@@ -1,0 +1,6 @@
+label: Breadcrumbs
+status: ready
+handle: breadcrumbs
+
+context:
+  componentSourcePath: './Breadcrumbs.jsx'

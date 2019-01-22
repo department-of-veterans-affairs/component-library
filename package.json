@@ -1,0 +1,40 @@
+{
+  "name": "@department-of-veterans-affairs/formation-react",
+  "version": "2.0.1",
+  "description": "React implementation of patterns in Formation",
+  "keywords": [
+    "react",
+    "js",
+    "formation",
+    "va",
+    "vads"
+  ],
+  "homepage": "http://design.va.gov",
+  "license": "CC0-1.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/department-of-veterans-affairs/design-system.git"
+  },
+  "scripts": {
+    "build": "node ./scripts/build.js",
+    "lint": "eslint --quiet --ext .js --ext .jsx ./src",
+    "test-watch": "karma start testing/karma.conf.js --auto-watch",
+    "test": "karma start testing/karma.conf.js --single-run",
+    "test-debug": "karma start testing/karma.conf.js --browsers Chrome"
+  },
+  "bugs": {
+    "url": "https://github.com/department-of-veterans-affairs/design-system/issues"
+  },
+  "dependencies": {
+    "classnames": "^2.2.6",
+    "lodash": "^4.17.11",
+    "moment": "^2.23.0",
+    "prop-types": "^15.6.2",
+    "react-transition-group": "1",
+    "window-or-global": "^1.0.1"
+  },
+  "peerDependencies": {
+    "@department-of-veterans-affairs/formation": "^2.0.0",
+    "react": "^15.5.4||^16.7.0"
+  }
+}
