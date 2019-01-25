@@ -19,8 +19,8 @@ export default class AdditionalInfo extends React.Component {
   render() {
     const { triggerText, children } = this.props;
     const iconClass = classNames({
-      fa: true,
-      'fas fa-angle-down': true,
+      fas: true,
+      'fa-angle-down': true,
       open: this.state.open
     });
     const { tagName: TagName = 'span' } = this.props;
