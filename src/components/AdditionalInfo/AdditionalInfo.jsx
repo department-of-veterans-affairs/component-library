@@ -51,7 +51,9 @@ export default class AdditionalInfo extends React.Component {
 }
 
 AdditionalInfo.propTypes = {
-  // this is the text displayed for AdditionalInfo link or button
+  /**
+   * this is the text displayed for AdditionalInfo link or button
+   */
   triggerText: PropTypes.string.isRequired,
   onClick: PropTypes.func,
 };

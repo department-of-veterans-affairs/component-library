@@ -127,10 +127,13 @@ class AcceptTermsPrompt extends React.Component {
 }
 
 AcceptTermsPrompt.propTypes = {
-  /* content shown as the actual terms and conditions */
-  terms: PropTypes.object,
-
-  /* cancel button click handler */
+  /**
+   * content shown as the actual terms and conditions
+   */
+  user: PropTypes.object,
+  /**
+   * cancel button click handler
+   */
   onCancel: PropTypes.func
 };
 export default AcceptTermsPrompt;
