@@ -72,7 +72,7 @@ Breadcrumbs.defaultProps = {
 
 Breadcrumbs.propTypes = {
   /**
-   * Adds an aria-label attribute to the <nav> element.
+   * Adds an aria-label attribute to the <nav /> element.
    * The aria-label will be read out when users navigate the
    * <Breadcrumbs/> component using a screen reader.
    */

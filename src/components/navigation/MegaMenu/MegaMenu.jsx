@@ -184,8 +184,8 @@ export default class MegaMenu extends React.Component {
 
 MegaMenu.propTypes = {
   /**
-   * This is the data that will generate the navigation<br/>
-   * Data is made up an array of objects </br>
+   * This is the data that will generate the navigation
+   * Data is made up an array of objects
    * Read Notes tab to see the structure of the data prop
    */
   data: PropTypes.arrayOf(
