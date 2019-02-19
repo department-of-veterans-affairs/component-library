@@ -7,15 +7,11 @@ const ESCAPE_KEY = 27;
 class Modal extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      lastFocus: null,
-    };
+    this.state = { lastFocus: null };
   }
 
   componentDidMount() {
-    if (this.props.visible) {
-      this.setupModal();
-    }
+    if (this.props.visible) this.setupModal();
   }
 
   componentDidUpdate(prevProps) {
@@ -86,26 +82,30 @@ class Modal extends React.Component {
     }
   }
 
-  render() {
-    const { id, title, visible } = this.props;
-    const alertClass = classNames(
-      'usa-alert',
-      `usa-alert-${this.props.status}`
-    );
+  renderAlertActions = () => {
+    const { primaryButton, secondaryButton } = this.props;
+    if (!primaryButton && !secondaryButton) return null;
 
-    const titleClass = classNames(
-      'va-modal-title',
-      `va-modal-title-${this.props.status}`
-    );
-
-    const modalCss = classNames('va-modal', this.props.cssClass);
-    const modalTitle = title && (
-      <div className={alertClass}>
-        <h3 id={`${id}-title`} className={titleClass}>{title}</h3>
+    return (
+      <div className="alert-actions">
+        {primaryButton && <button className="usa-button" onClick={primaryButton.action}>{primaryButton.text}</button>}
+        {secondaryButton && <button className="usa-button-secondary" onClick={secondaryButton.action}>{secondaryButton.text}</button>}
       </div>
     );
+  };
 
-    if (!visible) { return <div/>; }
+  render() {
+    if (!this.props.visible) return null;
+
+    const { id, status, title } = this.props;
+    const titleId = title && `${id || 'va-modal'}-title`;
+
+    const modalClass = classNames(
+      'va-modal',
+      { 'va-modal-alert': status },
+      { [`va-modal-${status}`]: status },
+      this.props.cssClass,
+    );
 
     let closeButton;
     if (!this.props.hideCloseButton) {
@@ -114,23 +114,20 @@ class Modal extends React.Component {
         type="button"
         aria-label="Close this modal"
         onClick={this.handleClose}>
-        <i className="fas fa-times" aria-hidden="true"></i>
+        <i className="fas fa-times-circle" aria-hidden="true"></i>
       </button>);
     }
 
     return (
-      <div className={modalCss} id={id} role="alertdialog" aria-labelledby={`${id}-title`}>
+      <div className={modalClass} id={id} role="alertdialog" aria-labelledby={titleId}>
         <div className="va-modal-inner" ref={el => { this.element = el; }}>
-          {modalTitle}
           {closeButton}
           <div className="va-modal-body" role="document">
+            {title && <h3 id={titleId} className="va-modal-title">{title}</h3>}
             <div>
               {this.props.contents || this.props.children}
             </div>
-            <div className="alert-actions">
-              {this.props.primaryButton && <button className="usa-button" onClick={this.props.primaryButton.action}>{this.props.primaryButton.text}</button>}
-              {this.props.secondaryButton && <button className="usa-button-secondary" onClick={this.props.secondaryButton.action}>{this.props.secondaryButton.text}</button>}
-            </div>
+            {this.renderAlertActions()}
           </div>
 
         </div>
@@ -165,14 +162,14 @@ Modal.propTypes = {
    */
   id: PropTypes.string,
   /**
-   * primary button text and action
+   * Primary button text and action
    */
   primaryButton: PropTypes.shape({
     text: PropTypes.string.isRequired,
     action: PropTypes.func.isRequired,
   }),
   /**
-   * secondary button text and action
+   * Secondary button text and action
    */
   secondaryButton: PropTypes.shape({
     text: PropTypes.string.isRequired,
