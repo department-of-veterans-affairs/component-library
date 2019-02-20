@@ -7,24 +7,32 @@ import { expect } from 'chai';
 import Breadcrumbs from './Breadcrumbs.jsx';
 
 const crumbs = [
-  <a href="/" key="1">Link 1</a>,
-  <a href="/test1" key="2">Link 2</a>,
-  <a href="/test2" key="3">Link 3</a>
+  <a href="/" key="1">
+    Link 1
+  </a>,
+  <a href="/test1" key="2">
+    Link 2
+  </a>,
+  <a href="/test2" key="3">
+    Link 3
+  </a>
 ];
 
 const routerCrumbs = [
-  <Link to="/" key="1">Link 1</Link>,
-  <Link to="/test1" key="2">Link 2</Link>,
-  <Link to="/test2" key="3">Link 3</Link>,
+  <Link to="/" key="1">
+    Link 1
+  </Link>,
+  <Link to="/test1" key="2">
+    Link 2
+  </Link>,
+  <Link to="/test2" key="3">
+    Link 3
+  </Link>
 ];
 
 describe('<Breadcrumbs>', () => {
   it('should render', () => {
-    const tree = shallow(
-      <Breadcrumbs>
-        {crumbs}
-      </Breadcrumbs>
-    );
+    const tree = shallow(<Breadcrumbs>{crumbs}</Breadcrumbs>);
 
     expect(tree).to.exist;
   });
@@ -51,11 +59,7 @@ describe('<Breadcrumbs>', () => {
   });
 
   it('should render exactly one nav', () => {
-    const tree = shallow(
-      <Breadcrumbs>
-        {crumbs}
-      </Breadcrumbs>
-    );
+    const tree = shallow(<Breadcrumbs>{crumbs}</Breadcrumbs>);
 
     const navElem = tree.find('nav');
 
@@ -63,11 +67,7 @@ describe('<Breadcrumbs>', () => {
   });
 
   it('should render correct nav props', () => {
-    const tree = shallow(
-      <Breadcrumbs>
-        {crumbs}
-      </Breadcrumbs>
-    );
+    const tree = shallow(<Breadcrumbs>{crumbs}</Breadcrumbs>);
 
     const navElem = tree.find('nav');
 
@@ -77,11 +77,7 @@ describe('<Breadcrumbs>', () => {
   });
 
   it('should render exactly one unordered list', () => {
-    const tree = shallow(
-      <Breadcrumbs>
-        {crumbs}
-      </Breadcrumbs>
-    );
+    const tree = shallow(<Breadcrumbs>{crumbs}</Breadcrumbs>);
 
     const listElem = tree.find('ul');
 
@@ -89,23 +85,17 @@ describe('<Breadcrumbs>', () => {
   });
 
   it('should render correct unordered list props', () => {
-    const tree = shallow(
-      <Breadcrumbs>
-        {crumbs}
-      </Breadcrumbs>
-    );
+    const tree = shallow(<Breadcrumbs>{crumbs}</Breadcrumbs>);
 
     const listElem = tree.find('ul');
 
-    expect(listElem.props().className).to.equal('row va-nav-breadcrumbs-list columns');
+    expect(listElem.props().className).to.equal(
+      'row va-nav-breadcrumbs-list columns'
+    );
   });
 
   it('should render exactly three list items', () => {
-    const tree = shallow(
-      <Breadcrumbs>
-        {crumbs}
-      </Breadcrumbs>
-    );
+    const tree = shallow(<Breadcrumbs>{crumbs}</Breadcrumbs>);
 
     const listItemElem = tree.find('li');
 
@@ -113,11 +103,7 @@ describe('<Breadcrumbs>', () => {
   });
 
   it('should render exactly three link elements', () => {
-    const tree = shallow(
-      <Breadcrumbs>
-        {crumbs}
-      </Breadcrumbs>
-    );
+    const tree = shallow(<Breadcrumbs>{crumbs}</Breadcrumbs>);
 
     const linkElem = tree.find('a');
 
@@ -125,11 +111,7 @@ describe('<Breadcrumbs>', () => {
   });
 
   it('should have the correct text labels', () => {
-    const tree = shallow(
-      <Breadcrumbs>
-        {crumbs}
-      </Breadcrumbs>
-    );
+    const tree = shallow(<Breadcrumbs>{crumbs}</Breadcrumbs>);
 
     tree.find('a').forEach((node, i) => {
       expect(node.text()).to.equal(`Link ${i + 1}`);
@@ -137,11 +119,7 @@ describe('<Breadcrumbs>', () => {
   });
 
   it('should render the correct link props', () => {
-    const tree = shallow(
-      <Breadcrumbs>
-        {crumbs}
-      </Breadcrumbs>
-    );
+    const tree = shallow(<Breadcrumbs>{crumbs}</Breadcrumbs>);
 
     const linkElem = tree.find('a');
 
@@ -153,28 +131,44 @@ describe('<Breadcrumbs>', () => {
   it('should render individual children correctly', () => {
     const tree = shallow(
       <Breadcrumbs>
-        <a href="/" onClick={() => { const result = {}; return result; }} key="1">Link 1</a>
-        <a href="/test1" key="2">Link 2</a>
-        <a href="/test2" key="3">Link 3</a>
+        <a
+          href="/"
+          onClick={() => {
+            const result = {};
+            return result;
+          }}
+          key="1">
+          Link 1
+        </a>
+        <a href="/test1" key="2">
+          Link 2
+        </a>
+        <a href="/test2" key="3">
+          Link 3
+        </a>
       </Breadcrumbs>
     );
 
     const linkElem = tree.find('a');
+    const listItemElem = tree.find('li');
 
     linkElem.forEach((node, i) => {
       expect(node.text()).to.equal(`Link ${i + 1}`);
     });
 
+    expect(listItemElem).to.exist;
+    expect(listItemElem).to.have.length(3);
+
     expect(linkElem).to.exist;
     expect(linkElem.length).to.equal(3);
+
+    expect(linkElem.at(0).props()['aria-current']).to.be.undefined;
+    expect(linkElem.at(1).props()['aria-current']).to.be.undefined;
+    expect(linkElem.at(2).props()['aria-current']).to.equal('page');
   });
 
   it('should render React Router 3 Links correctly', () => {
-    const tree = mount(
-      <Breadcrumbs>
-        {routerCrumbs}
-      </Breadcrumbs>
-    );
+    const tree = mount(<Breadcrumbs>{routerCrumbs}</Breadcrumbs>);
 
     const linkElem = tree.find('a');
 
@@ -187,30 +181,20 @@ describe('<Breadcrumbs>', () => {
   });
 
   it('should add mobile-only class when mobileFirstProp is true', () => {
-    const tree = shallow(
-      <Breadcrumbs mobileFirstProp>
-        {crumbs}
-      </Breadcrumbs>
-    );
+    const tree = shallow(<Breadcrumbs mobileFirstProp>{crumbs}</Breadcrumbs>);
 
     const navElem = tree.find('nav');
 
-    expect(navElem.props().className).to.equal('va-nav-breadcrumbs va-nav-breadcrumbs--mobile');
+    expect(navElem.props().className).to.equal(
+      'va-nav-breadcrumbs va-nav-breadcrumbs--mobile'
+    );
   });
 
   it('should pass aXe check when showing full breadcrumb', () => {
-    return axeCheck(
-      <Breadcrumbs>
-        {crumbs}
-      </Breadcrumbs>
-    );
+    return axeCheck(<Breadcrumbs>{crumbs}</Breadcrumbs>);
   });
 
   it('should pass aXe check when showing mobile breadcrumb', () => {
-    return axeCheck(
-      <Breadcrumbs mobileFirstProp>
-        {crumbs}
-      </Breadcrumbs>
-    );
+    return axeCheck(<Breadcrumbs mobileFirstProp>{crumbs}</Breadcrumbs>);
   });
 });
