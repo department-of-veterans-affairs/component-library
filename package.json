@@ -13,7 +13,7 @@
   "license": "CC0-1.0",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/department-of-veterans-affairs/design-system.git"
+    "url": "git+https://github.com/department-of-veterans-affairs/veteran-facing-services-tools.git"
   },
   "scripts": {
     "build": "node ./scripts/build.js",
@@ -23,7 +23,7 @@
     "test-debug": "karma start testing/karma.conf.js --browsers Chrome"
   },
   "bugs": {
-    "url": "https://github.com/department-of-veterans-affairs/design-system/issues"
+    "url": "https://github.com/department-of-veterans-affairs/veteran-facing-services-tools/issues"
   },
   "dependencies": {
     "classnames": "^2.2.6",
