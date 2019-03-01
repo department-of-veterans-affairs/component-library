@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
 import classNames from 'classnames';
-import ExpandingGroup from '../form/controls/ExpandingGroup/ExpandingGroup';
+import ExpandingGroup from '../ExpandingGroup/ExpandingGroup';
 
 export default class AdditionalInfo extends React.Component {
   constructor(props) {

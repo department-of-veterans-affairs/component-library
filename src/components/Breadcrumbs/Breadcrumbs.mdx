@@ -1,4 +1,11 @@
-# Intent
+---
+title: Breadcrumbs
+name: Breadcrumbs
+---
+
+import Breadcrumbs from './Breadcrumbs'
+
+## Intent
 
 Breadcrumbs are intended to provide users an understanding of where they are located in a rich information structure. They work well in situations where users may have clicked several layers deep, and would want to move back toward the top in linear steps.
 
@@ -58,3 +65,27 @@ The `<Breadcrumbs />` component automatically adds an `aria-label="Breadcrumb"` 
 ### aria-current (ATTRIBUTE)
 
 The `<Breadcrumbs />` component automatically adds an `aria-current="page"` attribute to the last link rendered by the full breadcrumb list. This attribute triggers an `a[aria-current="page"]` CSS selector, makes the link bold, removes the underline, and changes it to a black text color. Current [WAI-ARIA authoring practices](https://www.w3.org/TR/2017/NOTE-wai-aria-practices-1.1-20171214/examples/breadcrumb/index.html) recommend this `aria-current="page"` attribute for screen reader context.
+
+### Code:
+```javascript
+import Breadcrumbs from '@department-of-veterans-affairs/formation-react/Breadcrumbs';
+
+<Breadcrumbs>
+  {[
+    <a href="#" key="1">Home</a>,
+    <a href="#" key="2">Level One</a>,
+    <a href="#" key="3">Level Two</a>
+  ]}
+</Breadcrumbs>
+```
+
+### Rendered Component
+<div className="rendered-component">
+  <Breadcrumbs>
+    {[
+      <a href="#" key="1">Home</a>,
+      <a href="#" key="2">Level One</a>,
+      <a href="#" key="3">Level Two</a>
+    ]}
+  </Breadcrumbs>
+</div>
