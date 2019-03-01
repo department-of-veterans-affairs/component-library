@@ -3,21 +3,10 @@ import React from 'react';
 import _ from 'lodash';
 import classNames from 'classnames';
 import ExpandingGroup from '../ExpandingGroup/ExpandingGroup';
-import { makeField } from '../../../../helpers/fields';
+import { makeField } from '../../helpers/fields';
 
 /**
  * A checkbox button group with a label.
- *
- * Validation has the following props.
- * `additionalFieldsetClass` - String for any additional fieldset classes.
- * `additionalLegendClass` - String for any additional legend classes.
- * `label` - String for the group field label.
- * `name` - String for the name attribute.
- * `tabIndex` - Number for keyboard tab order.
- * `options` - Array of options to populate group.
- * `required` - is this field required.
- * `values` - object. Values of the checkbox field.
- * `onValueChange` - a function with this prototype: (newValue)
  */
 class ErrorableCheckboxGroup extends React.Component {
 
@@ -144,15 +133,36 @@ class ErrorableCheckboxGroup extends React.Component {
 }
 
 ErrorableCheckboxGroup.propTypes = {
+  /**
+  * Any additional fieldset classes.
+  */
   additionalFieldsetClass: PropTypes.string,
+  /**
+  * Any additional legend classes.
+  */
   additionalLegendClass: PropTypes.string,
+  /**
+  * Error message.
+  */
   errorMessage: PropTypes.string,
+  /**
+  * group field label.
+  */
   label: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.element,
   ]).isRequired,
+  /**
+  * name attribute.
+  */
   name: PropTypes.string,
+  /**
+  * ID.
+  */
   id: PropTypes.string,
+  /**
+  * Array of options to populate group.
+  */
   options: PropTypes.arrayOf(
     PropTypes.oneOfType([
       PropTypes.string,
@@ -175,10 +185,25 @@ ErrorableCheckboxGroup.propTypes = {
         ])
       })
     ])).isRequired,
+  /**
+  * Values of the checkbox field.
+  */
   values: PropTypes.object.isRequired,
+  /**
+  * On mouse down event handler.
+  */
   onMouseDown: PropTypes.func,
+  /**
+  * On key down event handler.
+  */
   onKeyDown: PropTypes.func,
+  /**
+  * On value change event handler.
+  */
   onValueChange: PropTypes.func.isRequired,
+  /**
+  * Is this field required.
+  */
   required: PropTypes.bool,
 };
 

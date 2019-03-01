@@ -1,0 +1,62 @@
+---
+title: ErrorableCheckboxGroup
+name: ErrorableCheckboxGroup
+---
+
+import ErrorableCheckboxGroup from './ErrorableCheckboxGroup'
+
+### Code:
+```javascript
+import ErrorableCheckboxGroup from '@department-of-veterans-affairs/formation-react/ErrorableCheckboxGroup'
+
+<ErrorableCheckboxGroup
+  label='Errorable Checkbox Group'
+  onValueChange={(value) => value}
+  id='default'
+  errorMessage='This is an error message'
+  label='Errorable Checkboxes'
+  required={true}
+  options={[
+    {
+      label: 'Checkbox label',
+      value: 'value',
+      content: 'a string',
+      additional: 'another thing',
+    },
+    {
+      label: 'Checkbox label',
+      value: 'value',
+      content: 'some more content',
+      additional: 'and another thing',
+    }
+  ]}
+  values={{ key: 'value' }}
+/>
+```
+
+### Rendered Component
+<div className="rendered-component">
+  <ErrorableCheckboxGroup
+    label='Errorable Checkbox Group'
+    onValueChange={(value) => value}
+    id='default'
+    errorMessage='This is an error message'
+    label='Errorable Checkboxes'
+    required={true}
+    options={[
+      {
+        label: 'Checkbox label',
+        value: 'value',
+        content: 'a string',
+        additional: 'another thing',
+      },
+      {
+        label: 'Checkbox label',
+        value: 'value',
+        content: 'some more content',
+        additional: 'and another thing',
+      }
+    ]}
+    values={{ key: 'value' }}
+  />
+</div>

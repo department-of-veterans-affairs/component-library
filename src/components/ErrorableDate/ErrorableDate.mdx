@@ -1,0 +1,90 @@
+---
+title: ErrorableDate
+name: ErrorableDate
+---
+
+import ErrorableDate from './ErrorableDate'
+
+### Code:
+
+#### Date example
+The date prop Object should look this:
+
+```javascript
+this.state = {
+  date: {
+    day: {
+      value: '14',
+      dirty: false,
+    },
+    month: {
+      value: '4',
+      dirty: false,
+    },
+    year: {
+      value: '1983',
+      dirty: false,
+    },
+  }
+}
+```
+
+#### Example Code
+```javascript
+import ErrorableDate from '@department-of-veterans-affairs/formation-react/ErrorableDate'
+
+<ErrorableDate
+  label={props.label}
+  onValueChange={date => this.setState({ date })}
+  required={true}
+  label='Please tell us a date'
+  name='Errorable Date'
+  date={this.state.date}
+  requiredMessage='Please provide a response'
+  invalidMessage='Please provide a valid date'
+/>;
+```
+
+### Rendered Component
+
+export class RenderedComponent extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      date: {
+        day: {
+          value: '14',
+          dirty: false,
+        },
+        month: {
+          value: '4',
+          dirty: false,
+        },
+        year: {
+          value: '1983',
+          dirty: false,
+        },
+      }
+    }
+  }
+  render () {
+    return (
+      <div className="rendered-component">
+        <ErrorableDate
+          label={this.props.label}
+          onValueChange={(date) => this.setState({date})}
+          required={true}
+          label='Please tell us a date'
+          name='Errorable Date'
+          date={this.state.date}
+          requiredMessage='Please provide a response'
+          invalidMessage='Please provide a valid date'
+        />
+      </div>
+    );
+  }
+}
+
+<RenderedComponent
+  label="Please tell us a date"
+/>
