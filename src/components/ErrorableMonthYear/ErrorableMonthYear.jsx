@@ -12,15 +12,6 @@ import { months } from '../../helpers/options-for-select.js';
 
 /**
  * A date input field that accepts values for month and year
- *
- * Props:
- * `required` - boolean. Render marker indicating field is required.
- * `validation` - object or array. Result of custom validation. Should include a valid prop and a message prop
- * `label` - string. Label for entire question.
- * `name` - string. Used to create unique name attributes for each input.
- * `tabIndex` - Number for keyboard tab order.
- * `date` - object. Date value. Should have month, day, and year props
- * `onValueChange` - a function with this prototype: (newValue)
  */
 class ErrorableMonthYear extends React.Component {
   constructor() {
@@ -112,10 +103,25 @@ class ErrorableMonthYear extends React.Component {
 }
 
 ErrorableMonthYear.propTypes = {
+  /**
+  * Render marker indicating field is required.
+  */
   required: PropTypes.bool,
+  /**
+  * Result of custom validation. Should include a valid prop and a message prop.
+  */
   validation: PropTypes.any,
+  /**
+  * Label for entire question.
+  */
   label: PropTypes.string,
+  /**
+  * Used to create unique name attributes for each input.
+  */
   name: PropTypes.string.isRequired,
+  /**
+  * Date value. Should have month, day, and year props
+  */
   date: PropTypes.shape({
     month: PropTypes.shape({
       value: PropTypes.string,
@@ -126,6 +132,9 @@ ErrorableMonthYear.propTypes = {
       dirty: PropTypes.bool,
     })
   }).isRequired,
+  /**
+  * a function with this prototype: (newValue)
+  */
   onValueChange: PropTypes.func.isRequired,
   requiredMessage: PropTypes.string,
   invalidMessage: PropTypes.string

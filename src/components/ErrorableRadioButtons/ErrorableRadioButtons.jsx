@@ -5,7 +5,7 @@ import classNames from 'classnames';
 
 import ExpandingGroup from '../ExpandingGroup/ExpandingGroup';
 
-import { makeField } from '../../../../helpers/fields';
+import { makeField } from '../../helpers/fields';
 
 /**
  * A radio button group with a label.
