@@ -1,7 +1,7 @@
 import React from 'react';
 import { expect } from 'chai';
 import { shallow } from 'enzyme';
-import { axeCheck } from '../../../../helpers/test-helpers';
+import { axeCheck } from '../../helpers/test-helpers';
 import ErrorableCheckbox from './ErrorableCheckbox.jsx';
 import sinon from 'sinon';
 

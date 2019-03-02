@@ -1,10 +1,10 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { expect } from 'chai';
-import { axeCheck } from '../../../../helpers/test-helpers';
+import { axeCheck } from '../../helpers/test-helpers';
 
 import ErrorableMonthYear from './ErrorableMonthYear';
-import { makeField } from '../../../../helpers/fields.js';
+import { makeField } from '../../helpers/fields.js';
 
 describe('<ErrorableMonthYear>', () => {
   it('renders input elements', () => {
@@ -115,4 +115,3 @@ describe('<ErrorableMonthYear>', () => {
     );
   });
 });
-

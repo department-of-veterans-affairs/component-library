@@ -4,7 +4,7 @@ import { mount } from 'enzyme';
 import { axeCheck } from '../../helpers/test-helpers';
 
 import AdditionalInfo from './AdditionalInfo.jsx';
-import ExpandingGroup from '../form/controls/ExpandingGroup/ExpandingGroup';
+import ExpandingGroup from '../ExpandingGroup/ExpandingGroup';
 
 describe('<AdditionalInfo/>', () => {
   let wrapper;

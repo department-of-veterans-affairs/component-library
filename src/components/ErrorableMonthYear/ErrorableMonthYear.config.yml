@@ -1,7 +1,0 @@
-label: ErrorableMonthYear
-status: wip
-
-context:
-  componentSourcePath: './ErrorableMonthYear.jsx'
-  month: 8
-  year: 1980

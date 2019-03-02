@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router';
 import { shallow, mount } from 'enzyme';
-import { axeCheck } from '../../../helpers/test-helpers';
+import { axeCheck } from '../../helpers/test-helpers';
 import { expect } from 'chai';
 
 import Breadcrumbs from './Breadcrumbs.jsx';

@@ -7,8 +7,8 @@ import moment from 'moment';
 import ErrorableSelect from '../ErrorableSelect/ErrorableSelect';
 import ErrorableNumberInput from '../ErrorableNumberInput/ErrorableNumberInput';
 
-import { isValidPartialMonthYear, validateCustomFormComponent } from '../../../../helpers/validations';
-import { months } from '../../../../helpers/options-for-select.js';
+import { isValidPartialMonthYear, validateCustomFormComponent } from '../../helpers/validations';
+import { months } from '../../helpers/options-for-select.js';
 
 /**
  * A date input field that accepts values for month and year

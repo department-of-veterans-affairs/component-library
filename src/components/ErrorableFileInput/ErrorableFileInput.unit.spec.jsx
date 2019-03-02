@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { axeCheck } from '../../../../helpers/test-helpers';
+import { axeCheck } from '../../helpers/test-helpers';
 import { expect } from 'chai';
 import sinon from 'sinon';
 
