@@ -1,0 +1,61 @@
+---
+title: ErrorableFileInput
+name: ErrorableFileInput
+---
+
+import ErrorableFileInput from './ErrorableFileInput'
+
+### Code:
+
+```javascript
+import ErrorableFileInput from '@department-of-veterans-affairs/formation-react/ErrorableFileInput'
+
+<ErrorableFileInput
+  name='Name'
+  multiple={true}
+  buttonText='Upload some files'
+  accept='String'
+  errorMessage='Error message'
+  onChange={(e) => { // function to upload your file }}
+/>;
+```
+
+### Rendered Component
+
+export class RenderedComponent extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      date: {
+        day: {
+          value: '14',
+          dirty: false,
+        },
+        month: {
+          value: '4',
+          dirty: false,
+        },
+        year: {
+          value: '1983',
+          dirty: false,
+        },
+      }
+    }
+  }
+  render () {
+    return (
+      <div className="rendered-component">
+        <ErrorableFileInput
+          name='Name'
+          multiple={true}
+          buttonText='Upload some files'
+          accept='String'
+          errorMessage='Error message'
+          onChange={(e) => { alert('uploaded file') }}
+        />
+      </div>
+    );
+  }
+}
+
+<RenderedComponent />
