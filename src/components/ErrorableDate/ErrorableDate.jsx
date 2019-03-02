@@ -141,18 +141,28 @@ class ErrorableDate extends React.Component {
 }
 
 ErrorableDate.propTypes = {
-  /* Render marker indicating field is required. */
+  /**
+  * Render marker indicating field is required.
+  */
   required: PropTypes.bool,
-  /* object or array. Result of custom validation. Should include a valid prop and a message prop */
+  /**
+  * object or array. Result of custom validation. Should include a valid prop and a message prop
+  */
   validation: PropTypes.shape({
     valid: PropTypes.bool,
     message: PropTypes.string
   }),
-  /* Label for entire question. */
+  /**
+  * Label for entire question.
+  */
   label: PropTypes.string,
-  /* Used to create unique name attributes for each input. */
+  /**
+  * Used to create unique name attributes for each input.
+  */
   name: PropTypes.string.isRequired,
-  /* Date value. Should have month, day, and year props */
+  /**
+  * Date value. Should have month, day, and year props
+  */
   date: PropTypes.shape({
     day: PropTypes.shape({
       value: PropTypes.string,
@@ -167,7 +177,9 @@ ErrorableDate.propTypes = {
       dirty: PropTypes.bool
     })
   }).isRequired,
-  /* a function with this prototype: (newValue) */
+  /**
+  * a function with this prototype: (newValue)
+  */
   onValueChange: PropTypes.func.isRequired,
   requiredMessage: PropTypes.string,
   invalidMessage: PropTypes.string
