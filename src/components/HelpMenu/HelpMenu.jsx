@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import DropDownPanel from '../../navigation/DropDownPanel/DropDownPanel';
-import IconHelp from '../../svgicons/IconHelp/IconHelp';
+import DropDownPanel from '../DropDownPanel/DropDownPanel';
+import IconHelp from '../IconHelp/IconHelp';
 
 
 class HelpMenu extends React.Component {
@@ -28,14 +28,19 @@ class HelpMenu extends React.Component {
 }
 
 HelpMenu.propTypes = {
-
-  /* class to style the menu */
+  /**
+   * class to style the menu
+   */
   cssClass: PropTypes.string,
 
-  /* function to execute on click */
+  /**
+   * function to execute on click
+   */
   clickHandler: PropTypes.func.isRequired,
 
-  /* does the menu begin in an open state */
+  /**
+   * does the menu begin in an open state
+   */
   isOpen: PropTypes.bool.isRequired
 };
 

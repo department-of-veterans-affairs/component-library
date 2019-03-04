@@ -1,8 +1,0 @@
-label: IconSearch
-status: wip
-
-context:
-  componentSourcePath: 'IconSearch.jsx'
-  color: '#000000'
-  cssClass: 'a-class'
-  id: 'search'

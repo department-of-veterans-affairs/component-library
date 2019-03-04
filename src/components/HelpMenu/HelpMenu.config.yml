@@ -1,9 +1,0 @@
-label: Help Menu
-status: wip
-preview: '@uswds'
-
-context:
-  componentSourcePath: 'HelpMenu.jsx'
-  id: default
-  cssClass: 'va-dropdown'
-  isOpen: true

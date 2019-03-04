@@ -1,0 +1,67 @@
+---
+title: ExpandingGroup
+name: ExpandingGroup
+---
+
+import ExpandingGroup from './ExpandingGroup'
+
+### Code:
+
+#### Example State
+```
+state = {
+  open: false
+}
+```
+
+#### Code Sample
+```javascript
+import ExpandingGroup from '@department-of-veterans-affairs/formation-react/ExpandingGroup'
+
+<button
+  onClick={() => this.setState({
+    open: !this.state.open
+  })}
+>
+  Toggle Expanding Group
+</button>
+
+<ExpandingGroup
+  open={this.state.open}
+  expandedContentId='expandedContentId'
+>
+  <div>visible child</div>
+  <div>hidden child</div>
+</ExpandingGroup>
+```
+
+### Rendered Component
+
+export class RenderedComponent extends React.Component {
+  constructor() {
+    super();
+    this.state = {open: false}
+  }
+  render () {
+    return (
+      <div className="rendered-component">
+        <button
+          onClick={() => this.setState({
+            open: !this.state.open
+          })}
+        >
+          Toggle Expanding Group
+        </button>
+        <ExpandingGroup
+          open={this.state.open}
+          expandedContentId='expandedContentId'
+        >
+          <div>visible child</div>
+          <div>hidden child</div>
+        </ExpandingGroup>
+      </div>
+    );
+  }
+}
+
+<RenderedComponent />

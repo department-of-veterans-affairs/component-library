@@ -1,0 +1,56 @@
+---
+title: HelpMenu
+name: HelpMenu
+---
+
+import HelpMenu from './HelpMenu'
+
+### Code:
+
+#### Example State
+```
+state = {
+  open: false
+}
+```
+
+#### Code Sample
+```javascript
+import HelpMenu from '@department-of-veterans-affairs/formation-react/HelpMenu'
+
+<div style={{ backgroundColor: '#112e51', width: '85px' }}>
+  <HelpMenu
+    id='default'
+    cssClass='va-dropdown'
+    isOpen={this.state.open}
+    clickHandler={() => this.setState({ open: !this.state.open })}>
+  </HelpMenu>
+</div>
+```
+
+### Rendered Component
+
+export class RenderedComponent extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      open: false
+    }
+  }
+  render () {
+    return (
+      <div className="rendered-component">
+        <div style={{ backgroundColor: '#112e51', width: '85px' }}>
+          <HelpMenu
+            id='default'
+            cssClass='va-dropdown'
+            isOpen={this.state.open}
+            clickHandler={() => this.setState({ open: !this.state.open })}>
+          </HelpMenu>
+        </div>
+      </div>
+    );
+  }
+}
+
+<RenderedComponent />
