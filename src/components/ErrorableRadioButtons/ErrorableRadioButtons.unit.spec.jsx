@@ -4,9 +4,9 @@ import {
   shallow,
   mount
 } from 'enzyme';
-import { axeCheck } from '../../../../helpers/test-helpers';
+import { axeCheck } from '../../helpers/test-helpers';
 import ErrorableRadioButtons from './ErrorableRadioButtons.jsx';
-import { makeField } from '../../../../helpers/fields.js';
+import { makeField } from '../../helpers/fields.js';
 
 describe('<ErrorableRadioButtons>', () => {
   const nonExpandingOptions = ['yes', 'no'];

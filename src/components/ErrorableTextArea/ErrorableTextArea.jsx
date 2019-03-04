@@ -3,7 +3,7 @@ import React from 'react';
 import _ from 'lodash';
 import classNames from 'classnames';
 
-import { makeField } from '../../../../helpers/fields';
+import { makeField } from '../../helpers/fields';
 
 /**
  * A form input with a label that can display error messages.
@@ -100,34 +100,52 @@ class ErrorableTextArea extends React.Component {
 ErrorableTextArea.propTypes = {
   disabled: PropTypes.bool,
 
-  /* Error string to display in the component. When defined, indicates input has a */
+  /**
+   * Error string to display in the component. When defined, indicates input has an error
+   */
   errorMessage: PropTypes.string,
 
-  /* String for the input field label. */
+  /**
+   * String for the input field label.
+   */
   label: PropTypes.string.isRequired,
 
-  /* placeholder string for input field. */
+  /**
+   * placeholder string for input field.
+   */
   placeholder: PropTypes.string,
 
-  /* String for the input name attribute. */
+  /**
+   * String for the input name attribute.
+   */
   name: PropTypes.string,
 
-  /* Render marker indicating field is required. */
+  /**
+   * Render marker indicating field is required.
+   */
   required: PropTypes.bool,
 
-  /* Value of the input field. */
+  /**
+   * Value of the input field.
+   */
   field: PropTypes.shape({
     value: PropTypes.string,
     dirty: PropTypes.bool
   }).isRequired,
 
-  /* Extra attribute for use by CSS selector, specifically by tests */
+  /**
+   * Extra attribute for use by CSS selector, specifically by tests
+   */
   additionalClass: PropTypes.string,
 
-  /* max number of characters the field will accept */
+  /**
+   * max number of characters the field will accept
+   */
   charMax: PropTypes.number,
 
-  /* a function with this prototype: (newValue) */
+  /**
+   * a function with this prototype: (newValue)
+   */
   onValueChange: PropTypes.func.isRequired
 };
 

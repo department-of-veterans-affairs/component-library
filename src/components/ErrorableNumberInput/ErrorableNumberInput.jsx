@@ -83,24 +83,24 @@ class ErrorableNumberInput extends React.Component {
 
 ErrorableNumberInput.propTypes = {
   /**
-  * Error string to display in the component. When defined, indicates input has a validation error.
-  */
+   * Error string to display in the component. When defined, indicates input has a validation error.
+   */
   errorMessage: PropTypes.string,
   field: PropTypes.shape({
     value: PropTypes.string,
     dirty: PropTypes.bool
   }).isRequired,
   /**
-  * `label` - String for the input field label.
-  */
+   * `label` - String for the input field label.
+   */
   label: PropTypes.string.isRequired,
   /**
-  name` - String for name attribute.
-  */
+   * name` - String for name attribute.
+   */
   name: PropTypes.string,
   /**
-  * minimum number value and maximum of same
-  */
+   * minimum number value and maximum of same
+   */
   min: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.number
@@ -110,20 +110,20 @@ ErrorableNumberInput.propTypes = {
     PropTypes.number
   ]),
   /**
-  * String specifying the pattern for the input.
-  */
+   * String specifying the pattern for the input.
+   */
   pattern: PropTypes.string,
   /**
-  * placeholder string for input field.
-  */
+   * placeholder string for input field.
+   */
   placeholder: PropTypes.string,
   /**
-  * Render marker indicating field is required.
-  */
+   * Render marker indicating field is required.
+   */
   required: PropTypes.bool,
   /**
-  * handler for the value change with this prototype: (newValue)
-  */
+   * handler for the value change with this prototype: (newValue)
+   */
   onValueChange: PropTypes.func.isRequired,
   additionalClass: PropTypes.string
 };

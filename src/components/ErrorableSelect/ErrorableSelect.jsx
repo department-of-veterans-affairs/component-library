@@ -101,24 +101,34 @@ class ErrorableSelect extends React.Component {
 }
 
 ErrorableSelect.propTypes = {
-  // Error string to display in the component.
-  // When defined, indicates select has a validation error.
+  /**
+   * Error string to display in the component.
+   * When defined, indicates select has a validation error.
+  */
   errorMessage: PropTypes.string,
 
-  // Select name attribute.
+  /**
+   * Select name attribute.
+   */
   name: PropTypes.string,
 
-  // Select autocomplete attribute.
+  /**
+   * Select autocomplete attribute.
+   */
   autocomplete: PropTypes.string,
 
-  // Select field label.
+  /**
+   * Select field label.
+   */
   label: PropTypes.oneOfType([PropTypes.string, PropTypes.element]).isRequired,
 
-  /*
+  /**
    * KeyDown handler
    */
   onKeyDown: PropTypes.func,
-  // Array of options to populate select.
+  /**
+   * Array of options to populate select.
+   */
   options: PropTypes.arrayOf(
     PropTypes.oneOfType([
       PropTypes.string,
@@ -133,16 +143,22 @@ ErrorableSelect.propTypes = {
     ])
   ).isRequired,
 
-  // Render marker indicating field is required.
+  /**
+   * Render marker indicating field is required.
+   */
   required: PropTypes.bool,
 
-  // is there an empty selectable thing
+  /**
+   * is there an empty selectable thing
+   */
   includeBlankOption: PropTypes.bool,
 
-  // Description that shows up for the blank option, when includeBlankOption is true
+  /**
+   * Description that shows up for the blank option, when includeBlankOption is true
+   */
   emptyDescription: PropTypes.string,
 
-  /* `value` - object containing:
+  /** `value` - object containing:
    *   - `value`: Value of the select field.
    *   - `dirty`: boolean. Whether a field has been touched by the user.
    */
@@ -151,10 +167,14 @@ ErrorableSelect.propTypes = {
     dirty: PropTypes.bool
   }).isRequired,
 
-  // a function with this prototype: (newValue)
+  /**
+   * a function with this prototype: (newValue)
+   */
   onValueChange: PropTypes.func.isRequired,
 
-  // Additional css class that is added to the select element.
+  /**
+   * Additional css class that is added to the select element.
+   */
   additionalClass: PropTypes.string
 };
 

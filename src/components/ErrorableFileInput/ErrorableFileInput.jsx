@@ -85,46 +85,46 @@ class ErrorableFileInput extends React.Component {
 
 ErrorableFileInput.propTypes = {
   /**
-  * accepts multiple files
-  */
+   * accepts multiple files
+   */
   multiple: PropTypes.bool,
   /**
-  * label for the button
-  */
+   * label for the button
+   */
   buttonText: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.element]),
 
   /**
-  * additional CSS classes
-  */
+   * additional CSS classes
+   */
   additionalClass: PropTypes.string,
   additionalErrorClass: PropTypes.string,
   triggerClass: PropTypes.string,
 
   /**
-  * function to handle interaction
-  */
+   * function to handle interaction
+   */
   onChange: PropTypes.func.isRequired,
 
   /**
-  * ?
-  */
+   * ?
+   */
   accept: PropTypes.string,
 
   /**
-  * input name
-  */
+   * input name
+   */
   name: PropTypes.string.isRequired,
 
   /**
-  * message for error state
-  */
+   * message for error state
+   */
   errorMessage: PropTypes.string,
 
   /**
-  * file types
-  */
+   * file types
+   */
   mimeTypes: PropTypes.string,
 
 };

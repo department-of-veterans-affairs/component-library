@@ -71,8 +71,9 @@ class CollapsiblePanel extends React.Component {
 }
 
 CollapsiblePanel.propTypes = {
-
-  /* panel label */
+  /**
+   * panel label
+   */
   panelName: PropTypes.string.isRequired
 };
 

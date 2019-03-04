@@ -145,35 +145,35 @@ class ErrorableCheckboxGroup extends React.Component {
 
 ErrorableCheckboxGroup.propTypes = {
   /**
-  * Any additional fieldset classes.
-  */
+   * Any additional fieldset classes.
+   */
   additionalFieldsetClass: PropTypes.string,
   /**
-  * Any additional legend classes.
-  */
+   * Any additional legend classes.
+   */
   additionalLegendClass: PropTypes.string,
   /**
-  * Error message.
-  */
+   * Error message.
+   */
   errorMessage: PropTypes.string,
   /**
-  * group field label.
-  */
+   * group field label.
+   */
   label: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.element,
   ]).isRequired,
   /**
-  * name attribute.
-  */
+   * name attribute.
+   */
   name: PropTypes.string,
   /**
-  * ID.
-  */
+   * ID.
+   */
   id: PropTypes.string,
   /**
-  * Array of options to populate group.
-  */
+   * Array of options to populate group.
+   */
   options: PropTypes.arrayOf(
     PropTypes.oneOfType([
       PropTypes.string,
@@ -197,24 +197,24 @@ ErrorableCheckboxGroup.propTypes = {
       })
     ])).isRequired,
   /**
-  * Values of the checkbox field.
-  */
+   * Values of the checkbox field.
+   */
   values: PropTypes.object.isRequired,
   /**
-  * On mouse down event handler.
-  */
+   * On mouse down event handler.
+   */
   onMouseDown: PropTypes.func,
   /**
-  * On key down event handler.
-  */
+   * On key down event handler.
+   */
   onKeyDown: PropTypes.func,
   /**
-  * On value change event handler.
-  */
+   * On value change event handler.
+   */
   onValueChange: PropTypes.func.isRequired,
   /**
-  * Is this field required.
-  */
+   * Is this field required.
+   */
   required: PropTypes.bool,
 };
 

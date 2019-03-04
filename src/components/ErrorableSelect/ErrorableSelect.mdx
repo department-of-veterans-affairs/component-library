@@ -1,0 +1,72 @@
+---
+title: ErrorableSelect
+name: ErrorableSelect
+---
+
+import ErrorableSelect from './ErrorableSelect'
+
+### Code:
+
+#### Example State
+```
+state = {
+  value: {
+    value: 'Value',
+    dirty: true,
+  },
+}
+```
+
+#### Code Sample
+```javascript
+import ErrorableSelect from '@department-of-veterans-affairs/formation-react/ErrorableSelect'
+
+<ErrorableSelect
+  errorMessage='This is the error message'
+  label='select label'
+  name='Attribute name'
+  options={['first option', 'second option', 'third option']}
+  required={true}
+  value={this.state.value}
+  autocomplete='true'
+  includeBlankOption={true}
+  onValueChange={value => this.setState({ value })}
+  additionalClass='additional-class'
+  emptyDescription='this is empty'
+/>
+```
+
+### Rendered Component
+
+export class RenderedComponent extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      value: {
+        value: 'Value',
+        dirty: true,
+      },
+    }
+  }
+  render () {
+    return (
+      <div className="rendered-component">
+        <ErrorableSelect
+          errorMessage='This is the error message'
+          label='select label'
+          name='Attribute name'
+          options={['first option', 'second option', 'third option']}
+          required={true}
+          value={this.state.value}
+          autocomplete='true'
+          includeBlankOption={true}
+          onValueChange={value => this.setState({ value })}
+          additionalClass='additional-class'
+          emptyDescription='this is empty'
+        />
+      </div>
+    );
+  }
+}
+
+<RenderedComponent />

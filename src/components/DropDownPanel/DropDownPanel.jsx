@@ -55,6 +55,9 @@ DropDownPanel.propTypes = {
   buttonText: PropTypes.string.isRequired,
   clickHandler: PropTypes.func.isRequired,
   cssClass: PropTypes.string,
+  /**
+   * Should be SVG markup
+   */
   icon: PropTypes.node, /* Should be SVG markup */
   id: PropTypes.string,
   isOpen: PropTypes.bool.isRequired,

@@ -7,8 +7,8 @@ import { expect } from 'chai';
 import sinon from 'sinon';
 
 import ErrorableTextArea from './ErrorableTextArea';
-import { makeField } from '../../../../helpers/fields';
-import { axeCheck } from '../../../../helpers/test-helpers';
+import { makeField } from '../../helpers/fields';
+import { axeCheck } from '../../helpers/test-helpers';
 
 describe('<ErrorableTextArea>', () => {
   it('ensure value changes propagate', () => {
