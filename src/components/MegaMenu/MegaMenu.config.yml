@@ -1,5 +1,0 @@
-label: Mega Menu
-status: wip
-
-context:
-  componentSourcePath: './MegaMenu.jsx'
