@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { expect } from 'chai';
-import { axeCheck } from '../../../helpers/test-helpers';
+import { axeCheck } from '../../helpers/test-helpers';
 
 import ProgressBar from './ProgressBar.jsx';
 
