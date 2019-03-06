@@ -1,7 +1,7 @@
 import React from 'react';
 import { expect } from 'chai';
 import sinon from 'sinon';
-import { axeCheck } from '../../../helpers/test-helpers';
+import { axeCheck } from '../../helpers/test-helpers';
 import { mount } from 'enzyme';
 
 import MegaMenu from './MegaMenu.jsx';
