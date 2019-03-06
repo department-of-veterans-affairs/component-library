@@ -3,7 +3,7 @@ import ReactTestUtils from 'react-dom/test-utils';
 import { shallow } from 'enzyme';
 import chaiAsPromised from 'chai-as-promised';
 import chai, { expect } from 'chai';
-import { axeCheck } from '../../../../helpers/test-helpers';
+import { axeCheck } from '../../helpers/test-helpers';
 
 import ProgressButton from './ProgressButton.jsx';
 

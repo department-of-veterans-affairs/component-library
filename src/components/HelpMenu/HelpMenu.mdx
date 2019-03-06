@@ -20,7 +20,6 @@ import HelpMenu from '@department-of-veterans-affairs/formation-react/HelpMenu'
 
 <div style={{ backgroundColor: '#112e51', width: '85px' }}>
   <HelpMenu
-    id='default'
     cssClass='va-dropdown'
     isOpen={this.state.open}
     clickHandler={() => this.setState({ open: !this.state.open })}>
@@ -42,7 +41,6 @@ export class RenderedComponent extends React.Component {
       <div className="rendered-component">
         <div style={{ backgroundColor: '#112e51', width: '85px' }}>
           <HelpMenu
-            id='default'
             cssClass='va-dropdown'
             isOpen={this.state.open}
             clickHandler={() => this.setState({ open: !this.state.open })}>

@@ -47,13 +47,19 @@ class OMBInfo extends React.Component {
 }
 
 OMBInfo.propTypes = {
-  // respondent burden, length of time usually in minutes
+  /**
+   * respondent burden, length of time usually in minutes
+   */
   resBurden: PropTypes.number,
 
-  // OMB control number / form number
+  /**
+   * OMB control number / form number
+   */
   ombNumber: PropTypes.string,
 
-  // form expiration date
+  /**
+   * form expiration date
+   */
   expDate: PropTypes.string
 };
 

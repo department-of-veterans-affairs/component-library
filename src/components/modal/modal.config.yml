@@ -1,8 +1,0 @@
-label: Modal
-status: wip
-order: 10
-
-context:
-  componentSourcePath: 'Modal.jsx'
-  id: default
-  content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam id felis pulvinar ligula ultricies sollicitudin eget nec dui. Cras augue velit, pellentesque sit amet nisl ut, tristique suscipit sem. Cras sollicitudin auctor mattis.'

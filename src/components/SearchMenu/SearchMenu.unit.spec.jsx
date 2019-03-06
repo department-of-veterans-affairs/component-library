@@ -1,7 +1,7 @@
 import React from 'react';
 import { mount } from 'enzyme';
 import { expect } from 'chai';
-import { axeCheck } from '../../../helpers/test-helpers';
+import { axeCheck } from '../../helpers/test-helpers';
 
 import SearchMenu from './SearchMenu.jsx';
 

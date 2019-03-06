@@ -2,9 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
 
-const mobileMediaQuery = window.matchMedia('(max-width: 767px)');
-
-const isPanelWhite = (panelWhite) => {
+const isPanelWhite = (mobileMediaQuery,panelWhite) => {
   if (mobileMediaQuery.matches) {
     return '';
   }
@@ -13,13 +11,13 @@ const isPanelWhite = (panelWhite) => {
 };
 
 const Column = (props) => {
-  const { data, keyName, panelWhite, columnThreeLinkClicked, linkClicked, hidden } = props;
+  const { mobileMediaQuery, data, keyName, panelWhite, columnThreeLinkClicked, linkClicked, hidden } = props;
 
   if (keyName === 'columnThree') {
     return (
       <div
         aria-hidden={hidden ? 'true' : 'false'}
-        className={`vetnav-panel vetnav-panel--submenu ${_.kebabCase(keyName)}${isPanelWhite(panelWhite)}`}
+        className={`vetnav-panel vetnav-panel--submenu ${_.kebabCase(keyName)}${isPanelWhite(mobileMediaQuery, panelWhite)}`}
         aria-label={keyName}>
         <div className={`${panelWhite ? 'mm-marketing-container mm-marketing-gray' : 'mm-marketing-container'}`}>
           <img src={data.img.src} alt={data.img.alt}></img>
@@ -35,7 +33,7 @@ const Column = (props) => {
   }
 
   return (
-    <div aria-hidden={hidden ? 'true' : 'false'} className={`vetnav-panel vetnav-panel--submenu ${_.kebabCase(keyName)}${isPanelWhite(panelWhite)}`}>
+    <div aria-hidden={hidden ? 'true' : 'false'} className={`vetnav-panel vetnav-panel--submenu ${_.kebabCase(keyName)}${isPanelWhite(mobileMediaQuery, panelWhite)}`}>
       <h3 id={`vetnav-${_.kebabCase(keyName)}-header`}>{data.title}</h3>
       <ul id={`vetnav-${_.kebabCase(keyName)}-col`} aria-labelledby={`vetnav-${_.kebabCase(keyName)}-header`}>
         <li className="panel-top-link">{props.children}</li>

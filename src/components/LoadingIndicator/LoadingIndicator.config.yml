@@ -1,9 +1,0 @@
-label: Loading Indicator
-status: wip
-order: 17
-
-context:
-  componentSourcePath: 'LoadingIndicator.jsx'
-  id: default
-  message: 'Loading your application'
-  setFocus: true

@@ -4,10 +4,7 @@ import Column from './Column';
 import _ from 'lodash';
 import { ArrowRightBlueSVG }  from './arrow-right-blue';
 
-const mobileMediaQuery = window.matchMedia('(max-width: 767px)');
-const smallDesktopMediaQuery = window.matchMedia('(min-width: 768px and max-width: 1007px)');
-
-const getColumns = (columns) => {
+const getColumns = (mobileMediaQuery, columns) => {
   if (mobileMediaQuery.matches) {
     return {
       columnOne: {
@@ -23,11 +20,11 @@ const getColumns = (columns) => {
   return columns;
 };
 
-const SubMenu = ({ data, show, navTitle, handleBackToMenu, linkClicked, columnThreeLinkClicked }) => {
+const SubMenu = ({ mobileMediaQuery, smallDesktopMediaQuery, data, show, navTitle, handleBackToMenu, linkClicked, columnThreeLinkClicked }) => {
   const { seeAllLink, ...columns } = data;
 
   if (show) {
-    const filteredColumns = getColumns(columns);
+    const filteredColumns = getColumns(mobileMediaQuery, columns);
 
     return (
       <div className={mobileMediaQuery.matches ? 'mm-link-container-small' : ''}>
@@ -58,6 +55,7 @@ const SubMenu = ({ data, show, navTitle, handleBackToMenu, linkClicked, columnTh
               navTitle={navTitle}
               panelWhite={Object.prototype.hasOwnProperty.call(filteredColumns, 'mainColumn')}
               linkClicked={linkClicked}
+              mobileMediaQuery={mobileMediaQuery}
               hidden={keyName === 'columnThree' && smallDesktopMediaQuery.matches}
               columnThreeLinkClicked={columnThreeLinkClicked}>
             </Column>

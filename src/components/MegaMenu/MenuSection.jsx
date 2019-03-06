@@ -3,8 +3,6 @@ import PropTypes from 'prop-types';
 import SubMenu from './SubMenu';
 import _ from 'lodash';
 
-const mobileMediaQuery = window.matchMedia('(max-width: 767px)');
-
 class MenuSection extends React.Component {
   constructor() {
     super();
@@ -23,7 +21,7 @@ class MenuSection extends React.Component {
   }
 
   updateCurrentSection() {
-    if (mobileMediaQuery.matches) {
+    if (this.props.mobileMediaQuery.matches) {
       this.setState({
         title: {
           hidden: true,
@@ -37,7 +35,7 @@ class MenuSection extends React.Component {
   handleBackToMenu() {
     this.updateCurrentSection('');
 
-    if (mobileMediaQuery.matches) {
+    if (this.props.mobileMediaQuery.matches) {
       this.setState({
         title: {},
       });
@@ -64,6 +62,8 @@ class MenuSection extends React.Component {
           show={show}
           handleBackToMenu={() => this.handleBackToMenu()}
           linkClicked={this.props.linkClicked}
+          mobileMediaQuery={this.props.mobileMediaQuery}
+          smallDesktopMediaQuery={this.props.smallDesktopMediaQuery}
           columnThreeLinkClicked={this.props.columnThreeLinkClicked}>
         </SubMenu>
       </li>

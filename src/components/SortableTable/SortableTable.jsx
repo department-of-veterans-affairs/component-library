@@ -82,21 +82,26 @@ class SortableTable extends React.Component {
 SortableTable.propTypes = {
   className: PropTypes.string,
 
-  // Field value to sort by in either ascending or descending order.
-  // The `value` must be one of the values in the `fields` prop.
+  /**
+   * Field value to sort by in either ascending or descending order.
+   * The `value` must be one of the values in the `fields` prop.
+   */
   currentSort: PropTypes.shape({
     value: PropTypes.string.isRequired,
     order: PropTypes.oneOf(['ASC', 'DESC'])
   }).isRequired,
 
-  // Mappings of header labels to properties on the objects in `data`.
+  /**
+   * Mappings of header labels to properties on the objects in `data`.
+   */
   fields: PropTypes.arrayOf(PropTypes.shape({
     label: PropTypes.string.isRequired,
     value: PropTypes.string.isRequired
   })).isRequired,
-
-  // Each object represents data for a row.
-  // An optional class may be provided to style specific rows.
+  /**
+   * Each object represents data for a row.
+   * An optional class may be provided to style specific rows.
+   */
   data: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.oneOfType([
       PropTypes.number,

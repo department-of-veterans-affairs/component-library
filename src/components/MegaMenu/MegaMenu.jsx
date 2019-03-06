@@ -4,23 +4,16 @@ import MenuSection from './MenuSection';
 import SubMenu from './SubMenu';
 import _ from 'lodash';
 
-const mobileMediaQuery = window.matchMedia('(max-width: 767px)');
-
-const defaultSection = (sections) => {
-  if (mobileMediaQuery.matches) {
-    return '';
-  }
-
-  return sections[0].title;
-};
-
 export default class MegaMenu extends React.Component {
   componentDidMount() {
-    if (mobileMediaQuery.matches) {
+    this.mobileMediaQuery = window.matchMedia('(max-width: 767px)');
+    this.smallDesktopMediaQuery = window.matchMedia('(min-width: 768px and max-width: 1007px)');
+
+    if (this.mobileMediaQuery.matches) {
       this.props.toggleDisplayHidden(true);
     }
 
-    mobileMediaQuery.addListener(this.resetDefaultState);
+    this.mobileMediaQuery.addListener(this.resetDefaultState);
     document.body.addEventListener('click', this.handleDocumentClick, false);
   }
 
@@ -28,12 +21,12 @@ export default class MegaMenu extends React.Component {
    * Remove event listener
    */
   componentWillUnmount() {
-    mobileMediaQuery.removeListener(this.resetDefaultState);
+    this.mobileMediaQuery.removeListener(this.resetDefaultState);
     document.body.removeEventListener('click', this.handleDocumentClick, false);
   }
 
   getSubmenu(item, currentSection) {
-    if (mobileMediaQuery.matches) {
+    if (this.mobileMediaQuery.matches) {
       const menuSections = [
         item.menuSections.mainColumn,
         item.menuSections.columnOne,
@@ -61,11 +54,13 @@ export default class MegaMenu extends React.Component {
           <MenuSection
             key={`${section}-${i}`}
             title={section.title}
-            defaultSection={defaultSection(item.menuSections)}
+            defaultSection={this.defaultSection(item.menuSections)}
             currentSection={currentSection}
             updateCurrentSection={() => this.updateCurrentSection(section.title)}
             links={section.links}
             linkClicked={this.props.linkClicked}
+            mobileMediaQuery={this.mobileMediaQuery}
+            smallDesktopMediaQuery={this.smallDesktopMediaQuery}
             columnThreeLinkClicked={this.props.columnThreeLinkClicked}></MenuSection>
         );
       });
@@ -78,9 +73,20 @@ export default class MegaMenu extends React.Component {
         handleBackToMenu={() => this.toggleDropDown('')}
         show={this.props.currentDropdown !== ''}
         linkClicked={this.props.linkClicked}
+        mobileMediaQuery={this.mobileMediaQuery}
+        smallDesktopMediaQuery={this.smallDesktopMediaQuery}
         columnThreeLinkClicked={this.props.columnThreeLinkClicked}></SubMenu>
     );
   }
+
+  defaultSection(sections) {
+    if (this.mobileMediaQuery.matches) {
+      return '';
+    }
+
+    return sections[0].title;
+  }
+
   handleDocumentClick = (event) => {
     if (this.props.currentDropdown && !this.menuRef.contains(event.target)) {
       this.props.toggleDropDown('');
@@ -89,7 +95,7 @@ export default class MegaMenu extends React.Component {
   }
 
   resetDefaultState = () => {
-    if (mobileMediaQuery.matches) {
+    if (this.mobileMediaQuery.matches) {
       this.props.toggleDisplayHidden(true);
     } else {
       this.props.toggleDisplayHidden(false);
@@ -109,7 +115,7 @@ export default class MegaMenu extends React.Component {
   updateCurrentSection(title) {
     let sectionTitle = title;
 
-    if (mobileMediaQuery.matches) {
+    if (this.mobileMediaQuery.matches) {
       sectionTitle = this.props.currentSection === title ? '' : title;
     }
 
@@ -158,11 +164,13 @@ export default class MegaMenu extends React.Component {
                                   <MenuSection
                                     key={`${section}-${j}`}
                                     title={section.title}
-                                    defaultSection={defaultSection(item.menuSections)}
+                                    defaultSection={this.defaultSection(item.menuSections)}
                                     currentSection={currentSection}
                                     updateCurrentSection={() => this.updateCurrentSection(section.title)}
                                     links={section.links}
                                     linkClicked={linkClicked}
+                                    mobileMediaQuery={this.mobileMediaQuery}
+                                    smallDesktopMediaQuery={this.smallDesktopMediaQuery}
                                     columnThreeLinkClicked={columnThreeLinkClicked}/>
                                 );
                               }) : this.getSubmenu(item,  currentSection)
