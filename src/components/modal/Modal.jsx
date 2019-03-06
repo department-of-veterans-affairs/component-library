@@ -99,37 +99,41 @@ class Modal extends React.Component {
 
     const { id, status, title } = this.props;
     const titleId = title && `${id || 'va-modal'}-title`;
+    const content = this.props.contents || this.props.children;
 
-    const modalClass = classNames(
-      'va-modal',
-      { 'va-modal-alert': status },
-      { [`va-modal-${status}`]: status },
-      this.props.cssClass,
-    );
+    const modalClass = classNames('va-modal', this.props.cssClass);
 
-    let closeButton;
-    if (!this.props.hideCloseButton) {
-      closeButton = (<button
+    const wrapperClass = classNames('va-modal-inner', {
+      'usa-alert': status,
+      [`usa-alert-${status}`]: status,
+      'va-modal-alert': status,
+    });
+
+    const bodyClass = status ? 'usa-alert-body' : 'va-modal-body';
+    const titleClass = status ? 'usa-alert-heading' : 'va-modal-title';
+    const contentClass = classNames({ 'usa-alert-text': status });
+
+    const closeButton = !this.props.hideCloseButton && (
+      <button
         className="va-modal-close"
         type="button"
         aria-label="Close this modal"
         onClick={this.handleClose}>
-        <i className="fas fa-times-circle" aria-hidden="true"></i>
-      </button>);
-    }
+        <i className="fas fa-times-circle" aria-hidden="true"/>
+      </button>
+    );
 
     return (
       <div className={modalClass} id={id} role="alertdialog" aria-labelledby={titleId}>
-        <div className="va-modal-inner" ref={el => { this.element = el; }}>
+        <div className={wrapperClass} ref={el => { this.element = el; }}>
           {closeButton}
-          <div className="va-modal-body" role="document">
-            {title && <h3 id={titleId} className="va-modal-title">{title}</h3>}
-            <div>
-              {this.props.contents || this.props.children}
+          <div className={bodyClass}>
+            <div role="document">
+              {title && <h3 id={titleId} className={titleClass}>{title}</h3>}
+              {content && <div className={contentClass}>{content}</div>}
             </div>
             {this.renderAlertActions()}
           </div>
-
         </div>
       </div>
     );
@@ -182,7 +186,8 @@ Modal.propTypes = {
     'info',
     'error',
     'success',
-    'warning'
+    'warning',
+    'continue',
   ]),
   /**
    * Title/header text for the modal
