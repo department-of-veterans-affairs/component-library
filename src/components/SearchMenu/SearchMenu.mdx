@@ -1,0 +1,56 @@
+---
+title: SearchMenu
+name: SearchMenu
+---
+
+import SearchMenu from './SearchMenu'
+
+### Code:
+
+#### Example State
+```
+state = {
+  open: false
+}
+```
+
+#### Code Sample
+```javascript
+import SearchMenu from '@department-of-veterans-affairs/formation-react/SearchMenu'
+
+<div style={{ backgroundColor: '#112e51', width: '100px' }}>
+  <SearchMenu
+    title='Default SearchMenu'
+    id='default'
+    isOpen={this.state.open}
+    clickHandler={() => this.setState({ open: !this.state.open })}>
+  </SearchMenu>
+</div>
+```
+
+### Rendered Component
+
+export class RenderedComponent extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      open: false
+    }
+  }
+  render () {
+    return (
+      <div className="rendered-component">
+        <div style={{ backgroundColor: '#112e51', width: '100px' }}>
+          <SearchMenu
+            title='Default SearchMenu'
+            id='default'
+            isOpen={this.state.open}
+            clickHandler={() => this.setState({ open: !this.state.open })}>
+          </SearchMenu>
+        </div>
+      </div>
+    );
+  }
+}
+
+<RenderedComponent />

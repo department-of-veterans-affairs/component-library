@@ -1,0 +1,51 @@
+---
+title: PrivacyAgreement
+name: PrivacyAgreement
+---
+
+import PrivacyAgreement from './PrivacyAgreement'
+
+### Code:
+
+#### Example State
+```
+state = {
+  page: 2,
+}
+```
+
+#### Code Sample
+```javascript
+import PrivacyAgreement from '@department-of-veterans-affairs/formation-react/PrivacyAgreement'
+
+<Pagination
+  onPageSelect={(page) => this.setState({ page })}
+  page={this.state.page}
+  pages={3}
+  maxPageListLength={3}
+  showLastPage={true}
+/>
+```
+
+### Rendered Component
+
+export class RenderedComponent extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      checked: false,
+    }
+  }
+  render () {
+    return (
+      <div className="rendered-component">
+        <PrivacyAgreement
+          onChange={(checked) => this.setState({ checked })}
+          checked={this.state.checked}
+        />
+      </div>
+    );
+  }
+}
+
+<RenderedComponent />

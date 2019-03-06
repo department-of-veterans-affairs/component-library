@@ -1,0 +1,114 @@
+---
+title: SortableTable
+name: SortableTable
+---
+
+import SortableTable from './SortableTable'
+
+### Code:
+
+```javascript
+import SortableTable from '@department-of-veterans-affairs/formation-react/SortableTable'
+
+<SortableTable
+  className='va-table'
+  currentSort={{
+    value: 'String',
+    order: 'ASC',
+  }}
+  fields={
+    [
+      {
+        label: 'Name',
+        value: 'name'
+      },
+      {
+        label: 'Email',
+        value: 'email'
+      },
+      {
+        label: 'Message',
+        value: 'message'
+      }
+    ]
+  }
+  data={
+    [
+      {
+        id: 1,
+        name: 'Joe',
+        email: 'joe@joe.com',
+        message:'Hello',
+        rowClass: 'class'
+      },
+      {
+        id: 2,
+        name: 'Bob',
+        email: 'bob@bob.com',
+        message:'Hola',
+        rowClass: 'class'
+      },
+      {
+        id: 3,
+        name: 'Tom',
+        email: 'tom@tom.com',
+        message:"What's Up",
+        rowClass: 'class'
+      }
+    ]
+  }
+/>
+```
+
+### Rendered Component
+
+<div className="rendered-component">
+  <SortableTable
+    className='va-table'
+    currentSort={{
+      value: 'String',
+      order: 'ASC',
+    }}
+    fields={
+      [
+        {
+          label: 'Name',
+          value: 'name'
+        },
+        {
+          label: 'Email',
+          value: 'email'
+        },
+        {
+          label: 'Message',
+          value: 'message'
+        }
+      ]
+    }
+    data={
+      [
+        {
+          id: 1,
+          name: 'Joe',
+          email: 'joe@joe.com',
+          message:'Hello',
+          rowClass: 'class'
+        },
+        {
+          id: 2,
+          name: 'Bob',
+          email: 'bob@bob.com',
+          message:'Hola',
+          rowClass: 'class'
+        },
+        {
+          id: 3,
+          name: 'Tom',
+          email: 'tom@tom.com',
+          message:"What's Up",
+          rowClass: 'class'
+        }
+      ]
+    }
+  />
+</div>

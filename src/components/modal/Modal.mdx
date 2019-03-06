@@ -1,0 +1,126 @@
+---
+title: Modal
+name: Modal
+---
+
+import Modal from './Modal'
+
+### Code:
+
+#### Example State
+```
+state = {
+  showDefault: false,
+  showInfo: false,
+  showWarning: false,
+  showError: false,
+}
+```
+
+#### Code Sample
+```javascript
+import Modal from '@department-of-veterans-affairs/formation-react/Modal'
+
+<div>
+  <button onClick={() => this.setState({showDefault: true})}>Show Default Modal</button>
+  <Modal
+    title="Default Modal"
+    id="default"
+    visible={this.state.showDefault}
+    onClose={() => this.setState({showDefault: false})}
+  >
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam id felis pulvinar ligula ultricies sollicitudin eget nec dui. Cras augue velit, pellentesque sit amet nisl ut, tristique suscipit sem. Cras sollicitudin auctor mattis.
+  </Modal>
+  <button onClick={() => this.setState({showInfo: true})}>Show Info Modal</button>
+  <Modal
+    title="Info Modal"
+    id="info"
+    status="info"
+    visible={this.state.showInfo}
+    onClose={() => this.setState({showInfo: false})}
+  >
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam id felis pulvinar ligula ultricies sollicitudin eget nec dui. Cras augue velit, pellentesque sit amet nisl ut, tristique suscipit sem. Cras sollicitudin auctor mattis.
+  </Modal>
+  <button onClick={() => this.setState({showError: true})}>Show Error Modal</button>
+  <Modal
+    title="Error Modal"
+    id="error"
+    status="error"
+    visible={this.state.showError}
+    onClose={() => this.setState({showError: false})}
+  >
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam id felis pulvinar ligula ultricies sollicitudin eget nec dui. Cras augue velit, pellentesque sit amet nisl ut, tristique suscipit sem. Cras sollicitudin auctor mattis.
+  </Modal>
+  <button onClick={() => this.setState({showWarning: true})}>Show Warning Modal</button>
+  <Modal
+    title="Warning Modal"
+    id="warning"
+    status="warning"
+    visible={this.state.showWarning}
+    onClose={() => this.setState({showWarning: false})}
+  >
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam id felis pulvinar ligula ultricies sollicitudin eget nec dui. Cras augue velit, pellentesque sit amet nisl ut, tristique suscipit sem. Cras sollicitudin auctor mattis.
+  </Modal>
+</div>
+```
+
+### Rendered Component
+
+export class RenderedComponent extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      showDefault: false,
+      showInfo: false,
+      showWarning: false,
+      showError: false
+    };
+  }
+  render() {
+    return (
+      <div className="rendered-component">
+        <button onClick={() => this.setState({showDefault: true})}>Show Default Modal</button>
+        <Modal
+          title="Default Modal"
+          id="default"
+          visible={this.state.showDefault}
+          onClose={() => this.setState({showDefault: false})}
+        >
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam id felis pulvinar ligula ultricies sollicitudin eget nec dui. Cras augue velit, pellentesque sit amet nisl ut, tristique suscipit sem. Cras sollicitudin auctor mattis.
+        </Modal>
+        <button onClick={() => this.setState({showInfo: true})}>Show Info Modal</button>
+        <Modal
+          title="Info Modal"
+          id="info"
+          status="info"
+          visible={this.state.showInfo}
+          onClose={() => this.setState({showInfo: false})}
+        >
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam id felis pulvinar ligula ultricies sollicitudin eget nec dui. Cras augue velit, pellentesque sit amet nisl ut, tristique suscipit sem. Cras sollicitudin auctor mattis.
+        </Modal>
+        <button onClick={() => this.setState({showError: true})}>Show Error Modal</button>
+        <Modal
+          title="Error Modal"
+          id="error"
+          status="error"
+          visible={this.state.showError}
+          onClose={() => this.setState({showError: false})}
+        >
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam id felis pulvinar ligula ultricies sollicitudin eget nec dui. Cras augue velit, pellentesque sit amet nisl ut, tristique suscipit sem. Cras sollicitudin auctor mattis.
+        </Modal>
+        <button onClick={() => this.setState({showWarning: true})}>Show Warning Modal</button>
+        <Modal
+          title="Warning Modal"
+          id="warning"
+          status="warning"
+          visible={this.state.showWarning}
+          onClose={() => this.setState({showWarning: false})}
+        >
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam id felis pulvinar ligula ultricies sollicitudin eget nec dui. Cras augue velit, pellentesque sit amet nisl ut, tristique suscipit sem. Cras sollicitudin auctor mattis.
+        </Modal>
+      </div>
+    );
+  }
+}
+
+<RenderedComponent />

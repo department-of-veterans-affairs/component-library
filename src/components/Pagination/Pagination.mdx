@@ -1,0 +1,54 @@
+---
+title: Pagination
+name: Pagination
+---
+
+import Pagination from './Pagination'
+
+### Code:
+
+#### Example State
+```
+state = {
+  page: 2,
+}
+```
+
+#### Code Sample
+```javascript
+import Pagination from '@department-of-veterans-affairs/formation-react/Pagination'
+
+<Pagination
+  onPageSelect={(page) => this.setState({ page })}
+  page={this.state.page}
+  pages={3}
+  maxPageListLength={3}
+  showLastPage={true}
+/>
+```
+
+### Rendered Component
+
+export class RenderedComponent extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      page: 2,
+    }
+  }
+  render () {
+    return (
+      <div className="rendered-component">
+        <Pagination
+          onPageSelect={(page) => this.setState({ page })}
+          page={this.state.page}
+          pages={3}
+          maxPageListLength={3}
+          showLastPage={true}
+        />
+      </div>
+    );
+  }
+}
+
+<RenderedComponent />
