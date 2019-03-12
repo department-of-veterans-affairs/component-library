@@ -147,27 +147,49 @@ export default class MegaMenu extends React.Component {
         >
           <div id="vetnav" role="navigation">
             <ul id="vetnav-menu" role="menubar">
-              <li><a href="/" className="vetnav-level1" role="menuitem">Home</a></li>
-              {
-                data.map((item, i) => {
-                  return (
-                    <li
-                      key={`${_.kebabCase(item.title)}-${i}`}
-                      className={`${item.className || ''} ${item.currentPage ? 'current-page' : ''}`}>
-                      {
-                        item.menuSections ? <button
-                          aria-expanded={currentDropdown === item.title}
-                          aria-controls={`vetnav-${_.kebabCase(item.title)}`}
-                          aria-haspopup="true"
-                          className="vetnav-level1"
-                          onClick={() => this.toggleDropDown(item.title)}>{item.title}</button>
-                          : <a href={item.href} onClick={linkClicked.bind(null, item)} className="vetnav-level1" target={item.target || null}>{item.title}</a>
-                      }
-                      <div id={`vetnav-${_.kebabCase(item.title)}`} className="vetnav-panel" role="none" hidden={currentDropdown !== item.title}>
-                        {
-                          item.title === currentDropdown && item.menuSections && <ul aria-label={item.title}>
-                            {
-                              Array.isArray(item.menuSections) ? item.menuSections.map((section, j) => {
+              <li>
+                <a href="/" className="vetnav-level1" role="menuitem">
+                  Home
+                </a>
+              </li>
+              {data.map((item, i) => {
+                return (
+                  <li
+                    key={`${_.kebabCase(item.title)}-${i}`}
+                    className={`${item.className || ""} ${
+                      item.currentPage ? "current-page" : ""
+                    }`}
+                  >
+                    {item.menuSections ? (
+                      <button
+                        aria-expanded={currentDropdown === item.title}
+                        aria-controls={`vetnav-${_.kebabCase(item.title)}`}
+                        aria-haspopup="true"
+                        className="vetnav-level1"
+                        onClick={() => this.toggleDropDown(item.title)}
+                      >
+                        {item.title}
+                      </button>
+                    ) : (
+                      <a
+                        href={item.href}
+                        onClick={linkClicked.bind(null, item)}
+                        className="vetnav-level1"
+                        target={item.target || null}
+                      >
+                        {item.title}
+                      </a>
+                    )}
+                    <div
+                      id={`vetnav-${_.kebabCase(item.title)}`}
+                      className="vetnav-panel"
+                      role="none"
+                      hidden={currentDropdown !== item.title}
+                    >
+                      {item.title === currentDropdown && item.menuSections && (
+                        <ul aria-label={item.title}>
+                          {Array.isArray(item.menuSections.constructor.name)
+                            ? item.menuSections.map((section, j) => {
                                 return (
                                   <MenuSection
                                     key={`${section}-${j}`}
