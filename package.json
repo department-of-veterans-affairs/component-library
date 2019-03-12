@@ -31,8 +31,6 @@
     "moment": "^2.23.0",
     "prop-types": "^15.6.2",
     "react-transition-group": "1",
-    "shelljs": "0.8.3",
-    "window-or-global": "^1.0.1",
     "vagov-eslint": "file:../vagov-eslint"
   },
   "peerDependencies": {
