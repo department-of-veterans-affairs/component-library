@@ -17,7 +17,7 @@
   },
   "scripts": {
     "build": "node ./scripts/build.js",
-    "lint": "eslint --quiet --ext .js --ext .jsx ./src",
+    "lint": "npx vagov-eslint lint:js",
     "test-watch": "karma start testing/karma.conf.js --auto-watch",
     "test": "karma start testing/karma.conf.js --single-run",
     "test-debug": "karma start testing/karma.conf.js --browsers Chrome"
@@ -31,7 +31,9 @@
     "moment": "^2.23.0",
     "prop-types": "^15.6.2",
     "react-transition-group": "1",
-    "window-or-global": "^1.0.1"
+    "shelljs": "0.8.3",
+    "window-or-global": "^1.0.1",
+    "vagov-eslint": "file:../vagov-eslint"
   },
   "peerDependencies": {
     "@department-of-veterans-affairs/formation": "^5.4.0",
