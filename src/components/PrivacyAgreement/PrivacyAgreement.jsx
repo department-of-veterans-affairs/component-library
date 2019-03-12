@@ -1,6 +1,6 @@
-import PropTypes from 'prop-types';
-import React from 'react';
-import ErrorableCheckbox from '../ErrorableCheckbox/ErrorableCheckbox';
+import PropTypes from "prop-types";
+import React from "react";
+import ErrorableCheckbox from "../ErrorableCheckbox/ErrorableCheckbox";
 
 export default function PrivacyAgreement({ onChange, checked, showError }) {
   return (
@@ -12,17 +12,18 @@ export default function PrivacyAgreement({ onChange, checked, showError }) {
         name="privacyAgreement"
         errorMessage={
           showError && !checked
-            ? 'You must accept the privacy policy before continuing'
+            ? "You must accept the privacy policy before continuing"
             : undefined
         }
         label={
           <span>
-            I have read and accept the{' '}
+            I have read and accept the{" "}
             <a target="_blank" href="/privacy/">
               privacy policy
             </a>
           </span>
-        }/>
+        }
+      />
     </div>
   );
 }

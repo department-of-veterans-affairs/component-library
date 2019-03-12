@@ -1,19 +1,19 @@
 /* eslint-disable jsx-a11y/label-has-for */
-import PropTypes from 'prop-types';
-import React from 'react';
-import _ from 'lodash';
-import moment from 'moment';
+import PropTypes from "prop-types";
+import React from "react";
+import _ from "lodash";
+import moment from "moment";
 
-import ErrorableSelect from '../ErrorableSelect/ErrorableSelect';
-import ErrorableNumberInput from '../ErrorableNumberInput/ErrorableNumberInput';
+import ErrorableSelect from "../ErrorableSelect/ErrorableSelect";
+import ErrorableNumberInput from "../ErrorableNumberInput/ErrorableNumberInput";
 
 import {
   isDirtyDate,
   isValidPartialDate,
   isNotBlankDateField,
   validateCustomFormComponent
-} from '../../helpers/validations';
-import { months, days } from '../../helpers/options-for-select.js';
+} from "../../helpers/validations";
+import { months, days } from "../../helpers/options-for-select.js";
 
 /**
  * A date input field that accepts values for month and year
@@ -26,7 +26,7 @@ class ErrorableDate extends React.Component {
   }
 
   componentWillMount() {
-    this.id = _.uniqueId('date-input-');
+    this.id = _.uniqueId("date-input-");
   }
 
   handleChange(path, update) {
@@ -36,7 +36,7 @@ class ErrorableDate extends React.Component {
     };
 
     if (!date.month.value) {
-      date.day.value = '';
+      date.day.value = "";
     }
 
     this.props.onValueChange(date);
@@ -73,7 +73,7 @@ class ErrorableDate extends React.Component {
     }
 
     let errorSpanId;
-    let errorSpan = '';
+    let errorSpan = "";
     if (!isValid) {
       errorSpanId = `${this.inputId}-error-message`;
       errorSpan = (
@@ -84,54 +84,60 @@ class ErrorableDate extends React.Component {
     }
 
     return (
-      <div className={!isValid && 'input-error-date'}>
+      <div className={!isValid && "input-error-date"}>
         <label>
-          {this.props.label ? this.props.label : 'Date of birth'}
-          {this.props.required && <span className="form-required-span">(*Required)</span>}
+          {this.props.label ? this.props.label : "Date of birth"}
+          {this.props.required && (
+            <span className="form-required-span">(*Required)</span>
+          )}
         </label>
         {errorSpan}
         <div
-          className={isValid ? undefined : 'usa-input-error form-error-date'}>
+          className={isValid ? undefined : "usa-input-error form-error-date"}
+        >
           <div className="usa-date-of-birth row">
             <div className="form-datefield-month">
               <ErrorableSelect
-                errorMessage={isValid ? undefined : ''}
+                errorMessage={isValid ? undefined : ""}
                 autocomplete="false"
                 label="Month"
                 name={`${this.props.name}Month`}
                 options={months}
                 value={month}
                 onValueChange={update => {
-                  this.handleChange('month', update);
-                }}/>
+                  this.handleChange("month", update);
+                }}
+              />
             </div>
             <div className="form-datefield-day">
               <ErrorableSelect
-                errorMessage={isValid ? undefined : ''}
+                errorMessage={isValid ? undefined : ""}
                 autocomplete="false"
                 label="Day"
                 name={`${this.props.name}Day`}
                 options={daysForSelectedMonth}
                 value={day}
                 onValueChange={update => {
-                  this.handleChange('day', update);
-                }}/>
+                  this.handleChange("day", update);
+                }}
+              />
             </div>
             <div className="usa-datefield usa-form-group usa-form-group-year">
               <ErrorableNumberInput
-                errorMessage={isValid ? undefined : ''}
+                errorMessage={isValid ? undefined : ""}
                 autocomplete="false"
                 label="Year"
                 name={`${this.props.name}Year`}
                 max={moment()
-                  .add(100, 'year')
+                  .add(100, "year")
                   .year()}
                 min="1900"
                 pattern="[0-9]{4}"
                 field={year}
                 onValueChange={update => {
-                  this.handleChange('year', update);
-                }}/>
+                  this.handleChange("year", update);
+                }}
+              />
             </div>
           </div>
         </div>
@@ -186,8 +192,8 @@ ErrorableDate.propTypes = {
 };
 
 ErrorableDate.defaultProps = {
-  requiredMessage: 'Please provide a response',
-  invalidMessage: 'Please provide a valid date'
+  requiredMessage: "Please provide a response",
+  invalidMessage: "Please provide a valid date"
 };
 
 export default ErrorableDate;

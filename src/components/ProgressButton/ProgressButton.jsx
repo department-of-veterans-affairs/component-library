@@ -1,6 +1,6 @@
-import PropTypes from 'prop-types';
-import React from 'react';
-import _ from 'lodash';
+import PropTypes from "prop-types";
+import React from "react";
+import _ from "lodash";
 
 /**
  * A component for the continue button to navigate through panels of questions.
@@ -12,23 +12,36 @@ class ProgressButton extends React.Component {
   }
 
   render() {
-    const beforeText = (this.props.beforeText) ? (<span className="button-icon">{this.props.beforeText} </span>) : '';
-    const afterText = (this.props.afterText) ? (<span className="button-icon"> {this.props.afterText}</span>) : '';
+    const beforeText = this.props.beforeText ? (
+      <span className="button-icon">{this.props.beforeText} </span>
+    ) : (
+      ""
+    );
+    const afterText = this.props.afterText ? (
+      <span className="button-icon"> {this.props.afterText}</span>
+    ) : (
+      ""
+    );
 
     return (
       <button
-        type={this.props.submitButton ? 'submit' : 'button'}
+        type={this.props.submitButton ? "submit" : "button"}
         disabled={this.props.disabled}
-        className={`${this.props.buttonClass} ${this.props.disabled ? 'usa-button-disabled' : null}`}
+        className={`${this.props.buttonClass} ${
+          this.props.disabled ? "usa-button-disabled" : null
+        }`}
         id={`${this.id}-continueButton`}
-        onClick={this.props.onButtonClick}>{beforeText}{this.props.buttonText}{afterText}
+        onClick={this.props.onButtonClick}
+      >
+        {beforeText}
+        {this.props.buttonText}
+        {afterText}
       </button>
     );
   }
 }
 
 ProgressButton.propTypes = {
-
   /**
    * function that changes the path to the next panel or submit.
    */

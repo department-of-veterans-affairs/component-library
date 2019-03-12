@@ -1,8 +1,8 @@
-import PropTypes from 'prop-types';
-import React from 'react';
-import _ from 'lodash';
+import PropTypes from "prop-types";
+import React from "react";
+import _ from "lodash";
 
-import { makeField } from '../../helpers/fields';
+import { makeField } from "../../helpers/fields";
 
 /*
  * A form input with a label that can display error messages.
@@ -17,11 +17,13 @@ class ErrorableNumberInput extends React.Component {
   }
 
   componentWillMount() {
-    this.inputId = _.uniqueId('errorable-number-input-');
+    this.inputId = _.uniqueId("errorable-number-input-");
   }
 
   handleChange(domEvent) {
-    this.props.onValueChange(makeField(domEvent.target.value, this.props.field.dirty));
+    this.props.onValueChange(
+      makeField(domEvent.target.value, this.props.field.dirty)
+    );
   }
 
   handleBlur() {
@@ -30,7 +32,7 @@ class ErrorableNumberInput extends React.Component {
 
   render() {
     // Calculate error state.
-    let errorSpan = '';
+    let errorSpan = "";
     let errorSpanId = undefined;
 
     // TODO: Look into an alternate way of adding error styling not based on presence of errorMessage:
@@ -48,16 +50,19 @@ class ErrorableNumberInput extends React.Component {
     // Calculate required.
     let requiredSpan = undefined;
     if (this.props.required) {
-      requiredSpan = (
-        <span className="form-required-span">(*Required)</span>
-      );
+      requiredSpan = <span className="form-required-span">(*Required)</span>;
     }
 
     return (
-      <div className={this.props.errorMessage ? 'usa-input-error' : undefined}>
+      <div className={this.props.errorMessage ? "usa-input-error" : undefined}>
         <label
-          className={this.props.errorMessage !== undefined ? 'usa-input-error-label' : undefined}
-          htmlFor={this.inputId}>
+          className={
+            this.props.errorMessage !== undefined
+              ? "usa-input-error-label"
+              : undefined
+          }
+          htmlFor={this.inputId}
+        >
           {this.props.label}
           {requiredSpan}
         </label>
@@ -75,7 +80,8 @@ class ErrorableNumberInput extends React.Component {
           type="number"
           value={this.props.field.value}
           onChange={this.handleChange}
-          onBlur={this.handleBlur}/>
+          onBlur={this.handleBlur}
+        />
       </div>
     );
   }
@@ -101,14 +107,8 @@ ErrorableNumberInput.propTypes = {
   /**
    * minimum number value and maximum of same
    */
-  min: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.number
-  ]),
-  max: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.number
-  ]),
+  min: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  max: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   /**
    * String specifying the pattern for the input.
    */

@@ -1,14 +1,17 @@
 /* eslint-disable jsx-a11y/label-has-for */
-import PropTypes from 'prop-types';
-import React from 'react';
-import _ from 'lodash';
-import moment from 'moment';
+import PropTypes from "prop-types";
+import React from "react";
+import _ from "lodash";
+import moment from "moment";
 
-import ErrorableSelect from '../ErrorableSelect/ErrorableSelect';
-import ErrorableNumberInput from '../ErrorableNumberInput/ErrorableNumberInput';
+import ErrorableSelect from "../ErrorableSelect/ErrorableSelect";
+import ErrorableNumberInput from "../ErrorableNumberInput/ErrorableNumberInput";
 
-import { isValidPartialMonthYear, validateCustomFormComponent } from '../../helpers/validations';
-import { months } from '../../helpers/options-for-select.js';
+import {
+  isValidPartialMonthYear,
+  validateCustomFormComponent
+} from "../../helpers/validations";
+import { months } from "../../helpers/options-for-select.js";
 
 /**
  * A date input field that accepts values for month and year
@@ -20,7 +23,7 @@ class ErrorableMonthYear extends React.Component {
   }
 
   componentWillMount() {
-    this.id = _.uniqueId('date-input-');
+    this.id = _.uniqueId("date-input-");
   }
 
   handleChange(path, update) {
@@ -44,19 +47,21 @@ class ErrorableMonthYear extends React.Component {
       if (this.props.required && (!month.value || !year.value)) {
         isValid = false;
         errorMessage = this.props.requiredMessage;
-      // make sure the user has entered a minimally valid date
+        // make sure the user has entered a minimally valid date
       } else if (!isValidPartialMonthYear(month.value, year.value)) {
         isValid = false;
         errorMessage = this.props.invalidMessage;
       } else {
-        const validationResult = validateCustomFormComponent(this.props.validation);
+        const validationResult = validateCustomFormComponent(
+          this.props.validation
+        );
         isValid = validationResult.valid;
         errorMessage = validationResult.message;
       }
     }
 
     let errorSpanId;
-    let errorSpan = '';
+    let errorSpan = "";
     if (!isValid) {
       errorSpanId = `${this.inputId}-error-message`;
       errorSpan = (
@@ -67,33 +72,47 @@ class ErrorableMonthYear extends React.Component {
     }
 
     return (
-      <div className={!isValid && 'input-error-date'}>
+      <div className={!isValid && "input-error-date"}>
         <label>
           {this.props.label}
-          {this.props.required && <span className="form-required-span">(*Required)</span>}
+          {this.props.required && (
+            <span className="form-required-span">(*Required)</span>
+          )}
         </label>
         {errorSpan}
-        <div className={isValid ? undefined : 'usa-input-error form-error-date'}>
+        <div
+          className={isValid ? undefined : "usa-input-error form-error-date"}
+        >
           <div className="usa-date-of-birth row">
             <div className="form-datefield-month">
-              <ErrorableSelect errorMessage={isValid ? undefined : ''}
+              <ErrorableSelect
+                errorMessage={isValid ? undefined : ""}
                 autocomplete="false"
                 label="Month"
                 name={`${this.props.name}Month`}
                 options={months}
                 value={month}
-                onValueChange={(update) => {this.handleChange('month', update);}}/>
+                onValueChange={update => {
+                  this.handleChange("month", update);
+                }}
+              />
             </div>
             <div className="usa-datefield usa-form-group usa-form-group-year">
-              <ErrorableNumberInput errorMessage={isValid ? undefined : ''}
+              <ErrorableNumberInput
+                errorMessage={isValid ? undefined : ""}
                 autocomplete="false"
                 label="Year"
                 name={`${this.props.name}Year`}
-                max={moment().add(100, 'year').year()}
+                max={moment()
+                  .add(100, "year")
+                  .year()}
                 min="1900"
                 pattern="[0-9]{4}"
                 field={year}
-                onValueChange={(update) => {this.handleChange('year', update);}}/>
+                onValueChange={update => {
+                  this.handleChange("year", update);
+                }}
+              />
             </div>
           </div>
         </div>
@@ -125,11 +144,11 @@ ErrorableMonthYear.propTypes = {
   date: PropTypes.shape({
     month: PropTypes.shape({
       value: PropTypes.string,
-      dirty: PropTypes.bool,
+      dirty: PropTypes.bool
     }),
     year: PropTypes.shape({
       value: PropTypes.string,
-      dirty: PropTypes.bool,
+      dirty: PropTypes.bool
     })
   }).isRequired,
   /**
@@ -141,8 +160,8 @@ ErrorableMonthYear.propTypes = {
 };
 
 ErrorableMonthYear.defaultProps = {
-  requiredMessage: 'Please provide a response',
-  invalidMessage: 'Please provide a valid month and/or year'
+  requiredMessage: "Please provide a response",
+  invalidMessage: "Please provide a valid month and/or year"
 };
 
 export default ErrorableMonthYear;

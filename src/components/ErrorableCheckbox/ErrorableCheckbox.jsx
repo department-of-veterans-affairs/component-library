@@ -1,6 +1,6 @@
-import PropTypes from 'prop-types';
-import React from 'react';
-import _ from 'lodash';
+import PropTypes from "prop-types";
+import React from "react";
+import _ from "lodash";
 
 class ErrorableCheckbox extends React.Component {
   constructor() {
@@ -9,7 +9,7 @@ class ErrorableCheckbox extends React.Component {
   }
 
   componentWillMount() {
-    this.inputId = _.uniqueId('errorable-checkbox-');
+    this.inputId = _.uniqueId("errorable-checkbox-");
   }
 
   handleChange(domEvent) {
@@ -19,7 +19,7 @@ class ErrorableCheckbox extends React.Component {
   render() {
     // TODO: extract error logic into a utility function
     // Calculate error state.
-    let errorSpan = '';
+    let errorSpan = "";
     let errorSpanId = undefined;
     if (this.props.errorMessage) {
       errorSpanId = `${this.inputId}-error-message`;
@@ -33,13 +33,11 @@ class ErrorableCheckbox extends React.Component {
     // Calculate required.
     let requiredSpan = undefined;
     if (this.props.required) {
-      requiredSpan = (
-        <span className="form-required-span">(*Required)</span>
-      );
+      requiredSpan = <span className="form-required-span">(*Required)</span>;
     }
 
     let className = `form-checkbox${
-      this.props.errorMessage ? ' usa-input-error' : ''
+      this.props.errorMessage ? " usa-input-error" : ""
     }`;
     if (!_.isUndefined(this.props.className)) {
       className = `${className} ${this.props.className}`;
@@ -47,9 +45,11 @@ class ErrorableCheckbox extends React.Component {
 
     return (
       <div className={className}>
-        {this.props.labelAboveCheckbox && <span className="label-above-checkbox">
-          {this.props.labelAboveCheckbox}
-        </span>}
+        {this.props.labelAboveCheckbox && (
+          <span className="label-above-checkbox">
+            {this.props.labelAboveCheckbox}
+          </span>
+        )}
         <input
           autoComplete="false"
           aria-describedby={errorSpanId}
@@ -57,13 +57,15 @@ class ErrorableCheckbox extends React.Component {
           id={this.inputId}
           name={this.props.name}
           type="checkbox"
-          onChange={this.handleChange}/>
+          onChange={this.handleChange}
+        />
         <label
           className={
-            this.props.errorMessage ? 'usa-input-error-label' : undefined
+            this.props.errorMessage ? "usa-input-error-label" : undefined
           }
           name={`${this.props.name}-label`}
-          htmlFor={this.inputId}>
+          htmlFor={this.inputId}
+        >
           {this.props.label}
           {requiredSpan}
         </label>

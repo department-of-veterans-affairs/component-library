@@ -1,15 +1,10 @@
-import PropTypes from 'prop-types';
-import React from 'react';
-import IconBase from '../IconBase/IconBase';
+import PropTypes from "prop-types";
+import React from "react";
+import IconBase from "../IconBase/IconBase";
 
 class IconUser extends React.Component {
   render() {
-    const {
-      color,
-      cssClass,
-      id,
-      role
-    } = this.props;
+    const { color, cssClass, id, role } = this.props;
 
     return (
       <IconBase
@@ -19,8 +14,10 @@ class IconUser extends React.Component {
         pointerEvents="none"
         role={role}
         viewBox="308 246 57 63"
-        width="57">
-        <path fill={color}
+        width="57"
+      >
+        <path
+          fill={color}
           d="M364.571429,297.736607 C364.571429,300.950909 363.59376,303.48883
             361.638393,305.350446 C359.683026,307.212063 357.084838,308.142857
             353.84375,308.142857 L318.727679,308.142857 C315.486591,308.142857
@@ -58,15 +55,15 @@ class IconUser extends React.Component {
             351.714286,257.598193 351.714286,261.857143 Z"
           id="user"
           stroke="none"
-          fillRule="evenodd">
-        </path>
+          fillRule="evenodd"
+        />
       </IconBase>
     );
   }
 }
 
 IconUser.propTypes = {
-  color: PropTypes.string, /* Should be a CSS color */
+  color: PropTypes.string /* Should be a CSS color */,
   cssClass: PropTypes.string,
   id: PropTypes.string
 };

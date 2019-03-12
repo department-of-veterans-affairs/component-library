@@ -1,7 +1,7 @@
-import PropTypes from 'prop-types';
-import React from 'react';
-import _ from 'lodash';
-import { makeField } from '../../helpers/fields';
+import PropTypes from "prop-types";
+import React from "react";
+import _ from "lodash";
+import { makeField } from "../../helpers/fields";
 
 /**
  * A form input with a label that can display error messages.
@@ -28,7 +28,7 @@ class ErrorableTextInput extends React.Component {
   }
 
   componentWillMount() {
-    this.inputId = _.uniqueId('errorable-text-input-');
+    this.inputId = _.uniqueId("errorable-text-input-");
   }
 
   handleChange(domEvent) {
@@ -43,7 +43,7 @@ class ErrorableTextInput extends React.Component {
 
   render() {
     // Calculate error state.
-    let errorSpan = '';
+    let errorSpan = "";
     let maxCharacters;
     let errorSpanId = undefined;
     let inputErrorClass = undefined;
@@ -55,23 +55,21 @@ class ErrorableTextInput extends React.Component {
           <span className="sr-only">Error</span> {this.props.errorMessage}
         </span>
       );
-      inputErrorClass = 'usa-input-error';
-      labelErrorClass = 'usa-input-error-label';
+      inputErrorClass = "usa-input-error";
+      labelErrorClass = "usa-input-error-label";
     }
 
     // Calculate max characters and display '(Max. XX characters)' when max is hit.
     if (this.props.field.value) {
       if (this.props.charMax === this.props.field.value.length) {
-        maxCharacters = (<small>(Max. {this.props.charMax} characters)</small>);
+        maxCharacters = <small>(Max. {this.props.charMax} characters)</small>;
       }
     }
 
     // Calculate required.
     let requiredSpan = undefined;
     if (this.props.required) {
-      requiredSpan = (
-        <span className="form-required-span">(*Required)</span>
-      );
+      requiredSpan = <span className="form-required-span">(*Required)</span>;
     }
 
     return (
@@ -93,7 +91,8 @@ class ErrorableTextInput extends React.Component {
           maxLength={this.props.charMax}
           value={this.props.field.value}
           onChange={this.handleChange}
-          onBlur={this.handleBlur}/>
+          onBlur={this.handleBlur}
+        />
         {maxCharacters}
       </div>
     );
@@ -151,7 +150,7 @@ ErrorableTextInput.propTypes = {
 };
 
 ErrorableTextInput.defaultProps = {
-  type: 'text'
+  type: "text"
 };
 
 export default ErrorableTextInput;

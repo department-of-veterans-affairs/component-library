@@ -1,6 +1,6 @@
-import React from 'react';
-import classNames from 'classnames';
-import PropTypes from 'prop-types';
+import React from "react";
+import classNames from "classnames";
+import PropTypes from "prop-types";
 
 class AcceptTermsPrompt extends React.Component {
   constructor(props) {
@@ -12,7 +12,7 @@ class AcceptTermsPrompt extends React.Component {
   }
 
   componentDidMount() {
-    window.dataLayer.push({ event: 'terms-shown' });
+    window.dataLayer.push({ event: "terms-shown" });
     window.scrollTo(0, 0);
   }
 
@@ -31,7 +31,7 @@ class AcceptTermsPrompt extends React.Component {
   }
 
   handleAnswer(event) {
-    if (event.currentTarget.value === 'yes' && event.currentTarget.checked) {
+    if (event.currentTarget.value === "yes" && event.currentTarget.checked) {
       this.setState({
         scrolledToBottom: this.state.scrolledToBottom,
         yesSelected: true
@@ -44,7 +44,7 @@ class AcceptTermsPrompt extends React.Component {
     const { terms, onCancel } = this.props;
 
     if (!terms.termsContent) {
-      return <div/>;
+      return <div />;
     }
 
     const submitDisabled = !(
@@ -52,16 +52,17 @@ class AcceptTermsPrompt extends React.Component {
     );
 
     const submitClass = classNames({
-      'usa-button': true,
-      'usa-button-disabled': submitDisabled,
-      'submit-button': true
+      "usa-button": true,
+      "usa-button-disabled": submitDisabled,
+      "submit-button": true
     });
 
     const submitButton = (
       <button
         className={submitClass}
         disabled={submitDisabled}
-        onClick={this.handleSubmit}>
+        onClick={this.handleSubmit}
+      >
         Submit
       </button>
     );
@@ -74,13 +75,14 @@ class AcceptTermsPrompt extends React.Component {
           id="form-yes"
           value="yes"
           onChange={this.handleAnswer}
-          disabled={!this.state.scrolledToBottom}/>
+          disabled={!this.state.scrolledToBottom}
+        />
         <label htmlFor="form-yes">{terms.yesContent}</label>
       </div>
     );
 
     const actionButtonClass = classNames({
-      'form-radio-buttons': true,
+      "form-radio-buttons": true,
       disabled: !this.state.scrolledToBottom
     });
 
@@ -92,8 +94,9 @@ class AcceptTermsPrompt extends React.Component {
           className="small-12 columns usa-content"
           role="region"
           aria-label="Terms and Conditions"
-          tabIndex="0">
-          <div dangerouslySetInnerHTML={{ __html: terms.headerContent }}/>
+          tabIndex="0"
+        >
+          <div dangerouslySetInnerHTML={{ __html: terms.headerContent }} />
           <h1>{terms.title}</h1>
           <div className="terms-box">
             <div className="terms-head">
@@ -102,19 +105,21 @@ class AcceptTermsPrompt extends React.Component {
             <div
               className="terms-scroller"
               onScroll={this.handleScroll}
-              tabIndex="0">
-              <div dangerouslySetInnerHTML={{ __html: terms.termsContent }}/>
+              tabIndex="0"
+            >
+              <div dangerouslySetInnerHTML={{ __html: terms.termsContent }} />
             </div>
             <div className={actionButtonClass}>{yesButton}</div>
           </div>
           <div>
-            <div dangerouslySetInnerHTML={{ __html: terms.footerContent }}/>
+            <div dangerouslySetInnerHTML={{ __html: terms.footerContent }} />
           </div>
           <div>
             {submitButton}
             <button
               className="usa-button usa-button-secondary"
-              onClick={onCancel}>
+              onClick={onCancel}
+            >
               Cancel
             </button>
           </div>

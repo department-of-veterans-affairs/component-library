@@ -1,9 +1,9 @@
-import PropTypes from 'prop-types';
-import React from 'react';
-import classNames from 'classnames';
+import PropTypes from "prop-types";
+import React from "react";
+import classNames from "classnames";
 
-import IconSearch from '../IconSearch/IconSearch';
-import DropDownPanel from '../DropDownPanel/DropDownPanel';
+import IconSearch from "../IconSearch/IconSearch";
+import DropDownPanel from "../DropDownPanel/DropDownPanel";
 
 class SearchMenu extends React.Component {
   componentDidUpdate() {
@@ -20,15 +20,17 @@ class SearchMenu extends React.Component {
         acceptCharset="UTF-8"
         action="https://search.vets.gov/search"
         id="search"
-        method="get">
+        method="get"
+      >
         <div className="csp-inline-patch-header">
-          <input name="utf8" type="hidden" value="&#x2713;"/>
+          <input name="utf8" type="hidden" value="&#x2713;" />
         </div>
         <input
           id="affiliate"
           name="affiliate"
           type="hidden"
-          value="vets.gov_search"/>
+          value="vets.gov_search"
+        />
         <label htmlFor="query" className="usa-sr-only">
           Search:
         </label>
@@ -40,9 +42,10 @@ class SearchMenu extends React.Component {
             className="usagov-search-autocomplete"
             id="query"
             name="query"
-            type="text"/>
+            type="text"
+          />
           <button type="submit">
-            <IconSearch color="#fff" role="presentation"/>
+            <IconSearch color="#fff" role="presentation" />
             <span className="usa-sr-only">Search</span>
           </button>
         </div>
@@ -53,11 +56,11 @@ class SearchMenu extends React.Component {
   render() {
     const buttonClasses = classNames(
       this.props.cssClass,
-      'va-btn-withicon',
-      ''
+      "va-btn-withicon",
+      ""
     );
 
-    const icon = <IconSearch color="#fff" role="presentation"/>;
+    const icon = <IconSearch color="#fff" role="presentation" />;
 
     return (
       <DropDownPanel
@@ -66,7 +69,8 @@ class SearchMenu extends React.Component {
         cssClass={buttonClasses}
         id="searchmenu"
         icon={icon}
-        isOpen={this.props.isOpen}>
+        isOpen={this.props.isOpen}
+      >
         {this.makeForm()}
       </DropDownPanel>
     );

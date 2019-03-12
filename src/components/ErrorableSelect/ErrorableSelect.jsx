@@ -1,7 +1,7 @@
-import PropTypes from 'prop-types';
-import React from 'react';
-import _ from 'lodash';
-import { makeField } from '../../helpers/fields';
+import PropTypes from "prop-types";
+import React from "react";
+import _ from "lodash";
+import { makeField } from "../../helpers/fields";
 
 /**
  * A form select with a label that can display error messages.
@@ -14,7 +14,7 @@ class ErrorableSelect extends React.Component {
   }
 
   componentWillMount() {
-    this.selectId = _.uniqueId('errorable-select-');
+    this.selectId = _.uniqueId("errorable-select-");
   }
 
   handleChange(domEvent) {
@@ -25,7 +25,7 @@ class ErrorableSelect extends React.Component {
     const selectedValue = this.props.value.value;
 
     // Calculate error state.
-    let errorSpan = '';
+    let errorSpan = "";
     let errorSpanId = undefined;
     if (this.props.errorMessage) {
       errorSpanId = `${this.selectId}-error-message`;
@@ -33,7 +33,8 @@ class ErrorableSelect extends React.Component {
         <span
           className="usa-input-error-message"
           id={`${errorSpanId}`}
-          role="alert">
+          role="alert"
+        >
           {this.props.errorMessage}
         </span>
       );
@@ -42,9 +43,7 @@ class ErrorableSelect extends React.Component {
     // Calculate required.
     let requiredSpan = undefined;
     if (this.props.required) {
-      requiredSpan = (
-        <span className="form-required-span">(*Required)</span>
-      );
+      requiredSpan = <span className="form-required-span">(*Required)</span>;
     }
 
     // Calculate options for select
@@ -69,14 +68,15 @@ class ErrorableSelect extends React.Component {
     });
 
     return (
-      <div className={this.props.errorMessage ? 'usa-input-error' : undefined}>
+      <div className={this.props.errorMessage ? "usa-input-error" : undefined}>
         <label
           className={
             this.props.errorMessage !== undefined
-              ? 'usa-input-error-label'
+              ? "usa-input-error-label"
               : this.props.labelClass
           }
-          htmlFor={this.selectId}>
+          htmlFor={this.selectId}
+        >
           {this.props.label}
           {requiredSpan}
         </label>
@@ -89,7 +89,8 @@ class ErrorableSelect extends React.Component {
           autoComplete={this.props.autocomplete}
           value={selectedValue}
           onKeyDown={this.props.onKeyDown}
-          onChange={this.handleChange}>
+          onChange={this.handleChange}
+        >
           {this.props.includeBlankOption && (
             <option value="">{this.props.emptyDescription}</option>
           )}
@@ -104,7 +105,7 @@ ErrorableSelect.propTypes = {
   /**
    * Error string to display in the component.
    * When defined, indicates select has a validation error.
-  */
+   */
   errorMessage: PropTypes.string,
 
   /**

@@ -1,17 +1,18 @@
-import React from 'react';
-import { shallow } from 'enzyme';
-import { expect } from 'chai';
-import { axeCheck } from '../../helpers/test-helpers';
+import React from "react";
+import { shallow } from "enzyme";
+import { expect } from "chai";
+import { axeCheck } from "../../helpers/test-helpers";
 
-import ProgressBar from './ProgressBar.jsx';
+import ProgressBar from "./ProgressBar.jsx";
 
-describe('<ProgressBar/>', () => {
-  it('should render', () => {
-    const tree = shallow(<ProgressBar percent={35}/>);
-    expect(tree.find('.progress-bar-inner')).to.have.length(1);
+describe("<ProgressBar/>", () => {
+  it("should render", () => {
+    const tree = shallow(<ProgressBar percent={35} />);
+    expect(tree.find(".progress-bar-inner")).to.have.length(1);
+    tree.unmount();
   });
 
-  it('should pass aXe check', () => {
-    return axeCheck(<ProgressBar percent={35}/>);
+  it("should pass aXe check", () => {
+    return axeCheck(<ProgressBar percent={35} />);
   });
 });

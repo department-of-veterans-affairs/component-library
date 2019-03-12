@@ -1,11 +1,11 @@
-import PropTypes from 'prop-types';
-import React from 'react';
-import _ from 'lodash';
-import classNames from 'classnames';
+import PropTypes from "prop-types";
+import React from "react";
+import _ from "lodash";
+import classNames from "classnames";
 
-import ExpandingGroup from '../ExpandingGroup/ExpandingGroup';
+import ExpandingGroup from "../ExpandingGroup/ExpandingGroup";
 
-import { makeField } from '../../helpers/fields';
+import { makeField } from "../../helpers/fields";
 
 /**
  * A radio button group with a label.
@@ -31,7 +31,7 @@ class ErrorableRadioButtons extends React.Component {
   }
 
   componentWillMount() {
-    this.inputId = this.props.id || _.uniqueId('errorable-radio-buttons-');
+    this.inputId = this.props.id || _.uniqueId("errorable-radio-buttons-");
   }
 
   getMatchingSubSection(checked, optionValue) {
@@ -55,7 +55,7 @@ class ErrorableRadioButtons extends React.Component {
   render() {
     // TODO: extract error logic into a utility function
     // Calculate error state.
-    let errorSpan = '';
+    let errorSpan = "";
     let errorSpanId = undefined;
     if (this.props.errorMessage) {
       errorSpanId = `${this.inputId}-error-message`;
@@ -69,9 +69,7 @@ class ErrorableRadioButtons extends React.Component {
     // Calculate required.
     let requiredSpan = undefined;
     if (this.props.required) {
-      requiredSpan = (
-        <span className="form-required-span">(*Required)</span>
-      );
+      requiredSpan = <span className="form-required-span">(*Required)</span>;
     }
 
     const options = _.isArray(this.props.options) ? this.props.options : [];
@@ -90,7 +88,7 @@ class ErrorableRadioButtons extends React.Component {
           optionAdditional = <div>{option.additional}</div>;
         }
       }
-      const checked = optionValue === storedValue ? 'checked=true' : '';
+      const checked = optionValue === storedValue ? "checked=true" : "";
       const matchingSubSection = this.getMatchingSubSection(
         optionValue === storedValue,
         optionValue
@@ -99,7 +97,8 @@ class ErrorableRadioButtons extends React.Component {
       const radioButton = (
         <div
           key={optionAdditional ? undefined : optionIndex}
-          className="form-radio-buttons">
+          className="form-radio-buttons"
+        >
           <div className="errorable-radio-button">
             <input
               autoComplete="false"
@@ -110,13 +109,14 @@ class ErrorableRadioButtons extends React.Component {
               onMouseDown={this.props.onMouseDown}
               onKeyDown={this.props.onKeyDown}
               value={optionValue}
-              onChange={this.handleChange}/>
+              onChange={this.handleChange}
+            />
 
             <label
               name={`${this.props.name}-${optionIndex}-label`}
-              htmlFor={`${this.inputId}-${optionIndex}`}>
-
-              {optionLabel}
+              htmlFor={`${this.inputId}-${optionIndex}`}
+            >
+              >{optionLabel}
             </label>
             {matchingSubSection}
             {option.content}
@@ -132,7 +132,8 @@ class ErrorableRadioButtons extends React.Component {
           <ExpandingGroup
             additionalClass="form-expanding-group-active-radio"
             open={!!checked}
-            key={optionIndex}>
+            key={optionIndex}
+          >
             {radioButton}
             <div>{optionAdditional}</div>
           </ExpandingGroup>
@@ -142,13 +143,13 @@ class ErrorableRadioButtons extends React.Component {
       return output;
     });
 
-    const fieldsetClass = classNames('fieldset-input', {
-      'usa-input-error': this.props.errorMessage,
+    const fieldsetClass = classNames("fieldset-input", {
+      "usa-input-error": this.props.errorMessage,
       [this.props.additionalFieldsetClass]: this.props.additionalFieldsetClass
     });
 
-    const legendClass = classNames('legend-label', {
-      'usa-input-error-label': this.props.errorMessage,
+    const legendClass = classNames("legend-label", {
+      "usa-input-error-label": this.props.errorMessage,
       [this.props.additionalLegendClass]: this.props.additionalLegendClass
     });
 
