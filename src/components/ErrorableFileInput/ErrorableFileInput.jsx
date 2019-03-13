@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-to-interactive-role */
-import PropTypes from "prop-types";
-import React from "react";
-import _ from "lodash";
+import PropTypes from 'prop-types';
+import React from 'react';
+import _ from 'lodash';
 
 class ErrorableFileInput extends React.Component {
   constructor() {
@@ -10,7 +10,7 @@ class ErrorableFileInput extends React.Component {
   }
 
   componentWillMount() {
-    this.inputId = _.uniqueId("errorable-file-input-");
+    this.inputId = _.uniqueId('errorable-file-input-');
   }
 
   handleChange(domEvent) {
@@ -22,7 +22,7 @@ class ErrorableFileInput extends React.Component {
   }
 
   render() {
-    let errorSpan = "";
+    let errorSpan = '';
     let errorSpanId = undefined;
     let inputErrorClass = undefined;
     let labelErrorClass = undefined;
@@ -40,8 +40,8 @@ class ErrorableFileInput extends React.Component {
           <span className="sr-only">Error</span> {this.props.errorMessage}
         </span>
       );
-      inputErrorClass = "usa-input-error";
-      labelErrorClass = "usa-input-error-label";
+      inputErrorClass = 'usa-input-error';
+      labelErrorClass = 'usa-input-error-label';
     }
 
     // Calculate required
@@ -63,20 +63,20 @@ class ErrorableFileInput extends React.Component {
             tabIndex="0"
             htmlFor={this.inputId}
             onKeyPress={e => {
-              if (e.key === "Enter" || e.key === " ") {
+              if (e.key === 'Enter' || e.key === ' ') {
                 document.getElementById(this.inputId).click();
               }
             }}
-            aria-describedby={this.props["aria-describedby"]}
+            aria-describedby={this.props['aria-describedby']}
             className={
-              this.props.triggerClass || "usa-button usa-button-secondary"
+              this.props.triggerClass || 'usa-button usa-button-secondary'
             }
           >
             {this.props.buttonText}
           </label>
           <input
             multiple={this.props.multiple}
-            style={{ display: "none" }}
+            style={{ display: 'none' }}
             type="file"
             accept={this.props.accept}
             id={this.inputId}
@@ -129,13 +129,13 @@ ErrorableFileInput.propTypes = {
   /**
    * file types
    */
-  mimeTypes: PropTypes.string
+  mimeTypes: PropTypes.string,
 };
 
 ErrorableFileInput.defaultProps = {
-  buttonText: "Add Files",
-  mimeTypes: "",
-  multiple: false
+  buttonText: 'Add Files',
+  mimeTypes: '',
+  multiple: false,
 };
 
 export default ErrorableFileInput;

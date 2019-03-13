@@ -1,5 +1,5 @@
-import PropTypes from "prop-types";
-import React from "react";
+import PropTypes from 'prop-types';
+import React from 'react';
 
 export default class LoadingIndicator extends React.Component {
   componentDidMount() {
@@ -35,9 +35,9 @@ LoadingIndicator.propTypes = {
   /**
    * does the loading indicator capture focus
    */
-  setFocus: PropTypes.bool
+  setFocus: PropTypes.bool,
 };
 
 LoadingIndicator.defaultProps = {
-  setFocus: false
+  setFocus: false,
 };

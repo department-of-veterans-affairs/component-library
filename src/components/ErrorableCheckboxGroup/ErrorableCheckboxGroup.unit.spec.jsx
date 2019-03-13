@@ -1,16 +1,16 @@
-import React from "react";
-import { mount } from "enzyme";
-import { expect } from "chai";
-import { axeCheck } from "../../helpers/test-helpers";
-import ErrorableCheckboxGroup from "./ErrorableCheckboxGroup.jsx";
+import React from 'react';
+import { mount } from 'enzyme';
+import { expect } from 'chai';
+import { axeCheck } from '../../helpers/test-helpers';
+import ErrorableCheckboxGroup from './ErrorableCheckboxGroup.jsx';
 
-describe("<ErrorableCheckboxGroup>", () => {
+describe('<ErrorableCheckboxGroup>', () => {
   const options = [
-    { value: "yes", label: "Yes", additional: <p>additional content</p> },
-    { value: "no", label: "No" }
+    { value: 'yes', label: 'Yes', additional: <p>additional content</p> },
+    { value: 'no', label: 'No' },
   ];
 
-  it("should render", () => {
+  it('should render', () => {
     const state = { yes: false, no: false };
     const tree = mount(
       <ErrorableCheckboxGroup
@@ -20,27 +20,27 @@ describe("<ErrorableCheckboxGroup>", () => {
         onValueChange={(option, checked) => {
           state[option.value] = checked;
         }}
-      />
+      />,
     );
 
-    expect(tree.find("input").length).to.equal(2);
+    expect(tree.find('input').length).to.equal(2);
     expect(
       tree
-        .find("label")
+        .find('label')
         .at(0)
-        .text()
-    ).to.equal("Yes");
+        .text(),
+    ).to.equal('Yes');
     expect(
       tree
-        .find("label")
+        .find('label')
         .at(1)
-        .text()
-    ).to.equal("No");
-    expect(tree.find("legend").text()).to.equal("my label");
+        .text(),
+    ).to.equal('No');
+    expect(tree.find('legend').text()).to.equal('my label');
     tree.unmount();
   });
 
-  it("should reveal additional content", () => {
+  it('should reveal additional content', () => {
     const state = { yes: true, no: false };
     const tree = mount(
       <ErrorableCheckboxGroup
@@ -50,14 +50,14 @@ describe("<ErrorableCheckboxGroup>", () => {
         onValueChange={(option, checked) => {
           state[option.value] = checked;
         }}
-      />
+      />,
     );
 
-    expect(tree.find("p").text()).to.equal("additional content");
+    expect(tree.find('p').text()).to.equal('additional content');
     tree.unmount();
   });
 
-  it("should pass aXe check", () => {
+  it('should pass aXe check', () => {
     const state = { yes: false, no: false };
 
     return axeCheck(
@@ -68,7 +68,7 @@ describe("<ErrorableCheckboxGroup>", () => {
         onValueChange={(option, checked) => {
           state[option.value] = checked;
         }}
-      />
+      />,
     );
   });
 });

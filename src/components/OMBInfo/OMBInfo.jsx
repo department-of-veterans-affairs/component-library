@@ -1,6 +1,6 @@
-import PropTypes from "prop-types";
-import React from "react";
-import Modal from "../modal/Modal";
+import PropTypes from 'prop-types';
+import React from 'react';
+import Modal from '../modal/Modal';
 // tests will fail if .jsx is not included above
 
 const modalContents = minutes => (
@@ -16,7 +16,7 @@ const modalContents = minutes => (
       Budget) control number is displayed. You are not required to respond to a
       collection of information if this number is not displayed. Valid OMB
       control numbers can be located on the OMB Internet Page at
-      www.reginfo.gov/public/do/PRAMain. If desired, you can call{" "}
+      www.reginfo.gov/public/do/PRAMain. If desired, you can call{' '}
       <a href="+18008271000">1-800-827-1000</a> to get information on where to
       send comments or suggestions about this form.
     </p>
@@ -110,7 +110,7 @@ OMBInfo.propTypes = {
   /**
    * form expiration date
    */
-  expDate: PropTypes.string
+  expDate: PropTypes.string,
 };
 
 export default OMBInfo;

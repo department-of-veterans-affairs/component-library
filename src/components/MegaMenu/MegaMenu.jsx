@@ -1,14 +1,15 @@
-import PropTypes from "prop-types";
-import React from "react";
-import MenuSection from "./MenuSection";
-import SubMenu from "./SubMenu";
-import _ from "lodash";
+/* eslint-disable react/jsx-indent */
+import PropTypes from 'prop-types';
+import React from 'react';
+import MenuSection from './MenuSection';
+import SubMenu from './SubMenu';
+import _ from 'lodash';
 
 export default class MegaMenu extends React.Component {
   componentDidMount() {
-    this.mobileMediaQuery = window.matchMedia("(max-width: 767px)");
+    this.mobileMediaQuery = window.matchMedia('(max-width: 767px)');
     this.smallDesktopMediaQuery = window.matchMedia(
-      "(min-width: 768px and max-width: 1007px)"
+      '(min-width: 768px and max-width: 1007px)',
     );
 
     if (this.mobileMediaQuery.matches) {
@@ -16,7 +17,7 @@ export default class MegaMenu extends React.Component {
     }
 
     this.mobileMediaQuery.addListener(this.resetDefaultState);
-    document.body.addEventListener("click", this.handleDocumentClick, false);
+    document.body.addEventListener('click', this.handleDocumentClick, false);
   }
 
   /**
@@ -24,7 +25,7 @@ export default class MegaMenu extends React.Component {
    */
   componentWillUnmount() {
     this.mobileMediaQuery.removeListener(this.resetDefaultState);
-    document.body.removeEventListener("click", this.handleDocumentClick, false);
+    document.body.removeEventListener('click', this.handleDocumentClick, false);
   }
 
   getSubmenu(item, currentSection) {
@@ -32,51 +33,47 @@ export default class MegaMenu extends React.Component {
       const menuSections = [
         item.menuSections.mainColumn,
         item.menuSections.columnOne,
-        item.menuSections.columnTwo
+        item.menuSections.columnTwo,
       ].reduce((acc, column) => {
         acc.push({
           title: column.title,
           links: {
             columnOne: {
-              title: "",
-              links: column.links
+              title: '',
+              links: column.links,
             },
             columnTwo: {
-              title: "",
-              links: []
-            }
-          }
+              title: '',
+              links: [],
+            },
+          },
         });
 
         return acc;
       }, []);
 
-      return menuSections.map((section, i) => {
-        return (
-          <MenuSection
-            key={`${section}-${i}`}
-            title={section.title}
-            defaultSection={this.defaultSection(item.menuSections)}
-            currentSection={currentSection}
-            updateCurrentSection={() =>
-              this.updateCurrentSection(section.title)
-            }
-            links={section.links}
-            linkClicked={this.props.linkClicked}
-            mobileMediaQuery={this.mobileMediaQuery}
-            smallDesktopMediaQuery={this.smallDesktopMediaQuery}
-            columnThreeLinkClicked={this.props.columnThreeLinkClicked}
-          />
-        );
-      });
+      return menuSections.map((section, i) => (
+        <MenuSection
+          key={`${section}-${i}`}
+          title={section.title}
+          defaultSection={this.defaultSection(item.menuSections)}
+          currentSection={currentSection}
+          updateCurrentSection={() => this.updateCurrentSection(section.title)}
+          links={section.links}
+          linkClicked={this.props.linkClicked}
+          mobileMediaQuery={this.mobileMediaQuery}
+          smallDesktopMediaQuery={this.smallDesktopMediaQuery}
+          columnThreeLinkClicked={this.props.columnThreeLinkClicked}
+        />
+      ));
     }
 
     return (
       <SubMenu
         data={item.menuSections}
         navTitle={item.title}
-        handleBackToMenu={() => this.toggleDropDown("")}
-        show={this.props.currentDropdown !== ""}
+        handleBackToMenu={() => this.toggleDropDown('')}
+        show={this.props.currentDropdown !== ''}
         linkClicked={this.props.linkClicked}
         mobileMediaQuery={this.mobileMediaQuery}
         smallDesktopMediaQuery={this.smallDesktopMediaQuery}
@@ -87,7 +84,7 @@ export default class MegaMenu extends React.Component {
 
   defaultSection(sections) {
     if (this.mobileMediaQuery.matches) {
-      return "";
+      return '';
     }
 
     return sections[0].title;
@@ -95,7 +92,7 @@ export default class MegaMenu extends React.Component {
 
   handleDocumentClick = event => {
     if (this.props.currentDropdown && !this.menuRef.contains(event.target)) {
-      this.props.toggleDropDown("");
+      this.props.toggleDropDown('');
     }
   };
 
@@ -105,13 +102,13 @@ export default class MegaMenu extends React.Component {
     } else {
       this.props.toggleDisplayHidden(false);
     }
-    this.props.updateCurrentSection("");
-    this.props.toggleDropDown("");
+    this.props.updateCurrentSection('');
+    this.props.toggleDropDown('');
   };
 
   toggleDropDown(title) {
     if (this.props.currentDropdown === title) {
-      this.props.toggleDropDown("");
+      this.props.toggleDropDown('');
     } else {
       this.props.toggleDropDown(title);
     }
@@ -121,7 +118,7 @@ export default class MegaMenu extends React.Component {
     let sectionTitle = title;
 
     if (this.mobileMediaQuery.matches) {
-      sectionTitle = this.props.currentSection === title ? "" : title;
+      sectionTitle = this.props.currentSection === title ? '' : title;
     }
 
     this.props.updateCurrentSection(sectionTitle);
@@ -134,7 +131,7 @@ export default class MegaMenu extends React.Component {
       data,
       display,
       linkClicked,
-      columnThreeLinkClicked
+      columnThreeLinkClicked,
     } = this.props;
 
     return (
@@ -152,74 +149,68 @@ export default class MegaMenu extends React.Component {
                   Home
                 </a>
               </li>
-              {data.map((item, i) => {
-                return (
-                  <li
-                    key={`${_.kebabCase(item.title)}-${i}`}
-                    className={`${item.className || ""} ${
-                      item.currentPage ? "current-page" : ""
-                    }`}
-                  >
-                    {item.menuSections ? (
-                      <button
-                        aria-expanded={currentDropdown === item.title}
-                        aria-controls={`vetnav-${_.kebabCase(item.title)}`}
-                        aria-haspopup="true"
-                        className="vetnav-level1"
-                        onClick={() => this.toggleDropDown(item.title)}
-                      >
-                        {item.title}
-                      </button>
-                    ) : (
-                      <a
-                        href={item.href}
-                        onClick={linkClicked.bind(null, item)}
-                        className="vetnav-level1"
-                        target={item.target || null}
-                      >
-                        {item.title}
-                      </a>
-                    )}
-                    <div
-                      id={`vetnav-${_.kebabCase(item.title)}`}
-                      className="vetnav-panel"
-                      role="none"
-                      hidden={currentDropdown !== item.title}
+              {data.map((item, i) => (
+                <li
+                  key={`${_.kebabCase(item.title)}-${i}`}
+                  className={`${item.className || ''} ${
+                    item.currentPage ? 'current-page' : ''
+                  }`}
+                >
+                  {item.menuSections ? (
+                    <button
+                      aria-expanded={currentDropdown === item.title}
+                      aria-controls={`vetnav-${_.kebabCase(item.title)}`}
+                      aria-haspopup="true"
+                      className="vetnav-level1"
+                      onClick={() => this.toggleDropDown(item.title)}
                     >
-                      {item.title === currentDropdown && item.menuSections && (
-                        <ul aria-label={item.title}>
-                          {Array.isArray(item.menuSections)
-                            ? item.menuSections.map((section, j) => {
-                                return (
-                                  <MenuSection
-                                    key={`${section}-${j}`}
-                                    title={section.title}
-                                    defaultSection={this.defaultSection(
-                                      item.menuSections
-                                    )}
-                                    currentSection={currentSection}
-                                    updateCurrentSection={() =>
-                                      this.updateCurrentSection(section.title)
-                                    }
-                                    links={section.links}
-                                    linkClicked={linkClicked}
-                                    mobileMediaQuery={this.mobileMediaQuery}
-                                    smallDesktopMediaQuery={
-                                      this.smallDesktopMediaQuery
-                                    }
-                                    columnThreeLinkClicked={
-                                      columnThreeLinkClicked
-                                    }
-                                  />
-                                );
-                              })
-                            : this.getSubmenu(item, currentSection)}
-                        </ul>
-                      )}
-                    </div>
-                  </li>
-                );
-              })}
+                      {item.title}
+                    </button>
+                  ) : (
+                    <a
+                      href={item.href}
+                      onClick={linkClicked.bind(null, item)}
+                      className="vetnav-level1"
+                      target={item.target || null}
+                    >
+                      {item.title}
+                    </a>
+                  )}
+                  <div
+                    id={`vetnav-${_.kebabCase(item.title)}`}
+                    className="vetnav-panel"
+                    role="none"
+                    hidden={currentDropdown !== item.title}
+                  >
+                    {item.title === currentDropdown && item.menuSections && (
+                      <ul aria-label={item.title}>
+                        {Array.isArray(item.menuSections)
+                          ? item.menuSections.map((section, j) => (
+                              <MenuSection
+                                key={`${section}-${j}`}
+                                title={section.title}
+                                defaultSection={this.defaultSection(
+                                  item.menuSections,
+                                )}
+                                currentSection={currentSection}
+                                updateCurrentSection={() =>
+                                  this.updateCurrentSection(section.title)
+                                }
+                                links={section.links}
+                                linkClicked={linkClicked}
+                                mobileMediaQuery={this.mobileMediaQuery}
+                                smallDesktopMediaQuery={
+                                  this.smallDesktopMediaQuery
+                                }
+                                columnThreeLinkClicked={columnThreeLinkClicked}
+                              />
+                            ))
+                          : this.getSubmenu(item, currentSection)}
+                      </ul>
+                    )}
+                  </div>
+                </li>
+              ))}
             </ul>
           </div>
         </div>
@@ -237,8 +228,8 @@ MegaMenu.propTypes = {
   data: PropTypes.arrayOf(
     PropTypes.shape({
       title: PropTypes.string.isRequired,
-      menuSections: PropTypes.oneOfType([PropTypes.array, PropTypes.object])
-    })
+      menuSections: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
+    }),
   ).isRequired,
   /**
    * Function to update currentSection in state
@@ -272,14 +263,14 @@ MegaMenu.propTypes = {
   columnThreeLinkClicked: PropTypes.func,
 
   display: PropTypes.shape({
-    hidden: PropTypes.boolean
-  })
+    hidden: PropTypes.boolean,
+  }),
 };
 
 MegaMenu.defaultProps = {
-  currentDropdown: "",
-  currentSection: "",
+  currentDropdown: '',
+  currentSection: '',
   display: {},
   linkClicked() {},
-  columnThreeLinkClicked() {}
+  columnThreeLinkClicked() {},
 };

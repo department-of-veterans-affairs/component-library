@@ -1,9 +1,9 @@
-import PropTypes from "prop-types";
-import React from "react";
-import _ from "lodash";
-import classNames from "classnames";
+import PropTypes from 'prop-types';
+import React from 'react';
+import _ from 'lodash';
+import classNames from 'classnames';
 
-import { makeField } from "../../helpers/fields";
+import { makeField } from '../../helpers/fields';
 
 /**
  * A form input with a label that can display error messages.
@@ -16,7 +16,7 @@ class ErrorableTextArea extends React.Component {
   }
 
   componentWillMount() {
-    this.inputId = _.uniqueId("errorable-textarea-");
+    this.inputId = _.uniqueId('errorable-textarea-');
   }
 
   handleChange(domEvent) {
@@ -33,7 +33,7 @@ class ErrorableTextArea extends React.Component {
 
   render() {
     // Calculate error state.
-    let errorSpan = "";
+    let errorSpan = '';
     let maxCharacters;
     let errorSpanId = undefined;
     let inputErrorClass = undefined;
@@ -45,8 +45,8 @@ class ErrorableTextArea extends React.Component {
           <span className="sr-only">Error</span> {this.props.errorMessage}
         </span>
       );
-      inputErrorClass = "usa-input-error";
-      labelErrorClass = "usa-input-error-label";
+      inputErrorClass = 'usa-input-error';
+      labelErrorClass = 'usa-input-error-label';
     }
 
     // Calculate max characters and display '(Max. XX characters)' when max is hit.
@@ -63,7 +63,7 @@ class ErrorableTextArea extends React.Component {
     }
 
     const classes = classNames(this.props.additionalClass, {
-      "input-disabled": this.props.disabled
+      'input-disabled': this.props.disabled,
     });
 
     return (
@@ -130,7 +130,7 @@ ErrorableTextArea.propTypes = {
    */
   field: PropTypes.shape({
     value: PropTypes.string,
-    dirty: PropTypes.bool
+    dirty: PropTypes.bool,
   }).isRequired,
 
   /**
@@ -146,7 +146,7 @@ ErrorableTextArea.propTypes = {
   /**
    * a function with this prototype: (newValue)
    */
-  onValueChange: PropTypes.func.isRequired
+  onValueChange: PropTypes.func.isRequired,
 };
 
 export default ErrorableTextArea;

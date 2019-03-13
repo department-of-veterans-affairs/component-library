@@ -1,9 +1,9 @@
-import PropTypes from "prop-types";
-import React from "react";
-import classNames from "classnames";
+import PropTypes from 'prop-types';
+import React from 'react';
+import classNames from 'classnames';
 
-import IconSearch from "../IconSearch/IconSearch";
-import DropDownPanel from "../DropDownPanel/DropDownPanel";
+import IconSearch from '../IconSearch/IconSearch';
+import DropDownPanel from '../DropDownPanel/DropDownPanel';
 
 class SearchMenu extends React.Component {
   componentDidUpdate() {
@@ -14,50 +14,48 @@ class SearchMenu extends React.Component {
     this.props.clickHandler();
   };
 
-  makeForm = () => {
-    return (
-      <form
-        acceptCharset="UTF-8"
-        action="https://search.vets.gov/search"
-        id="search"
-        method="get"
-      >
-        <div className="csp-inline-patch-header">
-          <input name="utf8" type="hidden" value="&#x2713;" />
-        </div>
-        <input
-          id="affiliate"
-          name="affiliate"
-          type="hidden"
-          value="vets.gov_search"
-        />
-        <label htmlFor="query" className="usa-sr-only">
-          Search:
-        </label>
+  makeForm = () => (
+    <form
+      acceptCharset="UTF-8"
+      action="https://search.vets.gov/search"
+      id="search"
+      method="get"
+    >
+      <div className="csp-inline-patch-header">
+        <input name="utf8" type="hidden" value="&#x2713;" />
+      </div>
+      <input
+        id="affiliate"
+        name="affiliate"
+        type="hidden"
+        value="vets.gov_search"
+      />
+      <label htmlFor="query" className="usa-sr-only">
+        Search:
+      </label>
 
-        <div className="va-flex">
-          <input
-            autoComplete="off"
-            ref="searchField"
-            className="usagov-search-autocomplete"
-            id="query"
-            name="query"
-            type="text"
-          />
-          <button type="submit">
-            <IconSearch color="#fff" role="presentation" />
-            <span className="usa-sr-only">Search</span>
-          </button>
-        </div>
-      </form>
-    );
-  };
+      <div className="va-flex">
+        <input
+          autoComplete="off"
+          ref="searchField"
+          className="usagov-search-autocomplete"
+          id="query"
+          name="query"
+          type="text"
+        />
+        <button type="submit">
+          <IconSearch color="#fff" role="presentation" />
+          <span className="usa-sr-only">Search</span>
+        </button>
+      </div>
+    </form>
+  );
 
   render() {
     const buttonClasses = classNames(
       this.props.cssClass,
-      "va-btn-withicon",
-      ""
+      'va-btn-withicon',
+      '',
     );
 
     const icon = <IconSearch color="#fff" role="presentation" />;
@@ -89,7 +87,7 @@ SearchMenu.propTypes = {
   /**
    * Handler for when the menu is clicked
    */
-  clickHandler: PropTypes.func
+  clickHandler: PropTypes.func,
 };
 
 export default SearchMenu;

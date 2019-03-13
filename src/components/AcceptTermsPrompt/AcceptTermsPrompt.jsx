@@ -1,6 +1,6 @@
-import React from "react";
-import classNames from "classnames";
-import PropTypes from "prop-types";
+import React from 'react';
+import classNames from 'classnames';
+import PropTypes from 'prop-types';
 
 class AcceptTermsPrompt extends React.Component {
   constructor(props) {
@@ -12,7 +12,7 @@ class AcceptTermsPrompt extends React.Component {
   }
 
   componentDidMount() {
-    window.dataLayer.push({ event: "terms-shown" });
+    window.dataLayer.push({ event: 'terms-shown' });
     window.scrollTo(0, 0);
   }
 
@@ -25,16 +25,16 @@ class AcceptTermsPrompt extends React.Component {
     if (ct.scrollTop + ct.offsetHeight + 100 >= ct.scrollHeight) {
       this.setState({
         scrolledToBottom: true,
-        yesSelected: this.state.yesSelected
+        yesSelected: this.state.yesSelected,
       });
     }
   }
 
   handleAnswer(event) {
-    if (event.currentTarget.value === "yes" && event.currentTarget.checked) {
+    if (event.currentTarget.value === 'yes' && event.currentTarget.checked) {
       this.setState({
         scrolledToBottom: this.state.scrolledToBottom,
-        yesSelected: true
+        yesSelected: true,
       });
     }
   }
@@ -52,9 +52,9 @@ class AcceptTermsPrompt extends React.Component {
     );
 
     const submitClass = classNames({
-      "usa-button": true,
-      "usa-button-disabled": submitDisabled,
-      "submit-button": true
+      'usa-button': true,
+      'usa-button-disabled': submitDisabled,
+      'submit-button': true,
     });
 
     const submitButton = (
@@ -82,8 +82,8 @@ class AcceptTermsPrompt extends React.Component {
     );
 
     const actionButtonClass = classNames({
-      "form-radio-buttons": true,
-      disabled: !this.state.scrolledToBottom
+      'form-radio-buttons': true,
+      disabled: !this.state.scrolledToBottom,
     });
 
     /* eslint-disable react/no-danger */
@@ -139,6 +139,6 @@ AcceptTermsPrompt.propTypes = {
   /**
    * cancel button click handler
    */
-  onCancel: PropTypes.func
+  onCancel: PropTypes.func,
 };
 export default AcceptTermsPrompt;

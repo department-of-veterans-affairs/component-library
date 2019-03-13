@@ -1,16 +1,16 @@
-import React from "react";
-import PropTypes from "prop-types";
-import Column from "./Column";
-import _ from "lodash";
-import { ArrowRightBlueSVG } from "./arrow-right-blue";
+import React from 'react';
+import PropTypes from 'prop-types';
+import Column from './Column';
+import _ from 'lodash';
+import { ArrowRightBlueSVG } from './arrow-right-blue';
 
 const getColumns = (mobileMediaQuery, columns) => {
   if (mobileMediaQuery.matches) {
     return {
       columnOne: {
         title: columns.columnOne.title,
-        links: [...columns.columnOne.links, ...columns.columnTwo.links]
-      }
+        links: [...columns.columnOne.links, ...columns.columnTwo.links],
+      },
     };
   }
 
@@ -25,7 +25,7 @@ const SubMenu = ({
   navTitle,
   handleBackToMenu,
   linkClicked,
-  columnThreeLinkClicked
+  columnThreeLinkClicked,
 }) => {
   const { seeAllLink, ...columns } = data;
 
@@ -34,7 +34,7 @@ const SubMenu = ({
 
     return (
       <div
-        className={mobileMediaQuery.matches ? "mm-link-container-small" : ""}
+        className={mobileMediaQuery.matches ? 'mm-link-container-small' : ''}
       >
         <div>
           <button
@@ -58,26 +58,22 @@ const SubMenu = ({
           </div>
         )}
 
-        {Object.keys(filteredColumns).map(keyName => {
-          return (
-            <Column
-              key={keyName}
-              data={filteredColumns[keyName]}
-              keyName={keyName}
-              navTitle={navTitle}
-              panelWhite={Object.prototype.hasOwnProperty.call(
-                filteredColumns,
-                "mainColumn"
-              )}
-              linkClicked={linkClicked}
-              mobileMediaQuery={mobileMediaQuery}
-              hidden={
-                keyName === "columnThree" && smallDesktopMediaQuery.matches
-              }
-              columnThreeLinkClicked={columnThreeLinkClicked}
-            />
-          );
-        })}
+        {Object.keys(filteredColumns).map(keyName => (
+          <Column
+            key={keyName}
+            data={filteredColumns[keyName]}
+            keyName={keyName}
+            navTitle={navTitle}
+            panelWhite={Object.prototype.hasOwnProperty.call(
+              filteredColumns,
+              'mainColumn',
+            )}
+            linkClicked={linkClicked}
+            mobileMediaQuery={mobileMediaQuery}
+            hidden={keyName === 'columnThree' && smallDesktopMediaQuery.matches}
+            columnThreeLinkClicked={columnThreeLinkClicked}
+          />
+        ))}
       </div>
     );
   }
@@ -90,7 +86,7 @@ SubMenu.propTypes = {
   show: PropTypes.bool.isRequired,
   navTitle: PropTypes.string.isRequired,
   linkClicked: PropTypes.func.isRequired,
-  columnThreeLinkClicked: PropTypes.func.isRequired
+  columnThreeLinkClicked: PropTypes.func.isRequired,
 };
 
 export default SubMenu;

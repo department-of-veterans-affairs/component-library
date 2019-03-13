@@ -1,8 +1,8 @@
-import PropTypes from "prop-types";
-import React from "react";
-import _ from "lodash";
+import PropTypes from 'prop-types';
+import React from 'react';
+import _ from 'lodash';
 
-import { makeField } from "../../helpers/fields";
+import { makeField } from '../../helpers/fields';
 
 /*
  * A form input with a label that can display error messages.
@@ -17,12 +17,12 @@ class ErrorableNumberInput extends React.Component {
   }
 
   componentWillMount() {
-    this.inputId = _.uniqueId("errorable-number-input-");
+    this.inputId = _.uniqueId('errorable-number-input-');
   }
 
   handleChange(domEvent) {
     this.props.onValueChange(
-      makeField(domEvent.target.value, this.props.field.dirty)
+      makeField(domEvent.target.value, this.props.field.dirty),
     );
   }
 
@@ -32,7 +32,7 @@ class ErrorableNumberInput extends React.Component {
 
   render() {
     // Calculate error state.
-    let errorSpan = "";
+    let errorSpan = '';
     let errorSpanId = undefined;
 
     // TODO: Look into an alternate way of adding error styling not based on presence of errorMessage:
@@ -54,11 +54,11 @@ class ErrorableNumberInput extends React.Component {
     }
 
     return (
-      <div className={this.props.errorMessage ? "usa-input-error" : undefined}>
+      <div className={this.props.errorMessage ? 'usa-input-error' : undefined}>
         <label
           className={
             this.props.errorMessage !== undefined
-              ? "usa-input-error-label"
+              ? 'usa-input-error-label'
               : undefined
           }
           htmlFor={this.inputId}
@@ -94,7 +94,7 @@ ErrorableNumberInput.propTypes = {
   errorMessage: PropTypes.string,
   field: PropTypes.shape({
     value: PropTypes.string,
-    dirty: PropTypes.bool
+    dirty: PropTypes.bool,
   }).isRequired,
   /**
    * `label` - String for the input field label.
@@ -125,7 +125,7 @@ ErrorableNumberInput.propTypes = {
    * handler for the value change with this prototype: (newValue)
    */
   onValueChange: PropTypes.func.isRequired,
-  additionalClass: PropTypes.string
+  additionalClass: PropTypes.string,
 };
 
 export default ErrorableNumberInput;

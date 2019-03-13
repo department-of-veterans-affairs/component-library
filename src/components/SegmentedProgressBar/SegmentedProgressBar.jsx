@@ -1,6 +1,6 @@
-import React from "react";
-import PropTypes from "prop-types";
-import _ from "lodash";
+import React from 'react';
+import PropTypes from 'prop-types';
+import _ from 'lodash';
 
 /**
  * Create a segmented progress bar for multi-page forms.
@@ -22,7 +22,7 @@ export default function SegmentedProgressBar({ current, total }) {
         <div
           key={step}
           className={`progress-segment ${
-            current > step ? "progress-segment-complete" : ""
+            current > step ? 'progress-segment-complete' : ''
           }`}
         />
       ))}
@@ -38,5 +38,5 @@ SegmentedProgressBar.propTypes = {
   /**
    * The total number of segments in the progress bar
    */
-  total: PropTypes.number.isRequired
+  total: PropTypes.number.isRequired,
 };

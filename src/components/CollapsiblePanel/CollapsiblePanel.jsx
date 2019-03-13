@@ -1,7 +1,7 @@
-import PropTypes from "prop-types";
-import React from "react";
-import Scroll from "react-scroll";
-import _ from "lodash";
+import PropTypes from 'prop-types';
+import React from 'react';
+import Scroll from 'react-scroll';
+import _ from 'lodash';
 
 const Element = Scroll.Element;
 const scroller = Scroll.scroller;
@@ -24,8 +24,8 @@ class CollapsiblePanel extends React.Component {
       window.VetsGov.scroll || {
         duration: 500,
         delay: 2,
-        smooth: true
-      }
+        smooth: true,
+      },
     );
   }
 
@@ -41,7 +41,7 @@ class CollapsiblePanel extends React.Component {
         if (isOpening) {
           this.scrollToTop();
         }
-      }
+      },
     );
   }
 
@@ -62,7 +62,7 @@ class CollapsiblePanel extends React.Component {
         <div className="accordion-header clearfix">
           <button
             className="usa-accordion-button usa-button-unstyled"
-            aria-expanded={this.state.open ? "true" : "false"}
+            aria-expanded={this.state.open ? 'true' : 'false'}
             aria-controls={`collapsible-${this.id}`}
             onClick={this.toggleChapter}
           >
@@ -79,7 +79,7 @@ CollapsiblePanel.propTypes = {
   /**
    * panel label
    */
-  panelName: PropTypes.string.isRequired
+  panelName: PropTypes.string.isRequired,
 };
 
 export default CollapsiblePanel;

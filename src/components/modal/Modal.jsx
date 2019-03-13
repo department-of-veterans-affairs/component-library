@@ -1,6 +1,6 @@
-import PropTypes from "prop-types";
-import React from "react";
-import classNames from "classnames";
+import PropTypes from 'prop-types';
+import React from 'react';
+import classNames from 'classnames';
 
 const ESCAPE_KEY = 27;
 
@@ -30,11 +30,11 @@ class Modal extends React.Component {
 
   setupModal() {
     this.applyFocusToModal();
-    document.body.classList.add("modal-open");
-    document.addEventListener("keyup", this.handleDocumentKeyUp, false);
-    document.addEventListener("focus", this.handleDocumentFocus, true);
+    document.body.classList.add('modal-open');
+    document.addEventListener('keyup', this.handleDocumentKeyUp, false);
+    document.addEventListener('focus', this.handleDocumentFocus, true);
     if (this.props.clickToClose) {
-      document.addEventListener("click", this.handleDocumentClicked, true);
+      document.addEventListener('click', this.handleDocumentClicked, true);
     }
   }
 
@@ -42,11 +42,11 @@ class Modal extends React.Component {
     if (this.state.lastFocus) {
       this.state.lastFocus.focus();
     }
-    document.body.classList.remove("modal-open");
-    document.removeEventListener("keyup", this.handleDocumentKeyUp, false);
-    document.removeEventListener("focus", this.handleDocumentFocus, true);
+    document.body.classList.remove('modal-open');
+    document.removeEventListener('keyup', this.handleDocumentKeyUp, false);
+    document.removeEventListener('focus', this.handleDocumentFocus, true);
     if (this.props.clickToClose) {
-      document.removeEventListener("click", this.handleDocumentClicked, true);
+      document.removeEventListener('click', this.handleDocumentClicked, true);
     }
   }
 
@@ -76,7 +76,7 @@ class Modal extends React.Component {
 
   applyFocusToModal() {
     const focusableElement = this.element.querySelector(
-      this.props.focusSelector
+      this.props.focusSelector,
     );
     if (focusableElement) {
       this.setState({ lastFocus: document.activeElement });
@@ -111,20 +111,20 @@ class Modal extends React.Component {
     if (!this.props.visible) return null;
 
     const { id, status, title } = this.props;
-    const titleId = title && `${id || "va-modal"}-title`;
+    const titleId = title && `${id || 'va-modal'}-title`;
     const content = this.props.contents || this.props.children;
 
-    const modalClass = classNames("va-modal", this.props.cssClass);
+    const modalClass = classNames('va-modal', this.props.cssClass);
 
-    const wrapperClass = classNames("va-modal-inner", {
-      "usa-alert": status,
+    const wrapperClass = classNames('va-modal-inner', {
+      'usa-alert': status,
       [`usa-alert-${status}`]: status,
-      "va-modal-alert": status
+      'va-modal-alert': status,
     });
 
-    const bodyClass = status ? "usa-alert-body" : "va-modal-body";
-    const titleClass = status ? "usa-alert-heading" : "va-modal-title";
-    const contentClass = classNames({ "usa-alert-text": status });
+    const bodyClass = status ? 'usa-alert-body' : 'va-modal-body';
+    const titleClass = status ? 'usa-alert-heading' : 'va-modal-title';
+    const contentClass = classNames({ 'usa-alert-text': status });
 
     const closeButton = !this.props.hideCloseButton && (
       <button
@@ -198,19 +198,19 @@ Modal.propTypes = {
    */
   primaryButton: PropTypes.shape({
     text: PropTypes.string.isRequired,
-    action: PropTypes.func.isRequired
+    action: PropTypes.func.isRequired,
   }),
   /**
    * Secondary button text and action
    */
   secondaryButton: PropTypes.shape({
     text: PropTypes.string.isRequired,
-    action: PropTypes.func.isRequired
+    action: PropTypes.func.isRequired,
   }),
   /*
    * Style of modal alert - info, error, success, warning
    */
-  status: PropTypes.oneOf(["info", "error", "success", "warning", "continue"]),
+  status: PropTypes.oneOf(['info', 'error', 'success', 'warning', 'continue']),
   /**
    * Title/header text for the modal
    */
@@ -223,12 +223,12 @@ Modal.propTypes = {
    * Selector to use to find elements to focus on when the
    * modal is opened
    */
-  focusSelector: PropTypes.string
+  focusSelector: PropTypes.string,
 };
 
 Modal.defaultProps = {
   clickToClose: false,
-  focusSelector: "button, input, select, a"
+  focusSelector: 'button, input, select, a',
 };
 
 export default Modal;

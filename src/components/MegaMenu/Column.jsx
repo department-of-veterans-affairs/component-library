@@ -1,13 +1,13 @@
-import React from "react";
-import PropTypes from "prop-types";
-import _ from "lodash";
+import React from 'react';
+import PropTypes from 'prop-types';
+import _ from 'lodash';
 
 const isPanelWhite = (mobileMediaQuery, panelWhite) => {
   if (mobileMediaQuery.matches) {
-    return "";
+    return '';
   }
 
-  return panelWhite ? " panel-white" : "";
+  return panelWhite ? ' panel-white' : '';
 };
 
 const Column = props => {
@@ -18,23 +18,23 @@ const Column = props => {
     panelWhite,
     columnThreeLinkClicked,
     linkClicked,
-    hidden
+    hidden,
   } = props;
 
-  if (keyName === "columnThree") {
+  if (keyName === 'columnThree') {
     return (
       <div
-        aria-hidden={hidden ? "true" : "false"}
+        aria-hidden={hidden ? 'true' : 'false'}
         className={`vetnav-panel vetnav-panel--submenu ${_.kebabCase(
-          keyName
+          keyName,
         )}${isPanelWhite(mobileMediaQuery, panelWhite)}`}
         aria-label={keyName}
       >
         <div
           className={`${
             panelWhite
-              ? "mm-marketing-container mm-marketing-gray"
-              : "mm-marketing-container"
+              ? 'mm-marketing-container mm-marketing-gray'
+              : 'mm-marketing-container'
           }`}
         >
           <img src={data.img.src} alt={data.img.alt} />
@@ -43,7 +43,7 @@ const Column = props => {
               className="mm-links"
               href={data.link.href}
               onClick={columnThreeLinkClicked.bind(null, data.link)}
-              target={data.link.target || "_self"}
+              target={data.link.target || '_self'}
             >
               {data.link.text}
             </a>
@@ -56,9 +56,9 @@ const Column = props => {
 
   return (
     <div
-      aria-hidden={hidden ? "true" : "false"}
+      aria-hidden={hidden ? 'true' : 'false'}
       className={`vetnav-panel vetnav-panel--submenu ${_.kebabCase(
-        keyName
+        keyName,
       )}${isPanelWhite(mobileMediaQuery, panelWhite)}`}
     >
       <h3 id={`vetnav-${_.kebabCase(keyName)}-header`}>{data.title}</h3>
@@ -74,7 +74,7 @@ const Column = props => {
               className="mm-links"
               href={link.href}
               onClick={linkClicked.bind(null, link)}
-              target={link.target || "_self"}
+              target={link.target || '_self'}
             >
               {link.text}
             </a>
@@ -91,25 +91,25 @@ Column.propTypes = {
     links: PropTypes.arrayOf(
       PropTypes.shape({
         text: PropTypes.string.isRequired,
-        href: PropTypes.string.isRequired
-      })
+        href: PropTypes.string.isRequired,
+      }),
     ),
     img: PropTypes.shape({
       src: PropTypes.string.isRequired,
-      alt: PropTypes.string.isRequired
+      alt: PropTypes.string.isRequired,
     }),
     link: PropTypes.shape({
       text: PropTypes.string.isRequired,
       href: PropTypes.string.isRequired,
-      target: PropTypes.string
+      target: PropTypes.string,
     }),
-    description: PropTypes.string
+    description: PropTypes.string,
   }),
   keyName: PropTypes.string.isRequired,
   navTitle: PropTypes.string.isRequired,
   panelWhite: PropTypes.bool.isRequired,
   linkClicked: PropTypes.func.isRequired,
-  columnThreeLinkClicked: PropTypes.func.isRequired
+  columnThreeLinkClicked: PropTypes.func.isRequired,
 };
 
 export default Column;

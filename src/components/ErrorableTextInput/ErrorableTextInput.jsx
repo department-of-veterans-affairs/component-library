@@ -1,7 +1,7 @@
-import PropTypes from "prop-types";
-import React from "react";
-import _ from "lodash";
-import { makeField } from "../../helpers/fields";
+import PropTypes from 'prop-types';
+import React from 'react';
+import _ from 'lodash';
+import { makeField } from '../../helpers/fields';
 
 /**
  * A form input with a label that can display error messages.
@@ -28,12 +28,12 @@ class ErrorableTextInput extends React.Component {
   }
 
   componentWillMount() {
-    this.inputId = _.uniqueId("errorable-text-input-");
+    this.inputId = _.uniqueId('errorable-text-input-');
   }
 
   handleChange(domEvent) {
     this.props.onValueChange(
-      makeField(domEvent.target.value, this.props.field.dirty)
+      makeField(domEvent.target.value, this.props.field.dirty),
     );
   }
 
@@ -43,7 +43,7 @@ class ErrorableTextInput extends React.Component {
 
   render() {
     // Calculate error state.
-    let errorSpan = "";
+    let errorSpan = '';
     let maxCharacters;
     let errorSpanId = undefined;
     let inputErrorClass = undefined;
@@ -55,8 +55,8 @@ class ErrorableTextInput extends React.Component {
           <span className="sr-only">Error</span> {this.props.errorMessage}
         </span>
       );
-      inputErrorClass = "usa-input-error";
-      labelErrorClass = "usa-input-error-label";
+      inputErrorClass = 'usa-input-error';
+      labelErrorClass = 'usa-input-error-label';
     }
 
     // Calculate max characters and display '(Max. XX characters)' when max is hit.
@@ -129,7 +129,7 @@ ErrorableTextInput.propTypes = {
    */
   field: PropTypes.shape({
     value: PropTypes.string,
-    dirty: PropTypes.bool
+    dirty: PropTypes.bool,
   }).isRequired,
   /**
    * extra attribute for use by CSS selector, specifically by tests
@@ -146,11 +146,11 @@ ErrorableTextInput.propTypes = {
   /**
    * type attribute for input field
    */
-  type: PropTypes.string
+  type: PropTypes.string,
 };
 
 ErrorableTextInput.defaultProps = {
-  type: "text"
+  type: 'text',
 };
 
 export default ErrorableTextInput;

@@ -1,14 +1,14 @@
 /* eslint-disable no-console */
-const rimraf = require("rimraf");
-const glob = require("glob");
-const fs = require("fs-extra");
-const babel = require("babel-core");
-const recast = require("recast");
-const path = require("path");
+const rimraf = require('rimraf');
+const glob = require('glob');
+const fs = require('fs-extra');
+const babel = require('babel-core');
+const recast = require('recast');
+const path = require('path');
 
-console.log("Starting formation-react build");
-console.log("Cleaning old build");
-rimraf.sync("./*.js");
+console.log('Starting formation-react build');
+console.log('Cleaning old build');
+rimraf.sync('./*.js');
 
 // this comes from gulp-flatten-requires
 // https://github.com/insin/gulp-flatten-requires/blob/master/index.js
@@ -38,9 +38,9 @@ function flattenRequires(bufferString) {
 const fileNames = [].concat.apply(
   [],
   [
-    glob.sync("./src/components/**/*.jsx", { ignore: "./**/*.unit.spec.jsx" }),
-    glob.sync("./src/helpers/*.js")
-  ]
+    glob.sync('./src/components/**/*.jsx', { ignore: './**/*.unit.spec.jsx' }),
+    glob.sync('./src/helpers/*.js'),
+  ],
 );
 
 fileNames.forEach(fileName => {
@@ -48,11 +48,11 @@ fileNames.forEach(fileName => {
   const fileBuffer = fs.readFileSync(fileName);
   // transform the buffer with babel using babelrc
   const babelTransformedBuffer = babel.transform(fileBuffer, {
-    extends: "../../.babelrc"
+    extends: '../../.babelrc',
   }).code;
   // flatten paths given to all requires
   const requireFlattenedBuffer = flattenRequires(
-    babelTransformedBuffer.toString()
+    babelTransformedBuffer.toString(),
   );
   const newFileName = `${path.parse(fileName).name}.js`;
 

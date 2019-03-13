@@ -1,5 +1,5 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React from 'react';
+import PropTypes from 'prop-types';
 
 export default function ProgressBar({ percent }) {
   return (
@@ -20,5 +20,5 @@ ProgressBar.propTypes = {
   /**
    * Percent of progress made
    */
-  percent: PropTypes.number.isRequired
+  percent: PropTypes.number.isRequired,
 };

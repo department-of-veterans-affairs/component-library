@@ -1,9 +1,9 @@
-import PropTypes from "prop-types";
-import React from "react";
-import _ from "lodash";
-import classNames from "classnames";
-import ExpandingGroup from "../ExpandingGroup/ExpandingGroup";
-import { makeField } from "../../helpers/fields";
+import PropTypes from 'prop-types';
+import React from 'react';
+import _ from 'lodash';
+import classNames from 'classnames';
+import ExpandingGroup from '../ExpandingGroup/ExpandingGroup';
+import { makeField } from '../../helpers/fields';
 
 /**
  * A checkbox button group with a label.
@@ -21,7 +21,7 @@ import { makeField } from "../../helpers/fields";
  */
 class ErrorableCheckboxGroup extends React.Component {
   componentWillMount() {
-    this.inputId = this.props.id || _.uniqueId("errorable-checkbox-buttons-");
+    this.inputId = this.props.id || _.uniqueId('errorable-checkbox-buttons-');
   }
 
   getMatchingSubSection = (checked, optionValues) => {
@@ -30,7 +30,7 @@ class ErrorableCheckboxGroup extends React.Component {
         ? this.props.children
         : [this.props.children];
       const subsections = children.filter(child =>
-        optionValues.contains(child.props.showIfValueChosen)
+        optionValues.contains(child.props.showIfValueChosen),
       );
       return subsections.length > 0 ? subsections[0] : null;
     }
@@ -41,14 +41,14 @@ class ErrorableCheckboxGroup extends React.Component {
   handleChange = domEvent => {
     this.props.onValueChange(
       makeField(domEvent.target.value, true),
-      domEvent.target.checked
+      domEvent.target.checked,
     );
   };
 
   render() {
     // TODO: extract error logic into a utility function
     // Calculate error state.
-    let errorSpan = "";
+    let errorSpan = '';
     let errorSpanId = undefined;
     if (this.props.errorMessage) {
       errorSpanId = `${this.inputId}-error-message`;
@@ -84,7 +84,7 @@ class ErrorableCheckboxGroup extends React.Component {
       const checked = storedValues[optionValue];
       const matchingSubSection = this.getMatchingSubSection(
         checked,
-        optionValue
+        optionValue,
       );
       const checkboxButton = (
         <div
@@ -132,14 +132,14 @@ class ErrorableCheckboxGroup extends React.Component {
       return output;
     });
 
-    const fieldsetClass = classNames("fieldset-input", {
-      "usa-input-error": this.props.errorMessage,
-      [this.props.additionalFieldsetClass]: this.props.additionalFieldsetClass
+    const fieldsetClass = classNames('fieldset-input', {
+      'usa-input-error': this.props.errorMessage,
+      [this.props.additionalFieldsetClass]: this.props.additionalFieldsetClass,
     });
 
-    const legendClass = classNames("legend-label", {
-      "usa-input-error-label": this.props.errorMessage,
-      [this.props.additionalLegendClass]: this.props.additionalLegendClass
+    const legendClass = classNames('legend-label', {
+      'usa-input-error-label': this.props.errorMessage,
+      [this.props.additionalLegendClass]: this.props.additionalLegendClass,
     });
 
     return (
@@ -190,9 +190,9 @@ ErrorableCheckboxGroup.propTypes = {
         label: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
         value: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
         content: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
-        additional: PropTypes.oneOfType([PropTypes.string, PropTypes.element])
-      })
-    ])
+        additional: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
+      }),
+    ]),
   ).isRequired,
   /**
    * Values of the checkbox field.
@@ -213,7 +213,7 @@ ErrorableCheckboxGroup.propTypes = {
   /**
    * Is this field required.
    */
-  required: PropTypes.bool
+  required: PropTypes.bool,
 };
 
 export default ErrorableCheckboxGroup;

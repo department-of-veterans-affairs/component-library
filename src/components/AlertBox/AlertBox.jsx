@@ -1,6 +1,6 @@
-import PropTypes from "prop-types";
-import React from "react";
-import classNames from "classnames";
+import PropTypes from 'prop-types';
+import React from 'react';
+import classNames from 'classnames';
 
 class AlertBox extends React.Component {
   constructor(props) {
@@ -26,8 +26,8 @@ class AlertBox extends React.Component {
 
     if (this._ref && !isInView) {
       this._ref.scrollIntoView({
-        block: "end",
-        behavior: "smooth"
+        block: 'end',
+        behavior: 'smooth',
       });
     }
   }
@@ -36,9 +36,9 @@ class AlertBox extends React.Component {
     if (!this.props.isVisible) return <div aria-live="polite" />;
 
     const alertClass = classNames(
-      "usa-alert",
+      'usa-alert',
       `usa-alert-${this.props.status}`,
-      this.props.className
+      this.props.className,
     );
 
     const closeButton = this.props.onCloseAlert && (
@@ -79,11 +79,11 @@ AlertBox.propTypes = {
    * Determines the color and icon of the alert box.
    */
   status: PropTypes.oneOf([
-    "info", // Blue border, black circled 'i'
-    "error", // Red border, red circled exclamation
-    "success", // Green border, green checkmark
-    "warning", // Yellow border, black triangle exclamation
-    "continue" // Green border, green lock
+    'info', // Blue border, black circled 'i'
+    'error', // Red border, red circled exclamation
+    'success', // Green border, green checkmark
+    'warning', // Yellow border, black triangle exclamation
+    'continue', // Green border, green lock
   ]).isRequired,
 
   /**
@@ -114,11 +114,11 @@ AlertBox.propTypes = {
   /**
    * Optional class name to add to the alert box.
    */
-  className: PropTypes.string
+  className: PropTypes.string,
 };
 
 AlertBox.defaultProps = {
-  isVisible: true
+  isVisible: true,
 };
 
 export default AlertBox;

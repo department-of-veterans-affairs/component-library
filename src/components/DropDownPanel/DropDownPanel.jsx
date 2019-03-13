@@ -1,14 +1,14 @@
-import PropTypes from "prop-types";
-import React from "react";
-import classNames from "classnames";
+import PropTypes from 'prop-types';
+import React from 'react';
+import classNames from 'classnames';
 
 export default class DropDownPanel extends React.Component {
   componentDidMount() {
-    document.body.addEventListener("click", this.handleDocumentClick, false);
+    document.body.addEventListener('click', this.handleDocumentClick, false);
   }
 
   componentWillUnmount() {
-    document.body.removeEventListener("click", this.handleDocumentClick, false);
+    document.body.removeEventListener('click', this.handleDocumentClick, false);
   }
 
   handleDocumentClick = event => {
@@ -27,8 +27,8 @@ export default class DropDownPanel extends React.Component {
   render() {
     const buttonClasses = classNames(
       this.props.cssClass,
-      { "va-btn-withicon": this.props.icon },
-      "va-dropdown-trigger"
+      { 'va-btn-withicon': this.props.icon },
+      'va-dropdown-trigger',
     );
 
     return (
@@ -72,9 +72,9 @@ DropDownPanel.propTypes = {
   icon: PropTypes.node /* Should be SVG markup */,
   id: PropTypes.string,
   isOpen: PropTypes.bool.isRequired,
-  disabled: PropTypes.bool
+  disabled: PropTypes.bool,
 };
 
 DropDownPanel.defaultProps = {
-  disabled: false
+  disabled: false,
 };

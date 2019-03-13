@@ -1,6 +1,6 @@
-import PropTypes from "prop-types";
-import React from "react";
-import classNames from "classnames";
+import PropTypes from 'prop-types';
+import React from 'react';
+import classNames from 'classnames';
 
 class SortableTable extends React.Component {
   constructor(props) {
@@ -21,20 +21,20 @@ class SortableTable extends React.Component {
     // Determine what sort order the header will yield on the next click.
     // By default, clicking this header will sort in ascending order.
     // If it’s already ascending, next click will sort it in descending order.
-    let nextSortOrder = "ASC";
+    let nextSortOrder = 'ASC';
     let sortIcon;
 
     if (this.props.currentSort.value === field.value) {
       const iconClass = classNames({
         fa: true,
-        "fas fa-caret-down": this.props.currentSort.order === "DESC",
-        "fas fa-caret-up": this.props.currentSort.order === "ASC"
+        'fas fa-caret-down': this.props.currentSort.order === 'DESC',
+        'fas fa-caret-up': this.props.currentSort.order === 'ASC',
       });
 
       sortIcon = <i className={iconClass} />;
 
-      if (this.props.currentSort.order === "ASC") {
-        nextSortOrder = "DESC";
+      if (this.props.currentSort.order === 'ASC') {
+        nextSortOrder = 'DESC';
       }
     }
 
@@ -53,9 +53,9 @@ class SortableTable extends React.Component {
   }
 
   makeRow(item) {
-    const cells = this.props.fields.map(field => {
-      return <td key={`${item.id}-${field.value}`}>{item[field.value]}</td>;
-    });
+    const cells = this.props.fields.map(field => (
+      <td key={`${item.id}-${field.value}`}>{item[field.value]}</td>
+    ));
     return (
       <tr key={item.id} className={item.rowClass}>
         {cells}
@@ -66,7 +66,7 @@ class SortableTable extends React.Component {
   render() {
     const headers = this.props.fields.map(this.makeHeader);
     const rows = this.props.data.map(this.makeRow);
-    const tableClass = classNames("va-sortable-table", this.props.className);
+    const tableClass = classNames('va-sortable-table', this.props.className);
 
     return (
       <table className={tableClass}>
@@ -88,7 +88,7 @@ SortableTable.propTypes = {
    */
   currentSort: PropTypes.shape({
     value: PropTypes.string.isRequired,
-    order: PropTypes.oneOf(["ASC", "DESC"])
+    order: PropTypes.oneOf(['ASC', 'DESC']),
   }).isRequired,
 
   /**
@@ -97,8 +97,8 @@ SortableTable.propTypes = {
   fields: PropTypes.arrayOf(
     PropTypes.shape({
       label: PropTypes.string.isRequired,
-      value: PropTypes.string.isRequired
-    })
+      value: PropTypes.string.isRequired,
+    }),
   ).isRequired,
   /**
    * Each object represents data for a row.
@@ -108,13 +108,13 @@ SortableTable.propTypes = {
     PropTypes.shape({
       id: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
       values: PropTypes.arrayOf(
-        PropTypes.oneOfType([PropTypes.number, PropTypes.string])
+        PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
       ),
-      rowClass: PropTypes.string
-    })
+      rowClass: PropTypes.string,
+    }),
   ).isRequired,
 
-  onSort: PropTypes.func
+  onSort: PropTypes.func,
 };
 
 export default SortableTable;

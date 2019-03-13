@@ -1,7 +1,7 @@
-import PropTypes from "prop-types";
-import React from "react";
-import _ from "lodash";
-import { makeField } from "../../helpers/fields";
+import PropTypes from 'prop-types';
+import React from 'react';
+import _ from 'lodash';
+import { makeField } from '../../helpers/fields';
 
 /**
  * A form select with a label that can display error messages.
@@ -14,7 +14,7 @@ class ErrorableSelect extends React.Component {
   }
 
   componentWillMount() {
-    this.selectId = _.uniqueId("errorable-select-");
+    this.selectId = _.uniqueId('errorable-select-');
   }
 
   handleChange(domEvent) {
@@ -25,7 +25,7 @@ class ErrorableSelect extends React.Component {
     const selectedValue = this.props.value.value;
 
     // Calculate error state.
-    let errorSpan = "";
+    let errorSpan = '';
     let errorSpanId = undefined;
     if (this.props.errorMessage) {
       errorSpanId = `${this.selectId}-error-message`;
@@ -68,11 +68,11 @@ class ErrorableSelect extends React.Component {
     });
 
     return (
-      <div className={this.props.errorMessage ? "usa-input-error" : undefined}>
+      <div className={this.props.errorMessage ? 'usa-input-error' : undefined}>
         <label
           className={
             this.props.errorMessage !== undefined
-              ? "usa-input-error-label"
+              ? 'usa-input-error-label'
               : this.props.labelClass
           }
           htmlFor={this.selectId}
@@ -135,13 +135,13 @@ ErrorableSelect.propTypes = {
       PropTypes.string,
       PropTypes.shape({
         label: PropTypes.string,
-        value: PropTypes.number
+        value: PropTypes.number,
       }),
       PropTypes.shape({
         label: PropTypes.string,
-        value: PropTypes.string
-      })
-    ])
+        value: PropTypes.string,
+      }),
+    ]),
   ).isRequired,
 
   /**
@@ -165,7 +165,7 @@ ErrorableSelect.propTypes = {
    */
   value: PropTypes.shape({
     value: PropTypes.string,
-    dirty: PropTypes.bool
+    dirty: PropTypes.bool,
   }).isRequired,
 
   /**
@@ -176,11 +176,11 @@ ErrorableSelect.propTypes = {
   /**
    * Additional css class that is added to the select element.
    */
-  additionalClass: PropTypes.string
+  additionalClass: PropTypes.string,
 };
 
 ErrorableSelect.defaultProps = {
-  includeBlankOption: true
+  includeBlankOption: true,
 };
 
 export default ErrorableSelect;

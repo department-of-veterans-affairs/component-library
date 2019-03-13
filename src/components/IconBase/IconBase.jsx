@@ -1,5 +1,5 @@
-import PropTypes from "prop-types";
-import React from "react";
+import PropTypes from 'prop-types';
+import React from 'react';
 
 class IconBase extends React.Component {
   render() {
@@ -15,11 +15,11 @@ class IconBase extends React.Component {
 
 IconBase.propTypes = {
   focusable: PropTypes.bool.isRequired,
-  role: PropTypes.string
+  role: PropTypes.string,
 };
 
 IconBase.defaultProps = {
-  focusable: false
+  focusable: false,
 };
 
 export default IconBase;

@@ -1,15 +1,15 @@
-import React from "react";
-import { shallow } from "enzyme";
-import { expect } from "chai";
-import { axeCheck } from "../../helpers/test-helpers";
+import React from 'react';
+import { shallow } from 'enzyme';
+import { expect } from 'chai';
+import { axeCheck } from '../../helpers/test-helpers';
 
-import HelpMenu from "./HelpMenu.jsx";
+import HelpMenu from './HelpMenu.jsx';
 
-describe("<HelpMenu>", () => {
-  it("should render", () => {
+describe('<HelpMenu>', () => {
+  it('should render', () => {
     const props = {
       isOpen: false,
-      clickHandler: f => f
+      clickHandler: f => f,
     };
 
     const tree = shallow(<HelpMenu {...props} />);
@@ -17,16 +17,16 @@ describe("<HelpMenu>", () => {
     tree.unmount();
   });
 
-  it("should pass axeCheck when open", () => {
+  it('should pass axeCheck when open', () => {
     const props = {
-      clickHandler: f => f
+      clickHandler: f => f,
     };
     return axeCheck(<HelpMenu isOpen {...props} />);
   });
 
-  it("should pass axeCheck when closed", () => {
+  it('should pass axeCheck when closed', () => {
     const props = {
-      clickHandler: f => f
+      clickHandler: f => f,
     };
     return axeCheck(<HelpMenu isOpen={false} {...props} />);
   });

@@ -1,29 +1,29 @@
-import React from "react";
-import ReactTestUtils from "react-dom/test-utils";
-import { shallow } from "enzyme";
-import chaiAsPromised from "chai-as-promised";
-import chai, { expect } from "chai";
-import { axeCheck } from "../../helpers/test-helpers";
+import React from 'react';
+import ReactTestUtils from 'react-dom/test-utils';
+import { shallow } from 'enzyme';
+import chaiAsPromised from 'chai-as-promised';
+import chai, { expect } from 'chai';
+import { axeCheck } from '../../helpers/test-helpers';
 
-import ProgressButton from "./ProgressButton.jsx";
+import ProgressButton from './ProgressButton.jsx';
 
 chai.use(chaiAsPromised);
 
-describe("<ProgressButton>", () => {
-  it("should render with button text", () => {
+describe('<ProgressButton>', () => {
+  it('should render with button text', () => {
     const tree = shallow(
       <ProgressButton
         buttonText="Button text"
         buttonClass="usa-button-primary"
         disabled={false}
-      />
+      />,
     );
-    expect(tree.text()).to.equal("Button text");
+    expect(tree.text()).to.equal('Button text');
     expect(tree).to.have.length.of(1);
     tree.unmount();
   });
 
-  it("calls handle() on click", () => {
+  it('calls handle() on click', () => {
     let progressButton;
 
     const updatePromise = new Promise((resolve, _reject) => {
@@ -35,36 +35,34 @@ describe("<ProgressButton>", () => {
           onButtonClick={() => {
             resolve(true);
           }}
-        />
+        />,
       );
     });
 
     const button = ReactTestUtils.findRenderedDOMComponentWithTag(
       progressButton,
-      "button"
+      'button',
     );
     ReactTestUtils.Simulate.click(button);
 
     return expect(updatePromise).to.eventually.eql(true);
   });
 
-  it("should pass aXe check when enabled", () => {
-    return axeCheck(
+  it('should pass aXe check when enabled', () =>
+    axeCheck(
       <ProgressButton
         buttonText="Button text"
         buttonClass="usa-button-primary"
         disabled={false}
-      />
-    );
-  });
+      />,
+    ));
 
-  it("should pass aXe check when disabled", () => {
-    return axeCheck(
+  it('should pass aXe check when disabled', () =>
+    axeCheck(
       <ProgressButton
         buttonText="Button text"
         buttonClass="usa-button-primary"
         disabled
-      />
-    );
-  });
+      />,
+    ));
 });

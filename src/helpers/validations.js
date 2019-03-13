@@ -1,11 +1,11 @@
-import _ from "lodash";
-import moment from "moment";
+import _ from 'lodash';
+import moment from 'moment';
 
 function dateToMoment(dateField) {
   return moment({
     year: dateField.year.value,
-    month: dateField.month.value ? parseInt(dateField.month.value, 10) - 1 : "",
-    day: dateField.day ? dateField.day.value : null
+    month: dateField.month.value ? parseInt(dateField.month.value, 10) - 1 : '',
+    day: dateField.day ? dateField.day.value : null,
   });
 }
 
@@ -27,7 +27,7 @@ function validateCustomFormComponent(customValidation) {
       return customValidation.filter(validator => !validator.valid)[0];
     }
     // Also allow objects for custom validation
-  } else if (typeof customValidation === "object" && !customValidation.valid) {
+  } else if (typeof customValidation === 'object' && !customValidation.valid) {
     return customValidation;
   }
 
@@ -35,11 +35,11 @@ function validateCustomFormComponent(customValidation) {
 }
 
 function isBlank(value) {
-  return value === "";
+  return value === '';
 }
 
 function isNotBlank(value) {
-  return value !== "";
+  return value !== '';
 }
 
 function isValidValue(validator, value) {
@@ -62,13 +62,13 @@ function isValidYear(value) {
     Number(value) >= 1900 &&
     Number(value) <=
       moment()
-        .add(100, "year")
+        .add(100, 'year')
         .year()
   );
 }
 
 function isValidYearOrBlank(value) {
-  return isValidYear(value) || value === "";
+  return isValidYear(value) || value === '';
 }
 
 function isValidCurrentOrPastYear(value) {
@@ -141,7 +141,7 @@ function isValidAnyDate(day, month, year) {
   return moment({
     day,
     month: month ? parseInt(month, 10) - 1 : month,
-    year
+    year,
   }).isValid();
 }
 
@@ -161,7 +161,7 @@ function isValidPartialDateField(field) {
   return isValidPartialDate(
     field.day.value,
     field.month.value,
-    field.year.value
+    field.year.value,
   );
 }
 
@@ -176,8 +176,8 @@ function isValidDateRange(fromDate, toDate) {
 }
 
 function isValidPartialMonthYear(month, year) {
-  if (typeof month === "object") {
-    throw new Error("Pass a month and a year to function");
+  if (typeof month === 'object') {
+    throw new Error('Pass a month and a year to function');
   }
   if (month && (Number(month) > 12 || Number(month) < 1)) {
     return false;
@@ -197,34 +197,34 @@ function isValidPartialMonthYearRange(fromDate, toDate) {
 }
 
 function isValidPartialMonthYearInPast(month, year) {
-  if (typeof month === "object") {
-    throw new Error("Pass a month and a year to function");
+  if (typeof month === 'object') {
+    throw new Error('Pass a month and a year to function');
   }
   const momentDate = moment({
     year,
-    month: month ? parseInt(month, 10) - 1 : null
+    month: month ? parseInt(month, 10) - 1 : null,
   });
   return (
     !year ||
     (isValidPartialMonthYear(month, year) &&
       momentDate.isValid() &&
-      momentDate.isSameOrBefore(moment().startOf("month")))
+      momentDate.isSameOrBefore(moment().startOf('month')))
   );
 }
 
 function isValidCurrentOrPastDate(day, month, year) {
   const momentDate = moment({ day, month: parseInt(month, 10) - 1, year });
-  return momentDate.isSameOrBefore(moment().endOf("day"), "day");
+  return momentDate.isSameOrBefore(moment().endOf('day'), 'day');
 }
 
 function isValidFutureDate(day, month, year) {
   const momentDate = moment({ day, month: parseInt(month, 10) - 1, year });
-  return momentDate.isAfter(moment().endOf("day"), "day");
+  return momentDate.isAfter(moment().endOf('day'), 'day');
 }
 
 function isValidCurrentOrFutureMonthYear(month, year) {
   const momentDate = moment({ month: parseInt(month, 10) - 1, year });
-  return momentDate.isSameOrAfter(moment(), "month");
+  return momentDate.isSameOrAfter(moment(), 'month');
 }
 
 function isBlankMonthYear(field) {
@@ -239,12 +239,12 @@ function isValidDateOver17(day, month, year) {
   const momentDate = moment({
     day,
     month: parseInt(month, 10) - 1,
-    year
+    year,
   });
   return momentDate.isBefore(
     moment()
-      .endOf("day")
-      .subtract(17, "years")
+      .endOf('day')
+      .subtract(17, 'years'),
   );
 }
 
@@ -271,7 +271,7 @@ function isValidFullNameField(field) {
 // A value with 3 digits, an optional -, 2 digits, an optional -, and 4 digits is a valid SSN
 // 9 of the same digits (e.g., '111111111') is not a valid SSN
 function isValidSSN(value) {
-  if (value === "123456789" || value === "123-45-6789") {
+  if (value === '123456789' || value === '123-45-6789') {
     return false;
   } else if (/^0{3}-?\d{2}-?\d{4}$/.test(value)) {
     return false;
@@ -303,7 +303,7 @@ function isValidMonetaryValue(value) {
 // TODO: look into validation libraries (npm "validator")
 function isValidPhone(value) {
   // Strip spaces, dashes, and parens
-  const stripped = value.replace(/[^\d]/g, "");
+  const stripped = value.replace(/[^\d]/g, '');
   // Count number of digits
   return /^\d{10}$/.test(stripped);
 }
@@ -312,14 +312,14 @@ function isValidEmail(value) {
   // Comes from StackOverflow: http://stackoverflow.com/questions/46155/validate-email-address-in-javascript
   // eslint-disable-next-line no-useless-escape
   return /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
-    value
+    value,
   );
 }
 
 // Pulled from https://en.wikipedia.org/wiki/Routing_transit_number#Check_digit
 function isValidRoutingNumber(value) {
   if (/^\d{9}$/.test(value)) {
-    const digits = value.split("").map(val => parseInt(val, 10));
+    const digits = value.split('').map(val => parseInt(val, 10));
     const weighted =
       3 * (digits[0] + digits[3] + digits[6]) +
       7 * (digits[1] + digits[4] + digits[7]) +
@@ -367,5 +367,5 @@ export {
   validateCustomFormComponent,
   validateIfDirty,
   validateIfDirtyDate,
-  isValidRoutingNumber
+  isValidRoutingNumber,
 };

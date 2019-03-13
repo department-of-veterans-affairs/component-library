@@ -1,5 +1,5 @@
-import PropTypes from "prop-types";
-import React from "react";
+import PropTypes from 'prop-types';
+import React from 'react';
 
 class SystemDownView extends React.Component {
   render() {
@@ -24,7 +24,7 @@ SystemDownView.propTypes = {
   messageLine1: PropTypes.string.isRequired,
 
   // optional second line of messaging
-  messageLine2: PropTypes.string
+  messageLine2: PropTypes.string,
 };
 
 export default SystemDownView;

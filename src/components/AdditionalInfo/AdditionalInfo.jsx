@@ -1,13 +1,13 @@
-import React from "react";
-import PropTypes from "prop-types";
-import _ from "lodash";
-import classNames from "classnames";
-import ExpandingGroup from "../ExpandingGroup/ExpandingGroup";
+import React from 'react';
+import PropTypes from 'prop-types';
+import _ from 'lodash';
+import classNames from 'classnames';
+import ExpandingGroup from '../ExpandingGroup/ExpandingGroup';
 
 export default class AdditionalInfo extends React.Component {
   constructor(props) {
     super(props);
-    this.expandedContentId = _.uniqueId("tooltip-");
+    this.expandedContentId = _.uniqueId('tooltip-');
     this.state = { open: false };
   }
 
@@ -20,16 +20,16 @@ export default class AdditionalInfo extends React.Component {
     const { triggerText, children } = this.props;
     const iconClass = classNames({
       fas: true,
-      "fa-angle-down": true,
-      open: this.state.open
+      'fa-angle-down': true,
+      open: this.state.open,
     });
-    const { tagName: TagName = "span" } = this.props;
+    const { tagName: TagName = 'span' } = this.props;
 
     const trigger = (
       <button
         type="button"
         className="additional-info-button va-button-link"
-        aria-expanded={this.state.open ? "true" : "false"}
+        aria-expanded={this.state.open ? 'true' : 'false'}
         aria-controls={this.expandedContentId}
         onClick={this.toggle}
       >
@@ -57,5 +57,5 @@ AdditionalInfo.propTypes = {
    * this is the text displayed for AdditionalInfo link or button
    */
   triggerText: PropTypes.string.isRequired,
-  onClick: PropTypes.func
+  onClick: PropTypes.func,
 };

@@ -1,7 +1,7 @@
-import PropTypes from "prop-types";
-import React from "react";
-import DropDownPanel from "../DropDownPanel/DropDownPanel";
-import IconHelp from "../IconHelp/IconHelp";
+import PropTypes from 'prop-types';
+import React from 'react';
+import DropDownPanel from '../DropDownPanel/DropDownPanel';
+import IconHelp from '../IconHelp/IconHelp';
 
 class HelpMenu extends React.Component {
   render() {
@@ -47,7 +47,7 @@ HelpMenu.propTypes = {
   /**
    * does the menu begin in an open state
    */
-  isOpen: PropTypes.bool.isRequired
+  isOpen: PropTypes.bool.isRequired,
 };
 
 export default HelpMenu;

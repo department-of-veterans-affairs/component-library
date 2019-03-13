@@ -1,40 +1,39 @@
-import React from "react";
-import { shallow } from "enzyme";
-import { expect } from "chai";
-import { axeCheck } from "../../helpers/test-helpers";
-import SortableTable from "./SortableTable.jsx";
+import React from 'react';
+import { shallow } from 'enzyme';
+import { expect } from 'chai';
+import { axeCheck } from '../../helpers/test-helpers';
+import SortableTable from './SortableTable.jsx';
 
 /* Roll your own! */
 
 const fields = [
-  { label: "Label 1", value: "1" },
-  { label: "Label 2", value: "2" },
-  { label: "Label 3", value: "3" }
+  { label: 'Label 1', value: '1' },
+  { label: 'Label 2', value: '2' },
+  { label: 'Label 3', value: '3' },
 ];
 const data = [
-  { id: 1, rowClass: "class" },
-  { id: 2, rowClass: "class" },
-  { id: 3, rowClass: "class" }
+  { id: 1, rowClass: 'class' },
+  { id: 2, rowClass: 'class' },
+  { id: 3, rowClass: 'class' },
 ];
-const currentSort = { value: "String", order: "ASC" };
+const currentSort = { value: 'String', order: 'ASC' };
 
-describe("<SortableTable>", () => {
-  it("should render", () => {
+describe('<SortableTable>', () => {
+  it('should render', () => {
     const tree = shallow(
-      <SortableTable fields={fields} data={data} currentSort={currentSort} />
+      <SortableTable fields={fields} data={data} currentSort={currentSort} />,
     );
     expect(
       tree
-        .find("a")
+        .find('a')
         .first()
-        .text()
-    ).to.contain("Label 1");
+        .text(),
+    ).to.contain('Label 1');
     tree.unmount();
   });
 
-  it("should pass aXe check", () => {
-    return axeCheck(
-      <SortableTable fields={fields} data={data} currentSort={currentSort} />
-    );
-  });
+  it('should pass aXe check', () =>
+    axeCheck(
+      <SortableTable fields={fields} data={data} currentSort={currentSort} />,
+    ));
 });

@@ -1,7 +1,7 @@
-import PropTypes from "prop-types";
-import React from "react";
-import classNames from "classnames";
-import { uniqueId } from "lodash";
+import PropTypes from 'prop-types';
+import React from 'react';
+import classNames from 'classnames';
+import { uniqueId } from 'lodash';
 
 /**
  * React component to dynamically build breadcrumb links.
@@ -17,10 +17,10 @@ class Breadcrumbs extends React.Component {
   classNames() {
     const customClass = this.props.customClasses;
     const mobileFirst = this.props.mobileFirstProp
-      ? "va-nav-breadcrumbs--mobile"
+      ? 'va-nav-breadcrumbs--mobile'
       : null;
 
-    return classNames("va-nav-breadcrumbs", mobileFirst, customClass);
+    return classNames('va-nav-breadcrumbs', mobileFirst, customClass);
   }
 
   /**
@@ -32,17 +32,17 @@ class Breadcrumbs extends React.Component {
     const children = React.Children.toArray(this.props.children);
     children.push(
       React.cloneElement(children.pop(), {
-        "aria-current": "page"
-      })
+        'aria-current': 'page',
+      }),
     );
     return children.map((child, i) => <li key={i}>{child}</li>);
   };
 
   render() {
     const { ariaLabel, mobileFirstProp } = this.props;
-    const breadcrumbId = this.props.id || uniqueId("va-breadcrumbs-");
+    const breadcrumbId = this.props.id || uniqueId('va-breadcrumbs-');
     const breadcrumbListId =
-      this.props.listId || uniqueId("va-breadcrumbs-list-");
+      this.props.listId || uniqueId('va-breadcrumbs-list-');
 
     return (
       <nav
@@ -64,7 +64,7 @@ class Breadcrumbs extends React.Component {
 }
 
 Breadcrumbs.defaultProps = {
-  ariaLabel: "Breadcrumb"
+  ariaLabel: 'Breadcrumb',
 };
 
 Breadcrumbs.propTypes = {
@@ -91,7 +91,7 @@ Breadcrumbs.propTypes = {
    * NAV element. The mobile breadcrumb will always
    * be displayed while mobileFirstProp is True.
    */
-  mobileFirstProp: PropTypes.bool
+  mobileFirstProp: PropTypes.bool,
 };
 
 export default Breadcrumbs;
