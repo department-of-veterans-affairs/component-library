@@ -188,7 +188,7 @@ export default class MegaMenu extends React.Component {
                     >
                       {item.title === currentDropdown && item.menuSections && (
                         <ul aria-label={item.title}>
-                          {Array.isArray(item.menuSections.constructor.name)
+                          {Array.isArray(item.menuSections)
                             ? item.menuSections.map((section, j) => {
                                 return (
                                   <MenuSection
