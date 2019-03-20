@@ -263,7 +263,7 @@ MegaMenu.propTypes = {
   columnThreeLinkClicked: PropTypes.func,
 
   display: PropTypes.shape({
-    hidden: PropTypes.boolean,
+    hidden: PropTypes.bool,
   }),
 };
 
