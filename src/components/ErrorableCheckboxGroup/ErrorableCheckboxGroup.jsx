@@ -20,7 +20,7 @@ import { makeField } from '../../helpers/fields';
  * `onValueChange` - a function with this prototype: (newValue)
  */
 class ErrorableCheckboxGroup extends React.Component {
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     this.inputId = this.props.id || _.uniqueId('errorable-checkbox-buttons-');
   }
 

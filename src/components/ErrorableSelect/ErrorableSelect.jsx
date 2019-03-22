@@ -13,7 +13,7 @@ class ErrorableSelect extends React.Component {
     this.handleChange = this.handleChange.bind(this);
   }
 
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     this.selectId = _.uniqueId('errorable-select-');
   }
 

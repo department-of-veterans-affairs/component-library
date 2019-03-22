@@ -7,7 +7,7 @@ import _ from 'lodash';
  */
 
 class ProgressButton extends React.Component {
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     this.id = _.uniqueId();
   }
 

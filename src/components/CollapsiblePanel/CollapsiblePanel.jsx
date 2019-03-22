@@ -14,7 +14,7 @@ class CollapsiblePanel extends React.Component {
     this.scrollToTop = this.scrollToTop.bind(this);
   }
 
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     this.id = _.uniqueId();
   }
 

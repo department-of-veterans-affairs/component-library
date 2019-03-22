@@ -30,7 +30,7 @@ class ErrorableRadioButtons extends React.Component {
     this.getMatchingSubSection = this.getMatchingSubSection.bind(this);
   }
 
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     this.inputId = this.props.id || _.uniqueId('errorable-radio-buttons-');
   }
 

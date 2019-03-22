@@ -16,7 +16,7 @@ class ErrorableNumberInput extends React.Component {
     this.handleBlur = this.handleBlur.bind(this);
   }
 
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     this.inputId = _.uniqueId('errorable-number-input-');
   }
 

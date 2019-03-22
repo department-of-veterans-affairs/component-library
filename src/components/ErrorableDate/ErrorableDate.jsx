@@ -25,7 +25,7 @@ class ErrorableDate extends React.Component {
     this.handleChange = this.handleChange.bind(this);
   }
 
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     this.id = _.uniqueId('date-input-');
   }
 

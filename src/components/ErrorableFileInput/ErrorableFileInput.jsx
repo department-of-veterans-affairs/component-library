@@ -9,7 +9,7 @@ class ErrorableFileInput extends React.Component {
     this.handleChange = this.handleChange.bind(this);
   }
 
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     this.inputId = _.uniqueId('errorable-file-input-');
   }
 
