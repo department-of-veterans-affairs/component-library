@@ -116,7 +116,7 @@ class ErrorableRadioButtons extends React.Component {
               name={`${this.props.name}-${optionIndex}-label`}
               htmlFor={`${this.inputId}-${optionIndex}`}
             >
-              >{optionLabel}
+              {optionLabel}
             </label>
             {matchingSubSection}
             {option.content}

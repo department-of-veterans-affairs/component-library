@@ -55,7 +55,7 @@ const SubMenu = ({
               href={seeAllLink.href}
               onClick={linkClicked.bind(null, seeAllLink)}
             >
-              View All in {seeAllLink.text}
+              View all in {seeAllLink.text}
               <ArrowRightBlueSVG />
             </a>
           </div>
