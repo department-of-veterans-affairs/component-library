@@ -101,7 +101,6 @@ class ErrorableRadioButtons extends React.Component {
         >
           <div className="errorable-radio-button">
             <input
-              autoComplete="false"
               checked={checked}
               id={`${this.inputId}-${optionIndex}`}
               name={this.props.name}
