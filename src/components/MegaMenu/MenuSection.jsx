@@ -52,13 +52,10 @@ class MenuSection extends React.Component {
         className={`mm-link-container${
           this.state.title.hidden ? '-small' : ''
         }`}
-        role="menuitem"
       >
         <button
           {...this.state.title}
-          id={this.getId(this.props.title)}
           className="vetnav-level2"
-          aria-haspopup="true"
           aria-controls={show ? this.getId(this.props.title) : null}
           aria-expanded={show}
           onClick={() => this.updateCurrentSection()}

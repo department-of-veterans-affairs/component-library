@@ -86,7 +86,6 @@ class ErrorableSelect extends React.Component {
           aria-describedby={errorSpanId}
           id={this.selectId}
           name={this.props.name}
-          autoComplete={this.props.autocomplete}
           value={selectedValue}
           onKeyDown={this.props.onKeyDown}
           onChange={this.handleChange}
@@ -112,11 +111,6 @@ ErrorableSelect.propTypes = {
    * Select name attribute.
    */
   name: PropTypes.string,
-
-  /**
-   * Select autocomplete attribute.
-   */
-  autocomplete: PropTypes.string,
 
   /**
    * Select field label.
