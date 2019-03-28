@@ -46,13 +46,23 @@ class MenuSection extends React.Component {
 
   render() {
     const show = this.getCurrentSection(this.props) === this.props.title;
+    const isPlainLink = !!this.props.href;
 
-    return (
-      <li
-        className={`mm-link-container${
-          this.state.title.hidden ? '-small' : ''
-        }`}
-      >
+    let button = null;
+    let submenu = null;
+
+    if (isPlainLink) {
+      button = (
+        <a
+          href={this.props.href}
+          onClick={this.props.linkClicked}
+          className="vetnav-level2"
+        >
+          {this.props.title}
+        </a>
+      );
+    } else {
+      button = (
         <button
           {...this.state.title}
           className="vetnav-level2"
@@ -62,6 +72,9 @@ class MenuSection extends React.Component {
         >
           {this.props.title}
         </button>
+      );
+
+      submenu = (
         <SubMenu
           id={this.getId(this.props.title)}
           data={this.props.links}
@@ -73,6 +86,17 @@ class MenuSection extends React.Component {
           smallDesktopMediaQuery={this.props.smallDesktopMediaQuery}
           columnThreeLinkClicked={this.props.columnThreeLinkClicked}
         />
+      );
+    }
+
+    return (
+      <li
+        className={`mm-link-container${
+          this.state.title.hidden ? '-small' : ''
+        }`}
+      >
+        {button}
+        {submenu}
       </li>
     );
   }
@@ -115,7 +139,8 @@ MenuSection.propTypes = {
       text: PropTypes.string.isRequired,
       href: PropTypes.string.isRequired,
     }),
-  }).isRequired,
+  }),
+  href: PropTypes.string,
   defaultSection: PropTypes.string.isRequired,
   linkClicked: PropTypes.func.isRequired,
   columnThreeLinkClicked: PropTypes.func.isRequired,

@@ -194,6 +194,7 @@ export default class MegaMenu extends React.Component {
                                 updateCurrentSection={() =>
                                   this.updateCurrentSection(section.title)
                                 }
+                                href={section.href}
                                 links={section.links}
                                 linkClicked={linkClicked}
                                 mobileMediaQuery={this.mobileMediaQuery}
