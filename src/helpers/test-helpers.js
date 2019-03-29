@@ -13,7 +13,7 @@ export function mountToDiv(component, id) {
   return mount(component, { attachTo: div });
 }
 
-export function axeCheck(component) {
+export function axeCheck(component, ignoredRules = []) {
   let div = document.getElementById('axeContainer');
   if (!div) {
     div = document.createElement('div');
@@ -31,10 +31,13 @@ export function axeCheck(component) {
         console.error(err);
         reject(err);
       }
-      if (result.violations.length) {
+      const validViolations = result.violations.filter(
+        violation => !ignoredRules.includes(violation.id),
+      );
+      if (validViolations.length) {
         reject(
           new Error(
-            result.violations
+            validViolations
               .map(violation => {
                 const nodeInfo = violation.nodes.reduce((str, node) => {
                   const { html, target } = node;
@@ -42,8 +45,9 @@ export function axeCheck(component) {
                 }, '');
 
                 return `[${violation.impact}] ${violation.help}
-            See ${violation.helpUrl}
-            ${nodeInfo}`;
+Id: ${violation.id}
+See ${violation.helpUrl}
+${nodeInfo}`;
               })
               .join('\n'),
           ),

@@ -9,13 +9,13 @@ describe('<ExpandingGroup>', () => {
   it('renders only first child when open is false', () => {
     const wrapper = shallow(
       <ExpandingGroup open={false}>
-        <first />
-        <second />
+        <div className="first" />
+        <div className="second" />
       </ExpandingGroup>,
     );
 
-    const first = wrapper.find('first');
-    const second = wrapper.find('second');
+    const first = wrapper.find('.first');
+    const second = wrapper.find('.second');
     expect(first).to.have.lengthOf(1);
     expect(second).to.have.lengthOf(0);
     wrapper.unmount();
@@ -24,13 +24,13 @@ describe('<ExpandingGroup>', () => {
   it('renders both children when open is true', () => {
     const wrapper = shallow(
       <ExpandingGroup open>
-        <first />
-        <second />
+        <div className="first" />
+        <div className="second" />
       </ExpandingGroup>,
     );
 
-    const first = wrapper.find('first');
-    const second = wrapper.find('second');
+    const first = wrapper.find('.first');
+    const second = wrapper.find('.second');
     expect(first).to.have.lengthOf(1);
     expect(second).to.have.lengthOf(1);
     wrapper.unmount();
@@ -39,8 +39,8 @@ describe('<ExpandingGroup>', () => {
   it('passes aXe check when only first child is rendered', () => {
     const check = axeCheck(
       <ExpandingGroup open={false}>
-        <first />
-        <second />
+        <div className="first" />
+        <div className="second" />
       </ExpandingGroup>,
     );
     return check;
@@ -49,8 +49,8 @@ describe('<ExpandingGroup>', () => {
   it('passes aXe check when both children are rendered', () => {
     const check = axeCheck(
       <ExpandingGroup open>
-        <first />
-        <second />
+        <div className="first" />
+        <div className="second" />
       </ExpandingGroup>,
     );
     return check;

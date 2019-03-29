@@ -36,8 +36,8 @@ describe('<AdditionalInfo/>', () => {
     expect(first.open).to.be.true;
     return axeCheck(
       <ExpandingGroup open={first.open}>
-        <child1 />
-        <child2 />
+        <div className="child1" />
+        <div className="child2" />
       </ExpandingGroup>,
     );
   });

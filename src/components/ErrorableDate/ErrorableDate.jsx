@@ -84,7 +84,7 @@ class ErrorableDate extends React.Component {
     }
 
     return (
-      <div className={!isValid && 'input-error-date'}>
+      <div className={!isValid ? 'input-error-date' : undefined}>
         <label>
           {this.props.label ? this.props.label : 'Date of birth'}
           {this.props.required && (
