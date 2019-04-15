@@ -15,30 +15,19 @@ module.exports = function karmaConfig(config) {
     frameworks: ['mocha'],
     webpack: { // kind of a copy of your webpack config
       devtool: 'inline-source-map', // just do inline source maps instead of the default
-      mode: 'none',
+      mode: 'development',
       module: {
         rules: [
           {
-            test: /\.js$/,
-            exclude: /node_modules/,
+            test: /\.(js|jsx)$/,
+            exclude: [/node_modules/],
             use: {
               loader: 'babel-loader',
               options: {
-                cacheDirectory: '.babelcache'
+                configFile: '../../babel.config.js'
               }
             }
-          },
-          {
-            test: /\.jsx$/,
-            exclude: /node_modules/,
-            use: {
-              loader: 'babel-loader',
-              options: {
-                cacheDirectory: '.babelcache'
-                // Also see .babelrc
-              }
-            }
-          },
+          }
         ]
       },
       resolve: {
