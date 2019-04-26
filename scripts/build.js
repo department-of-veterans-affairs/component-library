@@ -19,9 +19,9 @@ function flattenRequires(bufferString) {
     recast.print(
       recast.visit(recast.parse(bufferString), {
         visitCallExpression: function(path) {
+          this.traverse(path);
           var expr = path.node;
           if (expr.callee.name == 'require') {
-            this.traverse(path);
             if (
               expr.arguments.length &&
               expr.arguments[0].value.charAt(0) == '.'
