@@ -21,13 +21,34 @@ describe('<AlertBox />', () => {
     wrapper.unmount();
   });
 
-  it('should have the expected classname', () => {
+  it('should have the expected classnames', () => {
     const wrapper = shallow(
       <AlertBox content={Content} status="info" isVisible />,
     );
     expect(wrapper.find('.usa-alert').hasClass('usa-alert-info')).to.equal(
       true,
     );
+    expect(
+      wrapper.find('.usa-alert').hasClass('background-color-only'),
+    ).to.equal(false);
+    wrapper.unmount();
+  });
+
+  it('should have have `background-color-only` class added when `backgroundOnly` is `true`', () => {
+    const wrapper = shallow(
+      <AlertBox content={Content} status="info" isVisible backgroundOnly />,
+    );
+    expect(
+      wrapper.find('.usa-alert').hasClass('background-color-only'),
+    ).to.equal(true);
+    wrapper.unmount();
+  });
+
+  it('should apply classes set via `className`', () => {
+    const wrapper = shallow(
+      <AlertBox content={Content} status="info" isVisible className="foo" />,
+    );
+    expect(wrapper.find('.usa-alert').hasClass('foo')).to.equal(true);
     wrapper.unmount();
   });
 
@@ -58,6 +79,16 @@ describe('<AlertBox />', () => {
         onCloseAlert={closeAlert()}
         status="info"
         isVisible
+      />,
+    ));
+
+  it('should pass aXe check when `backgroundOnly` is `true`', () =>
+    axeCheck(
+      <AlertBox
+        headline={Headline}
+        content={Content}
+        status="info"
+        backgroundOnly
       />,
     ));
 });

@@ -38,6 +38,7 @@ class AlertBox extends React.Component {
     const alertClass = classNames(
       'usa-alert',
       `usa-alert-${this.props.status}`,
+      { 'background-color-only': this.props.backgroundOnly },
       this.props.className,
     );
 
@@ -115,10 +116,17 @@ AlertBox.propTypes = {
    * Optional class name to add to the alert box.
    */
   className: PropTypes.string,
+
+  /**
+   * If true, renders an AlertBox with only a background color, without an
+   * accented left edge or an icon
+   */
+  backgroundOnly: PropTypes.bool,
 };
 
 AlertBox.defaultProps = {
   isVisible: true,
+  backgroundOnly: false,
 };
 
 export default AlertBox;
