@@ -8,6 +8,7 @@ import AlertBox from './AlertBox.jsx';
 // Placeholder for required "content" element
 const Content = <p />;
 const Headline = 'Headline';
+const CloseBtnAriaLabelOptional = 'Close notification optional';
 function closeAlert() {
   //
 }
@@ -76,6 +77,18 @@ describe('<AlertBox />', () => {
       <AlertBox
         headline={Headline}
         content={Content}
+        onCloseAlert={closeAlert()}
+        status="info"
+        isVisible
+      />,
+    ));
+
+  it('should pass aXe check when it has a close button with optional aria-label', () =>
+    axeCheck(
+      <AlertBox
+        headline={Headline}
+        content={Content}
+        closeBtnAriaLabel={CloseBtnAriaLabelOptional}
         onCloseAlert={closeAlert()}
         status="info"
         isVisible
