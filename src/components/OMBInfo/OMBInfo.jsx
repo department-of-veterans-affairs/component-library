@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import Modal from '../modal/Modal';
-// tests will fail if .jsx is not included above
 
 const modalContents = minutes => (
   <div>
@@ -86,7 +85,9 @@ class OMBInfo extends React.Component {
         </div>
         <Modal
           cssClass="va-modal-large"
-          contents={modalContents(resBurden)}
+          contents={
+            this.props.children ? this.props.children : modalContents(resBurden)
+          }
           id="omb-modal"
           visible={this.state.modalOpen}
           onClose={this.closeModal}
