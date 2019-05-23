@@ -162,6 +162,7 @@ Pagination.propTypes = {
 
 Pagination.defaultProps = {
   maxPageListLength: 10,
+  ariaLabelSuffix: '',
 };
 
 export default Pagination;
