@@ -10,7 +10,7 @@ class SystemDownView extends React.Component {
             <h3>{this.props.messageLine1}</h3>
             <h4>{this.props.messageLine2}</h4>
             <a href="/">
-              <button>Go Back to Vets.gov</button>
+              <button>Go Back to VA.gov</button>
             </a>
           </div>
         </div>

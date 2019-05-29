@@ -18,7 +18,7 @@ class HelpMenu extends React.Component {
       >
         <div>
           <p>
-            <b>Call the Vets.gov Help Desk</b>
+            <b>Call the VA.gov Help Desk</b>
           </p>
           <p>
             <a href="tel:18555747286">1-855-574-7286</a>
