@@ -1,0 +1,57 @@
+---
+title: PromoBanner
+name: PromoBanner
+tags: promo banner, promo-banner, promobanner, announcement
+---
+
+import PromoBanner from './PromoBanner'
+
+### Code:
+
+#### Example State
+```
+state = {
+  dismissed: false,
+}
+```
+
+#### Code Sample
+```javascript
+import PromoBanner, { PROMO_BANNER_TYPES } from '@department-of-veterans-affairs/formation-react/PromoBanner'
+
+<PromoBanner
+  type={PROMO_BANNER_TYPES.announcement}
+  onClose={() => this.setState({ dismissed: true }}
+  href="https://missionact.va.gov/"
+  text="Learn how you can get easier access to health care with the MISSION Act"
+/>
+```
+
+### Rendered Component
+
+export class RenderedComponent extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      dismissed: false,
+    }
+  }
+  render () {
+    return (
+      <div className="site-c-reactcomp__rendered">
+        {!this.state.dismissed ? (
+          <PromoBanner
+            type="announcement"
+            onClose={() => this.setState({ dismissed: true })}
+            href="https://missionact.va.gov/"
+            text="Learn how you can get easier access to health care with the MISSION Act"
+          />
+        ) : (
+          <span>PromoBanner was dismissed!</span>
+        )}
+      </div>
+    );
+  }
+}
+
+<RenderedComponent />
