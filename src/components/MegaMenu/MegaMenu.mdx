@@ -6,13 +6,24 @@ name: MegaMenu
 import MegaMenu from './MegaMenu'
 import data from './data.json'
 
-# Intent
+### Intent
 
 The MegaMenu is the initial design for navigation between va.gov and vets.gov. The MegaMenu is dynamically generated through data. The intent is to have va.gov people be able to modify labels and links on the page without ever touching the codebase. We will be getting data from the original TeamSite system that runs va.gov.
 
-## Data Props
+### Data Props
 
-This is the data that is used to generate the MegaMenu. There are 2 variations of how the MegaMenu can be rendered. It is important to format your data prop to properly generate the MegaMenu. Below is examples of the data structure.
+This is the data that is used to generate the MegaMenu. The data is made up of an Array of Objects. There are 2 variations of how the MegaMenu can be rendered. It is important to format your data prop to properly generate the MegaMenu. Below is examples of the data structure.
+
+### Dependancies
+There are style dependancies that need to be added to the project to make the MegaMenu work properly.
+
+- formation
+- uswds 1.6.10
+- Add this SCSS import into your app
+  ```
+  @import "~@department-of-veterans-affairs/formation/sass/full";
+  @import "~@department-of-veterans-affairs/formation/sass/site/m-vet-nav";
+  ```
 
 #### Dropdown with Side Navigation
 This layout will generate a dropdown with a left column that comprises of multiple sections.
@@ -154,7 +165,7 @@ This will generate a dropdown with only links.
 ```
 **This will generate this view.**
 
-![alt nav style 1](../../../documentation/src/images/mega-menu/nav-version-2.png)
+![alt nav style 1](../../../../documentation/src/images/mega-menu/nav-version-2.png)
 
 #### Just a link
 This will just generate a link in the nav-bar
@@ -454,7 +465,12 @@ export class RenderedComponent extends React.Component {
       <div className="site-c-reactcomp__rendered">
         <header className="header">
           <div className="usa-grid usa-grid-full">
-            <div id="mega-menu">
+            <div
+              id="mega-menu"
+              style={{
+                padding: '10px'
+              }}
+            >
               <div
                 onClick={() => this.toggleDisplayHidden()}
                 style={{
