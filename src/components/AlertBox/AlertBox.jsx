@@ -54,6 +54,7 @@ class AlertBox extends React.Component {
 
     const alertHeading = this.props.headline;
     const alertText = this.props.content || this.props.children;
+    const H = `h${this.props.level}`;
 
     return (
       <div
@@ -63,9 +64,7 @@ class AlertBox extends React.Component {
         }}
       >
         <div className="usa-alert-body">
-          {alertHeading && (
-            <h3 className="usa-alert-heading">{alertHeading}</h3>
-          )}
+          {alertHeading && <H className="usa-alert-heading">{alertHeading}</H>}
           {alertText && <div className="usa-alert-text">{alertText}</div>}
         </div>
         {closeButton}
@@ -74,6 +73,7 @@ class AlertBox extends React.Component {
   }
 }
 
+/* eslint-disable consistent-return */
 AlertBox.propTypes = {
   /**
    * Determines the color and icon of the alert box.
@@ -126,12 +126,28 @@ AlertBox.propTypes = {
    * accented left edge or an icon
    */
   backgroundOnly: PropTypes.bool,
+
+  /**
+   * The header level to use with the headline prop, must be a number 1-6
+   */
+  level(props, propName) {
+    const level = parseInt(props[propName], 10);
+    if (Number.isNaN(level) || level < 1 || level > 6) {
+      return new Error(
+        `Invalid prop: AlertBox level must be a number from 1-6, was passed ${
+          props[propName]
+        }`,
+      );
+    }
+  },
 };
+/* eslint-enable consistent-return */
 
 AlertBox.defaultProps = {
   isVisible: true,
   backgroundOnly: false,
   closeBtnAriaLabel: 'Close notification',
+  level: 3,
 };
 
 export default AlertBox;

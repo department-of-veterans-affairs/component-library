@@ -53,6 +53,21 @@ describe('<AlertBox />', () => {
     wrapper.unmount();
   });
 
+  it('should use level prop for headline element', () => {
+    const wrapper = shallow(
+      <AlertBox
+        content={Content}
+        status="info"
+        level={4}
+        headline="Testing"
+        isVisible
+        className="foo"
+      />,
+    );
+    expect(wrapper.find('.usa-alert-heading').is('h4')).to.equal(true);
+    wrapper.unmount();
+  });
+
   it('should pass aXe check when visible', () =>
     axeCheck(<AlertBox content={Content} status="info" isVisible />));
 
