@@ -62,6 +62,34 @@ describe('<ErrorableSelect>', () => {
     tree.unmount();
   });
 
+  it('no error styles when errorMessage is null', () => {
+    const tree = shallow(
+      <ErrorableSelect
+        errorMessage={null}
+        label="my label"
+        options={options}
+        value={testValue}
+        onValueChange={_update => {}}
+      />,
+    );
+
+    // No error classes.
+    expect(tree.find('.usa-input-error')).to.have.lengthOf(0);
+    expect(tree.find('.usa-input-error-label')).to.have.lengthOf(0);
+    expect(tree.find('.usa-input-error-message')).to.have.lengthOf(0);
+
+    // Ensure no unnecessary class names on label w/o error.
+    const labels = tree.find('label');
+    expect(labels).to.have.lengthOf(1);
+    expect(labels.hasClass('')).to.be.true;
+
+    // No error means no aria-describedby to not confuse screen readers.
+    const selects = tree.find('select');
+    expect(selects).to.have.lengthOf(1);
+    expect(selects.find('aria-describedby')).to.have.lengthOf(0);
+    tree.unmount();
+  });
+
   it('should pass aXe check when errorMessage is undefined', () =>
     axeCheck(
       <ErrorableSelect
