@@ -1,6 +1,6 @@
 {
   "name": "@department-of-veterans-affairs/formation-react",
-  "version": "4.8.1",
+  "version": "4.9.0",
   "description": "React implementation of patterns in Formation",
   "keywords": [
     "react",
@@ -33,7 +33,7 @@
     "react-transition-group": "1"
   },
   "peerDependencies": {
-    "@department-of-veterans-affairs/formation": "^5.4.0",
+    "@department-of-veterans-affairs/formation": "^6.7.1",
     "react": "^15.5.4||^16.7.0"
   }
 }

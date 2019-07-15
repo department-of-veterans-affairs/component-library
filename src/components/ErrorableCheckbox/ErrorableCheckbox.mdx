@@ -28,6 +28,16 @@ import ErrorableCheckbox from '@department-of-veterans-affairs/formation-react/E
     required={true}
     title='ErrorableCheckbox'
   />
+  <h4 id="checkboxTitle">External heading [label-substitute]</h4>
+  <ErrorableCheckbox
+    ariaLabelledBy="checkboxTitle"
+    labelAboveCheckbox="If a separate heading (like above) “labels” the checkbox, we do not want screen-readers to read both the heading and the checkbox’s own label.  In this case, an aria-labelledby attribute substitutes for the checkbox’s own label text, and references the external heading above."
+    onValueChange={(value) => value}
+    id='default'
+    errorMessage=''
+    required={true}
+    title='ErrorableCheckbox'
+  />
 </div>
 ```
 
@@ -47,6 +57,16 @@ import ErrorableCheckbox from '@department-of-veterans-affairs/formation-react/E
     onValueChange={(value) => value}
     id='default'
     errorMessage='Error message'
+    required={true}
+    title='ErrorableCheckbox'
+  />
+  <h4 id="checkboxTitle">External heading [label-substitute]</h4>
+  <ErrorableCheckbox
+    ariaLabelledBy="checkboxTitle"
+    labelAboveCheckbox="If a separate heading (like above) “labels” the checkbox, we do not want screen-readers to read both the heading and the checkbox’s own label.  In this case, an aria-labelledby attribute substitutes for the checkbox’s own label text, and references the external heading above."
+    onValueChange={(value) => value}
+    id='default'
+    errorMessage=''
     required={true}
     title='ErrorableCheckbox'
   />

@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import _ from 'lodash';
+import { isUndefined, uniqueId } from 'lodash';
 
 class ErrorableCheckbox extends React.Component {
   constructor() {
@@ -9,7 +9,7 @@ class ErrorableCheckbox extends React.Component {
   }
 
   UNSAFE_componentWillMount() {
-    this.inputId = _.uniqueId('errorable-checkbox-');
+    this.inputId = uniqueId('errorable-checkbox-');
   }
 
   handleChange(domEvent) {
@@ -39,7 +39,7 @@ class ErrorableCheckbox extends React.Component {
     let className = `form-checkbox${
       this.props.errorMessage ? ' usa-input-error' : ''
     }`;
-    if (!_.isUndefined(this.props.className)) {
+    if (!isUndefined(this.props.className)) {
       className = `${className} ${this.props.className}`;
     }
 
@@ -51,6 +51,7 @@ class ErrorableCheckbox extends React.Component {
           </span>
         )}
         <input
+          aria-labelledby={this.props.ariaLabelledBy}
           aria-describedby={errorSpanId}
           checked={this.props.checked}
           id={this.inputId}
@@ -88,13 +89,49 @@ ErrorableCheckbox.propTypes = {
    */
   name: PropTypes.string,
   /**
-   * Label for the checkbox
+   * Label [string or object] for the checkbox. Either this or ariaLabelledBy is required.
    */
-  label: PropTypes.oneOfType([PropTypes.string, PropTypes.object]).isRequired,
+  /* eslint-disable consistent-return */
+  label: (props, propName, componentName) => {
+    const validTypes = ['string', 'object'];
+
+    if (!props.label && !props.ariaLabelledBy) {
+      return new Error(
+        `Either ${propName} or ariaLabelledBy property is required in ${componentName}, but both are missing.`,
+      );
+    }
+
+    if (props.label && !validTypes.includes(typeof props.label)) {
+      return new Error(
+        `${componentName}’s label property type is invalid -- should be one of
+        these types: ${validTypes.join(', ')}.`,
+      );
+    }
+  },
+  /* eslint-enable consistent-return */
   /**
    * Descriptive text to sit above the checkbox and label
    */
   labelAboveCheckbox: PropTypes.string,
+  /**
+   * aria-labelledby attribute [string] (external-heading ID). Either this or label is required.
+   */
+  /* eslint-disable consistent-return */
+  ariaLabelledBy: (props, propName, componentName) => {
+    if (!props.label && !props.ariaLabelledBy) {
+      return new Error(
+        `Either ${propName} or label property is required in ${componentName}, but both are missing.`,
+      );
+    }
+
+    if (props.ariaLabelledBy && typeof props.ariaLabelledBy !== 'string') {
+      return new Error(
+        `${componentName}’s ariaLabelledBy property type is invalid -- should be
+        string.`,
+      );
+    }
+  },
+  /* eslint-enable consistent-return */
   /**
    * Handler for when the checkbox is changed
    */
