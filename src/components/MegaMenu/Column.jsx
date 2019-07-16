@@ -61,7 +61,11 @@ const Column = props => {
         keyName,
       )}${isPanelWhite(mobileMediaQuery, panelWhite)}`}
     >
-      <h3 id={`vetnav-${_.kebabCase(keyName)}-header`}>{data.title}</h3>
+      {data.title ? (
+        <h3 id={`vetnav-${_.kebabCase(keyName)}-header`}>{data.title}</h3>
+      ) : (
+        <span>&nbsp;</span>
+      )}
       <ul
         id={`vetnav-${_.kebabCase(keyName)}-col`}
         aria-labelledby={`vetnav-${_.kebabCase(keyName)}-header`}
