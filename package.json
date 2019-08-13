@@ -1,6 +1,6 @@
 {
   "name": "@department-of-veterans-affairs/formation-react",
-  "version": "4.9.1",
+  "version": "4.9.2",
   "description": "React implementation of patterns in Formation",
   "keywords": [
     "react",
@@ -27,7 +27,7 @@
   },
   "dependencies": {
     "classnames": "^2.2.6",
-    "lodash": "^4.17.11",
+    "lodash": "^4.17.15",
     "moment": "^2.23.0",
     "prop-types": "^15.6.2",
     "react-transition-group": "1"
