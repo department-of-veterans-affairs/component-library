@@ -33,7 +33,7 @@
     "react-transition-group": "1"
   },
   "peerDependencies": {
-    "@department-of-veterans-affairs/formation": "^6.7.1",
+    "@department-of-veterans-affairs/formation": "^6.7.3",
     "react": "^15.5.4||^16.7.0"
   }
 }
