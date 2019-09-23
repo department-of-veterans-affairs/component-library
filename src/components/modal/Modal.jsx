@@ -3,11 +3,12 @@ import React from 'react';
 import classNames from 'classnames';
 
 const ESCAPE_KEY = 27;
+const TAB_KEY = 9;
 
 class Modal extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { lastFocus: null };
+    this.state = { lastFocus: null, isTabbingBackwards: false };
   }
 
   componentDidMount() {
@@ -29,9 +30,9 @@ class Modal extends React.Component {
   }
 
   setupModal() {
-    this.applyFocusToModal();
+    this.applyFocusToFirstModalElement();
     document.body.classList.add('modal-open');
-    document.addEventListener('keyup', this.handleDocumentKeyUp, false);
+    document.addEventListener('keydown', this.handleDocumentKeyDown, false);
     document.addEventListener('focus', this.handleDocumentFocus, true);
     if (this.props.clickToClose) {
       document.addEventListener('click', this.handleDocumentClicked, true);
@@ -41,18 +42,26 @@ class Modal extends React.Component {
   teardownModal() {
     if (this.state.lastFocus) {
       this.state.lastFocus.focus();
+      this.setState({ lastFocus: null });
     }
     document.body.classList.remove('modal-open');
-    document.removeEventListener('keyup', this.handleDocumentKeyUp, false);
+    document.removeEventListener('keydown', this.handleDocumentKeyDown, false);
     document.removeEventListener('focus', this.handleDocumentFocus, true);
     if (this.props.clickToClose) {
       document.removeEventListener('click', this.handleDocumentClicked, true);
     }
   }
 
-  handleDocumentKeyUp = event => {
+  handleDocumentKeyDown = event => {
     if (event.keyCode === ESCAPE_KEY) {
       this.handleClose(event);
+    }
+    if (event.keyCode === TAB_KEY) {
+      if (event.shiftKey) {
+        this.setState({ isTabbingBackwards: true });
+      } else {
+        this.setState({ isTabbingBackwards: false });
+      }
     }
   };
 
@@ -64,7 +73,11 @@ class Modal extends React.Component {
   handleDocumentFocus = event => {
     if (this.props.visible && !this.element.contains(event.target)) {
       event.stopPropagation();
-      this.applyFocusToModal();
+      if (this.state.isTabbingBackwards) {
+        this.applyFocusToLastModalElement();
+      } else {
+        this.applyFocusToFirstModalElement();
+      }
     }
   };
 
@@ -74,13 +87,29 @@ class Modal extends React.Component {
     }
   };
 
-  applyFocusToModal() {
+  applyFocusToFirstModalElement() {
     const focusableElement = this.element.querySelector(
       this.props.focusSelector,
     );
     if (focusableElement) {
-      this.setState({ lastFocus: document.activeElement });
+      // we only want to set `lastFocus` when the modal first pops up, not every
+      // time the user tabs through all elements in the modal
+      if (!this.state.lastFocus) {
+        this.setState({ lastFocus: document.activeElement });
+      }
       focusableElement.focus();
+    }
+  }
+
+  applyFocusToLastModalElement() {
+    const allFocusableElements = this.element.querySelectorAll(
+      this.props.focusSelector,
+    );
+    const focusableModalElements = Array.from(allFocusableElements).filter(el =>
+      this.element.contains(el),
+    );
+    if (focusableModalElements.length) {
+      focusableModalElements[focusableModalElements.length - 1].focus();
     }
   }
 
