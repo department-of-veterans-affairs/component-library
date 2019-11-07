@@ -14,7 +14,7 @@ const PROMO_BANNER_ICONS = new Map([
   [PROMO_BANNER_TYPES.emailSignup, 'fa-envelope'],
 ]);
 
-function PromoBanner({ type, onClose, render, href, text }) {
+function PromoBanner({ type, onClose, render, href, target, text }) {
   const iconClasses = classnames(
     'fas',
     'fa-stack-1x',
@@ -38,6 +38,7 @@ function PromoBanner({ type, onClose, render, href, text }) {
             <a
               className="vads-c-promo-banner__content-link"
               href={href}
+              target={target}
               onClick={onClose}
             >
               {text} <i className="fas fa-angle-right" />
@@ -65,6 +66,7 @@ PromoBanner.propTypes = {
   onClose: PropTypes.func.isRequired,
   render: PropTypes.func,
   href: PropTypes.string,
+  target: PropTypes.string,
   text: PropTypes.string,
 };
 
