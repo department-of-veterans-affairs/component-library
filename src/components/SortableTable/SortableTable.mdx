@@ -3,12 +3,12 @@ title: SortableTable
 name: SortableTable
 tags: sortable table
 ---
-
 import SortableTable from './SortableTable'
 
 ### Code:
 
 ```javascript
+import React from 'react'
 import SortableTable from '@department-of-veterans-affairs/formation-react/SortableTable'
 
 <SortableTable
@@ -37,27 +37,28 @@ import SortableTable from '@department-of-veterans-affairs/formation-react/Sorta
     [
       {
         id: 1,
-        name: 'Joe',
+        name: <span>Joe</span>,
         email: 'joe@joe.com',
         message:'Hello',
         rowClass: 'class'
       },
       {
         id: 2,
-        name: 'Bob',
+        name: <span>Bob</span>,
         email: 'bob@bob.com',
         message:'Hola',
         rowClass: 'class'
       },
       {
         id: 3,
-        name: 'Tom',
+        name: <span>Tom</span>,
         email: 'tom@tom.com',
         message:"What's Up",
         rowClass: 'class'
       }
     ]
   }
+  onHeaderClick={(value, order) => {}}
 />
 ```
 
@@ -111,5 +112,6 @@ import SortableTable from '@department-of-veterans-affairs/formation-react/Sorta
         }
       ]
     }
+    onHeaderClick={(value, order) => {}}
   />
 </div>
