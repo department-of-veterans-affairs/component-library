@@ -30,7 +30,8 @@ class SortableTable extends Component {
      */
     data: PropTypes.arrayOf(
       PropTypes.shape({
-        id: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
+        id: PropTypes.oneOfType([PropTypes.number, PropTypes.string])
+          .isRequired,
         rowClass: PropTypes.string,
         values: PropTypes.arrayOf(
           PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
@@ -49,9 +50,9 @@ class SortableTable extends Component {
   onHeaderClick = (value, order) => () => {
     // This replaces `this.props.onSort`.
     this.props.onHeaderClick(value, order);
-  }
+  };
 
-  renderHeader = (field) => {
+  renderHeader = field => {
     if (field.nonSortable) {
       return <th key={field.value}>{field.label}</th>;
     }
@@ -88,21 +89,19 @@ class SortableTable extends Component {
         </a>
       </th>
     );
-  }
+  };
 
-  renderRow = (item) => {
+  renderRow = item => {
     const { fields } = this.props;
 
     return (
       <tr key={item.id} className={item.rowClass}>
         {fields.map(field => (
-          <td key={`${item.id}-${field.value}`}>
-            {item[field.value]}
-          </td>
+          <td key={`${item.id}-${field.value}`}>{item[field.value]}</td>
         ))}
       </tr>
     );
-  }
+  };
 
   render() {
     const { className, data, fields } = this.props;
