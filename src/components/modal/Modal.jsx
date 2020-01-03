@@ -42,7 +42,6 @@ class Modal extends React.Component {
   teardownModal() {
     if (this.state.lastFocus) {
       this.state.lastFocus.focus();
-      this.setState({ lastFocus: null });
     }
     document.body.classList.remove('modal-open');
     document.removeEventListener('keydown', this.handleDocumentKeyDown, false);
