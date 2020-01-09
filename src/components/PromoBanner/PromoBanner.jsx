@@ -24,14 +24,14 @@ function PromoBanner({ type, onClose, render, href, target, text }) {
   return (
     <div className="vads-c-promo-banner">
       <div className="vads-c-promo-banner__body">
-        <div className="vads-c-promo-banner__content">
-          <div className="vads-c-promo-banner__content-icon">
-            <span className="fa-stack fa-lg">
-              <i className="vads-u-color--white fa fa-circle fa-stack-2x" />
-              <i className={iconClasses} />
-            </span>
-          </div>
+        <div className="vads-c-promo-banner__icon">
+          <span className="fa-stack fa-lg">
+            <i className="vads-u-color--white fa fa-circle fa-stack-2x" />
+            <i className={iconClasses} />
+          </span>
+        </div>
 
+        <div className="vads-c-promo-banner__content">
           {render ? (
             render()
           ) : (
