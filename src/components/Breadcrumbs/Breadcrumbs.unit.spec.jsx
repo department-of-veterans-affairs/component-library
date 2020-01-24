@@ -42,7 +42,7 @@ describe('<Breadcrumbs>', () => {
     const tree = shallow(
       <Breadcrumbs
         ariaLabel="Breadcrumb foo"
-        customClasses="foo test"
+        className="foo test"
         id="foo"
         listId="foo-list"
       >

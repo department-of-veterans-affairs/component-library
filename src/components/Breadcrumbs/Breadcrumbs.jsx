@@ -1,6 +1,7 @@
+// Node modules.
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import React from 'react';
-import classNames from 'classnames';
+import classnames from 'classnames';
 import { uniqueId } from 'lodash';
 
 /**
@@ -10,19 +11,7 @@ import { uniqueId } from 'lodash';
  * The component also accepts hard-coded A or LINK elements
  * as props.children.
  */
-class Breadcrumbs extends React.Component {
-  /**
-   * Provide a means to add overriding classes
-   */
-  classNames() {
-    const customClass = this.props.customClasses;
-    const mobileFirst = this.props.mobileFirstProp
-      ? 'va-nav-breadcrumbs--mobile'
-      : null;
-
-    return classNames('va-nav-breadcrumbs', mobileFirst, customClass);
-  }
-
+class Breadcrumbs extends Component {
   /**
    * Build the breadcrumb links. Convert children to an array,
    * pop and add aria-current to last item, build a set of
@@ -39,16 +28,21 @@ class Breadcrumbs extends React.Component {
   };
 
   render() {
-    const { ariaLabel, mobileFirstProp } = this.props;
-    const breadcrumbId = this.props.id || uniqueId('va-breadcrumbs-');
-    const breadcrumbListId =
-      this.props.listId || uniqueId('va-breadcrumbs-list-');
+    const { ariaLabel, className, id, listId, mobileFirstProp } = this.props;
+
+    // Derive IDs.
+    const breadcrumbId = id || uniqueId('va-breadcrumbs-');
+    const breadcrumbListId = listId || uniqueId('va-breadcrumbs-list-');
 
     return (
       <nav
         aria-label={ariaLabel}
         aria-live="polite"
-        className={this.classNames()}
+        className={classnames({
+          'va-nav-breadcrumbs': true,
+          'va-nav-breadcrumbs--mobile': !!mobileFirstProp,
+          [className]: !!className,
+        })}
         data-mobile-first={mobileFirstProp}
         id={breadcrumbId}
       >
@@ -77,7 +71,7 @@ Breadcrumbs.propTypes = {
   /**
    * Optionally adds one or more CSS classes to the NAV element
    */
-  customClasses: PropTypes.string,
+  className: PropTypes.string,
   /**
    * Adds a custom id attribute to the NAV element
    */

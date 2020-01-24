@@ -19,6 +19,7 @@ state = {
 import Pagination from '@department-of-veterans-affairs/formation-react/Pagination'
 
 <Pagination
+  className="custom-class"
   onPageSelect={(page) => this.setState({ page })}
   page={this.state.page}
   pages={3}
@@ -40,6 +41,7 @@ export class RenderedComponent extends React.Component {
     return (
       <div className="site-c-reactcomp__rendered">
         <Pagination
+          className="custom-class"
           onPageSelect={(page) => this.setState({ page })}
           page={this.state.page}
           pages={3}
