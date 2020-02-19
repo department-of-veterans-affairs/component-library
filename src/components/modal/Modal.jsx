@@ -32,6 +32,9 @@ class Modal extends React.Component {
   setupModal() {
     this.setState({ lastFocus: document.activeElement });
     this.applyFocusToFirstModalElement();
+    // NOTE: With this PR (https://github.com/department-of-veterans-affairs/vets-website/pull/11712)
+    // we rely on the existence of `body.modal-open` to determine if a modal is
+    // currently open and adjust programmatic scrolling if there is.
     document.body.classList.add('modal-open');
     document.addEventListener('keydown', this.handleDocumentKeyDown, false);
     document.addEventListener('focus', this.handleDocumentFocus, true);
@@ -45,7 +48,7 @@ class Modal extends React.Component {
       // Ensure last focus is set before completing modal teardown
       setTimeout(() => {
         this.state.lastFocus.focus();
-      }, 0)
+      }, 0);
     }
     document.body.classList.remove('modal-open');
     document.removeEventListener('keydown', this.handleDocumentKeyDown, false);
