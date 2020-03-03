@@ -25,7 +25,7 @@ describe('<SortableTable>', () => {
     );
     expect(
       tree
-        .find('a')
+        .find('button')
         .first()
         .text(),
     ).to.contain('Label 1');
