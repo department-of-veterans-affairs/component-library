@@ -3,9 +3,8 @@ import React from 'react';
 import classNames from 'classnames';
 
 class AlertBox extends React.Component {
-  constructor(props) {
-    super(props);
-    this.scrollToAlert = this.scrollToAlert.bind(this);
+  componentDidMount() {
+    this.scrollToAlert();
   }
 
   shouldComponentUpdate(nextProps) {
@@ -16,13 +15,15 @@ class AlertBox extends React.Component {
   }
 
   componentDidUpdate() {
-    if (this.props.isVisible && this.props.scrollOnShow) {
-      this.scrollToAlert();
-    }
+    this.scrollToAlert();
   }
 
-  scrollToAlert() {
+  scrollToAlert = () => {
     const isInView = window.scrollY <= this._ref.offsetTop;
+
+    if (!this.props.isVisible || !this.props.scrollOnShow) {
+      return;
+    }
 
     if (this._ref && !isInView) {
       this._ref.scrollIntoView({
@@ -30,7 +31,7 @@ class AlertBox extends React.Component {
         behavior: 'smooth',
       });
     }
-  }
+  };
 
   render() {
     if (!this.props.isVisible) return <div aria-live="polite" />;
