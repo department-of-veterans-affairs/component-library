@@ -19,11 +19,11 @@ class AlertBox extends React.Component {
   }
 
   scrollToAlert = () => {
-    const isInView = window.scrollY <= this._ref.offsetTop;
-
     if (!this.props.isVisible || !this.props.scrollOnShow) {
       return;
     }
+
+    const isInView = window.scrollY <= this._ref.offsetTop;
 
     if (this._ref && !isInView) {
       this._ref.scrollIntoView({
