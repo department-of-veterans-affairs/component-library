@@ -149,7 +149,7 @@ class Pagination extends Component {
   }
 
   render() {
-    const { ariaLabelSuffix, className, onPageSelect, page, pages } = this.props;
+    const { ariaLabelSuffix, className, page, pages } = this.props;
 
     // Do not render if there's only 1 page.
     if (pages === 1) {
@@ -166,7 +166,7 @@ class Pagination extends Component {
           key={pageNumber}
           className={pageClass}
           aria-label={`Load page ${pageNumber} ${ariaLabelSuffix}`}
-          onClick={() => onPageSelect(pageNumber, 'nav-paginate-number')}
+          onClick={() => this.onPageSelect(pageNumber, 'nav-paginate-number')}
           onKeyDown={e => this.handleKeyDown(e, pageNumber)}
           tabIndex="0">
           {pageNumber}
