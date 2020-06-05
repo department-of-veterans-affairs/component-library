@@ -31,7 +31,7 @@ class Modal extends React.Component {
 
   setupModal() {
     this.setState({ lastFocus: document.activeElement });
-    this.applyFocusToFirstModalElement();
+    this.setInitialModalFocus();
     // NOTE: With this PR (https://github.com/department-of-veterans-affairs/vets-website/pull/11712)
     // we rely on the existence of `body.modal-open` to determine if a modal is
     // currently open and adjust programmatic scrolling if there is.
@@ -92,6 +92,19 @@ class Modal extends React.Component {
       this.props.onClose();
     }
   };
+
+  setInitialModalFocus() {
+    if (this.props.initialFocusSelector) {
+      const focusableElement = this.element.querySelector(
+        this.props.initialFocusSelector,
+      );
+      if (focusableElement) {
+        focusableElement.focus();
+      }
+    } else {
+      this.applyFocusToFirstModalElement();
+    }
+  }
 
   applyFocusToFirstModalElement() {
     const focusableElement = this.element.querySelector(
@@ -250,10 +263,16 @@ Modal.propTypes = {
    */
   hideCloseButton: PropTypes.bool,
   /**
-   * Selector to use to find elements to focus on when the
-   * modal is opened
+   * Selector to use to find elements that should be focusable
+   * within the modal
    */
   focusSelector: PropTypes.string,
+  /**
+   * Selector to explicitly specify which element should receive
+   * focus when the modal is open, if the initially focused element
+   * is not the first focusable element in the document
+   */
+  initialFocusSelector: PropTypes.string,
 };
 
 Modal.defaultProps = {

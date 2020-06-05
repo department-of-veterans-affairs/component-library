@@ -47,8 +47,64 @@ describe('<Modal/>', () => {
     global.document.removeEventListener.restore();
   });
 
-  it('should pass aXe check', () =>
-    axeCheck(
-      <Modal id="modal" title="Modal title" visible onClose={() => {}} />,
-    ));
+  it('should pass aXe check', () => {
+    return axeCheck(
+      <Modal id="modal" title="aXe Check" visible onClose={() => {}} />,
+    );
+  });
+
+  describe('programmatic focus', () => {
+    // see this issue comment for some enzyme/jsdom concerns to be aware of
+    // when testing focus:
+    // https://github.com/enzymejs/enzyme/issues/2337#issuecomment-609071803
+    let tree;
+    let root;
+
+    before(() => {
+      root = document.createElement('div');
+      global.document.body.appendChild(root);
+    })
+
+    after(() => {
+      tree && tree.unmount();
+      global.document.body.removeChild(root);
+    });
+
+    it('should start on the first focusable element by default', () => {
+      const tree = mount(
+        <Modal id="modal"
+          title="Programmatic focus"
+          visible
+          hideCloseButton
+          onClose={() => {}}
+        >
+          <button id="first-button">First button</button>
+          <button id="second-button">Second button</button>
+        </Modal>,
+        { attachTo: root }
+      );
+
+      expect(global.document.activeElement.id).to.equal('first-button');
+      tree.unmount();
+    });
+
+    it('should start on the first element matching initialFocusSelector if specified', () => {
+      const tree = mount(
+        <Modal id="modal"
+          title="My modal"
+          visible
+          hideCloseButton
+          onClose={() => {}}
+          initialFocusSelector="#second-button"
+        >
+          <button id="first-button">First button</button>
+          <button id="second-button">Second button</button>
+        </Modal>,
+        { attachTo: root }
+      );
+
+      expect(global.document.activeElement.id).to.equal('second-button');
+      tree.unmount();
+    });
+  });
 });
