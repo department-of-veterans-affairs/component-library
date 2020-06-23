@@ -1,6 +1,6 @@
 import React from 'react';
 
-export const ArrowRightBlueSVG = () => (
+const ArrowRightBlueSVG = () => (
   <svg
     className="all-link-arrow"
     width="444.819"
@@ -13,3 +13,5 @@ export const ArrowRightBlueSVG = () => (
     />
   </svg>
 );
+
+export default ArrowRightBlueSVG;

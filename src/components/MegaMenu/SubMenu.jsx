@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Column from './Column';
 import _ from 'lodash';
-import { ArrowRightBlueSVG } from './arrow-right-blue';
+import ArrowRightBlueSVG from './arrow-right-blue';
 
 const getColumns = (mobileMediaQuery, columns) => {
   if (mobileMediaQuery.matches) {
