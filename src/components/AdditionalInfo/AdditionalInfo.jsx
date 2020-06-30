@@ -18,17 +18,28 @@ export default class AdditionalInfo extends React.Component {
 
   render() {
     const { triggerText, children } = this.props;
+
+    // Display button as a block element in order to
+    // preserve the Safari VoiceOver navigation order
+    // when expanding the content.
+    const buttonClass = classNames(
+      'additional-info-button',
+      'va-button-link',
+      'vads-u-display--block',
+    );
+
     const iconClass = classNames({
       fas: true,
       'fa-angle-down': true,
       open: this.state.open,
     });
+
     const { tagName: TagName = 'span' } = this.props;
 
     const trigger = (
       <button
         type="button"
-        className="additional-info-button va-button-link"
+        className={buttonClass}
         aria-expanded={this.state.open ? 'true' : 'false'}
         aria-controls={this.expandedContentId}
         onClick={this.toggle}
