@@ -63,6 +63,7 @@ class AlertBox extends React.Component {
         ref={ref => {
           this._ref = ref;
         }}
+        role="alert"
       >
         <div className="usa-alert-body">
           {alertHeading && <H className="usa-alert-heading">{alertHeading}</H>}
