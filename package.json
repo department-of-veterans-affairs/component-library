@@ -1,6 +1,6 @@
 {
   "name": "@department-of-veterans-affairs/formation-react",
-  "version": "5.4.1",
+  "version": "5.4.2",
   "description": "React implementation of patterns in Formation",
   "keywords": [
     "react",
@@ -30,6 +30,7 @@
     "lodash": "^4.17.15",
     "moment": "^2.23.0",
     "prop-types": "^15.6.2",
+    "react-focus-lock": "^2.4.0",
     "react-transition-group": "1"
   },
   "peerDependencies": {
