@@ -1,0 +1,43 @@
+---
+title: MaintenanceBanner
+name: MaintenanceBanner
+---
+
+import moment from 'moment';
+import MaintenanceBanner from './MaintenanceBanner'
+
+
+### Code:
+```javascript
+import moment from 'moment';
+import MaintenanceBanner from '@department-of-veterans-affairs/formation-react/MaintenanceBanner'
+
+// Derive startsAt and expiresAt.
+const startsAt = moment();
+const expiresAt = startsAt.clone().add(24, 'hours');
+
+<MaintenanceBanner
+  content="We’re working on VA.gov right now. If you have trouble signing in or using tools, check back after we're finished. Thank you for your patience."
+  expiresAt={expiresAt}
+  id="1"
+  startsAt={startsAt}
+  title="Site maintenance"
+  warnContent="We’ll be doing some work on VA.gov. If you have trouble signing in or using tools, check back after we're finished. Thank you for your patience."
+  warnStartsAt={startsAt.clone().subtract(12, 'hours')}
+  warnTitle="Upcoming site maintenance"
+/>
+```
+
+### Rendered Component
+<div className="site-c-reactcomp__rendered">
+  <MaintenanceBanner
+    content="We’re working on VA.gov right now. If you have trouble signing in or using tools, check back after we're finished. Thank you for your patience."
+    expiresAt={moment().add(24, 'hours')}
+    id="1"
+    startsAt={moment()}
+    title="Site maintenance"
+    warnContent="We’ll be doing some work on VA.gov. If you have trouble signing in or using tools, check back after we're finished. Thank you for your patience."
+    warnStartsAt={moment().subtract(12, 'hours')}
+    warnTitle="Upcoming site maintenance"
+  />
+</div>
