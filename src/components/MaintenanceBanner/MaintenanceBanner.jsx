@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import moment from 'moment';
 // Relative imports.
-import AlertBox from '../AlertBox/AlertBox.jsx';
+import AlertBox from '../AlertBox/AlertBox';
 
 export const MAINTENANCE_BANNER = 'MAINTENANCE_BANNER';
 
