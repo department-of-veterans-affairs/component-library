@@ -136,13 +136,13 @@ describe('Widget <Telephone />', () => {
     wrapper.unmount();
   });
   it('should render a 3-digit custom pattern', () => {
-    const wrapper = shallow(<Telephone contact="711" pattern="# # #" />);
+    const wrapper = shallow(<Telephone contact="988" pattern="# # #" />);
     const props = wrapper.props();
-    expect(props.href).to.equal('tel:711');
+    expect(props.href).to.equal('tel:988');
     // not sure if including a period and a space is a big deal; probably
     // an edge case either way
-    expect(props['aria-label']).to.equal('7. 1. 1.');
-    expect(wrapper.text()).to.equal('7 1 1');
+    expect(props['aria-label']).to.equal('9. 8. 8.');
+    expect(wrapper.text()).to.equal('9 8 8');
     wrapper.unmount();
   });
 

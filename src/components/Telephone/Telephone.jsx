@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 export const CONTACTS = Object.freeze({
   '222_VETS': '8772228387', // VA Help Line
   '4AID_VET': '8774243838', // National Call Center for Homeless Veterans
+  711: '711', // Telecommunications Relay Service
   911: '911',
   CAREGIVER: '8552603274', // VA National Caregiver Support Line
   CRISIS_LINE: '8002738255', // Veterans Crisis hotline
@@ -17,6 +18,9 @@ export const CONTACTS = Object.freeze({
   MY_HEALTHEVET: '8773270022', // My HealtheVet help desk
   NCA: '8005351117', // National Cemetery Scheduling Office
   TESC: '8882242950', // U.S. Treasury Electronic Payment Solution Center
+  FEDERAL_RELAY_SERVICE: '8008778339', // Federal Relay Service
+  SUICIDE_PREVENTION_LIFELINE: '8007994889', // Suicide Prevention Line
+  DMDC_DEERS: '8663632883', // Defense Manpower Data Center (DMDC) | Defense Enrollment Eligibility Reporting System (DEERS) Support Office
   VA_311: '8446982311', // VA Help desk (VA311)
   VA_BENEFITS: '8008271000', // Veterans Benefits Assistance
 });
@@ -30,6 +34,7 @@ export const PATTERNS = {
 
 // Custom aria labels (only used internally)
 const LABELS = {
+  711: 'TTY: 7 1 1.',
   911: '1. 9 1 1.',
 };
 
