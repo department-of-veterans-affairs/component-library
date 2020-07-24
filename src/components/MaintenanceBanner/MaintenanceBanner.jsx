@@ -11,17 +11,26 @@ export const MAINTENANCE_BANNER = 'MAINTENANCE_BANNER';
 // @WARNING: This is currently only used once in vets-website.
 export class MaintenanceBanner extends Component {
   static propTypes = {
+    // The content of the banner for downtime.
     content: PropTypes.string.isRequired,
+    // A 'moment' object used when downtime expires.
     expiresAt: PropTypes.object.isRequired,
+    // A unique ID that will be used for conditionally rendering the banner based on if the user has dismissed it already.
     id: PropTypes.string.isRequired,
+    // Usually this is just window.localStorage
     localStorage: PropTypes.shape({
       getItem: PropTypes.func.isRequired,
       setItem: PropTypes.func.isRequired,
     }),
+    // A 'moment' object used when downtime starts.
     startsAt: PropTypes.object.isRequired,
+    // The title of the banner for downtime.
     title: PropTypes.string.isRequired,
+    // The content of the banner for pre-downtime.
     warnContent: PropTypes.string,
+    // A 'moment' object used when pre-downtime starts.
     warnStartsAt: PropTypes.object,
+    // The title of the banner for pre-downtime.
     warnTitle: PropTypes.string,
   };
 

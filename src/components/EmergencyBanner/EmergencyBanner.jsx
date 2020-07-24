@@ -10,15 +10,22 @@ const EMERGENCY_BANNER_LOCALSTORAGE = 'EMERGENCY_BANNER';
 // @WARNING: This is currently only used once in vets-website.
 export class EmergencyBanner extends Component {
   static propTypes = {
+    // A raw HTML string.
     content: PropTypes.string.isRequired,
+    // Usually this is just window.localStorage
     localStorage: PropTypes.shape({
       getItem: PropTypes.func.isRequired,
       setItem: PropTypes.func.isRequired,
     }),
+    // A function to track clicks (e.g. Google Analytics' `dataLayer.push`).
     recordEvent: PropTypes.func,
+    // Enable the close functionality. The banner will be closed until localStorage is cleared.
     showClose: PropTypes.bool,
+    // The title of the banner.
     title: PropTypes.string.isRequired,
+    // If type is equal to 'error', it will show a red emergency banner outline.
     type: PropTypes.string.isRequired,
+    // A boolean that when false makes it so the banner does not render.
     visible: PropTypes.bool.isRequired,
   };
 
