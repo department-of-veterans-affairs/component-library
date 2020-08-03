@@ -27,7 +27,7 @@ class AlertBox extends React.Component {
 
     if (this._ref && !isInView) {
       this._ref.scrollIntoView({
-        block: 'end',
+        block: this.props.scrollPosition,
         behavior: 'smooth',
       });
     }
@@ -119,6 +119,11 @@ AlertBox.propTypes = {
   scrollOnShow: PropTypes.bool,
 
   /**
+   * Defaults to 'start' but customizable.
+   */
+  scrollPosition: PropTypes.string,
+
+  /**
    * Optional class name to add to the alert box.
    */
   className: PropTypes.string,
@@ -146,6 +151,7 @@ AlertBox.propTypes = {
 /* eslint-enable consistent-return */
 
 AlertBox.defaultProps = {
+  scrollPosition: 'start',
   isVisible: true,
   backgroundOnly: false,
   closeBtnAriaLabel: 'Close notification',
