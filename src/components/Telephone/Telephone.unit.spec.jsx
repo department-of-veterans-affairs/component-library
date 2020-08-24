@@ -171,6 +171,18 @@ describe('Widget <Telephone />', () => {
     wrapper.unmount();
   });
 
+  // notClickable
+  it('should render a span instead of an a tag', () => {
+    const wrapper = shallow(
+      <Telephone contact={CONTACTS.GI_BILL} className="foo" notClickable />,
+    );
+    expect(wrapper.exists('span')).to.equal(true);
+    expect(wrapper.exists('a')).to.equal(false);
+    expect(wrapper.text()).to.include('888-442-4551');
+    expect(wrapper.text()).to.include('8 8 8. 4 4 2. 4 5 5 1');
+    wrapper.unmount();
+  });
+
   // tracking
   it('should track on click', () => {
     const onClick = sinon.spy();
