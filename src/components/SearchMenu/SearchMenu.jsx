@@ -6,8 +6,13 @@ import IconSearch from '../IconSearch/IconSearch';
 import DropDownPanel from '../DropDownPanel/DropDownPanel';
 
 class SearchMenu extends React.Component {
+  constructor(props) {
+    super(props);
+    this.searchFieldRef = React.createRef();
+  }
+
   componentDidUpdate() {
-    this.refs.searchField.focus();
+    this.searchFieldRef.current.focus();
   }
 
   toggleSearchForm = () => {
@@ -37,7 +42,7 @@ class SearchMenu extends React.Component {
       <div className="va-flex">
         <input
           autoComplete="off"
-          ref="searchField"
+          ref={this.searchFieldRef}
           className="usagov-search-autocomplete"
           id="query"
           name="query"
