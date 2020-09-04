@@ -27,7 +27,7 @@ export const CONTACTS = Object.freeze({
 
 // Patterns used in formatting visible text
 export const PATTERNS = {
-  911: '###', // needed to match 911 CONTACT
+  '3_DIGIT': '###',
   DEFAULT: '###-###-####',
   OUTSIDE_US: '+1-###-###-####',
 };
@@ -51,14 +51,21 @@ const parseNumber = number =>
 
 /**
  * Insert the provided number into the pattern
- * @param {string} num - parsed number string (no non-digits included)
+ * @param {string} phoneNumber - parsed number string (no non-digits included)
  * @param {string} pattern - provided pattern (using "#") for link text
  * @return {string} - formatted phone number for link text
  */
 // Create link text from pattern
-const formatTelText = (num, pattern) => {
+const formatTelText = (phoneNumber, pattern) => {
+  const patternLength = pattern.match(/#/g).length;
+
+  // If the pattern does not match the phone number, return the raw phone number.
+  if (phoneNumber.length !== patternLength) {
+    return phoneNumber;
+  }
+
   let i = 0;
-  return pattern.replace(/#/g, () => num[i++] || '');
+  return pattern.replace(/#/g, () => phoneNumber[i++] || '');
 };
 
 /**
@@ -81,6 +88,28 @@ const formatTelLabel = number =>
     .filter(n => n)
     .map(formatTelLabelBlock)
     .join('. ');
+
+/**
+ * Derive the contact pattern value
+ * @param {string} pattern (optional) - Link text format pattern, using "#" as
+ *  the digit placeholder
+ * @param {string} parsedNumber (optional) - Telephone number with non-digit characters
+ * stripped out
+ */
+const deriveContactPattern = (pattern, parsedNumber) => {
+  // Use their pattern if provided.
+  if (pattern) {
+    return pattern;
+  }
+
+  // If the number is 3 digits, use that pattern as the default.
+  if (parsedNumber && parsedNumber.length === PATTERNS['3_DIGIT'].length) {
+    return PATTERNS['3_DIGIT'];
+  }
+
+  // Use the default pattern.
+  return PATTERNS.DEFAULT;
+}
 
 /**
  * Telephone component
@@ -114,15 +143,14 @@ function Telephone({
   const parsedNumber = parseNumber(contact.toString());
   const phoneNumber = CONTACTS[parsedNumber] || parsedNumber;
 
-  // Capture "911" pattern here
-  const contactPattern = pattern || PATTERNS[parsedNumber] || PATTERNS.DEFAULT;
-  const patternLength = contactPattern.match(/#/g).length;
-  const formattedNumber = formatTelText(phoneNumber, contactPattern, extension);
+  // Capture 3 digit patterns here
+  const contactPattern = deriveContactPattern(pattern, parsedNumber);
+  const formattedNumber = formatTelText(phoneNumber, contactPattern);
 
-  if (!phoneNumber || phoneNumber.length !== patternLength) {
-    throw new Error(
-      `Contact number "${phoneNumber}" does not match the pattern (${contactPattern})`,
-    );
+  // Show nothing if no phone number was provided.
+  if (!phoneNumber) {
+    console.warn('Contact number is missing so the <Telephone /> component did not render.');
+    return null;
   }
 
   const formattedAriaLabel =

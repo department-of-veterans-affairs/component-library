@@ -63,7 +63,7 @@ import Telephone, { CONTACTS, PATTERNS } from '@department-of-veterans-affairs/f
   pattern={false} // Ignored when text is included
   ariaLabel="8 8 8. 4 4 2. 4 5 5 1"
   onClick={() => {}}
-/>
+>
   1-888-GI-BILL-1
 </Telephone>
 
@@ -150,6 +150,6 @@ import Telephone, { CONTACTS, PATTERNS } from '@department-of-veterans-affairs/f
 
 | Key | Pattern | Description |
 |:----|:--------|:------------|
-| `911` | `###` | Matches the `911` contact number |
+| `3_DIGIT` | `###` | Matches the `911` or `711` contact number |
 | `DEFAULT` | `###-###-####` | Current phone pattern used throughout the site |
 | `OUTSIDE_US` | `+1-###-###-####` | Use on pages for veterans outside the U.S. |
