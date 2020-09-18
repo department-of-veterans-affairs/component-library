@@ -14,6 +14,7 @@ export const CONTACTS = Object.freeze({
   GI_BILL: '8884424551', // Education Call Center (1-888-GI-BILL-1)
   GO_DIRECT: '8003331795', // Go Direct/Direct Express (Treasury)
   HELP_DESK: '8446982311', // VA Help desk
+  HEALTHCARE_ELIGIBILITY_CENTER: '8554888440', // VA Healthcare Eligibility Center (Eligibility Division)
   HELP_TTY: '8008778339', // VA Help Desk TTY
   MY_HEALTHEVET: '8773270022', // My HealtheVet help desk
   NCA: '8005351117', // National Cemetery Scheduling Office
