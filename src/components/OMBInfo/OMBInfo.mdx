@@ -17,6 +17,15 @@ import OMBInfo from '@department-of-veterans-affairs/formation-react/OMBInfo'
 />
 ```
 
+### Available Props
+
+| Name | Type | Description | Required|
+|-|-|-|:-:|
+|resBurden| String or Number | The number of minutes the form is expected to take. If left falsy, this will not show.| No|
+|ombNumber | String | The form's OMB (Office of Management and Budget) control number | Yes |
+| expDate | Date as a string | This should be a formated date, in the format of `MMMM DD YYYY`| Yes |
+|children | JSX | Any children nodes will should up in the Privacy Statement Act model | No|
+
 ### Rendered Component
 
 <div className="site-c-reactcomp__rendered">

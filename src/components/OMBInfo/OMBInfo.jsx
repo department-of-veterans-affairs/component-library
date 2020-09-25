@@ -69,9 +69,11 @@ class OMBInfo extends React.Component {
 
     return (
       <div className="omb-info">
-        <div>
-          Respondent burden: <strong>{resBurden} minutes</strong>
-        </div>
+        {resBurden && (
+          <div>
+            Respondent burden: <strong>{resBurden} minutes</strong>
+          </div>
+        )}
         <div>
           OMB Control #: <strong>{ombNumber}</strong>
         </div>
@@ -99,19 +101,19 @@ class OMBInfo extends React.Component {
 
 OMBInfo.propTypes = {
   /**
-   * respondent burden, length of time usually in minutes
+   * respondent burden, length of time usually in minutes. If this omitted, this will not show in the rendered component. Be sure to get approval from the design council before leaving it out. 
    */
   resBurden: PropTypes.number,
 
   /**
    * OMB control number / form number
    */
-  ombNumber: PropTypes.string,
+  ombNumber: PropTypes.string.isRequired,
 
   /**
    * form expiration date
    */
-  expDate: PropTypes.string,
+  expDate: PropTypes.string.isRequired,
 };
 
 export default OMBInfo;
