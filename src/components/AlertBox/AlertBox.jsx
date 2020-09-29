@@ -2,6 +2,15 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import classNames from 'classnames';
 
+// Enum used to set the AlertBox's `status` prop
+export const ALERT_TYPE = Object.freeze({
+  INFO: 'info', // Blue border, black circled 'i'
+  ERROR: 'error', // Red border, red circled exclamation
+  SUCCESS: 'success', // Green border, green checkmark
+  WARNING: 'warning', // Yellow border, black triangle exclamation
+  CONTINUE: 'continue', // Green border, green lock
+})
+
 class AlertBox extends React.Component {
   componentDidMount() {
     this.scrollToAlert();
@@ -79,13 +88,7 @@ AlertBox.propTypes = {
   /**
    * Determines the color and icon of the alert box.
    */
-  status: PropTypes.oneOf([
-    'info', // Blue border, black circled 'i'
-    'error', // Red border, red circled exclamation
-    'success', // Green border, green checkmark
-    'warning', // Yellow border, black triangle exclamation
-    'continue', // Green border, green lock
-  ]).isRequired,
+  status: PropTypes.oneOf(Object.values(ALERT_TYPE)).isRequired,
 
   /**
    * Show or hide the alert. Useful for alerts triggered by app interaction.

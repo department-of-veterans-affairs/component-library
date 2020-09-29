@@ -4,53 +4,53 @@ name: AlertBox
 tags: informational, warning, error, success, continue, dismissable
 ---
 
-import AlertBox from './AlertBox'
+import AlertBox, { ALERT_TYPE } from './AlertBox'
 
 
 ### Code:
 ```javascript
-import AlertBox from '@department-of-veterans-affairs/formation-react/AlertBox'
+import AlertBox, { ALERT_TYPE } from '@department-of-veterans-affairs/formation-react/AlertBox'
 
 <div className="usa-width-one-whole">
   <AlertBox
     headline='Informational alert'
     content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam id felis pulvinar ligula ultricies sollicitudin eget nec dui. Cras augue velit, pellentesque sit amet nisl ut, tristique suscipit sem. Cras sollicitudin auctor mattis."
-    status="info"
+    status={ALERT_TYPE.INFO}
     isVisible/>
   <AlertBox
     headline="Warning alert"
     content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam id felis pulvinar ligula ultricies sollicitudin eget nec dui. Cras augue velit, pellentesque sit amet nisl ut, tristique suscipit sem. Cras sollicitudin auctor mattis."
-    status="warning"/>
+    status={ALERT_TYPE.WARNING} />
   <AlertBox
     headline="Error alert"
     content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam id felis pulvinar ligula ultricies sollicitudin eget nec dui. Cras augue velit, pellentesque sit amet nisl ut, tristique suscipit sem. Cras sollicitudin auctor mattis."
-    status="error"/>
+    status={ALERT_TYPE.ERROR} />
   <AlertBox
     headline="Success alert"
     content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam id felis pulvinar ligula ultricies sollicitudin eget nec dui. Cras augue velit, pellentesque sit amet nisl ut, tristique suscipit sem. Cras sollicitudin auctor mattis."
-    status="success"/>
+    status={ALERT_TYPE.SUCCESS} />
   <AlertBox
     headline="Continue alert"
     content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam id felis pulvinar ligula ultricies sollicitudin eget nec dui. Cras augue velit, pellentesque sit amet nisl ut, tristique suscipit sem. Cras sollicitudin auctor mattis."
-    status="continue"/>
+    status={ALERT_TYPE.CONTINUE} />
   <AlertBox
     headline="Dismissable alert"
     content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam id felis pulvinar ligula ultricies sollicitudin eget nec dui. Cras augue velit, pellentesque sit amet nisl ut, tristique suscipit sem. Cras sollicitudin auctor mattis."
-    status="info"
+    status={ALERT_TYPE.INFO}
     isVisible
     onCloseAlert={() => {}}/>
   <AlertBox
     headline="Hidden alert"
     content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam id felis pulvinar ligula ultricies sollicitudin eget nec dui. Cras augue velit, pellentesque sit amet nisl ut, tristique suscipit sem. Cras sollicitudin auctor mattis."
-    status="info"
+    status={ALERT_TYPE.INFO}
     isVisible={false}/>
   <AlertBox
     content={<p>Content without heading.</p>}
-    status="info"/>
+    status={ALERT_TYPE.INFO}/>
   <AlertBox
     headline="Informational backgroundOnly alert"
     content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam id felis pulvinar ligula ultricies sollicitudin eget nec dui. Cras augue velit, pellentesque sit amet nisl ut, tristique suscipit sem. Cras sollicitudin auctor mattis."
-    status="info"
+    status={ALERT_TYPE.INFO}
     backgroundOnly />
 </div>
 ```
@@ -61,42 +61,42 @@ import AlertBox from '@department-of-veterans-affairs/formation-react/AlertBox'
     <AlertBox
       headline="Informational alert"
       content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam id felis pulvinar ligula ultricies sollicitudin eget nec dui. Cras augue velit, pellentesque sit amet nisl ut, tristique suscipit sem. Cras sollicitudin auctor mattis."
-      status="info"
+      status={ALERT_TYPE.INFO}
       isVisible/>
     <AlertBox
       headline="Warning alert"
       content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam id felis pulvinar ligula ultricies sollicitudin eget nec dui. Cras augue velit, pellentesque sit amet nisl ut, tristique suscipit sem. Cras sollicitudin auctor mattis."
-      status="warning"/>
+      status={ALERT_TYPE.WARNING} />
     <AlertBox
       headline="Error alert"
       content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam id felis pulvinar ligula ultricies sollicitudin eget nec dui. Cras augue velit, pellentesque sit amet nisl ut, tristique suscipit sem. Cras sollicitudin auctor mattis."
-      status="error"/>
+      status={ALERT_TYPE.ERROR} />
     <AlertBox
       headline="Success alert"
       content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam id felis pulvinar ligula ultricies sollicitudin eget nec dui. Cras augue velit, pellentesque sit amet nisl ut, tristique suscipit sem. Cras sollicitudin auctor mattis."
-      status="success"/>
+      status={ALERT_TYPE.SUCCESS} />
     <AlertBox
       headline="Continue alert"
       content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam id felis pulvinar ligula ultricies sollicitudin eget nec dui. Cras augue velit, pellentesque sit amet nisl ut, tristique suscipit sem. Cras sollicitudin auctor mattis."
-      status="continue"/>
+      status={ALERT_TYPE.CONTINUE} />
     <AlertBox
       headline="Dismissable alert"
       content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam id felis pulvinar ligula ultricies sollicitudin eget nec dui. Cras augue velit, pellentesque sit amet nisl ut, tristique suscipit sem. Cras sollicitudin auctor mattis."
-      status="info"
+      status={ALERT_TYPE.INFO}
       isVisible
       onCloseAlert={() => {}}/>
     <AlertBox
       headline="Hidden alert"
       content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam id felis pulvinar ligula ultricies sollicitudin eget nec dui. Cras augue velit, pellentesque sit amet nisl ut, tristique suscipit sem. Cras sollicitudin auctor mattis."
-      status="info"
+      status={ALERT_TYPE.INFO}
       isVisible={false}/>
     <AlertBox
       content={<p>Content without heading.</p>}
-      status="info"/>
+      status={ALERT_TYPE.INFO}/>
     <AlertBox
       headline="Background Only alert"
       content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam id felis pulvinar ligula ultricies sollicitudin eget nec dui. Cras augue velit, pellentesque sit amet nisl ut, tristique suscipit sem. Cras sollicitudin auctor mattis."
-      status="info"
+      status={ALERT_TYPE.INFO}
       backgroundOnly />
   </div>
 </div>
