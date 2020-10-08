@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { Component } from 'react';
 import classNames from 'classnames';
 
 // Enum used to set the AlertBox's `status` prop
@@ -9,11 +9,15 @@ export const ALERT_TYPE = Object.freeze({
   SUCCESS: 'success', // Green border, green checkmark
   WARNING: 'warning', // Yellow border, black triangle exclamation
   CONTINUE: 'continue', // Green border, green lock
-})
+});
 
-class AlertBox extends React.Component {
+class AlertBox extends Component {
   componentDidMount() {
     this.scrollToAlert();
+  }
+
+  componentWillUnmount() {
+    clearTimeout(this.scrollToAlertTimeout);
   }
 
   shouldComponentUpdate(nextProps) {
@@ -28,17 +32,16 @@ class AlertBox extends React.Component {
   }
 
   scrollToAlert = () => {
-    if (!this.props.isVisible || !this.props.scrollOnShow) {
-      return;
-    }
-
-    const isInView = window.scrollY <= this._ref.offsetTop;
-
-    if (this._ref && !isInView) {
-      this._ref.scrollIntoView({
-        block: this.props.scrollPosition,
-        behavior: 'smooth',
-      });
+    // Without using the setTimeout, React has not added the element
+    // to the DOM when it calls scrollIntoView()
+    if (this.props.isVisible && this.props.scrollOnShow) {
+      clearTimeout(this.scrollToAlertTimeout);
+      this.scrollToAlertTimeout = setTimeout(() => {
+        this._ref?.scrollIntoView({
+          block: this.props.scrollPosition,
+          behavior: 'smooth',
+        });
+      }, 0);
     }
   };
 
