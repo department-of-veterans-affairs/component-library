@@ -1,6 +1,6 @@
 {
   "name": "@department-of-veterans-affairs/formation-react",
-  "version": "5.7.0",
+  "version": "5.7.1",
   "description": "React implementation of patterns in Formation",
   "keywords": [
     "react",
