@@ -6,7 +6,7 @@ const babel = require('@babel/core');
 const recast = require('recast');
 const path = require('path');
 
-console.log('Starting formation-react build');
+console.log('Starting component-library build');
 console.log('Cleaning old build');
 rimraf.sync('./*.js');
 
