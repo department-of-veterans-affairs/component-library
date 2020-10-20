@@ -9,6 +9,8 @@ export const CONTACTS = Object.freeze({
   CAREGIVER: '8552603274', // VA National Caregiver Support Line
   CRISIS_LINE: '8002738255', // Veterans Crisis hotline
   CRISIS_TTY: '8007994889', // Veterans Crisis hotline TTY
+  DMC: '8008270648', // Debt Management Center
+  DMC_OVERSEAS: '6127136415', // Debt Management Center (Overseas)
   DS_LOGON: '8005389552', // Defense Manpower Data Center
   DS_LOGON_TTY: '8663632883', // Defense Manpower Data Center TTY
   GI_BILL: '8884424551', // Education Call Center (1-888-GI-BILL-1)
