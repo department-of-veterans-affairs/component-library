@@ -21,6 +21,7 @@ export const CONTACTS = Object.freeze({
   MY_HEALTHEVET: '8773270022', // My HealtheVet help desk
   NCA: '8005351117', // National Cemetery Scheduling Office
   TESC: '8882242950', // U.S. Treasury Electronic Payment Solution Center
+  TREASURY_DMS: '8888263127', // U.S. Department of the Treasury (Debt Management Services)
   FEDERAL_RELAY_SERVICE: '8008778339', // Federal Relay Service
   SUICIDE_PREVENTION_LIFELINE: '8007994889', // Suicide Prevention Line
   DMDC_DEERS: '8663632883', // Defense Manpower Data Center (DMDC) | Defense Enrollment Eligibility Reporting System (DEERS) Support Office
