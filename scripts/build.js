@@ -18,7 +18,7 @@ function flattenRequires(bufferString) {
   return new Buffer(
     recast.print(
       recast.visit(recast.parse(bufferString), {
-        visitCallExpression: function(path) {
+        visitCallExpression: function (path) {
           this.traverse(path);
           var expr = path.node;
           if (expr.callee.name == 'require') {
@@ -48,7 +48,9 @@ function flattenRequires(bufferString) {
 const fileNames = [].concat.apply(
   [],
   [
-    glob.sync('./src/components/**/*.jsx', { ignore: './**/*.unit.spec.jsx' }),
+    glob.sync('./src/components/**/*.jsx', {
+      ignore: ['./**/*.unit.spec.jsx', './**/*.stories.(mdx|jsx)'],
+    }),
     glob.sync('./src/helpers/*.js'),
   ],
 );

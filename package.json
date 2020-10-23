@@ -20,7 +20,9 @@
     "release": "PACKAGE=formation-react VERSION=$npm_package_version node ../../scripts/release.js",
     "test-watch": "karma start testing/karma.conf.js --auto-watch",
     "test": "karma start testing/karma.conf.js --single-run",
-    "test-debug": "karma start testing/karma.conf.js --browsers Chrome"
+    "test-debug": "karma start testing/karma.conf.js --browsers Chrome",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook"
   },
   "bugs": {
     "url": "https://github.com/department-of-veterans-affairs/veteran-facing-services-tools/issues"
@@ -34,7 +36,16 @@
     "react-transition-group": "1"
   },
   "peerDependencies": {
-    "@department-of-veterans-affairs/formation": "^6.9.0",
     "react": "^15.5.4||^16.7.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.12.3",
+    "@department-of-veterans-affairs/formation": "^6.9.0",
+    "@storybook/addon-actions": "^6.0.26",
+    "@storybook/addon-essentials": "^6.0.26",
+    "@storybook/addon-links": "^6.0.26",
+    "@storybook/react": "^6.0.26",
+    "babel-loader": "^8.1.0",
+    "react-is": "^17.0.1"
   }
 }
