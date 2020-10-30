@@ -63,15 +63,41 @@ export default class DropDownPanel extends React.Component {
 }
 
 DropDownPanel.propTypes = {
-  buttonText: PropTypes.string.isRequired,
-  clickHandler: PropTypes.func.isRequired,
-  cssClass: PropTypes.string,
   /**
-   * Should be SVG markup
+   * The text of the drop down button.
    */
-  icon: PropTypes.node /* Should be SVG markup */,
+  buttonText: PropTypes.string.isRequired,
+
+  /**
+   * A function called when the drop down button is clicked. This is often used
+   * to set the open state in the parent component, which passes down the new
+   * isOpen prop.
+   */
+  clickHandler: PropTypes.func.isRequired,
+
+  /**
+   * Any CSS classes to apply to the button itself.
+   */
+  cssClass: PropTypes.string,
+
+  /**
+   * An SVG icon to render before the button text.
+   */
+  icon: PropTypes.node,
+
+  /**
+   * The ID of the <div> surrounding the children.
+   */
   id: PropTypes.string,
+
+  /**
+   * Whether the drop down panel is open.
+   */
   isOpen: PropTypes.bool.isRequired,
+
+  /**
+   * The disabled state of the drop down button.
+   */
   disabled: PropTypes.bool,
 };
 
