@@ -12,6 +12,7 @@ class AcceptTermsPrompt extends React.Component {
   }
 
   componentDidMount() {
+    if (!window.dataLayer) return;
     window.dataLayer.push({ event: 'terms-shown' });
     window.scrollTo(0, 0);
   }
