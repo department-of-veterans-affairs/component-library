@@ -21,7 +21,7 @@ class CollapsiblePanel extends React.Component {
   scrollToTop() {
     scroller.scrollTo(
       `collapsible-panel-${this.id}-scroll-element`,
-      window.VetsGov.scroll || {
+      window.VetsGov?.scroll || {
         duration: 500,
         delay: 2,
         smooth: true,
@@ -81,13 +81,19 @@ class CollapsiblePanel extends React.Component {
 
 CollapsiblePanel.propTypes = {
   /**
-   * panel label
+   * The title of the collapsible panel.
    */
   panelName: PropTypes.string.isRequired,
+
   /**
-   * If set to true, panel content will be borderless
+   * If set to true, panel content will be borderless.
    */
   borderless: PropTypes.bool,
+
+  /**
+   * If set to true, the panel will default to open.
+   */
+  startOpen: PropTypes.bool,
 };
 
 export default CollapsiblePanel;
