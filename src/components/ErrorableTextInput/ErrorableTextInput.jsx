@@ -75,7 +75,7 @@ class ErrorableTextInput extends React.Component {
     // preventDefault on the div stops the form from submitting after a user
     // presses enter while the input is focused
     return (
-      <div className={inputErrorClass} onKeyPress={e => e.preventDefault()}>
+      <div className={inputErrorClass}>
         <label className={labelErrorClass} htmlFor={this.inputId}>
           {this.props.label}
           {requiredSpan}
