@@ -5,11 +5,69 @@ import classnames from 'classnames';
 import { uniqueId } from 'lodash';
 
 /**
- * React component to dynamically build breadcrumb links.
- * The Breadcrumbs component accepts an array of HTML A tags,
- * React Router LINK components, or a combination of the two.
- * The component also accepts hard-coded A or LINK elements
- * as props.children.
+ * React component to dynamically build breadcrumb links. The Breadcrumbs
+ * component accepts an array of HTML A tags, React Router LINK components, or a
+ * combination of the two. The component also accepts hard-coded A or LINK
+ * elements as props.children.
+ *
+## Intent
+
+Breadcrumbs are intended to provide users an understanding of where they are
+located in a rich information structure. They work well in situations where
+users may have clicked several layers deep, and would want to move back toward
+the top in linear steps.
+
+## Using the Breadcrumbs Component
+
+The `<Breadrumbs />` component accepts a number of different `children` props
+and will render them correctly:
+
+* An array of comma-separated `<a>` tags
+* An array of comma-separated `<Link />` components (React router)
+* Hard-coded HTML `<a>` tags
+* A combination of HTML and React router components
+
+You do not need to wrap your code in `<li>` or `<ul>` elements. The proper
+markup is included in the `<Breadcrumbs />` component and will be output when
+the `render()` method is executed.
+
+## Mobile Width Adaptation
+
+The breadcrumb component switches to a single previous step link when the screen
+is collapsed or zoomed smaller than 481 device pixels or a custom
+`props.mobileWidth` declaration. This adaptation is designed to minizime the
+breadcrumb's footprint on smaller screens and is beneficial for sites with many
+layers.
+
+## Accessibility
+
+The `<Breadcrumbs />` component has been tested for accessibility. It is fully
+keyboard accessible, and announces the current page correctly in the following
+screen reader combinations:
+
+* MacOS + Safari + VoiceOver
+* MacOS + Chrome + VoiceOver
+* iOS + Safari + VoiceOver
+* Windows 7/10 + Firefox + NVDA
+* Windows 10 + Chrome + NVDA
+* Windows 7/10 + IE11 + JAWS
+* Windows 10 + Chrome + JAWS
+
+### aria-label (ATTRIBUTE)
+
+The `<Breadcrumbs />` component automatically adds an `aria-label="Breadcrumb"`
+attribute to the containing `<nav>` element. This will be read out as
+"Breadcrumb" to assistive devices like JAWS, NVDA, and VoiceOver. The label can
+be changed to fit your needs by passing a custom string to the `ariaLabel` prop.
+
+### aria-current (ATTRIBUTE)
+
+The `<Breadcrumbs />` component automatically adds an `aria-current="page"`
+attribute to the last link rendered by the full breadcrumb list. This attribute
+triggers an `a[aria-current="page"]` CSS selector, makes the link bold, removes
+the underline, and changes it to a black text color. Current [WAI-ARIA authoring
+practices](https://www.w3.org/TR/2017/NOTE-wai-aria-practices-1.1-20171214/examples/breadcrumb/index.html)
+recommend this `aria-current="page"` attribute for screen reader context.
  */
 class Breadcrumbs extends Component {
   /**
