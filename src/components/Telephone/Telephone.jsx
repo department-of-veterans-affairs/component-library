@@ -15,7 +15,7 @@ export const CONTACTS = Object.freeze({
   DS_LOGON_TTY: '8663632883', // Defense Manpower Data Center TTY
   GI_BILL: '8884424551', // Education Call Center (1-888-GI-BILL-1)
   GO_DIRECT: '8003331795', // Go Direct/Direct Express (Treasury)
-  HELP_DESK: '8446982311', // VA Help desk
+  HELP_DESK: '8006982411', // VA Help desk
   HEALTHCARE_ELIGIBILITY_CENTER: '8554888440', // VA Healthcare Eligibility Center (Eligibility Division)
   HELP_TTY: '8008778339', // VA Help Desk TTY
   MY_HEALTHEVET: '8773270022', // My HealtheVet help desk
@@ -25,7 +25,7 @@ export const CONTACTS = Object.freeze({
   FEDERAL_RELAY_SERVICE: '8008778339', // Federal Relay Service
   SUICIDE_PREVENTION_LIFELINE: '8007994889', // Suicide Prevention Line
   DMDC_DEERS: '8663632883', // Defense Manpower Data Center (DMDC) | Defense Enrollment Eligibility Reporting System (DEERS) Support Office
-  VA_311: '8446982311', // VA Help desk (VA311)
+  VA_311: '8006982411', // VA Help desk (VA311)
   VA_BENEFITS: '8008271000', // Veterans Benefits Assistance
 });
 

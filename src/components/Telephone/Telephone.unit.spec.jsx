@@ -58,9 +58,9 @@ describe('Widget <Telephone />', () => {
   it('should render VA311 (a known number)', () => {
     const wrapper = shallow(<Telephone contact={CONTACTS.VA_311} />);
     const props = wrapper.props();
-    expect(props.href).to.equal('tel:+18446982311');
-    expect(props['aria-label']).to.equal('8 4 4. 6 9 8. 2 3 1 1.');
-    expect(wrapper.text()).to.equal('844-698-2311');
+    expect(props.href).to.equal('tel:+18006982411');
+    expect(props['aria-label']).to.equal('8 0 0. 6 9 8. 2 4 1 1.');
+    expect(wrapper.text()).to.equal('800-698-2411');
     wrapper.unmount();
   });
   it('should render 911 (a known number)', () => {
