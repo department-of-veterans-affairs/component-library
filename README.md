@@ -38,6 +38,7 @@ See [design system](https://department-of-veterans-affairs.github.io/design-syst
 - SegmentedProgressBar.js
 - SortableTable.js
 - SystemDownView.js
+- Table.js
 - Telephone.js
 - Tooltip.js
 - MegaMenu.js
