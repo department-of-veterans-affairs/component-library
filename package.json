@@ -33,6 +33,7 @@
     "moment": "^2.23.0",
     "prop-types": "^15.6.2",
     "react-focus-lock": "^2.4.0",
+    "react-scroll": "^1.7.16",
     "react-transition-group": "1"
   },
   "peerDependencies": {
