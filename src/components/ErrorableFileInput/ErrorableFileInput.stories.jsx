@@ -6,7 +6,11 @@ export default {
   component: ErrorableFileInput,
 };
 
-const Template = (args) => <ErrorableFileInput {...args} />;
+const Template = (args) => (
+  <div style={{ paddingLeft: '1em' }}>
+    <ErrorableFileInput {...args} />
+  </div>
+);
 
 const defaultArgs = {
   buttonText: 'Upload some files',

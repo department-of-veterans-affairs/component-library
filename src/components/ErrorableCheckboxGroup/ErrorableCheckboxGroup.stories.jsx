@@ -11,7 +11,11 @@ export default {
   },
 };
 
-const Template = (args) => <ErrorableCheckboxGroup {...args} />;
+const Template = (args) => (
+  <div style={{ paddingLeft: '1em' }}>
+    <ErrorableCheckboxGroup {...args} />
+  </div>
+);
 
 const defaultArgs = {
   label: 'Errorable Checkbox Group',

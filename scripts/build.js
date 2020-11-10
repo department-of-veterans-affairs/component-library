@@ -49,13 +49,13 @@ const fileNames = [].concat.apply(
   [],
   [
     glob.sync('./src/components/**/*.jsx', {
-      ignore: ['./**/*.unit.spec.jsx', './**/*.stories.(mdx|jsx)'],
+      ignore: ['./**/*.unit.spec.jsx', './**/*.stories.jsx'],
     }),
     glob.sync('./src/helpers/*.js'),
   ],
 );
 
-fileNames.forEach(fileName => {
+fileNames.forEach((fileName) => {
   // read a file into a buffer
   const fileBuffer = fs.readFileSync(fileName);
   // transform the buffer with babel using babelrc
