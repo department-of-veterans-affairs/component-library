@@ -13,7 +13,7 @@ function Table(props) {
     <table aria-labelledby={ariaLabelledBy} className="responsive" role="table">
       <thead>
         <tr role="row">
-          {fields.map((field) =>
+          {fields.map(field =>
             field.nonSortable ? (
               <th key={field.value}>{field.label}</th>
             ) : (
@@ -53,6 +53,7 @@ function Table(props) {
                 data-index={index}
                 className={classNames(borderClasses, {
                   'vads-u-text-align--left': field.alignLeft,
+                  'medium-screen:vads-u-text-align--right': field.alignRight,
                 })}
                 data-label={field.label}
                 key={`${rowIndex}-${field.label}`}
@@ -80,7 +81,10 @@ Table.propTypes = {
   data: PropTypes.arrayOf(PropTypes.object),
   /**
    * An array of objects representing columns. The `label` is what is displayed, and
-   * the `value` is what is used to match data to the correct column.
+   * the `value` is what is used to match data to the correct column. The type is
+   * the data type for the column. Available types are -
+   * - String
+   * - Number
    */
   fields: PropTypes.arrayOf(
     PropTypes.shape({
@@ -88,6 +92,7 @@ Table.propTypes = {
       value: PropTypes.string,
       nonSortable: PropTypes.boolean,
       alignLeft: PropTypes.boolean,
+      alignRight: PropTypes.boolean,
     }),
   ),
   /**

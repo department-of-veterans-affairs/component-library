@@ -7,7 +7,7 @@ export default {
   component: Table,
 };
 
-const Template = (args) => <Table {...args} />;
+const Template = args => <Table {...args} />;
 
 const defaultArgs = {
   currentSort: {
@@ -105,6 +105,21 @@ AlignLeft.args = {
       label: 'Year',
       value: 'year',
       alignLeft: true,
+    },
+  ],
+};
+
+// This story might not be useful
+export const alignRight = Template.bind({});
+alignRight.args = {
+  ...defaultArgs,
+  fields: [
+    defaultArgs.fields[0],
+    defaultArgs.fields[1],
+    {
+      label: 'Year',
+      value: 'year',
+      alignRight: true,
     },
   ],
 };
