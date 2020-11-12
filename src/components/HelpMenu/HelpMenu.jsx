@@ -35,17 +35,17 @@ class HelpMenu extends React.Component {
 
 HelpMenu.propTypes = {
   /**
-   * class to style the menu
+   * CSS class to apply to the dropdown panel
    */
   cssClass: PropTypes.string,
 
   /**
-   * function to execute on click
+   * Function to execute on click. Should toggle the `isOpen` prop by changing state
    */
   clickHandler: PropTypes.func.isRequired,
 
   /**
-   * does the menu begin in an open state
+   * The open state of the menu
    */
   isOpen: PropTypes.bool.isRequired,
 };
