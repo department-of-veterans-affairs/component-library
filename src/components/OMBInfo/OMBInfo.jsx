@@ -101,7 +101,9 @@ class OMBInfo extends React.Component {
 
 OMBInfo.propTypes = {
   /**
-   * respondent burden, length of time usually in minutes. If this omitted, this will not show in the rendered component. Be sure to get approval from the design council before leaving it out. 
+   * Respondent burden. How many minutes the form is expected to take. If this
+   * omitted, it will not show in the rendered component. Be sure to get
+   * approval from the design council before leaving it out.
    */
   resBurden: PropTypes.number,
 
@@ -111,7 +113,7 @@ OMBInfo.propTypes = {
   ombNumber: PropTypes.string.isRequired,
 
   /**
-   * form expiration date
+   * Form expiration date
    */
   expDate: PropTypes.string.isRequired,
 };
