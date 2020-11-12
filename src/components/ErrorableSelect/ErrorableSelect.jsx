@@ -82,7 +82,7 @@ class ErrorableSelect extends React.Component {
         </label>
         {errorSpan}
         <select
-          className={this.props.selectClass || this.props.additionalClass}
+          className={this.props.additionalClass}
           aria-describedby={errorSpanId}
           id={this.selectId}
           name={this.props.name}
@@ -144,18 +144,19 @@ ErrorableSelect.propTypes = {
   required: PropTypes.bool,
 
   /**
-   * is there an empty selectable thing
+   * Is there an empty selectable option
    */
   includeBlankOption: PropTypes.bool,
 
   /**
-   * Description that shows up for the blank option, when includeBlankOption is true
+   * Description that shows up for the blank option, when `includeBlankOption` is true
    */
   emptyDescription: PropTypes.string,
 
-  /** `value` - object containing:
+  /** Object containing:
+   *
    *   - `value`: Value of the select field.
-   *   - `dirty`: boolean. Whether a field has been touched by the user.
+   *   - `dirty`: Whether a field has been touched by the user.
    */
   value: PropTypes.shape({
     value: PropTypes.string,
@@ -163,7 +164,7 @@ ErrorableSelect.propTypes = {
   }).isRequired,
 
   /**
-   * a function with this prototype: (newValue)
+   * A function with this prototype: (newValue)
    */
   onValueChange: PropTypes.func.isRequired,
 
