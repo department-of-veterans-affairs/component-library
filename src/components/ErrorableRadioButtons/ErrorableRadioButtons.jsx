@@ -73,7 +73,7 @@ class ErrorableRadioButtons extends React.Component {
     }
 
     const options = _.isArray(this.props.options) ? this.props.options : [];
-    const storedValue = this.props.value.value;
+    const storedValue = this.props.value?.value;
     const optionElements = options.map((option, optionIndex) => {
       let optionLabel;
       let optionValue;
@@ -167,28 +167,28 @@ class ErrorableRadioButtons extends React.Component {
 
 ErrorableRadioButtons.propTypes = {
   /**
-   * additional fieldset classes
+   * Additional fieldset classes
    */
   additionalFieldsetClass: PropTypes.string,
   /**
-   * additional legend classes
+   * Additional legend classes
    */
   additionalLegendClass: PropTypes.string,
   /**
-   * radio button group error message
+   * Radio button group error message
    */
   errorMessage: PropTypes.string,
   /**
-   * radio button group field label
+   * Radio button group field label
    */
   label: PropTypes.oneOfType([PropTypes.string, PropTypes.element]).isRequired,
   /**
-   * name attribute
+   * Name attribute
    */
   name: PropTypes.string,
   id: PropTypes.string,
   /**
-   * keyboard tab order for radio button group
+   * Keyboard tab order for radio button group
    */
   tabIndex: PropTypes.number,
   /**
@@ -200,8 +200,16 @@ ErrorableRadioButtons.propTypes = {
    */
   onKeyDown: PropTypes.func,
   /**
-   * array of options to populate group- each item is a string or an object representing an Expanding Group
+   * Array of options to populate group. Each item is a string or an object
+   * representing an Expanding Group.
    *
+   * If the option is an object, it takes the following shape:
+   *
+   * `option.label` `<string|element>` - The text to display for the option
+   *
+   * `option.value` `<string|bool> - `The value of the option when selected
+   *
+   * `option.additional` `<string|element>` - Content to show conditionally beneath the option when selected
    */
   options: PropTypes.arrayOf(
     PropTypes.oneOfType([
@@ -216,23 +224,25 @@ ErrorableRadioButtons.propTypes = {
     ]),
   ).isRequired,
   /**
-   * value object for selected field
-   * value: string value that matches radio button value
-   * dirty: indicates if form is dirty; should be true after any user input
+   * Value object for selected field
+   *
+   * `value`: string value that matches radio button value
+   *
+   * `dirty`: indicates if form is dirty; should be true after any user input
    */
   value: PropTypes.shape({
     /**
-     * value of the select field.
+     * Value of the select field.
      */
     value: PropTypes.string,
     dirty: PropTypes.bool,
   }).isRequired,
   /**
-   * handler for the value change
+   * Handler for the value change
    */
   onValueChange: PropTypes.func.isRequired,
   /**
-   * toggles required field indicator
+   * Toggles required field indicator
    */
   required: PropTypes.bool,
 };
