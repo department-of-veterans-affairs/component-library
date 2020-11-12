@@ -34,10 +34,30 @@ class IconSearch extends React.Component {
 }
 
 IconSearch.propTypes = {
-  color: PropTypes.string /* Should be a CSS color */,
+  /**
+   * Should be a CSS color
+   */
+  color: PropTypes.string,
+
+  /**
+   * A CSS Class to apply to the underlying `<svg>` element
+   */
   cssClass: PropTypes.string,
+
+  /**
+   * `id` attribute for the underlying `<svg>` element
+   */
   id: PropTypes.string,
+
+  /**
+   * If present, will go inside a `<title>` element in the `<svg>` element
+   */
   title: PropTypes.string,
+
+  /**
+   * `role` attribute for the `<svg>` element
+   */
+  role: PropTypes.string,
 };
 
 export default IconSearch;
