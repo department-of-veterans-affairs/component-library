@@ -91,29 +91,38 @@ ErrorableNumberInput.propTypes = {
    * Error string to display in the component. When defined, indicates input has a validation error.
    */
   errorMessage: PropTypes.string,
+
+  /**
+   * An object that contains a `value` field which controls the value of the `<input>`.
+   * `dirty` just gets passed through as part of the `field` when `onValueChange` is called for a blur event
+   */
   field: PropTypes.shape({
     value: PropTypes.string,
     dirty: PropTypes.bool,
   }).isRequired,
   /**
-   * `label` - String for the input field label.
+   * String for the input field label.
    */
   label: PropTypes.string.isRequired,
   /**
-   * name` - String for name attribute.
+   * String for `name` attribute for the `<input>`.
    */
   name: PropTypes.string,
   /**
-   * minimum number value and maximum of same
+   * Minimum number value
    */
   min: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+
+  /**
+   * Maximum number value
+   */
   max: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   /**
    * String specifying the pattern for the input.
    */
   pattern: PropTypes.string,
   /**
-   * placeholder string for input field.
+   * Placeholder string for input field.
    */
   placeholder: PropTypes.string,
   /**
@@ -121,9 +130,13 @@ ErrorableNumberInput.propTypes = {
    */
   required: PropTypes.bool,
   /**
-   * handler for the value change with this prototype: (newValue)
+   * Handler for the value change with this prototype: (newField)
    */
   onValueChange: PropTypes.func.isRequired,
+
+  /**
+   * Will be applied as a class name on the `<input>`
+   */
   additionalClass: PropTypes.string,
 };
 
