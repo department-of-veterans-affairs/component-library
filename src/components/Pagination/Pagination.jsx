@@ -9,10 +9,23 @@ class Pagination extends Component {
     ariaLabelSuffix: PropTypes.string,
     className: PropTypes.string,
     enableAnalytics: PropTypes.bool,
+    /**
+     * The maximum number of pages to show at once.
+     */
     maxPageListLength: PropTypes.number.isRequired,
     onPageSelect: PropTypes.func.isRequired,
+    /**
+     * The current page number
+     */
     page: PropTypes.number.isRequired,
+    /**
+     * The total number of pages
+     */
     pages: PropTypes.number.isRequired,
+    /**
+     * Whether or not to show the last page number when the page count exceeds
+     * `maxPageListLength`
+     */
     showLastPage: PropTypes.bool,
     trackEvent: PropTypes.func,
   };
@@ -21,6 +34,7 @@ class Pagination extends Component {
     ariaLabelSuffix: '',
     enableAnalytics: true,
     maxPageListLength: 10,
+    showLastPage: false,
     trackEvent: (...args) => {
       // Escape early if Google Analytics (GA) is not enabled.
       if (!window.dataLayer) {
@@ -29,7 +43,7 @@ class Pagination extends Component {
 
       // Track event in GA.
       window.dataLayer.push(...args);
-    }
+    },
   };
 
   onPageSelect = (page, eventID) => {
@@ -43,7 +57,7 @@ class Pagination extends Component {
         'paginate-page-number': page,
       });
     }
-  }
+  };
 
   next = () => {
     let nextPage;
@@ -51,15 +65,18 @@ class Pagination extends Component {
       nextPage = (
         <a
           aria-label={`Load next page ${this.props.ariaLabelSuffix}`}
-          onClick={() => {this.onPageSelect(this.props.page + 1, 'nav-paginate-next');}}
+          onClick={() => {
+            this.onPageSelect(this.props.page + 1, 'nav-paginate-next');
+          }}
           onKeyDown={e => this.handleKeyDown(e, this.props.page + 1)}
-          tabIndex="0">
+          tabIndex="0"
+        >
           Next
         </a>
       );
     }
     return nextPage;
-  }
+  };
 
   prev = () => {
     let prevPage;
@@ -67,52 +84,57 @@ class Pagination extends Component {
       prevPage = (
         <a
           aria-label={`Load previous page ${this.props.ariaLabelSuffix}`}
-          onClick={() => {this.onPageSelect(this.props.page - 1, 'nav-paginate-previous');}}
+          onClick={() => {
+            this.onPageSelect(this.props.page - 1, 'nav-paginate-previous');
+          }}
           onKeyDown={e => this.handleKeyDown(e, this.props.page - 1)}
-          tabIndex="0">
+          tabIndex="0"
+        >
           <abbr title="Previous">Prev</abbr>
         </a>
       );
     }
     return prevPage;
-  }
+  };
 
   last = () => {
     const {
       maxPageListLength,
       page: currentPage,
       pages: totalPages,
-      showLastPage
+      showLastPage,
     } = this.props;
 
     let lastPage;
     if (showLastPage && currentPage < totalPages - maxPageListLength + 1) {
       lastPage = (
         <span>
-          <a aria-label="...">
-            ...
-          </a>
-          <a aria-label={`Load last page ${this.props.ariaLabelSuffix}`} onClick={() => {this.onPageSelect(totalPages, 'nav-paginate-number');}}>
+          <a aria-label="...">...</a>
+          <a
+            aria-label={`Load last page ${this.props.ariaLabelSuffix}`}
+            onClick={() => {
+              this.onPageSelect(totalPages, 'nav-paginate-number');
+            }}
+          >
             {totalPages}
           </a>
         </span>
       );
     }
     return lastPage;
-  }
+  };
 
   pageNumbers = () => {
     const {
       maxPageListLength,
       page: currentPage,
       pages: totalPages,
-      showLastPage
+      showLastPage,
     } = this.props;
 
     // Make space for "... (last page number)" if not in range of the last page.
     const showEllipsisAndLastPage =
-      showLastPage &&
-      currentPage < totalPages - maxPageListLength + 1;
+      showLastPage && currentPage < totalPages - maxPageListLength + 1;
 
     const limit = showEllipsisAndLastPage
       ? maxPageListLength - 2
@@ -137,28 +159,27 @@ class Pagination extends Component {
     }
 
     return range(start, end);
-  }
+  };
 
   handleKeyDown = (e, pageNumber) => {
-
     const keyCode = e.which || e.keyCode;
     if (keyCode === 13 || keyCode === 32) {
       e.preventDefault();
       this.onPageSelect(pageNumber, 'nav-paginate-number');
     }
-  }
+  };
 
   render() {
     const { ariaLabelSuffix, className, page, pages } = this.props;
 
     // Do not render if there's only 1 page.
     if (pages === 1) {
-      return <div/>;
+      return <div />;
     }
 
-    const pageList = this.pageNumbers().map((pageNumber) => {
+    const pageList = this.pageNumbers().map(pageNumber => {
       const pageClass = classNames({
-        'va-pagination-active': page === pageNumber
+        'va-pagination-active': page === pageNumber,
       });
 
       return (
@@ -168,17 +189,20 @@ class Pagination extends Component {
           aria-label={`Load page ${pageNumber} ${ariaLabelSuffix}`}
           onClick={() => this.onPageSelect(pageNumber, 'nav-paginate-number')}
           onKeyDown={e => this.handleKeyDown(e, pageNumber)}
-          tabIndex="0">
+          tabIndex="0"
+        >
           {pageNumber}
         </a>
       );
     });
 
     return (
-      <div className={classNames({
-        'va-pagination': true,
-        [className]: className,
-      })}>
+      <div
+        className={classNames({
+          'va-pagination': true,
+          [className]: className,
+        })}
+      >
         <span className="va-pagination-prev">{this.prev()}</span>
         <div className="va-pagination-inner">
           {pageList} {this.last()}
