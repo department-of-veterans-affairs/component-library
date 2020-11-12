@@ -98,6 +98,9 @@ class ErrorableTextArea extends React.Component {
 }
 
 ErrorableTextArea.propTypes = {
+  /**
+   * Whether or not the `<textarea>` is disabled
+   */
   disabled: PropTypes.bool,
 
   /**
@@ -111,7 +114,7 @@ ErrorableTextArea.propTypes = {
   label: PropTypes.string.isRequired,
 
   /**
-   * placeholder string for input field.
+   * Placeholder string for input field.
    */
   placeholder: PropTypes.string,
 
@@ -139,12 +142,12 @@ ErrorableTextArea.propTypes = {
   additionalClass: PropTypes.string,
 
   /**
-   * max number of characters the field will accept
+   * Max number of characters the field will accept
    */
   charMax: PropTypes.number,
 
   /**
-   * a function with this prototype: (newValue)
+   * A function with this prototype: (newValue)
    */
   onValueChange: PropTypes.func.isRequired,
 };
