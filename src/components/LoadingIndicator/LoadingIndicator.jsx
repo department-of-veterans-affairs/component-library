@@ -29,11 +29,11 @@ export default class LoadingIndicator extends React.Component {
 
 LoadingIndicator.propTypes = {
   /**
-   * message visible on screen when loading
+   * The message visible on screen when loading
    */
   message: PropTypes.string.isRequired,
   /**
-   * does the loading indicator capture focus
+   * Set to true if the loading indicator should capture focus
    */
   setFocus: PropTypes.bool,
 };
