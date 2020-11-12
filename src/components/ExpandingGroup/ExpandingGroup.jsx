@@ -46,19 +46,19 @@ export default function ExpandingGroup({
 
 ExpandingGroup.propTypes = {
   /**
-   * show second child
+   * Show second child if true
    */
   open: PropTypes.bool.isRequired,
   /**
-   * class added to parent element second child component
+   * Class added to parent element of second child component
    */
   additionalClass: PropTypes.string,
   /**
-   * show a + or - icon indicating second child's visibility
+   * Show a `+` or `-` icon indicating second child's visibility
    */
   showPlus: PropTypes.bool,
   /**
-   * id for ReactCSSTransitionGroup
+   * `id` attribute for ReactCSSTransitionGroup
    */
   expandedContentId: PropTypes.string,
 };
