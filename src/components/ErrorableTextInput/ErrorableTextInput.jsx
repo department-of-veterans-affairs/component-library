@@ -103,50 +103,50 @@ class ErrorableTextInput extends React.Component {
 
 ErrorableTextInput.propTypes = {
   /**
-   * display error message for input that indicates a validation error
+   * Display error message for input that indicates a validation error
    */
   errorMessage: PropTypes.string,
   /**
-   * label for input field
+   * Label for input field
    */
   label: PropTypes.any.isRequired,
   /**
-   * text displayed when input has no user provided value
+   * Text displayed when input has no user-provided value
    */
   placeholder: PropTypes.string,
   /**
-   * input name attribute
+   * `<input>` name attribute
    */
   name: PropTypes.string,
   /**
-   * input autocomplete attribute
+   * `<input>` autocomplete attribute
    */
   autocomplete: PropTypes.string,
   /**
-   * render marker indicating field is required
+   * Render marker indicating field is required
    */
   required: PropTypes.bool,
   /**
-   * value of the input field and if its dirty status
+   * Value of the input field and if its dirty status
    */
   field: PropTypes.shape({
     value: PropTypes.string,
     dirty: PropTypes.bool,
   }).isRequired,
   /**
-   * extra attribute for use by CSS selector, specifically by tests
+   * CSS class that gets applied to the `<input>` element
    */
   additionalClass: PropTypes.string,
   /**
-   * maximum permitted input length
+   * Maximum permitted input length
    */
   charMax: PropTypes.number,
   /**
-   * called when input value is changed
+   * Called when input value is changed
    */
   onValueChange: PropTypes.func.isRequired,
   /**
-   * type attribute for input field
+   * `<input>` type attribute
    */
   type: PropTypes.string,
 };
