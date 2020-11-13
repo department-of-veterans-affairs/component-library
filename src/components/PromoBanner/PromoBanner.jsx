@@ -62,11 +62,34 @@ function PromoBanner({ type, onClose, render, href, target, text }) {
 }
 
 PromoBanner.propTypes = {
+  /**
+   * Controls which icon gets used
+   */
   type: PropTypes.oneOf(Object.values(PROMO_BANNER_TYPES)).isRequired,
+
+  /**
+   * Callback function meant to change parent state so that `<PromoBanner>` gets dismissed
+   */
   onClose: PropTypes.func.isRequired,
+
+  /**
+   * Function for rendering custom markup instead of the `<a>` with `text` in it
+   */
   render: PropTypes.func,
+
+  /**
+   * `href` attribute for the `<a>` tag. Only gets used if `render` is _not_ used
+   */
   href: PropTypes.string,
+
+  /**
+   * `target` attribute for the `<a>` tag. Only gets used if `render` is _not_ used
+   */
   target: PropTypes.string,
+
+  /**
+   * Content for the `<a>` tag. Only gets used if `render` is _not_ used
+   */
   text: PropTypes.string,
 };
 
