@@ -86,9 +86,9 @@ SearchMenu.propTypes = {
    */
   cssClass: PropTypes.string,
   /**
-   * If the search menu is open or not
+   * Whether the search menu is open
    */
-  isOpen: PropTypes.bool.isRequired,
+  isOpen: PropTypes.bool,
   /**
    * Handler for when the menu is clicked
    */
