@@ -9,35 +9,58 @@ import AlertBox from '../AlertBox/AlertBox';
 export const MAINTENANCE_BANNER = 'MAINTENANCE_BANNER';
 
 // @WARNING: This is currently only used once in vets-website.
+/**
+ * Display a maintenance banner for a given time window.
+ */
 export class MaintenanceBanner extends Component {
   static propTypes = {
-    // The content of the banner for downtime.
+    /**
+     * The content of the banner for downtime.
+     */
     content: PropTypes.string.isRequired,
-    // A 'moment' object used when downtime expires.
+    /**
+     * A 'moment' object used when downtime expires. Use `moment.utc()` to get the correct display time.
+     */
     expiresAt: PropTypes.object.isRequired,
-    // A unique ID that will be used for conditionally rendering the banner based on if the user has dismissed it already.
+    /**
+     * A unique ID that will be used for conditionally rendering the banner based on if the user has dismissed it already.
+     */
     id: PropTypes.string.isRequired,
-    // Usually this is just window.localStorage
+    /**
+     * Usually this is just window.localStorage
+     */
     localStorage: PropTypes.shape({
       getItem: PropTypes.func.isRequired,
       setItem: PropTypes.func.isRequired,
     }),
-    // A 'moment' object used when downtime starts.
+    /**
+     * A 'moment' object used when downtime starts. Use `moment.utc()` to get the correct display time.
+     */
     startsAt: PropTypes.object.isRequired,
-    // The title of the banner for downtime.
+    /**
+     * The title of the banner for downtime.
+     */
     title: PropTypes.string.isRequired,
-    // The content of the banner for pre-downtime.
+    /**
+     * The content of the banner for pre-downtime.
+     */
     warnContent: PropTypes.string,
-    // A 'moment' object used when pre-downtime starts.
+    /**
+     * A 'moment' object used when pre-downtime starts. Use `moment.utc()` to get the correct display time.
+     */
     warnStartsAt: PropTypes.object,
-    // The title of the banner for pre-downtime.
+    /**
+     * The title of the banner for pre-downtime.
+     */
     warnTitle: PropTypes.string,
   };
 
   constructor(props) {
     super(props);
     this.state = {
-      dismissed: props.localStorage && props.localStorage.getItem(MAINTENANCE_BANNER) === this.props.id,
+      dismissed:
+        props.localStorage &&
+        props.localStorage.getItem(MAINTENANCE_BANNER) === this.props.id,
     };
   }
 
