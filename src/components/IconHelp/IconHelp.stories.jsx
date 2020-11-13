@@ -3,7 +3,7 @@ import React from 'react';
 import IconHelp from './IconHelp';
 
 export default {
-  title: 'Library/IconHelp',
+  title: 'Library/Icons/IconHelp',
   component: IconHelp,
   argTypes: {
     color: { control: 'color' },

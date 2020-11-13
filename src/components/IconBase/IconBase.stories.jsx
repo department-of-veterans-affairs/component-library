@@ -3,7 +3,7 @@ import React from 'react';
 import IconBase from './IconBase';
 
 export default {
-  title: 'Library/IconBase',
+  title: 'Library/Icons/IconBase',
   component: IconBase,
 };
 

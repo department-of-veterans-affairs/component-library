@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import PromoBanner, { PROMO_BANNER_TYPES } from './PromoBanner';
 
 export default {
-  title: 'Library/PromoBanner',
+  title: 'Library/Banners/PromoBanner',
   component: PromoBanner,
 };
 
@@ -14,7 +14,7 @@ const Template = args => {
     <>
       <PromoBanner {...args} onClose={onClose} />
       <p>See the open banner on the bottom of the page.</p>
-    </>  
+    </>
   ) : (
     <button onClick={() => setShowBanner(true)}>Show Banner</button>
   );

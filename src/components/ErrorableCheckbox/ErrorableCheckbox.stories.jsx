@@ -2,11 +2,11 @@ import React from 'react';
 import ErrorableCheckbox from './ErrorableCheckbox';
 
 export default {
-  title: 'Library/ErrorableCheckbox',
+  title: 'Library/Form controls/ErrorableCheckbox',
   component: ErrorableCheckbox,
 };
 
-const Template = (args) => (
+const Template = args => (
   <div style={{ paddingLeft: '1em' }}>
     <ErrorableCheckbox {...args} />
   </div>

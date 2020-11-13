@@ -2,7 +2,7 @@ import React from 'react';
 import EmergencyBanner from './EmergencyBanner';
 
 export default {
-  title: 'Library/EmergencyBanner',
+  title: 'Library/Banners/EmergencyBanner',
   component: EmergencyBanner,
   argTypes: {
     type: {
@@ -14,7 +14,7 @@ export default {
   },
 };
 
-const Template = (args) => <EmergencyBanner {...args} />;
+const Template = args => <EmergencyBanner {...args} />;
 
 const defaultArgs = {
   visible: true,

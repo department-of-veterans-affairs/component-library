@@ -3,13 +3,13 @@ import React, { useState } from 'react';
 import ErrorableSelect from './ErrorableSelect';
 
 export default {
-  title: 'Library/ErrorableSelect',
+  title: 'Library/Form controls/ErrorableSelect',
   component: ErrorableSelect,
 };
 
-const Template = (args) => {
+const Template = args => {
   const [value, setValue] = useState(args.value);
-  const onValueChange = (newValue) => {
+  const onValueChange = newValue => {
     console.log('value changed:', newValue);
     setValue(newValue);
   };

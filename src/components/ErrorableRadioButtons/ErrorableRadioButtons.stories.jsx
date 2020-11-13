@@ -2,13 +2,13 @@ import React, { useState } from 'react';
 import ErrorableRadioButtons from './ErrorableRadioButtons';
 
 export default {
-  title: 'Library/ErrorableRadioButtons',
+  title: 'Library/Form controls/ErrorableRadioButtons',
   component: ErrorableRadioButtons,
 };
 
-const Template = (args) => {
+const Template = args => {
   const [value, setValue] = useState(args.value);
-  const onChange = (newVal) => setValue(newVal);
+  const onChange = newVal => setValue(newVal);
   const errorMessage =
     value?.value === 'Invalid option' ? 'Invalid option selected' : '';
 

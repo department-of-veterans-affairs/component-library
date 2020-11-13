@@ -2,11 +2,11 @@ import React from 'react';
 import ErrorableFileInput from './ErrorableFileInput';
 
 export default {
-  title: 'Library/ErrorableFileInput',
+  title: 'Library/Form controls/ErrorableFileInput',
   component: ErrorableFileInput,
 };
 
-const Template = (args) => (
+const Template = args => (
   <div style={{ paddingLeft: '1em' }}>
     <ErrorableFileInput {...args} />
   </div>

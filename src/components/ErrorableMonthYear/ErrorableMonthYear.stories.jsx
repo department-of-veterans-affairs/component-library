@@ -2,13 +2,13 @@ import React, { useState } from 'react';
 import ErrorableMonthYear from './ErrorableMonthYear';
 
 export default {
-  title: 'Library/ErrorableMonthYear',
+  title: 'Library/Form controls/ErrorableMonthYear',
   component: ErrorableMonthYear,
 };
 
-const Template = (args) => {
+const Template = args => {
   const [date, setDate] = useState(args.date);
-  const onChange = (newDate) => {
+  const onChange = newDate => {
     setDate(newDate);
   };
   return (

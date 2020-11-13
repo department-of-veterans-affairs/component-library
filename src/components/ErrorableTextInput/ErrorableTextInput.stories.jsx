@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import ErrorableTextInput from './ErrorableTextInput';
 
 export default {
-  title: 'Library/ErrorableTextInput',
+  title: 'Library/Form controls/ErrorableTextInput',
   component: ErrorableTextInput,
 };
 

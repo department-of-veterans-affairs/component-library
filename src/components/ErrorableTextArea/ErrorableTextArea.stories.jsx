@@ -3,13 +3,13 @@ import React, { useState } from 'react';
 import ErrorableTextArea from './ErrorableTextArea';
 
 export default {
-  title: 'Library/ErrorableTextArea',
+  title: 'Library/Form controls/ErrorableTextArea',
   component: ErrorableTextArea,
 };
 
-const Template = (args) => {
+const Template = args => {
   const [field, setField] = useState(args.field);
-  const onValueChange = (newField) => {
+  const onValueChange = newField => {
     console.log('value changed:', newField);
     setField(newField);
   };

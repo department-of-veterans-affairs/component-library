@@ -2,7 +2,7 @@ import React from 'react';
 import ErrorableCheckboxGroup from './ErrorableCheckboxGroup';
 
 export default {
-  title: 'Library/ErrorableCheckboxGroup',
+  title: 'Library/Form controls/ErrorableCheckboxGroup',
   component: ErrorableCheckboxGroup,
   argTypes: {
     options: {
@@ -11,7 +11,7 @@ export default {
   },
 };
 
-const Template = (args) => (
+const Template = args => (
   <div style={{ paddingLeft: '1em' }}>
     <ErrorableCheckboxGroup {...args} />
   </div>
