@@ -18,7 +18,7 @@ export default function ProgressBar({ percent }) {
 
 ProgressBar.propTypes = {
   /**
-   * Percent of progress made
+   * Percent of progress made. 0 to 100.
    */
   percent: PropTypes.number.isRequired,
 };
