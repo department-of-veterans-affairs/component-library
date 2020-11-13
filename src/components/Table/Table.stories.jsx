@@ -10,10 +10,6 @@ export default {
 const Template = args => <Table {...args} />;
 
 const defaultArgs = {
-  currentSort: {
-    value: 'column1',
-    order: 'ASC',
-  },
   data: [
     {
       title: 'Declaration of Independence',
