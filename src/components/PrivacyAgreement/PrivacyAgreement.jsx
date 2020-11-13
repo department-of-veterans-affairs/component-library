@@ -37,4 +37,9 @@ PrivacyAgreement.propTypes = {
    * If the checkbox is checked or not
    */
   checked: PropTypes.bool.isRequired,
+  /**
+   * Whether to show the "You must accept the privacy policy before continuing"
+   * error message
+   */
+  showError: PropTypes.bool,
 };
