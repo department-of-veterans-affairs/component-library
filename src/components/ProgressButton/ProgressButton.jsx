@@ -43,37 +43,37 @@ class ProgressButton extends React.Component {
 
 ProgressButton.propTypes = {
   /**
-   * function that changes the path to the next panel or submit.
+   * Function called when the button is clicked.
    */
   onButtonClick: PropTypes.func,
 
   /**
-   * what is the button's label
+   * The text on the button
    */
   buttonText: PropTypes.string.isRequired,
 
   /**
-   * what CSS class(es) does the button have
+   * CSS class(es) to apply to the button
    */
-  buttonClass: PropTypes.string.isRequired,
+  buttonClass: PropTypes.string,
 
   /**
-   * Stores the value for the icon that will appear before the button text.
+   * A character to appear before the button text. This is wrapped in a `span.button-icon`.
    */
   beforeText: PropTypes.string,
 
   /**
-   * Stores the value for the icon that will appear after the button text.
+   * A character to appear after the button text. This is wrapped in a `span.button-icon`.
    */
   afterText: PropTypes.string,
 
   /**
-   * is the button disabled or not
+   * Whether the button is disabled
    */
   disabled: PropTypes.bool,
 
   /**
-   * is this a submit button or not
+   * Whether the button is a submit button
    */
   submitButton: PropTypes.bool,
 };
