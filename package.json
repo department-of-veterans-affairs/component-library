@@ -42,10 +42,10 @@
   "devDependencies": {
     "@babel/core": "^7.12.3",
     "@department-of-veterans-affairs/formation": "^6.9.0",
-    "@storybook/addon-actions": "^6.0.26",
-    "@storybook/addon-essentials": "^6.0.26",
-    "@storybook/addon-links": "^6.0.26",
-    "@storybook/react": "^6.0.26",
+    "@storybook/addon-actions": "^6.1.1",
+    "@storybook/addon-essentials": "^6.1.1",
+    "@storybook/addon-links": "^6.1.1",
+    "@storybook/react": "^6.1.1",
     "@whitespace/storybook-addon-html": "^2.0.1",
     "babel-loader": "^8.1.0",
     "react-is": "^17.0.1"
