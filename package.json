@@ -43,6 +43,8 @@
   "devDependencies": {
     "@babel/core": "^7.12.3",
     "@department-of-veterans-affairs/formation": "^6.9.0",
+
+    "@storybook/addon-a11y": "^6.1.1",
     "@storybook/addon-actions": "^6.1.1",
     "@storybook/addon-essentials": "^6.1.1",
     "@storybook/addon-links": "^6.1.1",
