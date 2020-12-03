@@ -51,6 +51,7 @@
     "@storybook/react": "^6.1.1",
     "@whitespace/storybook-addon-html": "^2.0.1",
     "babel-loader": "^8.1.0",
+    "react-html-parser": "^2.0.2",
     "react-is": "^17.0.1"
   }
 }

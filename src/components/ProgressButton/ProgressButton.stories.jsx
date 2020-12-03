@@ -3,7 +3,7 @@ import React from 'react';
 import ProgressButton from './ProgressButton';
 
 export default {
-  title: 'Library/ProgressButton',
+  title: 'Library/Buttons/ProgressButton',
   component: ProgressButton,
 };
 

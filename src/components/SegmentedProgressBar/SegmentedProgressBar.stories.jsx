@@ -3,7 +3,7 @@ import React from 'react';
 import SegmentedProgressBar from './SegmentedProgressBar';
 
 export default {
-  title: 'Library/SegmentedProgressBar',
+  title: 'Library/Progress bars/SegmentedProgressBar',
   component: SegmentedProgressBar,
   decorators: [
     Story => (
