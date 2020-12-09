@@ -1,0 +1,130 @@
+version: 2.1
+orbs:
+  aws-cli: circleci/aws-cli@1.3.1
+
+commands:
+  check-for-changes:
+    description: "Searches for any files matching the pattern in a diff result"
+    parameters:
+      in:
+        description: "Returns true if this pattern matches any folder/file in the diff"
+        type: string
+      since:
+        description: "The git commit that we are checking against"
+        type: string
+    steps:
+      - run:
+          command: |
+            git diff --name-only HEAD << parameters.since >> | grep << parameters.in >>
+
+  write-build-info:
+    description: "Write relevant info to the current build/deploy to a file for referencing"
+    parameters:
+      data:
+        description: "The contents of the build file"
+        type: string
+        default: |
+          BUILD_COMMIT=<< pipeline.git.revision >>
+      dest:
+        description: "The destination of the build file"
+        type: string
+    steps:
+      - run:
+          name: "Writing build info"
+          command: |
+            echo "<< parameters.data >>" > << parameters.dest >>/BUILD.txt
+
+  copy-to-s3:
+    description: "Copies a directory to a bucket (and folder) in S3"
+    parameters:
+      source:
+        description: "The local directory to copy"
+        type: string
+      bucket:
+        description: "The S3 bucket (and optional folder) to copy everything to"
+        type: string
+    steps:
+      - run: aws s3 cp << parameters.source >> s3://<< parameters.bucket >> --recursive --acl public-read
+
+jobs:
+  # This job should be a required job for the publish-storybook job to run
+  # Having this job will prevent "unnecessary" storybook publishes where nothing has changed in formation-react
+  # If this job succeeds, that means that:
+  #   - We didn't find a BUILD.txt file, OR
+  #   - We didn't find a last published commit in the BUILD.txt file, OR
+  #   - We did find a BUILD.txt file with a last published commit, and there have been changes to formation-react since that commit
+  needs-to-publish-storybook:
+    docker:
+      - image: circleci/node:14.5.0
+    parameters:
+      doc_site:
+        type: string
+        description: "The domain for the doc site containing the build file"
+    steps:
+      - checkout
+      - run:
+          name: "Get last published commit"
+          command: |
+            echo "export LAST_PUBLISHED_COMMIT=$(curl -s -f https://<< parameters.doc_site >>/storybook/BUILD.txt | sed -r 's/^.*=(.*)$/\1/')" >> $BASH_ENV
+            source $BASH_ENV
+        # If we didn't find a last published commit, then we need to publish
+      - run: |
+          if [ "$LAST_PUBLISHED_COMMIT" = "" ]; then
+            circleci-agent step halt
+          fi
+      - check-for-changes:
+          in: "formation-react"
+          since: $LAST_PUBLISHED_COMMIT
+
+  publish-storybook:
+    executor: aws-cli/default
+    environment:
+      AWS_DEFAULT_REGION: us-gov-west-1
+    parameters:
+      bucket:
+        type: string
+        description: "The S3 bucket to copy the storybook build into"
+    steps:
+      - checkout
+      - aws-cli/setup
+      - run: yarn install
+      - run:
+          working_directory: ./packages/formation-react
+          command: yarn install
+      - run:
+          name: "Build Storybook"
+          working_directory: ./packages/formation-react
+          command: yarn build-storybook
+      - write-build-info:
+          dest: "packages/formation-react/storybook-static"
+      - copy-to-s3:
+          source: "./packages/formation-react/storybook-static"
+          bucket: "<< parameters.bucket >>/storybook"
+
+workflows:
+  publish-dev:
+    jobs:
+      - needs-to-publish-storybook:
+          filters:
+            branches:
+              only: master
+          doc_site: dev-design.va.gov
+      - publish-storybook:
+          requires:
+            - needs-to-publish-storybook
+          bucket: dev-design.va.gov
+          context:
+            - Platform
+  publish-staging:
+    jobs:
+      - needs-to-publish-storybook:
+          filters:
+            branches:
+              only: master
+          doc_site: staging-design.va.gov
+      - publish-storybook:
+          requires:
+            - needs-to-publish-storybook
+          bucket: staging-design.va.gov
+          context:
+            - Platform
