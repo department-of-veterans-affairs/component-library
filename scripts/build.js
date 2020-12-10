@@ -60,7 +60,7 @@ fileNames.forEach(fileName => {
   const fileBuffer = fs.readFileSync(fileName);
   // transform the buffer with babel using babelrc
   const babelTransformedBuffer = babel.transform(fileBuffer, {
-    configFile: '../../babel.config.js',
+    configFile: './config/babel.config.js',
   }).code;
   // flatten paths given to all requires
   const requireFlattenedBuffer = flattenRequires(
