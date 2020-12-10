@@ -33,7 +33,8 @@
     "prop-types": "^15.6.2",
     "react-focus-lock": "^2.4.0",
     "react-scroll": "^1.7.16",
-    "react-transition-group": "1"
+    "react-transition-group": "1",
+    "recast": "^0.14.4"
   },
   "peerDependencies": {
     "react": "^15.5.4||^16.7.0"
