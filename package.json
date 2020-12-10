@@ -18,7 +18,6 @@
   "scripts": {
     "build": "node ./scripts/build.js",
     "prepublishOnly": "node ../../scripts/prepublish.js",
-    "release": "PACKAGE=formation-react VERSION=$npm_package_version node ../../scripts/release.js",
     "test-watch": "karma start testing/karma.conf.js --auto-watch",
     "test": "karma start testing/karma.conf.js --single-run",
     "test-debug": "karma start testing/karma.conf.js --browsers Chrome",
