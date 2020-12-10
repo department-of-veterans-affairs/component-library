@@ -28,7 +28,6 @@ See [design system](https://department-of-veterans-affairs.github.io/design-syst
 - IconSearch.js
 - IconUser.js
 - LoadingIndicator.js
-- MegaMenu.js
 - Modal.js
 - OMBInfo.js
 - Pagination.js

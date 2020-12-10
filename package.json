@@ -1,6 +1,6 @@
 {
   "name": "@department-of-veterans-affairs/formation-react",
-  "version": "5.10.0",
+  "version": "6.0.0",
   "description": "React implementation of patterns in Formation",
   "keywords": [
     "react",
@@ -43,7 +43,6 @@
   "devDependencies": {
     "@babel/core": "^7.12.3",
     "@department-of-veterans-affairs/formation": "^6.9.0",
-
     "@storybook/addon-a11y": "^6.1.1",
     "@storybook/addon-actions": "^6.1.1",
     "@storybook/addon-essentials": "^6.1.1",
