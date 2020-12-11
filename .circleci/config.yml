@@ -3,20 +3,6 @@ orbs:
   aws-cli: circleci/aws-cli@1.3.1
 
 commands:
-  check-for-changes:
-    description: "Searches for any files matching the pattern in a diff result"
-    parameters:
-      in:
-        description: "Returns true if this pattern matches any folder/file in the diff"
-        type: string
-      since:
-        description: "The git commit that we are checking against"
-        type: string
-    steps:
-      - run:
-          command: |
-            git diff --name-only HEAD << parameters.since >> | grep << parameters.in >>
-
   write-build-info:
     description: "Write relevant info to the current build/deploy to a file for referencing"
     parameters:
@@ -72,9 +58,6 @@ jobs:
           if [ "$LAST_PUBLISHED_COMMIT" = "" ]; then
             circleci-agent step halt
           fi
-      - check-for-changes:
-          in: "formation-react"
-          since: $LAST_PUBLISHED_COMMIT
 
   publish-storybook:
     executor: aws-cli/default
