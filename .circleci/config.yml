@@ -88,10 +88,7 @@ jobs:
       - checkout
       - aws-cli/setup
       - run: yarn install
-      - run:
-          name: "Build Storybook"
-          working_directory: ./packages/formation-react
-          command: yarn build-storybook
+      - run: yarn build-storybook
       - write-build-info:
           dest: "packages/formation-react/storybook-static"
       - copy-to-s3:
