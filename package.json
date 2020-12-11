@@ -31,6 +31,7 @@
     "lodash": "^4.17.15",
     "moment": "^2.23.0",
     "prop-types": "^15.6.2",
+    "react": "^16.8.0",
     "react-focus-lock": "^2.4.0",
     "react-scroll": "^1.7.16",
     "react-transition-group": "1",
@@ -51,7 +52,6 @@
     "babel-loader": "^8.1.0",
     "babel-plugin-lodash": "^3.3.4",
     "babel-plugin-transform-react-remove-prop-types": "^0.4.24",
-    "react-html-parser": "^2.0.2",
-    "react-is": "^17.0.1"
+    "react-html-parser": "^2.0.2"
   }
 }
