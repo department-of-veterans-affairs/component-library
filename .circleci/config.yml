@@ -3,23 +3,6 @@ orbs:
   aws-cli: circleci/aws-cli@1.3.1
 
 commands:
-  write-build-info:
-    description: "Write relevant info to the current build/deploy to a file for referencing"
-    parameters:
-      data:
-        description: "The contents of the build file"
-        type: string
-        default: |
-          BUILD_COMMIT=<< pipeline.git.revision >>
-      dest:
-        description: "The destination of the build file"
-        type: string
-    steps:
-      - run:
-          name: "Writing build info"
-          command: |
-            echo "<< parameters.data >>" > << parameters.dest >>/BUILD.txt
-
   copy-to-s3:
     description: "Copies a directory to a bucket (and folder) in S3"
     parameters:
@@ -46,8 +29,6 @@ jobs:
       - aws-cli/setup
       - run: yarn install
       - run: yarn build-storybook
-      - write-build-info:
-          dest: "./storybook-static"
       - copy-to-s3:
           source: "./storybook-static"
           bucket: "<< parameters.bucket >>/storybook"
