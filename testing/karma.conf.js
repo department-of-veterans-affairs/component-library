@@ -5,15 +5,14 @@ const isDocker = require('is-docker')();
 
 module.exports = function karmaConfig(config) {
   config.set({
-
     // base path that will be used to resolve all patterns (eg. files, exclude)
     // basePath: '../..',
-
 
     // frameworks to use
     // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
     frameworks: ['mocha'],
-    webpack: { // kind of a copy of your webpack config
+    webpack: {
+      // kind of a copy of your webpack config
       devtool: 'inline-source-map', // just do inline source maps instead of the default
       mode: 'development',
       module: {
@@ -24,39 +23,37 @@ module.exports = function karmaConfig(config) {
             use: {
               loader: 'babel-loader',
               options: {
-                configFile: '../../babel.config.js'
-              }
-            }
-          }
-        ]
+                configFile: './config/babel.config.js',
+              },
+            },
+          },
+        ],
       },
       resolve: {
-        extensions: ['.js', '.jsx']
-      }
+        extensions: ['.js', '.jsx'],
+      },
+      // target: 'node',
+      node: {global: true, fs: 'empty'},
     },
 
     // list of files / patterns to load in the browser
-    files: [
-      'tests.js',
-    ],
+    files: ['tests.js'],
 
     client: {
       captureConsole: true,
       mocha: {
-        bail: true
+        bail: true,
       },
     },
 
     browserConsoleLogOptions: {
       level: 'log',
       format: '%b %T: %m',
-      terminal: true
+      terminal: true,
     },
 
     // list of files to exclude
-    exclude: [
-    ],
-
+    exclude: [],
 
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
@@ -64,29 +61,23 @@ module.exports = function karmaConfig(config) {
       'tests.js': ['webpack'],
     },
 
-
     // test results reporter to use
     // possible values: 'dots', 'progress'
     // available reporters: https://npmjs.org/browse/keyword/karma-reporter
     reporters: ['dots'],
 
-
     // web server port
     port: 9876,
 
-
     // enable / disable colors in the output (reporters and logs)
     colors: true,
-
 
     // level of logging
     // possible values: config.LOG_DISABLE || config.LOG_ERROR || config.LOG_WARN || config.LOG_INFO || config.LOG_DEBUG
     logLevel: config.LOG_INFO,
 
-
     // enable / disable watching file and executing tests whenever any file changes
     autoWatch: true,
-
 
     // start these browsers
     // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
@@ -95,11 +86,10 @@ module.exports = function karmaConfig(config) {
         base: 'ChromeHeadless',
         // We must disable the Chrome sandbox when running Chrome inside Docker (Chrome's sandbox needs
         // more permissions than Docker allows by default)
-        flags: isDocker ? ['--no-sandbox'] : []
-      }
+        flags: isDocker ? ['--no-sandbox'] : [],
+      },
     },
     browsers: ['ChromeCustom'],
-
 
     // Continuous Integration mode
     // if true, Karma captures browsers, runs the tests and exits
@@ -107,6 +97,6 @@ module.exports = function karmaConfig(config) {
 
     // Concurrency level
     // how many browser should be started simultaneous
-    concurrency: Infinity
+    concurrency: Infinity,
   });
 };
