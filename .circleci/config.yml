@@ -33,32 +33,6 @@ commands:
       - run: aws s3 cp << parameters.source >> s3://<< parameters.bucket >> --recursive --acl public-read
 
 jobs:
-  # This job should be a required job for the publish-storybook job to run
-  # Having this job will prevent "unnecessary" storybook publishes where nothing has changed in formation-react
-  # If this job succeeds, that means that:
-  #   - We didn't find a BUILD.txt file, OR
-  #   - We didn't find a last published commit in the BUILD.txt file, OR
-  #   - We did find a BUILD.txt file with a last published commit, and there have been changes to formation-react since that commit
-  needs-to-publish-storybook:
-    docker:
-      - image: circleci/node:14.5.0
-    parameters:
-      doc_site:
-        type: string
-        description: "The domain for the doc site containing the build file"
-    steps:
-      - checkout
-      - run:
-          name: "Get last published commit"
-          command: |
-            echo "export LAST_PUBLISHED_COMMIT=$(curl -s -f https://<< parameters.doc_site >>/storybook/BUILD.txt | sed -r 's/^.*=(.*)$/\1/')" >> $BASH_ENV
-            source $BASH_ENV
-        # If we didn't find a last published commit, then we need to publish
-      - run: |
-          if [ "$LAST_PUBLISHED_COMMIT" = "" ]; then
-            circleci-agent step halt
-          fi
-
   publish-storybook:
     executor: aws-cli/default
     environment:
@@ -81,27 +55,19 @@ jobs:
 workflows:
   publish-dev:
     jobs:
-      - needs-to-publish-storybook:
+      - publish-storybook:
           filters:
             branches:
               only: master
-          doc_site: dev-design.va.gov
-      - publish-storybook:
-          requires:
-            - needs-to-publish-storybook
           bucket: dev-design.va.gov
           context:
             - Platform
   publish-staging:
     jobs:
-      - needs-to-publish-storybook:
+      - publish-storybook:
           filters:
             branches:
               only: master
-          doc_site: staging-design.va.gov
-      - publish-storybook:
-          requires:
-            - needs-to-publish-storybook
           bucket: staging-design.va.gov
           context:
             - Platform
