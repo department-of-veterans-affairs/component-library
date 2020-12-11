@@ -6,7 +6,7 @@ const babel = require('@babel/core');
 const recast = require('recast');
 const path = require('path');
 
-console.log('Starting formation-react build');
+console.log('Starting component-library build');
 console.log('Cleaning old build');
 rimraf.sync('./*.js');
 
@@ -49,7 +49,7 @@ const fileNames = [].concat.apply(
   [],
   [
     glob.sync('./src/components/**/*.@(js|jsx)', {
-      ignore: ['./**/*.unit.spec.jsx', './**/*.stories.jsx'],
+      ignore: ['./**/*.unit.spec.@(js|jsx)', './**/*.stories.@(js|jsx)'],
     }),
     glob.sync('./src/helpers/*.js'),
   ],
@@ -60,7 +60,7 @@ fileNames.forEach(fileName => {
   const fileBuffer = fs.readFileSync(fileName);
   // transform the buffer with babel using babelrc
   const babelTransformedBuffer = babel.transform(fileBuffer, {
-    configFile: '../../babel.config.js',
+    configFile: './config/babel.config.js',
   }).code;
   // flatten paths given to all requires
   const requireFlattenedBuffer = flattenRequires(

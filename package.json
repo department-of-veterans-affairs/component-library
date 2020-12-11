@@ -1,5 +1,5 @@
 {
-  "name": "@department-of-veterans-affairs/formation-react",
+  "name": "@department-of-veterans-affairs/component-library",
   "version": "6.0.1",
   "description": "React implementation of patterns in Formation",
   "keywords": [
@@ -17,8 +17,7 @@
   },
   "scripts": {
     "build": "node ./scripts/build.js",
-    "prepublishOnly": "node ../../scripts/prepublish.js",
-    "release": "PACKAGE=formation-react VERSION=$npm_package_version node ../../scripts/release.js",
+    "prepublishOnly": "node ./scripts/prepublish.js",
     "test-watch": "karma start testing/karma.conf.js --auto-watch",
     "test": "karma start testing/karma.conf.js --single-run",
     "test-debug": "karma start testing/karma.conf.js --browsers Chrome",
@@ -33,15 +32,18 @@
     "lodash": "^4.17.15",
     "moment": "^2.23.0",
     "prop-types": "^15.6.2",
+    "react": "^16.7.0",
     "react-focus-lock": "^2.4.0",
     "react-scroll": "^1.7.16",
-    "react-transition-group": "1"
-  },
-  "peerDependencies": {
-    "react": "^15.5.4||^16.7.0"
+    "react-transition-group": "1",
+    "recast": "^0.14.4"
   },
   "devDependencies": {
     "@babel/core": "^7.12.3",
+    "@babel/plugin-proposal-function-sent": "^7.12.1",
+    "@babel/plugin-proposal-throw-expressions": "^7.12.1",
+    "@babel/plugin-syntax-import-meta": "^7.10.4",
+    "@babel/preset-env": "^7.12.10",
     "@department-of-veterans-affairs/formation": "^6.9.0",
     "@storybook/addon-a11y": "^6.1.1",
     "@storybook/addon-actions": "^6.1.1",
@@ -50,7 +52,20 @@
     "@storybook/react": "^6.1.1",
     "@whitespace/storybook-addon-html": "^2.0.1",
     "babel-loader": "^8.1.0",
+    "babel-plugin-lodash": "^3.3.4",
+    "babel-plugin-transform-react-remove-prop-types": "^0.4.24",
+    "chai": "^4.1.2",
+    "chai-as-promised": "^7.1.1",
+    "enzyme": "^3.1.0",
+    "enzyme-adapter-react-16": "^1.7.1",
+    "karma": "^5.2.3",
+    "karma-chrome-launcher": "^3.1.0",
+    "karma-mocha": "^2.0.1",
+    "karma-webpack": "^4.0.2",
+    "mocha": "^4.0.1",
+    "react-dom": "^16.7.0",
     "react-html-parser": "^2.0.2",
-    "react-is": "^17.0.1"
+    "react-router": "3",
+    "sinon": "^9.2.2"
   }
 }
