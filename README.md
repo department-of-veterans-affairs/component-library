@@ -32,22 +32,26 @@ Once your changes are approved, squash merge them to master. Also, if your chang
 
 ### 3. Build and publish
 
-* Checkout the master branch
-* Run `yarn build`
-* For each module you need to publish, switch to its folder in `packages/` and run `npm publish`.
+- Checkout the master branch
+- Run `yarn build`
+- For each module you need to publish, switch to its folder in `packages/` and run `npm publish`.
 
 ### 4. Create a release
+
 You will need a github [personal access token](https://help.github.com/en/articles/creating-a-personal-access-token-for-the-command-line).
 This should be set as **GITHUB_API_KEY** in your environment variable.
+
 - Navigate to the package folder
 - Run the release script
-    ```
-    $ yarn release
-    ```
+  ```
+  $ yarn release
+  ```
 - Once the script has succeeded, go to the link provided in the console
 - Edit the release and add any relevant information.
 
+### 5. Update consuming apps
 
+The last step is to update the `package.json` files of consuming apps to use the latest version of `@department-of-veterans-affairs/formation` (or `formation-react`). For example, if you are working with the `vets-website` project, open the `vets-website`'s `package.json` to update the version number of the `@department-of-veterans-affairs/formation` entry listed in the `dependencies` section. The version number should match what you just published to NPM.
 
 ## Included components:
 
