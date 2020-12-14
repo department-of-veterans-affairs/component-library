@@ -34,7 +34,7 @@ export default class DropDownPanel extends React.Component {
     return (
       <div
         className="va-dropdown"
-        ref={div => {
+        ref={(div) => {
           this.dropdownDiv = div;
         }}
       >
@@ -51,7 +51,7 @@ export default class DropDownPanel extends React.Component {
           </span>
         </button>
         <div
-          className="va-dropdown-panel"
+          className={`va-dropdown-panel ${this.props.dropdownPanelClassNames}`}
           id={this.props.id}
           hidden={!this.props.isOpen}
         >
@@ -80,6 +80,12 @@ DropDownPanel.propTypes = {
    */
   cssClass: PropTypes.string,
 
+
+  /**
+   * The string of classnames for the dropdown panel container.
+   */
+  dropdownPanelClassNames: PropTypes.string,
+
   /**
    * An SVG icon to render before the button text.
    */
@@ -102,5 +108,6 @@ DropDownPanel.propTypes = {
 };
 
 DropDownPanel.defaultProps = {
+  dropdownPanelClassNames: "",
   disabled: false,
 };
