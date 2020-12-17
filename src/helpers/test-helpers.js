@@ -15,11 +15,17 @@ export function mountToDiv(component, id) {
 
 export function axeCheck(component, ignoredRules = []) {
   let div = document.getElementById('axeContainer');
+
   if (!div) {
     div = document.createElement('div');
     div.setAttribute('id', 'axeContainer');
     document.body.appendChild(div);
   }
+
+  // axe just needs a role on a containing element
+  div.setAttribute('role', 'region');
+  div.setAttribute('aria-label', `Component ${Math.floor(Math.random() * Math.floor(100))}`);
+
   div.innerHTML = '';
 
   const mountedComponent = mount(component, { attachTo: div });

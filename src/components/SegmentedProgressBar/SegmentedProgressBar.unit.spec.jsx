@@ -14,5 +14,5 @@ describe('<SegmentedProgressBar/>', () => {
   });
 
   it('should pass aXe check', () =>
-    axeCheck(<SegmentedProgressBar current={2} total={5} />));
+    axeCheck(<SegmentedProgressBar current={2} total={5} label="aria label here"/>));
 });

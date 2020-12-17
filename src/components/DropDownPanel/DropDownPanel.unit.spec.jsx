@@ -33,6 +33,10 @@ describe('<DropDownPanel>', () => {
 
     div = document.createElement('div');
     div.setAttribute('id', 'dropdownContainer');
+    div.setAttribute('aria-label', `Component ${Math.floor(Math.random() * Math.floor(100))}`);
+
+    // axe just needs a role on a containing element
+    div.setAttribute('role', 'region');
     document.body.appendChild(div);
 
     dropDown = mount(

@@ -12,5 +12,5 @@ describe('<ProgressBar/>', () => {
     tree.unmount();
   });
 
-  it('should pass aXe check', () => axeCheck(<ProgressBar percent={35} />));
+  it('should pass aXe check', () => axeCheck(<ProgressBar percent={35} label="aria label here"/>));
 });

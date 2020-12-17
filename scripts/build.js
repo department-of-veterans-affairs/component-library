@@ -49,7 +49,7 @@ const fileNames = [].concat.apply(
   [],
   [
     glob.sync('./src/components/**/*.@(js|jsx)', {
-      ignore: ['./**/*.unit.spec.jsx', './**/*.stories.jsx'],
+      ignore: ['./**/*.unit.spec.@(js|jsx)', './**/*.stories.@(js|jsx)'],
     }),
     glob.sync('./src/helpers/*.js'),
   ],

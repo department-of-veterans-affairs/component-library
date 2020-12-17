@@ -6,7 +6,7 @@ import LoadingIndicator from './LoadingIndicator.jsx';
 
 describe('<LoadingIndicator>', () => {
   it('should not focus if setFocus is not set', () => {
-    const component = <LoadingIndicator message="Loading" />;
+    const component = <LoadingIndicator message="Loading" label="aria label here" />;
     const mountedComponent = mountToDiv(component, 'loadingContainer');
 
     expect(document.activeElement.classList.contains('loading-indicator')).to.be
@@ -15,7 +15,7 @@ describe('<LoadingIndicator>', () => {
   });
 
   it('should focus if setFocus is set', () => {
-    const component = <LoadingIndicator setFocus message="Loading" />;
+    const component = <LoadingIndicator setFocus message="Loading" label="aria label here" />;
     const mountedComponent = mountToDiv(component, 'loadingContainer');
 
     expect(document.activeElement.classList.contains('loading-indicator')).to.be
@@ -24,5 +24,5 @@ describe('<LoadingIndicator>', () => {
   });
 
   it('should pass aXe check', () =>
-    axeCheck(<LoadingIndicator message="Loading" />));
+    axeCheck(<LoadingIndicator message="Loading" label="aria label here"/>));
 });
