@@ -2,7 +2,7 @@ import React from 'react';
 import ErrorableCheckboxGroup from './ErrorableCheckboxGroup';
 
 export default {
-  title: 'Library/Form controls/ErrorableCheckboxGroup',
+  title: 'Library/ErrorableCheckboxGroup',
   component: ErrorableCheckboxGroup,
   argTypes: {
     options: {

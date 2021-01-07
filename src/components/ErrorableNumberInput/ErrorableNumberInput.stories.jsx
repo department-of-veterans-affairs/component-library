@@ -3,14 +3,13 @@ import React, { useState } from 'react';
 import ErrorableNumberInput from './ErrorableNumberInput';
 
 export default {
-  title: 'Library/Form controls/ErrorableNumberInput',
+  title: 'Library/ErrorableNumberInput',
   component: ErrorableNumberInput,
 };
 
 const Template = args => {
   const [field, setField] = useState(args.field);
   const onValueChange = newField => {
-    console.log('value changed:', newField);
     setField(newField);
   };
 
