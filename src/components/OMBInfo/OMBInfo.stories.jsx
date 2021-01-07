@@ -2,7 +2,7 @@ import React from 'react';
 import OMBInfo from './OMBInfo';
 
 export default {
-  title: 'Library/OMBInfo',
+  title: 'Components/OMBInfo',
   component: OMBInfo,
 };
 

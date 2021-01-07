@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import DropDownPanel from './DropDownPanel';
 
 export default {
-  title: 'Library/DropDownPanel',
+  title: 'Components/DropDownPanel',
   component: DropDownPanel,
 };
 

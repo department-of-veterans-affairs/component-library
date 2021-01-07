@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import ErrorableTextArea from './ErrorableTextArea';
 
 export default {
-  title: 'Library/ErrorableTextArea',
+  title: 'Components/ErrorableTextArea',
   component: ErrorableTextArea,
 };
 

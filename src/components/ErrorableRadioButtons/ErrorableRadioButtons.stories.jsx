@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import ErrorableRadioButtons from './ErrorableRadioButtons';
 
 export default {
-  title: 'Library/ErrorableRadioButtons',
+  title: 'Components/ErrorableRadioButtons',
   component: ErrorableRadioButtons,
 };
 

@@ -2,7 +2,7 @@ import React from 'react';
 import ErrorableFileInput from './ErrorableFileInput';
 
 export default {
-  title: 'Library/ErrorableFileInput',
+  title: 'Components/ErrorableFileInput',
   component: ErrorableFileInput,
 };
 

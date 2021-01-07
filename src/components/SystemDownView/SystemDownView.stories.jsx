@@ -3,7 +3,7 @@ import React from 'react';
 import SystemDownView from './SystemDownView';
 
 export default {
-  title: 'Library/SystemDownView',
+  title: 'Components/SystemDownView',
   component: SystemDownView,
 };
 

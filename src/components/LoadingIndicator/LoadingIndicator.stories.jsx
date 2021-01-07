@@ -2,7 +2,7 @@ import React from 'react';
 import LoadingIndicator from './LoadingIndicator';
 
 export default {
-  title: 'Library/LoadingIndicator',
+  title: 'Components/LoadingIndicator',
   component: LoadingIndicator,
 };
 

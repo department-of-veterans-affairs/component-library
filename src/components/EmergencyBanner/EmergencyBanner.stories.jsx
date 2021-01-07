@@ -2,7 +2,7 @@ import React from 'react';
 import EmergencyBanner from './EmergencyBanner';
 
 export default {
-  title: 'Library/Banners/EmergencyBanner',
+  title: 'Components/Banners/EmergencyBanner',
   component: EmergencyBanner,
   argTypes: {
     type: {

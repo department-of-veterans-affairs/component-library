@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import ErrorableDate from './ErrorableDate';
 
 export default {
-  title: 'Library/ErrorableDate',
+  title: 'Components/ErrorableDate',
   component: ErrorableDate,
 };
 

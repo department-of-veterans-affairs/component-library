@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Modal from './Modal';
 
 export default {
-  title: 'Library/Modal',
+  title: 'Components/Modal',
   component: Modal,
 };
 

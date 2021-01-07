@@ -29,7 +29,7 @@ const Contacts = () => (
 );
 
 export default {
-  title: 'Library/Telephone',
+  title: 'Components/Telephone',
   component: Telephone,
   parameters: {
     docs: {
