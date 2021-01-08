@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import HelpMenu from './HelpMenu';
 
 export default {
-  title: 'Library/HelpMenu',
+  title: 'Components/HelpMenu',
   component: HelpMenu,
 };
 

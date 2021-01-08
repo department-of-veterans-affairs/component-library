@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import SearchMenu from './SearchMenu';
 
 export default {
-  title: 'Library/SearchMenu',
+  title: 'Components/SearchMenu',
   component: SearchMenu,
   decorators: [
     Story => (

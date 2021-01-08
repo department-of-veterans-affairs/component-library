@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import PrivacyAgreement from './PrivacyAgreement';
 
 export default {
-  title: 'Library/PrivacyAgreement',
+  title: 'Components/PrivacyAgreement',
   component: PrivacyAgreement,
 };
 
