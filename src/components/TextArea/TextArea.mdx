@@ -1,0 +1,67 @@
+---
+title: TextArea
+name: TextArea
+tags: text area, component
+---
+
+import TextArea from './TextArea'
+
+### Code:
+
+#### Example State
+```
+state = {
+  field: {
+    dirty: false,
+    charMax: 255,
+  },
+}
+```
+
+#### Code Sample
+```javascript
+import TextArea from '@department-of-veterans-affairs/formation-react/TextArea'
+
+<TextArea
+  disabled={false}
+  errorMessage='Error message'
+  label='Label'
+  placeholder='Placeholder'
+  name='Name'
+  required={true}
+  field={this.state.field}
+  onValueChange={(field) => this.setState({ field })}
+/>
+```
+
+### Rendered Component
+
+export class RenderedComponent extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      field: {
+        dirty: false,
+        charMax: 255,
+      },
+    }
+  }
+  render () {
+    return (
+      <div className="site-c-reactcomp__rendered">
+        <TextArea
+          disabled={false}
+          errorMessage='Error message'
+          label='Label'
+          placeholder='Placeholder'
+          name='Name'
+          required={true}
+          field={this.state.field}
+          onValueChange={(field) => this.setState({ field })}
+        />
+      </div>
+    );
+  }
+}
+
+<RenderedComponent />

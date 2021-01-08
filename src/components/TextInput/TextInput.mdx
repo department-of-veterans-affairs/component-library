@@ -1,0 +1,65 @@
+---
+title: TextInput
+name: TextInput
+tags: text input, component
+---
+
+import TextInput from './TextInput'
+
+### Code:
+
+#### Example State
+```
+state = {
+  field: {
+    dirty: false,
+    charMax: 255,
+  },
+}
+```
+
+#### Code Sample
+```javascript
+import TextInput from '@department-of-veterans-affairs/formation-react/TextInput'
+
+<TextInput
+  disabled={false}
+  errorMessage='Error message'
+  label='Label'
+  placeholder='Placeholder'
+  name='Name'
+  required={true}
+  field={this.state.field}
+  onValueChange={(field) => this.setState({ field })}
+/>
+```
+
+### Rendered Component
+
+export class RenderedComponent extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      field: {
+        dirty: false,
+        charMax: 255,
+      },
+    }
+  }
+  render () {
+    return (
+      <div className="site-c-reactcomp__rendered">
+        <TextInput
+          onValueChange={(e) => e}
+          errorMessage='Error message'
+          label='Label'
+          placeholder='Placeholder'
+          name='Name'
+          field={this.state.field}
+        />
+      </div>
+    );
+  }
+}
+
+<RenderedComponent />

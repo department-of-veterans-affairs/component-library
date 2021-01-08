@@ -1,0 +1,87 @@
+---
+title: Date
+name: Date
+tags: date, component
+---
+
+import Date from './Date'
+
+### Code:
+
+#### Date example
+The date prop Object should look this:
+
+```javascript
+this.state = {
+  date: {
+    day: {
+      value: '14',
+      dirty: false,
+    },
+    month: {
+      value: '4',
+      dirty: false,
+    },
+    year: {
+      value: '1983',
+      dirty: false,
+    },
+  }
+}
+```
+
+#### Example Code
+```javascript
+import Date from '@department-of-veterans-affairs/formation-react/Date'
+
+<Date
+  onValueChange={date => this.setState({ date })}
+  required={true}
+  label='Please tell us a date'
+  name='Date'
+  date={this.state.date}
+  requiredMessage='Please provide a response'
+  invalidMessage='Please provide a valid date'
+/>;
+```
+
+### Rendered Component
+
+export class RenderedComponent extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      date: {
+        day: {
+          value: '14',
+          dirty: false,
+        },
+        month: {
+          value: '4',
+          dirty: false,
+        },
+        year: {
+          value: '1983',
+          dirty: false,
+        },
+      }
+    }
+  }
+  render () {
+    return (
+      <div className="site-c-reactcomp__rendered">
+        <Date
+          onValueChange={(date) => this.setState({date})}
+          required={true}
+          label='Please tell us a date'
+          name='Date'
+          date={this.state.date}
+          requiredMessage='Please provide a response'
+          invalidMessage='Please provide a valid date'
+        />
+      </div>
+    );
+  }
+}
+
+<RenderedComponent />

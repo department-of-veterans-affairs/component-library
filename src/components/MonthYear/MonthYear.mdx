@@ -1,0 +1,74 @@
+---
+title: MonthYear
+name: MonthYear
+tags: month, year, component
+---
+
+import MonthYear from './MonthYear'
+
+### Code:
+
+#### Example State
+```
+state = {
+  date: {
+    month: {
+      value: '8',
+      dirty: false,
+    },
+    year: {
+      value: '1983',
+      dirty: false,
+    }
+  }
+}
+```
+#### Code Sample
+```javascript
+import MonthYear from '@department-of-veterans-affairs/formation-react/MonthYear'
+
+<div className="site-c-reactcomp__rendered">
+  <MonthYear
+    required
+    date={this.state.date}
+    label="Field label"
+    name='MonthYear'
+    onValueChange={(date) => this.setState({ date })}
+  />
+</div>
+```
+
+### Rendered Component
+
+export class RenderedComponent extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      date: {
+        month: {
+          value: '8',
+          dirty: false,
+        },
+        year: {
+          value: '1983',
+          dirty: false,
+        }
+      }
+    }
+  }
+  render () {
+    return (
+      <div className="site-c-reactcomp__rendered">
+        <MonthYear
+          required
+          date={this.state.date}
+          label="Field label"
+          name='MonthYear'
+          onValueChange={(date) => this.setState({ date })}
+        />
+      </div>
+    );
+  }
+}
+
+<RenderedComponent />

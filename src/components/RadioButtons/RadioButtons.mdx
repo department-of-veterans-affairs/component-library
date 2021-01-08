@@ -1,0 +1,85 @@
+---
+title: RadioButtons
+name: RadioButtons
+tags: radio buttons, component
+---
+
+import RadioButtons from './RadioButtons'
+
+### Code:
+
+#### Example State
+```
+state = {
+  value: {
+    value: 'option 2',
+    dirty: false
+  }
+}
+```
+
+#### Code Sample
+```javascript
+import RadioButtons from '@department-of-veterans-affairs/formation-react/RadioButtons'
+
+<RadioButtons
+  onValueChange={(value)=> this.setState({ value })}
+  id='defaultId'
+  name='defaultName'
+  errorMessage='Radio Button errorMessage'
+  label='Radio Buttons'
+  options={[
+    'option 1',
+    'option 2',
+    {
+      label: 'option 3 label',
+      value: 'expanding option 3',
+      additional: 'expanded option 3',
+    },
+  ]}
+  value={this.state.value}
+  required={false}
+  toolTipText= 'this triggers a tooltip'
+/>
+```
+
+### Rendered Component
+
+export class RenderedComponent extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      value: {
+        value: 'option 2',
+        dirty: false
+      }
+    }
+  }
+  render () {
+    return (
+      <div className="site-c-reactcomp__rendered">
+        <RadioButtons
+          onValueChange={(value)=> this.setState({ value })}
+          id='defaultId'
+          name='defaultName'
+          errorMessage='Radio Button errorMessage'
+          label='Radio Buttons'
+          options={[
+            'option 1',
+            'option 2',
+            {
+              label: 'option 3 label',
+              value: 'expanding option 3',
+              additional: 'expanded option 3',
+            },
+          ]}
+          value={this.state.value}
+          required={false}
+          toolTipText= 'this triggers a tooltip'
+        />
+      </div>
+    );
+  }
+}
+
+<RenderedComponent />

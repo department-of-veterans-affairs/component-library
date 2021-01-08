@@ -1,0 +1,71 @@
+---
+title: Select
+name: Select
+tags: select, component
+---
+
+import Select from './Select'
+
+### Code:
+
+#### Example State
+```
+state = {
+  value: {
+    value: 'Value',
+    dirty: true,
+  },
+}
+```
+
+#### Code Sample
+```javascript
+import Select from '@department-of-veterans-affairs/formation-react/Select'
+
+<Select
+  errorMessage='This is the error message'
+  label='select label'
+  name='Attribute name'
+  options={['first option', 'second option', 'third option']}
+  required={true}
+  value={this.state.value}
+  includeBlankOption={true}
+  onValueChange={value => this.setState({ value })}
+  additionalClass='additional-class'
+  emptyDescription='this is empty'
+/>
+```
+
+### Rendered Component
+
+export class RenderedComponent extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      value: {
+        value: 'Value',
+        dirty: true,
+      },
+    }
+  }
+  render () {
+    return (
+      <div className="site-c-reactcomp__rendered">
+        <Select
+          errorMessage='This is the error message'
+          label='select label'
+          name='Attribute name'
+          options={['first option', 'second option', 'third option']}
+          required={true}
+          value={this.state.value}
+          includeBlankOption={true}
+          onValueChange={value => this.setState({ value })}
+          additionalClass='additional-class'
+          emptyDescription='this is empty'
+        />
+      </div>
+    );
+  }
+}
+
+<RenderedComponent />

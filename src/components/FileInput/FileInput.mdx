@@ -1,0 +1,62 @@
+---
+title: FileInput
+name: FileInput
+tags: file input, component, upload
+---
+
+import FileInput from './FileInput'
+
+### Code:
+
+```javascript
+import FileInput from '@department-of-veterans-affairs/formation-react/FileInput'
+
+<FileInput
+  name='Name'
+  multiple={true}
+  buttonText='Upload some files'
+  accept='String'
+  errorMessage='Error message'
+  onChange={(e) => { // function to upload your file }}
+/>;
+```
+
+### Rendered Component
+
+export class RenderedComponent extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      date: {
+        day: {
+          value: '14',
+          dirty: false,
+        },
+        month: {
+          value: '4',
+          dirty: false,
+        },
+        year: {
+          value: '1983',
+          dirty: false,
+        },
+      }
+    }
+  }
+  render () {
+    return (
+      <div className="site-c-reactcomp__rendered">
+        <FileInput
+          name='Name'
+          multiple={true}
+          buttonText='Upload some files'
+          accept='String'
+          errorMessage='Error message'
+          onChange={(e) => { alert('uploaded file') }}
+        />
+      </div>
+    );
+  }
+}
+
+<RenderedComponent />

@@ -1,0 +1,63 @@
+---
+title: CheckboxGroup
+name: CheckboxGroup
+const: checkbox group, component
+---
+
+import CheckboxGroup from './CheckboxGroup'
+
+### Code:
+```javascript
+import CheckboxGroup from '@department-of-veterans-affairs/formation-react/CheckboxGroup'
+
+<CheckboxGroup
+  label='Checkbox Group'
+  onValueChange={(value) => value}
+  id='default'
+  errorMessage='This is an error message'
+  label='Checkboxes'
+  required={true}
+  options={[
+    {
+      label: 'Checkbox label',
+      value: 'value',
+      content: 'a string',
+      additional: 'another thing',
+    },
+    {
+      label: 'Checkbox label',
+      value: 'value',
+      content: 'some more content',
+      additional: 'and another thing',
+    }
+  ]}
+  values={{ key: 'value' }}
+/>
+```
+
+### Rendered Component
+<div className="site-c-reactcomp__rendered">
+  <CheckboxGroup
+    label='Checkbox Group'
+    onValueChange={(value) => value}
+    id='default'
+    errorMessage='This is an error message'
+    label='Checkboxes'
+    required={true}
+    options={[
+      {
+        label: 'Checkbox label',
+        value: 'value',
+        content: 'a string',
+        additional: 'another thing',
+      },
+      {
+        label: 'Checkbox label',
+        value: 'value',
+        content: 'some more content',
+        additional: 'and another thing',
+      }
+    ]}
+    values={{ key: 'value' }}
+  />
+</div>
