@@ -16,10 +16,8 @@
   ],
   "scripts": {
     "build": "stencil build --docs",
-    "start": "concurrently -n storybook,stencil,proxy -c \"bgMagenta.bold,bgBlue.bold,bgCyan.bold\" \"npm:watch:storybook\" \"npm:watch:stencil\" \"npm:watch:proxy\"",
-    "watch:storybook": "start-storybook -p 3001 --ci --quiet",
-    "watch:stencil": "stencil build --dev --watch --serve --port 3002",
-    "watch:proxy": "wait-on http://localhost:3001/ && wait-on http://localhost:3002/ && node ./scripts/proxy.js",
+    "start": "concurrently -n storybook,stencil -c \"bgMagenta.bold,bgBlue.bold\" \"npm:storybook\" \"npm:watch:stencil\"",
+    "watch:stencil": "stencil build --watch",
     "test": "stencil test --spec --e2e",
     "test.watch": "stencil test --spec --e2e --watchAll",
     "generate": "stencil generate",
