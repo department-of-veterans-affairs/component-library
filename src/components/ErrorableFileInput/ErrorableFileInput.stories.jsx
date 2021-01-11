@@ -1,14 +1,14 @@
 import React from 'react';
-import ErrorableFileInput from './ErrorableFileInput';
+import FileInput from './FileInput';
 
 export default {
-  title: 'Components/ErrorableFileInput',
-  component: ErrorableFileInput,
+  title: 'Components/FileInput',
+  component: FileInput,
 };
 
 const Template = args => (
   <div style={{ paddingLeft: '1em' }}>
-    <ErrorableFileInput {...args} />
+    <FileInput {...args} />
   </div>
 );
 

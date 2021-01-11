@@ -8,7 +8,7 @@ import { makeField } from '../../helpers/fields';
 /**
  * A form input with a label that can display error messages.
  */
-class ErrorableTextArea extends React.Component {
+class TextArea extends React.Component {
   constructor() {
     super();
     this.handleChange = this.handleChange.bind(this);
@@ -97,7 +97,7 @@ class ErrorableTextArea extends React.Component {
   }
 }
 
-ErrorableTextArea.propTypes = {
+TextArea.propTypes = {
   /**
    * Whether or not the `<textarea>` is disabled
    */
@@ -152,4 +152,4 @@ ErrorableTextArea.propTypes = {
   onValueChange: PropTypes.func.isRequired,
 };
 
-export default ErrorableTextArea;
+export default TextArea;

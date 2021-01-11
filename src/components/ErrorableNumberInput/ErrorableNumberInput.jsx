@@ -9,7 +9,7 @@ import { makeField } from '../../helpers/fields';
  *
  */
 
-class ErrorableNumberInput extends React.Component {
+class NumberInput extends React.Component {
   constructor() {
     super();
     this.handleChange = this.handleChange.bind(this);
@@ -86,7 +86,7 @@ class ErrorableNumberInput extends React.Component {
   }
 }
 
-ErrorableNumberInput.propTypes = {
+NumberInput.propTypes = {
   /**
    * Error string to display in the component. When defined, indicates input has a validation error.
    */
@@ -140,4 +140,4 @@ ErrorableNumberInput.propTypes = {
   additionalClass: PropTypes.string,
 };
 
-export default ErrorableNumberInput;
+export default NumberInput;

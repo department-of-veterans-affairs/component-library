@@ -1,10 +1,10 @@
 ---
-title: ErrorableTextArea
-name: ErrorableTextArea
+title: TextArea
+name: TextArea
 tags: text area, component
 ---
 
-import ErrorableTextArea from './ErrorableTextArea'
+import TextArea from './TextArea'
 
 ### Code:
 
@@ -20,9 +20,9 @@ state = {
 
 #### Code Sample
 ```javascript
-import ErrorableTextArea from '@department-of-veterans-affairs/component-library/ErrorableTextArea'
+import TextArea from '@department-of-veterans-affairs/component-library/TextArea'
 
-<ErrorableTextArea
+<TextArea
   disabled={false}
   errorMessage='Error message'
   label='Label'
@@ -49,7 +49,7 @@ export class RenderedComponent extends React.Component {
   render () {
     return (
       <div className="site-c-reactcomp__rendered">
-        <ErrorableTextArea
+        <TextArea
           disabled={false}
           errorMessage='Error message'
           label='Label'

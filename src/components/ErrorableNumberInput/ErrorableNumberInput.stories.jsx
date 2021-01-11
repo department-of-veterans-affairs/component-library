@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 
-import ErrorableNumberInput from './ErrorableNumberInput';
+import NumberInput from './NumberInput';
 
 export default {
-  title: 'Components/ErrorableNumberInput',
-  component: ErrorableNumberInput,
+  title: 'Components/NumberInput',
+  component: NumberInput,
 };
 
 const Template = args => {
@@ -14,7 +14,7 @@ const Template = args => {
   };
 
   return (
-    <ErrorableNumberInput
+    <NumberInput
       {...args}
       field={field}
       onValueChange={onValueChange}

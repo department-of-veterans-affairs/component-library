@@ -23,7 +23,7 @@ import { makeField } from '../../helpers/fields';
  * `value` - string. Value of the select field.
  * `onValueChange` - a function with this prototype: (newValue)
  */
-class ErrorableRadioButtons extends React.Component {
+class RadioButtons extends React.Component {
   constructor() {
     super();
     this.handleChange = this.handleChange.bind(this);
@@ -165,7 +165,7 @@ class ErrorableRadioButtons extends React.Component {
   }
 }
 
-ErrorableRadioButtons.propTypes = {
+RadioButtons.propTypes = {
   /**
    * Additional fieldset classes
    */
@@ -247,4 +247,4 @@ ErrorableRadioButtons.propTypes = {
   required: PropTypes.bool,
 };
 
-export default ErrorableRadioButtons;
+export default RadioButtons;

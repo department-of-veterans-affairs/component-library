@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import _ from 'lodash';
 
-class ErrorableFileInput extends React.Component {
+class FileInput extends React.Component {
   constructor() {
     super();
     this.handleChange = this.handleChange.bind(this);
@@ -89,7 +89,7 @@ class ErrorableFileInput extends React.Component {
   }
 }
 
-ErrorableFileInput.propTypes = {
+FileInput.propTypes = {
   /**
    * accepts multiple files
    */
@@ -132,10 +132,10 @@ ErrorableFileInput.propTypes = {
   mimeTypes: PropTypes.string,
 };
 
-ErrorableFileInput.defaultProps = {
+FileInput.defaultProps = {
   buttonText: 'Add Files',
   mimeTypes: '',
   multiple: false,
 };
 
-export default ErrorableFileInput;
+export default FileInput;

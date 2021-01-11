@@ -2,10 +2,10 @@ import React from 'react';
 import { expect } from 'chai';
 import { shallow, mount } from 'enzyme';
 import { axeCheck } from '../../helpers/test-helpers';
-import ErrorableRadioButtons from './ErrorableRadioButtons.jsx';
+import RadioButtons from './RadioButtons.jsx';
 import { makeField } from '../../helpers/fields.js';
 
-describe('<ErrorableRadioButtons>', () => {
+describe('<RadioButtons>', () => {
   const nonExpandingOptions = ['yes', 'no'];
   const allExpandingOptions = [
     { value: 'yes', label: 'Yes', additional: 'Yes addtional' },
@@ -21,7 +21,7 @@ describe('<ErrorableRadioButtons>', () => {
     let valueChanged;
     // shallowly render component with callback that alters valueChanged with passed argument
     const wrapper = mount(
-      <ErrorableRadioButtons
+      <RadioButtons
         label="test"
         options={nonExpandingOptions}
         value={makeField('test')}
@@ -45,7 +45,7 @@ describe('<ErrorableRadioButtons>', () => {
 
   it('renders label htmlFor attribute with correct input id attribute value', () => {
     const wrapper = shallow(
-      <ErrorableRadioButtons
+      <RadioButtons
         label="test"
         options={nonExpandingOptions}
         value={makeField('test')}
@@ -69,7 +69,7 @@ describe('<ErrorableRadioButtons>', () => {
   it('renders a legend tag with the label attribute', () => {
     const labelValue = 'test';
     const wrapper = shallow(
-      <ErrorableRadioButtons
+      <RadioButtons
         label={labelValue}
         options={nonExpandingOptions}
         value={makeField('test')}
@@ -85,7 +85,7 @@ describe('<ErrorableRadioButtons>', () => {
 
   it('passes aXe check when only non-expanding options are rendered', () => {
     const check = axeCheck(
-      <ErrorableRadioButtons
+      <RadioButtons
         label="test"
         options={nonExpandingOptions}
         value={makeField('test')}
@@ -97,7 +97,7 @@ describe('<ErrorableRadioButtons>', () => {
 
   it('passes aXe check when only expanding options are rendered', () => {
     const check = axeCheck(
-      <ErrorableRadioButtons
+      <RadioButtons
         label="test"
         options={allExpandingOptions}
         value={makeField('test')}
@@ -109,7 +109,7 @@ describe('<ErrorableRadioButtons>', () => {
 
   it('passes aXe check when non-expanding and expanding options rendered', () => {
     const check = axeCheck(
-      <ErrorableRadioButtons
+      <RadioButtons
         label="test"
         options={someExpandingOptions}
         value={makeField('test')}

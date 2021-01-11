@@ -1,10 +1,10 @@
 ---
-title: ErrorableTextInput
-name: ErrorableTextInput
+title: TextInput
+name: TextInput
 tags: text input, component
 ---
 
-import ErrorableTextInput from './ErrorableTextInput'
+import TextInput from './TextInput'
 
 ### Code:
 
@@ -20,9 +20,9 @@ state = {
 
 #### Code Sample
 ```javascript
-import ErrorableTextInput from '@department-of-veterans-affairs/component-library/ErrorableTextInput'
+import TextInput from '@department-of-veterans-affairs/component-library/TextInput'
 
-<ErrorableTextInput
+<TextInput
   disabled={false}
   errorMessage='Error message'
   label='Label'
@@ -49,7 +49,7 @@ export class RenderedComponent extends React.Component {
   render () {
     return (
       <div className="site-c-reactcomp__rendered">
-        <ErrorableTextInput
+        <TextInput
           onValueChange={(e) => e}
           errorMessage='Error message'
           label='Label'

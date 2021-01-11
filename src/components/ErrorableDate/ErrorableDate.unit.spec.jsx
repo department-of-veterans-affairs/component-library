@@ -3,10 +3,10 @@ import React from 'react';
 import { expect } from 'chai';
 import { shallow } from 'enzyme';
 import { axeCheck } from '../../helpers/test-helpers';
-import ErrorableDate from './ErrorableDate';
+import Date from './Date';
 import { makeField } from '../../helpers/fields.js';
 
-describe('<ErrorableDate>', () => {
+describe('<Date>', () => {
   it('renders input elements', () => {
     const date = {
       day: makeField(1),
@@ -14,10 +14,10 @@ describe('<ErrorableDate>', () => {
       year: makeField(2010),
     };
     const tree = shallow(
-      <ErrorableDate date={date} onValueChange={_update => {}} />,
+      <Date date={date} onValueChange={_update => {}} />,
     );
-    expect(tree.find('ErrorableNumberInput')).to.have.lengthOf(1);
-    expect(tree.find('ErrorableSelect')).to.have.lengthOf(2);
+    expect(tree.find('NumberInput')).to.have.lengthOf(1);
+    expect(tree.find('Select')).to.have.lengthOf(2);
     tree.unmount();
   });
   it('displays required message', () => {
@@ -31,7 +31,7 @@ describe('<ErrorableDate>', () => {
     date.day.dirty = true;
 
     const tree = shallow(
-      <ErrorableDate required date={date} onValueChange={_update => {}} />,
+      <Date required date={date} onValueChange={_update => {}} />,
     );
 
     expect(tree.find('.usa-input-error').exists()).to.be.true;
@@ -51,7 +51,7 @@ describe('<ErrorableDate>', () => {
     date.day.dirty = true;
 
     const tree = shallow(
-      <ErrorableDate date={date} onValueChange={_update => {}} />,
+      <Date date={date} onValueChange={_update => {}} />,
     );
 
     expect(tree.find('.usa-input-error').exists()).to.be.true;
@@ -72,7 +72,7 @@ describe('<ErrorableDate>', () => {
     date.day.dirty = true;
 
     const tree = shallow(
-      <ErrorableDate date={date} onValueChange={_update => {}} />,
+      <Date date={date} onValueChange={_update => {}} />,
     );
     expect(tree.find('.usa-input-error')).to.have.length(0);
     tree.unmount();
@@ -89,7 +89,7 @@ describe('<ErrorableDate>', () => {
     date.day.dirty = true;
 
     const tree = shallow(
-      <ErrorableDate
+      <Date
         date={date}
         validation={{ valid: false, message: 'Test' }}
         onValueChange={_update => {}}
@@ -111,7 +111,7 @@ describe('<ErrorableDate>', () => {
     date.day.dirty = true;
 
     const tree = shallow(
-      <ErrorableDate
+      <Date
         date={date}
         validation={[
           { valid: true, message: 'NotShownMessage' },
@@ -134,7 +134,7 @@ describe('<ErrorableDate>', () => {
     };
 
     return axeCheck(
-      <ErrorableDate date={date} onValueChange={_update => {}} />,
+      <Date date={date} onValueChange={_update => {}} />,
     );
   });
 
@@ -149,7 +149,7 @@ describe('<ErrorableDate>', () => {
     date.day.dirty = true;
 
     return axeCheck(
-      <ErrorableDate date={date} onValueChange={_update => {}} />,
+      <Date date={date} onValueChange={_update => {}} />,
     );
   });
 });

@@ -4,8 +4,8 @@ import React from 'react';
 import _ from 'lodash';
 import moment from 'moment';
 
-import ErrorableSelect from '../ErrorableSelect/ErrorableSelect';
-import ErrorableNumberInput from '../ErrorableNumberInput/ErrorableNumberInput';
+import Select from '../Select/Select';
+import NumberInput from '../NumberInput/NumberInput';
 
 import {
   isValidPartialMonthYear,
@@ -16,7 +16,7 @@ import { months } from '../../helpers/options-for-select.js';
 /**
  * A date input field that accepts values for month and year
  */
-class ErrorableMonthYear extends React.Component {
+class MonthYear extends React.Component {
   constructor() {
     super();
     this.handleChange = this.handleChange.bind(this);
@@ -85,7 +85,7 @@ class ErrorableMonthYear extends React.Component {
         >
           <div className="usa-date-of-birth">
             <div className="form-datefield-month">
-              <ErrorableSelect
+              <Select
                 errorMessage={isValid ? undefined : ''}
                 label="Month"
                 name={`${this.props.name}Month`}
@@ -97,7 +97,7 @@ class ErrorableMonthYear extends React.Component {
               />
             </div>
             <div className="usa-datefield usa-form-group usa-form-group-year">
-              <ErrorableNumberInput
+              <NumberInput
                 errorMessage={isValid ? undefined : ''}
                 label="Year"
                 name={`${this.props.name}Year`}
@@ -119,7 +119,7 @@ class ErrorableMonthYear extends React.Component {
   }
 }
 
-ErrorableMonthYear.propTypes = {
+MonthYear.propTypes = {
   /**
    * Render marker indicating field is required.
    */
@@ -157,9 +157,9 @@ ErrorableMonthYear.propTypes = {
   invalidMessage: PropTypes.string,
 };
 
-ErrorableMonthYear.defaultProps = {
+MonthYear.defaultProps = {
   requiredMessage: 'Please provide a response',
   invalidMessage: 'Please provide a valid month and/or year',
 };
 
-export default ErrorableMonthYear;
+export default MonthYear;

@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import ErrorableRadioButtons from './ErrorableRadioButtons';
+import RadioButtons from './RadioButtons';
 
 export default {
-  title: 'Components/ErrorableRadioButtons',
-  component: ErrorableRadioButtons,
+  title: 'Components/RadioButtons',
+  component: RadioButtons,
 };
 
 const Template = args => {
@@ -14,7 +14,7 @@ const Template = args => {
 
   return (
     <div style={{ paddingLeft: '1em' }}>
-      <ErrorableRadioButtons
+      <RadioButtons
         {...args}
         value={value}
         onValueChange={onChange}

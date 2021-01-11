@@ -1,10 +1,10 @@
 ---
-title: ErrorableDate
-name: ErrorableDate
+title: Date
+name: Date
 tags: date, component
 ---
 
-import ErrorableDate from './ErrorableDate'
+import Date from './Date'
 
 ### Code:
 
@@ -32,13 +32,13 @@ this.state = {
 
 #### Example Code
 ```javascript
-import ErrorableDate from '@department-of-veterans-affairs/component-library/ErrorableDate'
+import Date from '@department-of-veterans-affairs/component-library/Date'
 
-<ErrorableDate
+<Date
   onValueChange={date => this.setState({ date })}
   required={true}
   label='Please tell us a date'
-  name='Errorable Date'
+  name='Date'
   date={this.state.date}
   requiredMessage='Please provide a response'
   invalidMessage='Please provide a valid date'
@@ -70,11 +70,11 @@ export class RenderedComponent extends React.Component {
   render () {
     return (
       <div className="site-c-reactcomp__rendered">
-        <ErrorableDate
+        <Date
           onValueChange={(date) => this.setState({date})}
           required={true}
           label='Please tell us a date'
-          name='Errorable Date'
+          name='Date'
           date={this.state.date}
           requiredMessage='Please provide a response'
           invalidMessage='Please provide a valid date'

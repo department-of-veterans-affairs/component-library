@@ -2,9 +2,9 @@ import React from 'react';
 import { mount } from 'enzyme';
 import { expect } from 'chai';
 import { axeCheck } from '../../helpers/test-helpers';
-import ErrorableCheckboxGroup from './ErrorableCheckboxGroup.jsx';
+import CheckboxGroup from './CheckboxGroup.jsx';
 
-describe('<ErrorableCheckboxGroup>', () => {
+describe('<CheckboxGroup>', () => {
   const options = [
     { value: 'yes', label: 'Yes', additional: <p>additional content</p> },
     { value: 'no', label: 'No' },
@@ -13,7 +13,7 @@ describe('<ErrorableCheckboxGroup>', () => {
   it('should render', () => {
     const state = { yes: false, no: false };
     const tree = mount(
-      <ErrorableCheckboxGroup
+      <CheckboxGroup
         label="my label"
         options={options}
         values={state}
@@ -43,7 +43,7 @@ describe('<ErrorableCheckboxGroup>', () => {
   it('should reveal additional content', () => {
     const state = { yes: true, no: false };
     const tree = mount(
-      <ErrorableCheckboxGroup
+      <CheckboxGroup
         label="my label"
         options={options}
         values={state}
@@ -61,7 +61,7 @@ describe('<ErrorableCheckboxGroup>', () => {
     const state = { yes: false, no: false };
 
     return axeCheck(
-      <ErrorableCheckboxGroup
+      <CheckboxGroup
         label="my label"
         options={options}
         values={state}

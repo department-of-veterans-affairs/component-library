@@ -4,8 +4,8 @@ import React from 'react';
 import _ from 'lodash';
 import moment from 'moment';
 
-import ErrorableSelect from '../ErrorableSelect/ErrorableSelect';
-import ErrorableNumberInput from '../ErrorableNumberInput/ErrorableNumberInput';
+import Select from '../Select/Select';
+import NumberInput from '../NumberInput/NumberInput';
 
 import {
   isDirtyDate,
@@ -19,7 +19,7 @@ import { months, days } from '../../helpers/options-for-select.js';
  * A date input field that accepts values for month and year
  */
 
-class ErrorableDate extends React.Component {
+class Date extends React.Component {
   constructor() {
     super();
     this.handleChange = this.handleChange.bind(this);
@@ -97,7 +97,7 @@ class ErrorableDate extends React.Component {
         >
           <div className="usa-date-of-birth">
             <div className="form-datefield-month">
-              <ErrorableSelect
+              <Select
                 errorMessage={isValid ? undefined : ''}
                 label="Month"
                 name={`${this.props.name}Month`}
@@ -109,7 +109,7 @@ class ErrorableDate extends React.Component {
               />
             </div>
             <div className="form-datefield-day">
-              <ErrorableSelect
+              <Select
                 errorMessage={isValid ? undefined : ''}
                 label="Day"
                 name={`${this.props.name}Day`}
@@ -121,7 +121,7 @@ class ErrorableDate extends React.Component {
               />
             </div>
             <div className="usa-datefield usa-form-group usa-form-group-year">
-              <ErrorableNumberInput
+              <NumberInput
                 errorMessage={isValid ? undefined : ''}
                 label="Year"
                 name={`${this.props.name}Year`}
@@ -141,7 +141,7 @@ class ErrorableDate extends React.Component {
   }
 }
 
-ErrorableDate.propTypes = {
+Date.propTypes = {
   /**
    * Render marker indicating field is required.
    */
@@ -186,9 +186,9 @@ ErrorableDate.propTypes = {
   invalidMessage: PropTypes.string,
 };
 
-ErrorableDate.defaultProps = {
+Date.defaultProps = {
   requiredMessage: 'Please provide a response',
   invalidMessage: 'Please provide a valid date',
 };
 
-export default ErrorableDate;
+export default Date;

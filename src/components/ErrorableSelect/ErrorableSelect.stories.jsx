@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 
-import ErrorableSelect from './ErrorableSelect';
+import Select from './Select';
 
 export default {
-  title: 'Components/ErrorableSelect',
-  component: ErrorableSelect,
+  title: 'Components/Select',
+  component: Select,
 };
 
 const Template = args => {
@@ -14,7 +14,7 @@ const Template = args => {
   };
 
   return (
-    <ErrorableSelect {...args} value={value} onValueChange={onValueChange} />
+    <Select {...args} value={value} onValueChange={onValueChange} />
   );
 };
 

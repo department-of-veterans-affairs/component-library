@@ -24,14 +24,14 @@ describe('<PrivacyAgreement/>', () => {
 
   it('should pass aXe check', () =>
     axeCheck(<PrivacyAgreement checked onChange={() => {}} />));
-  it('ErrorableCheckbox should be checked if props.checked = true', () => {
+  it('Checkbox should be checked if props.checked = true', () => {
     const checkBox = wrapper.find('[type="checkbox"]').props();
     expect(checkBox.checked).to.be.true;
     expect(checkBox.onChange).to.be.a('function');
   });
   it('should show errorMessage when its passed as a prop', () => {
     wrapper.setProps({ checked: false, showError: true });
-    const checkBox = wrapper.find('ErrorableCheckbox');
+    const checkBox = wrapper.find('Checkbox');
     expect(checkBox.prop('errorMessage')).to.eql(
       'You must accept the privacy policy before continuing',
     );
@@ -45,7 +45,7 @@ describe('<PrivacyAgreement/>', () => {
   });
   it('no error styles when errorMessage undefined', () => {
     // No error classes.
-    const checkBox = wrapper.find('ErrorableCheckbox');
+    const checkBox = wrapper.find('Checkbox');
     expect(checkBox.find('.usa-input-error')).to.have.lengthOf(0);
     expect(checkBox.find('.usa-input-error-label')).to.have.lengthOf(0);
     expect(checkBox.find('.usa-input-error-message')).to.have.lengthOf(0);

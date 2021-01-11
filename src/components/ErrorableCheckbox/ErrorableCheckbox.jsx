@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { isUndefined, uniqueId } from 'lodash';
 
-class ErrorableCheckbox extends React.Component {
+class Checkbox extends React.Component {
   constructor() {
     super();
     this.handleChange = this.handleChange.bind(this);
@@ -75,7 +75,7 @@ class ErrorableCheckbox extends React.Component {
   }
 }
 
-ErrorableCheckbox.propTypes = {
+Checkbox.propTypes = {
   /**
    * If the checkbox is checked or not
    */
@@ -142,4 +142,4 @@ ErrorableCheckbox.propTypes = {
   required: PropTypes.bool,
 };
 
-export default ErrorableCheckbox;
+export default Checkbox;

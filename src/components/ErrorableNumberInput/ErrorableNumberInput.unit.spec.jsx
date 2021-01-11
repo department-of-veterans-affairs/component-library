@@ -7,11 +7,11 @@ import chai, { expect } from 'chai';
 import { makeField } from '../../helpers/fields.js';
 
 import ReactTestUtils from 'react-dom/test-utils';
-import ErrorableNumberInput from './ErrorableNumberInput';
+import NumberInput from './NumberInput';
 
 chai.use(chaiAsPromised);
 
-describe('<ErrorableNumberInput>', () => {
+describe('<NumberInput>', () => {
   const testValue = makeField('');
 
   it('ensure value changes propagate', () => {
@@ -19,7 +19,7 @@ describe('<ErrorableNumberInput>', () => {
 
     const updatePromise = new Promise((resolve, _reject) => {
       errorableInput = ReactTestUtils.renderIntoDocument(
-        <ErrorableNumberInput
+        <NumberInput
           field={testValue}
           label="test"
           onValueChange={update => {
@@ -44,7 +44,7 @@ describe('<ErrorableNumberInput>', () => {
 
     const updatePromise = new Promise((resolve, _reject) => {
       errorableInput = ReactTestUtils.renderIntoDocument(
-        <ErrorableNumberInput
+        <NumberInput
           field={testValue}
           label="test"
           onValueChange={update => {
@@ -65,7 +65,7 @@ describe('<ErrorableNumberInput>', () => {
 
   it('no error styles when errorMessage undefined', () => {
     const tree = shallow(
-      <ErrorableNumberInput
+      <NumberInput
         field={testValue}
         label="my label"
         onValueChange={_update => {}}
@@ -91,7 +91,7 @@ describe('<ErrorableNumberInput>', () => {
 
   it('has error styles when errorMessage is set', () => {
     const tree = shallow(
-      <ErrorableNumberInput
+      <NumberInput
         field={testValue}
         label="my label"
         errorMessage="error message"
@@ -120,7 +120,7 @@ describe('<ErrorableNumberInput>', () => {
 
   it('required=false does not have required asterisk', () => {
     const tree = shallow(
-      <ErrorableNumberInput
+      <NumberInput
         field={testValue}
         label="my label"
         onValueChange={_update => {}}
@@ -132,7 +132,7 @@ describe('<ErrorableNumberInput>', () => {
 
   it('required=true has required asterisk', () => {
     const tree = shallow(
-      <ErrorableNumberInput
+      <NumberInput
         field={testValue}
         label="my label"
         required
@@ -147,7 +147,7 @@ describe('<ErrorableNumberInput>', () => {
 
   it('label attribute propagates', () => {
     const tree = shallow(
-      <ErrorableNumberInput
+      <NumberInput
         field={testValue}
         label="my label"
         onValueChange={_update => {}}
@@ -169,7 +169,7 @@ describe('<ErrorableNumberInput>', () => {
 
   it('passes aXe check', () => {
     const check = axeCheck(
-      <ErrorableNumberInput
+      <NumberInput
         field={testValue}
         label="my label"
         onValueChange={_update => {}}

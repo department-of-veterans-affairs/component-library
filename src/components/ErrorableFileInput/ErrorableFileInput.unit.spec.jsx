@@ -4,12 +4,12 @@ import { axeCheck } from '../../helpers/test-helpers';
 import { expect } from 'chai';
 import sinon from 'sinon';
 
-import ErrorableFileInput from './ErrorableFileInput';
+import FileInput from './FileInput';
 
-describe('<ErrorableFileInput>', () => {
+describe('<FileInput>', () => {
   it('no error styles when errorMessage undefined', () => {
     const tree = shallow(
-      <ErrorableFileInput buttonText="my label" onChange={_update => {}} />,
+      <FileInput buttonText="my label" onChange={_update => {}} />,
     );
 
     // No error classes.
@@ -21,7 +21,7 @@ describe('<ErrorableFileInput>', () => {
 
   it('has error styles when errorMessage is set', () => {
     const tree = shallow(
-      <ErrorableFileInput
+      <FileInput
         buttonText="my label"
         errorMessage="error message"
         onChange={_update => {}}
@@ -37,7 +37,7 @@ describe('<ErrorableFileInput>', () => {
   it('onChange fires and clears input', () => {
     const onChange = sinon.spy();
     const tree = shallow(
-      <ErrorableFileInput buttonText="my label" onChange={onChange} />,
+      <FileInput buttonText="my label" onChange={onChange} />,
     );
 
     const event = {
@@ -55,7 +55,7 @@ describe('<ErrorableFileInput>', () => {
   });
 
   it('passes aXe check', () => {
-    const check = axeCheck(<ErrorableFileInput buttonText="my label" />, [
+    const check = axeCheck(<FileInput buttonText="my label" />, [
       'aria-allowed-role',
     ]);
     return check;

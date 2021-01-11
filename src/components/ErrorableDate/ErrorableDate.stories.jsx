@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
-import ErrorableDate from './ErrorableDate';
+import Date from './Date';
 
 export default {
-  title: 'Components/ErrorableDate',
-  component: ErrorableDate,
+  title: 'Components/Date',
+  component: Date,
 };
 
 const Template = args => {
   const [date, setDate] = useState(args.date);
   return (
-    <ErrorableDate
+    <Date
       {...args}
       date={date}
       onValueChange={newDate => setDate(newDate)}
@@ -20,7 +20,7 @@ const Template = args => {
 const defaultArgs = {
   required: true,
   label: 'Please tell us a date',
-  name: 'Errorable Date',
+  name: 'Date',
   requiredMessage: 'Please provide a response',
   date: {
     day: {

@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 
-import ErrorableTextInput from './ErrorableTextInput';
+import TextInput from './TextInput';
 
 export default {
-  title: 'Components/ErrorableTextInput',
-  component: ErrorableTextInput,
+  title: 'Components/TextInput',
+  component: TextInput,
 };
 
 const Template = args => {
@@ -14,7 +14,7 @@ const Template = args => {
   };
 
   return (
-    <ErrorableTextInput {...args} field={field} onValueChange={onValueChange} />
+    <TextInput {...args} field={field} onValueChange={onValueChange} />
   );
 };
 

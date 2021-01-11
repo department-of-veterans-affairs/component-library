@@ -1,21 +1,21 @@
 ---
-title: ErrorableCheckboxGroup
-name: ErrorableCheckboxGroup
+title: CheckboxGroup
+name: CheckboxGroup
 const: checkbox group, component
 ---
 
-import ErrorableCheckboxGroup from './ErrorableCheckboxGroup'
+import CheckboxGroup from './CheckboxGroup'
 
 ### Code:
 ```javascript
-import ErrorableCheckboxGroup from '@department-of-veterans-affairs/component-library/ErrorableCheckboxGroup'
+import CheckboxGroup from '@department-of-veterans-affairs/component-library/CheckboxGroup'
 
-<ErrorableCheckboxGroup
-  label='Errorable Checkbox Group'
+<CheckboxGroup
+  label='Checkbox Group'
   onValueChange={(value) => value}
   id='default'
   errorMessage='This is an error message'
-  label='Errorable Checkboxes'
+  label='Checkboxes'
   required={true}
   options={[
     {
@@ -37,12 +37,12 @@ import ErrorableCheckboxGroup from '@department-of-veterans-affairs/component-li
 
 ### Rendered Component
 <div className="site-c-reactcomp__rendered">
-  <ErrorableCheckboxGroup
-    label='Errorable Checkbox Group'
+  <CheckboxGroup
+    label='Checkbox Group'
     onValueChange={(value) => value}
     id='default'
     errorMessage='This is an error message'
-    label='Errorable Checkboxes'
+    label='Checkboxes'
     required={true}
     options={[
       {

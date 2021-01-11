@@ -1,10 +1,10 @@
 ---
-title: ErrorableNumberInput
-name: ErrorableNumberInput
+title: NumberInput
+name: NumberInput
 tags: number input, component
 ---
 
-import ErrorableNumberInput from './ErrorableNumberInput'
+import NumberInput from './NumberInput'
 
 ### Code:
 
@@ -19,9 +19,9 @@ state = {
 
 #### Code Sample
 ```javascript
-import ErrorableNumberInput from '@department-of-veterans-affairs/component-library/ErrorableNumberInput'
+import NumberInput from '@department-of-veterans-affairs/component-library/NumberInput'
 
-<ErrorableNumberInput
+<NumberInput
   onValueChange={(field) => this.setState({ field })}
   errorMessage='Error message'
   label='Please pick a number'
@@ -47,7 +47,7 @@ export class RenderedComponent extends React.Component {
   render () {
     return (
       <div className="site-c-reactcomp__rendered">
-        <ErrorableNumberInput
+        <NumberInput
           onValueChange={(field) => this.setState({ field })}
           errorMessage='Error message'
           label='Please pick a number'

@@ -1,14 +1,14 @@
 import React from 'react';
-import ErrorableCheckbox from './ErrorableCheckbox';
+import Checkbox from './Checkbox';
 
 export default {
-  title: 'Components/ErrorableCheckbox',
-  component: ErrorableCheckbox,
+  title: 'Components/Checkbox',
+  component: Checkbox,
 };
 
 const Template = args => (
   <div style={{ paddingLeft: '1em' }}>
-    <ErrorableCheckbox {...args} />
+    <Checkbox {...args} />
   </div>
 );
 

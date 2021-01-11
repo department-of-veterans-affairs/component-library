@@ -20,7 +20,7 @@ import { makeField } from '../../helpers/fields';
  *                     by tests
  * `onValueChange` - a function with this prototype: (newValue)
  */
-class ErrorableTextInput extends React.Component {
+class TextInput extends React.Component {
   constructor() {
     super();
     this.handleChange = this.handleChange.bind(this);
@@ -101,7 +101,7 @@ class ErrorableTextInput extends React.Component {
   }
 }
 
-ErrorableTextInput.propTypes = {
+TextInput.propTypes = {
   /**
    * Display error message for input that indicates a validation error
    */
@@ -151,8 +151,8 @@ ErrorableTextInput.propTypes = {
   type: PropTypes.string,
 };
 
-ErrorableTextInput.defaultProps = {
+TextInput.defaultProps = {
   type: 'text',
 };
 
-export default ErrorableTextInput;
+export default TextInput;

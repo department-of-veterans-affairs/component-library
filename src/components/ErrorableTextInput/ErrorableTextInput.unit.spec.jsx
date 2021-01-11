@@ -2,15 +2,15 @@ import React from 'react';
 import { shallow, mount } from 'enzyme';
 import { axeCheck } from '../../helpers/test-helpers';
 import { expect } from 'chai';
-import ErrorableTextInput from './ErrorableTextInput.jsx';
+import TextInput from './TextInput.jsx';
 import { makeField } from '../../helpers/fields.js';
 
-describe('<ErrorableTextInput>', () => {
+describe('<TextInput>', () => {
   it('calls onValueChange with input value and dirty state', () => {
     let valueChanged;
     // shallowly render component with callback that alters valueChanged with passed argument
     const wrapper = mount(
-      <ErrorableTextInput
+      <TextInput
         field={makeField('')}
         label="test"
         onValueChange={value => {
@@ -32,7 +32,7 @@ describe('<ErrorableTextInput>', () => {
     let valueChanged;
     // shallowly render component with callback that alters valueChanged with passed argument
     const wrapper = mount(
-      <ErrorableTextInput
+      <TextInput
         field={makeField('')}
         label="test"
         onValueChange={value => {
@@ -51,7 +51,7 @@ describe('<ErrorableTextInput>', () => {
 
   it('renders a label and a placeholder', () => {
     const wrapper = shallow(
-      <ErrorableTextInput
+      <TextInput
         field={makeField('')}
         label="test"
         placeholder="Placeholder"
@@ -69,7 +69,7 @@ describe('<ErrorableTextInput>', () => {
 
   it('renders error styling when errorMessage attribute is present', () => {
     const wrapper = shallow(
-      <ErrorableTextInput
+      <TextInput
         field={makeField('')}
         label="test"
         errorMessage="errorMessage"
@@ -91,7 +91,7 @@ describe('<ErrorableTextInput>', () => {
 
   it('renders aria-describedby attribute when errorMessage attribute is present', () => {
     const wrapper = shallow(
-      <ErrorableTextInput
+      <TextInput
         field={makeField('')}
         label="test"
         errorMessage="errorMessage"
@@ -110,7 +110,7 @@ describe('<ErrorableTextInput>', () => {
 
   it('renders an error message when errorMessage attribute is present', () => {
     const wrapper = shallow(
-      <ErrorableTextInput
+      <TextInput
         field={makeField('')}
         label="test"
         errorMessage="errorMessage"
@@ -126,7 +126,7 @@ describe('<ErrorableTextInput>', () => {
 
   it('renders no error styling when errorMessage attribute is not present', () => {
     const wrapper = shallow(
-      <ErrorableTextInput
+      <TextInput
         field={makeField('')}
         label="test"
         onValueChange={value => value}
@@ -147,7 +147,7 @@ describe('<ErrorableTextInput>', () => {
 
   it('renders no aria-describedby attribute when errorMessage attribute is not present', () => {
     const wrapper = shallow(
-      <ErrorableTextInput
+      <TextInput
         field={makeField('')}
         label="test"
         onValueChange={value => value}
@@ -160,7 +160,7 @@ describe('<ErrorableTextInput>', () => {
 
   it('renders no error message when errorMessage attribute is not present', () => {
     const wrapper = shallow(
-      <ErrorableTextInput
+      <TextInput
         field={makeField('')}
         label="test"
         onValueChange={value => value}
@@ -173,7 +173,7 @@ describe('<ErrorableTextInput>', () => {
 
   it('renders a required asterisk when required is true', () => {
     const wrapper = shallow(
-      <ErrorableTextInput
+      <TextInput
         field={makeField('')}
         label="test"
         required
@@ -187,7 +187,7 @@ describe('<ErrorableTextInput>', () => {
 
   it('renders no required asterisk when required is false', () => {
     const wrapper = shallow(
-      <ErrorableTextInput
+      <TextInput
         field={makeField('')}
         label="test"
         onValueChange={value => value}
@@ -200,7 +200,7 @@ describe('<ErrorableTextInput>', () => {
 
   it("renders the input id as label's for attribute value", () => {
     const wrapper = shallow(
-      <ErrorableTextInput
+      <TextInput
         field={makeField('')}
         label="test"
         onValueChange={value => value}
@@ -221,7 +221,7 @@ describe('<ErrorableTextInput>', () => {
 
   it('passes aXe check when no error present', () => {
     const check = axeCheck(
-      <ErrorableTextInput
+      <TextInput
         field={makeField('')}
         label="test"
         placeholder="Placeholder"
@@ -234,7 +234,7 @@ describe('<ErrorableTextInput>', () => {
 
   it('passes aXe check when error present', () => {
     const check = axeCheck(
-      <ErrorableTextInput
+      <TextInput
         field={makeField('')}
         label="test"
         placeholder="Placeholder"

@@ -3,16 +3,16 @@ import { shallow, mount } from 'enzyme';
 import { expect } from 'chai';
 import sinon from 'sinon';
 
-import ErrorableTextArea from './ErrorableTextArea';
+import TextArea from './TextArea';
 import { makeField } from '../../helpers/fields';
 import { axeCheck } from '../../helpers/test-helpers';
 
-describe('<ErrorableTextArea>', () => {
+describe('<TextArea>', () => {
   it('ensure value changes propagate', () => {
     let valueChanged;
 
     const tree = mount(
-      <ErrorableTextArea
+      <TextArea
         field={makeField(1)}
         label="test"
         onValueChange={value => {
@@ -35,7 +35,7 @@ describe('<ErrorableTextArea>', () => {
     let valueChanged;
 
     const tree = mount(
-      <ErrorableTextArea
+      <TextArea
         field={makeField(1)}
         label="test"
         onValueChange={value => {
@@ -56,7 +56,7 @@ describe('<ErrorableTextArea>', () => {
     const valueChangedSpy = sinon.spy();
 
     const tree = mount(
-      <ErrorableTextArea
+      <TextArea
         field={makeField(1)}
         charMax={1}
         label="test"
@@ -77,7 +77,7 @@ describe('<ErrorableTextArea>', () => {
 
   it('no error styles when errorMessage undefined', () => {
     const tree = shallow(
-      <ErrorableTextArea
+      <TextArea
         field={makeField(1)}
         label="my label"
         onValueChange={_update => {}}
@@ -103,7 +103,7 @@ describe('<ErrorableTextArea>', () => {
 
   it('has error styles when errorMessage is set', () => {
     const tree = shallow(
-      <ErrorableTextArea
+      <TextArea
         field={makeField(1)}
         label="my label"
         errorMessage="error message"
@@ -133,7 +133,7 @@ describe('<ErrorableTextArea>', () => {
 
   it('required=false does not have required asterisk', () => {
     const tree = shallow(
-      <ErrorableTextArea
+      <TextArea
         field={makeField(1)}
         label="my label"
         onValueChange={_update => {}}
@@ -146,7 +146,7 @@ describe('<ErrorableTextArea>', () => {
 
   it('required=true has required asterisk', () => {
     const tree = shallow(
-      <ErrorableTextArea
+      <TextArea
         field={makeField(1)}
         label="my label"
         required
@@ -161,7 +161,7 @@ describe('<ErrorableTextArea>', () => {
 
   it('label attribute propagates', () => {
     const tree = shallow(
-      <ErrorableTextArea
+      <TextArea
         field={makeField(1)}
         label="my label"
         onValueChange={_update => {}}
@@ -183,7 +183,7 @@ describe('<ErrorableTextArea>', () => {
 
   it('passes aXe check when no error present', () => {
     const check = axeCheck(
-      <ErrorableTextArea
+      <TextArea
         field={makeField('')}
         label="test"
         placeholder="Placeholder"
@@ -196,7 +196,7 @@ describe('<ErrorableTextArea>', () => {
 
   it('passes aXe check when error present', () => {
     const check = axeCheck(
-      <ErrorableTextArea
+      <TextArea
         field={makeField('')}
         label="test"
         placeholder="Placeholder"

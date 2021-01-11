@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import ErrorableMonthYear from './ErrorableMonthYear';
+import MonthYear from './MonthYear';
 
 export default {
-  title: 'Components/ErrorableMonthYear',
-  component: ErrorableMonthYear,
+  title: 'Components/MonthYear',
+  component: MonthYear,
 };
 
 const Template = args => {
@@ -13,7 +13,7 @@ const Template = args => {
   };
   return (
     <div style={{ paddingLeft: '1em' }}>
-      <ErrorableMonthYear {...args} date={date} onValueChange={onChange} />
+      <MonthYear {...args} date={date} onValueChange={onChange} />
     </div>
   );
 };

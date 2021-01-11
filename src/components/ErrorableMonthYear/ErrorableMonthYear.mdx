@@ -1,10 +1,10 @@
 ---
-title: ErrorableMonthYear
-name: ErrorableMonthYear
+title: MonthYear
+name: MonthYear
 tags: month, year, component
 ---
 
-import ErrorableMonthYear from './ErrorableMonthYear'
+import MonthYear from './MonthYear'
 
 ### Code:
 
@@ -25,14 +25,14 @@ state = {
 ```
 #### Code Sample
 ```javascript
-import ErrorableMonthYear from '@department-of-veterans-affairs/component-library/ErrorableMonthYear'
+import MonthYear from '@department-of-veterans-affairs/component-library/MonthYear'
 
 <div className="site-c-reactcomp__rendered">
-  <ErrorableMonthYear
+  <MonthYear
     required
     date={this.state.date}
     label="Field label"
-    name='ErrorableMonthYear'
+    name='MonthYear'
     onValueChange={(date) => this.setState({ date })}
   />
 </div>
@@ -59,11 +59,11 @@ export class RenderedComponent extends React.Component {
   render () {
     return (
       <div className="site-c-reactcomp__rendered">
-        <ErrorableMonthYear
+        <MonthYear
           required
           date={this.state.date}
           label="Field label"
-          name='ErrorableMonthYear'
+          name='MonthYear'
           onValueChange={(date) => this.setState({ date })}
         />
       </div>

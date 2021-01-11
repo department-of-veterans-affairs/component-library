@@ -4,12 +4,12 @@ import chaiAsPromised from 'chai-as-promised';
 import chai, { expect } from 'chai';
 import { axeCheck } from '../../helpers/test-helpers';
 
-import ErrorableSelect from './ErrorableSelect.jsx';
+import Select from './Select.jsx';
 import { makeField } from '../../helpers/fields.js';
 
 chai.use(chaiAsPromised);
 
-describe('<ErrorableSelect>', () => {
+describe('<Select>', () => {
   const testValue = makeField('');
   const options = [{ value: 1, label: 'first' }, { value: 2, label: 'second' }];
 
@@ -17,7 +17,7 @@ describe('<ErrorableSelect>', () => {
     let valueChanged;
     // render component with callback that alters valueChanged with passed argument
     const wrapper = mount(
-      <ErrorableSelect
+      <Select
         label="my label"
         options={options}
         value={testValue}
@@ -37,7 +37,7 @@ describe('<ErrorableSelect>', () => {
 
   it('no error styles when errorMessage undefined', () => {
     const tree = shallow(
-      <ErrorableSelect
+      <Select
         label="my label"
         options={options}
         value={testValue}
@@ -64,7 +64,7 @@ describe('<ErrorableSelect>', () => {
 
   it('no error styles when errorMessage is null', () => {
     const tree = shallow(
-      <ErrorableSelect
+      <Select
         errorMessage={null}
         label="my label"
         options={options}
@@ -92,7 +92,7 @@ describe('<ErrorableSelect>', () => {
 
   it('should pass aXe check when errorMessage is undefined', () =>
     axeCheck(
-      <ErrorableSelect
+      <Select
         label="my label"
         options={options}
         value={testValue}
@@ -102,7 +102,7 @@ describe('<ErrorableSelect>', () => {
 
   it('has error styles when errorMessage is set', () => {
     const tree = shallow(
-      <ErrorableSelect
+      <Select
         label="my label"
         options={options}
         errorMessage="error message"
@@ -136,7 +136,7 @@ describe('<ErrorableSelect>', () => {
 
   it('should pass aXe check when errorMessage is set', () =>
     axeCheck(
-      <ErrorableSelect
+      <Select
         label="my label"
         options={options}
         errorMessage="error message"
@@ -147,7 +147,7 @@ describe('<ErrorableSelect>', () => {
 
   it('required=false does not have required asterisk', () => {
     const tree = shallow(
-      <ErrorableSelect
+      <Select
         label="my label"
         options={options}
         value={testValue}
@@ -160,7 +160,7 @@ describe('<ErrorableSelect>', () => {
 
   it('should pass aXe check when it is not required', () =>
     axeCheck(
-      <ErrorableSelect
+      <Select
         label="my label"
         options={options}
         value={testValue}
@@ -170,7 +170,7 @@ describe('<ErrorableSelect>', () => {
 
   it('required=true has required asterisk', () => {
     const tree = shallow(
-      <ErrorableSelect
+      <Select
         label="my label"
         options={options}
         required
@@ -184,7 +184,7 @@ describe('<ErrorableSelect>', () => {
 
   it('should pass aXe check when it is required', () =>
     axeCheck(
-      <ErrorableSelect
+      <Select
         label="my label"
         options={options}
         required
@@ -195,7 +195,7 @@ describe('<ErrorableSelect>', () => {
 
   it('label attribute propagates', () => {
     const tree = shallow(
-      <ErrorableSelect
+      <Select
         label="my label"
         options={options}
         value={testValue}

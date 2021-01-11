@@ -1,9 +1,9 @@
 import React from 'react';
-import ErrorableCheckboxGroup from './ErrorableCheckboxGroup';
+import CheckboxGroup from './CheckboxGroup';
 
 export default {
-  title: 'Components/ErrorableCheckboxGroup',
-  component: ErrorableCheckboxGroup,
+  title: 'Components/CheckboxGroup',
+  component: CheckboxGroup,
   argTypes: {
     options: {
       control: 'object',
@@ -13,12 +13,12 @@ export default {
 
 const Template = args => (
   <div style={{ paddingLeft: '1em' }}>
-    <ErrorableCheckboxGroup {...args} />
+    <CheckboxGroup {...args} />
   </div>
 );
 
 const defaultArgs = {
-  label: 'Errorable Checkbox Group',
+  label: 'Checkbox Group',
   errorMessage: 'This is an error message',
   required: true,
   options: [

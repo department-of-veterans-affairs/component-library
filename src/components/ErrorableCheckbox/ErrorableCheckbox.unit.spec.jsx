@@ -2,13 +2,13 @@ import React from 'react';
 import { expect } from 'chai';
 import { shallow } from 'enzyme';
 import { axeCheck } from '../../helpers/test-helpers';
-import ErrorableCheckbox from './ErrorableCheckbox.jsx';
+import Checkbox from './Checkbox.jsx';
 import sinon from 'sinon';
 
-describe('<ErrorableCheckbox/>', () => {
+describe('<Checkbox/>', () => {
   it('should render without the labelAboveCheckbox', () => {
     const tree = shallow(
-      <ErrorableCheckbox label="test" onValueChange={() => {}} />,
+      <Checkbox label="test" onValueChange={() => {}} />,
     );
     expect(tree.text()).to.contain('test');
     tree.unmount();
@@ -16,7 +16,7 @@ describe('<ErrorableCheckbox/>', () => {
 
   it('should render with the labelAboveCheckbox', () => {
     const tree = shallow(
-      <ErrorableCheckbox
+      <Checkbox
         label="test"
         labelAboveCheckbox="this is a checkbox"
         onValueChange={() => {}}
@@ -28,14 +28,14 @@ describe('<ErrorableCheckbox/>', () => {
   });
 
   it('should pass aXe check', () =>
-    axeCheck(<ErrorableCheckbox label="test" onValueChange={() => {}} />));
+    axeCheck(<Checkbox label="test" onValueChange={() => {}} />));
   it('ensure checked changes propagate', () => {
     const handleChangeSpy = sinon.spy(
-      ErrorableCheckbox.prototype,
+      Checkbox.prototype,
       'handleChange',
     );
     const tree = shallow(
-      <ErrorableCheckbox label="test" onValueChange={() => {}} />,
+      <Checkbox label="test" onValueChange={() => {}} />,
     );
     const event = { target: { checked: true } };
 
@@ -46,7 +46,7 @@ describe('<ErrorableCheckbox/>', () => {
   });
   it('no error styles when errorMessage undefined', () => {
     const tree = shallow(
-      <ErrorableCheckbox label="my label" onValueChange={_update => {}} />,
+      <Checkbox label="my label" onValueChange={_update => {}} />,
     );
 
     // No error classes.
@@ -74,7 +74,7 @@ describe('<ErrorableCheckbox/>', () => {
 
   it('has error styles when errorMessage is set', () => {
     const tree = shallow(
-      <ErrorableCheckbox
+      <Checkbox
         label="my label"
         errorMessage="error message"
         onValueChange={_update => {}}
@@ -101,7 +101,7 @@ describe('<ErrorableCheckbox/>', () => {
 
   it('required=false does not have required asterisk', () => {
     const tree = shallow(
-      <ErrorableCheckbox label="my label" onValueChange={_update => {}} />,
+      <Checkbox label="my label" onValueChange={_update => {}} />,
     );
 
     expect(tree.find('label').text()).to.equal('my label');
@@ -110,7 +110,7 @@ describe('<ErrorableCheckbox/>', () => {
 
   it('required=true has required asterisk', () => {
     const tree = shallow(
-      <ErrorableCheckbox
+      <Checkbox
         label="my label"
         required
         onValueChange={_update => {}}
@@ -124,7 +124,7 @@ describe('<ErrorableCheckbox/>', () => {
 
   it('label attribute propagates', () => {
     const tree = shallow(
-      <ErrorableCheckbox label="my label" onValueChange={_update => {}} />,
+      <Checkbox label="my label" onValueChange={_update => {}} />,
     );
 
     // Ensure label text is correct.
@@ -142,7 +142,7 @@ describe('<ErrorableCheckbox/>', () => {
 
   it('adds aria-labelledby attribute', () => {
     const tree = shallow(
-      <ErrorableCheckbox
+      <Checkbox
         ariaLabelledBy="headingId"
         onValueChange={_update => {}}
       />,

@@ -7,7 +7,7 @@ import { makeField } from '../../helpers/fields';
  * A form select with a label that can display error messages.
  */
 
-class ErrorableSelect extends React.Component {
+class Select extends React.Component {
   constructor() {
     super();
     this.handleChange = this.handleChange.bind(this);
@@ -100,7 +100,7 @@ class ErrorableSelect extends React.Component {
   }
 }
 
-ErrorableSelect.propTypes = {
+Select.propTypes = {
   /**
    * Error string to display in the component.
    * When defined, indicates select has a validation error.
@@ -174,8 +174,8 @@ ErrorableSelect.propTypes = {
   additionalClass: PropTypes.string,
 };
 
-ErrorableSelect.defaultProps = {
+Select.defaultProps = {
   includeBlankOption: true,
 };
 
-export default ErrorableSelect;
+export default Select;

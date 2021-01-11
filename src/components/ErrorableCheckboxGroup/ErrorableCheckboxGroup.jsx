@@ -19,7 +19,7 @@ import { makeField } from '../../helpers/fields';
  * `values` - object. Values of the checkbox field.
  * `onValueChange` - a function with this prototype: (newValue)
  */
-class ErrorableCheckboxGroup extends React.Component {
+class CheckboxGroup extends React.Component {
   UNSAFE_componentWillMount() {
     this.inputId = this.props.id || _.uniqueId('errorable-checkbox-buttons-');
   }
@@ -154,7 +154,7 @@ class ErrorableCheckboxGroup extends React.Component {
   }
 }
 
-ErrorableCheckboxGroup.propTypes = {
+CheckboxGroup.propTypes = {
   /**
    * Any additional fieldset classes.
    */
@@ -215,4 +215,4 @@ ErrorableCheckboxGroup.propTypes = {
   required: PropTypes.bool,
 };
 
-export default ErrorableCheckboxGroup;
+export default CheckboxGroup;

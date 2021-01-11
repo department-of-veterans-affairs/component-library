@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 
-import ErrorableTextArea from './ErrorableTextArea';
+import TextArea from './TextArea';
 
 export default {
-  title: 'Components/ErrorableTextArea',
-  component: ErrorableTextArea,
+  title: 'Components/TextArea',
+  component: TextArea,
 };
 
 const Template = args => {
@@ -14,7 +14,7 @@ const Template = args => {
   };
 
   return (
-    <ErrorableTextArea {...args} field={field} onValueChange={onValueChange} />
+    <TextArea {...args} field={field} onValueChange={onValueChange} />
   );
 };
 
