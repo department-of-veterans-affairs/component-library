@@ -28,13 +28,15 @@ You'll need to choose what type of version update to make:
 
 ### 2. Merge your PR to master
 
-Once your changes are approved, squash merge them to master. Also, if your change is a breaking change, please prefix your commit message with `BREAKING CHANGE: `. Also keep in mind that your commit messages will be in a changelog that people use to figure out what has changed between releases, so make sure it accurately describes your changes.
+Once your changes are approved, squash merge them to master. Also, if your change is a breaking change, please prefix your commit message with `BREAKING CHANGE:`. Also keep in mind that your commit messages will be in a changelog that people use to figure out what has changed between releases, so make sure it accurately describes your changes.
 
 ### 3. Build and publish
 
 - Checkout the master branch
 - Run `yarn build`
-- For each module you need to publish, switch to its folder in `packages/` and run `npm publish`.
+- Run `npm publish`
+
+<!--
 
 ### 4. Create a release
 
@@ -49,7 +51,9 @@ This should be set as **GITHUB_API_KEY** in your environment variable.
 - Once the script has succeeded, go to the link provided in the console
 - Edit the release and add any relevant information.
 
-### 5. Update consuming apps
+-->
+
+### 4. Update consuming apps
 
 The last step is to update the `package.json` files of consuming apps to use the latest version of `@department-of-veterans-affairs/formation` (or `component-library`). For example, if you are working with the `vets-website` project, open the `vets-website`'s `package.json` to update the version number of the `@department-of-veterans-affairs/formation` entry listed in the `dependencies` section. The version number should match what you just published to NPM.
 
