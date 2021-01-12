@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import PromoBanner, { PROMO_BANNER_TYPES } from './PromoBanner';
 
 export default {
-  title: 'Library/Banners/PromoBanner',
+  title: 'Components/Banners/PromoBanner',
   component: PromoBanner,
 };
 

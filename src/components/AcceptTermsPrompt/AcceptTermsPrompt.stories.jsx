@@ -2,7 +2,7 @@ import React from 'react';
 import AcceptTermsPrompt from './AcceptTermsPrompt';
 
 export default {
-  title: 'Library/AcceptTermsPrompt',
+  title: 'Components/AcceptTermsPrompt',
   component: AcceptTermsPrompt,
 };
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-export default function ProgressBar({ percent }) {
+export default function ProgressBar({ percent, label }) {
   return (
     <div
       className="progress-bar"
@@ -10,6 +10,7 @@ export default function ProgressBar({ percent }) {
       aria-valuemin="0"
       aria-valuemax="100"
       tabIndex="0"
+      aria-label={label}
     >
       <div className="progress-bar-inner" style={{ width: `${percent}%` }} />
     </div>

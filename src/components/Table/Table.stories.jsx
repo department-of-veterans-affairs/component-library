@@ -3,7 +3,7 @@ import React from 'react';
 import Table from './Table';
 
 export default {
-  title: 'Library/Table',
+  title: 'Components/Table',
   component: Table,
 };
 

@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import ExpandingGroup from './ExpandingGroup';
 
 export default {
-  title: 'Library/ExpandingGroup',
+  title: 'Components/ExpandingGroup',
   component: ExpandingGroup,
 };
 

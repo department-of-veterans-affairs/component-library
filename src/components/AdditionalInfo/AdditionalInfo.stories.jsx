@@ -2,7 +2,7 @@ import React from 'react';
 import AdditionalInfo from './AdditionalInfo';
 
 export default {
-  title: 'Library/AdditionalInfo',
+  title: 'Components/AdditionalInfo',
   component: AdditionalInfo,
   argTypes: {
     infoA: { control: 'text' },

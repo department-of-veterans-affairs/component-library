@@ -5,7 +5,7 @@ import moment from 'moment';
 import MaintenanceBanner from './MaintenanceBanner';
 
 export default {
-  title: 'Library/Banners/MaintenanceBanner',
+  title: 'Components/Banners/MaintenanceBanner',
   component: MaintenanceBanner,
   argTypes: {
     startsAt: { control: { type: 'date' } },
