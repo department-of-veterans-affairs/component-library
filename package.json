@@ -1,6 +1,6 @@
 {
   "name": "@department-of-veterans-affairs/component-library",
-  "version": "6.0.3",
+  "version": "1.0.0",
   "description": "React implementation of patterns in Formation",
   "keywords": [
     "react",
@@ -13,7 +13,7 @@
   "license": "CC0-1.0",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/department-of-veterans-affairs/veteran-facing-services-tools.git"
+    "url": "git+https://github.com/department-of-veterans-affairs/component-library.git"
   },
   "scripts": {
     "build": "node ./scripts/build.js",
@@ -25,7 +25,7 @@
     "build-storybook": "build-storybook"
   },
   "bugs": {
-    "url": "https://github.com/department-of-veterans-affairs/veteran-facing-services-tools/issues"
+    "url": "https://github.com/department-of-veterans-affairs/component-library/issues"
   },
   "dependencies": {
     "classnames": "^2.2.6",
