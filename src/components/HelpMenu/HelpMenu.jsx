@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import DropDownPanel from '../DropDownPanel/DropDownPanel';
 import IconHelp from '../IconHelp/IconHelp';
+import Telephone, { CONTACTS, PATTERNS } from '../Telephone/Telephone';
 
 class HelpMenu extends React.Component {
   render() {
@@ -21,12 +22,15 @@ class HelpMenu extends React.Component {
             <b>Call the VA.gov Help Desk</b>
           </p>
           <p>
-            <a href="tel:18555747286">1-855-574-7286</a>
+            <Telephone contact={CONTACTS.HELP_DESK} />
           </p>
           <p>
-            TTY: <a href="tel:+18008778339">1-800-877-8339</a>
+            TTY:{' '}
+            <Telephone contact={CONTACTS['711']} pattern={PATTERNS['911']} />
           </p>
-          <p>Monday &ndash; Friday, 8:00 a.m. &ndash; 8:00 p.m. (ET)</p>
+          <p>
+            We’re here <abbr title="24 hours a day, 7 days a week">24/7</abbr>
+          </p>
         </div>
       </DropDownPanel>
     );
