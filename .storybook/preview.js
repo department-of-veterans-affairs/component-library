@@ -57,6 +57,7 @@ export const parameters = {
     viewports,
     defaultViewport: 'small',
   },
+  viewMode: 'docs',
 };
 
 export const decorators = [withHTML];
