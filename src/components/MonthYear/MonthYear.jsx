@@ -72,18 +72,18 @@ class MonthYear extends React.Component {
     }
 
     return (
-      <div className={!isValid ? 'input-error-date' : undefined}>
-        <label>
-          {this.props.label}
+      <fieldset className={!isValid ? 'input-error-date' : undefined}>
+        <legend className="vads-u-font-size--base vads-u-font-weight--normal">
+          {this.props.label || 'Date'}
           {this.props.required && (
             <span className="form-required-span">(*Required)</span>
           )}
-        </label>
+        </legend>
         {errorSpan}
         <div
           className={isValid ? undefined : 'usa-input-error form-error-date'}
         >
-          <div className="usa-date-of-birth">
+          <div className="usa-date-of-birth usa-datefields clearfix-text">
             <div className="form-datefield-month">
               <Select
                 errorMessage={isValid ? undefined : ''}
@@ -114,7 +114,7 @@ class MonthYear extends React.Component {
             </div>
           </div>
         </div>
-      </div>
+      </fieldset>
     );
   }
 }
