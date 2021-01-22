@@ -9,7 +9,6 @@ export default class LoadingIndicator extends React.Component {
   }
   render() {
     const { message } = this.props;
-    const { label } = this.props;
 
     return (
       <div className="loading-indicator-container">
@@ -19,7 +18,7 @@ export default class LoadingIndicator extends React.Component {
           }}
           className="loading-indicator"
           role="progressbar"
-          aria-label={label}
+          aria-label="Please wait while we load the application for you."
           aria-valuetext={message}
           tabIndex="0"
         />
