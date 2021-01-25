@@ -49,7 +49,7 @@ class OMBInfo extends React.Component {
         process the Veteran’s education claim or to monitor his or her progress
         during training) as identified in the VA system of records,
         58VA21/22/28, Compensation, Pension, Education, and Vocational
-        Rehabilitation and Employment Records - VA, and published in the Federal
+        Readiness and Employment - VA, and published in the Federal
         Register. Your obligation to respond is required to obtain or retain
         education benefits. Giving us your SSN account information is voluntary.
         Refusal to provide your SSN by itself will not result in the denial of
