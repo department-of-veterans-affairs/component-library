@@ -28,6 +28,7 @@ jobs:
       - checkout
       - aws-cli/setup
       - run: yarn install
+      - run: yarn build
       - run: yarn build-storybook
       - copy-to-s3:
           source: "./storybook-static"
