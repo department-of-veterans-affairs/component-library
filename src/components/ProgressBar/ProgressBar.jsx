@@ -21,7 +21,7 @@ ProgressBar.propTypes = {
   /**
    * The `aria-label` to use for the component
    */
-  label: PropTypes.isRequired,
+  label: PropTypes.string.isRequired,
 
   /**
    * Percent of progress made. 0 to 100.

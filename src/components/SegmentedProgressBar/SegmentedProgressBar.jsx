@@ -41,7 +41,7 @@ SegmentedProgressBar.propTypes = {
   /**
    * The `aria-valuetext` to use for the component
    */
-  ariaValueText: PropTypes.isRequired,
+  ariaValueText: PropTypes.string.isRequired,
 
   /**
    * The current segment in progress
@@ -51,7 +51,7 @@ SegmentedProgressBar.propTypes = {
   /**
    * The `aria-label` to use for the component
    */
-  label: PropTypes.isRequired,
+  label: PropTypes.string.isRequired,
 
   /**
    * The total number of segments in the progress bar
