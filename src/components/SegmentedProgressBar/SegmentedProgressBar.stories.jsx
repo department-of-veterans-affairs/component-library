@@ -27,6 +27,7 @@ const Template = args => <SegmentedProgressBar {...args} />;
 const defaultArgs = {
   current: 2,
   total: 10,
+  label: 'Form ABC-123, personal benefits',
 };
 
 export const Default = Template.bind({});
