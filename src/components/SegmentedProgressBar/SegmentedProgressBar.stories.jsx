@@ -28,6 +28,7 @@ const defaultArgs = {
   current: 2,
   total: 10,
   label: 'Form ABC-123, personal benefits',
+  ariaValueText: 'Step 2 of 10: Personal Information',
 };
 
 export const Default = Template.bind({});
