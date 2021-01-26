@@ -11,15 +11,15 @@ system](https://department-of-veterans-affairs.github.io/veteran-facing-services
 or
 [Storybook](https://design.va.gov/storybook/?path=/story/about-introduction--page).
 
+## Contributing
+
+The issue tracker is disabled on this repo. To request a new component or a feature enhancement, please [open an issue here](https://github.com/department-of-veterans-affairs/vets-design-system-documentation/issues/new?assignees=&labels=vsp-design-system-team&template=feature_request.md)
+
 ## Running Storybook locally
 
 From the project root, run the following commands:
 
 1. `yarn install`
-1. `cd packages/formation-react`
-1. `yarn install`
-   - It's a Lerna thing. For some reason, it doesn't work without _both_
-     installs. ¯\_(ツ)\_/¯
 1. `yarn storybook`
 
 ## Publishing Module to NPM
