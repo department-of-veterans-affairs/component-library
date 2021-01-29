@@ -107,4 +107,93 @@ describe('<Modal/>', () => {
       tree.unmount();
     });
   });
+
+  describe('dataLayer', () => {
+
+    beforeEach(() => {
+      global.window.dataLayer = [];
+    })
+
+    it('should only be updated when modal is visible', () => {
+      expect(
+        global.window.dataLayer.find(
+          ev => ev.event === 'int-modal-click'
+        ),
+      ).not.to.exist;
+
+      const tree = mount(
+        <Modal
+          id="modal"
+          visible={false}
+          clickToClose
+          onClose={() => {}}
+        >
+          Modal contents
+        </Modal>,
+      );
+
+      expect(
+        global.window.dataLayer.find(
+          ev => ev.event === 'int-modal-click'
+        ),
+      ).not.to.exist;
+    });    
+
+    it('should default to a modal-type of "info"', () => {
+      expect(
+        global.window.dataLayer.find(
+          ev => ev.event === 'int-modal-click' && 
+          ev["modal-type"] === "info",
+        ),
+      ).not.to.exist;
+
+      const tree = mount(
+        <Modal
+          id="modal"
+          visible
+          clickToClose
+          onClose={() => {}}
+        >
+          Modal contents
+        </Modal>,
+      );
+
+      expect(
+        global.window.dataLayer.find(
+          ev => ev.event === 'int-modal-click' && 
+          ev["modal-type"] === "info",
+        ),
+      ).to.exist;
+    });    
+
+    it('should include title when present', () => {
+      expect(
+        global.window.dataLayer.find(
+          ev => ev.event === 'int-modal-click' && 
+          ev["modal-type"] === "info" && 
+          ev["modal-title"] === "Modal title",
+        ),
+      ).not.to.exist;
+
+      const tree = mount(
+        <Modal
+          id="modal"
+          title="Modal title"
+          visible
+          clickToClose
+          onClose={() => {}}
+        >
+          Modal contents
+        </Modal>,
+      );
+
+      expect(
+        global.window.dataLayer.find(
+          ev => ev.event === 'int-modal-click' && 
+          ev["modal-type"] === "info" && 
+          ev["modal-title"] === "Modal title",
+        ),
+      ).to.exist;
+    });
+  });
 });

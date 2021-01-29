@@ -41,6 +41,14 @@ class Modal extends React.Component {
     if (this.props.clickToClose) {
       document.addEventListener('click', this.handleDocumentClicked, true);
     }
+    // Conditionally track the event.
+    if (this.props.enableAnalytics) {
+      this.props.trackEvent({
+        event: 'int-modal-click',
+        'modal-type': this.props.status,
+        'modal-title': this.props.title,
+      });
+    }
   }
 
   teardownModal() {
@@ -273,11 +281,30 @@ Modal.propTypes = {
    * is not the first focusable element in the document
    */
   initialFocusSelector: PropTypes.string,
+  /**
+   * Analytics tracking function(s) will be called
+   */
+  enableAnalytics: PropTypes.bool,
+  /**
+   * Function to pass in events and parameters to the dataLayer
+   * and (eventually) into Google Analytics
+   */
+  trackEvent: PropTypes.func,
 };
 
 Modal.defaultProps = {
+  visible: false,
   clickToClose: false,
+  enableAnalytics: true,
   focusSelector: 'button, input, select, a',
+  status: "info",
+  trackEvent: (...args) => {
+    window.dataLayer = [] || window.dataLayer;
+
+    // Track event in GA.
+    window.dataLayer.push(...args);
+    console.log(window.dataLayer);
+  },
 };
 
 export default Modal;
