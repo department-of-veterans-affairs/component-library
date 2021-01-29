@@ -1,7 +1,7 @@
-import PropTypes from 'prop-types';
-import React from 'react';
-import _ from 'lodash';
-import { makeField } from '../../helpers/fields';
+import PropTypes from "prop-types";
+import React from "react";
+import _ from "lodash";
+import { makeField } from "../../helpers/fields";
 
 /**
  * A form select with a label that can display error messages.
@@ -14,7 +14,7 @@ class Select extends React.Component {
   }
 
   UNSAFE_componentWillMount() {
-    this.selectId = _.uniqueId('errorable-select-');
+    this.selectId = _.uniqueId("errorable-select-");
   }
 
   handleChange(domEvent) {
@@ -25,7 +25,7 @@ class Select extends React.Component {
     const selectedValue = this.props.value.value;
 
     // Calculate error state.
-    let errorSpan = '';
+    let errorSpan = "";
     let errorSpanId = undefined;
     if (this.props.errorMessage) {
       errorSpanId = `${this.selectId}-error-message`;
@@ -50,7 +50,7 @@ class Select extends React.Component {
     let reactKey = 0;
     // TODO(awong): Remove this hack to handle options prop and use invariants instead.
     const options = _.isArray(this.props.options) ? this.props.options : [];
-    const optionElements = options.map(obj => {
+    const optionElements = options.map((obj) => {
       let label;
       let value;
       if (_.isString(obj)) {
@@ -68,11 +68,11 @@ class Select extends React.Component {
     });
 
     return (
-      <div className={this.props.errorMessage ? 'usa-input-error' : undefined}>
+      <div className={this.props.errorMessage ? "usa-input-error" : undefined}>
         <label
           className={
             this.props.errorMessage
-              ? 'usa-input-error-label'
+              ? "usa-input-error-label"
               : this.props.labelClass
           }
           htmlFor={this.selectId}
@@ -83,6 +83,9 @@ class Select extends React.Component {
         {errorSpan}
         <select
           className={this.props.additionalClass}
+          aria-controls={
+            this.props.ariaLiveRegionText && "selectAliveRegionInfo"
+          }
           aria-describedby={errorSpanId}
           id={this.selectId}
           name={this.props.name}
@@ -95,6 +98,16 @@ class Select extends React.Component {
           )}
           {optionElements}
         </select>
+        {this.props.ariaLiveRegionText && (
+          <span
+            role="region"
+            id="selectAliveRegionInfo"
+            className="vads-u-visibility--screen-reader"
+            aria-live="assertive"
+          >
+            {`${this.props.ariaLiveRegionText} ${selectedValue}`}
+          </span>
+        )}
       </div>
     );
   }
@@ -135,7 +148,7 @@ Select.propTypes = {
         label: PropTypes.string,
         value: PropTypes.string,
       }),
-    ]),
+    ])
   ).isRequired,
 
   /**
@@ -172,6 +185,11 @@ Select.propTypes = {
    * Additional css class that is added to the select element.
    */
   additionalClass: PropTypes.string,
+
+  /**
+   * Additional css class that is added to the select element.
+   */
+  ariaLiveRegionText: PropTypes.string,
 };
 
 Select.defaultProps = {

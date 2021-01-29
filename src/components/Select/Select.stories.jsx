@@ -1,31 +1,29 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
-import Select from './Select';
+import Select from "./Select";
 
 export default {
-  title: 'Components/Select',
+  title: "Components/Select",
   component: Select,
 };
 
-const Template = args => {
+const Template = (args) => {
   const [value, setValue] = useState(args.value);
-  const onValueChange = newValue => {
+  const onValueChange = (newValue) => {
     setValue(newValue);
   };
 
-  return (
-    <Select {...args} value={value} onValueChange={onValueChange} />
-  );
+  return <Select {...args} value={value} onValueChange={onValueChange} />;
 };
 
 const defaultArgs = {
-  label: 'Branch of Service',
-  name: 'branch',
+  label: "Branch of Service",
+  name: "branch",
   value: {
-    value: 'Marines',
+    value: "Marines",
     dirty: false,
   },
-  options: ['Army', 'Navy', 'Air Force', 'Marines', 'Coast Guard'],
+  options: ["Army", "Navy", "Air Force", "Marines", "Coast Guard"],
 };
 
 export const Default = Template.bind({});
@@ -36,7 +34,7 @@ Default.args = {
 export const ErrorMessage = Template.bind({});
 ErrorMessage.args = {
   ...defaultArgs,
-  errorMessage: 'There was a problem',
+  errorMessage: "There was a problem",
 };
 
 export const Required = Template.bind({});
@@ -49,4 +47,10 @@ export const NoBlankOption = Template.bind({});
 NoBlankOption.args = {
   ...defaultArgs,
   includeBlankOption: false,
+};
+
+export const AriaLiveRegion = Template.bind({});
+AriaLiveRegion.args = {
+  ...defaultArgs,
+  ariaLiveRegionText: "The following branch was selected: ",
 };
