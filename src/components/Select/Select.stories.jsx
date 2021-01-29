@@ -7,13 +7,15 @@ export default {
   component: Select,
 };
 
-const Template = (args) => {
+const Template = args => {
   const [value, setValue] = useState(args.value);
-  const onValueChange = (newValue) => {
+  const onValueChange = newValue => {
     setValue(newValue);
   };
 
-  return <Select {...args} value={value} onValueChange={onValueChange} />;
+  return (
+    <Select {...args} value={value} onValueChange={onValueChange} />
+  );
 };
 
 const defaultArgs = {

@@ -50,7 +50,7 @@ class Select extends React.Component {
     let reactKey = 0;
     // TODO(awong): Remove this hack to handle options prop and use invariants instead.
     const options = _.isArray(this.props.options) ? this.props.options : [];
-    const optionElements = options.map((obj) => {
+    const optionElements = options.map(obj => {
       let label;
       let value;
       if (_.isString(obj)) {
@@ -148,7 +148,7 @@ Select.propTypes = {
         label: PropTypes.string,
         value: PropTypes.string,
       }),
-    ])
+    ]),
   ).isRequired,
 
   /**

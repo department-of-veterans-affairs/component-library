@@ -4,12 +4,11 @@ name: Select
 tags: select, component
 ---
 
-import Select from "./Select";
+import Select from './Select';
 
 ### Code:
 
 #### Example State
-
 ```
 state = {
   value: {
@@ -20,7 +19,6 @@ state = {
 ```
 
 #### Code Sample
-
 ```javascript
 import Select from '@department-of-veterans-affairs/component-library/Select'
 
@@ -35,7 +33,7 @@ import Select from '@department-of-veterans-affairs/component-library/Select'
   onValueChange={value => this.setState({ value })}
   additionalClass='additional-class'
   emptyDescription='this is empty'
-  ariaLiveRegionText: "The following option was selected: ",
+  ariaLiveRegionText: 'The following option was selected: ',
 />
 ```
 
@@ -53,7 +51,7 @@ export class RenderedComponent extends React.Component {
   }
   render () {
     return (
-      <div className="site-c-reactcomp__rendered">
+      <div className='site-c-reactcomp__rendered'>
         <Select
           errorMessage='This is the error message'
           label='select label'
@@ -65,7 +63,7 @@ export class RenderedComponent extends React.Component {
           onValueChange={value => this.setState({ value })}
           additionalClass='additional-class'
           emptyDescription='this is empty'
-          ariaLiveRegionText: "The following option was selected: ",
+          ariaLiveRegionText: 'The following option was selected: ',
         />
       </div>
     );
