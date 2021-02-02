@@ -1053,10 +1053,10 @@
     exec-sh "^0.3.2"
     minimist "^1.2.0"
 
-"@department-of-veterans-affairs/formation@^6.9.0":
-  version "6.10.3"
-  resolved "https://registry.yarnpkg.com/@department-of-veterans-affairs/formation/-/formation-6.10.3.tgz#40fcb6ca083b71e346bf549bf654bb3448ac748b"
-  integrity sha512-7EoM31RJ+mZseo9Eac15zwI1H2ippFCinYAR7nGWtJsg15XHgD+Lo89f/2CzhIsw8+KLgYxmd5Fslp7VXLVr8A==
+"@department-of-veterans-affairs/formation@6.13.2":
+  version "6.13.2"
+  resolved "https://registry.yarnpkg.com/@department-of-veterans-affairs/formation/-/formation-6.13.2.tgz#53e5f101993677ee13c2e5a56983154ae21f2f64"
+  integrity sha512-tFyGfDg4kdQZyWd8ryZ2n/AS4gD2iVfEdFJFWV6GliMKiKxAJq79E0dPV725VQwfVrg/myQTqE/iPvMfgYc0fA==
   dependencies:
     "@fortawesome/fontawesome-free" "^5.6.3"
     domready "^1.0.8"
