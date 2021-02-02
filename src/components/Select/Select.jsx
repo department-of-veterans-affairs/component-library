@@ -83,9 +83,6 @@ class Select extends React.Component {
         {errorSpan}
         <select
           className={this.props.additionalClass}
-          aria-controls={
-            this.props.ariaLiveRegionText && 'selectAliveRegionInfo'
-          }
           aria-describedby={errorSpanId}
           id={this.selectId}
           name={this.props.name}
