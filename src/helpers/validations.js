@@ -1,6 +1,9 @@
 import _ from 'lodash';
 import moment from 'moment';
 
+const minYear = 1900;
+const maxYear = moment().add(100, 'year').year();
+
 function dateToMoment(dateField) {
   return moment({
     year: dateField.year.value,
@@ -331,6 +334,8 @@ function isValidRoutingNumber(value) {
 }
 
 export {
+  minYear,
+  maxYear,
   isBlank,
   isBlankDateField,
   isBlankMonthYear,
