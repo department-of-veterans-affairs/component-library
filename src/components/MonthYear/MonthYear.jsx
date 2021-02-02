@@ -83,7 +83,7 @@ class MonthYear extends React.Component {
         <div
           className={isValid ? undefined : 'usa-input-error form-error-date'}
         >
-          <div className="usa-date-of-birth usa-datefields clearfix-text">
+          <div className="usa-date-of-birth usa-datefields clearfix">
             <div className="form-datefield-month">
               <Select
                 errorMessage={isValid ? undefined : ''}
