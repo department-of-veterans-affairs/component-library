@@ -50,3 +50,9 @@ NoBlankOption.args = {
   ...defaultArgs,
   includeBlankOption: false,
 };
+
+export const AriaLiveRegion = Template.bind({});
+AriaLiveRegion.args = {
+  ...defaultArgs,
+  ariaLiveRegionText: 'The following branch was selected: ',
+};

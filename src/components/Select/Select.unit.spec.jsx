@@ -158,6 +158,21 @@ describe('<Select>', () => {
     tree.unmount();
   });
 
+  it('span should exist when ariaLiveRegionText is populated', () => {
+    const tree = shallow(
+      <Select
+        ariaLiveRegionText="The following option was selected: "
+        label="my label"
+        options={options}
+        value={testValue}
+        onValueChange={_update => {}}
+      />,
+    );
+    expect(tree.find('span').html()).to.include(`role="region"`);
+    expect(tree.find('span').text()).to.include('The following option was selected: ');
+    tree.unmount();
+  });
+
   it('should pass aXe check when it is not required', () =>
     axeCheck(
       <Select
