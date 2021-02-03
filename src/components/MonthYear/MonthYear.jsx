@@ -8,6 +8,8 @@ import Select from '../Select/Select';
 import NumberInput from '../NumberInput/NumberInput';
 
 import {
+  minYear,
+  maxYear,
   isValidPartialMonthYear,
   validateCustomFormComponent,
 } from '../../helpers/validations';
@@ -58,6 +60,12 @@ class MonthYear extends React.Component {
         isValid = validationResult.valid;
         errorMessage = validationResult.message;
       }
+    } else if (year.value.length >= 4) {
+      const yr = parseInt(year.value, 10);
+      if (yr < minYear || yr > maxYear) {
+        isValid = false;
+        errorMessage = `Please enter a year between ${minYear} and ${maxYear}`;
+      }
     }
 
     let errorSpanId;
@@ -101,10 +109,8 @@ class MonthYear extends React.Component {
                 errorMessage={isValid ? undefined : ''}
                 label="Year"
                 name={`${this.props.name}Year`}
-                max={moment()
-                  .add(100, 'year')
-                  .year()}
-                min="1900"
+                max={maxYear}
+                min={minYear}
                 pattern="[0-9]{4}"
                 field={year}
                 onValueChange={update => {

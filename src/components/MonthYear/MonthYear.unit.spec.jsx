@@ -6,6 +6,8 @@ import { axeCheck } from '../../helpers/test-helpers';
 import MonthYear from './MonthYear';
 import { makeField } from '../../helpers/fields.js';
 
+import { minYear, maxYear } from '../../helpers/validations';
+
 describe('<MonthYear>', () => {
   it('wraps input elements in a fieldset', () => {
     const date = {
@@ -88,6 +90,40 @@ describe('<MonthYear>', () => {
     );
 
     expect(tree.find('.usa-input-error').length).to.equal(0);
+    tree.unmount();
+  });
+  it('displays invalid year message for years < min', () => {
+    const date = {
+      month: makeField(''),
+      year: makeField((minYear - 20).toString()),
+    };
+    date.year.dirty = true;
+    date.month.dirty = false;
+    const tree = shallow(
+      <MonthYear date={date} onValueChange={_update => {}} />,
+    );
+
+    expect(tree.find('.usa-input-error').exists()).to.be.true;
+    expect(tree.find('.usa-input-error-message').text()).to.contain(
+      `Please enter a year between ${minYear} and ${maxYear}`,
+    );
+    tree.unmount();
+  });
+  it('displays invalid year message for years > max', () => {
+    const date = {
+      month: makeField(''),
+      year: makeField((maxYear + 20).toString()),
+    };
+    date.year.dirty = true;
+    date.month.dirty = false;
+    const tree = shallow(
+      <MonthYear date={date} onValueChange={_update => {}} />,
+    );
+
+    expect(tree.find('.usa-input-error').exists()).to.be.true;
+    expect(tree.find('.usa-input-error-message').text()).to.contain(
+      `Please enter a year between ${minYear} and ${maxYear}`,
+    );
     tree.unmount();
   });
 
