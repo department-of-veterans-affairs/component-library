@@ -9,9 +9,8 @@ const args = {
   first: 'First',
   middle: 'Middle',
   last: 'Last',
-  hex: '#fba308',
 };
-// https://storybook.js.org/docs/react/essentials/controls#annotation
+
 const argTypes = {
   first: {
     description: 'The first name',
@@ -22,12 +21,7 @@ const argTypes = {
   last: {
     description: 'The last name',
   },
-  hex: {
-    control: 'color',
-  },
 };
-
-// const Template = ({ first, middle, last }) => <my-component first={first} middle={middle} last={last}></my-component>;
 
 const Template = ({ first, middle, last }) => html` <my-component first="${first}" middle="${middle}" last="${last}"> </my-component> `;
 
