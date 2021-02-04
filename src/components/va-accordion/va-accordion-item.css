@@ -1,0 +1,13 @@
+/* :host([open='false']) + #content { */
+/*   display: none; */
+/* } */
+
+#content {
+  background-color: #fff;
+  overflow: auto;
+  padding: 1.5rem 2rem;
+}
+
+button[aria-expanded='false'] + div {
+  display: none;
+}
