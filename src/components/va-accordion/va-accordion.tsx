@@ -1,4 +1,5 @@
-import { Component, Listen, Prop, h } from '@stencil/core';
+import { Component, Host, Listen, Prop, h } from '@stencil/core';
+import { getSlottedNodes } from '../../utils/utils';
 
 @Component({
   tag: 'va-accordion',
@@ -6,11 +7,19 @@ import { Component, Listen, Prop, h } from '@stencil/core';
   shadow: true,
 })
 export class VaAccordion {
+  root!: HTMLElement;
+
   @Listen('accordionItemToggled')
   todoCompletedHandler(event: CustomEvent) {
-    console.log('Received the custom todoCompleted event: ', event.detail);
-    console.log(event.detail.target.parentNode);
-    let prevAttr = event.detail.target.parentNode.host.getAttribute('open') === 'true' ? true : false;
+    const clickedItem = event.detail.target.parentNode.host;
+    // Close the other items if this accordion isn't multi-selectable
+    if (!this.multi) {
+      getSlottedNodes(this.root, 'VA-ACCORDION-ITEM')
+        .filter(item => item !== clickedItem)
+        .forEach(item => (item as Element).setAttribute('open', 'false'));
+    }
+
+    let prevAttr = clickedItem.getAttribute('open') === 'true' ? true : false;
     console.log(prevAttr);
     console.log(!prevAttr);
     event.detail.target.parentNode.host.setAttribute('open', !prevAttr);
@@ -28,9 +37,9 @@ export class VaAccordion {
 
   render() {
     return (
-      <ul class="usa-accordion">
+      <Host ref={el => (this.root = el as HTMLElement)}>
         <slot />
-      </ul>
+      </Host>
     );
   }
 }

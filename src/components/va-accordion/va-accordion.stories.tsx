@@ -5,10 +5,8 @@ export default {
   component: 'va-accordion',
 };
 
-const args = {
-  first: 'First',
-  middle: 'Middle',
-  last: 'Last',
+const defaultArgs = {
+  multi: false,
 };
 
 const argTypes = {
@@ -23,8 +21,8 @@ const argTypes = {
   },
 };
 
-const Template = ({ first, middle, last }) => html`
-  <va-accordion>
+const Template = ({ multi }) => html`
+  <va-accordion multi="${multi}">
     <va-accordion-item header="First Ammendment">
       Congress shall make no law respecting an establishment of religion, or prohibiting the free exercise thereof; or abridging the freedom of speech, or of the press; or the
       right of the people peaceably to assemble, and to petition the Government for a redress of grievances.
@@ -37,5 +35,10 @@ const Template = ({ first, middle, last }) => html`
 
 export const Default = Template.bind({});
 
-Default.args = { ...args };
+Default.args = { ...defaultArgs };
 Default.argTypes = { ...argTypes };
+
+export const Multiselect = Template.bind({});
+
+Multiselect.args = { ...defaultArgs, multi: true };
+Multiselect.argTypes = { ...argTypes };
