@@ -12,7 +12,7 @@ export default function SegmentedProgressBar({ current, total, label }) {
   return (
     <div
       className="progress-bar-segmented"
-      role="progressbar"
+      // role="progressbar"
       aria-valuenow={current}
       aria-valuemin="0"
       aria-valuemax={total}
@@ -40,4 +40,8 @@ SegmentedProgressBar.propTypes = {
    * The total number of segments in the progress bar
    */
   total: PropTypes.number.isRequired,
+};
+
+SegmentedProgressBar.defaultProps = {
+  label: "progress-bar-segmented",
 };
