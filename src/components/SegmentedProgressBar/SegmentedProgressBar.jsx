@@ -12,7 +12,7 @@ export default function SegmentedProgressBar({ current, total, label }) {
   return (
     <div
       className="progress-bar-segmented"
-      // role="progressbar"
+      role="progressbar"
       aria-valuenow={current}
       aria-valuemin="0"
       aria-valuemax={total}
