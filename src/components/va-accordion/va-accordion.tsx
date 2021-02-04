@@ -20,9 +20,7 @@ export class VaAccordion {
     }
 
     let prevAttr = clickedItem.getAttribute('open') === 'true' ? true : false;
-    console.log(prevAttr);
-    console.log(!prevAttr);
-    event.detail.target.parentNode.host.setAttribute('open', !prevAttr);
+    clickedItem.setAttribute('open', !prevAttr);
   }
 
   /**
