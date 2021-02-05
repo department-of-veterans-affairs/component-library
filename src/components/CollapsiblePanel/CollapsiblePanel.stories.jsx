@@ -2,7 +2,7 @@ import React from 'react';
 import CollapsiblePanel from './CollapsiblePanel';
 
 export default {
-  title: 'Components/CollapsiblePanel',
+  title: 'Components/CollapsiblePanel (deprecated)',
   component: CollapsiblePanel,
 };
 

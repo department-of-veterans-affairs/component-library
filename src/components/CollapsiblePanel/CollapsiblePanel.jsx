@@ -6,6 +6,9 @@ import _ from 'lodash';
 const Element = Scroll.Element;
 const scroller = Scroll.scroller;
 
+/**
+ * This component is no longer supported, please use `<va-accordion>` instead
+ */
 class CollapsiblePanel extends React.Component {
   constructor(props) {
     super(props);
