@@ -1,7 +1,7 @@
 import ReactHtmlParser from 'react-html-parser';
 
 export default {
-  title: 'Components/CollapsiblePanel/Static markup',
+  title: 'Components/CollapsiblePanel (deprecated)/Static markup',
 };
 
 const content = `<li>
