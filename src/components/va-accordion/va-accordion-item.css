@@ -23,6 +23,10 @@ button {
   display: inline-block;
 }
 
+button:hover {
+  background-color: var(--color-gray-lighter);
+}
+
 #content {
   background-color: #fff;
   overflow: auto;
