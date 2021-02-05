@@ -10,7 +10,7 @@ export class VaAccordion {
   root!: HTMLElement;
 
   @Listen('accordionItemToggled')
-  todoCompletedHandler(event: CustomEvent) {
+  itemToggledHandler(event: CustomEvent) {
     const clickedItem = event.detail.target.parentNode.host;
     // Close the other items if this accordion isn't multi-selectable
     if (!this.multi) {
@@ -19,7 +19,7 @@ export class VaAccordion {
         .forEach(item => (item as Element).setAttribute('open', 'false'));
     }
 
-    let prevAttr = clickedItem.getAttribute('open') === 'true' ? true : false;
+    const prevAttr = clickedItem.getAttribute('open') === 'true' ? true : false;
     clickedItem.setAttribute('open', !prevAttr);
   }
 
