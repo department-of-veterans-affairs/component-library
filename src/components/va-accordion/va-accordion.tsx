@@ -1,4 +1,4 @@
-import { Component, Host, Listen, Prop, h } from '@stencil/core';
+import { Component, Element, Host, Listen, Prop, h } from '@stencil/core';
 import { getSlottedNodes } from '../../utils/utils';
 
 @Component({
@@ -7,14 +7,14 @@ import { getSlottedNodes } from '../../utils/utils';
   shadow: true,
 })
 export class VaAccordion {
-  root!: HTMLElement;
+  @Element() el!: any;
 
   @Listen('accordionItemToggled')
   itemToggledHandler(event: CustomEvent) {
     const clickedItem = event.detail.target.parentNode.host;
     // Close the other items if this accordion isn't multi-selectable
     if (!this.multi) {
-      getSlottedNodes(this.root, 'VA-ACCORDION-ITEM')
+      getSlottedNodes(this.el, 'VA-ACCORDION-ITEM')
         .filter(item => item !== clickedItem)
         .forEach(item => (item as Element).setAttribute('open', 'false'));
     }
@@ -35,7 +35,7 @@ export class VaAccordion {
 
   render() {
     return (
-      <Host ref={el => (this.root = el as HTMLElement)}>
+      <Host>
         <slot />
       </Host>
     );
