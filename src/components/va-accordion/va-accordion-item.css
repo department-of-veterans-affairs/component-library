@@ -11,6 +11,10 @@ button {
   font-weight: 700;
   padding: 1.5rem 5.5rem 1.5rem 2rem;
   background-color: #f1f1f1;
+  background-image: url('./assets/minus.svg');
+  background-position: right 2rem center;
+  background-repeat: no-repeat;
+  background-size: 1.5rem;
   display: inline-block;
 }
 
@@ -22,4 +26,8 @@ button {
 
 button[aria-expanded='false'] + div {
   display: none;
+}
+
+button[aria-expanded='false'] {
+  background-image: url('./assets/plus.svg');
 }
