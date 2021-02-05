@@ -22,8 +22,7 @@
     "test.watch": "stencil test --spec --e2e --watchAll",
     "generate": "stencil generate",
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook",
-    "postinstall": "install"
+    "build-storybook": "build-storybook"
   },
   "dependencies": {
     "@stencil/core": "^2.0.1"
