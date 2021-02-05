@@ -6,8 +6,6 @@ import { Component, Event, EventEmitter, Host, Prop, h } from '@stencil/core';
   shadow: true,
 })
 export class VaAccordionItem {
-  content!: HTMLDivElement;
-
   @Event({
     composed: true,
     bubbles: true,
@@ -25,18 +23,16 @@ export class VaAccordionItem {
   @Prop() open: boolean = false;
 
   private toggleOpen(e: MouseEvent): void {
-    // e.detail.content = this.content;
     this.accordionItemToggled.emit(e);
   }
 
   render() {
-    console.log('rendering');
     return (
       <Host>
-        <button onClick={this.toggleOpen.bind(this)} class="usa-accordion-button" aria-expanded={this.open ? 'true' : 'false'} aria-controls="content">
+        <button onClick={this.toggleOpen.bind(this)} aria-expanded={this.open ? 'true' : 'false'} aria-controls="content">
           {this.header}
         </button>
-        <div id="content" ref={el => (this.content = el as HTMLDivElement)}>
+        <div id="content">
           <slot />
         </div>
       </Host>
