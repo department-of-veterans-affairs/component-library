@@ -2,4 +2,9 @@
   display: block;
   width: 100%;
   color: #212121;
+  --item-border: none; /* This is to overwrite any previous inherited value */
+}
+
+:host([bordered='true']) {
+  --item-border: 3px solid #f1f1f1;
 }
