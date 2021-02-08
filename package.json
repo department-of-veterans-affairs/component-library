@@ -15,7 +15,7 @@
     "loader/"
   ],
   "scripts": {
-    "build": "stencil build --docs",
+    "build": "stencil build",
     "start": "concurrently -n storybook,stencil -c \"bgMagenta.bold,bgBlue.bold\" \"npm:storybook\" \"npm:watch:stencil\"",
     "watch:stencil": "stencil build --watch",
     "test": "stencil test --spec --e2e",
