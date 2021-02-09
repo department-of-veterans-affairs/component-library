@@ -17,15 +17,20 @@
   },
   "scripts": {
     "build": "node ./scripts/build.js",
-    "prepublishOnly": "node ./scripts/prepublish.js",
-    "test-watch": "karma start testing/karma.conf.js --auto-watch",
-    "test": "karma start testing/karma.conf.js --single-run",
-    "test-debug": "karma start testing/karma.conf.js --browsers Chrome",
+    "build-storybook": "build-storybook",
+    "prepublishOnly": "pinst --disable && node ./scripts/prepublish.js",
+    "postinstall": "husky install",
+    "postpublish": "pinst --enable",
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "test-debug": "karma start testing/karma.conf.js --browsers Chrome",
+    "test": "karma start testing/karma.conf.js --single-run",
+    "test-watch": "karma start testing/karma.conf.js --auto-watch"
   },
   "bugs": {
     "url": "https://github.com/department-of-veterans-affairs/component-library/issues"
+  },
+  "lint-staged": {
+    "*.(js|jsx)": "eslint --fix"
   },
   "dependencies": {
     "classnames": "^2.2.6",
