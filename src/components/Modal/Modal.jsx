@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import classNames from 'classnames';
+import { recordEvent } from '../../helpers/analytics';
 
 const ESCAPE_KEY = 27;
 const TAB_KEY = 9;
@@ -298,12 +299,8 @@ Modal.defaultProps = {
   enableAnalytics: true,
   focusSelector: 'button, input, select, a',
   status: "info",
-  trackEvent: (...args) => {
-    window.dataLayer = [] || window.dataLayer;
-
-    // Track event in GA.
-    window.dataLayer.push(...args);
-    console.log(window.dataLayer);
+  trackEvent: (args) => {
+    recordEvent(args);
   },
 };
 
