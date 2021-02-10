@@ -74,7 +74,7 @@ export class MaintenanceBanner extends Component {
       return (
         <>
           <p>
-            <strong>Date:</strong> {startsAtET.format('dddd MMMM D, YYYY')}
+            <strong>Date:</strong> {startsAtET.format('dddd, MMMM D, YYYY')}
           </p>
           <p>
             <strong>Start/End time:</strong> {startsAtET.format('h:mm a')} to{' '}
@@ -88,11 +88,11 @@ export class MaintenanceBanner extends Component {
       <>
         <p>
           <strong>Start:</strong>{' '}
-          {startsAtET.format('dddd MMMM D, YYYY, [at] h:mm a')} ET
+          {startsAtET.format('dddd, MMMM D, YYYY, [at] h:mm a')} ET
         </p>
         <p>
           <strong>End:</strong>{' '}
-          {expiresAtET.format('dddd MMMM D, YYYY, [at] h:mm a')} ET
+          {expiresAtET.format('dddd, MMMM D, YYYY, [at] h:mm a')} ET
         </p>
       </>
     );

@@ -35,10 +35,12 @@ const Template = args => {
 
 const defaultArgs = {
   id: 'maintenence-banner-id',
-  title: 'Current maintenance notice',
-  warnTitle: 'Future maintenance notice',
-  content: 'The site is currently under maintenance.',
-  warnContent: 'The site will be undergoing maintenance shortly.',
+  title: 'Site maintenance',
+  warnTitle: 'Upcoming site maintenance',
+  content:
+    'We’re working on VA.gov right now. If you have trouble signing in or using tools, check back after we’re finished. Thank you for your patience.',
+  warnContent:
+    'We’ll be doing some work on VA.gov. The maintenance will last 1 hour. During that time, you won’t be able to sign in or use tools.',
   startsAt: moment().valueOf(),
   expiresAt: moment().add(1, 'hour').valueOf(),
   warnStartsAt: moment().subtract(30, 'minutes').valueOf(),
