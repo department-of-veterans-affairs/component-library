@@ -41,4 +41,34 @@ describe('<AdditionalInfo/>', () => {
       </ExpandingGroup>,
     );
   });
+
+  describe('dataLayer', () => {
+
+    beforeEach(() => {
+      global.window.dataLayer = [];
+    })
+
+    it('should add triggerText when present', () => {
+      expect(
+        global.window.dataLayer.find(
+          ev => ev.event === 'int-additional-info-expand',
+
+        ),
+      ).not.to.exist;
+      
+      const tree = mount(<AdditionalInfo triggerText="This is test triggerText." />).setState({
+        open: true,
+      });
+
+      console.log(global.window.dataLayer);
+
+      expect(
+        global.window.dataLayer.find(
+          ev => ev.event === 'int-additional-info-expand' &&
+          ev["additional-info-triggerText"] === "This is test triggerText."
+        ),
+      ).to.exist;
+    });
+  });
+
 });

@@ -13,6 +13,12 @@ export default class AdditionalInfo extends React.Component {
 
   toggle = () => {
     this.setState({ open: !this.state.open });
+    if (this.props.enableAnalytics) {
+      this.props.trackEvent && this.props.trackEvent({
+        event: !this.state.open ? 'int-additional-info-expand' : 'int-additional-info-collapse',
+        'additional-info-triggerText': this.props.triggerText
+      });
+    }    
     return this.props.onClick && this.props.onClick();
   };
 
@@ -69,4 +75,20 @@ AdditionalInfo.propTypes = {
    */
   triggerText: PropTypes.string.isRequired,
   onClick: PropTypes.func,
+  /**
+   * Function to pass in events and parameters to the dataLayer
+   * and (eventually) into Google Analytics
+   */
+  trackEvent: PropTypes.func,  
+  /**
+   * Analytics tracking function(s) will be called
+   */
+  enableAnalytics: PropTypes.bool,  
+};
+
+AdditionalInfo.defaultProps = { 
+  enableAnalytics: true,
+  trackEvent: (args) => {
+    recordEvent(args);
+  },
 };
