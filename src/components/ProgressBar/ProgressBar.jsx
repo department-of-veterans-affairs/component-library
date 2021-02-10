@@ -25,5 +25,5 @@ ProgressBar.propTypes = {
 };
 
 ProgressBar.defaultProps = {
-  label: "progress-bar",
+  label: "Working",
 };

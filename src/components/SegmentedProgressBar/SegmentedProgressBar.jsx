@@ -8,7 +8,7 @@ import _ from 'lodash';
  * @param {number} current - The index of the current chapter
  * @param {number} total   - The total number of chapters in the form
  */
-export default function SegmentedProgressBar({ current, total, label }) {
+export default function SegmentedProgressBar({ current, total }) {
   return (
     <div
       className="progress-bar-segmented"
@@ -17,7 +17,7 @@ export default function SegmentedProgressBar({ current, total, label }) {
       aria-valuemin="0"
       aria-valuemax={total}
       tabIndex="0"
-      aria-label={label}
+      aria-label={`Step ${current} of ${total}`}
     >
       {_.range(total).map(step => (
         <div
@@ -40,8 +40,4 @@ SegmentedProgressBar.propTypes = {
    * The total number of segments in the progress bar
    */
   total: PropTypes.number.isRequired,
-};
-
-SegmentedProgressBar.defaultProps = {
-  label: "progress-bar-segmented",
 };

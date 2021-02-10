@@ -42,5 +42,5 @@ LoadingIndicator.propTypes = {
 
 LoadingIndicator.defaultProps = {
   setFocus: false,
-  label: "loading-indicator",
+  label: "Loading",
 };
