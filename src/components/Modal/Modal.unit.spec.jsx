@@ -114,7 +114,7 @@ describe('<Modal/>', () => {
       global.window.dataLayer = [];
     })
 
-    it('should only be updated when modal is visible', () => {
+    it('should only be triggered when modal is visible', () => {
       expect(
         global.window.dataLayer.find(
           ev => ev.event === 'int-modal-click'
@@ -139,11 +139,11 @@ describe('<Modal/>', () => {
       ).not.to.exist;
     });    
 
-    it('should default to a modal-type of "info"', () => {
+    it('should default to a modal-status of "info"', () => {
       expect(
         global.window.dataLayer.find(
           ev => ev.event === 'int-modal-click' && 
-          ev["modal-type"] === "info",
+          ev["modal-status"] === "info",
         ),
       ).not.to.exist;
 
@@ -161,7 +161,7 @@ describe('<Modal/>', () => {
       expect(
         global.window.dataLayer.find(
           ev => ev.event === 'int-modal-click' && 
-          ev["modal-type"] === "info",
+          ev["modal-status"] === "info",
         ),
       ).to.exist;
     });    
@@ -170,7 +170,7 @@ describe('<Modal/>', () => {
       expect(
         global.window.dataLayer.find(
           ev => ev.event === 'int-modal-click' && 
-          ev["modal-type"] === "info" && 
+          ev["modal-status"] === "info" && 
           ev["modal-title"] === "Modal title",
         ),
       ).not.to.exist;
@@ -190,7 +190,7 @@ describe('<Modal/>', () => {
       expect(
         global.window.dataLayer.find(
           ev => ev.event === 'int-modal-click' && 
-          ev["modal-type"] === "info" && 
+          ev["modal-status"] === "info" && 
           ev["modal-title"] === "Modal title",
         ),
       ).to.exist;

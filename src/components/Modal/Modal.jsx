@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import classNames from 'classnames';
-import { recordEvent } from '../../helpers/analytics';
+import recordEvent from '../../helpers/analytics';
 
 const ESCAPE_KEY = 27;
 const TAB_KEY = 9;
@@ -46,8 +46,10 @@ class Modal extends React.Component {
     if (this.props.enableAnalytics) {
       this.props.trackEvent({
         event: 'int-modal-click',
-        'modal-type': this.props.status,
+        'modal-status': this.props.status,
         'modal-title': this.props.title,
+        'modal-primaryButton-text': this.props.primaryButton?.text,
+        'modal-secondaryButton-text': this.props.secondaryButton?.text,
       });
     }
   }

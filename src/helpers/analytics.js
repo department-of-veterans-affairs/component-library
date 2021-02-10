@@ -5,7 +5,7 @@
  * @param {object} data - The event data that will be sent to GA.
  */
 
-export function recordEvent(data) {
+export default function recordEvent(data) {
   window.dataLayer = [] || window.dataLayer;
   return window.dataLayer.push(data);
 }
