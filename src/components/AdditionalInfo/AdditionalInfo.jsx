@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import _ from 'lodash';
 import classNames from 'classnames';
 import ExpandingGroup from '../ExpandingGroup/ExpandingGroup';
+import recordEvent from '../../helpers/analytics';
 
 export default class AdditionalInfo extends React.Component {
   constructor(props) {
