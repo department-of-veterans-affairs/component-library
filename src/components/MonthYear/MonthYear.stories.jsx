@@ -6,9 +6,9 @@ export default {
   component: MonthYear,
 };
 
-const Template = args => {
+const Template = (args) => {
   const [date, setDate] = useState(args.date);
-  const onChange = newDate => {
+  const onChange = (newDate) => {
     setDate(newDate);
   };
   return (
@@ -23,7 +23,7 @@ const defaultArgs = {
   label: 'Birth Month',
   date: {
     month: { dirty: false },
-    year: { dirty: false },
+    year: { dirty: false, value: '2000' },
   },
 };
 
