@@ -23,3 +23,7 @@ ProgressBar.propTypes = {
    */
   percent: PropTypes.number.isRequired,
 };
+
+ProgressBar.defaultProps = {
+  label: "Working",
+};

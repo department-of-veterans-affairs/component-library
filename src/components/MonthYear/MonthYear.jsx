@@ -8,6 +8,8 @@ import Select from '../Select/Select';
 import NumberInput from '../NumberInput/NumberInput';
 
 import {
+  minYear,
+  maxYear,
   isValidPartialMonthYear,
   validateCustomFormComponent,
 } from '../../helpers/validations';
@@ -58,6 +60,12 @@ class MonthYear extends React.Component {
         isValid = validationResult.valid;
         errorMessage = validationResult.message;
       }
+    } else if (year.value.length >= 4) {
+      const yr = parseInt(year.value, 10);
+      if (yr < minYear || yr > maxYear) {
+        isValid = false;
+        errorMessage = `Please enter a year between ${minYear} and ${maxYear}`;
+      }
     }
 
     let errorSpanId;
@@ -72,18 +80,18 @@ class MonthYear extends React.Component {
     }
 
     return (
-      <div className={!isValid ? 'input-error-date' : undefined}>
-        <label>
-          {this.props.label}
+      <fieldset className={!isValid ? 'input-error-date' : undefined}>
+        <legend className="vads-u-font-size--base vads-u-font-weight--normal">
+          {this.props.label || 'Date'}
           {this.props.required && (
             <span className="form-required-span">(*Required)</span>
           )}
-        </label>
+        </legend>
         {errorSpan}
         <div
           className={isValid ? undefined : 'usa-input-error form-error-date'}
         >
-          <div className="usa-date-of-birth">
+          <div className="usa-date-of-birth usa-datefields clearfix">
             <div className="form-datefield-month">
               <Select
                 errorMessage={isValid ? undefined : ''}
@@ -101,10 +109,8 @@ class MonthYear extends React.Component {
                 errorMessage={isValid ? undefined : ''}
                 label="Year"
                 name={`${this.props.name}Year`}
-                max={moment()
-                  .add(100, 'year')
-                  .year()}
-                min="1900"
+                max={maxYear}
+                min={minYear}
                 pattern="[0-9]{4}"
                 field={year}
                 onValueChange={update => {
@@ -114,7 +120,7 @@ class MonthYear extends React.Component {
             </div>
           </div>
         </div>
-      </div>
+      </fieldset>
     );
   }
 }

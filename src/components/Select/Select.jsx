@@ -31,9 +31,9 @@ class Select extends React.Component {
       errorSpanId = `${this.selectId}-error-message`;
       errorSpan = (
         <span
-          className="usa-input-error-message"
+          className='usa-input-error-message'
           id={`${errorSpanId}`}
-          role="alert"
+          role='alert'
         >
           {this.props.errorMessage}
         </span>
@@ -43,7 +43,7 @@ class Select extends React.Component {
     // Calculate required.
     let requiredSpan = undefined;
     if (this.props.required) {
-      requiredSpan = <span className="form-required-span">(*Required)</span>;
+      requiredSpan = <span className='form-required-span'>(*Required)</span>;
     }
 
     // Calculate options for select
@@ -91,10 +91,20 @@ class Select extends React.Component {
           onChange={this.handleChange}
         >
           {this.props.includeBlankOption && (
-            <option value="">{this.props.emptyDescription}</option>
+            <option value=''>{this.props.emptyDescription}</option>
           )}
           {optionElements}
         </select>
+        {this.props.ariaLiveRegionText && (
+          <span
+            role='region'
+            id='selectAliveRegionInfo'
+            className='vads-u-visibility--screen-reader'
+            aria-live='assertive'
+          >
+            {`${this.props.ariaLiveRegionText} ${selectedValue}`}
+          </span>
+        )}
       </div>
     );
   }
@@ -172,6 +182,11 @@ Select.propTypes = {
    * Additional css class that is added to the select element.
    */
   additionalClass: PropTypes.string,
+
+  /**
+   * Additional css class that is added to the select element.
+   */
+  ariaLiveRegionText: PropTypes.string,
 };
 
 Select.defaultProps = {
