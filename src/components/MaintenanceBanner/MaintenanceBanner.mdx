@@ -3,18 +3,17 @@ title: MaintenanceBanner
 name: MaintenanceBanner
 ---
 
-import moment from 'moment';
 import MaintenanceBanner from './MaintenanceBanner'
 
 
 ### Code:
 ```javascript
-import moment from 'moment';
+import { addHours, subHours } from 'date-fns';
 import MaintenanceBanner from '@department-of-veterans-affairs/component-library/MaintenanceBanner'
 
 // Derive startsAt and expiresAt.
-const startsAt = moment();
-const expiresAt = startsAt.clone().add(24, 'hours');
+const startsAt = new Date(Date.now())
+const expiresAt = addHours(Date.now(), 24);
 
 <MaintenanceBanner
   content="We’re working on VA.gov right now. If you have trouble signing in or using tools, check back after we're finished. Thank you for your patience."
@@ -23,7 +22,7 @@ const expiresAt = startsAt.clone().add(24, 'hours');
   startsAt={startsAt}
   title="Site maintenance"
   warnContent="We’ll be doing some work on VA.gov. If you have trouble signing in or using tools, check back after we're finished. Thank you for your patience."
-  warnStartsAt={startsAt.clone().subtract(12, 'hours')}
+  warnStartsAt={subHours(startsAt, 12)}
   warnTitle="Upcoming site maintenance"
 />
 ```
@@ -32,12 +31,12 @@ const expiresAt = startsAt.clone().add(24, 'hours');
 <div className="site-c-reactcomp__rendered">
   <MaintenanceBanner
     content="We’re working on VA.gov right now. If you have trouble signing in or using tools, check back after we're finished. Thank you for your patience."
-    expiresAt={moment().add(24, 'hours')}
+    expiresAt={addHours(Date.now(), 24)}
     id="1"
-    startsAt={moment()}
+    startsAt={new Date(Date.now())}
     title="Site maintenance"
     warnContent="We’ll be doing some work on VA.gov. If you have trouble signing in or using tools, check back after we're finished. Thank you for your patience."
-    warnStartsAt={moment().subtract(12, 'hours')}
+    warnStartsAt={subHours(Date.now(), 12)}
     warnTitle="Upcoming site maintenance"
   />
 </div>
