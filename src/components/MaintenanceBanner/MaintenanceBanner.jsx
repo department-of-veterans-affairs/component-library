@@ -88,8 +88,9 @@ export class MaintenanceBanner extends Component {
             {formatEastern(startsAt, 'EEEE, MMMM d, yyyy')}
           </p>
           <p>
-            <strong>Start/End time:</strong> {formatEastern(startsAt, 'h:mm a')}{' '}
-            to {formatEastern(expiresAt, 'h:mm a')} ET
+            <strong>Start/End time:</strong>{' '}
+            {formatEastern(startsAt, 'h:mm aaaa')} to{' '}
+            {formatEastern(expiresAt, 'h:mm aaaa')} ET
           </p>
         </>
       );
@@ -99,11 +100,11 @@ export class MaintenanceBanner extends Component {
       <>
         <p>
           <strong>Start:</strong>{' '}
-          {formatEastern(startsAt, "EEEE, MMMM d, yyyy, 'at' h:mm a")} ET
+          {formatEastern(startsAt, "EEEE, MMMM d, yyyy, 'at' h:mm aaaa")} ET
         </p>
         <p>
           <strong>End:</strong>{' '}
-          {formatEastern(expiresAt, "EEEE, MMMM d, yyyy, 'at' h:mm a")} ET
+          {formatEastern(expiresAt, "EEEE, MMMM d, yyyy, 'at' h:mm aaaa")} ET
         </p>
       </>
     );
