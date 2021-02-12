@@ -63,14 +63,6 @@ describe('Widget <Telephone />', () => {
     expect(wrapper.text()).to.equal('800-698-2411');
     wrapper.unmount();
   });
-  it('should render 911 (a known number)', () => {
-    const wrapper = shallow(<Telephone contact={CONTACTS['911']} />);
-    const props = wrapper.props();
-    expect(props.href).to.equal('tel:+1911');
-    expect(props['aria-label']).to.equal('1. 9 1 1.');
-    expect(wrapper.text()).to.equal('911');
-    wrapper.unmount();
-  });
 
   // extension
   it('should render a known number + extension', () => {
@@ -155,6 +147,24 @@ describe('Widget <Telephone />', () => {
     expect(props.href).to.equal('tel:+18884424551');
     expect(props['aria-label']).to.equal(ariaLabel);
     expect(wrapper.text()).to.equal('888-442-4551');
+    wrapper.unmount();
+  });
+  it('should render 911', () => {
+    const wrapper = shallow(<Telephone contact={CONTACTS['911']} />);
+    const props = wrapper.props();
+    expect(props.href).to.equal('tel:911');
+    expect(props['aria-label']).to.equal('9 1 1.');
+    expect(wrapper.text()).to.equal('911');
+    wrapper.unmount();
+  });
+  it('should render 711 without a custom label', () => {
+    const wrapper = shallow(
+      <Telephone contact={711} />,
+    );
+    const props = wrapper.props();
+    expect(props.href).to.equal('tel:711');
+    expect(props['aria-label']).to.equal('7 1 1.');
+    expect(wrapper.text()).to.equal('711');
     wrapper.unmount();
   });
 
