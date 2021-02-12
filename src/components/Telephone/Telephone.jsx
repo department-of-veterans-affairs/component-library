@@ -136,8 +136,9 @@ function Telephone({
     }`;
 
   // Add a "+1" to the tel for all included patterns, except 3-digit
-  const isIncludedPattern = Object.values(PATTERNS).includes(contactPattern) &&
-    contactPattern !== PATTERNS['3_DIGIT'];
+  const isIncludedPattern = Object.values(PATTERNS)
+    .filter(pattern => pattern !== PATTERNS['3_DIGIT'])
+    .includes(contactPattern);
   const href = `tel:${isIncludedPattern ? `+1${phoneNumber}` : phoneNumber}${
     // extension format ";ext=" from RFC3966 https://tools.ietf.org/html/rfc3966#page-5
     // but it seems that using a comma to pause for 2 seconds might be a better
