@@ -1,4 +1,4 @@
-export default function dispatchAnalayticsEvent({type, action, ...data}) {
+export default function dispatchAnalyticsEvent({type, action, ...data}) {
   const event = new CustomEvent("component.library.analytics", {
     detail: {
       type,

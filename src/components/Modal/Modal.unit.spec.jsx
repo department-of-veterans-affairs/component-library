@@ -113,7 +113,6 @@ describe('<Modal/>', () => {
     it('should be triggered when modal is visible', () => {
 
       const handleAnalyticsEvent = (e) => {
-        console.log(e.detail);
         expect(e.detail).to.eql(
           {
             'type': 'Modal',

@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import classNames from 'classnames';
-import dispatchAnalayticsEvent from '../../helpers/analytics';
+import dispatchAnalyticsEvent from '../../helpers/analytics';
 
 const ESCAPE_KEY = 27;
 const TAB_KEY = 9;
@@ -44,7 +44,7 @@ class Modal extends React.Component {
     }
     // Conditionally track the event.
     if (this.props.enableAnalytics) {
-      dispatchAnalayticsEvent({
+      dispatchAnalyticsEvent({
         'type': 'Modal',
         'action': 'show',
         'status': this.props.status,
