@@ -32,7 +32,7 @@ export class MaintenanceBanner extends Component {
      */
     content: PropTypes.string.isRequired,
     /**
-     * A Date object used when downtime expires. Should be in UTC.
+     * A Date object used when downtime expires.
      */
     expiresAt: PropTypes.object.isRequired,
     /**
@@ -47,7 +47,7 @@ export class MaintenanceBanner extends Component {
       setItem: PropTypes.func.isRequired,
     }),
     /**
-     * A Date object used when downtime starts. Should be in UTC.
+     * A Date object used when downtime starts.
      */
     startsAt: PropTypes.object.isRequired,
     /**
@@ -59,7 +59,7 @@ export class MaintenanceBanner extends Component {
      */
     warnContent: PropTypes.string,
     /**
-     * A Date object used when pre-downtime starts. Should be in UTC.
+     * A Date object used when pre-downtime starts.
      */
     warnStartsAt: PropTypes.object,
     /**
