@@ -45,12 +45,12 @@ class Modal extends React.Component {
     // Conditionally track the event.
     if (this.props.enableAnalytics) {
       dispatchAnalyticsEvent({
-        'type': 'Modal',
-        'action': 'show',
-        'status': this.props.status,
-        'title': this.props.title,
-        'primaryButtonText': this.props.primaryButton?.text,
-        'seondaryButtonText': this.props.secondaryButton?.text,
+        type: 'Modal',
+        action: 'show',
+        status: this.props.status,
+        title: this.props.title,
+        primaryButtonText: this.props.primaryButton?.text,
+        secondaryButtonText: this.props.secondaryButton?.text,
       });
     }
   }

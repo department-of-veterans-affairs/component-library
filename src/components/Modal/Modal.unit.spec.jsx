@@ -120,7 +120,7 @@ describe('<Modal/>', () => {
             'status': 'info',
             'title': undefined, 
             'primaryButtonText': undefined, 
-            'seondaryButtonText': undefined
+            'secondaryButtonText': undefined
           }
         );
       };
