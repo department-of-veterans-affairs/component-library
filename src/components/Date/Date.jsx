@@ -82,7 +82,9 @@ class Date extends React.Component {
 
     let errorSpanId;
     let errorSpan = '';
+    let fieldsetClass;
     if (!isValid) {
+      fieldsetClass = 'input-error-date usa-input-error';
       errorSpanId = `${this.inputId}-error-message`;
       errorSpan = (
         <span className="usa-input-error-message" role="alert" id={errorSpanId}>
@@ -92,7 +94,7 @@ class Date extends React.Component {
     }
 
     return (
-      <fieldset className={!isValid ? 'input-error-date' : undefined}>
+      <fieldset className={fieldsetClass}>
         <legend className="vads-u-font-size--base vads-u-font-weight--normal">
           {this.props.label || 'Date of birth'}
           {this.props.required && (
