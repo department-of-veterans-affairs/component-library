@@ -5,7 +5,13 @@
  * @param {object} data - The event data that will be sent to GA.
  */
 
-export default function recordEvent(data) {
-  window.dataLayer = [] || window.dataLayer;
-  return window.dataLayer.push(data);
+export default function dispatchAnalayticsEvent({type, action, ...data}) {
+  const event = new CustomEvent("component.library.analytics", {
+    detail: {
+      type,
+      action,
+      ...data,
+    },
+  });
+  document.body.dispatchEvent(event);
 }

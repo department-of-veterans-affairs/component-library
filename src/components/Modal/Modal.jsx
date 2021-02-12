@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import classNames from 'classnames';
-import recordEvent from '../../helpers/analytics';
+import dispatchAnalayticsEvent from '../../helpers/analytics';
 
 const ESCAPE_KEY = 27;
 const TAB_KEY = 9;
@@ -44,12 +44,13 @@ class Modal extends React.Component {
     }
     // Conditionally track the event.
     if (this.props.enableAnalytics) {
-      this.props.trackEvent({
-        event: 'int-modal-click',
-        'modal-status': this.props.status,
-        'modal-title': this.props.title,
-        'modal-primaryButton-text': this.props.primaryButton?.text,
-        'modal-secondaryButton-text': this.props.secondaryButton?.text,
+      dispatchAnalayticsEvent({
+        'type': 'Modal',
+        'action': 'show',
+        'status': this.props.status,
+        'title': this.props.title,
+        'primaryButtonText': this.props.primaryButton?.text,
+        'seondaryButtonText': this.props.secondaryButton?.text,
       });
     }
   }
@@ -288,22 +289,14 @@ Modal.propTypes = {
    * Analytics tracking function(s) will be called
    */
   enableAnalytics: PropTypes.bool,
-  /**
-   * Function to pass in events and parameters to the dataLayer
-   * and (eventually) into Google Analytics
-   */
-  trackEvent: PropTypes.func,
 };
 
 Modal.defaultProps = {
   visible: false,
   clickToClose: false,
-  enableAnalytics: true,
   focusSelector: 'button, input, select, a',
   status: "info",
-  trackEvent: (args) => {
-    recordEvent(args);
-  },
+  enableAnalytics: true,
 };
 
 export default Modal;

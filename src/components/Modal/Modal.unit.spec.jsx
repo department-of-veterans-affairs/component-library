@@ -108,92 +108,37 @@ describe('<Modal/>', () => {
     });
   });
 
-  describe('dataLayer', () => {
+  describe('analaytics event', function(done) {
+    
+    it('should be triggered when modal is visible', () => {
 
-    beforeEach(() => {
-      global.window.dataLayer = [];
-    })
+      const handleAnalyticsEvent = (e) => {
+        console.log(e.detail);
+        expect(e.detail).to.eql(
+          {
+            'type': 'Modal',
+            'action': 'show',
+            'status': 'info',
+            'title': undefined, 
+            'primaryButtonText': undefined, 
+            'seondaryButtonText': undefined
+          }
+        );
+      };
 
-    it('should only be triggered when modal is visible', () => {
-      expect(
-        global.window.dataLayer.find(
-          ev => ev.event === 'int-modal-click'
-        ),
-      ).not.to.exist;
+      global.document.body.addEventListener("component.library.analytics", handleAnalyticsEvent);
 
       const tree = mount(
         <Modal
           id="modal"
-          visible={false}
+          status="info"
+          visible={true}
           clickToClose
           onClose={() => {}}
         >
           Modal contents
         </Modal>,
       );
-
-      expect(
-        global.window.dataLayer.find(
-          ev => ev.event === 'int-modal-click'
-        ),
-      ).not.to.exist;
-    });    
-
-    it('should default to a modal-status of "info"', () => {
-      expect(
-        global.window.dataLayer.find(
-          ev => ev.event === 'int-modal-click' && 
-          ev["modal-status"] === "info",
-        ),
-      ).not.to.exist;
-
-      const tree = mount(
-        <Modal
-          id="modal"
-          visible
-          clickToClose
-          onClose={() => {}}
-        >
-          Modal contents
-        </Modal>,
-      );
-
-      expect(
-        global.window.dataLayer.find(
-          ev => ev.event === 'int-modal-click' && 
-          ev["modal-status"] === "info",
-        ),
-      ).to.exist;
-    });    
-
-    it('should include title when present', () => {
-      expect(
-        global.window.dataLayer.find(
-          ev => ev.event === 'int-modal-click' && 
-          ev["modal-status"] === "info" && 
-          ev["modal-title"] === "Modal title",
-        ),
-      ).not.to.exist;
-
-      const tree = mount(
-        <Modal
-          id="modal"
-          title="Modal title"
-          visible
-          clickToClose
-          onClose={() => {}}
-        >
-          Modal contents
-        </Modal>,
-      );
-
-      expect(
-        global.window.dataLayer.find(
-          ev => ev.event === 'int-modal-click' && 
-          ev["modal-status"] === "info" && 
-          ev["modal-title"] === "Modal title",
-        ),
-      ).to.exist;
-    });
+    }); 
   });
 });
