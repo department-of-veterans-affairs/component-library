@@ -2,14 +2,15 @@
 import React from 'react';
 import { mount } from 'enzyme';
 import { expect } from 'chai';
-import moment from 'moment';
+import { addHours, format, subHours } from 'date-fns';
+
 // Relative imports.
 import MaintenanceBanner, { MAINTENANCE_BANNER } from './MaintenanceBanner.jsx';
 
-const deriveDefaultProps = (startsAt = moment()) => {
-  const expiresAt = startsAt.clone().add(2, 'hours');
-  const formattedStartsAt = startsAt.format('dddd M/D, h:mm a');
-  const formattedExpiresAt = expiresAt.format('dddd M/D, h:mm a');
+const deriveDefaultProps = (startsAt = Date.now()) => {
+  const expiresAt = addHours(startsAt, 2);
+  const formattedStartsAt = format(startsAt, 'EEEE M/d, h:mm a');
+  const formattedExpiresAt = format(expiresAt, 'EEEE M/d, h:mm a');
 
   return {
     id: '1',
@@ -18,7 +19,7 @@ const deriveDefaultProps = (startsAt = moment()) => {
     title: 'DS Logon is down for maintenance.',
     content:
       'DS Logon is down for maintenance. Please use ID.me or MyHealtheVet to sign in or use online tools.',
-    warnStartsAt: startsAt.clone().subtract(12, 'hours'),
+    warnStartsAt: subHours(startsAt, 12),
     warnTitle: 'DS Logon will be down for maintenance',
     warnContent: `DS Logon will be unavailable from ${formattedStartsAt} to ${formattedExpiresAt} Please use ID.me or MyHealtheVet to sign in or use online tools during this time.`,
   };
@@ -27,7 +28,7 @@ const deriveDefaultProps = (startsAt = moment()) => {
 describe('<MaintenanceBanner>', () => {
   it("Escapes early if it's before when it should show.", () => {
     const wrapper = mount(
-      <MaintenanceBanner {...deriveDefaultProps(moment().add(13, 'hours'))} />,
+      <MaintenanceBanner {...deriveDefaultProps(addHours(Date.now(), 13))} />,
     );
     expect(wrapper.html()).to.equal(null);
     wrapper.unmount();
@@ -35,7 +36,7 @@ describe('<MaintenanceBanner>', () => {
 
   it('Shows pre-downtime.', () => {
     const wrapper = mount(
-      <MaintenanceBanner {...deriveDefaultProps(moment().add(2, 'hours'))} />,
+      <MaintenanceBanner {...deriveDefaultProps(addHours(Date.now(), 2))} />,
     );
     expect(wrapper.html()).to.not.equal(null);
     expect(wrapper.html()).to.include('vads-u-border-color--warning-message');
@@ -51,9 +52,7 @@ describe('<MaintenanceBanner>', () => {
 
   it("Escapes early if it's after when it should show.", () => {
     const wrapper = mount(
-      <MaintenanceBanner
-        {...deriveDefaultProps(moment().subtract(3, 'hours'))}
-      />,
+      <MaintenanceBanner {...deriveDefaultProps(subHours(Date.now(), 3))} />,
     );
     expect(wrapper.html()).to.equal(null);
     wrapper.unmount();
