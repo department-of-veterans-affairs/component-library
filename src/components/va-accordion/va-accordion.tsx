@@ -14,7 +14,7 @@ export class VaAccordion {
     const clickedItem = event.detail.target.parentNode.host;
     // Close the other items if this accordion isn't multi-selectable
     if (!this.multi) {
-      getSlottedNodes(this.el, 'VA-ACCORDION-ITEM')
+      getSlottedNodes(this.el, 'va-accordion-item')
         .filter(item => item !== clickedItem)
         .forEach(item => (item as Element).setAttribute('open', 'false'));
     }

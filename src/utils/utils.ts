@@ -6,5 +6,5 @@ export function getSlottedNodes(root: HTMLElement, nodeName: string): Array<Node
   return root.shadowRoot
     .querySelector('slot')
     .assignedNodes()
-    .filter(item => item.nodeName === nodeName);
+    .filter(item => item.nodeName.toLowerCase() === nodeName.toLowerCase());
 }
