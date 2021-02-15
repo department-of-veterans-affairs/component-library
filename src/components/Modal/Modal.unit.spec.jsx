@@ -63,7 +63,7 @@ describe('<Modal/>', () => {
     before(() => {
       root = document.createElement('div');
       global.document.body.appendChild(root);
-    })
+    });
 
     after(() => {
       tree && tree.unmount();
@@ -72,7 +72,8 @@ describe('<Modal/>', () => {
 
     it('should start on the first focusable element by default', () => {
       const tree = mount(
-        <Modal id="modal"
+        <Modal
+          id="modal"
           title="Programmatic focus"
           visible
           hideCloseButton
@@ -81,7 +82,7 @@ describe('<Modal/>', () => {
           <button id="first-button">First button</button>
           <button id="second-button">Second button</button>
         </Modal>,
-        { attachTo: root }
+        { attachTo: root },
       );
 
       expect(global.document.activeElement.id).to.equal('first-button');
@@ -90,7 +91,8 @@ describe('<Modal/>', () => {
 
     it('should start on the first element matching initialFocusSelector if specified', () => {
       const tree = mount(
-        <Modal id="modal"
+        <Modal
+          id="modal"
           title="My modal"
           visible
           hideCloseButton
@@ -100,7 +102,7 @@ describe('<Modal/>', () => {
           <button id="first-button">First button</button>
           <button id="second-button">Second button</button>
         </Modal>,
-        { attachTo: root }
+        { attachTo: root },
       );
 
       expect(global.document.activeElement.id).to.equal('second-button');
@@ -108,26 +110,27 @@ describe('<Modal/>', () => {
     });
   });
 
-  describe('analaytics event', function(done) {
-    
+  describe('analaytics event', function () {
     it('should be triggered when modal is visible', () => {
-
-      const handleAnalyticsEvent = (e) => {
-        expect(e.detail).to.eql(
-          {
-            'type': 'Modal',
-            'action': 'show',
-            'status': 'info',
-            'title': undefined, 
-            'primaryButtonText': undefined, 
-            'secondaryButtonText': undefined
-          }
-        );
+      const handleAnalyticsEvent = e => {
+        expect(e.detail).to.eql({
+          componentName: 'Modal',
+          action: 'show',
+          details: {
+            status: 'info',
+            title: undefined,
+            primaryButtonText: undefined,
+            secondaryButtonText: undefined,
+          },
+        });
       };
 
-      global.document.body.addEventListener("component.library.analytics", handleAnalyticsEvent);
+      global.document.body.addEventListener(
+        'component-library-analytics',
+        handleAnalyticsEvent,
+      );
 
-      const tree = mount(
+      mount(
         <Modal
           id="modal"
           status="info"
@@ -138,6 +141,6 @@ describe('<Modal/>', () => {
           Modal contents
         </Modal>,
       );
-    }); 
+    });
   });
 });
