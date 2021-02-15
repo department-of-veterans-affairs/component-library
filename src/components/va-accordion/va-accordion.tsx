@@ -1,5 +1,4 @@
 import { Component, Element, Host, Listen, Prop, h } from '@stencil/core';
-import { getSlottedNodes } from '../../utils/utils';
 
 @Component({
   tag: 'va-accordion',
@@ -14,13 +13,23 @@ export class VaAccordion {
     const clickedItem = event.detail.target.parentNode.host;
     // Close the other items if this accordion isn't multi-selectable
     if (!this.multi) {
-      getSlottedNodes(this.el, 'va-accordion-item')
+      this.getSlottedNodes(this.el, 'va-accordion-item')
         .filter(item => item !== clickedItem)
         .forEach(item => (item as Element).setAttribute('open', 'false'));
     }
 
     const prevAttr = clickedItem.getAttribute('open') === 'true' ? true : false;
     clickedItem.setAttribute('open', !prevAttr);
+  }
+
+  /**
+   * Get all of the slotted children in the root element that match `nodeName`
+   */
+  getSlottedNodes(root: HTMLElement, nodeName: string): Array<Node> {
+    return root.shadowRoot
+      .querySelector('slot')
+      .assignedNodes()
+      .filter(item => item.nodeName.toLowerCase() === nodeName);
   }
 
   /**
