@@ -23,7 +23,7 @@ const defaultArgs = {
   label: 'Birth Month',
   date: {
     month: { dirty: false },
-    year: { dirty: false },
+    year: { dirty: false, value: '2000' },
   },
 };
 
