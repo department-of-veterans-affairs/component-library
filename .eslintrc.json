@@ -17,6 +17,6 @@
     "prettier/prettier": ["error"]
   },
   "globals": {
-    "global": "writeable"
+    "global": "writable"
   }
 }
