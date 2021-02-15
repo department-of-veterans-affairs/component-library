@@ -12,12 +12,6 @@ export const PATTERNS = {
   OUTSIDE_US: '+1-###-###-####',
 };
 
-// Custom aria labels (only used internally)
-const LABELS = {
-  711: 'TTY: 7 1 1.',
-  911: '1. 9 1 1.',
-};
-
 /**
  * Parse the raw phone number string. And strip out leading "1" and any
  * non-digits
@@ -137,13 +131,14 @@ function Telephone({
 
   const formattedAriaLabel =
     ariaLabel ||
-    LABELS[parsedNumber] || // custom 911 aria-label
     `${formatTelLabel(formattedNumber)}${
       extension ? `. extension ${formatTelLabelBlock(extension)}.` : '.'
     }`;
 
-  // Add a "+1" to the tel for all included patterns
-  const isIncludedPattern = Object.values(PATTERNS).includes(contactPattern);
+  // Add a "+1" to the tel for all included patterns, except 3-digit
+  const isIncludedPattern = Object.values(PATTERNS)
+    .filter(pattern => pattern !== PATTERNS['3_DIGIT'])
+    .includes(contactPattern);
   const href = `tel:${isIncludedPattern ? `+1${phoneNumber}` : phoneNumber}${
     // extension format ";ext=" from RFC3966 https://tools.ietf.org/html/rfc3966#page-5
     // but it seems that using a comma to pause for 2 seconds might be a better
