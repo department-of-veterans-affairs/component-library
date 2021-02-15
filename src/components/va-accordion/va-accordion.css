@@ -1,7 +1,7 @@
 :host {
   display: block;
   width: 100%;
-  color: #212121;
+  color: var(--color-base);
   --item-border: none; /* This is to overwrite any previous inherited value */
 }
 
