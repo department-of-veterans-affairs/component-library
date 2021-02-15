@@ -24,12 +24,12 @@ export class VaAccordion {
   }
 
   /**
-   * Whether or not the accordion has a border
+   * Whether or not the accordion items will have borders
    */
   @Prop() bordered: boolean;
 
   /**
-   * Can multiple items be opened at once
+   * True if multiple items can be opened at once
    */
   @Prop() multi: boolean;
 

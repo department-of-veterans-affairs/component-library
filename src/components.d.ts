@@ -22,21 +22,21 @@ export namespace Components {
     }
     interface VaAccordion {
         /**
-          * Whether or not the accordion has a border
+          * Whether or not the accordion items will have borders
          */
         "bordered": boolean;
         /**
-          * Can multiple items be opened at once
+          * True if multiple items can be opened at once
          */
         "multi": boolean;
     }
     interface VaAccordionItem {
         /**
-          * The accordion item header
+          * The accordion item header text
          */
         "header": string;
         /**
-          * Is the item open
+          * True if the item is open
          */
         "open": boolean;
     }
@@ -83,22 +83,22 @@ declare namespace LocalJSX {
     }
     interface VaAccordion {
         /**
-          * Whether or not the accordion has a border
+          * Whether or not the accordion items will have borders
          */
         "bordered"?: boolean;
         /**
-          * Can multiple items be opened at once
+          * True if multiple items can be opened at once
          */
         "multi"?: boolean;
     }
     interface VaAccordionItem {
         /**
-          * The accordion item header
+          * The accordion item header text
          */
         "header"?: string;
         "onAccordionItemToggled"?: (event: CustomEvent<any>) => void;
         /**
-          * Is the item open
+          * True if the item is open
          */
         "open"?: boolean;
     }

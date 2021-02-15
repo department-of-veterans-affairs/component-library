@@ -13,12 +13,12 @@ export class VaAccordionItem {
   accordionItemToggled: EventEmitter;
 
   /**
-   * The accordion item header
+   * The accordion item header text
    */
   @Prop() header: string;
 
   /**
-   * Is the item open
+   * True if the item is open
    */
   @Prop() open: boolean = false;
 
