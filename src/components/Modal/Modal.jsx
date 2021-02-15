@@ -306,7 +306,6 @@ Modal.defaultProps = {
   visible: false,
   clickToClose: false,
   focusSelector: 'button, input, select, a',
-  status: 'info',
 };
 
 export default Modal;

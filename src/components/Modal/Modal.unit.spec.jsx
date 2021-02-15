@@ -110,15 +110,47 @@ describe('<Modal/>', () => {
     });
   });
 
-  describe('analaytics event', function () {
+  describe('analytics event', function () {
     it('should be triggered when modal is visible', () => {
       const handleAnalyticsEvent = e => {
         expect(e.detail).to.eql({
           componentName: 'Modal',
           action: 'show',
           details: {
-            status: 'info',
+            status: undefined,
             title: undefined,
+            primaryButtonText: undefined,
+            secondaryButtonText: undefined,
+          },
+        });
+      };
+
+      global.document.body.addEventListener(
+        'component-library-analytics',
+        handleAnalyticsEvent,
+      );
+
+      mount(
+        <Modal id="modal" visible={true} clickToClose onClose={() => {}}>
+          Modal contents
+        </Modal>,
+      );
+
+      global.document.body.removeEventListener(
+        'component-library-analytics',
+        handleAnalyticsEvent,
+      );
+    });
+
+    it('should include title when present', () => {
+      const handleAnalyticsEvent = e => {
+        console.log(e.detail);
+        expect(e.detail).to.eql({
+          componentName: 'Modal',
+          action: 'show',
+          details: {
+            status: undefined,
+            title: 'My modal title',
             primaryButtonText: undefined,
             secondaryButtonText: undefined,
           },
@@ -133,13 +165,18 @@ describe('<Modal/>', () => {
       mount(
         <Modal
           id="modal"
-          status="info"
           visible={true}
+          title="My modal title"
           clickToClose
           onClose={() => {}}
         >
           Modal contents
         </Modal>,
+      );
+
+      global.document.body.removeEventListener(
+        'component-library-analytics',
+        handleAnalyticsEvent,
       );
     });
   });
