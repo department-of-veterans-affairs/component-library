@@ -4,7 +4,7 @@ export function format(first: string, middle: string, last: string): string {
 
 export function getSlottedNodes(root: HTMLElement, nodeName: string): Array<Node> {
   return root.shadowRoot
-    .querySelectorAll('slot')[0]
+    .querySelector('slot')
     .assignedNodes()
     .filter(item => item.nodeName === nodeName);
 }
