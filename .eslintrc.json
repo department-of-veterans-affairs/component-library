@@ -15,5 +15,8 @@
   "plugins": ["react", "jsx-a11y", "prettier", "mocha"],
   "rules": {
     "prettier/prettier": ["error"]
+  },
+  "globals": {
+    "global": "writeable"
   }
 }
