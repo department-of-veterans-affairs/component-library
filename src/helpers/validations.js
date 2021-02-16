@@ -4,14 +4,6 @@ import moment from 'moment';
 const minYear = 1900;
 const maxYear = moment().add(100, 'year').year();
 
-function dateToMoment(dateField) {
-  return moment({
-    year: dateField.year.value,
-    month: dateField.month.value ? parseInt(dateField.month.value, 10) - 1 : '',
-    day: dateField.day ? dateField.day.value : null,
-  });
-}
-
 /**
  * General Validations *
  */
@@ -62,20 +54,8 @@ function isValidRequiredField(validator, field) {
  */
 function isValidYear(value) {
   return (
-    Number(value) >= 1900 &&
-    Number(value) <=
-      moment()
-        .add(100, 'year')
-        .year()
+    Number(value) >= 1900 && Number(value) <= moment().add(100, 'year').year()
   );
-}
-
-function isValidYearOrBlank(value) {
-  return isValidYear(value) || value === '';
-}
-
-function isValidCurrentOrPastYear(value) {
-  return Number(value) >= 1900 && Number(value) < moment().year() + 1;
 }
 
 function isValidMonths(value) {
@@ -136,18 +116,6 @@ function validateIfDirtyDate(dayField, monthField, yearField, validator) {
   return true;
 }
 
-function isValidAnyDate(day, month, year) {
-  if (!isValidYear(year)) {
-    return false;
-  }
-
-  return moment({
-    day,
-    month: month ? parseInt(month, 10) - 1 : month,
-    year,
-  }).isValid();
-}
-
 function isValidPartialDate(day, month, year) {
   if (year && !isValidYear(year)) {
     return false;
@@ -168,16 +136,6 @@ function isValidPartialDateField(field) {
   );
 }
 
-function isValidDateRange(fromDate, toDate) {
-  if (isBlankDateField(toDate) || isBlankDateField(fromDate)) {
-    return true;
-  }
-  const momentStart = dateToMoment(fromDate);
-  const momentEnd = dateToMoment(toDate);
-
-  return momentStart.isBefore(momentEnd);
-}
-
 function isValidPartialMonthYear(month, year) {
   if (typeof month === 'object') {
     throw new Error('Pass a month and a year to function');
@@ -189,66 +147,8 @@ function isValidPartialMonthYear(month, year) {
   return isValidPartialDate(null, null, year);
 }
 
-function isValidPartialMonthYearRange(fromDate, toDate) {
-  if (!fromDate.year.value || !toDate.year.value) {
-    return true;
-  }
-  const momentStart = dateToMoment(fromDate);
-  const momentEnd = dateToMoment(toDate);
-
-  return momentStart.isSameOrBefore(momentEnd);
-}
-
-function isValidPartialMonthYearInPast(month, year) {
-  if (typeof month === 'object') {
-    throw new Error('Pass a month and a year to function');
-  }
-  const momentDate = moment({
-    year,
-    month: month ? parseInt(month, 10) - 1 : null,
-  });
-  return (
-    !year ||
-    (isValidPartialMonthYear(month, year) &&
-      momentDate.isValid() &&
-      momentDate.isSameOrBefore(moment().startOf('month')))
-  );
-}
-
-function isValidCurrentOrPastDate(day, month, year) {
-  const momentDate = moment({ day, month: parseInt(month, 10) - 1, year });
-  return momentDate.isSameOrBefore(moment().endOf('day'), 'day');
-}
-
-function isValidFutureDate(day, month, year) {
-  const momentDate = moment({ day, month: parseInt(month, 10) - 1, year });
-  return momentDate.isAfter(moment().endOf('day'), 'day');
-}
-
-function isValidCurrentOrFutureMonthYear(month, year) {
-  const momentDate = moment({ month: parseInt(month, 10) - 1, year });
-  return momentDate.isSameOrAfter(moment(), 'month');
-}
-
 function isBlankMonthYear(field) {
   return isBlank(field.month.value) && isBlank(field.year.value);
-}
-
-function isValidDateOver17(day, month, year) {
-  if (!isValidYear(year)) {
-    return false;
-  }
-
-  const momentDate = moment({
-    day,
-    month: parseInt(month, 10) - 1,
-    year,
-  });
-  return momentDate.isBefore(
-    moment()
-      .endOf('day')
-      .subtract(17, 'years'),
-  );
 }
 
 /**
@@ -343,15 +243,8 @@ export {
   isFullDate,
   isNotBlank,
   isNotBlankDateField,
-  isValidAnyDate,
-  isValidCurrentOrPastYear,
-  isValidCurrentOrPastDate,
-  isValidCurrentOrFutureMonthYear,
-  isValidFutureDate,
   isValidDate,
   isValidDateField,
-  isValidDateOver17,
-  isValidDateRange,
   isValidEmail,
   isValidFullNameField,
   isValidField,
@@ -362,13 +255,10 @@ export {
   isValidPartialDate,
   isValidPartialDateField,
   isValidPartialMonthYear,
-  isValidPartialMonthYearInPast,
-  isValidPartialMonthYearRange,
   isValidRequiredField,
   isValidSSN,
   isValidValue,
   isValidYear,
-  isValidYearOrBlank,
   validateCustomFormComponent,
   validateIfDirty,
   validateIfDirtyDate,
