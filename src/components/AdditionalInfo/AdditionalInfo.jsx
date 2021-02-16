@@ -3,28 +3,36 @@ import PropTypes from 'prop-types';
 import _ from 'lodash';
 import classNames from 'classnames';
 import ExpandingGroup from '../ExpandingGroup/ExpandingGroup';
-import recordEvent from '../../helpers/analytics';
+import dispatchAnalyticsEvent from '../../helpers/analytics';
 
 export default class AdditionalInfo extends React.Component {
   constructor(props) {
     super(props);
     this.expandedContentId = _.uniqueId('tooltip-');
     this.state = { open: false };
+
+    this.toggle = this.toggle.bind(this);
   }
 
-  toggle = () => {
+  toggle() {
     this.setState({ open: !this.state.open });
-    if (this.props.enableAnalytics) {
-      this.props.trackEvent && this.props.trackEvent({
-        event: !this.state.open ? 'int-additional-info-expand' : 'int-additional-info-collapse',
-        'additional-info-triggerText': this.props.triggerText
+
+    // Conditionally track the event.
+    if (!this.props.disableAnalytics) {
+      dispatchAnalyticsEvent({
+        componentName: 'AdditionalInfo',
+        action: !this.state.open ? 'expand' : 'collapse',
+        details: {
+          triggerText: this.props.triggerText,
+        },
       });
-    }    
+    }
+
     return this.props.onClick && this.props.onClick();
-  };
+  }
 
   render() {
-    const { triggerText, children } = this.props;
+    const { triggerText, children, tagName: TagName = 'span' } = this.props;
 
     // Display button as a block element in order to
     // preserve the Safari VoiceOver navigation order
@@ -40,8 +48,6 @@ export default class AdditionalInfo extends React.Component {
       'fa-angle-down': true,
       open: this.state.open,
     });
-
-    const { tagName: TagName = 'span' } = this.props;
 
     const trigger = (
       <button
@@ -77,19 +83,17 @@ AdditionalInfo.propTypes = {
   triggerText: PropTypes.string.isRequired,
   onClick: PropTypes.func,
   /**
+   * Child elements (content) of modal when displayed
+   */
+  children: PropTypes.node,
+  /**
    * Function to pass in events and parameters to the dataLayer
    * and (eventually) into Google Analytics
    */
-  trackEvent: PropTypes.func,  
+  trackEvent: PropTypes.func,
   /**
-   * Analytics tracking function(s) will be called
+   * Analytics tracking function(s) will not be called
    */
-  enableAnalytics: PropTypes.bool,  
-};
-
-AdditionalInfo.defaultProps = { 
-  enableAnalytics: true,
-  trackEvent: (args) => {
-    recordEvent(args);
-  },
+  disableAnalytics: PropTypes.bool,
+  tagName: PropTypes.string,
 };
