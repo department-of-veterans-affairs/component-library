@@ -6,7 +6,16 @@ describe('va-accordion-item', () => {
 
     await page.setContent('<va-accordion-item></va-accordion-item>');
     const element = await page.find('va-accordion-item');
-    expect(element).toHaveClass('hydrated');
+
+    expect(element).toEqualHtml(`
+    <va-accordion-item class="hydrated">
+      <mock:shadow-root>
+        <button aria-controls="content" aria-expanded="false"></button>
+        <div id="content">
+          <slot></slot>
+        </div>
+      </mock:shadow-root>
+    </va-accordion-item>`);
   });
 
   it('sets aria-expanded to true based on prop', async () => {
