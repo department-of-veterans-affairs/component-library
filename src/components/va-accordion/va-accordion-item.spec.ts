@@ -21,19 +21,4 @@ describe('va-accordion-item', () => {
       </va-accordion-item>
     `);
   });
-
-  it('fires a custom event when the button is clicked', async () => {
-    const { root, doc } = await newSpecPage({
-      components: [VaAccordionItem],
-      html: '<va-accordion-item header="The header">Content inside</va-accordion-item>',
-    });
-
-    const mockListener = jest.fn();
-    doc.addEventListener('accordionItemToggled', mockListener);
-
-    const button = root.shadowRoot.querySelector('button');
-    button.click();
-
-    expect(mockListener).toHaveBeenCalledTimes(1);
-  });
 });
