@@ -102,14 +102,6 @@ function isValidPartialDate(day, month, year) {
   return true;
 }
 
-function isValidPartialDateField(field) {
-  return isValidPartialDate(
-    field.day.value,
-    field.month.value,
-    field.year.value,
-  );
-}
-
 function isValidPartialMonthYear(month, year) {
   if (typeof month === 'object') {
     throw new Error('Pass a month and a year to function');
@@ -225,7 +217,6 @@ export {
   isValidMonetaryValue,
   isValidPhone,
   isValidPartialDate,
-  isValidPartialDateField,
   isValidPartialMonthYear,
   isValidRequiredField,
   isValidSSN,
