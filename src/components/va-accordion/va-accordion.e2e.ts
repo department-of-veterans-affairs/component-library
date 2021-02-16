@@ -6,7 +6,14 @@ describe('va-accordion', () => {
 
     await page.setContent('<va-accordion></va-accordion>');
     const element = await page.find('va-accordion');
-    expect(element).toHaveClass('hydrated');
+
+    expect(element).toEqualHtml(`
+      <va-accordion class="hydrated">
+        <mock:shadow-root>
+          <slot></slot>
+        </mock:shadow-root>
+      </va-accordion>
+    `);
   });
 
   it('closes one item when another opens', async () => {
