@@ -1,5 +1,5 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { shallow, mount } from 'enzyme';
 import { axeCheck } from '../../helpers/test-helpers';
 import { expect } from 'chai';
 
@@ -119,4 +119,47 @@ describe('<AlertBox />', () => {
         backgroundOnly
       />,
     ));
+
+  describe('analytics event', function () {
+    it('should be triggered when link in AlertBox is clicked', () => {
+      const handleAnalyticsEvent = e => {
+        expect(e.detail).to.eql({
+          componentName: 'AlertBox',
+          action: 'linkClick',
+          details: {
+            clickLabel: 'with a link',
+            headline: 'Headline',
+            status: 'info',
+            backgroundOnly: true,
+            closeable: false,
+          },
+        });
+      };
+
+      global.document.body.addEventListener(
+        'component-library-analytics',
+        handleAnalyticsEvent,
+      );
+
+      const wrapper = mount(
+        <AlertBox headline={Headline} status="info" backgroundOnly>
+          <div>
+            This is content
+            <a href="https://www.va.gov/" id="test-link-1">
+              with a link
+            </a>
+            .
+          </div>
+        </AlertBox>,
+      );
+
+      const testLink = wrapper.find('a');
+      testLink.simulate('click');
+
+      global.document.body.removeEventListener(
+        'component-library-analytics',
+        handleAnalyticsEvent,
+      );
+    });
+  });
 });
