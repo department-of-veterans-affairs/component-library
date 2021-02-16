@@ -79,7 +79,6 @@ The last step is to update the `package.json` files of consuming apps to use the
 - Checkbox.js
 - Date.js
 - FileInput.js
-- MonthYear.js
 - NumberInput.js
 - RadioButtons.js
 - Select.js
