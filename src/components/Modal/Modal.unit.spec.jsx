@@ -130,7 +130,7 @@ describe('<Modal/>', () => {
         handleAnalyticsEvent,
       );
 
-      mount(
+      const tree = mount(
         <Modal id="modal" visible={true} clickToClose onClose={() => {}}>
           Modal contents
         </Modal>,
@@ -140,6 +140,8 @@ describe('<Modal/>', () => {
         'component-library-analytics',
         handleAnalyticsEvent,
       );
+
+      tree.unmount();
     });
 
     it('should include title when present', () => {
@@ -161,7 +163,7 @@ describe('<Modal/>', () => {
         handleAnalyticsEvent,
       );
 
-      mount(
+      const tree = mount(
         <Modal
           id="modal"
           visible={true}
@@ -177,6 +179,8 @@ describe('<Modal/>', () => {
         'component-library-analytics',
         handleAnalyticsEvent,
       );
+
+      tree.unmount();
     });
   });
 });
