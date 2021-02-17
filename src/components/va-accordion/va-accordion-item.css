@@ -3,9 +3,6 @@
 :host {
   display: block;
   margin-bottom: 0.5rem;
-  border-left: var(--item-border);
-  border-right: var(--item-border);
-  border-bottom: var(--item-border);
 }
 
 button {
@@ -34,6 +31,9 @@ button:hover {
   background-color: var(--color-white);
   overflow: auto;
   padding: 1.5rem 2rem;
+  border-left: var(--item-border);
+  border-right: var(--item-border);
+  border-bottom: var(--item-border);
 }
 
 button[aria-expanded='false'] + div {
