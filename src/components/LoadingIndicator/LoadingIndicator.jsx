@@ -1,12 +1,28 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+import dispatchAnalyticsEvent from '../../helpers/analytics';
 
 export default class LoadingIndicator extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = { loadingStartTime: Date.now() };
+  }
+
   componentDidMount() {
     if (this.props.setFocus && this.spinnerDiv) {
       this.spinnerDiv.focus();
     }
   }
+
+  componentWillUnmount() {
+    dispatchAnalyticsEvent({
+      componentName: 'LoadingIndicator',
+      action: 'displayed',
+      details: { displayTime: Date.now() - this.state.loadingStartTime },
+    });
+  }
+
   render() {
     const { message } = this.props;
     const { label } = this.props;
@@ -38,9 +54,13 @@ LoadingIndicator.propTypes = {
    * Set to true if the loading indicator should capture focus
    */
   setFocus: PropTypes.bool,
+  /**
+   * An aXe label
+   */
+  label: PropTypes.string,
 };
 
 LoadingIndicator.defaultProps = {
   setFocus: false,
-  label: "Loading",
+  label: 'Loading',
 };
