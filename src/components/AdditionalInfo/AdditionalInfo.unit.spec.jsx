@@ -113,34 +113,39 @@ describe('<AdditionalInfo/>', () => {
       wrapper.unmount();
     });
 
-    // it('should include triggerText when present', done => {
-    //   const handleAnalyticsEvent = e => {
-    //     expect(e.detail).to.eql({
-    //       componentName: 'AdditionalInfo',
-    //       action: 'expand',
-    //       details: {
-    //         triggerText: 'This is test triggerText.',
-    //       },
-    //     });
-    //     done();
-    //   };
+    it('should include triggerText when present', done => {
+      const handleAnalyticsEvent = e => {
+        expect(e.detail).to.eql({
+          componentName: 'AdditionalInfo',
+          action: 'collapse',
+          details: {
+            triggerText: 'This is test triggerText.',
+          },
+        });
+        done();
+      };
 
-    //   global.document.body.addEventListener(
-    //     'component-library-analytics',
-    //     handleAnalyticsEvent,
-    //   );
+      global.document.body.addEventListener(
+        'component-library-analytics',
+        handleAnalyticsEvent,
+      );
 
-    //   const wrapper = mount(
-    //     <AdditionalInfo triggerText="This is test triggerText." />,
-    //   ).setState({
-    //     open: true,
-    //   });
+      const wrapper = mount(
+        <AdditionalInfo triggerText="This is test triggerText." />,
+      ).setState({
+        open: true,
+      });
 
-    //   global.document.body.removeEventListener(
-    //     'component-library-analytics',
-    //     handleAnalyticsEvent,
-    //   );
-    //   wrapper.unmount();
-    // });
+      const addtionalInfoButton = wrapper.find('.additional-info-button');
+
+      addtionalInfoButton.simulate('click');
+
+      global.document.body.removeEventListener(
+        'component-library-analytics',
+        handleAnalyticsEvent,
+      );
+
+      wrapper.unmount();
+    });
   });
 });
