@@ -20,8 +20,14 @@ describe('va-accordion-item', () => {
 
   it('sets aria-expanded to true based on prop', async () => {
     const page = await newE2EPage();
-    await page.setContent('<va-accordion-item open header="The header">Content inside</va-accordion-item>');
+    await page.setContent('<va-accordion-item header="The header">Content inside</va-accordion-item>');
+    const component = await page.find('va-accordion-item');
     const button = await page.find('va-accordion-item >>> button');
+
+    expect(button.getAttribute('aria-expanded')).toEqual('false');
+
+    component.setProperty('open', true);
+    await page.waitForChanges();
 
     expect(button.getAttribute('aria-expanded')).toEqual('true');
   });
