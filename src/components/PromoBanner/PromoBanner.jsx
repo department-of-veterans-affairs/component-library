@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
+import dispatchAnalyticsEvent from '../../helpers/analytics';
 
 const PROMO_BANNER_TYPES = {
   announcement: 'announcement',
@@ -21,6 +22,20 @@ function PromoBanner({ type, onClose, render, href, target, text }) {
     PROMO_BANNER_ICONS.get(type),
   );
 
+  const onCloseWithAnalytics = () => {
+    dispatchAnalyticsEvent({
+      componentName: 'PromoBanner',
+      action: 'linkClick',
+      details: {
+        text,
+        href,
+        target,
+        type,
+      },
+    });
+    return onClose && onClose();
+  };
+
   return (
     <div className="vads-c-promo-banner">
       <div className="vads-c-promo-banner__body">
@@ -39,7 +54,7 @@ function PromoBanner({ type, onClose, render, href, target, text }) {
               className="vads-c-promo-banner__content-link"
               href={href}
               target={target}
-              onClick={onClose}
+              onClick={onCloseWithAnalytics}
             >
               {text} <i className="fas fa-angle-right" />
             </a>
