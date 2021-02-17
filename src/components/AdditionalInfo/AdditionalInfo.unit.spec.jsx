@@ -75,6 +75,8 @@ describe('<AdditionalInfo/>', () => {
         'component-library-analytics',
         handleExpandAnalyticsEvent,
       );
+
+      wrapper.unmount();
     });
 
     it('should include the correct collapse action', () => {
@@ -107,6 +109,8 @@ describe('<AdditionalInfo/>', () => {
         'component-library-analytics',
         handleExpandAnalyticsEvent,
       );
+
+      wrapper.unmount();
     });
 
     // it('should include triggerText when present', done => {
@@ -126,7 +130,7 @@ describe('<AdditionalInfo/>', () => {
     //     handleAnalyticsEvent,
     //   );
 
-    //   mount(
+    //   const wrapper = mount(
     //     <AdditionalInfo triggerText="This is test triggerText." />,
     //   ).setState({
     //     open: true,
@@ -136,6 +140,7 @@ describe('<AdditionalInfo/>', () => {
     //     'component-library-analytics',
     //     handleAnalyticsEvent,
     //   );
+    //   wrapper.unmount();
     // });
   });
 });
