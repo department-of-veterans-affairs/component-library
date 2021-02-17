@@ -144,7 +144,6 @@ describe('<Modal/>', () => {
 
     it('should include title when present', () => {
       const handleAnalyticsEvent = e => {
-        console.log(e.detail);
         expect(e.detail).to.eql({
           componentName: 'Modal',
           action: 'show',
