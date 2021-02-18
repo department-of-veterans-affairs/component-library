@@ -1,4 +1,4 @@
-
+import '../dist/component-library/component-library.css';
 import { defineCustomElements } from '../loader';
 
 defineCustomElements();

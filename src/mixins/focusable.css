@@ -1,0 +1,6 @@
+/* From the USWDS styles: */
+/*   https://github.com/uswds/uswds/blob/3dc296ec56cd621fe52d918701fd94621d96a198/src/stylesheets/core/mixins/_focus.scss#L12-L13 */
+button:not([disabled]):focus {
+  outline: 2px solid var(--color-gold-light);
+  outline-offset: 2px;
+}

@@ -20,6 +20,26 @@ export namespace Components {
          */
         "middle": string;
     }
+    interface VaAccordion {
+        /**
+          * Whether or not the accordion items will have borders
+         */
+        "bordered": boolean;
+        /**
+          * True if multiple items can be opened at once
+         */
+        "multi": boolean;
+    }
+    interface VaAccordionItem {
+        /**
+          * The accordion item header text
+         */
+        "header": string;
+        /**
+          * True if the item is open
+         */
+        "open": boolean;
+    }
 }
 declare global {
     interface HTMLMyComponentElement extends Components.MyComponent, HTMLStencilElement {
@@ -28,8 +48,22 @@ declare global {
         prototype: HTMLMyComponentElement;
         new (): HTMLMyComponentElement;
     };
+    interface HTMLVaAccordionElement extends Components.VaAccordion, HTMLStencilElement {
+    }
+    var HTMLVaAccordionElement: {
+        prototype: HTMLVaAccordionElement;
+        new (): HTMLVaAccordionElement;
+    };
+    interface HTMLVaAccordionItemElement extends Components.VaAccordionItem, HTMLStencilElement {
+    }
+    var HTMLVaAccordionItemElement: {
+        prototype: HTMLVaAccordionItemElement;
+        new (): HTMLVaAccordionItemElement;
+    };
     interface HTMLElementTagNameMap {
         "my-component": HTMLMyComponentElement;
+        "va-accordion": HTMLVaAccordionElement;
+        "va-accordion-item": HTMLVaAccordionItemElement;
     }
 }
 declare namespace LocalJSX {
@@ -47,8 +81,34 @@ declare namespace LocalJSX {
          */
         "middle"?: string;
     }
+    interface VaAccordion {
+        /**
+          * Whether or not the accordion items will have borders
+         */
+        "bordered"?: boolean;
+        /**
+          * True if multiple items can be opened at once
+         */
+        "multi"?: boolean;
+    }
+    interface VaAccordionItem {
+        /**
+          * The accordion item header text
+         */
+        "header"?: string;
+        /**
+          * This event is fired so that `<va-accordion>` can manage which items are opened or closed
+         */
+        "onAccordionItemToggled"?: (event: CustomEvent<any>) => void;
+        /**
+          * True if the item is open
+         */
+        "open"?: boolean;
+    }
     interface IntrinsicElements {
         "my-component": MyComponent;
+        "va-accordion": VaAccordion;
+        "va-accordion-item": VaAccordionItem;
     }
 }
 export { LocalJSX as JSX };
@@ -56,6 +116,8 @@ declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
             "my-component": LocalJSX.MyComponent & JSXBase.HTMLAttributes<HTMLMyComponentElement>;
+            "va-accordion": LocalJSX.VaAccordion & JSXBase.HTMLAttributes<HTMLVaAccordionElement>;
+            "va-accordion-item": LocalJSX.VaAccordionItem & JSXBase.HTMLAttributes<HTMLVaAccordionItemElement>;
         }
     }
 }

@@ -1,0 +1,12 @@
+:host {
+  display: block;
+  width: 100%;
+  color: var(--color-base);
+  --item-border: none; /* This is to overwrite any previous inherited value */
+}
+
+/* If `bordered` is present and if it is *not* false */
+:host([bordered='true']),
+:host([bordered='']) {
+  --item-border: 3px solid var(--color-gray-lightest);
+}
