@@ -8,7 +8,11 @@ import {
   Stories,
   PRIMARY_STORY,
 } from '@storybook/addon-docs/blocks';
-import {getWebComponentDocs, componentStructure} from './wc-helpers';
+import {
+  getWebComponentDocs,
+  componentStructure,
+  propStructure,
+} from './wc-helpers';
 
 const accordionDocs = getWebComponentDocs('va-accordion');
 const accordionItem = getWebComponentDocs('va-accordion-item');
@@ -60,6 +64,7 @@ export const Default = Template.bind({});
 Default.args = {
   ...defaultArgs,
 };
+Default.argTypes = propStructure(accordionDocs);
 
 export const Multi = Template.bind({});
 Multi.args = {

@@ -11,7 +11,18 @@ export const getWebComponentDocs = tag =>
  * on the return object from `getWebComponentDocs`
  */
 export const componentStructure = comp => {
-  const props = comp.props.reduce((propObj, prop) => {
+  const props = propStructure(comp);
+  return {
+    [comp.tag]: {
+      __docgenInfo: {
+        props,
+      },
+    },
+  };
+};
+
+export const propStructure = comp => {
+  return comp.props.reduce((propObj, prop) => {
     propObj[prop.name] = {
       description: prop.docs,
       required: prop.required,
@@ -21,12 +32,4 @@ export const componentStructure = comp => {
     };
     return propObj;
   }, {});
-
-  return {
-    [comp.tag]: {
-      __docgenInfo: {
-        props,
-      },
-    },
-  };
 };
