@@ -13,10 +13,34 @@ import {
 const getWebComponentDocs = tag =>
   componentDocs.components.filter(comp => comp.tag === tag)[0];
 
+const componentStructure = comp => {
+  const props = comp.props.reduce((propObj, prop) => {
+    propObj[prop.name] = {
+      description: prop.docs,
+      required: prop.required,
+      type: {
+        name: prop.type,
+      },
+    };
+    return propObj;
+  }, {});
+
+  return {
+    [comp.tag]: {
+      __docgenInfo: {
+        props,
+      },
+    },
+  };
+};
+
 const accordionDocs = getWebComponentDocs('va-accordion');
+
+const accordionItem = getWebComponentDocs('va-accordion-item');
 
 export default {
   title: 'Components/va-accordion',
+  subcomponents: componentStructure(accordionItem),
   parameters: {
     docs: {
       // Add the contacts table to the docs page
