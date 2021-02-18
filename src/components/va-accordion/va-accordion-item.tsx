@@ -6,6 +6,9 @@ import { Component, Event, EventEmitter, Host, Prop, h } from '@stencil/core';
   shadow: true,
 })
 export class VaAccordionItem {
+  /**
+   * This event is fired so that `<va-accordion>` can manage which items are opened or closed
+   */
   @Event({
     composed: true,
     bubbles: true,

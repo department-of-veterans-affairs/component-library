@@ -96,6 +96,9 @@ declare namespace LocalJSX {
           * The accordion item header text
          */
         "header"?: string;
+        /**
+          * This event is fired so that `<va-accordion>` can manage which items are opened or closed
+         */
         "onAccordionItemToggled"?: (event: CustomEvent<any>) => void;
         /**
           * True if the item is open
