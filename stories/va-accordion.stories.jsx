@@ -1,5 +1,4 @@
 import React from 'react';
-import componentDocs from 'web-components/component-docs.json';
 import {
   Title,
   Subtitle,
@@ -9,33 +8,9 @@ import {
   Stories,
   PRIMARY_STORY,
 } from '@storybook/addon-docs/blocks';
-
-const getWebComponentDocs = tag =>
-  componentDocs.components.filter(comp => comp.tag === tag)[0];
-
-const componentStructure = comp => {
-  const props = comp.props.reduce((propObj, prop) => {
-    propObj[prop.name] = {
-      description: prop.docs,
-      required: prop.required,
-      type: {
-        name: prop.type,
-      },
-    };
-    return propObj;
-  }, {});
-
-  return {
-    [comp.tag]: {
-      __docgenInfo: {
-        props,
-      },
-    },
-  };
-};
+import {getWebComponentDocs, componentStructure} from './wc-helpers';
 
 const accordionDocs = getWebComponentDocs('va-accordion');
-
 const accordionItem = getWebComponentDocs('va-accordion-item');
 
 export default {
