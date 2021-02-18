@@ -11,15 +11,12 @@ const defaultArgs = {
 };
 
 const argTypes = {
-  first: {
-    description: 'The first name',
-  },
-  middle: {
-    description: 'The middle name',
-  },
-  last: {
-    description: 'The last name',
-  },
+  //   multi: {
+  //     description: 'The first name',
+  //   },
+  //   bordered: {
+  //     description: 'The middle name',
+  //   },
 };
 
 const Template = ({ multi, bordered }) => html`
