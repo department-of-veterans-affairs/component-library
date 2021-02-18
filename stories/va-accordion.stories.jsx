@@ -10,9 +10,10 @@ import {
   PRIMARY_STORY,
 } from '@storybook/addon-docs/blocks';
 
-const accordionDocs = componentDocs.components.filter(
-  comp => comp.tag === 'va-accordion',
-)[0];
+const getWebComponentDocs = tag =>
+  componentDocs.components.filter(comp => comp.tag === tag)[0];
+
+const accordionDocs = getWebComponentDocs('va-accordion');
 
 export default {
   title: 'Components/va-accordion',
