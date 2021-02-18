@@ -23,8 +23,8 @@ export default {
         <>
           <Title />
           <Subtitle />
-          <Primary />
           <Description markdown={accordionDocs.docs} />
+          <Primary />
           <ArgsTable story={PRIMARY_STORY} />
           <Stories />
         </>
