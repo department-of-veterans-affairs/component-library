@@ -10,15 +10,6 @@ const defaultArgs = {
   bordered: false,
 };
 
-const argTypes = {
-  //   multi: {
-  //     description: 'The first name',
-  //   },
-  //   bordered: {
-  //     description: 'The middle name',
-  //   },
-};
-
 const Template = ({ multi, bordered }) => html`
   <va-accordion bordered="${bordered}" multi="${multi}">
     <va-accordion-item header="First Ammendment">
@@ -34,14 +25,11 @@ const Template = ({ multi, bordered }) => html`
 export const Default = Template.bind({});
 
 Default.args = { ...defaultArgs };
-Default.argTypes = { ...argTypes };
 
 export const Multiselect = Template.bind({});
 
 Multiselect.args = { ...defaultArgs, multi: true };
-Multiselect.argTypes = { ...argTypes };
 
 export const Bordered = Template.bind({});
 
 Bordered.args = { ...defaultArgs, bordered: true };
-Bordered.argTypes = { ...argTypes };
