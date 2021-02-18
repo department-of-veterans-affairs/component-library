@@ -10499,7 +10499,7 @@ watchpack@^1.7.4:
 
 "web-components@https://github.com/department-of-veterans-affairs/component-library.git#wc-accordion":
   version "0.0.1"
-  resolved "https://github.com/department-of-veterans-affairs/component-library.git#dd7948a7a1ca2b13dda85258934b2dd9da39e312"
+  resolved "https://github.com/department-of-veterans-affairs/component-library.git#e28f29e6fad6654bd7e6ba73190a52af24f4bc77"
   dependencies:
     "@stencil/core" "^2.0.1"
 
