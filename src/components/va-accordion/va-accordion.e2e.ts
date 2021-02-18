@@ -30,6 +30,7 @@ describe('va-accordion', () => {
     await buttons[0].click();
 
     expect(buttons[0].getAttribute('aria-expanded')).toEqual('true');
+    expect(buttons[1].getAttribute('aria-expanded')).toEqual('false');
 
     // Click the second button
     await buttons[1].click();
@@ -53,6 +54,7 @@ describe('va-accordion', () => {
     await buttons[0].click();
 
     expect(buttons[0].getAttribute('aria-expanded')).toEqual('true');
+    expect(buttons[1].getAttribute('aria-expanded')).toEqual('false');
 
     // Click the second button
     await buttons[1].click();
