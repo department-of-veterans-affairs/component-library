@@ -1,9 +1,36 @@
 import React from 'react';
-import {VaAccordion} from 'web-components/dist/collection/components/va-accordion/va-accordion.js';
+import componentDocs from 'web-components/component-docs.json';
+import {
+  Title,
+  Subtitle,
+  Description,
+  Primary,
+  ArgsTable,
+  Stories,
+  PRIMARY_STORY,
+} from '@storybook/addon-docs/blocks';
+
+const accordionDocs = componentDocs.components.filter(
+  comp => comp.tag === 'va-accordion',
+)[0];
 
 export default {
   title: 'Components/va-accordion',
-  component: VaAccordion,
+  parameters: {
+    docs: {
+      // Add the contacts table to the docs page
+      page: () => (
+        <>
+          <Title />
+          <Subtitle />
+          <Primary />
+          <Description markdown={accordionDocs.docs} />
+          <ArgsTable story={PRIMARY_STORY} />
+          <Stories />
+        </>
+      ),
+    },
+  },
 };
 
 const Template = args => {
