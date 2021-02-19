@@ -1,6 +1,6 @@
 import { AxePuppeteer } from '@axe-core/puppeteer';
 
-const ignoredDefaults = ['document-title', 'html-has-lang', 'page-has-heading-one', 'landmark-one-main'];
+const ignoredDefaults = ['document-title', 'html-has-lang', 'page-has-heading-one', 'landmark-one-main', 'region'];
 
 const buildAxeErrorOutput = violations =>
   violations
