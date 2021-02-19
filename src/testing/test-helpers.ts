@@ -1,6 +1,6 @@
 import { AxePuppeteer } from '@axe-core/puppeteer';
 
-const ignoredDefaults = ['document-title', 'html-has-lang'];
+const ignoredDefaults = ['document-title', 'html-has-lang', 'page-has-heading-one', 'landmark-one-main'];
 
 const buildAxeErrorOutput = violations =>
   violations
@@ -17,7 +17,6 @@ export async function axeCheck(page: any, additionalIgnored: string[] = []) {
   const ignoredRules = [...ignoredDefaults, ...additionalIgnored];
   const results = await new AxePuppeteer(page).disableRules(ignoredRules).analyze();
 
-  const appropriateSeverity = results.violations.filter(violation => ['serious', 'critical'].includes(violation.impact));
-  const axeError = buildAxeErrorOutput(appropriateSeverity);
+  const axeError = buildAxeErrorOutput(results.violations);
   expect(axeError).toBe(null);
 }
