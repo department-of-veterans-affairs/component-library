@@ -11,7 +11,10 @@
       "jsx": true
     },
     "ecmaVersion": 12,
-    "sourceType": "module"
+    "sourceType": "module",
+    "babelOptions": {
+      "configFile": "./config/babel.config.js"
+    }
   },
   "plugins": ["react", "jsx-a11y", "prettier", "mocha"],
   "rules": {
