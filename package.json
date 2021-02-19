@@ -46,7 +46,8 @@
     "recast": "^0.14.4"
   },
   "devDependencies": {
-    "@babel/core": "^7.12.3",
+    "@babel/core": "^7.12.17",
+    "@babel/eslint-parser": "^7.12.17",
     "@babel/plugin-proposal-function-sent": "^7.12.1",
     "@babel/plugin-proposal-throw-expressions": "^7.12.1",
     "@babel/plugin-syntax-import-meta": "^7.10.4",
