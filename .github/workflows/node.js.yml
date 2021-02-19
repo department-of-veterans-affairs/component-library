@@ -10,7 +10,7 @@ on:
     branches: [ master ]
 
 jobs:
-  build_and_test:
+  test:
 
     runs-on: ubuntu-latest
 
@@ -26,5 +26,4 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
     - run: yarn
-    - run: yarn build
     - run: yarn test
