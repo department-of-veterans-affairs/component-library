@@ -23,7 +23,7 @@ export function dirtyAllFields(field) {
   ) {
     return makeField(field.value, true);
   } else if (_.isPlainObject(field)) {
-    return _.mapValues(field, (value, _k) => dirtyAllFields(value));
+    return _.mapValues(field, value => dirtyAllFields(value));
   } else if (_.isArray(field)) {
     return field.map(dirtyAllFields);
   }
