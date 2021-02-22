@@ -57,19 +57,21 @@ class AlertBox extends Component {
   }
 
   handleAlertBodyClick(e) {
-    // If it's a link being clicked, dispatch an analytics event
-    if (e.target.tagName && e.target.tagName === 'A') {
-      dispatchAnalyticsEvent({
-        componentName: 'AlertBox',
-        action: 'linkClick',
-        details: {
-          clickLabel: e.target.innerText,
-          headline: this.props.headline,
-          status: this.props.status,
-          backgroundOnly: this.props.backgroundOnly,
-          closeable: !!this.props.onCloseAlert,
-        },
-      });
+    if (!this.props.disableAnalytics) {
+      // If it's a link being clicked, dispatch an analytics event
+      if (e.target.tagName && e.target.tagName === 'A') {
+        dispatchAnalyticsEvent({
+          componentName: 'AlertBox',
+          action: 'linkClick',
+          details: {
+            clickLabel: e.target.innerText,
+            headline: this.props.headline,
+            status: this.props.status,
+            backgroundOnly: this.props.backgroundOnly,
+            closeable: !!this.props.onCloseAlert,
+          },
+        });
+      }
     }
   }
 
@@ -181,6 +183,10 @@ AlertBox.propTypes = {
       );
     }
   },
+  /**
+   * Analytics tracking function(s) will not be called
+   */
+  disableAnalytics: PropTypes.bool,
 };
 /* eslint-enable consistent-return */
 
