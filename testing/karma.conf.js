@@ -33,7 +33,7 @@ module.exports = function karmaConfig(config) {
         extensions: ['.js', '.jsx'],
       },
       // target: 'node',
-      node: {global: true, fs: 'empty'},
+      node: { global: true, fs: 'empty' },
     },
 
     // list of files / patterns to load in the browser
