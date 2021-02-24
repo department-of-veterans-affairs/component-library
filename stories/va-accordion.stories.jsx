@@ -1,17 +1,9 @@
 import React from 'react';
 import {
-  Title,
-  Subtitle,
-  Description,
-  Primary,
-  ArgsTable,
-  Stories,
-  PRIMARY_STORY,
-} from '@storybook/addon-docs/blocks';
-import {
   getWebComponentDocs,
   componentStructure,
   propStructure,
+  StoryDocs,
 } from './wc-helpers';
 
 const accordionDocs = getWebComponentDocs('va-accordion');
@@ -22,17 +14,8 @@ export default {
   subcomponents: componentStructure(accordionItem),
   parameters: {
     docs: {
-      // Add the contacts table to the docs page
-      page: () => (
-        <>
-          <Title />
-          <Subtitle />
-          <Description markdown={accordionDocs.docs} />
-          <Primary />
-          <ArgsTable story={PRIMARY_STORY} />
-          <Stories />
-        </>
-      ),
+      /* eslint-disable-next-line react/display-name */
+      page: () => <StoryDocs docs={accordionDocs.docs} />,
     },
   },
 };

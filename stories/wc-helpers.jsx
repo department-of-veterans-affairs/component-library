@@ -1,3 +1,15 @@
+import React from 'react';
+import PropTypes from 'prop-types';
+import {
+  Title,
+  Subtitle,
+  Description,
+  Primary,
+  ArgsTable,
+  Stories,
+  PRIMARY_STORY,
+} from '@storybook/addon-docs/blocks';
+
 import componentDocs from 'web-components/component-docs.json';
 
 /**
@@ -32,4 +44,24 @@ export const propStructure = comp => {
     };
     return propObj;
   }, {});
+};
+
+/**
+ * Return a component with Storybook docs blocks in a standard order.
+ * Accepts a markdown string as a prop
+ */
+export function StoryDocs({ docs }) {
+  return (
+    <>
+      <Title />
+      <Subtitle />
+      <Description markdown={docs} />
+      <Primary />
+      <ArgsTable story={PRIMARY_STORY} />
+      <Stories />
+    </>
+  );
+}
+StoryDocs.propTypes = {
+  docs: PropTypes.string.isRequired,
 };
