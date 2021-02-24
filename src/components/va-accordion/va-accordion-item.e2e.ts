@@ -1,4 +1,5 @@
 import { newE2EPage } from '@stencil/core/testing';
+import { axeCheck } from '../../testing/test-helpers';
 
 describe('va-accordion-item', () => {
   it('renders', async () => {
@@ -16,6 +17,24 @@ describe('va-accordion-item', () => {
         </div>
       </mock:shadow-root>
     </va-accordion-item>`);
+  });
+
+  it('passes an axe check when open', async () => {
+    const page = await newE2EPage();
+    await page.setContent(`
+        <va-accordion-item open header="First item">Some content</va-accordion-item>
+      `);
+
+    await axeCheck(page);
+  });
+
+  it('passes an axe check when closed', async () => {
+    const page = await newE2EPage();
+    await page.setContent(`
+        <va-accordion-item header="First item">Some content</va-accordion-item>
+      `);
+
+    await axeCheck(page);
   });
 
   it('sets aria-expanded to true based on prop', async () => {
