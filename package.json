@@ -19,7 +19,7 @@
     "build": "node ./scripts/build.js",
     "build-storybook": "build-storybook",
     "prepublishOnly": "pinst --disable && node ./scripts/prepublish.js",
-    "postinstall": "husky install && cd node_modules/web-components && npm install --only=prod && npm run-script build"
+    "postinstall": "husky install && cd node_modules/web-components && npm install --only=prod && npm run-script build",
     "postpublish": "pinst --enable",
     "storybook": "start-storybook -p 6006",
     "test-debug": "karma start testing/karma.conf.js --browsers Chrome",
