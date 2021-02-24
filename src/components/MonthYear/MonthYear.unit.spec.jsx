@@ -9,6 +9,20 @@ import { makeField } from '../../helpers/fields.js';
 import { minYear, maxYear } from '../../helpers/validations';
 
 describe('<MonthYear>', () => {
+  it('wraps input elements in a fieldset', () => {
+    const date = {
+      month: makeField(12),
+      year: makeField(2010),
+    };
+    const tree = shallow(
+      <MonthYear date={date} onValueChange={_update => {}} />,
+    );
+    expect(tree.find('fieldset')).to.have.lengthOf(1);
+    const legend = tree.find('legend');
+    expect(legend).to.have.lengthOf(1);
+    expect(legend.text()).to.equal('Date');
+    tree.unmount();
+  });
   it('renders input elements', () => {
     const date = {
       month: makeField(12),

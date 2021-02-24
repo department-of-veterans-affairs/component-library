@@ -1,6 +1,6 @@
 {
   "name": "@department-of-veterans-affairs/component-library",
-  "version": "1.1.0",
+  "version": "2.0.0",
   "description": "VA.gov component library in React",
   "keywords": [
     "react",
@@ -17,19 +17,26 @@
   },
   "scripts": {
     "build": "node ./scripts/build.js",
-    "prepublishOnly": "node ./scripts/prepublish.js",
-    "test-watch": "karma start testing/karma.conf.js --auto-watch",
-    "test": "karma start testing/karma.conf.js --single-run",
-    "test-debug": "karma start testing/karma.conf.js --browsers Chrome",
-    "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
-    "postinstall": "cd node_modules/web-components && npm install --only=prod && npm run-script build"
+    "prepublishOnly": "pinst --disable && node ./scripts/prepublish.js",
+    "postinstall": "husky install && cd node_modules/web-components && npm install --only=prod && npm run-script build"
+    "postpublish": "pinst --enable",
+    "storybook": "start-storybook -p 6006",
+    "test-debug": "karma start testing/karma.conf.js --browsers Chrome",
+    "test": "karma start testing/karma.conf.js --single-run",
+    "test-watch": "karma start testing/karma.conf.js --auto-watch"
   },
   "bugs": {
     "url": "https://github.com/department-of-veterans-affairs/component-library/issues"
   },
+  "lint-staged": {
+    "*.(js|jsx)": "eslint --fix"
+  },
   "dependencies": {
     "classnames": "^2.2.6",
+    "core-js": "^3.9.0",
+    "date-fns": "^2.17.0",
+    "date-fns-tz": "^1.1.1",
     "lodash": "^4.17.15",
     "moment": "^2.23.0",
     "prop-types": "^15.6.2",
@@ -40,7 +47,8 @@
     "recast": "^0.14.4"
   },
   "devDependencies": {
-    "@babel/core": "^7.12.3",
+    "@babel/core": "^7.12.17",
+    "@babel/eslint-parser": "^7.12.17",
     "@babel/plugin-proposal-function-sent": "^7.12.1",
     "@babel/plugin-proposal-throw-expressions": "^7.12.1",
     "@babel/plugin-syntax-import-meta": "^7.10.4",
@@ -57,16 +65,32 @@
     "babel-plugin-transform-react-remove-prop-types": "^0.4.24",
     "chai": "^4.1.2",
     "chai-as-promised": "^7.1.1",
+    "chalk": "^4.1.0",
     "enzyme": "^3.1.0",
     "enzyme-adapter-react-16": "^1.7.1",
+    "eslint": "^7.19.0",
+    "eslint-config-prettier": "^7.2.0",
+    "eslint-plugin-jsx-a11y": "^6.4.1",
+    "eslint-plugin-mocha": "^8.0.0",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-prettier": "^3.3.1",
+    "eslint-plugin-react": "^7.22.0",
+    "fs-extra": "^9.1.0",
+    "glob": "^7.1.6",
+    "husky": "^5.0.9",
+    "is-docker": "^2.1.1",
     "karma": "^5.2.3",
     "karma-chrome-launcher": "^3.1.0",
     "karma-mocha": "^2.0.1",
     "karma-webpack": "^4.0.2",
+    "lint-staged": "^10.5.4",
     "mocha": "^4.0.1",
+    "pinst": "^2.1.4",
+    "prettier": "^2.2.1",
     "react-dom": "^16.7.0",
     "react-html-parser": "^2.0.2",
     "react-router": "3",
+    "rimraf": "^3.0.2",
     "sinon": "^9.2.2",
     "web-components": "https://github.com/department-of-veterans-affairs/component-library.git#postcss-deps"
   }

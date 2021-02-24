@@ -141,5 +141,22 @@ AcceptTermsPrompt.propTypes = {
    * cancel button click handler
    */
   onCancel: PropTypes.func,
+
+  onAccept: PropTypes.function.required,
+
+  /**
+   * The terms to accept.
+   *
+   * If somebody has good description for each of these properties, please add
+   * them here.
+   */
+  terms: PropTypes.shape({
+    title: PropTypes.string.required,
+    name: PropTypes.string.required,
+    headerContent: PropTypes.string, // ?
+    termsContent: PropTypes.string, // ?
+    footerContent: PropTypes.string, // ?
+    yesContent: PropTypes.string, // ?
+  }),
 };
 export default AcceptTermsPrompt;

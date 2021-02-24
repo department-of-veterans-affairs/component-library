@@ -2,11 +2,24 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
-import moment from 'moment';
+import { isAfter, isBefore, isSameDay } from 'date-fns';
+import { format, utcToZonedTime } from 'date-fns-tz';
+
 // Relative imports.
 import AlertBox from '../AlertBox/AlertBox';
 
 export const MAINTENANCE_BANNER = 'MAINTENANCE_BANNER';
+
+const easternZone = 'America/New_York';
+
+/**
+ * Simple helper which takes a UTC time and formats it to be in the Eastern (New York) timezone
+ */
+function formatEastern(datetimeUTC, formatString) {
+  return format(utcToZonedTime(datetimeUTC, easternZone), formatString, {
+    timeZone: easternZone,
+  });
+}
 
 // @WARNING: This is currently only used once in vets-website.
 /**
@@ -19,7 +32,7 @@ export class MaintenanceBanner extends Component {
      */
     content: PropTypes.string.isRequired,
     /**
-     * A 'moment' object used when downtime expires. Use `moment.utc()` to get the correct display time.
+     * A Date object used when downtime expires.
      */
     expiresAt: PropTypes.object.isRequired,
     /**
@@ -34,7 +47,7 @@ export class MaintenanceBanner extends Component {
       setItem: PropTypes.func.isRequired,
     }),
     /**
-     * A 'moment' object used when downtime starts. Use `moment.utc()` to get the correct display time.
+     * A Date object used when downtime starts.
      */
     startsAt: PropTypes.object.isRequired,
     /**
@@ -46,7 +59,7 @@ export class MaintenanceBanner extends Component {
      */
     warnContent: PropTypes.string,
     /**
-     * A 'moment' object used when pre-downtime starts. Use `moment.utc()` to get the correct display time.
+     * A Date object used when pre-downtime starts.
      */
     warnStartsAt: PropTypes.object,
     /**
@@ -67,18 +80,17 @@ export class MaintenanceBanner extends Component {
   derivePostContent = () => {
     const { startsAt, expiresAt } = this.props;
 
-    const startsAtET = startsAt.clone().subtract(4, 'hours');
-    const expiresAtET = expiresAt.clone().subtract(4, 'hours');
-
-    if (startsAt.isSame(expiresAt, 'day')) {
+    if (isSameDay(startsAt, expiresAt)) {
       return (
         <>
           <p>
-            <strong>Date:</strong> {startsAtET.format('dddd MMMM D, YYYY')}
+            <strong>Date:</strong>{' '}
+            {formatEastern(startsAt, 'EEEE, MMMM d, yyyy')}
           </p>
           <p>
-            <strong>Start/End time:</strong> {startsAtET.format('h:mm a')} to{' '}
-            {expiresAtET.format('h:mm a')} ET
+            <strong>Start/End time:</strong>{' '}
+            {formatEastern(startsAt, 'h:mm aaaa')} to{' '}
+            {formatEastern(expiresAt, 'h:mm aaaa')} ET
           </p>
         </>
       );
@@ -88,11 +100,11 @@ export class MaintenanceBanner extends Component {
       <>
         <p>
           <strong>Start:</strong>{' '}
-          {startsAtET.format('dddd MMMM D, YYYY, [at] h:mm a')} ET
+          {formatEastern(startsAt, "EEEE, MMMM d, yyyy, 'at' h:mm aaaa")} ET
         </p>
         <p>
           <strong>End:</strong>{' '}
-          {expiresAtET.format('dddd MMMM D, YYYY, [at] h:mm a')} ET
+          {formatEastern(expiresAt, "EEEE, MMMM d, yyyy, 'at' h:mm aaaa")} ET
         </p>
       </>
     );
@@ -120,7 +132,7 @@ export class MaintenanceBanner extends Component {
     } = this.props;
 
     // Derive dates.
-    const now = moment();
+    const now = Date.now();
     const postContent = derivePostContent();
 
     // Escape early if the banner is dismissed.
@@ -129,17 +141,17 @@ export class MaintenanceBanner extends Component {
     }
 
     // Escape early if it's before when it should show.
-    if (now.isBefore(warnStartsAt)) {
+    if (isBefore(now, warnStartsAt)) {
       return null;
     }
 
     // Escape early if it's after when it should show.
-    if (now.isAfter(expiresAt)) {
+    if (isAfter(now, expiresAt)) {
       return null;
     }
 
     // Show pre-downtime.
-    if (now.isBefore(startsAt)) {
+    if (isBefore(now, startsAt)) {
       return (
         <div
           className="usa-alert-full-width vads-u-border-top--5px medium-screen:vads-u-border-top--10px vads-u-border-color--warning-message maintenance-banner"
