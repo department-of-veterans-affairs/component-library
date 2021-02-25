@@ -27,7 +27,7 @@ export class VaAccordion {
 
   @Listen('accordionItemToggled')
   itemToggledHandler(event: CustomEvent) {
-    const clickedItem = event.detail.target.parentNode.host;
+    const clickedItem = event.detail.target.parentNode.parentNode.host;
     // Close the other items if this accordion isn't multi-selectable
     if (!this.multi) {
       this.getSlottedNodes(this.el, 'va-accordion-item')
