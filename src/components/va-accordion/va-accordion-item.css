@@ -20,7 +20,7 @@ button {
   background-position: right 2rem center;
   background-repeat: no-repeat;
   background-size: 1.5rem;
-  display: inline-block;
+  display: block;
 }
 
 button:hover {
