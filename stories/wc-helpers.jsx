@@ -33,6 +33,12 @@ export const componentStructure = comp => {
   };
 };
 
+/**
+ * Expects an object returned by `getWebComponentDocs`.
+ * Returns an object that matches the structure in:
+ *   https://github.com/reactjs/react-docgen#result-data-structure
+ * Used to generate some docs for web components in Storybook
+ */
 export const propStructure = comp => {
   return comp.props.reduce((propObj, prop) => {
     propObj[prop.name] = {
