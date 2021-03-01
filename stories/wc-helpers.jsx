@@ -26,6 +26,9 @@ export const componentStructure = comp => {
   const props = propStructure(comp);
   return {
     [comp.tag]: {
+      // For the React version of storybook, the loader looks for a `__docgenInfo` object
+      // with some metadata:
+      // https://github.com/storybookjs/storybook/blob/next/addons/docs/docs/multiframework.md#arg-tables
       __docgenInfo: {
         props,
       },
