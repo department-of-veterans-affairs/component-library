@@ -47,6 +47,7 @@ export const propStructure = comp => {
     propObj[prop.name] = {
       description: prop.docs,
       required: prop.required,
+      defaultValue: { value: prop.default },
       type: {
         name: prop.type,
       },
