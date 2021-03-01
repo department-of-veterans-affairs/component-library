@@ -27,7 +27,11 @@ export class VaAccordion {
 
   @Listen('accordionItemToggled')
   itemToggledHandler(event: CustomEvent) {
-    const clickedItem = event.detail.target.parentNode.host;
+    // The event target is the button, and it has a parent which is a header.
+    // It is the parent of the header (the root item) that we need to access
+    // The final parentNode will be a shadowRoot, and from there we get the host.
+    // https://developer.mozilla.org/en-US/docs/Web/API/ShadowRoot/host
+    const clickedItem = event.detail.target.parentNode.parentNode.host;
     // Close the other items if this accordion isn't multi-selectable
     if (!this.multi) {
       this.getSlottedNodes(this.el, 'va-accordion-item')

@@ -25,16 +25,32 @@ export class VaAccordionItem {
    */
   @Prop() open: boolean = false;
 
+  /**
+   * Header level for button wrapper. Must be between 1 and 6
+   */
+  @Prop() level: number = 2;
+
   private toggleOpen(e: MouseEvent): void {
     this.accordionItemToggled.emit(e);
   }
 
   render() {
+    const Header = () =>
+      h(
+        `h${this.level}`,
+        null,
+        <button
+          onClick={this.toggleOpen.bind(this)}
+          aria-expanded={this.open ? 'true' : 'false'}
+          aria-controls="content"
+        >
+          {this.header}
+        </button>,
+      );
+
     return (
       <Host>
-        <button onClick={this.toggleOpen.bind(this)} aria-expanded={this.open ? 'true' : 'false'} aria-controls="content">
-          {this.header}
-        </button>
+        <Header />
         <div id="content">
           <slot />
         </div>

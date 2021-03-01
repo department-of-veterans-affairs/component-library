@@ -37,7 +37,9 @@ describe('va-accordion', () => {
         <va-accordion-item header="Second item">A bit more</va-accordion-item>
       </va-accordion>`);
 
-    const buttons = await page.findAll('va-accordion-item >>> button[aria-expanded="false"]');
+    const buttons = await page.findAll(
+      'va-accordion-item >>> button[aria-expanded="false"]',
+    );
     expect(buttons.length).toEqual(2);
 
     await buttons[0].click();
@@ -61,7 +63,9 @@ describe('va-accordion', () => {
         <va-accordion-item header="Second item">A bit more</va-accordion-item>
       </va-accordion>`);
 
-    const buttons = await page.findAll('va-accordion-item >>> button[aria-expanded="false"]');
+    const buttons = await page.findAll(
+      'va-accordion-item >>> button[aria-expanded="false"]',
+    );
     expect(buttons.length).toEqual(2);
 
     await buttons[0].click();

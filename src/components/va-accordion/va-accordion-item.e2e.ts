@@ -11,12 +11,31 @@ describe('va-accordion-item', () => {
     expect(element).toEqualHtml(`
     <va-accordion-item class="hydrated">
       <mock:shadow-root>
-        <button aria-controls="content" aria-expanded="false"></button>
+        <h2>
+          <button aria-controls="content" aria-expanded="false"></button>
+        </h2>
         <div id="content">
           <slot></slot>
         </div>
       </mock:shadow-root>
     </va-accordion-item>`);
+  });
+
+  it('allows the heading level to be changed via prop', async () => {
+    const page = await newE2EPage();
+    await page.setContent(
+      '<va-accordion-item header="The header">Content inside</va-accordion-item>',
+    );
+    const element = await page.find('va-accordion-item');
+    let header = element.shadowRoot.childNodes[0];
+
+    expect(header.nodeName).toEqual('H2');
+
+    element.setProperty('level', 4);
+    await page.waitForChanges();
+    header = element.shadowRoot.childNodes[0];
+
+    expect(header.nodeName).toEqual('H4');
   });
 
   it('passes an axe check when open', async () => {
@@ -39,7 +58,9 @@ describe('va-accordion-item', () => {
 
   it('sets aria-expanded to true based on prop', async () => {
     const page = await newE2EPage();
-    await page.setContent('<va-accordion-item header="The header">Content inside</va-accordion-item>');
+    await page.setContent(
+      '<va-accordion-item header="The header">Content inside</va-accordion-item>',
+    );
     const component = await page.find('va-accordion-item');
     const button = await page.find('va-accordion-item >>> button');
 
@@ -53,7 +74,9 @@ describe('va-accordion-item', () => {
 
   it('fires a custom event when the button is clicked', async () => {
     const page = await newE2EPage();
-    await page.setContent('<va-accordion-item header="The header">Content inside</va-accordion-item>');
+    await page.setContent(
+      '<va-accordion-item header="The header">Content inside</va-accordion-item>',
+    );
 
     const accordionItemToggled = await page.spyOnEvent('accordionItemToggled');
 

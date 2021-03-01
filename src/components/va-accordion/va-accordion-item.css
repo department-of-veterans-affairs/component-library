@@ -5,6 +5,20 @@
   margin-bottom: 0.5rem;
 }
 
+:host(:not([open])) #content,
+:host([open='false']) #content {
+  display: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+}
+
 button {
   cursor: pointer;
   width: 100%;
@@ -20,7 +34,7 @@ button {
   background-position: right 2rem center;
   background-repeat: no-repeat;
   background-size: 1.5rem;
-  display: inline-block;
+  display: block;
 }
 
 button:hover {
@@ -34,10 +48,6 @@ button:hover {
   border-left: var(--item-border);
   border-right: var(--item-border);
   border-bottom: var(--item-border);
-}
-
-button[aria-expanded='false'] + div {
-  display: none;
 }
 
 button[aria-expanded='false'] {
