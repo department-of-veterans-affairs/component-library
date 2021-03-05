@@ -10,6 +10,17 @@ export const config: Config = {
       plugins: [url({ url: 'inline' })],
     }),
   ],
+  buildEs5: 'prod',
+  extras: {
+    cssVarsShim: true,
+    dynamicImportShim: true,
+    shadowDomShim: true,
+    safari10: true,
+    scriptDataOpts: true,
+    appendChildSlotFix: false,
+    cloneNodeFix: false,
+    slotChildNodesFix: true,
+  },
   outputTargets: [
     {
       type: 'dist',
