@@ -10,6 +10,8 @@ export const config: Config = {
       plugins: [url({ url: 'inline' })],
     }),
   ],
+  // This is for IE11 support
+  // https://stenciljs.com/docs/config-extras
   buildEs5: 'prod',
   extras: {
     cssVarsShim: true,
