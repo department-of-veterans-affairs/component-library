@@ -51,6 +51,8 @@ export class VaAccordion {
   getSlottedNodes(root: HTMLElement, nodeName: string): Array<Node> {
     // If the browser is using the shadowDOM, the childNodes should be an array of two things:
     // A `<style>` element and a `<slot>` element
+    // Chrome, Firefox, Safari, Edge - literally every modern browser will use shadowDOM.
+    // This is purely for IE compatibility
     const hasShadowDOM =
       Array.from(root.shadowRoot.childNodes).filter(
         (node: any) => node.tagName === 'SLOT',
