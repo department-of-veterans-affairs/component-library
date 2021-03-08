@@ -52,7 +52,11 @@ export class VaAccordion {
     let children = null;
     // If the browser is using the shadowDOM, the childNodes should be an array of two things:
     // A `<style>` element and a `<slot>` element
-    if (root.shadowRoot.childNodes.length > 1) {
+    const hasShadowDOM =
+      Array.from(root.shadowRoot.childNodes).filter(
+        (node: any) => node.tagName === 'SLOT',
+      ).length > 0;
+    if (hasShadowDOM) {
       children = root.shadowRoot.querySelector('slot').assignedNodes();
     } else {
       children = root.shadowRoot.childNodes;
