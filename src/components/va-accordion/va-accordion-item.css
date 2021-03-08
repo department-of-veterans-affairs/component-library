@@ -36,7 +36,7 @@ button {
   background-size: 1.5rem;
   display: block;
   /* This color assignment is for IE11 compatibility - the one in */
-  /* the `<va-accordion-item>`'s CSS with `:host` doesn't work well */
+  /* the `<va-accordion>`'s CSS with `:host` doesn't work well */
   color: var(--color-base);
 }
 
