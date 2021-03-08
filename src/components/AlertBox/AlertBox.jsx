@@ -16,7 +16,6 @@ class AlertBox extends Component {
   constructor(props) {
     super(props);
     this.handleAlertBodyClick = this.handleAlertBodyClick.bind(this);
-    this.scrollToAlert = this.scrollToAlert.bind(this);
   }
 
   componentDidMount() {
@@ -38,7 +37,7 @@ class AlertBox extends Component {
     this.scrollToAlert();
   }
 
-  scrollToAlert() {
+  scrollToAlert = () => {
     if (!this._ref || !this._ref.scrollIntoView) {
       return;
     }
@@ -54,7 +53,7 @@ class AlertBox extends Component {
         });
       }, 0);
     }
-  }
+  };
 
   handleAlertBodyClick(e) {
     if (!this.props.disableAnalytics) {
