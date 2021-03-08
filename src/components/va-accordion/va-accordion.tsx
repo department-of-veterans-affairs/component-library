@@ -49,19 +49,20 @@ export class VaAccordion {
    * Get all of the slotted children in the root element that match `nodeName`
    */
   getSlottedNodes(root: HTMLElement, nodeName: string): Array<Node> {
-    let children = null;
     // If the browser is using the shadowDOM, the childNodes should be an array of two things:
     // A `<style>` element and a `<slot>` element
     const hasShadowDOM =
       Array.from(root.shadowRoot.childNodes).filter(
         (node: any) => node.tagName === 'SLOT',
       ).length > 0;
-    if (hasShadowDOM) {
-      children = root.shadowRoot.querySelector('slot').assignedNodes();
-    } else {
-      children = root.shadowRoot.childNodes;
-    }
-    return children.filter(item => item.nodeName.toLowerCase() === nodeName);
+
+    const children = hasShadowDOM
+      ? root.shadowRoot.querySelector('slot').assignedNodes()
+      : root.shadowRoot.childNodes;
+
+    return Array.from(children).filter(
+      item => item.nodeName.toLowerCase() === nodeName,
+    );
   }
 
   /**
