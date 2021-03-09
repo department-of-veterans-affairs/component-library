@@ -10,6 +10,19 @@ export const config: Config = {
       plugins: [url({ url: 'inline' })],
     }),
   ],
+  // This is for IE11 support
+  // https://stenciljs.com/docs/config-extras
+  buildEs5: 'prod',
+  extras: {
+    cssVarsShim: true,
+    dynamicImportShim: true,
+    shadowDomShim: true,
+    safari10: true,
+    scriptDataOpts: true,
+    appendChildSlotFix: false,
+    cloneNodeFix: false,
+    slotChildNodesFix: true,
+  },
   outputTargets: [
     {
       type: 'dist',

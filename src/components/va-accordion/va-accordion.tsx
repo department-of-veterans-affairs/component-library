@@ -31,7 +31,9 @@ export class VaAccordion {
     // It is the parent of the header (the root item) that we need to access
     // The final parentNode will be a shadowRoot, and from there we get the host.
     // https://developer.mozilla.org/en-US/docs/Web/API/ShadowRoot/host
-    const clickedItem = event.detail.target.parentNode.parentNode.host;
+    const clickedItem =
+      event.detail.target.parentNode.parentNode.host || // if we are on IE, `.host` won't be there
+      event.detail.target.parentNode.parentNode;
     // Close the other items if this accordion isn't multi-selectable
     if (!this.multi) {
       this.getSlottedNodes(this.el, 'va-accordion-item')
@@ -47,10 +49,22 @@ export class VaAccordion {
    * Get all of the slotted children in the root element that match `nodeName`
    */
   getSlottedNodes(root: HTMLElement, nodeName: string): Array<Node> {
-    return root.shadowRoot
-      .querySelector('slot')
-      .assignedNodes()
-      .filter(item => item.nodeName.toLowerCase() === nodeName);
+    // If the browser is using the shadowDOM, the childNodes should be an array of two things:
+    // A `<style>` element and a `<slot>` element
+    // Chrome, Firefox, Safari, Edge - literally every modern browser will use shadowDOM.
+    // This is purely for IE compatibility
+    const hasShadowDOM =
+      Array.from(root.shadowRoot.childNodes).filter(
+        (node: any) => node.tagName === 'SLOT',
+      ).length > 0;
+
+    const children = hasShadowDOM
+      ? root.shadowRoot.querySelector('slot').assignedNodes()
+      : root.shadowRoot.childNodes;
+
+    return Array.from(children).filter(
+      item => item.nodeName.toLowerCase() === nodeName,
+    );
   }
 
   /**
