@@ -149,19 +149,7 @@ describe('<AlertBox />', () => {
     });
 
     it('should be triggered when link in AlertBox content is clicked', () => {
-      const handleAnalyticsEvent = sinon.spy(e => {
-        expect(e.detail).to.eql({
-          componentName: 'AlertBox',
-          action: 'linkClick',
-          details: {
-            clickLabel: 'with a link',
-            headline: HeadlineWithLink,
-            status: 'info',
-            backgroundOnly: true,
-            closeable: false,
-          },
-        });
-      });
+      const handleAnalyticsEvent = sinon.spy();
 
       global.document.body.addEventListener(
         'component-library-analytics',
@@ -177,23 +165,25 @@ describe('<AlertBox />', () => {
         handleAnalyticsEvent,
       );
 
-      expect(handleAnalyticsEvent.called).to.be.true;
+      expect(
+        handleAnalyticsEvent.calledWith(
+          sinon.match.has('detail', {
+            componentName: 'AlertBox',
+            action: 'linkClick',
+            details: {
+              clickLabel: 'with a link',
+              headline: HeadlineWithLink,
+              status: 'info',
+              backgroundOnly: true,
+              closeable: false,
+            },
+          }),
+        ),
+      ).to.be.true;
     });
 
     it('should be triggered when link in AlertBox headline is clicked', () => {
-      const handleAnalyticsEvent = sinon.spy(e => {
-        expect(e.detail).to.eql({
-          componentName: 'AlertBox',
-          action: 'linkClick',
-          details: {
-            clickLabel: 'with a link',
-            headline: HeadlineWithLink,
-            status: 'info',
-            backgroundOnly: true,
-            closeable: false,
-          },
-        });
-      });
+      const handleAnalyticsEvent = sinon.spy();
 
       global.document.body.addEventListener(
         'component-library-analytics',
@@ -209,7 +199,21 @@ describe('<AlertBox />', () => {
         handleAnalyticsEvent,
       );
 
-      expect(handleAnalyticsEvent.called).to.be.true;
+      expect(
+        handleAnalyticsEvent.calledWith(
+          sinon.match.has('detail', {
+            componentName: 'AlertBox',
+            action: 'linkClick',
+            details: {
+              clickLabel: 'with a link',
+              headline: HeadlineWithLink,
+              status: 'info',
+              backgroundOnly: true,
+              closeable: false,
+            },
+          }),
+        ),
+      ).to.be.true;
     });
   });
 });

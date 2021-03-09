@@ -58,7 +58,7 @@ class AlertBox extends Component {
   handleAlertBodyClick(e) {
     if (!this.props.disableAnalytics) {
       // If it's a link being clicked, dispatch an analytics event
-      if (e.target.tagName && e.target.tagName === 'A') {
+      if (e.target?.tagName === 'A') {
         dispatchAnalyticsEvent({
           componentName: 'AlertBox',
           action: 'linkClick',
