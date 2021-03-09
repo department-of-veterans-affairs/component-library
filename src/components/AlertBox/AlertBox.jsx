@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import classNames from 'classnames';
+import dispatchAnalyticsEvent from '../../helpers/analytics';
 
 // Enum used to set the AlertBox's `status` prop
 export const ALERT_TYPE = Object.freeze({
@@ -12,6 +13,11 @@ export const ALERT_TYPE = Object.freeze({
 });
 
 class AlertBox extends Component {
+  constructor(props) {
+    super(props);
+    this.handleAlertBodyClick = this.handleAlertBodyClick.bind(this);
+  }
+
   componentDidMount() {
     this.scrollToAlert();
   }
@@ -49,6 +55,25 @@ class AlertBox extends Component {
     }
   };
 
+  handleAlertBodyClick(e) {
+    if (!this.props.disableAnalytics) {
+      // If it's a link being clicked, dispatch an analytics event
+      if (e.target?.tagName === 'A') {
+        dispatchAnalyticsEvent({
+          componentName: 'AlertBox',
+          action: 'linkClick',
+          details: {
+            clickLabel: e.target.innerText,
+            headline: this.props.headline,
+            status: this.props.status,
+            backgroundOnly: this.props.backgroundOnly,
+            closeable: !!this.props.onCloseAlert,
+          },
+        });
+      }
+    }
+  }
+
   render() {
     if (!this.props.isVisible) return <div aria-live="polite" />;
 
@@ -80,7 +105,7 @@ class AlertBox extends Component {
           this._ref = ref;
         }}
       >
-        <div className="usa-alert-body">
+        <div className="usa-alert-body" onClick={this.handleAlertBodyClick}>
           {alertHeading && <H className="usa-alert-heading">{alertHeading}</H>}
           {alertText && <div className="usa-alert-text">{alertText}</div>}
         </div>
@@ -101,7 +126,10 @@ AlertBox.propTypes = {
    * Show or hide the alert. Useful for alerts triggered by app interaction.
    */
   isVisible: PropTypes.bool,
-
+  /**
+   * Child elements (content) of modal when displayed
+   */
+  children: PropTypes.node,
   /**
    * Body content of the alert, which can also be passed via children.
    */
@@ -150,12 +178,14 @@ AlertBox.propTypes = {
     const level = parseInt(props[propName], 10);
     if (Number.isNaN(level) || level < 1 || level > 6) {
       return new Error(
-        `Invalid prop: AlertBox level must be a number from 1-6, was passed ${
-          props[propName]
-        }`,
+        `Invalid prop: AlertBox level must be a number from 1-6, was passed ${props[propName]}`,
       );
     }
   },
+  /**
+   * Analytics tracking function(s) will not be called
+   */
+  disableAnalytics: PropTypes.bool,
 };
 /* eslint-enable consistent-return */
 
