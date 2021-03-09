@@ -23,7 +23,7 @@ export default {
   },
 };
 
-const Template = (args) => <AlertBox {...args} />;
+const Template = args => <AlertBox {...args} />;
 
 const defaultArgs = {
   status: ALERT_TYPE.INFO,
@@ -80,4 +80,15 @@ export const BackgroundOnly = Template.bind({});
 BackgroundOnly.args = {
   ...defaultArgs,
   backgroundOnly: true,
+};
+
+export const WithLinks = Template.bind({});
+WithLinks.args = {
+  ...defaultArgs,
+  content: null,
+  children: [
+    <div key="visible">
+      This is content <a href="https://www.va.gov/">with a link</a>.
+    </div>,
+  ],
 };
