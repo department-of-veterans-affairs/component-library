@@ -2,7 +2,7 @@ import React from 'react';
 import { expect } from 'chai';
 import { mount } from 'enzyme';
 import { axeCheck } from '../../helpers/test-helpers';
-
+import sinon from 'sinon';
 import AdditionalInfo from './AdditionalInfo.jsx';
 import ExpandingGroup from '../ExpandingGroup/ExpandingGroup';
 
@@ -45,107 +45,69 @@ describe('<AdditionalInfo/>', () => {
   });
 
   describe('analytics event', () => {
-    it('should include the correct expand action', () => {
-      const handleExpandAnalyticsEvent = e => {
-        expect(e.detail).to.deep.eql({
-          componentName: 'AdditionalInfo',
-          action: 'expand',
-          details: {
-            triggerText: 'This is test triggerText.',
-          },
-        });
-      };
+    let wrapper;
+    let handleAnalyticsEvent;
 
-      global.document.body.addEventListener(
-        'component-library-analytics',
-        handleExpandAnalyticsEvent,
-      );
+    const triggerText = 'This is test triggerText.';
 
-      const wrapper = mount(
-        <AdditionalInfo triggerText="This is test triggerText." />,
-      ).setState({
+    beforeEach(() => {
+      wrapper = mount(<AdditionalInfo triggerText={triggerText} />).setState({
         open: false,
       });
 
-      const addtionalInfoButton = wrapper.find('.additional-info-button');
+      handleAnalyticsEvent = sinon.spy();
 
-      addtionalInfoButton.simulate('click');
+      global.document.body.addEventListener(
+        'component-library-analytics',
+        handleAnalyticsEvent,
+      );
+    });
+
+    afterEach(() => {
+      wrapper.unmount();
 
       global.document.body.removeEventListener(
         'component-library-analytics',
-        handleExpandAnalyticsEvent,
+        handleAnalyticsEvent,
       );
+    });
 
-      wrapper.unmount();
+    it('should include the correct expand action', () => {
+      const addtionalInfoButton = wrapper.find('.additional-info-button');
+      addtionalInfoButton.simulate('click');
+
+      expect(
+        handleAnalyticsEvent.calledWith(
+          sinon.match.hasNested('detail.action', 'expand'),
+        ),
+      ).to.be.true;
     });
 
     it('should include the correct collapse action', () => {
-      const handleExpandAnalyticsEvent = e => {
-        expect(e.detail).to.deep.eql({
-          componentName: 'AdditionalInfo',
-          action: 'collapse',
-          details: {
-            triggerText: 'This is test triggerText.',
-          },
-        });
-      };
-
-      global.document.body.addEventListener(
-        'component-library-analytics',
-        handleExpandAnalyticsEvent,
-      );
-
-      const wrapper = mount(
-        <AdditionalInfo triggerText="This is test triggerText." />,
-      ).setState({
+      wrapper = mount(<AdditionalInfo triggerText="{triggerText}" />).setState({
         open: true,
       });
 
       const addtionalInfoButton = wrapper.find('.additional-info-button');
-
       addtionalInfoButton.simulate('click');
 
-      global.document.body.removeEventListener(
-        'component-library-analytics',
-        handleExpandAnalyticsEvent,
-      );
-
-      wrapper.unmount();
+      expect(
+        handleAnalyticsEvent.calledWith(
+          sinon.match.hasNested('detail.action', 'collapse'),
+        ),
+      ).to.be.true;
     });
 
-    it('should include triggerText when present', done => {
-      const handleAnalyticsEvent = e => {
-        expect(e.detail).to.eql({
-          componentName: 'AdditionalInfo',
-          action: 'collapse',
-          details: {
-            triggerText: 'This is test triggerText.',
-          },
-        });
-        done();
-      };
-
-      global.document.body.addEventListener(
-        'component-library-analytics',
-        handleAnalyticsEvent,
-      );
-
-      const wrapper = mount(
-        <AdditionalInfo triggerText="This is test triggerText." />,
-      ).setState({
-        open: true,
-      });
-
+    it('should include triggerText when present', () => {
       const addtionalInfoButton = wrapper.find('.additional-info-button');
 
       addtionalInfoButton.simulate('click');
 
-      global.document.body.removeEventListener(
-        'component-library-analytics',
-        handleAnalyticsEvent,
-      );
-
-      wrapper.unmount();
+      expect(
+        handleAnalyticsEvent.calledWith(
+          sinon.match.hasNested('detail.details.triggerText', triggerText),
+        ),
+      ).to.be.true;
     });
   });
 });

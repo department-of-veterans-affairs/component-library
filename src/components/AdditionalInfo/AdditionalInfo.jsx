@@ -10,13 +10,9 @@ export default class AdditionalInfo extends React.Component {
     super(props);
     this.expandedContentId = _.uniqueId('tooltip-');
     this.state = { open: false };
-
-    this.toggle = this.toggle.bind(this);
   }
 
-  toggle() {
-    this.setState({ open: !this.state.open });
-
+  toggle = () => {
     // Conditionally track the event.
     if (!this.props.disableAnalytics) {
       dispatchAnalyticsEvent({
@@ -28,8 +24,10 @@ export default class AdditionalInfo extends React.Component {
       });
     }
 
+    this.setState({ open: !this.state.open });
+
     return this.props.onClick && this.props.onClick();
-  }
+  };
 
   render() {
     const { triggerText, children, tagName: TagName = 'span' } = this.props;
@@ -86,11 +84,6 @@ AdditionalInfo.propTypes = {
    * Child elements (content) of modal when displayed
    */
   children: PropTypes.node,
-  /**
-   * Function to pass in events and parameters to the dataLayer
-   * and (eventually) into Google Analytics
-   */
-  trackEvent: PropTypes.func,
   /**
    * Analytics tracking function(s) will not be called
    */
