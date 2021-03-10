@@ -27,6 +27,11 @@ export const contactsMap = Object.freeze({
     phoneNumber: '6127136415',
     description: 'Debt Management Center (Overseas)',
   },
+  DMDC_DEERS: {
+    phoneNumber: '8663632883',
+    description:
+      'Defense Manpower Data Center (DMDC) | Defense Enrollment Eligibility Reporting System (DEERS) Support Office',
+  },
   DS_LOGON: {
     phoneNumber: '8005389552',
     description: 'Defense Manpower Data Center',
@@ -34,6 +39,10 @@ export const contactsMap = Object.freeze({
   DS_LOGON_TTY: {
     phoneNumber: '8663632883',
     description: 'Defense Manpower Data Center TTY',
+  },
+  FEDERAL_RELAY_SERVICE: {
+    phoneNumber: '8008778339',
+    description: 'Federal Relay Service',
   },
   GI_BILL: {
     phoneNumber: '8884424551',
@@ -57,6 +66,10 @@ export const contactsMap = Object.freeze({
     phoneNumber: '8005351117',
     description: 'National Cemetery Scheduling Office',
   },
+  SUICIDE_PREVENTION_LIFELINE: {
+    phoneNumber: '8007994889',
+    description: 'Suicide Prevention Line',
+  },
   TESC: {
     phoneNumber: '8882242950',
     description: 'U.S. Treasury Electronic Payment Solution Center',
@@ -65,20 +78,9 @@ export const contactsMap = Object.freeze({
     phoneNumber: '8888263127',
     description: 'U.S. Department of the Treasury (Debt Management Services)',
   },
-  FEDERAL_RELAY_SERVICE: {
-    phoneNumber: '8008778339',
-    description: 'Federal Relay Service',
-  },
-  SUICIDE_PREVENTION_LIFELINE: {
-    phoneNumber: '8007994889',
-    description: 'Suicide Prevention Line',
-  },
-  DMDC_DEERS: {
-    phoneNumber: '8663632883',
-    description:
-      'Defense Manpower Data Center (DMDC) | Defense Enrollment Eligibility Reporting System (DEERS) Support Office',
-  },
-  VA_311: { phoneNumber: '8006982411', description: 'VA Help desk (VA311)' },
+  // VA_311 used before the number changed to include 411
+  VA_311: { phoneNumber: '8006982411', description: 'VA Help desk (VA411)' },
+  VA_411: { phoneNumber: '8006982411', description: 'VA Help desk (VA411)' },
   VA_BENEFITS: {
     phoneNumber: '8008271000',
     description: 'Veterans Benefits Assistance',
