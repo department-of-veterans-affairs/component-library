@@ -35,5 +35,24 @@ module.exports = {
       extends: ['plugin:node/recommended', ...commonExtends],
       plugins: ['mocha', ...commonPlugins],
     },
+    {
+      files: ['src/components/**/*.unit.spec.jsx'],
+      env: {
+        node: true,
+        mocha: true,
+      },
+      extends: [...commonExtends],
+      plugins: ['mocha', ...commonPlugins],
+      parserOptions: {
+        ecmaVersion: 12,
+        sourceType: 'module',
+        ecmaFeatures: {
+          jsx: true,
+        },
+        babelOptions: {
+          configFile: './config/babel.config.js',
+        },
+      },
+    },
   ],
 };
