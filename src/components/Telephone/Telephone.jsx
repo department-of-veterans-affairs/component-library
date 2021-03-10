@@ -85,7 +85,7 @@ const deriveContactPattern = (pattern, parsedNumber) => {
   return PATTERNS.DEFAULT;
 };
 
-/**
+/***
  * Telephone component
  * @param {string|number} contact (required) - telephone number, with or without
  *  formatting; all non-digit characters will be stripped out
@@ -217,6 +217,11 @@ Telephone.propTypes = {
    * Custom onClick function
    */
   onClick: PropTypes.func,
+
+  /**
+   * Custom link content
+   */
+  children: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
 };
 
 export default Telephone;
