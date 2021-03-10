@@ -10,8 +10,11 @@ import {
 
 import Telephone, { CONTACTS, PATTERNS } from './Telephone';
 import { contactsMap } from './contacts';
+import { patternsMap } from './patterns';
 import Table from '../Table/Table';
 
+// This builds the available "CONTACTS" list table
+// Descriptions are available in the contacts.js file
 const fields = [
   { label: 'Property name (CONTACTS.x)', value: 'key' },
   { label: 'Phone number', value: 'value' },
@@ -28,35 +31,20 @@ const Contacts = () => (
   />
 );
 
+// This builds the available "PATTERNS" list table
+// Descriptions are included in the patterns.js file
 const patternFields = [
   { label: 'Pattern name (PATTERN.x)', value: 'key' },
   { label: 'Pattern', value: 'value' },
   { label: 'Description', value: 'description' },
 ];
-const patternDescriptions = {
-  '3_DIGIT':
-    'Used for 3-digit numbers (e.g. 711 & 911); automatically set for 3-digit numbers',
-  DEFAULT: (
-    <>
-      Standard telephone format. See the{' '}
-      <a href="https://design.va.gov/content-style-guide/dates-and-numbers#phone-numbers">
-        phone number design specification
-      </a>
-      .
-    </>
-  ),
-  OUTSIDE_US:
-    'Pattern used for numbers where the Veteran is located outside the United States',
-};
 const Patterns = () => (
   <Table
     fields={patternFields}
-    data={Object.entries(PATTERNS).map(p => ({
-      key: p[0],
-      value: p[1],
-      description: (
-        <div style={{ maxWidth: '30em' }}>{patternDescriptions[p[0]]}</div>
-      ),
+    data={Object.entries(patternsMap).map(p => ({
+      key: p[1].pattern,
+      value: PATTERNS[p[1].pattern],
+      description: <div style={{ maxWidth: '30em' }}>{p[1].description}</div>,
     }))}
   />
 );
