@@ -2,6 +2,11 @@ import '@department-of-veterans-affairs/formation/dist/formation.min.css';
 import '@department-of-veterans-affairs/formation/dist/formation';
 import { withHTML } from '@whitespace/storybook-addon-html/react';
 
+import 'web-components/dist/component-library/component-library.css';
+import { defineCustomElements } from 'web-components/loader';
+
+defineCustomElements();
+
 const viewports = {
   xsmall: {
     name: 'XSmall Screen',
