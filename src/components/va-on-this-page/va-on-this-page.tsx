@@ -17,7 +17,7 @@ export class VaOnThisPage {
         <ul>
           {h2s.map(heading => (
             <li>
-              <a href={heading.id}>{heading.innerText}</a>
+              <a href={`#${heading.id}`}>{heading.innerText}</a>
             </li>
           ))}
         </ul>
