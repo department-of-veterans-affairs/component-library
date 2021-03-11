@@ -1,0 +1,38 @@
+:host {
+  display: block;
+  border: 1px solid var(--color-gray-light);
+  border-radius: 4px;
+}
+
+h2 {
+  font-size: 1em;
+  margin-bottom: 16px;
+  margin-left: 8px;
+}
+
+/* @media (min-width: $medium-screen) { */
+/*   border: none; */
+/* } */
+
+ul {
+  margin-top: 0;
+  margin-bottom: 0;
+  list-style-type: none;
+  padding-left: 0;
+}
+
+li a {
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  padding-top: 8px;
+  padding-bottom: 8px;
+
+  /*       &::before { */
+  /*         font-family: 'Font Awesome 5 Free'; */
+  /*         font-weight: 900; */
+  /*         content: '\F063'; // fa-arrow-down */
+  /*         margin: 0px 8px; */
+  /*         font-size: 12px; */
+  /*       } */
+}
