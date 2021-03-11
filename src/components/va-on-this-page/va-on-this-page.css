@@ -5,9 +5,9 @@
 }
 
 h2 {
-  font-size: 1em;
+  font-size: 2rem;
   margin-bottom: 16px;
-  margin-left: 8px;
+  margin-left: 0px;
 }
 
 /* @media (min-width: $medium-screen) { */
