@@ -5,11 +5,6 @@ export default {
   component: 'va-on-this-page',
 };
 
-const defaultArgs = {
-  // multi: false,
-  // bordered: false,
-};
-
 const Template = ({ multi, bordered }) => html`
   <article>
     <va-on-this-page></va-on-this-page>
@@ -39,5 +34,3 @@ const Template = ({ multi, bordered }) => html`
 `;
 
 export const Default = Template.bind({});
-
-Default.args = { ...defaultArgs };
