@@ -1,0 +1,14 @@
+@import './focusable.css';
+
+a {
+  text-decoration: none;
+  color: var(--color-link-default);
+  transition-duration: 0.3s;
+  transition-timing-function: ease-in-out;
+  transition-property: color, background-color, border-color;
+}
+
+a:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+  color: inherit;
+}
