@@ -27,12 +27,12 @@ li a {
   align-items: center;
   padding-top: 8px;
   padding-bottom: 8px;
+}
 
-  /*       &::before { */
-  /*         font-family: 'Font Awesome 5 Free'; */
-  /*         font-weight: 900; */
-  /*         content: '\F063'; // fa-arrow-down */
-  /*         margin: 0px 8px; */
-  /*         font-size: 12px; */
-  /*       } */
+a::before {
+  font-family: 'Font Awesome 5 Free';
+  font-weight: 900;
+  content: '\F063'; /* fa-arrow-down */
+  margin-right: 8px;
+  font-size: 12px;
 }
