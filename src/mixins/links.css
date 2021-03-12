@@ -12,3 +12,7 @@ a:hover {
   background-color: rgba(0, 0, 0, 0.05);
   color: inherit;
 }
+
+a:visited {
+  color: var(--color-link-visited);
+}
