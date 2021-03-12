@@ -25,11 +25,12 @@ ul {
 
 li {
   margin-bottom: 16px;
+  max-width: 18em;
 }
 
 li a {
   display: flex;
-  align-items: center;
+  align-items: baseline;
 }
 
 a::before {
