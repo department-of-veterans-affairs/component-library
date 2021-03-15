@@ -1,7 +1,8 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { shallow, mount } from 'enzyme';
 import { axeCheck } from '../../helpers/test-helpers';
 import { expect } from 'chai';
+import sinon from 'sinon';
 
 import AlertBox from './AlertBox.jsx';
 
@@ -119,4 +120,100 @@ describe('<AlertBox />', () => {
         backgroundOnly
       />,
     ));
+
+  describe('analytics event', function () {
+    let wrapper;
+
+    const HeadlineWithLink = (
+      <>
+        Headline <a href="https://www.va.gov/">with a link</a>
+      </>
+    );
+
+    beforeEach(() => {
+      wrapper = mount(
+        <AlertBox headline={HeadlineWithLink} status="info" backgroundOnly>
+          <div>
+            This is content
+            <a href="https://www.va.gov/" id="test-link-1">
+              with a link
+            </a>
+            .
+          </div>
+        </AlertBox>,
+      );
+    });
+
+    afterEach(() => {
+      wrapper.unmount();
+    });
+
+    it('should be triggered when link in AlertBox content is clicked', () => {
+      const handleAnalyticsEvent = sinon.spy();
+
+      global.document.body.addEventListener(
+        'component-library-analytics',
+        handleAnalyticsEvent,
+      );
+
+      // Click link in content
+      const testLink = wrapper.find('.usa-alert-text a');
+      testLink.simulate('click');
+
+      global.document.body.removeEventListener(
+        'component-library-analytics',
+        handleAnalyticsEvent,
+      );
+
+      expect(
+        handleAnalyticsEvent.calledWith(
+          sinon.match.has('detail', {
+            componentName: 'AlertBox',
+            action: 'linkClick',
+            details: {
+              clickLabel: 'with a link',
+              headline: HeadlineWithLink,
+              status: 'info',
+              backgroundOnly: true,
+              closeable: false,
+            },
+          }),
+        ),
+      ).to.be.true;
+    });
+
+    it('should be triggered when link in AlertBox headline is clicked', () => {
+      const handleAnalyticsEvent = sinon.spy();
+
+      global.document.body.addEventListener(
+        'component-library-analytics',
+        handleAnalyticsEvent,
+      );
+
+      // Click link in headline
+      const testLink = wrapper.find('.usa-alert-heading a');
+      testLink.simulate('click');
+
+      global.document.body.removeEventListener(
+        'component-library-analytics',
+        handleAnalyticsEvent,
+      );
+
+      expect(
+        handleAnalyticsEvent.calledWith(
+          sinon.match.has('detail', {
+            componentName: 'AlertBox',
+            action: 'linkClick',
+            details: {
+              clickLabel: 'with a link',
+              headline: HeadlineWithLink,
+              status: 'info',
+              backgroundOnly: true,
+              closeable: false,
+            },
+          }),
+        ),
+      ).to.be.true;
+    });
+  });
 });

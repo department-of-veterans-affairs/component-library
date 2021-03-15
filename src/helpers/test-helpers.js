@@ -24,7 +24,10 @@ export function axeCheck(component, ignoredRules = []) {
 
   // axe just needs a role on a containing element
   div.setAttribute('role', 'region');
-  div.setAttribute('aria-label', `Component ${Math.floor(Math.random() * Math.floor(100))}`);
+  div.setAttribute(
+    'aria-label',
+    `Component ${Math.floor(Math.random() * Math.floor(100))}`,
+  );
 
   div.innerHTML = '';
 

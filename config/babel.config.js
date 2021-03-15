@@ -1,5 +1,4 @@
-module.exports = function(api) {
-
+module.exports = function (api) {
   const plugins = [
     // Stage 2
     '@babel/plugin-proposal-function-sent',
@@ -35,8 +34,8 @@ module.exports = function(api) {
         ],
         '@babel/react',
       ],
-      plugins: ['dynamic-import-node'].concat(plugins)
-    }
+      plugins: ['dynamic-import-node'].concat(plugins),
+    };
   }
 
   api.cache.using(() => process.env.NODE_ENV !== 'test');
@@ -59,6 +58,7 @@ module.exports = function(api) {
             ],
           },
           useBuiltIns: 'entry',
+          corejs: '3.9',
           debug: false,
         },
       ],

@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import classNames from 'classnames';
+import dispatchAnalyticsEvent from '../../helpers/analytics';
 
 const ESCAPE_KEY = 27;
 const TAB_KEY = 9;
@@ -9,6 +10,11 @@ class Modal extends React.Component {
   constructor(props) {
     super(props);
     this.state = { lastFocus: null, isTabbingBackwards: false };
+
+    this.handleDocumentKeyDown = this.handleDocumentKeyDown.bind(this);
+    this.handleClose = this.handleClose.bind(this);
+    this.handleDocumentFocus = this.handleDocumentFocus.bind(this);
+    this.handleDocumentClicked = this.handleDocumentClicked.bind(this);
   }
 
   componentDidMount() {
@@ -41,6 +47,19 @@ class Modal extends React.Component {
     if (this.props.clickToClose) {
       document.addEventListener('click', this.handleDocumentClicked, true);
     }
+    // Conditionally track the event.
+    if (!this.props.disableAnalytics) {
+      dispatchAnalyticsEvent({
+        componentName: 'Modal',
+        action: 'show',
+        details: {
+          status: this.props.status,
+          title: this.props.title,
+          primaryButtonText: this.props.primaryButton?.text,
+          secondaryButtonText: this.props.secondaryButton?.text,
+        },
+      });
+    }
   }
 
   teardownModal() {
@@ -58,7 +77,7 @@ class Modal extends React.Component {
     }
   }
 
-  handleDocumentKeyDown = event => {
+  handleDocumentKeyDown(event) {
     if (event.keyCode === ESCAPE_KEY) {
       this.handleClose(event);
     }
@@ -69,14 +88,14 @@ class Modal extends React.Component {
         this.setState({ isTabbingBackwards: false });
       }
     }
-  };
+  }
 
-  handleClose = e => {
+  handleClose(e) {
     e.preventDefault();
     this.props.onClose();
-  };
+  }
 
-  handleDocumentFocus = event => {
+  handleDocumentFocus(event) {
     if (this.props.visible && !this.element.contains(event.target)) {
       event.stopPropagation();
       if (this.state.isTabbingBackwards) {
@@ -85,13 +104,13 @@ class Modal extends React.Component {
         this.applyFocusToFirstModalElement();
       }
     }
-  };
+  }
 
-  handleDocumentClicked = event => {
+  handleDocumentClicked(event) {
     if (this.props.visible && !this.element.contains(event.target)) {
       this.props.onClose();
     }
-  };
+  }
 
   setInitialModalFocus() {
     if (this.props.initialFocusSelector) {
@@ -127,7 +146,7 @@ class Modal extends React.Component {
     }
   }
 
-  renderAlertActions = () => {
+  renderAlertActions() {
     const { primaryButton, secondaryButton } = this.props;
     if (!primaryButton && !secondaryButton) return null;
 
@@ -148,7 +167,7 @@ class Modal extends React.Component {
         )}
       </div>
     );
-  };
+  }
 
   render() {
     if (!this.props.visible) return null;
@@ -225,6 +244,10 @@ Modal.propTypes = {
    */
   clickToClose: PropTypes.bool,
   /**
+   * Child elements (content) of modal when displayed
+   */
+  children: PropTypes.node,
+  /**
    * Contents of modal when displayed. You can also pass the contents as children, which is preferred
    */
   contents: PropTypes.node,
@@ -273,9 +296,14 @@ Modal.propTypes = {
    * is not the first focusable element in the document
    */
   initialFocusSelector: PropTypes.string,
+  /**
+   * Analytics tracking function(s) will be called
+   */
+  disableAnalytics: PropTypes.bool,
 };
 
 Modal.defaultProps = {
+  visible: false,
   clickToClose: false,
   focusSelector: 'button, input, select, a',
 };
