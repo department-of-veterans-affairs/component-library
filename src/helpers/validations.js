@@ -62,11 +62,7 @@ function isValidRequiredField(validator, field) {
  */
 function isValidYear(value) {
   return (
-    Number(value) >= 1900 &&
-    Number(value) <=
-      moment()
-        .add(100, 'year')
-        .year()
+    Number(value) >= 1900 && Number(value) <= moment().add(100, 'year').year()
   );
 }
 
@@ -244,11 +240,7 @@ function isValidDateOver17(day, month, year) {
     month: parseInt(month, 10) - 1,
     year,
   });
-  return momentDate.isBefore(
-    moment()
-      .endOf('day')
-      .subtract(17, 'years'),
-  );
+  return momentDate.isBefore(moment().endOf('day').subtract(17, 'years'));
 }
 
 /**
