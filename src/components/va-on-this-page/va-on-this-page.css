@@ -14,25 +14,27 @@
 
 h2 {
   font-size: 2rem;
-  margin-bottom: 16px;
+  margin: 8px 0px;
   margin-left: 0px;
 }
 
 ul {
   margin-top: 0;
   margin-bottom: 0;
+  margin-left: -0.5em;
   list-style-type: none;
   padding-left: 0;
 }
 
 li {
-  margin-bottom: 16px;
   max-width: 18em;
 }
 
 li a {
   display: flex;
   align-items: baseline;
+  padding: 8px;
+  line-height: 24px;
 }
 
 a::before {
@@ -41,4 +43,8 @@ a::before {
   content: '\F063'; /* fa-arrow-down */
   margin-right: 8px;
   font-size: 12px;
+}
+
+a:active {
+  background-color: var(--color-gray-lighter);
 }
