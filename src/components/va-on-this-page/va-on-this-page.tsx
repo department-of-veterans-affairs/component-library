@@ -11,7 +11,7 @@ import { Component, Host, h } from '@stencil/core';
 })
 export class VaOnThisPage {
   render() {
-    const h2s = Array.from(document.querySelectorAll('article > h2')) as Array<
+    const h2s = Array.from(document.querySelectorAll('article h2')) as Array<
       HTMLElement
     >;
 
