@@ -4,7 +4,7 @@
   display: block;
   border: 1px solid var(--color-gray-light);
   border-radius: 4px;
-  padding: 1em;
+  padding: 1em 1em 1em 0;
 }
 @media (min-width: 768px) {
   :host {
