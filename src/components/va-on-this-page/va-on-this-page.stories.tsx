@@ -5,7 +5,7 @@ export default {
   component: 'va-on-this-page',
 };
 
-const Template = ({ multi, bordered }) => html`
+const Template = () => html`
   <article>
     <va-on-this-page></va-on-this-page>
     <h2 id="if-im-a-veteran">
