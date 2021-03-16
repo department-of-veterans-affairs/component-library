@@ -16,4 +16,40 @@ describe('va-on-this-page', () => {
       </va-on-this-page>
     `);
   });
+
+  it('puts <h2>s on the page into an ordered list with links', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent(
+      `
+      <article>
+        <va-on-this-page></va-on-this-page>
+        <h2 id="an-id">Hello</h2>
+        <div>Some content</div>
+        <h2 id="its-me">It's me</h2>
+        <span>Hello from the other side</span>
+      `,
+    );
+    const element = await page.find('va-on-this-page');
+
+    expect(element).toEqualHtml(`
+      <va-on-this-page class="hydrated">
+        <mock:shadow-root>
+          <h2>On this page</h2>
+          <ul>
+            <li>
+              <a href="#an-id">
+                Hello
+              </a>
+            </li>
+            <li>
+              <a href="#its-me">
+                It's me
+              </a>
+            </li>
+          </ul>
+        </mock:shadow-root>
+      </va-on-this-page>
+    `);
+  });
 });
