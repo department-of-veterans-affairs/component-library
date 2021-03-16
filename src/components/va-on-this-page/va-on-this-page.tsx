@@ -1,5 +1,9 @@
 import { Component, Host, h } from '@stencil/core';
 
+/**
+ * This component will render links based on the content around it. It scans the document for any `<h2>`s
+ * inside of an `<article>` and will create a list of links to the headings.
+ */
 @Component({
   tag: 'va-on-this-page',
   styleUrl: 'va-on-this-page.css',
