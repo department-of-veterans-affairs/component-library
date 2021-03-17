@@ -15,8 +15,7 @@
 
 h2 {
   font-size: 2rem;
-  margin: 8px 0px;
-  margin-left: 0px;
+  margin: 0.4em 0em;
 }
 
 ul {
@@ -30,8 +29,8 @@ ul {
 li a {
   display: flex;
   align-items: baseline;
-  padding: 8px;
-  line-height: 24px;
+  padding: 0.5em;
+  line-height: 1.5em;
   max-width: 17.75em;
 }
 
@@ -40,7 +39,7 @@ a::before {
   font-weight: 900;
   content: '\F063'; /* fa-arrow-down */
   margin-right: 8px;
-  font-size: 12px;
+  font-size: 0.75em;
 }
 
 a:active {
