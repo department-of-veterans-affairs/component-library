@@ -1,4 +1,5 @@
 import { newE2EPage } from '@stencil/core/testing';
+import { axeCheck } from '../../../testing/test-helpers';
 
 describe('va-on-this-page', () => {
   it('renders', async () => {
@@ -15,6 +16,23 @@ describe('va-on-this-page', () => {
         </mock:shadow-root>
       </va-on-this-page>
     `);
+  });
+
+  it('passes an axe check', async () => {
+    const page = await newE2EPage();
+    await page.setContent(
+      `
+      <article>
+        <va-on-this-page></va-on-this-page>
+        <h2 id="an-id">Hello</h2>
+        <div>Some content</div>
+        <h2 id="its-me">It's me</h2>
+        <span>Hello from the other side</span>
+      </article>
+      `,
+    );
+
+    await axeCheck(page);
   });
 
   it('puts <h2>s on the page into an ordered list with links', async () => {
