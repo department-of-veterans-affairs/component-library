@@ -26,15 +26,12 @@ ul {
   padding-left: 0;
 }
 
-li {
-  max-width: 18em;
-}
-
 li a {
   display: flex;
   align-items: baseline;
   padding: 8px;
   line-height: 24px;
+  max-width: 17.75em;
 }
 
 a::before {
