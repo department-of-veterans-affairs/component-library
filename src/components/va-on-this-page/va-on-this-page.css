@@ -31,7 +31,7 @@ li a {
   align-items: baseline;
   padding: 0.5em;
   line-height: 1.5em;
-  max-width: 17.75em;
+  max-width: 285px;
 }
 
 a::before {
