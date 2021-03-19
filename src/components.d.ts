@@ -44,6 +44,12 @@ export namespace Components {
          */
         "open": boolean;
     }
+    interface VaAdditionalInfo {
+        /**
+          * The text to trigger the expansion
+         */
+        "trigger": string;
+    }
 }
 declare global {
     interface HTMLMyComponentElement extends Components.MyComponent, HTMLStencilElement {
@@ -64,10 +70,17 @@ declare global {
         prototype: HTMLVaAccordionItemElement;
         new (): HTMLVaAccordionItemElement;
     };
+    interface HTMLVaAdditionalInfoElement extends Components.VaAdditionalInfo, HTMLStencilElement {
+    }
+    var HTMLVaAdditionalInfoElement: {
+        prototype: HTMLVaAdditionalInfoElement;
+        new (): HTMLVaAdditionalInfoElement;
+    };
     interface HTMLElementTagNameMap {
         "my-component": HTMLMyComponentElement;
         "va-accordion": HTMLVaAccordionElement;
         "va-accordion-item": HTMLVaAccordionItemElement;
+        "va-additional-info": HTMLVaAdditionalInfoElement;
     }
 }
 declare namespace LocalJSX {
@@ -113,10 +126,17 @@ declare namespace LocalJSX {
          */
         "open"?: boolean;
     }
+    interface VaAdditionalInfo {
+        /**
+          * The text to trigger the expansion
+         */
+        "trigger"?: string;
+    }
     interface IntrinsicElements {
         "my-component": MyComponent;
         "va-accordion": VaAccordion;
         "va-accordion-item": VaAccordionItem;
+        "va-additional-info": VaAdditionalInfo;
     }
 }
 export { LocalJSX as JSX };
@@ -126,6 +146,7 @@ declare module "@stencil/core" {
             "my-component": LocalJSX.MyComponent & JSXBase.HTMLAttributes<HTMLMyComponentElement>;
             "va-accordion": LocalJSX.VaAccordion & JSXBase.HTMLAttributes<HTMLVaAccordionElement>;
             "va-accordion-item": LocalJSX.VaAccordionItem & JSXBase.HTMLAttributes<HTMLVaAccordionItemElement>;
+            "va-additional-info": LocalJSX.VaAdditionalInfo & JSXBase.HTMLAttributes<HTMLVaAdditionalInfoElement>;
         }
     }
 }

@@ -1,0 +1,25 @@
+:host {
+  padding-left: calc(2rem - 7px);
+  border-left: 7px solid var(--color-primary-alt-light);
+  display: block;
+}
+.additional-info-title {
+  border-bottom-right-radius: 1px;
+  border-bottom: 2px dotted var(--color-primary);
+  color: var(--color-gray-dark);
+  cursor: pointer;
+}
+
+.closed {
+  opacity: 0;
+  max-height: 0;
+}
+
+.open {
+  height: auto;
+  opacity: 1;
+  transition: max-height 700ms 0ms, opacity 500ms 200ms;
+  max-height: 800px;
+  margin-top: 1em;
+  margin-bottom: 1em;
+}

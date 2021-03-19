@@ -5,8 +5,12 @@
 :root {
   --color-base: #212121;
   --color-white: #ffffff;
+  --color-gray-dark: #323a45;
   --color-gray-lighter: #d6d7d9;
   --color-gray-lightest: #f1f1f1;
   --color-gold-light: #f9c642;
-  --font-source-sans: Source Sans Pro, Helvetica Neue, Helvetica, Roboto, Arial, sans-serif;
+  --color-primary: #0071bb;
+  --color-primary-alt-light: #9bdaf1;
+  --font-source-sans: Source Sans Pro, Helvetica Neue, Helvetica, Roboto, Arial,
+    sans-serif;
 }
