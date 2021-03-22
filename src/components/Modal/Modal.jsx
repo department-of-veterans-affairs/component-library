@@ -9,7 +9,6 @@ const ESCAPE_KEY = 27;
 class Modal extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { lastFocus: null, isTabbingBackwards: false };
 
     this.handleDocumentKeyDown = this.handleDocumentKeyDown.bind(this);
     this.handleClose = this.handleClose.bind(this);
