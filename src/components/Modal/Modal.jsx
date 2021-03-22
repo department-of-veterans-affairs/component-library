@@ -1,10 +1,10 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import classNames from 'classnames';
+import { FocusOn } from 'react-focus-on';
 import dispatchAnalyticsEvent from '../../helpers/analytics';
 
 const ESCAPE_KEY = 27;
-const TAB_KEY = 9;
 
 class Modal extends React.Component {
   constructor(props) {
@@ -13,7 +13,6 @@ class Modal extends React.Component {
 
     this.handleDocumentKeyDown = this.handleDocumentKeyDown.bind(this);
     this.handleClose = this.handleClose.bind(this);
-    this.handleDocumentFocus = this.handleDocumentFocus.bind(this);
     this.handleDocumentClicked = this.handleDocumentClicked.bind(this);
   }
 
@@ -36,14 +35,12 @@ class Modal extends React.Component {
   }
 
   setupModal() {
-    this.setState({ lastFocus: document.activeElement });
     this.setInitialModalFocus();
     // NOTE: With this PR (https://github.com/department-of-veterans-affairs/vets-website/pull/11712)
     // we rely on the existence of `body.modal-open` to determine if a modal is
     // currently open and adjust programmatic scrolling if there is.
     document.body.classList.add('modal-open');
     document.addEventListener('keydown', this.handleDocumentKeyDown, false);
-    document.addEventListener('focus', this.handleDocumentFocus, true);
     if (this.props.clickToClose) {
       document.addEventListener('click', this.handleDocumentClicked, true);
     }
@@ -63,15 +60,8 @@ class Modal extends React.Component {
   }
 
   teardownModal() {
-    if (this.state.lastFocus) {
-      // Ensure last focus is set before completing modal teardown
-      setTimeout(() => {
-        this.state.lastFocus.focus();
-      }, 0);
-    }
     document.body.classList.remove('modal-open');
     document.removeEventListener('keydown', this.handleDocumentKeyDown, false);
-    document.removeEventListener('focus', this.handleDocumentFocus, true);
     if (this.props.clickToClose) {
       document.removeEventListener('click', this.handleDocumentClicked, true);
     }
@@ -81,29 +71,11 @@ class Modal extends React.Component {
     if (event.keyCode === ESCAPE_KEY) {
       this.handleClose(event);
     }
-    if (event.keyCode === TAB_KEY) {
-      if (event.shiftKey) {
-        this.setState({ isTabbingBackwards: true });
-      } else {
-        this.setState({ isTabbingBackwards: false });
-      }
-    }
   }
 
   handleClose(e) {
     e.preventDefault();
     this.props.onClose();
-  }
-
-  handleDocumentFocus(event) {
-    if (this.props.visible && !this.element.contains(event.target)) {
-      event.stopPropagation();
-      if (this.state.isTabbingBackwards) {
-        this.applyFocusToLastModalElement();
-      } else {
-        this.applyFocusToFirstModalElement();
-      }
-    }
   }
 
   handleDocumentClicked(event) {
@@ -118,31 +90,8 @@ class Modal extends React.Component {
         this.props.initialFocusSelector,
       );
       if (focusableElement) {
-        focusableElement.focus();
+        focusableElement.setAttribute('data-autofocus', 'true');
       }
-    } else {
-      this.applyFocusToFirstModalElement();
-    }
-  }
-
-  applyFocusToFirstModalElement() {
-    const focusableElement = this.element.querySelector(
-      this.props.focusSelector,
-    );
-    if (focusableElement) {
-      focusableElement.focus();
-    }
-  }
-
-  applyFocusToLastModalElement() {
-    const allFocusableElements = this.element.querySelectorAll(
-      this.props.focusSelector,
-    );
-    const focusableModalElements = Array.from(allFocusableElements).filter(el =>
-      this.element.contains(el),
-    );
-    if (focusableModalElements.length) {
-      focusableModalElements[focusableModalElements.length - 1].focus();
     }
   }
 
@@ -200,32 +149,35 @@ class Modal extends React.Component {
     );
 
     return (
-      <div
-        className={modalClass}
-        id={id}
-        role="alertdialog"
-        aria-labelledby={titleId}
-      >
+      <FocusOn returnFocus>
         <div
-          className={wrapperClass}
-          ref={el => {
-            this.element = el;
-          }}
+          className={modalClass}
+          id={id}
+          role="alertdialog"
+          aria-labelledby={titleId}
+          aria-modal
         >
-          {closeButton}
-          <div className={bodyClass}>
-            <div role="document">
-              {title && (
-                <h3 id={titleId} className={titleClass}>
-                  {title}
-                </h3>
-              )}
-              {content && <div className={contentClass}>{content}</div>}
+          <div
+            className={wrapperClass}
+            ref={el => {
+              this.element = el;
+            }}
+          >
+            {closeButton}
+            <div className={bodyClass}>
+              <div role="document">
+                {title && (
+                  <h3 id={titleId} className={titleClass}>
+                    {title}
+                  </h3>
+                )}
+                {content && <div className={contentClass}>{content}</div>}
+              </div>
+              {this.renderAlertActions()}
             </div>
-            {this.renderAlertActions()}
           </div>
         </div>
-      </div>
+      </FocusOn>
     );
   }
 }
