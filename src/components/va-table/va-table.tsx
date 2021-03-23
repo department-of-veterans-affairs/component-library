@@ -8,13 +8,15 @@ import { Component, Prop, Host, h } from '@stencil/core';
 export class VaTable {
   @Prop() columns: Array<any>;
   @Prop() data: Array<any>;
+  @Prop() title: string;
 
   render() {
-    const { columns, data } = this;
+    const { columns, data, title } = this;
 
     return (
       <Host>
         <table>
+          {title && <caption>{title}</caption>}
           <thead>
             <tr>
               {columns.map(col => (

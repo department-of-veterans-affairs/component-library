@@ -47,6 +47,7 @@ export namespace Components {
     interface VaTable {
         "columns": Array<any>;
         "data": Array<any>;
+        "title": string;
     }
 }
 declare global {
@@ -127,6 +128,7 @@ declare namespace LocalJSX {
     interface VaTable {
         "columns"?: Array<any>;
         "data"?: Array<any>;
+        "title"?: string;
     }
     interface IntrinsicElements {
         "my-component": MyComponent;

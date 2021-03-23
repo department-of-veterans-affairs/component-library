@@ -6,6 +6,7 @@ export default {
 };
 
 const defaultArgs = {
+  title: 'My table',
   data: [
     {
       title: 'Declaration of Independence',
@@ -48,11 +49,12 @@ const defaultArgs = {
   ],
 };
 
-const Template = ({ columns, data }) => html`
+const Template = ({ columns, data, title }) => html`
   <va-table> </va-table>
   <script>
     console.log(document.querySelectorAll('va-table'));
     const todoListElement = document.querySelector('va-table');
+    todoListElement.title = '${title}';
     todoListElement.columns = ${JSON.stringify(columns)};
     todoListElement.data = ${JSON.stringify(data)};
   </script>
