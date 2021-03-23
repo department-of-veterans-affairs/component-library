@@ -7,12 +7,16 @@ import { Component, Prop, Host, h } from '@stencil/core';
 })
 export class VaTable {
   @Prop() columns: Array<any>;
+  @Prop() col1: string;
+  @Prop() col2: string;
+  @Prop() col3: string;
   @Prop() data: Array<any>;
   @Prop() title: string;
 
   render() {
-    const { columns, data, title } = this;
+    const { data, title } = this;
 
+    const columns = [this.col1, this.col2, this.col3];
     return (
       <Host>
         <table role="table">
@@ -21,7 +25,7 @@ export class VaTable {
             <tr role="row">
               {columns.map(col => (
                 <th role="columnheader" scope="col">
-                  {col.label}
+                  {col}
                 </th>
               ))}
             </tr>
@@ -29,9 +33,9 @@ export class VaTable {
           <tbody role="row">
             {data?.map(item => (
               <tr>
-                {columns.map(c => (
-                  <td data-label={c.label} role="cell">
-                    {item[c.value] === null ? '---' : item[c.value]}
+                {columns.map((c, colIndex) => (
+                  <td data-label={c} role="cell">
+                    {item[colIndex] === null ? '---' : item[colIndex]}
                   </td>
                 ))}
               </tr>
