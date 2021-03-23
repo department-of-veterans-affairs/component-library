@@ -50,10 +50,9 @@ td::first-letter {
 
   tr {
     border-bottom: 1px solid var(--color-gray-medium);
-
-    &:first-child {
-      border-top: 1px solid var(--color-gray-medium);
-    }
+  }
+  tr:first-child {
+    border-top: 1px solid var(--color-gray-medium);
   }
 
   td {
@@ -61,6 +60,7 @@ td::first-letter {
     font-size: 16px;
     display: flex;
     flex-direction: column;
+    line-height: 24px;
   }
 
   td:first-child {
@@ -77,7 +77,7 @@ td::first-letter {
         content: attr(aria-label);
        */
     content: attr(data-label);
-    font-weight: bold;
+    font-weight: 700;
     padding-right: 4px;
     float: left;
   }
