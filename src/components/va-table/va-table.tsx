@@ -15,20 +15,22 @@ export class VaTable {
 
     return (
       <Host>
-        <table>
+        <table role="table">
           {title && <caption>{title}</caption>}
           <thead>
-            <tr>
+            <tr role="row">
               {columns.map(col => (
-                <th>{col.label}</th>
+                <th role="columnheader" scope="col">
+                  {col.label}
+                </th>
               ))}
             </tr>
           </thead>
-          <tbody>
+          <tbody role="row">
             {data?.map(item => (
               <tr>
                 {columns.map(c => (
-                  <td data-label={c.label}>
+                  <td data-label={c.label} role="cell">
                     {item[c.value] === null ? '---' : item[c.value]}
                   </td>
                 ))}
