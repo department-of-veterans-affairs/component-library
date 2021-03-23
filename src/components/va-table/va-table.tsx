@@ -10,11 +10,10 @@ export class VaTable {
   @Prop() col1: string;
   @Prop() col2: string;
   @Prop() col3: string;
-  @Prop() data: Array<any>;
   @Prop() title: string;
 
   render() {
-    const { data, title } = this;
+    const { title } = this;
 
     const columns = [this.col1, this.col2, this.col3];
     return (
@@ -31,15 +30,7 @@ export class VaTable {
             </tr>
           </thead>
           <tbody role="row">
-            {data?.map(item => (
-              <tr>
-                {columns.map((c, colIndex) => (
-                  <td data-label={c} role="cell">
-                    {item[colIndex] === null ? '---' : item[colIndex]}
-                  </td>
-                ))}
-              </tr>
-            ))}
+            <slot></slot>
           </tbody>
         </table>
       </Host>

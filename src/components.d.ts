@@ -49,7 +49,6 @@ export namespace Components {
         "col2": string;
         "col3": string;
         "columns": Array<any>;
-        "data": Array<any>;
         "title": string;
     }
 }
@@ -133,7 +132,6 @@ declare namespace LocalJSX {
         "col2"?: string;
         "col3"?: string;
         "columns"?: Array<any>;
-        "data"?: Array<any>;
         "title"?: string;
     }
     interface IntrinsicElements {

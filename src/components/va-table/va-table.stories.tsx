@@ -36,12 +36,13 @@ const defaultArgs = {
 
 const Template = ({ col1, col2, col3, data, title }) => html`
   <va-table title="${title}" col-1="${col1}" col-2="${col2}" col-3="${col3}">
+    ${data.map(
+      row =>
+        html`<tr>
+          ${row.map(item => html`<td>${item}</td>`)}
+        </tr> `,
+    )}
   </va-table>
-  <script>
-    console.log(document.querySelectorAll('va-table'));
-    const todoListElement = document.querySelector('va-table');
-    todoListElement.data = ${JSON.stringify(data)};
-  </script>
 `;
 
 export const Default = Template.bind({});
