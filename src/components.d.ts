@@ -44,6 +44,10 @@ export namespace Components {
          */
         "open": boolean;
     }
+    interface VaTable {
+        "columns": Array<any>;
+        "data": Array<any>;
+    }
 }
 declare global {
     interface HTMLMyComponentElement extends Components.MyComponent, HTMLStencilElement {
@@ -64,10 +68,17 @@ declare global {
         prototype: HTMLVaAccordionItemElement;
         new (): HTMLVaAccordionItemElement;
     };
+    interface HTMLVaTableElement extends Components.VaTable, HTMLStencilElement {
+    }
+    var HTMLVaTableElement: {
+        prototype: HTMLVaTableElement;
+        new (): HTMLVaTableElement;
+    };
     interface HTMLElementTagNameMap {
         "my-component": HTMLMyComponentElement;
         "va-accordion": HTMLVaAccordionElement;
         "va-accordion-item": HTMLVaAccordionItemElement;
+        "va-table": HTMLVaTableElement;
     }
 }
 declare namespace LocalJSX {
@@ -113,10 +124,15 @@ declare namespace LocalJSX {
          */
         "open"?: boolean;
     }
+    interface VaTable {
+        "columns"?: Array<any>;
+        "data"?: Array<any>;
+    }
     interface IntrinsicElements {
         "my-component": MyComponent;
         "va-accordion": VaAccordion;
         "va-accordion-item": VaAccordionItem;
+        "va-table": VaTable;
     }
 }
 export { LocalJSX as JSX };
@@ -126,6 +142,7 @@ declare module "@stencil/core" {
             "my-component": LocalJSX.MyComponent & JSXBase.HTMLAttributes<HTMLMyComponentElement>;
             "va-accordion": LocalJSX.VaAccordion & JSXBase.HTMLAttributes<HTMLVaAccordionElement>;
             "va-accordion-item": LocalJSX.VaAccordionItem & JSXBase.HTMLAttributes<HTMLVaAccordionItemElement>;
+            "va-table": LocalJSX.VaTable & JSXBase.HTMLAttributes<HTMLVaTableElement>;
         }
     }
 }

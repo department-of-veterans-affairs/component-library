@@ -6,19 +6,26 @@ export default {
 };
 
 const defaultArgs = {
-  columns: ['one', 'two'],
+  columns: [
+    { label: 'one', value: 'one' },
+    { label: 'two', value: 'two' },
+  ],
+  data: [
+    {
+      one: 'hello darkness',
+      two: 'my old friend',
+    },
+  ],
 };
 
-const Template = ({ columns }) => html`
-  <va-table columns="${columns}">
-    <div slot="head">
-      <th>One</th>
-      <th>Two</th>
-    </div>
-    <div slot="body">
-      <span>test</span>
-    </div>
-  </va-table>
+const Template = ({ columns, data }) => html`
+  <va-table> </va-table>
+  <script>
+    console.log(document.querySelectorAll('va-table'));
+    const todoListElement = document.querySelector('va-table');
+    todoListElement.columns = ${JSON.stringify(columns)};
+    todoListElement.data = ${JSON.stringify(data)};
+  </script>
 `;
 
 export const Default = Template.bind({});
