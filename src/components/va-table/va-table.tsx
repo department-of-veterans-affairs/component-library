@@ -26,7 +26,9 @@ export class VaTable {
             {data?.map(item => (
               <tr>
                 {columns.map(c => (
-                  <td>{item[c.value] === null ? '---' : item[c.value]}</td>
+                  <td data-label={c.label}>
+                    {item[c.value] === null ? '---' : item[c.value]}
+                  </td>
                 ))}
               </tr>
             ))}

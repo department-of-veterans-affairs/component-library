@@ -39,3 +39,50 @@ tr {
 td::first-letter {
   text-transform: capitalize;
 }
+
+@media screen and (max-width: 768px) {
+  table {
+    border: 0;
+  }
+  thead {
+    display: none;
+  }
+
+  tr {
+    border-bottom: 1px solid var(--color-gray-medium);
+
+    &:first-child {
+      border-top: 1px solid var(--color-gray-medium);
+    }
+  }
+
+  td {
+    border: none;
+    font-size: 16px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  td:first-child {
+    margin-top: 16px;
+  }
+
+  td:last-child {
+    margin-bottom: 16px;
+  }
+
+  td::before {
+    /*
+       * aria-label has no advantage, it won't be read inside a table
+        content: attr(aria-label);
+       */
+    content: attr(data-label);
+    font-weight: bold;
+    padding-right: 4px;
+    float: left;
+  }
+
+  td:last-child {
+    border-bottom: 0;
+  }
+}
