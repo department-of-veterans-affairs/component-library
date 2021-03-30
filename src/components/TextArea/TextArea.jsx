@@ -5,6 +5,7 @@ import classNames from 'classnames';
 
 import { makeField } from '../../helpers/fields';
 
+import dispatchAnalyticsEvent from '../../helpers/analytics';
 /**
  * A form input with a label that can display error messages.
  */
@@ -28,6 +29,18 @@ class TextArea extends React.Component {
   }
 
   handleBlur() {
+    if (this.props.enableAnalytics) {
+      dispatchAnalyticsEvent({
+        componentName: 'TextArea',
+        action: 'blur',
+
+        details: {
+          label: this.props.label,
+          value: this.props.field.value,
+        },
+      });
+    }
+
     this.props.onValueChange(makeField(this.props.field.value, true));
   }
 
@@ -150,6 +163,15 @@ TextArea.propTypes = {
    * A function with this prototype: (newValue)
    */
   onValueChange: PropTypes.func.isRequired,
+  /**
+   * Keyboard tab order for radio button group
+   */
+  tabIndex: PropTypes.number,
+  /**
+   * Analytics tracking function(s) will be called. Form components
+   * are disabled by default due to PII/PHI concerns.
+   */
+  enableAnalytics: PropTypes.bool,
 };
 
 export default TextArea;
