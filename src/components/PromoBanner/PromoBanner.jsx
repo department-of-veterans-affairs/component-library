@@ -15,7 +15,15 @@ const PROMO_BANNER_ICONS = new Map([
   [PROMO_BANNER_TYPES.emailSignup, 'fa-envelope'],
 ]);
 
-function PromoBanner({ type, onClose, render, href, target, text }) {
+function PromoBanner({
+  type,
+  onClose,
+  render,
+  href,
+  target,
+  text,
+  disableAnalytics,
+}) {
   const iconClasses = classnames(
     'fas',
     'fa-stack-1x',
@@ -23,16 +31,19 @@ function PromoBanner({ type, onClose, render, href, target, text }) {
   );
 
   const onCloseWithAnalytics = () => {
-    dispatchAnalyticsEvent({
-      componentName: 'PromoBanner',
-      action: 'linkClick',
-      details: {
-        text,
-        href,
-        target,
-        type,
-      },
-    });
+    // Conditionally track the event.
+    if (!disableAnalytics) {
+      dispatchAnalyticsEvent({
+        componentName: 'PromoBanner',
+        action: 'linkClick',
+        details: {
+          text,
+          href,
+          target,
+          type,
+        },
+      });
+    }
     return onClose && onClose();
   };
 
@@ -106,6 +117,10 @@ PromoBanner.propTypes = {
    * Content for the `<a>` tag. Only gets used if `render` is _not_ used
    */
   text: PropTypes.string,
+  /**
+   * Analytics tracking function(s) will not be called
+   */
+  disableAnalytics: PropTypes.bool,
 };
 
 export default PromoBanner;
