@@ -35,12 +35,15 @@ li a {
   max-width: 285px;
 }
 
-a::before {
+i {
   font-family: 'Font Awesome 5 Free';
+  font-style: normal;
   font-weight: 900;
-  content: '\F063'; /* fa-arrow-down */
   margin-right: 8px;
   font-size: 0.75em;
+}
+i::before {
+  content: '\F063'; /* fa-arrow-down */
 }
 
 a:active {

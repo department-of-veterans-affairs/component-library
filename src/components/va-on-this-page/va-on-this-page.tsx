@@ -1,4 +1,4 @@
-import { Component, Host, h } from '@stencil/core';
+import { Component, h } from '@stencil/core';
 
 /**
  * This component will render links based on the content around it. It scans the document for any `<h2>`s
@@ -16,16 +16,19 @@ export class VaOnThisPage {
     >;
 
     return (
-      <Host>
+      <nav>
         <h2>On this page</h2>
         <ul>
           {h2s.map(heading => (
             <li>
-              <a href={`#${heading.id}`}>{heading.innerText}</a>
+              <a href={`#${heading.id}`}>
+                <i aria-hidden="true" class="fas fa-arrow-down"></i>
+                {heading.innerText}
+              </a>
             </li>
           ))}
         </ul>
-      </Host>
+      </nav>
     );
   }
 }
