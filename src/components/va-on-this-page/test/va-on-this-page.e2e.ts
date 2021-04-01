@@ -11,8 +11,10 @@ describe('va-on-this-page', () => {
     expect(element).toEqualHtml(`
       <va-on-this-page class="hydrated">
         <mock:shadow-root>
-          <h2>On this page</h2>
-          <ul></ul>
+          <nav>
+            <h2>On this page</h2>
+            <ul></ul>
+          </nav>
         </mock:shadow-root>
       </va-on-this-page>
     `);
@@ -54,19 +56,23 @@ describe('va-on-this-page', () => {
     expect(element).toEqualHtml(`
       <va-on-this-page class="hydrated">
         <mock:shadow-root>
-          <h2>On this page</h2>
-          <ul>
-            <li>
-              <a href="#an-id">
-                Hello
-              </a>
-            </li>
-            <li>
-              <a href="#its-me">
-                It's me
-              </a>
-            </li>
-          </ul>
+          <nav>
+            <h2>On this page</h2>
+            <ul>
+              <li>
+                <a href="#an-id">
+                  <i aria-hidden="true" class="fa-arrow-down fas"></i>
+                  Hello
+                </a>
+              </li>
+              <li>
+                <a href="#its-me">
+                  <i aria-hidden="true" class="fa-arrow-down fas"></i>
+                  It's me
+                </a>
+              </li>
+            </ul>
+          </nav>
         </mock:shadow-root>
       </va-on-this-page>
     `);
@@ -91,14 +97,17 @@ describe('va-on-this-page', () => {
     expect(element).toEqualHtml(`
       <va-on-this-page class="hydrated">
         <mock:shadow-root>
-          <h2>On this page</h2>
-          <ul>
-            <li>
-              <a href="#foo">
-                Foo
-              </a>
-            </li>
-          </ul>
+          <nav>
+            <h2>On this page</h2>
+            <ul>
+              <li>
+                <a href="#foo">
+                  <i aria-hidden="true" class="fa-arrow-down fas"></i>
+                  Foo
+                </a>
+              </li>
+            </ul>
+          </nav>
         </mock:shadow-root>
       </va-on-this-page>
     `);
