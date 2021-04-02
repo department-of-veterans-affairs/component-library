@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
+import dispatchAnalyticsEvent from '../../helpers/analytics';
 
 const PROMO_BANNER_TYPES = {
   announcement: 'announcement',
@@ -14,12 +15,37 @@ const PROMO_BANNER_ICONS = new Map([
   [PROMO_BANNER_TYPES.emailSignup, 'fa-envelope'],
 ]);
 
-function PromoBanner({ type, onClose, render, href, target, text }) {
+function PromoBanner({
+  type,
+  onClose,
+  render,
+  href,
+  target,
+  text,
+  disableAnalytics,
+}) {
   const iconClasses = classnames(
     'fas',
     'fa-stack-1x',
     PROMO_BANNER_ICONS.get(type),
   );
+
+  const onCloseWithAnalytics = () => {
+    // Conditionally track the event.
+    if (!disableAnalytics) {
+      dispatchAnalyticsEvent({
+        componentName: 'PromoBanner',
+        action: 'linkClick',
+        details: {
+          text,
+          href,
+          target,
+          type,
+        },
+      });
+    }
+    return onClose && onClose();
+  };
 
   return (
     <div className="vads-c-promo-banner">
@@ -39,7 +65,7 @@ function PromoBanner({ type, onClose, render, href, target, text }) {
               className="vads-c-promo-banner__content-link"
               href={href}
               target={target}
-              onClick={onClose}
+              onClick={onCloseWithAnalytics}
             >
               {text} <i className="fas fa-angle-right" />
             </a>
@@ -91,6 +117,10 @@ PromoBanner.propTypes = {
    * Content for the `<a>` tag. Only gets used if `render` is _not_ used
    */
   text: PropTypes.string,
+  /**
+   * Analytics tracking function(s) will not be called
+   */
+  disableAnalytics: PropTypes.bool,
 };
 
 export default PromoBanner;
