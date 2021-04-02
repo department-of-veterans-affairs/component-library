@@ -44,6 +44,8 @@ export namespace Components {
          */
         "open": boolean;
     }
+    interface VaOnThisPage {
+    }
 }
 declare global {
     interface HTMLMyComponentElement extends Components.MyComponent, HTMLStencilElement {
@@ -64,10 +66,17 @@ declare global {
         prototype: HTMLVaAccordionItemElement;
         new (): HTMLVaAccordionItemElement;
     };
+    interface HTMLVaOnThisPageElement extends Components.VaOnThisPage, HTMLStencilElement {
+    }
+    var HTMLVaOnThisPageElement: {
+        prototype: HTMLVaOnThisPageElement;
+        new (): HTMLVaOnThisPageElement;
+    };
     interface HTMLElementTagNameMap {
         "my-component": HTMLMyComponentElement;
         "va-accordion": HTMLVaAccordionElement;
         "va-accordion-item": HTMLVaAccordionItemElement;
+        "va-on-this-page": HTMLVaOnThisPageElement;
     }
 }
 declare namespace LocalJSX {
@@ -113,10 +122,13 @@ declare namespace LocalJSX {
          */
         "open"?: boolean;
     }
+    interface VaOnThisPage {
+    }
     interface IntrinsicElements {
         "my-component": MyComponent;
         "va-accordion": VaAccordion;
         "va-accordion-item": VaAccordionItem;
+        "va-on-this-page": VaOnThisPage;
     }
 }
 export { LocalJSX as JSX };
@@ -126,6 +138,7 @@ declare module "@stencil/core" {
             "my-component": LocalJSX.MyComponent & JSXBase.HTMLAttributes<HTMLMyComponentElement>;
             "va-accordion": LocalJSX.VaAccordion & JSXBase.HTMLAttributes<HTMLVaAccordionElement>;
             "va-accordion-item": LocalJSX.VaAccordionItem & JSXBase.HTMLAttributes<HTMLVaAccordionItemElement>;
+            "va-on-this-page": LocalJSX.VaOnThisPage & JSXBase.HTMLAttributes<HTMLVaOnThisPageElement>;
         }
     }
 }
