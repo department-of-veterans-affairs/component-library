@@ -44,12 +44,16 @@ export namespace Components {
          */
         "open": boolean;
     }
+    interface VaOnThisPage {
+    }
     interface VaTable {
         "col1": string;
         "col2": string;
         "col3": string;
         "columns": Array<any>;
         "title": string;
+    }
+    interface VaTableRow {
     }
 }
 declare global {
@@ -71,17 +75,31 @@ declare global {
         prototype: HTMLVaAccordionItemElement;
         new (): HTMLVaAccordionItemElement;
     };
+    interface HTMLVaOnThisPageElement extends Components.VaOnThisPage, HTMLStencilElement {
+    }
+    var HTMLVaOnThisPageElement: {
+        prototype: HTMLVaOnThisPageElement;
+        new (): HTMLVaOnThisPageElement;
+    };
     interface HTMLVaTableElement extends Components.VaTable, HTMLStencilElement {
     }
     var HTMLVaTableElement: {
         prototype: HTMLVaTableElement;
         new (): HTMLVaTableElement;
     };
+    interface HTMLVaTableRowElement extends Components.VaTableRow, HTMLStencilElement {
+    }
+    var HTMLVaTableRowElement: {
+        prototype: HTMLVaTableRowElement;
+        new (): HTMLVaTableRowElement;
+    };
     interface HTMLElementTagNameMap {
         "my-component": HTMLMyComponentElement;
         "va-accordion": HTMLVaAccordionElement;
         "va-accordion-item": HTMLVaAccordionItemElement;
+        "va-on-this-page": HTMLVaOnThisPageElement;
         "va-table": HTMLVaTableElement;
+        "va-table-row": HTMLVaTableRowElement;
     }
 }
 declare namespace LocalJSX {
@@ -127,6 +145,8 @@ declare namespace LocalJSX {
          */
         "open"?: boolean;
     }
+    interface VaOnThisPage {
+    }
     interface VaTable {
         "col1"?: string;
         "col2"?: string;
@@ -134,11 +154,15 @@ declare namespace LocalJSX {
         "columns"?: Array<any>;
         "title"?: string;
     }
+    interface VaTableRow {
+    }
     interface IntrinsicElements {
         "my-component": MyComponent;
         "va-accordion": VaAccordion;
         "va-accordion-item": VaAccordionItem;
+        "va-on-this-page": VaOnThisPage;
         "va-table": VaTable;
+        "va-table-row": VaTableRow;
     }
 }
 export { LocalJSX as JSX };
@@ -148,7 +172,9 @@ declare module "@stencil/core" {
             "my-component": LocalJSX.MyComponent & JSXBase.HTMLAttributes<HTMLMyComponentElement>;
             "va-accordion": LocalJSX.VaAccordion & JSXBase.HTMLAttributes<HTMLVaAccordionElement>;
             "va-accordion-item": LocalJSX.VaAccordionItem & JSXBase.HTMLAttributes<HTMLVaAccordionItemElement>;
+            "va-on-this-page": LocalJSX.VaOnThisPage & JSXBase.HTMLAttributes<HTMLVaOnThisPageElement>;
             "va-table": LocalJSX.VaTable & JSXBase.HTMLAttributes<HTMLVaTableElement>;
+            "va-table-row": LocalJSX.VaTableRow & JSXBase.HTMLAttributes<HTMLVaTableRowElement>;
         }
     }
 }
