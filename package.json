@@ -93,6 +93,6 @@
     "react-router": "3",
     "rimraf": "^3.0.2",
     "sinon": "^9.2.2",
-    "web-components": "https://github.com/department-of-veterans-affairs/component-library.git#wc-on-this-page"
+    "web-components": "https://github.com/department-of-veterans-affairs/component-library.git#wc-v0.3.0"
   }
 }
