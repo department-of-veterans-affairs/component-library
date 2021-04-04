@@ -17,34 +17,48 @@ describe('<Modal/>', () => {
     tree.unmount();
   });
 
-  it('should setup event listeners and tear them down', () => {
-    sinon.spy(global.document, 'addEventListener');
-    sinon.spy(global.document, 'removeEventListener');
+  describe('event listeners', () => {
+    const checkForListener = (callsArray, listenerName) => {
+      return callsArray.filter(call => {
+        return call.firstArg === listenerName;
+      });
+    };
 
-    const totalListeners = 3;
-    const tree = mount(
-      <Modal
-        id="modal"
-        title="Modal title"
-        visible
-        clickToClose
-        onClose={() => {}}
-      >
-        Modal contents
-      </Modal>,
-    );
+    let tree;
+    before(() => {
+      sinon.spy(global.document, 'addEventListener');
+      sinon.spy(global.document, 'removeEventListener');
+    });
 
-    expect(global.document.addEventListener.callCount).to.be.equal(
-      totalListeners,
-    );
+    after(() => {
+      global.document.addEventListener.restore();
+      global.document.removeEventListener.restore();
+    });
 
-    tree.unmount();
-    expect(global.document.removeEventListener.callCount).to.be.equal(
-      totalListeners,
-    );
+    it('should set up a keydown and a click listener', () => {
+      tree = mount(
+        <Modal
+          id="modal"
+          title="Modal title"
+          visible
+          clickToClose
+          onClose={() => {}}
+        >
+          Modal contents
+        </Modal>,
+      );
 
-    global.document.addEventListener.restore();
-    global.document.removeEventListener.restore();
+      const callsArray = global.document.addEventListener.getCalls();
+      expect(checkForListener(callsArray, 'keydown').length).to.be.at.least(1);
+      expect(checkForListener(callsArray, 'click').length).to.be.at.least(1);
+    });
+
+    it('should tear down keydown and click listeners when the modal is closed', () => {
+      tree.unmount();
+      const callsArray = global.document.removeEventListener.getCalls();
+      expect(checkForListener(callsArray, 'keydown').length).to.be.at.least(1);
+      expect(checkForListener(callsArray, 'click').length).to.be.at.least(1);
+    });
   });
 
   it('should pass aXe check', () => {
@@ -70,7 +84,22 @@ describe('<Modal/>', () => {
       global.document.body.removeChild(root);
     });
 
-    it('should start on the first focusable element by default', () => {
+    it('should open with focus assigned to the close button', () => {
+      const tree = mount(
+        <Modal id="modal" title="Programmatic focus" visible onClose={() => {}}>
+          <button id="first-button">First button</button>
+          <button id="second-button">Second button</button>
+        </Modal>,
+        { attachTo: root },
+      );
+
+      expect(global.document.activeElement.className).to.equal(
+        'va-modal-close',
+      );
+      tree.unmount();
+    });
+
+    it('should open with focus assigned to the first button when the close button is turned off', () => {
       const tree = mount(
         <Modal
           id="modal"
