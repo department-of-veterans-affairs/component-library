@@ -6,19 +6,23 @@ export default {
   component: Modal,
 };
 
-const Template = (args) => {
+const Template = args => {
   const [visible, setVisible] = useState(args.visible);
   const onClose = () => setVisible(!visible);
+  const openModal = () => setVisible(true);
   return (
-    <Modal {...args} visible={visible} onClose={onClose}>
-      {args.children}
-    </Modal>
+    <div style={{ height: '500px' }}>
+      <button onClick={openModal}>Click here to open modal</button>
+      <Modal {...args} visible={visible} onClose={onClose}>
+        {args.children}
+      </Modal>
+    </div>
   );
 };
 
 const defaultArgs = {
   ...Modal.defaultProps,
-  visible: true,
+  visible: false,
   // Note: This is not a prop of Modal. This is to demonstrate the use of children in the Modal.
   children: (
     <>
@@ -36,12 +40,12 @@ const defaultArgs = {
   primaryButton: {
     text: 'Primary button',
     // eslint-disable-next-line no-console
-    action: (e) => console.log('Primary button clicked. Event fired:', e),
+    action: e => console.log('Primary button clicked. Event fired:', e),
   },
   secondaryButton: {
     text: 'Secondary button',
     // eslint-disable-next-line no-console
-    action: (e) => console.log('Secondary button clicked. Event fired:', e),
+    action: e => console.log('Secondary button clicked. Event fired:', e),
   },
   title: 'Modal title goes here',
 };
@@ -84,4 +88,8 @@ export const WithoutTitle = Template.bind({});
 WithoutTitle.args = { ...defaultArgs, title: undefined };
 
 export const HideCloseButton = Template.bind({});
-HideCloseButton.args = { ...defaultArgs, hideCloseButton: true };
+HideCloseButton.args = {
+  ...defaultArgs,
+  hideCloseButton: true,
+  clickToClose: true,
+};
