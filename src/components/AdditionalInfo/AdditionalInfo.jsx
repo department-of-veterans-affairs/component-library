@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import _ from 'lodash';
 import classNames from 'classnames';
 import ExpandingGroup from '../ExpandingGroup/ExpandingGroup';
+import dispatchAnalyticsEvent from '../../helpers/analytics';
 
 export default class AdditionalInfo extends React.Component {
   constructor(props) {
@@ -12,12 +13,24 @@ export default class AdditionalInfo extends React.Component {
   }
 
   toggle = () => {
+    // Conditionally track the event.
+    if (!this.props.disableAnalytics) {
+      dispatchAnalyticsEvent({
+        componentName: 'AdditionalInfo',
+        action: !this.state.open ? 'expand' : 'collapse',
+        details: {
+          triggerText: this.props.triggerText,
+        },
+      });
+    }
+
     this.setState({ open: !this.state.open });
+
     return this.props.onClick && this.props.onClick();
   };
 
   render() {
-    const { triggerText, children } = this.props;
+    const { triggerText, children, tagName: TagName = 'span' } = this.props;
 
     // Display button as a block element in order to
     // preserve the Safari VoiceOver navigation order
@@ -33,8 +46,6 @@ export default class AdditionalInfo extends React.Component {
       'fa-angle-down': true,
       open: this.state.open,
     });
-
-    const { tagName: TagName = 'span' } = this.props;
 
     const trigger = (
       <button
@@ -69,4 +80,13 @@ AdditionalInfo.propTypes = {
    */
   triggerText: PropTypes.string.isRequired,
   onClick: PropTypes.func,
+  /**
+   * Child elements (content) of modal when displayed
+   */
+  children: PropTypes.node,
+  /**
+   * Analytics tracking function(s) will not be called
+   */
+  disableAnalytics: PropTypes.bool,
+  tagName: PropTypes.string,
 };

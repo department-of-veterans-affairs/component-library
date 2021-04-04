@@ -24,13 +24,13 @@ const Template = args => {
   const { level, ...rest } = args;
   return (
     <va-accordion {...rest}>
-      <va-accordion-item level={level} header="First Ammendment">
+      <va-accordion-item level={level} header="First Amendment">
         Congress shall make no law respecting an establishment of religion, or
         prohibiting the free exercise thereof; or abridging the freedom of
         speech, or of the press; or the right of the people peaceably to
         assemble, and to petition the Government for a redress of grievances.
       </va-accordion-item>
-      <va-accordion-item level={level} header="Second Ammendment">
+      <va-accordion-item level={level} header="Second Amendment">
         A well regulated Militia, being necessary to the security of a free
         State, the right of the people to keep and bear Arms, shall not be
         infringed.
