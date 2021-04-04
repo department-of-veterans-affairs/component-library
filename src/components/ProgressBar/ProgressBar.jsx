@@ -19,17 +19,18 @@ class ProgressBar extends Component {
 
   analyticsEvent = () => {
     // Conditionally track events
-    if (!this.props.disableAnalytics) {
-      if (this.props.percent === 0 || this.props.percent === 100) {
-        dispatchAnalyticsEvent({
-          componentName: 'ProgressBar',
-          action: 'change',
-          details: {
-            percent: this.props.percent,
-            label: this.props.label,
-          },
-        });
-      }
+    if (
+      !this.props.disableAnalytics &&
+      (this.props.percent === 0 || this.props.percent === 100)
+    ) {
+      dispatchAnalyticsEvent({
+        componentName: 'ProgressBar',
+        action: 'change',
+        details: {
+          percent: this.props.percent,
+          label: this.props.label,
+        },
+      });
     }
   };
 
