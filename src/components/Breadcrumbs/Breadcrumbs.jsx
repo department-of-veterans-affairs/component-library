@@ -42,8 +42,8 @@ class Breadcrumbs extends Component {
           componentName: 'Breadcrumbs',
           action: 'linkClick',
           details: {
-            clickLabel: e.target.innerText,
-            clickLevel: parseInt(e.target.dataset.index, 10),
+            clickLabel: e.target.innerText.trim(),
+            clickLevel: parseInt(e.target.dataset.index, 10) + 1,
             totalLevels: this.props.children.length,
             mobileFirstProp: this.props.mobileFirstProp,
           },
