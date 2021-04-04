@@ -6,6 +6,8 @@ export default class LoadingIndicator extends React.Component {
   constructor(props) {
     super(props);
 
+    // This state variable is used as a constant to get a diff
+    // between initial mount and unmount
     this.state = { loadingStartTime: Date.now() };
   }
 
