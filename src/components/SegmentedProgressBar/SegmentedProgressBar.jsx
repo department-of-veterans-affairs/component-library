@@ -17,14 +17,17 @@ export default class SegmentedProgressBar extends React.Component {
   }
 
   analyticsEvent() {
-    dispatchAnalyticsEvent({
-      componentName: 'SegmentedProgressBar',
-      action: 'update',
-      details: {
-        current: this.props.current,
-        total: this.props.total,
-      },
-    });
+    // Conditionally track events
+    if (!this.props.disableAnalytics) {
+      dispatchAnalyticsEvent({
+        componentName: 'SegmentedProgressBar',
+        action: 'change',
+        details: {
+          current: this.props.current,
+          total: this.props.total,
+        },
+      });
+    }
   }
 
   componentDidMount() {
@@ -70,4 +73,8 @@ SegmentedProgressBar.propTypes = {
    * The total number of segments in the progress bar
    */
   total: PropTypes.number.isRequired,
+  /**
+   * Analytics tracking function(s) will not be called
+   */
+  disableAnalytics: PropTypes.bool,
 };

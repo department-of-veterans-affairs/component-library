@@ -12,17 +12,18 @@ class ProgressBar extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    if (prevProps.percent < 100 && this.props.percent === 100) {
+    if (prevProps.percent !== this.props.percent) {
       this.analyticsEvent();
     }
   }
 
   analyticsEvent = () => {
+    // Conditionally track events
     if (!this.props.disableAnalytics) {
-      if (this.props.percent === 100) {
+      if (this.props.percent === 0 || this.props.percent === 100) {
         dispatchAnalyticsEvent({
           componentName: 'ProgressBar',
-          action: 'update',
+          action: 'change',
           details: {
             percent: this.props.percent,
             label: this.props.label,
@@ -64,7 +65,8 @@ ProgressBar.propTypes = {
   label: PropTypes.string,
   /**
    * Analytics tracking function(s) will not be called
-   */ disableAnalytics: PropTypes.bool,
+   */
+  disableAnalytics: PropTypes.bool,
 };
 
 ProgressBar.defaultProps = {
