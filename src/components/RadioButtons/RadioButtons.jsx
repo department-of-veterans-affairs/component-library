@@ -191,7 +191,7 @@ RadioButtons.propTypes = {
    */
   additionalLegendClass: PropTypes.string,
   /**
-   * Child elements (content) of modal when displayed
+   * Child elements (content)
    */
   children: PropTypes.node,
   /**

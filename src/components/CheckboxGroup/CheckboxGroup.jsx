@@ -5,6 +5,8 @@ import classNames from 'classnames';
 import ExpandingGroup from '../ExpandingGroup/ExpandingGroup';
 import { makeField } from '../../helpers/fields';
 
+import dispatchAnalyticsEvent from '../../helpers/analytics';
+
 /**
  * A checkbox button group with a label.
  *
@@ -39,10 +41,20 @@ class CheckboxGroup extends React.Component {
   };
 
   handleChange = domEvent => {
-    this.props.onValueChange(
-      makeField(domEvent.target.value, true),
-      domEvent.target.checked,
-    );
+    const isChecked = domEvent.target.checked;
+
+    if (isChecked && this.props.enableAnalytics) {
+      dispatchAnalyticsEvent({
+        componentName: 'CheckboxGroup',
+        action: 'change',
+
+        details: {
+          label: this.props.label,
+        },
+      });
+    }
+
+    this.props.onValueChange(makeField(domEvent.target.value, true), isChecked);
   };
 
   render() {
@@ -164,6 +176,10 @@ CheckboxGroup.propTypes = {
    */
   additionalLegendClass: PropTypes.string,
   /**
+   * Child elements (content)
+   */
+  children: PropTypes.node,
+  /**
    * Error message.
    */
   errorMessage: PropTypes.string,
@@ -213,6 +229,11 @@ CheckboxGroup.propTypes = {
    * Is this field required.
    */
   required: PropTypes.bool,
+  /**
+   * Analytics tracking function(s) will be called. Form components
+   * are disabled by default due to PII/PHI concerns.
+   */
+  enableAnalytics: PropTypes.bool,
 };
 
 export default CheckboxGroup;
