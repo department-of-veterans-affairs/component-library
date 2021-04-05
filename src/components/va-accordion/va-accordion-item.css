@@ -59,3 +59,7 @@ button:hover {
 button[aria-expanded='false'] {
   background-image: url('../../assets/plus.svg');
 }
+
+p {
+  font-weight: 400;
+}

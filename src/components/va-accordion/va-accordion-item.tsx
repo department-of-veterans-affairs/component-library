@@ -39,16 +39,6 @@ export class VaAccordionItem {
     this.accordionItemToggled.emit(e);
   }
 
-  addSubheader() {
-    if (this.subheader) {
-      console.log(this.subheader);
-      return (
-        <p class="vads-u-font-weight--normal vads-u-margin--0">{this.subheader}</p>
-      )
-    }
-    return false;
-  }
-
   render() {
     const Header = () =>
       h(
@@ -60,7 +50,7 @@ export class VaAccordionItem {
           aria-controls="content"
         >
           {this.header}
-          {this.addSubheader()}
+          {this.subheader ? (<p>{this.subheader}</p>) : false}
         </button>,
       );
 
