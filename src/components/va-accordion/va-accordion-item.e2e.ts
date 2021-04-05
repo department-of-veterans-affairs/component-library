@@ -96,5 +96,5 @@ describe('va-accordion-item', () => {
     let subheader = element.shadowRoot.querySelector('p');
 
     expect(subheader).toEqualText('The subheader');
-  })
+  });
 });
