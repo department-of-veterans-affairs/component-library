@@ -22,6 +22,17 @@ From the project root, run the following commands:
 1. `yarn install`
 1. `yarn storybook`
 
+## Web Components
+
+The Design System team is working on replacing the React components in this library with Web Component versions. This isn't _just_ a React replacement however - part of the goal is to have true components that can be used outside of React in plain HTML pages.
+
+For now these Web Components live on the [`web-components` branch](https://github.com/department-of-veterans-affairs/component-library/tree/web-components). In order to add a new component or make changes to an existing one, you must:
+
+1. Create a new branch off of `web-components`
+1. Have the PR be based off of `web-components` (not `master`)
+1. Once the PR is merged, create a Github Release with `web-components` as the base, where the version is `wc-vX.Y.Z`. with `X.Y.Z` being the semantic version.
+
+
 ## Publishing Module to NPM
 
 After you've tested and previewed your changes locally it's time to publish a new version of the package to NPM.
