@@ -25,9 +25,11 @@ export class VaAlert {
   @Prop() onClose: any;
 
   render() {
+    const { status } = this;
+    const classes = `alert ${status}`;
     return (
       <Host>
-        <div class="alert info">
+        <div class={classes}>
           <div class="body">
             {this.headline && <h2>{this.headline}</h2>}
             <slot></slot>

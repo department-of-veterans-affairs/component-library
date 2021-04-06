@@ -38,8 +38,17 @@ div.info::before {
   content: '\F05A';
 }
 
+div.continue::before {
+  content: '\F023';
+  color: var(--color-green);
+}
+
 .info {
   border-left-color: var(--color-primary-alt-dark);
+}
+
+.continue {
+  border-left-color: var(--color-green);
 }
 
 .va-alert-close {
