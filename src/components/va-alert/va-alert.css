@@ -39,7 +39,7 @@ div.info::before {
 }
 
 .info {
-  border-left-color: #00a6d2;
+  border-left-color: var(--color-primary-alt-dark);
 }
 
 .va-alert-close {
@@ -48,7 +48,7 @@ div.info::before {
   position: absolute;
   margin: 1.6rem;
   width: auto;
-  color: #0071bb;
+  color: var(--color-primary);
   font-size: 2.25rem;
   appearance: none;
   border: 0;
