@@ -31,7 +31,7 @@ export class VaAlert {
       <Host>
         <div class={classes}>
           <div class="body">
-            {this.headline && <h2>{this.headline}</h2>}
+            {this.headline && <h3>{this.headline}</h3>}
             <slot></slot>
           </div>
         </div>
