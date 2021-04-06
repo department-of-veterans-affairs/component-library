@@ -43,12 +43,35 @@ div.continue::before {
   color: var(--color-green);
 }
 
+div.success::before {
+  content: '\F00C';
+  color: var(--color-green);
+}
+
+div.warning::before {
+  content: '\F071';
+}
+
+div.error::before {
+  content: '\F06A';
+  color: var(--color-secondary-dark);
+}
+
 .info {
   border-left-color: var(--color-primary-alt-dark);
 }
 
-.continue {
+.continue,
+.success {
   border-left-color: var(--color-green);
+}
+
+.warning {
+  border-left-color: var(--color-gold);
+}
+
+.error {
+  border-left-color: var(--color-secondary-dark);
 }
 
 .va-alert-close {
