@@ -44,6 +44,12 @@ export namespace Components {
          */
         "open": boolean;
     }
+    interface VaAlert {
+        "closeBtnAriaLabel": string;
+        "headline": string;
+        "onClose": any;
+        "status": string;
+    }
     interface VaOnThisPage {
     }
 }
@@ -66,6 +72,12 @@ declare global {
         prototype: HTMLVaAccordionItemElement;
         new (): HTMLVaAccordionItemElement;
     };
+    interface HTMLVaAlertElement extends Components.VaAlert, HTMLStencilElement {
+    }
+    var HTMLVaAlertElement: {
+        prototype: HTMLVaAlertElement;
+        new (): HTMLVaAlertElement;
+    };
     interface HTMLVaOnThisPageElement extends Components.VaOnThisPage, HTMLStencilElement {
     }
     var HTMLVaOnThisPageElement: {
@@ -76,6 +88,7 @@ declare global {
         "my-component": HTMLMyComponentElement;
         "va-accordion": HTMLVaAccordionElement;
         "va-accordion-item": HTMLVaAccordionItemElement;
+        "va-alert": HTMLVaAlertElement;
         "va-on-this-page": HTMLVaOnThisPageElement;
     }
 }
@@ -122,12 +135,19 @@ declare namespace LocalJSX {
          */
         "open"?: boolean;
     }
+    interface VaAlert {
+        "closeBtnAriaLabel"?: string;
+        "headline"?: string;
+        "onClose"?: any;
+        "status"?: string;
+    }
     interface VaOnThisPage {
     }
     interface IntrinsicElements {
         "my-component": MyComponent;
         "va-accordion": VaAccordion;
         "va-accordion-item": VaAccordionItem;
+        "va-alert": VaAlert;
         "va-on-this-page": VaOnThisPage;
     }
 }
@@ -138,6 +158,7 @@ declare module "@stencil/core" {
             "my-component": LocalJSX.MyComponent & JSXBase.HTMLAttributes<HTMLMyComponentElement>;
             "va-accordion": LocalJSX.VaAccordion & JSXBase.HTMLAttributes<HTMLVaAccordionElement>;
             "va-accordion-item": LocalJSX.VaAccordionItem & JSXBase.HTMLAttributes<HTMLVaAccordionItemElement>;
+            "va-alert": LocalJSX.VaAlert & JSXBase.HTMLAttributes<HTMLVaAlertElement>;
             "va-on-this-page": LocalJSX.VaOnThisPage & JSXBase.HTMLAttributes<HTMLVaOnThisPageElement>;
         }
     }
