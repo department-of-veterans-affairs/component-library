@@ -71,4 +71,16 @@ describe('va-alert', () => {
       </div>
     `);
   });
+
+  it('fires a custom "close" event when the close button is clicked', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-alert>Content inside</va-alert>');
+
+    const closeSpy = await page.spyOnEvent('close');
+
+    const button = await page.find('va-alert >>> button');
+    await button.click();
+
+    expect(closeSpy).toHaveReceivedEventTimes(1);
+  });
 });

@@ -12,16 +12,25 @@ const defaultArgs = {
 };
 
 const Template = ({ backgroundOnly, headline, status }) => html`
-  <va-alert
-    background-only="${backgroundOnly}"
-    headline="${headline}"
-    status="${status}"
-  >
-    <div>
-      A well regulated Militia, being necessary to the security of a free State,
-      the right of the people to keep and bear Arms, shall not be infringed.
-    </div>
-  </va-alert>
+  <div>
+    <va-alert
+      background-only="${backgroundOnly}"
+      headline="${headline}"
+      status="${status}"
+    >
+      <div>
+        A well regulated Militia, being necessary to the security of a free
+        State, the right of the people to keep and bear Arms, shall not be
+        infringed.
+      </div>
+    </va-alert>
+    <script>
+      const alertElement = document.querySelector('va-alert');
+      alertElement.addEventListener('close', event => {
+        console.log('Close button clicked');
+      });
+    </script>
+  </div>
 `;
 
 export const Default = Template.bind({});

@@ -1,4 +1,4 @@
-import { Component, Host, Prop, h } from '@stencil/core';
+import { Component, Event, EventEmitter, Host, Prop, h } from '@stencil/core';
 
 // Enum used to set the AlertBox's `status` prop
 // export const ALERT_TYPE = Object.freeze({
@@ -34,7 +34,15 @@ export class VaAlert {
 
   @Prop() closeBtnAriaLabel: string = 'Close notification';
 
-  @Prop() onClose: any;
+  @Event({
+    composed: true,
+    bubbles: true,
+  })
+  close: EventEmitter;
+
+  private closeHandler(e: MouseEvent): void {
+    this.close.emit(e);
+  }
 
   render() {
     const { backgroundOnly, headline, level, status, visible } = this;
@@ -53,7 +61,7 @@ export class VaAlert {
         <button
           class="va-alert-close"
           aria-label={this.closeBtnAriaLabel}
-          onClick={this.onClose}
+          onClick={this.closeHandler.bind(this)}
         >
           <i class="fas fa-times-circle" aria-label="Close icon" />
         </button>

@@ -55,7 +55,6 @@ export namespace Components {
           * Determines the level of the heading in the alert
          */
         "level": number;
-        "onClose": any;
         "status": string;
         "visible": boolean;
     }
@@ -155,7 +154,7 @@ declare namespace LocalJSX {
           * Determines the level of the heading in the alert
          */
         "level"?: number;
-        "onClose"?: any;
+        "onClose"?: (event: CustomEvent<any>) => void;
         "status"?: string;
         "visible"?: boolean;
     }
