@@ -17,6 +17,12 @@ import { Component, Host, Prop, h } from '@stencil/core';
 export class VaAlert {
   @Prop() status: string = 'info';
 
+  /**
+   * If true, renders the alert with only a background color corresponding
+   * to the status - no icon or left border.
+   */
+  @Prop() backgroundOnly: boolean = false;
+
   @Prop() visible: boolean = true;
 
   @Prop() headline: string;
@@ -31,8 +37,8 @@ export class VaAlert {
   @Prop() onClose: any;
 
   render() {
-    const { headline, level, status, visible } = this;
-    const classes = `alert ${status}`;
+    const { backgroundOnly, headline, level, status, visible } = this;
+    const classes = `alert ${status} ${backgroundOnly ? 'bg-only' : ''}`;
 
     if (!visible) return <div aria-live="polite" />;
 

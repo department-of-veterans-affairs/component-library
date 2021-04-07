@@ -45,6 +45,10 @@ export namespace Components {
         "open": boolean;
     }
     interface VaAlert {
+        /**
+          * If true, renders the alert with only a background color corresponding to the status - no icon or left border.
+         */
+        "backgroundOnly": boolean;
         "closeBtnAriaLabel": string;
         "headline": string;
         /**
@@ -141,6 +145,10 @@ declare namespace LocalJSX {
         "open"?: boolean;
     }
     interface VaAlert {
+        /**
+          * If true, renders the alert with only a background color corresponding to the status - no icon or left border.
+         */
+        "backgroundOnly"?: boolean;
         "closeBtnAriaLabel"?: string;
         "headline"?: string;
         /**
