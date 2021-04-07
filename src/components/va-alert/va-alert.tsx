@@ -20,14 +20,18 @@ export class VaAlert {
   @Prop() visible: boolean = true;
 
   @Prop() headline: string;
-  // @Prop() level: number;
-  //
+
+  /**
+   * Determines the level of the heading in the alert
+   */
+  @Prop() level: number = 3;
+
   @Prop() closeBtnAriaLabel: string = 'Close notification';
 
   @Prop() onClose: any;
 
   render() {
-    const { status, visible } = this;
+    const { headline, level, status, visible } = this;
     const classes = `alert ${status}`;
 
     if (!visible) return <div aria-live="polite" />;
@@ -36,7 +40,7 @@ export class VaAlert {
       <Host>
         <div class={classes}>
           <div class="body">
-            {this.headline && <h3>{this.headline}</h3>}
+            {headline && h(`h${level}`, null, headline)}
             <slot></slot>
           </div>
         </div>

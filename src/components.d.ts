@@ -47,6 +47,10 @@ export namespace Components {
     interface VaAlert {
         "closeBtnAriaLabel": string;
         "headline": string;
+        /**
+          * Determines the level of the heading in the alert
+         */
+        "level": number;
         "onClose": any;
         "status": string;
         "visible": boolean;
@@ -139,6 +143,10 @@ declare namespace LocalJSX {
     interface VaAlert {
         "closeBtnAriaLabel"?: string;
         "headline"?: string;
+        /**
+          * Determines the level of the heading in the alert
+         */
+        "level"?: number;
         "onClose"?: any;
         "status"?: string;
         "visible"?: boolean;

@@ -37,4 +37,38 @@ describe('va-alert', () => {
       </va-alert>
     `);
   });
+
+  it('wraps the headline in a header element', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-alert headline="This is an alert"></va-alert>');
+
+    const body = await page.find('va-alert >>> div.body');
+
+    expect(body).toEqualHtml(`
+      <div class="body">
+        <h3>
+          This is an alert
+        </h3>
+        <slot></slot>
+      </div>
+    `);
+  });
+
+  it('allows the heading level to be changed', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent(
+      '<va-alert headline="Changed the level" level="4"></va-alert>',
+    );
+    const body = await page.find('va-alert >>> div.body');
+
+    expect(body).toEqualHtml(`
+      <div class="body">
+        <h4>
+          Changed the level
+        </h4>
+        <slot></slot>
+      </div>
+    `);
+  });
 });
