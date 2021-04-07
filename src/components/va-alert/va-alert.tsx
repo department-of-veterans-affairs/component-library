@@ -15,7 +15,7 @@ import { Component, Host, Prop, h } from '@stencil/core';
   shadow: true,
 })
 export class VaAlert {
-  @Prop() status: string;
+  @Prop() status: string = 'info';
 
   @Prop() headline: string;
   // @Prop() level: number;

@@ -1,13 +1,11 @@
 :host {
-  display: block;
+  display: flex;
   background-color: var(--color-gray-lightest);
   font-size: 2rem;
 }
 
 div.alert {
   display: table;
-  /* padding-left: 0; */
-  /* padding-right: 0; */
   padding: 3.2rem 6.4rem 3.2rem 2.4rem;
   width: 100%;
   vertical-align: middle;
