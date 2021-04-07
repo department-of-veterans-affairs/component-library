@@ -22,4 +22,19 @@ describe('va-alert', () => {
       </va-alert>
     `);
   });
+
+  it('renders an empty div with a "polite" aria-live tag when not visible', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<va-alert visible="false"></va-alert>');
+    const element = await page.find('va-alert');
+
+    expect(element).toEqualHtml(`
+      <va-alert class="hydrated" visible="false">
+        <mock:shadow-root>
+          <div aria-live="polite"></div>
+        </mock:shadow-root>
+      </va-alert>
+    `);
+  });
 });

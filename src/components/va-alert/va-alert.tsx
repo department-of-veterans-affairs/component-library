@@ -17,6 +17,8 @@ import { Component, Host, Prop, h } from '@stencil/core';
 export class VaAlert {
   @Prop() status: string = 'info';
 
+  @Prop() visible: boolean = true;
+
   @Prop() headline: string;
   // @Prop() level: number;
   //
@@ -25,8 +27,11 @@ export class VaAlert {
   @Prop() onClose: any;
 
   render() {
-    const { status } = this;
+    const { status, visible } = this;
     const classes = `alert ${status}`;
+
+    if (!visible) return <div aria-live="polite" />;
+
     return (
       <Host>
         <div class={classes}>

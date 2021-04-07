@@ -49,6 +49,7 @@ export namespace Components {
         "headline": string;
         "onClose": any;
         "status": string;
+        "visible": boolean;
     }
     interface VaOnThisPage {
     }
@@ -140,6 +141,7 @@ declare namespace LocalJSX {
         "headline"?: string;
         "onClose"?: any;
         "status"?: string;
+        "visible"?: boolean;
     }
     interface VaOnThisPage {
     }
