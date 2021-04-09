@@ -59,6 +59,7 @@ describe('<LoadingIndicator>', () => {
             action: 'displayed',
             details: {
               displayTime: sinon.match.number,
+              message: 'Loading',
             },
           }),
         ),

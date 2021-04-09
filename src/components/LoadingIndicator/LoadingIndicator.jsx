@@ -21,7 +21,10 @@ export default class LoadingIndicator extends React.Component {
     dispatchAnalyticsEvent({
       componentName: 'LoadingIndicator',
       action: 'displayed',
-      details: { displayTime: Date.now() - this.state.loadingStartTime },
+      details: {
+        displayTime: Date.now() - this.state.loadingStartTime,
+        message: this.props.message,
+      },
     });
   }
 
