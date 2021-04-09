@@ -44,10 +44,7 @@ describe('<TextArea>', () => {
       />,
     );
 
-    tree
-      .find('textarea')
-      .first()
-      .simulate('blur');
+    tree.find('textarea').first().simulate('blur');
     expect(valueChanged.dirty).to.eql(true);
     tree.unmount();
   });
@@ -80,7 +77,7 @@ describe('<TextArea>', () => {
       <TextArea
         field={makeField(1)}
         label="my label"
-        onValueChange={_update => {}}
+        onValueChange={() => {}}
       />,
     );
 
@@ -107,7 +104,7 @@ describe('<TextArea>', () => {
         field={makeField(1)}
         label="my label"
         errorMessage="error message"
-        onValueChange={_update => {}}
+        onValueChange={() => {}}
       />,
     );
 
@@ -136,7 +133,7 @@ describe('<TextArea>', () => {
       <TextArea
         field={makeField(1)}
         label="my label"
-        onValueChange={_update => {}}
+        onValueChange={() => {}}
       />,
     );
 
@@ -150,7 +147,7 @@ describe('<TextArea>', () => {
         field={makeField(1)}
         label="my label"
         required
-        onValueChange={_update => {}}
+        onValueChange={() => {}}
       />,
     );
 
@@ -164,7 +161,7 @@ describe('<TextArea>', () => {
       <TextArea
         field={makeField(1)}
         label="my label"
-        onValueChange={_update => {}}
+        onValueChange={() => {}}
       />,
     );
 
@@ -206,5 +203,77 @@ describe('<TextArea>', () => {
     );
 
     return check;
+  });
+
+  describe('analytics event', function () {
+    it('should NOT be triggered when enableAnalytics is not true', () => {
+      const handleAnalyticsEvent = sinon.spy();
+
+      global.document.body.addEventListener(
+        'component-library-analytics',
+        handleAnalyticsEvent,
+      );
+
+      const wrapper = mount(
+        <TextArea
+          field={makeField('')}
+          label="test"
+          placeholder="Placeholder"
+          errorMessage="error"
+          onValueChange={value => value}
+        />,
+      );
+
+      // Click link in content
+      wrapper.find('textarea').first().simulate('blur');
+
+      global.document.body.removeEventListener(
+        'component-library-analytics',
+        handleAnalyticsEvent,
+      );
+
+      expect(handleAnalyticsEvent.called).to.be.false;
+    });
+
+    it('should be triggered when TextInput is blurred', () => {
+      const handleAnalyticsEvent = sinon.spy();
+
+      global.document.body.addEventListener(
+        'component-library-analytics',
+        handleAnalyticsEvent,
+      );
+
+      const wrapper = mount(
+        <TextArea
+          field={makeField('Test Text')}
+          label="test"
+          placeholder="Placeholder"
+          errorMessage="error"
+          onValueChange={value => value}
+          enableAnalytics
+        />,
+      );
+
+      // Click link in content
+      wrapper.find('textarea').first().simulate('blur');
+
+      global.document.body.removeEventListener(
+        'component-library-analytics',
+        handleAnalyticsEvent,
+      );
+
+      expect(
+        handleAnalyticsEvent.calledWith(
+          sinon.match.has('detail', {
+            componentName: 'TextArea',
+            action: 'blur',
+            details: {
+              label: 'test',
+              value: 'Test Text',
+            },
+          }),
+        ),
+      ).to.be.true;
+    });
   });
 });

@@ -29,7 +29,8 @@ class TextArea extends React.Component {
   }
 
   handleBlur() {
-    if (this.props.enableAnalytics) {
+    // Only fire the analytics event if enabled and value is not null
+    if (this.props.enableAnalytics && this.props.field.value) {
       dispatchAnalyticsEvent({
         componentName: 'TextArea',
         action: 'blur',

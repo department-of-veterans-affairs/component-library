@@ -4,6 +4,7 @@ import { axeCheck } from '../../helpers/test-helpers';
 import { expect } from 'chai';
 import TextInput from './TextInput.jsx';
 import { makeField } from '../../helpers/fields.js';
+import sinon from 'sinon';
 
 describe('<TextInput>', () => {
   it('calls onValueChange with input value and dirty state', () => {
@@ -41,10 +42,7 @@ describe('<TextInput>', () => {
       />,
     );
 
-    wrapper
-      .find('input')
-      .first()
-      .simulate('blur');
+    wrapper.find('input').first().simulate('blur');
     expect(valueChanged.dirty).to.eql(true);
     wrapper.unmount();
   });
@@ -207,14 +205,8 @@ describe('<TextInput>', () => {
       />,
     );
 
-    const inputId = wrapper
-      .find('input')
-      .first()
-      .prop('id');
-    const labelFor = wrapper
-      .find('label')
-      .first()
-      .prop('htmlFor');
+    const inputId = wrapper.find('input').first().prop('id');
+    const labelFor = wrapper.find('label').first().prop('htmlFor');
     expect(inputId).to.eql(labelFor);
     wrapper.unmount();
   });
@@ -244,5 +236,73 @@ describe('<TextInput>', () => {
     );
 
     return check;
+  });
+
+  describe('analytics event', function () {
+    it('should NOT be triggered when enableAnalytics is not true', () => {
+      const handleAnalyticsEvent = sinon.spy();
+
+      global.document.body.addEventListener(
+        'component-library-analytics',
+        handleAnalyticsEvent,
+      );
+
+      const wrapper = mount(
+        <TextInput
+          field={makeField('Test Text')}
+          label="test"
+          onValueChange={() => {}}
+        ></TextInput>,
+      );
+
+      // Click link in content
+      wrapper.find('input[type="text"]').first().simulate('blur');
+
+      global.document.body.removeEventListener(
+        'component-library-analytics',
+        handleAnalyticsEvent,
+      );
+
+      expect(handleAnalyticsEvent.called).to.be.false;
+    });
+
+    it('should be triggered when TextInput is blurred', () => {
+      const handleAnalyticsEvent = sinon.spy();
+
+      global.document.body.addEventListener(
+        'component-library-analytics',
+        handleAnalyticsEvent,
+      );
+
+      const wrapper = mount(
+        <TextInput
+          field={makeField('Test Text')}
+          label="test"
+          onValueChange={() => {}}
+          enableAnalytics
+        ></TextInput>,
+      );
+
+      // Click link in content
+      wrapper.find('input[type="text"]').first().simulate('blur');
+
+      global.document.body.removeEventListener(
+        'component-library-analytics',
+        handleAnalyticsEvent,
+      );
+
+      expect(
+        handleAnalyticsEvent.calledWith(
+          sinon.match.has('detail', {
+            componentName: 'TextInput',
+            action: 'blur',
+            details: {
+              label: 'test',
+              value: 'Test Text',
+            },
+          }),
+        ),
+      ).to.be.true;
+    });
   });
 });
