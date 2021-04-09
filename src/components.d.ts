@@ -43,6 +43,10 @@ export namespace Components {
           * True if the item is open
          */
         "open": boolean;
+        /**
+          * Optional accordion item subheader text. Default is null.
+         */
+        "subheader": string;
     }
     interface VaOnThisPage {
     }
@@ -121,6 +125,10 @@ declare namespace LocalJSX {
           * True if the item is open
          */
         "open"?: boolean;
+        /**
+          * Optional accordion item subheader text. Default is null.
+         */
+        "subheader"?: string;
     }
     interface VaOnThisPage {
     }

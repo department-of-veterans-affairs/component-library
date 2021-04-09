@@ -21,6 +21,11 @@ export class VaAccordionItem {
   @Prop() header: string;
 
   /**
+   * Optional accordion item subheader text. Default is null.
+   */
+  @Prop() subheader: string = null;
+
+  /**
    * True if the item is open
    */
   @Prop() open: boolean = false;
@@ -45,6 +50,7 @@ export class VaAccordionItem {
           aria-controls="content"
         >
           {this.header}
+          {this.subheader ? (<p>{this.subheader}</p>) : false}
         </button>,
       );
 

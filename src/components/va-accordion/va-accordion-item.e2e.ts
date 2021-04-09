@@ -85,4 +85,16 @@ describe('va-accordion-item', () => {
 
     expect(accordionItemToggled).toHaveReceivedEventTimes(1);
   });
+
+  it('adds a subheader when the subheader prop is used', async () => {
+    const page = await newE2EPage();
+    await page.setContent(
+      '<va-accordion-item header="The header" subheader="The subheader">Content inside</va-accordion-item>',
+    );
+    
+    const element = await page.find('va-accordion-item');
+    let subheader = element.shadowRoot.querySelector('p');
+
+    expect(subheader).toEqualText('The subheader');
+  });
 });
