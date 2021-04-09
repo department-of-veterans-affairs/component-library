@@ -50,6 +50,7 @@ class CheckboxGroup extends React.Component {
 
         details: {
           label: this.props.label,
+          clickLabel: domEvent.target.value,
         },
       });
     }

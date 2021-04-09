@@ -4,6 +4,7 @@ import { shallow, mount } from 'enzyme';
 import { axeCheck } from '../../helpers/test-helpers';
 import RadioButtons from './RadioButtons.jsx';
 import { makeField } from '../../helpers/fields.js';
+import sinon from 'sinon';
 
 describe('<RadioButtons>', () => {
   const nonExpandingOptions = ['yes', 'no'];
@@ -32,10 +33,7 @@ describe('<RadioButtons>', () => {
     );
 
     // simulate change event on first input
-    wrapper
-      .find('input')
-      .first()
-      .simulate('change');
+    wrapper.find('input').first().simulate('change');
 
     // verify that change event value matches first value in options passed to component
     expect(valueChanged.value).to.eql(nonExpandingOptions[0]);
@@ -117,5 +115,73 @@ describe('<RadioButtons>', () => {
       />,
     );
     return check;
+  });
+
+  describe('analytics event', function () {
+    it('should NOT be triggered when enableAnalytics is not true', () => {
+      const handleAnalyticsEvent = sinon.spy();
+
+      global.document.body.addEventListener(
+        'component-library-analytics',
+        handleAnalyticsEvent,
+      );
+
+      const wrapper = mount(
+        <RadioButtons
+          label="test"
+          options={nonExpandingOptions}
+          value={makeField('test')}
+          onValueChange={value => value}
+        />,
+      );
+
+      wrapper.find('[type="radio"]').first().simulate('change');
+
+      global.document.body.removeEventListener(
+        'component-library-analytics',
+        handleAnalyticsEvent,
+      );
+
+      expect(handleAnalyticsEvent.called).to.be.false;
+    });
+
+    it('should be triggered when Checkbox is checked', () => {
+      const handleAnalyticsEvent = sinon.spy();
+
+      global.document.body.addEventListener(
+        'component-library-analytics',
+        handleAnalyticsEvent,
+      );
+
+      const wrapper = mount(
+        <RadioButtons
+          label="test"
+          options={nonExpandingOptions}
+          value={makeField('test')}
+          onValueChange={value => value}
+          enableAnalytics
+        />,
+      );
+
+      wrapper.find('[type="radio"]').first().simulate('change');
+
+      global.document.body.removeEventListener(
+        'component-library-analytics',
+        handleAnalyticsEvent,
+      );
+
+      expect(
+        handleAnalyticsEvent.calledWith(
+          sinon.match.has('detail', {
+            componentName: 'RadioButtons',
+            action: 'change',
+            details: {
+              label: 'test',
+              clickLabel: nonExpandingOptions[0],
+            },
+          }),
+        ),
+      ).to.be.true;
+    });
   });
 });

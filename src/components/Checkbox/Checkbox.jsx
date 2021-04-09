@@ -24,6 +24,7 @@ class Checkbox extends React.Component {
 
         details: {
           label: this.props.label,
+          labelAboveCheckbox: this.props.labelAboveCheckbox,
         },
       });
     }

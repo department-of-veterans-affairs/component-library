@@ -255,7 +255,6 @@ describe('<TextInput>', () => {
         ></TextInput>,
       );
 
-      // Click link in content
       wrapper.find('input[type="text"]').first().simulate('blur');
 
       global.document.body.removeEventListener(
@@ -266,7 +265,7 @@ describe('<TextInput>', () => {
       expect(handleAnalyticsEvent.called).to.be.false;
     });
 
-    it('should be triggered when TextInput is blurred', () => {
+    it('should be triggered when field is blurred', () => {
       const handleAnalyticsEvent = sinon.spy();
 
       global.document.body.addEventListener(
@@ -283,7 +282,6 @@ describe('<TextInput>', () => {
         ></TextInput>,
       );
 
-      // Click link in content
       wrapper.find('input[type="text"]').first().simulate('blur');
 
       global.document.body.removeEventListener(

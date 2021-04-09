@@ -7,9 +7,7 @@ import sinon from 'sinon';
 
 describe('<Checkbox/>', () => {
   it('should render without the labelAboveCheckbox', () => {
-    const tree = shallow(
-      <Checkbox label="test" onValueChange={() => {}} />,
-    );
+    const tree = shallow(<Checkbox label="test" onValueChange={() => {}} />);
     expect(tree.text()).to.contain('test');
     tree.unmount();
   });
@@ -30,13 +28,8 @@ describe('<Checkbox/>', () => {
   it('should pass aXe check', () =>
     axeCheck(<Checkbox label="test" onValueChange={() => {}} />));
   it('ensure checked changes propagate', () => {
-    const handleChangeSpy = sinon.spy(
-      Checkbox.prototype,
-      'handleChange',
-    );
-    const tree = shallow(
-      <Checkbox label="test" onValueChange={() => {}} />,
-    );
+    const handleChangeSpy = sinon.spy(Checkbox.prototype, 'handleChange');
+    const tree = shallow(<Checkbox label="test" onValueChange={() => {}} />);
     const event = { target: { checked: true } };
 
     const checkBox = () => tree.find('[type="checkbox"]');
@@ -46,7 +39,7 @@ describe('<Checkbox/>', () => {
   });
   it('no error styles when errorMessage undefined', () => {
     const tree = shallow(
-      <Checkbox label="my label" onValueChange={_update => {}} />,
+      <Checkbox label="my label" onValueChange={() => {}} />,
     );
 
     // No error classes.
@@ -77,7 +70,7 @@ describe('<Checkbox/>', () => {
       <Checkbox
         label="my label"
         errorMessage="error message"
-        onValueChange={_update => {}}
+        onValueChange={() => {}}
       />,
     );
 
@@ -101,7 +94,7 @@ describe('<Checkbox/>', () => {
 
   it('required=false does not have required asterisk', () => {
     const tree = shallow(
-      <Checkbox label="my label" onValueChange={_update => {}} />,
+      <Checkbox label="my label" onValueChange={() => {}} />,
     );
 
     expect(tree.find('label').text()).to.equal('my label');
@@ -110,11 +103,7 @@ describe('<Checkbox/>', () => {
 
   it('required=true has required asterisk', () => {
     const tree = shallow(
-      <Checkbox
-        label="my label"
-        required
-        onValueChange={_update => {}}
-      />,
+      <Checkbox label="my label" required onValueChange={() => {}} />,
     );
 
     const label = tree.find('label');
@@ -124,7 +113,7 @@ describe('<Checkbox/>', () => {
 
   it('label attribute propagates', () => {
     const tree = shallow(
-      <Checkbox label="my label" onValueChange={_update => {}} />,
+      <Checkbox label="my label" onValueChange={() => {}} />,
     );
 
     // Ensure label text is correct.
@@ -142,10 +131,7 @@ describe('<Checkbox/>', () => {
 
   it('adds aria-labelledby attribute', () => {
     const tree = shallow(
-      <Checkbox
-        ariaLabelledBy="headingId"
-        onValueChange={_update => {}}
-      />,
+      <Checkbox ariaLabelledBy="headingId" onValueChange={() => {}} />,
     );
 
     // Ensure label text is empty string.
@@ -158,5 +144,75 @@ describe('<Checkbox/>', () => {
     expect(inputs).to.have.lengthOf(1);
     expect(inputs.prop('aria-labelledby')).to.equal('headingId');
     tree.unmount();
+  });
+
+  describe('analytics event', function () {
+    it('should NOT be triggered when enableAnalytics is not true', () => {
+      const handleAnalyticsEvent = sinon.spy();
+
+      global.document.body.addEventListener(
+        'component-library-analytics',
+        handleAnalyticsEvent,
+      );
+
+      const wrapper = shallow(
+        <Checkbox
+          label="test"
+          labelAboveCheckbox="this is a checkbox"
+          onValueChange={() => {}}
+        />,
+      );
+
+      const event = { target: { checked: true } };
+
+      wrapper.find('[type="checkbox"]').simulate('change', event);
+
+      global.document.body.removeEventListener(
+        'component-library-analytics',
+        handleAnalyticsEvent,
+      );
+
+      expect(handleAnalyticsEvent.called).to.be.false;
+    });
+
+    it('should be triggered when Checkbox is checked', () => {
+      const handleAnalyticsEvent = sinon.spy();
+
+      global.document.body.addEventListener(
+        'component-library-analytics',
+        handleAnalyticsEvent,
+      );
+
+      const wrapper = shallow(
+        <Checkbox
+          label="test"
+          labelAboveCheckbox="this is a checkbox"
+          onValueChange={() => {}}
+          enableAnalytics
+        />,
+      );
+
+      const event = { target: { checked: true } };
+
+      wrapper.find('[type="checkbox"]').simulate('change', event);
+
+      global.document.body.removeEventListener(
+        'component-library-analytics',
+        handleAnalyticsEvent,
+      );
+
+      expect(
+        handleAnalyticsEvent.calledWith(
+          sinon.match.has('detail', {
+            componentName: 'Checkbox',
+            action: 'change',
+            details: {
+              label: 'test',
+              labelAboveCheckbox: 'this is a checkbox',
+            },
+          }),
+        ),
+      ).to.be.true;
+    });
   });
 });

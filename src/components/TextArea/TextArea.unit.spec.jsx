@@ -224,7 +224,6 @@ describe('<TextArea>', () => {
         />,
       );
 
-      // Click link in content
       wrapper.find('textarea').first().simulate('blur');
 
       global.document.body.removeEventListener(
@@ -235,7 +234,7 @@ describe('<TextArea>', () => {
       expect(handleAnalyticsEvent.called).to.be.false;
     });
 
-    it('should be triggered when TextInput is blurred', () => {
+    it('should be triggered when field is blurred', () => {
       const handleAnalyticsEvent = sinon.spy();
 
       global.document.body.addEventListener(
@@ -254,7 +253,6 @@ describe('<TextArea>', () => {
         />,
       );
 
-      // Click link in content
       wrapper.find('textarea').first().simulate('blur');
 
       global.document.body.removeEventListener(
