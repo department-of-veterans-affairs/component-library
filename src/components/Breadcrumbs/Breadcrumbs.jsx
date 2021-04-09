@@ -29,6 +29,7 @@ class Breadcrumbs extends Component {
         'aria-current': 'page',
       }),
     );
+    // data-index added because key is not in DOM
     return children.map((child, i) => (
       <li key={i}>{React.cloneElement(child, { 'data-index': i })}</li>
     ));
