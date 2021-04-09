@@ -25,7 +25,7 @@ describe('<ProgressBar/>', () => {
         handleAnalyticsEvent,
       );
 
-      const tree = shallow(
+      const tree = mount(
         <ProgressBar percent={0} label="This is my ProgressBar." />,
       );
 

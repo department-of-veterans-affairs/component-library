@@ -1,5 +1,5 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { shallow, mount } from 'enzyme';
 import { expect } from 'chai';
 import { axeCheck } from '../../helpers/test-helpers';
 import sinon from 'sinon';
@@ -28,7 +28,7 @@ describe('<SegmentedProgressBar/>', () => {
         handleAnalyticsEvent,
       );
 
-      const tree = shallow(<SegmentedProgressBar current={0} total={5} />);
+      const tree = mount(<SegmentedProgressBar current={0} total={5} />);
 
       tree.setProps({ current: 1 });
 

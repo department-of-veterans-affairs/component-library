@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
 import dispatchAnalyticsEvent from '../../helpers/analytics';
@@ -9,59 +9,45 @@ import dispatchAnalyticsEvent from '../../helpers/analytics';
  * @param {number} current - The index of the current chapter
  * @param {number} total   - The total number of chapters in the form
  */
-export default class SegmentedProgressBar extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.analyticsEvent = this.analyticsEvent.bind(this);
-  }
-
-  analyticsEvent() {
+export default function SegmentedProgressBar({
+  current,
+  total,
+  disableAnalytics,
+}) {
+  useEffect(() => {
     // Conditionally track events
-    if (!this.props.disableAnalytics) {
+    if (!disableAnalytics) {
       dispatchAnalyticsEvent({
         componentName: 'SegmentedProgressBar',
         action: 'change',
         details: {
-          current: this.props.current,
-          total: this.props.total,
+          current: current,
+          total: total,
         },
       });
     }
-  }
+  });
 
-  componentDidMount() {
-    this.analyticsEvent();
-  }
-
-  componentDidUpdate(prevProps) {
-    if (prevProps.current !== this.props.current) {
-      this.analyticsEvent();
-    }
-  }
-
-  render() {
-    return (
-      <div
-        className="progress-bar-segmented"
-        role="progressbar"
-        aria-valuenow={this.props.current}
-        aria-valuemin="0"
-        aria-valuemax={this.props.total}
-        tabIndex="0"
-        aria-label={`Step ${this.props.current} of ${this.props.total}`}
-      >
-        {_.range(this.props.total).map(step => (
-          <div
-            key={step}
-            className={`progress-segment ${
-              this.props.current > step ? 'progress-segment-complete' : ''
-            }`}
-          />
-        ))}
-      </div>
-    );
-  }
+  return (
+    <div
+      className="progress-bar-segmented"
+      role="progressbar"
+      aria-valuenow={current}
+      aria-valuemin="0"
+      aria-valuemax={total}
+      tabIndex="0"
+      aria-label={`Step ${current} of ${total}`}
+    >
+      {_.range(total).map(step => (
+        <div
+          key={step}
+          className={`progress-segment ${
+            current > step ? 'progress-segment-complete' : ''
+          }`}
+        />
+      ))}
+    </div>
+  );
 }
 
 SegmentedProgressBar.propTypes = {
