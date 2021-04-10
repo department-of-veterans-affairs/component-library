@@ -23,6 +23,11 @@ export class VaAlert {
    */
   @Prop() backgroundOnly: boolean = false;
 
+  /**
+   * If true, doesn't fire the CustomEvent which can be used for analytics tracking
+   */
+  @Prop() disableAnalytics: boolean = false;
+
   @Prop() visible: boolean = true;
 
   @Prop() headline: string;
@@ -40,8 +45,36 @@ export class VaAlert {
   })
   close: EventEmitter;
 
+  @Event({
+    eventName: 'component-library-analytics',
+    composed: true,
+    bubbles: true,
+  })
+  componentLibraryAnalytics: EventEmitter;
+
   private closeHandler(e: MouseEvent): void {
     this.close.emit(e);
+  }
+
+  private handleAlertBodyClick(e: MouseEvent): void {
+    if (!this.disableAnalytics) {
+      const target = e.target as HTMLElement;
+      // If it's a link being clicked, dispatch an analytics event
+      if (target?.tagName === 'A') {
+        const detail = {
+          componentName: 'AlertBox',
+          action: 'linkClick',
+          details: {
+            clickLabel: target.innerText,
+            headline: this.headline,
+            status: this.status,
+            backgroundOnly: this.backgroundOnly,
+            // closeable: !!this.onCloseAlert,
+          },
+        };
+        this.componentLibraryAnalytics.emit(detail);
+      }
+    }
   }
 
   render() {
@@ -53,7 +86,7 @@ export class VaAlert {
     return (
       <Host>
         <div class={classes}>
-          <div class="body">
+          <div class="body" onClick={this.handleAlertBodyClick.bind(this)}>
             {headline && h(`h${level}`, null, headline)}
             <slot></slot>
           </div>

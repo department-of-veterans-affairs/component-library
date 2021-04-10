@@ -83,4 +83,40 @@ describe('va-alert', () => {
 
     expect(closeSpy).toHaveReceivedEventTimes(1);
   });
+
+  it('fires an analytics event when a link is clicked', async () => {
+    const page = await newE2EPage();
+    await page.setContent(
+      '<va-alert><a href="#">This is a link</a></va-alert>',
+    );
+
+    const analyticsSpy = await page.spyOnEvent('component-library-analytics');
+
+    const link = await page.find('va-alert a');
+    await link.click();
+
+    expect(analyticsSpy).toHaveReceivedEventDetail({
+      action: 'linkClick',
+      componentName: 'AlertBox',
+      details: {
+        backgroundOnly: false,
+        clickLabel: 'This is a link',
+        status: 'info',
+      },
+    });
+  });
+
+  it('does not fire an analytics event when disableAnalytics is passed', async () => {
+    const page = await newE2EPage();
+    await page.setContent(
+      '<va-alert disable-analytics="true"><a href="#">This is a link</a></va-alert>',
+    );
+
+    const analyticsSpy = await page.spyOnEvent('component-library-analytics');
+
+    const link = await page.find('va-alert a');
+    await link.click();
+
+    expect(analyticsSpy).toHaveReceivedEventTimes(0);
+  });
 });

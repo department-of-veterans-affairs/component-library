@@ -50,6 +50,10 @@ export namespace Components {
          */
         "backgroundOnly": boolean;
         "closeBtnAriaLabel": string;
+        /**
+          * If true, doesn't fire the CustomEvent which can be used for analytics tracking
+         */
+        "disableAnalytics": boolean;
         "headline": string;
         /**
           * Determines the level of the heading in the alert
@@ -149,6 +153,10 @@ declare namespace LocalJSX {
          */
         "backgroundOnly"?: boolean;
         "closeBtnAriaLabel"?: string;
+        /**
+          * If true, doesn't fire the CustomEvent which can be used for analytics tracking
+         */
+        "disableAnalytics"?: boolean;
         "headline"?: string;
         /**
           * Determines the level of the heading in the alert
