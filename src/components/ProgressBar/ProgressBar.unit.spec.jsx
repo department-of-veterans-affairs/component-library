@@ -29,13 +29,6 @@ describe('<ProgressBar/>', () => {
         <ProgressBar percent={0} label="This is my ProgressBar." />,
       );
 
-      global.document.body.removeEventListener(
-        'component-library-analytics',
-        handleAnalyticsEvent,
-      );
-
-      tree.unmount();
-
       expect(
         handleAnalyticsEvent.calledWith(
           sinon.match.has('detail', {
@@ -48,6 +41,13 @@ describe('<ProgressBar/>', () => {
           }),
         ),
       ).to.be.true;
+
+      global.document.body.removeEventListener(
+        'component-library-analytics',
+        handleAnalyticsEvent,
+      );
+
+      tree.unmount();
     });
 
     it('should be triggered when a ProgressBar updates to 100%', () => {
@@ -64,30 +64,10 @@ describe('<ProgressBar/>', () => {
 
       tree.setProps({ percent: 100 });
 
-      global.document.body.removeEventListener(
-        'component-library-analytics',
-        handleAnalyticsEvent,
-      );
-
-      tree.unmount();
-
       // We should onnly see the 100% event
 
       expect(
-        handleAnalyticsEvent.calledWith(
-          sinon.match.has('detail', {
-            componentName: 'ProgressBar',
-            action: 'change',
-            details: {
-              percent: 42,
-              label: 'This is my ProgressBar.',
-            },
-          }),
-        ),
-      ).to.be.false;
-
-      expect(
-        handleAnalyticsEvent.calledWith(
+        handleAnalyticsEvent.calledOnceWith(
           sinon.match.has('detail', {
             componentName: 'ProgressBar',
             action: 'change',
@@ -98,6 +78,13 @@ describe('<ProgressBar/>', () => {
           }),
         ),
       ).to.be.true;
+
+      global.document.body.removeEventListener(
+        'component-library-analytics',
+        handleAnalyticsEvent,
+      );
+
+      tree.unmount();
     });
   });
 });

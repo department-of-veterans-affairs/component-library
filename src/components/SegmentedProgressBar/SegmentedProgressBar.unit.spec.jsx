@@ -20,6 +20,37 @@ describe('<SegmentedProgressBar/>', () => {
     ));
 
   describe('analytics event', function () {
+    it('should be triggered when a SegmentedProgressBar is mounted', () => {
+      const handleAnalyticsEvent = sinon.spy();
+
+      global.document.body.addEventListener(
+        'component-library-analytics',
+        handleAnalyticsEvent,
+      );
+
+      const tree = mount(<SegmentedProgressBar current={0} total={5} />);
+
+      expect(
+        handleAnalyticsEvent.calledWith(
+          sinon.match.has('detail', {
+            componentName: 'SegmentedProgressBar',
+            action: 'change',
+            details: {
+              current: 0,
+              total: 5,
+            },
+          }),
+        ),
+      ).to.be.true;
+
+      global.document.body.removeEventListener(
+        'component-library-analytics',
+        handleAnalyticsEvent,
+      );
+
+      tree.unmount();
+    });
+
     it('should be triggered when a SegmentedProgressBar is updated', () => {
       const handleAnalyticsEvent = sinon.spy();
 
@@ -31,13 +62,6 @@ describe('<SegmentedProgressBar/>', () => {
       const tree = mount(<SegmentedProgressBar current={0} total={5} />);
 
       tree.setProps({ current: 1 });
-
-      global.document.body.removeEventListener(
-        'component-library-analytics',
-        handleAnalyticsEvent,
-      );
-
-      tree.unmount();
 
       expect(
         handleAnalyticsEvent.calledWith(
@@ -51,6 +75,13 @@ describe('<SegmentedProgressBar/>', () => {
           }),
         ),
       ).to.be.true;
+
+      global.document.body.removeEventListener(
+        'component-library-analytics',
+        handleAnalyticsEvent,
+      );
+
+      tree.unmount();
     });
   });
 });
