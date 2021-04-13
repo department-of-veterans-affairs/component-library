@@ -108,23 +108,22 @@ div.alert.bg-only::before {
 }
 
 .va-alert-close {
-  right: 0;
-  top: 0;
-  position: absolute;
   margin: 1.6rem;
+  padding: 0;
   width: auto;
   color: var(--color-primary);
   font-size: 2.25rem;
   appearance: none;
   border: 0;
+  cursor: pointer;
+  background: transparent;
+  align-self: start;
 }
 
 i {
   font-family: 'Font Awesome 5 Free';
   font-style: normal;
   font-weight: 900;
-  margin-right: 8px;
-  font-size: 0.75em;
 }
 i::before {
   content: '\F057'; /* fa-times-circle*/
