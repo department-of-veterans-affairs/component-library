@@ -39,6 +39,8 @@ export class VaAlert {
 
   @Prop() closeBtnAriaLabel: string = 'Close notification';
 
+  @Prop() uncloseable: boolean = false;
+
   @Event({
     composed: true,
     bubbles: true,
@@ -78,7 +80,14 @@ export class VaAlert {
   }
 
   render() {
-    const { backgroundOnly, headline, level, status, visible } = this;
+    const {
+      backgroundOnly,
+      headline,
+      level,
+      status,
+      visible,
+      uncloseable,
+    } = this;
     const classes = `alert ${status} ${backgroundOnly ? 'bg-only' : ''}`;
 
     if (!visible) return <div aria-live="polite" />;
@@ -95,13 +104,16 @@ export class VaAlert {
             </div>
           </div>
         </div>
-        <button
-          class="va-alert-close"
-          aria-label={this.closeBtnAriaLabel}
-          onClick={this.closeHandler.bind(this)}
-        >
-          <i class="fas fa-times-circle" aria-label="Close icon" />
-        </button>
+
+        {!uncloseable && (
+          <button
+            class="va-alert-close"
+            aria-label={this.closeBtnAriaLabel}
+            onClick={this.closeHandler.bind(this)}
+          >
+            <i class="fas fa-times-circle" aria-label="Close icon" />
+          </button>
+        )}
       </Host>
     );
   }

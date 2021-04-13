@@ -80,6 +80,22 @@ describe('va-alert', () => {
     `);
   });
 
+  it('does not show a close icon if the uncloseable prop is passed', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-alert>Alert</va-alert>');
+
+    const element = await page.find('va-alert');
+
+    let button = await page.find('va-alert >>> button');
+    expect(button).not.toBeNull();
+
+    element.setProperty('uncloseable', true);
+    await page.waitForChanges();
+    button = await page.find('va-alert >>> button');
+
+    expect(button).toBeNull();
+  });
+
   it('fires a custom "close" event when the close button is clicked', async () => {
     const page = await newE2EPage();
     await page.setContent('<va-alert>Content inside</va-alert>');

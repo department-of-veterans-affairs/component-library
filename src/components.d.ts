@@ -60,6 +60,7 @@ export namespace Components {
          */
         "level": number;
         "status": string;
+        "uncloseable": boolean;
         "visible": boolean;
     }
     interface VaOnThisPage {
@@ -165,6 +166,7 @@ declare namespace LocalJSX {
         "onClose"?: (event: CustomEvent<any>) => void;
         "onComponent-library-analytics"?: (event: CustomEvent<any>) => void;
         "status"?: string;
+        "uncloseable"?: boolean;
         "visible"?: boolean;
     }
     interface VaOnThisPage {
