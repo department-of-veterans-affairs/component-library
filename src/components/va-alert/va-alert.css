@@ -69,11 +69,14 @@ div.alert.bg-only > i::before {
   content: '';
 }
 
+div.bg-only {
+  border: none;
+}
+
 .info {
   border-left-color: var(--color-primary-alt-dark);
 }
 .info.bg-only {
-  border: none;
   background-color: var(--color-primary-alt-lightest);
 }
 
@@ -83,11 +86,9 @@ div.alert.bg-only > i::before {
 }
 
 .continue.bg-only {
-  border: none;
   background-color: var(--color-gray-lightest);
 }
 .success.bg-only {
-  border: none;
   background-color: var(--color-green-lightest);
 }
 
@@ -96,7 +97,6 @@ div.alert.bg-only > i::before {
 }
 
 .warning.bg-only {
-  border: none;
   background-color: var(--color-gold-lightest);
 }
 
@@ -105,7 +105,6 @@ div.alert.bg-only > i::before {
 }
 
 .error.bg-only {
-  border: none;
   background-color: var(--color-secondary-lightest);
 }
 
