@@ -12,7 +12,9 @@ describe('va-alert', () => {
         <mock:shadow-root>
           <div class="alert info">
             <div class="body">
-              <slot></slot>
+              <div class="text">
+                <slot></slot>
+              </div>
             </div>
           </div>
           <button aria-label="Close notification" class="va-alert-close">
@@ -49,7 +51,9 @@ describe('va-alert', () => {
         <h3>
           This is an alert
         </h3>
-        <slot></slot>
+        <div class="text">
+          <slot></slot>
+        </div>
       </div>
     `);
   });
@@ -67,7 +71,9 @@ describe('va-alert', () => {
         <h4>
           Changed the level
         </h4>
-        <slot></slot>
+        <div class="text">
+          <slot></slot>
+        </div>
       </div>
     `);
   });
