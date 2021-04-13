@@ -21,14 +21,7 @@ div.alert {
 }
 
 div.alert > i::before {
-  display: block;
-  width: auto;
-  background: none;
-  font-family: 'Font Awesome 5 Free';
-  font-size: 2rem;
   margin-right: 1.6rem;
-  position: static;
-  font-weight: 900;
 }
 
 div.body {
