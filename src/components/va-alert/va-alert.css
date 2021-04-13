@@ -21,6 +21,7 @@ div.alert {
 }
 
 div.alert > i::before {
+  display: flex;
   margin-right: 1.6rem;
 }
 
