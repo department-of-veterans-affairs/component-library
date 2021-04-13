@@ -11,6 +11,8 @@ describe('va-alert', () => {
       <va-alert class="hydrated">
         <mock:shadow-root>
           <div class="alert info">
+            <i aria-hidden="true" role="img"></i>
+            <span class="sr-only">Alert:</span>
             <div class="body">
               <div class="text">
                 <slot></slot>

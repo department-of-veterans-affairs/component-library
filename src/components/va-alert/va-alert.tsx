@@ -86,6 +86,8 @@ export class VaAlert {
     return (
       <Host>
         <div class={classes}>
+          <i aria-hidden="true" role="img"></i>
+          <span class="sr-only">Alert: </span>
           <div class="body" onClick={this.handleAlertBodyClick.bind(this)}>
             {headline && h(`h${level}`, null, headline)}
             <div class="text">

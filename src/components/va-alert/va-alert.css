@@ -1,3 +1,5 @@
+@import '../../mixins/accessibility.css';
+
 :host {
   display: flex;
   background-color: var(--color-gray-lightest);
@@ -18,7 +20,7 @@ div.alert {
   border-left-width: 10px;
 }
 
-div.alert::before {
+div.alert > i::before {
   display: block;
   width: auto;
   background: none;
@@ -40,30 +42,30 @@ div.text {
   margin-top: 2rem;
 }
 
-div.info::before {
+div.info > i::before {
   content: '\F05A';
 }
 
-div.continue::before {
+div.continue > i::before {
   content: '\F023';
   color: var(--color-green);
 }
 
-div.success::before {
+div.success > i::before {
   content: '\F00C';
   color: var(--color-green);
 }
 
-div.warning::before {
+div.warning > i::before {
   content: '\F071';
 }
 
-div.error::before {
+div.error > i::before {
   content: '\F06A';
   color: var(--color-secondary-dark);
 }
 
-div.alert.bg-only::before {
+div.alert.bg-only > i::before {
   content: '';
 }
 
@@ -125,7 +127,7 @@ i {
   font-style: normal;
   font-weight: 900;
 }
-i::before {
+i.fa-times-circle::before {
   content: '\F057'; /* fa-times-circle*/
 }
 
