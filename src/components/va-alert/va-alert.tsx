@@ -88,7 +88,9 @@ export class VaAlert {
         <div class={classes}>
           <div class="body" onClick={this.handleAlertBodyClick.bind(this)}>
             {headline && h(`h${level}`, null, headline)}
-            <slot></slot>
+            <div class="text">
+              <slot></slot>
+            </div>
           </div>
         </div>
         <button

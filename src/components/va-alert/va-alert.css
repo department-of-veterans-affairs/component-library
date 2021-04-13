@@ -36,6 +36,9 @@ div.body {
   vertical-align: middle;
   width: 100%;
 }
+div.text {
+  margin-top: 2rem;
+}
 
 div.info::before {
   content: '\F05A';
