@@ -163,6 +163,7 @@ declare namespace LocalJSX {
          */
         "level"?: number;
         "onClose"?: (event: CustomEvent<any>) => void;
+        "onComponent-library-analytics"?: (event: CustomEvent<any>) => void;
         "status"?: string;
         "visible"?: boolean;
     }
