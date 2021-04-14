@@ -1,4 +1,5 @@
 import { newE2EPage } from '@stencil/core/testing';
+import { axeCheck } from '../../../testing/test-helpers';
 
 describe('va-alert', () => {
   it('renders', async () => {
@@ -37,6 +38,13 @@ describe('va-alert', () => {
         </mock:shadow-root>
       </va-alert>
     `);
+  });
+
+  it('passes an axe check', async () => {
+    const page = await newE2EPage();
+    await page.setContent(
+      `<va-alert headline="Alert">Alert content</va-alert>`,
+    );
   });
 
   it('wraps the headline in a header element', async () => {
