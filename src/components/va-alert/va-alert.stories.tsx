@@ -22,12 +22,16 @@ const Template = ({ backgroundOnly, headline, status }) => html`
         A well regulated Militia, being necessary to the security of a free
         State, the right of the people to keep and bear Arms, shall not be
         infringed.
+        <a href="#">test</a>
       </div>
     </va-alert>
     <script>
       const alertElement = document.querySelector('va-alert');
       alertElement.addEventListener('close', event => {
         console.log('Close button clicked');
+      });
+      alertElement.addEventListener('component-library-analytics', e => {
+        console.log(e);
       });
     </script>
   </div>
