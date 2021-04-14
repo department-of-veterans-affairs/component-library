@@ -39,7 +39,7 @@ export class VaAlert {
 
   @Prop() closeBtnAriaLabel: string = 'Close notification';
 
-  @Prop() uncloseable: boolean = false;
+  @Prop() closeable: boolean = false;
 
   @Event({
     composed: true,
@@ -71,7 +71,7 @@ export class VaAlert {
             headline: this.headline,
             status: this.status,
             backgroundOnly: this.backgroundOnly,
-            // closeable: !!this.onCloseAlert,
+            closeable: this.closeable,
           },
         };
         this.componentLibraryAnalytics.emit(detail);
@@ -86,7 +86,7 @@ export class VaAlert {
       level,
       status,
       visible,
-      uncloseable,
+      closeable,
     } = this;
     const classes = `alert ${status} ${backgroundOnly ? 'bg-only' : ''}`;
 
@@ -105,7 +105,7 @@ export class VaAlert {
           </div>
         </div>
 
-        {!uncloseable && (
+        {closeable && (
           <button
             class="va-alert-close"
             aria-label={this.closeBtnAriaLabel}

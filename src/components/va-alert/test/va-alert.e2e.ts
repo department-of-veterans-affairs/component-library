@@ -19,9 +19,6 @@ describe('va-alert', () => {
               </div>
             </div>
           </div>
-          <button aria-label="Close notification" class="va-alert-close">
-            <i aria-label="Close icon" class="fa-times-circle fas"></i>
-          </button>
         </mock:shadow-root>
       </va-alert>
     `);
@@ -80,25 +77,27 @@ describe('va-alert', () => {
     `);
   });
 
-  it('does not show a close icon if the uncloseable prop is passed', async () => {
+  it('only shows a close icon if the closeable prop is passed', async () => {
     const page = await newE2EPage();
     await page.setContent('<va-alert>Alert</va-alert>');
 
     const element = await page.find('va-alert');
 
     let button = await page.find('va-alert >>> button');
-    expect(button).not.toBeNull();
+    expect(button).toBeNull();
 
-    element.setProperty('uncloseable', true);
+    element.setProperty('closeable', true);
     await page.waitForChanges();
     button = await page.find('va-alert >>> button');
 
-    expect(button).toBeNull();
+    expect(button).not.toBeNull();
   });
 
   it('fires a custom "close" event when the close button is clicked', async () => {
     const page = await newE2EPage();
-    await page.setContent('<va-alert>Content inside</va-alert>');
+    await page.setContent(
+      '<va-alert closeable="true">Content inside</va-alert>',
+    );
 
     const closeSpy = await page.spyOnEvent('close');
 
@@ -126,6 +125,7 @@ describe('va-alert', () => {
         backgroundOnly: false,
         clickLabel: 'This is a link',
         status: 'info',
+        closeable: false,
       },
     });
   });
