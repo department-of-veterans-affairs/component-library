@@ -68,6 +68,7 @@ describe('<PromoBanner>', () => {
               target: defaultProps.target,
               type: defaultProps.type,
             },
+            version: sinon.match.string,
           }),
         ),
       ).to.be.true;
