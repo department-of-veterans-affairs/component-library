@@ -1,20 +1,14 @@
 import { Component, Event, EventEmitter, Host, Prop, h } from '@stencil/core';
 
-// Enum used to set the AlertBox's `status` prop
-// export const ALERT_TYPE = Object.freeze({
-//   INFO: 'info', // Blue border, black circled 'i'
-//   ERROR: 'error', // Red border, red circled exclamation
-//   SUCCESS: 'success', // Green border, green checkmark
-//   WARNING: 'warning', // Yellow border, black triangle exclamation
-//   CONTINUE: 'continue', // Green border, green lock
-// });
-
 @Component({
   tag: 'va-alert',
   styleUrl: 'va-alert.css',
   shadow: true,
 })
 export class VaAlert {
+  /* Determines the icon and border/background color.
+   * One of `info`, `error`, `success`, `warning`, or `continue`
+   */
   @Prop() status: string = 'info';
 
   /**
