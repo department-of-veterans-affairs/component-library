@@ -17,17 +17,17 @@ export default {
 const defaultArgs = {
   headline: 'Alert headline',
   status: 'info',
-  immediate: false,
+  backgroundOnly: false,
   closeable: false,
   onClose: () => {},
 };
 
-const Template = ({ headline, status, immediate, closeable, onClose }) => {
+const Template = ({ headline, status, backgroundOnly, closeable, onClose }) => {
   return (
     <va-alert
       headline={headline}
       status={status}
-      immediate={immediate}
+      background-only={backgroundOnly}
       closeable={closeable}
       onClose={onClose}
     >
@@ -61,6 +61,6 @@ Closeable.args = {
 export const BackgroundOnly = Template.bind({});
 BackgroundOnly.args = {
   ...defaultArgs,
-  immediate: true,
+  backgroundOnly: true,
   headline: null,
 };
