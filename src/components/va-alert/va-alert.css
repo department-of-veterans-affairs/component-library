@@ -35,6 +35,9 @@ div.body {
 div.text {
   margin-top: 2rem;
 }
+.bg-only .text {
+  margin-top: 0;
+}
 
 div.info > i::before {
   content: '\F05A';

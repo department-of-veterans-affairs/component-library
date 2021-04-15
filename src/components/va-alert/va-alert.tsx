@@ -24,6 +24,9 @@ export class VaAlert {
 
   @Prop() visible: boolean = true;
 
+  /**
+   * Headline for the alert. Won't show if `backgroundOnly` is true
+   */
   @Prop() headline: string;
 
   /**
@@ -92,7 +95,7 @@ export class VaAlert {
           <i aria-hidden="true" role="img"></i>
           <span class="sr-only">Alert: </span>
           <div class="body" onClick={this.handleAlertBodyClick.bind(this)}>
-            {headline && h(`h${level}`, null, headline)}
+            {headline && !backgroundOnly && h(`h${level}`, null, headline)}
             <div class="text">
               <slot></slot>
             </div>
@@ -105,7 +108,7 @@ export class VaAlert {
             aria-label={this.closeBtnAriaLabel}
             onClick={this.closeHandler.bind(this)}
           >
-            <i class="fas fa-times-circle" aria-label="Close icon" />
+            <i class="fa-times-circle" aria-label="Close icon" />
           </button>
         )}
       </Host>

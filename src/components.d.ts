@@ -55,6 +55,9 @@ export namespace Components {
           * If true, doesn't fire the CustomEvent which can be used for analytics tracking
          */
         "disableAnalytics": boolean;
+        /**
+          * Headline for the alert. Won't show if `backgroundOnly` is true
+         */
         "headline": string;
         /**
           * Determines the level of the heading in the alert
@@ -159,6 +162,9 @@ declare namespace LocalJSX {
           * If true, doesn't fire the CustomEvent which can be used for analytics tracking
          */
         "disableAnalytics"?: boolean;
+        /**
+          * Headline for the alert. Won't show if `backgroundOnly` is true
+         */
         "headline"?: string;
         /**
           * Determines the level of the heading in the alert
