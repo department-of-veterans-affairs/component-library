@@ -45,6 +45,8 @@ describe('va-alert', () => {
     await page.setContent(
       `<va-alert headline="Alert">Alert content</va-alert>`,
     );
+
+    await axeCheck(page);
   });
 
   it('wraps the headline in a header element', async () => {
