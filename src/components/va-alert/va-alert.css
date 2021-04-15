@@ -117,6 +117,9 @@ div.bg-only {
   background: transparent;
   align-self: start;
 }
+.va-alert-close:hover {
+  color: var(--color-primary-darker);
+}
 
 i {
   font-family: 'Font Awesome 5 Free';
