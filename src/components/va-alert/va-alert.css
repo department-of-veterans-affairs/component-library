@@ -4,6 +4,7 @@
   display: block;
   background-color: var(--color-gray-lightest);
   font-size: 2rem;
+  position: relative;
 }
 
 :host([background-only='true']),
