@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import { uniqueId } from 'lodash';
+import dispatchAnalyticsEvent from '../../helpers/analytics';
 
 /**
  * React component to dynamically build breadcrumb links. The Breadcrumbs
@@ -12,6 +13,10 @@ import { uniqueId } from 'lodash';
  *
  */
 class Breadcrumbs extends Component {
+  constructor(props) {
+    super(props);
+    this.handleBreadcrumbLinkClick = this.handleBreadcrumbLinkClick.bind(this);
+  }
   /**
    * Build the breadcrumb links. Convert children to an array,
    * pop and add aria-current to last item, build a set of
@@ -24,8 +29,29 @@ class Breadcrumbs extends Component {
         'aria-current': 'page',
       }),
     );
-    return children.map((child, i) => <li key={i}>{child}</li>);
+    // data-index added because key is not in DOM
+    return children.map((child, i) => (
+      <li key={i}>{React.cloneElement(child, { 'data-index': i })}</li>
+    ));
   };
+
+  handleBreadcrumbLinkClick(e) {
+    if (!this.props.disableAnalytics) {
+      // If it's a link being clicked, dispatch an analytics event
+      if (e.target?.tagName === 'A') {
+        dispatchAnalyticsEvent({
+          componentName: 'Breadcrumbs',
+          action: 'linkClick',
+          details: {
+            clickLabel: e.target.innerText.trim(),
+            clickLevel: parseInt(e.target.dataset.index, 10) + 1,
+            totalLevels: this.props.children.length,
+            mobileFirstProp: this.props.mobileFirstProp,
+          },
+        });
+      }
+    }
+  }
 
   render() {
     const { ariaLabel, className, id, listId, mobileFirstProp } = this.props;
@@ -49,6 +75,7 @@ class Breadcrumbs extends Component {
         <ul
           className="row va-nav-breadcrumbs-list columns"
           id={breadcrumbListId}
+          onClick={this.handleBreadcrumbLinkClick}
         >
           {this.renderBreadcrumbLinks()}
         </ul>
@@ -86,6 +113,14 @@ Breadcrumbs.propTypes = {
    * be displayed while mobileFirstProp is True.
    */
   mobileFirstProp: PropTypes.bool,
+  /**
+   * Child elements (content) of modal when displayed
+   */
+  children: PropTypes.node,
+  /**
+   * Analytics tracking function(s) will not be called
+   */
+  disableAnalytics: PropTypes.bool,
 };
 
 export default Breadcrumbs;

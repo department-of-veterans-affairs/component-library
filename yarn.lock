@@ -1239,10 +1239,10 @@
     exec-sh "^0.3.2"
     minimist "^1.2.0"
 
-"@department-of-veterans-affairs/formation@6.15.1":
-  version "6.15.1"
-  resolved "https://registry.yarnpkg.com/@department-of-veterans-affairs/formation/-/formation-6.15.1.tgz#17eef0b979d9ccf18a756141d8d8431e1bfe8268"
-  integrity sha512-hYLaR6IDN4Wk0PW8phD7LnrwYFp0L20ehJCbusEmPa2lJwujQRmQP52SDYlR+VutGswkvDfD5sv5RgJ97VIIMQ==
+"@department-of-veterans-affairs/formation@6.16.0":
+  version "6.16.0"
+  resolved "https://registry.yarnpkg.com/@department-of-veterans-affairs/formation/-/formation-6.16.0.tgz#9f567a3cc5b16fac353773c116eb5b410c458962"
+  integrity sha512-ZaRB0jr2zJnrfcwGOKiLd+S8HGn6zKH3iuNvrqUxwwfQhGL4V1Gf7Ue72dHinUjQ11N20leutmppng6tQA+9zA==
   dependencies:
     "@fortawesome/fontawesome-free" "^5.6.3"
     domready "^1.0.8"
@@ -11593,9 +11593,9 @@ watchpack@^1.7.4:
     chokidar "^3.4.1"
     watchpack-chokidar2 "^2.0.1"
 
-"web-components@https://github.com/department-of-veterans-affairs/component-library.git#wc-v0.3.0":
-  version "0.3.0"
-  resolved "https://github.com/department-of-veterans-affairs/component-library.git#92a40a745b5616432ddff0815b4db8f9d930c349"
+"web-components@https://github.com/department-of-veterans-affairs/component-library.git#wc-v0.4.0":
+  version "0.4.0"
+  resolved "https://github.com/department-of-veterans-affairs/component-library.git#23d3c19611e4ce4704b213082b2c971c85b430ef"
   dependencies:
     "@stencil/core" "^2.0.1"
     "@stencil/postcss" "^2.0.0"

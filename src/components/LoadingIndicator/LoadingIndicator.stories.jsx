@@ -6,12 +6,9 @@ export default {
   component: LoadingIndicator,
 };
 
-const Template = (args) => <LoadingIndicator {...args} />;
+const Template = args => <LoadingIndicator {...args} />;
 
 const defaultArgs = {};
 
 export const Default = Template.bind({});
-Default.args = { ...defaultArgs };
-
-export const WithMessage = Template.bind({});
-WithMessage.args = { ...defaultArgs, message: 'Loading your application...' };
+Default.args = { ...defaultArgs, message: 'Loading your application...' };
