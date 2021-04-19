@@ -9,14 +9,16 @@ const defaultArgs = {
   headline: 'This is an alert',
   status: 'info',
   backgroundOnly: false,
+  closeable: false,
 };
 
-const Template = ({ backgroundOnly, headline, status }) => html`
+const Template = ({ backgroundOnly, headline, status, closeable }) => html`
   <div>
     <va-alert
       background-only="${backgroundOnly}"
       headline="${headline}"
       status="${status}"
+      closeable="${closeable}"
     >
       <div>
         A well regulated Militia, being necessary to the security of a free
@@ -52,6 +54,12 @@ Warning.args = { ...defaultArgs, status: 'warning' };
 
 export const Error = Template.bind({});
 Error.args = { ...defaultArgs, status: 'error' };
+
+export const Closeable = Template.bind({});
+Closeable.args = {
+  ...defaultArgs,
+  closeable: true,
+};
 
 export const BackgroundOnly = Template.bind({});
 BackgroundOnly.args = {
