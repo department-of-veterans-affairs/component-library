@@ -22,6 +22,9 @@ export class VaAlert {
    */
   @Prop() disableAnalytics: boolean = false;
 
+  /**
+   * If true, the alert will be visible.
+   */
   @Prop() visible: boolean = true;
 
   /**
@@ -34,8 +37,14 @@ export class VaAlert {
    */
   @Prop() level: number = 3;
 
+  /**
+   * Aria-label text for the close button.
+   */
   @Prop() closeBtnAriaLabel: string = 'Close notification';
 
+  /**
+   * If true, a close button will be displayed.
+   */
   @Prop() closeable: boolean = false;
 
   @Event({
