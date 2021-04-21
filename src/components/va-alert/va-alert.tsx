@@ -18,19 +18,19 @@ export class VaAlert {
   @Prop() backgroundOnly: boolean = false;
 
   /**
-   * If true, doesn't fire the CustomEvent which can be used for analytics tracking
+   * If true, doesn't fire the CustomEvent which can be used for analytics tracking.
    */
   @Prop() disableAnalytics: boolean = false;
 
   @Prop() visible: boolean = true;
 
   /**
-   * Headline for the alert. Won't show if `backgroundOnly` is true
+   * Headline for the alert. Won't show if `backgroundOnly` is true.
    */
   @Prop() headline: string;
 
   /**
-   * Determines the level of the heading in the alert
+   * Determines the level of the heading in the alert.
    */
   @Prop() level: number = 3;
 
