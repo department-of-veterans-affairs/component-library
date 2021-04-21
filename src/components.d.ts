@@ -53,21 +53,30 @@ export namespace Components {
           * If true, renders the alert with only a background color corresponding to the status - no icon or left border.
          */
         "backgroundOnly": boolean;
+        /**
+          * Aria-label text for the close button.
+         */
         "closeBtnAriaLabel": string;
+        /**
+          * If true, a close button will be displayed.
+         */
         "closeable": boolean;
         /**
-          * If true, doesn't fire the CustomEvent which can be used for analytics tracking
+          * If true, doesn't fire the CustomEvent which can be used for analytics tracking.
          */
         "disableAnalytics": boolean;
         /**
-          * Headline for the alert. Won't show if `backgroundOnly` is true
+          * Headline for the alert. Won't show if `backgroundOnly` is true.
          */
         "headline": string;
         /**
-          * Determines the level of the heading in the alert
+          * Determines the level of the heading in the alert.
          */
         "level": number;
         "status": string;
+        /**
+          * If true, the alert will be visible.
+         */
         "visible": boolean;
     }
     interface VaOnThisPage {
@@ -164,23 +173,32 @@ declare namespace LocalJSX {
           * If true, renders the alert with only a background color corresponding to the status - no icon or left border.
          */
         "backgroundOnly"?: boolean;
+        /**
+          * Aria-label text for the close button.
+         */
         "closeBtnAriaLabel"?: string;
+        /**
+          * If true, a close button will be displayed.
+         */
         "closeable"?: boolean;
         /**
-          * If true, doesn't fire the CustomEvent which can be used for analytics tracking
+          * If true, doesn't fire the CustomEvent which can be used for analytics tracking.
          */
         "disableAnalytics"?: boolean;
         /**
-          * Headline for the alert. Won't show if `backgroundOnly` is true
+          * Headline for the alert. Won't show if `backgroundOnly` is true.
          */
         "headline"?: string;
         /**
-          * Determines the level of the heading in the alert
+          * Determines the level of the heading in the alert.
          */
         "level"?: number;
         "onClose"?: (event: CustomEvent<any>) => void;
         "onComponent-library-analytics"?: (event: CustomEvent<any>) => void;
         "status"?: string;
+        /**
+          * If true, the alert will be visible.
+         */
         "visible"?: boolean;
     }
     interface VaOnThisPage {
