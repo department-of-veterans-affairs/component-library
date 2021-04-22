@@ -4,6 +4,7 @@ import { shallow } from 'enzyme';
 import { axeCheck } from '../../helpers/test-helpers';
 import Checkbox from './Checkbox.jsx';
 import sinon from 'sinon';
+import { testAnalytics } from '../../helpers/test-helpers';
 
 describe('<Checkbox/>', () => {
   it('should render without the labelAboveCheckbox', () => {
@@ -148,13 +149,6 @@ describe('<Checkbox/>', () => {
 
   describe('analytics event', function () {
     it('should NOT be triggered when enableAnalytics is not true', () => {
-      const handleAnalyticsEvent = sinon.spy();
-
-      global.document.body.addEventListener(
-        'component-library-analytics',
-        handleAnalyticsEvent,
-      );
-
       const wrapper = shallow(
         <Checkbox
           label="test"
@@ -163,26 +157,15 @@ describe('<Checkbox/>', () => {
         />,
       );
 
-      const event = { target: { checked: true } };
+      const spy = testAnalytics(wrapper, () => {
+        const event = { target: { checked: true } };
+        wrapper.find('[type="checkbox"]').simulate('change', event);
+      });
 
-      wrapper.find('[type="checkbox"]').simulate('change', event);
-
-      global.document.body.removeEventListener(
-        'component-library-analytics',
-        handleAnalyticsEvent,
-      );
-
-      expect(handleAnalyticsEvent.called).to.be.false;
+      expect(spy.called).to.be.false;
     });
 
     it('should be triggered when Checkbox is checked', () => {
-      const handleAnalyticsEvent = sinon.spy();
-
-      global.document.body.addEventListener(
-        'component-library-analytics',
-        handleAnalyticsEvent,
-      );
-
       const wrapper = shallow(
         <Checkbox
           label="test"
@@ -192,17 +175,13 @@ describe('<Checkbox/>', () => {
         />,
       );
 
-      const event = { target: { checked: true } };
-
-      wrapper.find('[type="checkbox"]').simulate('change', event);
-
-      global.document.body.removeEventListener(
-        'component-library-analytics',
-        handleAnalyticsEvent,
-      );
+      const spy = testAnalytics(wrapper, () => {
+        const event = { target: { checked: true } };
+        wrapper.find('[type="checkbox"]').simulate('change', event);
+      });
 
       expect(
-        handleAnalyticsEvent.calledWith(
+        spy.calledWith(
           sinon.match.has('detail', {
             componentName: 'Checkbox',
             action: 'change',

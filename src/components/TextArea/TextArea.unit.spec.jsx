@@ -6,6 +6,7 @@ import sinon from 'sinon';
 import TextArea from './TextArea';
 import { makeField } from '../../helpers/fields';
 import { axeCheck } from '../../helpers/test-helpers';
+import { testAnalytics } from '../../helpers/test-helpers';
 
 describe('<TextArea>', () => {
   it('ensure value changes propagate', () => {
@@ -207,13 +208,6 @@ describe('<TextArea>', () => {
 
   describe('analytics event', function () {
     it('should NOT be triggered when enableAnalytics is not true', () => {
-      const handleAnalyticsEvent = sinon.spy();
-
-      global.document.body.addEventListener(
-        'component-library-analytics',
-        handleAnalyticsEvent,
-      );
-
       const wrapper = mount(
         <TextArea
           field={makeField('')}
@@ -224,24 +218,14 @@ describe('<TextArea>', () => {
         />,
       );
 
-      wrapper.find('textarea').first().simulate('blur');
+      const spy = testAnalytics(wrapper, () => {
+        wrapper.find('textarea').first().simulate('blur');
+      });
 
-      global.document.body.removeEventListener(
-        'component-library-analytics',
-        handleAnalyticsEvent,
-      );
-
-      expect(handleAnalyticsEvent.called).to.be.false;
+      expect(spy.called).to.be.false;
     });
 
     it('should be triggered when field is blurred', () => {
-      const handleAnalyticsEvent = sinon.spy();
-
-      global.document.body.addEventListener(
-        'component-library-analytics',
-        handleAnalyticsEvent,
-      );
-
       const wrapper = mount(
         <TextArea
           field={makeField('Test Text')}
@@ -253,15 +237,12 @@ describe('<TextArea>', () => {
         />,
       );
 
-      wrapper.find('textarea').first().simulate('blur');
-
-      global.document.body.removeEventListener(
-        'component-library-analytics',
-        handleAnalyticsEvent,
-      );
+      const spy = testAnalytics(wrapper, () => {
+        wrapper.find('textarea').first().simulate('blur');
+      });
 
       expect(
-        handleAnalyticsEvent.calledWith(
+        spy.calledWith(
           sinon.match.has('detail', {
             componentName: 'TextArea',
             action: 'blur',

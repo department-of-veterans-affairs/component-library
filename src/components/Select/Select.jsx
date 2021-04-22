@@ -24,7 +24,7 @@ class Select extends React.Component {
 
     if (this.props.enableAnalytics) {
       dispatchAnalyticsEvent({
-        componentName: 'Checkbox',
+        componentName: 'Select',
         action: 'change',
 
         details: {
@@ -208,10 +208,12 @@ Select.propTypes = {
    * Additional css class that is added to the select element.
    */
   ariaLiveRegionText: PropTypes.string,
+
   /**
    * Analytics tracking function(s) will be called. Form components
    * are disabled by default due to PII/PHI concerns.
-   */ enableAnalytics: PropTypes.bool,
+   */
+  enableAnalytics: PropTypes.bool,
 };
 
 Select.defaultProps = {

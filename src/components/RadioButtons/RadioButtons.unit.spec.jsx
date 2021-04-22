@@ -5,6 +5,7 @@ import { axeCheck } from '../../helpers/test-helpers';
 import RadioButtons from './RadioButtons.jsx';
 import { makeField } from '../../helpers/fields.js';
 import sinon from 'sinon';
+import { testAnalytics } from '../../helpers/test-helpers';
 
 describe('<RadioButtons>', () => {
   const nonExpandingOptions = ['yes', 'no'];
@@ -119,13 +120,6 @@ describe('<RadioButtons>', () => {
 
   describe('analytics event', function () {
     it('should NOT be triggered when enableAnalytics is not true', () => {
-      const handleAnalyticsEvent = sinon.spy();
-
-      global.document.body.addEventListener(
-        'component-library-analytics',
-        handleAnalyticsEvent,
-      );
-
       const wrapper = mount(
         <RadioButtons
           label="test"
@@ -135,24 +129,14 @@ describe('<RadioButtons>', () => {
         />,
       );
 
-      wrapper.find('[type="radio"]').first().simulate('change');
+      const spy = testAnalytics(wrapper, () => {
+        wrapper.find('[type="radio"]').first().simulate('change');
+      });
 
-      global.document.body.removeEventListener(
-        'component-library-analytics',
-        handleAnalyticsEvent,
-      );
-
-      expect(handleAnalyticsEvent.called).to.be.false;
+      expect(spy.called).to.be.false;
     });
 
     it('should be triggered when Checkbox is checked', () => {
-      const handleAnalyticsEvent = sinon.spy();
-
-      global.document.body.addEventListener(
-        'component-library-analytics',
-        handleAnalyticsEvent,
-      );
-
       const wrapper = mount(
         <RadioButtons
           label="test"
@@ -163,15 +147,12 @@ describe('<RadioButtons>', () => {
         />,
       );
 
-      wrapper.find('[type="radio"]').first().simulate('change');
-
-      global.document.body.removeEventListener(
-        'component-library-analytics',
-        handleAnalyticsEvent,
-      );
+      const spy = testAnalytics(wrapper, () => {
+        wrapper.find('[type="radio"]').first().simulate('change');
+      });
 
       expect(
-        handleAnalyticsEvent.calledWith(
+        spy.calledWith(
           sinon.match.has('detail', {
             componentName: 'RadioButtons',
             action: 'change',

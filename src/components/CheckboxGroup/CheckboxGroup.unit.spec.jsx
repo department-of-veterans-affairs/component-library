@@ -4,6 +4,7 @@ import { expect } from 'chai';
 import { axeCheck } from '../../helpers/test-helpers';
 import CheckboxGroup from './CheckboxGroup.jsx';
 import sinon from 'sinon';
+import { testAnalytics } from '../../helpers/test-helpers';
 
 describe('<CheckboxGroup>', () => {
   const options = [
@@ -67,13 +68,6 @@ describe('<CheckboxGroup>', () => {
     const state = { yes: true, no: false };
 
     it('should NOT be triggered when enableAnalytics is not true', () => {
-      const handleAnalyticsEvent = sinon.spy();
-
-      global.document.body.addEventListener(
-        'component-library-analytics',
-        handleAnalyticsEvent,
-      );
-
       const wrapper = mount(
         <CheckboxGroup
           label="my label"
@@ -84,33 +78,22 @@ describe('<CheckboxGroup>', () => {
           }}
         />,
       );
+      const spy = testAnalytics(wrapper, () => {
+        const event = {
+          target: {
+            value: options[0].value,
+            label: options[0].label,
+            checked: true,
+          },
+        };
 
-      const event = {
-        target: {
-          value: options[0].value,
-          label: options[0].label,
-          checked: true,
-        },
-      };
+        wrapper.find('[type="checkbox"]').first().simulate('change', event);
+      });
 
-      wrapper.find('[type="checkbox"]').first().simulate('change', event);
-
-      global.document.body.removeEventListener(
-        'component-library-analytics',
-        handleAnalyticsEvent,
-      );
-
-      expect(handleAnalyticsEvent.called).to.be.false;
+      expect(spy.called).to.be.false;
     });
 
     it('should be triggered when field is checked', () => {
-      const handleAnalyticsEvent = sinon.spy();
-
-      global.document.body.addEventListener(
-        'component-library-analytics',
-        handleAnalyticsEvent,
-      );
-
       const wrapper = mount(
         <CheckboxGroup
           label="my label"
@@ -123,23 +106,20 @@ describe('<CheckboxGroup>', () => {
         />,
       );
 
-      const event = {
-        target: {
-          value: options[0].value,
-          label: options[0].label,
-          checked: true,
-        },
-      };
+      const spy = testAnalytics(wrapper, () => {
+        const event = {
+          target: {
+            value: options[0].value,
+            label: options[0].label,
+            checked: true,
+          },
+        };
 
-      wrapper.find('[type="checkbox"]').first().simulate('change', event);
-
-      global.document.body.removeEventListener(
-        'component-library-analytics',
-        handleAnalyticsEvent,
-      );
+        wrapper.find('[type="checkbox"]').first().simulate('change', event);
+      });
 
       expect(
-        handleAnalyticsEvent.calledWith(
+        spy.calledWith(
           sinon.match.has('detail', {
             componentName: 'CheckboxGroup',
             action: 'change',
