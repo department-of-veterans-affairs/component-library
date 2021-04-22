@@ -39,6 +39,7 @@ describe('<SegmentedProgressBar/>', () => {
               current: 0,
               total: 5,
             },
+            version: sinon.match.string,
           }),
         ),
       ).to.be.true;
@@ -72,6 +73,7 @@ describe('<SegmentedProgressBar/>', () => {
               current: 1,
               total: 5,
             },
+            version: sinon.match.string,
           }),
         ),
       ).to.be.true;
