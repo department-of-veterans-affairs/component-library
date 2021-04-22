@@ -5,6 +5,7 @@ import { expect } from 'chai';
 import TextInput from './TextInput.jsx';
 import { makeField } from '../../helpers/fields.js';
 import sinon from 'sinon';
+import { testAnalytics } from '../../helpers/test-helpers';
 
 describe('<TextInput>', () => {
   it('calls onValueChange with input value and dirty state', () => {
@@ -240,13 +241,6 @@ describe('<TextInput>', () => {
 
   describe('analytics event', function () {
     it('should NOT be triggered when enableAnalytics is not true', () => {
-      const handleAnalyticsEvent = sinon.spy();
-
-      global.document.body.addEventListener(
-        'component-library-analytics',
-        handleAnalyticsEvent,
-      );
-
       const wrapper = mount(
         <TextInput
           field={makeField('Test Text')}
@@ -255,24 +249,14 @@ describe('<TextInput>', () => {
         ></TextInput>,
       );
 
-      wrapper.find('input[type="text"]').first().simulate('blur');
+      const spy = testAnalytics(wrapper, () => {
+        wrapper.find('input[type="text"]').first().simulate('blur');
+      });
 
-      global.document.body.removeEventListener(
-        'component-library-analytics',
-        handleAnalyticsEvent,
-      );
-
-      expect(handleAnalyticsEvent.called).to.be.false;
+      expect(spy.called).to.be.false;
     });
 
     it('should be triggered when field is blurred', () => {
-      const handleAnalyticsEvent = sinon.spy();
-
-      global.document.body.addEventListener(
-        'component-library-analytics',
-        handleAnalyticsEvent,
-      );
-
       const wrapper = mount(
         <TextInput
           field={makeField('Test Text')}
@@ -282,15 +266,12 @@ describe('<TextInput>', () => {
         ></TextInput>,
       );
 
-      wrapper.find('input[type="text"]').first().simulate('blur');
-
-      global.document.body.removeEventListener(
-        'component-library-analytics',
-        handleAnalyticsEvent,
-      );
+      const spy = testAnalytics(wrapper, () => {
+        wrapper.find('input[type="text"]').first().simulate('blur');
+      });
 
       expect(
-        handleAnalyticsEvent.calledWith(
+        spy.calledWith(
           sinon.match.has('detail', {
             componentName: 'TextInput',
             action: 'blur',
