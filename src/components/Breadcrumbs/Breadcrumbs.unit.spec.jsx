@@ -3,6 +3,7 @@ import { Link } from 'react-router';
 import { shallow, mount } from 'enzyme';
 import { axeCheck } from '../../helpers/test-helpers';
 import { expect } from 'chai';
+import sinon from 'sinon';
 
 import Breadcrumbs from './Breadcrumbs.jsx';
 
@@ -210,4 +211,53 @@ describe('<Breadcrumbs>', () => {
 
   it('should pass aXe check when showing mobile breadcrumb', () =>
     axeCheck(<Breadcrumbs mobileFirstProp>{crumbs}</Breadcrumbs>));
+
+  describe('analytics event', function () {
+    const crumbs = [
+      <a href="/" key="1">
+        Link 1
+      </a>,
+      <a href="/test1" key="2">
+        Link 2
+      </a>,
+      <a href="/test2" key="3">
+        Link 3
+      </a>,
+    ];
+
+    it('should be triggered when link in Breadcrumbs content is clicked', () => {
+      const handleAnalyticsEvent = sinon.spy();
+
+      global.document.body.addEventListener(
+        'component-library-analytics',
+        handleAnalyticsEvent,
+      );
+
+      const tree = mount(<Breadcrumbs>{crumbs}</Breadcrumbs>);
+
+      // Click link in content
+      const testLink = tree.find('a').at(1);
+      testLink.simulate('click');
+
+      global.document.body.removeEventListener(
+        'component-library-analytics',
+        handleAnalyticsEvent,
+      );
+
+      expect(
+        handleAnalyticsEvent.calledWith(
+          sinon.match.has('detail', {
+            componentName: 'Breadcrumbs',
+            action: 'linkClick',
+            details: {
+              clickLabel: 'Link 2',
+              clickLevel: 2,
+              totalLevels: 3,
+              mobileFirstProp: undefined,
+            },
+          }),
+        ),
+      ).to.be.true;
+    });
+  });
 });

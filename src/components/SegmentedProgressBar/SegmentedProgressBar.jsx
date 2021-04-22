@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
+import dispatchAnalyticsEvent from '../../helpers/analytics';
 
 /**
  * Create a segmented progress bar for multi-page forms.
@@ -8,7 +9,25 @@ import _ from 'lodash';
  * @param {number} current - The index of the current chapter
  * @param {number} total   - The total number of chapters in the form
  */
-export default function SegmentedProgressBar({ current, total }) {
+export default function SegmentedProgressBar({
+  current,
+  total,
+  disableAnalytics,
+}) {
+  useEffect(() => {
+    // Conditionally track events
+    if (!disableAnalytics) {
+      dispatchAnalyticsEvent({
+        componentName: 'SegmentedProgressBar',
+        action: 'change',
+        details: {
+          current: current,
+          total: total,
+        },
+      });
+    }
+  });
+
   return (
     <div
       className="progress-bar-segmented"
@@ -40,4 +59,8 @@ SegmentedProgressBar.propTypes = {
    * The total number of segments in the progress bar
    */
   total: PropTypes.number.isRequired,
+  /**
+   * Analytics tracking function(s) will not be called
+   */
+  disableAnalytics: PropTypes.bool,
 };
