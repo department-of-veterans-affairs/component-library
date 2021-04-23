@@ -255,6 +255,7 @@ describe('<Breadcrumbs>', () => {
               totalLevels: 3,
               mobileFirstProp: undefined,
             },
+            version: sinon.match.string,
           }),
         ),
       ).to.be.true;

@@ -38,6 +38,7 @@ describe('<ProgressBar/>', () => {
               percent: 0,
               label: 'This is my ProgressBar.',
             },
+            version: sinon.match.string,
           }),
         ),
       ).to.be.true;
@@ -75,6 +76,7 @@ describe('<ProgressBar/>', () => {
               percent: 100,
               label: 'This is my ProgressBar.',
             },
+            version: sinon.match.string,
           }),
         ),
       ).to.be.true;
