@@ -177,6 +177,7 @@ describe('<AlertBox />', () => {
               backgroundOnly: true,
               closeable: false,
             },
+            version: sinon.match.string,
           }),
         ),
       ).to.be.true;
@@ -211,6 +212,7 @@ describe('<AlertBox />', () => {
               backgroundOnly: true,
               closeable: false,
             },
+            version: sinon.match.string,
           }),
         ),
       ).to.be.true;
