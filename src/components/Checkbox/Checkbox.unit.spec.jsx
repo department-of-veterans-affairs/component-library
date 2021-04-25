@@ -172,6 +172,7 @@ describe('<Checkbox/>', () => {
           labelAboveCheckbox="this is a checkbox"
           onValueChange={() => {}}
           enableAnalytics
+          required={false}
         />,
       );
 
@@ -188,6 +189,7 @@ describe('<Checkbox/>', () => {
             details: {
               label: 'test',
               labelAboveCheckbox: 'this is a checkbox',
+              required: false,
             },
           }),
         ),

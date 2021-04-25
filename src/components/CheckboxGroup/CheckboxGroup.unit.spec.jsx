@@ -103,6 +103,7 @@ describe('<CheckboxGroup>', () => {
             state[option.value] = checked;
           }}
           enableAnalytics
+          required={false}
         />,
       );
 
@@ -125,7 +126,8 @@ describe('<CheckboxGroup>', () => {
             action: 'change',
             details: {
               label: 'my label',
-              clickLabel: options[0].value,
+              optionLabel: options[0].value,
+              required: false,
             },
           }),
         ),
