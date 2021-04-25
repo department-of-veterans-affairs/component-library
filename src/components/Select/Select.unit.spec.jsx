@@ -260,7 +260,7 @@ describe('<Select>', () => {
       expect(spy.called).to.be.false;
     });
 
-    it('should be triggered when Checkbox is checked', () => {
+    it('should be triggered when Select option is changed', () => {
       const wrapper = shallow(
         <Select
           label="my label"
