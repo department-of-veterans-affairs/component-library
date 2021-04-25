@@ -250,6 +250,7 @@ describe('<TextArea>', () => {
               label: 'test',
               value: 'Test Text',
             },
+            version: sinon.match.string,
           }),
         ),
       ).to.be.true;

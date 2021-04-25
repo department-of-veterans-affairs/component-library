@@ -51,21 +51,22 @@ class RadioButtons extends React.Component {
   }
 
   handleChange(domEvent) {
-    const clickLabel = domEvent.target.value;
+    const optionValue = domEvent.target.value;
+    const optionLabel = domEvent.target.dataset.label;
 
     if (this.props.enableAnalytics) {
       dispatchAnalyticsEvent({
         componentName: 'RadioButtons',
         action: 'change',
-
         details: {
-          clickLabel: clickLabel,
           label: this.props.label,
+          optionLabel: optionLabel,
+          required: this.props.required,
         },
       });
     }
 
-    this.props.onValueChange(makeField(clickLabel, true));
+    this.props.onValueChange(makeField(optionValue, true));
   }
 
   render() {
@@ -125,6 +126,7 @@ class RadioButtons extends React.Component {
               onKeyDown={this.props.onKeyDown}
               value={optionValue}
               onChange={this.handleChange}
+              data-label={optionLabel}
             />
 
             <label

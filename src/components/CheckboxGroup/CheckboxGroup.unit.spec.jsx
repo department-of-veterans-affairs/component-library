@@ -129,6 +129,7 @@ describe('<CheckboxGroup>', () => {
               optionLabel: options[0].value,
               required: false,
             },
+            version: sinon.match.string,
           }),
         ),
       ).to.be.true;

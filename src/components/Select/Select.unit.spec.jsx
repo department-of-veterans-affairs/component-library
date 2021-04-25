@@ -287,6 +287,7 @@ describe('<Select>', () => {
               label: 'my label',
               selectLabel: 'first',
             },
+            version: sinon.match.string,
           }),
         ),
       ).to.be.true;

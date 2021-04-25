@@ -21,7 +21,6 @@ class Checkbox extends React.Component {
       dispatchAnalyticsEvent({
         componentName: 'Checkbox',
         action: 'change',
-
         details: {
           label: this.props.label,
           labelAboveCheckbox: this.props.labelAboveCheckbox,

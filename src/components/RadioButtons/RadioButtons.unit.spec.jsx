@@ -136,7 +136,7 @@ describe('<RadioButtons>', () => {
       expect(spy.called).to.be.false;
     });
 
-    it('should be triggered when Checkbox is checked', () => {
+    it('should be triggered when RadioButton is selected', () => {
       const wrapper = mount(
         <RadioButtons
           label="test"
@@ -144,6 +144,7 @@ describe('<RadioButtons>', () => {
           value={makeField('test')}
           onValueChange={value => value}
           enableAnalytics
+          required={false}
         />,
       );
 
@@ -158,8 +159,10 @@ describe('<RadioButtons>', () => {
             action: 'change',
             details: {
               label: 'test',
-              clickLabel: nonExpandingOptions[0],
+              optionLabel: nonExpandingOptions[0],
+              required: false,
             },
+            version: sinon.match.string,
           }),
         ),
       ).to.be.true;

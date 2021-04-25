@@ -1,6 +1,6 @@
 import React from 'react';
 import { expect } from 'chai';
-import { shallow } from 'enzyme';
+import { mount, shallow } from 'enzyme';
 import { axeCheck } from '../../helpers/test-helpers';
 import Checkbox from './Checkbox.jsx';
 import sinon from 'sinon';
@@ -166,7 +166,7 @@ describe('<Checkbox/>', () => {
     });
 
     it('should be triggered when Checkbox is checked', () => {
-      const wrapper = shallow(
+      const wrapper = mount(
         <Checkbox
           label="test"
           labelAboveCheckbox="this is a checkbox"
@@ -176,7 +176,7 @@ describe('<Checkbox/>', () => {
         />,
       );
 
-      const spy = testAnalytics(wrapper, () => {
+      const spy = testAnalytics(wrapper, wrapper => {
         const event = { target: { checked: true } };
         wrapper.find('[type="checkbox"]').simulate('change', event);
       });
@@ -191,6 +191,7 @@ describe('<Checkbox/>', () => {
               labelAboveCheckbox: 'this is a checkbox',
               required: false,
             },
+            version: sinon.match.string,
           }),
         ),
       ).to.be.true;
