@@ -32,6 +32,12 @@ For now these Web Components live on the [`web-components` branch](https://githu
 1. Have the PR be based off of `web-components` (not `master` - see image below)
 1. Once the PR is merged, create a Github Release with `web-components` as the base, where the version is `wc-vX.Y.Z`. with `X.Y.Z` being the semantic version.
 
+### Making a PR
+
+![PR into `web-components` branch](./img/pr-base.png)
+
+### Making a release
+
 ![release off of `web-components` branch](./img/release-base.png)
 
 ## Publishing Module to NPM
