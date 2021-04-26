@@ -61,6 +61,7 @@ describe('<LoadingIndicator>', () => {
               displayTime: sinon.match.number,
               message: 'Loading',
             },
+            version: sinon.match.string,
           }),
         ),
       ).to.be.true;
