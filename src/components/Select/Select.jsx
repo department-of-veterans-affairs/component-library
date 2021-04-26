@@ -144,7 +144,7 @@ Select.propTypes = {
   label: PropTypes.oneOfType([PropTypes.string, PropTypes.element]).isRequired,
 
   /**
-   * Select field label.
+   * Class name(s) for the label.
    */
   labelClass: PropTypes.string,
 
