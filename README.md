@@ -29,9 +29,10 @@ The Design System team is working on replacing the React components in this libr
 For now these Web Components live on the [`web-components` branch](https://github.com/department-of-veterans-affairs/component-library/tree/web-components). In order to add a new component or make changes to an existing one, you must:
 
 1. Create a new branch off of `web-components`
-1. Have the PR be based off of `web-components` (not `master`)
+1. Have the PR be based off of `web-components` (not `master` - see image below)
 1. Once the PR is merged, create a Github Release with `web-components` as the base, where the version is `wc-vX.Y.Z`. with `X.Y.Z` being the semantic version.
 
+![release off of `web-components` branch](./img/release-base.png)
 
 ## Publishing Module to NPM
 
