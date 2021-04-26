@@ -1,3 +1,5 @@
+import packageJSON from '../../package.json';
+
 /**
  * Dispatch a custom JavaScript event on document.body for tracking analytics.
  * A separate event listener will be required to record the events to GA.
@@ -6,6 +8,8 @@
  * event.action {string} - The action that triggered the analytics event
  * event.details {object} - Contains any number of key-value pairs to further describe the analytics event
  */
+
+const version = packageJSON.version;
 
 export default function dispatchAnalyticsEvent({
   componentName,
@@ -17,6 +21,7 @@ export default function dispatchAnalyticsEvent({
       componentName,
       action,
       details,
+      version,
     },
   });
   document.body.dispatchEvent(event);
