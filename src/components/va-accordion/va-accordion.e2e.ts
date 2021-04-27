@@ -98,13 +98,14 @@ describe('va-accordion', () => {
 
     await buttons[0].click();
 
+    console.log(analyticsSpy.events[0].detail);
+
     expect(analyticsSpy).toHaveReceivedEventDetail({
       action: 'expand',
       componentName: 'Accordion',
       details: {
         header: "First item",
-        subheader: undefined,
-        level: 1,
+        level: 2,
       },
     });
   });
