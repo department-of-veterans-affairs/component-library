@@ -1,4 +1,4 @@
-import { Component, Element, Host, Listen, Prop, h } from '@stencil/core';
+import { Component, Element, Event, EventEmitter, Host, Listen, Prop, h } from '@stencil/core';
 
 /**
  * Accordions are a list of headers that can be clicked to hide or reveal additional content.
@@ -25,6 +25,13 @@ import { Component, Element, Host, Listen, Prop, h } from '@stencil/core';
 export class VaAccordion {
   @Element() el!: any;
 
+  @Event({
+    eventName: 'component-library-analytics',
+    composed: true,
+    bubbles: true,
+  })
+  componentLibraryAnalytics: EventEmitter;
+
   @Listen('accordionItemToggled')
   itemToggledHandler(event: CustomEvent) {
     // The event target is the button, and it has a parent which is a header.
@@ -42,6 +49,20 @@ export class VaAccordion {
     }
 
     const prevAttr = clickedItem.getAttribute('open') === 'true' ? true : false;
+
+    if (!this.disableAnalytics) {
+      const detail = {
+        componentName: 'Accordion',
+        action: prevAttr ? "collapse" : "expand",
+        details: {
+          header: clickedItem.header,
+          subheader: clickedItem.subeader,
+          level: clickedItem.level,
+        },
+      };
+      this.componentLibraryAnalytics.emit(detail);
+    }
+
     clickedItem.setAttribute('open', !prevAttr);
   }
 
@@ -76,6 +97,11 @@ export class VaAccordion {
    * True if multiple items can be opened at once
    */
   @Prop() multi: boolean;
+
+  /**
+   * If true, doesn't fire the CustomEvent which can be used for analytics tracking.
+   */
+  @Prop() disableAnalytics: boolean = false;
 
   render() {
     return (

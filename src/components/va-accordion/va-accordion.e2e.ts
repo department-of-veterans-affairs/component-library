@@ -79,4 +79,54 @@ describe('va-accordion', () => {
     expect(buttons[0].getAttribute('aria-expanded')).toEqual('true');
     expect(buttons[1].getAttribute('aria-expanded')).toEqual('true');
   });
+
+  it('fires an analytics event when expanded', async () => {
+    const page = await newE2EPage();
+    await page.setContent(`
+      <va-accordion>
+        <va-accordion-item header="First item">Some content</va-accordion-item>
+        <va-accordion-item header="Second item">A bit more</va-accordion-item>
+      </va-accordion>`,
+    );
+
+    const analyticsSpy = await page.spyOnEvent('component-library-analytics');
+
+    const buttons = await page.findAll(
+      'va-accordion-item >>> button[aria-expanded="false"]',
+    );
+    expect(buttons.length).toEqual(2);
+
+    await buttons[0].click();
+
+    expect(analyticsSpy).toHaveReceivedEventDetail({
+      action: 'expand',
+      componentName: 'Accordion',
+      details: {
+        header: "First item",
+        subheader: undefined,
+        level: 1,
+      },
+    });
+  });
+
+  it('does not fire an analytics event when disableAnalytics is passed', async () => {
+    const page = await newE2EPage();
+    await page.setContent(`
+      <va-accordion disable-analytics="true">
+        <va-accordion-item header="First item">Some content</va-accordion-item>
+        <va-accordion-item header="Second item">A bit more</va-accordion-item>
+      </va-accordion>`,
+    );
+
+    const analyticsSpy = await page.spyOnEvent('component-library-analytics');
+
+    const buttons = await page.findAll(
+      'va-accordion-item >>> button[aria-expanded="false"]',
+    );
+    expect(buttons.length).toEqual(2);
+
+    await buttons[0].click();
+
+    expect(analyticsSpy).toHaveReceivedEventTimes(0);
+  });
 });
