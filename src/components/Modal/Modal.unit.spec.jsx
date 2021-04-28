@@ -141,18 +141,7 @@ describe('<Modal/>', () => {
 
   describe('analytics event', function () {
     it('should be triggered when modal is visible', () => {
-      const handleAnalyticsEvent = e => {
-        expect(e.detail).to.eql({
-          componentName: 'Modal',
-          action: 'show',
-          details: {
-            status: undefined,
-            title: undefined,
-            primaryButtonText: undefined,
-            secondaryButtonText: undefined,
-          },
-        });
-      };
+      const handleAnalyticsEvent = sinon.spy();
 
       global.document.body.addEventListener(
         'component-library-analytics',
@@ -165,6 +154,22 @@ describe('<Modal/>', () => {
         </Modal>,
       );
 
+      expect(
+        handleAnalyticsEvent.calledWith(
+          sinon.match.has('detail', {
+            componentName: 'Modal',
+            action: 'show',
+            details: {
+              status: undefined,
+              title: undefined,
+              primaryButtonText: undefined,
+              secondaryButtonText: undefined,
+            },
+            version: sinon.match.string,
+          }),
+        ),
+      ).to.be.true;
+
       global.document.body.removeEventListener(
         'component-library-analytics',
         handleAnalyticsEvent,
@@ -174,18 +179,7 @@ describe('<Modal/>', () => {
     });
 
     it('should include title when present', () => {
-      const handleAnalyticsEvent = e => {
-        expect(e.detail).to.eql({
-          componentName: 'Modal',
-          action: 'show',
-          details: {
-            status: undefined,
-            title: 'My modal title',
-            primaryButtonText: undefined,
-            secondaryButtonText: undefined,
-          },
-        });
-      };
+      const handleAnalyticsEvent = sinon.spy();
 
       global.document.body.addEventListener(
         'component-library-analytics',
@@ -203,6 +197,22 @@ describe('<Modal/>', () => {
           Modal contents
         </Modal>,
       );
+
+      expect(
+        handleAnalyticsEvent.calledWith(
+          sinon.match.has('detail', {
+            componentName: 'Modal',
+            action: 'show',
+            details: {
+              status: undefined,
+              title: 'My modal title',
+              primaryButtonText: undefined,
+              secondaryButtonText: undefined,
+            },
+            version: sinon.match.string,
+          }),
+        ),
+      ).to.be.true;
 
       global.document.body.removeEventListener(
         'component-library-analytics',
