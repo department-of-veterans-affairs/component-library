@@ -105,6 +105,7 @@ describe('va-accordion', () => {
       componentName: 'Accordion',
       details: {
         header: "First item",
+        subheader: null,
         level: 2,
       },
     });
