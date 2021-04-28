@@ -56,7 +56,7 @@ export class VaAccordion {
         action: prevAttr ? "collapse" : "expand",
         details: {
           header: clickedItem.header,
-          subheader: clickedItem.subeader,
+          subheader: clickedItem.subheader,
           level: clickedItem.level,
         },
       };
