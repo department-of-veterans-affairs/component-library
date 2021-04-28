@@ -13,6 +13,7 @@
 }
 
 ::slotted([slot='headline']) {
+  font-size: 1em !important;
   line-height: 26px !important;
   padding: 0 !important;
   margin: 0 !important;
