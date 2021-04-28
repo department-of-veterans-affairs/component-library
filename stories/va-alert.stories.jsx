@@ -1,15 +1,15 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
-import { getWebComponentDocs, StoryDocs } from './wc-helpers';
+import { getWebComponentDocs, StoryDocs, propStructure } from './wc-helpers';
 
-const onThisPageDocs = getWebComponentDocs('va-alert');
+const alertDocs = getWebComponentDocs('va-alert');
 
 export default {
   title: 'Components/va-alert',
   parameters: {
     docs: {
       /* eslint-disable-next-line react/display-name */
-      page: () => <StoryDocs docs={onThisPageDocs.docs} />,
+      page: () => <StoryDocs docs={alertDocs.docs} />,
     },
   },
 };
@@ -38,6 +38,7 @@ const Template = ({ headline, status, backgroundOnly, closeable, onClose }) => {
 
 export const Default = Template.bind({});
 Default.args = { ...defaultArgs };
+Default.argTypes = propStructure(alertDocs);
 
 export const Continue = Template.bind({});
 Continue.args = { ...defaultArgs, status: 'continue' };
