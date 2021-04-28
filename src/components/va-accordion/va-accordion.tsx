@@ -39,8 +39,8 @@ export class VaAccordion {
     // The final parentNode will be a shadowRoot, and from there we get the host.
     // https://developer.mozilla.org/en-US/docs/Web/API/ShadowRoot/host
     const clickedItem =
-      event.detail.target.parentNode.parentNode.host || // if we are on IE, `.host` won't be there
-      event.detail.target.parentNode.parentNode;
+      event.detail.currentTarget.parentNode.parentNode.host || // if we are on IE, `.host` won't be there
+      event.detail.currentTarget.parentNode.parentNode;
     // Close the other items if this accordion isn't multi-selectable
     if (!this.multi) {
       this.getSlottedNodes(this.el, 'va-accordion-item')

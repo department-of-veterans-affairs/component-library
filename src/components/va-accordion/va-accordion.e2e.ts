@@ -84,8 +84,8 @@ describe('va-accordion', () => {
     const page = await newE2EPage();
     await page.setContent(`
       <va-accordion>
-        <va-accordion-item header="First item">Some content</va-accordion-item>
-        <va-accordion-item header="Second item">A bit more</va-accordion-item>
+        <va-accordion-item header="First item" subheader="First subheader">Some content</va-accordion-item>
+        <va-accordion-item header="Second item" subheader="Second subheader">A bit more</va-accordion-item>
       </va-accordion>`,
     );
 
@@ -98,14 +98,14 @@ describe('va-accordion', () => {
 
     await buttons[0].click();
 
-    console.log(analyticsSpy.events[0].detail);
+    console.log("**********", analyticsSpy.events[0].detail);
 
     expect(analyticsSpy).toHaveReceivedEventDetail({
       action: 'expand',
       componentName: 'Accordion',
       details: {
         header: "First item",
-        subheader: null,
+        subheader: "First subheader",
         level: 2,
       },
     });
@@ -115,8 +115,8 @@ describe('va-accordion', () => {
     const page = await newE2EPage();
     await page.setContent(`
       <va-accordion disable-analytics="true">
-        <va-accordion-item header="First item">Some content</va-accordion-item>
-        <va-accordion-item header="Second item">A bit more</va-accordion-item>
+        <va-accordion-item header="First item" subheader="First subheader">Some content</va-accordion-item>
+        <va-accordion-item header="Second item" subheader="Second subheader">A bit more</va-accordion-item>
       </va-accordion>`,
     );
 
