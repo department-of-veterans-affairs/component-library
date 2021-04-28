@@ -15,6 +15,7 @@ describe('va-alert', () => {
             <i aria-hidden="true" role="img"></i>
             <span class="sr-only">Alert:</span>
             <div class="body">
+              <slot name="headline"></slot>
               <div class="text">
                 <slot></slot>
               </div>
@@ -43,48 +44,10 @@ describe('va-alert', () => {
   it('passes an axe check', async () => {
     const page = await newE2EPage();
     await page.setContent(
-      `<va-alert headline="Alert">Alert content</va-alert>`,
+      `<va-alert><h3 slot="headline">Alert></h3>Alert content</va-alert>`,
     );
 
     await axeCheck(page);
-  });
-
-  it('wraps the headline in a header element', async () => {
-    const page = await newE2EPage();
-    await page.setContent('<va-alert headline="This is an alert"></va-alert>');
-
-    const body = await page.find('va-alert >>> div.body');
-
-    expect(body).toEqualHtml(`
-      <div class="body">
-        <h3>
-          This is an alert
-        </h3>
-        <div class="text">
-          <slot></slot>
-        </div>
-      </div>
-    `);
-  });
-
-  it('allows the heading level to be changed', async () => {
-    const page = await newE2EPage();
-
-    await page.setContent(
-      '<va-alert headline="Changed the level" level="4"></va-alert>',
-    );
-    const body = await page.find('va-alert >>> div.body');
-
-    expect(body).toEqualHtml(`
-      <div class="body">
-        <h4>
-          Changed the level
-        </h4>
-        <div class="text">
-          <slot></slot>
-        </div>
-      </div>
-    `);
   });
 
   it('only shows a close icon if the closeable prop is passed', async () => {

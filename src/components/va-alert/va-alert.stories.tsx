@@ -16,10 +16,10 @@ const Template = ({ backgroundOnly, headline, status, closeable }) => html`
   <div>
     <va-alert
       background-only="${backgroundOnly}"
-      headline="${headline}"
       status="${status}"
       closeable="${closeable}"
     >
+      <h3 slot="headline">${headline}</h3>
       <div>
         A well regulated Militia, being necessary to the security of a free
         State, the right of the people to keep and bear Arms, shall not be

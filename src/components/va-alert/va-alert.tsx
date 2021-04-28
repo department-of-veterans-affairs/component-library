@@ -28,16 +28,6 @@ export class VaAlert {
   @Prop() visible: boolean = true;
 
   /**
-   * Headline for the alert. Won't show if `backgroundOnly` is true.
-   */
-  @Prop() headline: string;
-
-  /**
-   * Determines the level of the heading in the alert.
-   */
-  @Prop() level: number = 3;
-
-  /**
    * Aria-label text for the close button.
    */
   @Prop() closeBtnAriaLabel: string = 'Close notification';
@@ -74,7 +64,7 @@ export class VaAlert {
           action: 'linkClick',
           details: {
             clickLabel: target.innerText,
-            headline: this.headline,
+            // headline: this.headline,
             status: this.status,
             backgroundOnly: this.backgroundOnly,
             closeable: this.closeable,
@@ -86,14 +76,7 @@ export class VaAlert {
   }
 
   render() {
-    const {
-      backgroundOnly,
-      headline,
-      level,
-      status,
-      visible,
-      closeable,
-    } = this;
+    const { backgroundOnly, status, visible, closeable } = this;
     const classes = `alert ${status} ${backgroundOnly ? 'bg-only' : ''}`;
 
     if (!visible) return <div aria-live="polite" />;
@@ -104,7 +87,7 @@ export class VaAlert {
           <i aria-hidden="true" role="img"></i>
           <span class="sr-only">Alert: </span>
           <div class="body" onClick={this.handleAlertBodyClick.bind(this)}>
-            {headline && !backgroundOnly && h(`h${level}`, null, headline)}
+            {!backgroundOnly && <slot name="headline"></slot>}
             <div class="text">
               <slot></slot>
             </div>

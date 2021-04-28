@@ -12,6 +12,12 @@
   background-color: unset;
 }
 
+::slotted([slot='headline']) {
+  line-height: 26px !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
 div.alert {
   display: table;
   padding: 3.2rem 6.4rem 3.2rem 2.4rem;
@@ -133,10 +139,4 @@ i {
 }
 i.fa-times-circle::before {
   content: '\F057'; /* fa-times-circle*/
-}
-
-h3 {
-  line-height: 26px;
-  padding: 0;
-  margin: 0;
 }

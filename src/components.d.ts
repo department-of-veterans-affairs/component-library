@@ -65,14 +65,6 @@ export namespace Components {
           * If true, doesn't fire the CustomEvent which can be used for analytics tracking.
          */
         "disableAnalytics": boolean;
-        /**
-          * Headline for the alert. Won't show if `backgroundOnly` is true.
-         */
-        "headline": string;
-        /**
-          * Determines the level of the heading in the alert.
-         */
-        "level": number;
         "status": string;
         /**
           * If true, the alert will be visible.
@@ -185,14 +177,6 @@ declare namespace LocalJSX {
           * If true, doesn't fire the CustomEvent which can be used for analytics tracking.
          */
         "disableAnalytics"?: boolean;
-        /**
-          * Headline for the alert. Won't show if `backgroundOnly` is true.
-         */
-        "headline"?: string;
-        /**
-          * Determines the level of the heading in the alert.
-         */
-        "level"?: number;
         "onClose"?: (event: CustomEvent<any>) => void;
         "onComponent-library-analytics"?: (event: CustomEvent<any>) => void;
         "status"?: string;
