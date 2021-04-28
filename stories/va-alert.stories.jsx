@@ -15,7 +15,7 @@ export default {
 };
 
 const defaultArgs = {
-  headline: 'Alert headline',
+  headline: <h3 slot="headline">Alert headline</h3>,
   status: 'info',
   backgroundOnly: false,
   closeable: false,
@@ -25,12 +25,12 @@ const defaultArgs = {
 const Template = ({ headline, status, backgroundOnly, closeable, onClose }) => {
   return (
     <va-alert
-      headline={headline}
       status={status}
       background-only={backgroundOnly}
       closeable={closeable}
       onClose={onClose}
     >
+      {headline}
       <div>This is an alert</div>
     </va-alert>
   );
@@ -51,6 +51,12 @@ Warning.args = { ...defaultArgs, status: 'warning' };
 export const Error = Template.bind({});
 Error.args = { ...defaultArgs, status: 'error' };
 
+export const HeadingLevel = Template.bind({});
+HeadingLevel.args = {
+  ...defaultArgs,
+  headline: <h4 slot="headline">I am an h4</h4>,
+};
+
 export const Closeable = Template.bind({});
 Closeable.args = {
   ...defaultArgs,
@@ -62,5 +68,4 @@ export const BackgroundOnly = Template.bind({});
 BackgroundOnly.args = {
   ...defaultArgs,
   backgroundOnly: true,
-  headline: null,
 };
