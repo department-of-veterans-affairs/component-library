@@ -6,7 +6,8 @@ import { Component, Event, EventEmitter, Host, Prop, h } from '@stencil/core';
   shadow: true,
 })
 export class VaAlert {
-  /* Determines the icon and border/background color.
+  /**
+   * Determines the icon and border/background color.
    * One of `info`, `error`, `success`, `warning`, or `continue`
    */
   @Prop() status: string = 'info';

@@ -65,6 +65,9 @@ export namespace Components {
           * If true, doesn't fire the CustomEvent which can be used for analytics tracking.
          */
         "disableAnalytics": boolean;
+        /**
+          * Determines the icon and border/background color. One of `info`, `error`, `success`, `warning`, or `continue`
+         */
         "status": string;
         /**
           * If true, the alert will be visible.
@@ -179,6 +182,9 @@ declare namespace LocalJSX {
         "disableAnalytics"?: boolean;
         "onClose"?: (event: CustomEvent<any>) => void;
         "onComponent-library-analytics"?: (event: CustomEvent<any>) => void;
+        /**
+          * Determines the icon and border/background color. One of `info`, `error`, `success`, `warning`, or `continue`
+         */
         "status"?: string;
         /**
           * If true, the alert will be visible.
