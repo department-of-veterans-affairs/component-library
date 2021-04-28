@@ -11600,7 +11600,7 @@ watchpack@^1.7.4:
 
 "web-components@https://github.com/department-of-veterans-affairs/component-library.git#wc-alertbox":
   version "0.4.0"
-  resolved "https://github.com/department-of-veterans-affairs/component-library.git#e876926f9a74d3c1623d1885640aa63e0f4591fc"
+  resolved "https://github.com/department-of-veterans-affairs/component-library.git#74f2a85112975cf9b587b712672057ff6a378567"
   dependencies:
     "@stencil/core" "^2.0.1"
     "@stencil/postcss" "^2.0.0"
