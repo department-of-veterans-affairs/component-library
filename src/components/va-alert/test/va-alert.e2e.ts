@@ -44,7 +44,7 @@ describe('va-alert', () => {
   it('passes an axe check', async () => {
     const page = await newE2EPage();
     await page.setContent(
-      `<va-alert><h3 slot="headline">Alert></h3>Alert content</va-alert>`,
+      `<va-alert><h3 slot="headline">Alert</h3>Alert content</va-alert>`,
     );
 
     await axeCheck(page);
