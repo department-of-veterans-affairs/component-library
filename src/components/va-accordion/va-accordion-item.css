@@ -62,4 +62,6 @@ button[aria-expanded='false'] {
 
 p {
   font-weight: 400;
+  line-height: 26px;
+  margin: 0;
 }
