@@ -71,12 +71,18 @@ export class VaAlert {
     // This is the happy path, meaning the user isn't using IE11
     try {
       const children = this.el.shadowRoot.querySelector('slot').assignedNodes();
-      const headlineNode = children[0];
-      headlineText = headlineNode.textContent;
+      // An empty array means that there isn't a node with `slot="headline"`
+      headlineText = children.length > 0 ? children[0].textContent : null;
     } catch (e) {
       // This is where we handle the edge case of the user being on IE11
       const children = this.el.shadowRoot.childNodes;
-      headlineText = children[0].textContent;
+      const headerList = children.filter((node: any) =>
+        ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'].includes(
+          node.tagName.toLowerCase(),
+        ),
+      );
+
+      headlineText = headerList.length > 0 ? headerList[0].textContent : null;
     }
 
     if (!this.disableAnalytics) {
