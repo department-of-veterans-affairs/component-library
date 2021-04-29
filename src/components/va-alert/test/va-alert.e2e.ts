@@ -83,7 +83,7 @@ describe('va-alert', () => {
   it('fires an analytics event when a link is clicked', async () => {
     const page = await newE2EPage();
     await page.setContent(
-      '<va-alert><a href="#">This is a link</a></va-alert>',
+      '<va-alert><h4 slot="headline">This is an alert</h4><a href="#">This is a link</a></va-alert>',
     );
 
     const analyticsSpy = await page.spyOnEvent('component-library-analytics');
@@ -95,6 +95,7 @@ describe('va-alert', () => {
       action: 'linkClick',
       componentName: 'AlertBox',
       details: {
+        headline: 'This is an alert',
         backgroundOnly: false,
         clickLabel: 'This is a link',
         status: 'info',

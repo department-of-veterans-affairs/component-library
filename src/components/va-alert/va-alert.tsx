@@ -1,4 +1,12 @@
-import { Component, Event, EventEmitter, Host, Prop, h } from '@stencil/core';
+import {
+  Component,
+  Element,
+  Event,
+  EventEmitter,
+  Host,
+  Prop,
+  h,
+} from '@stencil/core';
 
 @Component({
   tag: 'va-alert',
@@ -6,6 +14,8 @@ import { Component, Event, EventEmitter, Host, Prop, h } from '@stencil/core';
   shadow: true,
 })
 export class VaAlert {
+  @Element() el!: any;
+
   /**
    * Determines the icon and border/background color.
    * One of `info`, `error`, `success`, `warning`, or `continue`
@@ -56,6 +66,19 @@ export class VaAlert {
   }
 
   private handleAlertBodyClick(e: MouseEvent): void {
+    let headlineText = null;
+
+    // This is the happy path, meaning the user isn't using IE11
+    try {
+      const children = this.el.shadowRoot.querySelector('slot').assignedNodes();
+      const headlineNode = children[0];
+      headlineText = headlineNode.textContent;
+    } catch (e) {
+      // This is where we handle the edge case of the user being on IE11
+      const children = this.el.shadowRoot.childNodes;
+      headlineText = children[0].textContent;
+    }
+
     if (!this.disableAnalytics) {
       const target = e.target as HTMLElement;
       // If it's a link being clicked, dispatch an analytics event
@@ -65,7 +88,7 @@ export class VaAlert {
           action: 'linkClick',
           details: {
             clickLabel: target.innerText,
-            // headline: this.headline,
+            headline: headlineText,
             status: this.status,
             backgroundOnly: this.backgroundOnly,
             closeable: this.closeable,
