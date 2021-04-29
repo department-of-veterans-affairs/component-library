@@ -104,6 +104,30 @@ describe('va-alert', () => {
     });
   });
 
+  it('uses a null headline in the analytics event detail when the heading is absent', async () => {
+    const page = await newE2EPage();
+    await page.setContent(
+      '<va-alert><a href="#">This is a link</a></va-alert>',
+    );
+
+    const analyticsSpy = await page.spyOnEvent('component-library-analytics');
+
+    const link = await page.find('va-alert a');
+    await link.click();
+
+    expect(analyticsSpy).toHaveReceivedEventDetail({
+      action: 'linkClick',
+      componentName: 'AlertBox',
+      details: {
+        headline: null,
+        backgroundOnly: false,
+        clickLabel: 'This is a link',
+        status: 'info',
+        closeable: false,
+      },
+    });
+  });
+
   it('does not fire an analytics event when disableAnalytics is passed', async () => {
     const page = await newE2EPage();
     await page.setContent(
