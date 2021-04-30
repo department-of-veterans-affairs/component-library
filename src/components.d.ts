@@ -52,6 +52,32 @@ export namespace Components {
          */
         "subheader": string;
     }
+    interface VaAlert {
+        /**
+          * If true, renders the alert with only a background color corresponding to the status - no icon or left border.
+         */
+        "backgroundOnly": boolean;
+        /**
+          * Aria-label text for the close button.
+         */
+        "closeBtnAriaLabel": string;
+        /**
+          * If true, a close button will be displayed.
+         */
+        "closeable": boolean;
+        /**
+          * If true, doesn't fire the CustomEvent which can be used for analytics tracking.
+         */
+        "disableAnalytics": boolean;
+        /**
+          * Determines the icon and border/background color. One of `info`, `error`, `success`, `warning`, or `continue`
+         */
+        "status": string;
+        /**
+          * If true, the alert will be visible.
+         */
+        "visible": boolean;
+    }
     interface VaOnThisPage {
     }
 }
@@ -74,6 +100,12 @@ declare global {
         prototype: HTMLVaAccordionItemElement;
         new (): HTMLVaAccordionItemElement;
     };
+    interface HTMLVaAlertElement extends Components.VaAlert, HTMLStencilElement {
+    }
+    var HTMLVaAlertElement: {
+        prototype: HTMLVaAlertElement;
+        new (): HTMLVaAlertElement;
+    };
     interface HTMLVaOnThisPageElement extends Components.VaOnThisPage, HTMLStencilElement {
     }
     var HTMLVaOnThisPageElement: {
@@ -84,6 +116,7 @@ declare global {
         "my-component": HTMLMyComponentElement;
         "va-accordion": HTMLVaAccordionElement;
         "va-accordion-item": HTMLVaAccordionItemElement;
+        "va-alert": HTMLVaAlertElement;
         "va-on-this-page": HTMLVaOnThisPageElement;
     }
 }
@@ -139,12 +172,41 @@ declare namespace LocalJSX {
          */
         "subheader"?: string;
     }
+    interface VaAlert {
+        /**
+          * If true, renders the alert with only a background color corresponding to the status - no icon or left border.
+         */
+        "backgroundOnly"?: boolean;
+        /**
+          * Aria-label text for the close button.
+         */
+        "closeBtnAriaLabel"?: string;
+        /**
+          * If true, a close button will be displayed.
+         */
+        "closeable"?: boolean;
+        /**
+          * If true, doesn't fire the CustomEvent which can be used for analytics tracking.
+         */
+        "disableAnalytics"?: boolean;
+        "onClose"?: (event: CustomEvent<any>) => void;
+        "onComponent-library-analytics"?: (event: CustomEvent<any>) => void;
+        /**
+          * Determines the icon and border/background color. One of `info`, `error`, `success`, `warning`, or `continue`
+         */
+        "status"?: string;
+        /**
+          * If true, the alert will be visible.
+         */
+        "visible"?: boolean;
+    }
     interface VaOnThisPage {
     }
     interface IntrinsicElements {
         "my-component": MyComponent;
         "va-accordion": VaAccordion;
         "va-accordion-item": VaAccordionItem;
+        "va-alert": VaAlert;
         "va-on-this-page": VaOnThisPage;
     }
 }
@@ -155,6 +217,7 @@ declare module "@stencil/core" {
             "my-component": LocalJSX.MyComponent & JSXBase.HTMLAttributes<HTMLMyComponentElement>;
             "va-accordion": LocalJSX.VaAccordion & JSXBase.HTMLAttributes<HTMLVaAccordionElement>;
             "va-accordion-item": LocalJSX.VaAccordionItem & JSXBase.HTMLAttributes<HTMLVaAccordionItemElement>;
+            "va-alert": LocalJSX.VaAlert & JSXBase.HTMLAttributes<HTMLVaAlertElement>;
             "va-on-this-page": LocalJSX.VaOnThisPage & JSXBase.HTMLAttributes<HTMLVaOnThisPageElement>;
         }
     }
