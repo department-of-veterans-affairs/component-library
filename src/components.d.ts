@@ -76,6 +76,28 @@ export namespace Components {
     }
     interface VaOnThisPage {
     }
+    interface VaPagination {
+        /**
+          * Number of pages to show on the edges; maxes out at 3
+         */
+        "edges": number;
+        /**
+          * Text added to aria-labels. Any included `{page}` will be replaced with the associated page number
+         */
+        "linkAriaLabel": string;
+        /**
+          * The maximum number of pages to show at once. This includes the 2 edges & 2 ellipsis even when not visible. Best if this is an odd number to maintain symmetry
+         */
+        "maxVisible": number;
+        /**
+          * The current page number
+         */
+        "page": number;
+        /**
+          * The total number of pages
+         */
+        "total": number;
+    }
 }
 declare global {
     interface HTMLMyComponentElement extends Components.MyComponent, HTMLStencilElement {
@@ -108,12 +130,19 @@ declare global {
         prototype: HTMLVaOnThisPageElement;
         new (): HTMLVaOnThisPageElement;
     };
+    interface HTMLVaPaginationElement extends Components.VaPagination, HTMLStencilElement {
+    }
+    var HTMLVaPaginationElement: {
+        prototype: HTMLVaPaginationElement;
+        new (): HTMLVaPaginationElement;
+    };
     interface HTMLElementTagNameMap {
         "my-component": HTMLMyComponentElement;
         "va-accordion": HTMLVaAccordionElement;
         "va-accordion-item": HTMLVaAccordionItemElement;
         "va-alert": HTMLVaAlertElement;
         "va-on-this-page": HTMLVaOnThisPageElement;
+        "va-pagination": HTMLVaPaginationElement;
     }
 }
 declare namespace LocalJSX {
@@ -193,12 +222,39 @@ declare namespace LocalJSX {
     }
     interface VaOnThisPage {
     }
+    interface VaPagination {
+        /**
+          * Number of pages to show on the edges; maxes out at 3
+         */
+        "edges"?: number;
+        /**
+          * Text added to aria-labels. Any included `{page}` will be replaced with the associated page number
+         */
+        "linkAriaLabel"?: string;
+        /**
+          * The maximum number of pages to show at once. This includes the 2 edges & 2 ellipsis even when not visible. Best if this is an odd number to maintain symmetry
+         */
+        "maxVisible"?: number;
+        /**
+          * This event is fired when a pagination link is selected
+         */
+        "onPageSelect"?: (event: CustomEvent<any>) => void;
+        /**
+          * The current page number
+         */
+        "page"?: number;
+        /**
+          * The total number of pages
+         */
+        "total"?: number;
+    }
     interface IntrinsicElements {
         "my-component": MyComponent;
         "va-accordion": VaAccordion;
         "va-accordion-item": VaAccordionItem;
         "va-alert": VaAlert;
         "va-on-this-page": VaOnThisPage;
+        "va-pagination": VaPagination;
     }
 }
 export { LocalJSX as JSX };
@@ -210,6 +266,7 @@ declare module "@stencil/core" {
             "va-accordion-item": LocalJSX.VaAccordionItem & JSXBase.HTMLAttributes<HTMLVaAccordionItemElement>;
             "va-alert": LocalJSX.VaAlert & JSXBase.HTMLAttributes<HTMLVaAlertElement>;
             "va-on-this-page": LocalJSX.VaOnThisPage & JSXBase.HTMLAttributes<HTMLVaOnThisPageElement>;
+            "va-pagination": LocalJSX.VaPagination & JSXBase.HTMLAttributes<HTMLVaPaginationElement>;
         }
     }
 }
