@@ -85,20 +85,16 @@ describe('va-accordion', () => {
     await page.setContent(`
       <va-accordion>
         <va-accordion-item header="First item" subheader="First subheader">Some content</va-accordion-item>
-        <va-accordion-item header="Second item" subheader="Second subheader">A bit more</va-accordion-item>
       </va-accordion>`,
     );
 
     const analyticsSpy = await page.spyOnEvent('component-library-analytics');
 
-    const buttons = await page.findAll(
+    const button = await page.find(
       'va-accordion-item >>> button[aria-expanded="false"]',
     );
-    expect(buttons.length).toEqual(2);
 
-    await buttons[0].click();
-
-    console.log("**********", analyticsSpy.events[0].detail);
+    await button.click();
 
     expect(analyticsSpy).toHaveReceivedEventDetail({
       action: 'expand',
@@ -116,18 +112,14 @@ describe('va-accordion', () => {
     await page.setContent(`
       <va-accordion disable-analytics="true">
         <va-accordion-item header="First item" subheader="First subheader">Some content</va-accordion-item>
-        <va-accordion-item header="Second item" subheader="Second subheader">A bit more</va-accordion-item>
       </va-accordion>`,
     );
 
     const analyticsSpy = await page.spyOnEvent('component-library-analytics');
 
-    const buttons = await page.findAll(
-      'va-accordion-item >>> button[aria-expanded="false"]',
-    );
-    expect(buttons.length).toEqual(2);
+    const button = await page.find('va-accordion-item');
 
-    await buttons[0].click();
+    await button.click();
 
     expect(analyticsSpy).toHaveReceivedEventTimes(0);
   });
