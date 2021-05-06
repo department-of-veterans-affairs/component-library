@@ -104,17 +104,6 @@ export class VaPagination {
   };
 
   /**
-   * Key down event handler - this allows the user to hold down the key to
-   * quickly navigate through the pages
-   */
-  private handleKeyDown = (key: string, page: number) => {
-    const activate = ['Enter', ' ', 'Spacebar' /* IE11 */];
-    if (activate.includes(key)) {
-      this.onPageSelected(page);
-    }
-  };
-
-  /**
    * Return common link properties
    */
   private getLinkProps = ({ page, current = false, className = '' }) => ({
@@ -127,7 +116,6 @@ export class VaPagination {
       this.currentPage = page;
       this.onPageSelected(page);
     },
-    onKeyDown: (event: KeyboardEvent) => this.handleKeyDown(event.key, page)
   });
 
   
