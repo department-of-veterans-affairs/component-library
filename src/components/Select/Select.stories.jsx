@@ -13,9 +13,7 @@ const Template = args => {
     setValue(newValue);
   };
 
-  return (
-    <Select {...args} value={value} onValueChange={onValueChange} />
-  );
+  return <Select {...args} value={value} onValueChange={onValueChange} />;
 };
 
 const defaultArgs = {
@@ -55,4 +53,10 @@ export const AriaLiveRegion = Template.bind({});
 AriaLiveRegion.args = {
   ...defaultArgs,
   ariaLiveRegionText: 'The following branch was selected: ',
+};
+
+export const WithAnalytics = Template.bind({});
+WithAnalytics.args = {
+  ...defaultArgs,
+  enableAnalytics: true,
 };

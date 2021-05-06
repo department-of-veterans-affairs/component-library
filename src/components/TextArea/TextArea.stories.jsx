@@ -13,9 +13,7 @@ const Template = args => {
     setField(newField);
   };
 
-  return (
-    <TextArea {...args} field={field} onValueChange={onValueChange} />
-  );
+  return <TextArea {...args} field={field} onValueChange={onValueChange} />;
 };
 
 const defaultArgs = {
@@ -61,4 +59,10 @@ MaxChars.args = {
   ...defaultArgs,
   charMax: 16,
   placeholder: 'No more than 16 characters',
+};
+
+export const WithAnalytics = Template.bind({});
+WithAnalytics.args = {
+  ...defaultArgs,
+  enableAnalytics: true,
 };

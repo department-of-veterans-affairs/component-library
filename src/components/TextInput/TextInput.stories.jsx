@@ -13,9 +13,7 @@ const Template = args => {
     setField(newField);
   };
 
-  return (
-    <TextInput {...args} field={field} onValueChange={onValueChange} />
-  );
+  return <TextInput {...args} field={field} onValueChange={onValueChange} />;
 };
 
 const defaultArgs = {
@@ -64,4 +62,10 @@ Autocomplete.args = {
   label: 'Email',
   name: 'email',
   placeholder: 'This should autocomplete using email addresses',
+};
+
+export const WithAnalytics = Template.bind({});
+WithAnalytics.args = {
+  ...defaultArgs,
+  enableAnalytics: true,
 };

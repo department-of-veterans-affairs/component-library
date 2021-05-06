@@ -2,6 +2,8 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { isUndefined, uniqueId } from 'lodash';
 
+import dispatchAnalyticsEvent from '../../helpers/analytics';
+
 class Checkbox extends React.Component {
   constructor() {
     super();
@@ -13,7 +15,21 @@ class Checkbox extends React.Component {
   }
 
   handleChange(domEvent) {
-    this.props.onValueChange(domEvent.target.checked);
+    const isChecked = domEvent.target.checked;
+
+    if (isChecked && this.props.enableAnalytics) {
+      dispatchAnalyticsEvent({
+        componentName: 'Checkbox',
+        action: 'change',
+        details: {
+          label: this.props.label,
+          labelAboveCheckbox: this.props.labelAboveCheckbox,
+          required: this.props.required,
+        },
+      });
+    }
+
+    this.props.onValueChange(isChecked);
   }
 
   render() {
@@ -81,6 +97,10 @@ Checkbox.propTypes = {
    */
   checked: PropTypes.bool,
   /**
+   * Optionally adds one or more CSS classes to the NAV element
+   */
+  className: PropTypes.string,
+  /**
    * Error message for the modal
    */
   errorMessage: PropTypes.string,
@@ -140,6 +160,11 @@ Checkbox.propTypes = {
    * If the checkbox is required or not
    */
   required: PropTypes.bool,
+  /**
+   * Analytics tracking function(s) will be called. Form components
+   * are disabled by default due to PII/PHI concerns.
+   */
+  enableAnalytics: PropTypes.bool,
 };
 
 export default Checkbox;
