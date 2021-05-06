@@ -52,7 +52,9 @@ class RadioButtons extends React.Component {
 
   handleChange(domEvent) {
     const optionValue = domEvent.target.value;
-    const optionLabel = domEvent.target.dataset.label;
+    const optionLabel = domEvent.target.parentElement.querySelector(
+      `label[for="${domEvent.target.id}"`,
+    ).innerText;
 
     if (this.props.enableAnalytics) {
       dispatchAnalyticsEvent({
@@ -126,7 +128,6 @@ class RadioButtons extends React.Component {
               onKeyDown={this.props.onKeyDown}
               value={optionValue}
               onChange={this.handleChange}
-              data-label={optionLabel}
             />
 
             <label
