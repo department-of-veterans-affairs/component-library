@@ -34,7 +34,7 @@ export class VaPagination {
   /**
    * The current page number
    */
-  @Prop({ reflect: true }) page: number = 1;
+  @Prop() page: number = 1;
   /**
    * The total number of pages
    */
@@ -120,7 +120,6 @@ export class VaPagination {
   private getLinkProps = ({ page, current = false, className = '' }) => ({
     href: '#',
     class: className,
-    'data-page': page,
     'aria-label': (this.linkAriaLabel || '').replace(/\{page\}/g, page),
     'aria-current': current ? 'page' : null,
     onClick: (event: MouseEvent) => {
@@ -166,7 +165,7 @@ export class VaPagination {
   /**
    * Build page links
    */
-  private buildLink = (index: number, { current, total }) => {
+  private buildLink = (index: number, current: number, total: number) => {
     let page = index + 1;
     if (page < 1) {
       page = 1;
@@ -211,18 +210,18 @@ export class VaPagination {
     // build start edge links & add ellipsis
     if (start > 0 && edges > 0) {
       for (index = 0; index < Math.min(edges, start); index++) {
-        pages.push(this.buildLink(index, { current, total }));
+        pages.push(this.buildLink(index, current, total));
       }
       if (edges < start && (start - edges !== 1)) {
         pages.push(this.addEllipsis());
       } else if (start - edges === 1) {
-        pages.push(this.buildLink(edges, { current, total }));
+        pages.push(this.buildLink(edges, current, total));
       }
     }
 
     // build middle links
     for (index = start; index < end; index++) {
-      pages.push(this.buildLink(index, { current, total }));
+      pages.push(this.buildLink(index, current, total));
     }
 
     // build ellipsis & ending edge links
@@ -233,14 +232,14 @@ export class VaPagination {
       ) {
         pages.push(this.addEllipsis());
       } else if (total - edges - end === 1) {
-        pages.push(this.buildLink(end, { current, total }));
+        pages.push(this.buildLink(end, current, total));
       }
       for (
         index = Math.max(total - edges, end);
         index < total;
         index++
       ) {
-        pages.push(this.buildLink(index, { current, total }));
+        pages.push(this.buildLink(index, current, total));
       }
     }
     return pages;
