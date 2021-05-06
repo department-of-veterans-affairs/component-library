@@ -67,7 +67,6 @@ export class VaPagination {
    */
   /**
    * Validate settings & return clamped results
-   * @returns Options
    */
   private checkValidation = () => {
     const opts = {
@@ -98,7 +97,6 @@ export class VaPagination {
 
   /**
    * Set current page state & emit pageSelect event
-   * @param page - user selected page
    */
   private onPageSelected = (page: number) => {
     this.currentPage = page;
@@ -108,8 +106,6 @@ export class VaPagination {
   /**
    * Key down event handler - this allows the user to hold down the key to
    * quickly navigate through the pages
-   * @param key - event.key
-   * @param page - page associated with the interaction
    */
   private handleKeyDown = (key: string, page: number) => {
     const activate = ['Enter', ' ', 'Spacebar' /* IE11 */];
@@ -120,16 +116,8 @@ export class VaPagination {
 
   /**
    * Return common link properties
-   * @param page - page associated with the link
-   * @param current - "page" indicates that the link is for the current page
-   *   otherwise set to null so the attribute isn't included
-   * @param className - custom link class
    */
-  private getLinkProps = ({
-    page,
-    current = '',
-    className = '',
-  }) => ({
+  private getLinkProps = ({ page, current = false, className = '' }) => ({
     href: '#',
     class: className,
     'data-page': page,
@@ -143,71 +131,40 @@ export class VaPagination {
     onKeyDown: (event: KeyboardEvent) => this.handleKeyDown(event.key, page)
   });
 
-  /**
-   * Add previous link. Renders a span when there is no previous page to
-   * navigate to
-   * @param Options
-   * @returns {JSX} previous link
-   */
-  private addPrevLink = ({ current }) => {
-    const prevPage = current - 1 >= 1 ? current - 1 : null;
-    const content = (
-      <Fragment>
-        <span class="vads-u-visibility--screen-reader">Previous</span>
-        <span aria-hidden="true">{'\u2039\u00a0\u00a0'}
-          <span class="hide-narrow">Prev</span>
-        </span>
-      </Fragment>
-    );
-    if (prevPage === null) {
-      return <li aria-hidden="true"><span class="prev">{content}</span></li>;
-    }
-    const props = this.getLinkProps({
-      page: prevPage,
-      className: 'prev',
-    });
-    return <li><a {...props}>{content}</a></li>;
-  };
-
-    /**
-   * Add next link. Renders a span when there is no next page to navigate to
-   * @param Options
-   * @returns {JSX} next link
-   */
-  private addNextLink = ({ current, total }) => {
-    const nextPage = current + 1 <= total
-      ? current + 1
-      : null;
-    const content = (
-      <Fragment>
-        <span class="hide-narrow">Next</span>
-        {'\u00a0\u00a0\u203a'}
-      </Fragment>
-    );
-    if (nextPage === null) {
-      return <li aria-hidden="true"><span class="next">{content}</span></li>;
-    }
-    const props = this.getLinkProps({
-      page: nextPage,
-      className: 'next',
-    });
-    return <li><a {...props}>{content}</a></li>;
-  };
-
+  
   /**
    * Add ellipsis separator
-   * @returns {JSX} ellipsis separator
    */
   private addEllipsis = () =>
-    <li aria-hidden="true">
-      <span class='ellipsis'>{'\u2026'}</span>
-    </li>;
+   <li aria-hidden="true">
+     <span class='ellipsis'>{'\u2026'}</span>
+   </li>;
+
+  /**
+   * Build end (prev or next) link. Renders a span when there is no next page to
+   * navigate to
+   */
+  private buildEndLink = (className: string|null, page: number) => {
+    const isNext = className === 'next';
+    const content = (
+      <Fragment>
+        <span class="vads-u-visibility--screen-reader">
+          {isNext ? 'Next' : 'Previous'}
+        </span>
+        {!isNext && <span aria-hidden="true">{'\u2039\u00a0\u00a0'}</span>}
+        <span class="hide-narrow">{isNext ? 'Next' : 'Prev'}</span>
+        {isNext && <span aria-hidden="true">{'\u00a0\u00a0\u203a'}</span>}
+      </Fragment>
+    );
+    return page ? (
+      <li><a {...this.getLinkProps({ className, page })}>{content}</a></li>
+    ) : (
+      <li aria-hidden="true"><span class={className}>{content}</span></li>
+    );
+  };
 
   /**
    * Build page links
-   * @param index - Current page index to build 
-   * @param Options
-   * @returns {JSX} page link
    */
   private buildLink = (index: number, { current, total }) => {
     let page = index + 1;
@@ -216,14 +173,14 @@ export class VaPagination {
     } else if (page >= total) {
       page = total;
     }
-    const isCurrent = page === current;
+    const isCurr = page === current;
     const props = this.getLinkProps({
       page,
-      current: isCurrent ? 'page' : '',
-      className: `va-pagination-link ${isCurrent ? 'va-pagination-active' : ''}`,
+      current: isCurr,
+      className: `va-pagination-link ${isCurr ? 'va-pagination-active' : ''}`,
     });
     return (
-      <li class={isCurrent ? 'va-pagination-current' : null}>
+      <li class={isCurr ? 'va-pagination-current' : null}>
         <a {...props}>{page}</a>
       </li>
     );
@@ -231,8 +188,6 @@ export class VaPagination {
 
   /**
    * Calculates and build visible pages
-   * @param Options
-   * @returns {JSX} all visible page links
    */
   private buildPager = ({ current, total, edges, visible }) => {
     let index : number;
@@ -293,12 +248,14 @@ export class VaPagination {
 
   render() {
     const opts = this.checkValidation();
+    const prevPage = opts.current - 1 >= 1 ? opts.current - 1 : null;
+    const nextPage = opts.current + 1 <= opts.total ? opts.current + 1 : null;
     return (
       <nav aria-label="pagination">
         <ul>
-          {this.addPrevLink(opts)}
+          {this.buildEndLink('prev', prevPage)}
           {this.buildPager(opts)}
-          {this.addNextLink(opts)}
+          {this.buildEndLink('next', nextPage)}
         </ul>
       </nav>
     );
