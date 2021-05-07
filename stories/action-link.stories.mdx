@@ -1,17 +1,26 @@
-import { Meta, Canvas } from '@storybook/addon-docs/blocks';
+import { Meta, Story, Canvas } from '@storybook/addon-docs/blocks';
 
 <Meta title="Components/Action link" />
 
+# Primary
 <Canvas>
-  <a className="vads-c-action-link--blue" href="#">Call to action</a>
+  <Story name="Primary">
+    <a className="vads-c-action-link--green" href="#">Call to action</a>
+  </Story>
 </Canvas>
 
+# Secondary
 <Canvas>
-  <a className="vads-c-action-link--green" href="#">Call to action</a>
+  <Story name="Secondary">
+    <a className="vads-c-action-link--blue" href="#">Call to action</a>
+  </Story>
 </Canvas>
 
+# Reverse
 <Canvas>
-  <div class="usa-background-dark" style={{ padding: '10px 0 20px' }}>
-    <a className="vads-c-action-link--white" href="#">Call to action</a>
-  </div>
+  <Story name="Reverse">
+    <div className="usa-background-dark" style={{ padding: '10px 0 20px' }}>
+      <a className="vads-c-action-link--white" href="#">Call to action</a>
+    </div>
+  </Story>
 </Canvas>
