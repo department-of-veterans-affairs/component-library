@@ -7,6 +7,8 @@ import ExpandingGroup from '../ExpandingGroup/ExpandingGroup';
 
 import { makeField } from '../../helpers/fields';
 
+import dispatchAnalyticsEvent from '../../helpers/analytics';
+
 /**
  * A radio button group with a label.
  *
@@ -49,7 +51,24 @@ class RadioButtons extends React.Component {
   }
 
   handleChange(domEvent) {
-    this.props.onValueChange(makeField(domEvent.target.value, true));
+    const optionValue = domEvent.target.value;
+    const optionLabel = domEvent.target.parentElement.querySelector(
+      `label[for="${domEvent.target.id}"`,
+    ).innerText;
+
+    if (this.props.enableAnalytics) {
+      dispatchAnalyticsEvent({
+        componentName: 'RadioButtons',
+        action: 'change',
+        details: {
+          label: this.props.label,
+          optionLabel: optionLabel,
+          required: this.props.required,
+        },
+      });
+    }
+
+    this.props.onValueChange(makeField(optionValue, true));
   }
 
   render() {
@@ -175,6 +194,10 @@ RadioButtons.propTypes = {
    */
   additionalLegendClass: PropTypes.string,
   /**
+   * Child elements (content)
+   */
+  children: PropTypes.node,
+  /**
    * Radio button group error message
    */
   errorMessage: PropTypes.string,
@@ -245,6 +268,11 @@ RadioButtons.propTypes = {
    * Toggles required field indicator
    */
   required: PropTypes.bool,
+  /**
+   * Analytics tracking function(s) will be called. Form components
+   * are disabled by default due to PII/PHI concerns.
+   */
+  enableAnalytics: PropTypes.bool,
 };
 
 export default RadioButtons;

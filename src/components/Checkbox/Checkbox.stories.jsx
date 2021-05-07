@@ -29,3 +29,10 @@ Error.args = {
   ...defaultArgs,
   errorMessage: 'Error message',
 };
+
+export const WithAnalytics = Template.bind({});
+
+WithAnalytics.args = {
+  ...defaultArgs,
+  enableAnalytics: true,
+};

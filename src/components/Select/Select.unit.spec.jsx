@@ -6,12 +6,17 @@ import { axeCheck } from '../../helpers/test-helpers';
 
 import Select from './Select.jsx';
 import { makeField } from '../../helpers/fields.js';
+import sinon from 'sinon';
+import { testAnalytics } from '../../helpers/test-helpers';
 
 chai.use(chaiAsPromised);
 
 describe('<Select>', () => {
   const testValue = makeField('');
-  const options = [{ value: 1, label: 'first' }, { value: 2, label: 'second' }];
+  const options = [
+    { value: 1, label: 'first' },
+    { value: 2, label: 'second' },
+  ];
 
   it('calls onValueChange with input value', () => {
     let valueChanged;
@@ -41,7 +46,7 @@ describe('<Select>', () => {
         label="my label"
         options={options}
         value={testValue}
-        onValueChange={_update => {}}
+        onValueChange={() => {}}
       />,
     );
 
@@ -69,7 +74,7 @@ describe('<Select>', () => {
         label="my label"
         options={options}
         value={testValue}
-        onValueChange={_update => {}}
+        onValueChange={() => {}}
       />,
     );
 
@@ -96,7 +101,7 @@ describe('<Select>', () => {
         label="my label"
         options={options}
         value={testValue}
-        onValueChange={_update => {}}
+        onValueChange={() => {}}
       />,
     ));
 
@@ -107,7 +112,7 @@ describe('<Select>', () => {
         options={options}
         errorMessage="error message"
         value={testValue}
-        onValueChange={_update => {}}
+        onValueChange={() => {}}
       />,
     );
 
@@ -141,7 +146,7 @@ describe('<Select>', () => {
         options={options}
         errorMessage="error message"
         value={testValue}
-        onValueChange={_update => {}}
+        onValueChange={() => {}}
       />,
     ));
 
@@ -151,7 +156,7 @@ describe('<Select>', () => {
         label="my label"
         options={options}
         value={testValue}
-        onValueChange={_update => {}}
+        onValueChange={() => {}}
       />,
     );
     expect(tree.find('label').text()).to.equal('my label');
@@ -165,11 +170,13 @@ describe('<Select>', () => {
         label="my label"
         options={options}
         value={testValue}
-        onValueChange={_update => {}}
+        onValueChange={() => {}}
       />,
     );
     expect(tree.find('span').html()).to.include(`role="region"`);
-    expect(tree.find('span').text()).to.include('The following option was selected: ');
+    expect(tree.find('span').text()).to.include(
+      'The following option was selected: ',
+    );
     tree.unmount();
   });
 
@@ -179,7 +186,7 @@ describe('<Select>', () => {
         label="my label"
         options={options}
         value={testValue}
-        onValueChange={_update => {}}
+        onValueChange={() => {}}
       />,
     ));
 
@@ -190,7 +197,7 @@ describe('<Select>', () => {
         options={options}
         required
         value={testValue}
-        onValueChange={_update => {}}
+        onValueChange={() => {}}
       />,
     );
     expect(tree.find('label').text()).to.equal('my label(*Required)');
@@ -204,7 +211,7 @@ describe('<Select>', () => {
         options={options}
         required
         value={testValue}
-        onValueChange={_update => {}}
+        onValueChange={() => {}}
       />,
     ));
 
@@ -214,7 +221,7 @@ describe('<Select>', () => {
         label="my label"
         options={options}
         value={testValue}
-        onValueChange={_update => {}}
+        onValueChange={() => {}}
       />,
     );
 
@@ -230,5 +237,60 @@ describe('<Select>', () => {
     expect(selects.find('id')).to.not.be.undefined;
     expect(selects.prop('id')).to.equal(`errorable-select-${idNum}`);
     tree.unmount();
+  });
+
+  describe('analytics event', function () {
+    it('should NOT be triggered when enableAnalytics is not true', () => {
+      const wrapper = shallow(
+        <Select
+          label="my label"
+          options={options}
+          value={testValue}
+          onValueChange={() => {}}
+        />,
+      );
+
+      const spy = testAnalytics(wrapper, () => {
+        wrapper
+          .find('select')
+          .first()
+          .simulate('change', { target: { value: 'first' } });
+      });
+
+      expect(spy.called).to.be.false;
+    });
+
+    it('should be triggered when Select option is changed', () => {
+      const wrapper = shallow(
+        <Select
+          label="my label"
+          options={options}
+          value={testValue}
+          onValueChange={() => {}}
+          enableAnalytics
+        />,
+      );
+
+      const spy = testAnalytics(wrapper, () => {
+        wrapper
+          .find('select')
+          .first()
+          .simulate('change', { target: { value: 'first' } });
+      });
+
+      expect(
+        spy.calledWith(
+          sinon.match.has('detail', {
+            componentName: 'Select',
+            action: 'change',
+            details: {
+              label: 'my label',
+              selectLabel: 'first',
+            },
+            version: sinon.match.string,
+          }),
+        ),
+      ).to.be.true;
+    });
   });
 });

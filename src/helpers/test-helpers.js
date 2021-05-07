@@ -1,5 +1,6 @@
 /* global axe */
 import { mount } from 'enzyme';
+import sinon from 'sinon';
 
 export function mountToDiv(component, id) {
   let div = document.getElementById(id);
@@ -66,4 +67,29 @@ ${nodeInfo}`;
       resolve();
     });
   });
+}
+
+/**
+ * @param {Object} wrapper - the Enzyme wrapper
+ * @param {function} act - A function to manipulate the wrapper
+ * @return sinon.spy
+ */
+export function testAnalytics(wrapper, act) {
+  const handleAnalyticsEvent = sinon.spy();
+  global.document.body.addEventListener(
+    'component-library-analytics',
+    handleAnalyticsEvent,
+  );
+
+  // Passing the `wrapper` isn't strictly speaking necessary since it'll probably
+  // be defined in the same scope as `act`, but it's good practice just in case.
+  // `act` is defined in a scope that doesn't have access to `wrapper`.
+  act(wrapper);
+
+  global.document.body.removeEventListener(
+    'component-library-analytics',
+    handleAnalyticsEvent,
+  );
+
+  return handleAnalyticsEvent;
 }
