@@ -34,7 +34,7 @@ export class VaPagination {
   /**
    * The current page number
    */
-  @Prop() page: number = 1;
+  @Prop({ reflect: true }) page: number = 1;
   /**
    * The total number of pages
    */
@@ -69,30 +69,19 @@ export class VaPagination {
    * Validate settings & return clamped results
    */
   private checkValidation = () => {
-    const opts = {
-      current: this.currentPage < 1 ? 1 : this.currentPage,
-      total: this.total < 1 ? 1 : this.total,
-      edges: this.edges < 0 ? 0 : this.edges,
-      visible: this.maxVisible,
-    }
-    if (opts.current > opts.total) {
-      opts.current = opts.total;
-    }
+    const total = Math.max(this.total, 1);
+    const current = Math.min(Math.max(this.currentPage, 1), total);
+
     // Set to a max of 3 to match the default of 9 maxVisible. We probably
     // wouldn't want to show more than 3 edge pages anyway. It would get really
     // messy on small screens
-    if (opts.edges > 3) {
-      opts.edges = 3;
-    }
+    const edges = Math.min(Math.max(this.edges, 0), 3);
+
     // edges * 2 + 2 ellipsis + 1 visible active link in the middle
-    let minVisible = opts.edges * 2 + 2 + 1;
-    if (minVisible > opts.total) {
-      minVisible = opts.total;
-    }
-    if (minVisible > opts.visible) {
-      opts.visible = minVisible;
-    }
-    return opts;
+    const minVisible = Math.min(edges * 2 + 2 + 1, total);
+    const visible = Math.max(this.maxVisible, minVisible);
+
+    return { total, current, edges, visible };
   }
 
   /**
