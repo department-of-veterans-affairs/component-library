@@ -1,7 +1,6 @@
 import {
   Component,
   Prop,
-  State,
   Event,
   EventEmitter,
   Fragment,
@@ -34,7 +33,7 @@ export class VaPagination {
   /**
    * The current page number
    */
-  @Prop({ reflect: true }) page: number = 1;
+  @Prop() page: number = 1;
   /**
    * The total number of pages
    */
@@ -55,8 +54,6 @@ export class VaPagination {
    */
   @Prop() linkAriaLabel: string = 'Load page {page}';
 
-  @State() currentPage: number = this.page;
-
   /**
    * Clamped props passed to functions
    * @typedef Options
@@ -70,7 +67,7 @@ export class VaPagination {
    */
   private checkValidation = () => {
     const total = Math.max(this.total, 1);
-    const current = Math.min(Math.max(this.currentPage, 1), total);
+    const current = Math.min(Math.max(this.page, 1), total);
 
     // Set to a max of 3 to match the default of 9 maxVisible. We probably
     // wouldn't want to show more than 3 edge pages anyway. It would get really
@@ -88,7 +85,7 @@ export class VaPagination {
    * Set current page state & emit pageSelect event
    */
   private onPageSelected = (page: number) => {
-    this.currentPage = page;
+    this.page = page;
     this.pageSelect.emit(page);
   };
 
@@ -102,7 +99,7 @@ export class VaPagination {
     'aria-current': current ? 'page' : null,
     onClick: (event: MouseEvent) => {
       event.preventDefault();
-      this.currentPage = page;
+      this.page = page;
       this.onPageSelected(page);
     },
   });
