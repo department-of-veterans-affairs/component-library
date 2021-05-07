@@ -3,6 +3,8 @@ import React from 'react';
 import _ from 'lodash';
 import { makeField } from '../../helpers/fields';
 
+import dispatchAnalyticsEvent from '../../helpers/analytics';
+
 /**
  * A form select with a label that can display error messages.
  */
@@ -18,7 +20,21 @@ class Select extends React.Component {
   }
 
   handleChange(domEvent) {
-    this.props.onValueChange(makeField(domEvent.target.value, true));
+    const selectLabel = domEvent.target.value;
+
+    if (this.props.enableAnalytics) {
+      dispatchAnalyticsEvent({
+        componentName: 'Select',
+        action: 'change',
+
+        details: {
+          label: this.props.label,
+          selectLabel: selectLabel,
+        },
+      });
+    }
+
+    this.props.onValueChange(makeField(selectLabel, true));
   }
 
   render() {
@@ -31,9 +47,9 @@ class Select extends React.Component {
       errorSpanId = `${this.selectId}-error-message`;
       errorSpan = (
         <span
-          className='usa-input-error-message'
+          className="usa-input-error-message"
           id={`${errorSpanId}`}
-          role='alert'
+          role="alert"
         >
           {this.props.errorMessage}
         </span>
@@ -43,7 +59,7 @@ class Select extends React.Component {
     // Calculate required.
     let requiredSpan = undefined;
     if (this.props.required) {
-      requiredSpan = <span className='form-required-span'>(*Required)</span>;
+      requiredSpan = <span className="form-required-span">(*Required)</span>;
     }
 
     // Calculate options for select
@@ -91,16 +107,16 @@ class Select extends React.Component {
           onChange={this.handleChange}
         >
           {this.props.includeBlankOption && (
-            <option value=''>{this.props.emptyDescription}</option>
+            <option value="">{this.props.emptyDescription}</option>
           )}
           {optionElements}
         </select>
         {this.props.ariaLiveRegionText && (
           <span
-            role='region'
-            id='selectAliveRegionInfo'
-            className='vads-u-visibility--screen-reader'
-            aria-live='assertive'
+            role="region"
+            id="selectAliveRegionInfo"
+            className="vads-u-visibility--screen-reader"
+            aria-live="assertive"
           >
             {`${this.props.ariaLiveRegionText} ${selectedValue}`}
           </span>
@@ -126,6 +142,11 @@ Select.propTypes = {
    * Select field label.
    */
   label: PropTypes.oneOfType([PropTypes.string, PropTypes.element]).isRequired,
+
+  /**
+   * Class name(s) for the label.
+   */
+  labelClass: PropTypes.string,
 
   /**
    * KeyDown handler
@@ -187,6 +208,12 @@ Select.propTypes = {
    * Additional css class that is added to the select element.
    */
   ariaLiveRegionText: PropTypes.string,
+
+  /**
+   * Analytics tracking function(s) will be called. Form components
+   * are disabled by default due to PII/PHI concerns.
+   */
+  enableAnalytics: PropTypes.bool,
 };
 
 Select.defaultProps = {

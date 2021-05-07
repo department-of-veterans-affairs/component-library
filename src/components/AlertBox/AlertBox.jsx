@@ -127,7 +127,7 @@ AlertBox.propTypes = {
    */
   isVisible: PropTypes.bool,
   /**
-   * Child elements (content) of modal when displayed
+   * Child elements (content)
    */
   children: PropTypes.node,
   /**

@@ -6,6 +6,7 @@ import sinon from 'sinon';
 import TextArea from './TextArea';
 import { makeField } from '../../helpers/fields';
 import { axeCheck } from '../../helpers/test-helpers';
+import { testAnalytics } from '../../helpers/test-helpers';
 
 describe('<TextArea>', () => {
   it('ensure value changes propagate', () => {
@@ -44,10 +45,7 @@ describe('<TextArea>', () => {
       />,
     );
 
-    tree
-      .find('textarea')
-      .first()
-      .simulate('blur');
+    tree.find('textarea').first().simulate('blur');
     expect(valueChanged.dirty).to.eql(true);
     tree.unmount();
   });
@@ -80,7 +78,7 @@ describe('<TextArea>', () => {
       <TextArea
         field={makeField(1)}
         label="my label"
-        onValueChange={_update => {}}
+        onValueChange={() => {}}
       />,
     );
 
@@ -107,7 +105,7 @@ describe('<TextArea>', () => {
         field={makeField(1)}
         label="my label"
         errorMessage="error message"
-        onValueChange={_update => {}}
+        onValueChange={() => {}}
       />,
     );
 
@@ -136,7 +134,7 @@ describe('<TextArea>', () => {
       <TextArea
         field={makeField(1)}
         label="my label"
-        onValueChange={_update => {}}
+        onValueChange={() => {}}
       />,
     );
 
@@ -150,7 +148,7 @@ describe('<TextArea>', () => {
         field={makeField(1)}
         label="my label"
         required
-        onValueChange={_update => {}}
+        onValueChange={() => {}}
       />,
     );
 
@@ -164,7 +162,7 @@ describe('<TextArea>', () => {
       <TextArea
         field={makeField(1)}
         label="my label"
-        onValueChange={_update => {}}
+        onValueChange={() => {}}
       />,
     );
 
@@ -206,5 +204,56 @@ describe('<TextArea>', () => {
     );
 
     return check;
+  });
+
+  describe('analytics event', function () {
+    it('should NOT be triggered when enableAnalytics is not true', () => {
+      const wrapper = mount(
+        <TextArea
+          field={makeField('')}
+          label="test"
+          placeholder="Placeholder"
+          errorMessage="error"
+          onValueChange={value => value}
+        />,
+      );
+
+      const spy = testAnalytics(wrapper, () => {
+        wrapper.find('textarea').first().simulate('blur');
+      });
+
+      expect(spy.called).to.be.false;
+    });
+
+    it('should be triggered when field is blurred', () => {
+      const wrapper = mount(
+        <TextArea
+          field={makeField('Test Text')}
+          label="test"
+          placeholder="Placeholder"
+          errorMessage="error"
+          onValueChange={value => value}
+          enableAnalytics
+        />,
+      );
+
+      const spy = testAnalytics(wrapper, () => {
+        wrapper.find('textarea').first().simulate('blur');
+      });
+
+      expect(
+        spy.calledWith(
+          sinon.match.has('detail', {
+            componentName: 'TextArea',
+            action: 'blur',
+            details: {
+              label: 'test',
+              value: 'Test Text',
+            },
+            version: sinon.match.string,
+          }),
+        ),
+      ).to.be.true;
+    });
   });
 });

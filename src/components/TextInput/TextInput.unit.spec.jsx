@@ -4,6 +4,8 @@ import { axeCheck } from '../../helpers/test-helpers';
 import { expect } from 'chai';
 import TextInput from './TextInput.jsx';
 import { makeField } from '../../helpers/fields.js';
+import sinon from 'sinon';
+import { testAnalytics } from '../../helpers/test-helpers';
 
 describe('<TextInput>', () => {
   it('calls onValueChange with input value and dirty state', () => {
@@ -41,10 +43,7 @@ describe('<TextInput>', () => {
       />,
     );
 
-    wrapper
-      .find('input')
-      .first()
-      .simulate('blur');
+    wrapper.find('input').first().simulate('blur');
     expect(valueChanged.dirty).to.eql(true);
     wrapper.unmount();
   });
@@ -207,14 +206,8 @@ describe('<TextInput>', () => {
       />,
     );
 
-    const inputId = wrapper
-      .find('input')
-      .first()
-      .prop('id');
-    const labelFor = wrapper
-      .find('label')
-      .first()
-      .prop('htmlFor');
+    const inputId = wrapper.find('input').first().prop('id');
+    const labelFor = wrapper.find('label').first().prop('htmlFor');
     expect(inputId).to.eql(labelFor);
     wrapper.unmount();
   });
@@ -244,5 +237,52 @@ describe('<TextInput>', () => {
     );
 
     return check;
+  });
+
+  describe('analytics event', function () {
+    it('should NOT be triggered when enableAnalytics is not true', () => {
+      const wrapper = mount(
+        <TextInput
+          field={makeField('Test Text')}
+          label="test"
+          onValueChange={() => {}}
+        ></TextInput>,
+      );
+
+      const spy = testAnalytics(wrapper, () => {
+        wrapper.find('input[type="text"]').first().simulate('blur');
+      });
+
+      expect(spy.called).to.be.false;
+    });
+
+    it('should be triggered when field is blurred', () => {
+      const wrapper = mount(
+        <TextInput
+          field={makeField('Test Text')}
+          label="test"
+          onValueChange={() => {}}
+          enableAnalytics
+        ></TextInput>,
+      );
+
+      const spy = testAnalytics(wrapper, () => {
+        wrapper.find('input[type="text"]').first().simulate('blur');
+      });
+
+      expect(
+        spy.calledWith(
+          sinon.match.has('detail', {
+            componentName: 'TextInput',
+            action: 'blur',
+            details: {
+              label: 'test',
+              value: 'Test Text',
+            },
+            version: sinon.match.string,
+          }),
+        ),
+      ).to.be.true;
+    });
   });
 });

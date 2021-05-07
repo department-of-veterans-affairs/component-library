@@ -35,6 +35,8 @@ const defaultArgs = {
     },
     'Third option',
   ],
+  label: 'This is a Label',
+  value: { value: 'First option' },
 };
 
 export const Default = Template.bind({});
@@ -47,4 +49,11 @@ Error.args = {
   value: {
     value: 'Invalid option',
   },
+};
+
+export const WithAnalytics = Template.bind({});
+WithAnalytics.args = {
+  ...defaultArgs,
+  value: { value: 'First option' },
+  enableAnalytics: true,
 };

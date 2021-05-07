@@ -81,7 +81,7 @@ AdditionalInfo.propTypes = {
   triggerText: PropTypes.string.isRequired,
   onClick: PropTypes.func,
   /**
-   * Child elements (content) of modal when displayed
+   * Child elements (content)
    */
   children: PropTypes.node,
   /**
