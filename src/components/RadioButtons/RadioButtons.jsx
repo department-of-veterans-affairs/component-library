@@ -52,7 +52,7 @@ class RadioButtons extends React.Component {
 
   handleChange(domEvent) {
     const optionValue = domEvent.target.value;
-    const optionLabel = domEvent.target.parentElement.querySelector(
+    const optionLabel = domEvent.target.parentElement?.querySelector(
       `label[for="${domEvent.target.id}"`,
     ).innerText;
 
