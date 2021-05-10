@@ -20,6 +20,41 @@ const Template = args => {
   );
 };
 
+const CrisisTemplate = args => {
+  const [visible, setVisible] = useState(args.visible);
+  const onClose = () => setVisible(!visible);
+  const openModal = () => setVisible(true);
+  return (
+    <>
+      <div
+        className="va-crisis-line"
+        style={{ position: 'static', height: '600px' }}
+      >
+        <div className="va-flex">
+          <button
+            data-show="#modal-crisisline"
+            className="va-crisis-line-button va-overlay-trigger"
+            onClick={openModal}
+          >
+            <span className="va-flex">
+              <span className="vcl"></span>
+              Get help from Veterans Crisis Line
+            </span>
+          </button>
+        </div>
+      </div>
+      <Modal {...args} visible={visible} onClose={onClose}>
+        {args.children}
+      </Modal>
+      <div
+        id="modal-crisisline"
+        className="va-overlay va-modal va-modal-large"
+        role="alertdialog"
+      ></div>
+    </>
+  );
+};
+
 const defaultArgs = {
   ...Modal.defaultProps,
   visible: false,
@@ -92,4 +127,42 @@ HideCloseButton.args = {
   ...defaultArgs,
   hideCloseButton: true,
   clickToClose: true,
+};
+
+export const CrisisLineModal = CrisisTemplate.bind({});
+CrisisLineModal.args = {
+  ...defaultArgs,
+  primaryButton: null,
+  secondaryButton: null,
+  title: 'Get help from Veterans Crisis Line',
+  children: (
+    <div className="va-crisis-panel" style={{ transform: 'none' }}>
+      <div className="va-overlay-body va-crisis-panel-body">
+        <ul>
+          <li>
+            <a href="tel:18002738255">
+              Call <strong>1-800-273-8255 (Press 1)</strong>
+            </a>
+          </li>
+          <li>
+            <a href="sms:838255">
+              Text to <b>838255</b>
+            </a>
+          </li>
+          <li>
+            <a href="https://www.veteranscrisisline.net/ChatTermsOfService.aspx?account=Veterans%20Chat">
+              Chat <b>confidentially now</b>
+            </a>
+          </li>
+        </ul>
+        <p>
+          If you are in crisis or having thoughts of suicide, visit{' '}
+          <a href="https://www.veteranscrisisline.net/">
+            VeteransCrisisLine.net
+          </a>{' '}
+          for more resources.
+        </p>
+      </div>
+    </div>
+  ),
 };
