@@ -28,7 +28,7 @@ const CrisisTemplate = args => {
     <>
       <div
         className="va-crisis-line"
-        style={{ position: 'static', height: '600px' }}
+        style={{ position: 'static', height: '600px', maxWidth: 'none' }}
       >
         <div className="va-flex">
           <button
