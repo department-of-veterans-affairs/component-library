@@ -28,7 +28,9 @@ describe('<SegmentedProgressBar/>', () => {
         handleAnalyticsEvent,
       );
 
-      const tree = mount(<SegmentedProgressBar current={0} total={5} />);
+      const tree = mount(
+        <SegmentedProgressBar current={0} total={5} enableAnalytics />,
+      );
 
       expect(
         handleAnalyticsEvent.calledWith(
@@ -60,7 +62,9 @@ describe('<SegmentedProgressBar/>', () => {
         handleAnalyticsEvent,
       );
 
-      const tree = mount(<SegmentedProgressBar current={0} total={5} />);
+      const tree = mount(
+        <SegmentedProgressBar current={0} total={5} enableAnalytics />,
+      );
 
       tree.setProps({ current: 1 });
 

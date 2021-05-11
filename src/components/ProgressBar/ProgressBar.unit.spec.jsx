@@ -26,7 +26,11 @@ describe('<ProgressBar/>', () => {
       );
 
       const tree = mount(
-        <ProgressBar percent={0} label="This is my ProgressBar." />,
+        <ProgressBar
+          percent={0}
+          label="This is my ProgressBar."
+          enableAnalytics
+        />,
       );
 
       expect(
@@ -60,7 +64,11 @@ describe('<ProgressBar/>', () => {
       );
 
       const tree = mount(
-        <ProgressBar percent={42} label="This is my ProgressBar." />,
+        <ProgressBar
+          percent={42}
+          label="This is my ProgressBar."
+          enableAnalytics
+        />,
       );
 
       tree.setProps({ percent: 100 });

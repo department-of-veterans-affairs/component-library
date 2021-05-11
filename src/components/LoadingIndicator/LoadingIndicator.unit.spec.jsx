@@ -34,7 +34,11 @@ describe('<LoadingIndicator>', () => {
   describe('analytics event', function () {
     it('should be triggered when component is unmounted', () => {
       const component = (
-        <LoadingIndicator message="Loading" label="aria label here" />
+        <LoadingIndicator
+          message="Loading"
+          label="aria label here"
+          enableAnalytics
+        />
       );
       const handleAnalyticsEvent = sinon.spy();
 
