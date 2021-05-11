@@ -19,8 +19,34 @@ const Template = args => (
 
 const defaultArgs = {
   label: 'Checkbox Group',
-  errorMessage: 'This is an error message',
   required: true,
+  options: [
+    {
+      label: 'Option one',
+      value: 'value',
+    },
+    {
+      label: 'Option two',
+      value: 'value',
+    },
+  ],
+  values: { key: 'value' },
+};
+
+export const Default = Template.bind({});
+Default.args = {
+  ...defaultArgs,
+};
+
+export const Error = Template.bind({});
+Error.args = {
+  ...defaultArgs,
+  errorMessage: 'This is an error message',
+};
+
+export const AdditionalContent = Template.bind({});
+AdditionalContent.args = {
+  ...defaultArgs,
   options: [
     {
       label: 'Checkbox label',
@@ -35,11 +61,4 @@ const defaultArgs = {
       additional: 'and another thing',
     },
   ],
-  values: { key: 'value' },
-};
-
-export const Default = Template.bind({});
-
-Default.args = {
-  ...defaultArgs,
 };
