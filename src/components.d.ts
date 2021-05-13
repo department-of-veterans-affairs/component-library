@@ -26,6 +26,10 @@ export namespace Components {
          */
         "bordered": boolean;
         /**
+          * If true, doesn't fire the CustomEvent which can be used for analytics tracking.
+         */
+        "disableAnalytics": boolean;
+        /**
           * True if multiple items can be opened at once
          */
         "multi": boolean;
@@ -137,9 +141,14 @@ declare namespace LocalJSX {
          */
         "bordered"?: boolean;
         /**
+          * If true, doesn't fire the CustomEvent which can be used for analytics tracking.
+         */
+        "disableAnalytics"?: boolean;
+        /**
           * True if multiple items can be opened at once
          */
         "multi"?: boolean;
+        "onComponent-library-analytics"?: (event: CustomEvent<any>) => void;
     }
     interface VaAccordionItem {
         /**

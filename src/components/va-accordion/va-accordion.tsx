@@ -1,4 +1,4 @@
-import { Component, Element, Host, Listen, Prop, h } from '@stencil/core';
+import { Component, Element, Event, EventEmitter, Host, Listen, Prop, h } from '@stencil/core';
 
 /**
  * Accordions are a list of headers that can be clicked to hide or reveal additional content.
@@ -25,6 +25,13 @@ import { Component, Element, Host, Listen, Prop, h } from '@stencil/core';
 export class VaAccordion {
   @Element() el!: any;
 
+  @Event({
+    eventName: 'component-library-analytics',
+    composed: true,
+    bubbles: true,
+  })
+  componentLibraryAnalytics: EventEmitter;
+
   @Listen('accordionItemToggled')
   itemToggledHandler(event: CustomEvent) {
     // The event target is the button, and it has a parent which is a header.
@@ -32,8 +39,8 @@ export class VaAccordion {
     // The final parentNode will be a shadowRoot, and from there we get the host.
     // https://developer.mozilla.org/en-US/docs/Web/API/ShadowRoot/host
     const clickedItem =
-      event.detail.target.parentNode.parentNode.host || // if we are on IE, `.host` won't be there
-      event.detail.target.parentNode.parentNode;
+      event.detail.currentTarget.parentNode.parentNode.host || // if we are on IE, `.host` won't be there
+      event.detail.currentTarget.parentNode.parentNode;
     // Close the other items if this accordion isn't multi-selectable
     if (!this.multi) {
       this.getSlottedNodes(this.el, 'va-accordion-item')
@@ -42,6 +49,20 @@ export class VaAccordion {
     }
 
     const prevAttr = clickedItem.getAttribute('open') === 'true' ? true : false;
+
+    if (!this.disableAnalytics) {
+      const detail = {
+        componentName: 'Accordion',
+        action: prevAttr ? "collapse" : "expand",
+        details: {
+          header: clickedItem.header,
+          subheader: clickedItem.subheader,
+          level: clickedItem.level,
+        },
+      };
+      this.componentLibraryAnalytics.emit(detail);
+    }
+
     clickedItem.setAttribute('open', !prevAttr);
   }
 
@@ -76,6 +97,11 @@ export class VaAccordion {
    * True if multiple items can be opened at once
    */
   @Prop() multi: boolean;
+
+  /**
+   * If true, doesn't fire the CustomEvent which can be used for analytics tracking.
+   */
+  @Prop() disableAnalytics: boolean = false;
 
   render() {
     return (
