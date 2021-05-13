@@ -57,14 +57,14 @@ class TextInput extends React.Component {
   }
 
   render() {
+    let ariaDescribedBy = this.props.ariaDescribedBy;
     // Calculate error state.
     let errorSpan = '';
     let maxCharacters;
-    let errorSpanId = undefined;
     let inputErrorClass = undefined;
     let labelErrorClass = undefined;
     if (this.props.errorMessage) {
-      errorSpanId = `${this.inputId}-error-message`;
+      const errorSpanId = `${this.inputId}-error-message`;
       errorSpan = (
         <span className="usa-input-error-message" role="alert" id={errorSpanId}>
           <span className="sr-only">Error</span> {this.props.errorMessage}
@@ -72,6 +72,9 @@ class TextInput extends React.Component {
       );
       inputErrorClass = 'usa-input-error';
       labelErrorClass = 'usa-input-error-label';
+      ariaDescribedBy = ariaDescribedBy
+        ? `${ariaDescribedBy} ${errorSpanId}`
+        : errorSpanId;
     }
 
     // Calculate max characters and display '(Max. XX characters)' when max is hit.
@@ -98,7 +101,7 @@ class TextInput extends React.Component {
         {errorSpan}
         <input
           className={this.props.additionalClass}
-          aria-describedby={errorSpanId}
+          aria-describedby={ariaDescribedBy}
           id={this.inputId}
           placeholder={this.props.placeholder}
           name={this.props.name}
@@ -160,6 +163,11 @@ TextInput.propTypes = {
    * Called when input value is changed
    */
   onValueChange: PropTypes.func.isRequired,
+  /**
+   * Sets the aria-describedby attribute
+   */
+  /* eslint-disable consistent-return */
+  ariaDescribedBy: PropTypes.string,
   /**
    * `<input>` type attribute
    */
