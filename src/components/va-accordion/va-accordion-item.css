@@ -37,14 +37,14 @@ button {
   display: block;
   /* This color assignment is for IE11 compatibility - the one in */
   /* the `<va-accordion>`'s CSS with `:host` doesn't work well */
-  color: var(--color-base);
+  color: var(--color-gray-dark);
 }
 
 button:hover {
   background-color: var(--color-gray-lighter);
   /* This color assignment is for IE11 compatibility - the one in */
   /* the `<va-accordion>`'s CSS with `:host` doesn't work well */
-  color: var(--color-base);
+  color: var(--color-gray-dark);
 }
 
 #content {
