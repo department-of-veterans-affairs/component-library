@@ -12956,9 +12956,9 @@ watchpack@^1.7.4:
     chokidar "^3.4.1"
     watchpack-chokidar2 "^2.0.1"
 
-"web-components@https://github.com/department-of-veterans-affairs/component-library.git#wc-v0.5.0":
+"web-components@https://github.com/department-of-veterans-affairs/component-library.git#wc-accordion-color-fix":
   version "0.5.0"
-  resolved "https://github.com/department-of-veterans-affairs/component-library.git#f2250ee009e8feb811a9cd8b75457f849b6ed8be"
+  resolved "https://github.com/department-of-veterans-affairs/component-library.git#2b74f2938339c81bd0f6f87007edd1842c13de50"
   dependencies:
     "@stencil/core" "^2.0.1"
     "@stencil/postcss" "^2.0.0"
