@@ -18,14 +18,16 @@ export default class LoadingIndicator extends React.Component {
   }
 
   componentWillUnmount() {
-    dispatchAnalyticsEvent({
-      componentName: 'LoadingIndicator',
-      action: 'displayed',
-      details: {
-        displayTime: Date.now() - this.state.loadingStartTime,
-        message: this.props.message,
-      },
-    });
+    if (this.props.enableAnalytics) {
+      dispatchAnalyticsEvent({
+        componentName: 'LoadingIndicator',
+        action: 'displayed',
+        details: {
+          displayTime: Date.now() - this.state.loadingStartTime,
+          message: this.props.message,
+        },
+      });
+    }
   }
 
   render() {
@@ -63,6 +65,11 @@ LoadingIndicator.propTypes = {
    * An aXe label
    */
   label: PropTypes.string,
+  /**
+   * Analytics tracking function(s) will be called. Form components
+   * are disabled by default due to PII/PHI concerns.
+   */
+  enableAnalytics: PropTypes.bool,
 };
 
 LoadingIndicator.defaultProps = {
