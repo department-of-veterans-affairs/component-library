@@ -2,9 +2,9 @@ import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import dispatchAnalyticsEvent from '../../helpers/analytics';
 
-export default function ProgressBar({ percent, label, disableAnalytics }) {
+export default function ProgressBar({ percent, label, enableAnalytics }) {
   useEffect(() => {
-    if (!disableAnalytics && (percent === 0 || percent === 100)) {
+    if (enableAnalytics && (percent === 0 || percent === 100)) {
       dispatchAnalyticsEvent({
         componentName: 'ProgressBar',
         action: 'change',
@@ -42,9 +42,10 @@ ProgressBar.propTypes = {
    */
   label: PropTypes.string,
   /**
-   * Analytics tracking function(s) will not be called
+   * Analytics tracking function(s) will be called. Form components
+   * are disabled by default due to PII/PHI concerns.
    */
-  disableAnalytics: PropTypes.bool,
+  enableAnalytics: PropTypes.bool,
 };
 
 ProgressBar.defaultProps = {
