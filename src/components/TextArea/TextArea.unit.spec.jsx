@@ -223,6 +223,8 @@ describe('<TextArea>', () => {
       });
 
       expect(spy.called).to.be.false;
+
+      wrapper.unmount();
     });
 
     it('should be triggered when field is blurred', () => {
@@ -254,6 +256,8 @@ describe('<TextArea>', () => {
           }),
         ),
       ).to.be.true;
+
+      wrapper.unmount();
     });
   });
 });
