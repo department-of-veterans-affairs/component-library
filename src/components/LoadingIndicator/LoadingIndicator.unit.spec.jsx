@@ -1,7 +1,11 @@
 import { expect } from 'chai';
 import React from 'react';
 import sinon from 'sinon';
-import { axeCheck, mountToDiv } from '../../helpers/test-helpers';
+import {
+  axeCheck,
+  mountToDiv,
+  testAnalytics,
+} from '../../helpers/test-helpers';
 
 import LoadingIndicator from './LoadingIndicator.jsx';
 
@@ -40,24 +44,14 @@ describe('<LoadingIndicator>', () => {
           enableAnalytics
         />
       );
-      const handleAnalyticsEvent = sinon.spy();
 
       const mountedComponent = mountToDiv(component, 'loadingContainer');
-
-      global.document.body.addEventListener(
-        'component-library-analytics',
-        handleAnalyticsEvent,
-      );
-
-      mountedComponent.unmount();
-
-      global.document.body.removeEventListener(
-        'component-library-analytics',
-        handleAnalyticsEvent,
-      );
+      const spy = testAnalytics(mountedComponent, () => {
+        mountedComponent.unmount();
+      });
 
       expect(
-        handleAnalyticsEvent.calledWith(
+        spy.calledWith(
           sinon.match.has('detail', {
             componentName: 'LoadingIndicator',
             action: 'displayed',

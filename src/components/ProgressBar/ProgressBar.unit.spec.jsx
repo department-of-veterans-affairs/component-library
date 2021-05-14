@@ -5,6 +5,7 @@ import { axeCheck } from '../../helpers/test-helpers';
 import sinon from 'sinon';
 
 import ProgressBar from './ProgressBar.jsx';
+import { testAnalytics } from '../../helpers/test-helpers';
 
 describe('<ProgressBar/>', () => {
   it('should render', () => {
@@ -18,23 +19,20 @@ describe('<ProgressBar/>', () => {
 
   describe('analytics event', function () {
     it('should be triggered when a ProgressBar is mounted at 0%', () => {
-      const handleAnalyticsEvent = sinon.spy();
+      let tree;
 
-      global.document.body.addEventListener(
-        'component-library-analytics',
-        handleAnalyticsEvent,
-      );
-
-      const tree = mount(
-        <ProgressBar
-          percent={0}
-          label="This is my ProgressBar."
-          enableAnalytics
-        />,
-      );
+      const spy = testAnalytics(tree, () => {
+        tree = mount(
+          <ProgressBar
+            percent={0}
+            label="This is my ProgressBar."
+            enableAnalytics
+          />,
+        );
+      });
 
       expect(
-        handleAnalyticsEvent.calledWith(
+        spy.calledWith(
           sinon.match.has('detail', {
             componentName: 'ProgressBar',
             action: 'change',
@@ -47,22 +45,10 @@ describe('<ProgressBar/>', () => {
         ),
       ).to.be.true;
 
-      global.document.body.removeEventListener(
-        'component-library-analytics',
-        handleAnalyticsEvent,
-      );
-
       tree.unmount();
     });
 
     it('should be triggered when a ProgressBar updates to 100%', () => {
-      const handleAnalyticsEvent = sinon.spy();
-
-      global.document.body.addEventListener(
-        'component-library-analytics',
-        handleAnalyticsEvent,
-      );
-
       const tree = mount(
         <ProgressBar
           percent={42}
@@ -71,12 +57,14 @@ describe('<ProgressBar/>', () => {
         />,
       );
 
-      tree.setProps({ percent: 100 });
+      const spy = testAnalytics(tree, () => {
+        tree.setProps({ percent: 100 });
+      });
 
       // We should onnly see the 100% event
 
       expect(
-        handleAnalyticsEvent.calledOnceWith(
+        spy.calledOnceWith(
           sinon.match.has('detail', {
             componentName: 'ProgressBar',
             action: 'change',
@@ -88,11 +76,6 @@ describe('<ProgressBar/>', () => {
           }),
         ),
       ).to.be.true;
-
-      global.document.body.removeEventListener(
-        'component-library-analytics',
-        handleAnalyticsEvent,
-      );
 
       tree.unmount();
     });
