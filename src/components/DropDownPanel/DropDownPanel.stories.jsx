@@ -6,13 +6,12 @@ export default {
   component: DropDownPanel,
 };
 
-const Template = (args) => {
-  const [isOpen, setOpen] = useState(args.isOpen);
-
+export const Default = () => {
+  const [isOpen, setOpen] = useState(false);
   return (
     <div style={{ backgroundColor: '#112e51' }}>
       <DropDownPanel
-        {...args}
+        buttonText="Helpdesk"
         isOpen={isOpen}
         clickHandler={() => setOpen(!isOpen)}
       >
@@ -22,11 +21,3 @@ const Template = (args) => {
     </div>
   );
 };
-
-const defaultArgs = {
-  buttonText: 'Helpdesk',
-  isOpen: false,
-};
-
-export const Default = Template.bind({});
-Default.args = { ...defaultArgs };
