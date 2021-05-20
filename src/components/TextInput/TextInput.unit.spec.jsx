@@ -266,7 +266,6 @@ describe('<TextInput>', () => {
     );
 
     const attribute = wrapper.find('input').prop('aria-describedby');
-    expect(attribute).to.exist;
     expect(attribute).to.eql(describedById);
     wrapper.unmount();
   });
