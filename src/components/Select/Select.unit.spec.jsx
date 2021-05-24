@@ -258,6 +258,8 @@ describe('<Select>', () => {
       });
 
       expect(spy.called).to.be.false;
+
+      wrapper.unmount();
     });
 
     it('should be triggered when Select option is changed', () => {
@@ -291,6 +293,8 @@ describe('<Select>', () => {
           }),
         ),
       ).to.be.true;
+
+      wrapper.unmount();
     });
   });
 });

@@ -134,6 +134,8 @@ describe('<RadioButtons>', () => {
       });
 
       expect(spy.called).to.be.false;
+
+      wrapper.unmount();
     });
 
     it('should be triggered when RadioButton is selected', () => {
@@ -166,6 +168,8 @@ describe('<RadioButtons>', () => {
           }),
         ),
       ).to.be.true;
+
+      wrapper.unmount();
     });
   });
 });

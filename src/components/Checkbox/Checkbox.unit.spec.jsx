@@ -163,6 +163,8 @@ describe('<Checkbox/>', () => {
       });
 
       expect(spy.called).to.be.false;
+
+      wrapper.unmount();
     });
 
     it('should be triggered when Checkbox is checked', () => {
@@ -195,6 +197,8 @@ describe('<Checkbox/>', () => {
           }),
         ),
       ).to.be.true;
+
+      wrapper.unmount();
     });
   });
 });

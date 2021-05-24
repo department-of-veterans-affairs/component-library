@@ -91,6 +91,8 @@ describe('<CheckboxGroup>', () => {
       });
 
       expect(spy.called).to.be.false;
+
+      wrapper.unmount();
     });
 
     it('should be triggered when field is checked', () => {
@@ -133,6 +135,8 @@ describe('<CheckboxGroup>', () => {
           }),
         ),
       ).to.be.true;
+
+      wrapper.unmount();
     });
   });
 });
