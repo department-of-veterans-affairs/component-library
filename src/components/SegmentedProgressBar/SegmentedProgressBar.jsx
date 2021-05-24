@@ -12,11 +12,11 @@ import dispatchAnalyticsEvent from '../../helpers/analytics';
 export default function SegmentedProgressBar({
   current,
   total,
-  disableAnalytics,
+  enableAnalytics,
 }) {
   useEffect(() => {
     // Conditionally track events
-    if (!disableAnalytics) {
+    if (enableAnalytics) {
       dispatchAnalyticsEvent({
         componentName: 'SegmentedProgressBar',
         action: 'change',
@@ -60,7 +60,8 @@ SegmentedProgressBar.propTypes = {
    */
   total: PropTypes.number.isRequired,
   /**
-   * Analytics tracking function(s) will not be called
+   * Analytics tracking function(s) will be called. Form components
+   * are disabled by default due to PII/PHI concerns.
    */
-  disableAnalytics: PropTypes.bool,
+  enableAnalytics: PropTypes.bool,
 };

@@ -239,6 +239,60 @@ describe('<TextInput>', () => {
     return check;
   });
 
+  it('passes aXe check when error and ariaDescribedBy present', () => {
+    const check = axeCheck(
+      <TextInput
+        field={makeField('')}
+        label="test"
+        placeholder="Placeholder"
+        errorMessage="error"
+        onValueChange={value => value}
+        ariaDescribedBy="described-by-this-id"
+      />,
+    );
+
+    return check;
+  });
+
+  it('renders ariaDescribedBy as aria-describedby attribute when errorMessage attribute is not present', () => {
+    const describedById = 'described-by-this-id';
+    const wrapper = shallow(
+      <TextInput
+        field={makeField('')}
+        label="test"
+        onValueChange={value => value}
+        ariaDescribedBy={describedById}
+      />,
+    );
+
+    const attribute = wrapper.find('input').prop('aria-describedby');
+    expect(attribute).to.eql(describedById);
+    wrapper.unmount();
+  });
+
+  it('renders concatenated aria-describedby attribute when errorMessage attribute and ariaDescribedBy is present', () => {
+    const describedById = 'described-by-this-id';
+    const wrapper = shallow(
+      <TextInput
+        field={makeField('')}
+        label="test"
+        errorMessage="errorMessage"
+        onValueChange={value => value}
+        ariaDescribedBy={describedById}
+      />,
+    );
+
+    const input = wrapper.find('input');
+    const errorMessageId = wrapper
+      .find('.usa-input-error-message')
+      .first()
+      .prop('id');
+    const concatenatedAriaDescribedByIds = `${describedById} ${errorMessageId}`;
+    const ariaDescribedBy = input.prop('aria-describedby');
+    expect(ariaDescribedBy).to.eql(concatenatedAriaDescribedByIds);
+    wrapper.unmount();
+  });
+
   describe('analytics event', function () {
     it('should NOT be triggered when enableAnalytics is not true', () => {
       const wrapper = mount(

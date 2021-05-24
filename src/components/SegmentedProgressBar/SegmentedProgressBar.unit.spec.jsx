@@ -5,6 +5,7 @@ import { axeCheck } from '../../helpers/test-helpers';
 import sinon from 'sinon';
 
 import SegmentedProgressBar from './SegmentedProgressBar.jsx';
+import { testAnalytics } from '../../helpers/test-helpers';
 
 describe('<SegmentedProgressBar/>', () => {
   it('should render', () => {
@@ -21,17 +22,16 @@ describe('<SegmentedProgressBar/>', () => {
 
   describe('analytics event', function () {
     it('should be triggered when a SegmentedProgressBar is mounted', () => {
-      const handleAnalyticsEvent = sinon.spy();
+      let tree;
 
-      global.document.body.addEventListener(
-        'component-library-analytics',
-        handleAnalyticsEvent,
-      );
-
-      const tree = mount(<SegmentedProgressBar current={0} total={5} />);
+      const spy = testAnalytics(tree, () => {
+        tree = mount(
+          <SegmentedProgressBar current={0} total={5} enableAnalytics />,
+        );
+      });
 
       expect(
-        handleAnalyticsEvent.calledWith(
+        spy.calledWith(
           sinon.match.has('detail', {
             componentName: 'SegmentedProgressBar',
             action: 'change',
@@ -44,28 +44,20 @@ describe('<SegmentedProgressBar/>', () => {
         ),
       ).to.be.true;
 
-      global.document.body.removeEventListener(
-        'component-library-analytics',
-        handleAnalyticsEvent,
-      );
-
       tree.unmount();
     });
 
     it('should be triggered when a SegmentedProgressBar is updated', () => {
-      const handleAnalyticsEvent = sinon.spy();
-
-      global.document.body.addEventListener(
-        'component-library-analytics',
-        handleAnalyticsEvent,
+      const tree = mount(
+        <SegmentedProgressBar current={0} total={5} enableAnalytics />,
       );
 
-      const tree = mount(<SegmentedProgressBar current={0} total={5} />);
-
-      tree.setProps({ current: 1 });
+      const spy = testAnalytics(tree, () => {
+        tree.setProps({ current: 1 });
+      });
 
       expect(
-        handleAnalyticsEvent.calledWith(
+        spy.calledWith(
           sinon.match.has('detail', {
             componentName: 'SegmentedProgressBar',
             action: 'change',
@@ -77,11 +69,6 @@ describe('<SegmentedProgressBar/>', () => {
           }),
         ),
       ).to.be.true;
-
-      global.document.body.removeEventListener(
-        'component-library-analytics',
-        handleAnalyticsEvent,
-      );
 
       tree.unmount();
     });
