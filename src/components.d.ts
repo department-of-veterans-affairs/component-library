@@ -80,6 +80,13 @@ export namespace Components {
     }
     interface VaOnThisPage {
     }
+    interface VaSelect {
+        "error": string;
+        "label": string;
+        "name": string;
+        "required": boolean;
+        "value": string;
+    }
 }
 declare global {
     interface HTMLMyComponentElement extends Components.MyComponent, HTMLStencilElement {
@@ -112,12 +119,19 @@ declare global {
         prototype: HTMLVaOnThisPageElement;
         new (): HTMLVaOnThisPageElement;
     };
+    interface HTMLVaSelectElement extends Components.VaSelect, HTMLStencilElement {
+    }
+    var HTMLVaSelectElement: {
+        prototype: HTMLVaSelectElement;
+        new (): HTMLVaSelectElement;
+    };
     interface HTMLElementTagNameMap {
         "my-component": HTMLMyComponentElement;
         "va-accordion": HTMLVaAccordionElement;
         "va-accordion-item": HTMLVaAccordionItemElement;
         "va-alert": HTMLVaAlertElement;
         "va-on-this-page": HTMLVaOnThisPageElement;
+        "va-select": HTMLVaSelectElement;
     }
 }
 declare namespace LocalJSX {
@@ -202,12 +216,20 @@ declare namespace LocalJSX {
     }
     interface VaOnThisPage {
     }
+    interface VaSelect {
+        "error"?: string;
+        "label"?: string;
+        "name"?: string;
+        "required"?: boolean;
+        "value"?: string;
+    }
     interface IntrinsicElements {
         "my-component": MyComponent;
         "va-accordion": VaAccordion;
         "va-accordion-item": VaAccordionItem;
         "va-alert": VaAlert;
         "va-on-this-page": VaOnThisPage;
+        "va-select": VaSelect;
     }
 }
 export { LocalJSX as JSX };
@@ -219,6 +241,7 @@ declare module "@stencil/core" {
             "va-accordion-item": LocalJSX.VaAccordionItem & JSXBase.HTMLAttributes<HTMLVaAccordionItemElement>;
             "va-alert": LocalJSX.VaAlert & JSXBase.HTMLAttributes<HTMLVaAlertElement>;
             "va-on-this-page": LocalJSX.VaOnThisPage & JSXBase.HTMLAttributes<HTMLVaOnThisPageElement>;
+            "va-select": LocalJSX.VaSelect & JSXBase.HTMLAttributes<HTMLVaSelectElement>;
         }
     }
 }

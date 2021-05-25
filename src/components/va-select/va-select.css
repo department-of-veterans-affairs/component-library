@@ -1,0 +1,15 @@
+@import '../../mixins/inputs.css';
+
+:host {
+  display: block;
+}
+
+::slotted(option) {
+  display: none;
+}
+
+label {
+  margin-top: 3rem;
+  max-width: 46rem;
+  display: block;
+}
