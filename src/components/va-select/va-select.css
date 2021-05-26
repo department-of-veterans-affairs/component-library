@@ -44,3 +44,12 @@ label {
   max-width: 46rem;
   display: block;
 }
+
+select {
+  background-color: var(--color-white);
+  background-image: url('../../assets/arrow-both.svg');
+  background-position: right 1.3rem center;
+  background-repeat: no-repeat;
+  background-size: 1rem;
+  padding-right: 3rem;
+}
