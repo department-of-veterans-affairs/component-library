@@ -40,7 +40,7 @@ export class VaSelect {
       <Host>
         <label htmlFor="select">
           {this.label}
-          {this.required && <span class="form-required-span">(*Required)</span>}
+          {this.required && <span>(*Required)</span>}
         </label>
 
         {this.error && (
