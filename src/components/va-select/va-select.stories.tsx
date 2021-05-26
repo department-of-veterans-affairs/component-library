@@ -9,16 +9,17 @@ const defaultArgs = {
   label: 'Branch of Service',
   name: 'branch',
   required: false,
-  error: undefined,
+  error: 'There was an error',
+  value: 'cat',
 };
 
-const Template = ({ label, name, required, error }) => html`
+const Template = ({ label, name, required, error, value }) => html`
   <div>
     <va-select
       label="${label}"
       required="${required}"
       name="${name}"
-      error="${error}"
+      value="${value}"
     >
       <option value="">--Please choose an option--</option>
       <option value="dog">Dog</option>

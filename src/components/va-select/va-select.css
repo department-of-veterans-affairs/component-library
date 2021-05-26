@@ -14,18 +14,23 @@
   right: 1.9rem;
 }
 
+:host([required]) label > span {
+  color: var(--color-secondary-dark);
+  margin: 0 0.35em;
+}
+
 :host([error]) label {
   margin-top: 0;
 }
 
 :host([error]) label,
-:host([error]) span {
+:host([error]) > span {
   display: block;
   font-size: 1.6rem;
   font-weight: 700;
 }
 
-:host([error]) span {
+:host([error]) > span {
   color: var(--color-secondary-dark);
   padding-bottom: 3px;
   padding-top: 3px;
