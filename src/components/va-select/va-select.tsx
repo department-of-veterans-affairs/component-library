@@ -38,16 +38,13 @@ export class VaSelect {
 
     return (
       <Host>
-        <label
-          class={this.error ? 'usa-input-error-label' : ''}
-          htmlFor="select"
-        >
+        <label htmlFor="select">
           {this.label}
           {this.required && <span class="form-required-span">(*Required)</span>}
         </label>
 
         {this.error && (
-          <span class="usa-input-error-message" id={errorSpanId} role="alert">
+          <span id={errorSpanId} role="alert">
             {this.error}
           </span>
         )}
