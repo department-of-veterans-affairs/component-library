@@ -3,10 +3,10 @@ input,
 select,
 textarea {
   appearance: none;
-  border: 0.1rem solid #5b616b;
+  border: 0.1rem solid var(--color-gray);
   border-radius: 0;
   box-sizing: border-box;
-  color: #212121;
+  color: var(--color-base);
   display: block;
   font-size: 1.6rem;
   height: 4.2rem;
