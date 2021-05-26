@@ -37,7 +37,7 @@ export class VaSelect {
     const errorSpanId = this.error ? 'error' : undefined;
 
     return (
-      <Host role="listbox">
+      <Host>
         <label
           class={this.error ? 'usa-input-error-label' : ''}
           htmlFor="select"
