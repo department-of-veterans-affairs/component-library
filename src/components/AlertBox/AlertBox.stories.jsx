@@ -3,7 +3,7 @@ import React from 'react';
 import AlertBox, { ALERT_TYPE } from './AlertBox';
 
 export default {
-  title: 'Components/AlertBox',
+  title: 'Components/AlertBox (deprecated)',
   component: AlertBox,
   argTypes: {
     status: {
