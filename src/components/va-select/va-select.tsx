@@ -25,10 +25,7 @@ export class VaSelect {
   }
 
   private handleChange(e: Event) {
-    // console.log(e);
-    console.log('HELLO');
     const target: HTMLSelectElement = e.target as HTMLSelectElement;
-    console.log(target.value);
     this.value = target.value;
   }
 
@@ -68,7 +65,7 @@ export class VaSelect {
           id="select"
           name={this.name}
           onKeyDown={this.handleKeyDown}
-          onChange={this.handleChange}
+          onChange={this.handleChange.bind(this)}
         >
           {this.options}
         </select>
