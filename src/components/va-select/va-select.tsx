@@ -14,7 +14,7 @@ export class VaSelect {
 
   @Prop() name: string;
 
-  @Prop() value: string;
+  @Prop({ reflect: true, mutable: true }) value: string;
 
   @Prop() error: string;
 
@@ -24,11 +24,25 @@ export class VaSelect {
     console.log(e);
   }
 
+  private handleChange(e: Event) {
+    // console.log(e);
+    console.log('HELLO');
+    const target: HTMLSelectElement = e.target as HTMLSelectElement;
+    console.log(target.value);
+    this.value = target.value;
+  }
+
   componentDidRender() {
+    const { value } = this;
+    // console.log(this.options);
     if (!this.options)
       this.options = getSlottedNodes(this.el, 'option').map(
         (node: HTMLOptionElement) => {
-          return <option value={node.value}>{node.text}</option>;
+          return (
+            <option value={node.value} selected={value === node.value}>
+              {node.text}
+            </option>
+          );
         },
       );
   }
@@ -54,7 +68,7 @@ export class VaSelect {
           id="select"
           name={this.name}
           onKeyDown={this.handleKeyDown}
-          onChange={this.handleKeyDown}
+          onChange={this.handleChange}
         >
           {this.options}
         </select>
