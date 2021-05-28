@@ -1,4 +1,5 @@
 import { newE2EPage } from '@stencil/core/testing';
+import { axeCheck } from '../../../testing/test-helpers';
 
 describe('va-select', () => {
   it('changes its value prop when selected', async () => {
@@ -20,5 +21,18 @@ describe('va-select', () => {
     await page.waitForChanges();
 
     expect(await element.getProperty('value')).toBe('foo');
+  });
+
+  it('passes an axe check', async () => {
+    const page = await newE2EPage();
+    await page.setContent(`
+        <va-select label="A label">
+          <option value="">Please select an option</option>
+          <option value="foo">Foo</option>
+          <option value="bar">Bar</option>
+        </va-select>
+      `);
+
+    await axeCheck(page);
   });
 });
