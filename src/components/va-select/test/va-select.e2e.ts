@@ -2,6 +2,37 @@ import { newE2EPage } from '@stencil/core/testing';
 import { axeCheck } from '../../../testing/test-helpers';
 
 describe('va-select', () => {
+  it('renders', async () => {
+    const page = await newE2EPage();
+    await page.setContent(`
+      <va-select label="A label" value="bar">
+        <option value="">Please choose an option</option>
+        <option value="foo">Foo</option>
+        <option value="bar">Bar</option>
+      </va-select>
+    `);
+    const element = await page.find('va-select');
+
+    expect(element).toEqualHtml(`
+      <va-select label="A label" value="bar" class="hydrated">
+        <mock:shadow-root>
+          <label for="select">
+            A label
+          </label>
+          <slot></slot>
+          <select id="select">
+            <option value="">Please choose an option</option>
+            <option value="foo">Foo</option>
+            <option value="bar">Bar</option>
+          </select>
+        </mock:shadow-root>
+        <option value="">Please choose an option</option>
+        <option value="foo">Foo</option>
+        <option value="bar">Bar</option>
+      </va-select>
+    `);
+  });
+
   it('changes its value prop when selected', async () => {
     const page = await newE2EPage();
     await page.setContent(`
