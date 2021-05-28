@@ -16,8 +16,11 @@ export default {
 
 const defaultArgs = {
   label: 'Branch of Service',
+  name: 'branch',
   value: 'army',
   required: false,
+  error: null,
+  ariaLiveRegionText: 'You selected',
   options: [
     <option key="1" value="navy">
       Navy
@@ -37,9 +40,24 @@ const defaultArgs = {
   ],
 };
 
-const Template = ({ label, value, required, options }) => {
+const Template = ({
+  label,
+  name,
+  value,
+  required,
+  error,
+  ariaLiveRegionText,
+  options,
+}) => {
   return (
-    <va-select label={label} value={value} required={required}>
+    <va-select
+      label={label}
+      name={name}
+      value={value}
+      required={required}
+      error={error}
+      aria-live-region-text={ariaLiveRegionText}
+    >
       {options}
     </va-select>
   );
