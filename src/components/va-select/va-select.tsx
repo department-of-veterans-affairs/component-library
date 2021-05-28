@@ -18,6 +18,8 @@ export class VaSelect {
 
   @Prop() error: string;
 
+  @Prop() ariaLiveRegionText: string;
+
   @State() options: Array<Node>;
 
   private handleKeyDown(e: Event) {
@@ -69,6 +71,12 @@ export class VaSelect {
         >
           {this.options}
         </select>
+
+        {this.ariaLiveRegionText && (
+          <span role="region" class="sr-only" aria-live="assertive">
+            {`${this.ariaLiveRegionText} ${this.value}`}
+          </span>
+        )}
       </Host>
     );
   }

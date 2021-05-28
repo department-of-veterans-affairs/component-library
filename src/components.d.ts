@@ -81,6 +81,7 @@ export namespace Components {
     interface VaOnThisPage {
     }
     interface VaSelect {
+        "ariaLiveRegionText": string;
         "error": string;
         "label": string;
         "name": string;
@@ -217,6 +218,7 @@ declare namespace LocalJSX {
     interface VaOnThisPage {
     }
     interface VaSelect {
+        "ariaLiveRegionText"?: string;
         "error"?: string;
         "label"?: string;
         "name"?: string;

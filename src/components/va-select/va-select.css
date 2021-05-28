@@ -1,4 +1,5 @@
 @import '../../mixins/inputs.css';
+@import '../../mixins/accessibility.css';
 
 :host {
   display: block;
