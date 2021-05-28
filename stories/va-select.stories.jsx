@@ -48,3 +48,6 @@ const Template = ({ label, value, required, options }) => {
 export const Default = Template.bind({});
 Default.args = { ...defaultArgs };
 Default.argTypes = propStructure(selectDocs);
+
+export const Required = Template.bind({});
+Required.args = { ...defaultArgs, required: true };
