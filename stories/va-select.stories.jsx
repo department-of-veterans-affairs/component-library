@@ -69,3 +69,6 @@ Default.argTypes = propStructure(selectDocs);
 
 export const Required = Template.bind({});
 Required.args = { ...defaultArgs, required: true };
+
+export const ErrorMessage = Template.bind({});
+ErrorMessage.args = { ...defaultArgs, error: 'There was a problem' };
