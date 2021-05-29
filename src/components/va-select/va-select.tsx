@@ -1,4 +1,13 @@
-import { Component, Element, Host, Prop, State, h } from '@stencil/core';
+import {
+  Component,
+  Element,
+  Event,
+  EventEmitter,
+  Host,
+  Prop,
+  State,
+  h,
+} from '@stencil/core';
 import { getSlottedNodes } from '../../utils/utils';
 
 @Component({
@@ -20,6 +29,15 @@ export class VaSelect {
 
   @Prop() ariaLiveRegionText: string;
 
+  @Prop() enableAnalytics: boolean;
+
+  @Event({
+    eventName: 'component-library-analytics',
+    composed: true,
+    bubbles: true,
+  })
+  componentLibraryAnalytics: EventEmitter;
+
   @State() options: Array<Node>;
 
   private handleKeyDown(e: Event) {
@@ -29,6 +47,19 @@ export class VaSelect {
   private handleChange(e: Event) {
     const target: HTMLSelectElement = e.target as HTMLSelectElement;
     this.value = target.value;
+
+    if (this.enableAnalytics) {
+      const target = e.target as HTMLElement;
+      const detail = {
+        componentName: 'Select',
+        action: 'change',
+        details: {
+          label: this.label,
+          selectLabel: target.value,
+        },
+      };
+      this.componentLibraryAnalytics.emit(detail);
+    }
   }
 
   componentDidRender() {

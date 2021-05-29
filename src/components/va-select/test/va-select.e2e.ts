@@ -90,4 +90,47 @@ describe('va-select', () => {
 
     expect(screenreaderElement.textContent).toEqual('You selected bar');
   });
+
+  it('does not fire an analytics event without enable-enalytics prop', async () => {
+    const page = await newE2EPage();
+    await page.setContent(`
+      <va-select label="A label" value="foo">
+        <option value="foo">Foo</option>
+        <option value="bar">Bar</option>
+      </va-select>
+    `);
+
+    const analyticsSpy = await page.spyOnEvent('component-library-analytics');
+
+    const handle = await page.$('pierce/select');
+    await handle.select('bar');
+    await page.waitForChanges();
+
+    expect(analyticsSpy).toHaveReceivedEventTimes(0);
+  });
+
+  it('fires an analytics event when the selected value changes', async () => {
+    const page = await newE2EPage();
+    await page.setContent(`
+      <va-select label="A label" value="foo" enable-analytics>
+        <option value="foo">Foo</option>
+        <option value="bar">Bar</option>
+      </va-select>
+    `);
+
+    const analyticsSpy = await page.spyOnEvent('component-library-analytics');
+
+    const handle = await page.$('pierce/select');
+    await handle.select('bar');
+    await page.waitForChanges();
+
+    expect(analyticsSpy).toHaveReceivedEventDetail({
+      action: 'change',
+      componentName: 'Select',
+      details: {
+        label: 'A label',
+        selectLabel: 'bar',
+      },
+    });
+  });
 });

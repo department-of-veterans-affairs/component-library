@@ -82,6 +82,7 @@ export namespace Components {
     }
     interface VaSelect {
         "ariaLiveRegionText": string;
+        "enableAnalytics": boolean;
         "error": string;
         "label": string;
         "name": string;
@@ -219,9 +220,11 @@ declare namespace LocalJSX {
     }
     interface VaSelect {
         "ariaLiveRegionText"?: string;
+        "enableAnalytics"?: boolean;
         "error"?: string;
         "label"?: string;
         "name"?: string;
+        "onComponent-library-analytics"?: (event: CustomEvent<any>) => void;
         "required"?: boolean;
         "value"?: string;
     }
