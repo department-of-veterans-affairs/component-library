@@ -54,13 +54,12 @@ export class VaSelect {
     this.value = target.value;
 
     if (this.enableAnalytics) {
-      const target = e.target as HTMLElement;
       const detail = {
         componentName: 'Select',
         action: 'change',
         details: {
           label: this.label,
-          selectLabel: target.value,
+          selectLabel: this.value,
         },
       };
       this.componentLibraryAnalytics.emit(detail);
