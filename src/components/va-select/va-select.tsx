@@ -31,6 +31,8 @@ export class VaSelect {
 
   @Prop() enableAnalytics: boolean;
 
+  @Event() keyDown: EventEmitter;
+
   @Event() select: EventEmitter;
 
   @Event({
@@ -44,6 +46,7 @@ export class VaSelect {
 
   private handleKeyDown(e: Event) {
     console.log(e);
+    this.keyDown.emit();
   }
 
   private handleChange(e: Event) {
@@ -100,7 +103,7 @@ export class VaSelect {
           aria-describedby={errorSpanId}
           id="select"
           name={this.name}
-          onKeyDown={this.handleKeyDown}
+          onKeyDown={this.handleKeyDown.bind(this)}
           onChange={this.handleChange.bind(this)}
         >
           {this.options}

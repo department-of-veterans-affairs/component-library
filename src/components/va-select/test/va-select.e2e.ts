@@ -151,4 +151,23 @@ describe('va-select', () => {
 
     expect(selectSpy).toHaveReceivedEventDetail({ value: 'bar' });
   });
+
+  it('fires a custom event when a keydown happens in the select element', async () => {
+    const page = await newE2EPage();
+    await page.setContent(`
+      <va-select label="A label" value="foo" enable-analytics>
+        <option value="foo">Foo</option>
+        <option value="bar">Bar</option>
+      </va-select>
+    `);
+
+    const keyDownSpy = await page.spyOnEvent('keyDown');
+
+    const handle = await page.$('pierce/select');
+    await handle.press('ArrowDown');
+    await handle.press('ArrowDown');
+    await page.waitForChanges();
+
+    expect(keyDownSpy).toHaveReceivedEventTimes(2);
+  });
 });
