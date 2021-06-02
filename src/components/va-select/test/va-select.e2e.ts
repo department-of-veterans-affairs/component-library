@@ -133,4 +133,22 @@ describe('va-select', () => {
       },
     });
   });
+
+  it('fires a custom event when the selected value changes', async () => {
+    const page = await newE2EPage();
+    await page.setContent(`
+      <va-select label="A label" value="foo" enable-analytics>
+        <option value="foo">Foo</option>
+        <option value="bar">Bar</option>
+      </va-select>
+    `);
+
+    const selectSpy = await page.spyOnEvent('select');
+
+    const handle = await page.$('pierce/select');
+    await handle.select('bar');
+    await page.waitForChanges();
+
+    expect(selectSpy).toHaveReceivedEventDetail({ value: 'bar' });
+  });
 });

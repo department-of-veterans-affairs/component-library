@@ -225,6 +225,7 @@ declare namespace LocalJSX {
         "label"?: string;
         "name"?: string;
         "onComponent-library-analytics"?: (event: CustomEvent<any>) => void;
+        "onSelect"?: (event: CustomEvent<any>) => void;
         "required"?: boolean;
         "value"?: string;
     }

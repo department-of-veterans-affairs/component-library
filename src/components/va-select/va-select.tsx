@@ -31,6 +31,8 @@ export class VaSelect {
 
   @Prop() enableAnalytics: boolean;
 
+  @Event() select: EventEmitter;
+
   @Event({
     eventName: 'component-library-analytics',
     composed: true,
@@ -60,6 +62,7 @@ export class VaSelect {
       };
       this.componentLibraryAnalytics.emit(detail);
     }
+    this.select.emit({ value: this.value });
   }
 
   componentDidRender() {
