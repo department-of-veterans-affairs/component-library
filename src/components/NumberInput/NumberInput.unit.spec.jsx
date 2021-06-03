@@ -167,12 +167,70 @@ describe('<NumberInput>', () => {
     tree.unmount();
   });
 
+  it('has aria-describedby attribute when ariaDescribedby is set', () => {
+    const tree = shallow(
+      <NumberInput
+        field={testValue}
+        label="my label"
+        ariaDescribedby="some-id"
+        onValueChange={() => {}}
+      />,
+    );
+
+    // Ensure no error.
+    expect(tree.find('.usa-input-error')).to.have.lengthOf(0);
+
+    // No error means no aria-describedby to not confuse screen readers.
+    const inputs = tree.find('input');
+    expect(inputs).to.have.lengthOf(1);
+    expect(inputs.prop('aria-describedby')).to.equal('some-id');
+    tree.unmount();
+  });
+
+  it('has aria-described by attribute with id & errorMessage when set', () => {
+    const tree = shallow(
+      <NumberInput
+        field={testValue}
+        label="my label"
+        ariaDescribedby="some-id"
+        errorMessage="error message"
+        onValueChange={() => {}}
+      />,
+    );
+
+    // Ensure all error classes set.
+    expect(tree.find('.usa-input-error')).to.have.lengthOf(1);
+
+    const errorMessages = tree.find('.usa-input-error-message');
+    expect(errorMessages).to.have.lengthOf(1);
+    expect(errorMessages.text()).to.equal('Error error message');
+
+    const inputs = tree.find('input');
+    expect(inputs.prop('aria-describedby')).to.contain('some-id');
+    expect(inputs.prop('aria-describedby')).to.contain(
+      errorMessages.prop('id'),
+    );
+    tree.unmount();
+  });
+
   it('passes aXe check', () => {
     const check = axeCheck(
       <NumberInput
         field={testValue}
         label="my label"
         onValueChange={() => {}}
+      />,
+    );
+    return check;
+  });
+  it('passes aXe check with aria-describedby attribute containing 2 IDs', () => {
+    const check = axeCheck(
+      <NumberInput
+        field={testValue}
+        label="my label"
+        onValueChange={() => {}}
+        ariaDescribedby="some-id"
+        errorMessage="error message"
       />,
     );
     return check;
