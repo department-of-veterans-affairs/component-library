@@ -191,4 +191,36 @@ describe('<Date>', () => {
 
     return axeCheck(<Date date={date} onValueChange={() => {}} />);
   });
+
+  it('renders aria-describedby on elements', () => {
+    const date = {
+      day: makeField(1),
+      month: makeField(12),
+      year: makeField(2010),
+    };
+    const tree = shallow(
+      <Date date={date} onValueChange={() => {}} ariaDescribedby="test-id" />,
+    );
+    expect(tree.find('NumberInput').props().ariaDescribedby).to.equal(
+      'test-id',
+    );
+    tree.find('Select').forEach(select => {
+      expect(select.props().ariaDescribedby).to.equal('test-id');
+    });
+    tree.unmount();
+  });
+  it('should pass aXe check when multiple aria-describedby ids are set', () => {
+    const date = {
+      day: makeField(''),
+      month: makeField(''),
+      year: makeField('1890'),
+    };
+    date.year.dirty = true;
+    date.month.dirty = true;
+    date.day.dirty = true;
+
+    return axeCheck(
+      <Date date={date} onValueChange={() => {}} ariaDescribedby="test-id" />,
+    );
+  });
 });
