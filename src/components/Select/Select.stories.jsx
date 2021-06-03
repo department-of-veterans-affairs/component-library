@@ -55,6 +55,13 @@ AriaLiveRegion.args = {
   ariaLiveRegionText: 'The following branch was selected: ',
 };
 
+export const AriaDescribedby = Template.bind({});
+AriaDescribedby.args = {
+  ...defaultArgs,
+  errorMessage: 'This is also an error',
+  ariaDescribedby: 'testing-id',
+};
+
 export const WithAnalytics = Template.bind({});
 WithAnalytics.args = {
   ...defaultArgs,
