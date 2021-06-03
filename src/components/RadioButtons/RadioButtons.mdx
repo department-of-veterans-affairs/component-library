@@ -34,12 +34,17 @@ import RadioButtons from '@department-of-veterans-affairs/component-library/Radi
     {
       label: 'option 3 label',
       value: 'expanding option 3',
-      additional: 'expanded option 3',
+      additional: <span id="option3">expanded option 3<span>,
     },
   ]}
   value={this.state.value}
   required={false}
   toolTipText= 'this triggers a tooltip'
+  ariaDescribedby={[
+    null,
+    null,
+    'option3',
+  ]}
 />
 ```
 
@@ -70,12 +75,17 @@ export class RenderedComponent extends React.Component {
             {
               label: 'option 3 label',
               value: 'expanding option 3',
-              additional: 'expanded option 3',
+              additional: <span id="option3">expanded option 3<span>,
             },
           ]}
           value={this.state.value}
           required={false}
-          toolTipText= 'this triggers a tooltip'
+          toolTipText='this triggers a tooltip'
+          ariaDescribedby={[
+            null,
+            null,
+            'option3',
+          ]}
         />
       </div>
     );
