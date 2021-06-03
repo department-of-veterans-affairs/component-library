@@ -17,7 +17,7 @@ describe('<NumberInput>', () => {
   it('ensure value changes propagate', () => {
     let errorableInput;
 
-    const updatePromise = new Promise((resolve, _reject) => {
+    const updatePromise = new Promise(resolve => {
       errorableInput = ReactTestUtils.renderIntoDocument(
         <NumberInput
           field={testValue}
@@ -42,7 +42,7 @@ describe('<NumberInput>', () => {
   it('ensure blur makes field dirty', () => {
     let errorableInput;
 
-    const updatePromise = new Promise((resolve, _reject) => {
+    const updatePromise = new Promise(resolve => {
       errorableInput = ReactTestUtils.renderIntoDocument(
         <NumberInput
           field={testValue}
@@ -68,7 +68,7 @@ describe('<NumberInput>', () => {
       <NumberInput
         field={testValue}
         label="my label"
-        onValueChange={_update => {}}
+        onValueChange={() => {}}
       />,
     );
 
@@ -95,7 +95,7 @@ describe('<NumberInput>', () => {
         field={testValue}
         label="my label"
         errorMessage="error message"
-        onValueChange={_update => {}}
+        onValueChange={() => {}}
       />,
     );
 
@@ -123,7 +123,7 @@ describe('<NumberInput>', () => {
       <NumberInput
         field={testValue}
         label="my label"
-        onValueChange={_update => {}}
+        onValueChange={() => {}}
       />,
     );
     expect(tree.find('label').text()).to.equal('my label');
@@ -136,7 +136,7 @@ describe('<NumberInput>', () => {
         field={testValue}
         label="my label"
         required
-        onValueChange={_update => {}}
+        onValueChange={() => {}}
       />,
     );
 
@@ -150,7 +150,7 @@ describe('<NumberInput>', () => {
       <NumberInput
         field={testValue}
         label="my label"
-        onValueChange={_update => {}}
+        onValueChange={() => {}}
       />,
     );
 
@@ -172,7 +172,7 @@ describe('<NumberInput>', () => {
       <NumberInput
         field={testValue}
         label="my label"
-        onValueChange={_update => {}}
+        onValueChange={() => {}}
       />,
     );
     return check;
