@@ -15,9 +15,7 @@ describe('<Date>', () => {
       month: makeField(12),
       year: makeField(2010),
     };
-    const tree = shallow(
-      <Date date={date} onValueChange={_update => {}} />,
-    );
+    const tree = shallow(<Date date={date} onValueChange={() => {}} />);
     expect(tree.find('fieldset')).to.have.lengthOf(1);
     const legend = tree.find('legend');
     expect(legend).to.have.lengthOf(1);
@@ -30,9 +28,7 @@ describe('<Date>', () => {
       month: makeField(12),
       year: makeField(2010),
     };
-    const tree = shallow(
-      <Date date={date} onValueChange={_update => {}} />,
-    );
+    const tree = shallow(<Date date={date} onValueChange={() => {}} />);
     expect(tree.find('NumberInput')).to.have.lengthOf(1);
     expect(tree.find('Select')).to.have.lengthOf(2);
     tree.unmount();
@@ -48,7 +44,7 @@ describe('<Date>', () => {
     date.day.dirty = true;
 
     const tree = shallow(
-      <Date required date={date} onValueChange={_update => {}} />,
+      <Date required date={date} onValueChange={() => {}} />,
     );
 
     expect(tree.find('.usa-input-error').exists()).to.be.true;
@@ -67,9 +63,7 @@ describe('<Date>', () => {
     date.month.dirty = true;
     date.day.dirty = true;
 
-    const tree = shallow(
-      <Date date={date} onValueChange={_update => {}} />,
-    );
+    const tree = shallow(<Date date={date} onValueChange={() => {}} />);
 
     expect(tree.find('.usa-input-error').exists()).to.be.true;
     expect(tree.find('.usa-input-error-message').text()).to.equal(
@@ -86,9 +80,7 @@ describe('<Date>', () => {
     date.year.dirty = true;
     date.month.dirty = false;
     date.day.dirty = false;
-    const tree = shallow(
-      <Date date={date} onValueChange={_update => {}} />,
-    );
+    const tree = shallow(<Date date={date} onValueChange={() => {}} />);
 
     expect(tree.find('.usa-input-error').exists()).to.be.true;
     expect(tree.find('.usa-input-error-message').text()).to.contain(
@@ -105,9 +97,7 @@ describe('<Date>', () => {
     date.year.dirty = true;
     date.month.dirty = false;
     date.day.dirty = false;
-    const tree = shallow(
-      <Date date={date} onValueChange={_update => {}} />,
-    );
+    const tree = shallow(<Date date={date} onValueChange={() => {}} />);
 
     expect(tree.find('.usa-input-error').exists()).to.be.true;
     expect(tree.find('.usa-input-error-message').text()).to.contain(
@@ -115,7 +105,6 @@ describe('<Date>', () => {
     );
     tree.unmount();
   });
-
 
   it('does not show invalid message for month year date', () => {
     const date = {
@@ -127,9 +116,7 @@ describe('<Date>', () => {
     date.month.dirty = true;
     date.day.dirty = true;
 
-    const tree = shallow(
-      <Date date={date} onValueChange={_update => {}} />,
-    );
+    const tree = shallow(<Date date={date} onValueChange={() => {}} />);
     expect(tree.find('.usa-input-error')).to.have.length(0);
     tree.unmount();
   });
@@ -148,7 +135,7 @@ describe('<Date>', () => {
       <Date
         date={date}
         validation={{ valid: false, message: 'Test' }}
-        onValueChange={_update => {}}
+        onValueChange={() => {}}
       />,
     );
 
@@ -173,7 +160,7 @@ describe('<Date>', () => {
           { valid: true, message: 'NotShownMessage' },
           { valid: false, message: 'Test' },
         ]}
-        onValueChange={_update => {}}
+        onValueChange={() => {}}
       />,
     );
 
@@ -189,9 +176,7 @@ describe('<Date>', () => {
       year: makeField('1890'),
     };
 
-    return axeCheck(
-      <Date date={date} onValueChange={_update => {}} />,
-    );
+    return axeCheck(<Date date={date} onValueChange={() => {}} />);
   });
 
   it('should pass aXe check when errorMessage is set', () => {
@@ -204,8 +189,6 @@ describe('<Date>', () => {
     date.month.dirty = true;
     date.day.dirty = true;
 
-    return axeCheck(
-      <Date date={date} onValueChange={_update => {}} />,
-    );
+    return axeCheck(<Date date={date} onValueChange={() => {}} />);
   });
 });
