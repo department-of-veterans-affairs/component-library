@@ -13,17 +13,19 @@ import dispatchAnalyticsEvent from '../../helpers/analytics';
  * A radio button group with a label.
  *
  * Validation has the following props.
-
- * `additionalFieldsetClass` - String for any additional fieldset classes.
- * `additionalLegendClass` - String for any additional legend classes.
- * `errorMessage' - String Error message for the radio button group
- * `label` - String for the group field label.
- * `name` - String for the name attribute.
- * `tabIndex` - Number for keyboard tab order.
- * `options` - Array of options to populate group.
- * `required` - is this field required.
- * `value` - string. Value of the select field.
- * `onValueChange` - a function with this prototype: (newValue)
+ *
+ * - `additionalFieldsetClass` String for any additional fieldset classes.
+ * - `additionalLegendClass` String for any additional legend classes.
+ * - `errorMessage` String Error message for the radio button group
+ * - `label` String for the group field label.
+ * - `name` String for the name attribute.
+ * - `tabIndex` Number for keyboard tab order.
+ * - `options` Array of options to populate group.
+ * - `required` is this field required.
+ * - `value` string. Value of the select field.
+ * - `onValueChange` a function with this prototype: (newValue)
+ * - `ariaDescribedby` Array matching the options, added when the option is
+ *   selected
  */
 class RadioButtons extends React.Component {
   constructor() {
@@ -112,6 +114,8 @@ class RadioButtons extends React.Component {
         optionValue === storedValue,
         optionValue,
       );
+      const ariaDescribedby =
+        (checked && this.props.ariaDescribedby?.[optionIndex]) || null;
 
       const radioButton = (
         <div
@@ -128,6 +132,7 @@ class RadioButtons extends React.Component {
               onKeyDown={this.props.onKeyDown}
               value={optionValue}
               onChange={this.handleChange}
+              aria-describedby={ariaDescribedby}
             />
 
             <label
@@ -273,6 +278,10 @@ RadioButtons.propTypes = {
    * are disabled by default due to PII/PHI concerns.
    */
   enableAnalytics: PropTypes.bool,
+  /**
+   * aria-describedby labels array based on the option index
+   */
+  ariaDescribedby: PropTypes.arrayOf(PropTypes.string),
 };
 
 export default RadioButtons;

@@ -51,6 +51,17 @@ Error.args = {
   },
 };
 
+export const AriaDescribedby = Template.bind({});
+AriaDescribedby.args = {
+  ...defaultArgs,
+  value: { value: 'First option' },
+  ariaDescribedby: [
+    'test1',
+    'test2',
+    null, // nothing to point to
+  ],
+};
+
 export const WithAnalytics = Template.bind({});
 WithAnalytics.args = {
   ...defaultArgs,
