@@ -180,7 +180,8 @@ describe('<NumberInput>', () => {
     // Ensure no error.
     expect(tree.find('.usa-input-error')).to.have.lengthOf(0);
 
-    // No error means no aria-describedby to not confuse screen readers.
+    // No error, but ariaDescribedby contains an ID. It should exactly equal the
+    // ID
     const inputs = tree.find('input');
     expect(inputs).to.have.lengthOf(1);
     expect(inputs.prop('aria-describedby')).to.equal('some-id');
@@ -206,6 +207,7 @@ describe('<NumberInput>', () => {
     expect(errorMessages.text()).to.equal('Error error message');
 
     const inputs = tree.find('input');
+    // expect both the error span ID and the ariaDescribedby prop ID
     expect(inputs.prop('aria-describedby')).to.contain('some-id');
     expect(inputs.prop('aria-describedby')).to.contain(
       errorMessages.prop('id'),
@@ -223,7 +225,7 @@ describe('<NumberInput>', () => {
     );
     return check;
   });
-  it('passes aXe check with aria-describedby attribute containing 2 IDs', () => {
+  it('passes aXe check with aria-describedby attribute', () => {
     const check = axeCheck(
       <NumberInput
         field={testValue}
