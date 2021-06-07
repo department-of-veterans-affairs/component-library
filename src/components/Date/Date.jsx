@@ -92,6 +92,10 @@ class Date extends React.Component {
       );
     }
 
+    const ariaDescribedby =
+      [errorSpanId, this.props.ariaDescribedby || ''].join(' ').trim() ||
+      undefined;
+
     return (
       <fieldset className={fieldsetClass}>
         <legend className="vads-u-font-size--base vads-u-font-weight--normal">
@@ -115,7 +119,7 @@ class Date extends React.Component {
                 onValueChange={update => {
                   this.handleChange('month', update);
                 }}
-                ariaDescribedby={this.props.ariaDescribedby}
+                ariaDescribedby={ariaDescribedby}
               />
             </div>
             <div className="form-datefield-day">
@@ -128,7 +132,7 @@ class Date extends React.Component {
                 onValueChange={update => {
                   this.handleChange('day', update);
                 }}
-                ariaDescribedby={this.props.ariaDescribedby}
+                ariaDescribedby={ariaDescribedby}
               />
             </div>
             <div className="usa-datefield usa-form-group usa-form-group-year">
@@ -143,7 +147,7 @@ class Date extends React.Component {
                 onValueChange={update => {
                   this.handleChange('year', update);
                 }}
-                ariaDescribedby={this.props.ariaDescribedby}
+                ariaDescribedby={ariaDescribedby}
               />
             </div>
           </div>
