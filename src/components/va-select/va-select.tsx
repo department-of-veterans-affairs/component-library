@@ -104,34 +104,35 @@ export class VaSelect {
   }
 
   render() {
-    const errorSpanId = this.error ? 'error' : undefined;
+    const { error, label, required, name, value, ariaLiveRegionText } = this;
+    const errorSpanId = error ? 'error' : undefined;
 
     return (
       <Host>
         <label htmlFor="select">
-          {this.label}
-          {this.required && <span>(*Required)</span>}
+          {label}
+          {required && <span>(*Required)</span>}
         </label>
 
-        {this.error && (
+        {error && (
           <span id={errorSpanId} role="alert">
-            {this.error}
+            {error}
           </span>
         )}
         <slot></slot>
         <select
           aria-describedby={errorSpanId}
           id="select"
-          name={this.name}
+          name={name}
           onKeyDown={this.handleKeyDown.bind(this)}
           onChange={this.handleChange.bind(this)}
         >
           {this.options}
         </select>
 
-        {this.ariaLiveRegionText && (
+        {ariaLiveRegionText && (
           <span role="region" class="sr-only" aria-live="assertive">
-            {`${this.ariaLiveRegionText} ${this.value}`}
+            {`${ariaLiveRegionText} ${value}`}
           </span>
         )}
       </Host>
