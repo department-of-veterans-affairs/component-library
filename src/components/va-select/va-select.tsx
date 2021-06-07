@@ -45,7 +45,6 @@ export class VaSelect {
   @State() options: Array<Node>;
 
   private handleKeyDown(e: Event) {
-    console.log(e);
     this.keyDown.emit();
   }
 
@@ -69,7 +68,7 @@ export class VaSelect {
 
   componentDidRender() {
     const { value } = this;
-    // console.log(this.options);
+
     if (!this.options)
       this.options = getSlottedNodes(this.el, 'option').map(
         (node: HTMLOptionElement) => {
