@@ -27,7 +27,7 @@ class Date extends React.Component {
   }
 
   UNSAFE_componentWillMount() {
-    this.id = _.uniqueId('date-input-');
+    this.inputId = _.uniqueId('date-input-');
   }
 
   handleChange(path, update) {
