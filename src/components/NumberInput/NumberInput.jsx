@@ -53,6 +53,10 @@ class NumberInput extends React.Component {
       requiredSpan = <span className="form-required-span">(*Required)</span>;
     }
 
+    const ariaDescribedby =
+      [errorSpanId, this.props.ariaDescribedby || ''].join(' ').trim() ||
+      undefined;
+
     return (
       <div className={this.props.errorMessage ? 'usa-input-error' : undefined}>
         <label
@@ -69,7 +73,7 @@ class NumberInput extends React.Component {
         {errorSpan}
         <input
           className={this.props.additionalClass}
-          aria-describedby={errorSpanId}
+          aria-describedby={ariaDescribedby}
           id={this.inputId}
           name={this.props.name}
           max={this.props.max}
@@ -138,6 +142,11 @@ NumberInput.propTypes = {
    * Will be applied as a class name on the `<input>`
    */
   additionalClass: PropTypes.string,
+
+  /**
+   * Add additional aria-describedby to the `<input>`
+   */
+  ariaDescribedby: PropTypes.string,
 };
 
 export default NumberInput;
