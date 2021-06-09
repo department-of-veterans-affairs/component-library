@@ -16,7 +16,7 @@ import { getSlottedNodes } from '../../utils/utils';
   shadow: true,
 })
 export class VaSelect {
-  @Element() el!: any;
+  @Element() el: any;
 
   /**
    * Whether or not this is a required field.
