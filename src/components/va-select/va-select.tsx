@@ -66,7 +66,7 @@ export class VaSelect {
 
   @State() options: Array<Node>;
 
-  private handleKeyDown(e: Event) {
+  private handleKeyDown() {
     this.keyDown.emit();
   }
 
