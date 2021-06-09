@@ -81,12 +81,33 @@ export namespace Components {
     interface VaOnThisPage {
     }
     interface VaSelect {
+        /**
+          * Optional text that is displayed to screen readers only.
+         */
         "ariaLiveRegionText": string;
+        /**
+          * Whether or not to fire the analytics events
+         */
         "enableAnalytics": boolean;
+        /**
+          * Error message to display. When defined, this indicates an error.
+         */
         "error": string;
+        /**
+          * Text label for the field.
+         */
         "label": string;
+        /**
+          * Name attribute for the select field.
+         */
         "name": string;
+        /**
+          * Whether or not this is a required field.
+         */
         "required": boolean;
+        /**
+          * Selected value (will get updated on select).
+         */
         "value": string;
     }
 }
@@ -219,15 +240,36 @@ declare namespace LocalJSX {
     interface VaOnThisPage {
     }
     interface VaSelect {
+        /**
+          * Optional text that is displayed to screen readers only.
+         */
         "ariaLiveRegionText"?: string;
+        /**
+          * Whether or not to fire the analytics events
+         */
         "enableAnalytics"?: boolean;
+        /**
+          * Error message to display. When defined, this indicates an error.
+         */
         "error"?: string;
+        /**
+          * Text label for the field.
+         */
         "label"?: string;
+        /**
+          * Name attribute for the select field.
+         */
         "name"?: string;
         "onComponent-library-analytics"?: (event: CustomEvent<any>) => void;
         "onKeyDown"?: (event: CustomEvent<any>) => void;
         "onSelect"?: (event: CustomEvent<any>) => void;
+        /**
+          * Whether or not this is a required field.
+         */
         "required"?: boolean;
+        /**
+          * Selected value (will get updated on select).
+         */
         "value"?: string;
     }
     interface IntrinsicElements {
