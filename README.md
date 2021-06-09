@@ -1,4 +1,4 @@
-This module contains reusable react components from [vets-website](https://github.com/department-of-veterans-affairs/vets-website) housed in its design system [repo](https://github.com/department-of-veterans-affairs/design-system).
+This module contains reusable React components for [vets-website](https://github.com/department-of-veterans-affairs/vets-website) housed in the design system [repo](https://github.com/department-of-veterans-affairs/design-system) published as an NPM [package](https://www.npmjs.com/package/@department-of-veterans-affairs/component-library).
 
 ## Quick start
 
@@ -6,10 +6,7 @@ This module contains reusable react components from [vets-website](https://githu
 
 `import COMPONENTNAME from '@department-of-veterans-affairs/component-library/COMPONENTNAME'`
 
-See [design
-system](https://department-of-veterans-affairs.github.io/veteran-facing-services-tools/visual-design)
-or
-[Storybook](https://design.va.gov/storybook/?path=/story/about-introduction--page).
+See [design system](https://department-of-veterans-affairs.github.io/veteran-facing-services-tools/visual-design) or [Storybook](https://design.va.gov/storybook/?path=/story/about-introduction--page).
 
 ## Contributing
 
