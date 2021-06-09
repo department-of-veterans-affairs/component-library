@@ -124,8 +124,8 @@ export class VaSelect {
           aria-describedby={errorSpanId}
           id="select"
           name={name}
-          onKeyDown={this.handleKeyDown.bind(this)}
-          onChange={this.handleChange.bind(this)}
+          onKeyDown={() => this.handleKeyDown()}
+          onChange={e => this.handleChange(e)}
         >
           {this.options}
         </select>
