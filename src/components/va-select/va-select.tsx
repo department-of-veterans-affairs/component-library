@@ -88,7 +88,8 @@ export class VaSelect {
     this.select.emit({ value: this.value });
   }
 
-  componentDidRender() {
+  private populateOptions() {
+    console.log(this);
     const { value } = this;
 
     if (!this.options)
@@ -119,7 +120,7 @@ export class VaSelect {
             {error}
           </span>
         )}
-        <slot onSlotchange={e => console.log(e)}></slot>
+        <slot onSlotchange={() => this.populateOptions()}></slot>
         <select
           aria-describedby={errorSpanId}
           id="select"
