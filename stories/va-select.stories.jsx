@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import React from 'react';
+import React, { useState } from 'react';
 import { getWebComponentDocs, StoryDocs, propStructure } from './wc-helpers';
 
 const selectDocs = getWebComponentDocs('va-select');
@@ -49,17 +49,34 @@ const Template = ({
   ariaLiveRegionText,
   options,
 }) => {
+  const [modifiedOptions, setModifiedOptions] = useState(options);
+
   return (
-    <va-select
-      label={label}
-      name={name}
-      value={value}
-      required={required}
-      error={error}
-      aria-live-region-text={ariaLiveRegionText}
-    >
-      {options}
-    </va-select>
+    <>
+      <button
+        onClick={() => {
+          console.log(modifiedOptions);
+          setModifiedOptions([
+            ...modifiedOptions,
+            <option key="6" value="new">
+              Something new
+            </option>,
+          ]);
+        }}
+      >
+        Change the options
+      </button>
+      <va-select
+        label={label}
+        name={name}
+        value={value}
+        required={required}
+        error={error}
+        aria-live-region-text={ariaLiveRegionText}
+      >
+        {modifiedOptions}
+      </va-select>
+    </>
   );
 };
 
