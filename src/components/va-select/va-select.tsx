@@ -119,7 +119,7 @@ export class VaSelect {
             {error}
           </span>
         )}
-        <slot></slot>
+        <slot onSlotChange={e => console.log(e)}></slot>
         <select
           aria-describedby={errorSpanId}
           id="select"
