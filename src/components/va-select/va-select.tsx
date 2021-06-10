@@ -88,8 +88,13 @@ export class VaSelect {
     this.select.emit({ value: this.value });
   }
 
+  /**
+   * This function is for taking the slotted content and rendering
+   * it inside the `<select>` element. Putting the `<slot>` directly
+   * inside the `<select>` doesn't actually show the `<option>` elements,
+   * but this solves that problem.
+   */
   private populateOptions() {
-    console.log(this);
     const { value } = this;
 
     this.options = getSlottedNodes(this.el, 'option').map(
