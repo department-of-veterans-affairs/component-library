@@ -92,16 +92,15 @@ export class VaSelect {
     console.log(this);
     const { value } = this;
 
-    if (!this.options)
-      this.options = getSlottedNodes(this.el, 'option').map(
-        (node: HTMLOptionElement) => {
-          return (
-            <option value={node.value} selected={value === node.value}>
-              {node.text}
-            </option>
-          );
-        },
-      );
+    this.options = getSlottedNodes(this.el, 'option').map(
+      (node: HTMLOptionElement) => {
+        return (
+          <option value={node.value} selected={value === node.value}>
+            {node.text}
+          </option>
+        );
+      },
+    );
   }
 
   render() {
