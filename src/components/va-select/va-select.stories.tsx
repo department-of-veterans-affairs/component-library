@@ -11,24 +11,15 @@ const defaultArgs = {
   required: false,
   error: 'There was an error',
   value: 'cat',
-  ariaLiveRegionText: 'live region text',
 };
 
-const Template = ({
-  label,
-  name,
-  required,
-  error,
-  value,
-  ariaLiveRegionText,
-}) => html`
+const Template = ({ label, name, required, error, value }) => html`
   <div>
     <va-select
       label="${label}"
       required="${required}"
       name="${name}"
       value="${value}"
-      aria-live-region-text="${ariaLiveRegionText}"
     >
       <option value="">--Please choose an option--</option>
       <option value="dog">Dog</option>

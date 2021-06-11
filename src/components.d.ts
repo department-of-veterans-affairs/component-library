@@ -82,10 +82,6 @@ export namespace Components {
     }
     interface VaSelect {
         /**
-          * Optional text that is displayed to screen readers only.
-         */
-        "ariaLiveRegionText": string;
-        /**
           * Whether or not to fire the analytics events
          */
         "enableAnalytics": boolean;
@@ -240,10 +236,6 @@ declare namespace LocalJSX {
     interface VaOnThisPage {
     }
     interface VaSelect {
-        /**
-          * Optional text that is displayed to screen readers only.
-         */
-        "ariaLiveRegionText"?: string;
         /**
           * Whether or not to fire the analytics events
          */

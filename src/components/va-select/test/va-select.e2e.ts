@@ -67,30 +67,6 @@ describe('va-select', () => {
     await axeCheck(page);
   });
 
-  it('adds a span for an aria-live region', async () => {
-    const page = await newE2EPage();
-    await page.setContent(`
-      <va-select label="A label" value="foo" aria-live-region-text="You selected">
-        <option value="">Please select an option</option>
-        <option value="foo">Foo</option>
-        <option value="bar">Bar</option>
-      </va-select>
-    `);
-    const screenreaderElement = await page.find('va-select >>> .sr-only');
-    const handle = await page.$('pierce/select');
-
-    expect(screenreaderElement).toEqualHtml(`
-      <span aria-live="assertive" role="region" class="sr-only">
-        You selected foo
-      </span>
-    `);
-
-    await handle.select('bar');
-    await page.waitForChanges();
-
-    expect(screenreaderElement.textContent).toEqual('You selected bar');
-  });
-
   it('does not fire an analytics event without enable-enalytics prop', async () => {
     const page = await newE2EPage();
     await page.setContent(`

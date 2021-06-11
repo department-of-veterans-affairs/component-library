@@ -44,11 +44,6 @@ export class VaSelect {
   @Prop() error: string;
 
   /**
-   * Optional text that is displayed to screen readers only.
-   */
-  @Prop() ariaLiveRegionText: string;
-
-  /**
    * Whether or not to fire the analytics events
    */
   @Prop() enableAnalytics: boolean;
@@ -109,7 +104,7 @@ export class VaSelect {
   }
 
   render() {
-    const { error, label, required, name, value, ariaLiveRegionText } = this;
+    const { error, label, required, name, value } = this;
     const errorSpanId = error ? 'error' : undefined;
 
     return (
@@ -134,12 +129,6 @@ export class VaSelect {
         >
           {this.options}
         </select>
-
-        {ariaLiveRegionText && (
-          <span role="region" class="sr-only" aria-live="assertive">
-            {`${ariaLiveRegionText} ${value}`}
-          </span>
-        )}
       </Host>
     );
   }
