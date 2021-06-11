@@ -80,6 +80,8 @@ export namespace Components {
     }
     interface VaOnThisPage {
     }
+    interface VaTextInput {
+    }
 }
 declare global {
     interface HTMLMyComponentElement extends Components.MyComponent, HTMLStencilElement {
@@ -112,12 +114,19 @@ declare global {
         prototype: HTMLVaOnThisPageElement;
         new (): HTMLVaOnThisPageElement;
     };
+    interface HTMLVaTextInputElement extends Components.VaTextInput, HTMLStencilElement {
+    }
+    var HTMLVaTextInputElement: {
+        prototype: HTMLVaTextInputElement;
+        new (): HTMLVaTextInputElement;
+    };
     interface HTMLElementTagNameMap {
         "my-component": HTMLMyComponentElement;
         "va-accordion": HTMLVaAccordionElement;
         "va-accordion-item": HTMLVaAccordionItemElement;
         "va-alert": HTMLVaAlertElement;
         "va-on-this-page": HTMLVaOnThisPageElement;
+        "va-text-input": HTMLVaTextInputElement;
     }
 }
 declare namespace LocalJSX {
@@ -202,12 +211,15 @@ declare namespace LocalJSX {
     }
     interface VaOnThisPage {
     }
+    interface VaTextInput {
+    }
     interface IntrinsicElements {
         "my-component": MyComponent;
         "va-accordion": VaAccordion;
         "va-accordion-item": VaAccordionItem;
         "va-alert": VaAlert;
         "va-on-this-page": VaOnThisPage;
+        "va-text-input": VaTextInput;
     }
 }
 export { LocalJSX as JSX };
@@ -219,6 +231,7 @@ declare module "@stencil/core" {
             "va-accordion-item": LocalJSX.VaAccordionItem & JSXBase.HTMLAttributes<HTMLVaAccordionItemElement>;
             "va-alert": LocalJSX.VaAlert & JSXBase.HTMLAttributes<HTMLVaAlertElement>;
             "va-on-this-page": LocalJSX.VaOnThisPage & JSXBase.HTMLAttributes<HTMLVaOnThisPageElement>;
+            "va-text-input": LocalJSX.VaTextInput & JSXBase.HTMLAttributes<HTMLVaTextInputElement>;
         }
     }
 }
