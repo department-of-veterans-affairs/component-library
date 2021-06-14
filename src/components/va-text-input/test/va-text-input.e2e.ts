@@ -31,6 +31,8 @@ describe('va-text-input', () => {
 
   it('fires an analytics event (when?)', () => {});
 
+  it('adds placeholder text', async () => {});
+
   it('passes unknown props to the input element in the shadow DOM', async () => {
     // This is primarily so we don't have to make a new prop for each aria-* attribute
     const page = await newE2EPage();
