@@ -81,6 +81,7 @@ export namespace Components {
     interface VaOnThisPage {
     }
     interface VaTextInput {
+        "label": string | HTMLElement;
     }
 }
 declare global {
@@ -212,6 +213,7 @@ declare namespace LocalJSX {
     interface VaOnThisPage {
     }
     interface VaTextInput {
+        "label"?: string | HTMLElement;
     }
     interface IntrinsicElements {
         "my-component": MyComponent;
