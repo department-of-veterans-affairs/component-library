@@ -8,8 +8,14 @@ import { Component, Element, Prop, Host, h } from '@stencil/core';
 export class VaTextInput {
   @Element() el: HTMLElement;
 
+  /**
+   * The label for the text input.
+   */
   @Prop() label: string | HTMLElement;
 
+  /**
+   * The error message to render.
+   */
   @Prop() error: string | HTMLElement;
 
   render() {
