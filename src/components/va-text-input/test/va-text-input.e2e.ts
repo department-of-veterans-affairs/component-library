@@ -16,7 +16,12 @@ describe('va-text-input', () => {
     `);
   });
 
-  it('renders a label', () => {});
+  it('renders a label', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-text-input label="Hello, world" />');
+    const element = await page.find('va-text-input >>> label');
+    expect(element).not.toBeNull();
+  });
 
   it('renders an error message', () => {});
 
