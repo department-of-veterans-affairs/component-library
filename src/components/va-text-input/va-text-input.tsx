@@ -16,7 +16,7 @@ const assembleAttributes = (atts: NamedNodeMap) => {
 export class VaTextInput {
   @Element() el: HTMLElement;
 
-  @Prop() label: string | HTMLElement; // TODO: Also accept DOM elements (React)
+  @Prop() label: string | HTMLElement;
 
   render() {
     const atts = assembleAttributes(this.el.attributes);
