@@ -23,7 +23,35 @@ describe('va-text-input', () => {
     expect(element).not.toBeNull();
   });
 
-  it('renders an error message', () => {});
+  it('renders an error message', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-text-input error="This is a mistake" />');
+
+    // Render the error message text
+    const error = await page.find('va-text-input >>> span#error-message');
+    expect(error.innerText).toContain('This is a mistake');
+  });
+
+  it('adds new aria-describedby for error message', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-text-input error="This is a mistake" />');
+
+    // Render the error message text
+    const error = await page.find('va-text-input >>> input');
+    expect(error.getAttribute('aria-describedby')).toContain('error-message');
+  });
+
+  it('appends to an existing aria-describedby for error message', async () => {
+    const page = await newE2EPage();
+    await page.setContent(
+      '<va-text-input error="This is a mistake" aria-describedby="random-thing" />',
+    );
+
+    // Render the error message text
+    const error = await page.find('va-text-input >>> input');
+    expect(error.getAttribute('aria-describedby')).toContain('random-thing');
+    expect(error.getAttribute('aria-describedby')).toContain('error-message');
+  });
 
   it('renders a required span', () => {});
 
