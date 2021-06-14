@@ -20,7 +20,6 @@ export class VaTextInput {
 
   render() {
     const atts = assembleAttributes(this.el.attributes);
-    console.log(this.el.attributes);
     return (
       <Host>
         {this.label && <label htmlFor="inputField">{this.label}</label>}
