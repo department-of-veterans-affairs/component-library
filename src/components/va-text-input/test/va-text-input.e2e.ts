@@ -99,7 +99,22 @@ describe('va-text-input', () => {
     );
   });
 
-  it('adds adds a character limit with descriptive text', async () => {});
+  it('adds adds a character limit with descriptive text', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-text-input maxlength="3" value="22"/>');
+
+    // Level-setting expectations
+    const inputEl = await page.find('va-text-input >>> input');
+    expect(await inputEl.getProperty('value')).toBe('22');
+    expect(await page.find('va-text-input >>> small')).toBeNull();
+
+    // Test the functionality
+    await inputEl.press('2');
+    expect(await inputEl.getProperty('value')).toBe('222');
+    expect((await page.find('va-text-input >>> small')).innerText).toContain(
+      '(Max. 3 characters)',
+    );
+  });
 
   it('passes unknown props to the input element in the shadow DOM', async () => {
     // This is primarily so we don't have to make a new prop for each aria-* attribute

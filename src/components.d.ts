@@ -90,6 +90,10 @@ export namespace Components {
          */
         "label": string | HTMLElement;
         /**
+          * The maximum number of characters allowed in the input.
+         */
+        "maxlength"?: number;
+        /**
           * Placeholder text to show in the input field
          */
         "placeholder"?: string;
@@ -97,6 +101,7 @@ export namespace Components {
           * Set the input to required and render the (Required) text
          */
         "required"?: boolean;
+        "value"?: string;
     }
 }
 declare global {
@@ -237,6 +242,10 @@ declare namespace LocalJSX {
          */
         "label"?: string | HTMLElement;
         /**
+          * The maximum number of characters allowed in the input.
+         */
+        "maxlength"?: number;
+        /**
           * Placeholder text to show in the input field
          */
         "placeholder"?: string;
@@ -244,6 +253,7 @@ declare namespace LocalJSX {
           * Set the input to required and render the (Required) text
          */
         "required"?: boolean;
+        "value"?: string;
     }
     interface IntrinsicElements {
         "my-component": MyComponent;

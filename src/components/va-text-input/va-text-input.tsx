@@ -28,6 +28,27 @@ export class VaTextInput {
    */
   @Prop() placeholder?: string;
 
+  /**
+   * The maximum number of characters allowed in the input.
+   */
+  @Prop() maxlength?: number;
+
+  /*
+   * The value for the input.
+   */
+  @Prop({ mutable: true }) value?: string;
+  // TODO: Make the value prop reflective. Currently, it isn't because it screws
+  // up the input behavior. For now, the only bug is that the changed value
+  // isn't reflected in the DOM on the web component.
+  //
+  // $('va-text-input').value will be correct
+  // $('va-text-input').getAttribute('value') will be incorrect
+
+  private handleChange = (e: Event) => {
+    const target = e.target as HTMLInputElement;
+    this.value = target.value;
+  };
+
   render() {
     const atts = assembleAttributes(this.el.attributes);
     if (this.error) {
@@ -44,7 +65,15 @@ export class VaTextInput {
           </label>
         )}
         {this.error && <span id="error-message">{this.error}</span>}
-        <input id="inputField" type="text" {...atts} />
+        <input
+          id="inputField"
+          type="text"
+          {...atts}
+          onInput={this.handleChange.bind(this)}
+        />
+        {this.maxlength && this.value.length >= this.maxlength && (
+          <small>(Max. {this.maxlength} characters)</small>
+        )}
       </Host>
     );
   }
@@ -55,6 +84,8 @@ export class VaTextInput {
 // they get passed to the input:
 //   - required
 //   - placeholder
+//   - maxlength
+//   - value
 const wcPropNames = ['label', 'error'];
 
 const assembleAttributes = (atts: NamedNodeMap) =>
@@ -62,8 +93,14 @@ const assembleAttributes = (atts: NamedNodeMap) =>
     .filter(a => !wcPropNames.some(p => a.nodeName === p))
     .reduce(
       // Transform the NamedNodeMap into an object we can spread on <input>
-      // a.nodeValue will be an empty string when the attribute value isn't
-      // specified such as when using a boolean true like for the required prop.
-      (all, a) => ({ ...all, [a.nodeName]: a.nodeValue || a.nodeValue === '' }),
+      (all, a) => ({
+        ...all,
+        [a.nodeName]:
+          // a.nodeValue will be an empty string when the attribute value isn't
+          // specified such as when using a boolean true like for the required prop.
+          // ...except for value. We want to keep value="" because that's
+          // meaningful.
+          a.nodeValue || (a.nodeName !== 'value' && a.nodeValue === ''),
+      }),
       {},
     );
