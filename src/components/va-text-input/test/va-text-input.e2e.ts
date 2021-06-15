@@ -38,8 +38,8 @@ describe('va-text-input', () => {
     await page.setContent('<va-text-input error="This is a mistake" />');
 
     // Render the error message text
-    const error = await page.find('va-text-input >>> input');
-    expect(error.getAttribute('aria-describedby')).toContain('error-message');
+    const inputEl = await page.find('va-text-input >>> input');
+    expect(inputEl.getAttribute('aria-describedby')).toContain('error-message');
   });
 
   it('appends to an existing aria-describedby for error message', async () => {
