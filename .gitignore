@@ -2,6 +2,8 @@ dist/
 www/
 loader/
 
+component-docs.*
+
 *~
 *.sw[mnpcod]
 *.log
