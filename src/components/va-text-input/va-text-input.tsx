@@ -33,6 +33,11 @@ export class VaTextInput {
    */
   @Prop() maxlength?: number;
 
+  /**
+   * What to tell the browser to auto-complete the field with.
+   */
+  @Prop() autocomplete?: string;
+
   /*
    * The value for the input.
    */
@@ -85,6 +90,7 @@ export class VaTextInput {
 //   - required
 //   - placeholder
 //   - maxlength
+//   - autocomplete
 //   - value
 const wcPropNames = ['label', 'error'];
 

@@ -82,6 +82,10 @@ export namespace Components {
     }
     interface VaTextInput {
         /**
+          * What to tell the browser to auto-complete the field with.
+         */
+        "autocomplete"?: string;
+        /**
           * The error message to render.
          */
         "error"?: string | HTMLElement;
@@ -233,6 +237,10 @@ declare namespace LocalJSX {
     interface VaOnThisPage {
     }
     interface VaTextInput {
+        /**
+          * What to tell the browser to auto-complete the field with.
+         */
+        "autocomplete"?: string;
         /**
           * The error message to render.
          */
