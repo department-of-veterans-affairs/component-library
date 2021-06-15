@@ -1,4 +1,5 @@
 import { newE2EPage } from '@stencil/core/testing';
+import { axeCheck } from '../../../testing/test-helpers';
 
 describe('va-text-input', () => {
   it('renders without a label', async () => {
@@ -53,9 +54,27 @@ describe('va-text-input', () => {
     expect(error.getAttribute('aria-describedby')).toContain('error-message');
   });
 
-  it('renders a required span', () => {});
+  it('renders a required span', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-text-input label="This is a field" required />');
 
-  it('passes an aXe check', () => {});
+    const el = await page.find('va-text-input');
+    // required="" is a weird thing that only happens in these tests
+    expect(el).toEqualHtml(`
+      <va-text-input class="hydrated" label="This is a field" required="">
+        <mock:shadow-root>
+          <label for="inputField">This is a field <span class="required">(Required)</span></label>
+          <input id="inputField" type="text" required="" />
+        </mock:shadow-root>
+      </va-text-input>
+    `);
+
+    // Render the error message text
+    const requiredSpan = await page.find('va-text-input >>> .required');
+    expect(requiredSpan).not.toBeNull();
+  });
+
+  it('passes an aXe check', async () => {});
 
   it('fires an analytics event (when?)', () => {});
 

@@ -84,11 +84,15 @@ export namespace Components {
         /**
           * The error message to render.
          */
-        "error": string | HTMLElement;
+        "error"?: string | HTMLElement;
         /**
           * The label for the text input.
          */
         "label": string | HTMLElement;
+        /**
+          * Set the input to required and render the (Required) text
+         */
+        "required"?: boolean;
     }
 }
 declare global {
@@ -228,6 +232,10 @@ declare namespace LocalJSX {
           * The label for the text input.
          */
         "label"?: string | HTMLElement;
+        /**
+          * Set the input to required and render the (Required) text
+         */
+        "required"?: boolean;
     }
     interface IntrinsicElements {
         "my-component": MyComponent;

@@ -16,7 +16,12 @@ export class VaTextInput {
   /**
    * The error message to render.
    */
-  @Prop() error: string | HTMLElement;
+  @Prop() error?: string | HTMLElement;
+
+  /**
+   * Set the input to required and render the (Required) text
+   */
+  @Prop() required?: boolean;
 
   render() {
     const atts = assembleAttributes(this.el.attributes);
@@ -27,7 +32,12 @@ export class VaTextInput {
     }
     return (
       <Host>
-        {this.label && <label htmlFor="inputField">{this.label}</label>}
+        {this.label && (
+          <label htmlFor="inputField">
+            {this.label}{' '}
+            {this.required && <span class="required">(Required)</span>}
+          </label>
+        )}
         {this.error && <span id="error-message">{this.error}</span>}
         <input id="inputField" type="text" {...atts} />
       </Host>
@@ -35,11 +45,18 @@ export class VaTextInput {
   }
 }
 
-// This doesn't work in unit tests, but it does in the browser
-// const wcPropNames = Object.keys(VaTextInput.prototype);
+// The props passed to the web component which we don't want to pass to the
+// input element. Note: `required` is deliberately left out so it gets passed to
+// the input.
 const wcPropNames = ['label', 'error'];
 
 const assembleAttributes = (atts: NamedNodeMap) =>
   Array.from(atts)
     .filter(a => !wcPropNames.some(p => a.nodeName === p))
-    .reduce((all, a) => ({ ...all, [a.nodeName]: a.nodeValue }), {});
+    .reduce(
+      // Transform the NamedNodeMap into an object we can spread on <input>
+      // a.nodeValue will be an empty string when the attribute value isn't
+      // specified such as when using a boolean true like for the required prop.
+      (all, a) => ({ ...all, [a.nodeName]: a.nodeValue || a.nodeValue === '' }),
+      {},
+    );
