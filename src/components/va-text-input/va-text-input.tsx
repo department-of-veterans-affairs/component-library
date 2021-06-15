@@ -23,6 +23,11 @@ export class VaTextInput {
    */
   @Prop() required?: boolean;
 
+  /**
+   * Placeholder text to show in the input field
+   */
+  @Prop() placeholder?: string;
+
   render() {
     const atts = assembleAttributes(this.el.attributes);
     if (this.error) {
@@ -46,8 +51,10 @@ export class VaTextInput {
 }
 
 // The props passed to the web component which we don't want to pass to the
-// input element. Note: `required` is deliberately left out so it gets passed to
-// the input.
+// input element. Note: The following attributes are deliberately left out so
+// they get passed to the input:
+//   - required
+//   - placeholder
 const wcPropNames = ['label', 'error'];
 
 const assembleAttributes = (atts: NamedNodeMap) =>

@@ -90,6 +90,10 @@ export namespace Components {
          */
         "label": string | HTMLElement;
         /**
+          * Placeholder text to show in the input field
+         */
+        "placeholder"?: string;
+        /**
           * Set the input to required and render the (Required) text
          */
         "required"?: boolean;
@@ -232,6 +236,10 @@ declare namespace LocalJSX {
           * The label for the text input.
          */
         "label"?: string | HTMLElement;
+        /**
+          * Placeholder text to show in the input field
+         */
+        "placeholder"?: string;
         /**
           * Set the input to required and render the (Required) text
          */

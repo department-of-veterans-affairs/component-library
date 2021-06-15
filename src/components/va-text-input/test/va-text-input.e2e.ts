@@ -86,7 +86,20 @@ describe('va-text-input', () => {
 
   it('fires an analytics event (when?)', () => {});
 
-  it('adds placeholder text', async () => {});
+  it('adds placeholder text', async () => {
+    const page = await newE2EPage();
+    await page.setContent(
+      '<va-text-input placeholder="Enter your life story" />',
+    );
+
+    // Render the error message text
+    const inputEl = await page.find('va-text-input >>> input');
+    expect(inputEl.getAttribute('placeholder')).toContain(
+      'Enter your life story',
+    );
+  });
+
+  it('adds adds a character limit with descriptive text', async () => {});
 
   it('passes unknown props to the input element in the shadow DOM', async () => {
     // This is primarily so we don't have to make a new prop for each aria-* attribute
