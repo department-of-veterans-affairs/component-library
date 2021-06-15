@@ -74,7 +74,15 @@ describe('va-text-input', () => {
     expect(requiredSpan).not.toBeNull();
   });
 
-  it('passes an aXe check', async () => {});
+  it('passes an aXe check', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent(
+      '<va-text-input required label="This is a test" error="With an error message"/>',
+    );
+
+    await axeCheck(page);
+  });
 
   it('fires an analytics event (when?)', () => {});
 
