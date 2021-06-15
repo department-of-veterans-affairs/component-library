@@ -1,4 +1,12 @@
-import { Component, Element, Prop, Host, h } from '@stencil/core';
+import {
+  Component,
+  Element,
+  Prop,
+  Host,
+  h,
+  Event,
+  EventEmitter,
+} from '@stencil/core';
 
 @Component({
   tag: 'va-text-input',
@@ -7,6 +15,13 @@ import { Component, Element, Prop, Host, h } from '@stencil/core';
 })
 export class VaTextInput {
   @Element() el: HTMLElement;
+
+  @Event({
+    eventName: 'component-library-analytics',
+    composed: true,
+    bubbles: true,
+  })
+  componentLibraryAnalytics: EventEmitter;
 
   /**
    * The label for the text input.
@@ -38,6 +53,11 @@ export class VaTextInput {
    */
   @Prop() autocomplete?: string;
 
+  /**
+   * Don't emit any component-library-analytics events
+   */
+  @Prop() disableAnalytics?: boolean;
+
   /*
    * The value for the input.
    */
@@ -52,6 +72,19 @@ export class VaTextInput {
   private handleChange = (e: Event) => {
     const target = e.target as HTMLInputElement;
     this.value = target.value;
+  };
+
+  private handleBlur = () => {
+    if (this.disableAnalytics) return;
+
+    this.componentLibraryAnalytics.emit({
+      componentName: 'va-text-input',
+      action: 'blur',
+      details: {
+        label: this.label,
+        value: this.value,
+      },
+    });
   };
 
   render() {
@@ -74,7 +107,8 @@ export class VaTextInput {
           id="inputField"
           type="text"
           {...atts}
-          onInput={this.handleChange.bind(this)}
+          onInput={this.handleChange}
+          onBlur={this.handleBlur}
         />
         {this.maxlength && this.value.length >= this.maxlength && (
           <small>(Max. {this.maxlength} characters)</small>
@@ -92,7 +126,7 @@ export class VaTextInput {
 //   - maxlength
 //   - autocomplete
 //   - value
-const wcPropNames = ['label', 'error'];
+const wcPropNames = ['label', 'error', 'disableAnalytics'];
 
 const assembleAttributes = (atts: NamedNodeMap) =>
   Array.from(atts)

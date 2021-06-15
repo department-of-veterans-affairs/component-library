@@ -84,7 +84,55 @@ describe('va-text-input', () => {
     await axeCheck(page);
   });
 
-  it('fires an analytics event (when?)', () => {});
+  it('fires an analytics event', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<va-text-input label="Input Field"/>');
+
+    const analyticsSpy = await page.spyOnEvent('component-library-analytics');
+
+    const inputEl = await page.find('va-text-input >>> input');
+    await inputEl.press('1');
+    await inputEl.press('2');
+    await inputEl.press('3');
+    await inputEl.press('Tab');
+
+    expect(analyticsSpy).toHaveReceivedEventDetail({
+      action: 'blur',
+      componentName: 'va-text-input',
+      details: {
+        label: 'Input Field',
+        value: '123',
+      },
+    });
+  });
+
+  it("doesn't squelch other blur events", async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<va-text-input label="Input Field"/>');
+
+    const inputEl = await page.find('va-text-input >>> input');
+    const blurSpy = await inputEl.spyOnEvent('blur');
+    await inputEl.press('Tab');
+
+    expect(blurSpy).toHaveReceivedEvent();
+  });
+
+  it("doesn't fire analytics events when disableAnalytics is true", async () => {
+    const page = await newE2EPage();
+
+    await page.setContent(
+      '<va-text-input label="Input Field" disable-analytics />',
+    );
+
+    const analyticsSpy = await page.spyOnEvent('component-library-analytics');
+    const inputEl = await page.find('va-text-input >>> input');
+    await inputEl.press('1');
+    await inputEl.press('Tab');
+
+    expect(analyticsSpy).not.toHaveReceivedEvent();
+  });
 
   it('adds placeholder text', async () => {
     const page = await newE2EPage();

@@ -86,6 +86,10 @@ export namespace Components {
          */
         "autocomplete"?: string;
         /**
+          * Don't emit any component-library-analytics events
+         */
+        "disableAnalytics"?: boolean;
+        /**
           * The error message to render.
          */
         "error"?: string | HTMLElement;
@@ -242,6 +246,10 @@ declare namespace LocalJSX {
          */
         "autocomplete"?: string;
         /**
+          * Don't emit any component-library-analytics events
+         */
+        "disableAnalytics"?: boolean;
+        /**
           * The error message to render.
          */
         "error"?: string | HTMLElement;
@@ -253,6 +261,7 @@ declare namespace LocalJSX {
           * The maximum number of characters allowed in the input.
          */
         "maxlength"?: number;
+        "onComponent-library-analytics"?: (event: CustomEvent<any>) => void;
         /**
           * Placeholder text to show in the input field
          */
