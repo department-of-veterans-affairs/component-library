@@ -28,6 +28,11 @@ export class VaAlert {
    */
   @Prop() backgroundOnly: boolean = false;
 
+    /**
+   * If true, hides the content slot and displays with only a header
+   */
+  @Prop() hideContent: boolean = false;
+
   /**
    * If true, doesn't fire the CustomEvent which can be used for analytics tracking.
    */
@@ -106,11 +111,11 @@ export class VaAlert {
   }
 
   render() {
-    const { backgroundOnly, status, visible, closeable } = this;
+    const { backgroundOnly, status, visible, closeable , hideContent} = this;
     const classes = `alert ${status} ${backgroundOnly ? 'bg-only' : ''}`;
 
-    if (!visible) return <div aria-live="polite" />;
-
+    if (!visible) return <div aria-live="polite" />; 
+    
     return (
       <Host>
         <div class={classes}>
@@ -118,9 +123,9 @@ export class VaAlert {
           <span class="sr-only">Alert: </span>
           <div class="body" onClick={this.handleAlertBodyClick.bind(this)}>
             {!backgroundOnly && <slot name="headline"></slot>}
-            <div class="text">
+            {!hideContent && <div class="text">
               <slot></slot>
-            </div>
+            </div>}
           </div>
         </div>
 
