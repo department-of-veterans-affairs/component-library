@@ -28,7 +28,6 @@ export class VaAlert {
    */
   @Prop() backgroundOnly: boolean = false;
 
-
   /**
    * If true, doesn't fire the CustomEvent which can be used for analytics tracking.
    */
@@ -110,7 +109,7 @@ export class VaAlert {
     const { backgroundOnly, status, visible, closeable } = this;
     const classes = `alert ${status} ${backgroundOnly ? 'bg-only' : ''}`;
 
-    if (!visible) return <div aria-live="polite" />; 
+    if (!visible) return <div aria-live="polite" />;
     
     return (
       <Host>

@@ -9,7 +9,7 @@ const defaultArgs = {
   headline: 'This is an alert',
   status: 'info',
   backgroundOnly: false,
-  closeable: false
+  closeable: false,
 };
 
 const Template = ({ backgroundOnly, headline, status, closeable }) => html`
