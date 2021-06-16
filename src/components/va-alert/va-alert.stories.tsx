@@ -10,14 +10,16 @@ const defaultArgs = {
   status: 'info',
   backgroundOnly: false,
   closeable: false,
+  hideContent: false
 };
 
-const Template = ({ backgroundOnly, headline, status, closeable }) => html`
+const Template = ({ backgroundOnly, headline, status, closeable, hideContent }) => html`
   <div>
     <va-alert
       background-only="${backgroundOnly}"
       status="${status}"
       closeable="${closeable}"
+      hide-content="${hideContent}"
     >
       <h3 slot="headline">${headline}</h3>
       <div>
