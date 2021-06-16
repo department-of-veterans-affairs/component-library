@@ -17,7 +17,7 @@ describe('<NumberInput>', () => {
   it('ensure value changes propagate', () => {
     let errorableInput;
 
-    const updatePromise = new Promise((resolve, _reject) => {
+    const updatePromise = new Promise(resolve => {
       errorableInput = ReactTestUtils.renderIntoDocument(
         <NumberInput
           field={testValue}
@@ -42,7 +42,7 @@ describe('<NumberInput>', () => {
   it('ensure blur makes field dirty', () => {
     let errorableInput;
 
-    const updatePromise = new Promise((resolve, _reject) => {
+    const updatePromise = new Promise(resolve => {
       errorableInput = ReactTestUtils.renderIntoDocument(
         <NumberInput
           field={testValue}
@@ -68,7 +68,7 @@ describe('<NumberInput>', () => {
       <NumberInput
         field={testValue}
         label="my label"
-        onValueChange={_update => {}}
+        onValueChange={() => {}}
       />,
     );
 
@@ -95,7 +95,7 @@ describe('<NumberInput>', () => {
         field={testValue}
         label="my label"
         errorMessage="error message"
-        onValueChange={_update => {}}
+        onValueChange={() => {}}
       />,
     );
 
@@ -123,7 +123,7 @@ describe('<NumberInput>', () => {
       <NumberInput
         field={testValue}
         label="my label"
-        onValueChange={_update => {}}
+        onValueChange={() => {}}
       />,
     );
     expect(tree.find('label').text()).to.equal('my label');
@@ -136,7 +136,7 @@ describe('<NumberInput>', () => {
         field={testValue}
         label="my label"
         required
-        onValueChange={_update => {}}
+        onValueChange={() => {}}
       />,
     );
 
@@ -150,7 +150,7 @@ describe('<NumberInput>', () => {
       <NumberInput
         field={testValue}
         label="my label"
-        onValueChange={_update => {}}
+        onValueChange={() => {}}
       />,
     );
 
@@ -167,12 +167,72 @@ describe('<NumberInput>', () => {
     tree.unmount();
   });
 
+  it('has aria-describedby attribute when ariaDescribedby is set', () => {
+    const tree = shallow(
+      <NumberInput
+        field={testValue}
+        label="my label"
+        ariaDescribedby="some-id"
+        onValueChange={() => {}}
+      />,
+    );
+
+    // Ensure no error.
+    expect(tree.find('.usa-input-error')).to.have.lengthOf(0);
+
+    // No error, but ariaDescribedby contains an ID. It should exactly equal the
+    // ID
+    const inputs = tree.find('input');
+    expect(inputs).to.have.lengthOf(1);
+    expect(inputs.prop('aria-describedby')).to.equal('some-id');
+    tree.unmount();
+  });
+
+  it('has aria-described by attribute with id & errorMessage when set', () => {
+    const tree = shallow(
+      <NumberInput
+        field={testValue}
+        label="my label"
+        ariaDescribedby="some-id"
+        errorMessage="error message"
+        onValueChange={() => {}}
+      />,
+    );
+
+    // Ensure all error classes set.
+    expect(tree.find('.usa-input-error')).to.have.lengthOf(1);
+
+    const errorMessages = tree.find('.usa-input-error-message');
+    expect(errorMessages).to.have.lengthOf(1);
+    expect(errorMessages.text()).to.equal('Error error message');
+
+    const inputs = tree.find('input');
+    // expect both the error span ID and the ariaDescribedby prop ID
+    expect(inputs.prop('aria-describedby')).to.contain('some-id');
+    expect(inputs.prop('aria-describedby')).to.contain(
+      errorMessages.prop('id'),
+    );
+    tree.unmount();
+  });
+
   it('passes aXe check', () => {
     const check = axeCheck(
       <NumberInput
         field={testValue}
         label="my label"
-        onValueChange={_update => {}}
+        onValueChange={() => {}}
+      />,
+    );
+    return check;
+  });
+  it('passes aXe check with aria-describedby attribute', () => {
+    const check = axeCheck(
+      <NumberInput
+        field={testValue}
+        label="my label"
+        onValueChange={() => {}}
+        ariaDescribedby="some-id"
+        errorMessage="error message"
       />,
     );
     return check;

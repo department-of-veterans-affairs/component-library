@@ -9,11 +9,7 @@ export default {
 const Template = args => {
   const [date, setDate] = useState(args.date);
   return (
-    <Date
-      {...args}
-      date={date}
-      onValueChange={newDate => setDate(newDate)}
-    />
+    <Date {...args} date={date} onValueChange={newDate => setDate(newDate)} />
   );
 };
 
@@ -60,4 +56,10 @@ Error.args = {
       dirty: true,
     },
   },
+};
+
+export const AriaDescribedby = Template.bind({});
+AriaDescribedby.args = {
+  ...defaultArgs,
+  ariaDescribedby: 'some-id',
 };

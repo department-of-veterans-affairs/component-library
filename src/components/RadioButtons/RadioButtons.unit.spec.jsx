@@ -18,6 +18,11 @@ describe('<RadioButtons>', () => {
     { value: 'no', label: 'No', additional: 'No additional' },
     'maybe',
   ];
+  const someExpandingOptionsWithId = [
+    'yes',
+    { value: 'no', label: 'No', additional: <span id="nope">Nope</span> },
+    'maybe',
+  ];
 
   it('calls onValueChange with value and dirty state', () => {
     let valueChanged;
@@ -82,6 +87,25 @@ describe('<RadioButtons>', () => {
     wrapper.unmount();
   });
 
+  it('renders a aria-describedby when option is selected', () => {
+    const wrapper = shallow(
+      <RadioButtons
+        label="test"
+        options={someExpandingOptionsWithId}
+        value={makeField('no')}
+        onValueChange={value => value}
+        ariaDescribedby={['yep', 'nope', 'maybep']}
+      />,
+    );
+
+    // Only the selected radio should have an aria-describedby defined
+    const result = [null, 'nope', null];
+    wrapper.find('input').forEach((input, index) => {
+      expect(input.prop('aria-describedby')).to.eql(result[index]);
+    });
+    wrapper.unmount();
+  });
+
   it('passes aXe check when only non-expanding options are rendered', () => {
     const check = axeCheck(
       <RadioButtons
@@ -113,6 +137,31 @@ describe('<RadioButtons>', () => {
         options={someExpandingOptions}
         value={makeField('test')}
         onValueChange={value => value}
+      />,
+    );
+    return check;
+  });
+
+  it('passes aXe check when aria-describedby targets expanding id', () => {
+    const check = axeCheck(
+      <RadioButtons
+        label="test"
+        options={someExpandingOptionsWithId}
+        value={makeField('no')}
+        onValueChange={value => value}
+        ariaDescribedby={[null, 'nope', null]}
+      />,
+    );
+    return check;
+  });
+  it('passes aXe check when aria-describedby does not target expanding id', () => {
+    const check = axeCheck(
+      <RadioButtons
+        label="test"
+        options={someExpandingOptionsWithId}
+        value={makeField('maybe')}
+        onValueChange={value => value}
+        ariaDescribedby={[null, 'nope', null]}
       />,
     );
     return check;

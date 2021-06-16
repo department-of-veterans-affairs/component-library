@@ -13,13 +13,7 @@ const Template = args => {
     setField(newField);
   };
 
-  return (
-    <NumberInput
-      {...args}
-      field={field}
-      onValueChange={onValueChange}
-    />
-  );
+  return <NumberInput {...args} field={field} onValueChange={onValueChange} />;
 };
 
 const defaultArgs = {
@@ -57,4 +51,11 @@ export const Required = Template.bind({});
 Required.args = {
   ...defaultArgs,
   required: true,
+};
+
+export const AriaDescribedby = Template.bind({});
+AriaDescribedby.args = {
+  ...defaultArgs,
+  errorMessage: 'This is also an error',
+  ariaDescribedby: 'testing-id',
 };
