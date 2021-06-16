@@ -239,6 +239,55 @@ describe('<Select>', () => {
     tree.unmount();
   });
 
+  it('has error styles when errorMessage is set', () => {
+    const tree = shallow(
+      <Select
+        label="my label"
+        options={options}
+        value={testValue}
+        onValueChange={() => {}}
+        ariaDescribedby="test-id"
+      />,
+    );
+
+    // Ensure all error classes set.
+    expect(tree.find('.usa-input-error')).to.have.lengthOf(0);
+
+    // No error means no aria-describedby to not confuse screen readers.
+    const selects = tree.find('select');
+    expect(selects).to.have.lengthOf(1);
+
+    expect(selects.prop('aria-describedby')).to.equal('test-id');
+    tree.unmount();
+  });
+
+  it('has error styles when errorMessage is set', () => {
+    const tree = shallow(
+      <Select
+        label="my label"
+        options={options}
+        errorMessage="error message"
+        value={testValue}
+        onValueChange={() => {}}
+        ariaDescribedby="test-id"
+      />,
+    );
+
+    // Ensure all error classes set.
+    expect(tree.find('.usa-input-error')).to.have.lengthOf(1);
+
+    // No error means no aria-describedby to not confuse screen readers.
+    const selects = tree.find('select');
+    expect(selects).to.have.lengthOf(1);
+
+    const idNum = selects.props().id.split('-')[2];
+    expect(selects.prop('aria-describedby')).to.contain('test-id');
+    expect(selects.prop('aria-describedby')).to.contain(
+      `errorable-select-${idNum}-error-message`,
+    );
+    tree.unmount();
+  });
+
   describe('analytics event', function () {
     it('should NOT be triggered when enableAnalytics is not true', () => {
       const wrapper = shallow(

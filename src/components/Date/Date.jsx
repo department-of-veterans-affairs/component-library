@@ -2,7 +2,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import _ from 'lodash';
-import moment from 'moment';
 
 import Select from '../Select/Select';
 import NumberInput from '../NumberInput/NumberInput';
@@ -28,7 +27,7 @@ class Date extends React.Component {
   }
 
   UNSAFE_componentWillMount() {
-    this.id = _.uniqueId('date-input-');
+    this.inputId = _.uniqueId('date-input-');
   }
 
   handleChange(path, update) {
@@ -93,6 +92,10 @@ class Date extends React.Component {
       );
     }
 
+    const ariaDescribedby =
+      [errorSpanId, this.props.ariaDescribedby || ''].join(' ').trim() ||
+      undefined;
+
     return (
       <fieldset className={fieldsetClass}>
         <legend className="vads-u-font-size--base vads-u-font-weight--normal">
@@ -116,6 +119,7 @@ class Date extends React.Component {
                 onValueChange={update => {
                   this.handleChange('month', update);
                 }}
+                ariaDescribedby={ariaDescribedby}
               />
             </div>
             <div className="form-datefield-day">
@@ -128,6 +132,7 @@ class Date extends React.Component {
                 onValueChange={update => {
                   this.handleChange('day', update);
                 }}
+                ariaDescribedby={ariaDescribedby}
               />
             </div>
             <div className="usa-datefield usa-form-group usa-form-group-year">
@@ -142,6 +147,7 @@ class Date extends React.Component {
                 onValueChange={update => {
                   this.handleChange('year', update);
                 }}
+                ariaDescribedby={ariaDescribedby}
               />
             </div>
           </div>
@@ -194,6 +200,12 @@ Date.propTypes = {
   onValueChange: PropTypes.func.isRequired,
   requiredMessage: PropTypes.string,
   invalidMessage: PropTypes.string,
+  /**
+   * Add additional aria-describedby to the month, day & year elements.
+   * Note: make sure the ID exists on the page before adding this, or you'll
+   * have an WCAG violation
+   */
+  ariaDescribedby: PropTypes.string,
 };
 
 Date.defaultProps = {

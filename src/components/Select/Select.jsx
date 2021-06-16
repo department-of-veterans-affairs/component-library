@@ -62,6 +62,10 @@ class Select extends React.Component {
       requiredSpan = <span className="form-required-span">(*Required)</span>;
     }
 
+    const ariaDescribedby =
+      [errorSpanId, this.props.ariaDescribedby || ''].join(' ').trim() ||
+      undefined;
+
     // Calculate options for select
     let reactKey = 0;
     // TODO(awong): Remove this hack to handle options prop and use invariants instead.
@@ -99,7 +103,7 @@ class Select extends React.Component {
         {errorSpan}
         <select
           className={this.props.additionalClass}
-          aria-describedby={errorSpanId}
+          aria-describedby={ariaDescribedby}
           id={this.selectId}
           name={this.props.name}
           value={selectedValue}
@@ -214,6 +218,11 @@ Select.propTypes = {
    * are disabled by default due to PII/PHI concerns.
    */
   enableAnalytics: PropTypes.bool,
+
+  /**
+   * Add additional aria-describedby to the `<select>`
+   */
+  ariaDescribedby: PropTypes.string,
 };
 
 Select.defaultProps = {
