@@ -1,4 +1,4 @@
-This module contains reusable React components published as an NPM [package](https://www.npmjs.com/package/@department-of-veterans-affairs/component-library) for use in the [VA.gov frontend](https://github.com/department-of-veterans-affairs/vets-website).
+This module contains reusable React components for the VA.gov [design system](https://design.va.gov) published as an [NPM package](https://www.npmjs.com/package/@department-of-veterans-affairs/component-library) for use in the [vets-website](https://github.com/department-of-veterans-affairs/vets-website) frontend codebase.
 
 ## Quick start
 
@@ -6,7 +6,7 @@ This module contains reusable React components published as an NPM [package](htt
 
 `import COMPONENTNAME from '@department-of-veterans-affairs/component-library/COMPONENTNAME'`
 
-See [design system](https://department-of-veterans-affairs.github.io/veteran-facing-services-tools/visual-design) or [Storybook](https://design.va.gov/storybook/?path=/story/about-introduction--page) for a list of available components.
+See [design system](https://design.va.gov/components/) or [Storybook](https://design.va.gov/storybook/?path=/story/about-introduction--page) for a full list of available components.
 
 ## Contributing
 
@@ -86,35 +86,3 @@ This should be set as **GITHUB_API_KEY** in your environment variable.
 
 The last step is to update the `package.json` files of consuming apps to use the latest version of `@department-of-veterans-affairs/formation` (or `component-library`). For example, if you are working with the `vets-website` project, open the `vets-website`'s `package.json` to update the version number of the `@department-of-veterans-affairs/formation` entry listed in the `dependencies` section. The version number should match what you just published to NPM.
 
-## Included components:
-
-- AdditionalInfo.js
-- AlertBox.js
-- Breadcrumbs.js
-- Checkbox.js
-- Date.js
-- FileInput.js
-- MonthYear.js
-- NumberInput.js
-- RadioButtons.js
-- Select.js
-- TextArea.js
-- TextInput.js
-- ExpandingGroup.js
-- IconBase.js
-- IconHelp.js
-- IconSearch.js
-- IconUser.js
-- LoadingIndicator.js
-- Modal.js
-- OMBInfo.js
-- Pagination.js
-- PrivacyAgreement.js
-- ProgressBar.js
-- ProgressButton.js
-- SearchMenu.js
-- SegmentedProgressBar.js
-- SystemDownView.js
-- Table.js
-- Telephone.js
-- Tooltip.js
