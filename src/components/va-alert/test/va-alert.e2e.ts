@@ -142,49 +142,4 @@ describe('va-alert', () => {
     expect(analyticsSpy).toHaveReceivedEventTimes(0);
   });
 
-  it('hides the content slot', async () => {
-    const page = await newE2EPage();
-
-    await page.setContent('<va-alert hide-content="true"></va-alert>');
-    const element = await page.find('va-alert');
-
-    expect(element).toEqualHtml(`
-    <va-alert class="hydrated" hide-content="true">
-      <mock:shadow-root>
-        <div class="alert info">
-          <i aria-hidden="true" role="img"></i>
-          <span class="sr-only">Alert:</span>
-          <div class="body">
-            <slot name="headline"></slot>
-          </div>
-        </div>
-      </mock:shadow-root>
-    </va-alert>
-    `);
-  });
-
-  it('shows the content slot by default', async () => {
-    const page = await newE2EPage();
-
-    await page.setContent('<va-alert></va-alert>');
-    const element = await page.find('va-alert');
-
-    expect(element).toEqualHtml(`
-    <va-alert class="hydrated">
-      <mock:shadow-root>
-        <div class="alert info">
-          <i aria-hidden="true" role="img"></i>
-          <span class="sr-only">Alert:</span>
-          <div class="body">
-            <slot name="headline"></slot>
-            <div class="text">
-              <slot></slot>
-            </div>
-          </div>
-        </div>
-      </mock:shadow-root>
-    </va-alert>
-    `);
-  });
-
 });
