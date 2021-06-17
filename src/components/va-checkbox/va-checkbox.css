@@ -1,0 +1,29 @@
+:host {
+  display: block;
+}
+
+input:not([disabled]) {
+  outline: 2px solid var(--color-gold-light);
+  outline-offset: 2px;
+}
+
+input {
+  height: 1.8rem;
+  width: 1.8rem;
+  margin: 0;
+  padding: 0;
+  opacity: 0;
+  position: absolute;
+  left: auto;
+  box-sizing: border-box;
+}
+
+input+label {
+  cursor: pointer;
+  font-weight: 400;
+  margin-bottom: 0.65em;
+}
+
+label {
+  display: block;
+}

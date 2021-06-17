@@ -78,6 +78,9 @@ export namespace Components {
          */
         "visible": boolean;
     }
+    interface VaCheckbox {
+        "label": string;
+    }
     interface VaOnThisPage {
     }
 }
@@ -106,6 +109,12 @@ declare global {
         prototype: HTMLVaAlertElement;
         new (): HTMLVaAlertElement;
     };
+    interface HTMLVaCheckboxElement extends Components.VaCheckbox, HTMLStencilElement {
+    }
+    var HTMLVaCheckboxElement: {
+        prototype: HTMLVaCheckboxElement;
+        new (): HTMLVaCheckboxElement;
+    };
     interface HTMLVaOnThisPageElement extends Components.VaOnThisPage, HTMLStencilElement {
     }
     var HTMLVaOnThisPageElement: {
@@ -117,6 +126,7 @@ declare global {
         "va-accordion": HTMLVaAccordionElement;
         "va-accordion-item": HTMLVaAccordionItemElement;
         "va-alert": HTMLVaAlertElement;
+        "va-checkbox": HTMLVaCheckboxElement;
         "va-on-this-page": HTMLVaOnThisPageElement;
     }
 }
@@ -200,6 +210,9 @@ declare namespace LocalJSX {
          */
         "visible"?: boolean;
     }
+    interface VaCheckbox {
+        "label"?: string;
+    }
     interface VaOnThisPage {
     }
     interface IntrinsicElements {
@@ -207,6 +220,7 @@ declare namespace LocalJSX {
         "va-accordion": VaAccordion;
         "va-accordion-item": VaAccordionItem;
         "va-alert": VaAlert;
+        "va-checkbox": VaCheckbox;
         "va-on-this-page": VaOnThisPage;
     }
 }
@@ -218,6 +232,7 @@ declare module "@stencil/core" {
             "va-accordion": LocalJSX.VaAccordion & JSXBase.HTMLAttributes<HTMLVaAccordionElement>;
             "va-accordion-item": LocalJSX.VaAccordionItem & JSXBase.HTMLAttributes<HTMLVaAccordionItemElement>;
             "va-alert": LocalJSX.VaAlert & JSXBase.HTMLAttributes<HTMLVaAlertElement>;
+            "va-checkbox": LocalJSX.VaCheckbox & JSXBase.HTMLAttributes<HTMLVaCheckboxElement>;
             "va-on-this-page": LocalJSX.VaOnThisPage & JSXBase.HTMLAttributes<HTMLVaOnThisPageElement>;
         }
     }
