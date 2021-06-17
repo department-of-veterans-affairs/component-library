@@ -100,7 +100,7 @@ export class VaTextInput {
           {this.label && (
             <label htmlFor="inputField">
               {this.label}{' '}
-              {this.required && <span class="required">(Required)</span>}
+              {this.required && <span class="required">(*Required)</span>}
             </label>
           )}
           {this.error && <span id="error-message">{this.error}</span>}
