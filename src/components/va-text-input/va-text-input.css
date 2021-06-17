@@ -49,7 +49,7 @@ input:not([disabled]):focus {
     right: 1.9rem;
 }
 
-:host([error]) label, .input-error span {
+:host([error]) label, :host([error]) span {
     font-weight: 700;
 }
 
