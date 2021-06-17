@@ -118,9 +118,7 @@ export class VaAlert {
           <span class="sr-only">Alert: </span>
           <div class="body" onClick={this.handleAlertBodyClick.bind(this)}>
             {!backgroundOnly && <slot name="headline"></slot>}
-            <div class="text">
               <slot></slot>
-            </div>
           </div>
         </div>
 
