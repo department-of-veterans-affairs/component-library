@@ -10,7 +10,7 @@ import {
 
 @Component({
   tag: 'va-text-input',
-  // styleUrl: 'va-text-input.css',
+  styleUrl: 'va-text-input.css',
   shadow: true,
 })
 export class VaTextInput {
