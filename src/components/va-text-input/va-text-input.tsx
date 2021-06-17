@@ -96,23 +96,25 @@ export class VaTextInput {
     }
     return (
       <Host>
-        {this.label && (
-          <label htmlFor="inputField">
-            {this.label}{' '}
-            {this.required && <span class="required">(Required)</span>}
-          </label>
-        )}
-        {this.error && <span id="error-message">{this.error}</span>}
-        <input
-          id="inputField"
-          type="text"
-          {...atts}
-          onInput={this.handleChange}
-          onBlur={this.handleBlur}
-        />
-        {this.maxlength && this.value.length >= this.maxlength && (
-          <small>(Max. {this.maxlength} characters)</small>
-        )}
+        <div class={this.error ? 'input-wrapper input-error' : 'input-wrapper'}>
+          {this.label && (
+            <label htmlFor="inputField">
+              {this.label}{' '}
+              {this.required && <span class="required">(Required)</span>}
+            </label>
+          )}
+          {this.error && <span id="error-message">{this.error}</span>}
+          <input
+            id="inputField"
+            type="text"
+            {...atts}
+            onInput={this.handleChange}
+            onBlur={this.handleBlur}
+          />
+          {this.maxlength && this.value.length >= this.maxlength && (
+            <small>(Max. {this.maxlength} characters)</small>
+          )}
+        </div>
       </Host>
     );
   }
