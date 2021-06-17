@@ -86,7 +86,7 @@ export namespace Components {
          */
         "autocomplete"?: string;
         /**
-          * Don't emit any component-library-analytics events
+          * Don't emit any component-library-analytics events.
          */
         "disableAnalytics"?: boolean;
         /**
@@ -102,11 +102,15 @@ export namespace Components {
          */
         "maxlength"?: number;
         /**
-          * Placeholder text to show in the input field
+          * The name to pass to the input element.
+         */
+        "name"?: string;
+        /**
+          * Placeholder text to show in the input field.
          */
         "placeholder"?: string;
         /**
-          * Set the input to required and render the (Required) text
+          * Set the input to required and render the (Required) text.
          */
         "required"?: boolean;
         "value"?: string;
@@ -246,7 +250,7 @@ declare namespace LocalJSX {
          */
         "autocomplete"?: string;
         /**
-          * Don't emit any component-library-analytics events
+          * Don't emit any component-library-analytics events.
          */
         "disableAnalytics"?: boolean;
         /**
@@ -261,13 +265,17 @@ declare namespace LocalJSX {
           * The maximum number of characters allowed in the input.
          */
         "maxlength"?: number;
+        /**
+          * The name to pass to the input element.
+         */
+        "name"?: string;
         "onComponent-library-analytics"?: (event: CustomEvent<any>) => void;
         /**
-          * Placeholder text to show in the input field
+          * Placeholder text to show in the input field.
          */
         "placeholder"?: string;
         /**
-          * Set the input to required and render the (Required) text
+          * Set the input to required and render the (Required) text.
          */
         "required"?: boolean;
         "value"?: string;

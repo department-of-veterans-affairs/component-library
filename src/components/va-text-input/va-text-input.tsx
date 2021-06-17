@@ -34,12 +34,12 @@ export class VaTextInput {
   @Prop() error?: string | HTMLElement;
 
   /**
-   * Set the input to required and render the (Required) text
+   * Set the input to required and render the (Required) text.
    */
   @Prop() required?: boolean;
 
   /**
-   * Placeholder text to show in the input field
+   * Placeholder text to show in the input field.
    */
   @Prop() placeholder?: string;
 
@@ -54,9 +54,14 @@ export class VaTextInput {
   @Prop() autocomplete?: string;
 
   /**
-   * Don't emit any component-library-analytics events
+   * Don't emit any component-library-analytics events.
    */
   @Prop() disableAnalytics?: boolean;
+
+  /**
+   * The name to pass to the input element.
+   */
+  @Prop() name?: string;
 
   /*
    * The value for the input.
