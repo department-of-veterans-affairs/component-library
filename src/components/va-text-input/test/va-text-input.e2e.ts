@@ -11,7 +11,9 @@ describe('va-text-input', () => {
     expect(element).toEqualHtml(`
       <va-text-input class="hydrated">
         <mock:shadow-root>
-          <input id="inputField" type="text" />
+          <div class="input-wrapper">
+            <input id="inputField" type="text" />
+          </div>
         </mock:shadow-root>
       </va-text-input>
     `);
@@ -63,8 +65,10 @@ describe('va-text-input', () => {
     expect(el).toEqualHtml(`
       <va-text-input class="hydrated" label="This is a field" required="">
         <mock:shadow-root>
-          <label for="inputField">This is a field <span class="required">(Required)</span></label>
-          <input id="inputField" type="text" required="" />
+          <div class="input-wrapper">
+            <label for="inputField">This is a field <span class="required">(Required)</span></label>
+            <input id="inputField" type="text" required="" />
+          </div>
         </mock:shadow-root>
       </va-text-input>
     `);
@@ -177,8 +181,10 @@ describe('va-text-input', () => {
     expect(element).toEqualHtml(`
       <va-text-input class="hydrated" label="Hello, world" unprop="Not a real prop">
         <mock:shadow-root>
-          <label for="inputField">Hello, world</label>
-          <input id="inputField" type="text" unprop="Not a real prop"/>
+          <div class="input-wrapper">
+            <label for="inputField">Hello, world</label>
+            <input id="inputField" type="text" unprop="Not a real prop"/>
+          </div>
         </mock:shadow-root>
       </va-text-input>
     `);
