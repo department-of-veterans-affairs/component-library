@@ -80,6 +80,41 @@ export namespace Components {
     }
     interface VaOnThisPage {
     }
+    interface VaTextInput {
+        /**
+          * What to tell the browser to auto-complete the field with.
+         */
+        "autocomplete"?: string;
+        /**
+          * Don't emit any component-library-analytics events.
+         */
+        "disableAnalytics"?: boolean;
+        /**
+          * The error message to render.
+         */
+        "error"?: string | HTMLElement;
+        /**
+          * The label for the text input.
+         */
+        "label": string | HTMLElement;
+        /**
+          * The maximum number of characters allowed in the input.
+         */
+        "maxlength"?: number;
+        /**
+          * The name to pass to the input element.
+         */
+        "name"?: string;
+        /**
+          * Placeholder text to show in the input field.
+         */
+        "placeholder"?: string;
+        /**
+          * Set the input to required and render the (Required) text.
+         */
+        "required"?: boolean;
+        "value"?: string;
+    }
 }
 declare global {
     interface HTMLMyComponentElement extends Components.MyComponent, HTMLStencilElement {
@@ -112,12 +147,19 @@ declare global {
         prototype: HTMLVaOnThisPageElement;
         new (): HTMLVaOnThisPageElement;
     };
+    interface HTMLVaTextInputElement extends Components.VaTextInput, HTMLStencilElement {
+    }
+    var HTMLVaTextInputElement: {
+        prototype: HTMLVaTextInputElement;
+        new (): HTMLVaTextInputElement;
+    };
     interface HTMLElementTagNameMap {
         "my-component": HTMLMyComponentElement;
         "va-accordion": HTMLVaAccordionElement;
         "va-accordion-item": HTMLVaAccordionItemElement;
         "va-alert": HTMLVaAlertElement;
         "va-on-this-page": HTMLVaOnThisPageElement;
+        "va-text-input": HTMLVaTextInputElement;
     }
 }
 declare namespace LocalJSX {
@@ -202,12 +244,49 @@ declare namespace LocalJSX {
     }
     interface VaOnThisPage {
     }
+    interface VaTextInput {
+        /**
+          * What to tell the browser to auto-complete the field with.
+         */
+        "autocomplete"?: string;
+        /**
+          * Don't emit any component-library-analytics events.
+         */
+        "disableAnalytics"?: boolean;
+        /**
+          * The error message to render.
+         */
+        "error"?: string | HTMLElement;
+        /**
+          * The label for the text input.
+         */
+        "label"?: string | HTMLElement;
+        /**
+          * The maximum number of characters allowed in the input.
+         */
+        "maxlength"?: number;
+        /**
+          * The name to pass to the input element.
+         */
+        "name"?: string;
+        "onComponent-library-analytics"?: (event: CustomEvent<any>) => void;
+        /**
+          * Placeholder text to show in the input field.
+         */
+        "placeholder"?: string;
+        /**
+          * Set the input to required and render the (Required) text.
+         */
+        "required"?: boolean;
+        "value"?: string;
+    }
     interface IntrinsicElements {
         "my-component": MyComponent;
         "va-accordion": VaAccordion;
         "va-accordion-item": VaAccordionItem;
         "va-alert": VaAlert;
         "va-on-this-page": VaOnThisPage;
+        "va-text-input": VaTextInput;
     }
 }
 export { LocalJSX as JSX };
@@ -219,6 +298,7 @@ declare module "@stencil/core" {
             "va-accordion-item": LocalJSX.VaAccordionItem & JSXBase.HTMLAttributes<HTMLVaAccordionItemElement>;
             "va-alert": LocalJSX.VaAlert & JSXBase.HTMLAttributes<HTMLVaAlertElement>;
             "va-on-this-page": LocalJSX.VaOnThisPage & JSXBase.HTMLAttributes<HTMLVaOnThisPageElement>;
+            "va-text-input": LocalJSX.VaTextInput & JSXBase.HTMLAttributes<HTMLVaTextInputElement>;
         }
     }
 }
