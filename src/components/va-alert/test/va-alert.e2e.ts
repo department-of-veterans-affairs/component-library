@@ -16,9 +16,7 @@ describe('va-alert', () => {
             <span class="sr-only">Alert:</span>
             <div class="body">
               <slot name="headline"></slot>
-              <div class="text">
-                <slot></slot>
-              </div>
+              <slot></slot>
             </div>
           </div>
         </mock:shadow-root>
