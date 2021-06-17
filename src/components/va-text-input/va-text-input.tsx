@@ -61,7 +61,7 @@ export class VaTextInput {
   /*
    * The value for the input.
    */
-  @Prop({ mutable: true }) value?: string;
+  @Prop({ mutable: true }) value?: string = '';
   // TODO: Make the value prop reflective. Currently, it isn't because it screws
   // up the input behavior. For now, the only bug is that the changed value
   // isn't reflected in the DOM on the web component.
