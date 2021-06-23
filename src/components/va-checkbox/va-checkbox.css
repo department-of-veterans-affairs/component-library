@@ -1,16 +1,15 @@
 :host {
   display: block;
-}
-
-input:not([disabled]) {
-  outline: 2px solid var(--color-gold-light);
-  outline-offset: 2px;
+  --visible-checkbox-size: 2rem;
+  --visible-checkbox-top-margin: 0.14em;
 }
 
 input {
-  height: 1.8rem;
-  width: 1.8rem;
-  margin: 0;
+  /* Make the clickable element the same size and position as the box */
+  height: var(--visible-checkbox-size);
+  width: var(--visible-checkbox-size);
+  margin: var(--visible-checkbox-top-margin) 0 0 0;
+
   padding: 0;
   opacity: 0;
   position: absolute;
@@ -18,12 +17,46 @@ input {
   box-sizing: border-box;
 }
 
+label {
+  display: block;
+}
+
 input+label {
   cursor: pointer;
   font-weight: 400;
   margin-bottom: 0.65em;
+  margin-left: 1.7em;
 }
 
-label {
+/* The actual box */
+input+label::before {
   display: block;
+  float: left;
+  margin-left: -1.7em;
+  margin-top: var(--visible-checkbox-top-margin);
+  margin-right: 0;
+  pointer-events: none;
+  border-radius: 2px;
+  box-shadow: 0 0 0 1px var(--color-gray-medium);
+  content: "\A0";
+  height: var(--visible-checkbox-size);
+  width: var(--visible-checkbox-size);
+  text-indent: 0.15em;
+}
+
+input:checked+label::before {
+  background-color: var(--color-primary);
+  box-shadow: 0 0 0 1px var(--color-primary);
+  /* background-image: insert checked svg here */
+  /* background-position: 50% */
+  /* background-repeat: no-repeat */
+
+  /* Alternatively, use a unicode character (for now) */
+  content: '\2713';
+  color: var(--color-white);
+}
+
+input:not([disabled]):focus+label:before {
+  outline: 2px solid var(--color-gold-light);
+  outline-offset: 2px;
 }
