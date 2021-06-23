@@ -79,6 +79,10 @@ export namespace Components {
         "visible": boolean;
     }
     interface VaCheckbox {
+        /**
+          * The error message to render.
+         */
+        "error"?: string | HTMLElement;
         "label": string;
     }
     interface VaOnThisPage {
@@ -253,6 +257,10 @@ declare namespace LocalJSX {
         "visible"?: boolean;
     }
     interface VaCheckbox {
+        /**
+          * The error message to render.
+         */
+        "error"?: string | HTMLElement;
         "label"?: string;
     }
     interface VaOnThisPage {

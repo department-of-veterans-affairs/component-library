@@ -16,7 +16,14 @@ describe('va-checkbox', () => {
     expect(element).not.toBeNull();
   });
 
-  it('renders an error message', async () => {});
+  it('renders an error message', async () => {
+    const page = await newE2EPage();
+    await page.setContent(
+      '<va-checkbox error="Something went horribly wrong" />',
+    );
+    const element = await page.find('va-checkbox >>> #error-message');
+    expect(element).not.toBeNull();
+  });
 
   it('renders a required span', async () => {});
 
