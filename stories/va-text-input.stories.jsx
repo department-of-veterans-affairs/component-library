@@ -36,3 +36,27 @@ Default.argTypes = propStructure(textInputDocs);
 
 export const Error = Template.bind({});
 Error.args = { ...defaultArgs, error: 'This is an error message' };
+
+export const Required = Template.bind({});
+Required.args = { ...defaultArgs, required: true };
+
+export const WithPlaceholder = Template.bind({});
+WithPlaceholder.args = { ...defaultArgs, placeholder: 'This is a placeholder' };
+
+export const MaxLength = Template.bind({});
+MaxLength.args = {
+  ...defaultArgs,
+  maxlength: '16',
+  placeholder: 'No more than 16 characters',
+};
+
+export const Autocomplete = Template.bind({});
+Autocomplete.args = {
+  ...defaultArgs,
+  name: 'email',
+  autocomplete: 'email',
+  placeholder: 'This should complete using email addresses',
+};
+
+export const WithAnalytics = Template.bind({});
+WithAnalytics.args = { ...defaultArgs, 'disable-analytics': false };
