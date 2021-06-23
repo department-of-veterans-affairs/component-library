@@ -19,7 +19,11 @@ const defaultArgs = {
   label: 'My input',
   autocomplete: false,
   'disable-analytics': true,
-  required: false,
+  // Fun fact: This should really be false, but that passes required="false" to
+  // the web component, which correctly interprets this as a truthy value.
+  // See also:
+  // https://html.spec.whatwg.org/multipage/common-microsyntaxes.html#boolean-attribute
+  required: null,
   error: null,
   maxlength: null,
   placeholder: null,
