@@ -38,7 +38,8 @@ describe('va-checkbox', () => {
   });
 
   // This test fails, but is here as documentation. The unknown slot and unnamed
-  // slot shouldn't show up in the browser, but the test still finds the text.
+  // slot shouldn't show up in the browser, but the test still finds the text
+  // because the elements are still in the light DOM.
   it.skip('does not render unknown content', async () => {
     const page = await newE2EPage();
     await page.setContent(
