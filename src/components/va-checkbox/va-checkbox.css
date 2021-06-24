@@ -56,13 +56,9 @@ input+label::before {
 input:checked+label::before {
   background-color: var(--color-primary);
   box-shadow: 0 0 0 1px var(--color-primary);
-  /* background-image: insert checked svg here */
-  /* background-position: 50% */
-  /* background-repeat: no-repeat */
-
-  /* Alternatively, use a unicode character (for now) */
-  content: '\2713';
-  color: var(--color-white);
+  background-image: url('../../assets/check.svg');
+  background-position: 50%;
+  background-repeat: no-repeat;
 }
 
 input:not([disabled]):focus+label:before {
