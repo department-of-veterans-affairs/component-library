@@ -59,7 +59,26 @@ describe('va-checkbox', () => {
     ).toBeNull();
   });
 
-  it('appends to an existing aria-describedby for error message', async () => {});
+  it('adds new aria-describedby for error message', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-checkbox error="This is a mistake" />');
+
+    // Render the error message text
+    const inputEl = await page.find('va-checkbox >>> input');
+    expect(inputEl.getAttribute('aria-describedby')).toContain('error-message');
+  });
+
+  it('appends to an existing aria-describedby for error message', async () => {
+    const page = await newE2EPage();
+    await page.setContent(
+      '<va-checkbox error="This is a mistake" aria-describedby="random-thing" />',
+    );
+
+    // Render the error message text
+    const error = await page.find('va-checkbox >>> input');
+    expect(error.getAttribute('aria-describedby')).toContain('random-thing');
+    expect(error.getAttribute('aria-describedby')).toContain('error-message');
+  });
 
   it('passes an aXe check', async () => {});
 
@@ -67,5 +86,12 @@ describe('va-checkbox', () => {
 
   it("doesn't fire an analytics event when disableAnalytics is true", async () => {});
 
-  it('passes unknown props to the input element in the shadow DOM', async () => {});
+  it('passes unknown props to the input element in the shadow DOM', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-checkbox foo="bar" />');
+
+    // Render the error message text
+    const element = await page.find('va-checkbox >>> input');
+    expect(element.getAttribute('foo')).toEqual('bar');
+  });
 });

@@ -1,4 +1,13 @@
-import { Component, Host, h, Prop } from '@stencil/core';
+import { Component, Element, Host, h, Prop } from '@stencil/core';
+
+import { assembleAttributes } from '../../utils/utils';
+
+// The props passed to the web component which we don't want to pass to the
+// input element. Note: The following attributes are deliberately left out so
+// they get passed to the input:
+//   - required
+//   - checked
+const wcOnlyProps = ['label', 'error', 'disableAnalytics'];
 
 @Component({
   tag: 'va-checkbox',
@@ -6,6 +15,8 @@ import { Component, Host, h, Prop } from '@stencil/core';
   shadow: true,
 })
 export class VaCheckbox {
+  @Element() el: HTMLElement;
+
   @Prop() label: string;
 
   /**
@@ -20,6 +31,12 @@ export class VaCheckbox {
   @Prop() description?: string;
 
   render() {
+    const atts = assembleAttributes(this.el.attributes, wcOnlyProps);
+    if (this.error) {
+      atts['aria-describedby'] = (
+        (atts['aria-describedby'] || '') + ' error-message'
+      ).trim();
+    }
     return (
       <Host>
         <div id="description">
@@ -29,7 +46,7 @@ export class VaCheckbox {
             <slot name="description" />
           )}
         </div>
-        <input type="checkbox" id="checkbox-element" />
+        <input type="checkbox" id="checkbox-element" {...atts} />
         <label htmlFor="checkbox-element">{this.label}</label>
         {this.error && <span id="error-message">{this.error}</span>}
       </Host>
