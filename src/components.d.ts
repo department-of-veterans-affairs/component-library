@@ -88,6 +88,10 @@ export namespace Components {
          */
         "error"?: string | HTMLElement;
         "label": string;
+        /**
+          * Set the input to required and render the (Required) text.
+         */
+        "required"?: boolean;
     }
     interface VaOnThisPage {
     }
@@ -270,6 +274,10 @@ declare namespace LocalJSX {
          */
         "error"?: string | HTMLElement;
         "label"?: string;
+        /**
+          * Set the input to required and render the (Required) text.
+         */
+        "required"?: boolean;
     }
     interface VaOnThisPage {
     }

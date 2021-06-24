@@ -30,6 +30,11 @@ export class VaCheckbox {
    */
   @Prop() description?: string;
 
+  /**
+   * Set the input to required and render the (Required) text.
+   */
+  @Prop() required?: boolean;
+
   render() {
     const atts = assembleAttributes(this.el.attributes, wcOnlyProps);
     if (this.error) {
@@ -47,7 +52,10 @@ export class VaCheckbox {
           )}
         </div>
         <input type="checkbox" id="checkbox-element" {...atts} />
-        <label htmlFor="checkbox-element">{this.label}</label>
+        <label htmlFor="checkbox-element">
+          {this.label}
+          {this.required && <span class="required">(Required)</span>}
+        </label>
         {this.error && <span id="error-message">{this.error}</span>}
       </Host>
     );

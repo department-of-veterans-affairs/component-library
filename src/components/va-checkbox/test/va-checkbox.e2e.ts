@@ -26,7 +26,12 @@ describe('va-checkbox', () => {
     expect(element).not.toBeNull();
   });
 
-  it('renders a required span', async () => {});
+  it('renders a required span', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-checkbox label="I am Checkbox" required/>');
+    const element = await page.find('va-checkbox >>> .required');
+    expect(element).not.toBeNull();
+  });
 
   it('renders a description', async () => {
     const page = await newE2EPage();
