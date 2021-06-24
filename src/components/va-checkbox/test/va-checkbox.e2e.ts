@@ -152,7 +152,20 @@ describe('va-checkbox', () => {
     expect(analyticsSpy).not.toHaveReceivedEvent();
   });
 
-  it('updates the checked prop', async () => {});
+  it('updates the checked prop', async () => {
+    const page = await newE2EPage();
+    await page.setContent(
+      '<va-checkbox label="Just another checkbox here" checked/>',
+    );
+    const inputEl = await page.find('va-checkbox >>> input');
+    expect(await inputEl.getProperty('checked')).toBeTruthy();
+
+    await inputEl.click();
+    expect(await inputEl.getProperty('checked')).toBeFalsy();
+
+    await inputEl.click();
+    expect(await inputEl.getProperty('checked')).toBeTruthy();
+  });
 
   it('passes unknown props to the input element in the shadow DOM', async () => {
     const page = await newE2EPage();
