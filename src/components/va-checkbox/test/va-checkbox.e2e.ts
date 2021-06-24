@@ -1,4 +1,5 @@
 import { newE2EPage } from '@stencil/core/testing';
+import { axeCheck } from '../../../testing/test-helpers';
 
 describe('va-checkbox', () => {
   it('renders', async () => {
@@ -80,7 +81,15 @@ describe('va-checkbox', () => {
     expect(error.getAttribute('aria-describedby')).toContain('error-message');
   });
 
-  it('passes an aXe check', async () => {});
+  it('passes an aXe check', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent(
+      '<va-checkbox required label="This is a test" error="With an error message"/>',
+    );
+
+    await axeCheck(page);
+  });
 
   it('fires an analytics event', async () => {});
 
