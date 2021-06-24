@@ -112,9 +112,9 @@ export namespace Components {
          */
         "autocomplete"?: string;
         /**
-          * Don't emit any component-library-analytics events.
+          * Emit component-library-analytics events on the blur event.
          */
-        "disableAnalytics"?: boolean;
+        "enableAnalytics"?: boolean;
         /**
           * The error message to render.
          */
@@ -310,9 +310,9 @@ declare namespace LocalJSX {
          */
         "autocomplete"?: string;
         /**
-          * Don't emit any component-library-analytics events.
+          * Emit component-library-analytics events on the blur event.
          */
-        "disableAnalytics"?: boolean;
+        "enableAnalytics"?: boolean;
         /**
           * The error message to render.
          */
