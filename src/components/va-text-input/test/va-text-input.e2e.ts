@@ -84,7 +84,7 @@ describe('va-text-input', () => {
     await axeCheck(page);
   });
 
-  it('fires an analytics event', async () => {
+  it('fires an analytics event when enableAnalytics is true', async () => {
     const page = await newE2EPage();
 
     await page.setContent(
