@@ -83,10 +83,14 @@ export namespace Components {
           * The description to render. If this prop exists, va-checkbox will render it instead of the named slot.
          */
         "description"?: string;
+        "enableAnalytics": boolean;
         /**
           * The error message to render.
          */
         "error"?: string | HTMLElement;
+        /**
+          * The label for the checkbox.
+         */
         "label": string;
         /**
           * Set the input to required and render the (Required) text.
@@ -269,11 +273,16 @@ declare namespace LocalJSX {
           * The description to render. If this prop exists, va-checkbox will render it instead of the named slot.
          */
         "description"?: string;
+        "enableAnalytics"?: boolean;
         /**
           * The error message to render.
          */
         "error"?: string | HTMLElement;
+        /**
+          * The label for the checkbox.
+         */
         "label"?: string;
+        "onComponent-library-analytics"?: (event: CustomEvent<any>) => void;
         /**
           * Set the input to required and render the (Required) text.
          */

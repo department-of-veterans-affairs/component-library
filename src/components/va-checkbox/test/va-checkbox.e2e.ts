@@ -97,9 +97,62 @@ describe('va-checkbox', () => {
     await axeCheck(page);
   });
 
-  it('fires an analytics event', async () => {});
+  it('fires an analytics event when enableAnalytics is true', async () => {
+    const page = await newE2EPage();
+    await page.setContent(
+      '<va-checkbox label="Just another checkbox here" enable-analytics required description="Description content"/>',
+    );
+    const analyticsSpy = await page.spyOnEvent('component-library-analytics');
+    const inputEl = await page.find('va-checkbox >>> input');
+    await inputEl.click();
 
-  it("doesn't fire an analytics event when disableAnalytics is true", async () => {});
+    expect(analyticsSpy).toHaveReceivedEventDetail({
+      action: 'change',
+      componentName: 'va-checkbox',
+      details: {
+        label: 'Just another checkbox here',
+        description: 'Description content',
+        required: true, // This will be omitted if false, evidently
+      },
+    });
+  });
+
+  it('fires an analytics event with descritption slotted content', async () => {
+    const page = await newE2EPage();
+    await page.setContent(
+      `<va-checkbox label="Just another checkbox here" enable-analytics>
+        <div slot="description">Description content in a slot.<p>Testing nested nodes.</p></div>
+        <p slot="description">And multiple slots.</p>
+       </va-checkbox`,
+    );
+    const analyticsSpy = await page.spyOnEvent('component-library-analytics');
+    const inputEl = await page.find('va-checkbox >>> input');
+    await inputEl.click();
+
+    expect(analyticsSpy).toHaveReceivedEventDetail({
+      action: 'change',
+      componentName: 'va-checkbox',
+      details: {
+        label: 'Just another checkbox here',
+        description:
+          'Description content in a slot.Testing nested nodes. And multiple slots.',
+      },
+    });
+  });
+
+  it("doesn't fire an analytics event when enableAnalytics is false", async () => {
+    const page = await newE2EPage();
+    await page.setContent(
+      '<va-checkbox label="Just another checkbox here" required description="Description content"/>',
+    );
+    const analyticsSpy = await page.spyOnEvent('component-library-analytics');
+    const inputEl = await page.find('va-checkbox >>> input');
+    await inputEl.click();
+
+    expect(analyticsSpy).not.toHaveReceivedEvent();
+  });
+
+  it('updates the checked prop', async () => {});
 
   it('passes unknown props to the input element in the shadow DOM', async () => {
     const page = await newE2EPage();

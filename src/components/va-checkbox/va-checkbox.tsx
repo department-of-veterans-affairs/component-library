@@ -1,4 +1,12 @@
-import { Component, Element, Host, h, Prop } from '@stencil/core';
+import {
+  Component,
+  Element,
+  Event,
+  EventEmitter,
+  Host,
+  h,
+  Prop,
+} from '@stencil/core';
 
 import { assembleAttributes } from '../../utils/utils';
 
@@ -7,7 +15,7 @@ import { assembleAttributes } from '../../utils/utils';
 // they get passed to the input:
 //   - required
 //   - checked
-const wcOnlyProps = ['label', 'error', 'disableAnalytics'];
+const wcOnlyProps = ['label', 'error', 'enableAnalytics'];
 
 @Component({
   tag: 'va-checkbox',
@@ -16,6 +24,13 @@ const wcOnlyProps = ['label', 'error', 'disableAnalytics'];
 })
 export class VaCheckbox {
   @Element() el: HTMLElement;
+
+  @Event({
+    eventName: 'component-library-analytics',
+    composed: true,
+    bubbles: true,
+  })
+  componentLibraryAnalytics: EventEmitter;
 
   /**
    * The label for the checkbox.
@@ -38,6 +53,41 @@ export class VaCheckbox {
    */
   @Prop() required?: boolean;
 
+  /*
+   * True if the analytics event should fire.
+   */
+  @Prop() enableAnalytics: boolean = false;
+
+  private handleChange = () => {
+    if (!this.enableAnalytics) return;
+
+    // Either the description prop or the text content of the description slots
+    const description =
+      this.description ||
+      [
+        // This won't work in IE
+        ...(this.el.shadowRoot.querySelector(
+          'slot[name="description"]',
+        ) as HTMLSlotElement)?.assignedNodes(),
+        // For IE
+        ...Array.from(
+          this.el.shadowRoot.querySelectorAll('[slot="description"]'),
+        ),
+      ]
+        .map(n => n.textContent)
+        .join(' ');
+
+    this.componentLibraryAnalytics.emit({
+      componentName: 'va-checkbox',
+      action: 'change',
+      details: {
+        label: this.label,
+        description,
+        required: this.required,
+      },
+    });
+  };
+
   render() {
     const atts = assembleAttributes(this.el.attributes, wcOnlyProps);
     if (this.error) {
@@ -54,7 +104,12 @@ export class VaCheckbox {
             <slot name="description" />
           )}
         </div>
-        <input type="checkbox" id="checkbox-element" {...atts} />
+        <input
+          type="checkbox"
+          id="checkbox-element"
+          {...atts}
+          onChange={this.handleChange}
+        />
         <label htmlFor="checkbox-element">
           {this.label}
           {this.required && <span class="required">(Required)</span>}
