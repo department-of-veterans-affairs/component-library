@@ -80,6 +80,10 @@ export namespace Components {
     }
     interface VaCheckbox {
         /**
+          * The description to render. If this prop exists, va-checkbox will render it instead of the named slot.
+         */
+        "description"?: string;
+        /**
           * The error message to render.
          */
         "error"?: string | HTMLElement;
@@ -257,6 +261,10 @@ declare namespace LocalJSX {
         "visible"?: boolean;
     }
     interface VaCheckbox {
+        /**
+          * The description to render. If this prop exists, va-checkbox will render it instead of the named slot.
+         */
+        "description"?: string;
         /**
           * The error message to render.
          */

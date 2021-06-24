@@ -27,6 +27,38 @@ describe('va-checkbox', () => {
 
   it('renders a required span', async () => {});
 
+  it('renders a description', async () => {
+    const page = await newE2EPage();
+    await page.setContent(
+      '<va-checkbox><p slot="description">This is a description!</p></va-checkbox',
+    );
+    const element = await page.find('va-checkbox');
+    expect(element).toEqualText('This is a description!');
+  });
+
+  // This test fails, but is here as documentation. The unknown slot and unnamed
+  // slot shouldn't show up in the browser, but the test still finds the text.
+  it.skip('does not render unknown content', async () => {
+    const page = await newE2EPage();
+    await page.setContent(
+      '<va-checkbox><p slot="nope">Should not show up</p><p>Nor should unnamed slotted content</p></va-checkbox',
+    );
+    const element = await page.find('va-checkbox');
+    expect(element).toEqualText('');
+  });
+
+  it('should prefer rendering the description prop over the slotted element', async () => {
+    const page = await newE2EPage();
+    await page.setContent(
+      '<va-checkbox description="Description prop"><p slot="description">Slotted description</p></va-checkbox',
+    );
+    const element = await page.find('va-checkbox');
+    expect(element.shadowRoot.textContent).toContain('Description prop');
+    expect(
+      await page.find('va-checkbox >>> slot[name="description"]'),
+    ).toBeNull();
+  });
+
   it('appends to an existing aria-describedby for error message', async () => {});
 
   it('passes an aXe check', async () => {});
