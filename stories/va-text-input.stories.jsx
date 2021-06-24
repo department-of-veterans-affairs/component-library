@@ -18,11 +18,12 @@ const defaultArgs = {
   name: 'my-input',
   label: 'My input',
   autocomplete: false,
-  'disable-analytics': true,
-  // Fun fact: This should really be false, but that passes required="false" to
-  // the web component, which correctly interprets this as a truthy value.
-  // See also:
+  // Fun fact: This should really be false, but that passes
+  // enable-analytics="false" to the web component, which correctly interprets
+  // this as a truthy value. See also:
   // https://html.spec.whatwg.org/multipage/common-microsyntaxes.html#boolean-attribute
+  'enable-analytics': null,
+  // Same story here
   required: null,
   error: null,
   maxlength: null,
@@ -63,4 +64,4 @@ Autocomplete.args = {
 };
 
 export const WithAnalytics = Template.bind({});
-WithAnalytics.args = { ...defaultArgs, 'disable-analytics': false };
+WithAnalytics.args = { ...defaultArgs, 'enable-analytics': true };
