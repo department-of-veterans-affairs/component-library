@@ -53,14 +53,21 @@ export class VaCheckbox {
    */
   @Prop() required?: boolean;
 
-  /*
+  /**
    * True if the analytics event should fire.
    */
   @Prop() enableAnalytics: boolean = false;
 
-  private handleChange = () => {
-    if (!this.enableAnalytics) return;
+  /**
+   * Whether the checkbox is checked or not.
+   *
+   * Note: Because this isn't reflective, vaCheckbox.getAttribute('checked')
+   * will not reflect the correct value. Use the property vaCheckbox.checked
+   * instead.
+   */
+  @Prop({ mutable: true }) checked: boolean = false;
 
+  private fireAnalyticsEvent = () => {
     // Either the description prop or the text content of the description slots
     const description =
       this.description ||
@@ -86,6 +93,11 @@ export class VaCheckbox {
         required: this.required,
       },
     });
+  };
+
+  private handleChange = (e: Event) => {
+    this.checked = (e.target as HTMLInputElement).checked;
+    if (this.enableAnalytics) this.fireAnalyticsEvent();
   };
 
   render() {

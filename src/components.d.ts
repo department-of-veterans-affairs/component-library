@@ -80,9 +80,16 @@ export namespace Components {
     }
     interface VaCheckbox {
         /**
+          * Whether the checkbox is checked or not.  Note: Because this isn't reflective, vaCheckbox.getAttribute('checked') will not reflect the correct value. Use the property vaCheckbox.checked instead.
+         */
+        "checked": boolean;
+        /**
           * The description to render. If this prop exists, va-checkbox will render it instead of the named slot.
          */
         "description"?: string;
+        /**
+          * True if the analytics event should fire.
+         */
         "enableAnalytics": boolean;
         /**
           * The error message to render.
@@ -270,9 +277,16 @@ declare namespace LocalJSX {
     }
     interface VaCheckbox {
         /**
+          * Whether the checkbox is checked or not.  Note: Because this isn't reflective, vaCheckbox.getAttribute('checked') will not reflect the correct value. Use the property vaCheckbox.checked instead.
+         */
+        "checked"?: boolean;
+        /**
           * The description to render. If this prop exists, va-checkbox will render it instead of the named slot.
          */
         "description"?: string;
+        /**
+          * True if the analytics event should fire.
+         */
         "enableAnalytics"?: boolean;
         /**
           * The error message to render.
