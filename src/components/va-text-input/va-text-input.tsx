@@ -54,9 +54,9 @@ export class VaTextInput {
   @Prop() autocomplete?: string;
 
   /**
-   * Don't emit any component-library-analytics events.
+   * Emit component-library-analytics events on the blur event.
    */
-  @Prop() disableAnalytics?: boolean;
+  @Prop() enableAnalytics?: boolean;
 
   /**
    * The name to pass to the input element.
@@ -82,7 +82,7 @@ export class VaTextInput {
   };
 
   private handleBlur = () => {
-    if (this.disableAnalytics) return;
+    if (!this.enableAnalytics) return;
 
     this.componentLibraryAnalytics.emit({
       componentName: 'va-text-input',
