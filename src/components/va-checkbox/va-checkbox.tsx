@@ -17,6 +17,9 @@ const wcOnlyProps = ['label', 'error', 'disableAnalytics'];
 export class VaCheckbox {
   @Element() el: HTMLElement;
 
+  /**
+   * The label for the checkbox.
+   */
   @Prop() label: string;
 
   /**
