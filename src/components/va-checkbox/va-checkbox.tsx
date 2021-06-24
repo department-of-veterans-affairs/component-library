@@ -90,10 +90,11 @@ export class VaCheckbox {
 
   render() {
     const atts = assembleAttributes(this.el.attributes, wcOnlyProps);
+    atts['aria-describedby'] = (
+      (atts['aria-describedby'] || '') + ' description'
+    ).trim();
     if (this.error) {
-      atts['aria-describedby'] = (
-        (atts['aria-describedby'] || '') + ' error-message'
-      ).trim();
+      atts['aria-describedby'] += ' error-message';
     }
     return (
       <Host>
