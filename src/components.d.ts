@@ -106,6 +106,32 @@ export namespace Components {
     }
     interface VaOnThisPage {
     }
+    interface VaSelect {
+        /**
+          * Whether or not to fire the analytics events
+         */
+        "enableAnalytics": boolean;
+        /**
+          * Error message to display. When defined, this indicates an error.
+         */
+        "error": string;
+        /**
+          * Text label for the field.
+         */
+        "label": string;
+        /**
+          * Name attribute for the select field.
+         */
+        "name": string;
+        /**
+          * Whether or not this is a required field.
+         */
+        "required": boolean;
+        /**
+          * Selected value (will get updated on select).
+         */
+        "value": string;
+    }
     interface VaTextInput {
         /**
           * What to tell the browser to auto-complete the field with.
@@ -179,6 +205,12 @@ declare global {
         prototype: HTMLVaOnThisPageElement;
         new (): HTMLVaOnThisPageElement;
     };
+    interface HTMLVaSelectElement extends Components.VaSelect, HTMLStencilElement {
+    }
+    var HTMLVaSelectElement: {
+        prototype: HTMLVaSelectElement;
+        new (): HTMLVaSelectElement;
+    };
     interface HTMLVaTextInputElement extends Components.VaTextInput, HTMLStencilElement {
     }
     var HTMLVaTextInputElement: {
@@ -192,6 +224,7 @@ declare global {
         "va-alert": HTMLVaAlertElement;
         "va-checkbox": HTMLVaCheckboxElement;
         "va-on-this-page": HTMLVaOnThisPageElement;
+        "va-select": HTMLVaSelectElement;
         "va-text-input": HTMLVaTextInputElement;
     }
 }
@@ -304,6 +337,35 @@ declare namespace LocalJSX {
     }
     interface VaOnThisPage {
     }
+    interface VaSelect {
+        /**
+          * Whether or not to fire the analytics events
+         */
+        "enableAnalytics"?: boolean;
+        /**
+          * Error message to display. When defined, this indicates an error.
+         */
+        "error"?: string;
+        /**
+          * Text label for the field.
+         */
+        "label"?: string;
+        /**
+          * Name attribute for the select field.
+         */
+        "name"?: string;
+        "onComponent-library-analytics"?: (event: CustomEvent<any>) => void;
+        "onKeyDown"?: (event: CustomEvent<any>) => void;
+        "onSelect"?: (event: CustomEvent<any>) => void;
+        /**
+          * Whether or not this is a required field.
+         */
+        "required"?: boolean;
+        /**
+          * Selected value (will get updated on select).
+         */
+        "value"?: string;
+    }
     interface VaTextInput {
         /**
           * What to tell the browser to auto-complete the field with.
@@ -347,6 +409,7 @@ declare namespace LocalJSX {
         "va-alert": VaAlert;
         "va-checkbox": VaCheckbox;
         "va-on-this-page": VaOnThisPage;
+        "va-select": VaSelect;
         "va-text-input": VaTextInput;
     }
 }
@@ -360,6 +423,7 @@ declare module "@stencil/core" {
             "va-alert": LocalJSX.VaAlert & JSXBase.HTMLAttributes<HTMLVaAlertElement>;
             "va-checkbox": LocalJSX.VaCheckbox & JSXBase.HTMLAttributes<HTMLVaCheckboxElement>;
             "va-on-this-page": LocalJSX.VaOnThisPage & JSXBase.HTMLAttributes<HTMLVaOnThisPageElement>;
+            "va-select": LocalJSX.VaSelect & JSXBase.HTMLAttributes<HTMLVaSelectElement>;
             "va-text-input": LocalJSX.VaTextInput & JSXBase.HTMLAttributes<HTMLVaTextInputElement>;
         }
     }
