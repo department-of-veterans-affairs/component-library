@@ -104,7 +104,7 @@ export class VaSelect {
   }
 
   render() {
-    const { error, label, required, name, value } = this;
+    const { error, label, required, name } = this;
     const errorSpanId = error ? 'error' : undefined;
 
     return (
