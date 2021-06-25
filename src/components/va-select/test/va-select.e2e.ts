@@ -102,7 +102,7 @@ describe('va-select', () => {
 
     expect(analyticsSpy).toHaveReceivedEventDetail({
       action: 'change',
-      componentName: 'Select',
+      componentName: 'va-select',
       details: {
         label: 'A label',
         selectLabel: 'bar',
