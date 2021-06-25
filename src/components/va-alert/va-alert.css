@@ -41,10 +41,11 @@ div.body {
   vertical-align: middle;
   width: 100%;
 }
-div.text {
+::slotted(:not([slot])){
   margin-top: 2rem;
 }
-.bg-only .text {
+
+.bg-only ::slotted(*) {
   margin-top: 0;
 }
 

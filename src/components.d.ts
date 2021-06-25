@@ -78,6 +78,32 @@ export namespace Components {
          */
         "visible": boolean;
     }
+    interface VaCheckbox {
+        /**
+          * Whether the checkbox is checked or not.  Note: Because this isn't reflective, vaCheckbox.getAttribute('checked') will not reflect the correct value. Use the property vaCheckbox.checked instead.
+         */
+        "checked": boolean;
+        /**
+          * The description to render. If this prop exists, va-checkbox will render it instead of the named slot.
+         */
+        "description"?: string;
+        /**
+          * True if the analytics event should fire.
+         */
+        "enableAnalytics": boolean;
+        /**
+          * The error message to render.
+         */
+        "error"?: string | HTMLElement;
+        /**
+          * The label for the checkbox.
+         */
+        "label": string;
+        /**
+          * Set the input to required and render the (Required) text.
+         */
+        "required"?: boolean;
+    }
     interface VaOnThisPage {
     }
     interface VaSelect {
@@ -106,6 +132,41 @@ export namespace Components {
          */
         "value": string;
     }
+    interface VaTextInput {
+        /**
+          * What to tell the browser to auto-complete the field with.
+         */
+        "autocomplete"?: string;
+        /**
+          * Emit component-library-analytics events on the blur event.
+         */
+        "enableAnalytics"?: boolean;
+        /**
+          * The error message to render.
+         */
+        "error"?: string | HTMLElement;
+        /**
+          * The label for the text input.
+         */
+        "label": string | HTMLElement;
+        /**
+          * The maximum number of characters allowed in the input.
+         */
+        "maxlength"?: number;
+        /**
+          * The name to pass to the input element.
+         */
+        "name"?: string;
+        /**
+          * Placeholder text to show in the input field.
+         */
+        "placeholder"?: string;
+        /**
+          * Set the input to required and render the (Required) text.
+         */
+        "required"?: boolean;
+        "value"?: string;
+    }
 }
 declare global {
     interface HTMLMyComponentElement extends Components.MyComponent, HTMLStencilElement {
@@ -132,6 +193,12 @@ declare global {
         prototype: HTMLVaAlertElement;
         new (): HTMLVaAlertElement;
     };
+    interface HTMLVaCheckboxElement extends Components.VaCheckbox, HTMLStencilElement {
+    }
+    var HTMLVaCheckboxElement: {
+        prototype: HTMLVaCheckboxElement;
+        new (): HTMLVaCheckboxElement;
+    };
     interface HTMLVaOnThisPageElement extends Components.VaOnThisPage, HTMLStencilElement {
     }
     var HTMLVaOnThisPageElement: {
@@ -144,13 +211,21 @@ declare global {
         prototype: HTMLVaSelectElement;
         new (): HTMLVaSelectElement;
     };
+    interface HTMLVaTextInputElement extends Components.VaTextInput, HTMLStencilElement {
+    }
+    var HTMLVaTextInputElement: {
+        prototype: HTMLVaTextInputElement;
+        new (): HTMLVaTextInputElement;
+    };
     interface HTMLElementTagNameMap {
         "my-component": HTMLMyComponentElement;
         "va-accordion": HTMLVaAccordionElement;
         "va-accordion-item": HTMLVaAccordionItemElement;
         "va-alert": HTMLVaAlertElement;
+        "va-checkbox": HTMLVaCheckboxElement;
         "va-on-this-page": HTMLVaOnThisPageElement;
         "va-select": HTMLVaSelectElement;
+        "va-text-input": HTMLVaTextInputElement;
     }
 }
 declare namespace LocalJSX {
@@ -233,6 +308,33 @@ declare namespace LocalJSX {
          */
         "visible"?: boolean;
     }
+    interface VaCheckbox {
+        /**
+          * Whether the checkbox is checked or not.  Note: Because this isn't reflective, vaCheckbox.getAttribute('checked') will not reflect the correct value. Use the property vaCheckbox.checked instead.
+         */
+        "checked"?: boolean;
+        /**
+          * The description to render. If this prop exists, va-checkbox will render it instead of the named slot.
+         */
+        "description"?: string;
+        /**
+          * True if the analytics event should fire.
+         */
+        "enableAnalytics"?: boolean;
+        /**
+          * The error message to render.
+         */
+        "error"?: string | HTMLElement;
+        /**
+          * The label for the checkbox.
+         */
+        "label"?: string;
+        "onComponent-library-analytics"?: (event: CustomEvent<any>) => void;
+        /**
+          * Set the input to required and render the (Required) text.
+         */
+        "required"?: boolean;
+    }
     interface VaOnThisPage {
     }
     interface VaSelect {
@@ -264,13 +366,51 @@ declare namespace LocalJSX {
          */
         "value"?: string;
     }
+    interface VaTextInput {
+        /**
+          * What to tell the browser to auto-complete the field with.
+         */
+        "autocomplete"?: string;
+        /**
+          * Emit component-library-analytics events on the blur event.
+         */
+        "enableAnalytics"?: boolean;
+        /**
+          * The error message to render.
+         */
+        "error"?: string | HTMLElement;
+        /**
+          * The label for the text input.
+         */
+        "label"?: string | HTMLElement;
+        /**
+          * The maximum number of characters allowed in the input.
+         */
+        "maxlength"?: number;
+        /**
+          * The name to pass to the input element.
+         */
+        "name"?: string;
+        "onComponent-library-analytics"?: (event: CustomEvent<any>) => void;
+        /**
+          * Placeholder text to show in the input field.
+         */
+        "placeholder"?: string;
+        /**
+          * Set the input to required and render the (Required) text.
+         */
+        "required"?: boolean;
+        "value"?: string;
+    }
     interface IntrinsicElements {
         "my-component": MyComponent;
         "va-accordion": VaAccordion;
         "va-accordion-item": VaAccordionItem;
         "va-alert": VaAlert;
+        "va-checkbox": VaCheckbox;
         "va-on-this-page": VaOnThisPage;
         "va-select": VaSelect;
+        "va-text-input": VaTextInput;
     }
 }
 export { LocalJSX as JSX };
@@ -281,8 +421,10 @@ declare module "@stencil/core" {
             "va-accordion": LocalJSX.VaAccordion & JSXBase.HTMLAttributes<HTMLVaAccordionElement>;
             "va-accordion-item": LocalJSX.VaAccordionItem & JSXBase.HTMLAttributes<HTMLVaAccordionItemElement>;
             "va-alert": LocalJSX.VaAlert & JSXBase.HTMLAttributes<HTMLVaAlertElement>;
+            "va-checkbox": LocalJSX.VaCheckbox & JSXBase.HTMLAttributes<HTMLVaCheckboxElement>;
             "va-on-this-page": LocalJSX.VaOnThisPage & JSXBase.HTMLAttributes<HTMLVaOnThisPageElement>;
             "va-select": LocalJSX.VaSelect & JSXBase.HTMLAttributes<HTMLVaSelectElement>;
+            "va-text-input": LocalJSX.VaTextInput & JSXBase.HTMLAttributes<HTMLVaTextInputElement>;
         }
     }
 }
