@@ -71,7 +71,7 @@ export class VaSelect {
 
     if (this.enableAnalytics) {
       const detail = {
-        componentName: 'Select',
+        componentName: 'va-select',
         action: 'change',
         details: {
           label: this.label,
