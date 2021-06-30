@@ -7,6 +7,8 @@ import dispatchAnalyticsEvent from '../../helpers/analytics';
 
 /**
  * A form select with a label that can display error messages.
+ *
+ * **Note:** This component is deprecated in favor of the `<va-select>` Web Component.
  */
 
 class Select extends React.Component {
