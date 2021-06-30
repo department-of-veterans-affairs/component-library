@@ -38,6 +38,7 @@ const defaultArgs = {
       Coastguard
     </option>,
   ],
+  useAddButton: false,
 };
 
 const Template = ({
@@ -48,24 +49,26 @@ const Template = ({
   error,
   ariaLiveRegionText,
   options,
+  useAddButton,
 }) => {
   const [modifiedOptions, setModifiedOptions] = useState(options);
 
   return (
     <>
-      <button
-        onClick={() => {
-          console.log(modifiedOptions);
-          setModifiedOptions([
-            ...modifiedOptions,
-            <option key="6" value="new">
-              Something new
-            </option>,
-          ]);
-        }}
-      >
-        Change the options
-      </button>
+      {useAddButton && (
+        <button
+          onClick={() => {
+            setModifiedOptions([
+              ...modifiedOptions,
+              <option key="6" value="new">
+                Something new
+              </option>,
+            ]);
+          }}
+        >
+          Add &quot;Something new&quot;
+        </button>
+      )}
       <va-select
         label={label}
         name={name}
@@ -89,3 +92,6 @@ Required.args = { ...defaultArgs, required: true };
 
 export const ErrorMessage = Template.bind({});
 ErrorMessage.args = { ...defaultArgs, error: 'There was a problem' };
+
+export const DynamicOptions = Template.bind({});
+DynamicOptions.args = { ...defaultArgs, useAddButton: true };
