@@ -26,6 +26,12 @@ From the project root, run the following commands:
 
 The Design System team is working on replacing the React components in this library with Web Component versions. This isn't _just_ a React replacement however - part of the goal is to have true components that can be used outside of React in plain HTML pages.
 
+### Usage
+
+To use these Web Components in your own project, follow the [installation steps](https://design.va.gov/documentation/developers#load-the-web-component-library). This will allow the components to be used in JSX or HTML.
+
+### Development
+
 For now these Web Components live on the [`web-components` branch](https://github.com/department-of-veterans-affairs/component-library/tree/web-components). In order to add a new component or make changes to an existing one, you must:
 
 1. Create a new branch off of `web-components`
