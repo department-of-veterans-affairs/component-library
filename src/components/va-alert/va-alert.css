@@ -3,7 +3,6 @@
 :host {
   display: block;
   background-color: var(--color-gray-lightest);
-  font-size: 2rem;
   position: relative;
 }
 
@@ -13,7 +12,7 @@
 }
 
 ::slotted([slot='headline']) {
-  font-size: 1em !important;
+  font-size: 2rem !important;
   line-height: 26px !important;
   padding: 0 !important;
   margin: 0 !important;
@@ -43,7 +42,6 @@ div.body {
 }
 ::slotted(:not([slot])) {
   margin-top: 2rem;
-  font-size: 1.6rem;
 }
 
 .bg-only ::slotted(*) {
