@@ -8,6 +8,18 @@ import {
   EventEmitter,
 } from '@stencil/core';
 
+import { assembleAttributes } from '../../utils/utils';
+
+// The props passed to the web component which we don't want to pass to the
+// input element. Note: The following attributes are deliberately left out so
+// they get passed to the input:
+//   - required
+//   - placeholder
+//   - maxlength
+//   - autocomplete
+//   - value
+const wcOnlyProps = ['label', 'error', 'disableAnalytics'];
+
 @Component({
   tag: 'va-text-input',
   styleUrl: 'va-text-input.css',
@@ -54,9 +66,9 @@ export class VaTextInput {
   @Prop() autocomplete?: string;
 
   /**
-   * Don't emit any component-library-analytics events.
+   * Emit component-library-analytics events on the blur event.
    */
-  @Prop() disableAnalytics?: boolean;
+  @Prop() enableAnalytics?: boolean;
 
   /**
    * The name to pass to the input element.
@@ -82,7 +94,7 @@ export class VaTextInput {
   };
 
   private handleBlur = () => {
-    if (this.disableAnalytics) return;
+    if (!this.enableAnalytics) return;
 
     this.componentLibraryAnalytics.emit({
       componentName: 'va-text-input',
@@ -95,7 +107,7 @@ export class VaTextInput {
   };
 
   render() {
-    const atts = assembleAttributes(this.el.attributes);
+    const atts = assembleAttributes(this.el.attributes, wcOnlyProps);
     if (this.error) {
       atts['aria-describedby'] = (
         (atts['aria-describedby'] || '') + ' error-message'
@@ -124,30 +136,3 @@ export class VaTextInput {
     );
   }
 }
-
-// The props passed to the web component which we don't want to pass to the
-// input element. Note: The following attributes are deliberately left out so
-// they get passed to the input:
-//   - required
-//   - placeholder
-//   - maxlength
-//   - autocomplete
-//   - value
-const wcPropNames = ['label', 'error', 'disableAnalytics'];
-
-const assembleAttributes = (atts: NamedNodeMap) =>
-  Array.from(atts)
-    .filter(a => !wcPropNames.some(p => a.nodeName === p))
-    .reduce(
-      // Transform the NamedNodeMap into an object we can spread on <input>
-      (all, a) => ({
-        ...all,
-        [a.nodeName]:
-          // a.nodeValue will be an empty string when the attribute value isn't
-          // specified such as when using a boolean true like for the required prop.
-          // ...except for value. We want to keep value="" because that's
-          // meaningful.
-          a.nodeValue || (a.nodeName !== 'value' && a.nodeValue === ''),
-      }),
-      {},
-    );
