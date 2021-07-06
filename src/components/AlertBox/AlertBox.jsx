@@ -12,6 +12,9 @@ export const ALERT_TYPE = Object.freeze({
   CONTINUE: 'continue', // Green border, green lock
 });
 
+/**
+ * This component is no longer supported, please use `<va-alert>` instead.
+ */
 class AlertBox extends Component {
   constructor(props) {
     super(props);
