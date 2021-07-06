@@ -6,6 +6,9 @@ import { makeField } from '../../helpers/fields';
 import dispatchAnalyticsEvent from '../../helpers/analytics';
 
 /**
+ * **Note:** This component is deprecated in favor of the <va-text-input> web
+ * component.
+ *
  * A form input with a label that can display error messages.
  *
  * Props:
