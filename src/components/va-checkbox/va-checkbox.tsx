@@ -58,7 +58,10 @@ export class VaCheckbox {
    */
   @Prop({ mutable: true }) checked: boolean = false;
 
-  @Prop() ariaDescribedby: string;
+  /**
+   * The aria-describedby attribute for the <intput> in the shadow DOM.
+   */
+  @Prop() ariaDescribedby: string = '';
 
   private fireAnalyticsEvent = () => {
     // Either the description prop or the text content of the description slots
