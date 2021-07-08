@@ -79,6 +79,7 @@ export namespace Components {
         "visible": boolean;
     }
     interface VaCheckbox {
+        "ariaDescribedby": string;
         /**
           * Whether the checkbox is checked or not.  Note: Because this isn't reflective, vaCheckbox.getAttribute('checked') will not reflect the correct value. Use the property vaCheckbox.checked instead.
          */
@@ -309,6 +310,7 @@ declare namespace LocalJSX {
         "visible"?: boolean;
     }
     interface VaCheckbox {
+        "ariaDescribedby"?: string;
         /**
           * Whether the checkbox is checked or not.  Note: Because this isn't reflective, vaCheckbox.getAttribute('checked') will not reflect the correct value. Use the property vaCheckbox.checked instead.
          */

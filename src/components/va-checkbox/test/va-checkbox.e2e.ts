@@ -166,13 +166,4 @@ describe('va-checkbox', () => {
     await inputEl.click();
     expect(await inputEl.getProperty('checked')).toBeTruthy();
   });
-
-  it('passes unknown props to the input element in the shadow DOM', async () => {
-    const page = await newE2EPage();
-    await page.setContent('<va-checkbox foo="bar" />');
-
-    // Render the error message text
-    const element = await page.find('va-checkbox >>> input');
-    expect(element.getAttribute('foo')).toEqual('bar');
-  });
 });
