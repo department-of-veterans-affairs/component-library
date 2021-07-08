@@ -46,5 +46,8 @@
     "jest-cli": "^26.6.3",
     "lit-html": "^1.3.0",
     "puppeteer": "5.4.1"
+  },
+  "peerDependencies": {
+    "@department-of-veterans-affairs/formation": "^6.14.0"
   }
 }
