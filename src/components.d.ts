@@ -79,6 +79,9 @@ export namespace Components {
         "visible": boolean;
     }
     interface VaCheckbox {
+        /**
+          * The aria-describedby attribute for the <intput> in the shadow DOM.
+         */
         "ariaDescribedby": string;
         /**
           * Whether the checkbox is checked or not.  Note: Because this isn't reflective, vaCheckbox.getAttribute('checked') will not reflect the correct value. Use the property vaCheckbox.checked instead.
@@ -134,6 +137,10 @@ export namespace Components {
         "value": string;
     }
     interface VaTextInput {
+        /**
+          * The aria-describedby attribute for the <intput> in the shadow DOM.
+         */
+        "ariaDescribedby"?: string;
         /**
           * What to tell the browser to auto-complete the field with.
          */
@@ -310,6 +317,9 @@ declare namespace LocalJSX {
         "visible"?: boolean;
     }
     interface VaCheckbox {
+        /**
+          * The aria-describedby attribute for the <intput> in the shadow DOM.
+         */
         "ariaDescribedby"?: string;
         /**
           * Whether the checkbox is checked or not.  Note: Because this isn't reflective, vaCheckbox.getAttribute('checked') will not reflect the correct value. Use the property vaCheckbox.checked instead.
@@ -369,6 +379,10 @@ declare namespace LocalJSX {
         "value"?: string;
     }
     interface VaTextInput {
+        /**
+          * The aria-describedby attribute for the <intput> in the shadow DOM.
+         */
+        "ariaDescribedby"?: string;
         /**
           * What to tell the browser to auto-complete the field with.
          */
