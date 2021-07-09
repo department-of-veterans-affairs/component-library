@@ -1,4 +1,4 @@
-import { Component, Element, Host, Prop, h } from '@stencil/core';
+import { Component, Element, Host, Listen, Prop, h } from '@stencil/core';
 import { getSlottedNodes } from '../../utils/utils';
 
 @Component({
@@ -13,20 +13,25 @@ export class VaRadioButton {
 
   @Prop() required: boolean;
 
+  @Listen('radioOptionSelected')
+  radioOptionSelectedHandler(event: CustomEvent) {
+    const clickedItem = event.target as Element;
+
+    getSlottedNodes(this.el, 'va-radio-option')
+      .filter(item => item !== clickedItem)
+      .forEach(item => ((item as any).checked = false));
+
+    (clickedItem as any).checked = true;
+  }
+
   render() {
-    const nodes = getSlottedNodes(this.el, 'label');
-    console.log(nodes);
     return (
-      <Host>
-        <fieldset>
-          <legend>
-            {this.label}
-            {this.required && (
-              <span class="form-required-span">(*Required)</span>
-            )}
-          </legend>
-          <slot></slot>
-        </fieldset>
+      <Host role="radiogroup">
+        <legend>
+          {this.label}
+          {this.required && <span class="form-required-span">(*Required)</span>}
+        </legend>
+        <slot></slot>
       </Host>
     );
   }

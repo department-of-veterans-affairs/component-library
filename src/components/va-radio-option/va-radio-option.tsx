@@ -1,4 +1,4 @@
-import { Component, Host, Prop, h } from '@stencil/core';
+import { Component, Event, EventEmitter, Host, Prop, h } from '@stencil/core';
 
 @Component({
   tag: 'va-radio-option',
@@ -14,6 +14,16 @@ export class VaRadioOption {
 
   @Prop() checked: boolean;
 
+  @Event({
+    composed: true,
+    bubbles: true,
+  })
+  radioOptionSelected: EventEmitter;
+
+  private handleChange(e: Event): void {
+    this.radioOptionSelected.emit();
+  }
+
   render() {
     return (
       <Host>
@@ -23,6 +33,7 @@ export class VaRadioOption {
           name={this.name}
           type="radio"
           value={this.value}
+          onChange={e => this.handleChange(e)}
         />
         <label htmlFor="input">{this.label}</label>
       </Host>

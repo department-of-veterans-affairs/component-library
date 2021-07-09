@@ -381,6 +381,7 @@ declare namespace LocalJSX {
         "checked"?: boolean;
         "label"?: string;
         "name"?: string;
+        "onRadioOptionSelected"?: (event: CustomEvent<any>) => void;
         "value"?: string;
     }
     interface VaSelect {
