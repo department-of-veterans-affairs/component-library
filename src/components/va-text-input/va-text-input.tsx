@@ -74,6 +74,9 @@ export class VaTextInput {
   // $('va-text-input').value will be correct
   // $('va-text-input').getAttribute('value') will be incorrect
 
+  /**
+   * The event emitted when the input is blurred.
+   */
   @Event() vaBlur: EventEmitter;
 
   /**

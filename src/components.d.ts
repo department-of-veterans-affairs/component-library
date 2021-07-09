@@ -418,6 +418,9 @@ declare namespace LocalJSX {
           * The event used to track usage of the component. This is emitted when the input is blurred and enableAnalytics is true.
          */
         "onComponent-library-analytics"?: (event: CustomEvent<any>) => void;
+        /**
+          * The event emitted when the input is blurred.
+         */
         "onVaBlur"?: (event: CustomEvent<any>) => void;
         /**
           * Placeholder text to show in the input field.
