@@ -121,6 +121,19 @@ describe('va-text-input', () => {
     expect(blurSpy).toHaveReceivedEvent();
   });
 
+  it('emits vaChange event', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<va-text-input label="Input Field"/>');
+
+    const inputEl = await page.find('va-text-input >>> input');
+    const changeSpy = await page.spyOnEvent('vaChange');
+    await inputEl.press('a');
+    await inputEl.press('s');
+
+    expect(changeSpy).toHaveReceivedEventDetail({ value: 'as' });
+  });
+
   it("doesn't fire analytics events", async () => {
     const page = await newE2EPage();
 

@@ -423,6 +423,10 @@ declare namespace LocalJSX {
          */
         "onVaBlur"?: (event: CustomEvent<any>) => void;
         /**
+          * The event emitted when the input value changes
+         */
+        "onVaChange"?: (event: CustomEvent<any>) => void;
+        /**
           * Placeholder text to show in the input field.
          */
         "placeholder"?: string;
