@@ -62,6 +62,11 @@ export class VaCheckbox {
   @Event() vaChange: EventEmitter;
 
   /**
+   * The event emitted when the input is blurred.
+   */
+  @Event() vaBlur: EventEmitter;
+
+  /**
    * The event used to track usage of the component. This is emitted when the
    * input value changes and enableAnalytics is true.
    */
@@ -106,6 +111,10 @@ export class VaCheckbox {
     if (this.enableAnalytics) this.fireAnalyticsEvent();
   };
 
+  private handleBlur = () => {
+    this.vaBlur.emit();
+  };
+
   render() {
     const describedBy = `${this.ariaDescribedby} description ${
       this.error && 'error-message'
@@ -126,6 +135,7 @@ export class VaCheckbox {
           checked={this.checked}
           aria-describedby={describedBy}
           onChange={this.handleChange}
+          onBlur={this.handleBlur}
         />
         <label htmlFor="checkbox-element">
           {this.label}
