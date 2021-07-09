@@ -157,11 +157,11 @@ describe('va-checkbox', () => {
     await page.setContent(
       '<va-checkbox label="Just another checkbox here" required description="Description content"/>',
     );
-    const analyticsSpy = await page.spyOnEvent('vaChange');
+    const changeSpy = await page.spyOnEvent('vaChange');
     const inputEl = await page.find('va-checkbox >>> input');
     await inputEl.click();
 
-    expect(analyticsSpy).toHaveReceivedEventDetail({ checked: true });
+    expect(changeSpy).toHaveReceivedEventDetail({ checked: true });
   });
 
   it('updates the checked prop', async () => {
