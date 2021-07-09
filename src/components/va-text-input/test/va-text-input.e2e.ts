@@ -64,7 +64,7 @@ describe('va-text-input', () => {
       <va-text-input class="hydrated" label="This is a field" required="">
         <mock:shadow-root>
           <label for="inputField">This is a field <span class="required">(*Required)</span></label>
-          <input id="inputField" type="text" required="" />
+          <input id="inputField" type="text" />
         </mock:shadow-root>
       </va-text-input>
     `);
@@ -162,25 +162,5 @@ describe('va-text-input', () => {
     expect((await page.find('va-text-input >>> small')).innerText).toContain(
       '(Max. 3 characters)',
     );
-  });
-
-  it('passes unknown props to the input element in the shadow DOM', async () => {
-    // This is primarily so we don't have to make a new prop for each aria-* attribute
-    const page = await newE2EPage();
-
-    await page.setContent(
-      '<va-text-input label="Hello, world" unprop="Not a real prop" />',
-    );
-    const element = await page.find('va-text-input');
-
-    // Filters out label, passes unprop
-    expect(element).toEqualHtml(`
-      <va-text-input class="hydrated" label="Hello, world" unprop="Not a real prop">
-        <mock:shadow-root>
-          <label for="inputField">Hello, world</label>
-          <input id="inputField" type="text" unprop="Not a real prop"/>
-        </mock:shadow-root>
-      </va-text-input>
-    `);
   });
 });

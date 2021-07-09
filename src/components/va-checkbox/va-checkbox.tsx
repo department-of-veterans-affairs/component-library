@@ -8,15 +8,6 @@ import {
   Prop,
 } from '@stencil/core';
 
-import { assembleAttributes } from '../../utils/utils';
-
-// The props passed to the web component which we don't want to pass to the
-// input element. Note: The following attributes are deliberately left out so
-// they get passed to the input:
-//   - required
-//   - checked
-const wcOnlyProps = ['label', 'error', 'enableAnalytics'];
-
 @Component({
   tag: 'va-checkbox',
   styleUrl: 'va-checkbox.css',
@@ -67,6 +58,11 @@ export class VaCheckbox {
    */
   @Prop({ mutable: true }) checked: boolean = false;
 
+  /**
+   * The aria-describedby attribute for the <intput> in the shadow DOM.
+   */
+  @Prop() ariaDescribedby: string = '';
+
   private fireAnalyticsEvent = () => {
     // Either the description prop or the text content of the description slots
     const description =
@@ -101,13 +97,10 @@ export class VaCheckbox {
   };
 
   render() {
-    const atts = assembleAttributes(this.el.attributes, wcOnlyProps);
-    atts['aria-describedby'] = (
-      (atts['aria-describedby'] || '') + ' description'
-    ).trim();
-    if (this.error) {
-      atts['aria-describedby'] += ' error-message';
-    }
+    const describedBy = `${this.ariaDescribedby} description ${
+      this.error && 'error-message'
+    }`.trim();
+
     return (
       <Host>
         <div id="description">
@@ -120,7 +113,8 @@ export class VaCheckbox {
         <input
           type="checkbox"
           id="checkbox-element"
-          {...atts}
+          checked={this.checked}
+          aria-describedby={describedBy}
           onChange={this.handleChange}
         />
         <label htmlFor="checkbox-element">

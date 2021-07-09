@@ -75,6 +75,11 @@ export class VaTextInput {
    */
   @Prop() name?: string;
 
+  /**
+   * The aria-describedby attribute for the <intput> in the shadow DOM.
+   */
+  @Prop() ariaDescribedby?: string = '';
+
   /*
    * The value for the input.
    */
@@ -107,12 +112,9 @@ export class VaTextInput {
   };
 
   render() {
-    const atts = assembleAttributes(this.el.attributes, wcOnlyProps);
-    if (this.error) {
-      atts['aria-describedby'] = (
-        (atts['aria-describedby'] || '') + ' error-message'
-      ).trim();
-    }
+    const describedBy =
+      `${this.ariaDescribedby} ${this.error ? 'error-message' : ''}`.trim() ||
+      null; // Null so we don't add the attribute if we have an empty string
     return (
       <Host>
         {this.label && (
@@ -125,9 +127,12 @@ export class VaTextInput {
         <input
           id="inputField"
           type="text"
-          {...atts}
+          value={this.value}
           onInput={this.handleChange}
           onBlur={this.handleBlur}
+          aria-describedby={describedBy}
+          placeholder={this.placeholder}
+          maxlength={this.maxlength}
         />
         {this.maxlength && this.value.length >= this.maxlength && (
           <small>(Max. {this.maxlength} characters)</small>
