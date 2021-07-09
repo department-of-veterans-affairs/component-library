@@ -341,7 +341,14 @@ declare namespace LocalJSX {
           * The label for the checkbox.
          */
         "label"?: string;
+        /**
+          * The event used to track usage of the component. This is emitted when the input value changes and enableAnalytics is true.
+         */
         "onComponent-library-analytics"?: (event: CustomEvent<any>) => void;
+        /**
+          * The event emitted when the input value changes.
+         */
+        "onVaChange"?: (event: CustomEvent<any>) => void;
         /**
           * Set the input to required and render the (Required) text.
          */

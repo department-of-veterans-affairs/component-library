@@ -152,6 +152,18 @@ describe('va-checkbox', () => {
     expect(analyticsSpy).not.toHaveReceivedEvent();
   });
 
+  it('emits the vaChange event', async () => {
+    const page = await newE2EPage();
+    await page.setContent(
+      '<va-checkbox label="Just another checkbox here" required description="Description content"/>',
+    );
+    const analyticsSpy = await page.spyOnEvent('vaChange');
+    const inputEl = await page.find('va-checkbox >>> input');
+    await inputEl.click();
+
+    expect(analyticsSpy).toHaveReceivedEvent();
+  });
+
   it('updates the checked prop', async () => {
     const page = await newE2EPage();
     await page.setContent(
