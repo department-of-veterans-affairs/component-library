@@ -8,18 +8,6 @@ import {
   EventEmitter,
 } from '@stencil/core';
 
-import { assembleAttributes } from '../../utils/utils';
-
-// The props passed to the web component which we don't want to pass to the
-// input element. Note: The following attributes are deliberately left out so
-// they get passed to the input:
-//   - required
-//   - placeholder
-//   - maxlength
-//   - autocomplete
-//   - value
-const wcOnlyProps = ['label', 'error', 'disableAnalytics'];
-
 @Component({
   tag: 'va-text-input',
   styleUrl: 'va-text-input.css',
