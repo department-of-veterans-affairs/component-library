@@ -16,13 +16,6 @@ import {
 export class VaTextInput {
   @Element() el: HTMLElement;
 
-  @Event({
-    eventName: 'component-library-analytics',
-    composed: true,
-    bubbles: true,
-  })
-  componentLibraryAnalytics: EventEmitter;
-
   /**
    * The label for the text input.
    */
@@ -81,22 +74,37 @@ export class VaTextInput {
   // $('va-text-input').value will be correct
   // $('va-text-input').getAttribute('value') will be incorrect
 
+  @Event() vaBlur: EventEmitter;
+
+  /**
+   * The event used to track usage of the component. This is emitted when the
+   * input is blurred and enableAnalytics is true.
+   */
+  @Event({
+    eventName: 'component-library-analytics',
+    composed: true,
+    bubbles: true,
+  })
+  componentLibraryAnalytics: EventEmitter;
+
   private handleChange = (e: Event) => {
     const target = e.target as HTMLInputElement;
     this.value = target.value;
   };
 
   private handleBlur = () => {
-    if (!this.enableAnalytics) return;
+    this.vaBlur.emit();
 
-    this.componentLibraryAnalytics.emit({
-      componentName: 'va-text-input',
-      action: 'blur',
-      details: {
-        label: this.label,
-        value: this.value,
-      },
-    });
+    if (this.enableAnalytics) {
+      this.componentLibraryAnalytics.emit({
+        componentName: 'va-text-input',
+        action: 'blur',
+        details: {
+          label: this.label,
+          value: this.value,
+        },
+      });
+    }
   };
 
   render() {
