@@ -102,7 +102,7 @@ export class VaCheckbox {
 
   private handleChange = (e: Event) => {
     this.checked = (e.target as HTMLInputElement).checked;
-    this.vaChange.emit(); // TODO Add the event details
+    this.vaChange.emit({ checked: this.checked });
     if (this.enableAnalytics) this.fireAnalyticsEvent();
   };
 

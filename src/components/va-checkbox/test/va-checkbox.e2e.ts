@@ -161,7 +161,7 @@ describe('va-checkbox', () => {
     const inputEl = await page.find('va-checkbox >>> input');
     await inputEl.click();
 
-    expect(analyticsSpy).toHaveReceivedEvent();
+    expect(analyticsSpy).toHaveReceivedEventDetail({ checked: true });
   });
 
   it('updates the checked prop', async () => {
