@@ -110,6 +110,16 @@ export namespace Components {
     }
     interface VaOnThisPage {
     }
+    interface VaRadioButton {
+        "label": string;
+        "required": boolean;
+    }
+    interface VaRadioOption {
+        "checked": boolean;
+        "label": string;
+        "name": string;
+        "value": string;
+    }
     interface VaSelect {
         /**
           * Whether or not to fire the analytics events
@@ -213,6 +223,18 @@ declare global {
         prototype: HTMLVaOnThisPageElement;
         new (): HTMLVaOnThisPageElement;
     };
+    interface HTMLVaRadioButtonElement extends Components.VaRadioButton, HTMLStencilElement {
+    }
+    var HTMLVaRadioButtonElement: {
+        prototype: HTMLVaRadioButtonElement;
+        new (): HTMLVaRadioButtonElement;
+    };
+    interface HTMLVaRadioOptionElement extends Components.VaRadioOption, HTMLStencilElement {
+    }
+    var HTMLVaRadioOptionElement: {
+        prototype: HTMLVaRadioOptionElement;
+        new (): HTMLVaRadioOptionElement;
+    };
     interface HTMLVaSelectElement extends Components.VaSelect, HTMLStencilElement {
     }
     var HTMLVaSelectElement: {
@@ -232,6 +254,8 @@ declare global {
         "va-alert": HTMLVaAlertElement;
         "va-checkbox": HTMLVaCheckboxElement;
         "va-on-this-page": HTMLVaOnThisPageElement;
+        "va-radio-button": HTMLVaRadioButtonElement;
+        "va-radio-option": HTMLVaRadioOptionElement;
         "va-select": HTMLVaSelectElement;
         "va-text-input": HTMLVaTextInputElement;
     }
@@ -349,6 +373,16 @@ declare namespace LocalJSX {
     }
     interface VaOnThisPage {
     }
+    interface VaRadioButton {
+        "label"?: string;
+        "required"?: boolean;
+    }
+    interface VaRadioOption {
+        "checked"?: boolean;
+        "label"?: string;
+        "name"?: string;
+        "value"?: string;
+    }
     interface VaSelect {
         /**
           * Whether or not to fire the analytics events
@@ -425,6 +459,8 @@ declare namespace LocalJSX {
         "va-alert": VaAlert;
         "va-checkbox": VaCheckbox;
         "va-on-this-page": VaOnThisPage;
+        "va-radio-button": VaRadioButton;
+        "va-radio-option": VaRadioOption;
         "va-select": VaSelect;
         "va-text-input": VaTextInput;
     }
@@ -439,6 +475,8 @@ declare module "@stencil/core" {
             "va-alert": LocalJSX.VaAlert & JSXBase.HTMLAttributes<HTMLVaAlertElement>;
             "va-checkbox": LocalJSX.VaCheckbox & JSXBase.HTMLAttributes<HTMLVaCheckboxElement>;
             "va-on-this-page": LocalJSX.VaOnThisPage & JSXBase.HTMLAttributes<HTMLVaOnThisPageElement>;
+            "va-radio-button": LocalJSX.VaRadioButton & JSXBase.HTMLAttributes<HTMLVaRadioButtonElement>;
+            "va-radio-option": LocalJSX.VaRadioOption & JSXBase.HTMLAttributes<HTMLVaRadioOptionElement>;
             "va-select": LocalJSX.VaSelect & JSXBase.HTMLAttributes<HTMLVaSelectElement>;
             "va-text-input": LocalJSX.VaTextInput & JSXBase.HTMLAttributes<HTMLVaTextInputElement>;
         }

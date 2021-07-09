@@ -1,0 +1,46 @@
+@import '../../mixins/inputs.css';
+
+:host {
+  display: block;
+  /* line-height: 1.5; */
+  /* font-size: 1rem; */
+}
+input[type='radio'] {
+  margin-left: -2rem;
+  opacity: 0;
+  position: absolute;
+  left: auto;
+  box-sizing: border-box;
+  padding: 0;
+}
+
+label {
+  /* font-size: 1.6rem; */
+  box-sizing: border-box;
+  outline: none;
+  padding: 6px 12px;
+  display: inline-block;
+  margin: 0;
+}
+
+label::before {
+  box-sizing: border-box;
+  border-radius: 100%;
+  box-shadow: 0 0 0 2px #fff, 0 0 0 3px #757575;
+  height: 1.4rem;
+  line-height: 1.4rem;
+  margin-left: 3px;
+  margin-right: 0.75em;
+  width: 1.4rem;
+  background: #fff;
+  background-color: rgb(255, 255, 255);
+  content: '\A0';
+  display: inline-block;
+  text-indent: 0.15em;
+  /* vertical-align: middle; */
+}
+
+input[type='radio']:checked + label::before {
+  box-shadow: 0 0 0 2px #fff, 0 0 0 4px var(--color-primary);
+  background-color: var(--color-primary);
+}
