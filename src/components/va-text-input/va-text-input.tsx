@@ -8,18 +8,6 @@ import {
   EventEmitter,
 } from '@stencil/core';
 
-import { assembleAttributes } from '../../utils/utils';
-
-// The props passed to the web component which we don't want to pass to the
-// input element. Note: The following attributes are deliberately left out so
-// they get passed to the input:
-//   - required
-//   - placeholder
-//   - maxlength
-//   - autocomplete
-//   - value
-const wcOnlyProps = ['label', 'error', 'disableAnalytics'];
-
 @Component({
   tag: 'va-text-input',
   styleUrl: 'va-text-input.css',
@@ -27,13 +15,6 @@ const wcOnlyProps = ['label', 'error', 'disableAnalytics'];
 })
 export class VaTextInput {
   @Element() el: HTMLElement;
-
-  @Event({
-    eventName: 'component-library-analytics',
-    composed: true,
-    bubbles: true,
-  })
-  componentLibraryAnalytics: EventEmitter;
 
   /**
    * The label for the text input.
@@ -93,22 +74,46 @@ export class VaTextInput {
   // $('va-text-input').value will be correct
   // $('va-text-input').getAttribute('value') will be incorrect
 
+  /**
+   * The event emitted when the input is blurred.
+   */
+  @Event() vaBlur: EventEmitter;
+
+  /**
+   * The event emitted when the input value changes
+   */
+  @Event() vaChange: EventEmitter;
+
+  /**
+   * The event used to track usage of the component. This is emitted when the
+   * input is blurred and enableAnalytics is true.
+   */
+  @Event({
+    eventName: 'component-library-analytics',
+    composed: true,
+    bubbles: true,
+  })
+  componentLibraryAnalytics: EventEmitter;
+
   private handleChange = (e: Event) => {
     const target = e.target as HTMLInputElement;
     this.value = target.value;
+    this.vaChange.emit({ value: this.value });
   };
 
   private handleBlur = () => {
-    if (!this.enableAnalytics) return;
+    this.vaBlur.emit();
 
-    this.componentLibraryAnalytics.emit({
-      componentName: 'va-text-input',
-      action: 'blur',
-      details: {
-        label: this.label,
-        value: this.value,
-      },
-    });
+    if (this.enableAnalytics) {
+      this.componentLibraryAnalytics.emit({
+        componentName: 'va-text-input',
+        action: 'blur',
+        details: {
+          label: this.label,
+          value: this.value,
+        },
+      });
+    }
   };
 
   render() {
