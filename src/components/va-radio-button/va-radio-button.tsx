@@ -17,13 +17,14 @@ export class VaRadioButton {
 
   @Listen('radioOptionSelected')
   radioOptionSelectedHandler(event: CustomEvent) {
-    const clickedItem = event.target as Element;
+    const clickedItem = event.target as HTMLVaRadioOptionElement;
 
     getSlottedNodes(this.el, 'va-radio-option')
       .filter(item => item !== clickedItem)
-      .forEach(item => ((item as any).checked = false));
+      .forEach(item => ((item as HTMLVaRadioOptionElement).checked = false));
 
-    (clickedItem as any).checked = true;
+    clickedItem.checked = true;
+
   }
 
   render() {
