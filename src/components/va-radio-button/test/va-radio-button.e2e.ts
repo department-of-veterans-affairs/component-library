@@ -97,4 +97,19 @@ describe('va-radio-button', () => {
 
     expect(analyticsSpy).not.toHaveReceivedEvent();
   });
+
+  it.only('fires a vaChange event when the checked value changes', async () => {
+    const page = await newE2EPage();
+    await page.setContent(`
+      <va-radio-button label="Regular label">
+        <va-radio-option label="First option" value="one"></va-radio-option>
+      </va-radio-button>
+      `);
+
+    const changeSpy = await page.spyOnEvent('close');
+    const inputEl = await page.find('va-radio-option >>> input');
+    await inputEl.click();
+
+    expect(changeSpy).toHaveReceivedEvent();
+  });
 });

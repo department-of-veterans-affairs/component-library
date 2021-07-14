@@ -380,6 +380,7 @@ declare namespace LocalJSX {
         "enableAnalytics"?: boolean;
         "error"?: string;
         "label"?: string;
+        "onClose"?: (event: CustomEvent<any>) => void;
         "onComponent-library-analytics"?: (event: CustomEvent<any>) => void;
         "required"?: boolean;
     }

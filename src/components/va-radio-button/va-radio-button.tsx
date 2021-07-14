@@ -33,9 +33,18 @@ export class VaRadioButton {
   })
   componentLibraryAnalytics: EventEmitter;
 
+  @Event({
+    composed: true,
+    bubbles: true,
+  })
+  close: EventEmitter;
+
   @Listen('radioOptionSelected')
-  radioOptionSelectedHandler(event: CustomEvent) {
+  radioOptionSelectedHandler(event: CustomEvent) : void {
+    this.close.emit(event)
+
     const clickedItem = event.target as HTMLVaRadioOptionElement;
+    console.log(clickedItem)
 
     getSlottedNodes(this.el, 'va-radio-option')
       .filter(item => item !== clickedItem)
