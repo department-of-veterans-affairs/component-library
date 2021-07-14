@@ -20,7 +20,7 @@ export class VaRadioOption {
   })
   radioOptionSelected: EventEmitter;
 
-  private handleChange(e: Event): void {
+  private handleChange(): void {
     this.radioOptionSelected.emit();
   }
 
@@ -33,7 +33,7 @@ export class VaRadioOption {
           name={this.name}
           type="radio"
           value={this.value}
-          onChange={e => this.handleChange(e)}
+          onChange={() => this.handleChange()}
         />
         <label htmlFor="input">{this.label}</label>
       </Host>
