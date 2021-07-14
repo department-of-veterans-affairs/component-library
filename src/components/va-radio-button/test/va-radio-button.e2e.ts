@@ -30,7 +30,7 @@ describe('va-radio-button', () => {
     await options[1].click();
 
     expect(await options[0].getProperty('checked')).toBeFalsy();
-    expect(await options[1].getProperty('checked')).toBeFalsy();
-    expect(await options[2].getProperty('checked')).toBeTruthy();
+    expect(await options[1].getProperty('checked')).toBeTruthy();
+    expect(await options[2].getProperty('checked')).toBeFalsy();
   });
 });
