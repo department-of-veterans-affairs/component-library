@@ -1,15 +1,10 @@
+@import '../../mixins/accessibility.css';
+
 :host {
   display: block;
-}
-
-fieldset,
-legend {
-  margin-top: 3rem;
-}
-
-fieldset {
   border: none;
   padding: 0;
+  margin-top: 3rem;
 }
 
 legend {
