@@ -20,7 +20,7 @@ export class VaRadioButton {
 
   @Prop() label: string;
 
-  @Prop() required = false;
+  @Prop() required: boolean = false;
 
   @Prop() error: string;
 
