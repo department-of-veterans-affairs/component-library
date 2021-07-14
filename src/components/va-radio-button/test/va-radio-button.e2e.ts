@@ -60,4 +60,41 @@ describe('va-radio-button', () => {
       </span>
     `);
   });
+
+  it('fires an analytics event when enableAnalytics is true', async () => {
+    const page = await newE2EPage();
+    await page.setContent(`
+      <va-radio-button label="Regular label" enable-analytics>
+        <va-radio-option label="First option" value="one"></va-radio-option>
+      </va-radio-button>
+      `);
+    const analyticsSpy = await page.spyOnEvent('component-library-analytics');
+    const inputEl = await page.find('va-radio-option >>> input');
+    await inputEl.click();
+
+    expect(analyticsSpy).toHaveReceivedEventDetail({
+      action: 'change',
+      componentName: 'va-radio-button',
+      details: {
+        label: 'Regular label',
+        optionLabel: 'First option',
+        required: false,
+      },
+    });
+  });
+
+  it("doesn't fire an analytics event when enableAnalytics is false", async () => {
+    const page = await newE2EPage();
+    await page.setContent(`
+      <va-radio-button label="Regular label">
+        <va-radio-option label="First option" value="one"></va-radio-option>
+      </va-radio-button>
+      `);
+
+    const analyticsSpy = await page.spyOnEvent('component-library-analytics');
+    const inputEl = await page.find('va-radio-option >>> input');
+    await inputEl.click();
+
+    expect(analyticsSpy).not.toHaveReceivedEvent();
+  });
 });

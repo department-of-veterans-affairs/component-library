@@ -111,6 +111,7 @@ export namespace Components {
     interface VaOnThisPage {
     }
     interface VaRadioButton {
+        "enableAnalytics": boolean;
         "error": string;
         "label": string;
         "required": boolean;
@@ -375,8 +376,10 @@ declare namespace LocalJSX {
     interface VaOnThisPage {
     }
     interface VaRadioButton {
+        "enableAnalytics"?: boolean;
         "error"?: string;
         "label"?: string;
+        "onComponent-library-analytics"?: (event: CustomEvent<any>) => void;
         "required"?: boolean;
     }
     interface VaRadioOption {

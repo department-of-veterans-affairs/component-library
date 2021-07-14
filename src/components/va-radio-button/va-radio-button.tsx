@@ -1,4 +1,13 @@
-import { Component, Element, Host, Listen, Prop, h } from '@stencil/core';
+import {
+  Component,
+  Element,
+  Event,
+  EventEmitter,
+  Host,
+  Listen,
+  Prop,
+  h,
+} from '@stencil/core';
 import { getSlottedNodes } from '../../utils/utils';
 
 @Component({
@@ -11,9 +20,18 @@ export class VaRadioButton {
 
   @Prop() label: string;
 
-  @Prop() required: boolean;
+  @Prop() required = false;
 
   @Prop() error: string;
+
+  @Prop() enableAnalytics: boolean;
+
+  @Event({
+    eventName: 'component-library-analytics',
+    composed: true,
+    bubbles: true,
+  })
+  componentLibraryAnalytics: EventEmitter;
 
   @Listen('radioOptionSelected')
   radioOptionSelectedHandler(event: CustomEvent) {
@@ -25,6 +43,19 @@ export class VaRadioButton {
 
     clickedItem.checked = true;
 
+    if (this.enableAnalytics) this.fireAnalyticsEvent(clickedItem.label);
+  }
+
+  private fireAnalyticsEvent(optionLabel) {
+    this.componentLibraryAnalytics.emit({
+      componentName: 'va-radio-button',
+      action: 'change',
+      details: {
+        label: this.label,
+        optionLabel,
+        required: this.required,
+      },
+    });
   }
 
   render() {
