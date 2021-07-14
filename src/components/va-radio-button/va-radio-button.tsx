@@ -31,7 +31,7 @@ export class VaRadioButton {
       <Host role="radiogroup">
         <legend>
           {this.label}
-          {this.required && <span class="form-required-span">(*Required)</span>}
+          {this.required && <span class="required-span">(*Required)</span>}
         </legend>
         {this.error && (
           <span class="error-message" role="alert">

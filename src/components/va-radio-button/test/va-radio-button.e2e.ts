@@ -48,4 +48,16 @@ describe('va-radio-button', () => {
      </span>
     `);
   });
+
+  it('renders a required span based on prop', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-radio-button required></va-radio-button>');
+
+    const element = await page.find('va-radio-button >>> .required-span');
+    expect(element).toEqualHtml(`
+      <span class="required-span">
+        (*Required)
+      </span>
+    `);
+  });
 });

@@ -26,6 +26,11 @@
   font-weight: 700;
 }
 
+.required-span {
+  color: var(--color-secondary-dark);
+  margin: 0 0.35em;
+}
+
 legend {
   display: block;
   max-width: 46rem;
