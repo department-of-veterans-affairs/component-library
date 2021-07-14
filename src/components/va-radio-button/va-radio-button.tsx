@@ -13,6 +13,8 @@ export class VaRadioButton {
 
   @Prop() required: boolean;
 
+  @Prop() error: string;
+
   @Listen('radioOptionSelected')
   radioOptionSelectedHandler(event: CustomEvent) {
     const clickedItem = event.target as Element;
@@ -31,6 +33,11 @@ export class VaRadioButton {
           {this.label}
           {this.required && <span class="form-required-span">(*Required)</span>}
         </legend>
+        {this.error && (
+          <span class="error-message" role="alert">
+            <span class="sr-only">Error</span> {this.error}
+          </span>
+        )}
         <slot></slot>
       </Host>
     );

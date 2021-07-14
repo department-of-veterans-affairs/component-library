@@ -31,4 +31,21 @@ describe('va-radio-button', () => {
     expect(await options[0].getProperty('checked')).toBeFalsy();
     expect(await options[1].getProperty('checked')).toBeTruthy();
   });
+
+  it('renders an error message if passed', async () => {
+    const page = await newE2EPage();
+    await page.setContent(
+      '<va-radio-button error="This is an error"></va-radio-button>',
+    );
+
+    const element = await page.find('va-radio-button >>> .error-message');
+    expect(element).toEqualHtml(`
+     <span class="error-message" role="alert">
+       <span class="sr-only">
+         Error
+       </span>
+       This is an error
+     </span>
+    `);
+  });
 });

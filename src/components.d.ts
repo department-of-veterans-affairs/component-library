@@ -111,6 +111,7 @@ export namespace Components {
     interface VaOnThisPage {
     }
     interface VaRadioButton {
+        "error": string;
         "label": string;
         "required": boolean;
     }
@@ -374,6 +375,7 @@ declare namespace LocalJSX {
     interface VaOnThisPage {
     }
     interface VaRadioButton {
+        "error"?: string;
         "label"?: string;
         "required"?: boolean;
     }
