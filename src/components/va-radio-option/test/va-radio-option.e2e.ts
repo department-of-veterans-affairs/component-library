@@ -19,4 +19,21 @@ describe('va-radio-option', () => {
 
     expect(await inputEl.getProperty('checked')).toBeTruthy();
   });
+
+  it('adds aria-describedby to input when checked', async () => {
+    const page = await newE2EPage();
+    await page.setContent(
+      '<va-radio-option aria-describedby="test" label="A label" value="something" />',
+    );
+
+    const element = await page.find('va-radio-option');
+    const inputEl = await page.find('va-radio-option >>> input');
+
+    expect(inputEl.getAttribute('aria-describedby')).toEqual(null);
+
+    element.setProperty('checked', true);
+    await page.waitForChanges();
+
+    expect(inputEl.getAttribute('aria-describedby')).toEqual('test');
+  });
 });

@@ -117,6 +117,7 @@ export namespace Components {
         "required": boolean;
     }
     interface VaRadioOption {
+        "ariaDescribedby": string;
         "checked": boolean;
         "label": string;
         "name": string;
@@ -383,6 +384,7 @@ declare namespace LocalJSX {
         "required"?: boolean;
     }
     interface VaRadioOption {
+        "ariaDescribedby"?: string;
         "checked"?: boolean;
         "label"?: string;
         "name"?: string;

@@ -14,6 +14,8 @@ export class VaRadioOption {
 
   @Prop() checked: boolean;
 
+  @Prop() ariaDescribedby: string;
+
   @Event({
     composed: true,
     bubbles: true,
@@ -25,6 +27,7 @@ export class VaRadioOption {
   }
 
   render() {
+    const ariaDescribedby = (this.checked && this.ariaDescribedby) || null;
     return (
       <Host>
         <input
@@ -34,6 +37,7 @@ export class VaRadioOption {
           type="radio"
           value={this.value}
           onChange={() => this.handleChange()}
+          aria-describedby={ariaDescribedby}
         />
         <label htmlFor="input">{this.label}</label>
       </Host>
