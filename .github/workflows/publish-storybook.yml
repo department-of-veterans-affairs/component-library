@@ -7,7 +7,7 @@ jobs:
     steps:
     - uses: actions/checkout@master
     - name: Install dependencies
-      run: yarn build
+      run: yarn install
     - name: Build Storybook
       run: yarn build-storybook
     - uses: jakejarvis/s3-sync-action@master
