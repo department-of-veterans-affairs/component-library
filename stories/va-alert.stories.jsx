@@ -5,7 +5,7 @@ import { getWebComponentDocs, StoryDocs, propStructure } from './wc-helpers';
 const alertDocs = getWebComponentDocs('va-alert');
 
 export default {
-  title: 'Components/va-alert',
+  title: 'Components/va-alert (TESTING)',
   parameters: {
     docs: {
       /* eslint-disable-next-line react/display-name */
