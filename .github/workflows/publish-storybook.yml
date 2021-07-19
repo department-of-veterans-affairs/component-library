@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        bucket: [dev-design.va.gov, staging-design.va.gov]
+        bucket: [dev-design.va.gov, staging-design.va.gov, design.va.gov]
     steps:
     - uses: actions/checkout@master
     - name: Install dependencies
