@@ -52,6 +52,12 @@ export class VaAlert {
     composed: true,
     bubbles: true,
   })
+  foo: EventEmitter;
+
+  @Event({
+    composed: true,
+    bubbles: true,
+  })
   close: EventEmitter;
 
   @Event({
@@ -63,6 +69,7 @@ export class VaAlert {
 
   private closeHandler(e: MouseEvent): void {
     this.close.emit(e);
+    this.foo.emit(e);
   }
 
   private handleAlertBodyClick(e: MouseEvent): void {
