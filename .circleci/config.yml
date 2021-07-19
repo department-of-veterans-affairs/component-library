@@ -34,15 +34,15 @@ jobs:
           bucket: "<< parameters.bucket >>/storybook"
 
 workflows:
-  publish-dev:
-    jobs:
-      - publish-storybook:
-          filters:
-            branches:
-              only: master
-          bucket: dev-design.va.gov
-          context:
-            - Platform
+  # publish-dev:
+  #   jobs:
+  #     - publish-storybook:
+  #         filters:
+  #           branches:
+  #             only: master
+  #         bucket: dev-design.va.gov
+  #         context:
+  #           - Platform
   publish-staging:
     jobs:
       - publish-storybook:
