@@ -1,12 +1,15 @@
 name: Build storybook & deploy
-on: push
+on:
+  push:
+    branches:
+      - master
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        bucket: [dev-design.va.gov]
+        bucket: [dev-design.va.gov, staging-design.va.gov, design.va.gov]
     steps:
     - uses: actions/checkout@master
     - name: Install dependencies
