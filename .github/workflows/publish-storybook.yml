@@ -20,4 +20,4 @@ jobs:
         aws-region: "us-gov-west-1"         
     - name: S3 Sync Storybook build
       run: |
-        aws s3 sync ./storybook-static ./storybook --acl public-read --follow-symlinks --delete
+        aws s3 sync ./storybook-static s3://${{ matrix.bucket }}/storybook --acl public-read --follow-symlinks --delete
