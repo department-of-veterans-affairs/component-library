@@ -11,16 +11,16 @@ jobs:
       matrix:
         bucket: [dev-design.va.gov, staging-design.va.gov, design.va.gov]
     steps:
-    - uses: actions/checkout@master
-    - name: Install dependencies
-      run: yarn install
-    - name: Build Storybook
-      run: yarn build-storybook
-    - uses: aws-actions/configure-aws-credentials@v1
-      with:
-        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        aws-region: "us-gov-west-1"         
-    - name: S3 Sync Storybook build
-      run: |
-        aws s3 sync ./storybook-static s3://${{ matrix.bucket }}/storybook --acl public-read --follow-symlinks --delete
+      - uses: actions/checkout@master
+      - name: Install dependencies
+        run: yarn install
+      - name: Build Storybook
+        run: yarn build-storybook
+      - uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: "us-gov-west-1"         
+      - name: S3 Sync Storybook build
+        run: |
+          aws s3 sync ./storybook-static s3://${{ matrix.bucket }}/storybook --acl public-read --follow-symlinks --delete
