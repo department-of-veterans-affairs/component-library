@@ -12,7 +12,8 @@
   "unpkg": "dist/component-library/component-library.esm.js",
   "files": [
     "dist/",
-    "loader/"
+    "loader/",
+    "tsconfig.json"
   ],
   "scripts": {
     "build": "stencil build --docs-json component-docs.json",
