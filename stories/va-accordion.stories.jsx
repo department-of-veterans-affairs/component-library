@@ -67,7 +67,6 @@ const TemplateSubheader = args => {
 };
 
 const defaultArgs = {
-  multi: false,
   bordered: false,
 };
 
@@ -77,10 +76,10 @@ Default.args = {
 };
 Default.argTypes = propStructure(accordionDocs);
 
-export const Multi = Template.bind({});
-Multi.args = {
+export const NoMulti = Template.bind({});
+NoMulti.args = {
   ...defaultArgs,
-  multi: true,
+  multi: false,
 };
 
 export const Bordered = Template.bind({});
