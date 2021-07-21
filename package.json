@@ -13,7 +13,7 @@
   "files": [
     "dist/",
     "loader/",
-    "tsconfig.json"
+    "component-docs.json"
   ],
   "scripts": {
     "build": "stencil build --docs-json component-docs.json",
