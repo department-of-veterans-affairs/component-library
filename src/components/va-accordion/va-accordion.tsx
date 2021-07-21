@@ -84,7 +84,7 @@ export class VaAccordion {
   /**
    * True if multiple items can be opened at once
    */
-  @Prop() multi: boolean;
+  @Prop() multi: boolean = true;
 
   /**
    * If true, doesn't fire the CustomEvent which can be used for analytics tracking.

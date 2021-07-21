@@ -29,10 +29,10 @@ describe('va-accordion', () => {
     await axeCheck(page);
   });
 
-  it('closes one item when another opens', async () => {
+  it('closes one item when another opens if `multi` is false', async () => {
     const page = await newE2EPage();
     await page.setContent(`
-      <va-accordion>
+      <va-accordion multi="false">
         <va-accordion-item header="First item">Some content</va-accordion-item>
         <va-accordion-item header="Second item">A bit more</va-accordion-item>
       </va-accordion>`);
@@ -55,10 +55,10 @@ describe('va-accordion', () => {
     expect(buttons[1].getAttribute('aria-expanded')).toEqual('true');
   });
 
-  it('allows multiple items to be open when `multi` prop is used', async () => {
+  it('allows multiple items to be open by default', async () => {
     const page = await newE2EPage();
     await page.setContent(`
-      <va-accordion multi>
+      <va-accordion>
         <va-accordion-item header="First item">Some content</va-accordion-item>
         <va-accordion-item header="Second item">A bit more</va-accordion-item>
       </va-accordion>`);
