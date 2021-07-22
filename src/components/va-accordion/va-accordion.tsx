@@ -52,7 +52,7 @@ export class VaAccordion {
       event.detail.currentTarget.parentNode.parentNode.host || // if we are on IE, `.host` won't be there
       event.detail.currentTarget.parentNode.parentNode;
     // Close the other items if this accordion isn't multi-selectable
-    if (!this.multi) {
+    if (this.openSingle) {
       getSlottedNodes(this.el, 'va-accordion-item')
         .filter(item => item !== clickedItem)
         .forEach(item => (item as Element).setAttribute('open', 'false'));
@@ -82,9 +82,9 @@ export class VaAccordion {
   @Prop() bordered: boolean;
 
   /**
-   * True if multiple items can be opened at once
+   * True if only a single item can be opened at once
    */
-  @Prop() multi: boolean = true;
+  @Prop() openSingle: boolean;
 
   /**
    * If true, doesn't fire the CustomEvent which can be used for analytics tracking.

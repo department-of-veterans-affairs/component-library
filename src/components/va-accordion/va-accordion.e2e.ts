@@ -29,10 +29,10 @@ describe('va-accordion', () => {
     await axeCheck(page);
   });
 
-  it('closes one item when another opens if `multi` is false', async () => {
+  it('closes one item when another opens if `open-single` is true', async () => {
     const page = await newE2EPage();
     await page.setContent(`
-      <va-accordion multi="false">
+      <va-accordion open-single>
         <va-accordion-item header="First item">Some content</va-accordion-item>
         <va-accordion-item header="Second item">A bit more</va-accordion-item>
       </va-accordion>`);
