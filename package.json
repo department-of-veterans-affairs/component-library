@@ -97,7 +97,7 @@
     "sass-loader": "^8.0.2",
     "sinon": "^9.2.2",
     "uswds": "1.6.10",
-    "web-components": "https://github.com/department-of-veterans-affairs/component-library.git#wc-accordion-multi-patch"
+    "web-components": "https://github.com/department-of-veterans-affairs/component-library.git#web-components"
   },
   "resolutions": {
     "trim-newlines": "^4.0.2"
