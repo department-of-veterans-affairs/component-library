@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import Select from './Select';
 
 export default {
-  title: 'Components/Select',
+  title: 'Components/Select (deprecated)',
   component: Select,
 };
 
