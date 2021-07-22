@@ -76,8 +76,8 @@ Default.args = {
 };
 Default.argTypes = propStructure(accordionDocs);
 
-export const NoMulti = Template.bind({});
-NoMulti.args = {
+export const OnlyOpenOne = Template.bind({});
+OnlyOpenOne.args = {
   ...defaultArgs,
   multi: false,
 };
