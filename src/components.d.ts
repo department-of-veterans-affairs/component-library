@@ -378,8 +378,8 @@ declare namespace LocalJSX {
          */
         "name"?: string;
         "onComponent-library-analytics"?: (event: CustomEvent<any>) => void;
-        "onKeyDown"?: (event: CustomEvent<any>) => void;
-        "onSelect"?: (event: CustomEvent<any>) => void;
+        "onVaKeyDown"?: (event: CustomEvent<any>) => void;
+        "onVaSelect"?: (event: CustomEvent<any>) => void;
         /**
           * Whether or not this is a required field.
          */
