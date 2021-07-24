@@ -79,7 +79,7 @@ Default.argTypes = propStructure(accordionDocs);
 export const OnlyOpenOne = Template.bind({});
 OnlyOpenOne.args = {
   ...defaultArgs,
-  multi: false,
+  'open-single': true,
 };
 
 export const Bordered = Template.bind({});
