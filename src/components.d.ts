@@ -36,7 +36,7 @@ export namespace Components {
         /**
           * Optional accordion section heading text. Only used in analytics event. Default is null.
          */
-        "sectionheading": string;
+        "sectionHeading": string;
     }
     interface VaAccordionItem {
         /**
@@ -272,7 +272,7 @@ declare namespace LocalJSX {
         /**
           * Optional accordion section heading text. Only used in analytics event. Default is null.
          */
-        "sectionheading"?: string;
+        "sectionHeading"?: string;
     }
     interface VaAccordionItem {
         /**

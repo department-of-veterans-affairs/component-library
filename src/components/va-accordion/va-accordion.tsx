@@ -68,7 +68,7 @@ export class VaAccordion {
           header: clickedItem.header,
           subheader: clickedItem.subheader,
           level: clickedItem.level,
-          sectionHeading: this.sectionheading,
+          sectionHeading: this.sectionHeading,
           bordered: this.bordered
         },
       };
@@ -96,7 +96,7 @@ export class VaAccordion {
   /**
    * Optional accordion section heading text. Only used in analytics event. Default is null.
    */
-  @Prop() sectionheading: string = null;
+  @Prop() sectionHeading: string = null;
 
 
   render() {

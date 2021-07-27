@@ -9,7 +9,8 @@ const defaultArgs = {
   multi: false,
   bordered: false,
   subheader: false,
-  level: 2
+  level: 2,
+  sectionHeading: null
 };
 
 const Template = ({ multi, bordered, level }) => html`
@@ -36,8 +37,8 @@ const TemplateSubheader = ({ subheader1, subheader2, level }) => html`
   </va-accordion>
 `;
 
-const TemplateSectionHeading = ({ sectionheading, level }) => html`
-  <va-accordion sectionheading=${sectionheading}>
+const TemplateSectionHeading = ({ sectionHeading, level }) => html`
+  <va-accordion section-heading=${sectionHeading}>
     <va-accordion-item header="First Amendment" level=${level}>
       Congress shall make no law respecting an establishment of religion, or prohibiting the free exercise thereof; or abridging the freedom of speech, or of the press; or the
       right of the people peaceably to assemble, and to petition the Government for a redress of grievances.
@@ -67,5 +68,5 @@ Subheaders.args = { ...defaultArgs, subheader1: 'First Amendment Subheader', sub
 
 export const SectionHeading = TemplateSectionHeading.bind({});
 
-SectionHeading.args = { ...defaultArgs, sectionheading: "This is a section heading." };
+SectionHeading.args = { ...defaultArgs, sectionHeading: "This is a section heading." };
 
