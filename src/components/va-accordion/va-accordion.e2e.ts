@@ -103,6 +103,7 @@ describe('va-accordion', () => {
         header: "First item",
         subheader: "First subheader",
         level: 2,
+        sectionHeading: null,
       },
     });
   });

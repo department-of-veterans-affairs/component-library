@@ -33,6 +33,10 @@ export namespace Components {
           * True if only a single item can be opened at once
          */
         "openSingle": boolean;
+        /**
+          * Optional accordion section heading text. Only used in analytics event. Default is null.
+         */
+        "sectionheading": string;
     }
     interface VaAccordionItem {
         /**
@@ -265,6 +269,10 @@ declare namespace LocalJSX {
           * True if only a single item can be opened at once
          */
         "openSingle"?: boolean;
+        /**
+          * Optional accordion section heading text. Only used in analytics event. Default is null.
+         */
+        "sectionheading"?: string;
     }
     interface VaAccordionItem {
         /**

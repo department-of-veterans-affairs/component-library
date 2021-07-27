@@ -68,6 +68,8 @@ export class VaAccordion {
           header: clickedItem.header,
           subheader: clickedItem.subheader,
           level: clickedItem.level,
+          sectionHeading: this.sectionheading,
+          bordered: this.bordered
         },
       };
       this.componentLibraryAnalytics.emit(detail);
@@ -90,6 +92,12 @@ export class VaAccordion {
    * If true, doesn't fire the CustomEvent which can be used for analytics tracking.
    */
   @Prop() disableAnalytics: boolean = false;
+
+  /**
+   * Optional accordion section heading text. Only used in analytics event. Default is null.
+   */
+  @Prop() sectionheading: string = null;
+
 
   render() {
     return (
