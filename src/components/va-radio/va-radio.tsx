@@ -11,11 +11,11 @@ import {
 import { getSlottedNodes } from '../../utils/utils';
 
 @Component({
-  tag: 'va-radio-button',
-  styleUrl: 'va-radio-button.css',
+  tag: 'va-radio',
+  styleUrl: 'va-radio.css',
   shadow: true,
 })
-export class VaRadioButton {
+export class VaRadio {
   @Element() el: any;
 
   @Prop() label: string;
@@ -40,11 +40,11 @@ export class VaRadioButton {
   close: EventEmitter;
 
   @Listen('radioOptionSelected')
-  radioOptionSelectedHandler(event: CustomEvent) : void {
-    this.close.emit(event)
+  radioOptionSelectedHandler(event: CustomEvent): void {
+    this.close.emit(event);
 
     const clickedItem = event.target as HTMLVaRadioOptionElement;
-    console.log(clickedItem)
+    console.log(clickedItem);
 
     getSlottedNodes(this.el, 'va-radio-option')
       .filter(item => item !== clickedItem)
@@ -57,7 +57,7 @@ export class VaRadioButton {
 
   private fireAnalyticsEvent(optionLabel) {
     this.componentLibraryAnalytics.emit({
-      componentName: 'va-radio-button',
+      componentName: 'va-radio',
       action: 'change',
       details: {
         label: this.label,

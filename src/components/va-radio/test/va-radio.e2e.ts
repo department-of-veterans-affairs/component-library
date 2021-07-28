@@ -1,11 +1,11 @@
 import { newE2EPage } from '@stencil/core/testing';
 
-describe('va-radio-button', () => {
+describe('va-radio', () => {
   it('renders', async () => {
     const page = await newE2EPage();
-    await page.setContent('<va-radio-button></va-radio-button>');
+    await page.setContent('<va-radio></va-radio>');
 
-    const element = await page.find('va-radio-button');
+    const element = await page.find('va-radio');
     expect(element).toHaveClass('hydrated');
   });
 
@@ -13,11 +13,11 @@ describe('va-radio-button', () => {
     const page = await newE2EPage();
     await page.setContent(
       `
-      <va-radio-button>
+      <va-radio>
         <va-radio-option checked label="Option 1" value="1"></va-radio-option>
         <va-radio-option label="Option 2" value="2"></va-radio-option>
         <va-radio-option label="Option 3" value="3"></va-radio-option>
-      </va-radio-button>
+      </va-radio>
     `,
     );
 
@@ -34,11 +34,9 @@ describe('va-radio-button', () => {
 
   it('renders an error message if passed', async () => {
     const page = await newE2EPage();
-    await page.setContent(
-      '<va-radio-button error="This is an error"></va-radio-button>',
-    );
+    await page.setContent('<va-radio error="This is an error"></va-radio>');
 
-    const element = await page.find('va-radio-button >>> .error-message');
+    const element = await page.find('va-radio >>> .error-message');
     expect(element).toEqualHtml(`
      <span class="error-message" role="alert">
        <span class="sr-only">
@@ -51,9 +49,9 @@ describe('va-radio-button', () => {
 
   it('renders a required span based on prop', async () => {
     const page = await newE2EPage();
-    await page.setContent('<va-radio-button required></va-radio-button>');
+    await page.setContent('<va-radio required></va-radio>');
 
-    const element = await page.find('va-radio-button >>> .required-span');
+    const element = await page.find('va-radio >>> .required-span');
     expect(element).toEqualHtml(`
       <span class="required-span">
         (*Required)
@@ -64,9 +62,9 @@ describe('va-radio-button', () => {
   it('fires an analytics event when enableAnalytics is true', async () => {
     const page = await newE2EPage();
     await page.setContent(`
-      <va-radio-button label="Regular label" enable-analytics>
+      <va-radio label="Regular label" enable-analytics>
         <va-radio-option label="First option" value="one"></va-radio-option>
-      </va-radio-button>
+      </va-radio>
       `);
     const analyticsSpy = await page.spyOnEvent('component-library-analytics');
     const inputEl = await page.find('va-radio-option >>> input');
@@ -74,7 +72,7 @@ describe('va-radio-button', () => {
 
     expect(analyticsSpy).toHaveReceivedEventDetail({
       action: 'change',
-      componentName: 'va-radio-button',
+      componentName: 'va-radio',
       details: {
         label: 'Regular label',
         optionLabel: 'First option',
@@ -86,9 +84,9 @@ describe('va-radio-button', () => {
   it("doesn't fire an analytics event when enableAnalytics is false", async () => {
     const page = await newE2EPage();
     await page.setContent(`
-      <va-radio-button label="Regular label">
+      <va-radio label="Regular label">
         <va-radio-option label="First option" value="one"></va-radio-option>
-      </va-radio-button>
+      </va-radio>
       `);
 
     const analyticsSpy = await page.spyOnEvent('component-library-analytics');
@@ -101,9 +99,9 @@ describe('va-radio-button', () => {
   it.only('fires a vaChange event when the checked value changes', async () => {
     const page = await newE2EPage();
     await page.setContent(`
-      <va-radio-button label="Regular label">
+      <va-radio label="Regular label">
         <va-radio-option label="First option" value="one"></va-radio-option>
-      </va-radio-button>
+      </va-radio>
       `);
 
     const changeSpy = await page.spyOnEvent('close');
