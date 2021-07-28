@@ -30,9 +30,9 @@ export namespace Components {
          */
         "disableAnalytics": boolean;
         /**
-          * True if multiple items can be opened at once
+          * True if only a single item can be opened at once
          */
-        "multi": boolean;
+        "openSingle": boolean;
     }
     interface VaAccordionItem {
         /**
@@ -287,11 +287,11 @@ declare namespace LocalJSX {
           * If true, doesn't fire the CustomEvent which can be used for analytics tracking.
          */
         "disableAnalytics"?: boolean;
-        /**
-          * True if multiple items can be opened at once
-         */
-        "multi"?: boolean;
         "onComponent-library-analytics"?: (event: CustomEvent<any>) => void;
+        /**
+          * True if only a single item can be opened at once
+         */
+        "openSingle"?: boolean;
     }
     interface VaAccordionItem {
         /**
@@ -368,7 +368,18 @@ declare namespace LocalJSX {
           * The label for the checkbox.
          */
         "label"?: string;
+        /**
+          * The event used to track usage of the component. This is emitted when the input value changes and enableAnalytics is true.
+         */
         "onComponent-library-analytics"?: (event: CustomEvent<any>) => void;
+        /**
+          * The event emitted when the input is blurred.
+         */
+        "onVaBlur"?: (event: CustomEvent<any>) => void;
+        /**
+          * The event emitted when the input value changes.
+         */
+        "onVaChange"?: (event: CustomEvent<any>) => void;
         /**
           * Set the input to required and render the (Required) text.
          */
@@ -410,8 +421,8 @@ declare namespace LocalJSX {
          */
         "name"?: string;
         "onComponent-library-analytics"?: (event: CustomEvent<any>) => void;
-        "onKeyDown"?: (event: CustomEvent<any>) => void;
-        "onSelect"?: (event: CustomEvent<any>) => void;
+        "onVaKeyDown"?: (event: CustomEvent<any>) => void;
+        "onVaSelect"?: (event: CustomEvent<any>) => void;
         /**
           * Whether or not this is a required field.
          */
@@ -450,7 +461,18 @@ declare namespace LocalJSX {
           * The name to pass to the input element.
          */
         "name"?: string;
+        /**
+          * The event used to track usage of the component. This is emitted when the input is blurred and enableAnalytics is true.
+         */
         "onComponent-library-analytics"?: (event: CustomEvent<any>) => void;
+        /**
+          * The event emitted when the input is blurred.
+         */
+        "onVaBlur"?: (event: CustomEvent<any>) => void;
+        /**
+          * The event emitted when the input value changes
+         */
+        "onVaChange"?: (event: CustomEvent<any>) => void;
         /**
           * Placeholder text to show in the input field.
          */

@@ -48,9 +48,9 @@ export class VaSelect {
    */
   @Prop() enableAnalytics: boolean;
 
-  @Event() keyDown: EventEmitter;
+  @Event() vaKeyDown: EventEmitter;
 
-  @Event() select: EventEmitter;
+  @Event() vaSelect: EventEmitter;
 
   @Event({
     eventName: 'component-library-analytics',
@@ -62,7 +62,7 @@ export class VaSelect {
   @State() options: Array<Node>;
 
   private handleKeyDown() {
-    this.keyDown.emit();
+    this.vaKeyDown.emit();
   }
 
   private handleChange(e: Event) {
@@ -80,7 +80,7 @@ export class VaSelect {
       };
       this.componentLibraryAnalytics.emit(detail);
     }
-    this.select.emit({ value: this.value });
+    this.vaSelect.emit({ value: this.value });
   }
 
   /**

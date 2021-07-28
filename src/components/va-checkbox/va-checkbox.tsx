@@ -16,13 +16,6 @@ import {
 export class VaCheckbox {
   @Element() el: HTMLElement;
 
-  @Event({
-    eventName: 'component-library-analytics',
-    composed: true,
-    bubbles: true,
-  })
-  componentLibraryAnalytics: EventEmitter;
-
   /**
    * The label for the checkbox.
    */
@@ -63,6 +56,27 @@ export class VaCheckbox {
    */
   @Prop() ariaDescribedby: string = '';
 
+  /**
+   * The event emitted when the input value changes.
+   */
+  @Event() vaChange: EventEmitter;
+
+  /**
+   * The event emitted when the input is blurred.
+   */
+  @Event() vaBlur: EventEmitter;
+
+  /**
+   * The event used to track usage of the component. This is emitted when the
+   * input value changes and enableAnalytics is true.
+   */
+  @Event({
+    eventName: 'component-library-analytics',
+    composed: true,
+    bubbles: true,
+  })
+  componentLibraryAnalytics: EventEmitter;
+
   private fireAnalyticsEvent = () => {
     // Either the description prop or the text content of the description slots
     const description =
@@ -93,7 +107,12 @@ export class VaCheckbox {
 
   private handleChange = (e: Event) => {
     this.checked = (e.target as HTMLInputElement).checked;
+    this.vaChange.emit({ checked: this.checked });
     if (this.enableAnalytics) this.fireAnalyticsEvent();
+  };
+
+  private handleBlur = () => {
+    this.vaBlur.emit();
   };
 
   render() {
@@ -116,6 +135,7 @@ export class VaCheckbox {
           checked={this.checked}
           aria-describedby={describedBy}
           onChange={this.handleChange}
+          onBlur={this.handleBlur}
         />
         <label htmlFor="checkbox-element">
           {this.label}

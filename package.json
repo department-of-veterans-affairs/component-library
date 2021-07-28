@@ -1,6 +1,6 @@
 {
   "name": "web-components",
-  "version": "0.6.2",
+  "version": "0.8.0",
   "description": "Stencil Component Starter",
   "main": "dist/index.cjs.js",
   "module": "dist/custom-elements/index.js",
@@ -12,7 +12,8 @@
   "unpkg": "dist/component-library/component-library.esm.js",
   "files": [
     "dist/",
-    "loader/"
+    "loader/",
+    "component-docs.json"
   ],
   "scripts": {
     "build": "stencil build --docs-json component-docs.json",
@@ -23,7 +24,8 @@
     "generate": "stencil generate",
     "storybook": "start-storybook -p 6006",
     "serve": "stencil build --dev --watch --serve",
-    "build-storybook": "build-storybook"
+    "build-storybook": "build-storybook",
+    "prepare": "npm run build"
   },
   "dependencies": {
     "@stencil/core": "^2.0.1",

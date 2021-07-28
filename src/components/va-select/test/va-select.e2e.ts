@@ -119,7 +119,7 @@ describe('va-select', () => {
       </va-select>
     `);
 
-    const selectSpy = await page.spyOnEvent('select');
+    const selectSpy = await page.spyOnEvent('vaSelect');
 
     const handle = await page.$('pierce/select');
     await handle.select('bar');
@@ -137,7 +137,7 @@ describe('va-select', () => {
       </va-select>
     `);
 
-    const keyDownSpy = await page.spyOnEvent('keyDown');
+    const keyDownSpy = await page.spyOnEvent('vaKeyDown');
 
     const handle = await page.$('pierce/select');
     await handle.press('ArrowDown');
