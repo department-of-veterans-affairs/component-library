@@ -10687,7 +10687,7 @@ react-transition-group@1:
     prop-types "^15.5.6"
     warning "^3.0.0"
 
-react@^16.7.0:
+react@^16.13.1:
   version "16.14.0"
   resolved "https://registry.yarnpkg.com/react/-/react-16.14.0.tgz#94d776ddd0aaa37da3eda8fc5b6b18a4c9a3114d"
   integrity sha512-0X2CImDkJGApiAlcf0ODKIneSwBPhqJawOa5wCtKbu7ZECrmS26NvtSILynQ66cgkT/RJ4LidJOc3bUESwmU8g==
@@ -12942,9 +12942,9 @@ watchpack@^1.7.4:
     chokidar "^3.4.1"
     watchpack-chokidar2 "^2.0.1"
 
-"web-components@https://github.com/department-of-veterans-affairs/component-library.git#wc-v0.7.0":
-  version "0.6.2"
-  resolved "https://github.com/department-of-veterans-affairs/component-library.git#5fc83b5285684aa4060a3e5950f2ca5e2af9542e"
+"web-components@https://github.com/department-of-veterans-affairs/component-library.git#wc-v0.8.0":
+  version "0.8.0"
+  resolved "https://github.com/department-of-veterans-affairs/component-library.git#4ee6bb1b0dfe33f029d13b8ec5cd10b61bffdcb3"
   dependencies:
     "@stencil/core" "^2.0.1"
     "@stencil/postcss" "^2.0.0"

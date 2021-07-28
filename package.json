@@ -1,6 +1,6 @@
 {
   "name": "@department-of-veterans-affairs/component-library",
-  "version": "2.5.5",
+  "version": "2.5.6",
   "description": "VA.gov component library in React",
   "keywords": [
     "react",
@@ -19,7 +19,7 @@
     "build": "node ./scripts/build.js",
     "build-storybook": "build-storybook",
     "prepublishOnly": "pinst --disable && node ./scripts/prepublish.js",
-    "postinstall": "husky install && cd node_modules/web-components && yarn install --production && npm run-script build",
+    "postinstall": "husky install",
     "postpublish": "pinst --enable",
     "storybook": "start-storybook -p 6006",
     "test-debug": "karma start testing/karma.conf.js --browsers Chrome",
@@ -40,7 +40,6 @@
     "lodash": "^4.17.15",
     "moment": "^2.23.0",
     "prop-types": "^15.6.2",
-    "react": "^16.7.0",
     "react-focus-lock": "^2.4.0",
     "react-focus-on": "^3.5.1",
     "react-scroll": "^1.7.16",
@@ -90,6 +89,7 @@
     "node-sass": "4.14.1",
     "pinst": "^2.1.4",
     "prettier": "^2.2.1",
+    "react": "^16.13.1",
     "react-dom": "^16.7.0",
     "react-html-parser": "^2.0.2",
     "react-router": "3",
@@ -97,9 +97,12 @@
     "sass-loader": "^8.0.2",
     "sinon": "^9.2.2",
     "uswds": "1.6.10",
-    "web-components": "https://github.com/department-of-veterans-affairs/component-library.git#wc-v0.7.0"
+    "web-components": "https://github.com/department-of-veterans-affairs/component-library.git#wc-v0.8.0"
   },
   "resolutions": {
     "trim-newlines": "^4.0.2"
+  },
+  "peerDependencies": {
+    "react": "^16.13.1"
   }
 }
