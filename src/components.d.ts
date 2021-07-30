@@ -110,7 +110,7 @@ export namespace Components {
     }
     interface VaOnThisPage {
     }
-    interface VaRadioButton {
+    interface VaRadio {
         "enableAnalytics": boolean;
         "error": string;
         "label": string;
@@ -226,11 +226,11 @@ declare global {
         prototype: HTMLVaOnThisPageElement;
         new (): HTMLVaOnThisPageElement;
     };
-    interface HTMLVaRadioButtonElement extends Components.VaRadioButton, HTMLStencilElement {
+    interface HTMLVaRadioElement extends Components.VaRadio, HTMLStencilElement {
     }
-    var HTMLVaRadioButtonElement: {
-        prototype: HTMLVaRadioButtonElement;
-        new (): HTMLVaRadioButtonElement;
+    var HTMLVaRadioElement: {
+        prototype: HTMLVaRadioElement;
+        new (): HTMLVaRadioElement;
     };
     interface HTMLVaRadioOptionElement extends Components.VaRadioOption, HTMLStencilElement {
     }
@@ -257,7 +257,7 @@ declare global {
         "va-alert": HTMLVaAlertElement;
         "va-checkbox": HTMLVaCheckboxElement;
         "va-on-this-page": HTMLVaOnThisPageElement;
-        "va-radio-button": HTMLVaRadioButtonElement;
+        "va-radio": HTMLVaRadioElement;
         "va-radio-option": HTMLVaRadioOptionElement;
         "va-select": HTMLVaSelectElement;
         "va-text-input": HTMLVaTextInputElement;
@@ -387,7 +387,7 @@ declare namespace LocalJSX {
     }
     interface VaOnThisPage {
     }
-    interface VaRadioButton {
+    interface VaRadio {
         "enableAnalytics"?: boolean;
         "error"?: string;
         "label"?: string;
@@ -490,7 +490,7 @@ declare namespace LocalJSX {
         "va-alert": VaAlert;
         "va-checkbox": VaCheckbox;
         "va-on-this-page": VaOnThisPage;
-        "va-radio-button": VaRadioButton;
+        "va-radio": VaRadio;
         "va-radio-option": VaRadioOption;
         "va-select": VaSelect;
         "va-text-input": VaTextInput;
@@ -506,7 +506,7 @@ declare module "@stencil/core" {
             "va-alert": LocalJSX.VaAlert & JSXBase.HTMLAttributes<HTMLVaAlertElement>;
             "va-checkbox": LocalJSX.VaCheckbox & JSXBase.HTMLAttributes<HTMLVaCheckboxElement>;
             "va-on-this-page": LocalJSX.VaOnThisPage & JSXBase.HTMLAttributes<HTMLVaOnThisPageElement>;
-            "va-radio-button": LocalJSX.VaRadioButton & JSXBase.HTMLAttributes<HTMLVaRadioButtonElement>;
+            "va-radio": LocalJSX.VaRadio & JSXBase.HTMLAttributes<HTMLVaRadioElement>;
             "va-radio-option": LocalJSX.VaRadioOption & JSXBase.HTMLAttributes<HTMLVaRadioOptionElement>;
             "va-select": LocalJSX.VaSelect & JSXBase.HTMLAttributes<HTMLVaSelectElement>;
             "va-text-input": LocalJSX.VaTextInput & JSXBase.HTMLAttributes<HTMLVaTextInputElement>;
