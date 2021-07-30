@@ -96,7 +96,7 @@ describe('va-radio', () => {
     expect(analyticsSpy).not.toHaveReceivedEvent();
   });
 
-  it.only('fires a vaChange event when the checked value changes', async () => {
+  it('fires a vaValueChange event when the checked value changes', async () => {
     const page = await newE2EPage();
     await page.setContent(`
       <va-radio label="Regular label">
@@ -104,7 +104,7 @@ describe('va-radio', () => {
       </va-radio>
       `);
 
-    const changeSpy = await page.spyOnEvent('close');
+    const changeSpy = await page.spyOnEvent('vaValueChange');
     const inputEl = await page.find('va-radio-option >>> input');
     await inputEl.click();
 

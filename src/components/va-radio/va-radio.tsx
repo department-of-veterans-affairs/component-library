@@ -37,6 +37,12 @@ export class VaRadio {
     composed: true,
     bubbles: true,
   })
+  vaValueChange: EventEmitter;
+
+  @Event({
+    composed: true,
+    bubbles: true,
+  })
   close: EventEmitter;
 
   @Listen('radioOptionSelected')
@@ -53,6 +59,8 @@ export class VaRadio {
     clickedItem.checked = true;
 
     if (this.enableAnalytics) this.fireAnalyticsEvent(clickedItem.label);
+
+    this.vaValueChange.emit();
   }
 
   private fireAnalyticsEvent(optionLabel) {

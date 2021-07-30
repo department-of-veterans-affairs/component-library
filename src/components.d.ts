@@ -393,6 +393,7 @@ declare namespace LocalJSX {
         "label"?: string;
         "onClose"?: (event: CustomEvent<any>) => void;
         "onComponent-library-analytics"?: (event: CustomEvent<any>) => void;
+        "onVaValueChange"?: (event: CustomEvent<any>) => void;
         "required"?: boolean;
     }
     interface VaRadioOption {
