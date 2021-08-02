@@ -22,8 +22,19 @@ export class VaRadioOption {
   })
   radioOptionSelected: EventEmitter;
 
+  @Event({
+    composed: true,
+    bubbles: true,
+  })
+  radioOptionKeyDown: EventEmitter;
+
   private handleChange(): void {
     this.radioOptionSelected.emit();
+  }
+
+  private handleKeyDown(): void {
+    console.log('HI');
+    this.radioOptionKeyDown.emit();
   }
 
   render() {
@@ -37,6 +48,7 @@ export class VaRadioOption {
           type="radio"
           value={this.value}
           onChange={() => this.handleChange()}
+          onKeyDown={() => this.handleKeyDown()}
           aria-describedby={ariaDescribedby}
         />
         <label htmlFor="input">{this.label}</label>

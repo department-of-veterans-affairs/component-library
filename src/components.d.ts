@@ -391,8 +391,8 @@ declare namespace LocalJSX {
         "enableAnalytics"?: boolean;
         "error"?: string;
         "label"?: string;
-        "onClose"?: (event: CustomEvent<any>) => void;
         "onComponent-library-analytics"?: (event: CustomEvent<any>) => void;
+        "onVaKeyDown"?: (event: CustomEvent<any>) => void;
         "onVaValueChange"?: (event: CustomEvent<any>) => void;
         "required"?: boolean;
     }
@@ -401,6 +401,7 @@ declare namespace LocalJSX {
         "checked"?: boolean;
         "label"?: string;
         "name"?: string;
+        "onRadioOptionKeyDown"?: (event: CustomEvent<any>) => void;
         "onRadioOptionSelected"?: (event: CustomEvent<any>) => void;
         "value"?: string;
     }
