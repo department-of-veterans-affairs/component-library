@@ -33,7 +33,6 @@ export class VaRadioOption {
   }
 
   private handleKeyDown(): void {
-    console.log('HI');
     this.radioOptionKeyDown.emit();
   }
 
