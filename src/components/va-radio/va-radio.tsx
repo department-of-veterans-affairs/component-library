@@ -54,7 +54,6 @@ export class VaRadio {
   @Listen('radioOptionSelected')
   radioOptionSelectedHandler(event: CustomEvent): void {
     const clickedItem = event.target as HTMLVaRadioOptionElement;
-    console.log(clickedItem);
 
     getSlottedNodes(this.el, 'va-radio-option')
       .filter(item => item !== clickedItem)
