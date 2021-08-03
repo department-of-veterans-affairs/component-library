@@ -1,4 +1,5 @@
 import { newE2EPage } from '@stencil/core/testing';
+import { axeCheck } from '../../../testing/test-helpers';
 
 describe('va-radio', () => {
   it('renders', async () => {
@@ -7,6 +8,21 @@ describe('va-radio', () => {
 
     const element = await page.find('va-radio');
     expect(element).toHaveClass('hydrated');
+  });
+
+  it('passes an axe check', async () => {
+    const page = await newE2EPage();
+    await page.setContent(
+      `
+      <va-radio>
+        <va-radio-option checked label="Option 1" value="1"></va-radio-option>
+        <va-radio-option label="Option 2" value="2"></va-radio-option>
+        <va-radio-option label="Option 3" value="3"></va-radio-option>
+      </va-radio>
+    `,
+    );
+
+    await axeCheck(page);
   });
 
   it('unchecks current option when other button is checked', async () => {
