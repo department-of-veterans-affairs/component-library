@@ -45,6 +45,12 @@ export class VaRadio {
   })
   vaKeyDown: EventEmitter;
 
+  @Event({
+    composed: true,
+    bubbles: true,
+  })
+  vaMouseDown: EventEmitter;
+
   @Listen('radioOptionSelected')
   radioOptionSelectedHandler(event: CustomEvent): void {
     const clickedItem = event.target as HTMLVaRadioOptionElement;
@@ -64,6 +70,11 @@ export class VaRadio {
   @Listen('radioOptionKeyDown')
   radioOptionKeyDownHandler(event: CustomEvent): void {
     this.vaKeyDown.emit();
+  }
+
+  @Listen('radioOptionMouseDown')
+  radioOptionKeyDownHandler(event: CustomEvent): void {
+    this.vaMouseDown.emit();
   }
 
   private fireAnalyticsEvent(optionLabel) {
