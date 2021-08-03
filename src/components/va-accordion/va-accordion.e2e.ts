@@ -124,4 +124,32 @@ describe('va-accordion', () => {
 
     expect(analyticsSpy).toHaveReceivedEventTimes(0);
   });
+
+  it('includes sectionHeading in analytics event when present', async () => {
+    const page = await newE2EPage();
+    await page.setContent(`
+      <va-accordion section-heading="The Section Heading">
+        <va-accordion-item header="First item" subheader="First subheader">Some content</va-accordion-item>
+      </va-accordion>`,
+    );
+
+    const analyticsSpy = await page.spyOnEvent('component-library-analytics');
+
+    const button = await page.find(
+      'va-accordion-item >>> button[aria-expanded="false"]',
+    );
+
+    await button.click();
+
+    expect(analyticsSpy).toHaveReceivedEventDetail({
+      action: 'expand',
+      componentName: 'Accordion',
+      details: {
+        header: "First item",
+        subheader: "First subheader",
+        level: 2,
+        sectionHeading: "The Section Heading",
+      },
+    });
+  });
 });
