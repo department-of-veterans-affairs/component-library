@@ -68,12 +68,12 @@ export class VaRadio {
   }
 
   @Listen('radioOptionKeyDown')
-  radioOptionKeyDownHandler(event: CustomEvent): void {
+  radioOptionKeyDownHandler(): void {
     this.vaKeyDown.emit();
   }
 
   @Listen('radioOptionMouseDown')
-  radioOptionKeyDownHandler(event: CustomEvent): void {
+  radioOptionMouseDownHandler(): void {
     this.vaMouseDown.emit();
   }
 
