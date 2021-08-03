@@ -2,8 +2,6 @@
 
 :host {
   display: block;
-  /* line-height: 1.5; */
-  /* font-size: 1rem; */
 }
 input[type='radio'] {
   height: 0;
@@ -16,7 +14,6 @@ input[type='radio'] {
 }
 
 label {
-  /* font-size: 1.6rem; */
   box-sizing: border-box;
   outline: none;
   padding: 6px 12px;
@@ -39,7 +36,6 @@ label::before {
   content: '\A0';
   display: inline-block;
   text-indent: 0.15em;
-  /* vertical-align: middle; */
 }
 
 input[type='radio']:checked + label::before {
