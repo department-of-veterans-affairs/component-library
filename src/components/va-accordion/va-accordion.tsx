@@ -69,7 +69,6 @@ export class VaAccordion {
           subheader: clickedItem.subheader,
           level: clickedItem.level,
           sectionHeading: this.sectionHeading,
-          bordered: this.bordered
         },
       };
       this.componentLibraryAnalytics.emit(detail);
