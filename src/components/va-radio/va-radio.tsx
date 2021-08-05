@@ -43,12 +43,6 @@ export class VaRadio {
     composed: true,
     bubbles: true,
   })
-  vaKeyDown: EventEmitter;
-
-  @Event({
-    composed: true,
-    bubbles: true,
-  })
   vaMouseDown: EventEmitter;
 
   @Listen('radioOptionSelected')
@@ -64,11 +58,6 @@ export class VaRadio {
     if (this.enableAnalytics) this.fireAnalyticsEvent(clickedItem.label);
 
     this.vaValueChange.emit();
-  }
-
-  @Listen('radioOptionKeyDown')
-  radioOptionKeyDownHandler(): void {
-    this.vaKeyDown.emit();
   }
 
   @Listen('radioOptionMouseDown')

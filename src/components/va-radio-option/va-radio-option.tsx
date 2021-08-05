@@ -26,20 +26,10 @@ export class VaRadioOption {
     composed: true,
     bubbles: true,
   })
-  radioOptionKeyDown: EventEmitter;
-
-  @Event({
-    composed: true,
-    bubbles: true,
-  })
   radioOptionMouseDown: EventEmitter;
 
   private handleChange(): void {
     this.radioOptionSelected.emit();
-  }
-
-  private handleKeyDown(): void {
-    this.radioOptionKeyDown.emit();
   }
 
   private handleMouseDown(): void {
@@ -57,7 +47,6 @@ export class VaRadioOption {
           type="radio"
           value={this.value}
           onChange={() => this.handleChange()}
-          onKeyDown={() => this.handleKeyDown()}
           onMouseDown={() => this.handleMouseDown()}
           aria-describedby={ariaDescribedby}
         />
