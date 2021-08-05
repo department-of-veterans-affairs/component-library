@@ -126,20 +126,4 @@ describe('va-radio', () => {
 
     expect(changeSpy).toHaveReceivedEvent();
   });
-
-  it('fires a vaKeyDown event when a key is pressed on focused button', async () => {
-    const page = await newE2EPage();
-    await page.setContent(`
-      <va-radio label="Regular label">
-        <va-radio-option label="First option" value="one"></va-radio-option>
-        <va-radio-option label="Second option" value="two"></va-radio-option>
-      </va-radio>
-      `);
-
-    const keyDownSpy = await page.spyOnEvent('vaKeyDown');
-    const inputEl = await page.find('va-radio-option >>> input');
-    await inputEl.press('Tab');
-
-    expect(keyDownSpy).toHaveReceivedEvent();
-  });
 });
