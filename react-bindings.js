@@ -1,1 +1,1 @@
-export * from './generated/bindings/components.js';
+export * from './generated/bindings/components';
