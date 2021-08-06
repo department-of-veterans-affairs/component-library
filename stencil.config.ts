@@ -1,6 +1,7 @@
 import { Config } from '@stencil/core';
 import { postcss } from '@stencil/postcss';
 import url from 'postcss-url';
+import { reactOutputTarget } from '@stencil/react-output-target';
 
 export const config: Config = {
   namespace: 'component-library',
@@ -24,6 +25,11 @@ export const config: Config = {
     slotChildNodesFix: true,
   },
   outputTargets: [
+    reactOutputTarget({
+      componentCorePackage: '../dist/types',
+      proxiesFile: './react-bindings/components.ts',
+      includeDefineCustomElements: false,
+    }),
     {
       type: 'dist',
       esmLoaderPath: '../loader',
