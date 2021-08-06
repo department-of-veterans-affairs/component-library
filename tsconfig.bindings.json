@@ -13,13 +13,16 @@
     "noImplicitReturns": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "outDir": "bindings",
+    "outDir": "generated/bindings",
     "removeComments": false,
     "sourceMap": true,
     "jsx": "react",
     "target": "es2015"
   },
-  "include": ["react-bindings/**/*.ts", "react-bindings/**/*.tsx"],
+  "include": [
+    "generated/react-bindings/**/*.ts",
+    "generated/react-bindings/**/*.tsx"
+  ],
   "compileOnSave": false,
   "buildOnSave": false
 }

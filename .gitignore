@@ -24,6 +24,4 @@ Thumbs.db
 UserInterfaceState.xcuserstate
 .env
 
-# Generated files for react bindings
-bindings/
-react-bindings/
+generated/

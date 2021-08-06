@@ -26,8 +26,8 @@ export const config: Config = {
   },
   outputTargets: [
     reactOutputTarget({
-      componentCorePackage: '../dist/types',
-      proxiesFile: './react-bindings/components.ts',
+      componentCorePackage: '../../dist/types',
+      proxiesFile: './generated/react-bindings/components.ts',
       includeDefineCustomElements: false,
     }),
     {
