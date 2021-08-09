@@ -63,7 +63,6 @@ class Breadcrumbs extends Component {
     return (
       <nav
         aria-label={ariaLabel}
-        aria-live="polite"
         className={classnames({
           'va-nav-breadcrumbs': true,
           'va-nav-breadcrumbs--mobile': !!mobileFirstProp,
