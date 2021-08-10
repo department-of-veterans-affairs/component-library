@@ -101,6 +101,7 @@ export class VaCheckbox {
         label: this.label,
         description,
         required: this.required,
+        checked: this.checked
       },
     });
   };
@@ -116,9 +117,8 @@ export class VaCheckbox {
   };
 
   render() {
-    const describedBy = `${this.ariaDescribedby} description ${
-      this.error && 'error-message'
-    }`.trim();
+    const describedBy = `${this.ariaDescribedby} description ${this.error && 'error-message'
+      }`.trim();
 
     return (
       <Host>
