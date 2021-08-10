@@ -117,8 +117,9 @@ export class VaCheckbox {
   };
 
   render() {
-    const describedBy = `${this.ariaDescribedby} description ${this.error && 'error-message'
-      }`.trim();
+    const describedBy = `${this.ariaDescribedby} description ${
+      this.error && 'error-message'
+    }`.trim();
 
     return (
       <Host>
