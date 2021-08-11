@@ -57,7 +57,7 @@ export class VaRadio {
 
     if (this.enableAnalytics) this.fireAnalyticsEvent(clickedItem.label);
 
-    this.vaValueChange.emit();
+    this.vaValueChange.emit({ value: clickedItem.value });
   }
 
   @Listen('radioOptionMouseDown')

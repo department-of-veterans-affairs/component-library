@@ -124,6 +124,6 @@ describe('va-radio', () => {
     const inputEl = await page.find('va-radio-option >>> input');
     await inputEl.click();
 
-    expect(changeSpy).toHaveReceivedEvent();
+    expect(changeSpy).toHaveReceivedEventDetail({ value: 'one' });
   });
 });
