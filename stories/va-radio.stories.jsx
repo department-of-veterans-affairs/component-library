@@ -23,16 +23,8 @@ export default {
 const Template = args => {
   return (
     <va-radio {...args}>
-      <va-radio-option
-        label="Option one"
-        name="one"
-        value="1"
-      ></va-radio-option>
-      <va-radio-option
-        label="Option two"
-        name="two"
-        value="2"
-      ></va-radio-option>
+      <va-radio-option label="Option one" name="one" value="1" />
+      <va-radio-option label="Option two" name="two" value="2" />
     </va-radio>
   );
 };
