@@ -25,20 +25,20 @@ label {
 label::before {
   box-sizing: border-box;
   border-radius: 100%;
-  box-shadow: 0 0 0 2px #fff, 0 0 0 3px #757575;
+  box-shadow: 0 0 0 2px var(--color-white), 0 0 0 3px var(--color-gray-medium);
   height: 1.4rem;
   line-height: 1.4rem;
   margin-left: 3px;
   margin-right: 0.75em;
   width: 1.4rem;
-  background: #fff;
-  background-color: rgb(255, 255, 255);
+  background: var(--color-white);
+  background-color: var(--color-white);
   content: '\A0';
   display: inline-block;
   text-indent: 0.15em;
 }
 
 input[type='radio']:checked + label::before {
-  box-shadow: 0 0 0 2px #fff, 0 0 0 4px var(--color-primary);
+  box-shadow: 0 0 0 2px var(--color-white), 0 0 0 4px var(--color-primary);
   background-color: var(--color-primary);
 }
