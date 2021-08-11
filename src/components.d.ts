@@ -111,16 +111,43 @@ export namespace Components {
     interface VaOnThisPage {
     }
     interface VaRadio {
+        /**
+          * Whether or not an analytics event will be fired.
+         */
         "enableAnalytics": boolean;
+        /**
+          * A string with an error message.
+         */
         "error": string;
+        /**
+          * The text label for the radio group.
+         */
         "label": string;
+        /**
+          * Whether or not this input field is required.
+         */
         "required": boolean;
     }
     interface VaRadioOption {
+        /**
+          * Optional string for the ariaDescribedBy attribute.
+         */
         "ariaDescribedby": string;
+        /**
+          * Whether or not the option is selected.
+         */
         "checked": boolean;
+        /**
+          * The text label for the input element.
+         */
         "label": string;
+        /**
+          * The name attribute for the input element.
+         */
         "name": string;
+        /**
+          * The value attribute for the input element.
+         */
         "value": string;
     }
     interface VaSelect {
@@ -388,19 +415,46 @@ declare namespace LocalJSX {
     interface VaOnThisPage {
     }
     interface VaRadio {
+        /**
+          * Whether or not an analytics event will be fired.
+         */
         "enableAnalytics"?: boolean;
+        /**
+          * A string with an error message.
+         */
         "error"?: string;
+        /**
+          * The text label for the radio group.
+         */
         "label"?: string;
         "onComponent-library-analytics"?: (event: CustomEvent<any>) => void;
         "onVaValueChange"?: (event: CustomEvent<any>) => void;
+        /**
+          * Whether or not this input field is required.
+         */
         "required"?: boolean;
     }
     interface VaRadioOption {
+        /**
+          * Optional string for the ariaDescribedBy attribute.
+         */
         "ariaDescribedby"?: string;
+        /**
+          * Whether or not the option is selected.
+         */
         "checked"?: boolean;
+        /**
+          * The text label for the input element.
+         */
         "label"?: string;
+        /**
+          * The name attribute for the input element.
+         */
         "name"?: string;
         "onRadioOptionSelected"?: (event: CustomEvent<any>) => void;
+        /**
+          * The value attribute for the input element.
+         */
         "value"?: string;
     }
     interface VaSelect {

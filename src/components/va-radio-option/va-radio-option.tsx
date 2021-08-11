@@ -6,14 +6,29 @@ import { Component, Event, EventEmitter, Host, Prop, h } from '@stencil/core';
   shadow: true,
 })
 export class VaRadioOption {
+  /**
+   * The name attribute for the input element.
+   */
   @Prop() name: string;
 
+  /**
+   * The text label for the input element.
+   */
   @Prop() label: string;
 
+  /**
+   * The value attribute for the input element.
+   */
   @Prop() value: string;
 
+  /**
+   * Whether or not the option is selected.
+   */
   @Prop() checked: boolean;
 
+  /**
+   * Optional string for the ariaDescribedBy attribute.
+   */
   @Prop() ariaDescribedby: string;
 
   @Event({

@@ -18,12 +18,24 @@ import { getSlottedNodes } from '../../utils/utils';
 export class VaRadio {
   @Element() el: any;
 
+  /**
+   * The text label for the radio group.
+   */
   @Prop() label: string;
 
+  /**
+   * Whether or not this input field is required.
+   */
   @Prop() required: boolean = false;
 
+  /**
+   * A string with an error message.
+   */
   @Prop() error: string;
 
+  /**
+   * Whether or not an analytics event will be fired.
+   */
   @Prop() enableAnalytics: boolean;
 
   @Event({
