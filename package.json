@@ -26,7 +26,7 @@
     "storybook": "start-storybook -p 6006",
     "serve": "stencil build --dev --watch --serve",
     "build-storybook": "build-storybook",
-    "prepare": "npm run build"
+    "prepare": "npm run build && npm run build-bindings"
   },
   "dependencies": {
     "@stencil/core": "^2.0.1",
