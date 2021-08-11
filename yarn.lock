@@ -12944,7 +12944,7 @@ watchpack@^1.7.4:
 
 "web-components@https://github.com/department-of-veterans-affairs/component-library.git#wc-radio-button":
   version "0.8.0"
-  resolved "https://github.com/department-of-veterans-affairs/component-library.git#f3fb475f71493f43edd6014705f229bf3a5303c4"
+  resolved "https://github.com/department-of-veterans-affairs/component-library.git#c666445fe3a8b77cd8c42af89898a1461610f65e"
   dependencies:
     "@stencil/core" "^2.0.1"
     "@stencil/postcss" "^2.0.0"
