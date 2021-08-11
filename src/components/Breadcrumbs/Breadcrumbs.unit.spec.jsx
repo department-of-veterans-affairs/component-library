@@ -78,7 +78,6 @@ describe('<Breadcrumbs>', () => {
 
     expect(navElem.props().className).to.equal('va-nav-breadcrumbs');
     expect(navElem.props()['aria-label']).to.equal('Breadcrumb');
-    expect(navElem.props()['aria-live']).to.equal('polite');
     tree.unmount();
   });
 
