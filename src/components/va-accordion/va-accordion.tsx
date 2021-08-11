@@ -63,7 +63,7 @@ export class VaAccordion {
     if (!this.disableAnalytics) {
       const detail = {
         componentName: 'Accordion',
-        action: prevAttr ? "collapse" : "expand",
+        action: prevAttr ? 'collapse' : 'expand',
         details: {
           header: clickedItem.header,
           subheader: clickedItem.subheader,
@@ -74,6 +74,21 @@ export class VaAccordion {
     }
 
     clickedItem.setAttribute('open', !prevAttr);
+
+    if (!this.isScrolledIntoView(clickedItem)) {
+      clickedItem.scrollIntoView();
+    }
+  }
+
+  isScrolledIntoView(el: Element) {
+    const elemTop = el?.getBoundingClientRect().top;
+
+    if (!elemTop && elemTop !== 0) {
+      return false;
+    }
+
+    // Only partially || completely visible elements return true
+    return elemTop >= 0 && elemTop <= window.innerHeight;
   }
 
   /**
