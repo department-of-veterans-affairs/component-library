@@ -36,4 +36,17 @@ describe('va-radio-option', () => {
 
     expect(inputEl.getAttribute('aria-describedby')).toEqual('test');
   });
+
+  it('fires event for parent when changed', async () => {
+    const page = await newE2EPage();
+    await page.setContent(
+      '<va-radio-option aria-describedby="test" label="A label" value="something" />',
+    );
+
+    const changeSpy = await page.spyOnEvent('radioOptionSelected');
+    const inputEl = await page.find('va-radio-option >>> input');
+    await inputEl.click();
+
+    expect(changeSpy).toHaveReceivedEvent();
+  });
 });
