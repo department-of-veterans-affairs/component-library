@@ -48,3 +48,9 @@ Default.args = {
   ...defaultArgs,
 };
 Default.argTypes = propStructure(radioDocs);
+
+export const Error = Template.bind({});
+Error.args = {
+  ...defaultArgs,
+  error: 'There has been an error',
+};
