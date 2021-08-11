@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders a binding for a Web Component 1`] = `
+<div>
+  <va-text-input
+    label="First name"
+  />
+</div>
+`;
