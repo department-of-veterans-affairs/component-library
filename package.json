@@ -13,7 +13,8 @@
   "files": [
     "dist/",
     "loader/",
-    "component-docs.json"
+    "component-docs.json",
+    "react-bindings.js"
   ],
   "scripts": {
     "build": "stencil build --docs-json component-docs.json",
