@@ -108,14 +108,15 @@ export class VaAlert {
   render() {
     const { backgroundOnly, status, visible, closeable } = this;
     const classes = `alert ${status} ${backgroundOnly ? 'bg-only' : ''}`;
+    const role = status === 'error' ? 'alert' : '';
+    const ariaLive = status === 'error' ? 'assertive' : '';
 
     if (!visible) return <div aria-live="polite" />;
     
     return (
       <Host>
-        <div class={classes}>
+        <div role={role} aria-live={ariaLive} class={classes}>
           <i aria-hidden="true" role="img"></i>
-          <span class="sr-only">Alert: </span>
           <div class="body" onClick={this.handleAlertBodyClick.bind(this)}>
             {!backgroundOnly && <slot name="headline"></slot>}
               <slot></slot>

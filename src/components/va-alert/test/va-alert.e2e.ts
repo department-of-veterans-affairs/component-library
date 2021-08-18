@@ -140,4 +140,34 @@ describe('va-alert', () => {
     expect(analyticsSpy).toHaveReceivedEventTimes(0);
   });
 
+  it('has the correct accessible attributes when in an error state', async () => {
+    const page = await newE2EPage();
+    await page.setContent(
+      '<va-alert><h4 slot="headline">This is an alert</h4><div>This is the alert content</div>',
+    );
+
+    const analyticsSpy = await page.spyOnEvent('component-library-analytics');
+
+    expect(analyticsSpy).toHaveReceivedEventDetail({
+      action: 'linkClick',
+      componentName: 'AlertBox',
+      details: {
+        headline: 'This is an alert',
+        backgroundOnly: false,
+        clickLabel: 'This is a link',
+        status: 'error',
+        closeable: false,
+      },
+    });
+
+    const element = await page.find('va-alert .alert');
+
+    expect(element).toEqualAttributes({
+      'role': 'alert',
+      'aria-live': 'assertive'
+    });
+
+    expect(analyticsSpy).toHaveReceivedEventTimes(0);
+  });
+
 });
