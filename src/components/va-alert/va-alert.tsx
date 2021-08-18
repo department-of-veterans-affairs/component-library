@@ -108,8 +108,8 @@ export class VaAlert {
   render() {
     const { backgroundOnly, status, visible, closeable } = this;
     const classes = `alert ${status} ${backgroundOnly ? 'bg-only' : ''}`;
-    const role = status === 'error' ? 'alert' : '';
-    const ariaLive = status === 'error' ? 'assertive' : '';
+    const role = status === 'error' ? 'alert' : null;
+    const ariaLive = status === 'error' ? 'assertive' : null;
 
     if (!visible) return <div aria-live="polite" />;
     
