@@ -1,17 +1,11 @@
 /* eslint-disable react/prop-types */
 import React, { useState } from 'react';
-import { getWebComponentDocs, StoryDocs, propStructure } from './wc-helpers';
+import { getWebComponentDocs, propStructure } from './wc-helpers';
 
 const selectDocs = getWebComponentDocs('va-select');
 
 export default {
   title: 'Components/va-select',
-  parameters: {
-    docs: {
-      /* eslint-disable-next-line react/display-name */
-      page: () => <StoryDocs docs={selectDocs.docs} />,
-    },
-  },
 };
 
 const defaultArgs = {

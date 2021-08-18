@@ -3,7 +3,6 @@ import {
   getWebComponentDocs,
   componentStructure,
   propStructure,
-  StoryDocs,
 } from './wc-helpers';
 
 const radioDocs = getWebComponentDocs('va-radio');
@@ -12,12 +11,6 @@ const radioItem = getWebComponentDocs('va-radio-option');
 export default {
   title: 'Components/va-radio',
   subcomponents: componentStructure(radioItem),
-  parameters: {
-    docs: {
-      /* eslint-disable-next-line react/display-name */
-      page: () => <StoryDocs docs={radioDocs.docs} />,
-    },
-  },
 };
 
 const Template = args => {
