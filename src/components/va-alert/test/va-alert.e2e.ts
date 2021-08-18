@@ -147,7 +147,6 @@ describe('va-alert', () => {
 
     const element = await page.find('va-alert >>> .alert');
 
-    expect(element).toEqualAttribute('role', 'alert');
     expect(element).toEqualAttributes({
       'role': 'alert',
       'aria-live': 'assertive'
