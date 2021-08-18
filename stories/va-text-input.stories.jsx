@@ -1,17 +1,11 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
-import { getWebComponentDocs, StoryDocs, propStructure } from './wc-helpers';
+import { getWebComponentDocs, propStructure } from './wc-helpers';
 
 const textInputDocs = getWebComponentDocs('va-text-input');
 
 export default {
   title: 'Components/va-text-input',
-  parameters: {
-    docs: {
-      /* eslint-disable-next-line react/display-name */
-      page: () => <StoryDocs docs={textInputDocs.docs} />,
-    },
-  },
 };
 
 const defaultArgs = {

@@ -11,19 +11,6 @@ import dispatchAnalyticsEvent from '../../helpers/analytics';
  *
  * A form input with a label that can display error messages.
  *
- * Props:
- * `errorMessage` - Error string to display in the component.
- *                  When defined, indicates input has a validation error.
- * `label` - String for the input field label.
- * `name` - String for the input name attribute.
- * `tabIndex` - Number for keyboard tab order.
- * `autocomplete` - String for the input autocomplete attribute.
- * `placeholder` - placeholder string for input field.
- * `required` - boolean. Render marker indicating field is required.
- * `field` - string. Value of the input field.
- * `additionalClass` - Extra attribute for use by CSS selector, specifically
- *                     by tests
- * `onValueChange` - a function with this prototype: (newValue)
  */
 class TextInput extends React.Component {
   constructor() {
