@@ -11,21 +11,6 @@ import dispatchAnalyticsEvent from '../../helpers/analytics';
 
 /**
  * A radio button group with a label.
- *
- * Validation has the following props.
- *
- * - `additionalFieldsetClass` String for any additional fieldset classes.
- * - `additionalLegendClass` String for any additional legend classes.
- * - `errorMessage` String Error message for the radio button group
- * - `label` String for the group field label.
- * - `name` String for the name attribute.
- * - `tabIndex` Number for keyboard tab order.
- * - `options` Array of options to populate group.
- * - `required` is this field required.
- * - `value` string. Value of the select field.
- * - `onValueChange` a function with this prototype: (newValue)
- * - `ariaDescribedby` Array matching the options, added when the option is
- *   selected
  */
 class RadioButtons extends React.Component {
   constructor() {

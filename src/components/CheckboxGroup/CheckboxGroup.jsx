@@ -9,17 +9,6 @@ import dispatchAnalyticsEvent from '../../helpers/analytics';
 
 /**
  * A checkbox button group with a label.
- *
- * Validation has the following props.
- * `additionalFieldsetClass` - String for any additional fieldset classes.
- * `additionalLegendClass` - String for any additional legend classes.
- * `label` - String for the group field label.
- * `name` - String for the name attribute.
- * `tabIndex` - Number for keyboard tab order.
- * `options` - Array of options to populate group.
- * `required` - is this field required.
- * `values` - object. Values of the checkbox field.
- * `onValueChange` - a function with this prototype: (newValue)
  */
 class CheckboxGroup extends React.Component {
   UNSAFE_componentWillMount() {
