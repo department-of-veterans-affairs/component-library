@@ -48,6 +48,9 @@ export class VaAlert {
    */
   @Prop() closeable: boolean = false;
 
+  
+  @Prop() alertLoaded: Function = undefined;
+
   @Event({
     composed: true,
     bubbles: true,
@@ -104,6 +107,13 @@ export class VaAlert {
       }
     }
   }
+
+  componentDidLoad() {
+    if (this.alertLoaded) {
+      this.alertLoaded();
+    }
+  }
+
 
   render() {
     const { backgroundOnly, status, visible, closeable } = this;
