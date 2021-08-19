@@ -49,7 +49,7 @@ export class VaAlert {
   @Prop() closeable: boolean = false;
 
   
-  @Prop() alertLoaded: Function = undefined;
+  @Event() vaComponentDidLoad:EventEmitter;
 
   @Event({
     composed: true,
@@ -109,8 +109,8 @@ export class VaAlert {
   }
 
   componentDidLoad() {
-    if (this.alertLoaded) {
-      this.alertLoaded();
+    if (this.vaComponentDidLoad) {
+      this.vaComponentDidLoad.emit();
     }
   }
 
