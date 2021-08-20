@@ -21,7 +21,6 @@ jobs:
           node-version: 14.x
       - run: yarn
       - run: yarn build
-      - run: yarn build-bindings
       - run: yarn pack
       - name: Upload the artifacts
         uses: skx/github-action-publish-binaries@release-0.15
