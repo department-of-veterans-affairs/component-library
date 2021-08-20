@@ -48,8 +48,7 @@ export class VaAlert {
    */
   @Prop() closeable: boolean = false;
 
-  
-  @Event() vaComponentDidLoad:EventEmitter;
+  @Event() vaComponentDidLoad: EventEmitter;
 
   @Event({
     composed: true,
@@ -109,27 +108,26 @@ export class VaAlert {
   }
 
   componentDidLoad() {
-    console.log("Component did load", this.vaComponentDidLoad);
-    this.vaComponentDidLoad.emit("loaded");
+    console.log('Component did load', this.vaComponentDidLoad);
+    this.vaComponentDidLoad.emit('loaded');
   }
 
-
   render() {
-    console.log("rendering");
+    console.log('rendering');
     const { backgroundOnly, status, visible, closeable } = this;
     const classes = `alert ${status} ${backgroundOnly ? 'bg-only' : ''}`;
     const role = status === 'error' ? 'alert' : null;
     const ariaLive = status === 'error' ? 'assertive' : null;
 
     if (!visible) return <div aria-live="polite" />;
-    
+
     return (
       <Host>
         <div role={role} aria-live={ariaLive} class={classes}>
           <i aria-hidden="true" role="img"></i>
           <div class="body" onClick={this.handleAlertBodyClick.bind(this)}>
             {!backgroundOnly && <slot name="headline"></slot>}
-              <slot></slot>
+            <slot></slot>
           </div>
         </div>
 
