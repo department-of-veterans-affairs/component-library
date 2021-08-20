@@ -22,6 +22,7 @@ jobs:
       - run: yarn
       - run: yarn build
       - run: yarn pack
+      - run: ls
       - name: Upload the artifacts
         uses: skx/github-action-publish-binaries@release-0.15
         env:
