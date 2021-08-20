@@ -1,0 +1,3 @@
+yarn build
+yarn build-bindings
+yarn pack
