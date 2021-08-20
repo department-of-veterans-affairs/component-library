@@ -10,7 +10,7 @@ jobs:
       - name: Checkout the web-components branch
         uses: actions/checkout@v2
         with:
-          ref: web-components
+          ref: automate-release-files
       - uses: actions/cache@v2
         with:
           path: '**/node_modules'
@@ -27,4 +27,4 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          args: 'web-components-*.tar.gz'
+          args: '*.tar.gz'
