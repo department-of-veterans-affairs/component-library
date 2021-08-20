@@ -108,12 +108,10 @@ export class VaAlert {
   }
 
   componentDidLoad() {
-    console.log('Component did load', this.vaComponentDidLoad);
     this.vaComponentDidLoad.emit('loaded');
   }
 
   render() {
-    console.log('rendering');
     const { backgroundOnly, status, visible, closeable } = this;
     const classes = `alert ${status} ${backgroundOnly ? 'bg-only' : ''}`;
     const role = status === 'error' ? 'alert' : null;
