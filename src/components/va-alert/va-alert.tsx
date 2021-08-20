@@ -48,7 +48,16 @@ export class VaAlert {
    */
   @Prop() closeable: boolean = false;
 
-  @Event() vaComponentDidLoad: EventEmitter;
+  /**
+   * Fires when the component has successfully finished rendering for the first
+   * time.
+   */
+  @Event({
+    eventName: 'va-component-did-load',
+    composed: true,
+    bubbles: true,
+  })
+  vaComponentDidLoad: EventEmitter;
 
   @Event({
     composed: true,
@@ -108,7 +117,7 @@ export class VaAlert {
   }
 
   componentDidLoad() {
-    this.vaComponentDidLoad.emit('loaded');
+    this.vaComponentDidLoad.emit();
   }
 
   render() {
