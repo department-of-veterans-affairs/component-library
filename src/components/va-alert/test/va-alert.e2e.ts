@@ -149,8 +149,44 @@ describe('va-alert', () => {
 
     expect(element).toEqualAttributes({
       'role': 'alert',
-      'aria-live': 'assertive'
+      'aria-live': 'assertive',
     });
   });
 
+  it.skip('emits the vaComponentDidLoad event', async () => {
+    const page = await newE2EPage();
+    // For debugging:
+    // https://pptr.dev/#?product=Puppeteer&version=v10.2.0&show=api-class-page
+    const events = [
+      'close',
+      'console',
+      'dialog',
+      'domcontentloaded',
+      'error',
+      'frameattached',
+      'framenavigated',
+      'load',
+      'metrics',
+      'pageerror',
+      'popup',
+      'request',
+      'requestfailed',
+      'requestfinished',
+      'response',
+      'workercreated',
+      'workerdestroyed',
+    ];
+    events.forEach(name => {
+      page.on(name, () => {
+        console.log(`Event caught: ${name}`);
+      });
+    });
+    console.log('attaching spy...');
+    const loadSpy = await page.spyOnEvent('va-component-did-load');
+    console.log('...spy attached');
+    await page.setContent(`<va-alert></va-alert>`);
+    await page.find('va-alert');
+
+    expect(loadSpy).toHaveReceivedEvent();
+  });
 });
