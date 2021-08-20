@@ -22,8 +22,6 @@ jobs:
       - run: yarn
       - name: Generate the artifacts
         uses: skx/github-action-build@release-0.6.1
-        with:
-          builder: yarn pack
       - name: Upload the artifacts
         uses: skx/github-action-publish-binaries@release-0.15
         env:
