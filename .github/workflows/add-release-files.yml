@@ -1,6 +1,6 @@
 on:
   release:
-    types: [created, published, edited]
+    types: [published]
 name: Handle Release
 jobs:
   generate:
