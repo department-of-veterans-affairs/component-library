@@ -23,10 +23,9 @@ jobs:
       - run: yarn build
       - run: yarn build-bindings
       - run: yarn pack
-      - run: ls
       - name: Upload the artifacts
         uses: skx/github-action-publish-binaries@release-0.15
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          args: '*.tgz'
+          args: 'web-components-*.tgz'
