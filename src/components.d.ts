@@ -362,6 +362,10 @@ declare namespace LocalJSX {
         "onClose"?: (event: CustomEvent<any>) => void;
         "onComponent-library-analytics"?: (event: CustomEvent<any>) => void;
         /**
+          * Fires when the component has successfully finished rendering for the first time.
+         */
+        "onVa-component-did-load"?: (event: CustomEvent<any>) => void;
+        /**
           * Determines the icon and border/background color. One of `info`, `error`, `success`, `warning`, or `continue`
          */
         "status"?: string;

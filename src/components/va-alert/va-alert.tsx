@@ -48,6 +48,17 @@ export class VaAlert {
    */
   @Prop() closeable: boolean = false;
 
+  /**
+   * Fires when the component has successfully finished rendering for the first
+   * time.
+   */
+  @Event({
+    eventName: 'va-component-did-load',
+    composed: true,
+    bubbles: true,
+  })
+  vaComponentDidLoad: EventEmitter;
+
   @Event({
     composed: true,
     bubbles: true,
@@ -105,6 +116,10 @@ export class VaAlert {
     }
   }
 
+  componentDidLoad() {
+    this.vaComponentDidLoad.emit();
+  }
+
   render() {
     const { backgroundOnly, status, visible, closeable } = this;
     const classes = `alert ${status} ${backgroundOnly ? 'bg-only' : ''}`;
@@ -112,14 +127,14 @@ export class VaAlert {
     const ariaLive = status === 'error' ? 'assertive' : null;
 
     if (!visible) return <div aria-live="polite" />;
-    
+
     return (
       <Host>
         <div role={role} aria-live={ariaLive} class={classes}>
           <i aria-hidden="true" role="img"></i>
           <div class="body" onClick={this.handleAlertBodyClick.bind(this)}>
             {!backgroundOnly && <slot name="headline"></slot>}
-              <slot></slot>
+            <slot></slot>
           </div>
         </div>
 
