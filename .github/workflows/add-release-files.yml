@@ -10,7 +10,7 @@ jobs:
       - name: Checkout the web-components branch
         uses: actions/checkout@v2
         with:
-          ref: wc-automate-release-files
+          ref: web-components
       - uses: actions/cache@v2
         with:
           path: '**/node_modules'
