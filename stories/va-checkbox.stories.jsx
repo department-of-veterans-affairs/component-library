@@ -1,18 +1,12 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable react/no-unescaped-entities */
 import React from 'react';
-import { getWebComponentDocs, StoryDocs, propStructure } from './wc-helpers';
+import { getWebComponentDocs, propStructure } from './wc-helpers';
 
 const checkboxDocs = getWebComponentDocs('va-checkbox');
 
 export default {
   title: 'Components/va-checkbox',
-  parameters: {
-    docs: {
-      /* eslint-disable-next-line react/display-name */
-      page: () => <StoryDocs docs={checkboxDocs.docs} />,
-    },
-  },
 };
 
 const defaultArgs = {

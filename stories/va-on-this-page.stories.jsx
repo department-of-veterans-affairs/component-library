@@ -1,16 +1,7 @@
 import React from 'react';
-import { getWebComponentDocs, StoryDocs } from './wc-helpers';
-
-const onThisPageDocs = getWebComponentDocs('va-on-this-page');
 
 export default {
   title: 'Components/va-on-this-page',
-  parameters: {
-    docs: {
-      /* eslint-disable-next-line react/display-name */
-      page: () => <StoryDocs docs={onThisPageDocs.docs} />,
-    },
-  },
 };
 
 const Template = () => {

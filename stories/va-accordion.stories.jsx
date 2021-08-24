@@ -3,7 +3,6 @@ import {
   getWebComponentDocs,
   componentStructure,
   propStructure,
-  StoryDocs,
 } from './wc-helpers';
 
 const accordionDocs = getWebComponentDocs('va-accordion');
@@ -12,12 +11,6 @@ const accordionItem = getWebComponentDocs('va-accordion-item');
 export default {
   title: 'Components/va-accordion',
   subcomponents: componentStructure(accordionItem),
-  parameters: {
-    docs: {
-      /* eslint-disable-next-line react/display-name */
-      page: () => <StoryDocs docs={accordionDocs.docs} />,
-    },
-  },
 };
 
 const Template = args => {

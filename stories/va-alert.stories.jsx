@@ -1,17 +1,11 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
-import { getWebComponentDocs, StoryDocs, propStructure } from './wc-helpers';
+import { getWebComponentDocs, propStructure } from './wc-helpers';
 
 const alertDocs = getWebComponentDocs('va-alert');
 
 export default {
   title: 'Components/va-alert',
-  parameters: {
-    docs: {
-      /* eslint-disable-next-line react/display-name */
-      page: () => <StoryDocs docs={alertDocs.docs} />,
-    },
-  },
 };
 
 const defaultArgs = {
