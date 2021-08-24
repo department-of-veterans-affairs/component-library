@@ -18,7 +18,6 @@
   "scripts": {
     "build": "node ./scripts/build.js",
     "build-storybook": "build-storybook",
-    "prepublishOnly": "pinst --disable && node ./scripts/prepublish.js",
     "postinstall": "husky install",
     "postpublish": "pinst --enable",
     "storybook": "start-storybook -p 6006",
@@ -40,7 +39,7 @@
     "lodash": "^4.17.15",
     "moment": "^2.23.0",
     "prop-types": "^15.6.2",
-    "react-focus-lock": "^2.4.0",
+    "react-focus-lock": "^2.5.1",
     "react-focus-on": "^3.5.1",
     "react-scroll": "^1.7.16",
     "react-transition-group": "1",
