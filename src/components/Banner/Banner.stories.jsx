@@ -1,9 +1,9 @@
 import React from 'react';
-import EmergencyBanner from './EmergencyBanner';
+import Banner from './Banner';
 
 export default {
-  title: 'Components/Banners/EmergencyBanner',
-  component: EmergencyBanner,
+  title: 'Components/Banners/Banner',
+  component: Banner,
   argTypes: {
     type: {
       control: {
@@ -14,7 +14,7 @@ export default {
   },
 };
 
-const Template = args => <EmergencyBanner {...args} />;
+const Template = args => <Banner {...args} />;
 
 const defaultArgs = {
   visible: true,
