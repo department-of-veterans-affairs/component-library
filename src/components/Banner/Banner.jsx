@@ -5,7 +5,7 @@ import classnames from 'classnames';
 // Relative imports.
 import AlertBox from '../AlertBox/AlertBox';
 
-const DISMISSED_BANNERS_LOCAL_STORAGE = 'DISMISSED_BANNERS';
+const DISMISSED_BANNERS_KEY = 'DISMISSED_BANNERS';
 
 export class Banner extends Component {
   static propTypes = {
@@ -37,7 +37,7 @@ export class Banner extends Component {
 
     // Derive dismissed banners from storage.
     const dismissedBannersString = props.storage?.getItem(
-      DISMISSED_BANNERS_LOCAL_STORAGE,
+      DISMISSED_BANNERS_KEY,
     );
     const dismissedBanners = dismissedBannersString
       ? JSON.parse(dismissedBannersString)
@@ -69,7 +69,7 @@ export class Banner extends Component {
 
       // Set it in local storage.
       storage.setItem(
-        DISMISSED_BANNERS_LOCAL_STORAGE,
+        DISMISSED_BANNERS_KEY,
         JSON.stringify(updatedDismissedBanners),
       );
 
@@ -96,13 +96,14 @@ export class Banner extends Component {
   };
 
   render() {
-    const { showClose, title, content, type, visible } = this.props;
+    const { content, showClose, storage, title, type, visible } = this.props;
     const { dismissedBanners } = this.state;
 
     // Derive if the banner is dismissed.
-    const isBannerDismissed = dismissedBanners?.includes(
-      this.prepareBannerID(),
-    );
+    const isBannerDismissed =
+      showClose &&
+      storage &&
+      dismissedBanners?.includes(this.prepareBannerID());
 
     // Escape early if the banner isn't visible or is dismissed.
     if (!visible || isBannerDismissed) {
@@ -110,11 +111,10 @@ export class Banner extends Component {
     }
 
     // Derive onCloseAlert depending on the environment.
-    const onCloseAlert = showClose && this.dismiss;
+    const onCloseAlert = showClose && storage ? this.dismiss : undefined;
 
     return (
       <div
-        onClick={this.onClick}
         className={classnames(
           'usa-alert-full-width',
           'vads-u-border-top--5px',
@@ -134,6 +134,7 @@ export class Banner extends Component {
           },
         )}
         data-e2e-id="emergency-banner"
+        onClick={this.onClick}
       >
         <AlertBox
           // eslint-disable-next-line react/no-danger
