@@ -51,7 +51,7 @@ export class Banner extends Component {
   prepareBannerID = () => `${this.props.title}:${this.props.content}`;
 
   dismiss = () => {
-    const { content, recordEvent, storage, title } = this.props;
+    const { recordEvent, storage, title } = this.props;
     const { dismissedBanners } = this.state;
 
     // Derive the current banner ID.
