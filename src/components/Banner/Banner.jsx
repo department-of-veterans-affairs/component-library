@@ -80,10 +80,8 @@ export class Banner extends Component {
     // Track the dismiss event.
     if (recordEvent) {
       recordEvent({
-        event: 'banner-dismiss',
-        title,
-        content,
-        page: window?.location?.href,
+        event: 'int-alert-box-close',
+        'alert-box-headline': title,
       });
     }
   };
