@@ -19,7 +19,7 @@ From the project root, run the following commands:
 1. `yarn install`
 1. `yarn storybook`
 
-## Publishing Web Components with GitHub Releases
+## Web Components
 
 The Design System team is working on replacing the React components in this library with Web Component versions. This isn't _just_ a React replacement however - part of the goal is to have true components that can be used outside of React in plain HTML pages.
 
@@ -42,7 +42,7 @@ For now these Web Components live on the [`web-components` branch](https://githu
 
 ### Making a release
 
-Include an list of changes when you create a new release. Each bullet point should be one or two clear sentences. We have been using [Keep a changelog](https://keepachangelog.com/en/1.0.0/) informally and have had good success with it.
+Include a list of changes when you create a new release. Each bullet point should be one or two clear sentences. We have been using [Keep a changelog](https://keepachangelog.com/en/1.0.0/) informally and have had good success with it.
 
 ![release off of `web-components` branch](./img/release-base.png)
 
