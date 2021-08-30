@@ -9,22 +9,36 @@ const DISMISSED_BANNERS_KEY = 'DISMISSED_BANNERS';
 
 export class Banner extends Component {
   static propTypes = {
-    // A raw HTML string.
+    /**
+     * A raw HTML string.
+     * */
     content: PropTypes.string.isRequired,
-    // Usually this is just window.localStorage or window.sessionStorage.
+    /**
+     * Usually this is just window.localStorage or window.sessionStorage.
+     * */
     storage: PropTypes.shape({
       getItem: PropTypes.func.isRequired,
       setItem: PropTypes.func.isRequired,
     }),
-    // A function to track clicks (e.g. Google Analytics' `dataLayer.push`).
+    /**
+     * A function to track clicks (e.g. Google Analytics' `dataLayer.push`).
+     * */
     recordEvent: PropTypes.func,
-    // Enable the close functionality. The banner will be closed until storage is cleared.
+    /**
+     * Enable the close functionality. The banner will be closed until storage is cleared.
+     * */
     showClose: PropTypes.bool,
-    // The title of the banner.
+    /**
+     * The title of the banner.
+     * */
     title: PropTypes.string.isRequired,
-    // If type is equal to 'error', it will show a red emergency banner outline.
+    /**
+     * The type of the banner. One of 'info', 'error', 'success', 'continue', or 'warning'. This affects both the icon of the AlertBox and the top border color.
+     * */
     type: PropTypes.string.isRequired,
-    // A boolean that when false makes it so the banner does not render.
+    /**
+     * A boolean that when false makes it so that the banner does not render.
+     * */
     visible: PropTypes.bool.isRequired,
   };
 
