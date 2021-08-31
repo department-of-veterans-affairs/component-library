@@ -14,7 +14,11 @@ export class Banner extends Component {
      * */
     content: PropTypes.string.isRequired,
     /**
-     * Usually this is just window.localStorage or window.sessionStorage.
+     * Usually this is just window.localStorage or window.sessionStorage. If you provide sessionStorage to the component, it will only use sessionStorage
+     * (and vice versa for localStorage).
+     * An array of dismissed banners will be stored in storage under the DISMISSED_BANNERS_KEY. This is used to determine if a banner has been dismissed.
+     * In order to clear dismissed banners, you will need to clear the storage you provided (e.g. localStorage or sessionStorage) manually.
+     * (It is not desired for a user to clear their storage via Banner functionality at this time).
      * */
     storage: PropTypes.shape({
       getItem: PropTypes.func.isRequired,
