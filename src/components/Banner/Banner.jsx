@@ -148,7 +148,7 @@ export class Banner extends Component {
             'vads-u-border-color--green-light':
               type === 'success' || type === 'continue',
             // 'warning', Yellow border, black triangle exclamation
-            'vads-u-border-color--warning-message': type === 'error',
+            'vads-u-border-color--warning-message': type === 'warning',
           },
         )}
         data-e2e-id="emergency-banner"
