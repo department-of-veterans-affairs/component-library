@@ -96,6 +96,7 @@ const deriveContactPattern = (pattern, parsedNumber) => {
  *  the digit placeholder
  * @param {string} ariaLabel (optional) - if included, this custom aria-label
  *  will replace the generated aria-label
+ * @param {string} ariaDescribedById (optional) - id of element used to populate the aria-describedby attribute
  * @param {function} onClick (optional) - function called when the link is
  *  clicked
  * @param {string|JSX} children (optional) - if included, this custom
@@ -109,6 +110,7 @@ function Telephone({
   className = '', // additional css class to add
   pattern = '', // output format; defaults to patterns.default value
   ariaLabel = '', // custom aria-label
+  ariaDescribedById = '', // id of describing element
   onClick = () => {},
   children,
   notClickable = false,
@@ -160,13 +162,19 @@ function Telephone({
     );
   }
 
+  const linkProps = {
+    className: `no-wrap ${className}`,
+    href: href,
+    'aria-label': formattedAriaLabel,
+    onClick: onClick,
+  };
+
+  if (ariaDescribedById) {
+    linkProps['aria-describedby'] = ariaDescribedById;
+  }
+
   return (
-    <a
-      className={`no-wrap ${className}`}
-      href={href}
-      aria-label={formattedAriaLabel}
-      onClick={onClick}
-    >
+    <a {...linkProps}>
       {children ||
         `${formattedNumber}${extension ? `, ext. ${extension}` : ''}`}
     </a>
@@ -206,6 +214,11 @@ Telephone.propTypes = {
    * Custom aria-label string.
    */
   ariaLabel: PropTypes.string,
+
+  /**
+   * aria-describedby element id
+   */
+  ariaDescribedById: PropTypes.string,
 
   /**
    * Using this prop, the phone number becomes a non-clickable presentational
