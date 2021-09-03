@@ -66,6 +66,7 @@ class Checkbox extends React.Component {
             {this.props.labelAboveCheckbox}
           </span>
         )}
+        {errorSpan}
         <input
           aria-labelledby={this.props.ariaLabelledBy}
           aria-describedby={errorSpanId}
@@ -85,7 +86,6 @@ class Checkbox extends React.Component {
           {this.props.label}
           {requiredSpan}
         </label>
-        {errorSpan}
       </div>
     );
   }
