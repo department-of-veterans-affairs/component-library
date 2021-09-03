@@ -48,20 +48,36 @@ function Table(props) {
             className={`${borderClasses} ${rowPaddingClass}`}
             role="row"
           >
-            {fields.map((field, index) => (
-              <td
-                data-index={index}
-                className={classNames(borderClasses, {
-                  'vads-u-text-align--left': field.alignLeft,
-                  'medium-screen:vads-u-text-align--right': field.alignRight,
-                })}
-                data-label={field.label}
-                key={`${rowIndex}-${field.label}`}
-                role="cell"
-              >
-                {item[field.value] === null ? '---' : item[field.value]}
-              </td>
-            ))}
+            {fields.map((field, index) =>
+              index === 0 ? (
+                <th
+                  data-index={index}
+                  className={classNames(borderClasses, {
+                    'vads-u-text-align--left': field.alignLeft,
+                    'medium-screen:vads-u-text-align--right': field.alignRight,
+                  })}
+                  data-label={field.label}
+                  key={`${rowIndex}-${field.label}`}
+                  role="cell"
+                  scope="row"
+                >
+                  {item[field.value] === null ? '---' : item[field.value]}
+                </th>
+              ) : (
+                <td
+                  data-index={index}
+                  className={classNames(borderClasses, {
+                    'vads-u-text-align--left': field.alignLeft,
+                    'medium-screen:vads-u-text-align--right': field.alignRight,
+                  })}
+                  data-label={field.label}
+                  key={`${rowIndex}-${field.label}`}
+                  role="cell"
+                >
+                  {item[field.value] === null ? '---' : item[field.value]}
+                </td>
+              ),
+            )}
           </tr>
         ))}
       </tbody>
