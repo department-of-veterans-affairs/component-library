@@ -11,3 +11,8 @@
   /*  Workaround for https://bugzilla.mozilla.org/show_bug.cgi?id=1241631 */
   word-wrap: normal !important;
 }
+
+vads-u-outline--none:focus,
+[tabindex="-1"]:focus {
+  outline: 0;
+}
