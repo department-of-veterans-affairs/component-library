@@ -6,6 +6,26 @@ const borderClasses =
   'vads-u-border-top--0 vads-u-border-right--0 vads-u-border-left--0 vads-u-font-family--sans vads-u-padding--0 vads-u-padding-y--0p5 medium-screen:vads-u-padding--2';
 const rowPaddingClass = 'vads-u-padding-y--2';
 
+const cellProps = ({ alignLeft, alignRight, label }, index, rowIndex) => {
+  return {
+    'data-index': index,
+    className: classNames(borderClasses, {
+      'vads-u-text-align--left': alignLeft,
+      'medium-screen:vads-u-text-align--right': alignRight,
+    }),
+    'data-label': label,
+    key: `${rowIndex}-${label}`,
+    role: 'cell',
+  };
+};
+
+const thProps = (field, index, rowIndex) => {
+  return {
+    ...cellProps(field, index, rowIndex),
+    scope: 'row',
+  };
+};
+
 function Table(props) {
   const { currentSort, fields, data, ariaLabelledBy } = props;
 
@@ -50,30 +70,11 @@ function Table(props) {
           >
             {fields.map((field, index) =>
               index === 0 ? (
-                <th
-                  data-index={index}
-                  className={classNames(borderClasses, {
-                    'vads-u-text-align--left': field.alignLeft,
-                    'medium-screen:vads-u-text-align--right': field.alignRight,
-                  })}
-                  data-label={field.label}
-                  key={`${rowIndex}-${field.label}`}
-                  role="cell"
-                  scope="row"
-                >
+                <th {...thProps(field, index, rowIndex)}>
                   {item[field.value] === null ? '---' : item[field.value]}
                 </th>
               ) : (
-                <td
-                  data-index={index}
-                  className={classNames(borderClasses, {
-                    'vads-u-text-align--left': field.alignLeft,
-                    'medium-screen:vads-u-text-align--right': field.alignRight,
-                  })}
-                  data-label={field.label}
-                  key={`${rowIndex}-${field.label}`}
-                  role="cell"
-                >
+                <td {...cellProps(field, index, rowIndex)}>
                   {item[field.value] === null ? '---' : item[field.value]}
                 </td>
               ),
