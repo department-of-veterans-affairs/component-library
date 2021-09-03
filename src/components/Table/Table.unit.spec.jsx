@@ -35,11 +35,11 @@ describe('<Table />', () => {
     );
 
     expect(wrapper.find('thead')).to.have.lengthOf(1);
-    expect(wrapper.find('th')).to.have.lengthOf(6); // Once for each field
+    expect(wrapper.find('th')).to.have.lengthOf(15);
     wrapper.unmount();
   });
 
-  it('should render all of the rows', () => {
+  it('should render all of the rows with headers', () => {
     const wrapper = shallow(
       <Table
         fields={fields}
@@ -52,6 +52,13 @@ describe('<Table />', () => {
     );
 
     expect(wrapper.find('tr')).to.have.lengthOf(10); // includes header row
+
+    const bodyRows = wrapper.find('tbody').find('tr');
+    expect(bodyRows).to.have.lengthOf(9);
+    bodyRows.forEach(row => expect(row.childAt(0).type()).to.equal('th'));
+    bodyRows.forEach(row =>
+      expect(row.childAt(0).props()['scope']).to.eql('row'),
+    );
     wrapper.unmount();
   });
 

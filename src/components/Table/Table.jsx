@@ -6,6 +6,25 @@ const borderClasses =
   'vads-u-border-top--0 vads-u-border-right--0 vads-u-border-left--0 vads-u-font-family--sans vads-u-padding--0 vads-u-padding-y--0p5 medium-screen:vads-u-padding--2';
 const rowPaddingClass = 'vads-u-padding-y--2';
 
+const cellProps = (
+  { alignLeft, alignRight, label },
+  index,
+  rowIndex,
+  scope = null,
+) => {
+  return {
+    'data-index': index,
+    className: classNames(borderClasses, {
+      'vads-u-text-align--left': alignLeft,
+      'medium-screen:vads-u-text-align--right': alignRight,
+    }),
+    'data-label': label,
+    key: `${rowIndex}-${label}`,
+    role: 'cell',
+    scope: scope,
+  };
+};
+
 function Table(props) {
   const { currentSort, fields, data, ariaLabelledBy } = props;
 
@@ -48,20 +67,17 @@ function Table(props) {
             className={`${borderClasses} ${rowPaddingClass}`}
             role="row"
           >
-            {fields.map((field, index) => (
-              <td
-                data-index={index}
-                className={classNames(borderClasses, {
-                  'vads-u-text-align--left': field.alignLeft,
-                  'medium-screen:vads-u-text-align--right': field.alignRight,
-                })}
-                data-label={field.label}
-                key={`${rowIndex}-${field.label}`}
-                role="cell"
-              >
-                {item[field.value] === null ? '---' : item[field.value]}
-              </td>
-            ))}
+            {fields.map((field, index) =>
+              index === 0 ? (
+                <th {...cellProps(field, index, rowIndex, 'row')}>
+                  {item[field.value] === null ? '---' : item[field.value]}
+                </th>
+              ) : (
+                <td {...cellProps(field, index, rowIndex)}>
+                  {item[field.value] === null ? '---' : item[field.value]}
+                </td>
+              ),
+            )}
           </tr>
         ))}
       </tbody>
