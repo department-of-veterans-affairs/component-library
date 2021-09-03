@@ -8,6 +8,10 @@
   margin-bottom: 22px;
 }
 
+:host(:last-child) {
+  margin-bottom: 0.5rem;
+}
+
 :host(:not([open])) #content,
 :host([open='false']) #content {
   display: none;
