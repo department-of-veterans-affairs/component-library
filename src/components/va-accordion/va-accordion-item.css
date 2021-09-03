@@ -1,8 +1,8 @@
 @import '../../mixins/focusable.css';
 
-:host {
+:host(:not(:last-child)) {
   display: block;
-  margin-bottom: 0.5rem;
+  margin-bottom: 22px;
 }
 
 :host(:not([open])) #content,
