@@ -6,7 +6,12 @@ const borderClasses =
   'vads-u-border-top--0 vads-u-border-right--0 vads-u-border-left--0 vads-u-font-family--sans vads-u-padding--0 vads-u-padding-y--0p5 medium-screen:vads-u-padding--2';
 const rowPaddingClass = 'vads-u-padding-y--2';
 
-const cellProps = ({ alignLeft, alignRight, label }, index, rowIndex) => {
+const cellProps = (
+  { alignLeft, alignRight, label },
+  index,
+  rowIndex,
+  scope = null,
+) => {
   return {
     'data-index': index,
     className: classNames(borderClasses, {
@@ -16,13 +21,7 @@ const cellProps = ({ alignLeft, alignRight, label }, index, rowIndex) => {
     'data-label': label,
     key: `${rowIndex}-${label}`,
     role: 'cell',
-  };
-};
-
-const thProps = (field, index, rowIndex) => {
-  return {
-    ...cellProps(field, index, rowIndex),
-    scope: 'row',
+    scope: scope,
   };
 };
 
@@ -70,7 +69,7 @@ function Table(props) {
           >
             {fields.map((field, index) =>
               index === 0 ? (
-                <th {...thProps(field, index, rowIndex)}>
+                <th {...cellProps(field, index, rowIndex, 'row')}>
                   {item[field.value] === null ? '---' : item[field.value]}
                 </th>
               ) : (
