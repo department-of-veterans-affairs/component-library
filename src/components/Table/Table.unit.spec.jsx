@@ -35,7 +35,8 @@ describe('<Table />', () => {
     );
 
     expect(wrapper.find('thead')).to.have.lengthOf(1);
-    expect(wrapper.find('th')).to.have.lengthOf(6); // Once for each field
+    expect(wrapper.find('th')).to.have.lengthOf(15); // Once for each field
+    expect(wrapper.find('td')).to.have.lengthOf(45);
     wrapper.unmount();
   });
 
