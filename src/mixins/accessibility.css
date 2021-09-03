@@ -12,7 +12,7 @@
   word-wrap: normal !important;
 }
 
-vads-u-outline--none:focus,
+.vads-u-outline--none:focus,
 [tabindex="-1"]:focus {
-  outline: 0;
+  outline: none;
 }
