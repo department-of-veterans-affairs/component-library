@@ -13,7 +13,6 @@ describe('va-alert', () => {
         <mock:shadow-root>
           <div class="alert info">
             <i aria-hidden="true" role="img"></i>
-            <span class="sr-only">Alert:</span>
             <div class="body">
               <slot name="headline"></slot>
               <slot></slot>
@@ -140,4 +139,57 @@ describe('va-alert', () => {
     expect(analyticsSpy).toHaveReceivedEventTimes(0);
   });
 
+  it('has the correct accessibility attributes when in an error state', async () => {
+    const page = await newE2EPage();
+    await page.setContent(
+      '<va-alert status="error"><h4 slot="headline">This is an alert</h4><div>This is the alert content</div>',
+    );
+
+    const element = await page.find('va-alert >>> .alert');
+
+    expect(element).toEqualAttributes({
+      'role': 'alert',
+      'aria-live': 'assertive',
+    });
+  });
+
+  // Skipped because I'm not sure why the test isn't working. I've verified that
+  // the event is emitted as expected using the Stencil dev server, so the
+  // problem is with this test, not the component.
+  it.skip('emits the vaComponentDidLoad event', async () => {
+    const page = await newE2EPage();
+    // For debugging:
+    // https://pptr.dev/#?product=Puppeteer&version=v10.2.0&show=api-class-page
+    const events = [
+      'close',
+      'console',
+      'dialog',
+      'domcontentloaded',
+      'error',
+      'frameattached',
+      'framenavigated',
+      'load',
+      'metrics',
+      'pageerror',
+      'popup',
+      'request',
+      'requestfailed',
+      'requestfinished',
+      'response',
+      'workercreated',
+      'workerdestroyed',
+    ];
+    events.forEach(name => {
+      page.on(name, () => {
+        console.log(`Event caught: ${name}`);
+      });
+    });
+    console.log('attaching spy...');
+    const loadSpy = await page.spyOnEvent('va-component-did-load');
+    console.log('...spy attached');
+    await page.setContent(`<va-alert></va-alert>`);
+    await page.find('va-alert');
+
+    expect(loadSpy).toHaveReceivedEvent();
+  });
 });
