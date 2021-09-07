@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { uniqueId, isArray, isString } from 'lodash';
+import { uniqueId, isString } from 'lodash';
 import classNames from 'classnames';
 
 import ExpandingGroup from '../ExpandingGroup/ExpandingGroup';
@@ -25,7 +25,7 @@ class RadioButtons extends React.Component {
 
   getMatchingSubSection(checked, optionValue) {
     if (checked && this.props.children) {
-      const children = isArray(this.props.children)
+      const children = Array.isArray(this.props.children)
         ? this.props.children
         : [this.props.children];
       const subsections = children.filter(
@@ -78,7 +78,7 @@ class RadioButtons extends React.Component {
       requiredSpan = <span className="form-required-span">(*Required)</span>;
     }
 
-    const options = isArray(this.props.options) ? this.props.options : [];
+    const options = Array.isArray(this.props.options) ? this.props.options : [];
     const storedValue = this.props.value?.value;
     const optionElements = options.map((option, optionIndex) => {
       let optionLabel;

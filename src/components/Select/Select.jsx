@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { uniqueId, isArray, isString } from 'lodash';
+import { uniqueId, isString } from 'lodash';
 import { makeField } from '../../helpers/fields';
 
 import dispatchAnalyticsEvent from '../../helpers/analytics';
@@ -71,7 +71,7 @@ class Select extends React.Component {
     // Calculate options for select
     let reactKey = 0;
     // TODO(awong): Remove this hack to handle options prop and use invariants instead.
-    const options = isArray(this.props.options) ? this.props.options : [];
+    const options = Array.isArray(this.props.options) ? this.props.options : [];
     const optionElements = options.map(obj => {
       let label;
       let value;

@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { uniqueId, isArray, isString } from 'lodash';
+import { uniqueId, isString } from 'lodash';
 import classNames from 'classnames';
 import ExpandingGroup from '../ExpandingGroup/ExpandingGroup';
 import { makeField } from '../../helpers/fields';
@@ -17,7 +17,7 @@ class CheckboxGroup extends React.Component {
 
   getMatchingSubSection = (checked, optionValues) => {
     if (checked && this.props.children) {
-      const children = isArray(this.props.children)
+      const children = Array.isArray(this.props.children)
         ? this.props.children
         : [this.props.children];
       const subsections = children.filter(child =>
@@ -68,7 +68,7 @@ class CheckboxGroup extends React.Component {
       requiredSpan = <span className="form-required-span">(*Required)</span>;
     }
 
-    const options = isArray(this.props.options) ? this.props.options : [];
+    const options = Array.isArray(this.props.options) ? this.props.options : [];
     const storedValues = this.props.values;
     const optionElements = options.map((obj, index) => {
       let optionLabel;
