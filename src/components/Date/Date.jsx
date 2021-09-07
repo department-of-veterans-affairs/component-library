@@ -16,48 +16,43 @@ import {
 /**
  * A date input field that accepts values for month and year
  */
+const Date = props => {
+  const { day, month, year } = props.date;
 
-class Date extends React.Component {
-  render() {
-    const { day, month, year } = this.props.date;
-
-    // we want to do validations in a specific order, so we show the message
-    // that makes the most sense to the user
-    let errorMessage;
-    if (isDirtyDate(this.props.date)) {
-      // make sure the user enters a full date first, if required
-      if (this.props.required && !isNotBlankDateField(this.props.date)) {
-        errorMessage = this.props.requiredMessage;
-        // make sure the user has entered a minimally valid date
-      } else if (!isValidPartialDate(day.value, month.value, year.value)) {
-        errorMessage = this.props.invalidMessage;
-      } else {
-        const validationResult = validateCustomFormComponent(
-          this.props.validation,
-        );
-        errorMessage = validationResult.message;
-      }
-    } else if (year.value.length >= 4) {
-      const yr = parseInt(year.value, 10);
-      if (yr < minYear || yr > maxYear) {
-        errorMessage = `Please enter a year between ${minYear} and ${maxYear}`;
-      }
+  // we want to do validations in a specific order, so we show the message
+  // that makes the most sense to the user
+  let errorMessage;
+  if (isDirtyDate(props.date)) {
+    // make sure the user enters a full date first, if required
+    if (props.required && !isNotBlankDateField(props.date)) {
+      errorMessage = props.requiredMessage;
+      // make sure the user has entered a minimally valid date
+    } else if (!isValidPartialDate(day.value, month.value, year.value)) {
+      errorMessage = props.invalidMessage;
+    } else {
+      const validationResult = validateCustomFormComponent(props.validation);
+      errorMessage = validationResult.message;
     }
-
-    return (
-      <SimpleDate
-        required={this.props.required}
-        errorMessage={errorMessage}
-        label={this.props.label}
-        date={this.props.date}
-        ariaDescribedby={this.props.ariaDescribedby}
-        minYear={minYear}
-        maxYear={maxYear}
-        onValueChange={this.props.onValueChange}
-      />
-    );
+  } else if (year.value.length >= 4) {
+    const yr = parseInt(year.value, 10);
+    if (yr < minYear || yr > maxYear) {
+      errorMessage = `Please enter a year between ${minYear} and ${maxYear}`;
+    }
   }
-}
+
+  return (
+    <SimpleDate
+      required={props.required}
+      errorMessage={errorMessage}
+      label={props.label}
+      date={props.date}
+      ariaDescribedby={props.ariaDescribedby}
+      minYear={minYear}
+      maxYear={maxYear}
+      onValueChange={props.onValueChange}
+    />
+  );
+};
 
 export { SimpleDate };
 
