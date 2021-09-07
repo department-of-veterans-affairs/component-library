@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
-import _ from 'lodash';
+import { range } from 'lodash';
 import dispatchAnalyticsEvent from '../../helpers/analytics';
 
 /**
@@ -38,7 +38,7 @@ export default function SegmentedProgressBar({
       tabIndex="0"
       aria-label={`Step ${current} of ${total}`}
     >
-      {_.range(total).map(step => (
+      {range(total).map(step => (
         <div
           key={step}
           className={`progress-segment ${
