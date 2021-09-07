@@ -7,6 +7,8 @@ import NumberInput from '../NumberInput/NumberInput';
 import { months, days } from '../../helpers/options-for-select.js';
 
 const handleChange = (path, newValue, oldDate, onValueChange) => {
+  if (!onValueChange) return;
+
   const date = {
     ...oldDate,
     [path]: newValue,
@@ -18,6 +20,8 @@ const handleChange = (path, newValue, oldDate, onValueChange) => {
 
   onValueChange(date);
 };
+
+// TODO: Write a hasAncestor function and use it to determine whether or not to call onBlur by first finding if the currentElement
 
 /**
  * A simple date picker with only display logic. For built-in validation, use the Date component.
@@ -31,6 +35,7 @@ export const SimpleDate = ({
   minYear,
   maxYear,
   onValueChange,
+  onBlur,
 }) => {
   const inputId = useRef(_.uniqueId('date-input-'));
   const { day, month, year } = date;
@@ -79,6 +84,7 @@ export const SimpleDate = ({
                 handleChange('month', update, date, onValueChange);
               }}
               ariaDescribedby={ariaDescribedbyWithError}
+              onBlur={onBlur}
             />
           </div>
           <div className="form-datefield-day">
@@ -92,6 +98,7 @@ export const SimpleDate = ({
                 handleChange('day', update, date, onValueChange);
               }}
               ariaDescribedby={ariaDescribedbyWithError}
+              onBlur={onBlur}
             />
           </div>
           <div className="usa-datefield usa-form-group usa-form-group-year">
@@ -107,6 +114,7 @@ export const SimpleDate = ({
                 handleChange('year', update, date, onValueChange);
               }}
               ariaDescribedby={ariaDescribedbyWithError}
+              onBlur={onBlur}
             />
           </div>
         </div>
