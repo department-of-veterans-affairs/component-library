@@ -50,6 +50,7 @@ const Date = props => {
       minYear={minYear}
       maxYear={maxYear}
       onValueChange={props.onValueChange}
+      onBlur={props.onBlur}
     />
   );
 };
@@ -61,21 +62,25 @@ Date.propTypes = {
    * Render marker indicating field is required.
    */
   required: PropTypes.bool,
+
   /**
-   * object or array. Result of custom validation. Should include a valid prop and a message prop
+   * Result of custom validation. Should include a valid prop and a message prop
    */
   validation: PropTypes.shape({
     valid: PropTypes.bool,
     message: PropTypes.string,
   }),
+
   /**
    * Label for entire question.
    */
   label: PropTypes.string,
+
   /**
    * Used to create unique name attributes for each input.
    */
   name: PropTypes.string.isRequired,
+
   /**
    * Date value. Should have month, day, and year props
    */
@@ -93,18 +98,28 @@ Date.propTypes = {
       dirty: PropTypes.bool,
     }),
   }).isRequired,
+
   /**
    * a function with this prototype: (newValue)
    */
   onValueChange: PropTypes.func.isRequired,
+
   requiredMessage: PropTypes.string,
+
   invalidMessage: PropTypes.string,
+
   /**
    * Add additional aria-describedby to the month, day & year elements.
    * Note: make sure the ID exists on the page before adding this, or you'll
    * have an WCAG violation
    */
   ariaDescribedby: PropTypes.string,
+
+  /**
+   * This callback is called when a date field is blurred.
+   * Function signature: () => void
+   */
+  onBlur: PropTypes.func,
 };
 
 Date.defaultProps = {
