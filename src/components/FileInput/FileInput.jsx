@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-to-interactive-role */
 import PropTypes from 'prop-types';
 import React from 'react';
-import _ from 'lodash';
+import { uniqueId } from 'lodash';
 
 class FileInput extends React.Component {
   constructor() {
@@ -10,7 +10,7 @@ class FileInput extends React.Component {
   }
 
   UNSAFE_componentWillMount() {
-    this.inputId = _.uniqueId('errorable-file-input-');
+    this.inputId = uniqueId('errorable-file-input-');
   }
 
   handleChange(domEvent) {
@@ -31,9 +31,7 @@ class FileInput extends React.Component {
       errorSpanId = `${this.inputId}-error-message`;
       errorSpan = (
         <span
-          className={`usa-input-error-message ${
-            this.props.additionalErrorClass
-          }`}
+          className={`usa-input-error-message ${this.props.additionalErrorClass}`}
           role="alert"
           id={errorSpanId}
         >
