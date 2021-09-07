@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import _ from 'lodash';
+import { uniqueId } from 'lodash';
 import { makeField } from '../../helpers/fields';
 
 import dispatchAnalyticsEvent from '../../helpers/analytics';
@@ -20,7 +20,7 @@ class TextInput extends React.Component {
   }
 
   UNSAFE_componentWillMount() {
-    this.inputId = _.uniqueId('errorable-text-input-');
+    this.inputId = uniqueId('errorable-text-input-');
   }
 
   handleChange(domEvent) {

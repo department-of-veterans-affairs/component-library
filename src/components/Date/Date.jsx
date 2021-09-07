@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/label-has-for */
 import PropTypes from 'prop-types';
 import React from 'react';
-import _ from 'lodash';
+import { uniqueId } from 'lodash';
 
 import Select from '../Select/Select';
 import NumberInput from '../NumberInput/NumberInput';
@@ -27,7 +27,7 @@ class Date extends React.Component {
   }
 
   UNSAFE_componentWillMount() {
-    this.inputId = _.uniqueId('date-input-');
+    this.inputId = uniqueId('date-input-');
   }
 
   handleChange(path, update) {
