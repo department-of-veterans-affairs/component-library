@@ -2,6 +2,9 @@ import React from 'react';
 // import SkinDeep from 'skin-deep';
 import { expect } from 'chai';
 import { render } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+import { spy } from 'sinon';
+
 import { axeCheck } from '../../helpers/test-helpers';
 import { SimpleDate } from './Date';
 import { makeField } from '../../helpers/fields.js';
@@ -135,7 +138,46 @@ describe.only('<SimpleDate>', () => {
     );
   });
 
-  it('calls onBlur when the day field is blurred', () => {});
-  it('calls onBlur when the month field is blurred', () => {});
-  it('calls onBlur when the year field is blurred', () => {});
+  describe('calls onBlur', () => {
+    const renderDate = () => {
+      const date = {
+        day: makeField(1),
+        month: makeField(12),
+        year: makeField(2010),
+      };
+      const onBlur = spy();
+      const { getByLabelText, getByTestId } = render(
+        <>
+          <p data-testid="foo">Click me to blur the field!</p>
+          <SimpleDate date={date} onBlur={onBlur} />,
+        </>,
+      );
+      return { onBlur, getByLabelText, getByTestId };
+    };
+
+    it('when the day field is blurred', () => {
+      const { onBlur, getByTestId, getByLabelText } = renderDate();
+      userEvent.click(getByLabelText('Day'));
+      userEvent.click(getByTestId('foo'));
+      expect(onBlur.called).to.be.true;
+    });
+
+    it('when the month field is blurred', () => {
+      const { onBlur, getByTestId, getByLabelText } = renderDate();
+      userEvent.click(getByLabelText('Month'));
+      userEvent.click(getByTestId('foo'));
+      expect(onBlur.called).to.be.true;
+    });
+
+    it('when the year field is blurred', () => {
+      const { onBlur, getByTestId, getByLabelText } = renderDate();
+      userEvent.click(getByLabelText('Year'));
+      userEvent.click(getByTestId('foo'));
+      expect(onBlur.called).to.be.true;
+    });
+  });
+
+  it('does not call onBlur when navigating between inputs for the same date', () => {
+    // TODO: Make two date fields to make sure it's not just _any_ date
+  });
 });
