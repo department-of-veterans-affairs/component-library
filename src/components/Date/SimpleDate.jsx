@@ -45,7 +45,7 @@ export const SimpleDate = ({
   let fieldsetClass;
   if (errorMessage) {
     fieldsetClass = 'input-error-date usa-input-error';
-    errorSpanId = `${inputId}-error-message`;
+    errorSpanId = `${inputId.current}-error-message`;
     errorSpan = (
       <span className="usa-input-error-message" role="alert" id={errorSpanId}>
         <span className="sr-only">Error</span> {errorMessage}
@@ -167,6 +167,12 @@ SimpleDate.propTypes = {
    * Function signature: (newValue: string) => void
    */
   onValueChange: PropTypes.func.isRequired,
+
+  /**
+   * This callback is called when a date field is blurred.
+   * Function signature: () => void
+   */
+  onBlur: PropTypes.func,
 };
 
 export default SimpleDate;
