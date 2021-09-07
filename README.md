@@ -39,7 +39,10 @@ For now these Web Components live on the [`web-components` branch](https://githu
 
 ![PR into `web-components` branch](./img/pr-base.png)
 
+
 ### Making a release
+
+Include a list of changes when you create a new release. Each bullet point should be one or two clear sentences. We have been using [Keep a changelog](https://keepachangelog.com/en/1.0.0/) informally and have had good success with it.
 
 ![release off of `web-components` branch](./img/release-base.png)
 
@@ -52,6 +55,8 @@ After you've tested and previewed your changes locally it's time to publish a ne
 ### 1. Submit your PR
 
 Submit a PR that includes all of your code changes. This should include the bump in versions you need, which you can change directly in the `package.json` files for the modules that are changing. Modules like `component-library` depend on `formation` via a peer dependency, so you may need to update that as well. We try to keep the peer dependency loose and only update it for breaking changes.
+
+Please add a clear list of changes to your PR description. We have been using [Keep a changelog](https://keepachangelog.com/en/1.0.0/) informally and have had good success with it.
 
 You'll need to choose what type of version update to make:
 
