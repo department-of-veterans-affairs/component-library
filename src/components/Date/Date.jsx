@@ -14,7 +14,7 @@ import {
 } from '../../helpers/validations';
 
 /**
- * A date input field that accepts values for month and year
+ * A date input field with built-in validation.
  */
 const Date = props => {
   const { day, month, year } = props.date;
