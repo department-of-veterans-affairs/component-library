@@ -21,7 +21,7 @@ const handleChange = (path, newValue, oldDate, onValueChange) => {
   onValueChange(date);
 };
 
-// TODO: Write a hasAncestor function and use it to determine whether or not to call onBlur by first finding if the currentElement
+// TODO: Refactor the date prop to be either a string or an object of strings
 
 /**
  * A simple date picker with only display logic. For built-in validation, use the Date component.
@@ -60,6 +60,20 @@ export const SimpleDate = ({
   const ariaDescribedbyWithError =
     [errorSpanId, ariaDescribedby || ''].join(' ').trim() || undefined;
 
+  // If the active element is _not_ part of the SimpleDate, call onBlur
+  const blurIfOutsideField = () => {
+    // Push the function onto the event loop because otherwise,
+    // document.activeElement will be <body>, not the _actual_ active element.
+    setTimeout(() => {
+      if (
+        ![`${name}Month`, `${name}Day`, `${name}Year`].includes(
+          document.activeElement.name,
+        )
+      )
+        onBlur();
+    });
+  };
+
   return (
     <fieldset className={fieldsetClass}>
       <legend className="vads-u-font-size--base vads-u-font-weight--normal">
@@ -84,7 +98,7 @@ export const SimpleDate = ({
                 handleChange('month', update, date, onValueChange);
               }}
               ariaDescribedby={ariaDescribedbyWithError}
-              onBlur={onBlur}
+              onBlur={blurIfOutsideField}
             />
           </div>
           <div className="form-datefield-day">
@@ -98,7 +112,7 @@ export const SimpleDate = ({
                 handleChange('day', update, date, onValueChange);
               }}
               ariaDescribedby={ariaDescribedbyWithError}
-              onBlur={onBlur}
+              onBlur={blurIfOutsideField}
             />
           </div>
           <div className="usa-datefield usa-form-group usa-form-group-year">
@@ -114,7 +128,7 @@ export const SimpleDate = ({
                 handleChange('year', update, date, onValueChange);
               }}
               ariaDescribedby={ariaDescribedbyWithError}
-              onBlur={onBlur}
+              onBlur={blurIfOutsideField}
             />
           </div>
         </div>
