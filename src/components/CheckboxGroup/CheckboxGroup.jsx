@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import _ from 'lodash';
+import { uniqueId, isArray, isString } from 'lodash';
 import classNames from 'classnames';
 import ExpandingGroup from '../ExpandingGroup/ExpandingGroup';
 import { makeField } from '../../helpers/fields';
@@ -12,12 +12,12 @@ import dispatchAnalyticsEvent from '../../helpers/analytics';
  */
 class CheckboxGroup extends React.Component {
   UNSAFE_componentWillMount() {
-    this.inputId = this.props.id || _.uniqueId('errorable-checkbox-buttons-');
+    this.inputId = this.props.id || uniqueId('errorable-checkbox-buttons-');
   }
 
   getMatchingSubSection = (checked, optionValues) => {
     if (checked && this.props.children) {
-      const children = _.isArray(this.props.children)
+      const children = isArray(this.props.children)
         ? this.props.children
         : [this.props.children];
       const subsections = children.filter(child =>
@@ -68,13 +68,13 @@ class CheckboxGroup extends React.Component {
       requiredSpan = <span className="form-required-span">(*Required)</span>;
     }
 
-    const options = _.isArray(this.props.options) ? this.props.options : [];
+    const options = isArray(this.props.options) ? this.props.options : [];
     const storedValues = this.props.values;
     const optionElements = options.map((obj, index) => {
       let optionLabel;
       let optionValue;
       let optionAdditional;
-      if (_.isString(obj)) {
+      if (isString(obj)) {
         optionLabel = obj;
         optionValue = obj;
       } else {

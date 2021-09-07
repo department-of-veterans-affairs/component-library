@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import _ from 'lodash';
+import { uniqueId, isArray, isString } from 'lodash';
 import { makeField } from '../../helpers/fields';
 
 import dispatchAnalyticsEvent from '../../helpers/analytics';
@@ -18,7 +18,7 @@ class Select extends React.Component {
   }
 
   UNSAFE_componentWillMount() {
-    this.selectId = _.uniqueId('errorable-select-');
+    this.selectId = uniqueId('errorable-select-');
   }
 
   handleChange(domEvent) {
@@ -71,11 +71,11 @@ class Select extends React.Component {
     // Calculate options for select
     let reactKey = 0;
     // TODO(awong): Remove this hack to handle options prop and use invariants instead.
-    const options = _.isArray(this.props.options) ? this.props.options : [];
+    const options = isArray(this.props.options) ? this.props.options : [];
     const optionElements = options.map(obj => {
       let label;
       let value;
-      if (_.isString(obj)) {
+      if (isString(obj)) {
         label = obj;
         value = obj;
       } else {

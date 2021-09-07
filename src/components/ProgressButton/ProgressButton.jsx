@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import _ from 'lodash';
+import { uniqueId } from 'lodash';
 
 /**
  * A component for the continue button to navigate through panels of questions.
@@ -8,7 +8,7 @@ import _ from 'lodash';
 
 class ProgressButton extends React.Component {
   UNSAFE_componentWillMount() {
-    this.id = _.uniqueId();
+    this.id = uniqueId();
   }
 
   render() {
