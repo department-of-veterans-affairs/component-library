@@ -144,7 +144,7 @@ export class VaAlert {
             aria-label={this.closeBtnAriaLabel}
             onClick={this.closeHandler.bind(this)}
           >
-            <i class="fa-times-circle" aria-label="Close icon" />
+            <i aria-hidden="true" class="fas fa-times-circle" role="presentation" />
           </button>
         )}
       </Host>
