@@ -11,6 +11,7 @@ const defaultArgs = {
   bordered: false,
   subheader: false,
   level: 2,
+  sectionHeading: null
 };
 
 const Template = ({ multi, bordered, level }) => html`
@@ -47,6 +48,18 @@ const TemplateSubheader = ({ subheader1, subheader2, level }) => html`
     >
       A well regulated Militia, being necessary to the security of a free State,
       the right of the people to keep and bear Arms, shall not be infringed.
+    </va-accordion-item>
+  </va-accordion>
+`;
+
+const TemplateSectionHeading = ({ sectionHeading, level }) => html`
+  <va-accordion section-heading=${sectionHeading}>
+    <va-accordion-item header="First Amendment" level=${level}>
+      Congress shall make no law respecting an establishment of religion, or prohibiting the free exercise thereof; or abridging the freedom of speech, or of the press; or the
+      right of the people peaceably to assemble, and to petition the Government for a redress of grievances.
+    </va-accordion-item>
+    <va-accordion-item header="Second Amendment" level=${level}>
+      A well regulated Militia, being necessary to the security of a free State, the right of the people to keep and bear Arms, shall not be infringed.
     </va-accordion-item>
   </va-accordion>
 `;
@@ -94,3 +107,7 @@ Subheaders.args = {
 export const LargeItems = TemplateLargeItems.bind({});
 
 LargeItems.args = { ...defaultArgs, bordered: true };
+
+export const SectionHeading = TemplateSectionHeading.bind({});
+
+SectionHeading.args = { ...defaultArgs, sectionHeading: "This is a section heading." };
