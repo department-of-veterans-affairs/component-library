@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
@@ -27,22 +27,49 @@ const cellProps = (
 
 function Table(props) {
   const { currentSort, fields, data, ariaLabelledBy } = props;
+  const [direction, setDirection] = useState(currentSort?.order);
+  let sortedData;
+
+  useEffect(() => {
+    sortedData = sortData();
+  });
+
+  const sortData = () => {
+    if (direction === 'ASC') {
+      return data.sort((a, b) => {
+        return a[currentSort.value] > b[currentSort.value] ? 1 : -1;
+      });
+    } else {
+      return data.sort((a, b) => {
+        return a[currentSort.value] < b[currentSort.value] ? 1 : -1;
+      });
+    }
+  };
+
+  if (direction) {
+    sortedData = sortData();
+  } else {
+    sortedData = data;
+  }
 
   return (
     <table aria-labelledby={ariaLabelledBy} className="responsive" role="table">
       <thead>
         <tr role="row">
           {fields.map(field =>
-            field.nonSortable ? (
-              <th key={field.value}>{field.label}</th>
-            ) : (
+            field.sortable && field.value == currentSort?.value ? (
               <th
                 key={field.value}
                 className={borderClasses}
                 role="columnheader"
                 scope="col"
               >
-                <button className="va-button-link vads-u-font-weight--bold vads-u-color--base vads-u-text-decoration--none">
+                <button
+                  className="va-button-link vads-u-font-weight--bold vads-u-color--base vads-u-text-decoration--none"
+                  onClick={() =>
+                    setDirection(direction === 'ASC' ? 'DESC' : 'ASC')
+                  }
+                >
                   {field.label}
                   {currentSort?.value === field.value && (
                     <i
@@ -55,13 +82,15 @@ function Table(props) {
                   )}
                 </button>
               </th>
+            ) : (
+              <th key={field.value}>{field.label}</th>
             ),
           )}
         </tr>
       </thead>
 
       <tbody>
-        {data.map((item, rowIndex) => (
+        {sortedData.map((item, rowIndex) => (
           <tr
             key={rowIndex}
             className={`${borderClasses} ${rowPaddingClass}`}
