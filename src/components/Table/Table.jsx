@@ -135,7 +135,7 @@ Table.propTypes = {
     PropTypes.shape({
       label: PropTypes.string,
       value: PropTypes.string,
-      nonSortable: PropTypes.boolean,
+      sortable: PropTypes.boolean,
       alignLeft: PropTypes.boolean,
       alignRight: PropTypes.boolean,
     }),
