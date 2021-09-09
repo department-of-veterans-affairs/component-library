@@ -50,6 +50,10 @@ const defaultArgs = {
       value: 'year',
     },
   ],
+  currentSort: {
+    value: 'year',
+    order: 'ASC',
+  },
 };
 
 /**
