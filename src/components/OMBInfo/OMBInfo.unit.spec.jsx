@@ -32,6 +32,18 @@ describe('<OMBInfo/>', () => {
         expDate="Expiration date"
       />,
     ));
+  it('should pass aXe check again', () =>
+    axeCheck(
+      <OMBInfo
+        resBurden={15}
+        ombNumber="OMB Number"
+        expDate="Expiration date"
+      />,
+      [],
+      {
+        modalOpen: true,
+      },
+    ));
   it('should render resBurden', () => {
     const tree = shallow(
       <OMBInfo
