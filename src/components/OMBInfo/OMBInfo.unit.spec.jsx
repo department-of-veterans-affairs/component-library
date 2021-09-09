@@ -40,9 +40,7 @@ describe('<OMBInfo/>', () => {
         expDate="Expiration date"
       />,
       [],
-      {
-        modalOpen: true,
-      },
+      { modalOpen: true },
     ));
   it('should render resBurden', () => {
     const tree = shallow(
