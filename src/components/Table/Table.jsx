@@ -70,8 +70,8 @@ function Table(props) {
                     <i
                       className={classNames({
                         fa: true,
-                        'fas fa-caret-down': sortDirection === 'DESC',
                         'fas fa-caret-up': sortDirection === 'ASC',
+                        'fas fa-caret-down': sortDirection === 'DESC',
                       })}
                     />
                   )}
