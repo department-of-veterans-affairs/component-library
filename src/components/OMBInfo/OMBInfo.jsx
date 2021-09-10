@@ -101,6 +101,7 @@ class OMBInfo extends React.Component {
           id="omb-modal"
           visible={this.state.modalOpen}
           onClose={this.closeModal}
+          title=""
         />
       </div>
     );
@@ -122,6 +123,11 @@ OMBInfo.propTypes = {
    * Form expiration date.
    */
   expDate: PropTypes.string.isRequired,
+
+  /**
+   * Child elements (content) of modal when displayed
+   */
+  children: PropTypes.node,
 };
 
 export default OMBInfo;

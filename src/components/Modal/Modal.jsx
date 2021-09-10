@@ -121,7 +121,7 @@ class Modal extends React.Component {
     if (!this.props.visible) return null;
 
     const { id, status, title } = this.props;
-    const titleId = title && `${id || 'va-modal'}-title`;
+    const titleId = `${id || 'va-modal'}-title`;
     const content = this.props.contents || this.props.children;
 
     const modalClass = classNames('va-modal', this.props.cssClass);
@@ -153,7 +153,7 @@ class Modal extends React.Component {
           className={modalClass}
           id={id}
           role="alertdialog"
-          aria-labelledby={titleId}
+          aria-label={titleId}
           aria-modal
         >
           <div
