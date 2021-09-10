@@ -27,15 +27,14 @@ const cellProps = (
 
 function Table(props) {
   const { currentSort, fields, data, ariaLabelledBy } = props;
-  const [direction, setDirection] = useState(currentSort?.order);
-  let sortedData;
+  const [sortDirection, setSortDirection] = useState(currentSort?.order);
 
   useEffect(() => {
-    sortedData = sortData();
+    rowData = sortData();
   });
 
   const sortData = () => {
-    if (direction === 'ASC') {
+    if (sortDirection === 'ASC') {
       return data.sort((a, b) => {
         return a[currentSort.value] > b[currentSort.value] ? 1 : -1;
       });
@@ -46,11 +45,7 @@ function Table(props) {
     }
   };
 
-  if (direction) {
-    sortedData = sortData();
-  } else {
-    sortedData = data;
-  }
+  let rowData = sortDirection ? sortData() : data;
 
   return (
     <table aria-labelledby={ariaLabelledBy} className="responsive" role="table">
@@ -67,7 +62,7 @@ function Table(props) {
                 <button
                   className="va-button-link vads-u-font-weight--bold vads-u-color--base vads-u-text-decoration--none"
                   onClick={() =>
-                    setDirection(direction === 'ASC' ? 'DESC' : 'ASC')
+                    setSortDirection(sortDirection === 'ASC' ? 'DESC' : 'ASC')
                   }
                 >
                   {field.label}
@@ -75,8 +70,8 @@ function Table(props) {
                     <i
                       className={classNames({
                         fa: true,
-                        'fas fa-caret-down': currentSort.order === 'DESC',
-                        'fas fa-caret-up': currentSort.order === 'ASC',
+                        'fas fa-caret-down': sortDirection === 'DESC',
+                        'fas fa-caret-up': sortDirection === 'ASC',
                       })}
                     />
                   )}
@@ -90,7 +85,7 @@ function Table(props) {
       </thead>
 
       <tbody>
-        {sortedData.map((item, rowIndex) => (
+        {rowData.map((item, rowIndex) => (
           <tr
             key={rowIndex}
             className={`${borderClasses} ${rowPaddingClass}`}
