@@ -16,7 +16,7 @@ describe('<Table />', () => {
   it('should render the table header', () => {
     const wrapper = shallow(<Table fields={fields} data={data} />);
     expect(wrapper.find('thead')).to.have.lengthOf(1);
-    expect(wrapper.find('th')).to.have.lengthOf(14);
+    expect(wrapper.find('th')).to.have.lengthOf(13);
 
     wrapper.unmount();
   });
