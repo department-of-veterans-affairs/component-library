@@ -45,6 +45,7 @@ const Date = props => {
       required={props.required}
       errorMessage={errorMessage}
       label={props.label}
+      name={props.name}
       date={props.date}
       ariaDescribedby={props.ariaDescribedby}
       minYear={minYear}

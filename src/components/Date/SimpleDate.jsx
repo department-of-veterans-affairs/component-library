@@ -30,6 +30,7 @@ export const SimpleDate = ({
   errorMessage,
   date,
   label,
+  name,
   required,
   ariaDescribedby,
   minYear,
@@ -152,6 +153,11 @@ SimpleDate.propTypes = {
    * Label for the field.
    */
   label: PropTypes.string.isRequired,
+
+  /**
+   * Used to create unique name attributes for each input.
+   */
+  name: PropTypes.string.isRequired,
 
   /**
    * The error message to render (if any)
