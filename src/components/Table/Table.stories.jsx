@@ -51,10 +51,6 @@ const defaultArgs = {
       sortable: true,
     },
   ],
-  currentSort: {
-    value: 'year',
-    order: 'ASC',
-  },
 };
 
 /**
