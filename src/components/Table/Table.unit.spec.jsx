@@ -3,14 +3,14 @@ import { expect } from 'chai';
 import { shallow } from 'enzyme';
 import Table from './Table.jsx';
 import { axeCheck } from '../../helpers/test-helpers';
-import { payments, fields } from './test-data';
+import { data, fields } from './test-data';
 
 describe('<Table />', () => {
   it('Should Render', () => {
     const wrapper = shallow(
       <Table
         fields={fields}
-        data={payments.payments}
+        data={data}
         currentSort={{
           value: 'Date',
           order: 'ASC',
@@ -26,7 +26,7 @@ describe('<Table />', () => {
     const wrapper = shallow(
       <Table
         fields={fields}
-        data={payments.payments}
+        data={data}
         currentSort={{
           value: 'Date',
           order: 'ASC',
@@ -43,7 +43,7 @@ describe('<Table />', () => {
     const wrapper = shallow(
       <Table
         fields={fields}
-        data={payments.payments}
+        data={data}
         currentSort={{
           value: 'Date',
           order: 'ASC',
@@ -66,7 +66,7 @@ describe('<Table />', () => {
     axeCheck(
       <Table
         fields={fields}
-        data={payments.payments}
+        data={data}
         currentSort={{
           value: 'Date',
           order: 'ASC',
