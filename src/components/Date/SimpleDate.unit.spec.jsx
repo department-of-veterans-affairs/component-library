@@ -9,7 +9,7 @@ import { axeCheck } from '../../helpers/test-helpers';
 import { SimpleDate } from './Date';
 import { makeField } from '../../helpers/fields.js';
 
-describe.only('<SimpleDate>', () => {
+describe('<SimpleDate>', () => {
   it('wraps input elements in a fieldset', () => {
     const date = {
       day: makeField(1),
@@ -179,5 +179,24 @@ describe.only('<SimpleDate>', () => {
 
   it('does not call onBlur when navigating between inputs for the same date', () => {
     // TODO: Make two date fields to make sure it's not just _any_ date
+    const date = {
+      day: makeField(1),
+      month: makeField(12),
+      year: makeField(2010),
+    };
+    const onBlur = spy();
+    const { getByLabelText } = render(
+      <>
+        <SimpleDate date={date} onBlur={onBlur} />,
+      </>,
+    );
+    // Navigate back and forth through the date fields
+    userEvent.click(getByLabelText('Month'));
+    userEvent.click(getByLabelText('Day'));
+    userEvent.click(getByLabelText('Year'));
+    userEvent.click(getByLabelText('Month'));
+    userEvent.click(getByLabelText('Day'));
+    userEvent.click(getByLabelText('Year'));
+    expect(onBlur.called).to.be.false;
   });
 });
