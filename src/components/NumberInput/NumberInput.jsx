@@ -27,9 +27,6 @@ class NumberInput extends React.Component {
   }
 
   handleBlur() {
-    if (this.props.onValueChange)
-      this.props.onValueChange(makeField(this.props.field.value, true));
-
     if (this.props.onBlur) this.props.onBlur();
   }
 
