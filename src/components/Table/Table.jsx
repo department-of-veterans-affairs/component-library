@@ -38,7 +38,7 @@ function Table(props) {
       return data.sort((a, b) => {
         return a[currentSort.value] > b[currentSort.value] ? 1 : -1;
       });
-    } else {
+    } else if (sortDirection === 'DESC') {
       return data.sort((a, b) => {
         return a[currentSort.value] < b[currentSort.value] ? 1 : -1;
       });
