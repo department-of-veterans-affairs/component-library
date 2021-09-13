@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
-import _ from 'lodash';
+import { uniqueId } from 'lodash';
 
 import Select from '../Select/Select';
 import NumberInput from '../NumberInput/NumberInput';
@@ -38,7 +38,7 @@ export const SimpleDate = ({
   onValueChange,
   onBlur,
 }) => {
-  const inputId = useRef(_.uniqueId('date-input-'));
+  const inputId = useRef(uniqueId('date-input-'));
   const { day, month, year } = date;
 
   let daysForSelectedMonth = [];
