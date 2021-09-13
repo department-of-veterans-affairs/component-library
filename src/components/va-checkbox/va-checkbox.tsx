@@ -101,6 +101,7 @@ export class VaCheckbox {
         label: this.label,
         description,
         required: this.required,
+        checked: this.checked
       },
     });
   };

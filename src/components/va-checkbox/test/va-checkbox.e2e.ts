@@ -112,12 +112,13 @@ describe('va-checkbox', () => {
       details: {
         label: 'Just another checkbox here',
         description: 'Description content',
-        required: true, // This will be omitted if false, evidently
+        required: true, // This will be omitted if false, evidently,
+        checked: true,
       },
     });
   });
 
-  it('fires an analytics event with descritption slotted content', async () => {
+  it('fires an analytics event with description slotted content', async () => {
     const page = await newE2EPage();
     await page.setContent(
       `<va-checkbox label="Just another checkbox here" enable-analytics>
@@ -136,6 +137,7 @@ describe('va-checkbox', () => {
         label: 'Just another checkbox here',
         description:
           'Description content in a slot.Testing nested nodes. And multiple slots.',
+        checked: true,
       },
     });
   });
