@@ -32,9 +32,9 @@ describe('<SimpleDate>', () => {
     const { getByLabelText } = render(
       <SimpleDate date={date} onValueChange={() => {}} />,
     );
-    getByLabelText('Year');
-    getByLabelText('Month');
-    getByLabelText('Day');
+    expect(getByLabelText('Year')).to.not.be.null;
+    expect(getByLabelText('Month')).to.not.be.null;
+    expect(getByLabelText('Day')).to.not.be.null;
   });
 
   it('should pass aXe check', () => {

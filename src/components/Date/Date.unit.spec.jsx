@@ -22,7 +22,7 @@ describe('<Date>', () => {
       <Date required date={date} onValueChange={() => {}} />,
     );
 
-    getByText(/Please provide a response/);
+    expect(getByText(/Please provide a response/)).to.not.be.null;
   });
 
   it('displays invalid message', () => {
@@ -37,7 +37,7 @@ describe('<Date>', () => {
 
     const { getByText } = render(<Date date={date} onValueChange={() => {}} />);
 
-    getByText(/Please provide a valid date/);
+    expect(getByText(/Please provide a valid date/)).to.not.be.null;
   });
   it('displays invalid year message for years < min', () => {
     const date = {
@@ -50,7 +50,8 @@ describe('<Date>', () => {
     date.day.dirty = false;
     const { getByText } = render(<Date date={date} onValueChange={() => {}} />);
 
-    getByText(`Please enter a year between ${minYear} and ${maxYear}`);
+    expect(getByText(`Please enter a year between ${minYear} and ${maxYear}`))
+      .to.not.be.null;
   });
   it('displays invalid year message for years > max', () => {
     const date = {
@@ -63,7 +64,8 @@ describe('<Date>', () => {
     date.day.dirty = false;
     const { getByText } = render(<Date date={date} onValueChange={() => {}} />);
 
-    getByText(`Please enter a year between ${minYear} and ${maxYear}`);
+    expect(getByText(`Please enter a year between ${minYear} and ${maxYear}`))
+      .to.not.be.null;
   });
 
   it('does not show invalid message for month year date', () => {
@@ -98,7 +100,7 @@ describe('<Date>', () => {
       />,
     );
 
-    getByText('Test');
+    expect(getByText('Test')).to.not.be.null;
   });
 
   it('displays custom message from array', () => {
@@ -122,6 +124,6 @@ describe('<Date>', () => {
       />,
     );
 
-    getByText('Test');
+    expect(getByText('Test')).to.not.be.null;
   });
 });
