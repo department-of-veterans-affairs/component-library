@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import _ from 'lodash';
+import { uniqueId } from 'lodash';
 import classNames from 'classnames';
 
 import { makeField } from '../../helpers/fields';
@@ -17,7 +17,7 @@ class TextArea extends React.Component {
   }
 
   UNSAFE_componentWillMount() {
-    this.inputId = _.uniqueId('errorable-textarea-');
+    this.inputId = uniqueId('errorable-textarea-');
   }
 
   handleChange(domEvent) {

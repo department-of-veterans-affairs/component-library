@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import Scroll from 'react-scroll';
-import _ from 'lodash';
+import { uniqueId } from 'lodash';
 
 const Element = Scroll.Element;
 const scroller = Scroll.scroller;
@@ -18,7 +18,7 @@ class CollapsiblePanel extends React.Component {
   }
 
   UNSAFE_componentWillMount() {
-    this.id = _.uniqueId();
+    this.id = uniqueId();
   }
 
   scrollToTop() {

@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import _ from 'lodash';
+import { uniqueId } from 'lodash';
 
 import { makeField } from '../../helpers/fields';
 
@@ -17,7 +17,7 @@ class NumberInput extends React.Component {
   }
 
   UNSAFE_componentWillMount() {
-    this.inputId = _.uniqueId('errorable-number-input-');
+    this.inputId = uniqueId('errorable-number-input-');
   }
 
   handleChange(domEvent) {

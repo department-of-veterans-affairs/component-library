@@ -1,8 +1,7 @@
 /* eslint-disable jsx-a11y/label-has-for */
 import PropTypes from 'prop-types';
 import React from 'react';
-import _ from 'lodash';
-import moment from 'moment';
+import { uniqueId } from 'lodash';
 
 import Select from '../Select/Select';
 import NumberInput from '../NumberInput/NumberInput';
@@ -25,7 +24,7 @@ class MonthYear extends React.Component {
   }
 
   UNSAFE_componentWillMount() {
-    this.id = _.uniqueId('date-input-');
+    this.id = uniqueId('date-input-');
   }
 
   handleChange(path, update) {
