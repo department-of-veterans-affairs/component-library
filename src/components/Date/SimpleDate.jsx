@@ -73,7 +73,7 @@ export const SimpleDate = ({
             document.querySelector(selector) === document.activeElement,
         )
       )
-        onBlur();
+        if (onBlur) onBlur();
     });
   };
 
