@@ -15,4 +15,8 @@ const Template = args => <IconUser {...args} />;
 const defaultArgs = {};
 
 export const Default = Template.bind({});
-Default.args = { ...defaultArgs };
+Default.args = {
+  ...defaultArgs,
+  role: 'image',
+  ariaLabel: 'Favorite',
+};
