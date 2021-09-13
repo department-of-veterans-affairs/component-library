@@ -1,5 +1,4 @@
 import React from 'react';
-// import SkinDeep from 'skin-deep';
 import { expect } from 'chai';
 import { render } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
