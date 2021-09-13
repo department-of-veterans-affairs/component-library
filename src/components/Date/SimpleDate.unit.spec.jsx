@@ -155,30 +155,38 @@ describe('<SimpleDate>', () => {
       return { onBlur, getByLabelText, getByTestId };
     };
 
-    it('when the day field is blurred', () => {
+    it('when the day field is blurred', done => {
       const { onBlur, getByTestId, getByLabelText } = renderDate();
       userEvent.click(getByLabelText('Day'));
       userEvent.click(getByTestId('foo'));
-      expect(onBlur.called).to.be.true;
+      setTimeout(() => {
+        expect(onBlur.called).to.be.true;
+        done();
+      });
     });
 
-    it('when the month field is blurred', () => {
+    it('when the month field is blurred', done => {
       const { onBlur, getByTestId, getByLabelText } = renderDate();
       userEvent.click(getByLabelText('Month'));
       userEvent.click(getByTestId('foo'));
-      expect(onBlur.called).to.be.true;
+      setTimeout(() => {
+        expect(onBlur.called).to.be.true;
+        done();
+      });
     });
 
-    it('when the year field is blurred', () => {
+    it('when the year field is blurred', done => {
       const { onBlur, getByTestId, getByLabelText } = renderDate();
       userEvent.click(getByLabelText('Year'));
       userEvent.click(getByTestId('foo'));
-      expect(onBlur.called).to.be.true;
+      setTimeout(() => {
+        expect(onBlur.called).to.be.true;
+        done();
+      });
     });
   });
 
-  it('does not call onBlur when navigating between inputs for the same date', () => {
-    // TODO: Make two date fields to make sure it's not just _any_ date
+  it('does not call onBlur when navigating between inputs for the same date', done => {
     const date = {
       day: makeField(1),
       month: makeField(12),
@@ -197,6 +205,9 @@ describe('<SimpleDate>', () => {
     userEvent.click(getByLabelText('Month'));
     userEvent.click(getByLabelText('Day'));
     userEvent.click(getByLabelText('Year'));
-    expect(onBlur.called).to.be.false;
+    setTimeout(() => {
+      expect(onBlur.called).to.be.false;
+      done();
+    });
   });
 });
