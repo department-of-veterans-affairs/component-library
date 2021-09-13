@@ -13,7 +13,6 @@ class NumberInput extends React.Component {
   constructor() {
     super();
     this.handleChange = this.handleChange.bind(this);
-    this.handleBlur = this.handleBlur.bind(this);
   }
 
   UNSAFE_componentWillMount() {
@@ -24,10 +23,6 @@ class NumberInput extends React.Component {
     this.props.onValueChange(
       makeField(domEvent.target.value, this.props.field.dirty),
     );
-  }
-
-  handleBlur() {
-    if (this.props.onBlur) this.props.onBlur();
   }
 
   render() {
@@ -83,7 +78,7 @@ class NumberInput extends React.Component {
           type="number"
           value={this.props.field.value}
           onChange={this.handleChange}
-          onBlur={this.handleBlur}
+          onBlur={this.props.onBlur}
         />
       </div>
     );
