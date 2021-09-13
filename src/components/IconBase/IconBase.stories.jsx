@@ -16,5 +16,29 @@ export const Description = () => (
     <p>
       For examples of how this is used, see the other <code>Icon</code> stories.
     </p>
+    <p>
+      <strong>Icon being used alone</strong>
+      <br />
+      Example goes here...
+    </p>
+    <p>
+      <strong>Icon being used with supporting text</strong>
+      <br />
+      Example goes here...
+    </p>
+    <p>
+      <strong>
+        Icon being used alone inside an <code>{'<a>'}</code> tag
+      </strong>
+      <br />
+      Example goes here...
+    </p>
+    <p>
+      <strong>
+        icon being used with supporting text inside an <code>{'<a>'}</code> tag
+      </strong>
+      <br />
+      Example goes here...
+    </p>
   </div>
 );
