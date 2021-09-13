@@ -41,10 +41,7 @@ export const SimpleDate = ({
   const inputId = useRef(uniqueId('date-input-'));
   const { day, month, year } = date;
 
-  let daysForSelectedMonth = [];
-  if (month.value) {
-    daysForSelectedMonth = days[month.value];
-  }
+  const daysForSelectedMonth = month.value ? days[month.value] : [];
 
   let errorSpanId;
   let errorSpan = '';
