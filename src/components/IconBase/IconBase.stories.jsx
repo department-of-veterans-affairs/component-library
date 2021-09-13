@@ -19,7 +19,9 @@ export const Description = () => (
     <p>
       <strong>Icon being used alone</strong>
       <br />
-      Example goes here...
+      <code>{`
+      <IconHelp color={'#000000'} cssClass={'a-class'} id={'favorite'} role={'img'} ariaLabel={'Favorite'} />
+    `}</code>
     </p>
     <p>
       <strong>Icon being used with supporting text</strong>
