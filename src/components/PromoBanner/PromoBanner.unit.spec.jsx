@@ -74,4 +74,40 @@ describe('<PromoBanner>', () => {
       ).to.be.true;
     });
   });
+
+  describe('onClose', () => {
+    let wrapper;
+    const onCloseSpy = sinon.spy();
+    const props = {
+      type: PROMO_BANNER_TYPES.announcement,
+      href: 'https://missionact.va.gov/',
+      text: TEXT,
+      onClose: onCloseSpy,
+    };
+
+    beforeEach(() => {
+      wrapper = shallow(<PromoBanner {...props} />);
+    });
+
+    afterEach(() => {
+      onCloseSpy.resetHistory();
+      wrapper.unmount();
+    });
+
+    it('should call onClose when the "x" button is clicked', () => {
+      // Click close button in content
+      const closeButton = wrapper.find('.vads-c-promo-banner__close button');
+      closeButton.simulate('click');
+
+      expect(onCloseSpy.called).to.be.true;
+    });
+
+    it('should not call onClose when the link is clicked', () => {
+      // Click link in content
+      const testLink = wrapper.find('.vads-c-promo-banner__content-link');
+      testLink.simulate('click');
+
+      expect(onCloseSpy.called).not.to.be.true;
+    });
+  });
 });
