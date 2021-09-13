@@ -67,8 +67,13 @@ export const SimpleDate = ({
     // document.activeElement will be <body>, not the _actual_ active element.
     setTimeout(() => {
       if (
-        ![`${name}Month`, `${name}Day`, `${name}Year`].includes(
-          document.activeElement.name,
+        ![
+          `#${inputId.current} [name="${name}Month"]`,
+          `#${inputId.current} [name="${name}Day"]`,
+          `#${inputId.current} [name="${name}Year"]`,
+        ].some(
+          selector =>
+            document.querySelector(selector) === document.activeElement,
         )
       )
         onBlur();
@@ -76,7 +81,7 @@ export const SimpleDate = ({
   };
 
   return (
-    <fieldset className={fieldsetClass}>
+    <fieldset className={fieldsetClass} id={inputId.current}>
       <legend className="vads-u-font-size--base vads-u-font-weight--normal">
         {label || 'Date of birth'}
         {required && <span className="form-required-span">(*Required)</span>}
