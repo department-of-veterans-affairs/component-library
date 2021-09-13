@@ -21,12 +21,3 @@ FeaturedContentHeading.propTypes = {
 };
 
 export default FeaturedContentHeading;
-
-// Using the component...
-// <FeaturedContentHeading
-//   level={3}
-//   text="Here's the heading text"
-// />
-
-// ... vs using HTML
-// <h3>Here's the heading text</h3>
