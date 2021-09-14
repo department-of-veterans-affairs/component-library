@@ -76,25 +76,21 @@ describe('<PromoBanner>', () => {
   });
 
   describe('onClose', () => {
-    let wrapper;
-    const onCloseSpy = sinon.spy();
-    const props = {
-      type: PROMO_BANNER_TYPES.announcement,
-      href: 'https://missionact.va.gov/',
-      text: TEXT,
-      onClose: onCloseSpy,
+    const renderBanner = () => {
+      const onCloseSpy = sinon.spy();
+      const wrapper = shallow(
+        <PromoBanner
+          type={PROMO_BANNER_TYPES.announcement}
+          href="https://missionact.va.gov/"
+          text={TEXT}
+          onClose={onCloseSpy}
+        />,
+      );
+      return { onCloseSpy, wrapper };
     };
 
-    beforeEach(() => {
-      wrapper = shallow(<PromoBanner {...props} />);
-    });
-
-    afterEach(() => {
-      onCloseSpy.resetHistory();
-      wrapper.unmount();
-    });
-
     it('should call onClose when the "x" button is clicked', () => {
+      const { wrapper, onCloseSpy } = renderBanner();
       // Click close button in content
       const closeButton = wrapper.find('.vads-c-promo-banner__close button');
       closeButton.simulate('click');
@@ -103,6 +99,7 @@ describe('<PromoBanner>', () => {
     });
 
     it('should not call onClose when the link is clicked', () => {
+      const { wrapper, onCloseSpy } = renderBanner();
       // Click link in content
       const testLink = wrapper.find('.vads-c-promo-banner__content-link');
       testLink.simulate('click');
