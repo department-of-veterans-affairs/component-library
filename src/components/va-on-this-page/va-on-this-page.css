@@ -13,13 +13,13 @@
   }
 }
 
-h2 {
+dt {
   font-family: var(--font-serif);
   font-size: 2rem;
   margin: 0.4em 0em;
 }
 
-ul {
+dl {
   margin-top: 0;
   margin-bottom: 0;
   margin-left: -0.5em;
@@ -27,7 +27,7 @@ ul {
   padding-left: 0;
 }
 
-li a {
+dd a {
   display: flex;
   align-items: baseline;
   padding: 0.5em;
