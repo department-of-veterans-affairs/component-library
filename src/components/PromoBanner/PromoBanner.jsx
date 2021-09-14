@@ -30,7 +30,7 @@ function PromoBanner({
     PROMO_BANNER_ICONS.get(type),
   );
 
-  const onCloseWithAnalytics = () => {
+  const handleLinkClick = () => {
     // Conditionally track the event.
     if (!disableAnalytics) {
       dispatchAnalyticsEvent({
@@ -44,7 +44,6 @@ function PromoBanner({
         },
       });
     }
-    return onClose && onClose();
   };
 
   return (
@@ -65,7 +64,7 @@ function PromoBanner({
               className="vads-c-promo-banner__content-link"
               href={href}
               target={target}
-              onClick={onCloseWithAnalytics}
+              onClick={handleLinkClick}
             >
               {text} <i className="fas fa-angle-right" />
             </a>
