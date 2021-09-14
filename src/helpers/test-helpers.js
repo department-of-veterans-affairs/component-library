@@ -32,12 +32,8 @@ export function axeCheck(component, ignoredRules = [], state = null) {
 
   div.innerHTML = '';
 
-  let mountedComponent;
-  if (state) {
-    mountedComponent = mount(component, { attachTo: div }).setState(state);
-  } else {
-    mountedComponent = mount(component, { attachTo: div });
-  }
+  const mountedComponent = mount(component, { attachTo: div });
+  state ? mountedComponent.setState(state) : mountedComponent;
 
   return new Promise((resolve, reject) => {
     axe.run(document.body, (err, result) => {

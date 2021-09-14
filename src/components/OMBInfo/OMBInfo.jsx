@@ -101,7 +101,6 @@ class OMBInfo extends React.Component {
           id="omb-modal"
           visible={this.state.modalOpen}
           onClose={this.closeModal}
-          title=""
         />
       </div>
     );
