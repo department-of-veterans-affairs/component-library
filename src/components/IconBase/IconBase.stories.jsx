@@ -41,6 +41,7 @@ export const Description = () => (
     <code>{`
     <IconHelp color={'#000000'} cssClass={'a-class'} id={'icon-help'} role={'presentation'} ariaLabel={'Help'} />
     `}</code>
+    <br />
     <code>{`
     Help
     `}</code>
@@ -49,7 +50,13 @@ export const Description = () => (
     </h4>
     <code>{`
       <a href="#>
+    `}</code>
+    <br />
+    <code>{`
         <IconHelp color={'#000000'} cssClass={'a-class'} id={'icon-help'} role={'img'} ariaLabel={'Help'} />
+    `}</code>
+    <br />
+    <code>{`
       </a>
     `}</code>
     <h4>
@@ -57,8 +64,17 @@ export const Description = () => (
     </h4>
     <code>{`
       <a href="#>
+    `}</code>
+    <br />
+    <code>{`
         <IconHelp color={'#000000'} cssClass={'a-class'} id={'icon-help'} role={'presentation'} ariaLabel={'Help'} />
+    `}</code>
+    <br />
+    <code>{`
         Help
+    `}</code>
+    <br />
+    <code>{`
       </a>
     `}</code>
   </div>
