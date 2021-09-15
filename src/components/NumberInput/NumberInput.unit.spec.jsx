@@ -39,7 +39,7 @@ describe('<NumberInput>', () => {
     return expect(updatePromise).to.eventually.eql(makeField('1', false));
   });
 
-  it('ensure blur makes field dirty', () => {
+  it('blurring the field calls the onBlur function', () => {
     let errorableInput;
 
     const updatePromise = new Promise(resolve => {
@@ -47,8 +47,8 @@ describe('<NumberInput>', () => {
         <NumberInput
           field={testValue}
           label="test"
-          onValueChange={update => {
-            resolve(update);
+          onBlur={() => {
+            resolve();
           }}
         />,
       );
@@ -60,7 +60,7 @@ describe('<NumberInput>', () => {
     );
     ReactTestUtils.Simulate.blur(input);
 
-    return expect(updatePromise).to.eventually.eql(makeField('', true));
+    return expect(updatePromise).to.eventually.be.fulfilled;
   });
 
   it('no error styles when errorMessage undefined', () => {
