@@ -55,7 +55,7 @@ function Table(props) {
             field.sortable && field.value == currentSort?.value ? (
               <th key={field.value} role="columnheader" scope="col">
                 <button
-                  className="va-button-link vads-u-font-weight--bold vads-u-color--base vads-u-text-decoration--none sortable"
+                  className="va-button-link vads-u-font-weight--bold vads-u-color--base vads-u-text-decoration--none sort"
                   onClick={() =>
                     setSortDirection(sortDirection === 'ASC' ? 'DESC' : 'ASC')
                   }
@@ -63,7 +63,7 @@ function Table(props) {
                   {field.label}
                   {currentSort?.value === field.value && (
                     <svg
-                      className="usa-icon"
+                      className="usa-icon sort"
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 24 24"
                     >
