@@ -82,6 +82,8 @@ export namespace Components {
          */
         "visible": boolean;
     }
+    interface VaBackToTop {
+    }
     interface VaCheckbox {
         /**
           * The aria-describedby attribute for the <intput> in the shadow DOM.
@@ -245,6 +247,12 @@ declare global {
         prototype: HTMLVaAlertElement;
         new (): HTMLVaAlertElement;
     };
+    interface HTMLVaBackToTopElement extends Components.VaBackToTop, HTMLStencilElement {
+    }
+    var HTMLVaBackToTopElement: {
+        prototype: HTMLVaBackToTopElement;
+        new (): HTMLVaBackToTopElement;
+    };
     interface HTMLVaCheckboxElement extends Components.VaCheckbox, HTMLStencilElement {
     }
     var HTMLVaCheckboxElement: {
@@ -286,6 +294,7 @@ declare global {
         "va-accordion": HTMLVaAccordionElement;
         "va-accordion-item": HTMLVaAccordionItemElement;
         "va-alert": HTMLVaAlertElement;
+        "va-back-to-top": HTMLVaBackToTopElement;
         "va-checkbox": HTMLVaCheckboxElement;
         "va-on-this-page": HTMLVaOnThisPageElement;
         "va-radio": HTMLVaRadioElement;
@@ -381,6 +390,8 @@ declare namespace LocalJSX {
           * If true, the alert will be visible.
          */
         "visible"?: boolean;
+    }
+    interface VaBackToTop {
     }
     interface VaCheckbox {
         /**
@@ -554,6 +565,7 @@ declare namespace LocalJSX {
         "va-accordion": VaAccordion;
         "va-accordion-item": VaAccordionItem;
         "va-alert": VaAlert;
+        "va-back-to-top": VaBackToTop;
         "va-checkbox": VaCheckbox;
         "va-on-this-page": VaOnThisPage;
         "va-radio": VaRadio;
@@ -570,6 +582,7 @@ declare module "@stencil/core" {
             "va-accordion": LocalJSX.VaAccordion & JSXBase.HTMLAttributes<HTMLVaAccordionElement>;
             "va-accordion-item": LocalJSX.VaAccordionItem & JSXBase.HTMLAttributes<HTMLVaAccordionItemElement>;
             "va-alert": LocalJSX.VaAlert & JSXBase.HTMLAttributes<HTMLVaAlertElement>;
+            "va-back-to-top": LocalJSX.VaBackToTop & JSXBase.HTMLAttributes<HTMLVaBackToTopElement>;
             "va-checkbox": LocalJSX.VaCheckbox & JSXBase.HTMLAttributes<HTMLVaCheckboxElement>;
             "va-on-this-page": LocalJSX.VaOnThisPage & JSXBase.HTMLAttributes<HTMLVaOnThisPageElement>;
             "va-radio": LocalJSX.VaRadio & JSXBase.HTMLAttributes<HTMLVaRadioElement>;
