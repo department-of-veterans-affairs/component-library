@@ -1,4 +1,4 @@
-import { Component, Host, h } from '@stencil/core';
+import { Component, Host, Listen, State, h } from '@stencil/core';
 
 @Component({
   tag: 'va-back-to-top',
@@ -6,6 +6,20 @@ import { Component, Host, h } from '@stencil/core';
   shadow: true,
 })
 export class VaBackToTop {
+  breakpoint = 600;
+  @State() hasHitBreakpoint = false;
+
+  @Listen('scroll', { target: 'window' })
+  handleScroll(ev) {
+    if (this.breakpointCheck() !== this.hasHitBreakpoint) {
+      this.hasHitBreakpoint = !this.hasHitBreakpoint;
+    }
+  }
+
+  breakpointCheck() {
+    return (window.scrollY || window.pageYOffset) > this.breakpoint;
+  }
+
   navigateToTop() {
     console.log('Clicking button');
     // Focus the h1 tag on the page.
@@ -27,7 +41,10 @@ export class VaBackToTop {
     return (
       <Host>
         <div>
-          <button onClick={this.navigateToTop.bind(this)}>
+          <button
+            onClick={this.navigateToTop.bind(this)}
+            class={this.hasHitBreakpoint ? 'reveal' : ''}
+          >
             <span>
               <i aria-hidden="true" class="fa-arrow-up" role="img"></i>
             </span>

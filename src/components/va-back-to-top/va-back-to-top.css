@@ -42,3 +42,8 @@ i {
   margin-right: 0;
   font-size: 2rem;
 }
+
+.reveal {
+  background: blue;
+  color: white;
+}
