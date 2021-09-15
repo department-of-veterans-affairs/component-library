@@ -31,6 +31,7 @@ function Table(props) {
 
   useEffect(() => {
     rowData = sortData();
+    setSortLabel();
   });
 
   const sortData = () => {
@@ -45,6 +46,10 @@ function Table(props) {
     }
   };
 
+  const setSortLabel = () =>
+    sortDirection === 'ASC' ? 'ascending' : 'descending';
+
+  let sortLabel = setSortLabel();
   let rowData = sortDirection ? sortData() : data;
 
   return (
@@ -59,6 +64,7 @@ function Table(props) {
                   onClick={() =>
                     setSortDirection(sortDirection === 'ASC' ? 'DESC' : 'ASC')
                   }
+                  aria-label={`sort data by ${sortLabel}`}
                 >
                   {field.label}
                   {currentSort?.value === field.value && (
