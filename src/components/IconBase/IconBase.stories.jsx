@@ -16,31 +16,33 @@ export const Description = () => (
     <p>
       For examples of how this is used, see the other <code>Icon</code> stories.
     </p>
+    <h2>Accessibility</h2>
+    <h3>
+      When to use <code>{'role="img"'}</code>
+    </h3>
     <p>
-      <strong>Icon being used alone</strong>
-      <br />
-      <code>{`
+      If an icon is being used alone (without support text), it should have a{' '}
+      <code>{'role="img"'}</code> AND appropriate ARIA markup OR screen reader
+      only descriptive text.
+    </p>
+    <h3>
+      When to use <code>{'role="presentation"'}</code>
+    </h3>
+    <p>
+      If an icon is being used with visual (and assistive device) text, it
+      should have <code>{'role="presentation"'}</code>.
+    </p>
+    <h3>Accessibility Examples</h3>
+    <h4>Icon being used alone</h4>
+    <code>{`
       <IconHelp color={'#000000'} cssClass={'a-class'} id={'favorite'} role={'img'} ariaLabel={'Favorite'} />
     `}</code>
-    </p>
-    <p>
-      <strong>Icon being used with supporting text</strong>
-      <br />
-      Example goes here...
-    </p>
-    <p>
-      <strong>
-        Icon being used alone inside an <code>{'<a>'}</code> tag
-      </strong>
-      <br />
-      Example goes here...
-    </p>
-    <p>
-      <strong>
-        icon being used with supporting text inside an <code>{'<a>'}</code> tag
-      </strong>
-      <br />
-      Example goes here...
-    </p>
+    <h4>Icon being used with supporting text</h4>
+    <h4>
+      Icon being used alone inside an <code>{'<a>'}</code> tag
+    </h4>
+    <h4>
+      Icon being used with supporting text inside an <code>{'<a>'}</code> tag
+    </h4>
   </div>
 );
