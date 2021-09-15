@@ -10,7 +10,7 @@ describe('<IconUser />', () => {
         color="#000000"
         id="help"
         role="img"
-        ariaLabel="Favorite"
+        ariaLabel="User"
       />,
     ));
 });
