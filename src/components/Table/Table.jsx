@@ -62,13 +62,32 @@ function Table(props) {
                 >
                   {field.label}
                   {currentSort?.value === field.value && (
-                    <i
-                      className={classNames({
-                        fa: true,
-                        'fas fa-caret-up': sortDirection === 'ASC',
-                        'fas fa-caret-down': sortDirection === 'DESC',
-                      })}
-                    />
+                    <svg
+                      className="usa-icon"
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                    >
+                      {sortDirection === 'ASC' ? (
+                        <g
+                          className="ascending"
+                          role="presentation"
+                          aria-label="ascending"
+                        >
+                          <path
+                            transform="rotate(180, 12, 12)"
+                            d="M17 17L15.59 15.59L12.9999 18.17V2H10.9999V18.17L8.41 15.58L7 17L11.9999 22L17 17Z"
+                          ></path>
+                        </g>
+                      ) : (
+                        <g
+                          className="descending"
+                          role="presentation"
+                          aria-label="descending"
+                        >
+                          <path d="M17 17L15.59 15.59L12.9999 18.17V2H10.9999V18.17L8.41 15.58L7 17L11.9999 22L17 17Z"></path>
+                        </g>
+                      )}
+                    </svg>
                   )}
                 </button>
               </th>
