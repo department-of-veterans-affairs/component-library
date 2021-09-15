@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
 const borderClasses =
-  'vads-u-font-family--sans vads-u-padding--0 vads-u-padding-y--0p5 medium-screen:vads-u-padding--2';
+  'vads-u-border-top--0 vads-u-border-right--0 vads-u-border-left--0 vads-u-font-family--sans vads-u-padding--0 vads-u-padding-y--0p5 medium-screen:vads-u-padding--2';
 const rowPaddingClass = 'vads-u-padding-y--2';
 
 const cellProps = (
@@ -53,12 +53,7 @@ function Table(props) {
         <tr role="row">
           {fields.map(field =>
             field.sortable && field.value == currentSort?.value ? (
-              <th
-                key={field.value}
-                className={borderClasses}
-                role="columnheader"
-                scope="col"
-              >
+              <th key={field.value} role="columnheader" scope="col">
                 <button
                   className="va-button-link vads-u-font-weight--bold vads-u-color--base vads-u-text-decoration--none"
                   onClick={() =>
