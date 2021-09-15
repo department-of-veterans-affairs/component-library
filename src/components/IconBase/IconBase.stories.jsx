@@ -39,7 +39,9 @@ export const Description = () => (
     `}</code>
     <h4>Icon being used with supporting text</h4>
     <code>{`
-    <IconHelp color={'#000000'} cssClass={'a-class'} id={'icon-help'} role={'img'} ariaLabel={'Help'} />
+    <IconHelp color={'#000000'} cssClass={'a-class'} id={'icon-help'} role={'presentation'} ariaLabel={'Help'} />
+    `}</code>
+    <code>{`
     Help
     `}</code>
     <h4>
@@ -55,7 +57,7 @@ export const Description = () => (
     </h4>
     <code>{`
       <a href="#>
-        <IconHelp color={'#000000'} cssClass={'a-class'} id={'icon-help'} role={'img'} ariaLabel={'Help'} />
+        <IconHelp color={'#000000'} cssClass={'a-class'} id={'icon-help'} role={'presentation'} ariaLabel={'Help'} />
         Help
       </a>
     `}</code>
