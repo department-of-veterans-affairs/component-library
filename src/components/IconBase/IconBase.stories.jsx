@@ -35,14 +35,25 @@ export const Description = () => (
     <h3>Accessibility Examples</h3>
     <h4>Icon being used alone</h4>
     <code>{`
-      <IconHelp color={'#000000'} cssClass={'a-class'} id={'favorite'} role={'img'} ariaLabel={'Favorite'} />
+      <IconHelp color={'#000000'} cssClass={'a-class'} id={'icon-help'} role={'img'} ariaLabel={'Help'} />
     `}</code>
     <h4>Icon being used with supporting text</h4>
     <h4>
       Icon being used alone inside an <code>{'<a>'}</code> tag
     </h4>
+    <code>{`
+      <a href="#>
+        <IconHelp color={'#000000'} cssClass={'a-class'} id={'icon-help'} role={'img'} ariaLabel={'Help'} />
+      </a>
+    `}</code>
     <h4>
       Icon being used with supporting text inside an <code>{'<a>'}</code> tag
     </h4>
+    <code>{`
+      <a href="#>
+        <IconHelp color={'#000000'} cssClass={'a-class'} id={'icon-help'} role={'img'} ariaLabel={'Help'} />
+        Help
+      </a>
+    `}</code>
   </div>
 );
