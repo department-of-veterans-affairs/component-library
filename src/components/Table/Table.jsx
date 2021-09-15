@@ -55,7 +55,7 @@ function Table(props) {
             field.sortable && field.value == currentSort?.value ? (
               <th key={field.value} role="columnheader" scope="col">
                 <button
-                  className="va-button-link vads-u-font-weight--bold vads-u-color--base vads-u-text-decoration--none"
+                  className="va-button-link vads-u-font-weight--bold vads-u-color--base vads-u-text-decoration--none sortable"
                   onClick={() =>
                     setSortDirection(sortDirection === 'ASC' ? 'DESC' : 'ASC')
                   }
