@@ -1,3 +1,4 @@
+@import '../../mixins/buttons.css';
 :host {
   display: block;
   bottom: 0;
