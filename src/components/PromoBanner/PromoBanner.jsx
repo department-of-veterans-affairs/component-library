@@ -30,7 +30,7 @@ function PromoBanner({
     PROMO_BANNER_ICONS.get(type),
   );
 
-  const onCloseWithAnalytics = () => {
+  const handleLinkClick = () => {
     // Conditionally track the event.
     if (!disableAnalytics) {
       dispatchAnalyticsEvent({
@@ -44,7 +44,6 @@ function PromoBanner({
         },
       });
     }
-    return onClose && onClose();
   };
 
   return (
@@ -52,8 +51,12 @@ function PromoBanner({
       <div className="vads-c-promo-banner__body">
         <div className="vads-c-promo-banner__icon">
           <span className="fa-stack fa-lg">
-            <i className="vads-u-color--white fa fa-circle fa-stack-2x" />
-            <i className={iconClasses} />
+            <i
+              aria-hidden="true"
+              className="vads-u-color--white fa fa-circle fa-stack-2x"
+              role="presentation"
+            />
+            <i aria-hidden="true" className={iconClasses} role="presentation" />
           </span>
         </div>
 
@@ -65,9 +68,14 @@ function PromoBanner({
               className="vads-c-promo-banner__content-link"
               href={href}
               target={target}
-              onClick={onCloseWithAnalytics}
+              onClick={handleLinkClick}
             >
-              {text} <i className="fas fa-angle-right" />
+              {text}{' '}
+              <i
+                aria-hidden="true"
+                className="fas fa-angle-right"
+                role="presentation"
+              />
             </a>
           )}
         </div>
@@ -79,7 +87,11 @@ function PromoBanner({
             onClick={onClose}
             className="va-button-link vads-u-margin-top--1"
           >
-            <i className="fas fa-times-circle vads-u-font-size--lg" />
+            <i
+              aria-hidden="true"
+              className="fas fa-times-circle vads-u-font-size--lg"
+              role="presentation"
+            />
           </button>
         </div>
       </div>
