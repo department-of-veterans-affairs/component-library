@@ -18,15 +18,15 @@ export class VaOnThisPage {
     return (
       <nav aria-label="table of contents">
         <dl>
-        <dt id="on-this-page">On this page</dt>
-        <dd role="definition">
-          {h2s.map(heading => (
-            <a href={`#${heading.id}`}>
-              <i aria-hidden="true" class="fas fa-arrow-down"></i>
-              {heading.innerText}
-            </a>
-          ))}
-        </dd>
+          <dt id="on-this-page">On this page</dt>
+          <dd role="definition">
+            {h2s.map(heading => (
+              <a href={`#${heading.id}`}>
+                <i aria-hidden="true" class="fas fa-arrow-down"></i>
+                {heading.innerText}
+              </a>
+            ))}
+          </dd>
         </dl>
       </nav>
     );
