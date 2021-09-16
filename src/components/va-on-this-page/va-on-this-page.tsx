@@ -16,18 +16,18 @@ export class VaOnThisPage {
     >;
 
     return (
-      <nav>
-        <h2>On this page</h2>
-        <ul>
-          {h2s.map(heading => (
-            <li>
+      <nav aria-label="table of contents">
+        <dl>
+          <dt id="on-this-page">On this page</dt>
+          <dd role="definition">
+            {h2s.map(heading => (
               <a href={`#${heading.id}`}>
                 <i aria-hidden="true" class="fas fa-arrow-down"></i>
                 {heading.innerText}
               </a>
-            </li>
-          ))}
-        </ul>
+            ))}
+          </dd>
+        </dl>
       </nav>
     );
   }

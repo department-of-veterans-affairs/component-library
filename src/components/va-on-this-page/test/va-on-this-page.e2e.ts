@@ -11,9 +11,11 @@ describe('va-on-this-page', () => {
     expect(element).toEqualHtml(`
       <va-on-this-page class="hydrated">
         <mock:shadow-root>
-          <nav>
-            <h2>On this page</h2>
-            <ul></ul>
+          <nav aria-label="table of contents">
+            <dl>
+              <dt id="on-this-page">On this page</dt>
+              <dd role="definition"></dd>
+            </dl>
           </nav>
         </mock:shadow-root>
       </va-on-this-page>
@@ -56,22 +58,20 @@ describe('va-on-this-page', () => {
     expect(element).toEqualHtml(`
       <va-on-this-page class="hydrated">
         <mock:shadow-root>
-          <nav>
-            <h2>On this page</h2>
-            <ul>
-              <li>
+          <nav aria-label="table of contents">
+            <dl>
+              <dt id="on-this-page">On this page</dt>
+              <dd role="definition">
                 <a href="#an-id">
                   <i aria-hidden="true" class="fa-arrow-down fas"></i>
                   Hello
                 </a>
-              </li>
-              <li>
                 <a href="#its-me">
                   <i aria-hidden="true" class="fa-arrow-down fas"></i>
                   It's me
                 </a>
-              </li>
-            </ul>
+              </dd>
+            </dl>
           </nav>
         </mock:shadow-root>
       </va-on-this-page>
@@ -95,21 +95,21 @@ describe('va-on-this-page', () => {
     const element = await page.find('va-on-this-page');
 
     expect(element).toEqualHtml(`
-      <va-on-this-page class="hydrated">
-        <mock:shadow-root>
-          <nav>
-            <h2>On this page</h2>
-            <ul>
-              <li>
-                <a href="#foo">
-                  <i aria-hidden="true" class="fa-arrow-down fas"></i>
-                  Foo
-                </a>
-              </li>
-            </ul>
-          </nav>
-        </mock:shadow-root>
-      </va-on-this-page>
+    <va-on-this-page class="hydrated">
+    <mock:shadow-root>
+      <nav aria-label="table of contents">
+        <dl>
+          <dt id="on-this-page">On this page</dt>
+          <dd role="definition">
+            <a href="#foo">
+              <i aria-hidden="true" class="fa-arrow-down fas"></i>
+              Foo
+            </a>
+          </dd>
+        </dl>
+      </nav>
+    </mock:shadow-root>
+  </va-on-this-page>
     `);
   });
 });
