@@ -13,14 +13,12 @@ export const Description = () => (
   </div>
 );
 
-const args = {
-  headingLevel: 3,
-  headingText: "If I'm a Veteran, can I get VR&amp;E benefits and services?",
-};
-
 export const Default = () => {
   return (
-    <FeaturedContent {...args}>
+    <FeaturedContent
+      headingLevel={3}
+      headingText={"If I'm a Veteran, can I get VR&E benefits and services?"}
+    >
       <p>
         You may be eligible for VR&E benefits and services if you’re a Veteran,
         and you meet all of the requirements listed below.
