@@ -41,6 +41,10 @@ div.docked {
   flex-direction: row-reverse;
 }
 
+div:not(.docked) {
+  max-width: var(--undocked-width);
+}
+
 div.docked button {
   position: relative;
 }

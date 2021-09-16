@@ -55,6 +55,9 @@ export class VaBackToTop {
   }
 
   render() {
+    const undockedWidth = this.el.getBoundingClientRect().width;
+    this.el.style.setProperty('--undocked-width', `${undockedWidth}px`);
+
     return (
       <Host>
         <div class={this.isDocked ? 'docked' : ''}>
