@@ -30,6 +30,21 @@ button {
   width: 44px;
 }
 
+/* div.docked, */
+/* div.docked button { */
+/*   position: relative; */
+/* } */
+
+div.docked {
+  position: relative;
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+div.docked button {
+  position: relative;
+}
+
 /* @media(max-width: ) { */
 button {
   padding-left: 17px;
@@ -46,8 +61,4 @@ i {
 .reveal {
   background: blue;
   color: white;
-}
-
-.docked {
-  position: relative;
 }

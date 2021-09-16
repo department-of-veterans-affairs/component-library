@@ -16,7 +16,7 @@ export class VaBackToTop {
   @Element() el: HTMLElement;
 
   @Listen('scroll', { target: 'window' })
-  handleScroll(ev) {
+  handleScroll() {
     if (this.breakpointCheck() !== this.hasHitBreakpoint) {
       this.hasHitBreakpoint = !this.hasHitBreakpoint;
     }
@@ -55,17 +55,12 @@ export class VaBackToTop {
   }
 
   render() {
-    let buttonClasses = '';
-
-    if (this.hasHitBreakpoint) buttonClasses += 'reveal ';
-    if (this.isDocked) buttonClasses += 'docked';
-
     return (
       <Host>
         <div class={this.isDocked ? 'docked' : ''}>
           <button
             onClick={this.navigateToTop.bind(this)}
-            class={buttonClasses}
+            class={this.hasHitBreakpoint ? 'reveal' : ''}
             ref={el => (this.bttButton = el as HTMLButtonElement)}
           >
             <span>
