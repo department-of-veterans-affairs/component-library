@@ -6,6 +6,13 @@ export default {
   component: FeaturedContent,
 };
 
+export const Description = () => (
+  <div>
+    <p>Call attention to important blocks of content.</p>
+    <p>Features are typically used to describe eligibility requirements.</p>
+  </div>
+);
+
 const args = {
   headingLevel: 3,
   headingText: "If I'm a Veteran, can I get VR&amp;E benefits and services?",
