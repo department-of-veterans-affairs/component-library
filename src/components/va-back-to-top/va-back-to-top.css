@@ -21,9 +21,9 @@ button {
   border-top-right-radius: 0;
   height: 44px;
   margin: 0;
-  /* opacity: 0; */
+  opacity: 0;
   padding: 0;
-  /* pointer-events: none; */
+  pointer-events: none;
   pointer-events: auto;
   position: absolute;
   right: 0;
@@ -58,7 +58,7 @@ i {
   font-size: 2rem;
 }
 
-.reveal {
-  background: blue;
-  color: white;
+button.reveal {
+  pointer-events: auto;
+  opacity: 1;
 }
