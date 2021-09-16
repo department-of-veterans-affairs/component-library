@@ -47,3 +47,7 @@ i {
   background: blue;
   color: white;
 }
+
+.docked {
+  position: relative;
+}

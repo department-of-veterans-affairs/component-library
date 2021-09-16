@@ -1,4 +1,6 @@
-import { Component, Host, Listen, State, h } from '@stencil/core';
+import { Component, Element, Host, Listen, State, h } from '@stencil/core';
+
+import { isInViewport } from '../../utils/utils';
 
 @Component({
   tag: 'va-back-to-top',
@@ -7,13 +9,28 @@ import { Component, Host, Listen, State, h } from '@stencil/core';
 })
 export class VaBackToTop {
   breakpoint = 600;
+  bttButton!: HTMLButtonElement;
   @State() hasHitBreakpoint = false;
+  @State() isDocked = false;
+
+  @Element() el: HTMLElement;
 
   @Listen('scroll', { target: 'window' })
   handleScroll(ev) {
     if (this.breakpointCheck() !== this.hasHitBreakpoint) {
       this.hasHitBreakpoint = !this.hasHitBreakpoint;
     }
+
+    if (this.readyToDock() !== this.isDocked) {
+      this.isDocked = !this.isDocked;
+    }
+  }
+
+  readyToDock() {
+    return (
+      this.el.getBoundingClientRect().top <=
+        this.bttButton.getBoundingClientRect().top && isInViewport(this.el)
+    );
   }
 
   breakpointCheck() {
@@ -38,12 +55,18 @@ export class VaBackToTop {
   }
 
   render() {
+    let buttonClasses = '';
+
+    if (this.hasHitBreakpoint) buttonClasses += 'reveal ';
+    if (this.isDocked) buttonClasses += 'docked';
+
     return (
       <Host>
-        <div>
+        <div class={this.isDocked ? 'docked' : ''}>
           <button
             onClick={this.navigateToTop.bind(this)}
-            class={this.hasHitBreakpoint ? 'reveal' : ''}
+            class={buttonClasses}
+            ref={el => (this.bttButton = el as HTMLButtonElement)}
           >
             <span>
               <i aria-hidden="true" class="fa-arrow-up" role="img"></i>
