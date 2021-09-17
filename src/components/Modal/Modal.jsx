@@ -149,11 +149,7 @@ class Modal extends React.Component {
         aria-label={`Close the ${status} modal`}
         onClick={this.handleClose}
       >
-        <i
-          className="fas fa-times-circle"
-          aria-hidden="true"
-          role="presentation"
-        />
+        <i className="fas fa-times-circle" aria-hidden="true" />
       </button>
     );
 
