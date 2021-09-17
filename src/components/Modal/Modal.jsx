@@ -135,12 +135,18 @@ class Modal extends React.Component {
     const bodyClass = status ? 'usa-alert-body' : 'va-modal-body';
     const titleClass = status ? 'usa-alert-heading' : 'va-modal-title';
     const contentClass = classNames({ 'usa-alert-text': status });
+    const ariaRole = status => {
+      if (status === 'warning' || status === 'error') {
+        return 'alertdialog';
+      }
+      return 'dialog';
+    };
 
     const closeButton = !this.props.hideCloseButton && (
       <button
         className="va-modal-close"
         type="button"
-        aria-label="Close this modal"
+        aria-label={`Close the ${status} modal`}
         onClick={this.handleClose}
       >
         <i className="fas fa-times-circle" aria-hidden="true" />
@@ -152,7 +158,7 @@ class Modal extends React.Component {
         <div
           className={modalClass}
           id={id}
-          role="alertdialog"
+          role={ariaRole(status)}
           aria-label={titleId}
           aria-modal
         >
@@ -166,7 +172,7 @@ class Modal extends React.Component {
             <div className={bodyClass}>
               <div role="document">
                 {title && (
-                  <h3 id={titleId} className={titleClass}>
+                  <h3 id={titleId} className={titleClass} tabIndex="-1">
                     {title}
                   </h3>
                 )}
