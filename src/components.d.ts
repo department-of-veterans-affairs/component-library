@@ -113,6 +113,16 @@ export namespace Components {
         "required"?: boolean;
     }
     interface VaFeaturedContent {
+        /**
+         * Sets the level for the HTML section heading elements.
+         * Valid values: 3, 4
+         */
+        "headingLevel": number;
+
+        /**
+          * Sets the text for the section heading.
+          */
+        "headingContent": string;
     }
     interface VaOnThisPage {
     }
