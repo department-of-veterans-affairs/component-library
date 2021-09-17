@@ -50,17 +50,40 @@ div.docked button {
   position: relative;
 }
 
-/* @media(max-width: ) { */
-button {
-  padding-left: 17px;
-  padding-right: 19px;
-  width: auto;
+button span {
+  display: none;
 }
-/* } */
+
+@media (min-width: 768px) {
+  button {
+    border-radius: 5px;
+    padding-left: 17px;
+    padding-right: 19px;
+    width: auto;
+  }
+
+  i {
+    padding-right: 8px;
+    padding-top: 12px;
+    font-size: 1em;
+  }
+
+  button span {
+    display: inline-block;
+  }
+}
 
 i {
   margin-right: 0;
   font-size: 2rem;
+}
+i {
+  font-family: 'Font Awesome 5 Free';
+  font-style: normal;
+  font-weight: 900;
+}
+i::before {
+  content: '\F062'; /* fa-arrow-up*/
 }
 
 button.reveal {
