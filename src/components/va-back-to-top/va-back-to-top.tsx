@@ -66,9 +66,7 @@ export class VaBackToTop {
             class={this.hasHitBreakpoint ? 'reveal' : ''}
             ref={el => (this.bttButton = el as HTMLButtonElement)}
           >
-            <span>
-              <i aria-hidden="true" class="fa-arrow-up" role="img"></i>
-            </span>
+            <i aria-hidden="true" role="img"></i>
             <span>Back to top</span>
           </button>
         </div>
