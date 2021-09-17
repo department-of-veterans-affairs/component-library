@@ -15,24 +15,19 @@ export class VaFeaturedContent {
    * Sets the level for the HTML section heading elements.
    * Valid values: 3, 4
    */
-  @Prop() headingLevel: number;
+  @Prop() level: number;
 
   /**
    * Sets the text for the section heading.
    */
-  @Prop() headingContent: string;
+  @Prop() header: string;
 
   render() {
-    const Header = () => h(`h${this.headingLevel}`);
+    const Header = () => h(`h${this.level}`, `${this.header}`);
 
     return (
       <Host>
-        <div class="feature">
-          <Header>
-            {this.headingContent}
-          </Header>
-          <slot />
-        </div>
+        <h1>{this.header}</h1>
       </Host>
     );
   }
