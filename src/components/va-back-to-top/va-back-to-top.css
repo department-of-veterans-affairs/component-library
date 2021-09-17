@@ -30,11 +30,9 @@ button {
   right: 0;
   width: 44px;
 }
-
-/* div.docked, */
-/* div.docked button { */
-/*   position: relative; */
-/* } */
+button:hover {
+  background-color: var(--color-black);
+}
 
 div.docked {
   position: relative;
