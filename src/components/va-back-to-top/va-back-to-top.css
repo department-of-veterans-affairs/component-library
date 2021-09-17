@@ -29,6 +29,8 @@ button {
   position: absolute;
   right: 0;
   width: 44px;
+  transition: all 0.25s ease-in;
+  margin-bottom: 0.5rem;
 }
 button:hover {
   background-color: var(--color-black);
@@ -87,4 +89,33 @@ i::before {
 button.reveal {
   pointer-events: auto;
   opacity: 1;
+  animation: slideInUp;
+  animation-duration: 0.25s;
+}
+
+button:not(.reveal) {
+  animation: slideOutDown;
+  animation-duration: 0.25s;
+}
+
+@keyframes slideInUp {
+  from {
+    transform: translate3d(0, 100%, 0);
+    visibility: visible;
+  }
+
+  to {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes slideOutDown {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+
+  to {
+    visibility: hidden;
+    transform: translate3d(0, 100%, 0);
+  }
 }
