@@ -28,10 +28,12 @@ const cellProps = (
 function Table(props) {
   const { currentSort, fields, data, ariaLabelledBy } = props;
   const [sortDirection, setSortDirection] = useState(currentSort?.order);
+  let sortLabel;
+  let rowData;
 
   useEffect(() => {
     rowData = sortData();
-    setSortLabel();
+    sortLabel = getSortLabel();
   });
 
   const sortData = () => {
@@ -46,11 +48,11 @@ function Table(props) {
     }
   };
 
-  const setSortLabel = () =>
+  const getSortLabel = () =>
     sortDirection === 'ASC' ? 'ascending' : 'descending';
 
-  let sortLabel = setSortLabel();
-  let rowData = sortDirection ? sortData() : data;
+  sortLabel = getSortLabel();
+  rowData = sortDirection ? sortData() : data;
 
   return (
     <table aria-labelledby={ariaLabelledBy} className="responsive" role="table">
