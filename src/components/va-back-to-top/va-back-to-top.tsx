@@ -1,6 +1,6 @@
 import { Component, Element, Host, Listen, State, h } from '@stencil/core';
 
-import { isInViewport } from '../../utils/utils';
+import 'intersection-observer';
 
 @Component({
   tag: 'va-back-to-top',
@@ -9,6 +9,7 @@ import { isInViewport } from '../../utils/utils';
 })
 export class VaBackToTop {
   breakpoint = 600;
+  observer = null;
   bttButton!: HTMLButtonElement;
   @State() hasHitBreakpoint = false;
   @State() isDocked = false;
@@ -20,17 +21,26 @@ export class VaBackToTop {
     if (this.breakpointCheck() !== this.hasHitBreakpoint) {
       this.hasHitBreakpoint = !this.hasHitBreakpoint;
     }
-
-    if (this.readyToDock() !== this.isDocked) {
-      this.isDocked = !this.isDocked;
-    }
   }
 
-  readyToDock() {
-    return (
-      this.el.getBoundingClientRect().top <=
-        this.bttButton.getBoundingClientRect().top && isInViewport(this.el)
-    );
+  componentWillLoad() {
+    console.log(this.el, this.el.getBoundingClientRect());
+    const options = {
+      threshold: 1.0,
+    };
+
+    const handleDock = (entries, observer) => {
+      console.log('Intersection callback', this.isDocked);
+      console.log(entries[0].isIntersecting);
+      if (entries[0].isIntersecting && !this.isDocked) {
+        this.isDocked = true;
+      } else if (!entries[0].isIntersecting && this.isDocked) {
+        this.isDocked = false;
+      }
+    };
+
+    this.observer = new IntersectionObserver(handleDock, options);
+    this.observer.observe(this.el);
   }
 
   breakpointCheck() {
