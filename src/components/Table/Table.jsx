@@ -76,22 +76,14 @@ function Table(props) {
                       viewBox="0 0 24 24"
                     >
                       {sortDirection === 'ASC' ? (
-                        <g
-                          className="ascending"
-                          role="presentation"
-                          aria-label="ascending"
-                        >
+                        <g className="ascending" aria-label="ascending">
                           <path
                             transform="rotate(180, 12, 12)"
                             d="M17 17L15.59 15.59L12.9999 18.17V2H10.9999V18.17L8.41 15.58L7 17L11.9999 22L17 17Z"
                           ></path>
                         </g>
                       ) : (
-                        <g
-                          className="descending"
-                          role="presentation"
-                          aria-label="descending"
-                        >
+                        <g className="descending" aria-label="descending">
                           <path d="M17 17L15.59 15.59L12.9999 18.17V2H10.9999V18.17L8.41 15.58L7 17L11.9999 22L17 17Z"></path>
                         </g>
                       )}

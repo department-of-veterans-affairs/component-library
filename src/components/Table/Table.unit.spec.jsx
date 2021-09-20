@@ -291,6 +291,23 @@ describe('<Table />', () => {
     });
   });
 
-  it('should pass a basic aXe check', () =>
+  it('should pass a basic aXe check with no sortable column', () =>
     axeCheck(<Table fields={fields} data={data} />));
+
+  it('should pass a basic aXe check with sortable column', () =>
+    axeCheck(
+      <Table
+        fields={[
+          Object.assign(fields[0], { sortable: true }),
+          fields[1],
+          fields[2],
+          fields[3],
+        ]}
+        data={data}
+        currentSort={{
+          value: 'string',
+          order: 'ASC',
+        }}
+      />,
+    ));
 });
