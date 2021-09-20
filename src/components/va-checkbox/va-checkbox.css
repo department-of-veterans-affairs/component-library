@@ -62,7 +62,7 @@ input:checked+label::before {
 }
 
 input:not([disabled]):focus+label:before {
-  outline: 2px solid var(--color-gold-light);
+  outline: 2px solid var(--color-olive);
   outline-offset: 2px;
 }
 

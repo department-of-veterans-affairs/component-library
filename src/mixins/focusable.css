@@ -3,6 +3,6 @@
 button:not([disabled]):focus,
 select:not([disabled]):focus,
 a:not([disabled]):focus {
-  outline: 2px solid var(--color-gold-light);
+  outline: 2px solid var(--color-olive);
   outline-offset: 2px;
 }
