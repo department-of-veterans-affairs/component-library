@@ -29,7 +29,7 @@ export class VaBackToTop {
       threshold: 1.0,
     };
 
-    const handleDock = (entries, observer) => {
+    const handleDock = entries => {
       console.log('Intersection callback', this.isDocked);
       console.log(entries[0].isIntersecting);
       if (entries[0].isIntersecting && !this.isDocked) {
