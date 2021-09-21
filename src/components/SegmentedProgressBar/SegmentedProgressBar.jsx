@@ -64,4 +64,12 @@ SegmentedProgressBar.propTypes = {
    * are disabled by default due to PII/PHI concerns.
    */
   enableAnalytics: PropTypes.bool,
+  /**
+   * An optional progress message in the progress bar.
+   */
+  optionalMessage: PropTypes.string,
+};
+
+SegmentedProgressBar.defaultProps = {
+  optionalMessage: '',
 };
