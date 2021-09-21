@@ -1,4 +1,4 @@
-import { Component, Element, Host, Listen, State, h } from '@stencil/core';
+import { Component, Element, Host, State, h } from '@stencil/core';
 
 import 'intersection-observer';
 
@@ -9,29 +9,21 @@ import 'intersection-observer';
 })
 export class VaBackToTop {
   breakpoint = 600;
-  observer = null;
-  bttButton!: HTMLButtonElement;
+  dockObserver = null;
+  revealObserver = null;
+  revealPixel!: HTMLSpanElement;
+
   @State() hasHitBreakpoint = false;
   @State() isDocked = false;
 
   @Element() el: HTMLElement;
 
-  @Listen('scroll', { target: 'window' })
-  handleScroll() {
-    if (this.breakpointCheck() !== this.hasHitBreakpoint) {
-      this.hasHitBreakpoint = !this.hasHitBreakpoint;
-    }
-  }
-
   componentWillLoad() {
-    console.log(this.el, this.el.getBoundingClientRect());
     const options = {
       threshold: 1.0,
     };
 
     const handleDock = entries => {
-      console.log('Intersection callback', this.isDocked);
-      console.log(entries[0].isIntersecting);
       if (entries[0].isIntersecting && !this.isDocked) {
         this.isDocked = true;
       } else if (!entries[0].isIntersecting && this.isDocked) {
@@ -39,16 +31,22 @@ export class VaBackToTop {
       }
     };
 
-    this.observer = new IntersectionObserver(handleDock, options);
-    this.observer.observe(this.el);
+    const handleReveal = entries => {
+      this.hasHitBreakpoint = entries[0].boundingClientRect.y < 0;
+    };
+
+    this.dockObserver = new IntersectionObserver(handleDock, options);
+    this.dockObserver.observe(this.el);
+
+    this.revealObserver = new IntersectionObserver(handleReveal);
   }
 
-  breakpointCheck() {
-    return (window.scrollY || window.pageYOffset) > this.breakpoint;
+  componentDidLoad() {
+    console.log(this.revealPixel);
+    this.revealObserver.observe(this.revealPixel);
   }
 
   navigateToTop() {
-    console.log('Clicking button');
     // Focus the h1 tag on the page.
     const el = document.querySelector('h1');
     if (el) {
@@ -70,11 +68,15 @@ export class VaBackToTop {
 
     return (
       <Host>
+        <span
+          class="reveal-point"
+          ref={el => (this.revealPixel = el as HTMLSpanElement)}
+        ></span>
+
         <div class={this.isDocked ? 'docked' : ''}>
           <button
             onClick={this.navigateToTop.bind(this)}
             class={this.hasHitBreakpoint ? 'reveal' : ''}
-            ref={el => (this.bttButton = el as HTMLButtonElement)}
           >
             <i aria-hidden="true" role="img"></i>
             <span>Back to top</span>

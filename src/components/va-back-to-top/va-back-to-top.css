@@ -15,6 +15,14 @@ div {
   width: 100%;
 }
 
+.reveal-point {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  top: var(--reveal-breakpoint, 60rem);
+  left: 0;
+}
+
 button {
   bottom: 0;
   background-color: var(--color-gray-dark);
