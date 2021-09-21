@@ -138,7 +138,7 @@ describe('<Pagination>', () => {
     tree.unmount();
   });
 
-  it('should set aria-current to the current page number on the correct link', () => {
+  it('should set aria-current to true on the correct link', () => {
     const currentPage = 6;
     const tree = shallow(
       <Pagination
