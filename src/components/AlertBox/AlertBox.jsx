@@ -93,7 +93,7 @@ class AlertBox extends Component {
         aria-label={this.props.closeBtnAriaLabel}
         onClick={this.props.onCloseAlert}
       >
-        <i className="fas fa-times-circle" aria-label="Close icon" />
+        <i className="fas fa-times-circle" aria-hidden="true" />
       </button>
     );
 
