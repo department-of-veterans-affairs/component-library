@@ -112,6 +112,19 @@ describe('va-featured-content', () => {
     expect(element).toBeNull();
   });
 
+  it('sents the header to the value of the header prop', async () => {
+    const header = "If I'm a Veteran, can I get VR&E benefits and services?";
+    const page = await newE2EPage();
+    await page.setContent(`
+      <va-featured-content
+        level=3
+        header=${header}
+      />
+    `);
+    const element = await page.find('va-featured-content >>> h3');
+    expect(element).toEqualText(header.split(' ')[0]);
+  });
+
   it('passes an axe check', async () => {
     const page = await newE2EPage();
     await page.setContent('<va-featured-content />');
