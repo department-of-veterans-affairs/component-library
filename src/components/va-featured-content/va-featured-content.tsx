@@ -32,8 +32,10 @@ export class VaFeaturedContent {
   
     return (
       <Host>
-        <Header />
-        <slot></slot>
+        <div class="feature">
+          <Header />
+          <slot></slot>
+        </div>
       </Host>
     );
   }
