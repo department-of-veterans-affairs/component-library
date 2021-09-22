@@ -8,7 +8,7 @@ import dispatchAnalyticsEvent from '../../helpers/analytics';
  *
  * @param {number} current - The index of the current chapter
  * @param {number} total   - The total number of chapters in the form
- * @param {string} ariaLabel - An optional aria label to override progress bar
+ * @param {string} ariaLabel - An override for the default aria label
  */
 export default function SegmentedProgressBar({
   current,
@@ -67,7 +67,7 @@ SegmentedProgressBar.propTypes = {
    */
   enableAnalytics: PropTypes.bool,
   /**
-   * An optional progress message in the progress bar.
+   * An override for the default aria label.
    */
   ariaLabel: PropTypes.string,
 };

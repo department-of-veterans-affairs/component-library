@@ -15,10 +15,19 @@ describe('<SegmentedProgressBar/>', () => {
     tree.unmount();
   });
 
-  it('should pass aXe check', () =>
-    axeCheck(
-      <SegmentedProgressBar current={2} total={5} label="aria label here" />,
-    ));
+  describe('should pass the axe check', () => {
+    it('with a custom arial label', () =>
+      axeCheck(
+        <SegmentedProgressBar
+          current={2}
+          total={5}
+          ariaLabel="aria label here"
+        />,
+      ));
+
+    it('with the default aria label', () =>
+      axeCheck(<SegmentedProgressBar current={2} total={5} />));
+  });
 
   describe('optional aria label event', () => {
     it('should replace the aria label when an ariaLabel prop is passed', () => {
@@ -29,22 +38,10 @@ describe('<SegmentedProgressBar/>', () => {
           ariaLabel={'Step 2: Basic Info'}
         />,
       );
-      expect(wrapper.find(SegmentedProgressBar).prop('ariaLabel')).to.equal(
-        'Step 2: Basic Info',
-      );
+      expect(
+        wrapper.find('div[role="progressbar"]').prop('aria-label'),
+      ).to.equal('Step 2: Basic Info');
     });
-
-    it('should pass aXe check', () =>
-      axeCheck(
-        <SegmentedProgressBar
-          current={2}
-          total={5}
-          ariaLabel="aria label here"
-        />,
-      ));
-
-    it('should pass aXe check', () =>
-      axeCheck(<SegmentedProgressBar current={2} total={5} />));
   });
 
   describe('analytics event', function () {
