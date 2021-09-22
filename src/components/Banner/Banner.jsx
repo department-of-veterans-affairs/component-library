@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 // Relative imports.
-import AlertBox from '../AlertBox/AlertBox';
+import { VaAlert } from 'web-components/react-bindings';
 
 const DISMISSED_BANNERS_KEY = 'DISMISSED_BANNERS';
 
@@ -154,14 +154,15 @@ export class Banner extends Component {
         data-e2e-id="emergency-banner"
         onClick={this.onClick}
       >
-        <AlertBox
-          // eslint-disable-next-line react/no-danger
-          content={<div dangerouslySetInnerHTML={{ __html: content }} />}
-          headline={title}
-          isVisible
+        <VaAlert
+          visible
+          closeable={showClose}
           onCloseAlert={onCloseAlert}
           status={type}
-        />
+        >
+          <h3 slot="headline">{title}</h3>
+          <div dangerouslySetInnerHTML={{ __html: content }} />
+        </VaAlert>
       </div>
     );
   }
