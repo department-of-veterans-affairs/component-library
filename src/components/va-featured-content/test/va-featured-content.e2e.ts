@@ -7,7 +7,6 @@ describe('va-featured-content', () => {
     await page.setContent('<va-featured-content />');
 
     const element = await page.find('va-featured-content');
-    // expect(element).toHaveClass('feature');
     expect(element).toHaveClass('hydrated');
   });
 
