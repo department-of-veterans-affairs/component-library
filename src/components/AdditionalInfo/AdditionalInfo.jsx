@@ -10,6 +10,8 @@ export default class AdditionalInfo extends React.Component {
     super(props);
     this.expandedContentId = uniqueId('tooltip-');
     this.state = { open: false };
+  }
+  componentDidMount() {
     this.setEventListener(this.expandedContentId, 'click');
     this.setEventListener(this.expandedContentId, 'keydown');
   }
