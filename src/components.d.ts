@@ -74,6 +74,10 @@ export namespace Components {
          */
         "disableAnalytics": boolean;
         /**
+          * If true, the alert will be full width. Should be for emergency communication only.
+         */
+        "fullwidth": boolean;
+        /**
           * Determines the icon and border/background color. One of `info`, `error`, `success`, `warning`, or `continue`
          */
         "status": string;
@@ -367,6 +371,10 @@ declare namespace LocalJSX {
           * If true, doesn't fire the CustomEvent which can be used for analytics tracking.
          */
         "disableAnalytics"?: boolean;
+        /**
+          * If true, the alert will be full width. Should be for emergency communication only.
+         */
+        "fullwidth"?: boolean;
         "onClose"?: (event: CustomEvent<any>) => void;
         "onComponent-library-analytics"?: (event: CustomEvent<any>) => void;
         /**
