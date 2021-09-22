@@ -39,21 +39,78 @@ describe('va-featured-content', () => {
     `);
   });
 
-  // it("has a class of 'feature", () => {
+  it('renders when level prop is 3', async () => {
+    const page = await newE2EPage();
+    await page.setContent(`
+      <va-featured-content
+        level=3
+        header="If I'm a Veteran, can I get VR&E benefits and services?"
+      >
+      />
+    `);
+    const element = await page.find('va-featured-content >>> h3');
+    expect(element).not.toBeNull();
+  });
 
-  // });
+  it('renders when level prop is 4', async () => {
+    const page = await newE2EPage();
+    await page.setContent(`
+      <va-featured-content
+        level=4
+        header="If I'm a Veteran, can I get VR&E benefits and services?"
+      />
+    `);
+    const element = await page.find('va-featured-content >>> h4');
+    expect(element).not.toBeNull();
+  });
 
-  // it('renders when level prop is 3', () => {
+  it('does not render the header when level prop is 1', async () => {
+    const page = await newE2EPage();
+    await page.setContent(`
+      <va-featured-content
+        level=1
+        header="If I'm a Veteran, can I get VR&E benefits and services?"
+      />
+    `);
+    const element = await page.find('va-featured-content >>> h1');
+    expect(element).toBeNull();
+  });
 
-  // });
+  it('does not render the header when level prop is 2', async () => {
+    const page = await newE2EPage();
+    await page.setContent(`
+      <va-featured-content
+        level=2
+        header="If I'm a Veteran, can I get VR&E benefits and services?"
+      />
+    `);
+    const element = await page.find('va-featured-content >>> h2');
+    expect(element).toBeNull();
+  });
 
-  // it('renders when level prop is 4', () => {
+  it('does not render the header when level prop is 5', async () => {
+    const page = await newE2EPage();
+    await page.setContent(`
+      <va-featured-content
+        level=5
+        header="If I'm a Veteran, can I get VR&E benefits and services?"
+      />
+    `);
+    const element = await page.find('va-featured-content >>> h5');
+    expect(element).toBeNull();
+  });
 
-  // });
-
-  // it('throws an error when level prop is not 3 or 4', () => {
-
-  // });
+  it('does not render the header when level prop is 6', async () => {
+    const page = await newE2EPage();
+    await page.setContent(`
+      <va-featured-content
+        level=6
+        header="If I'm a Veteran, can I get VR&E benefits and services?"
+      />
+    `);
+    const element = await page.find('va-featured-content >>> h6');
+    expect(element).toBeNull();
+  });
 
   it('passes an axe check', async () => {
     const page = await newE2EPage();
