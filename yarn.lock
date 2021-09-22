@@ -13031,9 +13031,9 @@ watchpack@^1.7.4:
     chokidar "^3.4.1"
     watchpack-chokidar2 "^2.0.1"
 
-"web-components@https://github.com/department-of-veterans-affairs/component-library.git#wc-v0.9.0":
-  version "0.9.0"
-  resolved "https://github.com/department-of-veterans-affairs/component-library.git#ac558c3c97129ad1acdf60b08966359b2d5139f4"
+"web-components@https://github.com/department-of-veterans-affairs/component-library.git#wc-v0.9.6":
+  version "0.9.6"
+  resolved "https://github.com/department-of-veterans-affairs/component-library.git#cfffd5588044c7c2f37a5bae0be625aa50f8c1af"
   dependencies:
     "@stencil/core" "^2.0.1"
     "@stencil/postcss" "^2.0.0"
