@@ -23,6 +23,10 @@ export class VaFeaturedContent {
   @Prop() header: string;
 
   render() {
+    if (this.level !== 3 && this.level !== 4) {
+      throw new Error('Featured Content heading level must be 3 or 4');
+    }
+
     const Header = () =>
       h(
         `h${this.level}`,
