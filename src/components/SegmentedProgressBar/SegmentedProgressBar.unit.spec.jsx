@@ -20,6 +20,60 @@ describe('<SegmentedProgressBar/>', () => {
       <SegmentedProgressBar current={2} total={5} label="aria label here" />,
     ));
 
+  describe('optional aria label event', () => {
+    it('should replace the aria label when an ariaLabel prop is passed', () => {
+      const wrapper = mount(
+        <SegmentedProgressBar
+          current={2}
+          total={5}
+          ariaLabel={'Step 2: Basic Info'}
+        />,
+      );
+      expect(wrapper.find({ prop: 'ariaLabel' })).to.equal(
+        'Step 2: Basic Info',
+      );
+      //////
+      // const tree = shallow(<SegmentedProgressBar current={2} total={5} ariaLabel={`Step 2: Basic Info`} />);
+      // expect(tree.find({prop: 'value'}).to.equal('Step 2: Basic Info'));
+      ////////
+      //   let tree;
+
+      //   const spy = testAnalytics(tree, () => {
+      //     tree = mount(
+      //       <SegmentedProgressBar current={0} total={5} ariaLabel={`Step 2: Basic Info`}  />,
+      //     );
+      //   });
+
+      //   expect(
+      //     spy.calledWith(
+      //       sinon.match.has('detail', {
+      //         componentName: 'SegmentedProgressBar',
+      //         action: 'change',
+      //         details: {
+      //           current: 0,
+      //           total: 5,
+      //           ariaLabel: 'Step 2: Basic Info'
+      //         },
+      //         version: sinon.match.string,
+      //       }),
+      //     ),
+      //   ).to.be.true;
+
+      //   tree.unmount();
+    });
+
+    it('should pass aXe check', () =>
+      axeCheck(
+        <SegmentedProgressBar
+          current={2}
+          total={5}
+          ariaLabel="aria label here"
+        />,
+      ));
+
+    it('should pass aXe check', () =>
+      axeCheck(<SegmentedProgressBar current={2} total={5} />));
+  });
   describe('analytics event', function () {
     it('should be triggered when a SegmentedProgressBar is mounted', () => {
       let tree;

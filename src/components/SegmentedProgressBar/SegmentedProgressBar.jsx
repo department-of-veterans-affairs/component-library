@@ -8,11 +8,13 @@ import dispatchAnalyticsEvent from '../../helpers/analytics';
  *
  * @param {number} current - The index of the current chapter
  * @param {number} total   - The total number of chapters in the form
+ * @param {string} ariaLabel - An optional aria label to override progress bar
  */
 export default function SegmentedProgressBar({
   current,
   total,
   enableAnalytics,
+  ariaLabel,
 }) {
   useEffect(() => {
     // Conditionally track events
@@ -23,6 +25,7 @@ export default function SegmentedProgressBar({
         details: {
           current: current,
           total: total,
+          ariaLabel: ariaLabel,
         },
       });
     }
@@ -36,7 +39,7 @@ export default function SegmentedProgressBar({
       aria-valuemin="0"
       aria-valuemax={total}
       tabIndex="0"
-      aria-label={`Step ${current} of ${total}`}
+      aria-label={ariaLabel || `Step ${current} of ${total}`}
     >
       {range(total).map(step => (
         <div
@@ -67,9 +70,5 @@ SegmentedProgressBar.propTypes = {
   /**
    * An optional progress message in the progress bar.
    */
-  optionalMessage: PropTypes.string,
-};
-
-SegmentedProgressBar.defaultProps = {
-  optionalMessage: '',
+  ariaLabel: PropTypes.string,
 };
