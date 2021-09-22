@@ -25,7 +25,6 @@ export default function SegmentedProgressBar({
         details: {
           current: current,
           total: total,
-          ariaLabel: ariaLabel,
         },
       });
     }
