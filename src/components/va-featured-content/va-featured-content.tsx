@@ -23,11 +23,17 @@ export class VaFeaturedContent {
   @Prop() header: string;
 
   render() {
-    const Header = () => h(`h${this.level}`, `${this.header}`);
-
+    const Header = () =>
+      h(
+        `h${this.level}`,
+        null,
+        `${this.header}`,
+      );
+  
     return (
       <Host>
-        <h1>{this.header}</h1>
+        <Header />
+        <slot></slot>
       </Host>
     );
   }
