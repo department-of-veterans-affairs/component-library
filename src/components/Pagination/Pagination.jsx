@@ -64,12 +64,11 @@ class Pagination extends Component {
     if (this.props.pages > this.props.page) {
       nextPage = (
         <a
-          aria-label={`Load next page ${this.props.ariaLabelSuffix}`}
+          aria-label={`Next page ${this.props.ariaLabelSuffix}`}
           onClick={() => {
             this.onPageSelect(this.props.page + 1, 'nav-paginate-next');
           }}
           onKeyDown={e => this.handleKeyDown(e, this.props.page + 1)}
-          tabIndex="0"
         >
           Next
         </a>
@@ -83,14 +82,13 @@ class Pagination extends Component {
     if (this.props.page > 1) {
       prevPage = (
         <a
-          aria-label={`Load previous page ${this.props.ariaLabelSuffix}`}
+          aria-label={`Previous page ${this.props.ariaLabelSuffix}`}
           onClick={() => {
             this.onPageSelect(this.props.page - 1, 'nav-paginate-previous');
           }}
           onKeyDown={e => this.handleKeyDown(e, this.props.page - 1)}
-          tabIndex="0"
         >
-          <abbr title="Previous">Prev</abbr>
+          Prev
         </a>
       );
     }
@@ -184,12 +182,12 @@ class Pagination extends Component {
 
       return (
         <a
+          aria-current={this.props.page === pageNumber ? 'true' : null}
+          aria-label={`Page ${pageNumber} ${ariaLabelSuffix}`}
           key={pageNumber}
           className={pageClass}
-          aria-label={`Load page ${pageNumber} ${ariaLabelSuffix}`}
           onClick={() => this.onPageSelect(pageNumber, 'nav-paginate-number')}
           onKeyDown={e => this.handleKeyDown(e, pageNumber)}
-          tabIndex="0"
         >
           {pageNumber}
         </a>
