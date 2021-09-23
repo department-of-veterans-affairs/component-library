@@ -1,3 +1,5 @@
+@import '../../../node_modules/animate.css/source/sliding_entrances/slideInUp.css';
+@import '../../../node_modules/animate.css/source/sliding_exits/slideOutDown.css';
 @import '../../mixins/buttons.css';
 :host {
   display: block;
@@ -96,33 +98,9 @@ i::before {
 button.reveal {
   pointer-events: auto;
   opacity: 1;
-  animation: slideInUp;
-  animation-duration: 0.25s;
+  animation: slideInUp 0.25s;
 }
 
 button:not(.reveal) {
-  animation: slideOutDown;
-  animation-duration: 0.25s;
-}
-
-@keyframes slideInUp {
-  from {
-    transform: translate3d(0, 100%, 0);
-    visibility: visible;
-  }
-
-  to {
-    transform: translate3d(0, 0, 0);
-  }
-}
-
-@keyframes slideOutDown {
-  from {
-    transform: translate3d(0, 0, 0);
-  }
-
-  to {
-    visibility: hidden;
-    transform: translate3d(0, 100%, 0);
-  }
+  animation: slideOutDown 0.25s;
 }
