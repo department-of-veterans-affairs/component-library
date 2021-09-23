@@ -73,6 +73,7 @@ class Breadcrumbs extends Component {
       >
         <ul
           className="row va-nav-breadcrumbs-list columns"
+          role="list"
           id={breadcrumbListId}
           onClick={this.handleBreadcrumbLinkClick}
         >
