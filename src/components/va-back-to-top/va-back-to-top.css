@@ -64,7 +64,6 @@ button span {
 
 @media (min-width: 768px) {
   button {
-    border-radius: 5px;
     padding-left: 17px;
     padding-right: 19px;
     width: auto;
