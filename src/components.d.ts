@@ -76,7 +76,7 @@ export namespace Components {
         /**
           * If true, the alert will be full width. Should be for emergency communication only.
          */
-        "fullwidth": boolean;
+        "fullWidth": boolean;
         /**
           * Determines the icon and border/background color. One of `info`, `error`, `success`, `warning`, or `continue`
          */
@@ -374,7 +374,7 @@ declare namespace LocalJSX {
         /**
           * If true, the alert will be full width. Should be for emergency communication only.
          */
-        "fullwidth"?: boolean;
+        "fullWidth"?: boolean;
         "onClose"?: (event: CustomEvent<any>) => void;
         "onComponent-library-analytics"?: (event: CustomEvent<any>) => void;
         /**

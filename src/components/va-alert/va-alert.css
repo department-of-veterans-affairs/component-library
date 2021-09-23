@@ -26,12 +26,12 @@ div.alert {
   box-sizing: border-box;
 }
 
-div.alert:not(.fullwidth):not(.bg-only) {
+div.alert:not(.full-width):not(.bg-only) {
   border-left-style: solid;
   border-left-width: 10px;
 }
-div.alert.fullwidth.info,
-div.alert.fullwidth.warning {
+div.alert.full-width.info,
+div.alert.full-width.warning {
   border-top-style: solid;
   border-top-width: 10px;
 }

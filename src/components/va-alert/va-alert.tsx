@@ -52,7 +52,7 @@ export class VaAlert {
    * If true, the alert will be full width.
    * Should be for emergency communication only.
    */
-  @Prop() fullwidth: boolean = false;
+  @Prop() fullWidth: boolean = false;
 
   /**
    * Fires when the component has successfully finished rendering for the first
@@ -127,8 +127,8 @@ export class VaAlert {
   }
 
   render() {
-    const { backgroundOnly, status, fullwidth, visible, closeable } = this;
-    const classes = `alert ${status} ${fullwidth ? 'fullwidth' : ''} ${
+    const { backgroundOnly, status, fullWidth, visible, closeable } = this;
+    const classes = `alert ${status} ${fullWidth ? 'full-width' : ''} ${
       backgroundOnly ? 'bg-only' : ''
     }`;
     const role = status === 'error' ? 'alert' : null;

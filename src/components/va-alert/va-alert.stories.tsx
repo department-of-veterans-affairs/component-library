@@ -10,12 +10,12 @@ const defaultArgs = {
   status: 'info',
   backgroundOnly: false,
   closeable: false,
-  fullwidth: false,
+  fullWidth: false,
 };
 
 const Template = ({
   backgroundOnly,
-  fullwidth,
+  fullWidth,
   headline,
   status,
   closeable,
@@ -25,7 +25,7 @@ const Template = ({
       background-only="${backgroundOnly}"
       status="${status}"
       closeable="${closeable}"
-      fullwidth="${fullwidth}"
+      full-width="${fullWidth}"
     >
       <h3 slot="headline">${headline}</h3>
       <div>
@@ -72,7 +72,7 @@ Closeable.args = {
 export const Fullwidth = Template.bind({});
 Fullwidth.args = {
   ...defaultArgs,
-  fullwidth: true,
+  fullWidth: true,
 };
 
 export const BackgroundOnly = Template.bind({});
