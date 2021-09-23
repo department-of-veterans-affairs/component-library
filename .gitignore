@@ -2,3 +2,4 @@ node_modules
 /*.js
 !.eslintrc.js
 .idea
+.DS_Store
