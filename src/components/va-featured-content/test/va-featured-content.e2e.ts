@@ -113,7 +113,7 @@ describe('va-featured-content', () => {
   });
 
   it('sents the header to the value of the header prop', async () => {
-    const header = "If I'm a Veteran, can I get VR&E benefits and services?";
+    const header = "Testing";
     const page = await newE2EPage();
     await page.setContent(`
       <va-featured-content
@@ -122,7 +122,7 @@ describe('va-featured-content', () => {
       />
     `);
     const element = await page.find('va-featured-content >>> h3');
-    expect(element).toEqualText(header.split(' ')[0]);
+    expect(element).toEqualText(header);
   });
 
   it('passes an axe check', async () => {
