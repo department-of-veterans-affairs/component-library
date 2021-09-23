@@ -18,7 +18,7 @@ export class VaBackToTop {
 
   @Element() el: HTMLElement;
 
-  componentWillLoad() {
+  componentDidLoad() {
     // Setup observer to handle docking behavior
     this.dockObserver = new IntersectionObserver(
       entries => {
@@ -32,10 +32,6 @@ export class VaBackToTop {
     this.revealObserver = new IntersectionObserver(entries => {
       this.hasHitBreakpoint = entries[0].boundingClientRect.y < 0;
     });
-  }
-
-  componentDidLoad() {
-    console.log(this.revealPixel);
     this.revealObserver.observe(this.revealPixel);
   }
 
