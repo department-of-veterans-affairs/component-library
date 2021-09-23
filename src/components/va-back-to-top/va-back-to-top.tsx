@@ -1,4 +1,4 @@
-import { Component, Element, Host, State, h } from '@stencil/core';
+import { Component, Element, Host, State, Prop, h } from '@stencil/core';
 import classnames from 'classnames';
 
 import 'intersection-observer';
@@ -9,10 +9,15 @@ import 'intersection-observer';
   shadow: true,
 })
 export class VaBackToTop {
-  breakpoint = 600;
   dockObserver = null;
   revealObserver = null;
   revealPixel!: HTMLSpanElement;
+
+  /**
+   * A vertical distance. Once the viewport is below this point,
+   * the button is revealed
+   */
+  @Prop() breakpoint = '60rem';
 
   @State() hasHitBreakpoint = false;
   @State() isDocked = false;
@@ -54,7 +59,10 @@ export class VaBackToTop {
 
   render() {
     const undockedWidth = this.el.getBoundingClientRect().width;
+
+    // These won't work on IE11 - there is a default value for --reveal-breakpoint
     this.el.style.setProperty('--undocked-width', `${undockedWidth}px`);
+    this.el.style.setProperty('--reveal-breakpoint', this.breakpoint);
 
     return (
       <Host>
