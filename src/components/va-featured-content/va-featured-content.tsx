@@ -24,7 +24,7 @@ export class VaFeaturedContent {
 
   render() {
     if (this.level !== 3 && this.level !== 4) {
-      throw new Error('Featured Content heading level must be 3 or 4');
+      throw new Error('Featured Content header level must be 3 or 4');
     }
 
     const Header = () =>
