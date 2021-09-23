@@ -24,11 +24,7 @@ export class VaBackToTop {
     };
 
     const handleDock = entries => {
-      if (entries[0].isIntersecting && !this.isDocked) {
-        this.isDocked = true;
-      } else if (!entries[0].isIntersecting && this.isDocked) {
-        this.isDocked = false;
-      }
+      this.isDocked = entries[0].isIntersecting;
     };
 
     const handleReveal = entries => {
