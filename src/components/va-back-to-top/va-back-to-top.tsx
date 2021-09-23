@@ -19,22 +19,19 @@ export class VaBackToTop {
   @Element() el: HTMLElement;
 
   componentWillLoad() {
-    const options = {
-      threshold: 1.0,
-    };
-
-    const handleDock = entries => {
-      this.isDocked = entries[0].isIntersecting;
-    };
-
-    const handleReveal = entries => {
-      this.hasHitBreakpoint = entries[0].boundingClientRect.y < 0;
-    };
-
-    this.dockObserver = new IntersectionObserver(handleDock, options);
+    // Setup observer to handle docking behavior
+    this.dockObserver = new IntersectionObserver(
+      entries => {
+        this.isDocked = entries[0].isIntersecting;
+      },
+      { threshold: 1.0 },
+    );
     this.dockObserver.observe(this.el);
 
-    this.revealObserver = new IntersectionObserver(handleReveal);
+    // Setup observer to handle reveal behavior
+    this.revealObserver = new IntersectionObserver(entries => {
+      this.hasHitBreakpoint = entries[0].boundingClientRect.y < 0;
+    });
   }
 
   componentDidLoad() {
