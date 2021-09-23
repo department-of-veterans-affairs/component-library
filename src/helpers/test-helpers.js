@@ -14,7 +14,7 @@ export function mountToDiv(component, id) {
   return mount(component, { attachTo: div });
 }
 
-export function axeCheck(component, ignoredRules = []) {
+export function axeCheck(component, ignoredRules = [], state = null) {
   let div = document.getElementById('axeContainer');
 
   if (!div) {
@@ -33,6 +33,7 @@ export function axeCheck(component, ignoredRules = []) {
   div.innerHTML = '';
 
   const mountedComponent = mount(component, { attachTo: div });
+  state ? mountedComponent.setState(state) : mountedComponent;
 
   return new Promise((resolve, reject) => {
     axe.run(document.body, (err, result) => {

@@ -24,13 +24,23 @@ describe('<OMBInfo/>', () => {
     expect(tree.text()).to.contain('Privacy Act Statement');
     tree.unmount();
   });
-  it('should pass aXe check', () =>
+  it('should pass aXe check with modal closed', () =>
     axeCheck(
       <OMBInfo
         resBurden={15}
         ombNumber="OMB Number"
         expDate="Expiration date"
       />,
+    ));
+  it('should pass aXe check with modal open', () =>
+    axeCheck(
+      <OMBInfo
+        resBurden={15}
+        ombNumber="OMB Number"
+        expDate="Expiration date"
+      />,
+      [],
+      { modalOpen: true },
     ));
   it('should render resBurden', () => {
     const tree = shallow(
