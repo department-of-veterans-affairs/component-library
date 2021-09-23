@@ -30,7 +30,8 @@ div.alert:not(.fullwidth):not(.bg-only) {
   border-left-style: solid;
   border-left-width: 10px;
 }
-div.alert.fullwidth {
+div.alert.fullwidth.info,
+div.alert.fullwidth.warning {
   border-top-style: solid;
   border-top-width: 10px;
 }
