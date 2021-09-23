@@ -134,7 +134,7 @@ export class Banner extends Component {
       <div data-e2e-id="emergency-banner" onClick={this.onClick}>
         <VaAlert
           visible
-          fullwidth
+          full-width
           closeable={showClose}
           onCloseAlert={onCloseAlert}
           status={type}

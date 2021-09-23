@@ -13,13 +13,13 @@ const defaultArgs = {
   status: 'info',
   backgroundOnly: false,
   closeable: false,
-  fullwidth: false,
+  fullWidth: false,
   onClose: () => {},
 };
 
 const Template = ({
   headline,
-  fullwidth,
+  fullWidth,
   status,
   backgroundOnly,
   closeable,
@@ -30,7 +30,7 @@ const Template = ({
       status={status}
       background-only={backgroundOnly}
       closeable={closeable}
-      fullwidth={fullwidth}
+      full-width={fullWidth}
       onClose={onClose}
     >
       {headline}
@@ -71,7 +71,7 @@ Closeable.args = {
 export const Fullwidth = Template.bind({});
 Fullwidth.args = {
   ...defaultArgs,
-  fullwidth: true,
+  fullWidth: true,
   status: 'warning',
 };
 
