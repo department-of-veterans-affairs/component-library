@@ -138,6 +138,31 @@ describe('<Pagination>', () => {
     tree.unmount();
   });
 
+  it('should set aria-current to true on the correct link', () => {
+    const currentPage = 6;
+    const tree = shallow(
+      <Pagination
+        {...props}
+        page={currentPage}
+        pages={15}
+        maxPageListLength={10}
+        showLastPage
+      />,
+    );
+    const links = tree.find('a');
+    links.forEach(link => {
+      if (link.text() === currentPage.toString()) {
+        expect(link.prop('aria-current')).to.equal('true');
+      } else if (link.text() === 'Prev' || link.text() === 'Next') {
+        expect(link.prop('aria-current')).to.be.undefined;
+      } else {
+        expect(link.prop('aria-current')).to.be.null;
+      }
+    });
+
+    tree.unmount();
+  });
+
   it('should pass aXe check', () =>
     axeCheck(<Pagination {...props} page={3} pages={5} />));
 });
