@@ -1,4 +1,5 @@
 import { Component, Element, Host, State, h } from '@stencil/core';
+import classnames from 'classnames';
 
 import 'intersection-observer';
 
@@ -62,10 +63,10 @@ export class VaBackToTop {
           ref={el => (this.revealPixel = el as HTMLSpanElement)}
         ></span>
 
-        <div class={this.isDocked ? 'docked' : ''}>
+        <div class={classnames({ docked: this.isDocked })}>
           <button
             onClick={this.navigateToTop.bind(this)}
-            class={this.hasHitBreakpoint ? 'reveal' : ''}
+            class={classnames({ reveal: this.hasHitBreakpoint })}
           >
             <i aria-hidden="true" role="img"></i>
             <span>Back to top</span>
