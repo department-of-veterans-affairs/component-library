@@ -114,15 +114,13 @@ export namespace Components {
     }
     interface VaFeaturedContent {
         /**
-         * Sets the level for the HTML section heading elements.
-         * Valid values: 3, 4
-         */
-        "headingLevel": number;
-
-        /**
           * Sets the text for the section heading.
-          */
-        "headingContent": string;
+         */
+        "header": string;
+        /**
+          * Sets the level for the HTML section heading elements. Valid values: 3, 4
+         */
+        "level": number;
     }
     interface VaOnThisPage {
     }
@@ -444,6 +442,14 @@ declare namespace LocalJSX {
         "required"?: boolean;
     }
     interface VaFeaturedContent {
+        /**
+          * Sets the text for the section heading.
+         */
+        "header"?: string;
+        /**
+          * Sets the level for the HTML section heading elements. Valid values: 3, 4
+         */
+        "level"?: number;
     }
     interface VaOnThisPage {
     }
