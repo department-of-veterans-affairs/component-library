@@ -11,6 +11,30 @@ import packageJSON from '../../package.json';
 
 const version = packageJSON.version;
 
+// This CustomEvent polyfill is for IE11:
+// https://developer.mozilla.org/en-US/docs/Web/API/CustomEvent/CustomEvent#polyfill
+(function () {
+  if (typeof window.CustomEvent === 'function') return;
+
+  function CustomEvent(event, params) {
+    const customParams = params || {
+      bubbles: false,
+      cancelable: false,
+      detail: null,
+    };
+    const evt = document.createEvent('CustomEvent');
+    evt.initCustomEvent(
+      event,
+      customParams.bubbles,
+      customParams.cancelable,
+      customParams.detail,
+    );
+    return evt;
+  }
+
+  window.CustomEvent = CustomEvent;
+})();
+
 export default function dispatchAnalyticsEvent({
   componentName,
   action,
