@@ -11,21 +11,11 @@ export default class AdditionalInfo extends React.Component {
     this.expandedContentId = uniqueId('tooltip-');
     this.state = { open: false };
   }
-  componentDidMount() {
-    this.setEventListener(this.expandedContentId, 'click');
-    this.setEventListener(this.expandedContentId, 'keydown');
-  }
 
-  setEventListener = (elemId, eventHandler) => {
-    const elem = document.getElementById(`${elemId}-button`);
-    if (elem) {
-      elem.addEventListener(eventHandler, event => {
-        const key = event.key || event.keyCode;
-        if (key === '' || key === 32 || eventHandler === 'click') {
-          event.preventDefault();
-          this.toggle();
-        }
-      });
+  handleKeyDown = event => {
+    if (event.key === '' || event.keyCode === 32) {
+      event.preventDefault();
+      this.toggle();
     }
   };
 
@@ -72,6 +62,8 @@ export default class AdditionalInfo extends React.Component {
         aria-expanded={this.state.open ? 'true' : 'false'}
         aria-controls={this.expandedContentId}
         onClick={this.toggle}
+        onKeyDown={this.handleKeyDown}
+        tabIndex="0"
       >
         <TagName className="additional-info-title">
           {triggerText}
