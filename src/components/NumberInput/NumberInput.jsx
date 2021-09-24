@@ -13,7 +13,6 @@ class NumberInput extends React.Component {
   constructor() {
     super();
     this.handleChange = this.handleChange.bind(this);
-    this.handleBlur = this.handleBlur.bind(this);
   }
 
   UNSAFE_componentWillMount() {
@@ -24,10 +23,6 @@ class NumberInput extends React.Component {
     this.props.onValueChange(
       makeField(domEvent.target.value, this.props.field.dirty),
     );
-  }
-
-  handleBlur() {
-    this.props.onValueChange(makeField(this.props.field.value, true));
   }
 
   render() {
@@ -83,7 +78,7 @@ class NumberInput extends React.Component {
           type="number"
           value={this.props.field.value}
           onChange={this.handleChange}
-          onBlur={this.handleBlur}
+          onBlur={this.props.onBlur}
         />
       </div>
     );
@@ -147,6 +142,12 @@ NumberInput.propTypes = {
    * Add additional aria-describedby to the `<input>`
    */
   ariaDescribedby: PropTypes.string,
+
+  /**
+   * Call this function when the field is blurred.
+   * Function signature: () => void
+   */
+  onBlur: PropTypes.func,
 };
 
 export default NumberInput;

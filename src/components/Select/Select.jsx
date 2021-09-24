@@ -111,6 +111,7 @@ class Select extends React.Component {
           value={selectedValue}
           onKeyDown={this.props.onKeyDown}
           onChange={this.handleChange}
+          onBlur={this.props.onBlur}
         >
           {this.props.includeBlankOption && (
             <option value="">{this.props.emptyDescription}</option>
@@ -225,6 +226,12 @@ Select.propTypes = {
    * Add additional aria-describedby to the `<select>`
    */
   ariaDescribedby: PropTypes.string,
+
+  /**
+   * Call this function when the field is blurred.
+   * Function signature: () => void
+   */
+  onBlur: PropTypes.func,
 };
 
 Select.defaultProps = {
