@@ -14,7 +14,7 @@ export default function SegmentedProgressBar({
   current,
   total,
   enableAnalytics,
-  ariaLabel,
+  ariaLabel = `Step ${current} of ${total}`,
 }) {
   useEffect(() => {
     // Conditionally track events
@@ -38,7 +38,7 @@ export default function SegmentedProgressBar({
       aria-valuemin="0"
       aria-valuemax={total}
       tabIndex="0"
-      aria-label={ariaLabel || `Step ${current} of ${total}`}
+      aria-label={ariaLabel}
     >
       {range(total).map(step => (
         <div
