@@ -3,7 +3,7 @@
 }
 
 .feature {
-  background: #e1f3f8;
+  background: var(--color-primary-alt-lightest);
   padding: 1em;
   clear: both;
   margin: 1.5em 0;
