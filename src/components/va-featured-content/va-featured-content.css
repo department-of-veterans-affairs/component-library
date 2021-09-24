@@ -1,12 +1,10 @@
-@import '../../mixins/accessibility.css';
-
 :host {
   display: block;
 }
 
 .feature {
   background: #e1f3f8;
-    padding: 1em;
-    clear: both;
-    margin: 1.5em 0;
+  padding: 1em;
+  clear: both;
+  margin: 1.5em 0;
 }
