@@ -61,7 +61,7 @@ function Table(props) {
                     setSortDirection(sortDirection === 'ASC' ? 'DESC' : 'ASC')
                   }
                   aria-label={`sort data by ${
-                    sortDirection === 'ASC' ? 'ascending' : 'descending'
+                    sortDirection === 'ASC' ? 'descending' : 'ascending'
                   }`}
                 >
                   {field.label}
