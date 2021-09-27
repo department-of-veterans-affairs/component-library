@@ -9,19 +9,19 @@
   margin: 1.5em 0 1.5em 0;
 }
 
-.feature h2 {
+::slotted(h2) {
   font-family: var(--font-serif);
-  margin-top: 0;
+  margin-top: 0 !important;
 }
 
-.feature h3 {
+::slotted(h3) {
   font-family: var(--font-serif);
-  margin-top: 0;
+  margin-top: 0 !important;
 }
 
-.feature h4 {
+::slotted(h4) {
   font-family: var(--font-serif);
-  margin-top: 0;
+  margin-top: 0 !important;
 }
 
 ::slotted(p) {
@@ -33,7 +33,7 @@
 
 ::slotted(ul) {
   margin: 0 0 0.5em 1.5em !important;
-  padding: 0;
+  padding: 0 !important;
 }
 
 ::slotted(li) {
