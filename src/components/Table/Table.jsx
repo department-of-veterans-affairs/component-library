@@ -135,6 +135,7 @@ Table.propTypes = {
    * the data type for the column. Available types are -
    * - String
    * - Number
+   * Optional: If the field is sortable, set `sortable` to `true`.
    */
   fields: PropTypes.arrayOf(
     PropTypes.shape({
@@ -146,7 +147,8 @@ Table.propTypes = {
     }),
   ),
   /**
-   * A way to change the sorted order of the data. Currently unused.
+   * Optional. A way to change the sorted order of data in a specified column.
+   * 'order' should be set to ASC for ascending or DESC for descending.
    */
   currentSort: PropTypes.shape({
     value: PropTypes.string,
