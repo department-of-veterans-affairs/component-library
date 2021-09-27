@@ -9,29 +9,23 @@
   margin: 1.5em 0 1.5em 0;
 }
 
-.feature p {
-  color: inherit !important;
-  font: inherit !important;
-  margin-bottom: 0;
-  margin-top: 0;
-  padding-bottom: 0.5em;
-}
-
 .feature h2 {
+  font-family: var(--font-serif);
   margin-top: 0;
 }
 
 .feature h3 {
+  font-family: var(--font-serif);
   margin-top: 0;
 }
 
 .feature h4 {
+  font-family: var(--font-serif);
   margin-top: 0;
 }
 
 ::slotted(p) {
-  color: inherit !important;
-  font: inherit !important;
+  font: 'Source Sans Pro', 'Helvetica';
   margin-bottom: 0;
   margin-top: 0;
   padding-bottom: 0.5em;
