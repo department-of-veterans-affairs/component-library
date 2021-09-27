@@ -31,6 +31,11 @@ export class VaAccordionItem {
   @Prop() open: boolean = false;
 
   /**
+   * Optional styling for sidebar navs
+   */
+  @Prop() isSidebar: boolean = false;
+
+  /**
    * Header level for button wrapper. Must be between 1 and 6
    */
   @Prop() level: number = 2;
@@ -50,7 +55,7 @@ export class VaAccordionItem {
           aria-controls="content"
         >
           {this.header}
-          {this.subheader ? (<p>{this.subheader}</p>) : false}
+          {this.subheader ? <p>{this.subheader}</p> : false}
         </button>,
       );
 

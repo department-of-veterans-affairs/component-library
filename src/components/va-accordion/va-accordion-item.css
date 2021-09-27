@@ -65,3 +65,28 @@ p {
   line-height: 26px;
   margin: 0;
 }
+
+:host([isSidebar='true']) button,
+:host([isSidebar='']) button {
+  font-weight: 400;
+  font-size: 1.8rem;
+  background-color: inherit;
+  color: var(--color-link-default);
+  background-image: url('../../assets/minus-blue.svg');
+}
+
+:host([isSidebar='true']) button:focus,
+:host([isSidebar='']) button:focus {
+  background-color: var(--color-gray-lightest);
+  font-weight: 700;
+}
+
+:host([isSidebar='true']) button[aria-expanded='false'],
+:host([isSidebar='']) button[aria-expanded='false'] {
+  background-image: url('../../assets/plus-blue.svg');
+}
+
+:host([isSidebar='true']) #content,
+:host([isSidebar='']) #content {
+  color: var(--color-link-default);
+}

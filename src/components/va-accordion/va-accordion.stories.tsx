@@ -11,7 +11,7 @@ const defaultArgs = {
   bordered: false,
   subheader: false,
   level: 2,
-  sectionHeading: null
+  sectionHeading: null,
 };
 
 const Template = ({ multi, bordered, level }) => html`
@@ -27,6 +27,54 @@ const Template = ({ multi, bordered, level }) => html`
       the right of the people to keep and bear Arms, shall not be infringed.
     </va-accordion-item>
   </va-accordion>
+`;
+
+const TemplateSidebarNav = ({ multi, bordered, level, isSidebar }) => html`
+  <div style="width: 30em;">
+    <va-accordion bordered="${bordered}" multi="${multi}">
+      <va-accordion-item
+        header="Bill of Rights"
+        level=${level}
+        isSidebar="${isSidebar}"
+      >
+        <ul style="list-style-type: none; padding-left: 0; margin: 0">
+          <li>
+            <a
+              href="#"
+              style="margin: 0 0 0 4px; padding: 8px 16px 8px 12px; text-decoration: none;"
+            >
+              First Amendment
+            </a>
+          </li>
+          <li>
+            <a
+              href="#"
+              style="margin: 0 0 0 4px; padding: 8px 16px 8px 12px; text-decoration: none;"
+            >
+              Second Amendment
+            </a>
+          </li>
+          <li>
+            <a
+              href="#"
+              style="margin: 0 0 0 4px; padding: 8px 16px 8px 12px; text-decoration: none;"
+            >
+              Third Amendment
+            </a>
+          </li>
+
+          <li>
+            <a
+              href="#"
+              style="margin: 0 0 0 4px; padding: 8px 16px 8px 12px; text-decoration: none;"
+            >
+              Fourth Amendment
+            </a>
+          </li>
+        </ul>
+      </va-accordion-item>
+    </va-accordion>
+  </div>
 `;
 
 const TemplateSubheader = ({ subheader1, subheader2, level }) => html`
@@ -55,11 +103,14 @@ const TemplateSubheader = ({ subheader1, subheader2, level }) => html`
 const TemplateSectionHeading = ({ sectionHeading, level }) => html`
   <va-accordion section-heading=${sectionHeading}>
     <va-accordion-item header="First Amendment" level=${level}>
-      Congress shall make no law respecting an establishment of religion, or prohibiting the free exercise thereof; or abridging the freedom of speech, or of the press; or the
-      right of the people peaceably to assemble, and to petition the Government for a redress of grievances.
+      Congress shall make no law respecting an establishment of religion, or
+      prohibiting the free exercise thereof; or abridging the freedom of speech,
+      or of the press; or the right of the people peaceably to assemble, and to
+      petition the Government for a redress of grievances.
     </va-accordion-item>
     <va-accordion-item header="Second Amendment" level=${level}>
-      A well regulated Militia, being necessary to the security of a free State, the right of the people to keep and bear Arms, shall not be infringed.
+      A well regulated Militia, being necessary to the security of a free State,
+      the right of the people to keep and bear Arms, shall not be infringed.
     </va-accordion-item>
   </va-accordion>
 `;
@@ -96,6 +147,10 @@ export const Bordered = Template.bind({});
 
 Bordered.args = { ...defaultArgs, bordered: true };
 
+export const SidebarNav = TemplateSidebarNav.bind({});
+
+SidebarNav.args = { ...defaultArgs, isSidebar: true };
+
 export const Subheaders = TemplateSubheader.bind({});
 
 Subheaders.args = {
@@ -110,4 +165,7 @@ LargeItems.args = { ...defaultArgs, bordered: true };
 
 export const SectionHeading = TemplateSectionHeading.bind({});
 
-SectionHeading.args = { ...defaultArgs, sectionHeading: "This is a section heading." };
+SectionHeading.args = {
+  ...defaultArgs,
+  sectionHeading: 'This is a section heading.',
+};
