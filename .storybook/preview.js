@@ -6,6 +6,30 @@ import { withHTML } from '@whitespace/storybook-addon-html/react';
 import 'web-components/dist/component-library/component-library.css';
 import { defineCustomElements } from 'web-components/loader';
 
+// This CustomEvent polyfill is for IE11:
+// https://developer.mozilla.org/en-US/docs/Web/API/CustomEvent/CustomEvent#polyfill
+(function () {
+  if (typeof window.CustomEvent === 'function') return;
+
+  function CustomEvent(event, params) {
+    const customParams = params || {
+      bubbles: false,
+      cancelable: false,
+      detail: null,
+    };
+    const evt = document.createEvent('CustomEvent');
+    evt.initCustomEvent(
+      event,
+      customParams.bubbles,
+      customParams.cancelable,
+      customParams.detail,
+    );
+    return evt;
+  }
+
+  window.CustomEvent = CustomEvent;
+})();
+
 defineCustomElements();
 
 const viewports = {
