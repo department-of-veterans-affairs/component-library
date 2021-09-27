@@ -28,12 +28,10 @@ const cellProps = (
 function Table(props) {
   const { currentSort, fields, data, ariaLabelledBy } = props;
   const [sortDirection, setSortDirection] = useState(currentSort?.order);
-  let sortLabel;
   let rowData;
 
   useEffect(() => {
     rowData = sortData();
-    sortLabel = getSortLabel();
   });
 
   const sortData = () => {
@@ -48,10 +46,6 @@ function Table(props) {
     }
   };
 
-  const getSortLabel = () =>
-    sortDirection === 'ASC' ? 'ascending' : 'descending';
-
-  sortLabel = getSortLabel();
   rowData = sortDirection ? sortData() : data;
 
   return (
@@ -66,7 +60,9 @@ function Table(props) {
                   onClick={() =>
                     setSortDirection(sortDirection === 'ASC' ? 'DESC' : 'ASC')
                   }
-                  aria-label={`sort data by ${sortLabel}`}
+                  aria-label={`sort data by ${
+                    sortDirection === 'ASC' ? 'ascending' : 'descending'
+                  }`}
                 >
                   {field.label}
                   {currentSort?.value === field.value && (
