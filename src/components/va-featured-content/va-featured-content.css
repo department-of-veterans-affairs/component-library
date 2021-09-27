@@ -9,17 +9,7 @@
   margin: 1.5em 0 1.5em 0;
 }
 
-::slotted(h2) {
-  font-family: var(--font-serif);
-  margin-top: 0 !important;
-}
-
-::slotted(h3) {
-  font-family: var(--font-serif);
-  margin-top: 0 !important;
-}
-
-::slotted(h4) {
+::slotted([slot='headline']) {
   font-family: var(--font-serif);
   margin-top: 0 !important;
 }
