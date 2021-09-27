@@ -25,7 +25,7 @@
 }
 
 ::slotted(p) {
-  font: 'Source Sans Pro', 'Helvetica';
+  font-family: var(--font-source-sans);
   margin-bottom: 0;
   margin-top: 0;
   padding-bottom: 0.5em;
