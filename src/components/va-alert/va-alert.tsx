@@ -49,6 +49,12 @@ export class VaAlert {
   @Prop() closeable: boolean = false;
 
   /**
+   * If true, the alert will be full width.
+   * Should be for emergency communication only.
+   */
+  @Prop() fullWidth: boolean = false;
+
+  /**
    * Fires when the component has successfully finished rendering for the first
    * time.
    */
@@ -121,8 +127,10 @@ export class VaAlert {
   }
 
   render() {
-    const { backgroundOnly, status, visible, closeable } = this;
-    const classes = `alert ${status} ${backgroundOnly ? 'bg-only' : ''}`;
+    const { backgroundOnly, status, fullWidth, visible, closeable } = this;
+    const classes = `alert ${status} ${fullWidth ? 'full-width' : ''} ${
+      backgroundOnly ? 'bg-only' : ''
+    }`;
     const role = status === 'error' ? 'alert' : null;
     const ariaLive = status === 'error' ? 'assertive' : null;
 
