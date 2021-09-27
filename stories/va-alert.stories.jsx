@@ -13,15 +13,24 @@ const defaultArgs = {
   status: 'info',
   backgroundOnly: false,
   closeable: false,
+  fullWidth: false,
   onClose: () => {},
 };
 
-const Template = ({ headline, status, backgroundOnly, closeable, onClose }) => {
+const Template = ({
+  headline,
+  fullWidth,
+  status,
+  backgroundOnly,
+  closeable,
+  onClose,
+}) => {
   return (
     <va-alert
       status={status}
       background-only={backgroundOnly}
       closeable={closeable}
+      full-width={fullWidth}
       onClose={onClose}
     >
       {headline}
@@ -57,6 +66,13 @@ Closeable.args = {
   ...defaultArgs,
   closeable: true,
   onClose: () => console.log('Close event triggered'),
+};
+
+export const Fullwidth = Template.bind({});
+Fullwidth.args = {
+  ...defaultArgs,
+  fullWidth: true,
+  status: 'warning',
 };
 
 export const BackgroundOnly = Template.bind({});
