@@ -48,8 +48,13 @@ const defaultArgs = {
     {
       label: 'Year',
       value: 'year',
+      sortable: true,
     },
   ],
+  currentSort: {
+    value: 'year',
+    order: 'ASC',
+  },
 };
 
 /**
@@ -64,13 +69,12 @@ export const Unsortable = Template.bind({});
 Unsortable.args = {
   ...defaultArgs,
   fields: [
-    {
-      label: 'Document title',
-      value: 'title',
-      nonSortable: true,
-    },
+    defaultArgs.fields[0],
     defaultArgs.fields[1],
-    defaultArgs.fields[2],
+    {
+      label: 'Year',
+      value: 'year',
+    },
   ],
 };
 
