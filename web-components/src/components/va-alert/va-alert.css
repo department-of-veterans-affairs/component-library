@@ -1,0 +1,151 @@
+@import '../../mixins/accessibility.css';
+
+:host {
+  display: block;
+  background-color: var(--color-gray-lightest);
+  position: relative;
+}
+
+:host([background-only='true']),
+:host([background-only='']) {
+  background-color: unset;
+}
+
+::slotted([slot='headline']) {
+  font-size: 2rem !important;
+  line-height: 26px !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+div.alert {
+  display: table;
+  padding: 3.2rem 6.4rem 3.2rem 2.4rem;
+  width: 100%;
+  vertical-align: middle;
+  box-sizing: border-box;
+}
+
+div.alert:not(.full-width):not(.bg-only) {
+  border-left-style: solid;
+  border-left-width: 10px;
+}
+div.alert.full-width.info,
+div.alert.full-width.warning {
+  border-top-style: solid;
+  border-top-width: 10px;
+}
+
+div.alert > i::before {
+  display: flex;
+  margin-right: 1.6rem;
+}
+
+div.body {
+  padding-left: 0;
+  padding-right: 0;
+  display: table-cell;
+  vertical-align: middle;
+  width: 100%;
+}
+::slotted(:not([slot])) {
+  margin-top: 2rem;
+}
+
+.bg-only ::slotted(*) {
+  margin-top: 0;
+}
+
+div.info > i::before {
+  content: '\F05A';
+}
+
+div.continue > i::before {
+  content: '\F023';
+  color: var(--color-green);
+}
+
+div.success > i::before {
+  content: '\F00C';
+  color: var(--color-green);
+}
+
+div.warning > i::before {
+  content: '\F071';
+}
+
+div.error > i::before {
+  content: '\F06A';
+  color: var(--color-secondary-dark);
+}
+
+div.alert.bg-only > i::before {
+  content: '';
+}
+
+div.bg-only {
+  border: none;
+}
+
+.info {
+  border-color: var(--color-primary-alt-dark);
+}
+.info.bg-only {
+  background-color: var(--color-primary-alt-lightest);
+}
+
+.continue,
+.success {
+  border-color: var(--color-green);
+}
+
+.continue.bg-only {
+  background-color: var(--color-gray-lightest);
+}
+.success.bg-only {
+  background-color: var(--color-green-lightest);
+}
+
+.warning {
+  border-color: var(--color-gold);
+}
+
+.warning.bg-only {
+  background-color: var(--color-gold-lightest);
+}
+
+.error {
+  border-color: var(--color-secondary-dark);
+}
+
+.error.bg-only {
+  background-color: var(--color-secondary-lightest);
+}
+
+.va-alert-close {
+  margin: 1.6rem;
+  padding: 0;
+  width: auto;
+  color: var(--color-primary);
+  font-size: 2.25rem;
+  appearance: none;
+  border: 0;
+  cursor: pointer;
+  background: transparent;
+  display: block;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+.va-alert-close:hover {
+  color: var(--color-primary-darker);
+}
+
+i {
+  font-family: 'Font Awesome 5 Free';
+  font-style: normal;
+  font-weight: 900;
+}
+i.fa-times-circle::before {
+  content: '\F057'; /* fa-times-circle*/
+}
