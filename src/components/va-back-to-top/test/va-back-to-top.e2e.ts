@@ -1,6 +1,7 @@
 import { newE2EPage } from '@stencil/core/testing';
 
 const pageContent = `
+      <h1>The top</h1>
       <p>Lorem ipsum</p>
       <p>Some more</p>
       <p>Lorem ipsum</p>
@@ -128,5 +129,28 @@ describe('va-back-to-top', () => {
 
     // We've scrolled a lot - button should be revealed
     expect(wrapper).toHaveClass('docked');
+  });
+
+  it('goes to top on click', async () => {
+    const page = await newE2EPage();
+    await page.setContent(`
+    <main>
+    ${pageContent}
+    <va-back-to-top></va-back-to-top>
+    </main>
+    `);
+    const button = await page.find('va-back-to-top >>> button');
+    const topHeading = await page.find('h1');
+
+    // Make the button visible
+    await page.mouse.wheel({ deltaY: 1000 });
+    await page.waitForChanges();
+
+    expect(await topHeading.isIntersectingViewport()).toEqual(false);
+
+    button.click();
+    await page.waitForChanges();
+
+    expect(await topHeading.isIntersectingViewport()).toEqual(true);
   });
 });
