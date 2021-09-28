@@ -27,23 +27,35 @@ div {
 
 button {
   bottom: 0;
+  right: 0;
   background-color: var(--color-gray-dark);
   border-bottom-right-radius: 0;
   border-top-right-radius: 0;
   height: 44px;
+  width: 44px;
   margin: 0;
+  margin-bottom: 0.5rem;
   opacity: 0;
   padding: 0;
   pointer-events: none;
   pointer-events: auto;
   position: absolute;
-  right: 0;
-  width: 44px;
   transition: all 0.25s ease-in;
-  margin-bottom: 0.5rem;
 }
 button:hover {
   background-color: var(--color-black);
+}
+button.reveal {
+  pointer-events: auto;
+  opacity: 1;
+  animation: slideInUp 0.25s;
+}
+button:not(.reveal) {
+  animation: slideOutDown 0.25s;
+}
+
+button span {
+  display: none;
 }
 
 div.docked {
@@ -51,7 +63,6 @@ div.docked {
   display: flex;
   flex-direction: row-reverse;
 }
-
 div:not(.docked) {
   max-width: var(--undocked-width);
 }
@@ -60,31 +71,9 @@ div.docked button {
   position: relative;
 }
 
-button span {
-  display: none;
-}
-
 i {
   font-size: 2rem;
 }
-
-@media (min-width: 768px) {
-  button {
-    padding: 0 1.6rem;
-    width: auto;
-  }
-
-  i {
-    padding-right: 8px;
-    padding-top: 12px;
-    font-size: 1em;
-  }
-
-  button span {
-    display: inline-block;
-  }
-}
-
 i {
   font-family: 'Font Awesome 5 Free';
   font-style: normal;
@@ -94,12 +83,19 @@ i::before {
   content: '\F062'; /* fa-arrow-up*/
 }
 
-button.reveal {
-  pointer-events: auto;
-  opacity: 1;
-  animation: slideInUp 0.25s;
-}
+@media (min-width: 768px) {
+  button {
+    padding: 0 1.6rem;
+    width: auto;
+  }
 
-button:not(.reveal) {
-  animation: slideOutDown 0.25s;
+  button span {
+    display: inline-block;
+  }
+
+  i {
+    padding-right: 8px;
+    padding-top: 12px;
+    font-size: 1em;
+  }
 }
