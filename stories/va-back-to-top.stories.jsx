@@ -91,14 +91,5 @@ const Template = () => {
   );
 };
 
-// const defaultArgs = {
-//   label: 'This is a label',
-//   required: false,
-//   error: null,
-// };
-
 export const Default = Template.bind({});
-// Default.args = {
-//   ...defaultArgs,
-// };
 Default.argTypes = propStructure(bttDocs);
