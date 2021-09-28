@@ -109,4 +109,24 @@ describe('va-back-to-top', () => {
     // We've scrolled a lot - button should be revealed
     expect(button).toHaveClass('reveal');
   });
+
+  it('docks when the "dock" is scrolled into view', async () => {
+    const page = await newE2EPage();
+    await page.setContent(`
+    <main>
+    ${pageContent}
+    <va-back-to-top></va-back-to-top>
+    <footer style="height: 100px">The footer</footer>
+    </main>
+    `);
+    const wrapper = await page.find('va-back-to-top >>> div');
+
+    expect(wrapper).not.toHaveClass('docked');
+
+    await page.mouse.wheel({ deltaY: 1400 });
+    await page.waitForChanges();
+
+    // We've scrolled a lot - button should be revealed
+    expect(wrapper).toHaveClass('docked');
+  });
 });
