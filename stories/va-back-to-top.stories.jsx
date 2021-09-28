@@ -9,7 +9,7 @@ export default {
 
 const Template = () => {
   return (
-    <main style={{ width: '60%' }}>
+    <main className="vads-l-col--12 medium-screen:vads-l-col--8">
       <p>Lorem ipsum</p>
       <p>Some more</p>
       <p>Lorem ipsum</p>
