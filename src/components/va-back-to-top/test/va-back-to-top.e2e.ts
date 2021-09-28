@@ -131,6 +131,24 @@ describe('va-back-to-top', () => {
     expect(wrapper).toHaveClass('docked');
   });
 
+  it('stays docked even with really long footers', async () => {
+    const page = await newE2EPage();
+    await page.setContent(`
+    <main>
+    ${pageContent}
+    <va-back-to-top></va-back-to-top>
+    <footer style="height: 2400px">The footer</footer>
+    </main>
+    `);
+    const wrapper = await page.find('va-back-to-top >>> div');
+
+    await page.mouse.wheel({ deltaY: 3000 });
+    await page.waitForChanges();
+
+    // After scrolling this much, the dock is well above the viewport
+    expect(wrapper).toHaveClass('docked');
+  });
+
   it('goes to top on click', async () => {
     const page = await newE2EPage();
     await page.setContent(`
