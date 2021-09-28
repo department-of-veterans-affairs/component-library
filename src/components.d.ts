@@ -83,10 +83,6 @@ export namespace Components {
         "visible": boolean;
     }
     interface VaBackToTop {
-        /**
-          * A vertical distance. Once the viewport is below this point, the button is revealed
-         */
-        "breakpoint": string;
     }
     interface VaCheckbox {
         /**
@@ -396,10 +392,6 @@ declare namespace LocalJSX {
         "visible"?: boolean;
     }
     interface VaBackToTop {
-        /**
-          * A vertical distance. Once the viewport is below this point, the button is revealed
-         */
-        "breakpoint"?: string;
     }
     interface VaCheckbox {
         /**
