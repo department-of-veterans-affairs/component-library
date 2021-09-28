@@ -64,10 +64,13 @@ button span {
   display: none;
 }
 
+i {
+  font-size: 2rem;
+}
+
 @media (min-width: 768px) {
   button {
-    padding-left: 17px;
-    padding-right: 19px;
+    padding: 0 1.6rem;
     width: auto;
   }
 
@@ -82,10 +85,6 @@ button span {
   }
 }
 
-i {
-  margin-right: 0;
-  font-size: 2rem;
-}
 i {
   font-family: 'Font Awesome 5 Free';
   font-style: normal;
