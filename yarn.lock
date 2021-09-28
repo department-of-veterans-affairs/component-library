@@ -13038,10 +13038,11 @@ watchpack@^1.7.4:
 
 "web-components@https://github.com/department-of-veterans-affairs/component-library.git#wc-btt":
   version "0.9.6"
-  resolved "https://github.com/department-of-veterans-affairs/component-library.git#198b6d1ca01dbddbcd6b725d2534ed0c93cf4fe0"
+  resolved "https://github.com/department-of-veterans-affairs/component-library.git#e506b2ac1f51ea1b04a3b22f83da79307f685481"
   dependencies:
     "@stencil/core" "^2.0.1"
     "@stencil/postcss" "^2.0.0"
+    classnames "^2.3.1"
     intersection-observer "^0.12.0"
     postcss-url "^10.1.1"
 
