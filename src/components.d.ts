@@ -84,7 +84,7 @@ export namespace Components {
     }
     interface VaBackToTop {
         /**
-          * Once the viewport is below this point, the button is revealed
+          * A vertical distance. Once the viewport is below this point, the button is revealed
          */
         "breakpoint": string;
     }
@@ -397,7 +397,7 @@ declare namespace LocalJSX {
     }
     interface VaBackToTop {
         /**
-          * Once the viewport is below this point, the button is revealed
+          * A vertical distance. Once the viewport is below this point, the button is revealed
          */
         "breakpoint"?: string;
     }
