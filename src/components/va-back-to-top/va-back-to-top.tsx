@@ -9,8 +9,6 @@ import 'intersection-observer';
   shadow: true,
 })
 export class VaBackToTop {
-  dockObserver = null;
-  revealObserver = null;
   revealPixel!: HTMLSpanElement;
 
   /**
@@ -26,19 +24,19 @@ export class VaBackToTop {
 
   componentDidLoad() {
     // Setup observer to handle docking behavior
-    this.dockObserver = new IntersectionObserver(
+    const dockObserver = new IntersectionObserver(
       entries => {
         this.isDocked = entries[0].isIntersecting;
       },
       { threshold: 1.0 },
     );
-    this.dockObserver.observe(this.el);
+    dockObserver.observe(this.el);
 
     // Setup observer to handle reveal behavior
-    this.revealObserver = new IntersectionObserver(entries => {
+    const revealObserver = new IntersectionObserver(entries => {
       this.hasHitBreakpoint = entries[0].boundingClientRect.y < 0;
     });
-    this.revealObserver.observe(this.revealPixel);
+    revealObserver.observe(this.revealPixel);
   }
 
   navigateToTop() {
