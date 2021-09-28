@@ -13,7 +13,7 @@ export default class AdditionalInfo extends React.Component {
   }
 
   handleKeyDown = event => {
-    if (event.key === '' || event.keyCode === 32) {
+    if (event.key === ' ') {
       event.preventDefault();
       this.toggle();
     }
@@ -57,7 +57,6 @@ export default class AdditionalInfo extends React.Component {
     const trigger = (
       <a
         role="button"
-        id={`${this.expandedContentId}-button`}
         className={buttonClass}
         aria-expanded={this.state.open ? 'true' : 'false'}
         aria-controls={this.expandedContentId}
