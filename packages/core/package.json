@@ -1,0 +1,13 @@
+{
+  "name": "@department-of-veterans-affairs/component-library",
+  "description": "VA.gov component library. Includes React and web components.",
+  "version": "3.3.0",
+  "license": "MIT",
+  "scripts": {},
+  "dependencies": {
+    "@department-of-veterans-affairs/react-components": "workspace:*"
+  },
+  "devDependencies": {
+    "rollup": "^2.57.0"
+  }
+}
