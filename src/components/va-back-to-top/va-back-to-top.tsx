@@ -20,7 +20,10 @@ export class VaBackToTop {
     // Setup observer to handle docking behavior
     const dockObserver = new IntersectionObserver(
       entries => {
-        this.isDocked = entries[0].isIntersecting;
+        // The second half of the || ensures that the button
+        // stays docked even if the viewport is scrolled below the dock
+        this.isDocked =
+          entries[0].isIntersecting || entries[0].boundingClientRect.y < 0;
       },
       { threshold: 1.0 },
     );
