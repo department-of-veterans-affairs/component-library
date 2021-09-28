@@ -1754,8 +1754,8 @@ __metadata:
     sinon: ^9.2.2
     uswds: 1.6.10
   peerDependencies:
+    "@department-of-veterans-affairs/web-components": "*"
     react: ^16.13.1
-    web-components: "*"
   languageName: unknown
   linkType: soft
 
