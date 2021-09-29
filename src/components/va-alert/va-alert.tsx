@@ -127,7 +127,7 @@ export class VaAlert {
   }
 
   render() {
-    const { backgroundOnly, status, fullWidth, visible, closeable } = this;
+    const { backgroundOnly, status, visible, closeable } = this;
     const classes = `alert ${status} ${backgroundOnly ? 'bg-only' : ''}`;
     const role = status === 'error' ? 'alert' : null;
     const ariaLive = status === 'error' ? 'assertive' : null;
@@ -136,29 +136,23 @@ export class VaAlert {
 
     return (
       <Host>
-        <div class={fullWidth ? 'full-width' : ''}>
-          <div role={role} aria-live={ariaLive} class={classes}>
-            <i aria-hidden="true" role="img"></i>
-            <div class="body" onClick={this.handleAlertBodyClick.bind(this)}>
-              {!backgroundOnly && <slot name="headline"></slot>}
-              <slot></slot>
-            </div>
+        <div role={role} aria-live={ariaLive} class={classes}>
+          <i aria-hidden="true" role="img"></i>
+          <div class="body" onClick={this.handleAlertBodyClick.bind(this)}>
+            {!backgroundOnly && <slot name="headline"></slot>}
+            <slot></slot>
           </div>
-
-          {closeable && (
-            <button
-              class="va-alert-close"
-              aria-label={this.closeBtnAriaLabel}
-              onClick={this.closeHandler.bind(this)}
-            >
-              <i
-                aria-hidden="true"
-                class="fa-times-circle"
-                role="presentation"
-              />
-            </button>
-          )}
         </div>
+
+        {closeable && (
+          <button
+            class="va-alert-close"
+            aria-label={this.closeBtnAriaLabel}
+            onClick={this.closeHandler.bind(this)}
+          >
+            <i aria-hidden="true" class="fa-times-circle" role="presentation" />
+          </button>
+        )}
       </Host>
     );
   }
