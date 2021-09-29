@@ -26,14 +26,19 @@ div.alert {
   box-sizing: border-box;
 }
 
-div.alert:not(.full-width):not(.bg-only) {
+div:not(.full-width) div.alert:not(.bg-only) {
   border-left-style: solid;
   border-left-width: 10px;
 }
-div.alert.full-width.info,
-div.alert.full-width.warning {
+div.full-width,
+div.full-width {
   border-top-style: solid;
   border-top-width: 10px;
+}
+
+div.full-width div.alert {
+  max-width: 1000px;
+  margin: 0 auto;
 }
 
 div.alert > i::before {
@@ -87,6 +92,7 @@ div.bg-only {
   border: none;
 }
 
+div.full-width,
 .info {
   border-color: var(--color-primary-alt-dark);
 }
@@ -106,6 +112,7 @@ div.bg-only {
   background-color: var(--color-green-lightest);
 }
 
+div.full-width,
 .warning {
   border-color: var(--color-gold);
 }
