@@ -1,4 +1,5 @@
 import { newE2EPage } from '@stencil/core/testing';
+import { axeCheck } from '../../../testing/test-helpers';
 
 const pageContent = `
       <h1>The top</h1>
@@ -127,7 +128,7 @@ describe('va-back-to-top', () => {
     await page.mouse.wheel({ deltaY: 1400 });
     await page.waitForChanges();
 
-    // We've scrolled a lot - button should be revealed
+    // We've scrolled a lot - button should be docked
     expect(wrapper).toHaveClass('docked');
   });
 
@@ -170,5 +171,17 @@ describe('va-back-to-top', () => {
     await page.waitForChanges();
 
     expect(await topHeading.isIntersectingViewport()).toEqual(true);
+  });
+
+  it('passes an axe check', async () => {
+    const page = await newE2EPage();
+    await page.setContent(`
+    <main>
+    ${pageContent}
+    <va-back-to-top></va-back-to-top>
+    </main>
+    `);
+
+    await axeCheck(page);
   });
 });
