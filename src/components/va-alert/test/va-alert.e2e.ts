@@ -25,6 +25,15 @@ describe('va-alert', () => {
     `);
   });
 
+  it('renders the right markup for the full-width variant', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-alert full-width></va-alert>');
+
+    const wrapper = await page.find('va-alert >>> div');
+
+    expect(wrapper).toHaveClass('full-width');
+  });
+
   it('renders an empty div with a "polite" aria-live tag when not visible', async () => {
     const page = await newE2EPage();
 
