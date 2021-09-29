@@ -122,6 +122,11 @@ OMBInfo.propTypes = {
    * Form expiration date.
    */
   expDate: PropTypes.string.isRequired,
+
+  /**
+   * Child elements (content) of modal when displayed
+   */
+  children: PropTypes.node,
 };
 
 export default OMBInfo;

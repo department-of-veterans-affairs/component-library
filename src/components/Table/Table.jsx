@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
@@ -27,41 +27,75 @@ const cellProps = (
 
 function Table(props) {
   const { currentSort, fields, data, ariaLabelledBy } = props;
+  const [sortDirection, setSortDirection] = useState(currentSort?.order);
+  let rowData;
+
+  useEffect(() => {
+    rowData = sortData();
+  });
+
+  const sortData = () => {
+    if (sortDirection === 'ASC') {
+      return data.sort((a, b) => {
+        return a[currentSort.value] > b[currentSort.value] ? 1 : -1;
+      });
+    } else if (sortDirection === 'DESC') {
+      return data.sort((a, b) => {
+        return a[currentSort.value] < b[currentSort.value] ? 1 : -1;
+      });
+    }
+  };
+
+  rowData = sortDirection ? sortData() : data;
 
   return (
     <table aria-labelledby={ariaLabelledBy} className="responsive" role="table">
       <thead>
         <tr role="row">
           {fields.map(field =>
-            field.nonSortable ? (
-              <th key={field.value}>{field.label}</th>
-            ) : (
-              <th
-                key={field.value}
-                className={borderClasses}
-                role="columnheader"
-                scope="col"
-              >
-                <button className="va-button-link vads-u-font-weight--bold vads-u-color--base vads-u-text-decoration--none">
+            field.sortable && field.value == currentSort?.value ? (
+              <th key={field.value} role="columnheader" scope="col">
+                <button
+                  className="va-button-link vads-u-font-weight--bold vads-u-color--base vads-u-text-decoration--none sort"
+                  onClick={() =>
+                    setSortDirection(sortDirection === 'ASC' ? 'DESC' : 'ASC')
+                  }
+                  aria-label={`sort data by ${
+                    sortDirection === 'ASC' ? 'descending' : 'ascending'
+                  }`}
+                >
                   {field.label}
                   {currentSort?.value === field.value && (
-                    <i
-                      className={classNames({
-                        fa: true,
-                        'fas fa-caret-down': currentSort.order === 'DESC',
-                        'fas fa-caret-up': currentSort.order === 'ASC',
-                      })}
-                    />
+                    <svg
+                      className="usa-icon sort"
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                    >
+                      {sortDirection === 'ASC' ? (
+                        <g className="ascending" aria-label="ascending">
+                          <path
+                            transform="rotate(180, 12, 12)"
+                            d="M17 17L15.59 15.59L12.9999 18.17V2H10.9999V18.17L8.41 15.58L7 17L11.9999 22L17 17Z"
+                          ></path>
+                        </g>
+                      ) : (
+                        <g className="descending" aria-label="descending">
+                          <path d="M17 17L15.59 15.59L12.9999 18.17V2H10.9999V18.17L8.41 15.58L7 17L11.9999 22L17 17Z"></path>
+                        </g>
+                      )}
+                    </svg>
                   )}
                 </button>
               </th>
+            ) : (
+              <th key={field.value}>{field.label}</th>
             ),
           )}
         </tr>
       </thead>
 
       <tbody>
-        {data.map((item, rowIndex) => (
+        {rowData.map((item, rowIndex) => (
           <tr
             key={rowIndex}
             className={`${borderClasses} ${rowPaddingClass}`}
@@ -101,18 +135,20 @@ Table.propTypes = {
    * the data type for the column. Available types are -
    * - String
    * - Number
+   * Optional: If the field is sortable, set `sortable` to `true`.
    */
   fields: PropTypes.arrayOf(
     PropTypes.shape({
       label: PropTypes.string,
       value: PropTypes.string,
-      nonSortable: PropTypes.boolean,
+      sortable: PropTypes.boolean,
       alignLeft: PropTypes.boolean,
       alignRight: PropTypes.boolean,
     }),
   ),
   /**
-   * A way to change the sorted order of the data. Currently unused.
+   * Optional. A way to change the sorted order of data in a specified column.
+   * 'order' should be set to ASC for ascending or DESC for descending.
    */
   currentSort: PropTypes.shape({
     value: PropTypes.string,
