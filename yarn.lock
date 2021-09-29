@@ -13033,7 +13033,7 @@ watchpack@^1.7.4:
 
 "web-components@https://github.com/department-of-veterans-affairs/component-library.git#wc-fullwidth-alert-fix":
   version "0.10.0"
-  resolved "https://github.com/department-of-veterans-affairs/component-library.git#2b76d145c610432973e874203033bbb570b9c9a9"
+  resolved "https://github.com/department-of-veterans-affairs/component-library.git#908aac40dc201a20c5da5c4aced62d86ba3e7ed8"
   dependencies:
     "@stencil/core" "^2.0.1"
     "@stencil/postcss" "^2.0.0"
