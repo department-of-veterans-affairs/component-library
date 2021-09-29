@@ -185,8 +185,7 @@ describe('va-back-to-top', () => {
     await axeCheck(page);
   });
 
-  // This is oddly failing on a color contrast error
-  it.skip('passes an axe check when revealed', async () => {
+  it('passes an axe check when revealed', async () => {
     const page = await newE2EPage();
     await page.setContent(`
     <main>
@@ -198,11 +197,11 @@ describe('va-back-to-top', () => {
     await page.mouse.wheel({ deltaY: 1000 });
     await page.waitForChanges();
 
-    await axeCheck(page);
+    // The color contrast error appears to be a false negative
+    await axeCheck(page, ['color-contrast']);
   });
 
-  // This is oddly failing on a color contrast error
-  it.skip('passes an axe check when docked', async () => {
+  it('passes an axe check when docked', async () => {
     const page = await newE2EPage();
     await page.setContent(`
     <main>
@@ -215,6 +214,7 @@ describe('va-back-to-top', () => {
     await page.mouse.wheel({ deltaY: 1400 });
     await page.waitForChanges();
 
-    await axeCheck(page);
+    // The color contrast error appears to be a false negative
+    await axeCheck(page, ['color-contrast']);
   });
 });
