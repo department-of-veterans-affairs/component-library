@@ -27,6 +27,11 @@ export class VaTextInput {
   @Prop() error?: string | HTMLElement;
 
   /**
+   * Optimize the field for numeric input.
+   */
+  @Prop() numericInput?: boolean;
+
+  /**
    * Set the input to required and render the (Required) text.
    */
   @Prop() required?: boolean;
@@ -35,6 +40,16 @@ export class VaTextInput {
    * Placeholder text to show in the input field.
    */
   @Prop() placeholder?: string;
+
+  /**
+   * The inputmode attribute.
+   */
+  @Prop() inputmode?: string = '';
+
+  /**
+   * The pattern attribute.
+   */
+  @Prop() pattern?: string = '';
 
   /**
    * The maximum number of characters allowed in the input.
@@ -57,7 +72,7 @@ export class VaTextInput {
   @Prop() name?: string;
 
   /**
-   * The aria-describedby attribute for the <intput> in the shadow DOM.
+   * The aria-describedby attribute for the <input> in the shadow DOM.
    */
   @Prop() ariaDescribedby?: string = '';
 
@@ -136,6 +151,8 @@ export class VaTextInput {
           onInput={this.handleChange}
           onBlur={this.handleBlur}
           aria-describedby={describedBy}
+          inputmode={this.numericInput ? "numeric" : this.inputmode}
+          pattern={this.numericInput ? "[0-9]*" : this.pattern}
           placeholder={this.placeholder}
           maxlength={this.maxlength}
         />

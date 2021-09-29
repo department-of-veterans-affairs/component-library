@@ -188,7 +188,7 @@ export namespace Components {
     }
     interface VaTextInput {
         /**
-          * The aria-describedby attribute for the <intput> in the shadow DOM.
+          * The aria-describedby attribute for the <input> in the shadow DOM.
          */
         "ariaDescribedby"?: string;
         /**
@@ -204,6 +204,10 @@ export namespace Components {
          */
         "error"?: string | HTMLElement;
         /**
+          * The inputmode attribute.
+         */
+        "inputmode"?: string;
+        /**
           * The label for the text input.
          */
         "label": string | HTMLElement;
@@ -215,6 +219,14 @@ export namespace Components {
           * The name to pass to the input element.
          */
         "name"?: string;
+        /**
+          * Optimize the field for numeric input.
+         */
+        "numericInput"?: boolean;
+        /**
+          * The pattern attribute.
+         */
+        "pattern"?: string;
         /**
           * Placeholder text to show in the input field.
          */
@@ -519,7 +531,7 @@ declare namespace LocalJSX {
     }
     interface VaTextInput {
         /**
-          * The aria-describedby attribute for the <intput> in the shadow DOM.
+          * The aria-describedby attribute for the <input> in the shadow DOM.
          */
         "ariaDescribedby"?: string;
         /**
@@ -535,6 +547,10 @@ declare namespace LocalJSX {
          */
         "error"?: string | HTMLElement;
         /**
+          * The inputmode attribute.
+         */
+        "inputmode"?: string;
+        /**
           * The label for the text input.
          */
         "label"?: string | HTMLElement;
@@ -547,6 +563,10 @@ declare namespace LocalJSX {
          */
         "name"?: string;
         /**
+          * Optimize the field for numeric input.
+         */
+        "numericInput"?: boolean;
+        /**
           * The event used to track usage of the component. This is emitted when the input is blurred and enableAnalytics is true.
          */
         "onComponent-library-analytics"?: (event: CustomEvent<any>) => void;
@@ -558,6 +578,10 @@ declare namespace LocalJSX {
           * The event emitted when the input value changes
          */
         "onVaChange"?: (event: CustomEvent<any>) => void;
+        /**
+          * The pattern attribute.
+         */
+        "pattern"?: string;
         /**
           * Placeholder text to show in the input field.
          */
