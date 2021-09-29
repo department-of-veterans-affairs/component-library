@@ -91,7 +91,7 @@ div.bg-only {
   border: none;
 }
 
-div.full-width,
+:host([status='info']) div.full-width,
 .info {
   border-color: var(--color-primary-alt-dark);
 }
@@ -111,7 +111,7 @@ div.full-width,
   background-color: var(--color-green-lightest);
 }
 
-div.full-width,
+:host([status='warning']) div.full-width,
 .warning {
   border-color: var(--color-gold);
 }
