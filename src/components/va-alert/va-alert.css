@@ -30,7 +30,6 @@ div:not(.full-width) div.alert:not(.bg-only) {
   border-left-style: solid;
   border-left-width: 10px;
 }
-div.full-width,
 div.full-width {
   border-top-style: solid;
   border-top-width: 10px;
