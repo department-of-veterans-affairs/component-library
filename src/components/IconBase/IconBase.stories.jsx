@@ -16,54 +16,12 @@ export const Description = () => (
     <p>
       For examples of how this is used, see the other <code>Icon</code> stories.
     </p>
-    <h2>Accessibility</h2>
-    <h3>
-      When to use <code>{'role="img"'}</code>
-    </h3>
     <p>
-      If an icon is being used alone (without support text), it should have a{' '}
-      <code>{'role="img"'}</code> AND appropriate ARIA markup OR screen reader
-      only descriptive text.
+      For more information, see the Design System{' '}
+      <a href="https://github.com/department-of-veterans-affairs/vets-design-system-documentation/blob/master/src/_design/icons.md">
+        icon documentation
+      </a>
+      .
     </p>
-    <h3>
-      When to use <code>{'role="presentation"'}</code>
-    </h3>
-    <p>
-      If an icon is being used with visual (and assistive device) text, it
-      should have <code>{'role="presentation"'}</code>.
-    </p>
-    <h3>Accessibility Examples</h3>
-    <h4>Icon being used alone</h4>
-    <code>{`
-      <IconHelp color={'#000000'} cssClass={'a-class'} id={'icon-help'} role={'img'} ariaLabel={'Help'} />
-    `}</code>
-    <h4>Icon being used with supporting text</h4>
-    <code>{`
-    <IconHelp color={'#000000'} cssClass={'a-class'} id={'icon-help'} role={'presentation'} ariaLabel={'Help'} />
-    `}</code>
-    <br />
-    <code>{`Help`}</code>
-    <h4>
-      Icon being used alone inside an <code>{'<a>'}</code> tag
-    </h4>
-    <code>{`<a href="#>`}</code>
-    <br />
-    <code>{`
-      <IconHelp color={'#000000'} cssClass={'a-class'} id={'icon-help'} role={'img'} ariaLabel={'Help'} />
-    `}</code>
-    <br />
-    <code>{`</a>`}</code>
-    <h4>
-      Icon being used with supporting text inside an <code>{'<a>'}</code> tag
-    </h4>
-    <code>{`<a href="#>`}</code>
-    <br />
-    <code>{`
-        <IconHelp color={'#000000'} cssClass={'a-class'} id={'icon-help'} role={'presentation'} ariaLabel={'Help'} />
-    `}</code>
-    <br />
-    <code>{`Help`}</code>
-    <br />
-    <code>{`</a>`}</code>
   </div>
 );
