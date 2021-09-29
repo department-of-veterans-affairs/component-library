@@ -10,14 +10,22 @@ const defaultArgs = {
   status: 'info',
   backgroundOnly: false,
   closeable: false,
+  fullWidth: false,
 };
 
-const Template = ({ backgroundOnly, headline, status, closeable }) => html`
+const Template = ({
+  backgroundOnly,
+  fullWidth,
+  headline,
+  status,
+  closeable,
+}) => html`
   <div>
     <va-alert
       background-only="${backgroundOnly}"
       status="${status}"
       closeable="${closeable}"
+      full-width="${fullWidth}"
     >
       <h3 slot="headline">${headline}</h3>
       <div>
@@ -59,6 +67,12 @@ export const Closeable = Template.bind({});
 Closeable.args = {
   ...defaultArgs,
   closeable: true,
+};
+
+export const Fullwidth = Template.bind({});
+Fullwidth.args = {
+  ...defaultArgs,
+  fullWidth: true,
 };
 
 export const BackgroundOnly = Template.bind({});

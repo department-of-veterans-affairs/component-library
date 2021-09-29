@@ -74,6 +74,10 @@ export namespace Components {
          */
         "disableAnalytics": boolean;
         /**
+          * If true, the alert will be full width. Should be for emergency communication only.
+         */
+        "fullWidth": boolean;
+        /**
           * Determines the icon and border/background color. One of `info`, `error`, `success`, `warning`, or `continue`
          */
         "status": string;
@@ -113,6 +117,8 @@ export namespace Components {
           * Set the input to required and render the (Required) text.
          */
         "required"?: boolean;
+    }
+    interface VaFeaturedContent {
     }
     interface VaOnThisPage {
     }
@@ -259,6 +265,12 @@ declare global {
         prototype: HTMLVaCheckboxElement;
         new (): HTMLVaCheckboxElement;
     };
+    interface HTMLVaFeaturedContentElement extends Components.VaFeaturedContent, HTMLStencilElement {
+    }
+    var HTMLVaFeaturedContentElement: {
+        prototype: HTMLVaFeaturedContentElement;
+        new (): HTMLVaFeaturedContentElement;
+    };
     interface HTMLVaOnThisPageElement extends Components.VaOnThisPage, HTMLStencilElement {
     }
     var HTMLVaOnThisPageElement: {
@@ -296,6 +308,7 @@ declare global {
         "va-alert": HTMLVaAlertElement;
         "va-back-to-top": HTMLVaBackToTopElement;
         "va-checkbox": HTMLVaCheckboxElement;
+        "va-featured-content": HTMLVaFeaturedContentElement;
         "va-on-this-page": HTMLVaOnThisPageElement;
         "va-radio": HTMLVaRadioElement;
         "va-radio-option": HTMLVaRadioOptionElement;
@@ -376,6 +389,10 @@ declare namespace LocalJSX {
           * If true, doesn't fire the CustomEvent which can be used for analytics tracking.
          */
         "disableAnalytics"?: boolean;
+        /**
+          * If true, the alert will be full width. Should be for emergency communication only.
+         */
+        "fullWidth"?: boolean;
         "onClose"?: (event: CustomEvent<any>) => void;
         "onComponent-library-analytics"?: (event: CustomEvent<any>) => void;
         /**
@@ -434,6 +451,8 @@ declare namespace LocalJSX {
           * Set the input to required and render the (Required) text.
          */
         "required"?: boolean;
+    }
+    interface VaFeaturedContent {
     }
     interface VaOnThisPage {
     }
@@ -567,6 +586,7 @@ declare namespace LocalJSX {
         "va-alert": VaAlert;
         "va-back-to-top": VaBackToTop;
         "va-checkbox": VaCheckbox;
+        "va-featured-content": VaFeaturedContent;
         "va-on-this-page": VaOnThisPage;
         "va-radio": VaRadio;
         "va-radio-option": VaRadioOption;
@@ -584,6 +604,7 @@ declare module "@stencil/core" {
             "va-alert": LocalJSX.VaAlert & JSXBase.HTMLAttributes<HTMLVaAlertElement>;
             "va-back-to-top": LocalJSX.VaBackToTop & JSXBase.HTMLAttributes<HTMLVaBackToTopElement>;
             "va-checkbox": LocalJSX.VaCheckbox & JSXBase.HTMLAttributes<HTMLVaCheckboxElement>;
+            "va-featured-content": LocalJSX.VaFeaturedContent & JSXBase.HTMLAttributes<HTMLVaFeaturedContentElement>;
             "va-on-this-page": LocalJSX.VaOnThisPage & JSXBase.HTMLAttributes<HTMLVaOnThisPageElement>;
             "va-radio": LocalJSX.VaRadio & JSXBase.HTMLAttributes<HTMLVaRadioElement>;
             "va-radio-option": LocalJSX.VaRadioOption & JSXBase.HTMLAttributes<HTMLVaRadioOptionElement>;
