@@ -18,5 +18,5 @@ export const Default = Template.bind({});
 Default.args = {
   ...defaultArgs,
   role: 'image',
-  ariaLabel: 'Favorite',
+  ariaLabel: 'User',
 };
