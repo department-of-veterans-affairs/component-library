@@ -13,7 +13,7 @@ class IconUser extends React.Component {
         id={id}
         pointerEvents="none"
         role={role}
-        aria-label={ariaLabel}
+        ariaLabel={ariaLabel}
         viewBox="308 246 57 63"
         width="57"
       >
