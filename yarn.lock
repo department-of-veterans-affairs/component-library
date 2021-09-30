@@ -13031,9 +13031,9 @@ watchpack@^1.7.4:
     chokidar "^3.4.1"
     watchpack-chokidar2 "^2.0.1"
 
-"web-components@https://github.com/department-of-veterans-affairs/component-library.git#wc-fullwidth-alert-fix":
-  version "0.10.0"
-  resolved "https://github.com/department-of-veterans-affairs/component-library.git#908aac40dc201a20c5da5c4aced62d86ba3e7ed8"
+"web-components@https://github.com/department-of-veterans-affairs/component-library.git#wc-fullwidth-close":
+  version "0.11.1"
+  resolved "https://github.com/department-of-veterans-affairs/component-library.git#6746c849f6e99288d9e42561769f11237adb60e1"
   dependencies:
     "@stencil/core" "^2.0.1"
     "@stencil/postcss" "^2.0.0"
