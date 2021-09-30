@@ -19,6 +19,7 @@ const Template = args => <Banner {...args} />;
 const defaultArgs = {
   visible: true,
   title: 'Coronavirus',
+  storage: { getItem: () => {}, setItem: () => {} },
   content: `<div>
       <p>
         For questions about COVID-19 and how it affects VA health care and

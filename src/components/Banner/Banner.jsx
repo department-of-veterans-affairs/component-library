@@ -136,7 +136,7 @@ export class Banner extends Component {
           visible
           full-width
           closeable={showClose}
-          onCloseAlert={onCloseAlert}
+          onClose={onCloseAlert}
           status={type}
         >
           <h3 slot="headline">{title}</h3>
