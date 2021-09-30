@@ -38,7 +38,7 @@
   "devDependencies": {
     "@axe-core/puppeteer": "^4.1.1",
     "@babel/core": "^7.12.13",
-    "@department-of-veterans-affairs/formation": "^6.14.0",
+    "@department-of-veterans-affairs/formation": "6.17.3",
     "@stencil/react-output-target": "^0.0.9",
     "@storybook/addon-actions": "^6.1.17",
     "@storybook/addon-essentials": "^6.1.17",

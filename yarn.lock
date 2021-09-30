@@ -1011,10 +1011,10 @@
     exec-sh "^0.3.2"
     minimist "^1.2.0"
 
-"@department-of-veterans-affairs/formation@^6.14.0":
-  version "6.14.0"
-  resolved "https://registry.yarnpkg.com/@department-of-veterans-affairs/formation/-/formation-6.14.0.tgz#6a58f95920dd596d5ec0815155fe3b927c8b0736"
-  integrity sha512-gJVyk8eaiSgFc7mvmn8tIoE04CTL6Q6IW4ri66Brx72OqvS7nAj82/aK+GQ2uJMfIUaS591YFw3F07ZAhVorWQ==
+"@department-of-veterans-affairs/formation@6.17.3":
+  version "6.17.3"
+  resolved "https://registry.yarnpkg.com/@department-of-veterans-affairs/formation/-/formation-6.17.3.tgz#204a1e86d041eec30c6ed8a16c8f74f94498dc21"
+  integrity sha512-JS103tNPG4oHYAL3PZoeEWpUdkZVNqAqkegM82Sv5L4hkf5hpPZdrmulIi7xFXE3tmfWc1rHLXL2uMf8auOKYg==
   dependencies:
     "@fortawesome/fontawesome-free" "^5.6.3"
     domready "^1.0.8"
