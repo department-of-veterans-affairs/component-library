@@ -19,7 +19,7 @@ class IconSearch extends React.Component {
         id={id}
         pointerEvents="none"
         role={role}
-        aria-label={ariaLabel}
+        ariaLabel={ariaLabel}
         viewBox="0 0 216 146"
         width="24"
       >

@@ -13,7 +13,7 @@ class IconHelp extends React.Component {
         id={id}
         pointerEvents="none"
         role={role}
-        aria-label={ariaLabel}
+        ariaLabel={ariaLabel}
         viewBox="0 0 62 63"
         width="62"
       >
