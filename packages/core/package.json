@@ -3,9 +3,14 @@
   "description": "VA.gov component library. Includes React and web components.",
   "version": "3.3.0",
   "license": "MIT",
-  "scripts": {},
+  "scripts": {
+    "build": "rollup main.js --file main-bundle.js --format umd --name 'main-bundle'"
+  },
+  "main": "main-bundle.js",
+  "module": "main.js",
   "dependencies": {
-    "@department-of-veterans-affairs/react-components": "workspace:*"
+    "@department-of-veterans-affairs/react-components": "workspace:*",
+    "@department-of-veterans-affairs/web-components": "workspace:*"
   },
   "devDependencies": {
     "rollup": "^2.57.0"
