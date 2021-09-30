@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactTestUtils from 'react-dom/test-utils';
-
 import { expect } from 'chai';
 import { shallow, mount } from 'enzyme';
+
 import IconSearch from './IconSearch.jsx';
 import { axeCheck } from '../../helpers/test-helpers';
 
