@@ -18,7 +18,10 @@ export default class ProcessList extends Component {
       <div className="process schemaform-process">
         <ol role="list">
           {children.map((child, index) => (
-            <li className={`process-step list-${toWords(index + 1)}`} key={index}>
+            <li
+              className={`process-step list-${toWords(index + 1)}`}
+              key={index}
+            >
               {child}
             </li>
           ))}

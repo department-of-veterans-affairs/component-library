@@ -1,9 +1,7 @@
 import React from 'react';
-import { Link } from 'react-router';
-import { shallow, mount } from 'enzyme';
+import { shallow } from 'enzyme';
 import { axeCheck } from '../../helpers/test-helpers';
 import { expect } from 'chai';
-import sinon from 'sinon';
 
 import ProcessList from './ProcessList.jsx';
 
