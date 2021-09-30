@@ -72,6 +72,8 @@ export const Fullwidth = Template.bind({});
 Fullwidth.args = {
   ...defaultArgs,
   fullWidth: true,
+  closeable: true,
+  onClose: () => console.log('Close event triggered'),
   status: 'warning',
 };
 
