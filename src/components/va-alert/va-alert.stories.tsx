@@ -73,6 +73,7 @@ export const Fullwidth = Template.bind({});
 Fullwidth.args = {
   ...defaultArgs,
   fullWidth: true,
+  closeable: true,
 };
 
 export const BackgroundOnly = Template.bind({});
