@@ -15,6 +15,14 @@
 :host([full-width='']) {
   border-top-style: solid;
   border-top-width: 10px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+:host([full-width='true']) .va-alert-close,
+:host([full-width='']) .va-alert-close {
+  position: relative;
 }
 
 :host([status='warning']) {
@@ -35,7 +43,6 @@
 :host([full-width='true']) div.alert {
   border-left: none;
   max-width: 1000px;
-  margin: 0 auto;
 }
 
 ::slotted([slot='headline']) {
