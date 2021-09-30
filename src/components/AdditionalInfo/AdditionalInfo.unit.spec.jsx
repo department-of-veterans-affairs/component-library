@@ -44,6 +44,27 @@ describe('<AdditionalInfo/>', () => {
     });
   });
 
+  describe('expand keyboard test', () => {
+    let wrapper;
+    beforeEach(() => {
+      wrapper = mount(<AdditionalInfo triggerText="test" />).setState({
+        open: false,
+      });
+    });
+
+    it('should open and close', () => {
+      const additionalInfoButton = wrapper.find('.additional-info-button');
+      additionalInfoButton.simulate('keydown', { key: ' ' });
+      expect(wrapper.state().open).to.equal(true);
+      additionalInfoButton.simulate('keydown', { key: ' ' });
+      expect(wrapper.state().open).to.equal(false);
+    });
+
+    afterEach(() => {
+      wrapper.unmount();
+    });
+  });
+
   describe('analytics event', () => {
     let wrapper;
     let handleAnalyticsEvent;
