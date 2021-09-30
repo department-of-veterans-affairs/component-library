@@ -1,4 +1,6 @@
 import React from 'react';
+import ReactTestUtils from 'react-dom/test-utils';
+
 import { expect } from 'chai';
 import { shallow, mount } from 'enzyme';
 
@@ -22,7 +24,7 @@ describe('<IconHelp />', () => {
     wrapper.unmount();
   });
 
-  it('sets aria-label when a valid value for the ariaLabel prop is provided', () => {
+  it('passes the ariaLabel prop to IconBase', () => {
     const ariaLabel = 'Help';
     const wrapper = mount(
       <IconHelp
@@ -40,6 +42,22 @@ describe('<IconHelp />', () => {
     expect(IconBaseComponent.props().ariaLabel).to.equal(ariaLabel);
 
     wrapper.unmount();
+  });
+
+  it('sets the aria-label attribute when the ariaLabel prop is given', () => {
+    const ariaLabel = 'Help';
+
+    const icon = ReactTestUtils.renderIntoDocument(
+      <IconHelp
+        cssClass="a-class"
+        color="#000000"
+        id="help"
+        role="img"
+        ariaLabel={ariaLabel}
+      />,
+    );
+    var svg = ReactTestUtils.findRenderedDOMComponentWithTag(icon, 'svg');
+    expect(svg.getAttribute('aria-label')).to.equal(ariaLabel);
   });
 
   it('should pass a basic aXe check', () =>
