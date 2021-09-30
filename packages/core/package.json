@@ -4,7 +4,7 @@
   "version": "3.3.0",
   "license": "MIT",
   "scripts": {
-    "build": "rollup main.js --file main-bundle.js --format umd --name 'main-bundle'"
+    "build": "rollup -c"
   },
   "main": "main-bundle.js",
   "module": "main.js",
@@ -13,6 +13,7 @@
     "@department-of-veterans-affairs/web-components": "workspace:*"
   },
   "devDependencies": {
+    "@rollup/plugin-node-resolve": "^13.0.5",
     "rollup": "^2.57.0"
   }
 }
