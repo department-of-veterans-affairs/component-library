@@ -19,6 +19,7 @@ const Template = args => <Banner {...args} />;
 const defaultArgs = {
   visible: true,
   title: 'Coronavirus',
+  storage: { getItem: () => {}, setItem: () => {} },
   content: `<div>
       <p>
         For questions about COVID-19 and how it affects VA health care and
@@ -51,4 +52,11 @@ export const Default = Template.bind({});
 Default.args = {
   ...defaultArgs,
   type: 'error',
+};
+
+export const Closeable = Template.bind({});
+Closeable.args = {
+  ...defaultArgs,
+  type: 'error',
+  showClose: true,
 };
