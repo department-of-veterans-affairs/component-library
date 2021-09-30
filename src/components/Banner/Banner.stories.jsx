@@ -52,3 +52,10 @@ Default.args = {
   ...defaultArgs,
   type: 'error',
 };
+
+export const Closeable = Template.bind({});
+Closeable.args = {
+  ...defaultArgs,
+  type: 'error',
+  showClose: true,
+};
