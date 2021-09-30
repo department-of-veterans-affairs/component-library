@@ -106,6 +106,6 @@
   },
   "peerDependencies": {
     "react": "^16.13.1",
-    "web-components": "https://github.com/department-of-veterans-affairs/component-library.git#wc-v0.10.0"
+    "web-components": "https://github.com/department-of-veterans-affairs/component-library.git#wc-v0.11.2"
   }
 }
