@@ -12,6 +12,13 @@ export default class AdditionalInfo extends React.Component {
     this.state = { open: false };
   }
 
+  handleKeyDown = event => {
+    if (event.key === ' ') {
+      event.preventDefault();
+      this.toggle();
+    }
+  };
+
   toggle = () => {
     // Conditionally track the event.
     if (!this.props.disableAnalytics) {
@@ -48,18 +55,20 @@ export default class AdditionalInfo extends React.Component {
     });
 
     const trigger = (
-      <button
-        type="button"
+      <a
+        role="button"
         className={buttonClass}
         aria-expanded={this.state.open ? 'true' : 'false'}
         aria-controls={this.expandedContentId}
         onClick={this.toggle}
+        onKeyDown={this.handleKeyDown}
+        tabIndex="0"
       >
         <TagName className="additional-info-title">
           {triggerText}
           <i className={iconClass} />
         </TagName>
-      </button>
+      </a>
     );
 
     return (
