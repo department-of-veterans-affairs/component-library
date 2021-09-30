@@ -60,6 +60,14 @@ describe('<IconHelp />', () => {
     expect(svg.getAttribute('aria-label')).to.equal(ariaLabel);
   });
 
+  it('does not include the aria-label attribute when the ariaLabel prop is not given', () => {
+    const icon = ReactTestUtils.renderIntoDocument(
+      <IconHelp cssClass="a-class" color="#000000" id="help" role="img" />,
+    );
+    var svg = ReactTestUtils.findRenderedDOMComponentWithTag(icon, 'svg');
+    expect(svg.getAttribute('aria-label')).to.equal(null);
+  });
+
   it('should pass a basic aXe check', () =>
     axeCheck(
       <IconHelp
