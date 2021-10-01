@@ -12,7 +12,7 @@ export default class ProcessList extends Component {
   }
 
   render() {
-    const { children } = this.props;
+    const children = React.Children.toArray(this.props.children);
 
     return (
       <div className="process schemaform-process">
