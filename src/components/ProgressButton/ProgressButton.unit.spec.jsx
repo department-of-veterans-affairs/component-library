@@ -17,11 +17,13 @@ describe('<ProgressButton>', () => {
         buttonClass="usa-button-primary"
         disabled={false}
         ariaLabel="testing"
+        ariaDescribedby="some-id"
       />,
     );
     expect(tree.text()).to.equal('Button text');
     expect(tree).to.have.length.of(1);
     expect(tree.props()['aria-label']).to.eq('testing');
+    expect(tree.props()['aria-describedby']).to.eq('some-id');
     tree.unmount();
   });
 

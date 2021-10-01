@@ -42,6 +42,7 @@ class ProgressButton extends React.Component {
         id={`${this.id}-continueButton`}
         onClick={this.props.onButtonClick}
         aria-label={this.props.ariaLabel || null}
+        aria-describedby={this.props.ariaDescribedby || null}
       >
         {beforeText}
         {this.props.buttonText}
@@ -82,9 +83,15 @@ ProgressButton.propTypes = {
    */
   disabled: PropTypes.bool,
 
-  // aria-label attribute; needed for the review & submit page "Update page"
-  // button
+  /**
+   * Text read by a screenreader instead of content within the button
+   */
   ariaLabel: PropTypes.string,
+
+  /*
+   * Element ID containing additional content read by a screenreader
+   */
+  ariaDescribedby: PropTypes.string,
 
   /**
    * Whether the button is a submit button
