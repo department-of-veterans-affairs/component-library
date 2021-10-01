@@ -12,7 +12,6 @@
 div {
   position: fixed;
   bottom: 0;
-  display: block;
   width: 100%;
 }
 
@@ -93,8 +92,8 @@ i::before {
   }
 
   i {
-    padding-right: 8px;
-    padding-top: 12px;
+    padding-right: 0.8rem;
+    padding-top: 1.2rem;
     font-size: 1em;
   }
 }
