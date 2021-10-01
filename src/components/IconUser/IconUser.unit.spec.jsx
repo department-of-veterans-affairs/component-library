@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactTestUtils from 'react-dom/test-utils';
 import { expect } from 'chai';
-import { shallow, mount } from 'enzyme';
+import { shallow } from 'enzyme';
 
 import IconUser from './IconUser.jsx';
 import { axeCheck } from '../../helpers/test-helpers';
@@ -19,26 +19,6 @@ describe('<IconUser />', () => {
     );
 
     expect(wrapper.exists('.a-class')).to.equal(true);
-
-    wrapper.unmount();
-  });
-
-  it('passes the ariaLabel prop to IconBase', () => {
-    const ariaLabel = 'user';
-    const wrapper = mount(
-      <IconUser
-        cssClass="a-class"
-        color="#000000"
-        id="user"
-        role="img"
-        ariaLabel={ariaLabel}
-      />,
-    );
-    const IconUserComponent = wrapper.find('IconUser');
-    expect(IconUserComponent.props().ariaLabel).to.equal(ariaLabel);
-
-    const IconBaseComponent = wrapper.find('IconBase');
-    expect(IconBaseComponent.props().ariaLabel).to.equal(ariaLabel);
 
     wrapper.unmount();
   });
