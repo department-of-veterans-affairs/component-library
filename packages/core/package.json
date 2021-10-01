@@ -6,8 +6,8 @@
   "scripts": {
     "build": "rollup -c"
   },
-  "main": "main-bundle.js",
-  "module": "main.js",
+  "main": "dist/main-bundle.js",
+  "module": "src/main.js",
   "dependencies": {
     "@department-of-veterans-affairs/react-components": "workspace:*",
     "@department-of-veterans-affairs/web-components": "workspace:*"
