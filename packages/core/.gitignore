@@ -4,4 +4,4 @@
 tmp/
 
 
-main-bundle.js
+dist/*
