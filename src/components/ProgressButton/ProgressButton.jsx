@@ -13,25 +13,35 @@ class ProgressButton extends React.Component {
 
   render() {
     const beforeText = this.props.beforeText ? (
-      <span className="button-icon">{this.props.beforeText} </span>
+      <span className="button-icon" aria-hidden="true">
+        {this.props.beforeText}
+        &nbsp;
+      </span>
     ) : (
       ''
     );
     const afterText = this.props.afterText ? (
-      <span className="button-icon"> {this.props.afterText}</span>
+      <span className="button-icon" aria-hidden="true">
+        &nbsp;
+        {this.props.afterText}
+      </span>
     ) : (
       ''
     );
+
+    const className =
+      [this.props.buttonClass, this.props.disabled ? 'usa-button-disabled' : '']
+        .filter(Boolean)
+        .join(' ') || null;
 
     return (
       <button
         type={this.props.submitButton ? 'submit' : 'button'}
         disabled={this.props.disabled}
-        className={`${this.props.buttonClass} ${
-          this.props.disabled ? 'usa-button-disabled' : null
-        }`}
+        className={className}
         id={`${this.id}-continueButton`}
         onClick={this.props.onButtonClick}
+        aria-label={this.props.ariaLabel || null}
       >
         {beforeText}
         {this.props.buttonText}
@@ -71,6 +81,10 @@ ProgressButton.propTypes = {
    * Whether the button is disabled
    */
   disabled: PropTypes.bool,
+
+  // aria-label attribute; needed for the review & submit page "Update page"
+  // button
+  ariaLabel: PropTypes.string,
 
   /**
    * Whether the button is a submit button
