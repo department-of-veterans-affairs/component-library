@@ -16,5 +16,12 @@ export const Description = () => (
     <p>
       For examples of how this is used, see the other <code>Icon</code> stories.
     </p>
+    <p>
+      For more information, see the Design System{' '}
+      <a href="https://github.com/department-of-veterans-affairs/vets-design-system-documentation/blob/master/src/_design/icons.md">
+        icon documentation
+      </a>
+      .
+    </p>
   </div>
 );
