@@ -11,9 +11,5 @@
   "dependencies": {
     "@department-of-veterans-affairs/react-components": "workspace:*",
     "@department-of-veterans-affairs/web-components": "workspace:*"
-  },
-  "devDependencies": {
-    "@rollup/plugin-node-resolve": "^13.0.5",
-    "rollup": "^2.57.0"
   }
 }
