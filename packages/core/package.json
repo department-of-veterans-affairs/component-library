@@ -4,12 +4,16 @@
   "version": "3.3.0",
   "license": "MIT",
   "scripts": {
-    "build": "rollup -c"
+    "build": "webpack"
   },
   "main": "dist/main-bundle.js",
   "module": "src/main.js",
   "dependencies": {
     "@department-of-veterans-affairs/react-components": "workspace:*",
     "@department-of-veterans-affairs/web-components": "workspace:*"
+  },
+  "devDependencies": {
+    "webpack": "^5.56.0",
+    "webpack-cli": "^4.8.0"
   }
 }
