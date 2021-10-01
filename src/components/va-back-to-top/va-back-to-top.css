@@ -23,6 +23,8 @@ div {
   height: 1px;
   top: var(--reveal-breakpoint, 60rem);
   left: 0;
+  /* background: black; /1* For debugging in browser *1/ */
+  /* width: 100%;  /1* For debugging in browser *1/ */
 }
 
 button {

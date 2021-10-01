@@ -3,6 +3,16 @@ import classnames from 'classnames';
 
 import 'intersection-observer';
 
+/**
+ * This component has three main behaviors:
+ * 1. Going to the top of the page when the button is clicked
+ * 2. "Revealing" after scrolling down far enough
+ * 3. "Docking" when the dock becomes visible
+ *
+ * The span.reveal-point determines when the reveal happens.
+ * It is positioned on the page in an absolute manner, and the
+ * button will reveal when the span is above the viewport.
+ */
 @Component({
   tag: 'va-back-to-top',
   styleUrl: 'va-back-to-top.css',
@@ -53,6 +63,8 @@ export class VaBackToTop {
   }
 
   render() {
+    // This ensures that when the button is revealed but not docked,
+    // its width is the same as its parent.
     const undockedWidth = this.el.getBoundingClientRect().width;
     this.el.style.setProperty('--undocked-width', `${undockedWidth}px`);
 
