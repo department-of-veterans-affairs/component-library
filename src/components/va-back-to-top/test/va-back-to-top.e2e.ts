@@ -83,9 +83,16 @@ describe('va-back-to-top', () => {
   it('stays docked even with really long footers', async () => {
     const page = await pageSetup();
     const wrapper = await page.find('va-back-to-top >>> div');
-    const pastDock = 1300; // Placeholder section is 1000px tall & viewport is 200
+    const pastPlaceholder = 1000;
+    // Placeholder section is 1000px tall. Accounting for the header,
+    // 2000px should put us well past the dock
+    const pastDock = 500;
 
-    // Scroll past the dock
+    // Scroll to the dock to give IntersectionObserver time to trigger
+    await page.mouse.wheel({ deltaY: pastPlaceholder });
+    await page.waitForChanges();
+
+    // Scroll past dock
     await page.mouse.wheel({ deltaY: pastDock });
     await page.waitForChanges();
 
