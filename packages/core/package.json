@@ -13,6 +13,8 @@
     "@department-of-veterans-affairs/web-components": "workspace:*"
   },
   "devDependencies": {
+    "@babel/core": "^7.15.5",
+    "babel-loader": "^8.2.2",
     "webpack": "^5.56.0",
     "webpack-cli": "^4.8.0"
   }

@@ -74,7 +74,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/core@npm:7.15.5, @babel/core@npm:^7.1.0, @babel/core@npm:^7.12.1, @babel/core@npm:^7.12.10, @babel/core@npm:^7.12.13, @babel/core@npm:^7.12.17, @babel/core@npm:^7.12.3, @babel/core@npm:^7.7.5":
+"@babel/core@npm:7.15.5, @babel/core@npm:^7.1.0, @babel/core@npm:^7.12.1, @babel/core@npm:^7.12.10, @babel/core@npm:^7.12.13, @babel/core@npm:^7.12.17, @babel/core@npm:^7.12.3, @babel/core@npm:^7.15.5, @babel/core@npm:^7.7.5":
   version: 7.15.5
   resolution: "@babel/core@npm:7.15.5"
   dependencies:
@@ -1647,8 +1647,10 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@department-of-veterans-affairs/component-library@workspace:packages/core"
   dependencies:
+    "@babel/core": ^7.15.5
     "@department-of-veterans-affairs/react-components": "workspace:*"
     "@department-of-veterans-affairs/web-components": "workspace:*"
+    babel-loader: ^8.2.2
     webpack: ^5.56.0
     webpack-cli: ^4.8.0
   languageName: unknown
