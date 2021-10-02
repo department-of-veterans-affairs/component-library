@@ -121,8 +121,9 @@ describe('va-back-to-top', () => {
   it('passes an axe check when revealed', async () => {
     const page = await pageSetup();
     const button = await page.find('va-back-to-top >>> button');
+    const pastRevealPoint = 300;
 
-    await page.mouse.wheel({ deltaY: 300 });
+    await page.mouse.wheel({ deltaY: pastRevealPoint });
     await page.waitForChanges();
 
     expect(button).toHaveClass('reveal');
@@ -132,10 +133,13 @@ describe('va-back-to-top', () => {
 
   it('passes an axe check when docked', async () => {
     const page = await pageSetup();
+    const wrapper = await page.find('va-back-to-top >>> div');
+    const pastPlaceholder = 1000;
 
-    await page.mouse.wheel({ deltaY: 1400 });
+    await page.mouse.wheel({ deltaY: pastPlaceholder });
     await page.waitForChanges();
 
+    expect(wrapper).toHaveClass('docked');
     // The color contrast error appears to be a false negative
     await axeCheck(page, ['color-contrast']);
   });
