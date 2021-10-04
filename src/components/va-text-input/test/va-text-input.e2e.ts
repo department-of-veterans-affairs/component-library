@@ -177,18 +177,21 @@ describe('va-text-input', () => {
     );
   });
 
-  it('allows manually setting the inputmode attribute', async () => {
-    const page = await newE2EPage();
-    await page.setContent('<va-text-input inputmode="numeric" />');
-
-    // Level-setting expectations
-    const inputEl = await page.find('va-text-input >>> input');
-    expect(inputEl.getAttribute('inputmode')).toBe('numeric');
-
-    // Test the functionality
-    await inputEl.press('2');
-    await inputEl.press('0');
-    expect(await inputEl.getProperty('value')).toBe('20');
+  it('allows manually setting the type attribute', async () => {
+    const allowedInputTypes = [
+      'email',
+      'number',
+      'search',
+      'tel',
+      'text',
+      'url'
+    ];
+    for (const inputType of allowedInputTypes) {
+      const page = await newE2EPage();
+      await page.setContent(`<va-text-input type="${inputType}" />`);
+      const inputEl = await page.find('va-text-input >>> input');
+      expect(inputEl.getAttribute('type')).toBe(inputType);
+    }
   });
 
   it('defaults to text when the type attribute is invalid or unsupported', async () => {
@@ -198,26 +201,25 @@ describe('va-text-input', () => {
     // Level-setting expectations
     const inputEl = await page.find('va-text-input >>> input');
     expect(inputEl.getAttribute('type')).toBe('text');
-
-    // Test the functionality
-    await inputEl.press('a');
-    await inputEl.press('b');
-    await inputEl.press('c');
-    expect(await inputEl.getProperty('value')).toBe('abc');
   });
 
-  it('allows setting supported type attributes', async () => {
-    const page = await newE2EPage();
-    await page.setContent('<va-text-input type="tel" />');
-
-    // Level-setting expectations
-    const inputEl = await page.find('va-text-input >>> input');
-    expect(inputEl.getAttribute('type')).toBe('tel');
-
-    // Test the functionality
-    await inputEl.press('a');
-    await inputEl.press('b');
-    await inputEl.press('c');
-    expect(await inputEl.getProperty('value')).toBe('abc');
+  it('allows manually setting the inputmode attribute', async () => {
+    const inputModes = [
+      'decimal',
+      'email',
+      'none',
+      'numeric',
+      'search',
+      'tel',
+      'text',
+      'url',
+    ];
+    for (const inputMode of inputModes) {
+      const page = await newE2EPage();
+      await page.setContent(`<va-text-input inputmode="${inputMode}" />`);
+      const inputEl = await page.find('va-text-input >>> input');
+      expect(inputEl.getAttribute('inputmode')).toBe(inputMode);
+    }
   });
+
 });

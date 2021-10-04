@@ -17,6 +17,11 @@ export class VaTextInput {
   @Element() el: HTMLElement;
 
   /**
+   * Input types we will allow to be specified with the "type" prop.
+   */
+  allowedInputTypes = ['email', 'number', 'search', 'tel', 'text', 'url'];
+
+  /**
    * The label for the text input.
    */
   @Prop() label: string | HTMLElement;
@@ -135,7 +140,7 @@ export class VaTextInput {
       this.inputmode :
       null; // Null so we don't add the attribute if we have an empty string
     const type =
-      ['email', 'number', 'search', 'tel', 'text', 'url'].includes(this.type) ?
+      this.allowedInputTypes.includes(this.type) ?
       this.type :
       'text';
 
