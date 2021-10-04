@@ -44,7 +44,7 @@ export class VaTextInput {
   /**
    * The type attribute.
    */
-  @Prop({ mutable: true }) type?: string = 'text';
+  @Prop() type?: string = 'text';
 
   /**
    * The maximum number of characters allowed in the input.

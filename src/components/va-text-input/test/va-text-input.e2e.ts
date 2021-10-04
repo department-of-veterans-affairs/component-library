@@ -11,7 +11,7 @@ describe('va-text-input', () => {
     expect(element).toEqualHtml(`
       <va-text-input class="hydrated">
         <mock:shadow-root>
-          <input id="inputField" type="text">
+          <input id="inputField" type="text" />
         </mock:shadow-root>
       </va-text-input>
     `);
@@ -64,7 +64,7 @@ describe('va-text-input', () => {
       <va-text-input class="hydrated" label="This is a field" required="">
         <mock:shadow-root>
           <label for="inputField">This is a field <span class="required">(*Required)</span></label>
-          <input id="inputField" type="text">
+          <input id="inputField" type="text" />
         </mock:shadow-root>
       </va-text-input>
     `);
