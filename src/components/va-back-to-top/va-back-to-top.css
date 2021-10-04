@@ -85,6 +85,8 @@ i::before {
   button {
     padding: 0 1.6rem;
     width: auto;
+    border-bottom-right-radius: 5px;
+    border-top-right-radius: 5px;
   }
 
   button span {
