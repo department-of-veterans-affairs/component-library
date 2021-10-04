@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { uniqueId } from 'lodash';
+import classNames from 'classnames';
 
 /**
  * A component for the continue button to navigate through panels of questions.
@@ -12,6 +13,7 @@ class ProgressButton extends React.Component {
   }
 
   render() {
+    const { ariaLabel = null, ariaDescribedby = null, disabled } = this.props;
     const beforeText = this.props.beforeText ? (
       <span className="button-icon" aria-hidden="true">
         {this.props.beforeText}
@@ -29,20 +31,17 @@ class ProgressButton extends React.Component {
       ''
     );
 
-    const className =
-      [this.props.buttonClass, this.props.disabled ? 'usa-button-disabled' : '']
-        .filter(Boolean)
-        .join(' ') || null;
-
     return (
       <button
         type={this.props.submitButton ? 'submit' : 'button'}
-        disabled={this.props.disabled}
-        className={className}
+        disabled={disabled}
+        className={classNames(this.props.buttonClass, {
+          'usa-button-disabled': disabled,
+        })}
         id={`${this.id}-continueButton`}
         onClick={this.props.onButtonClick}
-        aria-label={this.props.ariaLabel || null}
-        aria-describedby={this.props.ariaDescribedby || null}
+        aria-label={ariaLabel}
+        aria-describedby={ariaDescribedby}
       >
         {beforeText}
         {this.props.buttonText}
