@@ -11,7 +11,7 @@ describe('va-text-input', () => {
     expect(element).toEqualHtml(`
       <va-text-input class="hydrated">
         <mock:shadow-root>
-          <input id="inputField" inputmode="" pattern="" type="text">
+          <input id="inputField" type="text">
         </mock:shadow-root>
       </va-text-input>
     `);
@@ -64,7 +64,7 @@ describe('va-text-input', () => {
       <va-text-input class="hydrated" label="This is a field" required="">
         <mock:shadow-root>
           <label for="inputField">This is a field <span class="required">(*Required)</span></label>
-          <input id="inputField" inputmode="" pattern="" type="text">
+          <input id="inputField" type="text">
         </mock:shadow-root>
       </va-text-input>
     `);
@@ -177,46 +177,47 @@ describe('va-text-input', () => {
     );
   });
 
-  it('adds a field optimized for numeric input', async () => {
+  it('allows manually setting the inputmode attribute', async () => {
     const page = await newE2EPage();
-    await page.setContent('<va-text-input numeric-input />');
+    await page.setContent('<va-text-input inputmode="numeric" />');
 
     // Level-setting expectations
     const inputEl = await page.find('va-text-input >>> input');
     expect(inputEl.getAttribute('inputmode')).toBe('numeric');
-    expect(inputEl.getAttribute('pattern')).toBe('[0-9]*');
 
     // Test the functionality
     await inputEl.press('2');
-    expect(await inputEl.getProperty('value')).toBe('2');
-  });
-
-  it('allows manually setting the inputmode attribute', async () => {
-    const page = await newE2EPage();
-    await page.setContent('<va-text-input inputmode="decimal" />');
-
-    // Level-setting expectations
-    const inputEl = await page.find('va-text-input >>> input');
-    expect(inputEl.getAttribute('inputmode')).toBe('decimal');
-
-    // Test the functionality
-    await inputEl.press('2');
-    await inputEl.press('.');
     await inputEl.press('0');
-    expect(await inputEl.getProperty('value')).toBe('2.0');
+    expect(await inputEl.getProperty('value')).toBe('20');
   });
 
-  it('allows manually setting the pattern attribute', async () => {
+  it('defaults to text when the type attribute is invalid or unsupported', async () => {
     const page = await newE2EPage();
-    await page.setContent('<va-text-input pattern="[a-z]*" />');
+    await page.setContent('<va-text-input type="textual" />');
 
     // Level-setting expectations
     const inputEl = await page.find('va-text-input >>> input');
-    expect(inputEl.getAttribute('pattern')).toBe('[a-z]*');
+    expect(inputEl.getAttribute('type')).toBe('text');
 
     // Test the functionality
-    await inputEl.press('v');
     await inputEl.press('a');
-    expect(await inputEl.getProperty('value')).toBe('va');
+    await inputEl.press('b');
+    await inputEl.press('c');
+    expect(await inputEl.getProperty('value')).toBe('abc');
+  });
+
+  it('allows setting supported type attributes', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-text-input type="tel" />');
+
+    // Level-setting expectations
+    const inputEl = await page.find('va-text-input >>> input');
+    expect(inputEl.getAttribute('type')).toBe('tel');
+
+    // Test the functionality
+    await inputEl.press('a');
+    await inputEl.press('b');
+    await inputEl.press('c');
+    expect(await inputEl.getProperty('value')).toBe('abc');
   });
 });

@@ -220,14 +220,6 @@ export namespace Components {
          */
         "name"?: string;
         /**
-          * Optimize the field for numeric input.
-         */
-        "numericInput"?: boolean;
-        /**
-          * The pattern attribute.
-         */
-        "pattern"?: string;
-        /**
           * Placeholder text to show in the input field.
          */
         "placeholder"?: string;
@@ -235,6 +227,10 @@ export namespace Components {
           * Set the input to required and render the (Required) text.
          */
         "required"?: boolean;
+        /**
+          * The type attribute.
+         */
+        "type"?: string;
         "value"?: string;
     }
 }
@@ -563,10 +559,6 @@ declare namespace LocalJSX {
          */
         "name"?: string;
         /**
-          * Optimize the field for numeric input.
-         */
-        "numericInput"?: boolean;
-        /**
           * The event used to track usage of the component. This is emitted when the input is blurred and enableAnalytics is true.
          */
         "onComponent-library-analytics"?: (event: CustomEvent<any>) => void;
@@ -579,10 +571,6 @@ declare namespace LocalJSX {
          */
         "onVaChange"?: (event: CustomEvent<any>) => void;
         /**
-          * The pattern attribute.
-         */
-        "pattern"?: string;
-        /**
           * Placeholder text to show in the input field.
          */
         "placeholder"?: string;
@@ -590,6 +578,10 @@ declare namespace LocalJSX {
           * Set the input to required and render the (Required) text.
          */
         "required"?: boolean;
+        /**
+          * The type attribute.
+         */
+        "type"?: string;
         "value"?: string;
     }
     interface IntrinsicElements {

@@ -27,11 +27,6 @@ export class VaTextInput {
   @Prop() error?: string | HTMLElement;
 
   /**
-   * Optimize the field for numeric input.
-   */
-  @Prop() numericInput?: boolean;
-
-  /**
    * Set the input to required and render the (Required) text.
    */
   @Prop() required?: boolean;
@@ -47,9 +42,9 @@ export class VaTextInput {
   @Prop() inputmode?: string = '';
 
   /**
-   * The pattern attribute.
+   * The type attribute.
    */
-  @Prop() pattern?: string = '';
+  @Prop({ mutable: true }) type?: string = 'text';
 
   /**
    * The maximum number of characters allowed in the input.
@@ -135,6 +130,15 @@ export class VaTextInput {
     const describedBy =
       `${this.ariaDescribedby} ${this.error ? 'error-message' : ''}`.trim() ||
       null; // Null so we don't add the attribute if we have an empty string
+    const inputMode =
+      this.inputmode ?
+      this.inputmode :
+      null; // Null so we don't add the attribute if we have an empty string
+    const type =
+      ['email', 'number', 'search', 'tel', 'text', 'url'].includes(this.type) ?
+      this.type :
+      'text';
+
     return (
       <Host>
         {this.label && (
@@ -146,13 +150,12 @@ export class VaTextInput {
         {this.error && <span id="error-message">{this.error}</span>}
         <input
           id="inputField"
-          type="text"
+          type={type}
           value={this.value}
           onInput={this.handleChange}
           onBlur={this.handleBlur}
           aria-describedby={describedBy}
-          inputmode={this.numericInput ? "numeric" : this.inputmode}
-          pattern={this.numericInput ? "[0-9]*" : this.pattern}
+          inputmode={inputMode}
           placeholder={this.placeholder}
           maxlength={this.maxlength}
         />
