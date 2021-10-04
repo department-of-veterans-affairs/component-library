@@ -21,7 +21,7 @@ import 'intersection-observer';
 export class VaBackToTop {
   revealPixel!: HTMLSpanElement;
 
-  @State() hasHitBreakpoint = false;
+  @State() revealed = false;
   @State() isDocked = false;
 
   @Element() el: HTMLElement;
@@ -41,7 +41,7 @@ export class VaBackToTop {
 
     // Setup observer to handle reveal behavior
     const revealObserver = new IntersectionObserver(entries => {
-      this.hasHitBreakpoint = entries[0].boundingClientRect.y < 0;
+      this.revealed = entries[0].boundingClientRect.y < 0;
     });
     revealObserver.observe(this.revealPixel);
   }
@@ -78,7 +78,7 @@ export class VaBackToTop {
         <div class={classnames({ docked: this.isDocked })}>
           <button
             onClick={this.navigateToTop.bind(this)}
-            class={classnames({ reveal: this.hasHitBreakpoint })}
+            class={classnames({ reveal: this.revealed })}
           >
             <i aria-hidden="true" role="img"></i>
             <span>Back to top</span>
