@@ -1,4 +1,5 @@
 import {
+  Build,
   Component,
   Element,
   Prop,
@@ -110,6 +111,18 @@ export class VaTextInput {
   })
   componentLibraryAnalytics: EventEmitter;
 
+  private getInputType() {
+    if (!this.allowedInputTypes.includes(this.type)) {
+      if (Build.isDev) {
+        console.error(`The type ${this.type} is invalid or unsupported!`);
+      }
+
+      return 'text';
+    }
+
+    return this.type;
+  };
+
   private handleChange = (e: Event) => {
     const target = e.target as HTMLInputElement;
     this.value = target.value;
@@ -139,10 +152,7 @@ export class VaTextInput {
       this.inputmode ?
       this.inputmode :
       null; // Null so we don't add the attribute if we have an empty string
-    const type =
-      this.allowedInputTypes.includes(this.type) ?
-      this.type :
-      'text';
+    const type = this.getInputType();
 
     return (
       <Host>
