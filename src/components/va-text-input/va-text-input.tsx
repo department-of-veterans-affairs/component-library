@@ -113,7 +113,7 @@ export class VaTextInput {
 
   private getInputType() {
     if (!this.allowedInputTypes.includes(this.type)) {
-      consoleDevError(`The type ${this.type} is invalid or unsupported!`);
+      consoleDevError(`The input type "${this.type}" is invalid or unsupported!`);
       return 'text';
     }
 
