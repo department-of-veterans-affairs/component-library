@@ -1,5 +1,4 @@
 import {
-  Build,
   Component,
   Element,
   Prop,
@@ -8,6 +7,7 @@ import {
   Event,
   EventEmitter,
 } from '@stencil/core';
+import { consoleDevError } from '../../utils/utils';
 
 @Component({
   tag: 'va-text-input',
@@ -113,10 +113,7 @@ export class VaTextInput {
 
   private getInputType() {
     if (!this.allowedInputTypes.includes(this.type)) {
-      if (Build.isDev && !Build.isTesting) {
-        console.error(`The type ${this.type} is invalid or unsupported!`);
-      }
-
+      consoleDevError(`The type ${this.type} is invalid or unsupported!`);
       return 'text';
     }
 
