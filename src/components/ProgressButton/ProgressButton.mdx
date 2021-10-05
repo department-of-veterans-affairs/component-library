@@ -18,7 +18,10 @@ import ProgressButton from '@department-of-veterans-affairs/component-library/Pr
   afterText='»'
   disabled={false}
   submitButton={true}
+  ariaLabel="Click to start"
+  ariaDescribedby="additional-content"
 />
+<span id="additional-content">Additional content</span>
 ```
 
 ### Rendered Component
@@ -31,5 +34,8 @@ import ProgressButton from '@department-of-veterans-affairs/component-library/Pr
     afterText='»'
     disabled={false}
     submitButton={true}
+    ariaLabel='Click to start'
+    ariaDescribedby='additional-content'
   />
+  <span id="additional-content">Additional content</span>
 </div>

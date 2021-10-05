@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { uniqueId } from 'lodash';
+import classNames from 'classnames';
 
 /**
  * A component for the continue button to navigate through panels of questions.
@@ -12,13 +13,20 @@ class ProgressButton extends React.Component {
   }
 
   render() {
+    const { ariaLabel = null, ariaDescribedby = null, disabled } = this.props;
     const beforeText = this.props.beforeText ? (
-      <span className="button-icon">{this.props.beforeText} </span>
+      <span className="button-icon" aria-hidden="true">
+        {this.props.beforeText}
+        &nbsp;
+      </span>
     ) : (
       ''
     );
     const afterText = this.props.afterText ? (
-      <span className="button-icon"> {this.props.afterText}</span>
+      <span className="button-icon" aria-hidden="true">
+        &nbsp;
+        {this.props.afterText}
+      </span>
     ) : (
       ''
     );
@@ -26,12 +34,14 @@ class ProgressButton extends React.Component {
     return (
       <button
         type={this.props.submitButton ? 'submit' : 'button'}
-        disabled={this.props.disabled}
-        className={`${this.props.buttonClass} ${
-          this.props.disabled ? 'usa-button-disabled' : null
-        }`}
+        disabled={disabled}
+        className={classNames(this.props.buttonClass, {
+          'usa-button-disabled': disabled,
+        })}
         id={`${this.id}-continueButton`}
         onClick={this.props.onButtonClick}
+        aria-label={ariaLabel}
+        aria-describedby={ariaDescribedby}
       >
         {beforeText}
         {this.props.buttonText}
@@ -71,6 +81,16 @@ ProgressButton.propTypes = {
    * Whether the button is disabled
    */
   disabled: PropTypes.bool,
+
+  /**
+   * Text read by a screenreader instead of content within the button
+   */
+  ariaLabel: PropTypes.string,
+
+  /*
+   * Element ID containing additional content read by a screenreader
+   */
+  ariaDescribedby: PropTypes.string,
 
   /**
    * Whether the button is a submit button
