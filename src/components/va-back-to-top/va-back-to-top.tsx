@@ -10,8 +10,8 @@ import 'intersection-observer';
  * 3. "Docking" when the dock becomes visible
  *
  * The span.reveal-point determines when the reveal happens.
- * It is positioned on the page in an absolute manner, and the
- * button will reveal when the span is above the viewport.
+ * It uses `position: absolute` so the button will reveal when
+ * the `span` is above the viewport.
  */
 @Component({
   tag: 'va-back-to-top',
