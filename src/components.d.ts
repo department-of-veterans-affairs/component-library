@@ -188,7 +188,7 @@ export namespace Components {
     }
     interface VaTextInput {
         /**
-          * The aria-describedby attribute for the <intput> in the shadow DOM.
+          * The aria-describedby attribute for the <input> in the shadow DOM.
          */
         "ariaDescribedby"?: string;
         /**
@@ -203,6 +203,10 @@ export namespace Components {
           * The error message to render.
          */
         "error"?: string | HTMLElement;
+        /**
+          * The inputmode attribute.
+         */
+        "inputmode"?: string;
         /**
           * The label for the text input.
          */
@@ -223,6 +227,10 @@ export namespace Components {
           * Set the input to required and render the (Required) text.
          */
         "required"?: boolean;
+        /**
+          * The type attribute.
+         */
+        "type"?: string;
         "value"?: string;
     }
 }
@@ -519,7 +527,7 @@ declare namespace LocalJSX {
     }
     interface VaTextInput {
         /**
-          * The aria-describedby attribute for the <intput> in the shadow DOM.
+          * The aria-describedby attribute for the <input> in the shadow DOM.
          */
         "ariaDescribedby"?: string;
         /**
@@ -534,6 +542,10 @@ declare namespace LocalJSX {
           * The error message to render.
          */
         "error"?: string | HTMLElement;
+        /**
+          * The inputmode attribute.
+         */
+        "inputmode"?: string;
         /**
           * The label for the text input.
          */
@@ -566,6 +578,10 @@ declare namespace LocalJSX {
           * Set the input to required and render the (Required) text.
          */
         "required"?: boolean;
+        /**
+          * The type attribute.
+         */
+        "type"?: string;
         "value"?: string;
     }
     interface IntrinsicElements {

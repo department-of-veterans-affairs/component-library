@@ -160,7 +160,7 @@ describe('va-text-input', () => {
     );
   });
 
-  it('adds adds a character limit with descriptive text', async () => {
+  it('adds a character limit with descriptive text', async () => {
     const page = await newE2EPage();
     await page.setContent('<va-text-input maxlength="3" value="22"/>');
 
@@ -176,4 +176,50 @@ describe('va-text-input', () => {
       '(Max. 3 characters)',
     );
   });
+
+  it('allows manually setting the type attribute', async () => {
+    const allowedInputTypes = [
+      'email',
+      'number',
+      'search',
+      'tel',
+      'text',
+      'url'
+    ];
+    for (const inputType of allowedInputTypes) {
+      const page = await newE2EPage();
+      await page.setContent(`<va-text-input type="${inputType}" />`);
+      const inputEl = await page.find('va-text-input >>> input');
+      expect(inputEl.getAttribute('type')).toBe(inputType);
+    }
+  });
+
+  it('defaults to text when the type attribute is invalid or unsupported', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-text-input type="textual" />');
+
+    // Level-setting expectations
+    const inputEl = await page.find('va-text-input >>> input');
+    expect(inputEl.getAttribute('type')).toBe('text');
+  });
+
+  it('allows manually setting the inputmode attribute', async () => {
+    const inputModes = [
+      'decimal',
+      'email',
+      'none',
+      'numeric',
+      'search',
+      'tel',
+      'text',
+      'url',
+    ];
+    for (const inputMode of inputModes) {
+      const page = await newE2EPage();
+      await page.setContent(`<va-text-input inputmode="${inputMode}" />`);
+      const inputEl = await page.find('va-text-input >>> input');
+      expect(inputEl.getAttribute('inputmode')).toBe(inputMode);
+    }
+  });
+
 });
