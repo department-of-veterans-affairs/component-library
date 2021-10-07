@@ -52,6 +52,18 @@ button:not(.reveal) {
   animation: slideOutDown 0.25s;
 }
 
+@media (prefers-reduced-motion) {
+  button {
+    transition: none;
+  }
+  button.reveal {
+    animation: none;
+  }
+  button:not(.reveal) {
+    animation: none;
+  }
+}
+
 button span {
   display: none;
 }
