@@ -77,6 +77,7 @@ export class VaBackToTop {
 
         <div class={classnames({ docked: this.isDocked })}>
           <button
+            type="button"
             onClick={this.navigateToTop.bind(this)}
             class={classnames({ reveal: this.revealed })}
           >
