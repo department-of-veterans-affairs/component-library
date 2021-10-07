@@ -75,12 +75,10 @@ export class VaBackToTop {
           ref={el => (this.revealPixel = el as HTMLSpanElement)}
         ></span>
 
-        <div class={classnames({ docked: this.isDocked })}>
-          <button
-            type="button"
-            onClick={this.navigateToTop.bind(this)}
-            class={classnames({ reveal: this.revealed })}
-          >
+        <div
+          class={classnames({ docked: this.isDocked, reveal: this.revealed })}
+        >
+          <button type="button" onClick={this.navigateToTop.bind(this)}>
             <i aria-hidden="true" role="img"></i>
             <span>Back to top</span>
           </button>

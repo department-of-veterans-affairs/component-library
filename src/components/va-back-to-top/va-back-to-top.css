@@ -43,12 +43,12 @@ button {
 button:hover {
   background-color: var(--color-black);
 }
-button.reveal {
+div.reveal button {
   pointer-events: auto;
   opacity: 1;
   animation: slideInUp 0.25s;
 }
-button:not(.reveal) {
+div:not(.reveal) button {
   animation: slideOutDown 0.25s;
 }
 
@@ -56,10 +56,10 @@ button:not(.reveal) {
   button {
     transition: none;
   }
-  button.reveal {
+  div.reveal button {
     animation: none;
   }
-  button:not(.reveal) {
+  div:not(.reveal) button {
     animation: none;
   }
 }
@@ -75,6 +75,9 @@ div.docked {
 }
 div:not(.docked) {
   max-width: var(--undocked-width);
+}
+div:not(.docked):not(.reveal) {
+  position: relative;
 }
 
 div.docked button {
