@@ -33,6 +33,7 @@ const Template = () => {
           display: 'flex',
           justifyContent: 'center',
           background: '#112E51',
+          color: 'white',
         }}
       >
         The footer
