@@ -1596,7 +1596,7 @@
   resolved "https://registry.yarnpkg.com/@sinonjs/text-encoding/-/text-encoding-0.7.1.tgz#8da5c6530915653f3a1f38fd5f101d8c3f8079c5"
   integrity sha512-+iTbntw2IZPb/anVDbypzfQa+ay64MW0Zo8aJ8gZPWMMK6/OubMVb6lUPMagqjOPnmtauXnFCACVl3O7ogjeqQ==
 
-"@stencil/core@^2.0.1":
+"@stencil/core@^2.8.1":
   version "2.8.1"
   resolved "https://registry.yarnpkg.com/@stencil/core/-/core-2.8.1.tgz#21b15c115d9a5e2f56379774fcbd9bc947bf336f"
   integrity sha512-iv9J6oLO/lv7/aO45M05yw3pp1J7olY400vlOZgdMVs3s5zHfalY1ZPYM0KyqU4+7DZuadKYbd0aQZ/g2PInZw==
@@ -13041,9 +13041,9 @@ watchpack@^1.7.4:
     chokidar "^3.4.1"
     watchpack-chokidar2 "^2.0.1"
 
-"web-components@https://github.com/department-of-veterans-affairs/component-library.git#wc-btt":
-  version "0.11.2"
-  resolved "https://github.com/department-of-veterans-affairs/component-library.git#ca6e72116949a61a028bc9dd608f496bb05c5986"
+"web-components@https://github.com/department-of-veterans-affairs/component-library.git#wc-v0.13.0":
+  version "0.13.0"
+  resolved "https://github.com/department-of-veterans-affairs/component-library.git#076765c81554032c35ef6af45a25e19771e883a1"
   dependencies:
     "@stencil/core" "^2.8.1"
     "@stencil/postcss" "^2.0.0"
