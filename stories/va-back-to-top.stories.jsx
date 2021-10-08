@@ -32,6 +32,7 @@ const Template = () => {
           height: '500px',
           display: 'flex',
           justifyContent: 'center',
+          background: '#112E51',
         }}
       >
         The footer
