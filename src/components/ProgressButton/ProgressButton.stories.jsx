@@ -27,3 +27,9 @@ Disabled.args = { ...defaultArgs, disabled: true };
 
 export const SubmitButton = Template.bind({});
 SubmitButton.args = { ...defaultArgs, submitButton: true };
+
+export const AriaLabel = Template.bind({});
+AriaLabel.args = { ...defaultArgs, ariaLabel: 'click to submit' };
+
+export const AriaDescribedby = Template.bind({});
+AriaDescribedby.args = { ...defaultArgs, ariaDescribedby: 'some-existing-id' };

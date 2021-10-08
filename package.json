@@ -1,6 +1,6 @@
 {
   "name": "@department-of-veterans-affairs/component-library",
-  "version": "3.1.1",
+  "version": "3.2.2",
   "description": "VA.gov component library in React",
   "keywords": [
     "react",
@@ -39,6 +39,7 @@
     "date-fns-tz": "^1.1.1",
     "lodash": "^4.17.15",
     "moment": "^2.23.0",
+    "number-to-words": "^1.2.4",
     "prop-types": "^15.6.2",
     "react-focus-lock": "^2.5.1",
     "react-focus-on": "^3.5.1",
@@ -105,6 +106,7 @@
     "trim-newlines": "^4.0.2"
   },
   "peerDependencies": {
-    "react": "^16.13.1"
+    "react": "^16.13.1",
+    "web-components": "https://github.com/department-of-veterans-affairs/component-library.git#wc-v0.11.2"
   }
 }

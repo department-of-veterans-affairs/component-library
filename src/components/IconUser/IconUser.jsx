@@ -4,7 +4,7 @@ import IconBase from '../IconBase/IconBase';
 
 class IconUser extends React.Component {
   render() {
-    const { color, cssClass, id, role } = this.props;
+    const { color, cssClass, id, role, ariaLabel } = this.props;
 
     return (
       <IconBase
@@ -13,6 +13,7 @@ class IconUser extends React.Component {
         id={id}
         pointerEvents="none"
         role={role}
+        ariaLabel={ariaLabel}
         viewBox="308 246 57 63"
         width="57"
       >
@@ -66,6 +67,16 @@ IconUser.propTypes = {
   color: PropTypes.string /* Should be a CSS color */,
   cssClass: PropTypes.string,
   id: PropTypes.string,
+
+  /**
+   * `role` attribute for the `<svg>` element
+   */
+  role: PropTypes.string,
+
+  /**
+   * `aria-label` attribute for the `<svg>` element
+   */
+  ariaLabel: PropTypes.string,
 };
 
 export default IconUser;

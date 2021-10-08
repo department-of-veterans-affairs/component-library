@@ -1,9 +1,8 @@
 // Node modules.
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import classnames from 'classnames';
 // Relative imports.
-import AlertBox from '../AlertBox/AlertBox';
+import { VaAlert } from 'web-components/react-bindings';
 
 const DISMISSED_BANNERS_KEY = 'DISMISSED_BANNERS';
 
@@ -132,36 +131,17 @@ export class Banner extends Component {
     const onCloseAlert = showClose && storage ? this.dismiss : undefined;
 
     return (
-      <div
-        className={classnames(
-          'usa-alert-full-width',
-          'vads-u-border-top--5px',
-          'medium-screen:vads-u-border-top--10px',
-          'vads-c-emergency-banner',
-          {
-            // 'info', primary-alt border, black circled 'i'
-            'vads-u-border-color--primary-alt': type === 'info' || !type,
-            // 'error', Red border, red circled exclamation
-            'vads-u-border-color--secondary': type === 'error',
-            // 'success', Green border, green checkmark
-            // 'continue', Green border, green lock
-            'vads-u-border-color--green-light':
-              type === 'success' || type === 'continue',
-            // 'warning', Yellow border, black triangle exclamation
-            'vads-u-border-color--warning-message': type === 'warning',
-          },
-        )}
-        data-e2e-id="emergency-banner"
-        onClick={this.onClick}
-      >
-        <AlertBox
-          // eslint-disable-next-line react/no-danger
-          content={<div dangerouslySetInnerHTML={{ __html: content }} />}
-          headline={title}
-          isVisible
-          onCloseAlert={onCloseAlert}
+      <div data-e2e-id="emergency-banner" onClick={this.onClick}>
+        <VaAlert
+          visible
+          full-width
+          closeable={showClose}
+          onClose={onCloseAlert}
           status={type}
-        />
+        >
+          <h3 slot="headline">{title}</h3>
+          <div dangerouslySetInnerHTML={{ __html: content }} />
+        </VaAlert>
       </div>
     );
   }
