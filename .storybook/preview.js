@@ -4,7 +4,11 @@ import '@department-of-veterans-affairs/formation/dist/formation';
 import { withHTML } from '@whitespace/storybook-addon-html/react';
 
 import 'web-components/dist/component-library/component-library.css';
-import { defineCustomElements } from 'web-components/loader';
+import { applyPolyfills, defineCustomElements } from 'web-components/loader';
+
+applyPolyfills().then(() => {
+  defineCustomElements();
+});
 
 // This CustomEvent polyfill is for IE11:
 // https://developer.mozilla.org/en-US/docs/Web/API/CustomEvent/CustomEvent#polyfill
