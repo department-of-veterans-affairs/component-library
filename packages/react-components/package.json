@@ -1,5 +1,5 @@
 {
-  "name": "react-components",
+  "name": "@department-of-veterans-affairs/react-components",
   "version": "3.2.2",
   "description": "VA.gov component library in React",
   "keywords": [
@@ -61,6 +61,7 @@
     "@babel/preset-env": "^7.12.10",
     "@babel/preset-react": "^7.14.5",
     "@department-of-veterans-affairs/formation": "^6.17.3",
+    "@department-of-veterans-affairs/web-components": "workspace:packages/web-components",
     "@storybook/addon-a11y": "6.1.21",
     "@storybook/addon-actions": "6.1.21",
     "@storybook/addon-essentials": "6.1.21",
@@ -106,8 +107,7 @@
     "rimraf": "^3.0.2",
     "sass-loader": "^8.0.2",
     "sinon": "^9.2.2",
-    "uswds": "1.6.10",
-    "web-components": "workspace:packages/web-components"
+    "uswds": "1.6.10"
   },
   "resolutions": {
     "trim-newlines": "^4.0.2"
