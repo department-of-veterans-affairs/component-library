@@ -1661,7 +1661,6 @@ __metadata:
     "@babel/preset-env": ^7.12.10
     "@babel/preset-react": ^7.14.5
     "@department-of-veterans-affairs/formation": ^6.17.3
-    "@department-of-veterans-affairs/web-components": "workspace:*"
     "@storybook/addon-a11y": 6.1.21
     "@storybook/addon-actions": 6.1.21
     "@storybook/addon-essentials": 6.1.21
@@ -1742,7 +1741,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@department-of-veterans-affairs/web-components@workspace:*, @department-of-veterans-affairs/web-components@workspace:packages/web-components":
+"@department-of-veterans-affairs/web-components@workspace:packages/web-components":
   version: 0.0.0-use.local
   resolution: "@department-of-veterans-affairs/web-components@workspace:packages/web-components"
   dependencies:

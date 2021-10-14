@@ -2133,7 +2133,6 @@ __metadata:
     sass-loader: ^8.0.2
     sinon: ^9.2.2
     uswds: 1.6.10
-    web-components: "https://github.com/department-of-veterans-affairs/component-library.git#wc-v0.13.0"
   peerDependencies:
     react: ^16.13.1
     web-components: "*"
@@ -2612,26 +2611,6 @@ __metadata:
   version: 0.7.1
   resolution: "@sinonjs/text-encoding@npm:0.7.1"
   checksum: 130de0bb568c5f8a611ec21d1a4e3f80ab0c5ec333010f49cfc1adc5cba6d8808699c8a587a46b0f0b016a1f4c1389bc96141e773e8460fcbb441875b2e91ba7
-  languageName: node
-  linkType: hard
-
-"@stencil/core@npm:^2.8.1":
-  version: 2.8.1
-  resolution: "@stencil/core@npm:2.8.1"
-  bin:
-    stencil: bin/stencil
-  checksum: 0a75e65ea8a2b3f39c6a0981a5e82e9fb21499a706cf4bc7f63fcb11ede22ae9de2a1c63450d1ede5a9957bcadada6a97ae3be9f5d9d384e4f715f47b9bfe69a
-  languageName: node
-  linkType: hard
-
-"@stencil/postcss@npm:^2.0.0":
-  version: 2.0.0
-  resolution: "@stencil/postcss@npm:2.0.0"
-  dependencies:
-    postcss: ~8.2.1
-  peerDependencies:
-    "@stencil/core": ">=2.3.0"
-  checksum: 7837427e686d13b3a440d2ae60440774c69e9c09312bd0fb095e7662bd66f9d3e79587a90e15a4bc265e6358f041a8745f12b27d0ddf530d01735fba6b541a55
   languageName: node
   linkType: hard
 
@@ -6236,13 +6215,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"classnames@npm:^2.3.1":
-  version: 2.3.1
-  resolution: "classnames@npm:2.3.1"
-  checksum: 14db8889d56c267a591f08b0834989fe542d47fac659af5a539e110cc4266694e8de86e4e3bbd271157dbd831361310a8293e0167141e80b0f03a0f175c80960
-  languageName: node
-  linkType: hard
-
 "clean-css@npm:^4.2.3":
   version: 4.2.3
   resolution: "clean-css@npm:4.2.3"
@@ -6997,13 +6969,6 @@ __metadata:
   version: 3.0.7
   resolution: "csstype@npm:3.0.7"
   checksum: 2f30c993be570c6d0de334b979a718370ee9bca9569c90340f13e05e542146c55b22e87372b858c061f9f8ded494da7a4715957882f9356cf9993ba11ab6f09c
-  languageName: node
-  linkType: hard
-
-"cuint@npm:^0.2.2":
-  version: 0.2.2
-  resolution: "cuint@npm:0.2.2"
-  checksum: b8127a93a7f16ce120ffcb22108014327c9808b258ee20e7dbb4c6740d7cb0f0c12d18a054eb716b0f2470090666abaae8a082d3cd5ef0e94fa447dd155842c4
   languageName: node
   linkType: hard
 
@@ -10434,13 +10399,6 @@ fsevents@~2.1.2:
   languageName: node
   linkType: hard
 
-"intersection-observer@npm:^0.12.0":
-  version: 0.12.0
-  resolution: "intersection-observer@npm:0.12.0"
-  checksum: 96d2f3ea4995b7b429b79646467c975230cfbe3ede7fb08d0c022cfe6ee0c89dfa98aa4377e8b5f7bee880322eb118e6c0275607a53043f9c50921da8363c1e8
-  languageName: node
-  linkType: hard
-
 "invariant@npm:^2.2.1, invariant@npm:^2.2.3, invariant@npm:^2.2.4":
   version: 2.2.4
   resolution: "invariant@npm:2.2.4"
@@ -11925,7 +11883,7 @@ fsevents@~2.1.2:
   languageName: node
   linkType: hard
 
-"make-dir@npm:^3.0.0, make-dir@npm:^3.0.2, make-dir@npm:^3.1.0, make-dir@npm:~3.1.0":
+"make-dir@npm:^3.0.0, make-dir@npm:^3.0.2, make-dir@npm:^3.1.0":
   version: 3.1.0
   resolution: "make-dir@npm:3.1.0"
   dependencies:
@@ -12315,15 +12273,6 @@ fsevents@~2.1.2:
   languageName: node
   linkType: hard
 
-"mime@npm:~2.5.2":
-  version: 2.5.2
-  resolution: "mime@npm:2.5.2"
-  bin:
-    mime: cli.js
-  checksum: dd3c93d433d41a09f6a1cfa969b653b769899f3bd573e7bfcea33bdc8b0cc4eba57daa2f95937369c2bd2b6d39d62389b11a4309fe40d1d3a1b736afdedad0ff
-  languageName: node
-  linkType: hard
-
 "mimic-fn@npm:^2.0.0, mimic-fn@npm:^2.1.0":
   version: 2.1.0
   resolution: "mimic-fn@npm:2.1.0"
@@ -12361,7 +12310,7 @@ fsevents@~2.1.2:
   languageName: node
   linkType: hard
 
-"minimatch@npm:3.0.4, minimatch@npm:^3.0.2, minimatch@npm:^3.0.4, minimatch@npm:~3.0.2, minimatch@npm:~3.0.4":
+"minimatch@npm:3.0.4, minimatch@npm:^3.0.2, minimatch@npm:^3.0.4, minimatch@npm:~3.0.2":
   version: 3.0.4
   resolution: "minimatch@npm:3.0.4"
   dependencies:
@@ -13977,20 +13926,6 @@ fsevents@~2.1.2:
   languageName: node
   linkType: hard
 
-"postcss-url@npm:^10.1.1":
-  version: 10.1.3
-  resolution: "postcss-url@npm:10.1.3"
-  dependencies:
-    make-dir: ~3.1.0
-    mime: ~2.5.2
-    minimatch: ~3.0.4
-    xxhashjs: ~0.2.2
-  peerDependencies:
-    postcss: ^8.0.0
-  checksum: 5983dbd20eabc0ba394a80aec14b6d6fdb986632ff6a4d3a6f0afc478d639f8a753a5c1e2bc7b9f6692befdb578372e7b288ab3d29bfa6b0d3ee06afca645f06
-  languageName: node
-  linkType: hard
-
 "postcss-value-parser@npm:^4.1.0":
   version: 4.1.0
   resolution: "postcss-value-parser@npm:4.1.0"
@@ -14009,7 +13944,7 @@ fsevents@~2.1.2:
   languageName: node
   linkType: hard
 
-"postcss@npm:^8.2.10, postcss@npm:~8.2.1":
+"postcss@npm:^8.2.10":
   version: 8.2.15
   resolution: "postcss@npm:8.2.15"
   dependencies:
@@ -18020,21 +17955,6 @@ typescript@^2.4.1:
   languageName: node
   linkType: hard
 
-"web-components@https://github.com/department-of-veterans-affairs/component-library.git#wc-v0.13.0":
-  version: 0.13.0
-  resolution: "web-components@https://github.com/department-of-veterans-affairs/component-library.git#commit=076765c81554032c35ef6af45a25e19771e883a1"
-  dependencies:
-    "@stencil/core": ^2.8.1
-    "@stencil/postcss": ^2.0.0
-    classnames: ^2.3.1
-    intersection-observer: ^0.12.0
-    postcss-url: ^10.1.1
-  peerDependencies:
-    "@department-of-veterans-affairs/formation": ^6.14.0
-  checksum: b33f3281eab394ac1b03f6b7172982a2f52f57265399d24b2fc18446801bb47ad654b45943bd859d6eb66581dbbc6ef2732e40fd9fd01f19fdc67e8952f3ad61
-  languageName: node
-  linkType: hard
-
 "web-namespaces@npm:^1.0.0":
   version: 1.1.4
   resolution: "web-namespaces@npm:1.1.4"
@@ -18319,15 +18239,6 @@ typescript@^2.4.1:
   version: 4.0.2
   resolution: "xtend@npm:4.0.2"
   checksum: ac5dfa738b21f6e7f0dd6e65e1b3155036d68104e67e5d5d1bde74892e327d7e5636a076f625599dc394330a731861e87343ff184b0047fef1360a7ec0a5a36a
-  languageName: node
-  linkType: hard
-
-"xxhashjs@npm:~0.2.2":
-  version: 0.2.2
-  resolution: "xxhashjs@npm:0.2.2"
-  dependencies:
-    cuint: ^0.2.2
-  checksum: cf6baf05bafe5651dbf108008bafdb1ebe972f65228633f00b56c49d7a1e614a821fe3345c4eb27462994c7c954d982eae05871be6a48146f30803dd87f3c3b6
   languageName: node
   linkType: hard
 
