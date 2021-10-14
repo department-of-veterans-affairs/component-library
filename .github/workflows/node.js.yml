@@ -25,6 +25,7 @@ jobs:
       with:
         node-version: 14.x
     - run: yarn
+    - run: cd packages/web-components && yarn
+    - run: cd packages/web-components && yarn build
     - run: cd packages/react-components && yarn
-    # The tests will fail on Banner since we're importing from web-components/react-bindings
-    # - run: cd packages/react-components && yarn test
+    - run: cd packages/react-components && yarn test
