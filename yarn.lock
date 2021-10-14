@@ -5538,6 +5538,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"axe-core@npm:^4.1.2":
+  version: 4.1.2
+  resolution: "axe-core@npm:4.1.2"
+  checksum: e26d155e1dcaa48dffcbded84739c96c350069e20c52cb1ebdeaa8e2881a6ce683961276b3de57ca66b6ba8bd4d2beaed54d504c818198757c98d790586f7a92
+  languageName: node
+  linkType: hard
+
 "axobject-query@npm:^2.2.0":
   version: 2.2.0
   resolution: "axobject-query@npm:2.2.0"
