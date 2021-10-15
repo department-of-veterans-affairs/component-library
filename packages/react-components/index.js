@@ -1,6 +1,6 @@
 import AcceptTermsPrompt from './AcceptTermsPrompt';
 import AdditionalInfo from './AdditionalInfo';
-import AlertBox, {ALERT_TYPE} from './AlertBox';
+import AlertBox, { ALERT_TYPE } from './AlertBox';
 import Banner from './Banner';
 import Breadcrumbs from './Breadcrumbs';
 import Checkbox from './Checkbox';
@@ -17,7 +17,7 @@ import IconSearch from './IconSearch';
 import IconUser from './IconUser';
 import LoadingIndicator from './LoadingIndicator';
 import MaintenanceBanner from './MaintenanceBanner';
-// import Modal from './Modal';
+import Modal from './Modal';
 import MonthYear from './MonthYear';
 import NumberInput from './NumberInput';
 // import OMBInfo from './OMBInfo';
@@ -25,14 +25,19 @@ import Pagination from './Pagination';
 import PrivacyAgreement from './PrivacyAgreement';
 import ProcessList from './ProcessList';
 import ProgressBar from './ProgressBar';
-import PromoBanner, {PROMO_BANNER_TYPES} from './PromoBanner';
+import PromoBanner, { PROMO_BANNER_TYPES } from './PromoBanner';
 import RadioButtons from './RadioButtons';
 import SearchMenu from './SearchMenu';
 import SegmentedProgressBar from './SegmentedProgressBar';
 import Select from './Select';
 import SystemDownView from './SystemDownView';
 import Table from './Table';
-import Telephone, {CONTACTS as PHONE_CONTACTS, contactsMap as PHONE_CONTACTS_MAP, PATTERNS as PHONE_PATTERNS, patternsMap as PHONE_PATTERNS_MAP} from './Telephone';
+import Telephone, {
+  CONTACTS as PHONE_CONTACTS,
+  contactsMap as PHONE_CONTACTS_MAP,
+  PATTERNS as PHONE_PATTERNS,
+  patternsMap as PHONE_PATTERNS_MAP,
+} from './Telephone';
 import TextArea from './TextArea';
 import TextInput from './TextInput';
 
@@ -57,7 +62,7 @@ export {
   IconUser,
   LoadingIndicator,
   MaintenanceBanner,
-  // Modal,
+  Modal,
   MonthYear,
   NumberInput,
   // OMBInfo,
