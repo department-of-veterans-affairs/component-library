@@ -1,10 +1,10 @@
 import '@department-of-veterans-affairs/formation/dist/formation.min.css';
 import './style.scss';
 import '@department-of-veterans-affairs/formation/dist/formation';
-import { withHTML } from '@whitespace/storybook-addon-html/react';
+import {withHTML} from '@whitespace/storybook-addon-html/react';
 
 import 'web-components/dist/component-library/component-library.css';
-import { applyPolyfills, defineCustomElements } from 'web-components/loader';
+import {applyPolyfills, defineCustomElements} from 'web-components/loader';
 
 applyPolyfills().then(() => {
   defineCustomElements();
@@ -80,7 +80,7 @@ const viewports = {
 };
 
 export const parameters = {
-  actions: { argTypesRegex: '^on[A-Z].*' },
+  actions: {argTypesRegex: '^on[A-Z].*'},
   options: {
     storySort: {
       method: 'alphabetical',
