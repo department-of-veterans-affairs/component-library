@@ -1,0 +1,116 @@
+@import '../../../../../node_modules/animate.css/source/sliding_entrances/slideInUp.css';
+@import '../../../../../node_modules/animate.css/source/sliding_exits/slideOutDown.css';
+@import '../../mixins/buttons.css';
+:host {
+  display: block;
+  width: 100%;
+  height: 44px;
+  margin-top: 4rem;
+  margin-bottom: 2rem;
+}
+
+div {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+
+.reveal-point {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  top: var(--reveal-breakpoint, 60rem);
+  left: 0;
+  /* background: black; /1* For debugging in browser *1/ */
+  /* width: 100%;  /1* For debugging in browser *1/ */
+}
+
+button {
+  bottom: 0;
+  right: 0;
+  background-color: var(--color-gray-dark);
+  border-bottom-right-radius: 0;
+  border-top-right-radius: 0;
+  height: 44px;
+  width: 44px;
+  margin-bottom: 0.5rem;
+  opacity: 0;
+  padding: 0;
+  pointer-events: none;
+  position: absolute;
+  transition: all 0.25s ease-in;
+}
+button:hover {
+  background-color: var(--color-black);
+}
+div.reveal button {
+  pointer-events: auto;
+  opacity: 1;
+  animation: slideInUp 0.25s;
+}
+div:not(.reveal) button {
+  animation: slideOutDown 0.25s;
+}
+
+@media (prefers-reduced-motion) {
+  button {
+    transition: none;
+  }
+  div.reveal button {
+    animation: none;
+  }
+  div:not(.reveal) button {
+    animation: none;
+  }
+}
+
+button span {
+  display: none;
+}
+
+div.docked {
+  position: relative;
+  display: flex;
+  flex-direction: row-reverse;
+}
+div:not(.docked) {
+  max-width: var(--undocked-width);
+}
+div:not(.docked):not(.reveal) {
+  position: relative;
+}
+
+div.docked button {
+  position: relative;
+}
+
+i {
+  font-size: 2rem;
+}
+i {
+  font-family: 'Font Awesome 5 Free';
+  font-style: normal;
+  font-weight: 900;
+}
+i::before {
+  content: '\F062'; /* fa-arrow-up*/
+}
+
+@media (min-width: 768px) {
+  button {
+    padding: 0 1.6rem;
+    width: auto;
+    border-bottom-right-radius: 5px;
+    border-top-right-radius: 5px;
+  }
+
+  button span {
+    display: inline-block;
+  }
+
+  i {
+    padding-right: 0.8rem;
+    padding-top: 1.2rem;
+    font-size: 1em;
+  }
+}

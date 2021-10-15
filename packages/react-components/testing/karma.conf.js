@@ -2,6 +2,7 @@
 // Generated on Fri Nov 03 2017 11:42:39 GMT-0400 (EDT)
 
 const isDocker = require('is-docker')();
+const path = require('path');
 
 module.exports = function karmaConfig(config) {
   config.set({
@@ -31,6 +32,10 @@ module.exports = function karmaConfig(config) {
       },
       resolve: {
         extensions: ['.js', '.jsx'],
+        alias: {
+          '@department-of-veterans-affairs/web-components/react-bindings':
+            path.resolve(__dirname, '../../web-components/'),
+        },
       },
       // target: 'node',
       node: { global: true, fs: 'empty' },

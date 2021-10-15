@@ -2,7 +2,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 // Relative imports.
-import { VaAlert } from 'web-components/react-bindings';
+
+import { VaAlert } from '@department-of-veterans-affairs/web-components/react-bindings';
 
 const DISMISSED_BANNERS_KEY = 'DISMISSED_BANNERS';
 

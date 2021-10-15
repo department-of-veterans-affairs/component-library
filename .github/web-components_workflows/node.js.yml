@@ -4,9 +4,9 @@ name: Node.js CI
 
 on:
   push:
-    branches: [ master ]
+    branches: [ web-components ]
   pull_request:
-    branches: [ master ]
+    branches: [ web-components ]
 
 jobs:
   test:
@@ -25,7 +25,5 @@ jobs:
       with:
         node-version: 14.x
     - run: yarn
-    - run: cd packages/web-components && yarn
-    - run: cd packages/web-components && yarn build
-    - run: cd packages/react-components && yarn
-    - run: cd packages/react-components && yarn test
+    - run: yarn test
+
