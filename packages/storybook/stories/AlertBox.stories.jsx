@@ -1,6 +1,6 @@
 import React from 'react';
 
-import AlertBox, { ALERT_TYPE } from './AlertBox';
+import { AlertBox, ALERT_TYPE } from '@department-of-veterans-affairs/component-library';
 
 export default {
   title: 'Components/AlertBox (deprecated)',

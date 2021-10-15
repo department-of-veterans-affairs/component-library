@@ -1,6 +1,6 @@
 import AcceptTermsPrompt from './AcceptTermsPrompt';
 import AdditionalInfo from './AdditionalInfo';
-import AlertBox from './AlertBox';
+import AlertBox, {ALERT_TYPE} from './AlertBox';
 import Banner from './Banner';
 import Breadcrumbs from './Breadcrumbs';
 import Checkbox from './Checkbox';
@@ -40,6 +40,7 @@ export {
   AcceptTermsPrompt,
   AdditionalInfo,
   AlertBox,
+  ALERT_TYPE,
   Banner,
   Breadcrumbs,
   Checkbox,
