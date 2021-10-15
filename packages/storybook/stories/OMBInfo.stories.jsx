@@ -1,5 +1,5 @@
 import React from 'react';
-import OMBInfo from './OMBInfo';
+import {OMBInfo} from '@department-of-veterans-affairs/component-library';
 
 export default {
   title: 'Components/OMBInfo',

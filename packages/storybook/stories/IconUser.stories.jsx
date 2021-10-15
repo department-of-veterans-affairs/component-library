@@ -1,6 +1,6 @@
 import React from 'react';
 
-import IconUser from './IconUser';
+import {IconUser} from '@department-of-veterans-affairs/component-library';
 
 export default {
   title: 'Components/Icons/IconUser',

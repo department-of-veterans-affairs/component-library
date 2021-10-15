@@ -17,10 +17,10 @@ import IconSearch from './IconSearch';
 import IconUser from './IconUser';
 import LoadingIndicator from './LoadingIndicator';
 import MaintenanceBanner from './MaintenanceBanner';
-import Modal from './Modal';
+// import Modal from './Modal';
 import MonthYear from './MonthYear';
 import NumberInput from './NumberInput';
-import OMBInfo from './OMBInfo';
+// import OMBInfo from './OMBInfo';
 import Pagination from './Pagination';
 import PrivacyAgreement from './PrivacyAgreement';
 import ProcessList from './ProcessList';
@@ -56,10 +56,10 @@ export {
   IconUser,
   LoadingIndicator,
   MaintenanceBanner,
-  Modal,
+  // Modal,
   MonthYear,
   NumberInput,
-  OMBInfo,
+  // OMBInfo,
   Pagination,
   PrivacyAgreement,
   ProcessList,

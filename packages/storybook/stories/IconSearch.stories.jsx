@@ -1,6 +1,6 @@
 import React from 'react';
 
-import IconSearch from './IconSearch';
+import {IconSearch} from '@department-of-veterans-affairs/component-library';
 
 export default {
   title: 'Components/Icons/IconSearch',

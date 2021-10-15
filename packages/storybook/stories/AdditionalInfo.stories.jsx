@@ -1,5 +1,5 @@
 import React from 'react';
-import AdditionalInfo from './AdditionalInfo';
+import {AdditionalInfo} from '@department-of-veterans-affairs/component-library';
 
 export default {
   title: 'Components/AdditionalInfo',

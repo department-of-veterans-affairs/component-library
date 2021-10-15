@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import SearchMenu from './SearchMenu';
+import {SearchMenu} from '@department-of-veterans-affairs/component-library';
 
 export default {
   title: 'Components/SearchMenu',

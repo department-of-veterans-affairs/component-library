@@ -1,6 +1,6 @@
 import React from 'react';
 
-import IconHelp from './IconHelp';
+import {IconHelp} from '@department-of-veterans-affairs/component-library';
 
 export default {
   title: 'Components/Icons/IconHelp',

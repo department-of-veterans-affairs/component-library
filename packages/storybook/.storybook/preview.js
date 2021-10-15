@@ -1,14 +1,14 @@
 import '@department-of-veterans-affairs/formation/dist/formation.min.css';
-import './style.scss';
+// import './style.scss';
 import '@department-of-veterans-affairs/formation/dist/formation';
 import {withHTML} from '@whitespace/storybook-addon-html/react';
 
-import 'web-components/dist/component-library/component-library.css';
-import {applyPolyfills, defineCustomElements} from 'web-components/loader';
+// import 'web-components/dist/component-library/component-library.css';
+// import {applyPolyfills, defineCustomElements} from 'web-components/loader';
 
-applyPolyfills().then(() => {
-  defineCustomElements();
-});
+// applyPolyfills().then(() => {
+//   defineCustomElements();
+// });
 
 // This CustomEvent polyfill is for IE11:
 // https://developer.mozilla.org/en-US/docs/Web/API/CustomEvent/CustomEvent#polyfill
@@ -34,7 +34,7 @@ applyPolyfills().then(() => {
   window.CustomEvent = CustomEvent;
 })();
 
-defineCustomElements();
+// defineCustomElements();
 
 const viewports = {
   xsmall: {

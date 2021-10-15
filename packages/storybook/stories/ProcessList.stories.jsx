@@ -1,5 +1,5 @@
 import React from 'react';
-import ProcessList from './ProcessList';
+import {ProcessList} from '@department-of-veterans-affairs/component-library';
 
 export default {
   title: 'Components/ProcessList/ProcessList',

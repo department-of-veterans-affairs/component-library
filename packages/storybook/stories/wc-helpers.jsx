@@ -10,13 +10,14 @@ import {
   PRIMARY_STORY,
 } from '@storybook/addon-docs/blocks';
 
-import componentDocs from 'web-components/component-docs.json';
+// import componentDocs from 'web-components/component-docs.json';
 
 /**
  * Return the JSON object matching a specific component tag
  */
 export const getWebComponentDocs = tag =>
-  componentDocs.components.filter(comp => comp.tag === tag)[0];
+  console.log('getting component docs')
+  // componentDocs.components.filter(comp => comp.tag === tag)[0];
 
 /**
  * Construct an object appropriate for Storybook subcomponent documentation based

@@ -1,5 +1,5 @@
 import React from 'react';
-import Banner from './Banner';
+import {Banner} from '@department-of-veterans-affairs/component-library';
 
 export default {
   title: 'Components/Banners/Banner',

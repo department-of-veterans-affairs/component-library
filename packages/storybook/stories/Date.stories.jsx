@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Date from './Date';
+import {Date} from '@department-of-veterans-affairs/component-library';
 
 export default {
   title: 'Components/Date',

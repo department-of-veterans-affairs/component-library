@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Pagination from './Pagination';
+import {Pagination} from '@department-of-veterans-affairs/component-library';
 
 export default {
   title: 'Components/Pagination',

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Table from './Table';
+import {Table} from '@department-of-veterans-affairs/component-library';
 
 export default {
   title: 'Components/Table',

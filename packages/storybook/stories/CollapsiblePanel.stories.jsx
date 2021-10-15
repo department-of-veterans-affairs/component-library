@@ -1,5 +1,5 @@
 import React from 'react';
-import CollapsiblePanel from './CollapsiblePanel';
+import {CollapsiblePanel} from '@department-of-veterans-affairs/component-library';
 
 export default {
   title: 'Components/CollapsiblePanel (deprecated)',

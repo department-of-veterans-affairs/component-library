@@ -2,7 +2,7 @@
 import React from 'react';
 import { addHours, subMinutes, format } from 'date-fns';
 
-import MaintenanceBanner from './MaintenanceBanner';
+import {MaintenanceBanner} from '@department-of-veterans-affairs/component-library';
 
 export default {
   title: 'Components/Banners/MaintenanceBanner',
