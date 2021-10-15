@@ -9,6 +9,9 @@
     "va",
     "vads"
   ],
+  "files": [
+    "index.js"
+  ],
   "homepage": "http://design.va.gov",
   "license": "CC0-1.0",
   "repository": {
