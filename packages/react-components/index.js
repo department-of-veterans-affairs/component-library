@@ -25,7 +25,7 @@ import Pagination from './Pagination';
 import PrivacyAgreement from './PrivacyAgreement';
 import ProcessList from './ProcessList';
 import ProgressBar from './ProgressBar';
-import PromoBanner from './PromoBanner';
+import PromoBanner, {PROMO_BANNER_TYPES} from './PromoBanner';
 import RadioButtons from './RadioButtons';
 import SearchMenu from './SearchMenu';
 import SegmentedProgressBar from './SegmentedProgressBar';
@@ -66,6 +66,7 @@ export {
   ProcessList,
   ProgressBar,
   PromoBanner,
+  PROMO_BANNER_TYPES,
   RadioButtons,
   SearchMenu,
   SegmentedProgressBar,
