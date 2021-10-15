@@ -3,7 +3,7 @@ import '@department-of-veterans-affairs/formation/dist/formation.min.css';
 import '@department-of-veterans-affairs/formation/dist/formation';
 import {withHTML} from '@whitespace/storybook-addon-html/react';
 
-// import 'web-components/dist/component-library/component-library.css';
+import '@department-of-veterans-affairs/component-library/dist/main.css';
 import {applyPolyfills, defineCustomElements} from '@department-of-veterans-affairs/component-library';
 
 applyPolyfills().then(() => {
