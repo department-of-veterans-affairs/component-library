@@ -6,12 +6,10 @@ import {
   Primary,
   ArgsTable,
   Stories,
+  PRIMARY_STORY,
 } from '@storybook/addon-docs/blocks';
 
-import Telephone, { CONTACTS, PATTERNS } from './Telephone';
-import { contactsMap } from './contacts';
-import { patternsMap } from './patterns';
-import Table from '../Table/Table';
+import {Telephone, PHONE_CONTACTS, PHONE_CONTACTS_MAP, PHONE_PATTERNS, PHONE_PATTERNS_MAP, Table} from '@department-of-veterans-affairs/component-library';
 
 // This builds the available "CONTACTS" list table
 // Descriptions are available in the contacts.js file
@@ -23,7 +21,7 @@ const fields = [
 const Contacts = () => (
   <Table
     fields={fields}
-    data={Object.entries(contactsMap).map(c => ({
+    data={Object.entries(PHONE_CONTACTS_MAP).map(c => ({
       key: c[0],
       value: <Telephone contact={c[1].phoneNumber} />,
       description: <div style={{ maxWidth: '30em' }}>{c[1].description}</div>,
@@ -41,9 +39,9 @@ const patternFields = [
 const Patterns = () => (
   <Table
     fields={patternFields}
-    data={Object.entries(patternsMap).map(p => ({
+    data={Object.entries(PHONE_PATTERNS_MAP).map(p => ({
       key: p[1].pattern,
-      value: PATTERNS[p[1].pattern],
+      value: PHONE_PATTERNS[p[1].pattern],
       description: <div style={{ maxWidth: '30em' }}>{p[1].description}</div>,
     }))}
   />
@@ -55,7 +53,7 @@ const Page = () => (
     <Subtitle />
     <Description />
     <Primary />
-    <ArgsTable />
+    <ArgsTable story={PRIMARY_STORY}/>
     <Contacts />
     <br />
     <Patterns />
@@ -78,7 +76,7 @@ export default {
 const Template = args => <Telephone {...args} />;
 
 const defaultArgs = {
-  contact: CONTACTS.GI_BILL,
+  contact: PHONE_CONTACTS.GI_BILL,
 };
 
 export const Default = Template.bind({});
@@ -95,6 +93,6 @@ Extension.args = { ...defaultArgs, extension: '123' };
 
 export const CustomContent = Template.bind({});
 CustomContent.args = {
-  contact: CONTACTS['222_VETS'],
+  contact: PHONE_CONTACTS['222_VETS'],
   children: '877-222-VETS (8387)',
 };

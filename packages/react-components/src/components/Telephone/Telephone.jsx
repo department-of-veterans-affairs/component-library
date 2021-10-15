@@ -1,9 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { CONTACTS } from './contacts';
+import { CONTACTS, contactsMap } from './contacts';
+import { patternsMap } from './patterns';
 
-export { CONTACTS };
+export { CONTACTS, contactsMap, patternsMap };
 
 // Patterns used in formatting visible text
 export const PATTERNS = {

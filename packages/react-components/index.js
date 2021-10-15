@@ -32,7 +32,7 @@ import SegmentedProgressBar from './SegmentedProgressBar';
 import Select from './Select';
 import SystemDownView from './SystemDownView';
 import Table from './Table';
-import Telephone from './Telephone';
+import Telephone, {CONTACTS as PHONE_CONTACTS, contactsMap as PHONE_CONTACTS_MAP, PATTERNS as PHONE_PATTERNS, patternsMap as PHONE_PATTERNS_MAP} from './Telephone';
 import TextArea from './TextArea';
 import TextInput from './TextInput';
 
@@ -73,6 +73,10 @@ export {
   SystemDownView,
   Table,
   Telephone,
+  PHONE_CONTACTS,
+  PHONE_CONTACTS_MAP,
+  PHONE_PATTERNS,
+  PHONE_PATTERNS_MAP,
   TextArea,
   TextInput,
 };
