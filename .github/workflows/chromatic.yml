@@ -29,6 +29,8 @@ jobs:
         working-directory: packages/web-components
       - run: yarn build-storybook
         working-directory: packages/storybook
+      - run: yarn build
+        working-directory: packages/core
         # 👇 Adds Chromatic as a step in the workflow
       - name: Publish to Chromatic
         uses: chromaui/action@v1
