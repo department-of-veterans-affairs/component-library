@@ -19,7 +19,7 @@ jobs:
           path: '**/node_modules'
           key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
       - name: Install dependencies
-        run: yarn
+        run: yarn workspaces foreach run install
         # 👇 Adds Chromatic as a step in the workflow
       - name: Publish to Chromatic
         uses: chromaui/action@v1
@@ -28,3 +28,4 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           # 👇 Chromatic projectToken, refer to the manage page to obtain it.
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
+          workingDir: packages/storybook
