@@ -20,6 +20,8 @@ jobs:
           key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
       - name: Install dependencies
         run: yarn workspaces foreach run install
+      - name: Build core
+        run: yarn workspace @department-of-veterans-affairs/component-library run build
         # 👇 Adds Chromatic as a step in the workflow
       - name: Publish to Chromatic
         uses: chromaui/action@v1
