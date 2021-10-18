@@ -20,17 +20,9 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: 14.x
-      - run: yarn install
-      - run: yarn build
-        working-directory: packages/react-components
-      - run: yarn build
-        working-directory: packages/web-components
-      - run: yarn build
-        working-directory: packages/core
-      - run: yarn build-storybook
-        working-directory: packages/storybook
-      - run: yarn install
-        working-directory: packages/storybook
+      - run: yarn workspaces foreach run install
+      - run: yarn workspace @department-of-veterans-affairs/react-components run build
+      - run: yarn workspace @department-of-veterans-affairs/web-components run build
         # 👇 Adds Chromatic as a step in the workflow
       - name: Publish to Chromatic
         run: npx chromatic --project-token=${{ secrets.CHROMATIC_PROJECT_TOKEN }}
