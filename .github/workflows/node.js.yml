@@ -24,8 +24,6 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: 14.x
-    - run: yarn
-    - run: cd packages/web-components && yarn
-    - run: cd packages/web-components && yarn build
-    - run: cd packages/react-components && yarn
-    - run: cd packages/react-components && yarn test
+    - run: yarn workspaces foreach run install
+    - run: yarn workspaces foreach run build
+    - run: yarn workspaces foreach run test
