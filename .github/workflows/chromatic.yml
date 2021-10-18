@@ -21,8 +21,8 @@ jobs:
         with:
           node-version: 14.x
       - run: yarn workspaces foreach run install
-      - run: yarn workspace @department-of-veterans-affairs/react-components run build
       - run: yarn workspace @department-of-veterans-affairs/web-components run build
+      - run: yarn workspace @department-of-veterans-affairs/react-components run build
       - name: Build core
         run: yarn workspace @department-of-veterans-affairs/component-library run build
         # 👇 Adds Chromatic as a step in the workflow
