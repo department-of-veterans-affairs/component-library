@@ -5,8 +5,8 @@
   "version": "1.0.0",
   "license": "MIT",
   "scripts": {},
-  "workspaces": [
-    "packages/*"
-  ],
-  "packageManager": "yarn@3.0.2"
+  "workspaces": ["packages/*"],
+  "devDependencies": {
+    "chromatic": "^6.0.4"
+  }
 }

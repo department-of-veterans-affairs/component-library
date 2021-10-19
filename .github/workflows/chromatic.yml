@@ -34,5 +34,5 @@ jobs:
         working-directory: packages/core
         # 👇 Adds Chromatic as a step in the workflow
       - name: Publish to Chromatic
-        run: npx chromatic --project-token=${{ secrets.CHROMATIC_PROJECT_TOKEN }}
+        run: chromatic --project-token=${{ secrets.CHROMATIC_PROJECT_TOKEN }}
         working-directory: packages/storybook
