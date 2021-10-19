@@ -1,5 +1,6 @@
 node_modules
 /*.js
+!index.js
 !.eslintrc.js
 .idea
 .DS_Store

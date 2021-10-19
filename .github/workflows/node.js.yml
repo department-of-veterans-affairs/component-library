@@ -10,22 +10,18 @@ on:
 
 jobs:
   test:
-
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v2
     - uses: actions/cache@v2
       with:
         path: '**/node_modules'
         key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
-
     - name: Use Node.js 14.x
       uses: actions/setup-node@v1
       with:
         node-version: 14.x
-    - run: yarn
-    - run: cd packages/web-components && yarn
-    - run: cd packages/web-components && yarn build
-    - run: cd packages/react-components && yarn
-    - run: cd packages/react-components && yarn test
+    - run: yarn workspaces foreach run install
+    - run: yarn workspace @department-of-veterans-affairs/react-components run build
+    - run: yarn workspace @department-of-veterans-affairs/web-components run build
+    - run: yarn workspaces foreach run test

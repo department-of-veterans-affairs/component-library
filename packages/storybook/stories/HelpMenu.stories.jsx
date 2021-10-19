@@ -1,0 +1,28 @@
+import React, { useState } from 'react';
+
+import {HelpMenu} from '@department-of-veterans-affairs/component-library';
+
+export default {
+  title: 'Components/HelpMenu',
+  component: HelpMenu,
+};
+
+const Template = args => {
+  const [open, setOpen] = useState(args.isOpen);
+
+  const toggleOpen = () => setOpen(!open);
+  return (
+    <div style={{ backgroundColor: '#112e51' }}>
+      <HelpMenu {...args} isOpen={open} clickHandler={toggleOpen} />
+    </div>
+  );
+};
+
+const defaultArgs = {
+  isOpen: true,
+};
+
+export const Default = Template.bind({});
+Default.args = {
+  ...defaultArgs,
+};

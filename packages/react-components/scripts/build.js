@@ -8,7 +8,7 @@ const path = require('path');
 
 console.log('Starting component-library build');
 console.log('Cleaning old build');
-rimraf.sync('./*.js');
+rimraf.sync('./[.]*!(index).js');
 
 // this comes from gulp-flatten-requires
 // https://github.com/insin/gulp-flatten-requires/blob/master/index.js

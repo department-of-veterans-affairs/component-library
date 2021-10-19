@@ -9,6 +9,9 @@
     "va",
     "vads"
   ],
+  "files": [
+    "index.js"
+  ],
   "homepage": "http://design.va.gov",
   "license": "CC0-1.0",
   "repository": {
@@ -17,10 +20,8 @@
   },
   "scripts": {
     "build": "node ./scripts/build.js",
-    "build-storybook": "build-storybook",
     "prepublishOnly": "pinst --disable && node ./scripts/prepublish.js",
     "postpublish": "pinst --enable",
-    "storybook": "start-storybook -p 6006",
     "test-debug": "karma start testing/karma.conf.js --browsers Chrome",
     "test": "karma start testing/karma.conf.js --single-run",
     "test-watch": "karma start testing/karma.conf.js --auto-watch"
@@ -62,14 +63,8 @@
     "@babel/preset-react": "^7.14.5",
     "@department-of-veterans-affairs/formation": "^6.17.3",
     "@department-of-veterans-affairs/web-components": "workspace:packages/web-components",
-    "@storybook/addon-a11y": "6.1.21",
-    "@storybook/addon-actions": "6.1.21",
-    "@storybook/addon-essentials": "6.1.21",
-    "@storybook/addon-links": "6.1.21",
-    "@storybook/react": "6.1.21",
     "@testing-library/react": "^12.0.0",
     "@testing-library/user-event": "^13.2.1",
-    "@whitespace/storybook-addon-html": "^2.0.1",
     "axe-core": "^4.1.2",
     "babel-loader": "^8.1.0",
     "babel-plugin-lodash": "^3.3.4",
