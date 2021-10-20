@@ -28,6 +28,9 @@ jobs:
         working-directory: packages/react-components
       - run: yarn workspace @department-of-veterans-affairs/react-components run build
       - run: yarn workspace @department-of-veterans-affairs/web-components run build
+      - name: Install dependencies in storybook
+        run: yarn install
+        working-directory: packages/storybook
         # 👇 Adds Chromatic as a step in the workflow
       - name: Publish to Chromatic
         run: npx chromatic --project-token=${{ secrets.CHROMATIC_PROJECT_TOKEN }}
