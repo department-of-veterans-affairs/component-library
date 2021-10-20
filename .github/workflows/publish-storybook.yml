@@ -3,14 +3,13 @@ on:
   push:
     branches:
       - master
-      - integrate-wc-bj-pt3
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        bucket: [dev-design.va.gov]
+        bucket: [dev-design.va.gov, staging-design.va.gov, design.va.gov]
     steps:
       - uses: actions/checkout@master
       - run: yarn install
