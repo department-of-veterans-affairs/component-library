@@ -6,6 +6,10 @@
   "scripts": {
     "build": "webpack"
   },
+  "files": [
+    "dist/*",
+    "*.js"
+  ],
   "main": "dist/main-bundle.js",
   "module": "src/main.js",
   "dependencies": {
