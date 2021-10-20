@@ -22,6 +22,9 @@ jobs:
       with:
         node-version: 14.x
     - run: yarn install
+    - name: Install dependencies in react-components
+      run: yarn install
+      working-directory: packages/react-components
     - run: yarn workspace @department-of-veterans-affairs/react-components run build
     - run: yarn workspace @department-of-veterans-affairs/web-components run build
     - run: yarn workspaces foreach run test
