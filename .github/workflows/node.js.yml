@@ -4,9 +4,9 @@ name: Node.js CI
 
 on:
   push:
-    branches: [ integrate-wc-bj-pt3 ]
+    branches: [ master ]
   pull_request:
-    branches: [ integrate-wc-bj-pt3 ]
+    branches: [ master ]
 
 jobs:
   test:
