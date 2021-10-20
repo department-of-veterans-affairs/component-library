@@ -46,7 +46,7 @@ module.exports = {
     new MiniCssExtractPlugin(),
     // This is meant to allow for a gentle transition to the new named import strategy
     new CopyPlugin({
-      patterns: [{ from: '[\\w]*!(index).js', to: '.', context: buildPath }],
+      patterns: [{ from: '[\\w]*!(index).js', to: '../', context: buildPath }],
     }),
   ],
 };
