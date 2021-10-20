@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Date } from '../../react-components/src';
+import Date from '../../react-components/src/components/Date/Date';
 // import { Date } from '@department-of-veterans-affairs/react-components';
 
 export default {
