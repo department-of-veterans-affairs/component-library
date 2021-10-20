@@ -28,7 +28,7 @@ jobs:
         working-directory: packages/react-components
       - run: yarn workspace @department-of-veterans-affairs/react-components run build
       - run: yarn workspace @department-of-veterans-affairs/web-components run build
-      - run: yarn workspace @department-of-veterans-affairs/core run build
+      - run: yarn workspace @department-of-veterans-affairs/component-library run build
       - name: Install dependencies in storybook
         run: yarn install
         working-directory: packages/storybook
