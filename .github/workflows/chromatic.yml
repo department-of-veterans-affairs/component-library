@@ -31,7 +31,5 @@ jobs:
       - name: Install dependencies in storybook
         run: yarn install
         working-directory: packages/storybook
-        # 👇 Adds Chromatic as a step in the workflow
-      - name: Publish to Chromatic
-        run: npx chromatic --project-token=${{ secrets.CHROMATIC_PROJECT_TOKEN }}
+      - run: yarn build-storybook
         working-directory: packages/storybook
