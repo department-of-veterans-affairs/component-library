@@ -3,6 +3,7 @@ on:
   push:
     branches:
       - master
+      - integrate-wc-bj-pt3
 
 jobs:
   deploy:
