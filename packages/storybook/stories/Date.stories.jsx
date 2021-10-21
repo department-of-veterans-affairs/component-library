@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import Date from '../../react-components/src/components/Date/Date';
-// import { Date } from '@department-of-veterans-affairs/react-components';
+import { Date } from '@department-of-veterans-affairs/component-library';
 
 export default {
   title: 'Components/Date',
