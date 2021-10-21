@@ -1,10 +1,10 @@
-This module contains reusable React components for the VA.gov [design system](https://design.va.gov) published as an [NPM package](https://www.npmjs.com/package/@department-of-veterans-affairs/component-library) for use in the [vets-website](https://github.com/department-of-veterans-affairs/vets-website) frontend codebase.
+This module contains reusable React and Web components for the VA.gov [design system](https://design.va.gov) published as an [NPM package](https://www.npmjs.com/package/@department-of-veterans-affairs/component-library) for use in the [vets-website](https://github.com/department-of-veterans-affairs/vets-website) frontend codebase.
 
 ## Quick start
 
 `npm install @department-of-veterans-affairs/component-library`
 
-`import COMPONENTNAME from '@department-of-veterans-affairs/component-library/COMPONENTNAME'`
+`import { COMPONENTNAME } from '@department-of-veterans-affairs/component-library'`
 
 See [design system](https://design.va.gov/components/) or [Storybook](https://design.va.gov/storybook/?path=/story/about-introduction--page) for a full list of available components.
 
@@ -14,7 +14,7 @@ The issue tracker is disabled on this repo. To request a new component or a feat
 
 ## Running Storybook locally
 
-From the project root, run the following commands:
+From the `packages/storybook` directory, run the following commands:
 
 1. `yarn install`
 1. `yarn storybook`
@@ -27,24 +27,9 @@ The Design System team is working on replacing the React components in this libr
 
 To use these Web Components in your own project, follow the [installation steps](https://design.va.gov/documentation/developers#load-the-web-component-library). This will allow the components to be used in JSX or HTML.
 
-### Development
-
-For now these Web Components live on the [`web-components` branch](https://github.com/department-of-veterans-affairs/component-library/tree/web-components). In order to add a new component or make changes to an existing one, you must:
-
-1. Create a new branch off of `web-components`
-1. Have the PR be based off of `web-components` (not `master` - see image below)
-1. Once the PR is merged, create a Github Release with `web-components` as the base, where the version is `wc-vX.Y.Z`. with `X.Y.Z` being the semantic version.
-
-### Making a PR
-
-![PR into `web-components` branch](./img/pr-base.png)
-
-
-### Making a release
+## Making a release
 
 Include a list of changes when you create a new release. Each bullet point should be one or two clear sentences. We have been using [Keep a changelog](https://keepachangelog.com/en/1.0.0/) informally and have had good success with it.
-
-![release off of `web-components` branch](./img/release-base.png)
 
 ## Publishing Module to NPM
 
@@ -96,4 +81,3 @@ This should be set as **GITHUB_API_KEY** in your environment variable.
 ### 4. Update consuming apps
 
 The last step is to update the `package.json` files of consuming apps to use the latest version of `@department-of-veterans-affairs/formation` (or `component-library`). For example, if you are working with the `vets-website` project, open the `vets-website`'s `package.json` to update the version number of the `@department-of-veterans-affairs/formation` entry listed in the `dependencies` section. The version number should match what you just published to NPM.
-
