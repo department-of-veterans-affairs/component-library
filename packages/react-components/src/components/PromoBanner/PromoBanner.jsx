@@ -23,6 +23,7 @@ function PromoBanner({
   target,
   text,
   disableAnalytics,
+  role
 }) {
   const iconClasses = classnames(
     'fas',
@@ -47,7 +48,7 @@ function PromoBanner({
   };
 
   return (
-    <div className="vads-c-promo-banner">
+    <div className="vads-c-promo-banner" role={role}>
       <div className="vads-c-promo-banner__body">
         <div className="vads-c-promo-banner__icon">
           <span className="fa-stack fa-lg">
@@ -133,6 +134,10 @@ PromoBanner.propTypes = {
    * Analytics tracking function(s) will not be called
    */
   disableAnalytics: PropTypes.bool,
+  /**
+   * role prop for accessibility tools
+   */
+  role: PropTypes.string,
 };
 
 export default PromoBanner;
