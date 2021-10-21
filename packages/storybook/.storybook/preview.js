@@ -37,7 +37,6 @@ applyPolyfills().then(() => {
   window.CustomEvent = CustomEvent;
 })();
 
-
 const viewports = {
   xsmall: {
     name: 'XSmall Screen',
@@ -82,7 +81,7 @@ const viewports = {
 };
 
 export const parameters = {
-  actions: {argTypesRegex: '^on[A-Z].*'},
+  actions: { argTypesRegex: '^on[A-Z].*' },
   options: {
     storySort: {
       method: 'alphabetical',

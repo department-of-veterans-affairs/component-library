@@ -24,8 +24,6 @@ module.exports = {
     config.resolve.alias['@department-of-veterans-affairs/component-library$'] =
       path.resolve(__dirname, '../../react-components/src');
 
-    console.log('webpack config', config);
-
     // Return the altered config
     return config;
   },
