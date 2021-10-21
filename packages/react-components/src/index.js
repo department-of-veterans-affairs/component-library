@@ -25,6 +25,7 @@ import Pagination from './components/Pagination/Pagination';
 import PrivacyAgreement from './components/PrivacyAgreement/PrivacyAgreement';
 import ProcessList from './components/ProcessList/ProcessList';
 import ProgressBar from './components/ProgressBar/ProgressBar';
+import ProgressButton from './components/ProgressButton/ProgressButton';
 import PromoBanner, {
   PROMO_BANNER_TYPES,
 } from './components/PromoBanner/PromoBanner';
@@ -72,6 +73,7 @@ export {
   PrivacyAgreement,
   ProcessList,
   ProgressBar,
+  ProgressButton,
   PromoBanner,
   PROMO_BANNER_TYPES,
   RadioButtons,
