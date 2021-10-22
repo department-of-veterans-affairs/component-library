@@ -1,6 +1,7 @@
 {
   "name": "@department-of-veterans-affairs/react-components",
   "version": "3.2.2",
+  "private": true,
   "description": "VA.gov component library in React",
   "keywords": [
     "react",
