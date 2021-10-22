@@ -13,6 +13,7 @@
   "main": "dist/main-bundle.js",
   "module": "src/main.js",
   "dependencies": {
+    "date-fns-tz": "^1.1.1",
     "react-focus-on": "^3.5.1",
     "react-scroll": "^1.7.16",
     "react-transition-group": "^1.0.0"
