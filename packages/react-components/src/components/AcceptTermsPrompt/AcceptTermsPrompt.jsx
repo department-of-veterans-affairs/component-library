@@ -142,7 +142,7 @@ AcceptTermsPrompt.propTypes = {
    */
   onCancel: PropTypes.func,
 
-  onAccept: PropTypes.function.required,
+  onAccept: PropTypes.func.isRequired,
 
   /**
    * The terms to accept.

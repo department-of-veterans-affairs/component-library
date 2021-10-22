@@ -10,7 +10,7 @@ import {
   PRIMARY_STORY,
 } from '@storybook/addon-docs/blocks';
 
-import {webComponentDocs} from '@department-of-veterans-affairs/component-library';
+import webComponentDocs from '@department-of-veterans-affairs/web-components/component-docs.json';
 
 /**
  * Return the JSON object matching a specific component tag
