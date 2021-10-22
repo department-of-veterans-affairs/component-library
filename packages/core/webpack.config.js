@@ -2,8 +2,6 @@ const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
 
-const buildPath = path.resolve(__dirname, '../', 'react-components');
-
 module.exports = {
   entry: ['./src/main.js'],
   output: {
@@ -46,7 +44,18 @@ module.exports = {
     new MiniCssExtractPlugin(),
     // This is meant to allow for a gentle transition to the new named import strategy
     new CopyPlugin({
-      patterns: [{ from: '[\\w]*!(index).js', to: '../', context: buildPath }],
+      patterns: [
+        {
+          from: '[\\w]*!(index).js',
+          to: '../',
+          context: path.resolve(__dirname, '../', 'react-components'),
+        },
+        {
+          from: 'react-bindings/**/*',
+          to: './',
+          context: path.resolve(__dirname, '../', 'web-components'),
+        },
+      ],
     }),
   ],
 };
