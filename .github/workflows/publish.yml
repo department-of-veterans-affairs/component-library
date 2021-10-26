@@ -3,6 +3,8 @@ name: Yarn publish
 on:
   release:
     types: [published]
+  pull_request:
+    branches: [ master ]
 
 jobs:
   publish:
