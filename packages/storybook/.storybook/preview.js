@@ -1,10 +1,13 @@
 import '@department-of-veterans-affairs/formation/dist/formation.min.css';
 import './style.scss';
 import '@department-of-veterans-affairs/formation/dist/formation';
-import {withHTML} from '@whitespace/storybook-addon-html/react';
+import { withHTML } from '@whitespace/storybook-addon-html/react';
 
 import '@department-of-veterans-affairs/component-library/dist/main.css';
-import {applyPolyfills, defineCustomElements} from '@department-of-veterans-affairs/component-library';
+import {
+  applyPolyfills,
+  defineCustomElements,
+} from '@department-of-veterans-affairs/web-components/loader';
 
 applyPolyfills().then(() => {
   defineCustomElements();
@@ -33,7 +36,6 @@ applyPolyfills().then(() => {
 
   window.CustomEvent = CustomEvent;
 })();
-
 
 const viewports = {
   xsmall: {
@@ -79,7 +81,7 @@ const viewports = {
 };
 
 export const parameters = {
-  actions: {argTypesRegex: '^on[A-Z].*'},
+  actions: { argTypesRegex: '^on[A-Z].*' },
   options: {
     storySort: {
       method: 'alphabetical',
