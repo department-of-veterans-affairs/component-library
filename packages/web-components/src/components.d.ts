@@ -120,6 +120,20 @@ export namespace Components {
     }
     interface VaFeaturedContent {
     }
+    interface VaLoadingIndicator {
+        /**
+          * An aria label
+         */
+        "label": string;
+        /**
+          * The message visible on screen when loading
+         */
+        "message": string;
+        /**
+          * Set to true if the loading indicator should capture focus
+         */
+        "setFocus": boolean;
+    }
     interface VaOnThisPage {
     }
     interface VaRadio {
@@ -279,6 +293,12 @@ declare global {
         prototype: HTMLVaFeaturedContentElement;
         new (): HTMLVaFeaturedContentElement;
     };
+    interface HTMLVaLoadingIndicatorElement extends Components.VaLoadingIndicator, HTMLStencilElement {
+    }
+    var HTMLVaLoadingIndicatorElement: {
+        prototype: HTMLVaLoadingIndicatorElement;
+        new (): HTMLVaLoadingIndicatorElement;
+    };
     interface HTMLVaOnThisPageElement extends Components.VaOnThisPage, HTMLStencilElement {
     }
     var HTMLVaOnThisPageElement: {
@@ -317,6 +337,7 @@ declare global {
         "va-back-to-top": HTMLVaBackToTopElement;
         "va-checkbox": HTMLVaCheckboxElement;
         "va-featured-content": HTMLVaFeaturedContentElement;
+        "va-loading-indicator": HTMLVaLoadingIndicatorElement;
         "va-on-this-page": HTMLVaOnThisPageElement;
         "va-radio": HTMLVaRadioElement;
         "va-radio-option": HTMLVaRadioOptionElement;
@@ -462,6 +483,20 @@ declare namespace LocalJSX {
     }
     interface VaFeaturedContent {
     }
+    interface VaLoadingIndicator {
+        /**
+          * An aria label
+         */
+        "label"?: string;
+        /**
+          * The message visible on screen when loading
+         */
+        "message"?: string;
+        /**
+          * Set to true if the loading indicator should capture focus
+         */
+        "setFocus"?: boolean;
+    }
     interface VaOnThisPage {
     }
     interface VaRadio {
@@ -603,6 +638,7 @@ declare namespace LocalJSX {
         "va-back-to-top": VaBackToTop;
         "va-checkbox": VaCheckbox;
         "va-featured-content": VaFeaturedContent;
+        "va-loading-indicator": VaLoadingIndicator;
         "va-on-this-page": VaOnThisPage;
         "va-radio": VaRadio;
         "va-radio-option": VaRadioOption;
@@ -621,6 +657,7 @@ declare module "@stencil/core" {
             "va-back-to-top": LocalJSX.VaBackToTop & JSXBase.HTMLAttributes<HTMLVaBackToTopElement>;
             "va-checkbox": LocalJSX.VaCheckbox & JSXBase.HTMLAttributes<HTMLVaCheckboxElement>;
             "va-featured-content": LocalJSX.VaFeaturedContent & JSXBase.HTMLAttributes<HTMLVaFeaturedContentElement>;
+            "va-loading-indicator": LocalJSX.VaLoadingIndicator & JSXBase.HTMLAttributes<HTMLVaLoadingIndicatorElement>;
             "va-on-this-page": LocalJSX.VaOnThisPage & JSXBase.HTMLAttributes<HTMLVaOnThisPageElement>;
             "va-radio": LocalJSX.VaRadio & JSXBase.HTMLAttributes<HTMLVaRadioElement>;
             "va-radio-option": LocalJSX.VaRadioOption & JSXBase.HTMLAttributes<HTMLVaRadioOptionElement>;
