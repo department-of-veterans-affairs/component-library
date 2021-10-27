@@ -24,3 +24,5 @@ jobs:
     - run: yarn workspace @department-of-veterans-affairs/web-components run build
     - run: yarn workspace @department-of-veterans-affairs/component-library run build
     - run: yarn workspaces foreach --verbose --no-private npm publish
+      env:
+        YARN_NPM_AUTH_TOKEN: ${{ secrets.YARN_NPM_AUTH_TOKEN }}
