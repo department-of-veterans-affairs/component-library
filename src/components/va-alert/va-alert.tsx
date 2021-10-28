@@ -49,6 +49,12 @@ export class VaAlert {
   @Prop() closeable: boolean = false;
 
   /**
+   * If true, the alert will be full width.
+   * Should be for emergency communication only.
+   */
+  @Prop() fullWidth: boolean = false;
+
+  /**
    * Fires when the component has successfully finished rendering for the first
    * time.
    */
@@ -144,7 +150,7 @@ export class VaAlert {
             aria-label={this.closeBtnAriaLabel}
             onClick={this.closeHandler.bind(this)}
           >
-            <i class="fa-times-circle" aria-label="Close icon" />
+            <i aria-hidden="true" class="fa-times-circle" role="presentation" />
           </button>
         )}
       </Host>

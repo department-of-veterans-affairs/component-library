@@ -4,6 +4,7 @@
 /*   https://github.com/department-of-veterans-affairs/veteran-facing-services-tools/blob/8d39616e957cb44b6664a658b2c51dca8076fe7e/packages/formation/sass/base/_b-variables.scss#L16-L17 */
 :root {
   --color-base: #212121;
+  --color-black: #000000;
   --color-white: #ffffff;
   --color-gray: #5b616b;
   --color-gray-medium: #757575;

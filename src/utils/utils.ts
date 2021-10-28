@@ -1,3 +1,5 @@
+import { Build } from '@stencil/core';
+
 export function format(first: string, middle: string, last: string): string {
   return (
     (first || '') + (middle ? ` ${middle}` : '') + (last ? ` ${last}` : '')
@@ -27,4 +29,13 @@ export function getSlottedNodes(
   return Array.from(children).filter(
     item => item.nodeName.toLowerCase() === nodeName,
   );
+}
+
+/**
+ * Output an error message when in development mode and not testing.
+ */
+export function consoleDevError(message: string): void {
+  if (Build.isDev && !Build.isTesting) {
+    console.error(message);
+  }
 }

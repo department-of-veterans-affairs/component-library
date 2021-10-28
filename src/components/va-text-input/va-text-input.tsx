@@ -7,6 +7,7 @@ import {
   Event,
   EventEmitter,
 } from '@stencil/core';
+import { consoleDevError } from '../../utils/utils';
 
 @Component({
   tag: 'va-text-input',
@@ -15,6 +16,11 @@ import {
 })
 export class VaTextInput {
   @Element() el: HTMLElement;
+
+  /**
+   * Input types we will allow to be specified with the "type" prop.
+   */
+  allowedInputTypes = ['email', 'number', 'search', 'tel', 'text', 'url'];
 
   /**
    * The label for the text input.
@@ -37,6 +43,16 @@ export class VaTextInput {
   @Prop() placeholder?: string;
 
   /**
+   * The inputmode attribute.
+   */
+  @Prop() inputmode?: string = '';
+
+  /**
+   * The type attribute.
+   */
+  @Prop() type?: string = 'text';
+
+  /**
    * The maximum number of characters allowed in the input.
    */
   @Prop() maxlength?: number;
@@ -57,7 +73,7 @@ export class VaTextInput {
   @Prop() name?: string;
 
   /**
-   * The aria-describedby attribute for the <intput> in the shadow DOM.
+   * The aria-describedby attribute for the <input> in the shadow DOM.
    */
   @Prop() ariaDescribedby?: string = '';
 
@@ -95,6 +111,15 @@ export class VaTextInput {
   })
   componentLibraryAnalytics: EventEmitter;
 
+  private getInputType() {
+    if (!this.allowedInputTypes.includes(this.type)) {
+      consoleDevError(`The input type "${this.type}" is invalid or unsupported!`);
+      return 'text';
+    }
+
+    return this.type;
+  };
+
   private handleChange = (e: Event) => {
     const target = e.target as HTMLInputElement;
     this.value = target.value;
@@ -120,6 +145,12 @@ export class VaTextInput {
     const describedBy =
       `${this.ariaDescribedby} ${this.error ? 'error-message' : ''}`.trim() ||
       null; // Null so we don't add the attribute if we have an empty string
+    const inputMode =
+      this.inputmode ?
+      this.inputmode :
+      null; // Null so we don't add the attribute if we have an empty string
+    const type = this.getInputType();
+
     return (
       <Host>
         {this.label && (
@@ -131,11 +162,12 @@ export class VaTextInput {
         {this.error && <span id="error-message">{this.error}</span>}
         <input
           id="inputField"
-          type="text"
+          type={type}
           value={this.value}
           onInput={this.handleChange}
           onBlur={this.handleBlur}
           aria-describedby={describedBy}
+          inputmode={inputMode}
           placeholder={this.placeholder}
           maxlength={this.maxlength}
         />
