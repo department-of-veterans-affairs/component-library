@@ -1,4 +1,5 @@
 import { newE2EPage } from '@stencil/core/testing';
+import { axeCheck } from '../../../testing/test-helpers';
 
 describe('va-loading-indicator', () => {
   it('renders', async () => {
@@ -37,5 +38,14 @@ describe('va-loading-indicator', () => {
     });
 
     expect(focusedTag).toEqual('va-loading-indicator');
+  });
+
+  it('passes an axe check', async () => {
+    const page = await newE2EPage();
+    await page.setContent(
+      '<va-loading-indicator message="Loading" label="aria label here"</va-loading-indicator>',
+    );
+
+    await axeCheck(page);
   });
 });
