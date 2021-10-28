@@ -10,12 +10,21 @@ export default {
 
 const defaultArgs = {
   message: 'Loading your application...',
+  setFocus: false,
 };
 
-const Template = ({ message }) => {
-  return <va-loading-indicator message={message}></va-loading-indicator>;
+const Template = ({ message, setFocus }) => {
+  return (
+    <va-loading-indicator
+      message={message}
+      set-focus={setFocus}
+    ></va-loading-indicator>
+  );
 };
 
 export const Default = Template.bind({});
 Default.args = { ...defaultArgs };
 Default.argTypes = propStructure(loadingIndicatorDocs);
+
+export const SetFocus = Template.bind({});
+SetFocus.args = { ...defaultArgs, setFocus: true };

@@ -23,6 +23,12 @@ export class VaLoadingIndicator {
    */
   @Prop() setFocus: boolean = false;
 
+  componentDidLoad() {
+    if (this.setFocus && this.spinner) {
+      this.spinner.focus();
+    }
+  }
+
   render() {
     const { message, label } = this;
 
