@@ -5,7 +5,7 @@
 }
 
 :host(:not(:last-child)) {
-  margin-bottom: 22px;
+  margin-bottom: 8px;
 }
 
 :host(:last-child) {
