@@ -12,8 +12,8 @@
 .loading-indicator:after {
   content: ' ';
   display: inline-block;
-  width: 5.6rem;
-  height: 5.6rem;
+  width: 4rem;
+  height: 4rem;
   margin: 1px;
   border-radius: 50%;
   border: 8px solid var(--color-primary);
