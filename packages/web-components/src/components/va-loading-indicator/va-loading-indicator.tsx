@@ -1,4 +1,12 @@
-import { Component, Host, Prop, h } from '@stencil/core';
+import {
+  Component,
+  Element,
+  Event,
+  EventEmitter,
+  Host,
+  Prop,
+  h,
+} from '@stencil/core';
 
 @Component({
   tag: 'va-loading-indicator',
@@ -6,7 +14,11 @@ import { Component, Host, Prop, h } from '@stencil/core';
   shadow: true,
 })
 export class VaLoadingIndicator {
+  @Element() el!: HTMLElement;
   spinner!: HTMLDivElement;
+
+  loadingStartTime = null;
+  observer = null;
 
   /**
    * The message visible on screen when loading
@@ -23,10 +35,69 @@ export class VaLoadingIndicator {
    */
   @Prop() setFocus: boolean = false;
 
+  /**
+   * Analytics tracking function(s) will be called. Form components
+   * are disabled by default due to PII/PHI concerns.
+   */
+  @Prop() enableAnalytics: boolean;
+
+  /**
+   * The event used to track usage of the component.
+   */
+  @Event({
+    eventName: 'component-library-analytics',
+    composed: true,
+    bubbles: true,
+  })
+  componentLibraryAnalytics: EventEmitter;
+
   componentDidLoad() {
     if (this.setFocus && this.spinner) {
       this.spinner.focus();
     }
+
+    this.loadingStartTime = Date.now();
+
+    const parentNode = this.el.parentNode;
+
+    const callback = mutationsList => {
+      // Use traditional 'for loops' for IE 11
+      for (const mutation of mutationsList) {
+        if (mutation.type === 'childList') {
+          const loadingIndicatorRemoved =
+            Array.from(parentNode.children).filter(node => {
+              return node.tagName.toLowerCase() == 'va-loading-indicator';
+            }).length == 0;
+
+          if (this.enableAnalytics && loadingIndicatorRemoved) {
+            const ev = new CustomEvent('component-library-analytics', {
+              bubbles: true,
+              detail: {
+                componentName: 'va-loading-indicator',
+                action: 'displayed',
+                details: {
+                  displayTime: Date.now() - this.loadingStartTime,
+                  message: this.message,
+                },
+              },
+            });
+            parentNode.dispatchEvent(ev);
+          }
+        }
+      }
+    };
+
+    this.observer = new MutationObserver(callback);
+    this.observer.observe(parentNode, {
+      childList: true,
+    });
+  }
+
+  disconnectedCallback() {
+    // Without accessing a property of the parent node, the mutation observer
+    // doesn't fire. I'd like to figure out why
+    console.debug('Removed loading indicator from', this.el.parentNode.tagName);
+    this.observer.disconnect();
   }
 
   render() {

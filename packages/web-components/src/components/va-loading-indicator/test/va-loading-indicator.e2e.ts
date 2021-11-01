@@ -48,4 +48,48 @@ describe('va-loading-indicator', () => {
 
     await axeCheck(page);
   });
+
+  it('fires an analytics event when enableAnalytics is true', async () => {
+    const page = await newE2EPage();
+    await page.setContent(`
+      <body id="test">
+        <va-loading-indicator message="Loading" enable-analytics></va-loading-indicator>
+        </body>
+        `);
+
+    const analyticsSpy = await page.spyOnEvent('component-library-analytics');
+
+    await page.evaluate(() => {
+      let node = document.querySelector('va-loading-indicator');
+      node.parentNode.removeChild(node);
+    });
+
+    const eventDetails = analyticsSpy.events[0].detail;
+
+    expect(analyticsSpy).toHaveReceivedEventTimes(1);
+    console.log(analyticsSpy.events[0].detail);
+    expect(eventDetails.action).toEqual('displayed');
+    expect(eventDetails.componentName).toEqual('va-loading-indicator');
+    expect(eventDetails.details.message).toEqual('Loading');
+    expect(typeof eventDetails.details.displayTime).toEqual('number');
+  });
+
+  it('does not fire an analytics event when enableAnalytics is not truthy', async () => {
+    const page = await newE2EPage();
+    await page.setContent(`
+      <body id="test">
+        <va-loading-indicator message="Loading"></va-loading-indicator>
+      </body>
+    `);
+
+    const analyticsSpy = await page.spyOnEvent('component-library-analytics');
+
+    await page.evaluate(() => {
+      let node = document.querySelector('va-loading-indicator');
+      node.parentNode.removeChild(node);
+    });
+    await page.waitForChanges();
+
+    expect(analyticsSpy).toHaveReceivedEventTimes(0);
+  });
 });

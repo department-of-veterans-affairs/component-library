@@ -122,6 +122,10 @@ export namespace Components {
     }
     interface VaLoadingIndicator {
         /**
+          * Analytics tracking function(s) will be called. Form components are disabled by default due to PII/PHI concerns.
+         */
+        "enableAnalytics": boolean;
+        /**
           * An aria label
          */
         "label": string;
@@ -485,6 +489,10 @@ declare namespace LocalJSX {
     }
     interface VaLoadingIndicator {
         /**
+          * Analytics tracking function(s) will be called. Form components are disabled by default due to PII/PHI concerns.
+         */
+        "enableAnalytics"?: boolean;
+        /**
           * An aria label
          */
         "label"?: string;
@@ -492,6 +500,10 @@ declare namespace LocalJSX {
           * The message visible on screen when loading
          */
         "message"?: string;
+        /**
+          * The event used to track usage of the component.
+         */
+        "onComponent-library-analytics"?: (event: CustomEvent<any>) => void;
         /**
           * Set to true if the loading indicator should capture focus
          */
