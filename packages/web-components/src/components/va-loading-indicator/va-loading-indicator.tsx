@@ -92,17 +92,14 @@ export class VaLoadingIndicator {
     this.observer = new MutationObserver(callback);
     this.observer.observe(parentNode, {
       childList: true,
+      // attributes: true,
+      // subtree: true,
     });
   }
 
   disconnectedCallback() {
-    // Without accessing a property of the parent node, the mutation observer
-    // doesn't fire. I'd like to figure out why
-    console.debug(
-      'Removed loading indicator from',
-      (this.el.parentNode as Element).tagName,
-    );
-    this.observer.disconnect();
+    // Don't disconnect the observer before the callback runs
+    setTimeout(() => this.observer.disconnect());
   }
 
   render() {
