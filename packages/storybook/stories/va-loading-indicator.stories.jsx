@@ -1,24 +1,39 @@
 /* eslint-disable react/prop-types */
-import React from 'react';
+import React, { useState } from 'react';
 import { getWebComponentDocs, propStructure } from './wc-helpers';
 
 const loadingIndicatorDocs = getWebComponentDocs('va-loading-indicator');
 
 export default {
   title: 'Components/va-loading-indicator',
+  parameters: {
+    actions: {
+      handles: ['component-library-analytics'],
+    },
+  },
 };
 
 const defaultArgs = {
   message: 'Loading your application...',
   setFocus: false,
+  enableAnalytics: false,
 };
 
-const Template = ({ message, setFocus }) => {
+const Template = ({ message, setFocus, enableAnalytics }) => {
+  const [isLoading, setIsLoading] = useState(true);
   return (
-    <va-loading-indicator
-      message={message}
-      set-focus={setFocus}
-    ></va-loading-indicator>
+    <div>
+      {enableAnalytics && (
+        <button onClick={() => setIsLoading(false)}>Finish loading</button>
+      )}
+      {isLoading && (
+        <va-loading-indicator
+          message={message}
+          set-focus={setFocus}
+          enable-analytics={enableAnalytics}
+        ></va-loading-indicator>
+      )}
+    </div>
   );
 };
 
@@ -28,3 +43,6 @@ Default.argTypes = propStructure(loadingIndicatorDocs);
 
 export const SetFocus = Template.bind({});
 SetFocus.args = { ...defaultArgs, setFocus: true };
+
+export const EnableAnalytics = Template.bind({});
+EnableAnalytics.args = { ...defaultArgs, enableAnalytics: true };

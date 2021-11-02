@@ -72,6 +72,7 @@ export class VaLoadingIndicator {
           if (this.enableAnalytics && loadingIndicatorRemoved) {
             const ev = new CustomEvent('component-library-analytics', {
               bubbles: true,
+              composed: true,
               detail: {
                 componentName: 'va-loading-indicator',
                 action: 'displayed',
