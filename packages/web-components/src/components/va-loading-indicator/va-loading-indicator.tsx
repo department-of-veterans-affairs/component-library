@@ -92,8 +92,6 @@ export class VaLoadingIndicator {
     this.observer = new MutationObserver(callback);
     this.observer.observe(parentNode, {
       childList: true,
-      // attributes: true,
-      // subtree: true,
     });
   }
 
