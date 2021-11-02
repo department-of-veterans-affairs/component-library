@@ -7,7 +7,15 @@ describe('va-loading-indicator', () => {
     await page.setContent('<va-loading-indicator></va-loading-indicator>');
 
     const element = await page.find('va-loading-indicator');
-    expect(element).toHaveClass('hydrated');
+
+    expect(element).toEqualHtml(`
+      <va-loading-indicator class="hydrated">
+        <mock:shadow-root>
+          <div aria-label="Loading" class="loading-indicator" role="progressbar" tabindex="0">
+          </div>
+        </mock:shadow-root>
+      </va-loading-indicator>
+    `);
   });
 
   it('should not focus if setFocus is not set', async () => {
@@ -67,7 +75,6 @@ describe('va-loading-indicator', () => {
     const eventDetails = analyticsSpy.events[0].detail;
 
     expect(analyticsSpy).toHaveReceivedEventTimes(1);
-    console.log(analyticsSpy.events[0].detail);
     expect(eventDetails.action).toEqual('displayed');
     expect(eventDetails.componentName).toEqual('va-loading-indicator');
     expect(eventDetails.details.message).toEqual('Loading');
