@@ -15,6 +15,7 @@ export default {
 
 const defaultArgs = {
   message: 'Loading your application...',
+  label: 'Loading',
   setFocus: false,
   enableAnalytics: false,
 };
@@ -24,7 +25,12 @@ const Template = ({ message, setFocus, enableAnalytics }) => {
   return (
     <div>
       {enableAnalytics && (
-        <button onClick={() => setIsLoading(false)}>Finish loading</button>
+        <button
+          className="vads-u-display--flex vads-u-margin-x--auto"
+          onClick={() => setIsLoading(false)}
+        >
+          Finish loading
+        </button>
       )}
       {isLoading && (
         <va-loading-indicator
