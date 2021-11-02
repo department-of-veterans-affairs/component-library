@@ -65,9 +65,10 @@ export class VaLoadingIndicator {
       for (const mutation of mutationsList) {
         if (mutation.type === 'childList') {
           const loadingIndicatorRemoved =
-            Array.from(parentNode.children).filter(node => {
-              return node.tagName.toLowerCase() == 'va-loading-indicator';
-            }).length == 0;
+            Array.from(mutation.removedNodes.values()).filter(
+              (node: Element) =>
+                node.tagName.toLowerCase() === 'va-loading-indicator',
+            ).length > 0;
 
           if (this.enableAnalytics && loadingIndicatorRemoved) {
             const ev = new CustomEvent('component-library-analytics', {
