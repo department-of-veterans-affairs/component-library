@@ -1,8 +1,8 @@
 import React from 'react';
-import {LoadingIndicator} from '@department-of-veterans-affairs/component-library';
+import { LoadingIndicator } from '@department-of-veterans-affairs/component-library';
 
 export default {
-  title: 'Components/LoadingIndicator',
+  title: 'Components/LoadingIndicator (deprecated)',
   component: LoadingIndicator,
 };
 
