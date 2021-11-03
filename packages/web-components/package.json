@@ -23,8 +23,7 @@
     "test": "stencil test --spec --e2e",
     "test.watch": "stencil test --spec --e2e --watchAll",
     "generate": "stencil generate",
-    "serve": "stencil build --dev --watch --serve",
-    "prepare": "npm run build && npm run build-bindings"
+    "serve": "stencil build --dev --watch --serve"
   },
   "dependencies": {
     "@stencil/core": "^2.8.1",
