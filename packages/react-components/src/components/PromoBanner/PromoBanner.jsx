@@ -46,6 +46,11 @@ function PromoBanner({
     }
   };
 
+  let splitText = text.split(' ');
+  const lastWord = splitText.pop();
+  const formattedText = splitText.join(' ');
+
+
   return (
     <div className="vads-c-promo-banner">
       <div className="vads-c-promo-banner__body">
@@ -70,12 +75,12 @@ function PromoBanner({
               target={target}
               onClick={handleLinkClick}
             >
-              {text}{' '}
-              <i
+              {formattedText}
+              <span style={{whiteSpace: 'nowrap'}}> {lastWord} <i
                 aria-hidden="true"
                 className="fas fa-angle-right"
                 role="presentation"
-              />
+              /></span>
             </a>
           )}
         </div>
