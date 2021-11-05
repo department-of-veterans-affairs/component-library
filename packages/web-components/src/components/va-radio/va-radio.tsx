@@ -51,15 +51,66 @@ export class VaRadio {
   })
   vaValueChange: EventEmitter;
 
+  @Listen('keydown')
+  handleKeyDown(event: KeyboardEvent) {
+    const currentItem = event.target as HTMLVaRadioOptionElement;
+    const radioOptionNodes = getSlottedNodes(
+      this.el,
+      'va-radio-option',
+    ) as HTMLVaRadioOptionElement[];
+    const currentItemIndex = radioOptionNodes.findIndex(
+      item => item === currentItem,
+    );
+    let nextItem;
+
+    switch (event.key) {
+      case ' ':
+        this.selectNextItem(currentItem);
+        break;
+      case 'ArrowDown':
+      case 'ArrowRight':
+        if (currentItemIndex === radioOptionNodes.length - 1) {
+          this.deselectCurrentItem(currentItem);
+          nextItem = radioOptionNodes[0];
+          this.selectNextItem(nextItem);
+        } else {
+          this.deselectCurrentItem(currentItem);
+          nextItem = radioOptionNodes[currentItemIndex + 1];
+          this.selectNextItem(nextItem);
+        }
+        break;
+      case 'ArrowUp':
+      case 'ArrowLeft':
+        if (currentItemIndex === 0) {
+          this.deselectCurrentItem(currentItem);
+          nextItem = radioOptionNodes[radioOptionNodes.length - 1];
+          this.selectNextItem(nextItem);
+        } else {
+          this.deselectCurrentItem(currentItem);
+          nextItem = radioOptionNodes[currentItemIndex - 1];
+          this.selectNextItem(nextItem);
+        }
+        break;
+      default:
+        break;
+    }
+
+    if (this.enableAnalytics) this.fireAnalyticsEvent(nextItem.label);
+
+    this.vaValueChange.emit({ value: nextItem.value });
+  }
+
   @Listen('radioOptionSelected')
   radioOptionSelectedHandler(event: CustomEvent): void {
     const clickedItem = event.target as HTMLVaRadioOptionElement;
 
     getSlottedNodes(this.el, 'va-radio-option')
-      .filter(item => item !== clickedItem)
-      .forEach(item => ((item as HTMLVaRadioOptionElement).checked = false));
+      .filter((item: HTMLVaRadioOptionElement) => item !== clickedItem)
+      .forEach((item: HTMLVaRadioOptionElement) => {
+        this.deselectCurrentItem(item);
+      });
 
-    clickedItem.checked = true;
+    this.selectNextItem(clickedItem);
 
     if (this.enableAnalytics) this.fireAnalyticsEvent(clickedItem.label);
 
@@ -76,6 +127,30 @@ export class VaRadio {
         required: this.required,
       },
     });
+  }
+
+  private deselectCurrentItem(currentItem: HTMLVaRadioOptionElement): void {
+    currentItem.checked = false;
+    currentItem.tabIndex = -1;
+  }
+
+  private selectNextItem(nextItem: HTMLVaRadioOptionElement): void {
+    nextItem.focus();
+    nextItem.checked = true;
+    nextItem.tabIndex = 0;
+  }
+
+  componentDidLoad(): void {
+    getSlottedNodes(this.el, 'va-radio-option').forEach(
+      (item: HTMLVaRadioOptionElement, index: number) => {
+        if (index === 0) {
+          item.checked = false;
+          item.tabIndex = 0;
+        } else {
+          this.deselectCurrentItem(item);
+        }
+      },
+    );
   }
 
   render() {

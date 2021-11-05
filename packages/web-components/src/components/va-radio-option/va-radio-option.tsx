@@ -43,8 +43,9 @@ export class VaRadioOption {
 
   render() {
     const ariaDescribedby = (this.checked && this.ariaDescribedby) || null;
+    const ariaChecked = (this.checked && this.checked.toString()) || 'false';
     return (
-      <Host>
+      <Host role="radio" aria-checked={ariaChecked}>
         <input
           checked={this.checked}
           id="input"
