@@ -25,8 +25,8 @@ const Template = () => (
         Didn't receive a dishonorable discharge, <strong>and</strong>
       </li>
       <li>
-        Have a service-connected disability rating of at least 10% from VA, 
-        <strong>and</strong>
+        Have a service-connected disability rating of at least 10% from VA,
+        <strong> and</strong>
       </li>
       <li>
         <a href="#">Apply for VR&amp;E services</a>
