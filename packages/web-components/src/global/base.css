@@ -23,13 +23,13 @@ body {
   font-family: "Font Awesome 5 Free";
   font-weight: 900;
   font-style: normal;
-  src: url('../fonts/font-awesome/fa-solid-900.eot');
+  src: url("../fonts/font-awesome/fa-solid-900.eot");
   src: 
-      url('../fonts/font-awesome/fa-solid-900.eot?#iefix') format('embedded-opentype')
+      url("../fonts/font-awesome/fa-solid-900.eot?#iefix") format("embedded-opentype")
       url("../fonts/font-awesome/fa-solid-900.woff2") format("woff2"),
       url("../fonts/font-awesome/fa-solid-900.woff") format("woff"),
-      url('../fonts/font-awesome/fa-solid-900.ttf')  format('truetype'),
-      url('../fonts/font-awesome/fa-solid-900.svg#fontawesome') format('svg');
+      url("../fonts/font-awesome/fa-solid-900.ttf")  format("truetype"),
+      url("../fonts/font-awesome/fa-solid-900.svg") format("svg");
 }
 
 @font-face {
@@ -39,8 +39,8 @@ body {
   src:
     local("Bitter Regular"),
     local("Bitter-Regular"),
-    url('../fonts/bitter/bitter-regular.woff2') format("woff2"),
-    url('../fonts/bitter/bitter-regular.ttf') format("truetype");
+    url("../fonts/bitter/bitter-regular.woff2") format("woff2"),
+    url("../fonts/bitter/bitter-regular.ttf") format("truetype");
 }
 
 @font-face {
@@ -50,28 +50,28 @@ body {
   src:
     local("Bitter Bold"),
     local("Bitter-Bold"),
-    url('../fonts/bitter/bitter-bold.woff2') format("woff2"),
-    url('../fonts/bitter/bitter-bold.ttf') format("truetype");
+    url("../fonts/bitter/bitter-bold.woff2") format("woff2"),
+    url("../fonts/bitter/bitter-bold.ttf") format("truetype");
 }
 
 @font-face {
-  font-family: 'Source Sans Pro';
+  font-family: "Source Sans Pro";
   font-style: normal;
   font-weight: 400;
-  src: local('Source Sans Pro Regular'), local('Source-Sans-Pro-Regular'),
-       url('../fonts/source-sans-pro/sourcesanspro-regular-webfont.woff2') format('woff2'), 
-       url('../fonts/source-sans-pro/sourcesanspro-regular-webfont.woff') format('woff'),
-       url('../fonts/source-sans-pro/sourcesanspro-regular-webfont.ttf') format("truetype");
+  src: local("Source Sans Pro Regular"), local("Source-Sans-Pro-Regular"),
+       url("../fonts/source-sans-pro/sourcesanspro-regular-webfont.woff2") format("woff2"), 
+       url("../fonts/source-sans-pro/sourcesanspro-regular-webfont.woff") format("woff"),
+       url("../fonts/source-sans-pro/sourcesanspro-regular-webfont.ttf") format("truetype");
 }
 
 @font-face {
-  font-family: 'Source Sans Pro';
+  font-family: "Source Sans Pro";
   font-style: normal;
   font-weight: 700;
-  src: local('Source Sans Pro Bold'), local('Source-Sans-Pro-Bold'),
-       url('../fonts/source-sans-pro/sourcesanspro-bold-webfont.woff2') format('woff2'), 
-       url('../fonts/source-sans-pro/sourcesanspro-bold-webfont.woff') format('woff'),
-       url('../fonts/source-sans-pro/sourcesanspro-bold-webfont.ttf') format("truetype");
+  src: local("Source Sans Pro Bold"), local("Source-Sans-Pro-Bold"),
+       url("../fonts/source-sans-pro/sourcesanspro-bold-webfont.woff2") format("woff2"), 
+       url("../fonts/source-sans-pro/sourcesanspro-bold-webfont.woff") format("woff"),
+       url("../fonts/source-sans-pro/sourcesanspro-bold-webfont.ttf") format("truetype");
 }
 
 :root {
@@ -97,7 +97,7 @@ body {
   --color-primary-alt-lightest: #e1f3f8;
   --color-secondary-dark: #cd2026;
   --color-secondary-lightest: #f9dede;
-  --font-source-sans: 'Source Sans Pro', 'Helvetica Neue', Helvetica, 'Roboto', Arial,
+  --font-source-sans: "Source Sans Pro", "Helvetica Neue", Helvetica, "Roboto", Arial,
     sans-serif;
-  --font-serif: 'Bitter';
+  --font-serif: "Bitter";
 }
