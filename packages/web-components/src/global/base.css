@@ -1,0 +1,104 @@
+/* Colors from: */
+/*   https://design.va.gov/design/color-palette */
+/* Fonts from: */
+/*   https://github.com/department-of-veterans-affairs/veteran-facing-services-tools/blob/8d39616e957cb44b6664a658b2c51dca8076fe7e/packages/formation/sass/base/_b-variables.scss#L16-L17 */
+
+html {
+  font-size: 10px;
+}
+
+body {
+  background: #fff;
+  color: #323a45;
+  font-size: 1.6rem;
+  font-family: inherit;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.5;
+  cursor: auto;
+  position: relative;
+}
+
+@font-face {
+  font-family: "Font Awesome 5 Free";
+  font-weight: normal;
+  font-style: normal;
+  src: url('../fonts/font-awesome/fa-solid-900.eot');
+  src: 
+      local("Font Awesome 5 Free"),
+      local("Font-Awesome-5-Free"),
+      url("../fonts/font-awesome/fa-solid-900.woff2") format("woff2"),
+      url("../fonts/font-awesome/fa-solid-900.woff") format("woff"),
+      url('../fonts/font-awesome/fa-solid-900.ttf')  format('truetype'),
+      url('../fonts/font-awesome/fa-solid-900.eot') format('svg');
+}
+
+@font-face {
+  font-family: "Bitter";
+  font-style: normal;
+  font-weight: 400;
+  src:
+    local("Bitter Regular"),
+    local("Bitter-Regular"),
+    url('../fonts/bitter/bitter-regular.woff2') format("woff2"),
+    url('../fonts/bitter/bitter-regular.ttf') format("truetype");
+}
+
+@font-face {
+  font-family: "Bitter";
+  font-style: normal;
+  font-weight: 700;
+  src:
+    local("Bitter Bold"),
+    local("Bitter-Bold"),
+    url('../fonts/bitter/bitter-bold.woff2') format("woff2"),
+    url('../fonts/bitter/bitter-bold.ttf') format("truetype");
+}
+
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Source Sans Pro Regular'), local('Source-Sans-Pro-Regular'),
+       url('../fonts/source-sans-pro/sourcesanspro-regular-webfont.woff2') format('woff2'), 
+       url('../fonts/source-sans-pro/sourcesanspro-regular-webfont.woff') format('woff'),
+       url('../fonts/source-sans-pro/sourcesanspro-regular-webfont.ttf') format("truetype");
+}
+
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-style: normal;
+  font-weight: 700;
+  src: local('Source Sans Pro Bold'), local('Source-Sans-Pro-Bold'),
+       url('../fonts/source-sans-pro/sourcesanspro-bold-webfont.woff2') format('woff2'), 
+       url('../fonts/source-sans-pro/sourcesanspro-bold-webfont.woff') format('woff'),
+       url('../fonts/source-sans-pro/sourcesanspro-bold-webfont.ttf') format("truetype");
+}
+
+:root {
+  --color-base: #212121;
+  --color-black: #000000;
+  --color-white: #ffffff;
+  --color-gray: #5b616b;
+  --color-gray-medium: #757575;
+  --color-gray-dark: #323a45;
+  --color-gray-light: #aeb0b5;
+  --color-gray-lighter: #d6d7d9;
+  --color-gray-lightest: #f1f1f1;
+  --color-green: #2e8540;
+  --color-green-lightest: #e7f4e4;
+  --color-gold: #fdb81e;
+  --color-gold-light: #f9c642;
+  --color-gold-lightest: #fff1d2;
+  --color-link-default: #004795;
+  --color-link-visited: #4c2c92;
+  --color-primary: #0071bb;
+  --color-primary-darker: #003e73;
+  --color-primary-alt-dark: #00a6d2;
+  --color-primary-alt-lightest: #e1f3f8;
+  --color-secondary-dark: #cd2026;
+  --color-secondary-lightest: #f9dede;
+  --font-source-sans: 'Source Sans Pro', 'Helvetica Neue', Helvetica, 'Roboto', Arial,
+    sans-serif;
+  --font-serif: 'Bitter';
+}
