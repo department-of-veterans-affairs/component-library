@@ -21,16 +21,15 @@ body {
 
 @font-face {
   font-family: "Font Awesome 5 Free";
-  font-weight: normal;
+  font-weight: 900;
   font-style: normal;
   src: url('../fonts/font-awesome/fa-solid-900.eot');
   src: 
-      local("Font Awesome 5 Free"),
-      local("Font-Awesome-5-Free"),
+      url('../fonts/font-awesome/fa-solid-900.eot?#iefix') format('embedded-opentype')
       url("../fonts/font-awesome/fa-solid-900.woff2") format("woff2"),
       url("../fonts/font-awesome/fa-solid-900.woff") format("woff"),
       url('../fonts/font-awesome/fa-solid-900.ttf')  format('truetype'),
-      url('../fonts/font-awesome/fa-solid-900.eot') format('svg');
+      url('../fonts/font-awesome/fa-solid-900.svg#fontawesome') format('svg');
 }
 
 @font-face {
