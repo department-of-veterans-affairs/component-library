@@ -146,7 +146,7 @@ class Modal extends React.Component {
       <button
         className="va-modal-close"
         type="button"
-        aria-label={`Close the ${status} modal`}
+        aria-label="close"
         onClick={this.handleClose}
       >
         <i className="fas fa-times-circle" aria-hidden="true" />
@@ -159,7 +159,7 @@ class Modal extends React.Component {
           className={modalClass}
           id={id}
           role={ariaRole(status)}
-          aria-label={titleId}
+          aria-labelledby={titleId}
           aria-modal
         >
           <div

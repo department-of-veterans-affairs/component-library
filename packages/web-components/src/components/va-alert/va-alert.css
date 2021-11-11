@@ -115,6 +115,7 @@ div.alert.bg-only > i::before {
 
 div.bg-only {
   border: none;
+  padding: 2rem;
 }
 
 .info.bg-only {
