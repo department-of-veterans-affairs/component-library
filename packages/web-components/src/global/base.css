@@ -3,35 +3,6 @@
 /* Fonts from: */
 /*   https://github.com/department-of-veterans-affairs/veteran-facing-services-tools/blob/8d39616e957cb44b6664a658b2c51dca8076fe7e/packages/formation/sass/base/_b-variables.scss#L16-L17 */
 
-html {
-  font-size: 10px;
-}
-
-body {
-  background: #fff;
-  color: #323a45;
-  font-size: 1.6rem;
-  font-family: inherit;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 1.5;
-  cursor: auto;
-  position: relative;
-}
-
-@font-face {
-  font-family: "Font Awesome 5 Free";
-  font-weight: 900;
-  font-style: normal;
-  src: url("../fonts/font-awesome/fa-solid-900.eot");
-  src: 
-      url("../fonts/font-awesome/fa-solid-900.eot?#iefix") format("embedded-opentype")
-      url("../fonts/font-awesome/fa-solid-900.woff2") format("woff2"),
-      url("../fonts/font-awesome/fa-solid-900.woff") format("woff"),
-      url("../fonts/font-awesome/fa-solid-900.ttf")  format("truetype"),
-      url("../fonts/font-awesome/fa-solid-900.svg") format("svg");
-}
-
 @font-face {
   font-family: "Bitter";
   font-style: normal;
@@ -60,7 +31,7 @@ body {
   font-weight: 400;
   src: local("Source Sans Pro Regular"), local("Source-Sans-Pro-Regular"),
        url("../fonts/source-sans-pro/sourcesanspro-regular-webfont.woff2") format("woff2"), 
-       url("../fonts/source-sans-pro/sourcesanspro-regular-webfont.woff") format("woff"),
+       url("../fonts/source-sans-pro/sourcesanspro-regular-webfont.woff") format("font-woff"),
        url("../fonts/source-sans-pro/sourcesanspro-regular-webfont.ttf") format("truetype");
 }
 
@@ -70,7 +41,7 @@ body {
   font-weight: 700;
   src: local("Source Sans Pro Bold"), local("Source-Sans-Pro-Bold"),
        url("../fonts/source-sans-pro/sourcesanspro-bold-webfont.woff2") format("woff2"), 
-       url("../fonts/source-sans-pro/sourcesanspro-bold-webfont.woff") format("woff"),
+       url("../fonts/source-sans-pro/sourcesanspro-bold-webfont.woff") format("font-woff"),
        url("../fonts/source-sans-pro/sourcesanspro-bold-webfont.ttf") format("truetype");
 }
 
