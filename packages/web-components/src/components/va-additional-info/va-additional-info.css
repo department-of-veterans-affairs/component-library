@@ -1,7 +1,11 @@
 :host {
   padding-left: calc(2rem - 7px);
-  border-left: 7px solid var(--color-primary-alt-light);
+  border-left: 7px solid transparent;
   display: block;
+}
+
+:host([aria-expanded='true']) {
+  border-left-color: var(--color-primary-alt-light);
 }
 .additional-info-title {
   border-bottom-right-radius: 1px;
