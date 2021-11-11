@@ -21,7 +21,10 @@ export class VaAdditionalInfo {
   render() {
     return (
       <Host aria-expanded={this.open ? 'true' : 'false'}>
-        <span class="additional-info-title">{this.trigger}</span>
+        <span class="additional-info-title">
+          {this.trigger}
+          <i class="fa-angle-down" role="presentation" />
+        </span>
 
         <div class={this.open ? 'open' : 'closed'}>
           <slot></slot>
