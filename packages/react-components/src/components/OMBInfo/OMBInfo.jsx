@@ -7,6 +7,7 @@ class OMBInfo extends React.Component {
     super(props);
 
     this.state = { modalOpen: false };
+    this.id = 'omb-modal';
   }
 
   openModal = () => {
@@ -19,7 +20,7 @@ class OMBInfo extends React.Component {
 
   modalContents = minutes => (
     <div>
-      <h3>Privacy Act Statement</h3>
+      <h3 id={`${this.id}-title`}>Privacy Act Statement</h3>
       {minutes && (
         <p>
           <strong>Respondent Burden:</strong> We need this information to
@@ -98,7 +99,7 @@ class OMBInfo extends React.Component {
               ? this.props.children
               : this.modalContents(resBurden)
           }
-          id="omb-modal"
+          id={this.id}
           visible={this.state.modalOpen}
           onClose={this.closeModal}
         />
