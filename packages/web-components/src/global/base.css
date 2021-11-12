@@ -31,7 +31,7 @@
   font-weight: 400;
   src: local("Source Sans Pro Regular"), local("Source-Sans-Pro-Regular"),
        url("../fonts/source-sans-pro/sourcesanspro-regular-webfont.woff2") format("woff2"), 
-       url("../fonts/source-sans-pro/sourcesanspro-regular-webfont.woff") format("font-woff"),
+       url("../fonts/source-sans-pro/sourcesanspro-regular-webfont.woff") format("woff"),
        url("../fonts/source-sans-pro/sourcesanspro-regular-webfont.ttf") format("truetype");
 }
 
@@ -41,7 +41,7 @@
   font-weight: 700;
   src: local("Source Sans Pro Bold"), local("Source-Sans-Pro-Bold"),
        url("../fonts/source-sans-pro/sourcesanspro-bold-webfont.woff2") format("woff2"), 
-       url("../fonts/source-sans-pro/sourcesanspro-bold-webfont.woff") format("font-woff"),
+       url("../fonts/source-sans-pro/sourcesanspro-bold-webfont.woff") format("woff"),
        url("../fonts/source-sans-pro/sourcesanspro-bold-webfont.ttf") format("truetype");
 }
 
