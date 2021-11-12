@@ -137,6 +137,27 @@ describe('va-additional-info', () => {
     });
   });
 
+  it('has the collapse action in analytics event', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent(`
+      <va-additional-info trigger="Whatever">
+        <div>More content</div>
+      </va-additional-info>
+    `);
+
+    const analyticsSpy = await page.spyOnEvent('component-library-analytics');
+
+    const anchorEl = await page.find('va-additional-info >>> a');
+
+    // Click once to expand, again to collapse
+    await anchorEl.click();
+    await anchorEl.click();
+
+    const secondEvent = analyticsSpy.events[1];
+    expect(secondEvent.detail.action).toEqual('collapse');
+  });
+
   it('does not fire an analytics event when disableAnalytics is set', async () => {
     const page = await newE2EPage();
 
