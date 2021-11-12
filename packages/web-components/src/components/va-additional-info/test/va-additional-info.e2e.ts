@@ -4,10 +4,27 @@ import { axeCheck } from '../../../testing/test-helpers';
 describe('va-additional-info', () => {
   it('renders', async () => {
     const page = await newE2EPage();
-    await page.setContent('<va-additional-info></va-additional-info>');
+    await page.setContent(
+      '<va-additional-info trigger="More info"></va-additional-info>',
+    );
 
     const element = await page.find('va-additional-info');
-    expect(element).toHaveClass('hydrated');
+
+    expect(element).toEqualHtml(`
+      <va-additional-info aria-expanded="false" trigger="More info" class="hydrated">
+        <mock:shadow-root>
+          <a aria-controls="info" role="button" tabindex="0">
+            <span class="additional-info-title">
+              More info
+              <i class="fa-angle-down" role="presentation"></i>
+            </span>
+          </a>
+          <div class="closed" id="info">
+            <slot></slot>
+          </div>
+        </mock:shadow-root>
+      </va-additional-info>
+    `);
   });
 
   it('passes an axe check', async () => {
