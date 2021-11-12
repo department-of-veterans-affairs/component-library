@@ -12,14 +12,14 @@
 .loading-indicator:after {
   content: ' ';
   display: inline-block;
-  width: 4.3rem;
-  height: 4.3rem;
+  width: 3.5rem;
+  height: 3.5rem;
   margin: 1px;
   border-radius: 50%;
   border: 8px solid var(--color-primary);
   border-color: var(--color-primary) transparent var(--color-primary)
     transparent;
-  animation: spin 1.2s linear infinite;
+  animation: spin 1.5s linear infinite;
 }
 
 .loading-indicator:focus {
