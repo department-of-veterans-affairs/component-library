@@ -1,4 +1,5 @@
 import { newE2EPage } from '@stencil/core/testing';
+import { axeCheck } from '../../../testing/test-helpers';
 
 describe('va-additional-info', () => {
   it('renders', async () => {
@@ -7,6 +8,35 @@ describe('va-additional-info', () => {
 
     const element = await page.find('va-additional-info');
     expect(element).toHaveClass('hydrated');
+  });
+
+  it('passes an axe check', async () => {
+    const page = await newE2EPage();
+    await page.setContent(
+      `<va-additional-info trigger="Additional information">
+        <div>
+          Additional content
+        </div>
+      </va-additional-info>`,
+    );
+
+    await axeCheck(page);
+  });
+
+  it('passes an axe check when opened', async () => {
+    const page = await newE2EPage();
+    await page.setContent(
+      `<va-additional-info trigger="Additional information">
+        <div>
+          Additional content
+        </div>
+      </va-additional-info>`,
+    );
+
+    const anchorEl = await page.find('va-additional-info >>> a');
+    await anchorEl.click();
+
+    await axeCheck(page);
   });
 
   it('fires an analytics event by default', async () => {
