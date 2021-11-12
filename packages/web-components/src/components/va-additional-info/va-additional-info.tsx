@@ -1,4 +1,13 @@
-import { Component, Host, Prop, State, Listen, h } from '@stencil/core';
+import {
+  Component,
+  Event,
+  EventEmitter,
+  Host,
+  Prop,
+  State,
+  Listen,
+  h,
+} from '@stencil/core';
 
 @Component({
   tag: 'va-additional-info',
@@ -13,8 +22,31 @@ export class VaAdditionalInfo {
    */
   @Prop() trigger: string;
 
+  /**
+   * If true, doesn't fire the CustomEvent which can be used for analytics tracking.
+   */
+  @Prop() disableAnalytics: boolean;
+
+  @Event({
+    eventName: 'component-library-analytics',
+    composed: true,
+    bubbles: true,
+  })
+  componentLibraryAnalytics: EventEmitter;
+
   @Listen('click', { capture: true })
   toggleOpen(): void {
+    // Conditionally track the event.
+    if (!this.disableAnalytics) {
+      this.componentLibraryAnalytics.emit({
+        componentName: 'va-additional-info',
+        action: !this.open ? 'expand' : 'collapse',
+        details: {
+          triggerText: this.trigger,
+        },
+      });
+    }
+
     this.open = !this.open;
   }
 

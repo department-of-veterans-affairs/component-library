@@ -44,6 +44,10 @@ export namespace Components {
     }
     interface VaAdditionalInfo {
         /**
+          * If true, doesn't fire the CustomEvent which can be used for analytics tracking.
+         */
+        "disableAnalytics": boolean;
+        /**
           * The text to trigger the expansion
          */
         "trigger": string;
@@ -359,6 +363,11 @@ declare namespace LocalJSX {
         "subheader"?: string;
     }
     interface VaAdditionalInfo {
+        /**
+          * If true, doesn't fire the CustomEvent which can be used for analytics tracking.
+         */
+        "disableAnalytics"?: boolean;
+        "onComponent-library-analytics"?: (event: CustomEvent<any>) => void;
         /**
           * The text to trigger the expansion
          */
