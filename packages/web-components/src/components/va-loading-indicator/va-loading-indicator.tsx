@@ -104,7 +104,7 @@ export class VaLoadingIndicator {
     const { message, label } = this;
 
     return (
-      <Host>
+      <Host aria-live="polite">
         <div
           ref={el => (this.spinner = el as HTMLDivElement)}
           class="loading-indicator"
