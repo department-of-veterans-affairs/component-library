@@ -14,17 +14,18 @@ export default {
 };
 
 const defaultArgs = {
-  trigger: 'Show more',
+  trigger: 'Additional Information',
 };
 
 const Template = ({ trigger }) => {
   return (
     <va-additional-info trigger={trigger}>
+      <div>Here are some popular pets to consider</div>
       <ul>
-        <li>Part 1</li>
-        <li>Part 1</li>
-        <li>Part 1</li>
-        <li>Part 1</li>
+        <li>Dogs</li>
+        <li>Cats</li>
+        <li>Fish</li>
+        <li>Birds</li>
       </ul>
     </va-additional-info>
   );
