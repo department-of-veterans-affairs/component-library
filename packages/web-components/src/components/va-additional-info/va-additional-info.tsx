@@ -5,7 +5,6 @@ import {
   Host,
   Prop,
   State,
-  Listen,
   h,
 } from '@stencil/core';
 
@@ -34,7 +33,6 @@ export class VaAdditionalInfo {
   })
   componentLibraryAnalytics: EventEmitter;
 
-  @Listen('click', { capture: true })
   toggleOpen(): void {
     // Conditionally track the event.
     if (!this.disableAnalytics) {
@@ -50,7 +48,6 @@ export class VaAdditionalInfo {
     this.open = !this.open;
   }
 
-  @Listen('keydown', { capture: true })
   handleKeydown(event): void {
     if (event.key === ' ') {
       event.preventDefault();
@@ -61,7 +58,13 @@ export class VaAdditionalInfo {
   render() {
     return (
       <Host aria-expanded={this.open ? 'true' : 'false'}>
-        <a role="button" aria-controls="info" tabIndex={0}>
+        <a
+          role="button"
+          aria-controls="info"
+          tabIndex={0}
+          onClick={this.toggleOpen.bind(this)}
+          onKeyDown={this.handleKeydown.bind(this)}
+        >
           <span class="additional-info-title">
             {this.trigger}
             <i class="fa-angle-down" role="presentation" />
