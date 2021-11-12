@@ -19,15 +19,20 @@ const defaultArgs = {
 
 const Template = ({ trigger }) => {
   return (
-    <va-additional-info trigger={trigger}>
-      <div>Here are some popular pets to consider</div>
-      <ul>
-        <li>Dogs</li>
-        <li>Cats</li>
-        <li>Fish</li>
-        <li>Birds</li>
-      </ul>
-    </va-additional-info>
+    <>
+      <p>Surrounding content.</p>
+
+      <va-additional-info trigger={trigger}>
+        <div>Here are some popular pets to consider</div>
+        <ul>
+          <li>Dogs</li>
+          <li>Cats</li>
+          <li>Fish</li>
+          <li>Birds</li>
+        </ul>
+      </va-additional-info>
+      <p>Surrounding content.</p>
+    </>
   );
 };
 
