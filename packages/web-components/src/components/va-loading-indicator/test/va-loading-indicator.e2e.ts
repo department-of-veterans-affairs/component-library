@@ -9,9 +9,9 @@ describe('va-loading-indicator', () => {
     const element = await page.find('va-loading-indicator');
 
     expect(element).toEqualHtml(`
-      <va-loading-indicator class="hydrated">
+      <va-loading-indicator aria-live="polite" class="hydrated">
         <mock:shadow-root>
-          <div aria-label="Loading" class="loading-indicator" role="progressbar" tabindex="0">
+          <div aria-label="Loading" class="loading-indicator" role="progressbar" tabindex="-1">
           </div>
         </mock:shadow-root>
       </va-loading-indicator>
