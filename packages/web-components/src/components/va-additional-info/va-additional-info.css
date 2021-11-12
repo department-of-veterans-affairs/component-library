@@ -1,12 +1,17 @@
+@import '../../mixins/links.css';
 :host {
   padding-left: calc(2rem - 7px);
   border-left: 7px solid transparent;
   display: block;
 }
-
 :host([aria-expanded='true']) {
   border-left-color: var(--color-primary-alt-light);
 }
+
+a {
+  display: block;
+}
+
 .additional-info-title {
   border-bottom-right-radius: 1px;
   border-bottom: 2px dotted var(--color-primary);
@@ -32,6 +37,7 @@ i {
   font-family: 'Font Awesome 5 Free';
   font-style: normal;
   font-weight: 900;
+  line-height: 1;
 }
 i.fa-angle-down {
   display: inline-block;
