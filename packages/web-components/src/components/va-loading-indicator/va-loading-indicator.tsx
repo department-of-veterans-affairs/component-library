@@ -111,7 +111,7 @@ export class VaLoadingIndicator {
           role="progressbar"
           aria-label={label}
           aria-valuetext={message}
-          tabindex="0"
+          tabindex="-1"
         />
         {message}
       </Host>
