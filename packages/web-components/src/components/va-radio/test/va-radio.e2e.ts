@@ -161,6 +161,24 @@ describe('va-radio', () => {
     expect(await options[2].getProperty('checked')).toBeTruthy();
   });
 
+  it('unchecks current option when using the left arrow key', async () => {
+    const page = await newE2EPage();
+    await page.setContent(
+      `
+      <va-radio>
+        <va-radio-option checked label="Option 1" value="1"></va-radio-option>
+        <va-radio-option label="Option 2" value="2"></va-radio-option>
+        <va-radio-option label="Option 3" value="3"></va-radio-option>
+      </va-radio>
+    `,
+    );
+    const options = await page.findAll('va-radio-option');
+
+    await options[0].press('ArrowLeft');
+
+    expect(await options[0].getProperty('checked')).toBeFalsy();
+  });
+
   it('checks next option when using the right arrow key', async () => {
     const page = await newE2EPage();
     await page.setContent(
@@ -179,6 +197,24 @@ describe('va-radio', () => {
     expect(await options[1].getProperty('checked')).toBeTruthy();
   });
 
+  it('unchecks current option when using the right arrow key', async () => {
+    const page = await newE2EPage();
+    await page.setContent(
+      `
+      <va-radio>
+        <va-radio-option checked label="Option 1" value="1"></va-radio-option>
+        <va-radio-option label="Option 2" value="2"></va-radio-option>
+        <va-radio-option label="Option 3" value="3"></va-radio-option>
+      </va-radio>
+    `,
+    );
+    const options = await page.findAll('va-radio-option');
+
+    await options[0].press('ArrowRight');
+
+    expect(await options[0].getProperty('checked')).toBeFalsy();
+  });
+
   it('checks next option when using the down arrow key', async () => {
     const page = await newE2EPage();
     await page.setContent(
@@ -192,23 +228,6 @@ describe('va-radio', () => {
     const options = await page.findAll('va-radio-option');
 
     await options[0].press('ArrowDown');
-
-    expect(await options[1].getProperty('checked')).toBeTruthy();
-  });
-
-  it('checks next option when using the up arrow key', async () => {
-    const page = await newE2EPage();
-    await page.setContent(
-      `
-      <va-radio>
-        <va-radio-option checked label="Option 1" value="1"></va-radio-option>
-        <va-radio-option label="Option 2" value="2"></va-radio-option>
-      </va-radio>
-    `,
-    );
-    const options = await page.findAll('va-radio-option');
-
-    await options[0].press('ArrowUp');
 
     expect(await options[1].getProperty('checked')).toBeTruthy();
   });
@@ -230,7 +249,24 @@ describe('va-radio', () => {
     expect(await options[0].getProperty('checked')).toBeFalsy();
   });
 
-  it('unchecks current option when new option is selected using the up arrow key', async () => {
+  it('checks next option when using the up arrow key', async () => {
+    const page = await newE2EPage();
+    await page.setContent(
+      `
+      <va-radio>
+        <va-radio-option checked label="Option 1" value="1"></va-radio-option>
+        <va-radio-option label="Option 2" value="2"></va-radio-option>
+      </va-radio>
+    `,
+    );
+    const options = await page.findAll('va-radio-option');
+
+    await options[0].press('ArrowUp');
+
+    expect(await options[1].getProperty('checked')).toBeTruthy();
+  });
+
+  it('unchecks current option when using the up arrow key', async () => {
     const page = await newE2EPage();
     await page.setContent(
       `
