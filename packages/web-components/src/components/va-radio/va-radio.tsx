@@ -67,6 +67,7 @@ export class VaRadio {
     switch (event.key) {
       case ' ':
         event.preventDefault();
+        if (currentNode.checked) return;
         nextNode = currentNode;
         this.selectNextNode(currentNode);
         break;
