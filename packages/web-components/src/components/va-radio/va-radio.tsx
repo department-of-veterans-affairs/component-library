@@ -16,7 +16,7 @@ import { getSlottedNodes } from '../../utils/utils';
   shadow: true,
 })
 export class VaRadio {
-  @Element() el: any;
+  @Element() el: HTMLElement;
 
   /**
    * The text label for the radio group.
@@ -66,6 +66,8 @@ export class VaRadio {
 
     switch (event.key) {
       case ' ':
+        event.preventDefault();
+        nextNode = currentNode;
         this.selectNextNode(currentNode);
         break;
       case 'ArrowDown':
@@ -134,13 +136,11 @@ export class VaRadio {
 
   private deselectCurrentNode(node: HTMLVaRadioOptionElement): void {
     node.removeAttribute('checked');
-    node.setAttribute('aria-checked', 'false');
     node.setAttribute('tabindex', '-1');
   }
 
   private selectNextNode(node: HTMLVaRadioOptionElement): void {
     node.setAttribute('checked', '');
-    node.setAttribute('aria-checked', 'true');
     node.setAttribute('tabindex', '0');
     node.focus();
   }
@@ -153,7 +153,6 @@ export class VaRadio {
         } else {
           node.setAttribute('tabindex', '-1');
         }
-        node.setAttribute('aria-checked', 'false');
       },
     );
   }

@@ -44,16 +44,20 @@ export class VaRadioOption {
   render() {
     const ariaDescribedby = (this.checked && this.ariaDescribedby) || null;
     return (
-      <Host>
+      <Host
+        role="radio"
+        onClick={() => this.handleChange()}
+        checked={this.checked}
+        aria-describedby={ariaDescribedby}
+        aria-checked={`${this.checked}`}
+      >
         <input
-          role="radio"
           checked={this.checked}
           id="input"
           name={this.name}
           type="radio"
           value={this.value}
-          onChange={() => this.handleChange()}
-          aria-describedby={ariaDescribedby}
+          tabindex="-1"
         />
         <label htmlFor="input">{this.label}</label>
       </Host>
