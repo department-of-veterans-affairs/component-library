@@ -1,6 +1,7 @@
 @import '../../mixins/links.css';
 :host {
   padding-left: calc(2rem - 7px);
+  margin-left: -2rem;
   border-left: 7px solid transparent;
   display: block;
 }
