@@ -70,7 +70,7 @@ export class VaBackToTop {
 
     return (
       <Host>
-        <div id="marginWrapper">
+        <span id="marginWrapper">
           <span
             class="reveal-point"
             ref={el => (this.revealPixel = el as HTMLSpanElement)}
@@ -84,7 +84,7 @@ export class VaBackToTop {
               <span>Back to top</span>
             </button>
           </div>
-        </div>
+        </span>
       </Host>
     );
   }

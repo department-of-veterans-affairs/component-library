@@ -10,7 +10,7 @@
   margin-bottom: 2rem;
 }
 
-#marginWrapper div {
+div {
   position: fixed;
   bottom: 0;
   width: 100%;
@@ -44,12 +44,12 @@ button {
 button:hover {
   background-color: var(--color-black);
 }
-#marginWrapper div.reveal button {
+div.reveal button {
   pointer-events: auto;
   opacity: 1;
   animation: slideInUp 0.25s;
 }
-#marginWrapper div:not(.reveal) button {
+div:not(.reveal) button {
   animation: slideOutDown 0.25s;
 }
 
@@ -57,10 +57,10 @@ button:hover {
   button {
     transition: none;
   }
-  #marginWRapper div.reveal button {
+  div.reveal button {
     animation: none;
   }
-  #marginWrapper div:not(.reveal) button {
+  div:not(.reveal) button {
     animation: none;
   }
 }
@@ -69,19 +69,19 @@ button span {
   display: none;
 }
 
-#marginWrapper div.docked {
+div.docked {
   position: relative;
   display: flex;
   flex-direction: row-reverse;
 }
-#marginWrapper div:not(.docked) {
+div:not(.docked) {
   max-width: var(--undocked-width);
 }
-#marginWrapper div:not(.docked):not(.reveal) {
+div:not(.docked):not(.reveal) {
   position: relative;
 }
 
-#marginWrapper div.docked button {
+div.docked button {
   position: relative;
 }
 

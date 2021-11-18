@@ -41,7 +41,7 @@ describe('va-back-to-top', () => {
 
   it('reveals when the viewport is below the reveal pixel', async () => {
     const page = await pageSetup();
-    const wrapper = await page.find('va-back-to-top >>> #marginWrapper div');
+    const wrapper = await page.find('va-back-to-top >>> div');
     const notQuitePastRevealPoint = 199;
 
     // Button shouldn't be revealed initially
@@ -65,7 +65,7 @@ describe('va-back-to-top', () => {
 
   it('docks when the "dock" is scrolled into view', async () => {
     const page = await pageSetup();
-    const wrapper = await page.find('va-back-to-top >>> #marginWrapper div');
+    const wrapper = await page.find('va-back-to-top >>> div');
     const pastPlaceholder = 1000;
 
     expect(wrapper).not.toHaveClass('docked');
@@ -82,7 +82,7 @@ describe('va-back-to-top', () => {
 
   it('stays docked even with really long footers', async () => {
     const page = await pageSetup();
-    const wrapper = await page.find('va-back-to-top >>> #marginWrapper div');
+    const wrapper = await page.find('va-back-to-top >>> div');
     const pastPlaceholder = 1000;
     // Placeholder section is 1000px tall. Accounting for the header,
     // 2000px should put us well past the dock
@@ -127,7 +127,7 @@ describe('va-back-to-top', () => {
 
   it('passes an axe check when revealed', async () => {
     const page = await pageSetup();
-    const wrapper = await page.find('va-back-to-top >>> #marginWrapper div');
+    const wrapper = await page.find('va-back-to-top >>> div');
     const pastRevealPoint = 300;
 
     await page.mouse.wheel({ deltaY: pastRevealPoint });
@@ -140,7 +140,7 @@ describe('va-back-to-top', () => {
 
   it('passes an axe check when docked', async () => {
     const page = await pageSetup();
-    const wrapper = await page.find('va-back-to-top >>> #marginWrapper div');
+    const wrapper = await page.find('va-back-to-top >>> div');
     const pastPlaceholder = 1000;
 
     await page.mouse.wheel({ deltaY: pastPlaceholder });
