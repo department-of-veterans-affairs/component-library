@@ -26,6 +26,7 @@ const pageSetup = async () => {
     `);
 
   await page.addStyleTag({ content: pageStyles });
+  await page.waitForChanges();
 
   return page;
 };
