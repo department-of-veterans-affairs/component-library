@@ -15,7 +15,7 @@ describe('va-radio-option', () => {
       '<va-radio-option checked label="An option"></va-radio-option>',
     );
 
-    const inputEl = await page.find('va-radio-option >>> input');
+    const inputEl = await page.find('va-radio-option');
 
     expect(await inputEl.getProperty('checked')).toBeTruthy();
   });

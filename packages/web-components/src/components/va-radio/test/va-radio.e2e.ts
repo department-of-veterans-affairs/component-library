@@ -37,7 +37,7 @@ describe('va-radio', () => {
     `,
     );
 
-    const options = await page.findAll('va-radio-option >>> input');
+    const options = await page.findAll('va-radio-option');
 
     expect(await options[0].getProperty('checked')).toBeTruthy();
     expect(await options[1].getProperty('checked')).toBeFalsy();
@@ -83,7 +83,7 @@ describe('va-radio', () => {
       </va-radio>
       `);
     const analyticsSpy = await page.spyOnEvent('component-library-analytics');
-    const inputEl = await page.find('va-radio-option >>> input');
+    const inputEl = await page.find('va-radio-option');
     await inputEl.click();
 
     expect(analyticsSpy).toHaveReceivedEventDetail({
@@ -106,7 +106,7 @@ describe('va-radio', () => {
       `);
 
     const analyticsSpy = await page.spyOnEvent('component-library-analytics');
-    const inputEl = await page.find('va-radio-option >>> input');
+    const inputEl = await page.find('va-radio-option');
     await inputEl.click();
 
     expect(analyticsSpy).not.toHaveReceivedEvent();
@@ -121,7 +121,7 @@ describe('va-radio', () => {
       `);
 
     const changeSpy = await page.spyOnEvent('vaValueChange');
-    const inputEl = await page.find('va-radio-option >>> input');
+    const inputEl = await page.find('va-radio-option');
     await inputEl.click();
 
     expect(changeSpy).toHaveReceivedEventDetail({ value: 'one' });
