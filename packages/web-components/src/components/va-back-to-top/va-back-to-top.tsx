@@ -70,19 +70,21 @@ export class VaBackToTop {
 
     return (
       <Host>
-        <span
-          class="reveal-point"
-          ref={el => (this.revealPixel = el as HTMLSpanElement)}
-        ></span>
+        <span id="marginWrapper">
+          <span
+            class="reveal-point"
+            ref={el => (this.revealPixel = el as HTMLSpanElement)}
+          ></span>
 
-        <div
-          class={classnames({ docked: this.isDocked, reveal: this.revealed })}
-        >
-          <button type="button" onClick={this.navigateToTop.bind(this)}>
-            <i aria-hidden="true" role="img"></i>
-            <span>Back to top</span>
-          </button>
-        </div>
+          <div
+            class={classnames({ docked: this.isDocked, reveal: this.revealed })}
+          >
+            <button type="button" onClick={this.navigateToTop.bind(this)}>
+              <i aria-hidden="true" role="img"></i>
+              <span>Back to top</span>
+            </button>
+          </div>
+        </span>
       </Host>
     );
   }
