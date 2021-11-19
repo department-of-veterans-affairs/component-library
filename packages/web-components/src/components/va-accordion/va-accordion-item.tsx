@@ -49,7 +49,7 @@ export class VaAccordionItem {
           aria-expanded={this.open ? 'true' : 'false'}
           aria-controls="content"
         >
-          {this.header}
+          {this.header || <slot name="headline"/>}
           {this.subheader ? (<p>{this.subheader}</p>) : false}
         </button>,
       );

@@ -14,10 +14,11 @@ export default {
 };
 
 const Template = args => {
-  const { level, ...rest } = args;
+  const { headline, level, ...rest } = args;
   return (
     <va-accordion {...rest}>
-      <va-accordion-item level={level} header="First Amendment">
+      <va-accordion-item>
+        {headline}
         Congress shall make no law respecting an establishment of religion, or
         prohibiting the free exercise thereof; or abridging the freedom of
         speech, or of the press; or the right of the people peaceably to
@@ -66,6 +67,7 @@ const TemplateSubheader = args => {
 
 const defaultArgs = {
   bordered: false,
+  headline: <span slot="headline">Accordion headline</span>
 };
 
 export const Default = Template.bind({});
