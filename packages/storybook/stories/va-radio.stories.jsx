@@ -23,6 +23,7 @@ const Template = args => {
 };
 
 const defaultArgs = {
+  enableAnalytics: false,
   label: 'This is a label',
   required: false,
   error: null,
