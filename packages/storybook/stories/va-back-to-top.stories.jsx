@@ -9,24 +9,28 @@ export default {
 
 const Template = () => {
   return (
-    <main className="vads-l-col--12 medium-screen:vads-l-col--8">
-      <h1>The top</h1>
-      {[...Array(10)].map(i => (
-        <div
-          key={i}
-          style={{
-            height: '300px',
-            background: 'whitesmoke',
-            margin: '2em 0',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-          }}
-        >
-          Scroll down
+    <>
+      <div className="usa-grid usa-grid-full">
+        <div className="usa-width-three-fourths">
+          <h1>The top</h1>
+          {[...Array(10)].map(i => (
+            <div
+              key={i}
+              style={{
+                height: '300px',
+                background: 'whitesmoke',
+                margin: '2em 0',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}
+            >
+              Scroll down
+            </div>
+          ))}
+          <va-back-to-top />
         </div>
-      ))}
-      <va-back-to-top />
+      </div>
       <footer
         style={{
           height: '500px',
@@ -38,7 +42,7 @@ const Template = () => {
       >
         The footer
       </footer>
-    </main>
+    </>
   );
 };
 
