@@ -44,17 +44,17 @@ export class VaRadioOption {
   render() {
     const ariaDescribedby = (this.checked && this.ariaDescribedby) || null;
     return (
-      <Host>
-        <input
-          checked={this.checked}
-          id="input"
-          name={this.name}
-          type="radio"
-          value={this.value}
-          onChange={() => this.handleChange()}
-          aria-describedby={ariaDescribedby}
-        />
-        <label htmlFor="input">{this.label}</label>
+      <Host
+        aria-checked={this.checked ? `${this.checked}` : 'false'}
+        aria-describedby={ariaDescribedby}
+        checked={this.checked}
+        name={this.name}
+        onClick={() => this.handleChange()}
+        role="radio"
+        value={this.value}
+        id={this.label}
+      >
+        <label htmlFor={this.label}>{this.label}</label>
       </Host>
     );
   }
