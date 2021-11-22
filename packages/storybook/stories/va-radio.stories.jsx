@@ -13,7 +13,12 @@ export default {
   subcomponents: componentStructure(radioItem),
 };
 
-const Template = ({ enableAnalytics, error, label, required }) => {
+const Template = ({
+  'enable-analytics': enableAnalytics,
+  error,
+  label,
+  required,
+}) => {
   return (
     <va-radio
       enable-analytics={enableAnalytics}
