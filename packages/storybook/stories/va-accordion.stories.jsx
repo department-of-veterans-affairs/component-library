@@ -67,7 +67,7 @@ const TemplateSubheader = args => {
 
 const defaultArgs = {
   bordered: false,
-  headline: <span slot="headline">Accordion headline</span>
+  headline: <h6 slot="headline">First Amendment Headline</h6>
 };
 
 export const Default = Template.bind({});
