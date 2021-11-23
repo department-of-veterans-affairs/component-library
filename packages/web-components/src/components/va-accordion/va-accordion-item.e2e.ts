@@ -105,22 +105,6 @@ describe('va-accordion-item', () => {
     expect(button.getAttribute('aria-expanded')).toEqual('true');
   });
 
-  it('slot usage sets aria-expanded to true based on prop', async () => {
-    const page = await newE2EPage();
-    await page.setContent(
-      '<va-accordion-item><h3 slot="headline">The header</h3>Content inside</va-accordion-item>',
-    );
-    const component = await page.find('va-accordion-item');
-    const button = await page.find('va-accordion-item >>> button');
-
-    expect(button.getAttribute('aria-expanded')).toEqual('false');
-
-    component.setProperty('open', true);
-    await page.waitForChanges();
-
-    expect(button.getAttribute('aria-expanded')).toEqual('true');
-  });
-
   it('fires a custom event when the button is clicked', async () => {
     const page = await newE2EPage();
     await page.setContent(

@@ -40,14 +40,26 @@ export class VaAccordionItem {
    */
   @Prop() level: number = 2;
 
+  /**
+   * Local State for slot=headline replacement of props (header).
+   * Provides context of the header text to the Accordion Item
+   */
   @State() slotHeader: string = null;
 
+  /**
+   * Local State for slot=headline replacement of props (level).
+   * Provides context of the level to the Accordion Item
+   */
   @State() slotTag: string = null;
 
   private toggleOpen(e: MouseEvent): void {
     this.accordionItemToggled.emit(e);
   }
 
+  // Using onSlotChange to fire event on inital load
+  // Data access from slot html element is being perfomed by this function
+  // Function allows us to provide context to state
+  // State is then being digested by the Header Function below
   private populateStateValues() {
     getSlottedNodes(this.el, null).map(
       (node: HTMLSlotElement) => {
