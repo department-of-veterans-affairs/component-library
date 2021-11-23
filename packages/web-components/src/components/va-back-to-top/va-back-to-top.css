@@ -1,7 +1,8 @@
 @import '../../../../../node_modules/animate.css/source/sliding_entrances/slideInUp.css';
 @import '../../../../../node_modules/animate.css/source/sliding_exits/slideOutDown.css';
 @import '../../mixins/buttons.css';
-:host {
+
+#marginWrapper {
   display: block;
   width: 100%;
   height: 44px;
