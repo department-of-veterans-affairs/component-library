@@ -53,6 +53,8 @@ export class VaAccordion {
       event.detail.currentTarget.parentNode.parentNode.host || // if we are on IE, `.host` won't be there
       event.detail.currentTarget.parentNode.parentNode;
     // Close the other items if this accordion isn't multi-selectable
+    
+    // Usage for slot to provide context to analytics for header and level
     getSlottedNodes(clickedItem, null).map(
       (node: HTMLSlotElement) => {
         this.slotHeader = node.innerHTML
