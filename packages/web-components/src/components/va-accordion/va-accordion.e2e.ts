@@ -152,4 +152,33 @@ describe('va-accordion', () => {
       },
     });
   });
+
+
+  it('slot usage includes correct header in analytics event when present', async () => {
+    const page = await newE2EPage();
+    await page.setContent(`
+      <va-accordion section-heading="The Section Heading">
+        <va-accordion-item subheader="First subheader"><h3 slot="headline">First header</h3>Some content</va-accordion-item>
+      </va-accordion>`,
+    );
+
+    const analyticsSpy = await page.spyOnEvent('component-library-analytics');
+
+    const button = await page.find(
+      'va-accordion-item >>> button[aria-expanded="false"]',
+    );
+
+    await button.click();
+
+    expect(analyticsSpy).toHaveReceivedEventDetail({
+      action: 'expand',
+      componentName: 'Accordion',
+      details: {
+        header: "First header",
+        subheader: "First subheader",
+        level: 3,
+        sectionHeading: "The Section Heading",
+      },
+    });
+  });
 });
