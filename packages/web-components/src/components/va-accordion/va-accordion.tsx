@@ -54,12 +54,12 @@ export class VaAccordion {
     // Close the other items if this accordion isn't multi-selectable
     
     // Usage for slot to provide context to analytics for header and level
-    let slotHeader
-    let slotTag
+    let headerText
+    let headerLevel
     getSlottedNodes(clickedItem, null).map(
       (node: HTMLSlotElement) => {
-        slotHeader = node.innerHTML
-        slotTag = parseInt(node.tagName.toLowerCase().split('')[1])
+        headerText = node.innerHTML
+        headerLevel = parseInt(node.tagName.toLowerCase().split('')[1])
     })
 
     if (this.openSingle) {
@@ -75,9 +75,9 @@ export class VaAccordion {
         componentName: 'Accordion',
         action: prevAttr ? 'collapse' : 'expand',
         details: {
-          header: slotHeader || clickedItem.header,
+          header: headerText || clickedItem.header,
           subheader: clickedItem.subheader,
-          level: slotTag || clickedItem.level,
+          level: headerLevel || clickedItem.level,
           sectionHeading: this.sectionHeading,
         },
       };
