@@ -6,7 +6,6 @@ import {
   Host,
   Listen,
   Prop,
-  State,
   h,
 } from '@stencil/core';
 import { getSlottedNodes } from '../../utils/utils';
@@ -55,11 +54,14 @@ export class VaAccordion {
     // Close the other items if this accordion isn't multi-selectable
     
     // Usage for slot to provide context to analytics for header and level
+    let slotHeader
+    let slotTag
     getSlottedNodes(clickedItem, null).map(
       (node: HTMLSlotElement) => {
-        this.slotHeader = node.innerHTML
-        this.slotTag = parseInt(node.tagName.toLowerCase().split('')[1])
+        slotHeader = node.innerHTML
+        slotTag = parseInt(node.tagName.toLowerCase().split('')[1])
     })
+
     if (this.openSingle) {
       getSlottedNodes(this.el, 'va-accordion-item')
         .filter(item => item !== clickedItem)
@@ -73,9 +75,9 @@ export class VaAccordion {
         componentName: 'Accordion',
         action: prevAttr ? 'collapse' : 'expand',
         details: {
-          header: this.slotHeader || clickedItem.header,
+          header: slotHeader || clickedItem.header,
           subheader: clickedItem.subheader,
-          level: this.slotTag || clickedItem.level,
+          level: slotTag || clickedItem.level,
           sectionHeading: this.sectionHeading,
         },
       };
@@ -119,18 +121,6 @@ export class VaAccordion {
    * Optional accordion section heading text. Only used in analytics event. Default is null.
    */
   @Prop() sectionHeading: string = null;
-
-  /**
-   * Local State for slot=headline replacement of props (header).
-   * Provides context of the header text to the Accordion Item
-   */
-  @State() slotHeader: string = null;
-
-  /**
-   * Local State for slot=headline replacement of props (level).
-   * Provides context of the level to the Accordion Item
-   */
-  @State() slotTag: number = null;
 
 
   render() {
