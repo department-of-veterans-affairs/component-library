@@ -26,7 +26,7 @@ const Template = () => (
       </li>
       <li>
         Have a service-connected disability rating of at least 10% from VA,
-        <strong>and</strong>
+        <strong> and</strong>
       </li>
       <li>
         <a href="#">Apply for VR&amp;E services</a>
