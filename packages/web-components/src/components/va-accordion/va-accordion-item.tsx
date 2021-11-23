@@ -71,7 +71,7 @@ export class VaAccordionItem {
   render() {
     const Header = () =>
       h(
-        `${this.slotTag || 'h' + this.level}`,
+        this.slotTag || `h${this.level}`,
         null,
         <button
           onClick={this.toggleOpen.bind(this)}
