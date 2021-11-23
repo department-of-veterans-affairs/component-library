@@ -61,7 +61,7 @@ export class VaAccordionItem {
   // Function allows us to provide context to state
   // State is then being digested by the Header Function below
   private populateStateValues() {
-    getSlottedNodes(this.el, null).map(
+    getSlottedNodes(this.el, null).forEach(
       (node: HTMLSlotElement) => {
         this.slotHeader = node.innerHTML
         this.slotTag = node.tagName.toLowerCase()
