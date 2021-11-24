@@ -52,6 +52,11 @@ export class VaAccordionItem {
    */
   @State() slotTag: string = null;
 
+  /**
+   * Toggle button reference
+   */
+  private expandButton: HTMLElement = null;
+
   private toggleOpen(e: MouseEvent): void {
     this.accordionItemToggled.emit(e);
   }
@@ -68,12 +73,23 @@ export class VaAccordionItem {
       })
   }
 
+  componentDidLoad() {
+    // auto-expand accordion if the window hash matches the ID
+    if (this.el.id === window.location.hash.slice(1)) {
+      const currentTarget: HTMLElement = this.expandButton;
+      if (currentTarget) {
+        currentTarget.click();
+      }
+    }
+  }
+
   render() {
     const Header = () =>
       h(
         this.slotTag || `h${this.level}`,
         null,
         <button
+          ref={el => { this.expandButton = el }}
           onClick={this.toggleOpen.bind(this)}
           aria-expanded={this.open ? 'true' : 'false'}
           aria-controls="content"
