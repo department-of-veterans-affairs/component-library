@@ -126,6 +126,20 @@ export namespace Components {
     }
     interface VaOnThisPage {
     }
+    interface VaProgressBar {
+        /**
+          * Whether or not an analytics event will be fired.
+         */
+        "enableAnalytics": boolean;
+        /**
+          * The text label for the progress bar.
+         */
+        "label": string;
+        /**
+          * Percent of progress made. 0 to 100.
+         */
+        "percent": number;
+    }
     interface VaRadio {
         /**
           * Whether or not an analytics event will be fired.
@@ -289,6 +303,12 @@ declare global {
         prototype: HTMLVaOnThisPageElement;
         new (): HTMLVaOnThisPageElement;
     };
+    interface HTMLVaProgressBarElement extends Components.VaProgressBar, HTMLStencilElement {
+    }
+    var HTMLVaProgressBarElement: {
+        prototype: HTMLVaProgressBarElement;
+        new (): HTMLVaProgressBarElement;
+    };
     interface HTMLVaRadioElement extends Components.VaRadio, HTMLStencilElement {
     }
     var HTMLVaRadioElement: {
@@ -322,6 +342,7 @@ declare global {
         "va-featured-content": HTMLVaFeaturedContentElement;
         "va-loading-indicator": HTMLVaLoadingIndicatorElement;
         "va-on-this-page": HTMLVaOnThisPageElement;
+        "va-progress-bar": HTMLVaProgressBarElement;
         "va-radio": HTMLVaRadioElement;
         "va-radio-option": HTMLVaRadioOptionElement;
         "va-select": HTMLVaSelectElement;
@@ -476,6 +497,21 @@ declare namespace LocalJSX {
     }
     interface VaOnThisPage {
     }
+    interface VaProgressBar {
+        /**
+          * Whether or not an analytics event will be fired.
+         */
+        "enableAnalytics"?: boolean;
+        /**
+          * The text label for the progress bar.
+         */
+        "label"?: string;
+        "onComponent-library-analytics"?: (event: CustomEvent<any>) => void;
+        /**
+          * Percent of progress made. 0 to 100.
+         */
+        "percent"?: number;
+    }
     interface VaRadio {
         /**
           * Whether or not an analytics event will be fired.
@@ -616,6 +652,7 @@ declare namespace LocalJSX {
         "va-featured-content": VaFeaturedContent;
         "va-loading-indicator": VaLoadingIndicator;
         "va-on-this-page": VaOnThisPage;
+        "va-progress-bar": VaProgressBar;
         "va-radio": VaRadio;
         "va-radio-option": VaRadioOption;
         "va-select": VaSelect;
@@ -634,6 +671,7 @@ declare module "@stencil/core" {
             "va-featured-content": LocalJSX.VaFeaturedContent & JSXBase.HTMLAttributes<HTMLVaFeaturedContentElement>;
             "va-loading-indicator": LocalJSX.VaLoadingIndicator & JSXBase.HTMLAttributes<HTMLVaLoadingIndicatorElement>;
             "va-on-this-page": LocalJSX.VaOnThisPage & JSXBase.HTMLAttributes<HTMLVaOnThisPageElement>;
+            "va-progress-bar": LocalJSX.VaProgressBar & JSXBase.HTMLAttributes<HTMLVaProgressBarElement>;
             "va-radio": LocalJSX.VaRadio & JSXBase.HTMLAttributes<HTMLVaRadioElement>;
             "va-radio-option": LocalJSX.VaRadioOption & JSXBase.HTMLAttributes<HTMLVaRadioOptionElement>;
             "va-select": LocalJSX.VaSelect & JSXBase.HTMLAttributes<HTMLVaSelectElement>;
