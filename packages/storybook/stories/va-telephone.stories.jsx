@@ -21,3 +21,10 @@ Default.args = {
   ...defaultArgs,
 };
 Default.argTypes = propStructure(telephoneDocs);
+
+export const ThreeDigitNumber = Template.bind({});
+ThreeDigitNumber.args = {
+  ...defaultArgs,
+  contact: '711',
+  extension: 0,
+};

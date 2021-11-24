@@ -14,10 +14,12 @@ export class VaTelephone {
   @Prop() extension: number;
 
   private formatPhoneNumber(num: string, extension: number): string {
-    const regex = /(?<area>\d{3})(?<local>\d{3})(?<last4>\d{4})/g;
-    const { area, local, last4 } = regex.exec(num).groups;
-
-    const formattedNum = `${area}-${local}-${last4}`;
+    let formattedNum = num;
+    if (num.length === 10) {
+      const regex = /(?<area>\d{3})(?<local>\d{3})(?<last4>\d{4})/g;
+      const { area, local, last4 } = regex.exec(num).groups;
+      formattedNum = `${area}-${local}-${last4}`;
+    }
     return extension ? `${formattedNum} ext. ${extension}` : formattedNum;
   }
   /**
