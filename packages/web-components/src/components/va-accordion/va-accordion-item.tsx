@@ -75,7 +75,7 @@ export class VaAccordionItem {
 
   componentDidLoad() {
     // auto-expand accordion if the window hash matches the ID
-    if (this.el.id === window.location.hash.slice(1)) {
+    if (this.el.id && this.el.id === window.location.hash.slice(1)) {
       const currentTarget: HTMLElement = this.expandButton;
       if (currentTarget) {
         currentTarget.click();
