@@ -1,3 +1,7 @@
+div {
+  box-sizing: border-box;
+}
+
 .progress-bar {
   border: 2px solid var(--color-primary);
   border-radius: 1em;
