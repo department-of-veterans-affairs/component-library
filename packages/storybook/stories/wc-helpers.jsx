@@ -44,7 +44,7 @@ export const componentStructure = comp => {
  */
 export const propStructure = comp => {
   return comp.props.reduce((propObj, prop) => {
-    propObj[prop.name] = {
+    propObj[prop.attr] = {
       description: prop.docs,
       required: prop.required,
       defaultValue: { value: prop.default },
