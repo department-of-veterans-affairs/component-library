@@ -7,12 +7,13 @@ export default {
   title: 'Components/va-telephone',
 };
 
-const Template = ({ contact }) => {
-  return <va-telephone contact={contact}></va-telephone>;
+const Template = ({ contact, extension }) => {
+  return <va-telephone contact={contact} extension={extension}></va-telephone>;
 };
 
 const defaultArgs = {
   contact: '8773459876',
+  extension: 123,
 };
 
 export const Default = Template.bind({});

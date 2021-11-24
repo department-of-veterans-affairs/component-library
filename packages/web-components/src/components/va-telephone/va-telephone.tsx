@@ -11,12 +11,14 @@ export class VaTelephone {
    */
   @Prop() contact: string;
 
-  private formatPhoneNumber(num: string): string {
+  @Prop() extension: number;
+
+  private formatPhoneNumber(num: string, extension: number): string {
     const regex = /(?<area>\d{3})(?<local>\d{3})(?<last4>\d{4})/g;
     const { area, local, last4 } = regex.exec(num).groups;
-    console.log(area, local, last4);
 
-    return `${area}-${local}-${last4}`;
+    const formattedNum = `${area}-${local}-${last4}`;
+    return extension ? `${formattedNum} ext. ${extension}` : formattedNum;
   }
   /**
    * Format telephone number for label
@@ -27,21 +29,23 @@ export class VaTelephone {
    */
   private formatTelLabel(number: string): string {
     return number
-      .split(/[^\d]+/)
+      .split(/[^\d\w]+/)
       .filter(n => n)
-      .map(number => number.split('').join(' '))
+      .map(chunk => (chunk === 'ext' ? 'extension' : chunk.split('').join(' ')))
       .join('. ');
   }
 
   render() {
-    const { contact } = this;
+    const { contact, extension } = this;
     const isN11 = this.contact.length === 3;
     // extension format ";ext=" from RFC3966 https://tools.ietf.org/html/rfc3966#page-5
     // but it seems that using a comma to pause for 2 seconds might be a better
     // solution - see https://dsva.slack.com/archives/C8E985R32/p1589814301103200
-    const href = `tel:${isN11 ? `+1${contact}` : contact}`;
+    const href = `tel:${isN11 ? `+1${contact}` : contact}${
+      extension ? `,${extension}` : ''
+    }`;
 
-    const formattedNumber = this.formatPhoneNumber(this.contact);
+    const formattedNumber = this.formatPhoneNumber(contact, extension);
     const formattedAriaLabel = this.formatTelLabel(formattedNumber);
 
     return (

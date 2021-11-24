@@ -197,6 +197,7 @@ export namespace Components {
           * 3 or 10 digit string representing the contact number
          */
         "contact": string;
+        "extension": number;
     }
     interface VaTextInput {
         /**
@@ -566,6 +567,7 @@ declare namespace LocalJSX {
           * 3 or 10 digit string representing the contact number
          */
         "contact"?: string;
+        "extension"?: number;
     }
     interface VaTextInput {
         /**
