@@ -1,0 +1,9 @@
+@import '../../mixins/links.css';
+:host {
+  display: block;
+}
+
+a,
+a:hover {
+  text-decoration: underline;
+}
