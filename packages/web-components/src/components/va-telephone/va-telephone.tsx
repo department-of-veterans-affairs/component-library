@@ -20,7 +20,7 @@ export class VaTelephone {
       const { area, local, last4 } = regex.exec(num).groups;
       formattedNum = `${area}-${local}-${last4}`;
     }
-    return extension ? `${formattedNum} ext. ${extension}` : formattedNum;
+    return extension ? `${formattedNum}, ext. ${extension}` : formattedNum;
   }
   /**
    * Format telephone number for label
