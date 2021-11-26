@@ -15,12 +15,23 @@ export class VaTelephone {
 
   @Prop() inactive: boolean = false;
 
-  private formatPhoneNumber(num: string, extension: number): string {
+  /**
+   * Indicates if this is a number meant to be called from outside the US.
+   * Prepends a "+1" to the formatted number.
+   */
+  @Prop() international: boolean = false;
+
+  private formatPhoneNumber(
+    num: string,
+    extension: number,
+    international: boolean = false,
+  ): string {
     let formattedNum = num;
     if (num.length === 10) {
       const regex = /(?<area>\d{3})(?<local>\d{3})(?<last4>\d{4})/g;
       const { area, local, last4 } = regex.exec(num).groups;
       formattedNum = `${area}-${local}-${last4}`;
+      formattedNum = international ? `+1-${formattedNum}` : formattedNum;
     }
     return extension ? `${formattedNum}, ext. ${extension}` : formattedNum;
   }
@@ -40,7 +51,7 @@ export class VaTelephone {
   }
 
   render() {
-    const { contact, extension, inactive } = this;
+    const { contact, extension, inactive, international } = this;
     const isN11 = this.contact.length === 3;
     // extension format ";ext=" from RFC3966 https://tools.ietf.org/html/rfc3966#page-5
     // but it seems that using a comma to pause for 2 seconds might be a better
@@ -49,7 +60,11 @@ export class VaTelephone {
       extension ? `,${extension}` : ''
     }`;
 
-    const formattedNumber = this.formatPhoneNumber(contact, extension);
+    const formattedNumber = this.formatPhoneNumber(
+      contact,
+      extension,
+      international,
+    );
     const formattedAriaLabel = this.formatTelLabel(formattedNumber);
 
     if (inactive) {

@@ -7,12 +7,13 @@ export default {
   title: 'Components/va-telephone',
 };
 
-const Template = ({ contact, extension, inactive }) => {
+const Template = ({ contact, extension, inactive, international }) => {
   return (
     <va-telephone
       contact={contact}
       extension={extension}
       inactive={inactive}
+      international={international}
     ></va-telephone>
   );
 };
@@ -39,4 +40,10 @@ export const Inactive = Template.bind({});
 Inactive.args = {
   ...defaultArgs,
   inactive: true,
+};
+
+export const International = Template.bind({});
+International.args = {
+  ...defaultArgs,
+  international: true,
 };
