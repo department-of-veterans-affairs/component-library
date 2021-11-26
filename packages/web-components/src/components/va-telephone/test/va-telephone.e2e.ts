@@ -19,6 +19,48 @@ describe('va-telephone', () => {
     expect(link.innerText).toEqual('877-955-1234');
   });
 
+  it('handles an inactive 10 digit contact prop', async () => {
+    const page = await newE2EPage();
+    await page.setContent(
+      '<va-telephone inactive contact="8779551234"></va-telephone>',
+    );
+
+    const element = await page.find('va-telephone');
+    expect(element).toEqualHtml(`
+      <va-telephone class="hydrated" contact="8779551234" inactive="">
+        <mock:shadow-root>
+          <span aria-hidden="true">
+            877-955-1234
+          </span>
+          <span class="sr-only">
+            8 7 7. 9 5 5. 1 2 3 4
+          </span>
+        </mock:shadow-root>
+      </va-telephone>
+    `);
+  });
+
+  it('handles an inactive 10 digit contact prop with extension', async () => {
+    const page = await newE2EPage();
+    await page.setContent(
+      '<va-telephone inactive contact="8779551234" extension="123"></va-telephone>',
+    );
+
+    const element = await page.find('va-telephone');
+    expect(element).toEqualHtml(`
+      <va-telephone class="hydrated" contact="8779551234" extension="123" inactive="">
+        <mock:shadow-root>
+          <span aria-hidden="true">
+            877-955-1234, ext. 123
+          </span>
+          <span class="sr-only">
+            8 7 7. 9 5 5. 1 2 3 4. extension. 1 2 3
+          </span>
+        </mock:shadow-root>
+      </va-telephone>
+    `);
+  });
+
   it('handles a 10 digit contact prop with extension', async () => {
     const page = await newE2EPage();
     await page.setContent(

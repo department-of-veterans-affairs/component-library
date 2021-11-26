@@ -198,6 +198,7 @@ export namespace Components {
          */
         "contact": string;
         "extension": number;
+        "inactive": boolean;
     }
     interface VaTextInput {
         /**
@@ -568,6 +569,7 @@ declare namespace LocalJSX {
          */
         "contact"?: string;
         "extension"?: number;
+        "inactive"?: boolean;
     }
     interface VaTextInput {
         /**
