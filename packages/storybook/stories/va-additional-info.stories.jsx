@@ -21,7 +21,6 @@ const Template = ({ trigger }) => {
   return (
     <>
       <p>Surrounding content.</p>
-
       <va-additional-info trigger={trigger}>
         <div>Here are some popular pets to consider</div>
         <ul>

@@ -1,11 +1,10 @@
 @import '../../mixins/links.css';
 :host {
-  padding-left: calc(2rem - 7px);
-  margin-left: -2rem;
-  border-left: 7px solid transparent;
   display: block;
 }
-:host([aria-expanded='true']) {
+:host([aria-expanded='true']) #info {
+  padding-left: calc(2rem - 7px);
+  border-left: 7px solid transparent;
   border-left-color: var(--color-primary-alt-light);
 }
 
