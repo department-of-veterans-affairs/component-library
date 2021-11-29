@@ -109,10 +109,6 @@ div.error > i::before {
   color: var(--color-secondary-dark);
 }
 
-div.alert.bg-only > i::before {
-  content: '';
-}
-
 div.bg-only {
   border: none;
   padding: 2rem;
