@@ -109,6 +109,10 @@ div.error > i::before {
   color: var(--color-secondary-dark);
 }
 
+div.bg-only.hide-icon > i::before {
+  content: '';
+}
+
 div.bg-only {
   border: none;
   padding: 2rem;
