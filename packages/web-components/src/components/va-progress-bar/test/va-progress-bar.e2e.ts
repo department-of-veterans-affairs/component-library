@@ -45,7 +45,15 @@ describe('va-progress-bar', () => {
       element.percent = 0;
     });
     await page.waitForChanges();
-    expect(analyticsSpy).toHaveReceivedEvent();
+
+    expect(analyticsSpy).toHaveReceivedEventDetail({
+      action: 'change',
+      componentName: 'va-progress-bar',
+      details: {
+        label: 'Working',
+        percent: 0,
+      },
+    });
   });
 
   it('fires an analytics event when enable-analytics is set and percent is set to 100', async () => {
@@ -59,7 +67,14 @@ describe('va-progress-bar', () => {
       (element: any) => (element.percent = 100),
     );
     await page.waitForChanges();
-    expect(analyticsSpy).toHaveReceivedEvent();
+    expect(analyticsSpy).toHaveReceivedEventDetail({
+      action: 'change',
+      componentName: 'va-progress-bar',
+      details: {
+        label: 'Working',
+        percent: 100,
+      },
+    });
   });
 
   it("doesn't fire an analytics event when enable-analytics is false", async () => {
