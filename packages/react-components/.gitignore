@@ -4,3 +4,4 @@ node_modules
 !.eslintrc.js
 .idea
 .DS_Store
+package.tgz
