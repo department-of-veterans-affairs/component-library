@@ -4,3 +4,15 @@ $formation-asset-path: '~@department-of-veterans-affairs/formation/assets';
 @import '@department-of-veterans-affairs/formation/sass/base/_b-variables.scss';
 @import '@department-of-veterans-affairs/formation/sass/base/_b-breakpoints.scss';
 @import '@department-of-veterans-affairs/formation/sass/site/_m-crisis-line.scss';
+
+// Remove Negative Margin via Default Storybook CSS
+// This is causing the show code button to overlap with components
+// Height Auto fixes Firefox Bug with height being set to a fixed 70px value
+.docs-story {
+    & > div {
+        margin: 0;
+        & > div {
+            height: auto;
+        }
+    }
+}
