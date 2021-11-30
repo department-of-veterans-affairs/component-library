@@ -32,7 +32,7 @@ export class VaAlert {
    * This only takes effect when background-only is true. If true, the background-only alert will
    * include an icon.
    */
-  @Prop() showIconInBackgroundOnly: boolean = false; 
+  @Prop() showIconInBackgroundOnly: boolean = false;
 
   /**
    * If true, doesn't fire the CustomEvent which can be used for analytics tracking.
@@ -133,9 +133,15 @@ export class VaAlert {
   }
 
   render() {
-    const { backgroundOnly, status, visible, closeable, showIconInBackgroundOnly } = this;
+    const {
+      backgroundOnly,
+      status,
+      visible,
+      closeable,
+      showIconInBackgroundOnly,
+    } = this;
     const classes = `alert ${status} ${backgroundOnly ? 'bg-only' : ''} ${
-      showIconInBackgroundOnly ? '' : 'hide-icon'
+      backgroundOnly ? (showIconInBackgroundOnly ? '' : 'hide-icon') : ''
     }`;
     const role = status === 'error' ? 'alert' : null;
     const ariaLive = status === 'error' ? 'assertive' : null;
