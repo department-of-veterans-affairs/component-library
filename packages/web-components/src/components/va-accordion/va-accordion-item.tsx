@@ -55,7 +55,7 @@ export class VaAccordionItem {
   /**
    * Toggle button reference
    */
-  private expandButton: HTMLElement = null;
+  private expandButton: HTMLButtonElement = null;
 
   private toggleOpen(e: MouseEvent): void {
     this.accordionItemToggled.emit(e);
@@ -76,7 +76,7 @@ export class VaAccordionItem {
   componentDidLoad() {
     // auto-expand accordion if the window hash matches the ID
     if (this.el.id && this.el.id === window.location.hash.slice(1)) {
-      const currentTarget: HTMLElement = this.expandButton;
+      const currentTarget = this.expandButton;
       if (currentTarget) {
         currentTarget.click();
       }

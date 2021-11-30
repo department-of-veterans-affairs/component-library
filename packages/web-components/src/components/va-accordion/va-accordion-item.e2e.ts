@@ -157,17 +157,15 @@ describe('va-accordion-item', () => {
     expect(subheader).toEqualText('The subheader');
   });
 
-  it.skip('fires a custom event when the location hash matches the accordion id', async () => {
-    const page = await newE2EPage();
+  it('fires a custom event when the location hash matches the accordion id', async () => {
+    const page = await newE2EPage({ url: '/#testing' });
 
-    // await page.evaluate(() => { window.location.hash = '#testing'; });
-    await page.goto(`/${page.url()}#testing`);
-
-    const accordionItemToggled = await page.spyOnEvent('accordionItemToggled');
     await page.setContent(
       '<va-accordion-item id="testing" header="The header">Content inside</va-accordion-item>',
     );
+    const accordionItemToggled = await page.spyOnEvent('accordionItemToggled');
+    await page.waitForChanges();
 
-    expect(accordionItemToggled).toHaveReceivedEventTimes(1);
+    expect(accordionItemToggled).toHaveReceivedEvent();
   });
 });
