@@ -11,7 +11,7 @@ describe('va-alert', () => {
     expect(element).toEqualHtml(`
       <va-alert class="hydrated">
         <mock:shadow-root>
-          <div class="alert info">
+          <div class="alert hide-icon info">
             <i aria-hidden="true" role="img"></i>
             <div class="body">
               <slot name="headline"></slot>
