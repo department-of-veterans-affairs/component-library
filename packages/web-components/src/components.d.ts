@@ -64,9 +64,9 @@ export namespace Components {
          */
         "fullWidth": boolean;
         /**
-          * This only takes effect when background-only is true. If true, the background-only alert will include an icon.
+          * This option only takes effect when background-only is true. If true, the background-only alert will include an icon.
          */
-        "showIconInBackgroundOnly": boolean;
+        "showIcon": boolean;
         /**
           * Determines the icon and border/background color. One of `info`, `error`, `success`, `warning`, or `continue`
          */
@@ -402,9 +402,9 @@ declare namespace LocalJSX {
          */
         "onVa-component-did-load"?: (event: CustomEvent<any>) => void;
         /**
-          * This only takes effect when background-only is true. If true, the background-only alert will include an icon.
+          * This option only takes effect when background-only is true. If true, the background-only alert will include an icon.
          */
-        "showIconInBackgroundOnly"?: boolean;
+        "showIcon"?: boolean;
         /**
           * Determines the icon and border/background color. One of `info`, `error`, `success`, `warning`, or `continue`
          */
