@@ -25,3 +25,6 @@ UserInterfaceState.xcuserstate
 .env
 
 react-bindings/
+component-docs.d.ts
+component-docs.json
+package.tgz
