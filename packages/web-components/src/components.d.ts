@@ -198,7 +198,6 @@ export namespace Components {
          */
         "contact": string;
         "extension": number;
-        "inactive": boolean;
         /**
           * Indicates if this is a number meant to be called from outside the US. Prepends a "+1" to the formatted number.
          */
@@ -573,7 +572,6 @@ declare namespace LocalJSX {
          */
         "contact"?: string;
         "extension"?: number;
-        "inactive"?: boolean;
         /**
           * Indicates if this is a number meant to be called from outside the US. Prepends a "+1" to the formatted number.
          */

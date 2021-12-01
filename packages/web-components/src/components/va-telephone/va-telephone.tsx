@@ -1,4 +1,4 @@
-import { Component, Fragment, Prop, h } from '@stencil/core';
+import { Component, Prop, h } from '@stencil/core';
 
 @Component({
   tag: 'va-telephone',
@@ -12,8 +12,6 @@ export class VaTelephone {
   @Prop() contact: string;
 
   @Prop() extension: number;
-
-  @Prop() inactive: boolean = false;
 
   /**
    * Indicates if this is a number meant to be called from outside the US.
@@ -51,7 +49,7 @@ export class VaTelephone {
   }
 
   render() {
-    const { contact, extension, inactive, international } = this;
+    const { contact, extension, international } = this;
     const isN11 = this.contact.length === 3;
     // extension format ";ext=" from RFC3966 https://tools.ietf.org/html/rfc3966#page-5
     // but it seems that using a comma to pause for 2 seconds might be a better
@@ -66,15 +64,6 @@ export class VaTelephone {
       international,
     );
     const formattedAriaLabel = this.formatTelLabel(formattedNumber);
-
-    if (inactive) {
-      return (
-        <Fragment>
-          <span aria-hidden="true">{formattedNumber}</span>
-          <span class="sr-only">{formattedAriaLabel}</span>
-        </Fragment>
-      );
-    }
 
     return (
       <a href={href} aria-label={formattedAriaLabel}>
