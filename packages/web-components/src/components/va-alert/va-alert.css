@@ -109,7 +109,7 @@ div.error > i::before {
   color: var(--color-secondary-dark);
 }
 
-div.alert.bg-only > i::before {
+div.bg-only.hide-icon > i::before {
   content: '';
 }
 
