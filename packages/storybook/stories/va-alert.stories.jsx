@@ -15,7 +15,7 @@ const defaultArgs = {
   closeable: false,
   fullWidth: false,
   onClose: () => {},
-  'show-icon-in-background-only': false
+  'show-icon': false
 };
 
 const Template = ({
@@ -25,7 +25,7 @@ const Template = ({
   backgroundOnly,
   closeable,
   onClose,
-  'show-icon-in-background-only': showIconInBackgroundOnly
+  'show-icon': showIcon
 }) => {
   return (
     <va-alert
@@ -34,7 +34,7 @@ const Template = ({
       closeable={closeable}
       full-width={fullWidth}
       onClose={onClose}
-      show-icon-in-background-only={showIconInBackgroundOnly}
+      show-icon={showIcon}
     >
       {headline}
       <div>This is an alert</div>
@@ -90,5 +90,5 @@ export const BackgroundOnlyWithIcon = Template.bind({});
 BackgroundOnlyWithIcon.args = {
   ...defaultArgs,
   backgroundOnly: true,
-  'show-icon-in-background-only': true
+  'show-icon': true
 };
