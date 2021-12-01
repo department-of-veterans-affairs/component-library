@@ -7,6 +7,7 @@ import {
   Prop,
   h,
 } from '@stencil/core';
+import classnames from 'classnames';
 
 @Component({
   tag: 'va-alert',
@@ -134,9 +135,10 @@ export class VaAlert {
 
   render() {
     const { backgroundOnly, status, visible, closeable, showIcon } = this;
-    const classes = `alert ${status} ${backgroundOnly ? 'bg-only' : ''} ${
-      backgroundOnly ? (showIcon ? '' : 'hide-icon') : ''
-    }`;
+    const classes = classnames('alert', status, {
+      'bg-only': backgroundOnly,
+      'hide-icon': backgroundOnly && !showIcon,
+    });
     const role = status === 'error' ? 'alert' : null;
     const ariaLive = status === 'error' ? 'assertive' : null;
 
