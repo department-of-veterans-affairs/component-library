@@ -25,7 +25,7 @@ export class VaSegmentedProgressBar {
     /**
     * An override for the default aria label.
     */
-    @Prop() ariaLabel: string = '';
+    @Prop() label: string = '';
 
     @Event({
         eventName: 'component-library-analytics',
@@ -48,6 +48,7 @@ export class VaSegmentedProgressBar {
     }
 
     render() {
+        const label = this.label || `Step ${this.current} of ${this.total}`
         return (
             <Host>
                 <div
@@ -57,7 +58,7 @@ export class VaSegmentedProgressBar {
                     aria-valuemin="0"
                     aria-valuemax={this.total}
                     tabindex="0"
-                    aria-label={this.ariaLabel === '' ? `Step ${this.current} of ${this.total}` : this.ariaLabel}
+                    aria-label={label}
                 >
                     {range(this.total).map(step => (
                         <div

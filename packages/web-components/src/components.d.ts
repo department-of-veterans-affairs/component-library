@@ -168,10 +168,6 @@ export namespace Components {
     }
     interface VaSegmentedProgressBar {
         /**
-          * An override for the default aria label.
-         */
-        "ariaLabel": string;
-        /**
           * The current segment in progress
          */
         "current": number;
@@ -179,6 +175,10 @@ export namespace Components {
           * Whether or not an analytics event will be fired.
          */
         "enableAnalytics": boolean;
+        /**
+          * An override for the default aria label.
+         */
+        "label": string;
         /**
           * The total number of segments in the progress bar
          */
@@ -546,10 +546,6 @@ declare namespace LocalJSX {
     }
     interface VaSegmentedProgressBar {
         /**
-          * An override for the default aria label.
-         */
-        "ariaLabel"?: string;
-        /**
           * The current segment in progress
          */
         "current"?: number;
@@ -557,6 +553,10 @@ declare namespace LocalJSX {
           * Whether or not an analytics event will be fired.
          */
         "enableAnalytics"?: boolean;
+        /**
+          * An override for the default aria label.
+         */
+        "label"?: string;
         "onComponent-library-analytics"?: (event: CustomEvent<any>) => void;
         /**
           * The total number of segments in the progress bar

@@ -7,7 +7,7 @@ export default {
   title: 'Components/va-segmented-progress-bar',
 };
 
-const Template = ({ 'enable-analytics': enableAnalytics, current, total, 'aria-label': ariaLabel }) => (
+const Template = ({ 'enable-analytics': enableAnalytics, current, total, label }) => (
   // Wrapper for spacing when viewing in storybook
   // Component can be used without it
   <div style={{ margin: '3em' }}>
@@ -15,7 +15,7 @@ const Template = ({ 'enable-analytics': enableAnalytics, current, total, 'aria-l
       enable-analytics={enableAnalytics}
       current={current}
       total={total}
-      aria-label={ariaLabel}
+      label={label}
     ></va-segmented-progress-bar>
   </div>
 );
@@ -24,7 +24,7 @@ const defaultArgs = {
   'enable-analytics': false,
   'current': 2,
   'total': 6,
-  'aria-label': 'Test out the label'
+  'label': 'Test out the label'
 };
 
 export const Default = Template.bind({});

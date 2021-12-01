@@ -40,7 +40,7 @@ describe('va-segmented-progress-bar', () => {
   it('it should update the aria label based on changed ariaLabel prop', async () => {
     const page = await newE2EPage();
     await page.setContent(
-      '<va-segmented-progress-bar current="3" total="6" aria-label="E2E Test"></va-segmented-progress-bar>',
+      '<va-segmented-progress-bar current="3" total="6" label="E2E Test"></va-segmented-progress-bar>',
     );
     const label = await page.find('va-segmented-progress-bar >>> div.progress-bar-segmented');
     expect(label.getAttribute('aria-label')).toContain('E2E Test');
