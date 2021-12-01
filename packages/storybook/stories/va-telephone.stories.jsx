@@ -7,11 +7,12 @@ export default {
   title: 'Components/va-telephone',
 };
 
-const Template = ({ contact, extension, international }) => {
+const Template = ({ contact, extension, inactive, international }) => {
   return (
     <va-telephone
       contact={contact}
       extension={extension}
+      inactive={inactive}
       international={international}
     ></va-telephone>
   );
@@ -19,7 +20,7 @@ const Template = ({ contact, extension, international }) => {
 
 const defaultArgs = {
   contact: '8773459876',
-  extension: 123,
+  inactive: false,
 };
 
 export const Default = Template.bind({});
@@ -33,6 +34,12 @@ ThreeDigitNumber.args = {
   ...defaultArgs,
   contact: '711',
   extension: 0,
+};
+
+export const Inactive = Template.bind({});
+Inactive.args = {
+  ...defaultArgs,
+  inactive: true,
 };
 
 export const International = Template.bind({});
