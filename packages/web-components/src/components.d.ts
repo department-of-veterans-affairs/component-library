@@ -194,11 +194,14 @@ export namespace Components {
     }
     interface VaTelephone {
         /**
+          * Indicates if the phone number can be clicked or not
+         */
+        "clickable": boolean;
+        /**
           * 3 or 10 digit string representing the contact number
          */
         "contact": string;
         "extension": number;
-        "inactive": boolean;
         /**
           * Indicates if this is a number meant to be called from outside the US. Prepends a "+1" to the formatted number.
          */
@@ -569,11 +572,14 @@ declare namespace LocalJSX {
     }
     interface VaTelephone {
         /**
+          * Indicates if the phone number can be clicked or not
+         */
+        "clickable"?: boolean;
+        /**
           * 3 or 10 digit string representing the contact number
          */
         "contact": string;
         "extension"?: number;
-        "inactive"?: boolean;
         /**
           * Indicates if this is a number meant to be called from outside the US. Prepends a "+1" to the formatted number.
          */

@@ -33,15 +33,15 @@ describe('va-telephone', () => {
     expect(link.innerText).toEqual('+1-877-955-1234');
   });
 
-  it('handles an inactive 10 digit contact prop', async () => {
+  it('handles a non-clickable 10 digit contact prop', async () => {
     const page = await newE2EPage();
     await page.setContent(
-      '<va-telephone inactive contact="8779551234"></va-telephone>',
+      '<va-telephone clickable="false" contact="8779551234"></va-telephone>',
     );
 
     const element = await page.find('va-telephone');
     expect(element).toEqualHtml(`
-      <va-telephone class="hydrated" contact="8779551234" inactive="">
+      <va-telephone class="hydrated" contact="8779551234" clickable="false">
         <mock:shadow-root>
           <span aria-hidden="true">
             877-955-1234
@@ -54,15 +54,15 @@ describe('va-telephone', () => {
     `);
   });
 
-  it('handles an inactive 10 digit contact prop with extension', async () => {
+  it('handles a non-clickable 10 digit contact prop with extension', async () => {
     const page = await newE2EPage();
     await page.setContent(
-      '<va-telephone inactive contact="8779551234" extension="123"></va-telephone>',
+      '<va-telephone clickable="false" contact="8779551234" extension="123"></va-telephone>',
     );
 
     const element = await page.find('va-telephone');
     expect(element).toEqualHtml(`
-      <va-telephone class="hydrated" contact="8779551234" extension="123" inactive="">
+      <va-telephone class="hydrated" contact="8779551234" extension="123" clickable="false">
         <mock:shadow-root>
           <span aria-hidden="true">
             877-955-1234, ext. 123
