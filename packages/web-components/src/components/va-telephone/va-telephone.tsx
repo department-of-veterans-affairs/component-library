@@ -50,16 +50,17 @@ export class VaTelephone {
       .join('. ');
   }
 
-  render() {
-    const { contact, extension, inactive, international } = this;
-    const isN11 = this.contact.length === 3;
+  static createHref(contact: string, extension: number): string {
+    const isN11 = contact.length === 3;
     // extension format ";ext=" from RFC3966 https://tools.ietf.org/html/rfc3966#page-5
     // but it seems that using a comma to pause for 2 seconds might be a better
     // solution - see https://dsva.slack.com/archives/C8E985R32/p1589814301103200
-    const href = `tel:${isN11 ? contact : `+1${contact}`}${
-      extension ? `,${extension}` : ''
-    }`;
+    const href = `tel:${isN11 ? contact : `+1${contact}`}`;
+    return `${href}${extension ? `,${extension}` : ''}`;
+  }
 
+  render() {
+    const { contact, extension, inactive, international } = this;
     const formattedNumber = VaTelephone.formatPhoneNumber(
       contact,
       extension,
@@ -79,7 +80,10 @@ export class VaTelephone {
     }
 
     return (
-      <a href={href} aria-label={formattedAriaLabel}>
+      <a
+        href={VaTelephone.createHref(contact, extension)}
+        aria-label={formattedAriaLabel}
+      >
         {formattedNumber}
       </a>
     );

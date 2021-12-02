@@ -34,3 +34,20 @@ describe('formatTelLabel', () => {
     );
   });
 });
+
+describe('createHref', () => {
+  const contact = '8885551234';
+  const n11 = '911';
+  const extension = 123;
+  it('creates a tel link for a phone number', () => {
+    expect(VaTelephone.createHref(contact, null)).toBe('tel:+18885551234');
+  });
+  it('creates a tel link for a phone number with extension', () => {
+    expect(VaTelephone.createHref(contact, extension)).toBe(
+      'tel:+18885551234,123',
+    );
+  });
+  it('creates a tel link for an N11 number', () => {
+    expect(VaTelephone.createHref(n11, null)).toBe('tel:911');
+  });
+});
