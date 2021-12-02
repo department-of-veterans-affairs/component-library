@@ -7,6 +7,7 @@ import {
   Prop,
   h,
 } from '@stencil/core';
+import classnames from 'classnames';
 
 @Component({
   tag: 'va-alert',
@@ -27,6 +28,12 @@ export class VaAlert {
    * to the status - no icon or left border.
    */
   @Prop() backgroundOnly: boolean = false;
+
+  /**
+   * This option only takes effect when background-only is true. If true, the background-only alert will
+   * include an icon.
+   */
+  @Prop() showIcon: boolean = false;
 
   /**
    * If true, doesn't fire the CustomEvent which can be used for analytics tracking.
@@ -127,8 +134,11 @@ export class VaAlert {
   }
 
   render() {
-    const { backgroundOnly, status, visible, closeable } = this;
-    const classes = `alert ${status} ${backgroundOnly ? 'bg-only' : ''}`;
+    const { backgroundOnly, status, visible, closeable, showIcon } = this;
+    const classes = classnames('alert', status, {
+      'bg-only': backgroundOnly,
+      'hide-icon': backgroundOnly && !showIcon,
+    });
     const role = status === 'error' ? 'alert' : null;
     const ariaLive = status === 'error' ? 'assertive' : null;
 
