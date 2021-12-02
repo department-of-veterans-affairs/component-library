@@ -52,7 +52,7 @@ export class VaCheckbox {
   @Prop({ mutable: true }) checked: boolean = false;
 
   /**
-   * The aria-describedby attribute for the <intput> in the shadow DOM.
+   * The aria-describedby attribute for the <input> in the shadow DOM.
    */
   @Prop() ariaDescribedby: string = '';
 
@@ -65,6 +65,15 @@ export class VaCheckbox {
    * The event emitted when the input is blurred.
    */
   @Event() vaBlur: EventEmitter;
+
+  /**
+   * Bubble event emitted by checkbox to parent Checkbox Group
+   */
+  @Event({
+    composed: true,
+    bubbles: true,
+  })
+  checkboxSelected: EventEmitter;
 
   /**
    * The event used to track usage of the component. This is emitted when the
@@ -107,6 +116,7 @@ export class VaCheckbox {
   };
 
   private handleChange = (e: Event) => {
+    this.checkboxSelected.emit();
     this.checked = (e.target as HTMLInputElement).checked;
     this.vaChange.emit({ checked: this.checked });
     if (this.enableAnalytics) this.fireAnalyticsEvent();

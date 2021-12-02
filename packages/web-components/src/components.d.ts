@@ -76,7 +76,7 @@ export namespace Components {
     }
     interface VaCheckbox {
         /**
-          * The aria-describedby attribute for the <intput> in the shadow DOM.
+          * The aria-describedby attribute for the <input> in the shadow DOM.
          */
         "ariaDescribedby": string;
         /**
@@ -103,6 +103,24 @@ export namespace Components {
           * Set the input to required and render the (Required) text.
          */
         "required"?: boolean;
+    }
+    interface VaCheckboxGroup {
+        /**
+          * Whether or not an analytics event will be fired.
+         */
+        "enableAnalytics": boolean;
+        /**
+          * A string with an error message.
+         */
+        "error": string;
+        /**
+          * The text label for the checkbox group.
+         */
+        "label": string;
+        /**
+          * Whether or not this input field is required.
+         */
+        "required": boolean;
     }
     interface VaFeaturedContent {
     }
@@ -271,6 +289,12 @@ declare global {
         prototype: HTMLVaCheckboxElement;
         new (): HTMLVaCheckboxElement;
     };
+    interface HTMLVaCheckboxGroupElement extends Components.VaCheckboxGroup, HTMLStencilElement {
+    }
+    var HTMLVaCheckboxGroupElement: {
+        prototype: HTMLVaCheckboxGroupElement;
+        new (): HTMLVaCheckboxGroupElement;
+    };
     interface HTMLVaFeaturedContentElement extends Components.VaFeaturedContent, HTMLStencilElement {
     }
     var HTMLVaFeaturedContentElement: {
@@ -319,6 +343,7 @@ declare global {
         "va-alert": HTMLVaAlertElement;
         "va-back-to-top": HTMLVaBackToTopElement;
         "va-checkbox": HTMLVaCheckboxElement;
+        "va-checkbox-group": HTMLVaCheckboxGroupElement;
         "va-featured-content": HTMLVaFeaturedContentElement;
         "va-loading-indicator": HTMLVaLoadingIndicatorElement;
         "va-on-this-page": HTMLVaOnThisPageElement;
@@ -410,7 +435,7 @@ declare namespace LocalJSX {
     }
     interface VaCheckbox {
         /**
-          * The aria-describedby attribute for the <intput> in the shadow DOM.
+          * The aria-describedby attribute for the <input> in the shadow DOM.
          */
         "ariaDescribedby"?: string;
         /**
@@ -434,6 +459,10 @@ declare namespace LocalJSX {
          */
         "label"?: string;
         /**
+          * Bubble event emitted by checkbox to parent Checkbox Group
+         */
+        "onCheckboxSelected"?: (event: CustomEvent<any>) => void;
+        /**
           * The event used to track usage of the component. This is emitted when the input value changes and enableAnalytics is true.
          */
         "onComponent-library-analytics"?: (event: CustomEvent<any>) => void;
@@ -447,6 +476,25 @@ declare namespace LocalJSX {
         "onVaChange"?: (event: CustomEvent<any>) => void;
         /**
           * Set the input to required and render the (Required) text.
+         */
+        "required"?: boolean;
+    }
+    interface VaCheckboxGroup {
+        /**
+          * Whether or not an analytics event will be fired.
+         */
+        "enableAnalytics"?: boolean;
+        /**
+          * A string with an error message.
+         */
+        "error"?: string;
+        /**
+          * The text label for the checkbox group.
+         */
+        "label"?: string;
+        "onComponent-library-analytics"?: (event: CustomEvent<any>) => void;
+        /**
+          * Whether or not this input field is required.
          */
         "required"?: boolean;
     }
@@ -613,6 +661,7 @@ declare namespace LocalJSX {
         "va-alert": VaAlert;
         "va-back-to-top": VaBackToTop;
         "va-checkbox": VaCheckbox;
+        "va-checkbox-group": VaCheckboxGroup;
         "va-featured-content": VaFeaturedContent;
         "va-loading-indicator": VaLoadingIndicator;
         "va-on-this-page": VaOnThisPage;
@@ -631,6 +680,7 @@ declare module "@stencil/core" {
             "va-alert": LocalJSX.VaAlert & JSXBase.HTMLAttributes<HTMLVaAlertElement>;
             "va-back-to-top": LocalJSX.VaBackToTop & JSXBase.HTMLAttributes<HTMLVaBackToTopElement>;
             "va-checkbox": LocalJSX.VaCheckbox & JSXBase.HTMLAttributes<HTMLVaCheckboxElement>;
+            "va-checkbox-group": LocalJSX.VaCheckboxGroup & JSXBase.HTMLAttributes<HTMLVaCheckboxGroupElement>;
             "va-featured-content": LocalJSX.VaFeaturedContent & JSXBase.HTMLAttributes<HTMLVaFeaturedContentElement>;
             "va-loading-indicator": LocalJSX.VaLoadingIndicator & JSXBase.HTMLAttributes<HTMLVaLoadingIndicatorElement>;
             "va-on-this-page": LocalJSX.VaOnThisPage & JSXBase.HTMLAttributes<HTMLVaOnThisPageElement>;

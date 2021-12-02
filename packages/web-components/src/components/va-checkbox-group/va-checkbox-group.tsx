@@ -1,11 +1,12 @@
 import {
-    Component,
-    Element,
-    Event,
-    EventEmitter,
-    Host,
-    h,
-    Prop,
+  Component,
+  Element,
+  Event,
+  EventEmitter,
+  Host,
+  Listen,
+  Prop,
+  h,
 } from '@stencil/core';
 
 @Component({
@@ -17,74 +18,25 @@ export class VaCheckboxGroup {
   @Element() el: HTMLElement;
 
   /**
-   * Any additional fieldset classes.
+   * The text label for the checkbox group.
    */
-  @Prop() additionalFieldsetClass?: string;
+  @Prop() label: string;
 
   /**
-   * Any additional legend classes.
+   * Whether or not this input field is required.
    */
-  @Prop() additionalLegendClass?: string;
+  @Prop() required: boolean = false;
 
   /**
-   * Error message.
+   * A string with an error message.
    */
-  @Prop() errorMessage?: string;
+  @Prop() error: string;
 
   /**
-   * group field label.
+   * Whether or not an analytics event will be fired.
    */
-  @Prop() label: string | HTMLElement;
+  @Prop() enableAnalytics: boolean;
 
-  /**
-   * name attribute.
-   */
-  @Prop() name: string;
-
-  /**
-   * ID.
-   */
-  @Prop() id: string;
-
-  /**
-   * Array of options to populate group.
-   */
-  @Prop() options: Array<object>;
-
-  /**
-   * Values of the checkbox field.
-   */
-  @Prop() values?: Object;
-
-  /**
-   * Is this field required.
-   */
-  @Prop() required?: boolean;
-
-  /**
-   * True if the analytics event should fire.
-   */
-  @Prop() enableAnalytics: boolean = false;
-
-  /**
-   * On value change event handler.
-   */
-  @Event() vaChange: EventEmitter;
-
-  /**
-   * On mouse down event handler.
-   */
-  @Event() vaMouseDown: EventEmitter;
-
-  /**
-   * On key down event handler.
-   */
-  @Event() vaKeyDown: EventEmitter;
-
-  /**
-   * The event used to track usage of the component. This is emitted when the
-   * input value changes and enableAnalytics is true.
-   */
   @Event({
     eventName: 'component-library-analytics',
     composed: true,
@@ -92,70 +44,37 @@ export class VaCheckboxGroup {
   })
   componentLibraryAnalytics: EventEmitter;
 
-  private fireAnalyticsEvent = () => {
-    // console.log(this.checked);
+  @Listen('checkboxSelected')
+  checkboxSelectedHandler(event: CustomEvent): void {
+    const clickedItem = event.target as HTMLVaCheckboxElement;
+    if (this.enableAnalytics) this.fireAnalyticsEvent(clickedItem.label);
+  }
+
+  private fireAnalyticsEvent(optionLabel) {
     this.componentLibraryAnalytics.emit({
       componentName: 'va-checkbox-group',
       action: 'change',
       details: {
         label: this.label,
+        optionLabel,
         required: this.required,
-        // checked: this.checked,
       },
     });
-  };
-
-  private handleChange = (e: Event) => {
-    this.checked = (e.target as HTMLInputElement).checked;
-    this.vaChange.emit({ checked: this.checked });
-    if (this.enableAnalytics) this.fireAnalyticsEvent();
-  };
-
-  private handleBlur = () => {
-    this.vaBlur.emit();
-  };
-
-  private getMatchingSubSection = (checked, optionValues) => {
-    if (checked && this.props.children) {
-      const children = Array.isArray(this.props.children)
-        ? this.props.children
-        : [this.props.children];
-      const subsections = children.filter(child =>
-        optionValues.contains(child.props.showIfValueChosen),
-      );
-      return subsections.length > 0 ? subsections[0] : null;
-    }
-
-    return null;
-  };
+  }
 
   render() {
-    const describedBy = `${this.ariaDescribedby} description ${
-      this.error && 'error-message'
-    }`.trim();
-
     return (
-      <Host>
-        <div id="description">
-          {this.description ? (
-            <p>{this.description}</p>
-          ) : (
-            <slot name="description" />
-          )}
-        </div>
-        <input
-          type="checkbox"
-          id="checkbox-element"
-          checked={this.checked}
-          aria-describedby={describedBy}
-          onChange={this.handleChange}
-          onBlur={this.handleBlur}
-        />
-        <label htmlFor="checkbox-element">
+      <Host role="group">
+        <legend>
           {this.label}
-          {this.required && <span class="required">(Required)</span>}
-        </label>
-        {this.error && <span id="error-message">{this.error}</span>}
+          {this.required && <span class="required-span">(*Required)</span>}
+        </legend>
+        {this.error && (
+          <span class="error-message" role="alert">
+            <span class="sr-only">Error</span> {this.error}
+          </span>
+        )}
+        <slot></slot>
       </Host>
     );
   }
