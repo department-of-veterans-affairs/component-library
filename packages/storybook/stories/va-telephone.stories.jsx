@@ -33,7 +33,12 @@ export const ThreeDigitNumber = Template.bind({});
 ThreeDigitNumber.args = {
   ...defaultArgs,
   contact: '711',
-  extension: 0,
+};
+
+export const Extension = Template.bind({});
+Extension.args = {
+  ...defaultArgs,
+  extension: '123',
 };
 
 export const Inactive = Template.bind({});
