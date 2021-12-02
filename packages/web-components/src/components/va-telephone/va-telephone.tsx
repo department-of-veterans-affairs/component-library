@@ -65,7 +65,7 @@ export class VaTelephone {
       extension,
       international,
     );
-    const formattedAriaLabel = this.formatTelLabel(formattedNumber);
+    const formattedAriaLabel = `${this.formatTelLabel(formattedNumber)}.`;
 
     if (inactive) {
       return (
