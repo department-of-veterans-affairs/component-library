@@ -70,16 +70,12 @@ export class VaTelephone {
       formattedNumber,
     )}.`;
 
-    if (inactive) {
-      return (
-        <Fragment>
-          <span aria-hidden="true">{formattedNumber}</span>
-          <span class="sr-only">{formattedAriaLabel}</span>
-        </Fragment>
-      );
-    }
-
-    return (
+    return inactive ? (
+      <Fragment>
+        <span aria-hidden="true">{formattedNumber}</span>
+        <span class="sr-only">{formattedAriaLabel}</span>
+      </Fragment>
+    ) : (
       <a
         href={VaTelephone.createHref(contact, extension)}
         aria-label={formattedAriaLabel}
