@@ -9,7 +9,7 @@ export class VaTelephone {
   /**
    * 3 or 10 digit string representing the contact number
    */
-  @Prop() contact: string;
+  @Prop() contact!: string;
 
   @Prop() extension: number;
 
