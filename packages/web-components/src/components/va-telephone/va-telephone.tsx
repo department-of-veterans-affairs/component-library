@@ -21,7 +21,7 @@ export class VaTelephone {
    */
   @Prop() international: boolean = false;
 
-  private formatPhoneNumber(
+  static formatPhoneNumber(
     num: string,
     extension: number,
     international: boolean = false,
@@ -42,7 +42,7 @@ export class VaTelephone {
    * @return {string} - Combined phone number parts within the label separated by
    * periods, e.g. "800-555-1212" becomes "8 0 0. 5 5 5. 1 2 1 2"
    */
-  private formatTelLabel(number: string): string {
+  static formatTelLabel(number: string): string {
     return number
       .split(/[^\d\w]+/)
       .filter(n => n)
@@ -60,12 +60,14 @@ export class VaTelephone {
       extension ? `,${extension}` : ''
     }`;
 
-    const formattedNumber = this.formatPhoneNumber(
+    const formattedNumber = VaTelephone.formatPhoneNumber(
       contact,
       extension,
       international,
     );
-    const formattedAriaLabel = `${this.formatTelLabel(formattedNumber)}.`;
+    const formattedAriaLabel = `${VaTelephone.formatTelLabel(
+      formattedNumber,
+    )}.`;
 
     if (inactive) {
       return (
