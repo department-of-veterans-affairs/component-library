@@ -49,7 +49,7 @@ export class VaAdditionalInfo {
   }
 
   handleKeydown(event): void {
-    if (event.key === ' ') {
+    if (event.key === ' ' || event.key === 'Enter') {
       event.preventDefault();
       this.toggleOpen();
     }
