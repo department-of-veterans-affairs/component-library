@@ -11,9 +11,9 @@ describe('va-additional-info', () => {
     const element = await page.find('va-additional-info');
 
     expect(element).toEqualHtml(`
-      <va-additional-info aria-expanded="false" trigger="More info" class="hydrated">
+      <va-additional-info trigger="More info" class="hydrated">
         <mock:shadow-root>
-          <a aria-controls="info" role="button" tabindex="0">
+          <a aria-controls="info" aria-expanded="false" role="button" tabindex="0">
             <span class="additional-info-title">
               More info
               <i class="fa-angle-down" role="presentation"></i>
@@ -73,9 +73,11 @@ describe('va-additional-info', () => {
 
     // Use click to expand
     const anchorEl = await page.find('va-additional-info >>> a');
+    expect(anchorEl.getAttribute('aria-expanded')).toEqual('false');
     await anchorEl.click();
     // Allow the transition to complete
     await page.waitForTimeout(600);
+    expect(anchorEl.getAttribute('aria-expanded')).toEqual('true');
 
     const postOpacity = await handle.evaluate(
       (domElement: HTMLElement) => window.getComputedStyle(domElement).opacity,

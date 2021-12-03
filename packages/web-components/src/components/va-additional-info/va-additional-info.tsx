@@ -57,10 +57,11 @@ export class VaAdditionalInfo {
 
   render() {
     return (
-      <Host aria-expanded={this.open ? 'true' : 'false'}>
+      <Host>
         <a
           role="button"
           aria-controls="info"
+          aria-expanded={this.open ? 'true' : 'false'}
           tabIndex={0}
           onClick={this.toggleOpen.bind(this)}
           onKeyDown={this.handleKeydown.bind(this)}
