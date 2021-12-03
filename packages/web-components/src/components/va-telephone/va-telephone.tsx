@@ -34,7 +34,7 @@ export class VaTelephone {
       const regex = /(?<area>\d{3})(?<local>\d{3})(?<last4>\d{4})/g;
       const { area, local, last4 } = regex.exec(num).groups;
       formattedNum = `${area}-${local}-${last4}`;
-      formattedNum = international ? `+1-${formattedNum}` : formattedNum;
+      if (international) formattedNum = `+1-${formattedNum}`;
     }
     return extension ? `${formattedNum}, ext. ${extension}` : formattedNum;
   }
