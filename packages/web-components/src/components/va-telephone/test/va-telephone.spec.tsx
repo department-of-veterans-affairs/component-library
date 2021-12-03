@@ -2,6 +2,7 @@ import { VaTelephone } from '../va-telephone';
 
 describe('formatPhoneNumber', () => {
   const contact = '8885551234';
+  const N11 = '911';
   const extension = 123;
   it('formats a contact number with no extension', () => {
     expect(VaTelephone.formatPhoneNumber(contact, null)).toBe('888-555-1234');
@@ -11,6 +12,18 @@ describe('formatPhoneNumber', () => {
     expect(VaTelephone.formatPhoneNumber(contact, extension)).toBe(
       '888-555-1234, ext. 123',
     );
+  });
+
+  it('formats a 3 digit contact number', () => {
+    expect(VaTelephone.formatPhoneNumber(N11, null)).toBe('911');
+  });
+
+  it('does not use extension for 3 digit contact', () => {
+    expect(VaTelephone.formatPhoneNumber(N11, extension)).toBe('911');
+  });
+
+  it('does not use international formatting for 3 digit contact', () => {
+    expect(VaTelephone.formatPhoneNumber(N11, extension, true)).toBe('911');
   });
 });
 

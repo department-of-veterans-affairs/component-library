@@ -24,6 +24,10 @@ export class VaTelephone {
    */
   @Prop() international: boolean = false;
 
+  /**
+   * Format telephone number for display.
+   * `international` and `extension` args only work on 10 digit contacts
+   */
   static formatPhoneNumber(
     num: string,
     extension: number,
@@ -35,9 +39,11 @@ export class VaTelephone {
       const { area, local, last4 } = regex.exec(num).groups;
       formattedNum = `${area}-${local}-${last4}`;
       if (international) formattedNum = `+1-${formattedNum}`;
+      if (extension) formattedNum = `${formattedNum}, ext. ${extension}`;
     }
-    return extension ? `${formattedNum}, ext. ${extension}` : formattedNum;
+    return formattedNum;
   }
+
   /**
    * Format telephone number for label
    * @param {string} number - Expected a phone number with or without dashes that
