@@ -7,14 +7,26 @@ export default {
   title: 'Components/va-telephone',
 };
 
-const Template = ({ contact, extension, inactive, international }) => {
+const Template = ({
+  contact,
+  extension,
+  inactive,
+  international,
+  ariaDescribedby,
+}) => {
   return (
-    <va-telephone
-      contact={contact}
-      extension={extension}
-      inactive={inactive}
-      international={international}
-    ></va-telephone>
+    <div>
+      {ariaDescribedby && (
+        <span id={ariaDescribedby}>Phone number title: </span>
+      )}
+      <va-telephone
+        contact={contact}
+        extension={extension}
+        inactive={inactive}
+        international={international}
+        aria-describedby={ariaDescribedby}
+      ></va-telephone>
+    </div>
   );
 };
 
@@ -51,4 +63,10 @@ export const International = Template.bind({});
 International.args = {
   ...defaultArgs,
   international: true,
+};
+
+export const AriaDescribedBy = Template.bind({});
+AriaDescribedBy.args = {
+  ...defaultArgs,
+  ariaDescribedby: 'numberDescription',
 };
