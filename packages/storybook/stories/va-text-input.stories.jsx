@@ -9,24 +9,46 @@ export default {
 };
 
 const defaultArgs = {
-  name: 'my-input',
-  label: 'My input',
-  autocomplete: false,
+  'name': 'my-input',
+  'label': 'My input',
+  'autocomplete': false,
   // Fun fact: This should really be false, but that passes
   // enable-analytics="false" to the web component, which correctly interprets
   // this as a truthy value. See also:
   // https://html.spec.whatwg.org/multipage/common-microsyntaxes.html#boolean-attribute
-  'enable-analytics': null,
+  'enable-analytics': false,
   // Same story here
-  required: null,
-  error: null,
-  maxlength: null,
-  placeholder: null,
-  value: null,
+  'required': false,
+  'error': null,
+  'maxlength': null,
+  'placeholder': null,
+  'value': null,
 };
 
-const Template = props => {
-  return <va-text-input {...props} />;
+const Template = ({
+  name,
+  label,
+  autocomplete,
+  'enable-analytics': enableAnalytics,
+  required,
+  error,
+  maxlength,
+  placeholder,
+  value,
+}) => {
+  return (
+    <va-text-input
+      name={name}
+      label={label}
+      autocomplete={autocomplete}
+      enable-analytics={enableAnalytics}
+      required={required}
+      error={error}
+      maxlength={maxlength}
+      placeholder={placeholder}
+      value={value}
+    />
+  );
 };
 
 export const Default = Template.bind({});
