@@ -2,7 +2,7 @@
 :host {
   display: block;
 }
-:host([aria-expanded='true']) #info {
+a[aria-expanded='true'] ~ #info {
   padding-left: calc(2rem - 7px);
   border-left: 7px solid transparent;
   border-left-color: var(--color-primary-alt-light);
@@ -51,7 +51,7 @@ i.fa-angle-down::before {
   content: '\F107'; /* fa-angle-down*/
 }
 
-:host([aria-expanded='true']) i.fa-angle-down {
+a[aria-expanded='true'] i.fa-angle-down {
   transform: rotate(180deg);
   transition: transform 0.15s linear;
 }
