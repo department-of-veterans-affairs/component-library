@@ -11,6 +11,9 @@ export class VaTelephone {
    */
   @Prop() contact!: string;
 
+  /**
+   * Optional phone number extension
+   */
   @Prop() extension: number;
 
   /**

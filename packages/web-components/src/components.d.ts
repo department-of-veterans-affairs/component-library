@@ -201,6 +201,9 @@ export namespace Components {
           * 3 or 10 digit string representing the contact number
          */
         "contact": string;
+        /**
+          * Optional phone number extension
+         */
         "extension": number;
         /**
           * Indicates if this is a number meant to be called from outside the US. Prepends a "+1" to the formatted number.
@@ -579,6 +582,9 @@ declare namespace LocalJSX {
           * 3 or 10 digit string representing the contact number
          */
         "contact": string;
+        /**
+          * Optional phone number extension
+         */
         "extension"?: number;
         /**
           * Indicates if this is a number meant to be called from outside the US. Prepends a "+1" to the formatted number.
