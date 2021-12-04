@@ -74,6 +74,10 @@ export namespace Components {
          */
         "fullWidth": boolean;
         /**
+          * This option only takes effect when background-only is true. If true, the background-only alert will include an icon.
+         */
+        "showIcon": boolean;
+        /**
           * Determines the icon and border/background color. One of `info`, `error`, `success`, `warning`, or `continue`
          */
         "status": string;
@@ -115,6 +119,24 @@ export namespace Components {
         "required"?: boolean;
     }
     interface VaFeaturedContent {
+    }
+    interface VaLoadingIndicator {
+        /**
+          * Analytics tracking function(s) will be called. Form components are disabled by default due to PII/PHI concerns.
+         */
+        "enableAnalytics": boolean;
+        /**
+          * An aria label
+         */
+        "label": string;
+        /**
+          * The message visible on screen when loading
+         */
+        "message": string;
+        /**
+          * Set to true if the loading indicator should capture focus
+         */
+        "setFocus": boolean;
     }
     interface VaOnThisPage {
     }
@@ -275,6 +297,12 @@ declare global {
         prototype: HTMLVaFeaturedContentElement;
         new (): HTMLVaFeaturedContentElement;
     };
+    interface HTMLVaLoadingIndicatorElement extends Components.VaLoadingIndicator, HTMLStencilElement {
+    }
+    var HTMLVaLoadingIndicatorElement: {
+        prototype: HTMLVaLoadingIndicatorElement;
+        new (): HTMLVaLoadingIndicatorElement;
+    };
     interface HTMLVaOnThisPageElement extends Components.VaOnThisPage, HTMLStencilElement {
     }
     var HTMLVaOnThisPageElement: {
@@ -313,6 +341,7 @@ declare global {
         "va-back-to-top": HTMLVaBackToTopElement;
         "va-checkbox": HTMLVaCheckboxElement;
         "va-featured-content": HTMLVaFeaturedContentElement;
+        "va-loading-indicator": HTMLVaLoadingIndicatorElement;
         "va-on-this-page": HTMLVaOnThisPageElement;
         "va-radio": HTMLVaRadioElement;
         "va-radio-option": HTMLVaRadioOptionElement;
@@ -401,6 +430,10 @@ declare namespace LocalJSX {
          */
         "onVa-component-did-load"?: (event: CustomEvent<any>) => void;
         /**
+          * This option only takes effect when background-only is true. If true, the background-only alert will include an icon.
+         */
+        "showIcon"?: boolean;
+        /**
           * Determines the icon and border/background color. One of `info`, `error`, `success`, `warning`, or `continue`
          */
         "status"?: string;
@@ -454,6 +487,28 @@ declare namespace LocalJSX {
         "required"?: boolean;
     }
     interface VaFeaturedContent {
+    }
+    interface VaLoadingIndicator {
+        /**
+          * Analytics tracking function(s) will be called. Form components are disabled by default due to PII/PHI concerns.
+         */
+        "enableAnalytics"?: boolean;
+        /**
+          * An aria label
+         */
+        "label"?: string;
+        /**
+          * The message visible on screen when loading
+         */
+        "message"?: string;
+        /**
+          * The event used to track usage of the component.
+         */
+        "onComponent-library-analytics"?: (event: CustomEvent<any>) => void;
+        /**
+          * Set to true if the loading indicator should capture focus
+         */
+        "setFocus"?: boolean;
     }
     interface VaOnThisPage {
     }
@@ -596,6 +651,7 @@ declare namespace LocalJSX {
         "va-back-to-top": VaBackToTop;
         "va-checkbox": VaCheckbox;
         "va-featured-content": VaFeaturedContent;
+        "va-loading-indicator": VaLoadingIndicator;
         "va-on-this-page": VaOnThisPage;
         "va-radio": VaRadio;
         "va-radio-option": VaRadioOption;
@@ -614,6 +670,7 @@ declare module "@stencil/core" {
             "va-back-to-top": LocalJSX.VaBackToTop & JSXBase.HTMLAttributes<HTMLVaBackToTopElement>;
             "va-checkbox": LocalJSX.VaCheckbox & JSXBase.HTMLAttributes<HTMLVaCheckboxElement>;
             "va-featured-content": LocalJSX.VaFeaturedContent & JSXBase.HTMLAttributes<HTMLVaFeaturedContentElement>;
+            "va-loading-indicator": LocalJSX.VaLoadingIndicator & JSXBase.HTMLAttributes<HTMLVaLoadingIndicatorElement>;
             "va-on-this-page": LocalJSX.VaOnThisPage & JSXBase.HTMLAttributes<HTMLVaOnThisPageElement>;
             "va-radio": LocalJSX.VaRadio & JSXBase.HTMLAttributes<HTMLVaRadioElement>;
             "va-radio-option": LocalJSX.VaRadioOption & JSXBase.HTMLAttributes<HTMLVaRadioOptionElement>;

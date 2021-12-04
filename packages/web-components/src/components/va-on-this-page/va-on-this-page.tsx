@@ -11,12 +11,12 @@ import { Component, h } from '@stencil/core';
 })
 export class VaOnThisPage {
   render() {
-    const h2s = Array.from(document.querySelectorAll('article h2')) as Array<
-      HTMLElement
-    >;
+    const h2s = Array.from(
+      document.querySelectorAll('article h2'),
+    ) as Array<HTMLElement>;
 
     return (
-      <nav aria-label="table of contents">
+      <nav aria-labelledby="on-this-page">
         <dl>
           <dt id="on-this-page">On this page</dt>
           <dd role="definition">

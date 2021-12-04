@@ -13,19 +13,30 @@ export default {
   subcomponents: componentStructure(radioItem),
 };
 
-const Template = args => {
+const Template = ({
+  'enable-analytics': enableAnalytics,
+  error,
+  label,
+  required,
+}) => {
   return (
-    <va-radio {...args}>
-      <va-radio-option label="Option one" name="one" value="1" />
-      <va-radio-option label="Option two" name="two" value="2" />
+    <va-radio
+      enable-analytics={enableAnalytics}
+      error={error}
+      label={label}
+      required={required}
+    >
+      <va-radio-option label="Option one" name="example" value="1" />
+      <va-radio-option label="Option two" name="example" value="2" />
     </va-radio>
   );
 };
 
 const defaultArgs = {
-  label: 'This is a label',
-  required: false,
-  error: null,
+  'enable-analytics': false,
+  'label': 'This is a label',
+  'required': false,
+  'error': null,
 };
 
 export const Default = Template.bind({});

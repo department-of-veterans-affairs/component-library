@@ -52,6 +52,16 @@ export class VaAccordion {
       event.detail.currentTarget.parentNode.parentNode.host || // if we are on IE, `.host` won't be there
       event.detail.currentTarget.parentNode.parentNode;
     // Close the other items if this accordion isn't multi-selectable
+
+    // Usage for slot to provide context to analytics for header and level
+    let headerText
+    let headerLevel
+    getSlottedNodes(clickedItem, null).map(
+      (node: HTMLSlotElement) => {
+        headerText = node.innerHTML
+        headerLevel = parseInt(node.tagName.toLowerCase().split('')[1])
+    })
+
     if (this.openSingle) {
       getSlottedNodes(this.el, 'va-accordion-item')
         .filter(item => item !== clickedItem)
@@ -65,9 +75,9 @@ export class VaAccordion {
         componentName: 'Accordion',
         action: prevAttr ? 'collapse' : 'expand',
         details: {
-          header: clickedItem.header,
+          header: headerText || clickedItem.header,
           subheader: clickedItem.subheader,
-          level: clickedItem.level,
+          level: headerLevel || clickedItem.level,
           sectionHeading: this.sectionHeading,
         },
       };
