@@ -12,12 +12,7 @@ const defaultArgs = {
   'name': 'my-input',
   'label': 'My input',
   'autocomplete': false,
-  // Fun fact: This should really be false, but that passes
-  // enable-analytics="false" to the web component, which correctly interprets
-  // this as a truthy value. See also:
-  // https://html.spec.whatwg.org/multipage/common-microsyntaxes.html#boolean-attribute
   'enable-analytics': false,
-  // Same story here
   'required': false,
   'error': null,
   'maxlength': null,
