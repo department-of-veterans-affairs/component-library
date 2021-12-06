@@ -1,5 +1,4 @@
 import { Component, Event, EventEmitter, Host, Prop, h } from '@stencil/core';
-import { range } from 'lodash';
 
 @Component({
     tag: 'va-segmented-progress-bar',
@@ -49,6 +48,7 @@ export class VaSegmentedProgressBar {
 
     render() {
         const label = this.label || `Step ${this.current} of ${this.total}`
+        const range = Array.from({length: this.total}, (_, i) => i)
         return (
             <Host>
                 <div
@@ -60,7 +60,7 @@ export class VaSegmentedProgressBar {
                     tabindex="0"
                     aria-label={label}
                 >
-                    {range(this.total).map(step => (
+                    {range.map(step => (
                         <div
                             key={step}
                             class={`progress-segment ${this.current > step ? 'progress-segment-complete' : ''}`}
