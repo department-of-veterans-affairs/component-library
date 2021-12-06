@@ -8,6 +8,10 @@ a[aria-expanded='true'] ~ #info {
   border-left-color: var(--color-primary-alt-light);
 }
 
+#info.closed {
+  visibility: hidden;
+}
+
 a {
   display: block;
 }
@@ -27,7 +31,7 @@ a {
 .open {
   height: auto;
   opacity: 1;
-  transition: max-height 700ms 0ms, opacity 500ms 200ms;
+  transition: max-height 700ms 0ms, opacity 500ms 200ms, visibility 500ms 200ms;
   max-height: 800px;
   margin-top: 1em;
   margin-bottom: 1em;
