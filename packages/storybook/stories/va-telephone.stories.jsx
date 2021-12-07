@@ -38,6 +38,7 @@ const Template = ({
 const defaultArgs = {
   'contact': '8773459876',
   'not-clickable': false,
+  'international': false,
 };
 
 export const Default = Template.bind({});
