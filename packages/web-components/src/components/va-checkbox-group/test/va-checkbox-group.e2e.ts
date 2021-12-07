@@ -76,7 +76,7 @@ describe('va-checkbox-group', () => {
     });
   });
 
-  it("doesn't fire an analytics event when enableAnalytics is false", async () => {
+  it("doesn't fire an analytics event by default", async () => {
     const page = await newE2EPage();
     await page.setContent(`
       <va-checkbox-group label="Regular label">
