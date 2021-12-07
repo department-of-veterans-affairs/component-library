@@ -14,7 +14,7 @@ export class VaProgressBar {
   /**
    * The text label for the progress bar.
    */
-  @Prop() label: string = 'Working';
+  @Prop() label: string;
 
   /**
    * Percent of progress made. 0 to 100.
@@ -42,10 +42,11 @@ export class VaProgressBar {
   }
 
   render() {
+    const ariaLabel = this.label ?? `${this.percent}%`;
     return (
       <Host>
         <div
-          aria-label={this.label}
+          aria-label={ariaLabel}
           aria-valuemax="100"
           aria-valuemin="0"
           aria-valuenow={this.percent}
