@@ -67,15 +67,6 @@ export class VaCheckbox {
   @Event() vaBlur: EventEmitter;
 
   /**
-   * Bubble event emitted by checkbox to parent Checkbox Group
-   */
-  @Event({
-    composed: true,
-    bubbles: true,
-  })
-  checkboxSelected: EventEmitter;
-
-  /**
    * The event used to track usage of the component. This is emitted when the
    * input value changes and enableAnalytics is true.
    */
@@ -116,7 +107,6 @@ export class VaCheckbox {
   };
 
   private handleChange = (e: Event) => {
-    this.checkboxSelected.emit();
     this.checked = (e.target as HTMLInputElement).checked;
     this.vaChange.emit({ checked: this.checked });
     if (this.enableAnalytics) this.fireAnalyticsEvent();

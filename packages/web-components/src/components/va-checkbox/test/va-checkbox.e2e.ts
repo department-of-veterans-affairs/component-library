@@ -200,7 +200,7 @@ describe('va-checkbox', () => {
       '<va-checkbox aria-describedby="test" label="A label" value="something" />',
     );
 
-    const changeSpy = await page.spyOnEvent('checkboxSelected');
+    const changeSpy = await page.spyOnEvent('vaChange');
     const inputEl = await page.find('va-checkbox');
     await inputEl.click();
 

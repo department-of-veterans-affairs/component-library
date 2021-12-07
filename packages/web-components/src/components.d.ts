@@ -459,10 +459,6 @@ declare namespace LocalJSX {
          */
         "label"?: string;
         /**
-          * Bubble event emitted by checkbox to parent Checkbox Group
-         */
-        "onCheckboxSelected"?: (event: CustomEvent<any>) => void;
-        /**
           * The event used to track usage of the component. This is emitted when the input value changes and enableAnalytics is true.
          */
         "onComponent-library-analytics"?: (event: CustomEvent<any>) => void;
