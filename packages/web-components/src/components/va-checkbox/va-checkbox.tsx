@@ -130,6 +130,7 @@ export class VaCheckbox {
             <slot name="description" />
           )}
         </div>
+        {this.error && <span id="error-message">{this.error}</span>}
         <input
           type="checkbox"
           id="checkbox-element"
@@ -142,7 +143,6 @@ export class VaCheckbox {
           {this.label}
           {this.required && <span class="required">(Required)</span>}
         </label>
-        {this.error && <span id="error-message">{this.error}</span>}
       </Host>
     );
   }
