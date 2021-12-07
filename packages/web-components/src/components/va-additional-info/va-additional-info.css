@@ -5,7 +5,7 @@
 a[aria-expanded='true'] ~ #info {
   padding-left: calc(2rem - 7px);
   border-left: 7px solid transparent;
-  border-left-color: var(--color-primary-alt-light);
+  border-left-color: var(--color-primary-alt-dark);
 }
 
 #info.closed {
@@ -18,7 +18,7 @@ a {
 
 .additional-info-title {
   border-bottom-right-radius: 1px;
-  border-bottom: 2px dotted var(--color-primary);
+  border-bottom: 2px dotted var(--color-primary-alt-dark);
   color: var(--color-gray-dark);
   cursor: pointer;
 }
@@ -45,7 +45,7 @@ i {
 }
 i.fa-angle-down {
   display: inline-block;
-  color: var(--color-gray-light);
+  color: var(--color-primary-alt-dark);
   font-size: 1.6rem;
   margin: 0.5rem;
   transform: rotate(0deg);
