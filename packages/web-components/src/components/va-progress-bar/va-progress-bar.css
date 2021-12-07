@@ -16,4 +16,5 @@ div {
   content: '&nbsp;';
   display: block;
   height: 100%;
+  max-width: 100%;
 }
