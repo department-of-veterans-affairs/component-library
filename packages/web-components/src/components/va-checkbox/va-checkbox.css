@@ -11,14 +11,14 @@
 #error-message {
     color: var(--color-secondary-dark);
     display: block;
-    margin-bottom: 0.8rem;
+    margin-bottom: 1em;
 }
 
 input {
   /* Make the clickable element the same size and position as the box */
   height: var(--visible-checkbox-size);
   width: var(--visible-checkbox-size);
-  margin: var(--visible-checkbox-top-margin) 0 0 0;
+  margin: var(--visible-checkbox-top-margin) 0 0 2.4rem;
 
   padding: 0;
   opacity: 0;
@@ -34,23 +34,22 @@ label {
 input+label {
   cursor: pointer;
   font-weight: 400;
-  margin-left: 1.7em;
+  margin-left: 2.4rem;
+  margin-top: 1em;
 }
 
 /* The actual box */
 input+label::before {
   display: block;
   float: left;
-  margin-left: -1.7em;
   margin-top: var(--visible-checkbox-top-margin);
-  margin-right: 0;
+  margin-right: 1rem;
   pointer-events: none;
   border-radius: 2px;
   box-shadow: 0 0 0 1px var(--color-gray-medium);
   content: "\A0";
   height: var(--visible-checkbox-size);
   width: var(--visible-checkbox-size);
-  text-indent: 0.15em;
 }
 
 input:checked+label::before {
@@ -80,4 +79,8 @@ input:not([disabled]):focus+label:before {
 :host([required]) label > span {
   color: var(--color-secondary-dark);
   margin: 0px 0.35em;
+}
+
+::slotted([slot='description']){
+  margin-top: 0 !important;
 }

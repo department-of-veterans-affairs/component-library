@@ -4,26 +4,21 @@
   display: block;
   border: none;
   padding: 0;
-  margin-top: 3rem;
 }
 
 :host([error]) {
   border-left: 4px solid var(--color-secondary-dark);
-  margin-top: 3rem;
-  padding-bottom: 0.8rem;
-  padding-left: 1.5rem;
-  padding-top: 0.8rem;
+  padding-left: 1.8rem;
   position: relative;
-  right: 1.9rem;
 }
 
 .error-message {
   color: var(--color-secondary-dark);
-  padding-bottom: 3px;
-  padding-top: 3px;
   display: block;
   font-size: 1.6rem;
+  line-height: 2.4rem;
   font-weight: 700;
+  margin-bottom: 1em;
 }
 
 .required-span {
@@ -38,4 +33,5 @@ legend {
   font-size: inherit;
   color: inherit;
   line-height: inherit;
+  margin-bottom: 1em;
 }
