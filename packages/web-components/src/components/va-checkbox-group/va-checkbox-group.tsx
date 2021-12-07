@@ -44,8 +44,8 @@ export class VaCheckboxGroup {
   })
   componentLibraryAnalytics: EventEmitter;
 
-  @Listen('checkboxSelected')
-  checkboxSelectedHandler(event: CustomEvent): void {
+  @Listen('vaChange')
+  vaChangeHandler(event: CustomEvent): void {
     const clickedItem = event.target as HTMLVaCheckboxElement;
     if (this.enableAnalytics) this.fireAnalyticsEvent(clickedItem.label);
   }
@@ -71,7 +71,7 @@ export class VaCheckboxGroup {
         </legend>
         {this.error && (
           <span class="error-message" role="alert">
-            <span class="sr-only">Error</span> {this.error}
+            <span class="sr-only">Error:</span> {this.error}
           </span>
         )}
         <slot></slot>
