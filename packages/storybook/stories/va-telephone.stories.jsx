@@ -15,7 +15,7 @@ export default {
 const Template = ({
   contact,
   extension,
-  inactive,
+  'not-clickable': notClickable,
   international,
   ariaDescribedby,
 }) => {
@@ -27,7 +27,7 @@ const Template = ({
       <va-telephone
         contact={contact}
         extension={extension}
-        inactive={inactive}
+        not-clickable={notClickable}
         international={international}
         aria-describedby={ariaDescribedby}
       ></va-telephone>
@@ -36,8 +36,8 @@ const Template = ({
 };
 
 const defaultArgs = {
-  contact: '8773459876',
-  inactive: false,
+  'contact': '8773459876',
+  'not-clickable': false,
 };
 
 export const Default = Template.bind({});
@@ -58,10 +58,10 @@ Extension.args = {
   extension: '123',
 };
 
-export const Inactive = Template.bind({});
-Inactive.args = {
+export const NotClickable = Template.bind({});
+NotClickable.args = {
   ...defaultArgs,
-  inactive: true,
+  'not-clickable': true,
 };
 
 export const International = Template.bind({});

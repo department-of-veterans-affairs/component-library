@@ -36,12 +36,12 @@ describe('va-telephone', () => {
   it('handles a non-clickable 10 digit contact prop', async () => {
     const page = await newE2EPage();
     await page.setContent(
-      '<va-telephone clickable="false" contact="8779551234"></va-telephone>',
+      '<va-telephone not-clickable contact="8779551234"></va-telephone>',
     );
 
     const element = await page.find('va-telephone');
     expect(element).toEqualHtml(`
-      <va-telephone class="hydrated" contact="8779551234" clickable="false">
+      <va-telephone class="hydrated" contact="8779551234" not-clickable>
         <mock:shadow-root>
           <span aria-hidden="true">
             877-955-1234
@@ -57,12 +57,12 @@ describe('va-telephone', () => {
   it('handles a non-clickable 10 digit contact prop with extension', async () => {
     const page = await newE2EPage();
     await page.setContent(
-      '<va-telephone clickable="false" contact="8779551234" extension="123"></va-telephone>',
+      '<va-telephone not-clickable contact="8779551234" extension="123"></va-telephone>',
     );
 
     const element = await page.find('va-telephone');
     expect(element).toEqualHtml(`
-      <va-telephone class="hydrated" contact="8779551234" extension="123" clickable="false">
+      <va-telephone class="hydrated" contact="8779551234" extension="123" not-clickable>
         <mock:shadow-root>
           <span aria-hidden="true">
             877-955-1234, ext. 123

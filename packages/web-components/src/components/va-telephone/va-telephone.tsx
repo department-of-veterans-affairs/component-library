@@ -26,7 +26,7 @@ export class VaTelephone {
   /**
    * Indicates if the phone number can be clicked or not
    */
-  @Prop() clickable: boolean = true;
+  @Prop() notClickable: boolean = false;
 
   /**
    * Indicates if this is a number meant to be called from outside the US.
@@ -96,7 +96,7 @@ export class VaTelephone {
   }
 
   render() {
-    const { contact, extension, clickable, international } = this;
+    const { contact, extension, notClickable, international } = this;
     const formattedNumber = VaTelephone.formatPhoneNumber(
       contact,
       extension,
@@ -106,7 +106,12 @@ export class VaTelephone {
       formattedNumber,
     )}.`;
 
-    return clickable ? (
+    return notClickable ? (
+      <Fragment>
+        <span aria-hidden="true">{formattedNumber}</span>
+        <span class="sr-only">{formattedAriaLabel}</span>
+      </Fragment>
+    ) : (
       <a
         href={VaTelephone.createHref(contact, extension)}
         aria-label={formattedAriaLabel}
@@ -114,11 +119,6 @@ export class VaTelephone {
       >
         {formattedNumber}
       </a>
-    ) : (
-      <Fragment>
-        <span aria-hidden="true">{formattedNumber}</span>
-        <span class="sr-only">{formattedAriaLabel}</span>
-      </Fragment>
     );
   }
 }
