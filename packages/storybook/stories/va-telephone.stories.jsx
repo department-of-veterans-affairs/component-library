@@ -37,6 +37,7 @@ const Template = ({
 
 const defaultArgs = {
   'contact': '8773459876',
+  'extension': undefined,
   'not-clickable': false,
   'international': false,
 };
