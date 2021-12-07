@@ -71,7 +71,7 @@ export class VaCheckboxGroup {
         </legend>
         {this.error && (
           <span class="error-message" role="alert">
-            <span class="sr-only">Error</span> {this.error}
+            <span class="sr-only">Error:</span> {this.error}
           </span>
         )}
         <slot></slot>
