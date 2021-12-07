@@ -590,6 +590,7 @@ declare namespace LocalJSX {
           * Indicates if this is a number meant to be called from outside the US. Prepends a "+1" to the formatted number.
          */
         "international"?: boolean;
+        "onComponent-library-analytics"?: (event: CustomEvent<any>) => void;
     }
     interface VaTextInput {
         /**

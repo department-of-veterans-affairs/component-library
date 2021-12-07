@@ -5,6 +5,11 @@ const telephoneDocs = getWebComponentDocs('va-telephone');
 
 export default {
   title: 'Components/va-telephone',
+  parameters: {
+    actions: {
+      handles: ['component-library-analytics'],
+    },
+  },
 };
 
 const Template = ({

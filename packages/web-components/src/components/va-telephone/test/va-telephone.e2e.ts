@@ -98,4 +98,25 @@ describe('va-telephone', () => {
     expect(link.getAttribute('href')).toEqual('tel:711');
     expect(link.innerText).toEqual('711');
   });
+
+  it('fires an analytics event when clicked', async () => {
+    const page = await newE2EPage();
+    await page.setContent(
+      '<va-telephone contact="8779551234" extension="123"></va-telephone>',
+    );
+
+    const analyticsSpy = await page.spyOnEvent('component-library-analytics');
+
+    const link = await page.find('va-telephone >>> a');
+    await link.click();
+
+    expect(analyticsSpy).toHaveReceivedEventDetail({
+      action: 'click',
+      componentName: 'va-telephone',
+      details: {
+        contact: '8779551234',
+        extension: 123,
+      },
+    });
+  });
 });

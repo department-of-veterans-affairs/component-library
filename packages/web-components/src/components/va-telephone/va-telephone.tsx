@@ -1,4 +1,11 @@
-import { Component, Fragment, Prop, h } from '@stencil/core';
+import {
+  Component,
+  Event,
+  EventEmitter,
+  Fragment,
+  Prop,
+  h,
+} from '@stencil/core';
 
 @Component({
   tag: 'va-telephone',
@@ -26,6 +33,13 @@ export class VaTelephone {
    * Prepends a "+1" to the formatted number.
    */
   @Prop() international: boolean = false;
+
+  @Event({
+    eventName: 'component-library-analytics',
+    composed: true,
+    bubbles: true,
+  })
+  componentLibraryAnalytics: EventEmitter;
 
   /**
    * Format telephone number for display.
@@ -71,6 +85,17 @@ export class VaTelephone {
     return `${href}${extension ? `,${extension}` : ''}`;
   }
 
+  private handleClick(): void {
+    this.componentLibraryAnalytics.emit({
+      componentName: 'va-telephone',
+      action: 'click',
+      details: {
+        contact: this.contact,
+        extension: this.extension,
+      },
+    });
+  }
+
   render() {
     const { contact, extension, clickable, international } = this;
     const formattedNumber = VaTelephone.formatPhoneNumber(
@@ -86,6 +111,7 @@ export class VaTelephone {
       <a
         href={VaTelephone.createHref(contact, extension)}
         aria-label={formattedAriaLabel}
+        onClick={this.handleClick.bind(this)}
       >
         {formattedNumber}
       </a>
