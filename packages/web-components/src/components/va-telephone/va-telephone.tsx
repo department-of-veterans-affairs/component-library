@@ -62,10 +62,9 @@ export class VaTelephone {
   }
 
   /**
-   * Format telephone number for label
-   * @param {string} number - Expected a phone number with or without dashes that
-   * matches the number of "#" within the default or set pattern
-   * @return {string} - Combined phone number parts within the label separated by
+   * Format telephone number for screen readers
+   * @param {string} number - Expected a formatted phone number with or without extension
+   * @return {string} - Combined phone number parts within the label seperated by
    * periods, e.g. "800-555-1212" becomes "8 0 0. 5 5 5. 1 2 1 2"
    */
   static formatTelLabel(number: string): string {
