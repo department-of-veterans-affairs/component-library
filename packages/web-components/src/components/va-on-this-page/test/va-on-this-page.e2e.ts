@@ -11,7 +11,7 @@ describe('va-on-this-page', () => {
     expect(element).toEqualHtml(`
       <va-on-this-page class="hydrated">
         <mock:shadow-root>
-          <nav aria-label="table of contents">
+          <nav aria-labelledby="on-this-page">
             <dl>
               <dt id="on-this-page">On this page</dt>
               <dd role="definition"></dd>
@@ -58,7 +58,7 @@ describe('va-on-this-page', () => {
     expect(element).toEqualHtml(`
       <va-on-this-page class="hydrated">
         <mock:shadow-root>
-          <nav aria-label="table of contents">
+          <nav aria-labelledby="on-this-page">
             <dl>
               <dt id="on-this-page">On this page</dt>
               <dd role="definition">
@@ -97,7 +97,7 @@ describe('va-on-this-page', () => {
     expect(element).toEqualHtml(`
     <va-on-this-page class="hydrated">
     <mock:shadow-root>
-      <nav aria-label="table of contents">
+      <nav aria-labelledby="on-this-page">
         <dl>
           <dt id="on-this-page">On this page</dt>
           <dd role="definition">

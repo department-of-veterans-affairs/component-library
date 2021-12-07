@@ -2,6 +2,9 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import dispatchAnalyticsEvent from '../../helpers/analytics';
 
+/**
+ * **Note:** This component is deprecated in favor of the `<va-loading-indicator>` Web Component
+ */
 export default class LoadingIndicator extends React.Component {
   constructor(props) {
     super(props);

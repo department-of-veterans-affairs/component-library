@@ -2,6 +2,13 @@
 
 :host {
   display: block;
+}
+
+:host(:not(:last-child)) {
+  margin-bottom: 0.8rem;
+}
+
+:host(:last-child) {
   margin-bottom: 0.5rem;
 }
 
@@ -64,4 +71,9 @@ p {
   font-weight: 400;
   line-height: 26px;
   margin: 0;
+}
+
+/* Hiding since element would be duplicated via the Shadow DOM */
+::slotted([slot='headline']) {
+  display: none;
 }
