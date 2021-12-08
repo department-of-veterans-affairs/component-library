@@ -76,8 +76,11 @@ export class VaBreadcrumbs {
     const nodes = this.el.shadowRoot.querySelector('slot').assignedNodes();
     if (!nodes?.length) return;
 
-    // TODO: Wrap each child with <li>
     nodes.forEach((node: HTMLSlotElement, index: number) => {
+      const wrapper = document.createElement('li');
+      node.parentNode.insertBefore(wrapper, node);
+      wrapper.appendChild(node);
+
       node.setAttribute('data-index', `${index}`);
       if (index === nodes.length - 1) {
         node.setAttribute('aria-current', 'page');
