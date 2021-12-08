@@ -35,7 +35,7 @@ describe('va-checkbox-group', () => {
     expect(element).toEqualHtml(`
      <span class="error-message" role="alert">
        <span class="sr-only">
-         Error
+         Error:
        </span>
        This is an error
      </span>
