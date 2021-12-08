@@ -5,6 +5,9 @@ import classNames from 'classnames';
 import ExpandingGroup from '../ExpandingGroup/ExpandingGroup';
 import dispatchAnalyticsEvent from '../../helpers/analytics';
 
+/**
+ * **Note:** This component is deprecated in favor of the `<va-additional-info>` Web Component.
+ */
 export default class AdditionalInfo extends React.Component {
   constructor(props) {
     super(props);
