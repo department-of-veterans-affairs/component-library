@@ -42,6 +42,16 @@ export namespace Components {
          */
         "subheader": string;
     }
+    interface VaAdditionalInfo {
+        /**
+          * If true, doesn't fire the CustomEvent which can be used for analytics tracking.
+         */
+        "disableAnalytics": boolean;
+        /**
+          * The text to trigger the expansion
+         */
+        "trigger": string;
+    }
     interface VaAlert {
         /**
           * If true, renders the alert with only a background color corresponding to the status - no icon or left border.
@@ -63,6 +73,10 @@ export namespace Components {
           * If true, the alert will be full width. Should be for emergency communication only.
          */
         "fullWidth": boolean;
+        /**
+          * This option only takes effect when background-only is true. If true, the background-only alert will include an icon.
+         */
+        "showIcon": boolean;
         /**
           * Determines the icon and border/background color. One of `info`, `error`, `success`, `warning`, or `continue`
          */
@@ -271,6 +285,12 @@ declare global {
         prototype: HTMLVaAccordionItemElement;
         new (): HTMLVaAccordionItemElement;
     };
+    interface HTMLVaAdditionalInfoElement extends Components.VaAdditionalInfo, HTMLStencilElement {
+    }
+    var HTMLVaAdditionalInfoElement: {
+        prototype: HTMLVaAdditionalInfoElement;
+        new (): HTMLVaAdditionalInfoElement;
+    };
     interface HTMLVaAlertElement extends Components.VaAlert, HTMLStencilElement {
     }
     var HTMLVaAlertElement: {
@@ -340,6 +360,7 @@ declare global {
     interface HTMLElementTagNameMap {
         "va-accordion": HTMLVaAccordionElement;
         "va-accordion-item": HTMLVaAccordionItemElement;
+        "va-additional-info": HTMLVaAdditionalInfoElement;
         "va-alert": HTMLVaAlertElement;
         "va-back-to-top": HTMLVaBackToTopElement;
         "va-checkbox": HTMLVaCheckboxElement;
@@ -395,6 +416,17 @@ declare namespace LocalJSX {
          */
         "subheader"?: string;
     }
+    interface VaAdditionalInfo {
+        /**
+          * If true, doesn't fire the CustomEvent which can be used for analytics tracking.
+         */
+        "disableAnalytics"?: boolean;
+        "onComponent-library-analytics"?: (event: CustomEvent<any>) => void;
+        /**
+          * The text to trigger the expansion
+         */
+        "trigger"?: string;
+    }
     interface VaAlert {
         /**
           * If true, renders the alert with only a background color corresponding to the status - no icon or left border.
@@ -422,6 +454,10 @@ declare namespace LocalJSX {
           * Fires when the component has successfully finished rendering for the first time.
          */
         "onVa-component-did-load"?: (event: CustomEvent<any>) => void;
+        /**
+          * This option only takes effect when background-only is true. If true, the background-only alert will include an icon.
+         */
+        "showIcon"?: boolean;
         /**
           * Determines the icon and border/background color. One of `info`, `error`, `success`, `warning`, or `continue`
          */
@@ -654,6 +690,7 @@ declare namespace LocalJSX {
     interface IntrinsicElements {
         "va-accordion": VaAccordion;
         "va-accordion-item": VaAccordionItem;
+        "va-additional-info": VaAdditionalInfo;
         "va-alert": VaAlert;
         "va-back-to-top": VaBackToTop;
         "va-checkbox": VaCheckbox;
@@ -673,6 +710,7 @@ declare module "@stencil/core" {
         interface IntrinsicElements {
             "va-accordion": LocalJSX.VaAccordion & JSXBase.HTMLAttributes<HTMLVaAccordionElement>;
             "va-accordion-item": LocalJSX.VaAccordionItem & JSXBase.HTMLAttributes<HTMLVaAccordionItemElement>;
+            "va-additional-info": LocalJSX.VaAdditionalInfo & JSXBase.HTMLAttributes<HTMLVaAdditionalInfoElement>;
             "va-alert": LocalJSX.VaAlert & JSXBase.HTMLAttributes<HTMLVaAlertElement>;
             "va-back-to-top": LocalJSX.VaBackToTop & JSXBase.HTMLAttributes<HTMLVaBackToTopElement>;
             "va-checkbox": LocalJSX.VaCheckbox & JSXBase.HTMLAttributes<HTMLVaCheckboxElement>;
