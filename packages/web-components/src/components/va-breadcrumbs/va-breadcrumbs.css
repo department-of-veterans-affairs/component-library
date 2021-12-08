@@ -1,0 +1,118 @@
+:host {
+  display: block;
+}
+
+ul {
+  padding: 0 0 0 1.5em;
+  list-style: square;
+}
+
+/* .row {
+  margin: 0 auto;
+  max-width: 62.5em;
+}
+
+.columns {
+  width: 100%;
+} */
+
+.va-nav-breadcrumbs {
+  background: var(--color-white);
+  color: var(--color-link-default);
+  font-size: inherit;
+  padding: 1em 0;
+}
+
+li {
+  display: inline-block;
+  margin: 0.25em 0;
+  padding: 0.25em 0 0.25em 0;
+  vertical-align: middle;
+}
+
+li:after {
+  content: ' › ';
+  display: inline-block;
+  padding: 0 0.35em;
+}
+
+li:last-child:after {
+  content: '';
+}
+
+li.active {
+  font-weight: bold;
+  padding: 0.3em 0;
+}
+
+li.active:after {
+  content: '';
+}
+
+a {
+  color: var(--color-link-default);
+  display: inline-block;
+  padding: 2px;
+}
+
+a:hover {
+  /* background: $color-link-default-hover; */
+}
+
+a[aria-current='page'] {
+  color: var(--color-gray-dark);
+  cursor: default;
+  font-weight: bold;
+  pointer-events: none;
+  text-decoration: none;
+}
+
+.va-nav-breadcrumbs-list {
+  float: none;
+  position: relative;
+}
+
+/* Mobile class declaration for React apps, manual override */
+
+.va-nav-breadcrumbs--mobile li {
+  display: none;
+}
+
+.va-nav-breadcrumbs--mobile li:nth-last-child(2) {
+  display: inline-block;
+}
+
+.va-nav-breadcrumbs--mobile li:nth-last-child(2)::before {
+  content: ' \2039 ';
+  display: inline-block;
+  padding: 0 0.15em;
+}
+
+.va-nav-breadcrumbs--mobile li:nth-last-child(2)::after {
+  content: '';
+  display: none;
+  padding: 0;
+}
+
+/* Activate the mobile breadcrumb at $small-screen breakpoint */
+@media screen and (max-width: 481px) {
+  .va-nav-breadcrumbs li {
+    display: none;
+  }
+
+  .va-nav-breadcrumbs li:nth-last-child(2) {
+    display: inline-block;
+  }
+
+  .va-nav-breadcrumbs li:nth-last-child(2)::before {
+    content: ' \2039 ';
+    display: inline-block;
+    padding: 0 0.15em;
+  }
+
+  .va-nav-breadcrumbs li:nth-last-child(2)::after {
+    content: '';
+    display: none;
+    padding: 0;
+  }
+}
