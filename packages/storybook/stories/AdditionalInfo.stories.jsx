@@ -1,8 +1,8 @@
 import React from 'react';
-import {AdditionalInfo} from '@department-of-veterans-affairs/component-library';
+import { AdditionalInfo } from '@department-of-veterans-affairs/component-library';
 
 export default {
-  title: 'Components/AdditionalInfo',
+  title: 'Components/AdditionalInfo (deprecated)',
   component: AdditionalInfo,
   argTypes: {
     infoA: { control: 'text' },

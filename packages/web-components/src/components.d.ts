@@ -42,6 +42,16 @@ export namespace Components {
          */
         "subheader": string;
     }
+    interface VaAdditionalInfo {
+        /**
+          * If true, doesn't fire the CustomEvent which can be used for analytics tracking.
+         */
+        "disableAnalytics": boolean;
+        /**
+          * The text to trigger the expansion
+         */
+        "trigger": string;
+    }
     interface VaAlert {
         /**
           * If true, renders the alert with only a background color corresponding to the status - no icon or left border.
@@ -279,6 +289,12 @@ declare global {
         prototype: HTMLVaAccordionItemElement;
         new (): HTMLVaAccordionItemElement;
     };
+    interface HTMLVaAdditionalInfoElement extends Components.VaAdditionalInfo, HTMLStencilElement {
+    }
+    var HTMLVaAdditionalInfoElement: {
+        prototype: HTMLVaAdditionalInfoElement;
+        new (): HTMLVaAdditionalInfoElement;
+    };
     interface HTMLVaAlertElement extends Components.VaAlert, HTMLStencilElement {
     }
     var HTMLVaAlertElement: {
@@ -348,6 +364,7 @@ declare global {
     interface HTMLElementTagNameMap {
         "va-accordion": HTMLVaAccordionElement;
         "va-accordion-item": HTMLVaAccordionItemElement;
+        "va-additional-info": HTMLVaAdditionalInfoElement;
         "va-alert": HTMLVaAlertElement;
         "va-back-to-top": HTMLVaBackToTopElement;
         "va-breadcrumbs": HTMLVaBreadcrumbsElement;
@@ -402,6 +419,17 @@ declare namespace LocalJSX {
           * Optional accordion item subheader text. Default is null.
          */
         "subheader"?: string;
+    }
+    interface VaAdditionalInfo {
+        /**
+          * If true, doesn't fire the CustomEvent which can be used for analytics tracking.
+         */
+        "disableAnalytics"?: boolean;
+        "onComponent-library-analytics"?: (event: CustomEvent<any>) => void;
+        /**
+          * The text to trigger the expansion
+         */
+        "trigger"?: string;
     }
     interface VaAlert {
         /**
@@ -670,6 +698,7 @@ declare namespace LocalJSX {
     interface IntrinsicElements {
         "va-accordion": VaAccordion;
         "va-accordion-item": VaAccordionItem;
+        "va-additional-info": VaAdditionalInfo;
         "va-alert": VaAlert;
         "va-back-to-top": VaBackToTop;
         "va-breadcrumbs": VaBreadcrumbs;
@@ -689,6 +718,7 @@ declare module "@stencil/core" {
         interface IntrinsicElements {
             "va-accordion": LocalJSX.VaAccordion & JSXBase.HTMLAttributes<HTMLVaAccordionElement>;
             "va-accordion-item": LocalJSX.VaAccordionItem & JSXBase.HTMLAttributes<HTMLVaAccordionItemElement>;
+            "va-additional-info": LocalJSX.VaAdditionalInfo & JSXBase.HTMLAttributes<HTMLVaAdditionalInfoElement>;
             "va-alert": LocalJSX.VaAlert & JSXBase.HTMLAttributes<HTMLVaAlertElement>;
             "va-back-to-top": LocalJSX.VaBackToTop & JSXBase.HTMLAttributes<HTMLVaBackToTopElement>;
             "va-breadcrumbs": LocalJSX.VaBreadcrumbs & JSXBase.HTMLAttributes<HTMLVaBreadcrumbsElement>;
