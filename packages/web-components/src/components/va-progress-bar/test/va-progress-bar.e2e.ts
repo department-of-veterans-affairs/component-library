@@ -50,7 +50,7 @@ describe('va-progress-bar', () => {
       action: 'change',
       componentName: 'va-progress-bar',
       details: {
-        label: 'Working',
+        label: '0%',
         percent: 0,
       },
     });
@@ -71,7 +71,7 @@ describe('va-progress-bar', () => {
       action: 'change',
       componentName: 'va-progress-bar',
       details: {
-        label: 'Working',
+        label: '100%',
         percent: 100,
       },
     });

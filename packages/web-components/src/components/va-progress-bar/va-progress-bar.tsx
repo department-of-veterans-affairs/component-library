@@ -34,7 +34,7 @@ export class VaProgressBar {
         componentName: 'va-progress-bar',
         action: 'change',
         details: {
-          label: this.label,
+          label: this.label || `${this.percent}%`,
           percent: this.percent,
         },
       });
