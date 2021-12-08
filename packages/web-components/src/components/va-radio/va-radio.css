@@ -6,15 +6,10 @@
   padding: 0;
 }
 
-:host([error]) {
+:host([error]:not([error=''])) {
   border-left: 4px solid var(--color-secondary-dark);
   padding-left: 1.8rem;
   position: relative;
-}
-
-:host([error=""]) {
-  border-left: none;
-  padding-left: initial;
 }
 
 .error-message {
@@ -23,12 +18,12 @@
   font-size: 1.6rem;
   line-height: 2.4rem;
   font-weight: 700;
-  margin-bottom: 1em;
+  margin-bottom: 1.2rem;
 }
 
 .required-span {
   color: var(--color-secondary-dark);
-  margin: 0 0.35em;
+  margin: 0 0.35rem;
 }
 
 legend {
@@ -38,5 +33,5 @@ legend {
   font-size: inherit;
   color: inherit;
   line-height: inherit;
-  margin-bottom: 1em;
+  margin-bottom: 1.2rem;
 }
