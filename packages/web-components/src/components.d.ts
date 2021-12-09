@@ -194,6 +194,24 @@ export namespace Components {
          */
         "value": string;
     }
+    interface VaSegmentedProgressBar {
+        /**
+          * The current segment in progress
+         */
+        "current": number;
+        /**
+          * Whether or not an analytics event will be fired.
+         */
+        "enableAnalytics": boolean;
+        /**
+          * An override for the default aria label.
+         */
+        "label": string;
+        /**
+          * The total number of segments in the progress bar
+         */
+        "total": number;
+    }
     interface VaSelect {
         /**
           * Whether or not to fire the analytics events
@@ -341,6 +359,12 @@ declare global {
         prototype: HTMLVaRadioOptionElement;
         new (): HTMLVaRadioOptionElement;
     };
+    interface HTMLVaSegmentedProgressBarElement extends Components.VaSegmentedProgressBar, HTMLStencilElement {
+    }
+    var HTMLVaSegmentedProgressBarElement: {
+        prototype: HTMLVaSegmentedProgressBarElement;
+        new (): HTMLVaSegmentedProgressBarElement;
+    };
     interface HTMLVaSelectElement extends Components.VaSelect, HTMLStencilElement {
     }
     var HTMLVaSelectElement: {
@@ -366,6 +390,7 @@ declare global {
         "va-progress-bar": HTMLVaProgressBarElement;
         "va-radio": HTMLVaRadioElement;
         "va-radio-option": HTMLVaRadioOptionElement;
+        "va-segmented-progress-bar": HTMLVaSegmentedProgressBarElement;
         "va-select": HTMLVaSelectElement;
         "va-text-input": HTMLVaTextInputElement;
     }
@@ -591,6 +616,25 @@ declare namespace LocalJSX {
          */
         "value"?: string;
     }
+    interface VaSegmentedProgressBar {
+        /**
+          * The current segment in progress
+         */
+        "current"?: number;
+        /**
+          * Whether or not an analytics event will be fired.
+         */
+        "enableAnalytics"?: boolean;
+        /**
+          * An override for the default aria label.
+         */
+        "label"?: string;
+        "onComponent-library-analytics"?: (event: CustomEvent<any>) => void;
+        /**
+          * The total number of segments in the progress bar
+         */
+        "total"?: number;
+    }
     interface VaSelect {
         /**
           * Whether or not to fire the analytics events
@@ -692,6 +736,7 @@ declare namespace LocalJSX {
         "va-progress-bar": VaProgressBar;
         "va-radio": VaRadio;
         "va-radio-option": VaRadioOption;
+        "va-segmented-progress-bar": VaSegmentedProgressBar;
         "va-select": VaSelect;
         "va-text-input": VaTextInput;
     }
@@ -712,6 +757,7 @@ declare module "@stencil/core" {
             "va-progress-bar": LocalJSX.VaProgressBar & JSXBase.HTMLAttributes<HTMLVaProgressBarElement>;
             "va-radio": LocalJSX.VaRadio & JSXBase.HTMLAttributes<HTMLVaRadioElement>;
             "va-radio-option": LocalJSX.VaRadioOption & JSXBase.HTMLAttributes<HTMLVaRadioOptionElement>;
+            "va-segmented-progress-bar": LocalJSX.VaSegmentedProgressBar & JSXBase.HTMLAttributes<HTMLVaSegmentedProgressBarElement>;
             "va-select": LocalJSX.VaSelect & JSXBase.HTMLAttributes<HTMLVaSelectElement>;
             "va-text-input": LocalJSX.VaTextInput & JSXBase.HTMLAttributes<HTMLVaTextInputElement>;
         }
