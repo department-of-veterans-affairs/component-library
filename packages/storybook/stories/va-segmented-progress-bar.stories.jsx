@@ -24,7 +24,7 @@ const defaultArgs = {
   'enable-analytics': false,
   'current': 2,
   'total': 6,
-  'label': 'Test out the label'
+  'label': 'Test out the label',
 };
 
 export const Default = Template.bind({});
