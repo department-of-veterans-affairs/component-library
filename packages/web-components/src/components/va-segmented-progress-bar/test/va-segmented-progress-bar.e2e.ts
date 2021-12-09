@@ -33,7 +33,9 @@ describe('va-segmented-progress-bar', () => {
 
   it('passes an axe check', async () => {
     const page = await newE2EPage();
-    await page.setContent('<va-segmented-progress-bar current="3" total="6"></va-segmented-progress-bar>');
+    await page.setContent(
+      '<va-segmented-progress-bar current="3" total="6"></va-segmented-progress-bar>',
+    );
     await axeCheck(page);
   });
 
@@ -42,7 +44,9 @@ describe('va-segmented-progress-bar', () => {
     await page.setContent(
       '<va-segmented-progress-bar current="3" total="6" label="E2E Test"></va-segmented-progress-bar>',
     );
-    const label = await page.find('va-segmented-progress-bar >>> div.progress-bar-segmented');
+    const label = await page.find(
+      'va-segmented-progress-bar >>> div.progress-bar-segmented',
+    );
     expect(label.getAttribute('aria-label')).toContain('E2E Test');
   });
 
@@ -69,7 +73,9 @@ describe('va-segmented-progress-bar', () => {
 
   it("doesn't fire an analytics event when enable-analytics is false", async () => {
     const page = await newE2EPage();
-    await page.setContent('<va-segmented-progress-bar current="3" total="6" aria-label="E2E Test"></va-segmented-progress-bar>');
+    await page.setContent(
+      '<va-segmented-progress-bar current="3" total="6" aria-label="E2E Test"></va-segmented-progress-bar>',
+    );
     const analyticsSpy = await page.spyOnEvent('component-library-analytics');
     expect(analyticsSpy).not.toHaveReceivedEvent();
   });

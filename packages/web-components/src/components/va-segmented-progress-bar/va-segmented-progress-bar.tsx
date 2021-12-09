@@ -1,76 +1,78 @@
 import { Component, Event, EventEmitter, Host, Prop, h } from '@stencil/core';
 
 @Component({
-    tag: 'va-segmented-progress-bar',
-    styleUrl: 'va-segmented-progress-bar.css',
-    shadow: true,
+  tag: 'va-segmented-progress-bar',
+  styleUrl: 'va-segmented-progress-bar.css',
+  shadow: true,
 })
 export class VaSegmentedProgressBar {
-    /**
-     * Whether or not an analytics event will be fired.
-     */
-    @Prop() enableAnalytics: boolean;
+  /**
+   * Whether or not an analytics event will be fired.
+   */
+  @Prop() enableAnalytics: boolean;
 
-    /**
-     * The current segment in progress
-     */
-    @Prop() current: number;
+  /**
+   * The current segment in progress
+   */
+  @Prop() current: number;
 
-    /**
-     * The total number of segments in the progress bar
-     */
-    @Prop() total: number;
+  /**
+   * The total number of segments in the progress bar
+   */
+  @Prop() total: number;
 
-    /**
-    * An override for the default aria label.
-    */
-    @Prop() label: string;
+  /**
+   * An override for the default aria label.
+   */
+  @Prop() label: string;
 
-    @Event({
-        eventName: 'component-library-analytics',
-        composed: true,
-        bubbles: true,
-    })
-    componentLibraryAnalytics: EventEmitter;
+  @Event({
+    eventName: 'component-library-analytics',
+    composed: true,
+    bubbles: true,
+  })
+  componentLibraryAnalytics: EventEmitter;
 
-    componentDidRender() {
-        if (this.enableAnalytics) {
-            this.componentLibraryAnalytics.emit({
-                componentName: 'va-segmented-progress-bar',
-                action: 'change',
-                details: {
-                    current: this.current,
-                    total: this.total,
-                },
-            });
-        }
+  componentDidRender() {
+    if (this.enableAnalytics) {
+      this.componentLibraryAnalytics.emit({
+        componentName: 'va-segmented-progress-bar',
+        action: 'change',
+        details: {
+          current: this.current,
+          total: this.total,
+        },
+      });
     }
+  }
 
-    render() {
-        // Label needs to use input or fallback and have instructions on correct one to use
-        // Needs to use initialized values as destructured values are causing data inconsistency
-        const label = this.label || `Step ${this.current} of ${this.total}`
-        const {current, total} = this
-        const range = Array.from({length: total}, (_, i) => i)
-        return (
-            <Host>
-                <div
-                    class="progress-bar-segmented"
-                    role="progressbar"
-                    aria-valuenow={current}
-                    aria-valuemin="0"
-                    aria-valuemax={total}
-                    tabindex="0"
-                    aria-label={label}
-                >
-                    {range.map(step => (
-                        <div
-                            key={step}
-                            class={`progress-segment ${current > step ? 'progress-segment-complete' : ''}`}
-                        />
-                    ))}
-                </div>
-            </Host>
-        );
-    }
+  render() {
+    // Label needs to use input or fallback and have instructions on correct one to use
+    // Needs to use initialized values as destructured values are causing data inconsistency
+    const label = this.label || `Step ${this.current} of ${this.total}`;
+    const { current, total } = this;
+    const range = Array.from({ length: total }, (_, i) => i);
+    return (
+      <Host>
+        <div
+          class="progress-bar-segmented"
+          role="progressbar"
+          aria-valuenow={current}
+          aria-valuemin="0"
+          aria-valuemax={total}
+          tabindex="0"
+          aria-label={label}
+        >
+          {range.map(step => (
+            <div
+              key={step}
+              class={`progress-segment ${
+                current > step ? 'progress-segment-complete' : ''
+              }`}
+            />
+          ))}
+        </div>
+      </Host>
+    );
+  }
 }
