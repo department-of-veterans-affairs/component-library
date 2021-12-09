@@ -35,6 +35,7 @@ describe('va-progress-bar', () => {
     await axeCheck(page);
   });
 
+  // Skipping this test until we discover how to properly test lifecycle methods on component initialization
   it.skip('fires an analytics event when enable-analytics is set and percent is 0', async () => {
     const page = await newE2EPage();
     await page.setContent(
