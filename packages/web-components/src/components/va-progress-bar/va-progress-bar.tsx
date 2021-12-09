@@ -34,7 +34,7 @@ export class VaProgressBar {
         componentName: 'va-progress-bar',
         action: 'change',
         details: {
-          label: this.label || `${this.percent}%`,
+          label: this.label || `${this.percent}% complete`,
           percent: this.percent,
         },
       });
@@ -42,22 +42,20 @@ export class VaProgressBar {
   }
 
   render() {
-    const ariaLabel = this.label ?? `${this.percent}%`;
+    const { label = `${this.percent}% complete`, percent } = this;
+
     return (
       <Host>
         <div
-          aria-label={ariaLabel}
+          aria-label={label}
           aria-valuemax="100"
           aria-valuemin="0"
-          aria-valuenow={this.percent}
+          aria-valuenow={percent}
           class="progress-bar"
           tabindex="0"
           role="progressbar"
         >
-          <div
-            class="progress-bar-inner"
-            style={{ width: `${this.percent}%` }}
-          />
+          <div class="progress-bar-inner" style={{ width: `${percent}%` }} />
         </div>
       </Host>
     );
