@@ -6,8 +6,10 @@ import {
   Host,
   h,
   Prop,
+  State,
 } from '@stencil/core';
 import classnames from 'classnames';
+import { getSlottedNodes } from '../../utils/utils';
 
 @Component({
   tag: 'va-breadcrumbs',
@@ -37,12 +39,14 @@ export class VaBreadcrumbs {
    * NAV element. The mobile breadcrumb will always
    * be displayed while mobileFirstProp is True.
    */
-  @Prop() mobileFirstProp: boolean;
+  @Prop() mobileFirstProp: boolean = false;
 
   /**
    * Adds a custom id attribute to the NAV element
    */
   @Prop() navId: string;
+
+  @State() breadcrumbs: Array<Node>;
 
   @Event({
     eventName: 'component-library-analytics',
@@ -51,19 +55,18 @@ export class VaBreadcrumbs {
   })
   componentLibraryAnalytics: EventEmitter;
 
-  private fireAnalyticsEvent(event) {
+  private fireAnalyticsEvent(event: MouseEvent): void {
     if (!this.disableAnalytics) {
       // If it's a link being clicked, dispatch an analytics event
-      if (event.target?.tagName === 'A') {
+      const target = event.target as HTMLElement;
+      if (target?.tagName === 'A') {
         const details = {
           componentName: 'va-breadcrumbs',
           action: 'linkClick',
           details: {
-            clickLabel: event.target.innerText.trim(),
-            clickLevel: parseInt(event.target.dataset.index, 10) + 1,
-            // totalLevels: this.el.shadowRoot
-            //   .querySelector('slot')
-            //   .assignedNodes(),
+            clickLabel: target.innerText.trim(),
+            clickLevel: parseInt(target.dataset.index, 10) + 1,
+            totalLevels: getSlottedNodes(this.el, 'a').length,
             mobileFirstProp: this.mobileFirstProp,
           },
         };
@@ -73,18 +76,30 @@ export class VaBreadcrumbs {
   }
 
   componentDidLoad() {
-    const nodes = this.el.shadowRoot.querySelector('slot').assignedNodes();
-    if (!nodes?.length) return;
+    const nodes = getSlottedNodes(this.el, 'a');
 
-    nodes.forEach((node: HTMLSlotElement, index: number) => {
-      const wrapper = document.createElement('li');
-      node.parentNode.insertBefore(wrapper, node);
-      wrapper.appendChild(node);
-
-      node.setAttribute('data-index', `${index}`);
+    this.breadcrumbs = nodes.map((node: HTMLAnchorElement, index: number) => {
       if (index === nodes.length - 1) {
-        node.setAttribute('aria-current', 'page');
+        return (
+          <li>
+            <a
+              aria-current="page"
+              data-index={`${index}`}
+              href={node.attributes['href'].value}
+            >
+              {node.innerText}
+            </a>
+          </li>
+        );
       }
+
+      return (
+        <li>
+          <a data-index={`${index}`} href={node.attributes['href'].value}>
+            {node.innerText}
+          </a>
+        </li>
+      );
     });
   }
 
@@ -105,11 +120,12 @@ export class VaBreadcrumbs {
             class="row va-nav-breadcrumbs-list columns"
             role="list"
             id={listId}
-            onClick={this.fireAnalyticsEvent}
+            onClick={e => this.fireAnalyticsEvent(e)}
           >
-            <slot></slot>
+            {this.breadcrumbs}
           </ul>
         </nav>
+        <slot></slot>
       </Host>
     );
   }

@@ -2,61 +2,91 @@
   display: block;
 }
 
-ul {
-  padding: 0 0 0 1.5em;
-  list-style: square;
+::slotted(*) {
+  display: none;
 }
 
-/* .row {
+.row {
   margin: 0 auto;
-  max-width: 62.5em;
+  max-width: 100rem;
+  width: 100%;
+}
+
+.row::after,
+.row::before {
+  content: ' ';
+  display: table;
+}
+
+.row::after {
+  clear: both;
 }
 
 .columns {
+  float: left;
+  padding-left: 0.9375rem;
+  padding-right: 0.9375rem;
   width: 100%;
-} */
+}
 
 .va-nav-breadcrumbs {
   background: var(--color-white);
   color: var(--color-link-default);
   font-size: inherit;
-  padding: 1em 0;
+  padding: 1.6rem 0;
+}
+
+.va-nav-breadcrumbs--gate {
+  margin-bottom: -1.6rem;
+}
+
+.va-nav-breadcrumbs-list {
+  float: none;
+  position: relative;
+}
+
+ul {
+  box-sizing: border-box;
+  list-style: square;
+  padding: 0 0 0 2.4rem;
+  width: 100%;
 }
 
 li {
   display: inline-block;
-  margin: 0.25em 0;
-  padding: 0.25em 0 0.25em 0;
+  line-height: 1.5;
+  margin: 0.4rem 0;
+  padding: 0.4rem 0 0.4rem 0;
   vertical-align: middle;
 }
 
-li:after {
+li::after {
   content: ' › ';
   display: inline-block;
-  padding: 0 0.35em;
+  padding: 0 0.56rem;
 }
 
-li:last-child:after {
-  content: '';
-}
-
-li.active {
-  font-weight: bold;
-  padding: 0.3em 0;
-}
-
-li.active:after {
+li:last-child::after {
   content: '';
 }
 
 a {
+  background-color: transparent;
   color: var(--color-link-default);
   display: inline-block;
   padding: 2px;
+  transition-duration: 0.3s;
+  transition-property: color, background-color, border-color;
+  transition-timing-function: ease-in-out;
 }
 
 a:hover {
-  /* background: $color-link-default-hover; */
+  background: rgba(0, 0, 0, 0.05);
+}
+
+a:focus {
+  outline: 2px solid var(--color-gold-light);
+  outline-offset: 2px;
 }
 
 a[aria-current='page'] {
@@ -66,13 +96,6 @@ a[aria-current='page'] {
   pointer-events: none;
   text-decoration: none;
 }
-
-.va-nav-breadcrumbs-list {
-  float: none;
-  position: relative;
-}
-
-/* Mobile class declaration for React apps, manual override */
 
 .va-nav-breadcrumbs--mobile li {
   display: none;
@@ -85,7 +108,7 @@ a[aria-current='page'] {
 .va-nav-breadcrumbs--mobile li:nth-last-child(2)::before {
   content: ' \2039 ';
   display: inline-block;
-  padding: 0 0.15em;
+  padding: 0 0.24rem;
 }
 
 .va-nav-breadcrumbs--mobile li:nth-last-child(2)::after {
@@ -94,7 +117,6 @@ a[aria-current='page'] {
   padding: 0;
 }
 
-/* Activate the mobile breadcrumb at $small-screen breakpoint */
 @media screen and (max-width: 481px) {
   .va-nav-breadcrumbs li {
     display: none;
@@ -107,7 +129,7 @@ a[aria-current='page'] {
   .va-nav-breadcrumbs li:nth-last-child(2)::before {
     content: ' \2039 ';
     display: inline-block;
-    padding: 0 0.15em;
+    padding: 0 0.24rem;
   }
 
   .va-nav-breadcrumbs li:nth-last-child(2)::after {
