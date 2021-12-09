@@ -14,13 +14,18 @@ export default {
 };
 
 const defaultArgs = {
-  message: 'Loading your application...',
-  label: 'Loading',
-  setFocus: false,
-  enableAnalytics: false,
+  'message': 'Loading your application...',
+  'label': 'Loading',
+  'set-focus': false,
+  'enable-analytics': false,
 };
 
-const Template = ({ message, setFocus, enableAnalytics }) => {
+const Template = ({
+  'enable-analytics': enableAnalytics,
+  label,
+  message,
+  'set-focus': setFocus,
+}) => {
   const [isLoading, setIsLoading] = useState(true);
   return (
     <div>
@@ -34,6 +39,7 @@ const Template = ({ message, setFocus, enableAnalytics }) => {
       )}
       {isLoading && (
         <va-loading-indicator
+          label={label}
           message={message}
           set-focus={setFocus}
           enable-analytics={enableAnalytics}
@@ -48,7 +54,7 @@ Default.args = { ...defaultArgs };
 Default.argTypes = propStructure(loadingIndicatorDocs);
 
 export const SetFocus = Template.bind({});
-SetFocus.args = { ...defaultArgs, setFocus: true };
+SetFocus.args = { ...defaultArgs, 'set-focus': true };
 
 export const EnableAnalytics = Template.bind({});
-EnableAnalytics.args = { ...defaultArgs, enableAnalytics: true };
+EnableAnalytics.args = { ...defaultArgs, 'enable-analytics': true };
