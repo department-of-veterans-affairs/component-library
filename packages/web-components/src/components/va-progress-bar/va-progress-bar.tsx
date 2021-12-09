@@ -1,12 +1,4 @@
-import {
-  Component,
-  Event,
-  EventEmitter,
-  Host,
-  Prop,
-  h,
-  Watch,
-} from '@stencil/core';
+import { Component, Event, EventEmitter, Host, Prop, h } from '@stencil/core';
 
 @Component({
   tag: 'va-progress-bar',
@@ -22,17 +14,12 @@ export class VaProgressBar {
   /**
    * Percent of progress made. 0 to 100.
    */
-  @Prop() percent: number = 0;
+  @Prop() percent: number;
 
   /**
    * The text label for the progress bar.
    */
-  @Prop({ mutable: true }) label: string = `${this.percent}% complete`;
-
-  @Watch('percent')
-  updateLabel(newPercent: number) {
-    this.label = `${newPercent}% complete`;
-  }
+  @Prop() label: string;
 
   @Event({
     eventName: 'component-library-analytics',
@@ -47,7 +34,7 @@ export class VaProgressBar {
         componentName: 'va-progress-bar',
         action: 'change',
         details: {
-          label: this.label,
+          label: this.label || `${this.percent}% complete`,
           percent: this.percent,
         },
       });
@@ -55,7 +42,7 @@ export class VaProgressBar {
   }
 
   render() {
-    const { label, percent } = this;
+    const { label = `${this.percent}% complete`, percent } = this;
 
     return (
       <Host>
