@@ -24,11 +24,18 @@ const defaultArgs = {
   'enable-analytics': false,
   'current': 2,
   'total': 6,
-  'label': 'Test out the label',
+  'label': undefined,
 };
 
 export const Default = Template.bind({});
 Default.args = {
   ...defaultArgs,
 };
+
 Default.argTypes = propStructure(segmentedProgressBarDocs);
+
+export const AriaLabelOverride = Template.bind({});
+AriaLabelOverride.args = {
+  ...defaultArgs,
+  label: 'Label is here',
+};
