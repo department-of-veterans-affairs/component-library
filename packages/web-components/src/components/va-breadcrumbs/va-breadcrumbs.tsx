@@ -56,8 +56,8 @@ export class VaBreadcrumbs {
 
   private fireAnalyticsEvent(event: MouseEvent): void {
     if (!this.disableAnalytics) {
-      // If it's a link being clicked, dispatch an analytics event
       const target = event.target as HTMLElement;
+      // If it's a link being clicked, dispatch an analytics event
       if (target?.tagName === 'A') {
         const details = {
           componentName: 'va-breadcrumbs',
@@ -76,7 +76,9 @@ export class VaBreadcrumbs {
 
   componentDidLoad() {
     const nodes = getSlottedNodes(this.el, 'a');
-
+    // This renders slot content outside of a slot.
+    // This is a workaround for the limitations of styling slotted nested elements.
+    // See https://stackoverflow.com/questions/61626493/slotted-css-selector-for-nested-children-in-shadowdom-slot/61631668
     this.breadcrumbs = nodes.map((node: HTMLAnchorElement, index: number) => {
       if (index === nodes.length - 1) {
         return (
