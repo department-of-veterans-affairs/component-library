@@ -10,8 +10,8 @@ describe('va-breadcrumbs', () => {
     expect(element).toEqualHtml(`
       <va-breadcrumbs class="hydrated">
         <mock:shadow-root>
-          <nav aria-label="Breadcrumb" class="va-nav-breadcrumbs">
-            <ul class="columns row va-nav-breadcrumbs-list" role="list"></ul>
+          <nav aria-label="Breadcrumb">
+            <ul role="list"></ul>
           </nav>
           <slot></slot>
         </mock:shadow-root>
