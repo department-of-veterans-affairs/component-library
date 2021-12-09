@@ -1,0 +1,20 @@
+div {
+  box-sizing: border-box;
+}
+
+.progress-bar {
+  border: 2px solid var(--color-primary);
+  border-radius: 1em;
+  display: block;
+  height: 1em;
+  margin: 1em 0;
+  width: 100%;
+}
+
+.progress-bar-inner {
+  background-color: var(--color-primary);
+  content: '&nbsp;';
+  display: block;
+  height: 100%;
+  max-width: 100%;
+}
