@@ -8,7 +8,6 @@ import {
   Prop,
   State,
 } from '@stencil/core';
-import classnames from 'classnames';
 import { getSlottedNodes } from '../../utils/utils';
 
 @Component({
@@ -110,18 +109,11 @@ export class VaBreadcrumbs {
       <Host>
         <nav
           aria-label={label}
-          class={classnames('va-nav-breadcrumbs', {
-            'va-nav-breadcrumbs--mobile': mobileFirstProp,
-          })}
+          class={mobileFirstProp ? 'va-nav-breadcrumbs--mobile' : undefined}
           data-mobile-first={mobileFirstProp}
           id={navId}
         >
-          <ul
-            class="row va-nav-breadcrumbs-list columns"
-            role="list"
-            id={listId}
-            onClick={e => this.fireAnalyticsEvent(e)}
-          >
+          <ul role="list" id={listId} onClick={e => this.fireAnalyticsEvent(e)}>
             {this.breadcrumbs}
           </ul>
         </nav>
