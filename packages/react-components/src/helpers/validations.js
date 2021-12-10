@@ -2,7 +2,7 @@ import { range } from 'lodash';
 import moment from 'moment';
 
 const minYear = 1900;
-const maxYear = moment().add(100, 'year').year();
+const maxYear = new Date().getFullYear() + 100;
 
 /**
  * General Validations *
