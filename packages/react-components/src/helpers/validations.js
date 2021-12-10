@@ -4,14 +4,6 @@ import moment from 'moment';
 const minYear = 1900;
 const maxYear = moment().add(100, 'year').year();
 
-function dateToMoment(dateField) {
-  return moment({
-    year: dateField.year.value,
-    month: dateField.month.value ? parseInt(dateField.month.value, 10) - 1 : '',
-    day: dateField.day ? dateField.day.value : null,
-  });
-}
-
 /**
  * General Validations *
  */
