@@ -159,37 +159,6 @@ function isValidPartialMonthYear(month, year) {
   return isValidPartialDate(null, null, year);
 }
 
-function isValidPartialMonthYearRange(fromDate, toDate) {
-  if (!fromDate.year.value || !toDate.year.value) {
-    return true;
-  }
-  const momentStart = dateToMoment(fromDate);
-  const momentEnd = dateToMoment(toDate);
-
-  return momentStart.isSameOrBefore(momentEnd);
-}
-
-function isValidPartialMonthYearInPast(month, year) {
-  if (typeof month === 'object') {
-    throw new Error('Pass a month and a year to function');
-  }
-  const momentDate = moment({
-    year,
-    month: month ? parseInt(month, 10) - 1 : null,
-  });
-  return (
-    !year ||
-    (isValidPartialMonthYear(month, year) &&
-      momentDate.isValid() &&
-      momentDate.isSameOrBefore(moment().startOf('month')))
-  );
-}
-
-function isValidCurrentOrFutureMonthYear(month, year) {
-  const momentDate = moment({ month: parseInt(month, 10) - 1, year });
-  return momentDate.isSameOrAfter(moment(), 'month');
-}
-
 function isBlankMonthYear(field) {
   return isBlank(field.month.value) && isBlank(field.year.value);
 }
@@ -286,7 +255,6 @@ export {
   isFullDate,
   isNotBlank,
   isNotBlankDateField,
-  isValidCurrentOrFutureMonthYear,
   isValidDate,
   isValidDateField,
   isValidEmail,
@@ -299,8 +267,6 @@ export {
   isValidPartialDate,
   isValidPartialDateField,
   isValidPartialMonthYear,
-  isValidPartialMonthYearInPast,
-  isValidPartialMonthYearRange,
   isValidRequiredField,
   isValidSSN,
   isValidValue,
