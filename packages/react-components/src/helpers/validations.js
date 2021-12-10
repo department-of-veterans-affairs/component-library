@@ -70,10 +70,6 @@ function isValidYearOrBlank(value) {
   return isValidYear(value) || value === '';
 }
 
-function isValidCurrentOrPastYear(value) {
-  return Number(value) >= 1900 && Number(value) < moment().year() + 1;
-}
-
 function isValidMonths(value) {
   return Number(value) >= 0;
 }
@@ -132,18 +128,6 @@ function validateIfDirtyDate(dayField, monthField, yearField, validator) {
   return true;
 }
 
-function isValidAnyDate(day, month, year) {
-  if (!isValidYear(year)) {
-    return false;
-  }
-
-  return moment({
-    day,
-    month: month ? parseInt(month, 10) - 1 : month,
-    year,
-  }).isValid();
-}
-
 function isValidPartialDate(day, month, year) {
   if (year && !isValidYear(year)) {
     return false;
@@ -162,16 +146,6 @@ function isValidPartialDateField(field) {
     field.month.value,
     field.year.value,
   );
-}
-
-function isValidDateRange(fromDate, toDate) {
-  if (isBlankDateField(toDate) || isBlankDateField(fromDate)) {
-    return true;
-  }
-  const momentStart = dateToMoment(fromDate);
-  const momentEnd = dateToMoment(toDate);
-
-  return momentStart.isBefore(momentEnd);
 }
 
 function isValidPartialMonthYear(month, year) {
@@ -211,16 +185,6 @@ function isValidPartialMonthYearInPast(month, year) {
   );
 }
 
-function isValidCurrentOrPastDate(day, month, year) {
-  const momentDate = moment({ day, month: parseInt(month, 10) - 1, year });
-  return momentDate.isSameOrBefore(moment().endOf('day'), 'day');
-}
-
-function isValidFutureDate(day, month, year) {
-  const momentDate = moment({ day, month: parseInt(month, 10) - 1, year });
-  return momentDate.isAfter(moment().endOf('day'), 'day');
-}
-
 function isValidCurrentOrFutureMonthYear(month, year) {
   const momentDate = moment({ month: parseInt(month, 10) - 1, year });
   return momentDate.isSameOrAfter(moment(), 'month');
@@ -228,19 +192,6 @@ function isValidCurrentOrFutureMonthYear(month, year) {
 
 function isBlankMonthYear(field) {
   return isBlank(field.month.value) && isBlank(field.year.value);
-}
-
-function isValidDateOver17(day, month, year) {
-  if (!isValidYear(year)) {
-    return false;
-  }
-
-  const momentDate = moment({
-    day,
-    month: parseInt(month, 10) - 1,
-    year,
-  });
-  return momentDate.isBefore(moment().endOf('day').subtract(17, 'years'));
 }
 
 /**
@@ -335,15 +286,9 @@ export {
   isFullDate,
   isNotBlank,
   isNotBlankDateField,
-  isValidAnyDate,
-  isValidCurrentOrPastYear,
-  isValidCurrentOrPastDate,
   isValidCurrentOrFutureMonthYear,
-  isValidFutureDate,
   isValidDate,
   isValidDateField,
-  isValidDateOver17,
-  isValidDateRange,
   isValidEmail,
   isValidFullNameField,
   isValidField,
