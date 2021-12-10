@@ -1,5 +1,4 @@
 import { range } from 'lodash';
-import moment from 'moment';
 
 const minYear = 1900;
 const maxYear = new Date().getFullYear() + 100;
@@ -53,9 +52,7 @@ function isValidRequiredField(validator, field) {
  * Date Validations *
  */
 function isValidYear(value) {
-  return (
-    Number(value) >= 1900 && Number(value) <= moment().add(100, 'year').year()
-  );
+  return Number(value) >= minYear && Number(value) <= maxYear;
 }
 
 function isValidMonths(value) {
