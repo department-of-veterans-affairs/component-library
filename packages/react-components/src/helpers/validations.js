@@ -74,28 +74,6 @@ function isFullDate(date) {
   return /\d{4}-\d{1,2}-\d{1,2}/.test(date);
 }
 
-function isValidDate(day, month, year) {
-  // Use the date class to see if the date parses back sanely as a
-  // validation check. Not sure is a great idea...
-  const adjustedMonth = Number(month) - 1; // JS Date object 0-indexes months. WTF.
-  const date = new Date(year, adjustedMonth, day);
-  const today = new Date();
-
-  if (today < date) {
-    return false;
-  }
-
-  if (!isValidYear(year)) {
-    return false;
-  }
-
-  return (
-    date.getDate() === Number(day) &&
-    date.getMonth() === adjustedMonth &&
-    date.getFullYear() === Number(year)
-  );
-}
-
 function isNotBlankDateField(field) {
   return (
     isNotBlank(field.day.value) &&
@@ -122,10 +100,6 @@ function isValidPartialDate(day, month, year) {
   }
 
   return true;
-}
-
-function isValidDateField(field) {
-  return isValidDate(field.day.value, field.month.value, field.year.value);
 }
 
 function isValidPartialDateField(field) {
@@ -243,8 +217,6 @@ export {
   isFullDate,
   isNotBlank,
   isNotBlankDateField,
-  isValidDate,
-  isValidDateField,
   isValidEmail,
   isValidFullNameField,
   isValidField,
