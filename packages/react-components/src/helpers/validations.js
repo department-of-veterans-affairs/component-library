@@ -258,7 +258,6 @@ export {
   isValidRequiredField,
   isValidSSN,
   isValidValue,
-  isValidYear,
   validateCustomFormComponent,
   validateIfDirty,
   validateIfDirtyDate,
