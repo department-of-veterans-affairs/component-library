@@ -1,0 +1,31 @@
+{
+  "name": "@department-of-veterans-affairs/storybook",
+  "private": true,
+  "packageManager": "yarn@3.0.2",
+  "scripts": {
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook"
+  },
+  "dependencies": {
+    "@department-of-veterans-affairs/component-library": "workspace:packages/core",
+    "prop-types": "^15.7.2",
+    "react": "^17.0.2"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.15.8",
+    "@department-of-veterans-affairs/formation": "^6.17.3",
+    "@mdx-js/react": "^1.6.22",
+    "@storybook/addon-actions": "^6.3.11",
+    "@storybook/addon-docs": "^6.3.11",
+    "@storybook/addon-essentials": "^6.3.11",
+    "@storybook/addon-links": "^6.3.11",
+    "@storybook/react": "^6.3.11",
+    "@whitespace/storybook-addon-html": "^2.0.1",
+    "babel-loader": "^8.2.2",
+    "css-loader": "^5.2.4",
+    "date-fns": "^2.17.0",
+    "node-sass": "4.14.1",
+    "react-dom": "^17.0.2",
+    "sass-loader": "^8.0.2"
+  }
+}

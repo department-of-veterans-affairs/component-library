@@ -1,0 +1,41 @@
+name: Build storybook & deploy
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        bucket: [dev-design.va.gov, staging-design.va.gov, design.va.gov]
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          ref: master
+      - name: Use Node.js 14.x
+        uses: actions/setup-node@v2
+        with:
+          node-version: 14.x
+          cache: 'yarn'
+      - run: yarn install
+      - name: Install dependencies in react-components
+        run: yarn install
+        working-directory: packages/react-components
+      - run: yarn workspace @department-of-veterans-affairs/react-components run build
+      - run: yarn workspace @department-of-veterans-affairs/web-components run build
+      - run: yarn workspace @department-of-veterans-affairs/component-library run build
+      - name: Install dependencies in storybook
+        run: yarn install
+        working-directory: packages/storybook
+      - run: yarn build-storybook
+        working-directory: packages/storybook
+      - uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: "us-gov-west-1"         
+      - name: S3 Sync Storybook build
+        run: |
+          aws s3 sync ./packages/storybook/storybook-static s3://${{ matrix.bucket }}/storybook --acl public-read --follow-symlinks --delete

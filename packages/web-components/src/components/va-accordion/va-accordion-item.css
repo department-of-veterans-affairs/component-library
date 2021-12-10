@@ -1,0 +1,79 @@
+@import '../../mixins/focusable.css';
+
+:host {
+  display: block;
+}
+
+:host(:not(:last-child)) {
+  margin-bottom: 0.8rem;
+}
+
+:host(:last-child) {
+  margin-bottom: 0.5rem;
+}
+
+:host(:not([open])) #content,
+:host([open='false']) #content {
+  display: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+}
+
+button {
+  cursor: pointer;
+  width: 100%;
+  border: 0;
+  text-align: left;
+  font-family: var(--font-source-sans);
+  font-size: 1.6rem;
+  font-weight: 700;
+  line-height: 1;
+  padding: 1.5rem 5.5rem 1.5rem 2rem;
+  background-color: var(--color-gray-lightest);
+  background-image: url('../../assets/minus.svg');
+  background-position: right 2rem center;
+  background-repeat: no-repeat;
+  background-size: 1.5rem;
+  display: block;
+  /* This color assignment is for IE11 compatibility - the one in */
+  /* the `<va-accordion>`'s CSS with `:host` doesn't work well */
+  color: var(--color-gray-dark);
+}
+
+button:hover {
+  background-color: var(--color-gray-lighter);
+  /* This color assignment is for IE11 compatibility - the one in */
+  /* the `<va-accordion>`'s CSS with `:host` doesn't work well */
+  color: var(--color-gray-dark);
+}
+
+#content {
+  background-color: var(--color-white);
+  overflow: auto;
+  padding: 1.5rem 2rem;
+  border-left: var(--item-border);
+  border-right: var(--item-border);
+  border-bottom: var(--item-border);
+}
+
+button[aria-expanded='false'] {
+  background-image: url('../../assets/plus.svg');
+}
+
+p {
+  font-weight: 400;
+  line-height: 26px;
+  margin: 0;
+}
+
+/* Hiding since element would be duplicated via the Shadow DOM */
+::slotted([slot='headline']) {
+  display: none;
+}

@@ -1,0 +1,16 @@
+@import './focusable.css';
+button {
+  appearance: none;
+  border: 0;
+  border-radius: 5px;
+  color: var(--color-white);
+  cursor: pointer;
+  display: inline-block;
+  font-family: var(--font-source-sans);
+  font-size: 1.6rem;
+  font-weight: 700;
+  line-height: 1;
+  padding: 1rem 2rem;
+  text-align: center;
+  text-decoration: none;
+}

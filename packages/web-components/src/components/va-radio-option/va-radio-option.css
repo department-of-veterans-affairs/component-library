@@ -1,0 +1,35 @@
+@import '../../mixins/inputs.css';
+
+:host {
+  display: block;
+}
+
+label {
+  box-sizing: border-box;
+  outline: none;
+  padding: 6px 12px;
+  display: inline-block;
+  margin: 0;
+  width: 100%;
+}
+
+label::before {
+  box-sizing: border-box;
+  border-radius: 100%;
+  box-shadow: 0 0 0 2px var(--color-white), 0 0 0 3px var(--color-gray-medium);
+  height: 1.4rem;
+  line-height: 1.4rem;
+  margin-left: 3px;
+  margin-right: 0.75em;
+  width: 1.4rem;
+  background: var(--color-white);
+  background-color: var(--color-white);
+  content: '\A0';
+  display: inline-block;
+  text-indent: 0.15em;
+}
+
+:host([aria-checked='true']) label::before {
+  background-color: var(--color-primary);
+  box-shadow: 0 0 0 2px var(--color-white), 0 0 0 4px var(--color-primary);
+}

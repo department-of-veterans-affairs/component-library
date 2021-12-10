@@ -1,0 +1,28 @@
+on:
+  release:
+    types: [published]
+name: Handle Release
+jobs:
+  generate:
+    name: Create release-artifacts
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout the web-components branch
+        uses: actions/checkout@v2
+        with:
+          ref: web-components
+      - name: Use Node.js 14.x
+        uses: actions/setup-node@v2
+        with:
+          node-version: 14.x
+          cache: 'yarn'
+      - run: yarn
+      - run: yarn build
+      - run: yarn build-bindings
+      - run: yarn pack
+      - name: Upload the artifacts
+        uses: skx/github-action-publish-binaries@release-0.15
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          args: 'web-components-*.tgz'
