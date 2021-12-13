@@ -1710,8 +1710,6 @@ __metadata:
     classnames: ^2.2.6
     core-js: ^3.9.0
     css-loader: ^5.2.4
-    date-fns: ^2.17.0
-    date-fns-tz: ^1.1.1
     enzyme: ^3.1.0
     enzyme-adapter-react-16: ^1.7.1
     eslint: ^7.19.0
