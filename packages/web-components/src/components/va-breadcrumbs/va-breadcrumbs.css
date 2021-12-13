@@ -46,7 +46,7 @@ a {
   background-color: transparent;
   color: var(--color-link-default);
   display: inline-block;
-  padding: 2px;
+  padding: 0.2rem;
   transition-duration: 0.3s;
   transition-property: color, background-color, border-color;
   transition-timing-function: ease-in-out;
@@ -58,7 +58,7 @@ a:hover {
 
 a:focus {
   outline: 2px solid var(--color-gold-light);
-  outline-offset: 2px;
+  outline-offset: 0.2rem;
 }
 
 a[aria-current='page'] {
