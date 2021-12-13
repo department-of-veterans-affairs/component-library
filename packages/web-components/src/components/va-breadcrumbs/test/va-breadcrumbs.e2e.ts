@@ -107,4 +107,15 @@ describe('va-breadcrumbs', () => {
 
     expect(analyticsSpy).toHaveReceivedEventTimes(0);
   });
+
+  it('adds va-nav-breadcrumbs--mobile class to nav when mobile-first-prop is true', async () => {
+    const page = await newE2EPage();
+    await page.setContent(`
+      <va-breadcrumbs mobile-first-prop></va-breadcrumbs>
+    `);
+
+    const element = await page.find('va-breadcrumbs >>> nav');
+
+    expect(element).toHaveClass('va-nav-breadcrumbs--mobile');
+  });
 });
