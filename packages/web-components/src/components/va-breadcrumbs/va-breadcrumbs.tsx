@@ -80,23 +80,13 @@ export class VaBreadcrumbs {
     // This is a workaround for the limitations of styling slotted nested elements.
     // See https://stackoverflow.com/questions/61626493/slotted-css-selector-for-nested-children-in-shadowdom-slot/61631668
     this.breadcrumbs = nodes.map((node: HTMLAnchorElement, index: number) => {
-      if (index === nodes.length - 1) {
-        return (
-          <li>
-            <a
-              aria-current="page"
-              data-index={`${index}`}
-              href={node.attributes['href'].value}
-            >
-              {node.innerText}
-            </a>
-          </li>
-        );
-      }
-
       return (
         <li>
-          <a data-index={`${index}`} href={node.attributes['href'].value}>
+          <a
+            aria-current={index === nodes.length - 1 ? 'page' : undefined}
+            data-index={`${index}`}
+            href={node.attributes['href'].value}
+          >
             {node.innerText}
           </a>
         </li>
