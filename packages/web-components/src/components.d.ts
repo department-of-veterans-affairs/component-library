@@ -98,17 +98,9 @@ export namespace Components {
          */
         "label": string;
         /**
-          * Adds a custom id attribute to the UL element
-         */
-        "listId": string;
-        /**
           * Adds CSS class `.va-nav-breadcrumbs--mobile` to the NAV element. The mobile breadcrumb will always be displayed while mobileFirstProp is True.
          */
         "mobileFirstProp": boolean;
-        /**
-          * Adds a custom id attribute to the NAV element
-         */
-        "navId": string;
     }
     interface VaCheckbox {
         /**
@@ -508,17 +500,9 @@ declare namespace LocalJSX {
          */
         "label"?: string;
         /**
-          * Adds a custom id attribute to the UL element
-         */
-        "listId"?: string;
-        /**
           * Adds CSS class `.va-nav-breadcrumbs--mobile` to the NAV element. The mobile breadcrumb will always be displayed while mobileFirstProp is True.
          */
         "mobileFirstProp"?: boolean;
-        /**
-          * Adds a custom id attribute to the NAV element
-         */
-        "navId"?: string;
         "onComponent-library-analytics"?: (event: CustomEvent<any>) => void;
     }
     interface VaCheckbox {

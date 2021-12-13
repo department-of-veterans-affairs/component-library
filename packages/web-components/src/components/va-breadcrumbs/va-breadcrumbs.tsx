@@ -29,21 +29,11 @@ export class VaBreadcrumbs {
   @Prop() disableAnalytics: boolean;
 
   /**
-   * Adds a custom id attribute to the UL element
-   */
-  @Prop() listId: string;
-
-  /**
    * Adds CSS class `.va-nav-breadcrumbs--mobile` to the
    * NAV element. The mobile breadcrumb will always
    * be displayed while mobileFirstProp is True.
    */
   @Prop() mobileFirstProp: boolean = false;
-
-  /**
-   * Adds a custom id attribute to the NAV element
-   */
-  @Prop() navId: string;
 
   @State() breadcrumbs: Array<Node>;
 
@@ -95,7 +85,7 @@ export class VaBreadcrumbs {
   }
 
   render() {
-    const { label, navId, listId, mobileFirstProp } = this;
+    const { label, mobileFirstProp } = this;
 
     return (
       <Host>
@@ -103,9 +93,8 @@ export class VaBreadcrumbs {
           aria-label={label}
           class={mobileFirstProp ? 'va-nav-breadcrumbs--mobile' : undefined}
           data-mobile-first={mobileFirstProp}
-          id={navId}
         >
-          <ul role="list" id={listId} onClick={e => this.fireAnalyticsEvent(e)}>
+          <ul role="list" onClick={e => this.fireAnalyticsEvent(e)}>
             {this.breadcrumbs}
           </ul>
         </nav>
