@@ -55,7 +55,7 @@ export class VaBreadcrumbs {
           details: {
             clickLabel: target.innerText.trim(),
             clickLevel: parseInt(target.dataset.index, 10) + 1,
-            totalLevels: getSlottedNodes(this.el, 'a').length,
+            totalLevels: this.breadcrumbs.length,
             mobileFirstProp: this.mobileFirstProp,
           },
         };
