@@ -4,17 +4,48 @@ import { axeCheck } from '../../../testing/test-helpers';
 describe('va-breadcrumbs', () => {
   it('renders', async () => {
     const page = await newE2EPage();
-    await page.setContent('<va-breadcrumbs></va-breadcrumbs>');
+    await page.setContent(`
+      <va-breadcrumbs>
+        <a href="#">Home</a>
+        <a href="#">Level One</a>
+        <a href="#">Level Two</a>
+      </va-breadcrumbs>
+    `);
 
     const element = await page.find('va-breadcrumbs');
     expect(element).toEqualHtml(`
       <va-breadcrumbs class="hydrated">
         <mock:shadow-root>
           <nav aria-label="Breadcrumb">
-            <ul role="list"></ul>
+            <ul role="list">
+              <li>
+                <a data-index="0" href="#">
+                  Home
+                </a>
+              </li>
+              <li>
+                <a data-index="1" href="#">
+                  Level One
+                </a>
+              </li>
+              <li>
+                <a aria-current="page" data-index="2" href="#">
+                  Level Two
+                </a>
+              </li>
+            </ul>
           </nav>
           <slot></slot>
         </mock:shadow-root>
+        <a href="#">
+          Home
+        </a>
+        <a href="#">
+          Level One
+        </a>
+        <a href="#">
+          Level Two
+        </a>
       </va-breadcrumbs>
     `);
   });
