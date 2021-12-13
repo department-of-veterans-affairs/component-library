@@ -8,7 +8,7 @@ import {
   formatDate,
   isDateAfter,
   isDateBefore,
-  isDateToday,
+  isDateSameDay,
 } from '../../helpers/format-date';
 
 export const MAINTENANCE_BANNER = 'MAINTENANCE_BANNER';
@@ -26,7 +26,7 @@ export class MaintenanceBanner extends Component {
     /**
      * A Date object used when downtime expires.
      */
-    expiresAt: PropTypes.object.isRequired,
+    expiresAt: PropTypes.instanceOf(Date).isRequired,
     /**
      * A unique ID that will be used for conditionally rendering the banner based on if the user has dismissed it already.
      */
@@ -41,7 +41,7 @@ export class MaintenanceBanner extends Component {
     /**
      * A Date object used when downtime starts.
      */
-    startsAt: PropTypes.object.isRequired,
+    startsAt: PropTypes.instanceOf(Date).isRequired,
     /**
      * The title of the banner for downtime.
      */
@@ -53,7 +53,7 @@ export class MaintenanceBanner extends Component {
     /**
      * A Date object used when pre-downtime starts.
      */
-    warnStartsAt: PropTypes.object,
+    warnStartsAt: PropTypes.instanceOf(Date),
     /**
      * The title of the banner for pre-downtime.
      */
@@ -72,7 +72,7 @@ export class MaintenanceBanner extends Component {
   derivePostContent = () => {
     const { startsAt, expiresAt } = this.props;
 
-    if (isDateToday(startsAt, expiresAt)) {
+    if (isDateSameDay(startsAt, expiresAt)) {
       return (
         <>
           <p>
@@ -120,7 +120,7 @@ export class MaintenanceBanner extends Component {
     } = this.props;
 
     // Derive dates.
-    const now = Date.now();
+    const now = new Date();
     const postContent = derivePostContent();
 
     // Escape early if the banner is dismissed.

@@ -19,7 +19,7 @@ export const isDateBefore = (date1, date2) => {
   return dateObj1.getTime() < dateObj2.getTime();
 };
 
-export const isDateToday = (date1, date2) => {
+export const isDateSameDay = (date1, date2) => {
   const dateObj1 = convertToDate(date1);
   const dateObj2 = convertToDate(date2);
   if (!dateObj1 || !dateObj2) return;
