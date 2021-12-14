@@ -4,6 +4,24 @@ import { axeCheck } from '../../../testing/test-helpers';
 describe('va-breadcrumbs', () => {
   it('renders', async () => {
     const page = await newE2EPage();
+    await page.setContent('<va-breadcrumbs></va-breadcrumbs>');
+
+    const element = await page.find('va-breadcrumbs');
+    expect(element).toEqualHtml(`
+      <va-breadcrumbs class="hydrated">
+        <mock:shadow-root>
+          <nav aria-label="Breadcrumb">
+            <ul role="list">
+            </ul>
+          </nav>
+          <slot></slot>
+        </mock:shadow-root>
+      </va-breadcrumbs>
+    `);
+  });
+
+  it('renders slotted content', async () => {
+    const page = await newE2EPage();
     await page.setContent(`
       <va-breadcrumbs>
         <a href="#">Home</a>
