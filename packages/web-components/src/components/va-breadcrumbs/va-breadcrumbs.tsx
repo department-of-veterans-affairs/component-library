@@ -64,7 +64,7 @@ export class VaBreadcrumbs {
     }
   }
 
-  componentDidLoad() {
+  private renderBreadcrumbs() {
     const nodes = getSlottedNodes(this.el, 'a');
     // This renders slot content outside of a slot.
     // This is a workaround for the limitations of styling slotted nested elements.
@@ -98,7 +98,7 @@ export class VaBreadcrumbs {
             {this.breadcrumbs}
           </ul>
         </nav>
-        <slot></slot>
+        <slot onSlotchange={() => this.renderBreadcrumbs()}></slot>
       </Host>
     );
   }
