@@ -1730,7 +1730,6 @@ __metadata:
     lint-staged: ^10.5.4
     lodash: ^4.17.15
     mocha: ^4.0.1
-    moment: ^2.23.0
     node-sass: 4.14.1
     number-to-words: ^1.2.4
     pinst: ^2.1.4
@@ -13702,13 +13701,6 @@ fsevents@^1.2.7:
   bin:
     module-deps: bin/cmd.js
   checksum: 07b2c062fd6c6d4b7e0d58fc014f6be0a589f938cea89673928502ccb36ab8b15895d0c6cd81ce2aa9df7c159541665f48cff000500f7aa7a02547d73bc6d083
-  languageName: node
-  linkType: hard
-
-"moment@npm:^2.23.0":
-  version: 2.29.1
-  resolution: "moment@npm:2.29.1"
-  checksum: 1e14d5f422a2687996be11dd2d50c8de3bd577c4a4ca79ba5d02c397242a933e5b941655de6c8cb90ac18f01cc4127e55b4a12ae3c527a6c0a274e455979345e
   languageName: node
   linkType: hard
 
