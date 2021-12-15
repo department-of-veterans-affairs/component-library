@@ -85,16 +85,35 @@ describe('getSlottedNodes', () => {
       constructor() {
         super();
         this.attachShadow({ mode: 'open' });
-        this.shadowRoot.innerHTML = 
-        `<slot name="headline">Updated Test Headline</slot>`;
+        this.shadowRoot.innerHTML = `<slot name="headline">Updated Test Headline</slot>`;
       }
     }
 
+    var mockObject = {
+      assignedNodes: () => {
+        return [1, 2, 3];
+      },
+    };
     window.customElements.define('custom-element', CustomElement);
 
     const defaultElement = document.createElement('custom-element');
+
+    const defElement_shadowRoot = defaultElement.shadowRoot;
+    jest
+      .spyOn(defaultElement.shadowRoot, 'querySelector')
+      .mockImplementation(selector => {
+        console.log('SELECTOR', selector);
+        if (selector === 'slot') {
+          return mockObject;
+        }
+        return defElement_shadowRoot.querySelector(selector);
+      });
+
     console.log('SHADOW', defaultElement.shadowRoot.childNodes);
-    console.log('LIGHT', document.querySelector('custom-element').shadowRoot.childNodes);
+    console.log(
+      'LIGHT',
+      document.querySelector('custom-element').shadowRoot.childNodes,
+    );
     const slottedNodes = getSlottedNodes(defaultElement, null);
     console.log('FUNCTION RESULTS', slottedNodes);
     expect(await slottedNodes[0].nodeName).toEqual('SLOT');
