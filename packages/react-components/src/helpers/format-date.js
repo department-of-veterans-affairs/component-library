@@ -1,3 +1,31 @@
+/**
+ * Returns a string with date & time by default.
+ * Ex: Tuesday, June 9, 2020 at 10:00 AM
+ * Accepts an optional `options` object matching `Intl.DateTimeFormat` standards.
+ */
+export const formatDate = (
+  date,
+  options = { dateStyle: 'full', timeStyle: 'short' },
+  timeZone = 'America/New_York',
+) => {
+  if (!date || !(date instanceof Date)) return;
+  return date.toLocaleString('en-US', { ...options, timeZone });
+};
+
+/**
+ * Date only, no time.
+ * Ex: Tuesday, June 9, 2020
+ */
+export const formatDateShort = (date, timezone) =>
+  formatDate(date, { dateStyle: 'full' }, timezone);
+
+/**
+ * Time only, no date.
+ * Ex: 10:00 AM
+ */
+export const formatTime = (date, timezone) =>
+  formatDate(date, { timeStyle: 'short' }, timezone);
+
 export const isDateAfter = (date1, date2) => {
   if (!date1 || !(date1 instanceof Date) || !date2 || !(date2 instanceof Date))
     return;
@@ -21,27 +49,4 @@ export const isDateSameDay = (date1, date2) => {
     date1.getMonth() === date2.getMonth() &&
     date1.getDay() === date2.getDay()
   );
-};
-
-export const formatDate = (date, pattern, timezone) => {
-  if (!date || !(date instanceof Date)) return;
-
-  const timeZone = timezone || 'America/New_York';
-
-  // Example: Tuesday, June 9, 2020
-  if (pattern === 'dateFull') {
-    return date.toLocaleString('en-US', { dateStyle: 'full', timeZone });
-  }
-
-  // Example: 10:00 AM
-  if (pattern === 'timeShort') {
-    return date.toLocaleString('en-US', { timeStyle: 'short', timeZone });
-  }
-
-  // Example: Tuesday, June 9, 2020 at 10:00 AM
-  return date.toLocaleString('en-US', {
-    dateStyle: 'full',
-    timeStyle: 'short',
-    timeZone,
-  });
 };
