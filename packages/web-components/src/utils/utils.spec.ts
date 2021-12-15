@@ -98,7 +98,8 @@ describe('getSlottedNodes', () => {
 
     const defaultElement = document.createElement('custom-element');
 
-    const defElement_shadowRoot = defaultElement.shadowRoot;
+    const defElement_shadowRoot_querySelector =
+      defaultElement.shadowRoot.querySelector;
     jest
       .spyOn(defaultElement.shadowRoot, 'querySelector')
       .mockImplementation(selector => {
@@ -106,7 +107,7 @@ describe('getSlottedNodes', () => {
         if (selector === 'slot') {
           return mockObject;
         }
-        return defElement_shadowRoot.querySelector(selector);
+        return defElement_shadowRoot_querySelector(selector);
       });
 
     console.log('SHADOW', defaultElement.shadowRoot.childNodes);
