@@ -1,4 +1,5 @@
 import { newE2EPage } from '@stencil/core/testing';
+import { axeCheck } from '../../../testing/test-helpers';
 
 describe('va-telephone', () => {
   it('renders', async () => {
@@ -7,6 +8,38 @@ describe('va-telephone', () => {
 
     const element = await page.find('va-telephone');
     expect(element).toHaveClass('hydrated');
+  });
+
+  it('passes an axe check', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-telephone contact="8779551234"></va-telephone>');
+
+    await axeCheck(page);
+  });
+
+  it('passes an axe check as an international number', async () => {
+    const page = await newE2EPage();
+    await page.setContent(
+      '<va-telephone international contact="8779551234"></va-telephone>',
+    );
+
+    await axeCheck(page);
+  });
+
+  it('passes an axe check with extension', async () => {
+    const page = await newE2EPage();
+    await page.setContent(
+      '<va-telephone contact="8779551234" extension="123"></va-telephone>',
+    );
+
+    await axeCheck(page);
+  });
+
+  it('passes an axe check for an N11 number', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-telephone contact="711"></va-telephone>');
+
+    await axeCheck(page);
   });
 
   it('handles a 10 digit contact prop', async () => {
