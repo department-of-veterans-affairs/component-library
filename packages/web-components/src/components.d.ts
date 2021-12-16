@@ -238,6 +238,24 @@ export namespace Components {
          */
         "value": string;
     }
+    interface VaTelephone {
+        /**
+          * 3 or 10 digit string representing the contact number
+         */
+        "contact": string;
+        /**
+          * Optional phone number extension
+         */
+        "extension": number;
+        /**
+          * Indicates if this is a number meant to be called from outside the US. Prepends a "+1" to the formatted number.
+         */
+        "international": boolean;
+        /**
+          * Indicates if the phone number can be clicked or not
+         */
+        "notClickable": boolean;
+    }
     interface VaTextInput {
         /**
           * The aria-describedby attribute for the <input> in the shadow DOM.
@@ -371,6 +389,12 @@ declare global {
         prototype: HTMLVaSelectElement;
         new (): HTMLVaSelectElement;
     };
+    interface HTMLVaTelephoneElement extends Components.VaTelephone, HTMLStencilElement {
+    }
+    var HTMLVaTelephoneElement: {
+        prototype: HTMLVaTelephoneElement;
+        new (): HTMLVaTelephoneElement;
+    };
     interface HTMLVaTextInputElement extends Components.VaTextInput, HTMLStencilElement {
     }
     var HTMLVaTextInputElement: {
@@ -392,6 +416,7 @@ declare global {
         "va-radio-option": HTMLVaRadioOptionElement;
         "va-segmented-progress-bar": HTMLVaSegmentedProgressBarElement;
         "va-select": HTMLVaSelectElement;
+        "va-telephone": HTMLVaTelephoneElement;
         "va-text-input": HTMLVaTextInputElement;
     }
 }
@@ -664,6 +689,25 @@ declare namespace LocalJSX {
          */
         "value"?: string;
     }
+    interface VaTelephone {
+        /**
+          * 3 or 10 digit string representing the contact number
+         */
+        "contact": string;
+        /**
+          * Optional phone number extension
+         */
+        "extension"?: number;
+        /**
+          * Indicates if this is a number meant to be called from outside the US. Prepends a "+1" to the formatted number.
+         */
+        "international"?: boolean;
+        /**
+          * Indicates if the phone number can be clicked or not
+         */
+        "notClickable"?: boolean;
+        "onComponent-library-analytics"?: (event: CustomEvent<any>) => void;
+    }
     interface VaTextInput {
         /**
           * The aria-describedby attribute for the <input> in the shadow DOM.
@@ -738,6 +782,7 @@ declare namespace LocalJSX {
         "va-radio-option": VaRadioOption;
         "va-segmented-progress-bar": VaSegmentedProgressBar;
         "va-select": VaSelect;
+        "va-telephone": VaTelephone;
         "va-text-input": VaTextInput;
     }
 }
@@ -759,6 +804,7 @@ declare module "@stencil/core" {
             "va-radio-option": LocalJSX.VaRadioOption & JSXBase.HTMLAttributes<HTMLVaRadioOptionElement>;
             "va-segmented-progress-bar": LocalJSX.VaSegmentedProgressBar & JSXBase.HTMLAttributes<HTMLVaSegmentedProgressBarElement>;
             "va-select": LocalJSX.VaSelect & JSXBase.HTMLAttributes<HTMLVaSelectElement>;
+            "va-telephone": LocalJSX.VaTelephone & JSXBase.HTMLAttributes<HTMLVaTelephoneElement>;
             "va-text-input": LocalJSX.VaTextInput & JSXBase.HTMLAttributes<HTMLVaTextInputElement>;
         }
     }
