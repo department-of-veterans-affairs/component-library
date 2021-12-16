@@ -25,25 +25,25 @@ describe('date functions', () => {
   });
 
   it('returns false if date1 is not after date2', () => {
-    const date1 = new Date();
+    const date1 = new Date(Date.UTC(2021, 11, 17, 8, 24, 0));
     const date2 = new Date(Date.UTC(2022, 11, 17, 8, 24, 0));
     expect(isDateAfter(date1, date2)).to.equal(false);
   });
 
   it('returns true if date1 is after date2', () => {
     const date1 = new Date(Date.UTC(2022, 11, 17, 8, 24, 0));
-    const date2 = new Date();
+    const date2 = new Date(Date.UTC(2021, 11, 17, 8, 24, 0));
     expect(isDateAfter(date1, date2)).to.equal(true);
   });
 
   it('returns true if date1 is before date2', () => {
     const date1 = new Date(Date.UTC(1995, 11, 17, 8, 24, 0));
-    const date2 = new Date();
+    const date2 = new Date(Date.UTC(1996, 11, 17, 8, 24, 0));
     expect(isDateBefore(date1, date2)).to.equal(true);
   });
 
   it('returns false if date1 is not before date2', () => {
-    const date1 = new Date();
+    const date1 = new Date(Date.UTC(1996, 11, 17, 8, 24, 0));
     const date2 = new Date(Date.UTC(1995, 11, 17, 8, 24, 0));
     expect(isDateBefore(date1, date2)).to.equal(false);
   });
@@ -55,7 +55,7 @@ describe('date functions', () => {
   });
 
   it('returns false if date1 is not on the same day as date2', () => {
-    const date1 = new Date();
+    const date1 = new Date(Date.UTC(2022, 11, 17, 8, 24, 0));
     const date2 = new Date(Date.UTC(1995, 11, 17, 8, 24, 0));
     expect(isDateSameDay(date1, date2)).to.equal(false);
   });
