@@ -14,17 +14,17 @@ export class VaSegmentedProgressBar {
   /**
    * The current segment in progress
    */
-  @Prop() current: number = 0;
+  @Prop() current: number;
 
   /**
    * The total number of segments in the progress bar
    */
-  @Prop() total: number = 10;
+  @Prop() total: number;
 
   /**
    * An override for the default aria label.
    */
-  @Prop() label: string = `Step ${this.current} of ${this.total}`;
+  @Prop() label: string;
 
   @Event({
     eventName: 'component-library-analytics',
@@ -47,7 +47,7 @@ export class VaSegmentedProgressBar {
   }
 
   render() {
-    const { current, total, label } = this;
+    const { current, total, label = `Step ${current} of ${total}`} = this;
     const range = Array.from({ length: total }, (_, i) => i);
     return (
       <Host>
