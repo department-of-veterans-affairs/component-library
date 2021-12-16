@@ -9,21 +9,23 @@ export default {
 };
 
 const defaultArgs = {
-  headline: <h3 slot="headline">Alert headline</h3>,
-  status: 'info',
-  backgroundOnly: false,
-  closeable: false,
-  fullWidth: false,
-  onClose: () => {},
+  'headline': <h3 slot="headline">Alert headline</h3>,
+  'status': 'info',
+  'background-only': false,
+  'closeable': false,
+  'full-width': false,
+  'onclose': () => {},
+  'show-icon': false,
 };
 
 const Template = ({
   headline,
-  fullWidth,
+  'full-width': fullWidth,
   status,
-  backgroundOnly,
+  'background-only': backgroundOnly,
   closeable,
-  onClose,
+  onclose,
+  'show-icon': showIcon,
 }) => {
   return (
     <va-alert
@@ -31,7 +33,8 @@ const Template = ({
       background-only={backgroundOnly}
       closeable={closeable}
       full-width={fullWidth}
-      onClose={onClose}
+      onclose={onclose}
+      show-icon={showIcon}
     >
       {headline}
       <div>This is an alert</div>
@@ -65,20 +68,27 @@ export const Closeable = Template.bind({});
 Closeable.args = {
   ...defaultArgs,
   closeable: true,
-  onClose: () => console.log('Close event triggered'),
+  onclose: () => console.log('Close event triggered'),
 };
 
 export const Fullwidth = Template.bind({});
 Fullwidth.args = {
   ...defaultArgs,
-  fullWidth: true,
-  closeable: true,
-  onClose: () => console.log('Close event triggered'),
-  status: 'warning',
+  'full-width': true,
+  'closeable': true,
+  'onclose': () => console.log('Close event triggered'),
+  'status': 'warning',
 };
 
 export const BackgroundOnly = Template.bind({});
 BackgroundOnly.args = {
   ...defaultArgs,
-  backgroundOnly: true,
+  'background-only': true,
+};
+
+export const BackgroundOnlyWithIcon = Template.bind({});
+BackgroundOnlyWithIcon.args = {
+  ...defaultArgs,
+  'background-only': true,
+  'show-icon': true,
 };

@@ -1,7 +1,7 @@
 import { newE2EPage } from '@stencil/core/testing';
 import { axeCheck } from '../../testing/test-helpers';
 
-// **NOTE** Duplicate tests written to handle scenario of both Props and Slot Usage of Component 
+// **NOTE** Duplicate tests written to handle scenario of both Props and Slot Usage of Component
 
 describe('va-accordion-item', () => {
   it('renders', async () => {
@@ -138,7 +138,7 @@ describe('va-accordion-item', () => {
     await page.setContent(
       '<va-accordion-item header="The header" subheader="The subheader">Content inside</va-accordion-item>',
     );
-    
+
     const element = await page.find('va-accordion-item');
     let subheader = element.shadowRoot.querySelector('p');
 
@@ -150,10 +150,25 @@ describe('va-accordion-item', () => {
     await page.setContent(
       '<va-accordion-item subheader="The subheader"><h3 slot="headline">The header</h3>Content inside</va-accordion-item>',
     );
-    
+
     const element = await page.find('va-accordion-item');
     let subheader = element.shadowRoot.querySelector('p');
 
     expect(subheader).toEqualText('The subheader');
+  });
+
+  // Skipping Test until fix can be found via ticket 33479
+  // Test sometimes succeeds and other times fails
+  // Replication is inconsistent and causing other PRs to fail
+  it.skip('fires a custom event when the location hash matches the accordion id', async () => {
+    const page = await newE2EPage({ url: '/#testing' });
+
+    await page.setContent(
+      '<va-accordion-item id="testing" header="The header">Content inside</va-accordion-item>',
+    );
+    const accordionItemToggled = await page.spyOnEvent('accordionItemToggled');
+    await page.waitForChanges();
+
+    expect(accordionItemToggled).toHaveReceivedEventTimes(1);
   });
 });

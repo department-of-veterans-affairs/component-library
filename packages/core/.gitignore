@@ -5,3 +5,4 @@ tmp/
 dist/*
 /*.js
 !*.config.js
+package.tgz

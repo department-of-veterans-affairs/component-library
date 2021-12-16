@@ -42,6 +42,16 @@ export namespace Components {
          */
         "subheader": string;
     }
+    interface VaAdditionalInfo {
+        /**
+          * If true, doesn't fire the CustomEvent which can be used for analytics tracking.
+         */
+        "disableAnalytics": boolean;
+        /**
+          * The text to trigger the expansion
+         */
+        "trigger": string;
+    }
     interface VaAlert {
         /**
           * If true, renders the alert with only a background color corresponding to the status - no icon or left border.
@@ -63,6 +73,10 @@ export namespace Components {
           * If true, the alert will be full width. Should be for emergency communication only.
          */
         "fullWidth": boolean;
+        /**
+          * This option only takes effect when background-only is true. If true, the background-only alert will include an icon.
+         */
+        "showIcon": boolean;
         /**
           * Determines the icon and border/background color. One of `info`, `error`, `success`, `warning`, or `continue`
          */
@@ -126,6 +140,20 @@ export namespace Components {
     }
     interface VaOnThisPage {
     }
+    interface VaProgressBar {
+        /**
+          * Whether or not an analytics event will be fired.
+         */
+        "enableAnalytics": boolean;
+        /**
+          * The text label for the progress bar.
+         */
+        "label": string;
+        /**
+          * Percent of progress made. 0 to 100.
+         */
+        "percent": number;
+    }
     interface VaRadio {
         /**
           * Whether or not an analytics event will be fired.
@@ -165,6 +193,24 @@ export namespace Components {
           * The value attribute for the input element.
          */
         "value": string;
+    }
+    interface VaSegmentedProgressBar {
+        /**
+          * The current segment in progress
+         */
+        "current": number;
+        /**
+          * Whether or not an analytics event will be fired.
+         */
+        "enableAnalytics": boolean;
+        /**
+          * An override for the default aria label.
+         */
+        "label": string;
+        /**
+          * The total number of segments in the progress bar
+         */
+        "total": number;
     }
     interface VaSelect {
         /**
@@ -271,6 +317,12 @@ declare global {
         prototype: HTMLVaAccordionItemElement;
         new (): HTMLVaAccordionItemElement;
     };
+    interface HTMLVaAdditionalInfoElement extends Components.VaAdditionalInfo, HTMLStencilElement {
+    }
+    var HTMLVaAdditionalInfoElement: {
+        prototype: HTMLVaAdditionalInfoElement;
+        new (): HTMLVaAdditionalInfoElement;
+    };
     interface HTMLVaAlertElement extends Components.VaAlert, HTMLStencilElement {
     }
     var HTMLVaAlertElement: {
@@ -307,6 +359,12 @@ declare global {
         prototype: HTMLVaOnThisPageElement;
         new (): HTMLVaOnThisPageElement;
     };
+    interface HTMLVaProgressBarElement extends Components.VaProgressBar, HTMLStencilElement {
+    }
+    var HTMLVaProgressBarElement: {
+        prototype: HTMLVaProgressBarElement;
+        new (): HTMLVaProgressBarElement;
+    };
     interface HTMLVaRadioElement extends Components.VaRadio, HTMLStencilElement {
     }
     var HTMLVaRadioElement: {
@@ -318,6 +376,12 @@ declare global {
     var HTMLVaRadioOptionElement: {
         prototype: HTMLVaRadioOptionElement;
         new (): HTMLVaRadioOptionElement;
+    };
+    interface HTMLVaSegmentedProgressBarElement extends Components.VaSegmentedProgressBar, HTMLStencilElement {
+    }
+    var HTMLVaSegmentedProgressBarElement: {
+        prototype: HTMLVaSegmentedProgressBarElement;
+        new (): HTMLVaSegmentedProgressBarElement;
     };
     interface HTMLVaSelectElement extends Components.VaSelect, HTMLStencilElement {
     }
@@ -340,14 +404,17 @@ declare global {
     interface HTMLElementTagNameMap {
         "va-accordion": HTMLVaAccordionElement;
         "va-accordion-item": HTMLVaAccordionItemElement;
+        "va-additional-info": HTMLVaAdditionalInfoElement;
         "va-alert": HTMLVaAlertElement;
         "va-back-to-top": HTMLVaBackToTopElement;
         "va-checkbox": HTMLVaCheckboxElement;
         "va-featured-content": HTMLVaFeaturedContentElement;
         "va-loading-indicator": HTMLVaLoadingIndicatorElement;
         "va-on-this-page": HTMLVaOnThisPageElement;
+        "va-progress-bar": HTMLVaProgressBarElement;
         "va-radio": HTMLVaRadioElement;
         "va-radio-option": HTMLVaRadioOptionElement;
+        "va-segmented-progress-bar": HTMLVaSegmentedProgressBarElement;
         "va-select": HTMLVaSelectElement;
         "va-telephone": HTMLVaTelephoneElement;
         "va-text-input": HTMLVaTextInputElement;
@@ -395,6 +462,17 @@ declare namespace LocalJSX {
          */
         "subheader"?: string;
     }
+    interface VaAdditionalInfo {
+        /**
+          * If true, doesn't fire the CustomEvent which can be used for analytics tracking.
+         */
+        "disableAnalytics"?: boolean;
+        "onComponent-library-analytics"?: (event: CustomEvent<any>) => void;
+        /**
+          * The text to trigger the expansion
+         */
+        "trigger"?: string;
+    }
     interface VaAlert {
         /**
           * If true, renders the alert with only a background color corresponding to the status - no icon or left border.
@@ -422,6 +500,10 @@ declare namespace LocalJSX {
           * Fires when the component has successfully finished rendering for the first time.
          */
         "onVa-component-did-load"?: (event: CustomEvent<any>) => void;
+        /**
+          * This option only takes effect when background-only is true. If true, the background-only alert will include an icon.
+         */
+        "showIcon"?: boolean;
         /**
           * Determines the icon and border/background color. One of `info`, `error`, `success`, `warning`, or `continue`
          */
@@ -501,6 +583,21 @@ declare namespace LocalJSX {
     }
     interface VaOnThisPage {
     }
+    interface VaProgressBar {
+        /**
+          * Whether or not an analytics event will be fired.
+         */
+        "enableAnalytics"?: boolean;
+        /**
+          * The text label for the progress bar.
+         */
+        "label"?: string;
+        "onComponent-library-analytics"?: (event: CustomEvent<any>) => void;
+        /**
+          * Percent of progress made. 0 to 100.
+         */
+        "percent"?: number;
+    }
     interface VaRadio {
         /**
           * Whether or not an analytics event will be fired.
@@ -543,6 +640,25 @@ declare namespace LocalJSX {
           * The value attribute for the input element.
          */
         "value"?: string;
+    }
+    interface VaSegmentedProgressBar {
+        /**
+          * The current segment in progress
+         */
+        "current"?: number;
+        /**
+          * Whether or not an analytics event will be fired.
+         */
+        "enableAnalytics"?: boolean;
+        /**
+          * An override for the default aria label.
+         */
+        "label"?: string;
+        "onComponent-library-analytics"?: (event: CustomEvent<any>) => void;
+        /**
+          * The total number of segments in the progress bar
+         */
+        "total"?: number;
     }
     interface VaSelect {
         /**
@@ -654,14 +770,17 @@ declare namespace LocalJSX {
     interface IntrinsicElements {
         "va-accordion": VaAccordion;
         "va-accordion-item": VaAccordionItem;
+        "va-additional-info": VaAdditionalInfo;
         "va-alert": VaAlert;
         "va-back-to-top": VaBackToTop;
         "va-checkbox": VaCheckbox;
         "va-featured-content": VaFeaturedContent;
         "va-loading-indicator": VaLoadingIndicator;
         "va-on-this-page": VaOnThisPage;
+        "va-progress-bar": VaProgressBar;
         "va-radio": VaRadio;
         "va-radio-option": VaRadioOption;
+        "va-segmented-progress-bar": VaSegmentedProgressBar;
         "va-select": VaSelect;
         "va-telephone": VaTelephone;
         "va-text-input": VaTextInput;
@@ -673,14 +792,17 @@ declare module "@stencil/core" {
         interface IntrinsicElements {
             "va-accordion": LocalJSX.VaAccordion & JSXBase.HTMLAttributes<HTMLVaAccordionElement>;
             "va-accordion-item": LocalJSX.VaAccordionItem & JSXBase.HTMLAttributes<HTMLVaAccordionItemElement>;
+            "va-additional-info": LocalJSX.VaAdditionalInfo & JSXBase.HTMLAttributes<HTMLVaAdditionalInfoElement>;
             "va-alert": LocalJSX.VaAlert & JSXBase.HTMLAttributes<HTMLVaAlertElement>;
             "va-back-to-top": LocalJSX.VaBackToTop & JSXBase.HTMLAttributes<HTMLVaBackToTopElement>;
             "va-checkbox": LocalJSX.VaCheckbox & JSXBase.HTMLAttributes<HTMLVaCheckboxElement>;
             "va-featured-content": LocalJSX.VaFeaturedContent & JSXBase.HTMLAttributes<HTMLVaFeaturedContentElement>;
             "va-loading-indicator": LocalJSX.VaLoadingIndicator & JSXBase.HTMLAttributes<HTMLVaLoadingIndicatorElement>;
             "va-on-this-page": LocalJSX.VaOnThisPage & JSXBase.HTMLAttributes<HTMLVaOnThisPageElement>;
+            "va-progress-bar": LocalJSX.VaProgressBar & JSXBase.HTMLAttributes<HTMLVaProgressBarElement>;
             "va-radio": LocalJSX.VaRadio & JSXBase.HTMLAttributes<HTMLVaRadioElement>;
             "va-radio-option": LocalJSX.VaRadioOption & JSXBase.HTMLAttributes<HTMLVaRadioOptionElement>;
+            "va-segmented-progress-bar": LocalJSX.VaSegmentedProgressBar & JSXBase.HTMLAttributes<HTMLVaSegmentedProgressBarElement>;
             "va-select": LocalJSX.VaSelect & JSXBase.HTMLAttributes<HTMLVaSelectElement>;
             "va-telephone": LocalJSX.VaTelephone & JSXBase.HTMLAttributes<HTMLVaTelephoneElement>;
             "va-text-input": LocalJSX.VaTextInput & JSXBase.HTMLAttributes<HTMLVaTextInputElement>;
