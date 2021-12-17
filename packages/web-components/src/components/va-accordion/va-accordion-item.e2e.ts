@@ -157,9 +157,6 @@ describe('va-accordion-item', () => {
     expect(subheader).toEqualText('The subheader');
   });
 
-  // Skipping Test until fix can be found via ticket 33479
-  // Test sometimes succeeds and other times fails
-  // Replication is inconsistent and causing other PRs to fail
   it('fires a click event when the location hash matches the accordion id', async () => {
     const page = await newE2EPage({
       html: '<va-accordion-item id="testing" header="The header">Content inside</va-accordion-item>',
