@@ -101,7 +101,7 @@ describe('getSlottedNodes()', () => {
 
     var mockObject = {
       assignedNodes: () => {
-        return [{nodeName: 'DIV'}, {nodeName: 'A'}, {nodeName: 'P'}];
+        return [{ nodeName: 'DIV' }, { nodeName: 'A' }, { nodeName: 'P' }];
       },
     };
     window.customElements.define('custom-element', CustomElement);
@@ -120,6 +120,33 @@ describe('getSlottedNodes()', () => {
       });
 
     const slottedNodes = getSlottedNodes(defaultElement, 'a');
-    expect(await slottedNodes).toEqual([ { nodeName: 'A' } ]);
+    expect(await slottedNodes).toEqual([{ nodeName: 'A' }]);
+  });
+
+  it('only values set via the shadow DOM should return nodes', async () => {
+    // Setting Light DOM
+    const documentHTML =
+      '<!doctype html><html><body>' +
+      '<div>' +
+      '<h1>ABC</h1>' +
+      '<h2>GHI</h2>' +
+      '</div>' +
+      '</body></html>';
+    document.body.innerHTML = documentHTML;
+    const slottedNodesLightDom = getSlottedNodes(document.querySelector('div'), null);
+    expect(await slottedNodesLightDom).toBeUndefined();
+    class CustomElement extends window.HTMLElement {
+      constructor() {
+        super();
+        this.attachShadow({ mode: 'open' });
+        this.shadowRoot.innerHTML = `<h6>ABC</h6><div>DEF</div><p>GHI</p>`;
+      }
+    }
+
+    window.customElements.define('custom-element', CustomElement);
+
+    const defaultElement = document.createElement('custom-element');
+    const slottedNodesShadowDom = getSlottedNodes(defaultElement, null);
+    expect(await slottedNodesShadowDom).toBeDefined();
   });
 });
