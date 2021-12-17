@@ -1,25 +1,17 @@
 // Node modules.
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import classnames from 'classnames';
-import { isAfter, isBefore, isSameDay } from 'date-fns';
-import { format, utcToZonedTime } from 'date-fns-tz';
 
 // Relative imports.
 import AlertBox from '../AlertBox/AlertBox';
+import {
+  formatDate,
+  isDateAfter,
+  isDateBefore,
+  isDateSameDay,
+} from '../../helpers/format-date';
 
 export const MAINTENANCE_BANNER = 'MAINTENANCE_BANNER';
-
-const easternZone = 'America/New_York';
-
-/**
- * Simple helper which takes a UTC time and formats it to be in the Eastern (New York) timezone
- */
-function formatEastern(datetimeUTC, formatString) {
-  return format(utcToZonedTime(datetimeUTC, easternZone), formatString, {
-    timeZone: easternZone,
-  });
-}
 
 // @WARNING: This is currently only used once in vets-website.
 /**
@@ -34,7 +26,7 @@ export class MaintenanceBanner extends Component {
     /**
      * A Date object used when downtime expires.
      */
-    expiresAt: PropTypes.object.isRequired,
+    expiresAt: PropTypes.instanceOf(Date).isRequired,
     /**
      * A unique ID that will be used for conditionally rendering the banner based on if the user has dismissed it already.
      */
@@ -49,7 +41,7 @@ export class MaintenanceBanner extends Component {
     /**
      * A Date object used when downtime starts.
      */
-    startsAt: PropTypes.object.isRequired,
+    startsAt: PropTypes.instanceOf(Date).isRequired,
     /**
      * The title of the banner for downtime.
      */
@@ -61,7 +53,7 @@ export class MaintenanceBanner extends Component {
     /**
      * A Date object used when pre-downtime starts.
      */
-    warnStartsAt: PropTypes.object,
+    warnStartsAt: PropTypes.instanceOf(Date),
     /**
      * The title of the banner for pre-downtime.
      */
@@ -80,17 +72,15 @@ export class MaintenanceBanner extends Component {
   derivePostContent = () => {
     const { startsAt, expiresAt } = this.props;
 
-    if (isSameDay(startsAt, expiresAt)) {
+    if (isDateSameDay(startsAt, expiresAt)) {
       return (
         <>
           <p>
-            <strong>Date:</strong>{' '}
-            {formatEastern(startsAt, 'EEEE, MMMM d, yyyy')}
+            <strong>Date:</strong> {formatDate(startsAt, 'dateFull')}
           </p>
           <p>
-            <strong>Start/End time:</strong>{' '}
-            {formatEastern(startsAt, 'h:mm aaaa')} to{' '}
-            {formatEastern(expiresAt, 'h:mm aaaa')} ET
+            <strong>Start/End time:</strong> {formatDate(startsAt, 'timeShort')}{' '}
+            to {formatDate(expiresAt, 'timeShort')} ET
           </p>
         </>
       );
@@ -99,12 +89,10 @@ export class MaintenanceBanner extends Component {
     return (
       <>
         <p>
-          <strong>Start:</strong>{' '}
-          {formatEastern(startsAt, "EEEE, MMMM d, yyyy, 'at' h:mm aaaa")} ET
+          <strong>Start:</strong> {formatDate(startsAt)} ET
         </p>
         <p>
-          <strong>End:</strong>{' '}
-          {formatEastern(expiresAt, "EEEE, MMMM d, yyyy, 'at' h:mm aaaa")} ET
+          <strong>End:</strong> {formatDate(expiresAt)} ET
         </p>
       </>
     );
@@ -132,7 +120,7 @@ export class MaintenanceBanner extends Component {
     } = this.props;
 
     // Derive dates.
-    const now = Date.now();
+    const now = new Date();
     const postContent = derivePostContent();
 
     // Escape early if the banner is dismissed.
@@ -141,17 +129,17 @@ export class MaintenanceBanner extends Component {
     }
 
     // Escape early if it's before when it should show.
-    if (isBefore(now, warnStartsAt)) {
+    if (isDateBefore(now, warnStartsAt)) {
       return null;
     }
 
     // Escape early if it's after when it should show.
-    if (isAfter(now, expiresAt)) {
+    if (isDateAfter(now, expiresAt)) {
       return null;
     }
 
     // Show pre-downtime.
-    if (isBefore(now, startsAt)) {
+    if (isDateBefore(now, startsAt)) {
       return (
         <div
           className="usa-alert-full-width vads-u-border-top--5px medium-screen:vads-u-border-top--10px vads-u-border-color--warning-message maintenance-banner"
