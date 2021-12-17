@@ -140,6 +140,20 @@ export namespace Components {
     }
     interface VaOnThisPage {
     }
+    interface VaProgressBar {
+        /**
+          * Whether or not an analytics event will be fired.
+         */
+        "enableAnalytics": boolean;
+        /**
+          * The text label for the progress bar.
+         */
+        "label": string;
+        /**
+          * Percent of progress made. 0 to 100.
+         */
+        "percent": number;
+    }
     interface VaRadio {
         /**
           * Whether or not an analytics event will be fired.
@@ -180,6 +194,24 @@ export namespace Components {
          */
         "value": string;
     }
+    interface VaSegmentedProgressBar {
+        /**
+          * The current segment in progress
+         */
+        "current": number;
+        /**
+          * Whether or not an analytics event will be fired.
+         */
+        "enableAnalytics": boolean;
+        /**
+          * An override for the default aria label.
+         */
+        "label": string;
+        /**
+          * The total number of segments in the progress bar
+         */
+        "total": number;
+    }
     interface VaSelect {
         /**
           * Whether or not to fire the analytics events
@@ -205,6 +237,24 @@ export namespace Components {
           * Selected value (will get updated on select).
          */
         "value": string;
+    }
+    interface VaTelephone {
+        /**
+          * 3 or 10 digit string representing the contact number
+         */
+        "contact": string;
+        /**
+          * Optional phone number extension
+         */
+        "extension": number;
+        /**
+          * Indicates if this is a number meant to be called from outside the US. Prepends a "+1" to the formatted number.
+         */
+        "international": boolean;
+        /**
+          * Indicates if the phone number can be clicked or not
+         */
+        "notClickable": boolean;
     }
     interface VaTextInput {
         /**
@@ -309,6 +359,12 @@ declare global {
         prototype: HTMLVaOnThisPageElement;
         new (): HTMLVaOnThisPageElement;
     };
+    interface HTMLVaProgressBarElement extends Components.VaProgressBar, HTMLStencilElement {
+    }
+    var HTMLVaProgressBarElement: {
+        prototype: HTMLVaProgressBarElement;
+        new (): HTMLVaProgressBarElement;
+    };
     interface HTMLVaRadioElement extends Components.VaRadio, HTMLStencilElement {
     }
     var HTMLVaRadioElement: {
@@ -321,11 +377,23 @@ declare global {
         prototype: HTMLVaRadioOptionElement;
         new (): HTMLVaRadioOptionElement;
     };
+    interface HTMLVaSegmentedProgressBarElement extends Components.VaSegmentedProgressBar, HTMLStencilElement {
+    }
+    var HTMLVaSegmentedProgressBarElement: {
+        prototype: HTMLVaSegmentedProgressBarElement;
+        new (): HTMLVaSegmentedProgressBarElement;
+    };
     interface HTMLVaSelectElement extends Components.VaSelect, HTMLStencilElement {
     }
     var HTMLVaSelectElement: {
         prototype: HTMLVaSelectElement;
         new (): HTMLVaSelectElement;
+    };
+    interface HTMLVaTelephoneElement extends Components.VaTelephone, HTMLStencilElement {
+    }
+    var HTMLVaTelephoneElement: {
+        prototype: HTMLVaTelephoneElement;
+        new (): HTMLVaTelephoneElement;
     };
     interface HTMLVaTextInputElement extends Components.VaTextInput, HTMLStencilElement {
     }
@@ -343,9 +411,12 @@ declare global {
         "va-featured-content": HTMLVaFeaturedContentElement;
         "va-loading-indicator": HTMLVaLoadingIndicatorElement;
         "va-on-this-page": HTMLVaOnThisPageElement;
+        "va-progress-bar": HTMLVaProgressBarElement;
         "va-radio": HTMLVaRadioElement;
         "va-radio-option": HTMLVaRadioOptionElement;
+        "va-segmented-progress-bar": HTMLVaSegmentedProgressBarElement;
         "va-select": HTMLVaSelectElement;
+        "va-telephone": HTMLVaTelephoneElement;
         "va-text-input": HTMLVaTextInputElement;
     }
 }
@@ -512,6 +583,21 @@ declare namespace LocalJSX {
     }
     interface VaOnThisPage {
     }
+    interface VaProgressBar {
+        /**
+          * Whether or not an analytics event will be fired.
+         */
+        "enableAnalytics"?: boolean;
+        /**
+          * The text label for the progress bar.
+         */
+        "label"?: string;
+        "onComponent-library-analytics"?: (event: CustomEvent<any>) => void;
+        /**
+          * Percent of progress made. 0 to 100.
+         */
+        "percent"?: number;
+    }
     interface VaRadio {
         /**
           * Whether or not an analytics event will be fired.
@@ -555,6 +641,25 @@ declare namespace LocalJSX {
          */
         "value"?: string;
     }
+    interface VaSegmentedProgressBar {
+        /**
+          * The current segment in progress
+         */
+        "current"?: number;
+        /**
+          * Whether or not an analytics event will be fired.
+         */
+        "enableAnalytics"?: boolean;
+        /**
+          * An override for the default aria label.
+         */
+        "label"?: string;
+        "onComponent-library-analytics"?: (event: CustomEvent<any>) => void;
+        /**
+          * The total number of segments in the progress bar
+         */
+        "total"?: number;
+    }
     interface VaSelect {
         /**
           * Whether or not to fire the analytics events
@@ -583,6 +688,25 @@ declare namespace LocalJSX {
           * Selected value (will get updated on select).
          */
         "value"?: string;
+    }
+    interface VaTelephone {
+        /**
+          * 3 or 10 digit string representing the contact number
+         */
+        "contact": string;
+        /**
+          * Optional phone number extension
+         */
+        "extension"?: number;
+        /**
+          * Indicates if this is a number meant to be called from outside the US. Prepends a "+1" to the formatted number.
+         */
+        "international"?: boolean;
+        /**
+          * Indicates if the phone number can be clicked or not
+         */
+        "notClickable"?: boolean;
+        "onComponent-library-analytics"?: (event: CustomEvent<any>) => void;
     }
     interface VaTextInput {
         /**
@@ -653,9 +777,12 @@ declare namespace LocalJSX {
         "va-featured-content": VaFeaturedContent;
         "va-loading-indicator": VaLoadingIndicator;
         "va-on-this-page": VaOnThisPage;
+        "va-progress-bar": VaProgressBar;
         "va-radio": VaRadio;
         "va-radio-option": VaRadioOption;
+        "va-segmented-progress-bar": VaSegmentedProgressBar;
         "va-select": VaSelect;
+        "va-telephone": VaTelephone;
         "va-text-input": VaTextInput;
     }
 }
@@ -672,9 +799,12 @@ declare module "@stencil/core" {
             "va-featured-content": LocalJSX.VaFeaturedContent & JSXBase.HTMLAttributes<HTMLVaFeaturedContentElement>;
             "va-loading-indicator": LocalJSX.VaLoadingIndicator & JSXBase.HTMLAttributes<HTMLVaLoadingIndicatorElement>;
             "va-on-this-page": LocalJSX.VaOnThisPage & JSXBase.HTMLAttributes<HTMLVaOnThisPageElement>;
+            "va-progress-bar": LocalJSX.VaProgressBar & JSXBase.HTMLAttributes<HTMLVaProgressBarElement>;
             "va-radio": LocalJSX.VaRadio & JSXBase.HTMLAttributes<HTMLVaRadioElement>;
             "va-radio-option": LocalJSX.VaRadioOption & JSXBase.HTMLAttributes<HTMLVaRadioOptionElement>;
+            "va-segmented-progress-bar": LocalJSX.VaSegmentedProgressBar & JSXBase.HTMLAttributes<HTMLVaSegmentedProgressBarElement>;
             "va-select": LocalJSX.VaSelect & JSXBase.HTMLAttributes<HTMLVaSelectElement>;
+            "va-telephone": LocalJSX.VaTelephone & JSXBase.HTMLAttributes<HTMLVaTelephoneElement>;
             "va-text-input": LocalJSX.VaTextInput & JSXBase.HTMLAttributes<HTMLVaTextInputElement>;
         }
     }

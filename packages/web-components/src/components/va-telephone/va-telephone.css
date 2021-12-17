@@ -1,0 +1,7 @@
+@import '../../mixins/links.css';
+@import '../../mixins/accessibility.css';
+
+a,
+a:hover {
+  text-decoration: underline;
+}

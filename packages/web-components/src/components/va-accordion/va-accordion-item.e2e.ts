@@ -169,6 +169,6 @@ describe('va-accordion-item', () => {
     const accordionItemToggled = await page.spyOnEvent('accordionItemToggled');
     await page.waitForChanges();
 
-    expect(await accordionItemToggled).toHaveReceivedEventTimes(1);
+    expect(accordionItemToggled).toHaveReceivedEventTimes(1);
   });
 });
