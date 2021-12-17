@@ -36,7 +36,10 @@ module.exports = {
       plugins: ['mocha', ...commonPlugins],
     },
     {
-      files: ['src/components/**/*.unit.spec.jsx'],
+      files: [
+        'src/components/**/*.unit.spec.jsx',
+        'src/helpers/*.unit.spec.js',
+      ],
       env: {
         node: true,
         mocha: true,
