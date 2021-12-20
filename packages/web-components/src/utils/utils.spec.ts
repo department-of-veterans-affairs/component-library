@@ -35,7 +35,7 @@ describe('getSlottedNodes()', () => {
 
     const defaultElement = document.createElement('custom-element');
     const slottedNodes = getSlottedNodes(defaultElement, null);
-    expect(await slottedNodes[2].nodeName).toEqual('P');
+    expect(slottedNodes[2].nodeName).toEqual('P');
   });
 
   it('filters nodes from a custom element in the shadow dom based on nodeName', async () => {
@@ -52,7 +52,7 @@ describe('getSlottedNodes()', () => {
 
     const defaultElement = document.createElement('custom-element');
     const slottedNodes = getSlottedNodes(defaultElement, 'p');
-    expect(await slottedNodes[0].nodeName).toEqual('P');
+    expect(slottedNodes[0].nodeName).toEqual('P');
   });
 
   it('gathers slot nodes in the shadow DOM if slot is used', async () => {
@@ -86,7 +86,7 @@ describe('getSlottedNodes()', () => {
       });
 
     const slottedNodes = getSlottedNodes(defaultElement, null);
-    expect(await slottedNodes).toEqual(['h2', 'a', 'a']);
+    expect(slottedNodes).toEqual(['h2', 'a', 'a']);
   });
 
   it('gathers specific slot nodes in the shadow DOM if slot is used and nodeName is specified', async () => {
@@ -120,7 +120,7 @@ describe('getSlottedNodes()', () => {
       });
 
     const slottedNodes = getSlottedNodes(defaultElement, 'a');
-    expect(await slottedNodes).toEqual([{ nodeName: 'A' }]);
+    expect(slottedNodes).toEqual([{ nodeName: 'A' }]);
   });
 
   it('only values set via the shadow DOM should return nodes', async () => {
@@ -133,8 +133,11 @@ describe('getSlottedNodes()', () => {
       '</div>' +
       '</body></html>';
     document.body.innerHTML = documentHTML;
-    const slottedNodesLightDom = getSlottedNodes(document.querySelector('div'), null);
-    expect(await slottedNodesLightDom).toBeUndefined();
+    const slottedNodesLightDom = getSlottedNodes(
+      document.querySelector('div'),
+      null,
+    );
+    expect(slottedNodesLightDom).toBeUndefined();
     class CustomElement extends window.HTMLElement {
       constructor() {
         super();
@@ -147,6 +150,6 @@ describe('getSlottedNodes()', () => {
 
     const defaultElement = document.createElement('custom-element');
     const slottedNodesShadowDom = getSlottedNodes(defaultElement, null);
-    expect(await slottedNodesShadowDom).toBeDefined();
+    expect(slottedNodesShadowDom).toBeDefined();
   });
 });
