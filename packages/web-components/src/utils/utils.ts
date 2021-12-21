@@ -18,21 +18,21 @@ export function getSlottedNodes(
   // A `<style>` element and a `<slot>` element
   // Chrome, Firefox, Safari, Edge - literally every modern browser will use shadowDOM.
   // This is purely for IE compatibility
-  if (root.shadowRoot) {
-    const hasShadowDOM =
-      Array.from(root.shadowRoot.childNodes).filter(
-        (node: any) => node.tagName === 'SLOT',
-      ).length > 0;
+  const hasShadowDOM =
+    Array.from(root.shadowRoot.childNodes).filter(
+      (node: any) => node.tagName === 'SLOT',
+    ).length > 0;
 
-    // This will only get the first slot on a component
-    const children = hasShadowDOM
-      ? root.shadowRoot.querySelector('slot').assignedNodes()
-      : root.shadowRoot.childNodes;
+  // This will only get the first slot on a component
+  const children = hasShadowDOM
+    ? root.shadowRoot.querySelector('slot').assignedNodes()
+    : root.shadowRoot.childNodes;
 
-    return nodeName !== null ? Array.from(children).filter(
-      item => item.nodeName.toLowerCase() === nodeName,
-    ) : Array.from(children);
-  }
+  return nodeName !== null
+    ? Array.from(children).filter(
+        item => item.nodeName.toLowerCase() === nodeName,
+      )
+    : Array.from(children);
 }
 
 /**
