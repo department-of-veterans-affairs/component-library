@@ -28,11 +28,9 @@ export function getSlottedNodes(
     ? root.shadowRoot.querySelector('slot').assignedNodes()
     : root.shadowRoot.childNodes;
 
-  return nodeName !== null
-    ? Array.from(children).filter(
-        item => item.nodeName.toLowerCase() === nodeName,
-      )
-    : Array.from(children);
+  return nodeName !== null ? Array.from(children).filter(
+    item => item.nodeName.toLowerCase() === nodeName,
+  ) : Array.from(children);
 }
 
 /**
