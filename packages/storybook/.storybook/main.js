@@ -6,7 +6,6 @@ module.exports = {
     '@storybook/addon-a11y',
     '@storybook/addon-essentials',
     '@storybook/addon-links',
-    '@storybook/addon-ie11',
     // '@whitespace/storybook-addon-html/register',
   ],
 
