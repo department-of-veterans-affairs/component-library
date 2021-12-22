@@ -97,10 +97,6 @@ export namespace Components {
           * Adds an aria-label attribute to the <nav /> element.
          */
         "label": string;
-        /**
-          * Adds CSS class `.va-nav-breadcrumbs--mobile` to the NAV element. The mobile breadcrumb will always be displayed while mobileFirstProp is True.
-         */
-        "mobileFirstProp": boolean;
     }
     interface VaCheckbox {
         /**
@@ -545,10 +541,6 @@ declare namespace LocalJSX {
           * Adds an aria-label attribute to the <nav /> element.
          */
         "label"?: string;
-        /**
-          * Adds CSS class `.va-nav-breadcrumbs--mobile` to the NAV element. The mobile breadcrumb will always be displayed while mobileFirstProp is True.
-         */
-        "mobileFirstProp"?: boolean;
         "onComponent-library-analytics"?: (event: CustomEvent<any>) => void;
     }
     interface VaCheckbox {

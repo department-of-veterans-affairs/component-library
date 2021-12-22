@@ -8,7 +8,6 @@ import {
   Prop,
   State,
 } from '@stencil/core';
-import { getSlottedNodes } from '../../utils/utils';
 
 @Component({
   tag: 'va-breadcrumbs',
@@ -27,13 +26,6 @@ export class VaBreadcrumbs {
    * Analytics tracking function(s) will not be called
    */
   @Prop() disableAnalytics: boolean;
-
-  /**
-   * Adds CSS class `.va-nav-breadcrumbs--mobile` to the
-   * NAV element. The mobile breadcrumb will always
-   * be displayed while mobileFirstProp is True.
-   */
-  @Prop() mobileFirstProp: boolean = false;
 
   @State() breadcrumbs: Array<Node>;
 
@@ -56,7 +48,6 @@ export class VaBreadcrumbs {
             clickLabel: target.innerText.trim(),
             clickLevel: parseInt(target.dataset.index, 10) + 1,
             totalLevels: this.breadcrumbs.length,
-            mobileFirstProp: this.mobileFirstProp,
           },
         };
         this.componentLibraryAnalytics.emit(details);
@@ -64,41 +55,41 @@ export class VaBreadcrumbs {
     }
   }
 
-  private renderBreadcrumbs() {
-    const nodes = getSlottedNodes(this.el, 'a');
-    // This renders slot content outside of a slot.
-    // This is a workaround for the limitations of styling slotted nested elements.
-    // See https://stackoverflow.com/questions/61626493/slotted-css-selector-for-nested-children-in-shadowdom-slot/61631668
-    this.breadcrumbs = nodes.map((node: HTMLAnchorElement, index: number) => {
-      return (
-        <li>
-          <a
-            aria-current={index === nodes.length - 1 ? 'page' : undefined}
-            data-index={`${index}`}
-            href={node.attributes['href'].value}
-          >
-            {node.innerText}
-          </a>
-        </li>
-      );
-    });
+  componentWillLoad() {
+    //  This renders slot content outside of a slot.
+    //  This is a workaround for the limitations of styling slotted nested elements.
+    //  See https://stackoverflow.com/questions/61626493/slotted-css-selector-for-nested-children-in-shadowdom-slot/61631668
+    const anchorNodes = Array.from(this.el.querySelectorAll('a'));
+    this.breadcrumbs = anchorNodes.map(
+      (node: HTMLAnchorElement, index: number) => {
+        return (
+          <li>
+            <a
+              aria-current={
+                index === anchorNodes.length - 1 ? 'page' : undefined
+              }
+              data-index={`${index}`}
+              href={node.attributes['href'].value}
+            >
+              {node.innerText}
+            </a>
+          </li>
+        );
+      },
+    );
   }
 
   render() {
-    const { label, mobileFirstProp } = this;
+    const { label } = this;
 
     return (
       <Host>
-        <nav
-          aria-label={label}
-          class={mobileFirstProp ? 'va-nav-breadcrumbs--mobile' : undefined}
-          data-mobile-first={mobileFirstProp}
-        >
+        <nav aria-label={label}>
           <ul role="list" onClick={e => this.fireAnalyticsEvent(e)}>
             {this.breadcrumbs}
           </ul>
         </nav>
-        <slot onSlotchange={() => this.renderBreadcrumbs()}></slot>
+        <slot></slot>
       </Host>
     );
   }
