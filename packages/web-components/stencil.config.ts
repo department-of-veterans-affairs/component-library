@@ -6,6 +6,7 @@ import { reactOutputTarget } from '@stencil/react-output-target';
 export const config: Config = {
   namespace: 'component-library',
   globalStyle: 'src/global/variables.css',
+  globalScript: 'src/global/imports.ts',
   plugins: [
     postcss({
       plugins: [url({ url: 'inline' })],

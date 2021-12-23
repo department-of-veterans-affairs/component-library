@@ -1786,6 +1786,7 @@ __metadata:
     "@axe-core/puppeteer": ^4.1.1
     "@babel/core": ^7.12.13
     "@department-of-veterans-affairs/formation": ^6.14.0
+    "@ionic/core": ^6.0.1
     "@stencil/core": ^2.10.0
     "@stencil/postcss": ^2.0.0
     "@stencil/react-output-target": ^0.0.9
@@ -1999,6 +2000,17 @@ __metadata:
   version: 1.2.0
   resolution: "@humanwhocodes/object-schema@npm:1.2.0"
   checksum: 40b75480376de8104d65f7c44a7dd76d30fb57823ca8ba3a3239b2b568323be894d93440578a72fd8e5e2cc3df3577ce0d2f0fe308b990dd51cf35392bf3c9a2
+  languageName: node
+  linkType: hard
+
+"@ionic/core@npm:^6.0.1":
+  version: 6.0.1
+  resolution: "@ionic/core@npm:6.0.1"
+  dependencies:
+    "@stencil/core": ~2.11.0-0
+    ionicons: ^6.0.0
+    tslib: ^2.1.0
+  checksum: f7c7096f806654fc7bb76ce94d1a94fb99a25fb26ee71d5ef2a15810c2804a09a66a19ab7e8155be52156d8c6d3665cc84ed5403158336c92faefc578d4b9619
   languageName: node
   linkType: hard
 
@@ -2442,12 +2454,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@stencil/core@npm:^2.10.0":
+"@stencil/core@npm:^2.10.0, @stencil/core@npm:~2.10.0":
   version: 2.10.0
   resolution: "@stencil/core@npm:2.10.0"
   bin:
     stencil: bin/stencil
   checksum: 035f74e71c2428a69f15df2a3e234845e3105f3481a352a7aed65f64714fc8b4b3b135a6bb90dfd90aca559d7f80b488cf7b5b2247e96e94fccb5e1bee676634
+  languageName: node
+  linkType: hard
+
+"@stencil/core@npm:~2.11.0-0":
+  version: 2.11.0
+  resolution: "@stencil/core@npm:2.11.0"
+  bin:
+    stencil: bin/stencil
+  checksum: 90bbf7d8866507b1758b44d5f1a5d197853c135e32a9b665643c4b034d41dedbe17af282c9328cfe0d0e3f57fa0b07c660ec834e4f7656de82cb5ac69cf9a8b5
   languageName: node
   linkType: hard
 
@@ -11104,6 +11125,15 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
+"ionicons@npm:^6.0.0":
+  version: 6.0.0
+  resolution: "ionicons@npm:6.0.0"
+  dependencies:
+    "@stencil/core": ~2.10.0
+  checksum: 237e788466b7b2b1fca1b0c7b14ffd84f5490d0d10d50d61b7ac2a2ac621d9627ac7600191214916ca4cd453dbb728ef8c99cb1549cb99bab445ed08cf6f942f
+  languageName: node
+  linkType: hard
+
 "ip@npm:^1.1.5":
   version: 1.1.5
   resolution: "ip@npm:1.1.5"
@@ -18698,7 +18728,7 @@ resolve@^2.0.0-next.3:
   languageName: node
   linkType: hard
 
-"tslib@npm:^2.0.0, tslib@npm:^2.0.1, tslib@npm:^2.0.3, tslib@npm:^2.2.0, tslib@npm:^2.3.0":
+"tslib@npm:^2.0.0, tslib@npm:^2.0.1, tslib@npm:^2.0.3, tslib@npm:^2.1.0, tslib@npm:^2.2.0, tslib@npm:^2.3.0":
   version: 2.3.1
   resolution: "tslib@npm:2.3.1"
   checksum: de17a98d4614481f7fcb5cd53ffc1aaf8654313be0291e1bfaee4b4bb31a20494b7d218ff2e15017883e8ea9626599b3b0e0229c18383ba9dce89da2adf15cb9

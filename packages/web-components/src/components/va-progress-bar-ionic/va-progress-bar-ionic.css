@@ -1,0 +1,17 @@
+.progress-bar-determinate {
+    border: 2px solid var(--color-primary);
+    border-radius: 1em;
+    display: block;
+    height: 1em;
+    margin: 1em 0;
+    width: 100%;
+    background: white;
+}
+
+ion-progress-bar::part(progress) {
+    background: var(--color-primary);
+}
+
+ion-progress-bar::part(track) {
+    background: white;
+}
