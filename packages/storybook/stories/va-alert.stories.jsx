@@ -9,32 +9,41 @@ export default {
 };
 
 const defaultArgs = {
-  'headline': <h3 slot="headline">Alert headline</h3>,
   'status': 'info',
   'background-only': false,
+  'show-icon': false,
+  'disable-analytics': false,
+  'visible': true,
+  'close-btn-aria-label': 'Close notification',
   'closeable': false,
   'full-width': false,
-  'onclose': () => {},
-  'show-icon': false,
+  'headline': <h3 slot="headline">Alert headline</h3>,
+  'onclose': () => console.log('Closed'),
 };
 
 const Template = ({
-  headline,
-  'full-width': fullWidth,
   status,
   'background-only': backgroundOnly,
-  closeable,
-  onclose,
   'show-icon': showIcon,
+  'disable-analytics': disableAnalytics,
+  visible,
+  'close-btn-aria-label': closeBtnAriaLabel,
+  closeable,
+  'full-width': fullWidth,
+  headline,
+  onclose,
 }) => {
   return (
     <va-alert
       status={status}
       background-only={backgroundOnly}
+      show-icon={showIcon}
+      disable-analytics={disableAnalytics}
+      visible={visible}
+      close-btn-aria-label={closeBtnAriaLabel}
       closeable={closeable}
       full-width={fullWidth}
       onclose={onclose}
-      show-icon={showIcon}
     >
       {headline}
       <div>This is an alert</div>
@@ -75,7 +84,6 @@ export const Fullwidth = Template.bind({});
 Fullwidth.args = {
   ...defaultArgs,
   'full-width': true,
-  'closeable': true,
   'onclose': () => console.log('Close event triggered'),
   'status': 'warning',
 };
@@ -91,4 +99,10 @@ BackgroundOnlyWithIcon.args = {
   ...defaultArgs,
   'background-only': true,
   'show-icon': true,
+};
+
+export const NotVisible = Template.bind({});
+NotVisible.args = {
+  ...defaultArgs,
+  visible: false,
 };
