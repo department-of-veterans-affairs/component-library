@@ -5,7 +5,36 @@ import { getWebComponentDocs, propStructure } from './wc-helpers';
 const alertDocs = getWebComponentDocs('va-alert');
 
 export default {
+  /* 👇 The title prop is optional.
+   * See https://storybook.js.org/docs/react/configure/overview#configure-story-loading
+   * to learn how to generate automatic titles
+   */
   title: 'Components/va-alert',
+  argTypes: {
+    headline: {
+      table: {
+        disable: true,
+      },
+    },
+    onclose: {
+      description:
+        'If closeable is true, this event is triggered when an alert is closed.',
+      table: {
+        defaultValue: {
+          detail: undefined,
+        },
+      },
+      control: false,
+    },
+  },
+  parameters: {
+    docs: {
+      description: {
+        component: `Use a heading element with an attribute named slot and a value of "headline" to control what is displayed for the alert's headline. 
+        Any children passed into this component without a parent slot "headline" will render in the alert's body.`,
+      },
+    },
+  },
 };
 
 const defaultArgs = {
@@ -18,7 +47,7 @@ const defaultArgs = {
   'closeable': false,
   'full-width': false,
   'headline': <h3 slot="headline">Alert headline</h3>,
-  'onclose': () => console.log('Closed'),
+  'onclose': undefined,
 };
 
 const Template = ({
