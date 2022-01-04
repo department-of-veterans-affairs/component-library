@@ -93,9 +93,9 @@ describe('va-breadcrumbs', () => {
 
     const analyticsSpy = await page.spyOnEvent('component-library-analytics');
 
-    const anchorElement = await page.findAll('va-breadcrumbs >>> li > a');
+    const anchorElements = await page.findAll('va-breadcrumbs >>> li > a');
 
-    await anchorElement[1].click();
+    await anchorElements[1].click();
 
     expect(analyticsSpy).toHaveReceivedEventDetail({
       action: 'linkClick',
