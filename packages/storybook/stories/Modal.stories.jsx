@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import {Modal} from '@department-of-veterans-affairs/component-library';
+import { Modal } from '@department-of-veterans-affairs/component-library';
 
 export default {
   title: 'Components/Modal',
@@ -12,6 +12,7 @@ const Template = args => {
   const openModal = () => setVisible(true);
   return (
     <div style={{ height: '500px' }}>
+      <h1>Testing h1 heading</h1>
       <button onClick={openModal}>Click here to open modal</button>
       <Modal {...args} visible={visible} onClose={onClose}>
         {args.children}
