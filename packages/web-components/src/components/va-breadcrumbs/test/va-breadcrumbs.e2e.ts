@@ -24,9 +24,9 @@ describe('va-breadcrumbs', () => {
     const page = await newE2EPage();
     await page.setContent(`
       <va-breadcrumbs>
-        <a href="#">Home</a>
-        <a href="#">Level One</a>
-        <a href="#">Level Two</a>
+        <a href="#home">Home</a>
+        <a href="#one">Level One</a>
+        <a href="#two">Level Two</a>
       </va-breadcrumbs>
     `);
 
@@ -37,17 +37,17 @@ describe('va-breadcrumbs', () => {
           <nav aria-label="Breadcrumb">
             <ul role="list">
               <li>
-                <a data-index="0" href="#">
+                <a href="#home">
                   Home
                 </a>
               </li>
               <li>
-                <a data-index="1" href="#">
+                <a href="#one">
                   Level One
                 </a>
               </li>
               <li>
-                <a aria-current="page" data-index="2" href="#">
+                <a aria-current="page" href="#two">
                   Level Two
                 </a>
               </li>
@@ -55,13 +55,13 @@ describe('va-breadcrumbs', () => {
           </nav>
           <slot></slot>
         </mock:shadow-root>
-        <a href="#">
+        <a href="#home">
           Home
         </a>
-        <a href="#">
+        <a href="#one">
           Level One
         </a>
-        <a href="#">
+        <a href="#two">
           Level Two
         </a>
       </va-breadcrumbs>
@@ -72,9 +72,9 @@ describe('va-breadcrumbs', () => {
     const page = await newE2EPage();
     await page.setContent(`
       <va-breadcrumbs>
-        <a href="#">Home</a>
-        <a href="#">Level One</a>
-        <a href="#">Level Two</a>
+        <a href="#home">Home</a>
+        <a href="#one">Level One</a>
+        <a href="#two">Level Two</a>
       </va-breadcrumbs>
     `);
 
@@ -85,9 +85,9 @@ describe('va-breadcrumbs', () => {
     const page = await newE2EPage();
     await page.setContent(`
       <va-breadcrumbs>
-        <a href="#">Home</a>
-        <a href="#">Level One</a>
-        <a href="#">Level Two</a>
+        <a href="#home">Home</a>
+        <a href="#one">Level One</a>
+        <a href="#two">Level Two</a>
       </va-breadcrumbs>
     `);
 
@@ -111,9 +111,9 @@ describe('va-breadcrumbs', () => {
     const page = await newE2EPage();
     await page.setContent(`
       <va-breadcrumbs disable-analytics>
-        <a href="#">Home</a>
-        <a href="#">Level One</a>
-        <a href="#">Level Two</a>
+        <a href="#home">Home</a>
+        <a href="#one">Level One</a>
+        <a href="#two">Level Two</a>
       </va-breadcrumbs>
     `);
 
