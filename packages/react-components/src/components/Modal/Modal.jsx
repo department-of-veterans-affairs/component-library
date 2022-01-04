@@ -172,9 +172,9 @@ class Modal extends React.Component {
             <div className={bodyClass}>
               <div role="document">
                 {title && (
-                  <h3 id={titleId} className={titleClass} tabIndex="-1">
+                  <h1 id={titleId} className={titleClass} tabIndex="-1">
                     {title}
-                  </h3>
+                  </h1>
                 )}
                 {content && <div className={contentClass}>{content}</div>}
               </div>
