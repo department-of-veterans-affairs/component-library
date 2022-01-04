@@ -67,7 +67,8 @@ const TemplateSubheader = args => {
 
 const defaultArgs = {
   bordered: false,
-  headline: <h6 slot="headline">First Amendment Headline</h6>
+  headline: <h6 slot="headline">First Amendment Headline</h6>,
+  'open-single': undefined
 };
 
 export const Default = Template.bind({});
@@ -76,8 +77,8 @@ Default.args = {
 };
 Default.argTypes = propStructure(accordionDocs);
 
-export const OnlyOpenOne = Template.bind({});
-OnlyOpenOne.args = {
+export const SingleSelect = Template.bind({});
+SingleSelect.args = {
   ...defaultArgs,
   'open-single': true,
 };
