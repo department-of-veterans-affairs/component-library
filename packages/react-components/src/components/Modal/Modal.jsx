@@ -133,7 +133,10 @@ class Modal extends React.Component {
     });
 
     const bodyClass = status ? 'usa-alert-body' : 'va-modal-body';
-    const titleClass = status ? 'usa-alert-heading' : 'va-modal-title';
+    const titleClass = classNames(
+      status ? 'usa-alert-heading' : 'va-modal-title',
+      'vads-u-font-size--h3',
+    );
     const contentClass = classNames({ 'usa-alert-text': status });
     const ariaRole = status => {
       if (status === 'warning' || status === 'error') {
