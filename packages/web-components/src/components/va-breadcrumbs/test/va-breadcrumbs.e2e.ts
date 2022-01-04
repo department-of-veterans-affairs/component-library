@@ -93,16 +93,16 @@ describe('va-breadcrumbs', () => {
 
     const analyticsSpy = await page.spyOnEvent('component-library-analytics');
 
-    const anchorElement = await page.find('va-breadcrumbs >>> li > a');
+    const anchorElement = await page.findAll('va-breadcrumbs >>> li > a');
 
-    await anchorElement.click();
+    await anchorElement[1].click();
 
     expect(analyticsSpy).toHaveReceivedEventDetail({
       action: 'linkClick',
       componentName: 'va-breadcrumbs',
       details: {
-        clickLabel: 'Home',
-        clickLevel: 1,
+        clickLabel: 'Level One',
+        clickLevel: 2,
         totalLevels: 3,
       },
     });
