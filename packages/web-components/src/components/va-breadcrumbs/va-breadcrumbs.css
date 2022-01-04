@@ -69,26 +69,6 @@ a[aria-current='page'] {
   text-decoration: none;
 }
 
-.va-nav-breadcrumbs--mobile li {
-  display: none;
-}
-
-.va-nav-breadcrumbs--mobile li:nth-last-child(2) {
-  display: inline-block;
-}
-
-.va-nav-breadcrumbs--mobile li:nth-last-child(2)::before {
-  content: ' \2039 ';
-  display: inline-block;
-  padding: 0 0.24rem;
-}
-
-.va-nav-breadcrumbs--mobile li:nth-last-child(2)::after {
-  content: '';
-  display: none;
-  padding: 0;
-}
-
 @media screen and (max-width: 481px) {
   li {
     display: none;
