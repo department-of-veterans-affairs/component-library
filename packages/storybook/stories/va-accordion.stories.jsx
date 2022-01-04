@@ -77,8 +77,8 @@ Default.args = {
 };
 Default.argTypes = propStructure(accordionDocs);
 
-export const OnlyOpenOne = Template.bind({});
-OnlyOpenOne.args = {
+export const SingleSelect = Template.bind({});
+SingleSelect.args = {
   ...defaultArgs,
   'open-single': true,
 };
