@@ -36,6 +36,15 @@ export class VaBreadcrumbs {
   })
   componentLibraryAnalytics: EventEmitter;
 
+  private getClickLevel(target: HTMLElement) {
+    const anchorNodes = Array.from(this.el.querySelectorAll('a'));
+    const index = anchorNodes.findIndex(
+      (node: HTMLAnchorElement) =>
+        node.attributes['href'].value === target.attributes['href'].value,
+    );
+    return index + 1;
+  }
+
   private fireAnalyticsEvent(event: MouseEvent): void {
     if (!this.disableAnalytics) {
       const target = event.target as HTMLElement;
@@ -46,7 +55,7 @@ export class VaBreadcrumbs {
           action: 'linkClick',
           details: {
             clickLabel: target.innerText.trim(),
-            clickLevel: parseInt(target.dataset.index, 10) + 1,
+            clickLevel: this.getClickLevel(target),
             totalLevels: this.breadcrumbs.length,
           },
         };
@@ -68,7 +77,6 @@ export class VaBreadcrumbs {
               aria-current={
                 index === anchorNodes.length - 1 ? 'page' : undefined
               }
-              data-index={`${index}`}
               href={node.attributes['href'].value}
             >
               {node.innerText}
