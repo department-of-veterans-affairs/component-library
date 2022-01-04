@@ -36,18 +36,17 @@ export class VaBreadcrumbs {
   })
   componentLibraryAnalytics: EventEmitter;
 
-  private getClickLevel(target: HTMLElement) {
+  private getClickLevel(target: HTMLAnchorElement) {
     const anchorNodes = Array.from(this.el.querySelectorAll('a'));
-    const index = anchorNodes.findIndex(
-      (node: HTMLAnchorElement) =>
-        node.attributes['href'].value === target.attributes['href'].value,
+    const index = anchorNodes.findIndex((node: HTMLAnchorElement) =>
+      node.isEqualNode(target),
     );
     return index + 1;
   }
 
   private fireAnalyticsEvent(event: MouseEvent): void {
     if (!this.disableAnalytics) {
-      const target = event.target as HTMLElement;
+      const target = event.target as HTMLAnchorElement;
       // If it's a link being clicked, dispatch an analytics event
       if (target?.tagName === 'A') {
         const details = {

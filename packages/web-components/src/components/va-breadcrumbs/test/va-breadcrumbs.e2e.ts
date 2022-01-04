@@ -93,7 +93,8 @@ describe('va-breadcrumbs', () => {
 
     const analyticsSpy = await page.spyOnEvent('component-library-analytics');
 
-    const anchorElement = await page.find('va-breadcrumbs >>> a');
+    const anchorElement = await page.find('va-breadcrumbs >>> li > a');
+
     await anchorElement.click();
 
     expect(analyticsSpy).toHaveReceivedEventDetail({
@@ -119,7 +120,7 @@ describe('va-breadcrumbs', () => {
 
     const analyticsSpy = await page.spyOnEvent('component-library-analytics');
 
-    const anchorElement = await page.find('va-breadcrumbs >>> a');
+    const anchorElement = await page.find('va-breadcrumbs >>> li > a');
     await anchorElement.click();
 
     expect(analyticsSpy).toHaveReceivedEventTimes(0);
