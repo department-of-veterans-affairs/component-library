@@ -21,50 +21,15 @@ describe('format', () => {
 });
 
 describe('getSlottedNodes()', () => {
-  it('returns an array of nodes from a custom element if hasShadowDom is false', async () => {
-    // Shadow DOM Custom Element
-    class CustomElement extends window.HTMLElement {
-      constructor() {
-        super();
-        this.attachShadow({ mode: 'open' });
-        this.shadowRoot.innerHTML = `<h6>ABC</h6><div>DEF</div><p>GHI</p>`;
-      }
+  class CustomElement extends window.HTMLElement {
+    constructor() {
+      super();
+      this.attachShadow({ mode: 'open' });
+      this.shadowRoot.innerHTML = `<div>ABC</div><slot name="headline">Updated Test Headline</slot><p>GHI</p>`;
     }
-
-    window.customElements.define('custom-element', CustomElement);
-
-    const defaultElement = document.createElement('custom-element');
-    const slottedNodes = getSlottedNodes(defaultElement, null);
-    expect(slottedNodes[2].nodeName).toEqual('P');
-  });
-
-  it('filters nodes from a custom element in the shadow dom based on nodeName', async () => {
-    // Shadow DOM Custom Element
-    class CustomElement extends window.HTMLElement {
-      constructor() {
-        super();
-        this.attachShadow({ mode: 'open' });
-        this.shadowRoot.innerHTML = `<h6>ABC</h6><div>DEF</div><p>GHI</p>`;
-      }
-    }
-
-    window.customElements.define('custom-element', CustomElement);
-
-    const defaultElement = document.createElement('custom-element');
-    const slottedNodes = getSlottedNodes(defaultElement, 'p');
-    expect(slottedNodes[0].nodeName).toEqual('P');
-  });
+  }
 
   it('gathers slot nodes in the shadow DOM if slot is used', async () => {
-    // Shadow DOM Custom Element
-    class CustomElement extends window.HTMLElement {
-      constructor() {
-        super();
-        this.attachShadow({ mode: 'open' });
-        this.shadowRoot.innerHTML = `<div>ABC</div><slot name="headline">Updated Test Headline</slot><p>GHI</p>`;
-      }
-    }
-
     var mockObject = {
       assignedNodes: () => {
         return ['h2', 'a', 'a'];
@@ -90,15 +55,6 @@ describe('getSlottedNodes()', () => {
   });
 
   it('gathers specific slot nodes in the shadow DOM if slot is used and nodeName is specified', async () => {
-    // Shadow DOM Custom Element
-    class CustomElement extends window.HTMLElement {
-      constructor() {
-        super();
-        this.attachShadow({ mode: 'open' });
-        this.shadowRoot.innerHTML = `<div>ABC</div><slot name="headline">Updated Test Headline</slot><p>GHI</p>`;
-      }
-    }
-
     var mockObject = {
       assignedNodes: () => {
         return [{ nodeName: 'DIV' }, { nodeName: 'A' }, { nodeName: 'P' }];
@@ -121,5 +77,19 @@ describe('getSlottedNodes()', () => {
 
     const slottedNodes = getSlottedNodes(defaultElement, 'a');
     expect(slottedNodes).toEqual([{ nodeName: 'A' }]);
+  });
+
+  it('childNodes empty array', async () => {
+    const mockObject : NodeListOf<Element> = document.querySelectorAll('.mockObject') 
+    window.customElements.define('custom-element', CustomElement);
+
+    const defaultElement = document.createElement('custom-element');
+
+    jest
+      .spyOn(defaultElement.shadowRoot, 'childNodes', 'get')
+      .mockReturnValue(mockObject);
+
+    const slottedNodes = getSlottedNodes(defaultElement, null);
+    expect(slottedNodes).toEqual([]);
   });
 });
