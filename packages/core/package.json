@@ -10,7 +10,7 @@
     "dist/*",
     "*.js"
   ],
-  "main": "dist/main-bundle.js",
+  "main": "dist/app.bundle.js",
   "module": "src/main.js",
   "dependencies": {
     "@department-of-veterans-affairs/react-components": "workspace:*",
