@@ -157,39 +157,15 @@ describe('va-accordion-item', () => {
     expect(subheader).toEqualText('The subheader');
   });
 
-  it('fires an event when the location hash matches the accordion id', async () => {
-    const page = await newE2EPage({
-      html: '<va-accordion-item id="testing" header="The header">Content inside</va-accordion-item>',
-    });
+  it('fires a custom event when the location hash matches the accordion id', async () => {
+    const page = await newE2EPage({ url: '/#testing' });
+
+    await page.setContent(
+      '<va-accordion-item id="testing" header="The header">Content inside</va-accordion-item>',
+    );
     const accordionItemToggled = await page.spyOnEvent('accordionItemToggled');
-    
-    await page.goto('http://localhost:3333/#testing', {waitUntil: 'domcontentloaded'});
-    const elId = (await page.find('va-accordion-item')).id
-    const idPageMatch = page.url().includes(elId)
-    const button = await page.find('va-accordion-item >>> button');
-    if(idPageMatch){
-      await button.click();
-    }
     await page.waitForChanges();
 
     expect(accordionItemToggled).toHaveReceivedEventTimes(1);
-  });
-
-  it('does not fire an event when the location hash does not match the accordion id', async () => {
-    const page = await newE2EPage({
-      html: '<va-accordion-item id="randomId" header="The header">Content inside</va-accordion-item>',
-    });
-    const accordionItemToggled = await page.spyOnEvent('accordionItemToggled');
-    
-    await page.goto('http://localhost:3333/#testing', {waitUntil: 'domcontentloaded'});
-    const elId = (await page.find('va-accordion-item')).id
-    const idPageMatch = page.url().includes(elId)
-    const button = await page.find('va-accordion-item >>> button');
-    if(idPageMatch){
-      await button.click();
-    }
-    await page.waitForChanges();
-
-    expect(accordionItemToggled).toHaveReceivedEventTimes(0);
   });
 });
