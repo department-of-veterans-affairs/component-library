@@ -26,7 +26,7 @@ export const config: Config = {
   },
   outputTargets: [
     reactOutputTarget({
-      componentCorePackage: '../dist/types',
+      componentCorePackage: '@department-of-veterans-affairs/component-library',
       proxiesFile: './react-bindings/index.ts',
       includeDefineCustomElements: false,
     }),
@@ -35,7 +35,7 @@ export const config: Config = {
       esmLoaderPath: '../loader',
     },
     {
-      type: 'dist-custom-elements-bundle',
+      type: 'dist-custom-elements',
     },
     {
       type: 'www',
