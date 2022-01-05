@@ -157,7 +157,7 @@ describe('va-accordion-item', () => {
     expect(subheader).toEqualText('The subheader');
   });
 
-  it('fires a click event when the location hash matches the accordion id', async () => {
+  it('fires an event when the location hash matches the accordion id', async () => {
     const page = await newE2EPage({
       html: '<va-accordion-item id="testing" header="The header">Content inside</va-accordion-item>',
     });
@@ -175,7 +175,7 @@ describe('va-accordion-item', () => {
     expect(accordionItemToggled).toHaveReceivedEventTimes(1);
   });
 
-  it('does not fire a click event when the location hash does not match the accordion id', async () => {
+  it('does not fire an event when the location hash does not match the accordion id', async () => {
     const page = await newE2EPage({
       html: '<va-accordion-item id="randomId" header="The header">Content inside</va-accordion-item>',
     });
