@@ -8,6 +8,7 @@ module.exports = {
   output: {
     path: __dirname + '/dist',
     filename: 'app.bundle.js',
+    libraryTarget: 'umd',
   },
   module: {
     rules: [
