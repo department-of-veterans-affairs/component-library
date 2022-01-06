@@ -78,18 +78,4 @@ describe('getSlottedNodes()', () => {
     const slottedNodes = getSlottedNodes(defaultElement, 'a');
     expect(slottedNodes).toEqual([{ nodeName: 'A' }]);
   });
-
-  it('childNodes empty array', async () => {
-    const mockObject : NodeListOf<Element> = document.querySelectorAll('.mockObject') 
-    window.customElements.define('custom-element', CustomElement);
-
-    const defaultElement = document.createElement('custom-element');
-
-    jest
-      .spyOn(defaultElement.shadowRoot, 'childNodes', 'get')
-      .mockReturnValue(mockObject);
-
-    const slottedNodes = getSlottedNodes(defaultElement, null);
-    expect(slottedNodes).toEqual([]);
-  });
 });
