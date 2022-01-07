@@ -56,9 +56,7 @@ class NumberInput extends React.Component {
       <div className={this.props.errorMessage ? 'usa-input-error' : undefined}>
         <label
           className={
-            this.props.errorMessage !== undefined
-              ? 'usa-input-error-label'
-              : undefined
+            this.props.errorMessage ? 'usa-input-error-label' : undefined
           }
           htmlFor={this.inputId}
         >
