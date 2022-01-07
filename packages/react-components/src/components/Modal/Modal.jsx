@@ -120,7 +120,7 @@ class Modal extends React.Component {
   render() {
     if (!this.props.visible) return null;
 
-    const { id, status, title = 'this' } = this.props;
+    const { id, status, title } = this.props;
     const titleId = `${id || 'va-modal'}-title`;
     const content = this.props.contents || this.props.children;
 
@@ -142,11 +142,13 @@ class Modal extends React.Component {
       return 'dialog';
     };
 
+    const btnAriaLabel = title ? `close ${title} modal` : 'close modal'
+
     const closeButton = !this.props.hideCloseButton && (
       <button
         className="va-modal-close"
         type="button"
-        aria-label={`close ${title} modal`}
+        aria-label={btnAriaLabel}
         onClick={this.handleClose}
       >
         <i className="fas fa-times-circle" aria-hidden="true" />
