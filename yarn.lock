@@ -1708,7 +1708,6 @@ __metadata:
     chai-as-promised: ^7.1.1
     chalk: ^4.1.0
     classnames: ^2.2.6
-    core-js: ^3.9.0
     css-loader: ^5.2.4
     enzyme: ^3.1.0
     enzyme-adapter-react-16: ^1.7.1
@@ -7141,7 +7140,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"core-js@npm:^3.0.4, core-js@npm:^3.6.5, core-js@npm:^3.8.2, core-js@npm:^3.9.0":
+"core-js@npm:^3.0.4, core-js@npm:^3.6.5, core-js@npm:^3.8.2":
   version: 3.18.3
   resolution: "core-js@npm:3.18.3"
   checksum: 4aa5017992c18b0a09ded6c7dbf3c3880b27b6ade97a522dba332f52381466978d441317e5aad49f0684e9241aecc450e3e72c550ddaccfc9fb1e69c5908e53c
