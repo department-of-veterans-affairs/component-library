@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { uniqueId } from 'lodash';
+import { uniqueId } from '../../helpers/lodash';
 import { makeField } from '../../helpers/fields';
 
 import dispatchAnalyticsEvent from '../../helpers/analytics';

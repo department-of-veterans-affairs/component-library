@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { uniqueId, isString } from 'lodash';
+import { uniqueId, isString } from '../../helpers/lodash';
 import classNames from 'classnames';
 
 import ExpandingGroup from '../ExpandingGroup/ExpandingGroup';

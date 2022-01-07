@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
-import { uniqueId } from 'lodash';
+import { uniqueId } from '../../helpers/lodash';
 import dispatchAnalyticsEvent from '../../helpers/analytics';
 
 /**

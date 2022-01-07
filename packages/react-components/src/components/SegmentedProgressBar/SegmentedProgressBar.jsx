@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { range } from 'lodash';
+import { range } from '../../helpers/lodash';
 import dispatchAnalyticsEvent from '../../helpers/analytics';
 
 /**

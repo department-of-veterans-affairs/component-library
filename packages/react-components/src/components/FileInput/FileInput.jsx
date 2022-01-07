@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-to-interactive-role */
 import PropTypes from 'prop-types';
 import React from 'react';
-import { uniqueId } from 'lodash';
+import { uniqueId } from '../../helpers/lodash';
 
 class FileInput extends React.Component {
   constructor() {

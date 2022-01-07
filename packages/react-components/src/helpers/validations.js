@@ -1,4 +1,4 @@
-import { range } from 'lodash';
+import { range } from './lodash';
 
 const minYear = 1900;
 const maxYear = new Date().getFullYear() + 100;

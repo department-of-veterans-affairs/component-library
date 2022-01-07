@@ -2,7 +2,7 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import classNames from 'classnames';
-import { range } from 'lodash';
+import { range } from '../../helpers/lodash';
 
 class Pagination extends Component {
   static propTypes = {
