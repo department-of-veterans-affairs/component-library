@@ -114,6 +114,12 @@ OMBInfo.propTypes = {
   resBurden: PropTypes.number,
 
   /**
+   * The name of the respondent burden feature. This is displayed inside the Privacy Act Statement
+   * Respondent Burden section.
+   */
+  resBurdenName: PropTypes.string,
+
+  /**
    * OMB control number / form number
    */
   ombNumber: PropTypes.string,
