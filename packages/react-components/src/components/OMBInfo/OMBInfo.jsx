@@ -18,24 +18,23 @@ class OMBInfo extends React.Component {
     this.setState({ modalOpen: false });
   };
 
-  modalContents = minutes => (
+  modalContents = (minutes, resBurdenName = 'education benefits') => (
     <div>
       <h3 id={`${this.id}-title`}>Privacy Act Statement</h3>
       {minutes && (
         <p>
           <strong>Respondent Burden:</strong> We need this information to
-          determine your eligibility for education benefits (38 U.S.C. 3471).
-          Title 38, United States Code, allows us to ask for this information.
-          We estimate that you will need an average of {minutes} minutes to
-          review the instructions, find the information, and complete this form.
-          The VA cannot conduct or sponsor a collection of information unless a
-          valid OMB (Office of Management and Budget) control number is
-          displayed. You are not required to respond to a collection of
-          information if this number is not displayed. Valid OMB control numbers
-          can be located on the OMB Internet Page at
-          www.reginfo.gov/public/do/PRAMain. If desired, you can call{' '}
-          <a href="+18008271000">1-800-827-1000</a> to get information on where
-          to send comments or suggestions about this form.
+          determine your eligibility for {resBurdenName} (38 U.S.C. 3471). Title
+          38, United States Code, allows us to ask for this information. We
+          estimate that you will need an average of {minutes} minutes to review
+          the instructions, find the information, and complete this form. The VA
+          cannot conduct or sponsor a collection of information unless a valid
+          OMB (Office of Management and Budget) control number is displayed. You
+          are not required to respond to a collection of information if this
+          number is not displayed. Valid OMB control numbers can be located on
+          the OMB Internet Page at www.reginfo.gov/public/do/PRAMain. If
+          desired, you can call <a href="+18008271000">1-800-827-1000</a> to get
+          information on where to send comments or suggestions about this form.
         </p>
       )}
       <p>
@@ -70,7 +69,7 @@ class OMBInfo extends React.Component {
   );
 
   render() {
-    const { resBurden, ombNumber, expDate } = this.props;
+    const { resBurden, resBurdenName, ombNumber, expDate } = this.props;
 
     return (
       <div className="omb-info">
@@ -97,7 +96,7 @@ class OMBInfo extends React.Component {
           contents={
             this.props.children
               ? this.props.children
-              : this.modalContents(resBurden)
+              : this.modalContents(resBurden, resBurdenName)
           }
           id={this.id}
           visible={this.state.modalOpen}
