@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
-import { uniqueId } from '../../helpers/lodash';
+import { uniqueId } from '../../helpers/utilities';
 
 import Select from '../Select/Select';
 import NumberInput from '../NumberInput/NumberInput';

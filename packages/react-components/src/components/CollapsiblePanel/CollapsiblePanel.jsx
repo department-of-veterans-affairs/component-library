@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import Scroll from 'react-scroll';
-import { uniqueId } from '../../helpers/lodash';
+import { uniqueId } from '../../helpers/utilities';
 
 const Element = Scroll.Element;
 const scroller = Scroll.scroller;

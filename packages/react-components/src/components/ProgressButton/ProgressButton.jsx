@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { uniqueId } from '../../helpers/lodash';
+import { uniqueId } from '../../helpers/utilities';
 import classNames from 'classnames';
 
 /**

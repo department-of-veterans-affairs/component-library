@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { isUndefined, uniqueId } from '../../helpers/lodash';
+import { isUndefined, uniqueId } from '../../helpers/utilities';
 
 import dispatchAnalyticsEvent from '../../helpers/analytics';
 
