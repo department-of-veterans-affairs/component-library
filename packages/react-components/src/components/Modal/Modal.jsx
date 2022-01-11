@@ -145,11 +145,13 @@ class Modal extends React.Component {
       return 'dialog';
     };
 
+    const btnAriaLabel = title ? `close ${title} modal` : 'close modal'
+
     const closeButton = !this.props.hideCloseButton && (
       <button
         className="va-modal-close"
         type="button"
-        aria-label="close"
+        aria-label={btnAriaLabel}
         onClick={this.handleClose}
       >
         <i className="fas fa-times-circle" aria-hidden="true" />
