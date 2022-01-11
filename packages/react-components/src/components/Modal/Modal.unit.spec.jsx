@@ -17,6 +17,17 @@ describe('<Modal/>', () => {
     tree.unmount();
   });
 
+  it('should have an <h1> as the heading', () => {
+    const tree = mount(
+      <Modal title="Modal title" visible onClose={() => {}}>
+        Some content
+      </Modal>,
+    );
+
+    expect(tree.find('h1').text()).to.equal('Modal title');
+    tree.unmount();
+  });
+
   describe('event listeners', () => {
     const checkForListener = (callsArray, listenerName) => {
       return callsArray.filter(call => {

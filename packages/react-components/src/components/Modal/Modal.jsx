@@ -133,7 +133,10 @@ class Modal extends React.Component {
     });
 
     const bodyClass = status ? 'usa-alert-body' : 'va-modal-body';
-    const titleClass = status ? 'usa-alert-heading' : 'va-modal-title';
+    const titleClass = classNames(
+      status ? 'usa-alert-heading' : 'va-modal-title',
+      'vads-u-font-size--h3',
+    );
     const contentClass = classNames({ 'usa-alert-text': status });
     const ariaRole = status => {
       if (status === 'warning' || status === 'error') {
@@ -174,9 +177,9 @@ class Modal extends React.Component {
             <div className={bodyClass}>
               <div role="document">
                 {title && (
-                  <h3 id={titleId} className={titleClass} tabIndex="-1">
+                  <h1 id={titleId} className={titleClass} tabIndex="-1">
                     {title}
-                  </h3>
+                  </h1>
                 )}
                 {content && <div className={contentClass}>{content}</div>}
               </div>
