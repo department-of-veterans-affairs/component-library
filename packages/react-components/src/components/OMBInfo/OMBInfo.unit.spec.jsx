@@ -92,17 +92,4 @@ describe('<OMBInfo/>', () => {
     modelContent.unmount();
     tree.unmount();
   });
-  it('modal should not display response burden section of the privacy act statement', () => {
-    const tree = shallow(<OMBInfo resBurden="90" hideResBurdenSection />);
-    const instance = tree.instance();
-    const modelContent = shallow(
-      instance.modalContents(
-        instance.props.resBurden,
-        instance.props.hideResBurdenSection,
-      ),
-    );
-    expect(modelContent.text()).to.not.contain('Respondent Burden');
-    modelContent.unmount();
-    tree.unmount();
-  });
 });
