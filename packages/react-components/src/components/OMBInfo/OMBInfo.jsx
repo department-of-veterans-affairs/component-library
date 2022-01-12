@@ -18,10 +18,10 @@ class OMBInfo extends React.Component {
     this.setState({ modalOpen: false });
   };
 
-  modalContents = (minutes, hideResBurdenSection) => (
+  modalContents = minutes => (
     <div>
       <h3 id={`${this.id}-title`}>Privacy Act Statement</h3>
-      {minutes && !hideResBurdenSection && (
+      {minutes && (
         <p>
           <strong>Respondent Burden:</strong> We need this information to
           determine your eligibility for education benefits (38 U.S.C. 3471).
@@ -70,7 +70,7 @@ class OMBInfo extends React.Component {
   );
 
   render() {
-    const { resBurden, ombNumber, expDate, hideResBurdenSection } = this.props;
+    const { resBurden, ombNumber, expDate } = this.props;
 
     return (
       <div className="omb-info">
@@ -97,7 +97,7 @@ class OMBInfo extends React.Component {
           contents={
             this.props.children
               ? this.props.children
-              : this.modalContents(resBurden, hideResBurdenSection)
+              : this.modalContents(resBurden)
           }
           id={this.id}
           visible={this.state.modalOpen}
@@ -110,7 +110,8 @@ class OMBInfo extends React.Component {
 
 OMBInfo.propTypes = {
   /**
-   * Respondent burden. How many minutes the form is expected to take.
+   * Displays the Respondent Burden section in the Privacy Act Statement modal
+   * and how many minutes the form is expected to take.
    */
   resBurden: PropTypes.number,
 
@@ -123,11 +124,6 @@ OMBInfo.propTypes = {
    * Form expiration date.
    */
   expDate: PropTypes.string.isRequired,
-
-  /**
-   * Hides Respondent Burden section of the Privacy Act Statement
-   */
-  hideResBurdenSection: PropTypes.bool,
 
   /**
    * Child elements (content) of modal when displayed
