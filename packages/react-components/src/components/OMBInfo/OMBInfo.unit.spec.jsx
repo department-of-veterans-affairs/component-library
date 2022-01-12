@@ -101,9 +101,7 @@ describe('<OMBInfo/>', () => {
         instance.props.benefitType,
       ),
     );
-    expect(modelContent.text()).to.contain(
-      'education benefits (38 U.S.C. 3471)',
-    );
+    expect(modelContent.text()).to.contain('benefits (38 U.S.C. 3471)');
     modelContent.unmount();
     tree.unmount();
   });

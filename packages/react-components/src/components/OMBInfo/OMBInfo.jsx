@@ -136,7 +136,7 @@ OMBInfo.propTypes = {
 };
 
 OMBInfo.defaultProps = {
-  benefitType: 'education benefits',
+  benefitType: 'benefits',
 };
 
 export default OMBInfo;
