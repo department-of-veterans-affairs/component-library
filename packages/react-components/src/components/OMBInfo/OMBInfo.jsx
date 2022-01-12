@@ -18,13 +18,13 @@ class OMBInfo extends React.Component {
     this.setState({ modalOpen: false });
   };
 
-  modalContents = (minutes, resBurdenName = 'education benefits') => (
+  modalContents = (minutes, benefitType) => (
     <div>
       <h3 id={`${this.id}-title`}>Privacy Act Statement</h3>
       {minutes && (
         <p>
           <strong>Respondent Burden:</strong> We need this information to
-          determine your eligibility for {resBurdenName} (38 U.S.C. 3471). Title
+          determine your eligibility for {benefitType} (38 U.S.C. 3471). Title
           38, United States Code, allows us to ask for this information. We
           estimate that you will need an average of {minutes} minutes to review
           the instructions, find the information, and complete this form. The VA
@@ -69,7 +69,7 @@ class OMBInfo extends React.Component {
   );
 
   render() {
-    const { resBurden, resBurdenName, ombNumber, expDate } = this.props;
+    const { resBurden, benefitType, ombNumber, expDate } = this.props;
 
     return (
       <div className="omb-info">
@@ -96,7 +96,7 @@ class OMBInfo extends React.Component {
           contents={
             this.props.children
               ? this.props.children
-              : this.modalContents(resBurden, resBurdenName)
+              : this.modalContents(resBurden, benefitType)
           }
           id={this.id}
           visible={this.state.modalOpen}
@@ -114,10 +114,10 @@ OMBInfo.propTypes = {
   resBurden: PropTypes.number,
 
   /**
-   * The name of the respondent burden feature. This is displayed in the Privacy Act Statement
-   * Respondent Burden section.
+   * The name of the benefit displayed in the Respondent Burden section
+   * of the Privacy Act Statement.
    */
-  resBurdenName: PropTypes.string,
+  benefitType: PropTypes.string,
 
   /**
    * OMB control number / form number
@@ -133,6 +133,10 @@ OMBInfo.propTypes = {
    * Child elements (content) of modal when displayed
    */
   children: PropTypes.node,
+};
+
+OMBInfo.defaultProps = {
+  benefitType: 'education benefits',
 };
 
 export default OMBInfo;

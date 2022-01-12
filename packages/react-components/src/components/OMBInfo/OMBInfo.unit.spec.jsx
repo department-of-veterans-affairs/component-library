@@ -98,7 +98,7 @@ describe('<OMBInfo/>', () => {
     const modelContent = shallow(
       instance.modalContents(
         instance.props.resBurden,
-        instance.props.resBurdenName,
+        instance.props.benefitType,
       ),
     );
     expect(modelContent.text()).to.contain(
@@ -108,12 +108,12 @@ describe('<OMBInfo/>', () => {
     tree.unmount();
   });
   it('modal should have response burden feature name when given', () => {
-    const tree = shallow(<OMBInfo resBurden="10" resBurdenName="TEST" />);
+    const tree = shallow(<OMBInfo resBurden="10" benefitType="TEST" />);
     const instance = tree.instance();
     const modelContent = shallow(
       instance.modalContents(
         instance.props.resBurden,
-        instance.props.resBurdenName,
+        instance.props.benefitType,
       ),
     );
     expect(modelContent.text()).to.contain('TEST (38 U.S.C. 3471)');
