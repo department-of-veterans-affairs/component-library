@@ -12,7 +12,6 @@ const defaultArgs = {
   resBurden: 120,
   ombNumber: '12-3456',
   expDate: '12/31/2077',
-  resBurdenName: undefined,
 };
 
 export const Default = Template.bind({});
@@ -24,9 +23,9 @@ WithoutOMBNumber.args = { ...defaultArgs, ombNumber: '' };
 export const WithoutResponseBurden = Template.bind({});
 WithoutResponseBurden.args = { ...defaultArgs, resBurden: undefined };
 
-export const WithCustomRespondentBurdenName = Template.bind({});
-WithCustomRespondentBurdenName.args = {
+export const WithCustomRespondentBurdenBenefitType = Template.bind({});
+WithCustomRespondentBurdenBenefitType.args = {
   ...defaultArgs,
   resBurden: 90,
-  resBurdenName: 'EXAMPLE',
+  benefitType: 'EXAMPLE BENEFITS',
 };
