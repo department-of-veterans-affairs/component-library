@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { range } from '../../helpers/utilities';
 import dispatchAnalyticsEvent from '../../helpers/analytics';
 
 /**
@@ -30,6 +29,8 @@ export default function SegmentedProgressBar({
     }
   });
 
+  const range = Array.from({ length: total }, (_, i) => i);
+
   return (
     <div
       className="progress-bar-segmented"
@@ -40,7 +41,7 @@ export default function SegmentedProgressBar({
       tabIndex="0"
       aria-label={ariaLabel}
     >
-      {range(total).map(step => (
+      {range.map(step => (
         <div
           key={step}
           className={`progress-segment ${
