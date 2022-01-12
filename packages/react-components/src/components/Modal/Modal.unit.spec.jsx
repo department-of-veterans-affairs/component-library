@@ -17,6 +17,17 @@ describe('<Modal/>', () => {
     tree.unmount();
   });
 
+  it('should have an <h1> as the heading', () => {
+    const tree = mount(
+      <Modal title="Modal title" visible onClose={() => {}}>
+        Some content
+      </Modal>,
+    );
+
+    expect(tree.find('h1').text()).to.equal('Modal title');
+    tree.unmount();
+  });
+
   describe('event listeners', () => {
     const checkForListener = (callsArray, listenerName) => {
       return callsArray.filter(call => {
@@ -135,6 +146,36 @@ describe('<Modal/>', () => {
       );
 
       expect(global.document.activeElement.id).to.equal('second-button');
+      tree.unmount();
+    });
+
+    it('should include the title in the close button aria label if given', () => {
+      const tree = mount(
+        <Modal id="modal" title="Programmatic focus" visible onClose={() => {}}>
+          <button id="first-button">First button</button>
+          <button id="second-button">Second button</button>
+        </Modal>,
+        { attachTo: root },
+      );
+
+      expect(global.document.activeElement.ariaLabel).to.equal(
+        'close Programmatic focus modal',
+      );
+      tree.unmount();
+    });
+
+    it('should not include the title in the close button aria label when not given', () => {
+      const tree = mount(
+        <Modal id="modal" visible onClose={() => {}}>
+          <button id="first-button">First button</button>
+          <button id="second-button">Second button</button>
+        </Modal>,
+        { attachTo: root },
+      );
+
+      expect(global.document.activeElement.ariaLabel).to.equal(
+        'close modal',
+      );
       tree.unmount();
     });
   });
