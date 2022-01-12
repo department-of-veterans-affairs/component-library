@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { isUndefined, uniqueId } from '../../helpers/utilities';
+import { uniqueId } from '../../helpers/utilities';
 
 import dispatchAnalyticsEvent from '../../helpers/analytics';
 
@@ -55,7 +55,7 @@ class Checkbox extends React.Component {
     let className = `form-checkbox${
       this.props.errorMessage ? ' usa-input-error' : ''
     }`;
-    if (!isUndefined(this.props.className)) {
+    if (this.props.className !== undefined) {
       className = `${className} ${this.props.className}`;
     }
 
