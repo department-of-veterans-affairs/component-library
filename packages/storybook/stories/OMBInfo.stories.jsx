@@ -12,7 +12,6 @@ const defaultArgs = {
   resBurden: 120,
   ombNumber: '12-3456',
   expDate: '12/31/2077',
-  hideResBurdenSection: false,
 };
 
 export const Default = Template.bind({});
