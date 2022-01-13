@@ -10,15 +10,31 @@ export default {
 };
 
 const defaultArgs = {
-  label: 'This is a cleverly-labelled checkbox',
-  checked: null,
-  error: null,
-  required: null,
-  description: null,
-  enableAnalytics: false,
+  'label': 'This is a cleverly-labelled checkbox',
+  'checked': false,
+  'error': null,
+  'required': false,
+  'description': null,
+  'enable-analytics': false,
 };
 
-const Template = props => <va-checkbox {...props} />;
+const Template = ({
+  checked,
+  description,
+  'enable-analytics': enableAnalytics,
+  error,
+  label,
+  required,
+}) => (
+  <va-checkbox
+    checked={checked}
+    description={description}
+    enable-analytics={enableAnalytics}
+    error={error}
+    label={label}
+    required={required}
+  />
+);
 
 export const Default = Template.bind({});
 Default.args = { ...defaultArgs };

@@ -61,6 +61,8 @@ button:hover {
   border-left: var(--item-border);
   border-right: var(--item-border);
   border-bottom: var(--item-border);
+  display: flex;
+  flex-wrap: wrap;
 }
 
 button[aria-expanded='false'] {
