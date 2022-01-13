@@ -92,4 +92,30 @@ describe('<OMBInfo/>', () => {
     modelContent.unmount();
     tree.unmount();
   });
+  it('modal should have default response burden feature name when omitted', () => {
+    const tree = shallow(<OMBInfo resBurden="10" />);
+    const instance = tree.instance();
+    const modelContent = shallow(
+      instance.modalContents(
+        instance.props.resBurden,
+        instance.props.benefitType,
+      ),
+    );
+    expect(modelContent.text()).to.contain('benefits (38 U.S.C. 3471)');
+    modelContent.unmount();
+    tree.unmount();
+  });
+  it('modal should have response burden feature name when given', () => {
+    const tree = shallow(<OMBInfo resBurden="10" benefitType="TEST" />);
+    const instance = tree.instance();
+    const modelContent = shallow(
+      instance.modalContents(
+        instance.props.resBurden,
+        instance.props.benefitType,
+      ),
+    );
+    expect(modelContent.text()).to.contain('TEST (38 U.S.C. 3471)');
+    modelContent.unmount();
+    tree.unmount();
+  });
 });

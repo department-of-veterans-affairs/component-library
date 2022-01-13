@@ -22,3 +22,10 @@ WithoutOMBNumber.args = { ...defaultArgs, ombNumber: '' };
 
 export const WithoutResponseBurden = Template.bind({});
 WithoutResponseBurden.args = { ...defaultArgs, resBurden: undefined };
+
+export const WithCustomRespondentBurdenBenefitType = Template.bind({});
+WithCustomRespondentBurdenBenefitType.args = {
+  ...defaultArgs,
+  resBurden: 90,
+  benefitType: 'EXAMPLE BENEFITS',
+};
