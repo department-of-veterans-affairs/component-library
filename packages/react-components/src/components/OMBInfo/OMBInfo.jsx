@@ -51,7 +51,7 @@ class OMBInfo extends React.Component {
         58VA21/22/28, Compensation, Pension, Education, and Vocational
         Rehabilitation and Employment Records - VA, and published in the Federal
         Register. Your obligation to respond is required to obtain or retain
-        education benefits. Giving us your SSN account information is voluntary.
+        {benefitType}. Giving us your SSN account information is voluntary.
         Refusal to provide your SSN by itself will not result in the denial of
         benefits. The VA will not deny an individual benefits for refusing to
         provide his or her SSN unless the disclosure of the SSN is required by a
