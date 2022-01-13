@@ -1,12 +1,12 @@
 import React from 'react';
-import {OMBInfo} from '@department-of-veterans-affairs/component-library';
+import { OMBInfo } from '@department-of-veterans-affairs/component-library';
 
 export default {
   title: 'Components/OMBInfo',
   component: OMBInfo,
 };
 
-const Template = (args) => <OMBInfo {...args} />;
+const Template = args => <OMBInfo {...args} />;
 
 const defaultArgs = {
   resBurden: 120,

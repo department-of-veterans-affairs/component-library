@@ -110,7 +110,8 @@ class OMBInfo extends React.Component {
 
 OMBInfo.propTypes = {
   /**
-   * Respondent burden. How many minutes the form is expected to take.
+   * Displays the Respondent Burden section in the Privacy Act Statement modal
+   * and how many minutes the form is expected to take.
    */
   resBurden: PropTypes.number,
 
