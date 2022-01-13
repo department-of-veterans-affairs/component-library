@@ -1,7 +1,7 @@
 {
   "name": "@department-of-veterans-affairs/component-library",
   "description": "VA.gov component library. Includes React and web components.",
-  "version": "3.11.5-0",
+  "version": "3.11.5-1",
   "license": "MIT",
   "scripts": {
     "build": "webpack"
@@ -22,6 +22,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.15.5",
+    "@babel/preset-env": "^7.16.8",
     "babel-loader": "^8.2.2",
     "copy-webpack-plugin": "^9.0.1",
     "css-loader": "^6.4.0",
