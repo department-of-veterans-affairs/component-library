@@ -4,6 +4,7 @@ const CopyPlugin = require('copy-webpack-plugin');
 
 module.exports = {
   entry: ['./src/main.js'],
+  target: ['web', 'es5'],
   output: {
     path: __dirname + '/dist',
     filename: 'app.bundle.js',

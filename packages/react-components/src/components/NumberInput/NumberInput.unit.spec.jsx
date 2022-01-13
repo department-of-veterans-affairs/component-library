@@ -89,6 +89,33 @@ describe('<NumberInput>', () => {
     tree.unmount();
   });
 
+  it('no error styles when errorMessage is an empty string', () => {
+    const tree = shallow(
+      <NumberInput
+        field={testValue}
+        label="my label"
+        errorMessage=""
+        onValueChange={() => {}}
+      />,
+    );
+
+    // No error classes.
+    expect(tree.find('.usa-input-error')).to.have.lengthOf(0);
+    expect(tree.find('.usa-input-error-label')).to.have.lengthOf(0);
+    expect(tree.find('.usa-input-error-message')).to.have.lengthOf(0);
+
+    // Ensure no unnecessary class names on label w/o error..
+    const labels = tree.find('label');
+    expect(labels).to.have.lengthOf(1);
+    expect(labels.hasClass('foo')).to.be.false;
+
+    // No error means no aria-describedby to not confuse screen readers.
+    const inputs = tree.find('input');
+    expect(inputs).to.have.lengthOf(1);
+    expect(inputs.prop('aria-describedby')).to.be.undefined;
+    tree.unmount();
+  });
+
   it('has error styles when errorMessage is set', () => {
     const tree = shallow(
       <NumberInput

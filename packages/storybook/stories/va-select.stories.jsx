@@ -9,13 +9,13 @@ export default {
 };
 
 const defaultArgs = {
-  label: 'Branch of Service',
-  name: 'branch',
-  value: 'army',
-  required: false,
-  error: null,
-  ariaLiveRegionText: 'You selected',
-  options: [
+  'label': 'Branch of Service',
+  'name': 'branch',
+  'value': 'army',
+  'required': false,
+  'error': null,
+  'aria-live-region-text': 'You selected',
+  'options': [
     <option key="1" value="navy">
       Navy
     </option>,
@@ -32,7 +32,7 @@ const defaultArgs = {
       Coastguard
     </option>,
   ],
-  useAddButton: false,
+  'use-add-button': false,
 };
 
 const Template = ({
@@ -41,9 +41,9 @@ const Template = ({
   value,
   required,
   error,
-  ariaLiveRegionText,
+  'aria-live-region-text': ariaLiveRegionText,
   options,
-  useAddButton,
+  'use-add-button': useAddButton,
 }) => {
   const [modifiedOptions, setModifiedOptions] = useState(options);
 
@@ -70,6 +70,7 @@ const Template = ({
         required={required}
         error={error}
         aria-live-region-text={ariaLiveRegionText}
+        use-add-button={useAddButton}
       >
         {modifiedOptions}
       </va-select>
@@ -88,4 +89,4 @@ export const ErrorMessage = Template.bind({});
 ErrorMessage.args = { ...defaultArgs, error: 'There was a problem' };
 
 export const DynamicOptions = Template.bind({});
-DynamicOptions.args = { ...defaultArgs, useAddButton: true };
+DynamicOptions.args = { ...defaultArgs, 'use-add-button': true };
