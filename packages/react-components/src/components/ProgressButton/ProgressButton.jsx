@@ -9,7 +9,7 @@ import classNames from 'classnames';
 
 class ProgressButton extends React.Component {
   UNSAFE_componentWillMount() {
-    this.id = uniqueId();
+    this.id = uniqueId('continueButton-');
   }
 
   render() {
@@ -38,7 +38,7 @@ class ProgressButton extends React.Component {
         className={classNames(this.props.buttonClass, {
           'usa-button-disabled': disabled,
         })}
-        id={`${this.id}-continueButton`}
+        id={`${this.id}`}
         onClick={this.props.onButtonClick}
         aria-label={ariaLabel}
         aria-describedby={ariaDescribedby}
