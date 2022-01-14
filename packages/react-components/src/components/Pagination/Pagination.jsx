@@ -53,7 +53,7 @@ class Pagination extends Component {
     // Conditionally track the event.
     if (this.props.enableAnalytics) {
       this.props.trackEvent({
-        event: eventID,
+        'event': eventID,
         'paginate-page-number': page,
       });
     }
@@ -63,15 +63,16 @@ class Pagination extends Component {
     let nextPage;
     if (this.props.pages > this.props.page) {
       nextPage = (
-        <a
+        <button
           aria-label={`Next page ${this.props.ariaLabelSuffix}`}
           onClick={() => {
             this.onPageSelect(this.props.page + 1, 'nav-paginate-next');
           }}
           onKeyDown={e => this.handleKeyDown(e, this.props.page + 1)}
+          type="button"
         >
           Next
-        </a>
+        </button>
       );
     }
     return nextPage;
@@ -81,15 +82,16 @@ class Pagination extends Component {
     let prevPage;
     if (this.props.page > 1) {
       prevPage = (
-        <a
+        <button
           aria-label={`Previous page ${this.props.ariaLabelSuffix}`}
           onClick={() => {
             this.onPageSelect(this.props.page - 1, 'nav-paginate-previous');
           }}
           onKeyDown={e => this.handleKeyDown(e, this.props.page - 1)}
+          type="button"
         >
           Prev
-        </a>
+        </button>
       );
     }
     return prevPage;
@@ -107,15 +109,18 @@ class Pagination extends Component {
     if (showLastPage && currentPage < totalPages - maxPageListLength + 1) {
       lastPage = (
         <span>
-          <a aria-label="...">...</a>
-          <a
+          <button aria-label="..." type="button">
+            ...
+          </button>
+          <button
             aria-label={`Load last page ${this.props.ariaLabelSuffix}`}
             onClick={() => {
               this.onPageSelect(totalPages, 'nav-paginate-number');
             }}
+            type="button"
           >
             {totalPages}
-          </a>
+          </button>
         </span>
       );
     }
@@ -181,16 +186,17 @@ class Pagination extends Component {
       });
 
       return (
-        <a
+        <button
           aria-current={this.props.page === pageNumber ? 'true' : null}
           aria-label={`Page ${pageNumber} ${ariaLabelSuffix}`}
           key={pageNumber}
           className={pageClass}
           onClick={() => this.onPageSelect(pageNumber, 'nav-paginate-number')}
           onKeyDown={e => this.handleKeyDown(e, pageNumber)}
+          type="button"
         >
           {pageNumber}
-        </a>
+        </button>
       );
     });
 
