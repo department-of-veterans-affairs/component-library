@@ -1,0 +1,44 @@
+:host {
+  display: block;
+  list-style: none;
+  padding: 1em 0;
+  position: relative;
+}
+
+::slotted(li) {
+  display: none;
+}
+
+ol {
+  counter-reset: listCounter;
+}
+
+li {
+  counter-increment: listCounter;
+  border-left: 8px solid var(--color-gray-light);
+  padding: 0 0 2em 2em;
+  list-style: none;
+  margin: 0 !important;
+}
+
+li:before {
+  color: var(--color-white);
+  content: counter(listCounter);
+  float: left;
+  font-size: 1.3em;
+  font-weight: 700;
+  text-align: center;
+  width: 2em;
+  top: -0.2em;
+  margin-left: -2.7em;
+  display: block;
+  border: 4px solid var(--color-white);
+  background: var(--color-gray);
+  border-radius: 4em;
+  position: relative;
+}
+
+li:last-child {
+  border-left: 0;
+  padding-left: calc(2em + 8px);
+}

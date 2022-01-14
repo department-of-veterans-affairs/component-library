@@ -140,6 +140,8 @@ export namespace Components {
     }
     interface VaOnThisPage {
     }
+    interface VaProcessList {
+    }
     interface VaProgressBar {
         /**
           * Whether or not an analytics event will be fired.
@@ -359,6 +361,12 @@ declare global {
         prototype: HTMLVaOnThisPageElement;
         new (): HTMLVaOnThisPageElement;
     };
+    interface HTMLVaProcessListElement extends Components.VaProcessList, HTMLStencilElement {
+    }
+    var HTMLVaProcessListElement: {
+        prototype: HTMLVaProcessListElement;
+        new (): HTMLVaProcessListElement;
+    };
     interface HTMLVaProgressBarElement extends Components.VaProgressBar, HTMLStencilElement {
     }
     var HTMLVaProgressBarElement: {
@@ -411,6 +419,7 @@ declare global {
         "va-featured-content": HTMLVaFeaturedContentElement;
         "va-loading-indicator": HTMLVaLoadingIndicatorElement;
         "va-on-this-page": HTMLVaOnThisPageElement;
+        "va-process-list": HTMLVaProcessListElement;
         "va-progress-bar": HTMLVaProgressBarElement;
         "va-radio": HTMLVaRadioElement;
         "va-radio-option": HTMLVaRadioOptionElement;
@@ -582,6 +591,8 @@ declare namespace LocalJSX {
         "setFocus"?: boolean;
     }
     interface VaOnThisPage {
+    }
+    interface VaProcessList {
     }
     interface VaProgressBar {
         /**
@@ -777,6 +788,7 @@ declare namespace LocalJSX {
         "va-featured-content": VaFeaturedContent;
         "va-loading-indicator": VaLoadingIndicator;
         "va-on-this-page": VaOnThisPage;
+        "va-process-list": VaProcessList;
         "va-progress-bar": VaProgressBar;
         "va-radio": VaRadio;
         "va-radio-option": VaRadioOption;
@@ -799,6 +811,7 @@ declare module "@stencil/core" {
             "va-featured-content": LocalJSX.VaFeaturedContent & JSXBase.HTMLAttributes<HTMLVaFeaturedContentElement>;
             "va-loading-indicator": LocalJSX.VaLoadingIndicator & JSXBase.HTMLAttributes<HTMLVaLoadingIndicatorElement>;
             "va-on-this-page": LocalJSX.VaOnThisPage & JSXBase.HTMLAttributes<HTMLVaOnThisPageElement>;
+            "va-process-list": LocalJSX.VaProcessList & JSXBase.HTMLAttributes<HTMLVaProcessListElement>;
             "va-progress-bar": LocalJSX.VaProgressBar & JSXBase.HTMLAttributes<HTMLVaProgressBarElement>;
             "va-radio": LocalJSX.VaRadio & JSXBase.HTMLAttributes<HTMLVaRadioElement>;
             "va-radio-option": LocalJSX.VaRadioOption & JSXBase.HTMLAttributes<HTMLVaRadioOptionElement>;
