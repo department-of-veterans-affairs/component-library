@@ -5,6 +5,12 @@
   position: relative;
 }
 
+:host > ol > li > :is(h2, h3, h4, h5) {
+  margin-top: 0;
+  clear: none;
+  padding-top: 0.3em;
+}
+
 ::slotted(li) {
   display: none;
 }
