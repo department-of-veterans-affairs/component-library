@@ -17,8 +17,7 @@ export class VaProcessList {
    */
   private populateItems() {
     this.items = getSlottedNodes(this.el, 'li').map((node: HTMLLIElement) => {
-      console.log(node);
-      return <li>Testing</li>;
+      return <li innerHTML={node.innerHTML} />;
     });
   }
 
