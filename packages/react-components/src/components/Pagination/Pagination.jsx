@@ -72,6 +72,7 @@ class Pagination extends Component {
           type="button"
         >
           Next
+          <span aria-hidden></span>
         </button>
       );
     }
@@ -90,6 +91,7 @@ class Pagination extends Component {
           onKeyDown={e => this.handleKeyDown(e, this.props.page - 1)}
           type="button"
         >
+          <span aria-hidden></span>
           Prev
         </button>
       );
@@ -108,7 +110,7 @@ class Pagination extends Component {
     let lastPage;
     if (showLastPage && currentPage < totalPages - maxPageListLength + 1) {
       lastPage = (
-        <span>
+        <>
           <button aria-label="..." type="button">
             ...
           </button>
@@ -121,7 +123,7 @@ class Pagination extends Component {
           >
             {totalPages}
           </button>
-        </span>
+        </>
       );
     }
     return lastPage;
