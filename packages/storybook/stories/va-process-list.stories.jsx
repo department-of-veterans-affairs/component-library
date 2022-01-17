@@ -55,6 +55,36 @@ const Template = ({}) => {
   );
 };
 
+const UtilityStyling = ({}) => {
+  return (
+    <va-process-list>
+      <li>
+        <h3>First step</h3>
+        <p>Look at me in mobile view</p>
+        <va-additional-info
+          trigger="Show more"
+          class="medium-screen:vads-u-display--none"
+        >
+          <img src="https://via.placeholder.com/350" />
+        </va-additional-info>
+      </li>
+      <li>
+        <h3>Next step</h3>
+        <p>Look at me in desktop view</p>
+        <p className="vads-u-display--none medium-screen:vads-u-display--block vads-u-background-color--gray-cool-light">
+          I'm only visible on desktop.
+          <br />
+          <span className="vads-u-font-style--italic">
+            And any global utility style will work.
+          </span>
+        </p>
+      </li>
+    </va-process-list>
+  );
+};
+
 export const Default = Template.bind({});
 Default.args = { ...defaultArgs };
 Default.argTypes = propStructure(processListDocs);
+
+export const AdditionalStyling = UtilityStyling.bind({});
