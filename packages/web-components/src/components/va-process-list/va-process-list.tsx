@@ -1,5 +1,4 @@
-import { Component, Host, Element, State, h } from '@stencil/core';
-import { getSlottedNodes } from '../../utils/utils';
+import { Component, Host, h } from '@stencil/core';
 
 @Component({
   tag: 'va-process-list',
@@ -7,25 +6,12 @@ import { getSlottedNodes } from '../../utils/utils';
   shadow: true,
 })
 export class VaProcessList {
-  @Element() el: any;
-
-  @State() items: Array<Node>;
-  /**
-   * This function is for taking the slotted content and rendering
-   * it inside the `<ol>` element. Putting the `<slot>` directly
-   * inside the `<ol>` prevents `<li>` from being the only child type
-   */
-  private populateItems() {
-    this.items = getSlottedNodes(this.el, 'li').map((node: HTMLLIElement) => {
-      return <li innerHTML={node.innerHTML} />;
-    });
-  }
-
   render() {
     return (
       <Host>
-        <slot onSlotchange={() => this.populateItems()}></slot>
-        <ol role="list">{this.items}</ol>
+        <ol role="list">
+          <slot></slot>
+        </ol>
       </Host>
     );
   }
