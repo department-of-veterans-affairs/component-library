@@ -18,12 +18,12 @@ class CollapsiblePanel extends React.Component {
   }
 
   UNSAFE_componentWillMount() {
-    this.id = uniqueId('scroll-element-');
+    this.id = uniqueId();
   }
 
   scrollToTop() {
     scroller.scrollTo(
-      `collapsible-panel-${this.id}`,
+      `collapsible-panel-${this.id}-scroll-element`,
       window.VetsGov?.scroll || {
         duration: 500,
         delay: 2,
@@ -65,7 +65,7 @@ class CollapsiblePanel extends React.Component {
           this.props.borderless ? 'usa-accordion' : 'usa-accordion-bordered'
         } form-review-panel`}
       >
-        <Element name={`collapsible-panel-${this.id}`} />
+        <Element name={`collapsible-panel-${this.id}-scroll-element`} />
         <div className="accordion-header clearfix">
           <button
             className="usa-accordion-button usa-button-unstyled"

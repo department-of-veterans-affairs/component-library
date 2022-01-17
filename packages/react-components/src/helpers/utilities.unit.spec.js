@@ -2,9 +2,6 @@ import { expect } from 'chai';
 import { uniqueId } from './utilities';
 
 describe('uniqueId functionality', () => {
-  it('generates a unique ID', () => {
-    expect(uniqueId()).to.equal('1');
-  });
   it('appends the unique to a prefix if provided', () => {
     expect(uniqueId('contact_')).to.equal('contact_1');
   });
