@@ -88,6 +88,16 @@ export namespace Components {
     }
     interface VaBackToTop {
     }
+    interface VaBreadcrumbs {
+        /**
+          * Analytics tracking function(s) will not be called
+         */
+        "disableAnalytics": boolean;
+        /**
+          * Adds an aria-label attribute to the <nav /> element.
+         */
+        "label": string;
+    }
     interface VaCheckbox {
         /**
           * The aria-describedby attribute for the <intput> in the shadow DOM.
@@ -335,6 +345,12 @@ declare global {
         prototype: HTMLVaBackToTopElement;
         new (): HTMLVaBackToTopElement;
     };
+    interface HTMLVaBreadcrumbsElement extends Components.VaBreadcrumbs, HTMLStencilElement {
+    }
+    var HTMLVaBreadcrumbsElement: {
+        prototype: HTMLVaBreadcrumbsElement;
+        new (): HTMLVaBreadcrumbsElement;
+    };
     interface HTMLVaCheckboxElement extends Components.VaCheckbox, HTMLStencilElement {
     }
     var HTMLVaCheckboxElement: {
@@ -407,6 +423,7 @@ declare global {
         "va-additional-info": HTMLVaAdditionalInfoElement;
         "va-alert": HTMLVaAlertElement;
         "va-back-to-top": HTMLVaBackToTopElement;
+        "va-breadcrumbs": HTMLVaBreadcrumbsElement;
         "va-checkbox": HTMLVaCheckboxElement;
         "va-featured-content": HTMLVaFeaturedContentElement;
         "va-loading-indicator": HTMLVaLoadingIndicatorElement;
@@ -514,6 +531,17 @@ declare namespace LocalJSX {
         "visible"?: boolean;
     }
     interface VaBackToTop {
+    }
+    interface VaBreadcrumbs {
+        /**
+          * Analytics tracking function(s) will not be called
+         */
+        "disableAnalytics"?: boolean;
+        /**
+          * Adds an aria-label attribute to the <nav /> element.
+         */
+        "label"?: string;
+        "onComponent-library-analytics"?: (event: CustomEvent<any>) => void;
     }
     interface VaCheckbox {
         /**
@@ -773,6 +801,7 @@ declare namespace LocalJSX {
         "va-additional-info": VaAdditionalInfo;
         "va-alert": VaAlert;
         "va-back-to-top": VaBackToTop;
+        "va-breadcrumbs": VaBreadcrumbs;
         "va-checkbox": VaCheckbox;
         "va-featured-content": VaFeaturedContent;
         "va-loading-indicator": VaLoadingIndicator;
@@ -795,6 +824,7 @@ declare module "@stencil/core" {
             "va-additional-info": LocalJSX.VaAdditionalInfo & JSXBase.HTMLAttributes<HTMLVaAdditionalInfoElement>;
             "va-alert": LocalJSX.VaAlert & JSXBase.HTMLAttributes<HTMLVaAlertElement>;
             "va-back-to-top": LocalJSX.VaBackToTop & JSXBase.HTMLAttributes<HTMLVaBackToTopElement>;
+            "va-breadcrumbs": LocalJSX.VaBreadcrumbs & JSXBase.HTMLAttributes<HTMLVaBreadcrumbsElement>;
             "va-checkbox": LocalJSX.VaCheckbox & JSXBase.HTMLAttributes<HTMLVaCheckboxElement>;
             "va-featured-content": LocalJSX.VaFeaturedContent & JSXBase.HTMLAttributes<HTMLVaFeaturedContentElement>;
             "va-loading-indicator": LocalJSX.VaLoadingIndicator & JSXBase.HTMLAttributes<HTMLVaLoadingIndicatorElement>;
