@@ -1,4 +1,4 @@
-import { Component, Host, h } from '@stencil/core';
+import { Component, h } from '@stencil/core';
 
 @Component({
   tag: 'va-process-list',
@@ -8,11 +8,9 @@ import { Component, Host, h } from '@stencil/core';
 export class VaProcessList {
   render() {
     return (
-      <Host>
-        <ol role="list">
-          <slot></slot>
-        </ol>
-      </Host>
+      <ol role="list">
+        <slot></slot>
+      </ol>
     );
   }
 }
