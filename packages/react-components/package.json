@@ -1,6 +1,6 @@
 {
   "name": "@department-of-veterans-affairs/react-components",
-  "version": "3.3.3",
+  "version": "4.0.1",
   "description": "VA.gov component library in React",
   "keywords": [
     "react",
@@ -31,7 +31,6 @@
   },
   "dependencies": {
     "classnames": "^2.2.6",
-    "lodash": "^4.17.15",
     "number-to-words": "^1.2.4",
     "prop-types": "^15.6.2",
     "react-focus-lock": "^2.5.1",
