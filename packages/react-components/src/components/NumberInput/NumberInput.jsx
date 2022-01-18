@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { uniqueId } from 'lodash';
+import { uniqueId } from '../../helpers/utilities';
 
 import { makeField } from '../../helpers/fields';
 
@@ -56,9 +56,7 @@ class NumberInput extends React.Component {
       <div className={this.props.errorMessage ? 'usa-input-error' : undefined}>
         <label
           className={
-            this.props.errorMessage !== undefined
-              ? 'usa-input-error-label'
-              : undefined
+            this.props.errorMessage ? 'usa-input-error-label' : undefined
           }
           htmlFor={this.inputId}
         >

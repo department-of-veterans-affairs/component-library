@@ -1,12 +1,12 @@
 import React from 'react';
-import {OMBInfo} from '@department-of-veterans-affairs/component-library';
+import { OMBInfo } from '@department-of-veterans-affairs/component-library';
 
 export default {
   title: 'Components/OMBInfo',
   component: OMBInfo,
 };
 
-const Template = (args) => <OMBInfo {...args} />;
+const Template = args => <OMBInfo {...args} />;
 
 const defaultArgs = {
   resBurden: 120,
@@ -22,3 +22,10 @@ WithoutOMBNumber.args = { ...defaultArgs, ombNumber: '' };
 
 export const WithoutResponseBurden = Template.bind({});
 WithoutResponseBurden.args = { ...defaultArgs, resBurden: undefined };
+
+export const WithCustomRespondentBurdenBenefitType = Template.bind({});
+WithCustomRespondentBurdenBenefitType.args = {
+  ...defaultArgs,
+  resBurden: 90,
+  benefitType: 'EXAMPLE BENEFITS',
+};

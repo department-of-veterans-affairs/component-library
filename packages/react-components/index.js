@@ -24,12 +24,10 @@ import OMBInfo from './OMBInfo';
 import Pagination from './Pagination';
 import PrivacyAgreement from './PrivacyAgreement';
 import ProcessList from './ProcessList';
-import ProgressBar from './ProgressBar';
 import ProgressButton from './ProgressButton';
 import PromoBanner, { PROMO_BANNER_TYPES } from './PromoBanner';
 import RadioButtons from './RadioButtons';
 import SearchMenu from './SearchMenu';
-import SegmentedProgressBar from './SegmentedProgressBar';
 import Select from './Select';
 import SystemDownView from './SystemDownView';
 import Table from './Table';
@@ -70,13 +68,11 @@ export {
   Pagination,
   PrivacyAgreement,
   ProcessList,
-  ProgressBar,
   ProgressButton,
   PromoBanner,
   PROMO_BANNER_TYPES,
   RadioButtons,
   SearchMenu,
-  SegmentedProgressBar,
   Select,
   SystemDownView,
   Table,

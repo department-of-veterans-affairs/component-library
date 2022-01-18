@@ -18,24 +18,23 @@ class OMBInfo extends React.Component {
     this.setState({ modalOpen: false });
   };
 
-  modalContents = minutes => (
+  modalContents = (minutes, benefitType) => (
     <div>
       <h3 id={`${this.id}-title`}>Privacy Act Statement</h3>
       {minutes && (
         <p>
           <strong>Respondent Burden:</strong> We need this information to
-          determine your eligibility for education benefits (38 U.S.C. 3471).
-          Title 38, United States Code, allows us to ask for this information.
-          We estimate that you will need an average of {minutes} minutes to
-          review the instructions, find the information, and complete this form.
-          The VA cannot conduct or sponsor a collection of information unless a
-          valid OMB (Office of Management and Budget) control number is
-          displayed. You are not required to respond to a collection of
-          information if this number is not displayed. Valid OMB control numbers
-          can be located on the OMB Internet Page at
-          www.reginfo.gov/public/do/PRAMain. If desired, you can call{' '}
-          <a href="+18008271000">1-800-827-1000</a> to get information on where
-          to send comments or suggestions about this form.
+          determine your eligibility for {benefitType} (38 U.S.C. 3471). Title
+          38, United States Code, allows us to ask for this information. We
+          estimate that you will need an average of {minutes} minutes to review
+          the instructions, find the information, and complete this form. The VA
+          cannot conduct or sponsor a collection of information unless a valid
+          OMB (Office of Management and Budget) control number is displayed. You
+          are not required to respond to a collection of information if this
+          number is not displayed. Valid OMB control numbers can be located on
+          the OMB Internet Page at www.reginfo.gov/public/do/PRAMain. If
+          desired, you can call <a href="+18008271000">1-800-827-1000</a> to get
+          information on where to send comments or suggestions about this form.
         </p>
       )}
       <p>
@@ -52,7 +51,7 @@ class OMBInfo extends React.Component {
         58VA21/22/28, Compensation, Pension, Education, and Vocational
         Rehabilitation and Employment Records - VA, and published in the Federal
         Register. Your obligation to respond is required to obtain or retain
-        education benefits. Giving us your SSN account information is voluntary.
+        {benefitType}. Giving us your SSN account information is voluntary.
         Refusal to provide your SSN by itself will not result in the denial of
         benefits. The VA will not deny an individual benefits for refusing to
         provide his or her SSN unless the disclosure of the SSN is required by a
@@ -70,7 +69,7 @@ class OMBInfo extends React.Component {
   );
 
   render() {
-    const { resBurden, ombNumber, expDate } = this.props;
+    const { resBurden, benefitType, ombNumber, expDate } = this.props;
 
     return (
       <div className="omb-info">
@@ -97,7 +96,7 @@ class OMBInfo extends React.Component {
           contents={
             this.props.children
               ? this.props.children
-              : this.modalContents(resBurden)
+              : this.modalContents(resBurden, benefitType)
           }
           id={this.id}
           visible={this.state.modalOpen}
@@ -110,9 +109,16 @@ class OMBInfo extends React.Component {
 
 OMBInfo.propTypes = {
   /**
-   * Respondent burden. How many minutes the form is expected to take.
+   * Displays the Respondent Burden section in the Privacy Act Statement modal
+   * and how many minutes the form is expected to take.
    */
   resBurden: PropTypes.number,
+
+  /**
+   * The name of the benefit displayed in the Respondent Burden section
+   * of the Privacy Act Statement.
+   */
+  benefitType: PropTypes.string,
 
   /**
    * OMB control number / form number
@@ -128,6 +134,10 @@ OMBInfo.propTypes = {
    * Child elements (content) of modal when displayed
    */
   children: PropTypes.node,
+};
+
+OMBInfo.defaultProps = {
+  benefitType: 'benefits',
 };
 
 export default OMBInfo;

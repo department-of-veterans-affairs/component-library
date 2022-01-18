@@ -24,14 +24,12 @@ import OMBInfo from './components/OMBInfo/OMBInfo';
 import Pagination from './components/Pagination/Pagination';
 import PrivacyAgreement from './components/PrivacyAgreement/PrivacyAgreement';
 import ProcessList from './components/ProcessList/ProcessList';
-import ProgressBar from './components/ProgressBar/ProgressBar';
 import ProgressButton from './components/ProgressButton/ProgressButton';
 import PromoBanner, {
   PROMO_BANNER_TYPES,
 } from './components/PromoBanner/PromoBanner';
 import RadioButtons from './components/RadioButtons/RadioButtons';
 import SearchMenu from './components/SearchMenu/SearchMenu';
-import SegmentedProgressBar from './components/SegmentedProgressBar/SegmentedProgressBar';
 import Select from './components/Select/Select';
 import SystemDownView from './components/SystemDownView/SystemDownView';
 import Table from './components/Table/Table';
@@ -72,13 +70,11 @@ export {
   Pagination,
   PrivacyAgreement,
   ProcessList,
-  ProgressBar,
   ProgressButton,
   PromoBanner,
   PROMO_BANNER_TYPES,
   RadioButtons,
   SearchMenu,
-  SegmentedProgressBar,
   Select,
   SystemDownView,
   Table,
