@@ -59,7 +59,6 @@ const UtilityStyling = ({}) => {
   return (
     <va-process-list>
       <li>
-        <h3>First step</h3>
         <p>Look at me in mobile view</p>
         <va-additional-info
           trigger="Show more"
@@ -69,7 +68,6 @@ const UtilityStyling = ({}) => {
         </va-additional-info>
       </li>
       <li>
-        <h3>Next step</h3>
         <p>Look at me in desktop view</p>
         <p className="vads-u-display--none medium-screen:vads-u-display--block vads-u-background-color--gray-cool-light">
           I'm only visible on desktop.
