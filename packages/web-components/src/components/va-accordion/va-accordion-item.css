@@ -73,6 +73,7 @@ p {
   font-weight: 400;
   line-height: 26px;
   margin: 0;
+  width: 100%;
 }
 
 /* Hiding since element would be duplicated via the Shadow DOM */
