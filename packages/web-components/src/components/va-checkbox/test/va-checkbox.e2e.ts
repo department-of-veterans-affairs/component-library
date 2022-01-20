@@ -193,17 +193,4 @@ describe('va-checkbox', () => {
     await inputEl.click();
     expect(await inputEl.getProperty('checked')).toBeTruthy();
   });
-
-  it('fires event for parent when changed', async () => {
-    const page = await newE2EPage();
-    await page.setContent(
-      '<va-checkbox aria-describedby="test" label="A label" value="something" />',
-    );
-
-    const changeSpy = await page.spyOnEvent('vaChange');
-    const inputEl = await page.find('va-checkbox');
-    await inputEl.click();
-
-    expect(changeSpy).toHaveReceivedEvent();
-  });
 });
