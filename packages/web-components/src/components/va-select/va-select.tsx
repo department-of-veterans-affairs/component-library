@@ -48,8 +48,14 @@ export class VaSelect {
    */
   @Prop() enableAnalytics: boolean;
 
+  /**
+   * The event attached to select's onkeydown
+   */
   @Event() vaKeyDown: EventEmitter;
 
+  /**
+   * The event emitted when the selected value changes
+   */
   @Event() vaSelect: EventEmitter;
 
   @Event({

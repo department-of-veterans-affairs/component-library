@@ -511,6 +511,9 @@ declare namespace LocalJSX {
           * If true, the alert will be full width. Should be for emergency communication only.
          */
         "fullWidth"?: boolean;
+        /**
+          * Fires when the component is closed by clicking on the close icon. This fires only when closeable is true.
+         */
         "onClose"?: (event: CustomEvent<any>) => void;
         "onComponent-library-analytics"?: (event: CustomEvent<any>) => void;
         /**
@@ -640,6 +643,9 @@ declare namespace LocalJSX {
          */
         "label"?: string;
         "onComponent-library-analytics"?: (event: CustomEvent<any>) => void;
+        /**
+          * The event emitted when the selected value changes
+         */
         "onVaValueChange"?: (event: CustomEvent<any>) => void;
         /**
           * Whether or not this input field is required.
@@ -663,6 +669,9 @@ declare namespace LocalJSX {
           * The name attribute for the input element.
          */
         "name"?: string;
+        /**
+          * The event emitted when the selected option value changes
+         */
         "onRadioOptionSelected"?: (event: CustomEvent<any>) => void;
         /**
           * The value attribute for the input element.
@@ -706,7 +715,13 @@ declare namespace LocalJSX {
          */
         "name"?: string;
         "onComponent-library-analytics"?: (event: CustomEvent<any>) => void;
+        /**
+          * The event attached to select's onkeydown
+         */
         "onVaKeyDown"?: (event: CustomEvent<any>) => void;
+        /**
+          * The event emitted when the selected value changes
+         */
         "onVaSelect"?: (event: CustomEvent<any>) => void;
         /**
           * Whether or not this is a required field.

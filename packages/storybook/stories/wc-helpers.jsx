@@ -43,7 +43,7 @@ export const componentStructure = comp => {
  * Used to generate some docs for web components in Storybook
  */
 export const propStructure = comp => {
-  return comp.props.reduce((propObj, prop) => {
+  const props = comp.props.reduce((propObj, prop) => {
     propObj[prop.attr] = {
       description: prop.docs,
       required: prop.required,
@@ -54,6 +54,19 @@ export const propStructure = comp => {
     };
     return propObj;
   }, {});
+
+  const events = comp.events.reduce((eventObj, event) => {
+    // remove analytics event
+    if (event.event === 'component-library-analytics') return eventObj;
+
+    eventObj[event.event] = {
+      description: event.docs,
+    };
+
+    return eventObj;
+  }, {});
+
+  return { ...props, ...events };
 };
 
 /**

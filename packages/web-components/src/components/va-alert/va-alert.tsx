@@ -72,6 +72,10 @@ export class VaAlert {
   })
   vaComponentDidLoad: EventEmitter;
 
+  /**
+   * Fires when the component is closed by clicking on the close icon. This fires only
+   * when closeable is true.
+   */
   @Event({
     composed: true,
     bubbles: true,

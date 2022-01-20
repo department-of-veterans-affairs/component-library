@@ -45,6 +45,9 @@ export class VaRadio {
   })
   componentLibraryAnalytics: EventEmitter;
 
+  /**
+   * The event emitted when the selected value changes
+   */
   @Event({
     composed: true,
     bubbles: true,
