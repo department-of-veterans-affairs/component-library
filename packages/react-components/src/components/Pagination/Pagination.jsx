@@ -62,17 +62,16 @@ class Pagination extends Component {
     let nextPage;
     if (this.props.pages > this.props.page) {
       nextPage = (
-        <button
+        <a
           aria-label={`Next page ${this.props.ariaLabelSuffix}`}
           onClick={() => {
             this.onPageSelect(this.props.page + 1, 'nav-paginate-next');
           }}
           onKeyDown={e => this.handleKeyDown(e, this.props.page + 1)}
-          type="button"
+          tabIndex={0}
         >
           Next
-          <span aria-hidden></span>
-        </button>
+        </a>
       );
     }
     return nextPage;
@@ -82,17 +81,16 @@ class Pagination extends Component {
     let prevPage;
     if (this.props.page > 1) {
       prevPage = (
-        <button
+        <a
           aria-label={`Previous page ${this.props.ariaLabelSuffix}`}
           onClick={() => {
             this.onPageSelect(this.props.page - 1, 'nav-paginate-previous');
           }}
           onKeyDown={e => this.handleKeyDown(e, this.props.page - 1)}
-          type="button"
+          tabIndex={0}
         >
-          <span aria-hidden></span>
           Prev
-        </button>
+        </a>
       );
     }
     return prevPage;
@@ -109,20 +107,25 @@ class Pagination extends Component {
     let lastPage;
     if (showLastPage && currentPage < totalPages - maxPageListLength + 1) {
       lastPage = (
-        <>
-          <button aria-label="..." type="button">
+        <span>
+          <a
+            aria-label="..."
+            onKeyDown={e => this.handleKeyDown(e, null)}
+            tabIndex={0}
+          >
             ...
-          </button>
-          <button
+          </a>
+          <a
             aria-label={`Load last page ${this.props.ariaLabelSuffix}`}
             onClick={() => {
               this.onPageSelect(totalPages, 'nav-paginate-number');
             }}
-            type="button"
+            onKeyDown={e => this.handleKeyDown(e, totalPages)}
+            tabIndex={0}
           >
             {totalPages}
-          </button>
-        </>
+          </a>
+        </span>
       );
     }
     return lastPage;
@@ -168,6 +171,7 @@ class Pagination extends Component {
     const keyCode = e.which || e.keyCode;
     if (keyCode === 13 || keyCode === 32) {
       e.preventDefault();
+      if (!pageNumber) return;
       this.onPageSelect(pageNumber, 'nav-paginate-number');
     }
   };
@@ -186,17 +190,17 @@ class Pagination extends Component {
       });
 
       return (
-        <button
+        <a
           aria-current={this.props.page === pageNumber ? 'true' : null}
           aria-label={`Page ${pageNumber} ${ariaLabelSuffix}`}
           key={pageNumber}
           className={pageClass}
           onClick={() => this.onPageSelect(pageNumber, 'nav-paginate-number')}
           onKeyDown={e => this.handleKeyDown(e, pageNumber)}
-          type="button"
+          tabIndex={0}
         >
           {pageNumber}
-        </button>
+        </a>
       );
     });
 

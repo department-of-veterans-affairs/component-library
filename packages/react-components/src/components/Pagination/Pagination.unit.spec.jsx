@@ -18,7 +18,7 @@ describe('<Pagination>', () => {
         ariaLabelSuffix="of search results"
       />,
     );
-    const links = tree.find('button[aria-label*="of search results"]');
+    const links = tree.find('a[aria-label*="of search results"]');
     expect(links).to.have.length(6);
     links.forEach((link, index) => {
       if (index === 5) {
@@ -33,7 +33,7 @@ describe('<Pagination>', () => {
 
   it('should show both "Prev" and "Next" if in a middle page', () => {
     const tree = shallow(<Pagination {...props} page={3} pages={5} />);
-    const links = tree.find('button');
+    const links = tree.find('a');
     expect(links).to.have.length(7);
     links.forEach((link, index) => {
       if (index === 0) {
@@ -50,7 +50,7 @@ describe('<Pagination>', () => {
 
   it('should show "Prev" but not "Next" if on the last page', () => {
     const tree = shallow(<Pagination {...props} page={5} pages={5} />);
-    const links = tree.find('button');
+    const links = tree.find('a');
     expect(links).to.have.length(6);
     links.forEach((link, index) => {
       if (index === 0) {
@@ -67,7 +67,7 @@ describe('<Pagination>', () => {
 
   it('should show the correct range of pages if the max is exceeded', () => {
     const tree = shallow(<Pagination {...props} page={5} pages={20} />);
-    const links = tree.find('button');
+    const links = tree.find('a');
     expect(links).to.have.length(12);
     links.forEach((link, index) => {
       if (index === 0) {
@@ -92,7 +92,7 @@ describe('<Pagination>', () => {
         showLastPage
       />,
     );
-    const links = tree.find('button');
+    const links = tree.find('a');
     expect(links).to.have.length(12);
     links.forEach((link, index) => {
       if (index === 0) {
@@ -121,7 +121,7 @@ describe('<Pagination>', () => {
         showLastPage
       />,
     );
-    const links = tree.find('button');
+    const links = tree.find('a');
     expect(links).to.have.length(12);
     links.forEach((link, index) => {
       if (index === 0) {
@@ -149,7 +149,7 @@ describe('<Pagination>', () => {
         showLastPage
       />,
     );
-    const links = tree.find('button');
+    const links = tree.find('a');
     links.forEach(link => {
       if (link.text() === currentPage.toString()) {
         expect(link.prop('aria-current')).to.equal('true');
