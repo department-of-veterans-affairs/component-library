@@ -2,7 +2,6 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import classNames from 'classnames';
-import { range } from 'lodash';
 
 class Pagination extends Component {
   static propTypes = {
@@ -155,8 +154,7 @@ class Pagination extends Component {
       start = 1;
       end = totalPages + 1;
     }
-
-    return range(start, end);
+    return Array.from({ length: end - start }, (_, i) => i + start);
   };
 
   handleKeyDown = (e, pageNumber) => {
