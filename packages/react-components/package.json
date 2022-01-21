@@ -1,6 +1,6 @@
 {
   "name": "@department-of-veterans-affairs/react-components",
-  "version": "4.0.0",
+  "version": "4.0.1",
   "description": "VA.gov component library in React",
   "keywords": [
     "react",
@@ -31,7 +31,6 @@
   },
   "dependencies": {
     "classnames": "^2.2.6",
-    "lodash": "^4.17.15",
     "number-to-words": "^1.2.4",
     "prop-types": "^15.6.2",
     "react-focus-lock": "^2.5.1",
@@ -54,7 +53,7 @@
     "@babel/plugin-syntax-import-meta": "^7.10.4",
     "@babel/preset-env": "^7.12.10",
     "@babel/preset-react": "^7.14.5",
-    "@department-of-veterans-affairs/formation": "^6.17.3",
+    "@department-of-veterans-affairs/formation": "^6.17.5",
     "@department-of-veterans-affairs/web-components": "workspace:packages/web-components",
     "@testing-library/react": "^12.0.0",
     "@testing-library/user-event": "^13.2.1",
