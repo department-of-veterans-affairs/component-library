@@ -163,32 +163,6 @@ describe('<Pagination>', () => {
     tree.unmount();
   });
 
-  it('should change to next page when using the space key on the next page anchor', () => {
-    const tree = shallow(<Pagination {...props} page={3} pages={5} />);
-    const links = tree.find('a');
-    const nextPageAnchor = tree.find('a[aria-label="Next page "]');
-    nextPageAnchor.simulate('keydown', { key: ' ' });
-    links.forEach(link => {
-      if (link.text() === 'Page 4 ') {
-        expect(link.prop('aria-current')).to.equal('true');
-      }
-    });
-    tree.unmount();
-  });
-
-  it('should tab from anchor to anchor', () => {
-    const tree = shallow(<Pagination {...props} page={3} pages={5} />);
-    const links = tree.find('a');
-    const prevPageAnchor = tree.find('a[aria-label="Previous page "]');
-    prevPageAnchor.simulate('keydown', { key: 'Tab' });
-    links.forEach(link => {
-      if (link.text() === 'Page 1 ') {
-        expect(link).to.equal(document.activeElement);
-      }
-    });
-    tree.unmount();
-  });
-
   it('should pass aXe check', () =>
     axeCheck(<Pagination {...props} page={3} pages={5} />));
 });
