@@ -1,5 +1,5 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { mount, shallow } from 'enzyme';
 import { expect } from 'chai';
 import Pagination from './Pagination';
 import { axeCheck } from '../../helpers/test-helpers';
@@ -165,4 +165,24 @@ describe('<Pagination>', () => {
 
   it('should pass aXe check', () =>
     axeCheck(<Pagination {...props} page={3} pages={5} />));
+
+  it('should change pages when selecting the previous page button using the space key', () => {
+    const tree = mount(
+      <Pagination
+        onPageSelect={pageNumber => {
+          tree.setProps({ page: pageNumber });
+        }}
+        page={5}
+        pages={20}
+      />,
+    );
+    const previousPageAnchor = tree.find('a[aria-label="Previous page "]');
+    previousPageAnchor.props().onKeyDown({ keyCode: 32, preventDefault() {} });
+
+    const currentPageAnchor = tree.find('a[aria-current="true"]');
+
+    expect(currentPageAnchor.text()).to.equal('4');
+
+    tree.unmount();
+  });
 });
