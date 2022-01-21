@@ -1663,9 +1663,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@department-of-veterans-affairs/formation@npm:^6.14.0, @department-of-veterans-affairs/formation@npm:^6.17.3":
-  version: 6.17.3
-  resolution: "@department-of-veterans-affairs/formation@npm:6.17.3"
+"@department-of-veterans-affairs/formation@npm:^6.17.5":
+  version: 6.17.5
+  resolution: "@department-of-veterans-affairs/formation@npm:6.17.5"
   dependencies:
     "@fortawesome/fontawesome-free": ^5.6.3
     domready: ^1.0.8
@@ -1675,7 +1675,7 @@ __metadata:
     "@fortawesome/fontawesome-free": ^5.6.3
     foundation-sites: 5
     uswds: ^1.6.10
-  checksum: 9a2c71765e28d3874181120ed72c89f8eb4365cfa76c4cba44540eee149d9f5b1d969c623cb268674e62dab2fdee8c7a4098103b6d55cecae13348d8e303bafa
+  checksum: ae564c46dc2644818f62b40b1a6a8260994753c689c4d7e6b25fb4764fd57aed6a5a9dbca88b90b2c982dd3a078e93bc3b64415f5d173e998f8848e7d8c9c080
   languageName: node
   linkType: hard
 
@@ -1696,7 +1696,7 @@ __metadata:
     "@babel/plugin-syntax-import-meta": ^7.10.4
     "@babel/preset-env": ^7.12.10
     "@babel/preset-react": ^7.14.5
-    "@department-of-veterans-affairs/formation": ^6.17.3
+    "@department-of-veterans-affairs/formation": ^6.17.5
     "@department-of-veterans-affairs/web-components": "workspace:packages/web-components"
     "@testing-library/react": ^12.0.0
     "@testing-library/user-event": ^13.2.1
@@ -1758,7 +1758,7 @@ __metadata:
   dependencies:
     "@babel/core": ^7.15.8
     "@department-of-veterans-affairs/component-library": "workspace:packages/core"
-    "@department-of-veterans-affairs/formation": ^6.17.3
+    "@department-of-veterans-affairs/formation": ^6.17.5
     "@mdx-js/react": ^1.6.22
     "@storybook/addon-actions": ^6.3.11
     "@storybook/addon-docs": ^6.3.11
@@ -1783,7 +1783,7 @@ __metadata:
   dependencies:
     "@axe-core/puppeteer": ^4.1.1
     "@babel/core": ^7.12.13
-    "@department-of-veterans-affairs/formation": ^6.14.0
+    "@department-of-veterans-affairs/formation": ^6.17.5
     "@stencil/core": ^2.10.0
     "@stencil/postcss": ^2.0.0
     "@stencil/react-output-target": ^0.0.9
