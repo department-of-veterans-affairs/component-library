@@ -3,6 +3,8 @@ import { mount, shallow } from 'enzyme';
 import { expect } from 'chai';
 import Pagination from './Pagination';
 import { axeCheck } from '../../helpers/test-helpers';
+import userEvent from '@testing-library/user-event';
+
 // import ReactTestUtils from 'react-dom/test-utils';
 
 const props = {
@@ -191,7 +193,6 @@ describe('<Pagination>', () => {
     // https://github.com/enzymejs/enzyme/issues/2337#issuecomment-609071803
     const root = document.createElement('div');
     global.document.body.appendChild(root);
-
     const tree = mount(
       <Pagination
         onPageSelect={pageNumber => {
@@ -202,26 +203,11 @@ describe('<Pagination>', () => {
       />,
       { attachTo: root },
     );
-
     const previousPageAnchor = tree.find('a[aria-label="Previous page "]');
-
-    previousPageAnchor.is(':focus'); // false
-
     previousPageAnchor.getDOMNode().focus();
-
-    previousPageAnchor.is(':focus'); // true
-    // document.activeElement is now <a aria-label="Previous page " tabindex="0">Prev</a>
-
-    previousPageAnchor.props().onKeyDown({ keyCode: 9 });
-    // ReactTestUtils.Simulate.keyDown(previousPageAnchor.getDOMNode(), {
-    //   keyCode: 9,
-    // }); // this works too
-    // previousPageAnchor.invoke('onKeyDown')({ keyCode: 9 }); // this works too
-
+    userEvent.tab();
     const nextFocusableElement = tree.find(':focus');
-
     expect(nextFocusableElement.text()).to.equal('1');
-
     tree.unmount();
     global.document.body.removeChild(root);
   });
