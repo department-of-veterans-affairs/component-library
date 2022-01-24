@@ -38,6 +38,9 @@ export default {
   },
 };
 
+// Fix for displaying component name when using bindings in 'Show code'
+VaAlert.displayName = 'VaAlert';
+
 const defaultArgs = {
   'status': 'info',
   'background-only': false,
