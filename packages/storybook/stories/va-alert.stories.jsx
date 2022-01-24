@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
+import { VaAlert } from '@department-of-veterans-affairs/web-components/react-bindings';
 import { getWebComponentDocs, propStructure } from './wc-helpers';
 
 const alertDocs = getWebComponentDocs('va-alert');
@@ -16,7 +17,7 @@ export default {
         disable: true,
       },
     },
-    onclose: {
+    vaClose: {
       description:
         'If closeable is true, this event is triggered when an alert is closed.',
       table: {
@@ -47,7 +48,7 @@ const defaultArgs = {
   'closeable': false,
   'full-width': false,
   'headline': <h3 slot="headline">Alert headline</h3>,
-  'onclose': undefined,
+  'vaClose': undefined,
 };
 
 const Template = ({
@@ -60,8 +61,26 @@ const Template = ({
   closeable,
   'full-width': fullWidth,
   headline,
-  onclose,
+  vaClose,
+  storybookOnlyClose,
 }) => {
+  if (storybookOnlyClose)
+    return (
+      <VaAlert
+        status={status}
+        background-only={backgroundOnly}
+        show-icon={showIcon}
+        disable-analytics={disableAnalytics}
+        visible={visible}
+        close-btn-aria-label={closeBtnAriaLabel}
+        closeable={closeable}
+        full-width={fullWidth}
+        onVaClose={vaClose}
+      >
+        {headline}
+        <div>This is an alert</div>
+      </VaAlert>
+    );
   return (
     <va-alert
       status={status}
@@ -72,7 +91,7 @@ const Template = ({
       close-btn-aria-label={closeBtnAriaLabel}
       closeable={closeable}
       full-width={fullWidth}
-      onclose={onclose}
+      onVaClose={vaClose}
     >
       {headline}
       <div>This is an alert</div>
@@ -106,14 +125,14 @@ export const Closeable = Template.bind({});
 Closeable.args = {
   ...defaultArgs,
   closeable: true,
-  onclose: () => console.log('Close event triggered'),
+  vaClose: () => console.log('Close event triggered'),
+  storybookOnlyClose: true,
 };
 
 export const Fullwidth = Template.bind({});
 Fullwidth.args = {
   ...defaultArgs,
   'full-width': true,
-  'onclose': () => console.log('Close event triggered'),
   'status': 'warning',
 };
 
