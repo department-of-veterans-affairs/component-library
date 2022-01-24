@@ -1,23 +1,25 @@
 :host {
   display: block;
   --visible-checkbox-size: 2rem;
-  --visible-checkbox-top-margin: 0.14em;
+  --visible-checkbox-top-margin: 0.14rem;
 }
 
-span.required {
-    color: var(--color-secondary-dark);
+:host p {
+  margin-top: 0;
+  margin-bottom: 1.2rem;
 }
 
 #error-message {
     color: var(--color-secondary-dark);
     display: block;
+    margin-bottom: 1.2rem;
 }
 
 input {
   /* Make the clickable element the same size and position as the box */
   height: var(--visible-checkbox-size);
   width: var(--visible-checkbox-size);
-  margin: var(--visible-checkbox-top-margin) 0 0 0;
+  margin: var(--visible-checkbox-top-margin) 0 0 2.4rem;
 
   padding: 0;
   opacity: 0;
@@ -33,24 +35,22 @@ label {
 input+label {
   cursor: pointer;
   font-weight: 400;
-  margin-bottom: 0.65em;
-  margin-left: 1.7em;
+  margin-left: 2.4rem;
+  margin-top: 1.2rem;
 }
 
 /* The actual box */
 input+label::before {
   display: block;
   float: left;
-  margin-left: -1.7em;
   margin-top: var(--visible-checkbox-top-margin);
-  margin-right: 0;
+  margin-right: 1rem;
   pointer-events: none;
   border-radius: 2px;
   box-shadow: 0 0 0 1px var(--color-gray-medium);
   content: "\A0";
   height: var(--visible-checkbox-size);
   width: var(--visible-checkbox-size);
-  text-indent: 0.15em;
 }
 
 input:checked+label::before {
@@ -66,14 +66,22 @@ input:not([disabled]):focus+label:before {
   outline-offset: 2px;
 }
 
-:host([error]) {
-    border-left: 4px solid var(--color-secondary-dark);
-    padding-left: 1.5rem;
-    padding-top: .8rem;
-    position: relative;
-    right: 1.9rem;
+:host([error]:not([error=''])) {
+  border-left: 4px solid var(--color-secondary-dark);
+  padding-left: 1.8rem;
+  position: relative;
 }
 
 :host([error]) label, :host([error]) span {
     font-weight: 700;
+}
+
+:host([required]) label > span {
+  color: var(--color-secondary-dark);
+  margin: 0px 0.35rem;
+}
+
+::slotted([slot='description']){
+  margin-top: 0 !important;
+  margin-bottom: 1.2rem !important;
 }
