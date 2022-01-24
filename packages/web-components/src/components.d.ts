@@ -100,7 +100,7 @@ export namespace Components {
     }
     interface VaCheckbox {
         /**
-          * The aria-describedby attribute for the <input> in the shadow DOM.
+          * The aria-describedby attribute for the `<input>` in the shadow DOM.
          */
         "ariaDescribedby": string;
         /**
@@ -118,7 +118,7 @@ export namespace Components {
         /**
           * The error message to render.
          */
-        "error"?: string | HTMLElement;
+        "error"?: string;
         /**
           * The label for the checkbox.
          */
@@ -286,7 +286,7 @@ export namespace Components {
     }
     interface VaTextInput {
         /**
-          * The aria-describedby attribute for the <input> in the shadow DOM.
+          * The aria-describedby attribute for the `<input>` in the shadow DOM.
          */
         "ariaDescribedby"?: string;
         /**
@@ -300,7 +300,7 @@ export namespace Components {
         /**
           * The error message to render.
          */
-        "error"?: string | HTMLElement;
+        "error"?: string;
         /**
           * The inputmode attribute.
          */
@@ -570,7 +570,7 @@ declare namespace LocalJSX {
     }
     interface VaCheckbox {
         /**
-          * The aria-describedby attribute for the <input> in the shadow DOM.
+          * The aria-describedby attribute for the `<input>` in the shadow DOM.
          */
         "ariaDescribedby"?: string;
         /**
@@ -588,7 +588,7 @@ declare namespace LocalJSX {
         /**
           * The error message to render.
          */
-        "error"?: string | HTMLElement;
+        "error"?: string;
         /**
           * The label for the checkbox.
          */
@@ -782,7 +782,7 @@ declare namespace LocalJSX {
     }
     interface VaTextInput {
         /**
-          * The aria-describedby attribute for the <input> in the shadow DOM.
+          * The aria-describedby attribute for the `<input>` in the shadow DOM.
          */
         "ariaDescribedby"?: string;
         /**
@@ -796,7 +796,7 @@ declare namespace LocalJSX {
         /**
           * The error message to render.
          */
-        "error"?: string | HTMLElement;
+        "error"?: string;
         /**
           * The inputmode attribute.
          */
