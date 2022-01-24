@@ -118,7 +118,7 @@ export namespace Components {
         /**
           * The error message to render.
          */
-        "error"?: string | HTMLElement;
+        "error"?: string;
         /**
           * The label for the checkbox.
          */
@@ -300,7 +300,7 @@ export namespace Components {
         /**
           * The error message to render.
          */
-        "error"?: string | HTMLElement;
+        "error"?: string;
         /**
           * The inputmode attribute.
          */
@@ -588,7 +588,7 @@ declare namespace LocalJSX {
         /**
           * The error message to render.
          */
-        "error"?: string | HTMLElement;
+        "error"?: string;
         /**
           * The label for the checkbox.
          */
@@ -796,7 +796,7 @@ declare namespace LocalJSX {
         /**
           * The error message to render.
          */
-        "error"?: string | HTMLElement;
+        "error"?: string;
         /**
           * The inputmode attribute.
          */

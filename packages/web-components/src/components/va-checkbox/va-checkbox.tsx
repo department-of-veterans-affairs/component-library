@@ -24,7 +24,7 @@ export class VaCheckbox {
   /**
    * The error message to render.
    */
-  @Prop() error?: string | HTMLElement;
+  @Prop() error?: string;
 
   /**
    * The description to render. If this prop exists, va-checkbox will render it

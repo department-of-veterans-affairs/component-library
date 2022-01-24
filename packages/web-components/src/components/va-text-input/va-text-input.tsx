@@ -30,7 +30,7 @@ export class VaTextInput {
   /**
    * The error message to render.
    */
-  @Prop() error?: string | HTMLElement;
+  @Prop() error?: string;
 
   /**
    * Set the input to required and render the (Required) text.
