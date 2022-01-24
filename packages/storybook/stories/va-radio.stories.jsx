@@ -1,4 +1,5 @@
 import React from 'react';
+import { EVENTS_DESCRIPTION } from './events';
 import {
   getWebComponentDocs,
   componentStructure,
@@ -15,7 +16,7 @@ export default {
     docs: {
       description: {
         component:
-          'This component has 1 event: onVaValueChange. If you need to use these events in React applications, please use the bindings import for this web component. See https://design.va.gov/documentation/developers#react-applications.',
+          'This component has 1 event: vaValueChange.' + EVENTS_DESCRIPTION,
       },
     },
   },

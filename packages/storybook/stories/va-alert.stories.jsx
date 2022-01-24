@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
+import { EVENTS_DESCRIPTION } from './events';
 import { getWebComponentDocs, propStructure } from './wc-helpers';
 
 const alertDocs = getWebComponentDocs('va-alert');
@@ -20,8 +21,11 @@ export default {
   parameters: {
     docs: {
       description: {
-        component: `Use a heading element with an attribute named slot and a value of "headline" to control what is displayed for the alert's headline. 
-        Any children passed into this component without a parent slot "headline" will render in the alert's body. This component has 1 event: onClose and onVaComponentDidLoad. If you need to use these events in React applications, please use the bindings import for this web component. See https://design.va.gov/documentation/developers#react-applications.`,
+        component:
+          `Use a heading element with an attribute named slot and a value of "headline" to control what is displayed for the alert's headline. 
+        Any children passed into this component without a parent slot "headline" will render in the alert's body. 
+        This component has 2 events: close and vaComponentDidLoad.` +
+          EVENTS_DESCRIPTION,
       },
     },
   },

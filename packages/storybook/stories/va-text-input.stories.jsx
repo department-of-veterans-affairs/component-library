@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
+import { EVENTS_DESCRIPTION } from './events';
 import { getWebComponentDocs, propStructure } from './wc-helpers';
 
 const textInputDocs = getWebComponentDocs('va-text-input');
@@ -10,7 +11,8 @@ export default {
     docs: {
       description: {
         component:
-          'This component has 2 events: onVaChange and onVaBlur. If you need to use these events in React applications, please use the bindings import for this web component. See https://design.va.gov/documentation/developers#react-applications.',
+          'This component has 2 events: vaChange and vaBlur.' +
+          EVENTS_DESCRIPTION,
       },
     },
   },
