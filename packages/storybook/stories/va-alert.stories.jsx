@@ -16,22 +16,13 @@ export default {
         disable: true,
       },
     },
-    onclose: {
-      description:
-        'If closeable is true, this event is triggered when an alert is closed.',
-      table: {
-        defaultValue: {
-          detail: undefined,
-        },
-      },
-      control: false,
-    },
   },
   parameters: {
     docs: {
       description: {
         component: `Use a heading element with an attribute named slot and a value of "headline" to control what is displayed for the alert's headline. 
-        Any children passed into this component without a parent slot "headline" will render in the alert's body.`,
+        Any children passed into this component without a parent slot "headline" will render in the alert's body. 
+        This component has 1 event: onClose and onVaComponentDidLoad. If you need to use these events in React applications, please use the bindings import for this web component.`,
       },
     },
   },
@@ -47,7 +38,6 @@ const defaultArgs = {
   'closeable': false,
   'full-width': false,
   'headline': <h3 slot="headline">Alert headline</h3>,
-  'onclose': undefined,
 };
 
 const Template = ({

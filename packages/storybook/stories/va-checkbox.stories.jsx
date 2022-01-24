@@ -7,6 +7,14 @@ const checkboxDocs = getWebComponentDocs('va-checkbox');
 
 export default {
   title: 'Components/va-checkbox',
+  parameters: {
+    docs: {
+      description: {
+        component:
+          'This component has 2 events: onVaChange and onVaBlur. If you need to use these events in React applications, please use the bindings import for this web component.',
+      },
+    },
+  },
 };
 
 const defaultArgs = {

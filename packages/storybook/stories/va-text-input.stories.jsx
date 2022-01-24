@@ -6,6 +6,14 @@ const textInputDocs = getWebComponentDocs('va-text-input');
 
 export default {
   title: 'Components/va-text-input',
+  parameters: {
+    docs: {
+      description: {
+        component:
+          'This component has 2 events: onVaChange and onVaBlur. If you need to use these events in React applications, please use the bindings import for this web component.',
+      },
+    },
+  },
 };
 
 const defaultArgs = {

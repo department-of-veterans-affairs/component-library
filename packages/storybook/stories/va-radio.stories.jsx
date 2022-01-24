@@ -11,6 +11,14 @@ const radioItem = getWebComponentDocs('va-radio-option');
 export default {
   title: 'Components/va-radio',
   subcomponents: componentStructure(radioItem),
+  parameters: {
+    docs: {
+      description: {
+        component:
+          'This component has 1 event: onVaValueChange. If you need to use these events in React applications, please use the bindings import for this web component.',
+      },
+    },
+  },
 };
 
 const Template = ({

@@ -6,6 +6,14 @@ const selectDocs = getWebComponentDocs('va-select');
 
 export default {
   title: 'Components/va-select',
+  parameters: {
+    docs: {
+      description: {
+        component:
+          'This component has 2 events: onVaSelect and onVaKeyDown. If you need to use these events in React applications, please use the bindings import for this web component.',
+      },
+    },
+  },
 };
 
 const defaultArgs = {
