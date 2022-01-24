@@ -21,8 +21,7 @@ export default {
     docs: {
       description: {
         component: `Use a heading element with an attribute named slot and a value of "headline" to control what is displayed for the alert's headline. 
-        Any children passed into this component without a parent slot "headline" will render in the alert's body. 
-        This component has 1 event: onClose and onVaComponentDidLoad. If you need to use these events in React applications, please use the bindings import for this web component.`,
+        Any children passed into this component without a parent slot "headline" will render in the alert's body. This component has 1 event: onClose and onVaComponentDidLoad. If you need to use these events in React applications, please use the bindings import for this web component. See https://design.va.gov/documentation/developers#react-applications.`,
       },
     },
   },
