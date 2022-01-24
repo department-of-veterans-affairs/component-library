@@ -69,7 +69,7 @@ describe('va-alert', () => {
       '<va-alert closeable="true">Content inside</va-alert>',
     );
 
-    const closeSpy = await page.spyOnEvent('close');
+    const closeSpy = await page.spyOnEvent('vaClose');
 
     const button = await page.find('va-alert >>> button');
     await button.click();
