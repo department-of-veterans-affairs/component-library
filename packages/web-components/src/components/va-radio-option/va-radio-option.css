@@ -2,15 +2,16 @@
 
 :host {
   display: block;
+  margin-top: 1rem;
 }
 
 label {
   box-sizing: border-box;
   outline: none;
-  padding: 6px 12px;
   display: inline-block;
   margin: 0;
   width: 100%;
+  padding-left: 2.4rem;
 }
 
 label::before {
@@ -19,14 +20,12 @@ label::before {
   box-shadow: 0 0 0 2px var(--color-white), 0 0 0 3px var(--color-gray-medium);
   height: 1.4rem;
   line-height: 1.4rem;
-  margin-left: 3px;
-  margin-right: 0.75em;
+  margin-right: 1rem;
   width: 1.4rem;
   background: var(--color-white);
   background-color: var(--color-white);
   content: '\A0';
   display: inline-block;
-  text-indent: 0.15em;
 }
 
 :host([aria-checked='true']) label::before {
