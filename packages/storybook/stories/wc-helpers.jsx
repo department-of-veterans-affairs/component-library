@@ -36,6 +36,22 @@ export const componentStructure = comp => {
   };
 };
 
+const getEventObj = array => {
+  return array.reduce((eventObj, event) => {
+    // remove analytics event
+    if (event.event === 'component-library-analytics') return eventObj;
+
+    eventObj[event.event] = {
+      description: event.docs,
+      type: {
+        name: 'Event',
+      },
+    };
+
+    return eventObj;
+  }, {});
+};
+
 /**
  * Expects an object returned by `getWebComponentDocs`.
  * Returns an object that matches the structure in:
@@ -55,18 +71,10 @@ export const propStructure = comp => {
     return propObj;
   }, {});
 
-  const events = comp.events.reduce((eventObj, event) => {
-    // remove analytics event
-    if (event.event === 'component-library-analytics') return eventObj;
+  const events = getEventObj(comp.events);
+  const listeners = getEventObj(comp.listeners);
 
-    eventObj[event.event] = {
-      description: event.docs,
-    };
-
-    return eventObj;
-  }, {});
-
-  return { ...props, ...events };
+  return { ...props, ...events, ...listeners };
 };
 
 /**

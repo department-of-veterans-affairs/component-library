@@ -1,4 +1,5 @@
 import React from 'react';
+import { EVENTS_DESCRIPTION } from './events';
 import {
   getWebComponentDocs,
   componentStructure,
@@ -14,6 +15,16 @@ export default {
   parameters: {
     actions: {
       handles: ['component-library-analytics'],
+    },
+    docs: {
+      description: {
+        component: 'This component has 1 event: vaChange.' + EVENTS_DESCRIPTION,
+      },
+    },
+  },
+  argTypes: {
+    vaChange: {
+      description: 'The event emitted when the input value changes.',
     },
   },
 };

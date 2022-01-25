@@ -16,8 +16,17 @@ export default {
     docs: {
       description: {
         component:
-          'This component has 1 event: vaValueChange.' + EVENTS_DESCRIPTION,
+          'This component has 3 events: vaValueChange, keydown and radioOptionSelected.' +
+          EVENTS_DESCRIPTION,
       },
+    },
+  },
+  argTypes: {
+    keydown: {
+      description: 'The event emitted when a key is pressed.',
+    },
+    radioOptionSelected: {
+      description: 'The event emitted when the selected option value changes.',
     },
   },
 };

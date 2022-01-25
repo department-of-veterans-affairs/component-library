@@ -1,4 +1,5 @@
 import React from 'react';
+import { EVENTS_DESCRIPTION } from './events';
 import {
   getWebComponentDocs,
   componentStructure,
@@ -11,6 +12,21 @@ const accordionItem = getWebComponentDocs('va-accordion-item');
 export default {
   title: 'Components/va-accordion',
   subcomponents: componentStructure(accordionItem),
+  argTypes: {
+    accordionItemToggled: {
+      description:
+        'This event is fired when an accordion item is opened or closed.',
+    },
+  },
+  parameters: {
+    docs: {
+      description: {
+        component:
+          'This component has 1 event: accordionItemToggled.' +
+          EVENTS_DESCRIPTION,
+      },
+    },
+  },
 };
 
 const Template = args => {
@@ -66,9 +82,9 @@ const TemplateSubheader = args => {
 };
 
 const defaultArgs = {
-  bordered: false,
-  headline: <h6 slot="headline">First Amendment Headline</h6>,
-  'open-single': undefined
+  'bordered': false,
+  'headline': <h6 slot="headline">First Amendment Headline</h6>,
+  'open-single': undefined,
 };
 
 export const Default = Template.bind({});
