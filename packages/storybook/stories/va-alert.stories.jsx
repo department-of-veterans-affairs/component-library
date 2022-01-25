@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
-import { EVENTS_DESCRIPTION } from './events';
+import { generateEventsDescription } from './events';
 import { getWebComponentDocs, propStructure } from './wc-helpers';
 
 const alertDocs = getWebComponentDocs('va-alert');
@@ -33,9 +33,8 @@ export default {
       description: {
         component:
           `Use a heading element with an attribute named slot and a value of "headline" to control what is displayed for the alert's headline. 
-        Any children passed into this component without a parent slot "headline" will render in the alert's body. 
-        This component has 2 events: close and vaComponentDidLoad.` +
-          EVENTS_DESCRIPTION,
+        Any children passed into this component without a parent slot "headline" will render in the alert's body.` +
+          generateEventsDescription(alertDocs),
       },
     },
   },

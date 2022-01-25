@@ -1,5 +1,5 @@
 import React from 'react';
-import { EVENTS_DESCRIPTION } from './events';
+import { generateEventsDescription } from './events';
 import {
   getWebComponentDocs,
   componentStructure,
@@ -15,9 +15,7 @@ export default {
   parameters: {
     docs: {
       description: {
-        component:
-          'This component has 3 events: vaValueChange, keydown and radioOptionSelected.' +
-          EVENTS_DESCRIPTION,
+        component: generateEventsDescription(radioDocs),
       },
     },
   },

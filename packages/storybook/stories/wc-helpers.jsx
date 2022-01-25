@@ -38,9 +38,6 @@ export const componentStructure = comp => {
 
 const getEventObj = array => {
   return array.reduce((eventObj, event) => {
-    // remove analytics event
-    if (event.event === 'component-library-analytics') return eventObj;
-
     eventObj[event.event] = {
       description: event.docs,
       type: {

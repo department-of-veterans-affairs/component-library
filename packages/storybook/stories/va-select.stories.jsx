@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import React, { useState } from 'react';
-import { EVENTS_DESCRIPTION } from './events';
+import { generateEventsDescription } from './events';
 import { getWebComponentDocs, propStructure } from './wc-helpers';
 
 const selectDocs = getWebComponentDocs('va-select');
@@ -10,9 +10,7 @@ export default {
   parameters: {
     docs: {
       description: {
-        component:
-          'This component has 2 events: vaSelect and vaKeyDown.' +
-          EVENTS_DESCRIPTION,
+        component: generateEventsDescription(selectDocs),
       },
     },
   },

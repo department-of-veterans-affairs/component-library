@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable react/no-unescaped-entities */
 import React from 'react';
-import { EVENTS_DESCRIPTION } from './events';
+import { generateEventsDescription } from './events';
 import { getWebComponentDocs, propStructure } from './wc-helpers';
 
 const checkboxDocs = getWebComponentDocs('va-checkbox');
@@ -11,9 +11,7 @@ export default {
   parameters: {
     docs: {
       description: {
-        component:
-          'This component has 2 events: vaChange and vaBlur.' +
-          EVENTS_DESCRIPTION,
+        component: generateEventsDescription(checkboxDocs),
       },
     },
   },
