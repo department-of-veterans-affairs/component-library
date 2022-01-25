@@ -52,7 +52,7 @@ class Pagination extends Component {
     // Conditionally track the event.
     if (this.props.enableAnalytics) {
       this.props.trackEvent({
-        event: eventID,
+        'event': eventID,
         'paginate-page-number': page,
       });
     }
@@ -68,6 +68,7 @@ class Pagination extends Component {
             this.onPageSelect(this.props.page + 1, 'nav-paginate-next');
           }}
           onKeyDown={e => this.handleKeyDown(e, this.props.page + 1)}
+          tabIndex={0}
         >
           Next
         </a>
@@ -86,6 +87,7 @@ class Pagination extends Component {
             this.onPageSelect(this.props.page - 1, 'nav-paginate-previous');
           }}
           onKeyDown={e => this.handleKeyDown(e, this.props.page - 1)}
+          tabIndex={0}
         >
           Prev
         </a>
@@ -106,12 +108,20 @@ class Pagination extends Component {
     if (showLastPage && currentPage < totalPages - maxPageListLength + 1) {
       lastPage = (
         <span>
-          <a aria-label="...">...</a>
+          <a
+            aria-label="..."
+            onKeyDown={e => this.handleKeyDown(e, null)}
+            tabIndex={0}
+          >
+            ...
+          </a>
           <a
             aria-label={`Load last page ${this.props.ariaLabelSuffix}`}
             onClick={() => {
               this.onPageSelect(totalPages, 'nav-paginate-number');
             }}
+            onKeyDown={e => this.handleKeyDown(e, totalPages)}
+            tabIndex={0}
           >
             {totalPages}
           </a>
@@ -161,6 +171,7 @@ class Pagination extends Component {
     const keyCode = e.which || e.keyCode;
     if (keyCode === 13 || keyCode === 32) {
       e.preventDefault();
+      if (!pageNumber) return;
       this.onPageSelect(pageNumber, 'nav-paginate-number');
     }
   };
@@ -186,6 +197,7 @@ class Pagination extends Component {
           className={pageClass}
           onClick={() => this.onPageSelect(pageNumber, 'nav-paginate-number')}
           onKeyDown={e => this.handleKeyDown(e, pageNumber)}
+          tabIndex={0}
         >
           {pageNumber}
         </a>
