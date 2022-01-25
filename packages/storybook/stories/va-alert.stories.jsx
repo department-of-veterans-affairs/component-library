@@ -64,7 +64,7 @@ const Template = ({
   closeable,
   'full-width': fullWidth,
   headline,
-  vaClose,
+  onVaClose,
   storybookOnlyClose,
 }) => {
   if (storybookOnlyClose)
@@ -78,7 +78,7 @@ const Template = ({
         close-btn-aria-label={closeBtnAriaLabel}
         closeable={closeable}
         full-width={fullWidth}
-        onVaClose={vaClose}
+        onVaClose={onVaClose}
       >
         {headline}
         <div>This is an alert</div>
@@ -94,7 +94,6 @@ const Template = ({
       close-btn-aria-label={closeBtnAriaLabel}
       closeable={closeable}
       full-width={fullWidth}
-      onVaClose={vaClose}
     >
       {headline}
       <div>This is an alert</div>
@@ -128,7 +127,7 @@ export const Closeable = Template.bind({});
 Closeable.args = {
   ...defaultArgs,
   closeable: true,
-  vaClose: () => console.log('Close event triggered'),
+  onVaClose: () => console.log('Close event triggered'),
   storybookOnlyClose: true,
 };
 
