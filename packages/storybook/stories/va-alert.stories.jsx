@@ -51,7 +51,6 @@ const defaultArgs = {
   'closeable': false,
   'full-width': false,
   'headline': <h3 slot="headline">Alert headline</h3>,
-  'vaClose': undefined,
 };
 
 const Template = ({
@@ -65,9 +64,8 @@ const Template = ({
   'full-width': fullWidth,
   headline,
   onVaClose,
-  storybookOnlyClose,
 }) => {
-  if (storybookOnlyClose)
+  if (onVaClose)
     return (
       <VaAlert
         status={status}
@@ -84,6 +82,7 @@ const Template = ({
         <div>This is an alert</div>
       </VaAlert>
     );
+
   return (
     <va-alert
       status={status}
@@ -128,7 +127,6 @@ Closeable.args = {
   ...defaultArgs,
   closeable: true,
   onVaClose: () => console.log('Close event triggered'),
-  storybookOnlyClose: true,
 };
 
 export const Fullwidth = Template.bind({});
