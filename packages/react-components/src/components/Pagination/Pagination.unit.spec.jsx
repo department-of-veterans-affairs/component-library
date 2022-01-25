@@ -1,8 +1,11 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { mount, shallow } from 'enzyme';
 import { expect } from 'chai';
 import Pagination from './Pagination';
 import { axeCheck } from '../../helpers/test-helpers';
+import userEvent from '@testing-library/user-event';
+
+// import ReactTestUtils from 'react-dom/test-utils';
 
 const props = {
   onPageSelect: () => {},
@@ -165,4 +168,47 @@ describe('<Pagination>', () => {
 
   it('should pass aXe check', () =>
     axeCheck(<Pagination {...props} page={3} pages={5} />));
+
+  it('should change pages when selecting the previous page button using the space key', () => {
+    const tree = mount(
+      <Pagination
+        onPageSelect={pageNumber => {
+          tree.setProps({ page: pageNumber });
+        }}
+        page={5}
+        pages={20}
+      />,
+    );
+    const previousPageAnchor = tree.find('a[aria-label="Previous page "]');
+    previousPageAnchor.props().onKeyDown({ keyCode: 32, preventDefault() {} });
+
+    const currentPageAnchor = tree.find('a[aria-current="true"]');
+
+    expect(currentPageAnchor.text()).to.equal('4');
+
+    tree.unmount();
+  });
+
+  it('should change focus from prev anchor to page 1 anchor', () => {
+    // https://github.com/enzymejs/enzyme/issues/2337#issuecomment-609071803
+    const root = document.createElement('div');
+    global.document.body.appendChild(root);
+    const tree = mount(
+      <Pagination
+        onPageSelect={pageNumber => {
+          tree.setProps({ page: pageNumber });
+        }}
+        page={5}
+        pages={10}
+      />,
+      { attachTo: root },
+    );
+    const previousPageAnchor = tree.find('a[aria-label="Previous page "]');
+    previousPageAnchor.getDOMNode().focus();
+    userEvent.tab();
+    const nextFocusableElement = tree.find(':focus');
+    expect(nextFocusableElement.text()).to.equal('1');
+    tree.unmount();
+    global.document.body.removeChild(root);
+  });
 });
