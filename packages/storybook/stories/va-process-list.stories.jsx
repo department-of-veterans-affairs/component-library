@@ -68,7 +68,7 @@ const UtilityStyling = ({}) => {
         </va-additional-info>
       </li>
       <li>
-        <p>Look at me in desktop view</p>
+        <p className="vads-u-margin-top--0">Look at me in desktop view</p>
         <p className="vads-u-display--none medium-screen:vads-u-display--block vads-u-background-color--gray-cool-light">
           I'm only visible on desktop.
           <br />
