@@ -30,7 +30,7 @@ export class VaTextInput {
   /**
    * The error message to render.
    */
-  @Prop() error?: string | HTMLElement;
+  @Prop() error?: string;
 
   /**
    * Set the input to required and render the (Required) text.
@@ -73,7 +73,7 @@ export class VaTextInput {
   @Prop() name?: string;
 
   /**
-   * The aria-describedby attribute for the <input> in the shadow DOM.
+   * The aria-describedby attribute for the `<input>` in the shadow DOM.
    */
   @Prop() ariaDescribedby?: string = '';
 

@@ -24,7 +24,7 @@ export class VaCheckbox {
   /**
    * The error message to render.
    */
-  @Prop() error?: string | HTMLElement;
+  @Prop() error?: string;
 
   /**
    * The description to render. If this prop exists, va-checkbox will render it
@@ -52,7 +52,7 @@ export class VaCheckbox {
   @Prop({ mutable: true }) checked: boolean = false;
 
   /**
-   * The aria-describedby attribute for the <intput> in the shadow DOM.
+   * The aria-describedby attribute for the `<input>` in the shadow DOM.
    */
   @Prop() ariaDescribedby: string = '';
 
@@ -130,6 +130,7 @@ export class VaCheckbox {
             <slot name="description" />
           )}
         </div>
+        {this.error && <span id="error-message">{this.error}</span>}
         <input
           type="checkbox"
           id="checkbox-element"
@@ -142,7 +143,6 @@ export class VaCheckbox {
           {this.label}
           {this.required && <span class="required">(Required)</span>}
         </label>
-        {this.error && <span id="error-message">{this.error}</span>}
       </Host>
     );
   }
