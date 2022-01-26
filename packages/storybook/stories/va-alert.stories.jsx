@@ -17,7 +17,7 @@ export default {
         disable: true,
       },
     },
-    vaClose: {
+    closeEvent: {
       description:
         'If closeable is true, this event is triggered when an alert is closed.',
       table: {
@@ -63,20 +63,20 @@ const Template = ({
   closeable,
   'full-width': fullWidth,
   headline,
-  onVaClose,
+  onCloseEvent,
 }) => {
-  if (onVaClose)
+  if (onCloseEvent)
     return (
       <VaAlert
         status={status}
-        background-only={backgroundOnly}
-        show-icon={showIcon}
-        disable-analytics={disableAnalytics}
+        backgroundOnly={backgroundOnly}
+        showIcon={showIcon}
+        disableAnalytics={disableAnalytics}
         visible={visible}
-        close-btn-aria-label={closeBtnAriaLabel}
+        closeBtnAriaLabel={closeBtnAriaLabel}
         closeable={closeable}
-        full-width={fullWidth}
-        onVaClose={onVaClose}
+        fullWidth={fullWidth}
+        onCloseEvent={onCloseEvent}
       >
         {headline}
         <div>This is an alert</div>
@@ -126,7 +126,7 @@ export const Closeable = Template.bind({});
 Closeable.args = {
   ...defaultArgs,
   closeable: true,
-  onVaClose: () => console.log('Close event triggered'),
+  onCloseEvent: () => console.log('Close event triggered'),
 };
 
 export const Fullwidth = Template.bind({});
