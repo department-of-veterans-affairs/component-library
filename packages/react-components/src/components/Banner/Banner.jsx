@@ -2,7 +2,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 // Relative imports.
-
 import { VaAlert } from '@department-of-veterans-affairs/web-components/react-bindings';
 
 const DISMISSED_BANNERS_KEY = 'DISMISSED_BANNERS';
@@ -98,7 +97,7 @@ export class Banner extends Component {
     // Track the dismiss event.
     if (recordEvent) {
       recordEvent({
-        event: 'int-alert-box-close',
+        'event': 'int-alert-box-close',
         'alert-box-headline': title,
       });
     }
@@ -137,7 +136,7 @@ export class Banner extends Component {
           visible
           full-width
           closeable={showClose}
-          onVaClose={onCloseAlert}
+          onCloseEvent={onCloseAlert}
           status={type}
         >
           <h3 slot="headline">{title}</h3>
