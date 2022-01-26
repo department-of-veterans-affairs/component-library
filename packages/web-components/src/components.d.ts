@@ -539,7 +539,7 @@ declare namespace LocalJSX {
         /**
           * Fires when the component is closed by clicking on the close icon. This fires only when closeable is true.
          */
-        "onClose"?: (event: CustomEvent<any>) => void;
+        "onCloseEvent"?: (event: CustomEvent<any>) => void;
         "onComponent-library-analytics"?: (event: CustomEvent<any>) => void;
         /**
           * Fires when the component has successfully finished rendering for the first time.

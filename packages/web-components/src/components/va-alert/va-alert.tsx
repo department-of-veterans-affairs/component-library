@@ -80,7 +80,7 @@ export class VaAlert {
     composed: true,
     bubbles: true,
   })
-  close: EventEmitter;
+  closeEvent: EventEmitter;
 
   @Event({
     eventName: 'component-library-analytics',
@@ -90,7 +90,7 @@ export class VaAlert {
   componentLibraryAnalytics: EventEmitter;
 
   private closeHandler(e: MouseEvent): void {
-    this.close.emit(e);
+    this.closeEvent.emit(e);
   }
 
   private handleAlertBodyClick(e: MouseEvent): void {
