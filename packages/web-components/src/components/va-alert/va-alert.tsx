@@ -72,11 +72,15 @@ export class VaAlert {
   })
   vaComponentDidLoad: EventEmitter;
 
+  /**
+   * Fires when the component is closed by clicking on the close icon. This fires only
+   * when closeable is true.
+   */
   @Event({
     composed: true,
     bubbles: true,
   })
-  close: EventEmitter;
+  closeEvent: EventEmitter;
 
   @Event({
     eventName: 'component-library-analytics',
@@ -86,7 +90,7 @@ export class VaAlert {
   componentLibraryAnalytics: EventEmitter;
 
   private closeHandler(e: MouseEvent): void {
-    this.close.emit(e);
+    this.closeEvent.emit(e);
   }
 
   private handleAlertBodyClick(e: MouseEvent): void {

@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
+import { VaAlert } from '@department-of-veterans-affairs/web-components/react-bindings';
 import { getWebComponentDocs, propStructure } from './wc-helpers';
 
 const alertDocs = getWebComponentDocs('va-alert');
@@ -16,7 +17,7 @@ export default {
         disable: true,
       },
     },
-    onclose: {
+    closeEvent: {
       description:
         'If closeable is true, this event is triggered when an alert is closed.',
       table: {
@@ -37,6 +38,9 @@ export default {
   },
 };
 
+// Fix for displaying component name when using bindings in 'Show code'
+VaAlert.displayName = 'VaAlert';
+
 const defaultArgs = {
   'status': 'info',
   'background-only': false,
@@ -47,7 +51,6 @@ const defaultArgs = {
   'closeable': false,
   'full-width': false,
   'headline': <h3 slot="headline">Alert headline</h3>,
-  'onclose': undefined,
 };
 
 const Template = ({
@@ -60,8 +63,26 @@ const Template = ({
   closeable,
   'full-width': fullWidth,
   headline,
-  onclose,
+  onCloseEvent,
 }) => {
+  if (onCloseEvent)
+    return (
+      <VaAlert
+        status={status}
+        backgroundOnly={backgroundOnly}
+        showIcon={showIcon}
+        disableAnalytics={disableAnalytics}
+        visible={visible}
+        closeBtnAriaLabel={closeBtnAriaLabel}
+        closeable={closeable}
+        fullWidth={fullWidth}
+        onCloseEvent={onCloseEvent}
+      >
+        {headline}
+        <div>This is an alert</div>
+      </VaAlert>
+    );
+
   return (
     <va-alert
       status={status}
@@ -72,7 +93,6 @@ const Template = ({
       close-btn-aria-label={closeBtnAriaLabel}
       closeable={closeable}
       full-width={fullWidth}
-      onclose={onclose}
     >
       {headline}
       <div>This is an alert</div>
@@ -106,14 +126,13 @@ export const Closeable = Template.bind({});
 Closeable.args = {
   ...defaultArgs,
   closeable: true,
-  onclose: () => console.log('Close event triggered'),
+  onCloseEvent: () => console.log('Close event triggered'),
 };
 
 export const Fullwidth = Template.bind({});
 Fullwidth.args = {
   ...defaultArgs,
   'full-width': true,
-  'onclose': () => console.log('Close event triggered'),
   'status': 'warning',
 };
 
