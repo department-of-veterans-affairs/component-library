@@ -13,7 +13,7 @@ const defaultArgs = {
   'disable-border': false,
   'page': 3,
   'pages': 5,
-  'show-last-page': true,
+  'show-last-page': false,
 };
 
 const Template = ({

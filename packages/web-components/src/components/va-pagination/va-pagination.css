@@ -7,6 +7,9 @@ nav {
   border-top: 1px solid var(--color-gray-lightest);
   display: flex;
   font-family: 'Source Sans Pro';
+  justify-content: center;
+  overflow: hidden;
+  padding: 2rem 0 1rem;
   width: 100%;
 }
 
@@ -15,15 +18,13 @@ nav {
 }
 
 ul {
-  display: flex;
-  justify-content: center;
   list-style-type: none;
   margin: 0;
-  overflow: hidden;
-  padding: 2rem 0 1rem;
-  position: relative;
-  text-align: center;
-  width: 100%;
+  padding: 0;
+}
+
+li {
+  display: inline-flex;
 }
 
 button {
@@ -69,9 +70,8 @@ button:focus {
 }
 
 .pagination-inner {
-  display: flex;
-  justify-content: center;
   overflow: hidden;
+  text-align: center;
   white-space: nowrap;
 }
 
@@ -109,7 +109,7 @@ button:focus {
 }
 
 @media (min-width: 481px) {
-  .pagination-prev:not(:empty) > .button-prev::before {
+  .pagination-prev:not(:empty) .button-prev::before {
     content: '\2039\a0\a0';
   }
 }
@@ -122,7 +122,7 @@ button:focus {
 }
 
 @media (min-width: 481px) {
-  .pagination-next:not(:empty) > .button-next::after {
+  .pagination-next:not(:empty) .button-next::after {
     content: '\a0\a0\203a';
   }
 }

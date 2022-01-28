@@ -164,11 +164,10 @@ export class VaPagination {
     return (
       <Host>
         <nav class={classnames({ 'remove-border': disableBorder })}>
-          <ul>
+          <ul class="pagination-prev">
             {/* START PREV BUTTON */}
-
             {this.page > 1 && (
-              <li class="pagination-prev">
+              <li>
                 <button
                   aria-label={`Previous page ${this.ariaLabelSuffix}`}
                   class="button-prev"
@@ -185,45 +184,46 @@ export class VaPagination {
                 </button>
               </li>
             )}
-
             {/* END PREV BUTTON */}
+          </ul>
 
-            <div class="pagination-inner">
-              {renderPages}
-              {/* START ELLIPSIS AND LAST BUTTON */}
-              {showLastPage && page < pages - maxPageListLength + 1 && (
-                <Fragment>
-                  <li>
-                    <button
-                      aria-label="..."
-                      class="button-inner"
-                      onKeyDown={e => this.handleKeyDown(e, null)}
-                      type="button"
-                    >
-                      ...
-                    </button>
-                  </li>
-                  <li>
-                    <button
-                      aria-label={`Load last page ${this.ariaLabelSuffix}`}
-                      class="button-inner"
-                      onClick={() =>
-                        this.handlePageSelect(pages, 'nav-paginate-number')
-                      }
-                      onKeyDown={e => this.handleKeyDown(e, pages)}
-                      type="button"
-                    >
-                      {pages}
-                    </button>
-                  </li>
-                </Fragment>
-              )}
-              {/* END ELLIPSIS AND LAST BUTTON */}
-            </div>
+          <ul class="pagination-inner">
+            {renderPages}
+            {/* START ELLIPSIS AND LAST BUTTON */}
+            {showLastPage && page < pages - maxPageListLength + 1 && (
+              <Fragment>
+                <li>
+                  <button
+                    aria-label="..."
+                    class="button-inner"
+                    onKeyDown={e => this.handleKeyDown(e, null)}
+                    type="button"
+                  >
+                    ...
+                  </button>
+                </li>
+                <li>
+                  <button
+                    aria-label={`Load last page ${this.ariaLabelSuffix}`}
+                    class="button-inner"
+                    onClick={() =>
+                      this.handlePageSelect(pages, 'nav-paginate-number')
+                    }
+                    onKeyDown={e => this.handleKeyDown(e, pages)}
+                    type="button"
+                  >
+                    {pages}
+                  </button>
+                </li>
+              </Fragment>
+            )}
+            {/* END ELLIPSIS AND LAST BUTTON */}
+          </ul>
 
+          <ul class="pagination-next">
             {/* START NEXT BUTTON */}
             {this.pages > this.page && (
-              <li class="pagination-next">
+              <li>
                 <button
                   aria-label={`Next page ${this.ariaLabelSuffix}`}
                   class="button-next"
