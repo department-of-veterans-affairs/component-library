@@ -9,7 +9,7 @@ export default {
   parameters: {
     docs: {
       /* eslint-disable-next-line react/display-name */
-      page: () => <StoryDocs docs={processListDocs} />,
+      page: () => <StoryDocs data={processListDocs} />,
     },
   },
 };

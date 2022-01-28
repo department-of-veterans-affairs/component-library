@@ -60,13 +60,13 @@ export const propStructure = comp => {
  * Return a component with Storybook docs blocks in a standard order.
  * Accepts a JSON object as a prop representing component information
  */
-export function StoryDocs({ docs }) {
-  const noArgs = docs.props.length == 0;
+export function StoryDocs({ data }) {
+  const noArgs = data.props.length == 0;
   return (
     <>
       <Title />
       <Subtitle />
-      <Description markdown={docs.docs} />
+      <Description markdown={data.docs} />
       <Primary />
       {!noArgs && <ArgsTable story={PRIMARY_STORY} />}
       <Stories />
@@ -74,5 +74,5 @@ export function StoryDocs({ docs }) {
   );
 }
 StoryDocs.propTypes = {
-  docs: PropTypes.string.isRequired,
+  data: PropTypes.Object.isRequired,
 };
