@@ -168,6 +168,40 @@ export namespace Components {
     }
     interface VaOnThisPage {
     }
+    interface VaPagination {
+        /**
+          * TODO
+         */
+        "ariaLabelSuffix": string;
+        /**
+          * TODO
+         */
+        "enableAnalytics": boolean;
+        /**
+          * The maximum number of pages to show at once
+         */
+        "maxPageListLength": number;
+        /**
+          * The current page number
+         */
+        "page": number;
+        /**
+          * Fires when a page is selected
+         */
+        "pageSelect": (page) => void;
+        /**
+          * The total number of pages
+         */
+        "pages": number;
+        /**
+          * Whether or not to show the last page number when the page count exceeds `maxPageListLength`
+         */
+        "showLastPage": boolean;
+        /**
+          * Fires when a page is selected
+         */
+        "trackEvent": (event) => void;
+    }
     interface VaProgressBar {
         /**
           * Whether or not an analytics event will be fired.
@@ -399,6 +433,12 @@ declare global {
         prototype: HTMLVaOnThisPageElement;
         new (): HTMLVaOnThisPageElement;
     };
+    interface HTMLVaPaginationElement extends Components.VaPagination, HTMLStencilElement {
+    }
+    var HTMLVaPaginationElement: {
+        prototype: HTMLVaPaginationElement;
+        new (): HTMLVaPaginationElement;
+    };
     interface HTMLVaProgressBarElement extends Components.VaProgressBar, HTMLStencilElement {
     }
     var HTMLVaProgressBarElement: {
@@ -453,6 +493,7 @@ declare global {
         "va-featured-content": HTMLVaFeaturedContentElement;
         "va-loading-indicator": HTMLVaLoadingIndicatorElement;
         "va-on-this-page": HTMLVaOnThisPageElement;
+        "va-pagination": HTMLVaPaginationElement;
         "va-progress-bar": HTMLVaProgressBarElement;
         "va-radio": HTMLVaRadioElement;
         "va-radio-option": HTMLVaRadioOptionElement;
@@ -655,6 +696,40 @@ declare namespace LocalJSX {
     }
     interface VaOnThisPage {
     }
+    interface VaPagination {
+        /**
+          * TODO
+         */
+        "ariaLabelSuffix"?: string;
+        /**
+          * TODO
+         */
+        "enableAnalytics"?: boolean;
+        /**
+          * The maximum number of pages to show at once
+         */
+        "maxPageListLength"?: number;
+        /**
+          * The current page number
+         */
+        "page"?: number;
+        /**
+          * Fires when a page is selected
+         */
+        "pageSelect"?: (page) => void;
+        /**
+          * The total number of pages
+         */
+        "pages"?: number;
+        /**
+          * Whether or not to show the last page number when the page count exceeds `maxPageListLength`
+         */
+        "showLastPage"?: boolean;
+        /**
+          * Fires when a page is selected
+         */
+        "trackEvent"?: (event) => void;
+    }
     interface VaProgressBar {
         /**
           * Whether or not an analytics event will be fired.
@@ -851,6 +926,7 @@ declare namespace LocalJSX {
         "va-featured-content": VaFeaturedContent;
         "va-loading-indicator": VaLoadingIndicator;
         "va-on-this-page": VaOnThisPage;
+        "va-pagination": VaPagination;
         "va-progress-bar": VaProgressBar;
         "va-radio": VaRadio;
         "va-radio-option": VaRadioOption;
@@ -875,6 +951,7 @@ declare module "@stencil/core" {
             "va-featured-content": LocalJSX.VaFeaturedContent & JSXBase.HTMLAttributes<HTMLVaFeaturedContentElement>;
             "va-loading-indicator": LocalJSX.VaLoadingIndicator & JSXBase.HTMLAttributes<HTMLVaLoadingIndicatorElement>;
             "va-on-this-page": LocalJSX.VaOnThisPage & JSXBase.HTMLAttributes<HTMLVaOnThisPageElement>;
+            "va-pagination": LocalJSX.VaPagination & JSXBase.HTMLAttributes<HTMLVaPaginationElement>;
             "va-progress-bar": LocalJSX.VaProgressBar & JSXBase.HTMLAttributes<HTMLVaProgressBarElement>;
             "va-radio": LocalJSX.VaRadio & JSXBase.HTMLAttributes<HTMLVaRadioElement>;
             "va-radio-option": LocalJSX.VaRadioOption & JSXBase.HTMLAttributes<HTMLVaRadioOptionElement>;
