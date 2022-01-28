@@ -172,7 +172,7 @@ export class VaTextInput {
           maxlength={this.maxlength}
         />
         {this.maxlength && this.value.length >= this.maxlength && (
-          <small>(Max. {this.maxlength} characters)</small>
+          <small aria-live="polite">(Max. {this.maxlength} characters)</small>
         )}
       </Host>
     );
