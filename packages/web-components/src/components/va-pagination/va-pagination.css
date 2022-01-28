@@ -3,8 +3,10 @@
 }
 
 nav {
+  background-color: #fff;
   border-top: 1px solid var(--color-gray-lightest);
   display: flex;
+  font-family: 'Source Sans Pro';
   width: 100%;
 }
 
@@ -20,11 +22,6 @@ ul {
   width: 100%;
 }
 
-li {
-  align-items: center;
-  display: flex;
-}
-
 button {
   -moz-osx-font-smoothing: auto;
   -webkit-font-smoothing: auto;
@@ -33,6 +30,7 @@ button {
   color: var(--color-link-default);
   cursor: pointer;
   display: inline-flex;
+  font-family: inherit;
   font-size: 0.9em;
   font-weight: 400;
   justify-content: center;
@@ -47,34 +45,28 @@ button:focus {
   outline-offset: 2px;
 }
 
-.pagination-prev,
-.pagination-next {
-  display: flex;
-  position: relative;
-  /* border-radius: 0;
-  margin: 0; */
-}
-
-.pagination-prev > button,
-.pagination-next > button {
+.button-next,
+.button-prev {
   border-radius: 0;
   margin: 0;
 }
 
-.pagination-prev > button:hover,
-.pagination-next > button:hover {
+.button-next:hover,
+.button-prev:hover {
   background-color: transparent;
   color: var(--color-link-default);
   text-decoration: underline;
 }
 
-.pagination-prev:hover,
-.pagination-next:hover {
+.pagination-next:hover,
+.pagination-prev:hover {
   text-decoration: underline;
+  text-decoration-color: var(--color-primary);
 }
 
 .pagination-inner {
   display: flex;
+  justify-content: center;
   overflow: hidden;
   white-space: nowrap;
 }
@@ -93,14 +85,60 @@ button:focus {
   color: var(--color-white);
 }
 
-.pagination-prev,
+.button-active {
+  background-color: var(--color-primary);
+  color: var(--color-white);
+}
+
+.pagination-inner,
 .pagination-next,
-.pagination-inner {
+.pagination-prev {
   padding-bottom: 4px;
   padding-top: 4px;
 }
 
-.button-active {
-  background-color: var(--color-primary);
-  color: var(--color-white);
+@media (max-width: 768px) {
+  .pagination-prev {
+    margin-left: -3rem;
+    padding-right: 1rem;
+  }
+}
+
+@media (min-width: 481px) {
+  .pagination-prev:not(:empty) > .button-prev::before {
+    content: '\2039\a0\a0';
+  }
+}
+
+@media (max-width: 768px) {
+  .pagination-next {
+    margin-right: -3rem;
+    padding-left: 1rem;
+  }
+}
+
+@media (min-width: 481px) {
+  .pagination-next:not(:empty) > .button-next::after {
+    content: '\a0\a0\203a';
+  }
+}
+
+@media (min-width: 768px) {
+  .pagination-next,
+  .pagination-prev {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .pagination-inner {
+    width: 20rem;
+  }
+}
+
+@media (min-width: 1201px) {
+  .pagination-inner {
+    width: 40rem;
+  }
 }
