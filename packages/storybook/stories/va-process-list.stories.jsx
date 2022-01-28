@@ -1,11 +1,17 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
-import { getWebComponentDocs, propStructure } from './wc-helpers';
+import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
 
 const processListDocs = getWebComponentDocs('va-process-list');
 
 export default {
   title: 'Components/va-process-list',
+  parameters: {
+    docs: {
+      /* eslint-disable-next-line react/display-name */
+      page: () => <StoryDocs noArgs docs={processListDocs.docs} />,
+    },
+  },
 };
 
 const defaultArgs = {};

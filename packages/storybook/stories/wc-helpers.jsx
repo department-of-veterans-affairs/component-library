@@ -60,14 +60,14 @@ export const propStructure = comp => {
  * Return a component with Storybook docs blocks in a standard order.
  * Accepts a markdown string as a prop
  */
-export function StoryDocs({ docs }) {
+export function StoryDocs({ docs, noArgs = false }) {
   return (
     <>
       <Title />
       <Subtitle />
       <Description markdown={docs} />
       <Primary />
-      <ArgsTable story={PRIMARY_STORY} />
+      {!noArgs && <ArgsTable story={PRIMARY_STORY} />}
       <Stories />
     </>
   );
