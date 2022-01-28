@@ -200,7 +200,7 @@ export namespace Components {
         /**
           * Fires when a page is selected
          */
-        "trackEvent": (event) => void;
+        "trackEvent": (args) => void;
     }
     interface VaProgressBar {
         /**
@@ -731,7 +731,7 @@ declare namespace LocalJSX {
         /**
           * Fires when a page is selected
          */
-        "trackEvent"?: (event) => void;
+        "trackEvent"?: (args) => void;
     }
     interface VaProgressBar {
         /**
