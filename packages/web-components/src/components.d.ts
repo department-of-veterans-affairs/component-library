@@ -210,6 +210,10 @@ export namespace Components {
          */
         "checked": boolean;
         /**
+          * Optional id attribute override if unique id is needed, defaults to label
+         */
+        "customid": string;
+        /**
           * The text label for the input element.
          */
         "label": string;
@@ -702,6 +706,10 @@ declare namespace LocalJSX {
           * Whether or not the option is selected.
          */
         "checked"?: boolean;
+        /**
+          * Optional id attribute override if unique id is needed, defaults to label
+         */
+        "customid"?: string;
         /**
           * The text label for the input element.
          */

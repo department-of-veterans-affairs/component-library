@@ -31,6 +31,11 @@ export class VaRadioOption {
    */
   @Prop() ariaDescribedby: string;
 
+  /**
+   * Optional id attribute override if unique id is needed, defaults to label 
+   */
+  @Prop() customid: string;
+
   @Event({
     composed: true,
     bubbles: true,
@@ -52,7 +57,7 @@ export class VaRadioOption {
         onClick={() => this.handleChange()}
         role="radio"
         value={this.value}
-        id={this.label}
+        id={this.customid || this.label}
       >
         <label htmlFor={this.label}>{this.label}</label>
       </Host>

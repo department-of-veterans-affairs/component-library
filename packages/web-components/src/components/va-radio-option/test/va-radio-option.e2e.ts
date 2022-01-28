@@ -23,7 +23,7 @@ describe('va-radio-option', () => {
   it('fires event for parent when changed', async () => {
     const page = await newE2EPage();
     await page.setContent(
-      '<va-radio-option aria-describedby="test" label="A label" value="something" />',
+      '<va-radio-option checked aria-describedby="test" label="A label" value="something" />',
     );
 
     const changeSpy = await page.spyOnEvent('radioOptionSelected');
