@@ -1653,7 +1653,6 @@ __metadata:
     babel-loader: ^8.2.2
     copy-webpack-plugin: ^9.0.1
     css-loader: ^6.4.0
-    date-fns-tz: ^1.1.1
     mini-css-extract-plugin: ^2.4.2
     react-focus-on: ^3.5.1
     react-scroll: ^1.7.16
@@ -1768,7 +1767,6 @@ __metadata:
     "@whitespace/storybook-addon-html": ^2.0.1
     babel-loader: ^8.2.2
     css-loader: ^5.2.4
-    date-fns: ^2.17.0
     node-sass: 4.14.1
     prop-types: ^15.7.2
     react: ^17.0.2
@@ -7516,22 +7514,6 @@ __metadata:
     whatwg-mimetype: ^2.3.0
     whatwg-url: ^8.0.0
   checksum: 97caf828aac25e25e04ba6869db0f99c75e6859bb5b424ada28d3e7841941ebf08ddff3c1b1bb4585986bd507a5d54c2a716853ea6cb98af877400e637393e71
-  languageName: node
-  linkType: hard
-
-"date-fns-tz@npm:^1.1.1":
-  version: 1.1.6
-  resolution: "date-fns-tz@npm:1.1.6"
-  peerDependencies:
-    date-fns: ">=2.0.0-alpha.13"
-  checksum: cfe4c799372fcb586b7f22d9c31e10df33dabc74452fbd92269ae02bbaed4024636c477b9aac06c521ec78a7391826d5526fedbcefbad2e5de25bcc00c61ad8f
-  languageName: node
-  linkType: hard
-
-"date-fns@npm:^2.17.0":
-  version: 2.25.0
-  resolution: "date-fns@npm:2.25.0"
-  checksum: 8896dc1dde0ee5ef77616942423bfa11fa2017a5ac19457293b7aaedc8822ff94f0a14eaf93da573b09b601dc0149eb430988a046cc9f79a2eb15f8c66c9c50c
   languageName: node
   linkType: hard
 
