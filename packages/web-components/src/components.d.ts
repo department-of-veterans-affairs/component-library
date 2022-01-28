@@ -170,11 +170,15 @@ export namespace Components {
     }
     interface VaPagination {
         /**
-          * TODO
+          * Aria-label suffix text for buttons
          */
         "ariaLabelSuffix": string;
         /**
-          * TODO
+          * If true, the border above the component will not be shown
+         */
+        "disableBorder": boolean;
+        /**
+          * Whether or not an analytics event will be fired
          */
         "enableAnalytics": boolean;
         /**
@@ -188,19 +192,19 @@ export namespace Components {
         /**
           * Fires when a page is selected
          */
-        "pageSelect": (page) => void;
+        "pageSelect": any;
         /**
           * The total number of pages
          */
         "pages": number;
         /**
-          * Whether or not to show the last page number when the page count exceeds `maxPageListLength`
+          * Display last page number when the page count exceeds `maxPageListLength`
          */
         "showLastPage": boolean;
         /**
-          * Fires when a page is selected
+          * Fires when a page is selected if enable-analytics is true
          */
-        "trackEvent": (args) => void;
+        "trackEvent": any;
     }
     interface VaProgressBar {
         /**
@@ -701,11 +705,15 @@ declare namespace LocalJSX {
     }
     interface VaPagination {
         /**
-          * TODO
+          * Aria-label suffix text for buttons
          */
         "ariaLabelSuffix"?: string;
         /**
-          * TODO
+          * If true, the border above the component will not be shown
+         */
+        "disableBorder"?: boolean;
+        /**
+          * Whether or not an analytics event will be fired
          */
         "enableAnalytics"?: boolean;
         /**
@@ -719,19 +727,19 @@ declare namespace LocalJSX {
         /**
           * Fires when a page is selected
          */
-        "pageSelect"?: (page) => void;
+        "pageSelect"?: any;
         /**
           * The total number of pages
          */
         "pages"?: number;
         /**
-          * Whether or not to show the last page number when the page count exceeds `maxPageListLength`
+          * Display last page number when the page count exceeds `maxPageListLength`
          */
         "showLastPage"?: boolean;
         /**
-          * Fires when a page is selected
+          * Fires when a page is selected if enable-analytics is true
          */
-        "trackEvent"?: (args) => void;
+        "trackEvent"?: any;
     }
     interface VaProgressBar {
         /**

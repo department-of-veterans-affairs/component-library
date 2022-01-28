@@ -15,23 +15,20 @@ export class VaPagination {
   /**
    * Fires when a page is selected
    */
-  @Prop() pageSelect: (page) => void;
+  @Prop() pageSelect: any;
 
   /**
-   * Fires when a page is selected
+   * Fires when a page is selected if enable-analytics is true
    */
-  @Prop() trackEvent: (args) => void = (...args) => {
-    if (!window.dataLayer) return;
-    window.dataLayer.push(...args);
-  };
+  @Prop() trackEvent: any;
 
   /**
-   * TODO
+   * Aria-label suffix text for buttons
    */
-  @Prop() ariaLabelSuffix: string = ''; // might not need a default value here
+  @Prop() ariaLabelSuffix: string = '';
 
   /**
-   * TODO
+   * Whether or not an analytics event will be fired
    */
   @Prop() enableAnalytics: boolean = true;
 
@@ -51,25 +48,36 @@ export class VaPagination {
   @Prop() pages: number;
 
   /**
-   * Whether or not to show the last page number when the page count exceeds
+   * Display last page number when the page count exceeds
    * `maxPageListLength`
    */
-  @Prop() showLastPage: boolean = false;
+  @Prop() showLastPage: boolean;
+
+  /**
+   * If true, the border above the component will not be shown
+   */
+  @Prop() disableBorder: boolean;
+
+  private handleTrackEvent = (...args) => {
+    if (!this.trackEvent) {
+      if (!window.dataLayer) return;
+      window.dataLayer.push(...args);
+    } else {
+      this.trackEvent(...args);
+    }
+  };
 
   private handlePageSelect = (page, eventID) => {
-    console.log({ page });
-    // this.page = page;
     this.pageSelect(page);
-
     if (!this.enableAnalytics) return;
 
-    this.trackEvent({
+    this.handleTrackEvent({
       'event': eventID,
       'paginate-page-number': page,
     });
   };
 
-  private pageNumbers() {
+  private pageNumbers = () => {
     const {
       maxPageListLength,
       page: currentPage,
@@ -103,21 +111,21 @@ export class VaPagination {
       end = totalPages + 1;
     }
     return Array.from({ length: end - start }, (_, i) => i + start);
-  }
+  };
 
-  private handleKeyDown(e, pageNumber) {
+  private handleKeyDown = (e, pageNumber) => {
     const keyCode = e.key;
     if (keyCode === 'Enter' || keyCode === ' ') {
       e.preventDefault();
       if (!pageNumber) return;
       this.handlePageSelect(pageNumber, 'nav-paginate-number');
     }
-  }
+  };
 
   render() {
     const {
       ariaLabelSuffix,
-      // className,
+      disableBorder,
       page,
       pages,
       maxPageListLength,
@@ -155,7 +163,7 @@ export class VaPagination {
 
     return (
       <Host>
-        <nav>
+        <nav class={classnames({ 'remove-border': disableBorder })}>
           <ul>
             {/* START PREV BUTTON */}
 
