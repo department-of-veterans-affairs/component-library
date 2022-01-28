@@ -8,22 +8,24 @@ export default {
   title: 'Components/va-pagination',
 };
 
-const Template = args => {
-  const [page, setPage] = useState(args.page);
+const Template = ({ page: currentPage, pages, showLastPage }) => {
+  const [page, setPage] = useState(currentPage);
   const handlePageSelect = pageNumber => {
     setPage(pageNumber);
   };
   return (
     <VaPagination
       page={page}
-      pages={args.pages}
+      pages={pages}
       pageSelect={handlePageSelect}
+      showLastPage={showLastPage}
     />
   );
 };
 const defaultArgs = {
   page: 3,
-  pages: 20,
+  pages: 5,
+  showLastPage: true,
 };
 
 export const Default = Template.bind({});
