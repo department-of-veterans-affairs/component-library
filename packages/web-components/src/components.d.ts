@@ -545,7 +545,10 @@ declare namespace LocalJSX {
           * If true, the alert will be full width. Should be for emergency communication only.
          */
         "fullWidth"?: boolean;
-        "onClose"?: (event: CustomEvent<any>) => void;
+        /**
+          * Fires when the component is closed by clicking on the close icon. This fires only when closeable is true.
+         */
+        "onCloseEvent"?: (event: CustomEvent<any>) => void;
         "onComponent-library-analytics"?: (event: CustomEvent<any>) => void;
         /**
           * Fires when the component has successfully finished rendering for the first time.
