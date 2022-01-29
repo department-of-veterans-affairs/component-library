@@ -148,7 +148,6 @@ export class VaPagination {
             aria-current={page === pageNumber ? 'true' : null}
             aria-label={`Page ${pageNumber} ${ariaLabelSuffix}`}
             class={pageClass}
-            key={pageNumber}
             onClick={() =>
               this.handlePageSelect(pageNumber, 'nav-paginate-number')
             }
