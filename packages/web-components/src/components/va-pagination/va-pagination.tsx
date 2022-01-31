@@ -15,12 +15,12 @@ export class VaPagination {
   /**
    * Fires when a page is selected
    */
-  @Prop() pageSelect: (pageNumber: number) => void;
+  @Prop() pageSelect: any;
 
   /**
    * Fires when a page is selected if enable-analytics is true
    */
-  @Prop() trackEvent: (...args: any) => void;
+  @Prop() trackEvent: any;
 
   /**
    * Aria-label suffix text for buttons
