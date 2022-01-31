@@ -192,7 +192,7 @@ export namespace Components {
         /**
           * Fires when a page is selected
          */
-        "pageSelect": any;
+        "pageSelect": (pageNumber: number) => void;
         /**
           * The total number of pages
          */
@@ -204,7 +204,7 @@ export namespace Components {
         /**
           * Fires when a page is selected if enable-analytics is true
          */
-        "trackEvent": any;
+        "trackEvent": (...args: any) => void;
     }
     interface VaProgressBar {
         /**
@@ -727,7 +727,7 @@ declare namespace LocalJSX {
         /**
           * Fires when a page is selected
          */
-        "pageSelect"?: any;
+        "pageSelect"?: (pageNumber: number) => void;
         /**
           * The total number of pages
          */
@@ -739,7 +739,7 @@ declare namespace LocalJSX {
         /**
           * Fires when a page is selected if enable-analytics is true
          */
-        "trackEvent"?: any;
+        "trackEvent"?: (...args: any) => void;
     }
     interface VaProgressBar {
         /**
