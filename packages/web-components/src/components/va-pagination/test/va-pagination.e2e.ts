@@ -85,4 +85,36 @@ describe('va-pagination', () => {
     expect(mockSelectPage.mock.calls.length).toEqual(1);
     expect(mockSelectPage.mock.calls[0][0]).toBe(5);
   });
+
+  it('should focus prev button when pressing tab inside component', async () => {
+    const page = await newE2EPage();
+    await page.setContent(`
+      <va-pagination page="3" pages="50" />
+    `);
+
+    const component = await page.find('va-pagination');
+    await component.press('Tab');
+
+    const focused = await page.find('va-pagination >>> button:focus');
+    expect(focused.textContent).toContain('Prev');
+  });
+
+  it('should tab to prev button and select it using the enter key', async () => {
+    const mockSelectPage = jest.fn();
+    const page = await newE2EPage();
+    await page.setContent(`
+    <va-pagination page="3" pages="50" />
+    `);
+    await page.exposeFunction('mockFunction', mockSelectPage);
+    await page.$eval('va-pagination', (elm: any) => {
+      elm.pageSelect = this.mockFunction;
+    });
+    await page.waitForChanges();
+    const component = await page.find('va-pagination');
+    await component.press('Tab');
+
+    await component.press('Enter');
+    expect(mockSelectPage.mock.calls.length).toEqual(1);
+    expect(mockSelectPage.mock.calls[0][0]).toBe(2);
+  });
 });
