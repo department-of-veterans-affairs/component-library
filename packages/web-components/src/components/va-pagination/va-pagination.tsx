@@ -56,7 +56,7 @@ export class VaPagination {
   /**
    * If true, the border above the component will not be shown
    */
-  @Prop() disableBorder: boolean;
+  @Prop() removeBorder: boolean;
 
   private handleTrackEvent = (...args) => {
     if (!this.trackEvent) {
@@ -125,7 +125,7 @@ export class VaPagination {
   render() {
     const {
       ariaLabelSuffix,
-      disableBorder,
+      removeBorder,
       page,
       pages,
       maxPageListLength,
@@ -162,7 +162,7 @@ export class VaPagination {
 
     return (
       <Host>
-        <nav class={classnames({ 'remove-border': disableBorder })}>
+        <nav class={classnames({ 'remove-border': removeBorder })}>
           <ul class="pagination-prev">
             {/* START PREV BUTTON */}
             {this.page > 1 && (

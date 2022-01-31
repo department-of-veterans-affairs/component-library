@@ -174,10 +174,6 @@ export namespace Components {
          */
         "ariaLabelSuffix": string;
         /**
-          * If true, the border above the component will not be shown
-         */
-        "disableBorder": boolean;
-        /**
           * Whether or not an analytics event will be fired
          */
         "enableAnalytics": boolean;
@@ -197,6 +193,10 @@ export namespace Components {
           * The total number of pages
          */
         "pages": number;
+        /**
+          * If true, the border above the component will not be shown
+         */
+        "removeBorder": boolean;
         /**
           * Display last page number when the page count exceeds `maxPageListLength`
          */
@@ -709,10 +709,6 @@ declare namespace LocalJSX {
          */
         "ariaLabelSuffix"?: string;
         /**
-          * If true, the border above the component will not be shown
-         */
-        "disableBorder"?: boolean;
-        /**
           * Whether or not an analytics event will be fired
          */
         "enableAnalytics"?: boolean;
@@ -732,6 +728,10 @@ declare namespace LocalJSX {
           * The total number of pages
          */
         "pages"?: number;
+        /**
+          * If true, the border above the component will not be shown
+         */
+        "removeBorder"?: boolean;
         /**
           * Display last page number when the page count exceeds `maxPageListLength`
          */
