@@ -25,7 +25,7 @@ describe('va-radio', () => {
     await axeCheck(page);
   });
 
-  it('passes an axe check if customid is used with identical labels', async () => {
+  it('passes an axe check if id is used with identical labels', async () => {
     const page = await newE2EPage();
     await page.setContent(
       `
@@ -35,9 +35,9 @@ describe('va-radio', () => {
         <va-radio-option label="Option 3" value="3"></va-radio-option>
       </va-radio>
       <va-radio>
-        <va-radio-option checked customid="RadioOption1" label="Option 1" value="1"></va-radio-option>
-        <va-radio-option customid="RadioOption2" label="Option 2" value="2"></va-radio-option>
-        <va-radio-option customid="RadioOption3" label="Option 3" value="3"></va-radio-option>
+        <va-radio-option checked id="RadioOption1" label="Option 1" value="1"></va-radio-option>
+        <va-radio-option id="RadioOption2" label="Option 2" value="2"></va-radio-option>
+        <va-radio-option id="RadioOption3" label="Option 3" value="3"></va-radio-option>
       </va-radio>
     `,
     );
