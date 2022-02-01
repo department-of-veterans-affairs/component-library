@@ -54,3 +54,17 @@ Once a release is created, an attempt will be made to automatically publish the 
     2. `yarn storybook`
 
 This will allow you to run Storybook locally to view all components
+
+# Stencil Dev Server for Testing IE11
+
+1. Update `stencil.config.ts` line 16 to `buildEs5: true,`
+    1. [More information on buildEs5 in Stencil](https://stenciljs.com/docs/config#buildes5)
+    2. Stencil Dev Server is run in `dev` mode
+2. Within `component-library/packages/web-components/src/index.html` Web Components can be added inside of the `<body>` tag for testing
+    1. Example: 
+    ```
+    <body>
+        <va-segmented-progress-bar current={2} total={6}><va-segmented-progress-bar>
+    </body>
+    ```
+3. Run `yarn serve` inside `packages/web-components/` to start the Stencil Dev Server
