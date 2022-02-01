@@ -12,12 +12,6 @@ const accordionItem = getWebComponentDocs('va-accordion-item');
 export default {
   title: 'Components/va-accordion',
   subcomponents: componentStructure(accordionItem),
-  argTypes: {
-    accordionItemToggled: {
-      description:
-        'This event is fired when an accordion item is opened or closed.',
-    },
-  },
   parameters: {
     docs: {
       description: {

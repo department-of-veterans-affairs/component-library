@@ -22,11 +22,6 @@ export default {
       },
     },
   },
-  argTypes: {
-    vaChange: {
-      description: 'The event emitted when the input value changes.',
-    },
-  },
 };
 
 const Template = ({

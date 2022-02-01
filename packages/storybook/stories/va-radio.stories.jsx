@@ -19,14 +19,6 @@ export default {
       },
     },
   },
-  argTypes: {
-    keydown: {
-      description: 'The event emitted when a key is pressed.',
-    },
-    radioOptionSelected: {
-      description: 'The event emitted when the selected option value changes.',
-    },
-  },
 };
 
 const Template = ({
