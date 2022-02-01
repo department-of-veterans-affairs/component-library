@@ -58,8 +58,8 @@ export class VaAccordion {
     let headerLevel
     getSlottedNodes(clickedItem, null).map(
       (node: HTMLSlotElement) => {
-        headerText = node.innerHTML
-        headerLevel = parseInt(node.tagName.toLowerCase().split('')[1])
+        headerText = node.innerHTML !== undefined ? node.innerHTML : clickedItem.header
+        headerLevel = node.tagName !== undefined ? parseInt(node.tagName.toLowerCase().split('')[1]) : clickedItem.level
     })
 
     if (this.openSingle) {

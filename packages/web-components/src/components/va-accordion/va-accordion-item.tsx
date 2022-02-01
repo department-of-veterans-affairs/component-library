@@ -84,9 +84,21 @@ export class VaAccordionItem {
   }
 
   render() {
+    // IE11 is unable to run onSlotChange
+    // Check needed to populate Accordion Item Header information
+    // When using slot="headline" to set the information
+    const ieSlotCheckTag =
+      this.el.querySelector('[slot="headline"]') !== null
+        ? this.el.querySelector('[slot="headline"]').tagName.toLowerCase()
+        : false;
+    const ieSlotCheckHeader =
+      this.el.querySelector('[slot="headline"]') !== null
+        ? this.el.querySelector('[slot="headline"]').innerHTML
+        : false;
+
     const Header = () =>
       h(
-        this.slotTag || `h${this.level}`,
+        this.slotTag || ieSlotCheckTag || `h${this.level}`,
         null,
         <button
           ref={el => { this.expandButton = el }}
@@ -94,11 +106,10 @@ export class VaAccordionItem {
           aria-expanded={this.open ? 'true' : 'false'}
           aria-controls="content"
         >
-          {this.slotHeader || this.header}
+          {this.slotHeader || ieSlotCheckHeader || this.header}
           {this.subheader ? (<p>{this.subheader}</p>) : false}
         </button>,
       );
-
     return (
       <Host>
         <Header />
