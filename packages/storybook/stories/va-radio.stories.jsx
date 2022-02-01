@@ -32,7 +32,7 @@ const Template = ({
   );
 };
 
-const CustomIdTemplate = ({
+const IdTemplate = ({
   'enable-analytics': enableAnalytics,
   error,
   label,
@@ -46,9 +46,9 @@ const CustomIdTemplate = ({
         label={label}
         required={required}
       >
-        <va-radio-option customid="no1" label="No" name="no" value="1" />
+        <va-radio-option id="no1" label="No" name="no" value="1" />
         <va-radio-option
-          customid="yes1"
+          id="yes1"
           label="Yes - Any Veteran"
           name="yes"
           value="2"
@@ -60,9 +60,9 @@ const CustomIdTemplate = ({
         label={label}
         required={required}
       >
-        <va-radio-option customid="no2" label="No" name="no" value="1" />
+        <va-radio-option id="no2" label="No" name="no" value="1" />
         <va-radio-option
-          customid="yes2"
+          id="yes2"
           label="Yes - Any Veteran"
           name="yes"
           value="2"
@@ -91,8 +91,8 @@ Error.args = {
   error: 'There has been an error',
 };
 
-export const CustomId = CustomIdTemplate.bind({});
-CustomId.args = {
+export const Id = IdTemplate.bind({});
+Id.args = {
   ...defaultArgs,
   required: true,
 };

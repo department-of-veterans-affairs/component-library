@@ -1,4 +1,4 @@
-import { Component, Event, EventEmitter, Host, Prop, h } from '@stencil/core';
+import { Component, Element, Event, EventEmitter, Host, Prop, h } from '@stencil/core';
 
 @Component({
   tag: 'va-radio-option',
@@ -6,6 +6,8 @@ import { Component, Event, EventEmitter, Host, Prop, h } from '@stencil/core';
   shadow: true,
 })
 export class VaRadioOption {
+  @Element() el: HTMLElement;
+
   /**
    * The name attribute for the input element.
    */
@@ -31,11 +33,6 @@ export class VaRadioOption {
    */
   @Prop() ariaDescribedby: string;
 
-  /**
-   * Optional id attribute override if unique id is needed, defaults to label 
-   */
-  @Prop() customid: string;
-
   @Event({
     composed: true,
     bubbles: true,
@@ -57,7 +54,7 @@ export class VaRadioOption {
         onClick={() => this.handleChange()}
         role="radio"
         value={this.value}
-        id={this.customid || this.label}
+        id={this.el.id || this.label}
       >
         <label htmlFor={this.label}>{this.label}</label>
       </Host>
