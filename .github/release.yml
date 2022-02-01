@@ -5,13 +5,13 @@ changelog:
   categories:
     - title: Breaking Changes
       labels:
-        - breaking
+        - major
     - title: New Features & Components 🎉
       labels:
-        - enhancement
+        - minor
     - title: Fixes
       labels:
-        - fix
+        - patch
     - title: Other Changes
       labels:
         - "*"
