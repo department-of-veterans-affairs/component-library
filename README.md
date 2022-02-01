@@ -64,7 +64,8 @@ This will allow you to run Storybook locally to view all components
     1. Example: 
     ```
     <body>
-        <va-segmented-progress-bar current={2} total={6}><va-segmented-progress-bar>
+        <va-progress-bar label="Add a label here" percent={35}></va-progress-bar>
+        <va-segmented-progress-bar current={2} total={6}></va-segmented-progress-bar>
     </body>
     ```
 3. Run `yarn serve` inside `packages/web-components/` to start the Stencil Dev Server
