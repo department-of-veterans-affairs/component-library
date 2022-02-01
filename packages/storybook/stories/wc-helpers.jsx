@@ -36,6 +36,20 @@ export const componentStructure = comp => {
   };
 };
 
+const getListenerDescriptions = (comp, listeners) => {
+  const { docsTags } = comp;
+  let updatedListenersObj = {};
+  Object.keys(listeners).map(listener => {
+    const docsTag = docsTags.find(docs => docs.name === listener);
+    if (!docsTag) return;
+    updatedListenersObj[listener] = {
+      ...listeners[listener],
+      description: docsTag.text,
+    };
+  });
+  return updatedListenersObj;
+};
+
 const getEventObj = array => {
   return array.reduce((eventObj, event) => {
     eventObj[event.event] = {
@@ -81,7 +95,8 @@ export const propStructure = comp => {
   }, {});
   const events = getEventObj(comp.events);
   const listeners = getEventObj(comp.listeners);
-  return { ...props, ...events, ...listeners };
+  const listenersWithDescriptions = getListenerDescriptions(comp, listeners);
+  return { ...props, ...events, ...listenersWithDescriptions };
 };
 
 /**
