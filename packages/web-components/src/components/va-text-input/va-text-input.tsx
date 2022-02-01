@@ -38,11 +38,6 @@ export class VaTextInput {
   @Prop() required?: boolean;
 
   /**
-   * Placeholder text to show in the input field.
-   */
-  @Prop() placeholder?: string;
-
-  /**
    * The inputmode attribute.
    */
   @Prop() inputmode?: string = '';
@@ -168,11 +163,10 @@ export class VaTextInput {
           onBlur={this.handleBlur}
           aria-describedby={describedBy}
           inputmode={inputMode}
-          placeholder={this.placeholder}
           maxlength={this.maxlength}
         />
         {this.maxlength && this.value.length >= this.maxlength && (
-          <small>(Max. {this.maxlength} characters)</small>
+          <small aria-live="polite">(Max. {this.maxlength} characters)</small>
         )}
       </Host>
     );

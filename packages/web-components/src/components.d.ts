@@ -320,10 +320,6 @@ export namespace Components {
          */
         "name"?: string;
         /**
-          * Placeholder text to show in the input field.
-         */
-        "placeholder"?: string;
-        /**
           * Set the input to required and render the (Required) text.
          */
         "required"?: boolean;
@@ -839,10 +835,6 @@ declare namespace LocalJSX {
           * The event emitted when the input value changes
          */
         "onVaChange"?: (event: CustomEvent<any>) => void;
-        /**
-          * Placeholder text to show in the input field.
-         */
-        "placeholder"?: string;
         /**
           * Set the input to required and render the (Required) text.
          */

@@ -1,8 +1,8 @@
 /* eslint-disable no-console */
 import React from 'react';
-import { addHours, subMinutes, format } from 'date-fns';
+import { formatDate } from '../../react-components/src/helpers/format-date';
 
-import {MaintenanceBanner} from '@department-of-veterans-affairs/component-library';
+import { MaintenanceBanner } from '@department-of-veterans-affairs/component-library';
 
 export default {
   title: 'Components/Banners/MaintenanceBanner',
@@ -14,14 +14,14 @@ export default {
   },
 };
 
-const Template = (args) => {
+const Template = args => {
   const startTime = args.startsAt;
   const endTime = args.expiresAt;
   const warnStart = args.warnStartsAt;
   console.group('Times passed to Template');
-  console.log('startTime:', format(startTime, 'MM/dd/yy p'));
-  console.log('endTime', format(endTime, 'MM/dd/yy p'));
-  console.log('warnStart', format(warnStart, 'MM/dd/yy p'));
+  console.log('startTime:', formatDate(startTime, 'timeShort'));
+  console.log('endTime', formatDate(endTime, 'timeShort'));
+  console.log('warnStart', formatDate(warnStart, 'timeShort'));
   console.groupEnd();
   return <MaintenanceBanner {...args} />;
 };
@@ -33,10 +33,10 @@ const defaultArgs = {
   content:
     'We’re working on VA.gov right now. If you have trouble signing in or using tools, check back after we’re finished. Thank you for your patience.',
   warnContent:
-    'We’ll be doing some work on VA.gov. The maintenance will last 1 hour. During that time, you won’t be able to sign in or use tools.',
-  startsAt: new Date(Date.now()),
-  expiresAt: addHours(Date.now(), 1),
-  warnStartsAt: subMinutes(Date.now(), 30),
+    'We’ll be doing some work on VA.gov. The maintenance will last X hours. During that time, you won’t be able to sign in or use tools.',
+  startsAt: new Date(),
+  expiresAt: new Date(new Date().setHours(new Date().getHours() + 2)),
+  warnStartsAt: new Date(new Date().setHours(new Date().getHours() - 1)),
 };
 
 export const DuringMaintenance = Template.bind({});
@@ -45,7 +45,7 @@ DuringMaintenance.args = { ...defaultArgs };
 export const BeforeMaintenance = Template.bind({});
 BeforeMaintenance.args = {
   ...defaultArgs,
-  startsAt: addHours(Date.now(), 1),
-  expiresAt: addHours(Date.now(), 2),
-  warnStartsAt: new Date(Date.now()),
+  startsAt: new Date(new Date().setHours(new Date().getHours() + 1)),
+  expiresAt: new Date(new Date().setHours(new Date().getHours() + 2)),
+  warnStartsAt: new Date(),
 };
