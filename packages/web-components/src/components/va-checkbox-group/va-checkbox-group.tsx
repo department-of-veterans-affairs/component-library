@@ -37,6 +37,10 @@ export class VaCheckboxGroup {
    */
   @Prop() enableAnalytics: boolean;
 
+  /**
+   * The event used to track usage of the component. This is emitted when an
+   * input value changes and enableAnalytics is true.
+   */
   @Event({
     eventName: 'component-library-analytics',
     composed: true,

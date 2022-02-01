@@ -38,6 +38,10 @@ export class VaRadio {
    */
   @Prop() enableAnalytics: boolean;
 
+  /**
+   * The event used to track usage of the component. This is emitted when a
+   * radio option is selected and enableAnalytics is true.
+   */
   @Event({
     eventName: 'component-library-analytics',
     composed: true,

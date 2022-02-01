@@ -35,6 +35,10 @@ import { getSlottedNodes } from '../../utils/utils';
 export class VaAccordion {
   @Element() el!: any;
 
+  /**
+   * The event used to track usage of the component. This is emitted when an
+   * accordion item is toggled and disableAnalytics is not true.
+   */
   @Event({
     eventName: 'component-library-analytics',
     composed: true,
@@ -54,13 +58,12 @@ export class VaAccordion {
     // Close the other items if this accordion isn't multi-selectable
 
     // Usage for slot to provide context to analytics for header and level
-    let headerText
-    let headerLevel
-    getSlottedNodes(clickedItem, null).map(
-      (node: HTMLSlotElement) => {
-        headerText = node.innerHTML
-        headerLevel = parseInt(node.tagName.toLowerCase().split('')[1])
-    })
+    let headerText;
+    let headerLevel;
+    getSlottedNodes(clickedItem, null).map((node: HTMLSlotElement) => {
+      headerText = node.innerHTML;
+      headerLevel = parseInt(node.tagName.toLowerCase().split('')[1]);
+    });
 
     if (this.openSingle) {
       getSlottedNodes(this.el, 'va-accordion-item')
@@ -121,7 +124,6 @@ export class VaAccordion {
    * Optional accordion section heading text. Only used in analytics event. Default is null.
    */
   @Prop() sectionHeading: string = null;
-
 
   render() {
     return (

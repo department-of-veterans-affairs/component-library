@@ -58,6 +58,10 @@ export class VaSelect {
    */
   @Event() vaSelect: EventEmitter;
 
+  /**
+   * The event used to track usage of the component. This is emitted when an
+   * option is selected and enableAnalytics is true.
+   */
   @Event({
     eventName: 'component-library-analytics',
     composed: true,
