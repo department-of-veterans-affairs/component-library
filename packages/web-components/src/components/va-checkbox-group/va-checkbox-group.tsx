@@ -9,6 +9,9 @@ import {
   h,
 } from '@stencil/core';
 
+/**
+ * @vaChange The event emitted when the input value changes.
+ */
 @Component({
   tag: 'va-checkbox-group',
   styleUrl: 'va-checkbox-group.css',

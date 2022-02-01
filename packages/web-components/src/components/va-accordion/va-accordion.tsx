@@ -27,6 +27,10 @@ import { getSlottedNodes } from '../../utils/utils';
  * - Allow users to click anywhere in the header area to expand or collapse the content; a larger target is easier to manipulate.
  * - Make sure interactive elements within the collapsible region are far enough from the headers that users don’t accidentally trigger a collapse. (The exact distance depends on the device.
  */
+
+/**
+ * @accordionItemToggled This event is fired when an accordion item is opened or closed
+ */
 @Component({
   tag: 'va-accordion',
   styleUrl: 'va-accordion.css',

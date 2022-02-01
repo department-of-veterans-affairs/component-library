@@ -10,6 +10,10 @@ import {
 } from '@stencil/core';
 import { getSlottedNodes } from '../../utils/utils';
 
+/**
+ * @keydown The event emitted when a key is pressed.
+ * @radioOptionSelected The event emitted when the selected option value changes.
+ */
 @Component({
   tag: 'va-radio',
   styleUrl: 'va-radio.css',
