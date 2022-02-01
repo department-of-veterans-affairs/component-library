@@ -18,16 +18,6 @@ export default {
         disable: true,
       },
     },
-    closeEvent: {
-      description:
-        'If closeable is true, this event is triggered when an alert is closed.',
-      table: {
-        defaultValue: {
-          detail: undefined,
-        },
-      },
-      control: false,
-    },
   },
   parameters: {
     docs: {
