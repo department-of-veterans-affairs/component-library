@@ -36,6 +36,23 @@ export const componentStructure = comp => {
   };
 };
 
+const getEventObj = array => {
+  return array.reduce((eventObj, event) => {
+    eventObj[event.event] = {
+      description: event.docs,
+      type: {
+        name: 'Event',
+      },
+      // Assigns the argType to the Events category
+      table: {
+        category: 'Events',
+      },
+    };
+
+    return eventObj;
+  }, {});
+};
+
 /**
  * Expects an object returned by `getWebComponentDocs`.
  * Returns an object that matches the structure in:
@@ -43,7 +60,7 @@ export const componentStructure = comp => {
  * Used to generate some docs for web components in Storybook
  */
 export const propStructure = comp => {
-  return comp.props.reduce((propObj, prop) => {
+  const props = comp.props.reduce((propObj, prop) => {
     propObj[prop.attr] = {
       description: prop.docs,
       required: prop.required,
@@ -51,9 +68,16 @@ export const propStructure = comp => {
       type: {
         name: prop.type,
       },
+      // Assigns the argType to the Properties category
+      table: {
+        category: 'Properties',
+      },
     };
     return propObj;
   }, {});
+  const events = getEventObj(comp.events);
+  const listeners = getEventObj(comp.listeners);
+  return { ...props, ...events, ...listeners };
 };
 
 /**
