@@ -46,6 +46,10 @@ const getEventObj = array => {
       // Assigns the argType to the Events category
       table: {
         category: 'Events',
+        // Remove dash from default column
+        defaultValue: {
+          detail: undefined,
+        },
       },
     };
 
