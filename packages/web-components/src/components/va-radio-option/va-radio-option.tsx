@@ -56,7 +56,7 @@ export class VaRadioOption {
         value={this.value}
         id={this.el.id || this.label}
       >
-        <label htmlFor={this.label}>{this.label}</label>
+        <label htmlFor={this.label} aria-label={this.name}>{this.label}</label>
       </Host>
     );
   }

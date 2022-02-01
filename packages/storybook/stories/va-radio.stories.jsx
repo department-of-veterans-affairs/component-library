@@ -32,7 +32,7 @@ const Template = ({
   );
 };
 
-const IdTemplate = ({
+const IdUsageTemplate = ({
   'enable-analytics': enableAnalytics,
   error,
   label,
@@ -91,8 +91,8 @@ Error.args = {
   error: 'There has been an error',
 };
 
-export const Id = IdTemplate.bind({});
-Id.args = {
+export const IdUsage = IdUsageTemplate.bind({});
+IdUsage.args = {
   ...defaultArgs,
   required: true,
 };
