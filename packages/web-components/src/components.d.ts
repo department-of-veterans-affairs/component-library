@@ -468,6 +468,9 @@ declare namespace LocalJSX {
           * If true, doesn't fire the CustomEvent which can be used for analytics tracking.
          */
         "disableAnalytics"?: boolean;
+        /**
+          * The event used to track usage of the component. This is emitted when an accordion item is toggled and disableAnalytics is not true.
+         */
         "onComponent-library-analytics"?: (event: CustomEvent<any>) => void;
         /**
           * True if only a single item can be opened at once
@@ -505,6 +508,9 @@ declare namespace LocalJSX {
           * If true, doesn't fire the CustomEvent which can be used for analytics tracking.
          */
         "disableAnalytics"?: boolean;
+        /**
+          * The event used to track usage of the component. This is emitted when an anchor link is clicked and disableAnalytics is not true.
+         */
         "onComponent-library-analytics"?: (event: CustomEvent<any>) => void;
         /**
           * The text to trigger the expansion
@@ -536,6 +542,9 @@ declare namespace LocalJSX {
           * Fires when the component is closed by clicking on the close icon. This fires only when closeable is true.
          */
         "onCloseEvent"?: (event: CustomEvent<any>) => void;
+        /**
+          * The event used to track usage of the component. This is emitted when an anchor link is clicked and disableAnalytics is not true.
+         */
         "onComponent-library-analytics"?: (event: CustomEvent<any>) => void;
         /**
           * Fires when the component has successfully finished rendering for the first time.
@@ -565,6 +574,9 @@ declare namespace LocalJSX {
           * Adds an aria-label attribute to the <nav /> element.
          */
         "label"?: string;
+        /**
+          * The event used to track usage of the component. This is emitted when a breadcrumb anchor is clicked and disableAnalytics is not true.
+         */
         "onComponent-library-analytics"?: (event: CustomEvent<any>) => void;
     }
     interface VaCheckbox {
@@ -622,6 +634,9 @@ declare namespace LocalJSX {
           * The text label for the checkbox group.
          */
         "label"?: string;
+        /**
+          * The event used to track usage of the component. This is emitted when an input value changes and enableAnalytics is true.
+         */
         "onComponent-library-analytics"?: (event: CustomEvent<any>) => void;
         /**
           * Whether or not this input field is required.
@@ -663,6 +678,9 @@ declare namespace LocalJSX {
           * The text label for the progress bar.
          */
         "label"?: string;
+        /**
+          * The event used to track usage of the component. This is emitted when percent is 0 or 100 and enableAnalytics is true.
+         */
         "onComponent-library-analytics"?: (event: CustomEvent<any>) => void;
         /**
           * Percent of progress made. 0 to 100.
@@ -682,7 +700,13 @@ declare namespace LocalJSX {
           * The text label for the radio group.
          */
         "label"?: string;
+        /**
+          * The event used to track usage of the component. This is emitted when a radio option is selected and enableAnalytics is true.
+         */
         "onComponent-library-analytics"?: (event: CustomEvent<any>) => void;
+        /**
+          * The event emitted when the selected value changes
+         */
         "onVaValueChange"?: (event: CustomEvent<any>) => void;
         /**
           * Whether or not this input field is required.
@@ -706,6 +730,9 @@ declare namespace LocalJSX {
           * The name attribute for the input element.
          */
         "name"?: string;
+        /**
+          * The event emitted when the selected option value changes
+         */
         "onRadioOptionSelected"?: (event: CustomEvent<any>) => void;
         /**
           * The value attribute for the input element.
@@ -725,6 +752,9 @@ declare namespace LocalJSX {
           * An override for the default aria label.
          */
         "label"?: string;
+        /**
+          * The event used to track usage of the component. This is emitted when the component renders and enableAnalytics is true.
+         */
         "onComponent-library-analytics"?: (event: CustomEvent<any>) => void;
         /**
           * The total number of segments in the progress bar
@@ -748,8 +778,17 @@ declare namespace LocalJSX {
           * Name attribute for the select field.
          */
         "name"?: string;
+        /**
+          * The event used to track usage of the component. This is emitted when an option is selected and enableAnalytics is true.
+         */
         "onComponent-library-analytics"?: (event: CustomEvent<any>) => void;
+        /**
+          * The event attached to select's onkeydown
+         */
         "onVaKeyDown"?: (event: CustomEvent<any>) => void;
+        /**
+          * The event emitted when the selected value changes
+         */
         "onVaSelect"?: (event: CustomEvent<any>) => void;
         /**
           * Whether or not this is a required field.
@@ -777,6 +816,9 @@ declare namespace LocalJSX {
           * Indicates if the phone number can be clicked or not
          */
         "notClickable"?: boolean;
+        /**
+          * The event used to track usage of the component. This is emitted when clicking on an anchor link.
+         */
         "onComponent-library-analytics"?: (event: CustomEvent<any>) => void;
     }
     interface VaTextInput {

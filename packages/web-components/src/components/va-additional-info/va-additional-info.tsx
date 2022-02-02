@@ -26,6 +26,10 @@ export class VaAdditionalInfo {
    */
   @Prop() disableAnalytics: boolean;
 
+  /**
+   * The event used to track usage of the component. This is emitted when an
+   * anchor link is clicked and disableAnalytics is not true.
+   */
   @Event({
     eventName: 'component-library-analytics',
     composed: true,

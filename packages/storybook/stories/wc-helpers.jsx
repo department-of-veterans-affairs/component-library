@@ -36,6 +36,42 @@ export const componentStructure = comp => {
   };
 };
 
+const getListenerDescriptions = (comp, listeners) => {
+  return Object.keys(listeners).reduce((listenerObj, listener) => {
+    const docsTag = comp.docsTags.find(docs => docs.name === listener);
+    if (!docsTag) {
+      listenerObj[listener] = { ...listeners[listener] };
+    } else {
+      listenerObj[listener] = {
+        ...listeners[listener],
+        description: docsTag.text,
+      };
+    }
+    return listenerObj;
+  }, {});
+};
+
+const getEventObj = array => {
+  return array.reduce((eventObj, event) => {
+    eventObj[event.event] = {
+      description: event.docs,
+      type: {
+        name: 'Event',
+      },
+      // Assigns the argType to the Events category
+      table: {
+        category: 'Events',
+        // Remove dash from default column
+        defaultValue: {
+          detail: undefined,
+        },
+      },
+    };
+
+    return eventObj;
+  }, {});
+};
+
 /**
  * Expects an object returned by `getWebComponentDocs`.
  * Returns an object that matches the structure in:
@@ -43,7 +79,7 @@ export const componentStructure = comp => {
  * Used to generate some docs for web components in Storybook
  */
 export const propStructure = comp => {
-  return comp.props.reduce((propObj, prop) => {
+  const props = comp.props.reduce((propObj, prop) => {
     propObj[prop.attr] = {
       description: prop.docs,
       required: prop.required,
@@ -51,9 +87,17 @@ export const propStructure = comp => {
       type: {
         name: prop.type,
       },
+      // Assigns the argType to the Properties category
+      table: {
+        category: 'Properties',
+      },
     };
     return propObj;
   }, {});
+  const events = getEventObj(comp.events);
+  const listeners = getEventObj(comp.listeners);
+  const listenersWithDescriptions = getListenerDescriptions(comp, listeners);
+  return { ...props, ...events, ...listenersWithDescriptions };
 };
 
 /**
