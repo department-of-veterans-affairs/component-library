@@ -139,6 +139,7 @@ export class VaAlert {
 
   componentDidLoad() {
     this.vaComponentDidLoad.emit();
+    this.el.addEventListener('click', e => this.handleAlertBodyClick(e));
   }
 
   render() {
@@ -158,10 +159,7 @@ export class VaAlert {
           <i aria-hidden="true" role="img"></i>
           <div class="body">
             {!backgroundOnly && <slot name="headline"></slot>}
-            <div
-              role="presentation"
-              onClick={this.handleAlertBodyClick.bind(this)}
-            >
+            <div role="presentation">
               <div>
                 <slot></slot>
               </div>
