@@ -8,13 +8,11 @@ describe('va-pagination', () => {
 
     const element = await page.find('va-pagination');
     expect(element).toEqualHtml(`
-      <va-pagination class="hydrated">
+      <va-pagination class="hydrated" role="navigation">
         <mock:shadow-root>
-          <nav>
-            <ul class="pagination-prev"></ul>
-            <ul class="pagination-inner"></ul>
-            <ul class="pagination-next"></ul>
-          </nav>
+          <ul class="pagination-prev"></ul>
+          <ul class="pagination-inner"></ul>
+          <ul class="pagination-next"></ul>
         </mock:shadow-root>
       </va-pagination>
     `);
@@ -38,51 +36,49 @@ describe('va-pagination', () => {
 
     const element = await page.find('va-pagination');
     expect(element).toEqualHtml(`
-      <va-pagination class="hydrated" page="3" pages="5">
+      <va-pagination class="hydrated" page="3" pages="5" role="navigation">
         <mock:shadow-root>
-          <nav>
-            <ul class="pagination-prev">
+          <ul class="pagination-prev">
+          <li>
+            <button aria-label="Previous page " class="button-prev" type="button">
+              Prev
+            </button>
+          </li>
+          </ul>
+          <ul class="pagination-inner">
             <li>
-              <button aria-label="Previous page " class="button-prev" type="button">
-                Prev
+              <button aria-label="Page 1 " class="button-inner" type="button">
+                1
               </button>
             </li>
-            </ul>
-            <ul class="pagination-inner">
-              <li>
-                <button aria-label="Page 1 " class="button-inner" type="button">
-                  1
-                </button>
-              </li>
-              <li>
-                <button aria-label="Page 2 " class="button-inner" type="button">
-                  2
-                </button>
-              </li>
-              <li>
-                <button aria-current="true" aria-label="Page 3 " class="button-active button-inner" type="button">
-                  3
-                </button>
-              </li>
-              <li>
-                <button aria-label="Page 4 " class="button-inner" type="button">
-                  4
-                </button>
-              </li>
-              <li>
-                <button aria-label="Page 5 " class="button-inner" type="button">
-                  5
-                </button>
-              </li>
-            </ul>
-            <ul class="pagination-next">
-              <li>
-                <button aria-label="Next page " class="button-next" type="button">
-                  Next
-                </button>
-              </li>
-            </ul>
-          </nav>
+            <li>
+              <button aria-label="Page 2 " class="button-inner" type="button">
+                2
+              </button>
+            </li>
+            <li>
+              <button aria-current="true" aria-label="Page 3 " class="button-active button-inner" type="button">
+                3
+              </button>
+            </li>
+            <li>
+              <button aria-label="Page 4 " class="button-inner" type="button">
+                4
+              </button>
+            </li>
+            <li>
+              <button aria-label="Page 5 " class="button-inner" type="button">
+                5
+              </button>
+            </li>
+          </ul>
+          <ul class="pagination-next">
+            <li>
+              <button aria-label="Next page " class="button-next" type="button">
+                Next
+              </button>
+            </li>
+          </ul>
         </mock:shadow-root>
       </va-pagination>
     `);
