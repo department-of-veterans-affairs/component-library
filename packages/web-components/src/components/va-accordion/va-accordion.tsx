@@ -58,8 +58,8 @@ export class VaAccordion {
     let headerLevel
     getSlottedNodes(clickedItem, null).map(
       (node: HTMLSlotElement) => {
-        headerText = node.innerHTML !== undefined ? node.innerHTML : clickedItem.header
-        headerLevel = node.tagName !== undefined ? parseInt(node.tagName.toLowerCase().split('')[1]) : clickedItem.level
+        headerText = node?.innerHTML
+        headerLevel = node?.tagName?.toLowerCase().split('')[1]
     })
 
     if (this.openSingle) {
@@ -77,7 +77,7 @@ export class VaAccordion {
         details: {
           header: headerText || clickedItem.header,
           subheader: clickedItem.subheader,
-          level: headerLevel || clickedItem.level,
+          level: headerLevel !== undefined ? parseInt(headerLevel) : headerLevel || clickedItem.level,
           sectionHeading: this.sectionHeading,
         },
       };

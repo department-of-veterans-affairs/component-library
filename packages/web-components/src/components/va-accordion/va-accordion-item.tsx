@@ -87,14 +87,8 @@ export class VaAccordionItem {
     // IE11 is unable to run onSlotChange
     // Check needed to populate Accordion Item Header information
     // When using slot="headline" to set the information
-    const ieSlotCheckTag =
-      this.el.querySelector('[slot="headline"]') !== null
-        ? this.el.querySelector('[slot="headline"]').tagName.toLowerCase()
-        : false;
-    const ieSlotCheckHeader =
-      this.el.querySelector('[slot="headline"]') !== null
-        ? this.el.querySelector('[slot="headline"]').innerHTML
-        : false;
+    const ieSlotCheckTag = this.el.querySelector('[slot="headline"]')?.tagName.toLowerCase()
+    const ieSlotCheckHeader = this.el.querySelector('[slot="headline"]')?.innerHTML
 
     const Header = () =>
       h(
