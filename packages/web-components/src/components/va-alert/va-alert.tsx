@@ -158,7 +158,7 @@ export class VaAlert {
     if (!visible) return <div aria-live="polite" />;
 
     return (
-      <Host>
+      <Host role="presentation">
         <div role={role} aria-live={ariaLive} class={classes}>
           <i aria-hidden="true" role="img"></i>
           <div class="body">
