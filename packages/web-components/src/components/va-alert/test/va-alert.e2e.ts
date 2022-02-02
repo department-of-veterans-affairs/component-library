@@ -15,7 +15,7 @@ describe('va-alert', () => {
             <i aria-hidden="true" role="img"></i>
             <div class="body">
               <slot name="headline"></slot>
-              <div role="presentation">
+              <div id="body-click" role="presentation">
                 <div>
                   <slot></slot>
                 </div>

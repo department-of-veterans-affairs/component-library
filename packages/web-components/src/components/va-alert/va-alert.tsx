@@ -16,7 +16,6 @@ import classnames from 'classnames';
 })
 export class VaAlert {
   @Element() el!: any;
-  bodyClickEl: HTMLDivElement;
 
   /**
    * Determines the icon and border/background color.
@@ -140,9 +139,9 @@ export class VaAlert {
 
   componentDidLoad() {
     // NVDA workaround to prevent "clickable" announcement
-    this.bodyClickEl?.addEventListener('click', e =>
-      this.handleAlertBodyClick(e),
-    );
+    this.el?.shadowRoot
+      .querySelector('#body-click')
+      .addEventListener('click', e => this.handleAlertBodyClick(e));
     this.vaComponentDidLoad.emit();
   }
 
@@ -163,7 +162,7 @@ export class VaAlert {
           <i aria-hidden="true" role="img"></i>
           <div class="body">
             {!backgroundOnly && <slot name="headline"></slot>}
-            <div ref={el => (this.bodyClickEl = el)} role="presentation">
+            <div id="body-click" role="presentation">
               <div>
                 <slot></slot>
               </div>
