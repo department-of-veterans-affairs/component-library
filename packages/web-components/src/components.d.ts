@@ -174,10 +174,6 @@ export namespace Components {
          */
         "ariaLabelSuffix": string;
         /**
-          * A class to provide additional styling to the outer container element
-         */
-        "className": string;
-        /**
           * Whether or not an analytics event will be fired
          */
         "enableAnalytics": boolean;
@@ -719,10 +715,6 @@ declare namespace LocalJSX {
           * Aria-label suffix text for buttons
          */
         "ariaLabelSuffix"?: string;
-        /**
-          * A class to provide additional styling to the outer container element
-         */
-        "className"?: string;
         /**
           * Whether or not an analytics event will be fired
          */

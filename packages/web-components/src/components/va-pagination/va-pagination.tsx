@@ -53,11 +53,6 @@ export class VaPagination {
    */
   @Prop() showLastPage: boolean;
 
-  /**
-   * A class to provide additional styling to the outer container element
-   */
-  @Prop() className: string;
-
   private handleTrackEvent = (...args) => {
     if (!this.trackEvent) {
       if (!window.dataLayer) return;
@@ -123,14 +118,8 @@ export class VaPagination {
   };
 
   render() {
-    const {
-      ariaLabelSuffix,
-      className,
-      page,
-      pages,
-      maxPageListLength,
-      showLastPage,
-    } = this;
+    const { ariaLabelSuffix, page, pages, maxPageListLength, showLastPage } =
+      this;
 
     if (pages === 1) {
       return <div />;
@@ -161,7 +150,7 @@ export class VaPagination {
     });
 
     return (
-      <Host class={className ?? undefined} role="navigation">
+      <Host role="navigation">
         <ul class="pagination-prev">
           {/* START PREV BUTTON */}
           {this.page > 1 && (
