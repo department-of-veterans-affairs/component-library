@@ -156,9 +156,16 @@ export class VaAlert {
       <Host>
         <div role={role} aria-live={ariaLive} class={classes}>
           <i aria-hidden="true" role="img"></i>
-          <div class="body" onClick={this.handleAlertBodyClick.bind(this)}>
+          <div class="body">
             {!backgroundOnly && <slot name="headline"></slot>}
-            <slot></slot>
+            <div
+              role="presentation"
+              onClick={this.handleAlertBodyClick.bind(this)}
+            >
+              <div>
+                <slot></slot>
+              </div>
+            </div>
           </div>
         </div>
 
