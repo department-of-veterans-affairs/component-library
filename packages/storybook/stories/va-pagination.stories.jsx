@@ -10,14 +10,12 @@ export default {
 };
 
 const defaultArgs = {
-  'disable-border': false,
   'page': 3,
   'pages': 5,
   'show-last-page': false,
 };
 
 const Template = ({
-  'disable-border': disableBorder,
   'page': currentPage,
   pages,
   'show-last-page': showLastPage,
@@ -28,7 +26,6 @@ const Template = ({
   };
   return (
     <VaPagination
-      disableBorder={disableBorder}
       page={page}
       pages={pages}
       pageSelect={handlePageSelect}
@@ -42,9 +39,3 @@ Default.args = {
   ...defaultArgs,
 };
 Default.argTypes = propStructure(paginationDocs);
-
-export const Borderless = Template.bind({});
-Borderless.args = {
-  ...defaultArgs,
-  'disable-border': true,
-};
