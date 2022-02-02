@@ -34,6 +34,10 @@ export class VaTelephone {
    */
   @Prop() international: boolean = false;
 
+  /**
+   * The event used to track usage of the component. This is emitted when
+   * clicking on an anchor link.
+   */
   @Event({
     eventName: 'component-library-analytics',
     composed: true,

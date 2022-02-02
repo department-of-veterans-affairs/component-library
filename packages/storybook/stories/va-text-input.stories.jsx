@@ -1,11 +1,19 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
+import { generateEventsDescription } from './events';
 import { getWebComponentDocs, propStructure } from './wc-helpers';
 
 const textInputDocs = getWebComponentDocs('va-text-input');
 
 export default {
   title: 'Components/va-text-input',
+  parameters: {
+    docs: {
+      description: {
+        component: generateEventsDescription(textInputDocs),
+      },
+    },
+  },
 };
 
 const defaultArgs = {

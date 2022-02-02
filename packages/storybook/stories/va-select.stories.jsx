@@ -1,11 +1,19 @@
 /* eslint-disable react/prop-types */
 import React, { useState } from 'react';
+import { generateEventsDescription } from './events';
 import { getWebComponentDocs, propStructure } from './wc-helpers';
 
 const selectDocs = getWebComponentDocs('va-select');
 
 export default {
   title: 'Components/va-select',
+  parameters: {
+    docs: {
+      description: {
+        component: generateEventsDescription(selectDocs),
+      },
+    },
+  },
 };
 
 const defaultArgs = {
