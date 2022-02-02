@@ -147,19 +147,6 @@ describe('va-text-input', () => {
     expect(analyticsSpy).not.toHaveReceivedEvent();
   });
 
-  it('adds placeholder text', async () => {
-    const page = await newE2EPage();
-    await page.setContent(
-      '<va-text-input placeholder="Enter your life story" />',
-    );
-
-    // Render the error message text
-    const inputEl = await page.find('va-text-input >>> input');
-    expect(inputEl.getAttribute('placeholder')).toContain(
-      'Enter your life story',
-    );
-  });
-
   it('adds a character limit with descriptive text', async () => {
     const page = await newE2EPage();
     await page.setContent('<va-text-input maxlength="3" value="22"/>');
