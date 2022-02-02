@@ -54,9 +54,9 @@ export class VaPagination {
   @Prop() showLastPage: boolean;
 
   /**
-   * If true, the border above the component will not be shown
+   * A class to provide additional styling to the outer container element
    */
-  @Prop() removeBorder: boolean;
+  @Prop() className: string;
 
   private handleTrackEvent = (...args) => {
     if (!this.trackEvent) {
@@ -125,7 +125,7 @@ export class VaPagination {
   render() {
     const {
       ariaLabelSuffix,
-      removeBorder,
+      className,
       page,
       pages,
       maxPageListLength,
@@ -161,84 +161,79 @@ export class VaPagination {
     });
 
     return (
-      <Host>
-        <nav class={classnames({ 'remove-border': removeBorder })}>
-          <ul class="pagination-prev">
-            {/* START PREV BUTTON */}
-            {this.page > 1 && (
+      <Host class={className ?? undefined} role="navigation">
+        <ul class="pagination-prev">
+          {/* START PREV BUTTON */}
+          {this.page > 1 && (
+            <li>
+              <button
+                aria-label={`Previous page ${this.ariaLabelSuffix}`}
+                class="button-prev"
+                onClick={() =>
+                  this.handlePageSelect(this.page - 1, 'nav-paginate-previous')
+                }
+                onKeyDown={e => this.handleKeyDown(e, this.page - 1)}
+                type="button"
+              >
+                Prev
+              </button>
+            </li>
+          )}
+          {/* END PREV BUTTON */}
+        </ul>
+
+        <ul class="pagination-inner">
+          {renderPages}
+          {/* START ELLIPSIS AND LAST BUTTON */}
+          {showLastPage && page < pages - maxPageListLength + 1 && (
+            <Fragment>
               <li>
                 <button
-                  aria-label={`Previous page ${this.ariaLabelSuffix}`}
-                  class="button-prev"
-                  onClick={() =>
-                    this.handlePageSelect(
-                      this.page - 1,
-                      'nav-paginate-previous',
-                    )
-                  }
-                  onKeyDown={e => this.handleKeyDown(e, this.page - 1)}
+                  aria-label="..."
+                  class="button-inner"
+                  onKeyDown={e => this.handleKeyDown(e, null)}
                   type="button"
                 >
-                  Prev
+                  ...
                 </button>
               </li>
-            )}
-            {/* END PREV BUTTON */}
-          </ul>
-
-          <ul class="pagination-inner">
-            {renderPages}
-            {/* START ELLIPSIS AND LAST BUTTON */}
-            {showLastPage && page < pages - maxPageListLength + 1 && (
-              <Fragment>
-                <li>
-                  <button
-                    aria-label="..."
-                    class="button-inner"
-                    onKeyDown={e => this.handleKeyDown(e, null)}
-                    type="button"
-                  >
-                    ...
-                  </button>
-                </li>
-                <li>
-                  <button
-                    aria-label={`Load last page ${this.ariaLabelSuffix}`}
-                    class="button-inner"
-                    onClick={() =>
-                      this.handlePageSelect(pages, 'nav-paginate-number')
-                    }
-                    onKeyDown={e => this.handleKeyDown(e, pages)}
-                    type="button"
-                  >
-                    {pages}
-                  </button>
-                </li>
-              </Fragment>
-            )}
-            {/* END ELLIPSIS AND LAST BUTTON */}
-          </ul>
-
-          <ul class="pagination-next">
-            {/* START NEXT BUTTON */}
-            {this.pages > this.page && (
               <li>
                 <button
-                  aria-label={`Next page ${this.ariaLabelSuffix}`}
-                  class="button-next"
+                  aria-label={`Load last page ${this.ariaLabelSuffix}`}
+                  class="button-inner"
                   onClick={() =>
-                    this.handlePageSelect(this.page + 1, 'nav-paginate-next')
+                    this.handlePageSelect(pages, 'nav-paginate-number')
                   }
-                  onKeyDown={e => this.handleKeyDown(e, this.page + 1)}
+                  onKeyDown={e => this.handleKeyDown(e, pages)}
                   type="button"
                 >
-                  Next
+                  {pages}
                 </button>
               </li>
-            )}
-            {/* END NEXT BUTTON */}
-          </ul>
-        </nav>
+            </Fragment>
+          )}
+          {/* END ELLIPSIS AND LAST BUTTON */}
+        </ul>
+
+        <ul class="pagination-next">
+          {/* START NEXT BUTTON */}
+          {this.pages > this.page && (
+            <li>
+              <button
+                aria-label={`Next page ${this.ariaLabelSuffix}`}
+                class="button-next"
+                onClick={() =>
+                  this.handlePageSelect(this.page + 1, 'nav-paginate-next')
+                }
+                onKeyDown={e => this.handleKeyDown(e, this.page + 1)}
+                type="button"
+              >
+                Next
+              </button>
+            </li>
+          )}
+          {/* END NEXT BUTTON */}
+        </ul>
       </Host>
     );
   }
