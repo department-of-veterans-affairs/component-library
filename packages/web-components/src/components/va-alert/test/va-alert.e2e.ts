@@ -9,7 +9,7 @@ describe('va-alert', () => {
     const element = await page.find('va-alert');
 
     expect(element).toEqualHtml(`
-      <va-alert class="hydrated" role="presentation">
+      <va-alert class="hydrated">
         <mock:shadow-root>
           <div class="alert info">
             <i aria-hidden="true" role="img"></i>
