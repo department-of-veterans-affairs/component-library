@@ -33,6 +33,9 @@ export class VaRadioOption {
    */
   @Prop() ariaDescribedby: string;
 
+  /**
+   * The event emitted when the selected option value changes
+   */
   @Event({
     composed: true,
     bubbles: true,

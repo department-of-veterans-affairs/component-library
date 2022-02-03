@@ -26,6 +26,10 @@ export class VaSegmentedProgressBar {
    */
   @Prop() label: string;
 
+  /**
+   * The event used to track usage of the component. This is emitted when the
+   * component renders and enableAnalytics is true.
+   */
   @Event({
     eventName: 'component-library-analytics',
     composed: true,
@@ -47,7 +51,7 @@ export class VaSegmentedProgressBar {
   }
 
   render() {
-    const { current, total, label = `Step ${current} of ${total}`} = this;
+    const { current, total, label = `Step ${current} of ${total}` } = this;
     const range = Array.from({ length: total }, (_, i) => i);
     return (
       <Host>

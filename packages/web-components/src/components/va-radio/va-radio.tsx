@@ -10,6 +10,10 @@ import {
 } from '@stencil/core';
 import { getSlottedNodes } from '../../utils/utils';
 
+/**
+ * @keydown The event emitted when a key is pressed.
+ * @radioOptionSelected The event emitted when the selected option value changes.
+ */
 @Component({
   tag: 'va-radio',
   styleUrl: 'va-radio.css',
@@ -38,6 +42,10 @@ export class VaRadio {
    */
   @Prop() enableAnalytics: boolean;
 
+  /**
+   * The event used to track usage of the component. This is emitted when a
+   * radio option is selected and enableAnalytics is true.
+   */
   @Event({
     eventName: 'component-library-analytics',
     composed: true,
@@ -45,6 +53,9 @@ export class VaRadio {
   })
   componentLibraryAnalytics: EventEmitter;
 
+  /**
+   * The event emitted when the selected value changes
+   */
   @Event({
     composed: true,
     bubbles: true,

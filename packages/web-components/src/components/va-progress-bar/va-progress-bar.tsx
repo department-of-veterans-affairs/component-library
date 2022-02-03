@@ -21,6 +21,10 @@ export class VaProgressBar {
    */
   @Prop() label: string;
 
+  /**
+   * The event used to track usage of the component. This is emitted when percent
+   * is 0 or 100 and enableAnalytics is true.
+   */
   @Event({
     eventName: 'component-library-analytics',
     composed: true,

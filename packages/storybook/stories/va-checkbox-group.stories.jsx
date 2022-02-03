@@ -1,4 +1,5 @@
 import React from 'react';
+import { generateEventsDescription } from './events';
 import {
   getWebComponentDocs,
   componentStructure,
@@ -14,6 +15,11 @@ export default {
   parameters: {
     actions: {
       handles: ['component-library-analytics'],
+    },
+    docs: {
+      description: {
+        component: generateEventsDescription(checkBoxGroupDocs),
+      },
     },
   },
 };

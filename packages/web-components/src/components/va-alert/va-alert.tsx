@@ -82,6 +82,10 @@ export class VaAlert {
   })
   closeEvent: EventEmitter;
 
+  /**
+   * The event used to track usage of the component. This is emitted when an
+   * anchor link is clicked and disableAnalytics is not true.
+   */
   @Event({
     eventName: 'component-library-analytics',
     composed: true,

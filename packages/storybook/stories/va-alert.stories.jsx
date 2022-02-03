@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
+import { generateEventsDescription } from './events';
 import { VaAlert } from '@department-of-veterans-affairs/web-components/react-bindings';
 import { getWebComponentDocs, propStructure } from './wc-helpers';
 
@@ -17,22 +18,14 @@ export default {
         disable: true,
       },
     },
-    closeEvent: {
-      description:
-        'If closeable is true, this event is triggered when an alert is closed.',
-      table: {
-        defaultValue: {
-          detail: undefined,
-        },
-      },
-      control: false,
-    },
   },
   parameters: {
     docs: {
       description: {
-        component: `Use a heading element with an attribute named slot and a value of "headline" to control what is displayed for the alert's headline. 
-        Any children passed into this component without a parent slot "headline" will render in the alert's body.`,
+        component:
+          `Use a heading element with an attribute named slot and a value of "headline" to control what is displayed for the alert's headline. 
+        Any children passed into this component without a parent slot "headline" will render in the alert's body.` +
+          generateEventsDescription(alertDocs),
       },
     },
   },
