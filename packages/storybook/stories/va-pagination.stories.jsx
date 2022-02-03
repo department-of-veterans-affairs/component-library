@@ -22,7 +22,7 @@ const Template = ({
 }) => {
   const [page, setPage] = useState(currentPage);
   const handlePageSelect = event => {
-    setPage(event.detail);
+    setPage(event.detail.page);
   };
   return (
     <VaPagination

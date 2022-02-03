@@ -63,7 +63,7 @@ export class VaPagination {
   @Prop() showLastPage: boolean;
 
   private handlePageSelect = (page, eventID) => {
-    this.pageSelect.emit(page);
+    this.pageSelect.emit({ page });
     if (!this.enableAnalytics) return;
     this.componentLibraryAnalytics.emit({
       componentName: 'va-pagination',
