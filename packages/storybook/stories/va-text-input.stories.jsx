@@ -16,7 +16,6 @@ const defaultArgs = {
   'required': false,
   'error': null,
   'maxlength': null,
-  'placeholder': null,
   'value': null,
 };
 
@@ -28,7 +27,6 @@ const Template = ({
   required,
   error,
   maxlength,
-  placeholder,
   value,
 }) => {
   return (
@@ -40,7 +38,6 @@ const Template = ({
       required={required}
       error={error}
       maxlength={maxlength}
-      placeholder={placeholder}
       value={value}
     />
   );
@@ -56,14 +53,10 @@ Error.args = { ...defaultArgs, error: 'This is an error message' };
 export const Required = Template.bind({});
 Required.args = { ...defaultArgs, required: true };
 
-export const WithPlaceholder = Template.bind({});
-WithPlaceholder.args = { ...defaultArgs, placeholder: 'This is a placeholder' };
-
 export const MaxLength = Template.bind({});
 MaxLength.args = {
   ...defaultArgs,
   maxlength: '16',
-  placeholder: 'No more than 16 characters',
 };
 
 export const Autocomplete = Template.bind({});
@@ -71,7 +64,6 @@ Autocomplete.args = {
   ...defaultArgs,
   name: 'email',
   autocomplete: 'email',
-  placeholder: 'This should complete using email addresses',
 };
 
 export const WithAnalytics = Template.bind({});
