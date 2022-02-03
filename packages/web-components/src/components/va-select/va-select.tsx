@@ -48,10 +48,20 @@ export class VaSelect {
    */
   @Prop() enableAnalytics: boolean;
 
+  /**
+   * The event attached to select's onkeydown
+   */
   @Event() vaKeyDown: EventEmitter;
 
+  /**
+   * The event emitted when the selected value changes
+   */
   @Event() vaSelect: EventEmitter;
 
+  /**
+   * The event used to track usage of the component. This is emitted when an
+   * option is selected and enableAnalytics is true.
+   */
   @Event({
     eventName: 'component-library-analytics',
     composed: true,

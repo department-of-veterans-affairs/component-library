@@ -29,6 +29,10 @@ export class VaBreadcrumbs {
 
   @State() breadcrumbs: Array<Node>;
 
+  /**
+   * The event used to track usage of the component. This is emitted when a
+   * breadcrumb anchor is clicked and disableAnalytics is not true.
+   */
   @Event({
     eventName: 'component-library-analytics',
     composed: true,

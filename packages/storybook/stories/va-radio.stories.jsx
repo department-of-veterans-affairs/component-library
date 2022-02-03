@@ -1,4 +1,5 @@
 import React from 'react';
+import { generateEventsDescription } from './events';
 import {
   getWebComponentDocs,
   componentStructure,
@@ -11,6 +12,13 @@ const radioItem = getWebComponentDocs('va-radio-option');
 export default {
   title: 'Components/va-radio',
   subcomponents: componentStructure(radioItem),
+  parameters: {
+    docs: {
+      description: {
+        component: generateEventsDescription(radioDocs),
+      },
+    },
+  },
 };
 
 const Template = ({
