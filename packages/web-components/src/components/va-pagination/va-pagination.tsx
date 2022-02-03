@@ -1,10 +1,13 @@
-import { Component, Host, h, Prop, Fragment } from '@stencil/core';
+import {
+  Component,
+  Event,
+  EventEmitter,
+  Fragment,
+  Host,
+  h,
+  Prop,
+} from '@stencil/core';
 import classnames from 'classnames';
-
-declare const window: Window &
-  typeof globalThis & {
-    dataLayer: any;
-  };
 
 @Component({
   tag: 'va-pagination',
@@ -15,12 +18,18 @@ export class VaPagination {
   /**
    * Fires when a page is selected
    */
-  @Prop() pageSelect: any;
+  @Event() pageSelect: EventEmitter;
 
   /**
-   * Fires when a page is selected if enable-analytics is true
+   * The event used to track usage of the component. Fires when a
+   * a page is selected if enable-analytics is true.
    */
-  @Prop() trackEvent: any;
+  @Event({
+    bubbles: true,
+    composed: true,
+    eventName: 'component-library-analytics',
+  })
+  componentLibraryAnalytics: EventEmitter;
 
   /**
    * Aria-label suffix text for buttons
@@ -53,22 +62,16 @@ export class VaPagination {
    */
   @Prop() showLastPage: boolean;
 
-  private handleTrackEvent = (...args) => {
-    if (!this.trackEvent) {
-      if (!window.dataLayer) return;
-      window.dataLayer.push(...args);
-    } else {
-      this.trackEvent(...args);
-    }
-  };
-
   private handlePageSelect = (page, eventID) => {
-    this.pageSelect(page);
+    this.pageSelect.emit(page);
     if (!this.enableAnalytics) return;
-
-    this.handleTrackEvent({
-      'event': eventID,
-      'paginate-page-number': page,
+    this.componentLibraryAnalytics.emit({
+      componentName: 'va-pagination',
+      action: 'linkClick',
+      details: {
+        'event': eventID,
+        'paginate-page-number': page,
+      },
     });
   };
 

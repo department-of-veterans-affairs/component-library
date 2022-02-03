@@ -97,59 +97,38 @@ describe('va-pagination', () => {
   });
 
   it('should select previous page when prev button is clicked', async () => {
-    const mockSelectPage = jest.fn();
     const page = await newE2EPage();
     await page.setContent(`
       <va-pagination page="3" pages="50" />
     `);
-    await page.exposeFunction('mockFunction', mockSelectPage);
-    await page.$eval('va-pagination', (elm: any) => {
-      elm.pageSelect = this.mockFunction;
-    });
-    await page.waitForChanges();
-
+    const onPageSelectSpy = await page.spyOnEvent('pageSelect');
     const prevButton = await page.find('va-pagination >>> .button-prev');
     await prevButton.click();
-    expect(mockSelectPage.mock.calls.length).toEqual(1);
-    expect(mockSelectPage.mock.calls[0][0]).toBe(2);
+    expect(onPageSelectSpy).toHaveReceivedEventDetail({ page: 2 });
   });
 
   it('should select next page when next button is clicked', async () => {
-    const mockSelectPage = jest.fn();
     const page = await newE2EPage();
     await page.setContent(`
       <va-pagination page="3" pages="50" />
     `);
-    await page.exposeFunction('mockFunction', mockSelectPage);
-    await page.$eval('va-pagination', (elm: any) => {
-      elm.pageSelect = this.mockFunction;
-    });
-    await page.waitForChanges();
-
+    const onPageSelectSpy = await page.spyOnEvent('pageSelect');
     const nextButton = await page.find('va-pagination >>> .button-next');
     await nextButton.click();
-    expect(mockSelectPage.mock.calls.length).toEqual(1);
-    expect(mockSelectPage.mock.calls[0][0]).toBe(4);
+    expect(onPageSelectSpy).toHaveReceivedEventDetail({ page: 4 });
   });
 
   it('should select page 5 when page 5 button is clicked', async () => {
-    const mockSelectPage = jest.fn();
     const page = await newE2EPage();
     await page.setContent(`
       <va-pagination page="3" pages="50" />
     `);
-    await page.exposeFunction('mockFunction', mockSelectPage);
-    await page.$eval('va-pagination', (elm: any) => {
-      elm.pageSelect = this.mockFunction;
-    });
-    await page.waitForChanges();
-
+    const onPageSelectSpy = await page.spyOnEvent('pageSelect');
     const page5Button = await page.find(
       'va-pagination >>> button[aria-label="Page 5 "]',
     );
     await page5Button.click();
-    expect(mockSelectPage.mock.calls.length).toEqual(1);
-    expect(mockSelectPage.mock.calls[0][0]).toBe(5);
+    expect(onPageSelectSpy).toHaveReceivedEventDetail({ page: 5 });
   });
 
   it('should focus prev button when pressing tab inside component', async () => {
@@ -166,22 +145,15 @@ describe('va-pagination', () => {
   });
 
   it('should tab to prev button and select it using the enter key', async () => {
-    const mockSelectPage = jest.fn();
     const page = await newE2EPage();
     await page.setContent(`
     <va-pagination page="3" pages="50" />
     `);
-    await page.exposeFunction('mockFunction', mockSelectPage);
-    await page.$eval('va-pagination', (elm: any) => {
-      elm.pageSelect = this.mockFunction;
-    });
-    await page.waitForChanges();
+    const onPageSelectSpy = await page.spyOnEvent('pageSelect');
     const component = await page.find('va-pagination');
     await component.press('Tab');
-
     await component.press('Enter');
-    expect(mockSelectPage.mock.calls.length).toEqual(1);
-    expect(mockSelectPage.mock.calls[0][0]).toBe(2);
+    expect(onPageSelectSpy).toHaveReceivedEventDetail({ page: 2 });
   });
 
   it('should set aria-current to selected page', async () => {

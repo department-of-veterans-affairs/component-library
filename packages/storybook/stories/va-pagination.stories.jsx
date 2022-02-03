@@ -21,14 +21,14 @@ const Template = ({
   'show-last-page': showLastPage,
 }) => {
   const [page, setPage] = useState(currentPage);
-  const handlePageSelect = pageNumber => {
-    setPage(pageNumber);
+  const handlePageSelect = event => {
+    setPage(event.detail);
   };
   return (
     <VaPagination
       page={page}
       pages={pages}
-      pageSelect={handlePageSelect}
+      onPageSelect={handlePageSelect}
       showLastPage={showLastPage}
     />
   );

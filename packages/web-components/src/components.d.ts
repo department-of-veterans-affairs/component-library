@@ -186,10 +186,6 @@ export namespace Components {
          */
         "page": number;
         /**
-          * Fires when a page is selected
-         */
-        "pageSelect": any;
-        /**
           * The total number of pages
          */
         "pages": number;
@@ -197,10 +193,6 @@ export namespace Components {
           * Display last page number when the page count exceeds `maxPageListLength`
          */
         "showLastPage": boolean;
-        /**
-          * Fires when a page is selected if enable-analytics is true
-         */
-        "trackEvent": any;
     }
     interface VaProgressBar {
         /**
@@ -724,13 +716,17 @@ declare namespace LocalJSX {
          */
         "maxPageListLength"?: number;
         /**
-          * The current page number
+          * The event used to track usage of the component. Fires when a a page is selected if enable-analytics is true.
          */
-        "page"?: number;
+        "onComponent-library-analytics"?: (event: CustomEvent<any>) => void;
         /**
           * Fires when a page is selected
          */
-        "pageSelect"?: any;
+        "onPageSelect"?: (event: CustomEvent<any>) => void;
+        /**
+          * The current page number
+         */
+        "page"?: number;
         /**
           * The total number of pages
          */
@@ -739,10 +735,6 @@ declare namespace LocalJSX {
           * Display last page number when the page count exceeds `maxPageListLength`
          */
         "showLastPage"?: boolean;
-        /**
-          * Fires when a page is selected if enable-analytics is true
-         */
-        "trackEvent"?: any;
     }
     interface VaProgressBar {
         /**
