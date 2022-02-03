@@ -181,4 +181,31 @@ describe('va-accordion', () => {
       },
     });
   });
+
+  it('fires an analytics event with default data when no props are provided', async () => {
+    const page = await newE2EPage();
+    await page.setContent(`
+      <va-accordion>
+        <va-accordion-item></va-accordion-item>
+      </va-accordion>`,
+    );
+
+    const analyticsSpy = await page.spyOnEvent('component-library-analytics');
+
+    const button = await page.find(
+      'va-accordion-item >>> button[aria-expanded="false"]',
+    );
+
+    await button.click();
+
+    expect(analyticsSpy).toHaveReceivedEventDetail({
+      action: 'expand',
+      componentName: 'Accordion',
+      details: {
+        level: 2,
+        sectionHeading: null,
+        subheader: null,
+      },
+    });
+  });
 });
