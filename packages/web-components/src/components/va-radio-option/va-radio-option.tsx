@@ -49,6 +49,7 @@ export class VaRadioOption {
       <Host
         aria-checked={this.checked ? `${this.checked}` : 'false'}
         aria-describedby={ariaDescribedby}
+        aria-label={this.name}
         checked={this.checked}
         name={this.name}
         onClick={() => this.handleChange()}
@@ -56,7 +57,7 @@ export class VaRadioOption {
         value={this.value}
         id={this.el.id || this.label}
       >
-        <label htmlFor={this.label} aria-label={this.name}>{this.label}</label>
+        <label htmlFor={this.label}>{this.label}</label>
       </Host>
     );
   }
