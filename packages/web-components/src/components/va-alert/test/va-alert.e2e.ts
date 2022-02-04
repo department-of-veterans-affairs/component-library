@@ -15,11 +15,7 @@ describe('va-alert', () => {
             <i aria-hidden="true" role="img"></i>
             <div class="body">
               <slot name="headline"></slot>
-              <div id="body-click" role="presentation">
-                <div>
-                  <slot></slot>
-                </div>
-              </div>
+              <slot></slot>
             </div>
           </div>
         </mock:shadow-root>
