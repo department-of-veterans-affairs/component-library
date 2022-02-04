@@ -138,10 +138,6 @@ export class VaAlert {
   }
 
   componentDidLoad() {
-    // NVDA workaround to prevent "clickable" announcement
-    this.el?.shadowRoot
-      .querySelector('#body-click')
-      .addEventListener('click', e => this.handleAlertBodyClick(e));
     this.vaComponentDidLoad.emit();
   }
 
