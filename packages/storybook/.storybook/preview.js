@@ -96,8 +96,3 @@ export const parameters = {
 };
 
 export const decorators = [withHTML];
-
-// Test
-document.body.onload = function () {
-  document.querySelector('#root').setAttribute('role', 'presentation');
-};
