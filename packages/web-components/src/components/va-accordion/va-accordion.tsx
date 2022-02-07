@@ -27,6 +27,10 @@ import { getSlottedNodes } from '../../utils/utils';
  * - Allow users to click anywhere in the header area to expand or collapse the content; a larger target is easier to manipulate.
  * - Make sure interactive elements within the collapsible region are far enough from the headers that users don’t accidentally trigger a collapse. (The exact distance depends on the device.
  */
+
+/**
+ * @accordionItemToggled This event is fired when an accordion item is opened or closed
+ */
 @Component({
   tag: 'va-accordion',
   styleUrl: 'va-accordion.css',
@@ -35,6 +39,10 @@ import { getSlottedNodes } from '../../utils/utils';
 export class VaAccordion {
   @Element() el!: any;
 
+  /**
+   * The event used to track usage of the component. This is emitted when an
+   * accordion item is toggled and disableAnalytics is not true.
+   */
   @Event({
     eventName: 'component-library-analytics',
     composed: true,
@@ -54,13 +62,12 @@ export class VaAccordion {
     // Close the other items if this accordion isn't multi-selectable
 
     // Usage for slot to provide context to analytics for header and level
-    let headerText
-    let headerLevel
-    getSlottedNodes(clickedItem, null).map(
-      (node: HTMLSlotElement) => {
-        headerText = node.innerHTML
-        headerLevel = parseInt(node.tagName.toLowerCase().split('')[1])
-    })
+    let headerText;
+    let headerLevel;
+    getSlottedNodes(clickedItem, null).map((node: HTMLSlotElement) => {
+      headerText = node?.innerHTML;
+      headerLevel = parseInt(node?.tagName?.toLowerCase().split('')[1]);
+    });
 
     if (this.openSingle) {
       getSlottedNodes(this.el, 'va-accordion-item')
@@ -121,7 +128,6 @@ export class VaAccordion {
    * Optional accordion section heading text. Only used in analytics event. Default is null.
    */
   @Prop() sectionHeading: string = null;
-
 
   render() {
     return (

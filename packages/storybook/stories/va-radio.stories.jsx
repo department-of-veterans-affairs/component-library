@@ -1,4 +1,5 @@
 import React from 'react';
+import { generateEventsDescription } from './events';
 import {
   getWebComponentDocs,
   componentStructure,
@@ -11,6 +12,13 @@ const radioItem = getWebComponentDocs('va-radio-option');
 export default {
   title: 'Components/va-radio',
   subcomponents: componentStructure(radioItem),
+  parameters: {
+    docs: {
+      description: {
+        component: generateEventsDescription(radioDocs),
+      },
+    },
+  },
 };
 
 const Template = ({
@@ -32,6 +40,46 @@ const Template = ({
   );
 };
 
+const IdUsageTemplate = ({
+  'enable-analytics': enableAnalytics,
+  error,
+  label,
+  required,
+}) => {
+  return (
+    <>
+      <va-radio
+        enable-analytics={enableAnalytics}
+        error={error}
+        label={label}
+        required={required}
+      >
+        <va-radio-option id="no1" label="No" name="no" value="1" />
+        <va-radio-option
+          id="yes1"
+          label="Yes - Any Veteran"
+          name="yes"
+          value="2"
+        />
+      </va-radio>
+      <va-radio
+        enable-analytics={enableAnalytics}
+        error={error}
+        label={label}
+        required={required}
+      >
+        <va-radio-option id="no2" label="No" name="no" value="1" />
+        <va-radio-option
+          id="yes2"
+          label="Yes - Any Veteran"
+          name="yes"
+          value="2"
+        />
+      </va-radio>
+    </>
+  );
+};
+
 const defaultArgs = {
   'enable-analytics': false,
   'label': 'This is a label',
@@ -49,4 +97,10 @@ export const Error = Template.bind({});
 Error.args = {
   ...defaultArgs,
   error: 'There has been an error',
+};
+
+export const IdUsage = IdUsageTemplate.bind({});
+IdUsage.args = {
+  ...defaultArgs,
+  required: true,
 };
