@@ -168,6 +168,32 @@ export namespace Components {
     }
     interface VaOnThisPage {
     }
+    interface VaPagination {
+        /**
+          * Aria-label suffix text for buttons
+         */
+        "ariaLabelSuffix": string;
+        /**
+          * Whether or not an analytics event will be fired
+         */
+        "enableAnalytics": boolean;
+        /**
+          * The maximum number of pages to show at once
+         */
+        "maxPageListLength": number;
+        /**
+          * The current page number
+         */
+        "page": number;
+        /**
+          * The total number of pages
+         */
+        "pages": number;
+        /**
+          * Display last page number when the page count exceeds `maxPageListLength`
+         */
+        "showLastPage": boolean;
+    }
     interface VaProcessList {
     }
     interface VaProgressBar {
@@ -402,7 +428,7 @@ declare global {
     var HTMLVaPaginationElement: {
         prototype: HTMLVaPaginationElement;
         new (): HTMLVaPaginationElement;
-    }
+    };
     interface HTMLVaProcessListElement extends Components.VaProcessList, HTMLStencilElement {
     }
     var HTMLVaProcessListElement: {
