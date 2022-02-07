@@ -46,7 +46,7 @@ export class VaProgressBar {
   }
 
   render() {
-    const { label = `${this.percent}% complete`, percent } = this;
+    const { label = `${this.percent.toFixed(0)}% complete`, percent } = this;
 
     return (
       <Host>
