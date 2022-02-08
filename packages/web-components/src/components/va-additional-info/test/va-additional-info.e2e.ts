@@ -19,7 +19,7 @@ describe('va-additional-info', () => {
               <i class="fa-angle-down" role="presentation"></i>
             </span>
           </a>
-          <div class="closed" id="info">
+          <div class="closed" id="info" style="--calc-max-height:0px;">
             <slot></slot>
           </div>
         </mock:shadow-root>

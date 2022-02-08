@@ -1,5 +1,6 @@
 import {
   Component,
+  Element,
   Event,
   EventEmitter,
   Host,
@@ -14,6 +15,8 @@ import {
   shadow: true,
 })
 export class VaAdditionalInfo {
+  @Element() el: HTMLElement;
+
   @State() open: boolean;
 
   /**
@@ -57,6 +60,13 @@ export class VaAdditionalInfo {
       event.preventDefault();
       this.toggleOpen();
     }
+  }
+
+  // Ensures that the CSS animation is consistent and uses the correct max-height for its content
+  componentDidLoad() {
+    const infoElm = this.el.shadowRoot.getElementById('info');
+    const maxHeight = infoElm.scrollHeight + 'px';
+    infoElm.style.setProperty('--calc-max-height', maxHeight);
   }
 
   render() {
