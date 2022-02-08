@@ -8,10 +8,6 @@ a[aria-expanded='true'] ~ #info {
   border-left-color: var(--color-primary-alt-dark);
 }
 
-#info {
-  overflow: hidden;
-}
-
 #info.closed {
   visibility: hidden;
 }
