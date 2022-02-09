@@ -94,6 +94,15 @@ button:focus {
 }
 
 @media (max-width: 768px) {
+  .pagination-inner {
+    width: 20rem;
+  }
+
+  .pagination-next {
+    margin-right: -3rem;
+    padding-left: 1rem;
+  }
+
   .pagination-prev {
     margin-left: -3rem;
     padding-right: 1rem;
@@ -101,21 +110,12 @@ button:focus {
 }
 
 @media (min-width: 481px) {
-  .pagination-prev:not(:empty) .button-prev::before {
-    content: '\2039\a0\a0';
-  }
-}
-
-@media (max-width: 768px) {
-  .pagination-next {
-    margin-right: -3rem;
-    padding-left: 1rem;
-  }
-}
-
-@media (min-width: 481px) {
   .pagination-next:not(:empty) .button-next::after {
     content: '\a0\a0\203a';
+  }
+
+  .pagination-prev:not(:empty) .button-prev::before {
+    content: '\2039\a0\a0';
   }
 }
 
@@ -124,12 +124,6 @@ button:focus {
   .pagination-prev {
     padding-left: 1rem;
     padding-right: 1rem;
-  }
-}
-
-@media (max-width: 768px) {
-  .pagination-inner {
-    width: 20rem;
   }
 }
 
