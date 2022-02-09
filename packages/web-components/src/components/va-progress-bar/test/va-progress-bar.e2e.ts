@@ -83,7 +83,7 @@ describe('va-progress-bar', () => {
     expect(analyticsSpy).not.toHaveReceivedEvent();
   });
 
-  it('rounds percent value used in aria-label to 0 significant figures', async () => {
+  it('truncates percent to integer in aria-label and aria-valuenow', async () => {
     const page = await newE2EPage();
     await page.setContent(
       '<va-progress-bar percent="17.3098439"></va-progress-bar>',
