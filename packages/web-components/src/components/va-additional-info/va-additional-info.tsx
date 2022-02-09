@@ -5,6 +5,7 @@ import {
   EventEmitter,
   Host,
   Prop,
+  Listen,
   State,
   h,
 } from '@stencil/core';
@@ -40,6 +41,11 @@ export class VaAdditionalInfo {
   })
   componentLibraryAnalytics: EventEmitter;
 
+  @Listen('resize', { target: 'window' })
+  handleResize() {
+    this.updateInfoMaxHeight();
+  }
+
   toggleOpen(): void {
     // Conditionally track the event.
     if (!this.disableAnalytics) {
@@ -63,10 +69,18 @@ export class VaAdditionalInfo {
   }
 
   // Ensures that the CSS animation is consistent and uses the correct max-height for its content
-  componentDidLoad() {
+  updateInfoMaxHeight() {
     const infoElm = this.el.shadowRoot.getElementById('info');
-    const maxHeight = infoElm.scrollHeight + 'px';
-    infoElm.style.setProperty('--calc-max-height', maxHeight);
+    const contentHeight = infoElm.scrollHeight + 'px';
+    // the additional 2em is #info margin-top and margin-bottom when open
+    infoElm.style.setProperty(
+      '--calc-max-height',
+      'calc(' + contentHeight + ' + 2rem)',
+    );
+  }
+
+  componentDidLoad() {
+    this.updateInfoMaxHeight();
   }
 
   render() {
