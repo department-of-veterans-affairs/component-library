@@ -206,4 +206,22 @@ describe('va-additional-info', () => {
 
     expect(analyticsSpy).toHaveReceivedEventTimes(0);
   });
+
+  it('sets the correct max-height value for the content given', async () => {
+    const page = await newE2EPage();
+    await page.setContent(`
+      <va-additional-info trigger="Click here for a treat!" disable-analytics>
+        <div style="height:50px;padding:10px 0;margin:5px 0;">We're out of treats! Try again later.</div>
+      </va-additional-info>
+    `);
+    const handle = await page.waitForSelector('pierce/#info');
+    const anchorEl = await page.find('va-additional-info >>> a');
+    await anchorEl.click();
+    await page.waitForSelector('pierce/#info.open');
+    const calcMaxHeight = await handle.evaluate((domElement: HTMLElement) =>
+      domElement.style.getPropertyValue('--calc-max-height'),
+    );
+    // 50px from height + 20px from padding + 10px from margin
+    expect(calcMaxHeight).toEqual('calc(80px + 2rem)');
+  });
 });
