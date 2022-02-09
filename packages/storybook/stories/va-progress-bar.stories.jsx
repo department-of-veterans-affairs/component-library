@@ -17,8 +17,8 @@ const Template = ({ 'enable-analytics': enableAnalytics, label, percent }) => (
 
 const defaultArgs = {
   'enable-analytics': false,
-  'label': 'Add a label here',
-  'percent': 35,
+  'label': undefined,
+  'percent': 48.123456,
 };
 
 export const Default = Template.bind({});
