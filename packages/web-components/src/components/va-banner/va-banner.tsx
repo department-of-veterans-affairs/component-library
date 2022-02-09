@@ -6,8 +6,10 @@ import {
   Host,
   h,
   Prop,
+  State,
 } from '@stencil/core';
 
+const DISMISSED_BANNERS_KEY = 'DISMISSED_BANNERS';
 @Component({
   tag: 'va-banner',
   styleUrl: 'va-banner.css',
@@ -42,14 +44,19 @@ export class VaBanner {
   @Prop() visible: boolean = true;
 
   /**
-   * Enable sessionStorage for Banner
-   * Defaults to localStorage
+   * Enable sessionStorage for the Banner otherwise storage 
+   * if showClose is enabled will default to localStorage
    * */
-  @Prop() storage: boolean = false;
+  @Prop() windowSession: boolean = false;
+
+  /**
+   * Keep track of locally dismissed Banners
+   * */
+  @State() dismissedBanners: Array<String> = [];
 
   /**
    * The event used to track usage of the component. This is emitted when an
-   * anchor link is clicked and disableAnalytics is not true.
+   * anchor link or the dismiss icon is clicked and disableAnalytics is not true.
    */
   @Event({
     eventName: 'component-library-analytics',
@@ -58,11 +65,56 @@ export class VaBanner {
   })
   componentLibraryAnalytics: EventEmitter;
 
-  private dismiss(e: Event): void {
-    console.log(e, 'DISMISS')
-    // Handle Storage Settings
-    // Run Analytics event for Close Click
-  }
+  private prepareBannerID = () => `${this.headline}:${this.el.innerHTML}`;
+
+  private dismiss = () => {
+    // Derive the current banner ID.
+    const currentBannerID = this.prepareBannerID();
+
+    // Escape early if the banner is already dismissed.
+    if (this.dismissedBanners.includes(currentBannerID)) {
+      return;
+    }
+
+    // Add the banner ID to the list of dismissed banners. If showClose enabled
+    if (this.showClose) {
+      // Derive the updated dismissed banners.
+      const updatedDismissedBanners = [
+        ...this.dismissedBanners,
+        currentBannerID,
+      ];
+
+      //   Set storage type
+      const storageType = this.windowSession
+        ? window.sessionStorage
+        : window.localStorage;
+
+      // Set banner dismissed in storage
+      storageType.setItem(
+        DISMISSED_BANNERS_KEY,
+        JSON.stringify(updatedDismissedBanners),
+      );
+
+      // Update dismissedBanners in state.
+      this.dismissedBanners = updatedDismissedBanners;
+    }
+
+    // Track the dismiss event in Google Analytics
+    if (!this.disableAnalytics) {
+      const detail = {
+        componentName: 'Banner',
+        action: 'dismissIconClick',
+        details: {
+          clickLabel: 'Dismiss Banner',
+          headline: this.headline,
+          showClose: this.showClose,
+          windowSession: this.windowSession,
+          type: this.type,
+        },
+      };
+      this.componentLibraryAnalytics.emit(detail);
+    }
+  };
 
   private handleAlertBodyClick(e: MouseEvent): void {
     let headlineText = null;
@@ -94,6 +146,8 @@ export class VaBanner {
           details: {
             clickLabel: target.innerText,
             headline: headlineText,
+            showClose: this.showClose,
+            type: this.type,
           },
         };
         this.componentLibraryAnalytics.emit(detail);
@@ -102,9 +156,28 @@ export class VaBanner {
   }
 
   render() {
-    // Derive onCloseAlert depending on the environment.
-    const onCloseAlert =
-      this.showClose && this.storage ? this.dismiss : undefined;
+    // Set the storage type
+    const storageType = this.windowSession
+      ? window.sessionStorage
+      : window.localStorage;
+
+    // Derive dismissed banners from storage.
+    const dismissedBannersString = storageType.getItem(DISMISSED_BANNERS_KEY);
+    this.dismissedBanners = dismissedBannersString
+      ? JSON.parse(dismissedBannersString)
+      : [];
+
+    // Derive if the banner is dismissed.
+    const isBannerDismissed =
+      this.showClose && this.dismissedBanners?.includes(this.prepareBannerID());
+
+    // Escape early if the banner isn't visible or is dismissed.
+    if (!this.visible || isBannerDismissed) {
+      return null;
+    }
+
+    // Derive onCloseAlert depending if the close icon is shown.
+    const onCloseAlert = this.showClose ? this.dismiss : undefined;
 
     return (
       <Host

@@ -102,10 +102,6 @@ export namespace Components {
          */
         "showClose": boolean;
         /**
-          * Enable sessionStorage for Banner Defaults to localStorage
-         */
-        "storage": boolean;
-        /**
           * The type of the banner. One of 'info', 'error', 'success', 'continue', or 'warning'. This affects both the icon of the AlertBox and the top border color.
          */
         "type": string;
@@ -113,6 +109,10 @@ export namespace Components {
           * A boolean that when false makes it so that the banner does not render.
          */
         "visible": boolean;
+        /**
+          * Enable sessionStorage for the Banner otherwise storage  if showClose is enabled will default to localStorage
+         */
+        "windowSession": boolean;
     }
     interface VaBreadcrumbs {
         /**
@@ -617,17 +617,13 @@ declare namespace LocalJSX {
          */
         "headline"?: string;
         /**
-          * The event used to track usage of the component. This is emitted when an anchor link is clicked and disableAnalytics is not true.
+          * The event used to track usage of the component. This is emitted when an anchor link or the dismiss icon is clicked and disableAnalytics is not true.
          */
         "onComponent-library-analytics"?: (event: CustomEvent<any>) => void;
         /**
           * Enable the close functionality. The banner will be closed until storage is cleared.
          */
         "showClose"?: boolean;
-        /**
-          * Enable sessionStorage for Banner Defaults to localStorage
-         */
-        "storage"?: boolean;
         /**
           * The type of the banner. One of 'info', 'error', 'success', 'continue', or 'warning'. This affects both the icon of the AlertBox and the top border color.
          */
@@ -636,6 +632,10 @@ declare namespace LocalJSX {
           * A boolean that when false makes it so that the banner does not render.
          */
         "visible"?: boolean;
+        /**
+          * Enable sessionStorage for the Banner otherwise storage  if showClose is enabled will default to localStorage
+         */
+        "windowSession"?: boolean;
     }
     interface VaBreadcrumbs {
         /**
