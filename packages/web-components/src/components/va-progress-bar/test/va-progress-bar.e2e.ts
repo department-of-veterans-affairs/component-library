@@ -82,4 +82,33 @@ describe('va-progress-bar', () => {
 
     expect(analyticsSpy).not.toHaveReceivedEvent();
   });
+
+  it('rounds percent to integer in aria-label and aria-valuenow', async () => {
+    const page = await newE2EPage();
+    await page.setContent(
+      '<va-progress-bar percent="17.3098439"></va-progress-bar>',
+    );
+
+    const element = await page.find('va-progress-bar');
+    expect(element).toEqualHtml(`
+      <va-progress-bar class="hydrated" percent="17.3098439">
+        <mock:shadow-root>
+          <div
+            aria-label="17% complete"
+            aria-valuemax="100"
+            aria-valuemin="0"
+            aria-valuenow="17"
+            class="progress-bar"
+            tabindex="0"
+            role="progressbar"
+          >
+            <div
+              class="progress-bar-inner"
+              style="width: 17.3098%;"
+            />
+          </div>
+        </mock:shadow-root>
+      </va-progress-bar>
+    `);
+  });
 });
