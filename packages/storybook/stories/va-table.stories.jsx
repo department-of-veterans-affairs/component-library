@@ -18,19 +18,21 @@ const Template = args => {
   const { data, title, col1, col2, col3 } = args;
   const columns = [col1, col2, col3];
   return (
-    <va-table title={title}>
-      {columns.map(col => (
-        <th slot="headers">{col}</th>
-      ))}
+    <main>
+      <va-table title={title}>
+        {columns.map(col => (
+          <th slot="headers">{col}</th>
+        ))}
 
-      {data.map(row => (
-        <va-table-row>
-          {row.map(item => (
-            <td>{item}</td>
-          ))}
-        </va-table-row>
-      ))}
-    </va-table>
+        {data.map(row => (
+          <va-table-row>
+            {row.map(item => (
+              <td role="cell">{item}</td>
+            ))}
+          </va-table-row>
+        ))}
+      </va-table>
+    </main>
   );
 };
 
