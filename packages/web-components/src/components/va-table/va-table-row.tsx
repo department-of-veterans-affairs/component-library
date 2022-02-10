@@ -1,4 +1,4 @@
-import { Component, Host, h } from '@stencil/core';
+import { Component, h } from '@stencil/core';
 
 @Component({
   tag: 'va-table-row',
@@ -8,9 +8,9 @@ import { Component, Host, h } from '@stencil/core';
 export class VaTableRow {
   render() {
     return (
-      <Host role="row">
+      <tr>
         <slot></slot>
-      </Host>
+      </tr>
     );
   }
 }
