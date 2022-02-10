@@ -110,7 +110,7 @@ export namespace Components {
          */
         "visible": boolean;
         /**
-          * Enable sessionStorage for the Banner otherwise storage  if showClose is enabled will default to localStorage
+          * Enable sessionStorage for the Banner otherwise storage if showClose is enabled will default to localStorage
          */
         "windowSession": boolean;
     }
@@ -633,7 +633,7 @@ declare namespace LocalJSX {
          */
         "visible"?: boolean;
         /**
-          * Enable sessionStorage for the Banner otherwise storage  if showClose is enabled will default to localStorage
+          * Enable sessionStorage for the Banner otherwise storage if showClose is enabled will default to localStorage
          */
         "windowSession"?: boolean;
     }

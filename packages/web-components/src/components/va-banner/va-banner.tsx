@@ -44,7 +44,7 @@ export class VaBanner {
   @Prop() visible: boolean = true;
 
   /**
-   * Enable sessionStorage for the Banner otherwise storage 
+   * Enable sessionStorage for the Banner otherwise storage
    * if showClose is enabled will default to localStorage
    * */
   @Prop() windowSession: boolean = false;
@@ -117,25 +117,6 @@ export class VaBanner {
   };
 
   private handleAlertBodyClick(e: MouseEvent): void {
-    let headlineText = null;
-
-    // This is the happy path, meaning the user isn't using IE11
-    try {
-      const children = this.el.shadowRoot.querySelector('slot').assignedNodes();
-      // An empty array means that there isn't a node with `slot="headline"`
-      headlineText = children.length > 0 ? children[0].textContent : null;
-    } catch (e) {
-      // This is where we handle the edge case of the user being on IE11
-      const children = this.el.shadowRoot.childNodes;
-      const headerList = children.filter((node: any) =>
-        ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'].includes(
-          node.tagName.toLowerCase(),
-        ),
-      );
-
-      headlineText = headerList.length > 0 ? headerList[0].textContent : null;
-    }
-
     if (!this.disableAnalytics) {
       const target = e.target as HTMLElement;
       // If it's a link being clicked, dispatch an analytics event
@@ -145,7 +126,7 @@ export class VaBanner {
           action: 'linkClick',
           details: {
             clickLabel: target.innerText,
-            headline: headlineText,
+            headline: this.headline,
             showClose: this.showClose,
             type: this.type,
           },
