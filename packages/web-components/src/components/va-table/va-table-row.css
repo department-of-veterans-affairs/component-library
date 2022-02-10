@@ -1,5 +1,7 @@
 :host {
-  display: inherit;
+  display: table-row;
+  background-color: var(--color-white);
+  border-bottom: 1px solid var(--color-gray);
 }
 
 ::slotted(td) {
@@ -8,11 +10,6 @@
   padding-left: 0.8em;
   word-wrap: break-word;
   vertical-align: top;
-}
-
-tr {
-  background-color: var(--color-white);
-  border-bottom: 1px solid var(--color-gray);
 }
 
 ::slotted(td::first-letter) {

@@ -37,7 +37,7 @@ export class VaTable {
               <slot name="headers"></slot>
             </tr>
           </thead>
-          <tbody role="row">
+          <tbody>
             <slot></slot>
           </tbody>
         </table>
