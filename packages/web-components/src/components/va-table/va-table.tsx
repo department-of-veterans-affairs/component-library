@@ -6,10 +6,6 @@ import { Component, Prop, Host, h } from '@stencil/core';
   shadow: true,
 })
 export class VaTable {
-  @Prop() columns: Array<any>;
-  @Prop() col1: string;
-  @Prop() col2: string;
-  @Prop() col3: string;
   @Prop() title: string;
 
   render() {
@@ -20,7 +16,9 @@ export class VaTable {
         <table role="table">
           {title && <caption>{title}</caption>}
           <thead>
-            <slot name="headers"></slot>
+            <tr role="row" slot="headers">
+              <slot name="headers"></slot>
+            </tr>
           </thead>
           <tbody role="row">
             <slot></slot>

@@ -19,13 +19,11 @@ const Template = args => {
   const columns = [col1, col2, col3];
   return (
     <va-table title={title}>
-      <tr role="row" slot="headers">
-        {columns.map(col => (
-          <th role="columnheader" scope="col">
-            {col}
-          </th>
-        ))}
-      </tr>
+      {columns.map(col => (
+        <th slot="headers" role="columnheader" scope="col">
+          {col}
+        </th>
+      ))}
 
       {data.map(row => (
         <va-table-row>

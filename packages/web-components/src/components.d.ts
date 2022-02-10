@@ -269,10 +269,6 @@ export namespace Components {
         "value": string;
     }
     interface VaTable {
-        "col1": string;
-        "col2": string;
-        "col3": string;
-        "columns": Array<any>;
         "title": string;
     }
     interface VaTableRow {
@@ -834,10 +830,6 @@ declare namespace LocalJSX {
         "value"?: string;
     }
     interface VaTable {
-        "col1"?: string;
-        "col2"?: string;
-        "col3"?: string;
-        "columns"?: Array<any>;
         "title"?: string;
     }
     interface VaTableRow {

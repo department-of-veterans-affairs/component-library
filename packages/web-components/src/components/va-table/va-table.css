@@ -11,13 +11,9 @@ table {
   text-align: left;
 }
 
-/**
- * In order for this to work we'll have to remove the
- * USWDS table styles that are targetting the `<th>`
- */
-::slotted(tr) {
+::slotted(th) {
   background: #f1f1f1 !important;
-  font-weight: 700;
+  font-weight: 700 !important;
 }
 
 caption {
