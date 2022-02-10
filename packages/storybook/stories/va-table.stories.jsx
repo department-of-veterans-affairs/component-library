@@ -15,9 +15,18 @@ export default {
 };
 
 const Template = args => {
-  const { data, ...rest } = args;
+  const { data, title, col1, col2, col3 } = args;
+  const columns = [col1, col2, col3];
   return (
-    <va-table {...rest}>
+    <va-table title={title}>
+      <tr role="row" slot="headers">
+        {columns.map(col => (
+          <th role="columnheader" scope="col">
+            {col}
+          </th>
+        ))}
+      </tr>
+
       {data.map(row => (
         <va-table-row>
           {row.map(item => (
