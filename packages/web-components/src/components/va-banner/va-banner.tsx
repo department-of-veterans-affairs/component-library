@@ -97,22 +97,22 @@ export class VaBanner {
 
       // Update dismissedBanners in state.
       this.dismissedBanners = updatedDismissedBanners;
-    }
 
-    // Track the dismiss event in Google Analytics
-    if (!this.disableAnalytics) {
-      const detail = {
-        componentName: 'Banner',
-        action: 'dismissIconClick',
-        details: {
-          clickLabel: 'Dismiss Banner',
-          headline: this.headline,
-          showClose: this.showClose,
-          windowSession: this.windowSession,
-          type: this.type,
-        },
-      };
-      this.componentLibraryAnalytics.emit(detail);
+      // Track the dismiss event in Google Analytics
+      if (!this.disableAnalytics) {
+        const detail = {
+          componentName: 'Banner',
+          action: 'dismissIconClick',
+          details: {
+            clickLabel: 'Dismiss Banner',
+            headline: this.headline,
+            showClose: this.showClose,
+            windowSession: this.windowSession,
+            type: this.type,
+          },
+        };
+        this.componentLibraryAnalytics.emit(detail);
+      }
     }
   };
 
