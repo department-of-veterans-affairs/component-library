@@ -268,6 +268,15 @@ export namespace Components {
          */
         "value": string;
     }
+    interface VaTable {
+        "col1": string;
+        "col2": string;
+        "col3": string;
+        "columns": Array<any>;
+        "title": string;
+    }
+    interface VaTableRow {
+    }
     interface VaTelephone {
         /**
           * 3 or 10 digit string representing the contact number
@@ -433,6 +442,18 @@ declare global {
         prototype: HTMLVaSelectElement;
         new (): HTMLVaSelectElement;
     };
+    interface HTMLVaTableElement extends Components.VaTable, HTMLStencilElement {
+    }
+    var HTMLVaTableElement: {
+        prototype: HTMLVaTableElement;
+        new (): HTMLVaTableElement;
+    };
+    interface HTMLVaTableRowElement extends Components.VaTableRow, HTMLStencilElement {
+    }
+    var HTMLVaTableRowElement: {
+        prototype: HTMLVaTableRowElement;
+        new (): HTMLVaTableRowElement;
+    };
     interface HTMLVaTelephoneElement extends Components.VaTelephone, HTMLStencilElement {
     }
     var HTMLVaTelephoneElement: {
@@ -463,6 +484,8 @@ declare global {
         "va-radio-option": HTMLVaRadioOptionElement;
         "va-segmented-progress-bar": HTMLVaSegmentedProgressBarElement;
         "va-select": HTMLVaSelectElement;
+        "va-table": HTMLVaTableElement;
+        "va-table-row": HTMLVaTableRowElement;
         "va-telephone": HTMLVaTelephoneElement;
         "va-text-input": HTMLVaTextInputElement;
     }
@@ -810,6 +833,15 @@ declare namespace LocalJSX {
          */
         "value"?: string;
     }
+    interface VaTable {
+        "col1"?: string;
+        "col2"?: string;
+        "col3"?: string;
+        "columns"?: Array<any>;
+        "title"?: string;
+    }
+    interface VaTableRow {
+    }
     interface VaTelephone {
         /**
           * 3 or 10 digit string representing the contact number
@@ -905,6 +937,8 @@ declare namespace LocalJSX {
         "va-radio-option": VaRadioOption;
         "va-segmented-progress-bar": VaSegmentedProgressBar;
         "va-select": VaSelect;
+        "va-table": VaTable;
+        "va-table-row": VaTableRow;
         "va-telephone": VaTelephone;
         "va-text-input": VaTextInput;
     }
@@ -930,6 +964,8 @@ declare module "@stencil/core" {
             "va-radio-option": LocalJSX.VaRadioOption & JSXBase.HTMLAttributes<HTMLVaRadioOptionElement>;
             "va-segmented-progress-bar": LocalJSX.VaSegmentedProgressBar & JSXBase.HTMLAttributes<HTMLVaSegmentedProgressBarElement>;
             "va-select": LocalJSX.VaSelect & JSXBase.HTMLAttributes<HTMLVaSelectElement>;
+            "va-table": LocalJSX.VaTable & JSXBase.HTMLAttributes<HTMLVaTableElement>;
+            "va-table-row": LocalJSX.VaTableRow & JSXBase.HTMLAttributes<HTMLVaTableRowElement>;
             "va-telephone": LocalJSX.VaTelephone & JSXBase.HTMLAttributes<HTMLVaTelephoneElement>;
             "va-text-input": LocalJSX.VaTextInput & JSXBase.HTMLAttributes<HTMLVaTextInputElement>;
         }
