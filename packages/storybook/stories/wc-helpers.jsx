@@ -118,5 +118,5 @@ export function StoryDocs({ data }) {
   );
 }
 StoryDocs.propTypes = {
-  data: PropTypes.Object.isRequired,
+  data: PropTypes.object.isRequired,
 };
