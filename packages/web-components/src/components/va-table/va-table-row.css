@@ -1,14 +1,11 @@
 :host {
-  display: block;
+  display: inherit;
 }
 
-td {
+::slotted(td) {
   padding-top: 0.8em;
   padding-bottom: 0.8em;
   padding-left: 0.8em;
-}
-
-td {
   word-wrap: break-word;
   vertical-align: top;
 }
@@ -18,7 +15,7 @@ tr {
   border-bottom: 1px solid var(--color-gray);
 }
 
-td::first-letter {
+::slotted(td::first-letter) {
   text-transform: capitalize;
 }
 
@@ -30,23 +27,23 @@ td::first-letter {
     border-top: 1px solid var(--color-gray-medium);
   }
 
-  td {
-    border: none;
+  ::slotted(td) {
+    border: none !important;
     font-size: 16px;
     display: flex;
     flex-direction: column;
     line-height: 24px;
   }
 
-  td:first-child {
+  ::slotted(td:first-child) {
     margin-top: 16px;
   }
 
-  td:last-child {
+  ::slotted(td:last-child) {
     margin-bottom: 16px;
   }
 
-  td::before {
+  ::slotted(td::before) {
     /*
        * aria-label has no advantage, it won't be read inside a table
         content: attr(aria-label);
@@ -57,7 +54,7 @@ td::first-letter {
     float: left;
   }
 
-  td:last-child {
+  ::slotted(td:last-child) {
     border-bottom: 0;
   }
 }

@@ -19,11 +19,11 @@ const Template = args => {
   return (
     <va-table {...rest}>
       {data.map(row => (
-        <tr>
+        <va-table-row>
           {row.map(item => (
             <td>{item}</td>
           ))}
-        </tr>
+        </va-table-row>
       ))}
     </va-table>
   );

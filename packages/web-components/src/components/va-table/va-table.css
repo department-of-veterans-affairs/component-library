@@ -28,25 +28,15 @@ th {
   vertical-align: bottom;
 }
 
-td,
 th {
   padding-top: 0.8em;
   padding-bottom: 0.8em;
   padding-left: 0.8em;
 }
 
-td {
-  word-wrap: break-word;
-  vertical-align: top;
-}
-
-tr {
+::slotted(tr) {
   background-color: var(--color-white);
   border-bottom: 1px solid var(--color-gray);
-}
-
-td::first-letter {
-  text-transform: capitalize;
 }
 
 @media screen and (max-width: 768px) {
@@ -57,41 +47,10 @@ td::first-letter {
     display: none;
   }
 
-  tr {
+  ::slotted(va-table-row) {
     border-bottom: 1px solid var(--color-gray-medium);
   }
-  tr:first-child {
+  ::slotted(va-table-row):first-child {
     border-top: 1px solid var(--color-gray-medium);
-  }
-
-  td {
-    border: none;
-    font-size: 16px;
-    display: flex;
-    flex-direction: column;
-    line-height: 24px;
-  }
-
-  td:first-child {
-    margin-top: 16px;
-  }
-
-  td:last-child {
-    margin-bottom: 16px;
-  }
-
-  td::before {
-    /*
-       * aria-label has no advantage, it won't be read inside a table
-        content: attr(aria-label);
-       */
-    content: attr(data-label);
-    font-weight: 700;
-    padding-right: 4px;
-    float: left;
-  }
-
-  td:last-child {
-    border-bottom: 0;
   }
 }
