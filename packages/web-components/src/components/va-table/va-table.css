@@ -12,7 +12,7 @@ table {
 }
 
 ::slotted(th) {
-  background: #f1f1f1 !important;
+  background: var(--color-gray-lightest) !important;
   font-weight: 700 !important;
 }
 
