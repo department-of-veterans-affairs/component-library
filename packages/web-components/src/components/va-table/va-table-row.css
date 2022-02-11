@@ -45,7 +45,7 @@ tr {
     margin-bottom: 16px;
   }
 
-  ::slotted(td::before) {
+  ::slotted(td)::before {
     /*
        * aria-label has no advantage, it won't be read inside a table
         content: attr(aria-label);
