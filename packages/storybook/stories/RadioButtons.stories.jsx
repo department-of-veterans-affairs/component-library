@@ -9,8 +9,6 @@ export default {
 const Template = args => {
   const [value, setValue] = useState(args.value);
   const onChange = newVal => setValue(newVal);
-  const errorMessage =
-    value?.value === 'Invalid option' ? 'Invalid option selected' : '';
 
   return (
     <div style={{ paddingLeft: '1em' }}>
@@ -18,7 +16,6 @@ const Template = args => {
         {...args}
         value={value}
         onValueChange={onChange}
-        errorMessage={errorMessage}
       />
     </div>
   );
@@ -37,6 +34,7 @@ const defaultArgs = {
   ],
   label: 'This is a Label',
   value: { value: 'First option' },
+  errorMessage: undefined
 };
 
 export const Default = Template.bind({});
@@ -46,6 +44,7 @@ export const Error = Template.bind({});
 Error.args = {
   ...defaultArgs,
   options: defaultArgs.options.concat(['Invalid option']),
+  errorMessage: 'Invalid Option is Selected',
   value: {
     value: 'Invalid option',
   },
