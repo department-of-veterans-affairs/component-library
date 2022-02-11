@@ -115,9 +115,9 @@ describe('va-banner', () => {
     expect(Array.from(vaBanner.shadowRoot.childNodes)).toHaveLength(0);
 
     await page.evaluate(() => {
-        location.reload()
-     })
+      location.reload();
+    });
 
-     expect(Array.from(vaBanner.shadowRoot.childNodes)).toHaveLength(0);
+    expect(Array.from(vaBanner.shadowRoot.childNodes)).toHaveLength(0);
   });
 });
