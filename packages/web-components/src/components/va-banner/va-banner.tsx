@@ -16,7 +16,7 @@ const DISMISSED_BANNERS_KEY = 'DISMISSED_BANNERS';
   shadow: true,
 })
 export class VaBanner {
-  @Element() el!: any;
+  @Element() el: HTMLElement;
 
   /**
    * If true, doesn't fire the CustomEvent which can be used for analytics tracking.

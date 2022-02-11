@@ -96,9 +96,7 @@ describe('va-banner', () => {
     });
   });
 
-  // Issue is piercing into the nested ShadowDOM as you can't go down more than one step from the host
-  // In theory we would test that the button click causes the va-alert to go away since it is dismissed
-  it.skip('does not display if dismissed', async () => {
+  it('does not display if dismissed', async () => {
     const page = await newE2EPage();
     await page.setContent(
       '<va-banner show-close="true" headline="This is a test">Test Content<a href="#">Test Link</a></va-banner>',
@@ -108,20 +106,18 @@ describe('va-banner', () => {
 
     expect(Array.from(vaBanner.shadowRoot.childNodes)).toHaveLength(1);
 
-    // Ideally we would be able to do something like page.find('va-banner >>> va-alert >>> button')
-    // Which would allow us to pierce into the nested shadowDOM get the button
-    // However Stencil only allows for first level piercing from the host which returns va-alert
-    const vaAlert = await page.find('va-banner >>> va-alert');
-
-    // This querySelector finds the Mock Element but it is not a E2EEElement
-    // E2EEElements seem to be reserved to only the hosts shadowroot elements like va-alert
-    const button = await vaAlert.shadowRoot.querySelector('button');
-
-    // Which is why the click event even though it is in theory triggered
-    // doesn't actually fire in the testing suite
+    // Allows us to pierce to nested elements in the shadowDOM
+    // https://github.com/puppeteer/puppeteer/pull/6509
+    const button = await page.$('pierce/.va-alert-close');
     await button.click();
     await page.waitForChanges();
 
     expect(Array.from(vaBanner.shadowRoot.childNodes)).toHaveLength(0);
+
+    await page.evaluate(() => {
+        location.reload()
+     })
+
+     expect(Array.from(vaBanner.shadowRoot.childNodes)).toHaveLength(0);
   });
 });
