@@ -15,9 +15,20 @@ module.exports = {
     // 'PRODUCTION' is used when building the static version of storybook.
 
     // Make whatever fine-grained changes you need
+    // Webpack docs on Loader with Dart Sass: https://webpack.js.org/loaders/sass-loader/
     config.module.rules.push({
       test: /\.scss$/,
-      use: ['style-loader', 'css-loader', 'sass-loader'],
+      use: [
+        'style-loader',
+        'css-loader',
+        {
+          loader: 'sass-loader',
+          options: {
+            // Prefer `dart-sass`
+            implementation: require.resolve('sass'),
+          },
+        },
+      ],
       include: path.resolve(__dirname, '../'),
     });
 

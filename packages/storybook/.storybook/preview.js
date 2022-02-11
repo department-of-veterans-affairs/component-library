@@ -1,5 +1,4 @@
 import '@department-of-veterans-affairs/formation/dist/formation.min.css';
-import './style.scss';
 import '@department-of-veterans-affairs/formation/dist/formation';
 import { withHTML } from '@whitespace/storybook-addon-html/react';
 
@@ -8,6 +7,8 @@ import {
   applyPolyfills,
   defineCustomElements,
 } from '@department-of-veterans-affairs/web-components/loader';
+// Reference https://github.com/storybookjs/storybook/issues/6364#issuecomment-604586067
+import '!style-loader!css-loader!sass-loader!./style.scss';
 
 applyPolyfills().then(() => {
   defineCustomElements();

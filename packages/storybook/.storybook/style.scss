@@ -1,5 +1,6 @@
-$formation-asset-path: '~@department-of-veterans-affairs/formation/assets';
-
+// Upgrading to Dart Sass requires the use of @use to import mixins at the top of the file
+// _m-crisis-line.scss are missing those references in formation for the mixins created by the imported files
+// https://sass-lang.com/documentation/at-rules/use
 @import '@department-of-veterans-affairs/formation/sass/base/_b-mixins.scss';
 @import '@department-of-veterans-affairs/formation/sass/base/_b-variables.scss';
 @import '@department-of-veterans-affairs/formation/sass/base/_b-breakpoints.scss';
