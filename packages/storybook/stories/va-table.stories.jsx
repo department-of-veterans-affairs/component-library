@@ -20,9 +20,11 @@ const Template = args => {
   return (
     <main>
       <va-table title={title}>
-        {columns.map(col => (
-          <th slot="headers">{col}</th>
-        ))}
+        <va-table-row slot="headers">
+          {columns.map(col => (
+            <th>{col}</th>
+          ))}
+        </va-table-row>
 
         {data.map(row => (
           <va-table-row>

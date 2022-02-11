@@ -7,14 +7,14 @@ import { getSlottedNodes } from '../../utils/utils';
   shadow: true,
 })
 export class VaTable {
-  header!: HTMLTableRowElement;
+  header!: HTMLTableSectionElement;
   body!: HTMLTableSectionElement;
   @Prop() title: string;
 
   componentDidLoad() {
     const headers = (
       this.header.children[0] as HTMLSlotElement
-    ).assignedNodes();
+    ).assignedNodes()[0].childNodes;
     const rows = (this.body.children[0] as HTMLSlotElement).assignedNodes();
 
     console.log('ROWS', rows);
@@ -28,7 +28,7 @@ export class VaTable {
     });
 
     rows.forEach(row => {
-      const slotted = getSlottedNodes(row as HTMLElement, 'tr')[0];
+      const slotted = getSlottedNodes(row as HTMLElement, 'va-table-row')[0];
       console.log('SLOTTED', slotted);
       const cells = (row as HTMLElement).childNodes;
       console.log(cells);
@@ -46,10 +46,8 @@ export class VaTable {
       <Host>
         <table role="table">
           {title && <caption>{title}</caption>}
-          <thead>
-            <tr ref={el => (this.header = el as HTMLTableRowElement)}>
-              <slot name="headers"></slot>
-            </tr>
+          <thead ref={el => (this.header = el as HTMLTableSectionElement)}>
+            <slot name="headers"></slot>
           </thead>
 
           <tbody ref={el => (this.body = el as HTMLTableSectionElement)}>
