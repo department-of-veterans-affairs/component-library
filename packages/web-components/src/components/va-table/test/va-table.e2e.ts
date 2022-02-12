@@ -14,9 +14,11 @@ describe('va-table', () => {
     const page = await newE2EPage();
     await page.setContent(`
         <va-table>
-          <th slot="headers">One</th>
-          <th slot="headers">Two</th>
-          <th slot="headers">Three</th>
+          <va-table-row slot="headers">
+            <th>One</th>
+            <th>Two</th>
+            <th>Three</th>
+          </va-table-row>
           <va-table-row>
             <td>Dog</td>
             <td>Cat</td>
