@@ -1782,7 +1782,7 @@ __metadata:
     "@axe-core/puppeteer": ^4.1.1
     "@babel/core": ^7.12.13
     "@department-of-veterans-affairs/formation": ^6.17.5
-    "@stencil/core": ^2.10.0
+    "@stencil/core": ^2.12.1
     "@stencil/postcss": ^2.0.0
     "@stencil/react-output-target": ^0.0.9
     "@types/jest": ^26.0.20
@@ -2438,12 +2438,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@stencil/core@npm:^2.10.0":
-  version: 2.10.0
-  resolution: "@stencil/core@npm:2.10.0"
+"@stencil/core@npm:^2.12.1":
+  version: 2.14.0
+  resolution: "@stencil/core@npm:2.14.0"
   bin:
     stencil: bin/stencil
-  checksum: 035f74e71c2428a69f15df2a3e234845e3105f3481a352a7aed65f64714fc8b4b3b135a6bb90dfd90aca559d7f80b488cf7b5b2247e96e94fccb5e1bee676634
+  checksum: e2c68913a1c6fd518611b2a15705fa1b30d8950413e62b8599223679d511f2085fc127af76d3fb216eca0e17c1d2994d134f24a1ea7652639c83913f6ba53602
   languageName: node
   linkType: hard
 
