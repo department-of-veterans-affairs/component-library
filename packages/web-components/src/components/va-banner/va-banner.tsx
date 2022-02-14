@@ -139,16 +139,19 @@ export class VaBanner {
   // Called once just after the component is first connected to the DOM
   // Fixes rerender issues that could be potentially created by calling dismissedBanners multiple times
   componentWillLoad() {
-    // Set the storage type
-    const storageType = this.windowSession
-      ? window.sessionStorage
-      : window.localStorage;
+    // Only fire if showClose enabled
+    if (this.showClose) {
+      // Set the storage type
+      const storageType = this.windowSession
+        ? window.sessionStorage
+        : window.localStorage;
 
-    // Derive dismissed banners from storage.
-    const dismissedBannersString = storageType.getItem(DISMISSED_BANNERS_KEY);
-    this.dismissedBanners = dismissedBannersString
-      ? JSON.parse(dismissedBannersString)
-      : [];
+      // Derive dismissed banners from storage.
+      const dismissedBannersString = storageType.getItem(DISMISSED_BANNERS_KEY);
+      this.dismissedBanners = dismissedBannersString
+        ? JSON.parse(dismissedBannersString)
+        : [];
+    }
   }
 
   render() {
