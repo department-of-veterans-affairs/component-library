@@ -1,5 +1,4 @@
 import { Component, Prop, Host, h } from '@stencil/core';
-import { getSlottedNodes } from '../../utils/utils';
 
 @Component({
   tag: 'va-table',
@@ -15,7 +14,6 @@ export class VaTable {
     const headers = this.header.assignedNodes()[0].childNodes;
     const rows = this.body.assignedNodes();
 
-    console.log('ROWS', rows);
 
     const columns = [];
 
@@ -26,10 +24,7 @@ export class VaTable {
     });
 
     rows.forEach(row => {
-      const slotted = getSlottedNodes(row as HTMLElement, 'va-table-row')[0];
-      console.log('SLOTTED', slotted);
       const cells = (row as HTMLElement).childNodes;
-      console.log(cells);
 
       cells.forEach((cell, index) => {
         (cell as Element).setAttribute('data-label', columns[index]);
