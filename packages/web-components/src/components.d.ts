@@ -269,7 +269,7 @@ export namespace Components {
         "value": string;
     }
     interface VaTable {
-        "title": string;
+        "caption": string;
     }
     interface VaTableRow {
     }
@@ -830,7 +830,7 @@ declare namespace LocalJSX {
         "value"?: string;
     }
     interface VaTable {
-        "title"?: string;
+        "caption"?: string;
     }
     interface VaTableRow {
     }

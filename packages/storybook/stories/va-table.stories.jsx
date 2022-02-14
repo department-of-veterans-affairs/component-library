@@ -15,11 +15,11 @@ export default {
 };
 
 const Template = args => {
-  const { data, title, col1, col2, col3 } = args;
+  const { data, caption, col1, col2, col3 } = args;
   const columns = [col1, col2, col3];
   return (
     <main>
-      <va-table title={title}>
+      <va-table caption={caption}>
         <va-table-row slot="headers">
           {columns.map(col => (
             <th>{col}</th>
@@ -39,7 +39,7 @@ const Template = args => {
 };
 
 const defaultArgs = {
-  title: 'My table',
+  caption: 'My table',
   col1: 'Document title',
   col2: 'Description',
   col3: 'Year',

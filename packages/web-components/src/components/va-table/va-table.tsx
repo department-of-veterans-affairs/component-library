@@ -9,7 +9,7 @@ import { getSlottedNodes } from '../../utils/utils';
 export class VaTable {
   header!: HTMLSlotElement;
   body!: HTMLSlotElement;
-  @Prop() title: string;
+  @Prop() caption: string;
 
   componentDidLoad() {
     const headers = this.header.assignedNodes()[0].childNodes;
@@ -38,12 +38,12 @@ export class VaTable {
   }
 
   render() {
-    const { title } = this;
+    const { caption } = this;
 
     return (
       <Host>
         <table role="table">
-          {title && <caption>{title}</caption>}
+          {caption && <caption>{caption}</caption>}
           <thead>
             <slot
               ref={el => (this.header = el as HTMLSlotElement)}
