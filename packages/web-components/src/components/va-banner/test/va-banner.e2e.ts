@@ -33,19 +33,6 @@ describe('va-banner', () => {
     `);
   });
 
-  it('renders an shadow root div when not visible', async () => {
-    const page = await newE2EPage();
-
-    await page.setContent('<va-banner visible="false"></va-banner>');
-    const element = await page.find('va-banner');
-
-    expect(element).toEqualHtml(`
-      <va-banner class="hydrated" visible="false">
-        <mock:shadow-root></mock:shadow-root>
-      </va-banner>
-    `);
-  });
-
   it('passes an axe check', async () => {
     const page = await newE2EPage();
     await page.setContent(
