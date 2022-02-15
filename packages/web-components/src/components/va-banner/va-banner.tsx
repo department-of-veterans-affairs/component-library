@@ -101,7 +101,7 @@ export class VaBanner {
       // Track the dismiss event in Google Analytics
       if (!this.disableAnalytics) {
         const detail = {
-          componentName: 'Banner',
+          componentName: 'va-banner',
           action: 'dismissIconClick',
           details: {
             clickLabel: 'Dismiss Banner',
