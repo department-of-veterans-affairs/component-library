@@ -8,20 +8,5 @@
   "workspaces": [
     "packages/*"
   ],
-  "packageManager": "yarn@3.0.2",
-  "resolutions": {
-    "ansi-regex": "^5.0.1",
-    "browserslist": "^4.16.5",
-    "diff": "^3.5.0",
-    "follow-redirects": "^1.14.8",
-    "highlight.js": "^10.4.1",
-    "immer": "^9.0.6",
-    "json-schema": "^0.4.0",
-    "minimist": "^0.2.1",
-    "nanoid": "^3.1.31",
-    "node-fetch": "^2.6.7",
-    "prismjs": "^1.25.0",
-    "glob-parent": "^5.1.2",
-    "trim": "^0.0.3"
-  }
+  "packageManager": "yarn@3.0.2"
 }
