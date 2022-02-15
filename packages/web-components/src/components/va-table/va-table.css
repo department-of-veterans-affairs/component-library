@@ -3,7 +3,7 @@
 }
 
 table {
-  font-family: 'Open Sans', sans-serif;
+  font-family: var(--font-source-sans);
   border-collapse: collapse;
   margin: 0;
   padding: 0;
