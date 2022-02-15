@@ -60,29 +60,6 @@ describe('va-banner', () => {
     expect(button).not.toBeNull();
   });
 
-  it('fires an analytics event when a link is clicked', async () => {
-    const page = await newE2EPage();
-    await page.setContent(
-      '<va-banner headline="This is a test">Test Content<a href="#">Test Link</a></va-banner>',
-    );
-
-    const analyticsSpy = await page.spyOnEvent('component-library-analytics');
-
-    const link = await page.find('va-banner a');
-    await link.click();
-
-    expect(analyticsSpy).toHaveReceivedEventDetail({
-      componentName: 'Banner',
-      action: 'linkClick',
-      details: {
-        clickLabel: 'Test Link',
-        headline: 'This is a test',
-        showClose: false,
-        type: 'info',
-      },
-    });
-  });
-
   it('does not display if dismissed', async () => {
     const page = await newE2EPage();
     await page.setContent(

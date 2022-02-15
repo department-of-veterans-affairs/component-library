@@ -101,40 +101,16 @@ export class VaBanner {
       // Track the dismiss event in Google Analytics
       if (!this.disableAnalytics) {
         const detail = {
-          componentName: 'Banner',
-          action: 'dismissIconClick',
+          componentName: 'va-banner',
+          action: 'click',
           details: {
-            clickLabel: 'Dismiss Banner',
-            headline: this.headline,
-            showClose: this.showClose,
-            windowSession: this.windowSession,
-            type: this.type,
+            'alert-box-headline': this.headline,
           },
         };
         this.componentLibraryAnalytics.emit(detail);
       }
     }
   };
-
-  private handleAlertBodyClick(e: MouseEvent): void {
-    if (!this.disableAnalytics) {
-      const target = e.target as HTMLElement;
-      // If it's a link being clicked, dispatch an analytics event
-      if (target?.tagName === 'A') {
-        const detail = {
-          componentName: 'Banner',
-          action: 'linkClick',
-          details: {
-            clickLabel: target.innerText,
-            headline: this.headline,
-            showClose: this.showClose,
-            type: this.type,
-          },
-        };
-        this.componentLibraryAnalytics.emit(detail);
-      }
-    }
-  }
 
   // Called once just after the component is first connected to the DOM
   // Fixes rerender issues that could be potentially created by calling dismissedBanners multiple times
@@ -170,7 +146,6 @@ export class VaBanner {
     return (
       <Host
         data-e2e-id="emergency-banner"
-        onClick={this.handleAlertBodyClick.bind(this)}
       >
         <va-alert
           visible

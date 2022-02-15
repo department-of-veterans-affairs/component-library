@@ -123,7 +123,7 @@ export class VaAlert {
       // If it's a link being clicked, dispatch an analytics event
       if (target?.tagName === 'A') {
         const detail = {
-          componentName: 'AlertBox',
+          componentName: 'va-alert',
           action: 'linkClick',
           details: {
             clickLabel: target.innerText,
