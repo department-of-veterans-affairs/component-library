@@ -23,11 +23,24 @@ export class VaTable {
       (item as Element).setAttribute('scope', 'col');
     });
 
-    rows.forEach(row => {
+    const alignment = {};
+    rows.forEach((row, index) => {
       const cells = (row as HTMLElement).childNodes;
 
-      cells.forEach((cell, index) => {
-        (cell as Element).setAttribute('data-label', columns[index]);
+      cells.forEach((cell, colNum) => {
+        // Look at the first row of data to determine type of data in column
+        if (index === 0) {
+          // Right align columns with numeric data
+          if (!Number.isNaN(Number((cell as Element).textContent))) {
+            alignment[colNum] = 'medium-screen:vads-u-text-align--right';
+            (headers[colNum] as Element).classList.add(alignment[colNum]);
+          }
+        }
+        if (alignment[colNum]) {
+          (cell as Element).classList.add(alignment[colNum]);
+        }
+
+        (cell as Element).setAttribute('data-label', columns[colNum]);
       });
     });
   }
