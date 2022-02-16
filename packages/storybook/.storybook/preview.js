@@ -1,7 +1,6 @@
 import '@department-of-veterans-affairs/formation/dist/formation.min.css';
 import './style.scss';
 import '@department-of-veterans-affairs/formation/dist/formation';
-import { withHTML } from '@whitespace/storybook-addon-html/react';
 
 import '@department-of-veterans-affairs/component-library/dist/main.css';
 import {
@@ -94,8 +93,6 @@ export const parameters = {
   },
   viewMode: 'docs',
 };
-
-export const decorators = [withHTML];
 
 // Fix for React 17/NVDA bug where React root is read as "clickable"
 // https://github.com/nvaccess/nvda/issues/13262
