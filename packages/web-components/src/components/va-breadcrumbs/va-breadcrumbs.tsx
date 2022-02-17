@@ -6,7 +6,6 @@ import {
   Host,
   h,
   Prop,
-  State,
 } from '@stencil/core';
 
 @Component({
@@ -26,8 +25,6 @@ export class VaBreadcrumbs {
    * Analytics tracking function(s) will not be called
    */
   @Prop() disableAnalytics: boolean;
-
-  @State() breadcrumbs: Array<Node>;
 
   /**
    * The event used to track usage of the component. This is emitted when a
@@ -59,7 +56,7 @@ export class VaBreadcrumbs {
           details: {
             clickLabel: target.innerText.trim(),
             clickLevel: this.getClickLevel(target),
-            totalLevels: this.breadcrumbs.length,
+            totalLevels: this.el.querySelectorAll('a').length,
           },
         };
         this.componentLibraryAnalytics.emit(details);
@@ -68,26 +65,15 @@ export class VaBreadcrumbs {
   }
 
   componentWillLoad() {
-    //  This renders slot content outside of a slot.
-    //  This is a workaround for the limitations of styling slotted nested elements.
-    //  See https://stackoverflow.com/questions/61626493/slotted-css-selector-for-nested-children-in-shadowdom-slot/61631668
     const anchorNodes = Array.from(this.el.querySelectorAll('a'));
-    this.breadcrumbs = anchorNodes.map(
-      (node: HTMLAnchorElement, index: number) => {
-        return (
-          <li>
-            <a
-              aria-current={
-                index === anchorNodes.length - 1 ? 'page' : undefined
-              }
-              href={node.attributes['href'].value}
-            >
-              {node.innerText}
-            </a>
-          </li>
-        );
-      },
-    );
+    anchorNodes.forEach((crumb: HTMLAnchorElement, index: number) => {
+      const li = document.createElement('li');
+      if (index === anchorNodes.length - 1) {
+        crumb.setAttribute('aria-current', 'page');
+      }
+      crumb.parentNode.replaceChild(li, crumb);
+      li.appendChild(crumb);
+    });
   }
 
   render() {
@@ -97,10 +83,9 @@ export class VaBreadcrumbs {
       <Host>
         <nav aria-label={label}>
           <ul role="list" onClick={e => this.fireAnalyticsEvent(e)}>
-            {this.breadcrumbs}
+            <slot></slot>
           </ul>
         </nav>
-        <slot></slot>
       </Host>
     );
   }

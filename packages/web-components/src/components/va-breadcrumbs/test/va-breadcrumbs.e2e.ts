@@ -12,9 +12,9 @@ describe('va-breadcrumbs', () => {
         <mock:shadow-root>
           <nav aria-label="Breadcrumb">
             <ul role="list">
+              <slot></slot>
             </ul>
           </nav>
-          <slot></slot>
         </mock:shadow-root>
       </va-breadcrumbs>
     `);
@@ -36,34 +36,19 @@ describe('va-breadcrumbs', () => {
         <mock:shadow-root>
           <nav aria-label="Breadcrumb">
             <ul role="list">
-              <li>
-                <a href="#home">
-                  Home
-                </a>
-              </li>
-              <li>
-                <a href="#one">
-                  Level One
-                </a>
-              </li>
-              <li>
-                <a aria-current="page" href="#two">
-                  Level Two
-                </a>
-              </li>
+              <slot></slot>
             </ul>
           </nav>
-          <slot></slot>
         </mock:shadow-root>
-        <a href="#home">
-          Home
-        </a>
-        <a href="#one">
-          Level One
-        </a>
-        <a href="#two">
-          Level Two
-        </a>
+        <li>
+          <a href="#home">Home</a>
+        </li>
+        <li>
+          <a href="#one">Level One</a>
+        </li>
+        <li>
+          <a aria-current="page" href="#two">Level Two</a>
+        </li>
       </va-breadcrumbs>
     `);
   });
@@ -93,7 +78,7 @@ describe('va-breadcrumbs', () => {
 
     const analyticsSpy = await page.spyOnEvent('component-library-analytics');
 
-    const anchorElements = await page.findAll('va-breadcrumbs >>> li > a');
+    const anchorElements = await page.findAll('pierce/a');
 
     await anchorElements[1].click();
 
@@ -120,7 +105,7 @@ describe('va-breadcrumbs', () => {
 
     const analyticsSpy = await page.spyOnEvent('component-library-analytics');
 
-    const anchorElement = await page.find('va-breadcrumbs >>> li > a');
+    const anchorElement = await page.find('pierce/a');
     await anchorElement.click();
 
     expect(analyticsSpy).toHaveReceivedEventTimes(0);
