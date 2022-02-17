@@ -12,7 +12,7 @@ import {
 import {
   Telephone,
   CONTACTS,
-  CONTACTS_MAP,
+  contactsMap,
   PHONE_PATTERNS,
   PHONE_PATTERNS_MAP,
   Table,
@@ -28,7 +28,7 @@ const fields = [
 const Contacts = () => (
   <Table
     fields={fields}
-    data={Object.entries(PHONE_CONTACTS_MAP).map(c => ({
+    data={Object.entries(contactsMap).map(c => ({
       key: c[0],
       value: <Telephone contact={c[1].phoneNumber} />,
       description: <div style={{ maxWidth: '30em' }}>{c[1].description}</div>,
@@ -60,7 +60,7 @@ const Page = () => (
     <Subtitle />
     <Description />
     <Primary />
-    <ArgsTable story={PRIMARY_STORY}/>
+    <ArgsTable story={PRIMARY_STORY} />
     <Contacts />
     <br />
     <Patterns />
@@ -83,7 +83,7 @@ export default {
 const Template = args => <Telephone {...args} />;
 
 const defaultArgs = {
-  contact: PHONE_CONTACTS.GI_BILL,
+  contact: CONTACTS.GI_BILL,
 };
 
 export const Default = Template.bind({});
@@ -100,6 +100,6 @@ Extension.args = { ...defaultArgs, extension: '123' };
 
 export const CustomContent = Template.bind({});
 CustomContent.args = {
-  contact: PHONE_CONTACTS['222_VETS'],
+  contact: CONTACTS['222_VETS'],
   children: '877-222-VETS (8387)',
 };
