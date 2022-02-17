@@ -102,9 +102,9 @@ export class VaBanner {
       if (!this.disableAnalytics) {
         const detail = {
           componentName: 'va-banner',
-          action: 'click',
+          action: 'close',
           details: {
-            'alert-box-headline': this.headline,
+            headline: this.headline,
           },
         };
         this.componentLibraryAnalytics.emit(detail);
