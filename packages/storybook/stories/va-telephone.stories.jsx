@@ -1,13 +1,63 @@
 import React from 'react';
+import {
+  Title,
+  Subtitle,
+  Description,
+  Primary,
+  ArgsTable,
+  Stories,
+  PRIMARY_STORY,
+} from '@storybook/addon-docs/blocks';
+
+import {
+  CONTACTS,
+  contactsMap,
+  Table,
+} from '@department-of-veterans-affairs/component-library';
+
 import { getWebComponentDocs, propStructure } from './wc-helpers';
 
 const telephoneDocs = getWebComponentDocs('va-telephone');
+//
+// This builds the available "CONTACTS" list table
+// Descriptions are available in the contacts.js file
+const fields = [
+  { label: 'Property name (CONTACTS.x)', value: 'key' },
+  { label: 'Phone number', value: 'value' },
+  { label: 'Description', value: 'description' },
+];
+const Contacts = () => (
+  <Table
+    fields={fields}
+    data={Object.entries(contactsMap).map(c => ({
+      key: c[0],
+      value: <va-telephone contact={c[1].phoneNumber} />,
+      description: <div style={{ maxWidth: '30em' }}>{c[1].description}</div>,
+    }))}
+  />
+);
+
+const Page = () => (
+  <>
+    <Title />
+    <Subtitle />
+    <Description />
+    <Primary />
+    <ArgsTable story={PRIMARY_STORY} />
+    <Contacts />
+    <br />
+    <Stories />
+  </>
+);
 
 export default {
   title: 'Components/va-telephone',
   parameters: {
     actions: {
       handles: ['component-library-analytics'],
+    },
+    docs: {
+      page: Page,
     },
   },
 };
