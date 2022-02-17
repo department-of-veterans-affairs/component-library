@@ -1,0 +1,66 @@
+va-breadcrumbs li {
+  display: inline-block;
+  line-height: 1.5 !important;
+  margin: 0.4rem 0 !important;
+  padding: 0.4rem 0 0.4rem 0;
+  vertical-align: middle;
+}
+
+va-breadcrumbs li::after {
+  content: ' › ';
+  display: inline-block;
+  padding: 0 0.56rem;
+}
+
+va-breadcrumbs li:last-child::after {
+  content: '';
+}
+
+@media screen and (max-width: 481px) {
+  va-breadcrumbs li {
+    display: none;
+  }
+
+  va-breadcrumbs li:nth-last-child(2) {
+    display: inline-block;
+  }
+
+  va-breadcrumbs li:nth-last-child(2)::before {
+    content: ' \2039 ';
+    display: inline-block;
+    padding: 0 0.24rem;
+  }
+
+  va-breadcrumbs li:nth-last-child(2)::after {
+    content: '';
+    display: none;
+    padding: 0;
+  }
+}
+
+va-breadcrumbs li > a {
+  background-color: transparent;
+  color: var(--color-link-default);
+  display: inline-block;
+  padding: 0.2rem;
+  transition-duration: 0.3s;
+  transition-property: color, background-color, border-color;
+  transition-timing-function: ease-in-out;
+}
+
+va-breadcrumbs li > a:hover {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+va-breadcrumbs li > a:focus {
+  outline: 2px solid var(--color-gold-light);
+  outline-offset: 0.2rem;
+}
+
+va-breadcrumbs li > a[aria-current='page'] {
+  color: var(--color-gray-dark);
+  cursor: default;
+  font-weight: bold;
+  pointer-events: none;
+  text-decoration: none;
+}

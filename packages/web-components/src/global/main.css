@@ -1,34 +1,8 @@
 @import 'variables.css';
+@import '../components/va-breadcrumbs/va-breadcrumbs-slot.css';
 
 va-process-list li :is(h2, h3, h4, h5) {
   margin-top: 0;
   clear: none;
   padding-top: 0.3rem;
-}
-
-va-breadcrumbs li > a {
-  background-color: transparent;
-  color: var(--color-link-default);
-  display: inline-block;
-  padding: 0.2rem;
-  transition-duration: 0.3s;
-  transition-property: color, background-color, border-color;
-  transition-timing-function: ease-in-out;
-}
-
-va-breadcrumbs li > a:hover {
-  background: rgba(0, 0, 0, 0.05);
-}
-
-va-breadcrumbs li > a:focus {
-  outline: 2px solid var(--color-gold-light);
-  outline-offset: 0.2rem;
-}
-
-va-breadcrumbs li > a[aria-current='page'] {
-  color: var(--color-gray-dark);
-  cursor: default;
-  font-weight: bold;
-  pointer-events: none;
-  text-decoration: none;
 }
