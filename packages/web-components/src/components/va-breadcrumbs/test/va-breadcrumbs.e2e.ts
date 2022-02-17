@@ -40,13 +40,13 @@ describe('va-breadcrumbs', () => {
             </ul>
           </nav>
         </mock:shadow-root>
-        <li>
+        <li class="va-breadcrumbs-li">
           <a href="#home">Home</a>
         </li>
-        <li>
+        <li class="va-breadcrumbs-li">
           <a href="#one">Level One</a>
         </li>
-        <li>
+        <li class="va-breadcrumbs-li">
           <a aria-current="page" href="#two">Level Two</a>
         </li>
       </va-breadcrumbs>

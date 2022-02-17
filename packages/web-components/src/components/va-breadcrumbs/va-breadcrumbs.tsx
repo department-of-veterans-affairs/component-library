@@ -68,6 +68,7 @@ export class VaBreadcrumbs {
     const anchorNodes = Array.from(this.el.querySelectorAll('a'));
     anchorNodes.forEach((crumb: HTMLAnchorElement, index: number) => {
       const li = document.createElement('li');
+      li.classList.add('va-breadcrumbs-li');
       if (index === anchorNodes.length - 1) {
         crumb.setAttribute('aria-current', 'page');
       }
