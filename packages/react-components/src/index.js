@@ -80,7 +80,7 @@ export {
   Table,
   Telephone,
   CONTACTS,
-  CONTACTS_MAP,
+  contactsMap,
   PHONE_PATTERNS,
   PHONE_PATTERNS_MAP,
   TextArea,

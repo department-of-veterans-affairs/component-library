@@ -78,7 +78,7 @@ export {
   Table,
   Telephone,
   CONTACTS,
-  phoneContactsMap,
+  contactsMap,
   PHONE_PATTERNS,
   PHONE_PATTERNS_MAP,
   TextArea,
