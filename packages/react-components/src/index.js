@@ -34,8 +34,8 @@ import Select from './components/Select/Select';
 import SystemDownView from './components/SystemDownView/SystemDownView';
 import Table from './components/Table/Table';
 import Telephone, {
-  CONTACTS as PHONE_CONTACTS,
-  contactsMap as PHONE_CONTACTS_MAP,
+  CONTACTS,
+  contactsMap,
   PATTERNS as PHONE_PATTERNS,
   patternsMap as PHONE_PATTERNS_MAP,
 } from './components/Telephone/Telephone';
@@ -79,8 +79,8 @@ export {
   SystemDownView,
   Table,
   Telephone,
-  PHONE_CONTACTS,
-  PHONE_CONTACTS_MAP,
+  CONTACTS,
+  CONTACTS_MAP,
   PHONE_PATTERNS,
   PHONE_PATTERNS_MAP,
   TextArea,

@@ -9,7 +9,14 @@ import {
   PRIMARY_STORY,
 } from '@storybook/addon-docs/blocks';
 
-import {Telephone, PHONE_CONTACTS, PHONE_CONTACTS_MAP, PHONE_PATTERNS, PHONE_PATTERNS_MAP, Table} from '@department-of-veterans-affairs/component-library';
+import {
+  Telephone,
+  CONTACTS,
+  CONTACTS_MAP,
+  PHONE_PATTERNS,
+  PHONE_PATTERNS_MAP,
+  Table,
+} from '@department-of-veterans-affairs/component-library';
 
 // This builds the available "CONTACTS" list table
 // Descriptions are available in the contacts.js file
