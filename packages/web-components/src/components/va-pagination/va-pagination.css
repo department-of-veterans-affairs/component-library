@@ -1,8 +1,10 @@
+@import '../../mixins/focusable.css';
+
 :host {
-  background-color: #fff;
+  background-color: var(--color-white);
   border-top: 1px solid var(--color-gray-lightest);
   display: flex;
-  font-family: 'Source Sans Pro';
+  font-family: var(--font-source-sans);
   justify-content: center;
   overflow: hidden;
   padding: 2rem 0 1rem;
@@ -28,18 +30,13 @@ button {
   cursor: pointer;
   display: inline-flex;
   font-family: inherit;
-  font-size: 0.9em;
+  font-size: 1.44rem;
   font-weight: 400;
   justify-content: center;
   line-height: 2;
   padding: 0;
   transition: all 0.3s ease-in-out;
   transition-property: color, background-color;
-}
-
-button:focus {
-  outline: 2px solid #f9c642;
-  outline-offset: 2px;
 }
 
 .button-next,
@@ -74,14 +71,10 @@ button:focus {
   width: 3rem;
 }
 
+.button-active,
 .button-inner[aria-current='true'],
 .button-inner:hover,
 .button-inner:focus {
-  background-color: var(--color-primary);
-  color: var(--color-white);
-}
-
-.button-active {
   background-color: var(--color-primary);
   color: var(--color-white);
 }
@@ -111,10 +104,12 @@ button:focus {
 
 @media (min-width: 481px) {
   .pagination-next:not(:empty) .button-next::after {
+    /* right-pointing angle quotation mark › with 2 spaces before it */
     content: '\a0\a0\203a';
   }
 
   .pagination-prev:not(:empty) .button-prev::before {
+    /* left-pointing angle quotation mark ‹ with 2 spaces after it */
     content: '\2039\a0\a0';
   }
 }
