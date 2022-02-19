@@ -15,14 +15,15 @@ describe('va-table', () => {
     await page.setContent(`
         <va-table>
           <va-table-row slot="headers">
-            <th>One</th>
-            <th>Two</th>
-            <th>Three</th>
+            <span>One</span>
+            <span>Two</span>
+            <span>Three</span>
           </va-table-row>
+
           <va-table-row>
-            <td>Dog</td>
-            <td>Cat</td>
-            <td>Mouse</td>
+            <span>Dog</span>
+            <span>Cat</span>
+            <span>Mouse</span>
           </va-table-row>
         </va-table>
       `);

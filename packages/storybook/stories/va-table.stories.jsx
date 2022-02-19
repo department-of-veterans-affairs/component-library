@@ -45,14 +45,14 @@ const Template = args => {
       <va-table caption={caption}>
         <va-table-row slot="headers">
           {columns.map(col => (
-            <th>{col}</th>
+            <span>{col}</span>
           ))}
         </va-table-row>
 
         {data.map(row => (
           <va-table-row>
             {row.map(item => (
-              <td role="cell">{item}</td>
+              <span>{item}</span>
             ))}
           </va-table-row>
         ))}

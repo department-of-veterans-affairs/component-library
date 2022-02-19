@@ -1,5 +1,5 @@
 :host {
-  display: inherit;
+  display: table-row;
 }
 tr {
   background-color: var(--color-white);
@@ -21,13 +21,10 @@ tr {
   text-transform: capitalize;
 }
 
-::slotted(th) {
-  background: var(--color-gray-lightest) !important;
-  font-weight: 700 !important;
-  vertical-align: bottom;
-  padding-top: 0.8em;
-  padding-bottom: 0.8em;
-  padding-left: 0.8em;
+::slotted(*) {
+  display: table-cell;
+  border: 1px solid #5b616b;
+  padding: 1rem 1.5rem;
 }
 
 @media screen and (max-width: 768px) {

@@ -41,6 +41,7 @@ export class VaTable {
         }
 
         (cell as Element).setAttribute('data-label', columns[colNum]);
+        (cell as Element).setAttribute('role', 'cell');
       });
     });
   }
