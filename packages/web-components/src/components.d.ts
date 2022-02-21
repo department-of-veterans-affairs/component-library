@@ -184,6 +184,28 @@ export namespace Components {
          */
         "percent": number;
     }
+    interface VaPromoBanner {
+        /**
+          * Analytics tracking function(s) will not be called
+         */
+        "disableAnalytics": boolean;
+        /**
+          * `href` attribute for the `<a>` tag. Only gets used if `render` is _not_ used
+         */
+        "href": string;
+        /**
+          * The rendering custom markup via the slot instead of the `<a>` with `text` in it
+         */
+        "renderCustom": boolean;
+        /**
+          * `target` attribute for the `<a>` tag. Only gets used if `render` is _not_ used
+         */
+        "target": string;
+        /**
+          * Controls which icon gets used. Options are 'announcement', 'news', or 'email-signup'.
+         */
+        "type": string;
+    }
     interface VaRadio {
         /**
           * Whether or not an analytics event will be fired.
@@ -409,6 +431,12 @@ declare global {
         prototype: HTMLVaProgressBarElement;
         new (): HTMLVaProgressBarElement;
     };
+    interface HTMLVaPromoBannerElement extends Components.VaPromoBanner, HTMLStencilElement {
+    }
+    var HTMLVaPromoBannerElement: {
+        prototype: HTMLVaPromoBannerElement;
+        new (): HTMLVaPromoBannerElement;
+    };
     interface HTMLVaRadioElement extends Components.VaRadio, HTMLStencilElement {
     }
     var HTMLVaRadioElement: {
@@ -459,6 +487,7 @@ declare global {
         "va-on-this-page": HTMLVaOnThisPageElement;
         "va-process-list": HTMLVaProcessListElement;
         "va-progress-bar": HTMLVaProgressBarElement;
+        "va-promo-banner": HTMLVaPromoBannerElement;
         "va-radio": HTMLVaRadioElement;
         "va-radio-option": HTMLVaRadioOptionElement;
         "va-segmented-progress-bar": HTMLVaSegmentedProgressBarElement;
@@ -698,6 +727,36 @@ declare namespace LocalJSX {
          */
         "percent"?: number;
     }
+    interface VaPromoBanner {
+        /**
+          * Analytics tracking function(s) will not be called
+         */
+        "disableAnalytics"?: boolean;
+        /**
+          * `href` attribute for the `<a>` tag. Only gets used if `render` is _not_ used
+         */
+        "href"?: string;
+        /**
+          * Fires when the component is closed by clicking on the close icon.
+         */
+        "onCloseEvent"?: (event: CustomEvent<any>) => void;
+        /**
+          * The event used to track usage of the component. This is emitted when an anchor link or the dismiss icon is clicked and disableAnalytics is not true.
+         */
+        "onComponent-library-analytics"?: (event: CustomEvent<any>) => void;
+        /**
+          * The rendering custom markup via the slot instead of the `<a>` with `text` in it
+         */
+        "renderCustom"?: boolean;
+        /**
+          * `target` attribute for the `<a>` tag. Only gets used if `render` is _not_ used
+         */
+        "target"?: string;
+        /**
+          * Controls which icon gets used. Options are 'announcement', 'news', or 'email-signup'.
+         */
+        "type"?: string;
+    }
     interface VaRadio {
         /**
           * Whether or not an analytics event will be fired.
@@ -901,6 +960,7 @@ declare namespace LocalJSX {
         "va-on-this-page": VaOnThisPage;
         "va-process-list": VaProcessList;
         "va-progress-bar": VaProgressBar;
+        "va-promo-banner": VaPromoBanner;
         "va-radio": VaRadio;
         "va-radio-option": VaRadioOption;
         "va-segmented-progress-bar": VaSegmentedProgressBar;
@@ -926,6 +986,7 @@ declare module "@stencil/core" {
             "va-on-this-page": LocalJSX.VaOnThisPage & JSXBase.HTMLAttributes<HTMLVaOnThisPageElement>;
             "va-process-list": LocalJSX.VaProcessList & JSXBase.HTMLAttributes<HTMLVaProcessListElement>;
             "va-progress-bar": LocalJSX.VaProgressBar & JSXBase.HTMLAttributes<HTMLVaProgressBarElement>;
+            "va-promo-banner": LocalJSX.VaPromoBanner & JSXBase.HTMLAttributes<HTMLVaPromoBannerElement>;
             "va-radio": LocalJSX.VaRadio & JSXBase.HTMLAttributes<HTMLVaRadioElement>;
             "va-radio-option": LocalJSX.VaRadioOption & JSXBase.HTMLAttributes<HTMLVaRadioOptionElement>;
             "va-segmented-progress-bar": LocalJSX.VaSegmentedProgressBar & JSXBase.HTMLAttributes<HTMLVaSegmentedProgressBarElement>;

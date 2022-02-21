@@ -1,0 +1,120 @@
+:host {
+  z-index: 1;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: var(--color-gray-lightest);
+  color: var(--color-link-default);
+  font-weight: 700;
+}
+
+.va-banner-body {
+  display: table;
+  width: 100%;
+  max-width: 100rem;
+  margin: 0 auto;
+}
+
+.va-banner-icon {
+  width: 5.4rem;
+  margin-right: 0.8rem;
+  padding: 0.8rem 0;
+  display: none;
+}
+
+.va-banner-icon-contents {
+  display: inline-block;
+  height: 4.2rem;
+  position: relative;
+  vertical-align: middle;
+  width: 4.2rem;
+  margin-left: 0.5rem;
+}
+
+.va-banner-icon-contents i {
+  position: absolute;
+  text-align: center;
+  width: 100%;
+  font-size: 2.15rem;
+  background-color: var(--color-white);
+  border-radius: 50%;
+  height: 100%;
+}
+
+.va-banner-icon-contents i::before {
+  position: relative;
+  top: 0.8rem;
+}
+
+.va-banner-icon-contents i.announcement::before {
+  content: '\F0A1'; /* fa-bullhorn */
+}
+
+.va-banner-icon-contents i.news::before {
+  content: '\F1EA'; /* fa-newspaper */
+}
+
+.va-banner-icon-contents i.email-signup::before {
+  content: '\F0E0'; /* fa-envelope */
+}
+
+.va-banner-content {
+  padding: 0.8rem;
+  line-height: 2rem;
+}
+
+.va-banner-content-link {
+  display: inline-block;
+  text-decoration: none;
+  color: var(--color-link-default);
+}
+
+.va-banner-content-link i::before {
+  content: '\F105'; /* fa-angle-right */
+}
+
+.va-banner-close {
+  text-align: center;
+  display: table-cell;
+  border-left: 1px solid var(--color-gray-lighter);
+  padding: 0 1.6rem;
+  vertical-align: middle;
+}
+
+.va-banner-close button {
+  background: none;
+  background-color: transparent;
+  color: var(--color-link-default);
+  border: none;
+  font-size: 2rem;
+  padding: 0;
+}
+
+.va-banner-close button i::before {
+  content: '\F057'; /* fa-times-circle */
+}
+
+i {
+  font-family: 'Font Awesome 5 Free';
+  font-style: normal;
+  font-weight: 900;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  display: inline-block;
+  font-style: normal;
+  font-variant: normal;
+  text-rendering: auto;
+  line-height: 1;
+}
+
+@media screen and (min-width: 768px) {
+  .va-banner-icon {
+    display: table-cell;
+  }
+
+  .va-banner-close {
+    text-align: right;
+    border: none;
+  }
+}
