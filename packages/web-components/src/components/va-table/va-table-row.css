@@ -28,14 +28,14 @@ tr {
 }
 
 @media screen and (max-width: 768px) {
-  tr {
+  :host {
     border-bottom: 1px solid var(--color-gray-medium);
   }
-  tr:first-child {
+  :host:first-child {
     border-top: 1px solid var(--color-gray-medium);
   }
 
-  ::slotted(td) {
+  ::slotted([role='cell']) {
     border: none !important;
     font-size: 16px;
     display: flex;
@@ -43,15 +43,15 @@ tr {
     line-height: 24px;
   }
 
-  ::slotted(td:first-child) {
+  ::slotted([role='cell']:first-child) {
     margin-top: 16px;
   }
 
-  ::slotted(td:last-child) {
+  ::slotted([role='cell']:last-child) {
     margin-bottom: 16px;
   }
 
-  ::slotted(td)::before {
+  ::slotted([role='cell'])::before {
     /*
        * aria-label has no advantage, it won't be read inside a table
         content: attr(aria-label);
