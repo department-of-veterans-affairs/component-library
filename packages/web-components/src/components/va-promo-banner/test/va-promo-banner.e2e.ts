@@ -9,10 +9,32 @@ describe('va-promo-banner', () => {
     const element = await page.find('va-promo-banner');
 
     expect(element).toEqualHtml(`
-     <va-promo-banner class="hydrated">
-       <mock:shadow-root>
-        </mock:shadow-root>
-      </va-promo-banner>
+    <va-promo-banner class="hydrated">
+      <mock:shadow-root>
+        <div class="va-banner-body">
+          <div class="va-banner-icon">
+            <div class="va-banner-icon-contents">
+              <i
+                aria-hidden="true"
+                class="announcement"
+                role="presentation"
+              ></i>
+            </div>
+          </div>
+          <div class="va-banner-content">
+            <a class="va-banner-content-link">
+              <slot></slot>
+              <i aria-hidden="true" role="presentation"></i>
+            </a>
+          </div>
+          <div class="va-banner-close">
+            <button aria-label="Dismiss this promo banner" type="button">
+              <i aria-hidden="true" role="presentation"></i>
+            </button>
+          </div>
+        </div>
+      </mock:shadow-root>
+    </va-promo-banner>
     `);
   });
 
@@ -25,8 +47,28 @@ describe('va-promo-banner', () => {
     const element = await page.find('va-promo-banner');
 
     expect(element).toEqualHtml(`
-      <va-promo-banner class="hydrated">
-        <mock:shadow-root></mock:shadow-root>
+     <va-promo-banner banner-id="ABC_BANNER" class="hydrated" href="#" target="_self" type="news">
+       <mock:shadow-root>
+         <div class="va-banner-body">
+           <div class="va-banner-icon">
+             <div class="va-banner-icon-contents">
+               <i aria-hidden="true" class="news" role="presentation"></i>
+             </div>
+           </div>
+           <div class="va-banner-content">
+             <a class="va-banner-content-link" href="#" target="_self">
+               <slot></slot>
+               <i aria-hidden="true" role="presentation"></i>
+             </a>
+           </div>
+           <div class="va-banner-close">
+             <button aria-label="Dismiss this promo banner" type="button">
+               <i aria-hidden="true" role="presentation"></i>
+             </button>
+           </div>
+         </div>
+       </mock:shadow-root>
+       This is a promo banner
       </va-promo-banner>
     `);
   });
@@ -35,13 +77,30 @@ describe('va-promo-banner', () => {
     const page = await newE2EPage();
 
     await page.setContent(
-      '<va-promo-banner banner-id="ABC_BANNER" href="#" target="_self" type="news" render-custom>This is a promo banner</va-promo-banner>',
+      '<va-promo-banner banner-id="ABC_BANNER" href="#" target="_self" type="announcement" render-custom="true">This is a promo banner</va-promo-banner>',
     );
     const element = await page.find('va-promo-banner');
 
     expect(element).toEqualHtml(`
-      <va-promo-banner class="hydrated">
-        <mock:shadow-root></mock:shadow-root>
+     <va-promo-banner banner-id="ABC_BANNER" class="hydrated" href="#" render-custom="true" target="_self" type="announcement">
+       <mock:shadow-root>
+         <div class="va-banner-body">
+           <div class="va-banner-icon">
+             <div class="va-banner-icon-contents">
+               <i aria-hidden="true" class="announcement" role="presentation"></i>
+             </div>
+           </div>
+           <div class="va-banner-content">
+             <slot></slot>
+           </div>
+           <div class="va-banner-close">
+             <button aria-label="Dismiss this promo banner" type="button">
+               <i aria-hidden="true" role="presentation"></i>
+             </button>
+           </div>
+         </div>
+       </mock:shadow-root>
+       This is a promo banner
       </va-promo-banner>
     `);
   });
@@ -54,35 +113,79 @@ describe('va-promo-banner', () => {
     await axeCheck(page);
   });
 
-  it('fires a component library analytics event on a link click', async () => {});
+  it('fires a component library analytics event on a link click', async () => {
+    const page = await newE2EPage();
 
-  it('does not fire a component library analytics event if disableAnalytics enabled', async () => {});
+    await page.setContent(
+      `<va-promo-banner banner-id="ABC_BANNER" href="#" target="_self" type="news">This is a promo banner</va-promo-banner>`,
+    );
 
-  it('fires closeEvent event on clicking the dismiss button', async () => {});
+    const analyticsSpy = await page.spyOnEvent('component-library-analytics');
 
-  //   it('does not display if dismissed', async () => {
-  //     const page = await newE2EPage();
-  //     await page.setContent(
-  //       '<va-banner show-close="true" headline="This is a test">Test Content<a href="#">Test Link</a></va-banner>',
-  //     );
-  //     // Banner should have childNodes in the shadowRoot to start but go away after being dismissed
-  //     const vaBanner = await page.find('va-banner');
+    const anchorEl = await page.find('va-promo-banner >>> a');
+    await anchorEl.click();
 
-  //     expect(Array.from(vaBanner.shadowRoot.childNodes)).toHaveLength(1);
+    expect(analyticsSpy).toHaveReceivedEventTimes(1);
 
-  //     // Allows us to pierce to nested elements in the shadowDOM
-  //     // https://github.com/puppeteer/puppeteer/pull/6509
-  //     const button = await page.$('pierce/.va-alert-close');
-  //     await button.click();
-  //     await page.waitForChanges();
+    expect(analyticsSpy).toHaveReceivedEventDetail({
+      componentName: 'va-promo-banner',
+      action: 'linkClick',
+      details: {
+        text: 'This is a promo banner',
+        href: '#',
+        target: '_self',
+        type: 'news',
+      },
+    });
+  });
 
-  //     expect(Array.from(vaBanner.shadowRoot.childNodes)).toHaveLength(0);
+  it('does not fire a component library analytics event if disableAnalytics enabled', async () => {
+    const page = await newE2EPage();
 
-  //     await page.evaluate(() => {
+    await page.setContent(
+      `<va-promo-banner banner-id="ABC_BANNER" href="#" target="_self" type="news" disable-analytics>This is a promo banner</va-promo-banner>`,
+    );
 
-  //       location.reload();
-  //     });
+    const analyticsSpy = await page.spyOnEvent('component-library-analytics');
 
-  //     expect(Array.from(vaBanner.shadowRoot.childNodes)).toHaveLength(0);
-  //   });
+    const anchorEl = await page.find('va-promo-banner >>> a');
+    await anchorEl.click();
+
+    expect(analyticsSpy).toHaveReceivedEventTimes(0);
+  });
+
+  it('fires closeEvent and does not display if dismissed', async () => {
+    const page = await newE2EPage();
+    await page.setContent(
+      `<va-promo-banner banner-id="ABC_BANNER" href="#" target="_self" type="news">This is a promo banner</va-promo-banner>`,
+    );
+    const analyticsSpy = await page.spyOnEvent('closeEvent');
+    const element = await page.find('va-promo-banner');
+
+    const button = await page.find('va-promo-banner >>> button');
+    await button.click();
+    await page.waitForChanges();
+
+    expect(analyticsSpy).toHaveReceivedEventTimes(1);
+    expect(element).toEqualHtml(`
+      <va-promo-banner banner-id="ABC_BANNER" class="hydrated" href="#" target="_self" type="news">
+        <mock:shadow-root>
+        </mock:shadow-root>
+        This is a promo banner
+       </va-promo-banner>
+     `);
+
+    // Confirm still dismissed on page reload
+    await page.evaluate(() => {
+      location.reload();
+    });
+
+    expect(element).toEqualHtml(`
+    <va-promo-banner banner-id="ABC_BANNER" class="hydrated" href="#" target="_self" type="news">
+      <mock:shadow-root>
+      </mock:shadow-root>
+      This is a promo banner
+     </va-promo-banner>
+   `);
+  });
 });

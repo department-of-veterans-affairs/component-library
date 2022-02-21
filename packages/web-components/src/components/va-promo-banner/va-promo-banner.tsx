@@ -74,6 +74,7 @@ export class VaPromoBanner {
   @State() dismissedBanners: Array<String> = [];
 
   private closeHandler(): void {
+    this.closeEvent.emit();
     // Derive the updated dismissed banners.
     const updatedDismissedBanners = [...this.dismissedBanners, this.bannerId];
 
@@ -156,7 +157,7 @@ export class VaPromoBanner {
           <div class="va-banner-close">
             <button
               type="button"
-              aria-label="Dismiss this announcement"
+              aria-label="Dismiss this promo banner"
               onClick={() => this.closeHandler()}
             >
               <i aria-hidden="true" role="presentation" />
