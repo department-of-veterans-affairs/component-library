@@ -6,7 +6,7 @@ tr {
   border-bottom: 1px solid var(--color-gray);
 }
 
-::slotted(td) {
+::slotted([role='cell']) {
   padding-top: 0.8em;
   padding-bottom: 0.8em;
   padding-left: 0.8em;
@@ -17,7 +17,7 @@ tr {
   border-top: 0 !important;
 }
 
-::slotted(td::first-letter) {
+::slotted(*::first-letter) {
   text-transform: capitalize;
 }
 
