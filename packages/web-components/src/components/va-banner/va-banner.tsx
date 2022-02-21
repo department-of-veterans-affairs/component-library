@@ -144,9 +144,7 @@ export class VaBanner {
     const onCloseAlert = this.showClose ? this.dismiss : undefined;
 
     return (
-      <Host
-        data-e2e-id="emergency-banner"
-      >
+      <Host>
         <va-alert
           visible
           full-width
