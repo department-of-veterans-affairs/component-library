@@ -6,8 +6,10 @@ import {
   Host,
   h,
   Prop,
+  State,
 } from '@stencil/core';
 
+const DISMISSED_PROMO_BANNERS_LOCAL_STORAGE_KEY = 'DISMISSED_PROMO_BANNERS';
 @Component({
   tag: 'va-promo-banner',
   styleUrl: 'va-promo-banner.css',
@@ -42,6 +44,11 @@ export class VaPromoBanner {
   @Prop() disableAnalytics: boolean;
 
   /**
+   * Id of Promo Banner Instance for tracking in Storage
+   */
+  @Prop() bannerId: string;
+
+  /**
    * Fires when the component is closed by clicking on the close icon.
    */
   @Event({
@@ -61,8 +68,23 @@ export class VaPromoBanner {
   })
   componentLibraryAnalytics: EventEmitter;
 
-  private closeHandler(e: MouseEvent): void {
-    this.closeEvent.emit(e);
+  /**
+   * Keep track of locally dismissed Banners
+   * */
+  @State() dismissedBanners: Array<String> = [];
+
+  private closeHandler(): void {
+    // Derive the updated dismissed banners.
+    const updatedDismissedBanners = [...this.dismissedBanners, this.bannerId];
+
+    // Update dismissedBanners in state.
+    this.dismissedBanners = updatedDismissedBanners;
+
+    // Add the promo banner ID to local storage.
+    localStorage.setItem(
+      DISMISSED_PROMO_BANNERS_LOCAL_STORAGE_KEY,
+      JSON.stringify(updatedDismissedBanners),
+    );
   }
 
   private handleLinkClick(e: MouseEvent): void {
@@ -70,14 +92,16 @@ export class VaPromoBanner {
       const targetEl = e.target as HTMLElement;
       const targetAnchor =
         targetEl?.tagName === 'A' ||
-        (targetEl?.tagName === 'SLOT' && targetEl?.parentElement.tagName === 'A');
+        (targetEl?.tagName === 'SLOT' &&
+          targetEl?.parentElement.tagName === 'A');
       // If it's a link being clicked, dispatch an analytics event
       if (targetAnchor) {
         const detail = {
           componentName: 'va-promo-banner',
           action: 'linkClick',
           details: {
-            text: targetEl.tagName ==='A' ? targetEl.innerText : this.el.innerText,
+            text:
+              targetEl.tagName === 'A' ? targetEl.innerText : this.el.innerText,
             href: this.href,
             target: this.target,
             type: this.type,
@@ -88,7 +112,25 @@ export class VaPromoBanner {
     }
   }
 
+  componentWillLoad() {
+    // Derive dismissed banners from storage.
+    const dismissedBannersString = localStorage.getItem(
+      DISMISSED_PROMO_BANNERS_LOCAL_STORAGE_KEY,
+    );
+    this.dismissedBanners = dismissedBannersString
+      ? JSON.parse(dismissedBannersString)
+      : [];
+  }
+
   render() {
+    // Derive if the banner is dismissed.
+    const isBannerDismissed = this.dismissedBanners?.includes(this.bannerId);
+
+    // Do not render if the promo banner is dismissed.
+    if (isBannerDismissed) {
+      return null;
+    }
+
     return (
       <Host>
         <div class="va-banner-body">
@@ -115,7 +157,7 @@ export class VaPromoBanner {
             <button
               type="button"
               aria-label="Dismiss this announcement"
-              onClick={e => this.closeHandler(e)}
+              onClick={() => this.closeHandler()}
             >
               <i aria-hidden="true" role="presentation" />
             </button>

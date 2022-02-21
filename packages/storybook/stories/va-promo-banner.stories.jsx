@@ -9,7 +9,12 @@ export default {
   parameters: {
     docs: {
       description: {
-        component: generateEventsDescription(promoBannerDocs),
+        component:
+          `Reset the banner in storage by opening Developer Tools in the browser and then clicking on the Application Tab. ` +
+          `Under Storage you will see Local Storage and check the Storage to see if a DISMISSED_PROMO_BANNERS Key exists. ` +
+          `If it does right click and delete it and refresh your page to see the banner again. ` +
+          `Alternatively you can change the banner-id since the new banner-id would not match the banner-id in storage.` +
+          generateEventsDescription(promoBannerDocs),
       },
     },
   },
@@ -35,6 +40,7 @@ const Template = ({
   target,
   href,
   'render-custom': renderCustom,
+  'banner-id': bannerId,
 }) => {
   if (renderCustom) {
     return (
@@ -45,6 +51,7 @@ const Template = ({
           target={target}
           href={href}
           render-custom={renderCustom}
+          banner-id={bannerId}
         >
           <h4>This is a custom rendered version</h4>
           <a href="#">Custom anchor inside of the custom render</a>
@@ -55,6 +62,7 @@ const Template = ({
           </ul>
         </va-promo-banner>
         <p>See the bottom of the page from the Promo Banner</p>
+        <p>Don't see it? Read the instructions above about resetting the banner from storage</p>
       </>
     );
   } else {
@@ -66,10 +74,12 @@ const Template = ({
           target={target}
           href={href}
           render-custom={renderCustom}
+          banner-id={bannerId}
         >
           Lorem ipsum dolor sit amet, consectetur adipiscing elit.
         </va-promo-banner>
         <p>See the bottom of the page from the Promo Banner</p>
+        <p>Don't see it? Read the instructions above about resetting the banner from storage</p>
       </>
     );
   }
@@ -81,6 +91,7 @@ const defaultArgs = {
   'target': '_self',
   'href': '#',
   'render-custom': false,
+  'banner-id': 'ABC_BANNER',
 };
 
 export const Default = Template.bind({});

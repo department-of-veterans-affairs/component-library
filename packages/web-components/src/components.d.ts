@@ -186,6 +186,10 @@ export namespace Components {
     }
     interface VaPromoBanner {
         /**
+          * Id of Promo Banner Instance for tracking in Storage
+         */
+        "bannerId": string;
+        /**
           * Analytics tracking function(s) will not be called
          */
         "disableAnalytics": boolean;
@@ -728,6 +732,10 @@ declare namespace LocalJSX {
         "percent"?: number;
     }
     interface VaPromoBanner {
+        /**
+          * Id of Promo Banner Instance for tracking in Storage
+         */
+        "bannerId"?: string;
         /**
           * Analytics tracking function(s) will not be called
          */
