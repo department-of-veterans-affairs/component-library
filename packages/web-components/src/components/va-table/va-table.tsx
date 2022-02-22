@@ -55,9 +55,9 @@ export class VaTable {
           <slot name="headers"></slot>
         </thead>
 
-        <div role="rowgroup">
+        <tbody>
           <slot></slot>
-        </div>
+        </tbody>
       </Host>
     );
   }
