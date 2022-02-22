@@ -22,7 +22,7 @@ const Template = ({
   'click-to-close': clickToClose,
   'disable-analytics': disableAnalytics,
   headline,
-  'hide-close-buton': hideCloseButton,
+  'hide-close-button': hideCloseButton,
   'initial-focus-selector': initialFocusSelector,
   'primary-button': primaryButton,
   'secondary-button': secondaryButton,
@@ -64,7 +64,10 @@ const Template = ({
 };
 
 const defaultArgs = {
+  'click-to-close': undefined,
+  'disable-analytics': undefined,
   'headline': 'Modal title goes here',
+  'hide-close-button': undefined,
   'initial-focus-selector': undefined,
   'primary-button': undefined,
   'secondary-button': undefined,
