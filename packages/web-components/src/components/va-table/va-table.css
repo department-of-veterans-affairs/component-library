@@ -1,6 +1,13 @@
 :host {
-  display: block;
+  display: table;
+  font-family: var(--font-source-sans);
+  border-collapse: collapse;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  text-align: left;
 }
+
 ::slotted([slot='headers']) {
   background: var(--color-gray-lightest) !important;
   font-weight: 700 !important;
@@ -10,13 +17,8 @@
   padding-left: 0.8em;
 }
 
-table {
-  font-family: var(--font-source-sans);
-  border-collapse: collapse;
-  margin: 0;
-  padding: 0;
-  width: 100%;
-  text-align: left;
+[role='rowgroup'] {
+  display: table-row-group;
 }
 
 caption {

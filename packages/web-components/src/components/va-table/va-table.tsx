@@ -50,20 +50,18 @@ export class VaTable {
     const { caption } = this;
 
     return (
-      <Host>
-        <table role="table">
-          {caption && <caption>{caption}</caption>}
-          <thead>
-            <slot
-              ref={el => (this.header = el as HTMLSlotElement)}
-              name="headers"
-            ></slot>
-          </thead>
+      <Host role="table">
+        {caption && <caption>{caption}</caption>}
+        <thead>
+          <slot
+            ref={(el: HTMLSlotElement) => (this.headers = el)}
+            name="headers"
+          ></slot>
+        </thead>
 
-          <tbody>
-            <slot ref={el => (this.body = el as HTMLSlotElement)}></slot>
-          </tbody>
-        </table>
+        <div role="rowgroup">
+          <slot ref={(el: HTMLSlotElement) => (this.body = el)}></slot>
+        </div>
       </Host>
     );
   }
