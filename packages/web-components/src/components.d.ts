@@ -166,6 +166,17 @@ export namespace Components {
          */
         "setFocus": boolean;
     }
+    interface VaModal {
+        "clickToClose": boolean;
+        "disableAnalytics": boolean;
+        "headline": string;
+        "hideCloseButton": boolean;
+        "initialFocusSelector"?: string;
+        "primaryButton"?: { text: string; action: () => void };
+        "secondaryButton"?: { text: string; action: () => void };
+        "status": 'continue' | 'error' | 'info' | 'success' | 'warning';
+        "visible": boolean;
+    }
     interface VaOnThisPage {
     }
     interface VaPagination {
@@ -417,6 +428,12 @@ declare global {
         prototype: HTMLVaLoadingIndicatorElement;
         new (): HTMLVaLoadingIndicatorElement;
     };
+    interface HTMLVaModalElement extends Components.VaModal, HTMLStencilElement {
+    }
+    var HTMLVaModalElement: {
+        prototype: HTMLVaModalElement;
+        new (): HTMLVaModalElement;
+    };
     interface HTMLVaOnThisPageElement extends Components.VaOnThisPage, HTMLStencilElement {
     }
     var HTMLVaOnThisPageElement: {
@@ -488,6 +505,7 @@ declare global {
         "va-checkbox-group": HTMLVaCheckboxGroupElement;
         "va-featured-content": HTMLVaFeaturedContentElement;
         "va-loading-indicator": HTMLVaLoadingIndicatorElement;
+        "va-modal": HTMLVaModalElement;
         "va-on-this-page": HTMLVaOnThisPageElement;
         "va-pagination": HTMLVaPaginationElement;
         "va-process-list": HTMLVaProcessListElement;
@@ -708,6 +726,19 @@ declare namespace LocalJSX {
           * Set to true if the loading indicator should capture focus
          */
         "setFocus"?: boolean;
+    }
+    interface VaModal {
+        "clickToClose"?: boolean;
+        "disableAnalytics"?: boolean;
+        "headline"?: string;
+        "hideCloseButton"?: boolean;
+        "initialFocusSelector"?: string;
+        "onCloseEvent"?: (event: CustomEvent<any>) => void;
+        "onComponent-library-analytics"?: (event: CustomEvent<any>) => void;
+        "primaryButton"?: { text: string; action: () => void };
+        "secondaryButton"?: { text: string; action: () => void };
+        "status"?: 'continue' | 'error' | 'info' | 'success' | 'warning';
+        "visible"?: boolean;
     }
     interface VaOnThisPage {
     }
@@ -965,6 +996,7 @@ declare namespace LocalJSX {
         "va-checkbox-group": VaCheckboxGroup;
         "va-featured-content": VaFeaturedContent;
         "va-loading-indicator": VaLoadingIndicator;
+        "va-modal": VaModal;
         "va-on-this-page": VaOnThisPage;
         "va-pagination": VaPagination;
         "va-process-list": VaProcessList;
@@ -991,6 +1023,7 @@ declare module "@stencil/core" {
             "va-checkbox-group": LocalJSX.VaCheckboxGroup & JSXBase.HTMLAttributes<HTMLVaCheckboxGroupElement>;
             "va-featured-content": LocalJSX.VaFeaturedContent & JSXBase.HTMLAttributes<HTMLVaFeaturedContentElement>;
             "va-loading-indicator": LocalJSX.VaLoadingIndicator & JSXBase.HTMLAttributes<HTMLVaLoadingIndicatorElement>;
+            "va-modal": LocalJSX.VaModal & JSXBase.HTMLAttributes<HTMLVaModalElement>;
             "va-on-this-page": LocalJSX.VaOnThisPage & JSXBase.HTMLAttributes<HTMLVaOnThisPageElement>;
             "va-pagination": LocalJSX.VaPagination & JSXBase.HTMLAttributes<HTMLVaPaginationElement>;
             "va-process-list": LocalJSX.VaProcessList & JSXBase.HTMLAttributes<HTMLVaProcessListElement>;
