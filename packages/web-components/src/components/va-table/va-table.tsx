@@ -14,7 +14,6 @@ export class VaTable {
       this.el.querySelectorAll('va-table-row'),
     );
     const headers = headerRow.children;
-
     const columns = [];
 
     Array.from(headers).forEach((item: HTMLVaTableRowElement) => {
@@ -31,9 +30,9 @@ export class VaTable {
         // Look at the first row of data to determine type of data in column
         if (index === 0) {
           // Right align columns with numeric data
-          if (!Number.isNaN(Number((cell as Element).textContent))) {
+          if (!Number.isNaN(Number(cell.textContent))) {
             alignment[colNum] = 'medium-screen:vads-u-text-align--right';
-            (headers[colNum] as Element).classList.add(alignment[colNum]);
+            headers[colNum].classList.add(alignment[colNum]);
           }
         }
         if (alignment[colNum]) {
@@ -41,7 +40,6 @@ export class VaTable {
         }
 
         cell.setAttribute('data-label', columns[colNum]);
-
         cell.setAttribute('role', 'cell');
       });
     });
