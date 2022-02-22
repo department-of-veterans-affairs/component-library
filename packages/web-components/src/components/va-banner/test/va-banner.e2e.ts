@@ -9,7 +9,7 @@ describe('va-banner', () => {
     const element = await page.find('va-banner');
 
     expect(element).toEqualHtml(`
-     <va-banner class="hydrated">
+     <va-banner aria-labelledby="Banner Region" class="hydrated" role="region">
        <mock:shadow-root>
          <va-alert class="hydrated" full-width="" status="info">
            <h3 slot="headline"></h3>
