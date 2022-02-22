@@ -1813,8 +1813,11 @@ __metadata:
     "@types/puppeteer": ^5.4.3
     "@types/react-dom": 16.0.9
     animate.css: ^4.1.1
+    aria-hidden: ^1.1.3
     babel-loader: ^8.2.2
+    body-scroll-lock: ^4.0.0-beta.0
     classnames: ^2.3.1
+    dom-focus-lock: ^1.0.4
     intersection-observer: ^0.12.0
     jest: ^26.6.3
     jest-cli: ^26.6.3
@@ -4913,7 +4916,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"aria-hidden@npm:^1.1.2":
+"aria-hidden@npm:^1.1.2, aria-hidden@npm:^1.1.3":
   version: 1.1.3
   resolution: "aria-hidden@npm:1.1.3"
   dependencies:
@@ -5689,6 +5692,13 @@ __metadata:
     raw-body: 2.4.0
     type-is: ~1.6.17
   checksum: 490231b4c89bbd43112762f7ba8e5342c174a6c9f64284a3b0fcabf63277e332f8316765596f1e5b15e4f3a6cf0422e005f4bb3149ed3a224bb025b7a36b9ac1
+  languageName: node
+  linkType: hard
+
+"body-scroll-lock@npm:^4.0.0-beta.0":
+  version: 4.0.0-beta.0
+  resolution: "body-scroll-lock@npm:4.0.0-beta.0"
+  checksum: 61d40007fddf64ecc69e9e02ed9d96bb895f88d7da65cea7651081110225de48efa44ffc4acd376ed004788e242a9af12059fec728c096774b49365524ea6f46
   languageName: node
   linkType: hard
 
@@ -7568,6 +7578,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"dom-focus-lock@npm:^1.0.4":
+  version: 1.0.4
+  resolution: "dom-focus-lock@npm:1.0.4"
+  dependencies:
+    focus-lock: ^0.6.2
+  checksum: f8d972696a504a1e16e05f70b9e4be97186479ed0beceff48fc9d0a9b56c6a04b91005a658006c6e56fd3abb0e800855025bbf8ea41005abc197dc6ede08242e
+  languageName: node
+  linkType: hard
+
 "dom-helpers@npm:^3.2.0":
   version: 3.4.0
   resolution: "dom-helpers@npm:3.4.0"
@@ -9015,6 +9034,13 @@ __metadata:
     inherits: ^2.0.3
     readable-stream: ^2.3.6
   checksum: 42e07747f83bcd4e799da802e621d6039787749ffd41f5517f8c4f786ee967e31ba32b09f8b28a9c6f67bd4f5346772e604202df350e8d99f4141771bae31279
+  languageName: node
+  linkType: hard
+
+"focus-lock@npm:^0.6.2":
+  version: 0.6.8
+  resolution: "focus-lock@npm:0.6.8"
+  checksum: 0fc7503b84536d1d74a4ee16e2b97b7ab1d5294a15ff96e60753742ba7f3f20b48d2a041afb6f5db3f659e0ed49aa75be85471edd8c9e88d3d867263d2d7bd54
   languageName: node
   linkType: hard
 
