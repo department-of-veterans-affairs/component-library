@@ -1,4 +1,4 @@
-import { Component, Prop, Host, h } from '@stencil/core';
+import { Component, Element, Host, Prop, h } from '@stencil/core';
 
 @Component({
   tag: 'va-table',
@@ -6,28 +6,28 @@ import { Component, Prop, Host, h } from '@stencil/core';
   shadow: true,
 })
 export class VaTable {
-  header!: HTMLSlotElement;
-  body!: HTMLSlotElement;
+  @Element() el: HTMLElement;
   @Prop() caption: string;
 
   componentDidLoad() {
-    const headers = this.header.assignedNodes()[0].childNodes;
-    const rows = this.body.assignedNodes();
-
+    const [headerRow, ...rows] = Array.from(
+      this.el.querySelectorAll('va-table-row'),
+    );
+    const headers = headerRow.children;
 
     const columns = [];
 
-    headers.forEach(item => {
-      columns.push((item as HTMLElement).textContent);
-      (item as Element).setAttribute('role', 'columnheader');
-      (item as Element).setAttribute('scope', 'col');
+    Array.from(headers).forEach((item: HTMLVaTableRowElement) => {
+      columns.push(item.textContent);
+      item.setAttribute('role', 'columnheader');
+      item.setAttribute('scope', 'col');
     });
 
     const alignment = {};
-    rows.forEach((row, index) => {
-      const cells = (row as HTMLElement).childNodes;
+    Array.from(rows).forEach((row, index) => {
+      const cells = (row as HTMLElement).children;
 
-      cells.forEach((cell, colNum) => {
+      Array.from(cells).forEach((cell: HTMLSpanElement, colNum) => {
         // Look at the first row of data to determine type of data in column
         if (index === 0) {
           // Right align columns with numeric data
@@ -37,11 +37,12 @@ export class VaTable {
           }
         }
         if (alignment[colNum]) {
-          (cell as Element).classList.add(alignment[colNum]);
+          cell.classList.add(alignment[colNum]);
         }
 
-        (cell as Element).setAttribute('data-label', columns[colNum]);
-        (cell as Element).setAttribute('role', 'cell');
+        cell.setAttribute('data-label', columns[colNum]);
+
+        cell.setAttribute('role', 'cell');
       });
     });
   }
@@ -53,14 +54,11 @@ export class VaTable {
       <Host role="table">
         {caption && <caption>{caption}</caption>}
         <thead>
-          <slot
-            ref={(el: HTMLSlotElement) => (this.headers = el)}
-            name="headers"
-          ></slot>
+          <slot name="headers"></slot>
         </thead>
 
         <div role="rowgroup">
-          <slot ref={(el: HTMLSlotElement) => (this.body = el)}></slot>
+          <slot></slot>
         </div>
       </Host>
     );
