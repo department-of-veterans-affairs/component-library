@@ -85,4 +85,32 @@ describe('va-table', () => {
     await page.waitForChanges();
     await axeCheck(page);
   });
+
+  it('right aligns columns with numeric data', async () => {
+    const rightAlignClass = 'medium-screen:vads-u-text-align--right';
+    const page = await newE2EPage();
+    await page.setContent(`
+      <va-table>
+        <va-table-row slot="headers">
+          <span>First</span>
+          <span>Second</span>
+          <span>Third</span>
+        </va-table-row>
+
+        <va-table-row>
+          <span>Strings</span>
+          <span>1234</span>
+          <span>More strings</span>
+        </va-table-row>
+      </va-table>
+    `);
+
+    await page.waitForChanges();
+    const table = await page.findAll('va-table-row');
+    const header = await table[0].findAll('span');
+    const body = await table[1].findAll('span');
+
+    expect(header[1].getAttribute('class')).toEqual(rightAlignClass);
+    expect(body[1].getAttribute('class')).toEqual(rightAlignClass);
+  });
 });
