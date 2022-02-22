@@ -1,10 +1,6 @@
 :host {
   display: table-row;
 }
-tr {
-  background-color: var(--color-white);
-  border-bottom: 1px solid var(--color-gray);
-}
 
 ::slotted([role='cell']) {
   padding-top: 0.8em;
@@ -23,7 +19,7 @@ tr {
 
 ::slotted(*) {
   display: table-cell;
-  border: 1px solid #5b616b;
+  border: 1px solid var(--color-gray);
   padding: 1rem 1.5rem;
 }
 
@@ -37,10 +33,8 @@ tr {
 
   ::slotted([role='cell']) {
     border: none !important;
-    font-size: 16px;
     display: flex;
     flex-direction: column;
-    line-height: 24px;
   }
 
   ::slotted([role='cell']:first-child) {
@@ -49,6 +43,7 @@ tr {
 
   ::slotted([role='cell']:last-child) {
     margin-bottom: 16px;
+    border-bottom: 0;
   }
 
   ::slotted([role='cell'])::before {
@@ -60,9 +55,5 @@ tr {
     font-weight: 700;
     padding-right: 4px;
     float: left;
-  }
-
-  ::slotted(td:last-child) {
-    border-bottom: 0;
   }
 }

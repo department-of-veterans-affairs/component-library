@@ -5,13 +5,11 @@
   margin: 0;
   padding: 0;
   width: 100%;
-  text-align: left;
 }
 
 ::slotted([slot='headers']) {
   background: var(--color-gray-lightest) !important;
   font-weight: 700 !important;
-  vertical-align: bottom;
   padding-top: 0.8em;
   padding-bottom: 0.8em;
   padding-left: 0.8em;
@@ -22,14 +20,11 @@ caption {
   padding: 0 0 0.25em;
   font-weight: 700;
   font-size: 1.25em;
-  font-family: Bitter, Georgia, Cambria, Times New Roman, Times, serif;
+  font-family: var(--font-serif);
   margin-bottom: 1.2rem;
 }
 
 @media screen and (max-width: 768px) {
-  table {
-    border: 0;
-  }
   thead {
     display: none;
   }
