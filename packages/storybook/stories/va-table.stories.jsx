@@ -7,11 +7,9 @@ import {
 } from './wc-helpers';
 
 const accordionDocs = getWebComponentDocs('va-table');
-// const accordionItem = getWebComponentDocs('va-accordion-item');
 
 export default {
   title: 'Components/va-table',
-  // subcomponents: componentStructure(accordionItem),
 };
 
 const Template = args => {
