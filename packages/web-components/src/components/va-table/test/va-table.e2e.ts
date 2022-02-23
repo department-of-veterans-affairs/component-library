@@ -37,7 +37,7 @@ describe('va-table', () => {
     });
   });
 
-  it('adds role and scope to body row children', async () => {
+  it('adds role to body row children', async () => {
     const page = await newE2EPage();
     await page.setContent(`
       <va-table>
