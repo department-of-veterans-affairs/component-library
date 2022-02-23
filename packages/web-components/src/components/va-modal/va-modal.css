@@ -85,6 +85,8 @@ i.fa-times-circle::before {
 }
 
 .alert-actions button {
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
   background-color: var(--color-primary);
   margin-top: 0.5em;
   margin-right: 0.5em;
