@@ -53,7 +53,5 @@
        */
     content: attr(data-label);
     font-weight: 700;
-    padding-right: 4px;
-    float: left;
   }
 }
