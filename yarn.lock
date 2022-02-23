@@ -1775,6 +1775,7 @@ __metadata:
   peerDependencies:
     "@department-of-veterans-affairs/web-components": "*"
     react: ^16.13.1
+    react-dom: "*"
   languageName: unknown
   linkType: soft
 
