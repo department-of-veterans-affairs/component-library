@@ -32,18 +32,17 @@ export class VaTable {
       item.setAttribute('scope', 'col');
     });
 
+    // Store alignment classes by column index.
     const alignment = {};
     Array.from(rows).forEach((row, index) => {
       const cells = (row as HTMLElement).children;
 
       Array.from(cells).forEach((cell: HTMLSpanElement, colNum) => {
         // Look at the first row of data to determine type of data in column
-        if (index === 0) {
-          // Right align columns with numeric data
-          if (isNumeric(cell.textContent)) {
-            alignment[colNum] = 'medium-screen:vads-u-text-align--right';
-            headers[colNum].classList.add(alignment[colNum]);
-          }
+        // Right align columns with numeric data
+        if (index === 0 && isNumeric(cell.textContent)) {
+          alignment[colNum] = 'medium-screen:vads-u-text-align--right';
+          headers[colNum].classList.add(alignment[colNum]);
         }
         if (alignment[colNum]) {
           cell.classList.add(alignment[colNum]);
