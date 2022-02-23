@@ -5,6 +5,7 @@ import {
   EventEmitter,
   Host,
   h,
+  Listen,
   Prop,
   Watch,
   State,
@@ -20,7 +21,10 @@ import classnames from 'classnames';
   shadow: true,
 })
 export class VaModal {
-  @Element() el: any;
+  contents: HTMLDivElement;
+  closeButton: HTMLButtonElement;
+
+  @Element() el: HTMLElement;
 
   @Event({
     composed: true,
@@ -47,36 +51,62 @@ export class VaModal {
 
   @State() undo: any;
 
+  // broken: shouldn't close modal if click is inside modal
+  @Listen('click')
+  handleClick(e) {
+    console.log('handleClick');
+    if (!this.clickToClose) return;
+
+    if (this.visible && !this.el.contains(e.target)) {
+      console.log('handleDocumentClicked inside');
+      this.closeEvent.emit(e);
+    }
+  }
+
+  @Listen('keydown', { target: 'window' })
+  handleKeyDown(e: KeyboardEvent) {
+    console.log('handleKeyDown');
+    if (!this.visible) return;
+
+    const keyCode = e.key;
+    if (keyCode === 'Escape') {
+      this.handleClose(e);
+    }
+  }
+
+  @Watch('visible')
+  watchVisibleHandler(newVisible: boolean) {
+    console.log('watchVisibleHandler');
+    if (newVisible) return this.setupModal();
+    this.teardownModal();
+  }
+
+  componentDidLoad() {
+    if (this.visible) this.setupModal();
+  }
+
+  disconnectedCallback() {
+    if (this.visible) {
+      this.teardownModal();
+    }
+  }
+
   private handleClose(e) {
     console.log('handleClose', e);
     e.preventDefault();
     this.closeEvent.emit(e);
   }
 
-  private handleDocumentKeyDown(event) {
-    console.log('handleDocumentKeyDown');
-    if (event.keyCode === 27) {
-      this.handleClose(event);
-    }
-  }
-
-  private handleDocumentClicked(event) {
-    console.log('handleDocumentClicked');
-    if (this.visible && !this.el.contains(event.target)) {
-      console.log(event.target);
-      this.closeEvent.emit();
-    }
-  }
-
+  // TODO: target close button on load
   private setInitialModalFocus() {
     console.log('setInitialModalFocus');
     if (this.initialFocusSelector) {
-      const focusableElement = this.el.shadowRoot.querySelector(
-        this.initialFocusSelector,
-      );
+      const focusableElement = this.el.querySelector(this.initialFocusSelector);
       if (focusableElement) {
         focusableElement.setAttribute('data-autofocus', 'true');
       }
+    } else {
+      this.closeButton.focus(); // not working
     }
   }
 
@@ -85,7 +115,7 @@ export class VaModal {
     this.setInitialModalFocus();
 
     // Verify this is the correct element to target for these packages
-    focusLock.on(this.el); // not working
+    focusLock.on(this.contents); // not working
     disableBodyScroll(this.el); // working
     this.undo = hideOthers(this.el); // working
 
@@ -93,18 +123,7 @@ export class VaModal {
     // we rely on the existence of `body.modal-open` to determine if a modal is
     // currently open and adjust programmatic scrolling if there is.
     document.body.classList.add('modal-open');
-    document.addEventListener(
-      'keydown',
-      this.handleDocumentKeyDown.bind(this),
-      false,
-    );
-    if (this.clickToClose) {
-      document.addEventListener(
-        'click',
-        this.handleDocumentClicked.bind(this),
-        true,
-      );
-    }
+
     // Conditionally track the event.
     if (!this.disableAnalytics) {
       const detail = {
@@ -124,40 +143,11 @@ export class VaModal {
   private teardownModal() {
     console.log('teardownModal');
 
-    focusLock.off(this.el);
+    focusLock.off(this.contents);
     clearAllBodyScrollLocks();
     this.undo();
 
     document.body.classList.remove('modal-open');
-    document.removeEventListener(
-      'keydown',
-      this.handleDocumentKeyDown.bind(this),
-      false,
-    );
-    if (this.clickToClose) {
-      document.removeEventListener(
-        'click',
-        this.handleDocumentClicked.bind(this),
-        true,
-      );
-    }
-  }
-
-  @Watch('visible')
-  watchVisibleHandler(newVisible: boolean) {
-    console.log('watchVisibleHandler');
-    if (newVisible) return this.setupModal();
-    this.teardownModal();
-  }
-
-  componentDidLoad() {
-    if (this.visible) this.setupModal();
-  }
-
-  disconnectedCallback() {
-    if (this.visible) {
-      this.teardownModal();
-    }
   }
 
   render() {
@@ -200,13 +190,14 @@ export class VaModal {
           aria-modal
           role={ariaRole(status)}
         >
-          <div class={wrapperClass}>
+          <div class={wrapperClass} ref={el => (this.contents = el)}>
             {!hideCloseButton && (
               <button
                 class="va-modal-close"
                 type="button"
                 aria-label={btnAriaLabel}
                 onClick={this.handleClose.bind(this)}
+                ref={el => (this.closeButton = el)}
               >
                 <i class="fas fa-times-circle" aria-hidden="true" />
               </button>
