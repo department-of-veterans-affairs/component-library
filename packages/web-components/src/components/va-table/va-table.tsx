@@ -3,6 +3,8 @@ import { isNumeric } from '../../utils/utils';
 
 /**
  * This component expects `<va-table-row>` elements as children.
+ * Children of each row element should be `<span>` elements. Table
+ * semantics will be added and numeric columns will be right aligned.
  */
 @Component({
   tag: 'va-table',
