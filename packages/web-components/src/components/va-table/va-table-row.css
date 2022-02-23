@@ -3,9 +3,9 @@
 }
 
 ::slotted([role='cell']) {
-  padding-top: 0.8em;
-  padding-bottom: 0.8em;
-  padding-left: 0.8em;
+  padding-top: 1.6rem;
+  padding-bottom: 1.6rem;
+  padding-left: 1.6rem;
   word-wrap: break-word;
   vertical-align: top;
   border-left: 0 !important;
@@ -38,11 +38,11 @@
   }
 
   ::slotted([role='cell']:first-child) {
-    margin-top: 16px;
+    margin-top: 1.6rem;
   }
 
   ::slotted([role='cell']:last-child) {
-    margin-bottom: 16px;
+    margin-bottom: 1.6rem;
     border-bottom: 0;
   }
 
