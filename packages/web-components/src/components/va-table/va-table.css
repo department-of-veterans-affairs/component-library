@@ -10,9 +10,6 @@
 ::slotted([slot='headers']) {
   background: var(--color-gray-lightest) !important;
   font-weight: 700 !important;
-  padding-top: 0.8em;
-  padding-bottom: 0.8em;
-  padding-left: 0.8em;
 }
 
 caption {
