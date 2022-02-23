@@ -32,7 +32,7 @@
   }
 
   ::slotted([role='cell']) {
-    border: none !important;
+    border: none;
     display: flex;
     flex-direction: column;
   }
