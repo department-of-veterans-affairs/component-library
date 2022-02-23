@@ -97,7 +97,7 @@
   },
   "peerDependencies": {
     "@department-of-veterans-affairs/web-components": "*",
-    "react": "^16.13.1",
+    "react": "^17",
     "react-dom": "*"
   },
   "stableVersion": "4.0.3"
