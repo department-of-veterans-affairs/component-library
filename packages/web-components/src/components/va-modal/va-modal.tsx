@@ -10,7 +10,9 @@ import {
   Watch,
   State,
 } from '@stencil/core';
-import focusLock from 'dom-focus-lock';
+// import focusLock from 'dom-focus-lock';
+import * as focusTrap from 'focus-trap';
+// import moveFocusInside, { focusInside } from 'focus-lock';
 import { clearAllBodyScrollLocks, disableBodyScroll } from 'body-scroll-lock';
 import { hideOthers } from 'aria-hidden';
 import classnames from 'classnames';
@@ -21,8 +23,9 @@ import classnames from 'classnames';
   shadow: true,
 })
 export class VaModal {
+  // closeButton: HTMLButtonElement;
   contents: HTMLDivElement;
-  closeButton: HTMLButtonElement;
+  trap: focusTrap.FocusTrap;
 
   @Element() el: HTMLElement;
 
@@ -51,14 +54,14 @@ export class VaModal {
 
   @State() undo: any;
 
-  // broken: shouldn't close modal if click is inside modal
   @Listen('click')
   handleClick(e) {
     console.log('handleClick');
     if (!this.clickToClose) return;
 
-    if (this.visible && !this.el.contains(e.target)) {
-      console.log('handleDocumentClicked inside');
+    // event.target is always the shadow host
+    // event.composedPath()[0] returns the node clicked when shadow root is open
+    if (this.visible && e.composedPath()[0] === this.el) {
       this.closeEvent.emit(e);
     }
   }
@@ -98,24 +101,36 @@ export class VaModal {
   }
 
   // TODO: target close button on load
-  private setInitialModalFocus() {
-    console.log('setInitialModalFocus');
-    if (this.initialFocusSelector) {
-      const focusableElement = this.el.querySelector(this.initialFocusSelector);
-      if (focusableElement) {
-        focusableElement.setAttribute('data-autofocus', 'true');
-      }
-    } else {
-      this.closeButton.focus(); // not working
-    }
-  }
+  // private setInitialModalFocus() {
+  //   console.log('setInitialModalFocus');
+  //   // if (!focusInside(this.contents)) {
+  //   //   console.log('focus inside fired');
+  //   //   moveFocusInside(this.contents, null);
+  //   // }
+  //   if (this.initialFocusSelector) {
+  //     const focusableElement = this.el.querySelector(this.initialFocusSelector);
+  //     if (focusableElement) {
+  //       focusableElement.setAttribute('data-autofocus', 'true');
+  //     }
+  //   } else {
+  //     this.closeButton.focus(); // not working
+  //   }
+  // }
 
   private setupModal() {
     console.log('setupModal');
-    this.setInitialModalFocus();
+    // this.setInitialModalFocus();
+
+    this.trap = focusTrap.createFocusTrap(
+      this.contents,
+      //   , {
+      //   initialFocus: this.closeButton,
+      // }
+    );
+    this.trap.activate();
 
     // Verify this is the correct element to target for these packages
-    focusLock.on(this.contents); // not working
+    // focusLock.on(this.el); // not working
     disableBodyScroll(this.el); // working
     this.undo = hideOthers(this.el); // working
 
@@ -143,7 +158,8 @@ export class VaModal {
   private teardownModal() {
     console.log('teardownModal');
 
-    focusLock.off(this.contents);
+    // focusLock.off(this.el);
+    this.trap.deactivate();
     clearAllBodyScrollLocks();
     this.undo();
 
@@ -183,51 +199,53 @@ export class VaModal {
     const btnAriaLabel = headline ? `close ${headline} modal` : 'close modal';
 
     return (
-      <Host>
-        <div
-          class="va-modal"
-          aria-labelledby={titleId}
-          aria-modal
-          role={ariaRole(status)}
-        >
-          <div class={wrapperClass} ref={el => (this.contents = el)}>
-            {!hideCloseButton && (
-              <button
-                class="va-modal-close"
-                type="button"
-                aria-label={btnAriaLabel}
-                onClick={this.handleClose.bind(this)}
-                ref={el => (this.closeButton = el)}
-              >
-                <i class="fas fa-times-circle" aria-hidden="true" />
-              </button>
-            )}
-            <div class={bodyClass}>
-              <div role="document">
-                {headline && (
-                  <h1 id={titleId} class={titleClass} tabIndex={-1}>
-                    {headline}
-                  </h1>
-                )}
-                <slot></slot>
-                {(primaryButton || secondaryButton) && (
-                  <div class="alert-actions">
-                    {primaryButton && (
-                      <button class="usa-button" onClick={primaryButton.action}>
-                        {primaryButton.text}
-                      </button>
-                    )}
-                    {secondaryButton && (
-                      <button
-                        class="usa-button-secondary"
-                        onClick={secondaryButton.action}
-                      >
-                        {secondaryButton.text}
-                      </button>
-                    )}
-                  </div>
-                )}
-              </div>
+      <Host
+        class="va-modal"
+        aria-labelledby={titleId}
+        aria-modal
+        role={ariaRole(status)}
+      >
+        <div class={wrapperClass} ref={el => (this.contents = el)}>
+          {!hideCloseButton && (
+            <button
+              class="va-modal-close"
+              type="button"
+              aria-label={btnAriaLabel}
+              onClick={this.handleClose.bind(this)}
+            >
+              <i class="fas fa-times-circle" aria-hidden="true" />
+            </button>
+          )}
+          <div class={bodyClass}>
+            <div role="document">
+              {headline && (
+                <h1 id={titleId} class={titleClass} tabIndex={-1}>
+                  {headline}
+                </h1>
+              )}
+              <slot></slot>
+              {(primaryButton || secondaryButton) && (
+                <div class="alert-actions">
+                  {primaryButton && (
+                    <button
+                      class="usa-button"
+                      onClick={primaryButton.action}
+                      type="button"
+                    >
+                      {primaryButton.text}
+                    </button>
+                  )}
+                  {secondaryButton && (
+                    <button
+                      class="usa-button-secondary"
+                      onClick={secondaryButton.action}
+                      type="button"
+                    >
+                      {secondaryButton.text}
+                    </button>
+                  )}
+                </div>
+              )}
             </div>
           </div>
         </div>

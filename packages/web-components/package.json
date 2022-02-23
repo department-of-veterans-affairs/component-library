@@ -32,6 +32,8 @@
     "body-scroll-lock": "^4.0.0-beta.0",
     "classnames": "^2.3.1",
     "dom-focus-lock": "^1.0.4",
+    "focus-lock": "^0.10.2",
+    "focus-trap": "^6.7.3",
     "intersection-observer": "^0.12.0",
     "postcss-url": "^10.1.1"
   },
