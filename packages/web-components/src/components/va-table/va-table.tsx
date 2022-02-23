@@ -7,6 +7,10 @@ import { Component, Element, Host, Prop, h } from '@stencil/core';
 })
 export class VaTable {
   @Element() el: HTMLElement;
+
+  /**
+   * The title of the table
+   */
   @Prop() caption: string;
 
   componentDidLoad() {
