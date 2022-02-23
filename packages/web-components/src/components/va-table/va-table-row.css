@@ -8,9 +8,9 @@
   padding-left: 1.6rem;
   word-wrap: break-word;
   vertical-align: top;
-  border-left: 0 !important;
-  border-right: 0 !important;
-  border-top: 0 !important;
+  border-left: 0;
+  border-right: 0;
+  border-top: 0;
 }
 
 ::slotted(*::first-letter) {

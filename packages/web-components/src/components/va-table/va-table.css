@@ -8,8 +8,8 @@
 }
 
 ::slotted([slot='headers']) {
-  background: var(--color-gray-lightest) !important;
-  font-weight: 700 !important;
+  background: var(--color-gray-lightest);
+  font-weight: 700;
 }
 
 caption {
