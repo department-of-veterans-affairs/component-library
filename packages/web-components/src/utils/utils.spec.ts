@@ -21,12 +21,6 @@ describe('format', () => {
 });
 
 describe('isNumeric', () => {
-  // it('returns true for a primitive int', () => {
-  //   expect(isNumeric(4)).toEqual(true);
-  // });
-  // it('returns true for a primitive float', () => {
-  //   expect(isNumeric(4.5)).toEqual(true);
-  // });
   it('returns true for an int as a string', () => {
     expect(isNumeric('2')).toEqual(true);
   });
