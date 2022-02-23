@@ -144,7 +144,7 @@ export class VaBanner {
     const onCloseAlert = this.showClose ? this.dismiss : undefined;
 
     return (
-      <Host role="region" aria-labelledby="Banner Region">
+      <Host role="region" aria-labelledby={this.headline || 'Banner Region'}>
         <va-alert
           visible
           full-width
