@@ -1,6 +1,9 @@
 import { Component, Element, Host, Prop, h } from '@stencil/core';
 import { isNumeric } from '../../utils/utils';
 
+/**
+ * This component expects `<va-table-row>` elements as children.
+ */
 @Component({
   tag: 'va-table',
   styleUrl: 'va-table.css',
@@ -44,6 +47,8 @@ export class VaTable {
           cell.classList.add(alignment[colNum]);
         }
 
+        // This allows the responsive table in mobile view to display
+        // a column header
         cell.setAttribute('data-label', columns[colNum]);
         cell.setAttribute('role', 'cell');
       });
