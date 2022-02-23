@@ -97,6 +97,6 @@
   },
   "peerDependencies": {
     "react": "^16.13.1",
-    "web-components": "*"
+    "@department-of-veterans-affairs/web-components": "*"
   }
 }
