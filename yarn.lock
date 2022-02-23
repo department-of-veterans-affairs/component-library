@@ -1773,8 +1773,8 @@ __metadata:
     rimraf: ^3.0.2
     sinon: ^9.2.2
   peerDependencies:
+    "@department-of-veterans-affairs/web-components": "*"
     react: ^16.13.1
-    web-components: "*"
   languageName: unknown
   linkType: soft
 

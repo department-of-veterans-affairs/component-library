@@ -96,7 +96,7 @@
     "trim-newlines": "^4.0.2"
   },
   "peerDependencies": {
-    "react": "^16.13.1",
-    "@department-of-veterans-affairs/web-components": "*"
+    "@department-of-veterans-affairs/web-components": "*",
+    "react": "^16.13.1"
   }
 }
