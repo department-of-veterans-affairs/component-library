@@ -1,4 +1,4 @@
-import { format, getSlottedNodes } from './utils';
+import { format, getSlottedNodes, isNumeric } from './utils';
 
 describe('format', () => {
   it('returns empty string for no names defined', () => {
@@ -17,6 +17,27 @@ describe('format', () => {
     expect(format('Joseph', 'Quincy', 'Publique')).toEqual(
       'Joseph Quincy Publique',
     );
+  });
+});
+
+describe('isNumeric', () => {
+  // it('returns true for a primitive int', () => {
+  //   expect(isNumeric(4)).toEqual(true);
+  // });
+  // it('returns true for a primitive float', () => {
+  //   expect(isNumeric(4.5)).toEqual(true);
+  // });
+  it('returns true for an int as a string', () => {
+    expect(isNumeric('2')).toEqual(true);
+  });
+  it('returns true for a float as a string', () => {
+    expect(isNumeric('2.5')).toEqual(true);
+  });
+  it('returns true for a string which begins with a number', () => {
+    expect(isNumeric('5 pounds')).toEqual(true);
+  });
+  it('returns false for a string which does not start with a number', () => {
+    expect(isNumeric('dog')).toEqual(false);
   });
 });
 

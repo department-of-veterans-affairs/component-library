@@ -1,4 +1,5 @@
 import { Component, Element, Host, Prop, h } from '@stencil/core';
+import { isNumeric } from '../../utils/utils';
 
 @Component({
   tag: 'va-table',
@@ -34,7 +35,7 @@ export class VaTable {
         // Look at the first row of data to determine type of data in column
         if (index === 0) {
           // Right align columns with numeric data
-          if (!Number.isNaN(Number(cell.textContent))) {
+          if (isNumeric(cell.textContent)) {
             alignment[colNum] = 'medium-screen:vads-u-text-align--right';
             headers[colNum].classList.add(alignment[colNum]);
           }
