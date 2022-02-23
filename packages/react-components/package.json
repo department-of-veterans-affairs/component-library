@@ -1,6 +1,6 @@
 {
   "name": "@department-of-veterans-affairs/react-components",
-  "version": "4.0.4-1",
+  "version": "4.0.3",
   "description": "VA.gov component library in React",
   "keywords": [
     "react",
@@ -99,6 +99,5 @@
     "@department-of-veterans-affairs/web-components": "*",
     "react": "^17",
     "react-dom": "*"
-  },
-  "stableVersion": "4.0.3"
+  }
 }
