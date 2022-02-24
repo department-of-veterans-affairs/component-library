@@ -168,6 +168,32 @@ export namespace Components {
     }
     interface VaOnThisPage {
     }
+    interface VaPagination {
+        /**
+          * Aria-label suffix text for buttons
+         */
+        "ariaLabelSuffix": string;
+        /**
+          * Whether or not an analytics event will be fired
+         */
+        "enableAnalytics": boolean;
+        /**
+          * The maximum number of pages to show at once
+         */
+        "maxPageListLength": number;
+        /**
+          * The current page number
+         */
+        "page": number;
+        /**
+          * The total number of pages
+         */
+        "pages": number;
+        /**
+          * Display last page number when the page count exceeds `maxPageListLength`
+         */
+        "showLastPage": boolean;
+    }
     interface VaProcessList {
     }
     interface VaProgressBar {
@@ -405,6 +431,12 @@ declare global {
         prototype: HTMLVaOnThisPageElement;
         new (): HTMLVaOnThisPageElement;
     };
+    interface HTMLVaPaginationElement extends Components.VaPagination, HTMLStencilElement {
+    }
+    var HTMLVaPaginationElement: {
+        prototype: HTMLVaPaginationElement;
+        new (): HTMLVaPaginationElement;
+    };
     interface HTMLVaProcessListElement extends Components.VaProcessList, HTMLStencilElement {
     }
     var HTMLVaProcessListElement: {
@@ -477,6 +509,7 @@ declare global {
         "va-featured-content": HTMLVaFeaturedContentElement;
         "va-loading-indicator": HTMLVaLoadingIndicatorElement;
         "va-on-this-page": HTMLVaOnThisPageElement;
+        "va-pagination": HTMLVaPaginationElement;
         "va-process-list": HTMLVaProcessListElement;
         "va-progress-bar": HTMLVaProgressBarElement;
         "va-radio": HTMLVaRadioElement;
@@ -699,6 +732,40 @@ declare namespace LocalJSX {
         "setFocus"?: boolean;
     }
     interface VaOnThisPage {
+    }
+    interface VaPagination {
+        /**
+          * Aria-label suffix text for buttons
+         */
+        "ariaLabelSuffix"?: string;
+        /**
+          * Whether or not an analytics event will be fired
+         */
+        "enableAnalytics"?: boolean;
+        /**
+          * The maximum number of pages to show at once
+         */
+        "maxPageListLength"?: number;
+        /**
+          * The event used to track usage of the component. Fires when a a page is selected if enable-analytics is true.
+         */
+        "onComponent-library-analytics"?: (event: CustomEvent<any>) => void;
+        /**
+          * Fires when a page is selected
+         */
+        "onPageSelect"?: (event: CustomEvent<any>) => void;
+        /**
+          * The current page number
+         */
+        "page"?: number;
+        /**
+          * The total number of pages
+         */
+        "pages"?: number;
+        /**
+          * Display last page number when the page count exceeds `maxPageListLength`
+         */
+        "showLastPage"?: boolean;
     }
     interface VaProcessList {
     }
@@ -929,6 +996,7 @@ declare namespace LocalJSX {
         "va-featured-content": VaFeaturedContent;
         "va-loading-indicator": VaLoadingIndicator;
         "va-on-this-page": VaOnThisPage;
+        "va-pagination": VaPagination;
         "va-process-list": VaProcessList;
         "va-progress-bar": VaProgressBar;
         "va-radio": VaRadio;
@@ -956,6 +1024,7 @@ declare module "@stencil/core" {
             "va-featured-content": LocalJSX.VaFeaturedContent & JSXBase.HTMLAttributes<HTMLVaFeaturedContentElement>;
             "va-loading-indicator": LocalJSX.VaLoadingIndicator & JSXBase.HTMLAttributes<HTMLVaLoadingIndicatorElement>;
             "va-on-this-page": LocalJSX.VaOnThisPage & JSXBase.HTMLAttributes<HTMLVaOnThisPageElement>;
+            "va-pagination": LocalJSX.VaPagination & JSXBase.HTMLAttributes<HTMLVaPaginationElement>;
             "va-process-list": LocalJSX.VaProcessList & JSXBase.HTMLAttributes<HTMLVaProcessListElement>;
             "va-progress-bar": LocalJSX.VaProgressBar & JSXBase.HTMLAttributes<HTMLVaProgressBarElement>;
             "va-radio": LocalJSX.VaRadio & JSXBase.HTMLAttributes<HTMLVaRadioElement>;
