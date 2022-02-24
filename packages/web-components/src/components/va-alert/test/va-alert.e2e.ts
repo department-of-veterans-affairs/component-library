@@ -90,7 +90,7 @@ describe('va-alert', () => {
 
     expect(analyticsSpy).toHaveReceivedEventDetail({
       action: 'linkClick',
-      componentName: 'AlertBox',
+      componentName: 'va-alert',
       details: {
         headline: 'This is an alert',
         backgroundOnly: false,
@@ -114,7 +114,7 @@ describe('va-alert', () => {
 
     expect(analyticsSpy).toHaveReceivedEventDetail({
       action: 'linkClick',
-      componentName: 'AlertBox',
+      componentName: 'va-alert',
       details: {
         headline: null,
         backgroundOnly: false,
