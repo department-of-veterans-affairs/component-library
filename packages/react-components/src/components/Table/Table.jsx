@@ -14,14 +14,14 @@ const cellProps = (
 ) => {
   return {
     'data-index': index,
-    className: classNames(borderClasses, {
+    'className': classNames(borderClasses, {
       'vads-u-text-align--left': alignLeft,
       'medium-screen:vads-u-text-align--right': alignRight,
     }),
     'data-label': label,
-    key: `${rowIndex}-${label}`,
-    role: 'cell',
-    scope: scope,
+    'key': `${rowIndex}-${label}`,
+    'role': 'cell',
+    'scope': scope,
   };
 };
 
@@ -67,19 +67,22 @@ function Table(props) {
                   {field.label}
                   {currentSort?.value === field.value && (
                     <svg
+                      aria-label={
+                        sortDirection === 'ASC' ? 'ascending' : 'descending'
+                      }
                       className="usa-icon sort"
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 24 24"
                     >
                       {sortDirection === 'ASC' ? (
-                        <g className="ascending" aria-label="ascending">
+                        <g className="ascending">
                           <path
                             transform="rotate(180, 12, 12)"
                             d="M17 17L15.59 15.59L12.9999 18.17V2H10.9999V18.17L8.41 15.58L7 17L11.9999 22L17 17Z"
                           ></path>
                         </g>
                       ) : (
-                        <g className="descending" aria-label="descending">
+                        <g className="descending">
                           <path d="M17 17L15.59 15.59L12.9999 18.17V2H10.9999V18.17L8.41 15.58L7 17L11.9999 22L17 17Z"></path>
                         </g>
                       )}
