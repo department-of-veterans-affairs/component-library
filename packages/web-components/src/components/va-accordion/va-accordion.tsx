@@ -79,7 +79,7 @@ export class VaAccordion {
 
     if (!this.disableAnalytics) {
       const detail = {
-        componentName: 'Accordion',
+        componentName: 'va-accordion',
         action: prevAttr ? 'collapse' : 'expand',
         details: {
           header: headerText || clickedItem.header,
