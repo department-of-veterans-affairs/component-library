@@ -234,7 +234,7 @@ export namespace Components {
         /**
           * Controls which icon gets used. Options are 'announcement', 'news', or 'email-signup'.
          */
-        "type": string;
+        "type": 'announcement' | 'news' | 'email-signup';
     }
     interface VaRadio {
         /**
@@ -830,7 +830,7 @@ declare namespace LocalJSX {
         /**
           * Controls which icon gets used. Options are 'announcement', 'news', or 'email-signup'.
          */
-        "type"?: string;
+        "type"?: 'announcement' | 'news' | 'email-signup';
     }
     interface VaRadio {
         /**

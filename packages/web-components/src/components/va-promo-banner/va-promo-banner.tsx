@@ -36,7 +36,7 @@ export class VaPromoBanner {
   /**
    * Controls which icon gets used. Options are 'announcement', 'news', or 'email-signup'.
    * */
-  @Prop() type: string = 'announcement';
+  @Prop() type: 'announcement' | 'news' | 'email-signup';
 
   /**
    * Analytics tracking function(s) will not be called
