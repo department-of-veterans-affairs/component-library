@@ -167,14 +167,14 @@ export namespace Components {
         "setFocus": boolean;
     }
     interface VaModal {
-        "clickToClose": boolean;
-        "disableAnalytics": boolean;
-        "headline": string;
-        "hideCloseButton": boolean;
+        "clickToClose"?: boolean;
+        "disableAnalytics"?: boolean;
+        "headline"?: string;
+        "hideCloseButton"?: boolean;
         "initialFocusSelector"?: string;
         "primaryButton"?: { text: string; action: () => void };
         "secondaryButton"?: { text: string; action: () => void };
-        "status": 'continue' | 'error' | 'info' | 'success' | 'warning';
+        "status"?: 'continue' | 'error' | 'info' | 'success' | 'warning';
         "visible": boolean;
     }
     interface VaOnThisPage {

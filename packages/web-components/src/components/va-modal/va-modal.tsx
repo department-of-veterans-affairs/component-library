@@ -10,9 +10,7 @@ import {
   Watch,
   State,
 } from '@stencil/core';
-// import focusLock from 'dom-focus-lock';
 import * as focusTrap from 'focus-trap';
-// import moveFocusInside, { focusInside } from 'focus-lock';
 import { clearAllBodyScrollLocks, disableBodyScroll } from 'body-scroll-lock';
 import { hideOthers } from 'aria-hidden';
 import classnames from 'classnames';
@@ -23,8 +21,10 @@ import classnames from 'classnames';
   shadow: true,
 })
 export class VaModal {
-  // closeButton: HTMLButtonElement;
+  alertActions: HTMLDivElement;
+  closeButton: HTMLButtonElement;
   contents: HTMLDivElement;
+  dirty: boolean;
   trap: focusTrap.FocusTrap;
 
   @Element() el: HTMLElement;
@@ -42,14 +42,14 @@ export class VaModal {
   })
   componentLibraryAnalytics: EventEmitter;
 
-  @Prop() clickToClose: boolean = false;
-  @Prop() disableAnalytics: boolean = false;
-  @Prop() headline: string;
-  @Prop() hideCloseButton: boolean = false;
+  @Prop() clickToClose?: boolean = false;
+  @Prop() disableAnalytics?: boolean = false;
+  @Prop() headline?: string;
+  @Prop() hideCloseButton?: boolean = false;
   @Prop() initialFocusSelector?: string;
   @Prop() primaryButton?: { text: string; action: () => void };
   @Prop() secondaryButton?: { text: string; action: () => void };
-  @Prop() status: 'continue' | 'error' | 'info' | 'success' | 'warning';
+  @Prop() status?: 'continue' | 'error' | 'info' | 'success' | 'warning';
   @Prop() visible: boolean = false;
 
   @State() undo: any;
@@ -78,20 +78,28 @@ export class VaModal {
   }
 
   @Watch('visible')
-  watchVisibleHandler(newVisible: boolean) {
-    console.log('watchVisibleHandler');
-    if (newVisible) return this.setupModal();
-    this.teardownModal();
+  watchVisibleHandler() {
+    this.dirty = true;
   }
 
   componentDidLoad() {
     if (this.visible) this.setupModal();
   }
 
-  disconnectedCallback() {
+  componentDidUpdate() {
+    if (!this.dirty) return;
+
+    this.dirty = false;
     if (this.visible) {
+      this.setupModal();
+    } else {
       this.teardownModal();
     }
+  }
+
+  disconnectedCallback() {
+    console.log('disconnectedCallback');
+    this.teardownModal();
   }
 
   private handleClose(e) {
@@ -100,39 +108,19 @@ export class VaModal {
     this.closeEvent.emit(e);
   }
 
-  // TODO: target close button on load
-  // private setInitialModalFocus() {
-  //   console.log('setInitialModalFocus');
-  //   // if (!focusInside(this.contents)) {
-  //   //   console.log('focus inside fired');
-  //   //   moveFocusInside(this.contents, null);
-  //   // }
-  //   if (this.initialFocusSelector) {
-  //     const focusableElement = this.el.querySelector(this.initialFocusSelector);
-  //     if (focusableElement) {
-  //       focusableElement.setAttribute('data-autofocus', 'true');
-  //     }
-  //   } else {
-  //     this.closeButton.focus(); // not working
-  //   }
-  // }
-
   private setupModal() {
     console.log('setupModal');
-    // this.setInitialModalFocus();
-
     this.trap = focusTrap.createFocusTrap(
-      this.contents,
-      //   , {
-      //   initialFocus: this.closeButton,
-      // }
+      [this.el, this.alertActions, this.contents],
+      {
+        escapeDeactivates: false,
+        fallbackFocus: this.contents,
+        initialFocus: this.closeButton,
+      },
     );
     this.trap.activate();
-
-    // Verify this is the correct element to target for these packages
-    // focusLock.on(this.el); // not working
-    disableBodyScroll(this.el); // working
-    this.undo = hideOthers(this.el); // working
+    disableBodyScroll(this.el);
+    this.undo = hideOthers(this.el);
 
     // NOTE: With this PR (https://github.com/department-of-veterans-affairs/vets-website/pull/11712)
     // we rely on the existence of `body.modal-open` to determine if a modal is
@@ -146,7 +134,7 @@ export class VaModal {
         action: 'show',
         details: {
           status: this.status,
-          title: this.headline, // does this need to be updated to headline?
+          title: this.headline, // does this need to be updated to details.headline?
           primaryButtonText: this.primaryButton?.text,
           secondayButtonText: this.secondaryButton?.text,
         },
@@ -157,11 +145,9 @@ export class VaModal {
 
   private teardownModal() {
     console.log('teardownModal');
-
-    // focusLock.off(this.el);
-    this.trap.deactivate();
+    this.trap?.deactivate();
     clearAllBodyScrollLocks();
-    this.undo();
+    this.undo?.();
 
     document.body.classList.remove('modal-open');
   }
@@ -200,32 +186,40 @@ export class VaModal {
 
     return (
       <Host
-        class="va-modal"
         aria-labelledby={titleId}
         aria-modal
+        class="va-modal"
         role={ariaRole(status)}
       >
-        <div class={wrapperClass} ref={el => (this.contents = el)}>
+        <div
+          class={wrapperClass}
+          ref={el => (this.contents = el as HTMLDivElement)}
+          tabIndex={-1}
+        >
           {!hideCloseButton && (
             <button
-              class="va-modal-close"
-              type="button"
               aria-label={btnAriaLabel}
+              class="va-modal-close"
               onClick={this.handleClose.bind(this)}
+              ref={el => (this.closeButton = el as HTMLButtonElement)}
+              type="button"
             >
-              <i class="fas fa-times-circle" aria-hidden="true" />
+              <i aria-hidden="true" class="fas fa-times-circle" />
             </button>
           )}
           <div class={bodyClass}>
             <div role="document">
               {headline && (
-                <h1 id={titleId} class={titleClass} tabIndex={-1}>
+                <h1 class={titleClass} id={titleId} tabIndex={-1}>
                   {headline}
                 </h1>
               )}
               <slot></slot>
               {(primaryButton || secondaryButton) && (
-                <div class="alert-actions">
+                <div
+                  class="alert-actions"
+                  ref={el => (this.alertActions = el as HTMLDivElement)}
+                >
                   {primaryButton && (
                     <button
                       class="usa-button"
