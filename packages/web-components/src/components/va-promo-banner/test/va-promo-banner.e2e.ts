@@ -16,7 +16,6 @@ describe('va-promo-banner', () => {
             <div class="va-banner-icon-contents">
               <i
                 aria-hidden="true"
-                class="announcement"
                 role="presentation"
               ></i>
             </div>
