@@ -11,7 +11,7 @@ describe('va-banner', () => {
     expect(element).toEqualHtml(`
      <va-banner aria-labelledby="Banner Region" class="hydrated" role="region">
        <mock:shadow-root>
-         <va-alert class="hydrated" full-width="" status="info">
+         <va-alert aria-label="banner" class="hydrated" full-width="" status="info">
            <h3 slot="headline"></h3>
            <slot></slot>
          </va-alert>

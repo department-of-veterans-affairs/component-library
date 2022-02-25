@@ -151,6 +151,7 @@ export class VaBanner {
           closeable={this.showClose}
           onCloseEvent={onCloseAlert}
           status={this.type}
+          aria-label="banner"
         >
           <h3 slot="headline">{this.headline}</h3>
           <slot></slot>
