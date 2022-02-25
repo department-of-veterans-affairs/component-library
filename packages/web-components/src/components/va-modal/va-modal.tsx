@@ -14,6 +14,10 @@ import { clearAllBodyScrollLocks, disableBodyScroll } from 'body-scroll-lock';
 import { hideOthers, Undo } from 'aria-hidden';
 import classnames from 'classnames';
 
+/**
+ * @click Used to detect clicks outside of modal contents to close modal
+ * @keydown Used to detect Escape key to close modal
+ */
 @Component({
   tag: 'va-modal',
   styleUrl: 'va-modal.css',
@@ -29,12 +33,19 @@ export class VaModal {
 
   @Element() el: HTMLElement;
 
+  /**
+   * Fires when modal is closed
+   */
   @Event({
     composed: true,
     bubbles: true,
   })
   closeEvent: EventEmitter;
 
+  /**
+   * The event used to track usage of the component. Fires when a
+   * a page is selected if enable-analytics is true.
+   */
   @Event({
     eventName: 'component-library-analytics',
     composed: true,
@@ -42,14 +53,50 @@ export class VaModal {
   })
   componentLibraryAnalytics: EventEmitter;
 
+  /**
+   * Click outside modal will trigger closeEvent
+   */
   @Prop() clickToClose?: boolean = false;
+
+  /**
+   * If true, analytics event won't be fired
+   */
   @Prop() disableAnalytics?: boolean = false;
+  /**
+   * Title/header text for the modal
+   */
   @Prop() modalTitle?: string;
+
+  /**
+   * Hide the close button that's normally in the top right
+   */
   @Prop() hideCloseButton?: boolean = false;
+
+  /**
+   * Selector to explicitly specify which element should receive
+   * focus when the modal is open, if the initially focused element
+   * is not the first focusable element in the document
+   */
   @Prop() initialFocusSelector?: string;
+
+  /**
+   * Primary button text and action
+   */
   @Prop() primaryButton?: { text: string; action: () => void };
+
+  /**
+   * Secondary button text and action
+   */
   @Prop() secondaryButton?: { text: string; action: () => void };
+
+  /*
+   * Style of modal alert - info, error, success, warning
+   */
   @Prop() status?: 'continue' | 'error' | 'info' | 'success' | 'warning';
+
+  /**
+   * If the modal is visible or not
+   */
   @Prop() visible: boolean = false;
 
   @Listen('click')
