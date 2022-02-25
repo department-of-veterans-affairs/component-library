@@ -91,6 +91,10 @@
   padding: 0;
 }
 
+.va-banner-close button:hover {
+  cursor: pointer;
+}
+
 .va-banner-close button i::before {
   content: '\F057'; /* fa-times-circle */
 }

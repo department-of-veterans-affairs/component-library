@@ -19,17 +19,12 @@ export class VaPromoBanner {
   @Element() el: HTMLElement;
 
   /**
-   * The rendering custom markup via the slot instead of the `<a>` with `text` in it
-   * */
-  @Prop() renderCustom: boolean = false;
-
-  /**
-   * `href` attribute for the `<a>` tag. Only gets used if `render-custom` is _not_ used
+   * `href` attribute for the `<a>` tag.
    */
   @Prop() href: string;
 
   /**
-   * `target` attribute for the `<a>` tag. Only gets used if `render-custom` is _not_ used
+   * `target` attribute for the `<a>` tag.
    */
   @Prop() target: string;
 
@@ -42,11 +37,6 @@ export class VaPromoBanner {
    * Analytics tracking function(s) will not be called
    */
   @Prop() disableAnalytics: boolean;
-
-  /**
-   * Id of Promo Banner Instance for tracking in Storage
-   */
-  @Prop() bannerId: string;
 
   /**
    * Fires when the component is closed by clicking on the close icon.
@@ -75,8 +65,8 @@ export class VaPromoBanner {
 
   private closeHandler(): void {
     this.closeEvent.emit();
-    // Derive the updated dismissed banners.
-    const updatedDismissedBanners = [...this.dismissedBanners, this.bannerId];
+    // Derive the updated dismissed banners based on the id attribute set on the component.
+    const updatedDismissedBanners = [...this.dismissedBanners, this.el.id];
 
     // Update dismissedBanners in state.
     this.dismissedBanners = updatedDismissedBanners;
@@ -124,8 +114,8 @@ export class VaPromoBanner {
   }
 
   render() {
-    // Derive if the banner is dismissed.
-    const isBannerDismissed = this.dismissedBanners?.includes(this.bannerId);
+    // Derive if the banner is dismissed based on the id attribute set on the component.
+    const isBannerDismissed = this.dismissedBanners?.includes(this.el.id);
 
     // Do not render if the promo banner is dismissed.
     if (isBannerDismissed) {
@@ -141,18 +131,14 @@ export class VaPromoBanner {
             </div>
           </div>
           <div class="va-banner-content">
-            {this.renderCustom ? (
-              <slot></slot>
-            ) : (
-              <a
-                class="va-banner-content-link"
-                href={this.href}
-                target={this.target}
-                onClick={e => this.handleLinkClick(e)}
-              >
-                <slot></slot> <i aria-hidden="true" role="presentation" />
-              </a>
-            )}
+            <a
+              class="va-banner-content-link"
+              href={this.href}
+              target={this.target}
+              onClick={e => this.handleLinkClick(e)}
+            >
+              <slot></slot> <i aria-hidden="true" role="presentation" />
+            </a>
           </div>
           <div class="va-banner-close">
             <button

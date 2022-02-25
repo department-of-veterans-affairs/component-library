@@ -212,23 +212,15 @@ export namespace Components {
     }
     interface VaPromoBanner {
         /**
-          * Id of Promo Banner Instance for tracking in Storage
-         */
-        "bannerId": string;
-        /**
           * Analytics tracking function(s) will not be called
          */
         "disableAnalytics": boolean;
         /**
-          * `href` attribute for the `<a>` tag. Only gets used if `render-custom` is _not_ used
+          * `href` attribute for the `<a>` tag.
          */
         "href": string;
         /**
-          * The rendering custom markup via the slot instead of the `<a>` with `text` in it
-         */
-        "renderCustom": boolean;
-        /**
-          * `target` attribute for the `<a>` tag. Only gets used if `render-custom` is _not_ used
+          * `target` attribute for the `<a>` tag.
          */
         "target": string;
         /**
@@ -800,15 +792,11 @@ declare namespace LocalJSX {
     }
     interface VaPromoBanner {
         /**
-          * Id of Promo Banner Instance for tracking in Storage
-         */
-        "bannerId"?: string;
-        /**
           * Analytics tracking function(s) will not be called
          */
         "disableAnalytics"?: boolean;
         /**
-          * `href` attribute for the `<a>` tag. Only gets used if `render-custom` is _not_ used
+          * `href` attribute for the `<a>` tag.
          */
         "href"?: string;
         /**
@@ -820,11 +808,7 @@ declare namespace LocalJSX {
          */
         "onComponent-library-analytics"?: (event: CustomEvent<any>) => void;
         /**
-          * The rendering custom markup via the slot instead of the `<a>` with `text` in it
-         */
-        "renderCustom"?: boolean;
-        /**
-          * `target` attribute for the `<a>` tag. Only gets used if `render-custom` is _not_ used
+          * `target` attribute for the `<a>` tag.
          */
         "target"?: string;
         /**

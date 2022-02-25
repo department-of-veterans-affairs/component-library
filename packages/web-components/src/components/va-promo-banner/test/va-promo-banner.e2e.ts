@@ -37,16 +37,16 @@ describe('va-promo-banner', () => {
     `);
   });
 
-  it('renders inside an anchor link without render-custom', async () => {
+  it('renders inside an anchor link', async () => {
     const page = await newE2EPage();
 
     await page.setContent(
-      '<va-promo-banner banner-id="ABC_BANNER" href="#" target="_self" type="news">This is a promo banner</va-promo-banner>',
+      '<va-promo-banner id="ABC_BANNER" href="#" target="_self" type="news">This is a promo banner</va-promo-banner>',
     );
     const element = await page.find('va-promo-banner');
 
     expect(element).toEqualHtml(`
-     <va-promo-banner banner-id="ABC_BANNER" class="hydrated" href="#" target="_self" type="news">
+     <va-promo-banner id="ABC_BANNER" class="hydrated" href="#" target="_self" type="news">
        <mock:shadow-root>
          <div class="va-banner-body">
            <div class="va-banner-icon">
@@ -72,42 +72,10 @@ describe('va-promo-banner', () => {
     `);
   });
 
-  it('renders without an anchor link wrapper with render-custom', async () => {
-    const page = await newE2EPage();
-
-    await page.setContent(
-      '<va-promo-banner banner-id="ABC_BANNER" href="#" target="_self" type="announcement" render-custom="true">This is a promo banner</va-promo-banner>',
-    );
-    const element = await page.find('va-promo-banner');
-
-    expect(element).toEqualHtml(`
-     <va-promo-banner banner-id="ABC_BANNER" class="hydrated" href="#" render-custom="true" target="_self" type="announcement">
-       <mock:shadow-root>
-         <div class="va-banner-body">
-           <div class="va-banner-icon">
-             <div class="va-banner-icon-contents">
-               <i aria-hidden="true" class="announcement" role="presentation"></i>
-             </div>
-           </div>
-           <div class="va-banner-content">
-             <slot></slot>
-           </div>
-           <div class="va-banner-close">
-             <button aria-label="Dismiss this promo banner" type="button">
-               <i aria-hidden="true" role="presentation"></i>
-             </button>
-           </div>
-         </div>
-       </mock:shadow-root>
-       This is a promo banner
-      </va-promo-banner>
-    `);
-  });
-
   it('passes an axe check', async () => {
     const page = await newE2EPage();
     await page.setContent(
-      `<va-promo-banner banner-id="ABC_BANNER" href="#" target="_self" type="news">This is a promo banner</va-promo-banner>`,
+      `<va-promo-banner id="ABC_BANNER" href="#" target="_self" type="news">This is a promo banner</va-promo-banner>`,
     );
     await axeCheck(page);
   });
@@ -116,7 +84,7 @@ describe('va-promo-banner', () => {
     const page = await newE2EPage();
 
     await page.setContent(
-      `<va-promo-banner banner-id="ABC_BANNER" href="#" target="_self" type="news">This is a promo banner</va-promo-banner>`,
+      `<va-promo-banner id="ABC_BANNER" href="#" target="_self" type="news">This is a promo banner</va-promo-banner>`,
     );
 
     const analyticsSpy = await page.spyOnEvent('component-library-analytics');
@@ -142,7 +110,7 @@ describe('va-promo-banner', () => {
     const page = await newE2EPage();
 
     await page.setContent(
-      `<va-promo-banner banner-id="ABC_BANNER" href="#" target="_self" type="news" disable-analytics>This is a promo banner</va-promo-banner>`,
+      `<va-promo-banner id="ABC_BANNER" href="#" target="_self" type="news" disable-analytics>This is a promo banner</va-promo-banner>`,
     );
 
     const analyticsSpy = await page.spyOnEvent('component-library-analytics');
@@ -156,7 +124,7 @@ describe('va-promo-banner', () => {
   it('fires closeEvent and does not display if dismissed', async () => {
     const page = await newE2EPage();
     await page.setContent(
-      `<va-promo-banner banner-id="ABC_BANNER" href="#" target="_self" type="news">This is a promo banner</va-promo-banner>`,
+      `<va-promo-banner id="ABC_BANNER" href="#" target="_self" type="news">This is a promo banner</va-promo-banner>`,
     );
     const analyticsSpy = await page.spyOnEvent('closeEvent');
     const element = await page.find('va-promo-banner');
@@ -167,7 +135,7 @@ describe('va-promo-banner', () => {
 
     expect(analyticsSpy).toHaveReceivedEventTimes(1);
     expect(element).toEqualHtml(`
-      <va-promo-banner banner-id="ABC_BANNER" class="hydrated" href="#" target="_self" type="news">
+      <va-promo-banner id="ABC_BANNER" class="hydrated" href="#" target="_self" type="news">
         <mock:shadow-root>
         </mock:shadow-root>
         This is a promo banner
@@ -180,7 +148,7 @@ describe('va-promo-banner', () => {
     });
 
     expect(element).toEqualHtml(`
-    <va-promo-banner banner-id="ABC_BANNER" class="hydrated" href="#" target="_self" type="news">
+    <va-promo-banner id="ABC_BANNER" class="hydrated" href="#" target="_self" type="news">
       <mock:shadow-root>
       </mock:shadow-root>
       This is a promo banner
