@@ -213,6 +213,7 @@ export class VaModal {
 
     if (!visible) return null;
 
+    const ariaLabel = modalTitle || 'Modal';
     const titleId = `${this.el.getAttribute('id') || 'va-modal'}-title`;
     const wrapperClass = classnames('va-modal-inner', {
       'usa-alert': status,
@@ -237,7 +238,7 @@ export class VaModal {
 
     return (
       <Host
-        aria-label={titleId}
+        aria-label={ariaLabel}
         aria-modal="true"
         class="va-modal"
         role={ariaRole(status)}
