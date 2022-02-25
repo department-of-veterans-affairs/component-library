@@ -1687,6 +1687,10 @@ __metadata:
     react-transition-group: ^1.0.0
     webpack: ^5.56.0
     webpack-cli: ^4.8.0
+  peerDependencies:
+    "@department-of-veterans-affairs/formation": "*"
+    react: ^17
+    react-dom: "*"
   languageName: unknown
   linkType: soft
 
@@ -1770,8 +1774,9 @@ __metadata:
     rimraf: ^3.0.2
     sinon: ^9.2.2
   peerDependencies:
-    react: ^16.13.1
-    web-components: "*"
+    "@department-of-veterans-affairs/web-components": "*"
+    react: ^17
+    react-dom: "*"
   languageName: unknown
   linkType: soft
 

@@ -98,7 +98,7 @@ describe('va-accordion', () => {
 
     expect(analyticsSpy).toHaveReceivedEventDetail({
       action: 'expand',
-      componentName: 'Accordion',
+      componentName: 'va-accordion',
       details: {
         header: "First item",
         subheader: "First subheader",
@@ -143,7 +143,7 @@ describe('va-accordion', () => {
 
     expect(analyticsSpy).toHaveReceivedEventDetail({
       action: 'expand',
-      componentName: 'Accordion',
+      componentName: 'va-accordion',
       details: {
         header: "First item",
         subheader: "First subheader",
@@ -172,7 +172,7 @@ describe('va-accordion', () => {
 
     expect(analyticsSpy).toHaveReceivedEventDetail({
       action: 'expand',
-      componentName: 'Accordion',
+      componentName: 'va-accordion',
       details: {
         header: "First header",
         subheader: "First subheader",
@@ -200,7 +200,7 @@ describe('va-accordion', () => {
 
     expect(analyticsSpy).toHaveReceivedEventDetail({
       action: 'expand',
-      componentName: 'Accordion',
+      componentName: 'va-accordion',
       details: {
         level: 2,
         sectionHeading: null,
