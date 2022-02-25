@@ -48,6 +48,11 @@ export class VaTable {
           cell.classList.add(alignment[colNum]);
         }
 
+        // Indicate missing cell content with "---"
+        if (cell.innerText === '') {
+          cell.innerText = '---';
+        }
+
         // This allows the responsive table in mobile view to display
         // a column header
         cell.setAttribute('data-label', columns[colNum]);

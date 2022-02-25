@@ -59,6 +59,38 @@ const Template = args => {
   );
 };
 
+const MissingDataTemplate = args => {
+  const { 'table-title': tableTitle } = args;
+  const data = [
+    ['A document', '', ''],
+    [
+      'Bill of Rights',
+      'The first ten ammendements of the U.S. Constitution guaranteeing rights and freedoms',
+      '1791',
+    ],
+  ];
+
+  const columns = ['Document title', 'Description', 'Year'];
+  return (
+    <main>
+      <va-table table-title={tableTitle}>
+        <va-table-row slot="headers">
+          {columns.map(col => (
+            <span>{col}</span>
+          ))}
+        </va-table-row>
+
+        {data.map(row => (
+          <va-table-row>
+            {row.map(item => (
+              <span>{item}</span>
+            ))}
+          </va-table-row>
+        ))}
+      </va-table>
+    </main>
+  );
+};
 const defaultArgs = {
   'table-title': 'My table',
 };
@@ -68,3 +100,8 @@ Default.args = {
   ...defaultArgs,
 };
 Default.argTypes = propStructure(accordionDocs);
+
+export const MissingData = MissingDataTemplate.bind({});
+MissingData.args = {
+  ...defaultArgs,
+};
