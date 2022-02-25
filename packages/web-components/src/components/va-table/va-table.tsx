@@ -17,7 +17,7 @@ export class VaTable {
   /**
    * The title of the table
    */
-  @Prop() caption: string;
+  @Prop() tableTitle: string;
 
   componentDidLoad() {
     const [headerRow, ...rows] = Array.from(
@@ -57,11 +57,11 @@ export class VaTable {
   }
 
   render() {
-    const { caption } = this;
+    const { tableTitle } = this;
 
     return (
       <Host role="table">
-        {caption && <caption>{caption}</caption>}
+        {tableTitle && <caption>{tableTitle}</caption>}
         <thead>
           <slot name="headers"></slot>
         </thead>

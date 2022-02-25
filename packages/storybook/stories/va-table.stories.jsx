@@ -13,7 +13,7 @@ export default {
 };
 
 const Template = args => {
-  const { caption } = args;
+  const { 'table-title': tableTitle } = args;
   const data = [
     [
       'Declaration of Independence',
@@ -40,7 +40,7 @@ const Template = args => {
   const columns = ['Document title', 'Description', 'Year'];
   return (
     <main>
-      <va-table caption={caption}>
+      <va-table table-title={tableTitle}>
         <va-table-row slot="headers">
           {columns.map(col => (
             <span>{col}</span>
@@ -60,7 +60,7 @@ const Template = args => {
 };
 
 const defaultArgs = {
-  caption: 'My table',
+  'table-title': 'My table',
 };
 
 export const Default = Template.bind({});

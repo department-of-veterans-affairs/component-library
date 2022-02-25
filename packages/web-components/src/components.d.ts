@@ -298,7 +298,7 @@ export namespace Components {
         /**
           * The title of the table
          */
-        "caption": string;
+        "tableTitle": string;
     }
     interface VaTableRow {
     }
@@ -903,7 +903,7 @@ declare namespace LocalJSX {
         /**
           * The title of the table
          */
-        "caption"?: string;
+        "tableTitle"?: string;
     }
     interface VaTableRow {
     }
