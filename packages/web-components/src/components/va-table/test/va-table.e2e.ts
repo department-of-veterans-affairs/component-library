@@ -10,6 +10,14 @@ describe('va-table', () => {
     expect(element).toHaveClass('hydrated');
   });
 
+  it('includes a caption', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-table table-title="My table"></va-table>');
+
+    const element = await page.find('va-table >>> caption');
+    expect(element.innerText).toEqual('My table');
+  });
+
   it('adds role and scope to header row children', async () => {
     const page = await newE2EPage();
     await page.setContent(`
