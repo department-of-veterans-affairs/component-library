@@ -23,7 +23,7 @@ export class VaModal {
   alertActions: HTMLDivElement;
   closeButton: HTMLButtonElement;
   contents: HTMLDivElement;
-  dirty: boolean; // used to determine if visible has changed (workaround)
+  isVisibleDirty: boolean; // used to determine if visible has changed (workaround)
   focusTrap: FocusTrap;
   undoAriaHidden: Undo; // used to undo aria hidden on close
 
@@ -44,7 +44,7 @@ export class VaModal {
 
   @Prop() clickToClose?: boolean = false;
   @Prop() disableAnalytics?: boolean = false;
-  @Prop() headline?: string;
+  @Prop() modalTitle?: string;
   @Prop() hideCloseButton?: boolean = false;
   @Prop() initialFocusSelector?: string;
   @Prop() primaryButton?: { text: string; action: () => void };
@@ -78,7 +78,7 @@ export class VaModal {
     // This is a workaround for determining when to call setupModal or teardownModal.
     // Elements are not yet available in the DOM due to `if (!visible) return null;`
     // See componentDidUpdate.
-    this.dirty = true;
+    this.isVisibleDirty = true;
   }
 
   componentDidLoad() {
@@ -87,9 +87,9 @@ export class VaModal {
 
   componentDidUpdate() {
     // This dirty check prevents the component from updating endlessly.
-    if (!this.dirty) return;
+    if (!this.isVisibleDirty) return;
 
-    this.dirty = false;
+    this.isVisibleDirty = false;
     if (this.visible) {
       this.setupModal();
     } else {
@@ -137,7 +137,7 @@ export class VaModal {
         action: 'show',
         details: {
           status: this.status,
-          title: this.headline, // does this need to be updated to details.headline?
+          title: this.modalTitle, // does this need to be updated to details.modalTitle?
           primaryButtonText: this.primaryButton?.text,
           secondayButtonText: this.secondaryButton?.text,
         },
@@ -156,7 +156,7 @@ export class VaModal {
 
   render() {
     const {
-      headline,
+      modalTitle,
       hideCloseButton,
       primaryButton,
       secondaryButton,
@@ -184,7 +184,9 @@ export class VaModal {
       }
       return 'dialog';
     };
-    const btnAriaLabel = headline ? `close ${headline} modal` : 'close modal';
+    const btnAriaLabel = modalTitle
+      ? `close ${modalTitle} modal`
+      : 'close modal';
 
     return (
       <Host
@@ -211,9 +213,9 @@ export class VaModal {
           )}
           <div class={bodyClass}>
             <div role="document">
-              {headline && (
+              {modalTitle && (
                 <h1 class={titleClass} id={titleId} tabIndex={-1}>
-                  {headline}
+                  {modalTitle}
                 </h1>
               )}
               <slot></slot>

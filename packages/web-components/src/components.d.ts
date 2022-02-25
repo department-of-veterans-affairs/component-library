@@ -169,9 +169,9 @@ export namespace Components {
     interface VaModal {
         "clickToClose"?: boolean;
         "disableAnalytics"?: boolean;
-        "headline"?: string;
         "hideCloseButton"?: boolean;
         "initialFocusSelector"?: string;
+        "modalTitle"?: string;
         "primaryButton"?: { text: string; action: () => void };
         "secondaryButton"?: { text: string; action: () => void };
         "status"?: 'continue' | 'error' | 'info' | 'success' | 'warning';
@@ -730,9 +730,9 @@ declare namespace LocalJSX {
     interface VaModal {
         "clickToClose"?: boolean;
         "disableAnalytics"?: boolean;
-        "headline"?: string;
         "hideCloseButton"?: boolean;
         "initialFocusSelector"?: string;
+        "modalTitle"?: string;
         "onCloseEvent"?: (event: CustomEvent<any>) => void;
         "onComponent-library-analytics"?: (event: CustomEvent<any>) => void;
         "primaryButton"?: { text: string; action: () => void };
