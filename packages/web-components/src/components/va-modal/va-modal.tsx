@@ -8,11 +8,10 @@ import {
   Listen,
   Prop,
   Watch,
-  State,
 } from '@stencil/core';
-import * as focusTrap from 'focus-trap';
+import { createFocusTrap, FocusTrap } from 'focus-trap';
 import { clearAllBodyScrollLocks, disableBodyScroll } from 'body-scroll-lock';
-import { hideOthers } from 'aria-hidden';
+import { hideOthers, Undo } from 'aria-hidden';
 import classnames from 'classnames';
 
 @Component({
@@ -24,8 +23,9 @@ export class VaModal {
   alertActions: HTMLDivElement;
   closeButton: HTMLButtonElement;
   contents: HTMLDivElement;
-  dirty: boolean;
-  trap: focusTrap.FocusTrap;
+  dirty: boolean; // used to determine if visible has changed (workaround)
+  focusTrap: FocusTrap;
+  undoAriaHidden: Undo; // used to undo aria hidden on close
 
   @Element() el: HTMLElement;
 
@@ -52,11 +52,8 @@ export class VaModal {
   @Prop() status?: 'continue' | 'error' | 'info' | 'success' | 'warning';
   @Prop() visible: boolean = false;
 
-  @State() undo: any;
-
   @Listen('click')
   handleClick(e) {
-    console.log('handleClick');
     if (!this.clickToClose) return;
 
     // event.target is always the shadow host
@@ -68,7 +65,6 @@ export class VaModal {
 
   @Listen('keydown', { target: 'window' })
   handleKeyDown(e: KeyboardEvent) {
-    console.log('handleKeyDown');
     if (!this.visible) return;
 
     const keyCode = e.key;
@@ -79,6 +75,9 @@ export class VaModal {
 
   @Watch('visible')
   watchVisibleHandler() {
+    // This is a workaround for determining when to call setupModal or teardownModal.
+    // Elements are not yet available in the DOM due to `if (!visible) return null;`
+    // See componentDidUpdate.
     this.dirty = true;
   }
 
@@ -87,6 +86,7 @@ export class VaModal {
   }
 
   componentDidUpdate() {
+    // This dirty check prevents the component from updating endlessly.
     if (!this.dirty) return;
 
     this.dirty = false;
@@ -98,29 +98,32 @@ export class VaModal {
   }
 
   disconnectedCallback() {
-    console.log('disconnectedCallback');
     this.teardownModal();
   }
 
   private handleClose(e) {
-    console.log('handleClose', e);
-    e.preventDefault();
     this.closeEvent.emit(e);
   }
 
   private setupModal() {
-    console.log('setupModal');
-    this.trap = focusTrap.createFocusTrap(
+    const initialFocus = (this.el.querySelector(this.initialFocusSelector) ||
+      this.el.shadowRoot.querySelector(
+        this.initialFocusSelector,
+      )) as HTMLElement;
+    this.focusTrap = createFocusTrap(
       [this.el, this.alertActions, this.contents],
       {
+        // trap is removed in teardownModal - disable escape key deactivating the focus trap
         escapeDeactivates: false,
-        fallbackFocus: this.contents,
-        initialFocus: this.closeButton,
+        // if hideCloseButton is true, we need a fallback element to focus
+        fallbackFocus: this.contents, // is this needed?
+        // the element we want to target immediately after opening modal
+        initialFocus: initialFocus || this.closeButton,
       },
     );
-    this.trap.activate();
+    this.focusTrap.activate();
     disableBodyScroll(this.el);
-    this.undo = hideOthers(this.el);
+    this.undoAriaHidden = hideOthers(this.el);
 
     // NOTE: With this PR (https://github.com/department-of-veterans-affairs/vets-website/pull/11712)
     // we rely on the existence of `body.modal-open` to determine if a modal is
@@ -144,10 +147,9 @@ export class VaModal {
   }
 
   private teardownModal() {
-    console.log('teardownModal');
-    this.trap?.deactivate();
+    this.focusTrap?.deactivate();
     clearAllBodyScrollLocks();
-    this.undo?.();
+    this.undoAriaHidden?.();
 
     document.body.classList.remove('modal-open');
   }
@@ -186,8 +188,8 @@ export class VaModal {
 
     return (
       <Host
-        aria-labelledby={titleId}
-        aria-modal
+        aria-label={titleId}
+        aria-modal="true"
         class="va-modal"
         role={ariaRole(status)}
       >
@@ -200,7 +202,7 @@ export class VaModal {
             <button
               aria-label={btnAriaLabel}
               class="va-modal-close"
-              onClick={this.handleClose.bind(this)}
+              onClick={e => this.handleClose(e)}
               ref={el => (this.closeButton = el as HTMLButtonElement)}
               type="button"
             >
