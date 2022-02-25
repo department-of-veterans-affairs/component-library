@@ -24,12 +24,12 @@ export class VaPromoBanner {
   @Prop() renderCustom: boolean = false;
 
   /**
-   * `href` attribute for the `<a>` tag. Only gets used if `render` is _not_ used
+   * `href` attribute for the `<a>` tag. Only gets used if `render-custom` is _not_ used
    */
   @Prop() href: string;
 
   /**
-   * `target` attribute for the `<a>` tag. Only gets used if `render` is _not_ used
+   * `target` attribute for the `<a>` tag. Only gets used if `render-custom` is _not_ used
    */
   @Prop() target: string;
 

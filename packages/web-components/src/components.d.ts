@@ -220,7 +220,7 @@ export namespace Components {
          */
         "disableAnalytics": boolean;
         /**
-          * `href` attribute for the `<a>` tag. Only gets used if `render` is _not_ used
+          * `href` attribute for the `<a>` tag. Only gets used if `render-custom` is _not_ used
          */
         "href": string;
         /**
@@ -228,7 +228,7 @@ export namespace Components {
          */
         "renderCustom": boolean;
         /**
-          * `target` attribute for the `<a>` tag. Only gets used if `render` is _not_ used
+          * `target` attribute for the `<a>` tag. Only gets used if `render-custom` is _not_ used
          */
         "target": string;
         /**
@@ -808,7 +808,7 @@ declare namespace LocalJSX {
          */
         "disableAnalytics"?: boolean;
         /**
-          * `href` attribute for the `<a>` tag. Only gets used if `render` is _not_ used
+          * `href` attribute for the `<a>` tag. Only gets used if `render-custom` is _not_ used
          */
         "href"?: string;
         /**
@@ -824,7 +824,7 @@ declare namespace LocalJSX {
          */
         "renderCustom"?: boolean;
         /**
-          * `target` attribute for the `<a>` tag. Only gets used if `render` is _not_ used
+          * `target` attribute for the `<a>` tag. Only gets used if `render-custom` is _not_ used
          */
         "target"?: string;
         /**
