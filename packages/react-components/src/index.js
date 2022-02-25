@@ -23,7 +23,6 @@ import NumberInput from './components/NumberInput/NumberInput';
 import OMBInfo from './components/OMBInfo/OMBInfo';
 import Pagination from './components/Pagination/Pagination';
 import PrivacyAgreement from './components/PrivacyAgreement/PrivacyAgreement';
-import ProcessList from './components/ProcessList/ProcessList';
 import ProgressButton from './components/ProgressButton/ProgressButton';
 import PromoBanner, {
   PROMO_BANNER_TYPES,
@@ -69,7 +68,6 @@ export {
   OMBInfo,
   Pagination,
   PrivacyAgreement,
-  ProcessList,
   ProgressButton,
   PromoBanner,
   PROMO_BANNER_TYPES,

@@ -31,7 +31,6 @@
   },
   "dependencies": {
     "classnames": "^2.2.6",
-    "number-to-words": "^1.2.4",
     "prop-types": "^15.6.2",
     "react-focus-lock": "^2.5.1",
     "react-focus-on": "^3.5.1",
