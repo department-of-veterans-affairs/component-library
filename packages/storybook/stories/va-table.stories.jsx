@@ -80,3 +80,29 @@ MissingData.args = {
     ],
   ],
 };
+
+export const CustomComponents = Template.bind({});
+CustomComponents.args = {
+  ...defaultArgs,
+  rows: [
+    ...data,
+    [
+      'Social Security Act',
+      <div>
+        <div>
+          An act to provide for the general welfare by establishing a system of
+          Federal old-age benefits. Enables provisions for:
+        </div>
+        <ul>
+          <li>aged persons</li>
+          <li>blind persons</li>
+          <li>dependent and crippled children</li>
+          <li>maternal and child welfare</li>
+          <li>public health</li>
+          <li>unemployment compensation</li>
+        </ul>
+      </div>,
+      '1935',
+    ],
+  ],
+};
