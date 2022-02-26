@@ -62,6 +62,7 @@ export class VaModal {
    * If true, analytics event won't be fired
    */
   @Prop() disableAnalytics?: boolean = false;
+
   /**
    * Title/header text for the modal
    */
@@ -106,7 +107,7 @@ export class VaModal {
     // event.target is always the shadow host
     // event.composedPath()[0] returns the node clicked when shadow root is open
     if (this.visible && e.composedPath()[0] === this.el) {
-      this.closeEvent.emit(e);
+      this.handleClose(e);
     }
   }
 
