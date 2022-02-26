@@ -16,12 +16,20 @@ export default {
       },
     },
   },
+  argTypes: {
+    status: {
+      control: {
+        type: 'select',
+        options: ['continue', 'error', 'info', 'success', 'warning'],
+      },
+    },
+  },
 };
 
 const Template = ({
   'click-to-close': clickToClose,
   'disable-analytics': disableAnalytics,
-  headline,
+  'modal-title': modalTitle,
   'hide-close-button': hideCloseButton,
   'initial-focus-selector': initialFocusSelector,
   'primary-button': primaryButton,
@@ -39,7 +47,7 @@ const Template = ({
       <VaModal
         clickToClose={clickToClose}
         disableAnalytics={disableAnalytics}
-        headline={headline}
+        modalTitle={modalTitle}
         hideCloseButton={hideCloseButton}
         initialFocusSelector={initialFocusSelector}
         onCloseEvent={onCloseEvent}
@@ -64,20 +72,11 @@ const Template = ({
 };
 
 const defaultArgs = {
-  'click-to-close': undefined,
-  'disable-analytics': undefined,
-  'headline': 'Modal title goes here',
-  'hide-close-button': undefined,
-  'initial-focus-selector': undefined,
-  'primary-button': undefined,
-  'secondary-button': undefined,
-  'status': undefined,
-  'visible': false,
-};
-
-export const Default = Template.bind({});
-Default.args = {
-  ...defaultArgs,
+  'click-to-close': false,
+  'disable-analytics': false,
+  'modal-title': 'Modal title goes here',
+  'hide-close-button': false,
+  'initial-focus-selector': '',
   'primary-button': {
     text: 'Primary button',
     action: e => console.log('Primary button clicked. Event fired:', e),
@@ -86,5 +85,12 @@ Default.args = {
     text: 'Secondary button',
     action: e => console.log('Secondary button clicked. Event fired:', e),
   },
+  'status': undefined,
+  'visible': false,
+};
+
+export const Default = Template.bind({});
+Default.args = {
+  ...defaultArgs,
 };
 Default.argTypes = propStructure(modalDocs);

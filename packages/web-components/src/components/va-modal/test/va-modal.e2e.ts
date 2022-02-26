@@ -25,7 +25,9 @@ describe('va-modal', () => {
                 <h1 class="va-modal-title vads-u-font-size--h3" id="va-modal-title" tabindex="-1">
                   Example Title
                 </h1>
-                <slot></slot>
+                <div>
+                  <slot></slot>
+                </div>
               </div>
             </div>
           </div>

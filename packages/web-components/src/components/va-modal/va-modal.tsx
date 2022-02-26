@@ -225,7 +225,7 @@ export class VaModal {
       status ? 'usa-alert-heading' : 'va-modal-title',
       'vads-u-font-size--h3',
     );
-    // const contentClass = classnames({ 'usa-alert-text': status });
+    const contentClass = classnames({ 'usa-alert-text': status });
     const ariaRole = status => {
       if (status === 'warning' || status === 'error') {
         return 'alertdialog';
@@ -266,7 +266,9 @@ export class VaModal {
                   {modalTitle}
                 </h1>
               )}
-              <slot></slot>
+              <div class={contentClass}>
+                <slot></slot>
+              </div>
               {(primaryButton || secondaryButton) && (
                 <div
                   class="alert-actions"
