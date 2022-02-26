@@ -1758,7 +1758,6 @@ __metadata:
     karma-webpack: ^4.0.2
     lint-staged: ^10.5.4
     mocha: ^4.0.1
-    number-to-words: ^1.2.4
     pinst: ^2.1.4
     prettier: ^2.2.1
     prop-types: ^15.6.2
@@ -13319,13 +13318,6 @@ fsevents@^1.2.7:
   version: 1.0.1
   resolution: "number-is-nan@npm:1.0.1"
   checksum: 13656bc9aa771b96cef209ffca31c31a03b507ca6862ba7c3f638a283560620d723d52e626d57892c7fff475f4c36ac07f0600f14544692ff595abff214b9ffb
-  languageName: node
-  linkType: hard
-
-"number-to-words@npm:^1.2.4":
-  version: 1.2.4
-  resolution: "number-to-words@npm:1.2.4"
-  checksum: 468f4d745b18f961c7a6f933d3beb3f3b8b434f3daa2b3d891a43f5f43c6eeddea9f08bbc25d46a8221adaf2b31d5acc801ef6ece270190267ae79c6ac27857d
   languageName: node
   linkType: hard
 
