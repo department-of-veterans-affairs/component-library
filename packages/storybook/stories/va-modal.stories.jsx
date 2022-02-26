@@ -76,7 +76,7 @@ const defaultArgs = {
   'disable-analytics': false,
   'modal-title': 'Modal title goes here',
   'hide-close-button': false,
-  'initial-focus-selector': '',
+  'initial-focus-selector': undefined,
   'primary-button': {
     text: 'Primary button',
     action: e => console.log('Primary button clicked. Event fired:', e),
