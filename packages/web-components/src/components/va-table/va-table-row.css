@@ -51,6 +51,7 @@
        * aria-label has no advantage, it won't be read inside a table
         content: attr(aria-label);
        */
+    display: block; /* for IE11 compatibility */
     content: attr(data-label);
     font-weight: 700;
   }

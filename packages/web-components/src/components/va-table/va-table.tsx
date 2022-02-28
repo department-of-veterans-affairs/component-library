@@ -20,13 +20,18 @@ export class VaTable {
   @Prop() tableTitle: string;
 
   componentDidLoad() {
+    // For IE11 compatibility. `el.children` renders booleans instead of html elements,
+    // so instead we use `el.childNodes` and filter out nodes that aren't a proper tag
+    const elementChildren = (el: HTMLElement) =>
+      Array.from(el.childNodes).filter(node => node.nodeName !== '#text');
+
     const [headerRow, ...rows] = Array.from(
       this.el.querySelectorAll('va-table-row'),
     );
-    const headers = headerRow.children;
+    const headers = elementChildren(headerRow);
     const columns = [];
 
-    Array.from(headers).forEach((item: HTMLVaTableRowElement) => {
+    headers.forEach((item: HTMLVaTableRowElement) => {
       columns.push(item.textContent);
       item.setAttribute('role', 'columnheader');
       item.setAttribute('scope', 'col');
@@ -35,14 +40,14 @@ export class VaTable {
     // Store alignment classes by column index.
     const alignment = {};
     Array.from(rows).forEach((row, index) => {
-      const cells = (row as HTMLElement).children;
+      const cells = elementChildren(row);
 
-      Array.from(cells).forEach((cell: HTMLSpanElement, colNum) => {
+      cells.forEach((cell: HTMLSpanElement, colNum) => {
         // Look at the first row of data to determine type of data in column
         // Right align columns with numeric data
         if (index === 0 && isNumeric(cell.textContent)) {
           alignment[colNum] = 'medium-screen:vads-u-text-align--right';
-          headers[colNum].classList.add(alignment[colNum]);
+          (headers[colNum] as HTMLElement).classList.add(alignment[colNum]);
         }
         if (alignment[colNum]) {
           cell.classList.add(alignment[colNum]);
