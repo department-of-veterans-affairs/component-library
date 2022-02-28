@@ -144,14 +144,14 @@ export class VaBanner {
     const onCloseAlert = this.showClose ? this.dismiss : undefined;
 
     return (
-      <Host role="region" aria-labelledby={this.headline || 'Banner Region'}>
+      <Host>
         <va-alert
           visible
           full-width
           closeable={this.showClose}
           onCloseEvent={onCloseAlert}
           status={this.type}
-          aria-label="banner"
+          data-role="banner"
         >
           <h3 slot="headline">{this.headline}</h3>
           <slot></slot>

@@ -155,7 +155,7 @@ export class VaAlert {
 
     return (
       <Host>
-        <div role={role} aria-live={ariaLive} class={classes}>
+        <div role={this.el.getAttribute('data-role') || role} aria-live={ariaLive} class={classes}>
           <i aria-hidden="true" role="img"></i>
           <div
             class="body"
