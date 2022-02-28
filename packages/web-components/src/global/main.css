@@ -1,4 +1,5 @@
 @import 'variables.css';
+@import '../components/va-breadcrumbs/va-breadcrumbs-slot.css';
 
 va-process-list li :is(h2, h3, h4, h5) {
   margin-top: 0;

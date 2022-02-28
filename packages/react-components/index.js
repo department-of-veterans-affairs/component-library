@@ -23,7 +23,6 @@ import NumberInput from './NumberInput';
 import OMBInfo from './OMBInfo';
 import Pagination from './Pagination';
 import PrivacyAgreement from './PrivacyAgreement';
-import ProcessList from './ProcessList';
 import ProgressButton from './ProgressButton';
 import PromoBanner, { PROMO_BANNER_TYPES } from './PromoBanner';
 import RadioButtons from './RadioButtons';
@@ -32,8 +31,8 @@ import Select from './Select';
 import SystemDownView from './SystemDownView';
 import Table from './Table';
 import Telephone, {
-  CONTACTS as PHONE_CONTACTS,
-  contactsMap as PHONE_CONTACTS_MAP,
+  CONTACTS,
+  contactsMap,
   PATTERNS as PHONE_PATTERNS,
   patternsMap as PHONE_PATTERNS_MAP,
 } from './Telephone';
@@ -67,7 +66,6 @@ export {
   OMBInfo,
   Pagination,
   PrivacyAgreement,
-  ProcessList,
   ProgressButton,
   PromoBanner,
   PROMO_BANNER_TYPES,
@@ -77,8 +75,8 @@ export {
   SystemDownView,
   Table,
   Telephone,
-  PHONE_CONTACTS,
-  PHONE_CONTACTS_MAP,
+  CONTACTS,
+  contactsMap,
   PHONE_PATTERNS,
   PHONE_PATTERNS_MAP,
   TextArea,

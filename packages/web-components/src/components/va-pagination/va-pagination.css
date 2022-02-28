@@ -1,0 +1,129 @@
+@import '../../mixins/focusable.css';
+
+:host {
+  background-color: var(--color-white);
+  border-top: 1px solid var(--color-gray-lightest);
+  display: flex;
+  font-family: var(--font-source-sans);
+  justify-content: center;
+  overflow: hidden;
+  padding: 2rem 0 1rem;
+  width: 100%;
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+li {
+  display: inline-flex;
+}
+
+button {
+  -moz-osx-font-smoothing: auto;
+  -webkit-font-smoothing: auto;
+  background-color: transparent;
+  border: 0;
+  color: var(--color-link-default);
+  cursor: pointer;
+  display: inline-flex;
+  font-family: inherit;
+  font-size: 1.44rem;
+  font-weight: 400;
+  justify-content: center;
+  line-height: 2;
+  padding: 0;
+  transition: all 0.3s ease-in-out;
+  transition-property: color, background-color;
+}
+
+.button-next,
+.button-prev {
+  border-radius: 0;
+  margin: 0;
+}
+
+.button-next:hover,
+.button-prev:hover {
+  background-color: transparent;
+  color: var(--color-link-default);
+  text-decoration: underline;
+}
+
+.pagination-next:hover,
+.pagination-prev:hover {
+  text-decoration: underline;
+  text-decoration-color: var(--color-primary);
+}
+
+.pagination-inner {
+  overflow: hidden;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.button-inner {
+  border-radius: 1000px;
+  height: 3rem;
+  margin: 0 0.5rem;
+  width: 3rem;
+}
+
+.button-active,
+.button-inner[aria-current='true'],
+.button-inner:hover,
+.button-inner:focus {
+  background-color: var(--color-primary);
+  color: var(--color-white);
+}
+
+.pagination-inner,
+.pagination-next,
+.pagination-prev {
+  padding-bottom: 4px;
+  padding-top: 4px;
+}
+
+@media (max-width: 768px) {
+  .pagination-inner {
+    width: 20rem;
+  }
+
+  .pagination-next {
+    margin-right: -3rem;
+    padding-left: 1rem;
+  }
+
+  .pagination-prev {
+    margin-left: -3rem;
+    padding-right: 1rem;
+  }
+}
+
+@media (min-width: 481px) {
+  .pagination-next:not(:empty) .button-next::after {
+    /* right-pointing angle quotation mark › with 2 spaces before it */
+    content: '\a0\a0\203a';
+  }
+
+  .pagination-prev:not(:empty) .button-prev::before {
+    /* left-pointing angle quotation mark ‹ with 2 spaces after it */
+    content: '\2039\a0\a0';
+  }
+}
+
+@media (min-width: 768px) {
+  .pagination-next,
+  .pagination-prev {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}
+
+@media (min-width: 1201px) {
+  .pagination-inner {
+    width: 40rem;
+  }
+}

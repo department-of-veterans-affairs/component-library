@@ -8,5 +8,15 @@
   "workspaces": [
     "packages/*"
   ],
-  "packageManager": "yarn@3.0.2"
+  "packageManager": "yarn@3.0.2",
+  "resolutions": {
+    "ansi-regex": "^5.0.1",
+    "diff": "^3.5.0",
+    "glob-parent": "^5.1.2",
+    "json-schema": "^0.4.0",
+    "minimist": "^0.2.1",
+    "node-fetch": "^2.6.7",
+    "trim": "^0.0.3",
+    "prism": "^1.27.0"
+  }
 }
