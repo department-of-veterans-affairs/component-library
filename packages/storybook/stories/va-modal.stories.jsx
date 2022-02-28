@@ -41,7 +41,7 @@ const Template = ({
   const onCloseEvent = () => setIsVisible(!isVisible);
   const openModal = () => setIsVisible(true);
   return (
-    <div style={{ height: '500px' }}>
+    <div>
       <h1>Testing h1 heading</h1>
       <button onClick={openModal}>Click here to open modal</button>
       <VaModal
@@ -94,3 +94,38 @@ Default.args = {
   ...defaultArgs,
 };
 Default.argTypes = propStructure(modalDocs);
+
+// Statuses
+export const Info = Template.bind({});
+Info.args = { ...defaultArgs, status: 'info' };
+export const Continue = Template.bind({});
+Continue.args = { ...defaultArgs, status: 'continue' };
+export const Success = Template.bind({});
+Success.args = { ...defaultArgs, status: 'success' };
+export const Warning = Template.bind({});
+Warning.args = { ...defaultArgs, status: 'warning' };
+export const Error = Template.bind({});
+Error.args = { ...defaultArgs, status: 'error' };
+
+export const ClickOutsideToClose = Template.bind({});
+ClickOutsideToClose.args = {
+  ...defaultArgs,
+  'click-to-close': true,
+};
+
+export const WithoutButtons = Template.bind({});
+WithoutButtons.args = {
+  ...defaultArgs,
+  'primary-button': undefined,
+  'secondary-button': undefined,
+};
+
+export const WithoutTitle = Template.bind({});
+WithoutTitle.args = { ...defaultArgs, 'modal-title': undefined };
+
+export const HideCloseButton = Template.bind({});
+HideCloseButton.args = {
+  ...defaultArgs,
+  'hide-close-button': true,
+  'click-to-close': true,
+};
