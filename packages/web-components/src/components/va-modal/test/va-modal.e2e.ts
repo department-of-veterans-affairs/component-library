@@ -39,7 +39,7 @@ describe('va-modal', () => {
     `);
   });
 
-  it('passes an axe check', async () => {
+  it('passes an axe check when visible', async () => {
     const page = await newE2EPage();
     await page.setContent(`
       <va-modal modal-title="Example Title" visible>
@@ -52,7 +52,20 @@ describe('va-modal', () => {
     await axeCheck(page);
   });
 
-  it('closeEvent is triggered using the Escape key when modal is visible', async () => {
+  it('passes an axe check when not visible', async () => {
+    const page = await newE2EPage();
+    await page.setContent(`
+      <va-modal modal-title="Example Title">
+        <p>
+          A modal may pass any React nodes as children to be displayed within it.
+        </p>
+      </va-modal>
+    `);
+
+    await axeCheck(page);
+  });
+
+  it('should trigger closeEvent using the Escape key when modal is visible', async () => {
     const page = await newE2EPage();
     await page.setContent(`
       <va-modal modal-title="Example Title" visible>
@@ -69,7 +82,7 @@ describe('va-modal', () => {
     expect(closeEvent).toHaveReceivedEvent();
   });
 
-  it('closeEvent is not triggered using the Escape key when modal is not visible', async () => {
+  it('should not trigger closeEvent using the Escape key when modal is not visible', async () => {
     const page = await newE2EPage();
     await page.setContent(`
       <va-modal modal-title="Example Title">
@@ -84,5 +97,54 @@ describe('va-modal', () => {
     await component.press('Escape');
 
     expect(closeEvent).toHaveReceivedEventTimes(0);
+  });
+
+  it('should open with focus assigned to close button', async () => {
+    const page = await newE2EPage();
+    await page.setContent(`
+      <va-modal modal-title="Example Title" visible>
+        <p>
+          A modal may pass any React nodes as children to be displayed within it.
+        </p>
+      </va-modal>
+    `);
+
+    const focusedElement = await page.find('va-modal >>> :focus');
+
+    expect(focusedElement.getAttribute('aria-label')).toEqual(
+      'close Example Title modal',
+    );
+  });
+
+  it('should open with focus assigned to given selector', async () => {
+    const page = await newE2EPage();
+    await page.setContent(`
+      <va-modal modal-title="Example Title" visible initial-focus-selector="#va-modal-title">
+        <p>
+          A modal may pass any React nodes as children to be displayed within it.
+        </p>
+      </va-modal>
+    `);
+
+    const focusedElement = await page.find('va-modal >>> :focus');
+
+    expect(focusedElement.textContent).toEqual('Example Title');
+  });
+
+  it('should open with focus assigned to the first button when hideCloseButton is true', async () => {
+    const page = await newE2EPage();
+    await page.setContent(`
+      <va-modal modal-title="Example Title" visible hide-close-button>
+        <p>
+          A modal may pass any React nodes as children to be displayed within it.
+        </p>
+        <button id="first-button">First</button>
+        <button id="second-button">Second</button>
+      </va-modal>
+    `);
+
+    const focusedElement = await page.find(':focus');
+
+    expect(focusedElement.id).toEqual('first-button');
   });
 });
