@@ -51,7 +51,8 @@
 }
 
 h1 {
-  font-family: Bitter, Georgia, Cambria, 'Times New Roman', Times, serif;
+  font-family: var(--font-serif), Georgia, Cambria, 'Times New Roman', Times,
+    serif;
   font-size: 2rem;
   line-height: 1.3;
   margin-bottom: 0.5rem;
@@ -80,8 +81,8 @@ i::before {
 }
 
 .alert-actions button {
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-font-smoothing: antialiased;
+  /* -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased; */
   background-color: var(--color-primary);
   margin-top: 0.8rem;
   margin-right: 0.8rem;
@@ -145,7 +146,7 @@ i::before {
 
 .va-modal-alert-continue::before {
   color: var(--color-green);
-  content: '\F023';
+  content: '\F023'; /* fa-lock */
 }
 
 .va-modal-alert-error {
@@ -154,7 +155,7 @@ i::before {
 
 .va-modal-alert-error::before {
   color: var(--color-secondary-dark);
-  content: '\F06A';
+  content: '\F06A'; /* fa-circle-exclamation */
 }
 
 .va-modal-alert-info {
@@ -162,7 +163,7 @@ i::before {
 }
 
 .va-modal-alert-info::before {
-  content: '\F05A';
+  content: '\F05A'; /* fa-circle-info */
 }
 
 .va-modal-alert-success {
@@ -171,7 +172,7 @@ i::before {
 
 .va-modal-alert-success::before {
   color: var(--color-green);
-  content: '\F00C';
+  content: '\F00C'; /* fa-check */
 }
 
 .va-modal-alert-warning {
@@ -179,7 +180,7 @@ i::before {
 }
 
 .va-modal-alert-warning::before {
-  content: '\F071';
+  content: '\F071'; /* fa-triangle-exclamation */
 }
 
 .va-modal-alert-text {
