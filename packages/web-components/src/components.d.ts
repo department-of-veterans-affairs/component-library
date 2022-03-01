@@ -190,11 +190,11 @@ export namespace Components {
         /**
           * Primary button text and action
          */
-        "primaryButton"?: { text: string; action: () => void };
+        "primaryButton"?: any;
         /**
           * Secondary button text and action
          */
-        "secondaryButton"?: { text: string; action: () => void };
+        "secondaryButton"?: any;
         "status"?: 'continue' | 'error' | 'info' | 'success' | 'warning';
         /**
           * If the modal is visible or not
@@ -783,11 +783,11 @@ declare namespace LocalJSX {
         /**
           * Primary button text and action
          */
-        "primaryButton"?: { text: string; action: () => void };
+        "primaryButton"?: any;
         /**
           * Secondary button text and action
          */
-        "secondaryButton"?: { text: string; action: () => void };
+        "secondaryButton"?: any;
         "status"?: 'continue' | 'error' | 'info' | 'success' | 'warning';
         /**
           * If the modal is visible or not
