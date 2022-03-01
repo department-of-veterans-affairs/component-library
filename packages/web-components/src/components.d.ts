@@ -88,6 +88,32 @@ export namespace Components {
     }
     interface VaBackToTop {
     }
+    interface VaBanner {
+        /**
+          * If true, doesn't fire the CustomEvent which can be used for analytics tracking.
+         */
+        "disableAnalytics": boolean;
+        /**
+          * The headline of the banner.
+         */
+        "headline": string;
+        /**
+          * Enable the close functionality. The banner will be closed until storage is cleared.
+         */
+        "showClose": boolean;
+        /**
+          * The type of the banner. One of 'info', 'error', 'success', 'continue', or 'warning'. This affects both the icon of the AlertBox and the top border color.
+         */
+        "type": string;
+        /**
+          * A boolean that when false makes it so that the banner does not render.
+         */
+        "visible": boolean;
+        /**
+          * Enable sessionStorage for the Banner otherwise storage if showClose is enabled will default to localStorage
+         */
+        "windowSession": boolean;
+    }
     interface VaBreadcrumbs {
         /**
           * Analytics tracking function(s) will not be called
@@ -422,6 +448,12 @@ declare global {
         prototype: HTMLVaBackToTopElement;
         new (): HTMLVaBackToTopElement;
     };
+    interface HTMLVaBannerElement extends Components.VaBanner, HTMLStencilElement {
+    }
+    var HTMLVaBannerElement: {
+        prototype: HTMLVaBannerElement;
+        new (): HTMLVaBannerElement;
+    };
     interface HTMLVaBreadcrumbsElement extends Components.VaBreadcrumbs, HTMLStencilElement {
     }
     var HTMLVaBreadcrumbsElement: {
@@ -524,6 +556,7 @@ declare global {
         "va-additional-info": HTMLVaAdditionalInfoElement;
         "va-alert": HTMLVaAlertElement;
         "va-back-to-top": HTMLVaBackToTopElement;
+        "va-banner": HTMLVaBannerElement;
         "va-breadcrumbs": HTMLVaBreadcrumbsElement;
         "va-checkbox": HTMLVaCheckboxElement;
         "va-checkbox-group": HTMLVaCheckboxGroupElement;
@@ -648,6 +681,36 @@ declare namespace LocalJSX {
         "visible"?: boolean;
     }
     interface VaBackToTop {
+    }
+    interface VaBanner {
+        /**
+          * If true, doesn't fire the CustomEvent which can be used for analytics tracking.
+         */
+        "disableAnalytics"?: boolean;
+        /**
+          * The headline of the banner.
+         */
+        "headline"?: string;
+        /**
+          * The event used to track usage of the component. This is emitted when an anchor link or the dismiss icon is clicked and disableAnalytics is not true.
+         */
+        "onComponent-library-analytics"?: (event: CustomEvent<any>) => void;
+        /**
+          * Enable the close functionality. The banner will be closed until storage is cleared.
+         */
+        "showClose"?: boolean;
+        /**
+          * The type of the banner. One of 'info', 'error', 'success', 'continue', or 'warning'. This affects both the icon of the AlertBox and the top border color.
+         */
+        "type"?: string;
+        /**
+          * A boolean that when false makes it so that the banner does not render.
+         */
+        "visible"?: boolean;
+        /**
+          * Enable sessionStorage for the Banner otherwise storage if showClose is enabled will default to localStorage
+         */
+        "windowSession"?: boolean;
     }
     interface VaBreadcrumbs {
         /**
@@ -1045,6 +1108,7 @@ declare namespace LocalJSX {
         "va-additional-info": VaAdditionalInfo;
         "va-alert": VaAlert;
         "va-back-to-top": VaBackToTop;
+        "va-banner": VaBanner;
         "va-breadcrumbs": VaBreadcrumbs;
         "va-checkbox": VaCheckbox;
         "va-checkbox-group": VaCheckboxGroup;
@@ -1072,6 +1136,7 @@ declare module "@stencil/core" {
             "va-additional-info": LocalJSX.VaAdditionalInfo & JSXBase.HTMLAttributes<HTMLVaAdditionalInfoElement>;
             "va-alert": LocalJSX.VaAlert & JSXBase.HTMLAttributes<HTMLVaAlertElement>;
             "va-back-to-top": LocalJSX.VaBackToTop & JSXBase.HTMLAttributes<HTMLVaBackToTopElement>;
+            "va-banner": LocalJSX.VaBanner & JSXBase.HTMLAttributes<HTMLVaBannerElement>;
             "va-breadcrumbs": LocalJSX.VaBreadcrumbs & JSXBase.HTMLAttributes<HTMLVaBreadcrumbsElement>;
             "va-checkbox": LocalJSX.VaCheckbox & JSXBase.HTMLAttributes<HTMLVaCheckboxElement>;
             "va-checkbox-group": LocalJSX.VaCheckboxGroup & JSXBase.HTMLAttributes<HTMLVaCheckboxGroupElement>;
