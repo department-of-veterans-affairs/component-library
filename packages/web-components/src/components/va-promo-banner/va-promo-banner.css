@@ -10,10 +10,10 @@
 }
 
 .va-banner-body {
-  display: table;
-  width: 100%;
   max-width: 100rem;
   margin: 0 auto;
+  display: flex;
+  align-items: center;
 }
 
 .va-banner-icon {
@@ -24,10 +24,9 @@
 }
 
 .va-banner-icon-contents {
-  display: inline-block;
+  display: block;
   height: 4.2rem;
   position: relative;
-  vertical-align: middle;
   width: 4.2rem;
   margin-left: 0.5rem;
 }
@@ -62,12 +61,17 @@
 .va-banner-content {
   padding: 0.8rem;
   line-height: 2rem;
+  flex-grow: 1;
 }
 
 .va-banner-content-link {
-  display: inline-block;
+  display: block;
   text-decoration: none;
   color: var(--color-link-default);
+}
+
+.va-banner-content-link:hover {
+  text-decoration: underline;
 }
 
 .va-banner-content-link i::before {
@@ -75,11 +79,8 @@
 }
 
 .va-banner-close {
-  text-align: center;
-  display: table-cell;
   border-left: 1px solid var(--color-gray-lighter);
   padding: 0 1.6rem;
-  vertical-align: middle;
 }
 
 .va-banner-close button {
@@ -112,7 +113,7 @@ i {
 
 @media screen and (min-width: 768px) {
   .va-banner-icon {
-    display: table-cell;
+    display: block;
   }
 
   .va-banner-close {

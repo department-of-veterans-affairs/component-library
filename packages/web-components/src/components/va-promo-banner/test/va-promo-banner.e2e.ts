@@ -121,6 +121,44 @@ describe('va-promo-banner', () => {
     expect(analyticsSpy).toHaveReceivedEventTimes(0);
   });
 
+  it('does not dismiss without an id attribute', async () => {
+    const page = await newE2EPage();
+    await page.setContent(
+      `<va-promo-banner href="#" target="_self" type="news">This is a promo banner</va-promo-banner>`,
+    );
+    const element = await page.find('va-promo-banner');
+
+    const button = await page.find('va-promo-banner >>> button');
+    await button.click();
+    await page.waitForChanges();
+
+    expect(element).toEqualHtml(`
+      <va-promo-banner class="hydrated" href="#" target="_self" type="news">
+         <mock:shadow-root>
+           <div class="va-banner-body">
+             <div class="va-banner-icon">
+               <div class="va-banner-icon-contents">
+                 <i aria-hidden="true" class="news" role="presentation"></i>
+               </div>
+             </div>
+             <div class="va-banner-content">
+               <a class="va-banner-content-link" href="#" target="_self">
+                 <slot></slot>
+                 <i aria-hidden="true" role="presentation"></i>
+               </a>
+             </div>
+             <div class="va-banner-close">
+               <button aria-label="Dismiss this promo banner" type="button">
+                 <i aria-hidden="true" role="presentation"></i>
+               </button>
+             </div>
+           </div>
+         </mock:shadow-root>
+        This is a promo banner
+       </va-promo-banner>
+     `);
+  });
+
   it('fires closeEvent and does not display if dismissed', async () => {
     const page = await newE2EPage();
     await page.setContent(

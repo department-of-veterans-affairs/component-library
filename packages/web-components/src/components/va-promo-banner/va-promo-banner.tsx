@@ -65,41 +65,34 @@ export class VaPromoBanner {
 
   private closeHandler(): void {
     this.closeEvent.emit();
-    // Derive the updated dismissed banners based on the id attribute set on the component.
-    const updatedDismissedBanners = [...this.dismissedBanners, this.el.id];
+    if (this.el.id) {
+      // Derive the updated dismissed banners based on the id attribute set on the component.
+      const updatedDismissedBanners = [...this.dismissedBanners, this.el.id];
 
-    // Update dismissedBanners in state.
-    this.dismissedBanners = updatedDismissedBanners;
+      // Update dismissedBanners in state.
+      this.dismissedBanners = updatedDismissedBanners;
 
-    // Add the promo banner ID to local storage.
-    localStorage.setItem(
-      DISMISSED_PROMO_BANNERS_LOCAL_STORAGE_KEY,
-      JSON.stringify(updatedDismissedBanners),
-    );
+      // Add the promo banner ID to local storage.
+      localStorage.setItem(
+        DISMISSED_PROMO_BANNERS_LOCAL_STORAGE_KEY,
+        JSON.stringify(updatedDismissedBanners),
+      );
+    }
   }
 
-  private handleLinkClick(e: MouseEvent): void {
+  private handleLinkClick(): void {
     if (!this.disableAnalytics) {
-      const targetEl = e.target as HTMLElement;
-      const targetAnchor =
-        targetEl?.tagName === 'A' ||
-        (targetEl?.tagName === 'SLOT' &&
-          targetEl?.parentElement.tagName === 'A');
-      // If it's a link being clicked, dispatch an analytics event
-      if (targetAnchor) {
-        const detail = {
-          componentName: 'va-promo-banner',
-          action: 'linkClick',
-          details: {
-            text:
-              targetEl.tagName === 'A' ? targetEl.innerText : this.el.innerText,
-            href: this.href,
-            target: this.target,
-            type: this.type,
-          },
-        };
-        this.componentLibraryAnalytics.emit(detail);
-      }
+      const detail = {
+        componentName: 'va-promo-banner',
+        action: 'linkClick',
+        details: {
+          text: this.el.innerText,
+          href: this.href,
+          target: this.target,
+          type: this.type,
+        },
+      };
+      this.componentLibraryAnalytics.emit(detail);
     }
   }
 
@@ -135,7 +128,7 @@ export class VaPromoBanner {
               class="va-banner-content-link"
               href={this.href}
               target={this.target}
-              onClick={e => this.handleLinkClick(e)}
+              onClick={() => this.handleLinkClick()}
             >
               <slot></slot> <i aria-hidden="true" role="presentation" />
             </a>
