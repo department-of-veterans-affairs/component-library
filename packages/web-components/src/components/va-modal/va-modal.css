@@ -1,5 +1,4 @@
 @import '../../mixins/buttons.css';
-@import '../../mixins/focusable.css';
 
 :host {
   display: block;
