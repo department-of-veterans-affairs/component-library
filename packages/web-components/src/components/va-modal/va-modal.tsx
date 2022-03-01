@@ -174,8 +174,6 @@ export class VaModal {
       {
         // trap is removed in teardownModal - disable escape key deactivating the focus trap
         escapeDeactivates: false,
-        // if hideCloseButton is true, we need a fallback element to focus
-        fallbackFocus: this.contents, // is this needed?
         // the element we want to target immediately after opening modal
         initialFocus: initialFocus || this.closeButton,
       },
