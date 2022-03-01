@@ -20,11 +20,6 @@
   justify-content: center;
 }
 
-:host([full-width='true']) .va-alert-close,
-:host([full-width='']) .va-alert-close {
-  position: relative;
-}
-
 :host([status='warning']) {
   border-color: var(--color-gold);
 }
@@ -43,6 +38,13 @@
 :host([full-width='true']) div.alert {
   border-left: none;
   max-width: 1000px;
+}
+
+@media screen and (min-width:1024px) {
+  :host([full-width='true']) .va-alert-close,
+  :host([full-width='']) .va-alert-close {
+    position: relative;
+  }
 }
 
 ::slotted([slot='headline']) {
