@@ -65,27 +65,19 @@ h1:focus {
 }
 
 .va-modal-title {
-  margin: 0;
-  margin-bottom: 1.6rem;
+  margin: 0 0 1.6rem 0;
 }
 
-i {
+i::before {
+  -webkit-font-smoothing: antialiased;
+  content: '\F057'; /* fa-times-circle*/
+  display: inline-block;
   font-family: 'Font Awesome 5 Free';
   font-style: normal;
-  font-weight: 900;
-}
-
-i.fa-times-circle::before {
-  content: '\F057'; /* fa-times-circle*/
-}
-
-.fas {
-  -webkit-font-smoothing: antialiased;
-  display: inline-block;
-  font-style: normal;
   font-variant: normal;
-  text-rendering: auto;
+  font-weight: 900;
   line-height: 1;
+  text-rendering: auto;
 }
 
 .alert-actions button {
@@ -98,7 +90,7 @@ i.fa-times-circle::before {
   white-space: nowrap;
 }
 
-.alert-actions .usa-button-secondary {
+.alert-actions .button-secondary {
   background-color: transparent;
   box-shadow: inset 0 0 0 2px var(--color-primary);
   color: var(--color-primary);
@@ -108,35 +100,20 @@ i.fa-times-circle::before {
 .alert-actions button:focus {
   background-color: var(--color-primary-darker);
 }
-.alert-actions .usa-button-secondary:hover,
-.alert-actions .usa-button-secondary:focus {
+.alert-actions .button-secondary:hover,
+.alert-actions .button-secondary:focus {
   background-color: #dce4ef;
 }
 
 .va-modal-alert {
-  max-width: 60rem;
-}
-
-.va-modal-alert .alert-actions {
-  margin-top: 2.4rem;
-}
-
-.va-modal-alert .alert-actions button {
-  margin: 0;
-}
-
-.va-modal-alert .alert-actions button + button {
-  margin-left: 2rem;
-}
-
-.usa-alert {
   border-left-style: solid;
   border-left-width: 10px;
   display: table;
+  max-width: 60rem;
   padding: 3.2rem 6.4rem 3.2rem 2.4rem;
 }
 
-.usa-alert::before {
+.va-modal-alert::before {
   display: block;
   width: auto;
   background: none;
@@ -150,7 +127,7 @@ i.fa-times-circle::before {
   top: 0;
 }
 
-.usa-alert .usa-alert-body {
+.va-modal-alert .va-modal-alert-body {
   display: table-cell;
   padding-left: 0;
   padding-right: 0;
@@ -158,55 +135,67 @@ i.fa-times-circle::before {
   vertical-align: middle;
 }
 
-.usa-alert-heading {
+.va-modal-alert-title {
   margin: 0;
   padding: 0;
 }
 
-.usa-alert-continue {
+.va-modal-alert-continue {
   border-left-color: var(--color-green);
 }
 
-.usa-alert-continue::before {
+.va-modal-alert-continue::before {
   color: var(--color-green);
   content: '\F023';
 }
 
-.usa-alert-error {
+.va-modal-alert-error {
   border-left-color: var(--color-secondary-dark);
 }
 
-.usa-alert-error::before {
+.va-modal-alert-error::before {
   color: var(--color-secondary-dark);
   content: '\F06A';
 }
 
-.usa-alert-info {
+.va-modal-alert-info {
   border-left-color: var(--color-primary-alt-dark);
 }
 
-.usa-alert-info::before {
+.va-modal-alert-info::before {
   content: '\F05A';
 }
 
-.usa-alert-success {
+.va-modal-alert-success {
   border-left-color: var(--color-green);
 }
 
-.usa-alert-success::before {
+.va-modal-alert-success::before {
   color: var(--color-green);
   content: '\F00C';
 }
 
-.usa-alert-warning {
+.va-modal-alert-warning {
   border-left-color: var(--color-gold);
 }
 
-.usa-alert-warning::before {
+.va-modal-alert-warning::before {
   content: '\F071';
 }
 
-.usa-alert-text {
+.va-modal-alert-text {
   margin-top: 2rem;
   margin-bottom: 0;
+}
+
+.va-modal-alert .alert-actions {
+  margin-top: 2.4rem;
+}
+
+.va-modal-alert .alert-actions button {
+  margin: 0;
+}
+
+.va-modal-alert .alert-actions button + button {
+  margin-left: 2rem;
 }

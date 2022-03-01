@@ -133,8 +133,14 @@ export class VaModal {
     if (this.visible) this.setupModal();
   }
 
+  /**
+   *
+   * Stencil's componentDidUpdate doesn't provide us with previous props to compare
+   * and determine if we need to setup or destroy the modal. We can use a boolean
+   * variable inside a Watch decorator as a workaround to determine if an update needs
+   * to occur.
+   */
   componentDidUpdate() {
-    // This dirty check prevents the component from updating endlessly.
     if (!this.isVisibleDirty) return;
 
     this.isVisibleDirty = false;
@@ -153,6 +159,11 @@ export class VaModal {
     this.closeEvent.emit(e);
   }
 
+  /**
+   * This method traps the focus inside our web component, prevents scrolling outside
+   * the modal, and adds aria-hidden="true" to all elements outside the web component.
+   * Fires analytics event unless disableAnalytics is true.
+   */
   private setupModal() {
     const initialFocus = (this.el.querySelector(this.initialFocusSelector) ||
       this.el.shadowRoot.querySelector(
@@ -185,7 +196,7 @@ export class VaModal {
         action: 'show',
         details: {
           status: this.status,
-          title: this.modalTitle, // does this need to be updated to details.modalTitle?
+          title: this.modalTitle,
           primaryButtonText: this.primaryButton?.text,
           secondayButtonText: this.secondaryButton?.text,
         },
@@ -194,6 +205,10 @@ export class VaModal {
     }
   }
 
+  /**
+   * This method removes the focus trap, re-enables scrolling and
+   * removes aria-hidden="true" from external elements.
+   */
   private teardownModal() {
     this.focusTrap?.deactivate();
     clearAllBodyScrollLocks();
@@ -214,19 +229,16 @@ export class VaModal {
 
     if (!visible) return null;
 
-    const ariaLabel = modalTitle || 'Modal';
-    const titleId = `${this.el.getAttribute('id') || 'va-modal'}-title`;
+    const ariaLabel = `${modalTitle} modal` || 'Modal';
     const wrapperClass = classnames('va-modal-inner', {
-      'usa-alert': status,
-      [`usa-alert-${status}`]: status,
       'va-modal-alert': status,
+      [`va-modal-alert-${status}`]: status,
     });
-    const bodyClass = status ? 'usa-alert-body' : 'va-modal-body';
+    const bodyClass = status ? 'va-modal-alert-body' : 'va-modal-body';
     const titleClass = classnames(
-      status ? 'usa-alert-heading' : 'va-modal-title',
-      'vads-u-font-size--h3',
+      status ? 'va-modal-alert-title' : 'va-modal-title',
     );
-    const contentClass = classnames({ 'usa-alert-text': status });
+    const contentClass = classnames({ 'va-modal-alert-text': status });
     const ariaRole = status => {
       if (status === 'warning' || status === 'error') {
         return 'alertdialog';
@@ -234,8 +246,8 @@ export class VaModal {
       return 'dialog';
     };
     const btnAriaLabel = modalTitle
-      ? `close ${modalTitle} modal`
-      : 'close modal';
+      ? `Close ${modalTitle} modal`
+      : 'Close modal';
 
     return (
       <Host
@@ -257,13 +269,13 @@ export class VaModal {
               ref={el => (this.closeButton = el as HTMLButtonElement)}
               type="button"
             >
-              <i aria-hidden="true" class="fas fa-times-circle" />
+              <i aria-hidden="true" />
             </button>
           )}
           <div class={bodyClass}>
             <div role="document">
               {modalTitle && (
-                <h1 class={titleClass} id={titleId} tabIndex={-1}>
+                <h1 class={titleClass} tabIndex={-1}>
                   {modalTitle}
                 </h1>
               )}
@@ -276,17 +288,13 @@ export class VaModal {
                   ref={el => (this.alertActions = el as HTMLDivElement)}
                 >
                   {primaryButton && (
-                    <button
-                      class="usa-button"
-                      onClick={primaryButton.action}
-                      type="button"
-                    >
+                    <button onClick={primaryButton.action} type="button">
                       {primaryButton.text}
                     </button>
                   )}
                   {secondaryButton && (
                     <button
-                      class="usa-button-secondary"
+                      class="button-secondary"
                       onClick={secondaryButton.action}
                       type="button"
                     >
