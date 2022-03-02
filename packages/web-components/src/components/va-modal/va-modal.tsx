@@ -26,7 +26,7 @@ import classnames from 'classnames';
 export class VaModal {
   alertActions: HTMLDivElement;
   closeButton: HTMLButtonElement;
-  contents: HTMLDivElement;
+  closeButtonContainer: HTMLDivElement;
   isVisibleDirty: boolean; // used to determine if visible has changed (workaround)
   focusTrap: FocusTrap;
   undoAriaHidden: Undo; // used to undo aria hidden on close
@@ -101,7 +101,7 @@ export class VaModal {
   @Prop() visible: boolean = false;
 
   @Listen('click')
-  handleClick(e) {
+  handleClick(e: MouseEvent) {
     if (!this.clickToClose) return;
 
     // event.target is always the shadow host
@@ -170,7 +170,7 @@ export class VaModal {
         this.initialFocusSelector,
       )) as HTMLElement;
     this.focusTrap = createFocusTrap(
-      [this.el, this.alertActions, this.contents],
+      [this.el, this.alertActions, this.closeButtonContainer],
       {
         // trap is removed in teardownModal - disable escape key deactivating the focus trap
         escapeDeactivates: false,
@@ -208,7 +208,7 @@ export class VaModal {
    * removes aria-hidden="true" from external elements.
    */
   private teardownModal() {
-    this.focusTrap?.deactivate();
+    this.focusTrap.deactivate();
     clearAllBodyScrollLocks();
     this.undoAriaHidden?.();
 
@@ -254,21 +254,19 @@ export class VaModal {
         class="va-modal"
         role={ariaRole(status)}
       >
-        <div
-          class={wrapperClass}
-          ref={el => (this.contents = el as HTMLDivElement)}
-          tabIndex={-1}
-        >
+        <div class={wrapperClass} tabIndex={-1}>
           {!hideCloseButton && (
-            <button
-              aria-label={btnAriaLabel}
-              class="va-modal-close"
-              onClick={e => this.handleClose(e)}
-              ref={el => (this.closeButton = el as HTMLButtonElement)}
-              type="button"
-            >
-              <i aria-hidden="true" />
-            </button>
+            <div ref={el => (this.closeButtonContainer = el as HTMLDivElement)}>
+              <button
+                aria-label={btnAriaLabel}
+                class="va-modal-close"
+                onClick={e => this.handleClose(e)}
+                ref={el => (this.closeButton = el as HTMLButtonElement)}
+                type="button"
+              >
+                <i aria-hidden="true" />
+              </button>
+            </div>
           )}
           <div class={bodyClass}>
             <div role="document">

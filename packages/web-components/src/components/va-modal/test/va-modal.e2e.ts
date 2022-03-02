@@ -17,9 +17,11 @@ describe('va-modal', () => {
       <va-modal aria-label="Example Title modal" aria-modal="true" class="hydrated va-modal" modal-title="Example Title" role="dialog" visible>
         <mock:shadow-root>
           <div class="va-modal-inner" tabindex="-1">
-            <button aria-label="Close Example Title modal" class="va-modal-close" type="button">
-              <i aria-hidden="true"></i>
-            </button>
+            <div>
+              <button aria-label="Close Example Title modal" class="va-modal-close" type="button">
+                <i aria-hidden="true"></i>
+              </button>
+            </div>
             <div class="va-modal-body">
               <div role="document">
                 <h1 class="va-modal-title" tabindex="-1">
