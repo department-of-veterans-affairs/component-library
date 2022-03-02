@@ -37,7 +37,6 @@ export default {
 const Template = ({
   'disable-analytics': disableAnalytics,
   type,
-  target,
   href,
 }) => {
   return (
@@ -45,7 +44,6 @@ const Template = ({
       <va-promo-banner
         disable-analytics={disableAnalytics}
         type={type}
-        target={target}
         href={href}
         id="ABC_BANNER"
       >
@@ -63,7 +61,6 @@ const Template = ({
 const defaultArgs = {
   'disable-analytics': false,
   'type': 'announcement',
-  'target': '_self',
   'href': '#',
 };
 

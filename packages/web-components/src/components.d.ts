@@ -246,10 +246,6 @@ export namespace Components {
          */
         "href": string;
         /**
-          * `target` attribute for the `<a>` tag.
-         */
-        "target": string;
-        /**
           * Controls which icon gets used. Options are 'announcement', 'news', or 'email-signup'.
          */
         "type": 'announcement' | 'news' | 'email-signup';
@@ -870,10 +866,6 @@ declare namespace LocalJSX {
           * The event used to track usage of the component. This is emitted when an anchor link or the dismiss icon is clicked and disableAnalytics is not true.
          */
         "onComponent-library-analytics"?: (event: CustomEvent<any>) => void;
-        /**
-          * `target` attribute for the `<a>` tag.
-         */
-        "target"?: string;
         /**
           * Controls which icon gets used. Options are 'announcement', 'news', or 'email-signup'.
          */

@@ -24,11 +24,6 @@ export class VaPromoBanner {
   @Prop() href: string;
 
   /**
-   * `target` attribute for the `<a>` tag.
-   */
-  @Prop() target: string = "_self";
-
-  /**
    * Controls which icon gets used. Options are 'announcement', 'news', or 'email-signup'.
    * */
   @Prop() type: 'announcement' | 'news' | 'email-signup';
@@ -88,7 +83,6 @@ export class VaPromoBanner {
         details: {
           text: this.el.innerText,
           href: this.href,
-          target: this.target,
           type: this.type,
         },
       };
@@ -127,7 +121,6 @@ export class VaPromoBanner {
             <a
               class="va-banner-content-link"
               href={this.href}
-              target={this.target}
               onClick={() => this.handleLinkClick()}
             >
               <slot></slot> <i aria-hidden="true" role="presentation" />
