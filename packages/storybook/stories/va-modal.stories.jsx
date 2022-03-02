@@ -32,8 +32,10 @@ const Template = ({
   'modal-title': modalTitle,
   'hide-close-button': hideCloseButton,
   'initial-focus-selector': initialFocusSelector,
-  'primary-button': primaryButton,
-  'secondary-button': secondaryButton,
+  primaryButtonClick,
+  'primary-button-text': primaryButtonText,
+  secondaryButtonClick,
+  'secondary-button-text': secondaryButtonText,
   status,
   visible,
 }) => {
@@ -51,8 +53,10 @@ const Template = ({
         hideCloseButton={hideCloseButton}
         initialFocusSelector={initialFocusSelector}
         onCloseEvent={onCloseEvent}
-        primaryButton={primaryButton}
-        secondaryButton={secondaryButton}
+        onPrimaryButtonClick={primaryButtonClick}
+        primaryButtonText={primaryButtonText}
+        onSecondaryButtonClick={secondaryButtonClick}
+        secondaryButtonText={secondaryButtonText}
         status={status}
         visible={isVisible}
       >
@@ -77,16 +81,12 @@ const defaultArgs = {
   'modal-title': 'Modal title goes here',
   'hide-close-button': false,
   'initial-focus-selector': undefined,
-  'primary-button': {
-    text: 'Primary button',
-    action: e => console.log('Primary button clicked. Event fired:', e),
-  },
-  'secondary-button': {
-    text: 'Secondary button',
-    action: e => console.log('Secondary button clicked. Event fired:', e),
-  },
   'status': undefined,
   'visible': false,
+  'primaryButtonClick': () => window.alert('Primary button clicked!'),
+  'primary-button-text': 'Primary Button',
+  'secondaryButtonClick': () => window.alert('Secondary button clicked!'),
+  'secondary-button-text': 'Secondary Button',
 };
 
 export const Default = Template.bind({});
@@ -116,8 +116,10 @@ ClickOutsideToClose.args = {
 export const WithoutButtons = Template.bind({});
 WithoutButtons.args = {
   ...defaultArgs,
-  'primary-button': undefined,
-  'secondary-button': undefined,
+  'primaryButtonClick': undefined,
+  'primary-button-text': undefined,
+  'secondaryButtonClick': undefined,
+  'secondary-button-text': undefined,
 };
 
 export const WithoutTitle = Template.bind({});
