@@ -25,20 +25,10 @@ export default {
         options: ['announcement', 'news', 'email-signup'],
       },
     },
-    target: {
-      control: {
-        type: 'select',
-        options: ['_self', '_blank'],
-      },
-    },
   },
 };
 
-const Template = ({
-  'disable-analytics': disableAnalytics,
-  type,
-  href,
-}) => {
+const Template = ({ 'disable-analytics': disableAnalytics, type, href }) => {
   return (
     <>
       <va-promo-banner
