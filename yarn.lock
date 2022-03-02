@@ -14,7 +14,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@axe-core/puppeteer@npm:^4.1.1":
+"@axe-core/puppeteer@npm:^4.4.0":
   version: 4.4.0
   resolution: "@axe-core/puppeteer@npm:4.4.0"
   dependencies:
@@ -1731,7 +1731,7 @@ __metadata:
     "@department-of-veterans-affairs/web-components": "workspace:packages/web-components"
     "@testing-library/react": ^12.0.0
     "@testing-library/user-event": ^13.2.1
-    axe-core: ^4.1.2
+    axe-core: ^4.4.1
     babel-loader: ^8.1.0
     babel-plugin-lodash: ^3.3.4
     babel-plugin-transform-react-remove-prop-types: ^0.4.24
@@ -1807,7 +1807,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@department-of-veterans-affairs/web-components@workspace:packages/web-components"
   dependencies:
-    "@axe-core/puppeteer": ^4.1.1
+    "@axe-core/puppeteer": ^4.4.0
     "@babel/core": ^7.12.13
     "@department-of-veterans-affairs/formation": ^6.17.5
     "@stencil/core": ^2.10.0
@@ -5295,7 +5295,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"axe-core@npm:^4.1.2, axe-core@npm:^4.3.5, axe-core@npm:^4.4.1":
+"axe-core@npm:^4.3.5, axe-core@npm:^4.4.1":
   version: 4.4.1
   resolution: "axe-core@npm:4.4.1"
   checksum: ad14c5b71059dc3d24ef2519b8cd96e98b4a572379396201ce449d1c4262181821d6ca9550df65b22371faf06d28bbe94d391fe5675f2a08e6550f7b5da8416d
