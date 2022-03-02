@@ -26,7 +26,7 @@ export class VaPromoBanner {
   /**
    * `target` attribute for the `<a>` tag.
    */
-  @Prop() target: string;
+  @Prop() target: string = "_self";
 
   /**
    * Controls which icon gets used. Options are 'announcement', 'news', or 'email-signup'.
