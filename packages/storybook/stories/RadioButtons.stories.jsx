@@ -34,7 +34,7 @@ const defaultArgs = {
   ],
   label: 'This is a Label',
   value: { value: 'First option' },
-  errorMessage: ''
+  errorMessage: undefined
 };
 
 export const Default = Template.bind({});

@@ -11,7 +11,6 @@ module.exports = {
   core: {
     builder: 'webpack5',
   },
-  typescript: { reactDocgen: false },
 
   webpackFinal: async (config, { configType }) => {
     // `configType` has a value of 'DEVELOPMENT' or 'PRODUCTION'
