@@ -43,6 +43,24 @@ export class VaModal {
   closeEvent: EventEmitter;
 
   /**
+   * Fires when primary button is clicked
+   */
+  @Event({
+    composed: true,
+    bubbles: true,
+  })
+  primaryButtonClick: EventEmitter;
+
+  /**
+   * Fires when secondary button is clicked
+   */
+  @Event({
+    composed: true,
+    bubbles: true,
+  })
+  secondaryButtonClick: EventEmitter;
+
+  /**
    * The event used to track usage of the component. Fires when a
    * a page is selected if enable-analytics is true.
    */
@@ -81,14 +99,14 @@ export class VaModal {
   @Prop() initialFocusSelector?: string;
 
   /**
-   * Primary button text and action
+   * Primary button text
    */
-  @Prop() primaryButton?: any;
+  @Prop() primaryButtonText?: any;
 
   /**
-   * Secondary button text and action
+   * Secondary button text
    */
-  @Prop() secondaryButton?: any;
+  @Prop() secondaryButtonText?: any;
 
   /*
    * Style of modal alert - info, error, success, warning
@@ -159,6 +177,14 @@ export class VaModal {
     this.closeEvent.emit(e);
   }
 
+  private handlePrimaryButtonClick(e) {
+    this.primaryButtonClick.emit(e);
+  }
+
+  private handleSecondaryButtonClick(e) {
+    this.secondaryButtonClick.emit(e);
+  }
+
   /**
    * This method traps the focus inside our web component, prevents scrolling outside
    * the modal, and adds aria-hidden="true" to all elements outside the web component.
@@ -195,8 +221,8 @@ export class VaModal {
         details: {
           status: this.status,
           title: this.modalTitle,
-          primaryButtonText: this.primaryButton?.text,
-          secondayButtonText: this.secondaryButton?.text,
+          primaryButtonText: this.primaryButtonText,
+          secondayButtonText: this.secondaryButtonText,
         },
       };
       this.componentLibraryAnalytics.emit(detail);
@@ -219,8 +245,10 @@ export class VaModal {
     const {
       modalTitle,
       hideCloseButton,
-      primaryButton,
-      secondaryButton,
+      primaryButtonClick,
+      primaryButtonText,
+      secondaryButtonClick,
+      secondaryButtonText,
       status,
       visible,
     } = this;
@@ -278,28 +306,32 @@ export class VaModal {
               <div class={contentClass}>
                 <slot></slot>
               </div>
-              {(primaryButton || secondaryButton) && (
-                <div
-                  class="alert-actions"
-                  ref={el => (this.alertActions = el as HTMLDivElement)}
-                >
-                  {primaryButton && (
-                    <button onClick={primaryButton.action} type="button">
-                      {primaryButton.text}
-                    </button>
-                  )}
-                  {secondaryButton && (
-                    <button
-                      class="button-secondary"
-                      onClick={secondaryButton.action}
-                      type="button"
-                    >
-                      {secondaryButton.text}
-                    </button>
-                  )}
-                </div>
-              )}
             </div>
+            {((primaryButtonClick && primaryButtonText) ||
+              (secondaryButtonClick && secondaryButtonText)) && (
+              <div
+                class="alert-actions"
+                ref={el => (this.alertActions = el as HTMLDivElement)}
+              >
+                {primaryButtonClick && primaryButtonText && (
+                  <button
+                    onClick={e => this.handlePrimaryButtonClick(e)}
+                    type="button"
+                  >
+                    {primaryButtonText}
+                  </button>
+                )}
+                {secondaryButtonClick && secondaryButtonText && (
+                  <button
+                    class="button-secondary"
+                    onClick={e => this.handleSecondaryButtonClick(e)}
+                    type="button"
+                  >
+                    {secondaryButtonText}
+                  </button>
+                )}
+              </div>
+            )}
           </div>
         </div>
       </Host>
