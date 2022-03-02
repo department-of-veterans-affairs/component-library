@@ -7,6 +7,13 @@ export function format(first: string, middle: string, last: string): string {
 }
 
 /**
+ * Returns true if the string is numeric
+ */
+export function isNumeric(value: string): boolean {
+  return !Number.isNaN(parseFloat(value));
+}
+
+/**
  * Get all of the slotted children in the root element that match `nodeName`
  * If nodeName is null we still want all children to be accessible
  */
