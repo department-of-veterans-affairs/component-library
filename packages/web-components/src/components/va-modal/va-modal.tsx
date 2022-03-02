@@ -236,7 +236,7 @@ export class VaModal {
   private teardownModal() {
     this.focusTrap.deactivate();
     clearAllBodyScrollLocks();
-    this.undoAriaHidden?.();
+    this.undoAriaHidden();
 
     document.body.classList.remove('modal-open');
   }
