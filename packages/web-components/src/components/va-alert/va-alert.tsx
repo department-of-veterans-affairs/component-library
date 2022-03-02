@@ -21,7 +21,8 @@ export class VaAlert {
    * Determines the icon and border/background color.
    * One of `info`, `error`, `success`, `warning`, or `continue`
    */
-  @Prop() status: string = 'info';
+  //  Reflect Prop into DOM for va-banner: https://stenciljs.com/docs/properties#prop-options
+  @Prop({reflect: true}) status: string = 'info';
 
   /**
    * If true, renders the alert with only a background color corresponding
@@ -154,7 +155,7 @@ export class VaAlert {
 
     return (
       <Host>
-        <div role={role} aria-live={ariaLive} class={classes}>
+        <div role={this.el.getAttribute('data-role') || role} aria-live={ariaLive} class={classes}>
           <i aria-hidden="true" role="img"></i>
           <div
             class="body"
