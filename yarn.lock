@@ -1668,6 +1668,8 @@ __metadata:
 "@department-of-veterans-affairs/component-library-monorepo@workspace:.":
   version: 0.0.0-use.local
   resolution: "@department-of-veterans-affairs/component-library-monorepo@workspace:."
+  dependencies:
+    webpack: 5
   languageName: unknown
   linkType: soft
 
@@ -18346,7 +18348,7 @@ typescript@^4.3.5:
   languageName: node
   linkType: hard
 
-"webpack@npm:^5.56.0, webpack@npm:^5.9.0":
+"webpack@npm:5, webpack@npm:^5.56.0, webpack@npm:^5.9.0":
   version: 5.69.1
   resolution: "webpack@npm:5.69.1"
   dependencies:
