@@ -62,6 +62,7 @@
   padding: 0.8rem;
   line-height: 2rem;
   flex-grow: 1;
+  border-right: 1px solid var(--color-gray-lighter);
 }
 
 .va-banner-content-link {
@@ -79,7 +80,6 @@
 }
 
 .va-banner-close {
-  border-left: 1px solid var(--color-gray-lighter);
   padding: 0 1.6rem;
 }
 
@@ -116,8 +116,7 @@ i {
     display: block;
   }
 
-  .va-banner-close {
-    text-align: right;
+  .va-banner-content {
     border: none;
   }
 }
