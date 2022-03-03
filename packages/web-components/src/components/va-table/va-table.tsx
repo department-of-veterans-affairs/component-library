@@ -14,6 +14,8 @@ import { isNumeric } from '../../utils/utils';
 export class VaTable {
   @Element() el: HTMLElement;
 
+  rows: HTMLElement[] = null;
+
   /**
    * The title of the table
    */
@@ -31,6 +33,7 @@ export class VaTable {
     const headers = elementChildren(headerRow);
     const columns = [];
 
+    this.rows = rows;
     headers.forEach((item: HTMLVaTableRowElement) => {
       columns.push(item.textContent);
       item.setAttribute('role', 'columnheader');
@@ -66,11 +69,52 @@ export class VaTable {
     });
   }
 
+  private partition(rows: Element[], lo: number, hi: number): number {
+    const pivot = rows[hi];
+    const parent = rows[0].parentNode;
+
+    let i = lo - 1;
+    let smaller;
+    let larger;
+    for (const j = lo; j < hi; ) {
+      if (rows[j] <= pivot) {
+        debugger;
+        i = i + 1;
+        //swap rows[i] and rows[j]
+        smaller = rows[j];
+        larger = rows[i];
+        console.log(larger);
+        const oldPosition = larger.nextSibling;
+        parent.insertBefore(smaller, larger);
+        parent.insertBefore(larger, oldPosition);
+      }
+    }
+
+    i = i + 1;
+    // swap rows[i] with rows[hi]
+    return i;
+  }
+
+  private quicksort(rows: Element[], lo: number, hi: number): void {
+    if (lo >= hi || lo < 0) return;
+
+    const p = this.partition(rows, lo, hi);
+
+    this.quicksort(rows, lo, p - 1); // Left side
+    this.quicksort(rows, p + 1, hi); // Right side
+  }
+
   render() {
     const { tableTitle } = this;
 
+    const handleSort = e => {
+      console.log(e);
+      console.log(this.rows);
+      this.quicksort(this.rows, 0, this.rows.length - 1);
+    };
+
     return (
-      <Host role="table">
+      <Host role="table" onClick={handleSort}>
         {tableTitle && <caption>{tableTitle}</caption>}
         <thead>
           <slot name="headers"></slot>
