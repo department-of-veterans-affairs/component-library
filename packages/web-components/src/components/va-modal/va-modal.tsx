@@ -12,7 +12,6 @@ import {
 import { createFocusTrap, FocusTrap } from 'focus-trap';
 import { clearAllBodyScrollLocks, disableBodyScroll } from 'body-scroll-lock';
 import { hideOthers, Undo } from 'aria-hidden';
-import classnames from 'classnames';
 
 /**
  * @click Used to detect clicks outside of modal contents to close modal
@@ -256,15 +255,12 @@ export class VaModal {
     if (!visible) return null;
 
     const ariaLabel = `${modalTitle} modal` || 'Modal';
-    const wrapperClass = classnames('va-modal-inner', {
-      'va-modal-alert': status,
-      [`va-modal-alert-${status}`]: status,
-    });
+    const wrapperClass = status
+      ? 'va-modal-inner va-modal-alert'
+      : 'va-modal-inner';
     const bodyClass = status ? 'va-modal-alert-body' : 'va-modal-body';
-    const titleClass = classnames(
-      status ? 'va-modal-alert-title' : 'va-modal-title',
-    );
-    const contentClass = classnames({ 'va-modal-alert-text': status });
+    const titleClass = status ? 'va-modal-alert-title' : 'va-modal-title';
+    const contentClass = status ? 'va-modal-alert-text' : undefined;
     const ariaRole = status => {
       if (status === 'warning' || status === 'error') {
         return 'alertdialog';

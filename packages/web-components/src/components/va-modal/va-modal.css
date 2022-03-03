@@ -134,46 +134,46 @@ i::before {
   padding: 0;
 }
 
-.va-modal-alert-continue {
+:host([status='continue']) .va-modal-inner {
   border-left-color: var(--color-green);
 }
 
-.va-modal-alert-continue::before {
+:host([status='continue']) .va-modal-inner::before {
   color: var(--color-green);
   content: '\F023'; /* fa-lock */
 }
 
-.va-modal-alert-error {
+:host([status='error']) .va-modal-inner {
   border-left-color: var(--color-secondary-dark);
 }
 
-.va-modal-alert-error::before {
+:host([status='error']) .va-modal-inner::before {
   color: var(--color-secondary-dark);
   content: '\F06A'; /* fa-circle-exclamation */
 }
 
-.va-modal-alert-info {
+:host([status='info']) .va-modal-inner {
   border-left-color: var(--color-primary-alt-dark);
 }
 
-.va-modal-alert-info::before {
+:host([status='info']) .va-modal-inner::before {
   content: '\F05A'; /* fa-circle-info */
 }
 
-.va-modal-alert-success {
+:host([status='success']) .va-modal-inner {
   border-left-color: var(--color-green);
 }
 
-.va-modal-alert-success::before {
+:host([status='success']) .va-modal-inner::before {
   color: var(--color-green);
   content: '\F00C'; /* fa-check */
 }
 
-.va-modal-alert-warning {
+:host([status='warning']) .va-modal-inner {
   border-left-color: var(--color-gold);
 }
 
-.va-modal-alert-warning::before {
+:host([status='warning']) .va-modal-inner::before {
   content: '\F071'; /* fa-triangle-exclamation */
 }
 
