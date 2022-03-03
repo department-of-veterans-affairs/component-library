@@ -21,7 +21,7 @@ export default {
     type: {
       control: {
         type: 'select',
-        options: ['error', 'info'],
+        options: ['error', 'info', 'success', 'continue', 'warning'],
       },
     },
   },

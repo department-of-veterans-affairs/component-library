@@ -32,7 +32,7 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@axe-core/puppeteer": "^4.1.1",
+    "@axe-core/puppeteer": "^4.4.0",
     "@babel/core": "^7.12.13",
     "@department-of-veterans-affairs/formation": "^6.17.5",
     "@stencil/postcss": "^2.0.0",
