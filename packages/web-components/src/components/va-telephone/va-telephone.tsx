@@ -54,13 +54,69 @@ export class VaTelephone {
     extension: number,
     international: boolean = false,
   ): string {
+    const alphaPhoneNumber = val => {
+      let result = '';
+      switch (val) {
+        case 'A':
+        case 'B':
+        case 'C':
+          result = '2';
+          break;
+        case 'D':
+        case 'E':
+        case 'F':
+          result = '3';
+          break;
+        case 'G':
+        case 'H':
+        case 'I':
+          result = '4';
+          break;
+        case 'J':
+        case 'K':
+        case 'L':
+          result = '5';
+          break;
+        case 'M':
+        case 'N':
+        case 'O':
+          result = '6';
+          break;
+        case 'P':
+        case 'Q':
+        case 'R':
+        case 'S':
+          result = '7';
+          break;
+        case 'T':
+        case 'U':
+        case 'V':
+          result = '8';
+          break;
+        case 'W':
+        case 'X':
+        case 'Y':
+        case 'Z':
+          result = '9';
+          break;
+      }
+      return result;
+    };
     let formattedNum = num;
     if (num.length === 10) {
-      const regex = /(?<area>\d{3})(?<local>\d{3})(?<last4>\d{4})/g;
+      const regex = /(?<area>\d{3})(?<local>\d{3})(?<last4>\w{4})/g;
       const { area, local, last4 } = regex.exec(num).groups;
+      const vanity = /^[a-zA-Z]+$/.test(last4);
       formattedNum = `${area}-${local}-${last4}`;
       if (international) formattedNum = `+1-${formattedNum}`;
       if (extension) formattedNum = `${formattedNum}, ext. ${extension}`;
+      if (vanity) {
+        const alphaConversion = last4
+          .split('')
+          .map(digit => alphaPhoneNumber(digit))
+          .join('');
+        formattedNum = `+1-${formattedNum} (${alphaConversion})`;
+      }
     }
     return formattedNum;
   }
