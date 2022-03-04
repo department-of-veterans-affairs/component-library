@@ -69,8 +69,13 @@ export class VaTable {
     });
   }
 
-  private swap(rows: Element[], one: Element, two: Element): void {
+  /**
+   * Swap the DOM elements at each index
+   */
+  private swap(rows: Element[], i: number, j: number): void {
     const parent = rows[0].parentNode;
+    const one = rows[i];
+    const two = rows[j];
     const temp = one.nextSibling;
     parent.insertBefore(one, two);
     parent.insertBefore(two, temp);
@@ -81,8 +86,6 @@ export class VaTable {
 
     let i = lo;
     let j = hi;
-    let smaller;
-    let larger;
 
     while (i <= j) {
       while (rows[i] < pivot) {
@@ -93,9 +96,7 @@ export class VaTable {
       }
 
       if (i <= j) {
-        smaller = rows[j];
-        larger = rows[i];
-        this.swap(rows, smaller, larger);
+        this.swap(rows, i, j);
         i++;
         j--;
       }
