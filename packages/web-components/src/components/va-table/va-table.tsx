@@ -74,8 +74,8 @@ export class VaTable {
    */
   private swap(rows: Element[], i: number, j: number): void {
     const parent = rows[0].parentNode;
-    const one = rows[i];
-    const two = rows[j];
+    const one = rows[j];
+    const two = rows[i];
     const temp = one.nextSibling;
     parent.insertBefore(one, two);
     parent.insertBefore(two, temp);
