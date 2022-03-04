@@ -122,10 +122,11 @@ export class VaTable {
   render() {
     const { tableTitle } = this;
 
-    const handleSort = e => {
-      console.log(e);
-      console.log(this.rows);
+    const handleSort = () => {
       this.quicksort(this.rows, 0, this.rows.length - 1);
+      this.rows = Array.from(
+        this.el.querySelectorAll('va-table-row:not([slot])'),
+      );
     };
 
     return (
