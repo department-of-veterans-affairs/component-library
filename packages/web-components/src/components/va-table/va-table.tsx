@@ -69,29 +69,44 @@ export class VaTable {
     });
   }
 
-  private partition(rows: Element[], lo: number, hi: number): number {
-    const pivot = rows[hi];
+  private swap(rows: Element[], one: Element, two: Element): void {
     const parent = rows[0].parentNode;
+    const temp = one.nextSibling;
+    parent.insertBefore(one, two);
+    parent.insertBefore(two, temp);
+  }
 
-    let i = lo - 1;
+  private partition(rows: Element[], lo: number, hi: number): number {
+    const pivot = rows[Math.floor((lo + hi) / 2)];
+
+    const yearCell = row => {
+      const val = row.children[2].textContent;
+      console.log(val);
+      return val;
+    };
+    let i = lo;
+    let j = hi;
     let smaller;
     let larger;
-    for (const j = lo; j < hi; ) {
-      if (rows[j] <= pivot) {
-        debugger;
-        i = i + 1;
-        //swap rows[i] and rows[j]
+
+    while (i <= j) {
+      while (yearCell(rows[i]) < yearCell(pivot)) {
+        i++;
+      }
+      console.log('\n\n');
+      while (yearCell(rows[j]) > yearCell(pivot)) {
+        j--;
+      }
+
+      if (i <= j) {
         smaller = rows[j];
         larger = rows[i];
-        console.log(larger);
-        const oldPosition = larger.nextSibling;
-        parent.insertBefore(smaller, larger);
-        parent.insertBefore(larger, oldPosition);
+        this.swap(rows, smaller, larger);
+        i++;
+        j--;
       }
     }
 
-    i = i + 1;
-    // swap rows[i] with rows[hi]
     return i;
   }
 
