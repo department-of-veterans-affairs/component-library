@@ -79,22 +79,16 @@ export class VaTable {
   private partition(rows: Element[], lo: number, hi: number): number {
     const pivot = rows[Math.floor((lo + hi) / 2)];
 
-    const yearCell = row => {
-      const val = row.children[2].textContent;
-      console.log(val);
-      return val;
-    };
     let i = lo;
     let j = hi;
     let smaller;
     let larger;
 
     while (i <= j) {
-      while (yearCell(rows[i]) < yearCell(pivot)) {
+      while (rows[i] < pivot) {
         i++;
       }
-      console.log('\n\n');
-      while (yearCell(rows[j]) > yearCell(pivot)) {
+      while (rows[j] > pivot) {
         j--;
       }
 
