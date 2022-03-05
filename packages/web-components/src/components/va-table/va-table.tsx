@@ -21,6 +21,8 @@ export class VaTable {
    */
   @Prop() tableTitle: string;
 
+  @Prop() sortColumn: number;
+
   componentDidLoad() {
     // For IE11 compatibility. `el.children` renders booleans instead of html elements,
     // so instead we use `el.childNodes` and filter out nodes that aren't a proper tag
@@ -39,6 +41,21 @@ export class VaTable {
       item.setAttribute('role', 'columnheader');
       item.setAttribute('scope', 'col');
     });
+
+    if (this.sortColumn) {
+      const button = document.createElement('button');
+      button.textContent = headers[this.sortColumn].textContent;
+
+      headers[this.sortColumn].childNodes.forEach(child => child.remove());
+      headers[this.sortColumn].appendChild(button);
+      button.classList.add(
+        'vads-u-padding--0',
+        'vads-u-text-decoration--none',
+        'vads-u-font-weight--bold',
+        'vads-u-background-color--gray-lightest',
+        'vads-u-color--base',
+      );
+    }
 
     // Store alignment classes by column index.
     const alignment = {};

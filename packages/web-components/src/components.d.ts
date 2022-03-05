@@ -321,6 +321,7 @@ export namespace Components {
         "value": string;
     }
     interface VaTable {
+        "sortColumn": number;
         /**
           * The title of the table
          */
@@ -963,6 +964,7 @@ declare namespace LocalJSX {
         "value"?: string;
     }
     interface VaTable {
+        "sortColumn"?: number;
         /**
           * The title of the table
          */
