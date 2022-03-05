@@ -81,17 +81,17 @@ export class VaTable {
     parent.insertBefore(two, temp);
   }
 
-  private partition(rows: Element[], lo: number, hi: number): number {
-    const pivot = rows[Math.floor((lo + hi) / 2)];
+  private partition(rows: Element[], lo: number, hi: number, selector): number {
+    const pivot = selector(rows[Math.floor((lo + hi) / 2)]);
 
     let i = lo;
     let j = hi;
 
     while (i <= j) {
-      while (rows[i] < pivot) {
+      while (selector(rows[i]) < pivot) {
         i++;
       }
-      while (rows[j] > pivot) {
+      while (selector(rows[j]) > pivot) {
         j--;
       }
 
@@ -105,20 +105,26 @@ export class VaTable {
     return i;
   }
 
-  private quicksort(rows: Element[], lo: number, hi: number): void {
+  private quicksort(
+    rows: Element[],
+    lo: number,
+    hi: number,
+    selector = row => row,
+  ): void {
     if (lo >= hi || lo < 0) return;
 
-    const p = this.partition(rows, lo, hi);
+    const p = this.partition(rows, lo, hi, selector);
 
-    this.quicksort(rows, lo, p - 1); // Left side
-    this.quicksort(rows, p + 1, hi); // Right side
+    this.quicksort(rows, lo, p - 1, selector); // Left side
+    this.quicksort(rows, p + 1, hi, selector); // Right side
   }
 
   render() {
     const { tableTitle } = this;
 
     const handleSort = () => {
-      this.quicksort(this.rows, 0, this.rows.length - 1);
+      const yearCell = row => row.children[2].textContent;
+      this.quicksort(this.rows, 0, this.rows.length - 1, yearCell);
       this.rows = Array.from(
         this.el.querySelectorAll('va-table-row:not([slot])'),
       );
