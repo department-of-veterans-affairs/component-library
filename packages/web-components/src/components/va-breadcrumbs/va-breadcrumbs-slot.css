@@ -7,9 +7,12 @@ va-breadcrumbs .va-breadcrumbs-li {
 }
 
 va-breadcrumbs .va-breadcrumbs-li::after {
-  content: ' › ';
+  content: '\f054';
   display: inline-block;
+  font: 900 .75rem 'Font Awesome 5 Free';
+  line-height: 1;
   padding: 0 0.56rem;
+  vertical-align: middle;
 }
 
 va-breadcrumbs .va-breadcrumbs-li:last-child::after {
