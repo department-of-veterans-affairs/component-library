@@ -9,67 +9,32 @@ describe('va-promo-banner', () => {
     const element = await page.find('va-promo-banner');
 
     expect(element).toEqualHtml(`
-    <va-promo-banner class="hydrated">
-      <mock:shadow-root>
-        <div class="va-banner-body">
-          <div class="va-banner-icon">
-            <div class="va-banner-icon-contents">
-              <i
-                aria-hidden="true"
-                role="presentation"
-              ></i>
-            </div>
-          </div>
-          <div class="va-banner-content">
+      <va-promo-banner class="hydrated">
+        <mock:shadow-root>
+          <div class="va-banner-body">
+            <i aria-hidden="true" role="presentation"></i>
             <a class="va-banner-content-link">
               <slot></slot>
               <i aria-hidden="true" role="presentation"></i>
             </a>
-          </div>
-          <div class="va-banner-close">
             <button aria-label="Dismiss this promo banner" type="button">
               <i aria-hidden="true" role="presentation"></i>
             </button>
           </div>
-        </div>
-      </mock:shadow-root>
-    </va-promo-banner>
+        </mock:shadow-root>
+      </va-promo-banner>
     `);
   });
 
-  it('renders inside an anchor link', async () => {
+  it('renders with content', async () => {
     const page = await newE2EPage();
 
     await page.setContent(
       '<va-promo-banner id="ABC_BANNER" href="#" type="news">This is a promo banner</va-promo-banner>',
     );
-    const element = await page.find('va-promo-banner');
+    const link = await page.find('va-promo-banner');
 
-    expect(element).toEqualHtml(`
-     <va-promo-banner id="ABC_BANNER" class="hydrated" href="#" type="news">
-       <mock:shadow-root>
-         <div class="va-banner-body">
-           <div class="va-banner-icon">
-             <div class="va-banner-icon-contents">
-               <i aria-hidden="true" class="news" role="presentation"></i>
-             </div>
-           </div>
-           <div class="va-banner-content">
-             <a class="va-banner-content-link" href="#">
-               <slot></slot>
-               <i aria-hidden="true" role="presentation"></i>
-             </a>
-           </div>
-           <div class="va-banner-close">
-             <button aria-label="Dismiss this promo banner" type="button">
-               <i aria-hidden="true" role="presentation"></i>
-             </button>
-           </div>
-         </div>
-       </mock:shadow-root>
-       This is a promo banner
-      </va-promo-banner>
-    `);
+    expect(link).toEqualText('This is a promo banner');
   });
 
   it('passes an axe check', async () => {
@@ -132,29 +97,21 @@ describe('va-promo-banner', () => {
     await page.waitForChanges();
 
     expect(element).toEqualHtml(`
-      <va-promo-banner class="hydrated" href="#" type="news">
-         <mock:shadow-root>
-           <div class="va-banner-body">
-             <div class="va-banner-icon">
-               <div class="va-banner-icon-contents">
-                 <i aria-hidden="true" class="news" role="presentation"></i>
-               </div>
-             </div>
-             <div class="va-banner-content">
-               <a class="va-banner-content-link" href="#">
-                 <slot></slot>
-                 <i aria-hidden="true" role="presentation"></i>
-               </a>
-             </div>
-             <div class="va-banner-close">
-               <button aria-label="Dismiss this promo banner" type="button">
-                 <i aria-hidden="true" role="presentation"></i>
-               </button>
-             </div>
-           </div>
-         </mock:shadow-root>
-        This is a promo banner
-       </va-promo-banner>
+    <va-promo-banner class="hydrated" href="#" type="news">
+      <mock:shadow-root>
+        <div class="va-banner-body">
+          <i aria-hidden="true" class="news" role="presentation"></i>
+          <a class="va-banner-content-link" href="#">
+            <slot></slot>
+            <i aria-hidden="true" role="presentation"></i>
+          </a>
+          <button aria-label="Dismiss this promo banner" type="button">
+            <i aria-hidden="true" role="presentation"></i>
+          </button>
+        </div>
+      </mock:shadow-root>
+      This is a promo banner
+    </va-promo-banner>
      `);
   });
 

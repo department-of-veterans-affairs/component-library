@@ -112,29 +112,21 @@ export class VaPromoBanner {
     return (
       <Host>
         <div class="va-banner-body">
-          <div class="va-banner-icon">
-            <div class="va-banner-icon-contents">
-              <i aria-hidden="true" class={this.type} role="presentation" />
-            </div>
-          </div>
-          <div class="va-banner-content">
-            <a
-              class="va-banner-content-link"
-              href={this.href}
-              onClick={() => this.handleLinkClick()}
-            >
-              <slot></slot> <i aria-hidden="true" role="presentation" />
-            </a>
-          </div>
-          <div class="va-banner-close">
-            <button
-              type="button"
-              aria-label="Dismiss this promo banner"
-              onClick={() => this.closeHandler()}
-            >
-              <i aria-hidden="true" role="presentation" />
-            </button>
-          </div>
+          <i aria-hidden="true" class={this.type} role="presentation" />
+          <a
+            class="va-banner-content-link"
+            href={this.href}
+            onClick={() => this.handleLinkClick()}
+          >
+            <slot></slot> <i aria-hidden="true" role="presentation" />
+          </a>
+          <button
+            type="button"
+            aria-label="Dismiss this promo banner"
+            onClick={() => this.closeHandler()}
+          >
+            <i aria-hidden="true" role="presentation" />
+          </button>
         </div>
       </Host>
     );
