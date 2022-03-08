@@ -27,9 +27,7 @@ describe('va-modal', () => {
                 <h1 class="va-modal-title" tabindex="-1">
                   Example Title
                 </h1>
-                <div>
-                  <slot></slot>
-                </div>
+                <slot></slot>
               </div>
             </div>
           </div>

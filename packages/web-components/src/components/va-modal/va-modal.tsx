@@ -14,8 +14,8 @@ import { clearAllBodyScrollLocks, disableBodyScroll } from 'body-scroll-lock';
 import { hideOthers, Undo } from 'aria-hidden';
 
 /**
- * @click Used to detect clicks outside of modal contents to close modal
- * @keydown Used to detect Escape key to close modal
+ * @click Used to detect clicks outside of modal contents to close modal.
+ * @keydown Used to detect Escape key to close modal.
  */
 @Component({
   tag: 'va-modal',
@@ -23,17 +23,31 @@ import { hideOthers, Undo } from 'aria-hidden';
   shadow: true,
 })
 export class VaModal {
+  // This reference is required to allow focus trap to work properly.
+  // Without it, keyboard navigation behavior may break and work unexpectedly.
   alertActions: HTMLDivElement;
+
+  // This reference is used by focus trap to focus the close button on open
+  // when initialFocusSelector is not specified.
   closeButton: HTMLButtonElement;
+
+  // This reference is required to allow focus trap to work properly.
+  // Without it, keyboard navigation behavior may break and work unexpectedly.
   closeButtonContainer: HTMLDivElement;
-  isVisibleDirty: boolean; // used to determine if visible has changed (workaround)
+
+  // This boolean variable is used to determine if componentDidUpdate should
+  // set up or tear down the modal.
+  isVisibleDirty: boolean;
+
   focusTrap: FocusTrap;
-  undoAriaHidden: Undo; // used to undo aria hidden on close
+
+  // This variable is used to undo aria-hidden on modal close.
+  undoAriaHidden: Undo;
 
   @Element() el: HTMLElement;
 
   /**
-   * Fires when modal is closed
+   * Fires when modal is closed.
    */
   @Event({
     composed: true,
@@ -42,7 +56,7 @@ export class VaModal {
   closeEvent: EventEmitter;
 
   /**
-   * Fires when primary button is clicked
+   * Fires when primary button is clicked.
    */
   @Event({
     composed: true,
@@ -51,7 +65,7 @@ export class VaModal {
   primaryButtonClick: EventEmitter;
 
   /**
-   * Fires when secondary button is clicked
+   * Fires when secondary button is clicked.
    */
   @Event({
     composed: true,
@@ -117,6 +131,8 @@ export class VaModal {
    */
   @Prop() visible: boolean = false;
 
+  // This click event listener is used to close the modal when clickToClose
+  // is true and the user clicks the overlay outside of the modal contents.
   @Listen('click')
   handleClick(e: MouseEvent) {
     if (!this.clickToClose) return;
@@ -128,6 +144,8 @@ export class VaModal {
     }
   }
 
+  // This keydown event listener is used to close the modal when the user hits
+  // the Escape key.
   @Listen('keydown', { target: 'window' })
   handleKeyDown(e: KeyboardEvent) {
     if (!this.visible) return;
@@ -138,11 +156,11 @@ export class VaModal {
     }
   }
 
+  // This is a workaround for determining when to call setupModal or teardownModal.
+  // Elements are not yet available in the DOM due to `if (!visible) return null;`.
+  // See componentDidUpdate.
   @Watch('visible')
   watchVisibleHandler() {
-    // This is a workaround for determining when to call setupModal or teardownModal.
-    // Elements are not yet available in the DOM due to `if (!visible) return null;`
-    // See componentDidUpdate.
     this.isVisibleDirty = true;
   }
 
@@ -150,13 +168,10 @@ export class VaModal {
     if (this.visible) this.setupModal();
   }
 
-  /**
-   *
-   * Stencil's componentDidUpdate doesn't provide us with previous props to compare
-   * and determine if we need to setup or destroy the modal. We can use a boolean
-   * variable inside a Watch decorator as a workaround to determine if an update needs
-   * to occur.
-   */
+  // Stencil's componentDidUpdate doesn't provide us with previous props to compare
+  // and determine if we need to setup or destroy the modal. We can use a boolean
+  // variable inside a Watch decorator as a workaround to determine if an update needs
+  // to occur.
   componentDidUpdate() {
     if (!this.isVisibleDirty) return;
 
@@ -172,39 +187,56 @@ export class VaModal {
     this.teardownModal();
   }
 
-  private handleClose(e) {
+  private handleClose(e: KeyboardEvent | MouseEvent) {
     this.closeEvent.emit(e);
   }
 
-  private handlePrimaryButtonClick(e) {
+  private handlePrimaryButtonClick(e: MouseEvent) {
     this.primaryButtonClick.emit(e);
   }
 
-  private handleSecondaryButtonClick(e) {
+  private handleSecondaryButtonClick(e: MouseEvent) {
     this.secondaryButtonClick.emit(e);
   }
 
-  /**
-   * This method traps the focus inside our web component, prevents scrolling outside
-   * the modal, and adds aria-hidden="true" to all elements outside the web component.
-   * Fires analytics event unless disableAnalytics is true.
-   */
+  // This method traps the focus inside our web component, prevents scrolling outside
+  // the modal, and adds aria-hidden="true" to all elements outside the web component.
+  // Fires analytics event unless disableAnalytics is true.
   private setupModal() {
+    // If an initialFocusSelector is provided, the element will be focused on modal open
+    // if it exists. You are able to focus elements in both light and shadow DOM.
     const initialFocus = (this.el.querySelector(this.initialFocusSelector) ||
       this.el.shadowRoot.querySelector(
         this.initialFocusSelector,
       )) as HTMLElement;
+
+    // These containers and their order are required to ensure predictable keyboard
+    // navigation within the focus trap.
     this.focusTrap = createFocusTrap(
       [this.el, this.alertActions, this.closeButtonContainer],
       {
-        // trap is removed in teardownModal - disable escape key deactivating the focus trap
+        // This is set to false because we don't want the user to disable the focus trap using
+        // the escape key.
         escapeDeactivates: false,
-        // the element we want to target immediately after opening modal
+
+        // This is used to determine what element to focus on modal open.
+        // If initialFocusSelector is specified, focus will be received by that element.
+        // If initialFocusSelector is specified and the element isn't found, focus will be received by
+        // the close button if it exists.
+        // If initialFocusSelector is not specified, focus will be received by the close button if it exists.
+        // If hideCloseButton is true, focus will be received by the first focusable element in the modal.
         initialFocus: initialFocus || this.closeButton,
       },
     );
+
+    // Traps focus inside modal
     this.focusTrap.activate();
+
+    // Prevents scrolling outside modal
     disableBodyScroll(this.el);
+
+    // Sets aria-hidden="true" to all elements outside of the modal.
+    // This is used to limit the screen reader to content inside the modal.
     this.undoAriaHidden = hideOthers(this.el);
 
     // NOTE: With this PR (https://github.com/department-of-veterans-affairs/vets-website/pull/11712)
@@ -228,10 +260,8 @@ export class VaModal {
     }
   }
 
-  /**
-   * This method removes the focus trap, re-enables scrolling and
-   * removes aria-hidden="true" from external elements.
-   */
+  // This method removes the focus trap, re-enables scrolling and
+  // removes aria-hidden="true" from external elements.
   private teardownModal() {
     this.focusTrap.deactivate();
     clearAllBodyScrollLocks();
@@ -260,7 +290,6 @@ export class VaModal {
       : 'va-modal-inner';
     const bodyClass = status ? 'va-modal-alert-body' : 'va-modal-body';
     const titleClass = status ? 'va-modal-alert-title' : 'va-modal-title';
-    const contentClass = status ? 'va-modal-alert-text' : undefined;
     const ariaRole = status => {
       if (status === 'warning' || status === 'error') {
         return 'alertdialog';
@@ -299,9 +328,8 @@ export class VaModal {
                   {modalTitle}
                 </h1>
               )}
-              <div class={contentClass}>
-                <slot></slot>
-              </div>
+
+              <slot></slot>
             </div>
             {((primaryButtonClick && primaryButtonText) ||
               (secondaryButtonClick && secondaryButtonText)) && (

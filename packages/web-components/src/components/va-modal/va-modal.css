@@ -130,8 +130,7 @@ i::before {
 }
 
 .va-modal-alert-title {
-  margin: 0;
-  padding: 0;
+  margin: 0 0 2rem 0;
 }
 
 :host([status='continue']) .va-modal-inner {
@@ -175,11 +174,6 @@ i::before {
 
 :host([status='warning']) .va-modal-inner::before {
   content: '\F071'; /* fa-triangle-exclamation */
-}
-
-.va-modal-alert-text {
-  margin-top: 2rem;
-  margin-bottom: 0;
 }
 
 .va-modal-alert .alert-actions {

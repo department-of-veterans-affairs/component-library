@@ -216,11 +216,11 @@ export namespace Components {
         /**
           * Primary button text
          */
-        "primaryButtonText"?: any;
+        "primaryButtonText"?: string;
         /**
           * Secondary button text
          */
-        "secondaryButtonText"?: any;
+        "secondaryButtonText"?: string;
         "status"?: 'continue' | 'error' | 'info' | 'success' | 'warning';
         /**
           * If the modal is visible or not
@@ -858,7 +858,7 @@ declare namespace LocalJSX {
          */
         "modalTitle"?: string;
         /**
-          * Fires when modal is closed
+          * Fires when modal is closed.
          */
         "onCloseEvent"?: (event: CustomEvent<any>) => void;
         /**
@@ -866,21 +866,21 @@ declare namespace LocalJSX {
          */
         "onComponent-library-analytics"?: (event: CustomEvent<any>) => void;
         /**
-          * Fires when primary button is clicked
+          * Fires when primary button is clicked.
          */
         "onPrimaryButtonClick"?: (event: CustomEvent<any>) => void;
         /**
-          * Fires when secondary button is clicked
+          * Fires when secondary button is clicked.
          */
         "onSecondaryButtonClick"?: (event: CustomEvent<any>) => void;
         /**
           * Primary button text
          */
-        "primaryButtonText"?: any;
+        "primaryButtonText"?: string;
         /**
           * Secondary button text
          */
-        "secondaryButtonText"?: any;
+        "secondaryButtonText"?: string;
         "status"?: 'continue' | 'error' | 'info' | 'success' | 'warning';
         /**
           * If the modal is visible or not
