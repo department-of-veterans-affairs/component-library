@@ -11,7 +11,7 @@ describe('va-promo-banner', () => {
     expect(element).toEqualHtml(`
       <va-promo-banner class="hydrated">
         <mock:shadow-root>
-          <div class="va-banner-body">
+          <div class="va-banner-body" role="banner">
             <i aria-hidden="true" role="presentation"></i>
             <a class="va-banner-content-link">
               <slot></slot>
@@ -99,7 +99,7 @@ describe('va-promo-banner', () => {
     expect(element).toEqualHtml(`
     <va-promo-banner class="hydrated" href="#" type="news">
       <mock:shadow-root>
-        <div class="va-banner-body">
+        <div class="va-banner-body" role="banner">
           <i aria-hidden="true" class="news" role="presentation"></i>
           <a class="va-banner-content-link" href="#">
             <slot></slot>
