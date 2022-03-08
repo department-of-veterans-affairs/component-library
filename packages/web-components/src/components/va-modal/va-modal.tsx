@@ -100,12 +100,12 @@ export class VaModal {
   /**
    * Primary button text
    */
-  @Prop() primaryButtonText?: any;
+  @Prop() primaryButtonText?: string;
 
   /**
    * Secondary button text
    */
-  @Prop() secondaryButtonText?: any;
+  @Prop() secondaryButtonText?: string;
 
   /*
    * Style of modal alert - info, error, success, warning
