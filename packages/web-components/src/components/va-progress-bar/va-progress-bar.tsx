@@ -55,6 +55,7 @@ export class VaProgressBar {
           aria-valuemax="100"
           aria-valuemin="0"
           aria-valuenow={percent.toFixed(0)}
+          aria-valuetext={label}
           class="progress-bar"
           tabindex="0"
           role="progressbar"
