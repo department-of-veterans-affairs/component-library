@@ -38,7 +38,7 @@ module.exports = function karmaConfig(config) {
         },
       },
       // target: 'node',
-      node: { global: true, fs: 'empty' },
+      node: { global: true },
     },
 
     // list of files / patterns to load in the browser
