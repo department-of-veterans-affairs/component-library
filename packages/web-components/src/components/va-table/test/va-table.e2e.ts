@@ -18,33 +18,6 @@ describe('va-table', () => {
     expect(element.innerText).toEqual('My table');
   });
 
-  it('adds "---" as cell content if it was empty', async () => {
-    const page = await newE2EPage();
-    await page.setContent(`
-      <va-table table-title="My table">
-        <va-table-row slot="headers">
-          <span>One</span>
-          <span>Two</span>
-          <span>Three</span>
-        </va-table-row>
-
-        <va-table-row>
-          <span>Dog</span>
-          <span></span>
-          <span>Mouse</span>
-        </va-table-row>
-      </va-table>
-      `);
-
-    const cells = await page.findAll(
-      'va-table > va-table-row:last-child > span',
-    );
-
-    expect(cells[0].innerText).toEqual('Dog');
-    expect(cells[1].innerText).toEqual('---');
-    expect(cells[2].innerText).toEqual('Mouse');
-  });
-
   it('adds role and scope to header row children', async () => {
     const page = await newE2EPage();
     await page.setContent(`
