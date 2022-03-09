@@ -1,5 +1,6 @@
 import { Component, Element, Host, Prop, h } from '@stencil/core';
 import { isNumeric } from '../../utils/utils';
+import sortIcon from '../../assets/sort-arrow.svg?format=text';
 
 /**
  * This component expects `<va-table-row>` elements as children.
@@ -55,6 +56,7 @@ export class VaTable {
         'vads-u-background-color--gray-lightest',
         'vads-u-color--base',
       );
+      button.innerHTML = sortIcon;
     }
 
     // Store alignment classes by column index.
