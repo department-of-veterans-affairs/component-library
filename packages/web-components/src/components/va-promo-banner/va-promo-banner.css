@@ -52,7 +52,7 @@
 
 .va-banner-content-link {
   padding: 0.8rem;
-  line-height: 2;
+  line-height: 2.2rem;
   text-decoration: none;
   color: var(--color-link-default);
   flex-grow: 2;
