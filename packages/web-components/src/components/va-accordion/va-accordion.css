@@ -3,7 +3,6 @@
   width: 100%;
   color: var(--color-gray-dark);
   --item-border: none; /* This is to overwrite any previous inherited value */
-  text-align: right;
 }
 
 /* If `bordered` is present and if it is *not* false */
@@ -19,4 +18,5 @@ button {
   padding: 1rem;
   cursor: pointer;
   font-weight: bold;
+  float: right;
 }
