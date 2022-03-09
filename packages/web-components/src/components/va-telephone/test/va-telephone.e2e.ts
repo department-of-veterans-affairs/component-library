@@ -138,10 +138,10 @@ describe('va-telephone', () => {
 
     const link = await page.find('va-telephone >>> a');
     expect(link.getAttribute('aria-label')).toEqual(
-      '1. 8 7 7. 2 2 2. V E T S. 8 3 8 7.',
+      '8 7 7. 2 2 2. 8 3 8 7.',
     );
     expect(link.getAttribute('href')).toEqual('tel:+18772228387');
-    expect(link.innerText).toEqual('+1-877-222-VETS (8387)');
+    expect(link.innerText).toEqual('877-222-VETS (8387)');
   });
 
   it('fires an analytics event when clicked', async () => {
