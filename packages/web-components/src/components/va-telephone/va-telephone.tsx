@@ -101,13 +101,13 @@ export class VaTelephone {
     num: string,
     extension: number,
     international: boolean = false,
-    alphaPhoneNumber: any,
+    alphaPhoneNumber: Function,
+    vanity: boolean,
   ): string {
     let formattedNum = num;
     if (num.length === 10) {
       const regex = /(?<area>\d{3})(?<local>\d{3})(?<last4>\w{4})/g;
       const { area, local, last4 } = regex.exec(num).groups;
-      const vanity = /^[a-zA-Z]+$/.test(last4);
       formattedNum = `${area}-${local}-${last4}`;
       if (international) formattedNum = `+1-${formattedNum}`;
       if (extension) formattedNum = `${formattedNum}, ext. ${extension}`;
@@ -116,7 +116,7 @@ export class VaTelephone {
           .split('')
           .map(digit => alphaPhoneNumber(digit))
           .join('');
-        formattedNum = `+1-${formattedNum} (${alphaConversion})`;
+        formattedNum = `${formattedNum} (${alphaConversion})`;
       }
     }
     return formattedNum;
@@ -128,25 +128,33 @@ export class VaTelephone {
    * @return {string} - Combined phone number parts within the label seperated by
    * periods, e.g. "800-555-1212" becomes "8 0 0. 5 5 5. 1 2 1 2"
    */
-  static formatTelLabel(number: string): string {
-    return number
-      .split(/[^\d\w]+/)
-      .filter(n => n)
-      .map(chunk => (chunk === 'ext' ? 'extension' : chunk.split('').join(' ')))
-      .join('. ');
+  static formatTelLabel(number: string, vanity: boolean): string {
+    return vanity
+      ? number
+          .split(/[^\d]+/)
+          .filter(n => n)
+          .map(chunk => chunk.split('').join(' '))
+          .join('. ')
+      : number
+          .split(/[^\d\w]+/)
+          .filter(n => n)
+          .map(chunk =>
+            chunk === 'ext' ? 'extension' : chunk.split('').join(' '),
+          )
+          .join('. ');
   }
 
   static createHref(
     contact: string,
     extension: number,
-    alphaPhoneNumber: any,
+    alphaPhoneNumber: Function,
+    vanity: boolean,
   ): string {
     const isN11 = contact.length === 3;
     // extension format ";ext=" from RFC3966 https://tools.ietf.org/html/rfc3966#page-5
     // but it seems that using a comma to pause for 2 seconds might be a better
     // solution - see https://dsva.slack.com/archives/C8E985R32/p1589814301103200
     const last4 = contact.slice(contact.length - 4);
-    const vanity = /^[a-zA-Z]+$/.test(last4);
     let vanityNumber: string;
     if (vanity) {
       vanityNumber =
@@ -175,14 +183,18 @@ export class VaTelephone {
 
   render() {
     const { contact, extension, notClickable, international } = this;
+    const vanityCheck = contact.slice(contact.length - 4);
+    const vanity = /^[a-zA-Z]+$/.test(vanityCheck);
     const formattedNumber = VaTelephone.formatPhoneNumber(
       contact,
       extension,
       international,
       this.alphaPhoneNumber,
+      vanity,
     );
     const formattedAriaLabel = `${VaTelephone.formatTelLabel(
       formattedNumber,
+      vanity,
     )}.`;
 
     return notClickable ? (
@@ -192,7 +204,12 @@ export class VaTelephone {
       </Fragment>
     ) : (
       <a
-        href={VaTelephone.createHref(contact, extension, this.alphaPhoneNumber)}
+        href={VaTelephone.createHref(
+          contact,
+          extension,
+          this.alphaPhoneNumber,
+          vanity,
+        )}
         aria-label={formattedAriaLabel}
         onClick={this.handleClick.bind(this)}
       >
