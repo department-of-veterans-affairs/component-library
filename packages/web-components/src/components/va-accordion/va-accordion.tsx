@@ -6,6 +6,7 @@ import {
   Host,
   Listen,
   Prop,
+  State,
   h,
 } from '@stencil/core';
 import { getSlottedNodes } from '../../utils/utils';
@@ -38,6 +39,9 @@ import { getSlottedNodes } from '../../utils/utils';
 })
 export class VaAccordion {
   @Element() el!: any;
+  expandCollapseBtn!: HTMLButtonElement;
+
+  @State() expanded = false;
 
   /**
    * The event used to track usage of the component. This is emitted when an
@@ -129,9 +133,36 @@ export class VaAccordion {
    */
   @Prop() sectionHeading: string = null;
 
+  private expandCollapseAll = (expanded: boolean) => {
+    if (expanded) {
+      this.expandCollapseBtn.innerText = 'Collapse All -';
+      this.expandCollapseBtn.ariaLabel = 'Collapse All Accordions';
+      getSlottedNodes(this.el, 'va-accordion-item').forEach(item =>
+        (item as Element).setAttribute('open', 'true'),
+      );
+      this.expanded = true;
+    } else {
+      this.expandCollapseBtn.innerText = 'Expand All +';
+      this.expandCollapseBtn.ariaLabel = 'Expand All Accordions';
+      getSlottedNodes(this.el, 'va-accordion-item').forEach(item =>
+        (item as Element).setAttribute('open', 'false'),
+      );
+      this.expanded = false;
+    }
+  };
+
   render() {
     return (
       <Host>
+        {!this.openSingle && (
+          <button
+            ref={el => (this.expandCollapseBtn = el as HTMLButtonElement)}
+            onClick={() => this.expandCollapseAll(!this.expanded)}
+            aria-label="Expand All Accordions"
+          >
+            Expand All +
+          </button>
+        )}
         <slot />
       </Host>
     );
