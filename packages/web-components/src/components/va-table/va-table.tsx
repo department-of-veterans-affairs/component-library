@@ -46,11 +46,13 @@ export class VaTable {
     if (this.sortColumn) {
       const button = document.createElement('button');
       button.textContent = headers[this.sortColumn].textContent;
+      button.onclick = this.handleSort.bind(this);
 
       headers[this.sortColumn].childNodes.forEach(child => child.remove());
       headers[this.sortColumn].appendChild(button);
       button.classList.add(
         'vads-u-padding--0',
+        'vads-u-margin--0',
         'vads-u-text-decoration--none',
         'vads-u-font-weight--bold',
         'vads-u-background-color--gray-lightest',
@@ -132,20 +134,19 @@ export class VaTable {
     this.quicksort(rows, lo, p - 1, selector); // Left side
     this.quicksort(rows, p + 1, hi, selector); // Right side
   }
+  private handleSort(): void {
+    const yearCell = row => row.children[2].textContent;
+    this.quicksort(this.rows, 0, this.rows.length - 1, yearCell);
+    this.rows = Array.from(
+      this.el.querySelectorAll('va-table-row:not([slot])'),
+    );
+  }
 
   render() {
     const { tableTitle } = this;
 
-    const handleSort = () => {
-      const yearCell = row => row.children[2].textContent;
-      this.quicksort(this.rows, 0, this.rows.length - 1, yearCell);
-      this.rows = Array.from(
-        this.el.querySelectorAll('va-table-row:not([slot])'),
-      );
-    };
-
     return (
-      <Host role="table" onClick={handleSort}>
+      <Host role="table">
         {tableTitle && <caption>{tableTitle}</caption>}
         <thead>
           <slot name="headers"></slot>

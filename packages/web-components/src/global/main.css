@@ -6,3 +6,11 @@ va-process-list li :is(h2, h3, h4, h5) {
   clear: none;
   padding-top: 0.3rem;
 }
+
+va-table > va-table-row[slot] button {
+  display: inline-flex;
+  align-items: center;
+}
+va-table > va-table-row[slot] button svg {
+  width: 2.4rem;
+}
