@@ -98,6 +98,8 @@ export class VaPromoBanner {
     this.dismissedBanners = dismissedBannersString
       ? JSON.parse(dismissedBannersString)
       : [];
+    // Add additional padding on component load to prevent position fixed text overlap in footer
+    document.body.classList.add('va-pad-promo-banner');
   }
 
   render() {
@@ -106,6 +108,8 @@ export class VaPromoBanner {
 
     // Do not render if the promo banner is dismissed.
     if (isBannerDismissed) {
+      // Remove additional padding set on the body during component load
+      document.body.classList.remove('va-pad-promo-banner');
       return null;
     }
 
