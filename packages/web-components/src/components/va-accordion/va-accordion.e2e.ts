@@ -12,8 +12,8 @@ describe('va-accordion', () => {
     expect(element).toEqualHtml(`
       <va-accordion class="hydrated">
         <mock:shadow-root>
-          <button aria-label="Expand All Accordions">
-            Expand All +
+          <button aria-label="Expand all accordions">
+            Expand all +
           </button>
           <slot></slot>
         </mock:shadow-root>
