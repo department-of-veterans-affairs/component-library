@@ -202,10 +202,6 @@ export namespace Components {
          */
         "disableAnalytics"?: boolean;
         /**
-          * Hide the close button that's normally in the top right
-         */
-        "hideCloseButton"?: boolean;
-        /**
           * Selector to explicitly specify which element should receive focus when the modal is open, if the initially focused element is not the first focusable element in the document
          */
         "initialFocusSelector"?: string;
@@ -845,10 +841,6 @@ declare namespace LocalJSX {
           * If true, analytics event won't be fired
          */
         "disableAnalytics"?: boolean;
-        /**
-          * Hide the close button that's normally in the top right
-         */
-        "hideCloseButton"?: boolean;
         /**
           * Selector to explicitly specify which element should receive focus when the modal is open, if the initially focused element is not the first focusable element in the document
          */

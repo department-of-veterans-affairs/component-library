@@ -130,21 +130,4 @@ describe('va-modal', () => {
 
     expect(focusedElement.textContent).toEqual('Example Title');
   });
-
-  it('should open with focus assigned to the first button when hideCloseButton is true', async () => {
-    const page = await newE2EPage();
-    await page.setContent(`
-      <va-modal modal-title="Example Title" visible hide-close-button>
-        <p>
-          A modal may pass any React nodes as children to be displayed within it.
-        </p>
-        <button id="first-button">First</button>
-        <button id="second-button">Second</button>
-      </va-modal>
-    `);
-
-    const focusedElement = await page.find(':focus');
-
-    expect(focusedElement.id).toEqual('first-button');
-  });
 });

@@ -30,7 +30,6 @@ const Template = ({
   'click-to-close': clickToClose,
   'disable-analytics': disableAnalytics,
   'modal-title': modalTitle,
-  'hide-close-button': hideCloseButton,
   'initial-focus-selector': initialFocusSelector,
   primaryButtonClick,
   'primary-button-text': primaryButtonText,
@@ -50,7 +49,6 @@ const Template = ({
         clickToClose={clickToClose}
         disableAnalytics={disableAnalytics}
         modalTitle={modalTitle}
-        hideCloseButton={hideCloseButton}
         initialFocusSelector={initialFocusSelector}
         onCloseEvent={onCloseEvent}
         onPrimaryButtonClick={primaryButtonClick}
@@ -79,7 +77,6 @@ const defaultArgs = {
   'click-to-close': false,
   'disable-analytics': false,
   'modal-title': 'Modal title goes here',
-  'hide-close-button': false,
   'initial-focus-selector': undefined,
   'status': undefined,
   'visible': false,
@@ -124,10 +121,3 @@ WithoutButtons.args = {
 
 export const WithoutTitle = Template.bind({});
 WithoutTitle.args = { ...defaultArgs, 'modal-title': undefined };
-
-export const HideCloseButton = Template.bind({});
-HideCloseButton.args = {
-  ...defaultArgs,
-  'hide-close-button': true,
-  'click-to-close': true,
-};

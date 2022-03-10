@@ -100,11 +100,6 @@ export class VaModal {
   @Prop() modalTitle?: string;
 
   /**
-   * Hide the close button that's normally in the top right
-   */
-  @Prop() hideCloseButton?: boolean = false;
-
-  /**
    * Selector to explicitly specify which element should receive
    * focus when the modal is open, if the initially focused element
    * is not the first focusable element in the document
@@ -222,9 +217,8 @@ export class VaModal {
         // This is used to determine what element to focus on modal open.
         // If initialFocusSelector is specified, focus will be received by that element.
         // If initialFocusSelector is specified and the element isn't found, focus will be received by
-        // the close button if it exists.
-        // If initialFocusSelector is not specified, focus will be received by the close button if it exists.
-        // If hideCloseButton is true, focus will be received by the first focusable element in the modal.
+        // the close button.
+        // If initialFocusSelector is not specified, focus will be received by the close button.
         initialFocus: initialFocus || this.closeButton,
       },
     );
@@ -273,7 +267,6 @@ export class VaModal {
   render() {
     const {
       modalTitle,
-      hideCloseButton,
       primaryButtonClick,
       primaryButtonText,
       secondaryButtonClick,
@@ -308,19 +301,17 @@ export class VaModal {
         role={ariaRole(status)}
       >
         <div class={wrapperClass} tabIndex={-1}>
-          {!hideCloseButton && (
-            <div ref={el => (this.closeButtonContainer = el as HTMLDivElement)}>
-              <button
-                aria-label={btnAriaLabel}
-                class="va-modal-close"
-                onClick={e => this.handleClose(e)}
-                ref={el => (this.closeButton = el as HTMLButtonElement)}
-                type="button"
-              >
-                <i aria-hidden="true" />
-              </button>
-            </div>
-          )}
+          <div ref={el => (this.closeButtonContainer = el as HTMLDivElement)}>
+            <button
+              aria-label={btnAriaLabel}
+              class="va-modal-close"
+              onClick={e => this.handleClose(e)}
+              ref={el => (this.closeButton = el as HTMLButtonElement)}
+              type="button"
+            >
+              <i aria-hidden="true" />
+            </button>
+          </div>
           <div class={bodyClass}>
             <div role="document">
               {modalTitle && (
@@ -328,7 +319,6 @@ export class VaModal {
                   {modalTitle}
                 </h1>
               )}
-
               <slot></slot>
             </div>
             {((primaryButtonClick && primaryButtonText) ||
