@@ -84,9 +84,9 @@ const defaultArgs = {
   'status': undefined,
   'visible': false,
   'primaryButtonClick': () => window.alert('Primary button clicked!'),
-  'primary-button-text': 'Primary Button',
+  'primary-button-text': 'Primary button',
   'secondaryButtonClick': () => window.alert('Secondary button clicked!'),
-  'secondary-button-text': 'Secondary Button',
+  'secondary-button-text': 'Secondary button',
 };
 
 export const Default = Template.bind({});
