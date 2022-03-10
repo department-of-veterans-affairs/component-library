@@ -191,3 +191,20 @@ i::before {
 .va-modal-alert .alert-actions button + button {
   margin-left: 2rem;
 }
+
+@media (max-width: 320px) {
+  .alert-actions button {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 481px) {
+  .va-modal {
+    overflow-y: scroll;
+  }
+
+  .va-modal-inner {
+    top: 0;
+    transform: none;
+  }
+}
