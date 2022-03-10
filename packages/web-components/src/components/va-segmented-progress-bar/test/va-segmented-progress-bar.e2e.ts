@@ -16,6 +16,7 @@ describe('va-segmented-progress-bar', () => {
             aria-valuenow="3"
             aria-valuemin="0"
             aria-valuemax="6"
+            aria-valuetext="Step 3 of 6"
             tabindex="0"
             aria-label="Step 3 of 6"
           >

@@ -267,6 +267,20 @@ export namespace Components {
          */
         "percent": number;
     }
+    interface VaPromoBanner {
+        /**
+          * Analytics tracking function(s) will not be called
+         */
+        "disableAnalytics": boolean;
+        /**
+          * `href` attribute for the `<a>` tag.
+         */
+        "href": string;
+        /**
+          * Controls which icon gets used. Options are 'announcement', 'news', or 'email-signup'.
+         */
+        "type": 'announcement' | 'news' | 'email-signup';
+    }
     interface VaRadio {
         /**
           * Whether or not an analytics event will be fired.
@@ -518,6 +532,12 @@ declare global {
         prototype: HTMLVaProgressBarElement;
         new (): HTMLVaProgressBarElement;
     };
+    interface HTMLVaPromoBannerElement extends Components.VaPromoBanner, HTMLStencilElement {
+    }
+    var HTMLVaPromoBannerElement: {
+        prototype: HTMLVaPromoBannerElement;
+        new (): HTMLVaPromoBannerElement;
+    };
     interface HTMLVaRadioElement extends Components.VaRadio, HTMLStencilElement {
     }
     var HTMLVaRadioElement: {
@@ -583,6 +603,7 @@ declare global {
         "va-pagination": HTMLVaPaginationElement;
         "va-process-list": HTMLVaProcessListElement;
         "va-progress-bar": HTMLVaProgressBarElement;
+        "va-promo-banner": HTMLVaPromoBannerElement;
         "va-radio": HTMLVaRadioElement;
         "va-radio-option": HTMLVaRadioOptionElement;
         "va-segmented-progress-bar": HTMLVaSegmentedProgressBarElement;
@@ -935,6 +956,28 @@ declare namespace LocalJSX {
          */
         "percent"?: number;
     }
+    interface VaPromoBanner {
+        /**
+          * Analytics tracking function(s) will not be called
+         */
+        "disableAnalytics"?: boolean;
+        /**
+          * `href` attribute for the `<a>` tag.
+         */
+        "href"?: string;
+        /**
+          * Fires when the component is closed by clicking on the close icon.
+         */
+        "onCloseEvent"?: (event: CustomEvent<any>) => void;
+        /**
+          * The event used to track usage of the component. This is emitted when an anchor link or the dismiss icon is clicked and disableAnalytics is not true.
+         */
+        "onComponent-library-analytics"?: (event: CustomEvent<any>) => void;
+        /**
+          * Controls which icon gets used. Options are 'announcement', 'news', or 'email-signup'.
+         */
+        "type"?: 'announcement' | 'news' | 'email-signup';
+    }
     interface VaRadio {
         /**
           * Whether or not an analytics event will be fired.
@@ -1149,6 +1192,7 @@ declare namespace LocalJSX {
         "va-pagination": VaPagination;
         "va-process-list": VaProcessList;
         "va-progress-bar": VaProgressBar;
+        "va-promo-banner": VaPromoBanner;
         "va-radio": VaRadio;
         "va-radio-option": VaRadioOption;
         "va-segmented-progress-bar": VaSegmentedProgressBar;
@@ -1179,6 +1223,7 @@ declare module "@stencil/core" {
             "va-pagination": LocalJSX.VaPagination & JSXBase.HTMLAttributes<HTMLVaPaginationElement>;
             "va-process-list": LocalJSX.VaProcessList & JSXBase.HTMLAttributes<HTMLVaProcessListElement>;
             "va-progress-bar": LocalJSX.VaProgressBar & JSXBase.HTMLAttributes<HTMLVaProgressBarElement>;
+            "va-promo-banner": LocalJSX.VaPromoBanner & JSXBase.HTMLAttributes<HTMLVaPromoBannerElement>;
             "va-radio": LocalJSX.VaRadio & JSXBase.HTMLAttributes<HTMLVaRadioElement>;
             "va-radio-option": LocalJSX.VaRadioOption & JSXBase.HTMLAttributes<HTMLVaRadioOptionElement>;
             "va-segmented-progress-bar": LocalJSX.VaSegmentedProgressBar & JSXBase.HTMLAttributes<HTMLVaSegmentedProgressBarElement>;
