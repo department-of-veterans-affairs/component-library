@@ -42,6 +42,10 @@
   white-space: nowrap;
 }
 
+.va-modal-close:hover {
+  color: var(--color-primary-darker);
+}
+
 .va-modal-body {
   margin-right: 2rem;
   overflow-wrap: break-word;
