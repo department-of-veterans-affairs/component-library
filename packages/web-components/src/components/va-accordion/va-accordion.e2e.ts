@@ -98,7 +98,7 @@ describe('va-accordion', () => {
     expect(buttons[1].getAttribute('aria-expanded')).toEqual('true');
   });
 
-  it('expands and collapses all items when button is triggered', async () => {
+  it('expands all items when `Expand all +` button is triggered', async () => {
     const page = await newE2EPage();
     await page.setContent(`
       <va-accordion>
@@ -113,8 +113,20 @@ describe('va-accordion', () => {
 
     expect(accordionItems[0].getAttribute('aria-expanded')).toEqual('true');
     expect(accordionItems[1].getAttribute('aria-expanded')).toEqual('true');
+  });
 
-    // Click the second button
+  it('collapses all items when `Collapse All -` button is triggered', async () => {
+    const page = await newE2EPage();
+    await page.setContent(`
+      <va-accordion>
+        <va-accordion-item header="First item">Some content</va-accordion-item>
+        <va-accordion-item header="Second item">A bit more</va-accordion-item>
+      </va-accordion>`);
+
+    const expandButton = await page.find('va-accordion >>> button');
+    const accordionItems = await page.findAll('va-accordion-item >>> button');
+
+    await expandButton.click();
     await expandButton.click();
 
     expect(accordionItems[0].getAttribute('aria-expanded')).toEqual('false');
