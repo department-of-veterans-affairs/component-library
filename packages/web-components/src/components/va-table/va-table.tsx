@@ -1,6 +1,7 @@
 import { Component, Element, Host, Prop, h } from '@stencil/core';
 import { isNumeric } from '../../utils/utils';
 import sortIcon from '../../assets/sort-arrow.svg?format=text';
+import { quicksort } from '../../utils/dom';
 
 /**
  * This component expects `<va-table-row>` elements as children.
@@ -85,58 +86,9 @@ export class VaTable {
     });
   }
 
-  /**
-   * Swap the DOM elements at each index
-   */
-  private swap(rows: Element[], i: number, j: number): void {
-    const parent = rows[0].parentNode;
-    const one = rows[j];
-    const two = rows[i];
-    const temp = one.nextSibling;
-    parent.insertBefore(one, two);
-    parent.insertBefore(two, temp);
-  }
-
-  private partition(rows: Element[], lo: number, hi: number, selector): number {
-    const pivot = selector(rows[Math.floor((lo + hi) / 2)]);
-
-    let i = lo;
-    let j = hi;
-
-    while (i <= j) {
-      while (selector(rows[i]) < pivot) {
-        i++;
-      }
-      while (selector(rows[j]) > pivot) {
-        j--;
-      }
-
-      if (i <= j) {
-        this.swap(rows, i, j);
-        i++;
-        j--;
-      }
-    }
-
-    return i;
-  }
-
-  private quicksort(
-    rows: Element[],
-    lo: number,
-    hi: number,
-    selector = row => row,
-  ): void {
-    if (lo >= hi || lo < 0) return;
-
-    const p = this.partition(rows, lo, hi, selector);
-
-    this.quicksort(rows, lo, p - 1, selector); // Left side
-    this.quicksort(rows, p + 1, hi, selector); // Right side
-  }
   private handleSort(): void {
     const yearCell = row => row.children[2].textContent;
-    this.quicksort(this.rows, 0, this.rows.length - 1, yearCell);
+    quicksort(this.rows, 0, this.rows.length - 1, yearCell);
     this.rows = Array.from(
       this.el.querySelectorAll('va-table-row:not([slot])'),
     );
