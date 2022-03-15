@@ -100,7 +100,49 @@ export class VaAccordion {
     if (!this.isScrolledIntoView(clickedItem)) {
       clickedItem.scrollIntoView();
     }
+
+    // Check if all accordions are open or closed due to user clicks
+    this.accordionsOpened();
   }
+
+  private accordionsOpened() {
+    // Track user clicks or va-accordion-item within array to compare if all values are true or false
+    let accordionItems = [];
+    getSlottedNodes(this.el, 'va-accordion-item').forEach(item => {
+      accordionItems.push((item as Element).getAttribute('open'));
+    });
+    const allTrue = currentValue => currentValue === 'true';
+    const allFalse = currentValue => currentValue === 'false';
+    if (accordionItems.every(allTrue)) {
+      this.expandCollapseBtn.innerText = 'Collapse all -';
+      this.expandCollapseBtn.ariaLabel = 'Collapse all accordions';
+      this.expanded = true;
+    }
+    if (accordionItems.every(allFalse)) {
+      this.expandCollapseBtn.innerText = 'Expand all +';
+      this.expandCollapseBtn.ariaLabel = 'Expand all accordions';
+      this.expanded = false;
+    }
+  }
+
+  // Expand or Collapse All Function for Button Click
+  private expandCollapseAll = (expanded: boolean) => {
+    if (expanded) {
+      this.expandCollapseBtn.innerText = 'Collapse all -';
+      this.expandCollapseBtn.ariaLabel = 'Collapse all accordions';
+      getSlottedNodes(this.el, 'va-accordion-item').forEach(item =>
+        (item as Element).setAttribute('open', 'true'),
+      );
+      this.expanded = true;
+    } else {
+      this.expandCollapseBtn.innerText = 'Expand all +';
+      this.expandCollapseBtn.ariaLabel = 'Expand all accordions';
+      getSlottedNodes(this.el, 'va-accordion-item').forEach(item =>
+        (item as Element).setAttribute('open', 'false'),
+      );
+      this.expanded = false;
+    }
+  };
 
   isScrolledIntoView(el: Element) {
     const elemTop = el?.getBoundingClientRect().top;
@@ -132,24 +174,6 @@ export class VaAccordion {
    * Optional accordion section heading text. Only used in analytics event. Default is null.
    */
   @Prop() sectionHeading: string = null;
-
-  private expandCollapseAll = (expanded: boolean) => {
-    if (expanded) {
-      this.expandCollapseBtn.innerText = 'Collapse all -';
-      this.expandCollapseBtn.ariaLabel = 'Collapse all accordions';
-      getSlottedNodes(this.el, 'va-accordion-item').forEach(item =>
-        (item as Element).setAttribute('open', 'true'),
-      );
-      this.expanded = true;
-    } else {
-      this.expandCollapseBtn.innerText = 'Expand all +';
-      this.expandCollapseBtn.ariaLabel = 'Expand all accordions';
-      getSlottedNodes(this.el, 'va-accordion-item').forEach(item =>
-        (item as Element).setAttribute('open', 'false'),
-      );
-      this.expanded = false;
-    }
-  };
 
   render() {
     return (

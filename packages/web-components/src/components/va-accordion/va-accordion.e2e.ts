@@ -108,7 +108,7 @@ describe('va-accordion', () => {
 
     const expandButton = await page.find('va-accordion >>> button');
     const accordionItems = await page.findAll('va-accordion-item >>> button');
-
+    // Click to Trigger Expanse of all Buttons
     await expandButton.click();
 
     expect(accordionItems[0].getAttribute('aria-expanded')).toEqual('true');
@@ -124,13 +124,21 @@ describe('va-accordion', () => {
       </va-accordion>`);
 
     const expandButton = await page.find('va-accordion >>> button');
-    const accordionItems = await page.findAll('va-accordion-item >>> button');
-
+    const accordionItemsButtons = await page.findAll(
+      'va-accordion-item >>> button',
+    );
+    // Click to Expand Both Buttons
+    await accordionItemsButtons[0].click();
+    await accordionItemsButtons[1].click();
+    // Click to Trigger Collapse of all Buttons
     await expandButton.click();
-    await expandButton.click();
 
-    expect(accordionItems[0].getAttribute('aria-expanded')).toEqual('false');
-    expect(accordionItems[1].getAttribute('aria-expanded')).toEqual('false');
+    expect(accordionItemsButtons[0].getAttribute('aria-expanded')).toEqual(
+      'false',
+    );
+    expect(accordionItemsButtons[1].getAttribute('aria-expanded')).toEqual(
+      'false',
+    );
   });
 
   it('fires an analytics event when expanded', async () => {
