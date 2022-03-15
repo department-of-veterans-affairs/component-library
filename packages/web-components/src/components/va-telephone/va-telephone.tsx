@@ -63,7 +63,7 @@ export class VaTelephone {
   ): string {
     let formattedNum = num;
     if (num.length === 10) {
-      const regex = /(?<area>\d{3})(?<local>\d{3})(?<last4>\w{4})/g;
+      const regex = /(?<area>\d{3})(?<local>\d{3})(?<last4>\d{4})/g;
       const { area, local, last4 } = regex.exec(num).groups;
       formattedNum = `${area}-${local}-${last4}`;
       if (international) formattedNum = `+1-${formattedNum}`;
@@ -82,19 +82,13 @@ export class VaTelephone {
    * periods, e.g. "800-555-1212" becomes "8 0 0. 5 5 5. 1 2 1 2"
    */
   static formatTelLabel(number: string, vanity: string): string {
-    return vanity
-      ? number
-          .split(/[^\d]+/)
-          .filter(n => n)
-          .map(chunk => chunk.split('').join(' '))
-          .join('. ')
-      : number
-          .split(/[^\d\w]+/)
-          .filter(n => n)
-          .map(chunk =>
-            chunk === 'ext' ? 'extension' : chunk.split('').join(' '),
-          )
-          .join('. ');
+    const numberType = vanity
+      ? number.split(/[^\d]+/)
+      : number.split(/[^\d\w]+/);
+    return numberType
+      .filter(n => n)
+      .map(chunk => (chunk === 'ext' ? 'extension' : chunk.split('').join(' ')))
+      .join('. ');
   }
 
   static createHref(contact: string, extension: number): string {
@@ -126,7 +120,8 @@ export class VaTelephone {
       vanity,
     );
     const formattedAriaLabel = `${VaTelephone.formatTelLabel(
-      formattedNumber, vanity
+      formattedNumber,
+      vanity,
     )}.`;
 
     return notClickable ? (
