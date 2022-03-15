@@ -38,7 +38,3 @@ jobs:
           # 👇 Chromatic projectToken, refer to the manage page to obtain it.
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
           storybookBuildDir: packages/storybook/storybook-static
-      - name: Update PR Chromatic link
-        uses: luigibertaco/dynamic-template-action@1.0.0
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
