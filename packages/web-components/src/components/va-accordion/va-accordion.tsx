@@ -106,7 +106,7 @@ export class VaAccordion {
   }
 
   private accordionsOpened() {
-    // Track user clicks or va-accordion-item within array to compare if all values are true or false
+    // Track user clicks on va-accordion-item within an array to compare if all values are true or false
     let accordionItems = [];
     getSlottedNodes(this.el, 'va-accordion-item').forEach(item => {
       accordionItems.push((item as Element).getAttribute('open'));
