@@ -192,6 +192,37 @@ export namespace Components {
          */
         "setFocus": boolean;
     }
+    interface VaModal {
+        /**
+          * Click outside modal will trigger closeEvent
+         */
+        "clickToClose"?: boolean;
+        /**
+          * If true, analytics event won't be fired
+         */
+        "disableAnalytics"?: boolean;
+        /**
+          * Selector to explicitly specify which element should receive focus when the modal is open, if the initially focused element is not the first focusable element in the document
+         */
+        "initialFocusSelector"?: string;
+        /**
+          * Title/header text for the modal
+         */
+        "modalTitle"?: string;
+        /**
+          * Primary button text
+         */
+        "primaryButtonText"?: string;
+        /**
+          * Secondary button text
+         */
+        "secondaryButtonText"?: string;
+        "status"?: 'continue' | 'error' | 'info' | 'success' | 'warning';
+        /**
+          * If the modal is visible or not
+         */
+        "visible": boolean;
+    }
     interface VaOnThisPage {
     }
     interface VaPagination {
@@ -475,6 +506,12 @@ declare global {
         prototype: HTMLVaLoadingIndicatorElement;
         new (): HTMLVaLoadingIndicatorElement;
     };
+    interface HTMLVaModalElement extends Components.VaModal, HTMLStencilElement {
+    }
+    var HTMLVaModalElement: {
+        prototype: HTMLVaModalElement;
+        new (): HTMLVaModalElement;
+    };
     interface HTMLVaOnThisPageElement extends Components.VaOnThisPage, HTMLStencilElement {
     }
     var HTMLVaOnThisPageElement: {
@@ -565,6 +602,7 @@ declare global {
         "va-checkbox-group": HTMLVaCheckboxGroupElement;
         "va-featured-content": HTMLVaFeaturedContentElement;
         "va-loading-indicator": HTMLVaLoadingIndicatorElement;
+        "va-modal": HTMLVaModalElement;
         "va-on-this-page": HTMLVaOnThisPageElement;
         "va-pagination": HTMLVaPaginationElement;
         "va-process-list": HTMLVaProcessListElement;
@@ -818,6 +856,53 @@ declare namespace LocalJSX {
           * Set to true if the loading indicator should capture focus
          */
         "setFocus"?: boolean;
+    }
+    interface VaModal {
+        /**
+          * Click outside modal will trigger closeEvent
+         */
+        "clickToClose"?: boolean;
+        /**
+          * If true, analytics event won't be fired
+         */
+        "disableAnalytics"?: boolean;
+        /**
+          * Selector to explicitly specify which element should receive focus when the modal is open, if the initially focused element is not the first focusable element in the document
+         */
+        "initialFocusSelector"?: string;
+        /**
+          * Title/header text for the modal
+         */
+        "modalTitle"?: string;
+        /**
+          * Fires when modal is closed.
+         */
+        "onCloseEvent"?: (event: CustomEvent<any>) => void;
+        /**
+          * The event used to track usage of the component. Fires when a a page is selected if enable-analytics is true.
+         */
+        "onComponent-library-analytics"?: (event: CustomEvent<any>) => void;
+        /**
+          * Fires when primary button is clicked.
+         */
+        "onPrimaryButtonClick"?: (event: CustomEvent<any>) => void;
+        /**
+          * Fires when secondary button is clicked.
+         */
+        "onSecondaryButtonClick"?: (event: CustomEvent<any>) => void;
+        /**
+          * Primary button text
+         */
+        "primaryButtonText"?: string;
+        /**
+          * Secondary button text
+         */
+        "secondaryButtonText"?: string;
+        "status"?: 'continue' | 'error' | 'info' | 'success' | 'warning';
+        /**
+          * If the modal is visible or not
+         */
+        "visible"?: boolean;
     }
     interface VaOnThisPage {
     }
@@ -1110,6 +1195,7 @@ declare namespace LocalJSX {
         "va-checkbox-group": VaCheckboxGroup;
         "va-featured-content": VaFeaturedContent;
         "va-loading-indicator": VaLoadingIndicator;
+        "va-modal": VaModal;
         "va-on-this-page": VaOnThisPage;
         "va-pagination": VaPagination;
         "va-process-list": VaProcessList;
@@ -1140,6 +1226,7 @@ declare module "@stencil/core" {
             "va-checkbox-group": LocalJSX.VaCheckboxGroup & JSXBase.HTMLAttributes<HTMLVaCheckboxGroupElement>;
             "va-featured-content": LocalJSX.VaFeaturedContent & JSXBase.HTMLAttributes<HTMLVaFeaturedContentElement>;
             "va-loading-indicator": LocalJSX.VaLoadingIndicator & JSXBase.HTMLAttributes<HTMLVaLoadingIndicatorElement>;
+            "va-modal": LocalJSX.VaModal & JSXBase.HTMLAttributes<HTMLVaModalElement>;
             "va-on-this-page": LocalJSX.VaOnThisPage & JSXBase.HTMLAttributes<HTMLVaOnThisPageElement>;
             "va-pagination": LocalJSX.VaPagination & JSXBase.HTMLAttributes<HTMLVaPaginationElement>;
             "va-process-list": LocalJSX.VaProcessList & JSXBase.HTMLAttributes<HTMLVaProcessListElement>;
