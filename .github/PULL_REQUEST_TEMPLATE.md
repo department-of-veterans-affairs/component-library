@@ -6,9 +6,7 @@ Closes <ticket>
 
 ## Testing done
 
-
 ## Screenshots
-
 
 ## Acceptance criteria
 - [ ]
