@@ -41,9 +41,8 @@ export class VaTable {
       item.setAttribute('scope', 'col');
     });
 
-    if (this.sortColumn) {
+    if (this.sortColumn >= 0) {
       const button = document.createElement('button');
-      button.textContent = headers[this.sortColumn].textContent;
       button.onclick = this.handleSort.bind(this);
 
       headers[this.sortColumn].childNodes.forEach(child => child.remove());
@@ -56,7 +55,7 @@ export class VaTable {
         'vads-u-background-color--gray-lightest',
         'vads-u-color--base',
       );
-      button.innerHTML = sortIcon;
+      button.innerHTML = `${columns[this.sortColumn]}${sortIcon}`;
     }
 
     // Store alignment classes by column index.
@@ -84,9 +83,14 @@ export class VaTable {
   }
 
   private handleSort(): void {
-    const yearCell = row => row.children[2].textContent;
+    const cellSelector = row => row.children[this.sortColumn].textContent;
     // Starting at index 1 to skip the header row
-    quicksort(this.el.childNodes, 1, this.el.childNodes.length - 1, yearCell);
+    quicksort(
+      this.el.childNodes,
+      1,
+      this.el.childNodes.length - 1,
+      cellSelector,
+    );
   }
 
   render() {
