@@ -181,7 +181,7 @@ export class VaPagination {
             <Fragment>
               <li>
                 <button
-                  aria-label="..."
+                  aria-label="ellipsis"
                   class="button-inner"
                   onKeyDown={e => this.handleKeyDown(e, null)}
                   type="button"
