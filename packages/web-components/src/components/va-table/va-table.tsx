@@ -16,8 +16,6 @@ import { quicksort } from '../../utils/dom';
 export class VaTable {
   @Element() el: HTMLElement;
 
-  rows: HTMLElement[] = null;
-
   /**
    * The title of the table
    */
@@ -37,7 +35,6 @@ export class VaTable {
     const headers = elementChildren(headerRow);
     const columns = [];
 
-    this.rows = rows;
     headers.forEach((item: HTMLVaTableRowElement) => {
       columns.push(item.textContent);
       item.setAttribute('role', 'columnheader');
@@ -88,10 +85,8 @@ export class VaTable {
 
   private handleSort(): void {
     const yearCell = row => row.children[2].textContent;
-    quicksort(this.rows, 0, this.rows.length - 1, yearCell);
-    this.rows = Array.from(
-      this.el.querySelectorAll('va-table-row:not([slot])'),
-    );
+    // Starting at index 1 to skip the header row
+    quicksort(this.el.childNodes, 1, this.el.childNodes.length - 1, yearCell);
   }
 
   render() {

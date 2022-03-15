@@ -1,7 +1,7 @@
 /**
  * Swap the DOM elements at each index
  */
-function swapChildren(rows: Element[], i: number, j: number): void {
+function swapChildren(rows: NodeList, i: number, j: number): void {
   const parent = rows[0].parentNode;
   const one = rows[j];
   const two = rows[i];
@@ -10,7 +10,7 @@ function swapChildren(rows: Element[], i: number, j: number): void {
   parent.insertBefore(two, temp);
 }
 
-function partition(rows: Element[], lo: number, hi: number, selector): number {
+function partition(rows: NodeList, lo: number, hi: number, selector): number {
   const pivot = selector(rows[Math.floor((lo + hi) / 2)]);
 
   let i = lo;
@@ -34,8 +34,15 @@ function partition(rows: Element[], lo: number, hi: number, selector): number {
   return i;
 }
 
+/**
+ * Sorts a NodeList in place.
+ * @param {NodeList} rows - A live NodeList of elements to sort
+ * @param {number} lo - The lower bound index to use for the partition
+ * @param {number} hi - The upper bound index to use for the partition
+ * @param {Function} selector - An optional selector to use for comparing elements
+ */
 export function quicksort(
-  rows: Element[],
+  rows: NodeList,
   lo: number,
   hi: number,
   selector = row => row,
@@ -45,5 +52,5 @@ export function quicksort(
   const p = partition(rows, lo, hi, selector);
 
   quicksort(rows, lo, p - 1, selector); // Left side
-  quicksort(rows, p + 1, hi, selector); // Right side
+  quicksort(rows, p, hi, selector); // Right side
 }
