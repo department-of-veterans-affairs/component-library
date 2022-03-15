@@ -108,7 +108,7 @@ describe('va-accordion', () => {
 
     const expandButton = await page.find('va-accordion >>> button');
     const accordionItems = await page.findAll('va-accordion-item >>> button');
-    // Click to Trigger Expand of all Buttons
+    // Click to trigger expand of all accordion items collectively
     await expandButton.click();
 
     expect(accordionItems[0].getAttribute('aria-expanded')).toEqual('true');
@@ -124,21 +124,36 @@ describe('va-accordion', () => {
       </va-accordion>`);
 
     const expandButton = await page.find('va-accordion >>> button');
+    const accordionItems = await page.findAll('va-accordion-item >>> button');
+    // Click to expand both accordion items manually
+    await accordionItems[0].click();
+    await accordionItems[1].click();
+    // Click to trigger collapse of all accordion items collectively
+    await expandButton.click();
+
+    expect(accordionItems[0].getAttribute('aria-expanded')).toEqual('false');
+    expect(accordionItems[1].getAttribute('aria-expanded')).toEqual('false');
+  });
+
+  it('tracks which accordions are opened', async () => {
+    const page = await newE2EPage();
+    await page.setContent(`
+      <va-accordion>
+        <va-accordion-item header="First item">Some content</va-accordion-item>
+        <va-accordion-item header="Second item">A bit more</va-accordion-item>
+      </va-accordion>`);
     const accordionItemsButtons = await page.findAll(
       'va-accordion-item >>> button',
     );
-    // Click to Expand Both Buttons
+    const expandButton = await page.find('va-accordion >>> button');
+    // Click to expand single accordion item manually
     await accordionItemsButtons[0].click();
+    // Check if all accordions opened conditions are met
+    expect(expandButton).toEqualText('Expand all +');
+    // Click to expand single accordion item manually
     await accordionItemsButtons[1].click();
-    // Click to Trigger Collapse of all Buttons
-    await expandButton.click();
-
-    expect(accordionItemsButtons[0].getAttribute('aria-expanded')).toEqual(
-      'false',
-    );
-    expect(accordionItemsButtons[1].getAttribute('aria-expanded')).toEqual(
-      'false',
-    );
+    // Check if all accordions opened conditions are met
+    expect(expandButton).toEqualText('Collapse all -');
   });
 
   it('fires an analytics event when expanded', async () => {
