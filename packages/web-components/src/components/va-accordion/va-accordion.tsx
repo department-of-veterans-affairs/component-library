@@ -114,13 +114,9 @@ export class VaAccordion {
     const allTrue = currentValue => currentValue === 'true';
     const allFalse = currentValue => currentValue === 'false';
     if (accordionItems.every(allTrue)) {
-      this.expandCollapseBtn.innerText = 'Collapse all -';
-      this.expandCollapseBtn.ariaLabel = 'Collapse all accordions';
       this.expanded = true;
     }
     if (accordionItems.every(allFalse)) {
-      this.expandCollapseBtn.innerText = 'Expand all +';
-      this.expandCollapseBtn.ariaLabel = 'Expand all accordions';
       this.expanded = false;
     }
   }
@@ -128,15 +124,11 @@ export class VaAccordion {
   // Expand or Collapse All Function for Button Click
   private expandCollapseAll = (expanded: boolean) => {
     if (expanded) {
-      this.expandCollapseBtn.innerText = 'Collapse all -';
-      this.expandCollapseBtn.ariaLabel = 'Collapse all accordions';
       getSlottedNodes(this.el, 'va-accordion-item').forEach(item =>
         (item as Element).setAttribute('open', 'true'),
       );
       this.expanded = true;
     } else {
-      this.expandCollapseBtn.innerText = 'Expand all +';
-      this.expandCollapseBtn.ariaLabel = 'Expand all accordions';
       getSlottedNodes(this.el, 'va-accordion-item').forEach(item =>
         (item as Element).setAttribute('open', 'false'),
       );
@@ -182,9 +174,13 @@ export class VaAccordion {
           <button
             ref={el => (this.expandCollapseBtn = el as HTMLButtonElement)}
             onClick={() => this.expandCollapseAll(!this.expanded)}
-            aria-label="Expand all accordions"
+            aria-label={
+              this.expanded
+                ? 'Collapse all accordions'
+                : 'Expand all accordions'
+            }
           >
-            Expand all +
+            {this.expanded ? 'Collapse all -' : 'Expand all +'}
           </button>
         )}
         <slot />
