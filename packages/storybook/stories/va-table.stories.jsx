@@ -64,7 +64,7 @@ const Template = args => {
 
 const defaultArgs = {
   'table-title': 'My table',
-  'sort-column': 2,
+  'sort-column': undefined,
 };
 
 export const Default = Template.bind({ data });
@@ -72,6 +72,12 @@ Default.args = {
   ...defaultArgs,
 };
 Default.argTypes = propStructure(accordionDocs);
+
+export const Sortable = Template.bind({ data });
+Sortable.args = {
+  ...defaultArgs,
+  'sort-column': 2,
+};
 
 export const MissingData = Template.bind({});
 MissingData.args = {
