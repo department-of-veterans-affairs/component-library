@@ -78,6 +78,8 @@ export class VaTelephone {
   /**
    * Format telephone number for screen readers
    * @param {string} number - Expected a formatted phone number with or without extension
+   * @param {string} vanity - Using vanity prop set on the component to remove extra text added
+   * via formatPhoneNumber to create the vanity number
    * @return {string} - Combined phone number parts within the label separated by
    * periods, e.g. "800-555-1212" becomes "8 0 0. 5 5 5. 1 2 1 2"
    */
