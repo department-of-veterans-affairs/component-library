@@ -108,7 +108,7 @@ describe('va-accordion', () => {
 
     const expandButton = await page.find('va-accordion >>> button');
     const accordionItems = await page.findAll('va-accordion-item >>> button');
-    // Click to Trigger Expanse of all Buttons
+    // Click to Trigger Expand of all Buttons
     await expandButton.click();
 
     expect(accordionItems[0].getAttribute('aria-expanded')).toEqual('true');
