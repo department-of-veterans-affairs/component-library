@@ -35,6 +35,12 @@ export class VaTelephone {
   @Prop() international: boolean = false;
 
   /**
+   * Optional vanity phone number.
+   * Replaces the last 4 digits with the vanity text input
+   */
+  @Prop() vanity: string;
+
+  /**
    * The event used to track usage of the component. This is emitted when
    * clicking on an anchor link.
    */
@@ -45,54 +51,6 @@ export class VaTelephone {
   })
   componentLibraryAnalytics: EventEmitter;
 
-  private alphaPhoneNumber = val => {
-    let result = '';
-    switch (val) {
-      case 'A':
-      case 'B':
-      case 'C':
-        result = '2';
-        break;
-      case 'D':
-      case 'E':
-      case 'F':
-        result = '3';
-        break;
-      case 'G':
-      case 'H':
-      case 'I':
-        result = '4';
-        break;
-      case 'J':
-      case 'K':
-      case 'L':
-        result = '5';
-        break;
-      case 'M':
-      case 'N':
-      case 'O':
-        result = '6';
-        break;
-      case 'P':
-      case 'Q':
-      case 'R':
-      case 'S':
-        result = '7';
-        break;
-      case 'T':
-      case 'U':
-      case 'V':
-        result = '8';
-        break;
-      case 'W':
-      case 'X':
-      case 'Y':
-      case 'Z':
-        result = '9';
-        break;
-    }
-    return result;
-  };
   /**
    * Format telephone number for display.
    * `international` and `extension` args only work on 10 digit contacts
@@ -101,8 +59,7 @@ export class VaTelephone {
     num: string,
     extension: number,
     international: boolean = false,
-    alphaPhoneNumber: Function,
-    vanity: boolean,
+    vanity: string,
   ): string {
     let formattedNum = num;
     if (num.length === 10) {
@@ -112,11 +69,7 @@ export class VaTelephone {
       if (international) formattedNum = `+1-${formattedNum}`;
       if (extension) formattedNum = `${formattedNum}, ext. ${extension}`;
       if (vanity) {
-        const alphaConversion = last4
-          .split('')
-          .map(digit => alphaPhoneNumber(digit))
-          .join('');
-        formattedNum = `${formattedNum} (${alphaConversion})`;
+        formattedNum = `${area}-${local}-${vanity} (${last4})`;
       }
     }
     return formattedNum;
@@ -125,10 +78,10 @@ export class VaTelephone {
   /**
    * Format telephone number for screen readers
    * @param {string} number - Expected a formatted phone number with or without extension
-   * @return {string} - Combined phone number parts within the label seperated by
+   * @return {string} - Combined phone number parts within the label separated by
    * periods, e.g. "800-555-1212" becomes "8 0 0. 5 5 5. 1 2 1 2"
    */
-  static formatTelLabel(number: string, vanity: boolean): string {
+  static formatTelLabel(number: string, vanity: string): string {
     return vanity
       ? number
           .split(/[^\d]+/)
@@ -144,29 +97,12 @@ export class VaTelephone {
           .join('. ');
   }
 
-  static createHref(
-    contact: string,
-    extension: number,
-    alphaPhoneNumber: Function,
-    vanity: boolean,
-  ): string {
+  static createHref(contact: string, extension: number): string {
     const isN11 = contact.length === 3;
     // extension format ";ext=" from RFC3966 https://tools.ietf.org/html/rfc3966#page-5
     // but it seems that using a comma to pause for 2 seconds might be a better
     // solution - see https://dsva.slack.com/archives/C8E985R32/p1589814301103200
-    const last4 = contact.slice(contact.length - 4);
-    let vanityNumber: string;
-    if (vanity) {
-      vanityNumber =
-        contact.substring(0, contact.length - 4) +
-        last4
-          .split('')
-          .map(digit => alphaPhoneNumber(digit))
-          .join('');
-    }
-    const href = `tel:${
-      isN11 ? contact : vanity ? `+1${vanityNumber}` : `+1${contact}`
-    }`;
+    const href = `tel:${isN11 ? contact : `+1${contact}`}`;
     return `${href}${extension ? `,${extension}` : ''}`;
   }
 
@@ -182,19 +118,15 @@ export class VaTelephone {
   }
 
   render() {
-    const { contact, extension, notClickable, international } = this;
-    const vanityCheck = contact.slice(contact.length - 4);
-    const vanity = /^[a-zA-Z]+$/.test(vanityCheck);
+    const { contact, extension, notClickable, international, vanity } = this;
     const formattedNumber = VaTelephone.formatPhoneNumber(
       contact,
       extension,
       international,
-      this.alphaPhoneNumber,
       vanity,
     );
     const formattedAriaLabel = `${VaTelephone.formatTelLabel(
-      formattedNumber,
-      vanity,
+      formattedNumber, vanity
     )}.`;
 
     return notClickable ? (
@@ -204,12 +136,7 @@ export class VaTelephone {
       </Fragment>
     ) : (
       <a
-        href={VaTelephone.createHref(
-          contact,
-          extension,
-          this.alphaPhoneNumber,
-          vanity,
-        )}
+        href={VaTelephone.createHref(contact, extension)}
         aria-label={formattedAriaLabel}
         onClick={this.handleClick.bind(this)}
       >

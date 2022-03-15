@@ -134,7 +134,7 @@ describe('va-telephone', () => {
 
   it('handles a vanity number as a contact prop', async () => {
     const page = await newE2EPage();
-    await page.setContent('<va-telephone contact="877222VETS"></va-telephone>');
+    await page.setContent('<va-telephone contact="8772228387" vanity="VETS"></va-telephone>');
 
     const link = await page.find('va-telephone >>> a');
     expect(link.getAttribute('aria-label')).toEqual(

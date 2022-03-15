@@ -359,6 +359,10 @@ export namespace Components {
           * Indicates if the phone number can be clicked or not
          */
         "notClickable": boolean;
+        /**
+          * Optional vanity phone number. Replaces the last 4 digits with the vanity text input
+         */
+        "vanity": string;
     }
     interface VaTextInput {
         /**
@@ -1034,6 +1038,10 @@ declare namespace LocalJSX {
           * The event used to track usage of the component. This is emitted when clicking on an anchor link.
          */
         "onComponent-library-analytics"?: (event: CustomEvent<any>) => void;
+        /**
+          * Optional vanity phone number. Replaces the last 4 digits with the vanity text input
+         */
+        "vanity"?: string;
     }
     interface VaTextInput {
         /**

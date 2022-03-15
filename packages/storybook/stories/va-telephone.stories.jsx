@@ -68,6 +68,7 @@ const Template = ({
   'not-clickable': notClickable,
   international,
   ariaDescribedby,
+  vanity,
 }) => {
   return (
     <div>
@@ -80,6 +81,7 @@ const Template = ({
         not-clickable={notClickable}
         international={international}
         aria-describedby={ariaDescribedby}
+        vanity={vanity}
       ></va-telephone>
     </div>
   );
@@ -90,6 +92,7 @@ const defaultArgs = {
   'extension': undefined,
   'not-clickable': false,
   'international': false,
+  'vanity': undefined,
 };
 
 export const Default = Template.bind({});
@@ -131,5 +134,6 @@ AriaDescribedBy.args = {
 export const VanityNumber = Template.bind({});
 VanityNumber.args = {
   ...defaultArgs,
-  contact: '877222VETS',
+  contact: '8772228387',
+  vanity: 'VETS'
 };
