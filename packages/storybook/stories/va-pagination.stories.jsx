@@ -25,15 +25,12 @@ const Template = ({
     setPage(event.detail.page);
   };
   return (
-    <div>
-      <p>TESTING CHORMATIC LINK</p>
-      <VaPagination
-        page={page}
-        pages={pages}
-        onPageSelect={handlePageSelect}
-        showLastPage={showLastPage}
-      />
-    </div>
+    <VaPagination
+      page={page}
+      pages={pages}
+      onPageSelect={handlePageSelect}
+      showLastPage={showLastPage}
+    />
   );
 };
 
