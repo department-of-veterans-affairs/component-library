@@ -53,7 +53,7 @@ export function quicksort(
   rows: NodeList,
   lo: number,
   hi: number,
-  selector = row => row,
+  selector = row => row.textContent,
   comparator = (a, b) => a < b,
 ): void {
   if (lo >= hi || lo < 0) return;
@@ -72,7 +72,7 @@ export function reverseQuicksort(
   rows: NodeList,
   lo: number,
   hi: number,
-  selector = row => row,
+  selector = row => row.textContent,
 ): void {
   quicksort(rows, lo, hi, selector, (a, b) => a > b);
 }
