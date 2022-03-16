@@ -415,7 +415,13 @@ export namespace Components {
         /**
           * The inputmode attribute.
          */
-        "inputmode"?: string;
+        "inputmode"?: | 'decimal'
+    | 'email'
+    | 'numeric'
+    | 'search'
+    | 'tel'
+    | 'text'
+    | 'url';
         /**
           * The label for the text input.
          */
@@ -435,7 +441,10 @@ export namespace Components {
         /**
           * The type attribute.
          */
-        "type"?: string;
+        "type"?: 'email' | 'number' | 'search' | 'tel' | 'text' | 'url';
+        /**
+          * The value for the input.
+         */
         "value"?: string;
     }
 }
@@ -1148,7 +1157,13 @@ declare namespace LocalJSX {
         /**
           * The inputmode attribute.
          */
-        "inputmode"?: string;
+        "inputmode"?: | 'decimal'
+    | 'email'
+    | 'numeric'
+    | 'search'
+    | 'tel'
+    | 'text'
+    | 'url';
         /**
           * The label for the text input.
          */
@@ -1180,7 +1195,10 @@ declare namespace LocalJSX {
         /**
           * The type attribute.
          */
-        "type"?: string;
+        "type"?: 'email' | 'number' | 'search' | 'tel' | 'text' | 'url';
+        /**
+          * The value for the input.
+         */
         "value"?: string;
     }
     interface IntrinsicElements {

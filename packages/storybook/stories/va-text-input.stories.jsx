@@ -14,17 +14,42 @@ export default {
       },
     },
   },
+  argTypes: {
+    inputmode: {
+      control: {
+        type: 'select',
+        options: [
+          'decimal',
+          'email',
+          'numeric',
+          'search',
+          'tel',
+          'text',
+          'url',
+        ],
+      },
+    },
+    type: {
+      control: {
+        type: 'select',
+        options: ['email', 'number', 'search', 'tel', 'text', 'url'],
+      },
+    },
+  },
 };
 
 const defaultArgs = {
   'name': 'my-input',
   'label': 'My input',
-  'autocomplete': false,
+  'autocomplete': undefined,
   'enable-analytics': false,
   'required': false,
   'error': undefined,
   'maxlength': undefined,
   'value': undefined,
+  'inputmode': undefined,
+  'type': undefined,
+  'aria-describedby': undefined,
 };
 
 const Template = ({
@@ -36,6 +61,9 @@ const Template = ({
   error,
   maxlength,
   value,
+  inputmode,
+  type,
+  'aria-describedby': ariaDescribedby,
 }) => {
   return (
     <va-text-input
@@ -47,6 +75,9 @@ const Template = ({
       error={error}
       maxlength={maxlength}
       value={value}
+      inputmode={inputmode}
+      type={type}
+      aria-describedby={ariaDescribedby}
     />
   );
 };
@@ -77,27 +108,9 @@ Autocomplete.args = {
 export const WithAnalytics = Template.bind({});
 WithAnalytics.args = { ...defaultArgs, 'enable-analytics': true };
 
-const ExperimentalTemplate = ({
-  name,
-  label,
-  autocomplete,
-  'enable-analytics': enableAnalytics,
-  required,
-  error,
-  maxlength,
-  value,
-}) => {
+const ExperimentalTemplate = ({ name, label }) => {
   return (
-    <va-text-input
-      name={name}
-      label={label}
-      autocomplete={autocomplete}
-      enable-analytics={enableAnalytics}
-      required={required}
-      error={error}
-      maxlength={maxlength}
-      value={value}
-    >
+    <va-text-input name={name} label={label}>
       <div className="vads-u-margin-bottom--1">
         <va-additional-info trigger="Why is this required?">
           We need the Veteran’s Social Security number or tax identification

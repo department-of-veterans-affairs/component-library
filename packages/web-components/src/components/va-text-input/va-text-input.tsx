@@ -41,12 +41,20 @@ export class VaTextInput {
   /**
    * The inputmode attribute.
    */
-  @Prop() inputmode?: string = '';
+  @Prop() inputmode?:
+    | 'decimal'
+    | 'email'
+    | 'numeric'
+    | 'search'
+    | 'tel'
+    | 'text'
+    | 'url';
 
   /**
    * The type attribute.
    */
-  @Prop() type?: string = 'text';
+  @Prop() type?: 'email' | 'number' | 'search' | 'tel' | 'text' | 'url' =
+    'text';
 
   /**
    * The maximum number of characters allowed in the input.
@@ -71,12 +79,12 @@ export class VaTextInput {
   /**
    * The aria-describedby attribute for the `<input>` in the shadow DOM.
    */
-  @Prop() ariaDescribedby?: string = '';
+  @Prop() ariaDescribedby?: string;
 
-  /*
+  /**
    * The value for the input.
    */
-  @Prop({ mutable: true }) value?: string = '';
+  @Prop({ mutable: true }) value?: string;
   // TODO: Make the value prop reflective. Currently, it isn't because it screws
   // up the input behavior. For now, the only "bug" is that the changed value
   // isn't reflected in the DOM on the web component. That seems to be how the
