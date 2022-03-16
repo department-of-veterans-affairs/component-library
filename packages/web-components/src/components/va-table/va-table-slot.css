@@ -1,7 +1,15 @@
 va-table > va-table-row[slot] button {
   display: inline-flex;
   align-items: center;
+  border-radius: 0;
 }
+va-table > va-table-row[slot] button:hover {
+  background-color: rgba(0, 0, 0, 0.05) !important;
+  transition-duration: 0.3s;
+  transition-timing-function: ease-in-out;
+  transition-property: color, background-color, border-color;
+}
+
 va-table > va-table-row[slot] button svg {
   width: 2.4rem;
 }
