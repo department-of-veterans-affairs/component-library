@@ -1,12 +1,12 @@
 import React from 'react';
-import {AcceptTermsPrompt} from '@department-of-veterans-affairs/component-library';
+import { AcceptTermsPrompt } from '@department-of-veterans-affairs/component-library';
 
 export default {
   title: 'Components/AcceptTermsPrompt',
   component: AcceptTermsPrompt,
 };
 
-const Template = (args) => <AcceptTermsPrompt terms={{ ...args }} />;
+const Template = args => <AcceptTermsPrompt terms={{ ...args }} />;
 
 const defaultArgs = {
   title: 'Terms and Conditions',
@@ -46,6 +46,8 @@ const defaultArgs = {
         on VA.gov—the information is stored on VA protected federal computer
         systems and networks. VA supports the secure storage and transmission of
         all information on VA.gov.
+
+        Hello!
       </p>
     </div>`,
 };
