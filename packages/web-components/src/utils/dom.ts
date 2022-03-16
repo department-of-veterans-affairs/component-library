@@ -10,17 +10,25 @@ function swapChildren(rows: NodeList, i: number, j: number): void {
   parent.insertBefore(two, temp);
 }
 
-function partition(rows: NodeList, lo: number, hi: number, selector): number {
+function partition(
+  rows: NodeList,
+  lo: number,
+  hi: number,
+  selector: Function,
+  comparator: Function,
+): number {
   const pivot = selector(rows[Math.floor((lo + hi) / 2)]);
 
   let i = lo;
   let j = hi;
 
   while (i <= j) {
-    while (selector(rows[i]) < pivot) {
+    // By default, selector(rows[i]) < pivot
+    while (comparator(selector(rows[i]), pivot)) {
       i++;
     }
-    while (selector(rows[j]) > pivot) {
+    // By default, selector(rows[j]) > pivot
+    while (comparator(pivot, selector(rows[j]))) {
       j--;
     }
 
@@ -46,11 +54,25 @@ export function quicksort(
   lo: number,
   hi: number,
   selector = row => row,
+  comparator = (a, b) => a < b,
 ): void {
   if (lo >= hi || lo < 0) return;
 
-  const p = partition(rows, lo, hi, selector);
+  const p = partition(rows, lo, hi, selector, comparator);
 
-  quicksort(rows, lo, p - 1, selector); // Left side
-  quicksort(rows, p, hi, selector); // Right side
+  quicksort(rows, lo, p - 1, selector, comparator); // Left side
+  quicksort(rows, p, hi, selector, comparator); // Right side
+}
+
+/**
+ * Run quicksort with the `comparator` argument using a greater than operator
+ * instead of the default less than
+ */
+export function reverseQuicksort(
+  rows: NodeList,
+  lo: number,
+  hi: number,
+  selector = row => row,
+): void {
+  quicksort(rows, lo, hi, selector, (a, b) => a > b);
 }
