@@ -46,8 +46,6 @@ const defaultArgs = {
         on VA.gov—the information is stored on VA protected federal computer
         systems and networks. VA supports the secure storage and transmission of
         all information on VA.gov.
-
-        Hello!
       </p>
     </div>`,
 };
