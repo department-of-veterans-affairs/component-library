@@ -1,0 +1,7 @@
+va-table > va-table-row[slot] button {
+  display: inline-flex;
+  align-items: center;
+}
+va-table > va-table-row[slot] button svg {
+  width: 2.4rem;
+}
