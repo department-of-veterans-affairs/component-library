@@ -419,7 +419,7 @@ export namespace Components {
         /**
           * The label for the text input.
          */
-        "label": string | HTMLElement;
+        "label"?: string;
         /**
           * The maximum number of characters allowed in the input.
          */
@@ -1152,7 +1152,7 @@ declare namespace LocalJSX {
         /**
           * The label for the text input.
          */
-        "label"?: string | HTMLElement;
+        "label"?: string;
         /**
           * The maximum number of characters allowed in the input.
          */

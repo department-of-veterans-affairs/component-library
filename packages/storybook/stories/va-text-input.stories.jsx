@@ -22,9 +22,9 @@ const defaultArgs = {
   'autocomplete': false,
   'enable-analytics': false,
   'required': false,
-  'error': null,
-  'maxlength': null,
-  'value': null,
+  'error': undefined,
+  'maxlength': undefined,
+  'value': undefined,
 };
 
 const Template = ({
@@ -76,3 +76,41 @@ Autocomplete.args = {
 
 export const WithAnalytics = Template.bind({});
 WithAnalytics.args = { ...defaultArgs, 'enable-analytics': true };
+
+const ExperimentalTemplate = ({
+  name,
+  label,
+  autocomplete,
+  'enable-analytics': enableAnalytics,
+  required,
+  error,
+  maxlength,
+  value,
+}) => {
+  return (
+    <va-text-input
+      name={name}
+      label={label}
+      autocomplete={autocomplete}
+      enable-analytics={enableAnalytics}
+      required={required}
+      error={error}
+      maxlength={maxlength}
+      value={value}
+    >
+      <div className="vads-u-margin-bottom--1">
+        <va-additional-info trigger="Why is this required?">
+          We need the Veteran’s Social Security number or tax identification
+          number to process the application when it’s submitted online, but it’s
+          not a requirement to apply for the program.
+        </va-additional-info>
+      </div>
+    </va-text-input>
+  );
+};
+
+export const Experimental = ExperimentalTemplate.bind({});
+Experimental.args = {
+  ...defaultArgs,
+  label: 'Veteran’s Social Security number',
+};

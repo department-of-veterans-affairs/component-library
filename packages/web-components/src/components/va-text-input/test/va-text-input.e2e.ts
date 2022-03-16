@@ -11,6 +11,9 @@ describe('va-text-input', () => {
     expect(element).toEqualHtml(`
       <va-text-input class="hydrated">
         <mock:shadow-root>
+          <label for="inputField">
+            <slot></slot>
+          </label>
           <input id="inputField" type="text" />
         </mock:shadow-root>
       </va-text-input>
@@ -63,7 +66,10 @@ describe('va-text-input', () => {
     expect(el).toEqualHtml(`
       <va-text-input class="hydrated" label="This is a field" required="">
         <mock:shadow-root>
-          <label for="inputField">This is a field <span class="required">(*Required)</span></label>
+          <label for="inputField">
+            This is a field <span class="required">(*Required)</span>
+            <slot></slot>
+          </label>
           <input id="inputField" type="text" />
         </mock:shadow-root>
       </va-text-input>
@@ -171,7 +177,7 @@ describe('va-text-input', () => {
       'search',
       'tel',
       'text',
-      'url'
+      'url',
     ];
     for (const inputType of allowedInputTypes) {
       const page = await newE2EPage();
@@ -208,5 +214,4 @@ describe('va-text-input', () => {
       expect(inputEl.getAttribute('inputmode')).toBe(inputMode);
     }
   });
-
 });

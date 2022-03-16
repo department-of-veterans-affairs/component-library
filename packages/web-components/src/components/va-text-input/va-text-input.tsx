@@ -6,6 +6,7 @@ import {
   h,
   Event,
   EventEmitter,
+  Fragment,
 } from '@stencil/core';
 import { consoleDevError } from '../../utils/utils';
 
@@ -25,7 +26,7 @@ export class VaTextInput {
   /**
    * The label for the text input.
    */
-  @Prop() label: string | HTMLElement;
+  @Prop() label?: string;
 
   /**
    * The error message to render.
@@ -108,12 +109,14 @@ export class VaTextInput {
 
   private getInputType() {
     if (!this.allowedInputTypes.includes(this.type)) {
-      consoleDevError(`The input type "${this.type}" is invalid or unsupported!`);
+      consoleDevError(
+        `The input type "${this.type}" is invalid or unsupported!`,
+      );
       return 'text';
     }
 
     return this.type;
-  };
+  }
 
   private handleChange = (e: Event) => {
     const target = e.target as HTMLInputElement;
@@ -140,20 +143,20 @@ export class VaTextInput {
     const describedBy =
       `${this.ariaDescribedby} ${this.error ? 'error-message' : ''}`.trim() ||
       null; // Null so we don't add the attribute if we have an empty string
-    const inputMode =
-      this.inputmode ?
-      this.inputmode :
-      null; // Null so we don't add the attribute if we have an empty string
+    const inputMode = this.inputmode ? this.inputmode : null; // Null so we don't add the attribute if we have an empty string
     const type = this.getInputType();
 
     return (
       <Host>
-        {this.label && (
-          <label htmlFor="inputField">
-            {this.label}{' '}
-            {this.required && <span class="required">(*Required)</span>}
-          </label>
-        )}
+        <label htmlFor="inputField">
+          {this.label && (
+            <Fragment>
+              {this.label}{' '}
+              {this.required && <span class="required">(*Required)</span>}
+            </Fragment>
+          )}
+          <slot></slot>
+        </label>
         {this.error && <span id="error-message">{this.error}</span>}
         <input
           id="inputField"
