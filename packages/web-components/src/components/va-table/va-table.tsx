@@ -1,7 +1,7 @@
 import { Component, Element, Host, Prop, State, h } from '@stencil/core';
 import { isNumeric } from '../../utils/utils';
-import sortIcon from '../../assets/sort-arrow.svg?format=text';
-import reverseSortIcon from '../../assets/sort-arrow-down.svg?format=text';
+import ascendingIcon from '../../assets/sort-arrow-up.svg?format=text';
+import descendingIcon from '../../assets/sort-arrow-down.svg?format=text';
 import { quicksort, reverseQuicksort } from '../../utils/dom';
 
 /**
@@ -46,7 +46,7 @@ export class VaTable {
     if (this.sortColumn >= 0) {
       const button = document.createElement('button');
       button.onclick = this.handleSort.bind(this);
-      const icon = this.sortAscending ? sortIcon : reverseSortIcon;
+      const icon = this.sortAscending ? ascendingIcon : descendingIcon;
 
       headers[this.sortColumn].childNodes.forEach(child => child.remove());
       headers[this.sortColumn].appendChild(button);
@@ -88,7 +88,7 @@ export class VaTable {
   componentDidUpdate() {
     // Update the sort icon
     if (this.sortColumn >= 0) {
-      const icon = this.sortAscending ? sortIcon : reverseSortIcon;
+      const icon = this.sortAscending ? ascendingIcon : descendingIcon;
       const button = this.el.querySelector('va-table-row[slot] button');
       const node = button.children[0];
       node.outerHTML = icon;
