@@ -1,3 +1,7 @@
+## Chromatic
+<!-- This `{{head.ref}}` is a placeholder for a CI job - it will be updated automatically -->
+https://{{head.ref}}--60f9b557105290003b387cd5.chromatic.com
+
 ## Description
 Closes <ticket>
 

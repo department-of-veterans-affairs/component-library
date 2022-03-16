@@ -9,6 +9,11 @@ This is a monorepo containing two main packages:
 
 The `core` package is for bundling the two main packages into one for publishing. The `storybook` package is for the combined story files from each `*-components` package.
 
+## Contributing
+
+### Branch naming
+This repo uses [`Chromatic`](https://www.chromatic.com/) to streamline reviews by publishing your changes and allowing reviewers to see them online. Do not use `/` in your branch name as Chromatic doesn't support it and will result in broken links.
+
 ## Publishing
 
 ### Updating the version
