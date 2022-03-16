@@ -37,6 +37,7 @@ const Template = ({
   maxlength,
   value,
 }) => {
+  const changeHandler = e => console.log('input event value:', e.target.value);
   return (
     <va-text-input
       name={name}
@@ -47,6 +48,7 @@ const Template = ({
       error={error}
       maxlength={maxlength}
       value={value}
+      onInput={changeHandler}
     />
   );
 };

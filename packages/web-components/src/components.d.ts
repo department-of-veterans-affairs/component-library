@@ -1170,10 +1170,6 @@ declare namespace LocalJSX {
          */
         "onVaBlur"?: (event: CustomEvent<any>) => void;
         /**
-          * The event emitted when the input value changes
-         */
-        "onVaChange"?: (event: CustomEvent<any>) => void;
-        /**
           * Set the input to required and render the (Required) text.
          */
         "required"?: boolean;
