@@ -17,13 +17,22 @@ import { quicksort, reverseQuicksort } from '../../utils/dom';
 export class VaTable {
   @Element() el: HTMLElement;
 
-  @State() sortAscending: boolean;
   /**
    * The title of the table
    */
   @Prop() tableTitle: string;
 
   @Prop() sortColumn: number;
+
+  /**
+   * Whether the initial sort state will be descending or not.
+   */
+  @Prop() descending: boolean = false;
+
+  /**
+   * The next direction to sort the rows
+   */
+  @State() sortAscending: boolean = !this.descending;
 
   componentDidLoad() {
     // For IE11 compatibility. `el.children` renders booleans instead of html elements,
@@ -45,6 +54,10 @@ export class VaTable {
 
     if (this.sortColumn >= 0) {
       const button = document.createElement('button');
+      button.setAttribute(
+        'aria-label',
+        `sort data by ${this.sortAscending ? 'ascending' : 'descending'}`,
+      );
       button.onclick = this.handleSort.bind(this);
       const icon = this.sortAscending ? ascendingIcon : descendingIcon;
 
@@ -59,6 +72,8 @@ export class VaTable {
         'vads-u-color--base',
       );
       button.innerHTML = `${columns[this.sortColumn]}${icon}`;
+
+      this.handleSort();
     }
 
     // Store alignment classes by column index.

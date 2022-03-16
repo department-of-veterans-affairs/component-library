@@ -321,6 +321,10 @@ export namespace Components {
         "value": string;
     }
     interface VaTable {
+        /**
+          * Whether the initial sort state will be descending or not.
+         */
+        "descending": boolean;
         "sortColumn": number;
         /**
           * The title of the table
@@ -964,6 +968,10 @@ declare namespace LocalJSX {
         "value"?: string;
     }
     interface VaTable {
+        /**
+          * Whether the initial sort state will be descending or not.
+         */
+        "descending"?: boolean;
         "sortColumn"?: number;
         /**
           * The title of the table

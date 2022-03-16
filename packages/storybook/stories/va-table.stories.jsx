@@ -38,12 +38,17 @@ const Template = args => {
   const {
     'table-title': tableTitle,
     'sort-column': sortColumn,
+    descending,
     rows = data,
   } = args;
   const columns = ['Document title', 'Description', 'Year'];
   return (
     <main>
-      <va-table table-title={tableTitle} sort-column={sortColumn}>
+      <va-table
+        table-title={tableTitle}
+        sort-column={sortColumn}
+        descending={descending}
+      >
         <va-table-row slot="headers">
           {columns.map(col => (
             <span>{col}</span>
@@ -65,6 +70,7 @@ const Template = args => {
 const defaultArgs = {
   'table-title': 'My table',
   'sort-column': undefined,
+  'descending': false,
 };
 
 export const Default = Template.bind({ data });
