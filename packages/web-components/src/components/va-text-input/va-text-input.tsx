@@ -79,7 +79,7 @@ export class VaTextInput {
   /**
    * The aria-describedby attribute for the `<input>` in the shadow DOM.
    */
-  @Prop() ariaDescribedby?: string;
+  @Prop() ariaDescribedby?: string = '';
 
   /**
    * The value for the input.
