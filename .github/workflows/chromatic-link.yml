@@ -1,0 +1,14 @@
+name: Chromatic Link
+
+on:
+  pull_request:
+    types: [edited, opened, reopened]
+
+jobs:
+  update_pr_chromatic_link:
+    runs-on: ubuntu-latest
+    name: Update PR Chromatic link
+    steps:
+      - uses: luigibertaco/dynamic-template-action@1.0.0
+        with:
+          token: '${{ secrets.GITHUB_TOKEN }}'
