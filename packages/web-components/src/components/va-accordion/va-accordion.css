@@ -1,5 +1,3 @@
-@import '../../mixins/focusable.css';
-
 :host {
   display: block;
   width: 100%;
@@ -11,14 +9,4 @@
 :host([bordered='true']),
 :host([bordered='']) {
   --item-border: 3px solid var(--color-gray-lightest);
-}
-
-button {
-  border: none;
-  color: var(--color-link-default);
-  background: transparent;
-  padding: 1rem;
-  cursor: pointer;
-  font-weight: bold;
-  float: right;
 }
