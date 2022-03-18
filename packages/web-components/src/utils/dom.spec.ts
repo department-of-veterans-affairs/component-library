@@ -10,7 +10,7 @@ describe('quicksort', () => {
       '<span>Delta</span>';
 
     const rows = document.body.childNodes;
-    quicksort(rows, 0, rows.length - 1, el => el.textContent);
+    quicksort(rows, 0, rows.length - 1);
 
     const sortedRows = Array.from(document.querySelectorAll('span'));
     expect(sortedRows[0]).toEqualText('Alpha');
@@ -56,7 +56,7 @@ describe('reverseQuicksort', () => {
       '<span>Delta</span>';
 
     const rows = document.body.childNodes;
-    reverseQuicksort(rows, 0, rows.length - 1, el => el.textContent);
+    reverseQuicksort(rows, 0, rows.length - 1);
 
     const sortedRows = Array.from(document.querySelectorAll('span'));
     expect(sortedRows[0]).toEqualText('Delta');
