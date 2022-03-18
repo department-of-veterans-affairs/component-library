@@ -148,6 +148,9 @@ describe('va-table', () => {
     expect(body[1].getAttribute('class')).toEqual(rightAlignClass);
   });
 
+  // TODO: add tests for the following (have been unable to get puppeteer to recognize DOM mutations):
+  // - initial sort on load
+  // - descending sort on button click
   describe('ascending sort', () => {
     it('adds a button with icon to the sortable column', async () => {
       const page = await sortSetup();
@@ -164,6 +167,9 @@ describe('va-table', () => {
       expect(sortIcon.getAttribute('aria-label')).toEqual('ascending');
     });
 
+  // TODO: add tests for the following (have been unable to get puppeteer to recognize DOM mutations):
+  // - initial descending sort on load
+  // - ascending sort on button click
   describe('descending sort', () => {
     it('adds a button with icon to the sortable column', async () => {
       const page = await sortSetup({ ascending: false });
