@@ -1,4 +1,4 @@
-import { Component, Host, h } from '@stencil/core';
+import { Component, Host, h, Prop, Event, EventEmitter } from '@stencil/core';
 
 @Component({
   tag: 'va-search',
@@ -6,13 +6,39 @@ import { Component, Host, h } from '@stencil/core';
   shadow: true,
 })
 export class VaSearch {
+  @Prop() action: string;
+
+  @Prop() label: string = 'Search';
+
+  @Prop() method?: 'GET' | 'POST' | 'dialog';
+
+  @Event({ bubbles: true, composed: true })
+  submitEvent: EventEmitter;
+
+  private handleSubmitEvent(event: KeyboardEvent | MouseEvent) {
+    event.preventDefault();
+    this.submitEvent.emit(event);
+  }
 
   render() {
+    const { action, label, method } = this;
+
     return (
       <Host>
-        <slot></slot>
+        <form
+          id="va-search-form"
+          action={action}
+          method={method}
+          onSubmit={(event: KeyboardEvent | MouseEvent) =>
+            this.handleSubmitEvent(event)
+          }
+        >
+          <input id="va-search-input" aria-label={label} type="text"></input>
+          <button id="va-search-button" type="submit">
+            <i aria-hidden="true" class="fa fa-search" />
+          </button>
+        </form>
       </Host>
     );
   }
-
 }

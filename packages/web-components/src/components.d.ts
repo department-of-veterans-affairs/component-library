@@ -322,6 +322,9 @@ export namespace Components {
         "value": string;
     }
     interface VaSearch {
+        "action": string;
+        "label": string;
+        "method"?: 'GET' | 'POST' | 'dialog';
     }
     interface VaSegmentedProgressBar {
         /**
@@ -1044,6 +1047,10 @@ declare namespace LocalJSX {
         "value"?: string;
     }
     interface VaSearch {
+        "action"?: string;
+        "label"?: string;
+        "method"?: 'GET' | 'POST' | 'dialog';
+        "onSubmitEvent"?: (event: CustomEvent<any>) => void;
     }
     interface VaSegmentedProgressBar {
         /**
