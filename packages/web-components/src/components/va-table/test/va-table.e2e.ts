@@ -1,6 +1,32 @@
 import { newE2EPage } from '@stencil/core/testing';
 import { axeCheck } from '../../../testing/test-helpers';
 
+const ascendingSortSetup = async () => {
+  const page = await newE2EPage();
+  await page.setContent(`
+      <va-table sort-column="2">
+        <va-table-row slot="headers">
+          <span>ID</span>
+          <span>Name</span>
+          <span>Cost</span>
+        </va-table-row>
+
+        <va-table-row>
+          <span>1</span>
+          <span>Turkey sandwich</span>
+          <span>8.00</span>
+        </va-table-row>
+        <va-table-row>
+          <span>2</span>
+          <span>Banana</span>
+          <span>0.50</span>
+        </va-table-row>
+      </va-table>
+    `);
+
+  return page;
+};
+
 describe('va-table', () => {
   it('renders', async () => {
     const page = await newE2EPage();
@@ -120,5 +146,22 @@ describe('va-table', () => {
 
     expect(header[1].getAttribute('class')).toEqual(rightAlignClass);
     expect(body[1].getAttribute('class')).toEqual(rightAlignClass);
+  });
+
+  describe('ascending sort', () => {
+    it('adds a button with icon to the sortable column', async () => {
+      const page = await ascendingSortSetup();
+      // The `nth-child` index is 1-based
+      const sortButton = await page.find(
+        'va-table-row[slot] span:nth-child(3) > button',
+      );
+      const sortIcon = await sortButton.find('svg');
+      // This describes the result of the click action
+      expect(sortButton.getAttribute('aria-label')).toEqual(
+        'sort data by descending',
+      );
+      // This describes the current state
+      expect(sortIcon.getAttribute('aria-label')).toEqual('ascending');
+    });
   });
 });

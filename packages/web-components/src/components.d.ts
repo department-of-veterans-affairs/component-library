@@ -325,6 +325,9 @@ export namespace Components {
           * Whether the initial sort state will be descending or not.
          */
         "descending": boolean;
+        /**
+          * The zero-based index of the column to sort by. Optional.
+         */
         "sortColumn": number;
         /**
           * The title of the table
@@ -972,6 +975,9 @@ declare namespace LocalJSX {
           * Whether the initial sort state will be descending or not.
          */
         "descending"?: boolean;
+        /**
+          * The zero-based index of the column to sort by. Optional.
+         */
         "sortColumn"?: number;
         /**
           * The title of the table

@@ -22,6 +22,9 @@ export class VaTable {
    */
   @Prop() tableTitle: string;
 
+  /**
+   * The zero-based index of the column to sort by. Optional.
+   */
   @Prop() sortColumn: number;
 
   /**
@@ -56,7 +59,7 @@ export class VaTable {
       const button = document.createElement('button');
       button.setAttribute(
         'aria-label',
-        `sort data by ${this.sortAscending ? 'ascending' : 'descending'}`,
+        `sort data by ${this.sortAscending ? 'descending' : 'ascending'}`,
       );
       button.onclick = this.handleSort.bind(this);
       const icon = this.sortAscending ? ascendingIcon : descendingIcon;
@@ -103,7 +106,7 @@ export class VaTable {
   componentDidUpdate() {
     // Update the sort icon
     if (this.sortColumn >= 0) {
-      const icon = this.sortAscending ? ascendingIcon : descendingIcon;
+      const icon = this.sortAscending ? descendingIcon : ascendingIcon;
       const button = this.el.querySelector('va-table-row[slot] button');
       const node = button.children[0];
       node.outerHTML = icon;
