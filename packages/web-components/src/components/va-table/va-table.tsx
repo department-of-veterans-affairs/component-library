@@ -56,16 +56,12 @@ export class VaTable {
     });
 
     if (this.sortColumn >= 0) {
+      const icon = this.sortAscending ? ascendingIcon : descendingIcon;
       const button = document.createElement('button');
       button.setAttribute(
         'aria-label',
         `sort data by ${this.sortAscending ? 'descending' : 'ascending'}`,
       );
-      button.onclick = this.handleSort.bind(this);
-      const icon = this.sortAscending ? ascendingIcon : descendingIcon;
-
-      headers[this.sortColumn].childNodes.forEach(child => child.remove());
-      headers[this.sortColumn].appendChild(button);
       button.classList.add(
         'vads-u-padding--0',
         'vads-u-margin--0',
@@ -75,6 +71,10 @@ export class VaTable {
         'vads-u-color--base',
       );
       button.innerHTML = `${columns[this.sortColumn]}${icon}`;
+      button.onclick = this.handleSort.bind(this);
+
+      headers[this.sortColumn].childNodes.forEach(child => child.remove());
+      headers[this.sortColumn].appendChild(button);
 
       this.handleSort();
     }
