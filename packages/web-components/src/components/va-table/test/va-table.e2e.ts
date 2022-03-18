@@ -1,10 +1,10 @@
 import { newE2EPage } from '@stencil/core/testing';
 import { axeCheck } from '../../../testing/test-helpers';
 
-const ascendingSortSetup = async () => {
+const sortSetup = async (opts = { ascending: true }) => {
   const page = await newE2EPage();
   await page.setContent(`
-      <va-table sort-column="2">
+      <va-table sort-column="2" ${!opts.ascending ? 'descending' : ''}>
         <va-table-row slot="headers">
           <span>ID</span>
           <span>Name</span>
@@ -150,7 +150,7 @@ describe('va-table', () => {
 
   describe('ascending sort', () => {
     it('adds a button with icon to the sortable column', async () => {
-      const page = await ascendingSortSetup();
+      const page = await sortSetup();
       // The `nth-child` index is 1-based
       const sortButton = await page.find(
         'va-table-row[slot] span:nth-child(3) > button',
@@ -162,6 +162,22 @@ describe('va-table', () => {
       );
       // This describes the current state
       expect(sortIcon.getAttribute('aria-label')).toEqual('ascending');
+    });
+
+  describe('descending sort', () => {
+    it('adds a button with icon to the sortable column', async () => {
+      const page = await sortSetup({ ascending: false });
+      // The `nth-child` index is 1-based
+      const sortButton = await page.find(
+        'va-table-row[slot] span:nth-child(3) > button',
+      );
+      const sortIcon = await sortButton.find('svg');
+      // This describes the result of the click action
+      expect(sortButton.getAttribute('aria-label')).toEqual(
+        'sort data by ascending',
+      );
+      // This describes the current state
+      expect(sortIcon.getAttribute('aria-label')).toEqual('descending');
     });
   });
 });
