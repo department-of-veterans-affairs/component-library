@@ -8,11 +8,13 @@ a[aria-expanded='true'] ~ #info {
   border-left-color: var(--color-primary-alt-dark);
 }
 
-#info {
+#info,
+#info-no-border {
   overflow: hidden;
 }
 
-#info.closed {
+#info.closed,
+#info-no-border.closed {
   visibility: hidden;
 }
 
