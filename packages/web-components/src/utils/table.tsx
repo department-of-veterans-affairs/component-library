@@ -1,7 +1,5 @@
 /** @jsx React.createElement */
-// import { h } from '@stencil/core';
 import React from 'react';
-// import { JSX } from '../components';
 
 /**
  * This is based off of the React `<Table>` implementation where fields
