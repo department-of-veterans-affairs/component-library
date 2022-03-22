@@ -3,7 +3,8 @@
   display: block;
 }
 
-:host([disable-border='true']) a[aria-expanded='true'] ~ #info {
+:host([disable-border='true']) a[aria-expanded='true'] ~ #info,
+:host([disable-border='']) a[aria-expanded='true'] ~ #info {
   padding-left: 0;
   border-left: 0;
   border-left-color: transparent;
