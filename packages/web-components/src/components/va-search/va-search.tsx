@@ -16,7 +16,6 @@ export class VaSearch {
   submitEvent: EventEmitter;
 
   private handleSubmitEvent(event: KeyboardEvent | MouseEvent) {
-    event.preventDefault();
     this.submitEvent.emit(event);
   }
 
