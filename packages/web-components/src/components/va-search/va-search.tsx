@@ -34,7 +34,7 @@ export class VaSearch {
           }
         >
           <input id="va-search-input" aria-label={label} type="text"></input>
-          <button id="va-search-button" type="submit">
+          <button id="va-search-button" type="submit" aria-label={label}>
             <i aria-hidden="true" class="fa fa-search" />
           </button>
         </form>
