@@ -1,7 +1,7 @@
 {
   "name": "@department-of-veterans-affairs/component-library",
   "description": "VA.gov component library. Includes React and web components.",
-  "version": "8.0.1-1",
+  "version": "8.0.0",
   "license": "MIT",
   "scripts": {
     "build": "webpack"
@@ -32,6 +32,5 @@
     "@department-of-veterans-affairs/formation": "*",
     "react": "^17",
     "react-dom": "*"
-  },
-  "stableVersion": "8.0.0"
+  }
 }
