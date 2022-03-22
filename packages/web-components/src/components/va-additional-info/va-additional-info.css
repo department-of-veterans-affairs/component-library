@@ -3,16 +3,16 @@
   display: block;
 }
 
-a[aria-expanded='true'] ~ #info {
-  padding-left: calc(2rem - 7px);
-  border-left: 7px solid transparent;
-  border-left-color: var(--color-primary-alt-dark);
-}
-
 :host([disable-border='true']) a[aria-expanded='true'] ~ #info {
   padding-left: 0;
   border-left: 0;
   border-left-color: transparent;
+}
+
+a[aria-expanded='true'] ~ #info {
+  padding-left: calc(2rem - 7px);
+  border-left: 7px solid transparent;
+  border-left-color: var(--color-primary-alt-dark);
 }
 
 #info {
