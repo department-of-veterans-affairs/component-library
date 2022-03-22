@@ -18,7 +18,10 @@ interface FieldType {
  * @param {array} data - An array of arrays, where the inner arrays represent row data
  * @param {array} fields - The field/column names
  */
-export function generateTableChildren(data: any[], fields: FieldType[]): any[] {
+export function generateTableChildren(
+  data: object[],
+  fields: FieldType[],
+): JSX.Element[] {
   return [
     /** @ts-ignore */
     <va-table-row slot="headers">
