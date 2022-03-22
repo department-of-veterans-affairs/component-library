@@ -4,10 +4,12 @@ import React from 'react';
 /**
  * This is based off of the React `<Table>` implementation where fields
  * was an array of objects w/ `label`, `value`, and a few other properties.
- * For this we only care about `label`.
+ * `label` is used for display, and value is used to match object properties
+ * for each row.
  */
 interface FieldType {
   label: string;
+  value: string;
 }
 
 /**
@@ -30,8 +32,8 @@ export function generateTableChildren(data: any[], fields: FieldType[]): any[] {
       return (
         /** @ts-ignore */
         <va-table-row>
-          {row.map(cell => (
-            <span>{cell}</span>
+          {fields.map(field => (
+            <span>{row[field.value]}</span>
           ))}
           {/** @ts-ignore */}
         </va-table-row>

@@ -3,11 +3,15 @@ import React from 'react';
 import { generateTableChildren } from './table';
 
 describe('generateTableChildren', () => {
-  const fields = [{ label: 'ID' }, { label: 'Name' }, { label: 'Role' }];
+  const fields = [
+    { label: 'ID', value: 'id' },
+    { label: 'Name', value: 'name' },
+    { label: 'Role', value: 'role' },
+  ];
   const data = [
-    [1, 'Michael', 'Management'],
-    [10, 'Toby', 'HR'],
-    [25, 'Jim', 'Sales'],
+    { id: 1, name: 'Michael', role: 'Management' },
+    { id: 10, name: 'Toby', role: 'HR' },
+    { id: 25, name: 'Jim', role: 'Sales' },
   ];
 
   it('generates <va-table-row> React children>', () => {
