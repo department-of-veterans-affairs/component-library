@@ -1765,7 +1765,6 @@ __metadata:
     prop-types: ^15.6.2
     react: ^16.13.1
     react-dom: ^16.7.0
-    react-focus-lock: ^2.5.1
     react-focus-on: ^3.5.1
     react-html-parser: ^2.0.2
     react-router: 3
@@ -14887,7 +14886,7 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"react-focus-lock@npm:^2.5.1, react-focus-lock@npm:^2.6.0":
+"react-focus-lock@npm:^2.6.0":
   version: 2.8.1
   resolution: "react-focus-lock@npm:2.8.1"
   dependencies:
