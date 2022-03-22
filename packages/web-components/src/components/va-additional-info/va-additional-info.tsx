@@ -104,10 +104,7 @@ export class VaAdditionalInfo {
             <i class="fa-angle-down" role="presentation" />
           </span>
         </a>
-        <div
-          id={this.disableBorder ? 'info-no-border' : 'info'}
-          class={this.open ? 'open' : 'closed'}
-        >
+        <div id="info" class={this.open ? 'open' : 'closed'}>
           <slot></slot>
         </div>
       </Host>
