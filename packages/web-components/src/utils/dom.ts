@@ -44,27 +44,24 @@ function partition(
 ): number {
   const pivot = selector(rows[Math.floor((lo + hi) / 2)]);
 
-  let i = lo;
-  let j = hi;
-
-  while (i <= j) {
-    // By default, selector(rows[i]) < pivot
-    while (comparator(selector(rows[i]), pivot)) {
-      i++;
+  while (lo <= hi) {
+    // By default, selector(rows[lo]) < pivot
+    while (comparator(selector(rows[lo]), pivot)) {
+      lo++;
     }
-    // By default, selector(rows[j]) > pivot
-    while (comparator(pivot, selector(rows[j]))) {
-      j--;
+    // By default, selector(rows[hi]) > pivot
+    while (comparator(pivot, selector(rows[hi]))) {
+      hi--;
     }
 
-    if (i <= j) {
-      swapChildren(rows, i, j);
-      i++;
-      j--;
+    if (lo <= hi) {
+      swapChildren(rows, lo, hi);
+      lo++;
+      hi--;
     }
   }
 
-  return i;
+  return lo;
 }
 
 /**
