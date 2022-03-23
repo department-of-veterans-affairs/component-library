@@ -1,5 +1,4 @@
 import React from 'react';
-import { VaSearch } from '@department-of-veterans-affairs/web-components/react-bindings';
 import { getWebComponentDocs, propStructure } from './wc-helpers';
 import { generateEventsDescription } from './events';
 
@@ -14,17 +13,18 @@ export default {
       },
     },
   },
+  argTypes: {
+    method: {
+      control: {
+        type: 'select',
+        options: ['GET', 'POST', 'dialog'],
+      },
+    },
+  },
 };
 
-VaSearch.displayName = 'VaSearch';
-
-const Template = ({ action, label, method, submitEvent }) => (
-  <VaSearch
-    action={action}
-    label={label}
-    method={method}
-    onSubmitEvent={submitEvent}
-  />
+const Template = ({ action, label, method, submit }) => (
+  <va-search action={action} label={label} method={method} onsubmit={submit} />
 );
 
 const defaultArgs = {
@@ -36,6 +36,11 @@ const defaultArgs = {
 export const Default = Template.bind({});
 Default.args = {
   ...defaultArgs,
-  submitEvent: e => console.log(e),
+  method: 'GET',
+  // not working
+  submit: e => {
+    e.preventDefault();
+    console.log(e);
+  },
 };
 Default.argTypes = propStructure(searchDocs);
