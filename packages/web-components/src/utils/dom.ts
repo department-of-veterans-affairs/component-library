@@ -1,13 +1,21 @@
 /**
  * Swap the DOM elements at each index
+ *
+ * @param {NodeList} rows - A live NodeList with elements to be swapped
+ * @param {number} firstIndex - The index of the first item to be swapped
+ * @param {number} secondIndex - The index of the second item to be swapped
  */
-function swapChildren(rows: NodeList, i: number, j: number): void {
+function swapChildren(
+  rows: NodeList,
+  firstIndex: number,
+  secondIndex: number,
+): void {
   const parent = rows[0].parentNode;
-  const one = rows[j];
-  const two = rows[i];
-  const temp = one.nextSibling;
-  parent.insertBefore(one, two);
-  parent.insertBefore(two, temp);
+  const itemOne = rows[firstIndex];
+  const itemTwo = rows[secondIndex];
+  const temp = itemTwo.nextSibling;
+  parent.insertBefore(itemTwo, itemOne);
+  parent.insertBefore(itemOne, temp);
 }
 
 /**
