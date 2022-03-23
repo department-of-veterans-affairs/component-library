@@ -84,10 +84,10 @@ export function quicksort(
 ): void {
   if (lo >= hi || lo < 0) return;
 
-  const p = partition(rows, lo, hi, selector, comparator);
+  const pivot = partition(rows, lo, hi, selector, comparator);
 
-  quicksort(rows, lo, p - 1, selector, comparator); // Left side
-  quicksort(rows, p, hi, selector, comparator); // Right side
+  quicksort(rows, lo, pivot - 1, selector, comparator); // Left side
+  quicksort(rows, pivot, hi, selector, comparator); // Right side
 }
 
 /**
