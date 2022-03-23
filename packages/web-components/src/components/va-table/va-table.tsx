@@ -2,7 +2,7 @@ import { Component, Element, Host, Prop, State, h } from '@stencil/core';
 import { isNumeric } from '../../utils/utils';
 import ascendingIcon from '../../assets/sort-arrow-up.svg?format=text';
 import descendingIcon from '../../assets/sort-arrow-down.svg?format=text';
-import { quicksort, reverseQuicksort } from '../../utils/dom';
+import { quicksort, reverseQuicksort } from '../../utils/dom-sort';
 
 /**
  * This component expects `<va-table-row>` elements as children.

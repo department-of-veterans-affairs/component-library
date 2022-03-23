@@ -1,4 +1,4 @@
-import { quicksort, reverseQuicksort } from './dom';
+import { quicksort, reverseQuicksort } from './dom-sort';
 
 describe('quicksort', () => {
   it('sorts DOM elements by their value', () => {
