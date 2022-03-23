@@ -132,6 +132,18 @@ describe('va-telephone', () => {
     expect(link.innerText).toEqual('711');
   });
 
+  it('handles a vanity number as a contact prop', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-telephone contact="8772228387" vanity="VETS"></va-telephone>');
+
+    const link = await page.find('va-telephone >>> a');
+    expect(link.getAttribute('aria-label')).toEqual(
+      '8 7 7. 2 2 2. 8 3 8 7.',
+    );
+    expect(link.getAttribute('href')).toEqual('tel:+18772228387');
+    expect(link.innerText).toEqual('877-222-VETS (8387)');
+  });
+
   it('fires an analytics event when clicked', async () => {
     const page = await newE2EPage();
     await page.setContent(

@@ -192,6 +192,37 @@ export namespace Components {
          */
         "setFocus": boolean;
     }
+    interface VaModal {
+        /**
+          * Click outside modal will trigger closeEvent
+         */
+        "clickToClose"?: boolean;
+        /**
+          * If true, analytics event won't be fired
+         */
+        "disableAnalytics"?: boolean;
+        /**
+          * Selector to explicitly specify which element should receive focus when the modal is open, if the initially focused element is not the first focusable element in the document
+         */
+        "initialFocusSelector"?: string;
+        /**
+          * Title/header text for the modal
+         */
+        "modalTitle"?: string;
+        /**
+          * Primary button text
+         */
+        "primaryButtonText"?: string;
+        /**
+          * Secondary button text
+         */
+        "secondaryButtonText"?: string;
+        "status"?: 'continue' | 'error' | 'info' | 'success' | 'warning';
+        /**
+          * If the modal is visible or not
+         */
+        "visible": boolean;
+    }
     interface VaOnThisPage {
     }
     interface VaPagination {
@@ -235,6 +266,20 @@ export namespace Components {
           * Percent of progress made. 0 to 100.
          */
         "percent": number;
+    }
+    interface VaPromoBanner {
+        /**
+          * Analytics tracking function(s) will not be called
+         */
+        "disableAnalytics": boolean;
+        /**
+          * `href` attribute for the `<a>` tag.
+         */
+        "href": string;
+        /**
+          * Controls which icon gets used. Options are 'announcement', 'news', or 'email-signup'.
+         */
+        "type": 'announcement' | 'news' | 'email-signup';
     }
     interface VaRadio {
         /**
@@ -353,6 +398,10 @@ export namespace Components {
           * Indicates if the phone number can be clicked or not
          */
         "notClickable": boolean;
+        /**
+          * Optional vanity phone number. Replaces the last 4 digits with the vanity text input
+         */
+        "vanity": string;
     }
     interface VaTextInput {
         /**
@@ -465,6 +514,12 @@ declare global {
         prototype: HTMLVaLoadingIndicatorElement;
         new (): HTMLVaLoadingIndicatorElement;
     };
+    interface HTMLVaModalElement extends Components.VaModal, HTMLStencilElement {
+    }
+    var HTMLVaModalElement: {
+        prototype: HTMLVaModalElement;
+        new (): HTMLVaModalElement;
+    };
     interface HTMLVaOnThisPageElement extends Components.VaOnThisPage, HTMLStencilElement {
     }
     var HTMLVaOnThisPageElement: {
@@ -488,6 +543,12 @@ declare global {
     var HTMLVaProgressBarElement: {
         prototype: HTMLVaProgressBarElement;
         new (): HTMLVaProgressBarElement;
+    };
+    interface HTMLVaPromoBannerElement extends Components.VaPromoBanner, HTMLStencilElement {
+    }
+    var HTMLVaPromoBannerElement: {
+        prototype: HTMLVaPromoBannerElement;
+        new (): HTMLVaPromoBannerElement;
     };
     interface HTMLVaRadioElement extends Components.VaRadio, HTMLStencilElement {
     }
@@ -549,10 +610,12 @@ declare global {
         "va-checkbox-group": HTMLVaCheckboxGroupElement;
         "va-featured-content": HTMLVaFeaturedContentElement;
         "va-loading-indicator": HTMLVaLoadingIndicatorElement;
+        "va-modal": HTMLVaModalElement;
         "va-on-this-page": HTMLVaOnThisPageElement;
         "va-pagination": HTMLVaPaginationElement;
         "va-process-list": HTMLVaProcessListElement;
         "va-progress-bar": HTMLVaProgressBarElement;
+        "va-promo-banner": HTMLVaPromoBannerElement;
         "va-radio": HTMLVaRadioElement;
         "va-radio-option": HTMLVaRadioOptionElement;
         "va-segmented-progress-bar": HTMLVaSegmentedProgressBarElement;
@@ -802,6 +865,53 @@ declare namespace LocalJSX {
          */
         "setFocus"?: boolean;
     }
+    interface VaModal {
+        /**
+          * Click outside modal will trigger closeEvent
+         */
+        "clickToClose"?: boolean;
+        /**
+          * If true, analytics event won't be fired
+         */
+        "disableAnalytics"?: boolean;
+        /**
+          * Selector to explicitly specify which element should receive focus when the modal is open, if the initially focused element is not the first focusable element in the document
+         */
+        "initialFocusSelector"?: string;
+        /**
+          * Title/header text for the modal
+         */
+        "modalTitle"?: string;
+        /**
+          * Fires when modal is closed.
+         */
+        "onCloseEvent"?: (event: CustomEvent<any>) => void;
+        /**
+          * The event used to track usage of the component. Fires when a a page is selected if enable-analytics is true.
+         */
+        "onComponent-library-analytics"?: (event: CustomEvent<any>) => void;
+        /**
+          * Fires when primary button is clicked.
+         */
+        "onPrimaryButtonClick"?: (event: CustomEvent<any>) => void;
+        /**
+          * Fires when secondary button is clicked.
+         */
+        "onSecondaryButtonClick"?: (event: CustomEvent<any>) => void;
+        /**
+          * Primary button text
+         */
+        "primaryButtonText"?: string;
+        /**
+          * Secondary button text
+         */
+        "secondaryButtonText"?: string;
+        "status"?: 'continue' | 'error' | 'info' | 'success' | 'warning';
+        /**
+          * If the modal is visible or not
+         */
+        "visible"?: boolean;
+    }
     interface VaOnThisPage {
     }
     interface VaPagination {
@@ -857,6 +967,28 @@ declare namespace LocalJSX {
           * Percent of progress made. 0 to 100.
          */
         "percent"?: number;
+    }
+    interface VaPromoBanner {
+        /**
+          * Analytics tracking function(s) will not be called
+         */
+        "disableAnalytics"?: boolean;
+        /**
+          * `href` attribute for the `<a>` tag.
+         */
+        "href"?: string;
+        /**
+          * Fires when the component is closed by clicking on the close icon.
+         */
+        "onCloseEvent"?: (event: CustomEvent<any>) => void;
+        /**
+          * The event used to track usage of the component. This is emitted when an anchor link or the dismiss icon is clicked and disableAnalytics is not true.
+         */
+        "onComponent-library-analytics"?: (event: CustomEvent<any>) => void;
+        /**
+          * Controls which icon gets used. Options are 'announcement', 'news', or 'email-signup'.
+         */
+        "type"?: 'announcement' | 'news' | 'email-signup';
     }
     interface VaRadio {
         /**
@@ -1007,6 +1139,10 @@ declare namespace LocalJSX {
           * The event used to track usage of the component. This is emitted when clicking on an anchor link.
          */
         "onComponent-library-analytics"?: (event: CustomEvent<any>) => void;
+        /**
+          * Optional vanity phone number. Replaces the last 4 digits with the vanity text input
+         */
+        "vanity"?: string;
     }
     interface VaTextInput {
         /**
@@ -1075,10 +1211,12 @@ declare namespace LocalJSX {
         "va-checkbox-group": VaCheckboxGroup;
         "va-featured-content": VaFeaturedContent;
         "va-loading-indicator": VaLoadingIndicator;
+        "va-modal": VaModal;
         "va-on-this-page": VaOnThisPage;
         "va-pagination": VaPagination;
         "va-process-list": VaProcessList;
         "va-progress-bar": VaProgressBar;
+        "va-promo-banner": VaPromoBanner;
         "va-radio": VaRadio;
         "va-radio-option": VaRadioOption;
         "va-segmented-progress-bar": VaSegmentedProgressBar;
@@ -1104,10 +1242,12 @@ declare module "@stencil/core" {
             "va-checkbox-group": LocalJSX.VaCheckboxGroup & JSXBase.HTMLAttributes<HTMLVaCheckboxGroupElement>;
             "va-featured-content": LocalJSX.VaFeaturedContent & JSXBase.HTMLAttributes<HTMLVaFeaturedContentElement>;
             "va-loading-indicator": LocalJSX.VaLoadingIndicator & JSXBase.HTMLAttributes<HTMLVaLoadingIndicatorElement>;
+            "va-modal": LocalJSX.VaModal & JSXBase.HTMLAttributes<HTMLVaModalElement>;
             "va-on-this-page": LocalJSX.VaOnThisPage & JSXBase.HTMLAttributes<HTMLVaOnThisPageElement>;
             "va-pagination": LocalJSX.VaPagination & JSXBase.HTMLAttributes<HTMLVaPaginationElement>;
             "va-process-list": LocalJSX.VaProcessList & JSXBase.HTMLAttributes<HTMLVaProcessListElement>;
             "va-progress-bar": LocalJSX.VaProgressBar & JSXBase.HTMLAttributes<HTMLVaProgressBarElement>;
+            "va-promo-banner": LocalJSX.VaPromoBanner & JSXBase.HTMLAttributes<HTMLVaPromoBannerElement>;
             "va-radio": LocalJSX.VaRadio & JSXBase.HTMLAttributes<HTMLVaRadioElement>;
             "va-radio-option": LocalJSX.VaRadioOption & JSXBase.HTMLAttributes<HTMLVaRadioOptionElement>;
             "va-segmented-progress-bar": LocalJSX.VaSegmentedProgressBar & JSXBase.HTMLAttributes<HTMLVaSegmentedProgressBarElement>;

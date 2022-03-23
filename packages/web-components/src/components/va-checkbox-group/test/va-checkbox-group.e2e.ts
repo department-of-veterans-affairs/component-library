@@ -42,6 +42,20 @@ describe('va-checkbox-group', () => {
     `);
   });
 
+  it('passes an axe check in error state', async () => {
+    const page = await newE2EPage();
+    await page.setContent(
+      `
+      <va-checkbox-group error="There has been an error" label="This is a label">
+        <va-checkbox label="Option one" name="example" value="1"/>
+        <va-checkbox label="Option two" name="example" value="2"/>
+      </va-checkbox-group>
+    `,
+    );
+
+    await axeCheck(page);
+  });
+
   it('renders a required span based on prop', async () => {
     const page = await newE2EPage();
     await page.setContent('<va-checkbox-group required></va-checkbox-group>');

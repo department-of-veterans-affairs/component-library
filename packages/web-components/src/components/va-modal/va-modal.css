@@ -1,0 +1,210 @@
+@import '../../mixins/buttons.css';
+
+:host {
+  display: block;
+}
+
+.va-modal {
+  background: rgba(50, 58, 69, 0.8);
+  content: ' ';
+  display: block;
+  height: 100%;
+  left: 0;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 6;
+}
+
+.va-modal-inner {
+  background: var(--color-white);
+  box-sizing: border-box;
+  margin: auto;
+  max-width: 40rem;
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 100%;
+  cursor: auto;
+}
+
+.va-modal-close {
+  background-color: transparent;
+  color: var(--color-primary);
+  font-size: 2.25rem;
+  padding: 0;
+  position: absolute;
+  margin: 1.6rem;
+  right: 0;
+  top: 0;
+  width: auto;
+  z-index: 9;
+  white-space: nowrap;
+}
+
+.va-modal-close:hover {
+  color: var(--color-primary-darker);
+}
+
+.va-modal-body {
+  margin-right: 2rem;
+  overflow-wrap: break-word;
+  padding: 2rem;
+  word-break: break-word;
+  word-wrap: break-word;
+}
+
+h1 {
+  font-family: var(--font-serif);
+  font-size: 2rem;
+  line-height: 1.3;
+  margin-bottom: 0.5rem;
+  margin-top: 1.5rem;
+}
+
+.va-modal-title {
+  margin: 0 0 1.6rem 0;
+}
+
+i::before {
+  -webkit-font-smoothing: antialiased;
+  content: '\F057'; /* fa-times-circle*/
+  display: inline-block;
+  font-family: 'Font Awesome 5 Free';
+  font-style: normal;
+  font-variant: normal;
+  font-weight: 900;
+  line-height: 1;
+  text-rendering: auto;
+}
+
+.alert-actions button {
+  /* -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased; */
+  background-color: var(--color-primary);
+  margin-top: 0.8rem;
+  margin-right: 0.8rem;
+  margin-bottom: 0.8rem;
+  white-space: nowrap;
+}
+
+.alert-actions .button-secondary {
+  background-color: transparent;
+  box-shadow: inset 0 0 0 2px var(--color-primary);
+  color: var(--color-primary);
+}
+
+.alert-actions button:hover,
+.alert-actions button:focus {
+  background-color: var(--color-primary-darker);
+}
+.alert-actions .button-secondary:hover,
+.alert-actions .button-secondary:focus {
+  background-color: var(--color-gray-cool-light);
+}
+
+.va-modal-alert {
+  border-left-style: solid;
+  border-left-width: 10px;
+  display: table;
+  max-width: 60rem;
+  padding: 3.2rem 6.4rem 3.2rem 2.4rem;
+}
+
+.va-modal-alert::before {
+  display: block;
+  width: auto;
+  background: none;
+  font-family: 'Font Awesome 5 Free';
+  font-size: 2rem;
+  margin-right: 1.6rem;
+  position: static;
+  font-weight: 900;
+  height: 100%;
+  left: 0;
+  top: 0;
+}
+
+.va-modal-alert .va-modal-alert-body {
+  display: table-cell;
+  padding-left: 0;
+  padding-right: 0;
+  width: 100%;
+  vertical-align: middle;
+}
+
+.va-modal-alert-title {
+  margin: 0 0 2rem 0;
+}
+
+:host([status='continue']) .va-modal-inner {
+  border-left-color: var(--color-green);
+}
+
+:host([status='continue']) .va-modal-inner::before {
+  color: var(--color-green);
+  content: '\F023'; /* fa-lock */
+}
+
+:host([status='error']) .va-modal-inner {
+  border-left-color: var(--color-secondary-dark);
+}
+
+:host([status='error']) .va-modal-inner::before {
+  color: var(--color-secondary-dark);
+  content: '\F06A'; /* fa-circle-exclamation */
+}
+
+:host([status='info']) .va-modal-inner {
+  border-left-color: var(--color-primary-alt-dark);
+}
+
+:host([status='info']) .va-modal-inner::before {
+  content: '\F05A'; /* fa-circle-info */
+}
+
+:host([status='success']) .va-modal-inner {
+  border-left-color: var(--color-green);
+}
+
+:host([status='success']) .va-modal-inner::before {
+  color: var(--color-green);
+  content: '\F00C'; /* fa-check */
+}
+
+:host([status='warning']) .va-modal-inner {
+  border-left-color: var(--color-gold);
+}
+
+:host([status='warning']) .va-modal-inner::before {
+  content: '\F071'; /* fa-triangle-exclamation */
+}
+
+.va-modal-alert .alert-actions {
+  margin-top: 2.4rem;
+}
+
+.va-modal-alert .alert-actions button {
+  margin: 0;
+}
+
+.va-modal-alert .alert-actions button + button {
+  margin-left: 2rem;
+}
+
+@media (max-width: 320px) {
+  .alert-actions button {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 481px) {
+  .va-modal {
+    overflow-y: scroll;
+  }
+
+  .va-modal-inner {
+    top: 0;
+    transform: none;
+  }
+}

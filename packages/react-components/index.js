@@ -26,7 +26,6 @@ import PrivacyAgreement from './PrivacyAgreement';
 import ProgressButton from './ProgressButton';
 import PromoBanner, { PROMO_BANNER_TYPES } from './PromoBanner';
 import RadioButtons from './RadioButtons';
-import SearchMenu from './SearchMenu';
 import Select from './Select';
 import SystemDownView from './SystemDownView';
 import Table from './Table';
@@ -70,7 +69,6 @@ export {
   PromoBanner,
   PROMO_BANNER_TYPES,
   RadioButtons,
-  SearchMenu,
   Select,
   SystemDownView,
   Table,

@@ -1,5 +1,6 @@
 @import 'variables.css';
 @import '../components/va-breadcrumbs/va-breadcrumbs-slot.css';
+@import '../components/va-modal/va-modal-slot.css';
 @import '../components/va-table/va-table-slot.css';
 
 va-process-list li :is(h2, h3, h4, h5) {

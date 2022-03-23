@@ -9,6 +9,13 @@ This is a monorepo containing two main packages:
 
 The `core` package is for bundling the two main packages into one for publishing. The `storybook` package is for the combined story files from each `*-components` package.
 
+## Contributing
+
+### Branch naming
+This repo uses [`Chromatic`](https://www.chromatic.com/) to streamline reviews by publishing your changes online. A link containing your changes is automatically added to pull requests to aid others when reviewing your code. In order for this link to work, please follow these rules when naming your branch:
+- Your branch must contain only lowercase letters, numbers and dashes
+- Your branch must not exceed 37 characters
+
 ## Publishing
 
 ### Updating the version
@@ -16,6 +23,8 @@ The `core` package is for bundling the two main packages into one for publishing
 To publish changes from the `react-components` subpackage, make sure the version number in `packages/react-components/package.json` _and_ the version number in `packages/core/package.json` have been updated to be one ahead of the published versions.
 
 To publish changes from the `web-components` subpackage, make sure the version number in `packages/web-components/package.json` _and_ the version number in `packages/core/package.json` have been updated to be one ahead of the published versions.
+
+[`yarn version`](https://yarnpkg.com/cli/version) is available to use to make changes in the CLI. To change the version of the package you are working on run one of the following commands: `yarn version major`, `yarn version minor`, or `yarn version patch`. For guidance on which command to use please see below.
 
 ### How to choose a version number
 
