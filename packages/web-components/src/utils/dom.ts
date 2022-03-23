@@ -10,6 +10,23 @@ function swapChildren(rows: NodeList, i: number, j: number): void {
   parent.insertBefore(two, temp);
 }
 
+/**
+ * A helper for quicksort. This function:
+ *  1. Chooses a pivot in the middle of the list
+ *  2. Moves the lower index higher until an item is greater than the pivot
+ *  3. Moves the higher index lower until an item is less than the pivot
+ *  4. Swaps those two items
+ *  5. Continues until the lower and the higher indices have met/crossed
+ * At the end of the funciton, all items from indices `lo` to the pivot index
+ * will be smaller than the pivot item, and all items from the pivot index to
+ * `hi` will be greater than the pivot position
+ *
+ * @param {NodeList} rows - A live NodeList of elements to sort
+ * @param {number} lo - The lower bound index to use for the partition
+ * @param {number} hi - The upper bound index to use for the partition
+ * @param {Function} selector - An optional selector to use for selecting values for comparison
+ * @param {Function} comparator - An optional comparator to use for comparing elements
+ */
 function partition(
   rows: NodeList,
   lo: number,
@@ -47,7 +64,8 @@ function partition(
  * @param {NodeList} rows - A live NodeList of elements to sort
  * @param {number} lo - The lower bound index to use for the partition
  * @param {number} hi - The upper bound index to use for the partition
- * @param {Function} selector - An optional selector to use for comparing elements
+ * @param {Function} selector - An optional selector to use for selecting values for comparison
+ * @param {Function} comparator - An optional comparator to use for comparing elements
  */
 export function quicksort(
   rows: NodeList,
