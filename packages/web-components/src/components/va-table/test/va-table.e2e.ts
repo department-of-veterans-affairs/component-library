@@ -166,6 +166,7 @@ describe('va-table', () => {
       // This describes the current state
       expect(sortIcon.getAttribute('aria-label')).toEqual('ascending');
     });
+  });
 
   // TODO: add tests for the following (have been unable to get puppeteer to recognize DOM mutations):
   // - initial descending sort on load
