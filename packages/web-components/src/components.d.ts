@@ -322,8 +322,17 @@ export namespace Components {
         "value": string;
     }
     interface VaSearch {
+        /**
+          * Specifies where to send the form-data when a form is submitted
+         */
         "action": string;
+        /**
+          * Adds an aria-label attribute to the input and button
+         */
         "label": string;
+        /**
+          * Specifies the HTTP method to use when sending form-data
+         */
         "method"?: 'GET' | 'POST' | 'dialog';
     }
     interface VaSegmentedProgressBar {
@@ -1047,10 +1056,18 @@ declare namespace LocalJSX {
         "value"?: string;
     }
     interface VaSearch {
+        /**
+          * Specifies where to send the form-data when a form is submitted
+         */
         "action"?: string;
+        /**
+          * Adds an aria-label attribute to the input and button
+         */
         "label"?: string;
+        /**
+          * Specifies the HTTP method to use when sending form-data
+         */
         "method"?: 'GET' | 'POST' | 'dialog';
-        "onSubmitEvent"?: (event: CustomEvent<any>) => void;
     }
     interface VaSegmentedProgressBar {
         /**
