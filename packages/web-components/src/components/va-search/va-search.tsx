@@ -7,7 +7,8 @@ import { Component, Host, h, Prop } from '@stencil/core';
 })
 export class VaSearch {
   /**
-   * Specifies where to send the form-data when a form is submitted
+   * Specifies where to send the form-data when a form is submitted.
+   * Ignored when method="dialog" is set.
    */
   @Prop() action: string;
 
@@ -17,7 +18,10 @@ export class VaSearch {
   @Prop() label: string = 'Search';
 
   /**
-   * Specifies the HTTP method to use when sending form-data
+   * Specifies the HTTP method to use when sending form-data.
+   * GET: form data appended to the action URL with a ? separator.
+   * POST: form data sent as the request body.
+   * dialog: Closes the dialog and throws a submit event on submission without submitting data or clearing the form.
    */
   @Prop() method?: 'GET' | 'POST' | 'dialog';
 

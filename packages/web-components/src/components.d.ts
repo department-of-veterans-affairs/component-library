@@ -323,7 +323,7 @@ export namespace Components {
     }
     interface VaSearch {
         /**
-          * Specifies where to send the form-data when a form is submitted
+          * Specifies where to send the form-data when a form is submitted. Ignored when method="dialog" is set.
          */
         "action": string;
         /**
@@ -331,7 +331,7 @@ export namespace Components {
          */
         "label": string;
         /**
-          * Specifies the HTTP method to use when sending form-data
+          * Specifies the HTTP method to use when sending form-data. GET: form data appended to the action URL with a ? separator. POST: form data sent as the request body. dialog: Closes the dialog and throws a submit event on submission without submitting data or clearing the form.
          */
         "method"?: 'GET' | 'POST' | 'dialog';
     }
@@ -1057,7 +1057,7 @@ declare namespace LocalJSX {
     }
     interface VaSearch {
         /**
-          * Specifies where to send the form-data when a form is submitted
+          * Specifies where to send the form-data when a form is submitted. Ignored when method="dialog" is set.
          */
         "action"?: string;
         /**
@@ -1065,7 +1065,7 @@ declare namespace LocalJSX {
          */
         "label"?: string;
         /**
-          * Specifies the HTTP method to use when sending form-data
+          * Specifies the HTTP method to use when sending form-data. GET: form data appended to the action URL with a ? separator. POST: form data sent as the request body. dialog: Closes the dialog and throws a submit event on submission without submitting data or clearing the form.
          */
         "method"?: 'GET' | 'POST' | 'dialog';
     }
