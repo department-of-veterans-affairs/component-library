@@ -31,6 +31,11 @@ export class VaAdditionalInfo {
   @Prop() disableAnalytics: boolean;
 
   /**
+   * If true, left blue border and padding is removed.
+   */
+  @Prop() disableBorder: boolean;
+
+  /**
    * The event used to track usage of the component. This is emitted when an
    * anchor link is clicked and disableAnalytics is not true.
    */
@@ -99,7 +104,6 @@ export class VaAdditionalInfo {
             <i class="fa-angle-down" role="presentation" />
           </span>
         </a>
-
         <div id="info" class={this.open ? 'open' : 'closed'}>
           <slot></slot>
         </div>

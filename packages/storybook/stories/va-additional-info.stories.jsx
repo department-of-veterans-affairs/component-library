@@ -14,14 +14,24 @@ export default {
 };
 
 const defaultArgs = {
-  trigger: 'Additional Information',
+  'trigger': 'Additional Information',
+  'disable-border': false,
+  'disable-analytics': false,
 };
 
-const Template = ({ trigger }) => {
+const Template = ({
+  trigger,
+  'disable-border': disableBorder,
+  'disable-analytics': disableAnalytics,
+}) => {
   return (
     <>
       <p>Surrounding content.</p>
-      <va-additional-info trigger={trigger}>
+      <va-additional-info
+        trigger={trigger}
+        disable-analytics={disableAnalytics}
+        disable-border={disableBorder}
+      >
         <div>Here are some popular pets to consider</div>
         <ul>
           <li>Dogs</li>
@@ -38,3 +48,9 @@ const Template = ({ trigger }) => {
 export const Default = Template.bind({});
 Default.args = { ...defaultArgs };
 Default.argTypes = propStructure(additionalInfoDocs);
+
+export const NoBorder = Template.bind({});
+NoBorder.args = {
+  ...defaultArgs,
+  'disable-border': true,
+};
