@@ -1,6 +1,6 @@
 /** @jsx React.createElement */
 import React from 'react';
-import { generateTableChildren } from './table';
+import { generateTableChildren } from './table-migration';
 
 describe('generateTableChildren', () => {
   const fields = [
