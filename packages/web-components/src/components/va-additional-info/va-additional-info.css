@@ -3,14 +3,9 @@
   display: block;
 }
 
-:host([disable-border='true']) a[aria-expanded='true'] ~ #info,
-:host([disable-border='']) a[aria-expanded='true'] ~ #info {
-  padding-left: 0;
-  border-left: 0;
-  border-left-color: transparent;
-}
-
-a[aria-expanded='true'] ~ #info {
+/* Add left side blue border if disable border prop disabled or not present */
+:host(:not([disable-border])) a[aria-expanded='true'] ~ #info,
+:host([disable-border='false']) a[aria-expanded='true'] ~ #info {
   padding-left: calc(2rem - 7px);
   border-left: 7px solid transparent;
   border-left-color: var(--color-primary-alt-dark);
