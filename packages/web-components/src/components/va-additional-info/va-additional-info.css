@@ -2,7 +2,10 @@
 :host {
   display: block;
 }
-a[aria-expanded='true'] ~ #info {
+
+/* Add left side blue border if disable border prop disabled or not present */
+:host(:not([disable-border])) a[aria-expanded='true'] ~ #info,
+:host([disable-border='false']) a[aria-expanded='true'] ~ #info {
   padding-left: calc(2rem - 7px);
   border-left: 7px solid transparent;
   border-left-color: var(--color-primary-alt-dark);
@@ -47,6 +50,7 @@ i {
   font-weight: 900;
   line-height: 1;
 }
+
 i.fa-angle-down {
   display: inline-block;
   color: var(--color-primary-alt-dark);
@@ -55,6 +59,7 @@ i.fa-angle-down {
   transform: rotate(0deg);
   transition: transform 0.15s linear;
 }
+
 i.fa-angle-down::before {
   content: '\F107'; /* fa-angle-down*/
 }
