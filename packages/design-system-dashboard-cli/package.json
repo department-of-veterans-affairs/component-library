@@ -1,0 +1,35 @@
+{
+  "name": "dst-dashboard",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "forms": "node src/find-form-apps",
+    "forms-library-usage": "node src/non-form-app-uses",
+    "report": "node src/find-ds-components --sql",
+    "report:csv": "node src/find-ds-components --csv",
+    "report:forms": "node src/find-form-apps --csv",
+    "search": "node src/find-ds-components",
+    "prepare": "husky install"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "chalk": "^4.1.0",
+    "command-line-args": "^5.1.1",
+    "fast-memoize": "^2.5.2",
+    "glob": "^7.1.6",
+    "jsonexport": "^3.2.0",
+    "lodash": "^4.17.21"
+  },
+  "devDependencies": {
+    "eslint": "^7.32.0",
+    "husky": ">=6",
+    "lint-staged": ">=10",
+    "prettier": "^2.4.1"
+  },
+  "lint-staged": {
+    "*.js": "eslint --cache --fix",
+    "*.{js,css,md}": "prettier --write"
+  }
+}
