@@ -6,7 +6,7 @@
  * @param {number} secondIndex - The index of the second item to be swapped
  */
 function swapChildren(
-  rows: NodeList,
+  rows: HTMLCollection | NodeList,
   firstIndex: number,
   secondIndex: number,
 ): void {
@@ -36,7 +36,7 @@ function swapChildren(
  * @param {Function} comparator - An optional comparator to use for comparing elements
  */
 function partition(
-  rows: NodeList,
+  rows: HTMLCollection | NodeList,
   low: number,
   high: number,
   selector: Function,
@@ -73,7 +73,7 @@ function partition(
  * @param {Function} comparator - An optional comparator to use for comparing elements
  */
 export function quicksort(
-  rows: NodeList,
+  rows: HTMLCollection | NodeList,
   low: number,
   high: number,
   selector = row => row.textContent,
@@ -92,7 +92,7 @@ export function quicksort(
  * instead of the default less than
  */
 export function reverseQuicksort(
-  rows: NodeList,
+  rows: HTMLCollection | NodeList,
   low: number,
   high: number,
   selector = row => row.textContent,

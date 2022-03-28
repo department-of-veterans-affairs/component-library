@@ -117,12 +117,7 @@ export class VaTable {
     const cellSelector = row => row.children[this.sortColumn].textContent;
     // Starting at index 1 to skip the header row
     const sortingFunc = this.sortAscending ? quicksort : reverseQuicksort;
-    sortingFunc(
-      this.el.childNodes,
-      1,
-      this.el.childNodes.length - 1,
-      cellSelector,
-    );
+    sortingFunc(this.el.children, 1, this.el.children.length - 1, cellSelector);
     this.sortAscending = !this.sortAscending;
   }
 
