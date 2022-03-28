@@ -28,7 +28,6 @@ import PromoBanner, {
   PROMO_BANNER_TYPES,
 } from './components/PromoBanner/PromoBanner';
 import RadioButtons from './components/RadioButtons/RadioButtons';
-import SearchMenu from './components/SearchMenu/SearchMenu';
 import Select from './components/Select/Select';
 import SystemDownView from './components/SystemDownView/SystemDownView';
 import Table from './components/Table/Table';
@@ -72,7 +71,6 @@ export {
   PromoBanner,
   PROMO_BANNER_TYPES,
   RadioButtons,
-  SearchMenu,
   Select,
   SystemDownView,
   Table,
