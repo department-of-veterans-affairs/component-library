@@ -5,26 +5,20 @@ describe('va-text-input', () => {
   it('renders', async () => {
     const page = await newE2EPage();
 
-    await page.setContent('<va-text-input />');
+    await page.setContent('<va-text-input label="Hello, world" />');
     const element = await page.find('va-text-input');
 
     expect(element).toEqualHtml(`
-      <va-text-input class="hydrated">
+      <va-text-input class="hydrated" label="Hello, world">
         <mock:shadow-root>
           <label for="inputField">
+            Hello, world
             <slot></slot>
           </label>
           <input id="inputField" type="text" />
         </mock:shadow-root>
       </va-text-input>
     `);
-  });
-
-  it('renders a label', async () => {
-    const page = await newE2EPage();
-    await page.setContent('<va-text-input label="Hello, world" />');
-    const element = await page.find('va-text-input >>> label');
-    expect(element).not.toBeNull();
   });
 
   it('renders using slot as label', async () => {
