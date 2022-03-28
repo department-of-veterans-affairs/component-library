@@ -48,6 +48,10 @@ export namespace Components {
          */
         "disableAnalytics": boolean;
         /**
+          * If true, left blue border and padding is removed.
+         */
+        "disableBorder": boolean;
+        /**
           * The text to trigger the expansion
          */
         "trigger": string;
@@ -676,6 +680,10 @@ declare namespace LocalJSX {
           * If true, doesn't fire the CustomEvent which can be used for analytics tracking.
          */
         "disableAnalytics"?: boolean;
+        /**
+          * If true, left blue border and padding is removed.
+         */
+        "disableBorder"?: boolean;
         /**
           * The event used to track usage of the component. This is emitted when an anchor link is clicked and disableAnalytics is not true.
          */
