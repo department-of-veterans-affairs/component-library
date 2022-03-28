@@ -2,7 +2,7 @@ import { newE2EPage } from '@stencil/core/testing';
 import { axeCheck } from '../../../testing/test-helpers';
 
 describe('va-text-input', () => {
-  it('renders without a label', async () => {
+  it('renders', async () => {
     const page = await newE2EPage();
 
     await page.setContent('<va-text-input />');
@@ -25,6 +25,36 @@ describe('va-text-input', () => {
     await page.setContent('<va-text-input label="Hello, world" />');
     const element = await page.find('va-text-input >>> label');
     expect(element).not.toBeNull();
+  });
+
+  it('renders using slot as label', async () => {
+    const page = await newE2EPage();
+    await page.setContent(`
+    <va-text-input>
+      <strong>Name of issue</strong>
+      <span className="form-required-span">(*Required)</span>
+      <p className="vads-u-font-weight--normal label-description">
+        You can only add an issue that you've already received a VA decision
+        notice for.
+      </p>
+    </va-text-input>`);
+    const element = await page.find('va-text-input');
+    expect(element).toEqualHtml(`
+      <va-text-input class="hydrated">
+        <mock:shadow-root>
+          <label for="inputField">
+            <slot></slot>
+          </label>
+          <input id="inputField" type="text" />
+        </mock:shadow-root>
+        <strong>Name of issue</strong>
+        <span className="form-required-span">(*Required)</span>
+        <p className="vads-u-font-weight--normal label-description">
+          You can only add an issue that you've already received a VA decision
+          notice for.
+        </p>
+      </va-text-input>
+    `);
   });
 
   it('renders an error message', async () => {
