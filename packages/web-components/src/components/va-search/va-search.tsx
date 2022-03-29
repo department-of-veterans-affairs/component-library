@@ -1,4 +1,12 @@
-import { Component, Element, Host, h, Prop } from '@stencil/core';
+import {
+  Component,
+  Element,
+  Event,
+  EventEmitter,
+  Host,
+  h,
+  Prop,
+} from '@stencil/core';
 
 @Component({
   tag: 'va-search',
@@ -9,10 +17,40 @@ export class VaSearch {
   @Element() el: HTMLElement;
 
   /**
-   * Specifies where to send the form-data when a form is submitted.
-   * Ignored when method="dialog" is set.
+   * Fires when the search input loses focus after its value was changed
    */
-  @Prop() action?: string = 'javascript:void(0);';
+  @Event({
+    composed: true,
+    bubbles: true,
+  })
+  inputChangeEvent: EventEmitter;
+
+  /**
+   * Fires when the search button is clicked
+   */
+  @Event({
+    composed: true,
+    bubbles: true,
+  })
+  buttonClickEvent: EventEmitter;
+
+  /**
+   * Fires when the search button gains focus
+   */
+  @Event({
+    composed: true,
+    bubbles: true,
+  })
+  buttonFocusEvent: EventEmitter;
+
+  /**
+   * Fires when the search button is focused and a key is pressed
+   */
+  @Event({
+    composed: true,
+    bubbles: true,
+  })
+  buttonKeyDownEvent: EventEmitter;
 
   /**
    * Identifies the currently active element
@@ -34,50 +72,58 @@ export class VaSearch {
    */
   @Prop() label: string = 'Search';
 
-  /**
-   * Specifies the HTTP method to use when sending form-data.
-   * GET: form data appended to the action URL with a ? separator.
-   * POST: form data sent as the request body.
-   * dialog: Closes the dialog and throws a submit event on submission without submitting data or clearing the form.
-   */
-  // @Prop() method?: 'GET' | 'POST' | 'dialog';
+  // Input Event Handlers
+  private handleInputChangeEvent = (event: Event) => {
+    // const target = event.target as HTMLInputElement;
+    this.inputChangeEvent.emit(event);
+  };
 
-  private handleOnChange = (event: Event) => {
-    console.log(event);
-    const syntheticChange = new Event('change', {
-      bubbles: true,
-      composed: true,
-    });
-    this.el.dispatchEvent(syntheticChange);
+  // Button Event Handlers
+  private handleButtonClickEvent = (event: MouseEvent) => {
+    this.buttonClickEvent.emit(event);
+  };
+
+  private handleButtonFocusEvent = (event: FocusEvent) => {
+    this.buttonFocusEvent.emit(event);
+  };
+
+  private handleButtonKeyDownEvent = (event: KeyboardEvent) => {
+    this.buttonKeyDownEvent.emit(event);
   };
 
   render() {
     const {
-      // action,
       ariaActiveDescendant,
       ariaControls,
       buttonText,
-      handleOnChange,
+      handleButtonClickEvent,
+      handleButtonFocusEvent,
+      handleButtonKeyDownEvent,
+      handleInputChangeEvent,
       label,
-      // method,
     } = this;
 
     return (
       <Host>
-        {/* <form id="va-search-form" action={action} method={method}> */}
         <input
           id="va-search-input"
           aria-activedescendant={ariaActiveDescendant}
           aria-controls={ariaControls}
           aria-label={label}
           type="text"
-          onChange={handleOnChange}
+          onChange={handleInputChangeEvent}
         />
-        <button id="va-search-button" type="submit" aria-label={label}>
+        <button
+          id="va-search-button"
+          type="submit"
+          aria-label={label}
+          onClick={handleButtonClickEvent}
+          onFocus={handleButtonFocusEvent}
+          onKeyDown={handleButtonKeyDownEvent}
+        >
           <i aria-hidden="true" class="fa fa-search" />
           {buttonText && <span id="va-search-button-text">{buttonText}</span>}
         </button>
-        {/* </form> */}
       </Host>
     );
   }

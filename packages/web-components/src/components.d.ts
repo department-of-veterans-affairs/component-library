@@ -327,10 +327,6 @@ export namespace Components {
     }
     interface VaSearch {
         /**
-          * Specifies where to send the form-data when a form is submitted. Ignored when method="dialog" is set.
-         */
-        "action"?: string;
-        /**
           * Identifies the currently active element
          */
         "ariaActiveDescendant"?: string;
@@ -1073,10 +1069,6 @@ declare namespace LocalJSX {
     }
     interface VaSearch {
         /**
-          * Specifies where to send the form-data when a form is submitted. Ignored when method="dialog" is set.
-         */
-        "action"?: string;
-        /**
           * Identifies the currently active element
          */
         "ariaActiveDescendant"?: string;
@@ -1092,6 +1084,22 @@ declare namespace LocalJSX {
           * Adds an aria-label attribute to the input and button
          */
         "label"?: string;
+        /**
+          * Fires when the search button is clicked
+         */
+        "onButtonClickEvent"?: (event: CustomEvent<any>) => void;
+        /**
+          * Fires when the search button gains focus
+         */
+        "onButtonFocusEvent"?: (event: CustomEvent<any>) => void;
+        /**
+          * Fires when the search button is focused and a key is pressed
+         */
+        "onButtonKeyDownEvent"?: (event: CustomEvent<any>) => void;
+        /**
+          * Fires when the search input loses focus after its value was changed
+         */
+        "onInputChangeEvent"?: (event: CustomEvent<any>) => void;
     }
     interface VaSegmentedProgressBar {
         /**
