@@ -89,21 +89,6 @@ export class VaSearch {
   buttonKeyDownEvent: EventEmitter;
 
   /**
-   * Identifies the currently active element
-   */
-  @Prop() ariaActiveDescendant?: string;
-
-  /**
-   * Identifies the element (or elements) whose contents or presence are controlled by the element on which this attribute is set
-   */
-  @Prop() ariaControls?: string;
-
-  /**
-   * Adds an aria-label attribute to the input and button
-   */
-  @Prop() ariaExpanded: string;
-
-  /**
    * Text displayed inside the search button
    */
   @Prop() buttonText?: string;
@@ -112,6 +97,21 @@ export class VaSearch {
    * Hides the search button
    */
   @Prop() hideButton: boolean = false;
+
+  /**
+   * Identifies the currently active element
+   */
+  @Prop() inputAriaActiveDescendant?: string;
+
+  /**
+   * Identifies the element (or elements) whose contents or presence are controlled by the element on which this attribute is set
+   */
+  @Prop() inputAriaControls?: string;
+
+  /**
+   * Adds an aria-label attribute to the input and button
+   */
+  @Prop() inputAriaExpanded: string;
 
   /**
    * Initial value of input
@@ -160,9 +160,6 @@ export class VaSearch {
 
   render() {
     const {
-      ariaActiveDescendant,
-      ariaExpanded,
-      ariaControls,
       buttonText,
       handleButtonClickEvent,
       handleButtonFocusEvent,
@@ -173,6 +170,9 @@ export class VaSearch {
       handleInputFocusEvent,
       handleInputKeyDownEvent,
       hideButton,
+      inputAriaActiveDescendant,
+      inputAriaControls,
+      inputAriaExpanded,
       inputValue,
       label,
     } = this;
@@ -181,10 +181,10 @@ export class VaSearch {
       <Host>
         <input
           id="va-search-input"
-          aria-activedescendant={ariaActiveDescendant}
+          aria-activedescendant={inputAriaActiveDescendant}
           aria-autocomplete="none"
-          aria-controls={ariaControls}
-          aria-expanded={ariaExpanded}
+          aria-controls={inputAriaControls}
+          aria-expanded={inputAriaExpanded}
           aria-haspopup="listbox"
           aria-label={label}
           autocomplete="off"
