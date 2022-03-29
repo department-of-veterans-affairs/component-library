@@ -1,4 +1,5 @@
 import React from 'react';
+import { VaSearch } from '@department-of-veterans-affairs/web-components/react-bindings';
 import { getWebComponentDocs, propStructure } from './wc-helpers';
 import { generateEventsDescription } from './events';
 
@@ -13,37 +14,27 @@ export default {
       },
     },
   },
-  // argTypes: {
-  //   method: {
-  //     control: {
-  //       type: 'select',
-  //       options: ['GET', 'POST', 'dialog'],
-  //     },
-  //   },
-  // },
 };
 
-const Template = ({ action, label }) => (
-  <va-search
-    action={action}
+const Template = ({ label }) => (
+  <VaSearch
     label={label}
-    // method={method}
-    onBlur={() => console.log('BLUR')}
-    onChange={() => console.log('CHANGE')}
-    onClick={() => console.log('CLICK')}
-    onKeyDown={() => console.log('KEYDOWN')}
+    onInputBlurEvent={e => console.log(e, 'INPUT BLUR FIRED')}
+    onInputChangeEvent={e => console.log(e, 'INPUT CHANGE FIRED')}
+    onInputClickEvent={e => console.log(e, 'INPUT CLICK FIRED')}
+    onInputKeyDownEvent={e => console.log(e, 'INPUT KEYDOWN FIRED')}
+    onButtonClickEvent={e => console.log(e, 'BUTTON CLICK FIRED')}
+    onButtonFocusEvent={e => console.log(e, 'BUTTON FOCUS FIRED')}
+    onButtonKeyDownEvent={e => console.log(e, 'BUTTON KEYDOWN FIRED')}
   />
 );
 
 const defaultArgs = {
-  action: undefined,
   label: 'Search',
-  // method: undefined,
 };
 
 export const Default = Template.bind({});
 Default.args = {
   ...defaultArgs,
-  // method: 'GET',
 };
 Default.argTypes = propStructure(searchDocs);
