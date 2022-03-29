@@ -28,10 +28,10 @@ const Template = ({ action, label }) => (
     action={action}
     label={label}
     // method={method}
-    onblur={() => console.log('BLUR')}
-    onchange={() => console.log('CHANGE')}
-    onclick={() => console.log('CLICK')}
-    onkeydown={() => console.log('KEYDOWN')}
+    onBlur={() => console.log('BLUR')}
+    onChange={() => console.log('CHANGE')}
+    onClick={() => console.log('CLICK')}
+    onKeyDown={() => console.log('KEYDOWN')}
   />
 );
 
