@@ -13,34 +13,37 @@ export default {
       },
     },
   },
-  argTypes: {
-    method: {
-      control: {
-        type: 'select',
-        options: ['GET', 'POST', 'dialog'],
-      },
-    },
-  },
+  // argTypes: {
+  //   method: {
+  //     control: {
+  //       type: 'select',
+  //       options: ['GET', 'POST', 'dialog'],
+  //     },
+  //   },
+  // },
 };
 
-const Template = ({ action, label, method, submit }) => (
-  <va-search action={action} label={label} method={method} onsubmit={submit} />
+const Template = ({ action, label }) => (
+  <va-search
+    action={action}
+    label={label}
+    // method={method}
+    onblur={() => console.log('BLUR')}
+    onchange={() => console.log('CHANGE')}
+    onclick={() => console.log('CLICK')}
+    onkeydown={() => console.log('KEYDOWN')}
+  />
 );
 
 const defaultArgs = {
   action: undefined,
   label: 'Search',
-  method: undefined,
+  // method: undefined,
 };
 
 export const Default = Template.bind({});
 Default.args = {
   ...defaultArgs,
-  method: 'GET',
-  // not working
-  submit: e => {
-    e.preventDefault();
-    console.log(e);
-  },
+  // method: 'GET',
 };
 Default.argTypes = propStructure(searchDocs);

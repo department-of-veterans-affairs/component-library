@@ -325,15 +325,23 @@ export namespace Components {
         /**
           * Specifies where to send the form-data when a form is submitted. Ignored when method="dialog" is set.
          */
-        "action": string;
+        "action"?: string;
+        /**
+          * Identifies the currently active element
+         */
+        "ariaActiveDescendant"?: string;
+        /**
+          * Identifies the element (or elements) whose contents or presence are controlled by the element on which this attribute is set
+         */
+        "ariaControls"?: string;
+        /**
+          * Text displayed inside the search button
+         */
+        "buttonText"?: string;
         /**
           * Adds an aria-label attribute to the input and button
          */
         "label": string;
-        /**
-          * Specifies the HTTP method to use when sending form-data. GET: form data appended to the action URL with a ? separator. POST: form data sent as the request body. dialog: Closes the dialog and throws a submit event on submission without submitting data or clearing the form.
-         */
-        "method"?: 'GET' | 'POST' | 'dialog';
     }
     interface VaSegmentedProgressBar {
         /**
@@ -1061,13 +1069,21 @@ declare namespace LocalJSX {
          */
         "action"?: string;
         /**
+          * Identifies the currently active element
+         */
+        "ariaActiveDescendant"?: string;
+        /**
+          * Identifies the element (or elements) whose contents or presence are controlled by the element on which this attribute is set
+         */
+        "ariaControls"?: string;
+        /**
+          * Text displayed inside the search button
+         */
+        "buttonText"?: string;
+        /**
           * Adds an aria-label attribute to the input and button
          */
         "label"?: string;
-        /**
-          * Specifies the HTTP method to use when sending form-data. GET: form data appended to the action URL with a ? separator. POST: form data sent as the request body. dialog: Closes the dialog and throws a submit event on submission without submitting data or clearing the form.
-         */
-        "method"?: 'GET' | 'POST' | 'dialog';
     }
     interface VaSegmentedProgressBar {
         /**
