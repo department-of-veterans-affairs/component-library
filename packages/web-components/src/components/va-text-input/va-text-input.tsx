@@ -38,6 +38,11 @@ export class VaTextInput {
   @Prop() required?: boolean;
 
   /**
+   * The label for the (Required) text.
+   */
+  @Prop() requiredLabel?: string = '(*Required)';
+
+  /**
    * The inputmode attribute.
    */
   @Prop() inputmode?: string = '';
@@ -151,7 +156,7 @@ export class VaTextInput {
         {this.label && (
           <label htmlFor="inputField">
             {this.label}{' '}
-            {this.required && <span class="required">(*Required)</span>}
+            {this.required && <span class="required">{this.requiredLabel}</span>}
           </label>
         )}
         {this.error && <span id="error-message">{this.error}</span>}

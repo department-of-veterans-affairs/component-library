@@ -74,6 +74,24 @@ describe('va-text-input', () => {
     expect(requiredSpan).not.toBeNull();
   });
 
+  it('renders a default required label', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-text-input label="This is a field" required />');
+
+    // Render the required label text
+    const error = await page.find('va-text-input >>> span.required');
+    expect(error.innerText).toContain('(*Required)');
+  });
+
+  it('renders a passed in required label', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-text-input label="This is a field" required required-label="(*Required + extra text)" />');
+
+    // Render the required label text
+    const error = await page.find('va-text-input >>> span.required');
+    expect(error.innerText).toContain('(*Required + extra text)');
+  });
+
   it('passes an aXe check', async () => {
     const page = await newE2EPage();
 

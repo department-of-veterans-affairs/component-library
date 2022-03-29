@@ -22,6 +22,7 @@ const defaultArgs = {
   'autocomplete': false,
   'enable-analytics': false,
   'required': false,
+  'requiredLabel': null,
   'error': null,
   'maxlength': null,
   'value': null,
@@ -33,6 +34,7 @@ const Template = ({
   autocomplete,
   'enable-analytics': enableAnalytics,
   required,
+  'required-label': requiredLabel,
   error,
   maxlength,
   value,
@@ -44,6 +46,7 @@ const Template = ({
       autocomplete={autocomplete}
       enable-analytics={enableAnalytics}
       required={required}
+      required-label={requiredLabel}
       error={error}
       maxlength={maxlength}
       value={value}

@@ -437,6 +437,10 @@ export namespace Components {
          */
         "required"?: boolean;
         /**
+          * The label for the (Required) text.
+         */
+        "requiredLabel"?: string;
+        /**
           * The type attribute.
          */
         "type"?: string;
@@ -1185,6 +1189,10 @@ declare namespace LocalJSX {
           * Set the input to required and render the (Required) text.
          */
         "required"?: boolean;
+        /**
+          * The label for the (Required) text.
+         */
+        "requiredLabel"?: string;
         /**
           * The type attribute.
          */
