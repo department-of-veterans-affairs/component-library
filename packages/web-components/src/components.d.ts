@@ -335,9 +335,21 @@ export namespace Components {
          */
         "ariaControls"?: string;
         /**
+          * Adds an aria-label attribute to the input and button
+         */
+        "ariaExpanded": string;
+        /**
           * Text displayed inside the search button
          */
         "buttonText"?: string;
+        /**
+          * Hides the search button
+         */
+        "hideButton": boolean;
+        /**
+          * Initial value of input
+         */
+        "inputValue"?: string;
         /**
           * Adds an aria-label attribute to the input and button
          */
@@ -1077,9 +1089,21 @@ declare namespace LocalJSX {
          */
         "ariaControls"?: string;
         /**
+          * Adds an aria-label attribute to the input and button
+         */
+        "ariaExpanded"?: string;
+        /**
           * Text displayed inside the search button
          */
         "buttonText"?: string;
+        /**
+          * Hides the search button
+         */
+        "hideButton"?: boolean;
+        /**
+          * Initial value of input
+         */
+        "inputValue"?: string;
         /**
           * Adds an aria-label attribute to the input and button
          */
@@ -1097,9 +1121,25 @@ declare namespace LocalJSX {
          */
         "onButtonKeyDownEvent"?: (event: CustomEvent<any>) => void;
         /**
+          * Fires when the search input loses focus
+         */
+        "onInputBlurEvent"?: (event: CustomEvent<any>) => void;
+        /**
           * Fires when the search input loses focus after its value was changed
          */
         "onInputChangeEvent"?: (event: CustomEvent<any>) => void;
+        /**
+          * Fires when the search input is clicked
+         */
+        "onInputClickEvent"?: (event: CustomEvent<any>) => void;
+        /**
+          * Fires when the search input gains focus
+         */
+        "onInputFocusEvent"?: (event: CustomEvent<any>) => void;
+        /**
+          * Fires when the search input is focused and a key is pressed
+         */
+        "onInputKeyDownEvent"?: (event: CustomEvent<any>) => void;
     }
     interface VaSegmentedProgressBar {
         /**
