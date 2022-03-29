@@ -42,15 +42,6 @@ export class VaSearch {
    */
   // @Prop() method?: 'GET' | 'POST' | 'dialog';
 
-  private handleOnBlur = (event: FocusEvent) => {
-    console.log(event);
-    const syntheticBlur = new FocusEvent('blur', {
-      bubbles: true,
-      composed: true,
-    });
-    this.el.dispatchEvent(syntheticBlur);
-  };
-
   private handleOnChange = (event: Event) => {
     console.log(event);
     const syntheticChange = new Event('change', {
@@ -66,7 +57,6 @@ export class VaSearch {
       ariaActiveDescendant,
       ariaControls,
       buttonText,
-      handleOnBlur,
       handleOnChange,
       label,
       // method,
@@ -81,7 +71,6 @@ export class VaSearch {
           aria-controls={ariaControls}
           aria-label={label}
           type="text"
-          onBlur={handleOnBlur}
           onChange={handleOnChange}
         />
         <button id="va-search-button" type="submit" aria-label={label}>
