@@ -133,7 +133,7 @@ export class VaSearch {
     this.inputChangeEvent.emit(event);
   };
 
-  private handleInputClickEvent = (event: MouseEvent) => {
+  private handleInputClickEvent = (event: KeyboardEvent | MouseEvent) => {
     this.inputClickEvent.emit(event);
   };
 
@@ -141,12 +141,12 @@ export class VaSearch {
     this.inputFocusEvent.emit(event);
   };
 
-  private handleInputKeyDownEvent = (event: Event) => {
+  private handleInputKeyDownEvent = (event: KeyboardEvent) => {
     this.inputKeyDownEvent.emit(event);
   };
 
   // Button Event Handlers
-  private handleButtonClickEvent = (event: MouseEvent) => {
+  private handleButtonClickEvent = (event: KeyboardEvent | MouseEvent) => {
     this.buttonClickEvent.emit(event);
   };
 
