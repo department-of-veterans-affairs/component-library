@@ -80,7 +80,7 @@ describe('va-text-input', () => {
 
     // Render the required label text
     const error = await page.find('va-text-input >>> span.required');
-    expect(error.innerText).toContain('(*Required)');
+    expect(error.innerText).toBe('(*Required)');
   });
 
   it('renders a passed in required label', async () => {
@@ -89,7 +89,7 @@ describe('va-text-input', () => {
 
     // Render the required label text
     const error = await page.find('va-text-input >>> span.required');
-    expect(error.innerText).toContain('(*Required + extra text)');
+    expect(error.innerText).toBe('(*Required + extra text)');
   });
 
   it('passes an aXe check', async () => {
