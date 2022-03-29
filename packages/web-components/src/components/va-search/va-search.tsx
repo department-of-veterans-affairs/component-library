@@ -42,41 +42,23 @@ export class VaSearch {
    */
   // @Prop() method?: 'GET' | 'POST' | 'dialog';
 
-  private handleOnBlur(event: FocusEvent) {
+  private handleOnBlur = (event: FocusEvent) => {
     console.log(event);
     const syntheticBlur = new FocusEvent('blur', {
       bubbles: true,
       composed: true,
     });
     this.el.dispatchEvent(syntheticBlur);
-  }
+  };
 
-  private handleOnChange(event: Event) {
+  private handleOnChange = (event: Event) => {
     console.log(event);
     const syntheticChange = new Event('change', {
       bubbles: true,
       composed: true,
     });
     this.el.dispatchEvent(syntheticChange);
-  }
-
-  private handleOnClick(event: MouseEvent) {
-    console.log(event);
-    const syntheticClick = new MouseEvent('click', {
-      bubbles: true,
-      composed: true,
-    });
-    this.el.dispatchEvent(syntheticClick);
-  }
-
-  private handleOnKeyDown(event: KeyboardEvent) {
-    console.log(event);
-    const syntheticKeyDown = new KeyboardEvent('keydown', {
-      bubbles: true,
-      composed: true,
-    });
-    this.el.dispatchEvent(syntheticKeyDown);
-  }
+  };
 
   render() {
     const {
@@ -84,6 +66,8 @@ export class VaSearch {
       ariaActiveDescendant,
       ariaControls,
       buttonText,
+      handleOnBlur,
+      handleOnChange,
       label,
       // method,
     } = this;
@@ -97,10 +81,8 @@ export class VaSearch {
           aria-controls={ariaControls}
           aria-label={label}
           type="text"
-          onBlur={e => this.handleOnBlur(e)}
-          onChange={e => this.handleOnChange(e)}
-          onClick={e => this.handleOnClick(e)}
-          onKeyDown={e => this.handleOnKeyDown(e)}
+          onBlur={handleOnBlur}
+          onChange={handleOnChange}
         />
         <button id="va-search-button" type="submit" aria-label={label}>
           <i aria-hidden="true" class="fa fa-search" />
