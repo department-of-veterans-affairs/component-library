@@ -3,7 +3,8 @@
 button:not([disabled]):focus,
 select:not([disabled]):focus,
 a:not([disabled]):focus,
-h1:focus {
+h1:focus,
+input:not([disabled]):focus {
   outline: 2px solid var(--color-gold-light);
   outline-offset: 2px;
 }
