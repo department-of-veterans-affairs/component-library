@@ -78,19 +78,12 @@ const Template = ({
       inputmode={inputmode}
       type={type}
       aria-describedby={ariaDescribedby}
-    >
-      <strong>Name of issue</strong>
-      <span className="form-required-span">(*Required)</span>
-      <p className="vads-u-font-weight--normal label-description">
-        You can only add an issue that you’ve already received a VA decision
-        notice for.
-      </p>
-    </va-text-input>
+    />
   );
 };
 
 export const Default = Template.bind({});
-Default.args = { ...defaultArgs, label: undefined };
+Default.args = { ...defaultArgs };
 Default.argTypes = propStructure(textInputDocs);
 
 export const Error = Template.bind({});
