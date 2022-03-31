@@ -35,15 +35,6 @@ export class VaSearch {
   inputChangeEvent: EventEmitter;
 
   /**
-   * Fires when the search input is clicked
-   */
-  @Event({
-    composed: true,
-    bubbles: true,
-  })
-  inputClickEvent: EventEmitter;
-
-  /**
    * Fires when the search input gains focus
    */
   @Event({
@@ -118,10 +109,6 @@ export class VaSearch {
     this.inputChangeEvent.emit(event);
   };
 
-  private handleInputClickEvent = (event: KeyboardEvent | MouseEvent) => {
-    this.inputClickEvent.emit(event);
-  };
-
   private handleInputFocusEvent = (event: FocusEvent) => {
     this.inputFocusEvent.emit(event);
   };
@@ -151,7 +138,6 @@ export class VaSearch {
       handleButtonKeyDownEvent,
       handleInputBlurEvent,
       handleInputChangeEvent,
-      handleInputClickEvent,
       handleInputFocusEvent,
       handleInputKeyDownEvent,
       hideButton,
@@ -172,7 +158,6 @@ export class VaSearch {
           autocomplete="off"
           onBlur={handleInputBlurEvent}
           onChange={handleInputChangeEvent}
-          onClick={handleInputClickEvent}
           onFocus={handleInputFocusEvent}
           onKeyDown={handleInputKeyDownEvent}
           role={this.el.getAttribute('role')}
