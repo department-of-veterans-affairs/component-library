@@ -55,7 +55,7 @@ export class VaTable {
       item.setAttribute('scope', 'col');
     });
 
-    if (this.sortColumn >= 0) {
+    if (this.sortColumn >= 0 && columns.length > this.sortColumn) {
       const icon = this.sortAscending ? ascendingIcon : descendingIcon;
       const button = document.createElement('button');
       button.setAttribute(
