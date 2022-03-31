@@ -231,7 +231,7 @@ export namespace Components {
         /**
           * Whether or not an analytics event will be fired
          */
-        "enableAnalytics": boolean;
+        "enableAnalytics"?: boolean;
     }
     interface VaPagination {
         /**
