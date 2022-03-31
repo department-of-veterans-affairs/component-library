@@ -228,6 +228,10 @@ export namespace Components {
         "visible": boolean;
     }
     interface VaOnThisPage {
+        /**
+          * Whether or not an analytics event will be fired
+         */
+        "enableAnalytics": boolean;
     }
     interface VaPagination {
         /**
@@ -913,6 +917,14 @@ declare namespace LocalJSX {
         "visible"?: boolean;
     }
     interface VaOnThisPage {
+        /**
+          * Whether or not an analytics event will be fired
+         */
+        "enableAnalytics"?: boolean;
+        /**
+          * The event used to track usage of the component. This is emitted when the user clicks on a link and enableAnalytics is true.
+         */
+        "onComponent-library-analytics"?: (event: CustomEvent<any>) => void;
     }
     interface VaPagination {
         /**
