@@ -15,6 +15,8 @@ import { quicksort, reverseQuicksort } from '../../utils/dom-sort';
   shadow: true,
 })
 export class VaTable {
+  headers: HTMLElement[] = null;
+
   @Element() el: HTMLElement;
 
   /**
@@ -46,10 +48,10 @@ export class VaTable {
     const [headerRow, ...rows] = Array.from(
       this.el.querySelectorAll('va-table-row'),
     );
-    const headers = elementChildren(headerRow);
+    this.headers = elementChildren(headerRow) as Array<HTMLElement>;
     const columns = [];
 
-    headers.forEach((item: HTMLVaTableRowElement) => {
+    this.headers.forEach((item: HTMLVaTableRowElement) => {
       columns.push(item.textContent);
       item.setAttribute('role', 'columnheader');
       item.setAttribute('scope', 'col');
@@ -73,8 +75,9 @@ export class VaTable {
       button.innerHTML = `${columns[this.sortColumn]}${icon}`;
       button.onclick = this.handleSort.bind(this);
 
-      headers[this.sortColumn].childNodes.forEach(child => child.remove());
-      headers[this.sortColumn].appendChild(button);
+      const sortableHeader = this.headers[this.sortColumn];
+      sortableHeader.childNodes.forEach(child => child.remove());
+      sortableHeader.appendChild(button);
 
       this.handleSort();
     }
@@ -89,7 +92,9 @@ export class VaTable {
         // Right align columns with numeric data
         if (index === 0 && isNumeric(cell.textContent)) {
           alignment[colNum] = 'medium-screen:vads-u-text-align--right';
-          (headers[colNum] as HTMLElement).classList.add(alignment[colNum]);
+          (this.headers[colNum] as HTMLElement).classList.add(
+            alignment[colNum],
+          );
         }
         if (alignment[colNum]) {
           cell.classList.add(alignment[colNum]);
@@ -114,10 +119,16 @@ export class VaTable {
   }
 
   private handleSort(): void {
+    const sortableHeader = this.headers[this.sortColumn];
     const cellSelector = row => row.children[this.sortColumn].textContent;
+
     // Starting at index 1 to skip the header row
     const sortingFunc = this.sortAscending ? quicksort : reverseQuicksort;
     sortingFunc(this.el.children, 1, this.el.children.length - 1, cellSelector);
+    sortableHeader.setAttribute(
+      'aria-sort',
+      this.sortAscending ? 'ascending' : 'descending',
+    );
     this.sortAscending = !this.sortAscending;
   }
 

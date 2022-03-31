@@ -152,6 +152,15 @@ describe('va-table', () => {
   // - initial sort on load
   // - descending sort on button click
   describe('ascending sort', () => {
+    it('sets aria-sort on the header column to "ascending"', async () => {
+      const page = await sortSetup();
+      const sortHeader = await page.find(
+        'va-table-row[slot] span:nth-child(3)',
+      );
+
+      expect(sortHeader.getAttribute('aria-sort')).toEqual('ascending');
+    });
+
     it('adds a button with icon to the sortable column', async () => {
       const page = await sortSetup();
       // The `nth-child` index is 1-based
@@ -172,6 +181,15 @@ describe('va-table', () => {
   // - initial descending sort on load
   // - ascending sort on button click
   describe('descending sort', () => {
+    it('sets aria-sort on the header column to "descending"', async () => {
+      const page = await sortSetup({ ascending: false });
+      const sortHeader = await page.find(
+        'va-table-row[slot] span:nth-child(3)',
+      );
+
+      expect(sortHeader.getAttribute('aria-sort')).toEqual('descending');
+    });
+
     it('adds a button with icon to the sortable column', async () => {
       const page = await sortSetup({ ascending: false });
       // The `nth-child` index is 1-based
