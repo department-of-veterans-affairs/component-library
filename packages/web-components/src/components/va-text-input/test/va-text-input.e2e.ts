@@ -13,20 +13,18 @@ describe('va-text-input', () => {
         <mock:shadow-root>
           <label for="inputField">
             Hello, world
-            <slot></slot>
           </label>
+          <slot></slot>
           <input id="inputField" type="text" />
         </mock:shadow-root>
       </va-text-input>
     `);
   });
 
-  it('renders using slot as label', async () => {
+  it('renders slotted content', async () => {
     const page = await newE2EPage();
     await page.setContent(`
-    <va-text-input>
-      <strong>Name of issue</strong>
-      <span className="form-required-span">(*Required)</span>
+    <va-text-input label="Name of issue">
       <p className="vads-u-font-weight--normal label-description">
         You can only add an issue that you've already received a VA decision
         notice for.
@@ -34,15 +32,14 @@ describe('va-text-input', () => {
     </va-text-input>`);
     const element = await page.find('va-text-input');
     expect(element).toEqualHtml(`
-      <va-text-input class="hydrated">
+      <va-text-input class="hydrated" label="Name of issue">
         <mock:shadow-root>
           <label for="inputField">
-            <slot></slot>
+            Name of issue
           </label>
+          <slot></slot>
           <input id="inputField" type="text" />
         </mock:shadow-root>
-        <strong>Name of issue</strong>
-        <span className="form-required-span">(*Required)</span>
         <p className="vads-u-font-weight--normal label-description">
           You can only add an issue that you've already received a VA decision
           notice for.
@@ -92,8 +89,8 @@ describe('va-text-input', () => {
         <mock:shadow-root>
           <label for="inputField">
             This is a field <span class="required">(*Required)</span>
-            <slot></slot>
           </label>
+          <slot></slot>
           <input id="inputField" type="text" />
         </mock:shadow-root>
       </va-text-input>

@@ -156,15 +156,15 @@ export class VaTextInput {
 
     return (
       <Host>
-        <label htmlFor="inputField">
-          {this.label && (
+        {this.label && (
+          <label htmlFor="inputField">
             <Fragment>
               {this.label}{' '}
               {this.required && <span class="required">(*Required)</span>}
             </Fragment>
-          )}
-          <slot></slot>
-        </label>
+          </label>
+        )}
+        <slot></slot>
         {this.error && <span id="error-message">{this.error}</span>}
         <input
           id="inputField"
