@@ -24,7 +24,7 @@ export class VaOnThisPage {
   /**
    * Whether or not an analytics event will be fired
    */
-  @Prop() enableAnalytics: boolean;
+  @Prop() enableAnalytics?: boolean;
 
   private handleOnClick = () => {
     if (!this.enableAnalytics) return;
