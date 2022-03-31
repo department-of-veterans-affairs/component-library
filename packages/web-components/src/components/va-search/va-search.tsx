@@ -99,21 +99,6 @@ export class VaSearch {
   @Prop() hideButton: boolean = false;
 
   /**
-   * Identifies the currently active element
-   */
-  @Prop() inputAriaActiveDescendant?: string;
-
-  /**
-   * Identifies the element (or elements) whose contents or presence are controlled by the element on which this attribute is set
-   */
-  @Prop() inputAriaControls?: string;
-
-  /**
-   * Adds an aria-label attribute to the input and button
-   */
-  @Prop() inputAriaExpanded: string;
-
-  /**
    * Initial value of input
    */
   @Prop() inputValue?: string;
@@ -170,9 +155,6 @@ export class VaSearch {
       handleInputFocusEvent,
       handleInputKeyDownEvent,
       hideButton,
-      inputAriaActiveDescendant,
-      inputAriaControls,
-      inputAriaExpanded,
       inputValue,
       label,
     } = this;
@@ -181,11 +163,11 @@ export class VaSearch {
       <Host>
         <input
           id="va-search-input"
-          aria-activedescendant={inputAriaActiveDescendant}
+          aria-activedescendant={this.el.getAttribute('aria-activedescendant')}
           aria-autocomplete="none"
-          aria-controls={inputAriaControls}
-          aria-expanded={inputAriaExpanded}
-          aria-haspopup="listbox"
+          aria-controls={this.el.getAttribute('aria-controls')}
+          aria-expanded={this.el.getAttribute('aria-expanded')}
+          aria-haspopup={this.el.getAttribute('aria-haspopup')}
           aria-label={label}
           autocomplete="off"
           onBlur={handleInputBlurEvent}
@@ -193,7 +175,7 @@ export class VaSearch {
           onClick={handleInputClickEvent}
           onFocus={handleInputFocusEvent}
           onKeyDown={handleInputKeyDownEvent}
-          role="combobox"
+          role={this.el.getAttribute('role')}
           type="text"
           value={inputValue}
         />

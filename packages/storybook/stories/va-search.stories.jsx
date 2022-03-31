@@ -16,16 +16,8 @@ export default {
   },
 };
 
-const Template = ({
-  'input-aria-activedescendant': inputAriaActiveDescendant,
-  'input-aria-controls': inputAriaControls,
-  'input-aria-expanded': inputAriaExpanded,
-  label,
-}) => (
+const Template = ({ label }) => (
   <VaSearch
-    input-aria-activedescendant={inputAriaActiveDescendant}
-    input-aria-controls={inputAriaControls}
-    input-aria-expanded={inputAriaExpanded}
     label={label}
     onInputBlurEvent={e => console.log(e, 'INPUT BLUR FIRED')}
     onInputChangeEvent={e => console.log(e, 'INPUT CHANGE FIRED')}
@@ -44,8 +36,5 @@ const defaultArgs = {
 export const Default = Template.bind({});
 Default.args = {
   ...defaultArgs,
-  'input-aria-activedescendant': undefined,
-  'input-aria-controls': undefined,
-  'input-aria-expanded': undefined,
 };
 Default.argTypes = propStructure(searchDocs);

@@ -335,18 +335,6 @@ export namespace Components {
          */
         "hideButton": boolean;
         /**
-          * Identifies the currently active element
-         */
-        "inputAriaActiveDescendant"?: string;
-        /**
-          * Identifies the element (or elements) whose contents or presence are controlled by the element on which this attribute is set
-         */
-        "inputAriaControls"?: string;
-        /**
-          * Adds an aria-label attribute to the input and button
-         */
-        "inputAriaExpanded": string;
-        /**
           * Initial value of input
          */
         "inputValue"?: string;
@@ -1088,18 +1076,6 @@ declare namespace LocalJSX {
           * Hides the search button
          */
         "hideButton"?: boolean;
-        /**
-          * Identifies the currently active element
-         */
-        "inputAriaActiveDescendant"?: string;
-        /**
-          * Identifies the element (or elements) whose contents or presence are controlled by the element on which this attribute is set
-         */
-        "inputAriaControls"?: string;
-        /**
-          * Adds an aria-label attribute to the input and button
-         */
-        "inputAriaExpanded"?: string;
         /**
           * Initial value of input
          */
