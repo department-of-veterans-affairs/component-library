@@ -3,6 +3,8 @@ import { VaSearch } from '@department-of-veterans-affairs/web-components/react-b
 import { getWebComponentDocs, propStructure } from './wc-helpers';
 import { generateEventsDescription } from './events';
 
+VaSearch.displayName = 'VaSearch';
+
 const searchDocs = getWebComponentDocs('va-search');
 
 export default {
@@ -21,7 +23,6 @@ const Template = ({ label }) => (
     label={label}
     onInputBlurEvent={e => console.log(e, 'INPUT BLUR FIRED')}
     onInputChangeEvent={e => console.log(e, 'INPUT CHANGE FIRED')}
-    onInputClickEvent={e => console.log(e, 'INPUT CLICK FIRED')}
     onInputKeyDownEvent={e => console.log(e, 'INPUT KEYDOWN FIRED')}
     onButtonClickEvent={e => console.log(e, 'BUTTON CLICK FIRED')}
     onButtonFocusEvent={e => console.log(e, 'BUTTON FOCUS FIRED')}
