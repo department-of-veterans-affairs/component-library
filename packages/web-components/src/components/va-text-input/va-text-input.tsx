@@ -6,7 +6,6 @@ import {
   h,
   Event,
   EventEmitter,
-  Fragment,
 } from '@stencil/core';
 import { consoleDevError } from '../../utils/utils';
 
@@ -158,10 +157,8 @@ export class VaTextInput {
       <Host>
         {this.label && (
           <label htmlFor="inputField">
-            <Fragment>
-              {this.label}{' '}
-              {this.required && <span class="required">(*Required)</span>}
-            </Fragment>
+            {this.label}{' '}
+            {this.required && <span class="required">(*Required)</span>}
           </label>
         )}
         <slot></slot>
