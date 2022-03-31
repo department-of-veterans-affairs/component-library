@@ -12984,10 +12984,10 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"minimist@npm:^0.2.1":
-  version: 0.2.1
-  resolution: "minimist@npm:0.2.1"
-  checksum: 2d5c743f18d0660773d820228158c0d75d093db995434c77b88af06498571594b1687e4082a551752d7d9162e91e327b397664c58f6005f84476d4717ac7d195
+"minimist@npm:^1.2.6":
+  version: 1.2.6
+  resolution: "minimist@npm:1.2.6"
+  checksum: d15428cd1e11eb14e1233bcfb88ae07ed7a147de251441d61158619dfb32c4d7e9061d09cab4825fdee18ecd6fce323228c8c47b5ba7cd20af378ca4048fb3fb
   languageName: node
   linkType: hard
 
