@@ -22,8 +22,10 @@
 }
 
 #va-search-button {
+  align-items: center;
   background-color: var(--color-primary);
   border-radius: 0 3px 3px 0;
+  display: flex;
   height: 4.8rem;
 }
 
@@ -45,4 +47,8 @@ i::before {
   font-weight: 900;
   line-height: 1;
   text-rendering: auto;
+}
+
+#va-search-button-text {
+  margin-left: 0.4rem;
 }
