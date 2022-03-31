@@ -111,9 +111,13 @@ WithAnalytics.args = { ...defaultArgs, 'enable-analytics': true };
 const WithHintTextTemplate = ({ name, label }) => {
   return (
     <va-text-input name={name} label={label}>
-      <span className="vads-u-display--block vads-u-color--gray-medium">
-        You'll find this number on your case documents
-      </span>
+      <div className="vads-u-margin-bottom--1">
+        <va-additional-info trigger="Why is this required?">
+          We need the Veteran’s Social Security number or tax identification
+          number to process the application when it’s submitted online, but it’s
+          not a requirement to apply for the program.
+        </va-additional-info>
+      </div>
     </va-text-input>
   );
 };
@@ -121,5 +125,5 @@ const WithHintTextTemplate = ({ name, label }) => {
 export const WithHintText = WithHintTextTemplate.bind({});
 WithHintText.args = {
   ...defaultArgs,
-  label: 'Case or docket number',
+  label: 'Veteran’s Social Security number',
 };
