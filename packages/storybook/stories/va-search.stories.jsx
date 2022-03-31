@@ -18,8 +18,16 @@ export default {
   },
 };
 
-const Template = ({ label }) => (
+const Template = ({
+  'button-text': buttonText,
+  'hide-button': hideButton,
+  'input-value': inputValue,
+  label,
+}) => (
   <VaSearch
+    buttonText={buttonText}
+    hideButton={hideButton}
+    inputValue={inputValue}
     label={label}
     onInputBlurEvent={e => console.log(e, 'INPUT BLUR FIRED')}
     onInputChangeEvent={e => console.log(e, 'INPUT CHANGE FIRED')}
@@ -31,7 +39,10 @@ const Template = ({ label }) => (
 );
 
 const defaultArgs = {
-  label: 'Search',
+  'button-text': undefined,
+  'hide-button': false,
+  'input-value': undefined,
+  'label': 'Search',
 };
 
 export const Default = Template.bind({});
@@ -39,3 +50,9 @@ Default.args = {
   ...defaultArgs,
 };
 Default.argTypes = propStructure(searchDocs);
+
+export const WithButtonText = Template.bind({});
+WithButtonText.args = {
+  ...defaultArgs,
+  'button-text': 'Search',
+};
