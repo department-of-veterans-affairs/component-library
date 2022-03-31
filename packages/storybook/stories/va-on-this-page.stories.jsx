@@ -1,13 +1,13 @@
 import React from 'react';
+import { getWebComponentDocs, StoryDocs } from './wc-helpers';
+
+const otpDocs = getWebComponentDocs('va-on-this-page');
 
 export default {
   title: 'Components/va-on-this-page',
   parameters: {
     docs: {
-      description: {
-        component: `This component will render links based on the content around it. It scans the document for any h2 elements
-        that contain an **id** inside of an <article> and will create a list of links to the headings.`,
-      },
+      page: () => <StoryDocs data={otpDocs} />,
     },
   },
 };
