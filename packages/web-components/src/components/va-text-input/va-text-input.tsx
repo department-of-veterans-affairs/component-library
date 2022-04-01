@@ -25,7 +25,7 @@ export class VaTextInput {
   /**
    * The label for the text input.
    */
-  @Prop() label: string | HTMLElement;
+  @Prop() label?: string;
 
   /**
    * The error message to render.
@@ -40,12 +40,20 @@ export class VaTextInput {
   /**
    * The inputmode attribute.
    */
-  @Prop() inputmode?: string = '';
+  @Prop() inputmode?:
+    | 'decimal'
+    | 'email'
+    | 'numeric'
+    | 'search'
+    | 'tel'
+    | 'text'
+    | 'url';
 
   /**
    * The type attribute.
    */
-  @Prop() type?: string = 'text';
+  @Prop() type?: 'email' | 'number' | 'search' | 'tel' | 'text' | 'url' =
+    'text';
 
   /**
    * The maximum number of characters allowed in the input.
@@ -72,10 +80,10 @@ export class VaTextInput {
    */
   @Prop() ariaDescribedby?: string = '';
 
-  /*
+  /**
    * The value for the input.
    */
-  @Prop({ mutable: true }) value?: string = '';
+  @Prop({ mutable: true }) value?: string;
   // TODO: Make the value prop reflective. Currently, it isn't because it screws
   // up the input behavior. For now, the only "bug" is that the changed value
   // isn't reflected in the DOM on the web component. That seems to be how the
@@ -108,12 +116,14 @@ export class VaTextInput {
 
   private getInputType() {
     if (!this.allowedInputTypes.includes(this.type)) {
-      consoleDevError(`The input type "${this.type}" is invalid or unsupported!`);
+      consoleDevError(
+        `The input type "${this.type}" is invalid or unsupported!`,
+      );
       return 'text';
     }
 
     return this.type;
-  };
+  }
 
   private handleChange = (e: Event) => {
     const target = e.target as HTMLInputElement;
@@ -140,10 +150,7 @@ export class VaTextInput {
     const describedBy =
       `${this.ariaDescribedby} ${this.error ? 'error-message' : ''}`.trim() ||
       null; // Null so we don't add the attribute if we have an empty string
-    const inputMode =
-      this.inputmode ?
-      this.inputmode :
-      null; // Null so we don't add the attribute if we have an empty string
+    const inputMode = this.inputmode ? this.inputmode : null; // Null so we don't add the attribute if we have an empty string
     const type = this.getInputType();
 
     return (
@@ -154,6 +161,7 @@ export class VaTextInput {
             {this.required && <span class="required">(*Required)</span>}
           </label>
         )}
+        <slot></slot>
         {this.error && <span id="error-message">{this.error}</span>}
         <input
           id="inputField"
