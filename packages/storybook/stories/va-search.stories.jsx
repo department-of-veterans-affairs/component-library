@@ -31,6 +31,7 @@ const Template = ({
     label={label}
     onInputBlurEvent={e => console.log(e, 'INPUT BLUR FIRED')}
     onInputChangeEvent={e => console.log(e, 'INPUT CHANGE FIRED')}
+    onInputFocusEvent={e => console.log(e, 'INPUT FOCUS FIRED')}
     onInputKeyDownEvent={e => console.log(e, 'INPUT KEYDOWN FIRED')}
     onButtonClickEvent={e => console.log(e, 'BUTTON CLICK FIRED')}
     onButtonFocusEvent={e => console.log(e, 'BUTTON FOCUS FIRED')}
