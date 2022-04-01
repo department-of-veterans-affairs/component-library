@@ -105,7 +105,6 @@ export class VaSearch {
   };
 
   private handleInputChangeEvent = (event: Event) => {
-    // const target = event.target as HTMLInputElement;
     this.inputChangeEvent.emit(event);
   };
 
