@@ -7,6 +7,7 @@ import {
   Event,
   EventEmitter,
 } from '@stencil/core';
+import i18next from 'i18next';
 import { consoleDevError } from '../../utils/utils';
 
 @Component({
@@ -158,7 +159,9 @@ export class VaTextInput {
         {this.label && (
           <label htmlFor="inputField">
             {this.label}{' '}
-            {this.required && <span class="required">(*Required)</span>}
+            {this.required && (
+              <span class="required">{i18next.t('required')}</span>
+            )}
           </label>
         )}
         <slot></slot>
