@@ -1,5 +1,6 @@
 import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
+import i18next from 'i18next';
 import { uniqueId } from '../../helpers/utilities';
 
 import Select from '../Select/Select';
@@ -81,7 +82,9 @@ export const SimpleDate = ({
     <fieldset className={fieldsetClass} id={inputId.current}>
       <legend className="vads-u-font-size--base vads-u-font-weight--normal">
         {label || 'Date of birth'}
-        {required && <span className="form-required-span">(*Required)</span>}
+        {required && (
+          <span className="form-required-span">{i18next.t('required')}</span>
+        )}
       </legend>
       {errorSpan}
       <div

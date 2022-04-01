@@ -95,6 +95,7 @@
   },
   "peerDependencies": {
     "@department-of-veterans-affairs/web-components": "*",
+    "i18next": "*",
     "react": "^17",
     "react-dom": "*"
   }

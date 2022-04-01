@@ -40,6 +40,8 @@ import Telephone, {
 import TextArea from './components/TextArea/TextArea';
 import TextInput from './components/TextInput/TextInput';
 
+import '../../core/src/i18n-setup';
+
 export {
   AcceptTermsPrompt,
   AdditionalInfo,
