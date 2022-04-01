@@ -2,26 +2,50 @@ import { newE2EPage } from '@stencil/core/testing';
 import { axeCheck } from '../../../testing/test-helpers';
 
 describe('va-text-input', () => {
-  it('renders without a label', async () => {
+  it('renders', async () => {
     const page = await newE2EPage();
 
-    await page.setContent('<va-text-input />');
+    await page.setContent('<va-text-input label="Hello, world" />');
     const element = await page.find('va-text-input');
 
     expect(element).toEqualHtml(`
-      <va-text-input class="hydrated">
+      <va-text-input class="hydrated" label="Hello, world">
         <mock:shadow-root>
+          <label for="inputField">
+            Hello, world
+          </label>
+          <slot></slot>
           <input id="inputField" type="text" />
         </mock:shadow-root>
       </va-text-input>
     `);
   });
 
-  it('renders a label', async () => {
+  it('renders slotted content', async () => {
     const page = await newE2EPage();
-    await page.setContent('<va-text-input label="Hello, world" />');
-    const element = await page.find('va-text-input >>> label');
-    expect(element).not.toBeNull();
+    await page.setContent(`
+    <va-text-input label="Name of issue">
+      <p className="vads-u-font-weight--normal label-description">
+        You can only add an issue that you've already received a VA decision
+        notice for.
+      </p>
+    </va-text-input>`);
+    const element = await page.find('va-text-input');
+    expect(element).toEqualHtml(`
+      <va-text-input class="hydrated" label="Name of issue">
+        <mock:shadow-root>
+          <label for="inputField">
+            Name of issue
+          </label>
+          <slot></slot>
+          <input id="inputField" type="text" />
+        </mock:shadow-root>
+        <p className="vads-u-font-weight--normal label-description">
+          You can only add an issue that you've already received a VA decision
+          notice for.
+        </p>
+      </va-text-input>
+    `);
   });
 
   it('renders an error message', async () => {
@@ -63,7 +87,10 @@ describe('va-text-input', () => {
     expect(el).toEqualHtml(`
       <va-text-input class="hydrated" label="This is a field" required="">
         <mock:shadow-root>
-          <label for="inputField">This is a field <span class="required">(*Required)</span></label>
+          <label for="inputField">
+            This is a field <span class="required">(*Required)</span>
+          </label>
+          <slot></slot>
           <input id="inputField" type="text" />
         </mock:shadow-root>
       </va-text-input>
@@ -171,7 +198,7 @@ describe('va-text-input', () => {
       'search',
       'tel',
       'text',
-      'url'
+      'url',
     ];
     for (const inputType of allowedInputTypes) {
       const page = await newE2EPage();
@@ -208,5 +235,4 @@ describe('va-text-input', () => {
       expect(inputEl.getAttribute('inputmode')).toBe(inputMode);
     }
   });
-
 });
