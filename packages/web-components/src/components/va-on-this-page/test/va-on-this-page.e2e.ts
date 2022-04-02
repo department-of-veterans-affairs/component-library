@@ -112,4 +112,45 @@ describe('va-on-this-page', () => {
   </va-on-this-page>
     `);
   });
+
+  it('does not display <h2>s without ids', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent(
+      `
+      <article>
+        <va-on-this-page></va-on-this-page>
+        <h2 id="an-id">Hello</h2>
+        <div>Some content</div>
+        <h2 id="its-me">It's me</h2>
+        <span>Hello from the other side</span>
+        <h2>Heading without id</h2>
+        <span>The h2 above has no id</span>
+      </article>
+      `,
+    );
+    const element = await page.find('va-on-this-page');
+
+    expect(element).toEqualHtml(`
+      <va-on-this-page class="hydrated">
+        <mock:shadow-root>
+          <nav aria-labelledby="on-this-page">
+            <dl>
+              <dt id="on-this-page">On this page</dt>
+              <dd role="definition">
+                <a href="#an-id">
+                  <i aria-hidden="true" class="fa-arrow-down fas"></i>
+                  Hello
+                </a>
+                <a href="#its-me">
+                  <i aria-hidden="true" class="fa-arrow-down fas"></i>
+                  It's me
+                </a>
+              </dd>
+            </dl>
+          </nav>
+        </mock:shadow-root>
+      </va-on-this-page>
+    `);
+  });
 });
