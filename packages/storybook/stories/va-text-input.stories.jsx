@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import React from 'react';
+import React, { useState } from 'react';
 import { generateEventsDescription } from './events';
 import { getWebComponentDocs, propStructure } from './wc-helpers';
 
@@ -65,20 +65,27 @@ const Template = ({
   type,
   'aria-describedby': ariaDescribedby,
 }) => {
+  const [lang, setLang] = useState('es');
+  console.log('RENDERING');
   return (
-    <va-text-input
-      name={name}
-      label={label}
-      autocomplete={autocomplete}
-      enable-analytics={enableAnalytics}
-      required={required}
-      error={error}
-      maxlength={maxlength}
-      value={value}
-      inputmode={inputmode}
-      type={type}
-      aria-describedby={ariaDescribedby}
-    />
+    <div id="content" lang={lang}>
+      <button onClick={() => setLang(lang == 'en' ? 'es' : 'en')}>
+        Switch language
+      </button>
+      <va-text-input
+        name={name}
+        label={label}
+        autocomplete={autocomplete}
+        enable-analytics={enableAnalytics}
+        required={required}
+        error={error}
+        maxlength={maxlength}
+        value={value}
+        inputmode={inputmode}
+        type={type}
+        aria-describedby={ariaDescribedby}
+      />
+    </div>
   );
 };
 

@@ -8,8 +8,15 @@ export default {
 
 const Template = args => {
   const [date, setDate] = useState(args.date);
+  const [lang, setLang] = useState('en');
+  console.log('rendering');
   return (
-    <Date {...args} date={date} onValueChange={newDate => setDate(newDate)} />
+    <div id="content" lang={lang}>
+      <button onClick={() => setLang(lang === 'en' ? 'es' : 'en')}>
+        Switch language
+      </button>
+      <Date {...args} date={date} onValueChange={newDate => setDate(newDate)} />
+    </div>
   );
 };
 

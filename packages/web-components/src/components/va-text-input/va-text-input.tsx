@@ -6,6 +6,7 @@ import {
   h,
   Event,
   EventEmitter,
+  forceUpdate,
 } from '@stencil/core';
 import i18next from 'i18next';
 import { consoleDevError } from '../../utils/utils';
@@ -146,6 +147,14 @@ export class VaTextInput {
       });
     }
   };
+
+  componentWillRender() {
+    console.log('ABOUT TO RENDER');
+    i18next.on('languageChanged', () => {
+      console.log('language changed text-input');
+      forceUpdate(this.el);
+    });
+  }
 
   render() {
     const describedBy =
