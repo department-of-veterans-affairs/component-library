@@ -65,7 +65,7 @@ const Template = ({
   type,
   'aria-describedby': ariaDescribedby,
 }) => {
-  const [lang, setLang] = useState('es');
+  const [lang, setLang] = useState('en');
   console.log('RENDERING');
   return (
     <div id="content" lang={lang}>
