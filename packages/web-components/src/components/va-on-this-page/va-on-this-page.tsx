@@ -27,13 +27,16 @@ export class VaOnThisPage {
    */
   @Prop() enableAnalytics?: boolean;
 
-  private handleOnClick = () => {
+  private handleOnClick = event => {
     if (!this.enableAnalytics) return;
     this.componentLibraryAnalytics.emit({
       componentName: 'va-on-this-page',
-      // TODO: reach out to Analytics team for action and details
-      action: 'linkClick',
-      details: {},
+      action: 'click',
+      details: {
+        'click-text':
+          event.composedPath()?.[0]?.textContent ||
+          event.path?.[0]?.textContent,
+      },
     });
   };
 
