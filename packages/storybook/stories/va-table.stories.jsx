@@ -9,7 +9,7 @@ import {
 const accordionDocs = getWebComponentDocs('va-table');
 
 export default {
-  title: 'Components/va-table (DO NOT USE YET)',
+  title: 'Components/va-table',
 };
 const data = [
   [
