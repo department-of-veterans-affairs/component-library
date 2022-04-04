@@ -1,4 +1,4 @@
-import '../../core/src/i18n-setup';
+import '../../core/src/i18n/i18n-setup';
 
 export { Components, JSX } from './components';
 
