@@ -375,6 +375,14 @@ export namespace Components {
     }
     interface VaTable {
         /**
+          * Whether the initial sort state will be descending or not.
+         */
+        "descending": boolean;
+        /**
+          * The zero-based index of the column to sort by. Optional.
+         */
+        "sortColumn": number;
+        /**
           * The title of the table
          */
         "tableTitle": string;
@@ -1124,6 +1132,14 @@ declare namespace LocalJSX {
         "value"?: string;
     }
     interface VaTable {
+        /**
+          * Whether the initial sort state will be descending or not.
+         */
+        "descending"?: boolean;
+        /**
+          * The zero-based index of the column to sort by. Optional.
+         */
+        "sortColumn"?: number;
         /**
           * The title of the table
          */
