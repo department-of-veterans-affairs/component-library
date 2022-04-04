@@ -52,7 +52,7 @@ const fileNames = [].concat.apply(
       ignore: ['./**/*.unit.spec.@(js|jsx)', './**/*.stories.@(js|jsx)'],
     }),
     glob.sync('./src/helpers/*.js'),
-    glob.sync('../core/src/i18n/*.js'),
+    glob.sync('../core/src/i18n/**/*.js'),
   ],
 );
 
