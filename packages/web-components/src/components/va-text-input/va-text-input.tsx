@@ -148,12 +148,14 @@ export class VaTextInput {
     }
   };
 
-  componentWillRender() {
-    console.log('ABOUT TO RENDER');
+  connectedCallback() {
     i18next.on('languageChanged', () => {
       console.log('language changed text-input');
       forceUpdate(this.el);
     });
+  }
+  componentWillRender() {
+    console.log('ABOUT TO RENDER');
   }
 
   render() {
