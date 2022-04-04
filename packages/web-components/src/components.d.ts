@@ -176,6 +176,60 @@ export namespace Components {
          */
         "required": boolean;
     }
+    interface VaDate {
+        /**
+          * Add additional aria-describedby to the month, day & year elements. Note: make sure the ID exists on the page before adding this, or you'll have an WCAG violation
+         */
+        "ariaDescribedby": string;
+        /**
+          * Set the default day on the day input.
+         */
+        "day": string;
+        /**
+          * Whether or not an analytics event will be fired.
+         */
+        "enableAnalytics": boolean;
+        /**
+          * The error message to render (if any)
+         */
+        "error": string;
+        /**
+          * Set the invalid message.
+         */
+        "invalidMessage": string;
+        /**
+          * Label for the field.
+         */
+        "label": string;
+        /**
+          * Set the `max` value on the year input.
+         */
+        "maxYear": number;
+        /**
+          * Set the `min` value on the year input.
+         */
+        "minYear": number;
+        /**
+          * Set the default month on the month input.
+         */
+        "month": string;
+        /**
+          * Used to create unique name attributes for each input.
+         */
+        "name": string;
+        /**
+          * Render marker indicating field is required.
+         */
+        "required": boolean;
+        /**
+          * Set the required message.
+         */
+        "requiredMessage": string;
+        /**
+          * Set the default year on the year input.
+         */
+        "year": string;
+    }
     interface VaFeaturedContent {
     }
     interface VaLoadingIndicator {
@@ -507,6 +561,12 @@ declare global {
         prototype: HTMLVaCheckboxGroupElement;
         new (): HTMLVaCheckboxGroupElement;
     };
+    interface HTMLVaDateElement extends Components.VaDate, HTMLStencilElement {
+    }
+    var HTMLVaDateElement: {
+        prototype: HTMLVaDateElement;
+        new (): HTMLVaDateElement;
+    };
     interface HTMLVaFeaturedContentElement extends Components.VaFeaturedContent, HTMLStencilElement {
     }
     var HTMLVaFeaturedContentElement: {
@@ -613,6 +673,7 @@ declare global {
         "va-breadcrumbs": HTMLVaBreadcrumbsElement;
         "va-checkbox": HTMLVaCheckboxElement;
         "va-checkbox-group": HTMLVaCheckboxGroupElement;
+        "va-date": HTMLVaDateElement;
         "va-featured-content": HTMLVaFeaturedContentElement;
         "va-loading-indicator": HTMLVaLoadingIndicatorElement;
         "va-modal": HTMLVaModalElement;
@@ -849,6 +910,72 @@ declare namespace LocalJSX {
           * Whether or not this input field is required.
          */
         "required"?: boolean;
+    }
+    interface VaDate {
+        /**
+          * Add additional aria-describedby to the month, day & year elements. Note: make sure the ID exists on the page before adding this, or you'll have an WCAG violation
+         */
+        "ariaDescribedby"?: string;
+        /**
+          * Set the default day on the day input.
+         */
+        "day"?: string;
+        /**
+          * Whether or not an analytics event will be fired.
+         */
+        "enableAnalytics"?: boolean;
+        /**
+          * The error message to render (if any)
+         */
+        "error"?: string;
+        /**
+          * Set the invalid message.
+         */
+        "invalidMessage"?: string;
+        /**
+          * Label for the field.
+         */
+        "label": string;
+        /**
+          * Set the `max` value on the year input.
+         */
+        "maxYear"?: number;
+        /**
+          * Set the `min` value on the year input.
+         */
+        "minYear"?: number;
+        /**
+          * Set the default month on the month input.
+         */
+        "month"?: string;
+        /**
+          * Used to create unique name attributes for each input.
+         */
+        "name": string;
+        /**
+          * The event used to track usage of the component. This is emitted when an input value changes and enableAnalytics is true.
+         */
+        "onComponent-library-analytics"?: (event: CustomEvent<any>) => void;
+        /**
+          * Fires when the date input loses focus
+         */
+        "onDateBlurEvent"?: (event: CustomEvent<any>) => void;
+        /**
+          * Fires when the date input loses focus after its value was changed
+         */
+        "onDateChangeEvent"?: (event: CustomEvent<any>) => void;
+        /**
+          * Render marker indicating field is required.
+         */
+        "required"?: boolean;
+        /**
+          * Set the required message.
+         */
+        "requiredMessage"?: string;
+        /**
+          * Set the default year on the year input.
+         */
+        "year"?: string;
     }
     interface VaFeaturedContent {
     }
@@ -1219,6 +1346,7 @@ declare namespace LocalJSX {
         "va-breadcrumbs": VaBreadcrumbs;
         "va-checkbox": VaCheckbox;
         "va-checkbox-group": VaCheckboxGroup;
+        "va-date": VaDate;
         "va-featured-content": VaFeaturedContent;
         "va-loading-indicator": VaLoadingIndicator;
         "va-modal": VaModal;
@@ -1250,6 +1378,7 @@ declare module "@stencil/core" {
             "va-breadcrumbs": LocalJSX.VaBreadcrumbs & JSXBase.HTMLAttributes<HTMLVaBreadcrumbsElement>;
             "va-checkbox": LocalJSX.VaCheckbox & JSXBase.HTMLAttributes<HTMLVaCheckboxElement>;
             "va-checkbox-group": LocalJSX.VaCheckboxGroup & JSXBase.HTMLAttributes<HTMLVaCheckboxGroupElement>;
+            "va-date": LocalJSX.VaDate & JSXBase.HTMLAttributes<HTMLVaDateElement>;
             "va-featured-content": LocalJSX.VaFeaturedContent & JSXBase.HTMLAttributes<HTMLVaFeaturedContentElement>;
             "va-loading-indicator": LocalJSX.VaLoadingIndicator & JSXBase.HTMLAttributes<HTMLVaLoadingIndicatorElement>;
             "va-modal": LocalJSX.VaModal & JSXBase.HTMLAttributes<HTMLVaModalElement>;

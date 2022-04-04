@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import React, { useState } from 'react';
 import { generateEventsDescription } from './events';
 import { getWebComponentDocs, propStructure } from './wc-helpers';
@@ -21,7 +20,7 @@ const defaultArgs = {
   'name': 'branch',
   'value': 'army',
   'required': false,
-  'error': null,
+  'error': undefined,
   'aria-live-region-text': 'You selected',
   'options': [
     <option key="1" value="navy">
@@ -49,7 +48,6 @@ const Template = ({
   value,
   required,
   error,
-  'aria-live-region-text': ariaLiveRegionText,
   options,
   'use-add-button': useAddButton,
 }) => {
@@ -77,7 +75,6 @@ const Template = ({
         value={value}
         required={required}
         error={error}
-        aria-live-region-text={ariaLiveRegionText}
         use-add-button={useAddButton}
       >
         {modifiedOptions}
