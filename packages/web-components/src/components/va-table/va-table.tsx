@@ -25,7 +25,7 @@ export class VaTable {
   @Prop() tableTitle: string;
 
   /**
-   * The zero-based index of the column to sort by. Optional.
+   * The zero-based index of the column to sort by (Doesn't work in IE11). Optional.
    */
   @Prop() sortColumn: number;
 
