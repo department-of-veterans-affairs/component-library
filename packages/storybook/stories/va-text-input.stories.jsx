@@ -68,8 +68,14 @@ const Template = ({
   const [lang, setLang] = useState('en');
   console.log('RENDERING');
   return (
-    <div id="content" lang={lang}>
-      <button onClick={() => setLang(lang == 'en' ? 'es' : 'en')}>
+    <>
+      <button
+        onClick={() => {
+          const newLang = lang === 'en' ? 'es' : 'en';
+          setLang(newLang);
+          document.querySelector('main').setAttribute('lang', newLang);
+        }}
+      >
         Switch language
       </button>
       <va-text-input
@@ -85,7 +91,7 @@ const Template = ({
         type={type}
         aria-describedby={ariaDescribedby}
       />
-    </div>
+    </>
   );
 };
 

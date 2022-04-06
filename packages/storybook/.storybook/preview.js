@@ -94,6 +94,14 @@ export const parameters = {
   viewMode: 'docs',
 };
 
+export const decorators = [
+  Story => (
+    <main lang="en">
+      <Story />
+    </main>
+  ),
+];
+
 // Fix for React 17/NVDA bug where React root is read as "clickable"
 // https://github.com/nvaccess/nvda/issues/13262
 // https://github.com/facebook/react/issues/20895

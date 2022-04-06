@@ -1,16 +1,16 @@
 import i18next from 'i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
 
-import contentElementTag from './language-detector';
+import mainTag from './language-detector';
 import enTranslation from './translations/en';
 import esTranslation from './translations/es';
 
 const languageDetector = new LanguageDetector();
-languageDetector.addDetector(contentElementTag);
+languageDetector.addDetector(mainTag);
 i18next.use(languageDetector).init({
   fallbackLng: 'en',
   detection: {
-    order: ['contentElementTag', 'htmlTag'],
+    order: ['mainTag', 'htmlTag'],
   },
   resources: {
     en: { translation: enTranslation },
@@ -23,7 +23,7 @@ export { i18next };
 window.addEventListener('DOMContentLoaded', event => {
   console.log('DOM fully loaded and parsed');
 
-  const element = document.getElementById('content');
+  const element = document.querySelector('main');
 
   const observer = new MutationObserver(mutations => {
     mutations.forEach(mutation => {

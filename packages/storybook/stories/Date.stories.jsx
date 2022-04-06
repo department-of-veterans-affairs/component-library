@@ -11,12 +11,18 @@ const Template = args => {
   const [lang, setLang] = useState('en');
   console.log('rendering');
   return (
-    <div id="content" lang={lang}>
-      <button onClick={() => setLang(lang === 'en' ? 'es' : 'en')}>
+    <>
+      <button
+        onClick={() => {
+          const newLang = lang === 'en' ? 'es' : 'en';
+          setLang(newLang);
+          document.querySelector('main').setAttribute('lang', newLang);
+        }}
+      >
         Switch language
       </button>
       <Date {...args} date={date} onValueChange={newDate => setDate(newDate)} />
-    </div>
+    </>
   );
 };
 

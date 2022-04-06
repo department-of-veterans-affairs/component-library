@@ -1,5 +1,5 @@
 export default {
-  name: 'contentElementTag',
+  name: 'mainTag',
 
   lookup(options) {
     console.log('DETECTING LANGUAGE', options);
