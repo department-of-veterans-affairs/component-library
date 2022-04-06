@@ -9,7 +9,17 @@ import {
   forceUpdate,
 } from '@stencil/core';
 import i18next from 'i18next';
+// import { i18next } from '../../../../core/src/i18n/i18n-setup';
 import { consoleDevError } from '../../utils/utils';
+import { Build } from '@stencil/core';
+
+/** The .t() function will return the key instead of the value
+ */
+if (Build.isTesting) {
+  i18next.init({ lng: 'cimode' });
+}
+
+console.log('I18N', i18next.language);
 
 @Component({
   tag: 'va-text-input',
