@@ -2,15 +2,8 @@ export default {
   name: 'mainTag',
 
   lookup(options) {
-    console.log('DETECTING LANGUAGE', options);
-    const contentContainer = document.getElementById('content');
+    const mainTag = document.querySelector('main');
 
-    // if(htmlTag && typeof htmlTag.getAttribute === 'function') {
-    //   found = htmlTag.getAttribute('lang');
-    // }
-    console.log('CONTENT', contentContainer);
-    console.log('DOC', document);
-
-    return contentContainer?.getAttribute('lang');
+    return mainTag?.getAttribute('lang');
   },
 };
