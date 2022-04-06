@@ -35,7 +35,6 @@ const defaultArgs = {
   'aria-describedby': undefined,
   'min': undefined,
   'max': undefined,
-  'pattern': undefined,
 };
 
 const Template = ({
@@ -49,7 +48,6 @@ const Template = ({
   'aria-describedby': ariaDescribedby,
   min,
   max,
-  pattern,
 }) => {
   return (
     <va-number-input
@@ -63,7 +61,6 @@ const Template = ({
       aria-describedby={ariaDescribedby}
       max={max}
       min={min}
-      pattern={pattern}
     />
   );
 };
