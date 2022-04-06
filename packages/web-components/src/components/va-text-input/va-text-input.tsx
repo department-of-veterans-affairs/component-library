@@ -197,8 +197,10 @@ export class VaTextInput {
           inputmode={inputMode}
           maxlength={this.maxlength}
         />
-        {this.maxlength && this.value.length >= this.maxlength && (
-          <small aria-live="polite">(Max. {this.maxlength} characters)</small>
+        {this.maxlength && this.value?.length >= this.maxlength && (
+          <small aria-live="polite">
+            {i18next.t('max-chars', { length: this.maxlength })}
+          </small>
         )}
       </Host>
     );

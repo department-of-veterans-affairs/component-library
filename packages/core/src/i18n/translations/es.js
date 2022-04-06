@@ -1,5 +1,4 @@
 export default {
   'required': '[Spanish Text]',
-  'max-chars': '(Max. {{length}} characters)',
-  'valid-date': 'Please provide a valid date',
+  'max-chars': '[Spanish text with interpolated value: {{length}}]',
 };
