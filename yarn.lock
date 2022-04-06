@@ -1787,6 +1787,7 @@ __metadata:
   peerDependencies:
     "@department-of-veterans-affairs/web-components": "*"
     i18next: "*"
+    i18next-browser-languagedetector: "*"
     react: ^17
     react-dom: "*"
   languageName: unknown
@@ -1848,6 +1849,7 @@ __metadata:
   peerDependencies:
     "@department-of-veterans-affairs/formation": ^6.14.0
     i18next: "*"
+    i18next-browser-languagedetector: "*"
   languageName: unknown
   linkType: soft
 
