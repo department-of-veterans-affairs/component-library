@@ -14,6 +14,18 @@ export default {
       },
     },
   },
+  argTypes: {
+    keydown: {
+      description: 'Fires when a key is pressed',
+      table: {
+        category: 'Events',
+        defaultValue: {
+          detail: undefined,
+        },
+      },
+      type: { name: 'Event' },
+    },
+  },
 };
 
 const defaultArgs = {
