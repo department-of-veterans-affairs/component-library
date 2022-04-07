@@ -229,9 +229,9 @@ export namespace Components {
     }
     interface VaOnThisPage {
         /**
-          * Whether or not an analytics event will be fired
+          * If true, analytics event will not be fired
          */
-        "enableAnalytics"?: boolean;
+        "disableAnalytics"?: boolean;
     }
     interface VaPagination {
         /**
@@ -379,7 +379,7 @@ export namespace Components {
          */
         "descending": boolean;
         /**
-          * The zero-based index of the column to sort by. Optional.
+          * The zero-based index of the column to sort by (Doesn't work in IE11). Optional.
          */
         "sortColumn": number;
         /**
@@ -935,9 +935,9 @@ declare namespace LocalJSX {
     }
     interface VaOnThisPage {
         /**
-          * Whether or not an analytics event will be fired
+          * If true, analytics event will not be fired
          */
-        "enableAnalytics"?: boolean;
+        "disableAnalytics"?: boolean;
         /**
           * The event used to track usage of the component. This is emitted when the user clicks on a link and enableAnalytics is true.
          */
@@ -1137,7 +1137,7 @@ declare namespace LocalJSX {
          */
         "descending"?: boolean;
         /**
-          * The zero-based index of the column to sort by. Optional.
+          * The zero-based index of the column to sort by (Doesn't work in IE11). Optional.
          */
         "sortColumn"?: number;
         /**

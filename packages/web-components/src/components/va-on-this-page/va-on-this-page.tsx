@@ -23,12 +23,12 @@ export class VaOnThisPage {
   componentLibraryAnalytics: EventEmitter;
 
   /**
-   * Whether or not an analytics event will be fired
+   * If true, analytics event will not be fired
    */
-  @Prop() enableAnalytics?: boolean;
+  @Prop() disableAnalytics?: boolean;
 
   private handleOnClick = event => {
-    if (!this.enableAnalytics) return;
+    if (this.disableAnalytics) return;
     this.componentLibraryAnalytics.emit({
       componentName: 'va-on-this-page',
       action: 'click',

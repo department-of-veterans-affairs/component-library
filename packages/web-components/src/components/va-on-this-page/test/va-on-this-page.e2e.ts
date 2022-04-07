@@ -154,12 +154,12 @@ describe('va-on-this-page', () => {
     `);
   });
 
-  it('fires analytics event when an anchor is clicked and enable-analytics is true', async () => {
+  it('fires analytics event when an anchor is clicked', async () => {
     const page = await newE2EPage();
     await page.setContent(
       `
       <article>
-        <va-on-this-page enable-analytics></va-on-this-page>
+        <va-on-this-page></va-on-this-page>
         <h2 id="an-id">Hello</h2>
         <div>Some content</div>
         <h2 id="its-me">It's me</h2>
@@ -181,12 +181,12 @@ describe('va-on-this-page', () => {
     });
   });
 
-  it(`doesn't fire analytics event when an anchor is clicked and enable-analytics is not true`, async () => {
+  it(`doesn't fire analytics event when an anchor is clicked and disable-analytics is true`, async () => {
     const page = await newE2EPage();
     await page.setContent(
       `
       <article>
-        <va-on-this-page></va-on-this-page>
+        <va-on-this-page disable-analytics></va-on-this-page>
         <h2 id="an-id">Hello</h2>
         <div>Some content</div>
         <h2 id="its-me">It's me</h2>
