@@ -63,27 +63,17 @@ export class VaDate {
   /**
    * Set the default month on the month input.
    */
-  @Prop() month: string = '1';
+  @Prop() month: string;
 
   /**
    * Set the default day on the day input.
    */
-  @Prop() day: string = '1';
+  @Prop() day: string;
 
   /**
    * Set the default year on the year input.
    */
-  @Prop() year: string = '1900';
-
-  /**
-   * Set the required message.
-   */
-  @Prop() requiredMessage: string;
-
-  /**
-   * Set the invalid message.
-   */
-  @Prop() invalidMessage: string;
+  @Prop() year: string;
 
   /**
    * Fires when the date input loses focus after its value was changed

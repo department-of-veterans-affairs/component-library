@@ -194,10 +194,6 @@ export namespace Components {
          */
         "error": string;
         /**
-          * Set the invalid message.
-         */
-        "invalidMessage": string;
-        /**
           * Label for the field.
          */
         "label": string;
@@ -221,10 +217,6 @@ export namespace Components {
           * Render marker indicating field is required.
          */
         "required": boolean;
-        /**
-          * Set the required message.
-         */
-        "requiredMessage": string;
         /**
           * Set the default year on the year input.
          */
@@ -929,10 +921,6 @@ declare namespace LocalJSX {
          */
         "error"?: string;
         /**
-          * Set the invalid message.
-         */
-        "invalidMessage"?: string;
-        /**
           * Label for the field.
          */
         "label": string;
@@ -968,10 +956,6 @@ declare namespace LocalJSX {
           * Render marker indicating field is required.
          */
         "required"?: boolean;
-        /**
-          * Set the required message.
-         */
-        "requiredMessage"?: string;
         /**
           * Set the default year on the year input.
          */
