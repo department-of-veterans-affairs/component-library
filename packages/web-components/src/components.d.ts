@@ -48,6 +48,10 @@ export namespace Components {
          */
         "disableAnalytics": boolean;
         /**
+          * If true, left blue border and padding is removed.
+         */
+        "disableBorder": boolean;
+        /**
           * The text to trigger the expansion
          */
         "trigger": string;
@@ -224,6 +228,10 @@ export namespace Components {
         "visible": boolean;
     }
     interface VaOnThisPage {
+        /**
+          * If true, analytics event will not be fired
+         */
+        "disableAnalytics"?: boolean;
     }
     interface VaPagination {
         /**
@@ -367,6 +375,14 @@ export namespace Components {
     }
     interface VaTable {
         /**
+          * Whether the initial sort state will be descending or not.
+         */
+        "descending": boolean;
+        /**
+          * The zero-based index of the column to sort by (Doesn't work in IE11). Optional.
+         */
+        "sortColumn": number;
+        /**
           * The title of the table
          */
         "tableTitle": string;
@@ -415,11 +431,17 @@ export namespace Components {
         /**
           * The inputmode attribute.
          */
-        "inputmode"?: string;
+        "inputmode"?: | 'decimal'
+    | 'email'
+    | 'numeric'
+    | 'search'
+    | 'tel'
+    | 'text'
+    | 'url';
         /**
           * The label for the text input.
          */
-        "label": string | HTMLElement;
+        "label"?: string;
         /**
           * The maximum number of characters allowed in the input.
          */
@@ -435,7 +457,10 @@ export namespace Components {
         /**
           * The type attribute.
          */
-        "type"?: string;
+        "type"?: 'email' | 'number' | 'search' | 'tel' | 'text' | 'url';
+        /**
+          * The value for the input.
+         */
         "value"?: string;
     }
 }
@@ -668,6 +693,10 @@ declare namespace LocalJSX {
           * If true, doesn't fire the CustomEvent which can be used for analytics tracking.
          */
         "disableAnalytics"?: boolean;
+        /**
+          * If true, left blue border and padding is removed.
+         */
+        "disableBorder"?: boolean;
         /**
           * The event used to track usage of the component. This is emitted when an anchor link is clicked and disableAnalytics is not true.
          */
@@ -905,6 +934,14 @@ declare namespace LocalJSX {
         "visible"?: boolean;
     }
     interface VaOnThisPage {
+        /**
+          * If true, analytics event will not be fired
+         */
+        "disableAnalytics"?: boolean;
+        /**
+          * The event used to track usage of the component. This is emitted when the user clicks on a link and enableAnalytics is true.
+         */
+        "onComponent-library-analytics"?: (event: CustomEvent<any>) => void;
     }
     interface VaPagination {
         /**
@@ -1096,6 +1133,14 @@ declare namespace LocalJSX {
     }
     interface VaTable {
         /**
+          * Whether the initial sort state will be descending or not.
+         */
+        "descending"?: boolean;
+        /**
+          * The zero-based index of the column to sort by (Doesn't work in IE11). Optional.
+         */
+        "sortColumn"?: number;
+        /**
           * The title of the table
          */
         "tableTitle"?: string;
@@ -1148,11 +1193,17 @@ declare namespace LocalJSX {
         /**
           * The inputmode attribute.
          */
-        "inputmode"?: string;
+        "inputmode"?: | 'decimal'
+    | 'email'
+    | 'numeric'
+    | 'search'
+    | 'tel'
+    | 'text'
+    | 'url';
         /**
           * The label for the text input.
          */
-        "label"?: string | HTMLElement;
+        "label"?: string;
         /**
           * The maximum number of characters allowed in the input.
          */
@@ -1180,7 +1231,10 @@ declare namespace LocalJSX {
         /**
           * The type attribute.
          */
-        "type"?: string;
+        "type"?: 'email' | 'number' | 'search' | 'tel' | 'text' | 'url';
+        /**
+          * The value for the input.
+         */
         "value"?: string;
     }
     interface IntrinsicElements {

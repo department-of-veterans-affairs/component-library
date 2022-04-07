@@ -1,12 +1,12 @@
 import React from 'react';
-import {AcceptTermsPrompt} from '@department-of-veterans-affairs/component-library';
+import { AcceptTermsPrompt } from '@department-of-veterans-affairs/component-library';
 
 export default {
   title: 'Components/AcceptTermsPrompt',
   component: AcceptTermsPrompt,
 };
 
-const Template = (args) => <AcceptTermsPrompt terms={{ ...args }} />;
+const Template = args => <AcceptTermsPrompt terms={{ ...args }} />;
 
 const defaultArgs = {
   title: 'Terms and Conditions',

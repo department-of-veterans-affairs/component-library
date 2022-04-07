@@ -9,7 +9,7 @@ import {
 const accordionDocs = getWebComponentDocs('va-table');
 
 export default {
-  title: 'Components/va-table (DO NOT USE YET)',
+  title: 'Components/va-table',
 };
 const data = [
   [
@@ -35,11 +35,20 @@ const data = [
 ];
 
 const Template = args => {
-  const { 'table-title': tableTitle, rows = data } = args;
+  const {
+    'table-title': tableTitle,
+    'sort-column': sortColumn,
+    descending,
+    rows = data,
+  } = args;
   const columns = ['Document title', 'Description', 'Year'];
   return (
     <main>
-      <va-table table-title={tableTitle}>
+      <va-table
+        table-title={tableTitle}
+        sort-column={sortColumn}
+        descending={descending}
+      >
         <va-table-row slot="headers">
           {columns.map(col => (
             <span>{col}</span>
@@ -60,6 +69,8 @@ const Template = args => {
 
 const defaultArgs = {
   'table-title': 'My table',
+  'sort-column': undefined,
+  'descending': false,
 };
 
 export const Default = Template.bind({ data });
@@ -67,6 +78,12 @@ Default.args = {
   ...defaultArgs,
 };
 Default.argTypes = propStructure(accordionDocs);
+
+export const Sortable = Template.bind({ data });
+Sortable.args = {
+  ...defaultArgs,
+  'sort-column': 2,
+};
 
 export const MissingData = Template.bind({});
 MissingData.args = {
