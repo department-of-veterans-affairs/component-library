@@ -51,12 +51,20 @@ export class VaSelect {
   /**
    * The event attached to select's onkeydown
    */
-  @Event() vaKeyDown: EventEmitter;
+  @Event({
+    bubbles: true,
+    composed: true,
+  })
+  vaKeyDown: EventEmitter;
 
   /**
    * The event emitted when the selected value changes
    */
-  @Event() vaSelect: EventEmitter;
+  @Event({
+    bubbles: true,
+    composed: true,
+  })
+  vaSelect: EventEmitter;
 
   /**
    * The event used to track usage of the component. This is emitted when an
