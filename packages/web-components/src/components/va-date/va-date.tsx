@@ -94,7 +94,6 @@ export class VaDate {
   dateBlurEvent: EventEmitter;
 
   private handleDateBlurEvent = (event: FocusEvent) => {
-    console.log('DATE BLUR');
     this.dateBlurEvent.emit(event);
   };
 
@@ -126,14 +125,14 @@ export class VaDate {
       label,
       name,
       error,
-      //   ariaDescribedby,
-      //   maxYear,
-      //   minYear,
+      ariaDescribedby,
+      maxYear,
+      minYear,
       handleDateBlurEvent,
       handleDateChangeEvent,
       month,
       day,
-      //   year,
+      year,
     } = this;
 
     const daysForSelectedMonth = month ? days[month] : [];
@@ -159,9 +158,11 @@ export class VaDate {
                   onVaSelect={handleDateChangeEvent}
                   onBlur={handleDateBlurEvent}
                 >
-                  {months.map(month => (
-                    <option value={month.value}>{month.label}</option>
-                  ))}
+                  <option value=""></option>
+                  {months &&
+                    months.map(month => (
+                      <option value={month.value}>{month.label}</option>
+                    ))}
                 </va-select>
               </div>
               <div>
@@ -173,24 +174,25 @@ export class VaDate {
                   onVaSelect={handleDateChangeEvent}
                   onBlur={handleDateBlurEvent}
                 >
-                  {daysForSelectedMonth.map(day => (
-                    <option value={day}>{day}</option>
-                  ))}
+                  <option value=""></option>
+                  {daysForSelectedMonth &&
+                    daysForSelectedMonth.map(day => (
+                      <option value={day}>{day}</option>
+                    ))}
                 </va-select>
               </div>
               <div>
-                {/* <NumberInput
+                <va-number-input
                   error={error}
                   label="Year"
                   name={`${name}Year`}
                   max={maxYear}
                   min={minYear}
-                  pattern="[0-9]{4}"
-                  field={year}
-                  onValueChange={handleDateChangeEvent}
+                  value={year}
+                  onInput={handleDateChangeEvent}
                   ariaDescribedby={ariaDescribedby}
                   onBlur={handleDateBlurEvent}
-                /> */}
+                />
               </div>
             </div>
           </div>

@@ -463,7 +463,7 @@ export namespace Components {
          */
         "descending": boolean;
         /**
-          * The zero-based index of the column to sort by. Optional.
+          * The zero-based index of the column to sort by (Doesn't work in IE11). Optional.
          */
         "sortColumn": number;
         /**
@@ -1339,7 +1339,7 @@ declare namespace LocalJSX {
          */
         "descending"?: boolean;
         /**
-          * The zero-based index of the column to sort by. Optional.
+          * The zero-based index of the column to sort by (Doesn't work in IE11). Optional.
          */
         "sortColumn"?: number;
         /**
