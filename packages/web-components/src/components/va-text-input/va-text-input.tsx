@@ -110,7 +110,7 @@ export class VaTextInput {
     return this.type;
   };
 
-  private handleChange = (e: Event) => {
+  private handleInput= (e: Event) => {
     const target = e.target as HTMLInputElement;
     this.value = target.value;
   };
@@ -153,7 +153,7 @@ export class VaTextInput {
           id="inputField"
           type={type}
           value={this.value}
-          onInput={this.handleChange}
+          onInput={this.handleInput}
           onBlur={this.handleBlur}
           aria-describedby={describedBy}
           inputmode={inputMode}
