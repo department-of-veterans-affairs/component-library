@@ -79,6 +79,7 @@ const Template = ({
         error={error}
         aria-live-region-text={ariaLiveRegionText}
         use-add-button={useAddButton}
+        onKeyDown={() => console.log('KEYDOWN FIRED')}
       >
         {modifiedOptions}
       </va-select>

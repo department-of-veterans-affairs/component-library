@@ -375,7 +375,7 @@ export namespace Components {
          */
         "descending": boolean;
         /**
-          * The zero-based index of the column to sort by. Optional.
+          * The zero-based index of the column to sort by (Doesn't work in IE11). Optional.
          */
         "sortColumn": number;
         /**
@@ -1103,10 +1103,6 @@ declare namespace LocalJSX {
          */
         "onComponent-library-analytics"?: (event: CustomEvent<any>) => void;
         /**
-          * The event attached to select's onkeydown
-         */
-        "onVaKeyDown"?: (event: CustomEvent<any>) => void;
-        /**
           * The event emitted when the selected value changes
          */
         "onVaSelect"?: (event: CustomEvent<any>) => void;
@@ -1125,7 +1121,7 @@ declare namespace LocalJSX {
          */
         "descending"?: boolean;
         /**
-          * The zero-based index of the column to sort by. Optional.
+          * The zero-based index of the column to sort by (Doesn't work in IE11). Optional.
          */
         "sortColumn"?: number;
         /**

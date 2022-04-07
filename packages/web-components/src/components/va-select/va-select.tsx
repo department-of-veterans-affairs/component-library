@@ -49,15 +49,6 @@ export class VaSelect {
   @Prop() enableAnalytics: boolean;
 
   /**
-   * The event attached to select's onkeydown
-   */
-  @Event({
-    bubbles: true,
-    composed: true,
-  })
-  vaKeyDown: EventEmitter;
-
-  /**
    * The event emitted when the selected value changes
    */
   @Event({
@@ -78,10 +69,6 @@ export class VaSelect {
   componentLibraryAnalytics: EventEmitter;
 
   @State() options: Array<Node>;
-
-  private handleKeyDown() {
-    this.vaKeyDown.emit();
-  }
 
   private handleChange(e: Event) {
     const target: HTMLSelectElement = e.target as HTMLSelectElement;
@@ -142,7 +129,6 @@ export class VaSelect {
           aria-describedby={errorSpanId}
           id="select"
           name={name}
-          onKeyDown={() => this.handleKeyDown()}
           onChange={e => this.handleChange(e)}
         >
           {this.options}
