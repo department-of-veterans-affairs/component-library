@@ -1,4 +1,4 @@
-import { Component, h } from '@stencil/core';
+import { Component, Event, EventEmitter, h, Prop } from '@stencil/core';
 import { consoleDevError } from '../../utils/utils';
 
 /**
@@ -11,7 +11,38 @@ import { consoleDevError } from '../../utils/utils';
   shadow: true,
 })
 export class VaOnThisPage {
+  /**
+   * The event used to track usage of the component. This is emitted when the
+   * user clicks on a link and enableAnalytics is true.
+   */
+  @Event({
+    eventName: 'component-library-analytics',
+    composed: true,
+    bubbles: true,
+  })
+  componentLibraryAnalytics: EventEmitter;
+
+  /**
+   * If true, analytics event will not be fired
+   */
+  @Prop() disableAnalytics?: boolean;
+
+  private handleOnClick = event => {
+    if (this.disableAnalytics) return;
+    this.componentLibraryAnalytics.emit({
+      componentName: 'va-on-this-page',
+      action: 'click',
+      details: {
+        'click-text':
+          event.composedPath()?.[0]?.textContent ||
+          event.path?.[0]?.textContent,
+      },
+    });
+  };
+
   render() {
+    const { handleOnClick } = this;
+
     const h2s = Array.from(document.querySelectorAll('article h2')).filter(
       heading => {
         if (!heading.id) {
@@ -27,7 +58,7 @@ export class VaOnThisPage {
           <dt id="on-this-page">On this page</dt>
           <dd role="definition">
             {h2s.map(heading => (
-              <a href={`#${heading.id}`}>
+              <a href={`#${heading.id}`} onClick={handleOnClick}>
                 <i aria-hidden="true" class="fas fa-arrow-down"></i>
                 {heading.innerText}
               </a>
