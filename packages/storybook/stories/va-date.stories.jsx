@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { VaDate } from '@department-of-veterans-affairs/web-components/react-bindings';
 import { generateEventsDescription } from './events';
 import { getWebComponentDocs, propStructure } from './wc-helpers';
+
+VaDate.displayName = 'VaDate';
 
 const dateDocs = getWebComponentDocs('va-date');
 
@@ -83,8 +85,8 @@ const defaultArgs = {
   'month': undefined,
   'day': undefined,
   'year': undefined,
-  'min-year': undefined,
-  'max-year': undefined,
+  'min-year': '1900',
+  'max-year': '2000',
   'aria-describedby': undefined,
 };
 
@@ -100,6 +102,10 @@ const Template = ({
   'min-year': minYear,
   'max-year': maxYear,
 }) => {
+  const [yearVal, setYearVal] = useState(year);
+  if (yearVal < minYear || yearVal > maxYear) {
+    error = `Please enter a year between ${minYear} and ${maxYear}`;
+  }
   return (
     <VaDate
       label={label}
@@ -112,6 +118,12 @@ const Template = ({
       aria-describedby={ariaDescribedby}
       min-year={minYear}
       max-year={maxYear}
+      onMonthBlurEvent={e => console.log(e, 'Month BLUR FIRED')}
+      onDayBlurEvent={e => console.log(e, 'Day BLUR FIRED')}
+      onYearBlurEvent={e => console.log(e, 'Year BLUR FIRED')}
+      onMonthChangeEvent={e => console.log(e, 'Month Change FIRED')}
+      onDayChangeEvent={e => console.log(e, 'Day Change FIRED')}
+      onYearChangeEvent={e => setYearVal(e.detail.path[0].value)}
     >
       Header text slot
     </VaDate>
@@ -121,3 +133,12 @@ const Template = ({
 export const Default = Template.bind({});
 Default.args = { ...defaultArgs };
 Default.argTypes = propStructure(dateDocs);
+
+export const Error = Template.bind({});
+Error.args = { ...defaultArgs, error: 'Error Message Example' };
+
+export const AriaDescribedby = Template.bind({});
+AriaDescribedby.args = {
+  ...defaultArgs,
+  'aria-describedby': 'Aria Describe Test',
+};

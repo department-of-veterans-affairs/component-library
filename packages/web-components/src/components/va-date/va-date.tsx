@@ -144,6 +144,8 @@ export class VaDate {
   };
 
   private handleDayChangeEvent = (event: Event) => {
+    const target: HTMLSelectElement = event.target as HTMLSelectElement;
+    this.day = target.value;
     this.dayChangeEvent.emit(event);
   };
 
@@ -152,6 +154,8 @@ export class VaDate {
   };
 
   private handleYearChangeEvent = (event: Event) => {
+    const target: HTMLSelectElement = event.target as HTMLSelectElement;
+    this.year = target.value;
     this.yearChangeEvent.emit(event);
   };
 
@@ -191,6 +195,7 @@ export class VaDate {
       year,
     } = this;
 
+    console.log(year)
     const daysForSelectedMonth = month ? days[month] : [];
     return (
       <Host>
