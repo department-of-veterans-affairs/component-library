@@ -138,65 +138,56 @@ export class VaDate {
     const daysForSelectedMonth = month ? days[month] : [];
     return (
       <Host>
-        <slot></slot>
-        <fieldset>
-          <legend>
-            {label || 'Date of birth'}
-            {required && <span>(*Required)</span>}
-          </legend>
-          <span role="alert">
-            <span class="sr-only">Error</span> {error}
+        <label htmlFor="date-element">
+          {label || 'Date of birth'}{' '}
+          {required && <span class="required">(*Required)</span>}
+        </label>
+        {error && (
+          <span class="error-message" role="alert">
+            <span class="sr-only">Error</span> {this.error}
           </span>
-          <div>
-            <div>
-              <div>
-                <va-select
-                  error={error}
-                  label="Month"
-                  name={`${name}Month`}
-                  value={month}
-                  onVaSelect={handleDateChangeEvent}
-                  onBlur={handleDateBlurEvent}
-                >
-                  <option value=""></option>
-                  {months &&
-                    months.map(month => (
-                      <option value={month.value}>{month.label}</option>
-                    ))}
-                </va-select>
-              </div>
-              <div>
-                <va-select
-                  error={error}
-                  label="Day"
-                  name={`${name}Day`}
-                  value={day}
-                  onVaSelect={handleDateChangeEvent}
-                  onBlur={handleDateBlurEvent}
-                >
-                  <option value=""></option>
-                  {daysForSelectedMonth &&
-                    daysForSelectedMonth.map(day => (
-                      <option value={day}>{day}</option>
-                    ))}
-                </va-select>
-              </div>
-              <div>
-                <va-number-input
-                  error={error}
-                  label="Year"
-                  name={`${name}Year`}
-                  max={maxYear}
-                  min={minYear}
-                  value={year}
-                  onInput={handleDateChangeEvent}
-                  ariaDescribedby={ariaDescribedby}
-                  onBlur={handleDateBlurEvent}
-                />
-              </div>
-            </div>
-          </div>
-        </fieldset>
+        )}
+        <div>
+          <va-select
+            label="Month"
+            name={`${name}Month`}
+            value={month}
+            onVaSelect={handleDateChangeEvent}
+            onBlur={handleDateBlurEvent}
+            class="select-month"
+          >
+            <option value=""></option>
+            {months &&
+              months.map(month => (
+                <option value={month.value}>{month.label}</option>
+              ))}
+          </va-select>
+          <va-select
+            label="Day"
+            name={`${name}Day`}
+            value={day}
+            onVaSelect={handleDateChangeEvent}
+            onBlur={handleDateBlurEvent}
+            class="select-day"
+          >
+            <option value=""></option>
+            {daysForSelectedMonth &&
+              daysForSelectedMonth.map(day => (
+                <option value={day}>{day}</option>
+              ))}
+          </va-select>
+          <va-number-input
+            label="Year"
+            name={`${name}Year`}
+            max={maxYear}
+            min={minYear}
+            value={year}
+            onInput={handleDateChangeEvent}
+            ariaDescribedby={ariaDescribedby}
+            onBlur={handleDateBlurEvent}
+            class="input-year"
+          />
+        </div>
       </Host>
     );
   }
