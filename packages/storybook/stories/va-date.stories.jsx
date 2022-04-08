@@ -112,8 +112,6 @@ const Template = ({
       aria-describedby={ariaDescribedby}
       min-year={minYear}
       max-year={maxYear}
-      onDateBlurEvent={e => console.log(e, 'DATE BLUR FIRED')}
-      onDateChangeEvent={e => console.log(e, 'DATE CHANGE FIRED')}
     >
       Header text slot
     </VaDate>

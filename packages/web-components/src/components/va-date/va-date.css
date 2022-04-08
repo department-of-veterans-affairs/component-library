@@ -50,8 +50,7 @@ div {
 }
 
 .input-year {
-  width: 13rem;
-  margin-right: 1.5rem;
+  width: 10rem;
 }
 
 va-select::part(label),

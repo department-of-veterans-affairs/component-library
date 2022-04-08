@@ -66,15 +66,7 @@ export class VaNumberInput {
   /**
    * The value for the input.
    */
-  @Prop({ mutable: true }) value?: string;
-  // TODO: Make the value prop reflective. Currently, it isn't because it screws
-  // up the input behavior. For now, the only "bug" is that the changed value
-  // isn't reflected in the DOM on the web component. That seems to be how the
-  // <input> is supposed to work, however:
-  // https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-value
-  //
-  // $('va-number-input').value will be correct
-  // $('va-number-input').getAttribute('value') will be incorrect
+  @Prop({ mutable: true, reflect: true }) value?: string;
 
   /**
    * The event emitted when the input is blurred.
