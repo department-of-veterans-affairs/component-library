@@ -337,7 +337,7 @@ export namespace Components {
         /**
           * Hides the search button
          */
-        "hideButton": boolean;
+        "hideButton"?: boolean;
         /**
           * Initial value of input
          */
@@ -346,6 +346,10 @@ export namespace Components {
           * Adds an aria-label attribute to the input and button
          */
         "label": string;
+        /**
+          * An array of strings containing suggestions
+         */
+        "suggestions": Array<string>;
     }
     interface VaSegmentedProgressBar {
         /**
@@ -1141,6 +1145,30 @@ declare namespace LocalJSX {
           * Fires when the search input is focused and a key is pressed
          */
         "onInputKeyDownEvent"?: (event: CustomEvent<any>) => void;
+        /**
+          * Fires when a suggestion is clicked
+         */
+        "onSuggestionClickEvent"?: (event: CustomEvent<any>) => void;
+        /**
+          * Fires when a suggestion is focused
+         */
+        "onSuggestionFocusEvent"?: (event: CustomEvent<any>) => void;
+        /**
+          * Fires when a suggestion is focused and a key is pressed
+         */
+        "onSuggestionKeyDownEvent"?: (event: CustomEvent<any>) => void;
+        /**
+          * Fires when a suggestion is pressed
+         */
+        "onSuggestionMouseDownEvent"?: (event: CustomEvent<any>) => void;
+        /**
+          * Fires when user moves cursor over the suggestion
+         */
+        "onSuggestionMouseOverEvent"?: (event: CustomEvent<any>) => void;
+        /**
+          * An array of strings containing suggestions
+         */
+        "suggestions"?: Array<string>;
     }
     interface VaSegmentedProgressBar {
         /**

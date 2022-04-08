@@ -80,6 +80,51 @@ export class VaSearch {
   buttonKeyDownEvent: EventEmitter;
 
   /**
+   * Fires when a suggestion is clicked
+   */
+  @Event({
+    composed: true,
+    bubbles: true,
+  })
+  suggestionClickEvent: EventEmitter;
+
+  /**
+   * Fires when a suggestion is focused
+   */
+  @Event({
+    composed: true,
+    bubbles: true,
+  })
+  suggestionFocusEvent: EventEmitter;
+
+  /**
+   * Fires when a suggestion is focused and a key is pressed
+   */
+  @Event({
+    composed: true,
+    bubbles: true,
+  })
+  suggestionKeyDownEvent: EventEmitter;
+
+  /**
+   * Fires when a suggestion is pressed
+   */
+  @Event({
+    composed: true,
+    bubbles: true,
+  })
+  suggestionMouseDownEvent: EventEmitter;
+
+  /**
+   * Fires when user moves cursor over the suggestion
+   */
+  @Event({
+    composed: true,
+    bubbles: true,
+  })
+  suggestionMouseOverEvent: EventEmitter;
+
+  /**
    * Text displayed inside the search button
    */
   @Prop() buttonText?: string;
@@ -87,7 +132,7 @@ export class VaSearch {
   /**
    * Hides the search button
    */
-  @Prop() hideButton: boolean = false;
+  @Prop() hideButton?: boolean = false;
 
   /**
    * Initial value of input
@@ -98,6 +143,11 @@ export class VaSearch {
    * Adds an aria-label attribute to the input and button
    */
   @Prop() label: string = 'Search';
+
+  /**
+   * An array of strings containing suggestions
+   */
+  @Prop() suggestions: Array<string>;
 
   // Input Event Handlers
   private handleInputBlurEvent = (event: FocusEvent) => {
@@ -129,6 +179,27 @@ export class VaSearch {
     this.buttonKeyDownEvent.emit(event);
   };
 
+  // Suggestions Event Handlers
+  private handleSuggestionClickEvent = (event: KeyboardEvent | MouseEvent) => {
+    this.suggestionClickEvent.emit(event);
+  };
+
+  private handleSuggestionFocusEvent = (event: FocusEvent) => {
+    this.suggestionFocusEvent.emit(event);
+  };
+
+  private handleSuggestionKeyDownEvent = (event: KeyboardEvent) => {
+    this.suggestionKeyDownEvent.emit(event);
+  };
+
+  private handleSuggestionMouseDownEvent = (event: MouseEvent) => {
+    this.suggestionMouseDownEvent.emit(event);
+  };
+
+  private handleSuggestionMouseOverEvent = (event: MouseEvent) => {
+    this.suggestionMouseOverEvent.emit(event);
+  };
+
   render() {
     const {
       buttonText,
@@ -139,10 +210,19 @@ export class VaSearch {
       handleInputChangeEvent,
       handleInputFocusEvent,
       handleInputKeyDownEvent,
+      handleSuggestionClickEvent,
+      handleSuggestionFocusEvent,
+      handleSuggestionKeyDownEvent,
+      handleSuggestionMouseDownEvent,
+      handleSuggestionMouseOverEvent,
       hideButton,
       inputValue,
       label,
+      suggestions,
     } = this;
+
+    const showSuggestions =
+      Array.isArray(suggestions) && suggestions.length > 0;
 
     return (
       <Host>
@@ -160,7 +240,7 @@ export class VaSearch {
           onFocus={handleInputFocusEvent}
           onKeyDown={handleInputKeyDownEvent}
           role={this.el.getAttribute('role')}
-          type="text"
+          type={this.el.getAttribute('type') || 'text'}
           value={inputValue}
         />
         {!hideButton && (
@@ -175,6 +255,30 @@ export class VaSearch {
             <i aria-hidden="true" class="fa fa-search" />
             {buttonText && <span id="va-search-button-text">{buttonText}</span>}
           </button>
+        )}
+        {showSuggestions && (
+          <div
+            id="va-search-listbox"
+            aria-label="Search Suggestions"
+            role="listbox"
+          >
+            {suggestions.map(suggestion => {
+              return (
+                <div
+                  aria-hidden="true"
+                  onClick={handleSuggestionClickEvent}
+                  onFocus={handleSuggestionFocusEvent}
+                  onKeyDown={handleSuggestionKeyDownEvent}
+                  onMouseDown={handleSuggestionMouseDownEvent}
+                  onMouseOver={handleSuggestionMouseOverEvent}
+                  role="option"
+                  tabIndex={-1}
+                >
+                  {suggestion}
+                </div>
+              );
+            })}
+          </div>
         )}
       </Host>
     );
