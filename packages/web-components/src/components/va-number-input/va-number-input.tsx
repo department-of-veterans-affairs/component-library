@@ -138,6 +138,7 @@ export class VaNumberInput {
           type="number"
           aria-describedby={describedBy}
           inputmode={inputMode}
+          name={this.name}
           max={this.max}
           min={this.min}
           value={this.value}
