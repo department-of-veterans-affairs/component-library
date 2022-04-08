@@ -25,7 +25,8 @@ span.required {
   font-weight: 700;
 }
 
-:host([error]) input {
+:host([error]) va-select::part(select),
+:host([error]) va-number-input::part(input) {
   border: 3px solid var(--color-secondary-dark);
 }
 
@@ -49,6 +50,11 @@ div {
 }
 
 .input-year {
-  width: 7rem;
+  width: 13rem;
   margin-right: 1.5rem;
+}
+
+va-select::part(label),
+va-number-input::part(label) {
+  margin-top: 0;
 }

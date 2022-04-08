@@ -1006,13 +1006,29 @@ declare namespace LocalJSX {
          */
         "onComponent-library-analytics"?: (event: CustomEvent<any>) => void;
         /**
-          * Fires when the date input loses focus
+          * Fires when the day input loses focus
          */
-        "onDateBlurEvent"?: (event: CustomEvent<any>) => void;
+        "onDayBlurEvent"?: (event: CustomEvent<any>) => void;
         /**
-          * Fires when the date input loses focus after its value was changed
+          * Fires when the day input loses focus after its value was changed
          */
-        "onDateChangeEvent"?: (event: CustomEvent<any>) => void;
+        "onDayChangeEvent"?: (event: CustomEvent<any>) => void;
+        /**
+          * Fires when the month input loses focus
+         */
+        "onMonthBlurEvent"?: (event: CustomEvent<any>) => void;
+        /**
+          * Fires when the month input loses focus after its value was changed
+         */
+        "onMonthChangeEvent"?: (event: CustomEvent<any>) => void;
+        /**
+          * Fires when the year input loses focus
+         */
+        "onYearBlurEvent"?: (event: CustomEvent<any>) => void;
+        /**
+          * Fires when the year input loses focus after its value was changed
+         */
+        "onYearChangeEvent"?: (event: CustomEvent<any>) => void;
         /**
           * Render marker indicating field is required.
          */

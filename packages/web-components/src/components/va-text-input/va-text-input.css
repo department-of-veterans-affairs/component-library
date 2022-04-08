@@ -1,12 +1,12 @@
 :host {
     display: block;
     font-family: var(--font-source-sans);
-    margin-top: 3rem;
 }
 
 label {
     display: block;
     max-width: 46rem;
+    margin-top: 3rem;
 }
 
 span.required {

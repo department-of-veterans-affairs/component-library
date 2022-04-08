@@ -5,7 +5,7 @@ import {
   Host,
   h,
   Event,
-  EventEmitter
+  EventEmitter,
 } from '@stencil/core';
 
 @Component({
@@ -127,7 +127,7 @@ export class VaNumberInput {
     return (
       <Host>
         {this.label && (
-          <label htmlFor="inputField">
+          <label htmlFor="inputField" part="label">
             {this.label}{' '}
             {this.required && <span class="required">(*Required)</span>}
           </label>
@@ -143,6 +143,7 @@ export class VaNumberInput {
           value={this.value}
           onInput={this.handleChange}
           onBlur={this.handleBlur}
+          part="input"
         />
       </Host>
     );

@@ -53,12 +53,12 @@ export class VaDate {
   /**
    * Set the `min` value on the year input.
    */
-  @Prop() minYear: number;
+  @Prop() minYear: number = 1900;
 
   /**
    * Set the `max` value on the year input.
    */
-  @Prop() maxYear: number;
+  @Prop() maxYear: number = new Date().getFullYear() + 100;
 
   /**
    * Set the default month on the month input.
@@ -76,31 +76,83 @@ export class VaDate {
   @Prop() year: string;
 
   /**
-   * Fires when the date input loses focus after its value was changed
+   * Fires when the month input loses focus after its value was changed
    */
   @Event({
     composed: true,
     bubbles: true,
   })
-  dateChangeEvent: EventEmitter;
+  monthChangeEvent: EventEmitter;
 
   /**
-   * Fires when the date input loses focus
+   * Fires when the month input loses focus
    */
   @Event({
     composed: true,
     bubbles: true,
   })
-  dateBlurEvent: EventEmitter;
+  monthBlurEvent: EventEmitter;
 
-  private handleDateBlurEvent = (event: FocusEvent) => {
-    this.dateBlurEvent.emit(event);
+  /**
+   * Fires when the day input loses focus after its value was changed
+   */
+  @Event({
+    composed: true,
+    bubbles: true,
+  })
+  dayChangeEvent: EventEmitter;
+
+  /**
+   * Fires when the day input loses focus
+   */
+  @Event({
+    composed: true,
+    bubbles: true,
+  })
+  dayBlurEvent: EventEmitter;
+
+  /**
+   * Fires when the year input loses focus after its value was changed
+   */
+  @Event({
+    composed: true,
+    bubbles: true,
+  })
+  yearChangeEvent: EventEmitter;
+
+  /**
+   * Fires when the year input loses focus
+   */
+  @Event({
+    composed: true,
+    bubbles: true,
+  })
+  yearBlurEvent: EventEmitter;
+
+  private handleMonthBlurEvent = (event: FocusEvent) => {
+    this.monthBlurEvent.emit(event);
   };
 
-  private handleDateChangeEvent = (event: Event) => {
+  private handleMonthChangeEvent = (event: Event) => {
     const target: HTMLSelectElement = event.target as HTMLSelectElement;
     this.month = target.value;
-    this.dateChangeEvent.emit(event);
+    this.monthChangeEvent.emit(event);
+  };
+
+  private handleDayBlurEvent = (event: FocusEvent) => {
+    this.dayBlurEvent.emit(event);
+  };
+
+  private handleDayChangeEvent = (event: Event) => {
+    this.dayChangeEvent.emit(event);
+  };
+
+  private handleYearBlurEvent = (event: FocusEvent) => {
+    this.yearBlurEvent.emit(event);
+  };
+
+  private handleYearChangeEvent = (event: Event) => {
+    this.yearChangeEvent.emit(event);
   };
 
   /**
@@ -128,8 +180,12 @@ export class VaDate {
       ariaDescribedby,
       maxYear,
       minYear,
-      handleDateBlurEvent,
-      handleDateChangeEvent,
+      handleMonthBlurEvent,
+      handleMonthChangeEvent,
+      handleDayBlurEvent,
+      handleDayChangeEvent,
+      handleYearBlurEvent,
+      handleYearChangeEvent,
       month,
       day,
       year,
@@ -152,8 +208,8 @@ export class VaDate {
             label="Month"
             name={`${name}Month`}
             value={month}
-            onVaSelect={handleDateChangeEvent}
-            onBlur={handleDateBlurEvent}
+            onVaSelect={handleMonthChangeEvent}
+            onBlur={handleMonthBlurEvent}
             class="select-month"
           >
             <option value=""></option>
@@ -166,8 +222,8 @@ export class VaDate {
             label="Day"
             name={`${name}Day`}
             value={day}
-            onVaSelect={handleDateChangeEvent}
-            onBlur={handleDateBlurEvent}
+            onVaSelect={handleDayChangeEvent}
+            onBlur={handleDayBlurEvent}
             class="select-day"
           >
             <option value=""></option>
@@ -182,10 +238,11 @@ export class VaDate {
             max={maxYear}
             min={minYear}
             value={year}
-            onInput={handleDateChangeEvent}
+            onInput={handleYearChangeEvent}
             ariaDescribedby={ariaDescribedby}
-            onBlur={handleDateBlurEvent}
+            onBlur={handleYearBlurEvent}
             class="input-year"
+            inputmode="numeric"
           />
         </div>
       </Host>
