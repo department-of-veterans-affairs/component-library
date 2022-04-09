@@ -12,6 +12,24 @@ describe('va-accordion', () => {
     expect(element).toEqualHtml(`
       <va-accordion class="hydrated">
         <mock:shadow-root>
+          <button aria-label="Expand all accordions">
+            Expand all +
+          </button>
+          <slot></slot>
+        </mock:shadow-root>
+      </va-accordion>
+    `);
+  });
+
+  it('does not render expand collapse button if `open-single` is true', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<va-accordion open-single="true"></va-accordion>');
+    const element = await page.find('va-accordion');
+
+    expect(element).toEqualHtml(`
+      <va-accordion class="hydrated" open-single="true">
+        <mock:shadow-root>
           <slot></slot>
         </mock:shadow-root>
       </va-accordion>
@@ -80,13 +98,70 @@ describe('va-accordion', () => {
     expect(buttons[1].getAttribute('aria-expanded')).toEqual('true');
   });
 
+  it('expands all items when `Expand all +` button is triggered', async () => {
+    const page = await newE2EPage();
+    await page.setContent(`
+      <va-accordion>
+        <va-accordion-item header="First item">Some content</va-accordion-item>
+        <va-accordion-item header="Second item">A bit more</va-accordion-item>
+      </va-accordion>`);
+
+    const expandButton = await page.find('va-accordion >>> button');
+    const accordionItems = await page.findAll('va-accordion-item >>> button');
+    // Click to trigger expand of all accordion items collectively
+    await expandButton.click();
+
+    expect(accordionItems[0].getAttribute('aria-expanded')).toEqual('true');
+    expect(accordionItems[1].getAttribute('aria-expanded')).toEqual('true');
+  });
+
+  it('collapses all items when `Collapse All -` button is triggered', async () => {
+    const page = await newE2EPage();
+    await page.setContent(`
+      <va-accordion>
+        <va-accordion-item header="First item">Some content</va-accordion-item>
+        <va-accordion-item header="Second item">A bit more</va-accordion-item>
+      </va-accordion>`);
+
+    const expandButton = await page.find('va-accordion >>> button');
+    const accordionItems = await page.findAll('va-accordion-item >>> button');
+    // Click to expand both accordion items manually
+    await accordionItems[0].click();
+    await accordionItems[1].click();
+    // Click to trigger collapse of all accordion items collectively
+    await expandButton.click();
+
+    expect(accordionItems[0].getAttribute('aria-expanded')).toEqual('false');
+    expect(accordionItems[1].getAttribute('aria-expanded')).toEqual('false');
+  });
+
+  it('tracks which accordions are opened', async () => {
+    const page = await newE2EPage();
+    await page.setContent(`
+      <va-accordion>
+        <va-accordion-item header="First item">Some content</va-accordion-item>
+        <va-accordion-item header="Second item">A bit more</va-accordion-item>
+      </va-accordion>`);
+    const accordionItemsButtons = await page.findAll(
+      'va-accordion-item >>> button',
+    );
+    const expandButton = await page.find('va-accordion >>> button');
+    // Click to expand single accordion item manually
+    await accordionItemsButtons[0].click();
+    // Check if all accordions opened conditions are met
+    expect(expandButton).toEqualText('Expand all +');
+    // Click to expand single accordion item manually
+    await accordionItemsButtons[1].click();
+    // Check if all accordions opened conditions are met
+    expect(expandButton).toEqualText('Collapse all -');
+  });
+
   it('fires an analytics event when expanded', async () => {
     const page = await newE2EPage();
     await page.setContent(`
       <va-accordion>
         <va-accordion-item header="First item" subheader="First subheader">Some content</va-accordion-item>
-      </va-accordion>`,
-    );
+      </va-accordion>`);
 
     const analyticsSpy = await page.spyOnEvent('component-library-analytics');
 
@@ -100,8 +175,8 @@ describe('va-accordion', () => {
       action: 'expand',
       componentName: 'va-accordion',
       details: {
-        header: "First item",
-        subheader: "First subheader",
+        header: 'First item',
+        subheader: 'First subheader',
         level: 2,
         sectionHeading: null,
       },
@@ -113,8 +188,7 @@ describe('va-accordion', () => {
     await page.setContent(`
       <va-accordion disable-analytics="true">
         <va-accordion-item header="First item" subheader="First subheader">Some content</va-accordion-item>
-      </va-accordion>`,
-    );
+      </va-accordion>`);
 
     const analyticsSpy = await page.spyOnEvent('component-library-analytics');
 
@@ -130,8 +204,7 @@ describe('va-accordion', () => {
     await page.setContent(`
       <va-accordion section-heading="The Section Heading">
         <va-accordion-item header="First item" subheader="First subheader">Some content</va-accordion-item>
-      </va-accordion>`,
-    );
+      </va-accordion>`);
 
     const analyticsSpy = await page.spyOnEvent('component-library-analytics');
 
@@ -145,22 +218,20 @@ describe('va-accordion', () => {
       action: 'expand',
       componentName: 'va-accordion',
       details: {
-        header: "First item",
-        subheader: "First subheader",
+        header: 'First item',
+        subheader: 'First subheader',
         level: 2,
-        sectionHeading: "The Section Heading",
+        sectionHeading: 'The Section Heading',
       },
     });
   });
-
 
   it('slot usage includes correct header in analytics event when present', async () => {
     const page = await newE2EPage();
     await page.setContent(`
       <va-accordion section-heading="The Section Heading">
         <va-accordion-item subheader="First subheader"><h3 slot="headline">First header</h3>Some content</va-accordion-item>
-      </va-accordion>`,
-    );
+      </va-accordion>`);
 
     const analyticsSpy = await page.spyOnEvent('component-library-analytics');
 
@@ -174,10 +245,10 @@ describe('va-accordion', () => {
       action: 'expand',
       componentName: 'va-accordion',
       details: {
-        header: "First header",
-        subheader: "First subheader",
+        header: 'First header',
+        subheader: 'First subheader',
         level: 3,
-        sectionHeading: "The Section Heading",
+        sectionHeading: 'The Section Heading',
       },
     });
   });
@@ -187,8 +258,7 @@ describe('va-accordion', () => {
     await page.setContent(`
       <va-accordion>
         <va-accordion-item></va-accordion-item>
-      </va-accordion>`,
-    );
+      </va-accordion>`);
 
     const analyticsSpy = await page.spyOnEvent('component-library-analytics');
 

@@ -6,6 +6,7 @@ import {
   Host,
   Listen,
   Prop,
+  State,
   h,
 } from '@stencil/core';
 import { getSlottedNodes } from '../../utils/utils';
@@ -38,6 +39,9 @@ import { getSlottedNodes } from '../../utils/utils';
 })
 export class VaAccordion {
   @Element() el!: any;
+  expandCollapseBtn!: HTMLButtonElement;
+
+  @State() expanded = false;
 
   /**
    * The event used to track usage of the component. This is emitted when an
@@ -96,7 +100,34 @@ export class VaAccordion {
     if (!this.isScrolledIntoView(clickedItem)) {
       clickedItem.scrollIntoView();
     }
+
+    // Check if all accordions are open or closed due to user clicks
+    this.accordionsOpened();
   }
+
+  private accordionsOpened() {
+    // Track user clicks on va-accordion-item within an array to compare if all values are true or false
+    let accordionItems = [];
+    getSlottedNodes(this.el, 'va-accordion-item').forEach(item => {
+      accordionItems.push((item as Element).getAttribute('open'));
+    });
+    const allOpen = currentValue => currentValue === 'true';
+    const allClosed = currentValue => currentValue === 'false';
+    if (accordionItems.every(allOpen)) {
+      this.expanded = true;
+    }
+    if (accordionItems.every(allClosed)) {
+      this.expanded = false;
+    }
+  }
+
+  // Expand or Collapse All Function for Button Click
+  private expandCollapseAll = (expanded: boolean) => {
+    this.expanded = expanded;
+    getSlottedNodes(this.el, 'va-accordion-item').forEach(item =>
+      (item as Element).setAttribute('open', `${expanded}`),
+    );
+  };
 
   isScrolledIntoView(el: Element) {
     const elemTop = el?.getBoundingClientRect().top;
@@ -132,6 +163,19 @@ export class VaAccordion {
   render() {
     return (
       <Host>
+        {!this.openSingle && (
+          <button
+            ref={el => (this.expandCollapseBtn = el as HTMLButtonElement)}
+            onClick={() => this.expandCollapseAll(!this.expanded)}
+            aria-label={
+              this.expanded
+                ? 'Collapse all accordions'
+                : 'Expand all accordions'
+            }
+          >
+            {this.expanded ? 'Collapse all -' : 'Expand all +'}
+          </button>
+        )}
         <slot />
       </Host>
     );
