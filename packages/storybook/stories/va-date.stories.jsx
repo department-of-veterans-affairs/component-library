@@ -3,6 +3,11 @@ import { VaDate } from '@department-of-veterans-affairs/web-components/react-bin
 import { generateEventsDescription } from './events';
 import { getWebComponentDocs, propStructure } from './wc-helpers';
 
+import {
+  months,
+  days,
+} from '../../react-components/src/helpers/options-for-select.js';
+
 VaDate.displayName = 'VaDate';
 
 const dateDocs = getWebComponentDocs('va-date');
@@ -85,8 +90,8 @@ const defaultArgs = {
   'month': undefined,
   'day': undefined,
   'year': undefined,
-  'min-year': '1900',
-  'max-year': '2000',
+  'min-year': undefined,
+  'max-year': undefined,
   'aria-describedby': undefined,
 };
 
@@ -102,10 +107,6 @@ const Template = ({
   'min-year': minYear,
   'max-year': maxYear,
 }) => {
-  const [yearVal, setYearVal] = useState(year);
-  if (yearVal < minYear || yearVal > maxYear) {
-    error = `Please enter a year between ${minYear} and ${maxYear}`;
-  }
   return (
     <VaDate
       label={label}
@@ -123,10 +124,68 @@ const Template = ({
       onYearBlurEvent={e => console.log(e, 'Year BLUR FIRED')}
       onMonthChangeEvent={e => console.log(e, 'Month Change FIRED')}
       onDayChangeEvent={e => console.log(e, 'Day Change FIRED')}
-      onYearChangeEvent={e => setYearVal(e.detail.path[0].value)}
-    >
-      Header text slot
-    </VaDate>
+      onYearChangeEvent={e => console.log(e, 'Year Change FIRED')}
+    />
+  );
+};
+
+const CustomValidationTemplate = ({
+  label,
+  name,
+  required,
+  error,
+  month,
+  day,
+  year,
+  'aria-describedby': ariaDescribedby,
+  'min-year': minYear,
+  'max-year': maxYear,
+}) => {
+  const [monthVal, setMonthVal] = useState(month);
+  const [dayVal, setDayVal] = useState(day);
+  const [yearVal, setYearVal] = useState(year);
+  const daysForSelectedMonth = monthVal ? days[monthVal] : [];
+  if (dayVal === '' || dayVal > daysForSelectedMonth.length) {
+    error = 'Please select a day';
+  }
+  if (monthVal === '') {
+    error = 'Please select a month';
+  }
+  if (yearVal < minYear || yearVal > maxYear) {
+    error = `Please enter a year between ${minYear} and ${maxYear}`;
+  }
+  return (
+    <>
+      <VaDate
+        label={label}
+        name={name}
+        required={required}
+        error={error}
+        month={monthVal}
+        day={dayVal}
+        year={yearVal}
+        aria-describedby={ariaDescribedby}
+        min-year={minYear}
+        max-year={maxYear}
+        onMonthBlurEvent={e => console.log(e, 'Month BLUR FIRED')}
+        onDayBlurEvent={e => console.log(e, 'Day BLUR FIRED')}
+        onYearBlurEvent={e => console.log(e, 'Year BLUR FIRED')}
+        onMonthChangeEvent={e => setMonthVal(e.detail.path[0].value)}
+        onDayChangeEvent={e => setDayVal(e.detail.path[0].value)}
+        onYearChangeEvent={e => setYearVal(e.detail.path[0].value)}
+      />
+      <div>
+        This example has some custom validation logic built out to detect
+        changes made to the select and input fields. If the criteria below is
+        not met an error message will show:
+        <ul>
+          <li>The Month or Day does not have a value</li>
+          <li>The Year falls outside of the range of 1900-2022</li>
+        </ul>
+        These are examples of how Custom Validation could be used with this
+        component.
+      </div>
+    </>
   );
 };
 
@@ -141,4 +200,11 @@ export const AriaDescribedby = Template.bind({});
 AriaDescribedby.args = {
   ...defaultArgs,
   'aria-describedby': 'Aria Describe Test',
+};
+
+export const CustomValidation = CustomValidationTemplate.bind({});
+CustomValidation.args = {
+  ...defaultArgs,
+  'min-year': '1900',
+  'max-year': '2022',
 };

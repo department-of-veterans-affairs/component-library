@@ -1,13 +1,10 @@
 import {
   Component,
-  Element,
   Event,
   EventEmitter,
   Host,
-  //   Listen,
   Prop,
   h,
-  //   State,
 } from '@stencil/core';
 
 import {
@@ -21,8 +18,6 @@ import {
   shadow: true,
 })
 export class VaDate {
-  @Element() el: HTMLElement;
-
   /**
    * Render marker indicating field is required.
    */
@@ -40,25 +35,24 @@ export class VaDate {
 
   /**
    * The error message to render (if any)
+   * This prop should be leveraged to display any custom validations needed for this component
    */
   @Prop() error: string;
 
   /**
    * Add additional aria-describedby to the month, day & year elements.
-   * Note: make sure the ID exists on the page before adding this, or you'll
-   * have an WCAG violation
    */
   @Prop() ariaDescribedby: string;
 
   /**
    * Set the `min` value on the year input.
    */
-  @Prop() minYear: number = 1900;
+  @Prop() minYear: number;
 
   /**
    * Set the `max` value on the year input.
    */
-  @Prop() maxYear: number = new Date().getFullYear() + 100;
+  @Prop() maxYear: number;
 
   /**
    * Set the default month on the month input.
@@ -154,7 +148,7 @@ export class VaDate {
   };
 
   private handleYearChangeEvent = (event: Event) => {
-    const target: HTMLSelectElement = event.target as HTMLSelectElement;
+    const target: HTMLInputElement = event.target as HTMLInputElement;
     this.year = target.value;
     this.yearChangeEvent.emit(event);
   };
@@ -195,7 +189,6 @@ export class VaDate {
       year,
     } = this;
 
-    console.log(year)
     const daysForSelectedMonth = month ? days[month] : [];
     return (
       <Host>

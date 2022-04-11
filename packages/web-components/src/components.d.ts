@@ -178,7 +178,7 @@ export namespace Components {
     }
     interface VaDate {
         /**
-          * Add additional aria-describedby to the month, day & year elements. Note: make sure the ID exists on the page before adding this, or you'll have an WCAG violation
+          * Add additional aria-describedby to the month, day & year elements.
          */
         "ariaDescribedby": string;
         /**
@@ -190,7 +190,7 @@ export namespace Components {
          */
         "enableAnalytics": boolean;
         /**
-          * The error message to render (if any)
+          * The error message to render (if any) This prop should be leveraged to display any custom validations needed for this component
          */
         "error": string;
         /**
@@ -991,7 +991,7 @@ declare namespace LocalJSX {
     }
     interface VaDate {
         /**
-          * Add additional aria-describedby to the month, day & year elements. Note: make sure the ID exists on the page before adding this, or you'll have an WCAG violation
+          * Add additional aria-describedby to the month, day & year elements.
          */
         "ariaDescribedby"?: string;
         /**
@@ -1003,7 +1003,7 @@ declare namespace LocalJSX {
          */
         "enableAnalytics"?: boolean;
         /**
-          * The error message to render (if any)
+          * The error message to render (if any) This prop should be leveraged to display any custom validations needed for this component
          */
         "error"?: string;
         /**
