@@ -25,15 +25,17 @@ window.addEventListener('DOMContentLoaded', event => {
 
   const element = document.querySelector('main');
 
-  const observer = new MutationObserver(mutations => {
-    mutations.forEach(mutation => {
-      if (mutation.type === 'attributes' && mutation.attributeName === 'lang') {
-        i18next.changeLanguage(element.getAttribute('lang'));
-      }
+  if (element) {
+    const observer = new MutationObserver(mutations => {
+      mutations.forEach(mutation => {
+        if (mutation.type === 'attributes' && mutation.attributeName === 'lang') {
+          i18next.changeLanguage(element.getAttribute('lang'));
+        }
+      });
     });
-  });
 
-  observer.observe(element, {
-    attributes: true,
-  });
+    observer.observe(element, {
+      attributes: true,
+    });
+  }
 });
