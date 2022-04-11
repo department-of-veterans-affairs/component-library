@@ -3,6 +3,7 @@ import {
   Element,
   Event,
   EventEmitter,
+  Fragment,
   Host,
   h,
   Prop,
@@ -14,6 +15,8 @@ import {
   shadow: true,
 })
 export class VaSearch {
+  inputRef!: HTMLInputElement;
+
   @Element() el: HTMLElement;
 
   /**
@@ -200,9 +203,28 @@ export class VaSearch {
     this.suggestionMouseOverEvent.emit(event);
   };
 
+  /**
+   * Formats suggested characters to bold
+   */
+  private formatSuggestion = (suggestion: string) => {
+    const lowercaseSuggestion = suggestion.toLowerCase();
+    if (lowercaseSuggestion.includes(this.inputRef.value)) {
+      return (
+        <Fragment>
+          {this.inputRef.value}
+          <strong>
+            {lowercaseSuggestion.replace(this.inputRef.value, '')}
+          </strong>
+        </Fragment>
+      );
+    }
+    return <strong>{suggestion}</strong>;
+  };
+
   render() {
     const {
       buttonText,
+      formatSuggestion,
       handleButtonClickEvent,
       handleButtonFocusEvent,
       handleButtonKeyDownEvent,
@@ -227,6 +249,7 @@ export class VaSearch {
     return (
       <Host>
         <input
+          ref={el => (this.inputRef = el as HTMLInputElement)}
           id="va-search-input"
           aria-activedescendant={this.el.getAttribute('aria-activedescendant')}
           aria-autocomplete="none"
@@ -266,15 +289,16 @@ export class VaSearch {
               return (
                 <div
                   aria-hidden="true"
+                  class="va-search-suggestion"
                   onClick={handleSuggestionClickEvent}
                   onFocus={handleSuggestionFocusEvent}
                   onKeyDown={handleSuggestionKeyDownEvent}
                   onMouseDown={handleSuggestionMouseDownEvent}
                   onMouseOver={handleSuggestionMouseOverEvent}
                   role="option"
-                  tabIndex={-1}
+                  tabIndex={0}
                 >
-                  {suggestion}
+                  {formatSuggestion(suggestion)}
                 </div>
               );
             })}
