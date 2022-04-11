@@ -3,10 +3,7 @@ import { VaDate } from '@department-of-veterans-affairs/web-components/react-bin
 import { generateEventsDescription } from './events';
 import { getWebComponentDocs, propStructure } from './wc-helpers';
 
-import {
-  months,
-  days,
-} from '../../react-components/src/helpers/options-for-select.js';
+import { days } from '../../react-components/src/helpers/options-for-select.js';
 
 VaDate.displayName = 'VaDate';
 
