@@ -68,7 +68,6 @@ describe('search', () => {
     const searchTerm = new RegExp('telephone', 'gms');
     const filteredFiles = search(files, searchTerm);
 
-    console.log(filteredFiles);
     expect(filteredFiles.length).toEqual(1);
     expect(filteredFiles[0].path).toEqual('mock-vw/jsx-file.jsx');
     expect(filteredFiles[0].matches).toEqual([['telephone']]);
