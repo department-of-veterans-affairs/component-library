@@ -78,6 +78,7 @@ const Template = ({
       inputmode={inputmode}
       type={type}
       aria-describedby={ariaDescribedby}
+      onBlur={e => console.log('blur event', e)}
     />
   );
 };

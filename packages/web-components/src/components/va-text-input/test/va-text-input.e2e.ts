@@ -136,13 +136,13 @@ describe('va-text-input', () => {
     });
   });
 
-  it('emits vaBlur event', async () => {
+  it('emits blur event', async () => {
     const page = await newE2EPage();
 
     await page.setContent('<va-text-input label="Input Field"/>');
 
     const inputEl = await page.find('va-text-input >>> input');
-    const blurSpy = await page.spyOnEvent('vaBlur');
+    const blurSpy = await page.spyOnEvent('blur');
     await inputEl.press('Tab');
 
     expect(blurSpy).toHaveReceivedEvent();

@@ -94,11 +94,6 @@ export class VaTextInput {
   // $('va-text-input').getAttribute('value') will be incorrect
 
   /**
-   * The event emitted when the input is blurred.
-   */
-  @Event() vaBlur: EventEmitter;
-
-  /**
    * The event emitted when the input value changes
    */
   @Event() vaChange: EventEmitter;
@@ -132,8 +127,6 @@ export class VaTextInput {
   };
 
   private handleBlur = () => {
-    this.vaBlur.emit();
-
     if (this.enableAnalytics) {
       this.componentLibraryAnalytics.emit({
         componentName: 'va-text-input',
