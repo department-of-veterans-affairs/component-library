@@ -2,22 +2,8 @@ const memfs = require('memfs');
 const path = require('path');
 const toCSV = require('../src/to-csv');
 
-const env = {
-  repos: {
-    'vets-website': 'mock-vw/',
-    'content-build': 'mock-cb/',
-  },
-};
-const jsxFile = 'const phone = () => (<va-telephone contact={phoneContact} />)';
-
 const json = {
-  '../.env.json': JSON.stringify(env),
-  'mock-vw/jsx-file.jsx': jsxFile,
-  'mock-vw/js-file.js': 'some JS',
-  // 'mock-vw/js-file.unit.js': 'Testing code',
-  'mock-vw/txt-file.txt': 'Some text',
-  'mock-cb/liquid-template.liquid': 'A template',
-  'mock-cb/html-layout.html': 'HTML page',
+  'dummy.txt': 'Initial dummy placeholder file',
 };
 
 jest.mock('fs');
@@ -44,6 +30,7 @@ describe('toCSV', () => {
     await toCSV(flattenedData, './output.csv');
     const csvPath = path.resolve(__dirname, '../output.csv');
     const csvFile = memfs.vol.toJSON()[csvPath];
+
     expect(csvFile).toMatchSnapshot();
   });
 });
