@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`toCSV writes a CSV file 1`] = `
+"date,component_name,some_app,total,another_app
+2022-04-08,alert,2,2
+2022-04-08,accordion,2,3,1"
+`;
