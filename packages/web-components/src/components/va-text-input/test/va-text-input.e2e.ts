@@ -187,7 +187,7 @@ describe('va-text-input', () => {
     await inputEl.press('2');
     expect(await inputEl.getProperty('value')).toBe('222');
     expect((await page.find('va-text-input >>> small')).innerText).toContain(
-      '(Max. 3 characters)',
+      'max-chars',
     );
   });
 
