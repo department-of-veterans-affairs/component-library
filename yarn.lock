@@ -104,7 +104,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/core@npm:7.17.9, @babel/core@npm:^7.7.2, @babel/core@npm:^7.8.0":
+"@babel/core@npm:^7.7.2, @babel/core@npm:^7.8.0":
   version: 7.17.9
   resolution: "@babel/core@npm:7.17.9"
   dependencies:
@@ -12271,6 +12271,17 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
+"jest-resolve-dependencies@npm:^27.5.1":
+  version: 27.5.1
+  resolution: "jest-resolve-dependencies@npm:27.5.1"
+  dependencies:
+    "@jest/types": ^27.5.1
+    jest-regex-util: ^27.5.1
+    jest-snapshot: ^27.5.1
+  checksum: c67af97afad1da88f5530317c732bbd1262d1225f6cd7f4e4740a5db48f90ab0bd8564738ac70d1a43934894f9aef62205c1b8f8ee89e5c7a737e6a121ee4c25
+  languageName: node
+  linkType: hard
+
 "jest-resolve@npm:^26.6.2":
   version: 26.6.2
   resolution: "jest-resolve@npm:26.6.2"
@@ -12287,7 +12298,7 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"jest-resolve@npm:27.5.1, jest-resolve@npm:^27.5.1":
+"jest-resolve@npm:^27.5.1":
   version: 27.5.1
   resolution: "jest-resolve@npm:27.5.1"
   dependencies:
