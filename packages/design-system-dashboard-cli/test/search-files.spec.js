@@ -74,3 +74,9 @@ describe('search', () => {
   })
 });
 
+  it('expects the second arg to be a regex', () => {
+    expect(() => {
+      search('some-file.txt', 'a string');
+    }).toThrow('Must pass a RegExp term to search()');
+  });
+});
