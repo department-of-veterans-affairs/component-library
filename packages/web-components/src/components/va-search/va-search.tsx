@@ -150,7 +150,7 @@ export class VaSearch {
   @Prop() inputValue?: string;
 
   /**
-   * Adds an aria-label attribute to the input and button
+   * The aria-label for search input and button. Default is 'Search'.
    */
   @Prop() label: string = 'Search';
 
