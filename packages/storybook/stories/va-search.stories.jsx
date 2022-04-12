@@ -20,13 +20,11 @@ export default {
 
 const Template = ({
   'button-text': buttonText,
-  'hide-button': hideButton,
   'input-value': inputValue,
   label,
 }) => (
   <VaSearch
     buttonText={buttonText}
-    hideButton={hideButton}
     inputValue={inputValue}
     label={label}
     onInputBlurEvent={e => console.log(e, 'INPUT BLUR FIRED')}
@@ -41,9 +39,8 @@ const Template = ({
 
 const defaultArgs = {
   'button-text': undefined,
-  'hide-button': false,
   'input-value': undefined,
-  'label': 'Search',
+  'label': undefined,
 };
 
 export const Default = Template.bind({});

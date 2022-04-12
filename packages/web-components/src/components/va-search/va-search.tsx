@@ -264,7 +264,6 @@ export class VaSearch {
       handleSuggestionKeyDownEvent,
       handleSuggestionMouseDownEvent,
       handleSuggestionMouseOverEvent,
-      hideButton,
       inputValue,
       label,
     } = this;
@@ -299,19 +298,17 @@ export class VaSearch {
           type={this.el.getAttribute('type') || 'text'}
           value={inputValue}
         />
-        {!hideButton && (
-          <button
-            id="va-search-button"
-            type="submit"
-            aria-label={label}
-            onClick={handleButtonClickEvent}
-            onFocus={handleButtonFocusEvent}
-            onKeyDown={handleButtonKeyDownEvent}
-          >
-            <i aria-hidden="true" class="fa fa-search" />
-            {buttonText && <span id="va-search-button-text">{buttonText}</span>}
-          </button>
-        )}
+        <button
+          id="va-search-button"
+          type="submit"
+          aria-label={label}
+          onClick={handleButtonClickEvent}
+          onFocus={handleButtonFocusEvent}
+          onKeyDown={handleButtonKeyDownEvent}
+        >
+          <i aria-hidden="true" class="fa fa-search" />
+          {buttonText && <span id="va-search-button-text">{buttonText}</span>}
+        </button>
         {showSuggestions && (
           <div
             id="va-search-listbox"
