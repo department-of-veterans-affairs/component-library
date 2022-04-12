@@ -85,17 +85,12 @@ export class VaSearch {
   @Prop() buttonText?: string;
 
   /**
-   * Hides the search button
-   */
-  @Prop() hideButton: boolean = false;
-
-  /**
    * Initial value of input
    */
   @Prop() inputValue?: string;
 
   /**
-   * Adds an aria-label attribute to the input and button
+   * The aria-label for search input and button. Default is 'Search'.
    */
   @Prop() label: string = 'Search';
 
@@ -139,7 +134,10 @@ export class VaSearch {
       handleInputChangeEvent,
       handleInputFocusEvent,
       handleInputKeyDownEvent,
+<<<<<<< HEAD
       hideButton,
+=======
+>>>>>>> ac16664ae6bab8b2ad1f14956ae29c98cfa94af3
       inputValue,
       label,
     } = this;
@@ -163,19 +161,17 @@ export class VaSearch {
           type="text"
           value={inputValue}
         />
-        {!hideButton && (
-          <button
-            id="va-search-button"
-            type="submit"
-            aria-label={label}
-            onClick={handleButtonClickEvent}
-            onFocus={handleButtonFocusEvent}
-            onKeyDown={handleButtonKeyDownEvent}
-          >
-            <i aria-hidden="true" class="fa fa-search" />
-            {buttonText && <span id="va-search-button-text">{buttonText}</span>}
-          </button>
-        )}
+        <button
+          id="va-search-button"
+          type="submit"
+          aria-label={label}
+          onClick={handleButtonClickEvent}
+          onFocus={handleButtonFocusEvent}
+          onKeyDown={handleButtonKeyDownEvent}
+        >
+          <i aria-hidden="true" class="fa fa-search" />
+          {buttonText && <span id="va-search-button-text">{buttonText}</span>}
+        </button>
       </Host>
     );
   }
