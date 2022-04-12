@@ -64,13 +64,11 @@ const Template = ({
   inputmode,
   type,
   'aria-describedby': ariaDescribedby,
-  list,
 }) => {
   return (
     <va-text-input
       name={name}
       label={label}
-      list={list}
       autocomplete={autocomplete}
       enable-analytics={enableAnalytics}
       required={required}
