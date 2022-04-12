@@ -148,17 +148,24 @@ describe('va-text-input', () => {
     expect(blurSpy).toHaveReceivedEvent();
   });
 
-  it('emits vaChange event', async () => {
+  it('emits input event with value updated', async () => {
     const page = await newE2EPage();
 
     await page.setContent('<va-text-input label="Input Field"/>');
 
     const inputEl = await page.find('va-text-input >>> input');
-    const changeSpy = await page.spyOnEvent('vaChange');
-    await inputEl.press('a');
-    await inputEl.press('s');
+    const inputSpy = await page.spyOnEvent('input');
 
-    expect(changeSpy).toHaveReceivedEventDetail({ value: 'as' });
+    // Act
+    await inputEl.press('a');
+    const firstValue = await page.$eval("va-text-input", (comp : HTMLInputElement) => comp.value)
+    await inputEl.press('s');
+    const secondValue = await page.$eval("va-text-input", (comp : HTMLInputElement) => comp.value)
+
+    // Assert
+    expect(inputSpy).toHaveReceivedEventTimes(2);
+    expect(firstValue).toEqual('a');
+    expect(secondValue).toEqual('as');
   });
 
   it("doesn't fire analytics events", async () => {
