@@ -331,6 +331,10 @@ export namespace Components {
     }
     interface VaSearch {
         /**
+          * Index of selected suggestion
+         */
+        "activeIndex"?: number;
+        /**
           * Text displayed inside the search button
          */
         "buttonText"?: string;
@@ -1101,6 +1105,10 @@ declare namespace LocalJSX {
         "value"?: string;
     }
     interface VaSearch {
+        /**
+          * Index of selected suggestion
+         */
+        "activeIndex"?: number;
         /**
           * Text displayed inside the search button
          */

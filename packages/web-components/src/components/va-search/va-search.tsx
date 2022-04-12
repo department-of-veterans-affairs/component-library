@@ -7,6 +7,8 @@ import {
   Host,
   h,
   Prop,
+  State,
+  Watch,
 } from '@stencil/core';
 
 @Component({
@@ -128,6 +130,16 @@ export class VaSearch {
   suggestionMouseOverEvent: EventEmitter;
 
   /**
+   * An array of formatted suggestions
+   */
+  @State() formattedSuggestions: string[] = [];
+
+  /**
+   * Index of selected suggestion
+   */
+  @Prop() activeIndex?: number;
+
+  /**
    * Text displayed inside the search button
    */
   @Prop() buttonText?: string;
@@ -151,6 +163,21 @@ export class VaSearch {
    * An array of strings containing suggestions
    */
   @Prop() suggestions: Array<string>;
+
+  componentDidLoad() {
+    if (!this.suggestions || !Array.isArray(this.suggestions)) return;
+    this.formattedSuggestions = this.suggestions.map(suggestion =>
+      this.formatSuggestion(suggestion),
+    );
+  }
+
+  @Watch('suggestions')
+  watchSuggestionsHandler(newSuggestions: string[]) {
+    if (!Array.isArray(newSuggestions)) return;
+    this.formattedSuggestions = newSuggestions.map(suggestion =>
+      this.formatSuggestion(suggestion),
+    );
+  }
 
   // Input Event Handlers
   private handleInputBlurEvent = (event: FocusEvent) => {
@@ -208,13 +235,12 @@ export class VaSearch {
    */
   private formatSuggestion = (suggestion: string) => {
     const lowercaseSuggestion = suggestion.toLowerCase();
-    if (lowercaseSuggestion.includes(this.inputRef.value)) {
+    const inputValue = this.inputRef.value.toLowerCase();
+    if (lowercaseSuggestion.includes(inputValue)) {
       return (
         <Fragment>
-          {this.inputRef.value}
-          <strong>
-            {lowercaseSuggestion.replace(this.inputRef.value, '')}
-          </strong>
+          {inputValue}
+          <strong>{lowercaseSuggestion.replace(inputValue, '')}</strong>
         </Fragment>
       );
     }
@@ -223,8 +249,9 @@ export class VaSearch {
 
   render() {
     const {
+      activeIndex,
       buttonText,
-      formatSuggestion,
+      formattedSuggestions,
       handleButtonClickEvent,
       handleButtonFocusEvent,
       handleButtonKeyDownEvent,
@@ -240,11 +267,11 @@ export class VaSearch {
       hideButton,
       inputValue,
       label,
-      suggestions,
     } = this;
 
     const showSuggestions =
-      Array.isArray(suggestions) && suggestions.length > 0;
+      Array.isArray(formattedSuggestions) && formattedSuggestions.length > 0;
+    const role = showSuggestions ? 'combobox' : this.el.getAttribute('role');
 
     return (
       <Host>
@@ -262,7 +289,7 @@ export class VaSearch {
           onChange={handleInputChangeEvent}
           onFocus={handleInputFocusEvent}
           onKeyDown={handleInputKeyDownEvent}
-          role={this.el.getAttribute('role')}
+          role={role}
           type={this.el.getAttribute('type') || 'text'}
           value={inputValue}
         />
@@ -285,23 +312,26 @@ export class VaSearch {
             aria-label="Search Suggestions"
             role="listbox"
           >
-            {suggestions.map(suggestion => {
-              return (
-                <div
-                  aria-hidden="true"
-                  class="va-search-suggestion"
-                  onClick={handleSuggestionClickEvent}
-                  onFocus={handleSuggestionFocusEvent}
-                  onKeyDown={handleSuggestionKeyDownEvent}
-                  onMouseDown={handleSuggestionMouseDownEvent}
-                  onMouseOver={handleSuggestionMouseOverEvent}
-                  role="option"
-                  tabIndex={0}
-                >
-                  {formatSuggestion(suggestion)}
-                </div>
-              );
-            })}
+            {formattedSuggestions.map(
+              (suggestion: string | HTMLElement, index: number) => {
+                return (
+                  <div
+                    aria-selected={activeIndex === index ? 'true' : undefined}
+                    aria-hidden="true"
+                    class="va-search-suggestion"
+                    onClick={handleSuggestionClickEvent}
+                    onFocus={handleSuggestionFocusEvent}
+                    onKeyDown={handleSuggestionKeyDownEvent}
+                    onMouseDown={handleSuggestionMouseDownEvent}
+                    onMouseOver={handleSuggestionMouseOverEvent}
+                    role="option"
+                    tabIndex={0}
+                  >
+                    {suggestion}
+                  </div>
+                );
+              },
+            )}
           </div>
         )}
       </Host>
