@@ -70,6 +70,7 @@ i::before {
   padding: 0.8rem;
 }
 
+.va-search-suggestion[aria-selected='true'],
 .va-search-suggestion:focus,
 .va-search-suggestion:hover {
   background-color: var(--color-primary);
