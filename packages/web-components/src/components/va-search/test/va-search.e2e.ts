@@ -113,4 +113,26 @@ describe('va-search', () => {
 
     expect(keyDownSpy).toHaveReceivedEventTimes(1);
   });
+
+  it('renders with button with text', async () => {
+    const page = await newE2EPage();
+    await page.setContent(
+      '<va-search button-text="Search VA.gov"></va-search>',
+    );
+
+    const element = await page.find('va-search');
+    expect(element).toEqualHtml(`
+      <va-search button-text="Search VA.gov" class="hydrated">
+        <mock:shadow-root>
+          <input aria-autocomplete="none" aria-label="Search" autocomplete="off" id="va-search-input" type="text">
+          <button aria-label="Search" id="va-search-button" type="submit">
+            <i aria-hidden="true" class="fa fa-search"></i>
+            <span id="va-search-button-text">
+              Search VA.gov
+            </span>
+          </button>
+        </mock:shadow-root>
+      </va-search>
+    `);
+  });
 });

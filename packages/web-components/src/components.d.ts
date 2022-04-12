@@ -335,15 +335,11 @@ export namespace Components {
          */
         "buttonText"?: string;
         /**
-          * Hides the search button
-         */
-        "hideButton": boolean;
-        /**
           * Initial value of input
          */
         "inputValue"?: string;
         /**
-          * Adds an aria-label attribute to the input and button
+          * The aria-label for search input and button. Default is 'Search'.
          */
         "label": string;
     }
@@ -1102,15 +1098,11 @@ declare namespace LocalJSX {
          */
         "buttonText"?: string;
         /**
-          * Hides the search button
-         */
-        "hideButton"?: boolean;
-        /**
           * Initial value of input
          */
         "inputValue"?: string;
         /**
-          * Adds an aria-label attribute to the input and button
+          * The aria-label for search input and button. Default is 'Search'.
          */
         "label"?: string;
         /**
