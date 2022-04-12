@@ -19,22 +19,34 @@ describe('va-date', () => {
     );
     await axeCheck(page);
   });
-});
 
-it('renders an error message', async () => {
-  const page = await newE2EPage();
-  await page.setContent('<va-date error="This is a mistake" />');
+  it('renders an error message', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-date error="This is a mistake" />');
 
-  // Render the error message text
-  const error = await page.find('va-date >>> span.error-message');
-  expect(error.innerText).toContain('This is a mistake');
-});
+    // Render the error message text
+    const error = await page.find('va-date >>> span.error-message');
+    expect(error.innerText).toContain('This is a mistake');
+  });
 
-it('renders a required span', async () => {
-  const page = await newE2EPage();
-  await page.setContent('<va-date label="This is a field" required />');
+  it('renders a required span', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-date label="This is a field" required />');
 
-  // Render the error message text
-  const requiredSpan = await page.find('va-date >>> span.required');
-  expect(requiredSpan).not.toBeNull();
+    // Render the error message text
+    const requiredSpan = await page.find('va-date >>> span.required');
+    expect(requiredSpan).not.toBeNull();
+  });
+
+  it('sets a label', async () => {});
+
+  it('sets a default date', async () => {});
+
+  it('updates date based select and input fields', async () => {});
+
+  it('sets the correct amount of days per month', async () => {});
+
+  it('provides a name to select and input fields', async () => {});
+
+  it('provides a max and min year to input field', async () => {});
 });
