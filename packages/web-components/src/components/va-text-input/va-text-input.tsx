@@ -6,20 +6,8 @@ import {
   h,
   Event,
   EventEmitter,
-  forceUpdate,
 } from '@stencil/core';
-import i18next from 'i18next';
-// import { i18next } from '../../../../core/src/i18n/i18n-setup';
 import { consoleDevError } from '../../utils/utils';
-import { Build } from '@stencil/core';
-
-/** The .t() function will return the key instead of the value
- */
-if (Build.isTesting) {
-  i18next.init({ lng: 'cimode' });
-}
-
-console.log('I18N', i18next.language);
 
 @Component({
   tag: 'va-text-input',
@@ -158,16 +146,6 @@ export class VaTextInput {
     }
   };
 
-  connectedCallback() {
-    i18next.on('languageChanged', () => {
-      console.log('language changed text-input');
-      forceUpdate(this.el);
-    });
-  }
-  componentWillRender() {
-    console.log('ABOUT TO RENDER');
-  }
-
   render() {
     const describedBy =
       `${this.ariaDescribedby} ${this.error ? 'error-message' : ''}`.trim() ||
@@ -180,9 +158,7 @@ export class VaTextInput {
         {this.label && (
           <label htmlFor="inputField">
             {this.label}{' '}
-            {this.required && (
-              <span class="required">{i18next.t('required')}</span>
-            )}
+            {this.required && <span class="required">(*Required)</span>}
           </label>
         )}
         <slot></slot>
@@ -198,9 +174,7 @@ export class VaTextInput {
           maxlength={this.maxlength}
         />
         {this.maxlength && this.value?.length >= this.maxlength && (
-          <small aria-live="polite">
-            {i18next.t('max-chars', { length: this.maxlength })}
-          </small>
+          <small aria-live="polite">(Max. {this.maxlength} characters)</small>
         )}
       </Host>
     );

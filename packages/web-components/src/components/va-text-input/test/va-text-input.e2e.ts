@@ -88,7 +88,7 @@ describe('va-text-input', () => {
       <va-text-input class="hydrated" label="This is a field" required="">
         <mock:shadow-root>
           <label for="inputField">
-            This is a field <span class="required">required</span>
+            This is a field <span class="required">(*Required)</span>
           </label>
           <slot></slot>
           <input id="inputField" type="text" />
@@ -187,7 +187,7 @@ describe('va-text-input', () => {
     await inputEl.press('2');
     expect(await inputEl.getProperty('value')).toBe('222');
     expect((await page.find('va-text-input >>> small')).innerText).toContain(
-      'max-chars',
+      '(Max. 3 characters)',
     );
   });
 
