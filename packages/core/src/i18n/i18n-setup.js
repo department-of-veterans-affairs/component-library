@@ -28,7 +28,10 @@ window.addEventListener('DOMContentLoaded', event => {
   if (element) {
     const observer = new MutationObserver(mutations => {
       mutations.forEach(mutation => {
-        if (mutation.type === 'attributes' && mutation.attributeName === 'lang') {
+        if (
+          mutation.type === 'attributes' &&
+          mutation.attributeName === 'lang'
+        ) {
           i18next.changeLanguage(element.getAttribute('lang'));
         }
       });
