@@ -61,6 +61,8 @@ const Template = ({
       aria-describedby={ariaDescribedby}
       max={max}
       min={min}
+      onInput={e => console.log('input event value:', e.target.value)}
+      onBlur={e => console.log('blur event', e)}
     />
   );
 };
