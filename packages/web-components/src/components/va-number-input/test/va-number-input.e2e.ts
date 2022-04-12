@@ -109,30 +109,42 @@ describe('va-number-input', () => {
     });
   });
 
-  // it('emits vaBlur event', async () => {
-  //   const page = await newE2EPage();
+  it('emits blur event', async () => {
+    const page = await newE2EPage();
 
-  //   await page.setContent('<va-number-input label="Input Field"/>');
+    await page.setContent('<va-number-input label="Input Field"/>');
 
-  //   const inputEl = await page.find('va-number-input >>> input');
-  //   const blurSpy = await page.spyOnEvent('vaBlur');
-  //   await inputEl.press('Tab');
+    const inputEl = await page.find('va-number-input >>> input');
+    const blurSpy = await page.spyOnEvent('blur');
+    await inputEl.press('Tab');
 
-  //   expect(blurSpy).toHaveReceivedEvent();
-  // });
+    expect(blurSpy).toHaveReceivedEvent();
+  });
 
-  // it('emits vaChange event', async () => {
-  //   const page = await newE2EPage();
+  it('emits input event with value updated', async () => {
+    const page = await newE2EPage();
 
-  //   await page.setContent('<va-number-input label="Input Field"/>');
+    await page.setContent('<va-number-input label="Input Field"/>');
 
-  //   const inputEl = await page.find('va-number-input >>> input');
-  //   const changeSpy = await page.spyOnEvent('vaChange');
-  //   await inputEl.press('1');
-  //   await inputEl.press('2');
+    const inputEl = await page.find('va-number-input >>> input');
+    const inputSpy = await page.spyOnEvent('input');
+    // Act
+    await inputEl.press('1');
+    const firstValue = await page.$eval(
+      'va-number-input',
+      (comp: HTMLInputElement) => comp.value,
+    );
+    await inputEl.press('2');
+    const secondValue = await page.$eval(
+      'va-number-input',
+      (comp: HTMLInputElement) => comp.value,
+    );
 
-  //   expect(changeSpy).toHaveReceivedEventDetail({ value: '12' });
-  // });
+    // Assert
+    expect(inputSpy).toHaveReceivedEventTimes(2);
+    expect(firstValue).toEqual('1');
+    expect(secondValue).toEqual('12');
+  });
 
   it("doesn't fire analytics events", async () => {
     const page = await newE2EPage();
