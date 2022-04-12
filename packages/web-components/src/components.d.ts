@@ -417,7 +417,7 @@ export namespace Components {
          */
         "descending": boolean;
         /**
-          * The zero-based index of the column to sort by. Optional.
+          * The zero-based index of the column to sort by (Doesn't work in IE11). Optional.
          */
         "sortColumn": number;
         /**
@@ -1016,14 +1016,6 @@ declare namespace LocalJSX {
          */
         "onComponent-library-analytics"?: (event: CustomEvent<any>) => void;
         /**
-          * The event emitted when the input is blurred.
-         */
-        "onVaBlur"?: (event: CustomEvent<any>) => void;
-        /**
-          * The event emitted when the input value changes
-         */
-        "onVaChange"?: (event: CustomEvent<any>) => void;
-        /**
           * Set the input to required and render the (Required) text.
          */
         "required"?: boolean;
@@ -1228,7 +1220,7 @@ declare namespace LocalJSX {
          */
         "descending"?: boolean;
         /**
-          * The zero-based index of the column to sort by. Optional.
+          * The zero-based index of the column to sort by (Doesn't work in IE11). Optional.
          */
         "sortColumn"?: number;
         /**

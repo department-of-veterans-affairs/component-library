@@ -5,7 +5,7 @@ import {
   Host,
   h,
   Event,
-  EventEmitter
+  EventEmitter,
 } from '@stencil/core';
 
 @Component({
@@ -66,25 +66,7 @@ export class VaNumberInput {
   /**
    * The value for the input.
    */
-  @Prop({ mutable: true }) value?: string;
-  // TODO: Make the value prop reflective. Currently, it isn't because it screws
-  // up the input behavior. For now, the only "bug" is that the changed value
-  // isn't reflected in the DOM on the web component. That seems to be how the
-  // <input> is supposed to work, however:
-  // https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-value
-  //
-  // $('va-number-input').value will be correct
-  // $('va-number-input').getAttribute('value') will be incorrect
-
-  /**
-   * The event emitted when the input is blurred.
-   */
-  @Event() vaBlur: EventEmitter;
-
-  /**
-   * The event emitted when the input value changes
-   */
-  @Event() vaChange: EventEmitter;
+  @Prop({ mutable: true, reflect: true }) value?: string;
 
   /**
    * The event used to track usage of the component. This is emitted when the
@@ -97,15 +79,12 @@ export class VaNumberInput {
   })
   componentLibraryAnalytics: EventEmitter;
 
-  private handleChange = (e: Event) => {
+  private handleInput = (e: Event) => {
     const target = e.target as HTMLInputElement;
     this.value = target.value;
-    this.vaChange.emit({ value: this.value });
   };
 
   private handleBlur = () => {
-    this.vaBlur.emit();
-
     if (this.enableAnalytics) {
       this.componentLibraryAnalytics.emit({
         componentName: 'va-number-input',
@@ -141,7 +120,7 @@ export class VaNumberInput {
           max={this.max}
           min={this.min}
           value={this.value}
-          onInput={this.handleChange}
+          onInput={this.handleInput}
           onBlur={this.handleBlur}
         />
       </Host>
