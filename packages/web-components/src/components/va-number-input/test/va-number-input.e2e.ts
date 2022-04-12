@@ -109,29 +109,41 @@ describe('va-number-input', () => {
     });
   });
 
-  it('emits vaBlur event', async () => {
+  it('emits blur event', async () => {
     const page = await newE2EPage();
 
     await page.setContent('<va-number-input label="Input Field"/>');
 
     const inputEl = await page.find('va-number-input >>> input');
-    const blurSpy = await page.spyOnEvent('vaBlur');
+    const blurSpy = await page.spyOnEvent('blur');
     await inputEl.press('Tab');
 
     expect(blurSpy).toHaveReceivedEvent();
   });
 
-  it('emits vaChange event', async () => {
+  it('emits input event with value updated', async () => {
     const page = await newE2EPage();
 
     await page.setContent('<va-number-input label="Input Field"/>');
 
     const inputEl = await page.find('va-number-input >>> input');
-    const changeSpy = await page.spyOnEvent('vaChange');
+    const inputSpy = await page.spyOnEvent('input');
+    // Act
     await inputEl.press('1');
+    const firstValue = await page.$eval(
+      'va-number-input',
+      (comp: HTMLInputElement) => comp.value,
+    );
     await inputEl.press('2');
+    const secondValue = await page.$eval(
+      'va-number-input',
+      (comp: HTMLInputElement) => comp.value,
+    );
 
-    expect(changeSpy).toHaveReceivedEventDetail({ value: '12' });
+    // Assert
+    expect(inputSpy).toHaveReceivedEventTimes(2);
+    expect(firstValue).toEqual('1');
+    expect(secondValue).toEqual('12');
   });
 
   it("doesn't fire analytics events", async () => {

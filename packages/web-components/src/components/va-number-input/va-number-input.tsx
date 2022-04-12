@@ -69,16 +69,6 @@ export class VaNumberInput {
   @Prop({ mutable: true, reflect: true }) value?: string;
 
   /**
-   * The event emitted when the input is blurred.
-   */
-  @Event() vaBlur: EventEmitter;
-
-  /**
-   * The event emitted when the input value changes
-   */
-  @Event() vaChange: EventEmitter;
-
-  /**
    * The event used to track usage of the component. This is emitted when the
    * input is blurred and enableAnalytics is true.
    */
@@ -89,15 +79,12 @@ export class VaNumberInput {
   })
   componentLibraryAnalytics: EventEmitter;
 
-  private handleChange = (e: Event) => {
+  private handleInput = (e: Event) => {
     const target = e.target as HTMLInputElement;
     this.value = target.value;
-    this.vaChange.emit({ value: this.value });
   };
 
   private handleBlur = () => {
-    this.vaBlur.emit();
-
     if (this.enableAnalytics) {
       this.componentLibraryAnalytics.emit({
         componentName: 'va-number-input',
@@ -134,7 +121,7 @@ export class VaNumberInput {
           max={this.max}
           min={this.min}
           value={this.value}
-          onInput={this.handleChange}
+          onInput={this.handleInput}
           onBlur={this.handleBlur}
           part="input"
         />
