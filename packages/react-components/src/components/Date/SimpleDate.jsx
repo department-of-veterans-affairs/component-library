@@ -1,6 +1,5 @@
-import React, { useRef, useEffect, useState } from 'react';
+import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
-import i18next from 'i18next';
 import { uniqueId } from '../../helpers/utilities';
 
 import Select from '../Select/Select';
@@ -42,15 +41,6 @@ export const SimpleDate = ({
   const inputId = useRef(uniqueId('date-input-'));
   const { day, month, year } = date;
 
-  const [lang, setLang] = useState();
-
-  useEffect(() => {
-    i18next.on('languageChanged', lang => {
-      console.log('language changed SimpleDate');
-      setLang(lang);
-    });
-  }, []);
-
   const daysForSelectedMonth = month.value ? days[month.value] : [];
 
   let errorSpanId;
@@ -91,9 +81,7 @@ export const SimpleDate = ({
     <fieldset className={fieldsetClass} id={inputId.current}>
       <legend className="vads-u-font-size--base vads-u-font-weight--normal">
         {label || 'Date of birth'}
-        {required && (
-          <span className="form-required-span">{i18next.t('required')}</span>
-        )}
+        {required && <span className="form-required-span">(*Required)</span>}
       </legend>
       {errorSpan}
       <div
