@@ -271,6 +271,12 @@ export class VaSearch {
 
     const showSuggestions =
       Array.isArray(formattedSuggestions) && formattedSuggestions.length > 0;
+    const ariaControls = showSuggestions
+      ? 'va-search-listbox'
+      : this.el.getAttribute('aria-controls');
+    const ariaHasPopup = showSuggestions
+      ? 'listbox'
+      : this.el.getAttribute('aria-haspopup');
     const role = showSuggestions ? 'combobox' : this.el.getAttribute('role');
 
     return (
@@ -280,9 +286,9 @@ export class VaSearch {
           id="va-search-input"
           aria-activedescendant={this.el.getAttribute('aria-activedescendant')}
           aria-autocomplete="none"
-          aria-controls={this.el.getAttribute('aria-controls')}
+          aria-controls={ariaControls}
           aria-expanded={this.el.getAttribute('aria-expanded')}
-          aria-haspopup={this.el.getAttribute('aria-haspopup')}
+          aria-haspopup={ariaHasPopup}
           aria-label={label}
           autocomplete="off"
           onBlur={handleInputBlurEvent}
