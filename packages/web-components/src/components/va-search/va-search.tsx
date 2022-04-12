@@ -145,11 +145,6 @@ export class VaSearch {
   @Prop() buttonText?: string;
 
   /**
-   * Hides the search button
-   */
-  @Prop() hideButton?: boolean = false;
-
-  /**
    * Initial value of input
    */
   @Prop() inputValue?: string;
