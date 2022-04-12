@@ -235,4 +235,78 @@ describe('va-text-input', () => {
       expect(inputEl.getAttribute('inputmode')).toBe(inputMode);
     }
   });
+
+  it('renders datalist', async () => {
+    const page = await newE2EPage();
+    await page.setContent(`
+      <va-text-input label="A label" value="bar">
+        <option value="foo">Foo</option>
+        <option value="bar">Bar</option>
+      </va-text-input>
+    `);
+    const element = await page.find('va-text-input');
+
+    expect(element).toEqualHtml(`
+      <va-text-input label="A label" value="bar" class="hydrated">
+        <mock:shadow-root>
+          <label for="inputField">
+            A label
+          </label>
+          <slot></slot>
+          <datalist id="inputList">
+            <option value="foo"></option>
+            <option value="bar"></option>
+          </datalist>
+          <input id="inputField" type="text" list="inputList" />
+        </mock:shadow-root>
+        <option value="foo">Foo</option>
+        <option value="bar">Bar</option>
+      </va-text-input>
+    `);
+  });
+
+  it('passes an axe check with datalist', async () => {
+    const page = await newE2EPage();
+    await page.setContent(`
+      <va-text-input label="A label" value="bar">
+        <option value="foo">Foo</option>
+        <option value="bar">Bar</option>
+      </va-text-input>
+    `);
+
+    await axeCheck(page);
+  });
+
+  it('renders datalist with only options', async () => {
+    const page = await newE2EPage();
+    await page.setContent(`
+      <va-text-input label="A label" value="bar">
+        <div>Extra content</div>
+        <option value="foo">Foo</option>
+        <option value="bar">Bar</option>
+      </va-text-input>
+    `);
+    const element = await page.find('va-text-input');
+
+    expect(element).toEqualHtml(`
+      <va-text-input label="A label" value="bar" class="hydrated">
+        <mock:shadow-root>
+          <label for="inputField">
+            A label
+          </label>
+          <slot></slot>
+          <datalist id="inputList">
+            <option value="foo"></option>
+            <option value="bar"></option>
+          </datalist>
+          <input id="inputField" type="text" list="inputList" />
+        </mock:shadow-root>
+        <div>
+          Extra content
+        </div>
+        <option value="foo">Foo</option>
+        <option value="bar">Bar</option>
+      </va-text-input>
+    `);
+  });
 });

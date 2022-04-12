@@ -6,8 +6,9 @@ import {
   h,
   Event,
   EventEmitter,
+  State,
 } from '@stencil/core';
-import { consoleDevError } from '../../utils/utils';
+import { consoleDevError, getSlottedNodes } from '../../utils/utils';
 
 @Component({
   tag: 'va-text-input',
@@ -114,6 +115,8 @@ export class VaTextInput {
   })
   componentLibraryAnalytics: EventEmitter;
 
+  @State() options: Array<Node>;
+
   private getInputType() {
     if (!this.allowedInputTypes.includes(this.type)) {
       consoleDevError(
@@ -146,12 +149,27 @@ export class VaTextInput {
     }
   };
 
+  /**
+   * This function is for taking the slotted content and rendering
+   * it inside the `<select>` element. Putting the `<slot>` directly
+   * inside the `<select>` doesn't actually show the `<option>` elements,
+   * but this solves that problem.
+   */
+  private populateOptions() {
+    this.options = getSlottedNodes(this.el, 'option').map(
+      (node: HTMLOptionElement) => {
+        return <option value={node.value} />;
+      },
+    );
+  }
+
   render() {
     const describedBy =
       `${this.ariaDescribedby} ${this.error ? 'error-message' : ''}`.trim() ||
       null; // Null so we don't add the attribute if we have an empty string
     const inputMode = this.inputmode ? this.inputmode : null; // Null so we don't add the attribute if we have an empty string
     const type = this.getInputType();
+    const hasDatalist = type === 'text' && this.options?.length > 0;
 
     return (
       <Host>
@@ -161,12 +179,18 @@ export class VaTextInput {
             {this.required && <span class="required">(*Required)</span>}
           </label>
         )}
-        <slot></slot>
+        <slot onSlotchange={() => this.populateOptions()}></slot>
+        {hasDatalist ? (
+          <datalist id="inputList">
+            {this.options}
+          </datalist>
+        ) : null}
         {this.error && <span id="error-message">{this.error}</span>}
         <input
           id="inputField"
           type={type}
           value={this.value}
+          list={hasDatalist ? 'inputList' : null}
           onInput={this.handleChange}
           onBlur={this.handleBlur}
           aria-describedby={describedBy}

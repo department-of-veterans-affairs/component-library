@@ -34,6 +34,10 @@ input:not([disabled]):focus {
     outline-offset: 2px;
 }
 
+::slotted(option) {
+  display: none;
+}
+
 #error-message {
     color: var(--color-secondary-dark);
     display: block;

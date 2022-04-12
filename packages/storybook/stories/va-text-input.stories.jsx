@@ -64,11 +64,13 @@ const Template = ({
   inputmode,
   type,
   'aria-describedby': ariaDescribedby,
+  list,
 }) => {
   return (
     <va-text-input
       name={name}
       label={label}
+      list={list}
       autocomplete={autocomplete}
       enable-analytics={enableAnalytics}
       required={required}
@@ -126,4 +128,21 @@ export const WithHintText = WithHintTextTemplate.bind({});
 WithHintText.args = {
   ...defaultArgs,
   label: 'Veteran’s Social Security number',
+};
+
+const WithListTemplate = ({ name, label }) => (
+  <va-text-input name={name} label={label}>
+    <option value="Chocolate" />
+    <option value="Coconut" />
+    <option value="Mint" />
+    <option value="Strawberry" />
+    <option value="Vanilla" />
+  </va-text-input>
+);
+
+export const WithDatalistOptions = WithListTemplate.bind({});
+WithDatalistOptions.args = {
+  ...defaultArgs,
+  name: 'flavors',
+  label: 'Ice cream flavors',
 };
