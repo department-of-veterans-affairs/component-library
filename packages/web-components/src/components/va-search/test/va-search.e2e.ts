@@ -17,6 +17,25 @@ describe('va-search', () => {
     await axeCheck(page);
   });
 
+  it('passes an axe check with suggestions visible', async () => {
+    const page = await newE2EPage();
+    await page.setContent(`<va-search></va-search>`);
+
+    await page.$eval('va-search', (elm: any) => {
+      elm.inputValue = 'benefits';
+      elm.suggestions = [
+        'benefits for spouses',
+        'benefits for assisted living',
+        'benefits for family',
+      ];
+      elm.showSuggestions = true;
+    });
+
+    await page.waitForChanges();
+
+    await axeCheck(page);
+  });
+
   it('fires input blur event', async () => {
     const page = await newE2EPage();
     await page.setContent('<va-search></va-search>');
