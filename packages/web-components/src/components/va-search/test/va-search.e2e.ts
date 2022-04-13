@@ -154,4 +154,88 @@ describe('va-search', () => {
       </va-search>
     `);
   });
+
+  it('focuses first suggestion when pressing ArrowDown inside input field', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-search></va-search>');
+
+    await page.$eval('va-search', (elm: any) => {
+      elm.inputValue = 'benefits';
+      elm.suggestions = [
+        'benefits for assisted living',
+        'benefits for family',
+        'benefits for spouses',
+      ];
+      elm.showSuggestions = true;
+    });
+
+    await page.waitForChanges();
+
+    const input = await page.find('va-search >>> input');
+    await input.focus();
+
+    await input.press('ArrowDown');
+
+    const selectedSuggestion = await page.find(
+      'va-search >>> [aria-selected="true"]',
+    );
+
+    expect(selectedSuggestion.textContent).toContain(
+      'benefits for assisted living',
+    );
+  });
+
+  it('focuses last suggestion when pressing ArrowUp inside input field', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-search></va-search>');
+
+    await page.$eval('va-search', (elm: any) => {
+      elm.inputValue = 'benefits';
+      elm.suggestions = [
+        'benefits for assisted living',
+        'benefits for family',
+        'benefits for spouses',
+      ];
+      elm.showSuggestions = true;
+    });
+
+    await page.waitForChanges();
+
+    const input = await page.find('va-search >>> input');
+    await input.focus();
+
+    await input.press('ArrowUp');
+
+    const selectedSuggestion = await page.find(
+      'va-search >>> [aria-selected="true"]',
+    );
+
+    expect(selectedSuggestion.textContent).toContain('benefits for spouses');
+  });
+
+  it('clears input value when pressing Escape key inside input field', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-search></va-search>');
+
+    await page.$eval('va-search', (elm: any) => {
+      elm.inputValue = 'benefits';
+      elm.suggestions = [
+        'benefits for assisted living',
+        'benefits for family',
+        'benefits for spouses',
+      ];
+      elm.showSuggestions = true;
+    });
+
+    await page.waitForChanges();
+
+    const input = await page.find('va-search >>> input');
+    await input.focus();
+
+    await input.press('Escape');
+
+    const inputValue = await input.getProperty('value');
+
+    expect(inputValue).toContain('');
+  });
 });
