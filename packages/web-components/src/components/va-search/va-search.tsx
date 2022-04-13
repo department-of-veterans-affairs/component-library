@@ -198,14 +198,10 @@ export class VaSearch {
     const options = this.el.shadowRoot.querySelectorAll('[role="option"]');
     const firstOption = options[0] as HTMLDivElement;
     const lastOption = options[options.length - 1] as HTMLDivElement;
-    const selectedOption = this.el.shadowRoot.querySelector(
-      '[aria-selected="true"]',
-    );
+
     if (event.key === 'ArrowDown') {
       if (!firstOption) return;
-      firstOption.focus();
-      if (selectedOption) selectedOption.removeAttribute('aria-selected');
-      firstOption.setAttribute('aria-selected', 'true');
+      this.selectSuggestion(firstOption);
     }
 
     // if escape key, clear input
@@ -216,9 +212,7 @@ export class VaSearch {
     // if up arrow, select last element
     if (event.key === 'ArrowUp') {
       if (!lastOption) return;
-      lastOption.focus();
-      if (selectedOption) selectedOption.removeAttribute('aria-selected');
-      lastOption.setAttribute('aria-selected', 'true');
+      this.selectSuggestion(lastOption);
     }
   };
 
@@ -248,54 +242,32 @@ export class VaSearch {
     this.suggestionKeyDownEvent.emit(event);
 
     const options = this.el.shadowRoot.querySelectorAll('[role="option"]');
-    const firstOption = options[0] as HTMLDivElement;
-    const lastOption = options[options.length - 1] as HTMLDivElement;
-    const selectedOption = this.el.shadowRoot.querySelector(
-      '[aria-selected="true"]',
-    );
-
-    console.log(selectedOption);
 
     if (event.key === 'ArrowUp') {
+      const lastOption = options[options.length - 1] as HTMLDivElement;
       if (index === 0) {
         if (!lastOption) return;
-        lastOption.focus();
-        this.inputRef.setAttribute('aria-activedescendant', lastOption.id);
-        if (selectedOption) selectedOption.removeAttribute('aria-selected');
-        lastOption.setAttribute('aria-selected', 'true');
+        this.selectSuggestion(lastOption);
       } else {
-        // otherwise select the option before it
-        (options[index - 1] as HTMLDivElement).focus();
-        this.inputRef.setAttribute(
-          'aria-activedescendant',
-          options[index - 1].id,
-        );
-        if (selectedOption) selectedOption.removeAttribute('aria-selected');
-        options[index - 1].setAttribute('aria-selected', 'true');
+        if (!options[index - 1]) return;
+        this.selectSuggestion(options[index - 1]);
       }
     }
 
     if (event.key === 'ArrowDown') {
+      const firstOption = options[0] as HTMLDivElement;
       if (index === options.length - 1) {
-        firstOption.focus();
-        this.inputRef.setAttribute('aria-activedescendant', firstOption.id);
-        if (selectedOption) selectedOption.removeAttribute('aria-selected');
-        firstOption.setAttribute('aria-selected', 'true');
+        if (!firstOption) return;
+        this.selectSuggestion(firstOption);
       } else {
-        this.inputRef.setAttribute(
-          'aria-activedescendant',
-          options[index + 1].id,
-        );
-        (options[index + 1] as HTMLDivElement).focus();
-        if (selectedOption) selectedOption.removeAttribute('aria-selected');
-        options[index + 1].setAttribute('aria-selected', 'true');
+        if (!options[index + 1]) return;
+        this.selectSuggestion(options[index + 1]);
       }
     }
 
     if (event.key === 'Enter') {
       this.inputRef.value = options[index].textContent;
       this.inputRef.focus();
-      this.inputRef.setAttribute('aria-activedescendant', options[index].id);
     }
 
     if (event.key === 'Escape') {
@@ -346,6 +318,20 @@ export class VaSearch {
       );
     }
     return <strong>{suggestion}</strong>;
+  };
+
+  /**
+   * Focuses a suggestion, sets its aria-selected attribute to true, updates aria-activedescendant on input
+   * and removes aria-selected from previously selected option if it exists
+   */
+  private selectSuggestion = suggestion => {
+    const selectedSuggestion = this.el.shadowRoot.querySelector(
+      '[aria-selected="true"]',
+    );
+    if (selectedSuggestion) selectedSuggestion.removeAttribute('aria-selected');
+    suggestion.focus();
+    suggestion.setAttribute('aria-selected', 'true');
+    this.inputRef.setAttribute('aria-activedescendant', suggestion.id);
   };
 
   render() {
