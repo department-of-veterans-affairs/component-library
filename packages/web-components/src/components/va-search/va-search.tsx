@@ -155,6 +155,11 @@ export class VaSearch {
   @Prop() label: string = 'Search';
 
   /**
+   * A boolean that controls whether suggestions are visible
+   */
+  @Prop() showSuggestions?: boolean;
+
+  /**
    * An array of strings containing suggestions
    */
   @Prop() suggestions: Array<string>;
@@ -189,6 +194,27 @@ export class VaSearch {
 
   private handleInputKeyDownEvent = (event: KeyboardEvent) => {
     this.inputKeyDownEvent.emit(event);
+
+    const options = this.el.shadowRoot.querySelectorAll('[role="option"]');
+    const firstOption = options[0] as HTMLDivElement;
+    const lastOption = options[options.length - 1] as HTMLDivElement;
+    if (event.key === 'ArrowDown') {
+      if (!firstOption) return;
+      firstOption.focus();
+      firstOption.setAttribute('aria-selected', 'true');
+    }
+
+    // if escape key, clear input
+    if (event.key === 'Escape') {
+      this.inputRef.value = '';
+    }
+
+    // if up arrow, select last element
+    if (event.key === 'ArrowUp') {
+      if (!lastOption) return;
+      lastOption.focus();
+      lastOption.setAttribute('aria-selected', 'true');
+    }
   };
 
   // Button Event Handlers
@@ -213,8 +239,74 @@ export class VaSearch {
     this.suggestionFocusEvent.emit(event);
   };
 
-  private handleSuggestionKeyDownEvent = (event: KeyboardEvent) => {
+  private handleSuggestionKeyDownEvent = (event, index) => {
     this.suggestionKeyDownEvent.emit(event);
+
+    const options = this.el.shadowRoot.querySelectorAll('[role="option"]');
+    const firstOption = options[0] as HTMLDivElement;
+    const lastOption = options[options.length - 1] as HTMLDivElement;
+
+    if (event.key === 'ArrowUp') {
+      if (index === 0) {
+        if (!lastOption) return;
+        lastOption.focus();
+        this.inputRef.setAttribute('aria-activedescendant', lastOption.id);
+        firstOption.setAttribute('aria-selected', 'true');
+      } else {
+        // otherwise select the option before it
+        (options[index - 1] as HTMLDivElement).focus();
+        this.inputRef.setAttribute(
+          'aria-activedescendant',
+          options[index - 1].id,
+        );
+        options[index - 1].setAttribute('aria-selected', 'true');
+      }
+    }
+
+    if (event.key === 'ArrowDown') {
+      if (index === options.length - 1) {
+        firstOption.focus();
+        this.inputRef.setAttribute('aria-activedescendant', firstOption.id);
+        firstOption.setAttribute('aria-selected', 'true');
+      } else {
+        this.inputRef.setAttribute(
+          'aria-activedescendant',
+          options[index + 1].id,
+        );
+        (options[index + 1] as HTMLDivElement).focus();
+        options[index + 1].setAttribute('aria-selected', 'true');
+      }
+    }
+
+    if (event.key === 'Enter') {
+      this.inputRef.value = options[index].textContent;
+      this.inputRef.focus();
+      this.inputRef.setAttribute('aria-activedescendant', options[index].id);
+    }
+
+    if (event.key === 'Escape') {
+      this.inputRef.value = '';
+      this.inputRef.focus();
+    }
+
+    if (event.key === 'Home') {
+      this.inputRef.focus();
+      this.inputRef.setSelectionRange(0, 0);
+    }
+
+    if (event.key === 'End' || event.key === 'ArrowRight') {
+      const length = this.inputRef.value.length;
+      this.inputRef.focus();
+      this.inputRef.setSelectionRange(length + 1, length + 1);
+    }
+
+    if (event.key === 'ArrowLeft') {
+      const length = this.inputRef.value.length;
+      this.inputRef.focus();
+      this.inputRef.setSelectionRange(length, length);
+    }
+
+    // TODO: Printable Characters
   };
 
   private handleSuggestionMouseDownEvent = (event: MouseEvent) => {
@@ -261,27 +353,33 @@ export class VaSearch {
       handleSuggestionMouseOverEvent,
       inputValue,
       label,
+      showSuggestions,
     } = this;
 
-    const showSuggestions =
-      Array.isArray(formattedSuggestions) && formattedSuggestions.length > 0;
-    const ariaControls = showSuggestions
-      ? 'va-search-listbox'
-      : this.el.getAttribute('aria-controls');
-    const ariaHasPopup = showSuggestions
-      ? 'listbox'
-      : this.el.getAttribute('aria-haspopup');
-    const role = showSuggestions ? 'combobox' : this.el.getAttribute('role');
+    const isListboxVisible = showSuggestions && formattedSuggestions.length > 0;
+    const ariaControls = showSuggestions ? 'va-search-listbox' : undefined;
+    /**
+     * If showSugestion is false, set aria-expanded to undefined
+     * If showSuggestion is true and isListboxVisible is true, set aria-expanded to "true"
+     * If showSuggestion is true but isListboxVisible is false, set aria-expanded to "false"
+     */
+    const ariaExpanded = showSuggestions
+      ? isListboxVisible
+        ? 'true'
+        : 'false'
+      : undefined;
+    const ariaHasPopup = showSuggestions ? 'listbox' : undefined;
+    const role = showSuggestions ? 'combobox' : undefined;
+    const type = this.el.getAttribute('type') || 'text';
 
     return (
       <Host>
         <input
           ref={el => (this.inputRef = el as HTMLInputElement)}
           id="va-search-input"
-          aria-activedescendant={this.el.getAttribute('aria-activedescendant')}
           aria-autocomplete="none"
           aria-controls={ariaControls}
-          aria-expanded={this.el.getAttribute('aria-expanded')}
+          aria-expanded={ariaExpanded}
           aria-haspopup={ariaHasPopup}
           aria-label={label}
           autocomplete="off"
@@ -290,7 +388,7 @@ export class VaSearch {
           onFocus={handleInputFocusEvent}
           onKeyDown={handleInputKeyDownEvent}
           role={role}
-          type={this.el.getAttribute('type') || 'text'}
+          type={type}
           value={inputValue}
         />
         <button
@@ -304,8 +402,8 @@ export class VaSearch {
           <i aria-hidden="true" class="fa fa-search" />
           {buttonText && <span id="va-search-button-text">{buttonText}</span>}
         </button>
-        {showSuggestions && (
-          <div
+        {isListboxVisible && (
+          <ul
             id="va-search-listbox"
             aria-label="Search Suggestions"
             role="listbox"
@@ -313,24 +411,25 @@ export class VaSearch {
             {formattedSuggestions.map(
               (suggestion: string | HTMLElement, index: number) => {
                 return (
-                  <div
+                  <li
+                    id={`listbox-option-${index}`}
                     aria-selected={activeIndex === index ? 'true' : undefined}
                     aria-hidden="true"
                     class="va-search-suggestion"
                     onClick={handleSuggestionClickEvent}
                     onFocus={handleSuggestionFocusEvent}
-                    onKeyDown={handleSuggestionKeyDownEvent}
+                    onKeyDown={e => handleSuggestionKeyDownEvent(e, index)}
                     onMouseDown={handleSuggestionMouseDownEvent}
                     onMouseOver={handleSuggestionMouseOverEvent}
                     role="option"
-                    tabIndex={0}
+                    tabIndex={-1}
                   >
                     {suggestion}
-                  </div>
+                  </li>
                 );
               },
             )}
-          </div>
+          </ul>
         )}
       </Host>
     );
