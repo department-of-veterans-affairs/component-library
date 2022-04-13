@@ -192,6 +192,32 @@ export namespace Components {
          */
         "setFocus": boolean;
     }
+    interface VaMaintenanceBanner {
+        /**
+          * If true, doesn't fire the CustomEvent which can be used for analytics tracking.
+         */
+        "disableAnalytics": boolean;
+        /**
+          * The headline of the banner.
+         */
+        "headline": string;
+        /**
+          * Enable the close functionality. The banner will be closed until storage is cleared.
+         */
+        "showClose": boolean;
+        /**
+          * The type of the banner. One of 'info', 'error', 'success', 'continue', or 'warning'. This affects both the icon of the AlertBox and the top border color.
+         */
+        "type": string;
+        /**
+          * A boolean that when false makes it so that the banner does not render.
+         */
+        "visible": boolean;
+        /**
+          * Enable sessionStorage for the Banner otherwise storage if showClose is enabled will default to localStorage
+         */
+        "windowSession": boolean;
+    }
     interface VaModal {
         /**
           * Click outside modal will trigger closeEvent
@@ -506,6 +532,12 @@ declare global {
         prototype: HTMLVaLoadingIndicatorElement;
         new (): HTMLVaLoadingIndicatorElement;
     };
+    interface HTMLVaMaintenanceBannerElement extends Components.VaMaintenanceBanner, HTMLStencilElement {
+    }
+    var HTMLVaMaintenanceBannerElement: {
+        prototype: HTMLVaMaintenanceBannerElement;
+        new (): HTMLVaMaintenanceBannerElement;
+    };
     interface HTMLVaModalElement extends Components.VaModal, HTMLStencilElement {
     }
     var HTMLVaModalElement: {
@@ -602,6 +634,7 @@ declare global {
         "va-checkbox-group": HTMLVaCheckboxGroupElement;
         "va-featured-content": HTMLVaFeaturedContentElement;
         "va-loading-indicator": HTMLVaLoadingIndicatorElement;
+        "va-maintenance-banner": HTMLVaMaintenanceBannerElement;
         "va-modal": HTMLVaModalElement;
         "va-on-this-page": HTMLVaOnThisPageElement;
         "va-pagination": HTMLVaPaginationElement;
@@ -856,6 +889,36 @@ declare namespace LocalJSX {
           * Set to true if the loading indicator should capture focus
          */
         "setFocus"?: boolean;
+    }
+    interface VaMaintenanceBanner {
+        /**
+          * If true, doesn't fire the CustomEvent which can be used for analytics tracking.
+         */
+        "disableAnalytics"?: boolean;
+        /**
+          * The headline of the banner.
+         */
+        "headline"?: string;
+        /**
+          * The event used to track usage of the component. This is emitted when an anchor link or the dismiss icon is clicked and disableAnalytics is not true.
+         */
+        "onComponent-library-analytics"?: (event: CustomEvent<any>) => void;
+        /**
+          * Enable the close functionality. The banner will be closed until storage is cleared.
+         */
+        "showClose"?: boolean;
+        /**
+          * The type of the banner. One of 'info', 'error', 'success', 'continue', or 'warning'. This affects both the icon of the AlertBox and the top border color.
+         */
+        "type"?: string;
+        /**
+          * A boolean that when false makes it so that the banner does not render.
+         */
+        "visible"?: boolean;
+        /**
+          * Enable sessionStorage for the Banner otherwise storage if showClose is enabled will default to localStorage
+         */
+        "windowSession"?: boolean;
     }
     interface VaModal {
         /**
@@ -1195,6 +1258,7 @@ declare namespace LocalJSX {
         "va-checkbox-group": VaCheckboxGroup;
         "va-featured-content": VaFeaturedContent;
         "va-loading-indicator": VaLoadingIndicator;
+        "va-maintenance-banner": VaMaintenanceBanner;
         "va-modal": VaModal;
         "va-on-this-page": VaOnThisPage;
         "va-pagination": VaPagination;
@@ -1226,6 +1290,7 @@ declare module "@stencil/core" {
             "va-checkbox-group": LocalJSX.VaCheckboxGroup & JSXBase.HTMLAttributes<HTMLVaCheckboxGroupElement>;
             "va-featured-content": LocalJSX.VaFeaturedContent & JSXBase.HTMLAttributes<HTMLVaFeaturedContentElement>;
             "va-loading-indicator": LocalJSX.VaLoadingIndicator & JSXBase.HTMLAttributes<HTMLVaLoadingIndicatorElement>;
+            "va-maintenance-banner": LocalJSX.VaMaintenanceBanner & JSXBase.HTMLAttributes<HTMLVaMaintenanceBannerElement>;
             "va-modal": LocalJSX.VaModal & JSXBase.HTMLAttributes<HTMLVaModalElement>;
             "va-on-this-page": LocalJSX.VaOnThisPage & JSXBase.HTMLAttributes<HTMLVaOnThisPageElement>;
             "va-pagination": LocalJSX.VaPagination & JSXBase.HTMLAttributes<HTMLVaPaginationElement>;
