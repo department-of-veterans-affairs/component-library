@@ -219,7 +219,7 @@ export class VaDate {
           <va-select
             label="Day"
             name={`${name}Day`}
-            value={day}
+            value={daysForSelectedMonth.length < day ? '' : day}
             onVaSelect={handleDayChangeEvent}
             onBlur={handleDayBlurEvent}
             class="select-day"

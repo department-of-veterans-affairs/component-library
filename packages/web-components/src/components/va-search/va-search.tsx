@@ -134,10 +134,6 @@ export class VaSearch {
       handleInputChangeEvent,
       handleInputFocusEvent,
       handleInputKeyDownEvent,
-<<<<<<< HEAD
-      hideButton,
-=======
->>>>>>> ac16664ae6bab8b2ad1f14956ae29c98cfa94af3
       inputValue,
       label,
     } = this;
