@@ -238,4 +238,128 @@ describe('va-search', () => {
 
     expect(inputValue).toContain('');
   });
+
+  it('focuses next suggestion when pressing ArrowDown when suggestions are visible', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-search></va-search>');
+
+    await page.$eval('va-search', (elm: any) => {
+      elm.inputValue = 'benefits';
+      elm.suggestions = [
+        'benefits for assisted living',
+        'benefits for family',
+        'benefits for spouses',
+      ];
+      elm.showSuggestions = true;
+    });
+
+    await page.waitForChanges();
+
+    const input = await page.find('va-search >>> input');
+    await input.focus();
+    await input.press('ArrowDown');
+
+    const currentSuggestion = await page.find(
+      'va-search >>> [aria-selected="true"]',
+    );
+    await currentSuggestion.press('ArrowDown');
+
+    const selectedSuggestion = await page.find(
+      'va-search >>> [aria-selected="true"]',
+    );
+
+    expect(selectedSuggestion.textContent).toContain('benefits for family');
+  });
+
+  it('focuses last suggestion when pressing ArrowUp with first suggestion selected', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-search></va-search>');
+
+    await page.$eval('va-search', (elm: any) => {
+      elm.inputValue = 'benefits';
+      elm.suggestions = [
+        'benefits for assisted living',
+        'benefits for family',
+        'benefits for spouses',
+      ];
+      elm.showSuggestions = true;
+    });
+
+    await page.waitForChanges();
+
+    const input = await page.find('va-search >>> input');
+    await input.focus();
+    await input.press('ArrowDown');
+
+    const currentSuggestion = await page.find(
+      'va-search >>> [aria-selected="true"]',
+    );
+    await currentSuggestion.press('ArrowUp');
+
+    const selectedSuggestion = await page.find(
+      'va-search >>> [aria-selected="true"]',
+    );
+
+    expect(selectedSuggestion.textContent).toContain('benefits for spouses');
+  });
+
+  it('sets input value to suggestion when pressing Enter key with suggestion focused', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-search></va-search>');
+
+    await page.$eval('va-search', (elm: any) => {
+      elm.inputValue = 'benefits';
+      elm.suggestions = [
+        'benefits for assisted living',
+        'benefits for family',
+        'benefits for spouses',
+      ];
+      elm.showSuggestions = true;
+    });
+
+    await page.waitForChanges();
+
+    const input = await page.find('va-search >>> input');
+    await input.focus();
+    await input.press('ArrowDown');
+
+    const selectedSuggestion = await page.find(
+      'va-search >>> [aria-selected="true"]',
+    );
+    await selectedSuggestion.press('Enter');
+
+    const inputValue = await input.getProperty('value');
+
+    expect(inputValue).toContain('benefits for assisted living');
+  });
+
+  it('clears input value when pressing Escape key with a suggestion focused', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-search></va-search>');
+
+    await page.$eval('va-search', (elm: any) => {
+      elm.inputValue = 'benefits';
+      elm.suggestions = [
+        'benefits for assisted living',
+        'benefits for family',
+        'benefits for spouses',
+      ];
+      elm.showSuggestions = true;
+    });
+
+    await page.waitForChanges();
+
+    const input = await page.find('va-search >>> input');
+    await input.focus();
+    await input.press('ArrowDown');
+
+    const selectedSuggestion = await page.find(
+      'va-search >>> [aria-selected="true"]',
+    );
+    await selectedSuggestion.press('Escape');
+
+    const inputValue = await input.getProperty('value');
+
+    expect(inputValue).toContain('');
+  });
 });
