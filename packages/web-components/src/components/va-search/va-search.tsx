@@ -166,17 +166,17 @@ export class VaSearch {
 
   componentDidLoad() {
     if (!this.suggestions || !Array.isArray(this.suggestions)) return;
-    this.formattedSuggestions = this.suggestions.map(suggestion =>
-      this.formatSuggestion(suggestion),
-    );
+    this.formattedSuggestions = this.suggestions
+      .sort()
+      .map(suggestion => this.formatSuggestion(suggestion));
   }
 
   @Watch('suggestions')
   watchSuggestionsHandler(newSuggestions: string[]) {
     if (!Array.isArray(newSuggestions)) return;
-    this.formattedSuggestions = newSuggestions.map(suggestion =>
-      this.formatSuggestion(suggestion),
-    );
+    this.formattedSuggestions = newSuggestions
+      .sort()
+      .map(suggestion => this.formatSuggestion(suggestion));
   }
 
   // Input Event Handlers
@@ -198,9 +198,13 @@ export class VaSearch {
     const options = this.el.shadowRoot.querySelectorAll('[role="option"]');
     const firstOption = options[0] as HTMLDivElement;
     const lastOption = options[options.length - 1] as HTMLDivElement;
+    const selectedOption = this.el.shadowRoot.querySelector(
+      '[aria-selected="true"]',
+    );
     if (event.key === 'ArrowDown') {
       if (!firstOption) return;
       firstOption.focus();
+      if (selectedOption) selectedOption.removeAttribute('aria-selected');
       firstOption.setAttribute('aria-selected', 'true');
     }
 
@@ -213,6 +217,7 @@ export class VaSearch {
     if (event.key === 'ArrowUp') {
       if (!lastOption) return;
       lastOption.focus();
+      if (selectedOption) selectedOption.removeAttribute('aria-selected');
       lastOption.setAttribute('aria-selected', 'true');
     }
   };
@@ -245,13 +250,19 @@ export class VaSearch {
     const options = this.el.shadowRoot.querySelectorAll('[role="option"]');
     const firstOption = options[0] as HTMLDivElement;
     const lastOption = options[options.length - 1] as HTMLDivElement;
+    const selectedOption = this.el.shadowRoot.querySelector(
+      '[aria-selected="true"]',
+    );
+
+    console.log(selectedOption);
 
     if (event.key === 'ArrowUp') {
       if (index === 0) {
         if (!lastOption) return;
         lastOption.focus();
         this.inputRef.setAttribute('aria-activedescendant', lastOption.id);
-        firstOption.setAttribute('aria-selected', 'true');
+        if (selectedOption) selectedOption.removeAttribute('aria-selected');
+        lastOption.setAttribute('aria-selected', 'true');
       } else {
         // otherwise select the option before it
         (options[index - 1] as HTMLDivElement).focus();
@@ -259,6 +270,7 @@ export class VaSearch {
           'aria-activedescendant',
           options[index - 1].id,
         );
+        if (selectedOption) selectedOption.removeAttribute('aria-selected');
         options[index - 1].setAttribute('aria-selected', 'true');
       }
     }
@@ -267,6 +279,7 @@ export class VaSearch {
       if (index === options.length - 1) {
         firstOption.focus();
         this.inputRef.setAttribute('aria-activedescendant', firstOption.id);
+        if (selectedOption) selectedOption.removeAttribute('aria-selected');
         firstOption.setAttribute('aria-selected', 'true');
       } else {
         this.inputRef.setAttribute(
@@ -274,6 +287,7 @@ export class VaSearch {
           options[index + 1].id,
         );
         (options[index + 1] as HTMLDivElement).focus();
+        if (selectedOption) selectedOption.removeAttribute('aria-selected');
         options[index + 1].setAttribute('aria-selected', 'true');
       }
     }
