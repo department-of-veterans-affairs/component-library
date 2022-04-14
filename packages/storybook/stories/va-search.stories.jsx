@@ -99,6 +99,7 @@ const SuggestionsTemplate = ({
 export const WithSuggestions = SuggestionsTemplate.bind({});
 WithSuggestions.args = {
   ...defaultArgs,
+  label: undefined,
   suggestions: [
     'benefits for spouses',
     'benefits for assisted living',
