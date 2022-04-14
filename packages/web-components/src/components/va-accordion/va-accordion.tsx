@@ -8,8 +8,10 @@ import {
   Prop,
   State,
   h,
+  forceUpdate
 } from '@stencil/core';
 import { getSlottedNodes } from '../../utils/utils';
+import i18next from 'i18next'
 
 /**
  * Accordions are a list of headers that can be clicked to hide or reveal additional content.
@@ -160,6 +162,12 @@ export class VaAccordion {
    */
   @Prop() sectionHeading: string = null;
 
+  connectedCallback() {
+    i18next.on('languageChanged', () => {
+      forceUpdate(this.el);
+    });
+  }
+
   render() {
     return (
       <Host>
@@ -169,11 +177,11 @@ export class VaAccordion {
             onClick={() => this.expandCollapseAll(!this.expanded)}
             aria-label={
               this.expanded
-                ? 'Collapse all accordions'
-                : 'Expand all accordions'
+                ? i18next.t('collapse-all-aria-label')
+                : i18next.t('expand-all-aria-label')
             }
           >
-            {this.expanded ? 'Collapse all -' : 'Expand all +'}
+            {this.expanded ? `${i18next.t('collapse-all')} -` : `${i18next.t('expand-all')} +`}
           </button>
         )}
         <slot />
