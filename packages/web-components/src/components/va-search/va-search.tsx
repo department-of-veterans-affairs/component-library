@@ -162,7 +162,7 @@ export class VaSearch {
   /**
    * An array of strings containing suggestions
    */
-  @Prop() suggestions: Array<string>;
+  @Prop() suggestions: any;
 
   componentDidLoad() {
     if (!this.suggestions || !Array.isArray(this.suggestions)) return;

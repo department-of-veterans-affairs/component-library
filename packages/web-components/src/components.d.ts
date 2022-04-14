@@ -353,7 +353,7 @@ export namespace Components {
         /**
           * An array of strings containing suggestions
          */
-        "suggestions": Array<string>;
+        "suggestions": any;
     }
     interface VaSegmentedProgressBar {
         /**
@@ -1176,7 +1176,7 @@ declare namespace LocalJSX {
         /**
           * An array of strings containing suggestions
          */
-        "suggestions"?: Array<string>;
+        "suggestions"?: any;
     }
     interface VaSegmentedProgressBar {
         /**
