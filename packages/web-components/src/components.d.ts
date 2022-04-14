@@ -329,6 +329,20 @@ export namespace Components {
          */
         "value": string;
     }
+    interface VaSearch {
+        /**
+          * Text displayed inside the search button
+         */
+        "buttonText"?: string;
+        /**
+          * Initial value of input
+         */
+        "inputValue"?: string;
+        /**
+          * The aria-label for search input and button. Default is 'Search'.
+         */
+        "label": string;
+    }
     interface VaSegmentedProgressBar {
         /**
           * The current segment in progress
@@ -579,6 +593,12 @@ declare global {
         prototype: HTMLVaRadioOptionElement;
         new (): HTMLVaRadioOptionElement;
     };
+    interface HTMLVaSearchElement extends Components.VaSearch, HTMLStencilElement {
+    }
+    var HTMLVaSearchElement: {
+        prototype: HTMLVaSearchElement;
+        new (): HTMLVaSearchElement;
+    };
     interface HTMLVaSegmentedProgressBarElement extends Components.VaSegmentedProgressBar, HTMLStencilElement {
     }
     var HTMLVaSegmentedProgressBarElement: {
@@ -635,6 +655,7 @@ declare global {
         "va-promo-banner": HTMLVaPromoBannerElement;
         "va-radio": HTMLVaRadioElement;
         "va-radio-option": HTMLVaRadioOptionElement;
+        "va-search": HTMLVaSearchElement;
         "va-segmented-progress-bar": HTMLVaSegmentedProgressBarElement;
         "va-select": HTMLVaSelectElement;
         "va-table": HTMLVaTableElement;
@@ -1071,6 +1092,48 @@ declare namespace LocalJSX {
          */
         "value"?: string;
     }
+    interface VaSearch {
+        /**
+          * Text displayed inside the search button
+         */
+        "buttonText"?: string;
+        /**
+          * Initial value of input
+         */
+        "inputValue"?: string;
+        /**
+          * The aria-label for search input and button. Default is 'Search'.
+         */
+        "label"?: string;
+        /**
+          * Fires when the search button is clicked
+         */
+        "onButtonClickEvent"?: (event: CustomEvent<any>) => void;
+        /**
+          * Fires when the search button gains focus
+         */
+        "onButtonFocusEvent"?: (event: CustomEvent<any>) => void;
+        /**
+          * Fires when the search button is focused and a key is pressed
+         */
+        "onButtonKeyDownEvent"?: (event: CustomEvent<any>) => void;
+        /**
+          * Fires when the search input loses focus
+         */
+        "onInputBlurEvent"?: (event: CustomEvent<any>) => void;
+        /**
+          * Fires when the search input loses focus after its value was changed
+         */
+        "onInputChangeEvent"?: (event: CustomEvent<any>) => void;
+        /**
+          * Fires when the search input gains focus
+         */
+        "onInputFocusEvent"?: (event: CustomEvent<any>) => void;
+        /**
+          * Fires when the search input is focused and a key is pressed
+         */
+        "onInputKeyDownEvent"?: (event: CustomEvent<any>) => void;
+    }
     interface VaSegmentedProgressBar {
         /**
           * The current segment in progress
@@ -1257,6 +1320,7 @@ declare namespace LocalJSX {
         "va-promo-banner": VaPromoBanner;
         "va-radio": VaRadio;
         "va-radio-option": VaRadioOption;
+        "va-search": VaSearch;
         "va-segmented-progress-bar": VaSegmentedProgressBar;
         "va-select": VaSelect;
         "va-table": VaTable;
@@ -1288,6 +1352,7 @@ declare module "@stencil/core" {
             "va-promo-banner": LocalJSX.VaPromoBanner & JSXBase.HTMLAttributes<HTMLVaPromoBannerElement>;
             "va-radio": LocalJSX.VaRadio & JSXBase.HTMLAttributes<HTMLVaRadioElement>;
             "va-radio-option": LocalJSX.VaRadioOption & JSXBase.HTMLAttributes<HTMLVaRadioOptionElement>;
+            "va-search": LocalJSX.VaSearch & JSXBase.HTMLAttributes<HTMLVaSearchElement>;
             "va-segmented-progress-bar": LocalJSX.VaSegmentedProgressBar & JSXBase.HTMLAttributes<HTMLVaSegmentedProgressBarElement>;
             "va-select": LocalJSX.VaSelect & JSXBase.HTMLAttributes<HTMLVaSelectElement>;
             "va-table": LocalJSX.VaTable & JSXBase.HTMLAttributes<HTMLVaTableElement>;
