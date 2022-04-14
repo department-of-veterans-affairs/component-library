@@ -230,8 +230,21 @@ export class VaSearch {
   };
 
   // Suggestions Event Handlers
-  private handleSuggestionClickEvent = (event: KeyboardEvent | MouseEvent) => {
+  private handleSuggestionClickEvent = (
+    event: KeyboardEvent | MouseEvent,
+    index,
+  ) => {
     this.suggestionClickEvent.emit(event);
+    const suggestion = this.el.shadowRoot.getElementById(
+      `listbox-option-${index}`,
+    );
+    if (!suggestion) return;
+    const selectedSuggestion = this.el.shadowRoot.querySelector(
+      '[aria-selected="true"]',
+    );
+    if (selectedSuggestion) selectedSuggestion.removeAttribute('aria-selected');
+    this.inputRef.focus();
+    this.inputRef.value = suggestion.textContent;
   };
 
   private handleSuggestionFocusEvent = (event: FocusEvent) => {
@@ -243,56 +256,59 @@ export class VaSearch {
 
     const options = this.el.shadowRoot.querySelectorAll('[role="option"]');
 
-    if (event.key === 'ArrowUp') {
-      const lastOption = options[options.length - 1] as HTMLDivElement;
-      if (index === 0) {
-        if (!lastOption) return;
-        this.selectSuggestion(lastOption);
-      } else {
-        if (!options[index - 1]) return;
-        this.selectSuggestion(options[index - 1]);
-      }
+    switch (event.key) {
+      case 'ArrowUp':
+        const lastOption = options[options.length - 1] as HTMLDivElement;
+        if (index === 0) {
+          if (!lastOption) return;
+          this.selectSuggestion(lastOption);
+        } else {
+          if (!options[index - 1]) return;
+          this.selectSuggestion(options[index - 1]);
+        }
+        break;
+      case 'ArrowDown':
+        const firstOption = options[0] as HTMLDivElement;
+        if (index === options.length - 1) {
+          if (!firstOption) return;
+          this.selectSuggestion(firstOption);
+        } else {
+          if (!options[index + 1]) return;
+          this.selectSuggestion(options[index + 1]);
+        }
+        break;
+      case 'Enter':
+        this.inputRef.value = options[index].textContent;
+        this.inputRef.focus();
+        break;
+      case 'Escape':
+        this.inputRef.value = '';
+        this.inputRef.focus();
+        break;
+      case 'Home':
+        this.inputRef.focus();
+        this.inputRef.setSelectionRange(0, 0);
+        break;
+      case 'ArrowRight':
+      case 'End':
+        this.inputRef.focus();
+        this.inputRef.setSelectionRange(
+          this.inputRef.value.length + 1,
+          this.inputRef.value.length + 1,
+        );
+        break;
+      case 'ArrowLeft':
+        this.inputRef.focus();
+        this.inputRef.setSelectionRange(
+          this.inputRef.value.length,
+          this.inputRef.value.length,
+        );
+        break;
+      default:
+        this.inputRef.focus();
+        this.inputRef.value = this.inputRef.value + `${event.key}`;
+        break;
     }
-
-    if (event.key === 'ArrowDown') {
-      const firstOption = options[0] as HTMLDivElement;
-      if (index === options.length - 1) {
-        if (!firstOption) return;
-        this.selectSuggestion(firstOption);
-      } else {
-        if (!options[index + 1]) return;
-        this.selectSuggestion(options[index + 1]);
-      }
-    }
-
-    if (event.key === 'Enter') {
-      this.inputRef.value = options[index].textContent;
-      this.inputRef.focus();
-    }
-
-    if (event.key === 'Escape') {
-      this.inputRef.value = '';
-      this.inputRef.focus();
-    }
-
-    if (event.key === 'Home') {
-      this.inputRef.focus();
-      this.inputRef.setSelectionRange(0, 0);
-    }
-
-    if (event.key === 'End' || event.key === 'ArrowRight') {
-      const length = this.inputRef.value.length;
-      this.inputRef.focus();
-      this.inputRef.setSelectionRange(length + 1, length + 1);
-    }
-
-    if (event.key === 'ArrowLeft') {
-      const length = this.inputRef.value.length;
-      this.inputRef.focus();
-      this.inputRef.setSelectionRange(length, length);
-    }
-
-    // TODO: Printable Characters
   };
 
   private handleSuggestionMouseDownEvent = (event: MouseEvent) => {
@@ -416,7 +432,7 @@ export class VaSearch {
                     aria-selected={activeIndex === index ? 'true' : undefined}
                     aria-hidden="true"
                     class="va-search-suggestion"
-                    onClick={handleSuggestionClickEvent}
+                    onClick={e => handleSuggestionClickEvent(e, index)}
                     onFocus={handleSuggestionFocusEvent}
                     onKeyDown={e => handleSuggestionKeyDownEvent(e, index)}
                     onMouseDown={handleSuggestionMouseDownEvent}
