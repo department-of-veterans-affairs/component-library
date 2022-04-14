@@ -12,6 +12,12 @@ import {
 } from '@stencil/core';
 import { getSlottedNodes } from '../../utils/utils';
 import i18next from 'i18next'
+import { Build } from '@stencil/core';
+
+if (Build.isTesting) {
+  // Make i18next.t() return the key instead of the value
+  i18next.init({ lng: 'cimode' });
+}
 
 /**
  * Accordions are a list of headers that can be clicked to hide or reveal additional content.

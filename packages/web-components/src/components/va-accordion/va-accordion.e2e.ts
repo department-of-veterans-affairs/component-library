@@ -9,11 +9,12 @@ describe('va-accordion', () => {
     await page.setContent('<va-accordion></va-accordion>');
     const element = await page.find('va-accordion');
 
+    // The i18next translation keys are being rendered
     expect(element).toEqualHtml(`
       <va-accordion class="hydrated">
         <mock:shadow-root>
-          <button aria-label="Expand all accordions">
-            Expand all +
+          <button aria-label="expand-all-aria-label">
+            expand-all +
           </button>
           <slot></slot>
         </mock:shadow-root>
@@ -149,11 +150,13 @@ describe('va-accordion', () => {
     // Click to expand single accordion item manually
     await accordionItemsButtons[0].click();
     // Check if all accordions opened conditions are met
-    expect(expandButton).toEqualText('Expand all +');
+    // This is a translation key for i18next
+    expect(expandButton).toEqualText('expand-all +');
     // Click to expand single accordion item manually
     await accordionItemsButtons[1].click();
     // Check if all accordions opened conditions are met
-    expect(expandButton).toEqualText('Collapse all -');
+    // This is a translation key for i18next
+    expect(expandButton).toEqualText('collapse-all -');
   });
 
   it('fires an analytics event when expanded', async () => {
