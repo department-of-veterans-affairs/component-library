@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import React from 'react';
 import { generateEventsDescription } from './events';
 import { VaAlert } from '@department-of-veterans-affairs/web-components/react-bindings';
@@ -23,11 +22,14 @@ export default {
     docs: {
       description: {
         component:
+          `<a className="vads-c-action-link--blue" href="https://design.va.gov/components/alert">View guidance for the Alert component in the Design System</a>` +
+          `\n` +
           `Use a heading element with an attribute named slot and a value of "headline" to control what is displayed for the alert's headline. 
-        Any children passed into this component without a parent slot "headline" will render in the alert's body.` +
+          Any children passed into this component without a parent slot "headline" will render in the alert's body.` +
           generateEventsDescription(alertDocs),
       },
     },
+    componentSubtitle: `Alert web component`,
   },
 };
 
