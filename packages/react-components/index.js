@@ -38,6 +38,8 @@ import Telephone, {
 import TextArea from './TextArea';
 import TextInput from './TextInput';
 
+import './i18n-setup';
+
 export {
   AcceptTermsPrompt,
   AdditionalInfo,
