@@ -12,9 +12,13 @@ export default {
   parameters: {
     docs: {
       description: {
-        component: generateEventsDescription(modalDocs),
+        component:
+          `<a className="vads-c-action-link--blue" href="https://design.va.gov/components/modal">View guidance for the Modal component in the Design System</a>` +
+          '\n' +
+          generateEventsDescription(modalDocs),
       },
     },
+    componentSubtitle: `Modal web component`,
   },
   argTypes: {
     status: {
