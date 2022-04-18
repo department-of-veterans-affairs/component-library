@@ -178,10 +178,6 @@ export namespace Components {
     }
     interface VaDate {
         /**
-          * Add additional aria-describedby to the month, day & year elements.
-         */
-        "ariaDescribedby": string;
-        /**
           * Set the default day on the day input.
          */
         "day": string;
@@ -986,10 +982,6 @@ declare namespace LocalJSX {
         "required"?: boolean;
     }
     interface VaDate {
-        /**
-          * Add additional aria-describedby to the month, day & year elements.
-         */
-        "ariaDescribedby"?: string;
         /**
           * Set the default day on the day input.
          */

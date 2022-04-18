@@ -40,11 +40,6 @@ export class VaDate {
   @Prop() error: string;
 
   /**
-   * Add additional aria-describedby to the month, day & year elements.
-   */
-  @Prop() ariaDescribedby: string;
-
-  /**
    * Set the `min` value on the year input.
    */
   @Prop() minYear: number;
@@ -175,7 +170,6 @@ export class VaDate {
       label,
       name,
       error,
-      ariaDescribedby,
       maxYear,
       minYear,
       handleMonthBlurEvent,
@@ -237,7 +231,6 @@ export class VaDate {
             min={minYear}
             value={year}
             onInput={handleYearChangeEvent}
-            ariaDescribedby={ariaDescribedby}
             onBlur={handleYearBlurEvent}
             class="input-year"
             inputmode="numeric"

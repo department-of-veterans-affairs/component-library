@@ -89,7 +89,6 @@ const defaultArgs = {
   'year': undefined,
   'min-year': undefined,
   'max-year': undefined,
-  'aria-describedby': undefined,
 };
 
 const Template = ({
@@ -100,7 +99,6 @@ const Template = ({
   month,
   day,
   year,
-  'aria-describedby': ariaDescribedby,
   'min-year': minYear,
   'max-year': maxYear,
 }) => {
@@ -113,7 +111,6 @@ const Template = ({
       month={month}
       day={day}
       year={year}
-      aria-describedby={ariaDescribedby}
       min-year={minYear}
       max-year={maxYear}
       onMonthBlurEvent={e => console.log(e, 'Month BLUR FIRED')}
@@ -134,7 +131,6 @@ const CustomValidationTemplate = ({
   month,
   day,
   year,
-  'aria-describedby': ariaDescribedby,
   'min-year': minYear,
   'max-year': maxYear,
 }) => {
@@ -175,7 +171,6 @@ const CustomValidationTemplate = ({
         month={monthVal}
         day={dayVal}
         year={yearVal}
-        aria-describedby={ariaDescribedby}
         min-year={minYear}
         max-year={maxYear}
         onMonthBlurEvent={e => console.log(e, 'Month BLUR FIRED')}
@@ -221,7 +216,10 @@ const CustomValidationTemplate = ({
         <pre>&#125;</pre>
         <div>Year Check</div>
         <pre>if (yearVal &lt; minYear || yearVal &gt; maxYear) &#123;</pre>
-        <pre>error = `Please enter a year between $&#123;minYear&#125; and $&#123;maxYear&#125;`;</pre>
+        <pre>
+          error = `Please enter a year between $&#123;minYear&#125; and
+          $&#123;maxYear&#125;`;
+        </pre>
         <pre>&#125;</pre>
         <div>Blank Date Check</div>
         <pre>if (</pre>
@@ -254,12 +252,6 @@ Default.argTypes = propStructure(dateDocs);
 
 export const Error = Template.bind({});
 Error.args = { ...defaultArgs, error: 'Error Message Example' };
-
-export const AriaDescribedby = Template.bind({});
-AriaDescribedby.args = {
-  ...defaultArgs,
-  'aria-describedby': 'Aria Describe Test',
-};
 
 export const CustomValidation = CustomValidationTemplate.bind({});
 CustomValidation.args = {
