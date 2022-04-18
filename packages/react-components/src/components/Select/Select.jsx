@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { uniqueId, isString } from '../../helpers/utilities';
 import { makeField } from '../../helpers/fields';
+import i18next from 'i18next';
 
 import dispatchAnalyticsEvent from '../../helpers/analytics';
 
@@ -15,6 +16,9 @@ class Select extends React.Component {
   constructor() {
     super();
     this.handleChange = this.handleChange.bind(this);
+    i18next.on('languageChanged', () => {
+      this.forceUpdate(this.el);
+    });
   }
 
   UNSAFE_componentWillMount() {
@@ -61,7 +65,11 @@ class Select extends React.Component {
     // Calculate required.
     let requiredSpan = undefined;
     if (this.props.required) {
-      requiredSpan = <span className="form-required-span">(*Required)</span>;
+      requiredSpan = (
+        <span className="form-required-span">
+          {`(*${i18next.t('required')})`}
+        </span>
+      );
     }
 
     const ariaDescribedby =

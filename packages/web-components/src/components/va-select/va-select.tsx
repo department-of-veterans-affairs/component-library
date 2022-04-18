@@ -7,8 +7,10 @@ import {
   Prop,
   State,
   h,
+  forceUpdate,
 } from '@stencil/core';
 import { getSlottedNodes } from '../../utils/utils';
+import i18next from 'i18next';
 
 @Component({
   tag: 'va-select',
@@ -113,6 +115,12 @@ export class VaSelect {
     );
   }
 
+  connectedCallback() {
+    i18next.on('languageChanged', () => {
+      forceUpdate(this.el);
+    });
+  }
+
   render() {
     const { error, label, required, name } = this;
     const errorSpanId = error ? 'error' : undefined;
@@ -121,7 +129,7 @@ export class VaSelect {
       <Host>
         <label htmlFor="select">
           {label}
-          {required && <span>(*Required)</span>}
+          {required ? <span>{`(*${i18next.t('required')})`}</span> : null}
         </label>
 
         {error && (

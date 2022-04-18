@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState, useEffect } from 'react';
 
 import {Select} from '@department-of-veterans-affairs/component-library';
 
@@ -24,6 +24,27 @@ const defaultArgs = {
     dirty: false,
   },
   options: ['Army', 'Navy', 'Air Force', 'Marines', 'Coast Guard'],
+};
+
+const I18nTemplate = args => {
+  const [lang, setLang] = useState('en');
+  const [value, setValue] = useState(args.value);
+  const onValueChange = newValue => {
+    setValue(newValue);
+  };
+
+  useEffect(() => {
+    const main = document.querySelector('main');
+    main.setAttribute('lang', lang);
+  }, [lang]);
+
+  return (
+    <div>
+      <button onClick={e => setLang('es')}>Español</button>
+      <button onClick={e => setLang('en')}>English</button>
+      <Select {...args} value={value} onValueChange={onValueChange} />
+    </div>
+  );
 };
 
 export const Default = Template.bind({});
@@ -66,4 +87,10 @@ export const WithAnalytics = Template.bind({});
 WithAnalytics.args = {
   ...defaultArgs,
   enableAnalytics: true,
+};
+
+export const Internationalization = I18nTemplate.bind({});
+Internationalization.args = {
+  ...defaultArgs,
+  required: true,
 };
