@@ -1,5 +1,5 @@
 import React from 'react';
-import OMBInfo from '../../react-components/src/components/OMBInfo/OMBInfo ';
+import OMBInfo from '../../react-components/src/components/OMBInfo/OMBInfo';
 
 export default {
   title: 'Components/OMBInfo',

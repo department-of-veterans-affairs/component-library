@@ -2,7 +2,7 @@
 import React from 'react';
 import { formatDate } from '../../react-components/src/helpers/format-date';
 
-import MaintenanceBanner from '../../react-components/src/components/MaintenanceBanner/MaintenanceBanner ';
+import MaintenanceBanner from '../../react-components/src/components/MaintenanceBanner/MaintenanceBanner';
 
 export default {
   title: 'Components/Banners/MaintenanceBanner',

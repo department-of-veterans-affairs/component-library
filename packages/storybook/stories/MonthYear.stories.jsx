@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import MonthYear from '../../react-components/src/components/MonthYear/MonthYear ';
+import MonthYear from '../../react-components/src/components/MonthYear/MonthYear';
 
 export default {
   title: 'Components/MonthYear',

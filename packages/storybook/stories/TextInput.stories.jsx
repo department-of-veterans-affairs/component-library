@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import TextInput from '../../react-components/src/components/TextInput/TextInput ';
+import TextInput from '../../react-components/src/components/TextInput/TextInput';
 
 export default {
   title: 'Components/TextInput (deprecated)',

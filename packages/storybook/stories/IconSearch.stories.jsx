@@ -1,6 +1,6 @@
 import React from 'react';
 
-import IconSearch from '../../react-components/src/components/IconSearch/IconSearch ';
+import IconSearch from '../../react-components/src/components/IconSearch/IconSearch';
 
 export default {
   title: 'Components/Icons/IconSearch',

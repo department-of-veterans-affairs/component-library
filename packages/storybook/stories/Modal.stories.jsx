@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Modal from '../../react-components/src/components/Modal/Modal ';
+import Modal from '../../react-components/src/components/Modal/Modal';
 
 export default {
   title: 'Components/Modal',
