@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import {PrivacyAgreement} from '@department-of-veterans-affairs/component-library';
+import PrivacyAgreement from '../../react-components/src/components/PrivacyAgreement/PrivacyAgreement ';
 
 export default {
   title: 'Components/PrivacyAgreement',

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import {TextArea} from '@department-of-veterans-affairs/component-library';
+import TextArea from '../../react-components/src/components/TextArea/TextArea ';
 
 export default {
   title: 'Components/TextArea',

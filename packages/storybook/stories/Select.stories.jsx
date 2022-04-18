@@ -1,6 +1,6 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 
-import {Select} from '@department-of-veterans-affairs/component-library';
+import Select from '../../react-components/src/components/Select/Select ';
 
 export default {
   title: 'Components/Select (deprecated)',

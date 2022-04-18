@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import {RadioButtons} from '@department-of-veterans-affairs/component-library';
+import RadioButtons from '../../react-components/src/components/RadioButtons/RadioButtons ';
 
 export default {
   title: 'Components/RadioButtons',
@@ -12,11 +12,7 @@ const Template = args => {
 
   return (
     <div style={{ paddingLeft: '1em' }}>
-      <RadioButtons
-        {...args}
-        value={value}
-        onValueChange={onChange}
-      />
+      <RadioButtons {...args} value={value} onValueChange={onChange} />
     </div>
   );
 };
@@ -34,7 +30,7 @@ const defaultArgs = {
   ],
   label: 'This is a Label',
   value: { value: 'First option' },
-  errorMessage: undefined
+  errorMessage: undefined,
 };
 
 export const Default = Template.bind({});
