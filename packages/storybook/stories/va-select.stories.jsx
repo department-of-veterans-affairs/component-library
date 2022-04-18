@@ -48,6 +48,7 @@ const Template = ({
   value,
   required,
   error,
+  'aria-live-region-text': ariaLiveRegionText,
   options,
   'use-add-button': useAddButton,
 }) => {
@@ -75,6 +76,7 @@ const Template = ({
         value={value}
         required={required}
         error={error}
+        aria-live-region-text={ariaLiveRegionText}
         use-add-button={useAddButton}
       >
         {modifiedOptions}
