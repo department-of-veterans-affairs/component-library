@@ -12,9 +12,13 @@ export default {
   parameters: {
     docs: {
       description: {
-        component: generateEventsDescription(modalDocs),
+        component:
+          `<a className="vads-c-action-link--blue" href="https://design.va.gov/components/modal">View guidance for the Modal component in the Design System</a>` +
+          '\n' +
+          generateEventsDescription(modalDocs),
       },
     },
+    componentSubtitle: `Modal web component`,
   },
   argTypes: {
     status: {
@@ -121,3 +125,93 @@ WithoutButtons.args = {
 
 export const WithoutTitle = Template.bind({});
 WithoutTitle.args = { ...defaultArgs, 'modal-title': undefined };
+
+const CrisisTemplate = ({
+  'click-to-close': clickToClose,
+  'disable-analytics': disableAnalytics,
+  'modal-title': modalTitle,
+  'initial-focus-selector': initialFocusSelector,
+  primaryButtonClick,
+  'primary-button-text': primaryButtonText,
+  secondaryButtonClick,
+  'secondary-button-text': secondaryButtonText,
+  status,
+  visible,
+}) => {
+  const [isVisible, setIsVisible] = useState(visible);
+  const onCloseEvent = () => setIsVisible(!isVisible);
+  const openModal = () => setIsVisible(true);
+  return (
+    <div>
+      <div
+        className="va-crisis-line"
+        style={{ position: 'static', height: '600px', maxWidth: 'none' }}
+      >
+        <div className="va-flex">
+          <button
+            data-show="#modal-crisisline"
+            className="va-crisis-line-button va-overlay-trigger"
+            onClick={openModal}
+          >
+            <span className="va-flex">
+              <span className="vcl"></span>
+              Get help from Veterans Crisis Line
+            </span>
+          </button>
+        </div>
+      </div>
+      <VaModal
+        clickToClose={clickToClose}
+        disableAnalytics={disableAnalytics}
+        modalTitle={modalTitle}
+        initialFocusSelector={initialFocusSelector}
+        onCloseEvent={onCloseEvent}
+        onPrimaryButtonClick={primaryButtonClick}
+        primaryButtonText={primaryButtonText}
+        onSecondaryButtonClick={secondaryButtonClick}
+        secondaryButtonText={secondaryButtonText}
+        status={status}
+        visible={isVisible}
+      >
+        <div className="va-crisis-panel" style={{ transform: 'none' }}>
+          <div className="va-overlay-body va-crisis-panel-body">
+            <ul>
+              <li>
+                <a href="tel:18002738255">
+                  Call <strong>1-800-273-8255 (Press 1)</strong>
+                </a>
+              </li>
+              <li>
+                <a href="sms:838255">
+                  Text to <b>838255</b>
+                </a>
+              </li>
+              <li>
+                <a href="https://www.veteranscrisisline.net/ChatTermsOfService.aspx?account=Veterans%20Chat">
+                  Chat <b>confidentially now</b>
+                </a>
+              </li>
+            </ul>
+            <p>
+              If you are in crisis or having thoughts of suicide, visit{' '}
+              <a href="https://www.veteranscrisisline.net/">
+                VeteransCrisisLine.net
+              </a>{' '}
+              for more resources.
+            </p>
+          </div>
+        </div>
+      </VaModal>
+    </div>
+  );
+};
+
+export const CrisisLineModal = CrisisTemplate.bind({});
+CrisisLineModal.args = {
+  ...defaultArgs,
+  'primaryButtonClick': undefined,
+  'primary-button-text': undefined,
+  'secondaryButtonClick': undefined,
+  'secondary-button-text': undefined,
+  'modal-title': 'Get help from Veterans Crisis Line',
+};
