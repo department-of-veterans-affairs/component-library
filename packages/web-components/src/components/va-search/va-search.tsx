@@ -121,15 +121,6 @@ export class VaSearch {
   suggestionMouseDownEvent: EventEmitter;
 
   /**
-   * Fires when user moves cursor over the suggestion
-   */
-  @Event({
-    composed: true,
-    bubbles: true,
-  })
-  suggestionMouseOverEvent: EventEmitter;
-
-  /**
    * An array of formatted suggestions
    */
   @State() formattedSuggestions: string[] = [];
@@ -310,10 +301,6 @@ export class VaSearch {
     this.suggestionMouseDownEvent.emit(event);
   };
 
-  private handleSuggestionMouseOverEvent = (event: MouseEvent) => {
-    this.suggestionMouseOverEvent.emit(event);
-  };
-
   /**
    * Formats suggested characters to bold
    */
@@ -360,7 +347,6 @@ export class VaSearch {
       handleSuggestionFocusEvent,
       handleSuggestionKeyDownEvent,
       handleSuggestionMouseDownEvent,
-      handleSuggestionMouseOverEvent,
       inputValue,
       label,
       showSuggestions,
@@ -428,7 +414,6 @@ export class VaSearch {
                     onFocus={handleSuggestionFocusEvent}
                     onKeyDown={e => handleSuggestionKeyDownEvent(e, index)}
                     onMouseDown={handleSuggestionMouseDownEvent}
-                    onMouseOver={handleSuggestionMouseOverEvent}
                     role="option"
                     tabIndex={-1}
                   >

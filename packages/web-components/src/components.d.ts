@@ -1158,10 +1158,6 @@ declare namespace LocalJSX {
          */
         "onSuggestionMouseDownEvent"?: (event: CustomEvent<any>) => void;
         /**
-          * Fires when user moves cursor over the suggestion
-         */
-        "onSuggestionMouseOverEvent"?: (event: CustomEvent<any>) => void;
-        /**
           * A boolean that controls whether suggestions are visible
          */
         "showSuggestions"?: boolean;
