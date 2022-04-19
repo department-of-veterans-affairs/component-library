@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {ProgressButton} from '@department-of-veterans-affairs/component-library';
+import ProgressButton from '../../react-components/src/components/ProgressButton/ProgressButton';
 
 export default {
   title: 'Components/Buttons/ProgressButton',

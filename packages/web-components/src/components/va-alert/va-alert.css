@@ -140,7 +140,7 @@ div.bg-only {
   margin: 1.6rem;
   padding: 0;
   width: auto;
-  color: var(--color-primary);
+  color: var(--color-gray-dark);
   font-size: 2.25rem;
   appearance: none;
   border: 0;
@@ -152,7 +152,7 @@ div.bg-only {
   top: 0;
 }
 .va-alert-close:hover {
-  color: var(--color-primary-darker);
+  color: var(--color-base);
 }
 
 i {
