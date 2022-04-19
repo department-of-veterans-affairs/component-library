@@ -24,15 +24,6 @@ export class VaSearch {
   @State() isListboxOpen: boolean;
 
   /**
-   * Fires when the search input loses focus
-   */
-  @Event({
-    composed: true,
-    bubbles: true,
-  })
-  inputBlurEvent: EventEmitter;
-
-  /**
    * Fires when the search input gains focus
    */
   @Event({
@@ -161,10 +152,6 @@ export class VaSearch {
   };
 
   // Input Event Handlers
-  private handleInputBlurEvent = (event: FocusEvent) => {
-    this.inputBlurEvent.emit(event);
-  };
-
   private handleInputFocusEvent = (event: FocusEvent) => {
     this.inputFocusEvent.emit(event);
     if (this.formattedSuggestions.length && !this.isListboxOpen) {
@@ -222,7 +209,7 @@ export class VaSearch {
   // Suggestions Event Handlers
   private handleSuggestionClickEvent = (
     event: KeyboardEvent | MouseEvent,
-    index,
+    index: number,
   ) => {
     this.suggestionClickEvent.emit(event);
     const suggestion = this.el.shadowRoot.getElementById(
@@ -347,7 +334,6 @@ export class VaSearch {
       handleButtonClickEvent,
       handleButtonFocusEvent,
       handleButtonKeyDownEvent,
-      handleInputBlurEvent,
       handleInputFocusEvent,
       handleInputKeyDownEvent,
       handleSuggestionClickEvent,
@@ -386,7 +372,6 @@ export class VaSearch {
           aria-haspopup={ariaHasPopup}
           aria-label={label}
           autocomplete="off"
-          onBlur={handleInputBlurEvent}
           onFocus={handleInputFocusEvent}
           onKeyDown={handleInputKeyDownEvent}
           role={role}

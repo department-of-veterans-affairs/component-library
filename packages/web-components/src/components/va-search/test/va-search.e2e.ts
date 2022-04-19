@@ -36,20 +36,6 @@ describe('va-search', () => {
     await axeCheck(page);
   });
 
-  it('fires input blur event', async () => {
-    const page = await newE2EPage();
-    await page.setContent('<va-search></va-search>');
-
-    const blurSpy = await page.spyOnEvent('inputBlurEvent');
-    const input = await page.find('va-search >>> input');
-    await input.focus();
-
-    const component = await page.find('va-search');
-    await component.press('Tab');
-
-    expect(blurSpy).toHaveReceivedEventTimes(1);
-  });
-
   it('fires input event', async () => {
     const page = await newE2EPage();
     await page.setContent('<va-search></va-search>');
