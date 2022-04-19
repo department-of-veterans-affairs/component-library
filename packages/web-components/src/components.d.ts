@@ -263,10 +263,6 @@ export namespace Components {
     }
     interface VaNumberInput {
         /**
-          * The aria-describedby attribute for the `<input>` in the shadow DOM.
-         */
-        "ariaDescribedby"?: string;
-        /**
           * Emit component-library-analytics events on the blur event.
          */
         "enableAnalytics"?: boolean;
@@ -1091,10 +1087,6 @@ declare namespace LocalJSX {
         "visible"?: boolean;
     }
     interface VaNumberInput {
-        /**
-          * The aria-describedby attribute for the `<input>` in the shadow DOM.
-         */
-        "ariaDescribedby"?: string;
         /**
           * Emit component-library-analytics events on the blur event.
          */

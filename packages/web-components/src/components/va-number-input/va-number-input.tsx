@@ -47,11 +47,6 @@ export class VaNumberInput {
   @Prop() name?: string;
 
   /**
-   * The aria-describedby attribute for the `<input>` in the shadow DOM.
-   */
-  @Prop() ariaDescribedby?: string = '';
-
-  /**
    * Minimum number value
    * The min attribute specifies the minimum value for an `<input>` element.
    */
@@ -98,11 +93,6 @@ export class VaNumberInput {
   };
 
   render() {
-    const describedBy =
-      `${this.ariaDescribedby} ${this.error ? 'error-message' : ''}`.trim() ||
-      null; // Null so we don't add the attribute if we have an empty string
-    const inputMode = this.inputmode ? this.inputmode : null; // Null so we don't add the attribute if we have an empty string
-
     return (
       <Host>
         {this.label && (
@@ -115,8 +105,7 @@ export class VaNumberInput {
         <input
           id="inputField"
           type="number"
-          aria-describedby={describedBy}
-          inputmode={inputMode}
+          inputmode={this.inputmode ? this.inputmode : null}
           name={this.name}
           max={this.max}
           min={this.min}

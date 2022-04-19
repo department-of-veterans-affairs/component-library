@@ -31,7 +31,6 @@ const defaultArgs = {
   'error': undefined,
   'value': 0,
   'inputmode': 'numeric',
-  'aria-describedby': undefined,
   'min': undefined,
   'max': undefined,
 };
@@ -44,7 +43,6 @@ const Template = ({
   error,
   value,
   inputmode,
-  'aria-describedby': ariaDescribedby,
   min,
   max,
 }) => {
@@ -57,7 +55,6 @@ const Template = ({
       error={error}
       value={value}
       inputmode={inputmode}
-      aria-describedby={ariaDescribedby}
       max={max}
       min={min}
       onInput={e => console.log('input event value:', e.target.value)}
@@ -84,11 +81,4 @@ ValidRange.args = {
   ...defaultArgs,
   min: 0,
   max: 4,
-};
-
-export const AriaDescribedby = Template.bind({});
-AriaDescribedby.args = {
-  ...defaultArgs,
-  'error': 'This is also an error',
-  'aria-describedby': 'testing-id',
 };
