@@ -362,4 +362,24 @@ describe('va-search', () => {
 
     expect(inputValue).toContain('');
   });
+
+  it('fires submit event when enter key is pressed', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-search></va-search>');
+
+    const submitSpy = await page.spyOnEvent('submit');
+    const input = await page.find('va-search >>> input');
+    await input.focus();
+
+    await input.press('F');
+    await input.press('o');
+    await input.press('r');
+    await input.press('m');
+    await input.press('s');
+    await input.press('Enter');
+
+    expect(submitSpy).toHaveReceivedEventDetail({
+      value: 'Forms',
+    });
+  });
 });
