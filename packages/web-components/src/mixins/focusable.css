@@ -5,7 +5,7 @@ select:not([disabled]):focus,
 a:not([disabled]):focus,
 h1:focus,
 input:not([disabled]):focus,
-.va-search-suggestion:focus {
+[role="option"]:focus {
   outline: 2px solid var(--color-gold-light);
   outline-offset: 2px;
 }
