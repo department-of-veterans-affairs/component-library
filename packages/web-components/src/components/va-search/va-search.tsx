@@ -21,6 +21,8 @@ export class VaSearch {
 
   @Element() el: HTMLElement;
 
+  @State() isListboxOpen: boolean;
+
   /**
    * Fires when the search input loses focus
    */
@@ -141,11 +143,6 @@ export class VaSearch {
   @Prop() label: string = 'Search';
 
   /**
-   * A boolean that controls whether suggestions are visible
-   */
-  @Prop() showSuggestions?: boolean;
-
-  /**
    * An array of strings containing suggestions
    */
   @Prop() suggestions: any;
@@ -155,6 +152,7 @@ export class VaSearch {
     this.formattedSuggestions = this.suggestions
       .sort()
       .map(suggestion => this.formatSuggestion(suggestion));
+    this.isListboxOpen = true;
   }
 
   @Watch('suggestions')
@@ -163,7 +161,12 @@ export class VaSearch {
     this.formattedSuggestions = newSuggestions
       .sort()
       .map(suggestion => this.formatSuggestion(suggestion));
+    this.isListboxOpen = true;
   }
+
+  private handleBlur = () => {
+    this.isListboxOpen = false;
+  };
 
   // Input Event Handlers
   private handleInputBlurEvent = (event: FocusEvent) => {
@@ -176,6 +179,9 @@ export class VaSearch {
 
   private handleInputFocusEvent = (event: FocusEvent) => {
     this.inputFocusEvent.emit(event);
+    if (this.formattedSuggestions?.length && !this.isListboxOpen) {
+      this.isListboxOpen = true;
+    }
   };
 
   private handleInputKeyDownEvent = (event: KeyboardEvent) => {
@@ -229,8 +235,8 @@ export class VaSearch {
       '[aria-selected="true"]',
     );
     if (selectedSuggestion) selectedSuggestion.removeAttribute('aria-selected');
-    this.inputRef.focus();
-    this.inputRef.value = suggestion.textContent;
+    this.inputRef.value = suggestion.innerText;
+    this.isListboxOpen = false;
   };
 
   private handleSuggestionFocusEvent = (event: FocusEvent) => {
@@ -264,12 +270,16 @@ export class VaSearch {
         }
         break;
       case 'Enter':
-        this.inputRef.value = options[index].textContent;
+        this.inputRef.value = (options[index] as HTMLElement).innerText;
         this.inputRef.focus();
+        this.inputRef.removeAttribute('aria-activedescendant');
+        this.isListboxOpen = false;
         break;
       case 'Escape':
         this.inputRef.value = '';
         this.inputRef.focus();
+        this.inputRef.removeAttribute('aria-activedescendant');
+        this.isListboxOpen = false;
         break;
       case 'Home':
         this.inputRef.focus();
@@ -292,7 +302,6 @@ export class VaSearch {
         break;
       default:
         this.inputRef.focus();
-        this.inputRef.value = this.inputRef.value + `${event.key}`;
         break;
     }
   };
@@ -336,6 +345,7 @@ export class VaSearch {
     const {
       buttonText,
       formattedSuggestions,
+      handleBlur,
       handleButtonClickEvent,
       handleButtonFocusEvent,
       handleButtonKeyDownEvent,
@@ -348,28 +358,28 @@ export class VaSearch {
       handleSuggestionKeyDownEvent,
       handleSuggestionMouseDownEvent,
       inputValue,
+      isListboxOpen,
       label,
-      showSuggestions,
     } = this;
 
-    const isListboxVisible = showSuggestions && formattedSuggestions.length > 0;
-    const ariaControls = showSuggestions ? 'va-search-listbox' : undefined;
+    const isCombobox = formattedSuggestions?.length;
+    const ariaControls = isCombobox ? 'va-search-listbox' : undefined;
     /**
-     * If showSugestion is false, set aria-expanded to undefined
-     * If showSuggestion is true and isListboxVisible is true, set aria-expanded to "true"
-     * If showSuggestion is true but isListboxVisible is false, set aria-expanded to "false"
+     * If isCombobox is false, set aria-expanded to undefined
+     * If isCombobox is true and isListboxOpen is true, set aria-expanded to "true"
+     * If isCombobox is true but isListboxOpen is false, set aria-expanded to "false"
      */
-    const ariaExpanded = showSuggestions
-      ? isListboxVisible
+    const ariaExpanded = isCombobox
+      ? isListboxOpen
         ? 'true'
         : 'false'
       : undefined;
-    const ariaHasPopup = showSuggestions ? 'listbox' : undefined;
-    const role = showSuggestions ? 'combobox' : undefined;
+    const ariaHasPopup = isCombobox ? 'listbox' : undefined;
+    const role = isCombobox ? 'combobox' : undefined;
     const type = this.el.getAttribute('type') || 'text';
 
     return (
-      <Host>
+      <Host onBlur={handleBlur}>
         <input
           ref={el => (this.inputRef = el as HTMLInputElement)}
           id="va-search-input"
@@ -398,7 +408,7 @@ export class VaSearch {
           <i aria-hidden="true" class="fa fa-search" />
           {buttonText && <span id="va-search-button-text">{buttonText}</span>}
         </button>
-        {isListboxVisible && (
+        {isListboxOpen && (
           <ul
             id="va-search-listbox"
             aria-label="Search Suggestions"

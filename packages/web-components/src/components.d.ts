@@ -343,10 +343,6 @@ export namespace Components {
          */
         "label": string;
         /**
-          * A boolean that controls whether suggestions are visible
-         */
-        "showSuggestions"?: boolean;
-        /**
           * An array of strings containing suggestions
          */
         "suggestions": any;
@@ -1157,10 +1153,6 @@ declare namespace LocalJSX {
           * Fires when a suggestion is pressed
          */
         "onSuggestionMouseDownEvent"?: (event: CustomEvent<any>) => void;
-        /**
-          * A boolean that controls whether suggestions are visible
-         */
-        "showSuggestions"?: boolean;
         /**
           * An array of strings containing suggestions
          */
