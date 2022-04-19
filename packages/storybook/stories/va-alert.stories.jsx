@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import React from 'react';
 import { generateEventsDescription } from './events';
 import { VaAlert } from '@department-of-veterans-affairs/web-components/react-bindings';
@@ -23,11 +22,14 @@ export default {
     docs: {
       description: {
         component:
+          `<a className="vads-c-action-link--blue" href="https://design.va.gov/components/alert">View guidance for the Alert component in the Design System</a>` +
+          `\n` +
           `Use a heading element with an attribute named slot and a value of "headline" to control what is displayed for the alert's headline. 
-        Any children passed into this component without a parent slot "headline" will render in the alert's body.` +
+          Any children passed into this component without a parent slot "headline" will render in the alert's body.` +
           generateEventsDescription(alertDocs),
       },
     },
+    componentSubtitle: `Alert web component`,
   },
 };
 
@@ -93,6 +95,88 @@ const Template = ({
   );
 };
 
+const BackgroundOnlyTemplate = ({
+  'background-only': backgroundOnly,
+  'show-icon': showIcon,
+  'close-btn-aria-label': closeBtnAriaLabel,
+  closeable,
+  headline,
+}) => {
+  return (
+    <>
+      <va-alert
+        status="info"
+        background-only={backgroundOnly}
+        show-icon={showIcon}
+        disable-analytics="false"
+        visible="true"
+        close-btn-aria-label={closeBtnAriaLabel}
+        closeable={closeable}
+        full-width="false"
+        class="vads-u-margin-bottom--1"
+      >
+        {headline}
+        <div>Info alert</div>
+      </va-alert>
+      <va-alert
+        status="error"
+        background-only={backgroundOnly}
+        show-icon={showIcon}
+        disable-analytics="false"
+        visible="true"
+        close-btn-aria-label={closeBtnAriaLabel}
+        closeable={closeable}
+        full-width="false"
+        class="vads-u-margin-bottom--1"
+      >
+        {headline}
+        <div>Error alert</div>
+      </va-alert>
+      <va-alert
+        status="success"
+        background-only={backgroundOnly}
+        show-icon={showIcon}
+        disable-analytics="false"
+        visible="true"
+        close-btn-aria-label={closeBtnAriaLabel}
+        closeable={closeable}
+        full-width="false"
+        class="vads-u-margin-bottom--1"
+      >
+        {headline}
+        <div>Success alert</div>
+      </va-alert>
+      <va-alert
+        status="warning"
+        background-only={backgroundOnly}
+        show-icon={showIcon}
+        disable-analytics="false"
+        visible="true"
+        close-btn-aria-label={closeBtnAriaLabel}
+        closeable={closeable}
+        full-width="false"
+        class="vads-u-margin-bottom--1"
+      >
+        {headline}
+        <div>Warning alert</div>
+      </va-alert>
+      <va-alert
+        status="continue"
+        background-only={backgroundOnly}
+        show-icon={showIcon}
+        disable-analytics="false"
+        visible="true"
+        close-btn-aria-label={closeBtnAriaLabel}
+        closeable={closeable}
+        full-width="false"
+      >
+        {headline}
+        <div>Continue alert</div>
+      </va-alert>
+    </>
+  );
+};
+
 export const Default = Template.bind({});
 Default.args = { ...defaultArgs };
 Default.argTypes = propStructure(alertDocs);
@@ -129,13 +213,13 @@ Fullwidth.args = {
   'status': 'warning',
 };
 
-export const BackgroundOnly = Template.bind({});
+export const BackgroundOnly = BackgroundOnlyTemplate.bind({});
 BackgroundOnly.args = {
   ...defaultArgs,
   'background-only': true,
 };
 
-export const BackgroundOnlyWithIcon = Template.bind({});
+export const BackgroundOnlyWithIcon = BackgroundOnlyTemplate.bind({});
 BackgroundOnlyWithIcon.args = {
   ...defaultArgs,
   'background-only': true,
