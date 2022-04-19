@@ -135,11 +135,6 @@ export class VaSearch {
   @State() formattedSuggestions: string[] = [];
 
   /**
-   * Index of selected suggestion
-   */
-  @Prop() activeIndex?: number;
-
-  /**
    * Text displayed inside the search button
    */
   @Prop() buttonText?: string;
@@ -352,7 +347,6 @@ export class VaSearch {
 
   render() {
     const {
-      activeIndex,
       buttonText,
       formattedSuggestions,
       handleButtonClickEvent,
@@ -429,7 +423,6 @@ export class VaSearch {
                 return (
                   <li
                     id={`listbox-option-${index}`}
-                    aria-selected={activeIndex === index ? 'true' : undefined}
                     class="va-search-suggestion"
                     onClick={e => handleSuggestionClickEvent(e, index)}
                     onFocus={handleSuggestionFocusEvent}
