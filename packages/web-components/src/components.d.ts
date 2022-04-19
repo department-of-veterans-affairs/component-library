@@ -1126,10 +1126,6 @@ declare namespace LocalJSX {
          */
         "onInputBlurEvent"?: (event: CustomEvent<any>) => void;
         /**
-          * Fires when text is inputted in the search input
-         */
-        "onInputEvent"?: (event: CustomEvent<any>) => void;
-        /**
           * Fires when the search input gains focus
          */
         "onInputFocusEvent"?: (event: CustomEvent<any>) => void;

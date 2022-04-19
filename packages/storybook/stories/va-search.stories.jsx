@@ -29,7 +29,6 @@ const Template = ({
     inputValue={inputValue}
     label={label}
     onInputBlurEvent={e => console.log(e, 'INPUT BLUR FIRED')}
-    onInputChangeEvent={e => console.log(e, 'INPUT CHANGE FIRED')}
     onInputFocusEvent={e => console.log(e, 'INPUT FOCUS FIRED')}
     onInputKeyDownEvent={e => console.log(e, 'INPUT KEYDOWN FIRED')}
     onButtonClickEvent={e => console.log(e, 'BUTTON CLICK FIRED')}
@@ -37,6 +36,7 @@ const Template = ({
     onButtonKeyDownEvent={e => console.log(e, 'BUTTON KEYDOWN FIRED')}
     onSuggestionKeyDownEvent={e => console.log(e, 'SUGGESTION KEYDOWN FIRED')}
     suggestions={suggestions}
+    onInput={e => console.log(e, 'INPUT EVENT FIRED')}
     onSubmit={e => console.log(e, 'SUBMIT EVENT FIRED')}
   />
 );
@@ -72,7 +72,6 @@ const SuggestionsTemplate = ({
       inputValue={inputValue}
       label={label}
       onInputBlurEvent={e => console.log(e, 'INPUT BLUR FIRED')}
-      onInputChangeEvent={e => console.log(e, 'INPUT CHANGE FIRED')}
       onInputFocusEvent={e => console.log(e, 'INPUT FOCUS FIRED')}
       onInputKeyDownEvent={e => console.log(e, 'INPUT KEYDOWN FIRED')}
       onButtonClickEvent={e => console.log(e, 'BUTTON CLICK FIRED')}
@@ -80,6 +79,7 @@ const SuggestionsTemplate = ({
       onButtonKeyDownEvent={e => console.log(e, 'BUTTON KEYDOWN FIRED')}
       onSuggestionKeyDownEvent={e => console.log(e, 'SUGGESTION KEYDOWN FIRED')}
       suggestions={suggestions}
+      onInput={e => console.log(e, 'INPUT EVENT FIRED')}
       onSubmit={e => console.log(e, 'SUBMIT EVENT FIRED')}
     />
   </div>
