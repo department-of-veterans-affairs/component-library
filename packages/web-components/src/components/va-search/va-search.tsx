@@ -165,6 +165,7 @@ export class VaSearch {
   }
 
   private handleBlur = () => {
+    if (!this.formattedSuggestions.length) return;
     this.isListboxOpen = false;
   };
 
@@ -179,7 +180,7 @@ export class VaSearch {
 
   private handleInputFocusEvent = (event: FocusEvent) => {
     this.inputFocusEvent.emit(event);
-    if (this.formattedSuggestions?.length && !this.isListboxOpen) {
+    if (this.formattedSuggestions.length && !this.isListboxOpen) {
       this.isListboxOpen = true;
     }
   };
@@ -205,6 +206,16 @@ export class VaSearch {
     if (event.key === 'ArrowUp') {
       if (!lastOption) return;
       this.selectSuggestion(lastOption);
+    }
+
+    // submit
+    if (event.key === 'Enter') {
+      const submitEvent = new CustomEvent('submit', {
+        bubbles: true,
+        cancelable: true,
+        detail: { value: this.inputRef.value },
+      });
+      this.el.dispatchEvent(submitEvent);
     }
   };
 
@@ -362,7 +373,7 @@ export class VaSearch {
       label,
     } = this;
 
-    const isCombobox = formattedSuggestions?.length;
+    const isCombobox = formattedSuggestions.length;
     const ariaControls = isCombobox ? 'va-search-listbox' : undefined;
     /**
      * If isCombobox is false, set aria-expanded to undefined

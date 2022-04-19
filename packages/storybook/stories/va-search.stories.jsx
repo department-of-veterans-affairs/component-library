@@ -37,6 +37,7 @@ const Template = ({
     onButtonKeyDownEvent={e => console.log(e, 'BUTTON KEYDOWN FIRED')}
     onSuggestionKeyDownEvent={e => console.log(e, 'SUGGESTION KEYDOWN FIRED')}
     suggestions={suggestions}
+    onSubmit={e => console.log(e, 'SUBMIT EVENT FIRED')}
   />
 );
 
@@ -79,6 +80,7 @@ const SuggestionsTemplate = ({
       onButtonKeyDownEvent={e => console.log(e, 'BUTTON KEYDOWN FIRED')}
       onSuggestionKeyDownEvent={e => console.log(e, 'SUGGESTION KEYDOWN FIRED')}
       suggestions={suggestions}
+      onSubmit={e => console.log(e, 'SUBMIT EVENT FIRED')}
     />
   </div>
 );
