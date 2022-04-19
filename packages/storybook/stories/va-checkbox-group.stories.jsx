@@ -65,3 +65,26 @@ Error.args = {
   ...defaultArgs,
   error: 'There has been an error',
 };
+
+const SingleCheckboxTemplate = ({
+  'enable-analytics': enableAnalytics,
+  error,
+  label,
+  required,
+}) => {
+  return (
+    <va-checkbox-group
+      enable-analytics={enableAnalytics}
+      error={error}
+      label={label}
+      required={required}
+    >
+      <va-checkbox label="Option one" name="example" value="1" />
+    </va-checkbox-group>
+  );
+};
+
+export const SingleCheckbox = SingleCheckboxTemplate.bind({});
+SingleCheckbox.args = {
+  ...defaultArgs,
+};
