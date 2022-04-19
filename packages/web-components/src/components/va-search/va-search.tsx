@@ -430,7 +430,6 @@ export class VaSearch {
                   <li
                     id={`listbox-option-${index}`}
                     aria-selected={activeIndex === index ? 'true' : undefined}
-                    aria-hidden="true"
                     class="va-search-suggestion"
                     onClick={e => handleSuggestionClickEvent(e, index)}
                     onFocus={handleSuggestionFocusEvent}
