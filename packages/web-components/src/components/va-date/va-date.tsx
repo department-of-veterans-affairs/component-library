@@ -140,11 +140,9 @@ export class VaDate {
       ? days[parseInt(defaultMonth, 10)]
       : [];
 
-    day = daysForSelectedMonth.length < day ? '' : day;
-
     let newDate = `${year || defaultYear}-${
-      this.minTwoDigits(month) || defaultMonth
-    }-${this.minTwoDigits(day) || defaultDay}`;
+      (month && this.minTwoDigits(month)) || defaultMonth
+    }-${(day && this.minTwoDigits(day)) || defaultDay}`;
 
     return (
       <Host value={isFullDate(newDate) ? newDate : value}>
@@ -177,7 +175,10 @@ export class VaDate {
           <va-select
             label="Day"
             name={`${name}Day`}
-            value={day || (defaultDay ? defaultDay.replace(/^0+/, '') : '')}
+            value={
+              (daysForSelectedMonth.length < day ? '' : day) ||
+              (defaultDay ? defaultDay.replace(/^0+/, '') : '')
+            }
             onVaSelect={handleDateChangeEvent}
             onBlur={handleDateBlurEvent}
             class="select-day"
