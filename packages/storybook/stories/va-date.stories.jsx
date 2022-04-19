@@ -18,65 +18,6 @@ export default {
       },
     },
   },
-  argTypes: {
-    month: {
-      control: {
-        type: 'select',
-        options: [
-          '1',
-          '2',
-          '3',
-          '4',
-          '5',
-          '6',
-          '7',
-          '8',
-          '9',
-          '10',
-          '11',
-          '12',
-        ],
-      },
-    },
-    day: {
-      control: {
-        type: 'select',
-        options: [
-          '1',
-          '2',
-          '3',
-          '4',
-          '5',
-          '6',
-          '7',
-          '8',
-          '9',
-          '10',
-          '11',
-          '12',
-          '13',
-          '14',
-          '15',
-          '16',
-          '17',
-          '18',
-          '19',
-          '20',
-          '21',
-          '22',
-          '23',
-          '24',
-          '25',
-          '26',
-          '27',
-          '28',
-          '29',
-          '30',
-          '31',
-        ],
-      },
-    },
-  },
 };
 
 const defaultArgs = {
@@ -84,9 +25,7 @@ const defaultArgs = {
   'name': 'test',
   'required': false,
   'error': undefined,
-  'month': undefined,
-  'day': undefined,
-  'year': undefined,
+  'value': undefined,
   'min-year': undefined,
   'max-year': undefined,
 };
@@ -96,9 +35,7 @@ const Template = ({
   name,
   required,
   error,
-  month,
-  day,
-  year,
+  value,
   'min-year': minYear,
   'max-year': maxYear,
 }) => {
@@ -108,17 +45,11 @@ const Template = ({
       name={name}
       required={required}
       error={error}
-      month={month}
-      day={day}
-      year={year}
+      value={value}
       min-year={minYear}
       max-year={maxYear}
-      onMonthBlurEvent={e => console.log(e, 'Month BLUR FIRED')}
-      onDayBlurEvent={e => console.log(e, 'Day BLUR FIRED')}
-      onYearBlurEvent={e => console.log(e, 'Year BLUR FIRED')}
-      onMonthChangeEvent={e => console.log(e, 'Month Change FIRED')}
-      onDayChangeEvent={e => console.log(e, 'Day Change FIRED')}
-      onYearChangeEvent={e => console.log(e, 'Year Change FIRED')}
+      // onDateBlurEvent={e => console.log(e, 'DATE BLUR FIRED')}
+      // onDateChangeEvent={e => console.log(e, 'DATE CHANGE FIRED')}
     />
   );
 };
@@ -128,39 +59,37 @@ const CustomValidationTemplate = ({
   name,
   required,
   error,
-  month,
-  day,
-  year,
+  value,
   'min-year': minYear,
   'max-year': maxYear,
 }) => {
-  const [monthVal, setMonthVal] = useState(month);
-  const [dayVal, setDayVal] = useState(day);
-  const [yearVal, setYearVal] = useState(year);
-  const daysForSelectedMonth = monthVal ? days[monthVal] : [];
-  function isInTheFuture(date) {
-    const today = new Date();
-    return date > today;
-  }
-  if (dayVal === '' || dayVal > daysForSelectedMonth.length) {
-    error = 'Please select a day';
-  }
-  if (monthVal === '') {
-    error = 'Please select a month';
-  }
-  if (yearVal < minYear || yearVal > maxYear) {
-    error = `Please enter a year between ${minYear} and ${maxYear}`;
-  }
-  if (
-    (required && (dayVal === '' || dayVal === undefined)) ||
-    (required && (monthVal === '' || monthVal === undefined)) ||
-    (required && yearVal === undefined)
-  ) {
-    error = 'Please enter completed date';
-  }
-  if (!isInTheFuture(new Date(`${yearVal}-${monthVal}-${dayVal}`))) {
-    error = 'Date must be in the future';
-  }
+  // const [monthVal, setMonthVal] = useState(month);
+  // const [dayVal, setDayVal] = useState(day);
+  // const [yearVal, setYearVal] = useState(year);
+  // const daysForSelectedMonth = monthVal ? days[monthVal] : [];
+  // function isInTheFuture(date) {
+  //   const today = new Date();
+  //   return date > today;
+  // }
+  // if (dayVal === '' || dayVal > daysForSelectedMonth.length) {
+  //   error = 'Please select a day';
+  // }
+  // if (monthVal === '') {
+  //   error = 'Please select a month';
+  // }
+  // if (yearVal < minYear || yearVal > maxYear) {
+  //   error = `Please enter a year between ${minYear} and ${maxYear}`;
+  // }
+  // if (
+  //   (required && (dayVal === '' || dayVal === undefined)) ||
+  //   (required && (monthVal === '' || monthVal === undefined)) ||
+  //   (required && yearVal === undefined)
+  // ) {
+  //   error = 'Please enter completed date';
+  // }
+  // if (!isInTheFuture(new Date(`${yearVal}-${monthVal}-${dayVal}`))) {
+  //   error = 'Date must be in the future';
+  // }
   return (
     <>
       <VaDate
@@ -168,17 +97,11 @@ const CustomValidationTemplate = ({
         name={name}
         required={required}
         error={error}
-        month={monthVal}
-        day={dayVal}
-        year={yearVal}
+        value={value}
         min-year={minYear}
         max-year={maxYear}
-        onMonthBlurEvent={e => console.log(e, 'Month BLUR FIRED')}
-        onDayBlurEvent={e => console.log(e, 'Day BLUR FIRED')}
-        onYearBlurEvent={e => console.log(e, 'Year BLUR FIRED')}
-        onMonthChangeEvent={e => setMonthVal(e.detail.path[0].value)}
-        onDayChangeEvent={e => setDayVal(e.detail.path[0].value)}
-        onYearChangeEvent={e => setYearVal(e.detail.path[0].value)}
+        onDateBlurEvent={e => console.log(e, 'DATE BLUR FIRED')}
+        onDateChangeEvent={e => console.log(e.detail)}
       />
       <div>
         This example has some custom validation logic built out to detect

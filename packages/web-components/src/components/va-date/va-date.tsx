@@ -5,12 +5,15 @@ import {
   Host,
   Prop,
   h,
+  State,
 } from '@stencil/core';
 
 import {
   months,
   days,
 } from '../../../../react-components/src/helpers/options-for-select.js';
+
+import { isFullDate } from '../../../../react-components/src/helpers/validations.js';
 
 @Component({
   tag: 'va-date',
@@ -50,102 +53,52 @@ export class VaDate {
   @Prop() maxYear: number;
 
   /**
-   * Set the default month on the month input.
+   * Set the default date value must be in YYYY-MM-DD format.
    */
-  @Prop() month: string;
+  @Prop() value: string;
 
   /**
-   * Set the default day on the day input.
-   */
-  @Prop() day: string;
-
-  /**
-   * Set the default year on the year input.
-   */
-  @Prop() year: string;
-
-  /**
-   * Fires when the month input loses focus after its value was changed
+   * Fires when the date input loses focus after its value was changed
    */
   @Event({
     composed: true,
     bubbles: true,
   })
-  monthChangeEvent: EventEmitter;
+  dateChangeEvent: EventEmitter;
 
   /**
-   * Fires when the month input loses focus
+   * Fires when the date input loses focus
    */
   @Event({
     composed: true,
     bubbles: true,
   })
-  monthBlurEvent: EventEmitter;
+  dateBlurEvent: EventEmitter;
 
-  /**
-   * Fires when the day input loses focus after its value was changed
-   */
-  @Event({
-    composed: true,
-    bubbles: true,
-  })
-  dayChangeEvent: EventEmitter;
+  @State() month: string;
+  @State() day: string;
+  @State() year: string;
 
-  /**
-   * Fires when the day input loses focus
-   */
-  @Event({
-    composed: true,
-    bubbles: true,
-  })
-  dayBlurEvent: EventEmitter;
-
-  /**
-   * Fires when the year input loses focus after its value was changed
-   */
-  @Event({
-    composed: true,
-    bubbles: true,
-  })
-  yearChangeEvent: EventEmitter;
-
-  /**
-   * Fires when the year input loses focus
-   */
-  @Event({
-    composed: true,
-    bubbles: true,
-  })
-  yearBlurEvent: EventEmitter;
-
-  private handleMonthBlurEvent = (event: FocusEvent) => {
-    this.monthBlurEvent.emit(event);
+  private minTwoDigits = n => {
+    return (n < 10 ? '0' : '') + n;
   };
 
-  private handleMonthChangeEvent = (event: Event) => {
-    const target: HTMLSelectElement = event.target as HTMLSelectElement;
-    this.month = target.value;
-    this.monthChangeEvent.emit(event);
+  private handleDateBlurEvent = (event: FocusEvent) => {
+    this.dateBlurEvent.emit(event);
   };
 
-  private handleDayBlurEvent = (event: FocusEvent) => {
-    this.dayBlurEvent.emit(event);
-  };
-
-  private handleDayChangeEvent = (event: Event) => {
-    const target: HTMLSelectElement = event.target as HTMLSelectElement;
-    this.day = target.value;
-    this.dayChangeEvent.emit(event);
-  };
-
-  private handleYearBlurEvent = (event: FocusEvent) => {
-    this.yearBlurEvent.emit(event);
-  };
-
-  private handleYearChangeEvent = (event: Event) => {
-    const target: HTMLInputElement = event.target as HTMLInputElement;
-    this.year = target.value;
-    this.yearChangeEvent.emit(event);
+  private handleDateChangeEvent = (event: Event) => {
+    const target = event.target as HTMLSelectElement | HTMLInputElement;
+    if (target.classList.contains('select-month')) {
+      this.month = target.value;
+    }
+    if (target.classList.contains('select-day')) {
+      this.day = target.value;
+    }
+    if (target.classList.contains('input-year')) {
+      this.year = target.value;
+    }
+    this.dateChangeEvent.emit(event);
   };
 
   /**
@@ -172,20 +125,29 @@ export class VaDate {
       error,
       maxYear,
       minYear,
-      handleMonthBlurEvent,
-      handleMonthChangeEvent,
-      handleDayBlurEvent,
-      handleDayChangeEvent,
-      handleYearBlurEvent,
-      handleYearChangeEvent,
-      month,
-      day,
-      year,
+      handleDateBlurEvent,
+      handleDateChangeEvent,
+      value,
     } = this;
 
-    const daysForSelectedMonth = month ? days[month] : [];
+    let { month, day, year } = this;
+
+    const [defaultYear, defaultMonth, defaultDay] = (value || '').split('-');
+
+    const daysForSelectedMonth = month
+      ? days[month]
+      : parseInt(defaultMonth, 10) > 0
+      ? days[parseInt(defaultMonth, 10)]
+      : [];
+
+    day = daysForSelectedMonth.length < day ? '' : day;
+
+    let newDate = `${year || defaultYear}-${
+      this.minTwoDigits(month) || defaultMonth
+    }-${this.minTwoDigits(day) || defaultDay}`;
+
     return (
-      <Host>
+      <Host value={isFullDate(newDate) ? newDate : value}>
         <label htmlFor="date-element">
           {label || 'Date of birth'}{' '}
           {required && <span class="required">(*Required)</span>}
@@ -199,9 +161,11 @@ export class VaDate {
           <va-select
             label="Month"
             name={`${name}Month`}
-            value={month}
-            onVaSelect={handleMonthChangeEvent}
-            onBlur={handleMonthBlurEvent}
+            value={
+              month || (defaultMonth ? defaultMonth.replace(/^0+/, '') : '')
+            }
+            onVaSelect={handleDateChangeEvent}
+            onBlur={handleDateBlurEvent}
             class="select-month"
           >
             <option value=""></option>
@@ -213,9 +177,9 @@ export class VaDate {
           <va-select
             label="Day"
             name={`${name}Day`}
-            value={daysForSelectedMonth.length < day ? '' : day}
-            onVaSelect={handleDayChangeEvent}
-            onBlur={handleDayBlurEvent}
+            value={day || (defaultDay ? defaultDay.replace(/^0+/, '') : '')}
+            onVaSelect={handleDateChangeEvent}
+            onBlur={handleDateBlurEvent}
             class="select-day"
           >
             <option value=""></option>
@@ -229,9 +193,9 @@ export class VaDate {
             name={`${name}Year`}
             max={maxYear}
             min={minYear}
-            value={year}
-            onInput={handleYearChangeEvent}
-            onBlur={handleYearBlurEvent}
+            value={year || defaultYear}
+            onInput={handleDateChangeEvent}
+            onBlur={handleDateBlurEvent}
             class="input-year"
             inputmode="numeric"
           />

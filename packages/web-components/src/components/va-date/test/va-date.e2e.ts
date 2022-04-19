@@ -47,7 +47,7 @@ describe('va-date', () => {
 
   it('sets a default date', async () => {
     const page = await newE2EPage();
-    await page.setContent('<va-date month="5" day="3" year="1999" />');
+    await page.setContent('<va-date value="1999-05-03" />');
 
     const month = await page.find('va-date >>> .select-month');
     const day = await page.find('va-date >>> .select-day');
@@ -60,7 +60,7 @@ describe('va-date', () => {
 
   it('updates date based select and input fields', async () => {
     const page = await newE2EPage();
-    await page.setContent('<va-date month="5" day="3" name="test" />');
+    await page.setContent('<va-date value="1999-05-03" name="test" />');
 
     const elementMonth = await page.find('va-date >>> .select-month');
     const elementDay = await page.find('va-date >>> .select-day');
@@ -71,6 +71,8 @@ describe('va-date', () => {
 
     await handleMonth.select('7');
     await handleDay.select('21');
+    // Click three times to select all text in input
+    await handleYear.click({ clickCount: 3 })
     await handleYear.press('2');
     await handleYear.press('0');
     await handleYear.press('2');

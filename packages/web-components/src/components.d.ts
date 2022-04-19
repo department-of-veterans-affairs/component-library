@@ -178,10 +178,6 @@ export namespace Components {
     }
     interface VaDate {
         /**
-          * Set the default day on the day input.
-         */
-        "day": string;
-        /**
           * Whether or not an analytics event will be fired.
          */
         "enableAnalytics": boolean;
@@ -202,10 +198,6 @@ export namespace Components {
          */
         "minYear": number;
         /**
-          * Set the default month on the month input.
-         */
-        "month": string;
-        /**
           * Used to create unique name attributes for each input.
          */
         "name": string;
@@ -214,9 +206,9 @@ export namespace Components {
          */
         "required": boolean;
         /**
-          * Set the default year on the year input.
+          * Set the default date value must be in YYYY-MM-DD format.
          */
-        "year": string;
+        "value": string;
     }
     interface VaFeaturedContent {
     }
@@ -983,10 +975,6 @@ declare namespace LocalJSX {
     }
     interface VaDate {
         /**
-          * Set the default day on the day input.
-         */
-        "day"?: string;
-        /**
           * Whether or not an analytics event will be fired.
          */
         "enableAnalytics"?: boolean;
@@ -1007,10 +995,6 @@ declare namespace LocalJSX {
          */
         "minYear"?: number;
         /**
-          * Set the default month on the month input.
-         */
-        "month"?: string;
-        /**
           * Used to create unique name attributes for each input.
          */
         "name": string;
@@ -1019,37 +1003,21 @@ declare namespace LocalJSX {
          */
         "onComponent-library-analytics"?: (event: CustomEvent<any>) => void;
         /**
-          * Fires when the day input loses focus
+          * Fires when the date input loses focus
          */
-        "onDayBlurEvent"?: (event: CustomEvent<any>) => void;
+        "onDateBlurEvent"?: (event: CustomEvent<any>) => void;
         /**
-          * Fires when the day input loses focus after its value was changed
+          * Fires when the date input loses focus after its value was changed
          */
-        "onDayChangeEvent"?: (event: CustomEvent<any>) => void;
-        /**
-          * Fires when the month input loses focus
-         */
-        "onMonthBlurEvent"?: (event: CustomEvent<any>) => void;
-        /**
-          * Fires when the month input loses focus after its value was changed
-         */
-        "onMonthChangeEvent"?: (event: CustomEvent<any>) => void;
-        /**
-          * Fires when the year input loses focus
-         */
-        "onYearBlurEvent"?: (event: CustomEvent<any>) => void;
-        /**
-          * Fires when the year input loses focus after its value was changed
-         */
-        "onYearChangeEvent"?: (event: CustomEvent<any>) => void;
+        "onDateChangeEvent"?: (event: CustomEvent<any>) => void;
         /**
           * Render marker indicating field is required.
          */
         "required"?: boolean;
         /**
-          * Set the default year on the year input.
+          * Set the default date value must be in YYYY-MM-DD format.
          */
-        "year"?: string;
+        "value"?: string;
     }
     interface VaFeaturedContent {
     }
