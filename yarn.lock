@@ -1710,6 +1710,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@babel/runtime@npm:^7.14.6, @babel/runtime@npm:^7.17.2":
+  version: 7.17.8
+  resolution: "@babel/runtime@npm:7.17.8"
+  dependencies:
+    regenerator-runtime: ^0.13.4
+  checksum: 68d195c1630bb91ac20e86635d292a17ebab7f361cfe79406b3f5a6cc2e59fa283ae5006568899abf869312c2b35b744bd407aea8ffdb650f1a68d07785d47e9
+  languageName: node
+  linkType: hard
+
 "@babel/template@npm:^7.12.7, @babel/template@npm:^7.16.7, @babel/template@npm:^7.3.3":
   version: 7.16.7
   resolution: "@babel/template@npm:7.16.7"
@@ -1811,6 +1820,8 @@ __metadata:
     babel-loader: ^8.2.2
     copy-webpack-plugin: ^9.0.1
     css-loader: ^6.4.0
+    i18next: ^21.6.14
+    i18next-browser-languagedetector: ^6.1.4
     mini-css-extract-plugin: ^2.4.2
     react-focus-on: ^3.5.1
     react-scroll: ^1.7.16
@@ -1824,9 +1835,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@department-of-veterans-affairs/formation@npm:^6.17.5":
-  version: 6.17.5
-  resolution: "@department-of-veterans-affairs/formation@npm:6.17.5"
+"@department-of-veterans-affairs/formation@npm:^7.0.1":
+  version: 7.0.1
+  resolution: "@department-of-veterans-affairs/formation@npm:7.0.1"
   dependencies:
     "@fortawesome/fontawesome-free": ^5.6.3
     domready: ^1.0.8
@@ -1836,7 +1847,7 @@ __metadata:
     "@fortawesome/fontawesome-free": ^5.6.3
     foundation-sites: 5
     uswds: ^1.6.10
-  checksum: ae564c46dc2644818f62b40b1a6a8260994753c689c4d7e6b25fb4764fd57aed6a5a9dbca88b90b2c982dd3a078e93bc3b64415f5d173e998f8848e7d8c9c080
+  checksum: 6a26c08b15ea582e97d28a40a9e62f5715473f13e00bc4c988b80f1758a672788493f63fc33bae061ff4351e5f6fbfe5df012b00d67f49254dadebe6f95f30e1
   languageName: node
   linkType: hard
 
@@ -1857,7 +1868,7 @@ __metadata:
     "@babel/plugin-syntax-import-meta": ^7.10.4
     "@babel/preset-env": ^7.12.10
     "@babel/preset-react": ^7.14.5
-    "@department-of-veterans-affairs/formation": ^6.17.5
+    "@department-of-veterans-affairs/formation": ^7.0.1
     "@department-of-veterans-affairs/web-components": "workspace:packages/web-components"
     "@testing-library/react": ^12.0.0
     "@testing-library/user-event": ^13.2.1
@@ -1903,6 +1914,8 @@ __metadata:
     sinon: ^9.2.2
   peerDependencies:
     "@department-of-veterans-affairs/web-components": "*"
+    i18next: "*"
+    i18next-browser-languagedetector: "*"
     react: ^17
     react-dom: "*"
   languageName: unknown
@@ -1914,7 +1927,7 @@ __metadata:
   dependencies:
     "@babel/core": ^7.15.8
     "@department-of-veterans-affairs/component-library": "workspace:packages/core"
-    "@department-of-veterans-affairs/formation": ^6.17.5
+    "@department-of-veterans-affairs/formation": ^7.0.1
     "@mdx-js/react": ^1.6.22
     "@storybook/addon-actions": ^6.4.19
     "@storybook/addon-docs": ^6.4.19
@@ -1940,7 +1953,7 @@ __metadata:
   dependencies:
     "@axe-core/puppeteer": ^4.4.0
     "@babel/core": ^7.12.13
-    "@department-of-veterans-affairs/formation": ^6.17.5
+    "@department-of-veterans-affairs/formation": ^7.0.1
     "@stencil/core": ^2.10.0
     "@stencil/postcss": ^2.0.0
     "@stencil/react-output-target": ^0.0.9
@@ -1962,7 +1975,9 @@ __metadata:
     react-dom: ^16.7.0
     typescript: ^4.3.5
   peerDependencies:
-    "@department-of-veterans-affairs/formation": ^6.14.0
+    "@department-of-veterans-affairs/formation": ^7.0.1
+    i18next: "*"
+    i18next-browser-languagedetector: "*"
   languageName: unknown
   linkType: soft
 
@@ -10865,6 +10880,24 @@ fsevents@^1.2.7:
   bin:
     husky: lib/bin.js
   checksum: 80af5b882c3f37d72d775f15dc8d5a74f27856881f92338278ac017ab447695ee0d958cffec22ba4d0ae96532fb8ee5f99f4ca7b869bc91285e5adc0b8cdfeb3
+  languageName: node
+  linkType: hard
+
+"i18next-browser-languagedetector@npm:^6.1.4":
+  version: 6.1.4
+  resolution: "i18next-browser-languagedetector@npm:6.1.4"
+  dependencies:
+    "@babel/runtime": ^7.14.6
+  checksum: 379dba3527c359c3adeb26c1e16e6b7e007989763c4361d43662e4d9412c538ca35e28a6a12df0654edc0adb78b44ff5afdf4c5d842bbf0e83db59d5e9e02f55
+  languageName: node
+  linkType: hard
+
+"i18next@npm:^21.6.14":
+  version: 21.6.14
+  resolution: "i18next@npm:21.6.14"
+  dependencies:
+    "@babel/runtime": ^7.17.2
+  checksum: bc6e117874d9b69a39d6ad322851d25f75908c7fa977c8771b98ba7b0273aceba96e82326ed0855b8db098b1490c5a0decbe62b4f61dac84fdc677c2fdc52bb8
   languageName: node
   linkType: hard
 

@@ -6,7 +6,7 @@ import '@department-of-veterans-affairs/component-library/dist/main.css';
 import {
   applyPolyfills,
   defineCustomElements,
-} from '@department-of-veterans-affairs/web-components/loader';
+} from '@department-of-veterans-affairs/component-library';
 
 applyPolyfills().then(() => {
   defineCustomElements();
@@ -93,6 +93,14 @@ export const parameters = {
   },
   viewMode: 'docs',
 };
+
+export const decorators = [
+  Story => (
+    <main lang="en">
+      <Story />
+    </main>
+  ),
+];
 
 // Fix for React 17/NVDA bug where React root is read as "clickable"
 // https://github.com/nvaccess/nvda/issues/13262
