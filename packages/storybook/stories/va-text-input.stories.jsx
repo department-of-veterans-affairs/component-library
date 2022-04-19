@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import React from 'react';
+import React, { useState } from 'react';
 import { generateEventsDescription } from './events';
 import { getWebComponentDocs, propStructure } from './wc-helpers';
 
@@ -95,6 +95,53 @@ const Template = ({
       onInput={e => console.log('input event value', e.target.value)}
     />
   );
+};
+
+const I18nTemplate = ({
+  name,
+  label,
+  autocomplete,
+  'enable-analytics': enableAnalytics,
+  required,
+  error,
+  maxlength,
+  value,
+  inputmode,
+  type,
+  'aria-describedby': ariaDescribedby,
+}) => {
+  const [lang, setLang] = useState('en');
+  return (
+    <>
+      <button
+        onClick={() => {
+          const newLang = lang === 'en' ? 'es' : 'en';
+          setLang(newLang);
+          document.querySelector('main').setAttribute('lang', newLang);
+        }}
+      >
+        Switch language
+      </button>
+      <va-text-input
+        name={name}
+        label={label}
+        autocomplete={autocomplete}
+        enable-analytics={enableAnalytics}
+        required={required}
+        error={error}
+        maxlength={maxlength}
+        value={value}
+        inputmode={inputmode}
+        type={type}
+        aria-describedby={ariaDescribedby}
+      />
+    </>
+  );
+};
+
+export const Internationalization = I18nTemplate.bind({});
+Internationalization.args = {
+  ...defaultArgs,
 };
 
 export const Default = Template.bind({});
