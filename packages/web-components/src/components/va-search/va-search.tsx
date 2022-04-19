@@ -31,13 +31,13 @@ export class VaSearch {
   inputBlurEvent: EventEmitter;
 
   /**
-   * Fires when the search input loses focus after its value was changed
+   * Fires when text is inputted in the search input
    */
   @Event({
     composed: true,
     bubbles: true,
   })
-  inputChangeEvent: EventEmitter;
+  inputEvent: EventEmitter;
 
   /**
    * Fires when the search input gains focus
@@ -170,8 +170,8 @@ export class VaSearch {
     this.inputBlurEvent.emit(event);
   };
 
-  private handleInputChangeEvent = (event: Event) => {
-    this.inputChangeEvent.emit(event);
+  private handleInputEvent = (event: Event) => {
+    this.inputEvent.emit(event);
   };
 
   private handleInputFocusEvent = (event: FocusEvent) => {
@@ -340,7 +340,7 @@ export class VaSearch {
       handleButtonFocusEvent,
       handleButtonKeyDownEvent,
       handleInputBlurEvent,
-      handleInputChangeEvent,
+      handleInputEvent,
       handleInputFocusEvent,
       handleInputKeyDownEvent,
       handleSuggestionClickEvent,
@@ -380,7 +380,7 @@ export class VaSearch {
           aria-label={label}
           autocomplete="off"
           onBlur={handleInputBlurEvent}
-          onChange={handleInputChangeEvent}
+          onInput={handleInputEvent}
           onFocus={handleInputFocusEvent}
           onKeyDown={handleInputKeyDownEvent}
           role={role}

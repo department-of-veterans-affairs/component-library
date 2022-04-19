@@ -50,11 +50,11 @@ describe('va-search', () => {
     expect(blurSpy).toHaveReceivedEventTimes(1);
   });
 
-  it('fires input change event', async () => {
+  it('fires input event', async () => {
     const page = await newE2EPage();
     await page.setContent('<va-search></va-search>');
 
-    const changeSpy = await page.spyOnEvent('inputChangeEvent');
+    const inputSpy = await page.spyOnEvent('inputEvent');
     const input = await page.find('va-search >>> input');
     await input.focus();
 
@@ -67,7 +67,7 @@ describe('va-search', () => {
     const component = await page.find('va-search');
     await component.press('Tab');
 
-    expect(changeSpy).toHaveReceivedEventTimes(1);
+    expect(inputSpy).toHaveReceivedEventTimes(5);
   });
 
   it('fires input focus event', async () => {
