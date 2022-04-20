@@ -1,11 +1,6 @@
 import { Component, Event, EventEmitter, Host, Prop, h } from '@stencil/core';
 
-import {
-  months,
-  days,
-} from '../../../../react-components/src/helpers/options-for-select.js';
-
-import { isFullDate } from '../../../../react-components/src/helpers/validations.js';
+import { months, days, isFullDate } from '../../utils/date-utils';
 @Component({
   tag: 'va-date',
   styleUrl: 'va-date.css',

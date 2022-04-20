@@ -3,9 +3,6 @@ import { VaDate } from '@department-of-veterans-affairs/web-components/react-bin
 import { generateEventsDescription } from './events';
 import { getWebComponentDocs, propStructure } from './wc-helpers';
 
-import { days } from '../../react-components/src/helpers/options-for-select.js';
-import { isFullDate } from '../../react-components/src/helpers/validations.js';
-
 VaDate.displayName = 'VaDate';
 
 const dateDocs = getWebComponentDocs('va-date');
