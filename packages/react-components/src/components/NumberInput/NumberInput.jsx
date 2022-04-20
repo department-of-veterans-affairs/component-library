@@ -23,6 +23,7 @@ class NumberInput extends React.Component {
 
   componentDidMount() {
     i18next.on('languageChanged', lang => {
+      // We're using this state change to force a re-render
       this.setState({ lang });
     });
   }
