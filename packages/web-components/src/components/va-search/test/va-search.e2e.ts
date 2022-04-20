@@ -345,4 +345,29 @@ describe('va-search', () => {
       value: 'benefits for assisted living',
     });
   });
+
+  it('displays up to 5 suggestions but not more', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-search></va-search>');
+
+    await page.$eval('va-search', (elm: any) => {
+      elm.value = 'benefits';
+      elm.suggestions = [
+        'benefits delivery at discharge',
+        'benefits for surviving spouse',
+        'benefits for spouses',
+        'benefits for assisted living',
+        'benefits for family',
+        'x',
+        'y',
+        'z',
+      ];
+    });
+
+    await page.waitForChanges();
+
+    const suggestions = await page.findAll('va-search >>> [role="option"]');
+
+    expect(suggestions.length).toEqual(5);
+  });
 });

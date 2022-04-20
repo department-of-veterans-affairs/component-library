@@ -59,7 +59,7 @@ const SuggestionsTemplate = ({
   label,
   suggestions,
 }) => (
-  <div style={{ height: '200px' }}>
+  <div style={{ height: '250px' }}>
     <VaSearch
       buttonText={buttonText}
       value={value}
@@ -76,6 +76,8 @@ WithSuggestions.args = {
   ...defaultArgs,
   label: undefined,
   suggestions: [
+    'benefits delivery at discharge',
+    'benefits for surviving spouse',
     'benefits for spouses',
     'benefits for assisted living',
     'benefits for family',

@@ -54,6 +54,7 @@ export class VaSearch {
   componentDidLoad() {
     if (!this.suggestions || !Array.isArray(this.suggestions)) return;
     this.formattedSuggestions = this.suggestions
+      .slice(0, 5)
       .sort()
       .map(suggestion => this.formatSuggestion(suggestion));
     this.isListboxOpen = true;
@@ -66,6 +67,7 @@ export class VaSearch {
   watchSuggestionsHandler(newSuggestions: string[]) {
     if (!Array.isArray(newSuggestions)) return;
     this.formattedSuggestions = newSuggestions
+      .slice(0, 5)
       .sort()
       .map(suggestion => this.formatSuggestion(suggestion));
     this.isListboxOpen = true;
