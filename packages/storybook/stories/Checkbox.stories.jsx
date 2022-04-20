@@ -1,5 +1,5 @@
 import React from 'react';
-import {Checkbox} from '@department-of-veterans-affairs/component-library';
+import Checkbox from '../../react-components/src/components/Checkbox/Checkbox';
 
 export default {
   title: 'Components/Checkbox',
