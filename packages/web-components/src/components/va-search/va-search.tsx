@@ -15,19 +15,18 @@ import {
   shadow: true,
 })
 export class VaSearch {
+  @Element() el: HTMLElement;
   inputRef!: HTMLInputElement;
 
-  @Element() el: HTMLElement;
+  /**
+   * An array of suggestions with suggested text bolded
+   */
+  @State() formattedSuggestions: string[] = [];
 
   /**
    * A boolean indicating whether listbox is open or closed
    */
   @State() isListboxOpen: boolean;
-
-  /**
-   * An array of formatted suggestions
-   */
-  @State() formattedSuggestions: string[] = [];
 
   /**
    * Text displayed inside the search button
@@ -37,17 +36,17 @@ export class VaSearch {
   /**
    * The aria-label for search input and button. Default is 'Search'.
    */
-  @Prop() label: string = 'Search';
+  @Prop() label?: string = 'Search';
 
   /**
-   * An array of strings containing suggestions
+   * An array of strings containing suggestions to be displayed in listbox
    */
-  @Prop() suggestions: any;
+  @Prop() suggestions?: any;
 
   /**
    * The value of the input field
    */
-  @Prop() value: string;
+  @Prop() value?: string;
 
   /**
    * If suggestions are provided, then format suggestions and open the listbox
@@ -72,8 +71,9 @@ export class VaSearch {
     this.isListboxOpen = true;
   }
 
+  // Host event handlers
   /**
-   * Close listbox when focus is outside of the host element
+   * Closes listbox when focus is outside of the host element
    */
   private handleBlur = () => {
     if (!this.formattedSuggestions.length) return;
@@ -81,7 +81,7 @@ export class VaSearch {
   };
 
   /**
-   * Fires a submit event
+   * Fires a submit event if search input has a value
    */
   private handleSubmit = () => {
     if (!this.inputRef.value) return;
@@ -94,14 +94,24 @@ export class VaSearch {
     );
   };
 
-  // Input Event Handlers
-  private handleInputFocusEvent = () => {
+  // Input event handlers
+  /**
+   * Opens listbox when search input has focus and suggestions are provided
+   */
+  private handleInputFocus = () => {
     if (this.formattedSuggestions.length && !this.isListboxOpen) {
       this.isListboxOpen = true;
     }
   };
 
-  private handleInputKeyDownEvent = (event: KeyboardEvent) => {
+  /**
+   * Implements keyboard interface from Keyboard Support at
+   * https://www.w3.org/TR/wai-aria-practices-1.1/examples/combobox/aria1.1pattern/listbox-combo.html
+   *
+   * Enter key was added to attempt to fire submit event.
+   * Tab key was added to aid in isListboxOpen state management.
+   */
+  private handleInputKeyDown = (event: KeyboardEvent) => {
     const options = this.el.shadowRoot.querySelectorAll(
       '[role="option"]',
     ) as NodeListOf<HTMLLIElement>;
@@ -131,13 +141,21 @@ export class VaSearch {
     }
   };
 
-  // Button Event Handlers
-  private handleButtonClickEvent = () => {
+  // Button event handlers
+  /**
+   * Attempts to fire a submit event when search button is clicked
+   */
+  private handleButtonClick = () => {
     this.handleSubmit();
   };
 
-  // Suggestions Event Handlers
-  private handleSuggestionClickEvent = (index: number) => {
+  // Listbox event handlers
+  /**
+   * Sets search input value to the suggestion clicked,
+   * removes aria-selected from previously selected suggestion if it exists,
+   * closes the listbox and attempts to fire a submit event.
+   */
+  private handleListboxClick = (index: number) => {
     const suggestion = this.el.shadowRoot.getElementById(
       `listbox-option-${index}`,
     );
@@ -151,10 +169,13 @@ export class VaSearch {
     this.handleSubmit();
   };
 
-  private handleSuggestionKeyDownEvent = (
-    event: KeyboardEvent,
-    index: number,
-  ) => {
+  /**
+   * Implements keyboard interface from Keyboard Support and guidance from Role, Property, State, and Tabindex Attribute at
+   * https://www.w3.org/TR/wai-aria-practices-1.1/examples/combobox/aria1.1pattern/listbox-combo.html
+   *
+   * Enter key was modified to also attempt to fire a submit event.
+   */
+  private handleListboxKeyDown = (event: KeyboardEvent, index: number) => {
     const options = this.el.shadowRoot.querySelectorAll(
       '[role="option"]',
     ) as NodeListOf<HTMLLIElement>;
@@ -254,11 +275,11 @@ export class VaSearch {
       buttonText,
       formattedSuggestions,
       handleBlur,
-      handleButtonClickEvent,
-      handleInputFocusEvent,
-      handleInputKeyDownEvent,
-      handleSuggestionClickEvent,
-      handleSuggestionKeyDownEvent,
+      handleButtonClick,
+      handleInputFocus,
+      handleInputKeyDown,
+      handleListboxClick,
+      handleListboxKeyDown,
       isListboxOpen,
       label,
       value,
@@ -291,8 +312,8 @@ export class VaSearch {
           aria-haspopup={ariaHasPopup}
           aria-label={label}
           autocomplete="off"
-          onFocus={handleInputFocusEvent}
-          onKeyDown={handleInputKeyDownEvent}
+          onFocus={handleInputFocus}
+          onKeyDown={handleInputKeyDown}
           role={role}
           type={type}
           value={value}
@@ -301,7 +322,7 @@ export class VaSearch {
           id="va-search-button"
           type="submit"
           aria-label={label}
-          onClick={handleButtonClickEvent}
+          onClick={handleButtonClick}
         >
           <i aria-hidden="true" class="fa fa-search" />
           {buttonText && <span id="va-search-button-text">{buttonText}</span>}
@@ -318,8 +339,8 @@ export class VaSearch {
                   <li
                     id={`listbox-option-${index}`}
                     class="va-search-suggestion"
-                    onClick={() => handleSuggestionClickEvent(index)}
-                    onKeyDown={e => handleSuggestionKeyDownEvent(e, index)}
+                    onClick={() => handleListboxClick(index)}
+                    onKeyDown={e => handleListboxKeyDown(e, index)}
                     role="option"
                     tabIndex={-1}
                   >
