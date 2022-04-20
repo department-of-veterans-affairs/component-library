@@ -55,9 +55,9 @@ input:not([disabled]):focus {
 }
 
 :host([error]) input {
-  border: 3px solid var(--color-secondary-dark);
+  border: 2px solid var(--color-secondary-dark);
 }
 
 :host([status='success']) input {
-  border: 3px solid var(--color-green);
+  border: 2px solid var(--color-green);
 }
