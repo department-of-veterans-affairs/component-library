@@ -66,18 +66,9 @@ const CustomValidationTemplate = ({
 }) => {
   const [dateVal, setDateVal] = useState(value);
   const [currentYear, currentMonth, currentDay] = (dateVal || '').split('-');
-  const daysForSelectedMonth = currentMonth
-    ? days[parseInt(currentMonth, 10)]
-    : [];
 
   if (currentYear < minYear || currentYear > maxYear) {
     error = `Please enter a year between ${minYear} and ${maxYear}`;
-  }
-  if (
-    required &&
-    (!isFullDate(dateVal) || currentDay > daysForSelectedMonth.length)
-  ) {
-    error = 'Please enter completed date';
   }
   const today = new Date();
   // new Date as YYYY-MM-DD is giving the day prior to the day select
@@ -117,13 +108,9 @@ const CustomValidationTemplate = ({
           const [currentYear, currentMonth, currentDay] = (dateVal ||
           '').split('-');
         </pre>
-        <pre>
-          const daysForSelectedMonth = currentMonth ?
-          days[parseInt(currentMonth, 10)] : [];
-        </pre>
         <pre>const today = new Date();</pre>
         <pre>const dateInput = new Date(dateVal.split('-').join(' '));</pre>
-        <h5>Sample Conditional Statements</h5>
+        <h5>Sample Custom Validation Conditional Statements</h5>
         <strong>Year Check</strong>
         <pre>
           if (currentYear &lt; minYear || currentYear &gt; maxYear) &#123;
@@ -132,13 +119,6 @@ const CustomValidationTemplate = ({
           error = `Please enter a year between $&#123;minYear&#125; and
           $&#123;maxYear&#125;`;
         </pre>
-        <pre>&#125;</pre>
-        <strong>Blank Date Check</strong>
-        <pre>
-          if (required &amp;&amp; (!isFullDate(dateVal) || currentDay &gt;
-          daysForSelectedMonth.length)) &#123;
-        </pre>
-        <pre>error = 'Please enter completed date';</pre>
         <pre>&#125;</pre>
         <strong>Date in Future Check</strong>
         <pre>if (dateInput &lt;= today)&#123;</pre>
