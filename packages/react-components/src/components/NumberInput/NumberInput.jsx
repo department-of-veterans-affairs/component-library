@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+import i18next from 'i18next';
 import { uniqueId } from '../../helpers/utilities';
 
 import { makeField } from '../../helpers/fields';
@@ -13,10 +14,17 @@ class NumberInput extends React.Component {
   constructor() {
     super();
     this.handleChange = this.handleChange.bind(this);
+    this.state = { lang: null };
   }
 
   UNSAFE_componentWillMount() {
     this.inputId = uniqueId('errorable-number-input-');
+  }
+
+  componentDidMount() {
+    i18next.on('languageChanged', lang => {
+      this.setState({ lang });
+    });
   }
 
   handleChange(domEvent) {
@@ -45,7 +53,9 @@ class NumberInput extends React.Component {
     // Calculate required.
     let requiredSpan = undefined;
     if (this.props.required) {
-      requiredSpan = <span className="form-required-span">(*Required)</span>;
+      requiredSpan = (
+        <span className="form-required-span">(*{i18next.t('required')})</span>
+      );
     }
 
     const ariaDescribedby =
