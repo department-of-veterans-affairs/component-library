@@ -122,10 +122,12 @@ export class VaSearch {
 
     switch (event.key) {
       case 'ArrowDown':
+        // Option doesn't exist if suggestions aren't provided
         if (!firstOption) return;
         this.selectSuggestion(firstOption);
         break;
       case 'ArrowUp':
+        // Option doesn't exist if suggestions aren't provided
         if (!lastOption) return;
         this.selectSuggestion(lastOption);
         break;
@@ -154,18 +156,12 @@ export class VaSearch {
   // Listbox event handlers
   /**
    * Sets search input value to the suggestion clicked,
-   * removes aria-selected from previously selected suggestion if it exists,
    * closes the listbox and fires a submit event.
    */
   private handleListboxClick = (index: number) => {
     const suggestion = this.el.shadowRoot.getElementById(
       `listbox-option-${index}`,
     );
-    if (!suggestion) return;
-    const selectedSuggestion = this.el.shadowRoot.querySelector(
-      '[aria-selected="true"]',
-    );
-    if (selectedSuggestion) selectedSuggestion.removeAttribute('aria-selected');
     this.inputRef.value = suggestion.innerText;
     this.inputRef.removeAttribute('aria-activedescendant');
     this.isListboxOpen = false;
@@ -185,22 +181,16 @@ export class VaSearch {
 
     switch (event.key) {
       case 'ArrowUp':
-        const lastOption = options[options.length - 1];
         if (index === 0) {
-          if (!lastOption) return;
-          this.selectSuggestion(lastOption);
+          this.selectSuggestion(options[options.length - 1]);
         } else {
-          if (!options[index - 1]) return;
           this.selectSuggestion(options[index - 1]);
         }
         break;
       case 'ArrowDown':
-        const firstOption = options[0];
         if (index === options.length - 1) {
-          if (!firstOption) return;
-          this.selectSuggestion(firstOption);
+          this.selectSuggestion(options[0]);
         } else {
-          if (!options[index + 1]) return;
           this.selectSuggestion(options[index + 1]);
         }
         break;
