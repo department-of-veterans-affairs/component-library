@@ -83,10 +83,9 @@ export class VaSearch {
   };
 
   /**
-   * Fires a submit event if search input has a value
+   * Fires a submit event
    */
   private handleSubmit = () => {
-    if (!this.inputRef.value) return;
     this.el.dispatchEvent(
       new CustomEvent('submit', {
         bubbles: true,
@@ -110,7 +109,7 @@ export class VaSearch {
    * Implements keyboard interface from Keyboard Support at
    * https://www.w3.org/TR/wai-aria-practices-1.1/examples/combobox/aria1.1pattern/listbox-combo.html
    *
-   * Enter key was added to attempt to fire submit event.
+   * Enter key was added to fire a submit event.
    * Tab key was added to aid in isListboxOpen state management.
    */
   private handleInputKeyDown = (event: KeyboardEvent) => {
@@ -145,7 +144,7 @@ export class VaSearch {
 
   // Button event handlers
   /**
-   * Attempts to fire a submit event when search button is clicked
+   * Fires a submit event when search button is clicked
    */
   private handleButtonClick = () => {
     this.handleSubmit();
@@ -155,7 +154,7 @@ export class VaSearch {
   /**
    * Sets search input value to the suggestion clicked,
    * removes aria-selected from previously selected suggestion if it exists,
-   * closes the listbox and attempts to fire a submit event.
+   * closes the listbox and fires a submit event.
    */
   private handleListboxClick = (index: number) => {
     const suggestion = this.el.shadowRoot.getElementById(
@@ -175,7 +174,7 @@ export class VaSearch {
    * Implements keyboard interface from Keyboard Support and guidance from Role, Property, State, and Tabindex Attribute at
    * https://www.w3.org/TR/wai-aria-practices-1.1/examples/combobox/aria1.1pattern/listbox-combo.html
    *
-   * Enter key was modified to also attempt to fire a submit event.
+   * Enter key was modified to also fire a submit event.
    */
   private handleListboxKeyDown = (event: KeyboardEvent, index: number) => {
     const options = this.el.shadowRoot.querySelectorAll(

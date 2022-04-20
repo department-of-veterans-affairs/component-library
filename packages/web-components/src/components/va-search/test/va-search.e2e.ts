@@ -89,17 +89,6 @@ describe('va-search', () => {
     expect(submitSpy).toHaveReceivedEventTimes(1);
   });
 
-  it(`doesn't fire submit event on search button click when input is empty`, async () => {
-    const page = await newE2EPage();
-    await page.setContent('<va-search></va-search>');
-
-    const submitSpy = await page.spyOnEvent('submit');
-    const button = await page.find('va-search >>> button');
-    await button.click();
-
-    expect(submitSpy).toHaveReceivedEventTimes(0);
-  });
-
   it('focuses first suggestion when pressing ArrowDown inside input field', async () => {
     const page = await newE2EPage();
     await page.setContent('<va-search></va-search>');
