@@ -35,11 +35,6 @@ export class VaSearch {
   @Prop() buttonText?: string;
 
   /**
-   * The value of the input field
-   */
-  @Prop() value: string;
-
-  /**
    * The aria-label for search input and button. Default is 'Search'.
    */
   @Prop() label: string = 'Search';
@@ -49,6 +44,14 @@ export class VaSearch {
    */
   @Prop() suggestions: any;
 
+  /**
+   * The value of the input field
+   */
+  @Prop() value: string;
+
+  /**
+   * If suggestions are provided, then format suggestions and open the listbox
+   */
   componentDidLoad() {
     if (!this.suggestions || !Array.isArray(this.suggestions)) return;
     this.formattedSuggestions = this.suggestions
@@ -57,6 +60,9 @@ export class VaSearch {
     this.isListboxOpen = true;
   }
 
+  /**
+   * If suggestions are provided, then format suggestions and open the listbox
+   */
   @Watch('suggestions')
   watchSuggestionsHandler(newSuggestions: string[]) {
     if (!Array.isArray(newSuggestions)) return;
@@ -66,11 +72,17 @@ export class VaSearch {
     this.isListboxOpen = true;
   }
 
+  /**
+   * Close listbox when focus is outside of the host element
+   */
   private handleBlur = () => {
     if (!this.formattedSuggestions.length) return;
     this.isListboxOpen = false;
   };
 
+  /**
+   * Fires a submit event
+   */
   private submit = () => {
     this.el.dispatchEvent(
       new CustomEvent('submit', {
