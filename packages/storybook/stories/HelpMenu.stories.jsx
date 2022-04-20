@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import {HelpMenu} from '@department-of-veterans-affairs/component-library';
+import HelpMenu from '../../react-components/src/components/HelpMenu/HelpMenu';
 
 export default {
   title: 'Components/HelpMenu',
