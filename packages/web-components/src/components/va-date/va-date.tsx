@@ -5,6 +5,7 @@ import {
   days,
 } from '../../../../react-components/src/helpers/options-for-select.js';
 
+import { isFullDate } from '../../../../react-components/src/helpers/validations.js';
 @Component({
   tag: 'va-date',
   styleUrl: 'va-date.css',
@@ -131,15 +132,23 @@ export class VaDate {
     const daysForSelectedMonth =
       parseInt(month, 10) > 0 ? days[parseInt(month, 10)] : [];
 
+    // Check validity of date if invalid provide message and error state styling
+    const dateInvalid =
+      required && (!isFullDate(value) || day > daysForSelectedMonth.length)
+        ? 'Please provide a valid date'
+        : null;
+
+    // Setting new attribute to avoid conflicts with only using error attribute
+    // Error attribute should be leveraged for custom error messaging
     return (
-      <Host value={value}>
+      <Host value={value} invalid={dateInvalid}>
         <label htmlFor="date-element">
           {label || 'Date of birth'}{' '}
           {required && <span class="required">(*Required)</span>}
         </label>
-        {error && (
+        {(error || dateInvalid) && (
           <span class="error-message" role="alert">
-            <span class="sr-only">Error</span> {this.error}
+            <span class="sr-only">Error</span> {error || dateInvalid}
           </span>
         )}
         <div>
