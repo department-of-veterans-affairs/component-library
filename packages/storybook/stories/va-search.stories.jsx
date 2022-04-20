@@ -20,13 +20,13 @@ export default {
 
 const Template = ({
   'button-text': buttonText,
-  'input-value': inputValue,
+  'value': value,
   label,
   suggestions,
 }) => (
   <VaSearch
     buttonText={buttonText}
-    inputValue={inputValue}
+    value={value}
     label={label}
     onInput={e => console.log(e)}
     onSubmit={e => console.log(e)}
@@ -36,7 +36,7 @@ const Template = ({
 
 const defaultArgs = {
   'button-text': undefined,
-  'input-value': 'benefits',
+  'value': 'benefits',
   'label': undefined,
   'suggestions': undefined,
 };
@@ -55,14 +55,14 @@ WithButtonText.args = {
 
 const SuggestionsTemplate = ({
   'button-text': buttonText,
-  'input-value': inputValue,
+  'value': value,
   label,
   suggestions,
 }) => (
   <div style={{ height: '200px' }}>
     <VaSearch
       buttonText={buttonText}
-      inputValue={inputValue}
+      value={value}
       label={label}
       onInput={e => console.log(e)}
       onSubmit={e => console.log(e)}

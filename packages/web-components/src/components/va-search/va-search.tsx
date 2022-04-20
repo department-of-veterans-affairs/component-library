@@ -35,9 +35,9 @@ export class VaSearch {
   @Prop() buttonText?: string;
 
   /**
-   * Initial value of input
+   * The value of the input field
    */
-  @Prop() inputValue?: string;
+  @Prop() value: string;
 
   /**
    * The aria-label for search input and button. Default is 'Search'.
@@ -246,9 +246,9 @@ export class VaSearch {
       handleInputKeyDownEvent,
       handleSuggestionClickEvent,
       handleSuggestionKeyDownEvent,
-      inputValue,
       isListboxOpen,
       label,
+      value,
     } = this;
 
     const isCombobox = formattedSuggestions.length;
@@ -282,7 +282,7 @@ export class VaSearch {
           onKeyDown={handleInputKeyDownEvent}
           role={role}
           type={type}
-          value={inputValue}
+          value={value}
         />
         <button
           id="va-search-button"

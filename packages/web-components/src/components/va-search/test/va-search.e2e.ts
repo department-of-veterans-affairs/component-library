@@ -22,7 +22,7 @@ describe('va-search', () => {
     await page.setContent(`<va-search></va-search>`);
 
     await page.$eval('va-search', (elm: any) => {
-      elm.inputValue = 'benefits';
+      elm.value = 'benefits';
       elm.suggestions = [
         'benefits for spouses',
         'benefits for assisted living',
@@ -90,7 +90,7 @@ describe('va-search', () => {
     await page.setContent('<va-search></va-search>');
 
     await page.$eval('va-search', (elm: any) => {
-      elm.inputValue = 'benefits';
+      elm.value = 'benefits';
       elm.suggestions = [
         'benefits for assisted living',
         'benefits for family',
@@ -119,7 +119,7 @@ describe('va-search', () => {
     await page.setContent('<va-search></va-search>');
 
     await page.$eval('va-search', (elm: any) => {
-      elm.inputValue = 'benefits';
+      elm.value = 'benefits';
       elm.suggestions = [
         'benefits for assisted living',
         'benefits for family',
@@ -146,7 +146,7 @@ describe('va-search', () => {
     await page.setContent('<va-search></va-search>');
 
     await page.$eval('va-search', (elm: any) => {
-      elm.inputValue = 'benefits';
+      elm.value = 'benefits';
       elm.suggestions = [
         'benefits for assisted living',
         'benefits for family',
@@ -171,7 +171,7 @@ describe('va-search', () => {
     await page.setContent('<va-search></va-search>');
 
     await page.$eval('va-search', (elm: any) => {
-      elm.inputValue = 'benefits';
+      elm.value = 'benefits';
       elm.suggestions = [
         'benefits for assisted living',
         'benefits for family',
@@ -202,7 +202,7 @@ describe('va-search', () => {
     await page.setContent('<va-search></va-search>');
 
     await page.$eval('va-search', (elm: any) => {
-      elm.inputValue = 'benefits';
+      elm.value = 'benefits';
       elm.suggestions = [
         'benefits for assisted living',
         'benefits for family',
@@ -233,7 +233,7 @@ describe('va-search', () => {
     await page.setContent('<va-search></va-search>');
 
     await page.$eval('va-search', (elm: any) => {
-      elm.inputValue = 'benefits';
+      elm.value = 'benefits';
       elm.suggestions = [
         'benefits for assisted living',
         'benefits for family',
@@ -262,7 +262,7 @@ describe('va-search', () => {
     await page.setContent('<va-search></va-search>');
 
     await page.$eval('va-search', (elm: any) => {
-      elm.inputValue = 'benefits';
+      elm.value = 'benefits';
       elm.suggestions = [
         'benefits for assisted living',
         'benefits for family',
@@ -311,7 +311,7 @@ describe('va-search', () => {
     await page.setContent('<va-search></va-search>');
 
     await page.$eval('va-search', (elm: any) => {
-      elm.inputValue = 'benefits';
+      elm.value = 'benefits';
       elm.suggestions = [
         'benefits for assisted living',
         'benefits for family',

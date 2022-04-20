@@ -335,10 +335,6 @@ export namespace Components {
          */
         "buttonText"?: string;
         /**
-          * Initial value of input
-         */
-        "inputValue"?: string;
-        /**
           * The aria-label for search input and button. Default is 'Search'.
          */
         "label": string;
@@ -346,6 +342,10 @@ export namespace Components {
           * An array of strings containing suggestions
          */
         "suggestions": any;
+        /**
+          * The value of the input field
+         */
+        "value": string;
     }
     interface VaSegmentedProgressBar {
         /**
@@ -1102,10 +1102,6 @@ declare namespace LocalJSX {
          */
         "buttonText"?: string;
         /**
-          * Initial value of input
-         */
-        "inputValue"?: string;
-        /**
           * The aria-label for search input and button. Default is 'Search'.
          */
         "label"?: string;
@@ -1113,6 +1109,10 @@ declare namespace LocalJSX {
           * An array of strings containing suggestions
          */
         "suggestions"?: any;
+        /**
+          * The value of the input field
+         */
+        "value"?: string;
     }
     interface VaSegmentedProgressBar {
         /**
