@@ -83,7 +83,8 @@ export class VaSearch {
   /**
    * Fires a submit event
    */
-  private submit = () => {
+  private handleSubmit = () => {
+    if (!this.inputRef.value) return;
     this.el.dispatchEvent(
       new CustomEvent('submit', {
         bubbles: true,
@@ -117,7 +118,7 @@ export class VaSearch {
         this.selectSuggestion(lastOption);
         break;
       case 'Enter':
-        this.submit();
+        this.handleSubmit();
         break;
       case 'Escape':
         this.inputRef.value = '';
@@ -132,7 +133,7 @@ export class VaSearch {
 
   // Button Event Handlers
   private handleButtonClickEvent = () => {
-    this.submit();
+    this.handleSubmit();
   };
 
   // Suggestions Event Handlers
@@ -147,7 +148,7 @@ export class VaSearch {
     if (selectedSuggestion) selectedSuggestion.removeAttribute('aria-selected');
     this.inputRef.value = suggestion.innerText;
     this.isListboxOpen = false;
-    this.submit();
+    this.handleSubmit();
   };
 
   private handleSuggestionKeyDownEvent = (
@@ -184,7 +185,7 @@ export class VaSearch {
         this.inputRef.focus();
         this.inputRef.removeAttribute('aria-activedescendant');
         this.isListboxOpen = false;
-        this.submit();
+        this.handleSubmit();
         break;
       case 'Escape':
         this.inputRef.value = '';
