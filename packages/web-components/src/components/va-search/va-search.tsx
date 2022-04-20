@@ -71,6 +71,16 @@ export class VaSearch {
     this.isListboxOpen = false;
   };
 
+  private submit = () => {
+    this.el.dispatchEvent(
+      new CustomEvent('submit', {
+        bubbles: true,
+        cancelable: true,
+        detail: { value: this.inputRef.value },
+      }),
+    );
+  };
+
   // Input Event Handlers
   private handleInputFocusEvent = () => {
     if (this.formattedSuggestions.length && !this.isListboxOpen) {
@@ -101,12 +111,7 @@ export class VaSearch {
 
     // submit
     if (event.key === 'Enter') {
-      const submitEvent = new CustomEvent('submit', {
-        bubbles: true,
-        cancelable: true,
-        detail: { value: this.inputRef.value },
-      });
-      this.el.dispatchEvent(submitEvent);
+      this.submit();
     }
 
     // close listbox on tab
@@ -117,12 +122,7 @@ export class VaSearch {
 
   // Button Event Handlers
   private handleButtonClickEvent = () => {
-    const submitEvent = new CustomEvent('submit', {
-      bubbles: true,
-      cancelable: true,
-      detail: { value: this.inputRef.value },
-    });
-    this.el.dispatchEvent(submitEvent);
+    this.submit();
   };
 
   // Suggestions Event Handlers
@@ -138,12 +138,7 @@ export class VaSearch {
     this.inputRef.value = suggestion.innerText;
     this.isListboxOpen = false;
 
-    const submitEvent = new CustomEvent('submit', {
-      bubbles: true,
-      cancelable: true,
-      detail: { value: this.inputRef.value },
-    });
-    this.el.dispatchEvent(submitEvent);
+    this.submit();
   };
 
   private handleSuggestionKeyDownEvent = (
@@ -178,12 +173,7 @@ export class VaSearch {
         this.inputRef.focus();
         this.inputRef.removeAttribute('aria-activedescendant');
         this.isListboxOpen = false;
-        const submitEvent = new CustomEvent('submit', {
-          bubbles: true,
-          cancelable: true,
-          detail: { value: this.inputRef.value },
-        });
-        this.el.dispatchEvent(submitEvent);
+        this.submit();
         break;
       case 'Escape':
         this.inputRef.value = '';
