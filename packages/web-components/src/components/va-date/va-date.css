@@ -10,7 +10,7 @@ span.required {
   color: var(--color-secondary-dark);
 }
 
-:host([error]) {
+:host([error]:not([error=''])) {
   border-left: 4px solid var(--color-secondary-dark);
   margin-top: 3rem;
   padding-bottom: 0.8rem;
@@ -20,13 +20,13 @@ span.required {
   right: 1.9rem;
 }
 
-:host([error]) label,
-:host([error]) span {
+:host([error]:not([error=''])) label,
+:host([error]:not([error=''])) span {
   font-weight: 700;
 }
 
-:host([error]) va-select::part(select),
-:host([error]) va-number-input::part(input) {
+:host([error]:not([error=''])) va-select::part(select),
+:host([error]:not([error=''])) va-number-input::part(input) {
   border: 3px solid var(--color-secondary-dark);
 }
 
