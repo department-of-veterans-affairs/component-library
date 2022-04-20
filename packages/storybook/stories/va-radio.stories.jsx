@@ -13,9 +13,13 @@ export default {
   title: 'Components/va-radio',
   subcomponents: componentStructure(radioItem),
   parameters: {
+    componentSubtitle: `Radio buttons web component`,
     docs: {
       description: {
-        component: generateEventsDescription(radioDocs),
+        component:
+          `<a className="vads-c-action-link--blue" href="https://design.va.gov/components/form-controls#radio-buttons">View guidance for the Radio buttons component in the Design System</a>` +
+          '\n' +
+          generateEventsDescription(radioDocs),
       },
     },
   },
