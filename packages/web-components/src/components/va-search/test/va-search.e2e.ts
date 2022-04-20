@@ -28,92 +28,11 @@ describe('va-search', () => {
         'benefits for assisted living',
         'benefits for family',
       ];
-      elm.showSuggestions = true;
     });
 
     await page.waitForChanges();
 
     await axeCheck(page);
-  });
-
-  it('fires input event', async () => {
-    const page = await newE2EPage();
-    await page.setContent('<va-search></va-search>');
-
-    const inputSpy = await page.spyOnEvent('input');
-    const input = await page.find('va-search >>> input');
-    await input.focus();
-
-    await input.press('F');
-    await input.press('o');
-    await input.press('r');
-    await input.press('m');
-    await input.press('s');
-
-    expect(inputSpy).toHaveReceivedEventTimes(5);
-  });
-
-  it('fires input focus event', async () => {
-    const page = await newE2EPage();
-    await page.setContent('<va-search></va-search>');
-
-    const focusSpy = await page.spyOnEvent('inputFocusEvent');
-    const input = await page.find('va-search >>> input');
-    await input.focus();
-
-    expect(focusSpy).toHaveReceivedEventTimes(1);
-  });
-
-  it('fires input keydown event', async () => {
-    const page = await newE2EPage();
-    await page.setContent('<va-search></va-search>');
-
-    const keyDownSpy = await page.spyOnEvent('inputKeyDownEvent');
-    const input = await page.find('va-search >>> input');
-    await input.focus();
-
-    await input.press('F');
-    await input.press('o');
-    await input.press('r');
-    await input.press('m');
-    await input.press('s');
-
-    expect(keyDownSpy).toHaveReceivedEventTimes(5);
-  });
-
-  it('fires button click event', async () => {
-    const page = await newE2EPage();
-    await page.setContent('<va-search></va-search>');
-
-    const clickSpy = await page.spyOnEvent('buttonClickEvent');
-    const button = await page.find('va-search >>> button');
-    await button.click();
-
-    expect(clickSpy).toHaveReceivedEventTimes(1);
-  });
-
-  it('fires button focus event', async () => {
-    const page = await newE2EPage();
-    await page.setContent('<va-search></va-search>');
-
-    const focusSpy = await page.spyOnEvent('buttonFocusEvent');
-    const button = await page.find('va-search >>> button');
-    await button.focus();
-
-    expect(focusSpy).toHaveReceivedEventTimes(1);
-  });
-
-  it('fires button keydown event', async () => {
-    const page = await newE2EPage();
-    await page.setContent('<va-search></va-search>');
-
-    const keyDownSpy = await page.spyOnEvent('buttonKeyDownEvent');
-    const button = await page.find('va-search >>> button');
-    await button.focus();
-
-    await button.press('Tab');
-
-    expect(keyDownSpy).toHaveReceivedEventTimes(1);
   });
 
   it('renders with button with text', async () => {
@@ -138,6 +57,34 @@ describe('va-search', () => {
     `);
   });
 
+  it('fires input event on key press', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-search></va-search>');
+
+    const inputSpy = await page.spyOnEvent('input');
+    const input = await page.find('va-search >>> input');
+    await input.focus();
+
+    await input.press('F');
+    await input.press('o');
+    await input.press('r');
+    await input.press('m');
+    await input.press('s');
+
+    expect(inputSpy).toHaveReceivedEventTimes(5);
+  });
+
+  it('fires submit event on search button click', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-search></va-search>');
+
+    const submitSpy = await page.spyOnEvent('submit');
+    const button = await page.find('va-search >>> button');
+    await button.click();
+
+    expect(submitSpy).toHaveReceivedEventTimes(1);
+  });
+
   it('focuses first suggestion when pressing ArrowDown inside input field', async () => {
     const page = await newE2EPage();
     await page.setContent('<va-search></va-search>');
@@ -149,7 +96,6 @@ describe('va-search', () => {
         'benefits for family',
         'benefits for spouses',
       ];
-      elm.showSuggestions = true;
     });
 
     await page.waitForChanges();
@@ -163,7 +109,7 @@ describe('va-search', () => {
       'va-search >>> [aria-selected="true"]',
     );
 
-    expect(selectedSuggestion.textContent).toContain(
+    expect(selectedSuggestion.innerText).toContain(
       'benefits for assisted living',
     );
   });
@@ -179,7 +125,6 @@ describe('va-search', () => {
         'benefits for family',
         'benefits for spouses',
       ];
-      elm.showSuggestions = true;
     });
 
     await page.waitForChanges();
@@ -193,7 +138,7 @@ describe('va-search', () => {
       'va-search >>> [aria-selected="true"]',
     );
 
-    expect(selectedSuggestion.textContent).toContain('benefits for spouses');
+    expect(selectedSuggestion.innerText).toContain('benefits for spouses');
   });
 
   it('clears input value when pressing Escape key inside input field', async () => {
@@ -207,7 +152,6 @@ describe('va-search', () => {
         'benefits for family',
         'benefits for spouses',
       ];
-      elm.showSuggestions = true;
     });
 
     await page.waitForChanges();
@@ -233,7 +177,6 @@ describe('va-search', () => {
         'benefits for family',
         'benefits for spouses',
       ];
-      elm.showSuggestions = true;
     });
 
     await page.waitForChanges();
@@ -251,7 +194,7 @@ describe('va-search', () => {
       'va-search >>> [aria-selected="true"]',
     );
 
-    expect(selectedSuggestion.textContent).toContain('benefits for family');
+    expect(selectedSuggestion.innerText).toContain('benefits for family');
   });
 
   it('focuses last suggestion when pressing ArrowUp with first suggestion selected', async () => {
@@ -265,7 +208,6 @@ describe('va-search', () => {
         'benefits for family',
         'benefits for spouses',
       ];
-      elm.showSuggestions = true;
     });
 
     await page.waitForChanges();
@@ -283,7 +225,7 @@ describe('va-search', () => {
       'va-search >>> [aria-selected="true"]',
     );
 
-    expect(selectedSuggestion.textContent).toContain('benefits for spouses');
+    expect(selectedSuggestion.innerText).toContain('benefits for spouses');
   });
 
   it('sets input value to suggestion when pressing Enter key with suggestion focused', async () => {
@@ -297,7 +239,6 @@ describe('va-search', () => {
         'benefits for family',
         'benefits for spouses',
       ];
-      elm.showSuggestions = true;
     });
 
     await page.waitForChanges();
@@ -327,7 +268,6 @@ describe('va-search', () => {
         'benefits for family',
         'benefits for spouses',
       ];
-      elm.showSuggestions = true;
     });
 
     await page.waitForChanges();
@@ -363,6 +303,31 @@ describe('va-search', () => {
 
     expect(submitSpy).toHaveReceivedEventDetail({
       value: 'Forms',
+    });
+  });
+
+  it('fires submit event when a suggestion is clicked', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-search></va-search>');
+
+    await page.$eval('va-search', (elm: any) => {
+      elm.inputValue = 'benefits';
+      elm.suggestions = [
+        'benefits for assisted living',
+        'benefits for family',
+        'benefits for spouses',
+      ];
+    });
+
+    await page.waitForChanges();
+
+    const submitSpy = await page.spyOnEvent('submit');
+
+    const firstSuggestion = await page.find('va-search >>> [role="option"]');
+    await firstSuggestion.click();
+
+    expect(submitSpy).toHaveReceivedEventDetail({
+      value: 'benefits for assisted living',
     });
   });
 });

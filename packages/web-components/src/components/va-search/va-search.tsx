@@ -1,8 +1,6 @@
 import {
   Component,
   Element,
-  Event,
-  EventEmitter,
   Fragment,
   Host,
   h,
@@ -22,87 +20,6 @@ export class VaSearch {
   @Element() el: HTMLElement;
 
   @State() isListboxOpen: boolean;
-
-  /**
-   * Fires when the search input gains focus
-   */
-  @Event({
-    composed: true,
-    bubbles: true,
-  })
-  inputFocusEvent: EventEmitter;
-
-  /**
-   * Fires when the search input is focused and a key is pressed
-   */
-  @Event({
-    composed: true,
-    bubbles: true,
-  })
-  inputKeyDownEvent: EventEmitter;
-
-  /**
-   * Fires when the search button is clicked
-   */
-  @Event({
-    composed: true,
-    bubbles: true,
-  })
-  buttonClickEvent: EventEmitter;
-
-  /**
-   * Fires when the search button gains focus
-   */
-  @Event({
-    composed: true,
-    bubbles: true,
-  })
-  buttonFocusEvent: EventEmitter;
-
-  /**
-   * Fires when the search button is focused and a key is pressed
-   */
-  @Event({
-    composed: true,
-    bubbles: true,
-  })
-  buttonKeyDownEvent: EventEmitter;
-
-  /**
-   * Fires when a suggestion is clicked
-   */
-  @Event({
-    composed: true,
-    bubbles: true,
-  })
-  suggestionClickEvent: EventEmitter;
-
-  /**
-   * Fires when a suggestion is focused
-   */
-  @Event({
-    composed: true,
-    bubbles: true,
-  })
-  suggestionFocusEvent: EventEmitter;
-
-  /**
-   * Fires when a suggestion is focused and a key is pressed
-   */
-  @Event({
-    composed: true,
-    bubbles: true,
-  })
-  suggestionKeyDownEvent: EventEmitter;
-
-  /**
-   * Fires when a suggestion is pressed
-   */
-  @Event({
-    composed: true,
-    bubbles: true,
-  })
-  suggestionMouseDownEvent: EventEmitter;
 
   /**
    * An array of formatted suggestions
@@ -152,16 +69,13 @@ export class VaSearch {
   };
 
   // Input Event Handlers
-  private handleInputFocusEvent = (event: FocusEvent) => {
-    this.inputFocusEvent.emit(event);
+  private handleInputFocusEvent = () => {
     if (this.formattedSuggestions.length && !this.isListboxOpen) {
       this.isListboxOpen = true;
     }
   };
 
   private handleInputKeyDownEvent = (event: KeyboardEvent) => {
-    this.inputKeyDownEvent.emit(event);
-
     const options = this.el.shadowRoot.querySelectorAll('[role="option"]');
     const firstOption = options[0] as HTMLDivElement;
     const lastOption = options[options.length - 1] as HTMLDivElement;
@@ -191,27 +105,25 @@ export class VaSearch {
       });
       this.el.dispatchEvent(submitEvent);
     }
+
+    // close listbox on tab
+    if (event.key === 'Tab') {
+      this.isListboxOpen = false;
+    }
   };
 
   // Button Event Handlers
-  private handleButtonClickEvent = (event: KeyboardEvent | MouseEvent) => {
-    this.buttonClickEvent.emit(event);
-  };
-
-  private handleButtonFocusEvent = (event: FocusEvent) => {
-    this.buttonFocusEvent.emit(event);
-  };
-
-  private handleButtonKeyDownEvent = (event: KeyboardEvent) => {
-    this.buttonKeyDownEvent.emit(event);
+  private handleButtonClickEvent = () => {
+    const submitEvent = new CustomEvent('submit', {
+      bubbles: true,
+      cancelable: true,
+      detail: { value: this.inputRef.value },
+    });
+    this.el.dispatchEvent(submitEvent);
   };
 
   // Suggestions Event Handlers
-  private handleSuggestionClickEvent = (
-    event: KeyboardEvent | MouseEvent,
-    index: number,
-  ) => {
-    this.suggestionClickEvent.emit(event);
+  private handleSuggestionClickEvent = (index: number) => {
     const suggestion = this.el.shadowRoot.getElementById(
       `listbox-option-${index}`,
     );
@@ -222,15 +134,19 @@ export class VaSearch {
     if (selectedSuggestion) selectedSuggestion.removeAttribute('aria-selected');
     this.inputRef.value = suggestion.innerText;
     this.isListboxOpen = false;
+
+    const submitEvent = new CustomEvent('submit', {
+      bubbles: true,
+      cancelable: true,
+      detail: { value: this.inputRef.value },
+    });
+    this.el.dispatchEvent(submitEvent);
   };
 
-  private handleSuggestionFocusEvent = (event: FocusEvent) => {
-    this.suggestionFocusEvent.emit(event);
-  };
-
-  private handleSuggestionKeyDownEvent = (event, index) => {
-    this.suggestionKeyDownEvent.emit(event);
-
+  private handleSuggestionKeyDownEvent = (
+    event: KeyboardEvent,
+    index: number,
+  ) => {
     const options = this.el.shadowRoot.querySelectorAll('[role="option"]');
 
     switch (event.key) {
@@ -259,6 +175,12 @@ export class VaSearch {
         this.inputRef.focus();
         this.inputRef.removeAttribute('aria-activedescendant');
         this.isListboxOpen = false;
+        const submitEvent = new CustomEvent('submit', {
+          bubbles: true,
+          cancelable: true,
+          detail: { value: this.inputRef.value },
+        });
+        this.el.dispatchEvent(submitEvent);
         break;
       case 'Escape':
         this.inputRef.value = '';
@@ -289,10 +211,6 @@ export class VaSearch {
         this.inputRef.focus();
         break;
     }
-  };
-
-  private handleSuggestionMouseDownEvent = (event: MouseEvent) => {
-    this.suggestionMouseDownEvent.emit(event);
   };
 
   /**
@@ -332,14 +250,10 @@ export class VaSearch {
       formattedSuggestions,
       handleBlur,
       handleButtonClickEvent,
-      handleButtonFocusEvent,
-      handleButtonKeyDownEvent,
       handleInputFocusEvent,
       handleInputKeyDownEvent,
       handleSuggestionClickEvent,
-      handleSuggestionFocusEvent,
       handleSuggestionKeyDownEvent,
-      handleSuggestionMouseDownEvent,
       inputValue,
       isListboxOpen,
       label,
@@ -383,8 +297,6 @@ export class VaSearch {
           type="submit"
           aria-label={label}
           onClick={handleButtonClickEvent}
-          onFocus={handleButtonFocusEvent}
-          onKeyDown={handleButtonKeyDownEvent}
         >
           <i aria-hidden="true" class="fa fa-search" />
           {buttonText && <span id="va-search-button-text">{buttonText}</span>}
@@ -401,10 +313,8 @@ export class VaSearch {
                   <li
                     id={`listbox-option-${index}`}
                     class="va-search-suggestion"
-                    onClick={e => handleSuggestionClickEvent(e, index)}
-                    onFocus={handleSuggestionFocusEvent}
+                    onClick={() => handleSuggestionClickEvent(index)}
                     onKeyDown={e => handleSuggestionKeyDownEvent(e, index)}
-                    onMouseDown={handleSuggestionMouseDownEvent}
                     role="option"
                     tabIndex={-1}
                   >

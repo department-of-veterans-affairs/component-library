@@ -1110,42 +1110,6 @@ declare namespace LocalJSX {
          */
         "label"?: string;
         /**
-          * Fires when the search button is clicked
-         */
-        "onButtonClickEvent"?: (event: CustomEvent<any>) => void;
-        /**
-          * Fires when the search button gains focus
-         */
-        "onButtonFocusEvent"?: (event: CustomEvent<any>) => void;
-        /**
-          * Fires when the search button is focused and a key is pressed
-         */
-        "onButtonKeyDownEvent"?: (event: CustomEvent<any>) => void;
-        /**
-          * Fires when the search input gains focus
-         */
-        "onInputFocusEvent"?: (event: CustomEvent<any>) => void;
-        /**
-          * Fires when the search input is focused and a key is pressed
-         */
-        "onInputKeyDownEvent"?: (event: CustomEvent<any>) => void;
-        /**
-          * Fires when a suggestion is clicked
-         */
-        "onSuggestionClickEvent"?: (event: CustomEvent<any>) => void;
-        /**
-          * Fires when a suggestion is focused
-         */
-        "onSuggestionFocusEvent"?: (event: CustomEvent<any>) => void;
-        /**
-          * Fires when a suggestion is focused and a key is pressed
-         */
-        "onSuggestionKeyDownEvent"?: (event: CustomEvent<any>) => void;
-        /**
-          * Fires when a suggestion is pressed
-         */
-        "onSuggestionMouseDownEvent"?: (event: CustomEvent<any>) => void;
-        /**
           * An array of strings containing suggestions
          */
         "suggestions"?: any;
