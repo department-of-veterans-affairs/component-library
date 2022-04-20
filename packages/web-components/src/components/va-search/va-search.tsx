@@ -90,6 +90,7 @@ export class VaSearch {
       new CustomEvent('submit', {
         bubbles: true,
         cancelable: true,
+        composed: true,
         detail: { value: this.inputRef.value },
       }),
     );
