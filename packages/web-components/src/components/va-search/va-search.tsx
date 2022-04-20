@@ -19,6 +19,9 @@ export class VaSearch {
 
   @Element() el: HTMLElement;
 
+  /**
+   * A boolean indicating whether listbox is open or closed
+   */
   @State() isListboxOpen: boolean;
 
   /**
