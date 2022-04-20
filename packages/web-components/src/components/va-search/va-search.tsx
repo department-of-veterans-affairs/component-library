@@ -285,7 +285,12 @@ export class VaSearch {
       value,
     } = this;
 
+    /**
+     * If suggestions are provided, this component will be recognized as
+     * a combobox. Used in determining what attributes should exist or be omitted on search input.
+     */
     const isCombobox = formattedSuggestions.length;
+    const ariaAutoComplete = isCombobox ? 'list' : 'none';
     const ariaControls = isCombobox ? 'va-search-listbox' : undefined;
     /**
      * If isCombobox is false, set aria-expanded to undefined
@@ -306,7 +311,7 @@ export class VaSearch {
         <input
           ref={el => (this.inputRef = el as HTMLInputElement)}
           id="va-search-input"
-          aria-autocomplete="none"
+          aria-autocomplete={ariaAutoComplete}
           aria-controls={ariaControls}
           aria-expanded={ariaExpanded}
           aria-haspopup={ariaHasPopup}
