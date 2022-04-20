@@ -89,34 +89,32 @@ export class VaSearch {
   };
 
   private handleInputKeyDownEvent = (event: KeyboardEvent) => {
-    const options = this.el.shadowRoot.querySelectorAll('[role="option"]');
-    const firstOption = options[0] as HTMLDivElement;
-    const lastOption = options[options.length - 1] as HTMLDivElement;
+    const options = this.el.shadowRoot.querySelectorAll(
+      '[role="option"]',
+    ) as NodeListOf<HTMLLIElement>;
+    const firstOption = options[0];
+    const lastOption = options[options.length - 1];
 
-    if (event.key === 'ArrowDown') {
-      if (!firstOption) return;
-      this.selectSuggestion(firstOption);
-    }
-
-    // if escape key, clear input
-    if (event.key === 'Escape') {
-      this.inputRef.value = '';
-    }
-
-    // if up arrow, select last element
-    if (event.key === 'ArrowUp') {
-      if (!lastOption) return;
-      this.selectSuggestion(lastOption);
-    }
-
-    // submit
-    if (event.key === 'Enter') {
-      this.submit();
-    }
-
-    // close listbox on tab
-    if (event.key === 'Tab') {
-      this.isListboxOpen = false;
+    switch (event.key) {
+      case 'ArrowDown':
+        if (!firstOption) return;
+        this.selectSuggestion(firstOption);
+        break;
+      case 'ArrowUp':
+        if (!lastOption) return;
+        this.selectSuggestion(lastOption);
+        break;
+      case 'Enter':
+        this.submit();
+        break;
+      case 'Escape':
+        this.inputRef.value = '';
+        break;
+      case 'Tab':
+        this.isListboxOpen = false;
+        break;
+      default:
+        break;
     }
   };
 
@@ -137,7 +135,6 @@ export class VaSearch {
     if (selectedSuggestion) selectedSuggestion.removeAttribute('aria-selected');
     this.inputRef.value = suggestion.innerText;
     this.isListboxOpen = false;
-
     this.submit();
   };
 
@@ -145,11 +142,13 @@ export class VaSearch {
     event: KeyboardEvent,
     index: number,
   ) => {
-    const options = this.el.shadowRoot.querySelectorAll('[role="option"]');
+    const options = this.el.shadowRoot.querySelectorAll(
+      '[role="option"]',
+    ) as NodeListOf<HTMLLIElement>;
 
     switch (event.key) {
       case 'ArrowUp':
-        const lastOption = options[options.length - 1] as HTMLDivElement;
+        const lastOption = options[options.length - 1];
         if (index === 0) {
           if (!lastOption) return;
           this.selectSuggestion(lastOption);
@@ -159,7 +158,7 @@ export class VaSearch {
         }
         break;
       case 'ArrowDown':
-        const firstOption = options[0] as HTMLDivElement;
+        const firstOption = options[0];
         if (index === options.length - 1) {
           if (!firstOption) return;
           this.selectSuggestion(firstOption);
@@ -169,7 +168,7 @@ export class VaSearch {
         }
         break;
       case 'Enter':
-        this.inputRef.value = (options[index] as HTMLElement).innerText;
+        this.inputRef.value = options[index].innerText;
         this.inputRef.focus();
         this.inputRef.removeAttribute('aria-activedescendant');
         this.isListboxOpen = false;
@@ -227,7 +226,7 @@ export class VaSearch {
    * Focuses a suggestion, sets its aria-selected attribute to true, updates aria-activedescendant on input
    * and removes aria-selected from previously selected option if it exists
    */
-  private selectSuggestion = suggestion => {
+  private selectSuggestion = (suggestion: HTMLLIElement) => {
     const selectedSuggestion = this.el.shadowRoot.querySelector(
       '[aria-selected="true"]',
     );
