@@ -261,7 +261,7 @@ export class VaSearch {
     const selectedSuggestion = this.el.shadowRoot.querySelector(
       '[aria-selected="true"]',
     );
-    if (selectedSuggestion) selectedSuggestion.removeAttribute('aria-selected');
+    selectedSuggestion?.removeAttribute('aria-selected');
     suggestion.focus();
     suggestion.setAttribute('aria-selected', 'true');
     this.inputRef.setAttribute('aria-activedescendant', suggestion.id);
