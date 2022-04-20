@@ -1,19 +1,9 @@
-import {
-  Component,
-  Event,
-  EventEmitter,
-  Host,
-  Prop,
-  h,
-  State,
-} from '@stencil/core';
+import { Component, Event, EventEmitter, Host, Prop, h } from '@stencil/core';
 
 import {
   months,
   days,
 } from '../../../../react-components/src/helpers/options-for-select.js';
-
-import { isFullDate } from '../../../../react-components/src/helpers/validations.js';
 
 @Component({
   tag: 'va-date',
@@ -55,7 +45,7 @@ export class VaDate {
   /**
    * Set the default date value must be in YYYY-MM-DD format.
    */
-  @Prop() value: string;
+  @Prop({ mutable: true }) value: string;
 
   /**
    * Fires when the date input loses focus after its value was changed
@@ -64,7 +54,7 @@ export class VaDate {
     composed: true,
     bubbles: true,
   })
-  dateChangeEvent: EventEmitter;
+  dateChange: EventEmitter;
 
   /**
    * Fires when the date input loses focus
@@ -73,32 +63,37 @@ export class VaDate {
     composed: true,
     bubbles: true,
   })
-  dateBlurEvent: EventEmitter;
+  dateBlur: EventEmitter;
 
-  @State() month: string;
-  @State() day: string;
-  @State() year: string;
-
-  private minTwoDigits = n => {
-    return (n < 10 ? '0' : '') + n;
+  private handleDateBlur = (event: FocusEvent) => {
+    this.dateBlur.emit(event);
   };
 
-  private handleDateBlurEvent = (event: FocusEvent) => {
-    this.dateBlurEvent.emit(event);
-  };
-
-  private handleDateChangeEvent = (event: Event) => {
+  private handleDateChange = (event: Event) => {
     const target = event.target as HTMLSelectElement | HTMLInputElement;
+    let [currentYear, currentMonth, currentDay] = (this.value || '').split('-');
     if (target.classList.contains('select-month')) {
-      this.month = target.value;
+      currentMonth = target.value;
     }
     if (target.classList.contains('select-day')) {
-      this.day = target.value;
+      currentDay = target.value;
     }
     if (target.classList.contains('input-year')) {
-      this.year = target.value;
+      currentYear = target.value;
     }
-    this.dateChangeEvent.emit(event);
+    // Use a leading zero for numbers < 10
+    const numFormatter = new Intl.NumberFormat('en-US', {
+      minimumIntegerDigits: 2,
+    });
+
+    // If Month or Date Select are chosen as empty return ''
+    // Otherwise convert numbers less than 10 to have a leading 0
+    this.value = `${currentYear}-${
+      currentMonth ? numFormatter.format(parseInt(currentMonth)) : ''
+    }-${currentDay ? numFormatter.format(parseInt(currentDay)) : ''}`;
+
+    // This event should always fire to allow for validation handling
+    this.dateChange.emit(event);
   };
 
   /**
@@ -125,27 +120,19 @@ export class VaDate {
       error,
       maxYear,
       minYear,
-      handleDateBlurEvent,
-      handleDateChangeEvent,
+      handleDateBlur,
+      handleDateChange,
       value,
     } = this;
 
-    let { month, day, year } = this;
+    const [year, month, day] = (value || '').split('-');
 
-    const [defaultYear, defaultMonth, defaultDay] = (value || '').split('-');
-
-    const daysForSelectedMonth = month
-      ? days[month]
-      : parseInt(defaultMonth, 10) > 0
-      ? days[parseInt(defaultMonth, 10)]
-      : [];
-
-    let newDate = `${year || defaultYear}-${
-      (month && this.minTwoDigits(month)) || defaultMonth
-    }-${(day && this.minTwoDigits(day)) || defaultDay}`;
+    // Convert string to number to remove leading 0 when matching to days object
+    const daysForSelectedMonth =
+      parseInt(month, 10) > 0 ? days[parseInt(month, 10)] : [];
 
     return (
-      <Host value={isFullDate(newDate) ? newDate : value}>
+      <Host value={value}>
         <label htmlFor="date-element">
           {label || 'Date of birth'}{' '}
           {required && <span class="required">(*Required)</span>}
@@ -159,11 +146,10 @@ export class VaDate {
           <va-select
             label="Month"
             name={`${name}Month`}
-            value={
-              month || (defaultMonth ? defaultMonth.replace(/^0+/, '') : '')
-            }
-            onVaSelect={handleDateChangeEvent}
-            onBlur={handleDateBlurEvent}
+            // Remove starting 0 on days less than 10
+            value={month ? month.replace(/^0+/, '') : ''}
+            onVaSelect={handleDateChange}
+            onBlur={handleDateBlur}
             class="select-month"
           >
             <option value=""></option>
@@ -175,12 +161,18 @@ export class VaDate {
           <va-select
             label="Day"
             name={`${name}Day`}
+            // If day value set is greater than amount of days in the month
+            // set to empty string instead
+            // Remove starting 0 on days less than 10
             value={
-              (daysForSelectedMonth.length < day ? '' : day) ||
-              (defaultDay ? defaultDay.replace(/^0+/, '') : '')
+              daysForSelectedMonth.length < day
+                ? ''
+                : day
+                ? day.replace(/^0+/, '')
+                : ''
             }
-            onVaSelect={handleDateChangeEvent}
-            onBlur={handleDateBlurEvent}
+            onVaSelect={handleDateChange}
+            onBlur={handleDateBlur}
             class="select-day"
           >
             <option value=""></option>
@@ -194,9 +186,9 @@ export class VaDate {
             name={`${name}Year`}
             max={maxYear}
             min={minYear}
-            value={year || defaultYear}
-            onInput={handleDateChangeEvent}
-            onBlur={handleDateBlurEvent}
+            value={year}
+            onInput={handleDateChange}
+            onBlur={handleDateBlur}
             class="input-year"
             inputmode="numeric"
           />

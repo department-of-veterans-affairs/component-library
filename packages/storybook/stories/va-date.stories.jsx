@@ -4,6 +4,7 @@ import { generateEventsDescription } from './events';
 import { getWebComponentDocs, propStructure } from './wc-helpers';
 
 import { days } from '../../react-components/src/helpers/options-for-select.js';
+import { isFullDate } from '../../react-components/src/helpers/validations.js';
 
 VaDate.displayName = 'VaDate';
 
@@ -48,8 +49,8 @@ const Template = ({
       value={value}
       min-year={minYear}
       max-year={maxYear}
-      onDateBlurEvent={e => console.log(e, 'DATE BLUR FIRED')}
-      onDateChangeEvent={e => console.log(e, 'DATE CHANGE FIRED')}
+      onDateBlur={e => console.log(e, 'DATE BLUR FIRED')}
+      onDateChange={e => console.log(e, 'DATE CHANGE FIRED')}
     />
   );
 };
@@ -63,44 +64,26 @@ const CustomValidationTemplate = ({
   'min-year': minYear,
   'max-year': maxYear,
 }) => {
-  const [defaultYear, defaultMonth, defaultDay] = (value || '').split('-');
-  const [monthVal, setMonthVal] = useState(defaultMonth);
-  const [dayVal, setDayVal] = useState(defaultDay);
-  const [yearVal, setYearVal] = useState(defaultYear);
-  const setMonthDayYear = target => {
-    if (target.classList.contains('select-month')) {
-      setMonthVal(target.value);
-    }
-    if (target.classList.contains('select-day')) {
-      setDayVal(target.value);
-    }
-    if (target.tagName === 'INPUT') {
-      setYearVal(target.value);
-    }
-  };
-  const isInTheFuture = date => {
-    const today = new Date();
-    return date > today;
-  };
+  const [dateVal, setDateVal] = useState(value);
+  const [currentYear, currentMonth, currentDay] = (dateVal || '').split('-');
+  const daysForSelectedMonth = currentMonth
+    ? days[parseInt(currentMonth, 10)]
+    : [];
 
-  const daysForSelectedMonth = monthVal ? days[parseInt(monthVal, 10)] : [];
-  if (dayVal === '' || dayVal > daysForSelectedMonth.length) {
-    error = 'Please select a day';
-  }
-  if (monthVal === '') {
-    error = 'Please select a month';
-  }
-  if (yearVal < minYear || yearVal > maxYear) {
+  if (currentYear < minYear || currentYear > maxYear) {
     error = `Please enter a year between ${minYear} and ${maxYear}`;
   }
   if (
-    (required && (dayVal === '' || dayVal === undefined)) ||
-    (required && (monthVal === '' || monthVal === undefined)) ||
-    (required && yearVal === undefined)
+    required &&
+    (!isFullDate(dateVal) || currentDay > daysForSelectedMonth.length)
   ) {
     error = 'Please enter completed date';
   }
-  if (!isInTheFuture(new Date(`${yearVal}-${monthVal}-${dayVal}`))) {
+  const today = new Date();
+  // new Date as YYYY-MM-DD is giving the day prior to the day select
+  // new Date as YYYY MM DD is giving the correct day selected
+  const dateInput = new Date(dateVal.split('-').join(' '));
+  if (dateInput <= today) {
     error = 'Date must be in the future';
   }
   return (
@@ -110,11 +93,11 @@ const CustomValidationTemplate = ({
         name={name}
         required={required}
         error={error}
-        value={value}
+        value={dateVal}
         min-year={minYear}
         max-year={maxYear}
-        onDateBlurEvent={e => console.log(e, 'DATE BLUR EVENT')}
-        onDateChangeEvent={e => setMonthDayYear(e.detail.path[0])}
+        onDateBlur={e => console.log(e, 'DATE BLUR')}
+        onDateChange={e => setDateVal(e.target.value)}
       />
       <div>
         This example has some custom validation logic built out to detect
@@ -122,71 +105,43 @@ const CustomValidationTemplate = ({
         not met an error message will show:
         <ul>
           <li>Cannot have blank values</li>
-          <li>The Month or Day does not have an empty value</li>
           <li>The Year falls outside of the range of 1900-2122</li>
-          <li>The date provided is in the future</li>
+          <li>The date provided is not in the future</li>
           <pre></pre>
         </ul>
         These are examples of how Custom Validation could be used with this
         component.
         <h5>Sample Variables</h5>
-        <pre>const [defaultYear, defaultMonth, defaultDay] = (value || '').split('-');</pre>
-        <pre>const [monthVal, setMonthVal] = useState(defaultMonth);</pre>
-        <pre>const [dayVal, setDayVal] = useState(defaultDay);</pre>
-        <pre>const [yearVal, setYearVal] = useState(defaultYear);</pre>
-        <pre>const daysForSelectedMonth = monthVal ? days[parseInt(monthVal, 10)] : [];</pre>
-        <h5>Sample Functions</h5>
-        <pre>const setMonthDayYear = target =&gt; &#123; </pre>
-        <pre>if (target.classList.contains('select-month')) &#123; </pre>
-        <pre>setMonthVal(target.value);</pre>
-        <pre>&#125;</pre>
-        <pre>if (target.classList.contains('select-day')) &#123; </pre>
-        <pre>setDayVal(target.value);</pre>
-        <pre>&#125;</pre>
-        <pre>if (target.tagName === 'INPUT') &#123; </pre>
-        <pre>setYearVal(target.value);</pre>
-        <pre>&#125;</pre>
-        <pre>&#125;</pre>
-        <pre>const isInTheFuture = (date) =&gt; &#123; </pre>
-        <pre>const today = new Date();</pre>
-        <pre>return date &gt; today;</pre>
-        <pre>&#125;</pre>
-        <h5>Sample Conditional Statements</h5>
-        <strong>Day Check</strong>
+        <pre>const [dateVal, setDateVal] = useState(value);</pre>
         <pre>
-          if (dayVal === '' || dayVal &gt; daysForSelectedMonth.length) &#123;
+          const [currentYear, currentMonth, currentDay] = (dateVal ||
+          '').split('-');
         </pre>
-        <pre>error = 'Please select a day';</pre>
-        <pre>&#125;</pre>
-        <strong>Month Check</strong>
-        <pre>if (monthVal === '') &#123;</pre>
-        <pre>error = 'Please select a month';</pre>
-        <pre>&#125;</pre>
+        <pre>
+          const daysForSelectedMonth = currentMonth ?
+          days[parseInt(currentMonth, 10)] : [];
+        </pre>
+        <pre>const today = new Date();</pre>
+        <pre>const dateInput = new Date(dateVal.split('-').join(' '));</pre>
+        <h5>Sample Conditional Statements</h5>
         <strong>Year Check</strong>
-        <pre>if (yearVal &lt; minYear || yearVal &gt; maxYear) &#123;</pre>
+        <pre>
+          if (currentYear &lt; minYear || currentYear &gt; maxYear) &#123;
+        </pre>
         <pre>
           error = `Please enter a year between $&#123;minYear&#125; and
           $&#123;maxYear&#125;`;
         </pre>
         <pre>&#125;</pre>
         <strong>Blank Date Check</strong>
-        <pre>if (</pre>
         <pre>
-          (required &#38;&#38; (dayVal === '' || dayVal === undefined)) ||
+          if (required &amp;&amp; (!isFullDate(dateVal) || currentDay &gt;
+          daysForSelectedMonth.length)) &#123;
         </pre>
-        <pre>
-          (required &#38;&#38; (monthVal === '' || monthVal === undefined)) ||
-        </pre>
-        <pre>(required &#38;&#38; yearVal === undefined)</pre>
-        <pre>) &#123; </pre>
         <pre>error = 'Please enter completed date';</pre>
         <pre>&#125;</pre>
         <strong>Date in Future Check</strong>
-        <pre>
-          if (!isInTheFuture(new
-          Date(`$&#123;yearVal&#125;-$&#123;monthVal&#125;-$&#123;dayVal&#125;`)))
-          &#123;
-        </pre>
+        <pre>if (dateInput &lt;= today)&#123;</pre>
         <pre>error = 'Date must be in the future';</pre>
         <pre>&#125;</pre>
       </div>

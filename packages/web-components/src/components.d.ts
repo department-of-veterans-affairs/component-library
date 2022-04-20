@@ -1001,11 +1001,11 @@ declare namespace LocalJSX {
         /**
           * Fires when the date input loses focus
          */
-        "onDateBlurEvent"?: (event: CustomEvent<any>) => void;
+        "onDateBlur"?: (event: CustomEvent<any>) => void;
         /**
           * Fires when the date input loses focus after its value was changed
          */
-        "onDateChangeEvent"?: (event: CustomEvent<any>) => void;
+        "onDateChange"?: (event: CustomEvent<any>) => void;
         /**
           * Render marker indicating field is required.
          */
