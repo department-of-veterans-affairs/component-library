@@ -9,9 +9,13 @@ const checkboxDocs = getWebComponentDocs('va-checkbox');
 export default {
   title: 'Components/va-checkbox',
   parameters: {
+    componentSubtitle: `Checkbox web component`,
     docs: {
       description: {
-        component: generateEventsDescription(checkboxDocs),
+        component:
+          `<a className="vads-c-action-link--blue" href="https://design.va.gov/components/form-controls#checkboxes">View guidance for the Checkbox component in the Design System</a>` +
+          '\n' +
+          generateEventsDescription(checkboxDocs),
       },
     },
   },
