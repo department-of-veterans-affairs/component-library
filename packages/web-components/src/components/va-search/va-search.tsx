@@ -166,6 +166,7 @@ export class VaSearch {
     );
     if (selectedSuggestion) selectedSuggestion.removeAttribute('aria-selected');
     this.inputRef.value = suggestion.innerText;
+    this.inputRef.removeAttribute('aria-activedescendant');
     this.isListboxOpen = false;
     this.handleSubmit();
   };
