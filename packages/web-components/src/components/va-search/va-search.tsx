@@ -49,27 +49,23 @@ export class VaSearch {
   @Prop() value?: string;
 
   /**
-   * If suggestions are provided, then format suggestions and open the listbox
+   * If suggestions are provided, then format suggestions and open the listbox.
+   * Limits suggestions to 5 and sorts them.
    */
   componentDidLoad() {
     if (!this.suggestions || !Array.isArray(this.suggestions)) return;
-    this.formattedSuggestions = this.suggestions
-      .slice(0, 5)
-      .sort()
-      .map(suggestion => this.formatSuggestion(suggestion));
+    this.updateSuggestions(this.suggestions.slice(0, 5).sort());
     this.isListboxOpen = true;
   }
 
   /**
-   * If suggestions are provided, then format suggestions and open the listbox
+   * If suggestions are provided, then format suggestions and open the listbox.
+   * Limits suggestions to 5 and sorts them.
    */
   @Watch('suggestions')
   watchSuggestionsHandler(newSuggestions: string[]) {
     if (!Array.isArray(newSuggestions)) return;
-    this.formattedSuggestions = newSuggestions
-      .slice(0, 5)
-      .sort()
-      .map(suggestion => this.formatSuggestion(suggestion));
+    this.updateSuggestions(newSuggestions.slice(0, 5).sort());
     this.isListboxOpen = true;
   }
 
@@ -97,6 +93,14 @@ export class VaSearch {
   };
 
   // Input event handlers
+  /**
+   * Updates suggestion formatting as user types
+   */
+  private handleInput = () => {
+    if (!this.suggestions) return;
+    this.updateSuggestions(this.suggestions);
+  };
+
   /**
    * Opens listbox when search input has focus and suggestions are provided
    */
@@ -263,12 +267,22 @@ export class VaSearch {
     this.inputRef.setAttribute('aria-activedescendant', suggestion.id);
   };
 
+  /**
+   * Updates formatting for all suggestions
+   */
+  private updateSuggestions = (suggestionsArr: string[]) => {
+    this.formattedSuggestions = suggestionsArr.map(suggestion =>
+      this.formatSuggestion(suggestion),
+    );
+  };
+
   render() {
     const {
       buttonText,
       formattedSuggestions,
       handleBlur,
       handleButtonClick,
+      handleInput,
       handleInputFocus,
       handleInputKeyDown,
       handleListboxClick,
@@ -311,6 +325,7 @@ export class VaSearch {
           aria-label={label}
           autocomplete="off"
           onFocus={handleInputFocus}
+          onInput={handleInput}
           onKeyDown={handleInputKeyDown}
           role={role}
           type={type}
