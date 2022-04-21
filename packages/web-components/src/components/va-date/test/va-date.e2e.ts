@@ -72,7 +72,7 @@ describe('va-date', () => {
     await handleMonth.select('7');
     await handleDay.select('21');
     // Click three times to select all text in input
-    await handleYear.click({ clickCount: 3 })
+    await handleYear.click({ clickCount: 3 });
     await handleYear.press('2');
     await handleYear.press('0');
     await handleYear.press('2');
@@ -120,5 +120,28 @@ describe('va-date', () => {
     expect(await inputYear.evaluate(node => node.getAttribute('max'))).toBe(
       '2022',
     );
+  });
+
+  it('fires an invalid message if date is invalid and component is required', async () => {
+    const page = await newE2EPage();
+    await page.setContent(
+      '<va-date value="1999-05-03" name="test" required="true" />',
+    );
+    const date = await page.find('va-date');
+    const handleYear = await page.$('pierce/[name="testYear"]');
+
+    // Click three times to select all text in input
+    await handleYear.click({ clickCount: 3 });
+    await handleYear.press('2');
+
+    await page.waitForChanges();
+    expect(date.getAttribute('invalid')).toEqual('Please provide a valid date');
+
+    await handleYear.press('0');
+    await handleYear.press('2');
+    await handleYear.press('2');
+
+    await page.waitForChanges();
+    expect(date.getAttribute('invalid')).toBeNull();
   });
 });
