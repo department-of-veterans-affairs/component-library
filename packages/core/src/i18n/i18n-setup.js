@@ -20,7 +20,7 @@ i18next.use(languageDetector).init({
 
 export { i18next };
 
-window.addEventListener('DOMContentLoaded', event => {
+window.addEventListener('load', event => {
   console.log('DOM fully loaded and parsed');
 
   const element = document.querySelector('main');
