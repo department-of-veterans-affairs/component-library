@@ -1,12 +1,21 @@
-/* eslint-disable react/prop-types */
 import React from 'react';
 import { getWebComponentDocs, propStructure } from './wc-helpers';
+import { generateEventsDescription } from './events';
 
 const additionalInfoDocs = getWebComponentDocs('va-additional-info');
 
 export default {
   title: 'Components/va-additional-info',
   parameters: {
+    componentSubtitle: `Additional Info web component`,
+    docs: {
+      description: {
+        component:
+          `<a className="vads-c-action-link--blue" href="https://design.va.gov/components/additional-info">View guidance for the Additional Info component in the Design System</a>` +
+          '\n' +
+          generateEventsDescription(additionalInfoDocs),
+      },
+    },
     actions: {
       handles: ['component-library-analytics'],
     },
