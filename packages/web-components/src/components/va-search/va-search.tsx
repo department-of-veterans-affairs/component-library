@@ -46,7 +46,7 @@ export class VaSearch {
   /**
    * The value of the input field
    */
-  @Prop() value?: string;
+  @Prop() value?: string = '';
 
   /**
    * If suggestions are provided, then format suggestions and open the listbox.
