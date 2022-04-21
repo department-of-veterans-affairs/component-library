@@ -12,7 +12,7 @@ export default {
     docs: {
       description: {
         component:
-          `<a className="vads-c-action-link--blue" href="https://design.va.gov/components/loading-indicator">View guidance for the Loading Indicator component in the Design System</a>` +
+          `<a className="vads-c-action-link--blue" href="https://design.va.gov/components/loading-indicators">View guidance for the Loading Indicator component in the Design System</a>` +
           '\n' +
           generateEventsDescription(loadingIndicatorDocs),
       },
