@@ -53,9 +53,8 @@ export class VaSearch {
    * Limits suggestions to 5 and sorts them.
    */
   componentDidLoad() {
-    if (!this.suggestions || !Array.isArray(this.suggestions)) return;
-    this.updateSuggestions(this.suggestions.slice(0, 5).sort());
-    this.isListboxOpen = true;
+    if (!Array.isArray(this.suggestions) || !this.suggestions?.length) return;
+    this.updateSuggestions(this.suggestions);
   }
 
   /**
@@ -65,8 +64,7 @@ export class VaSearch {
   @Watch('suggestions')
   watchSuggestionsHandler(newSuggestions: string[]) {
     if (!Array.isArray(newSuggestions)) return;
-    this.updateSuggestions(newSuggestions.slice(0, 5).sort());
-    this.isListboxOpen = true;
+    this.updateSuggestions(newSuggestions);
   }
 
   // Host event handlers
@@ -271,9 +269,18 @@ export class VaSearch {
    * Updates formatting for all suggestions
    */
   private updateSuggestions = (suggestionsArr: string[]) => {
-    this.formattedSuggestions = suggestionsArr.map(suggestion =>
-      this.formatSuggestion(suggestion),
-    );
+    // If it's an empty array, reset formatted suggestions and close the listbox
+    if (!suggestionsArr.length) {
+      this.formattedSuggestions = [];
+      this.isListboxOpen = false;
+      return;
+    }
+
+    this.formattedSuggestions = suggestionsArr
+      .slice(0, 5)
+      .sort()
+      .map(suggestion => this.formatSuggestion(suggestion));
+    this.isListboxOpen = true;
   };
 
   render() {
