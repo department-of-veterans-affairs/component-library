@@ -138,6 +138,12 @@ export class VaSearch {
         break;
       case 'Escape':
         this.inputRef.value = '';
+        this.inputRef.dispatchEvent(
+          new InputEvent('input', {
+            bubbles: true,
+            composed: true,
+          }),
+        );
         break;
       case 'Tab':
         this.isListboxOpen = false;
