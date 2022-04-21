@@ -62,6 +62,7 @@ describe('va-date', () => {
     const page = await newE2EPage();
     await page.setContent('<va-date value="1999-05-03" name="test" />');
 
+    const date = await page.find('va-date');
     const elementMonth = await page.find('va-date >>> .select-month');
     const elementDay = await page.find('va-date >>> .select-day');
     const elementYear = await page.find('va-date >>> .input-year');
@@ -82,6 +83,7 @@ describe('va-date', () => {
     expect(elementMonth.getAttribute('value')).toBe('7');
     expect(elementDay.getAttribute('value')).toBe('21');
     expect(elementYear.getAttribute('value')).toBe('2022');
+    expect(date.getAttribute('value')).toBe('2022-07-21');
   });
 
   it('sets the correct amount of days per month', async () => {

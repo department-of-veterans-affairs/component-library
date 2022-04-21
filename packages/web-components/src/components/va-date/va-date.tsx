@@ -121,11 +121,12 @@ export class VaDate {
       value,
     } = this;
 
-    const [year, month, day] = (value || '').split('-');
+    // Convert string to number to remove leading 0 on values less than 10
+    const [year, month, day] = (value || '')
+      .split('-')
+      .map(val => parseInt(val, 10));
 
-    // Convert string to number to remove leading 0 when matching to days object
-    const daysForSelectedMonth =
-      parseInt(month, 10) > 0 ? days[parseInt(month, 10)] : [];
+    const daysForSelectedMonth = month > 0 ? days[month] : [];
 
     // Check validity of date if invalid provide message and error state styling
     const dateInvalid =
@@ -154,8 +155,8 @@ export class VaDate {
             <va-select
               label="Month"
               name={`${name}Month`}
-              // Remove starting 0 on days less than 10
-              value={month ? month.replace(/^0+/, '') : ''}
+              // Value must be a string
+              value={month ? month.toString() : ''}
               onVaSelect={handleDateChange}
               onBlur={handleDateBlur}
               class="select-month"
@@ -171,12 +172,12 @@ export class VaDate {
               name={`${name}Day`}
               // If day value set is greater than amount of days in the month
               // set to empty string instead
-              // Remove starting 0 on days less than 10
+              // Value must be a string
               value={
                 daysForSelectedMonth.length < day
                   ? ''
                   : day
-                  ? day.replace(/^0+/, '')
+                  ? day.toString()
                   : ''
               }
               onVaSelect={handleDateChange}
@@ -194,7 +195,8 @@ export class VaDate {
               name={`${name}Year`}
               max={maxYear}
               min={minYear}
-              value={year}
+              // Value must be a string
+              value={year ? year.toString() : ''}
               onInput={handleDateChange}
               onBlur={handleDateBlur}
               class="input-year"
