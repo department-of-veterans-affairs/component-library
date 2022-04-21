@@ -10,11 +10,11 @@ import {
 } from '@stencil/core';
 
 @Component({
-  tag: 'va-search',
-  styleUrl: 'va-search.css',
+  tag: 'va-search-input',
+  styleUrl: 'va-search-input.css',
   shadow: true,
 })
-export class VaSearch {
+export class VaSearchInput {
   @Element() el: HTMLElement;
   inputRef!: HTMLInputElement;
 
@@ -39,7 +39,8 @@ export class VaSearch {
   @Prop() label?: string = 'Search';
 
   /**
-   * An array of strings containing suggestions to be displayed in listbox
+   * An array of strings containing suggestions to be displayed in listbox.
+   * This component displays up to 5 suggestions.
    */
   @Prop() suggestions?: any;
 

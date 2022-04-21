@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from 'react';
-import { VaSearch } from '@department-of-veterans-affairs/web-components/react-bindings';
+import { VaSearchInput } from '@department-of-veterans-affairs/web-components/react-bindings';
 import { getWebComponentDocs, propStructure } from './wc-helpers';
 import { generateEventsDescription } from './events';
 
-VaSearch.displayName = 'VaSearch';
+VaSearchInput.displayName = 'VaSearchInput';
 
-const searchDocs = getWebComponentDocs('va-search');
+const searchDocs = getWebComponentDocs('va-search-input');
 
 export default {
-  title: 'Components/va-search',
+  title: 'Components/va-search-input',
   parameters: {
-    componentSubtitle: 'Search web component',
+    componentSubtitle: 'Search Input web component',
     docs: {
       description: {
         component: generateEventsDescription(searchDocs),
@@ -20,7 +20,7 @@ export default {
 };
 
 const Template = ({ 'button-text': buttonText, value, label, suggestions }) => (
-  <VaSearch
+  <VaSearchInput
     buttonText={buttonText}
     value={value}
     label={label}
@@ -33,7 +33,7 @@ const Template = ({ 'button-text': buttonText, value, label, suggestions }) => (
 const defaultArgs = {
   'button-text': undefined,
   'value': 'benefits',
-  'label': undefined,
+  'label': 'Search',
   'suggestions': undefined,
 };
 
@@ -49,7 +49,7 @@ WithButtonText.args = {
   'button-text': 'Search',
 };
 
-const SuggestionsTemplate = ({ value, suggestions }) => {
+const TypeaheadTemplate = ({ value, suggestions }) => {
   const [text, setText] = useState(value);
   const [latestSuggestions, setLatestSuggestions] = useState(suggestions);
 
@@ -101,7 +101,7 @@ const SuggestionsTemplate = ({ value, suggestions }) => {
   }, [text]);
 
   return (
-    <div className="vads-u-padding--2" style={{ height: '400px' }}>
+    <div style={{ height: '400px' }}>
       <p>
         Start by typing '<strong>for</strong>'.
       </p>
@@ -109,7 +109,7 @@ const SuggestionsTemplate = ({ value, suggestions }) => {
         Suggestions will show up in this example for the following values: for,
         form, forms
       </p>
-      <VaSearch
+      <VaSearchInput
         value={value}
         onInput={handleInput}
         onSubmit={handleSubmit}
@@ -118,8 +118,8 @@ const SuggestionsTemplate = ({ value, suggestions }) => {
     </div>
   );
 };
-export const WithSuggestions = SuggestionsTemplate.bind({});
-WithSuggestions.args = {
+export const WithTypeahead = TypeaheadTemplate.bind({});
+WithTypeahead.args = {
   ...defaultArgs,
   value: '',
   suggestions: [],
