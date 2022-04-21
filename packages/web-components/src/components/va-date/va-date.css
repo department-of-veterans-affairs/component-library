@@ -40,7 +40,7 @@ span.required {
   display: block;
 }
 
-div {
+.date-container {
   display: flex;
 }
 

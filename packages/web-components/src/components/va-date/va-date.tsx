@@ -137,65 +137,70 @@ export class VaDate {
     // Error attribute should be leveraged for custom error messaging
     return (
       <Host value={value} invalid={dateInvalid}>
-        <label htmlFor="date-element">
-          {label || 'Date of birth'}{' '}
-          {required && <span class="required">(*Required)</span>}
-        </label>
-        {(error || dateInvalid) && (
-          <span class="error-message" role="alert">
-            <span class="sr-only">Error</span> {error || dateInvalid}
-          </span>
-        )}
-        <div>
-          <va-select
-            label="Month"
-            name={`${name}Month`}
-            // Remove starting 0 on days less than 10
-            value={month ? month.replace(/^0+/, '') : ''}
-            onVaSelect={handleDateChange}
-            onBlur={handleDateBlur}
-            class="select-month"
-          >
-            <option value=""></option>
-            {months &&
-              months.map(month => (
-                <option value={month.value}>{month.label}</option>
-              ))}
-          </va-select>
-          <va-select
-            label="Day"
-            name={`${name}Day`}
-            // If day value set is greater than amount of days in the month
-            // set to empty string instead
-            // Remove starting 0 on days less than 10
-            value={
-              daysForSelectedMonth.length < day
-                ? ''
-                : day
-                ? day.replace(/^0+/, '')
-                : ''
-            }
-            onVaSelect={handleDateChange}
-            onBlur={handleDateBlur}
-            class="select-day"
-          >
-            <option value=""></option>
-            {daysForSelectedMonth &&
-              daysForSelectedMonth.map(day => (
-                <option value={day}>{day}</option>
-              ))}
-          </va-select>
-          <va-number-input
-            label="Year"
-            name={`${name}Year`}
-            max={maxYear}
-            min={minYear}
-            value={year}
-            onInput={handleDateChange}
-            onBlur={handleDateBlur}
-            class="input-year"
-            inputmode="numeric"
-          />
+        <div
+          role="region"
+          aria-label="Select Month and two digit day XX and four digit year format XXX"
+        >
+          <label htmlFor="date-element">
+            {label || 'Date of birth'}{' '}
+            {required && <span class="required">(*Required)</span>}
+          </label>
+          {(error || dateInvalid) && (
+            <span class="error-message" role="alert">
+              <span class="sr-only">Error</span> {error || dateInvalid}
+            </span>
+          )}
+          <div class="date-container">
+            <va-select
+              label="Month"
+              name={`${name}Month`}
+              // Remove starting 0 on days less than 10
+              value={month ? month.replace(/^0+/, '') : ''}
+              onVaSelect={handleDateChange}
+              onBlur={handleDateBlur}
+              class="select-month"
+            >
+              <option value=""></option>
+              {months &&
+                months.map(month => (
+                  <option value={month.value}>{month.label}</option>
+                ))}
+            </va-select>
+            <va-select
+              label="Day"
+              name={`${name}Day`}
+              // If day value set is greater than amount of days in the month
+              // set to empty string instead
+              // Remove starting 0 on days less than 10
+              value={
+                daysForSelectedMonth.length < day
+                  ? ''
+                  : day
+                  ? day.replace(/^0+/, '')
+                  : ''
+              }
+              onVaSelect={handleDateChange}
+              onBlur={handleDateBlur}
+              class="select-day"
+            >
+              <option value=""></option>
+              {daysForSelectedMonth &&
+                daysForSelectedMonth.map(day => (
+                  <option value={day}>{day}</option>
+                ))}
+            </va-select>
+            <va-number-input
+              label="Year"
+              name={`${name}Year`}
+              max={maxYear}
+              min={minYear}
+              value={year}
+              onInput={handleDateChange}
+              onBlur={handleDateBlur}
+              class="input-year"
+              inputmode="numeric"
+            />
+          </div>
         </div>
       </Host>
     );
