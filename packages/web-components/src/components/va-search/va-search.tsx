@@ -171,6 +171,12 @@ export class VaSearch {
       `listbox-option-${index}`,
     );
     this.inputRef.value = suggestion.innerText;
+    this.inputRef.dispatchEvent(
+      new InputEvent('input', {
+        bubbles: true,
+        composed: true,
+      }),
+    );
     this.inputRef.removeAttribute('aria-activedescendant');
     this.isListboxOpen = false;
     this.handleSubmit();
@@ -204,6 +210,12 @@ export class VaSearch {
         break;
       case 'Enter':
         this.inputRef.value = options[index].innerText;
+        this.inputRef.dispatchEvent(
+          new InputEvent('input', {
+            bubbles: true,
+            composed: true,
+          }),
+        );
         this.inputRef.focus();
         this.inputRef.removeAttribute('aria-activedescendant');
         this.isListboxOpen = false;
@@ -211,6 +223,12 @@ export class VaSearch {
         break;
       case 'Escape':
         this.inputRef.value = '';
+        this.inputRef.dispatchEvent(
+          new InputEvent('input', {
+            bubbles: true,
+            composed: true,
+          }),
+        );
         this.inputRef.focus();
         this.inputRef.removeAttribute('aria-activedescendant');
         this.isListboxOpen = false;
