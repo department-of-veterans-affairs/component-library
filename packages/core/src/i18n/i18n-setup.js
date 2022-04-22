@@ -23,19 +23,15 @@ export { i18next };
 window.addEventListener('load', event => {
   console.log('DOM fully loaded and parsed');
 
-  const element =
-    document.getElementById('docs-root') || document.querySelector('main');
-  if (!element) console.log('didnt find main');
+  const element = document.querySelector('main');
 
   if (element) {
-    console.log('found main to attach event listener', element);
     const observer = new MutationObserver(mutations => {
       mutations.forEach(mutation => {
         if (
           mutation.type === 'attributes' &&
           mutation.attributeName === 'lang'
         ) {
-          console.log('firing changeLanguage');
           i18next.changeLanguage(element.getAttribute('lang'));
         }
       });
