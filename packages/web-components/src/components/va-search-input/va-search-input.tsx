@@ -81,12 +81,11 @@ export class VaSearchInput {
    * Fires a submit event
    */
   private handleSubmit = () => {
-    this.el.dispatchEvent(
-      new CustomEvent('submit', {
+    this.inputRef.dispatchEvent(
+      new SubmitEvent('submit', {
         bubbles: true,
         cancelable: true,
         composed: true,
-        detail: { value: this.inputRef.value },
       }),
     );
   };
@@ -120,18 +119,18 @@ export class VaSearchInput {
     const options = this.el.shadowRoot.querySelectorAll(
       '[role="option"]',
     ) as NodeListOf<HTMLLIElement>;
-    const firstOption = options[0];
-    const lastOption = options[options.length - 1];
 
     switch (event.key) {
       case 'ArrowDown':
         // Option doesn't exist if suggestions aren't provided
-        if (!firstOption) return;
+        if (!options?.length) return;
+        const firstOption = options[0];
         this.selectSuggestion(firstOption);
         break;
       case 'ArrowUp':
         // Option doesn't exist if suggestions aren't provided
-        if (!lastOption) return;
+        if (!options?.length) return;
+        const lastOption = options[options.length - 1];
         this.selectSuggestion(lastOption);
         break;
       case 'Enter':
