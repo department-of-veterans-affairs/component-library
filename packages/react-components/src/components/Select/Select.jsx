@@ -16,6 +16,9 @@ class Select extends React.Component {
   constructor() {
     super();
     this.handleChange = this.handleChange.bind(this);
+  }
+
+  componentDidMount() {
     i18next.on('languageChanged', () => {
       this.forceUpdate();
     });
