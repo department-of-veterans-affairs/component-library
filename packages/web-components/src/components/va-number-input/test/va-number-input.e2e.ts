@@ -43,7 +43,7 @@ describe('va-number-input', () => {
           <label for="inputField" part="label">
             This is a field <span class="required">(*Required)</span>
           </label>
-          <input id="inputField" part="input" type="number" required="" />
+          <input id="inputField" part="input" type="number" />
         </mock:shadow-root>
       </va-number-input>
     `);

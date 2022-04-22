@@ -117,7 +117,6 @@ export class VaNumberInput {
           onInput={this.handleInput}
           onBlur={this.handleBlur}
           part="input"
-          required={this.required || null}
         />
       </Host>
     );

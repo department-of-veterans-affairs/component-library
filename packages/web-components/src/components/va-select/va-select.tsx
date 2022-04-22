@@ -137,7 +137,6 @@ export class VaSelect {
           onKeyDown={() => this.handleKeyDown()}
           onChange={e => this.handleChange(e)}
           part="select"
-          required={required || null}
         >
           {this.options}
         </select>
