@@ -319,7 +319,7 @@ export namespace Components {
          */
         "disableAnalytics": boolean;
         /**
-          * `href` attribute for the `<a>` tag.
+          * `href` attribute for the anchor tag.
          */
         "href": string;
         /**
@@ -1115,7 +1115,7 @@ declare namespace LocalJSX {
          */
         "disableAnalytics"?: boolean;
         /**
-          * `href` attribute for the `<a>` tag.
+          * `href` attribute for the anchor tag.
          */
         "href"?: string;
         /**
