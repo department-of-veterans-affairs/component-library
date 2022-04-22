@@ -353,7 +353,7 @@ export namespace Components {
          */
         "disableAnalytics": boolean;
         /**
-          * `href` attribute for the `<a>` tag.
+          * `href` attribute for the anchor tag.
          */
         "href": string;
         /**
@@ -540,6 +540,10 @@ export namespace Components {
           * Set the input to required and render the (Required) text.
          */
         "required"?: boolean;
+        /**
+          * Adds styling based on status value
+         */
+        "status": 'success';
         /**
           * The type attribute.
          */
@@ -1198,7 +1202,7 @@ declare namespace LocalJSX {
          */
         "disableAnalytics"?: boolean;
         /**
-          * `href` attribute for the `<a>` tag.
+          * `href` attribute for the anchor tag.
          */
         "href"?: string;
         /**
@@ -1465,6 +1469,10 @@ declare namespace LocalJSX {
           * Set the input to required and render the (Required) text.
          */
         "required"?: boolean;
+        /**
+          * Adds styling based on status value
+         */
+        "status"?: 'success';
         /**
           * The type attribute.
          */
