@@ -1,0 +1,15 @@
+@import '../va-text-input/va-text-input.css';
+
+input:invalid {
+  border: 3px solid var(--color-secondary-dark);
+}
+
+input[type='number'] {
+  -moz-appearance: textfield;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
