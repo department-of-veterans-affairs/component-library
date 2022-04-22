@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { i18next } from '../../../../core/i18n-setup';
+import { i18next } from '../../../i18n-setup';
 import { uniqueId, isString } from '../../helpers/utilities';
 import { makeField } from '../../helpers/fields';
 
