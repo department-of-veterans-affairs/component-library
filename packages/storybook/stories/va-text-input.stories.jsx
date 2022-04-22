@@ -8,9 +8,13 @@ const textInputDocs = getWebComponentDocs('va-text-input');
 export default {
   title: 'Components/va-text-input',
   parameters: {
+    componentSubtitle: `Text Input web component`,
     docs: {
       description: {
-        component: generateEventsDescription(textInputDocs),
+        component:
+          `<a className="vads-c-action-link--blue" href="https://design.va.gov/components/form-controls#text-inputs">View guidance for the Text Input component in the Design System</a>` +
+          '\n' +
+          generateEventsDescription(textInputDocs),
       },
     },
   },
@@ -64,6 +68,7 @@ const Template = ({
   inputmode,
   type,
   'aria-describedby': ariaDescribedby,
+  status,
 }) => {
   return (
     <va-text-input
@@ -78,6 +83,7 @@ const Template = ({
       inputmode={inputmode}
       type={type}
       aria-describedby={ariaDescribedby}
+      status={status}
     />
   );
 };
@@ -88,6 +94,9 @@ Default.argTypes = propStructure(textInputDocs);
 
 export const Error = Template.bind({});
 Error.args = { ...defaultArgs, error: 'This is an error message' };
+
+export const Success = Template.bind({});
+Success.args = { ...defaultArgs, status: 'success' };
 
 export const Required = Template.bind({});
 Required.args = { ...defaultArgs, required: true };
