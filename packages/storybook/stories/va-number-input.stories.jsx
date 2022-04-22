@@ -7,9 +7,13 @@ const numberInputDocs = getWebComponentDocs('va-number-input');
 export default {
   title: 'Components/va-number-input',
   parameters: {
+    componentSubtitle: `Number Input web component`,
     docs: {
       description: {
-        component: generateEventsDescription(numberInputDocs),
+        component:
+          `<a className="vads-c-action-link--blue" href="https://design.va.gov/components/form-controls#text-inputs">View guidance for the Number Input component in the Design System</a>` +
+          '\n' +
+          generateEventsDescription(numberInputDocs),
       },
     },
   },
