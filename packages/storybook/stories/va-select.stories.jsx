@@ -8,9 +8,13 @@ const selectDocs = getWebComponentDocs('va-select');
 export default {
   title: 'Components/va-select',
   parameters: {
+    componentSubtitle: 'Select Box web component',
     docs: {
       description: {
-        component: generateEventsDescription(selectDocs),
+        component:
+          `<a className="vads-c-action-link--blue" href="https://design.va.gov/components/form-controls#select-box">View guidance for the Select Box component in the Design System</a>` +
+          '\n' +
+          generateEventsDescription(selectDocs),
       },
     },
   },
