@@ -143,7 +143,7 @@ export class VaDate {
           <legend>
             {label || 'Date of birth'}{' '}
             {required && (
-              <span class="required" aria-hidden="true">
+              <span class="required">
                 (*Required)
               </span>
             )}
@@ -162,7 +162,6 @@ export class VaDate {
               onVaSelect={handleDateChange}
               onBlur={handleDateBlur}
               class="select-month"
-              required={required || null}
             >
               <option value=""></option>
               {months &&
@@ -180,7 +179,6 @@ export class VaDate {
               onVaSelect={handleDateChange}
               onBlur={handleDateBlur}
               class="select-day"
-              required={required || null}
             >
               <option value=""></option>
               {daysForSelectedMonth &&
@@ -199,7 +197,6 @@ export class VaDate {
               onBlur={handleDateBlur}
               class="input-year"
               inputmode="numeric"
-              required={required || null}
             />
           </div>
         </fieldset>

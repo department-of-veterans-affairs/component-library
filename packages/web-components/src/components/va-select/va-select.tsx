@@ -121,7 +121,7 @@ export class VaSelect {
       <Host>
         <label htmlFor="select" part="label">
           {label}
-          {required && <span part="required" aria-hidden="true">(*Required)</span>}
+          {required && <span>(*Required)</span>}
         </label>
 
         {error && (

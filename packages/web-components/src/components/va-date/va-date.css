@@ -73,8 +73,3 @@ va-select::part(label),
 va-number-input::part(label) {
   margin-top: 0;
 }
-
-va-select::part(required),
-va-number-input::part(required) {
-  display: none;
-}

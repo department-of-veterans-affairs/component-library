@@ -99,7 +99,7 @@ export class VaNumberInput {
           <label htmlFor="inputField" part="label">
             {this.label}{' '}
             {this.required && (
-              <span class="required" part="required" aria-hidden="true">
+              <span class="required">
                 (*Required)
               </span>
             )}
