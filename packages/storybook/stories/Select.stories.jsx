@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import Select from '../../react-components/src/components/Select/Select';
+import { Select } from '../../react-components';
 
 export default {
   title: 'Components/Select (deprecated)',
