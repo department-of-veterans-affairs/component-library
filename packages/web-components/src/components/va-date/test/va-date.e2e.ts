@@ -41,7 +41,7 @@ describe('va-date', () => {
     const page = await newE2EPage();
     await page.setContent('<va-date label="This is a label" />');
 
-    const label = await page.find('va-date >>> label');
+    const label = await page.find('va-date >>> legend');
     expect(label.innerText).toContain('This is a label');
   });
 
@@ -145,5 +145,40 @@ describe('va-date', () => {
 
     await page.waitForChanges();
     expect(date.getAttribute('invalid')).toBeNull();
+  });
+
+  it('emits dateBlur event', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<va-date value="1999-05-03" name="test" />');
+
+    const handleMonth = await page.$('pierce/[name="testMonth"]');
+    const blurSpy = await page.spyOnEvent('dateBlur');
+    await handleMonth.press('Tab');
+
+    expect(blurSpy).toHaveReceivedEvent();
+  });
+
+  it('emits dateChange event when select or input value is updated', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<va-date value="1999-05-03" name="test" />');
+
+    const handleMonth = await page.$('pierce/[name="testMonth"]');
+    const handleDay = await page.$('pierce/[name="testDay"]');
+    const handleYear = await page.$('pierce/[name="testYear"]');
+    const spy = await page.spyOnEvent('dateChange');
+
+    await handleMonth.select('7');
+    await handleDay.select('21');
+
+    expect(spy).toHaveReceivedEventTimes(2);
+
+    await handleYear.press('2');
+    await handleYear.press('0');
+    await handleYear.press('2');
+    await handleYear.press('2');
+
+    expect(spy).toHaveReceivedEventTimes(6);
   });
 });

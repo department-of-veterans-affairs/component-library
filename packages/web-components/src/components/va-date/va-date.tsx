@@ -158,7 +158,7 @@ export class VaDate {
               label="Month"
               name={`${name}Month`}
               // Value must be a string
-              value={month ? month.toString() : ''}
+              value={month?.toString()}
               onVaSelect={handleDateChange}
               onBlur={handleDateBlur}
               class="select-month"
@@ -176,13 +176,7 @@ export class VaDate {
               // If day value set is greater than amount of days in the month
               // set to empty string instead
               // Value must be a string
-              value={
-                daysForSelectedMonth.length < day
-                  ? ''
-                  : day
-                  ? day.toString()
-                  : ''
-              }
+              value={daysForSelectedMonth.length < day ? '' : day?.toString()}
               onVaSelect={handleDateChange}
               onBlur={handleDateBlur}
               class="select-day"
@@ -200,7 +194,7 @@ export class VaDate {
               max={maxYear}
               min={minYear}
               // Value must be a string
-              value={year ? year.toString() : ''}
+              value={year?.toString()}
               onInput={handleDateChange}
               onBlur={handleDateBlur}
               class="input-year"
