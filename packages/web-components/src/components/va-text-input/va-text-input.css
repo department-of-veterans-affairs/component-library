@@ -39,7 +39,7 @@ input:not([disabled]):focus {
   display: block;
 }
 
-:host([error]) {
+:host([error]:not([error=''])) {
   border-left: 4px solid var(--color-secondary-dark);
   margin-top: 3rem;
   padding-bottom: 0.8rem;
@@ -49,12 +49,12 @@ input:not([disabled]):focus {
   right: 1.9rem;
 }
 
-:host([error]) label,
-:host([error]) span {
+:host([error]:not([error=''])) label,
+:host([error]:not([error=''])) span {
   font-weight: 700;
 }
 
-:host([error]) input {
+:host([error]:not([error=''])) input {
   border: 2px solid var(--color-secondary-dark);
 }
 

@@ -227,6 +227,44 @@ export namespace Components {
          */
         "visible": boolean;
     }
+    interface VaNumberInput {
+        /**
+          * Emit component-library-analytics events on the blur event.
+         */
+        "enableAnalytics"?: boolean;
+        /**
+          * The error message to render.
+         */
+        "error"?: string;
+        /**
+          * The inputmode attribute.
+         */
+        "inputmode"?: 'decimal' | 'numeric';
+        /**
+          * The label for the text input.
+         */
+        "label"?: string;
+        /**
+          * Maximum number value The max attribute specifies the maximum value for an `<input>` element.
+         */
+        "max": number | string;
+        /**
+          * Minimum number value The min attribute specifies the minimum value for an `<input>` element.
+         */
+        "min": number | string;
+        /**
+          * The name to pass to the input element.
+         */
+        "name"?: string;
+        /**
+          * Set the input to required and render the (Required) text.
+         */
+        "required"?: boolean;
+        /**
+          * The value for the input.
+         */
+        "value"?: string;
+    }
     interface VaOnThisPage {
         /**
           * If true, analytics event will not be fired
@@ -555,6 +593,12 @@ declare global {
         prototype: HTMLVaModalElement;
         new (): HTMLVaModalElement;
     };
+    interface HTMLVaNumberInputElement extends Components.VaNumberInput, HTMLStencilElement {
+    }
+    var HTMLVaNumberInputElement: {
+        prototype: HTMLVaNumberInputElement;
+        new (): HTMLVaNumberInputElement;
+    };
     interface HTMLVaOnThisPageElement extends Components.VaOnThisPage, HTMLStencilElement {
     }
     var HTMLVaOnThisPageElement: {
@@ -652,6 +696,7 @@ declare global {
         "va-featured-content": HTMLVaFeaturedContentElement;
         "va-loading-indicator": HTMLVaLoadingIndicatorElement;
         "va-modal": HTMLVaModalElement;
+        "va-number-input": HTMLVaNumberInputElement;
         "va-on-this-page": HTMLVaOnThisPageElement;
         "va-pagination": HTMLVaPaginationElement;
         "va-process-list": HTMLVaProcessListElement;
@@ -957,6 +1002,48 @@ declare namespace LocalJSX {
           * If the modal is visible or not
          */
         "visible"?: boolean;
+    }
+    interface VaNumberInput {
+        /**
+          * Emit component-library-analytics events on the blur event.
+         */
+        "enableAnalytics"?: boolean;
+        /**
+          * The error message to render.
+         */
+        "error"?: string;
+        /**
+          * The inputmode attribute.
+         */
+        "inputmode"?: 'decimal' | 'numeric';
+        /**
+          * The label for the text input.
+         */
+        "label"?: string;
+        /**
+          * Maximum number value The max attribute specifies the maximum value for an `<input>` element.
+         */
+        "max"?: number | string;
+        /**
+          * Minimum number value The min attribute specifies the minimum value for an `<input>` element.
+         */
+        "min"?: number | string;
+        /**
+          * The name to pass to the input element.
+         */
+        "name"?: string;
+        /**
+          * The event used to track usage of the component. This is emitted when the input is blurred and enableAnalytics is true.
+         */
+        "onComponent-library-analytics"?: (event: CustomEvent<any>) => void;
+        /**
+          * Set the input to required and render the (Required) text.
+         */
+        "required"?: boolean;
+        /**
+          * The value for the input.
+         */
+        "value"?: string;
     }
     interface VaOnThisPage {
         /**
@@ -1321,6 +1408,7 @@ declare namespace LocalJSX {
         "va-featured-content": VaFeaturedContent;
         "va-loading-indicator": VaLoadingIndicator;
         "va-modal": VaModal;
+        "va-number-input": VaNumberInput;
         "va-on-this-page": VaOnThisPage;
         "va-pagination": VaPagination;
         "va-process-list": VaProcessList;
@@ -1353,6 +1441,7 @@ declare module "@stencil/core" {
             "va-featured-content": LocalJSX.VaFeaturedContent & JSXBase.HTMLAttributes<HTMLVaFeaturedContentElement>;
             "va-loading-indicator": LocalJSX.VaLoadingIndicator & JSXBase.HTMLAttributes<HTMLVaLoadingIndicatorElement>;
             "va-modal": LocalJSX.VaModal & JSXBase.HTMLAttributes<HTMLVaModalElement>;
+            "va-number-input": LocalJSX.VaNumberInput & JSXBase.HTMLAttributes<HTMLVaNumberInputElement>;
             "va-on-this-page": LocalJSX.VaOnThisPage & JSXBase.HTMLAttributes<HTMLVaOnThisPageElement>;
             "va-pagination": LocalJSX.VaPagination & JSXBase.HTMLAttributes<HTMLVaPaginationElement>;
             "va-process-list": LocalJSX.VaProcessList & JSXBase.HTMLAttributes<HTMLVaProcessListElement>;
