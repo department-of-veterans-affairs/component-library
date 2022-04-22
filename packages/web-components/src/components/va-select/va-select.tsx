@@ -3,12 +3,20 @@ import {
   Element,
   Event,
   EventEmitter,
+  forceUpdate,
   Host,
   Prop,
   State,
   h,
 } from '@stencil/core';
+import i18next from 'i18next';
+import { Build } from '@stencil/core';
 import { getSlottedNodes } from '../../utils/utils';
+
+if (Build.isTesting) {
+  // Make i18next.t() return the key instead of the value
+  i18next.init({ lng: 'cimode' });
+}
 
 @Component({
   tag: 'va-select',
@@ -71,6 +79,12 @@ export class VaSelect {
 
   @State() options: Array<Node>;
 
+  connectedCallback() {
+    i18next.on('languageChanged', () => {
+      forceUpdate(this.el);
+    });
+  }
+
   private handleKeyDown() {
     this.vaKeyDown.emit();
   }
@@ -121,7 +135,7 @@ export class VaSelect {
       <Host>
         <label htmlFor="select">
           {label}
-          {required && <span>(*Required)</span>}
+          {required && <span>{`(*${i18next.t('required')})`}</span>}
         </label>
 
         {error && (
