@@ -47,7 +47,7 @@ export class VaSearchInput {
   /**
    * The value of the input field
    */
-  @Prop() value?: string = '';
+  @Prop({ mutable: true, reflect: true }) value?: string = '';
 
   /**
    * If suggestions are provided, then format suggestions and open the listbox.
@@ -137,7 +137,7 @@ export class VaSearchInput {
         this.handleSubmit();
         break;
       case 'Escape':
-        this.inputRef.value = '';
+        this.value = '';
         this.inputRef.dispatchEvent(
           new InputEvent('input', {
             bubbles: true,
@@ -170,7 +170,7 @@ export class VaSearchInput {
     const suggestion = this.el.shadowRoot.getElementById(
       `listbox-option-${index}`,
     );
-    this.inputRef.value = suggestion.innerText;
+    this.value = suggestion.innerText;
     this.inputRef.dispatchEvent(
       new InputEvent('input', {
         bubbles: true,
@@ -209,7 +209,7 @@ export class VaSearchInput {
         }
         break;
       case 'Enter':
-        this.inputRef.value = options[index].innerText;
+        this.value = options[index].innerText;
         this.inputRef.dispatchEvent(
           new InputEvent('input', {
             bubbles: true,
@@ -222,7 +222,7 @@ export class VaSearchInput {
         this.handleSubmit();
         break;
       case 'Escape':
-        this.inputRef.value = '';
+        this.value = '';
         this.inputRef.dispatchEvent(
           new InputEvent('input', {
             bubbles: true,
@@ -253,6 +253,8 @@ export class VaSearchInput {
         );
         break;
       default:
+        if (event.key.length !== 1) return;
+        this.value = this.value + event.key;
         this.inputRef.focus();
         break;
     }
