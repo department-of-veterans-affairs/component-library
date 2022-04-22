@@ -49,8 +49,8 @@ WithButtonText.args = {
   'button-text': 'Search',
 };
 
-const TypeaheadTemplate = ({ suggestions }) => {
-  const [text, setText] = useState('for');
+const TypeaheadTemplate = ({ value, suggestions }) => {
+  const [text, setText] = useState('');
   const [latestSuggestions, setLatestSuggestions] = useState(suggestions);
 
   const handleInput = e => {
@@ -111,7 +111,7 @@ const TypeaheadTemplate = ({ suggestions }) => {
         form, forms
       </p>
       <VaSearchInput
-        value="for"
+        value={value}
         onInput={handleInput}
         onSubmit={handleSubmit}
         suggestions={latestSuggestions}
@@ -122,5 +122,6 @@ const TypeaheadTemplate = ({ suggestions }) => {
 export const WithTypeahead = TypeaheadTemplate.bind({});
 WithTypeahead.args = {
   ...defaultArgs,
+  value: '',
   suggestions: [],
 };
