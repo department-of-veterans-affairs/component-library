@@ -50,7 +50,7 @@ WithButtonText.args = {
 };
 
 const TypeaheadTemplate = ({ value, suggestions }) => {
-  const [text, setText] = useState('');
+  const [text, setText] = useState(value);
   const [latestSuggestions, setLatestSuggestions] = useState(suggestions);
 
   const handleInput = e => {
