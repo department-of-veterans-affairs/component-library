@@ -24,8 +24,10 @@ window.addEventListener('load', event => {
   console.log('DOM fully loaded and parsed');
 
   const element = document.querySelector('main');
+  if (!element) console.log('didnt find main');
 
   if (element) {
+    console.log('found main to attach event listener', element);
     const observer = new MutationObserver(mutations => {
       mutations.forEach(mutation => {
         if (
