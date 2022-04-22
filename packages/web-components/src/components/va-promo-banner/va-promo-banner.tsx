@@ -19,7 +19,7 @@ export class VaPromoBanner {
   @Element() el: HTMLElement;
 
   /**
-   * `href` attribute for the `<a>` tag.
+   * `href` attribute for the anchor tag.
    */
   @Prop() href: string;
 

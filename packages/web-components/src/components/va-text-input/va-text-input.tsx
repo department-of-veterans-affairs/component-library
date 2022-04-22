@@ -94,6 +94,11 @@ export class VaTextInput {
   // $('va-text-input').getAttribute('value') will be incorrect
 
   /**
+   * Adds styling based on status value
+   */
+  @Prop() status: 'success';
+
+  /**
    * The event emitted when the input is blurred.
    */
   @Event() vaBlur: EventEmitter;

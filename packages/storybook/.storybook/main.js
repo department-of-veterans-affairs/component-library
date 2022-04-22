@@ -6,7 +6,7 @@ module.exports = {
     '@storybook/addon-a11y',
     '@storybook/addon-essentials',
     '@storybook/addon-links',
-    '@whitespace/storybook-addon-html'
+    '@whitespace/storybook-addon-html',
   ],
   core: {
     builder: 'webpack5',
@@ -23,12 +23,6 @@ module.exports = {
       use: ['style-loader', 'css-loader', 'sass-loader'],
       include: path.resolve(__dirname, '../'),
     });
-
-    // // This is so the docs page for each component can populate the args table.
-    // // The propTypes are stripped out in the built version, so we need to use
-    // // the source files
-    // config.resolve.alias['@department-of-veterans-affairs/component-library$'] =
-    //   path.resolve(__dirname, '../../react-components/src');
 
     // Return the altered config
     return config;

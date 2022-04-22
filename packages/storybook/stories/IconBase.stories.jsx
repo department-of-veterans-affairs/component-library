@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {IconBase} from '@department-of-veterans-affairs/component-library';
+import IconBase from '../../react-components/src/components/IconBase/IconBase';
 
 export default {
   title: 'Components/Icons/IconBase',

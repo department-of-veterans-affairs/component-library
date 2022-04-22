@@ -1,5 +1,5 @@
 import React from 'react';
-import { AcceptTermsPrompt } from '@department-of-veterans-affairs/component-library';
+import AcceptTermsPrompt from '../../react-components/src/components/AcceptTermsPrompt/AcceptTermsPrompt';
 
 export default {
   title: 'Components/AcceptTermsPrompt',
