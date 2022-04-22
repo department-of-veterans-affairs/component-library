@@ -21,6 +21,10 @@ class Select extends React.Component {
     });
   }
 
+  componentWillUnmount() {
+    i18next.off('languageChanged');
+  }
+
   UNSAFE_componentWillMount() {
     this.selectId = uniqueId('errorable-select-');
   }
