@@ -121,7 +121,7 @@ export class VaSelect {
       <Host>
         <label htmlFor="select" part="label">
           {label}
-          {required && <span>(*Required)</span>}
+          {required && <span part="required" aria-hidden="true">(*Required)</span>}
         </label>
 
         {error && (
@@ -137,6 +137,7 @@ export class VaSelect {
           onKeyDown={() => this.handleKeyDown()}
           onChange={e => this.handleChange(e)}
           part="select"
+          required={required || null}
         >
           {this.options}
         </select>

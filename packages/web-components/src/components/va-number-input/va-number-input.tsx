@@ -98,7 +98,11 @@ export class VaNumberInput {
         {this.label && (
           <label htmlFor="inputField" part="label">
             {this.label}{' '}
-            {this.required && <span class="required">(*Required)</span>}
+            {this.required && (
+              <span class="required" part="required" aria-hidden="true">
+                (*Required)
+              </span>
+            )}
           </label>
         )}
         {this.error && <span id="error-message">{this.error}</span>}
@@ -113,6 +117,7 @@ export class VaNumberInput {
           onInput={this.handleInput}
           onBlur={this.handleBlur}
           part="input"
+          required={this.required || null}
         />
       </Host>
     );

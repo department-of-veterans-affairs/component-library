@@ -19,7 +19,7 @@ export default {
 };
 
 const defaultArgs = {
-  'label': 'Test Label',
+  'label': 'Label should be specific',
   'name': 'test',
   'required': false,
   'error': undefined,

@@ -136,16 +136,18 @@ export class VaDate {
 
     // Setting new attribute to avoid conflicts with only using error attribute
     // Error attribute should be leveraged for custom error messaging
+    // Fieldset has an implicit aria role of group
     return (
       <Host value={value} invalid={dateInvalid}>
-        <div
-          role="region"
-          aria-label="Select Month and two digit day XX and four digit year format XXX"
-        >
-          <label htmlFor="date-element">
+        <fieldset aria-label="Select Month and two digit day XX and four digit year format XXX">
+          <legend>
             {label || 'Date of birth'}{' '}
-            {required && <span class="required">(*Required)</span>}
-          </label>
+            {required && (
+              <span class="required" aria-hidden="true">
+                (*Required)
+              </span>
+            )}
+          </legend>
           {(error || dateInvalid) && (
             <span class="error-message" role="alert">
               <span class="sr-only">Error</span> {error || dateInvalid}
@@ -160,6 +162,7 @@ export class VaDate {
               onVaSelect={handleDateChange}
               onBlur={handleDateBlur}
               class="select-month"
+              required={required || null}
             >
               <option value=""></option>
               {months &&
@@ -183,6 +186,7 @@ export class VaDate {
               onVaSelect={handleDateChange}
               onBlur={handleDateBlur}
               class="select-day"
+              required={required || null}
             >
               <option value=""></option>
               {daysForSelectedMonth &&
@@ -201,9 +205,10 @@ export class VaDate {
               onBlur={handleDateBlur}
               class="input-year"
               inputmode="numeric"
+              required={required || null}
             />
           </div>
-        </div>
+        </fieldset>
       </Host>
     );
   }
