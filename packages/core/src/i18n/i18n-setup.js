@@ -24,7 +24,7 @@ window.addEventListener('load', event => {
   console.log('DOM fully loaded and parsed');
 
   const element =
-    document.querySelector('main') || document.getElementById('docs-root');
+    document.getElementById('docs-root') || document.querySelector('main');
   if (!element) console.log('didnt find main');
 
   if (element) {
