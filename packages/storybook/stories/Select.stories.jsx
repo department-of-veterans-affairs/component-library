@@ -67,3 +67,32 @@ WithAnalytics.args = {
   ...defaultArgs,
   enableAnalytics: true,
 };
+
+const I18nTemplate = args => {
+  const [value, setValue] = useState(args.value);
+  const onValueChange = newValue => {
+    setValue(newValue);
+  };
+
+  const langToEnglish = () => {
+    document.querySelector('main').setAttribute('lang', 'en');
+  };
+
+  const langToSpanish = () => {
+    document.querySelector('main').setAttribute('lang', 'es');
+  };
+
+  return (
+    <div>
+      <button onClick={langToSpanish}>Español</button>
+      <button onClick={langToEnglish}>English</button>
+      <Select {...args} value={value} onValueChange={onValueChange} />
+    </div>
+  );
+};
+
+export const Internationalization = I18nTemplate.bind({});
+Internationalization.args = {
+  ...defaultArgs,
+  required: true,
+};
