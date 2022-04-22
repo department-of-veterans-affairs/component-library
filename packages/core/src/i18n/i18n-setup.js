@@ -32,6 +32,7 @@ window.addEventListener('load', event => {
           mutation.type === 'attributes' &&
           mutation.attributeName === 'lang'
         ) {
+          console.log('firing changeLanguage');
           i18next.changeLanguage(element.getAttribute('lang'));
         }
       });
