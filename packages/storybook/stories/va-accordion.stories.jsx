@@ -83,7 +83,7 @@ const I18nTemplate = args => {
 
   useEffect(() => {
     document.querySelector('main').setAttribute('lang', lang);
-  }, lang);
+  }, [lang]);
 
   return (
     <div>
