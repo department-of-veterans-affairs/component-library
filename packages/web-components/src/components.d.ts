@@ -507,6 +507,10 @@ export namespace Components {
          */
         "required"?: boolean;
         /**
+          * Adds styling based on status value
+         */
+        "status": 'success';
+        /**
           * The type attribute.
          */
         "type"?: 'email' | 'number' | 'search' | 'tel' | 'text' | 'url';
@@ -1378,6 +1382,10 @@ declare namespace LocalJSX {
           * Set the input to required and render the (Required) text.
          */
         "required"?: boolean;
+        /**
+          * Adds styling based on status value
+         */
+        "status"?: 'success';
         /**
           * The type attribute.
          */
