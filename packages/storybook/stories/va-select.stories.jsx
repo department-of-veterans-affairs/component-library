@@ -107,15 +107,11 @@ const I18nTemplate = args => {
   const { options, ...rest } = args;
 
   const langToEnglish = () => {
-    const main = document.querySelector('main');
-    console.log(main);
-    main?.setAttribute('lang', 'en');
+    document.querySelector('main').setAttribute('lang', 'en');
   };
 
   const langToSpanish = () => {
-    const main = document.querySelector('main');
-    console.log(main);
-    main?.setAttribute('lang', 'es');
+    document.querySelector('main').setAttribute('lang', 'es');
   };
 
   return (
