@@ -156,7 +156,7 @@ describe('<NumberInput>', () => {
 
     const label = tree.find('label');
     expect(label.text()).to.equal('my label');
-    expect(label.find('span.required')).to.be.empty;
+    expect(label.find('span.form-required-span')).to.have.length(0);
     tree.unmount();
   });
 
@@ -172,7 +172,7 @@ describe('<NumberInput>', () => {
 
     const label = tree.find('label');
     expect(label.text()).to.contain('my label');
-    expect(label.find('span.required')).to.exist;
+    expect(label.find('span.form-required-span')).to.have.length(1);
     tree.unmount();
   });
 
