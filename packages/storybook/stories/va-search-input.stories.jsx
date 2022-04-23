@@ -54,15 +54,12 @@ const TypeaheadTemplate = ({ value, suggestions }) => {
   const [latestSuggestions, setLatestSuggestions] = useState(suggestions);
 
   const handleInput = e => {
-    console.log(e);
-    // event.composedPath()[0].value outside of React
-    setText(e.nativeEvent.composedPath()[0].value);
+    console.log(e.target.value);
+    setText(e.target.value);
   };
 
   const handleSubmit = e => {
-    console.log(e);
-    // event.composedPath()[0].value outside of React
-    console.log(e.nativeEvent.composedPath()[0].value);
+    console.log(e.target.value);
   };
 
   /**
@@ -111,7 +108,7 @@ const TypeaheadTemplate = ({ value, suggestions }) => {
         form, forms
       </p>
       <VaSearchInput
-        value={value}
+        value={text}
         onInput={handleInput}
         onSubmit={handleSubmit}
         suggestions={latestSuggestions}
