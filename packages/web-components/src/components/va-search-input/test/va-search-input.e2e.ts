@@ -43,7 +43,7 @@ describe('va-search-input', () => {
 
     const element = await page.find('va-search-input');
     expect(element).toEqualHtml(`
-      <va-search-input button-text="Search VA.gov" class="hydrated">
+      <va-search-input button-text="Search VA.gov" class="hydrated" value="">
         <mock:shadow-root>
           <input aria-autocomplete="none" aria-label="Search" autocomplete="off" id="va-search-input" type="text">
           <button aria-label="Search" id="va-search-button" type="submit">
@@ -305,9 +305,7 @@ describe('va-search-input', () => {
     await input.press('s');
     await input.press('Enter');
 
-    expect(submitSpy).toHaveReceivedEventDetail({
-      value: 'Forms',
-    });
+    expect(submitSpy).toHaveReceivedEvent();
   });
 
   it('fires submit event when a suggestion is clicked', async () => {
@@ -332,9 +330,7 @@ describe('va-search-input', () => {
     );
     await firstSuggestion.click();
 
-    expect(submitSpy).toHaveReceivedEventDetail({
-      value: 'benefits for assisted living',
-    });
+    expect(submitSpy).toHaveReceivedEvent();
   });
 
   it('displays up to 5 suggestions but not more', async () => {
