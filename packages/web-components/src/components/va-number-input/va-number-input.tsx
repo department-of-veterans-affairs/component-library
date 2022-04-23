@@ -6,7 +6,9 @@ import {
   h,
   Event,
   EventEmitter,
+  forceUpdate
 } from '@stencil/core';
+import i18next from 'i18next';
 
 @Component({
   tag: 'va-number-input',
@@ -92,13 +94,19 @@ export class VaNumberInput {
     }
   };
 
+  connectedCallback() {
+    i18next.on('languageChanged', () => {
+      forceUpdate(this.el);
+    });
+  }
+
   render() {
     return (
       <Host>
         {this.label && (
           <label htmlFor="inputField">
             {this.label}{' '}
-            {this.required && <span class="required">(*Required)</span>}
+            {this.required && <span class="required">(*{i18next.t('required')})</span>}
           </label>
         )}
         {this.error && <span id="error-message">{this.error}</span>}
