@@ -149,6 +149,8 @@ export class VaSearchInput {
         this.isListboxOpen = false;
         break;
       default:
+        if (event.key.length !== 1) return;
+        this.value = this.value + event.key;
         break;
     }
   };
