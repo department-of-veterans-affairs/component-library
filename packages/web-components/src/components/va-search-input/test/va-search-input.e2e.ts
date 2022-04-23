@@ -305,9 +305,7 @@ describe('va-search-input', () => {
     await input.press('s');
     await input.press('Enter');
 
-    expect(submitSpy).toHaveReceivedEventDetail({
-      value: 'Forms',
-    });
+    expect(submitSpy).toHaveReceivedEvent();
   });
 
   it('fires submit event when a suggestion is clicked', async () => {
@@ -332,9 +330,7 @@ describe('va-search-input', () => {
     );
     await firstSuggestion.click();
 
-    expect(submitSpy).toHaveReceivedEventDetail({
-      value: 'benefits for assisted living',
-    });
+    expect(submitSpy).toHaveReceivedEvent();
   });
 
   it('displays up to 5 suggestions but not more', async () => {
