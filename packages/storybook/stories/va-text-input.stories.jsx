@@ -97,7 +97,7 @@ export const Error = Template.bind({});
 Error.args = { ...defaultArgs, error: 'This is an error message' };
 
 export const Success = Template.bind({});
-Success.args = { ...defaultArgs, status: 'success' };
+Success.args = { ...defaultArgs, success: true };
 
 export const Required = Template.bind({});
 Required.args = { ...defaultArgs, required: true };
