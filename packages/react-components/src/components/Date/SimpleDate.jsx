@@ -94,7 +94,7 @@ export const SimpleDate = ({
           <div className="form-datefield-month">
             <Select
               errorMessage={errorMessage && ''}
-              label="Month"
+              label={i18next.t('month')}
               name={`${name}Month`}
               options={months}
               value={month}
@@ -108,7 +108,7 @@ export const SimpleDate = ({
           <div className="form-datefield-day">
             <Select
               errorMessage={errorMessage && ''}
-              label="Day"
+              label={i18next.t('day')}
               name={`${name}Day`}
               options={daysForSelectedMonth}
               value={day}
@@ -122,7 +122,7 @@ export const SimpleDate = ({
           <div className="usa-datefield usa-form-group usa-form-group-year">
             <NumberInput
               errorMessage={errorMessage && ''}
-              label="Year"
+              label={i18next.t('year')}
               name={`${name}Year`}
               max={maxYear}
               min={minYear}
