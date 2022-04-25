@@ -8,6 +8,7 @@ This is a monorepo containing two main packages:
 - `web-components`
 
 The `core` package is for bundling the two main packages into one for publishing. The `storybook` package is for the combined story files from each `*-components` package.
+The `design-system-dashboard-cli` package is used to gather metrics on design system usage.
 
 ## Contributing
 
@@ -52,6 +53,7 @@ Once a release is created, an attempt will be made to automatically publish the 
 1. `cd packages/web-components/`
     1. `yarn install`
     2. `yarn build`
+    3. `yarn build-bindings`
 2. `cd ../react-components/`
     1. `yarn install`
     2. `yarn build`
