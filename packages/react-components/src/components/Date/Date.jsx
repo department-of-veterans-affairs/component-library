@@ -1,6 +1,7 @@
 /* eslint-disable jsx-a11y/label-has-for */
 import PropTypes from 'prop-types';
 import React from 'react';
+import i18next from 'i18next';
 
 import SimpleDate from './SimpleDate';
 
@@ -37,7 +38,7 @@ const Date = props => {
   } else if (year.value.length >= 4) {
     const yr = parseInt(year.value, 10);
     if (yr < minYear || yr > maxYear) {
-      errorMessage = `Please enter a year between ${minYear} and ${maxYear}`;
+      errorMessage = i18next.t('year-range', { start: minYear, end: maxYear });
     }
   }
 
