@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { generateEventsDescription } from './events';
 import { getWebComponentDocs, propStructure } from './wc-helpers';
 
@@ -104,20 +104,17 @@ export const DynamicOptions = Template.bind({});
 DynamicOptions.args = { ...defaultArgs, 'use-add-button': true };
 
 const I18nTemplate = args => {
+  const [lang, setLang] = useState('en');
   const { options, ...rest } = args;
 
-  const langToEnglish = () => {
-    document.querySelector('main').setAttribute('lang', 'en');
-  };
-
-  const langToSpanish = () => {
-    document.querySelector('main').setAttribute('lang', 'es');
-  };
+  useEffect(() => {
+    document.querySelector('main').setAttribute('lang', lang);
+  }, [lang]);
 
   return (
     <div>
-      <button onClick={langToSpanish}>Español</button>
-      <button onClick={langToEnglish}>English</button>
+      <button onClick={e => setLang('es')}>Español</button>
+      <button onClick={e => setLang('en')}>English</button>
       <va-select {...rest}>{options}</va-select>
     </div>
   );
