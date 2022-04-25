@@ -1,5 +1,6 @@
 import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
+import i18next from 'i18next';
 import { uniqueId } from '../../helpers/utilities';
 
 import Select from '../Select/Select';
@@ -51,7 +52,7 @@ export const SimpleDate = ({
     errorSpanId = `${inputId.current}-error-message`;
     errorSpan = (
       <span className="usa-input-error-message" role="alert" id={errorSpanId}>
-        <span className="sr-only">Error</span> {errorMessage}
+        <span className="sr-only">{i18next.t('error')}</span> {errorMessage}
       </span>
     );
   }
