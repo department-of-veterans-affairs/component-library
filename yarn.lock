@@ -1965,7 +1965,6 @@ __metadata:
     babel-loader: ^8.2.2
     body-scroll-lock: ^4.0.0-beta.0
     classnames: ^2.3.1
-    focusable-selectors: ^0.3.1
     intersection-observer: ^0.12.0
     jest: ^26.6.3
     jest-cli: ^26.6.3
@@ -9622,13 +9621,6 @@ __metadata:
   dependencies:
     tslib: ^2.0.3
   checksum: 4be2cbc0217410413f617c03720df74c3c950983f5914aa8b82c6a7ce98fab873e22e5af0818f6832d1249f86ef33357c7dc344074a09206134657d1f53915d7
-  languageName: node
-  linkType: hard
-
-"focusable-selectors@npm:^0.3.1":
-  version: 0.3.1
-  resolution: "focusable-selectors@npm:0.3.1"
-  checksum: 79a978f9f9fe059fbbc1602b17c1852d9404658c3fb4618545ad9e9bf398a8d0bf13d4ccb602e423a4cd68b08f165bb260d4806da1a6aedb95fbae4ee3acd4fd
   languageName: node
   linkType: hard
 
