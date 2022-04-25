@@ -54,6 +54,7 @@ const defaultArgs = {
   'inputmode': undefined,
   'type': undefined,
   'aria-describedby': undefined,
+  'success': false,
 };
 
 const Template = ({
@@ -68,7 +69,7 @@ const Template = ({
   inputmode,
   type,
   'aria-describedby': ariaDescribedby,
-  status,
+  success,
 }) => {
   return (
     <va-text-input
@@ -83,7 +84,7 @@ const Template = ({
       inputmode={inputmode}
       type={type}
       aria-describedby={ariaDescribedby}
-      status={status}
+      success={success}
     />
   );
 };

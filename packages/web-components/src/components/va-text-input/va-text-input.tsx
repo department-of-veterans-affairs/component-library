@@ -96,7 +96,7 @@ export class VaTextInput {
   /**
    * Adds styling based on status value
    */
-  @Prop() status: 'success';
+  @Prop() success?: boolean;
 
   /**
    * The event emitted when the input is blurred.
