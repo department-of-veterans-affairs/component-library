@@ -7,11 +7,12 @@ import {
   h,
   Listen,
   Prop,
+  State,
   Watch,
 } from '@stencil/core';
-import { createFocusTrap, FocusTrap } from 'focus-trap';
 import { clearAllBodyScrollLocks, disableBodyScroll } from 'body-scroll-lock';
 import { hideOthers, Undo } from 'aria-hidden';
+import { focusableQueryString } from '../../utils/utils';
 
 /**
  * @click Used to detect clicks outside of modal contents to close modal.
@@ -39,10 +40,11 @@ export class VaModal {
   // set up or tear down the modal.
   isVisibleDirty: boolean;
 
-  focusTrap: FocusTrap;
-
   // This variable is used to undo aria-hidden on modal close.
   undoAriaHidden: Undo;
+
+  // This stores reference to previously focused element
+  savedFocus: HTMLElement;
 
   @Element() el: HTMLElement;
 
@@ -126,6 +128,16 @@ export class VaModal {
    */
   @Prop() visible: boolean = false;
 
+  /**
+   * Local state to track if the shift key is pressed
+   */
+  @State() shifted: boolean = false;
+
+  /**
+   * Save focusable children within the modal. Populated on setup
+   */
+  @State() focusableChildren: HTMLElement[] = null;
+
   // This click event listener is used to close the modal when clickToClose
   // is true and the user clicks the overlay outside of the modal contents.
   @Listen('click')
@@ -148,6 +160,27 @@ export class VaModal {
     const keyCode = e.key;
     if (keyCode === 'Escape') {
       this.handleClose(e);
+    }
+
+    // shift key state used for focus trap. The FocusEvent does not include a
+    // way to check the key state
+    this.shifted = e.shiftKey;
+  }
+
+  // This focusin event listener is used to trap focus within the modal. When
+  // the focus is on an element outside of the modal, it is moved back to an
+  // appropriate element within the modal, depending on the shift key state
+  @Listen('focusin', { target: 'body' })
+  handleFocus(e: FocusEvent) {
+    if (this.visible) {
+      // focus path
+      const path = Array.from(e.composedPath());
+      // The focus is outside the modal
+      if (!path.includes(this.el)) {
+        e.preventDefault();
+        const focusIndex = this.shifted ? this.focusableChildren.length - 1 : 0;
+        this.focusableChildren[focusIndex]?.focus();
+      }
     }
   }
 
@@ -194,37 +227,66 @@ export class VaModal {
     this.secondaryButtonClick.emit(e);
   }
 
+  // Pass in an array of focusable elements and return non-hidden and elements
+  // inside the shadow DOM; note: when an element inside a web component has
+  // focus, document.activeElement will point to the web component itself
+  private getFocusableChildren() {
+    const modalContent = Array.from(
+      this.el?.querySelectorAll(focusableQueryString) || [],
+    );
+    const actionButtons = Array.from(
+      this.alertActions?.querySelectorAll(focusableQueryString) || [],
+    );
+
+    // maintain tab order
+    return [
+      this.closeButton, // close button first
+      ...modalContent,
+      ...actionButtons, // action buttons last
+    ].reduce(
+      (focusableElms, elm: HTMLElement) => {
+        // find not-hidden elements
+        if (elm && (elm.offsetWidth || elm.offsetHeight)) {
+          // hydrated class likely on web components
+          if (elm.classList.contains('hydrated')) {
+            const shadowElms = Array.from(
+              elm.shadowRoot.querySelectorAll(focusableQueryString) || [],
+            );
+            if (shadowElms.length) {
+              // add the web component and focusable shadow elements
+              // document.activeElement targets the web component but the event
+              // is composed, so crosses shadow DOM and shows up in composedPath
+              focusableElms.push(elm);
+              return focusableElms.concat(shadowElms);
+            }
+          } else {
+            focusableElms.push(elm);
+          }
+        }
+        return focusableElms;
+      },
+      [],
+    );
+  }
+
   // This method traps the focus inside our web component, prevents scrolling outside
   // the modal, and adds aria-hidden="true" to all elements outside the web component.
   // Fires analytics event unless disableAnalytics is true.
   private setupModal() {
+    // Save previous focus & restore when modal is closed
+    this.savedFocus = document.activeElement as HTMLElement;
+
+    // find all focusable children within the modal, but maintain tab order
+    this.focusableChildren = this.getFocusableChildren();
+
     // If an initialFocusSelector is provided, the element will be focused on modal open
     // if it exists. You are able to focus elements in both light and shadow DOM.
-    const initialFocus = (this.el.querySelector(this.initialFocusSelector) ||
-      this.el.shadowRoot.querySelector(
-        this.initialFocusSelector,
-      )) as HTMLElement;
-
-    // These containers and their order are required to ensure predictable keyboard
-    // navigation within the focus trap.
-    this.focusTrap = createFocusTrap(
-      [this.el, this.alertActions, this.closeButtonContainer],
-      {
-        // This is set to false because we don't want the user to disable the focus trap using
-        // the escape key.
-        escapeDeactivates: false,
-
-        // This is used to determine what element to focus on modal open.
-        // If initialFocusSelector is specified, focus will be received by that element.
-        // If initialFocusSelector is specified and the element isn't found, focus will be received by
-        // the close button.
-        // If initialFocusSelector is not specified, focus will be received by the close button.
-        initialFocus: initialFocus || this.closeButton,
-      },
-    );
-
-    // Traps focus inside modal
-    this.focusTrap.activate();
+    const initialFocus = (
+      this.el.querySelector(this.initialFocusSelector) ||
+      this.el.shadowRoot.querySelector(this.initialFocusSelector) ||
+      this.closeButton
+    ) as HTMLElement;
+    initialFocus.focus();
 
     // Prevents scrolling outside modal
     disableBodyScroll(this.el);
@@ -257,11 +319,11 @@ export class VaModal {
   // This method removes the focus trap, re-enables scrolling and
   // removes aria-hidden="true" from external elements.
   private teardownModal() {
-    this.focusTrap.deactivate();
     clearAllBodyScrollLocks();
-    this.undoAriaHidden();
+    this.undoAriaHidden?.();
 
     document.body.classList.remove('modal-open');
+    this.savedFocus?.focus();
   }
 
   render() {
