@@ -1,5 +1,6 @@
 import React from 'react';
 import { expect } from 'chai';
+import i18next from 'i18next';
 import { render } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { spy } from 'sinon';
@@ -32,9 +33,11 @@ describe('<SimpleDate>', () => {
     const { getByLabelText } = render(
       <SimpleDate date={date} onValueChange={() => {}} />,
     );
-    expect(getByLabelText('Year')).to.not.be.null;
-    expect(getByLabelText('Month')).to.not.be.null;
-    expect(getByLabelText('Day')).to.not.be.null;
+
+    // These are the keys for i18next translations
+    expect(getByLabelText('year')).to.not.be.null;
+    expect(getByLabelText('month')).to.not.be.null;
+    expect(getByLabelText('day')).to.not.be.null;
   });
 
   it('should pass aXe check', () => {
@@ -76,9 +79,9 @@ describe('<SimpleDate>', () => {
       />,
     );
     [
-      getByLabelText('Year'),
-      getByLabelText('Month'),
-      getByLabelText('Day'),
+      getByLabelText('year'),
+      getByLabelText('month'),
+      getByLabelText('day'),
     ].forEach(el => {
       expect(el.getAttribute('aria-describedby')).to.equal('test-id');
     });
@@ -103,15 +106,15 @@ describe('<SimpleDate>', () => {
       />,
     );
 
-    const numberAria = getByLabelText('Year').getAttribute('aria-describedby');
+    const numberAria = getByLabelText('year').getAttribute('aria-describedby');
     // "date-input-##-error-message test-id"
     expect(numberAria).to.contain('date-input-');
     expect(numberAria).to.contain('-error-message');
     expect(numberAria).to.contain('test-id');
     [
-      getByLabelText('Year'),
-      getByLabelText('Month'),
-      getByLabelText('Day'),
+      getByLabelText('year'),
+      getByLabelText('month'),
+      getByLabelText('day'),
     ].forEach(el => {
       expect(numberAria).to.contain('date-input-');
       expect(numberAria).to.contain('-error-message');
@@ -156,7 +159,7 @@ describe('<SimpleDate>', () => {
 
     it('when the day field is blurred', done => {
       const { onBlur, getByTestId, getByLabelText } = renderDate();
-      userEvent.click(getByLabelText('Day'));
+      userEvent.click(getByLabelText('day'));
       userEvent.click(getByTestId('foo'));
       setTimeout(() => {
         expect(onBlur.called).to.be.true;
@@ -166,7 +169,7 @@ describe('<SimpleDate>', () => {
 
     it('when the month field is blurred', done => {
       const { onBlur, getByTestId, getByLabelText } = renderDate();
-      userEvent.click(getByLabelText('Month'));
+      userEvent.click(getByLabelText('month'));
       userEvent.click(getByTestId('foo'));
       setTimeout(() => {
         expect(onBlur.called).to.be.true;
@@ -176,7 +179,7 @@ describe('<SimpleDate>', () => {
 
     it('when the year field is blurred', done => {
       const { onBlur, getByTestId, getByLabelText } = renderDate();
-      userEvent.click(getByLabelText('Year'));
+      userEvent.click(getByLabelText('year'));
       userEvent.click(getByTestId('foo'));
       setTimeout(() => {
         expect(onBlur.called).to.be.true;
@@ -198,12 +201,12 @@ describe('<SimpleDate>', () => {
       </>,
     );
     // Navigate back and forth through the date fields
-    userEvent.click(getByLabelText('Month'));
-    userEvent.click(getByLabelText('Day'));
-    userEvent.click(getByLabelText('Year'));
-    userEvent.click(getByLabelText('Month'));
-    userEvent.click(getByLabelText('Day'));
-    userEvent.click(getByLabelText('Year'));
+    userEvent.click(getByLabelText('month'));
+    userEvent.click(getByLabelText('day'));
+    userEvent.click(getByLabelText('year'));
+    userEvent.click(getByLabelText('month'));
+    userEvent.click(getByLabelText('day'));
+    userEvent.click(getByLabelText('year'));
     setTimeout(() => {
       expect(onBlur.called).to.be.false;
       done();
