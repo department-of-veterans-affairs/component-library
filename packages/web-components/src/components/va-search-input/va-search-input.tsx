@@ -94,8 +94,9 @@ export class VaSearchInput {
   /**
    * Updates suggestion formatting as user types
    */
-  private handleInput = () => {
+  private handleInput = (event: Event) => {
     if (!this.suggestions) return;
+    this.value = (event.target as HTMLInputElement).value;
     this.updateSuggestions(this.suggestions);
   };
 
@@ -149,8 +150,6 @@ export class VaSearchInput {
         this.isListboxOpen = false;
         break;
       default:
-        if (event.key.length !== 1) return;
-        this.value = this.value + event.key;
         break;
     }
   };
@@ -173,12 +172,12 @@ export class VaSearchInput {
       `listbox-option-${index}`,
     );
     this.value = suggestion.innerText;
-    this.inputRef.dispatchEvent(
-      new InputEvent('input', {
-        bubbles: true,
-        composed: true,
-      }),
-    );
+    // this.inputRef.dispatchEvent(
+    //   new InputEvent('input', {
+    //     bubbles: true,
+    //     composed: true,
+    //   }),
+    // );
     this.inputRef.removeAttribute('aria-activedescendant');
     this.isListboxOpen = false;
     this.handleSubmit();
@@ -212,12 +211,6 @@ export class VaSearchInput {
         break;
       case 'Enter':
         this.value = options[index].innerText;
-        this.inputRef.dispatchEvent(
-          new InputEvent('input', {
-            bubbles: true,
-            composed: true,
-          }),
-        );
         this.inputRef.focus();
         this.inputRef.removeAttribute('aria-activedescendant');
         this.isListboxOpen = false;
@@ -225,12 +218,12 @@ export class VaSearchInput {
         break;
       case 'Escape':
         this.value = '';
-        this.inputRef.dispatchEvent(
-          new InputEvent('input', {
-            bubbles: true,
-            composed: true,
-          }),
-        );
+        // this.inputRef.dispatchEvent(
+        //   new InputEvent('input', {
+        //     bubbles: true,
+        //     composed: true,
+        //   }),
+        // );
         this.inputRef.focus();
         this.inputRef.removeAttribute('aria-activedescendant');
         this.isListboxOpen = false;
@@ -255,8 +248,6 @@ export class VaSearchInput {
         );
         break;
       default:
-        if (event.key.length !== 1) return;
-        this.value = this.value + event.key;
         this.inputRef.focus();
         break;
     }

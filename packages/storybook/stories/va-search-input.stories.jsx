@@ -108,7 +108,7 @@ const TypeaheadTemplate = ({ value, suggestions }) => {
         form, forms
       </p>
       <VaSearchInput
-        value={text}
+        value={value}
         onInput={handleInput}
         onSubmit={handleSubmit}
         suggestions={latestSuggestions}
