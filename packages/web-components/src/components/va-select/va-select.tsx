@@ -85,6 +85,10 @@ export class VaSelect {
     });
   }
 
+  disconnectedCallback() {
+    i18next.off('languageChanged');
+  }
+
   private handleKeyDown() {
     this.vaKeyDown.emit();
   }
