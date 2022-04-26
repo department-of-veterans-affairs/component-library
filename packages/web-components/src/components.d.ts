@@ -245,11 +245,11 @@ export namespace Components {
          */
         "label"?: string;
         /**
-          * Maximum number value The max attribute specifies the maximum value for an `<input>` element.
+          * Maximum number value The max attribute specifies the maximum value for an input element.
          */
         "max": number | string;
         /**
-          * Minimum number value The min attribute specifies the minimum value for an `<input>` element.
+          * Minimum number value The min attribute specifies the minimum value for an input element.
          */
         "min": number | string;
         /**
@@ -1021,11 +1021,11 @@ declare namespace LocalJSX {
          */
         "label"?: string;
         /**
-          * Maximum number value The max attribute specifies the maximum value for an `<input>` element.
+          * Maximum number value The max attribute specifies the maximum value for an input element.
          */
         "max"?: number | string;
         /**
-          * Minimum number value The min attribute specifies the minimum value for an `<input>` element.
+          * Minimum number value The min attribute specifies the minimum value for an input element.
          */
         "min"?: number | string;
         /**
