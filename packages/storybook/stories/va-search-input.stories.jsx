@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { VaSearchInput } from '@department-of-veterans-affairs/web-components/react-bindings';
 import { getWebComponentDocs, propStructure } from './wc-helpers';
 import { generateEventsDescription } from './events';
@@ -50,53 +50,37 @@ WithButtonText.args = {
 };
 
 const TypeaheadTemplate = ({ value, suggestions }) => {
-  const [text, setText] = useState(value);
   const [latestSuggestions, setLatestSuggestions] = useState(suggestions);
-
-  const handleInput = e => {
-    console.log(e.target.value);
-    setText(e.target.value);
-  };
-
-  const handleSubmit = e => {
-    console.log(e.target.value);
-  };
 
   /**
    * Mock suggestions
    * Provides suggestions for the following values: for, form, forms
    * All other values will return an empty array
    */
-  useEffect(() => {
-    switch (text) {
-      case 'for':
-        setTimeout(() => {
-          setLatestSuggestions([
-            'form',
-            'form finder',
-            'form search',
-            'foreign study',
-            'forever gi bill',
-          ]);
-        }, 1000);
-        break;
-      case 'form':
-        setTimeout(() => {
-          setLatestSuggestions(['form', 'forms', 'form finder', 'form search']);
-        }, 1000);
-        break;
-      case 'forms':
-        setTimeout(() => {
-          setLatestSuggestions(['forms']);
-        }, 1000);
-        break;
-      default:
-        setTimeout(() => {
-          setLatestSuggestions([]);
-        }, 1000);
-        break;
-    }
-  }, [text]);
+  const mockSuggestions = [
+    'foreign study',
+    'forever gi bill',
+    'form',
+    'form finder',
+    'form search',
+    'forms',
+  ];
+
+  const handleInput = e => {
+    console.log(e.target.value);
+
+    // Commenting out until we figure out why any re-render causes value to reset
+    // setLatestSuggestions(
+    //   mockSuggestions.filter(
+    //     suggestion =>
+    //       e.target.value.length > 2 && suggestion.includes(e.target.value),
+    //   ),
+    // );
+  };
+
+  const handleSubmit = e => {
+    console.log(e.target.value);
+  };
 
   return (
     <div style={{ height: '400px' }}>
