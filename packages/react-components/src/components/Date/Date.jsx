@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/label-has-for */
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import i18next from 'i18next';
 
 import SimpleDate from './SimpleDate';
@@ -41,6 +41,11 @@ const Date = props => {
       errorMessage = i18next.t('year-range', { start: minYear, end: maxYear });
     }
   }
+
+  const [lang, setLang] = useState();
+  useEffect(() => {
+    i18next.on('languageChanged', lng => setLang(lng));
+  }, []);
 
   return (
     <SimpleDate

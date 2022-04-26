@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import i18next from 'i18next';
 import { uniqueId } from '../../helpers/utilities';
@@ -41,6 +41,12 @@ export const SimpleDate = ({
 }) => {
   const inputId = useRef(uniqueId('date-input-'));
   const { day, month, year } = date;
+
+  const [lang, setLang] = useState();
+
+  useEffect(() => {
+    i18next.on('languageChanged', lng => setLang(lng));
+  }, []);
 
   const daysForSelectedMonth = month.value ? days[month.value] : [];
 
