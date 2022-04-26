@@ -88,7 +88,7 @@ export const SimpleDate = ({
   return (
     <fieldset className={fieldsetClass} id={inputId.current}>
       <legend className="vads-u-font-size--base vads-u-font-weight--normal">
-        {label || 'Date of birth'}
+        {label || i18next.t('date-of-birth')}
         {required && (
           <span className="form-required-span">(*{i18next.t('required')})</span>
         )}

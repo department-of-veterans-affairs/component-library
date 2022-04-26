@@ -20,7 +20,7 @@ describe('<SimpleDate>', () => {
       <SimpleDate date={date} onValueChange={() => {}} />,
     );
     expect(container.querySelectorAll('fieldset')).to.have.lengthOf(1);
-    const legend = getByText('Date of birth');
+    const legend = getByText('date-of-birth');
     expect(legend.tagName).to.equal('LEGEND');
   });
 
