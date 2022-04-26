@@ -46,6 +46,7 @@ export const SimpleDate = ({
 
   useEffect(() => {
     i18next.on('languageChanged', lng => setLang(lng));
+    return () => i18next.off('languageChanged');
   }, []);
 
   const daysForSelectedMonth = month.value ? days[month.value] : [];

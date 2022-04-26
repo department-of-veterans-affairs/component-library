@@ -45,6 +45,7 @@ const Date = props => {
   const [lang, setLang] = useState();
   useEffect(() => {
     i18next.on('languageChanged', lng => setLang(lng));
+    return () => i18next.off('languageChanged');
   }, []);
 
   return (
