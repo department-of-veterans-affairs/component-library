@@ -98,7 +98,7 @@ export const SimpleDate = ({
               errorMessage={errorMessage && ''}
               label={i18next.t('month')}
               name={`${name}Month`}
-              options={months}
+              options={months()}
               value={month}
               onValueChange={update => {
                 handleChange('month', update, date, onValueChange);

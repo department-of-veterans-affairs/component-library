@@ -40,7 +40,7 @@ export const genders = [
   { label: 'Male', value: 'M' },
 ];
 
-export const months = [
+export const months = () => [
   { label: i18next.t('january'), value: 1 },
   { label: i18next.t('february'), value: 2 },
   { label: i18next.t('march'), value: 3 },
