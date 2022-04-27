@@ -59,6 +59,15 @@ export class VaSearchInput {
   }
 
   /**
+   * Fixes issue where submit event dispatches the initial value of value
+   * instead of the current value of the input field.
+   */
+  @Watch('value')
+  watchValueHandler() {
+    this.value = this.inputRef.value;
+  }
+
+  /**
    * If suggestions are provided, then format suggestions and open the listbox.
    * Limits suggestions to 5 and sorts them.
    */

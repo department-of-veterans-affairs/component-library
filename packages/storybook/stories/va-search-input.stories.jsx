@@ -67,19 +67,18 @@ const TypeaheadTemplate = ({ value, suggestions }) => {
   ];
 
   const handleInput = e => {
-    console.log(e.target.value);
+    console.log('onInput: ', e.target.value);
 
-    // Commenting out until we figure out why any re-render causes value to reset
-    // setLatestSuggestions(
-    //   mockSuggestions.filter(
-    //     suggestion =>
-    //       e.target.value.length > 2 && suggestion.includes(e.target.value),
-    //   ),
-    // );
+    setLatestSuggestions(
+      mockSuggestions.filter(
+        suggestion =>
+          e.target.value.length > 2 && suggestion.includes(e.target.value),
+      ),
+    );
   };
 
   const handleSubmit = e => {
-    console.log(e.target.value);
+    console.log('onSubmit: ', e.target.value);
   };
 
   return (
