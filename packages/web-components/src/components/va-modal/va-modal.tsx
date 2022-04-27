@@ -12,7 +12,7 @@ import {
 } from '@stencil/core';
 import { clearAllBodyScrollLocks, disableBodyScroll } from 'body-scroll-lock';
 import { hideOthers, Undo } from 'aria-hidden';
-import { focusableQueryString } from '../../utils/utils';
+import { focusableQueryString } from '../../utils/modal';
 
 /**
  * @click Used to detect clicks outside of modal contents to close modal.
