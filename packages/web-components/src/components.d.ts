@@ -130,7 +130,7 @@ export namespace Components {
     }
     interface VaCheckbox {
         /**
-          * The aria-describedby attribute for the `<input>` in the shadow DOM.
+          * The aria-describedby attribute for the input element in the shadow DOM.
          */
         "ariaDescribedby": string;
         /**
@@ -245,11 +245,11 @@ export namespace Components {
          */
         "label"?: string;
         /**
-          * Maximum number value The max attribute specifies the maximum value for an `<input>` element.
+          * Maximum number value The max attribute specifies the maximum value for an input element.
          */
         "max": number | string;
         /**
-          * Minimum number value The min attribute specifies the minimum value for an `<input>` element.
+          * Minimum number value The min attribute specifies the minimum value for an input element.
          */
         "min": number | string;
         /**
@@ -465,7 +465,7 @@ export namespace Components {
     }
     interface VaTextInput {
         /**
-          * The aria-describedby attribute for the `<input>` in the shadow DOM.
+          * The aria-describedby attribute for the input element in the shadow DOM.
          */
         "ariaDescribedby"?: string;
         /**
@@ -746,7 +746,7 @@ declare namespace LocalJSX {
          */
         "level"?: number;
         /**
-          * This event is fired so that `<va-accordion>` can manage which items are opened or closed
+          * This event is fired so that va-accordion element can manage which items are opened or closed
          */
         "onAccordionItemToggled"?: (event: CustomEvent<any>) => void;
         /**
@@ -870,7 +870,7 @@ declare namespace LocalJSX {
     }
     interface VaCheckbox {
         /**
-          * The aria-describedby attribute for the `<input>` in the shadow DOM.
+          * The aria-describedby attribute for the input element in the shadow DOM.
          */
         "ariaDescribedby"?: string;
         /**
@@ -1021,11 +1021,11 @@ declare namespace LocalJSX {
          */
         "label"?: string;
         /**
-          * Maximum number value The max attribute specifies the maximum value for an `<input>` element.
+          * Maximum number value The max attribute specifies the maximum value for an input element.
          */
         "max"?: number | string;
         /**
-          * Minimum number value The min attribute specifies the minimum value for an `<input>` element.
+          * Minimum number value The min attribute specifies the minimum value for an input element.
          */
         "min"?: number | string;
         /**
@@ -1329,7 +1329,7 @@ declare namespace LocalJSX {
     }
     interface VaTextInput {
         /**
-          * The aria-describedby attribute for the `<input>` in the shadow DOM.
+          * The aria-describedby attribute for the input element in the shadow DOM.
          */
         "ariaDescribedby"?: string;
         /**

@@ -48,13 +48,13 @@ export class VaNumberInput {
 
   /**
    * Minimum number value
-   * The min attribute specifies the minimum value for an `<input>` element.
+   * The min attribute specifies the minimum value for an input element.
    */
   @Prop() min: number | string;
 
   /**
    * Maximum number value
-   * The max attribute specifies the maximum value for an `<input>` element.
+   * The max attribute specifies the maximum value for an input element.
    */
   @Prop() max: number | string;
 
