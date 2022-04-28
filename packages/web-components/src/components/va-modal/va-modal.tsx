@@ -32,10 +32,6 @@ export class VaModal {
   // when initialFocusSelector is not specified.
   closeButton: HTMLButtonElement;
 
-  // This reference is required to allow focus trap to work properly.
-  // Without it, keyboard navigation behavior may break and work unexpectedly.
-  closeButtonContainer: HTMLDivElement;
-
   // This boolean variable is used to determine if componentDidUpdate should
   // set up or tear down the modal.
   isVisibleDirty: boolean;
@@ -363,17 +359,15 @@ export class VaModal {
         role={ariaRole(status)}
       >
         <div class={wrapperClass} tabIndex={-1}>
-          <div ref={el => (this.closeButtonContainer = el as HTMLDivElement)}>
-            <button
-              aria-label={btnAriaLabel}
-              class="va-modal-close"
-              onClick={e => this.handleClose(e)}
-              ref={el => (this.closeButton = el as HTMLButtonElement)}
-              type="button"
-            >
-              <i aria-hidden="true" />
-            </button>
-          </div>
+          <button
+            aria-label={btnAriaLabel}
+            class="va-modal-close"
+            onClick={e => this.handleClose(e)}
+            ref={el => (this.closeButton = el as HTMLButtonElement)}
+            type="button"
+          >
+            <i aria-hidden="true" />
+          </button>
           <div class={bodyClass}>
             <div role="document">
               {modalTitle && (
