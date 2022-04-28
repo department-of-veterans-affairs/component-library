@@ -52,7 +52,7 @@ export class VaCheckbox {
   @Prop({ mutable: true }) checked: boolean = false;
 
   /**
-   * The aria-describedby attribute for the `<input>` in the shadow DOM.
+   * The aria-describedby attribute for the input element in the shadow DOM.
    */
   @Prop() ariaDescribedby: string = '';
 
