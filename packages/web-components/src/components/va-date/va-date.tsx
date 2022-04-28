@@ -141,7 +141,7 @@ export class VaDate {
       <Host value={value} invalid={dateInvalid}>
         <fieldset aria-label="Select Month and two digit day XX and four digit year format XXX">
           <legend>
-            {label || 'Date of birth'}{' '}
+            {label}{' '}
             {required && (
               <span class="required">
                 (*Required)
