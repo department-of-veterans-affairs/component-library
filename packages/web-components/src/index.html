@@ -18,43 +18,6 @@
 
   </head>
   <body>
-    <!-- <my-component first="Stencil" last="'Don't call me a framework' JS"></my-component> -->
-    <div>
-      <h1>Testing h1 heading</h1>
-      <button id="toggle">Click here to open modal</button>
-      <input id="pre-modal-input" type="input" />
-      <label htmlFor="pre-modal-input">Random input</label>
-      <va-modal
-        id="modal"
-        modalTitle="Modal Title"
-        primaryButtonText="primary"
-        secondaryButtonText="secondary"
-      >
-        <p>
-          A modal may pass any React nodes as children to be displayed within
-          it.
-        </p>
-        <blockquote>
-          <input id="plain-checkbox" type="checkbox" />
-          <label htmlFor="plain-checkbox">Plain checkbox</label>
-        </blockquote>
-        <va-checkbox label="va-checkbox" />
-      </va-modal>
-      <input id="post-modal-input" type="input" />
-      <label htmlFor="post-modal-input">Random input</label>
-    </div>
-    <script>
-      let visible = false;
-      const modal = document.querySelector('va-modal');
-      const toggle = () => {
-        visible = !visible;
-        console.log('here')
-        modal.setAttribute('visible', visible);
-      };
-      modal.onCloseEvent = toggle;
-      modal.onPrimaryButtonClick = () => {};
-      modal.onSecondaryButtonClick = () => {};
-      document.querySelector('#toggle').onclick = toggle;
-    </script>
+    <my-component first="Stencil" last="'Don't call me a framework' JS"></my-component>
   </body>
 </html>
