@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import React, { useState } from 'react';
 import { generateEventsDescription } from './events';
 import { getWebComponentDocs, propStructure } from './wc-helpers';
@@ -8,9 +7,13 @@ const selectDocs = getWebComponentDocs('va-select');
 export default {
   title: 'Components/va-select',
   parameters: {
+    componentSubtitle: 'Select Box web component',
     docs: {
       description: {
-        component: generateEventsDescription(selectDocs),
+        component:
+          `<a className="vads-c-action-link--blue" href="https://design.va.gov/components/form-controls#select-box">View guidance for the Select Box component in the Design System</a>` +
+          '\n' +
+          generateEventsDescription(selectDocs),
       },
     },
   },
@@ -21,7 +24,7 @@ const defaultArgs = {
   'name': 'branch',
   'value': 'army',
   'required': false,
-  'error': null,
+  'error': undefined,
   'aria-live-region-text': 'You selected',
   'options': [
     <option key="1" value="navy">
