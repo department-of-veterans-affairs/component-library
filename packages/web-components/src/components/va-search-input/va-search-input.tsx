@@ -48,6 +48,8 @@ export class VaSearchInput {
    * The value of the input field
    */
   @Prop({ mutable: true, reflect: true }) value?: string = '';
+  // $('va-search-input').value will be correct
+  // $('va-search-input').getAttribute('value') will be incorrect
 
   /**
    * If suggestions are provided, then format suggestions and open the listbox.
