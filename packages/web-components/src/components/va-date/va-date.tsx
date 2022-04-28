@@ -139,7 +139,7 @@ export class VaDate {
     // Fieldset has an implicit aria role of group
     return (
       <Host value={value} invalid={dateInvalid}>
-        <fieldset aria-label="Select Month and two digit day XX and four digit year format XXX">
+        <fieldset aria-label="Select Month and two digit day XX and four digit year format XXXX">
           <legend>
             {label}{' '}
             {required && (
