@@ -176,6 +176,40 @@ export namespace Components {
          */
         "required": boolean;
     }
+    interface VaDate {
+        /**
+          * Whether or not an analytics event will be fired.
+         */
+        "enableAnalytics": boolean;
+        /**
+          * The error message to render (if any) This prop should be leveraged to display any custom validations needed for this component
+         */
+        "error": string;
+        /**
+          * Label for the field.
+         */
+        "label": string;
+        /**
+          * Set the `max` value on the year input.
+         */
+        "maxYear": number;
+        /**
+          * Set the `min` value on the year input.
+         */
+        "minYear": number;
+        /**
+          * Used to create unique name attributes for each input.
+         */
+        "name": string;
+        /**
+          * Render marker indicating field is required.
+         */
+        "required": boolean;
+        /**
+          * Set the default date value must be in YYYY-MM-DD format.
+         */
+        "value": string;
+    }
     interface VaFeaturedContent {
     }
     interface VaLoadingIndicator {
@@ -575,6 +609,12 @@ declare global {
         prototype: HTMLVaCheckboxGroupElement;
         new (): HTMLVaCheckboxGroupElement;
     };
+    interface HTMLVaDateElement extends Components.VaDate, HTMLStencilElement {
+    }
+    var HTMLVaDateElement: {
+        prototype: HTMLVaDateElement;
+        new (): HTMLVaDateElement;
+    };
     interface HTMLVaFeaturedContentElement extends Components.VaFeaturedContent, HTMLStencilElement {
     }
     var HTMLVaFeaturedContentElement: {
@@ -693,6 +733,7 @@ declare global {
         "va-breadcrumbs": HTMLVaBreadcrumbsElement;
         "va-checkbox": HTMLVaCheckboxElement;
         "va-checkbox-group": HTMLVaCheckboxGroupElement;
+        "va-date": HTMLVaDateElement;
         "va-featured-content": HTMLVaFeaturedContentElement;
         "va-loading-indicator": HTMLVaLoadingIndicatorElement;
         "va-modal": HTMLVaModalElement;
@@ -931,6 +972,52 @@ declare namespace LocalJSX {
           * Whether or not this input field is required.
          */
         "required"?: boolean;
+    }
+    interface VaDate {
+        /**
+          * Whether or not an analytics event will be fired.
+         */
+        "enableAnalytics"?: boolean;
+        /**
+          * The error message to render (if any) This prop should be leveraged to display any custom validations needed for this component
+         */
+        "error"?: string;
+        /**
+          * Label for the field.
+         */
+        "label": string;
+        /**
+          * Set the `max` value on the year input.
+         */
+        "maxYear"?: number;
+        /**
+          * Set the `min` value on the year input.
+         */
+        "minYear"?: number;
+        /**
+          * Used to create unique name attributes for each input.
+         */
+        "name": string;
+        /**
+          * The event used to track usage of the component. This is emitted when an input value changes and enableAnalytics is true.
+         */
+        "onComponent-library-analytics"?: (event: CustomEvent<any>) => void;
+        /**
+          * Fires when the date input loses focus
+         */
+        "onDateBlur"?: (event: CustomEvent<any>) => void;
+        /**
+          * Fires when the date input loses focus after its value was changed
+         */
+        "onDateChange"?: (event: CustomEvent<any>) => void;
+        /**
+          * Render marker indicating field is required.
+         */
+        "required"?: boolean;
+        /**
+          * Set the default date value must be in YYYY-MM-DD format.
+         */
+        "value"?: string;
     }
     interface VaFeaturedContent {
     }
@@ -1405,6 +1492,7 @@ declare namespace LocalJSX {
         "va-breadcrumbs": VaBreadcrumbs;
         "va-checkbox": VaCheckbox;
         "va-checkbox-group": VaCheckboxGroup;
+        "va-date": VaDate;
         "va-featured-content": VaFeaturedContent;
         "va-loading-indicator": VaLoadingIndicator;
         "va-modal": VaModal;
@@ -1438,6 +1526,7 @@ declare module "@stencil/core" {
             "va-breadcrumbs": LocalJSX.VaBreadcrumbs & JSXBase.HTMLAttributes<HTMLVaBreadcrumbsElement>;
             "va-checkbox": LocalJSX.VaCheckbox & JSXBase.HTMLAttributes<HTMLVaCheckboxElement>;
             "va-checkbox-group": LocalJSX.VaCheckboxGroup & JSXBase.HTMLAttributes<HTMLVaCheckboxGroupElement>;
+            "va-date": LocalJSX.VaDate & JSXBase.HTMLAttributes<HTMLVaDateElement>;
             "va-featured-content": LocalJSX.VaFeaturedContent & JSXBase.HTMLAttributes<HTMLVaFeaturedContentElement>;
             "va-loading-indicator": LocalJSX.VaLoadingIndicator & JSXBase.HTMLAttributes<HTMLVaLoadingIndicatorElement>;
             "va-modal": LocalJSX.VaModal & JSXBase.HTMLAttributes<HTMLVaModalElement>;

@@ -124,3 +124,7 @@ export const days = {
   11: thirtyDays,
   12: thirtyOneDays,
 };
+
+export function isFullDate(date) {
+  return /\d{4}-\d{1,2}-\d{1,2}/.test(date);
+}
