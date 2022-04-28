@@ -177,6 +177,7 @@ export class VaTextInput {
           aria-describedby={describedBy}
           inputmode={inputMode}
           maxlength={this.maxlength}
+          name={this.name}
         />
         {this.maxlength && this.value?.length >= this.maxlength && (
           <small aria-live="polite">(Max. {this.maxlength} characters)</small>

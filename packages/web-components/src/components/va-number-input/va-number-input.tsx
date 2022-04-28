@@ -96,9 +96,13 @@ export class VaNumberInput {
     return (
       <Host>
         {this.label && (
-          <label htmlFor="inputField">
+          <label htmlFor="inputField" part="label">
             {this.label}{' '}
-            {this.required && <span class="required">(*Required)</span>}
+            {this.required && (
+              <span class="required">
+                (*Required)
+              </span>
+            )}
           </label>
         )}
         {this.error && <span id="error-message">{this.error}</span>}
@@ -112,6 +116,7 @@ export class VaNumberInput {
           value={this.value}
           onInput={this.handleInput}
           onBlur={this.handleBlur}
+          part="input"
         />
       </Host>
     );
