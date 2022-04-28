@@ -139,11 +139,6 @@ const I18nTemplate = ({
   );
 };
 
-export const Internationalization = I18nTemplate.bind({});
-Internationalization.args = {
-  ...defaultArgs,
-};
-
 export const Default = Template.bind({});
 Default.args = { ...defaultArgs };
 Default.argTypes = propStructure(textInputDocs);
@@ -156,6 +151,13 @@ Success.args = { ...defaultArgs, success: true };
 
 export const Required = Template.bind({});
 Required.args = { ...defaultArgs, required: true };
+
+export const Internationalization = I18nTemplate.bind({});
+Internationalization.args = {
+  ...defaultArgs,
+  required: true,
+  maxlength: '16',
+};
 
 export const MaxLength = Template.bind({});
 MaxLength.args = {
