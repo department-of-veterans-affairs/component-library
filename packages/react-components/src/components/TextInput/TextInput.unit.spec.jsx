@@ -15,7 +15,7 @@ describe('<TextInput>', () => {
       resources: {
         en: {
           translation: {
-            required: 'Required',
+            required: '(*Required)',
           },
         },
       },
