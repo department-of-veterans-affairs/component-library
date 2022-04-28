@@ -68,13 +68,12 @@ const TypeaheadTemplate = ({ value, suggestions }) => {
 
   const handleInput = e => {
     console.log('onInput: ', e.target.value);
-
+    if (e.target.value.length < 3) return;
     setTimeout(
       () =>
         setLatestSuggestions(
-          mockSuggestions.filter(
-            suggestion =>
-              e.target.value.length > 2 && suggestion.includes(e.target.value),
+          mockSuggestions.filter(suggestion =>
+            suggestion.includes(e.target.value),
           ),
         ),
       1000,
