@@ -8,6 +8,7 @@ This is a monorepo containing two main packages:
 - `web-components`
 
 The `core` package is for bundling the two main packages into one for publishing. The `storybook` package is for the combined story files from each `*-components` package.
+The `design-system-dashboard-cli` package is used to gather metrics on design system usage.
 
 ## Contributing
 
@@ -52,6 +53,7 @@ Once a release is created, an attempt will be made to automatically publish the 
 1. `cd packages/web-components/`
     1. `yarn install`
     2. `yarn build`
+    3. `yarn build-bindings` (build React bindings)
 2. `cd ../react-components/`
     1. `yarn install`
     2. `yarn build`
@@ -70,7 +72,7 @@ This will allow you to run Storybook locally to view all components
     1. [More information on buildEs5 in Stencil](https://stenciljs.com/docs/config#buildes5)
     2. Stencil Dev Server is run in `dev` mode
 2. Within `component-library/packages/web-components/src/index.html` Web Components can be added inside of the `<body>` tag for testing
-    1. Example: 
+    1. Example:
     ```
     <body>
         <va-progress-bar label="Add a label here" percent={35}></va-progress-bar>

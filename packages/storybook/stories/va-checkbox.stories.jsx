@@ -9,9 +9,13 @@ const checkboxDocs = getWebComponentDocs('va-checkbox');
 export default {
   title: 'Components/va-checkbox',
   parameters: {
+    componentSubtitle: `Checkbox web component`,
     docs: {
       description: {
-        component: generateEventsDescription(checkboxDocs),
+        component:
+          `<a className="vads-c-action-link--blue" href="https://design.va.gov/components/form-controls#checkboxes">View guidance for the Checkbox component in the Design System</a>` +
+          '\n' +
+          generateEventsDescription(checkboxDocs),
       },
     },
   },
@@ -41,6 +45,7 @@ const Template = ({
     error={error}
     label={label}
     required={required}
+    onBlur={e => console.log(e)}
   />
 );
 
@@ -58,7 +63,7 @@ WithDescriptionString.args = {
 };
 
 export const WithDescriptionJSX = props => (
-  <va-checkbox {...props}>
+  <va-checkbox {...props} onBlur={e => console.log(e)}>
     <p slot="description">
       I'm a paragraph tag with <code>slot="description"</code>
     </p>
