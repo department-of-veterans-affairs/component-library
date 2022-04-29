@@ -5,6 +5,14 @@ const bttDocs = getWebComponentDocs('va-back-to-top');
 
 export default {
   title: 'Components/va-back-to-top',
+  parameters: {
+    docs: {
+      description: {
+        component: `<a className="vads-c-action-link--blue" href="https://design.va.gov/components/back-to-top">View guidance for the Back to top component in the Design System</a>`,
+      },
+    },
+    componentSubtitle: `Back to top web component`,
+  },
 };
 
 const Template = () => {
