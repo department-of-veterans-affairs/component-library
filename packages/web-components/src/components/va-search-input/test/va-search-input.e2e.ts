@@ -43,7 +43,7 @@ describe('va-search-input', () => {
 
     const element = await page.find('va-search-input');
     expect(element).toEqualHtml(`
-      <va-search-input button-text="Search VA.gov" class="hydrated">
+      <va-search-input button-text="Search VA.gov" class="hydrated" value="">
         <mock:shadow-root>
           <input aria-autocomplete="none" aria-label="Search" autocomplete="off" id="va-search-input" type="text">
           <button aria-label="Search" id="va-search-button" type="submit">

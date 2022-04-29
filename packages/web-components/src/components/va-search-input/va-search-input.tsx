@@ -47,7 +47,9 @@ export class VaSearchInput {
   /**
    * The value of the input field
    */
-  @Prop() value?: string = '';
+  @Prop({ mutable: true, reflect: true }) value?: string = '';
+  // $('va-search-input').value will be correct
+  // $('va-search-input').getAttribute('value') will be incorrect
 
   /**
    * If suggestions are provided, then format suggestions and open the listbox.
@@ -56,6 +58,15 @@ export class VaSearchInput {
   componentDidLoad() {
     if (!Array.isArray(this.suggestions) || !this.suggestions?.length) return;
     this.updateSuggestions(this.suggestions);
+  }
+
+  /**
+   * Fixes issue where submit event dispatches the initial value of value
+   * instead of the current value of the input field.
+   */
+  @Watch('value')
+  watchValueHandler() {
+    this.value = this.inputRef.value;
   }
 
   /**
@@ -94,7 +105,8 @@ export class VaSearchInput {
   /**
    * Updates suggestion formatting as user types
    */
-  private handleInput = () => {
+  private handleInput = (event: Event) => {
+    this.value = (event.target as HTMLInputElement).value;
     if (!this.suggestions) return;
     this.updateSuggestions(this.suggestions);
   };

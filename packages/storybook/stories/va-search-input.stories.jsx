@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { VaSearchInput } from '@department-of-veterans-affairs/web-components/react-bindings';
 import { getWebComponentDocs, propStructure } from './wc-helpers';
 import { generateEventsDescription } from './events';
@@ -50,56 +50,39 @@ WithButtonText.args = {
 };
 
 const TypeaheadTemplate = ({ value, suggestions }) => {
-  const [text, setText] = useState(value);
   const [latestSuggestions, setLatestSuggestions] = useState(suggestions);
-
-  const handleInput = e => {
-    console.log(e);
-    // event.composedPath()[0].value outside of React
-    setText(e.nativeEvent.composedPath()[0].value);
-  };
-
-  const handleSubmit = e => {
-    console.log(e);
-    // event.composedPath()[0].value outside of React
-    console.log(e.nativeEvent.composedPath()[0].value);
-  };
 
   /**
    * Mock suggestions
    * Provides suggestions for the following values: for, form, forms
    * All other values will return an empty array
    */
-  useEffect(() => {
-    switch (text) {
-      case 'for':
-        setTimeout(() => {
-          setLatestSuggestions([
-            'form',
-            'form finder',
-            'form search',
-            'foreign study',
-            'forever gi bill',
-          ]);
-        }, 1000);
-        break;
-      case 'form':
-        setTimeout(() => {
-          setLatestSuggestions(['form', 'forms', 'form finder', 'form search']);
-        }, 1000);
-        break;
-      case 'forms':
-        setTimeout(() => {
-          setLatestSuggestions(['forms']);
-        }, 1000);
-        break;
-      default:
-        setTimeout(() => {
-          setLatestSuggestions([]);
-        }, 1000);
-        break;
-    }
-  }, [text]);
+  const mockSuggestions = [
+    'foreign study',
+    'forever gi bill',
+    'form',
+    'form finder',
+    'form search',
+    'forms',
+  ];
+
+  const handleInput = e => {
+    console.log('onInput: ', e.target.value);
+    if (e.target.value.length < 3) return;
+    setTimeout(
+      () =>
+        setLatestSuggestions(
+          mockSuggestions.filter(suggestion =>
+            suggestion.includes(e.target.value),
+          ),
+        ),
+      1000,
+    );
+  };
+
+  const handleSubmit = e => {
+    console.log('onSubmit: ', e.target.value);
+  };
 
   return (
     <div style={{ height: '400px' }}>
