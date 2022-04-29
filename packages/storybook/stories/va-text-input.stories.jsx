@@ -83,6 +83,7 @@ const Template = ({
       inputmode={inputmode}
       type={type}
       aria-describedby={ariaDescribedby}
+      status={status}
       onBlur={e => console.log('blur event', e)}
       onInput={e => console.log('input event value', e.target.value)}
     />
