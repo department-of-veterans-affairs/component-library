@@ -76,7 +76,7 @@ export class VaTextInput {
   @Prop() name?: string;
 
   /**
-   * The aria-describedby attribute for the `<input>` in the shadow DOM.
+   * The aria-describedby attribute for the input element in the shadow DOM.
    */
   @Prop() ariaDescribedby?: string = '';
 
@@ -92,6 +92,11 @@ export class VaTextInput {
   //
   // $('va-text-input').value will be correct
   // $('va-text-input').getAttribute('value') will be incorrect
+
+  /**
+   * Adds styling based on status value
+   */
+  @Prop() status: 'success';
 
   /**
    * The event emitted when the input is blurred.
@@ -172,6 +177,7 @@ export class VaTextInput {
           aria-describedby={describedBy}
           inputmode={inputMode}
           maxlength={this.maxlength}
+          name={this.name}
         />
         {this.maxlength && this.value?.length >= this.maxlength && (
           <small aria-live="polite">(Max. {this.maxlength} characters)</small>

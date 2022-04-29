@@ -134,12 +134,14 @@ export class VaSearchInput {
 
     switch (event.key) {
       case 'ArrowDown':
+        event.preventDefault();
         // Option doesn't exist if suggestions aren't provided
         if (!options?.length) return;
         const firstOption = options[0];
         this.selectSuggestion(firstOption);
         break;
       case 'ArrowUp':
+        event.preventDefault();
         // Option doesn't exist if suggestions aren't provided
         if (!options?.length) return;
         const lastOption = options[options.length - 1];
@@ -207,6 +209,7 @@ export class VaSearchInput {
 
     switch (event.key) {
       case 'ArrowUp':
+        event.preventDefault();
         if (index === 0) {
           this.selectSuggestion(options[options.length - 1]);
         } else {
@@ -214,6 +217,7 @@ export class VaSearchInput {
         }
         break;
       case 'ArrowDown':
+        event.preventDefault();
         if (index === options.length - 1) {
           this.selectSuggestion(options[0]);
         } else {
@@ -246,11 +250,13 @@ export class VaSearchInput {
         this.isListboxOpen = false;
         break;
       case 'Home':
+        event.preventDefault();
         this.inputRef.focus();
         this.inputRef.setSelectionRange(0, 0);
         break;
       case 'ArrowRight':
       case 'End':
+        event.preventDefault();
         this.inputRef.focus();
         this.inputRef.setSelectionRange(
           this.inputRef.value.length + 1,
@@ -258,6 +264,7 @@ export class VaSearchInput {
         );
         break;
       case 'ArrowLeft':
+        event.preventDefault();
         this.inputRef.focus();
         this.inputRef.setSelectionRange(
           this.inputRef.value.length,
