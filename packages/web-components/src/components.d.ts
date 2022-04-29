@@ -190,14 +190,6 @@ export namespace Components {
          */
         "label": string;
         /**
-          * Set the `max` value on the year input.
-         */
-        "maxYear": number;
-        /**
-          * Set the `min` value on the year input.
-         */
-        "minYear": number;
-        /**
           * Used to create unique name attributes for each input.
          */
         "name": string;
@@ -990,14 +982,6 @@ declare namespace LocalJSX {
           * Label for the field.
          */
         "label": string;
-        /**
-          * Set the `max` value on the year input.
-         */
-        "maxYear"?: number;
-        /**
-          * Set the `min` value on the year input.
-         */
-        "minYear"?: number;
         /**
           * Used to create unique name attributes for each input.
          */

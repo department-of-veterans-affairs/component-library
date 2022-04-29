@@ -88,7 +88,7 @@ export class VaTextInput {
   /**
    * The value for the input.
    */
-  @Prop({ mutable: true }) value?: string;
+  @Prop({ mutable: true, reflect: true }) value?: string;
   // TODO: Make the value prop reflective. Currently, it isn't because it screws
   // up the input behavior. For now, the only "bug" is that the changed value
   // isn't reflected in the DOM on the web component. That seems to be how the
@@ -163,7 +163,7 @@ export class VaTextInput {
     return (
       <Host>
         {this.label && (
-          <label htmlFor="inputField">
+          <label htmlFor="inputField" part="label">
             {this.label}{' '}
             {this.required && <span class="required">(*Required)</span>}
           </label>
@@ -181,6 +181,7 @@ export class VaTextInput {
           minlength={this.minlength}
           pattern={this.pattern}
           name={this.name}
+          part="input"
         />
         {this.maxlength && this.value?.length >= this.maxlength && (
           <small aria-live="polite">(Max. {this.maxlength} characters)</small>

@@ -11,11 +11,11 @@ describe('va-text-input', () => {
     expect(element).toEqualHtml(`
       <va-text-input class="hydrated" label="Hello, world">
         <mock:shadow-root>
-          <label for="inputField">
+          <label for="inputField" part="label">
             Hello, world
           </label>
           <slot></slot>
-          <input id="inputField" type="text" />
+          <input id="inputField" type="text" part="input" />
         </mock:shadow-root>
       </va-text-input>
     `);
@@ -34,11 +34,11 @@ describe('va-text-input', () => {
     expect(element).toEqualHtml(`
       <va-text-input class="hydrated" label="Name of issue">
         <mock:shadow-root>
-          <label for="inputField">
+          <label for="inputField" part="label">
             Name of issue
           </label>
           <slot></slot>
-          <input id="inputField" type="text" />
+          <input id="inputField" type="text" part="input" />
         </mock:shadow-root>
         <p className="vads-u-font-weight--normal label-description">
           You can only add an issue that you've already received a VA decision
@@ -66,11 +66,11 @@ describe('va-text-input', () => {
     expect(el).toEqualHtml(`
       <va-text-input class="hydrated" label="This is a field" required="">
         <mock:shadow-root>
-          <label for="inputField">
+          <label for="inputField" part="label">
             This is a field <span class="required">(*Required)</span>
           </label>
           <slot></slot>
-          <input id="inputField" type="text" />
+          <input id="inputField" type="text" part="input" />
         </mock:shadow-root>
       </va-text-input>
     `);
