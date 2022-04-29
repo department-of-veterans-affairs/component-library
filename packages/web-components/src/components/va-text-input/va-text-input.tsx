@@ -61,6 +61,11 @@ export class VaTextInput {
   @Prop() maxlength?: number;
 
   /**
+   * The minimum number of characters allowed in the input.
+   */
+  @Prop() minlength?: number;
+
+  /**
    * What to tell the browser to auto-complete the field with.
    */
   @Prop() autocomplete?: string;
@@ -76,9 +81,9 @@ export class VaTextInput {
   @Prop() name?: string;
 
   /**
-   * The aria-describedby attribute for the input element in the shadow DOM.
+   * The regular expression that the input element's value is checked against on submission
    */
-  @Prop() ariaDescribedby?: string = '';
+  @Prop() pattern?: string;
 
   /**
    * The value for the input.
@@ -130,7 +135,7 @@ export class VaTextInput {
     return this.type;
   }
 
-  private handleChange = (e: Event) => {
+  private handleInput = (e: Event) => {
     const target = e.target as HTMLInputElement;
     this.value = target.value;
     this.vaChange.emit({ value: this.value });
@@ -152,9 +157,6 @@ export class VaTextInput {
   };
 
   render() {
-    const describedBy =
-      `${this.ariaDescribedby} ${this.error ? 'error-message' : ''}`.trim() ||
-      null; // Null so we don't add the attribute if we have an empty string
     const inputMode = this.inputmode ? this.inputmode : null; // Null so we don't add the attribute if we have an empty string
     const type = this.getInputType();
 
@@ -172,15 +174,19 @@ export class VaTextInput {
           id="inputField"
           type={type}
           value={this.value}
-          onInput={this.handleChange}
+          onInput={this.handleInput}
           onBlur={this.handleBlur}
-          aria-describedby={describedBy}
           inputmode={inputMode}
           maxlength={this.maxlength}
+          minlength={this.minlength}
+          pattern={this.pattern}
           name={this.name}
         />
         {this.maxlength && this.value?.length >= this.maxlength && (
           <small aria-live="polite">(Max. {this.maxlength} characters)</small>
+        )}
+        {this.minlength && this.value?.length < this.minlength && (
+          <small aria-live="polite">(Min. {this.minlength} characters)</small>
         )}
       </Host>
     );

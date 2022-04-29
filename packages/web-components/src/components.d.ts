@@ -499,10 +499,6 @@ export namespace Components {
     }
     interface VaTextInput {
         /**
-          * The aria-describedby attribute for the input element in the shadow DOM.
-         */
-        "ariaDescribedby"?: string;
-        /**
           * What to tell the browser to auto-complete the field with.
          */
         "autocomplete"?: string;
@@ -533,9 +529,17 @@ export namespace Components {
          */
         "maxlength"?: number;
         /**
+          * The minimum number of characters allowed in the input.
+         */
+        "minlength"?: number;
+        /**
           * The name to pass to the input element.
          */
         "name"?: string;
+        /**
+          * The regular expression that the input element's value is checked against on submission
+         */
+        "pattern"?: string;
         /**
           * Set the input to required and render the (Required) text.
          */
@@ -1416,10 +1420,6 @@ declare namespace LocalJSX {
     }
     interface VaTextInput {
         /**
-          * The aria-describedby attribute for the input element in the shadow DOM.
-         */
-        "ariaDescribedby"?: string;
-        /**
           * What to tell the browser to auto-complete the field with.
          */
         "autocomplete"?: string;
@@ -1450,6 +1450,10 @@ declare namespace LocalJSX {
          */
         "maxlength"?: number;
         /**
+          * The minimum number of characters allowed in the input.
+         */
+        "minlength"?: number;
+        /**
           * The name to pass to the input element.
          */
         "name"?: string;
@@ -1465,6 +1469,10 @@ declare namespace LocalJSX {
           * The event emitted when the input value changes
          */
         "onVaChange"?: (event: CustomEvent<any>) => void;
+        /**
+          * The regular expression that the input element's value is checked against on submission
+         */
+        "pattern"?: string;
         /**
           * Set the input to required and render the (Required) text.
          */

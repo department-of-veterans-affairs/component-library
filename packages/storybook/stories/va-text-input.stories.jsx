@@ -50,10 +50,11 @@ const defaultArgs = {
   'required': false,
   'error': undefined,
   'maxlength': undefined,
+  'minlength': undefined,
   'value': undefined,
   'inputmode': undefined,
   'type': undefined,
-  'aria-describedby': undefined,
+  'pattern': undefined,
 };
 
 const Template = ({
@@ -64,11 +65,12 @@ const Template = ({
   required,
   error,
   maxlength,
+  minlength,
   value,
   inputmode,
   type,
-  'aria-describedby': ariaDescribedby,
   status,
+  pattern,
 }) => {
   return (
     <va-text-input
@@ -79,11 +81,14 @@ const Template = ({
       required={required}
       error={error}
       maxlength={maxlength}
+      minlength={minlength}
       value={value}
       inputmode={inputmode}
       type={type}
-      aria-describedby={ariaDescribedby}
       status={status}
+      pattern={pattern}
+      onBlur={e => console.log('blur event', e)}
+      onInput={e => console.log('input event value', e.target.value)}
     />
   );
 };
@@ -105,6 +110,21 @@ export const MaxLength = Template.bind({});
 MaxLength.args = {
   ...defaultArgs,
   maxlength: '16',
+};
+
+export const Range = Template.bind({});
+Range.args = {
+  ...defaultArgs,
+  label: 'Acceptable range 3 - 6 characters',
+  minlength: '3',
+  maxlength: '6',
+};
+
+export const Pattern = Template.bind({});
+Pattern.args = {
+  ...defaultArgs,
+  label: 'Must be 4 digits',
+  pattern: '[0-9]{4}',
 };
 
 export const Autocomplete = Template.bind({});
