@@ -1,13 +1,28 @@
 import React from 'react';
 import { getWebComponentDocs, propStructure } from './wc-helpers';
 
-const segmentedProgressBarDocs = getWebComponentDocs('va-segmented-progress-bar');
+const segmentedProgressBarDocs = getWebComponentDocs(
+  'va-segmented-progress-bar',
+);
 
 export default {
   title: 'Components/va-segmented-progress-bar',
+  parameters: {
+    componentSubtitle: `Segmented progress bar web component`,
+    docs: {
+      description: {
+        component: `<a className="vads-c-action-link--blue" href="https://design.va.gov/components/progress-bar">View guidance for the Segmented progress bar component in the Design System</a>`,
+      },
+    },
+  },
 };
 
-const Template = ({ 'enable-analytics': enableAnalytics, current, total, label }) => (
+const Template = ({
+  'enable-analytics': enableAnalytics,
+  current,
+  total,
+  label,
+}) => (
   // Wrapper for spacing when viewing in storybook
   // Component can be used without it
   <div style={{ margin: '3em' }}>
