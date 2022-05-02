@@ -45,6 +45,7 @@ const Template = ({
     error={error}
     label={label}
     required={required}
+    onBlur={e => console.log(e)}
   />
 );
 
@@ -62,7 +63,7 @@ WithDescriptionString.args = {
 };
 
 export const WithDescriptionJSX = props => (
-  <va-checkbox {...props}>
+  <va-checkbox {...props} onBlur={e => console.log(e)}>
     <p slot="description">
       I'm a paragraph tag with <code>slot="description"</code>
     </p>

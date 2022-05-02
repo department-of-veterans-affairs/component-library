@@ -166,17 +166,17 @@ describe('va-checkbox', () => {
     expect(changeSpy).toHaveReceivedEventDetail({ checked: true });
   });
 
-  it('emits the vaBlur event', async () => {
+  it('emits blur event', async () => {
     const page = await newE2EPage();
     await page.setContent(
       '<va-checkbox label="Just another checkbox here" required description="Description content"/>',
     );
-    const analyticsSpy = await page.spyOnEvent('vaBlur');
+    const blurSpy = await page.spyOnEvent('blur');
     const inputEl = await page.find('va-checkbox >>> input');
     await inputEl.click(); // Focus on the element
     await inputEl.press('Tab'); // Blur the element
 
-    expect(analyticsSpy).toHaveReceivedEvent();
+    expect(blurSpy).toHaveReceivedEvent();
   });
 
   it('updates the checked prop', async () => {
