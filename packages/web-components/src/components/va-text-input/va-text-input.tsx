@@ -184,10 +184,10 @@ export class VaTextInput {
           part="input"
         />
         {this.maxlength && this.value?.length >= this.maxlength && (
-          <small aria-live="polite">(Max. {this.maxlength} characters)</small>
+          <small aria-live="polite" part="validation">(Max. {this.maxlength} characters)</small>
         )}
         {this.minlength && this.value?.length < this.minlength && (
-          <small aria-live="polite">(Min. {this.minlength} characters)</small>
+          <small aria-live="polite" part="validation">(Min. {this.minlength} characters)</small>
         )}
       </Host>
     );

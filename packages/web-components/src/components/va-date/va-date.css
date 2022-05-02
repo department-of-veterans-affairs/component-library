@@ -73,3 +73,7 @@ va-select::part(label),
 va-text-input::part(label) {
   margin-top: 0;
 }
+
+va-text-input::part(validation){
+  display: none;
+}
