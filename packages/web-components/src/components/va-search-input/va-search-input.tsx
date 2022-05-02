@@ -291,7 +291,7 @@ export class VaSearchInput {
         </Fragment>
       );
     }
-    return <strong>{suggestion}</strong>;
+    return <strong>{lowercaseSuggestion}</strong>;
   };
 
   /**
