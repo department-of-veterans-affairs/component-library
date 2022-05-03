@@ -8,9 +8,14 @@ export default {
   title: 'Components/va-process-list',
   parameters: {
     docs: {
-      /* eslint-disable-next-line react/display-name */
-      page: () => <StoryDocs data={processListDocs} />,
+      description: {
+        component:
+          `<a className="vads-c-action-link--blue" href="https://design.va.gov/components/process-list">View guidance for the Process list component in the Design System</a>` +
+          `\n` +
+          'This component expects `<li>` elements as its children.',
+      },
     },
+    componentSubtitle: `Process list web component`,
   },
 };
 
