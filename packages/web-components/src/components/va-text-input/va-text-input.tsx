@@ -99,16 +99,6 @@ export class VaTextInput {
   @Prop() status: 'success';
 
   /**
-   * The event emitted when the input is blurred.
-   */
-  @Event() vaBlur: EventEmitter;
-
-  /**
-   * The event emitted when the input value changes
-   */
-  @Event() vaChange: EventEmitter;
-
-  /**
    * The event used to track usage of the component. This is emitted when the
    * input is blurred and enableAnalytics is true.
    */
@@ -130,15 +120,12 @@ export class VaTextInput {
     return this.type;
   }
 
-  private handleChange = (e: Event) => {
+  private handleInput = (e: Event) => {
     const target = e.target as HTMLInputElement;
     this.value = target.value;
-    this.vaChange.emit({ value: this.value });
   };
 
   private handleBlur = () => {
-    this.vaBlur.emit();
-
     if (this.enableAnalytics) {
       this.componentLibraryAnalytics.emit({
         componentName: 'va-text-input',
@@ -172,11 +159,12 @@ export class VaTextInput {
           id="inputField"
           type={type}
           value={this.value}
-          onInput={this.handleChange}
+          onInput={this.handleInput}
           onBlur={this.handleBlur}
           aria-describedby={describedBy}
           inputmode={inputMode}
           maxlength={this.maxlength}
+          name={this.name}
         />
         {this.maxlength && this.value?.length >= this.maxlength && (
           <small aria-live="polite">(Max. {this.maxlength} characters)</small>

@@ -5,6 +5,7 @@
   display: block;
   align-items: center;
   display: flex;
+  position: relative;
 }
 
 #va-search-input {
@@ -51,4 +52,30 @@ i::before {
 
 #va-search-button-text {
   margin-left: 0.4rem;
+}
+
+#va-search-listbox {
+  background-color: var(--color-white);
+  box-shadow: 0px 2px 6px 1px rgba(20, 20, 20, 0.14);
+  display: block;
+  left: 0;
+  line-height: 2.4rem;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  right: 0;
+  top: 4.8rem;
+}
+
+.va-search-suggestion {
+  cursor: pointer;
+  padding: 0.8rem;
+}
+
+.va-search-suggestion[aria-selected='true'],
+.va-search-suggestion:focus,
+.va-search-suggestion:hover {
+  background-color: var(--color-primary);
+  color: var(--color-white);
 }
