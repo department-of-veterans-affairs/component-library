@@ -14,7 +14,7 @@ describe('va-alert-expandable', () => {
       <va-alert-expandable status="warning" trigger="Limited services and hours" class="hydrated">
         <mock:shadow-root>
         <div class="alert-expandable warning">
-          <a role="button" aria-controls="alert-body" aria-expanded="true" tabindex="0" class="alert-expandable-trigger">
+          <a role="button" aria-controls="alert-body" aria-expanded="false" tabindex="0" class="alert-expandable-trigger">
             <i class="alert-status-icon" aria-hidden="true" role="img"></i>
             <span class="alert-expandable-title">
               <span class="sr-only">Alert:&nbsp;</span>

@@ -71,7 +71,7 @@ export class VaAlertExpandable {
 
   @Listen('resize', { target: 'window' })
   handleResize() {
-    this.updateInfoMaxHeight();
+    this.updateAlertBodyMaxHeight();
   }
 
   toggleOpen(): void {
@@ -97,19 +97,19 @@ export class VaAlertExpandable {
   }
 
   // Ensures that the CSS animation is consistent and uses the correct max-height for its content
-  updateInfoMaxHeight() {
-    const infoElm = this.el.shadowRoot.getElementById('info');
-    const contentHeight = infoElm.scrollHeight + 'px';
-    // the additional 2em is #info margin-top and margin-bottom when open
-    infoElm.style.setProperty(
+  updateAlertBodyMaxHeight() {
+    const alertBodyElm = this.el.shadowRoot.getElementById('alert-body');
+    const contentHeight = alertBodyElm.scrollHeight + 'px';
+    // the additional 2em is #alert-body margin-top and margin-bottom when open
+    alertBodyElm.style.setProperty(
       '--calc-max-height',
       'calc(' + contentHeight + ' + 2rem)',
     );
   }
 
   componentDidLoad() {
+    this.updateAlertBodyMaxHeight();
     this.vaComponentDidLoad.emit();
-    this.updateInfoMaxHeight();
   }
 
   render() {
