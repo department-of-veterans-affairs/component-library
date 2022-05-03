@@ -150,8 +150,8 @@ Continue.args = {
   status: 'continue' 
 };
 
-export const noIcon = NoIconTemplate.bind({});
-noIcon.args = {
+export const NoIcon = NoIconTemplate.bind({});
+NoIcon.args = {
   ...defaultArgs,
   'show-icon': false,
 };

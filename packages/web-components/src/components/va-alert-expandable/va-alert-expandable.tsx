@@ -48,17 +48,6 @@ export class VaAlertExpandable {
    @Prop() visible: boolean = true;
 
   /**
-   * Fires when the component has successfully finished rendering for the first
-   * time.
-   */
-   @Event({
-    eventName: 'va-component-did-load',
-    composed: true,
-    bubbles: true,
-  })
-  vaComponentDidLoad: EventEmitter;
-
-  /**
    * The event used to track usage of the component. This is emitted when an
    * anchor link is clicked and disableAnalytics is not true.
    */
@@ -109,7 +98,6 @@ export class VaAlertExpandable {
 
   componentDidLoad() {
     this.updateAlertBodyMaxHeight();
-    this.vaComponentDidLoad.emit();
   }
 
   render() {
@@ -123,7 +111,7 @@ export class VaAlertExpandable {
 
     return (
       <Host>
-        <div role={this.el.getAttribute('data-role') || role} aria-live={ariaLive} class={alertClasses}>
+        <div role={role} aria-live={ariaLive} class={alertClasses}>
           <a
             role="button"
             aria-controls="alert-body"
