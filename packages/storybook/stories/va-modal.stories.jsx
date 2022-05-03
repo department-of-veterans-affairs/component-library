@@ -126,6 +126,57 @@ WithoutButtons.args = {
 export const WithoutTitle = Template.bind({});
 WithoutTitle.args = { ...defaultArgs, 'modal-title': undefined };
 
+export const WithNestedWebComponents = ({
+  'click-to-close': clickToClose,
+  'disable-analytics': disableAnalytics,
+  'modal-title': modalTitle,
+  'initial-focus-selector': initialFocusSelector,
+  primaryButtonClick,
+  'primary-button-text': primaryButtonText,
+  secondaryButtonClick,
+  'secondary-button-text': secondaryButtonText,
+  status,
+  visible,
+}) => {
+  const [isVisible, setIsVisible] = useState(visible);
+  const onCloseEvent = () => setIsVisible(!isVisible);
+  const openModal = () => setIsVisible(true);
+  return (
+    <div>
+      <h1>Testing h1 heading</h1>
+      <button onClick={openModal}>Click here to open modal</button>
+      <input id="pre-modal-input" type="checkbox" />
+      <label htmlFor="pre-modal-input">Checkbox before the modal</label>
+      <VaModal
+        clickToClose={clickToClose}
+        disableAnalytics={disableAnalytics}
+        modalTitle={modalTitle}
+        initialFocusSelector={initialFocusSelector}
+        onCloseEvent={onCloseEvent}
+        onPrimaryButtonClick={primaryButtonClick}
+        primaryButtonText={primaryButtonText}
+        onSecondaryButtonClick={secondaryButtonClick}
+        secondaryButtonText={secondaryButtonText}
+        status={status}
+        visible={isVisible}
+      >
+        <p>
+          A modal may pass any React nodes as children to be displayed within
+          it.
+        </p>
+        <blockquote>
+          <input id="plain-checkbox" type="checkbox" />
+          <label htmlFor="plain-checkbox">Plain checkbox</label>
+        </blockquote>
+        <va-checkbox label="va-checkbox" />
+      </VaModal>
+      <input id="post-modal-input" type="checkbox" />
+      <label htmlFor="post-modal-input">Checkbox after the modal</label>
+    </div>
+  );
+};
+WithNestedWebComponents.args = defaultArgs;
+
 const CrisisTemplate = ({
   'click-to-close': clickToClose,
   'disable-analytics': disableAnalytics,
