@@ -25,7 +25,7 @@ export class VaAlertExpandable {
    * Determines the icon and background color.
    * One of `info`, `error`, `success`, `warning`, or `continue`
    */
-  @Prop() status: string = 'info';
+   @Prop() status?: 'continue' | 'error' | 'info' | 'success' | 'warning'; 
 
   /**
    * The text to trigger the expansion

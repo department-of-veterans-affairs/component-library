@@ -9,15 +9,21 @@
 :host([status='warning']) {
   background-color: var(--color-gold-lightest);
 }
+
 :host([status='info']) {
   background-color: var(--color-primary-alt-lightest);
 }
+
 :host([status='error']) {
   background-color: var(--color-secondary-lightest);
 }
-:host([status='continue']),
+
 :host([status='success']) {
   background-color: var(--color-green-lightest);
+}
+
+:host([status='continue']) {
+  background-color: var(--color-gray-lightest);
 }
 
 .alert-expandable-trigger {
@@ -37,9 +43,12 @@ div.error .alert-expandable-trigger:hover {
   background-color: var(--color-secondary-light);
 }
 
-div.continue .alert-expandable-trigger:hover,
 div.success .alert-expandable-trigger:hover {
   background-color: var(--color-green-lighter);
+}
+
+div.continue .alert-expandable-trigger:hover {
+  background-color: var(--color-gray-lighter);
 }
 
 .alert-expandable-title {
