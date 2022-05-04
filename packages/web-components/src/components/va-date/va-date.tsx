@@ -29,16 +29,6 @@ export class VaDate {
   @Prop() error: string;
 
   /**
-   * Set the `min` value on the year input.
-   */
-  @Prop() minYear: number;
-
-  /**
-   * Set the `max` value on the year input.
-   */
-  @Prop() maxYear: number;
-
-  /**
    * Set the default date value must be in YYYY-MM-DD format.
    */
   @Prop({ mutable: true }) value: string;
@@ -114,8 +104,6 @@ export class VaDate {
       label,
       name,
       error,
-      maxYear,
-      minYear,
       handleDateBlur,
       handleDateChange,
       value,
@@ -141,12 +129,7 @@ export class VaDate {
       <Host value={value} invalid={dateInvalid}>
         <fieldset aria-label="Select Month and two digit day XX and four digit year format XXXX">
           <legend>
-            {label}{' '}
-            {required && (
-              <span class="required">
-                (*Required)
-              </span>
-            )}
+            {label} {required && <span class="required">(*Required)</span>}
           </legend>
           {(error || dateInvalid) && (
             <span class="error-message" role="alert">
@@ -186,17 +169,20 @@ export class VaDate {
                   <option value={day}>{day}</option>
                 ))}
             </va-select>
-            <va-number-input
+            <va-text-input
               label="Year"
               name={`${name}Year`}
-              max={maxYear}
-              min={minYear}
+              maxlength={4}
+              minlength={4}
+              pattern="[0-9]{4}"
               // Value must be a string
-              value={year?.toString()}
+              // Checking is NaN if so provide empty string
+              value={year ? year.toString() : ''}
               onInput={handleDateChange}
               onBlur={handleDateBlur}
               class="input-year"
               inputmode="numeric"
+              type="text"
             />
           </div>
         </fieldset>

@@ -61,6 +61,11 @@ export class VaTextInput {
   @Prop() maxlength?: number;
 
   /**
+   * The minimum number of characters allowed in the input.
+   */
+  @Prop() minlength?: number;
+
+  /**
    * What to tell the browser to auto-complete the field with.
    */
   @Prop() autocomplete?: string;
@@ -81,9 +86,14 @@ export class VaTextInput {
   @Prop() ariaDescribedby?: string = '';
 
   /**
+   * The regular expression that the input element's value is checked against on submission
+   */
+  @Prop() pattern?: string;
+
+  /**
    * The value for the input.
    */
-  @Prop({ mutable: true }) value?: string;
+  @Prop({ mutable: true, reflect: true }) value?: string;
   // TODO: Make the value prop reflective. Currently, it isn't because it screws
   // up the input behavior. For now, the only "bug" is that the changed value
   // isn't reflected in the DOM on the web component. That seems to be how the
@@ -148,7 +158,7 @@ export class VaTextInput {
     return (
       <Host>
         {this.label && (
-          <label htmlFor="inputField">
+          <label htmlFor="inputField" part="label">
             {this.label}{' '}
             {this.required && <span class="required">(*Required)</span>}
           </label>
@@ -164,10 +174,20 @@ export class VaTextInput {
           aria-describedby={describedBy}
           inputmode={inputMode}
           maxlength={this.maxlength}
+          minlength={this.minlength}
+          pattern={this.pattern}
           name={this.name}
+          part="input"
         />
         {this.maxlength && this.value?.length >= this.maxlength && (
-          <small aria-live="polite">(Max. {this.maxlength} characters)</small>
+          <small aria-live="polite" part="validation">
+            (Max. {this.maxlength} characters)
+          </small>
+        )}
+        {this.minlength && this.value?.length < this.minlength && (
+          <small aria-live="polite" part="validation">
+            (Min. {this.minlength} characters)
+          </small>
         )}
       </Host>
     );

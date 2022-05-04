@@ -11,11 +11,11 @@ describe('va-text-input', () => {
     expect(element).toEqualHtml(`
       <va-text-input class="hydrated" label="Hello, world">
         <mock:shadow-root>
-          <label for="inputField">
+          <label for="inputField" part="label">
             Hello, world
           </label>
           <slot></slot>
-          <input id="inputField" type="text" />
+          <input id="inputField" type="text" part="input" />
         </mock:shadow-root>
       </va-text-input>
     `);
@@ -34,11 +34,11 @@ describe('va-text-input', () => {
     expect(element).toEqualHtml(`
       <va-text-input class="hydrated" label="Name of issue">
         <mock:shadow-root>
-          <label for="inputField">
+          <label for="inputField" part="label">
             Name of issue
           </label>
           <slot></slot>
-          <input id="inputField" type="text" />
+          <input id="inputField" type="text" part="input" />
         </mock:shadow-root>
         <p className="vads-u-font-weight--normal label-description">
           You can only add an issue that you've already received a VA decision
@@ -87,11 +87,11 @@ describe('va-text-input', () => {
     expect(el).toEqualHtml(`
       <va-text-input class="hydrated" label="This is a field" required="">
         <mock:shadow-root>
-          <label for="inputField">
+          <label for="inputField" part="label">
             This is a field <span class="required">(*Required)</span>
           </label>
           <slot></slot>
-          <input id="inputField" type="text" />
+          <input id="inputField" type="text" part="input" />
         </mock:shadow-root>
       </va-text-input>
     `);
@@ -183,7 +183,9 @@ describe('va-text-input', () => {
 
   it('adds a character limit with descriptive text', async () => {
     const page = await newE2EPage();
-    await page.setContent('<va-text-input maxlength="3" value="22"/>');
+    await page.setContent(
+      '<va-text-input minlength="2" maxlength="3" value="22"/>',
+    );
 
     // Level-setting expectations
     const inputEl = await page.find('va-text-input >>> input');
@@ -195,6 +197,14 @@ describe('va-text-input', () => {
     expect(await inputEl.getProperty('value')).toBe('222');
     expect((await page.find('va-text-input >>> small')).innerText).toContain(
       '(Max. 3 characters)',
+    );
+
+    // Click three times to select all text in input
+    await inputEl.click({ clickCount: 3 });
+    await inputEl.press('2');
+    expect(await inputEl.getProperty('value')).toBe('2');
+    expect((await page.find('va-text-input >>> small')).innerText).toContain(
+      '(Min. 2 characters)',
     );
   });
 

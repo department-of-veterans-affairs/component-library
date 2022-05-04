@@ -19,24 +19,14 @@ export default {
 };
 
 const defaultArgs = {
-  'label': 'Label should be specific',
-  'name': 'test',
-  'required': false,
-  'error': undefined,
-  'value': undefined,
-  'min-year': undefined,
-  'max-year': undefined,
+  label: 'Label should be specific',
+  name: 'test',
+  required: false,
+  error: undefined,
+  value: undefined,
 };
 
-const Template = ({
-  label,
-  name,
-  required,
-  error,
-  value,
-  'min-year': minYear,
-  'max-year': maxYear,
-}) => {
+const Template = ({ label, name, required, error, value }) => {
   return (
     <VaDate
       label={label}
@@ -44,28 +34,18 @@ const Template = ({
       required={required}
       error={error}
       value={value}
-      min-year={minYear}
-      max-year={maxYear}
       onDateBlur={e => console.log(e, 'DATE BLUR FIRED')}
       onDateChange={e => console.log(e, 'DATE CHANGE FIRED')}
     />
   );
 };
 
-const CustomValidationTemplate = ({
-  label,
-  name,
-  required,
-  error,
-  value,
-  'min-year': minYear,
-  'max-year': maxYear,
-}) => {
+const CustomValidationTemplate = ({ label, name, required, error, value }) => {
   const [dateVal, setDateVal] = useState(value);
   const [currentYear, currentMonth, currentDay] = (dateVal || '').split('-');
 
-  if (currentYear < minYear || currentYear > maxYear) {
-    error = `Please enter a year between ${minYear} and ${maxYear}`;
+  if (currentYear < 1900 || currentYear > 2122) {
+    error = 'Please enter a year between 1900 and 2122';
   }
   const today = new Date();
   // new Date as YYYY-MM-DD is giving the day prior to the day select
@@ -82,8 +62,6 @@ const CustomValidationTemplate = ({
         required={required}
         error={error}
         value={dateVal}
-        min-year={minYear}
-        max-year={maxYear}
         onDateBlur={e => console.log(e, 'DATE BLUR')}
         onDateChange={e => setDateVal(e.target.value)}
       />
@@ -109,13 +87,8 @@ const CustomValidationTemplate = ({
         <pre>const dateInput = new Date(dateVal.split('-').join(' '));</pre>
         <h5>Sample Custom Validation Conditional Statements</h5>
         <strong>Year Check</strong>
-        <pre>
-          if (currentYear &lt; minYear || currentYear &gt; maxYear) &#123;
-        </pre>
-        <pre>
-          error = `Please enter a year between $&#123;minYear&#125; and
-          $&#123;maxYear&#125;`;
-        </pre>
+        <pre>if (currentYear &lt; 1900 || currentYear &gt; 2122) &#123;</pre>
+        <pre>error = 'Please enter a year between 1900 and 2122';</pre>
         <pre>&#125;</pre>
         <strong>Date in Future Check</strong>
         <pre>if (dateInput &lt;= today)&#123;</pre>
@@ -136,8 +109,6 @@ Error.args = { ...defaultArgs, error: 'Error Message Example' };
 export const CustomValidation = CustomValidationTemplate.bind({});
 CustomValidation.args = {
   ...defaultArgs,
-  'min-year': '1900',
-  'max-year': '2122',
-  'required': true,
-  'value': '2022-04-19',
+  required: true,
+  value: '2022-04-19',
 };
