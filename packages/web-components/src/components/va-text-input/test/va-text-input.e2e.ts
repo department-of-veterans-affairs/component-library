@@ -199,6 +199,7 @@ describe('va-text-input', () => {
       '(Max. 3 characters)',
     );
 
+    // Click three times to select all text in input
     await inputEl.click({ clickCount: 3 });
     await inputEl.press('2');
     expect(await inputEl.getProperty('value')).toBe('2');
