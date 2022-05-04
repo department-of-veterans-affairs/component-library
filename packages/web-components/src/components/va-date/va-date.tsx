@@ -25,8 +25,9 @@ export class VaDate {
   /**
    * The error message to render (if any)
    * This prop should be leveraged to display any custom validations needed for this component
+   * It is mutable and reflected into the DOM so that we can use it for simple internal validation
    */
-  @Prop() error: string;
+  @Prop({ mutable: true, reflect: true }) error: string;
 
   /**
    * Set the `min` value on the year input.
@@ -113,7 +114,6 @@ export class VaDate {
       required,
       label,
       name,
-      error,
       maxYear,
       minYear,
       handleDateBlur,
@@ -131,14 +131,18 @@ export class VaDate {
     // Check validity of date if invalid provide message and error state styling
     const dateInvalid =
       required && (!isFullDate(value) || day > daysForSelectedMonth.length)
-        ? 'Please provide a valid date'
-        : null;
+
+    if (dateInvalid) this.error = 'Please provide a valid date'
+
+    // This is pulled out from the earlier deconstruction since
+    // we might be assigning a value to it with internal validation
+    const { error } = this;
 
     // Setting new attribute to avoid conflicts with only using error attribute
     // Error attribute should be leveraged for custom error messaging
     // Fieldset has an implicit aria role of group
     return (
-      <Host value={value} invalid={dateInvalid}>
+      <Host value={value}>
         <fieldset aria-label="Select Month and two digit day XX and four digit year format XXXX">
           <legend>
             {label}{' '}
@@ -148,9 +152,9 @@ export class VaDate {
               </span>
             )}
           </legend>
-          {(error || dateInvalid) && (
+          {(error) && (
             <span class="error-message" role="alert">
-              <span class="sr-only">Error</span> {error || dateInvalid}
+              <span class="sr-only">Error</span> {error}
             </span>
           )}
           <div class="date-container">

@@ -182,7 +182,7 @@ export namespace Components {
          */
         "enableAnalytics": boolean;
         /**
-          * The error message to render (if any) This prop should be leveraged to display any custom validations needed for this component
+          * The error message to render (if any) This prop should be leveraged to display any custom validations needed for this component It is mutable and reflected into the DOM so that we can use it for simple internal validation
          */
         "error": string;
         /**
@@ -979,7 +979,7 @@ declare namespace LocalJSX {
          */
         "enableAnalytics"?: boolean;
         /**
-          * The error message to render (if any) This prop should be leveraged to display any custom validations needed for this component
+          * The error message to render (if any) This prop should be leveraged to display any custom validations needed for this component It is mutable and reflected into the DOM so that we can use it for simple internal validation
          */
         "error"?: string;
         /**
