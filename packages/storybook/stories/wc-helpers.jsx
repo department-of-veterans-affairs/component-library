@@ -104,12 +104,12 @@ export const propStructure = comp => {
  * Renders an Action link to the Design System
  */
 function Guidance({ data }) {
-  const { componentName, href } = data;
-  if (!componentName || !href) return null;
+  const { componentName, componentHref } = data;
+  if (!componentName || !componentHref) return null;
   return (
     <a
       className="vads-c-action-link--blue"
-      href={`https://design.va.gov/components/${href}`}
+      href={`https://design.va.gov/components/${componentHref}`}
     >
       View guidance for the {componentName} component in the Design System
     </a>

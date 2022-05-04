@@ -13,8 +13,8 @@ export default {
           data={{
             ...processListDocs,
             guidance: {
+              componentHref: 'process-list',
               componentName: 'Process list',
-              href: 'process-list',
             },
           }}
         />
