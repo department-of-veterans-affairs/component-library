@@ -31,21 +31,6 @@ describe('va-alert-expandable', () => {
     `);
   });
 
-  it('renders an empty div with a "polite" aria-live tag when not visible', async () => {
-    const page = await newE2EPage();
-
-    await page.setContent('<va-alert-expandable status="error" visible="false"></va-alert-expandable>');
-    const element = await page.find('va-alert-expandable');
-
-    expect(element).toEqualHtml(`
-      <va-alert-expandable class="hydrated" visible="false" status="error">
-        <mock:shadow-root>
-          <div aria-live="polite"></div>
-        </mock:shadow-root>
-      </va-alert-expandable>
-    `);
-  });
-
   it('passes an axe check', async () => {
     const page = await newE2EPage();
     await page.setContent(

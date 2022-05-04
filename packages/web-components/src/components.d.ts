@@ -96,21 +96,17 @@ export namespace Components {
          */
         "disableAnalytics": boolean;
         /**
-          * If false, the status icon is removed.
+          * If true, the status icon is removed.
          */
-        "showIcon": boolean;
+        "iconless": boolean;
         /**
           * Determines the icon and background color. One of `info`, `error`, `success`, `warning`, or `continue`
          */
-        "status": string;
+        "status"?: 'continue' | 'error' | 'info' | 'success' | 'warning';
         /**
           * The text to trigger the expansion
          */
         "trigger": string;
-        /**
-          * If true, the alert will be visible.
-         */
-        "visible": boolean;
     }
     interface VaBackToTop {
     }
@@ -902,29 +898,21 @@ declare namespace LocalJSX {
          */
         "disableAnalytics"?: boolean;
         /**
+          * If true, the status icon is removed.
+         */
+        "iconless"?: boolean;
+        /**
           * The event used to track usage of the component. This is emitted when an anchor link is clicked and disableAnalytics is not true.
          */
         "onComponent-library-analytics"?: (event: CustomEvent<any>) => void;
         /**
-          * Fires when the component has successfully finished rendering for the first time.
-         */
-        "onVa-component-did-load"?: (event: CustomEvent<any>) => void;
-        /**
-          * If false, the status icon is removed.
-         */
-        "showIcon"?: boolean;
-        /**
           * Determines the icon and background color. One of `info`, `error`, `success`, `warning`, or `continue`
          */
-        "status"?: string;
+        "status"?: 'continue' | 'error' | 'info' | 'success' | 'warning';
         /**
           * The text to trigger the expansion
          */
         "trigger"?: string;
-        /**
-          * If true, the alert will be visible.
-         */
-        "visible"?: boolean;
     }
     interface VaBackToTop {
     }

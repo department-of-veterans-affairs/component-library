@@ -24,29 +24,26 @@ export default {
 };
 
 const defaultArgs = {
-  'trigger': 'Alert Headline',
   'status': 'info',
+  'trigger': 'Alert Headline',
+  'iconless': false,
   'disable-analytics': false,
-  'show-icon': true,
-  'visible': true
 };
 
 const Template = ({
-  trigger,
   status,
-  visible,
+  trigger,
+  iconless,
   'disable-analytics': disableAnalytics,
-  'show-icon': showIcon,
 }) => {
   return (
     <>
       <h2>Content title</h2>
       <va-alert-expandable
-        trigger={trigger}
         status={status}
-        show-icon={showIcon}
+        trigger={trigger}
+        iconless={iconless}
         disable-analytics={disableAnalytics}
-        visible={visible}
       >
         <div>
           This is the alert content. To take action on this alert, please call <a href="tel:8775551234">877-555-1234.</a>
@@ -57,62 +54,57 @@ const Template = ({
   );
 };
 
-const NoIconTemplate = ({
+const IconlessTemplate = ({
   trigger,
-  'show-icon': showIcon,
+  iconless,
 }) => {
   return (
     <>
       <va-alert-expandable
-        trigger={trigger}
         status="info"
-        show-icon={showIcon}
+        trigger={trigger}
+        iconless={iconless}
         disable-analytics="false"
-        visible="true"
       >
         <div>
           This is the alert content. To take action on this alert, please call <a href="tel:8775551234">877-555-1234.</a>
         </div>
       </va-alert-expandable>
       <va-alert-expandable
-        trigger={trigger}
         status="error"
-        show-icon={showIcon}
+        trigger={trigger}
+        iconless={iconless}
         disable-analytics="false"
-        visible="true"
       >
         <div>
           This is the alert content. To take action on this alert, please call <a href="tel:8775551234">877-555-1234.</a>
         </div>
       </va-alert-expandable>
       <va-alert-expandable
-        trigger={trigger}
         status="warning"
-        show-icon={showIcon}
+        trigger={trigger}
+        iconless={iconless}
         disable-analytics="false"
-        visible="true"
       >
         <div>
           This is the alert content. To take action on this alert, please call <a href="tel:8775551234">877-555-1234.</a>
         </div>
       </va-alert-expandable>
       <va-alert-expandable
-        trigger={trigger}
         status="success"
-        show-icon={showIcon}
+        trigger={trigger}
+        iconless={iconless}
         disable-analytics="false"
-        visible="true"
       >
         <div>
           This is the alert content. To take action on this alert, please call <a href="tel:8775551234">877-555-1234.</a>
         </div>
       </va-alert-expandable>
       <va-alert-expandable
-        trigger={trigger}
         status="continue"
-        show-icon={showIcon}
+        trigger={trigger}
+        iconless={iconless}
         disable-analytics="false"
-        visible="true"
       >
         <div>
           This is the alert content. To take action on this alert, please call <a href="tel:8775551234">877-555-1234.</a>
@@ -150,14 +142,8 @@ Continue.args = {
   status: 'continue' 
 };
 
-export const NoIcon = NoIconTemplate.bind({});
+export const NoIcon = IconlessTemplate.bind({});
 NoIcon.args = {
   ...defaultArgs,
-  'show-icon': false,
-};
-
-export const NotVisible = Template.bind({});
-NotVisible.args = {
-  ...defaultArgs,
-  visible: false,
+  'iconless': true,
 };

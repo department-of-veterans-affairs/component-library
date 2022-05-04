@@ -38,14 +38,9 @@ export class VaAlertExpandable {
   @Prop() disableAnalytics: boolean = false;
 
   /**
-   * If false, the status icon is removed.
+   * If true, the status icon is removed.
    */
-  @Prop() showIcon: boolean = true;
-
-  /**
-   * If true, the alert will be visible.
-   */
-   @Prop() visible: boolean = true;
+  @Prop() iconless: boolean = false;
 
   /**
    * The event used to track usage of the component. This is emitted when an
@@ -101,13 +96,11 @@ export class VaAlertExpandable {
   }
 
   render() {
-    const { status, open, showIcon, visible } = this;
-    const alertClasses = classnames('alert-expandable', status, { 'hide-icon': !showIcon });
+    const { status, open, iconless } = this;
+    const alertClasses = classnames('alert-expandable', status, { 'hide-icon': iconless });
     const bodyClasses = classnames('alert-expandable-body', { 'open': open, 'closed': !open });
     const role = status === 'error' ? 'alert' : null;
     const ariaLive = status === 'error' ? 'assertive' : null;
-
-    if (!visible) return <div aria-live="polite" />;
 
     return (
       <Host>
