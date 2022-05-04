@@ -1,4 +1,5 @@
 import React from 'react';
+import { generateEventsDescription } from './events';
 import { getWebComponentDocs, propStructure } from './wc-helpers';
 
 const segmentedProgressBarDocs = getWebComponentDocs(
@@ -11,7 +12,10 @@ export default {
     componentSubtitle: `Segmented progress bar web component`,
     docs: {
       description: {
-        component: `<a className="vads-c-action-link--blue" href="https://design.va.gov/components/progress-bar">View guidance for the Segmented progress bar component in the Design System</a>`,
+        component:
+          `<a className="vads-c-action-link--blue" href="https://design.va.gov/components/progress-bar">View guidance for the Segmented progress bar component in the Design System</a>` +
+          `\n` +
+          generateEventsDescription(segmentedProgressBarDocs),
       },
     },
   },
