@@ -55,6 +55,7 @@ const defaultArgs = {
   'inputmode': undefined,
   'type': undefined,
   'pattern': undefined,
+  'status': undefined,
 };
 
 const Template = ({
