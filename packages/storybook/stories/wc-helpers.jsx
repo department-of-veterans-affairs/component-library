@@ -105,6 +105,7 @@ export const propStructure = comp => {
  */
 function Guidance({ data }) {
   const { componentName, href } = data;
+  if (!componentName || !href) return null;
   return (
     <a
       className="vads-c-action-link--blue"
