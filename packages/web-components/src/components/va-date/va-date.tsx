@@ -138,7 +138,6 @@ export class VaDate {
     // we might be assigning a value to it with internal validation
     const { error } = this;
 
-    // Setting new attribute to avoid conflicts with only using error attribute
     // Error attribute should be leveraged for custom error messaging
     // Fieldset has an implicit aria role of group
     return (
