@@ -96,7 +96,7 @@ export class VaNumberInput {
     return (
       <Host>
         {this.label && (
-          <label htmlFor="inputField" part="label">
+          <label htmlFor="inputField">
             {this.label}{' '}
             {this.required && (
               <span class="required">
@@ -116,7 +116,6 @@ export class VaNumberInput {
           value={this.value}
           onInput={this.handleInput}
           onBlur={this.handleBlur}
-          part="input"
         />
       </Host>
     );
