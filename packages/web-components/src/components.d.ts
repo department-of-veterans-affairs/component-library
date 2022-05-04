@@ -495,6 +495,10 @@ export namespace Components {
     }
     interface VaTextInput {
         /**
+          * The aria-describedby attribute for the input element in the shadow DOM.
+         */
+        "ariaDescribedby"?: string;
+        /**
           * What to tell the browser to auto-complete the field with.
          */
         "autocomplete"?: string;
@@ -1379,6 +1383,10 @@ declare namespace LocalJSX {
         "vanity"?: string;
     }
     interface VaTextInput {
+        /**
+          * The aria-describedby attribute for the input element in the shadow DOM.
+         */
+        "ariaDescribedby"?: string;
         /**
           * What to tell the browser to auto-complete the field with.
          */

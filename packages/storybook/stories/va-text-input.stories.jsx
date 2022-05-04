@@ -54,6 +54,7 @@ const defaultArgs = {
   'value': undefined,
   'inputmode': undefined,
   'type': undefined,
+  'aria-describedby': undefined,
   'pattern': undefined,
   'status': undefined,
 };
@@ -70,6 +71,7 @@ const Template = ({
   value,
   inputmode,
   type,
+  'aria-describedby': ariaDescribedby,
   status,
   pattern,
 }) => {
@@ -86,6 +88,7 @@ const Template = ({
       value={value}
       inputmode={inputmode}
       type={type}
+      aria-describedby={ariaDescribedby}
       status={status}
       pattern={pattern}
       onBlur={e => console.log('blur event', e)}
