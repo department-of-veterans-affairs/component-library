@@ -93,9 +93,9 @@ export class VaTable {
           (this.headers[colNum] as HTMLElement).classList.add(
             'medium-screen:vads-u-text-align--right',
           );
-
-          cell.setAttribute('data-label', this.columns[colNum]);
         }
+
+        cell.setAttribute('data-label', this.columns[colNum]);
       });
     });
   }
