@@ -111,8 +111,12 @@ export class VaTable {
   private handleHeaderSlotChange(e): void {
     const headers = e.target.assignedElements();
 
-    headers.forEach((header: HTMLSpanElement) => {
-      this.columns.push(header.textContent);
+    headers.forEach((header: HTMLVaTableRowElement) => {
+      const cells = elementChildren(header);
+      
+      cells.forEach((cell: HTMLSpanElement) => {
+        this.columns.push(cell.textContent);
+      });
     });
   }
 
