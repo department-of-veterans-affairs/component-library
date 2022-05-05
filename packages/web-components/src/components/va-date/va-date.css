@@ -40,10 +40,10 @@ span.required {
 }
 
 :host([error]:not([error=''])) va-select::part(select),
-:host([error]:not([error=''])) va-number-input::part(input),
+:host([error]:not([error=''])) va-text-input::part(input),
 :host([invalid]) va-select::part(select),
-:host([invalid]) va-number-input::part(input) {
-  border: 3px solid var(--color-secondary-dark);
+:host([invalid]) va-text-input::part(input) {
+  border: 2px solid var(--color-secondary-dark);
 }
 
 .error-message {
@@ -70,6 +70,10 @@ span.required {
 }
 
 va-select::part(label),
-va-number-input::part(label) {
+va-text-input::part(label) {
   margin-top: 0;
+}
+
+va-text-input::part(validation){
+  display: none;
 }

@@ -108,20 +108,20 @@ describe('va-date', () => {
     expect(elementDay.getAttribute('value')).toBe('');
   });
 
-  it('provides a max and min year to input field', async () => {
+  it('year input only allows for 4 characters to be used', async () => {
     const page = await newE2EPage();
-    await page.setContent(
-      '<va-date name="test" min-year="2000" max-year="2022" />',
-    );
+    await page.setContent('<va-date name="test" />');
 
-    const inputYear = await page.$('pierce/[name="testYear"]');
+    const elementYear = await page.find('va-date >>> .input-year');
+    const handleYear = await page.$('pierce/[name="testYear"]');
+    await handleYear.press('2');
+    await handleYear.press('0');
+    await handleYear.press('2');
+    await handleYear.press('2');
+    await handleYear.press('3');
 
-    expect(await inputYear.evaluate(node => node.getAttribute('min'))).toBe(
-      '2000',
-    );
-    expect(await inputYear.evaluate(node => node.getAttribute('max'))).toBe(
-      '2022',
-    );
+    await page.waitForChanges();
+    expect(elementYear.getAttribute('value')).toBe('2022');
   });
 
   it('fires an invalid message if date is invalid and component is required', async () => {
@@ -174,6 +174,8 @@ describe('va-date', () => {
 
     expect(spy).toHaveReceivedEventTimes(2);
 
+    // Click three times to select all text in input
+    await handleYear.click({ clickCount: 3 });
     await handleYear.press('2');
     await handleYear.press('0');
     await handleYear.press('2');
