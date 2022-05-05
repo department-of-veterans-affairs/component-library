@@ -52,13 +52,10 @@ export class VaTable {
     this.headers = elementChildren(headerRow) as Array<HTMLElement>;
 
     this.headers.forEach((item: HTMLVaTableRowElement) => {
-      console.log(item.textContent);
       this.columns.push(item.textContent);
       item.setAttribute('role', 'columnheader');
       item.setAttribute('scope', 'col');
     });
-
-    console.log(this.columns);
 
     if (this.sortColumn >= 0 && this.columns.length > this.sortColumn) {
       const icon = this.sortAscending ? ascendingIcon : descendingIcon;
