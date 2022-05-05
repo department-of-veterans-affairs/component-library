@@ -20,8 +20,9 @@ const elementChildren = (el: HTMLElement) =>
   shadow: true,
 })
 export class VaTable {
-  headers: HTMLElement[] = null;
+  alignment: object = {};
   columns: string[] = [];
+  headers: HTMLElement[] = null;
 
   @Element() el: HTMLElement;
 
@@ -46,15 +47,15 @@ export class VaTable {
   @State() sortAscending: boolean = !this.descending;
 
   componentDidLoad() {
-    const [headerRow, ...rows] = Array.from(
+    const headerRow = Array.from(
       this.el.querySelectorAll('va-table-row'),
-    );
+    )[0];
     this.headers = elementChildren(headerRow) as Array<HTMLElement>;
 
-    this.headers.forEach((item: HTMLVaTableRowElement) => {
-      this.columns.push(item.textContent);
+    this.headers.forEach((item: HTMLVaTableRowElement, colNum) => {
       item.setAttribute('role', 'columnheader');
       item.setAttribute('scope', 'col');
+      (item as HTMLElement).classList.add(this.alignment[colNum]);
     });
 
     if (this.sortColumn >= 0 && this.columns.length > this.sortColumn) {
@@ -81,23 +82,6 @@ export class VaTable {
 
       this.handleSort();
     }
-
-    // Check the header row to determine the type of data in each column
-    Array.from(rows).forEach((row, index) => {
-      const cells = elementChildren(row);
-
-      cells.forEach((cell: HTMLSpanElement, colNum) => {
-        // Check the header row to determine the type of data in each column
-        // Right align header cells with numeric data
-        if (index === 0 && isNumeric(cell.textContent)) {
-          (this.headers[colNum] as HTMLElement).classList.add(
-            'medium-screen:vads-u-text-align--right',
-          );
-        }
-
-        cell.setAttribute('data-label', this.columns[colNum]);
-      });
-    });
   }
 
   componentDidUpdate() {
@@ -124,15 +108,29 @@ export class VaTable {
     this.sortAscending = !this.sortAscending;
   }
 
+  private handleHeaderSlotChange(e): void {
+    const headers = e.target.assignedElements();
+
+    headers.forEach((header: HTMLSpanElement) => {
+      this.columns.push(header.textContent);
+    });
+  }
+
   private handleSlotChange(e): void {
     const rows = e.target.assignedElements();
 
-    rows.forEach(row => {
+    rows.forEach((row: HTMLVaTableRowElement, index) => {
       const cells = elementChildren(row);
 
       cells.forEach((cell: HTMLSpanElement, colNum) => {
-        if (isNumeric(cell.textContent)) {
-          cell.classList.add('medium-screen:vads-u-text-align--right');
+        // Look at the first row of data to determine type of data in column
+        // Right align columns with numeric data
+        if (index === 0 && isNumeric(cell.textContent)) {
+          this.alignment[colNum] = 'medium-screen:vads-u-text-align--right';
+        }
+      
+        if (this.alignment[colNum]) {
+          cell.classList.add(this.alignment[colNum]);
         }
 
         // This allows the responsive table in mobile view to display
@@ -150,7 +148,7 @@ export class VaTable {
       <Host role="table">
         {tableTitle && <caption>{tableTitle}</caption>}
         <thead>
-          <slot name="headers"></slot>
+          <slot name="headers" onSlotchange={e => this.handleHeaderSlotChange(e)}></slot>
         </thead>
 
         <tbody>
