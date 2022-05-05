@@ -19,7 +19,9 @@ const glob = require('glob');
  * @return {Module[]}
  */
 function readAllModules(rootDir) {
-  const jsFiles = glob.sync(`${rootDir}/**/*!(.unit)*.@(js|jsx)`);
+  const jsFiles = glob.sync(
+    `${rootDir}/**/!(tests)/*!(.unit|.spec)*.@(js|jsx)`
+  );
 
   return jsFiles.map(modulePath => ({
     path: modulePath,
