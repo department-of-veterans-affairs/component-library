@@ -121,8 +121,8 @@ function Guidance({ data }) {
  * Accepts a JSON object as a prop representing component information
  */
 export function StoryDocs({ data }) {
-  const args = data && data.props && data.props.length > 0;
-  const guidance = data && data.guidance;
+  const args = data?.props?.length > 0;
+  const guidance = data?.guidance;
   return (
     <>
       <Title />
