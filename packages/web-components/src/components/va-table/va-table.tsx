@@ -4,6 +4,11 @@ import ascendingIcon from '../../assets/sort-arrow-up.svg?format=text';
 import descendingIcon from '../../assets/sort-arrow-down.svg?format=text';
 import { quicksort, reverseQuicksort } from '../../utils/dom-sort';
 
+// For IE11 compatibility. `el.children` renders booleans instead of html elements,
+// so instead we use `el.childNodes` and filter out nodes that aren't a proper tag
+const elementChildren = (el: HTMLElement) =>
+  Array.from(el.childNodes).filter(node => node.nodeName !== '#text');
+
 /**
  * This component expects `<va-table-row>` elements as children.
  * Children of each row element should be `<span>` elements. Table
@@ -16,6 +21,7 @@ import { quicksort, reverseQuicksort } from '../../utils/dom-sort';
 })
 export class VaTable {
   headers: HTMLElement[] = null;
+  columns: string[] = [];
 
   @Element() el: HTMLElement;
 
@@ -40,24 +46,21 @@ export class VaTable {
   @State() sortAscending: boolean = !this.descending;
 
   componentDidLoad() {
-    // For IE11 compatibility. `el.children` renders booleans instead of html elements,
-    // so instead we use `el.childNodes` and filter out nodes that aren't a proper tag
-    const elementChildren = (el: HTMLElement) =>
-      Array.from(el.childNodes).filter(node => node.nodeName !== '#text');
-
     const [headerRow, ...rows] = Array.from(
       this.el.querySelectorAll('va-table-row'),
     );
     this.headers = elementChildren(headerRow) as Array<HTMLElement>;
-    const columns = [];
 
     this.headers.forEach((item: HTMLVaTableRowElement) => {
-      columns.push(item.textContent);
+      console.log(item.textContent);
+      this.columns.push(item.textContent);
       item.setAttribute('role', 'columnheader');
       item.setAttribute('scope', 'col');
     });
 
-    if (this.sortColumn >= 0 && columns.length > this.sortColumn) {
+    console.log(this.columns);
+
+    if (this.sortColumn >= 0 && this.columns.length > this.sortColumn) {
       const icon = this.sortAscending ? ascendingIcon : descendingIcon;
       const button = document.createElement('button');
       button.setAttribute(
@@ -72,7 +75,7 @@ export class VaTable {
         'vads-u-background-color--gray-lightest',
         'vads-u-color--base',
       );
-      button.innerHTML = `${columns[this.sortColumn]}${icon}`;
+      button.innerHTML = `${this.columns[this.sortColumn]}${icon}`;
       button.onclick = this.handleSort.bind(this);
 
       const sortableHeader = this.headers[this.sortColumn];
@@ -82,28 +85,20 @@ export class VaTable {
       this.handleSort();
     }
 
-    // Store alignment classes by column index.
-    const alignment = {};
+    // Check the header row to determine the type of data in each column
     Array.from(rows).forEach((row, index) => {
       const cells = elementChildren(row);
 
       cells.forEach((cell: HTMLSpanElement, colNum) => {
-        // Look at the first row of data to determine type of data in column
-        // Right align columns with numeric data
+        // Check the header row to determine the type of data in each column
+        // Right align header cells with numeric data
         if (index === 0 && isNumeric(cell.textContent)) {
-          alignment[colNum] = 'medium-screen:vads-u-text-align--right';
           (this.headers[colNum] as HTMLElement).classList.add(
-            alignment[colNum],
+            'medium-screen:vads-u-text-align--right',
           );
-        }
-        if (alignment[colNum]) {
-          cell.classList.add(alignment[colNum]);
-        }
 
-        // This allows the responsive table in mobile view to display
-        // a column header
-        cell.setAttribute('data-label', columns[colNum]);
-        cell.setAttribute('role', 'cell');
+          cell.setAttribute('data-label', this.columns[colNum]);
+        }
       });
     });
   }
@@ -132,6 +127,25 @@ export class VaTable {
     this.sortAscending = !this.sortAscending;
   }
 
+  private handleSlotChange(e): void {
+    const rows = e.target.assignedElements();
+
+    rows.forEach(row => {
+      const cells = elementChildren(row);
+
+      cells.forEach((cell: HTMLSpanElement, colNum) => {
+        if (isNumeric(cell.textContent)) {
+          cell.classList.add('medium-screen:vads-u-text-align--right');
+        }
+
+        // This allows the responsive table in mobile view to display
+        // a column header
+        cell.setAttribute('data-label', this.columns[colNum]);
+        cell.setAttribute('role', 'cell');
+      });
+    });
+  }
+
   render() {
     const { tableTitle } = this;
 
@@ -143,7 +157,7 @@ export class VaTable {
         </thead>
 
         <tbody>
-          <slot></slot>
+          <slot onSlotchange={e => this.handleSlotChange(e)}></slot>
         </tbody>
       </Host>
     );
