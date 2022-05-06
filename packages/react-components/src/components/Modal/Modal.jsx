@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import classNames from 'classnames';
+import clsx from 'clsx';
 import { FocusOn } from 'react-focus-on';
 import dispatchAnalyticsEvent from '../../helpers/analytics';
 
@@ -124,20 +124,20 @@ class Modal extends React.Component {
     const titleId = `${id || 'va-modal'}-title`;
     const content = this.props.contents || this.props.children;
 
-    const modalClass = classNames('va-modal', this.props.cssClass);
+    const modalClass = clsx('va-modal', this.props.cssClass);
 
-    const wrapperClass = classNames('va-modal-inner', {
+    const wrapperClass = clsx('va-modal-inner', {
       'usa-alert': status,
       [`usa-alert-${status}`]: status,
       'va-modal-alert': status,
     });
 
     const bodyClass = status ? 'usa-alert-body' : 'va-modal-body';
-    const titleClass = classNames(
+    const titleClass = clsx(
       status ? 'usa-alert-heading' : 'va-modal-title',
       'vads-u-font-size--h3',
     );
-    const contentClass = classNames({ 'usa-alert-text': status });
+    const contentClass = clsx({ 'usa-alert-text': status });
     const ariaRole = status => {
       if (status === 'warning' || status === 'error') {
         return 'alertdialog';
@@ -145,7 +145,7 @@ class Modal extends React.Component {
       return 'dialog';
     };
 
-    const btnAriaLabel = title ? `close ${title} modal` : 'close modal'
+    const btnAriaLabel = title ? `close ${title} modal` : 'close modal';
 
     const closeButton = !this.props.hideCloseButton && (
       <button

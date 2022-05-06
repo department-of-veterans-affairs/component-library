@@ -1,7 +1,7 @@
 // Node modules.
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import classNames from 'classnames';
+import clsx from 'clsx';
 
 class Pagination extends Component {
   static propTypes = {
@@ -185,7 +185,7 @@ class Pagination extends Component {
     }
 
     const pageList = this.pageNumbers().map(pageNumber => {
-      const pageClass = classNames({
+      const pageClass = clsx({
         'va-pagination-active': page === pageNumber,
       });
 
@@ -206,7 +206,7 @@ class Pagination extends Component {
 
     return (
       <div
-        className={classNames({
+        className={clsx({
           'va-pagination': true,
           [className]: className,
         })}

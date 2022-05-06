@@ -1,7 +1,7 @@
 // Node modules.
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import classnames from 'classnames';
+import clsx from 'clsx';
 import { uniqueId } from '../../helpers/utilities';
 import dispatchAnalyticsEvent from '../../helpers/analytics';
 
@@ -63,7 +63,7 @@ class Breadcrumbs extends Component {
     return (
       <nav
         aria-label={ariaLabel}
-        className={classnames({
+        className={clsx({
           'va-nav-breadcrumbs': true,
           'va-nav-breadcrumbs--mobile': !!mobileFirstProp,
           [className]: !!className,

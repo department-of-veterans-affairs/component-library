@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import ReactCSSTransitionGroup from 'react-transition-group/CSSTransitionGroup';
-import classnames from 'classnames';
+import clsx from 'clsx';
 
 /*
  * Component that expands to show a hidden child element with a fade in/slide down animation
@@ -19,7 +19,7 @@ export default function ExpandingGroup({
   additionalClass,
   expandedContentId,
 }) {
-  const classNames = classnames(
+  const classNames = clsx(
     'form-expanding-group',
     { 'form-expanding-group-open': open },
     { 'form-expanding-group-plus': showPlus },

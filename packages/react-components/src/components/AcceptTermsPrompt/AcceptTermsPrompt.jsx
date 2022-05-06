@@ -1,5 +1,5 @@
 import React from 'react';
-import classNames from 'classnames';
+import clsx from 'clsx';
 import PropTypes from 'prop-types';
 
 class AcceptTermsPrompt extends React.Component {
@@ -52,7 +52,7 @@ class AcceptTermsPrompt extends React.Component {
       this.state.scrolledToBottom && this.state.yesSelected
     );
 
-    const submitClass = classNames({
+    const submitClass = clsx({
       'usa-button': true,
       'usa-button-disabled': submitDisabled,
       'submit-button': true,
@@ -82,9 +82,9 @@ class AcceptTermsPrompt extends React.Component {
       </div>
     );
 
-    const actionButtonClass = classNames({
+    const actionButtonClass = clsx({
       'form-radio-buttons': true,
-      disabled: !this.state.scrolledToBottom,
+      'disabled': !this.state.scrolledToBottom,
     });
 
     /* eslint-disable react/no-danger */

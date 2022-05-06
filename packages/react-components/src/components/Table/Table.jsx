@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
+import clsx from 'clsx';
 
 const borderClasses =
   'vads-u-border-top--0 vads-u-border-right--0 vads-u-border-left--0 vads-u-font-family--sans vads-u-padding--0 vads-u-padding-y--0p5 medium-screen:vads-u-padding--2';
@@ -14,7 +14,7 @@ const cellProps = (
 ) => {
   return {
     'data-index': index,
-    'className': classNames(borderClasses, {
+    'className': clsx(borderClasses, {
       'vads-u-text-align--left': alignLeft,
       'medium-screen:vads-u-text-align--right': alignRight,
     }),

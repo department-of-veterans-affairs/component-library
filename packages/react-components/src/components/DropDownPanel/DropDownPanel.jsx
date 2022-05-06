@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import classNames from 'classnames';
+import clsx from 'clsx';
 
 export default class DropDownPanel extends React.Component {
   componentDidMount() {
@@ -25,7 +25,7 @@ export default class DropDownPanel extends React.Component {
   };
 
   render() {
-    const buttonClasses = classNames(
+    const buttonClasses = clsx(
       this.props.cssClass,
       { 'va-btn-withicon': this.props.icon },
       'va-dropdown-trigger',
@@ -34,7 +34,7 @@ export default class DropDownPanel extends React.Component {
     return (
       <div
         className="va-dropdown"
-        ref={(div) => {
+        ref={div => {
           this.dropdownDiv = div;
         }}
       >
@@ -80,7 +80,6 @@ DropDownPanel.propTypes = {
    */
   cssClass: PropTypes.string,
 
-
   /**
    * The string of classnames for the dropdown panel container.
    */
@@ -108,6 +107,6 @@ DropDownPanel.propTypes = {
 };
 
 DropDownPanel.defaultProps = {
-  dropdownPanelClassNames: "",
+  dropdownPanelClassNames: '',
   disabled: false,
 };

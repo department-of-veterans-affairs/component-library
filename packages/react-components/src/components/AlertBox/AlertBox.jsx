@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import classNames from 'classnames';
+import clsx from 'clsx';
 import dispatchAnalyticsEvent from '../../helpers/analytics';
 
 // Enum used to set the AlertBox's `status` prop
@@ -80,7 +80,7 @@ class AlertBox extends Component {
   render() {
     if (!this.props.isVisible) return <div aria-live="polite" />;
 
-    const alertClass = classNames(
+    const alertClass = clsx(
       'usa-alert',
       `usa-alert-${this.props.status}`,
       { 'background-color-only': this.props.backgroundOnly },

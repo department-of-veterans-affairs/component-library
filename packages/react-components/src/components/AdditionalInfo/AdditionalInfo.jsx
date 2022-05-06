@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { uniqueId } from '../../helpers/utilities';
-import classNames from 'classnames';
+import clsx from 'clsx';
 import ExpandingGroup from '../ExpandingGroup/ExpandingGroup';
 import dispatchAnalyticsEvent from '../../helpers/analytics';
 
@@ -45,16 +45,16 @@ export default class AdditionalInfo extends React.Component {
     // Display button as a block element in order to
     // preserve the Safari VoiceOver navigation order
     // when expanding the content.
-    const buttonClass = classNames(
+    const buttonClass = clsx(
       'additional-info-button',
       'va-button-link',
       'vads-u-display--block',
     );
 
-    const iconClass = classNames({
-      fas: true,
+    const iconClass = clsx({
+      'fas': true,
       'fa-angle-down': true,
-      open: this.state.open,
+      'open': this.state.open,
     });
 
     const trigger = (

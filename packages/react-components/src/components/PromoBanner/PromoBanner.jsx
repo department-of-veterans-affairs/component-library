@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import classnames from 'classnames';
+import clsx from 'clsx';
 import dispatchAnalyticsEvent from '../../helpers/analytics';
 
 const PROMO_BANNER_TYPES = {
@@ -24,11 +24,7 @@ function PromoBanner({
   text,
   disableAnalytics,
 }) {
-  const iconClasses = classnames(
-    'fas',
-    'fa-stack-1x',
-    PROMO_BANNER_ICONS.get(type),
-  );
+  const iconClasses = clsx('fas', 'fa-stack-1x', PROMO_BANNER_ICONS.get(type));
 
   const handleLinkClick = () => {
     // Conditionally track the event.

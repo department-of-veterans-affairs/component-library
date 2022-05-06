@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { uniqueId } from '../../helpers/utilities';
-import classNames from 'classnames';
+import clsx from 'clsx';
 
 import { makeField } from '../../helpers/fields';
 
@@ -76,7 +76,7 @@ class TextArea extends React.Component {
       requiredSpan = <span className="form-required-span">(*Required)</span>;
     }
 
-    const classes = classNames(this.props.additionalClass, {
+    const classes = clsx(this.props.additionalClass, {
       'input-disabled': this.props.disabled,
     });
 

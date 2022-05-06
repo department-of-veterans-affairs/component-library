@@ -1,5 +1,6 @@
 module.exports = function (api) {
   const plugins = [
+    '@babel/plugin-transform-runtime',
     // Stage 2
     '@babel/plugin-proposal-function-sent',
     '@babel/plugin-proposal-export-namespace-from',

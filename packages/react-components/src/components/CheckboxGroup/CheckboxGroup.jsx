@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { uniqueId, isString } from '../../helpers/utilities';
-import classNames from 'classnames';
+import clsx from 'clsx';
 import ExpandingGroup from '../ExpandingGroup/ExpandingGroup';
 import { makeField } from '../../helpers/fields';
 
@@ -134,12 +134,12 @@ class CheckboxGroup extends React.Component {
       return output;
     });
 
-    const fieldsetClass = classNames('fieldset-input', {
+    const fieldsetClass = clsx('fieldset-input', {
       'usa-input-error': this.props.errorMessage,
       [this.props.additionalFieldsetClass]: this.props.additionalFieldsetClass,
     });
 
-    const legendClass = classNames('legend-label', {
+    const legendClass = clsx('legend-label', {
       'usa-input-error-label': this.props.errorMessage,
       [this.props.additionalLegendClass]: this.props.additionalLegendClass,
     });

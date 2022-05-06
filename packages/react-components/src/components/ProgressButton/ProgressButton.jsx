@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { uniqueId } from '../../helpers/utilities';
-import classNames from 'classnames';
+import clsx from 'clsx';
 
 /**
  * A component for the continue button to navigate through panels of questions.
@@ -35,7 +35,7 @@ class ProgressButton extends React.Component {
       <button
         type={this.props.submitButton ? 'submit' : 'button'}
         disabled={disabled}
-        className={classNames(this.props.buttonClass, {
+        className={clsx(this.props.buttonClass, {
           'usa-button-disabled': disabled,
         })}
         id={`${this.id}-continueButton`}
