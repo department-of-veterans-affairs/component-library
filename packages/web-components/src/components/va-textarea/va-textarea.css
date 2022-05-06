@@ -1,3 +1,4 @@
+@import '../../mixins/focusable.css';
 @import '../va-text-input/va-text-input.css';
 
 :host {
