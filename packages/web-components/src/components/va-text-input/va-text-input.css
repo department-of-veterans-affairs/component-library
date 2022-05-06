@@ -59,6 +59,6 @@ input:invalid {
   border: 2px solid var(--color-secondary-dark);
 }
 
-:host([status='success']) input {
+:host([success='true']) input {
   border: 2px solid var(--color-green);
 }
