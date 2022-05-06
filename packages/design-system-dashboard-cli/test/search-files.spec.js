@@ -18,7 +18,10 @@ const json = {
   '../.env.json': JSON.stringify(env),
   'mock-vw/jsx-file.jsx': jsxFile,
   'mock-vw/js-file.js': 'some JS',
-  // 'mock-vw/js-file.unit.js': 'Testing code',
+  'mock-vw/app/js-file.unit.js': 'Testing file',
+  'mock-vw/app/js-file.spec.js': 'Testing file',
+  'mock-vw/app/js-file.unit.spec.js': 'Testing file',
+  'mock-vw/app/tests/js-file.js': 'Testing file',
   'mock-vw/txt-file.txt': 'Some text',
   'mock-cb/liquid-template.liquid': 'A template',
   'mock-cb/html-layout.html': 'HTML page',
@@ -28,7 +31,7 @@ jest.mock('fs');
 memfs.vol.fromJSON(json, '.');
 
 describe('readAllModules', () => {
-  it('reads only js and jsx files', () => {
+  it('reads only js and jsx files which are not test files', () => {
     const files = readAllModules(env.repos['vets-website']);
 
     expect(files.length).toEqual(2);

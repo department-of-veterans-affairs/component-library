@@ -11,10 +11,10 @@ describe('va-number-input', () => {
     expect(element).toEqualHtml(`
       <va-number-input class="hydrated" label="Hello, world">
         <mock:shadow-root>
-          <label for="inputField" part="label">
+          <label for="inputField">
             Hello, world
           </label>
-          <input id="inputField" part="input" type="number" />
+          <input id="inputField" type="number" />
         </mock:shadow-root>
       </va-number-input>
     `);
@@ -40,10 +40,10 @@ describe('va-number-input', () => {
     expect(el).toEqualHtml(`
       <va-number-input class="hydrated" label="This is a field" required="">
         <mock:shadow-root>
-          <label for="inputField" part="label">
+          <label for="inputField">
             This is a field <span class="required">(*Required)</span>
           </label>
-          <input id="inputField" part="input" type="number" />
+          <input id="inputField" type="number" />
         </mock:shadow-root>
       </va-number-input>
     `);

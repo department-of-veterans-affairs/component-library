@@ -208,14 +208,6 @@ export namespace Components {
          */
         "label": string;
         /**
-          * Set the `max` value on the year input.
-         */
-        "maxYear": number;
-        /**
-          * Set the `min` value on the year input.
-         */
-        "minYear": number;
-        /**
           * Used to create unique name attributes for each input.
          */
         "name": string;
@@ -555,9 +547,17 @@ export namespace Components {
          */
         "maxlength"?: number;
         /**
+          * The minimum number of characters allowed in the input.
+         */
+        "minlength"?: number;
+        /**
           * The name to pass to the input element.
          */
         "name"?: string;
+        /**
+          * The regular expression that the input element's value is checked against on submission
+         */
+        "pattern"?: string;
         /**
           * Set the input to required and render the (Required) text.
          */
@@ -1034,14 +1034,6 @@ declare namespace LocalJSX {
          */
         "label": string;
         /**
-          * Set the `max` value on the year input.
-         */
-        "maxYear"?: number;
-        /**
-          * Set the `min` value on the year input.
-         */
-        "minYear"?: number;
-        /**
           * Used to create unique name attributes for each input.
          */
         "name": string;
@@ -1473,6 +1465,10 @@ declare namespace LocalJSX {
          */
         "maxlength"?: number;
         /**
+          * The minimum number of characters allowed in the input.
+         */
+        "minlength"?: number;
+        /**
           * The name to pass to the input element.
          */
         "name"?: string;
@@ -1480,6 +1476,10 @@ declare namespace LocalJSX {
           * The event used to track usage of the component. This is emitted when the input is blurred and enableAnalytics is true.
          */
         "onComponent-library-analytics"?: (event: CustomEvent<any>) => void;
+        /**
+          * The regular expression that the input element's value is checked against on submission
+         */
+        "pattern"?: string;
         /**
           * Set the input to required and render the (Required) text.
          */
