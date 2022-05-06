@@ -22,6 +22,8 @@ function readAllModules(rootDir) {
   const jsFiles = glob.sync(`${rootDir}/**/*.@(js|jsx)`, {
     ignore: [
       `${rootDir}/**/tests/**`,
+      // This mock-form directory exists in vets-website and we don't want to include it
+      `${rootDir}/**/_mock-form/**`,
       `${rootDir}/**/*.unit.@(js|jsx)`,
       `${rootDir}/**/*.spec.@(js|jsx)`,
     ],
