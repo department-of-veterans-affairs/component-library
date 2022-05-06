@@ -106,7 +106,7 @@ export class VaTextInput {
   /**
    * Adds styling based on status value
    */
-  @Prop() status: 'success';
+  @Prop() success?: boolean;
 
   /**
    * The event used to track usage of the component. This is emitted when the

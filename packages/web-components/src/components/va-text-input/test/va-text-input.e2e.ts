@@ -252,4 +252,23 @@ describe('va-text-input', () => {
       expect(inputEl.getAttribute('inputmode')).toBe(inputMode);
     }
   });
+
+  it('displays a green border around input when success is true', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-text-input success />');
+
+    const input = await page.find('va-text-input >>> input');
+    expect((await input.getComputedStyle()).borderBottomColor).toEqual(
+      'rgb(91, 97, 107)',
+    );
+    expect((await input.getComputedStyle()).borderLeftColor).toEqual(
+      'rgb(91, 97, 107)',
+    );
+    expect((await input.getComputedStyle()).borderRightColor).toEqual(
+      'rgb(91, 97, 107)',
+    );
+    expect((await input.getComputedStyle()).borderTopColor).toEqual(
+      'rgb(91, 97, 107)',
+    );
+  });
 });

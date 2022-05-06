@@ -55,8 +55,8 @@ const defaultArgs = {
   'inputmode': undefined,
   'type': undefined,
   'aria-describedby': undefined,
+  'success': false,
   'pattern': undefined,
-  'status': undefined,
 };
 
 const Template = ({
@@ -72,7 +72,7 @@ const Template = ({
   inputmode,
   type,
   'aria-describedby': ariaDescribedby,
-  status,
+  success,
   pattern,
 }) => {
   return (
@@ -89,7 +89,7 @@ const Template = ({
       inputmode={inputmode}
       type={type}
       aria-describedby={ariaDescribedby}
-      status={status}
+      success={success}
       pattern={pattern}
       onBlur={e => console.log('blur event', e)}
       onInput={e => console.log('input event value', e.target.value)}
@@ -105,7 +105,7 @@ export const Error = Template.bind({});
 Error.args = { ...defaultArgs, error: 'This is an error message' };
 
 export const Success = Template.bind({});
-Success.args = { ...defaultArgs, status: 'success' };
+Success.args = { ...defaultArgs, success: true };
 
 export const Required = Template.bind({});
 Required.args = { ...defaultArgs, required: true };

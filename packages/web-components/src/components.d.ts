@@ -565,7 +565,7 @@ export namespace Components {
         /**
           * Adds styling based on status value
          */
-        "status": 'success';
+        "success"?: boolean;
         /**
           * The type attribute.
          */
@@ -1487,7 +1487,7 @@ declare namespace LocalJSX {
         /**
           * Adds styling based on status value
          */
-        "status"?: 'success';
+        "success"?: boolean;
         /**
           * The type attribute.
          */
