@@ -13,7 +13,7 @@ export default {
     docs: {
       description: {
         component:
-          `<a className="vads-c-action-link--blue" href="https://design.va.gov/components/progress-bar">View guidance for the Segmented progress bar component in the Design System</a>` +
+          `<a className="vads-c-action-link--blue" href="https://design.va.gov/components/progress-bar/segmented">View guidance for the Segmented progress bar component in the Design System</a>` +
           `\n` +
           generateEventsDescription(segmentedProgressBarDocs),
       },
