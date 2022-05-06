@@ -3,11 +3,19 @@ import {
   Element,
   Event,
   EventEmitter,
+  forceUpdate,
   Host,
   Prop,
   h,
 } from '@stencil/core';
+import i18next from 'i18next';
+import { Build } from '@stencil/core';
 import classnames from 'classnames';
+
+if (Build.isTesting) {
+  // Make i18next.t() return the key instead of the value
+  i18next.init({ lng: 'cimode' });
+}
 
 @Component({
   tag: 'va-alert',
@@ -49,7 +57,7 @@ export class VaAlert {
   /**
    * Aria-label text for the close button.
    */
-  @Prop() closeBtnAriaLabel: string = 'Close notification';
+  @Prop() closeBtnAriaLabel: string = i18next.t('close-notification');
 
   /**
    * If true, a close button will be displayed.
@@ -93,6 +101,16 @@ export class VaAlert {
     bubbles: true,
   })
   componentLibraryAnalytics: EventEmitter;
+
+  connectedCallback() {
+    i18next.on('languageChanged', () => {
+      forceUpdate(this.el);
+    });
+  }
+
+  disconnectedCallback() {
+    i18next.off('languageChanged');
+  }
 
   private closeHandler(e: MouseEvent): void {
     this.closeEvent.emit(e);

@@ -11,4 +11,5 @@ export default {
   'collapse-all': 'English "Expand all"',
   'expand-all-aria-label': 'English "Expand all accordions"',
   'collapse-all-aria-label': 'English "Collapse all accordions"',
+  'close-notification': 'Close Notification'
 };

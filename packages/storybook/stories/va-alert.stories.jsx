@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useRef } from 'react';
 import { generateEventsDescription } from './events';
 import { VaAlert } from '@department-of-veterans-affairs/web-components/react-bindings';
 import { getWebComponentDocs, propStructure } from './wc-helpers';
@@ -177,6 +177,47 @@ const BackgroundOnlyTemplate = ({
   );
 };
 
+const I18nTemplate = ({
+  status,
+  'background-only': backgroundOnly,
+  'show-icon': showIcon,
+  'disable-analytics': disableAnalytics,
+  visible,
+  'full-width': fullWidth,
+  closeable,
+  headline,
+}) => {
+  const thisTemplate = useRef(null);
+  const [lang, setLang] = useState('en');
+
+  return (
+    <>
+      <button
+        onClick={() => {
+          const newLang = lang === 'en' ? 'es' : 'en';
+          setLang(newLang);
+          thisTemplate.current.closest('main').setAttribute('lang', newLang);
+        }}
+      >
+        Switch language
+      </button>
+      
+      <va-alert
+        status={status}
+        background-only={backgroundOnly}
+        show-icon={showIcon}
+        disable-analytics={disableAnalytics}
+        visible={visible}
+        closeable={closeable}
+        full-width={fullWidth}
+      >
+        {headline}
+        <div ref={thisTemplate}>This is an alert</div>
+      </va-alert>
+    </>
+  );
+};
+
 export const Default = Template.bind({});
 Default.args = { ...defaultArgs };
 Default.argTypes = propStructure(alertDocs);
@@ -192,6 +233,9 @@ Warning.args = { ...defaultArgs, status: 'warning' };
 
 export const Error = Template.bind({});
 Error.args = { ...defaultArgs, status: 'error' };
+
+export const Internationalization = I18nTemplate.bind({});
+Internationalization.args = { ...defaultArgs, closeable: true };
 
 export const HeadingLevel = Template.bind({});
 HeadingLevel.args = {
