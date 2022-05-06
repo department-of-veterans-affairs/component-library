@@ -1,12 +1,12 @@
 :host {
   display: block;
   font-family: var(--font-source-sans);
-  margin-top: 3rem;
 }
 
 label {
   display: block;
   max-width: 46rem;
+  margin-top: 3rem;
 }
 
 span.required {
@@ -54,7 +54,8 @@ input:not([disabled]):focus {
   font-weight: 700;
 }
 
-:host([error]:not([error=''])) input {
+:host([error]:not([error=''])) input,
+input:invalid {
   border: 2px solid var(--color-secondary-dark);
 }
 

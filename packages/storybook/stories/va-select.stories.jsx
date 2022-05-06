@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import React, { useState } from 'react';
 import { generateEventsDescription } from './events';
 import { getWebComponentDocs, propStructure } from './wc-helpers';
@@ -25,7 +24,7 @@ const defaultArgs = {
   'name': 'branch',
   'value': 'army',
   'required': false,
-  'error': null,
+  'error': undefined,
   'aria-live-region-text': 'You selected',
   'options': [
     <option key="1" value="navy">

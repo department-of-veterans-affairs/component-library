@@ -8,9 +8,20 @@ export default {
   title: 'Components/va-process-list',
   parameters: {
     docs: {
-      /* eslint-disable-next-line react/display-name */
-      page: () => <StoryDocs data={processListDocs} />,
+      page: () => (
+        <StoryDocs
+          data={{
+            ...processListDocs,
+            guidance: {
+              componentHref: 'process-list',
+              componentName: 'Process list',
+            },
+          }}
+        />
+      ),
     },
+
+    componentSubtitle: `Process list web component`,
   },
 };
 
