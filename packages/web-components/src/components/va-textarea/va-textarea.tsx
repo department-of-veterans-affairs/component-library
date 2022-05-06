@@ -51,19 +51,16 @@ export class VaTextarea {
       <Host>
         <label
           id="textarea-label"
-          class={labelErrorClass}
           htmlFor="textarea"
         >
           {label}
           {required && <span class="required">(*Required)</span>}
         </label>
-        {errorSpan}
         {error && <span id="error-message" role="alert">
           <span class="sr-only">Error</span> {this.error}
           </span>
         }
         <textarea
-          class={classes}
           aria-describedby={error ? 'error-message' : undefined}
           aria-labelledby="textarea-label"
           id="textarea"
