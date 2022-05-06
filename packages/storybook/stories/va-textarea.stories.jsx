@@ -1,0 +1,81 @@
+/* eslint-disable react/prop-types */
+import React from 'react';
+import { generateEventsDescription } from './events';
+import { getWebComponentDocs, propStructure } from './wc-helpers';
+
+const textareaDocs = getWebComponentDocs('va-textarea');
+
+export default {
+  title: 'Components/va-textarea',
+  parameters: {
+    componentSubtitle: `Textarea web component`,
+    docs: {
+      description: {
+        component:
+          `<a className="vads-c-action-link--blue" href="https://design.va.gov/components/form-controls#text-inputs">View guidance for the Text Input component in the Design System</a>` +
+          '\n' +
+          generateEventsDescription(textareaDocs),
+      },
+    },
+  },
+};
+
+const defaultArgs = {
+  'name': 'my-input',
+  'label': 'My input',
+  'enable-analytics': false,
+  'required': false,
+  'error': undefined,
+  'maxlength': undefined,
+  'value': undefined,
+};
+
+const Template = ({
+  name,
+  label,
+  autocomplete,
+  'enable-analytics': enableAnalytics,
+  required,
+  error,
+  maxlength,
+  minlength,
+  value,
+  inputmode,
+  type,
+  'aria-describedby': ariaDescribedby,
+  success,
+  pattern,
+}) => {
+  return (
+    <va-textarea
+      name={name}
+      label={label}
+      enable-analytics={enableAnalytics}
+      required={required}
+      error={error}
+      maxlength={maxlength}
+      value={value}
+      onBlur={e => console.log('blur event', e)}
+      onInput={e => console.log('input event value', e.target.value)}
+    />
+  );
+};
+
+export const Default = Template.bind({});
+Default.args = { ...defaultArgs };
+Default.argTypes = propStructure(textareaDocs);
+
+export const Error = Template.bind({});
+Error.args = { ...defaultArgs, error: 'This is an error message' };
+
+export const Required = Template.bind({});
+Required.args = { ...defaultArgs, required: true };
+
+export const MaxLength = Template.bind({});
+MaxLength.args = {
+  ...defaultArgs,
+  maxlength: '16',
+};
+
+export const WithAnalytics = Template.bind({});
+WithAnalytics.args = { ...defaultArgs, 'enable-analytics': true };
