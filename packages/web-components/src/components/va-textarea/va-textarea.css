@@ -1,3 +1,5 @@
+@import '../va-text-input/va-text-input.css';
+
 :host {
   display: block;
 }
