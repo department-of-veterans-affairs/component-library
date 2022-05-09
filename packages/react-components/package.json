@@ -89,8 +89,8 @@
     "react-router": "3",
     "rimraf": "^3.0.2",
     "sinon": "^9.2.2",
-    "webpack": "^5.72.0",
-    "webpack-cli": "^4.9.2"
+    "webpack": "^5.56.0",
+    "webpack-cli": "^4.8.0"
   },
   "resolutions": {
     "trim-newlines": "^4.0.2"
