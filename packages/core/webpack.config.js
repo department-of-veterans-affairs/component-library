@@ -37,7 +37,7 @@ module.exports = {
       ),
       '@department-of-veterans-affairs/react-components': path.resolve(
         __dirname,
-        '../react-components/',
+        '../react-components/dist',
       ),
     },
   },
@@ -46,11 +46,6 @@ module.exports = {
     // This is meant to allow for a gentle transition to the new named import strategy
     new CopyPlugin({
       patterns: [
-        {
-          from: '[\\w]*!(index).js',
-          to: '../',
-          context: path.resolve(__dirname, '../', 'react-components'),
-        },
         {
           from: 'react-bindings/**/*',
           to: './',
