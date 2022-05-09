@@ -23,7 +23,7 @@ module.exports = {
   resolve: {
     alias: {
       '@department-of-veterans-affairs/web-components/react-bindings':
-        path.resolve(__dirname, '../web-components/'),
+        path.resolve(__dirname, '../web-components/react-bindings'),
       '@department-of-veterans-affairs/web-components': path.resolve(
         __dirname,
         '../web-components/',
