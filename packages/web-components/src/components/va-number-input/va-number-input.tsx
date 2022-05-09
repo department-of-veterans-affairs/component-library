@@ -100,6 +100,10 @@ export class VaNumberInput {
     });
   }
 
+  disconnectedCallback() {
+    i18next.off('languageChanged');
+  }
+
   render() {
     return (
       <Host>
