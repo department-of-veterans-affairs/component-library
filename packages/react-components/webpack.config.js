@@ -31,4 +31,12 @@ module.exports = {
     // },
     extensions: ['.jsx', '...'],
   },
+  externals: {
+    'react': 'react',
+    'react-dom': 'react-dom',
+    'i18next': 'i18next',
+    'i18next-browser-languagedetector': 'i18next-browser-languagedetector',
+    '@department-of-veterans-affairs/web-components':
+      '@department-of-veterans-affairs/web-components',
+  },
 };
