@@ -2,7 +2,7 @@ export default {
   'error': 'Error',
   'required': 'Requerido',
   'max-chars': 'Número máximo de caracteres: {{length}}',
-  'date-of-birth': 'Spanish "Date of birth"',
+  'date-of-birth': 'Fecha de nacimiento',
   'month': 'Spanish "Month"',
   'day': 'Spanish "Day"',
   'year': 'Spanish "Year"',

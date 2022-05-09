@@ -2,7 +2,7 @@ export default {
   'error': 'Error',
   'required': 'Required',
   'max-chars': 'Max. {{length}} characters',
-  'date-of-birth': 'English "Date of birth"',
+  'date-of-birth': 'Date of birth',
   'month': 'English "Month"',
   'day': 'English "Day"',
   'year': 'English "Year"',
