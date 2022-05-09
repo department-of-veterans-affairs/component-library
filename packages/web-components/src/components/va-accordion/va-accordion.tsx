@@ -174,6 +174,10 @@ export class VaAccordion {
     });
   }
 
+  disconnectedCallback() {
+    i18next.off('languageChanged');
+  }
+
   render() {
     return (
       <Host>
