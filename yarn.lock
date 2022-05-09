@@ -1965,7 +1965,6 @@ __metadata:
     babel-loader: ^8.2.2
     body-scroll-lock: ^4.0.0-beta.0
     classnames: ^2.3.1
-    focus-trap: ^6.8.0-beta.0
     intersection-observer: ^0.12.0
     jest: ^26.6.3
     jest-cli: ^26.6.3
@@ -9622,15 +9621,6 @@ __metadata:
   dependencies:
     tslib: ^2.0.3
   checksum: 4be2cbc0217410413f617c03720df74c3c950983f5914aa8b82c6a7ce98fab873e22e5af0818f6832d1249f86ef33357c7dc344074a09206134657d1f53915d7
-  languageName: node
-  linkType: hard
-
-"focus-trap@npm:^6.8.0-beta.0":
-  version: 6.8.0-beta.1
-  resolution: "focus-trap@npm:6.8.0-beta.1"
-  dependencies:
-    tabbable: 5.3.0-beta.0
-  checksum: f14a5a12bbbeaa364f998b2294f8f0125d75d79f693287f233dd84e819bf2af179adca1e80f67aae9b114014579cf13c0f65a6396b0f4caf8179d9c07648476f
   languageName: node
   linkType: hard
 
@@ -18163,13 +18153,6 @@ resolve@^2.0.0-next.3:
   version: 2.0.15
   resolution: "synchronous-promise@npm:2.0.15"
   checksum: 6079a6acd37d02eb76f250dc7ce09009151744901b320a8cfbba056b015c3d7cbf4e7467458f2d27c6393634f68521b241ea9e35fd9640f8fb59342740550472
-  languageName: node
-  linkType: hard
-
-"tabbable@npm:5.3.0-beta.0":
-  version: 5.3.0-beta.0
-  resolution: "tabbable@npm:5.3.0-beta.0"
-  checksum: 3f101c2a1534892e49f781d22de5e0de4f6be417a8d7eb720c7a98c5f4b103baf41fcd72b5e29122fd5b7425f95cc40e6c58810577f47a2fe33f8901293351f6
   languageName: node
   linkType: hard
 
