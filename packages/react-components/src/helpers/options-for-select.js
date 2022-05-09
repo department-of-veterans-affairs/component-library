@@ -1,3 +1,5 @@
+import i18next from 'i18next';
+
 export const months = () => [
   { label: i18next.t('january'), value: 1 },
   { label: i18next.t('february'), value: 2 },
