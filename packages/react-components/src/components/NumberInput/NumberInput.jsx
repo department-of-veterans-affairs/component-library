@@ -28,6 +28,10 @@ class NumberInput extends React.Component {
     });
   }
 
+  componentWillUnmount() {
+    i18next.off('languageChanged');
+  }
+
   handleChange(domEvent) {
     this.props.onValueChange(
       makeField(domEvent.target.value, this.props.field.dirty),
