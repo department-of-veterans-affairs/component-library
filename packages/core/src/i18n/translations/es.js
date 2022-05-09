@@ -6,7 +6,7 @@ export default {
   'month': 'Mes',
   'day': 'Día',
   'year': 'Año',
-  'year-range': 'Spanish "Please enter a year between {{start}} and {{end}}"',
+  'year-range': 'Ingrese un año entre {{start}} y {{end}}"',
   'expand-all': 'Spanish "Expand all"',
   'collapse-all': 'Spanish "Expand all"',
   'expand-all-aria-label': 'Spanish "Expand all accordions"',
