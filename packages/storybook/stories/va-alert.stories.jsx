@@ -181,8 +181,8 @@ export const Default = Template.bind({});
 Default.args = { ...defaultArgs };
 Default.argTypes = propStructure(alertDocs);
 
-export const Continue = Template.bind({});
-Continue.args = { ...defaultArgs, status: 'continue' };
+export const SignInOrToolPrompt = Template.bind({});
+SignInOrToolPrompt.args = { ...defaultArgs, status: 'continue' };
 
 export const Success = Template.bind({});
 Success.args = { ...defaultArgs, status: 'success' };
@@ -199,8 +199,8 @@ HeadingLevel.args = {
   headline: <h4 slot="headline">I am an h4</h4>,
 };
 
-export const Closeable = Template.bind({});
-Closeable.args = {
+export const Dismissable = Template.bind({});
+Dismissable.args = {
   ...defaultArgs,
   closeable: true,
   onCloseEvent: () => console.log('Close event triggered'),
