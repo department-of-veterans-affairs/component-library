@@ -21,14 +21,14 @@ module.exports = {
     ],
   },
   resolve: {
-    alias: {
-      '@department-of-veterans-affairs/web-components/react-bindings':
-        path.resolve(__dirname, '../web-components/'),
-      '@department-of-veterans-affairs/web-components': path.resolve(
-        __dirname,
-        '../web-components/',
-      ),
-    },
+    // alias: {
+    //   '@department-of-veterans-affairs/web-components/react-bindings':
+    //     path.resolve(__dirname, '../web-components/'),
+    //   '@department-of-veterans-affairs/web-components': path.resolve(
+    //     __dirname,
+    //     '../web-components/',
+    //   ),
+    // },
     extensions: ['.jsx', '...'],
   },
 };
