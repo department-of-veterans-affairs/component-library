@@ -14,18 +14,22 @@
   --color-gray-lightest: #f1f1f1;
   --color-gray-cool-light: #dce4ef;
   --color-green: #2e8540;
+  --color-green-lighter: #94bfa2;
   --color-green-lightest: #e7f4e4;
   --color-gold: #fdb81e;
   --color-gold-light: #f9c642;
+  --color-gold-lighter: #fad980;
   --color-gold-lightest: #fff1d2;
   --color-link-default: #004795;
   --color-link-visited: #4c2c92;
   --color-primary: #0071bb;
   --color-primary-darker: #003e73;
   --color-primary-alt-dark: #00a6d2;
+  --color-primary-alt-darkest: #046b99;
   --color-primary-alt-light: #9bdaf1;
   --color-primary-alt-lightest: #e1f3f8;
   --color-secondary-dark: #cd2026;
+  --color-secondary-light: #e59393;
   --color-secondary-lightest: #f9dede;
   --font-source-sans: 'Source Sans Pro', 'Helvetica Neue', Helvetica, Roboto,
     Arial, sans-serif;

@@ -1,10 +1,22 @@
 import React from 'react';
+import { generateEventsDescription } from './events';
 import { getWebComponentDocs, propStructure } from './wc-helpers';
 
 const progressBarDocs = getWebComponentDocs('va-progress-bar');
 
 export default {
   title: 'Components/va-progress-bar',
+  parameters: {
+    componentSubtitle: `Progress bar web component`,
+    docs: {
+      description: {
+        component:
+          `<a className="vads-c-action-link--blue" href="https://design.va.gov/components/progress-bar">View guidance for the Progress bar component in the Design System</a>` +
+          `\n` +
+          generateEventsDescription(progressBarDocs),
+      },
+    },
+  },
 };
 
 const Template = ({ 'enable-analytics': enableAnalytics, label, percent }) => (
