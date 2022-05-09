@@ -13,6 +13,7 @@
   "main": "dist/app.bundle.js",
   "module": "src/main.js",
   "dependencies": {
+    "@babel/runtime": "^7.17.9",
     "@department-of-veterans-affairs/react-components": "workspace:*",
     "@department-of-veterans-affairs/web-components": "workspace:*",
     "i18next": "^21.6.14",

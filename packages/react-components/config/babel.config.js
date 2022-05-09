@@ -18,6 +18,7 @@ module.exports = function (api) {
       },
     ],
     'lodash',
+    // '@babel/plugin-transform-runtime',
   ];
 
   if (api.env('test')) {
