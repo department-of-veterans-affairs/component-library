@@ -10,9 +10,13 @@ const dateDocs = getWebComponentDocs('va-date');
 export default {
   title: 'Components/va-date',
   parameters: {
+    componentSubtitle: `Date web component`,
     docs: {
       description: {
-        component: generateEventsDescription(dateDocs),
+        component:
+          `<a className="vads-c-action-link--blue" href="https://design.va.gov/components/form/date-input">View guidance for the Date component in the Design System</a>` +
+          '\n' +
+          generateEventsDescription(dateDocs),
       },
     },
   },
