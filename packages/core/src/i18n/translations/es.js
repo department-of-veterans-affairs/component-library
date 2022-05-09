@@ -1,7 +1,7 @@
 export default {
   'error': 'Error',
   'required': 'Requerido',
-  'max-chars': 'Spanish "Max. {{length}} characters"',
+  'max-chars': 'Número máximo de caracteres: {{length}}',
   'date-of-birth': 'Spanish "Date of birth"',
   'month': 'Spanish "Month"',
   'day': 'Spanish "Day"',
