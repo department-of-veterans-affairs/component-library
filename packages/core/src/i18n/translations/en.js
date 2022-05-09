@@ -7,8 +7,8 @@ export default {
   'day': 'Day',
   'year': 'Year',
   'year-range': 'Please enter a year between {{start}} and {{end}}',
-  'expand-all': 'English "Expand all"',
-  'collapse-all': 'English "Expand all"',
-  'expand-all-aria-label': 'English "Expand all accordions"',
-  'collapse-all-aria-label': 'English "Collapse all accordions"',
+  'expand-all': 'Expand all',
+  'collapse-all': 'Collapse all',
+  'expand-all-aria-label': 'Expand all accordions',
+  'collapse-all-aria-label': 'Collapse all accordions',
 };
