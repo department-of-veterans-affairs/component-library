@@ -101,18 +101,36 @@ export const propStructure = comp => {
 };
 
 /**
+ * Renders an Action link to the Design System
+ */
+function Guidance({ data }) {
+  const { componentName, componentHref } = data;
+  if (!componentName || !componentHref) return null;
+  return (
+    <a
+      className="vads-c-action-link--blue"
+      href={`https://design.va.gov/components/${componentHref}`}
+    >
+      View guidance for the {componentName} component in the Design System
+    </a>
+  );
+}
+
+/**
  * Return a component with Storybook docs blocks in a standard order.
  * Accepts a JSON object as a prop representing component information
  */
 export function StoryDocs({ data }) {
-  const noArgs = data.props.length == 0;
+  const args = data?.props?.length > 0;
+  const guidance = data?.guidance;
   return (
     <>
       <Title />
       <Subtitle />
+      {guidance && <Guidance data={guidance} />}
       <Description markdown={data.docs} />
       <Primary />
-      {!noArgs && <ArgsTable story={PRIMARY_STORY} />}
+      {args && <ArgsTable story={PRIMARY_STORY} />}
       <Stories />
     </>
   );
