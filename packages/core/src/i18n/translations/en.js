@@ -11,7 +11,7 @@ export default {
   'collapse-all': 'Collapse all',
   'expand-all-aria-label': 'Expand all accordions',
   'collapse-all-aria-label': 'Collapse all accordions',
-   'january': 'January',
+  'january': 'January',
   'february': 'February',
   'march': 'March',
   'april': 'April',

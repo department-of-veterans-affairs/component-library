@@ -11,7 +11,7 @@ export default {
   'collapse-all': 'Contraer todo',
   'expand-all-aria-label': 'Expandir todos los acordeones',
   'collapse-all-aria-label': 'Contraer todos los acordeones',
-   'january': 'Enero',
+  'january': 'Enero',
   'february': 'Febrero',
   'march': 'Marzo',
   'april': 'Abril',
