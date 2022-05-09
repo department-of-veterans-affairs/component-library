@@ -1,5 +1,5 @@
 export default {
-  'error': 'English "Error"',
+  'error': 'Error',
   'required': 'English "Required"',
   'max-chars': 'English "Max. {{length}} characters"',
   'date-of-birth': 'English "Date of birth"',
