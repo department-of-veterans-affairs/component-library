@@ -56,6 +56,11 @@ export class VaTextarea {
     i18next.off('languageChanged');
   }
 
+  private handleInput = (e: Event) => {
+    const target = e.target as HTMLInputElement;
+    this.value = target.value;
+  };
+
   render() {
     const {label, error, placeholder, maxlength, name, required, value} = this;
 
@@ -75,6 +80,7 @@ export class VaTextarea {
         <textarea
           aria-describedby={error ? 'error-message' : undefined}
           aria-labelledby="textarea-label"
+          onInput={this.handleInput}
           id="textarea"
           placeholder={placeholder}
           name={name}
