@@ -213,7 +213,7 @@ describe('<Select>', () => {
         onValueChange={() => {}}
       />,
     );
-    expect(tree.find('label').text()).to.include('my label(*Required)');
+    expect(tree.find('label').text()).to.equal('my label(*Required)');
     expect(tree.find('.form-required-span')).to.exist;
     tree.unmount();
   });
