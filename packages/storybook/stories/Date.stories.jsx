@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Date } from '@department-of-veterans-affairs/component-library';
 
 export default {
@@ -8,8 +8,20 @@ export default {
 
 const Template = args => {
   const [date, setDate] = useState(args.date);
+  const [lang, setLang] = useState('en');
+  const onValueChange = newField => {
+    setField(newField);
+  };
+
+  useEffect(() => {
+    document.querySelector('main').setAttribute('lang', lang);
+  }, [lang]);
   return (
-    <Date {...args} date={date} onValueChange={newDate => setDate(newDate)} />
+    <>
+      <button onClick={e => setLang('es')}>Español</button>
+      <button onClick={e => setLang('en')}>English</button>
+      <Date {...args} date={date} onValueChange={newDate => setDate(newDate)} />
+    </>
   );
 };
 

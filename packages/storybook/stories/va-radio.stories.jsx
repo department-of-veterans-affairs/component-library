@@ -17,7 +17,7 @@ export default {
     docs: {
       description: {
         component:
-          `<a className="vads-c-action-link--blue" href="https://design.va.gov/components/form-controls#radio-buttons">View guidance for the Radio buttons component in the Design System</a>` +
+          `<a className="vads-c-action-link--blue" href="https://design.va.gov/components/form/radio-button">View guidance for the Radio buttons component in the Design System</a>` +
           '\n' +
           generateEventsDescription(radioDocs),
       },

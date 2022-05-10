@@ -90,6 +90,24 @@ export namespace Components {
          */
         "visible": boolean;
     }
+    interface VaAlertExpandable {
+        /**
+          * If true, doesn't fire the CustomEvent which can be used for analytics tracking.
+         */
+        "disableAnalytics": boolean;
+        /**
+          * If true, the status icon is removed.
+         */
+        "iconless": boolean;
+        /**
+          * Determines the icon and background color. One of `info`, `error`, `success`, `warning`, or `continue`
+         */
+        "status"?: 'continue' | 'error' | 'info' | 'success' | 'warning';
+        /**
+          * The text to trigger the expansion
+         */
+        "trigger": string;
+    }
     interface VaBackToTop {
     }
     interface VaBanner {
@@ -614,6 +632,12 @@ declare global {
         prototype: HTMLVaAlertElement;
         new (): HTMLVaAlertElement;
     };
+    interface HTMLVaAlertExpandableElement extends Components.VaAlertExpandable, HTMLStencilElement {
+    }
+    var HTMLVaAlertExpandableElement: {
+        prototype: HTMLVaAlertExpandableElement;
+        new (): HTMLVaAlertExpandableElement;
+    };
     interface HTMLVaBackToTopElement extends Components.VaBackToTop, HTMLStencilElement {
     }
     var HTMLVaBackToTopElement: {
@@ -769,6 +793,7 @@ declare global {
         "va-accordion-item": HTMLVaAccordionItemElement;
         "va-additional-info": HTMLVaAdditionalInfoElement;
         "va-alert": HTMLVaAlertElement;
+        "va-alert-expandable": HTMLVaAlertExpandableElement;
         "va-back-to-top": HTMLVaBackToTopElement;
         "va-banner": HTMLVaBannerElement;
         "va-breadcrumbs": HTMLVaBreadcrumbsElement;
@@ -904,6 +929,28 @@ declare namespace LocalJSX {
           * If true, the alert will be visible.
          */
         "visible"?: boolean;
+    }
+    interface VaAlertExpandable {
+        /**
+          * If true, doesn't fire the CustomEvent which can be used for analytics tracking.
+         */
+        "disableAnalytics"?: boolean;
+        /**
+          * If true, the status icon is removed.
+         */
+        "iconless"?: boolean;
+        /**
+          * The event used to track usage of the component. This is emitted when an anchor link is clicked and disableAnalytics is not true.
+         */
+        "onComponent-library-analytics"?: (event: CustomEvent<any>) => void;
+        /**
+          * Determines the icon and background color. One of `info`, `error`, `success`, `warning`, or `continue`
+         */
+        "status"?: 'continue' | 'error' | 'info' | 'success' | 'warning';
+        /**
+          * The text to trigger the expansion
+         */
+        "trigger"?: string;
     }
     interface VaBackToTop {
     }
@@ -1524,6 +1571,7 @@ declare namespace LocalJSX {
         "va-accordion-item": VaAccordionItem;
         "va-additional-info": VaAdditionalInfo;
         "va-alert": VaAlert;
+        "va-alert-expandable": VaAlertExpandable;
         "va-back-to-top": VaBackToTop;
         "va-banner": VaBanner;
         "va-breadcrumbs": VaBreadcrumbs;
@@ -1559,6 +1607,7 @@ declare module "@stencil/core" {
             "va-accordion-item": LocalJSX.VaAccordionItem & JSXBase.HTMLAttributes<HTMLVaAccordionItemElement>;
             "va-additional-info": LocalJSX.VaAdditionalInfo & JSXBase.HTMLAttributes<HTMLVaAdditionalInfoElement>;
             "va-alert": LocalJSX.VaAlert & JSXBase.HTMLAttributes<HTMLVaAlertElement>;
+            "va-alert-expandable": LocalJSX.VaAlertExpandable & JSXBase.HTMLAttributes<HTMLVaAlertExpandableElement>;
             "va-back-to-top": LocalJSX.VaBackToTop & JSXBase.HTMLAttributes<HTMLVaBackToTopElement>;
             "va-banner": LocalJSX.VaBanner & JSXBase.HTMLAttributes<HTMLVaBannerElement>;
             "va-breadcrumbs": LocalJSX.VaBreadcrumbs & JSXBase.HTMLAttributes<HTMLVaBreadcrumbsElement>;

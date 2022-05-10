@@ -12,7 +12,7 @@ export default {
     docs: {
       description: {
         component:
-          `<a className="vads-c-action-link--blue" href="https://design.va.gov/components/form-controls#text-inputs">View guidance for the Text Input component in the Design System</a>` +
+          `<a className="vads-c-action-link--blue" href="https://design.va.gov/components/form/text-inputs">View guidance for the Text Input component in the Design System</a>` +
           '\n' +
           generateEventsDescription(textInputDocs),
       },
