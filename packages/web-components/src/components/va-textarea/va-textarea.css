@@ -4,3 +4,18 @@
 :host {
   display: block;
 }
+
+label {
+  display: block;
+  margin-top: 2.8rem;
+  max-width: 46rem;
+}
+
+textarea {
+  min-height: 50px;
+  height: 16rem;
+  max-width: 46rem;
+  width: 100%;
+  padding: 1.2rem;
+  margin: 0.4rem 0;
+}
