@@ -1,11 +1,12 @@
 import { Meta, Canvas } from '@storybook/addon-docs/blocks';
+import './buttons.style.scss';
 
 <Meta title="Components/Buttons" />
 
-## Default buttons
+## Primary buttons
 
 <Canvas>
-  <Story name="Default">
+  <Story name="Primary">
     <div>
       <button type="button" className="usa-button">
         Button
@@ -15,18 +16,6 @@ import { Meta, Canvas } from '@storybook/addon-docs/blocks';
       </button>
       <button type="button" className="usa-button usa-button-hover">
         Hover
-      </button>
-    </div>
-  </Story>
-</Canvas>
-
-## Primary buttons
-
-<Canvas>
-  <Story name="Primary">
-    <div>
-      <button type="button" class="usa-button-primary va-button-primary">
-        Button
       </button>
     </div>
   </Story>
@@ -44,19 +33,33 @@ import { Meta, Canvas } from '@storybook/addon-docs/blocks';
   </Story>
 </Canvas>
 
+## Continue buttons
+
+<Canvas>
+  <Story name="Continue">
+    <div>
+      <button type="button" class="usa-button-primary va-button-primary">
+        Button
+      </button>
+      <button class="usa-button-primary va-button-primary">Active</button>
+      <button class="usa-button-primary va-button-primary">Hover</button>
+    </div>
+  </Story>
+</Canvas>
+
 ## Big buttons
 
 <Canvas>
   <Story name="Big">
     <div>
       <button type="button" class="usa-button usa-button-big">
-        Default button
+        Primary button
       </button>
       <button
         type="button"
         class="usa-button-primary va-button-primary usa-button-big"
       >
-        Button
+        Continue button
       </button>
       <button class="usa-button-secondary usa-button-big">
         Secondary button

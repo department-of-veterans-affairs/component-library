@@ -1,0 +1,26 @@
+[name='Secondary'] {
+  & button:nth-child(2) {
+    background-color: #dce4ef;
+  }
+  & button:nth-child(3):focus {
+    border-color: #0071bb;
+    box-shadow: inset 0 0 0 2px #0071bb;
+    color: #0071bb;
+  }
+}
+
+[name='Continue'] {
+  & button:not(:first-child) {
+    background-color: #195c27 !important;
+  }
+}
+
+// Active buttons
+[name='Primary'],
+[name='Secondary'],
+[name='Continue'] {
+  & button:nth-child(2) {
+    outline: 2px solid #f9c642;
+    outline-offset: 2px;
+  }
+}
