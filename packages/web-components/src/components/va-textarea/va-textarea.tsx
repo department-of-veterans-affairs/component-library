@@ -92,7 +92,6 @@ export class VaTextarea {
             ({i18next.t('max-chars', { length: maxlength })})
           </small>
         )}
-
       </Host>
     );
   }

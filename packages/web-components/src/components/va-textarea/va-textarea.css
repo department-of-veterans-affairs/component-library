@@ -5,6 +5,10 @@
   display: block;
 }
 
+:host([error]) label {
+  margin-top: 0;
+}
+
 label {
   display: block;
   margin-top: 2.8rem;
