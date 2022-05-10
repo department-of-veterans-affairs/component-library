@@ -88,7 +88,7 @@ export class VaTextarea {
           value={value}
         />
         {maxlength && value?.length >= maxlength && (
-          <small aria-live="polite" part="validation">
+          <small aria-live="polite">
             ({i18next.t('max-chars', { length: maxlength })})
           </small>
         )}

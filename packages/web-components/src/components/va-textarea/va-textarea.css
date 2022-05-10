@@ -12,6 +12,7 @@ label {
 }
 
 textarea {
+  display: block;
   min-height: 50px;
   height: 16rem;
   max-width: 46rem;
