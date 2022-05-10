@@ -13,7 +13,7 @@ export default {
     docs: {
       description: {
         component:
-          `<a className="vads-c-action-link--blue" href="https://design.va.gov/components/form-controls#checkboxes">View guidance for the Checkbox component in the Design System</a>` +
+          `<a className="vads-c-action-link--blue" href="https://design.va.gov/components/form/checkbox">View guidance for the Checkbox component in the Design System</a>` +
           '\n' +
           generateEventsDescription(checkboxDocs),
       },

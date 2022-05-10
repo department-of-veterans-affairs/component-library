@@ -1,5 +1,6 @@
-import React, { useRef } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
+import i18next from 'i18next';
 import { uniqueId } from '../../helpers/utilities';
 
 import Select from '../Select/Select';
@@ -41,6 +42,13 @@ export const SimpleDate = ({
   const inputId = useRef(uniqueId('date-input-'));
   const { day, month, year } = date;
 
+  const [lang, setLang] = useState();
+
+  useEffect(() => {
+    i18next.on('languageChanged', lng => setLang(lng));
+    return () => i18next.off('languageChanged');
+  }, []);
+
   const daysForSelectedMonth = month.value ? days[month.value] : [];
 
   let errorSpanId;
@@ -51,7 +59,7 @@ export const SimpleDate = ({
     errorSpanId = `${inputId.current}-error-message`;
     errorSpan = (
       <span className="usa-input-error-message" role="alert" id={errorSpanId}>
-        <span className="sr-only">Error</span> {errorMessage}
+        <span className="sr-only">{i18next.t('error')}</span> {errorMessage}
       </span>
     );
   }
@@ -80,8 +88,10 @@ export const SimpleDate = ({
   return (
     <fieldset className={fieldsetClass} id={inputId.current}>
       <legend className="vads-u-font-size--base vads-u-font-weight--normal">
-        {label || 'Date of birth'}
-        {required && <span className="form-required-span">(*Required)</span>}
+        {label || i18next.t('date-of-birth')}
+        {required && (
+          <span className="form-required-span">(*{i18next.t('required')})</span>
+        )}
       </legend>
       {errorSpan}
       <div
@@ -93,9 +103,9 @@ export const SimpleDate = ({
           <div className="form-datefield-month">
             <Select
               errorMessage={errorMessage && ''}
-              label="Month"
+              label={i18next.t('month')}
               name={`${name}Month`}
-              options={months}
+              options={months()}
               value={month}
               onValueChange={update => {
                 handleChange('month', update, date, onValueChange);
@@ -107,7 +117,7 @@ export const SimpleDate = ({
           <div className="form-datefield-day">
             <Select
               errorMessage={errorMessage && ''}
-              label="Day"
+              label={i18next.t('day')}
               name={`${name}Day`}
               options={daysForSelectedMonth}
               value={day}
@@ -121,7 +131,7 @@ export const SimpleDate = ({
           <div className="usa-datefield usa-form-group usa-form-group-year">
             <NumberInput
               errorMessage={errorMessage && ''}
-              label="Year"
+              label={i18next.t('year')}
               name={`${name}Year`}
               max={maxYear}
               min={minYear}
