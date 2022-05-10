@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 
 import Select from '../../react-components/src/components/Select/Select';
 
@@ -66,30 +66,4 @@ export const WithAnalytics = Template.bind({});
 WithAnalytics.args = {
   ...defaultArgs,
   enableAnalytics: true,
-};
-
-const I18nTemplate = args => {
-  const [lang, setLang] = useState('en');
-  const [value, setValue] = useState(args.value);
-  const onValueChange = newValue => {
-    setValue(newValue);
-  };
-
-  useEffect(() => {
-    document.querySelector('main').setAttribute('lang', lang);
-  }, [lang]);
-
-  return (
-    <div>
-      <button onClick={e => setLang('es')}>Español</button>
-      <button onClick={e => setLang('en')}>English</button>
-      <Select {...args} value={value} onValueChange={onValueChange} />
-    </div>
-  );
-};
-
-export const Internationalization = I18nTemplate.bind({});
-Internationalization.args = {
-  ...defaultArgs,
-  required: true,
 };
