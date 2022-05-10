@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 
 import ProgressButton from '../../react-components/src/components/ProgressButton/ProgressButton';
 
@@ -13,8 +13,28 @@ const defaultArgs = {
   buttonText: 'Click me!',
 };
 
+const ButtonPairTemplate = args => (
+  <Fragment>
+    <ProgressButton {...args.backButton} />
+    <ProgressButton {...args.continueButton} />
+  </Fragment>
+);
+
 export const Default = Template.bind({});
 Default.args = { ...defaultArgs };
+
+export const ButtonPairs = ButtonPairTemplate.bind({});
+ButtonPairs.args = {
+  backButton: {
+    buttonClass: 'usa-button-secondary',
+    buttonText: 'Back',
+    beforeText: '«',
+  },
+  continueButton: {
+    buttonText: 'Continue',
+    afterText: '»',
+  },
+};
 
 export const Back = Template.bind({});
 Back.args = { ...defaultArgs, buttonText: 'Back', beforeText: '«' };
