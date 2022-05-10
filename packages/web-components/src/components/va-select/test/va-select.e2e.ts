@@ -16,11 +16,11 @@ describe('va-select', () => {
     expect(element).toEqualHtml(`
       <va-select label="A label" value="bar" class="hydrated">
         <mock:shadow-root>
-          <label for="select">
+          <label for="select" part="label">
             A label
           </label>
           <slot></slot>
-          <select id="select">
+          <select id="select" part="select">
             <option value="">Please choose an option</option>
             <option value="foo">Foo</option>
             <option value="bar">Bar</option>

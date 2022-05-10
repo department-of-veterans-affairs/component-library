@@ -12,7 +12,7 @@ export default {
     docs: {
       description: {
         component:
-          `<a className="vads-c-action-link--blue" href="https://design.va.gov/components/form-controls#select-box">View guidance for the Select Box component in the Design System</a>` +
+          `<a className="vads-c-action-link--blue" href="https://design.va.gov/components/form/select">View guidance for the Select Box component in the Design System</a>` +
           '\n' +
           generateEventsDescription(selectDocs),
       },
@@ -25,7 +25,7 @@ const defaultArgs = {
   'name': 'branch',
   'value': 'army',
   'required': false,
-  'error': null,
+  'error': undefined,
   'aria-live-region-text': 'You selected',
   'options': [
     <option key="1" value="navy">

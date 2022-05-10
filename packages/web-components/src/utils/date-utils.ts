@@ -1,18 +1,16 @@
-import i18next from 'i18next';
-
-export const months = () => [
-  { label: i18next.t('january'), value: 1 },
-  { label: i18next.t('february'), value: 2 },
-  { label: i18next.t('march'), value: 3 },
-  { label: i18next.t('april'), value: 4 },
-  { label: i18next.t('may'), value: 5 },
-  { label: i18next.t('june'), value: 6 },
-  { label: i18next.t('july'), value: 7 },
-  { label: i18next.t('august'), value: 8 },
-  { label: i18next.t('september'), value: 9 },
-  { label: i18next.t('october'), value: 10 },
-  { label: i18next.t('november'), value: 11 },
-  { label: i18next.t('december'), value: 12 },
+export const months = [
+  { label: 'January', value: 1 },
+  { label: 'February', value: 2 },
+  { label: 'March', value: 3 },
+  { label: 'April', value: 4 },
+  { label: 'May', value: 5 },
+  { label: 'June', value: 6 },
+  { label: 'July', value: 7 },
+  { label: 'August', value: 8 },
+  { label: 'September', value: 9 },
+  { label: 'October', value: 10 },
+  { label: 'November', value: 11 },
+  { label: 'December', value: 12 },
 ];
 
 export const twentyNineDays = [
@@ -126,3 +124,7 @@ export const days = {
   11: thirtyDays,
   12: thirtyOneDays,
 };
+
+export function isFullDate(date) {
+  return /\d{4}-\d{1,2}-\d{1,2}/.test(date);
+}

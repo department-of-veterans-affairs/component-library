@@ -137,7 +137,7 @@ export class VaSelect {
 
     return (
       <Host>
-        <label htmlFor="select">
+        <label htmlFor="select" part="label">
           {label}
           {required && <span>{`(*${i18next.t('required')})`}</span>}
         </label>
@@ -154,6 +154,7 @@ export class VaSelect {
           name={name}
           onKeyDown={() => this.handleKeyDown()}
           onChange={e => this.handleChange(e)}
+          part="select"
         >
           {this.options}
         </select>

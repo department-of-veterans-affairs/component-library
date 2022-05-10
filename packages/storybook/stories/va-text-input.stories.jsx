@@ -12,7 +12,7 @@ export default {
     docs: {
       description: {
         component:
-          `<a className="vads-c-action-link--blue" href="https://design.va.gov/components/form-controls#text-inputs">View guidance for the Text Input component in the Design System</a>` +
+          `<a className="vads-c-action-link--blue" href="https://design.va.gov/components/form/text-inputs">View guidance for the Text Input component in the Design System</a>` +
           '\n' +
           generateEventsDescription(textInputDocs),
       },
@@ -50,10 +50,13 @@ const defaultArgs = {
   'required': false,
   'error': undefined,
   'maxlength': undefined,
+  'minlength': undefined,
   'value': undefined,
   'inputmode': undefined,
   'type': undefined,
   'aria-describedby': undefined,
+  'success': false,
+  'pattern': undefined,
 };
 
 const Template = ({
@@ -64,11 +67,13 @@ const Template = ({
   required,
   error,
   maxlength,
+  minlength,
   value,
   inputmode,
   type,
   'aria-describedby': ariaDescribedby,
-  status,
+  success,
+  pattern,
 }) => {
   return (
     <va-text-input
@@ -79,11 +84,15 @@ const Template = ({
       required={required}
       error={error}
       maxlength={maxlength}
+      minlength={minlength}
       value={value}
       inputmode={inputmode}
       type={type}
       aria-describedby={ariaDescribedby}
-      status={status}
+      success={success}
+      pattern={pattern}
+      onBlur={e => console.log('blur event', e)}
+      onInput={e => console.log('input event value', e.target.value)}
     />
   );
 };
@@ -96,7 +105,7 @@ export const Error = Template.bind({});
 Error.args = { ...defaultArgs, error: 'This is an error message' };
 
 export const Success = Template.bind({});
-Success.args = { ...defaultArgs, status: 'success' };
+Success.args = { ...defaultArgs, success: true };
 
 export const Required = Template.bind({});
 Required.args = { ...defaultArgs, required: true };
@@ -105,6 +114,21 @@ export const MaxLength = Template.bind({});
 MaxLength.args = {
   ...defaultArgs,
   maxlength: '16',
+};
+
+export const Range = Template.bind({});
+Range.args = {
+  ...defaultArgs,
+  label: 'Acceptable range 3 - 6 characters',
+  minlength: '3',
+  maxlength: '6',
+};
+
+export const Pattern = Template.bind({});
+Pattern.args = {
+  ...defaultArgs,
+  label: 'Must be 4 digits',
+  pattern: '[0-9]{4}',
 };
 
 export const Autocomplete = Template.bind({});

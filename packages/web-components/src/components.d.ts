@@ -90,6 +90,24 @@ export namespace Components {
          */
         "visible": boolean;
     }
+    interface VaAlertExpandable {
+        /**
+          * If true, doesn't fire the CustomEvent which can be used for analytics tracking.
+         */
+        "disableAnalytics": boolean;
+        /**
+          * If true, the status icon is removed.
+         */
+        "iconless": boolean;
+        /**
+          * Determines the icon and background color. One of `info`, `error`, `success`, `warning`, or `continue`
+         */
+        "status"?: 'continue' | 'error' | 'info' | 'success' | 'warning';
+        /**
+          * The text to trigger the expansion
+         */
+        "trigger": string;
+    }
     interface VaBackToTop {
     }
     interface VaBanner {
@@ -130,7 +148,7 @@ export namespace Components {
     }
     interface VaCheckbox {
         /**
-          * The aria-describedby attribute for the `<input>` in the shadow DOM.
+          * The aria-describedby attribute for the input element in the shadow DOM.
          */
         "ariaDescribedby": string;
         /**
@@ -175,6 +193,32 @@ export namespace Components {
           * Whether or not this input field is required.
          */
         "required": boolean;
+    }
+    interface VaDate {
+        /**
+          * Whether or not an analytics event will be fired.
+         */
+        "enableAnalytics": boolean;
+        /**
+          * The error message to render (if any) This prop should be leveraged to display any custom validations needed for this component
+         */
+        "error": string;
+        /**
+          * Label for the field.
+         */
+        "label": string;
+        /**
+          * Used to create unique name attributes for each input.
+         */
+        "name": string;
+        /**
+          * Render marker indicating field is required.
+         */
+        "required": boolean;
+        /**
+          * Set the default date value must be in YYYY-MM-DD format.
+         */
+        "value": string;
     }
     interface VaFeaturedContent {
     }
@@ -367,19 +411,23 @@ export namespace Components {
          */
         "value": string;
     }
-    interface VaSearch {
+    interface VaSearchInput {
         /**
           * Text displayed inside the search button
          */
         "buttonText"?: string;
         /**
-          * Initial value of input
-         */
-        "inputValue"?: string;
-        /**
           * The aria-label for search input and button. Default is 'Search'.
          */
-        "label": string;
+        "label"?: string;
+        /**
+          * An array of strings containing suggestions to be displayed in listbox. This component displays up to 5 suggestions.
+         */
+        "suggestions"?: any;
+        /**
+          * The value of the input field
+         */
+        "value"?: string;
     }
     interface VaSegmentedProgressBar {
         /**
@@ -465,7 +513,7 @@ export namespace Components {
     }
     interface VaTextInput {
         /**
-          * The aria-describedby attribute for the `<input>` in the shadow DOM.
+          * The aria-describedby attribute for the input element in the shadow DOM.
          */
         "ariaDescribedby"?: string;
         /**
@@ -499,9 +547,17 @@ export namespace Components {
          */
         "maxlength"?: number;
         /**
+          * The minimum number of characters allowed in the input.
+         */
+        "minlength"?: number;
+        /**
           * The name to pass to the input element.
          */
         "name"?: string;
+        /**
+          * The regular expression that the input element's value is checked against on submission
+         */
+        "pattern"?: string;
         /**
           * Set the input to required and render the (Required) text.
          */
@@ -509,7 +565,7 @@ export namespace Components {
         /**
           * Adds styling based on status value
          */
-        "status": 'success';
+        "success"?: boolean;
         /**
           * The type attribute.
          */
@@ -545,6 +601,12 @@ declare global {
         prototype: HTMLVaAlertElement;
         new (): HTMLVaAlertElement;
     };
+    interface HTMLVaAlertExpandableElement extends Components.VaAlertExpandable, HTMLStencilElement {
+    }
+    var HTMLVaAlertExpandableElement: {
+        prototype: HTMLVaAlertExpandableElement;
+        new (): HTMLVaAlertExpandableElement;
+    };
     interface HTMLVaBackToTopElement extends Components.VaBackToTop, HTMLStencilElement {
     }
     var HTMLVaBackToTopElement: {
@@ -574,6 +636,12 @@ declare global {
     var HTMLVaCheckboxGroupElement: {
         prototype: HTMLVaCheckboxGroupElement;
         new (): HTMLVaCheckboxGroupElement;
+    };
+    interface HTMLVaDateElement extends Components.VaDate, HTMLStencilElement {
+    }
+    var HTMLVaDateElement: {
+        prototype: HTMLVaDateElement;
+        new (): HTMLVaDateElement;
     };
     interface HTMLVaFeaturedContentElement extends Components.VaFeaturedContent, HTMLStencilElement {
     }
@@ -641,11 +709,11 @@ declare global {
         prototype: HTMLVaRadioOptionElement;
         new (): HTMLVaRadioOptionElement;
     };
-    interface HTMLVaSearchElement extends Components.VaSearch, HTMLStencilElement {
+    interface HTMLVaSearchInputElement extends Components.VaSearchInput, HTMLStencilElement {
     }
-    var HTMLVaSearchElement: {
-        prototype: HTMLVaSearchElement;
-        new (): HTMLVaSearchElement;
+    var HTMLVaSearchInputElement: {
+        prototype: HTMLVaSearchInputElement;
+        new (): HTMLVaSearchInputElement;
     };
     interface HTMLVaSegmentedProgressBarElement extends Components.VaSegmentedProgressBar, HTMLStencilElement {
     }
@@ -688,11 +756,13 @@ declare global {
         "va-accordion-item": HTMLVaAccordionItemElement;
         "va-additional-info": HTMLVaAdditionalInfoElement;
         "va-alert": HTMLVaAlertElement;
+        "va-alert-expandable": HTMLVaAlertExpandableElement;
         "va-back-to-top": HTMLVaBackToTopElement;
         "va-banner": HTMLVaBannerElement;
         "va-breadcrumbs": HTMLVaBreadcrumbsElement;
         "va-checkbox": HTMLVaCheckboxElement;
         "va-checkbox-group": HTMLVaCheckboxGroupElement;
+        "va-date": HTMLVaDateElement;
         "va-featured-content": HTMLVaFeaturedContentElement;
         "va-loading-indicator": HTMLVaLoadingIndicatorElement;
         "va-modal": HTMLVaModalElement;
@@ -704,7 +774,7 @@ declare global {
         "va-promo-banner": HTMLVaPromoBannerElement;
         "va-radio": HTMLVaRadioElement;
         "va-radio-option": HTMLVaRadioOptionElement;
-        "va-search": HTMLVaSearchElement;
+        "va-search-input": HTMLVaSearchInputElement;
         "va-segmented-progress-bar": HTMLVaSegmentedProgressBarElement;
         "va-select": HTMLVaSelectElement;
         "va-table": HTMLVaTableElement;
@@ -746,7 +816,7 @@ declare namespace LocalJSX {
          */
         "level"?: number;
         /**
-          * This event is fired so that `<va-accordion>` can manage which items are opened or closed
+          * This event is fired so that va-accordion element can manage which items are opened or closed
          */
         "onAccordionItemToggled"?: (event: CustomEvent<any>) => void;
         /**
@@ -822,6 +892,28 @@ declare namespace LocalJSX {
          */
         "visible"?: boolean;
     }
+    interface VaAlertExpandable {
+        /**
+          * If true, doesn't fire the CustomEvent which can be used for analytics tracking.
+         */
+        "disableAnalytics"?: boolean;
+        /**
+          * If true, the status icon is removed.
+         */
+        "iconless"?: boolean;
+        /**
+          * The event used to track usage of the component. This is emitted when an anchor link is clicked and disableAnalytics is not true.
+         */
+        "onComponent-library-analytics"?: (event: CustomEvent<any>) => void;
+        /**
+          * Determines the icon and background color. One of `info`, `error`, `success`, `warning`, or `continue`
+         */
+        "status"?: 'continue' | 'error' | 'info' | 'success' | 'warning';
+        /**
+          * The text to trigger the expansion
+         */
+        "trigger"?: string;
+    }
     interface VaBackToTop {
     }
     interface VaBanner {
@@ -870,7 +962,7 @@ declare namespace LocalJSX {
     }
     interface VaCheckbox {
         /**
-          * The aria-describedby attribute for the `<input>` in the shadow DOM.
+          * The aria-describedby attribute for the input element in the shadow DOM.
          */
         "ariaDescribedby"?: string;
         /**
@@ -897,10 +989,6 @@ declare namespace LocalJSX {
           * The event used to track usage of the component. This is emitted when the input value changes and enableAnalytics is true.
          */
         "onComponent-library-analytics"?: (event: CustomEvent<any>) => void;
-        /**
-          * The event emitted when the input is blurred.
-         */
-        "onVaBlur"?: (event: CustomEvent<any>) => void;
         /**
           * The event emitted when the input value changes.
          */
@@ -931,6 +1019,44 @@ declare namespace LocalJSX {
           * Whether or not this input field is required.
          */
         "required"?: boolean;
+    }
+    interface VaDate {
+        /**
+          * Whether or not an analytics event will be fired.
+         */
+        "enableAnalytics"?: boolean;
+        /**
+          * The error message to render (if any) This prop should be leveraged to display any custom validations needed for this component
+         */
+        "error"?: string;
+        /**
+          * Label for the field.
+         */
+        "label": string;
+        /**
+          * Used to create unique name attributes for each input.
+         */
+        "name": string;
+        /**
+          * The event used to track usage of the component. This is emitted when an input value changes and enableAnalytics is true.
+         */
+        "onComponent-library-analytics"?: (event: CustomEvent<any>) => void;
+        /**
+          * Fires when the date input loses focus
+         */
+        "onDateBlur"?: (event: CustomEvent<any>) => void;
+        /**
+          * Fires when the date input loses focus after its value was changed
+         */
+        "onDateChange"?: (event: CustomEvent<any>) => void;
+        /**
+          * Render marker indicating field is required.
+         */
+        "required"?: boolean;
+        /**
+          * Set the default date value must be in YYYY-MM-DD format.
+         */
+        "value"?: string;
     }
     interface VaFeaturedContent {
     }
@@ -1183,47 +1309,23 @@ declare namespace LocalJSX {
          */
         "value"?: string;
     }
-    interface VaSearch {
+    interface VaSearchInput {
         /**
           * Text displayed inside the search button
          */
         "buttonText"?: string;
         /**
-          * Initial value of input
-         */
-        "inputValue"?: string;
-        /**
           * The aria-label for search input and button. Default is 'Search'.
          */
         "label"?: string;
         /**
-          * Fires when the search button is clicked
+          * An array of strings containing suggestions to be displayed in listbox. This component displays up to 5 suggestions.
          */
-        "onButtonClickEvent"?: (event: CustomEvent<any>) => void;
+        "suggestions"?: any;
         /**
-          * Fires when the search button gains focus
+          * The value of the input field
          */
-        "onButtonFocusEvent"?: (event: CustomEvent<any>) => void;
-        /**
-          * Fires when the search button is focused and a key is pressed
-         */
-        "onButtonKeyDownEvent"?: (event: CustomEvent<any>) => void;
-        /**
-          * Fires when the search input loses focus
-         */
-        "onInputBlurEvent"?: (event: CustomEvent<any>) => void;
-        /**
-          * Fires when the search input loses focus after its value was changed
-         */
-        "onInputChangeEvent"?: (event: CustomEvent<any>) => void;
-        /**
-          * Fires when the search input gains focus
-         */
-        "onInputFocusEvent"?: (event: CustomEvent<any>) => void;
-        /**
-          * Fires when the search input is focused and a key is pressed
-         */
-        "onInputKeyDownEvent"?: (event: CustomEvent<any>) => void;
+        "value"?: string;
     }
     interface VaSegmentedProgressBar {
         /**
@@ -1329,7 +1431,7 @@ declare namespace LocalJSX {
     }
     interface VaTextInput {
         /**
-          * The aria-describedby attribute for the `<input>` in the shadow DOM.
+          * The aria-describedby attribute for the input element in the shadow DOM.
          */
         "ariaDescribedby"?: string;
         /**
@@ -1363,6 +1465,10 @@ declare namespace LocalJSX {
          */
         "maxlength"?: number;
         /**
+          * The minimum number of characters allowed in the input.
+         */
+        "minlength"?: number;
+        /**
           * The name to pass to the input element.
          */
         "name"?: string;
@@ -1371,13 +1477,9 @@ declare namespace LocalJSX {
          */
         "onComponent-library-analytics"?: (event: CustomEvent<any>) => void;
         /**
-          * The event emitted when the input is blurred.
+          * The regular expression that the input element's value is checked against on submission
          */
-        "onVaBlur"?: (event: CustomEvent<any>) => void;
-        /**
-          * The event emitted when the input value changes
-         */
-        "onVaChange"?: (event: CustomEvent<any>) => void;
+        "pattern"?: string;
         /**
           * Set the input to required and render the (Required) text.
          */
@@ -1385,7 +1487,7 @@ declare namespace LocalJSX {
         /**
           * Adds styling based on status value
          */
-        "status"?: 'success';
+        "success"?: boolean;
         /**
           * The type attribute.
          */
@@ -1400,11 +1502,13 @@ declare namespace LocalJSX {
         "va-accordion-item": VaAccordionItem;
         "va-additional-info": VaAdditionalInfo;
         "va-alert": VaAlert;
+        "va-alert-expandable": VaAlertExpandable;
         "va-back-to-top": VaBackToTop;
         "va-banner": VaBanner;
         "va-breadcrumbs": VaBreadcrumbs;
         "va-checkbox": VaCheckbox;
         "va-checkbox-group": VaCheckboxGroup;
+        "va-date": VaDate;
         "va-featured-content": VaFeaturedContent;
         "va-loading-indicator": VaLoadingIndicator;
         "va-modal": VaModal;
@@ -1416,7 +1520,7 @@ declare namespace LocalJSX {
         "va-promo-banner": VaPromoBanner;
         "va-radio": VaRadio;
         "va-radio-option": VaRadioOption;
-        "va-search": VaSearch;
+        "va-search-input": VaSearchInput;
         "va-segmented-progress-bar": VaSegmentedProgressBar;
         "va-select": VaSelect;
         "va-table": VaTable;
@@ -1433,11 +1537,13 @@ declare module "@stencil/core" {
             "va-accordion-item": LocalJSX.VaAccordionItem & JSXBase.HTMLAttributes<HTMLVaAccordionItemElement>;
             "va-additional-info": LocalJSX.VaAdditionalInfo & JSXBase.HTMLAttributes<HTMLVaAdditionalInfoElement>;
             "va-alert": LocalJSX.VaAlert & JSXBase.HTMLAttributes<HTMLVaAlertElement>;
+            "va-alert-expandable": LocalJSX.VaAlertExpandable & JSXBase.HTMLAttributes<HTMLVaAlertExpandableElement>;
             "va-back-to-top": LocalJSX.VaBackToTop & JSXBase.HTMLAttributes<HTMLVaBackToTopElement>;
             "va-banner": LocalJSX.VaBanner & JSXBase.HTMLAttributes<HTMLVaBannerElement>;
             "va-breadcrumbs": LocalJSX.VaBreadcrumbs & JSXBase.HTMLAttributes<HTMLVaBreadcrumbsElement>;
             "va-checkbox": LocalJSX.VaCheckbox & JSXBase.HTMLAttributes<HTMLVaCheckboxElement>;
             "va-checkbox-group": LocalJSX.VaCheckboxGroup & JSXBase.HTMLAttributes<HTMLVaCheckboxGroupElement>;
+            "va-date": LocalJSX.VaDate & JSXBase.HTMLAttributes<HTMLVaDateElement>;
             "va-featured-content": LocalJSX.VaFeaturedContent & JSXBase.HTMLAttributes<HTMLVaFeaturedContentElement>;
             "va-loading-indicator": LocalJSX.VaLoadingIndicator & JSXBase.HTMLAttributes<HTMLVaLoadingIndicatorElement>;
             "va-modal": LocalJSX.VaModal & JSXBase.HTMLAttributes<HTMLVaModalElement>;
@@ -1449,7 +1555,7 @@ declare module "@stencil/core" {
             "va-promo-banner": LocalJSX.VaPromoBanner & JSXBase.HTMLAttributes<HTMLVaPromoBannerElement>;
             "va-radio": LocalJSX.VaRadio & JSXBase.HTMLAttributes<HTMLVaRadioElement>;
             "va-radio-option": LocalJSX.VaRadioOption & JSXBase.HTMLAttributes<HTMLVaRadioOptionElement>;
-            "va-search": LocalJSX.VaSearch & JSXBase.HTMLAttributes<HTMLVaSearchElement>;
+            "va-search-input": LocalJSX.VaSearchInput & JSXBase.HTMLAttributes<HTMLVaSearchInputElement>;
             "va-segmented-progress-bar": LocalJSX.VaSegmentedProgressBar & JSXBase.HTMLAttributes<HTMLVaSegmentedProgressBarElement>;
             "va-select": LocalJSX.VaSelect & JSXBase.HTMLAttributes<HTMLVaSelectElement>;
             "va-table": LocalJSX.VaTable & JSXBase.HTMLAttributes<HTMLVaTableElement>;

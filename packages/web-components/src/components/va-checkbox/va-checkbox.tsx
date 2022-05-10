@@ -52,7 +52,7 @@ export class VaCheckbox {
   @Prop({ mutable: true }) checked: boolean = false;
 
   /**
-   * The aria-describedby attribute for the `<input>` in the shadow DOM.
+   * The aria-describedby attribute for the input element in the shadow DOM.
    */
   @Prop() ariaDescribedby: string = '';
 
@@ -60,11 +60,6 @@ export class VaCheckbox {
    * The event emitted when the input value changes.
    */
   @Event() vaChange: EventEmitter;
-
-  /**
-   * The event emitted when the input is blurred.
-   */
-  @Event() vaBlur: EventEmitter;
 
   /**
    * The event used to track usage of the component. This is emitted when the
@@ -83,9 +78,11 @@ export class VaCheckbox {
       this.description ||
       [
         // This won't work in IE
-        ...(this.el.shadowRoot.querySelector(
-          'slot[name="description"]',
-        ) as HTMLSlotElement)?.assignedNodes(),
+        ...(
+          this.el.shadowRoot.querySelector(
+            'slot[name="description"]',
+          ) as HTMLSlotElement
+        )?.assignedNodes(),
         // For IE
         ...Array.from(
           this.el.shadowRoot.querySelectorAll('[slot="description"]'),
@@ -101,7 +98,7 @@ export class VaCheckbox {
         label: this.label,
         description,
         required: this.required,
-        checked: this.checked
+        checked: this.checked,
       },
     });
   };
@@ -110,10 +107,6 @@ export class VaCheckbox {
     this.checked = (e.target as HTMLInputElement).checked;
     this.vaChange.emit({ checked: this.checked });
     if (this.enableAnalytics) this.fireAnalyticsEvent();
-  };
-
-  private handleBlur = () => {
-    this.vaBlur.emit();
   };
 
   render() {
@@ -137,7 +130,6 @@ export class VaCheckbox {
           checked={this.checked}
           aria-describedby={describedBy}
           onChange={this.handleChange}
-          onBlur={this.handleBlur}
         />
         <label htmlFor="checkbox-element">
           {this.label}
