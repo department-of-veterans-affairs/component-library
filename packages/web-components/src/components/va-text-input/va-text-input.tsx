@@ -162,6 +162,10 @@ export class VaTextInput {
     });
   };
 
+  disconnectedCallback() {
+    i18next.off('languageChanged');
+  };
+
   render() {
     const describedBy =
       `${this.ariaDescribedby} ${this.error ? 'error-message' : ''}`.trim() ||
