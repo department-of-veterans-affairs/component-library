@@ -13,15 +13,15 @@ const defaultArgs = {
   buttonText: 'Continue',
 };
 
+export const Default = Template.bind({});
+Default.args = { ...defaultArgs, buttonText: 'Continue', afterText: '»' };
+
 const ButtonPairTemplate = args => (
   <Fragment>
     <ProgressButton {...args.backButton} />
     <ProgressButton {...args.continueButton} />
   </Fragment>
 );
-
-export const Default = Template.bind({});
-Default.args = { ...defaultArgs, buttonText: 'Continue', afterText: '»' };
 
 export const ButtonPairs = ButtonPairTemplate.bind({});
 ButtonPairs.args = {
