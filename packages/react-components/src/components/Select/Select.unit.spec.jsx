@@ -3,7 +3,7 @@ import { mount, shallow } from 'enzyme';
 import chaiAsPromised from 'chai-as-promised';
 import chai, { expect } from 'chai';
 import { axeCheck } from '../../helpers/test-helpers';
-
+import i18next from 'i18next';
 import Select from './Select.jsx';
 import { makeField } from '../../helpers/fields.js';
 import sinon from 'sinon';
@@ -12,6 +12,19 @@ import { testAnalytics } from '../../helpers/test-helpers';
 chai.use(chaiAsPromised);
 
 describe('<Select>', () => {
+  before(() => {
+    i18next.init({
+      fallbackLng: 'en',
+      resources: {
+        en: {
+          translation: {
+            required: 'Required',
+          },
+        },
+      },
+    });
+  });
+
   const testValue = makeField('');
   const options = [
     { value: 1, label: 'first' },
