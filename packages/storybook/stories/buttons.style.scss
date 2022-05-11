@@ -1,4 +1,4 @@
-[name='Secondary'] {
+[name='Secondary Buttons'] {
   & button:nth-child(2) {
     background-color: #dce4ef;
   }
@@ -9,16 +9,16 @@
   }
 }
 
-[name='Continue'] {
+[name='Continue Buttons'] {
   & button:not(:first-child) {
     background-color: #195c27 !important;
   }
 }
 
 // Active buttons
-[name='Primary'],
-[name='Secondary'],
-[name='Continue'] {
+[name='Primary Buttons'],
+[name='Secondary Buttons'],
+[name='Continue Buttons'] {
   & button:nth-child(2) {
     outline: 2px solid #f9c642;
     outline-offset: 2px;

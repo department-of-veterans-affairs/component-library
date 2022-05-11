@@ -1,4 +1,5 @@
 import { Meta, Canvas } from '@storybook/addon-docs/blocks';
+import './buttons.style.scss';
 
 <Meta title="Components/Buttons" />
 
@@ -6,7 +7,7 @@ import { Meta, Canvas } from '@storybook/addon-docs/blocks';
 
 <Canvas>
   <Story name="Primary">
-    <div>
+    <div name="Primary Buttons">
       <button type="button" className="usa-button">
         Button
       </button>
@@ -24,7 +25,7 @@ import { Meta, Canvas } from '@storybook/addon-docs/blocks';
 
 <Canvas>
   <Story name="Secondary">
-    <div>
+    <div name="Secondary Buttons">
       <button className="usa-button-secondary">Button</button>
       <button className="usa-button-secondary usa-button-active">Active</button>
       <button className="usa-button-secondary usa-button-hover">Hover</button>
@@ -36,7 +37,7 @@ import { Meta, Canvas } from '@storybook/addon-docs/blocks';
 
 <Canvas>
   <Story name="Continue">
-    <div>
+    <div name="Continue Buttons">
       <button type="button" className="usa-button-primary va-button-primary">
         Button
       </button>
