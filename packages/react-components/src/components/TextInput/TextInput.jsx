@@ -88,7 +88,7 @@ class TextInput extends React.Component {
     // Calculate required.
     let requiredSpan = undefined;
     if (this.props.required) {
-      requiredSpan = <span className="form-required-span">{i18next.t('required')}</span>;
+      requiredSpan = <span className="form-required-span">(*{i18next.t('required')})</span>;
     }
 
     // preventDefault on the div stops the form from submitting after a user
