@@ -1,6 +1,7 @@
 import React from 'react';
 // import SkinDeep from 'skin-deep';
 import { expect } from 'chai';
+import i18next from 'i18next';
 import { render } from '@testing-library/react';
 import Date from './Date';
 import { makeField } from '../../helpers/fields.js';
@@ -8,6 +9,20 @@ import { makeField } from '../../helpers/fields.js';
 import { minYear, maxYear } from '../../helpers/validations';
 
 describe('<Date>', () => {
+  // Mock a translation so that we can test for interpolation
+  before(() => {
+    i18next.init({
+      fallbackLng: 'en',
+      resources: {
+        en: {
+          translation: {
+            'year-range': 'year-range {{start}} {{end}}',
+          },
+        },
+      },
+    });
+  });
+
   it('displays required message', () => {
     const date = {
       day: makeField(''),
@@ -48,10 +63,12 @@ describe('<Date>', () => {
     date.year.dirty = true;
     date.month.dirty = false;
     date.day.dirty = false;
-    const { getByText } = render(<Date date={date} onValueChange={() => {}} />);
+    const { getByRole, getByText } = render(
+      <Date date={date} onValueChange={() => {}} />,
+    );
 
-    expect(getByText(`Please enter a year between ${minYear} and ${maxYear}`))
-      .to.not.be.null;
+    expect(getByRole('alert')).to.not.be.null;
+    expect(getByText(`year-range ${minYear} ${maxYear}`)).to.not.be.null;
   });
   it('displays invalid year message for years > max', () => {
     const date = {
@@ -62,10 +79,12 @@ describe('<Date>', () => {
     date.year.dirty = true;
     date.month.dirty = false;
     date.day.dirty = false;
-    const { getByText } = render(<Date date={date} onValueChange={() => {}} />);
+    const { getByText, getByRole } = render(
+      <Date date={date} onValueChange={() => {}} />,
+    );
 
-    expect(getByText(`Please enter a year between ${minYear} and ${maxYear}`))
-      .to.not.be.null;
+    expect(getByRole('alert')).to.not.be.null;
+    expect(getByText(`year-range ${minYear} ${maxYear}`)).to.not.be.null;
   });
 
   it('does not show invalid message for month year date', () => {
