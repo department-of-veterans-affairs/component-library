@@ -35,21 +35,8 @@ describe('va-number-input', () => {
       '<va-number-input label="This is a field" required />',
     );
 
-    const el = await page.find('va-number-input');
-    // required="" is a weird thing that only happens in these tests
-    expect(el).toEqualHtml(`
-      <va-number-input class="hydrated" label="This is a field" required="">
-        <mock:shadow-root>
-          <label for="inputField">
-            This is a field <span class="required">(*Required)</span>
-          </label>
-          <input id="inputField" type="number" />
-        </mock:shadow-root>
-      </va-number-input>
-    `);
-
-    // Render the error message text
-    const requiredSpan = await page.find('va-number-input >>> .required');
+    const requiredSpan = await page.find('va-number-input >>> label > span.required');
+    // The actual text value depends on the language of the document
     expect(requiredSpan).not.toBeNull();
   });
 
