@@ -88,7 +88,7 @@ describe('va-text-input', () => {
       <va-text-input class="hydrated" label="This is a field" required="">
         <mock:shadow-root>
           <label for="inputField" part="label">
-            This is a field <span class="required">required</span>
+            This is a field <span class="required">(*required)</span>
           </label>
           <slot></slot>
           <input id="inputField" type="text" part="input" />
