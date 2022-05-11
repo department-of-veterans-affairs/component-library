@@ -11,7 +11,6 @@ const Template = args => <ProgressButton {...args} />;
 
 const defaultArgs = {
   buttonText: 'Continue',
-  afterText: '»',
 };
 
 const ButtonPairTemplate = args => (
@@ -22,7 +21,7 @@ const ButtonPairTemplate = args => (
 );
 
 export const Default = Template.bind({});
-Default.args = { ...defaultArgs };
+Default.args = { ...defaultArgs, buttonText: 'Continue', afterText: '»' };
 
 export const ButtonPairs = ButtonPairTemplate.bind({});
 ButtonPairs.args = {
