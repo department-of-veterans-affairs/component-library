@@ -1,5 +1,4 @@
 import { Meta, Canvas } from '@storybook/addon-docs/blocks';
-import './buttons.style.scss';
 
 <Meta title="Components/Buttons" />
 
@@ -26,9 +25,9 @@ import './buttons.style.scss';
 <Canvas>
   <Story name="Secondary">
     <div>
-      <button class="usa-button-secondary">Button</button>
-      <button class="usa-button-secondary usa-button-active">Active</button>
-      <button class="usa-button-secondary usa-button-hover">Hover</button>
+      <button className="usa-button-secondary">Button</button>
+      <button className="usa-button-secondary usa-button-active">Active</button>
+      <button className="usa-button-secondary usa-button-hover">Hover</button>
     </div>
   </Story>
 </Canvas>
@@ -38,11 +37,11 @@ import './buttons.style.scss';
 <Canvas>
   <Story name="Continue">
     <div>
-      <button type="button" class="usa-button-primary va-button-primary">
+      <button type="button" className="usa-button-primary va-button-primary">
         Button
       </button>
-      <button class="usa-button-primary va-button-primary">Active</button>
-      <button class="usa-button-primary va-button-primary">Hover</button>
+      <button className="usa-button-primary va-button-primary">Active</button>
+      <button className="usa-button-primary va-button-primary">Hover</button>
     </div>
   </Story>
 </Canvas>
@@ -52,16 +51,16 @@ import './buttons.style.scss';
 <Canvas>
   <Story name="Big">
     <div>
-      <button type="button" class="usa-button usa-button-big">
+      <button type="button" className="usa-button usa-button-big">
         Primary button
       </button>
       <button
         type="button"
-        class="usa-button-primary va-button-primary usa-button-big"
+        className="usa-button-primary va-button-primary usa-button-big"
       >
         Continue button
       </button>
-      <button class="usa-button-secondary usa-button-big">
+      <button className="usa-button-secondary usa-button-big">
         Secondary button
       </button>
     </div>
@@ -73,7 +72,7 @@ import './buttons.style.scss';
 <Canvas>
   <Story name="Disabled">
     <div>
-      <button type="button" class="usa-button" disabled>
+      <button type="button" className="usa-button" disabled>
         Disabled button
       </button>
     </div>
