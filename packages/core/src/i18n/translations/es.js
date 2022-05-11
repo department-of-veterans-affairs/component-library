@@ -6,7 +6,7 @@ export default {
   'month': 'Mes',
   'day': 'Día',
   'year': 'Año',
-  'year-range': 'Ingrese un año entre {{start}} y {{end}}"',
+  'year-range': 'Ingrese un año entre {{start}} y {{end}}',
   'expand-all': 'Expandir todo',
   'collapse-all': 'Contraer todo',
   'expand-all-aria-label': 'Expandir todos los acordeones',
