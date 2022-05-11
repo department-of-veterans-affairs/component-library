@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 
 import TextInput from '../../react-components/src/components/TextInput/TextInput';
 
@@ -16,26 +16,6 @@ const Template = args => {
   return <TextInput {...args} field={field} onValueChange={onValueChange} />;
 };
 
-const I18nTemplate = args => {
-  const [lang, setLang] = useState('en');
-  const [field, setField] = useState(args.field);
-  const onValueChange = newField => {
-    setField(newField);
-  };
-
-  useEffect(() => {
-    document.querySelector('main').setAttribute('lang', lang);
-  }, [lang]);
-
-  return (
-    <div>
-      <button onClick={e => setLang('es')}>Español</button>
-      <button onClick={e => setLang('en')}>English</button>
-      <TextInput {...args} field={field} onValueChange={onValueChange} />
-    </div>
-  );
-};
-
 const defaultArgs = {
   label: 'First name',
   name: 'first_name',
@@ -48,12 +28,6 @@ const defaultArgs = {
 export const Default = Template.bind({});
 Default.args = {
   ...defaultArgs,
-};
-
-export const Internationalization = I18nTemplate.bind({});
-Internationalization.args = {
-  ...defaultArgs,
-  required: true,
 };
 
 export const ErrorMessage = Template.bind({});
