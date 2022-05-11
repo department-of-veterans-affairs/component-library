@@ -2,12 +2,25 @@ import React from 'react';
 import { shallow, mount } from 'enzyme';
 import { axeCheck } from '../../helpers/test-helpers';
 import { expect } from 'chai';
+import i18next from 'i18next';
 import TextInput from './TextInput.jsx';
 import { makeField } from '../../helpers/fields.js';
 import sinon from 'sinon';
 import { testAnalytics } from '../../helpers/test-helpers';
 
 describe('<TextInput>', () => {
+  before(() => {
+    i18next.init({
+      fallbackLng: 'en',
+      resources: {
+        en: {
+          translation: {
+            required: 'Required',
+          },
+        },
+      },
+    });
+  });
   it('calls onValueChange with input value and dirty state', () => {
     let valueChanged;
     // shallowly render component with callback that alters valueChanged with passed argument
