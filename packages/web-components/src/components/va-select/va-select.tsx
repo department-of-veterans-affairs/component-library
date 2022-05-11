@@ -10,13 +10,7 @@ import {
   h,
 } from '@stencil/core';
 import i18next from 'i18next';
-import { Build } from '@stencil/core';
 import { getSlottedNodes } from '../../utils/utils';
-
-if (Build.isTesting) {
-  // Make i18next.t() return the key instead of the value
-  i18next.init({ lng: 'cimode' });
-}
 
 @Component({
   tag: 'va-select',
