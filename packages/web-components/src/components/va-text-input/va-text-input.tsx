@@ -178,7 +178,7 @@ export class VaTextInput {
         {this.label && (
           <label htmlFor="inputField" part="label">
             {this.label}{' '}
-            {this.required && <span class="required">{i18next.t('required')}</span>}
+            {this.required && <span class="required">(*{i18next.t('required')})</span>}
           </label>
         )}
         <slot></slot>
