@@ -1,6 +1,6 @@
 {
   "name": "@department-of-veterans-affairs/react-components",
-  "version": "6.1.2-0",
+  "version": "6.1.2",
   "description": "VA.gov component library in React",
   "keywords": [
     "react",
@@ -99,6 +99,5 @@
     "i18next-browser-languagedetector": "*",
     "react": "^17",
     "react-dom": "*"
-  },
-  "stableVersion": "6.1.1"
+  }
 }
