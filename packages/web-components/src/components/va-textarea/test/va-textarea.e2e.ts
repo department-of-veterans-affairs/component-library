@@ -56,6 +56,31 @@ describe('va-textarea', () => {
     await axeCheck(page);
   });
 
+  it('fires an analytics event when enableAnalytics is true', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent(
+      '<va-textarea label="Something" enable-analytics/>',
+    );
+
+    const analyticsSpy = await page.spyOnEvent('component-library-analytics');
+
+    const textareaEl = await page.find('va-textarea >>> textarea');
+    await textareaEl.press('1');
+    await textareaEl.press('2');
+    await textareaEl.press('3');
+    await textareaEl.press('Tab');
+
+    expect(analyticsSpy).toHaveReceivedEventDetail({
+      action: 'blur',
+      componentName: 'va-textarea',
+      details: {
+        label: 'Something',
+        value: '123',
+      },
+    });
+  });
+
   it('emits blur event', async () => {
     const page = await newE2EPage();
 

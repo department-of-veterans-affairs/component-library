@@ -1,4 +1,4 @@
-import { Build, Component, Host, Prop, Element, forceUpdate, h } from '@stencil/core';
+import { Build, Component, Event, EventEmitter, Host, Prop, Element, forceUpdate, h } from '@stencil/core';
 import i18next from 'i18next';
 
 if (Build.isTesting) {
@@ -51,6 +51,17 @@ export class VaTextarea {
    */
   @Prop() enableAnalytics?: boolean;
 
+  /**
+   * The event used to track usage of the component. This is emitted when
+   * the textarea is blurred and `enableAnalytics` is true
+   */
+  @Event({
+    eventName: 'component-library-analytics',
+    composed: true,
+    bubbles: true,
+  })
+  componentLibraryAnalytics: EventEmitter;
+
   connectedCallback() {
     i18next.on('languageChanged', () => {
       forceUpdate(this.el);
@@ -65,6 +76,20 @@ export class VaTextarea {
     const target = e.target as HTMLInputElement;
     this.value = target.value;
   };
+
+  private handleBlur = () => {
+    // Only fire the analytics event if enabled and value is not null
+    if (this.enableAnalytics && this.value) {
+      this.componentLibraryAnalytics.emit({
+        componentName: 'va-textarea',
+        action: 'blur',
+        details: {
+          label: this.label,
+          value: this.value,
+        },
+      });
+    }
+  }
 
   render() {
     const {label, error, placeholder, maxlength, name, required, value} = this;
@@ -86,6 +111,7 @@ export class VaTextarea {
           aria-describedby={error ? 'error-message' : undefined}
           aria-labelledby="textarea-label"
           onInput={this.handleInput}
+          onBlur={this.handleBlur}
           id="textarea"
           placeholder={placeholder}
           name={name}

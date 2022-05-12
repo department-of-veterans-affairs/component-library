@@ -1557,6 +1557,10 @@ declare namespace LocalJSX {
          */
         "name"?: string;
         /**
+          * The event used to track usage of the component. This is emitted when the textarea is blurred and `enableAnalytics` is true
+         */
+        "onComponent-library-analytics"?: (event: CustomEvent<any>) => void;
+        /**
           * The placeholder string.
          */
         "placeholder"?: string;
