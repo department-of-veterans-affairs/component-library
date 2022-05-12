@@ -1,5 +1,10 @@
-import { Component, Host, Prop, Element, forceUpdate, h } from '@stencil/core';
+import { Build, Component, Host, Prop, Element, forceUpdate, h } from '@stencil/core';
 import i18next from 'i18next';
+
+if (Build.isTesting) {
+  // Make i18next.t() return the key instead of the value
+  i18next.init({ lng: 'cimode' });
+}
 
 @Component({
   tag: 'va-textarea',

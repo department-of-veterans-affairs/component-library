@@ -68,5 +68,44 @@ describe('va-textarea', () => {
     expect(blurSpy).toHaveReceivedEvent();
   });
 
+  it('emits input event with value updated', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<va-textarea label="Input Field"/>');
+
+    const textareaEl = await page.find('va-textarea >>> textarea');
+    const inputSpy = await page.spyOnEvent('input');
+
+    // Act
+    await textareaEl.press('a');
+    const firstValue = await page.$eval("va-textarea", (comp : HTMLTextAreaElement) => comp.value)
+    await textareaEl.press('s');
+    const secondValue = await page.$eval("va-textarea", (comp : HTMLTextAreaElement) => comp.value)
+
+    // Assert
+    expect(inputSpy).toHaveReceivedEventTimes(2);
+    expect(firstValue).toEqual('a');
+    expect(secondValue).toEqual('as');
+  });
+
+  it('adds a max character limit with descriptive text', async () => {
+    const page = await newE2EPage();
+    await page.setContent(
+      '<va-textarea maxlength="3" value="22"/>',
+    );
+
+    // Level-setting expectations
+    const textareaEl = await page.find('va-textarea >>> textarea');
+    expect(await textareaEl.getProperty('value')).toBe('22');
+    expect(await page.find('va-textarea >>> small')).toBeNull();
+
+    // Test the functionality
+    await textareaEl.press('2');
+    expect(await textareaEl.getProperty('value')).toBe('222');
+    // This is the i18next key surrounded by parentheses
+    expect((await page.find('va-textarea >>> small')).innerText).toContain(
+      '(max-chars)',
+    );
+  });
 
 });
