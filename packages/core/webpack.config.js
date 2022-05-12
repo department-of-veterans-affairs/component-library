@@ -6,6 +6,7 @@ module.exports = {
   entry: ['./src/main.js'],
   target: ['web', 'es5'],
   output: {
+    publicPath: '',
     path: __dirname + '/dist',
     filename: 'app.bundle.js',
   },
