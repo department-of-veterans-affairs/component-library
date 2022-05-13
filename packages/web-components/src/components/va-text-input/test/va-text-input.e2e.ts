@@ -91,7 +91,7 @@ describe('va-text-input', () => {
             This is a field <span class="required">(*required)</span>
           </label>
           <slot></slot>
-          <input id="inputField" type="text" part="input" />
+          <input id="inputField" type="text" required="" part="input" />
         </mock:shadow-root>
       </va-text-input>
     `);
