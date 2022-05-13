@@ -89,11 +89,6 @@ export class VaTextInput {
   @Prop() name?: string;
 
   /**
-   * The aria-describedby attribute for the input element in the shadow DOM.
-   */
-  @Prop() ariaDescribedby?: string = '';
-
-  /**
    * The regular expression that the input element's value is checked against on submission
    */
   @Prop() pattern?: string;
@@ -167,9 +162,6 @@ export class VaTextInput {
   };
 
   render() {
-    const describedBy =
-      `${this.ariaDescribedby} ${this.error ? 'error-message' : ''}`.trim() ||
-      null; // Null so we don't add the attribute if we have an empty string
     const inputMode = this.inputmode ? this.inputmode : null; // Null so we don't add the attribute if we have an empty string
     const type = this.getInputType();
 
@@ -189,7 +181,6 @@ export class VaTextInput {
           value={this.value}
           onInput={this.handleInput}
           onBlur={this.handleBlur}
-          aria-describedby={describedBy}
           inputmode={inputMode}
           maxlength={this.maxlength}
           minlength={this.minlength}
