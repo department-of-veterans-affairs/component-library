@@ -11,13 +11,16 @@ describe('va-radio-option', () => {
 
   it('inserts and parses optional props and attributes correctly', async () => {
     const page = await newE2EPage();
-    await page.setContent('<va-radio-option id="yes2" label="Yes - Any Veteran" name="yes" value="2"></va-radio-option>');
+    await page.setContent(
+      '<va-radio-option id="yes2" label="Yes - Any Veteran" name="yes" value="2"></va-radio-option>',
+    );
 
     const element = await page.find('va-radio-option');
     expect(element).toEqualHtml(`
-    <va-radio-option id="yes2" label="Yes - Any Veteran" name="yes" value="2" aria-checked="false" aria-label="yes" role="radio" class="hydrated">
+    <va-radio-option id="yes2" label="Yes - Any Veteran" name="yes" value="2" class="hydrated">
       <mock:shadow-root>
-        <label for="Yes - Any Veteran">Yes - Any Veteran</label>
+        <input id="inputField" name="yes" type="radio" value="2">
+        <label for="inputField">Yes - Any Veteran</label>
       </mock:shadow-root>
     </va-radio-option>
   `);
@@ -41,7 +44,7 @@ describe('va-radio-option', () => {
     );
 
     const changeSpy = await page.spyOnEvent('radioOptionSelected');
-    const inputEl = await page.find('va-radio-option');
+    const inputEl = await page.find('va-radio-option >>> input');
     await inputEl.click();
 
     expect(changeSpy).toHaveReceivedEvent();
