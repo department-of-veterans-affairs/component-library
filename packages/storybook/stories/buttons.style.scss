@@ -1,5 +1,8 @@
 @import '@department-of-veterans-affairs/formation/sass/base/_b-variables.scss';
 
+// Applies only to Secondary buttons
+// 2nd child represents a mock active state
+// 3rd child represents a mock hover state
 [name='Secondary Buttons'] {
   // Mocks state styles for active and hover buttons
   & button:nth-child(2),
@@ -7,7 +10,7 @@
     background-color: $color-cool-blue-lightest;
   }
 
-  // Fixes focus styling for Secondary button hover state
+  // Adds focus styling for hover state
   & button:nth-child(3):focus {
     border-color: $color-primary;
     box-shadow: inset 0 0 0 2px $color-primary;
