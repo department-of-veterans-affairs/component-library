@@ -1,4 +1,12 @@
-import { Component, Element, Event, EventEmitter, Host, Prop, h } from '@stencil/core';
+import {
+  Component,
+  Element,
+  Event,
+  EventEmitter,
+  Host,
+  Prop,
+  h,
+} from '@stencil/core';
 
 @Component({
   tag: 'va-radio-option',
@@ -29,11 +37,6 @@ export class VaRadioOption {
   @Prop() checked: boolean;
 
   /**
-   * Optional string for the ariaDescribedBy attribute.
-   */
-  @Prop() ariaDescribedby: string;
-
-  /**
    * The event emitted when the selected option value changes
    */
   @Event({
@@ -42,25 +45,23 @@ export class VaRadioOption {
   })
   radioOptionSelected: EventEmitter;
 
-  private handleChange(): void {
+  private handleChange = (): void => {
     this.radioOptionSelected.emit();
-  }
+  };
 
   render() {
-    const ariaDescribedby = (this.checked && this.ariaDescribedby) || null;
+    const { checked, label, name, value } = this;
+
     return (
-      <Host
-        aria-checked={this.checked ? `${this.checked}` : 'false'}
-        aria-describedby={ariaDescribedby}
-        aria-label={this.name}
-        checked={this.checked}
-        name={this.name}
-        onClick={() => this.handleChange()}
-        role="radio"
-        value={this.value}
-        id={this.el.id || this.label}
-      >
-        <label htmlFor={this.label}>{this.label}</label>
+      <Host onClick={this.handleChange}>
+        <input
+          checked={checked}
+          id="inputField"
+          name={name}
+          type="radio"
+          value={value}
+        ></input>
+        <label htmlFor="inputField">{label}</label>
       </Host>
     );
   }
