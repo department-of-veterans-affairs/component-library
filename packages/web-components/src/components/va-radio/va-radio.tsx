@@ -86,6 +86,9 @@ export class VaRadio {
         this.selectNextNode(currentNode);
         break;
       case 'ArrowDown':
+        // prevent scrolling page
+        event.preventDefault();
+      case 'ArrowDown':
       case 'ArrowRight':
         if (currentNodeIndex === radioOptionNodes.length - 1) {
           nextNode = radioOptionNodes[0];
@@ -97,6 +100,10 @@ export class VaRadio {
           this.selectNextNode(nextNode);
         }
         break;
+
+      case 'ArrowUp':
+        // prevent scrolling page
+        event.preventDefault();
       case 'ArrowUp':
       case 'ArrowLeft':
         if (currentNodeIndex === 0) {
@@ -129,6 +136,7 @@ export class VaRadio {
       .forEach((item: HTMLVaRadioOptionElement) => {
         this.deselectCurrentNode(item);
       });
+
     this.selectNextNode(clickedItem);
 
     if (this.enableAnalytics) this.fireAnalyticsEvent(clickedItem.label);

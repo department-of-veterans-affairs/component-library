@@ -391,10 +391,6 @@ export namespace Components {
     }
     interface VaRadioOption {
         /**
-          * Optional string for the ariaDescribedBy attribute.
-         */
-        "ariaDescribedby": string;
-        /**
           * Whether or not the option is selected.
          */
         "checked": boolean;
@@ -1284,10 +1280,6 @@ declare namespace LocalJSX {
         "required"?: boolean;
     }
     interface VaRadioOption {
-        /**
-          * Optional string for the ariaDescribedBy attribute.
-         */
-        "ariaDescribedby"?: string;
         /**
           * Whether or not the option is selected.
          */
