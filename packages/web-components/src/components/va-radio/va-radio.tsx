@@ -65,7 +65,6 @@ export class VaRadio {
   @Listen('keydown')
   handleKeyDown(event: KeyboardEvent) {
     const currentNode = event.target as HTMLVaRadioOptionElement;
-    const currentInput = currentNode.shadowRoot.querySelector('input');
     const radioOptionNodes = getSlottedNodes(
       this.el,
       'va-radio-option',
@@ -82,36 +81,32 @@ export class VaRadio {
     switch (event.key) {
       case ' ':
         event.preventDefault();
-        if (currentInput.checked) return;
+        if (currentNode.checked) return;
         nextNode = currentNode;
-        this.selectNextNode(currentInput);
+        this.selectNextNode(currentNode);
         break;
       case 'ArrowDown':
       case 'ArrowRight':
         if (currentNodeIndex === radioOptionNodes.length - 1) {
           nextNode = radioOptionNodes[0];
-          const nextInput = nextNode.shadowRoot.querySelector('input');
-          this.deselectCurrentNode(currentInput);
-          this.selectNextNode(nextInput);
+          this.deselectCurrentNode(currentNode);
+          this.selectNextNode(nextNode);
         } else {
           nextNode = radioOptionNodes[currentNodeIndex + 1];
-          const nextInput = nextNode.shadowRoot.querySelector('input');
-          this.deselectCurrentNode(currentInput);
-          this.selectNextNode(nextInput);
+          this.deselectCurrentNode(currentNode);
+          this.selectNextNode(nextNode);
         }
         break;
       case 'ArrowUp':
       case 'ArrowLeft':
         if (currentNodeIndex === 0) {
           nextNode = radioOptionNodes[radioOptionNodes.length - 1];
-          const nextInput = nextNode.shadowRoot.querySelector('input');
-          this.deselectCurrentNode(currentInput);
-          this.selectNextNode(nextInput);
+          this.deselectCurrentNode(currentNode);
+          this.selectNextNode(nextNode);
         } else {
           nextNode = radioOptionNodes[currentNodeIndex - 1];
-          const nextInput = nextNode.shadowRoot.querySelector('input');
-          this.deselectCurrentNode(currentInput);
-          this.selectNextNode(nextInput);
+          this.deselectCurrentNode(currentNode);
+          this.selectNextNode(nextNode);
         }
         break;
       default:
@@ -132,11 +127,9 @@ export class VaRadio {
     getSlottedNodes(this.el, 'va-radio-option')
       .filter(item => item !== clickedItem)
       .forEach((item: HTMLVaRadioOptionElement) => {
-        const input = item.shadowRoot.querySelector('input');
-        this.deselectCurrentNode(input);
+        this.deselectCurrentNode(item);
       });
-    const input = clickedItem.shadowRoot.querySelector('input');
-    this.selectNextNode(input);
+    this.selectNextNode(clickedItem);
 
     if (this.enableAnalytics) this.fireAnalyticsEvent(clickedItem.label);
 
@@ -155,15 +148,17 @@ export class VaRadio {
     });
   }
 
-  private deselectCurrentNode(node: HTMLInputElement): void {
+  private deselectCurrentNode(node: HTMLVaRadioOptionElement): void {
+    const input = node.shadowRoot.querySelector('input');
     node.removeAttribute('checked');
-    node.setAttribute('tabindex', '-1');
+    input.setAttribute('tabindex', '-1');
   }
 
-  private selectNextNode(node: HTMLInputElement): void {
+  private selectNextNode(node: HTMLVaRadioOptionElement): void {
+    const input = node.shadowRoot.querySelector('input');
     node.setAttribute('checked', '');
-    node.setAttribute('tabindex', '0');
-    node.focus();
+    input.setAttribute('tabindex', '0');
+    input.focus();
   }
 
   componentDidLoad(): void {
