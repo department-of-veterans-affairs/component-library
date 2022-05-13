@@ -50,15 +50,16 @@ export class VaRadioOption {
   };
 
   render() {
-    const { checked, label, name, value } = this;
+    const { checked, handleChange, label, name, value } = this;
 
     return (
-      <Host onClick={this.handleChange}>
+      <Host>
         <input
           checked={checked}
           id="inputField"
           name={name}
           type="radio"
+          onClick={handleChange}
           value={value}
         ></input>
         <label htmlFor="inputField">{label}</label>
