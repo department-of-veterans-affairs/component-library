@@ -1,7 +1,11 @@
 [name='Secondary Buttons'] {
-  & button:nth-child(2) {
+  // Mocks state styles for active and hover buttons
+  & button:nth-child(2),
+  & button:nth-child(3) {
     background-color: #dce4ef;
   }
+
+  // Fixes focus styling for Secondary button
   & button:nth-child(3):focus {
     border-color: #0071bb;
     box-shadow: inset 0 0 0 2px #0071bb;
@@ -9,16 +13,10 @@
   }
 }
 
-[name='Continue Buttons'] {
-  & button:not(:first-child) {
-    background-color: #195c27 !important;
-  }
-}
-
 // Active buttons
 [name='Primary Buttons'],
-[name='Secondary Buttons'],
-[name='Continue Buttons'] {
+[name='Secondary Buttons'] {
+  // Mocks focus state without requiring focus
   & button:nth-child(2) {
     outline: 2px solid #f9c642;
     outline-offset: 2px;
