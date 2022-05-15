@@ -1,0 +1,12 @@
+{
+  "name": "css-utilities",
+  "packageManager": "yarn@3.2.0",
+  "scripts": {
+    "build": "sass --load-path=../../node_modules/@uswds/uswds/packages/ src/index.scss out.css",
+    "build:minify": "yarn build --style compressed"
+  },
+  "devDependencies": {
+    "@uswds/uswds": "^3.0.1",
+    "sass": "^1.51.0"
+  }
+}

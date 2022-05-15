@@ -1,0 +1,31 @@
+@use "uswds-core/src/styles/functions" as *;
+
+// Our colors
+$tokens-color-basic: (
+  "primary": "#0071bb",
+  "orange": "#eb7f29",
+);
+
+$color-settings: (
+  output: true,
+  responsive: false,
+  active: false,
+  focus: false,
+  hover: true,
+  visited: false,
+) !default;
+
+// Config for color utility classes
+$u-color: (
+  color: (
+    base: "vads",
+    modifiers: null,
+    values:
+      map-collect(
+        $tokens-color-basic
+      ),
+    settings: $color-settings,
+    property: "color",
+    type: "utility",
+  ),
+);
