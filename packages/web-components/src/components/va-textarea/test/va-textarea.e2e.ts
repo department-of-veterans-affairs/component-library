@@ -43,7 +43,8 @@ describe('va-textarea', () => {
 
     // Render the error message text
     const requiredSpan = await page.find('va-textarea >>> .required');
-    expect(requiredSpan).not.toBeNull();
+    // This is the key for i18next
+    expect(requiredSpan).toEqualText('(*required)');
   });
 
   it('passes an aXe check', async () => {
