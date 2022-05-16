@@ -145,7 +145,7 @@ describe('<NumberInput>', () => {
     tree.unmount();
   });
 
-  it('required=false does not have required asterisk', () => {
+  it('required=false does not have required span', () => {
     const tree = shallow(
       <NumberInput
         field={testValue}
@@ -153,11 +153,14 @@ describe('<NumberInput>', () => {
         onValueChange={() => {}}
       />,
     );
-    expect(tree.find('label').text()).to.equal('my label');
+
+    const label = tree.find('label');
+    expect(label.text()).to.equal('my label');
+    expect(label.find('span.form-required-span')).to.have.length(0);
     tree.unmount();
   });
 
-  it('required=true has required asterisk', () => {
+  it('required=true has required span', () => {
     const tree = shallow(
       <NumberInput
         field={testValue}
@@ -168,7 +171,8 @@ describe('<NumberInput>', () => {
     );
 
     const label = tree.find('label');
-    expect(label.text()).to.equal('my label(*Required)');
+    expect(label.text()).to.contain('my label');
+    expect(label.find('span.form-required-span')).to.have.length(1);
     tree.unmount();
   });
 
