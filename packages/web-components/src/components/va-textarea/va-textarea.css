@@ -9,6 +9,10 @@
   margin-top: 0;
 }
 
+.required {
+  margin-left: 0.4rem;
+}
+
 label {
   display: block;
   margin-top: 2.8rem;
