@@ -28,6 +28,7 @@ const defaultArgs = {
   'error': undefined,
   'maxlength': undefined,
   'value': undefined,
+  'placeholder': '',
 };
 
 const Template = ({
@@ -38,6 +39,7 @@ const Template = ({
   error,
   maxlength,
   value,
+  placeholder,
 }) => {
   return (
     <va-textarea
@@ -48,6 +50,7 @@ const Template = ({
       error={error}
       maxlength={maxlength}
       value={value}
+      placeholder={placeholder}
       onBlur={e => console.log('blur event', e)}
       onInput={e => console.log('input event value', e.target.value)}
     />
@@ -68,6 +71,7 @@ export const MaxLength = Template.bind({});
 MaxLength.args = {
   ...defaultArgs,
   maxlength: '16',
+  placeholder: 'No more than 16 characters',
 };
 
 export const WithAnalytics = Template.bind({});

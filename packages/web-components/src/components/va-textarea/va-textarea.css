@@ -16,6 +16,7 @@ label {
 }
 
 textarea {
+  font-family: var(--font-sans);
   display: block;
   min-height: 5.2rem;
   height: 16rem;
