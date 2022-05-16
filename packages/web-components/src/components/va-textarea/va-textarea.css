@@ -12,14 +12,14 @@
 label {
   display: block;
   margin-top: 2.8rem;
-  max-width: 46rem;
+  max-width: 48rem;
 }
 
 textarea {
   display: block;
-  min-height: 50px;
+  min-height: 5.2rem;
   height: 16rem;
-  max-width: 46rem;
+  max-width: 48rem;
   width: 100%;
   padding: 1.2rem;
   margin: 0.4rem 0;
