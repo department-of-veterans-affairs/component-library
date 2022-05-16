@@ -44,6 +44,9 @@ export class VaTextarea {
    */
   @Prop() maxlength?: number;
 
+  /**
+   * The value of the textarea
+   */
   @Prop({ mutable: true, reflect: true }) value?: string;
 
   /**

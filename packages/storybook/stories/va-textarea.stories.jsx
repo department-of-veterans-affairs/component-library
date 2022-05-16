@@ -33,18 +33,11 @@ const defaultArgs = {
 const Template = ({
   name,
   label,
-  autocomplete,
   'enable-analytics': enableAnalytics,
   required,
   error,
   maxlength,
-  minlength,
   value,
-  inputmode,
-  type,
-  'aria-describedby': ariaDescribedby,
-  success,
-  pattern,
 }) => {
   return (
     <va-textarea
