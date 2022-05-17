@@ -57,6 +57,15 @@ describe('va-text-input', () => {
     expect(error.innerText).toContain('This is a mistake');
   });
 
+  it('adds new aria-describedby for error message', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-text-input error="This is a mistake" />');
+
+    // Render the error message text
+    const inputEl = await page.find('va-text-input >>> input');
+    expect(inputEl.getAttribute('aria-describedby')).toContain('error-message');
+  });
+
   it('renders a required span', async () => {
     const page = await newE2EPage();
     await page.setContent('<va-text-input label="This is a field" required />');

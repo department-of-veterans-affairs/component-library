@@ -155,13 +155,14 @@ export class VaTextInput {
     i18next.on('languageChanged', () => {
       forceUpdate(this.el);
     });
-  };
+  }
 
   disconnectedCallback() {
     i18next.off('languageChanged');
-  };
+  }
 
   render() {
+    const describedBy = `${this.error ? 'error-message' : ''}`.trim() || null; // Null so we don't add the attribute if we have an empty string
     const inputMode = this.inputmode ? this.inputmode : null; // Null so we don't add the attribute if we have an empty string
     const type = this.getInputType();
 
@@ -170,7 +171,9 @@ export class VaTextInput {
         {this.label && (
           <label htmlFor="inputField" part="label">
             {this.label}{' '}
-            {this.required && <span class="required">(*{i18next.t('required')})</span>}
+            {this.required && (
+              <span class="required">(*{i18next.t('required')})</span>
+            )}
           </label>
         )}
         <slot></slot>
@@ -181,6 +184,7 @@ export class VaTextInput {
           value={this.value}
           onInput={this.handleInput}
           onBlur={this.handleBlur}
+          aria-describedby={describedBy}
           inputmode={inputMode}
           maxlength={this.maxlength}
           minlength={this.minlength}
