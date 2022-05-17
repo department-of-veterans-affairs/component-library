@@ -146,6 +146,7 @@ export class VaSelect {
           aria-describedby={errorSpanId}
           id="select"
           name={name}
+          required={required || null}
           onKeyDown={() => this.handleKeyDown()}
           onChange={e => this.handleChange(e)}
           part="select"
