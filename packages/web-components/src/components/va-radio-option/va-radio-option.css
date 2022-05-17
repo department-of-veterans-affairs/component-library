@@ -5,6 +5,10 @@
   margin-top: 1rem;
 }
 
+:host(:focus) {
+  outline: none !important;
+}
+
 label {
   box-sizing: border-box;
   outline: none;
@@ -31,4 +35,9 @@ label::before {
 :host([aria-checked='true']) label::before {
   background-color: var(--color-primary);
   box-shadow: 0 0 0 2px var(--color-white), 0 0 0 4px var(--color-primary);
+}
+
+:host(:focus) label::before {
+  outline: 2px solid var(--color-gold-light);
+  outline-offset: 6px;
 }
