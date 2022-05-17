@@ -190,6 +190,7 @@ export class VaTextInput {
           minlength={this.minlength}
           pattern={this.pattern}
           name={this.name}
+          required={this.required || null}
           part="input"
         />
         {this.maxlength && this.value?.length >= this.maxlength && (

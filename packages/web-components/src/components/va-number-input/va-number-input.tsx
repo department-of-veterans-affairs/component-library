@@ -122,6 +122,7 @@ export class VaNumberInput {
           max={this.max}
           min={this.min}
           value={this.value}
+          required={this.required || null}
           onInput={this.handleInput}
           onBlur={this.handleBlur}
         />
