@@ -575,6 +575,40 @@ export namespace Components {
          */
         "value"?: string;
     }
+    interface VaTextarea {
+        /**
+          * Emit component-library-analytics events on the blur event.
+         */
+        "enableAnalytics"?: boolean;
+        /**
+          * The error message to render.
+         */
+        "error"?: string;
+        /**
+          * The label for the textarea.
+         */
+        "label"?: string;
+        /**
+          * The maximum number of characters allowed in the input.
+         */
+        "maxlength"?: number;
+        /**
+          * The name for the input.
+         */
+        "name"?: string;
+        /**
+          * The placeholder string.
+         */
+        "placeholder"?: string;
+        /**
+          * Set the input to required and render the (Required) text.
+         */
+        "required"?: boolean;
+        /**
+          * The value of the textarea
+         */
+        "value"?: string;
+    }
 }
 declare global {
     interface HTMLVaAccordionElement extends Components.VaAccordion, HTMLStencilElement {
@@ -751,6 +785,12 @@ declare global {
         prototype: HTMLVaTextInputElement;
         new (): HTMLVaTextInputElement;
     };
+    interface HTMLVaTextareaElement extends Components.VaTextarea, HTMLStencilElement {
+    }
+    var HTMLVaTextareaElement: {
+        prototype: HTMLVaTextareaElement;
+        new (): HTMLVaTextareaElement;
+    };
     interface HTMLElementTagNameMap {
         "va-accordion": HTMLVaAccordionElement;
         "va-accordion-item": HTMLVaAccordionItemElement;
@@ -781,6 +821,7 @@ declare global {
         "va-table-row": HTMLVaTableRowElement;
         "va-telephone": HTMLVaTelephoneElement;
         "va-text-input": HTMLVaTextInputElement;
+        "va-textarea": HTMLVaTextareaElement;
     }
 }
 declare namespace LocalJSX {
@@ -1497,6 +1538,44 @@ declare namespace LocalJSX {
          */
         "value"?: string;
     }
+    interface VaTextarea {
+        /**
+          * Emit component-library-analytics events on the blur event.
+         */
+        "enableAnalytics"?: boolean;
+        /**
+          * The error message to render.
+         */
+        "error"?: string;
+        /**
+          * The label for the textarea.
+         */
+        "label"?: string;
+        /**
+          * The maximum number of characters allowed in the input.
+         */
+        "maxlength"?: number;
+        /**
+          * The name for the input.
+         */
+        "name"?: string;
+        /**
+          * The event used to track usage of the component. This is emitted when the textarea is blurred and `enableAnalytics` is true
+         */
+        "onComponent-library-analytics"?: (event: CustomEvent<any>) => void;
+        /**
+          * The placeholder string.
+         */
+        "placeholder"?: string;
+        /**
+          * Set the input to required and render the (Required) text.
+         */
+        "required"?: boolean;
+        /**
+          * The value of the textarea
+         */
+        "value"?: string;
+    }
     interface IntrinsicElements {
         "va-accordion": VaAccordion;
         "va-accordion-item": VaAccordionItem;
@@ -1527,6 +1606,7 @@ declare namespace LocalJSX {
         "va-table-row": VaTableRow;
         "va-telephone": VaTelephone;
         "va-text-input": VaTextInput;
+        "va-textarea": VaTextarea;
     }
 }
 export { LocalJSX as JSX };
@@ -1562,6 +1642,7 @@ declare module "@stencil/core" {
             "va-table-row": LocalJSX.VaTableRow & JSXBase.HTMLAttributes<HTMLVaTableRowElement>;
             "va-telephone": LocalJSX.VaTelephone & JSXBase.HTMLAttributes<HTMLVaTelephoneElement>;
             "va-text-input": LocalJSX.VaTextInput & JSXBase.HTMLAttributes<HTMLVaTextInputElement>;
+            "va-textarea": LocalJSX.VaTextarea & JSXBase.HTMLAttributes<HTMLVaTextareaElement>;
         }
     }
 }
