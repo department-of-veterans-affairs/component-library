@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { generateEventsDescription } from './events';
 import { getWebComponentDocs, propStructure } from './wc-helpers';
 
@@ -67,6 +67,43 @@ const Template = ({
   );
 };
 
+const I18nTemplate = ({
+  name,
+  label,
+  'enable-analytics': enableAnalytics,
+  required,
+  error,
+  value,
+  inputmode,
+  min,
+  max,
+}) => {
+  const [lang, setLang] = useState('en');
+
+  useEffect(() => {
+    document.querySelector('main').setAttribute('lang', lang);
+  }, [lang]);
+  return (
+    <>
+      <button onClick={e => setLang('es')}>Español</button>
+      <button onClick={e => setLang('en')}>English</button>
+      <va-number-input
+        name={name}
+        label={label}
+        enable-analytics={enableAnalytics}
+        required={required}
+        error={error}
+        value={value}
+        inputmode={inputmode}
+        max={max}
+        min={min}
+        onInput={e => console.log('input event value:', e.target.value)}
+        onBlur={e => console.log('blur event', e)}
+      />
+    </>
+  );
+};
+
 export const Default = Template.bind({});
 Default.args = { ...defaultArgs };
 Default.argTypes = propStructure(numberInputDocs);
@@ -85,4 +122,10 @@ ValidRange.args = {
   ...defaultArgs,
   min: 0,
   max: 4,
+};
+
+export const Internationalization = I18nTemplate.bind({});
+Internationalization.args = {
+  ...defaultArgs,
+  required: true,
 };

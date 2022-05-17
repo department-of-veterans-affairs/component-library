@@ -96,7 +96,7 @@ class MonthYear extends React.Component {
                 errorMessage={isValid ? undefined : ''}
                 label="Month"
                 name={`${this.props.name}Month`}
-                options={months}
+                options={months()}
                 value={month}
                 onValueChange={update => {
                   this.handleChange('month', update);
