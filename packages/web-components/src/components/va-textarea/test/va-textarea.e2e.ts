@@ -82,6 +82,21 @@ describe('va-textarea', () => {
     });
   });
 
+  it('does not fire an analytics event when enableAnalytics is not truthy', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-textarea label="Something" />');
+
+    const analyticsSpy = await page.spyOnEvent('component-library-analytics');
+
+    const textareaEl = await page.find('va-textarea >>> textarea');
+    await textareaEl.press('1');
+    await textareaEl.press('2');
+    await textareaEl.press('3');
+    await textareaEl.press('Tab');
+
+    expect(analyticsSpy).toHaveReceivedEventTimes(0);
+  });
+
   it('emits blur event', async () => {
     const page = await newE2EPage();
 
