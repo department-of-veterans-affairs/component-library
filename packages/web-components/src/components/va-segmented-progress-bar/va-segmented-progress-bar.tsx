@@ -63,7 +63,6 @@ export class VaSegmentedProgressBar {
           aria-valuemin="0"
           aria-valuemax={total}
           aria-valuetext={label}
-          tabindex="0"
         >
           {range.map(step => (
             <div
