@@ -56,10 +56,16 @@
 
 div.alert {
   display: table;
-  padding: 1.6rem;
+  padding: 4rem;
   width: 100%;
   vertical-align: middle;
   box-sizing: border-box;
+}
+
+@media screen and (min-width: 481px) {
+  div.alert {
+    padding: 4.8rem;
+  }
 }
 
 div.alert:not(.bg-only) {
