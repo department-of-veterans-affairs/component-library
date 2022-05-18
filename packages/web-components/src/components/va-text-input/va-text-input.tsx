@@ -162,7 +162,7 @@ export class VaTextInput {
   }
 
   render() {
-    const describedBy = `${this.error ? 'error-message' : ''}` || null; // Null so we don't add the attribute if we have an empty string
+    const describedBy = this.error ? 'error-message' : null; // Null so we don't add the attribute if we have an empty string
     const inputMode = this.inputmode ? this.inputmode : null; // Null so we don't add the attribute if we have an empty string
     const type = this.getInputType();
 
