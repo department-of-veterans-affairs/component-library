@@ -1,4 +1,6 @@
 @import '../../mixins/accessibility.css';
+/* This is for the close button */
+@import '../../mixins/focusable.css';
 
 :host {
   display: block;
