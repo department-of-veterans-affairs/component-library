@@ -38,6 +38,6 @@ label::before {
 }
 
 :host(:focus) label::before {
-  outline: 2px solid var(--color-gold-light);
+  outline: 2px solid var(--color-gold-50v);
   outline-offset: 6px;
 }
