@@ -135,7 +135,11 @@ const BackgroundOnlyTemplate = ({
         class="vads-u-margin-bottom--1"
       >
         {headline}
-        <div>Info alert</div>
+        <p>
+          You can use our new mobile app to check the status of your claims or
+          appeals on your mobile device. Download the{' '}
+          <strong>VA: Health and Benefits</strong> mobile app to get started.
+        </p>
       </va-alert>
       <va-alert
         status="error"
@@ -149,7 +153,15 @@ const BackgroundOnlyTemplate = ({
         class="vads-u-margin-bottom--1"
       >
         {headline}
-        <div>Error alert</div>
+        <div>
+          <p>
+            We’re sorry for the interruption, but we’ve found some more
+            information that we need you to review before you can apply for VA
+            health care. Please sign in to VA.gov to review. If you don’t have
+            an account, you can create one now.
+          </p>
+          <button className="usa-button-primary">Sign in to VA.gov</button>
+        </div>
       </va-alert>
       <va-alert
         status="success"
@@ -163,7 +175,7 @@ const BackgroundOnlyTemplate = ({
         class="vads-u-margin-bottom--1"
       >
         {headline}
-        <div>Success alert</div>
+        <p>You can now access health tools on VA.gov.</p>
       </va-alert>
       <va-alert
         status="warning"
@@ -177,7 +189,18 @@ const BackgroundOnlyTemplate = ({
         class="vads-u-margin-bottom--1"
       >
         {headline}
-        <div>Warning alert</div>
+        <div>
+          <p>
+            We’re sorry. The health care application is currently down while we
+            fix a few things. We’ll be back up as soon as we can.
+          </p>
+          <p>
+            In the meantime, you can call{' '}
+            <a href="tel:+18772228387">877-222-8387</a>, Monday &#8211; Friday,
+            8:00 a.m. &#8211; 8:00 p.m. (<abbr title="eastern time">ET</abbr>)
+            and press 2 to complete this application over the phone.
+          </p>
+        </div>
       </va-alert>
       <va-alert
         status="continue"
@@ -190,7 +213,14 @@ const BackgroundOnlyTemplate = ({
         full-width="false"
       >
         {headline}
-        <div>Continue alert</div>
+        <div>
+          <p>
+            You can use our new mobile app to check the status of your claims or
+            appeals on your mobile device. Download the{' '}
+            <strong>VA: Health and Benefits</strong> mobile app to get started.
+          </p>
+          <button className="usa-button-primary">Sign in to VA.gov</button>
+        </div>
       </va-alert>
     </>
   );
@@ -275,7 +305,9 @@ Error.args = {
 export const HeadingLevel = Template.bind({});
 HeadingLevel.args = {
   ...defaultArgs,
-  headline: <h4 slot="headline">I am an h4</h4>,
+  headline: (
+    <h4 slot="headline">Track your claim or appeal on your mobile device</h4>
+  ),
 };
 
 export const Dismissable = Template.bind({});
@@ -288,8 +320,8 @@ Dismissable.args = {
 export const Fullwidth = Template.bind({});
 Fullwidth.args = {
   ...defaultArgs,
+  ...Warning.args,
   'full-width': true,
-  'status': 'warning',
 };
 
 export const BackgroundOnly = BackgroundOnlyTemplate.bind({});
