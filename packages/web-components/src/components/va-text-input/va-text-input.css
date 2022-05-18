@@ -1,3 +1,5 @@
+@import '../../mixins/focusable.css';
+
 :host {
   display: block;
   font-family: var(--font-source-sans);
@@ -27,11 +29,6 @@ input {
   max-width: 46rem;
   padding: 1rem 0.7em;
   width: 100%;
-}
-
-input:not([disabled]):focus {
-  outline: 2px solid var(--color-gold-light);
-  outline-offset: 2px;
 }
 
 #error-message {
