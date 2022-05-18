@@ -1,0 +1,31 @@
+@import '../../mixins/focusable.css';
+@import '../va-text-input/va-text-input.css';
+
+:host {
+  display: block;
+}
+
+:host([error]) label {
+  margin-top: 0;
+}
+
+.required {
+  margin-left: 0.4rem;
+}
+
+label {
+  display: block;
+  margin-top: 2.8rem;
+  max-width: 48rem;
+}
+
+textarea {
+  font-family: var(--font-sans);
+  display: block;
+  min-height: 5.2rem;
+  height: 16rem;
+  max-width: 48rem;
+  width: 100%;
+  padding: 1.2rem;
+  margin: 0.4rem 0;
+}
