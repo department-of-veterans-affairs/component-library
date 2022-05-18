@@ -24,6 +24,8 @@
 [name='Secondary Buttons'] {
   // Mocks focus state without requiring focus
   & button:nth-child(2) {
+    // TODO: update this with $color-gold-50v once we have a new version
+    // of `formation` published
     outline: 2px solid $color-gold-light;
     outline-offset: 2px;
   }
