@@ -7,6 +7,6 @@ h1:focus,
 input:not([disabled]):focus,
 textarea:not([disabled]):focus,
 [role='option']:focus {
-  outline: 2px solid var(--color-gold-50v);
-  outline-offset: 2px;
+  box-shadow: 0 0 0 3px var(--color-white), 0 0 4px 6px var(--color-gold-50v);
+  outline: none;
 }
