@@ -323,6 +323,23 @@ Dismissable.args = {
   onCloseEvent: () => console.log('Close event triggered'),
 };
 
+export const DismissableBackgroundOnly = Template.bind({});
+DismissableBackgroundOnly.args = {
+  ...defaultArgs,
+  'background-only': true,
+  closeable: true,
+  onCloseEvent: () => console.log('Close event triggered'),
+};
+
+export const DismissableBackgroundOnlyIcon = Template.bind({});
+DismissableBackgroundOnlyIcon.args = {
+  ...defaultArgs,
+  'background-only': true,
+  'show-icon': true,
+  closeable: true,
+  onCloseEvent: () => console.log('Close event triggered'),
+};
+
 export const Fullwidth = Template.bind({});
 Fullwidth.args = {
   ...defaultArgs,
