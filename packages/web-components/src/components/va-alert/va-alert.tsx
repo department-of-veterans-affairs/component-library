@@ -103,9 +103,6 @@ export class VaAlert {
 
     // This is the happy path, meaning the user isn't using IE11
     try {
-      // const children = this.el.shadowRoot.querySelector('slot').assignedNodes();
-      // An empty array means that there isn't a node with `slot="headline"`
-      // headlineText = children.length > 0 ? children[0].textContent : null;
       const hasHeadline = !!this.el.querySelector('[slot="headline"]');
       if (hasHeadline) {
         headlineText = this.el.querySelector('[slot="headline"]').textContent;
