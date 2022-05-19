@@ -57,7 +57,7 @@ const defaultArgs = {
   ),
   'children': (
     <div>
-      <p>
+      <p className="vads-u-margin-y--0">
         You can use our new mobile app to check the status of your claims or
         appeals on your mobile device. Download the{' '}
         <strong>VA: Health and Benefits</strong> mobile app to get started.
@@ -135,7 +135,7 @@ const BackgroundOnlyTemplate = ({
         class="vads-u-margin-bottom--1"
       >
         {headline}
-        <p>
+        <p className="vads-u-margin-y--0">
           You can use our new mobile app to check the status of your claims or
           appeals on your mobile device. Download the{' '}
           <strong>VA: Health and Benefits</strong> mobile app to get started.
@@ -154,7 +154,7 @@ const BackgroundOnlyTemplate = ({
       >
         {headline}
         <div>
-          <p>
+          <p className="vads-u-margin-top--0">
             We’re sorry for the interruption, but we’ve found some more
             information that we need you to review before you can apply for VA
             health care. Please sign in to VA.gov to review. If you don’t have
@@ -175,7 +175,9 @@ const BackgroundOnlyTemplate = ({
         class="vads-u-margin-bottom--1"
       >
         {headline}
-        <p>You can now access health tools on VA.gov.</p>
+        <p className="vads-u-margin-y--0">
+          You can now access health tools on VA.gov.
+        </p>
       </va-alert>
       <va-alert
         status="warning"
@@ -190,11 +192,11 @@ const BackgroundOnlyTemplate = ({
       >
         {headline}
         <div>
-          <p>
+          <p className="vads-u-margin-y--0">
             We’re sorry. The health care application is currently down while we
             fix a few things. We’ll be back up as soon as we can.
           </p>
-          <p>
+          <p className="vads-u-margin-bottom--0">
             In the meantime, you can call{' '}
             <a href="tel:+18772228387">877-222-8387</a>, Monday &#8211; Friday,
             8:00 a.m. &#8211; 8:00 p.m. (<abbr title="eastern time">ET</abbr>)
@@ -214,7 +216,7 @@ const BackgroundOnlyTemplate = ({
       >
         {headline}
         <div>
-          <p>
+          <p className="vads-u-margin-top--0">
             You can use our new mobile app to check the status of your claims or
             appeals on your mobile device. Download the{' '}
             <strong>VA: Health and Benefits</strong> mobile app to get started.
@@ -237,7 +239,7 @@ SignInOrToolPrompt.args = {
   ...defaultArgs,
   children: (
     <div>
-      <p>
+      <p className="vads-u-margin-top--0">
         You can use our new mobile app to check the status of your claims or
         appeals on your mobile device. Download the{' '}
         <strong>VA: Health and Benefits</strong> mobile app to get started.
@@ -257,7 +259,11 @@ Success.args = {
       tools
     </h2>
   ),
-  children: <p>You can now access health tools on VA.gov.</p>,
+  children: (
+    <p className="vads-u-margin-y--0">
+      You can now access health tools on VA.gov.
+    </p>
+  ),
   status: 'success',
 };
 
@@ -269,11 +275,11 @@ Warning.args = {
   ),
   children: (
     <div>
-      <p>
+      <p className="vads-u-margin-y--0">
         We’re sorry. The health care application is currently down while we fix
         a few things. We’ll be back up as soon as we can.
       </p>
-      <p>
+      <p className="vads-u-margin-bottom--0">
         In the meantime, you can call{' '}
         <a href="tel:+18772228387">877-222-8387</a>, Monday &#8211; Friday, 8:00
         a.m. &#8211; 8:00 p.m. (<abbr title="eastern time">ET</abbr>) and press
@@ -290,7 +296,7 @@ Error.args = {
   headline: <h2 slot="headline">Please sign in to review your information</h2>,
   children: (
     <div>
-      <p>
+      <p className="vads-u-margin-top--0">
         We’re sorry for the interruption, but we’ve found some more information
         that we need you to review before you can apply for VA health care.
         Please sign in to VA.gov to review. If you don’t have an account, you
