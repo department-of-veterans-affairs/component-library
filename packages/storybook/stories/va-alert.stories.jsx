@@ -104,6 +104,7 @@ const BackgroundOnlyTemplate = ({
 }) => {
   return (
     <>
+     
       <va-alert
         status="info"
         background-only={backgroundOnly}
@@ -247,4 +248,18 @@ export const NotVisible = Template.bind({});
 NotVisible.args = {
   ...defaultArgs,
   visible: false,
+};
+
+
+export const noHeaderMessage = ({ }) => {
+  return (
+    <>
+      <va-alert
+        status="warning"
+      >
+        <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Id quod corrupti reiciendis nesciunt unde rem! Amet quos porro repellat, debitis explicabo temporibus commodi consequatur expedita, tempora corrupti, vel perferendis soluta.</div>
+       
+      </va-alert>
+    </>
+  );
 };

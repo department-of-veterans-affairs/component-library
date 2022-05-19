@@ -80,6 +80,11 @@ div.body {
   vertical-align: middle;
   width: 100%;
 }
+
+.no-headline ::slotted(:not([slot]):first-child) {
+  margin-top: 0rem;
+}
+
 ::slotted(:not([slot])) {
   margin-top: 2rem;
 }

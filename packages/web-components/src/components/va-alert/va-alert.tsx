@@ -103,9 +103,13 @@ export class VaAlert {
 
     // This is the happy path, meaning the user isn't using IE11
     try {
-      const children = this.el.shadowRoot.querySelector('slot').assignedNodes();
+      // const children = this.el.shadowRoot.querySelector('slot').assignedNodes();
       // An empty array means that there isn't a node with `slot="headline"`
-      headlineText = children.length > 0 ? children[0].textContent : null;
+      // headlineText = children.length > 0 ? children[0].textContent : null;
+      const hasHeadline = !!this.el.querySelector('[slot="headline"]');
+      if (hasHeadline) {
+        headlineText = this.el.querySelector('[slot="headline"]').textContent;
+      }
     } catch (e) {
       // This is where we handle the edge case of the user being on IE11
       const children = this.el.shadowRoot.childNodes;
@@ -144,13 +148,14 @@ export class VaAlert {
 
   render() {
     const { backgroundOnly, status, visible, closeable, showIcon } = this;
+    const hasHeadline = !!this.el.querySelector('[slot="headline"]');
     const classes = classnames('alert', status, {
       'bg-only': backgroundOnly,
       'hide-icon': backgroundOnly && !showIcon,
+      'no-headline': !hasHeadline,
     });
     const role = status === 'error' ? 'alert' : null;
     const ariaLive = status === 'error' ? 'assertive' : null;
-
     if (!visible) return <div aria-live="polite" />;
 
     return (
@@ -162,8 +167,8 @@ export class VaAlert {
             onClick={this.handleAlertBodyClick.bind(this)}
             role="presentation"
           >
-            {!backgroundOnly && <slot name="headline"></slot>}
-            <slot></slot>
+            {!backgroundOnly && hasHeadline && <slot name="headline"></slot>}
+              <slot></slot>
           </div>
         </div>
 

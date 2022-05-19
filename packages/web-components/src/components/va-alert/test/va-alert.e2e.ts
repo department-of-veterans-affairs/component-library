@@ -11,6 +11,25 @@ describe('va-alert', () => {
     expect(element).toEqualHtml(`
       <va-alert class="hydrated" status="info">
         <mock:shadow-root>
+          <div class="alert info no-headline">
+            <i aria-hidden="true" role="img"></i>
+            <div class="body" role="presentation">
+              <slot></slot>
+            </div>
+          </div>
+        </mock:shadow-root>
+      </va-alert>
+    `);
+  });
+
+  it('renders a headline when present', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<va-alert><h1 slot="headline">Test headline</h1></va-alert>');
+    const element = await page.find('va-alert');
+    expect(element).toEqualHtml(`
+      <va-alert class="hydrated" status="info">
+        <mock:shadow-root>
           <div class="alert info">
             <i aria-hidden="true" role="img"></i>
             <div class="body" role="presentation">
@@ -19,9 +38,12 @@ describe('va-alert', () => {
             </div>
           </div>
         </mock:shadow-root>
-      </va-alert>
-    `);
+        <h1 slot="headline">
+          Test headline
+        </h1>
+    </va-alert>`);
   });
+
 
   it('renders an empty div with a "polite" aria-live tag when not visible', async () => {
     const page = await newE2EPage();
