@@ -59,10 +59,14 @@ describe('va-text-input', () => {
 
   it('adds new aria-describedby for error message', async () => {
     const page = await newE2EPage();
-    await page.setContent('<va-text-input error="This is a mistake" />');
-
-    // Render the error message text
+    await page.setContent('<va-text-input />');
+    // Check that error is empty
+    const el = await page.find('va-text-input'); 
     const inputEl = await page.find('va-text-input >>> input');
+    expect(inputEl.getAttribute('aria-describedby')).toBeFalsy();
+    // Render the error message text
+    el.setProperty('error', "This is a mistake");
+    await page.waitForChanges();
     expect(inputEl.getAttribute('aria-describedby')).toContain('error-message');
   });
 
