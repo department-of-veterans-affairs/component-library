@@ -63,10 +63,15 @@ describe('va-text-input', () => {
     // Check that error is empty
     const el = await page.find('va-text-input'); 
     const inputEl = await page.find('va-text-input >>> input');
-    expect(inputEl.getAttribute('aria-describedby')).toBeFalsy();
-    // Render the error message text
-    el.setProperty('error', "This is a mistake");
+    expect(inputEl.getAttribute('aria-describedby')).toBeNull();
+    // Render the error message text as empty string
+    el.setProperty('error', "");
     await page.waitForChanges();
+    expect(inputEl.getAttribute('aria-describedby')).toBeNull();
+    // Render the error message text as real value
+    el.setProperty('error', "Testing Error");
+    await page.waitForChanges();
+    expect(inputEl.getAttribute('aria-describedby')).not.toBeNull();
     expect(inputEl.getAttribute('aria-describedby')).toContain('error-message');
   });
 
