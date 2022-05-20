@@ -52,11 +52,6 @@ va-breadcrumbs li > a:hover {
   background: rgba(0, 0, 0, 0.05);
 }
 
-va-breadcrumbs li > a:focus {
-  box-shadow: 0 0 0 3px var(--color-white), 0 0 4px 6px var(--color-gold-50v);
-  outline: none;
-}
-
 va-breadcrumbs li > a[aria-current='page'] {
   color: var(--color-gray-dark);
   cursor: default;
