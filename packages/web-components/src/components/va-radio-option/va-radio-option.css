@@ -6,7 +6,7 @@
 }
 
 :host(:focus) {
-  outline: none !important;
+  box-shadow: unset !important;
 }
 
 label {
