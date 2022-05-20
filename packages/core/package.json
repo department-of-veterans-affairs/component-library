@@ -31,7 +31,7 @@
     "webpack-cli": "^4.8.0"
   },
   "peerDependencies": {
-    "@department-of-veterans-affairs/formation": "*",
+    "@department-of-veterans-affairs/formation": "^8.0.0",
     "react": "^17",
     "react-dom": "*"
   }
