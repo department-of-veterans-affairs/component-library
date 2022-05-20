@@ -157,9 +157,12 @@ div.bg-only {
 
 i {
   font-family: 'Font Awesome 5 Free';
+  font-size: 2.4rem;
   font-style: normal;
   font-weight: 900;
+  line-height: 1;
 }
+
 i.fa-times-circle::before {
   content: '\F057'; /* fa-times-circle*/
 }
