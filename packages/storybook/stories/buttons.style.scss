@@ -1,4 +1,5 @@
 @import '@department-of-veterans-affairs/formation/sass/base/_b-variables.scss';
+@import '@department-of-veterans-affairs/formation/sass/base/_b-mixins.scss';
 
 // Applies only to Secondary buttons
 // 2nd child represents a mock active state
@@ -24,9 +25,6 @@
 [name='Secondary Buttons'] {
   // Mocks focus state without requiring focus
   & button:nth-child(2) {
-    // TODO: update this with $color-gold-50v once we have a new version
-    // of `formation` published
-    outline: 2px solid $color-gold-light;
-    outline-offset: 2px;
+    @include focus-gold-vivid-outline;
   }
 }
