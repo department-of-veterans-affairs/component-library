@@ -134,7 +134,6 @@ const BackgroundOnlyTemplate = ({
         full-width="false"
         class="vads-u-margin-bottom--1"
       >
-        {headline}
         <p className="vads-u-margin-y--0">
           You can use our new mobile app to check the status of your claims or
           appeals on your mobile device. Download the{' '}
@@ -152,7 +151,6 @@ const BackgroundOnlyTemplate = ({
         full-width="false"
         class="vads-u-margin-bottom--1"
       >
-        {headline}
         <div>
           <p className="vads-u-margin-top--0">
             We’re sorry for the interruption, but we’ve found some more
@@ -174,7 +172,6 @@ const BackgroundOnlyTemplate = ({
         full-width="false"
         class="vads-u-margin-bottom--1"
       >
-        {headline}
         <p className="vads-u-margin-y--0">
           You can now access health tools on VA.gov.
         </p>
@@ -190,7 +187,6 @@ const BackgroundOnlyTemplate = ({
         full-width="false"
         class="vads-u-margin-bottom--1"
       >
-        {headline}
         <div>
           <p className="vads-u-margin-y--0">
             We’re sorry. The health care application is currently down while we
@@ -214,7 +210,6 @@ const BackgroundOnlyTemplate = ({
         closeable={closeable}
         full-width="false"
       >
-        {headline}
         <div>
           <p className="vads-u-margin-top--0">
             You can use our new mobile app to check the status of your claims or
@@ -327,8 +322,8 @@ export const DismissableBackgroundOnly = Template.bind({});
 DismissableBackgroundOnly.args = {
   ...defaultArgs,
   'background-only': true,
-  closeable: true,
-  onCloseEvent: () => console.log('Close event triggered'),
+  'closeable': true,
+  'onCloseEvent': () => console.log('Close event triggered'),
 };
 
 export const DismissableBackgroundOnlyIcon = Template.bind({});
@@ -336,8 +331,8 @@ DismissableBackgroundOnlyIcon.args = {
   ...defaultArgs,
   'background-only': true,
   'show-icon': true,
-  closeable: true,
-  onCloseEvent: () => console.log('Close event triggered'),
+  'closeable': true,
+  'onCloseEvent': () => console.log('Close event triggered'),
 };
 
 export const Fullwidth = Template.bind({});
