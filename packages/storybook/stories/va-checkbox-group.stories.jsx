@@ -4,6 +4,7 @@ import {
   getWebComponentDocs,
   componentStructure,
   propStructure,
+  StoryDocs,
 } from './wc-helpers';
 
 const checkBoxGroupDocs = getWebComponentDocs('va-checkbox-group');
@@ -18,12 +19,17 @@ export default {
       handles: ['component-library-analytics'],
     },
     docs: {
-      description: {
-        component:
-          `<a className="vads-c-action-link--blue" href="https://design.va.gov/components/form/checkbox">View guidance for the Checkbox Group component in the Design System</a>` +
-          '\n' +
-          generateEventsDescription(checkBoxGroupDocs),
-      },
+      page: () => (
+        <StoryDocs
+          data={{
+            ...checkBoxGroupDocs,
+            guidance: {
+              componentHref: 'checkbox',
+              componentName: 'Checkbox Group',
+            },
+          }}
+        />
+      ),
     },
   },
 };
