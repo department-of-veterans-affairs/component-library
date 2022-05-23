@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { VaModal } from '@department-of-veterans-affairs/web-components/react-bindings';
-import { getWebComponentDocs, propStructure } from './wc-helpers';
-import { generateEventsDescription } from './events';
+import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
 
 VaModal.displayName = 'VaModal';
 
@@ -11,12 +10,17 @@ export default {
   title: 'Components/va-modal',
   parameters: {
     docs: {
-      description: {
-        component:
-          `<a className="vads-c-action-link--blue" href="https://design.va.gov/components/modal">View guidance for the Modal component in the Design System</a>` +
-          '\n' +
-          generateEventsDescription(modalDocs),
-      },
+      page: () => (
+        <StoryDocs
+          data={{
+            ...modalDocs,
+            guidance: {
+              componentHref: 'modal',
+              componentName: 'Modal',
+            },
+          }}
+        />
+      ),
     },
     componentSubtitle: `Modal web component`,
   },
