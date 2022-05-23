@@ -4,6 +4,7 @@ import {
   getWebComponentDocs,
   componentStructure,
   propStructure,
+  StoryDocs,
 } from './wc-helpers';
 
 const accordionDocs = getWebComponentDocs('va-accordion');
@@ -15,12 +16,17 @@ export default {
   parameters: {
     componentSubtitle: `Accordion web component`,
     docs: {
-      description: {
-        component:
-          `<a className="vads-c-action-link--blue" href="https://design.va.gov/components/accordion">View guidance for the Accordion component in the Design System</a>` +
-          '\n' +
-          generateEventsDescription(accordionDocs),
-      },
+      page: () => (
+        <StoryDocs
+          data={{
+            ...accordionDocs,
+            guidance: {
+              componentHref: 'accordion',
+              componentName: 'Accordion',
+            },
+          }}
+        />
+      ),
     },
   },
 };
