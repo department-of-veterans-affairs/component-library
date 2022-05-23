@@ -1,10 +1,25 @@
 import React from 'react';
-import { getWebComponentDocs, propStructure } from './wc-helpers';
+import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
 
 const breadcrumbsDocs = getWebComponentDocs('va-breadcrumbs');
 
 export default {
   title: 'Components/va-breadcrumbs',
+  parameters: {
+    docs: {
+      page: () => (
+        <StoryDocs
+          data={{
+            ...breadcrumbsDocs,
+            guidance: {
+              componentHref: 'breadcrumbs',
+              componentName: 'Breadcrumbs',
+            },
+          }}
+        />
+      ),
+    },
+  },
 };
 
 const Template = ({ label, 'disable-analytics': disableAnalytics }) => (
