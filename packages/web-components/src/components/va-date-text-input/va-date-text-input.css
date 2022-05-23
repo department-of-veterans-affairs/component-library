@@ -1,0 +1,11 @@
+@import '../va-date/va-date.css';
+
+.input-month {
+  width: 13rem;
+  margin-right: 1.5rem;
+}
+
+.input-day {
+  width: 8rem;
+  margin-right: 1.5rem;
+}
