@@ -1,5 +1,5 @@
 import React from 'react';
-import { getWebComponentDocs, propStructure } from './wc-helpers';
+import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
 import { generateEventsDescription } from './events';
 
 const additionalInfoDocs = getWebComponentDocs('va-additional-info');
@@ -9,12 +9,17 @@ export default {
   parameters: {
     componentSubtitle: `Additional Info web component`,
     docs: {
-      description: {
-        component:
-          `<a className="vads-c-action-link--blue" href="https://design.va.gov/components/additional-info">View guidance for the Additional Info component in the Design System</a>` +
-          '\n' +
-          generateEventsDescription(additionalInfoDocs),
-      },
+      page: () => (
+        <StoryDocs
+          data={{
+            ...additionalInfoDocs,
+            guidance: {
+              componentHref: 'additional-info',
+              componentName: 'Additional info',
+            },
+          }}
+        />
+      ),
     },
     actions: {
       handles: ['component-library-analytics'],
