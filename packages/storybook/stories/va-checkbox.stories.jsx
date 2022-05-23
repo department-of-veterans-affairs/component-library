@@ -2,7 +2,7 @@
 /* eslint-disable react/no-unescaped-entities */
 import React from 'react';
 import { generateEventsDescription } from './events';
-import { getWebComponentDocs, propStructure } from './wc-helpers';
+import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
 
 const checkboxDocs = getWebComponentDocs('va-checkbox');
 
@@ -11,12 +11,17 @@ export default {
   parameters: {
     componentSubtitle: `Checkbox web component`,
     docs: {
-      description: {
-        component:
-          `<a className="vads-c-action-link--blue" href="https://design.va.gov/components/form/checkbox">View guidance for the Checkbox component in the Design System</a>` +
-          '\n' +
-          generateEventsDescription(checkboxDocs),
-      },
+      page: () => (
+        <StoryDocs
+          data={{
+            ...checkboxDocs,
+            guidance: {
+              componentHref: 'checkbox',
+              componentName: 'Checkbox',
+            },
+          }}
+        />
+      ),
     },
   },
 };
