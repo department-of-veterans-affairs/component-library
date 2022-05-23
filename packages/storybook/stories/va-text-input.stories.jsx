@@ -12,7 +12,7 @@ export default {
     docs: {
       description: {
         component:
-          `<a className="vads-c-action-link--blue" href="https://design.va.gov/components/form/text-inputs">View guidance for the Text Input component in the Design System</a>` +
+          `<a className="vads-c-action-link--blue" href="https://design.va.gov/components/form/text-input">View guidance for the Text Input component in the Design System</a>` +
           '\n' +
           'This component uses the native onInput and onBlur event handlers.' +
           '\n' +
@@ -57,7 +57,6 @@ const defaultArgs = {
   'value': undefined,
   'inputmode': undefined,
   'type': undefined,
-  'aria-describedby': undefined,
   'success': false,
   'pattern': undefined,
 };
@@ -74,7 +73,6 @@ const Template = ({
   value,
   inputmode,
   type,
-  'aria-describedby': ariaDescribedby,
   success,
   pattern,
 }) => {
@@ -91,7 +89,6 @@ const Template = ({
       value={value}
       inputmode={inputmode}
       type={type}
-      aria-describedby={ariaDescribedby}
       success={success}
       pattern={pattern}
       onBlur={e => console.log('blur event', e)}
@@ -111,7 +108,6 @@ const I18nTemplate = ({
   value,
   inputmode,
   type,
-  'aria-describedby': ariaDescribedby,
 }) => {
   const [lang, setLang] = useState('en');
   return (
@@ -136,7 +132,6 @@ const I18nTemplate = ({
         value={value}
         inputmode={inputmode}
         type={type}
-        aria-describedby={ariaDescribedby}
       />
     </>
   );
