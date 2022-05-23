@@ -1,10 +1,31 @@
 import React, { Fragment } from 'react';
-
 import ProgressButton from '../../react-components/src/components/ProgressButton/ProgressButton';
+import { StoryDocs } from './wc-helpers';
+import { category, level } from './maturity-scale';
 
 export default {
   title: 'Components/Buttons/ProgressButton',
   component: ProgressButton,
+  parameters: {
+    componentSubtitle: 'Progress button component',
+    docs: {
+      page: () => (
+        <StoryDocs
+          data={{
+            guidance: {
+              componentHref: 'button/progress-button',
+              componentName: 'Progress button',
+            },
+            maturity: {
+              category: category.USE,
+              level: level.DEPLOYED,
+            },
+            react: true,
+          }}
+        />
+      ),
+    },
+  },
 };
 
 const Template = args => <ProgressButton {...args} />;
