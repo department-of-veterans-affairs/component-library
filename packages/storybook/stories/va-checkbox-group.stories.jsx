@@ -1,5 +1,4 @@
 import React from 'react';
-import { generateEventsDescription } from './events';
 import {
   getWebComponentDocs,
   componentStructure,

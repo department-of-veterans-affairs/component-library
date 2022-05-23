@@ -1,5 +1,4 @@
 import React from 'react';
-import { generateEventsDescription } from './events';
 import { VaAlert } from '@department-of-veterans-affairs/web-components/react-bindings';
 import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
 

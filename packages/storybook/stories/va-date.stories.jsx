@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { VaDate } from '@department-of-veterans-affairs/web-components/react-bindings';
-import { generateEventsDescription } from './events';
 import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
 
 VaDate.displayName = 'VaDate';

@@ -1,5 +1,4 @@
 import React from 'react';
-import { generateEventsDescription } from './events';
 import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
 
 const bannerDocs = getWebComponentDocs('va-banner');

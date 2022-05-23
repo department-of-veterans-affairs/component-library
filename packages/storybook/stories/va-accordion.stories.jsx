@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { generateEventsDescription } from './events';
 import {
   getWebComponentDocs,
   componentStructure,

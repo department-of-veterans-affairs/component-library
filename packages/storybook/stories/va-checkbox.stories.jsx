@@ -1,7 +1,6 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable react/no-unescaped-entities */
 import React from 'react';
-import { generateEventsDescription } from './events';
 import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
 
 const checkboxDocs = getWebComponentDocs('va-checkbox');
