@@ -1,13 +1,29 @@
 import React from 'react';
 import { getWebComponentDocs, StoryDocs } from './wc-helpers';
+import { category, level } from './maturity-scale';
 
 const otpDocs = getWebComponentDocs('va-on-this-page');
 
 export default {
   title: 'Components/va-on-this-page',
   parameters: {
+    componentSubtitle: 'On this page web component',
     docs: {
-      page: () => <StoryDocs data={otpDocs} />,
+      page: () => (
+        <StoryDocs
+          data={{
+            ...otpDocs,
+            guidance: {
+              componentHref: 'on-this-page',
+              componentName: 'On this page',
+            },
+            maturity: {
+              category: category.USE,
+              level: level.BEST_PRACTICE,
+            },
+          }}
+        />
+      ),
     },
   },
 };

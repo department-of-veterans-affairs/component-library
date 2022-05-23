@@ -1,20 +1,29 @@
 import React, { useEffect, useState } from 'react';
-import { generateEventsDescription } from './events';
-import { getWebComponentDocs, propStructure } from './wc-helpers';
+import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
+import { category, level } from './maturity-scale';
 
 const numberInputDocs = getWebComponentDocs('va-number-input');
 
 export default {
   title: 'Components/va-number-input',
   parameters: {
-    componentSubtitle: `Number Input web component`,
+    componentSubtitle: `Number input web component`,
     docs: {
-      description: {
-        component:
-          `<a className="vads-c-action-link--blue" href="https://design.va.gov/components/form/number-input">View guidance for the Number Input component in the Design System</a>` +
-          '\n' +
-          generateEventsDescription(numberInputDocs),
-      },
+      page: () => (
+        <StoryDocs
+          data={{
+            ...numberInputDocs,
+            guidance: {
+              componentHref: 'form/number-input',
+              componentName: 'Number input',
+            },
+            maturity: {
+              category: category.USE,
+              level: level.DEPLOYED,
+            },
+          }}
+        />
+      ),
     },
   },
   argTypes: {

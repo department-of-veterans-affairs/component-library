@@ -1,6 +1,6 @@
 import React from 'react';
-import { generateEventsDescription } from './events';
-import { getWebComponentDocs, propStructure } from './wc-helpers';
+import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
+import { category, level } from './maturity-scale';
 
 const segmentedProgressBarDocs = getWebComponentDocs(
   'va-segmented-progress-bar',
@@ -11,12 +11,21 @@ export default {
   parameters: {
     componentSubtitle: `Segmented progress bar web component`,
     docs: {
-      description: {
-        component:
-          `<a className="vads-c-action-link--blue" href="https://design.va.gov/components/progress-bar/segmented">View guidance for the Segmented progress bar component in the Design System</a>` +
-          `\n` +
-          generateEventsDescription(segmentedProgressBarDocs),
-      },
+      page: () => (
+        <StoryDocs
+          data={{
+            ...segmentedProgressBarDocs,
+            guidance: {
+              componentHref: 'progress-bar/segmented',
+              componentName: 'Segmented progress bar',
+            },
+            maturity: {
+              category: category.USE,
+              level: level.DEPLOYED,
+            },
+          }}
+        />
+      ),
     },
   },
 };

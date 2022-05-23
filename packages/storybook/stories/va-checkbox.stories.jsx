@@ -1,8 +1,8 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable react/no-unescaped-entities */
 import React from 'react';
-import { generateEventsDescription } from './events';
-import { getWebComponentDocs, propStructure } from './wc-helpers';
+import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
+import { category, level } from './maturity-scale';
 
 const checkboxDocs = getWebComponentDocs('va-checkbox');
 
@@ -11,12 +11,21 @@ export default {
   parameters: {
     componentSubtitle: `Checkbox web component`,
     docs: {
-      description: {
-        component:
-          `<a className="vads-c-action-link--blue" href="https://design.va.gov/components/form/checkbox">View guidance for the Checkbox component in the Design System</a>` +
-          '\n' +
-          generateEventsDescription(checkboxDocs),
-      },
+      page: () => (
+        <StoryDocs
+          data={{
+            ...checkboxDocs,
+            guidance: {
+              componentHref: 'form/checkbox',
+              componentName: 'Checkbox',
+            },
+            maturity: {
+              category: category.USE,
+              level: level.DEPLOYED,
+            },
+          }}
+        />
+      ),
     },
   },
 };

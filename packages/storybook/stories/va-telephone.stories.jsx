@@ -8,14 +8,18 @@ import {
   Stories,
   PRIMARY_STORY,
 } from '@storybook/addon-docs/blocks';
-
 import {
   CONTACTS,
   contactsMap,
   Table,
 } from '@department-of-veterans-affairs/component-library';
-
-import { getWebComponentDocs, propStructure } from './wc-helpers';
+import {
+  getWebComponentDocs,
+  propStructure,
+  Guidance,
+  MaturityScale,
+} from './wc-helpers';
+import { category, level } from './maturity-scale';
 
 const telephoneDocs = getWebComponentDocs('va-telephone');
 //
@@ -40,7 +44,16 @@ const Contacts = () => (
 const Page = () => (
   <>
     <Title />
-    <Subtitle />
+    <Subtitle>Telephone web component</Subtitle>
+    <MaturityScale
+      data={{ category: category.USE, level: level.BEST_PRACTICE }}
+    />
+    <Guidance
+      data={{
+        componentHref: 'telephone',
+        componentName: 'Telephone',
+      }}
+    />
     <Description />
     <Primary />
     <ArgsTable story={PRIMARY_STORY} />
@@ -135,5 +148,5 @@ export const VanityNumber = Template.bind({});
 VanityNumber.args = {
   ...defaultArgs,
   contact: '8772228387',
-  vanity: 'VETS'
+  vanity: 'VETS',
 };

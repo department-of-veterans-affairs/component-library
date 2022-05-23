@@ -1,17 +1,30 @@
 import React from 'react';
-import { getWebComponentDocs, propStructure } from './wc-helpers';
+import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
+import { category, level } from './maturity-scale';
 
 const bttDocs = getWebComponentDocs('va-back-to-top');
 
 export default {
   title: 'Components/va-back-to-top',
   parameters: {
-    docs: {
-      description: {
-        component: `<a className="vads-c-action-link--blue" href="https://design.va.gov/components/back-to-top">View guidance for the Back to top component in the Design System</a>`,
-      },
-    },
     componentSubtitle: `Back to top web component`,
+    docs: {
+      page: () => (
+        <StoryDocs
+          data={{
+            ...bttDocs,
+            guidance: {
+              componentHref: 'back-to-top',
+              componentName: 'Back to top',
+            },
+            maturity: {
+              category: category.USE,
+              level: level.DEPLOYED,
+            },
+          }}
+        />
+      ),
+    },
   },
 };
 

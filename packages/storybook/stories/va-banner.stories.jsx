@@ -1,6 +1,6 @@
 import React from 'react';
-import { generateEventsDescription } from './events';
-import { getWebComponentDocs, propStructure } from './wc-helpers';
+import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
+import { category, level } from './maturity-scale';
 
 const bannerDocs = getWebComponentDocs('va-banner');
 
@@ -9,15 +9,25 @@ export default {
   parameters: {
     componentSubtitle: `Banner web component`,
     docs: {
-      description: {
-        component:
-          `<a className="vads-c-action-link--blue" href="https://design.va.gov/components/banner">View guidance for the Banner component in the Design System</a>` +
-          `\n` +
-          `Reset the banners in storage by opening Developer Tools in the browser and then clicking on the Application Tab. ` +
-          `Under Storage you will see both Local and Session Storage check each Storage to see if a DISMISSED_BANNERS Key exists. ` +
-          `If it does right click and delete it and refresh your page to see the banners again.` +
-          generateEventsDescription(bannerDocs),
-      },
+      page: () => (
+        <StoryDocs
+          data={{
+            ...bannerDocs,
+            guidance: {
+              componentHref: 'banner',
+              componentName: 'Banner',
+            },
+            maturity: {
+              category: category.USE,
+              level: level.DEPLOYED,
+            },
+            description:
+              `Reset the banners in storage by opening Developer Tools in the browser and then clicking on the Application Tab. ` +
+              `Under Storage you will see both Local and Session Storage check each Storage to see if a DISMISSED_BANNERS Key exists. ` +
+              `If it does right click and delete it and refresh your page to see the banners again.`,
+          }}
+        />
+      ),
     },
   },
   argTypes: {

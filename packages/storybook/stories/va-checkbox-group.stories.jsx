@@ -1,10 +1,11 @@
 import React from 'react';
-import { generateEventsDescription } from './events';
 import {
   getWebComponentDocs,
   componentStructure,
   propStructure,
+  StoryDocs,
 } from './wc-helpers';
+import { category, level } from './maturity-scale';
 
 const checkBoxGroupDocs = getWebComponentDocs('va-checkbox-group');
 const checkbox = getWebComponentDocs('va-checkbox');
@@ -13,17 +14,26 @@ export default {
   title: 'Components/va-checkbox-group',
   subcomponents: componentStructure(checkbox),
   parameters: {
-    componentSubtitle: 'Checkbox Group web component',
+    componentSubtitle: 'Checkbox group web component',
     actions: {
       handles: ['component-library-analytics'],
     },
     docs: {
-      description: {
-        component:
-          `<a className="vads-c-action-link--blue" href="https://design.va.gov/components/form/checkbox">View guidance for the Checkbox Group component in the Design System</a>` +
-          '\n' +
-          generateEventsDescription(checkBoxGroupDocs),
-      },
+      page: () => (
+        <StoryDocs
+          data={{
+            ...checkBoxGroupDocs,
+            guidance: {
+              componentHref: 'form/checkbox',
+              componentName: 'Checkbox group',
+            },
+            maturity: {
+              category: category.USE,
+              level: level.DEPLOYED,
+            },
+          }}
+        />
+      ),
     },
   },
 };

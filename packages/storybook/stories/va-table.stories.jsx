@@ -1,15 +1,31 @@
 import React from 'react';
-import { generateEventsDescription } from './events';
-import {
-  getWebComponentDocs,
-  componentStructure,
-  propStructure,
-} from './wc-helpers';
+import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
+import { category, level } from './maturity-scale';
 
-const accordionDocs = getWebComponentDocs('va-table');
+const tableDocs = getWebComponentDocs('va-table');
 
 export default {
   title: 'Components/va-table',
+  parameters: {
+    componentSubtitle: 'Table web component',
+    docs: {
+      page: () => (
+        <StoryDocs
+          data={{
+            ...tableDocs,
+            guidance: {
+              componentHref: 'table',
+              componentName: 'Table',
+            },
+            maturity: {
+              category: category.USE,
+              level: level.BEST_PRACTICE,
+            },
+          }}
+        />
+      ),
+    },
+  },
 };
 const data = [
   [
@@ -77,7 +93,7 @@ export const Default = Template.bind({ data });
 Default.args = {
   ...defaultArgs,
 };
-Default.argTypes = propStructure(accordionDocs);
+Default.argTypes = propStructure(tableDocs);
 
 export const Sortable = Template.bind({ data });
 Sortable.args = {

@@ -1,6 +1,6 @@
 import React from 'react';
-import { generateEventsDescription } from './events';
-import { getWebComponentDocs, propStructure } from './wc-helpers';
+import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
+import { category, level } from './maturity-scale';
 
 const progressBarDocs = getWebComponentDocs('va-progress-bar');
 
@@ -9,12 +9,21 @@ export default {
   parameters: {
     componentSubtitle: `Progress bar web component`,
     docs: {
-      description: {
-        component:
-          `<a className="vads-c-action-link--blue" href="https://design.va.gov/components/progress-bar">View guidance for the Progress bar component in the Design System</a>` +
-          `\n` +
-          generateEventsDescription(progressBarDocs),
-      },
+      page: () => (
+        <StoryDocs
+          data={{
+            ...progressBarDocs,
+            guidance: {
+              componentHref: 'progress-bar',
+              componentName: 'Progress bar',
+            },
+            maturity: {
+              category: category.USE,
+              level: level.DEPLOYED,
+            },
+          }}
+        />
+      ),
     },
   },
 };

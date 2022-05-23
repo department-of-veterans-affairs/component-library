@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
-import { generateEventsDescription } from './events';
-import { getWebComponentDocs, propStructure } from './wc-helpers';
+import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
+import { category, level } from './maturity-scale';
 
 const textareaDocs = getWebComponentDocs('va-textarea');
 
@@ -10,12 +10,21 @@ export default {
   parameters: {
     componentSubtitle: `Textarea web component`,
     docs: {
-      description: {
-        component:
-          `<a className="vads-c-action-link--blue" href="https://design.va.gov/components/form/textarea">View guidance for the Textarea component in the Design System</a>` +
-          '\n' +
-          generateEventsDescription(textareaDocs),
-      },
+      page: () => (
+        <StoryDocs
+          data={{
+            ...textareaDocs,
+            guidance: {
+              componentHref: 'form/textarea',
+              componentName: 'Textarea',
+            },
+            maturity: {
+              category: category.USE,
+              level: level.DEPLOYED,
+            },
+          }}
+        />
+      ),
     },
   },
 };
