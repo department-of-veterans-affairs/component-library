@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
-import { getWebComponentDocs, propStructure } from './wc-helpers';
+import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
 
 const featuredContentDocs = getWebComponentDocs('va-featured-content');
 
@@ -8,9 +8,17 @@ export default {
   title: 'Components/va-featured-content',
   parameters: {
     docs: {
-      description: {
-        component: `<a className="vads-c-action-link--blue" href="https://design.va.gov/components/featured-content">View guidance for the Featured content component in the Design System</a>`,
-      },
+      page: () => (
+        <StoryDocs
+          data={{
+            ...featuredContentDocs,
+            guidance: {
+              componentHref: 'featured-content',
+              componentName: 'Featured content',
+            },
+          }}
+        />
+      ),
     },
     componentSubtitle: `Featured content web component`,
   },
