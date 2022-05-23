@@ -6,5 +6,5 @@ export const generateEventsDescription = componentDocs => {
 
   return ` This component has ${events.length} ${
     events.length > 1 ? 'events' : 'event'
-  }: ${eventNames}. Please see our documentation on how to use web component events at https://design.va.gov/about/developers#using-web-components.`;
+  }: ${eventNames}.`;
 };

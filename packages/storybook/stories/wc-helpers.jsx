@@ -135,7 +135,15 @@ export function StoryDocs({ data }) {
         Information on this component's accessibility, html output, and how it
         is used within Storybook can be viewed by clicking the Canvas tab.
       </p>
-      {eventsDescription && <p>{eventsDescription}</p>}
+      {eventsDescription && (
+        <p>
+          {eventsDescription} Please see our{' '}
+          <a href="https://design.va.gov/developers#using-web-components">
+            documentation on how to use web component events
+          </a>
+          .
+        </p>
+      )}
       <Description markdown={data.docs} />
       <Primary />
       {args && <ArgsTable story={PRIMARY_STORY} />}
