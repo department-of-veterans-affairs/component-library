@@ -13,7 +13,7 @@ export default {
         component:
           `<a className="vads-c-action-link--blue" href="https://design.va.gov/components/form/number-input">View guidance for the Number Input component in the Design System</a>` +
           '\n' +
-          'This component uses the native event handlers of onInput and onBlur.' +
+          'This component uses the native onInput and onBlur event handlers.' +
           '\n' +
           '\n' +
           generateEventsDescription(numberInputDocs),
