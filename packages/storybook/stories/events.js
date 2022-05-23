@@ -1,5 +1,8 @@
 export const generateEventsDescription = componentDocs => {
-  const events = [...componentDocs.events, ...componentDocs.listeners];
+  if (!componentDocs.events && !componentDocs.listeners) return;
+  let events = [];
+  if (componentDocs.events) events = [...componentDocs.events];
+  if (componentDocs.listeners) events = [...events, ...componentDocs.listeners];
   if (!events.length) return;
 
   const eventNames = events.map(event => event.event).join(', ');
