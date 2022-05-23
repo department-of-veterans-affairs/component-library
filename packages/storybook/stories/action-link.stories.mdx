@@ -1,26 +1,55 @@
-import { Meta, Story, Canvas } from '@storybook/addon-docs/blocks';
+import {
+  Canvas,
+  Meta,
+  Story,
+  Subtitle,
+  Title,
+} from '@storybook/addon-docs/blocks';
+import { Guidance, MaturityScale } from './wc-helpers';
+import { category, level } from './maturity-scale';
 
 <Meta title="Components/Action link" />
 
-# Primary
+<Title>Action link</Title>
+<Subtitle>Action link component</Subtitle>
+<MaturityScale data={{ category: category.USE, level: level.DEPLOYED }} />
+<Guidance
+  data={{
+    componentHref: 'link/action',
+    componentName: 'Action link',
+  }}
+/>
+
+## Stories
+
+### Primary
+
 <Canvas>
   <Story name="Primary">
-    <a className="vads-c-action-link--green" href="#">Call to action</a>
+    <a className="vads-c-action-link--green" href="#">
+      Call to action
+    </a>
   </Story>
 </Canvas>
 
-# Secondary
+### Secondary
+
 <Canvas>
   <Story name="Secondary">
-    <a className="vads-c-action-link--blue" href="#">Call to action</a>
+    <a className="vads-c-action-link--blue" href="#">
+      Call to action
+    </a>
   </Story>
 </Canvas>
 
-# Reverse
+### Reverse
+
 <Canvas>
   <Story name="Reverse">
     <div className="usa-background-dark" style={{ padding: '10px 0 20px' }}>
-      <a className="vads-c-action-link--white" href="#">Call to action</a>
+      <a className="vads-c-action-link--white" href="#">
+        Call to action
+      </a>
     </div>
   </Story>
 </Canvas>

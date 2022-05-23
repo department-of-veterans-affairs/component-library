@@ -1,11 +1,31 @@
-import { Canvas, Meta, Story } from '@storybook/addon-docs/blocks';
+import {
+  Canvas,
+  Meta,
+  Story,
+  Subtitle,
+  Title,
+} from '@storybook/addon-docs/blocks';
+import { Guidance, MaturityScale } from './wc-helpers';
+import { category, level } from './maturity-scale';
 
-<Meta title="Components/Horizontal rules" />
+<Meta title="Components/Divider" />
 
-# Stars
+<Title>Divider</Title>
+<Subtitle>Divider component</Subtitle>
+<MaturityScale data={{ category: category.USE, level: level.BEST_PRACTICE }} />
+<Guidance
+  data={{
+    componentHref: 'divider',
+    componentName: 'Divider',
+  }}
+/>
+
+## Stories
+
+### Stars
 
 <Canvas>
   <Story name="Default">
-    <div class="va-h-ruled--stars"></div>
+    <div className="va-h-ruled--stars"></div>
   </Story>
 </Canvas>

@@ -1,9 +1,29 @@
-import { Meta, Canvas } from '@storybook/addon-docs/blocks';
+import {
+  Canvas,
+  Meta,
+  Story,
+  Subtitle,
+  Title,
+} from '@storybook/addon-docs/blocks';
+import { Guidance, MaturityScale } from './wc-helpers';
+import { category, level } from './maturity-scale';
 import './buttons.style.scss';
 
 <Meta title="Components/Buttons" />
 
-## Primary buttons
+<Title>Button</Title>
+<Subtitle>Button component</Subtitle>
+<MaturityScale data={{ category: category.USE, level: level.BEST_PRACTICE }} />
+<Guidance
+  data={{
+    componentHref: 'button',
+    componentName: 'Button',
+  }}
+/>
+
+## Stories
+
+### Primary buttons
 
 <Canvas>
   <Story name="Primary">
@@ -21,7 +41,7 @@ import './buttons.style.scss';
   </Story>
 </Canvas>
 
-## Secondary buttons
+### Secondary buttons
 
 <Canvas>
   <Story name="Secondary">
@@ -33,7 +53,7 @@ import './buttons.style.scss';
   </Story>
 </Canvas>
 
-## Big buttons
+### Big buttons
 
 <Canvas>
   <Story name="Big">
@@ -48,7 +68,7 @@ import './buttons.style.scss';
   </Story>
 </Canvas>
 
-## Disabled buttons
+### Disabled buttons
 
 <Canvas>
   <Story name="Disabled">

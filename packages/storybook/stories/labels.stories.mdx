@@ -1,9 +1,31 @@
-import { Canvas, Meta, Story } from '@storybook/addon-docs/blocks';
+import {
+  Canvas,
+  Meta,
+  Story,
+  Subtitle,
+  Title,
+} from '@storybook/addon-docs/blocks';
+import { Guidance, MaturityScale } from './wc-helpers';
+import { category, level } from './maturity-scale';
 
-<Meta title="Components/Labels" />
+<Meta title="Components/Tag" />
+
+<Title>Tag</Title>
+<Subtitle>Tag component</Subtitle>
+<MaturityScale data={{ category: category.USE, level: level.DEPLOYED }} />
+<Guidance
+  data={{
+    componentHref: 'tag',
+    componentName: 'Tag',
+  }}
+/>
+
+## Stories
+
+### Default
 
 <Canvas>
   <Story name="Default">
-    <span class="usa-label">New</span>
+    <span className="usa-label">New</span>
   </Story>
 </Canvas>
