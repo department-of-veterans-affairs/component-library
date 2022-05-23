@@ -1,7 +1,6 @@
 /* eslint-disable react/prop-types */
 import React, { useState } from 'react';
-import { getWebComponentDocs, propStructure } from './wc-helpers';
-import { generateEventsDescription } from './events';
+import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
 
 const loadingIndicatorDocs = getWebComponentDocs('va-loading-indicator');
 
@@ -10,12 +9,17 @@ export default {
   parameters: {
     componentSubtitle: `Loading Indicator web component`,
     docs: {
-      description: {
-        component:
-          `<a className="vads-c-action-link--blue" href="https://design.va.gov/components/loading-indicator">View guidance for the Loading Indicator component in the Design System</a>` +
-          '\n' +
-          generateEventsDescription(loadingIndicatorDocs),
-      },
+      page: () => (
+        <StoryDocs
+          data={{
+            ...loadingIndicatorDocs,
+            guidance: {
+              componentHref: 'loading-indicator',
+              componentName: 'Loading Indicator',
+            },
+          }}
+        />
+      ),
     },
     actions: {
       handles: ['component-library-analytics'],
