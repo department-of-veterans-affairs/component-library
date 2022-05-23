@@ -1,15 +1,30 @@
 import React from 'react';
-import { generateEventsDescription } from './events';
 import {
   getWebComponentDocs,
   componentStructure,
   propStructure,
+  StoryDocs,
 } from './wc-helpers';
 
-const accordionDocs = getWebComponentDocs('va-table');
+const tableDocs = getWebComponentDocs('va-table');
 
 export default {
   title: 'Components/va-table',
+  parameters: {
+    docs: {
+      page: () => (
+        <StoryDocs
+          data={{
+            ...tableDocs,
+            guidance: {
+              componentHref: 'table',
+              componentName: 'Table',
+            },
+          }}
+        />
+      ),
+    },
+  },
 };
 const data = [
   [
@@ -77,7 +92,7 @@ export const Default = Template.bind({ data });
 Default.args = {
   ...defaultArgs,
 };
-Default.argTypes = propStructure(accordionDocs);
+Default.argTypes = propStructure(tableDocs);
 
 export const Sortable = Template.bind({ data });
 Sortable.args = {
