@@ -12,6 +12,8 @@ import {
 
 import webComponentDocs from '@department-of-veterans-affairs/web-components/component-docs.json';
 
+import { generateEventsDescription } from './events';
+
 /**
  * Return the JSON object matching a specific component tag
  */
@@ -123,6 +125,7 @@ function Guidance({ data }) {
 export function StoryDocs({ data }) {
   const args = data?.props?.length > 0;
   const guidance = data?.guidance;
+  const eventsDescription = generateEventsDescription(data);
   return (
     <>
       <Title />
@@ -132,6 +135,7 @@ export function StoryDocs({ data }) {
         Information on this component's accessibility, html output, and how it
         is used within Storybook can be viewed by clicking the Canvas tab.
       </p>
+      {eventsDescription && <p>{eventsDescription}</p>}
       <Description markdown={data.docs} />
       <Primary />
       {args && <ArgsTable story={PRIMARY_STORY} />}
