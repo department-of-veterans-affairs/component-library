@@ -1,6 +1,5 @@
-
 import React from 'react';
-import { getWebComponentDocs, propStructure } from './wc-helpers';
+import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
 import { generateEventsDescription } from './events';
 
 const alertExpandableDocs = getWebComponentDocs('va-alert-expandable');
@@ -10,12 +9,17 @@ export default {
   parameters: {
     componentSubtitle: `Alert Expandable web component`,
     docs: {
-      description: {
-        component:
-          `<a className="vads-c-action-link--blue" href="https://design.va.gov/components/alert-expandable">View guidance for the Alert Expandable component in the Design System</a>` +
-          '\n' +
-          generateEventsDescription(alertExpandableDocs),
-      },
+      page: () => (
+        <StoryDocs
+          data={{
+            ...alertExpandableDocs,
+            guidance: {
+              componentHref: 'alert-expandable',
+              componentName: 'Alert Expandable',
+            },
+          }}
+        />
+      ),
     },
     actions: {
       handles: ['component-library-analytics'],
