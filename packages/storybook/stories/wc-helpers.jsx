@@ -116,6 +116,34 @@ function Guidance({ data }) {
   );
 }
 
+function MaturityScale({ data }) {
+  const { category, level } = data;
+
+  let colors;
+
+  switch (category) {
+    case 'USE':
+      colors = 'vads-u-background-color--green-darker';
+      break;
+    case 'USE WITH CAUTION':
+      colors = 'vads-u-background-color--orange vads-u-color--base';
+      break;
+    case 'DON’T USE':
+      colors = 'vads-u-background-color--secondary-darkest';
+      break;
+  }
+
+  if (!colors) return null;
+
+  return (
+    <div class="vads-u-margin-bottom--3">
+      <span class={`usa-label ${colors}`}>
+        {category}: {level}
+      </span>
+    </div>
+  );
+}
+
 /**
  * Return a component with Storybook docs blocks in a standard order.
  * Accepts a JSON object as a prop representing component information
@@ -123,10 +151,12 @@ function Guidance({ data }) {
 export function StoryDocs({ data }) {
   const args = data?.props?.length > 0;
   const guidance = data?.guidance;
+  const maturity = data?.maturity;
   return (
     <>
       <Title />
       <Subtitle />
+      {maturity && <MaturityScale data={maturity} />}
       {guidance && <Guidance data={guidance} />}
       <Description markdown={data.docs} />
       <Primary />
