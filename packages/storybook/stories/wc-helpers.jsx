@@ -11,6 +11,7 @@ import {
 } from '@storybook/addon-docs/blocks';
 
 import webComponentDocs from '@department-of-veterans-affairs/web-components/component-docs.json';
+import { generateEventsDescription } from './events';
 
 /**
  * Return the JSON object matching a specific component tag
@@ -103,7 +104,7 @@ export const propStructure = comp => {
 /**
  * Renders an Action link to the Design System
  */
-function Guidance({ data }) {
+export function Guidance({ data }) {
   const { componentName, componentHref } = data;
   if (!componentName || !componentHref) return null;
   return (
@@ -116,7 +117,7 @@ function Guidance({ data }) {
   );
 }
 
-function MaturityScale({ data }) {
+export function MaturityScale({ data }) {
   const { category, level } = data;
 
   let colors;
@@ -136,10 +137,18 @@ function MaturityScale({ data }) {
   if (!colors || !level) return null;
 
   return (
-    <div class="vads-u-margin-bottom--3">
-      <span class={`usa-label ${colors}`}>
+    <div className="vads-u-margin-bottom--3">
+      <span className={`usa-label ${colors}`}>
         {category}: {level}
       </span>
+    </div>
+  );
+}
+
+export function EventsDescription({ data }) {
+  return (
+    <div className="vads-u-margin-top--2">
+      {generateEventsDescription(data)}
     </div>
   );
 }
@@ -152,12 +161,14 @@ export function StoryDocs({ data }) {
   const args = data?.props?.length > 0;
   const guidance = data?.guidance;
   const maturity = data?.maturity;
+  const events = data?.events;
   return (
     <>
       <Title />
       <Subtitle />
       {maturity && <MaturityScale data={maturity} />}
       {guidance && <Guidance data={guidance} />}
+      {events && <EventsDescription data={events} />}
       <Description markdown={data.docs} />
       <Primary />
       {args && <ArgsTable story={PRIMARY_STORY} />}
