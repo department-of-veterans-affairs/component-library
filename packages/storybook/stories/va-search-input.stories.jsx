@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { VaSearchInput } from '@department-of-veterans-affairs/web-components/react-bindings';
-import { getWebComponentDocs, propStructure } from './wc-helpers';
-import { generateEventsDescription } from './events';
+import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
 
 VaSearchInput.displayName = 'VaSearchInput';
 
@@ -12,9 +11,17 @@ export default {
   parameters: {
     componentSubtitle: 'Search Input web component',
     docs: {
-      description: {
-        component: generateEventsDescription(searchDocs),
-      },
+      page: () => (
+        <StoryDocs
+          data={{
+            ...searchDocs,
+            guidance: {
+              componentHref: 'search-input',
+              componentName: 'Search input',
+            },
+          }}
+        />
+      ),
     },
   },
 };
