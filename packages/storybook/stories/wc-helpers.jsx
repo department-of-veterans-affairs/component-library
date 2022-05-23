@@ -128,6 +128,10 @@ export function StoryDocs({ data }) {
       <Title />
       <Subtitle />
       {guidance && <Guidance data={guidance} />}
+      <p>
+        Information on this component's accessibility, html output, and how it
+        is used within Storybook can be viewed by clicking the Canvas tab.
+      </p>
       <Description markdown={data.docs} />
       <Primary />
       {args && <ArgsTable story={PRIMARY_STORY} />}
