@@ -108,12 +108,14 @@ export function Guidance({ data }) {
   const { componentName, componentHref } = data;
   if (!componentName || !componentHref) return null;
   return (
-    <a
-      className="vads-c-action-link--blue"
-      href={`https://design.va.gov/components/${componentHref}`}
-    >
-      View guidance for the {componentName} component in the Design System
-    </a>
+    <div className="vads-u-margin-bottom--5">
+      <a
+        className="vads-c-action-link--blue"
+        href={`https://design.va.gov/components/${componentHref}`}
+      >
+        View guidance for the {componentName} component in the Design System
+      </a>
+    </div>
   );
 }
 
@@ -146,11 +148,11 @@ export function MaturityScale({ data }) {
 }
 
 export function EventsDescription({ data }) {
-  return (
-    <div className="vads-u-margin-top--2">
-      {generateEventsDescription(data)}
-    </div>
-  );
+  return <div className="vads-u-margin-top--2">{data}</div>;
+}
+
+export function ComponentDescription({ data }) {
+  return <div className="vads-u-margin-top--2">{data}</div>;
 }
 
 /**
@@ -161,17 +163,21 @@ export function StoryDocs({ data }) {
   const args = data?.props?.length > 0;
   const guidance = data?.guidance;
   const maturity = data?.maturity;
-  const events = data?.events;
+  const events = generateEventsDescription(data);
+  const description = data?.description;
+  const isReactComponent = data?.react;
+
   return (
     <>
       <Title />
       <Subtitle />
       {maturity && <MaturityScale data={maturity} />}
       {guidance && <Guidance data={guidance} />}
+      {description && <ComponentDescription data={description} />}
       {events && <EventsDescription data={events} />}
       <Description markdown={data.docs} />
       <Primary />
-      {args && <ArgsTable story={PRIMARY_STORY} />}
+      {(args || isReactComponent) && <ArgsTable story={PRIMARY_STORY} />}
       <Stories />
     </>
   );
