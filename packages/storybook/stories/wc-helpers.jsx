@@ -138,7 +138,7 @@ export function StoryDocs({ data }) {
       {eventsDescription && (
         <p>
           {eventsDescription} Please see our{' '}
-          <a href="https://design.va.gov/developers#using-web-components">
+          <a href="https://design.va.gov/about/developers#using-web-components">
             documentation on how to use web component events
           </a>
           .
