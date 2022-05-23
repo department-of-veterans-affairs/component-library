@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-import { getWebComponentDocs, propStructure } from './wc-helpers';
+import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
 import { VaPagination } from '@department-of-veterans-affairs/web-components/react-bindings';
-import { generateEventsDescription } from './events';
 
 VaPagination.displayName = 'VaPagination';
 const paginationDocs = getWebComponentDocs('va-pagination');
@@ -11,12 +10,17 @@ export default {
   parameters: {
     componentSubtitle: `Pagination web component`,
     docs: {
-      description: {
-        component:
-          `<a className="vads-c-action-link--blue" href="https://design.va.gov/components/pagination">View guidance for the Pagination component in the Design System</a>` +
-          '\n' +
-          generateEventsDescription(paginationDocs),
-      },
+      page: () => (
+        <StoryDocs
+          data={{
+            ...paginationDocs,
+            guidance: {
+              componentHref: 'pagination',
+              componentName: 'Pagination',
+            },
+          }}
+        />
+      ),
     },
   },
 };
