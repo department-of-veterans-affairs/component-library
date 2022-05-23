@@ -133,7 +133,7 @@ function MaturityScale({ data }) {
       break;
   }
 
-  if (!colors) return null;
+  if (!colors || !level) return null;
 
   return (
     <div class="vads-u-margin-bottom--3">
