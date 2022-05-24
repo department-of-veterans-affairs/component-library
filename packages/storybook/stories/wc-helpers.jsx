@@ -122,7 +122,7 @@ function Guidance({ data }) {
  * Return a component with Storybook docs blocks in a standard order.
  * Accepts a JSON object as a prop representing component information
  */
-export function StoryDocs({ data }) {
+export function StoryDocs({ data, children }) {
   const args = data?.props?.length > 0;
   const guidance = data?.guidance;
   const eventsDescription = generateEventsDescription(data);
@@ -147,6 +147,7 @@ export function StoryDocs({ data }) {
       <Description markdown={data.docs} />
       <Primary />
       {args && <ArgsTable story={PRIMARY_STORY} />}
+      <>{children}</>
       <Stories />
     </>
   );

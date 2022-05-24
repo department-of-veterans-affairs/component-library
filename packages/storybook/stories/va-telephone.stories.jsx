@@ -15,7 +15,7 @@ import {
   Table,
 } from '@department-of-veterans-affairs/component-library';
 
-import { getWebComponentDocs, propStructure } from './wc-helpers';
+import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
 
 const telephoneDocs = getWebComponentDocs('va-telephone');
 //
@@ -37,19 +37,6 @@ const Contacts = () => (
   />
 );
 
-const Page = () => (
-  <>
-    <Title />
-    <Subtitle />
-    <Description />
-    <Primary />
-    <ArgsTable story={PRIMARY_STORY} />
-    <Contacts />
-    <br />
-    <Stories />
-  </>
-);
-
 export default {
   title: 'Components/va-telephone',
   parameters: {
@@ -57,7 +44,11 @@ export default {
       handles: ['component-library-analytics'],
     },
     docs: {
-      page: Page,
+      page: () => (
+        <StoryDocs data={telephoneDocs}>
+          <Contacts />
+        </StoryDocs>
+      ),
     },
   },
 };
