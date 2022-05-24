@@ -178,7 +178,7 @@ export function StoryDocs({ data }) {
   const args = data?.props?.length > 0;
   const guidance = data?.guidance;
   const maturity = data?.maturity;
-  const events = data?.events?.length > 1 || data?.listeners?.length > 1;
+  const events = data?.events?.length > 0 || data?.listeners?.length > 0;
   const description = data?.description;
   const isReactComponent = data?.react;
 
