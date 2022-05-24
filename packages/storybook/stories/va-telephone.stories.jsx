@@ -1,15 +1,5 @@
 import React from 'react';
 import {
-  Title,
-  Subtitle,
-  Description,
-  Primary,
-  ArgsTable,
-  Stories,
-  PRIMARY_STORY,
-} from '@storybook/addon-docs/blocks';
-
-import {
   CONTACTS,
   contactsMap,
   Table,
