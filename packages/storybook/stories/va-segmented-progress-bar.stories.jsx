@@ -40,7 +40,7 @@ const Template = ({
   // Component can be used without it
   <div style={{ margin: '3em' }}>
     <div
-      class="schemaform-title"
+      className="schemaform-title"
       style={{ alignItems: 'baseline', display: 'flex', marginBottom: '3rem' }}
     >
       <h1
@@ -50,7 +50,7 @@ const Template = ({
         Apply for health care
       </h1>
       <div
-        class="schemaform-subtitle"
+        className="schemaform-subtitle"
         data-testid="form-subtitle"
         style={{ fontSize: '2rem' }}
       >
@@ -63,9 +63,12 @@ const Template = ({
       total={total}
       label={label}
     ></va-segmented-progress-bar>
-    <div class="schemaform-chapter-progress" style={{ paddingLeft: '2rem' }}>
-      <div class="nav-header nav-header-schemaform">
-        <h2 id="nav-form-header" class="vads-u-font-size--h4" tabindex="-1">
+    <div
+      className="schemaform-chapter-progress"
+      style={{ paddingLeft: '2rem' }}
+    >
+      <div className="nav-header nav-header-schemaform">
+        <h2 id="nav-form-header" className="vads-u-font-size--h4" tabIndex="-1">
           Step 2 of 6: VA Benefits
         </h2>
       </div>
