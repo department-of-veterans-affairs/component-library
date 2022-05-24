@@ -136,7 +136,7 @@ export function StoryDocs({ data, children }) {
   // This feels a bit awkward, but I didn't want to use a magic number
   const componentName = tagName.slice('va-'.length);
   if (!guidance.componentName)
-    guidance.componentName = capitalize(componentName);
+    guidance.componentName = capitalize(componentName).replace('-', ' ');
   if (!guidance.componentHref) guidance.componentHref = componentName;
   const eventsDescription = generateEventsDescription(data);
   return (

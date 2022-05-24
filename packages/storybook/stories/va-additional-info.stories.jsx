@@ -7,17 +7,7 @@ export default {
   parameters: {
     componentSubtitle: `Additional Info web component`,
     docs: {
-      page: () => (
-        <StoryDocs
-          data={{
-            ...additionalInfoDocs,
-            guidance: {
-              componentHref: 'additional-info',
-              componentName: 'Additional info',
-            },
-          }}
-        />
-      ),
+      page: () => <StoryDocs data={additionalInfoDocs} />,
     },
     actions: {
       handles: ['component-library-analytics'],
