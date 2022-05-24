@@ -11,12 +11,8 @@ export default {
     docs: {
       page: () => (
         <StoryDocs
-          data={{
-            ...loadingIndicatorDocs,
-            guidance: {
-              componentName: 'Loading Indicator',
-            },
-          }}
+          data={loadingIndicatorDocs}
+          componentName="Loading Indicator"
         />
       ),
     },

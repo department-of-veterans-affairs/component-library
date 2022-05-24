@@ -10,14 +10,7 @@ export default {
     componentSubtitle: `Textarea web component`,
     docs: {
       page: () => (
-        <StoryDocs
-          data={{
-            ...textareaDocs,
-            guidance: {
-              componentHref: 'form/textarea',
-            },
-          }}
-        />
+        <StoryDocs data={textareaDocs} componentHref="form/textarea" />
       ),
     },
   },

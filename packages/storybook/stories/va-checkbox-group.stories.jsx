@@ -20,13 +20,9 @@ export default {
     docs: {
       page: () => (
         <StoryDocs
-          data={{
-            ...checkBoxGroupDocs,
-            guidance: {
-              componentHref: 'checkbox',
-              componentName: 'Checkbox Group',
-            },
-          }}
+          data={checkBoxGroupDocs}
+          componentHref="checkbox"
+          componentName="Checkbox Group"
         />
       ),
     },

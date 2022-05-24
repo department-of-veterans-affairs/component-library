@@ -9,12 +9,8 @@ export default {
     docs: {
       page: () => (
         <StoryDocs
-          data={{
-            ...alertExpandableDocs,
-            guidance: {
-              componentName: 'Alert Expandable',
-            },
-          }}
+          data={alertExpandableDocs}
+          componentName="Alert Expandable"
         />
       ),
     },

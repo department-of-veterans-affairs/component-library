@@ -17,13 +17,9 @@ export default {
     docs: {
       page: () => (
         <StoryDocs
-          data={{
-            ...radioDocs,
-            guidance: {
-              componentHref: 'form/radio-button',
-              componentName: 'Radio buttons',
-            },
-          }}
+          data={radioDocs}
+          componentHref="form/radio-button"
+          componentName="Radio buttons"
         />
       ),
     },

@@ -10,13 +10,9 @@ export default {
     docs: {
       page: () => (
         <StoryDocs
-          data={{
-            ...numberInputDocs,
-            guidance: {
-              componentHref: 'form/number-input',
-              componentName: 'Number Input',
-            },
-          }}
+          data={numberInputDocs}
+          componentHref="form/number-input"
+          componentName="Number Input"
         />
       ),
     },

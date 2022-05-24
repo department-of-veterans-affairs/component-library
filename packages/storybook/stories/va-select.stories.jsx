@@ -11,13 +11,9 @@ export default {
     docs: {
       page: () => (
         <StoryDocs
-          data={{
-            ...selectDocs,
-            guidance: {
-              componentHref: 'form/select',
-              componentName: 'Select Box',
-            },
-          }}
+          data={selectDocs}
+          componentHref="form/select"
+          componentName="Select Box"
         />
       ),
     },

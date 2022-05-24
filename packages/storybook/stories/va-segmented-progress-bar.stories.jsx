@@ -12,12 +12,8 @@ export default {
     docs: {
       page: () => (
         <StoryDocs
-          data={{
-            ...segmentedProgressBarDocs,
-            guidance: {
-              componentHref: 'progress-bar/segmented',
-            },
-          }}
+          data={segmentedProgressBarDocs}
+          componentHref="progress-bar/segmented"
         />
       ),
     },

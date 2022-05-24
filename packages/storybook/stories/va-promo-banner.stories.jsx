@@ -8,14 +8,7 @@ export default {
   parameters: {
     docs: {
       page: () => (
-        <StoryDocs
-          data={{
-            ...promoBannerDocs,
-            guidance: {
-              componentHref: 'promo-banners',
-            },
-          }}
-        />
+        <StoryDocs data={promoBannerDocs} componentHref="promo-banners" />
       ),
     },
   },

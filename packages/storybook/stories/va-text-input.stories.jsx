@@ -11,13 +11,9 @@ export default {
     docs: {
       page: () => (
         <StoryDocs
-          data={{
-            ...textInputDocs,
-            guidance: {
-              componentHref: 'form/text-input',
-              componentName: 'Text Input',
-            },
-          }}
+          data={textInputDocs}
+          componentHref="form/text-input"
+          componentName="Text Input"
         />
       ),
     },

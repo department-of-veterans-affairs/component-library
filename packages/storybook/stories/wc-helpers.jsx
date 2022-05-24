@@ -129,21 +129,23 @@ function capitalize(text) {
  * Return a component with Storybook docs blocks in a standard order.
  * Accepts a JSON object as a prop representing component information
  */
-export function StoryDocs({ data, children }) {
+export function StoryDocs(props) {
+  const { data, children } = props;
   const args = data?.props?.length > 0;
-  const guidance = data?.guidance || {};
   const tagName = data.tag;
   // This feels a bit awkward, but I didn't want to use a magic number
-  const componentName = tagName.slice('va-'.length);
-  if (!guidance.componentName)
-    guidance.componentName = capitalize(componentName).replaceAll('-', ' ');
-  if (!guidance.componentHref) guidance.componentHref = componentName;
+  const _componentName = tagName.slice('va-'.length);
+  const {
+    componentHref = _componentName,
+    componentName = capitalize(_componentName).replaceAll('-', ' '),
+  } = props;
+
   const eventsDescription = generateEventsDescription(data);
   return (
     <>
       <Title />
       <Subtitle />
-      <Guidance {...guidance} />
+      <Guidance componentHref={componentHref} componentName={componentName} />
       <p>
         Information on this component's accessibility, html output, and how it
         is used within Storybook can be viewed by clicking the Canvas tab.
