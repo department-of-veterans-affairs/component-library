@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import TextArea from '../../react-components/src/components/TextArea/TextArea';
 
 export default {
-  title: 'Components/TextArea',
+  title: 'Components/TextArea (deprecated)',
   component: TextArea,
 };
 

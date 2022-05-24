@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import NumberInput from '../../react-components/src/components/NumberInput/NumberInput';
 
 export default {
-  title: 'Components/NumberInput',
+  title: 'Components/NumberInput (deprecated)',
   component: NumberInput,
 };
 

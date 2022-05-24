@@ -2,7 +2,7 @@ import React from 'react';
 import Checkbox from '../../react-components/src/components/Checkbox/Checkbox';
 
 export default {
-  title: 'Components/Checkbox',
+  title: 'Components/Checkbox (deprecated)',
   component: Checkbox,
 };
 

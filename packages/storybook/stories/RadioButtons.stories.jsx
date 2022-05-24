@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import RadioButtons from '../../react-components/src/components/RadioButtons/RadioButtons';
 
 export default {
-  title: 'Components/RadioButtons',
+  title: 'Components/RadioButtons (deprecated)',
   component: RadioButtons,
 };
 
