@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { VaSearchInput } from '@department-of-veterans-affairs/web-components/react-bindings';
 import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
-import { category, level } from './maturity-scale';
 
 VaSearchInput.displayName = 'VaSearchInput';
 
@@ -16,14 +15,6 @@ export default {
         <StoryDocs
           data={{
             ...searchDocs,
-            guidance: {
-              componentHref: 'search-input',
-              componentName: 'Search input',
-            },
-            maturity: {
-              category: category.USE,
-              level: level.DEPLOYED,
-            },
           }}
         />
       ),

@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
-import { category, level } from './maturity-scale';
 
 const numberInputDocs = getWebComponentDocs('va-number-input');
 
@@ -13,16 +12,6 @@ export default {
         <StoryDocs
           data={{
             ...numberInputDocs,
-            guidance: {
-              componentHref: 'form/number-input',
-              componentName: 'Number input',
-            },
-            maturity: {
-              category: category.USE,
-              level: level.DEPLOYED,
-            },
-            description:
-              'This component uses the native onInput and onBlur event handlers.',
           }}
         />
       ),

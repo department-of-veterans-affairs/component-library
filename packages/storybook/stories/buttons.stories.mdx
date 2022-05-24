@@ -6,20 +6,15 @@ import {
   Title,
 } from '@storybook/addon-docs/blocks';
 import { Guidance, MaturityScale } from './wc-helpers';
-import { category, level } from './maturity-scale';
+import { additionalDocs } from './additional-docs';
 import './buttons.style.scss';
 
 <Meta title="Components/Buttons" />
 
 <Title>Button</Title>
 <Subtitle>Button component</Subtitle>
-<MaturityScale data={{ category: category.USE, level: level.BEST_PRACTICE }} />
-<Guidance
-  data={{
-    componentHref: 'button',
-    componentName: 'Button',
-  }}
-/>
+<MaturityScale data={additionalDocs['Button']} />
+<Guidance data={additionalDocs['Button']} />
 
 ## Stories
 

@@ -19,7 +19,7 @@ import {
   Guidance,
   MaturityScale,
 } from './wc-helpers';
-import { category, level } from './maturity-scale';
+import { additionalDocs } from './additional-docs';
 
 const telephoneDocs = getWebComponentDocs('va-telephone');
 //
@@ -45,15 +45,8 @@ const Page = () => (
   <>
     <Title />
     <Subtitle>Telephone web component</Subtitle>
-    <MaturityScale
-      data={{ category: category.USE, level: level.BEST_PRACTICE }}
-    />
-    <Guidance
-      data={{
-        componentHref: 'telephone',
-        componentName: 'Telephone',
-      }}
-    />
+    <MaturityScale data={additionalDocs['va-telephone']} />
+    <Guidance data={additionalDocs['va-telephone']} />
     <Description />
     <Primary />
     <ArgsTable story={PRIMARY_STORY} />

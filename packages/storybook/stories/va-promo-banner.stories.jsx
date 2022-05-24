@@ -1,6 +1,5 @@
 import React from 'react';
 import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
-import { category, level } from './maturity-scale';
 
 const promoBannerDocs = getWebComponentDocs('va-promo-banner');
 
@@ -13,19 +12,6 @@ export default {
         <StoryDocs
           data={{
             ...promoBannerDocs,
-            guidance: {
-              componentHref: 'promo-banners',
-              componentName: 'Promo banner',
-            },
-            maturity: {
-              category: category.USE,
-              level: level.DEPLOYED,
-            },
-            description:
-              `Reset the banner in storage by opening Developer Tools in the browser and then clicking on the Application Tab. ` +
-              `Under Storage you will see Local Storage and check the Storage to see if a DISMISSED_PROMO_BANNERS Key exists. ` +
-              `If it does right click and delete it and refresh your page to see the banner again. ` +
-              `Alternatively you can change the id on the component since the new id would not match the id in storage.`,
           }}
         />
       ),

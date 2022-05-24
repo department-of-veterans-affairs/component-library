@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { VaModal } from '@department-of-veterans-affairs/web-components/react-bindings';
 import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
-import { category, level } from './maturity-scale';
 
 VaModal.displayName = 'VaModal';
 
@@ -16,14 +15,6 @@ export default {
         <StoryDocs
           data={{
             ...modalDocs,
-            guidance: {
-              componentHref: 'modal',
-              componentName: 'Modal',
-            },
-            maturity: {
-              category: category.USE,
-              level: level.DEPLOYED,
-            },
           }}
         />
       ),

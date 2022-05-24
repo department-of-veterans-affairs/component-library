@@ -1,6 +1,5 @@
 import React from 'react';
 import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
-import { category, level } from './maturity-scale';
 
 const bttDocs = getWebComponentDocs('va-back-to-top');
 
@@ -13,14 +12,6 @@ export default {
         <StoryDocs
           data={{
             ...bttDocs,
-            guidance: {
-              componentHref: 'back-to-top',
-              componentName: 'Back to top',
-            },
-            maturity: {
-              category: category.USE,
-              level: level.DEPLOYED,
-            },
           }}
         />
       ),

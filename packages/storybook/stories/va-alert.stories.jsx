@@ -1,7 +1,6 @@
 import React from 'react';
 import { VaAlert } from '@department-of-veterans-affairs/web-components/react-bindings';
 import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
-import { category, level } from './maturity-scale';
 
 const alertDocs = getWebComponentDocs('va-alert');
 
@@ -30,16 +29,6 @@ export default {
         <StoryDocs
           data={{
             ...alertDocs,
-            guidance: {
-              componentHref: 'alert',
-              componentName: 'Alert',
-            },
-            maturity: {
-              category: category.USE,
-              level: level.BEST_PRACTICE,
-            },
-            description: `Use a heading element with an attribute named slot and a value of "headline" to control what is displayed for the alert's headline. 
-            Any children passed into this component without a parent slot "headline" will render in the alert's body.`,
           }}
         />
       ),

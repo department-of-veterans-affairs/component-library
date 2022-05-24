@@ -6,19 +6,14 @@ import {
   Title,
 } from '@storybook/addon-docs/blocks';
 import { Guidance, MaturityScale } from './wc-helpers';
-import { category, level } from './maturity-scale';
+import { additionalDocs } from './additional-docs';
 
 <Meta title="Components/Sidenav" />
 
 <Title>Sidenav</Title>
 <Subtitle>Sidenav component</Subtitle>
-<MaturityScale data={{ category: category.USE, level: level.BEST_PRACTICE }} />
-<Guidance
-  data={{
-    componentHref: 'sidenav',
-    componentName: 'Sidenav',
-  }}
-/>
+<MaturityScale data={additionalDocs['Sidenav']} />
+<Guidance data={additionalDocs['Sidenav']} />
 
 ## Stories
 

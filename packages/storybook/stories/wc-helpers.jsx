@@ -11,6 +11,7 @@ import {
 } from '@storybook/addon-docs/blocks';
 
 import webComponentDocs from '@department-of-veterans-affairs/web-components/component-docs.json';
+import { additionalDocs } from './additional-docs';
 
 /**
  * Return the JSON object matching a specific component tag
@@ -104,26 +105,32 @@ export const propStructure = comp => {
  * Renders an Action link to the Design System
  */
 export function Guidance({ data }) {
-  const { componentName, componentHref } = data;
-  if (!componentName || !componentHref) return null;
+  if (!data) return null;
+
+  const { guidanceName, guidanceHref } = data;
+  if (!guidanceName || !guidanceHref) return null;
+
   return (
     <div className="vads-u-margin-bottom--5">
       <a
         className="vads-c-action-link--blue"
-        href={`https://design.va.gov/components/${componentHref}`}
+        href={`https://design.va.gov/components/${guidanceHref}`}
       >
-        View guidance for the {componentName} component in the Design System
+        View guidance for the {guidanceName} component in the Design System
       </a>
     </div>
   );
 }
 
 export function MaturityScale({ data }) {
-  const { category, level } = data;
+  if (!data) return null;
+
+  const { maturityCategory, maturityLevel } = data;
+  if (!maturityCategory || !maturityLevel) return null;
 
   let colors;
 
-  switch (category) {
+  switch (maturityCategory) {
     case 'USE':
       colors = 'vads-u-background-color--green-darker';
       break;
@@ -135,12 +142,12 @@ export function MaturityScale({ data }) {
       break;
   }
 
-  if (!colors || !level) return null;
+  if (!colors) return null;
 
   return (
     <div className="vads-u-margin-bottom--3">
       <span className={`usa-label ${colors}`}>
-        {category}: {level}
+        {maturityCategory}: {maturityLevel}
       </span>
     </div>
   );
@@ -175,19 +182,29 @@ export function ComponentDescription({ data }) {
  * Accepts a JSON object as a prop representing component information
  */
 export function StoryDocs({ data }) {
+  // if it's a wc, it'll have a tag; otherwise, pass in component name
+  const componentName = data?.tag || data?.componentName;
+  const otherDocs = additionalDocs[componentName];
+  let updatedData;
+
+  if (otherDocs) {
+    updatedData = { ...data, ...otherDocs };
+  }
+
   const args = data?.props?.length > 0;
-  const guidance = data?.guidance;
-  const maturity = data?.maturity;
   const events = data?.events?.length > 0 || data?.listeners?.length > 0;
-  const description = data?.description;
-  const isReactComponent = data?.react;
+
+  const guidance = updatedData?.guidanceHref && updatedData?.guidanceName;
+  const maturity = updatedData?.maturityCategory && updatedData?.maturityLevel;
+  const description = updatedData?.description;
+  const isReactComponent = updatedData?.react;
 
   return (
     <>
       <Title />
       <Subtitle />
-      {maturity && <MaturityScale data={maturity} />}
-      {guidance && <Guidance data={guidance} />}
+      {maturity && <MaturityScale data={updatedData} />}
+      {guidance && <Guidance data={updatedData} />}
       {description && <ComponentDescription data={description} />}
       {events && <CustomEventsDescription data={data} />}
       <Description markdown={data.docs} />

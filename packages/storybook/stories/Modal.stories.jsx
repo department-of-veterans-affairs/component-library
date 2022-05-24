@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import Modal from '../../react-components/src/components/Modal/Modal';
 import { StoryDocs } from './wc-helpers';
-import { category, level } from './maturity-scale';
 
 export default {
   title: 'Components/Modal',
@@ -12,11 +11,7 @@ export default {
       page: () => (
         <StoryDocs
           data={{
-            maturity: {
-              category: category.DONT_USE,
-              level: level.DEPRECATED,
-            },
-            react: true,
+            componentName: 'Modal',
           }}
         />
       ),

@@ -1,7 +1,6 @@
 /* eslint-disable react/prop-types */
 import React, { useEffect, useState } from 'react';
 import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
-import { category, level } from './maturity-scale';
 
 const selectDocs = getWebComponentDocs('va-select');
 
@@ -14,16 +13,6 @@ export default {
         <StoryDocs
           data={{
             ...selectDocs,
-            guidance: {
-              componentHref: 'form/select',
-              componentName: 'Select box',
-            },
-            maturity: {
-              category: category.USE,
-              level: level.DEPLOYED,
-            },
-            description:
-              'This component uses the native onKeyDown event handler.',
           }}
         />
       ),

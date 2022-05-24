@@ -1,7 +1,6 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
 import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
-import { category, level } from './maturity-scale';
 
 const processListDocs = getWebComponentDocs('va-process-list');
 
@@ -14,14 +13,6 @@ export default {
         <StoryDocs
           data={{
             ...processListDocs,
-            guidance: {
-              componentHref: 'process-list',
-              componentName: 'Process list',
-            },
-            maturity: {
-              category: category.USE,
-              level: level.DEPLOYED,
-            },
           }}
         />
       ),

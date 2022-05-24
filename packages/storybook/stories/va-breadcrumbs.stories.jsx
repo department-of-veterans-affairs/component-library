@@ -1,6 +1,5 @@
 import React from 'react';
 import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
-import { category, level } from './maturity-scale';
 
 const breadcrumbsDocs = getWebComponentDocs('va-breadcrumbs');
 
@@ -13,14 +12,6 @@ export default {
         <StoryDocs
           data={{
             ...breadcrumbsDocs,
-            guidance: {
-              componentHref: 'breadcrumbs',
-              componentName: 'Breadcrumbs',
-            },
-            maturity: {
-              category: category.USE,
-              level: level.DEPLOYED,
-            },
           }}
         />
       ),

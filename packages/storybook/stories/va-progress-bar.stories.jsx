@@ -1,6 +1,5 @@
 import React from 'react';
 import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
-import { category, level } from './maturity-scale';
 
 const progressBarDocs = getWebComponentDocs('va-progress-bar');
 
@@ -13,14 +12,6 @@ export default {
         <StoryDocs
           data={{
             ...progressBarDocs,
-            guidance: {
-              componentHref: 'progress-bar',
-              componentName: 'Progress bar',
-            },
-            maturity: {
-              category: category.USE,
-              level: level.DEPLOYED,
-            },
           }}
         />
       ),

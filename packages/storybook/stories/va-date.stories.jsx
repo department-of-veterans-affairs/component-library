@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { VaDate } from '@department-of-veterans-affairs/web-components/react-bindings';
 import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
-import { category, level } from './maturity-scale';
 
 VaDate.displayName = 'VaDate';
 
@@ -16,14 +15,6 @@ export default {
         <StoryDocs
           data={{
             ...dateDocs,
-            guidance: {
-              componentHref: 'form/date-input',
-              componentName: 'Date',
-            },
-            maturity: {
-              category: category.USE,
-              level: level.DEPLOYED,
-            },
           }}
         />
       ),

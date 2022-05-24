@@ -1,6 +1,5 @@
 import React from 'react';
 import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
-import { category, level } from './maturity-scale';
 
 const segmentedProgressBarDocs = getWebComponentDocs(
   'va-segmented-progress-bar',
@@ -15,14 +14,6 @@ export default {
         <StoryDocs
           data={{
             ...segmentedProgressBarDocs,
-            guidance: {
-              componentHref: 'progress-bar/segmented',
-              componentName: 'Segmented progress bar',
-            },
-            maturity: {
-              category: category.USE,
-              level: level.DEPLOYED,
-            },
           }}
         />
       ),

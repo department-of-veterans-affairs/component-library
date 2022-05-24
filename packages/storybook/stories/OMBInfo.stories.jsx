@@ -1,7 +1,6 @@
 import React from 'react';
 import OMBInfo from '../../react-components/src/components/OMBInfo/OMBInfo';
 import { StoryDocs } from './wc-helpers';
-import { category, level } from './maturity-scale';
 
 export default {
   title: 'Components/OMBInfo',
@@ -12,15 +11,7 @@ export default {
       page: () => (
         <StoryDocs
           data={{
-            guidance: {
-              componentHref: 'omb-info',
-              componentName: 'OMB info',
-            },
-            maturity: {
-              category: category.USE,
-              level: level.DEPLOYED,
-            },
-            react: true,
+            componentName: 'OMBInfo',
           }}
         />
       ),

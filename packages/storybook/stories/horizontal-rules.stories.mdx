@@ -6,19 +6,14 @@ import {
   Title,
 } from '@storybook/addon-docs/blocks';
 import { Guidance, MaturityScale } from './wc-helpers';
-import { category, level } from './maturity-scale';
+import { additionalDocs } from './additional-docs';
 
 <Meta title="Components/Divider" />
 
 <Title>Divider</Title>
 <Subtitle>Divider component</Subtitle>
-<MaturityScale data={{ category: category.USE, level: level.BEST_PRACTICE }} />
-<Guidance
-  data={{
-    componentHref: 'divider',
-    componentName: 'Divider',
-  }}
-/>
+<MaturityScale data={additionalDocs['Divider']} />
+<Guidance data={additionalDocs['Divider']} />
 
 ## Stories
 

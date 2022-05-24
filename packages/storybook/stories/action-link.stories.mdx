@@ -6,19 +6,14 @@ import {
   Title,
 } from '@storybook/addon-docs/blocks';
 import { Guidance, MaturityScale } from './wc-helpers';
-import { category, level } from './maturity-scale';
+import { additionalDocs } from './additional-docs';
 
 <Meta title="Components/Action link" />
 
 <Title>Action link</Title>
 <Subtitle>Action link component</Subtitle>
-<MaturityScale data={{ category: category.USE, level: level.DEPLOYED }} />
-<Guidance
-  data={{
-    componentHref: 'link/action',
-    componentName: 'Action link',
-  }}
-/>
+<MaturityScale data={additionalDocs['ActionLink']} />
+<Guidance data={additionalDocs['ActionLink']} />
 
 ## Stories
 

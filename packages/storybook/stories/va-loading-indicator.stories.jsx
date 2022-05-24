@@ -1,7 +1,6 @@
 /* eslint-disable react/prop-types */
 import React, { useState } from 'react';
 import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
-import { category, level } from './maturity-scale';
 
 const loadingIndicatorDocs = getWebComponentDocs('va-loading-indicator');
 
@@ -14,14 +13,6 @@ export default {
         <StoryDocs
           data={{
             ...loadingIndicatorDocs,
-            guidance: {
-              componentHref: 'loading-indicator',
-              componentName: 'Loading indicator',
-            },
-            maturity: {
-              category: category.USE,
-              level: level.BEST_PRACTICE,
-            },
           }}
         />
       ),

@@ -12,11 +12,7 @@ export default {
       page: () => (
         <StoryDocs
           data={{
-            maturity: {
-              category: category.DONT_USE,
-              level: level.DEPRECATED,
-            },
-            react: true,
+            componentName: 'TextInput',
           }}
         />
       ),

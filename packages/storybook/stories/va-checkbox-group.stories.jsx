@@ -5,7 +5,6 @@ import {
   propStructure,
   StoryDocs,
 } from './wc-helpers';
-import { category, level } from './maturity-scale';
 
 const checkBoxGroupDocs = getWebComponentDocs('va-checkbox-group');
 const checkbox = getWebComponentDocs('va-checkbox');
@@ -23,14 +22,6 @@ export default {
         <StoryDocs
           data={{
             ...checkBoxGroupDocs,
-            guidance: {
-              componentHref: 'form/checkbox',
-              componentName: 'Checkbox group',
-            },
-            maturity: {
-              category: category.USE,
-              level: level.DEPLOYED,
-            },
           }}
         />
       ),

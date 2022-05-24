@@ -2,7 +2,6 @@
 /* eslint-disable react/no-unescaped-entities */
 import React from 'react';
 import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
-import { category, level } from './maturity-scale';
 
 const checkboxDocs = getWebComponentDocs('va-checkbox');
 
@@ -15,15 +14,6 @@ export default {
         <StoryDocs
           data={{
             ...checkboxDocs,
-            guidance: {
-              componentHref: 'form/checkbox',
-              componentName: 'Checkbox',
-            },
-            maturity: {
-              category: category.USE,
-              level: level.DEPLOYED,
-            },
-            description: 'This component uses the native onBlur event handler.',
           }}
         />
       ),

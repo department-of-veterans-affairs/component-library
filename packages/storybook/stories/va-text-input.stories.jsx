@@ -1,7 +1,6 @@
 /* eslint-disable react/prop-types */
 import React, { useState } from 'react';
 import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
-import { category, level } from './maturity-scale';
 
 const textInputDocs = getWebComponentDocs('va-text-input');
 
@@ -14,16 +13,6 @@ export default {
         <StoryDocs
           data={{
             ...textInputDocs,
-            guidance: {
-              componentHref: 'form/text-input',
-              componentName: 'Text input',
-            },
-            maturity: {
-              category: category.USE,
-              level: level.DEPLOYED,
-            },
-            description:
-              'This component uses the native onInput and onBlur event handlers.',
           }}
         />
       ),

@@ -1,6 +1,5 @@
 import React from 'react';
 import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
-import { category, level } from './maturity-scale';
 
 const additionalInfoDocs = getWebComponentDocs('va-additional-info');
 
@@ -13,14 +12,6 @@ export default {
         <StoryDocs
           data={{
             ...additionalInfoDocs,
-            guidance: {
-              componentHref: 'additional-info',
-              componentName: 'Additional info',
-            },
-            maturity: {
-              category: category.USE,
-              level: level.DEPLOYED,
-            },
           }}
         />
       ),

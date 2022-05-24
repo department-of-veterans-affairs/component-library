@@ -1,7 +1,6 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
 import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
-import { category, level } from './maturity-scale';
 
 const textareaDocs = getWebComponentDocs('va-textarea');
 
@@ -14,16 +13,6 @@ export default {
         <StoryDocs
           data={{
             ...textareaDocs,
-            guidance: {
-              componentHref: 'form/textarea',
-              componentName: 'Textarea',
-            },
-            maturity: {
-              category: category.USE,
-              level: level.DEPLOYED,
-            },
-            description:
-              'This component uses the native onInput and onBlur event handlers.',
           }}
         />
       ),

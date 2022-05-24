@@ -1,7 +1,6 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
 import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
-import { category, level } from './maturity-scale';
 
 const featuredContentDocs = getWebComponentDocs('va-featured-content');
 
@@ -14,14 +13,6 @@ export default {
         <StoryDocs
           data={{
             ...featuredContentDocs,
-            guidance: {
-              componentHref: 'featured-content',
-              componentName: 'Featured content',
-            },
-            maturity: {
-              category: category.USE,
-              level: level.DEPLOYED,
-            },
           }}
         />
       ),

@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { VaPagination } from '@department-of-veterans-affairs/web-components/react-bindings';
 import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
-import { category, level } from './maturity-scale';
 
 VaPagination.displayName = 'VaPagination';
 const paginationDocs = getWebComponentDocs('va-pagination');
@@ -15,14 +14,6 @@ export default {
         <StoryDocs
           data={{
             ...paginationDocs,
-            guidance: {
-              componentHref: 'pagination',
-              componentName: 'Pagination',
-            },
-            maturity: {
-              category: category.USE,
-              level: level.DEPLOYED,
-            },
           }}
         />
       ),

@@ -5,7 +5,6 @@ import {
   propStructure,
   StoryDocs,
 } from './wc-helpers';
-import { category, level } from './maturity-scale';
 
 const radioDocs = getWebComponentDocs('va-radio');
 const radioItem = getWebComponentDocs('va-radio-option');
@@ -20,14 +19,6 @@ export default {
         <StoryDocs
           data={{
             ...radioDocs,
-            guidance: {
-              componentHref: 'form/radio-button',
-              componentName: 'Radio button',
-            },
-            maturity: {
-              category: category.USE,
-              level: level.DEPLOYED,
-            },
           }}
         />
       ),

@@ -1,6 +1,5 @@
 import React from 'react';
 import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
-import { category, level } from './maturity-scale';
 
 const alertExpandableDocs = getWebComponentDocs('va-alert-expandable');
 
@@ -13,14 +12,6 @@ export default {
         <StoryDocs
           data={{
             ...alertExpandableDocs,
-            guidance: {
-              componentHref: 'alert-expandable',
-              componentName: 'Alert expandable',
-            },
-            maturity: {
-              category: category.CAUTION,
-              level: level.CANDIDATE,
-            },
           }}
         />
       ),

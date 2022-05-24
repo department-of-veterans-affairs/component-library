@@ -1,6 +1,5 @@
 import React from 'react';
 import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
-import { category, level } from './maturity-scale';
 
 const tableDocs = getWebComponentDocs('va-table');
 
@@ -13,14 +12,6 @@ export default {
         <StoryDocs
           data={{
             ...tableDocs,
-            guidance: {
-              componentHref: 'table',
-              componentName: 'Table',
-            },
-            maturity: {
-              category: category.USE,
-              level: level.BEST_PRACTICE,
-            },
           }}
         />
       ),

@@ -5,7 +5,6 @@ import {
   propStructure,
   StoryDocs,
 } from './wc-helpers';
-import { category, level } from './maturity-scale';
 
 const accordionDocs = getWebComponentDocs('va-accordion');
 const accordionItem = getWebComponentDocs('va-accordion-item');
@@ -20,14 +19,6 @@ export default {
         <StoryDocs
           data={{
             ...accordionDocs,
-            guidance: {
-              componentHref: 'accordion',
-              componentName: 'Accordion',
-            },
-            maturity: {
-              category: category.USE,
-              level: level.BEST_PRACTICE,
-            },
           }}
         />
       ),
