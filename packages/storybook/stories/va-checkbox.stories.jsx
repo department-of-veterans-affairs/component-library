@@ -23,6 +23,7 @@ export default {
               category: category.USE,
               level: level.DEPLOYED,
             },
+            description: 'This component uses the native onBlur event handler.',
           }}
         />
       ),
