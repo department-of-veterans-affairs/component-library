@@ -146,7 +146,7 @@ export function MaturityScale({ data }) {
   );
 }
 
-export function EventsDescription({ data }) {
+export function CustomEventsDescription({ data }) {
   let events = [];
 
   if (data.events) events = [...data.events];
@@ -155,7 +155,7 @@ export function EventsDescription({ data }) {
 
   return (
     <div className="vads-u-margin-top--2">
-      This component has {events.length}{' '}
+      This component has {events.length} custom{' '}
       {events.length > 1 ? 'events' : 'event'}: {eventNames}. Please see our
       documentation on{' '}
       <a href="https://design.va.gov/about/developers#custom-events">
@@ -189,7 +189,7 @@ export function StoryDocs({ data }) {
       {maturity && <MaturityScale data={maturity} />}
       {guidance && <Guidance data={guidance} />}
       {description && <ComponentDescription data={description} />}
-      {events && <EventsDescription data={data} />}
+      {events && <CustomEventsDescription data={data} />}
       <Description markdown={data.docs} />
       <Primary />
       {(args || isReactComponent) && <ArgsTable story={PRIMARY_STORY} />}
