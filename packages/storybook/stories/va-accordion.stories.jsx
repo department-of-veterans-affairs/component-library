@@ -15,17 +15,7 @@ export default {
   parameters: {
     componentSubtitle: `Accordion web component`,
     docs: {
-      page: () => (
-        <StoryDocs
-          data={{
-            ...accordionDocs,
-            guidance: {
-              componentHref: 'accordion',
-              componentName: 'Accordion',
-            },
-          }}
-        />
-      ),
+      page: () => <StoryDocs data={accordionDocs} />,
     },
   },
 };

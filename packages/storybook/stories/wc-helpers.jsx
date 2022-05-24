@@ -118,12 +118,26 @@ function Guidance({ componentHref, componentName }) {
 }
 
 /**
+ * Capitalizes the first character.
+ * (There's probably a better way of doing this)
+ */
+function capitalize(text) {
+  return `${text[0].toUpperCase()}${text.slice(1)}`;
+}
+
+/**
  * Return a component with Storybook docs blocks in a standard order.
  * Accepts a JSON object as a prop representing component information
  */
 export function StoryDocs({ data, children }) {
   const args = data?.props?.length > 0;
-  const guidance = data?.guidance;
+  const guidance = data?.guidance || {};
+  const tagName = data.tag;
+  // This feels a bit awkward, but I didn't want to use a magic number
+  const componentName = tagName.slice('va-'.length);
+  if (!guidance.componentName)
+    guidance.componentName = capitalize(componentName);
+  if (!guidance.componentHref) guidance.componentHref = componentName;
   const eventsDescription = generateEventsDescription(data);
   return (
     <>
