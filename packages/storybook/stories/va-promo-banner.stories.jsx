@@ -13,7 +13,6 @@ export default {
             ...promoBannerDocs,
             guidance: {
               componentHref: 'promo-banners',
-              componentName: 'Promo banner',
             },
           }}
         />

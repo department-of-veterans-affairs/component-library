@@ -7,17 +7,7 @@ export default {
   title: 'Components/va-back-to-top',
   parameters: {
     docs: {
-      page: () => (
-        <StoryDocs
-          data={{
-            ...bttDocs,
-            guidance: {
-              componentHref: 'back-to-top',
-              componentName: 'Back to top',
-            },
-          }}
-        />
-      ),
+      page: () => <StoryDocs data={bttDocs} />,
     },
     componentSubtitle: `Back to top web component`,
   },

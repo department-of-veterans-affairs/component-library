@@ -24,17 +24,7 @@ export default {
   },
   parameters: {
     docs: {
-      page: () => (
-        <StoryDocs
-          data={{
-            ...alertDocs,
-            guidance: {
-              componentHref: 'alert',
-              componentName: 'Alert',
-            },
-          }}
-        />
-      ),
+      page: () => <StoryDocs data={alertDocs} />,
     },
     componentSubtitle: `Alert web component`,
   },

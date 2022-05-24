@@ -11,17 +11,7 @@ export default {
   parameters: {
     componentSubtitle: 'Search Input web component',
     docs: {
-      page: () => (
-        <StoryDocs
-          data={{
-            ...searchDocs,
-            guidance: {
-              componentHref: 'search-input',
-              componentName: 'Search input',
-            },
-          }}
-        />
-      ),
+      page: () => <StoryDocs data={searchDocs} />,
     },
   },
 };

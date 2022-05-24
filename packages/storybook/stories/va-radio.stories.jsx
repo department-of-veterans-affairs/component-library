@@ -20,7 +20,7 @@ export default {
           data={{
             ...radioDocs,
             guidance: {
-              componentHref: 'radio-button',
+              componentHref: 'form/radio-button',
               componentName: 'Radio buttons',
             },
           }}

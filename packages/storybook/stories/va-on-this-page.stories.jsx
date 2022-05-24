@@ -7,17 +7,7 @@ export default {
   title: 'Components/va-on-this-page',
   parameters: {
     docs: {
-      page: () => (
-        <StoryDocs
-          data={{
-            ...otpDocs,
-            guidance: {
-              componentHref: 'on-this-page',
-              componentName: 'On this page',
-            },
-          }}
-        />
-      ),
+      page: () => <StoryDocs data={otpDocs} />,
     },
   },
 };

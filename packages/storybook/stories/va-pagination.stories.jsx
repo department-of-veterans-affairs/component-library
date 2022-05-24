@@ -10,17 +10,7 @@ export default {
   parameters: {
     componentSubtitle: `Pagination web component`,
     docs: {
-      page: () => (
-        <StoryDocs
-          data={{
-            ...paginationDocs,
-            guidance: {
-              componentHref: 'pagination',
-              componentName: 'Pagination',
-            },
-          }}
-        />
-      ),
+      page: () => <StoryDocs data={paginationDocs} />,
     },
   },
 };

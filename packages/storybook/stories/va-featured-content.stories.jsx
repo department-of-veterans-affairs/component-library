@@ -8,17 +8,7 @@ export default {
   title: 'Components/va-featured-content',
   parameters: {
     docs: {
-      page: () => (
-        <StoryDocs
-          data={{
-            ...featuredContentDocs,
-            guidance: {
-              componentHref: 'featured-content',
-              componentName: 'Featured content',
-            },
-          }}
-        />
-      ),
+      page: () => <StoryDocs data={featuredContentDocs} />,
     },
     componentSubtitle: `Featured content web component`,
   },

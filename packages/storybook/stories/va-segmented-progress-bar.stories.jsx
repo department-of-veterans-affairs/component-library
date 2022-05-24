@@ -16,7 +16,6 @@ export default {
             ...segmentedProgressBarDocs,
             guidance: {
               componentHref: 'progress-bar/segmented',
-              componentName: 'Segmented progress bar',
             },
           }}
         />

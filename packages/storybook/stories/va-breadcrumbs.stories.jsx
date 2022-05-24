@@ -7,17 +7,7 @@ export default {
   title: 'Components/va-breadcrumbs',
   parameters: {
     docs: {
-      page: () => (
-        <StoryDocs
-          data={{
-            ...breadcrumbsDocs,
-            guidance: {
-              componentHref: 'breadcrumbs',
-              componentName: 'Breadcrumbs',
-            },
-          }}
-        />
-      ),
+      page: () => <StoryDocs data={breadcrumbsDocs} />,
     },
   },
 };

@@ -8,17 +8,7 @@ export default {
   parameters: {
     componentSubtitle: `Banner web component`,
     docs: {
-      page: () => (
-        <StoryDocs
-          data={{
-            ...bannerDocs,
-            guidance: {
-              componentHref: 'banner',
-              componentName: 'Banner',
-            },
-          }}
-        />
-      ),
+      page: () => <StoryDocs data={bannerDocs} />,
     },
   },
   argTypes: {

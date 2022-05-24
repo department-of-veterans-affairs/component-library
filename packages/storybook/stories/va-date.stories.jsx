@@ -16,8 +16,7 @@ export default {
           data={{
             ...dateDocs,
             guidance: {
-              componentHref: 'date-input',
-              componentName: 'Date',
+              componentHref: 'form/date-input',
             },
           }}
         />

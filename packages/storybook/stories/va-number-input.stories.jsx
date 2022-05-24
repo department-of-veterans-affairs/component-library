@@ -13,7 +13,7 @@ export default {
           data={{
             ...numberInputDocs,
             guidance: {
-              componentHref: 'number-input',
+              componentHref: 'form/number-input',
               componentName: 'Number Input',
             },
           }}

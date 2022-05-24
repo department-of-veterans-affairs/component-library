@@ -15,7 +15,6 @@ export default {
             ...textareaDocs,
             guidance: {
               componentHref: 'form/textarea',
-              componentName: 'Textarea',
             },
           }}
         />

@@ -14,7 +14,6 @@ export default {
           data={{
             ...loadingIndicatorDocs,
             guidance: {
-              componentHref: 'loading-indicator',
               componentName: 'Loading Indicator',
             },
           }}

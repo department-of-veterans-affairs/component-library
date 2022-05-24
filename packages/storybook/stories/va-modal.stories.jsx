@@ -10,17 +10,7 @@ export default {
   title: 'Components/va-modal',
   parameters: {
     docs: {
-      page: () => (
-        <StoryDocs
-          data={{
-            ...modalDocs,
-            guidance: {
-              componentHref: 'modal',
-              componentName: 'Modal',
-            },
-          }}
-        />
-      ),
+      page: () => <StoryDocs data={modalDocs} />,
     },
     componentSubtitle: `Modal web component`,
   },

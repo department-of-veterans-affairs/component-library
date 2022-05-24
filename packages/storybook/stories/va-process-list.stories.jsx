@@ -8,19 +8,8 @@ export default {
   title: 'Components/va-process-list',
   parameters: {
     docs: {
-      page: () => (
-        <StoryDocs
-          data={{
-            ...processListDocs,
-            guidance: {
-              componentHref: 'process-list',
-              componentName: 'Process list',
-            },
-          }}
-        />
-      ),
+      page: () => <StoryDocs data={processListDocs} />,
     },
-
     componentSubtitle: `Process list web component`,
   },
 };

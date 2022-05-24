@@ -12,17 +12,7 @@ export default {
   title: 'Components/va-table',
   parameters: {
     docs: {
-      page: () => (
-        <StoryDocs
-          data={{
-            ...tableDocs,
-            guidance: {
-              componentHref: 'table',
-              componentName: 'Table',
-            },
-          }}
-        />
-      ),
+      page: () => <StoryDocs data={tableDocs} />,
     },
   },
 };
