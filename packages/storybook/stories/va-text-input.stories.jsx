@@ -1,7 +1,6 @@
 /* eslint-disable react/prop-types */
 import React, { useState } from 'react';
-import { generateEventsDescription } from './events';
-import { getWebComponentDocs, propStructure } from './wc-helpers';
+import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
 
 const textInputDocs = getWebComponentDocs('va-text-input');
 
@@ -10,12 +9,17 @@ export default {
   parameters: {
     componentSubtitle: `Text Input web component`,
     docs: {
-      description: {
-        component:
-          `<a className="vads-c-action-link--blue" href="https://design.va.gov/components/form/text-input">View guidance for the Text Input component in the Design System</a>` +
-          '\n' +
-          generateEventsDescription(textInputDocs),
-      },
+      page: () => (
+        <StoryDocs
+          data={{
+            ...textInputDocs,
+            guidance: {
+              componentHref: 'form/text-input',
+              componentName: 'Text Input',
+            },
+          }}
+        />
+      ),
     },
   },
   argTypes: {
