@@ -130,11 +130,11 @@ export function MaturityScale({ data }) {
     case 'USE WITH CAUTION':
       colors = 'vads-u-background-color--orange vads-u-color--base';
       break;
-    case 'DON’T USE':
+    case "DON'T USE":
       colors = 'vads-u-background-color--secondary-darkest';
       break;
   }
-
+  console.log(colors, level);
   if (!colors || !level) return null;
 
   return (
@@ -181,6 +181,7 @@ export function StoryDocs({ data }) {
   const events = data?.events?.length > 1 || data?.listeners?.length > 1;
   const description = data?.description;
   const isReactComponent = data?.react;
+  console.log(maturity);
 
   return (
     <>
