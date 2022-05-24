@@ -148,7 +148,23 @@ export function MaturityScale({ data }) {
 }
 
 export function EventsDescription({ data }) {
-  return <div className="vads-u-margin-top--2">{data}</div>;
+  let events = [];
+
+  if (data.events) events = [...data.events];
+  if (data.listeners) events = [...events, ...data.listeners];
+  const eventNames = events.map(event => event.event).join(', ');
+
+  return (
+    <div className="vads-u-margin-top--2">
+      This component has {events.length}{' '}
+      {events.length > 1 ? 'events' : 'event'}: {eventNames}. Please see our
+      documentation on{' '}
+      <a href="https://design.va.gov/about/developers#custom-events">
+        how to use web component events
+      </a>
+      .
+    </div>
+  );
 }
 
 export function ComponentDescription({ data }) {
@@ -163,7 +179,7 @@ export function StoryDocs({ data }) {
   const args = data?.props?.length > 0;
   const guidance = data?.guidance;
   const maturity = data?.maturity;
-  const events = generateEventsDescription(data);
+  const events = data?.events?.length > 1 || data?.listeners?.length > 1;
   const description = data?.description;
   const isReactComponent = data?.react;
 
@@ -174,7 +190,7 @@ export function StoryDocs({ data }) {
       {maturity && <MaturityScale data={maturity} />}
       {guidance && <Guidance data={guidance} />}
       {description && <ComponentDescription data={description} />}
-      {events && <EventsDescription data={events} />}
+      {events && <EventsDescription data={data} />}
       <Description markdown={data.docs} />
       <Primary />
       {(args || isReactComponent) && <ArgsTable story={PRIMARY_STORY} />}
