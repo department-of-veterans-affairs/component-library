@@ -105,8 +105,7 @@ export const propStructure = comp => {
 /**
  * Renders an Action link to the Design System
  */
-function Guidance({ data }) {
-  const { componentName, componentHref } = data;
+function Guidance({ componentHref, componentName }) {
   if (!componentName || !componentHref) return null;
   return (
     <a
@@ -130,7 +129,7 @@ export function StoryDocs({ data, children }) {
     <>
       <Title />
       <Subtitle />
-      {guidance && <Guidance data={guidance} />}
+      <Guidance {...guidance} />
       <p>
         Information on this component's accessibility, html output, and how it
         is used within Storybook can be viewed by clicking the Canvas tab.
