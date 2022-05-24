@@ -12,7 +12,6 @@ export default {
           data={{
             ...alertExpandableDocs,
             guidance: {
-              componentHref: 'alert-expandable',
               componentName: 'Alert Expandable',
             },
           }}
