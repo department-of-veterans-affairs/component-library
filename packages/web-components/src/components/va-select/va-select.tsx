@@ -12,6 +12,9 @@ import {
 import i18next from 'i18next';
 import { getSlottedNodes } from '../../utils/utils';
 
+/**
+ * This component uses the native onKeyDown event handler.
+ */
 @Component({
   tag: 'va-select',
   styleUrl: 'va-select.css',

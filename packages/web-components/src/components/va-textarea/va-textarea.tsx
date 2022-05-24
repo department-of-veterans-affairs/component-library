@@ -6,6 +6,9 @@ if (Build.isTesting) {
   i18next.init({ lng: 'cimode' });
 }
 
+/**
+ * This component uses the native onInput and onBlur event handlers.
+ */
 @Component({
   tag: 'va-textarea',
   styleUrl: 'va-textarea.css',

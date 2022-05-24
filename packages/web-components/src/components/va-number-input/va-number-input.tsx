@@ -10,6 +10,9 @@ import {
 } from '@stencil/core';
 import i18next from 'i18next';
 
+/**
+ * This component uses the native onInput and onBlur event handlers
+ */
 @Component({
   tag: 'va-number-input',
   styleUrl: 'va-number-input.css',
