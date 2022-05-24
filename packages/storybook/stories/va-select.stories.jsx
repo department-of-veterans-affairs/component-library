@@ -14,6 +14,9 @@ export default {
         component:
           `<a className="vads-c-action-link--blue" href="https://design.va.gov/components/form/select">View guidance for the Select Box component in the Design System</a>` +
           '\n' +
+          'This component uses the native onKeyDown event handler.' +
+          '\n' +
+          '\n' +
           generateEventsDescription(selectDocs),
       },
     },
