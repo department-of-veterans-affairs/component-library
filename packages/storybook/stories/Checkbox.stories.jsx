@@ -1,9 +1,27 @@
 import React from 'react';
 import Checkbox from '../../react-components/src/components/Checkbox/Checkbox';
+import { StoryDocs } from './wc-helpers';
+import { category, level } from './maturity-scale';
 
 export default {
   title: 'Components/Checkbox',
   component: Checkbox,
+  parameters: {
+    componentSubtitle: 'Checkbox React component',
+    docs: {
+      page: () => (
+        <StoryDocs
+          data={{
+            maturity: {
+              category: category.DONT_USE,
+              level: level.DEPRECATED,
+            },
+            react: true,
+          }}
+        />
+      ),
+    },
+  },
 };
 
 const Template = args => (

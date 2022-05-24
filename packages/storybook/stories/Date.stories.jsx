@@ -1,9 +1,27 @@
 import React, { useEffect, useState } from 'react';
 import { Date } from '@department-of-veterans-affairs/component-library';
+import { StoryDocs } from './wc-helpers';
+import { category, level } from './maturity-scale';
 
 export default {
   title: 'Components/Date',
   component: Date,
+  parameters: {
+    componentSubtitle: 'Date React component',
+    docs: {
+      page: () => (
+        <StoryDocs
+          data={{
+            maturity: {
+              category: category.DONT_USE,
+              level: level.DEPRECATED,
+            },
+            react: true,
+          }}
+        />
+      ),
+    },
+  },
 };
 
 const Template = args => {

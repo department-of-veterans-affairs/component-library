@@ -1,10 +1,27 @@
 import React, { useState } from 'react';
-
 import NumberInput from '../../react-components/src/components/NumberInput/NumberInput';
+import { StoryDocs } from './wc-helpers';
+import { category, level } from './maturity-scale';
 
 export default {
   title: 'Components/NumberInput',
   component: NumberInput,
+  parameters: {
+    componentSubtitle: 'Number input React component',
+    docs: {
+      page: () => (
+        <StoryDocs
+          data={{
+            maturity: {
+              category: category.DONT_USE,
+              level: level.DEPRECATED,
+            },
+            react: true,
+          }}
+        />
+      ),
+    },
+  },
 };
 
 const Template = args => {

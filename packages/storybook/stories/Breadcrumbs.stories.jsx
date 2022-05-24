@@ -1,9 +1,27 @@
 import React from 'react';
 import Breadcrumbs from '../../react-components/src/components/Breadcrumbs/Breadcrumbs';
+import { StoryDocs } from './wc-helpers';
+import { category, level } from './maturity-scale';
 
 export default {
   title: 'Components/Breadcrumbs',
   component: Breadcrumbs,
+  parameters: {
+    componentSubtitle: 'Breadcrumbs React component',
+    docs: {
+      page: () => (
+        <StoryDocs
+          data={{
+            maturity: {
+              category: category.DONT_USE,
+              level: level.DEPRECATED,
+            },
+            react: true,
+          }}
+        />
+      ),
+    },
+  },
 };
 
 const Template = args => (

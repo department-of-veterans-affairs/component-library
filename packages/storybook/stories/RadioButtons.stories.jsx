@@ -1,9 +1,27 @@
 import React, { useState } from 'react';
 import RadioButtons from '../../react-components/src/components/RadioButtons/RadioButtons';
+import { StoryDocs } from './wc-helpers';
+import { category, level } from './maturity-scale';
 
 export default {
   title: 'Components/RadioButtons',
   component: RadioButtons,
+  parameters: {
+    componentSubtitle: 'Radio buttons React component',
+    docs: {
+      page: () => (
+        <StoryDocs
+          data={{
+            maturity: {
+              category: category.DONT_USE,
+              level: level.DEPRECATED,
+            },
+            react: true,
+          }}
+        />
+      ),
+    },
+  },
 };
 
 const Template = args => {

@@ -1,9 +1,27 @@
 import React, { useState } from 'react';
 import Pagination from '../../react-components/src/components/Pagination/Pagination';
+import { StoryDocs } from './wc-helpers';
+import { category, level } from './maturity-scale';
 
 export default {
   title: 'Components/Pagination',
   component: Pagination,
+  parameters: {
+    componentSubtitle: 'Pagination React component',
+    docs: {
+      page: () => (
+        <StoryDocs
+          data={{
+            maturity: {
+              category: category.DONT_USE,
+              level: level.DEPRECATED,
+            },
+            react: true,
+          }}
+        />
+      ),
+    },
+  },
 };
 
 const Template = args => {

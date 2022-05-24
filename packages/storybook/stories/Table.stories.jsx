@@ -1,10 +1,27 @@
 import React from 'react';
-
 import Table from '../../react-components/src/components/Table/Table';
+import { StoryDocs } from './wc-helpers';
+import { category, level } from './maturity-scale';
 
 export default {
   title: 'Components/Table',
   component: Table,
+  parameters: {
+    componentSubtitle: 'Table React component',
+    docs: {
+      page: () => (
+        <StoryDocs
+          data={{
+            maturity: {
+              category: category.DONT_USE,
+              level: level.DEPRECATED,
+            },
+            react: true,
+          }}
+        />
+      ),
+    },
+  },
 };
 
 const Template = args => <Table {...args} />;

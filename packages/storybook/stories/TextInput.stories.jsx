@@ -1,10 +1,27 @@
 import React, { useEffect, useState } from 'react';
-
 import TextInput from '../../react-components/src/components/TextInput/TextInput';
+import { StoryDocs } from './wc-helpers';
+import { category, level } from './maturity-scale';
 
 export default {
   title: 'Components/TextInput (deprecated)',
   component: TextInput,
+  parameters: {
+    componentSubtitle: 'Text input React component',
+    docs: {
+      page: () => (
+        <StoryDocs
+          data={{
+            maturity: {
+              category: category.DONT_USE,
+              level: level.DEPRECATED,
+            },
+            react: true,
+          }}
+        />
+      ),
+    },
+  },
 };
 
 const Template = args => {

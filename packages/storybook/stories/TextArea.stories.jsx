@@ -1,10 +1,27 @@
 import React, { useState } from 'react';
-
 import TextArea from '../../react-components/src/components/TextArea/TextArea';
+import { StoryDocs } from './wc-helpers';
+import { category, level } from './maturity-scale';
 
 export default {
   title: 'Components/TextArea',
   component: TextArea,
+  parameters: {
+    componentSubtitle: 'Textarea React component',
+    docs: {
+      page: () => (
+        <StoryDocs
+          data={{
+            maturity: {
+              category: category.DONT_USE,
+              level: level.DEPRECATED,
+            },
+            react: true,
+          }}
+        />
+      ),
+    },
+  },
 };
 
 const Template = args => {
