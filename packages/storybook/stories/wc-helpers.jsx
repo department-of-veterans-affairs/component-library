@@ -11,7 +11,6 @@ import {
 } from '@storybook/addon-docs/blocks';
 
 import webComponentDocs from '@department-of-veterans-affairs/web-components/component-docs.json';
-import { generateEventsDescription } from './events';
 
 /**
  * Return the JSON object matching a specific component tag
