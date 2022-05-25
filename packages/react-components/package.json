@@ -1,6 +1,7 @@
 {
   "name": "@department-of-veterans-affairs/react-components",
-  "module": "dist/index.js",
+  "main": "dist/index.js",
+  "module": "src/index.js",
   "version": "6.1.2",
   "description": "VA.gov component library in React",
   "keywords": [
