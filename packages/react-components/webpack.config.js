@@ -28,7 +28,7 @@ module.exports = {
     'react-dom': 'react-dom',
     'i18next': 'i18next',
     'i18next-browser-languagedetector': 'i18next-browser-languagedetector',
-    '@department-of-veterans-affairs/web-components':
-      '@department-of-veterans-affairs/web-components',
+    '@department-of-veterans-affairs/web-components/react-bindings':
+      'department-of-veterans-affairs/web-components',
   },
 };
