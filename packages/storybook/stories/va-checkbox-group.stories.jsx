@@ -21,7 +21,7 @@ export default {
       page: () => (
         <StoryDocs
           data={checkBoxGroupDocs}
-          componentHref="checkbox"
+          componentHref="form/checkbox"
           componentName="Checkbox Group"
         />
       ),
