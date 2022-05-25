@@ -37,6 +37,7 @@ export default {
       page: () => (
         <StoryDocs data={telephoneDocs}>
           <Contacts />
+          <br />
         </StoryDocs>
       ),
     },
