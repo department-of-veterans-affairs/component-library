@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-
-import NumberInput from '../../react-components/src/components/NumberInput/NumberInput';
+import { NumberInput } from '@department-of-veterans-affairs/component-library';
 
 export default {
   title: 'Components/NumberInput',

@@ -1,5 +1,5 @@
 import React from 'react';
-import Breadcrumbs from '../../react-components/src/components/Breadcrumbs/Breadcrumbs';
+import { Breadcrumbs } from '@department-of-veterans-affairs/component-library';
 
 export default {
   title: 'Components/Breadcrumbs',

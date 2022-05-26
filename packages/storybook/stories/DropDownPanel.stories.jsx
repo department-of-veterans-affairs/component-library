@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import DropDownPanel from '../../react-components/src/components/DropDownPanel/DropDownPanel';
+import { DropDownPanel } from '@department-of-veterans-affairs/component-library';
 
 export default {
   title: 'Components/DropDownPanel',

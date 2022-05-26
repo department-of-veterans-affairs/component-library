@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-
-import ExpandingGroup from '../../react-components/src/components/ExpandingGroup/ExpandingGroup';
+import { ExpandingGroup } from '@department-of-veterans-affairs/component-library';
 
 export default {
   title: 'Components/ExpandingGroup',

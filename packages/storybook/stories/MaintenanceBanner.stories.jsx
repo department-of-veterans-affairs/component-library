@@ -1,8 +1,7 @@
 /* eslint-disable no-console */
 import React from 'react';
+import { MaintenanceBanner } from '@department-of-veterans-affairs/component-library';
 import { formatDate } from '../../react-components/src/helpers/format-date';
-
-import MaintenanceBanner from '../../react-components/src/components/MaintenanceBanner/MaintenanceBanner';
 
 export default {
   title: 'Components/Banners/MaintenanceBanner',
