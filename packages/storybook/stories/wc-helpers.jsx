@@ -124,14 +124,14 @@ function NativeHandlers({ docsTags }) {
   if (!handlers.length) return null;
 
   return (
-    <p>
+    <div className="vads-u-margin-top--2">
       This component uses the following native handlers:
       <ul>
-        {handlers.map(handlerName => (
-          <li>{handlerName}</li>
+        {handlers.map((handlerName, index) => (
+          <li key={index}>{handlerName}</li>
         ))}
       </ul>
-    </p>
+    </div>
   );
 }
 
