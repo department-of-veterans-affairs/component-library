@@ -116,6 +116,25 @@ function Guidance({ data }) {
   );
 }
 
+function NativeHandlers({ docsTags }) {
+  const handlers = docsTags
+    .filter(item => item.name === 'nativeHandler')
+    .map(item => item.text);
+
+  if (!handlers.length) return null;
+
+  return (
+    <p>
+      This component uses the following native handlers:
+      <ul>
+        {handlers.map(handlerName => (
+          <li>{handlerName}</li>
+        ))}
+      </ul>
+    </p>
+  );
+}
+
 /**
  * Return a component with Storybook docs blocks in a standard order.
  * Accepts a JSON object as a prop representing component information
@@ -129,6 +148,7 @@ export function StoryDocs({ data }) {
       <Subtitle />
       {guidance && <Guidance data={guidance} />}
       <Description markdown={data.docs} />
+      <NativeHandlers docsTags={data.docsTags} />
       <Primary />
       {args && <ArgsTable story={PRIMARY_STORY} />}
       <Stories />

@@ -1,7 +1,6 @@
 /* eslint-disable react/prop-types */
 import React, { useEffect, useState } from 'react';
-import { generateEventsDescription } from './events';
-import { getWebComponentDocs, propStructure } from './wc-helpers';
+import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
 
 const selectDocs = getWebComponentDocs('va-select');
 
@@ -10,12 +9,17 @@ export default {
   parameters: {
     componentSubtitle: 'Select Box web component',
     docs: {
-      description: {
-        component:
-          `<a className="vads-c-action-link--blue" href="https://design.va.gov/components/form/select">View guidance for the Select Box component in the Design System</a>` +
-          '\n' +
-          generateEventsDescription(selectDocs),
-      },
+      page: () => (
+        <StoryDocs
+          data={{
+            ...selectDocs,
+            guidance: {
+              componentName: 'Select Box',
+              componentHref: 'form/select',
+            },
+          }}
+        />
+      ),
     },
   },
 };
