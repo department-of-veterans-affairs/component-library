@@ -51,6 +51,9 @@ module.exports = {
           from: '[\\w]*!(index).js',
           to: '../',
           context: path.resolve(__dirname, '../', 'react-components'),
+          globOptions: {
+            ignore: ['**/webpack.config.js'],
+          },
         },
         {
           from: 'react-bindings/**/*',
