@@ -12,8 +12,6 @@ import {
 
 import webComponentDocs from '@department-of-veterans-affairs/web-components/component-docs.json';
 
-import { generateEventsDescription } from './events';
-
 /**
  * Return the JSON object matching a specific component tag
  */
@@ -137,6 +135,26 @@ function NativeHandlers({ docsTags }) {
   );
 }
 
+export function CustomEventsDescription({ data }) {
+  let events = [];
+
+  if (data.events) events = [...data.events];
+  if (data.listeners) events = [...events, ...data.listeners];
+  const eventNames = events.map(event => event.event).join(', ');
+
+  return (
+    <div className="vads-u-margin-top--2">
+      This component has {events.length} custom{' '}
+      {events.length > 1 ? 'events' : 'event'}: {eventNames}. Please see our
+      documentation on{' '}
+      <a href="https://design.va.gov/about/developers#custom-events">
+        how to use web component events
+      </a>
+      .
+    </div>
+  );
+}
+
 /**
  * Return a component with Storybook docs blocks in a standard order.
  * Accepts a JSON object as a prop representing component information
@@ -144,6 +162,8 @@ function NativeHandlers({ docsTags }) {
 export function StoryDocs({ data }) {
   const args = data?.props?.length > 0;
   const guidance = data?.guidance;
+  const events = data?.events?.length > 0 || data?.listeners?.length > 0;
+
   return (
     <>
       <Title />
@@ -151,7 +171,7 @@ export function StoryDocs({ data }) {
       {guidance && <Guidance data={guidance} />}
       <Description markdown={data.docs} />
       <NativeHandlers docsTags={data.docsTags} />
-      {generateEventsDescription(data)}
+      {events && <CustomEventsDescription data={data} />}
       <Primary />
       {args && <ArgsTable story={PRIMARY_STORY} />}
       <Stories />
