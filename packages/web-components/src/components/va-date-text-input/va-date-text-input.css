@@ -15,6 +15,17 @@
   margin-right: 1.6rem;
 }
 
-.input-month input, .input-day input, .input-year input{
+.input-month input,
+.input-day input,
+.input-year input {
   padding: 0.8rem;
+}
+
+#dateHint {
+  padding: 0.8rem 0 1.6rem;
+}
+
+:host([error]:not([error=''])) #dateHint,
+:host([invalid]) #dateHint {
+  padding: 0.8rem 0 0;
 }

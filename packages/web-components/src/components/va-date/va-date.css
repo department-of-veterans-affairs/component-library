@@ -32,9 +32,9 @@ span.required {
   right: 1.9rem;
 }
 
-:host([error]:not([error=''])) label,
+:host([error]:not([error=''])) legend,
 :host([error]:not([error=''])) span,
-:host([invalid]) label,
+:host([invalid]) legend,
 :host([invalid]) span {
   font-weight: 700;
 }
