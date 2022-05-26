@@ -76,6 +76,15 @@ export class VaDateTextInput {
     this.dateChange.emit(event);
   };
 
+  private handleDateKey = (event: KeyboardEvent) => {
+    // Allow 0-9 and then Backspace and Tab to clear data or move to next field
+    const validKeys = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'Backspace', 'Tab'];
+    if (validKeys.indexOf(event.key) < 0) {
+      event.preventDefault()
+      return false;
+    }
+  };
+
   /**
    * Whether or not an analytics event will be fired.
    */
@@ -100,6 +109,7 @@ export class VaDateTextInput {
       error,
       handleDateBlur,
       handleDateChange,
+      handleDateKey,
       value,
     } = this;
 
@@ -115,9 +125,10 @@ export class VaDateTextInput {
     // Fieldset has an implicit aria role of group
     return (
       <Host value={value} invalid={dateInvalid}>
-        <fieldset aria-label="Select Month and two digit day XX and four digit year format XXXX">
+        <fieldset aria-label="Input month and day fields as two digit XX and four digit year format XXXX">
           <legend>
             {label} {required && <span class="required">(*Required)</span>}
+            <div id="dateHint">Use the following format: MM DD YYYY</div>
           </legend>
           {(error || dateInvalid) && (
             <span class="error-message" role="alert">
@@ -131,11 +142,13 @@ export class VaDateTextInput {
               maxlength={2}
               minlength={2}
               pattern="[0-9]*"
+              aria-describedby="dateHint"
               // Value must be a string
               // Checking is NaN if so provide empty string
               value={month ? month.toString() : ''}
               onInput={handleDateChange}
               onBlur={handleDateBlur}
+              onKeyDown={handleDateKey}
               class="input-month"
               inputmode="numeric"
               type="text"
@@ -146,11 +159,13 @@ export class VaDateTextInput {
               maxlength={2}
               minlength={2}
               pattern="[0-9]*"
+              aria-describedby="dateHint"
               // Value must be a string
               // Checking is NaN if so provide empty string
               value={day ? day.toString() : ''}
               onInput={handleDateChange}
               onBlur={handleDateBlur}
+              onKeyDown={handleDateKey}
               class="input-day"
               inputmode="numeric"
               type="text"
@@ -161,11 +176,13 @@ export class VaDateTextInput {
               maxlength={4}
               minlength={4}
               pattern="[0-9]*"
+              aria-describedby="dateHint"
               // Value must be a string
               // Checking is NaN if so provide empty string
               value={year ? year.toString() : ''}
               onInput={handleDateChange}
               onBlur={handleDateBlur}
+              onKeyDown={handleDateKey}
               class="input-year"
               inputmode="numeric"
               type="text"
