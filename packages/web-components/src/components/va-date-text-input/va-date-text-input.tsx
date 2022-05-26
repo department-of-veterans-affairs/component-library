@@ -147,7 +147,7 @@ export class VaDateTextInput {
               minlength={2}
               pattern="[0-9]*"
               // Value must be a string
-              // Checking is NaN if so provide empty string
+              // if NaN provide empty string
               value={day ? day.toString() : ''}
               onInput={handleDateChange}
               onBlur={handleDateBlur}
