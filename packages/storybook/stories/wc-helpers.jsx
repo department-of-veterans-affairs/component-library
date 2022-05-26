@@ -12,6 +12,8 @@ import {
 
 import webComponentDocs from '@department-of-veterans-affairs/web-components/component-docs.json';
 
+import { generateEventsDescription } from './events';
+
 /**
  * Return the JSON object matching a specific component tag
  */
@@ -149,6 +151,7 @@ export function StoryDocs({ data }) {
       {guidance && <Guidance data={guidance} />}
       <Description markdown={data.docs} />
       <NativeHandlers docsTags={data.docsTags} />
+      {generateEventsDescription(data)}
       <Primary />
       {args && <ArgsTable story={PRIMARY_STORY} />}
       <Stories />
