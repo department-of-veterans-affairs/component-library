@@ -1,11 +1,20 @@
 @import '../va-date/va-date.css';
 
 .input-month {
-  width: 13rem;
-  margin-right: 1.5rem;
+  width: 4.8rem;
+  margin-right: 1.6rem;
 }
 
 .input-day {
-  width: 8rem;
-  margin-right: 1.5rem;
+  width: 4.8rem;
+  margin-right: 1.6rem;
+}
+
+.input-year {
+  width: 7.2rem;
+  margin-right: 1.6rem;
+}
+
+.input-month input, .input-day input, .input-year input{
+  padding: 0.8rem;
 }
