@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0" />
     <title>Stencil Component Starter</title>
 
-    <link rel="stylesheet" href="https://unpkg.com/@department-of-veterans-affairs/formation@6.16.2/dist/formation.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/@department-of-veterans-affairs/formation@8.0.0/dist/formation.min.css">
     <link rel="stylesheet" href="build/component-library.css">
     <script type="module" src="/build/component-library.esm.js"></script>
     <script nomodule src="/build/component-library.js"></script>
@@ -14,10 +14,64 @@
           /* For a little breathing room around the components */
           padding: 4rem;
       }
+      div {
+        padding: 2rem;
+      }
+
+      .vads-u-background-color--primary-darkest :not(a:focus) {
+        color: white;
+      }
+      p {
+        max-width: 300px;
+      }
     </style>
 
   </head>
   <body>
-    <my-component first="Stencil" last="'Don't call me a framework' JS"></my-component>
+    <main>
+    <div>
+      <button class="usa-button">Button</button>
+      <a href="#">Link</a>
+
+      <p>
+      Here is a <a href="#">somewhat decently longish link that wraps</a>
+      so we can see how it looks
+      </p>
+
+      <va-accordion>
+        <va-accordion-item>
+          <h2 slot="headline">An item</h2>
+          <p>Some content</p>
+        </va-accordion-item>
+
+        <va-accordion-item>
+          <h2 slot="headline">Another item</h2>
+          <p>Some more content</p>
+        </va-accordion-item>
+      </va-accordion>
+    </div>
+
+    <div class="vads-u-background-color--primary-darkest" style="--color-gray-lightest: #003e73; --color-gray-dark: white; --color-link-default: white;">
+      <button class="usa-button">Button</button>
+      <a href="#">Link</a>
+
+      <p>
+      Here is a <a href="#">somewhat decently longish link that wraps</a>
+      so we can see how it looks
+      </p>
+
+      <va-accordion>
+        <va-accordion-item>
+          <h2 slot="headline">An item</h2>
+          <p>Some content</p>
+        </va-accordion-item>
+
+        <va-accordion-item>
+          <h2 slot="headline">Another item</h2>
+          <p>Some more content</p>
+        </va-accordion-item>
+      </va-accordion>
+    </div>
+    </main>
   </body>
 </html>
