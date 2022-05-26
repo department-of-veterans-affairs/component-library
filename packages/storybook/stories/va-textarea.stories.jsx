@@ -12,7 +12,10 @@ export default {
     docs: {
       description: {
         component:
-          `<a className="vads-c-action-link--blue" href="https://design.va.gov/components/form/text-inputs#text-area">View guidance for the Textarea component in the Design System</a>` +
+          `<a className="vads-c-action-link--blue" href="https://design.va.gov/components/form/textarea">View guidance for the Textarea component in the Design System</a>` +
+          '\n' +
+          'This component uses the native onInput and onBlur event handlers.' +
+          '\n' +
           '\n' +
           generateEventsDescription(textareaDocs),
       },

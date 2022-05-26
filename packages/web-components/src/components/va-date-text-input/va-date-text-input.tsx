@@ -144,7 +144,7 @@ export class VaDateTextInput {
               pattern="[0-9]*"
               aria-describedby="dateHint"
               // Value must be a string
-              // Checking is NaN if so provide empty string
+              // if NaN provide empty string
               value={month ? month.toString() : ''}
               onInput={handleDateChange}
               onBlur={handleDateBlur}
@@ -161,7 +161,7 @@ export class VaDateTextInput {
               pattern="[0-9]*"
               aria-describedby="dateHint"
               // Value must be a string
-              // Checking is NaN if so provide empty string
+              // if NaN provide empty string
               value={day ? day.toString() : ''}
               onInput={handleDateChange}
               onBlur={handleDateBlur}
@@ -178,7 +178,7 @@ export class VaDateTextInput {
               pattern="[0-9]*"
               aria-describedby="dateHint"
               // Value must be a string
-              // Checking is NaN if so provide empty string
+              // if NaN provide empty string
               value={year ? year.toString() : ''}
               onInput={handleDateChange}
               onBlur={handleDateBlur}

@@ -15,6 +15,9 @@ export default {
         component:
           `<a className="vads-c-action-link--blue" href="https://design.va.gov/components/form/checkbox">View guidance for the Checkbox component in the Design System</a>` +
           '\n' +
+          'This component uses the native onBlur event handler.' +
+          '\n' +
+          '\n' +
           generateEventsDescription(checkboxDocs),
       },
     },
