@@ -48,6 +48,11 @@ module.exports = {
     new CopyPlugin({
       patterns: [
         {
+          from: '[\\w]*!(index).js',
+          to: '../',
+          context: path.resolve(__dirname, '../', 'react-components'),
+        },
+        {
           from: 'react-bindings/**/*',
           to: './',
           context: path.resolve(__dirname, '../', 'web-components'),
