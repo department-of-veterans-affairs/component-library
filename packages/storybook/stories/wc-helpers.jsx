@@ -116,6 +116,11 @@ function Guidance({ data }) {
   );
 }
 
+/**
+ * This function looks for the `@nativeHandler` doc tag and renders
+ * them in a list. Documentation:
+ * - https://stenciljs.com/docs/docs-json#custom-jsdocs-tags
+ */
 function NativeHandlers({ docsTags }) {
   const handlers = docsTags
     .filter(item => item.name === 'nativeHandler')
