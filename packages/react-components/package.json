@@ -20,7 +20,7 @@
     "url": "git+https://github.com/department-of-veterans-affairs/component-library.git"
   },
   "scripts": {
-    "build": "webpack",
+    "build": "node ./scripts/build.js && webpack",
     "prepublishOnly": "pinst --disable && node ./scripts/prepublish.js",
     "postpublish": "pinst --enable",
     "test-debug": "karma start testing/karma.conf.js --browsers Chrome",
