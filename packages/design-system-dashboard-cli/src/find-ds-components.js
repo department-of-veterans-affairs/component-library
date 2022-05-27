@@ -155,9 +155,10 @@ if (require.main === module) {
     { name: 'csv', type: Boolean },
     { name: 'sql', type: Boolean },
     { name: 'update', type: Boolean },
-    { name: 'date',
+    {
+      name: 'date',
       type: String,
-      defaultValue: new Date().toISOString().substr(0, 'xxxx-xx-xx'.length)
+      defaultValue: new Date().toISOString().substr(0, 'xxxx-xx-xx'.length),
     },
     {
       name: 'output',
@@ -172,7 +173,7 @@ if (require.main === module) {
 
   const data = findComponents(options.searchTerms);
 
-  const date = options.date
+  const date = options.date;
   if (options.csv) {
     toCSV(flattenData(data, date), options.output);
   } else if (options.update) {
