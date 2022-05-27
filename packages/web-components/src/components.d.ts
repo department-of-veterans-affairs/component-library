@@ -240,6 +240,24 @@ export namespace Components {
          */
         "setFocus": boolean;
     }
+    interface VaMaintenanceBanner {
+        /**
+          * The content of the banner for downtime.
+         */
+        "downContent": string;
+        /**
+          * A Date object used when downtime expires.
+         */
+        "expiresAt": Date;
+        /**
+          * The title of the banner or downtime
+         */
+        "headline": string;
+        /**
+          * A Date object used when downtime starts
+         */
+        "startsAt": Date;
+    }
     interface VaModal {
         /**
           * Click outside modal will trigger closeEvent
@@ -685,6 +703,12 @@ declare global {
         prototype: HTMLVaLoadingIndicatorElement;
         new (): HTMLVaLoadingIndicatorElement;
     };
+    interface HTMLVaMaintenanceBannerElement extends Components.VaMaintenanceBanner, HTMLStencilElement {
+    }
+    var HTMLVaMaintenanceBannerElement: {
+        prototype: HTMLVaMaintenanceBannerElement;
+        new (): HTMLVaMaintenanceBannerElement;
+    };
     interface HTMLVaModalElement extends Components.VaModal, HTMLStencilElement {
     }
     var HTMLVaModalElement: {
@@ -801,6 +825,7 @@ declare global {
         "va-date": HTMLVaDateElement;
         "va-featured-content": HTMLVaFeaturedContentElement;
         "va-loading-indicator": HTMLVaLoadingIndicatorElement;
+        "va-maintenance-banner": HTMLVaMaintenanceBannerElement;
         "va-modal": HTMLVaModalElement;
         "va-number-input": HTMLVaNumberInputElement;
         "va-on-this-page": HTMLVaOnThisPageElement;
@@ -1118,6 +1143,24 @@ declare namespace LocalJSX {
           * Set to true if the loading indicator should capture focus
          */
         "setFocus"?: boolean;
+    }
+    interface VaMaintenanceBanner {
+        /**
+          * The content of the banner for downtime.
+         */
+        "downContent"?: string;
+        /**
+          * A Date object used when downtime expires.
+         */
+        "expiresAt"?: Date;
+        /**
+          * The title of the banner or downtime
+         */
+        "headline"?: string;
+        /**
+          * A Date object used when downtime starts
+         */
+        "startsAt"?: Date;
     }
     interface VaModal {
         /**
@@ -1582,6 +1625,7 @@ declare namespace LocalJSX {
         "va-date": VaDate;
         "va-featured-content": VaFeaturedContent;
         "va-loading-indicator": VaLoadingIndicator;
+        "va-maintenance-banner": VaMaintenanceBanner;
         "va-modal": VaModal;
         "va-number-input": VaNumberInput;
         "va-on-this-page": VaOnThisPage;
@@ -1618,6 +1662,7 @@ declare module "@stencil/core" {
             "va-date": LocalJSX.VaDate & JSXBase.HTMLAttributes<HTMLVaDateElement>;
             "va-featured-content": LocalJSX.VaFeaturedContent & JSXBase.HTMLAttributes<HTMLVaFeaturedContentElement>;
             "va-loading-indicator": LocalJSX.VaLoadingIndicator & JSXBase.HTMLAttributes<HTMLVaLoadingIndicatorElement>;
+            "va-maintenance-banner": LocalJSX.VaMaintenanceBanner & JSXBase.HTMLAttributes<HTMLVaMaintenanceBannerElement>;
             "va-modal": LocalJSX.VaModal & JSXBase.HTMLAttributes<HTMLVaModalElement>;
             "va-number-input": LocalJSX.VaNumberInput & JSXBase.HTMLAttributes<HTMLVaNumberInputElement>;
             "va-on-this-page": LocalJSX.VaOnThisPage & JSXBase.HTMLAttributes<HTMLVaOnThisPageElement>;
