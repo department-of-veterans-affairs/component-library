@@ -7,7 +7,6 @@ import {
 import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
 
 const telephoneDocs = getWebComponentDocs('va-telephone');
-additionalDocs['va-telephone'];
 
 // This builds the available "CONTACTS" list table
 // Descriptions are available in the contacts.js file
