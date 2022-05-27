@@ -6,14 +6,14 @@ const { AVAILABLE, BEST_PRACTICE, CANDIDATE, DEPLOYED, DEPRECATED, PROPOSED } =
 
 export const additionalDocs = {
   // MDX
-  'ActionLink': {
+  'Action link': {
     guidanceHref: 'link/action',
     guidanceName: 'Action link',
     maturityCategory: USE,
     maturityLevel: DEPLOYED,
   },
   // MDX
-  'AddressBlock': {
+  'Address block': {
     guidanceHref: 'address-block',
     guidanceName: 'Address block',
     maturityCategory: USE,
@@ -29,17 +29,14 @@ export const additionalDocs = {
   'Breadcrumbs': {
     maturityCategory: DONT_USE,
     maturityLevel: DEPRECATED,
-    react: true,
   },
   'Checkbox': {
     maturityCategory: DONT_USE,
     maturityLevel: DEPRECATED,
-    react: true,
   },
   'Date': {
     maturityCategory: DONT_USE,
     maturityLevel: DEPRECATED,
-    react: true,
   },
   // MDX
   'Divider': {
@@ -51,41 +48,34 @@ export const additionalDocs = {
   'Modal': {
     maturityCategory: DONT_USE,
     maturityLevel: DEPRECATED,
-    react: true,
   },
   'NumberInput': {
     maturityCategory: DONT_USE,
     maturityLevel: DEPRECATED,
-    react: true,
   },
   'OMBInfo': {
     guidanceHref: 'omb-info',
     guidanceName: 'OMB info',
     maturityCategory: USE,
     maturityLevel: DEPLOYED,
-    react: true,
   },
   'Pagination': {
     maturityCategory: DONT_USE,
     maturityLevel: DEPRECATED,
-    react: true,
   },
   'ProgressButton': {
     guidanceHref: 'button/progress-button',
     guidanceName: 'Progress button',
     maturityCategory: USE,
     maturityLevel: DEPLOYED,
-    react: true,
   },
   'RadioButtons': {
     maturityCategory: DONT_USE,
     maturityLevel: DEPRECATED,
-    react: true,
   },
   'Select': {
     maturityCategory: DONT_USE,
     maturityLevel: DEPRECATED,
-    react: true,
   },
   // MDX
   'Sidenav': {
@@ -97,7 +87,6 @@ export const additionalDocs = {
   'Table': {
     maturityCategory: DONT_USE,
     maturityLevel: DEPRECATED,
-    react: true,
   },
   // MDX
   'Tag': {
@@ -109,12 +98,10 @@ export const additionalDocs = {
   'TextArea': {
     maturityCategory: DONT_USE,
     maturityLevel: DEPRECATED,
-    react: true,
   },
   'TextInput': {
     maturityCategory: DONT_USE,
     maturityLevel: DEPRECATED,
-    react: true,
   },
   'va-accordion': {
     guidanceHref: 'accordion',
