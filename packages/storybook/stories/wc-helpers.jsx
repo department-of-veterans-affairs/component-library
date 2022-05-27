@@ -169,10 +169,10 @@ export function CustomEventsDescription({ data }) {
   );
 }
 
-export function ComponentDescription({ data }) {
-  if (!data) return null;
+export function ComponentDescription({ description }) {
+  if (!description) return null;
 
-  return <div className="vads-u-margin-top--2">{data}</div>;
+  return <div className="vads-u-margin-top--2">{description}</div>;
 }
 
 /**
@@ -201,8 +201,8 @@ export function StoryDocs({ componentName, data }) {
       <Subtitle />
       <MaturityScale category={maturityCategory} level={maturityLevel} />
       <Guidance href={guidanceHref} name={guidanceName} />
-      <ComponentDescription data={description} />
-      <CustomEventsDescription description={componentData} />
+      <ComponentDescription description={description} />
+      <CustomEventsDescription data={componentData} />
       <Description markdown={data?.docs} />
       <Primary />
       <ArgsTable story={PRIMARY_STORY} />
