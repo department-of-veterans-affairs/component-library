@@ -1,9 +1,16 @@
 import React from 'react';
 import OMBInfo from '../../react-components/src/components/OMBInfo/OMBInfo';
+import { StoryDocs } from './wc-helpers';
 
 export default {
   title: 'Components/OMBInfo',
   component: OMBInfo,
+  parameters: {
+    componentSubtitle: 'OMB info component',
+    docs: {
+      page: () => <StoryDocs componentName="OMBInfo" />,
+    },
+  },
 };
 
 const Template = args => <OMBInfo {...args} />;

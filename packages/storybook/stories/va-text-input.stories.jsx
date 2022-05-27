@@ -1,24 +1,15 @@
 /* eslint-disable react/prop-types */
 import React, { useState } from 'react';
-import { generateEventsDescription } from './events';
-import { getWebComponentDocs, propStructure } from './wc-helpers';
+import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
 
 const textInputDocs = getWebComponentDocs('va-text-input');
 
 export default {
   title: 'Components/va-text-input',
   parameters: {
-    componentSubtitle: `Text Input web component`,
+    componentSubtitle: `Text input web component`,
     docs: {
-      description: {
-        component:
-          `<a className="vads-c-action-link--blue" href="https://design.va.gov/components/form/text-input">View guidance for the Text Input component in the Design System</a>` +
-          '\n' +
-          'This component uses the native onInput and onBlur event handlers.' +
-          '\n' +
-          '\n' +
-          generateEventsDescription(textInputDocs),
-      },
+      page: () => <StoryDocs data={textInputDocs} />,
     },
   },
   argTypes: {

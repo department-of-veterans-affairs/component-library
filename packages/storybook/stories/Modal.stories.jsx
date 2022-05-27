@@ -1,9 +1,16 @@
 import React, { useState } from 'react';
 import Modal from '../../react-components/src/components/Modal/Modal';
+import { StoryDocs } from './wc-helpers';
 
 export default {
   title: 'Components/Modal',
   component: Modal,
+  parameters: {
+    componentSubtitle: 'Modal React component',
+    docs: {
+      page: () => <StoryDocs componentName="Modal" />,
+    },
+  },
 };
 
 const Template = args => {

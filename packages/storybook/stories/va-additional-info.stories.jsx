@@ -1,20 +1,14 @@
 import React from 'react';
-import { getWebComponentDocs, propStructure } from './wc-helpers';
-import { generateEventsDescription } from './events';
+import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
 
 const additionalInfoDocs = getWebComponentDocs('va-additional-info');
 
 export default {
   title: 'Components/va-additional-info',
   parameters: {
-    componentSubtitle: `Additional Info web component`,
+    componentSubtitle: `Additional info web component`,
     docs: {
-      description: {
-        component:
-          `<a className="vads-c-action-link--blue" href="https://design.va.gov/components/additional-info">View guidance for the Additional Info component in the Design System</a>` +
-          '\n' +
-          generateEventsDescription(additionalInfoDocs),
-      },
+      page: () => <StoryDocs data={additionalInfoDocs} />,
     },
     actions: {
       handles: ['component-library-analytics'],

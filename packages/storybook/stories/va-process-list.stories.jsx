@@ -7,21 +7,10 @@ const processListDocs = getWebComponentDocs('va-process-list');
 export default {
   title: 'Components/va-process-list',
   parameters: {
-    docs: {
-      page: () => (
-        <StoryDocs
-          data={{
-            ...processListDocs,
-            guidance: {
-              componentHref: 'process-list',
-              componentName: 'Process list',
-            },
-          }}
-        />
-      ),
-    },
-
     componentSubtitle: `Process list web component`,
+    docs: {
+      page: () => <StoryDocs data={processListDocs} />,
+    },
   },
 };
 

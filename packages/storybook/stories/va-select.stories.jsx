@@ -1,24 +1,15 @@
 /* eslint-disable react/prop-types */
 import React, { useEffect, useState } from 'react';
-import { generateEventsDescription } from './events';
-import { getWebComponentDocs, propStructure } from './wc-helpers';
+import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
 
 const selectDocs = getWebComponentDocs('va-select');
 
 export default {
   title: 'Components/va-select',
   parameters: {
-    componentSubtitle: 'Select Box web component',
+    componentSubtitle: 'Select box web component',
     docs: {
-      description: {
-        component:
-          `<a className="vads-c-action-link--blue" href="https://design.va.gov/components/form/select">View guidance for the Select Box component in the Design System</a>` +
-          '\n' +
-          'This component uses the native onKeyDown event handler.' +
-          '\n' +
-          '\n' +
-          generateEventsDescription(selectDocs),
-      },
+      page: () => <StoryDocs data={selectDocs} />,
     },
   },
 };

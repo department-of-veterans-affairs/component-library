@@ -1,9 +1,9 @@
 import React from 'react';
-import { generateEventsDescription } from './events';
 import {
   getWebComponentDocs,
   componentStructure,
   propStructure,
+  StoryDocs,
 } from './wc-helpers';
 
 const radioDocs = getWebComponentDocs('va-radio');
@@ -13,14 +13,9 @@ export default {
   title: 'Components/va-radio',
   subcomponents: componentStructure(radioItem),
   parameters: {
-    componentSubtitle: `Radio buttons web component`,
+    componentSubtitle: `Radio button web component`,
     docs: {
-      description: {
-        component:
-          `<a className="vads-c-action-link--blue" href="https://design.va.gov/components/form/radio-button">View guidance for the Radio buttons component in the Design System</a>` +
-          '\n' +
-          generateEventsDescription(radioDocs),
-      },
+      page: () => <StoryDocs data={radioDocs} />,
     },
   },
 };

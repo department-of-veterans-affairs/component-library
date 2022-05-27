@@ -1,10 +1,16 @@
 import React, { useState } from 'react';
-
 import TextArea from '../../react-components/src/components/TextArea/TextArea';
+import { StoryDocs } from './wc-helpers';
 
 export default {
   title: 'Components/TextArea',
   component: TextArea,
+  parameters: {
+    componentSubtitle: 'Textarea React component',
+    docs: {
+      page: () => <StoryDocs componentName="TextArea" />,
+    },
+  },
 };
 
 const Template = args => {
