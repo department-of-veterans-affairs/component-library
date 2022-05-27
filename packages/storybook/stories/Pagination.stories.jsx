@@ -8,13 +8,7 @@ export default {
   parameters: {
     componentSubtitle: 'Pagination React component',
     docs: {
-      page: () => (
-        <StoryDocs
-          data={{
-            componentName: 'Pagination',
-          }}
-        />
-      ),
+      page: () => <StoryDocs componentName="Pagination" />,
     },
   },
 };

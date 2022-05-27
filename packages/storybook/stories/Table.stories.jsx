@@ -8,13 +8,7 @@ export default {
   parameters: {
     componentSubtitle: 'Table React component',
     docs: {
-      page: () => (
-        <StoryDocs
-          data={{
-            componentName: 'Table',
-          }}
-        />
-      ),
+      page: () => <StoryDocs componentName="Table" />,
     },
   },
 };

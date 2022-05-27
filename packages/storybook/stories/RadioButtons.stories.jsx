@@ -8,13 +8,7 @@ export default {
   parameters: {
     componentSubtitle: 'Radio buttons React component',
     docs: {
-      page: () => (
-        <StoryDocs
-          data={{
-            componentName: 'RadioButtons',
-          }}
-        />
-      ),
+      page: () => <StoryDocs componentName="RadioButtons" />,
     },
   },
 };

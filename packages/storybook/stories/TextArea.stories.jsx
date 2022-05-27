@@ -8,13 +8,7 @@ export default {
   parameters: {
     componentSubtitle: 'Textarea React component',
     docs: {
-      page: () => (
-        <StoryDocs
-          data={{
-            componentName: 'TextArea',
-          }}
-        />
-      ),
+      page: () => <StoryDocs componentName="TextArea" />,
     },
   },
 };

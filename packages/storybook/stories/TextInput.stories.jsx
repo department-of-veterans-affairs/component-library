@@ -1,21 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import TextInput from '../../react-components/src/components/TextInput/TextInput';
 import { StoryDocs } from './wc-helpers';
-import { category, level } from './maturity-scale';
 
 export default {
-  title: 'Components/TextInput (deprecated)',
+  title: 'Components/TextInput',
   component: TextInput,
   parameters: {
     componentSubtitle: 'Text input React component',
     docs: {
-      page: () => (
-        <StoryDocs
-          data={{
-            componentName: 'TextInput',
-          }}
-        />
-      ),
+      page: () => <StoryDocs componentName="TextInput" />,
     },
   },
 };

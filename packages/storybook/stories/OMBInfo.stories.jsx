@@ -8,13 +8,7 @@ export default {
   parameters: {
     componentSubtitle: 'OMB info component',
     docs: {
-      page: () => (
-        <StoryDocs
-          data={{
-            componentName: 'OMBInfo',
-          }}
-        />
-      ),
+      page: () => <StoryDocs componentName="OMBInfo" />,
     },
   },
 };

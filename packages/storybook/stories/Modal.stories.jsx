@@ -8,13 +8,7 @@ export default {
   parameters: {
     componentSubtitle: 'Modal React component',
     docs: {
-      page: () => (
-        <StoryDocs
-          data={{
-            componentName: 'Modal',
-          }}
-        />
-      ),
+      page: () => <StoryDocs componentName="Modal" />,
     },
   },
 };
