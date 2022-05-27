@@ -220,7 +220,7 @@ function CanvasLink() {
 export function StoryDocs({ componentName, data, children }) {
   const component = componentName || data?.tag;
   const componentDocs = additionalDocs?.[component];
-  const componentData = data ? Object.assign(data, componentDocs) : null;
+  const componentData = data ? { ...data, ...componentDocs } : null;
 
   const maturityCategory = componentDocs?.maturityCategory;
   const maturityLevel = componentDocs?.maturityLevel;
