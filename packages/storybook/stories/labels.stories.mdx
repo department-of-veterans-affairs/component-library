@@ -12,8 +12,14 @@ import { additionalDocs } from './additional-docs';
 
 <Title>Tag</Title>
 <Subtitle>Tag component</Subtitle>
-<MaturityScale data={additionalDocs['Tag']} />
-<Guidance data={additionalDocs['Tag']} />
+<MaturityScale
+  category={additionalDocs['Tag'].maturityCategory}
+  level={additionalDocs['Tag'].maturityLevel}
+/>
+<Guidance
+  href={additionalDocs['Tag'].guidanceHref}
+  name={additionalDocs['Tag'].guidanceName}
+/>
 
 ## Stories
 

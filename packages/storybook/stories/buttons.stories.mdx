@@ -9,12 +9,18 @@ import { Guidance, MaturityScale } from './wc-helpers';
 import { additionalDocs } from './additional-docs';
 import './buttons.style.scss';
 
-<Meta title="Components/Buttons" />
+<Meta title="Components/Button" />
 
 <Title>Button</Title>
 <Subtitle>Button component</Subtitle>
-<MaturityScale data={additionalDocs['Button']} />
-<Guidance data={additionalDocs['Button']} />
+<MaturityScale
+  category={additionalDocs['Button'].maturityCategory}
+  level={additionalDocs['Button'].maturityLevel}
+/>
+<Guidance
+  href={additionalDocs['Button'].guidanceHref}
+  name={additionalDocs['Button'].guidanceName}
+/>
 
 ## Stories
 

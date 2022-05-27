@@ -12,8 +12,14 @@ import { additionalDocs } from './additional-docs';
 
 <Title>Sidenav</Title>
 <Subtitle>Sidenav component</Subtitle>
-<MaturityScale data={additionalDocs['Sidenav']} />
-<Guidance data={additionalDocs['Sidenav']} />
+<MaturityScale
+  category={additionalDocs['Sidenav'].maturityCategory}
+  level={additionalDocs['Sidenav'].maturityLevel}
+/>
+<Guidance
+  href={additionalDocs['Sidenav'].guidanceHref}
+  name={additionalDocs['Sidenav'].guidanceName}
+/>
 
 ## Stories
 

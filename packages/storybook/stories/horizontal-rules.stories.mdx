@@ -12,8 +12,14 @@ import { additionalDocs } from './additional-docs';
 
 <Title>Divider</Title>
 <Subtitle>Divider component</Subtitle>
-<MaturityScale data={additionalDocs['Divider']} />
-<Guidance data={additionalDocs['Divider']} />
+<MaturityScale
+  category={additionalDocs['Divider'].maturityCategory}
+  level={additionalDocs['Divider'].maturityLevel}
+/>
+<Guidance
+  href={additionalDocs['Divider'].guidanceHref}
+  name={additionalDocs['Divider'].guidanceName}
+/>
 
 ## Stories
 

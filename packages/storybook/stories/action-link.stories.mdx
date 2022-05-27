@@ -12,8 +12,14 @@ import { additionalDocs } from './additional-docs';
 
 <Title>Action link</Title>
 <Subtitle>Action link component</Subtitle>
-<MaturityScale data={additionalDocs['ActionLink']} />
-<Guidance data={additionalDocs['ActionLink']} />
+<MaturityScale
+  category={additionalDocs['Action link'].maturityCategory}
+  level={additionalDocs['Action link'].maturityLevel}
+/>
+<Guidance
+  href={additionalDocs['Action link'].guidanceHref}
+  name={additionalDocs['Action link'].guidanceName}
+/>
 
 ## Stories
 

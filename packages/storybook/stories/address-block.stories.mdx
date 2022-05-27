@@ -12,8 +12,14 @@ import { additionalDocs } from './additional-docs';
 
 <Title>Address block</Title>
 <Subtitle>Address block component</Subtitle>
-<MaturityScale data={additionalDocs['AddressBlock']} />
-<Guidance data={additionalDocs['AddressBlock']} />
+<MaturityScale
+  category={additionalDocs['Address block'].maturityCategory}
+  level={additionalDocs['Address block'].maturityLevel}
+/>
+<Guidance
+  href={additionalDocs['Address block'].guidanceHref}
+  name={additionalDocs['Address block'].guidanceName}
+/>
 
 ## Stories
 
