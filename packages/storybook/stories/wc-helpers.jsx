@@ -226,7 +226,7 @@ export function StoryDocs({ componentName, data, children }) {
   const maturityLevel = componentDocs?.maturityLevel;
   // This feels a bit awkward, but I didn't want to use a magic number
   const _componentName = data?.tag?.slice('va-'.length);
-  // Default the guidance values to be based on the web comopnent's
+  // Default the guidance values to be based on the web component's
   // tag name where possible
   const {
     guidanceHref = _componentName,
