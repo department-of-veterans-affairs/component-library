@@ -129,7 +129,7 @@ function findComponents(searchStrings) {
   );
 
   const usedBindingsRegex =
-    /import { ([^;]+) } from '(?:@department-of-veterans-affairs\/)?web-components\/react-bindings'/gms;
+    /import { ([^;]+) } from '@department-of-veterans-affairs\/component-library\/dist\/react-bindings'/gms;
   const usedReactBindings = findUsedReactComponents(
     vwModules,
     usedBindingsRegex
