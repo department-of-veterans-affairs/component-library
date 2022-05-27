@@ -1,5 +1,6 @@
 import React from 'react';
 import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
+
 const additionalInfoDocs = getWebComponentDocs('va-additional-info');
 
 export default {

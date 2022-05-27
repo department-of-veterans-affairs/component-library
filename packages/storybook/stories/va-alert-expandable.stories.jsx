@@ -1,5 +1,6 @@
 import React from 'react';
 import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
+
 const alertExpandableDocs = getWebComponentDocs('va-alert-expandable');
 
 export default {
