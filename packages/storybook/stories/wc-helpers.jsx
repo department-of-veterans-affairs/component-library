@@ -104,33 +104,26 @@ export const propStructure = comp => {
 /**
  * Renders an Action link to the Design System
  */
-export function Guidance({ data }) {
-  if (!data) return null;
-
-  const { guidanceName, guidanceHref } = data;
-  if (!guidanceName || !guidanceHref) return null;
+export function Guidance({ href, name }) {
+  if (!href || !name) return null;
 
   return (
     <div className="vads-u-margin-bottom--5">
       <a
         className="vads-c-action-link--blue"
-        href={`https://design.va.gov/components/${guidanceHref}`}
+        href={`https://design.va.gov/components/${href}`}
       >
-        View guidance for the {guidanceName} component in the Design System
+        View guidance for the {name} component in the Design System
       </a>
     </div>
   );
 }
 
-export function MaturityScale({ data }) {
-  if (!data) return null;
-
-  const { maturityCategory, maturityLevel } = data;
-  if (!maturityCategory || !maturityLevel) return null;
+export function MaturityScale({ category, level }) {
+  if (!category || !level) return null;
 
   let colors;
-
-  switch (maturityCategory) {
+  switch (category) {
     case 'USE':
       colors = 'vads-u-background-color--green-darker';
       break;
@@ -147,15 +140,18 @@ export function MaturityScale({ data }) {
   return (
     <div className="vads-u-margin-bottom--3">
       <span className={`usa-label ${colors}`}>
-        {maturityCategory}: {maturityLevel}
+        {category}: {level}
       </span>
     </div>
   );
 }
 
 export function CustomEventsDescription({ data }) {
-  let events = [];
+  if (!data || (data?.events?.length === 0 && data?.listeners?.length === 0)) {
+    return null;
+  }
 
+  let events = [];
   if (data.events) events = [...data.events];
   if (data.listeners) events = [...events, ...data.listeners];
   const eventNames = events.map(event => event.event).join(', ');
@@ -174,6 +170,8 @@ export function CustomEventsDescription({ data }) {
 }
 
 export function ComponentDescription({ data }) {
+  if (!data) return null;
+
   return <div className="vads-u-margin-top--2">{data}</div>;
 }
 
@@ -181,39 +179,38 @@ export function ComponentDescription({ data }) {
  * Return a component with Storybook docs blocks in a standard order.
  * Accepts a JSON object as a prop representing component information
  */
-export function StoryDocs({ data }) {
-  // if it's a wc, it'll have a tag; otherwise, pass in component name
-  const componentName = data?.tag || data?.componentName;
-  const otherDocs = additionalDocs[componentName];
-  let updatedData;
+export function StoryDocs({ componentName, data }) {
+  let componentData = data;
 
-  if (otherDocs) {
-    updatedData = { ...data, ...otherDocs };
+  const component = componentName || data?.tag;
+  const componentDocs = additionalDocs?.[component];
+
+  if (componentData && componentDocs) {
+    componentData = { ...data, ...componentDocs };
   }
 
-  const args = data?.props?.length > 0;
-  const events = data?.events?.length > 0 || data?.listeners?.length > 0;
-
-  const guidance = updatedData?.guidanceHref && updatedData?.guidanceName;
-  const maturity = updatedData?.maturityCategory && updatedData?.maturityLevel;
-  const description = updatedData?.description;
-  const isReactComponent = updatedData?.react;
+  const maturityCategory = componentDocs?.maturityCategory;
+  const maturityLevel = componentDocs?.maturityLevel;
+  const guidanceName = componentDocs?.guidanceName || componentName;
+  const guidanceHref = componentDocs?.guidanceHref;
+  const description = componentDocs?.description;
 
   return (
     <>
       <Title />
       <Subtitle />
-      {maturity && <MaturityScale data={updatedData} />}
-      {guidance && <Guidance data={updatedData} />}
-      {description && <ComponentDescription data={description} />}
-      {events && <CustomEventsDescription data={data} />}
-      <Description markdown={data.docs} />
+      <MaturityScale category={maturityCategory} level={maturityLevel} />
+      <Guidance href={guidanceHref} name={guidanceName} />
+      <ComponentDescription data={description} />
+      <CustomEventsDescription description={componentData} />
+      <Description markdown={data?.docs} />
       <Primary />
-      {(args || isReactComponent) && <ArgsTable story={PRIMARY_STORY} />}
+      <ArgsTable story={PRIMARY_STORY} />
       <Stories />
     </>
   );
 }
 StoryDocs.propTypes = {
-  data: PropTypes.object.isRequired,
+  componentName: PropTypes.string,
+  data: PropTypes.object,
 };
