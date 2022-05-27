@@ -1,6 +1,7 @@
 import { addons } from '@storybook/addons';
 import React from 'react';
 import { additionalDocs } from '../stories/additional-docs';
+import { category } from '../stories/maturity-scale';
 
 addons.setConfig({
   enableShortcuts: false,
@@ -17,13 +18,13 @@ addons.setConfig({
 
         let backgroundColor;
         switch (maturityCategory) {
-          case 'USE':
+          case category.USE:
             backgroundColor = '#195c27';
             break;
-          case 'USE WITH CAUTION':
+          case category.CAUTION:
             backgroundColor = '#eb7f29';
             break;
-          case "DON'T USE":
+          case category.DONT_USE:
             backgroundColor = '#981b1e';
             break;
         }
