@@ -10,13 +10,7 @@ export default {
   parameters: {
     componentSubtitle: `Segmented progress bar web component`,
     docs: {
-      page: () => (
-        <StoryDocs
-          data={{
-            ...segmentedProgressBarDocs,
-          }}
-        />
-      ),
+      page: () => <StoryDocs data={segmentedProgressBarDocs} />,
     },
   },
 };

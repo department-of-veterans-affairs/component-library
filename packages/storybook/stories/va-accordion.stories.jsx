@@ -15,13 +15,7 @@ export default {
   parameters: {
     componentSubtitle: `Accordion web component`,
     docs: {
-      page: () => (
-        <StoryDocs
-          data={{
-            ...accordionDocs,
-          }}
-        />
-      ),
+      page: () => <StoryDocs data={accordionDocs} />,
     },
   },
 };

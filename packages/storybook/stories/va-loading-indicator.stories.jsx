@@ -9,13 +9,7 @@ export default {
   parameters: {
     componentSubtitle: `Loading indicator web component`,
     docs: {
-      page: () => (
-        <StoryDocs
-          data={{
-            ...loadingIndicatorDocs,
-          }}
-        />
-      ),
+      page: () => <StoryDocs data={loadingIndicatorDocs} />,
     },
     actions: {
       handles: ['component-library-analytics'],

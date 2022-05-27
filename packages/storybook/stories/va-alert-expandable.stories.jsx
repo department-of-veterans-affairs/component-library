@@ -8,13 +8,7 @@ export default {
   parameters: {
     componentSubtitle: `Alert expandable web component`,
     docs: {
-      page: () => (
-        <StoryDocs
-          data={{
-            ...alertExpandableDocs,
-          }}
-        />
-      ),
+      page: () => <StoryDocs data={alertExpandableDocs} />,
     },
     actions: {
       handles: ['component-library-analytics'],

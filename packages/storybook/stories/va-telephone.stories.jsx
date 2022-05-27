@@ -22,7 +22,9 @@ import {
 import { additionalDocs } from './additional-docs';
 
 const telephoneDocs = getWebComponentDocs('va-telephone');
-//
+const { guidanceHref, guidanceName, maturityCategory, maturityLevel } =
+  additionalDocs['va-telephone'];
+
 // This builds the available "CONTACTS" list table
 // Descriptions are available in the contacts.js file
 const fields = [
@@ -45,8 +47,8 @@ const Page = () => (
   <>
     <Title />
     <Subtitle>Telephone web component</Subtitle>
-    <MaturityScale data={additionalDocs['va-telephone']} />
-    <Guidance data={additionalDocs['va-telephone']} />
+    <MaturityScale category={maturityCategory} level={maturityLevel} />
+    <Guidance href={guidanceHref} name={guidanceName} />
     <Description />
     <Primary />
     <ArgsTable story={PRIMARY_STORY} />

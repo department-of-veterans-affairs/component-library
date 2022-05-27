@@ -8,13 +8,7 @@ export default {
   parameters: {
     componentSubtitle: `Additional info web component`,
     docs: {
-      page: () => (
-        <StoryDocs
-          data={{
-            ...additionalInfoDocs,
-          }}
-        />
-      ),
+      page: () => <StoryDocs data={additionalInfoDocs} />,
     },
     actions: {
       handles: ['component-library-analytics'],

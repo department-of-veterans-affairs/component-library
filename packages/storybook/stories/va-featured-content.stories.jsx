@@ -9,13 +9,7 @@ export default {
   parameters: {
     componentSubtitle: `Featured content web component`,
     docs: {
-      page: () => (
-        <StoryDocs
-          data={{
-            ...featuredContentDocs,
-          }}
-        />
-      ),
+      page: () => <StoryDocs data={featuredContentDocs} />,
     },
   },
 };

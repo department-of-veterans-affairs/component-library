@@ -8,13 +8,7 @@ export default {
   parameters: {
     componentSubtitle: 'Table web component',
     docs: {
-      page: () => (
-        <StoryDocs
-          data={{
-            ...tableDocs,
-          }}
-        />
-      ),
+      page: () => <StoryDocs data={tableDocs} />,
     },
   },
 };

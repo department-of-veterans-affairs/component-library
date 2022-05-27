@@ -9,13 +9,7 @@ export default {
   parameters: {
     componentSubtitle: 'Select box web component',
     docs: {
-      page: () => (
-        <StoryDocs
-          data={{
-            ...selectDocs,
-          }}
-        />
-      ),
+      page: () => <StoryDocs data={selectDocs} />,
     },
   },
 };

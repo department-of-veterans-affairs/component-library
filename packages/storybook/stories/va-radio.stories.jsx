@@ -15,13 +15,7 @@ export default {
   parameters: {
     componentSubtitle: `Radio button web component`,
     docs: {
-      page: () => (
-        <StoryDocs
-          data={{
-            ...radioDocs,
-          }}
-        />
-      ),
+      page: () => <StoryDocs data={radioDocs} />,
     },
   },
 };

@@ -10,13 +10,7 @@ export default {
   parameters: {
     componentSubtitle: `Checkbox web component`,
     docs: {
-      page: () => (
-        <StoryDocs
-          data={{
-            ...checkboxDocs,
-          }}
-        />
-      ),
+      page: () => <StoryDocs data={checkboxDocs} />,
     },
   },
 };

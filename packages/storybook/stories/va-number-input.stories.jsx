@@ -8,13 +8,7 @@ export default {
   parameters: {
     componentSubtitle: `Number input web component`,
     docs: {
-      page: () => (
-        <StoryDocs
-          data={{
-            ...numberInputDocs,
-          }}
-        />
-      ),
+      page: () => <StoryDocs data={numberInputDocs} />,
     },
   },
   argTypes: {

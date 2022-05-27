@@ -8,13 +8,7 @@ export default {
   parameters: {
     componentSubtitle: 'Promo banner web component',
     docs: {
-      page: () => (
-        <StoryDocs
-          data={{
-            ...promoBannerDocs,
-          }}
-        />
-      ),
+      page: () => <StoryDocs data={promoBannerDocs} />,
     },
   },
   argTypes: {

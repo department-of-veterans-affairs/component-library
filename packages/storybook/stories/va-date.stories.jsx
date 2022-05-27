@@ -11,13 +11,7 @@ export default {
   parameters: {
     componentSubtitle: `Date web component`,
     docs: {
-      page: () => (
-        <StoryDocs
-          data={{
-            ...dateDocs,
-          }}
-        />
-      ),
+      page: () => <StoryDocs data={dateDocs} />,
     },
   },
 };

@@ -11,13 +11,7 @@ export default {
   parameters: {
     componentSubtitle: `Modal web component`,
     docs: {
-      page: () => (
-        <StoryDocs
-          data={{
-            ...modalDocs,
-          }}
-        />
-      ),
+      page: () => <StoryDocs data={modalDocs} />,
     },
   },
   argTypes: {

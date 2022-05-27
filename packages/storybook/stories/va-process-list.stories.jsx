@@ -9,13 +9,7 @@ export default {
   parameters: {
     componentSubtitle: `Process list web component`,
     docs: {
-      page: () => (
-        <StoryDocs
-          data={{
-            ...processListDocs,
-          }}
-        />
-      ),
+      page: () => <StoryDocs data={processListDocs} />,
     },
   },
 };

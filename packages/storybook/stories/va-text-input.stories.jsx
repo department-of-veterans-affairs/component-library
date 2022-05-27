@@ -9,13 +9,7 @@ export default {
   parameters: {
     componentSubtitle: `Text input web component`,
     docs: {
-      page: () => (
-        <StoryDocs
-          data={{
-            ...textInputDocs,
-          }}
-        />
-      ),
+      page: () => <StoryDocs data={textInputDocs} />,
     },
   },
   argTypes: {

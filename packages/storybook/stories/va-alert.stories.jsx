@@ -25,13 +25,7 @@ export default {
   parameters: {
     componentSubtitle: `Alert web component`,
     docs: {
-      page: () => (
-        <StoryDocs
-          data={{
-            ...alertDocs,
-          }}
-        />
-      ),
+      page: () => <StoryDocs data={alertDocs} />,
     },
   },
 };

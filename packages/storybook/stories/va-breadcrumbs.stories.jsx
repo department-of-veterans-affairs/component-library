@@ -8,13 +8,7 @@ export default {
   parameters: {
     componentSubtitle: 'Breadcrumbs web component',
     docs: {
-      page: () => (
-        <StoryDocs
-          data={{
-            ...breadcrumbsDocs,
-          }}
-        />
-      ),
+      page: () => <StoryDocs data={breadcrumbsDocs} />,
     },
   },
 };

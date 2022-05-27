@@ -8,13 +8,7 @@ export default {
   parameters: {
     componentSubtitle: `Back to top web component`,
     docs: {
-      page: () => (
-        <StoryDocs
-          data={{
-            ...bttDocs,
-          }}
-        />
-      ),
+      page: () => <StoryDocs data={bttDocs} />,
     },
   },
 };

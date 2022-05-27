@@ -8,13 +8,7 @@ export default {
   parameters: {
     componentSubtitle: 'On this page web component',
     docs: {
-      page: () => (
-        <StoryDocs
-          data={{
-            ...otpDocs,
-          }}
-        />
-      ),
+      page: () => <StoryDocs data={otpDocs} />,
     },
   },
 };

@@ -8,13 +8,7 @@ export default {
   parameters: {
     componentSubtitle: `Progress bar web component`,
     docs: {
-      page: () => (
-        <StoryDocs
-          data={{
-            ...progressBarDocs,
-          }}
-        />
-      ),
+      page: () => <StoryDocs data={progressBarDocs} />,
     },
   },
 };

@@ -11,13 +11,7 @@ export default {
   parameters: {
     componentSubtitle: 'Search input web component',
     docs: {
-      page: () => (
-        <StoryDocs
-          data={{
-            ...searchDocs,
-          }}
-        />
-      ),
+      page: () => <StoryDocs data={searchDocs} />,
     },
   },
 };
