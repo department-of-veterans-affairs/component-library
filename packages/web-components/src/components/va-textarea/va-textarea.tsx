@@ -7,7 +7,8 @@ if (Build.isTesting) {
 }
 
 /**
- * This component uses the native onInput and onBlur event handlers.
+ * @nativeHandler onInput
+ * @nativeHandler onBlur
  */
 @Component({
   tag: 'va-textarea',

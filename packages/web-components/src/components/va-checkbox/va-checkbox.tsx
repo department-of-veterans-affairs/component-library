@@ -9,7 +9,7 @@ import {
 } from '@stencil/core';
 
 /**
- * This component uses the native onBlur event handler.
+ * @nativeHandler onBlur
  */
 @Component({
   tag: 'va-checkbox',

@@ -11,7 +11,8 @@ import {
 import i18next from 'i18next';
 
 /**
- * This component uses the native onInput and onBlur event handlers
+ * @nativeHandler onInput
+ * @nativeHandler onBlur
  */
 @Component({
   tag: 'va-number-input',

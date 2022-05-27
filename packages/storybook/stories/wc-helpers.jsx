@@ -178,6 +178,30 @@ function capitalize(text) {
 }
 
 /**
+ * This function looks for the `@nativeHandler` doc tag and renders
+ * them in a list. Documentation:
+ * - https://stenciljs.com/docs/docs-json#custom-jsdocs-tags
+ */
+function NativeHandlers({ docsTags = [] }) {
+  const handlers = docsTags
+    .filter(item => item.name === 'nativeHandler')
+    .map(item => item.text);
+
+  if (!handlers.length) return null;
+
+  return (
+    <div className="vads-u-margin-top--2">
+      This component uses the following native handlers:
+      <ul>
+        {handlers.map((handlerName, index) => (
+          <li key={index}>{handlerName}</li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+/**
  * Return a component with Storybook docs blocks in a standard order.
  * Accepts a JSON object as a prop representing component information
  */
@@ -219,6 +243,7 @@ export function StoryDocs({ componentName, data, children }) {
       <Guidance href={guidanceHref} name={guidanceName} />
       <CustomEventsDescription data={componentData} />
       <Description markdown={data?.docs} />
+      <NativeHandlers docsTags={data?.docsTags} />
       <Primary />
       <ArgsTable story={PRIMARY_STORY} />
       <>{children}</>
