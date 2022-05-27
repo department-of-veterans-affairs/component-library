@@ -123,8 +123,6 @@ export const additionalDocs = {
   'va-alert': {
     guidanceHref: 'alert',
     guidanceName: 'Alert',
-    description: `Use a heading element with an attribute named slot and a value of "headline" to control what is displayed for the alert's headline. 
-    Any children passed into this component without a parent slot "headline" will render in the alert's body.`,
     maturityCategory: USE,
     maturityLevel: BEST_PRACTICE,
   },
@@ -143,10 +141,6 @@ export const additionalDocs = {
   'va-banner': {
     guidanceHref: 'banner',
     guidanceName: 'Banner',
-    description:
-      `Reset the banners in storage by opening Developer Tools in the browser and then clicking on the Application Tab. ` +
-      `Under Storage you will see both Local and Session Storage check each Storage to see if a DISMISSED_BANNERS Key exists. ` +
-      `If it does right click and delete it and refresh your page to see the banners again.`,
     maturityCategory: USE,
     maturityLevel: DEPLOYED,
   },
@@ -159,7 +153,6 @@ export const additionalDocs = {
   'va-checkbox': {
     guidanceHref: 'form/checkbox',
     guidanceName: 'Checkbox',
-    description: 'This component uses the native onBlur event handler.',
     maturityCategory: USE,
     maturityLevel: DEPLOYED,
   },
@@ -196,8 +189,6 @@ export const additionalDocs = {
   'va-number-input': {
     guidanceHref: 'form/number-input',
     guidanceName: 'Number input',
-    description:
-      'This component uses the native onInput and onBlur event handlers.',
     maturityCategory: USE,
     maturityLevel: DEPLOYED,
   },
@@ -230,11 +221,6 @@ export const additionalDocs = {
     guidanceName: 'Promo banner',
     maturityCategory: USE,
     maturityLevel: DEPLOYED,
-    description:
-      `Reset the banner in storage by opening Developer Tools in the browser and then clicking on the Application Tab. ` +
-      `Under Storage you will see Local Storage and check the Storage to see if a DISMISSED_PROMO_BANNERS Key exists. ` +
-      `If it does right click and delete it and refresh your page to see the banner again. ` +
-      `Alternatively you can change the id on the component since the new id would not match the id in storage.`,
   },
   'va-radio': {
     guidanceHref: 'form/radio-button',
@@ -257,7 +243,6 @@ export const additionalDocs = {
   'va-select': {
     guidanceHref: 'form/select',
     guidanceName: 'Select box',
-    description: 'This component uses the native onKeyDown event handler.',
     maturityCategory: USE,
     maturityLevel: DEPLOYED,
   },
@@ -276,16 +261,12 @@ export const additionalDocs = {
   'va-text-input': {
     guidanceHref: 'form/text-input',
     guidanceName: 'Text input',
-    description:
-      'This component uses the native onInput and onBlur event handlers.',
     maturityCategory: USE,
     maturityLevel: DEPLOYED,
   },
   'va-textarea': {
     guidanceHref: 'form/textarea',
     guidanceName: 'Textarea',
-    description:
-      'This component uses the native onInput and onBlur event handlers.',
     maturityCategory: USE,
     maturityLevel: DEPLOYED,
   },

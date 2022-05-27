@@ -169,12 +169,6 @@ export function CustomEventsDescription({ data }) {
   );
 }
 
-export function ComponentDescription({ description }) {
-  if (!description) return null;
-
-  return <div className="vads-u-margin-top--2">{description}</div>;
-}
-
 /**
  * Capitalizes the first character.
  * (There's probably a better way of doing this)
@@ -212,7 +206,6 @@ export function StoryDocs({ componentName, data }) {
   const maturityLevel = componentDocs?.maturityLevel;
   const guidanceName = componentDocs?.guidanceName || componentName;
   const guidanceHref = componentDocs?.guidanceHref;
-  const description = componentDocs?.description;
 
   return (
     <>
@@ -224,7 +217,6 @@ export function StoryDocs({ componentName, data }) {
       </p>
       <MaturityScale category={maturityCategory} level={maturityLevel} />
       <Guidance href={guidanceHref} name={guidanceName} />
-      <ComponentDescription description={description} />
       <CustomEventsDescription data={componentData} />
       <Description markdown={data?.docs} />
       <Primary />
