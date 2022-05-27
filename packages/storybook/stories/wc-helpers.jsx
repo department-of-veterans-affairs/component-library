@@ -174,7 +174,7 @@ export function CustomEventsDescription({ data }) {
  * (There's probably a better way of doing this)
  */
 function capitalize(text) {
-  return `${text[0].toUpperCase()}${text.slice(1)}`;
+  return text ? `${text[0].toUpperCase()}${text.slice(1)}` : null;
 }
 
 /**
@@ -218,30 +218,20 @@ function CanvasLink() {
  * Accepts a JSON object as a prop representing component information
  */
 export function StoryDocs({ componentName, data, children }) {
-  let componentData = data;
-  /** TODO: deal with this
-  const { data, children } = props;
-  const args = data?.props?.length > 0;
-  const tagName = data.tag;
-  // This feels a bit awkward, but I didn't want to use a magic number
-  const _componentName = tagName.slice('va-'.length);
-  const {
-    componentHref = _componentName,
-    componentName = capitalize(_componentName).replaceAll('-', ' '),
-  } = props;
-  */
-
   const component = componentName || data?.tag;
   const componentDocs = additionalDocs?.[component];
-
-  if (componentData && componentDocs) {
-    componentData = { ...data, ...componentDocs };
-  }
+  const componentData = data ? Object.assign(data, componentDocs) : null;
 
   const maturityCategory = componentDocs?.maturityCategory;
   const maturityLevel = componentDocs?.maturityLevel;
-  const guidanceName = componentDocs?.guidanceName || componentName;
-  const guidanceHref = componentDocs?.guidanceHref;
+  // This feels a bit awkward, but I didn't want to use a magic number
+  const _componentName = data?.tag?.slice('va-'.length);
+  // Default the guidance values to be based on the web comopnent's
+  // tag name where possible
+  const {
+    guidanceHref = _componentName,
+    guidanceName = capitalize(_componentName)?.replaceAll('-', ' '),
+  } = componentDocs;
 
   return (
     <>
