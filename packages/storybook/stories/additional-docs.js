@@ -45,6 +45,11 @@ export const additionalDocs = {
     maturityCategory: USE,
     maturityLevel: BEST_PRACTICE,
   },
+  'MaintenanceBanner': {
+    maturityCategory: CAUTION,
+    maturityLevel: CANDIDATE,
+  },
+
   'Modal': {
     maturityCategory: DONT_USE,
     maturityLevel: DEPRECATED,
