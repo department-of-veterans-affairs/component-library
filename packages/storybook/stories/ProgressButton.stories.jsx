@@ -3,7 +3,7 @@ import ProgressButton from '../../react-components/src/components/ProgressButton
 import { StoryDocs } from './wc-helpers';
 
 export default {
-  title: 'Components/ProgressButton',
+  title: 'Components/Buttons/ProgressButton',
   component: ProgressButton,
   parameters: {
     componentSubtitle: 'Progress button component',
