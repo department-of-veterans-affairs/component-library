@@ -6,7 +6,11 @@ addons.setConfig({
   enableShortcuts: false,
   sidebar: {
     renderLabel: item => {
-      if (item.parent === 'components') {
+      if (
+        item.parent === 'components' ||
+        item.parent === 'components-banners' ||
+        item.parent === 'components-buttons'
+      ) {
         const maturityCategory =
           additionalDocs[item.name] &&
           additionalDocs[item.name].maturityCategory;
