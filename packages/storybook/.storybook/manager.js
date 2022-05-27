@@ -48,7 +48,7 @@ addons.setConfig({
         );
       }
 
-      return <>{item.name}</>;
+      return item.name;
     },
   },
 });
