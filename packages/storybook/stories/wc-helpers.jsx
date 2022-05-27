@@ -201,6 +201,18 @@ function NativeHandlers({ docsTags = [] }) {
   );
 }
 
+function CanvasLink() {
+  // We're inside an iframe on the Docs page, so we need to get the parent
+  const canvasLink = window.parent.location.href.replace('docs', 'story');
+  return (
+    <p>
+      Information on this component's accessibility, html output, and how it is
+      used within Storybook can be <a href={canvasLink}>viewed on the Canvas</a>
+      .
+    </p>
+  );
+}
+
 /**
  * Return a component with Storybook docs blocks in a standard order.
  * Accepts a JSON object as a prop representing component information
@@ -235,12 +247,9 @@ export function StoryDocs({ componentName, data, children }) {
     <>
       <Title />
       <Subtitle />
-      <p>
-        Information on this component's accessibility, html output, and how it
-        is used within Storybook can be viewed by clicking the Canvas tab.
-      </p>
       <MaturityScale category={maturityCategory} level={maturityLevel} />
       <Guidance href={guidanceHref} name={guidanceName} />
+      <CanvasLink />
       <CustomEventsDescription data={componentData} />
       <Description markdown={data?.docs} />
       <NativeHandlers docsTags={data?.docsTags} />
