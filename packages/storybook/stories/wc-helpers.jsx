@@ -181,7 +181,7 @@ function capitalize(text) {
  * Return a component with Storybook docs blocks in a standard order.
  * Accepts a JSON object as a prop representing component information
  */
-export function StoryDocs({ componentName, data }) {
+export function StoryDocs({ componentName, data, children }) {
   let componentData = data;
   /** TODO: deal with this
   const { data, children } = props;
