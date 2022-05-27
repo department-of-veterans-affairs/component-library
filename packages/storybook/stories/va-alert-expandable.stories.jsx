@@ -5,14 +5,9 @@ const alertExpandableDocs = getWebComponentDocs('va-alert-expandable');
 export default {
   title: 'Components/va-alert-expandable',
   parameters: {
-    componentSubtitle: `Alert Expandable web component`,
+    componentSubtitle: `Alert expandable web component`,
     docs: {
-      page: () => (
-        <StoryDocs
-          data={alertExpandableDocs}
-          componentName="Alert Expandable"
-        />
-      ),
+      page: () => <StoryDocs data={alertExpandableDocs} />,
     },
     actions: {
       handles: ['component-library-analytics'],
@@ -43,7 +38,8 @@ const Template = ({
         disable-analytics={disableAnalytics}
       >
         <div>
-          This is the alert content. To take action on this alert, please call <a href="tel:8775551234">877-555-1234.</a>
+          This is the alert content. To take action on this alert, please call{' '}
+          <a href="tel:8775551234">877-555-1234.</a>
         </div>
       </va-alert-expandable>
       <p>Surrounding content.</p>
@@ -51,10 +47,7 @@ const Template = ({
   );
 };
 
-const IconlessTemplate = ({
-  trigger,
-  iconless,
-}) => {
+const IconlessTemplate = ({ trigger, iconless }) => {
   return (
     <>
       <va-alert-expandable
@@ -64,7 +57,8 @@ const IconlessTemplate = ({
         disable-analytics="false"
       >
         <div>
-          This is the alert content. To take action on this alert, please call <a href="tel:8775551234">877-555-1234.</a>
+          This is the alert content. To take action on this alert, please call{' '}
+          <a href="tel:8775551234">877-555-1234.</a>
         </div>
       </va-alert-expandable>
       <va-alert-expandable
@@ -74,7 +68,8 @@ const IconlessTemplate = ({
         disable-analytics="false"
       >
         <div>
-          This is the alert content. To take action on this alert, please call <a href="tel:8775551234">877-555-1234.</a>
+          This is the alert content. To take action on this alert, please call{' '}
+          <a href="tel:8775551234">877-555-1234.</a>
         </div>
       </va-alert-expandable>
       <va-alert-expandable
@@ -84,7 +79,8 @@ const IconlessTemplate = ({
         disable-analytics="false"
       >
         <div>
-          This is the alert content. To take action on this alert, please call <a href="tel:8775551234">877-555-1234.</a>
+          This is the alert content. To take action on this alert, please call{' '}
+          <a href="tel:8775551234">877-555-1234.</a>
         </div>
       </va-alert-expandable>
       <va-alert-expandable
@@ -94,7 +90,8 @@ const IconlessTemplate = ({
         disable-analytics="false"
       >
         <div>
-          This is the alert content. To take action on this alert, please call <a href="tel:8775551234">877-555-1234.</a>
+          This is the alert content. To take action on this alert, please call{' '}
+          <a href="tel:8775551234">877-555-1234.</a>
         </div>
       </va-alert-expandable>
       <va-alert-expandable
@@ -104,7 +101,8 @@ const IconlessTemplate = ({
         disable-analytics="false"
       >
         <div>
-          This is the alert content. To take action on this alert, please call <a href="tel:8775551234">877-555-1234.</a>
+          This is the alert content. To take action on this alert, please call{' '}
+          <a href="tel:8775551234">877-555-1234.</a>
         </div>
       </va-alert-expandable>
     </>
@@ -116,31 +114,31 @@ Default.args = { ...defaultArgs };
 Default.argTypes = propStructure(alertExpandableDocs);
 
 export const Error = Template.bind({});
-Error.args = { 
-  ...defaultArgs, 
-  status: 'error' 
+Error.args = {
+  ...defaultArgs,
+  status: 'error',
 };
 
 export const Warning = Template.bind({});
-Warning.args = { 
-  ...defaultArgs, 
-  status: 'warning' 
+Warning.args = {
+  ...defaultArgs,
+  status: 'warning',
 };
 
 export const Success = Template.bind({});
-Success.args = { 
-  ...defaultArgs, 
-  status: 'success' 
+Success.args = {
+  ...defaultArgs,
+  status: 'success',
 };
 
 export const Continue = Template.bind({});
-Continue.args = { 
-  ...defaultArgs, 
-  status: 'continue' 
+Continue.args = {
+  ...defaultArgs,
+  status: 'continue',
 };
 
 export const NoIcon = IconlessTemplate.bind({});
 NoIcon.args = {
   ...defaultArgs,
-  'iconless': true,
+  iconless: true,
 };

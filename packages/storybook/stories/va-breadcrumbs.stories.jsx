@@ -6,6 +6,7 @@ const breadcrumbsDocs = getWebComponentDocs('va-breadcrumbs');
 export default {
   title: 'Components/va-breadcrumbs',
   parameters: {
+    componentSubtitle: 'Breadcrumbs web component',
     docs: {
       page: () => <StoryDocs data={breadcrumbsDocs} />,
     },

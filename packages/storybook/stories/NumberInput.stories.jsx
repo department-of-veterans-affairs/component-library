@@ -1,10 +1,16 @@
 import React, { useState } from 'react';
-
 import NumberInput from '../../react-components/src/components/NumberInput/NumberInput';
+import { StoryDocs } from './wc-helpers';
 
 export default {
   title: 'Components/NumberInput',
   component: NumberInput,
+  parameters: {
+    componentSubtitle: 'Number input React component',
+    docs: {
+      page: () => <StoryDocs componentName="NumberInput" />,
+    },
+  },
 };
 
 const Template = args => {

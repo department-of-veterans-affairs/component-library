@@ -1,16 +1,12 @@
 import React from 'react';
-import {
-  getWebComponentDocs,
-  componentStructure,
-  propStructure,
-  StoryDocs,
-} from './wc-helpers';
+import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
 
 const tableDocs = getWebComponentDocs('va-table');
 
 export default {
   title: 'Components/va-table',
   parameters: {
+    componentSubtitle: 'Table web component',
     docs: {
       page: () => <StoryDocs data={tableDocs} />,
     },

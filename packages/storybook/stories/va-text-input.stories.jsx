@@ -7,15 +7,9 @@ const textInputDocs = getWebComponentDocs('va-text-input');
 export default {
   title: 'Components/va-text-input',
   parameters: {
-    componentSubtitle: `Text Input web component`,
+    componentSubtitle: `Text input web component`,
     docs: {
-      page: () => (
-        <StoryDocs
-          data={textInputDocs}
-          componentHref="form/text-input"
-          componentName="Text Input"
-        />
-      ),
+      page: () => <StoryDocs data={textInputDocs} />,
     },
   },
   argTypes: {

@@ -5,7 +5,7 @@ const additionalInfoDocs = getWebComponentDocs('va-additional-info');
 export default {
   title: 'Components/va-additional-info',
   parameters: {
-    componentSubtitle: `Additional Info web component`,
+    componentSubtitle: `Additional info web component`,
     docs: {
       page: () => <StoryDocs data={additionalInfoDocs} />,
     },

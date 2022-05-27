@@ -9,10 +9,10 @@ const modalDocs = getWebComponentDocs('va-modal');
 export default {
   title: 'Components/va-modal',
   parameters: {
+    componentSubtitle: `Modal web component`,
     docs: {
       page: () => <StoryDocs data={modalDocs} />,
     },
-    componentSubtitle: `Modal web component`,
   },
   argTypes: {
     status: {

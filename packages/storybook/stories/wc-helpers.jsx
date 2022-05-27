@@ -11,8 +11,7 @@ import {
 } from '@storybook/addon-docs/blocks';
 
 import webComponentDocs from '@department-of-veterans-affairs/web-components/component-docs.json';
-
-import { generateEventsDescription } from './events';
+import { additionalDocs } from './additional-docs';
 
 /**
  * Return the JSON object matching a specific component tag
@@ -105,16 +104,75 @@ export const propStructure = comp => {
 /**
  * Renders an Action link to the Design System
  */
-function Guidance({ componentHref, componentName }) {
-  if (!componentName || !componentHref) return null;
+export function Guidance({ href, name }) {
+  if (!href || !name) return null;
+
   return (
-    <a
-      className="vads-c-action-link--blue"
-      href={`https://design.va.gov/components/${componentHref}`}
-    >
-      View guidance for the {componentName} component in the Design System
-    </a>
+    <div className="vads-u-margin-bottom--5">
+      <a
+        className="vads-c-action-link--green"
+        href={`https://design.va.gov/components/${href}`}
+      >
+        View guidance for the {name} component in the Design System
+      </a>
+    </div>
   );
+}
+
+export function MaturityScale({ category, level }) {
+  if (!category || !level) return null;
+
+  let colors;
+  switch (category) {
+    case 'USE':
+      colors = 'vads-u-background-color--green-darker';
+      break;
+    case 'USE WITH CAUTION':
+      colors = 'vads-u-background-color--orange vads-u-color--base';
+      break;
+    case "DON'T USE":
+      colors = 'vads-u-background-color--secondary-darkest';
+      break;
+  }
+
+  if (!colors) return null;
+
+  return (
+    <div className="vads-u-margin-bottom--3">
+      <span className={`usa-label ${colors}`}>
+        {category}: {level}
+      </span>
+    </div>
+  );
+}
+
+export function CustomEventsDescription({ data }) {
+  if (!data || (data?.events?.length === 0 && data?.listeners?.length === 0)) {
+    return null;
+  }
+
+  let events = [];
+  if (data.events) events = [...data.events];
+  if (data.listeners) events = [...events, ...data.listeners];
+  const eventNames = events.map(event => event.event).join(', ');
+
+  return (
+    <div className="vads-u-margin-top--2">
+      This component has {events.length} custom{' '}
+      {events.length > 1 ? 'events' : 'event'}: {eventNames}. Please see our
+      documentation on{' '}
+      <a href="https://design.va.gov/about/developers#custom-events">
+        how to use web component events
+      </a>
+      .
+    </div>
+  );
+}
+
+export function ComponentDescription({ description }) {
+  if (!description) return null;
+
+  return <div className="vads-u-margin-top--2">{description}</div>;
 }
 
 /**
@@ -129,7 +187,9 @@ function capitalize(text) {
  * Return a component with Storybook docs blocks in a standard order.
  * Accepts a JSON object as a prop representing component information
  */
-export function StoryDocs(props) {
+export function StoryDocs({ componentName, data }) {
+  let componentData = data;
+  /** TODO: deal with this
   const { data, children } = props;
   const args = data?.props?.length > 0;
   const tagName = data.tag;
@@ -139,34 +199,42 @@ export function StoryDocs(props) {
     componentHref = _componentName,
     componentName = capitalize(_componentName).replaceAll('-', ' '),
   } = props;
+  */
 
-  const eventsDescription = generateEventsDescription(data);
+  const component = componentName || data?.tag;
+  const componentDocs = additionalDocs?.[component];
+
+  if (componentData && componentDocs) {
+    componentData = { ...data, ...componentDocs };
+  }
+
+  const maturityCategory = componentDocs?.maturityCategory;
+  const maturityLevel = componentDocs?.maturityLevel;
+  const guidanceName = componentDocs?.guidanceName || componentName;
+  const guidanceHref = componentDocs?.guidanceHref;
+  const description = componentDocs?.description;
+
   return (
     <>
       <Title />
       <Subtitle />
-      <Guidance componentHref={componentHref} componentName={componentName} />
       <p>
         Information on this component's accessibility, html output, and how it
         is used within Storybook can be viewed by clicking the Canvas tab.
       </p>
-      {eventsDescription && (
-        <p>
-          {eventsDescription} Please see our{' '}
-          <a href="https://design.va.gov/about/developers#using-web-components">
-            documentation on how to use web component events
-          </a>
-          .
-        </p>
-      )}
-      <Description markdown={data.docs} />
+      <MaturityScale category={maturityCategory} level={maturityLevel} />
+      <Guidance href={guidanceHref} name={guidanceName} />
+      <ComponentDescription description={description} />
+      <CustomEventsDescription data={componentData} />
+      <Description markdown={data?.docs} />
       <Primary />
-      {args && <ArgsTable story={PRIMARY_STORY} />}
+      <ArgsTable story={PRIMARY_STORY} />
       <>{children}</>
       <Stories />
     </>
   );
 }
 StoryDocs.propTypes = {
-  data: PropTypes.object.isRequired,
+  componentName: PropTypes.string,
+  data: PropTypes.object,
 };

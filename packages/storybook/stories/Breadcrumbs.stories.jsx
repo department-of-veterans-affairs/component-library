@@ -1,9 +1,16 @@
 import React from 'react';
 import Breadcrumbs from '../../react-components/src/components/Breadcrumbs/Breadcrumbs';
+import { StoryDocs } from './wc-helpers';
 
 export default {
   title: 'Components/Breadcrumbs',
   component: Breadcrumbs,
+  parameters: {
+    componentSubtitle: 'Breadcrumbs React component',
+    docs: {
+      page: () => <StoryDocs componentName="Breadcrumbs" />,
+    },
+  },
 };
 
 const Template = args => (

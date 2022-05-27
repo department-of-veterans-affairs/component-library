@@ -13,18 +13,12 @@ export default {
   title: 'Components/va-checkbox-group',
   subcomponents: componentStructure(checkbox),
   parameters: {
-    componentSubtitle: 'Checkbox Group web component',
+    componentSubtitle: 'Checkbox group web component',
     actions: {
       handles: ['component-library-analytics'],
     },
     docs: {
-      page: () => (
-        <StoryDocs
-          data={checkBoxGroupDocs}
-          componentHref="form/checkbox"
-          componentName="Checkbox Group"
-        />
-      ),
+      page: () => <StoryDocs data={checkBoxGroupDocs} />,
     },
   },
 };

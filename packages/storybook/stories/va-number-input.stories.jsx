@@ -6,15 +6,9 @@ const numberInputDocs = getWebComponentDocs('va-number-input');
 export default {
   title: 'Components/va-number-input',
   parameters: {
-    componentSubtitle: `Number Input web component`,
+    componentSubtitle: `Number input web component`,
     docs: {
-      page: () => (
-        <StoryDocs
-          data={numberInputDocs}
-          componentHref="form/number-input"
-          componentName="Number Input"
-        />
-      ),
+      page: () => <StoryDocs data={numberInputDocs} />,
     },
   },
   argTypes: {

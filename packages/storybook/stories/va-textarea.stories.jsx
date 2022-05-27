@@ -9,9 +9,7 @@ export default {
   parameters: {
     componentSubtitle: `Textarea web component`,
     docs: {
-      page: () => (
-        <StoryDocs data={textareaDocs} componentHref="form/textarea" />
-      ),
+      page: () => <StoryDocs data={textareaDocs} />,
     },
   },
 };

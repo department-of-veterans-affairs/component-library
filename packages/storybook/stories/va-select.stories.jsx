@@ -7,15 +7,9 @@ const selectDocs = getWebComponentDocs('va-select');
 export default {
   title: 'Components/va-select',
   parameters: {
-    componentSubtitle: 'Select Box web component',
+    componentSubtitle: 'Select box web component',
     docs: {
-      page: () => (
-        <StoryDocs
-          data={selectDocs}
-          componentHref="form/select"
-          componentName="Select Box"
-        />
-      ),
+      page: () => <StoryDocs data={selectDocs} />,
     },
   },
 };

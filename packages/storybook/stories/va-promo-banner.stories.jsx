@@ -6,10 +6,9 @@ const promoBannerDocs = getWebComponentDocs('va-promo-banner');
 export default {
   title: 'Components/va-promo-banner',
   parameters: {
+    componentSubtitle: 'Promo banner web component',
     docs: {
-      page: () => (
-        <StoryDocs data={promoBannerDocs} componentHref="promo-banners" />
-      ),
+      page: () => <StoryDocs data={promoBannerDocs} />,
     },
   },
   argTypes: {

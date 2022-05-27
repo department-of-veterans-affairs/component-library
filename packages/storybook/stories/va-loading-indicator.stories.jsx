@@ -7,14 +7,9 @@ const loadingIndicatorDocs = getWebComponentDocs('va-loading-indicator');
 export default {
   title: 'Components/va-loading-indicator',
   parameters: {
-    componentSubtitle: `Loading Indicator web component`,
+    componentSubtitle: `Loading indicator web component`,
     docs: {
-      page: () => (
-        <StoryDocs
-          data={loadingIndicatorDocs}
-          componentName="Loading Indicator"
-        />
-      ),
+      page: () => <StoryDocs data={loadingIndicatorDocs} />,
     },
     actions: {
       handles: ['component-library-analytics'],

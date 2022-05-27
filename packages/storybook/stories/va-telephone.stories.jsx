@@ -4,11 +4,11 @@ import {
   contactsMap,
   Table,
 } from '@department-of-veterans-affairs/component-library';
-
 import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
 
 const telephoneDocs = getWebComponentDocs('va-telephone');
-//
+additionalDocs['va-telephone'];
+
 // This builds the available "CONTACTS" list table
 // Descriptions are available in the contacts.js file
 const fields = [
@@ -117,5 +117,5 @@ export const VanityNumber = Template.bind({});
 VanityNumber.args = {
   ...defaultArgs,
   contact: '8772228387',
-  vanity: 'VETS'
+  vanity: 'VETS',
 };

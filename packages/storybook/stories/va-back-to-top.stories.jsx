@@ -6,10 +6,10 @@ const bttDocs = getWebComponentDocs('va-back-to-top');
 export default {
   title: 'Components/va-back-to-top',
   parameters: {
+    componentSubtitle: `Back to top web component`,
     docs: {
       page: () => <StoryDocs data={bttDocs} />,
     },
-    componentSubtitle: `Back to top web component`,
   },
 };
 

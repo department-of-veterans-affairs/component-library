@@ -1,8 +1,8 @@
 /* eslint-disable no-console */
 import React from 'react';
 import { formatDate } from '../../react-components/src/helpers/format-date';
-
 import MaintenanceBanner from '../../react-components/src/components/MaintenanceBanner/MaintenanceBanner';
+import { StoryDocs } from './wc-helpers';
 
 export default {
   title: 'Components/Banners/MaintenanceBanner',
@@ -11,6 +11,12 @@ export default {
     startsAt: { control: { type: 'date' } },
     expiresAt: { control: { type: 'date' } },
     warnStartsAt: { control: { type: 'date' } },
+  },
+  parameters: {
+    componentSubtitle: 'Maintenance banner React component',
+    docs: {
+      page: () => <StoryDocs componentName="MaintenanceBanner" />,
+    },
   },
 };
 

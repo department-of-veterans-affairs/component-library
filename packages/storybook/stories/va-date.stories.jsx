@@ -11,7 +11,7 @@ export default {
   parameters: {
     componentSubtitle: `Date web component`,
     docs: {
-      page: () => <StoryDocs data={dateDocs} componentHref="form/date-input" />,
+      page: () => <StoryDocs data={dateDocs} />,
     },
   },
 };

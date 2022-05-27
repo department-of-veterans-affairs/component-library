@@ -23,10 +23,10 @@ export default {
     },
   },
   parameters: {
+    componentSubtitle: `Alert web component`,
     docs: {
       page: () => <StoryDocs data={alertDocs} />,
     },
-    componentSubtitle: `Alert web component`,
   },
 };
 

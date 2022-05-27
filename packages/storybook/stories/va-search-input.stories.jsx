@@ -9,7 +9,7 @@ const searchDocs = getWebComponentDocs('va-search-input');
 export default {
   title: 'Components/va-search-input',
   parameters: {
-    componentSubtitle: 'Search Input web component',
+    componentSubtitle: 'Search input web component',
     docs: {
       page: () => <StoryDocs data={searchDocs} />,
     },

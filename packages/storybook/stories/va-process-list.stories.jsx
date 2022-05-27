@@ -7,10 +7,10 @@ const processListDocs = getWebComponentDocs('va-process-list');
 export default {
   title: 'Components/va-process-list',
   parameters: {
+    componentSubtitle: `Process list web component`,
     docs: {
       page: () => <StoryDocs data={processListDocs} />,
     },
-    componentSubtitle: `Process list web component`,
   },
 };
 
