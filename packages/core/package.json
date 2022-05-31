@@ -22,8 +22,9 @@
     "react-transition-group": "^1.0.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.15.5",
-    "babel-loader": "^8.2.2",
+    "@babel/core": "^7.18.2",
+    "@babel/preset-env": "^7.18.2",
+    "babel-loader": "^8.2.5",
     "copy-webpack-plugin": "^9.0.1",
     "css-loader": "^6.4.0",
     "mini-css-extract-plugin": "^2.4.2",
