@@ -23,14 +23,26 @@ export default {
 };
 
 const defaultArgs = {
-  label: 'Label should be specific',
-  name: 'test',
-  required: false,
-  error: undefined,
-  value: undefined,
+  'label': 'Label should be specific',
+  'name': 'test',
+  'required': false,
+  'error': undefined,
+  'value': undefined,
+  'custom-validation-boolean': false,
+  'custom-validation-message': '',
+  'aria-describedby': '',
 };
 
-const Template = ({ label, name, required, error, value }) => {
+const Template = ({
+  label,
+  name,
+  required,
+  error,
+  value,
+  'aria-describedby': ariaDescribedby,
+  'custom-validation-boolean': customValidationBoolean,
+  'custom-validation-message': customValidationMessage,
+}) => {
   return (
     <VaDateTextInput
       label={label}
@@ -38,25 +50,37 @@ const Template = ({ label, name, required, error, value }) => {
       required={required}
       error={error}
       value={value}
+      custom-validation-boolean={customValidationBoolean}
+      custom-validation-message={customValidationMessage}
+      aria-describedby={ariaDescribedby}
       onDateBlur={e => console.log(e, 'DATE BLUR FIRED')}
       onDateChange={e => console.log(e, 'DATE CHANGE FIRED')}
-    />
+    >
+      I am hint text in a slot
+    </VaDateTextInput>
   );
 };
 
-const CustomValidationTemplate = ({ label, name, required, error, value }) => {
+const CustomValidationTemplate = ({
+  label,
+  name,
+  required,
+  error,
+  value,
+  'aria-describedby': ariaDescribedby,
+  'custom-validation-boolean': customValidationBoolean,
+  'custom-validation-message': customValidationMessage,
+}) => {
   const [dateVal, setDateVal] = useState(value);
-  const [currentYear, currentMonth, currentDay] = (dateVal || '').split('-');
-
-  if (currentYear < 1900 || currentYear > 2122) {
-    error = 'Please enter a year between 1900 and 2122';
-  }
   const today = new Date();
   // new Date as YYYY-MM-DD is giving the day prior to the day select
   // new Date as YYYY MM DD is giving the correct day selected
   const dateInput = new Date(dateVal.split('-').join(' '));
   if (dateInput <= today) {
-    error = 'Date must be in the future';
+    customValidationBoolean = true;
+    customValidationMessage = 'Date must be in the future';
+  } else {
+    customValidationBoolean = false;
   }
   return (
     <>
@@ -66,37 +90,37 @@ const CustomValidationTemplate = ({ label, name, required, error, value }) => {
         required={required}
         error={error}
         value={dateVal}
+        custom-validation-boolean={customValidationBoolean}
+        custom-validation-message={customValidationMessage}
+        aria-describedby={ariaDescribedby}
         onDateBlur={e => console.log(e, 'DATE BLUR')}
         onDateChange={e => setDateVal(e.target.value)}
       />
       <div>
         This example has some custom validation logic built out to detect
-        changes made to the select and input fields. If the criteria below is
-        not met an error message will show:
+        changes made to the input fields that fire when the component is blurred
+        ie: focus is removed from the component. If the criteria below is not
+        met an error message will show:
         <ul>
           <li>Cannot have blank values</li>
-          <li>The Year falls outside of the range of 1900-2122</li>
+          <li>Month and Day are not valid</li>
+          <li>The Year falls outside of the range of 1900-2200</li>
           <li>The date provided is not in the future</li>
-          <pre></pre>
         </ul>
         These are examples of how Custom Validation could be used with this
         component.
         <h5>Sample Variables</h5>
         <pre>const [dateVal, setDateVal] = useState(value);</pre>
-        <pre>
-          const [currentYear, currentMonth, currentDay] = (dateVal ||
-          '').split('-');
-        </pre>
         <pre>const today = new Date();</pre>
         <pre>const dateInput = new Date(dateVal.split('-').join(' '));</pre>
         <h5>Sample Custom Validation Conditional Statements</h5>
-        <strong>Year Check</strong>
-        <pre>if (currentYear &lt; 1900 || currentYear &gt; 2122) &#123;</pre>
-        <pre>error = 'Please enter a year between 1900 and 2122';</pre>
-        <pre>&#125;</pre>
         <strong>Date in Future Check</strong>
         <pre>if (dateInput &lt;= today)&#123;</pre>
-        <pre>error = 'Date must be in the future';</pre>
+        <pre>customValidationBoolean = true;</pre>
+        <pre>customValidationMessage = 'Date must be in the future';</pre>
+        <pre>&#125;</pre>
+        <pre>else &#123;</pre>
+        <pre>customValidationBoolean = false;</pre>
         <pre>&#125;</pre>
       </div>
     </>

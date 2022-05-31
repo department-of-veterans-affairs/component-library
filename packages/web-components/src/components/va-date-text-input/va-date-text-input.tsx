@@ -1,6 +1,6 @@
 import { Component, Event, EventEmitter, Host, Prop, h } from '@stencil/core';
 
-import { isFullDate } from '../../utils/date-utils';
+import { days, isFullDate } from '../../utils/date-utils';
 @Component({
   tag: 'va-date-text-input',
   styleUrl: 'va-date-text-input.css',
@@ -27,6 +27,22 @@ export class VaDateTextInput {
    * This prop should be leveraged to display any custom validations needed for this component
    */
   @Prop() error: string;
+
+  /**
+   * The aria-describedby attribute lists the ids of the elements that describe the object. 
+   * It is used to establish a relationship between widgets or groups and the text that describes them
+   */
+  @Prop() ariaDescribedby: string;
+
+  /**
+   * Set to true if custom validation logic does not meet expected criteria for valid input
+   */
+  @Prop() customValidationBoolean: boolean;
+
+  /**
+   * Set message to display if custom validation boolean is true
+   */
+  @Prop() customValidationMessage: string;
 
   /**
    * Set the default date value must be in YYYY-MM-DD format.
@@ -64,6 +80,8 @@ export class VaDateTextInput {
       day ? numFormatter.format(dayNum) : ''
     }`;
 
+    const daysForSelectedMonth = monthNum > 0 ? days[monthNum] : [];
+
     // Check validity of date if invalid provide message and error state styling
     if (
       yearNum < 1900 ||
@@ -71,10 +89,12 @@ export class VaDateTextInput {
       monthNum < 1 ||
       monthNum > 12 ||
       dayNum < 1 ||
-      dayNum > 31 ||
+      dayNum > daysForSelectedMonth.length ||
       (this.required && !isFullDate(this.value))
     ) {
       this.error = 'Please provide a valid date';
+    } else if (this.customValidationBoolean) {
+      this.error = this.customValidationMessage;
     } else {
       this.error = '';
     }
@@ -152,6 +172,7 @@ export class VaDateTextInput {
       handleDateChange,
       handleDateKey,
       value,
+      ariaDescribedby,
     } = this;
 
     // Convert string to number to remove leading 0 on values less than 10
@@ -161,7 +182,12 @@ export class VaDateTextInput {
     // Error attribute should be leveraged for custom error messaging
     // Fieldset has an implicit aria role of group
     return (
-      <Host value={value} error={error || this.error} onBlur={handleDateBlur}>
+      <Host
+        value={value}
+        error={error || this.error}
+        onBlur={handleDateBlur}
+        aria-describedby={ariaDescribedby}
+      >
         <fieldset aria-label="Input month and day fields as two digit XX and four digit year format XXXX">
           <legend>
             {label} {required && <span class="required">(*Required)</span>}
@@ -172,6 +198,7 @@ export class VaDateTextInput {
               <span class="sr-only">Error</span> {error}
             </span>
           )}
+          <slot />
           <div class="date-container">
             <va-text-input
               label="Month"
