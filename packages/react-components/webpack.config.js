@@ -5,30 +5,39 @@ module.exports = {
   output: {
     filename: 'index.js',
     path: path.resolve(__dirname, 'dist'),
+    library: {
+      name: 'react-components',
+      type: 'umd',
+    },
   },
   module: {
     rules: [
       {
-        test: /\.jsx?$/,
+        test: /\.(js|jsx)$/,
         exclude: /node_modules/,
         use: {
           loader: 'babel-loader',
           options: {
-            configFile: './config/babel.config.js',
+            presets: [
+              '@babel/preset-env',
+              ['@babel/preset-react', { runtime: 'automatic' }],
+            ],
           },
         },
       },
     ],
   },
   resolve: {
-    extensions: ['...', '.jsx'],
+    extensions: ['.js', '.jsx'],
   },
-  externals: {
-    'react': 'react',
-    'react-dom': 'react-dom',
-    'i18next': 'i18next',
-    'i18next-browser-languagedetector': 'i18next-browser-languagedetector',
-    '@department-of-veterans-affairs/web-components/react-bindings':
-      'department-of-veterans-affairs/web-components',
-  },
+  externals: [
+    {
+      '@department-of-veterans-affairs/web-components/react-bindings':
+        '@department-of-veterans-affairs/web-components/react-bindings',
+      'i18next': 'i18next',
+      'i18next-browser-languagedetector': 'i18next-browser-languagedetector',
+      'react': 'react',
+      'react-dom': 'react-dom',
+    },
+  ],
 };
