@@ -52,6 +52,32 @@ export class VaDateTextInput {
   dateBlur: EventEmitter;
 
   private handleDateBlur = (event: FocusEvent) => {
+    const [year, month, day] = (this.value || '').split('-').map(val => val);
+    const yearNum = parseInt(year);
+    const monthNum = parseInt(month);
+    const dayNum = parseInt(day);
+    // Use a leading zero for numbers < 10
+    const numFormatter = new Intl.NumberFormat('en-US', {
+      minimumIntegerDigits: 2,
+    });
+    this.value = `${year}-${month ? numFormatter.format(monthNum) : ''}-${
+      day ? numFormatter.format(dayNum) : ''
+    }`;
+
+    // Check validity of date if invalid provide message and error state styling
+    if (
+      yearNum < 1900 ||
+      yearNum > 2200 ||
+      monthNum < 1 ||
+      monthNum > 12 ||
+      dayNum < 1 ||
+      dayNum > 31 ||
+      (this.required && !isFullDate(this.value))
+    ) {
+      this.error = 'Please provide a valid date';
+    } else {
+      this.error = '';
+    }
     this.dateBlur.emit(event);
   };
 
@@ -78,9 +104,24 @@ export class VaDateTextInput {
 
   private handleDateKey = (event: KeyboardEvent) => {
     // Allow 0-9 and then Backspace and Tab to clear data or move to next field
-    const validKeys = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'Backspace', 'Tab'];
+    const validKeys = [
+      '0',
+      '1',
+      '2',
+      '3',
+      '4',
+      '5',
+      '6',
+      '7',
+      '8',
+      '9',
+      'Backspace',
+      'ArrowRight',
+      'ArrowLeft',
+      'Tab',
+    ];
     if (validKeys.indexOf(event.key) < 0) {
-      event.preventDefault()
+      event.preventDefault();
       return false;
     }
   };
@@ -116,23 +157,19 @@ export class VaDateTextInput {
     // Convert string to number to remove leading 0 on values less than 10
     const [year, month, day] = (value || '').split('-').map(val => val);
 
-    // Check validity of date if invalid provide message and error state styling
-    const dateInvalid =
-      required && !isFullDate(value) ? 'Please provide a valid date' : null;
-
     // Setting new attribute to avoid conflicts with only using error attribute
     // Error attribute should be leveraged for custom error messaging
     // Fieldset has an implicit aria role of group
     return (
-      <Host value={value} invalid={dateInvalid}>
+      <Host value={value} error={error || this.error} onBlur={handleDateBlur}>
         <fieldset aria-label="Input month and day fields as two digit XX and four digit year format XXXX">
           <legend>
             {label} {required && <span class="required">(*Required)</span>}
             <div id="dateHint">Use the following format: MM DD YYYY</div>
           </legend>
-          {(error || dateInvalid) && (
+          {error && (
             <span class="error-message" role="alert">
-              <span class="sr-only">Error</span> {error || dateInvalid}
+              <span class="sr-only">Error</span> {error}
             </span>
           )}
           <div class="date-container">
@@ -147,7 +184,6 @@ export class VaDateTextInput {
               // if NaN provide empty string
               value={month ? month.toString() : ''}
               onInput={handleDateChange}
-              onBlur={handleDateBlur}
               onKeyDown={handleDateKey}
               class="input-month"
               inputmode="numeric"
@@ -164,7 +200,6 @@ export class VaDateTextInput {
               // if NaN provide empty string
               value={day ? day.toString() : ''}
               onInput={handleDateChange}
-              onBlur={handleDateBlur}
               onKeyDown={handleDateKey}
               class="input-day"
               inputmode="numeric"
@@ -181,7 +216,6 @@ export class VaDateTextInput {
               // if NaN provide empty string
               value={year ? year.toString() : ''}
               onInput={handleDateChange}
-              onBlur={handleDateBlur}
               onKeyDown={handleDateKey}
               class="input-year"
               inputmode="numeric"
