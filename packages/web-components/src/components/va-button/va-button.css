@@ -8,7 +8,7 @@
   align-items: center;
   border-radius: 5px;
   display: flex;
-  height: 3.6rem;
+  font-size: 1.6rem;
 }
 
 .va-button.primary {
@@ -54,4 +54,9 @@ i.fa-angles-left::before {
 i.fa-angles-right::before {
   content: '\F101';
   margin-left: 8px;
+}
+
+.big {
+  font-size: 2.4rem;
+  padding: 1.5rem 3rem;
 }
