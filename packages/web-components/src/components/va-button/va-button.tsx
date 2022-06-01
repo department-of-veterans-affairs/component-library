@@ -8,6 +8,9 @@ import {
   Prop,
 } from '@stencil/core';
 
+/**
+ * @nativeHandler onClick
+ */
 @Component({
   tag: 'va-button',
   styleUrl: 'va-button.css',
@@ -72,11 +75,9 @@ export class VaButton {
           onClick={handleClick}
           type={type}
         >
-          {/* TODO: update class with icon name */}
-          {previous && <i aria-hidden="true" class="fa" />}
+          {previous && <i aria-hidden="true" class="fa fa-angles-left" />}
           {text}
-          {/* TODO: update class with icon name */}
-          {next && <i aria-hidden="true" class="fa" />}
+          {next && <i aria-hidden="true" class="fa fa-angles-right" />}
         </button>
       </Host>
     );
