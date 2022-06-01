@@ -82,3 +82,15 @@ Big.args = {
   ...defaultArgs,
   big: true,
 };
+
+const ButtonPairTemplate = ({}) => {
+  return (
+    <>
+      <va-button previous text="Back" />
+      <va-button next text="Continue" />
+    </>
+  );
+};
+
+export const ButtonPair = ButtonPairTemplate.bind({});
+ButtonPair.args = {};
