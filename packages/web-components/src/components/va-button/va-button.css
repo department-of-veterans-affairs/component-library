@@ -46,10 +46,12 @@ i {
   line-height: 1;
 }
 
-.fa-angles-left {
-  content: '\f100';
+i.fa-angles-left::before {
+  content: '\F100';
+  margin-right: 8px;
 }
 
-.fa-angles-right {
-  content: '\f101';
+i.fa-angles-right::before {
+  content: '\F101';
+  margin-left: 8px;
 }
