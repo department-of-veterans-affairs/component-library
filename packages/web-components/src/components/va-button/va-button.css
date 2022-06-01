@@ -1,0 +1,55 @@
+@import '../../mixins/buttons.css';
+
+:host {
+  display: block;
+}
+
+.va-button {
+  align-items: center;
+  border-radius: 5px;
+  display: flex;
+  height: 3.6rem;
+}
+
+.va-button.primary {
+  background-color: var(--color-primary);
+  color: var(--color-white);
+}
+
+.va-button.primary:active,
+.va-button.primary:hover {
+  background-color: var(--color-primary-darker);
+}
+
+.va-button.secondary {
+  background-color: var(--color-white);
+  border: 2px solid var(--color-primary);
+  color: var(--color-primary);
+}
+
+.va-button.secondary:hover {
+  border-color: var(--color-primary-darker);
+  color: var(--color-primary-darker);
+}
+
+.va-button.secondary:active,
+.va-button.secondary:focus,
+.va-button.secondary:hover {
+  background-color: var(--color-gray-cool-light);
+}
+
+i {
+  font-family: 'Font Awesome 5 Free';
+  font-size: 1.6rem;
+  font-style: normal;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.fa-angles-left {
+  content: '\f100';
+}
+
+.fa-angles-right {
+  content: '\f101';
+}
