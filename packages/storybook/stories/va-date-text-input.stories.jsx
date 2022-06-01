@@ -1,23 +1,17 @@
 import React, { useState } from 'react';
 import { VaDateTextInput } from '@department-of-veterans-affairs/web-components/react-bindings';
-import { generateEventsDescription } from './events';
-import { getWebComponentDocs, propStructure } from './wc-helpers';
+import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
 
 VaDateTextInput.displayName = 'VaDateTextInput';
 
-const dateDocs = getWebComponentDocs('va-date-text-input');
+const dateTextInputDocs = getWebComponentDocs('va-date-text-input');
 
 export default {
   title: 'Components/va-date-text-input',
   parameters: {
     componentSubtitle: `Date web component`,
     docs: {
-      description: {
-        component:
-          `<a className="vads-c-action-link--blue" href="https://design.va.gov/components/form/date-input">View guidance for the Date component in the Design System</a>` +
-          '\n' +
-          generateEventsDescription(dateDocs),
-      },
+      page: () => <StoryDocs data={dateTextInputDocs} />,
     },
   },
 };
@@ -129,7 +123,7 @@ const CustomValidationTemplate = ({
 
 export const Default = Template.bind({});
 Default.args = { ...defaultArgs };
-Default.argTypes = propStructure(dateDocs);
+Default.argTypes = propStructure(dateTextInputDocs);
 
 export const Error = Template.bind({});
 Error.args = { ...defaultArgs, error: 'Error Message Example' };
