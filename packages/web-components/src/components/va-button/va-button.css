@@ -6,19 +6,16 @@
 
 .va-button {
   align-items: center;
+  background-color: var(--color-primary);
   border-radius: 5px;
+  color: var(--color-white);
   display: flex;
   font-size: 1.6rem;
   margin: 0.5em 0.5em 0.5em 0;
 }
 
-.va-button.primary {
-  background-color: var(--color-primary);
-  color: var(--color-white);
-}
-
-.va-button.primary:active,
-.va-button.primary:hover {
+.va-button:active,
+.va-button:hover {
   background-color: var(--color-primary-darker);
 }
 

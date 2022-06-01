@@ -101,7 +101,6 @@ export class VaButton {
 
     const styles = classnames('va-button', {
       big: big,
-      primary: !secondary || !previous,
       secondary: secondary || previous,
     });
     const type = submit ? 'submit' : 'button';
