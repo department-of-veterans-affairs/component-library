@@ -8,6 +8,25 @@ describe('va-date-text-input', () => {
 
     const element = await page.find('va-date-text-input');
     expect(element).toHaveClass('hydrated');
+    expect(element).toEqualHtml(`
+      <va-date-text-input class='hydrated'>
+      <mock:shadow-root>
+        <fieldset aria-label='Input month and day fields as two digit XX and four digit year format XXXX'>
+          <legend>
+            <div id='dateHint'>
+              Use the following format: MM DD YYYY
+            </div>
+          </legend>
+          <slot></slot>
+          <div class='date-container'>
+            <va-text-input aria-describedby='dateHint' class='hydrated input-month' value=''></va-text-input>
+            <va-text-input aria-describedby='dateHint' class='hydrated input-day' value=''></va-text-input>
+            <va-text-input aria-describedby='dateHint' class='hydrated input-year' value=''></va-text-input>
+          </div>
+        </fieldset>
+      </mock:shadow-root>
+    </va-date-text-input>
+  `);
   });
 
   it('passes an axe check', async () => {
@@ -139,7 +158,7 @@ describe('va-date-text-input', () => {
     expect(elementDay.getAttribute('value')).toBe('12');
   });
 
-  it('fires an invalid message if date is invalid and component is required', async () => {
+  it('fires a error message onBlur if date is invalid and component is required', async () => {
     const page = await newE2EPage();
     await page.setContent(
       '<va-date-text-input value="1999-05-03" name="test" required="true" />',
@@ -150,16 +169,19 @@ describe('va-date-text-input', () => {
     // Click three times to select all text in input
     await handleYear.click({ clickCount: 3 });
     await handleYear.press('2');
+    // Trigger Blur
+    await handleYear.press('Tab');
 
     await page.waitForChanges();
-    expect(date.getAttribute('invalid')).toEqual('Please provide a valid date');
+    expect(date.getAttribute('error')).toEqual('Please provide a valid date');
 
     await handleYear.press('0');
     await handleYear.press('2');
     await handleYear.press('2');
-
+    // Trigger Blur
+    await handleYear.press('Tab');
     await page.waitForChanges();
-    expect(date.getAttribute('invalid')).toBeNull();
+    expect(date.getAttribute('error')).toEqual('');
   });
 
   it('emits dateBlur event', async () => {
@@ -169,9 +191,10 @@ describe('va-date-text-input', () => {
       '<va-date-text-input value="1999-05-03" name="test" />',
     );
 
-    const handleMonth = await page.$('pierce/[name="testMonth"]');
+    const handleYear = await page.$('pierce/[name="testYear"]');
     const blurSpy = await page.spyOnEvent('dateBlur');
-    await handleMonth.press('Tab');
+    // Trigger Blur
+    await handleYear.press('Tab');
 
     expect(blurSpy).toHaveReceivedEvent();
   });
@@ -204,5 +227,106 @@ describe('va-date-text-input', () => {
     await handleYear.press('2');
 
     expect(spy).toHaveReceivedEventTimes(6);
+  });
+
+  it('adds an aria-describedby attribute for the component', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent(
+      '<va-date-text-input aria-describedby="This is a test" />',
+    );
+    const date = await page.find('va-date-text-input');
+    expect(date.getAttribute('aria-describedby')).toEqual('This is a test');
+  });
+
+  it('formats single digit days and months into 2 digits with a leading 0', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<va-date-text-input name="test"/>');
+    const date = await page.find('va-date-text-input');
+    const handleMonth = await page.$('pierce/[name="testMonth"]');
+    const handleDay = await page.$('pierce/[name="testDay"]');
+    const handleYear = await page.$('pierce/[name="testYear"]');
+    // Month
+    await handleMonth.press('1');
+    await handleMonth.press('Tab');
+    // Day
+    await handleDay.press('2');
+    await handleDay.press('Tab');
+    // Year
+    await handleYear.press('2');
+    await handleYear.press('0');
+    await handleYear.press('2');
+    await handleYear.press('2');
+    // Trigger Blur
+    await handleYear.press('Tab');
+    await page.waitForChanges();
+    expect(date.getAttribute('value')).toBe('2022-01-02');
+  });
+
+  it('performs custom validation onBlur', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent(
+      '<va-date-text-input custom-validation-boolean="true" custom-validation-message="Custom Message" name="test"/>',
+    );
+    const date = await page.find('va-date-text-input');
+    const handleYear = await page.$('pierce/[name="testYear"]');
+    await handleYear.focus();
+    // Trigger Blur
+    await handleYear.press('Tab');
+    await page.waitForChanges();
+    expect(date.getAttribute('error')).toEqual('Custom Message');
+  });
+
+  it('only allows specific keys to be used inside input fields', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<va-date-text-input name="test"/>');
+    const date = await page.find('va-date-text-input');
+    const handleMonth = await page.$('pierce/[name="testMonth"]');
+    const handleDay = await page.$('pierce/[name="testDay"]');
+    const handleYear = await page.$('pierce/[name="testYear"]');
+    // Month
+    await handleMonth.press('a');
+    await handleMonth.press('Tab');
+    // Day
+    await handleDay.press('b');
+    await handleDay.press('Tab');
+    // Year
+    await handleYear.press('`');
+    await handleYear.press(']');
+    await handleYear.press('/');
+    await handleYear.press(',');
+    // Trigger Blur
+    await handleYear.press('Tab');
+    await page.waitForChanges();
+    expect(date.getAttribute('value')).toBe('--');
+  });
+
+  it('checks for valid year month and day', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<va-date-text-input name="test"/>');
+    const date = await page.find('va-date-text-input');
+    const handleMonth = await page.$('pierce/[name="testMonth"]');
+    const handleDay = await page.$('pierce/[name="testDay"]');
+    const handleYear = await page.$('pierce/[name="testYear"]');
+    // Month
+    await handleMonth.press('0');
+    await handleMonth.press('Tab');
+    // Day
+    await handleDay.press('9');
+    await handleDay.press('9');
+    await handleDay.press('Tab');
+    // Year
+    await handleYear.press('3');
+    await handleYear.press('0');
+    await handleYear.press('0');
+    await handleYear.press('0');
+    // Trigger Blur
+    await handleYear.press('Tab');
+    await page.waitForChanges();
+    expect(date.getAttribute('error')).toEqual('Please provide a valid date');
   });
 });
