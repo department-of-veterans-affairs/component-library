@@ -175,6 +175,12 @@ export const additionalDocs = {
     maturityCategory: USE,
     maturityLevel: DEPLOYED,
   },
+  'va-date-text-input': {
+    guidanceHref: 'form/date-text-input',
+    guidanceName: 'Date Text Input',
+    maturityCategory: CAUTION,
+    maturityLevel: CANDIDATE,
+  },
   'va-featured-content': {
     guidanceHref: 'featured-content',
     guidanceName: 'Featured content',
