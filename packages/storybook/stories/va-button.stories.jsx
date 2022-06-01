@@ -14,6 +14,7 @@ export default {
 };
 
 const defaultArgs = {
+  'big': undefined,
   'disable-analytics': undefined,
   'disabled': undefined,
   'label': undefined,
@@ -21,10 +22,11 @@ const defaultArgs = {
   'previous': undefined,
   'secondary': undefined,
   'submit': undefined,
-  'text': 'Text',
+  'text': 'Edit',
 };
 
 const Template = ({
+  big,
   'disable-analytics': disableAnalytics,
   disabled,
   label,
@@ -36,6 +38,7 @@ const Template = ({
 }) => {
   return (
     <va-button
+      big={big}
       disable-analytics={disableAnalytics}
       disabled={disabled}
       label={label}
@@ -48,8 +51,34 @@ const Template = ({
   );
 };
 
-export const Default = Template.bind({});
-Default.args = {
+export const Primary = Template.bind({});
+Primary.args = {
   ...defaultArgs,
 };
-Default.argTypes = propStructure(buttonDocs);
+Primary.argTypes = propStructure(buttonDocs);
+
+export const Secondary = Template.bind({});
+Secondary.args = {
+  ...defaultArgs,
+  secondary: true,
+};
+
+export const Next = Template.bind({});
+Next.args = {
+  ...defaultArgs,
+  next: true,
+  text: 'Continue',
+};
+
+export const Previous = Template.bind({});
+Previous.args = {
+  ...defaultArgs,
+  previous: true,
+  text: 'Back',
+};
+
+export const Big = Template.bind({});
+Big.args = {
+  ...defaultArgs,
+  big: true,
+};
