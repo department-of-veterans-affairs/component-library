@@ -147,13 +147,41 @@ export namespace Components {
         "label": string;
     }
     interface VaButton {
+        /**
+          * Applies big button styling
+         */
+        "big"?: boolean;
+        /**
+          * Disables analytics tracking
+         */
         "disableAnalytics"?: boolean;
+        /**
+          * Prevents user from interacting with button
+         */
         "disabled"?: boolean;
+        /**
+          * The value for aria-label
+         */
         "label"?: string;
+        /**
+          * Adds an icon after the button text to represent navigation
+         */
         "next"?: boolean;
+        /**
+          * Adds an icon before the button text to represent navigation
+         */
         "previous"?: boolean;
+        /**
+          * Applies secondary button styling
+         */
         "secondary"?: boolean;
+        /**
+          * The button submits the form data
+         */
         "submit"?: boolean;
+        /**
+          * The text displayed on the button
+         */
         "text": string;
     }
     interface VaCheckbox {
@@ -932,7 +960,7 @@ declare namespace LocalJSX {
         /**
           * Fires when the component has successfully finished rendering for the first time.
          */
-        "onVa-component-did-load"?: (event: CustomEvent<any>) => void;
+        "onVaComponentDidLoad"?: (event: CustomEvent<any>) => void;
         /**
           * This option only takes effect when background-only is true. If true, the background-only alert will include an icon.
          */
@@ -1015,17 +1043,45 @@ declare namespace LocalJSX {
         "onComponent-library-analytics"?: (event: CustomEvent<any>) => void;
     }
     interface VaButton {
+        /**
+          * Applies big button styling
+         */
+        "big"?: boolean;
+        /**
+          * Disables analytics tracking
+         */
         "disableAnalytics"?: boolean;
+        /**
+          * Prevents user from interacting with button
+         */
         "disabled"?: boolean;
+        /**
+          * The value for aria-label
+         */
         "label"?: string;
+        /**
+          * Adds an icon after the button text to represent navigation
+         */
         "next"?: boolean;
         /**
           * The event used to track usage of the component.
          */
         "onComponent-library-analytics"?: (event: CustomEvent<any>) => void;
+        /**
+          * Adds an icon before the button text to represent navigation
+         */
         "previous"?: boolean;
+        /**
+          * Applies secondary button styling
+         */
         "secondary"?: boolean;
+        /**
+          * The button submits the form data
+         */
         "submit"?: boolean;
+        /**
+          * The text displayed on the button
+         */
         "text": string;
     }
     interface VaCheckbox {

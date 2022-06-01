@@ -7,6 +7,7 @@ import {
   h,
   Prop,
 } from '@stencil/core';
+import classnames from 'classnames';
 
 /**
  * @nativeHandler onClick
@@ -19,14 +20,47 @@ import {
 export class VaButton {
   // @Element() el: HTMLElement;
 
-  // TODO: add comments
+  /**
+   * Applies big button styling
+   */
+  @Prop() big?: boolean;
+
+  /** Disables analytics tracking */
   @Prop() disableAnalytics?: boolean;
+
+  /**
+   * Prevents user from interacting with button
+   */
   @Prop() disabled?: boolean; // do we want this? double check
+
+  /**
+   * The value for aria-label
+   */
   @Prop() label?: string; // could use this.el.getAttribute('aria-label') but this is more explicit
+
+  /**
+   * Adds an icon after the button text to represent navigation
+   */
   @Prop() next?: boolean;
+
+  /**
+   * Adds an icon before the button text to represent navigation
+   */
   @Prop() previous?: boolean;
+
+  /**
+   * Applies secondary button styling
+   */
   @Prop() secondary?: boolean;
+
+  /**
+   * The button submits the form data
+   */
   @Prop() submit?: boolean;
+
+  /**
+   * The text displayed on the button
+   */
   @Prop() text!: string;
 
   /**
@@ -54,6 +88,7 @@ export class VaButton {
 
   render() {
     const {
+      big,
       disabled,
       handleClick,
       label,
@@ -63,7 +98,12 @@ export class VaButton {
       submit,
       text,
     } = this;
-    const styles = secondary ? 'va-button secondary' : 'va-button primary';
+
+    const styles = classnames('va-button', {
+      big: big,
+      primary: !secondary,
+      secondary: secondary,
+    });
     const type = submit ? 'submit' : 'button';
 
     return (
