@@ -21,10 +21,8 @@ export const additionalDocs = {
   },
   // MDX
   'Button': {
-    guidanceHref: 'button',
-    guidanceName: 'Button',
-    maturityCategory: USE,
-    maturityLevel: BEST_PRACTICE,
+    maturityCategory: DONT_USE,
+    maturityLevel: DEPRECATED,
   },
   'Breadcrumbs': {
     maturityCategory: DONT_USE,
@@ -155,6 +153,12 @@ export const additionalDocs = {
     guidanceName: 'Breadcrumbs',
     maturityCategory: USE,
     maturityLevel: DEPLOYED,
+  },
+  'va-button': {
+    guidanceHref: 'button',
+    guidanceName: 'Button',
+    maturityCategory: USE,
+    maturityLevel: BEST_PRACTICE,
   },
   'va-checkbox': {
     guidanceHref: 'form/checkbox',
