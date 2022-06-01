@@ -1,10 +1,16 @@
 import React, { useState } from 'react';
-
 import Select from '../../react-components/src/components/Select/Select';
+import { StoryDocs } from './wc-helpers';
 
 export default {
-  title: 'Components/Select (deprecated)',
+  title: 'Components/Select',
   component: Select,
+  parameters: {
+    componentSubtitle: 'Select React component',
+    docs: {
+      page: () => <StoryDocs componentName="Select" />,
+    },
+  },
 };
 
 const Template = args => {

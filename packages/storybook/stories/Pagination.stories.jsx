@@ -1,9 +1,16 @@
 import React, { useState } from 'react';
 import Pagination from '../../react-components/src/components/Pagination/Pagination';
+import { StoryDocs } from './wc-helpers';
 
 export default {
   title: 'Components/Pagination',
   component: Pagination,
+  parameters: {
+    componentSubtitle: 'Pagination React component',
+    docs: {
+      page: () => <StoryDocs componentName="Pagination" />,
+    },
+  },
 };
 
 const Template = args => {

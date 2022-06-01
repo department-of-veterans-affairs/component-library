@@ -1,10 +1,16 @@
 import React, { Fragment } from 'react';
-
 import ProgressButton from '../../react-components/src/components/ProgressButton/ProgressButton';
+import { StoryDocs } from './wc-helpers';
 
 export default {
   title: 'Components/Buttons/ProgressButton',
   component: ProgressButton,
+  parameters: {
+    componentSubtitle: 'Progress button component',
+    docs: {
+      page: () => <StoryDocs componentName="ProgressButton" />,
+    },
+  },
 };
 
 const Template = args => <ProgressButton {...args} />;

@@ -1,10 +1,16 @@
 import React from 'react';
-
 import Table from '../../react-components/src/components/Table/Table';
+import { StoryDocs } from './wc-helpers';
 
 export default {
   title: 'Components/Table',
   component: Table,
+  parameters: {
+    componentSubtitle: 'Table React component',
+    docs: {
+      page: () => <StoryDocs componentName="Table" />,
+    },
+  },
 };
 
 const Template = args => <Table {...args} />;

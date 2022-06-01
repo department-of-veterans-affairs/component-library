@@ -1,10 +1,16 @@
 import React, { useEffect, useState } from 'react';
-
 import TextInput from '../../react-components/src/components/TextInput/TextInput';
+import { StoryDocs } from './wc-helpers';
 
 export default {
-  title: 'Components/TextInput (deprecated)',
+  title: 'Components/TextInput',
   component: TextInput,
+  parameters: {
+    componentSubtitle: 'Text input React component',
+    docs: {
+      page: () => <StoryDocs componentName="TextInput" />,
+    },
+  },
 };
 
 const Template = args => {

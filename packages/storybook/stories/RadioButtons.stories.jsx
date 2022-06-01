@@ -1,9 +1,16 @@
 import React, { useState } from 'react';
 import RadioButtons from '../../react-components/src/components/RadioButtons/RadioButtons';
+import { StoryDocs } from './wc-helpers';
 
 export default {
   title: 'Components/RadioButtons',
   component: RadioButtons,
+  parameters: {
+    componentSubtitle: 'Radio buttons React component',
+    docs: {
+      page: () => <StoryDocs componentName="RadioButtons" />,
+    },
+  },
 };
 
 const Template = args => {

@@ -1,9 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { Date } from '@department-of-veterans-affairs/component-library';
+import { StoryDocs } from './wc-helpers';
 
 export default {
   title: 'Components/Date',
   component: Date,
+  parameters: {
+    componentSubtitle: 'Date React component',
+    docs: {
+      page: () => <StoryDocs componentName="Date" />,
+    },
+  },
 };
 
 const Template = args => {
