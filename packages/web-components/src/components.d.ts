@@ -222,7 +222,7 @@ export namespace Components {
     }
     interface VaDateTextInput {
         /**
-          * The aria-describedby attribute lists the ids of the elements that describe the object.  It is used to establish a relationship between widgets or groups and the text that describes them
+          * The aria-describedby attribute lists the ids of the elements that describe the object. It is used to establish a relationship between widgets or groups and the text that describes them
          */
         "ariaDescribedby": string;
         /**
@@ -1142,7 +1142,7 @@ declare namespace LocalJSX {
     }
     interface VaDateTextInput {
         /**
-          * The aria-describedby attribute lists the ids of the elements that describe the object.  It is used to establish a relationship between widgets or groups and the text that describes them
+          * The aria-describedby attribute lists the ids of the elements that describe the object. It is used to establish a relationship between widgets or groups and the text that describes them
          */
         "ariaDescribedby"?: string;
         /**

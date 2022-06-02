@@ -1,6 +1,6 @@
 import { Component, Event, EventEmitter, Host, Prop, h } from '@stencil/core';
 
-import { days, isFullDate } from '../../utils/date-utils';
+import { days, isFullDate, checkLeapYear } from '../../utils/date-utils';
 @Component({
   tag: 'va-date-text-input',
   styleUrl: 'va-date-text-input.css',
@@ -29,7 +29,7 @@ export class VaDateTextInput {
   @Prop() error: string;
 
   /**
-   * The aria-describedby attribute lists the ids of the elements that describe the object. 
+   * The aria-describedby attribute lists the ids of the elements that describe the object.
    * It is used to establish a relationship between widgets or groups and the text that describes them
    */
   @Prop() ariaDescribedby: string;
@@ -81,7 +81,7 @@ export class VaDateTextInput {
     }`;
 
     const daysForSelectedMonth = monthNum > 0 ? days[monthNum] : [];
-
+    const leapYear = checkLeapYear(yearNum);
     // Check validity of date if invalid provide message and error state styling
     if (
       yearNum < 1900 ||
@@ -90,6 +90,7 @@ export class VaDateTextInput {
       monthNum > 12 ||
       dayNum < 1 ||
       dayNum > daysForSelectedMonth.length ||
+      (!leapYear && monthNum === 2 && dayNum > 28) ||
       (this.required && !isFullDate(this.value))
     ) {
       this.error = 'Please provide a valid date';
@@ -139,6 +140,7 @@ export class VaDateTextInput {
       'ArrowRight',
       'ArrowLeft',
       'Tab',
+      'Delete',
     ];
     if (validKeys.indexOf(event.key) < 0) {
       event.preventDefault();
