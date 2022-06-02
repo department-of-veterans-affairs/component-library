@@ -1,6 +1,11 @@
 import { Component, Event, EventEmitter, Host, Prop, h } from '@stencil/core';
 
-import { months, days, isFullDate } from '../../utils/date-utils';
+import {
+  months,
+  days,
+  isFullDate,
+  checkLeapYear,
+} from '../../utils/date-utils';
 @Component({
   tag: 'va-date',
   styleUrl: 'va-date.css',
@@ -29,6 +34,22 @@ export class VaDate {
   @Prop() error: string;
 
   /**
+   * The aria-describedby attribute lists the ids of the elements that describe the object.
+   * It is used to establish a relationship between widgets or groups and the text that describes them
+   */
+  @Prop() ariaDescribedby: string;
+
+  /**
+   * Set to true if custom validation logic does not meet expected criteria for valid input
+   */
+  @Prop() customValidationBoolean: boolean;
+
+  /**
+   * Set message to display if custom validation boolean is true
+   */
+  @Prop() customValidationMessage: string;
+
+  /**
    * Set the default date value must be in YYYY-MM-DD format.
    */
   @Prop({ mutable: true }) value: string;
@@ -52,6 +73,39 @@ export class VaDate {
   dateBlur: EventEmitter;
 
   private handleDateBlur = (event: FocusEvent) => {
+    const [year, month, day] = (this.value || '').split('-').map(val => val);
+    const yearNum = parseInt(year);
+    const monthNum = parseInt(month);
+    const dayNum = parseInt(day);
+    // Use a leading zero for numbers < 10
+    const numFormatter = new Intl.NumberFormat('en-US', {
+      minimumIntegerDigits: 2,
+    });
+    this.value = `${year}-${month ? numFormatter.format(monthNum) : ''}-${
+      day ? numFormatter.format(dayNum) : ''
+    }`;
+    const daysForSelectedMonth = monthNum > 0 ? days[monthNum] : [];
+    const leapYear = checkLeapYear(yearNum);
+    // Check validity of date if invalid provide message and error state styling
+    if (
+      yearNum < 1900 ||
+      yearNum > 2200 ||
+      monthNum < 1 ||
+      monthNum > 12 ||
+      dayNum < 1 ||
+      dayNum > daysForSelectedMonth.length ||
+      day === '' ||
+      month === '' ||
+      year === '' ||
+      (!leapYear && monthNum === 2 && dayNum > 28) ||
+      (this.required && !isFullDate(this.value))
+    ) {
+      this.error = 'Please provide a valid date';
+    } else if (this.customValidationBoolean) {
+      this.error = this.customValidationMessage;
+    } else {
+      this.error = '';
+    }
     this.dateBlur.emit(event);
   };
 
@@ -67,19 +121,38 @@ export class VaDate {
     if (target.classList.contains('input-year')) {
       currentYear = target.value;
     }
-    // Use a leading zero for numbers < 10
-    const numFormatter = new Intl.NumberFormat('en-US', {
-      minimumIntegerDigits: 2,
-    });
 
-    // If Month or Date Select are chosen as empty return ''
-    // Otherwise convert numbers less than 10 to have a leading 0
-    this.value = `${currentYear}-${
-      currentMonth ? numFormatter.format(parseInt(currentMonth)) : ''
-    }-${currentDay ? numFormatter.format(parseInt(currentDay)) : ''}`;
+    this.value = `${currentYear}-${currentMonth ? currentMonth : ''}-${
+      currentDay ? currentDay : ''
+    }`;
 
     // This event should always fire to allow for validation handling
     this.dateChange.emit(event);
+  };
+
+  private handleDateKey = (event: KeyboardEvent) => {
+    // Allow 0-9, Backspace, Delete, Left and Right Arrow, and Tab to clear data or move to next field
+    const validKeys = [
+      '0',
+      '1',
+      '2',
+      '3',
+      '4',
+      '5',
+      '6',
+      '7',
+      '8',
+      '9',
+      'Backspace',
+      'ArrowRight',
+      'ArrowLeft',
+      'Tab',
+      'Delete',
+    ];
+    if (validKeys.indexOf(event.key) < 0) {
+      event.preventDefault();
+      return false;
+    }
   };
 
   /**
@@ -106,44 +179,42 @@ export class VaDate {
       error,
       handleDateBlur,
       handleDateChange,
+      handleDateKey,
       value,
+      ariaDescribedby,
     } = this;
 
-    // Convert string to number to remove leading 0 on values less than 10
-    const [year, month, day] = (value || '')
-      .split('-')
-      .map(val => parseInt(val, 10));
+    const [year, month, day] = (value || '').split('-').map(val => val);
+    const monthNum = parseInt(month);
+    const dayNum = parseInt(day);
+    const daysForSelectedMonth = monthNum > 0 ? days[monthNum] : [];
 
-    const daysForSelectedMonth = month > 0 ? days[month] : [];
-
-    // Check validity of date if invalid provide message and error state styling
-    const dateInvalid =
-      required && (!isFullDate(value) || day > daysForSelectedMonth.length)
-        ? 'Please provide a valid date'
-        : null;
-
-    // Setting new attribute to avoid conflicts with only using error attribute
     // Error attribute should be leveraged for custom error messaging
     // Fieldset has an implicit aria role of group
     return (
-      <Host value={value} invalid={dateInvalid}>
-        <fieldset aria-label="Select Month and two digit day XX and four digit year format XXXX">
+      <Host
+        value={value}
+        error={error || this.error}
+        onBlur={handleDateBlur}
+        aria-describedby={ariaDescribedby}
+      >
+        <fieldset aria-label="Select month and day fields are in two digit format XX and input year field is in four digit format XXXX">
           <legend>
             {label} {required && <span class="required">(*Required)</span>}
           </legend>
-          {(error || dateInvalid) && (
+          {error && (
             <span class="error-message" role="alert">
-              <span class="sr-only">Error</span> {error || dateInvalid}
+              <span class="sr-only">Error</span> {error}
             </span>
           )}
+          <slot />
           <div class="date-container">
             <va-select
               label="Month"
               name={`${name}Month`}
               // Value must be a string
-              value={month?.toString()}
+              value={monthNum?.toString()}
               onVaSelect={handleDateChange}
-              onBlur={handleDateBlur}
               class="select-month"
             >
               <option value=""></option>
@@ -158,9 +229,8 @@ export class VaDate {
               // If day value set is greater than amount of days in the month
               // set to empty string instead
               // Value must be a string
-              value={daysForSelectedMonth.length < day ? '' : day?.toString()}
+              value={dayNum?.toString()}
               onVaSelect={handleDateChange}
-              onBlur={handleDateBlur}
               class="select-day"
             >
               <option value=""></option>
@@ -179,7 +249,7 @@ export class VaDate {
               // Checking is NaN if so provide empty string
               value={year ? year.toString() : ''}
               onInput={handleDateChange}
-              onBlur={handleDateBlur}
+              onKeyDown={handleDateKey}
               class="input-year"
               inputmode="numeric"
               type="text"
