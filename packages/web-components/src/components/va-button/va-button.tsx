@@ -1,13 +1,4 @@
-import {
-  Component,
-  // Element,
-  Event,
-  EventEmitter,
-  Host,
-  h,
-  Prop,
-} from '@stencil/core';
-import classnames from 'classnames';
+import { Component, Event, EventEmitter, Host, h, Prop } from '@stencil/core';
 
 /**
  * @nativeHandler onClick
@@ -18,8 +9,6 @@ import classnames from 'classnames';
   shadow: true,
 })
 export class VaButton {
-  // @Element() el: HTMLElement;
-
   /**
    * Adds an icon before the button text to represent navigation
    */
@@ -96,27 +85,20 @@ export class VaButton {
   render() {
     const {
       back,
-      big,
       continue: _continue,
       disabled,
       getButtonText,
       handleClick,
       label,
-      secondary,
       submit,
     } = this;
 
-    const styles = classnames('va-button', {
-      big: big,
-      secondary: secondary || back,
-    });
     const type = submit ? 'submit' : 'button';
 
     return (
       <Host>
         <button
           aria-label={label}
-          class={styles}
           disabled={disabled}
           onClick={handleClick}
           type={type}

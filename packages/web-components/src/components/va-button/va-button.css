@@ -4,36 +4,48 @@
   display: inline-block;
 }
 
-.va-button {
+button {
   align-items: center;
   background-color: var(--color-primary);
   border-radius: 5px;
   color: var(--color-white);
   display: flex;
   font-size: 1.6rem;
+  justify-content: center;
   margin: 0.5em 0.5em 0.5em 0;
 }
 
-.va-button:active,
-.va-button:hover {
+button:active,
+button:hover {
   background-color: var(--color-primary-darker);
 }
 
-.va-button.secondary {
+:host([back]) button,
+:host([secondary]) button {
   background-color: var(--color-white);
   box-shadow: inset 0 0 0 2px var(--color-primary);
   color: var(--color-primary);
 }
 
-.va-button.secondary:hover {
+:host([back]) button:hover,
+:host([secondary]) button:hover {
   box-shadow: inset 0 0 0 2px var(--color-primary-darker);
   color: var(--color-primary-darker);
 }
 
-.va-button.secondary:active,
-.va-button.secondary:focus,
-.va-button.secondary:hover {
+:host([back]) button:active,
+:host([back]) button:focus,
+:host([back]) button:hover,
+:host([secondary]) button:active,
+:host([secondary]) button:focus,
+:host([secondary]) button:hover {
   background-color: var(--color-gray-cool-light);
+}
+
+:host([big]) button {
+  border-radius: 8px;
+  font-size: 2.4rem;
+  padding: 1.5rem 3rem;
 }
 
 i {
@@ -52,10 +64,4 @@ i.fa-angles-left::before {
 i.fa-angles-right::before {
   content: '\F101';
   margin-left: 8px;
-}
-
-.big {
-  border-radius: 8px;
-  font-size: 2.4rem;
-  padding: 1.5rem 3rem;
 }
