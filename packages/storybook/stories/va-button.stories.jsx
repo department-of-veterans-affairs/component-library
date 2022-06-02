@@ -63,6 +63,12 @@ Secondary.args = {
   secondary: true,
 };
 
+export const Big = Template.bind({});
+Big.args = {
+  ...defaultArgs,
+  big: true,
+};
+
 export const Continue = Template.bind({});
 Continue.args = {
   ...defaultArgs,
@@ -76,21 +82,3 @@ Back.args = {
   back: true,
   text: undefined,
 };
-
-export const Big = Template.bind({});
-Big.args = {
-  ...defaultArgs,
-  big: true,
-};
-
-const ButtonPairTemplate = ({}) => {
-  return (
-    <>
-      <va-button back />
-      <va-button continue />
-    </>
-  );
-};
-
-export const ButtonPair = ButtonPairTemplate.bind({});
-ButtonPair.args = {};
