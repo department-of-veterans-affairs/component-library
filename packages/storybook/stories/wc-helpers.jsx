@@ -169,31 +169,69 @@ export function CustomEventsDescription({ data }) {
   );
 }
 
-export function ComponentDescription({ description }) {
-  if (!description) return null;
+/**
+ * Capitalizes the first character.
+ * (There's probably a better way of doing this)
+ */
+function capitalize(text) {
+  return text ? `${text[0].toUpperCase()}${text.slice(1)}` : null;
+}
 
-  return <div className="vads-u-margin-top--2">{description}</div>;
+/**
+ * This function looks for the `@nativeHandler` doc tag and renders
+ * them in a list. Documentation:
+ * - https://stenciljs.com/docs/docs-json#custom-jsdocs-tags
+ */
+function NativeHandlers({ docsTags = [] }) {
+  const handlers = docsTags
+    .filter(item => item.name === 'nativeHandler')
+    .map(item => item.text);
+
+  if (!handlers.length) return null;
+
+  return (
+    <div className="vads-u-margin-top--2">
+      This component uses the following native handlers:
+      <ul>
+        {handlers.map((handlerName, index) => (
+          <li key={index}>{handlerName}</li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+function CanvasLink() {
+  // We're inside an iframe on the Docs page, so we need to get the parent
+  const canvasLink = window.parent.location.href.replace('docs', 'story');
+  return (
+    <p>
+      Information on this component's accessibility, html output, and how it is
+      used within Storybook can be <a href={canvasLink}>viewed on the Canvas</a>
+      .
+    </p>
+  );
 }
 
 /**
  * Return a component with Storybook docs blocks in a standard order.
  * Accepts a JSON object as a prop representing component information
  */
-export function StoryDocs({ componentName, data }) {
-  let componentData = data;
-
+export function StoryDocs({ componentName, data, children }) {
   const component = componentName || data?.tag;
   const componentDocs = additionalDocs?.[component];
-
-  if (componentData && componentDocs) {
-    componentData = { ...data, ...componentDocs };
-  }
+  const componentData = data ? { ...data, ...componentDocs } : null;
 
   const maturityCategory = componentDocs?.maturityCategory;
   const maturityLevel = componentDocs?.maturityLevel;
-  const guidanceName = componentDocs?.guidanceName || componentName;
-  const guidanceHref = componentDocs?.guidanceHref;
-  const description = componentDocs?.description;
+  // This feels a bit awkward, but I didn't want to use a magic number
+  const _componentName = data?.tag?.slice('va-'.length);
+  // Default the guidance values to be based on the web component's
+  // tag name where possible
+  const {
+    guidanceHref = _componentName,
+    guidanceName = capitalize(_componentName)?.replaceAll('-', ' '),
+  } = componentDocs;
 
   return (
     <>
@@ -201,11 +239,13 @@ export function StoryDocs({ componentName, data }) {
       <Subtitle />
       <MaturityScale category={maturityCategory} level={maturityLevel} />
       <Guidance href={guidanceHref} name={guidanceName} />
-      <ComponentDescription description={description} />
+      <CanvasLink />
       <CustomEventsDescription data={componentData} />
       <Description markdown={data?.docs} />
+      <NativeHandlers docsTags={data?.docsTags} />
       <Primary />
       <ArgsTable story={PRIMARY_STORY} />
+      <>{children}</>
       <Stories />
     </>
   );
