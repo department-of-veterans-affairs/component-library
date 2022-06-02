@@ -182,7 +182,7 @@ export namespace Components {
         /**
           * The text displayed on the button. If continue or back is true, the value of text is ignored.
          */
-        "text": string;
+        "text"?: string;
     }
     interface VaCheckbox {
         /**
@@ -1082,7 +1082,7 @@ declare namespace LocalJSX {
         /**
           * The text displayed on the button. If continue or back is true, the value of text is ignored.
          */
-        "text": string;
+        "text"?: string;
     }
     interface VaCheckbox {
         /**

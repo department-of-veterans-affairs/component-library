@@ -61,7 +61,7 @@ export class VaButton {
   /**
    * The text displayed on the button. If continue or back is true, the value of text is ignored.
    */
-  @Prop() text!: string;
+  @Prop() text?: string;
 
   /**
    * The event used to track usage of the component.
@@ -73,7 +73,7 @@ export class VaButton {
   })
   componentLibraryAnalytics: EventEmitter;
 
-  private handleClick = (e: MouseEvent) => {
+  private handleClick = (e: MouseEvent): void => {
     // TODO: remove console.log
     console.log(e);
     if (this.disableAnalytics) return;
@@ -86,7 +86,7 @@ export class VaButton {
     });
   };
 
-  private getButtonText = () => {
+  private getButtonText = (): string => {
     if (this.continue) return 'Continue';
     if (this.back) return 'Back';
 
