@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import TextInput from '../../react-components/src/components/TextInput/TextInput';
+import TextInput from '@department-of-veterans-affairs/component-library/TextInput';
 import { StoryDocs } from './wc-helpers';
 
 export default {

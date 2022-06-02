@@ -4,6 +4,13 @@ import { uniqueId } from '../../helpers/utilities';
 import { makeField } from '../../helpers/fields';
 import i18next from 'i18next';
 
+if (!i18next.exists('collapse-all-aria-label')) {
+  console.log('SETTING UP DEPENDENCY IN COMPONENT');
+  import('../../../i18n-setup').then(() =>
+    console.log('INITIALIZED', i18next.exists('collapse-all-aria-label')),
+  );
+}
+
 import dispatchAnalyticsEvent from '../../helpers/analytics';
 
 /**
