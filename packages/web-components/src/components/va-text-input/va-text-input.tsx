@@ -17,6 +17,10 @@ if (Build.isTesting) {
   i18next.init({ lng: 'cimode' });
 }
 
+/**
+ * @nativeHandler onInput
+ * @nativeHandler onBlur
+ */
 @Component({
   tag: 'va-text-input',
   styleUrl: 'va-text-input.css',
