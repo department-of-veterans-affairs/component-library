@@ -128,6 +128,13 @@ function findComponents(searchStrings) {
     usedReactComponentsRegex
   );
 
+  const usedNamedReactComponentsRegex = 
+    /import { ([^;]+) } from '@department-of-veterans-affairs\/component-library'/gms;
+  const usedNamedReactComponents = findUsedReactComponents(
+    vwModules,
+    usedNamedReactComponentsRegex
+  );
+
   const usedBindingsRegex =
     /import { ([^;]+) } from '@department-of-veterans-affairs\/component-library\/dist\/react-bindings'/gms;
   const usedReactBindings = findUsedReactComponents(
@@ -141,6 +148,7 @@ function findComponents(searchStrings) {
 
   const vwComponents = [
     ...usedReactComponents,
+    ...usedNamedReactComponents,
     ...vwWebComponents,
     ...usedReactBindings,
   ];
