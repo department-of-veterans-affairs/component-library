@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Select from '../../react-components/src/components/Select/Select';
+import Select from '@department-of-veterans-affairs/component-library/Select';
 import { StoryDocs } from './wc-helpers';
 
 export default {
