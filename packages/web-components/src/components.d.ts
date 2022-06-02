@@ -148,39 +148,39 @@ export namespace Components {
     }
     interface VaButton {
         /**
-          * Adds an icon before the button text to represent navigation
+          * If `true`, the button will use `Back` as its text and an icon to represent going back in form flows.
          */
         "back"?: boolean;
         /**
-          * Applies big button styling
+          * If `true`, the button will use the big variant.
          */
         "big"?: boolean;
         /**
-          * Adds an icon after the button text to represent navigation
+          * If `true`, the button will use `Continue` as its text and an icon to represent proceeding forward in form flows.
          */
         "continue"?: boolean;
         /**
-          * Disables analytics tracking
+          * If `true`, the component-library-analytics event is disabled.
          */
         "disableAnalytics"?: boolean;
         /**
-          * Prevents user from interacting with button
+          * If `true`, the button is disabled.
          */
         "disabled"?: boolean;
         /**
-          * The value for aria-label
+          * The aria-label of the component.
          */
         "label"?: string;
         /**
-          * Applies secondary button styling
+          * If `true`, the button will use the secondary variant.
          */
         "secondary"?: boolean;
         /**
-          * The button submits the form data
+          * If `true`, the button will submit form data when clicked.
          */
         "submit"?: boolean;
         /**
-          * The text displayed on the button. If continue or back is true, the value of text is ignored.
+          * The text displayed on the button. If `continue` or `back` is true, the value of text is ignored.
          */
         "text"?: string;
     }
@@ -1044,27 +1044,27 @@ declare namespace LocalJSX {
     }
     interface VaButton {
         /**
-          * Adds an icon before the button text to represent navigation
+          * If `true`, the button will use `Back` as its text and an icon to represent going back in form flows.
          */
         "back"?: boolean;
         /**
-          * Applies big button styling
+          * If `true`, the button will use the big variant.
          */
         "big"?: boolean;
         /**
-          * Adds an icon after the button text to represent navigation
+          * If `true`, the button will use `Continue` as its text and an icon to represent proceeding forward in form flows.
          */
         "continue"?: boolean;
         /**
-          * Disables analytics tracking
+          * If `true`, the component-library-analytics event is disabled.
          */
         "disableAnalytics"?: boolean;
         /**
-          * Prevents user from interacting with button
+          * If `true`, the button is disabled.
          */
         "disabled"?: boolean;
         /**
-          * The value for aria-label
+          * The aria-label of the component.
          */
         "label"?: string;
         /**
@@ -1072,15 +1072,15 @@ declare namespace LocalJSX {
          */
         "onComponent-library-analytics"?: (event: CustomEvent<any>) => void;
         /**
-          * Applies secondary button styling
+          * If `true`, the button will use the secondary variant.
          */
         "secondary"?: boolean;
         /**
-          * The button submits the form data
+          * If `true`, the button will submit form data when clicked.
          */
         "submit"?: boolean;
         /**
-          * The text displayed on the button. If continue or back is true, the value of text is ignored.
+          * The text displayed on the button. If `continue` or `back` is true, the value of text is ignored.
          */
         "text"?: string;
     }

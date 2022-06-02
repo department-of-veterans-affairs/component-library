@@ -10,45 +10,45 @@ import { Component, Event, EventEmitter, Host, h, Prop } from '@stencil/core';
 })
 export class VaButton {
   /**
-   * Adds an icon before the button text to represent navigation
+   * If `true`, the button will use `Back` as its text and an icon to represent going back in form flows.
    */
-  @Prop() back?: boolean;
+  @Prop() back?: boolean = false;
 
   /**
-   * Applies big button styling
+   * If `true`, the button will use the big variant.
    */
-  @Prop() big?: boolean;
+  @Prop() big?: boolean = false;
 
   /**
-   * Adds an icon after the button text to represent navigation
+   * If `true`, the button will use `Continue` as its text and an icon to represent proceeding forward in form flows.
    */
-  @Prop() continue?: boolean;
+  @Prop() continue?: boolean = false;
 
-  /** Disables analytics tracking */
-  @Prop() disableAnalytics?: boolean;
+  /** If `true`, the component-library-analytics event is disabled. */
+  @Prop() disableAnalytics?: boolean = false;
 
   /**
-   * Prevents user from interacting with button
+   * If `true`, the button is disabled.
    */
-  @Prop() disabled?: boolean; // do we want this? double check
+  @Prop() disabled?: boolean = false; // do we want this? double check
 
   /**
-   * The value for aria-label
+   * The aria-label of the component.
    */
   @Prop() label?: string; // could use this.el.getAttribute('aria-label') but this is more explicit
 
   /**
-   * Applies secondary button styling
+   * If `true`, the button will use the secondary variant.
    */
-  @Prop() secondary?: boolean;
+  @Prop() secondary?: boolean = false;
 
   /**
-   * The button submits the form data
+   * If `true`, the button will submit form data when clicked.
    */
-  @Prop() submit?: boolean;
+  @Prop() submit?: boolean = false;
 
   /**
-   * The text displayed on the button. If continue or back is true, the value of text is ignored.
+   * The text displayed on the button. If `continue` or `back` is true, the value of text is ignored.
    */
   @Prop() text?: string;
 
