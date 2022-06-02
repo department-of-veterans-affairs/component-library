@@ -47,12 +47,12 @@ describe('va-button', () => {
     `);
   });
 
-  it('renders an icon before the button text when previous is true', async () => {
+  it('renders an icon before the button text when back is true', async () => {
     const page = await newE2EPage();
-    await page.setContent('<va-button text="Edit" previous></va-button>');
+    await page.setContent('<va-button text="Edit" back></va-button>');
     const element = await page.find('va-button');
     expect(element).toEqualHtml(`
-    <va-button class="hydrated" text="Edit" previous>
+    <va-button class="hydrated" text="Edit" back>
       <mock:shadow-root>
         <button class="secondary va-button" type="button">
           <i aria-hidden="true" class="fa fa-angles-left"></i>
@@ -63,12 +63,12 @@ describe('va-button', () => {
     `);
   });
 
-  it('renders an icon after the button text when next is true', async () => {
+  it('renders an icon after the button text when continue is true', async () => {
     const page = await newE2EPage();
-    await page.setContent('<va-button text="Edit" next></va-button>');
+    await page.setContent('<va-button text="Edit" continue></va-button>');
     const element = await page.find('va-button');
     expect(element).toEqualHtml(`
-    <va-button class="hydrated" text="Edit" next>
+    <va-button class="hydrated" text="Edit" continue>
       <mock:shadow-root>
         <button class="va-button" type="button">
           Edit

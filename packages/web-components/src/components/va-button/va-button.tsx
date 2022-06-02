@@ -21,9 +21,19 @@ export class VaButton {
   // @Element() el: HTMLElement;
 
   /**
+   * Adds an icon before the button text to represent navigation
+   */
+  @Prop() back?: boolean;
+
+  /**
    * Applies big button styling
    */
   @Prop() big?: boolean;
+
+  /**
+   * Adds an icon after the button text to represent navigation
+   */
+  @Prop() continue?: boolean;
 
   /** Disables analytics tracking */
   @Prop() disableAnalytics?: boolean;
@@ -37,16 +47,6 @@ export class VaButton {
    * The value for aria-label
    */
   @Prop() label?: string; // could use this.el.getAttribute('aria-label') but this is more explicit
-
-  /**
-   * Adds an icon after the button text to represent navigation
-   */
-  @Prop() next?: boolean;
-
-  /**
-   * Adds an icon before the button text to represent navigation
-   */
-  @Prop() previous?: boolean;
 
   /**
    * Applies secondary button styling
@@ -88,12 +88,12 @@ export class VaButton {
 
   render() {
     const {
+      back,
       big,
+      continue: _continue,
       disabled,
       handleClick,
       label,
-      next,
-      previous,
       secondary,
       submit,
       text,
@@ -101,7 +101,7 @@ export class VaButton {
 
     const styles = classnames('va-button', {
       big: big,
-      secondary: secondary || previous,
+      secondary: secondary || back,
     });
     const type = submit ? 'submit' : 'button';
 
@@ -114,9 +114,9 @@ export class VaButton {
           onClick={handleClick}
           type={type}
         >
-          {previous && <i aria-hidden="true" class="fa fa-angles-left" />}
+          {back && <i aria-hidden="true" class="fa fa-angles-left" />}
           {text}
-          {next && <i aria-hidden="true" class="fa fa-angles-right" />}
+          {_continue && <i aria-hidden="true" class="fa fa-angles-right" />}
         </button>
       </Host>
     );

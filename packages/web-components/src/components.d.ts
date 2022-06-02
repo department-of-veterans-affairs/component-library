@@ -148,9 +148,17 @@ export namespace Components {
     }
     interface VaButton {
         /**
+          * Adds an icon before the button text to represent navigation
+         */
+        "back"?: boolean;
+        /**
           * Applies big button styling
          */
         "big"?: boolean;
+        /**
+          * Adds an icon after the button text to represent navigation
+         */
+        "continue"?: boolean;
         /**
           * Disables analytics tracking
          */
@@ -163,14 +171,6 @@ export namespace Components {
           * The value for aria-label
          */
         "label"?: string;
-        /**
-          * Adds an icon after the button text to represent navigation
-         */
-        "next"?: boolean;
-        /**
-          * Adds an icon before the button text to represent navigation
-         */
-        "previous"?: boolean;
         /**
           * Applies secondary button styling
          */
@@ -1044,9 +1044,17 @@ declare namespace LocalJSX {
     }
     interface VaButton {
         /**
+          * Adds an icon before the button text to represent navigation
+         */
+        "back"?: boolean;
+        /**
           * Applies big button styling
          */
         "big"?: boolean;
+        /**
+          * Adds an icon after the button text to represent navigation
+         */
+        "continue"?: boolean;
         /**
           * Disables analytics tracking
          */
@@ -1060,17 +1068,9 @@ declare namespace LocalJSX {
          */
         "label"?: string;
         /**
-          * Adds an icon after the button text to represent navigation
-         */
-        "next"?: boolean;
-        /**
           * The event used to track usage of the component.
          */
         "onComponent-library-analytics"?: (event: CustomEvent<any>) => void;
-        /**
-          * Adds an icon before the button text to represent navigation
-         */
-        "previous"?: boolean;
         /**
           * Applies secondary button styling
          */

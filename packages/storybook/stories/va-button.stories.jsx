@@ -14,36 +14,36 @@ export default {
 };
 
 const defaultArgs = {
+  'back': undefined,
   'big': undefined,
+  'continue': undefined,
   'disable-analytics': undefined,
   'disabled': undefined,
   'label': undefined,
-  'next': undefined,
-  'previous': undefined,
   'secondary': undefined,
   'submit': undefined,
   'text': 'Edit',
 };
 
 const Template = ({
+  back,
   big,
+  'continue': _continue,
   'disable-analytics': disableAnalytics,
   disabled,
   label,
-  next,
-  previous,
   secondary,
   submit,
   text,
 }) => {
   return (
     <va-button
+      back={back}
       big={big}
+      continue={_continue}
       disable-analytics={disableAnalytics}
       disabled={disabled}
       label={label}
-      next={next}
-      previous={previous}
       secondary={secondary}
       submit={submit}
       text={text}
@@ -63,17 +63,17 @@ Secondary.args = {
   secondary: true,
 };
 
-export const Next = Template.bind({});
-Next.args = {
+export const Continue = Template.bind({});
+Continue.args = {
   ...defaultArgs,
-  next: true,
+  continue: true,
   text: 'Continue',
 };
 
-export const Previous = Template.bind({});
-Previous.args = {
+export const Back = Template.bind({});
+Back.args = {
   ...defaultArgs,
-  previous: true,
+  back: true,
   text: 'Back',
 };
 
@@ -86,8 +86,8 @@ Big.args = {
 const ButtonPairTemplate = ({}) => {
   return (
     <>
-      <va-button previous text="Back" />
-      <va-button next text="Continue" />
+      <va-button back text="Back" />
+      <va-button continue text="Continue" />
     </>
   );
 };
