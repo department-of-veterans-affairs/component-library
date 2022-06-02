@@ -133,7 +133,7 @@ describe('va-date-text-input', () => {
     expect(elementYear.getAttribute('value')).toBe('2022');
   });
 
-  it('day and month input only allows for 2 characters to be used', async () => {
+  it('day and month input field only allows for a maximum of 2 characters to be used', async () => {
     const page = await newE2EPage();
     await page.setContent('<va-date-text-input name="test" />');
 
