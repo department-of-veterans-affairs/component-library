@@ -124,7 +124,7 @@ export class VaDateTextInput {
   };
 
   private handleDateKey = (event: KeyboardEvent) => {
-    // Allow 0-9 and then Backspace and Tab to clear data or move to next field
+    // Allow 0-9, Arrow Left, Arrow Right, Delete, Backspace and Tab to clear data or move to next field
     const validKeys = [
       '0',
       '1',
@@ -177,10 +177,8 @@ export class VaDateTextInput {
       ariaDescribedby,
     } = this;
 
-    // Convert string to number to remove leading 0 on values less than 10
     const [year, month, day] = (value || '').split('-').map(val => val);
 
-    // Setting new attribute to avoid conflicts with only using error attribute
     // Error attribute should be leveraged for custom error messaging
     // Fieldset has an implicit aria role of group
     return (
