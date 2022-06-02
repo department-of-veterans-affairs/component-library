@@ -59,7 +59,7 @@ export class VaButton {
   @Prop() submit?: boolean;
 
   /**
-   * The text displayed on the button
+   * The text displayed on the button. If continue or back is true, the value of text is ignored.
    */
   @Prop() text!: string;
 
@@ -86,17 +86,24 @@ export class VaButton {
     });
   };
 
+  private getButtonText = () => {
+    if (this.continue) return 'Continue';
+    if (this.back) return 'Back';
+
+    return this.text;
+  };
+
   render() {
     const {
       back,
       big,
       continue: _continue,
       disabled,
+      getButtonText,
       handleClick,
       label,
       secondary,
       submit,
-      text,
     } = this;
 
     const styles = classnames('va-button', {
@@ -115,7 +122,7 @@ export class VaButton {
           type={type}
         >
           {back && <i aria-hidden="true" class="fa fa-angles-left" />}
-          {text}
+          {getButtonText()}
           {_continue && <i aria-hidden="true" class="fa fa-angles-right" />}
         </button>
       </Host>

@@ -67,14 +67,14 @@ export const Continue = Template.bind({});
 Continue.args = {
   ...defaultArgs,
   continue: true,
-  text: 'Continue',
+  text: undefined,
 };
 
 export const Back = Template.bind({});
 Back.args = {
   ...defaultArgs,
   back: true,
-  text: 'Back',
+  text: undefined,
 };
 
 export const Big = Template.bind({});
@@ -86,8 +86,8 @@ Big.args = {
 const ButtonPairTemplate = ({}) => {
   return (
     <>
-      <va-button back text="Back" />
-      <va-button continue text="Continue" />
+      <va-button back />
+      <va-button continue />
     </>
   );
 };

@@ -49,14 +49,14 @@ describe('va-button', () => {
 
   it('renders an icon before the button text when back is true', async () => {
     const page = await newE2EPage();
-    await page.setContent('<va-button text="Edit" back></va-button>');
+    await page.setContent('<va-button back></va-button>');
     const element = await page.find('va-button');
     expect(element).toEqualHtml(`
-    <va-button class="hydrated" text="Edit" back>
+    <va-button class="hydrated" back>
       <mock:shadow-root>
         <button class="secondary va-button" type="button">
           <i aria-hidden="true" class="fa fa-angles-left"></i>
-          Edit
+          Back
         </button>
       </mock:shadow-root>
     </va-button>
@@ -65,13 +65,13 @@ describe('va-button', () => {
 
   it('renders an icon after the button text when continue is true', async () => {
     const page = await newE2EPage();
-    await page.setContent('<va-button text="Edit" continue></va-button>');
+    await page.setContent('<va-button continue></va-button>');
     const element = await page.find('va-button');
     expect(element).toEqualHtml(`
-    <va-button class="hydrated" text="Edit" continue>
+    <va-button class="hydrated" continue>
       <mock:shadow-root>
         <button class="va-button" type="button">
-          Edit
+          Continue
           <i aria-hidden="true" class="fa fa-angles-right"></i>
         </button>
       </mock:shadow-root>
@@ -124,6 +124,20 @@ describe('va-button', () => {
       </mock:shadow-root>
     </va-button>
     `);
+  });
+
+  it('ignores text value and displays Continue when continue is true', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-button text="Edit" continue></va-button>');
+    const button = await page.find('va-button >>> button');
+    expect(button.textContent).toEqual('Continue');
+  });
+
+  it('ignores text value and displays Back when back is true', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-button text="Edit" back></va-button>');
+    const button = await page.find('va-button >>> button');
+    expect(button.textContent).toEqual('Back');
   });
 
   it('passes an axe check', async () => {
