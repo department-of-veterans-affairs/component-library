@@ -140,6 +140,21 @@ describe('va-button', () => {
     expect(button.textContent).toEqual('Back');
   });
 
+  it(`doesn't display icons if both continue and back are true`, async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-button back continue></va-button>');
+    const element = await page.find('va-button');
+    expect(element).toEqualHtml(`
+    <va-button class="hydrated" back continue>
+      <mock:shadow-root>
+        <button class="secondary va-button" type="button">
+          Continue
+        </button>
+      </mock:shadow-root>
+    </va-button>
+    `);
+  });
+
   it('passes an axe check', async () => {
     const page = await newE2EPage();
     await page.setContent('<va-button text="Edit"></va-button>');

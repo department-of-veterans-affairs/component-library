@@ -121,9 +121,13 @@ export class VaButton {
           onClick={handleClick}
           type={type}
         >
-          {back && <i aria-hidden="true" class="fa fa-angles-left" />}
+          {back && !_continue && (
+            <i aria-hidden="true" class="fa fa-angles-left" />
+          )}
           {getButtonText()}
-          {_continue && <i aria-hidden="true" class="fa fa-angles-right" />}
+          {_continue && !back && (
+            <i aria-hidden="true" class="fa fa-angles-right" />
+          )}
         </button>
       </Host>
     );
