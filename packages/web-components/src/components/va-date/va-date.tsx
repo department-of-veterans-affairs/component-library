@@ -49,12 +49,6 @@ export class VaDate {
   @Prop() error: string;
 
   /**
-   * The aria-describedby attribute lists the ids of the elements that describe the object.
-   * It is used to establish a relationship between widgets or groups and the text that describes them
-   */
-  @Prop() ariaDescribedby: string;
-
-  /**
    * Set to true if custom validation logic does not meet expected criteria for valid input
    */
   @Prop() customValidationBoolean: boolean;
@@ -205,8 +199,7 @@ export class VaDate {
       handleDateBlur,
       handleDateChange,
       handleDateKey,
-      value,
-      ariaDescribedby,
+      value
     } = this;
 
     const [year, month, day] = (value || '').split('-').map(val => val);
@@ -221,7 +214,6 @@ export class VaDate {
         value={value}
         error={error}
         onBlur={handleDateBlur}
-        aria-describedby={ariaDescribedby}
       >
         <fieldset aria-label="Select month and day fields are in two digit format XX and input year field is in four digit format XXXX">
           <legend>
