@@ -1,10 +1,5 @@
 @use "uswds-core/src/styles/functions" as *;
-
-// Our colors
-$tokens-color-basic: (
-  "primary": "#0071bb",
-  "orange": "#eb7f29",
-);
+@use "../tokens/color" as *;
 
 $color-settings: (
   output: true,
@@ -22,7 +17,8 @@ $u-color: (
     modifiers: null,
     values:
       map-collect(
-        $tokens-color-basic
+        $tokens-color-basic,
+        $tokens-color-grayscale
       ),
     settings: $color-settings,
     property: "color",
