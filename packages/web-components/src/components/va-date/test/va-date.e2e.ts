@@ -78,6 +78,8 @@ describe('va-date', () => {
     await handleYear.press('0');
     await handleYear.press('2');
     await handleYear.press('2');
+    // Trigger Blur
+    await handleYear.press('Tab');
     await page.waitForChanges();
 
     expect(elementMonth.getAttribute('value')).toBe('7');
@@ -124,7 +126,7 @@ describe('va-date', () => {
     expect(elementYear.getAttribute('value')).toBe('2022');
   });
 
-  it('fires an invalid message if date is invalid and component is required', async () => {
+  it('fires a error message onBlur if date is invalid and component is required', async () => {
     const page = await newE2EPage();
     await page.setContent(
       '<va-date value="1999-05-03" name="test" required="true" />',
@@ -135,16 +137,19 @@ describe('va-date', () => {
     // Click three times to select all text in input
     await handleYear.click({ clickCount: 3 });
     await handleYear.press('2');
+    // Trigger Blur
+    await handleYear.press('Tab');
 
     await page.waitForChanges();
-    expect(date.getAttribute('invalid')).toEqual('Please provide a valid date');
+    expect(date.getAttribute('error')).toEqual('Please provide a valid date');
 
     await handleYear.press('0');
     await handleYear.press('2');
     await handleYear.press('2');
-
+    // Trigger Blur
+    await handleYear.press('Tab');
     await page.waitForChanges();
-    expect(date.getAttribute('invalid')).toBeNull();
+    expect(date.getAttribute('error')).toEqual('');
   });
 
   it('emits dateBlur event', async () => {
@@ -152,9 +157,10 @@ describe('va-date', () => {
 
     await page.setContent('<va-date value="1999-05-03" name="test" />');
 
-    const handleMonth = await page.$('pierce/[name="testMonth"]');
+    const handleYear = await page.$('pierce/[name="testYear"]');
     const blurSpy = await page.spyOnEvent('dateBlur');
-    await handleMonth.press('Tab');
+    // Trigger Blur
+    await handleYear.press('Tab');
 
     expect(blurSpy).toHaveReceivedEvent();
   });
@@ -182,5 +188,93 @@ describe('va-date', () => {
     await handleYear.press('2');
 
     expect(spy).toHaveReceivedEventTimes(6);
+  });
+
+  it('adds an aria-describedby attribute for the component', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<va-date aria-describedby="This is a test" />');
+    const date = await page.find('va-date');
+    expect(date.getAttribute('aria-describedby')).toEqual('This is a test');
+  });
+
+  it('formats single digit days and months into 2 digits with a leading 0', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<va-date name="test"/>');
+    const date = await page.find('va-date');
+    const handleMonth = await page.$('pierce/[name="testMonth"]');
+    const handleDay = await page.$('pierce/[name="testDay"]');
+    const handleYear = await page.$('pierce/[name="testYear"]');
+    // Month
+    await handleMonth.select('3');
+    await page.waitForChanges();
+    // Day
+    await handleDay.select('2');
+    await page.waitForChanges();
+    // Year
+    await handleYear.press('2');
+    await handleYear.press('0');
+    await handleYear.press('2');
+    await handleYear.press('2');
+    // Trigger Blur
+    await handleYear.press('Tab');
+    await page.waitForChanges();
+    expect(date.getAttribute('value')).toBe('2022-03-02');
+  });
+
+  it('performs custom validation onBlur', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent(
+      '<va-date custom-validation-boolean="true" custom-validation-message="Custom Message" name="test"/>',
+    );
+    const date = await page.find('va-date');
+    const handleYear = await page.$('pierce/[name="testYear"]');
+    await handleYear.focus();
+    // Trigger Blur
+    await handleYear.press('Tab');
+    await page.waitForChanges();
+    expect(date.getAttribute('error')).toEqual('Custom Message');
+  });
+
+  it('only allows specific keys to be used inside input fields', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<va-date name="test"/>');
+    const date = await page.find('va-date');
+    const handleYear = await page.$('pierce/[name="testYear"]');
+    // Year
+    await handleYear.press('a');
+    await handleYear.press(']');
+    await handleYear.press('/');
+    await handleYear.press(',');
+    // Trigger Blur
+    await handleYear.press('Tab');
+    await page.waitForChanges();
+    expect(date.getAttribute('value')).toBe('--');
+  });
+
+  it('checks for valid year month and day', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<va-date name="test"/>');
+    const date = await page.find('va-date');
+    const handleMonth = await page.$('pierce/[name="testMonth"]');
+    const handleDay = await page.$('pierce/[name="testDay"]');
+    const handleYear = await page.$('pierce/[name="testYear"]');
+    // Month
+    await handleMonth.select();
+    // Day
+    await handleDay.select();
+    // Year
+    await handleYear.press('3');
+    await handleYear.press('0');
+    await handleYear.press('0');
+    await handleYear.press('0');
+    // Trigger Blur
+    await handleYear.press('Tab');
+    await page.waitForChanges();
+    expect(date.getAttribute('error')).toEqual('Please provide a valid date');
   });
 });

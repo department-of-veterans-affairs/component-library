@@ -87,7 +87,9 @@ export class VaDate {
     const daysForSelectedMonth = monthNum > 0 ? days[monthNum] : [];
     const leapYear = checkLeapYear(yearNum);
     // Check validity of date if invalid provide message and error state styling
-    if (
+    if (this.customValidationBoolean) {
+      this.error = this.customValidationMessage;
+    } else if (
       yearNum < 1900 ||
       yearNum > 2200 ||
       monthNum < 1 ||
@@ -101,8 +103,6 @@ export class VaDate {
       (this.required && !isFullDate(this.value))
     ) {
       this.error = 'Please provide a valid date';
-    } else if (this.customValidationBoolean) {
-      this.error = this.customValidationMessage;
     } else {
       this.error = '';
     }
@@ -229,7 +229,7 @@ export class VaDate {
               // If day value set is greater than amount of days in the month
               // set to empty string instead
               // Value must be a string
-              value={dayNum?.toString()}
+              value={daysForSelectedMonth.length < dayNum ? '' : dayNum?.toString()}
               onVaSelect={handleDateChange}
               class="select-day"
             >
