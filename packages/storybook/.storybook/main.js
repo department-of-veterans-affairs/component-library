@@ -6,7 +6,16 @@ module.exports = {
     '@storybook/addon-a11y',
     '@storybook/addon-essentials',
     '@storybook/addon-links',
-    '@whitespace/storybook-addon-html'
+    '@whitespace/storybook-addon-html',
+    '@storybook/addon-storysource',
+    {
+      name: '@storybook/addon-docs',
+      options: {
+        sourceLoaderOptions: {
+          injectStoryParameters: false,
+        },
+      },
+    },
   ],
   core: {
     builder: 'webpack5',
