@@ -1835,6 +1835,15 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@department-of-veterans-affairs/css-library@workspace:packages/css-library":
+  version: 0.0.0-use.local
+  resolution: "@department-of-veterans-affairs/css-library@workspace:packages/css-library"
+  dependencies:
+    "@uswds/uswds": ^3.0.1
+    sass: ^1.51.0
+  languageName: unknown
+  linkType: soft
+
 "@department-of-veterans-affairs/formation@npm:^7.0.1":
   version: 7.0.1
   resolution: "@department-of-veterans-affairs/formation@npm:7.0.1"
@@ -1927,6 +1936,7 @@ __metadata:
   dependencies:
     "@babel/core": ^7.15.8
     "@department-of-veterans-affairs/component-library": "workspace:packages/core"
+    "@department-of-veterans-affairs/css-library": "workspace:packages/css-library"
     "@department-of-veterans-affairs/formation": ^7.0.1
     "@mdx-js/react": ^1.6.22
     "@storybook/addon-actions": ^6.4.19
@@ -7619,15 +7629,6 @@ __metadata:
   checksum: c1609af82605474262f3eaa07daa0b2140026bd264ab316d4bf1170272570dbe02f0c49e29407fe0d3634f96c507c27a19a6765fb856fed854a625f9d15618e2
   languageName: node
   linkType: hard
-
-"css-library@workspace:packages/css-library":
-  version: 0.0.0-use.local
-  resolution: "css-library@workspace:packages/css-library"
-  dependencies:
-    "@uswds/uswds": ^3.0.1
-    sass: ^1.51.0
-  languageName: unknown
-  linkType: soft
 
 "css-loader@npm:^3.6.0":
   version: 3.6.0
