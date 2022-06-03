@@ -3,12 +3,6 @@ const path = require('path');
 module.exports = {
   stories: ['../@(src|stories)/**/*.stories.@(js|jsx|ts|tsx|mdx)'],
   addons: [
-    '@storybook/addon-a11y',
-    '@storybook/addon-actions',
-    '@storybook/addon-backgrounds',
-    '@storybook/addon-controls',
-    '@storybook/addon-links',
-    '@whitespace/storybook-addon-html',
     {
       name: '@storybook/addon-docs',
       options: {
@@ -17,6 +11,12 @@ module.exports = {
         },
       },
     },
+    '@storybook/addon-a11y',
+    '@storybook/addon-actions',
+    '@storybook/addon-backgrounds',
+    '@storybook/addon-controls',
+    '@storybook/addon-links',
+    '@whitespace/storybook-addon-html',
     '@storybook/addon-measure',
     '@storybook/addon-outline',
     '@storybook/addon-storysource',
