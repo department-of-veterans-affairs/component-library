@@ -229,16 +229,6 @@ describe('va-date-text-input', () => {
     expect(spy).toHaveReceivedEventTimes(6);
   });
 
-  it('adds an aria-describedby attribute for the component', async () => {
-    const page = await newE2EPage();
-
-    await page.setContent(
-      '<va-date-text-input aria-describedby="This is a test" />',
-    );
-    const date = await page.find('va-date-text-input');
-    expect(date.getAttribute('aria-describedby')).toEqual('This is a test');
-  });
-
   it('formats single digit days and months into 2 digits with a leading 0', async () => {
     const page = await newE2EPage();
 

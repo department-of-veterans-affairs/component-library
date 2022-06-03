@@ -222,10 +222,6 @@ export namespace Components {
     }
     interface VaDateTextInput {
         /**
-          * The aria-describedby attribute lists the ids of the elements that describe the object. It is used to establish a relationship between widgets or groups and the text that describes them
-         */
-        "ariaDescribedby": string;
-        /**
           * Set to true if custom validation logic does not meet expected criteria for valid input
          */
         "customValidationBoolean": boolean;
@@ -1141,10 +1137,6 @@ declare namespace LocalJSX {
         "value"?: string;
     }
     interface VaDateTextInput {
-        /**
-          * The aria-describedby attribute lists the ids of the elements that describe the object. It is used to establish a relationship between widgets or groups and the text that describes them
-         */
-        "ariaDescribedby"?: string;
         /**
           * Set to true if custom validation logic does not meet expected criteria for valid input
          */

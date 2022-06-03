@@ -48,12 +48,6 @@ export class VaDateTextInput {
   @Prop() error: string;
 
   /**
-   * The aria-describedby attribute lists the ids of the elements that describe the object.
-   * It is used to establish a relationship between widgets or groups and the text that describes them
-   */
-  @Prop() ariaDescribedby: string;
-
-  /**
    * Set to true if custom validation logic does not meet expected criteria for valid input
    */
   @Prop() customValidationBoolean: boolean;
@@ -206,7 +200,6 @@ export class VaDateTextInput {
       handleDateChange,
       handleDateKey,
       value,
-      ariaDescribedby,
     } = this;
 
     const [year, month, day] = (value || '').split('-').map(val => val);
@@ -214,12 +207,7 @@ export class VaDateTextInput {
     // Error attribute should be leveraged for custom error messaging
     // Fieldset has an implicit aria role of group
     return (
-      <Host
-        value={value}
-        error={error}
-        onBlur={handleDateBlur}
-        aria-describedby={ariaDescribedby}
-      >
+      <Host value={value} error={error} onBlur={handleDateBlur}>
         <fieldset aria-label="Input month and day fields as two digit XX and four digit year format XXXX">
           <legend>
             {label}{' '}
