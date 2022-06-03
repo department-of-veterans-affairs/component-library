@@ -152,8 +152,6 @@ export const additionalDocs = {
     maturityLevel: DEPLOYED,
   },
   'va-date-text-input': {
-    guidanceHref: 'form/date-text-input',
-    guidanceName: 'Date Text Input',
     maturityCategory: CAUTION,
     maturityLevel: CANDIDATE,
   },
