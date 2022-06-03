@@ -10,7 +10,9 @@ $u-color: (
     values:
       map-collect(
         $tokens-color-basic,
-        $tokens-color-grayscale
+        $tokens-color-grayscale,
+        $tokens-color-tertiary,
+        $tokens-color-hub
       ),
     settings: $color-settings,
     property: "color",

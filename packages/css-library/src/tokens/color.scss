@@ -34,3 +34,34 @@ $tokens-color-grayscale: (
   "gray-warm-light": "#e4e2e0",
   "gray-cool-light": "#dce4ef",
 );
+
+$tokens-color-tertiary: (
+  "gold": "#fdb81e",
+  "gold-darker": "#988530",
+  "gold-light": "#f9c642",
+  "gold-lighter": "#fad980",
+  "gold-lightest": "#fff1d2",
+  "green": "#2e8540",
+  "green-darker": "#195c27",
+  "green-light": "#4aa564",
+  "green-lighter": "#94bfa2",
+  "green-lightest": "#e7f4e4",
+  "cool-blue": "#205493",
+  "cool-blue-light": "#4773aa",
+  "cool-blue-lighter": "#8ba6ca",
+  "cool-blue-lightest": "#dce4ef",
+);
+
+// TODO: Consider removing these since they aren't used
+$tokens-color-hub: (
+  "hub-health-care": "#3f57a6",
+  "hub-education": "#21827f",
+  "hub-disability": "#a23737",
+  "hub-careers": "#bd5727",
+  "hub-pension": "#3e8520",
+  "hub-housing": "#8e704f",
+  "hub-life-insurance": "#6f7a41",
+  "hub-burials": "#357ab2",
+  "hub-family-member": "#003e73",
+  "hub-service-member": "#003e73",
+);
