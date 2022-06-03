@@ -1929,7 +1929,7 @@ __metadata:
     "@department-of-veterans-affairs/component-library": "workspace:packages/core"
     "@department-of-veterans-affairs/formation": ^7.0.1
     "@mdx-js/react": ^1.6.22
-    "@storybook/addon-a11y": ^6.4.19
+    "@storybook/addon-a11y": 6.4.19
     "@storybook/addon-actions": ^6.4.19
     "@storybook/addon-docs": ^6.4.19
     "@storybook/addon-essentials": ^6.4.19
@@ -2862,18 +2862,18 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@storybook/addon-a11y@npm:^6.4.19":
-  version: 6.5.6
-  resolution: "@storybook/addon-a11y@npm:6.5.6"
+"@storybook/addon-a11y@npm:6.4.19":
+  version: 6.4.19
+  resolution: "@storybook/addon-a11y@npm:6.4.19"
   dependencies:
-    "@storybook/addons": 6.5.6
-    "@storybook/api": 6.5.6
-    "@storybook/channels": 6.5.6
-    "@storybook/client-logger": 6.5.6
-    "@storybook/components": 6.5.6
-    "@storybook/core-events": 6.5.6
-    "@storybook/csf": 0.0.2--canary.4566f4d.1
-    "@storybook/theming": 6.5.6
+    "@storybook/addons": 6.4.19
+    "@storybook/api": 6.4.19
+    "@storybook/channels": 6.4.19
+    "@storybook/client-logger": 6.4.19
+    "@storybook/components": 6.4.19
+    "@storybook/core-events": 6.4.19
+    "@storybook/csf": 0.0.2--canary.87bc651.0
+    "@storybook/theming": 6.4.19
     axe-core: ^4.2.0
     core-js: ^3.8.2
     global: ^4.4.0
@@ -2883,14 +2883,14 @@ __metadata:
     ts-dedent: ^2.0.0
     util-deprecate: ^1.0.2
   peerDependencies:
-    react: ^16.8.0 || ^17.0.0 || ^18.0.0
-    react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
+    react: ^16.8.0 || ^17.0.0
+    react-dom: ^16.8.0 || ^17.0.0
   peerDependenciesMeta:
     react:
       optional: true
     react-dom:
       optional: true
-  checksum: 1c70e12bad35891aaf5f6cf6c05d514f1a2a51c6a295ee6c609500bd8063ad2610caa09741b481655da285b8ea38c9495098b09c3e8ebe3441581791e70dbad9
+  checksum: a7e6f544773cd6e515c88d4051ead0cae482d1df4960e8a28d4c45170814a55e56ee5433889dfc87df1d70cf587fe881fb39d042c411fa12a6c09bea21ceb2ef
   languageName: node
   linkType: hard
 
