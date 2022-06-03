@@ -40,10 +40,10 @@ const defaultArgs = {
   errorMessage: undefined,
 };
 
-export const Default = Template.bind({});
+export const Default = Template.bind(null);
 Default.args = { ...defaultArgs };
 
-export const Error = Template.bind({});
+export const Error = Template.bind(null);
 Error.args = {
   ...defaultArgs,
   options: defaultArgs.options.concat(['Invalid option']),
@@ -53,7 +53,7 @@ Error.args = {
   },
 };
 
-export const AriaDescribedby = Template.bind({});
+export const AriaDescribedby = Template.bind(null);
 AriaDescribedby.args = {
   ...defaultArgs,
   value: { value: 'First option' },
@@ -64,7 +64,7 @@ AriaDescribedby.args = {
   ],
 };
 
-export const WithAnalytics = Template.bind({});
+export const WithAnalytics = Template.bind(null);
 WithAnalytics.args = {
   ...defaultArgs,
   value: { value: 'First option' },

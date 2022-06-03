@@ -215,13 +215,13 @@ const BackgroundOnlyTemplate = ({
   );
 };
 
-export const Default = Template.bind({});
+export const Default = Template.bind(null);
 Default.args = {
   ...defaultArgs,
 };
 Default.argTypes = propStructure(alertDocs);
 
-export const SignInOrToolPrompt = Template.bind({});
+export const SignInOrToolPrompt = Template.bind(null);
 SignInOrToolPrompt.args = {
   ...defaultArgs,
   children: (
@@ -237,7 +237,7 @@ SignInOrToolPrompt.args = {
   status: 'continue',
 };
 
-export const Success = Template.bind({});
+export const Success = Template.bind(null);
 Success.args = {
   ...defaultArgs,
   headline: (
@@ -254,7 +254,7 @@ Success.args = {
   status: 'success',
 };
 
-export const Warning = Template.bind({});
+export const Warning = Template.bind(null);
 Warning.args = {
   ...defaultArgs,
   headline: (
@@ -277,7 +277,7 @@ Warning.args = {
   status: 'warning',
 };
 
-export const Error = Template.bind({});
+export const Error = Template.bind(null);
 Error.args = {
   ...defaultArgs,
   headline: <h2 slot="headline">Please sign in to review your information</h2>,
@@ -295,7 +295,7 @@ Error.args = {
   status: 'error',
 };
 
-export const HeadingLevel = Template.bind({});
+export const HeadingLevel = Template.bind(null);
 HeadingLevel.args = {
   ...defaultArgs,
   headline: (
@@ -303,14 +303,14 @@ HeadingLevel.args = {
   ),
 };
 
-export const Dismissable = Template.bind({});
+export const Dismissable = Template.bind(null);
 Dismissable.args = {
   ...defaultArgs,
   closeable: true,
   onCloseEvent: () => console.log('Close event triggered'),
 };
 
-export const DismissableBackgroundOnly = Template.bind({});
+export const DismissableBackgroundOnly = Template.bind(null);
 DismissableBackgroundOnly.args = {
   ...defaultArgs,
   'background-only': true,
@@ -318,7 +318,7 @@ DismissableBackgroundOnly.args = {
   'onCloseEvent': () => console.log('Close event triggered'),
 };
 
-export const DismissableBackgroundOnlyIcon = Template.bind({});
+export const DismissableBackgroundOnlyIcon = Template.bind(null);
 DismissableBackgroundOnlyIcon.args = {
   ...defaultArgs,
   'background-only': true,
@@ -327,27 +327,27 @@ DismissableBackgroundOnlyIcon.args = {
   'onCloseEvent': () => console.log('Close event triggered'),
 };
 
-export const Fullwidth = Template.bind({});
+export const Fullwidth = Template.bind(null);
 Fullwidth.args = {
   ...defaultArgs,
   ...Warning.args,
   'full-width': true,
 };
 
-export const BackgroundOnly = BackgroundOnlyTemplate.bind({});
+export const BackgroundOnly = BackgroundOnlyTemplate.bind(null);
 BackgroundOnly.args = {
   ...defaultArgs,
   'background-only': true,
 };
 
-export const BackgroundOnlyWithIcon = BackgroundOnlyTemplate.bind({});
+export const BackgroundOnlyWithIcon = BackgroundOnlyTemplate.bind(null);
 BackgroundOnlyWithIcon.args = {
   ...defaultArgs,
   'background-only': true,
   'show-icon': true,
 };
 
-export const NotVisible = Template.bind({});
+export const NotVisible = Template.bind(null);
 NotVisible.args = {
   ...defaultArgs,
   visible: false,

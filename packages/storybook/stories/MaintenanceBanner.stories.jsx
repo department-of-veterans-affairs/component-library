@@ -45,10 +45,10 @@ const defaultArgs = {
   warnStartsAt: new Date(new Date().setHours(new Date().getHours() - 1)),
 };
 
-export const DuringMaintenance = Template.bind({});
+export const DuringMaintenance = Template.bind(null);
 DuringMaintenance.args = { ...defaultArgs };
 
-export const BeforeMaintenance = Template.bind({});
+export const BeforeMaintenance = Template.bind(null);
 BeforeMaintenance.args = {
   ...defaultArgs,
   startsAt: new Date(new Date().setHours(new Date().getHours() + 1)),

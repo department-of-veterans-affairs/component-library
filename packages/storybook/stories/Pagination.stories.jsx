@@ -24,8 +24,8 @@ const defaultArgs = {
   pages: 5,
 };
 
-export const Default = Template.bind({});
+export const Default = Template.bind(null);
 Default.args = { ...defaultArgs };
 
-export const ShowLastPage = Template.bind({});
+export const ShowLastPage = Template.bind(null);
 ShowLastPage.args = { ...defaultArgs, pages: 100, showLastPage: true };
