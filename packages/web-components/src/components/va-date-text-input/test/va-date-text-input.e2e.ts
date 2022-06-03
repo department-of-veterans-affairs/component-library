@@ -81,7 +81,7 @@ describe('va-date-text-input', () => {
     expect(year.getAttribute('value')).toBe('1999');
   });
 
-  it('updates date based input fields', async () => {
+  it('updates date based on input fields', async () => {
     const page = await newE2EPage();
     await page.setContent(
       '<va-date-text-input value="1999-05-03" name="test" />',
