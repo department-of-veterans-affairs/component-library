@@ -3,9 +3,9 @@
 @use "./settings" as *;
 
 // Config for color utility classes
-$u-color: (
-  color: (
-    base: "vads",
+$u-bg-color: (
+  background-color: (
+    base: "vads-bg",
     modifiers: null,
     values:
       map-collect(
@@ -13,7 +13,7 @@ $u-color: (
         $tokens-color-grayscale
       ),
     settings: $color-settings,
-    property: "color",
+    property: "background-color",
     type: "utility",
   ),
 );
