@@ -1,3 +1,8 @@
+export const maxYear = 2200;
+export const minYear = 1900;
+export const maxMonths = 12;
+export const minMonths = 1;
+
 export const months = [
   { label: 'January', value: 1 },
   { label: 'February', value: 2 },
@@ -131,9 +136,5 @@ export function isFullDate(date) {
 
 export function checkLeapYear(year) {
   //three conditions to find out the leap year
-  if ((0 == year % 4 && 0 != year % 100) || 0 == year % 400) {
-    return true;
-  } else {
-    return false;
-  }
+  return (0 == year % 4 && 0 != year % 100) || 0 == year % 400;
 }

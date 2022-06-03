@@ -1,18 +1,18 @@
 @import '../va-date/va-date.css';
 
-.input-month {
-  width: 4.8rem;
+.input-month,
+.input-day,
+.input-year {
   margin-right: 1.6rem;
 }
 
+.input-month,
 .input-day {
   width: 4.8rem;
-  margin-right: 1.6rem;
 }
 
 .input-year {
   width: 7.2rem;
-  margin-right: 1.6rem;
 }
 
 .input-month input,
@@ -25,7 +25,6 @@
   padding: 0.8rem 0 1.6rem;
 }
 
-:host([error]:not([error=''])) #dateHint,
-:host([invalid]) #dateHint {
+:host([error]:not([error=''])) #dateHint {
   padding: 0.8rem 0 0;
 }

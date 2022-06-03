@@ -1,12 +1,31 @@
-import { Component, Event, EventEmitter, Host, Prop, h } from '@stencil/core';
+import {
+  Component,
+  Event,
+  EventEmitter,
+  Host,
+  Prop,
+  h,
+  forceUpdate,
+  Element,
+} from '@stencil/core';
+import i18next from 'i18next';
 
-import { days, isFullDate, checkLeapYear } from '../../utils/date-utils';
+import {
+  days,
+  isFullDate,
+  checkLeapYear,
+  maxMonths,
+  maxYear,
+  minMonths,
+  minYear,
+} from '../../utils/date-utils';
 @Component({
   tag: 'va-date-text-input',
   styleUrl: 'va-date-text-input.css',
   shadow: true,
 })
 export class VaDateTextInput {
+  @Element() el: HTMLElement;
   /**
    * Render marker indicating field is required.
    */
@@ -83,19 +102,19 @@ export class VaDateTextInput {
     const daysForSelectedMonth = monthNum > 0 ? days[monthNum] : [];
     const leapYear = checkLeapYear(yearNum);
     // Check validity of date if invalid provide message and error state styling
-    if (
-      yearNum < 1900 ||
-      yearNum > 2200 ||
-      monthNum < 1 ||
-      monthNum > 12 ||
-      dayNum < 1 ||
+    if (this.customValidationBoolean) {
+      this.error = this.customValidationMessage;
+    } else if (
+      yearNum < minYear ||
+      yearNum > maxYear ||
+      monthNum < minMonths ||
+      monthNum > maxMonths ||
+      dayNum < minMonths ||
       dayNum > daysForSelectedMonth.length ||
       (!leapYear && monthNum === 2 && dayNum > 28) ||
       (this.required && !isFullDate(this.value))
     ) {
       this.error = 'Please provide a valid date';
-    } else if (this.customValidationBoolean) {
-      this.error = this.customValidationMessage;
     } else {
       this.error = '';
     }
@@ -164,6 +183,16 @@ export class VaDateTextInput {
   })
   componentLibraryAnalytics: EventEmitter;
 
+  connectedCallback() {
+    i18next.on('languageChanged', () => {
+      forceUpdate(this.el);
+    });
+  }
+
+  disconnectedCallback() {
+    i18next.off('languageChanged');
+  }
+
   render() {
     const {
       required,
@@ -190,7 +219,7 @@ export class VaDateTextInput {
       >
         <fieldset aria-label="Input month and day fields as two digit XX and four digit year format XXXX">
           <legend>
-            {label} {required && <span class="required">(*Required)</span>}
+            {label} {required && <span class="required">(*{i18next.t('required')})</span>}
             <div id="dateHint">Use the following format: MM DD YYYY</div>
           </legend>
           {error && (
