@@ -1,10 +1,24 @@
-import { Component, Event, EventEmitter, Host, Prop, h } from '@stencil/core';
+import {
+  Component,
+  Event,
+  EventEmitter,
+  Host,
+  Prop,
+  h,
+  forceUpdate,
+  Element,
+} from '@stencil/core';
+import i18next from 'i18next';
 
 import {
   months,
   days,
   isFullDate,
   checkLeapYear,
+  maxMonths,
+  maxYear,
+  minMonths,
+  minYear,
 } from '../../utils/date-utils';
 @Component({
   tag: 'va-date',
@@ -12,6 +26,7 @@ import {
   shadow: true,
 })
 export class VaDate {
+  @Element() el: HTMLElement;
   /**
    * Render marker indicating field is required.
    */
@@ -90,11 +105,11 @@ export class VaDate {
     if (this.customValidationBoolean) {
       this.error = this.customValidationMessage;
     } else if (
-      yearNum < 1900 ||
-      yearNum > 2200 ||
-      monthNum < 1 ||
-      monthNum > 12 ||
-      dayNum < 1 ||
+      yearNum < minYear ||
+      yearNum > maxYear ||
+      monthNum < minMonths ||
+      monthNum > maxMonths ||
+      dayNum < minMonths ||
       dayNum > daysForSelectedMonth.length ||
       day === '' ||
       month === '' ||
@@ -171,6 +186,16 @@ export class VaDate {
   })
   componentLibraryAnalytics: EventEmitter;
 
+  connectedCallback() {
+    i18next.on('languageChanged', () => {
+      forceUpdate(this.el);
+    });
+  }
+
+  disconnectedCallback() {
+    i18next.off('languageChanged');
+  }
+
   render() {
     const {
       required,
@@ -194,13 +219,16 @@ export class VaDate {
     return (
       <Host
         value={value}
-        error={error || this.error}
+        error={error}
         onBlur={handleDateBlur}
         aria-describedby={ariaDescribedby}
       >
         <fieldset aria-label="Select month and day fields are in two digit format XX and input year field is in four digit format XXXX">
           <legend>
-            {label} {required && <span class="required">(*Required)</span>}
+            {label}{' '}
+            {required && (
+              <span class="required">(*{i18next.t('required')})</span>
+            )}
           </legend>
           {error && (
             <span class="error-message" role="alert">
@@ -229,7 +257,9 @@ export class VaDate {
               // If day value set is greater than amount of days in the month
               // set to empty string instead
               // Value must be a string
-              value={daysForSelectedMonth.length < dayNum ? '' : dayNum?.toString()}
+              value={
+                daysForSelectedMonth.length < dayNum ? '' : dayNum?.toString()
+              }
               onVaSelect={handleDateChange}
               class="select-day"
             >
