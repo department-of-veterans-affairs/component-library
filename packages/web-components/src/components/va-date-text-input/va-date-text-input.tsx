@@ -111,6 +111,9 @@ export class VaDateTextInput {
       monthNum > maxMonths ||
       dayNum < minMonths ||
       dayNum > daysForSelectedMonth.length ||
+      day === '' ||
+      month === '' ||
+      year === '' ||
       (!leapYear && monthNum === 2 && dayNum > 28) ||
       (this.required && !isFullDate(this.value))
     ) {
@@ -213,13 +216,16 @@ export class VaDateTextInput {
     return (
       <Host
         value={value}
-        error={error || this.error}
+        error={error}
         onBlur={handleDateBlur}
         aria-describedby={ariaDescribedby}
       >
         <fieldset aria-label="Input month and day fields as two digit XX and four digit year format XXXX">
           <legend>
-            {label} {required && <span class="required">(*{i18next.t('required')})</span>}
+            {label}{' '}
+            {required && (
+              <span class="required">(*{i18next.t('required')})</span>
+            )}
             <div id="dateHint">Use the following format: MM DD YYYY</div>
           </legend>
           {error && (

@@ -81,7 +81,7 @@ describe('va-date-text-input', () => {
     expect(year.getAttribute('value')).toBe('1999');
   });
 
-  it('updates date based select and input fields', async () => {
+  it('updates date based input fields', async () => {
     const page = await newE2EPage();
     await page.setContent(
       '<va-date-text-input value="1999-05-03" name="test" />',
@@ -199,7 +199,7 @@ describe('va-date-text-input', () => {
     expect(blurSpy).toHaveReceivedEvent();
   });
 
-  it('emits dateChange event when select or input value is updated', async () => {
+  it('emits dateChange event when input value is updated', async () => {
     const page = await newE2EPage();
 
     await page.setContent(
