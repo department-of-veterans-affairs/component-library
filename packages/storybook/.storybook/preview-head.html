@@ -2,4 +2,13 @@
   body {
     padding: 0 !important;
   }
+  /**
+   * Make sure the text in the `<Description>` doc block is styled like
+   * the rest of the documentation.
+   *  - https://storybook.js.org/docs/react/configure/theming#css-escape-hatches
+   */
+  p.sbdocs-p {
+    font-size: inherit;
+    font-family: var(--font-source-sans);
+  }
 </style>

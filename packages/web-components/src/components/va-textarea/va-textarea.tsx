@@ -6,6 +6,10 @@ if (Build.isTesting) {
   i18next.init({ lng: 'cimode' });
 }
 
+/**
+ * @nativeHandler onInput
+ * @nativeHandler onBlur
+ */
 @Component({
   tag: 'va-textarea',
   styleUrl: 'va-textarea.css',
