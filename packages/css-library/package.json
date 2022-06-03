@@ -1,8 +1,8 @@
 {
-  "name": "css-utilities",
+  "name": "css-library",
   "packageManager": "yarn@3.2.0",
   "scripts": {
-    "build": "sass --load-path=../../node_modules/@uswds/uswds/packages/ src/index.scss out.css",
+    "build": "sass --load-path=../../node_modules/@uswds/uswds/packages/ src/stylesheets:dist/",
     "build:minify": "yarn build --style compressed"
   },
   "devDependencies": {

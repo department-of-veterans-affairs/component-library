@@ -1,6 +1,6 @@
 @use "uswds-core/src/styles/mixins/utility-builder" as *;
 @use "uswds-core/src/styles/functions" as *;
-@use "./color" as *;
+@use "../utilities/color" as *;
 
 $utilities-package: map-collect(
   $u-color,
