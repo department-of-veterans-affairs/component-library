@@ -1,6 +1,9 @@
 {
   "name": "@department-of-veterans-affairs/css-library",
   "packageManager": "yarn@3.2.0",
+  "files": [
+    "dist/*.css"
+  ],
   "scripts": {
     "build": "sass --load-path=../../node_modules/@uswds/uswds/packages/ src/stylesheets:dist/",
     "build:minify": "yarn build --style compressed --no-source-map"
