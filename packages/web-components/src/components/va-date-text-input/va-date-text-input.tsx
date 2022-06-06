@@ -1,4 +1,5 @@
 import {
+  Build,
   Component,
   Event,
   EventEmitter,
@@ -19,6 +20,11 @@ import {
   minMonths,
   minYear,
 } from '../../utils/date-utils';
+
+if (Build.isTesting) {
+  // Make i18next.t() return the key instead of the value
+  i18next.init({ lng: 'cimode' });
+}
 @Component({
   tag: 'va-date-text-input',
   styleUrl: 'va-date-text-input.css',
@@ -202,8 +208,8 @@ export class VaDateTextInput {
       value,
     } = this;
 
-    const [year, month, day] = (value || '').split('-').map(val => val);
-
+    const [year, month, day] = (value || '').split('-');
+    
     // Error attribute should be leveraged for custom error messaging
     // Fieldset has an implicit aria role of group
     return (
@@ -218,7 +224,7 @@ export class VaDateTextInput {
           </legend>
           {error && (
             <span class="error-message" role="alert">
-              <span class="sr-only">Error</span> {error}
+              <span class="sr-only">{i18next.t('error')}</span> {error}
             </span>
           )}
           <slot />
