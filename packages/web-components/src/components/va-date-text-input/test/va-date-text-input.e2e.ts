@@ -11,10 +11,10 @@ describe('va-date-text-input', () => {
     expect(element).toEqualHtml(`
       <va-date-text-input class='hydrated'>
       <mock:shadow-root>
-        <fieldset aria-label='Input month and day fields as two digit XX and four digit year format XXXX'>
+        <fieldset>
           <legend>
             <div id='dateHint'>
-              Use the following format: MM DD YYYY
+            Please enter two digits for the month and day and four digits for the year.
             </div>
           </legend>
           <slot></slot>
