@@ -204,7 +204,7 @@ export const additionalDocs = {
     maturityLevel: DEPLOYED,
   },
   'va-segmented-progress-bar': {
-    guidanceHref: 'progress-bar/segmented',
+    guidanceHref: 'form/progress-bar-segmented',
     maturityCategory: USE,
     maturityLevel: DEPLOYED,
   },
