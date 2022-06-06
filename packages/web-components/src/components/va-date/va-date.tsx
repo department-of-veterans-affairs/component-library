@@ -1,4 +1,5 @@
 import {
+  Build,
   Component,
   Event,
   EventEmitter,
@@ -20,6 +21,12 @@ import {
   minMonths,
   minYear,
 } from '../../utils/date-utils';
+
+if (Build.isTesting) {
+  // Make i18next.t() return the key instead of the value
+  i18next.init({ lng: 'cimode' });
+}
+
 @Component({
   tag: 'va-date',
   styleUrl: 'va-date.css',
@@ -224,7 +231,7 @@ export class VaDate {
           </legend>
           {error && (
             <span class="error-message" role="alert">
-              <span class="sr-only">Error</span> {error}
+              <span class="sr-only">{i18next.t('error')}</span> {error}
             </span>
           )}
           <slot />
