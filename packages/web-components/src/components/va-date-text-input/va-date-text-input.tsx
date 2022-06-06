@@ -117,7 +117,7 @@ export class VaDateTextInput {
       (!leapYear && monthNum === 2 && dayNum > 28) ||
       (this.required && !isFullDate(this.value))
     ) {
-      this.error = 'Please provide a valid date';
+      this.error = 'Please enter a valid date';
     } else {
       this.error = '';
     }
@@ -214,13 +214,13 @@ export class VaDateTextInput {
     // Fieldset has an implicit aria role of group
     return (
       <Host value={value} error={error} onBlur={handleDateBlur}>
-        <fieldset aria-label="Input month and day fields as two digit XX and four digit year format XXXX">
+        <fieldset>
           <legend>
             {label}{' '}
             {required && (
               <span class="required">(*{i18next.t('required')})</span>
             )}
-            <div id="dateHint">Use the following format: MM DD YYYY</div>
+            <div id="dateHint">Please enter two digits for the month and day and four digits for the year.</div>
           </legend>
           {error && (
             <span class="error-message" role="alert">

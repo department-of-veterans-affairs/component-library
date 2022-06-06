@@ -17,14 +17,13 @@ export default {
 };
 
 const defaultArgs = {
-  'label': 'Label should be specific',
+  'label': 'Date of birth',
   'name': 'test',
   'required': false,
   'error': undefined,
   'value': undefined,
   'custom-validation-boolean': false,
   'custom-validation-message': '',
-  'aria-describedby': '',
 };
 
 const Template = ({
@@ -33,7 +32,6 @@ const Template = ({
   required,
   error,
   value,
-  'aria-describedby': ariaDescribedby,
   'custom-validation-boolean': customValidationBoolean,
   'custom-validation-message': customValidationMessage,
 }) => {
@@ -46,12 +44,9 @@ const Template = ({
       value={value}
       custom-validation-boolean={customValidationBoolean}
       custom-validation-message={customValidationMessage}
-      aria-describedby={ariaDescribedby}
       onDateBlur={e => console.log(e, 'DATE BLUR FIRED')}
       onDateChange={e => console.log(e, 'DATE CHANGE FIRED')}
-    >
-      I am hint text in a slot
-    </VaDateTextInput>
+    />
   );
 };
 
@@ -61,7 +56,6 @@ const CustomValidationTemplate = ({
   required,
   error,
   value,
-  'aria-describedby': ariaDescribedby,
   'custom-validation-boolean': customValidationBoolean,
   'custom-validation-message': customValidationMessage,
 }) => {
@@ -86,10 +80,10 @@ const CustomValidationTemplate = ({
         value={dateVal}
         custom-validation-boolean={customValidationBoolean}
         custom-validation-message={customValidationMessage}
-        aria-describedby={ariaDescribedby}
         onDateBlur={e => console.log(e, 'DATE BLUR')}
         onDateChange={e => setDateVal(e.target.value)}
       />
+      <hr />
       <div>
         This example has some custom validation logic built out to detect
         changes made to the input fields that fire when the component is blurred
@@ -121,12 +115,41 @@ const CustomValidationTemplate = ({
   );
 };
 
+const WithHintTextTemplate = ({ name, label, error, required, value }) => {
+  return (
+    <va-date-text-input
+      label={label}
+      name={name}
+      required={required}
+      error={error}
+      value={value}
+    >
+      <va-additional-info trigger="Why is this required?">
+        We need the Veteran’s Social Security number or tax identification
+        number to process the application when it’s submitted online, but it’s
+        not a requirement to apply for the program.
+      </va-additional-info>
+    </va-date-text-input>
+  );
+};
+
 export const Default = Template.bind({});
 Default.args = { ...defaultArgs };
 Default.argTypes = propStructure(dateTextInputDocs);
 
 export const Error = Template.bind({});
 Error.args = { ...defaultArgs, error: 'Error Message Example' };
+
+export const WithHintText = WithHintTextTemplate.bind({});
+WithHintText.args = {
+  ...defaultArgs,
+};
+
+export const WithHintTextError = WithHintTextTemplate.bind({});
+WithHintTextError.args = {
+  ...defaultArgs,
+  error: 'Error Message Example',
+};
 
 export const CustomValidation = CustomValidationTemplate.bind({});
 CustomValidation.args = {
