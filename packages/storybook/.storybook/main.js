@@ -11,17 +11,20 @@ module.exports = {
         },
       },
     },
-    '@storybook/addon-a11y',
-    '@storybook/addon-actions',
-    '@storybook/addon-backgrounds',
-    '@storybook/addon-controls',
+    {
+      name: '@storybook/addon-essentials',
+      options: {
+        // disabled docs because we need to configure it to allow storysource
+        // to display full story in Canvas tab
+        // disabling it allows us to continue to use addon-essentials and not have
+        // to individually list its addons
+        docs: false,
+      },
+    },
     '@storybook/addon-links',
-    '@whitespace/storybook-addon-html',
-    '@storybook/addon-measure',
-    '@storybook/addon-outline',
     '@storybook/addon-storysource',
-    '@storybook/addon-toolbars',
-    '@storybook/addon-viewport',
+    '@whitespace/storybook-addon-html',
+    '@storybook/addon-a11y',
   ],
   core: {
     builder: 'webpack5',
