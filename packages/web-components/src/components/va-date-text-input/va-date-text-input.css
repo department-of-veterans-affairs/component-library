@@ -22,9 +22,17 @@
 }
 
 #dateHint {
-  padding: 0.8rem 0 1.6rem;
+  padding: 0.8rem 0 0.8rem;
 }
 
-:host([error]:not([error=''])) #dateHint {
-  padding: 0.8rem 0 0;
+.date-container {
+  padding-top: 0.8rem;
+}
+
+:host([error]:not([error=''])) .date-container {
+  padding-top: 0;
+}
+
+:host([error]:not([error=''])) .error-message {
+  padding-top: 0.8rem;
 }

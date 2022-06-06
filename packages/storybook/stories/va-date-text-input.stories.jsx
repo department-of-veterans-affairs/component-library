@@ -17,24 +17,14 @@ export default {
 };
 
 const defaultArgs = {
-  'label': 'Date of birth',
-  'name': 'test',
-  'required': false,
-  'error': undefined,
-  'value': undefined,
-  'custom-validation-boolean': false,
-  'custom-validation-message': '',
+  label: 'Date of birth',
+  name: 'test',
+  required: false,
+  error: undefined,
+  value: undefined,
 };
 
-const Template = ({
-  label,
-  name,
-  required,
-  error,
-  value,
-  'custom-validation-boolean': customValidationBoolean,
-  'custom-validation-message': customValidationMessage,
-}) => {
+const Template = ({ label, name, required, error, value }) => {
   return (
     <VaDateTextInput
       label={label}
@@ -42,53 +32,45 @@ const Template = ({
       required={required}
       error={error}
       value={value}
-      custom-validation-boolean={customValidationBoolean}
-      custom-validation-message={customValidationMessage}
       onDateBlur={e => console.log(e, 'DATE BLUR FIRED')}
       onDateChange={e => console.log(e, 'DATE CHANGE FIRED')}
     />
   );
 };
 
-const CustomValidationTemplate = ({
-  label,
-  name,
-  required,
-  error,
-  value,
-  'custom-validation-boolean': customValidationBoolean,
-  'custom-validation-message': customValidationMessage,
-}) => {
+const CustomValidationTemplate = ({ label, name, required, error, value }) => {
   const [dateVal, setDateVal] = useState(value);
+  const [errorVal, setErrorVal] = useState(error);
   const today = new Date();
   // new Date as YYYY-MM-DD is giving the day prior to the day select
   // new Date as YYYY MM DD is giving the correct day selected
   const dateInput = new Date(dateVal.split('-').join(' '));
-  if (dateInput <= today) {
-    customValidationBoolean = true;
-    customValidationMessage = 'Date must be in the future';
-  } else {
-    customValidationBoolean = false;
+  function handleDateBlur() {
+    if (dateInput <= today) {
+      setErrorVal('Date must be in the future');
+    } else {
+      setErrorVal('');
+    }
   }
+
   return (
     <>
       <VaDateTextInput
         label={label}
         name={name}
         required={required}
-        error={error}
+        error={errorVal}
         value={dateVal}
-        custom-validation-boolean={customValidationBoolean}
-        custom-validation-message={customValidationMessage}
-        onDateBlur={e => console.log(e, 'DATE BLUR')}
+        onDateBlur={() => handleDateBlur()}
         onDateChange={e => setDateVal(e.target.value)}
       />
       <hr />
       <div>
         This example has some custom validation logic built out to detect
         changes made to the input fields that fire when the component is blurred
-        ie: focus is removed from the component. If the criteria below is not
-        met an error message will show:
+        ie: focus is removed from the component. We can cause the error prop to
+        dynamically be set if certain parameters are not met. If the criteria
+        below is not met an error message will show:
         <ul>
           <li>Cannot have blank values</li>
           <li>Month and Day are not valid</li>
@@ -104,11 +86,10 @@ const CustomValidationTemplate = ({
         <h5>Sample Custom Validation Conditional Statements</h5>
         <strong>Date in Future Check</strong>
         <pre>if (dateInput &lt;= today)&#123;</pre>
-        <pre>customValidationBoolean = true;</pre>
-        <pre>customValidationMessage = 'Date must be in the future';</pre>
+        <pre>error = 'Date must be in the future';</pre>
         <pre>&#125;</pre>
         <pre>else &#123;</pre>
-        <pre>customValidationBoolean = false;</pre>
+        <pre>error = '';</pre>
         <pre>&#125;</pre>
       </div>
     </>
@@ -124,11 +105,7 @@ const WithHintTextTemplate = ({ name, label, error, required, value }) => {
       error={error}
       value={value}
     >
-      <va-additional-info trigger="Why is this required?">
-        We need the Veteran’s Social Security number or tax identification
-        number to process the application when it’s submitted online, but it’s
-        not a requirement to apply for the program.
-      </va-additional-info>
+      <div className="vads-u-margin-bottom--1">This is example hint text</div>
     </va-date-text-input>
   );
 };

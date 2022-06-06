@@ -254,21 +254,6 @@ describe('va-date-text-input', () => {
     expect(date.getAttribute('value')).toBe('2022-01-02');
   });
 
-  it('performs custom validation onBlur', async () => {
-    const page = await newE2EPage();
-
-    await page.setContent(
-      '<va-date-text-input custom-validation-boolean="true" custom-validation-message="Custom Message" name="test"/>',
-    );
-    const date = await page.find('va-date-text-input');
-    const handleYear = await page.$('pierce/[name="testYear"]');
-    await handleYear.focus();
-    // Trigger Blur
-    await handleYear.press('Tab');
-    await page.waitForChanges();
-    expect(date.getAttribute('error')).toEqual('Custom Message');
-  });
-
   it('only allows specific keys to be used inside input fields', async () => {
     const page = await newE2EPage();
 

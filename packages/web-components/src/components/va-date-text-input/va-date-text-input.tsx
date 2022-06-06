@@ -54,16 +54,6 @@ export class VaDateTextInput {
   @Prop() error: string;
 
   /**
-   * Set to true if custom validation logic does not meet expected criteria for valid input
-   */
-  @Prop() customValidationBoolean: boolean;
-
-  /**
-   * Set message to display if custom validation boolean is true
-   */
-  @Prop() customValidationMessage: string;
-
-  /**
    * Set the default date value must be in YYYY-MM-DD format.
    */
   @Prop({ mutable: true }) value: string;
@@ -102,9 +92,7 @@ export class VaDateTextInput {
     const daysForSelectedMonth = monthNum > 0 ? days[monthNum] : [];
     const leapYear = checkLeapYear(yearNum);
     // Check validity of date if invalid provide message and error state styling
-    if (this.customValidationBoolean) {
-      this.error = this.customValidationMessage;
-    } else if (
+    if (
       yearNum < minYear ||
       yearNum > maxYear ||
       monthNum < minMonths ||
@@ -118,7 +106,10 @@ export class VaDateTextInput {
       (this.required && !isFullDate(this.value))
     ) {
       this.error = 'Please enter a valid date';
-    } else {
+    } else if (this.error !== 'Please enter a valid date') {
+      this.error
+    }
+    else {
       this.error = '';
     }
     this.dateBlur.emit(event);
@@ -209,7 +200,7 @@ export class VaDateTextInput {
     } = this;
 
     const [year, month, day] = (value || '').split('-');
-    
+
     // Error attribute should be leveraged for custom error messaging
     // Fieldset has an implicit aria role of group
     return (
@@ -220,14 +211,17 @@ export class VaDateTextInput {
             {required && (
               <span class="required">(*{i18next.t('required')})</span>
             )}
-            <div id="dateHint">Please enter two digits for the month and day and four digits for the year.</div>
+            <div id="dateHint">
+              Please enter two digits for the month and day and four digits for
+              the year.
+            </div>
           </legend>
+          <slot />
           {error && (
             <span class="error-message" role="alert">
               <span class="sr-only">{i18next.t('error')}</span> {error}
             </span>
           )}
-          <slot />
           <div class="date-container">
             <va-text-input
               label="Month"
