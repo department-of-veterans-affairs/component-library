@@ -1,4 +1,4 @@
-export const maxYear = 2200;
+export const maxYear = new Date().getFullYear() + 100;
 export const minYear = 1900;
 export const maxMonths = 12;
 export const minMonths = 1;
