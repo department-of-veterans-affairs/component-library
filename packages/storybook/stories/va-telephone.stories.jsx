@@ -1,29 +1,12 @@
 import React from 'react';
 import {
-  Title,
-  Subtitle,
-  Description,
-  Primary,
-  ArgsTable,
-  Stories,
-  PRIMARY_STORY,
-} from '@storybook/addon-docs/blocks';
-import {
   CONTACTS,
   contactsMap,
   Table,
 } from '@department-of-veterans-affairs/component-library';
-import {
-  getWebComponentDocs,
-  propStructure,
-  Guidance,
-  MaturityScale,
-} from './wc-helpers';
-import { additionalDocs } from './additional-docs';
+import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
 
 const telephoneDocs = getWebComponentDocs('va-telephone');
-const { guidanceHref, guidanceName, maturityCategory, maturityLevel } =
-  additionalDocs['va-telephone'];
 
 // This builds the available "CONTACTS" list table
 // Descriptions are available in the contacts.js file
@@ -43,29 +26,20 @@ const Contacts = () => (
   />
 );
 
-const Page = () => (
-  <>
-    <Title />
-    <Subtitle>Telephone web component</Subtitle>
-    <MaturityScale category={maturityCategory} level={maturityLevel} />
-    <Guidance href={guidanceHref} name={guidanceName} />
-    <Description />
-    <Primary />
-    <ArgsTable story={PRIMARY_STORY} />
-    <Contacts />
-    <br />
-    <Stories />
-  </>
-);
-
 export default {
   title: 'Components/va-telephone',
   parameters: {
+    componentSubtitle: `Telephone web component`,
     actions: {
       handles: ['component-library-analytics'],
     },
     docs: {
-      page: Page,
+      page: () => (
+        <StoryDocs data={telephoneDocs}>
+          <Contacts />
+          <br />
+        </StoryDocs>
+      ),
     },
   },
 };
