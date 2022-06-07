@@ -66,17 +66,12 @@ const CustomValidationTemplate = ({ label, name, required, error, value }) => {
       />
       <hr />
       <div>
-        This example has some custom validation logic built out to detect
-        changes made to the input fields that fire when the component is blurred
-        ie: focus is removed from the component. We can cause the error prop to
-        dynamically be set if certain parameters are not met. If the criteria
-        below is not met an error message will show:
-        <ul>
-          <li>Cannot have blank values</li>
-          <li>Month and Day are not valid</li>
-          <li>The Year falls outside of the range of 1900 through Current Year + 100 years</li>
-          <li>The date provided is not in the future</li>
-        </ul>
+        This example has some custom validation logic to detect if the date
+        provided is in the future. The validation will occur when the component
+        is blurred ie: focus is removed from the component. This will cause the
+        error prop to be dynamically set if the parameters are not met.
+      </div>
+      <div className="vads-u-margin-top--2">
         <a
           href="https://github.com/department-of-veterans-affairs/component-library/tree/master/packages/storybook/stories"
           target="_blank"

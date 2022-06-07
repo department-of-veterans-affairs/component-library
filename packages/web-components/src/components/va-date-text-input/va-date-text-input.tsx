@@ -25,6 +25,13 @@ if (Build.isTesting) {
   // Make i18next.t() return the key instead of the value
   i18next.init({ lng: 'cimode' });
 }
+
+/**
+ * By default all date components have the following validation:
+ * - Cannot have blank values
+ * - Month and Day must be valid numbers
+ * - The Year cannot fall outside of the range of 1900 through the current year plus 100 years
+ */
 @Component({
   tag: 'va-date-text-input',
   styleUrl: 'va-date-text-input.css',
