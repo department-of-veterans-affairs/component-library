@@ -106,7 +106,7 @@ export class VaDate {
       (!leapYear && monthNum === 2 && dayNum > 28) ||
       (this.required && !isFullDate(this.value))
     ) {
-      this.error = 'Please provide a valid date';
+      this.error = 'Please enter a valid date';
     } else if (this.error !== 'Please enter a valid date') {
       this.error;
     } else {

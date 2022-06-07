@@ -141,7 +141,7 @@ describe('va-date', () => {
     await handleYear.press('Tab');
 
     await page.waitForChanges();
-    expect(date.getAttribute('error')).toEqual('Please provide a valid date');
+    expect(date.getAttribute('error')).toEqual('Please enter a valid date');
 
     await handleYear.press('0');
     await handleYear.press('2');
@@ -252,6 +252,6 @@ describe('va-date', () => {
     // Trigger Blur
     await handleYear.press('Tab');
     await page.waitForChanges();
-    expect(date.getAttribute('error')).toEqual('Please provide a valid date');
+    expect(date.getAttribute('error')).toEqual('Please enter a valid date');
   });
 });
