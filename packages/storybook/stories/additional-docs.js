@@ -136,6 +136,10 @@ export const additionalDocs = {
     maturityCategory: USE,
     maturityLevel: DEPLOYED,
   },
+  'va-button': {
+    maturityCategory: CAUTION,
+    maturityLevel: CANDIDATE,
+  },
   'va-checkbox': {
     guidanceHref: 'form/checkbox',
     maturityCategory: USE,

@@ -146,6 +146,44 @@ export namespace Components {
          */
         "label": string;
     }
+    interface VaButton {
+        /**
+          * If `true`, the button will use `Back` as its text and an icon to represent going back in form flows.
+         */
+        "back"?: boolean;
+        /**
+          * If `true`, the button will use the big variant.
+         */
+        "big"?: boolean;
+        /**
+          * If `true`, the button will use `Continue` as its text and an icon to represent proceeding forward in form flows.
+         */
+        "continue"?: boolean;
+        /**
+          * If `true`, the component-library-analytics event is disabled.
+         */
+        "disableAnalytics"?: boolean;
+        /**
+          * If `true`, the button is disabled.
+         */
+        "disabled"?: boolean;
+        /**
+          * The aria-label of the component.
+         */
+        "label"?: string;
+        /**
+          * If `true`, the button will use the secondary variant.
+         */
+        "secondary"?: boolean;
+        /**
+          * If `true`, the button will submit form data when clicked.
+         */
+        "submit"?: boolean;
+        /**
+          * The text displayed on the button. If `continue` or `back` is true, the value of text is ignored.
+         */
+        "text"?: string;
+    }
     interface VaCheckbox {
         /**
           * The aria-describedby attribute for the input element in the shadow DOM.
@@ -681,6 +719,12 @@ declare global {
         prototype: HTMLVaBreadcrumbsElement;
         new (): HTMLVaBreadcrumbsElement;
     };
+    interface HTMLVaButtonElement extends Components.VaButton, HTMLStencilElement {
+    }
+    var HTMLVaButtonElement: {
+        prototype: HTMLVaButtonElement;
+        new (): HTMLVaButtonElement;
+    };
     interface HTMLVaCheckboxElement extends Components.VaCheckbox, HTMLStencilElement {
     }
     var HTMLVaCheckboxElement: {
@@ -828,6 +872,7 @@ declare global {
         "va-back-to-top": HTMLVaBackToTopElement;
         "va-banner": HTMLVaBannerElement;
         "va-breadcrumbs": HTMLVaBreadcrumbsElement;
+        "va-button": HTMLVaButtonElement;
         "va-checkbox": HTMLVaCheckboxElement;
         "va-checkbox-group": HTMLVaCheckboxGroupElement;
         "va-date": HTMLVaDateElement;
@@ -1029,6 +1074,48 @@ declare namespace LocalJSX {
           * The event used to track usage of the component. This is emitted when a breadcrumb anchor is clicked and disableAnalytics is not true.
          */
         "onComponent-library-analytics"?: (event: CustomEvent<any>) => void;
+    }
+    interface VaButton {
+        /**
+          * If `true`, the button will use `Back` as its text and an icon to represent going back in form flows.
+         */
+        "back"?: boolean;
+        /**
+          * If `true`, the button will use the big variant.
+         */
+        "big"?: boolean;
+        /**
+          * If `true`, the button will use `Continue` as its text and an icon to represent proceeding forward in form flows.
+         */
+        "continue"?: boolean;
+        /**
+          * If `true`, the component-library-analytics event is disabled.
+         */
+        "disableAnalytics"?: boolean;
+        /**
+          * If `true`, the button is disabled.
+         */
+        "disabled"?: boolean;
+        /**
+          * The aria-label of the component.
+         */
+        "label"?: string;
+        /**
+          * The event used to track usage of the component.
+         */
+        "onComponent-library-analytics"?: (event: CustomEvent<any>) => void;
+        /**
+          * If `true`, the button will use the secondary variant.
+         */
+        "secondary"?: boolean;
+        /**
+          * If `true`, the button will submit form data when clicked.
+         */
+        "submit"?: boolean;
+        /**
+          * The text displayed on the button. If `continue` or `back` is true, the value of text is ignored.
+         */
+        "text"?: string;
     }
     interface VaCheckbox {
         /**
@@ -1648,6 +1735,7 @@ declare namespace LocalJSX {
         "va-back-to-top": VaBackToTop;
         "va-banner": VaBanner;
         "va-breadcrumbs": VaBreadcrumbs;
+        "va-button": VaButton;
         "va-checkbox": VaCheckbox;
         "va-checkbox-group": VaCheckboxGroup;
         "va-date": VaDate;
@@ -1685,6 +1773,7 @@ declare module "@stencil/core" {
             "va-back-to-top": LocalJSX.VaBackToTop & JSXBase.HTMLAttributes<HTMLVaBackToTopElement>;
             "va-banner": LocalJSX.VaBanner & JSXBase.HTMLAttributes<HTMLVaBannerElement>;
             "va-breadcrumbs": LocalJSX.VaBreadcrumbs & JSXBase.HTMLAttributes<HTMLVaBreadcrumbsElement>;
+            "va-button": LocalJSX.VaButton & JSXBase.HTMLAttributes<HTMLVaButtonElement>;
             "va-checkbox": LocalJSX.VaCheckbox & JSXBase.HTMLAttributes<HTMLVaCheckboxElement>;
             "va-checkbox-group": LocalJSX.VaCheckboxGroup & JSXBase.HTMLAttributes<HTMLVaCheckboxGroupElement>;
             "va-date": LocalJSX.VaDate & JSXBase.HTMLAttributes<HTMLVaDateElement>;
