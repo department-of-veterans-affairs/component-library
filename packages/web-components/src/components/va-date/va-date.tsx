@@ -86,31 +86,31 @@ export class VaDate {
   dateBlur: EventEmitter;
 
   private handleDateBlur = (event: FocusEvent) => {
-    const [year, month, day] = (this.value || '').split('-').map(val => val);
-    const yearNum = parseInt(year);
-    const monthNum = parseInt(month);
-    const dayNum = parseInt(day);
+    const [year, month, day] = (this.value || '')
+      .split('-')
+      .map(val => parseInt(val));
     // Use a leading zero for numbers < 10
     const numFormatter = new Intl.NumberFormat('en-US', {
       minimumIntegerDigits: 2,
     });
-    this.value = `${year}-${month ? numFormatter.format(monthNum) : ''}-${
-      day ? numFormatter.format(dayNum) : ''
+    this.value = `${year}-${month ? numFormatter.format(month) : ''}-${
+      day ? numFormatter.format(day) : ''
     }`;
-    const daysForSelectedMonth = monthNum > 0 ? days[monthNum] : [];
-    const leapYear = checkLeapYear(yearNum);
+    const daysForSelectedMonth = month > 0 ? days[month] : [];
+    const leapYear = checkLeapYear(year);
+    
     // Check validity of date if invalid provide message and error state styling
     if (
-      yearNum < minYear ||
-      yearNum > maxYear ||
-      monthNum < minMonths ||
-      monthNum > maxMonths ||
-      dayNum < minMonths ||
-      dayNum > daysForSelectedMonth.length ||
-      day === '' ||
-      month === '' ||
-      year === '' ||
-      (!leapYear && monthNum === 2 && dayNum > 28) ||
+      year < minYear ||
+      year > maxYear ||
+      month < minMonths ||
+      month > maxMonths ||
+      day < minMonths ||
+      day > daysForSelectedMonth.length ||
+      !day ||
+      !month ||
+      !year ||
+      (!leapYear && month === 2 && day > 28) ||
       (this.required && !isFullDate(this.value))
     ) {
       this.error = 'Please enter a valid date';
@@ -135,9 +135,7 @@ export class VaDate {
       currentYear = target.value;
     }
 
-    this.value = `${currentYear}-${currentMonth ? currentMonth : ''}-${
-      currentDay ? currentDay : ''
-    }`;
+    this.value = `${currentYear}-${currentMonth}-${currentDay}`;
 
     // This event should always fire to allow for validation handling
     this.dateChange.emit(event);
@@ -188,10 +186,10 @@ export class VaDate {
       value,
     } = this;
 
-    const [year, month, day] = (value || '').split('-').map(val => val);
-    const monthNum = parseInt(month);
-    const dayNum = parseInt(day);
-    const daysForSelectedMonth = monthNum > 0 ? days[monthNum] : [];
+    const [year, month, day] = (value || '')
+      .split('-')
+      .map(val => parseInt(val));
+    const daysForSelectedMonth = month > 0 ? days[month] : [];
 
     // Error attribute should be leveraged for custom error messaging
     // Fieldset has an implicit aria role of group
@@ -215,7 +213,7 @@ export class VaDate {
               label="Month"
               name={`${name}Month`}
               // Value must be a string
-              value={monthNum?.toString()}
+              value={month?.toString()}
               onVaSelect={handleDateChange}
               class="select-month"
               aria-label="Please enter two digits for the month"
@@ -232,9 +230,7 @@ export class VaDate {
               // If day value set is greater than amount of days in the month
               // set to empty string instead
               // Value must be a string
-              value={
-                daysForSelectedMonth.length < dayNum ? '' : dayNum?.toString()
-              }
+              value={daysForSelectedMonth.length < day ? '' : day?.toString()}
               onVaSelect={handleDateChange}
               class="select-day"
               aria-label="Please enter two digits for the day"
