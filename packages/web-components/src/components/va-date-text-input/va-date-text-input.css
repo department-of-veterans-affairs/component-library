@@ -1,13 +1,5 @@
 @import '../va-date/va-date.css';
 
-:host {
-  color: var(--color-gray);
-}
-
-legend {
-  color: var(--color-base);
-}
-
 .input-month,
 .input-day,
 .input-year {
@@ -30,19 +22,6 @@ legend {
 }
 
 #dateHint {
-  padding: 0.8rem 0 0.8rem;
+  padding: 0.8rem 0 0;
   color: var(--color-gray);
-}
-
-.date-container {
-  color: var(--color-base);
-  padding-top: 0.8rem;
-}
-
-:host([error]:not([error=''])) .date-container {
-  padding-top: 0;
-}
-
-:host([error]:not([error=''])) .error-message {
-  padding-top: 0.8rem;
 }

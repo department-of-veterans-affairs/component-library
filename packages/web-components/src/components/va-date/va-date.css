@@ -4,6 +4,7 @@
   display: block;
   font-family: var(--font-source-sans);
   margin-top: 3rem;
+  color: var(--color-gray);
 }
 
 fieldset {
@@ -14,7 +15,8 @@ fieldset {
 
 legend {
   border: 0;
-  padding: 0;
+  padding: 0 0 0.8rem 0;
+  color: var(--color-base);
 }
 
 span.required {
@@ -51,8 +53,18 @@ span.required {
   display: block;
 }
 
+:host([error]:not([error=''])) .error-message {
+  padding-top: 0.8rem;
+}
+
 .date-container {
   display: flex;
+  color: var(--color-base);
+  padding-top: 0.8rem;
+}
+
+:host([error]:not([error=''])) .date-container {
+  padding-top: 0;
 }
 
 .select-month {
