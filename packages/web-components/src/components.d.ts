@@ -196,14 +196,6 @@ export namespace Components {
     }
     interface VaDate {
         /**
-          * Set to true if custom validation logic does not meet expected criteria for valid input
-         */
-        "customValidationBoolean": boolean;
-        /**
-          * Set message to display if custom validation boolean is true
-         */
-        "customValidationMessage": string;
-        /**
           * Whether or not an analytics event will be fired.
          */
         "enableAnalytics": boolean;
@@ -1066,14 +1058,6 @@ declare namespace LocalJSX {
         "required"?: boolean;
     }
     interface VaDate {
-        /**
-          * Set to true if custom validation logic does not meet expected criteria for valid input
-         */
-        "customValidationBoolean"?: boolean;
-        /**
-          * Set message to display if custom validation boolean is true
-         */
-        "customValidationMessage"?: string;
         /**
           * Whether or not an analytics event will be fired.
          */

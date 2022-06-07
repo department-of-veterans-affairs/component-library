@@ -56,16 +56,6 @@ export class VaDate {
   @Prop() error: string;
 
   /**
-   * Set to true if custom validation logic does not meet expected criteria for valid input
-   */
-  @Prop() customValidationBoolean: boolean;
-
-  /**
-   * Set message to display if custom validation boolean is true
-   */
-  @Prop() customValidationMessage: string;
-
-  /**
    * Set the default date value must be in YYYY-MM-DD format.
    */
   @Prop({ mutable: true }) value: string;
@@ -103,9 +93,7 @@ export class VaDate {
     const daysForSelectedMonth = monthNum > 0 ? days[monthNum] : [];
     const leapYear = checkLeapYear(yearNum);
     // Check validity of date if invalid provide message and error state styling
-    if (this.customValidationBoolean) {
-      this.error = this.customValidationMessage;
-    } else if (
+    if (
       yearNum < minYear ||
       yearNum > maxYear ||
       monthNum < minMonths ||
@@ -119,6 +107,8 @@ export class VaDate {
       (this.required && !isFullDate(this.value))
     ) {
       this.error = 'Please provide a valid date';
+    } else if (this.error !== 'Please enter a valid date') {
+      this.error;
     } else {
       this.error = '';
     }
@@ -206,7 +196,7 @@ export class VaDate {
       handleDateBlur,
       handleDateChange,
       handleDateKey,
-      value
+      value,
     } = this;
 
     const [year, month, day] = (value || '').split('-').map(val => val);
@@ -217,11 +207,7 @@ export class VaDate {
     // Error attribute should be leveraged for custom error messaging
     // Fieldset has an implicit aria role of group
     return (
-      <Host
-        value={value}
-        error={error}
-        onBlur={handleDateBlur}
-      >
+      <Host value={value} error={error} onBlur={handleDateBlur}>
         <fieldset aria-label="Select month and day fields are in two digit format XX and input year field is in four digit format XXXX">
           <legend>
             {label}{' '}
@@ -229,12 +215,12 @@ export class VaDate {
               <span class="required">(*{i18next.t('required')})</span>
             )}
           </legend>
+          <slot />
           {error && (
             <span class="error-message" role="alert">
               <span class="sr-only">{i18next.t('error')}</span> {error}
             </span>
           )}
-          <slot />
           <div class="date-container">
             <va-select
               label="Month"
