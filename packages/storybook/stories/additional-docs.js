@@ -155,6 +155,10 @@ export const additionalDocs = {
     maturityCategory: USE,
     maturityLevel: DEPLOYED,
   },
+  'va-date-text-input': {
+    maturityCategory: CAUTION,
+    maturityLevel: CANDIDATE,
+  },
   'va-featured-content': {
     maturityCategory: USE,
     maturityLevel: DEPLOYED,
@@ -204,7 +208,7 @@ export const additionalDocs = {
     maturityLevel: DEPLOYED,
   },
   'va-segmented-progress-bar': {
-    guidanceHref: 'progress-bar/segmented',
+    guidanceHref: 'form/progress-bar-segmented',
     maturityCategory: USE,
     maturityLevel: DEPLOYED,
   },

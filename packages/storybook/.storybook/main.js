@@ -3,10 +3,28 @@ const path = require('path');
 module.exports = {
   stories: ['../@(src|stories)/**/*.stories.@(js|jsx|ts|tsx|mdx)'],
   addons: [
-    '@storybook/addon-a11y',
-    '@storybook/addon-essentials',
+    {
+      name: '@storybook/addon-docs',
+      options: {
+        sourceLoaderOptions: {
+          injectStoryParameters: false,
+        },
+      },
+    },
+    {
+      name: '@storybook/addon-essentials',
+      options: {
+        // disabled docs because we need to configure it to allow storysource
+        // to display full story in Canvas tab
+        // disabling it allows us to continue to use addon-essentials and not have
+        // to individually list its addons
+        docs: false,
+      },
+    },
     '@storybook/addon-links',
-    '@whitespace/storybook-addon-html'
+    '@storybook/addon-storysource',
+    '@whitespace/storybook-addon-html',
+    '@storybook/addon-a11y',
   ],
   core: {
     builder: 'webpack5',

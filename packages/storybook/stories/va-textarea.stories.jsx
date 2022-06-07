@@ -51,22 +51,22 @@ const Template = ({
   );
 };
 
-export const Default = Template.bind({});
+export const Default = Template.bind(null);
 Default.args = { ...defaultArgs };
 Default.argTypes = propStructure(textareaDocs);
 
-export const Error = Template.bind({});
+export const Error = Template.bind(null);
 Error.args = { ...defaultArgs, error: 'This is an error message' };
 
-export const Required = Template.bind({});
+export const Required = Template.bind(null);
 Required.args = { ...defaultArgs, required: true };
 
-export const MaxLength = Template.bind({});
+export const MaxLength = Template.bind(null);
 MaxLength.args = {
   ...defaultArgs,
   maxlength: '16',
   placeholder: 'No more than 16 characters',
 };
 
-export const WithAnalytics = Template.bind({});
+export const WithAnalytics = Template.bind(null);
 WithAnalytics.args = { ...defaultArgs, 'enable-analytics': true };

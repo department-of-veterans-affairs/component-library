@@ -19,7 +19,7 @@ const defaultArgs = {
   buttonText: 'Continue',
 };
 
-export const Default = Template.bind({});
+export const Default = Template.bind(null);
 Default.args = { ...defaultArgs, buttonText: 'Continue', afterText: '»' };
 
 const ButtonPairTemplate = args => (
@@ -29,7 +29,7 @@ const ButtonPairTemplate = args => (
   </Fragment>
 );
 
-export const ButtonPairs = ButtonPairTemplate.bind({});
+export const ButtonPairs = ButtonPairTemplate.bind(null);
 ButtonPairs.args = {
   backButton: {
     buttonClass: 'usa-button-secondary',
@@ -42,15 +42,15 @@ ButtonPairs.args = {
   },
 };
 
-export const Back = Template.bind({});
+export const Back = Template.bind(null);
 Back.args = { ...defaultArgs, buttonText: 'Back', beforeText: '«' };
 
-export const SubmitButton = Template.bind({});
+export const SubmitButton = Template.bind(null);
 SubmitButton.args = {
   ...defaultArgs,
   buttonText: 'Submit',
   submitButton: true,
 };
 
-export const Disabled = Template.bind({});
+export const Disabled = Template.bind(null);
 Disabled.args = { ...defaultArgs, disabled: true };

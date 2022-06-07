@@ -93,22 +93,22 @@ const defaultArgs = {
   title: 'Modal title goes here',
 };
 
-export const Default = Template.bind({});
+export const Default = Template.bind(null);
 Default.args = { ...defaultArgs };
 
 // Statuses
-export const Info = Template.bind({});
+export const Info = Template.bind(null);
 Info.args = { ...defaultArgs, status: 'info' };
-export const Continue = Template.bind({});
+export const Continue = Template.bind(null);
 Continue.args = { ...defaultArgs, status: 'continue' };
-export const Success = Template.bind({});
+export const Success = Template.bind(null);
 Success.args = { ...defaultArgs, status: 'success' };
-export const Warning = Template.bind({});
+export const Warning = Template.bind(null);
 Warning.args = { ...defaultArgs, status: 'warning' };
-export const Error = Template.bind({});
+export const Error = Template.bind(null);
 Error.args = { ...defaultArgs, status: 'error' };
 
-export const ClickOutsideToClose = Template.bind({});
+export const ClickOutsideToClose = Template.bind(null);
 ClickOutsideToClose.args = {
   ...defaultArgs,
   children: (
@@ -120,24 +120,24 @@ ClickOutsideToClose.args = {
   clickToClose: true,
 };
 
-export const WithoutButtons = Template.bind({});
+export const WithoutButtons = Template.bind(null);
 WithoutButtons.args = {
   ...defaultArgs,
   primaryButton: undefined,
   secondaryButton: undefined,
 };
 
-export const WithoutTitle = Template.bind({});
+export const WithoutTitle = Template.bind(null);
 WithoutTitle.args = { ...defaultArgs, title: undefined };
 
-export const HideCloseButton = Template.bind({});
+export const HideCloseButton = Template.bind(null);
 HideCloseButton.args = {
   ...defaultArgs,
   hideCloseButton: true,
   clickToClose: true,
 };
 
-export const CrisisLineModal = CrisisTemplate.bind({});
+export const CrisisLineModal = CrisisTemplate.bind(null);
 CrisisLineModal.args = {
   ...defaultArgs,
   primaryButton: null,

@@ -29,8 +29,8 @@ const Template = args => (
 
 const defaultArgs = {};
 
-export const Default = Template.bind({});
+export const Default = Template.bind(null);
 Default.args = { ...defaultArgs };
 
-export const MobileFirst = Template.bind({});
+export const MobileFirst = Template.bind(null);
 MobileFirst.args = { ...defaultArgs, mobileFirstProp: true };
