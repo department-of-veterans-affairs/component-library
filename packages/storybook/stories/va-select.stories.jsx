@@ -84,17 +84,17 @@ const Template = ({
   );
 };
 
-export const Default = Template.bind({});
+export const Default = Template.bind(null);
 Default.args = { ...defaultArgs };
 Default.argTypes = propStructure(selectDocs);
 
-export const Required = Template.bind({});
+export const Required = Template.bind(null);
 Required.args = { ...defaultArgs, required: true };
 
-export const ErrorMessage = Template.bind({});
+export const ErrorMessage = Template.bind(null);
 ErrorMessage.args = { ...defaultArgs, error: 'There was a problem' };
 
-export const DynamicOptions = Template.bind({});
+export const DynamicOptions = Template.bind(null);
 DynamicOptions.args = { ...defaultArgs, 'use-add-button': true };
 
 const I18nTemplate = args => {
@@ -114,5 +114,5 @@ const I18nTemplate = args => {
   );
 };
 
-export const Internationalization = I18nTemplate.bind({});
+export const Internationalization = I18nTemplate.bind(null);
 Internationalization.args = { ...defaultArgs, required: true };

@@ -27,10 +27,10 @@ const defaultArgs = {
   },
 };
 
-export const Default = Template.bind({});
+export const Default = Template.bind(null);
 Default.args = { ...defaultArgs };
 
-export const Error = Template.bind({});
+export const Error = Template.bind(null);
 Error.args = Object.assign({}, defaultArgs, {
   date: {
     month: { value: '13', dirty: true },
@@ -39,5 +39,5 @@ Error.args = Object.assign({}, defaultArgs, {
   invalidMessage: "That date doesn't work...",
 });
 
-export const Required = Template.bind({});
+export const Required = Template.bind(null);
 Required.args = { ...defaultArgs, required: true };

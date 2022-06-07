@@ -26,7 +26,7 @@ const defaultArgs = {
   'disable-analytics': false,
 };
 
-export const Default = Template.bind({});
+export const Default = Template.bind(null);
 Default.args = {
   ...defaultArgs,
 };

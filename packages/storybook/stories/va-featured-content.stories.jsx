@@ -41,5 +41,5 @@ const Template = () => (
   </va-featured-content>
 );
 
-export const Default = Template.bind({});
+export const Default = Template.bind(null);
 Default.argTypes = propStructure(featuredContentDocs);

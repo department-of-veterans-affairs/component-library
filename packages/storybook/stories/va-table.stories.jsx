@@ -86,7 +86,7 @@ Sortable.args = {
   'sort-column': 2,
 };
 
-export const MissingData = Template.bind({});
+export const MissingData = Template.bind(null);
 MissingData.args = {
   ...defaultArgs,
   rows: [
@@ -99,7 +99,7 @@ MissingData.args = {
   ],
 };
 
-export const CustomComponents = Template.bind({});
+export const CustomComponents = Template.bind(null);
 CustomComponents.args = {
   ...defaultArgs,
   rows: [

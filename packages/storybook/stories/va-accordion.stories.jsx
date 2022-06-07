@@ -113,36 +113,36 @@ const defaultArgs = {
   'open-single': undefined,
 };
 
-export const Default = Template.bind({});
+export const Default = Template.bind(null);
 Default.args = {
   ...defaultArgs,
 };
 Default.argTypes = propStructure(accordionDocs);
 
-export const SingleSelect = Template.bind({});
+export const SingleSelect = Template.bind(null);
 SingleSelect.args = {
   ...defaultArgs,
   'open-single': true,
 };
 
-export const Bordered = Template.bind({});
+export const Bordered = Template.bind(null);
 Bordered.args = {
   ...defaultArgs,
   bordered: true,
 };
 
-export const ChangeHeaderLevel = Template.bind({});
+export const ChangeHeaderLevel = Template.bind(null);
 ChangeHeaderLevel.args = {
   ...defaultArgs,
   level: 4,
 };
 
-export const Subheader = TemplateSubheader.bind({});
+export const Subheader = TemplateSubheader.bind(null);
 Subheader.args = {
   ...defaultArgs,
 };
 
-export const Internationalization = I18nTemplate.bind({});
+export const Internationalization = I18nTemplate.bind(null);
 Internationalization.args = {
   ...defaultArgs,
 };

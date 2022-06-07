@@ -43,14 +43,14 @@ const Template = ({
   />
 );
 
-export const Default = Template.bind({});
+export const Default = Template.bind(null);
 Default.args = { ...defaultArgs };
 Default.argTypes = propStructure(checkboxDocs);
 
-export const Checked = Template.bind({});
+export const Checked = Template.bind(null);
 Checked.args = { ...defaultArgs, checked: true };
 
-export const WithDescriptionString = Template.bind({});
+export const WithDescriptionString = Template.bind(null);
 WithDescriptionString.args = {
   ...defaultArgs,
   description: 'Adding some descriptive text above the checkbox.',
@@ -68,7 +68,7 @@ export const WithDescriptionJSX = props => (
 );
 WithDescriptionJSX.args = { ...defaultArgs };
 
-export const Error = Template.bind({});
+export const Error = Template.bind(null);
 Error.args = {
   ...defaultArgs,
   description:
@@ -76,8 +76,8 @@ Error.args = {
   error: 'There has been a problem',
 };
 
-export const Required = Template.bind({});
+export const Required = Template.bind(null);
 Required.args = { ...defaultArgs, required: true };
 
-export const WithAnalytics = Template.bind({});
+export const WithAnalytics = Template.bind(null);
 WithAnalytics.args = { ...defaultArgs, 'enable-analytics': true };

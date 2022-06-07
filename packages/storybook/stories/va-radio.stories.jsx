@@ -86,19 +86,19 @@ const defaultArgs = {
   'error': null,
 };
 
-export const Default = Template.bind({});
+export const Default = Template.bind(null);
 Default.args = {
   ...defaultArgs,
 };
 Default.argTypes = propStructure(radioDocs);
 
-export const Error = Template.bind({});
+export const Error = Template.bind(null);
 Error.args = {
   ...defaultArgs,
   error: 'There has been an error',
 };
 
-export const IdUsage = IdUsageTemplate.bind({});
+export const IdUsage = IdUsageTemplate.bind(null);
 IdUsage.args = {
   ...defaultArgs,
   required: true,
