@@ -1,5 +1,13 @@
 @import '../va-date/va-date.css';
 
+:host {
+  color: var(--color-gray);
+}
+
+legend {
+  color: var(--color-base);
+}
+
 .input-month,
 .input-day,
 .input-year {
@@ -23,9 +31,11 @@
 
 #dateHint {
   padding: 0.8rem 0 0.8rem;
+  color: var(--color-gray);
 }
 
 .date-container {
+  color: var(--color-base);
   padding-top: 0.8rem;
 }
 

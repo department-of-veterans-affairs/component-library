@@ -77,20 +77,12 @@ const CustomValidationTemplate = ({ label, name, required, error, value }) => {
           <li>The Year falls outside of the range of 1900-2200</li>
           <li>The date provided is not in the future</li>
         </ul>
-        These are examples of how Custom Validation could be used with this
-        component.
-        <h5>Sample Variables</h5>
-        <pre>const [dateVal, setDateVal] = useState(value);</pre>
-        <pre>const today = new Date();</pre>
-        <pre>const dateInput = new Date(dateVal.split('-').join(' '));</pre>
-        <h5>Sample Custom Validation Conditional Statements</h5>
-        <strong>Date in Future Check</strong>
-        <pre>if (dateInput &lt;= today)&#123;</pre>
-        <pre>error = 'Date must be in the future';</pre>
-        <pre>&#125;</pre>
-        <pre>else &#123;</pre>
-        <pre>error = '';</pre>
-        <pre>&#125;</pre>
+        <a
+          href="https://github.com/department-of-veterans-affairs/component-library/tree/master/packages/storybook/stories"
+          target="_blank"
+        >
+          View validation code in our repo
+        </a>
       </div>
     </>
   );

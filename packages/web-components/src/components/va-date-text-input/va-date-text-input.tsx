@@ -232,7 +232,7 @@ export class VaDateTextInput {
               aria-describedby="dateHint"
               // Value must be a string
               // if NaN provide empty string
-              value={month ? month.toString() : ''}
+              value={month?.toString()}
               onInput={handleDateChange}
               onKeyDown={handleDateKey}
               class="input-month"
@@ -248,7 +248,7 @@ export class VaDateTextInput {
               aria-describedby="dateHint"
               // Value must be a string
               // if NaN provide empty string
-              value={day ? day.toString() : ''}
+              value={day?.toString()}
               onInput={handleDateChange}
               onKeyDown={handleDateKey}
               class="input-day"
@@ -264,7 +264,7 @@ export class VaDateTextInput {
               aria-describedby="dateHint"
               // Value must be a string
               // if NaN provide empty string
-              value={year ? year.toString() : ''}
+              value={year?.toString()}
               onInput={handleDateChange}
               onKeyDown={handleDateKey}
               class="input-year"
