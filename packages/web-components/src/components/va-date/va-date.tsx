@@ -20,6 +20,7 @@ import {
   maxYear,
   minMonths,
   minYear,
+  validKeys,
 } from '../../utils/date-utils';
 
 if (Build.isTesting) {
@@ -143,24 +144,6 @@ export class VaDate {
   };
 
   private handleDateKey = (event: KeyboardEvent) => {
-    // Allow 0-9, Backspace, Delete, Left and Right Arrow, and Tab to clear data or move to next field
-    const validKeys = [
-      '0',
-      '1',
-      '2',
-      '3',
-      '4',
-      '5',
-      '6',
-      '7',
-      '8',
-      '9',
-      'Backspace',
-      'ArrowRight',
-      'ArrowLeft',
-      'Tab',
-      'Delete',
-    ];
     if (validKeys.indexOf(event.key) < 0) {
       event.preventDefault();
       return false;
@@ -214,7 +197,7 @@ export class VaDate {
     // Fieldset has an implicit aria role of group
     return (
       <Host value={value} error={error} onBlur={handleDateBlur}>
-        <fieldset aria-label="Select month and day fields are in two digit format XX and input year field is in four digit format XXXX">
+        <fieldset>
           <legend>
             {label}{' '}
             {required && (
@@ -235,6 +218,7 @@ export class VaDate {
               value={monthNum?.toString()}
               onVaSelect={handleDateChange}
               class="select-month"
+              aria-label="Please enter two digits for the month"
             >
               <option value=""></option>
               {months &&
@@ -253,6 +237,7 @@ export class VaDate {
               }
               onVaSelect={handleDateChange}
               class="select-day"
+              aria-label="Please enter two digits for the day"
             >
               <option value=""></option>
               {daysForSelectedMonth &&
@@ -274,6 +259,7 @@ export class VaDate {
               class="input-year"
               inputmode="numeric"
               type="text"
+              aria-label="Please enter four digits for the year"
             />
           </div>
         </fieldset>
