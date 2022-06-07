@@ -102,25 +102,25 @@ const WithHintTextTemplate = ({ name, label, error, required, value }) => {
   );
 };
 
-export const Default = Template.bind({});
+export const Default = Template.bind(null);
 Default.args = { ...defaultArgs };
 Default.argTypes = propStructure(dateTextInputDocs);
 
-export const Error = Template.bind({});
+export const Error = Template.bind(null);
 Error.args = { ...defaultArgs, error: 'Error Message Example' };
 
-export const WithHintText = WithHintTextTemplate.bind({});
+export const WithHintText = WithHintTextTemplate.bind(null);
 WithHintText.args = {
   ...defaultArgs,
 };
 
-export const WithHintTextError = WithHintTextTemplate.bind({});
+export const WithHintTextError = WithHintTextTemplate.bind(null);
 WithHintTextError.args = {
   ...defaultArgs,
   error: 'Error Message Example',
 };
 
-export const CustomValidation = CustomValidationTemplate.bind({});
+export const CustomValidation = CustomValidationTemplate.bind(null);
 CustomValidation.args = {
   ...defaultArgs,
   required: true,
