@@ -56,13 +56,13 @@ const defaultArgs = {
   'window-session': false,
 };
 
-export const Default = Template.bind({});
+export const Default = Template.bind(null);
 Default.args = {
   ...defaultArgs,
 };
 Default.argTypes = propStructure(bannerDocs);
 
-export const Closeable = Template.bind({});
+export const Closeable = Template.bind(null);
 Closeable.args = {
   ...defaultArgs,
   'show-close': true,

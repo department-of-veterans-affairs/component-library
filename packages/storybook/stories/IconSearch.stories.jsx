@@ -18,7 +18,7 @@ const defaultArgs = {
   title: 'Search',
 };
 
-export const Default = Template.bind({});
+export const Default = Template.bind(null);
 Default.args = {
   ...defaultArgs,
   role: 'image',

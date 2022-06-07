@@ -27,7 +27,7 @@ const defaultArgs = {
   'percent': 48.123456,
 };
 
-export const Default = Template.bind({});
+export const Default = Template.bind(null);
 Default.args = {
   ...defaultArgs,
 };

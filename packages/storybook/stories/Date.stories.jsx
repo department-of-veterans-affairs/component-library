@@ -53,12 +53,12 @@ const defaultArgs = {
   },
 };
 
-export const Default = Template.bind({});
+export const Default = Template.bind(null);
 Default.args = {
   ...defaultArgs,
 };
 
-export const Error = Template.bind({});
+export const Error = Template.bind(null);
 Error.args = {
   ...defaultArgs,
   date: {
@@ -77,7 +77,7 @@ Error.args = {
   },
 };
 
-export const AriaDescribedby = Template.bind({});
+export const AriaDescribedby = Template.bind(null);
 AriaDescribedby.args = {
   ...defaultArgs,
   ariaDescribedby: 'some-id',

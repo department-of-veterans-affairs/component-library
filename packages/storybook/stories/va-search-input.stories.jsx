@@ -34,13 +34,13 @@ const defaultArgs = {
   'suggestions': undefined,
 };
 
-export const Default = Template.bind({});
+export const Default = Template.bind(null);
 Default.args = {
   ...defaultArgs,
 };
 Default.argTypes = propStructure(searchDocs);
 
-export const WithButtonText = Template.bind({});
+export const WithButtonText = Template.bind(null);
 WithButtonText.args = {
   ...defaultArgs,
   'button-text': 'Search',
@@ -99,7 +99,7 @@ const TypeaheadTemplate = ({ value, suggestions }) => {
     </div>
   );
 };
-export const WithTypeahead = TypeaheadTemplate.bind({});
+export const WithTypeahead = TypeaheadTemplate.bind(null);
 WithTypeahead.args = {
   ...defaultArgs,
   value: '',

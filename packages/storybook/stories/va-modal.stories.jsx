@@ -84,31 +84,31 @@ const defaultArgs = {
   'secondary-button-text': 'Secondary button',
 };
 
-export const Default = Template.bind({});
+export const Default = Template.bind(null);
 Default.args = {
   ...defaultArgs,
 };
 Default.argTypes = propStructure(modalDocs);
 
 // Statuses
-export const Info = Template.bind({});
+export const Info = Template.bind(null);
 Info.args = { ...defaultArgs, status: 'info' };
-export const Continue = Template.bind({});
+export const Continue = Template.bind(null);
 Continue.args = { ...defaultArgs, status: 'continue' };
-export const Success = Template.bind({});
+export const Success = Template.bind(null);
 Success.args = { ...defaultArgs, status: 'success' };
-export const Warning = Template.bind({});
+export const Warning = Template.bind(null);
 Warning.args = { ...defaultArgs, status: 'warning' };
-export const Error = Template.bind({});
+export const Error = Template.bind(null);
 Error.args = { ...defaultArgs, status: 'error' };
 
-export const ClickOutsideToClose = Template.bind({});
+export const ClickOutsideToClose = Template.bind(null);
 ClickOutsideToClose.args = {
   ...defaultArgs,
   'click-to-close': true,
 };
 
-export const WithoutButtons = Template.bind({});
+export const WithoutButtons = Template.bind(null);
 WithoutButtons.args = {
   ...defaultArgs,
   'primaryButtonClick': undefined,
@@ -117,7 +117,7 @@ WithoutButtons.args = {
   'secondary-button-text': undefined,
 };
 
-export const WithoutTitle = Template.bind({});
+export const WithoutTitle = Template.bind(null);
 WithoutTitle.args = { ...defaultArgs, 'modal-title': undefined };
 
 export const WithNestedWebComponents = ({
@@ -251,7 +251,7 @@ const CrisisTemplate = ({
   );
 };
 
-export const CrisisLineModal = CrisisTemplate.bind({});
+export const CrisisLineModal = CrisisTemplate.bind(null);
 CrisisLineModal.args = {
   ...defaultArgs,
   'primaryButtonClick': undefined,

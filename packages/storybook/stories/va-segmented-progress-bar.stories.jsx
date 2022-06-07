@@ -68,14 +68,14 @@ const defaultArgs = {
   'label': undefined,
 };
 
-export const Default = Template.bind({});
+export const Default = Template.bind(null);
 Default.args = {
   ...defaultArgs,
 };
 
 Default.argTypes = propStructure(segmentedProgressBarDocs);
 
-export const AriaLabelOverride = Template.bind({});
+export const AriaLabelOverride = Template.bind(null);
 AriaLabelOverride.args = {
   ...defaultArgs,
   label: 'Label is here',
