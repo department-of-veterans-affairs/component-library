@@ -231,7 +231,7 @@ SignInOrToolPrompt.args = {
         appeals on your mobile device. Download the{' '}
         <strong>VA: Health and Benefits</strong> mobile app to get started.
       </p>
-      <button className="usa-button-primary">Sign in to VA.gov</button>
+      <button className="va-button-primary">Sign in to VA.gov</button>
     </div>
   ),
   status: 'continue',
