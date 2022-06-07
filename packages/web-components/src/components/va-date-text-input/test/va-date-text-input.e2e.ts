@@ -19,8 +19,8 @@ describe('va-date-text-input', () => {
           </legend>
           <slot></slot>
           <div class='date-container'>
-            <va-text-input aria-describedby='dateHint' class='hydrated input-month' value=''></va-text-input>
-            <va-text-input aria-describedby='dateHint' class='hydrated input-day' value=''></va-text-input>
+            <va-text-input aria-describedby='dateHint' class='hydrated input-month'></va-text-input>
+            <va-text-input aria-describedby='dateHint' class='hydrated input-day'></va-text-input>
             <va-text-input aria-describedby='dateHint' class='hydrated input-year' value=''></va-text-input>
           </div>
         </fieldset>
