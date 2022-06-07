@@ -1,9 +1,11 @@
+$color-orange: #eb7f29;
+
 // Our colors
 $tokens-color-basic: (
   "base": "#212121",
   "white": "#ffffff",
   "black": "#000000",
-  "orange": "#eb7f29",
+  "orange": false,
   "link-default": "#004795",
   "warning-message": "#fac922",
   "gibill-accent": "#fff1d2",
