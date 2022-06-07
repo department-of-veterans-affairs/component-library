@@ -74,7 +74,7 @@ const CustomValidationTemplate = ({ label, name, required, error, value }) => {
         <ul>
           <li>Cannot have blank values</li>
           <li>Month and Day are not valid</li>
-          <li>The Year falls outside of the range of 1900-2200</li>
+          <li>The Year falls outside of the range of 1900 through Current Year + 100 years</li>
           <li>The date provided is not in the future</li>
         </ul>
         <a
