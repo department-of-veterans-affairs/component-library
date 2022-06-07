@@ -31,43 +31,43 @@ const defaultArgs = {
   },
 };
 
-export const Default = Template.bind({});
+export const Default = Template.bind(null);
 Default.args = {
   ...defaultArgs,
 };
 
-export const ErrorMessage = Template.bind({});
+export const ErrorMessage = Template.bind(null);
 ErrorMessage.args = {
   ...defaultArgs,
   errorMessage: 'There was a problem',
 };
 
-export const Required = Template.bind({});
+export const Required = Template.bind(null);
 Required.args = {
   ...defaultArgs,
   required: true,
 };
 
-export const WithPlaceholder = Template.bind({});
+export const WithPlaceholder = Template.bind(null);
 WithPlaceholder.args = {
   ...defaultArgs,
   placeholder: 'This is a placeholder',
 };
 
-export const Disabled = Template.bind({});
+export const Disabled = Template.bind(null);
 Disabled.args = {
   ...defaultArgs,
   disabled: true,
 };
 
-export const MaxChars = Template.bind({});
+export const MaxChars = Template.bind(null);
 MaxChars.args = {
   ...defaultArgs,
   charMax: 16,
   placeholder: 'No more than 16 characters',
 };
 
-export const WithAnalytics = Template.bind({});
+export const WithAnalytics = Template.bind(null);
 WithAnalytics.args = {
   ...defaultArgs,
   enableAnalytics: true,

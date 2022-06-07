@@ -66,12 +66,12 @@ const defaultArgs = {
 /**
  * Use this for informational purposes.
  */
-export const Default = Template.bind({});
+export const Default = Template.bind(null);
 Default.args = {
   ...defaultArgs,
 };
 
-export const Unsortable = Template.bind({});
+export const Unsortable = Template.bind(null);
 Unsortable.args = {
   ...defaultArgs,
   fields: [
@@ -87,7 +87,7 @@ Unsortable.args = {
 /**
  * The first item in the first column is displayed as three dashes for a null value
  */
-export const MissingData = Template.bind({});
+export const MissingData = Template.bind(null);
 MissingData.args = {
   ...defaultArgs,
   data: [
@@ -101,7 +101,7 @@ MissingData.args = {
 };
 
 // This story might not be useful
-export const AlignLeft = Template.bind({});
+export const AlignLeft = Template.bind(null);
 AlignLeft.args = {
   ...defaultArgs,
   fields: [
@@ -116,7 +116,7 @@ AlignLeft.args = {
 };
 
 // This story might not be useful
-export const alignRight = Template.bind({});
+export const alignRight = Template.bind(null);
 alignRight.args = {
   ...defaultArgs,
   fields: [
@@ -130,7 +130,7 @@ alignRight.args = {
   ],
 };
 
-export const CustomComponents = Template.bind({});
+export const CustomComponents = Template.bind(null);
 CustomComponents.args = {
   ...defaultArgs,
   data: [

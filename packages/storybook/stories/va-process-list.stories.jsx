@@ -87,8 +87,8 @@ const UtilityStyling = ({}) => {
   );
 };
 
-export const Default = Template.bind({});
+export const Default = Template.bind(null);
 Default.args = { ...defaultArgs };
 Default.argTypes = propStructure(processListDocs);
 
-export const AdditionalStyling = UtilityStyling.bind({});
+export const AdditionalStyling = UtilityStyling.bind(null);

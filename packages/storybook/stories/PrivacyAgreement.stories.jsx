@@ -21,8 +21,8 @@ const defaultArgs = {
   checked: false,
 };
 
-export const Default = Template.bind({});
+export const Default = Template.bind(null);
 Default.args = { ...defaultArgs };
 
-export const WithError = Template.bind({});
+export const WithError = Template.bind(null);
 WithError.args = { ...defaultArgs, showError: true };
