@@ -53,12 +53,12 @@ const Template = ({
   );
 };
 
-export const Default = Template.bind({});
+export const Default = Template.bind(null);
 Default.args = { ...defaultArgs };
 Default.argTypes = propStructure(loadingIndicatorDocs);
 
-export const SetFocus = Template.bind({});
+export const SetFocus = Template.bind(null);
 SetFocus.args = { ...defaultArgs, 'set-focus': true };
 
-export const EnableAnalytics = Template.bind({});
+export const EnableAnalytics = Template.bind(null);
 EnableAnalytics.args = { ...defaultArgs, 'enable-analytics': true };

@@ -77,43 +77,43 @@ const defaultArgs = {
   'vanity': undefined,
 };
 
-export const Default = Template.bind({});
+export const Default = Template.bind(null);
 Default.args = {
   ...defaultArgs,
 };
 Default.argTypes = propStructure(telephoneDocs);
 
-export const ThreeDigitNumber = Template.bind({});
+export const ThreeDigitNumber = Template.bind(null);
 ThreeDigitNumber.args = {
   ...defaultArgs,
   contact: '711',
 };
 
-export const Extension = Template.bind({});
+export const Extension = Template.bind(null);
 Extension.args = {
   ...defaultArgs,
   extension: '123',
 };
 
-export const NotClickable = Template.bind({});
+export const NotClickable = Template.bind(null);
 NotClickable.args = {
   ...defaultArgs,
   'not-clickable': true,
 };
 
-export const International = Template.bind({});
+export const International = Template.bind(null);
 International.args = {
   ...defaultArgs,
   international: true,
 };
 
-export const AriaDescribedBy = Template.bind({});
+export const AriaDescribedBy = Template.bind(null);
 AriaDescribedBy.args = {
   ...defaultArgs,
   ariaDescribedby: 'numberDescription',
 };
 
-export const VanityNumber = Template.bind({});
+export const VanityNumber = Template.bind(null);
 VanityNumber.args = {
   ...defaultArgs,
   contact: '8772228387',

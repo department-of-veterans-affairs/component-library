@@ -110,35 +110,35 @@ const IconlessTemplate = ({ trigger, iconless }) => {
   );
 };
 
-export const Default = Template.bind({});
+export const Default = Template.bind(null);
 Default.args = { ...defaultArgs };
 Default.argTypes = propStructure(alertExpandableDocs);
 
-export const Error = Template.bind({});
+export const Error = Template.bind(null);
 Error.args = {
   ...defaultArgs,
   status: 'error',
 };
 
-export const Warning = Template.bind({});
+export const Warning = Template.bind(null);
 Warning.args = {
   ...defaultArgs,
   status: 'warning',
 };
 
-export const Success = Template.bind({});
+export const Success = Template.bind(null);
 Success.args = {
   ...defaultArgs,
   status: 'success',
 };
 
-export const Continue = Template.bind({});
+export const Continue = Template.bind(null);
 Continue.args = {
   ...defaultArgs,
   status: 'continue',
 };
 
-export const NoIcon = IconlessTemplate.bind({});
+export const NoIcon = IconlessTemplate.bind(null);
 NoIcon.args = {
   ...defaultArgs,
   iconless: true,

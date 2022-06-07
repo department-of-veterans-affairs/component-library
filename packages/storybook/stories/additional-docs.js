@@ -151,6 +151,10 @@ export const additionalDocs = {
     maturityCategory: USE,
     maturityLevel: DEPLOYED,
   },
+  'va-date-text-input': {
+    maturityCategory: CAUTION,
+    maturityLevel: CANDIDATE,
+  },
   'va-featured-content': {
     maturityCategory: USE,
     maturityLevel: DEPLOYED,

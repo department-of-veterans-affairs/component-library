@@ -48,11 +48,11 @@ const Template = ({
   );
 };
 
-export const Default = Template.bind({});
+export const Default = Template.bind(null);
 Default.args = { ...defaultArgs };
 Default.argTypes = propStructure(additionalInfoDocs);
 
-export const NoBorder = Template.bind({});
+export const NoBorder = Template.bind(null);
 NoBorder.args = {
   ...defaultArgs,
   'disable-border': true,

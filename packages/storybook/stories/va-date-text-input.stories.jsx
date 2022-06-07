@@ -1,17 +1,17 @@
 import React, { useState } from 'react';
-import { VaDate } from '@department-of-veterans-affairs/web-components/react-bindings';
+import { VaDateTextInput } from '@department-of-veterans-affairs/web-components/react-bindings';
 import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
 
-VaDate.displayName = 'VaDate';
+VaDateTextInput.displayName = 'VaDateTextInput';
 
-const dateDocs = getWebComponentDocs('va-date');
+const dateTextInputDocs = getWebComponentDocs('va-date-text-input');
 
 export default {
-  title: 'Components/va-date',
+  title: 'Components/va-date-text-input',
   parameters: {
     componentSubtitle: `Date web component`,
     docs: {
-      page: () => <StoryDocs data={dateDocs} />,
+      page: () => <StoryDocs data={dateTextInputDocs} />,
     },
   },
 };
@@ -26,7 +26,7 @@ const defaultArgs = {
 
 const Template = ({ label, name, required, error, value }) => {
   return (
-    <VaDate
+    <VaDateTextInput
       label={label}
       name={name}
       required={required}
@@ -55,7 +55,7 @@ const CustomValidationTemplate = ({ label, name, required, error, value }) => {
 
   return (
     <>
-      <VaDate
+      <VaDateTextInput
         label={label}
         name={name}
         required={required}
@@ -68,8 +68,9 @@ const CustomValidationTemplate = ({ label, name, required, error, value }) => {
       <div>
         This example has some custom validation logic built out to detect
         changes made to the input fields that fire when the component is blurred
-        ie: focus is removed from the component. If the criteria below is not
-        met an error message will show:
+        ie: focus is removed from the component. We can cause the error prop to
+        dynamically be set if certain parameters are not met. If the criteria
+        below is not met an error message will show:
         <ul>
           <li>Cannot have blank values</li>
           <li>Month and Day are not valid</li>
@@ -89,7 +90,7 @@ const CustomValidationTemplate = ({ label, name, required, error, value }) => {
 
 const WithHintTextTemplate = ({ name, label, error, required, value }) => {
   return (
-    <va-date
+    <va-date-text-input
       label={label}
       name={name}
       required={required}
@@ -97,13 +98,13 @@ const WithHintTextTemplate = ({ name, label, error, required, value }) => {
       value={value}
     >
       <div className="vads-u-margin-bottom--1">This is example hint text</div>
-    </va-date>
+    </va-date-text-input>
   );
 };
 
 export const Default = Template.bind(null);
 Default.args = { ...defaultArgs };
-Default.argTypes = propStructure(dateDocs);
+Default.argTypes = propStructure(dateTextInputDocs);
 
 export const Error = Template.bind(null);
 Error.args = { ...defaultArgs, error: 'Error Message Example' };

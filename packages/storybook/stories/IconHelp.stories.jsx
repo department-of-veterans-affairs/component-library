@@ -17,7 +17,7 @@ const defaultArgs = {
   id: 'help-icon',
 };
 
-export const Default = Template.bind({});
+export const Default = Template.bind(null);
 Default.args = {
   ...defaultArgs,
   role: 'image',
