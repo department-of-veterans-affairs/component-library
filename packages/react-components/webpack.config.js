@@ -1,6 +1,10 @@
 const path = require('path');
 
 module.exports = {
+  devtool: 'source-map',
+  optimization: {
+    usedExports: true,
+  },
   entry: './src/index.js',
   output: {
     filename: 'index.js',
@@ -18,10 +22,7 @@ module.exports = {
         use: {
           loader: 'babel-loader',
           options: {
-            presets: [
-              '@babel/preset-env',
-              ['@babel/preset-react', { runtime: 'automatic' }],
-            ],
+            presets: ['@babel/preset-env', '@babel/preset-react'],
           },
         },
       },
@@ -31,13 +32,9 @@ module.exports = {
     extensions: ['.js', '.jsx'],
   },
   externals: [
-    {
-      '@department-of-veterans-affairs/web-components/react-bindings':
-        '@department-of-veterans-affairs/web-components/react-bindings',
-      'i18next': 'i18next',
-      'i18next-browser-languagedetector': 'i18next-browser-languagedetector',
-      'react': 'react',
-      'react-dom': 'react-dom',
-    },
+    '@department-of-veterans-affairs/web-components/react-bindings',
+    'i18next',
+    'react',
+    'react-dom',
   ],
 };

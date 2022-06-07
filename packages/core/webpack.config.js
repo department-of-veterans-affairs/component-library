@@ -1,14 +1,23 @@
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
+const webpack = require('webpack');
 
 module.exports = {
+  optimization: {
+    usedExports: true,
+  },
   entry: ['./src/main.js'],
   target: ['web', 'es5'],
   output: {
+    clean: true,
     publicPath: '',
     path: __dirname + '/dist',
     filename: 'app.bundle.js',
+    library: {
+      name: 'component-library',
+      type: 'umd',
+    },
   },
   module: {
     rules: [
@@ -17,6 +26,9 @@ module.exports = {
         exclude: /node_modules/,
         use: {
           loader: 'babel-loader',
+          options: {
+            presets: ['@babel/preset-env', '@babel/preset-react'],
+          },
         },
       },
       {
@@ -27,20 +39,6 @@ module.exports = {
         ],
       },
     ],
-  },
-  resolve: {
-    alias: {
-      '@department-of-veterans-affairs/web-components/react-bindings':
-        path.resolve(__dirname, '../web-components/'),
-      '@department-of-veterans-affairs/web-components': path.resolve(
-        __dirname,
-        '../web-components/',
-      ),
-      '@department-of-veterans-affairs/react-components': path.resolve(
-        __dirname,
-        '../react-components/dist',
-      ),
-    },
   },
   plugins: [
     new MiniCssExtractPlugin(),
@@ -62,5 +60,12 @@ module.exports = {
         },
       ],
     }),
+    // Without this, Stencil lazy loading chunks are created and causes the bundle to crash
+    // when it doesn't find them.
+    // See https://github.com/ionic-team/stencil/issues/1882
+    new webpack.optimize.LimitChunkCountPlugin({
+      maxChunks: 1,
+    }),
   ],
+  externals: ['react', 'react-dom'],
 };
