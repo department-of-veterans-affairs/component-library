@@ -1,15 +1,12 @@
 import {
-  Build,
   Component,
   Event,
   EventEmitter,
   Host,
   Prop,
   h,
-  forceUpdate,
   Element,
 } from '@stencil/core';
-import i18next from 'i18next';
 
 import {
   days,
@@ -21,11 +18,6 @@ import {
   minYear,
   validKeys,
 } from '../../utils/date-utils';
-
-if (Build.isTesting) {
-  // Make i18next.t() return the key instead of the value
-  i18next.init({ lng: 'cimode' });
-}
 
 /**
  * By default all date components have the following validation:
@@ -166,16 +158,6 @@ export class VaDateTextInput {
   })
   componentLibraryAnalytics: EventEmitter;
 
-  connectedCallback() {
-    i18next.on('languageChanged', () => {
-      forceUpdate(this.el);
-    });
-  }
-
-  disconnectedCallback() {
-    i18next.off('languageChanged');
-  }
-
   render() {
     const {
       required,
@@ -196,10 +178,7 @@ export class VaDateTextInput {
       <Host value={value} error={error} onBlur={handleDateBlur}>
         <fieldset>
           <legend>
-            {label}{' '}
-            {required && (
-              <span class="required">(*{i18next.t('required')})</span>
-            )}
+            {label} {required && <span class="required">(*Required)</span>}
             <div id="dateHint">
               Please enter two digits for the month and day and four digits for
               the year.
@@ -208,12 +187,12 @@ export class VaDateTextInput {
           <slot />
           {error && (
             <span class="error-message" role="alert">
-              <span class="sr-only">{i18next.t('error')}</span> {error}
+              <span class="sr-only">Error</span> {error}
             </span>
           )}
           <div class="date-container">
             <va-text-input
-              label={i18next.t('month')}
+              label="Month"
               name={`${name}Month`}
               maxlength={2}
               minlength={2}
@@ -229,7 +208,7 @@ export class VaDateTextInput {
               type="text"
             />
             <va-text-input
-              label={i18next.t('day')}
+              label="Day"
               name={`${name}Day`}
               maxlength={2}
               minlength={2}
@@ -245,7 +224,7 @@ export class VaDateTextInput {
               type="text"
             />
             <va-text-input
-              label={i18next.t('year')}
+              label="Year"
               name={`${name}Year`}
               maxlength={4}
               minlength={4}

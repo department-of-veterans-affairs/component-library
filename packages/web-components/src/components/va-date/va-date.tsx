@@ -1,15 +1,12 @@
 import {
-  Build,
   Component,
   Event,
   EventEmitter,
   Host,
   Prop,
   h,
-  forceUpdate,
   Element,
 } from '@stencil/core';
-import i18next from 'i18next';
 
 import {
   months,
@@ -22,11 +19,6 @@ import {
   minYear,
   validKeys,
 } from '../../utils/date-utils';
-
-if (Build.isTesting) {
-  // Make i18next.t() return the key instead of the value
-  i18next.init({ lng: 'cimode' });
-}
 
 /**
  * By default all date components have the following validation:
@@ -95,12 +87,12 @@ export class VaDate {
     });
     // Ternary to prevent NaN displaying as value for Year
     // Ternary to prevent Month or Day from displaying as single digit
-    this.value = `${year ? year : ''}-${month ? numFormatter.format(month) : ''}-${
-      day ? numFormatter.format(day) : ''
-    }`;
+    this.value = `${year ? year : ''}-${
+      month ? numFormatter.format(month) : ''
+    }-${day ? numFormatter.format(day) : ''}`;
     const daysForSelectedMonth = month > 0 ? days[month] : [];
     const leapYear = checkLeapYear(year);
-    
+
     // Check validity of date if invalid provide message and error state styling
     if (
       year < minYear ||
@@ -166,16 +158,6 @@ export class VaDate {
   })
   componentLibraryAnalytics: EventEmitter;
 
-  connectedCallback() {
-    i18next.on('languageChanged', () => {
-      forceUpdate(this.el);
-    });
-  }
-
-  disconnectedCallback() {
-    i18next.off('languageChanged');
-  }
-
   render() {
     const {
       required,
@@ -199,20 +181,17 @@ export class VaDate {
       <Host value={value} error={error} onBlur={handleDateBlur}>
         <fieldset>
           <legend>
-            {label}{' '}
-            {required && (
-              <span class="required">(*{i18next.t('required')})</span>
-            )}
+            {label} {required && <span class="required">(*Required)</span>}
           </legend>
           <slot />
           {error && (
             <span class="error-message" role="alert">
-              <span class="sr-only">{i18next.t('error')}</span> {error}
+              <span class="sr-only">Error</span> {error}
             </span>
           )}
           <div class="date-container">
             <va-select
-              label={i18next.t('month')}
+              label="Month"
               name={`${name}Month`}
               // Value must be a string
               value={month?.toString()}
@@ -223,11 +202,11 @@ export class VaDate {
               <option value=""></option>
               {months &&
                 months.map(month => (
-                  <option value={month.value}>{i18next.t(month.label)}</option>
+                  <option value={month.value}>{month.label}</option>
                 ))}
             </va-select>
             <va-select
-              label={i18next.t('day')}
+              label="Day"
               name={`${name}Day`}
               // If day value set is greater than amount of days in the month
               // set to empty string instead
@@ -244,7 +223,7 @@ export class VaDate {
                 ))}
             </va-select>
             <va-text-input
-              label={i18next.t('year')}
+              label="Year"
               name={`${name}Year`}
               maxlength={4}
               minlength={4}
