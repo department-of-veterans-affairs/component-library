@@ -93,12 +93,13 @@ export class VaButton {
       submit,
     } = this;
 
+    const buttonText = getButtonText();
     const type = submit ? 'submit' : 'button';
 
     return (
       <Host>
         <button
-          aria-label={label}
+          aria-label={label || buttonText}
           disabled={disabled}
           onClick={handleClick}
           type={type}
@@ -106,7 +107,7 @@ export class VaButton {
           {back && !_continue && (
             <i aria-hidden="true" class="fa fa-angles-left" />
           )}
-          {getButtonText()}
+          {buttonText}
           {_continue && !back && (
             <i aria-hidden="true" class="fa fa-angles-right" />
           )}
