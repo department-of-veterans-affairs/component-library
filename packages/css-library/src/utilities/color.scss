@@ -1,0 +1,21 @@
+@use "uswds-core/src/styles/functions" as *;
+@use "../tokens/color" as *;
+@use "./settings" as *;
+
+// Config for color utility classes
+$u-color: (
+  color: (
+    base: "vads",
+    modifiers: null,
+    values:
+      map-collect(
+        $tokens-color-basic,
+        $tokens-color-grayscale,
+        $tokens-color-tertiary,
+        $tokens-color-hub
+      ),
+    settings: $color-settings,
+    property: "color",
+    type: "utility",
+  ),
+);
