@@ -93,7 +93,9 @@ export class VaDate {
     const numFormatter = new Intl.NumberFormat('en-US', {
       minimumIntegerDigits: 2,
     });
-    this.value = `${year}-${month ? numFormatter.format(month) : ''}-${
+    // Ternary to prevent NaN displaying as value for Year
+    // Ternary to prevent Month or Day from displaying as single digit
+    this.value = `${year ? year : ''}-${month ? numFormatter.format(month) : ''}-${
       day ? numFormatter.format(day) : ''
     }`;
     const daysForSelectedMonth = month > 0 ? days[month] : [];
@@ -210,7 +212,7 @@ export class VaDate {
           )}
           <div class="date-container">
             <va-select
-              label="Month"
+              label={i18next.t('month')}
               name={`${name}Month`}
               // Value must be a string
               value={month?.toString()}
@@ -221,11 +223,11 @@ export class VaDate {
               <option value=""></option>
               {months &&
                 months.map(month => (
-                  <option value={month.value}>{month.label}</option>
+                  <option value={month.value}>{i18next.t(month.label)}</option>
                 ))}
             </va-select>
             <va-select
-              label="Day"
+              label={i18next.t('day')}
               name={`${name}Day`}
               // If day value set is greater than amount of days in the month
               // set to empty string instead
@@ -242,7 +244,7 @@ export class VaDate {
                 ))}
             </va-select>
             <va-text-input
-              label="Year"
+              label={i18next.t('year')}
               name={`${name}Year`}
               maxlength={4}
               minlength={4}

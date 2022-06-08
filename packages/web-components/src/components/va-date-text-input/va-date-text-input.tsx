@@ -213,7 +213,7 @@ export class VaDateTextInput {
           )}
           <div class="date-container">
             <va-text-input
-              label="Month"
+              label={i18next.t('month')}
               name={`${name}Month`}
               maxlength={2}
               minlength={2}
@@ -229,7 +229,7 @@ export class VaDateTextInput {
               type="text"
             />
             <va-text-input
-              label="Day"
+              label={i18next.t('day')}
               name={`${name}Day`}
               maxlength={2}
               minlength={2}
@@ -245,7 +245,7 @@ export class VaDateTextInput {
               type="text"
             />
             <va-text-input
-              label="Year"
+              label={i18next.t('year')}
               name={`${name}Year`}
               maxlength={4}
               minlength={4}
