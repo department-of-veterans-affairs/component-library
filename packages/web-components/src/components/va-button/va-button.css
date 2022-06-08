@@ -68,5 +68,11 @@ i.fa-angles-right::before {
 
 :host([disabled]:not([disabled='false'])) button {
   background-color: var(--color-gray-lighter);
+  box-shadow: none;
+  color: var(--color-white);
+  pointer-events: none;
+}
+
+:host([disabled]:not([disabled='false'])) {
   cursor: not-allowed;
 }
