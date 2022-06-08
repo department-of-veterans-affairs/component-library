@@ -3,7 +3,6 @@ import './style.scss';
 import '@department-of-veterans-affairs/formation/dist/formation';
 
 import '@department-of-veterans-affairs/component-library/dist/main.css';
-import '@department-of-veterans-affairs/css-library/dist/utilities.css';
 import {
   applyPolyfills,
   defineCustomElements,
