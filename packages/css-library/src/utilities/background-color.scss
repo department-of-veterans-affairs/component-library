@@ -2,7 +2,7 @@
 @use "../tokens/color" as *;
 @use "./settings" as *;
 
-// Config for color utility classes
+// Config for background-color utility classes
 $u-bg-color: (
   background-color: (
     base: "vads-bg",
