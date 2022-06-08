@@ -1,21 +1,15 @@
 /* eslint-disable react/prop-types */
 import React, { useState } from 'react';
-import { generateEventsDescription } from './events';
-import { getWebComponentDocs, propStructure } from './wc-helpers';
+import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
 
 const textInputDocs = getWebComponentDocs('va-text-input');
 
 export default {
   title: 'Components/va-text-input',
   parameters: {
-    componentSubtitle: `Text Input web component`,
+    componentSubtitle: `Text input web component`,
     docs: {
-      description: {
-        component:
-          `<a className="vads-c-action-link--blue" href="https://design.va.gov/components/form/text-inputs">View guidance for the Text Input component in the Design System</a>` +
-          '\n' +
-          generateEventsDescription(textInputDocs),
-      },
+      page: () => <StoryDocs data={textInputDocs} />,
     },
   },
   argTypes: {
@@ -54,7 +48,6 @@ const defaultArgs = {
   'value': undefined,
   'inputmode': undefined,
   'type': undefined,
-  'aria-describedby': undefined,
   'success': false,
   'pattern': undefined,
 };
@@ -71,7 +64,6 @@ const Template = ({
   value,
   inputmode,
   type,
-  'aria-describedby': ariaDescribedby,
   success,
   pattern,
 }) => {
@@ -88,7 +80,6 @@ const Template = ({
       value={value}
       inputmode={inputmode}
       type={type}
-      aria-describedby={ariaDescribedby}
       success={success}
       pattern={pattern}
       onBlur={e => console.log('blur event', e)}
@@ -108,7 +99,6 @@ const I18nTemplate = ({
   value,
   inputmode,
   type,
-  'aria-describedby': ariaDescribedby,
 }) => {
   const [lang, setLang] = useState('en');
   return (
@@ -133,39 +123,38 @@ const I18nTemplate = ({
         value={value}
         inputmode={inputmode}
         type={type}
-        aria-describedby={ariaDescribedby}
       />
     </>
   );
 };
 
-export const Default = Template.bind({});
+export const Default = Template.bind(null);
 Default.args = { ...defaultArgs };
 Default.argTypes = propStructure(textInputDocs);
 
-export const Error = Template.bind({});
+export const Error = Template.bind(null);
 Error.args = { ...defaultArgs, error: 'This is an error message' };
 
-export const Success = Template.bind({});
+export const Success = Template.bind(null);
 Success.args = { ...defaultArgs, success: true };
 
-export const Required = Template.bind({});
+export const Required = Template.bind(null);
 Required.args = { ...defaultArgs, required: true };
 
-export const Internationalization = I18nTemplate.bind({});
+export const Internationalization = I18nTemplate.bind(null);
 Internationalization.args = {
   ...defaultArgs,
   required: true,
   maxlength: '16',
 };
 
-export const MaxLength = Template.bind({});
+export const MaxLength = Template.bind(null);
 MaxLength.args = {
   ...defaultArgs,
   maxlength: '16',
 };
 
-export const Range = Template.bind({});
+export const Range = Template.bind(null);
 Range.args = {
   ...defaultArgs,
   label: 'Acceptable range 3 - 6 characters',
@@ -173,21 +162,21 @@ Range.args = {
   maxlength: '6',
 };
 
-export const Pattern = Template.bind({});
+export const Pattern = Template.bind(null);
 Pattern.args = {
   ...defaultArgs,
   label: 'Must be 4 digits',
   pattern: '[0-9]{4}',
 };
 
-export const Autocomplete = Template.bind({});
+export const Autocomplete = Template.bind(null);
 Autocomplete.args = {
   ...defaultArgs,
   name: 'email',
   autocomplete: 'email',
 };
 
-export const WithAnalytics = Template.bind({});
+export const WithAnalytics = Template.bind(null);
 WithAnalytics.args = { ...defaultArgs, 'enable-analytics': true };
 
 const WithHintTextTemplate = ({ name, label }) => {
@@ -204,7 +193,7 @@ const WithHintTextTemplate = ({ name, label }) => {
   );
 };
 
-export const WithHintText = WithHintTextTemplate.bind({});
+export const WithHintText = WithHintTextTemplate.bind(null);
 WithHintText.args = {
   ...defaultArgs,
   label: 'Veteran’s Social Security number',

@@ -17,6 +17,10 @@ if (Build.isTesting) {
   i18next.init({ lng: 'cimode' });
 }
 
+/**
+ * @nativeHandler onInput
+ * @nativeHandler onBlur
+ */
 @Component({
   tag: 'va-text-input',
   styleUrl: 'va-text-input.css',
@@ -89,11 +93,6 @@ export class VaTextInput {
   @Prop() name?: string;
 
   /**
-   * The aria-describedby attribute for the input element in the shadow DOM.
-   */
-  @Prop() ariaDescribedby?: string = '';
-
-  /**
    * The regular expression that the input element's value is checked against on submission
    */
   @Prop() pattern?: string;
@@ -160,16 +159,14 @@ export class VaTextInput {
     i18next.on('languageChanged', () => {
       forceUpdate(this.el);
     });
-  };
+  }
 
   disconnectedCallback() {
     i18next.off('languageChanged');
-  };
+  }
 
   render() {
-    const describedBy =
-      `${this.ariaDescribedby} ${this.error ? 'error-message' : ''}`.trim() ||
-      null; // Null so we don't add the attribute if we have an empty string
+    const describedBy = this.error ? 'error-message' : null; // Null so we don't add the attribute if we have an empty string
     const inputMode = this.inputmode ? this.inputmode : null; // Null so we don't add the attribute if we have an empty string
     const type = this.getInputType();
 
@@ -178,7 +175,9 @@ export class VaTextInput {
         {this.label && (
           <label htmlFor="inputField" part="label">
             {this.label}{' '}
-            {this.required && <span class="required">(*{i18next.t('required')})</span>}
+            {this.required && (
+              <span class="required">(*{i18next.t('required')})</span>
+            )}
           </label>
         )}
         <slot></slot>
@@ -195,6 +194,7 @@ export class VaTextInput {
           minlength={this.minlength}
           pattern={this.pattern}
           name={this.name}
+          required={this.required || null}
           part="input"
         />
         {this.maxlength && this.value?.length >= this.maxlength && (

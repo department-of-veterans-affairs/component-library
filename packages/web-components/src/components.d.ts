@@ -146,6 +146,44 @@ export namespace Components {
          */
         "label": string;
     }
+    interface VaButton {
+        /**
+          * If `true`, the button will use `Back` as its text and an icon to represent going back in form flows.
+         */
+        "back"?: boolean;
+        /**
+          * If `true`, the button will use the big variant.
+         */
+        "big"?: boolean;
+        /**
+          * If `true`, the button will use `Continue` as its text and an icon to represent proceeding forward in form flows.
+         */
+        "continue"?: boolean;
+        /**
+          * If `true`, the component-library-analytics event is disabled.
+         */
+        "disableAnalytics"?: boolean;
+        /**
+          * If `true`, the button is disabled.
+         */
+        "disabled"?: boolean;
+        /**
+          * The aria-label of the component.
+         */
+        "label"?: string;
+        /**
+          * If `true`, the button will use the secondary variant.
+         */
+        "secondary"?: boolean;
+        /**
+          * If `true`, the button will submit form data when clicked.
+         */
+        "submit"?: boolean;
+        /**
+          * The text displayed on the button. If `continue` or `back` is true, the value of text is ignored.
+         */
+        "text"?: string;
+    }
     interface VaCheckbox {
         /**
           * The aria-describedby attribute for the input element in the shadow DOM.
@@ -195,6 +233,32 @@ export namespace Components {
         "required": boolean;
     }
     interface VaDate {
+        /**
+          * Whether or not an analytics event will be fired.
+         */
+        "enableAnalytics": boolean;
+        /**
+          * The error message to render (if any) This prop should be leveraged to display any custom validations needed for this component
+         */
+        "error": string;
+        /**
+          * Label for the field.
+         */
+        "label": string;
+        /**
+          * Used to create unique name attributes for each input.
+         */
+        "name": string;
+        /**
+          * Render marker indicating field is required.
+         */
+        "required": boolean;
+        /**
+          * Set the default date value must be in YYYY-MM-DD format.
+         */
+        "value": string;
+    }
+    interface VaDateTextInput {
         /**
           * Whether or not an analytics event will be fired.
          */
@@ -513,10 +577,6 @@ export namespace Components {
     }
     interface VaTextInput {
         /**
-          * The aria-describedby attribute for the input element in the shadow DOM.
-         */
-        "ariaDescribedby"?: string;
-        /**
           * What to tell the browser to auto-complete the field with.
          */
         "autocomplete"?: string;
@@ -575,6 +635,40 @@ export namespace Components {
          */
         "value"?: string;
     }
+    interface VaTextarea {
+        /**
+          * Emit component-library-analytics events on the blur event.
+         */
+        "enableAnalytics"?: boolean;
+        /**
+          * The error message to render.
+         */
+        "error"?: string;
+        /**
+          * The label for the textarea.
+         */
+        "label"?: string;
+        /**
+          * The maximum number of characters allowed in the input.
+         */
+        "maxlength"?: number;
+        /**
+          * The name for the input.
+         */
+        "name"?: string;
+        /**
+          * The placeholder string.
+         */
+        "placeholder"?: string;
+        /**
+          * Set the input to required and render the (Required) text.
+         */
+        "required"?: boolean;
+        /**
+          * The value of the textarea
+         */
+        "value"?: string;
+    }
 }
 declare global {
     interface HTMLVaAccordionElement extends Components.VaAccordion, HTMLStencilElement {
@@ -625,6 +719,12 @@ declare global {
         prototype: HTMLVaBreadcrumbsElement;
         new (): HTMLVaBreadcrumbsElement;
     };
+    interface HTMLVaButtonElement extends Components.VaButton, HTMLStencilElement {
+    }
+    var HTMLVaButtonElement: {
+        prototype: HTMLVaButtonElement;
+        new (): HTMLVaButtonElement;
+    };
     interface HTMLVaCheckboxElement extends Components.VaCheckbox, HTMLStencilElement {
     }
     var HTMLVaCheckboxElement: {
@@ -642,6 +742,12 @@ declare global {
     var HTMLVaDateElement: {
         prototype: HTMLVaDateElement;
         new (): HTMLVaDateElement;
+    };
+    interface HTMLVaDateTextInputElement extends Components.VaDateTextInput, HTMLStencilElement {
+    }
+    var HTMLVaDateTextInputElement: {
+        prototype: HTMLVaDateTextInputElement;
+        new (): HTMLVaDateTextInputElement;
     };
     interface HTMLVaFeaturedContentElement extends Components.VaFeaturedContent, HTMLStencilElement {
     }
@@ -751,6 +857,12 @@ declare global {
         prototype: HTMLVaTextInputElement;
         new (): HTMLVaTextInputElement;
     };
+    interface HTMLVaTextareaElement extends Components.VaTextarea, HTMLStencilElement {
+    }
+    var HTMLVaTextareaElement: {
+        prototype: HTMLVaTextareaElement;
+        new (): HTMLVaTextareaElement;
+    };
     interface HTMLElementTagNameMap {
         "va-accordion": HTMLVaAccordionElement;
         "va-accordion-item": HTMLVaAccordionItemElement;
@@ -760,9 +872,11 @@ declare global {
         "va-back-to-top": HTMLVaBackToTopElement;
         "va-banner": HTMLVaBannerElement;
         "va-breadcrumbs": HTMLVaBreadcrumbsElement;
+        "va-button": HTMLVaButtonElement;
         "va-checkbox": HTMLVaCheckboxElement;
         "va-checkbox-group": HTMLVaCheckboxGroupElement;
         "va-date": HTMLVaDateElement;
+        "va-date-text-input": HTMLVaDateTextInputElement;
         "va-featured-content": HTMLVaFeaturedContentElement;
         "va-loading-indicator": HTMLVaLoadingIndicatorElement;
         "va-modal": HTMLVaModalElement;
@@ -781,6 +895,7 @@ declare global {
         "va-table-row": HTMLVaTableRowElement;
         "va-telephone": HTMLVaTelephoneElement;
         "va-text-input": HTMLVaTextInputElement;
+        "va-textarea": HTMLVaTextareaElement;
     }
 }
 declare namespace LocalJSX {
@@ -960,6 +1075,48 @@ declare namespace LocalJSX {
          */
         "onComponent-library-analytics"?: (event: CustomEvent<any>) => void;
     }
+    interface VaButton {
+        /**
+          * If `true`, the button will use `Back` as its text and an icon to represent going back in form flows.
+         */
+        "back"?: boolean;
+        /**
+          * If `true`, the button will use the big variant.
+         */
+        "big"?: boolean;
+        /**
+          * If `true`, the button will use `Continue` as its text and an icon to represent proceeding forward in form flows.
+         */
+        "continue"?: boolean;
+        /**
+          * If `true`, the component-library-analytics event is disabled.
+         */
+        "disableAnalytics"?: boolean;
+        /**
+          * If `true`, the button is disabled.
+         */
+        "disabled"?: boolean;
+        /**
+          * The aria-label of the component.
+         */
+        "label"?: string;
+        /**
+          * The event used to track usage of the component.
+         */
+        "onComponent-library-analytics"?: (event: CustomEvent<any>) => void;
+        /**
+          * If `true`, the button will use the secondary variant.
+         */
+        "secondary"?: boolean;
+        /**
+          * If `true`, the button will submit form data when clicked.
+         */
+        "submit"?: boolean;
+        /**
+          * The text displayed on the button. If `continue` or `back` is true, the value of text is ignored.
+         */
+        "text"?: string;
+    }
     interface VaCheckbox {
         /**
           * The aria-describedby attribute for the input element in the shadow DOM.
@@ -1021,6 +1178,44 @@ declare namespace LocalJSX {
         "required"?: boolean;
     }
     interface VaDate {
+        /**
+          * Whether or not an analytics event will be fired.
+         */
+        "enableAnalytics"?: boolean;
+        /**
+          * The error message to render (if any) This prop should be leveraged to display any custom validations needed for this component
+         */
+        "error"?: string;
+        /**
+          * Label for the field.
+         */
+        "label": string;
+        /**
+          * Used to create unique name attributes for each input.
+         */
+        "name": string;
+        /**
+          * The event used to track usage of the component. This is emitted when an input value changes and enableAnalytics is true.
+         */
+        "onComponent-library-analytics"?: (event: CustomEvent<any>) => void;
+        /**
+          * Fires when the date input loses focus
+         */
+        "onDateBlur"?: (event: CustomEvent<any>) => void;
+        /**
+          * Fires when the date input loses focus after its value was changed
+         */
+        "onDateChange"?: (event: CustomEvent<any>) => void;
+        /**
+          * Render marker indicating field is required.
+         */
+        "required"?: boolean;
+        /**
+          * Set the default date value must be in YYYY-MM-DD format.
+         */
+        "value"?: string;
+    }
+    interface VaDateTextInput {
         /**
           * Whether or not an analytics event will be fired.
          */
@@ -1431,10 +1626,6 @@ declare namespace LocalJSX {
     }
     interface VaTextInput {
         /**
-          * The aria-describedby attribute for the input element in the shadow DOM.
-         */
-        "ariaDescribedby"?: string;
-        /**
           * What to tell the browser to auto-complete the field with.
          */
         "autocomplete"?: string;
@@ -1497,6 +1688,44 @@ declare namespace LocalJSX {
          */
         "value"?: string;
     }
+    interface VaTextarea {
+        /**
+          * Emit component-library-analytics events on the blur event.
+         */
+        "enableAnalytics"?: boolean;
+        /**
+          * The error message to render.
+         */
+        "error"?: string;
+        /**
+          * The label for the textarea.
+         */
+        "label"?: string;
+        /**
+          * The maximum number of characters allowed in the input.
+         */
+        "maxlength"?: number;
+        /**
+          * The name for the input.
+         */
+        "name"?: string;
+        /**
+          * The event used to track usage of the component. This is emitted when the textarea is blurred and `enableAnalytics` is true
+         */
+        "onComponent-library-analytics"?: (event: CustomEvent<any>) => void;
+        /**
+          * The placeholder string.
+         */
+        "placeholder"?: string;
+        /**
+          * Set the input to required and render the (Required) text.
+         */
+        "required"?: boolean;
+        /**
+          * The value of the textarea
+         */
+        "value"?: string;
+    }
     interface IntrinsicElements {
         "va-accordion": VaAccordion;
         "va-accordion-item": VaAccordionItem;
@@ -1506,9 +1735,11 @@ declare namespace LocalJSX {
         "va-back-to-top": VaBackToTop;
         "va-banner": VaBanner;
         "va-breadcrumbs": VaBreadcrumbs;
+        "va-button": VaButton;
         "va-checkbox": VaCheckbox;
         "va-checkbox-group": VaCheckboxGroup;
         "va-date": VaDate;
+        "va-date-text-input": VaDateTextInput;
         "va-featured-content": VaFeaturedContent;
         "va-loading-indicator": VaLoadingIndicator;
         "va-modal": VaModal;
@@ -1527,6 +1758,7 @@ declare namespace LocalJSX {
         "va-table-row": VaTableRow;
         "va-telephone": VaTelephone;
         "va-text-input": VaTextInput;
+        "va-textarea": VaTextarea;
     }
 }
 export { LocalJSX as JSX };
@@ -1541,9 +1773,11 @@ declare module "@stencil/core" {
             "va-back-to-top": LocalJSX.VaBackToTop & JSXBase.HTMLAttributes<HTMLVaBackToTopElement>;
             "va-banner": LocalJSX.VaBanner & JSXBase.HTMLAttributes<HTMLVaBannerElement>;
             "va-breadcrumbs": LocalJSX.VaBreadcrumbs & JSXBase.HTMLAttributes<HTMLVaBreadcrumbsElement>;
+            "va-button": LocalJSX.VaButton & JSXBase.HTMLAttributes<HTMLVaButtonElement>;
             "va-checkbox": LocalJSX.VaCheckbox & JSXBase.HTMLAttributes<HTMLVaCheckboxElement>;
             "va-checkbox-group": LocalJSX.VaCheckboxGroup & JSXBase.HTMLAttributes<HTMLVaCheckboxGroupElement>;
             "va-date": LocalJSX.VaDate & JSXBase.HTMLAttributes<HTMLVaDateElement>;
+            "va-date-text-input": LocalJSX.VaDateTextInput & JSXBase.HTMLAttributes<HTMLVaDateTextInputElement>;
             "va-featured-content": LocalJSX.VaFeaturedContent & JSXBase.HTMLAttributes<HTMLVaFeaturedContentElement>;
             "va-loading-indicator": LocalJSX.VaLoadingIndicator & JSXBase.HTMLAttributes<HTMLVaLoadingIndicatorElement>;
             "va-modal": LocalJSX.VaModal & JSXBase.HTMLAttributes<HTMLVaModalElement>;
@@ -1562,6 +1796,7 @@ declare module "@stencil/core" {
             "va-table-row": LocalJSX.VaTableRow & JSXBase.HTMLAttributes<HTMLVaTableRowElement>;
             "va-telephone": LocalJSX.VaTelephone & JSXBase.HTMLAttributes<HTMLVaTelephoneElement>;
             "va-text-input": LocalJSX.VaTextInput & JSXBase.HTMLAttributes<HTMLVaTextInputElement>;
+            "va-textarea": LocalJSX.VaTextarea & JSXBase.HTMLAttributes<HTMLVaTextareaElement>;
         }
     }
 }

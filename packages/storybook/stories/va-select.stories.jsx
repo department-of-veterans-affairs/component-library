@@ -1,21 +1,15 @@
 /* eslint-disable react/prop-types */
 import React, { useEffect, useState } from 'react';
-import { generateEventsDescription } from './events';
-import { getWebComponentDocs, propStructure } from './wc-helpers';
+import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
 
 const selectDocs = getWebComponentDocs('va-select');
 
 export default {
   title: 'Components/va-select',
   parameters: {
-    componentSubtitle: 'Select Box web component',
+    componentSubtitle: 'Select box web component',
     docs: {
-      description: {
-        component:
-          `<a className="vads-c-action-link--blue" href="https://design.va.gov/components/form/select">View guidance for the Select Box component in the Design System</a>` +
-          '\n' +
-          generateEventsDescription(selectDocs),
-      },
+      page: () => <StoryDocs data={selectDocs} />,
     },
   },
 };
@@ -90,17 +84,17 @@ const Template = ({
   );
 };
 
-export const Default = Template.bind({});
+export const Default = Template.bind(null);
 Default.args = { ...defaultArgs };
 Default.argTypes = propStructure(selectDocs);
 
-export const Required = Template.bind({});
+export const Required = Template.bind(null);
 Required.args = { ...defaultArgs, required: true };
 
-export const ErrorMessage = Template.bind({});
+export const ErrorMessage = Template.bind(null);
 ErrorMessage.args = { ...defaultArgs, error: 'There was a problem' };
 
-export const DynamicOptions = Template.bind({});
+export const DynamicOptions = Template.bind(null);
 DynamicOptions.args = { ...defaultArgs, 'use-add-button': true };
 
 const I18nTemplate = args => {
@@ -120,5 +114,5 @@ const I18nTemplate = args => {
   );
 };
 
-export const Internationalization = I18nTemplate.bind({});
+export const Internationalization = I18nTemplate.bind(null);
 Internationalization.args = { ...defaultArgs, required: true };

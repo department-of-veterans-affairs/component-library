@@ -12,6 +12,9 @@ import {
 import i18next from 'i18next';
 import { getSlottedNodes } from '../../utils/utils';
 
+/**
+ * @nativeHandler onKeyDown
+ */
 @Component({
   tag: 'va-select',
   styleUrl: 'va-select.css',
@@ -146,6 +149,7 @@ export class VaSelect {
           aria-describedby={errorSpanId}
           id="select"
           name={name}
+          required={required || null}
           onKeyDown={() => this.handleKeyDown()}
           onChange={e => this.handleChange(e)}
           part="select"

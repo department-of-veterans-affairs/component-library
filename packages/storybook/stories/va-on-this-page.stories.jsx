@@ -6,6 +6,7 @@ const otpDocs = getWebComponentDocs('va-on-this-page');
 export default {
   title: 'Components/va-on-this-page',
   parameters: {
+    componentSubtitle: 'On this page web component',
     docs: {
       page: () => <StoryDocs data={otpDocs} />,
     },
@@ -51,4 +52,4 @@ const Template = () => {
   );
 };
 
-export const Default = Template.bind({});
+export const Default = Template.bind(null);

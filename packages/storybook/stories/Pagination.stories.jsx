@@ -1,9 +1,16 @@
 import React, { useState } from 'react';
 import Pagination from '../../react-components/src/components/Pagination/Pagination';
+import { StoryDocs } from './wc-helpers';
 
 export default {
   title: 'Components/Pagination',
   component: Pagination,
+  parameters: {
+    componentSubtitle: 'Pagination React component',
+    docs: {
+      page: () => <StoryDocs componentName="Pagination" />,
+    },
+  },
 };
 
 const Template = args => {
@@ -17,8 +24,8 @@ const defaultArgs = {
   pages: 5,
 };
 
-export const Default = Template.bind({});
+export const Default = Template.bind(null);
 Default.args = { ...defaultArgs };
 
-export const ShowLastPage = Template.bind({});
+export const ShowLastPage = Template.bind(null);
 ShowLastPage.args = { ...defaultArgs, pages: 100, showLastPage: true };

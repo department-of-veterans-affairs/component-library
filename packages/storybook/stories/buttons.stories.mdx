@@ -1,12 +1,28 @@
-import { Meta, Canvas } from '@storybook/addon-docs/blocks';
+import { Canvas, Meta, Story, Subtitle, Title } from '@storybook/addon-docs';
+import { Guidance, MaturityScale } from './wc-helpers';
+import { additionalDocs } from './additional-docs';
+import './buttons.style.scss';
 
-<Meta title="Components/Buttons" />
+<Meta title="Components/Buttons/Button" />
 
-## Default buttons
+<Title>Button</Title>
+<Subtitle>Button component</Subtitle>
+<MaturityScale
+  category={additionalDocs['Button'].maturityCategory}
+  level={additionalDocs['Button'].maturityLevel}
+/>
+<Guidance
+  href={additionalDocs['Button'].guidanceHref}
+  name={additionalDocs['Button'].guidanceName}
+/>
+
+## Stories
+
+### Primary buttons
 
 <Canvas>
-  <Story name="Default">
-    <div>
+  <Story name="Primary">
+    <div name="Primary Buttons">
       <button type="button" className="usa-button">
         Button
       </button>
@@ -20,57 +36,39 @@ import { Meta, Canvas } from '@storybook/addon-docs/blocks';
   </Story>
 </Canvas>
 
-## Primary buttons
-
-<Canvas>
-  <Story name="Primary">
-    <div>
-      <button type="button" class="usa-button-primary va-button-primary">
-        Button
-      </button>
-    </div>
-  </Story>
-</Canvas>
-
-## Secondary buttons
+### Secondary buttons
 
 <Canvas>
   <Story name="Secondary">
-    <div>
-      <button class="usa-button-secondary">Button</button>
-      <button class="usa-button-secondary usa-button-active">Active</button>
-      <button class="usa-button-secondary usa-button-hover">Hover</button>
+    <div name="Secondary Buttons">
+      <button className="usa-button-secondary">Button</button>
+      <button className="usa-button-secondary usa-button-active">Active</button>
+      <button className="usa-button-secondary usa-button-hover">Hover</button>
     </div>
   </Story>
 </Canvas>
 
-## Big buttons
+### Big buttons
 
 <Canvas>
   <Story name="Big">
     <div>
-      <button type="button" class="usa-button usa-button-big">
-        Default button
+      <button type="button" className="usa-button usa-button-big">
+        Primary button
       </button>
-      <button
-        type="button"
-        class="usa-button-primary va-button-primary usa-button-big"
-      >
-        Button
-      </button>
-      <button class="usa-button-secondary usa-button-big">
+      <button className="usa-button-secondary usa-button-big">
         Secondary button
       </button>
     </div>
   </Story>
 </Canvas>
 
-## Disabled buttons
+### Disabled buttons
 
 <Canvas>
   <Story name="Disabled">
     <div>
-      <button type="button" class="usa-button" disabled>
+      <button type="button" className="usa-button" disabled>
         Disabled button
       </button>
     </div>

@@ -1,20 +1,14 @@
 import React from 'react';
-import { generateEventsDescription } from './events';
-import { getWebComponentDocs, propStructure } from './wc-helpers';
+import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
 
 const bannerDocs = getWebComponentDocs('va-banner');
 
 export default {
   title: 'Components/va-banner',
   parameters: {
+    componentSubtitle: `Banner web component`,
     docs: {
-      description: {
-        component:
-          `Reset the banners in storage by opening Developer Tools in the browser and then clicking on the Application Tab. ` +
-          `Under Storage you will see both Local and Session Storage check each Storage to see if a DISMISSED_BANNERS Key exists. ` +
-          `If it does right click and delete it and refresh your page to see the banners again.` +
-          generateEventsDescription(bannerDocs),
-      },
+      page: () => <StoryDocs data={bannerDocs} />,
     },
   },
   argTypes: {
@@ -62,13 +56,13 @@ const defaultArgs = {
   'window-session': false,
 };
 
-export const Default = Template.bind({});
+export const Default = Template.bind(null);
 Default.args = {
   ...defaultArgs,
 };
 Default.argTypes = propStructure(bannerDocs);
 
-export const Closeable = Template.bind({});
+export const Closeable = Template.bind(null);
 Closeable.args = {
   ...defaultArgs,
   'show-close': true,

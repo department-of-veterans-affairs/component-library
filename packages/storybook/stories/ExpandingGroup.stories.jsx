@@ -28,18 +28,18 @@ const defaultArgs = {
   ],
 };
 
-export const Default = Template.bind({});
+export const Default = Template.bind(null);
 Default.args = {
   ...defaultArgs,
 };
 
-export const Closed = Template.bind({});
+export const Closed = Template.bind(null);
 Closed.args = {
   ...defaultArgs,
   open: false,
 };
 
-export const NoPlus = Template.bind({});
+export const NoPlus = Template.bind(null);
 NoPlus.args = {
   ...defaultArgs,
   showPlus: false,

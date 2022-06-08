@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { VaSearchInput } from '@department-of-veterans-affairs/web-components/react-bindings';
-import { getWebComponentDocs, propStructure } from './wc-helpers';
-import { generateEventsDescription } from './events';
+import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
 
 VaSearchInput.displayName = 'VaSearchInput';
 
@@ -10,11 +9,9 @@ const searchDocs = getWebComponentDocs('va-search-input');
 export default {
   title: 'Components/va-search-input',
   parameters: {
-    componentSubtitle: 'Search Input web component',
+    componentSubtitle: 'Search input web component',
     docs: {
-      description: {
-        component: generateEventsDescription(searchDocs),
-      },
+      page: () => <StoryDocs data={searchDocs} />,
     },
   },
 };
@@ -37,13 +34,13 @@ const defaultArgs = {
   'suggestions': undefined,
 };
 
-export const Default = Template.bind({});
+export const Default = Template.bind(null);
 Default.args = {
   ...defaultArgs,
 };
 Default.argTypes = propStructure(searchDocs);
 
-export const WithButtonText = Template.bind({});
+export const WithButtonText = Template.bind(null);
 WithButtonText.args = {
   ...defaultArgs,
   'button-text': 'Search',
@@ -102,7 +99,7 @@ const TypeaheadTemplate = ({ value, suggestions }) => {
     </div>
   );
 };
-export const WithTypeahead = TypeaheadTemplate.bind({});
+export const WithTypeahead = TypeaheadTemplate.bind(null);
 WithTypeahead.args = {
   ...defaultArgs,
   value: '',

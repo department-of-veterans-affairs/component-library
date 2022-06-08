@@ -1,24 +1,13 @@
 import React from 'react';
 import {
-  Title,
-  Subtitle,
-  Description,
-  Primary,
-  ArgsTable,
-  Stories,
-  PRIMARY_STORY,
-} from '@storybook/addon-docs/blocks';
-
-import {
   CONTACTS,
   contactsMap,
   Table,
 } from '@department-of-veterans-affairs/component-library';
-
-import { getWebComponentDocs, propStructure } from './wc-helpers';
+import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
 
 const telephoneDocs = getWebComponentDocs('va-telephone');
-//
+
 // This builds the available "CONTACTS" list table
 // Descriptions are available in the contacts.js file
 const fields = [
@@ -37,27 +26,20 @@ const Contacts = () => (
   />
 );
 
-const Page = () => (
-  <>
-    <Title />
-    <Subtitle />
-    <Description />
-    <Primary />
-    <ArgsTable story={PRIMARY_STORY} />
-    <Contacts />
-    <br />
-    <Stories />
-  </>
-);
-
 export default {
   title: 'Components/va-telephone',
   parameters: {
+    componentSubtitle: `Telephone web component`,
     actions: {
       handles: ['component-library-analytics'],
     },
     docs: {
-      page: Page,
+      page: () => (
+        <StoryDocs data={telephoneDocs}>
+          <Contacts />
+          <br />
+        </StoryDocs>
+      ),
     },
   },
 };
@@ -95,45 +77,45 @@ const defaultArgs = {
   'vanity': undefined,
 };
 
-export const Default = Template.bind({});
+export const Default = Template.bind(null);
 Default.args = {
   ...defaultArgs,
 };
 Default.argTypes = propStructure(telephoneDocs);
 
-export const ThreeDigitNumber = Template.bind({});
+export const ThreeDigitNumber = Template.bind(null);
 ThreeDigitNumber.args = {
   ...defaultArgs,
   contact: '711',
 };
 
-export const Extension = Template.bind({});
+export const Extension = Template.bind(null);
 Extension.args = {
   ...defaultArgs,
   extension: '123',
 };
 
-export const NotClickable = Template.bind({});
+export const NotClickable = Template.bind(null);
 NotClickable.args = {
   ...defaultArgs,
   'not-clickable': true,
 };
 
-export const International = Template.bind({});
+export const International = Template.bind(null);
 International.args = {
   ...defaultArgs,
   international: true,
 };
 
-export const AriaDescribedBy = Template.bind({});
+export const AriaDescribedBy = Template.bind(null);
 AriaDescribedBy.args = {
   ...defaultArgs,
   ariaDescribedby: 'numberDescription',
 };
 
-export const VanityNumber = Template.bind({});
+export const VanityNumber = Template.bind(null);
 VanityNumber.args = {
   ...defaultArgs,
   contact: '8772228387',
-  vanity: 'VETS'
+  vanity: 'VETS',
 };

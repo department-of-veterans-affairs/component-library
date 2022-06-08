@@ -59,23 +59,20 @@ describe('va-text-input', () => {
 
   it('adds new aria-describedby for error message', async () => {
     const page = await newE2EPage();
-    await page.setContent('<va-text-input error="This is a mistake" />');
-
-    // Render the error message text
+    await page.setContent('<va-text-input />');
+    // Check that error is empty
+    const el = await page.find('va-text-input'); 
     const inputEl = await page.find('va-text-input >>> input');
+    expect(inputEl.getAttribute('aria-describedby')).toBeNull();
+    // Render the error message text as empty string
+    el.setProperty('error', "");
+    await page.waitForChanges();
+    expect(inputEl.getAttribute('aria-describedby')).toBeNull();
+    // Render the error message text as real value
+    el.setProperty('error', "Testing Error");
+    await page.waitForChanges();
+    expect(inputEl.getAttribute('aria-describedby')).not.toBeNull();
     expect(inputEl.getAttribute('aria-describedby')).toContain('error-message');
-  });
-
-  it('appends to an existing aria-describedby for error message', async () => {
-    const page = await newE2EPage();
-    await page.setContent(
-      '<va-text-input error="This is a mistake" aria-describedby="random-thing" />',
-    );
-
-    // Render the error message text
-    const error = await page.find('va-text-input >>> input');
-    expect(error.getAttribute('aria-describedby')).toContain('random-thing');
-    expect(error.getAttribute('aria-describedby')).toContain('error-message');
   });
 
   it('renders a required span', async () => {
@@ -91,7 +88,7 @@ describe('va-text-input', () => {
             This is a field <span class="required">(*required)</span>
           </label>
           <slot></slot>
-          <input id="inputField" type="text" part="input" />
+          <input id="inputField" type="text" required="" part="input" />
         </mock:shadow-root>
       </va-text-input>
     `);

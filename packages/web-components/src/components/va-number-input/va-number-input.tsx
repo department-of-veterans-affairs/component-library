@@ -10,6 +10,10 @@ import {
 } from '@stencil/core';
 import i18next from 'i18next';
 
+/**
+ * @nativeHandler onInput
+ * @nativeHandler onBlur
+ */
 @Component({
   tag: 'va-number-input',
   styleUrl: 'va-number-input.css',
@@ -122,6 +126,7 @@ export class VaNumberInput {
           max={this.max}
           min={this.min}
           value={this.value}
+          required={this.required || null}
           onInput={this.handleInput}
           onBlur={this.handleBlur}
         />

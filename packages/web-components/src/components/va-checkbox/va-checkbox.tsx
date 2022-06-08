@@ -8,6 +8,9 @@ import {
   Prop,
 } from '@stencil/core';
 
+/**
+ * @nativeHandler onBlur
+ */
 @Component({
   tag: 'va-checkbox',
   styleUrl: 'va-checkbox.css',

@@ -1,3 +1,8 @@
+export const maxYear = new Date().getFullYear() + 100;
+export const minYear = 1900;
+export const maxMonths = 12;
+export const minMonths = 1;
+
 export const months = [
   { label: 'January', value: 1 },
   { label: 'February', value: 2 },
@@ -127,4 +132,9 @@ export const days = {
 
 export function isFullDate(date) {
   return /\d{4}-\d{1,2}-\d{1,2}/.test(date);
+}
+
+export function checkLeapYear(year) {
+  //three conditions to find out the leap year
+  return (0 == year % 4 && 0 != year % 100) || 0 == year % 400;
 }

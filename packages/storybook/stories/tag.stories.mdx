@@ -1,0 +1,26 @@
+import { Canvas, Meta, Story, Subtitle, Title } from '@storybook/addon-docs';
+import { Guidance, MaturityScale } from './wc-helpers';
+import { additionalDocs } from './additional-docs';
+
+<Meta title="Components/Tag" />
+
+<Title>Tag</Title>
+<Subtitle>Tag component</Subtitle>
+<MaturityScale
+  category={additionalDocs['Tag'].maturityCategory}
+  level={additionalDocs['Tag'].maturityLevel}
+/>
+<Guidance
+  href={additionalDocs['Tag'].guidanceHref}
+  name={additionalDocs['Tag'].guidanceName}
+/>
+
+## Stories
+
+### Default
+
+<Canvas>
+  <Story name="Default">
+    <span className="usa-label">New</span>
+  </Story>
+</Canvas>
