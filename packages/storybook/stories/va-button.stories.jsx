@@ -51,34 +51,40 @@ const Template = ({
   );
 };
 
-export const Primary = Template.bind({});
+export const Primary = Template.bind(null);
 Primary.args = {
   ...defaultArgs,
 };
 Primary.argTypes = propStructure(buttonDocs);
 
-export const Secondary = Template.bind({});
+export const Secondary = Template.bind(null);
 Secondary.args = {
   ...defaultArgs,
   secondary: true,
 };
 
-export const Big = Template.bind({});
+export const Big = Template.bind(null);
 Big.args = {
   ...defaultArgs,
   big: true,
 };
 
-export const Continue = Template.bind({});
+export const Continue = Template.bind(null);
 Continue.args = {
   ...defaultArgs,
   continue: true,
   text: undefined,
 };
 
-export const Back = Template.bind({});
+export const Back = Template.bind(null);
 Back.args = {
   ...defaultArgs,
   back: true,
   text: undefined,
+};
+
+export const Disabled = Template.bind(null);
+Disabled.args = {
+  ...defaultArgs,
+  disabled: true,
 };
