@@ -1,15 +1,12 @@
 import {
-  Build,
   Component,
   Event,
   EventEmitter,
   Host,
   Prop,
   h,
-  forceUpdate,
   Element,
 } from '@stencil/core';
-import i18next from 'i18next';
 
 import {
   days,
@@ -19,12 +16,15 @@ import {
   maxYear,
   minMonths,
   minYear,
+  validKeys,
 } from '../../utils/date-utils';
 
-if (Build.isTesting) {
-  // Make i18next.t() return the key instead of the value
-  i18next.init({ lng: 'cimode' });
-}
+/**
+ * By default all date components have the following validation:
+ * - Cannot have blank values
+ * - Month and Day must be valid numbers
+ * - The Year cannot fall outside of the range of 1900 through the current year plus 100 years
+ */
 @Component({
   tag: 'va-date-text-input',
   styleUrl: 'va-date-text-input.css',
@@ -107,9 +107,8 @@ export class VaDateTextInput {
     ) {
       this.error = 'Please enter a valid date';
     } else if (this.error !== 'Please enter a valid date') {
-      this.error
-    }
-    else {
+      this.error;
+    } else {
       this.error = '';
     }
     this.dateBlur.emit(event);
@@ -137,24 +136,6 @@ export class VaDateTextInput {
   };
 
   private handleDateKey = (event: KeyboardEvent) => {
-    // Allow 0-9, Arrow Left, Arrow Right, Delete, Backspace and Tab to clear data or move to next field
-    const validKeys = [
-      '0',
-      '1',
-      '2',
-      '3',
-      '4',
-      '5',
-      '6',
-      '7',
-      '8',
-      '9',
-      'Backspace',
-      'ArrowRight',
-      'ArrowLeft',
-      'Tab',
-      'Delete',
-    ];
     if (validKeys.indexOf(event.key) < 0) {
       event.preventDefault();
       return false;
@@ -177,16 +158,6 @@ export class VaDateTextInput {
   })
   componentLibraryAnalytics: EventEmitter;
 
-  connectedCallback() {
-    i18next.on('languageChanged', () => {
-      forceUpdate(this.el);
-    });
-  }
-
-  disconnectedCallback() {
-    i18next.off('languageChanged');
-  }
-
   render() {
     const {
       required,
@@ -207,10 +178,7 @@ export class VaDateTextInput {
       <Host value={value} error={error} onBlur={handleDateBlur}>
         <fieldset>
           <legend>
-            {label}{' '}
-            {required && (
-              <span class="required">(*{i18next.t('required')})</span>
-            )}
+            {label} {required && <span class="required">(*Required)</span>}
             <div id="dateHint">
               Please enter two digits for the month and day and four digits for
               the year.
@@ -219,7 +187,7 @@ export class VaDateTextInput {
           <slot />
           {error && (
             <span class="error-message" role="alert">
-              <span class="sr-only">{i18next.t('error')}</span> {error}
+              <span class="sr-only">Error</span> {error}
             </span>
           )}
           <div class="date-container">
