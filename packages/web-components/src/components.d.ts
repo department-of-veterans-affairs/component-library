@@ -246,6 +246,10 @@ export namespace Components {
          */
         "label": string;
         /**
+          * Whether or not only the Month and Year inputs should be displayed
+         */
+        "monthYearOnly": boolean;
+        /**
           * Used to create unique name attributes for each input.
          */
         "name": string;
@@ -1190,6 +1194,10 @@ declare namespace LocalJSX {
           * Label for the field.
          */
         "label": string;
+        /**
+          * Whether or not only the Month and Year inputs should be displayed
+         */
+        "monthYearOnly"?: boolean;
         /**
           * Used to create unique name attributes for each input.
          */

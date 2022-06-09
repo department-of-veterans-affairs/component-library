@@ -55,6 +55,11 @@ export class VaDate {
   @Prop() error: string;
 
   /**
+   * Whether or not only the Month and Year inputs should be displayed
+   */
+  @Prop() monthYearOnly: boolean = false;
+
+  /**
    * Set the default date value must be in YYYY-MM-DD format.
    */
   @Prop({ mutable: true }) value: string;
@@ -167,6 +172,7 @@ export class VaDate {
       handleDateBlur,
       handleDateChange,
       handleDateKey,
+      monthYearOnly,
       value,
     } = this;
 
@@ -205,23 +211,26 @@ export class VaDate {
                   <option value={month.value}>{month.label}</option>
                 ))}
             </va-select>
-            <va-select
-              label="Day"
-              name={`${name}Day`}
-              // If day value set is greater than amount of days in the month
-              // set to empty string instead
-              // Value must be a string
-              value={daysForSelectedMonth.length < day ? '' : day?.toString()}
-              onVaSelect={handleDateChange}
-              class="select-day"
+            {!monthYearOnly && (
+              <va-select
+                label="Day"
+                name={`${name}Day`}
+                // If day value set is greater than amount of days in the month
+                // set to empty string instead
+                // Value must be a string
+                value={daysForSelectedMonth.length < day ? '' : day?.toString()}
+                onVaSelect={handleDateChange}
+                onBlur={handleDateBlur}
+                class="select-day"
               aria-label="Please enter two digits for the day"
-            >
-              <option value=""></option>
-              {daysForSelectedMonth &&
-                daysForSelectedMonth.map(day => (
-                  <option value={day}>{day}</option>
-                ))}
-            </va-select>
+              >
+                <option value=""></option>
+                {daysForSelectedMonth &&
+                  daysForSelectedMonth.map(day => (
+                    <option value={day}>{day}</option>
+                  ))}
+              </va-select>
+            )}
             <va-text-input
               label="Year"
               name={`${name}Year`}

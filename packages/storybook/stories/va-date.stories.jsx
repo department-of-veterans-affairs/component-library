@@ -22,9 +22,10 @@ const defaultArgs = {
   required: false,
   error: undefined,
   value: undefined,
+  monthYear: undefined,
 };
 
-const Template = ({ label, name, required, error, value }) => {
+const Template = ({ label, name, required, error, monthYear, value }) => {
   return (
     <VaDate
       label={label}
@@ -32,6 +33,7 @@ const Template = ({ label, name, required, error, value }) => {
       required={required}
       error={error}
       value={value}
+      monthYear={monthYear}
       onDateBlur={e => console.log(e, 'DATE BLUR FIRED')}
       onDateChange={e => console.log(e, 'DATE CHANGE FIRED')}
     />
@@ -115,7 +117,11 @@ WithHintTextError.args = {
   error: 'Error Message Example',
 };
 
+export const MonthYear = Template.bind({});
+MonthYear.args = { ...defaultArgs, monthYear: true };
+
 export const CustomValidation = CustomValidationTemplate.bind(null);
+export const CustomValidation = CustomValidationTemplate.bind({});
 CustomValidation.args = {
   ...defaultArgs,
   required: true,
