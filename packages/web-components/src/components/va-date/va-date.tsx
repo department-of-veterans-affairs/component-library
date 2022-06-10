@@ -82,6 +82,11 @@ export class VaDate {
   })
   dateBlur: EventEmitter;
 
+  /**
+   * Set the value prop as an ISO-8601 date using provided arguments.
+   * Strips trailing hyphens and sets date to be null if the
+   * date values are all NaNs.
+   */
   private setValue(year: number, month: number, day: number): void {
     // Use a leading zero for numbers < 10
     const numFormatter = new Intl.NumberFormat('en-US', {

@@ -313,7 +313,7 @@ describe('va-date', () => {
       expect(date.getAttribute('error')).toEqual('Please enter a valid date');
     });
 
-    it('sets the value as ISO date with reduced precision', async () => {
+    it('sets the value as ISO-8601 date with reduced precision', async () => {
       const page = await newE2EPage();
       await page.setContent('<va-date name="test" month-year-only />');
 
