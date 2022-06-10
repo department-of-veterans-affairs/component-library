@@ -89,9 +89,11 @@ export class VaDate {
     });
     // Ternary to prevent NaN displaying as value for Year
     // Ternary to prevent Month or Day from displaying as single digit
-    this.value = `${year ? year : ''}-${
+    const val = `${year ? year : ''}-${
       month ? numFormatter.format(month) : ''
     }-${day ? numFormatter.format(day) : ''}`.replace(/-+$/, '');
+
+    this.value = val ? val : null;
   }
 
   private handleDateBlur = (event: FocusEvent) => {

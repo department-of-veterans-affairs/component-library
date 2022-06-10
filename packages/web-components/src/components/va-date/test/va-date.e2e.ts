@@ -236,7 +236,7 @@ describe('va-date', () => {
     // Trigger Blur
     await handleYear.press('Tab');
     await page.waitForChanges();
-    expect(date.getAttribute('value')).toBe('--');
+    expect(date.getAttribute('value')).toBeNull();
   });
 
   it('checks for valid year month and day', async () => {
