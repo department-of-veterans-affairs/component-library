@@ -82,10 +82,7 @@ export class VaDate {
   })
   dateBlur: EventEmitter;
 
-  private handleDateBlur = (event: FocusEvent) => {
-    const [year, month, day] = (this.value || '')
-      .split('-')
-      .map(val => parseInt(val));
+  private setValue(year: number, month: number, day: number): void {
     // Use a leading zero for numbers < 10
     const numFormatter = new Intl.NumberFormat('en-US', {
       minimumIntegerDigits: 2,
@@ -94,7 +91,15 @@ export class VaDate {
     // Ternary to prevent Month or Day from displaying as single digit
     this.value = `${year ? year : ''}-${
       month ? numFormatter.format(month) : ''
-    }-${day ? numFormatter.format(day) : ''}`;
+    }-${day ? numFormatter.format(day) : ''}`.replace(/-+$/, '');
+  }
+
+  private handleDateBlur = (event: FocusEvent) => {
+    const [year, month, day] = (this.value || '')
+      .split('-')
+      .map(val => parseInt(val));
+    this.setValue(year, month, day);
+
     const daysForSelectedMonth = month > 0 ? days[month] : [];
     const leapYear = checkLeapYear(year);
 
@@ -104,9 +109,10 @@ export class VaDate {
       year > maxYear ||
       month < minMonths ||
       month > maxMonths ||
-      day < minMonths ||
-      day > daysForSelectedMonth.length ||
-      !day ||
+      (!this.monthYearOnly && (
+        day < minMonths ||
+        day > daysForSelectedMonth.length ||
+        !day)) ||
       !month ||
       !year ||
       (!leapYear && month === 2 && day > 28) ||
@@ -127,6 +133,7 @@ export class VaDate {
     if (target.classList.contains('select-month')) {
       currentMonth = target.value;
     }
+    // This won't happen for monthYearOnly dates
     if (target.classList.contains('select-day')) {
       currentDay = target.value;
     }
@@ -134,7 +141,7 @@ export class VaDate {
       currentYear = target.value;
     }
 
-    this.value = `${currentYear}-${currentMonth}-${currentDay}`;
+    this.setValue(parseInt(currentYear), parseInt(currentMonth), parseInt(currentDay))
 
     // This event should always fire to allow for validation handling
     this.dateChange.emit(event);
@@ -222,7 +229,7 @@ export class VaDate {
                 onVaSelect={handleDateChange}
                 onBlur={handleDateBlur}
                 class="select-day"
-              aria-label="Please enter two digits for the day"
+                aria-label="Please enter two digits for the day"
               >
                 <option value=""></option>
                 {daysForSelectedMonth &&

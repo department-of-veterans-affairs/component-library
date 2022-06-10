@@ -270,5 +270,26 @@ describe('va-date', () => {
 
       expect(dayInput).toBeNull();
     })
-  })
+
+    it('sets the value as ISO date with reduced precision', async () => {
+      const page = await newE2EPage();
+      await page.setContent('<va-date name="test" month-year-only />');
+
+      const date = await page.find('va-date');
+      const handleMonth = await page.$('pierce/[name="testMonth"]');
+      const handleYear = await page.$('pierce/[name="testYear"]');
+      // Month
+      await handleMonth.select('3');
+      // Year
+      await handleYear.press('2');
+      await handleYear.press('0');
+      await handleYear.press('0');
+      await handleYear.press('0');
+      // Trigger Blur
+      await handleYear.press('Tab');
+      await page.waitForChanges();
+
+      expect(date.getAttribute('value')).toBe('2000-03');
+    });
+  });
 });
