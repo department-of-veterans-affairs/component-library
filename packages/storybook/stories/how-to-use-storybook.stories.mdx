@@ -1,6 +1,21 @@
 import { Meta } from '@storybook/addon-docs';
 import viewportImage from './images/responsive-viewport-toolbar.png';
 import searchBarImage from './images/search-bar.png';
+import canvasTabImage from './images/canvas-tab.png';
+import canvasImage from './images/canvas.png';
+import canvasToolbarImage from './images/canvas-toolbar.png';
+import canvasZoomImage from './images/canvas-zoom.png';
+import canvasToggleBackgroundImage from './images/canvas-toggle-background.png';
+import canvasViewportImage from './images/canvas-viewport.png';
+import canvasMeasureImage from './images/canvas-measure.png';
+import canvasOutlineImage from './images/canvas-outline.png';
+import canvasVisionImage from './images/canvas-vision.png';
+import canvasOtherImage from './images/canvas-other.png';
+import canvasAddonsImage from './images/canvas-addons.png';
+import canvasControlsImage from './images/canvas-controls.png';
+import canvasStoryImage from './images/canvas-story.png';
+import canvasHtmlImage from './images/canvas-html.png';
+import canvasAccessibilityImage from './images/canvas-accessibility.png';
 
 <Meta
   title="About/How to use Storybook"
@@ -9,23 +24,114 @@ import searchBarImage from './images/search-bar.png';
 
 # How to use Storybook
 
-For the most part, Storybook is pretty intuitive to use, but there are some
-things that may not be immediately obvious.
-
-## Using the responsive viewport
-
-What to see what a component does on mobile? Storybook has a tool for that!
-
-When viewing [a
-story](https://storybook.js.org/docs/react/get-started/whats-a-story), there's a
-toolbar at the top of the page. The furthest icon to the right is the responsive
-viewport tool. Click it to open a menu to change the viewport for the story.
-
-<img src={viewportImage} alt="responsive viewport location" />
-
 ## Searching for stories
 
 Can't find what you're looking for? Use Storybook's search bar! It's located in
 the upper left corner of the page.
 
 <img src={searchBarImage} alt="search bar location" />
+
+## Canvas
+
+The Canvas view allows you to see a component story in isolation from other stories while providing information and playground functionality.
+It's comprised of a toolbar located at the top of the page, the component story and addons.
+You can hover over each toolbar icon to view a short description of what it does.
+
+<img src={canvasImage} alt="A screenshot of the Canvas page" />
+
+You can get to Canvas view from a component story page by clicking the Canvas tab from a component story page.
+
+<img src={canvasTabImage} alt="canvas tab" />
+
+---
+
+### Toolbar
+
+The Canvas toolbar provides you with a variety of tools such as zoom controls, toggling between a light and dark background, changing the viewport size and orientation,
+measuring component dimensions, applying an outline to elements, a color filter to simulate visual impairments, and utility and convenience tools.
+
+The **zoom tools** allow you to zoom in, zoom out or reset the zoom. This allows you to see the component at different zoom levels while only affecting the component.
+
+<img
+  src={canvasZoomImage}
+  alt="A screenshot of the zoom controls in the Canvas tab"
+/>
+
+The **background tool** allows you to see how components look on a light or dark background. A clear background option appears if a background is selected.
+
+<img
+  src={canvasToggleBackgroundImage}
+  alt="A screenshot of the background toggle tool"
+/>
+
+The **viewport tools** allow you to change the viewport size and orientation to see how a component renders at different breakpoints.
+
+<img
+  src={canvasViewportImage}
+  alt="A screenshot of the viewport size and orientation tool"
+/>
+
+The **measure tool** allows you to hover over an element and view information about its height, width, padding and margin.
+
+<img
+  src={canvasMeasureImage}
+  alt="A screenshot of the measure tool in the Canvas tab"
+/>
+
+The **outline tool** applies outlines to elements in the component.
+
+<img
+  src={canvasOutlineImage}
+  alt="A screenshot of the outline tool in the Canvas tab"
+/>
+
+The **color filter tool** simulates how the component looks for users with vision impairments.
+
+<img
+  src={canvasVisionImage}
+  alt="A screenshot of the color filter tool in the Canvas tab"
+/>
+
+These utility and convenience tools allow you to view the story in full screen, view the component in complete isolation on a new tab or copy a link to the story with your selected settings.
+
+<img
+  src={canvasOtherImage}
+  alt="A screenshot of the other tools in the Canvas tab"
+/>
+
+### Addons
+
+If you don't see the Addons section, please make sure **Show addons** is selected and click on **Change addons orientation** as shown here.
+
+<img
+  src={canvasAddonsImage}
+  alt="A screenshot showing Storybook's menu and addon options selected"
+/>
+
+The **Controls** tab allows you to modify a component's properties and view its properties and events. The story will update to reflect new values for the properties if changed. This also exists in **Docs** view.
+
+<img
+  src={canvasControlsImage}
+  alt="A screenshot of the Controls addon in the Canvas tab"
+/>
+
+The **Story** tab displays the source code for the full story. You can use this to understand how we're using a component in a story.
+
+<img
+  src={canvasStoryImage}
+  alt="A screenshot of the Story addon in the Canvas tab"
+/>
+
+The **HTML** tab displays the HTML markup for the story. You can use this to understand how to use a component or click **Copy** to copy the full story for your convenience.
+
+<img
+  src={canvasHtmlImage}
+  alt="A screenshot of the HTML addon in the Canvas tab"
+/>
+
+The **Accessibility** tab shows you the results of automated accessibility checks performed for a story. You can click through the results to learn more about each test.
+
+<img
+  src={canvasAccessibilityImage}
+  alt="A screenshot of the Accessibility addon in the Canvas tab"
+/>
