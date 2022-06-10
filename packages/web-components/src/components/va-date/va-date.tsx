@@ -229,7 +229,6 @@ export class VaDate {
                 // Value must be a string
                 value={daysForSelectedMonth.length < day ? '' : day?.toString()}
                 onVaSelect={handleDateChange}
-                onBlur={handleDateBlur}
                 class="select-day"
                 aria-label="Please enter two digits for the day"
               >
