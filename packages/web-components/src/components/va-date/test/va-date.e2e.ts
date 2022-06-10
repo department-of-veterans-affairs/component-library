@@ -271,6 +271,16 @@ describe('va-date', () => {
       expect(dayInput).toBeNull();
     })
 
+    it('passes an axe check', async () => {
+      const page = await newE2EPage();
+      await page.setContent(
+        `
+        <va-date month-year-only label="Test Label" month="3" name="test" year="2000"></va-date>
+        `,
+      );
+      await axeCheck(page);
+    });
+
     it('sets the value as ISO date with reduced precision', async () => {
       const page = await newE2EPage();
       await page.setContent('<va-date name="test" month-year-only />');
