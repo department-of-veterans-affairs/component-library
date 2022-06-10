@@ -133,7 +133,7 @@ describe('va-date', () => {
     expect(elementYear.getAttribute('value')).toBe('2022');
   });
 
-  it('fires a error message onBlur if date is invalid and component is required', async () => {
+  it('displays an error message onBlur if date is invalid and component is required', async () => {
     const page = await newE2EPage();
     await page.setContent(
       '<va-date value="1999-05-03" name="test" required="true" />',
@@ -279,6 +279,38 @@ describe('va-date', () => {
         `,
       );
       await axeCheck(page);
+    });
+
+    it('sets a default date', async () => {
+      const page = await newE2EPage();
+      await page.setContent('<va-date month-year-only value="1999-05" />');
+
+      const month = await page.find('va-date >>> .select-month');
+      const year = await page.find('va-date >>> .input-year');
+
+      expect(month.getAttribute('value')).toBe('5');
+      expect(year.getAttribute('value')).toBe('1999');
+    });
+ 
+    it('checks for valid year and month', async () => {
+      const page = await newE2EPage();
+      await page.setContent('<va-date month-year-only name="test"/>');
+
+      const date = await page.find('va-date');
+      const handleMonth = await page.$('pierce/[name="testMonth"]');
+      const handleYear = await page.$('pierce/[name="testYear"]');
+
+      // Month
+      await handleMonth.select();
+      // Year
+      await handleYear.press('3');
+      await handleYear.press('0');
+      await handleYear.press('0');
+      await handleYear.press('0');
+      // Trigger Blur
+      await handleYear.press('Tab');
+      await page.waitForChanges();
+      expect(date.getAttribute('error')).toEqual('Please enter a valid date');
     });
 
     it('sets the value as ISO date with reduced precision', async () => {
