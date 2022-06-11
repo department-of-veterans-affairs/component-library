@@ -17,15 +17,22 @@ export default {
 };
 
 const defaultArgs = {
-  label: 'Date of birth',
-  name: 'test',
-  required: false,
-  error: undefined,
-  value: undefined,
-  monthYearOnly: undefined,
+  'label': 'Date of birth',
+  'name': 'test',
+  'required': false,
+  'error': undefined,
+  'value': undefined,
+  'month-year-only': undefined,
 };
 
-const Template = ({ label, name, required, error, monthYearOnly, value }) => {
+const Template = ({
+  label,
+  name,
+  required,
+  error,
+  'month-year-only': monthYearOnly,
+  value,
+}) => {
   return (
     <VaDate
       label={label}
@@ -121,7 +128,7 @@ WithHintTextError.args = {
 };
 
 export const MonthYear = Template.bind({});
-MonthYear.args = { ...defaultArgs, monthYearOnly: true };
+MonthYear.args = { ...defaultArgs, 'month-year-only': true };
 
 export const CustomValidation = CustomValidationTemplate.bind(null);
 CustomValidation.args = {
