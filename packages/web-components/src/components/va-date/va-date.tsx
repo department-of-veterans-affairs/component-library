@@ -12,6 +12,7 @@ import {
   months,
   days,
   isFullDate,
+  isMonthYearDate,
   checkLeapYear,
   maxMonths,
   maxYear,
@@ -110,6 +111,8 @@ export class VaDate {
     const daysForSelectedMonth = month > 0 ? days[month] : [];
     const leapYear = checkLeapYear(year);
 
+    const dateFormatChecker = this.monthYearOnly ? isMonthYearDate : isFullDate;
+
     // Check validity of date if invalid provide message and error state styling
     if (
       year < minYear ||
@@ -123,7 +126,7 @@ export class VaDate {
       !month ||
       !year ||
       (!leapYear && month === 2 && day > 28) ||
-      (this.required && !isFullDate(this.value))
+      (this.required && !dateFormatChecker(this.value))
     ) {
       this.error = 'Please enter a valid date';
     } else if (this.error !== 'Please enter a valid date') {
