@@ -1,3 +1,5 @@
+@import '../../mixins/accessibility.css';
+
 :host {
   display: block;
   --visible-checkbox-size: 2rem;
@@ -76,9 +78,9 @@ input:not([disabled]):focus+label:before {
     font-weight: 700;
 }
 
-:host([required]) label > span {
+.required {
   color: var(--color-secondary-dark);
-  margin: 0px 0.35rem;
+  margin: 0 0.35rem;
 }
 
 ::slotted([slot='description']){

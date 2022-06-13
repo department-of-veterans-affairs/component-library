@@ -113,30 +113,30 @@ export class VaCheckbox {
   };
 
   render() {
-    const describedBy = `${this.ariaDescribedby} description ${
-      this.error && 'error-message'
-    }`.trim();
+    const { error, label, required, description, checked, handleChange } = this;
+    const describedBy = error ? 'error-message' : null; // Null so we don't add the attribute if we have an empty string
 
     return (
       <Host>
         <div id="description">
-          {this.description ? (
-            <p>{this.description}</p>
-          ) : (
-            <slot name="description" />
-          )}
+          {description ? <p>{description}</p> : <slot name="description" />}
         </div>
-        {this.error && <span id="error-message">{this.error}</span>}
+        {error && (
+          <span id="error-message" role="alert">
+            <span class="sr-only">Error</span> {error}
+          </span>
+        )}
         <input
           type="checkbox"
           id="checkbox-element"
-          checked={this.checked}
+          checked={checked}
           aria-describedby={describedBy}
-          onChange={this.handleChange}
+          aria-labelledby="checkbox-label"
+          onChange={handleChange}
         />
-        <label htmlFor="checkbox-element">
-          {this.label}
-          {this.required && <span class="required">(Required)</span>}
+        <label htmlFor="checkbox-element" id="checkbox-label">
+          {label}
+          {required && <span class="required">(*Required)</span>}
         </label>
       </Host>
     );
