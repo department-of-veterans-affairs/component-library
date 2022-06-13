@@ -138,3 +138,22 @@ export function checkLeapYear(year) {
   //three conditions to find out the leap year
   return (0 == year % 4 && 0 != year % 100) || 0 == year % 400;
 }
+
+// Allow 0-9, Backspace, Delete, Left and Right Arrow, and Tab to clear data or move to next field
+export const validKeys = [
+  '0',
+  '1',
+  '2',
+  '3',
+  '4',
+  '5',
+  '6',
+  '7',
+  '8',
+  '9',
+  'Backspace',
+  'ArrowRight',
+  'ArrowLeft',
+  'Tab',
+  'Delete',
+];

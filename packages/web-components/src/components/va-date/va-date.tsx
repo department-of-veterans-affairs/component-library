@@ -1,12 +1,38 @@
-import { Component, Event, EventEmitter, Host, Prop, h } from '@stencil/core';
+import {
+  Component,
+  Event,
+  EventEmitter,
+  Host,
+  Prop,
+  h,
+  Element,
+} from '@stencil/core';
 
-import { months, days, isFullDate } from '../../utils/date-utils';
+import {
+  months,
+  days,
+  isFullDate,
+  checkLeapYear,
+  maxMonths,
+  maxYear,
+  minMonths,
+  minYear,
+  validKeys,
+} from '../../utils/date-utils';
+
+/**
+ * By default all date components have the following validation:
+ * - Cannot have blank values
+ * - Month and Day must be valid numbers
+ * - The Year cannot fall outside of the range of 1900 through the current year plus 100 years
+ */
 @Component({
   tag: 'va-date',
   styleUrl: 'va-date.css',
   shadow: true,
 })
 export class VaDate {
+  @Element() el: HTMLElement;
   /**
    * Render marker indicating field is required.
    */
@@ -52,6 +78,41 @@ export class VaDate {
   dateBlur: EventEmitter;
 
   private handleDateBlur = (event: FocusEvent) => {
+    const [year, month, day] = (this.value || '')
+      .split('-')
+      .map(val => parseInt(val));
+    // Use a leading zero for numbers < 10
+    const numFormatter = new Intl.NumberFormat('en-US', {
+      minimumIntegerDigits: 2,
+    });
+    // Ternary to prevent NaN displaying as value for Year
+    // Ternary to prevent Month or Day from displaying as single digit
+    this.value = `${year ? year : ''}-${
+      month ? numFormatter.format(month) : ''
+    }-${day ? numFormatter.format(day) : ''}`;
+    const daysForSelectedMonth = month > 0 ? days[month] : [];
+    const leapYear = checkLeapYear(year);
+
+    // Check validity of date if invalid provide message and error state styling
+    if (
+      year < minYear ||
+      year > maxYear ||
+      month < minMonths ||
+      month > maxMonths ||
+      day < minMonths ||
+      day > daysForSelectedMonth.length ||
+      !day ||
+      !month ||
+      !year ||
+      (!leapYear && month === 2 && day > 28) ||
+      (this.required && !isFullDate(this.value))
+    ) {
+      this.error = 'Please enter a valid date';
+    } else if (this.error !== 'Please enter a valid date') {
+      this.error;
+    } else {
+      this.error = '';
+    }
     this.dateBlur.emit(event);
   };
 
@@ -67,19 +128,18 @@ export class VaDate {
     if (target.classList.contains('input-year')) {
       currentYear = target.value;
     }
-    // Use a leading zero for numbers < 10
-    const numFormatter = new Intl.NumberFormat('en-US', {
-      minimumIntegerDigits: 2,
-    });
 
-    // If Month or Date Select are chosen as empty return ''
-    // Otherwise convert numbers less than 10 to have a leading 0
-    this.value = `${currentYear}-${
-      currentMonth ? numFormatter.format(parseInt(currentMonth)) : ''
-    }-${currentDay ? numFormatter.format(parseInt(currentDay)) : ''}`;
+    this.value = `${currentYear}-${currentMonth}-${currentDay}`;
 
     // This event should always fire to allow for validation handling
     this.dateChange.emit(event);
+  };
+
+  private handleDateKey = (event: KeyboardEvent) => {
+    if (validKeys.indexOf(event.key) < 0) {
+      event.preventDefault();
+      return false;
+    }
   };
 
   /**
@@ -106,34 +166,27 @@ export class VaDate {
       error,
       handleDateBlur,
       handleDateChange,
+      handleDateKey,
       value,
     } = this;
 
-    // Convert string to number to remove leading 0 on values less than 10
     const [year, month, day] = (value || '')
       .split('-')
-      .map(val => parseInt(val, 10));
-
+      .map(val => parseInt(val));
     const daysForSelectedMonth = month > 0 ? days[month] : [];
 
-    // Check validity of date if invalid provide message and error state styling
-    const dateInvalid =
-      required && (!isFullDate(value) || day > daysForSelectedMonth.length)
-        ? 'Please provide a valid date'
-        : null;
-
-    // Setting new attribute to avoid conflicts with only using error attribute
     // Error attribute should be leveraged for custom error messaging
     // Fieldset has an implicit aria role of group
     return (
-      <Host value={value} invalid={dateInvalid}>
-        <fieldset aria-label="Select Month and two digit day XX and four digit year format XXXX">
+      <Host value={value} error={error} onBlur={handleDateBlur}>
+        <fieldset>
           <legend>
             {label} {required && <span class="required">(*Required)</span>}
           </legend>
-          {(error || dateInvalid) && (
+          <slot />
+          {error && (
             <span class="error-message" role="alert">
-              <span class="sr-only">Error</span> {error || dateInvalid}
+              <span class="sr-only">Error</span> {error}
             </span>
           )}
           <div class="date-container">
@@ -143,8 +196,8 @@ export class VaDate {
               // Value must be a string
               value={month?.toString()}
               onVaSelect={handleDateChange}
-              onBlur={handleDateBlur}
               class="select-month"
+              aria-label="Please enter two digits for the month"
             >
               <option value=""></option>
               {months &&
@@ -160,8 +213,8 @@ export class VaDate {
               // Value must be a string
               value={daysForSelectedMonth.length < day ? '' : day?.toString()}
               onVaSelect={handleDateChange}
-              onBlur={handleDateBlur}
               class="select-day"
+              aria-label="Please enter two digits for the day"
             >
               <option value=""></option>
               {daysForSelectedMonth &&
@@ -179,10 +232,11 @@ export class VaDate {
               // Checking is NaN if so provide empty string
               value={year ? year.toString() : ''}
               onInput={handleDateChange}
-              onBlur={handleDateBlur}
+              onKeyDown={handleDateKey}
               class="input-year"
               inputmode="numeric"
               type="text"
+              aria-label="Please enter four digits for the year"
             />
           </div>
         </fieldset>
