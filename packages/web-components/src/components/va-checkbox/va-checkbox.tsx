@@ -113,7 +113,7 @@ export class VaCheckbox {
   };
 
   render() {
-    const { error, label, required, description, checked, handleChange } = this;
+    const { error, label, required, description, checked } = this;
     const describedBy = error ? 'error-message' : null; // Null so we don't add the attribute if we have an empty string
 
     return (
@@ -132,7 +132,7 @@ export class VaCheckbox {
           checked={checked}
           aria-describedby={describedBy}
           aria-labelledby="checkbox-label"
-          onChange={handleChange}
+          onChange={this.handleChange}
         />
         <label htmlFor="checkbox-element" id="checkbox-label">
           {label}

@@ -178,11 +178,10 @@ export class VaTextInput {
       name,
       handleInput,
       handleBlur,
-      getInputType,
     } = this;
     const describedBy = error ? 'error-message' : null; // Null so we don't add the attribute if we have an empty string
     const inputMode = inputmode ? inputmode : null; // Null so we don't add the attribute if we have an empty string
-    const type = getInputType();
+    const type = this.getInputType();
 
     return (
       <Host>
