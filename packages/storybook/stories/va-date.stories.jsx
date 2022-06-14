@@ -109,6 +109,41 @@ const WithHintTextTemplate = ({ name, label, error, required, value }) => {
   );
 };
 
+const CustomRequiredMessageTemplate = ({
+  label,
+  name,
+  required,
+  error,
+  value,
+}) => {
+  const [dateVal, setDateVal] = useState(value);
+  const [errorVal, setErrorVal] = useState(error);
+  const completeDate = date => /\d{4}-\d{1,2}-\d{1,2}/.test(date);
+  function handleDateBlur() {
+    if (!completeDate(dateVal)) {
+      setErrorVal("Don't forget to fill me out");
+    } else {
+      setErrorVal(null);
+    }
+  }
+
+  return (
+    <>
+      <VaDate
+        label={label}
+        name={name}
+        required={required}
+        error={errorVal}
+        value={dateVal}
+        onDateBlur={() => handleDateBlur()}
+        onDateChange={e => setDateVal(e.target.value)}
+      />
+      <hr />
+      <p>We are doing our own required check in the dateBlur handler</p>
+    </>
+  );
+};
+
 export const Default = Template.bind(null);
 Default.args = { ...defaultArgs };
 Default.argTypes = propStructure(dateDocs);
@@ -121,10 +156,10 @@ WithHintText.args = {
   ...defaultArgs,
 };
 
-export const CustomRequiredMessage = Template.bind(null);
+export const CustomRequiredMessage = CustomRequiredMessageTemplate.bind(null);
 CustomRequiredMessage.args = {
   ...defaultArgs,
-  required: "Don't forget to fill this out!",
+  required: true,
 };
 
 export const WithHintTextError = WithHintTextTemplate.bind(null);
