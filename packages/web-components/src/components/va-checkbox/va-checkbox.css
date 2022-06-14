@@ -74,7 +74,7 @@ input:not([disabled]):focus+label:before {
   position: relative;
 }
 
-:host([error]) label, :host([error]) span {
+:host([error]:not([error=''])) label, :host([error]:not([error=''])) span {
     font-weight: 700;
 }
 
