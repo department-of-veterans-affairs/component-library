@@ -47,6 +47,7 @@ const Template = ({
       secondary={secondary}
       submit={submit}
       text={text}
+      onClick={e => console.log(e)}
     />
   );
 };
