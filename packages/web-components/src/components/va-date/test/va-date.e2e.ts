@@ -7,11 +7,17 @@ describe('va-date', () => {
     await page.setContent('<va-date></va-date>');
 
     const element = await page.find('va-date');
+    expect(element).toHaveClass('hydrated');
+  });
+
+  it('renders all inputs for date fields', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-date></va-date>');
+
     const monthInput = await page.find('va-date >>> va-select.select-month')
     const dayInput = await page.find('va-date >>> va-select.select-day')
     const yearInput = await page.find('va-date >>> va-text-input.input-year')
 
-    expect(element).toHaveClass('hydrated');
     expect(monthInput).not.toBeNull();
     expect(dayInput).not.toBeNull();
     expect(yearInput).not.toBeNull();
@@ -286,9 +292,13 @@ describe('va-date', () => {
     it('only displays month and year fields', async () => {
       const page = await newE2EPage();
       await page.setContent('<va-date month-year-only/>');
+      const monthInput = await page.find('va-date >>> va-select.select-month')
       const dayInput = await page.find('va-date >>> va-select.select-day');
+      const yearInput = await page.find('va-date >>> va-text-input.input-year')
 
       expect(dayInput).toBeNull();
+      expect(monthInput).not.toBeNull();
+      expect(yearInput).not.toBeNull();
     })
 
     it('passes an axe check', async () => {
