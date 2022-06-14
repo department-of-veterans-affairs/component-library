@@ -103,10 +103,7 @@ export class VaTextarea {
 
     return (
       <Host>
-        <label
-          id="textarea-label"
-          htmlFor="textarea"
-        >
+        <label htmlFor="textarea">
           {label}
           {required && <span class="required">(*{i18next.t('required')})</span>}
         </label>
@@ -116,7 +113,6 @@ export class VaTextarea {
         }
         <textarea
           aria-describedby={error ? 'error-message' : undefined}
-          aria-labelledby="textarea-label"
           onInput={this.handleInput}
           onBlur={this.handleBlur}
           id="textarea"
