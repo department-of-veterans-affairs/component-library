@@ -1,5 +1,6 @@
 import { Build, Component, Event, EventEmitter, Host, Prop, Element, forceUpdate, h } from '@stencil/core';
 import i18next from 'i18next';
+import { consoleDevError } from '../../utils/utils';
 
 if (Build.isTesting) {
   // Make i18next.t() return the key instead of the value
@@ -98,8 +99,22 @@ export class VaTextarea {
     }
   }
 
+  /**
+   * This ensures that the `maxlength` property will be positive
+   * or it won't be used at all
+   */
+  private getMaxlength() {
+    if (this.maxlength <= 0) {
+      consoleDevError("The maxlength prop must be positive!");
+      return undefined;
+    }
+
+    return this.maxlength;
+  }
+
   render() {
-    const {label, error, placeholder, maxlength, name, required, value} = this;
+    const {label, error, placeholder, name, required, value} = this;
+    const maxlength = this.getMaxlength();
 
     return (
       <Host>

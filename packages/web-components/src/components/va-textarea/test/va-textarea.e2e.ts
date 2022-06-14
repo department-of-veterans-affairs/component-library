@@ -149,4 +149,31 @@ describe('va-textarea', () => {
     );
   });
 
+  it('ensures that negative maxlength values are ignored', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-textarea maxlength="-5"/>');
+
+    // Level-setting expectations
+    const textareaEl = await page.find('va-textarea >>> textarea');
+    expect(await page.find('va-textarea >>> small')).toBeNull();
+
+    // Test the functionality
+    await textareaEl.type('Hello, nice to meet you');
+    expect(await textareaEl.getProperty('value')).toBe('Hello, nice to meet you');
+    expect(await page.find('va-textarea >>> small')).toBeNull();
+  });
+
+  it('ensures that a maxlength of zero is ignored', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-textarea maxlength="0"/>');
+
+    // Level-setting expectations
+    const textareaEl = await page.find('va-textarea >>> textarea');
+    expect(await page.find('va-textarea >>> small')).toBeNull();
+
+    // Test the functionality
+    await textareaEl.type('Hello, nice to meet you');
+    expect(await textareaEl.getProperty('value')).toBe('Hello, nice to meet you');
+    expect(await page.find('va-textarea >>> small')).toBeNull();
+  });
 });
