@@ -128,8 +128,8 @@ export class VaDate {
       !year ||
       (!leapYear && month === 2 && day > 28) ||
       (this.required && !dateFormatChecker(this.value))
-      this.error = 'Please enter a valid date';
     )) {
+      this.error = 'Please enter a valid date';
     } else if (this.error !== 'Please enter a valid date') {
       this.error;
     } else {
