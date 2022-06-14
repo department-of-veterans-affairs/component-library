@@ -171,4 +171,13 @@ describe('va-button', () => {
     await button.click();
     expect(analyticsSpy).toHaveReceivedEventTimes(0);
   });
+
+  it(`doesn't fire click event when disabled is true`, async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-button text="Edit" disabled></va-button>');
+    const clickSpy = await page.spyOnEvent('click');
+    const button = await page.find('va-button >>> button');
+    await button.click();
+    expect(clickSpy).toHaveReceivedEventTimes(0);
+  });
 });
