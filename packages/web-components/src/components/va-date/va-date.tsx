@@ -56,7 +56,7 @@ export class VaDate {
   @Prop() error: string;
 
   /**
-   * Whether or not only the Month and Year inputs should be displayed
+   * Whether or not only the Month and Year inputs should be displayed.
    */
   @Prop() monthYearOnly: boolean = false;
 

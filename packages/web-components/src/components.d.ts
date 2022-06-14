@@ -242,7 +242,7 @@ export namespace Components {
          */
         "label": string;
         /**
-          * Whether or not only the Month and Year inputs should be displayed
+          * Whether or not only the Month and Year inputs should be displayed.
          */
         "monthYearOnly": boolean;
         /**
@@ -1187,7 +1187,7 @@ declare namespace LocalJSX {
          */
         "label": string;
         /**
-          * Whether or not only the Month and Year inputs should be displayed
+          * Whether or not only the Month and Year inputs should be displayed.
          */
         "monthYearOnly"?: boolean;
         /**
