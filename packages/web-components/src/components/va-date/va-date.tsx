@@ -115,6 +115,7 @@ export class VaDate {
 
     // Check validity of date if invalid provide message and error state styling
     if (
+      !this.error && (
       year < minYear ||
       year > maxYear ||
       month < minMonths ||
@@ -127,8 +128,8 @@ export class VaDate {
       !year ||
       (!leapYear && month === 2 && day > 28) ||
       (this.required && !dateFormatChecker(this.value))
-    ) {
       this.error = 'Please enter a valid date';
+    )) {
     } else if (this.error !== 'Please enter a valid date') {
       this.error;
     } else {

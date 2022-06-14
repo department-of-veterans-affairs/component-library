@@ -121,6 +121,12 @@ WithHintText.args = {
   ...defaultArgs,
 };
 
+export const CustomRequiredMessage = Template.bind(null);
+CustomRequiredMessage.args = {
+  ...defaultArgs,
+  required: "Don't forget to fill this out!",
+};
+
 export const WithHintTextError = WithHintTextTemplate.bind(null);
 WithHintTextError.args = {
   ...defaultArgs,

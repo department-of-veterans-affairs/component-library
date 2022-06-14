@@ -44,6 +44,26 @@ describe('va-date', () => {
     expect(requiredSpan).not.toBeNull();
   });
 
+  it('allows for a custom required message', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-date value="2000-01-01" name="test" label="This is a field" required="Fill me out" />');
+
+    // Act
+    const handleYear = await page.$('pierce/[name="testYear"]');
+    // Click three times to select all text in input
+    await handleYear.click({ clickCount: 3 });
+    await handleYear.press('2');
+    await handleYear.press('Tab');
+    await page.$eval('va-date', (elm: any) => {
+      elm.error= 'Fill me out';
+    });
+    await page.waitForChanges();
+
+    // Assert
+    const errorSpan = await page.find('va-date >>> span.error-message');
+    expect(errorSpan.textContent).toContain("Fill me out");
+  });
+
   it('sets a label', async () => {
     const page = await newE2EPage();
     await page.setContent('<va-date label="This is a label" />');
