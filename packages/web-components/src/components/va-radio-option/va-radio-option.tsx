@@ -1,4 +1,12 @@
-import { Component, Element, Event, EventEmitter, Host, Prop, h } from '@stencil/core';
+import {
+  Component,
+  Element,
+  Event,
+  EventEmitter,
+  Host,
+  Prop,
+  h,
+} from '@stencil/core';
 
 @Component({
   tag: 'va-radio-option',
@@ -47,12 +55,11 @@ export class VaRadioOption {
   }
 
   render() {
-    const {checked, ariaDescribedby, name, value, label} = this
-    const describedBy = (checked && ariaDescribedby) || null;
+    const { checked, ariaDescribedby, name, value, label } = this;
     return (
       <Host
         aria-checked={checked ? `${checked}` : 'false'}
-        aria-describedby={describedBy}
+        aria-describedby={(checked && ariaDescribedby) || null}
         aria-label={name}
         checked={checked}
         name={name}

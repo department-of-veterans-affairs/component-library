@@ -179,8 +179,6 @@ export class VaTextInput {
       handleInput,
       handleBlur,
     } = this;
-    const describedBy = error ? 'error-message' : null; // Null so we don't add the attribute if we have an empty string
-    const inputMode = inputmode ? inputmode : null; // Null so we don't add the attribute if we have an empty string
     const type = this.getInputType();
 
     return (
@@ -205,8 +203,8 @@ export class VaTextInput {
           value={value}
           onInput={handleInput}
           onBlur={handleBlur}
-          aria-describedby={describedBy}
-          inputmode={inputMode}
+          aria-describedby={error ? 'error-message' : undefined}
+          inputmode={inputmode ? inputmode : null}
           maxlength={maxlength}
           minlength={minlength}
           pattern={pattern}
