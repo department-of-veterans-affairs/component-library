@@ -204,7 +204,7 @@ export class VaTextInput {
           onInput={handleInput}
           onBlur={handleBlur}
           aria-describedby={error ? 'error-message' : undefined}
-          inputmode={inputmode ? inputmode : null}
+          inputmode={inputmode ? inputmode : undefined}
           maxlength={maxlength}
           minlength={minlength}
           pattern={pattern}
