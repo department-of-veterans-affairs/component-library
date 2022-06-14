@@ -91,7 +91,9 @@ export class VaButton {
   };
 
   /**
-   * A workaround for preventing the click event from bubbling.
+   * This workaround allows us to use disabled for styling and preventing the click event from firing while improving
+   * the button's accessibility by allowing it to be focusable and through the use of aria-disabled.
+   *
    * Using a click handler on the button with this same check for disabled results in the event bubbling.
    */
   @Listen('click')
