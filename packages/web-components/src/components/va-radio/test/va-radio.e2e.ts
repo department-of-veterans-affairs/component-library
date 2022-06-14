@@ -72,9 +72,9 @@ describe('va-radio', () => {
     const page = await newE2EPage();
     await page.setContent('<va-radio error="This is an error"></va-radio>');
 
-    const element = await page.find('va-radio >>> .error-message');
+    const element = await page.find('va-radio >>> #error-message');
     expect(element).toEqualHtml(`
-     <span class="error-message" role="alert">
+     <span id="error-message" role="alert">
        <span class="sr-only">
          Error
        </span>
@@ -87,9 +87,9 @@ describe('va-radio', () => {
     const page = await newE2EPage();
     await page.setContent('<va-radio required></va-radio>');
 
-    const element = await page.find('va-radio >>> .required-span');
+    const element = await page.find('va-radio >>> .required');
     expect(element).toEqualHtml(`
-      <span class="required-span">
+      <span class="required">
         (*Required)
       </span>
     `);
