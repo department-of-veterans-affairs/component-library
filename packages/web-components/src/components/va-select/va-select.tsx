@@ -130,23 +130,24 @@ export class VaSelect {
 
   render() {
     const { error, label, required, name } = this;
-    const errorSpanId = error ? 'error' : undefined;
 
     return (
       <Host>
-        <label htmlFor="select" part="label">
+        <label htmlFor="select" id="select-label" part="label">
           {label}
-          {required && <span>{`(*${i18next.t('required')})`}</span>}
+          {required && (
+            <span class="required">{`(*${i18next.t('required')})`}</span>
+          )}
         </label>
-
         {error && (
-          <span id={errorSpanId} role="alert">
-            {error}
+          <span id="error-message" role="alert">
+            <span class="sr-only">{i18next.t('error')}</span> {error}
           </span>
         )}
         <slot onSlotchange={() => this.populateOptions()}></slot>
         <select
-          aria-describedby={errorSpanId}
+          aria-labelledby="select-label"
+          aria-describedby={error ? 'error-message' : undefined}
           id="select"
           name={name}
           required={required || null}

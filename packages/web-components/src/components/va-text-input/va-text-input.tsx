@@ -166,45 +166,60 @@ export class VaTextInput {
   }
 
   render() {
-    const describedBy = this.error ? 'error-message' : null; // Null so we don't add the attribute if we have an empty string
-    const inputMode = this.inputmode ? this.inputmode : null; // Null so we don't add the attribute if we have an empty string
+    const {
+      label,
+      error,
+      inputmode,
+      required,
+      value,
+      maxlength,
+      minlength,
+      pattern,
+      name,
+      handleInput,
+      handleBlur,
+    } = this;
     const type = this.getInputType();
 
     return (
       <Host>
-        {this.label && (
+        {label && (
           <label htmlFor="inputField" part="label">
-            {this.label}{' '}
-            {this.required && (
+            {label}{' '}
+            {required && (
               <span class="required">(*{i18next.t('required')})</span>
             )}
           </label>
         )}
         <slot></slot>
-        {this.error && <span id="error-message">{this.error}</span>}
+        {error && (
+          <span id="error-message" role="alert">
+            <span class="sr-only">{i18next.t('error')}</span> {error}
+          </span>
+        )}
         <input
           id="inputField"
           type={type}
-          value={this.value}
-          onInput={this.handleInput}
-          onBlur={this.handleBlur}
-          aria-describedby={describedBy}
-          inputmode={inputMode}
-          maxlength={this.maxlength}
-          minlength={this.minlength}
-          pattern={this.pattern}
-          name={this.name}
-          required={this.required || null}
+          value={value}
+          onInput={handleInput}
+          onBlur={handleBlur}
+          aria-describedby={error ? 'error-message' : undefined}
+          inputmode={inputmode ? inputmode : undefined}
+          maxlength={maxlength}
+          minlength={minlength}
+          pattern={pattern}
+          name={name}
+          required={required || null}
           part="input"
         />
-        {this.maxlength && this.value?.length >= this.maxlength && (
+        {maxlength && value?.length >= maxlength && (
           <small aria-live="polite" part="validation">
-            ({i18next.t('max-chars', { length: this.maxlength })})
+            ({i18next.t('max-chars', { length: maxlength })})
           </small>
         )}
-        {this.minlength && this.value?.length < this.minlength && (
+        {minlength && value?.length < minlength && (
           <small aria-live="polite" part="validation">
-            (Min. {this.minlength} characters)
+            (Min. {minlength} characters)
           </small>
         )}
       </Host>

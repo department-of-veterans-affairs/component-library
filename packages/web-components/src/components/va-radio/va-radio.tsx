@@ -170,15 +170,16 @@ export class VaRadio {
   }
 
   render() {
+    const { label, required, error } = this;
     return (
       <Host role="radiogroup">
         <legend>
-          {this.label}
-          {this.required && <span class="required-span">(*Required)</span>}
+          {label}
+          {required && <span class="required">(*Required)</span>}
         </legend>
-        {this.error && (
-          <span class="error-message" role="alert">
-            <span class="sr-only">Error</span> {this.error}
+        {error && (
+          <span id="error-message" role="alert">
+            <span class="sr-only">Error</span> {error}
           </span>
         )}
         <slot></slot>

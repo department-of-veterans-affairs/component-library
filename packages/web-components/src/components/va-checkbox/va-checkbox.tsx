@@ -55,11 +55,6 @@ export class VaCheckbox {
   @Prop({ mutable: true }) checked: boolean = false;
 
   /**
-   * The aria-describedby attribute for the input element in the shadow DOM.
-   */
-  @Prop() ariaDescribedby: string = '';
-
-  /**
    * The event emitted when the input value changes.
    */
   @Event() vaChange: EventEmitter;
@@ -113,30 +108,29 @@ export class VaCheckbox {
   };
 
   render() {
-    const describedBy = `${this.ariaDescribedby} description ${
-      this.error && 'error-message'
-    }`.trim();
+    const { error, label, required, description, checked } = this;
 
     return (
       <Host>
         <div id="description">
-          {this.description ? (
-            <p>{this.description}</p>
-          ) : (
-            <slot name="description" />
-          )}
+          {description ? <p>{description}</p> : <slot name="description" />}
         </div>
-        {this.error && <span id="error-message">{this.error}</span>}
+        {error && (
+          <span id="error-message" role="alert">
+            <span class="sr-only">Error</span> {error}
+          </span>
+        )}
         <input
           type="checkbox"
           id="checkbox-element"
-          checked={this.checked}
-          aria-describedby={describedBy}
+          checked={checked}
+          aria-describedby={error ? 'error-message' : undefined}
+          aria-labelledby="checkbox-label"
           onChange={this.handleChange}
         />
-        <label htmlFor="checkbox-element">
-          {this.label}
-          {this.required && <span class="required">(Required)</span>}
+        <label htmlFor="checkbox-element" id="checkbox-label">
+          {label}
+          {required && <span class="required">(*Required)</span>}
         </label>
       </Host>
     );
