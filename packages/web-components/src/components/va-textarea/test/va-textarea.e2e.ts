@@ -149,7 +149,7 @@ describe('va-textarea', () => {
     );
   });
 
-  it('ensures that negative maxlength values are ignored', async () => {
+  it('ignores negative maxlength values', async () => {
     const page = await newE2EPage();
     await page.setContent('<va-textarea maxlength="-5"/>');
 
@@ -163,7 +163,7 @@ describe('va-textarea', () => {
     expect(await page.find('va-textarea >>> small')).toBeNull();
   });
 
-  it('ensures that a maxlength of zero is ignored', async () => {
+  it('ignores a maxlength of zero', async () => {
     const page = await newE2EPage();
     await page.setContent('<va-textarea maxlength="0"/>');
 
