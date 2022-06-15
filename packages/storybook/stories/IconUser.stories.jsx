@@ -3,7 +3,8 @@ import React from 'react';
 import IconUser from '../../react-components/src/components/IconUser/IconUser';
 
 export default {
-  title: 'Components/Icons/IconUser',
+  title: 'Components/Icons/React Component/Icon User',
+  id: 'Components/Icons/IconUser',
   component: IconUser,
   argTypes: {
     color: { control: 'color' },

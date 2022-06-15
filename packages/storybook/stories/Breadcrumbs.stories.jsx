@@ -3,7 +3,8 @@ import Breadcrumbs from '../../react-components/src/components/Breadcrumbs/Bread
 import { StoryDocs } from './wc-helpers';
 
 export default {
-  title: 'Components/Breadcrumbs',
+  title: 'Components/Breadcrumbs/React Component/Breadcrumbs',
+  id: 'Components/Breadcrumbs',
   component: Breadcrumbs,
   parameters: {
     componentSubtitle: 'Breadcrumbs React component',

@@ -3,7 +3,8 @@ import TextArea from '../../react-components/src/components/TextArea/TextArea';
 import { StoryDocs } from './wc-helpers';
 
 export default {
-  title: 'Components/TextArea',
+  title: 'Components/Form/Textarea/React Component/Textarea',
+  id: 'Components/TextArea',
   component: TextArea,
   parameters: {
     componentSubtitle: 'Textarea React component',

@@ -9,7 +9,8 @@ export default {
    * See https://storybook.js.org/docs/react/configure/overview#configure-story-loading
    * to learn how to generate automatic titles
    */
-  title: 'Components/va-alert',
+  title: 'Components/Alert/va-alert',
+  id: 'Components/va-alert',
   argTypes: {
     headline: {
       table: {

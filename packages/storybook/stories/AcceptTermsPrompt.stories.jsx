@@ -2,7 +2,8 @@ import React from 'react';
 import AcceptTermsPrompt from '../../react-components/src/components/AcceptTermsPrompt/AcceptTermsPrompt';
 
 export default {
-  title: 'Components/AcceptTermsPrompt',
+  title: 'Components/Accept terms prompt/React Component/Accept terms prompt',
+  id: 'Components/AcceptTermsPrompt',
   component: AcceptTermsPrompt,
 };
 

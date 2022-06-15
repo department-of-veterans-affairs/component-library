@@ -3,7 +3,8 @@ import TextInput from '../../react-components/src/components/TextInput/TextInput
 import { StoryDocs } from './wc-helpers';
 
 export default {
-  title: 'Components/TextInput',
+  title: 'Components/Form/Text input/React Component/Text input',
+  id: 'Components/TextInput',
   component: TextInput,
   parameters: {
     componentSubtitle: 'Text input React component',

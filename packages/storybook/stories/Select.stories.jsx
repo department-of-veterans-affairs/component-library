@@ -3,7 +3,8 @@ import Select from '../../react-components/src/components/Select/Select';
 import { StoryDocs } from './wc-helpers';
 
 export default {
-  title: 'Components/Select',
+  title: 'Components/Form/Select/React Component/Select',
+  id: 'Components/Select',
   component: Select,
   parameters: {
     componentSubtitle: 'Select React component',

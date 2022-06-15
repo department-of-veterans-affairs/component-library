@@ -5,7 +5,8 @@ import MaintenanceBanner from '../../react-components/src/components/Maintenance
 import { StoryDocs } from './wc-helpers';
 
 export default {
-  title: 'Components/Banners/MaintenanceBanner',
+  title: 'Components/Maintenance Banner/React Component/Maintenance Banner',
+  id: 'Components/Banners/MaintenanceBanner',
   component: MaintenanceBanner,
   argTypes: {
     startsAt: { control: { type: 'date' } },

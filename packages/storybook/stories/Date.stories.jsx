@@ -3,7 +3,8 @@ import { Date } from '@department-of-veterans-affairs/component-library';
 import { StoryDocs } from './wc-helpers';
 
 export default {
-  title: 'Components/Date',
+  title: 'Components/Form/Date input/React Component/Date',
+  id: 'Components/Date',
   component: Date,
   parameters: {
     componentSubtitle: 'Date React component',

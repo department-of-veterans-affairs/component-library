@@ -3,7 +3,8 @@ import React from 'react';
 import IconSearch from '../../react-components/src/components/IconSearch/IconSearch';
 
 export default {
-  title: 'Components/Icons/IconSearch',
+  title: 'Components/Icons/React Component/Icon Search',
+  id: 'Components/Icons/IconSearch',
   component: IconSearch,
   argTypes: {
     color: { control: 'color' },

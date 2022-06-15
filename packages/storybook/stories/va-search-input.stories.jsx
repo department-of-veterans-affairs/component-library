@@ -7,7 +7,8 @@ VaSearchInput.displayName = 'VaSearchInput';
 const searchDocs = getWebComponentDocs('va-search-input');
 
 export default {
-  title: 'Components/va-search-input',
+  title: 'Components/Search input/va-search-input',
+  id: 'Components/va-search-input',
   parameters: {
     componentSubtitle: 'Search input web component',
     docs: {

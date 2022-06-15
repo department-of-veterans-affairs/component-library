@@ -3,7 +3,8 @@ import Modal from '../../react-components/src/components/Modal/Modal';
 import { StoryDocs } from './wc-helpers';
 
 export default {
-  title: 'Components/Modal',
+  title: 'Components/Modal/React Component/Modal',
+  id: 'Components/Modal',
   component: Modal,
   parameters: {
     componentSubtitle: 'Modal React component',

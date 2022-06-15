@@ -3,7 +3,8 @@ import React from 'react';
 import IconBase from '../../react-components/src/components/IconBase/IconBase';
 
 export default {
-  title: 'Components/Icons/IconBase',
+  title: 'Components/Icons/React Component/Icon Base',
+  id: 'Components/Icons/IconBase',
   component: IconBase,
 };
 

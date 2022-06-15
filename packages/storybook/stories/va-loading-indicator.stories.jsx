@@ -5,7 +5,8 @@ import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
 const loadingIndicatorDocs = getWebComponentDocs('va-loading-indicator');
 
 export default {
-  title: 'Components/va-loading-indicator',
+  title: 'Components/Loading indicator/va-loading-indicator',
+  id: 'Components/va-loading-indicator',
   parameters: {
     componentSubtitle: `Loading indicator web component`,
     docs: {

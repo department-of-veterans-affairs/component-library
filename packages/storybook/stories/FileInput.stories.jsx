@@ -2,7 +2,8 @@ import React from 'react';
 import FileInput from '../../react-components/src/components/FileInput/FileInput';
 
 export default {
-  title: 'Components/FileInput',
+  title: 'Components/File Input/React Component/File Input',
+  id: 'Components/FileInput',
   component: FileInput,
 };
 

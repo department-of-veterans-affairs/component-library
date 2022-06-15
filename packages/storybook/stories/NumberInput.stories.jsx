@@ -3,7 +3,8 @@ import NumberInput from '../../react-components/src/components/NumberInput/Numbe
 import { StoryDocs } from './wc-helpers';
 
 export default {
-  title: 'Components/NumberInput',
+  title: 'Components/Form/Number input/React Component/Number input',
+  id: 'Components/NumberInput',
   component: NumberInput,
   parameters: {
     componentSubtitle: 'Number input React component',

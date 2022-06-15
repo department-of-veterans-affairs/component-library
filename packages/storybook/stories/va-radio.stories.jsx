@@ -10,7 +10,8 @@ const radioDocs = getWebComponentDocs('va-radio');
 const radioItem = getWebComponentDocs('va-radio-option');
 
 export default {
-  title: 'Components/va-radio',
+  title: 'Components/Form/Radio button/Web Component/va-radio',
+  id: 'Components/va-radio',
   subcomponents: componentStructure(radioItem),
   parameters: {
     componentSubtitle: `Radio button web component`,

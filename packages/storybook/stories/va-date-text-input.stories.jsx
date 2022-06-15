@@ -7,7 +7,8 @@ VaDateTextInput.displayName = 'VaDateTextInput';
 const dateTextInputDocs = getWebComponentDocs('va-date-text-input');
 
 export default {
-  title: 'Components/va-date-text-input',
+  title: 'Components/Form/Memorable date/va-date-text-input',
+  id: 'Components/va-date-text-input',
   parameters: {
     componentSubtitle: `Date web component`,
     docs: {

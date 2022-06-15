@@ -4,7 +4,8 @@ import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
 const bttDocs = getWebComponentDocs('va-back-to-top');
 
 export default {
-  title: 'Components/va-back-to-top',
+  title: 'Components/Back to top/va-back-to-top',
+  id: 'Components/va-back-to-top',
   parameters: {
     componentSubtitle: `Back to top web component`,
     docs: {

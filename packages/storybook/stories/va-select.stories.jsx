@@ -5,7 +5,8 @@ import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
 const selectDocs = getWebComponentDocs('va-select');
 
 export default {
-  title: 'Components/va-select',
+  title: 'Components/Form/Select/Web Component/va-select',
+  id: 'Components/va-select',
   parameters: {
     componentSubtitle: 'Select box web component',
     docs: {

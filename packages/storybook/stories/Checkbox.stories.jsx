@@ -3,7 +3,8 @@ import Checkbox from '../../react-components/src/components/Checkbox/Checkbox';
 import { StoryDocs } from './wc-helpers';
 
 export default {
-  title: 'Components/Checkbox',
+  title: 'Components/Form/Checkbox/React Component/Checkbox',
+  id: 'Components/Checkbox',
   component: Checkbox,
   parameters: {
     componentSubtitle: 'Checkbox React component',

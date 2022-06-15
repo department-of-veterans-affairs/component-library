@@ -4,7 +4,8 @@ import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
 const promoBannerDocs = getWebComponentDocs('va-promo-banner');
 
 export default {
-  title: 'Components/va-promo-banner',
+  title: 'Components/Promo banner/va-promo-banner',
+  id: 'Components/va-promo-banner',
   parameters: {
     componentSubtitle: 'Promo banner web component',
     docs: {

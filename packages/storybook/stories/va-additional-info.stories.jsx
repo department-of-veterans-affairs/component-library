@@ -4,7 +4,8 @@ import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
 const additionalInfoDocs = getWebComponentDocs('va-additional-info');
 
 export default {
-  title: 'Components/va-additional-info',
+  title: 'Components/Additional info/va-additional-info',
+  id: 'Components/va-additional-info',
   parameters: {
     componentSubtitle: `Additional info web component`,
     docs: {
