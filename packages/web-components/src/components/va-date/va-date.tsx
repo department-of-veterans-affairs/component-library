@@ -12,6 +12,7 @@ import {
   months,
   days,
   isFullDate,
+  isMonthYearDate,
   checkLeapYear,
   maxMonths,
   maxYear,
@@ -55,6 +56,11 @@ export class VaDate {
   @Prop() error: string;
 
   /**
+   * Whether or not only the Month and Year inputs should be displayed.
+   */
+  @Prop() monthYearOnly: boolean = false;
+
+  /**
    * Set the default date value must be in YYYY-MM-DD format.
    */
   @Prop({ mutable: true }) value: string;
@@ -77,36 +83,52 @@ export class VaDate {
   })
   dateBlur: EventEmitter;
 
-  private handleDateBlur = (event: FocusEvent) => {
-    const [year, month, day] = (this.value || '')
-      .split('-')
-      .map(val => parseInt(val));
+  /**
+   * Set the value prop as an ISO-8601 date using provided arguments.
+   * Strips trailing hyphens and sets date to be null if the
+   * date values are all NaNs.
+   */
+  private setValue(year: number, month: number, day: number): void {
     // Use a leading zero for numbers < 10
     const numFormatter = new Intl.NumberFormat('en-US', {
       minimumIntegerDigits: 2,
     });
     // Ternary to prevent NaN displaying as value for Year
     // Ternary to prevent Month or Day from displaying as single digit
-    this.value = `${year ? year : ''}-${
+    const val = `${year ? year : ''}-${
       month ? numFormatter.format(month) : ''
-    }-${day ? numFormatter.format(day) : ''}`;
+    }-${day ? numFormatter.format(day) : ''}`.replace(/-+$/, '');
+
+    this.value = val ? val : null;
+  }
+
+  private handleDateBlur = (event: FocusEvent) => {
+    const [year, month, day] = (this.value || '')
+      .split('-')
+      .map(val => parseInt(val));
+    this.setValue(year, month, day);
+
     const daysForSelectedMonth = month > 0 ? days[month] : [];
     const leapYear = checkLeapYear(year);
 
+    const expectedDateFormat = this.monthYearOnly ? isMonthYearDate : isFullDate;
+
     // Check validity of date if invalid provide message and error state styling
     if (
+      !this.error && (
       year < minYear ||
       year > maxYear ||
       month < minMonths ||
       month > maxMonths ||
-      day < minMonths ||
-      day > daysForSelectedMonth.length ||
-      !day ||
+      (!this.monthYearOnly && (
+        day < minMonths ||
+        day > daysForSelectedMonth.length ||
+        !day)) ||
       !month ||
       !year ||
       (!leapYear && month === 2 && day > 28) ||
-      (this.required && !isFullDate(this.value))
-    ) {
+      (this.required && !expectedDateFormat(this.value))
+    )) {
       this.error = 'Please enter a valid date';
     } else if (this.error !== 'Please enter a valid date') {
       this.error;
@@ -122,6 +144,7 @@ export class VaDate {
     if (target.classList.contains('select-month')) {
       currentMonth = target.value;
     }
+    // This won't happen for monthYearOnly dates
     if (target.classList.contains('select-day')) {
       currentDay = target.value;
     }
@@ -129,7 +152,7 @@ export class VaDate {
       currentYear = target.value;
     }
 
-    this.value = `${currentYear}-${currentMonth}-${currentDay}`;
+    this.setValue(parseInt(currentYear), parseInt(currentMonth), parseInt(currentDay))
 
     // This event should always fire to allow for validation handling
     this.dateChange.emit(event);
@@ -167,6 +190,7 @@ export class VaDate {
       handleDateBlur,
       handleDateChange,
       handleDateKey,
+      monthYearOnly,
       value,
     } = this;
 
@@ -205,23 +229,25 @@ export class VaDate {
                   <option value={month.value}>{month.label}</option>
                 ))}
             </va-select>
-            <va-select
-              label="Day"
-              name={`${name}Day`}
-              // If day value set is greater than amount of days in the month
-              // set to empty string instead
-              // Value must be a string
-              value={daysForSelectedMonth.length < day ? '' : day?.toString()}
-              onVaSelect={handleDateChange}
-              class="select-day"
-              aria-label="Please enter two digits for the day"
-            >
-              <option value=""></option>
-              {daysForSelectedMonth &&
-                daysForSelectedMonth.map(day => (
-                  <option value={day}>{day}</option>
-                ))}
-            </va-select>
+            {!monthYearOnly && (
+              <va-select
+                label="Day"
+                name={`${name}Day`}
+                // If day value set is greater than amount of days in the month
+                // set to empty string instead
+                // Value must be a string
+                value={daysForSelectedMonth.length < day ? '' : day?.toString()}
+                onVaSelect={handleDateChange}
+                class="select-day"
+                aria-label="Please enter two digits for the day"
+              >
+                <option value=""></option>
+                {daysForSelectedMonth &&
+                  daysForSelectedMonth.map(day => (
+                    <option value={day}>{day}</option>
+                  ))}
+              </va-select>
+            )}
             <va-text-input
               label="Year"
               name={`${name}Year`}

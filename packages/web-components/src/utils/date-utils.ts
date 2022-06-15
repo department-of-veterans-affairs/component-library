@@ -134,6 +134,10 @@ export function isFullDate(date) {
   return /\d{4}-\d{1,2}-\d{1,2}/.test(date);
 }
 
+export function isMonthYearDate(date) {
+  return /\d{4}-\d{1,2}/.test(date);
+}
+
 export function checkLeapYear(year) {
   //three conditions to find out the leap year
   return (0 == year % 4 && 0 != year % 100) || 0 == year % 400;

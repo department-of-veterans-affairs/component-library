@@ -186,10 +186,6 @@ export namespace Components {
     }
     interface VaCheckbox {
         /**
-          * The aria-describedby attribute for the input element in the shadow DOM.
-         */
-        "ariaDescribedby": string;
-        /**
           * Whether the checkbox is checked or not.  Note: Because this isn't reflective, vaCheckbox.getAttribute('checked') will not reflect the correct value. Use the property vaCheckbox.checked instead.
          */
         "checked": boolean;
@@ -245,6 +241,10 @@ export namespace Components {
           * Label for the field.
          */
         "label": string;
+        /**
+          * Whether or not only the Month and Year inputs should be displayed.
+         */
+        "monthYearOnly": boolean;
         /**
           * Used to create unique name attributes for each input.
          */
@@ -1119,10 +1119,6 @@ declare namespace LocalJSX {
     }
     interface VaCheckbox {
         /**
-          * The aria-describedby attribute for the input element in the shadow DOM.
-         */
-        "ariaDescribedby"?: string;
-        /**
           * Whether the checkbox is checked or not.  Note: Because this isn't reflective, vaCheckbox.getAttribute('checked') will not reflect the correct value. Use the property vaCheckbox.checked instead.
          */
         "checked"?: boolean;
@@ -1190,6 +1186,10 @@ declare namespace LocalJSX {
           * Label for the field.
          */
         "label": string;
+        /**
+          * Whether or not only the Month and Year inputs should be displayed.
+         */
+        "monthYearOnly"?: boolean;
         /**
           * Used to create unique name attributes for each input.
          */

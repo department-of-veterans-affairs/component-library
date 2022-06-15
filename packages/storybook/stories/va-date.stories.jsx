@@ -17,14 +17,22 @@ export default {
 };
 
 const defaultArgs = {
-  label: 'Date of birth',
-  name: 'test',
-  required: false,
-  error: undefined,
-  value: undefined,
+  'label': 'Date of birth',
+  'name': 'test',
+  'required': false,
+  'error': undefined,
+  'value': undefined,
+  'month-year-only': undefined,
 };
 
-const Template = ({ label, name, required, error, value }) => {
+const Template = ({
+  label,
+  name,
+  required,
+  error,
+  'month-year-only': monthYearOnly,
+  value,
+}) => {
   return (
     <VaDate
       label={label}
@@ -32,7 +40,11 @@ const Template = ({ label, name, required, error, value }) => {
       required={required}
       error={error}
       value={value}
-      onDateBlur={e => console.log(e, 'DATE BLUR FIRED')}
+      monthYearOnly={monthYearOnly}
+      onDateBlur={e => {
+        console.log(e, 'DATE BLUR FIRED');
+        console.log(e.target.value);
+      }}
       onDateChange={e => console.log(e, 'DATE CHANGE FIRED')}
     />
   );
@@ -97,6 +109,41 @@ const WithHintTextTemplate = ({ name, label, error, required, value }) => {
   );
 };
 
+const CustomRequiredMessageTemplate = ({
+  label,
+  name,
+  required,
+  error,
+  value,
+}) => {
+  const [dateVal, setDateVal] = useState(value);
+  const [errorVal, setErrorVal] = useState(error);
+  const completeDate = date => /\d{4}-\d{1,2}-\d{1,2}/.test(date);
+  function handleDateBlur() {
+    if (!completeDate(dateVal)) {
+      setErrorVal("Don't forget to fill me out");
+    } else {
+      setErrorVal(null);
+    }
+  }
+
+  return (
+    <>
+      <VaDate
+        label={label}
+        name={name}
+        required={required}
+        error={errorVal}
+        value={dateVal}
+        onDateBlur={() => handleDateBlur()}
+        onDateChange={e => setDateVal(e.target.value)}
+      />
+      <hr />
+      <p>We are doing our own required check in the dateBlur handler</p>
+    </>
+  );
+};
+
 export const Default = Template.bind(null);
 Default.args = { ...defaultArgs };
 Default.argTypes = propStructure(dateDocs);
@@ -109,11 +156,20 @@ WithHintText.args = {
   ...defaultArgs,
 };
 
+export const CustomRequiredMessage = CustomRequiredMessageTemplate.bind(null);
+CustomRequiredMessage.args = {
+  ...defaultArgs,
+  required: true,
+};
+
 export const WithHintTextError = WithHintTextTemplate.bind(null);
 WithHintTextError.args = {
   ...defaultArgs,
   error: 'Error Message Example',
 };
+
+export const MonthYear = Template.bind({});
+MonthYear.args = { ...defaultArgs, 'month-year-only': true };
 
 export const CustomValidation = CustomValidationTemplate.bind(null);
 CustomValidation.args = {

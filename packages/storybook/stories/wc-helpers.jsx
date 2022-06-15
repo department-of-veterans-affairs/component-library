@@ -159,10 +159,10 @@ export function CustomEventsDescription({ data }) {
   return (
     <div className="vads-u-margin-top--2">
       This component has {events.length} custom{' '}
-      {events.length > 1 ? 'events' : 'event'}: {eventNames}. Please see our
-      documentation on{' '}
+      {events.length > 1 ? 'events' : 'event'}: <strong>{eventNames}</strong>.
+      Please see our documentation on{' '}
       <a href="https://design.va.gov/about/developers#custom-events">
-        how to use web component events
+        how to use web component custom events
       </a>
       .
     </div>
@@ -189,14 +189,16 @@ function NativeHandlers({ docsTags = [] }) {
 
   if (!handlers.length) return null;
 
+  const nativeEvents = handlers.join(', ');
+
   return (
     <div className="vads-u-margin-top--2">
-      This component uses the following native handlers:
-      <ul>
-        {handlers.map((handlerName, index) => (
-          <li key={index}>{handlerName}</li>
-        ))}
-      </ul>
+      This component uses the following native handlers:{' '}
+      <strong>{nativeEvents}</strong>. Please see our documentation on{' '}
+      <a href="https://design.va.gov/about/developers#native-events">
+        how to use web component native events
+      </a>
+      .
     </div>
   );
 }

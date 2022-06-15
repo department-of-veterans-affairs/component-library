@@ -6,7 +6,7 @@ import {
   h,
   Event,
   EventEmitter,
-  forceUpdate
+  forceUpdate,
 } from '@stencil/core';
 import i18next from 'i18next';
 
@@ -109,26 +109,42 @@ export class VaNumberInput {
   }
 
   render() {
+    const {
+      label,
+      required,
+      error,
+      inputmode,
+      name,
+      max,
+      min,
+      value,
+      handleBlur,
+      handleInput,
+    } = this;
     return (
       <Host>
-        {this.label && (
-          <label htmlFor="inputField">
-            {this.label}{' '}
-            {this.required && <span class="required">(*{i18next.t('required')})</span>}
-          </label>
+        <label id="inputField-label" htmlFor="inputField">
+          {label}{' '}
+          {required && <span class="required">(*{i18next.t('required')})</span>}
+        </label>
+        {error && (
+          <span id="error-message" role="alert">
+            <span class="sr-only">{i18next.t('error')}</span> {error}
+          </span>
         )}
-        {this.error && <span id="error-message">{this.error}</span>}
         <input
+          aria-describedby={error ? 'error-message' : undefined}
+          aria-labelledby="inputField-label"
           id="inputField"
           type="number"
-          inputmode={this.inputmode ? this.inputmode : null}
-          name={this.name}
-          max={this.max}
-          min={this.min}
-          value={this.value}
-          required={this.required || null}
-          onInput={this.handleInput}
-          onBlur={this.handleBlur}
+          inputmode={inputmode ? inputmode : null}
+          name={name}
+          max={max}
+          min={min}
+          value={value}
+          required={required || null}
+          onInput={handleInput}
+          onBlur={handleBlur}
         />
       </Host>
     );
