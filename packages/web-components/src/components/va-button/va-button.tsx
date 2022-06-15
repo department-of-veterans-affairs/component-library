@@ -32,7 +32,9 @@ export class VaButton {
    */
   @Prop() continue?: boolean = false;
 
-  /** If `true`, the component-library-analytics event is disabled. */
+  /**
+   * If `true`, the component-library-analytics event is disabled.
+   */
   @Prop() disableAnalytics?: boolean = false;
 
   /**
@@ -97,13 +99,13 @@ export class VaButton {
    * Using a click handler on the button with this same check for disabled results in the event bubbling.
    */
   @Listen('click')
-  handleClickOverride(ev) {
+  handleClickOverride(e: MouseEvent) {
     if (this.disabled) {
-      ev.preventDefault();
-      ev.stopPropagation();
+      e.preventDefault();
+      e.stopPropagation();
       return;
     }
-    this.handleClick(ev);
+    this.handleClick(e);
   }
 
   render() {
