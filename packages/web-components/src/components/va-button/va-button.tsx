@@ -1,4 +1,12 @@
-import { Component, Event, EventEmitter, Host, h, Prop } from '@stencil/core';
+import {
+  Component,
+  Event,
+  EventEmitter,
+  Host,
+  h,
+  Listen,
+  Prop,
+} from '@stencil/core';
 
 /**
  * @nativeHandler onClick
@@ -24,13 +32,15 @@ export class VaButton {
    */
   @Prop() continue?: boolean = false;
 
-  /** If `true`, the component-library-analytics event is disabled. */
+  /**
+   * If `true`, the component-library-analytics event is disabled.
+   */
   @Prop() disableAnalytics?: boolean = false;
 
   /**
-   * If `true`, the button is disabled.
+   * If `true`, the click event will not fire.
    */
-  @Prop() disabled?: boolean = false; // do we want this? double check
+  @Prop() disabled?: boolean = false;
 
   /**
    * The aria-label of the component.
@@ -82,26 +92,41 @@ export class VaButton {
     return this.text;
   };
 
+  /**
+   * This workaround allows us to use disabled for styling and to prevent the click event from firing while improving
+   * the button's accessibility by allowing it to be focusable and through the use of aria-disabled.
+   *
+   * Using a click handler on the button with this same check for disabled results in the event bubbling.
+   */
+  @Listen('click')
+  handleClickOverride(e: MouseEvent) {
+    if (this.disabled) {
+      e.preventDefault();
+      e.stopPropagation();
+      return;
+    }
+    this.handleClick(e);
+  }
+
   render() {
     const {
       back,
       continue: _continue,
       disabled,
       getButtonText,
-      handleClick,
       label,
       submit,
     } = this;
 
+    const ariaDisabled = disabled ? 'true' : undefined;
     const buttonText = getButtonText();
     const type = submit ? 'submit' : 'button';
 
     return (
       <Host>
         <button
+          aria-disabled={ariaDisabled}
           aria-label={label || buttonText}
-          disabled={disabled}
-          onClick={handleClick}
           type={type}
         >
           {back && !_continue && (
