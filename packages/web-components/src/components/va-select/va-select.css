@@ -10,7 +10,7 @@
   margin: 0 0.35em;
 }
 
-:host([error]) {
+:host([error]:not([error=''])) {
   border-left: 4px solid var(--color-secondary-dark);
   margin-top: 3rem;
   padding-bottom: 0.8rem;
@@ -20,24 +20,24 @@
   right: 1.9rem;
 }
 
-:host([error]) label {
+:host([error]:not([error=''])) label {
   margin-top: 0;
 }
 
-:host([error]) label,
-:host([error]) > span {
+:host([error]:not([error=''])) label,
+:host([error]:not([error=''])) > span {
   display: block;
   font-size: 1.6rem;
   font-weight: 700;
 }
 
-:host([error]) > span {
+:host([error]:not([error=''])) > span {
   color: var(--color-secondary-dark);
   padding-bottom: 3px;
   padding-top: 3px;
 }
 
-:host([error]) select {
+:host([error]:not([error=''])) select {
   border: 3px solid var(--color-secondary-dark);
 }
 
