@@ -37,8 +37,7 @@
   padding-top: 3px;
 }
 
-:host([error]) select,
-select:invalid {
+:host([error]) select {
   border: 3px solid var(--color-secondary-dark);
 }
 

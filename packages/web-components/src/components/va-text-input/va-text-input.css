@@ -56,8 +56,7 @@ input:not([disabled]):focus {
   font-weight: 700;
 }
 
-:host([error]:not([error=''])) input,
-input:invalid {
+:host([error]:not([error=''])) input {
   border: 2px solid var(--color-secondary-dark);
 }
 
