@@ -61,15 +61,15 @@ describe('va-text-input', () => {
     const page = await newE2EPage();
     await page.setContent('<va-text-input />');
     // Check that error is empty
-    const el = await page.find('va-text-input'); 
+    const el = await page.find('va-text-input');
     const inputEl = await page.find('va-text-input >>> input');
     expect(inputEl.getAttribute('aria-describedby')).toBeNull();
     // Render the error message text as empty string
-    el.setProperty('error', "");
+    el.setProperty('error', '');
     await page.waitForChanges();
     expect(inputEl.getAttribute('aria-describedby')).toBeNull();
     // Render the error message text as real value
-    el.setProperty('error', "Testing Error");
+    el.setProperty('error', 'Testing Error');
     await page.waitForChanges();
     expect(inputEl.getAttribute('aria-describedby')).not.toBeNull();
     expect(inputEl.getAttribute('aria-describedby')).toContain('error-message');
@@ -155,9 +155,15 @@ describe('va-text-input', () => {
 
     // Act
     await inputEl.press('a');
-    const firstValue = await page.$eval("va-text-input", (comp : HTMLInputElement) => comp.value)
+    const firstValue = await page.$eval(
+      'va-text-input',
+      (comp: HTMLInputElement) => comp.value,
+    );
     await inputEl.press('s');
-    const secondValue = await page.$eval("va-text-input", (comp : HTMLInputElement) => comp.value)
+    const secondValue = await page.$eval(
+      'va-text-input',
+      (comp: HTMLInputElement) => comp.value,
+    );
 
     // Assert
     expect(inputSpy).toHaveReceivedEventTimes(2);
@@ -255,17 +261,18 @@ describe('va-text-input', () => {
     await page.setContent('<va-text-input success />');
 
     const input = await page.find('va-text-input >>> input');
+    // rgb(46, 133, 64) is equal to #2e8540 and --color-green CSS variable
     expect((await input.getComputedStyle()).borderBottomColor).toEqual(
-      'rgb(91, 97, 107)',
+      'rgb(46, 133, 64)',
     );
     expect((await input.getComputedStyle()).borderLeftColor).toEqual(
-      'rgb(91, 97, 107)',
+      'rgb(46, 133, 64)',
     );
     expect((await input.getComputedStyle()).borderRightColor).toEqual(
-      'rgb(91, 97, 107)',
+      'rgb(46, 133, 64)',
     );
     expect((await input.getComputedStyle()).borderTopColor).toEqual(
-      'rgb(91, 97, 107)',
+      'rgb(46, 133, 64)',
     );
   });
 });
