@@ -5,12 +5,22 @@ const { AVAILABLE, BEST_PRACTICE, CANDIDATE, DEPLOYED, DEPRECATED, PROPOSED } =
   level;
 
 export const additionalDocs = {
+  'Accept terms prompt': {
+    maturityCategory: CAUTION,
+    maturityLevel: DEPLOYED,
+  },
+  'Accordion': {
+    maturityCategory: USE,
+  },
   // MDX
   'Action link': {
     guidanceHref: 'link/action',
     guidanceName: 'Action link',
     maturityCategory: USE,
     maturityLevel: DEPLOYED,
+  },
+  'Additional info': {
+    maturityCategory: USE,
   },
   // MDX
   'Address block': {
@@ -19,16 +29,27 @@ export const additionalDocs = {
     maturityCategory: USE,
     maturityLevel: DEPLOYED,
   },
+  'Alert': {
+    maturityCategory: USE,
+  },
+  'Alert - expandable': {
+    maturityCategory: CAUTION,
+  },
+  'Back to top': {
+    maturityCategory: USE,
+  },
+  'Banner': {
+    maturityCategory: USE,
+  },
+  'Breadcrumbs': {
+    maturityCategory: USE,
+  },
   // MDX
   'Button': {
     guidanceHref: 'button',
     guidanceName: 'Button',
     maturityCategory: USE,
     maturityLevel: BEST_PRACTICE,
-  },
-  'Breadcrumbs': {
-    maturityCategory: DONT_USE,
-    maturityLevel: DEPRECATED,
   },
   'Checkbox': {
     maturityCategory: DONT_USE,
@@ -45,18 +66,52 @@ export const additionalDocs = {
     maturityCategory: USE,
     maturityLevel: BEST_PRACTICE,
   },
+  'Drop Down Panel': {
+    maturityCategory: CAUTION,
+    maturityLevel: DEPLOYED,
+  },
+  'Expanding Group': {
+    maturityCategory: CAUTION,
+    maturityLevel: DEPLOYED,
+  },
+  'Featured content': {
+    maturityCategory: USE,
+  },
+  'File Input': {
+    maturityCategory: CAUTION,
+    maturityLevel: DEPLOYED,
+  },
+  'Form': {
+    maturityCategory: USE,
+    maturityLevel: BEST_PRACTICE,
+  },
+  'Help Menu': {
+    maturityCategory: CAUTION,
+    maturityLevel: DEPLOYED,
+  },
+  'Icons': {
+    maturityCategory: CAUTION,
+    maturityLevel: DEPLOYED,
+  },
+  'Loading indicator': {
+    maturityCategory: USE,
+  },
+  'Maintenance Banner': {
+    maturityCategory: CAUTION,
+  },
   'MaintenanceBanner': {
     maturityCategory: CAUTION,
-    maturityLevel: CANDIDATE,
+    maturityLevel: DEPLOYED,
   },
-
   'Modal': {
-    maturityCategory: DONT_USE,
-    maturityLevel: DEPRECATED,
+    maturityCategory: USE,
   },
-  'NumberInput': {
-    maturityCategory: DONT_USE,
-    maturityLevel: DEPRECATED,
+  'Month Year': {
+    maturityCategory: CAUTION,
+    maturityLevel: DEPLOYED,
+  },
+  'OMB Info': {
+    maturityCategory: USE,
   },
   'OMBInfo': {
     guidanceHref: 'omb-info',
@@ -64,9 +119,11 @@ export const additionalDocs = {
     maturityCategory: USE,
     maturityLevel: DEPLOYED,
   },
+  'On this page': {
+    maturityCategory: USE,
+  },
   'Pagination': {
-    maturityCategory: DONT_USE,
-    maturityLevel: DEPRECATED,
+    maturityCategory: USE,
   },
   'ProgressButton': {
     guidanceHref: 'button/progress-button',
@@ -74,9 +131,28 @@ export const additionalDocs = {
     maturityCategory: USE,
     maturityLevel: DEPLOYED,
   },
+  'Privacy Agreement': {
+    maturityCategory: CAUTION,
+    maturityLevel: DEPLOYED,
+  },
+  'Process list': {
+    maturityCategory: USE,
+  },
+  'Progress bar - Activity': {
+    maturityCategory: USE,
+  },
+  'Promo banner': {
+    maturityCategory: USE,
+  },
   'RadioButtons': {
     maturityCategory: DONT_USE,
     maturityLevel: DEPRECATED,
+  },
+  'Search input': {
+    maturityCategory: USE,
+  },
+  'Segmented progress bar': {
+    maturityCategory: USE,
   },
   'Select': {
     maturityCategory: DONT_USE,
@@ -86,12 +162,15 @@ export const additionalDocs = {
   'Sidenav': {
     guidanceHref: 'sidenav',
     guidanceName: 'Sidenav',
-    maturityCategory: USE,
-    maturityLevel: BEST_PRACTICE,
+    maturityCategory: CAUTION,
+    maturityLevel: DEPLOYED,
+  },
+  'System Down View': {
+    maturityCategory: CAUTION,
+    maturityLevel: DEPLOYED,
   },
   'Table': {
-    maturityCategory: DONT_USE,
-    maturityLevel: DEPRECATED,
+    maturityCategory: USE,
   },
   // MDX
   'Tag': {
@@ -99,6 +178,9 @@ export const additionalDocs = {
     guidanceName: 'Tag',
     maturityCategory: USE,
     maturityLevel: DEPLOYED,
+  },
+  'Telephone': {
+    maturityCategory: USE,
   },
   'TextArea': {
     maturityCategory: DONT_USE,
@@ -108,6 +190,7 @@ export const additionalDocs = {
     maturityCategory: DONT_USE,
     maturityLevel: DEPRECATED,
   },
+  // Web Component Tag Linkage
   'va-accordion': {
     maturityCategory: USE,
     maturityLevel: BEST_PRACTICE,
