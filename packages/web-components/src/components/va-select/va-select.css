@@ -57,5 +57,5 @@ select {
   background-position: right 1.3rem center;
   background-repeat: no-repeat;
   background-size: 1rem;
-  padding-right: 3rem;
+  padding: 0.8rem 3rem 0.8rem 0.8em;
 }
