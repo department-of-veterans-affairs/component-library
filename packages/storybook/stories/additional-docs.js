@@ -156,8 +156,6 @@ export const additionalDocs = {
     maturityLevel: DEPLOYED,
   },
   'va-memorable-date': {
-    guidanceHref: 'form/memorable-date',
-    guidanceName: 'Memorable Date',
     maturityCategory: CAUTION,
     maturityLevel: CANDIDATE,
   },

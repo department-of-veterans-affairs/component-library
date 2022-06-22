@@ -2,8 +2,6 @@ import React, { useState } from 'react';
 import { VaMemorableDate } from '@department-of-veterans-affairs/web-components/react-bindings';
 import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
 
-console.log(VaMemorableDate);
-
 VaMemorableDate.displayName = 'VaMemorableDate';
 
 const memorableDateInputDocs = getWebComponentDocs('va-memorable-date');
@@ -11,7 +9,7 @@ const memorableDateInputDocs = getWebComponentDocs('va-memorable-date');
 export default {
   title: 'Components/va-memorable-date',
   parameters: {
-    componentSubtitle: `Date web component`,
+    componentSubtitle: `Memorable date web component`,
     docs: {
       page: () => <StoryDocs data={memorableDateInputDocs} />,
     },
