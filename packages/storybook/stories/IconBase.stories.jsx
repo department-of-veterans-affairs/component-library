@@ -1,11 +1,16 @@
 import React from 'react';
-
 import IconBase from '../../react-components/src/components/IconBase/IconBase';
+import { StoryDocs } from './wc-helpers';
 
 export default {
   title: 'Components/Icons/React Component/Icon Base',
   id: 'Components/Icons/IconBase',
   component: IconBase,
+  parameters: {
+    docs: {
+      page: () => <StoryDocs componentName="Icons" />,
+    },
+  },
 };
 
 export const Description = () => (
@@ -19,7 +24,7 @@ export const Description = () => (
     </p>
     <p>
       For more information, see the Design System{' '}
-      <a href="https://github.com/department-of-veterans-affairs/vets-design-system-documentation/blob/master/src/_design/icons.md">
+      <a href="https://design.va.gov/foundation/icons">
         icon documentation
       </a>
       .

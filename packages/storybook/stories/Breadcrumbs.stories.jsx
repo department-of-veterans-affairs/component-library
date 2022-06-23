@@ -9,7 +9,7 @@ export default {
   parameters: {
     componentSubtitle: 'Breadcrumbs React component',
     docs: {
-      page: () => <StoryDocs componentName="Breadcrumbs" />,
+      page: () => <StoryDocs componentName="Breadcrumbs react" />,
     },
   },
 };

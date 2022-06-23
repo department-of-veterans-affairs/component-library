@@ -7,7 +7,7 @@ export default {
   id: 'Components/OMBInfo',
   component: OMBInfo,
   parameters: {
-    componentSubtitle: 'OMB info component',
+    componentSubtitle: 'OMB info React component',
     docs: {
       page: () => <StoryDocs componentName="OMBInfo" />,
     },

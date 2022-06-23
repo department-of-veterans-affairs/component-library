@@ -1,11 +1,16 @@
 import React, { useState } from 'react';
-
 import ExpandingGroup from '../../react-components/src/components/ExpandingGroup/ExpandingGroup';
+import { StoryDocs } from './wc-helpers';
 
 export default {
   title: 'Components/Expanding Group/React Component/Expanding Group',
   id: 'Components/ExpandingGroup',
   component: ExpandingGroup,
+  parameters: {
+    docs: {
+      page: () => <StoryDocs componentName="Expanding Group" />,
+    },
+  },
 };
 
 const Template = args => {

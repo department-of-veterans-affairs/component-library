@@ -7,7 +7,7 @@ const { AVAILABLE, BEST_PRACTICE, CANDIDATE, DEPLOYED, DEPRECATED, PROPOSED } =
 export const additionalDocs = {
   'Accept terms prompt': {
     maturityCategory: CAUTION,
-    maturityLevel: DEPLOYED,
+    maturityLevel: AVAILABLE,
   },
   'Accordion': {
     maturityCategory: USE,
@@ -44,6 +44,10 @@ export const additionalDocs = {
   'Breadcrumbs': {
     maturityCategory: USE,
   },
+  'Breadcrumbs react': {
+    maturityCategory: DONT_USE,
+    maturityLevel: DEPRECATED,
+  },
   // MDX
   'Button': {
     guidanceHref: 'button',
@@ -68,18 +72,18 @@ export const additionalDocs = {
   },
   'Drop Down Panel': {
     maturityCategory: CAUTION,
-    maturityLevel: DEPLOYED,
+    maturityLevel: AVAILABLE,
   },
   'Expanding Group': {
     maturityCategory: CAUTION,
-    maturityLevel: DEPLOYED,
+    maturityLevel: AVAILABLE,
   },
   'Featured content': {
     maturityCategory: USE,
   },
   'File Input': {
     maturityCategory: CAUTION,
-    maturityLevel: DEPLOYED,
+    maturityLevel: AVAILABLE,
   },
   'Form': {
     maturityCategory: USE,
@@ -87,28 +91,41 @@ export const additionalDocs = {
   },
   'Help Menu': {
     maturityCategory: CAUTION,
-    maturityLevel: DEPLOYED,
+    maturityLevel: AVAILABLE,
   },
   'Icons': {
     maturityCategory: CAUTION,
-    maturityLevel: DEPLOYED,
+    maturityLevel: AVAILABLE,
   },
   'Loading indicator': {
     maturityCategory: USE,
+    maturityLevel: BEST_PRACTICE,
   },
   'Maintenance Banner': {
     maturityCategory: CAUTION,
+    maturityLevel: AVAILABLE,
   },
   'MaintenanceBanner': {
     maturityCategory: CAUTION,
-    maturityLevel: DEPLOYED,
+    maturityLevel: AVAILABLE,
   },
   'Modal': {
     maturityCategory: USE,
   },
+  'Modal react': {
+    maturityCategory: DONT_USE,
+    maturityLevel: DEPRECATED,
+  },
+  'Month year react': {
+    maturityCategory: USE,
+    maturityLevel: DEPLOYED,
+  },
   'Month Year': {
     maturityCategory: CAUTION,
-    maturityLevel: DEPLOYED,
+  },
+  'Number input react': {
+    maturityCategory: DONT_USE,
+    maturityLevel: DEPRECATED,
   },
   'OMB Info': {
     maturityCategory: USE,
@@ -125,6 +142,10 @@ export const additionalDocs = {
   'Pagination': {
     maturityCategory: USE,
   },
+  'Pagination react': {
+    maturityCategory: DONT_USE,
+    maturityLevel: DEPRECATED,
+  },
   'ProgressButton': {
     guidanceHref: 'button/progress-button',
     guidanceName: 'Progress button',
@@ -133,7 +154,7 @@ export const additionalDocs = {
   },
   'Privacy Agreement': {
     maturityCategory: CAUTION,
-    maturityLevel: DEPLOYED,
+    maturityLevel: AVAILABLE,
   },
   'Process list': {
     maturityCategory: USE,
@@ -163,14 +184,18 @@ export const additionalDocs = {
     guidanceHref: 'sidenav',
     guidanceName: 'Sidenav',
     maturityCategory: CAUTION,
-    maturityLevel: DEPLOYED,
+    maturityLevel: AVAILABLE,
   },
   'System Down View': {
     maturityCategory: CAUTION,
-    maturityLevel: DEPLOYED,
+    maturityLevel: AVAILABLE,
   },
   'Table': {
     maturityCategory: USE,
+  },
+  'Table react': {
+    maturityCategory: DONT_USE,
+    maturityLevel: DEPRECATED,
   },
   // MDX
   'Tag': {

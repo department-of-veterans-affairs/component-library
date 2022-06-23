@@ -1,11 +1,16 @@
 import React, { useState } from 'react';
-
 import HelpMenu from '../../react-components/src/components/HelpMenu/HelpMenu';
+import { StoryDocs } from './wc-helpers';
 
 export default {
   title: 'Components/Help Menu/React Component/Help Menu',
   id: 'Components/HelpMenu',
   component: HelpMenu,
+  parameters: {
+    docs: {
+      page: () => <StoryDocs componentName="Help Menu" />,
+    },
+  },
 };
 
 const Template = args => {

@@ -1,6 +1,6 @@
 import React from 'react';
-
 import IconUser from '../../react-components/src/components/IconUser/IconUser';
+import { StoryDocs } from './wc-helpers';
 
 export default {
   title: 'Components/Icons/React Component/Icon User',
@@ -8,6 +8,11 @@ export default {
   component: IconUser,
   argTypes: {
     color: { control: 'color' },
+  },
+  parameters: {
+    docs: {
+      page: () => <StoryDocs componentName="Icons" />,
+    },
   },
 };
 

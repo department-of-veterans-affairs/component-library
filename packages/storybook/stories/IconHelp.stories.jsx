@@ -1,6 +1,6 @@
 import React from 'react';
-
 import IconHelp from '../../react-components/src/components/IconHelp/IconHelp';
+import { StoryDocs } from './wc-helpers';
 
 export default {
   title: 'Components/Icons/React Component/Icon Help',
@@ -8,6 +8,11 @@ export default {
   component: IconHelp,
   argTypes: {
     color: { control: 'color' },
+  },
+  parameters: {
+    docs: {
+      page: () => <StoryDocs componentName="Icons" />,
+    },
   },
 };
 
