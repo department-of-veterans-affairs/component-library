@@ -8,6 +8,7 @@ import {
   Prop,
   State,
   h,
+  Watch,
 } from '@stencil/core';
 import i18next from 'i18next';
 import { getSlottedNodes } from '../../utils/utils';
@@ -126,6 +127,11 @@ export class VaSelect {
         );
       },
     );
+  }
+
+  @Watch('value')
+  handleValueChange() {
+    this.populateOptions();
   }
 
   render() {
