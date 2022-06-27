@@ -69,6 +69,7 @@ export class VaTextInput {
 
   /**
    * The maximum number of characters allowed in the input.
+   * Negative and zero values will be ignored.
    */
   @Prop() maxlength?: number;
 
@@ -137,6 +138,19 @@ export class VaTextInput {
     return this.type;
   }
 
+  /**
+   * This ensures that the `maxlength` property will be positive
+   * or it won't be used at all
+   */
+  private getMaxlength() {
+    if (this.maxlength <= 0) {
+      consoleDevError("The maxlength prop must be positive!");
+      return undefined;
+    }
+
+    return this.maxlength;
+  }
+
   private handleInput = (e: Event) => {
     const target = e.target as HTMLInputElement;
     this.value = target.value;
@@ -172,7 +186,6 @@ export class VaTextInput {
       inputmode,
       required,
       value,
-      maxlength,
       minlength,
       pattern,
       name,
@@ -180,6 +193,7 @@ export class VaTextInput {
       handleBlur,
     } = this;
     const type = this.getInputType();
+    const maxlength = this.getMaxlength();
 
     return (
       <Host>

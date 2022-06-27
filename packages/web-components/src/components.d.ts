@@ -603,7 +603,7 @@ export namespace Components {
          */
         "label"?: string;
         /**
-          * The maximum number of characters allowed in the input.
+          * The maximum number of characters allowed in the input. Negative and zero values will be ignored.
          */
         "maxlength"?: number;
         /**
@@ -649,7 +649,7 @@ export namespace Components {
          */
         "label"?: string;
         /**
-          * The maximum number of characters allowed in the input.
+          * The maximum number of characters allowed in the input. Negative and zero values will be ignored.
          */
         "maxlength"?: number;
         /**
@@ -1652,7 +1652,7 @@ declare namespace LocalJSX {
          */
         "label"?: string;
         /**
-          * The maximum number of characters allowed in the input.
+          * The maximum number of characters allowed in the input. Negative and zero values will be ignored.
          */
         "maxlength"?: number;
         /**
@@ -1702,7 +1702,7 @@ declare namespace LocalJSX {
          */
         "label"?: string;
         /**
-          * The maximum number of characters allowed in the input.
+          * The maximum number of characters allowed in the input. Negative and zero values will be ignored.
          */
         "maxlength"?: number;
         /**
