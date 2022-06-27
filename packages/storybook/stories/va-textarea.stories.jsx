@@ -51,6 +51,33 @@ const Template = ({
   );
 };
 
+const ResizableTemplate = ({
+  name,
+  label,
+  'enable-analytics': enableAnalytics,
+  required,
+  error,
+  maxlength,
+  value,
+  placeholder,
+}) => {
+  return (
+    <va-textarea
+      class="resize-y"
+      name={name}
+      label={label}
+      enable-analytics={enableAnalytics}
+      required={required}
+      error={error}
+      maxlength={maxlength}
+      value={value}
+      placeholder={placeholder}
+      onBlur={e => console.log('blur event', e)}
+      onInput={e => console.log('input event value', e.target.value)}
+    />
+  );
+};
+
 export const Default = Template.bind(null);
 Default.args = { ...defaultArgs };
 Default.argTypes = propStructure(textareaDocs);
@@ -70,3 +97,6 @@ MaxLength.args = {
 
 export const WithAnalytics = Template.bind(null);
 WithAnalytics.args = { ...defaultArgs, 'enable-analytics': true };
+
+export const ResizableControl = ResizableTemplate.bind(null);
+ResizableTemplate.args = { ...defaultArgs };
