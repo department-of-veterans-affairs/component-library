@@ -104,7 +104,7 @@ describe('va-button', () => {
     expect(element).toEqualHtml(`
     <va-button class="hydrated" text="Edit" disabled>
       <mock:shadow-root>
-        <button aria-label="Edit" type="button" disabled>
+        <button aria-disabled="true" aria-label="Edit" type="button">
           Edit
         </button>
       </mock:shadow-root>
@@ -170,5 +170,14 @@ describe('va-button', () => {
     const button = await page.find('va-button >>> button');
     await button.click();
     expect(analyticsSpy).toHaveReceivedEventTimes(0);
+  });
+
+  it(`doesn't fire click event when disabled is true`, async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-button text="Edit" disabled></va-button>');
+    const clickSpy = await page.spyOnEvent('click');
+    const button = await page.find('va-button >>> button');
+    await button.click();
+    expect(clickSpy).toHaveReceivedEventTimes(0);
   });
 });

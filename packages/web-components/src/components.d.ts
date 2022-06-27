@@ -164,7 +164,7 @@ export namespace Components {
          */
         "disableAnalytics"?: boolean;
         /**
-          * If `true`, the button is disabled.
+          * If `true`, the click event will not fire.
          */
         "disabled"?: boolean;
         /**
@@ -1093,7 +1093,7 @@ declare namespace LocalJSX {
          */
         "disableAnalytics"?: boolean;
         /**
-          * If `true`, the button is disabled.
+          * If `true`, the click event will not fire.
          */
         "disabled"?: boolean;
         /**
