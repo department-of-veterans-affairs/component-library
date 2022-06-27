@@ -46,6 +46,7 @@ export class VaTextarea {
 
   /**
    * The maximum number of characters allowed in the input.
+   * Negative and zero values will be ignored.
    */
   @Prop() maxlength?: number;
 
