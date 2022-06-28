@@ -20,25 +20,39 @@ i18next.use(languageDetector).init({
 
 export { i18next };
 
-window.addEventListener('load', event => {
-  console.log('DOM fully loaded and parsed');
+// Set up an IIFE so we don't pollute the global scope
+(() => {
+  const THREE_SECONDS = 3000;
+  let mainNotFound = true;
+  let main = null;
 
-  const element = document.querySelector('main');
+  // Exit the loop that searches for main after
+  // a given amount of time
+  setTimeout(() => {
+    mainNotFound = false;
+  }, THREE_SECONDS);
 
-  if (element) {
+  // Look for main until it is found
+  // or until we timeout looking for it
+  while (mainNotFound) {
+    main = document.querySelector('main');
+    mainNotFound = !!main;
+  }
+
+  if (main) {
     const observer = new MutationObserver(mutations => {
       mutations.forEach(mutation => {
         if (
           mutation.type === 'attributes' &&
           mutation.attributeName === 'lang'
         ) {
-          i18next.changeLanguage(element.getAttribute('lang'));
+          i18next.changeLanguage(main.getAttribute('lang'));
         }
       });
     });
 
-    observer.observe(element, {
+    observer.observe(main, {
       attributes: true,
     });
   }
-});
+})();
