@@ -20,8 +20,8 @@ export default {
 const defaultArgs = {
   'continue': undefined,
   'disable-analytics': undefined,
-  'primaryLabel': undefined,
-  'secondaryLabel': undefined,
+  'primary-label': undefined,
+  'secondary-label': undefined,
   'submit': undefined,
 };
 
