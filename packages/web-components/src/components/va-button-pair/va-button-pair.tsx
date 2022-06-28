@@ -50,13 +50,11 @@ export class VaButtonPair {
   secondaryClick: EventEmitter;
 
   private handlePrimaryClick = (e: MouseEvent) => {
-    console.log('first button clicked', e);
     this.primaryClick.emit(e);
     return;
   };
 
   private handleSecondaryClick = (e: MouseEvent) => {
-    console.log('second button clicked', e);
     this.secondaryClick.emit(e);
     return;
   };
