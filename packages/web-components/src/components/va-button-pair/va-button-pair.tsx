@@ -49,14 +49,38 @@ export class VaButtonPair {
   })
   secondaryClick: EventEmitter;
 
+  /**
+   * The event used to track usage of the component.
+   */
+  @Event({
+    bubbles: true,
+    composed: true,
+    eventName: 'component-library-analytics',
+  })
+  componentLibraryAnalytics: EventEmitter;
+
   private handlePrimaryClick = (e: MouseEvent) => {
     this.primaryClick.emit(e);
-    return;
+    if (this.disableAnalytics) return;
+    this.componentLibraryAnalytics.emit({
+      componentName: 'va-button-pair',
+      action: 'click',
+      details: {
+        // TODO: add analytics event details
+      },
+    });
   };
 
   private handleSecondaryClick = (e: MouseEvent) => {
     this.secondaryClick.emit(e);
-    return;
+    if (this.disableAnalytics) return;
+    this.componentLibraryAnalytics.emit({
+      componentName: 'va-button-pair',
+      action: 'click',
+      details: {
+        // TODO: add analytics event details
+      },
+    });
   };
 
   render() {
