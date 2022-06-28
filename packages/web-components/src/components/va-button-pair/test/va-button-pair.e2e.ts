@@ -15,6 +15,59 @@ describe('va-button-pair', () => {
     await axeCheck(page);
   });
 
+  it('fires analytics event when primary button is clicked', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-button-pair></va-button-pair>');
+    const analyticsSpy = await page.spyOnEvent('component-library-analytics');
+    const primaryButton = await page.find('va-button-pair >>> va-button');
+    await primaryButton.click();
+    expect(analyticsSpy).toHaveReceivedEventDetail({
+      action: 'click',
+      componentName: 'va-button-pair',
+      // TODO: update analytics event details
+      details: {},
+    });
+  });
+
+  it('fires analytics event when secondary button is clicked', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-button-pair></va-button-pair>');
+    const analyticsSpy = await page.spyOnEvent('component-library-analytics');
+    const buttons = await page.findAll('va-button-pair >>> va-button');
+    await buttons[1].click();
+    expect(analyticsSpy).toHaveReceivedEventDetail({
+      action: 'click',
+      componentName: 'va-button-pair',
+      // TODO: update analytics event details
+      details: {},
+    });
+  });
+
+  it('fires analytics event when secondary button is clicked', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-button-pair></va-button-pair>');
+    const analyticsSpy = await page.spyOnEvent('component-library-analytics');
+    const buttons = await page.findAll('va-button-pair >>> va-button');
+    await buttons[1].click();
+    expect(analyticsSpy).toHaveReceivedEventDetail({
+      action: 'click',
+      componentName: 'va-button-pair',
+      // TODO: update analytics event details
+      details: {},
+    });
+  });
+
+  it(`doesn't fire analytics event when disableAnalytics is true`, async () => {
+    const page = await newE2EPage();
+    await page.setContent(
+      '<va-button-pair disable-analytics></va-button-pair>',
+    );
+    const analyticsSpy = await page.spyOnEvent('component-library-analytics');
+    const buttons = await page.findAll('va-button-pair >>> va-button');
+    await buttons[1].click();
+    expect(analyticsSpy).toHaveReceivedEventTimes(0);
+  });
+
   it('fires primaryClick event when clicked', async () => {
     const page = await newE2EPage();
     await page.setContent('<va-button-pair></va-button-pair>');

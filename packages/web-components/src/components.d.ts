@@ -1156,6 +1156,10 @@ declare namespace LocalJSX {
          */
         "disableAnalytics"?: boolean;
         /**
+          * The event used to track usage of the component.
+         */
+        "onComponent-library-analytics"?: (event: CustomEvent<any>) => void;
+        /**
           * Fires when the primary button is clicked.
          */
         "onPrimaryClick"?: (event: CustomEvent<any>) => void;

@@ -86,6 +86,7 @@ export class VaButtonPair {
   render() {
     const {
       continue: _continue,
+      disableAnalytics,
       handlePrimaryClick,
       handleSecondaryClick,
       primaryLabel,
@@ -96,12 +97,14 @@ export class VaButtonPair {
       <Host>
         <va-button
           continue={_continue}
+          disable-analytics={disableAnalytics}
           label={primaryLabel}
           onClick={handlePrimaryClick}
           submit={submit}
         />
         <va-button
           back={_continue}
+          disable-analytics={disableAnalytics}
           label={secondaryLabel}
           onClick={handleSecondaryClick}
         />
