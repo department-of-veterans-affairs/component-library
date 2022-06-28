@@ -22,7 +22,7 @@ va-breadcrumbs .va-breadcrumbs-li:last-child::after {
   }
 
   va-breadcrumbs .va-breadcrumbs-li:nth-last-child(2) {
-    display: inline-block;
+    display: flex;
   }
 
   va-breadcrumbs .va-breadcrumbs-li:nth-last-child(2)::before {

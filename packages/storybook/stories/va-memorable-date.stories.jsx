@@ -1,17 +1,17 @@
 import React, { useState } from 'react';
-import { VaDateTextInput } from '@department-of-veterans-affairs/web-components/react-bindings';
+import { VaMemorableDate } from '@department-of-veterans-affairs/web-components/react-bindings';
 import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
 
-VaDateTextInput.displayName = 'VaDateTextInput';
+VaMemorableDate.displayName = 'VaMemorableDate';
 
-const dateTextInputDocs = getWebComponentDocs('va-date-text-input');
+const memorableDateInputDocs = getWebComponentDocs('va-memorable-date');
 
 export default {
-  title: 'Components/va-date-text-input',
+  title: 'Components/va-memorable-date',
   parameters: {
-    componentSubtitle: `Date web component`,
+    componentSubtitle: `Memorable date web component`,
     docs: {
-      page: () => <StoryDocs data={dateTextInputDocs} />,
+      page: () => <StoryDocs data={memorableDateInputDocs} />,
     },
   },
 };
@@ -26,7 +26,7 @@ const defaultArgs = {
 
 const Template = ({ label, name, required, error, value }) => {
   return (
-    <VaDateTextInput
+    <VaMemorableDate
       label={label}
       name={name}
       required={required}
@@ -55,7 +55,7 @@ const CustomValidationTemplate = ({ label, name, required, error, value }) => {
 
   return (
     <>
-      <VaDateTextInput
+      <VaMemorableDate
         label={label}
         name={name}
         required={required}
@@ -85,7 +85,7 @@ const CustomValidationTemplate = ({ label, name, required, error, value }) => {
 
 const WithHintTextTemplate = ({ name, label, error, required, value }) => {
   return (
-    <va-date-text-input
+    <va-memorable-date
       label={label}
       name={name}
       required={required}
@@ -93,13 +93,13 @@ const WithHintTextTemplate = ({ name, label, error, required, value }) => {
       value={value}
     >
       <div className="vads-u-margin-bottom--1">This is example hint text</div>
-    </va-date-text-input>
+    </va-memorable-date>
   );
 };
 
 export const Default = Template.bind(null);
 Default.args = { ...defaultArgs };
-Default.argTypes = propStructure(dateTextInputDocs);
+Default.argTypes = propStructure(memorableDateInputDocs);
 
 export const Error = Template.bind(null);
 Error.args = { ...defaultArgs, error: 'Error Message Example' };

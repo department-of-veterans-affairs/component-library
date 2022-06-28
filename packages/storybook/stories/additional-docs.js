@@ -155,7 +155,7 @@ export const additionalDocs = {
     maturityCategory: USE,
     maturityLevel: DEPLOYED,
   },
-  'va-date-text-input': {
+  'va-memorable-date': {
     maturityCategory: CAUTION,
     maturityLevel: CANDIDATE,
   },

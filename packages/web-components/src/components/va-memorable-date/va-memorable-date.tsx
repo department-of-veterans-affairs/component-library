@@ -26,11 +26,11 @@ import {
  * - The Year cannot fall outside of the range of 1900 through the current year plus 100 years
  */
 @Component({
-  tag: 'va-date-text-input',
-  styleUrl: 'va-date-text-input.css',
+  tag: 'va-memorable-date',
+  styleUrl: 'va-memorable-date.css',
   shadow: true,
 })
-export class VaDateTextInput {
+export class VaMemorableDate {
   @Element() el: HTMLElement;
   /**
    * Render marker indicating field is required.

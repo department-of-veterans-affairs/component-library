@@ -211,6 +211,34 @@ describe('va-text-input', () => {
     );
   });
 
+  it('ignores negative maxlength values', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-text-input maxlength="-5"/>');
+
+    // Level-setting expectations
+    const inputEl = await page.find('va-text-input >>> input');
+    expect(await page.find('va-text-input >>> small')).toBeNull();
+
+    // Test the functionality
+    await inputEl.type('Hello, nice to meet you');
+    expect(await inputEl.getProperty('value')).toBe('Hello, nice to meet you');
+    expect(await page.find('va-text-input >>> small')).toBeNull();
+  });
+
+  it('ignores a maxlength of zero', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-text-input maxlength="0"/>');
+
+    // Level-setting expectations
+    const inputEl = await page.find('va-text-input >>> input');
+    expect(await page.find('va-text-input >>> small')).toBeNull();
+
+    // Test the functionality
+    await inputEl.type('Hello, nice to meet you');
+    expect(await inputEl.getProperty('value')).toBe('Hello, nice to meet you');
+    expect(await page.find('va-text-input >>> small')).toBeNull();
+  });
+
   it('allows manually setting the type attribute', async () => {
     const allowedInputTypes = [
       'email',
