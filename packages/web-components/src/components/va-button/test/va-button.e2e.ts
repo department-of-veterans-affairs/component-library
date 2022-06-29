@@ -9,7 +9,7 @@ describe('va-button', () => {
     expect(element).toEqualHtml(`
     <va-button class="hydrated" text="Edit">
       <mock:shadow-root>
-        <button aria-label="Edit" type="button">
+        <button aria-label="Edit" type="button" part="button">
           Edit
         </button>
       </mock:shadow-root>
@@ -40,7 +40,7 @@ describe('va-button', () => {
     expect(element).toEqualHtml(`
     <va-button class="hydrated" back>
       <mock:shadow-root>
-        <button aria-label="Back" type="button">
+        <button aria-label="Back" type="button" part="button">
           <i aria-hidden="true" class="fa fa-angles-left"></i>
           Back
         </button>
@@ -56,7 +56,7 @@ describe('va-button', () => {
     expect(element).toEqualHtml(`
     <va-button class="hydrated" continue>
       <mock:shadow-root>
-        <button aria-label="Continue" type="button">
+        <button aria-label="Continue" type="button" part="button">
           Continue
           <i aria-hidden="true" class="fa fa-angles-right"></i>
         </button>
@@ -74,7 +74,7 @@ describe('va-button', () => {
     expect(element).toEqualHtml(`
     <va-button class="hydrated" text="Edit" label="Edit John Smith">
       <mock:shadow-root>
-        <button type="button" aria-label="Edit John Smith">
+        <button type="button" aria-label="Edit John Smith" part="button">
           Edit
         </button>
       </mock:shadow-root>
@@ -89,7 +89,7 @@ describe('va-button', () => {
     expect(element).toEqualHtml(`
     <va-button class="hydrated" text="Edit" submit>
       <mock:shadow-root>
-        <button aria-label="Edit" type="submit">
+        <button aria-label="Edit" type="submit" part="button">
           Edit
         </button>
       </mock:shadow-root>
@@ -104,7 +104,7 @@ describe('va-button', () => {
     expect(element).toEqualHtml(`
     <va-button class="hydrated" text="Edit" disabled>
       <mock:shadow-root>
-        <button aria-disabled="true" aria-label="Edit" type="button">
+        <button aria-disabled="true" aria-label="Edit" type="button" part="button">
           Edit
         </button>
       </mock:shadow-root>
@@ -133,7 +133,7 @@ describe('va-button', () => {
     expect(element).toEqualHtml(`
     <va-button class="hydrated" back continue>
       <mock:shadow-root>
-        <button aria-label="Continue" type="button">
+        <button aria-label="Continue" type="button" part="button">
           Continue
         </button>
       </mock:shadow-root>
