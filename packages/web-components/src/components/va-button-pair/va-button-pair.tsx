@@ -100,13 +100,13 @@ export class VaButtonPair {
           <va-button
             disable-analytics={disableAnalytics}
             label={secondaryLabel}
-            onClick={handleSecondaryClick}
+            onClick={handlePrimaryClick}
             text="Confirm"
           />
           <va-button
             disable-analytics={disableAnalytics}
             label={primaryLabel}
-            onClick={handlePrimaryClick}
+            onClick={handleSecondaryClick}
             secondary
             submit={submit}
             text="Cancel"
