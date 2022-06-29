@@ -7,7 +7,7 @@ import { Component, Event, EventEmitter, Host, h, Prop } from '@stencil/core';
 })
 export class VaButtonPair {
   /**
-   * If true, button pair will use Confirm and Cancel for button text.
+   * If `true`, button pair will use Confirm and Cancel for button text.
    */
   @Prop() confirm?: boolean = false;
 
