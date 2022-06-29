@@ -7,9 +7,9 @@ import { Component, Event, EventEmitter, Host, h, Prop } from '@stencil/core';
 })
 export class VaButtonPair {
   /**
-   * If true, button pair will use Continue and Back for button text.
+   * If true, button pair will use Confirm and Cancel for button text.
    */
-  @Prop() continue?: boolean = false;
+  @Prop() confirm?: boolean = false;
 
   /**
    * If `true`, the component-library-analytics event is disabled.
@@ -85,7 +85,7 @@ export class VaButtonPair {
 
   render() {
     const {
-      continue: _continue,
+      confirm,
       disableAnalytics,
       handlePrimaryClick,
       handleSecondaryClick,
@@ -93,20 +93,42 @@ export class VaButtonPair {
       secondaryLabel,
       submit,
     } = this;
+
+    if (confirm) {
+      return (
+        <Host>
+          <va-button
+            disable-analytics={disableAnalytics}
+            label={secondaryLabel}
+            onClick={handleSecondaryClick}
+            text="Confirm"
+          />
+          <va-button
+            disable-analytics={disableAnalytics}
+            label={primaryLabel}
+            onClick={handlePrimaryClick}
+            secondary
+            submit={submit}
+            text="Cancel"
+          />
+        </Host>
+      );
+    }
+
     return (
       <Host>
         <va-button
-          continue={_continue}
+          back
+          disable-analytics={disableAnalytics}
+          label={secondaryLabel}
+          onClick={handleSecondaryClick}
+        />
+        <va-button
+          continue
           disable-analytics={disableAnalytics}
           label={primaryLabel}
           onClick={handlePrimaryClick}
           submit={submit}
-        />
-        <va-button
-          back={_continue}
-          disable-analytics={disableAnalytics}
-          label={secondaryLabel}
-          onClick={handleSecondaryClick}
         />
       </Host>
     );

@@ -128,6 +128,7 @@ export class VaButton {
           aria-disabled={ariaDisabled}
           aria-label={label || buttonText}
           type={type}
+          part="button"
         >
           {back && !_continue && (
             <i aria-hidden="true" class="fa fa-angles-left" />

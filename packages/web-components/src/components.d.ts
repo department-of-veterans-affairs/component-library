@@ -186,9 +186,9 @@ export namespace Components {
     }
     interface VaButtonPair {
         /**
-          * If true, button pair will use Continue and Back for button text.
+          * If true, button pair will use Confirm and Cancel for button text.
          */
-        "continue"?: boolean;
+        "confirm"?: boolean;
         /**
           * If `true`, the component-library-analytics event is disabled.
          */
@@ -1148,9 +1148,9 @@ declare namespace LocalJSX {
     }
     interface VaButtonPair {
         /**
-          * If true, button pair will use Continue and Back for button text.
+          * If true, button pair will use Confirm and Cancel for button text.
          */
-        "continue"?: boolean;
+        "confirm"?: boolean;
         /**
           * If `true`, the component-library-analytics event is disabled.
          */
