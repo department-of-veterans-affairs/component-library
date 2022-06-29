@@ -24,7 +24,6 @@ export { i18next };
 (() => {
   const intervalId = setInterval(() => {
     const main = document.querySelector('main');
-    console.log('MAIN', main);
 
     if (main) {
       const langAttr = main.getAttribute('lang');
@@ -36,7 +35,6 @@ export { i18next };
             mutation.attributeName === 'lang'
           ) {
             i18next.changeLanguage(main.getAttribute('lang'));
-            console.log(i18next.language);
           }
         });
       });
