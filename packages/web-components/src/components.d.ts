@@ -280,7 +280,27 @@ export namespace Components {
          */
         "value": string;
     }
-    interface VaDateTextInput {
+    interface VaFeaturedContent {
+    }
+    interface VaLoadingIndicator {
+        /**
+          * Analytics tracking function(s) will be called. Form components are disabled by default due to PII/PHI concerns.
+         */
+        "enableAnalytics": boolean;
+        /**
+          * An aria label
+         */
+        "label": string;
+        /**
+          * The message visible on screen when loading
+         */
+        "message": string;
+        /**
+          * Set to true if the loading indicator should capture focus
+         */
+        "setFocus": boolean;
+    }
+    interface VaMemorableDate {
         /**
           * Whether or not an analytics event will be fired.
          */
@@ -305,26 +325,6 @@ export namespace Components {
           * Set the default date value must be in YYYY-MM-DD format.
          */
         "value": string;
-    }
-    interface VaFeaturedContent {
-    }
-    interface VaLoadingIndicator {
-        /**
-          * Analytics tracking function(s) will be called. Form components are disabled by default due to PII/PHI concerns.
-         */
-        "enableAnalytics": boolean;
-        /**
-          * An aria label
-         */
-        "label": string;
-        /**
-          * The message visible on screen when loading
-         */
-        "message": string;
-        /**
-          * Set to true if the loading indicator should capture focus
-         */
-        "setFocus": boolean;
     }
     interface VaModal {
         /**
@@ -771,12 +771,6 @@ declare global {
         prototype: HTMLVaDateElement;
         new (): HTMLVaDateElement;
     };
-    interface HTMLVaDateTextInputElement extends Components.VaDateTextInput, HTMLStencilElement {
-    }
-    var HTMLVaDateTextInputElement: {
-        prototype: HTMLVaDateTextInputElement;
-        new (): HTMLVaDateTextInputElement;
-    };
     interface HTMLVaFeaturedContentElement extends Components.VaFeaturedContent, HTMLStencilElement {
     }
     var HTMLVaFeaturedContentElement: {
@@ -788,6 +782,12 @@ declare global {
     var HTMLVaLoadingIndicatorElement: {
         prototype: HTMLVaLoadingIndicatorElement;
         new (): HTMLVaLoadingIndicatorElement;
+    };
+    interface HTMLVaMemorableDateElement extends Components.VaMemorableDate, HTMLStencilElement {
+    }
+    var HTMLVaMemorableDateElement: {
+        prototype: HTMLVaMemorableDateElement;
+        new (): HTMLVaMemorableDateElement;
     };
     interface HTMLVaModalElement extends Components.VaModal, HTMLStencilElement {
     }
@@ -905,9 +905,9 @@ declare global {
         "va-checkbox": HTMLVaCheckboxElement;
         "va-checkbox-group": HTMLVaCheckboxGroupElement;
         "va-date": HTMLVaDateElement;
-        "va-date-text-input": HTMLVaDateTextInputElement;
         "va-featured-content": HTMLVaFeaturedContentElement;
         "va-loading-indicator": HTMLVaLoadingIndicatorElement;
+        "va-memorable-date": HTMLVaMemorableDateElement;
         "va-modal": HTMLVaModalElement;
         "va-number-input": HTMLVaNumberInputElement;
         "va-on-this-page": HTMLVaOnThisPageElement;
@@ -1278,7 +1278,31 @@ declare namespace LocalJSX {
          */
         "value"?: string;
     }
-    interface VaDateTextInput {
+    interface VaFeaturedContent {
+    }
+    interface VaLoadingIndicator {
+        /**
+          * Analytics tracking function(s) will be called. Form components are disabled by default due to PII/PHI concerns.
+         */
+        "enableAnalytics"?: boolean;
+        /**
+          * An aria label
+         */
+        "label"?: string;
+        /**
+          * The message visible on screen when loading
+         */
+        "message"?: string;
+        /**
+          * The event used to track usage of the component.
+         */
+        "onComponent-library-analytics"?: (event: CustomEvent<any>) => void;
+        /**
+          * Set to true if the loading indicator should capture focus
+         */
+        "setFocus"?: boolean;
+    }
+    interface VaMemorableDate {
         /**
           * Whether or not an analytics event will be fired.
          */
@@ -1315,30 +1339,6 @@ declare namespace LocalJSX {
           * Set the default date value must be in YYYY-MM-DD format.
          */
         "value"?: string;
-    }
-    interface VaFeaturedContent {
-    }
-    interface VaLoadingIndicator {
-        /**
-          * Analytics tracking function(s) will be called. Form components are disabled by default due to PII/PHI concerns.
-         */
-        "enableAnalytics"?: boolean;
-        /**
-          * An aria label
-         */
-        "label"?: string;
-        /**
-          * The message visible on screen when loading
-         */
-        "message"?: string;
-        /**
-          * The event used to track usage of the component.
-         */
-        "onComponent-library-analytics"?: (event: CustomEvent<any>) => void;
-        /**
-          * Set to true if the loading indicator should capture focus
-         */
-        "setFocus"?: boolean;
     }
     interface VaModal {
         /**
@@ -1803,9 +1803,9 @@ declare namespace LocalJSX {
         "va-checkbox": VaCheckbox;
         "va-checkbox-group": VaCheckboxGroup;
         "va-date": VaDate;
-        "va-date-text-input": VaDateTextInput;
         "va-featured-content": VaFeaturedContent;
         "va-loading-indicator": VaLoadingIndicator;
+        "va-memorable-date": VaMemorableDate;
         "va-modal": VaModal;
         "va-number-input": VaNumberInput;
         "va-on-this-page": VaOnThisPage;
@@ -1842,9 +1842,9 @@ declare module "@stencil/core" {
             "va-checkbox": LocalJSX.VaCheckbox & JSXBase.HTMLAttributes<HTMLVaCheckboxElement>;
             "va-checkbox-group": LocalJSX.VaCheckboxGroup & JSXBase.HTMLAttributes<HTMLVaCheckboxGroupElement>;
             "va-date": LocalJSX.VaDate & JSXBase.HTMLAttributes<HTMLVaDateElement>;
-            "va-date-text-input": LocalJSX.VaDateTextInput & JSXBase.HTMLAttributes<HTMLVaDateTextInputElement>;
             "va-featured-content": LocalJSX.VaFeaturedContent & JSXBase.HTMLAttributes<HTMLVaFeaturedContentElement>;
             "va-loading-indicator": LocalJSX.VaLoadingIndicator & JSXBase.HTMLAttributes<HTMLVaLoadingIndicatorElement>;
+            "va-memorable-date": LocalJSX.VaMemorableDate & JSXBase.HTMLAttributes<HTMLVaMemorableDateElement>;
             "va-modal": LocalJSX.VaModal & JSXBase.HTMLAttributes<HTMLVaModalElement>;
             "va-number-input": LocalJSX.VaNumberInput & JSXBase.HTMLAttributes<HTMLVaNumberInputElement>;
             "va-on-this-page": LocalJSX.VaOnThisPage & JSXBase.HTMLAttributes<HTMLVaOnThisPageElement>;

@@ -1,15 +1,15 @@
 import { newE2EPage } from '@stencil/core/testing';
 import { axeCheck } from '../../../testing/test-helpers';
 
-describe('va-date-text-input', () => {
+describe('va-memorable-date', () => {
   it('renders', async () => {
     const page = await newE2EPage();
-    await page.setContent('<va-date-text-input></va-date-text-input>');
+    await page.setContent('<va-memorable-date></va-memorable-date>');
 
-    const element = await page.find('va-date-text-input');
+    const element = await page.find('va-memorable-date');
     expect(element).toHaveClass('hydrated');
     expect(element).toEqualHtml(`
-      <va-date-text-input class='hydrated'>
+      <va-memorable-date class='hydrated'>
       <mock:shadow-root>
         <fieldset>
           <legend>
@@ -25,7 +25,7 @@ describe('va-date-text-input', () => {
           </div>
         </fieldset>
       </mock:shadow-root>
-    </va-date-text-input>
+    </va-memorable-date>
   `);
   });
 
@@ -33,7 +33,7 @@ describe('va-date-text-input', () => {
     const page = await newE2EPage();
     await page.setContent(
       `
-      <va-date-text-input day="5" label="Test Label" month="3" name="test" year="2000"></va-date-text-input>
+      <va-memorable-date day="5" label="Test Label" month="3" name="test" year="2000"></va-memorable-date>
       `,
     );
     await axeCheck(page);
@@ -41,40 +41,40 @@ describe('va-date-text-input', () => {
 
   it('renders an error message', async () => {
     const page = await newE2EPage();
-    await page.setContent('<va-date-text-input error="This is a mistake" />');
+    await page.setContent('<va-memorable-date error="This is a mistake" />');
 
     // Render the error message text
-    const error = await page.find('va-date-text-input >>> span.error-message');
+    const error = await page.find('va-memorable-date >>> span.error-message');
     expect(error.innerText).toContain('This is a mistake');
   });
 
   it('renders a required span', async () => {
     const page = await newE2EPage();
     await page.setContent(
-      '<va-date-text-input label="This is a field" required />',
+      '<va-memorable-date label="This is a field" required />',
     );
 
     const requiredSpan = await page.find(
-      'va-date-text-input >>> span.required',
+      'va-memorable-date >>> span.required',
     );
     expect(requiredSpan).not.toBeNull();
   });
 
   it('sets a label', async () => {
     const page = await newE2EPage();
-    await page.setContent('<va-date-text-input label="This is a label" />');
+    await page.setContent('<va-memorable-date label="This is a label" />');
 
-    const label = await page.find('va-date-text-input >>> legend');
+    const label = await page.find('va-memorable-date >>> legend');
     expect(label.innerText).toContain('This is a label');
   });
 
   it('sets a default date', async () => {
     const page = await newE2EPage();
-    await page.setContent('<va-date-text-input value="1999-05-03" />');
+    await page.setContent('<va-memorable-date value="1999-05-03" />');
 
-    const month = await page.find('va-date-text-input >>> .input-month');
-    const day = await page.find('va-date-text-input >>> .input-day');
-    const year = await page.find('va-date-text-input >>> .input-year');
+    const month = await page.find('va-memorable-date >>> .input-month');
+    const day = await page.find('va-memorable-date >>> .input-day');
+    const year = await page.find('va-memorable-date >>> .input-year');
 
     expect(month.getAttribute('value')).toBe('05');
     expect(day.getAttribute('value')).toBe('03');
@@ -84,13 +84,13 @@ describe('va-date-text-input', () => {
   it('updates date based on input fields', async () => {
     const page = await newE2EPage();
     await page.setContent(
-      '<va-date-text-input value="1999-05-03" name="test" />',
+      '<va-memorable-date value="1999-05-03" name="test" />',
     );
 
-    const date = await page.find('va-date-text-input');
-    const elementMonth = await page.find('va-date-text-input >>> .input-month');
-    const elementDay = await page.find('va-date-text-input >>> .input-day');
-    const elementYear = await page.find('va-date-text-input >>> .input-year');
+    const date = await page.find('va-memorable-date');
+    const elementMonth = await page.find('va-memorable-date >>> .input-month');
+    const elementDay = await page.find('va-memorable-date >>> .input-day');
+    const elementYear = await page.find('va-memorable-date >>> .input-year');
     const handleMonth = await page.$('pierce/[name="testMonth"]');
     const handleDay = await page.$('pierce/[name="testDay"]');
     const handleYear = await page.$('pierce/[name="testYear"]');
@@ -119,9 +119,9 @@ describe('va-date-text-input', () => {
 
   it('year input only allows for 4 characters to be used', async () => {
     const page = await newE2EPage();
-    await page.setContent('<va-date-text-input name="test" />');
+    await page.setContent('<va-memorable-date name="test" />');
 
-    const elementYear = await page.find('va-date-text-input >>> .input-year');
+    const elementYear = await page.find('va-memorable-date >>> .input-year');
     const handleYear = await page.$('pierce/[name="testYear"]');
     await handleYear.press('2');
     await handleYear.press('0');
@@ -135,9 +135,9 @@ describe('va-date-text-input', () => {
 
   it('day and month input field only allows for a maximum of 2 characters to be used', async () => {
     const page = await newE2EPage();
-    await page.setContent('<va-date-text-input name="test" />');
+    await page.setContent('<va-memorable-date name="test" />');
 
-    const elementMonth = await page.find('va-date-text-input >>> .input-month');
+    const elementMonth = await page.find('va-memorable-date >>> .input-month');
     const handleMonth = await page.$('pierce/[name="testMonth"]');
     await handleMonth.press('2');
     await handleMonth.press('0');
@@ -145,7 +145,7 @@ describe('va-date-text-input', () => {
     await handleMonth.press('2');
     await handleMonth.press('3');
 
-    const elementDay = await page.find('va-date-text-input >>> .input-day');
+    const elementDay = await page.find('va-memorable-date >>> .input-day');
     const handleDay = await page.$('pierce/[name="testDay"]');
     await handleDay.press('1');
     await handleDay.press('2');
@@ -161,9 +161,9 @@ describe('va-date-text-input', () => {
   it('fires a error message onBlur if date is invalid and component is required', async () => {
     const page = await newE2EPage();
     await page.setContent(
-      '<va-date-text-input value="1999-05-03" name="test" required="true" />',
+      '<va-memorable-date value="1999-05-03" name="test" required="true" />',
     );
-    const date = await page.find('va-date-text-input');
+    const date = await page.find('va-memorable-date');
     const handleYear = await page.$('pierce/[name="testYear"]');
 
     // Click three times to select all text in input
@@ -188,7 +188,7 @@ describe('va-date-text-input', () => {
     const page = await newE2EPage();
 
     await page.setContent(
-      '<va-date-text-input value="1999-05-03" name="test" />',
+      '<va-memorable-date value="1999-05-03" name="test" />',
     );
 
     const handleYear = await page.$('pierce/[name="testYear"]');
@@ -203,7 +203,7 @@ describe('va-date-text-input', () => {
     const page = await newE2EPage();
 
     await page.setContent(
-      '<va-date-text-input value="1999-05-03" name="test" />',
+      '<va-memorable-date value="1999-05-03" name="test" />',
     );
 
     const handleMonth = await page.$('pierce/[name="testMonth"]');
@@ -232,8 +232,8 @@ describe('va-date-text-input', () => {
   it('formats single digit days and months into 2 digits with a leading 0', async () => {
     const page = await newE2EPage();
 
-    await page.setContent('<va-date-text-input name="test"/>');
-    const date = await page.find('va-date-text-input');
+    await page.setContent('<va-memorable-date name="test"/>');
+    const date = await page.find('va-memorable-date');
     const handleMonth = await page.$('pierce/[name="testMonth"]');
     const handleDay = await page.$('pierce/[name="testDay"]');
     const handleYear = await page.$('pierce/[name="testYear"]');
@@ -257,8 +257,8 @@ describe('va-date-text-input', () => {
   it('only allows specific keys to be used inside input fields', async () => {
     const page = await newE2EPage();
 
-    await page.setContent('<va-date-text-input name="test"/>');
-    const date = await page.find('va-date-text-input');
+    await page.setContent('<va-memorable-date name="test"/>');
+    const date = await page.find('va-memorable-date');
     const handleMonth = await page.$('pierce/[name="testMonth"]');
     const handleDay = await page.$('pierce/[name="testDay"]');
     const handleYear = await page.$('pierce/[name="testYear"]');
@@ -282,8 +282,8 @@ describe('va-date-text-input', () => {
   it('checks for valid year month and day', async () => {
     const page = await newE2EPage();
 
-    await page.setContent('<va-date-text-input name="test"/>');
-    const date = await page.find('va-date-text-input');
+    await page.setContent('<va-memorable-date name="test"/>');
+    const date = await page.find('va-memorable-date');
     const handleMonth = await page.$('pierce/[name="testMonth"]');
     const handleDay = await page.$('pierce/[name="testDay"]');
     const handleYear = await page.$('pierce/[name="testYear"]');
