@@ -22,37 +22,31 @@ export { i18next };
 
 // Set up an IIFE so we don't pollute the global scope
 (() => {
-  const THREE_SECONDS = 3000;
-  let mainNotFound = true;
-  let main = null;
+  const intervalId = setInterval(() => {
+    const main = document.querySelector('main');
+    console.log('MAIN', main);
 
-  // Exit the loop that searches for main after
-  // a given amount of time
-  setTimeout(() => {
-    mainNotFound = false;
-  }, THREE_SECONDS);
-
-  // Look for main until it is found
-  // or until we timeout looking for it
-  while (mainNotFound) {
-    main = document.querySelector('main');
-    mainNotFound = !!main;
-  }
-
-  if (main) {
-    const observer = new MutationObserver(mutations => {
-      mutations.forEach(mutation => {
-        if (
-          mutation.type === 'attributes' &&
-          mutation.attributeName === 'lang'
-        ) {
-          i18next.changeLanguage(main.getAttribute('lang'));
-        }
+    if (main) {
+      const langAttr = main.getAttribute('lang');
+      if (langAttr) i18next.changeLanguage(langAttr);
+      const observer = new MutationObserver(mutations => {
+        mutations.forEach(mutation => {
+          if (
+            mutation.type === 'attributes' &&
+            mutation.attributeName === 'lang'
+          ) {
+            i18next.changeLanguage(main.getAttribute('lang'));
+            console.log(i18next.language);
+          }
+        });
       });
-    });
 
-    observer.observe(main, {
-      attributes: true,
-    });
-  }
+      observer.observe(main, {
+        attributes: true,
+      });
+      clearInterval(intervalId);
+    }
+  });
+
+  setTimeout(() => clearInterval(intervalId), 1000);
 })();
