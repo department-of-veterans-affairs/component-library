@@ -99,16 +99,16 @@ export class VaButtonPair {
         <Host>
           <va-button
             disable-analytics={disableAnalytics}
-            label={secondaryLabel}
+            label={primaryLabel}
             onClick={handlePrimaryClick}
             text="Confirm"
+            submit={submit}
           />
           <va-button
             disable-analytics={disableAnalytics}
-            label={primaryLabel}
+            label={secondaryLabel}
             onClick={handleSecondaryClick}
             secondary
-            submit={submit}
             text="Cancel"
           />
         </Host>
