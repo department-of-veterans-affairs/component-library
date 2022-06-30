@@ -8,10 +8,10 @@ import {
   Prop,
   State,
   h,
-  forceUpdate
+  forceUpdate,
 } from '@stencil/core';
 import { getSlottedNodes } from '../../utils/utils';
-import i18next from 'i18next'
+import i18next from 'i18next';
 import { Build } from '@stencil/core';
 
 if (Build.isTesting) {
@@ -151,22 +151,22 @@ export class VaAccordion {
   /**
    * Whether or not the accordion items will have borders
    */
-  @Prop() bordered: boolean;
+  @Prop() bordered?: boolean = false;
 
   /**
    * True if only a single item can be opened at once
    */
-  @Prop() openSingle: boolean;
+  @Prop() openSingle?: boolean = false;
 
   /**
-   * If true, doesn't fire the CustomEvent which can be used for analytics tracking.
+   * If `true`, doesn't fire the CustomEvent which can be used for analytics tracking.
    */
-  @Prop() disableAnalytics: boolean = false;
+  @Prop() disableAnalytics?: boolean = false;
 
   /**
    * Optional accordion section heading text. Only used in analytics event. Default is null.
    */
-  @Prop() sectionHeading: string = null;
+  @Prop() sectionHeading?: string = null;
 
   connectedCallback() {
     i18next.on('languageChanged', () => {
@@ -191,7 +191,9 @@ export class VaAccordion {
                 : i18next.t('expand-all-aria-label')
             }
           >
-            {this.expanded ? `${i18next.t('collapse-all')} -` : `${i18next.t('expand-all')} +`}
+            {this.expanded
+              ? `${i18next.t('collapse-all')} -`
+              : `${i18next.t('expand-all')} +`}
           </button>
         )}
         <slot />

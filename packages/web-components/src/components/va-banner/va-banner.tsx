@@ -29,12 +29,12 @@ export class VaBanner {
   /**
    * If true, doesn't fire the CustomEvent which can be used for analytics tracking.
    */
-  @Prop() disableAnalytics: boolean = false;
+  @Prop() disableAnalytics?: boolean = false;
 
   /**
    * Enable the close functionality. The banner will be closed until storage is cleared.
    * */
-  @Prop() showClose: boolean = false;
+  @Prop() showClose?: boolean = false;
 
   /**
    * The headline of the banner.
@@ -44,18 +44,18 @@ export class VaBanner {
   /**
    * The type of the banner. One of 'info', 'error', 'success', 'continue', or 'warning'. This affects both the icon of the AlertBox and the top border color.
    * */
-  @Prop() type: string = 'info';
+  @Prop() type?: string = 'info';
 
   /**
    * A boolean that when false makes it so that the banner does not render.
    * */
-  @Prop() visible: boolean = true;
+  @Prop() visible?: boolean = true;
 
   /**
    * Enable sessionStorage for the Banner otherwise storage
    * if showClose is enabled will default to localStorage
    * */
-  @Prop() windowSession: boolean = false;
+  @Prop() windowSession?: boolean = false;
 
   /**
    * Keep track of locally dismissed Banners

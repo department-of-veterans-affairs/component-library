@@ -37,7 +37,7 @@ export class VaDate {
   /**
    * Render marker indicating field is required.
    */
-  @Prop() required: boolean;
+  @Prop() required?: boolean = false;
 
   /**
    * Label for the field.
@@ -53,17 +53,17 @@ export class VaDate {
    * The error message to render (if any)
    * This prop should be leveraged to display any custom validations needed for this component
    */
-  @Prop() error: string;
+  @Prop() error?: string;
 
   /**
    * Whether or not only the Month and Year inputs should be displayed.
    */
-  @Prop() monthYearOnly: boolean = false;
+  @Prop() monthYearOnly?: boolean = false;
 
   /**
    * Set the default date value must be in YYYY-MM-DD format.
    */
-  @Prop({ mutable: true }) value: string;
+  @Prop({ mutable: true }) value?: string;
 
   /**
    * Fires when the date input loses focus after its value was changed
@@ -111,24 +111,24 @@ export class VaDate {
     const daysForSelectedMonth = month > 0 ? days[month] : [];
     const leapYear = checkLeapYear(year);
 
-    const expectedDateFormat = this.monthYearOnly ? isMonthYearDate : isFullDate;
+    const expectedDateFormat = this.monthYearOnly
+      ? isMonthYearDate
+      : isFullDate;
 
     // Check validity of date if invalid provide message and error state styling
     if (
-      !this.error && (
-      year < minYear ||
-      year > maxYear ||
-      month < minMonths ||
-      month > maxMonths ||
-      (!this.monthYearOnly && (
-        day < minMonths ||
-        day > daysForSelectedMonth.length ||
-        !day)) ||
-      !month ||
-      !year ||
-      (!leapYear && month === 2 && day > 28) ||
-      (this.required && !expectedDateFormat(this.value))
-    )) {
+      !this.error &&
+      (year < minYear ||
+        year > maxYear ||
+        month < minMonths ||
+        month > maxMonths ||
+        (!this.monthYearOnly &&
+          (day < minMonths || day > daysForSelectedMonth.length || !day)) ||
+        !month ||
+        !year ||
+        (!leapYear && month === 2 && day > 28) ||
+        (this.required && !expectedDateFormat(this.value)))
+    ) {
       this.error = 'Please enter a valid date';
     } else if (this.error !== 'Please enter a valid date') {
       this.error;
@@ -152,7 +152,11 @@ export class VaDate {
       currentYear = target.value;
     }
 
-    this.setValue(parseInt(currentYear), parseInt(currentMonth), parseInt(currentDay))
+    this.setValue(
+      parseInt(currentYear),
+      parseInt(currentMonth),
+      parseInt(currentDay),
+    );
 
     // This event should always fire to allow for validation handling
     this.dateChange.emit(event);

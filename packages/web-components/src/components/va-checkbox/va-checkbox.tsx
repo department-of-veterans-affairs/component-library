@@ -22,7 +22,7 @@ export class VaCheckbox {
   /**
    * The label for the checkbox.
    */
-  @Prop() label: string;
+  @Prop() label!: string;
 
   /**
    * The error message to render.
@@ -43,7 +43,7 @@ export class VaCheckbox {
   /**
    * True if the analytics event should fire.
    */
-  @Prop() enableAnalytics: boolean = false;
+  @Prop() enableAnalytics?: boolean = false;
 
   /**
    * Whether the checkbox is checked or not.
@@ -52,7 +52,7 @@ export class VaCheckbox {
    * will not reflect the correct value. Use the property vaCheckbox.checked
    * instead.
    */
-  @Prop({ mutable: true }) checked: boolean = false;
+  @Prop({ mutable: true }) checked?: boolean = false;
 
   /**
    * The event emitted when the input value changes.

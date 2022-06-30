@@ -21,24 +21,24 @@ export class VaTelephone {
   /**
    * Optional phone number extension
    */
-  @Prop() extension: number;
+  @Prop() extension?: number;
 
   /**
    * Indicates if the phone number can be clicked or not
    */
-  @Prop() notClickable: boolean = false;
+  @Prop() notClickable?: boolean = false;
 
   /**
    * Indicates if this is a number meant to be called from outside the US.
    * Prepends a "+1" to the formatted number.
    */
-  @Prop() international: boolean = false;
+  @Prop() international?: boolean = false;
 
   /**
    * Optional vanity phone number.
    * Replaces the last 4 digits with the vanity text input
    */
-  @Prop() vanity: string;
+  @Prop() vanity?: string;
 
   /**
    * The event used to track usage of the component. This is emitted when

@@ -35,7 +35,7 @@ export class VaMemorableDate {
   /**
    * Render marker indicating field is required.
    */
-  @Prop() required: boolean;
+  @Prop() required?: boolean = false;
 
   /**
    * Label for the field.
@@ -51,12 +51,12 @@ export class VaMemorableDate {
    * The error message to render (if any)
    * This prop should be leveraged to display any custom validations needed for this component
    */
-  @Prop() error: string;
+  @Prop() error?: string;
 
   /**
    * Set the default date value must be in YYYY-MM-DD format.
    */
-  @Prop({ mutable: true }) value: string;
+  @Prop({ mutable: true }) value?: string;
 
   /**
    * Fires when the date input loses focus after its value was changed
