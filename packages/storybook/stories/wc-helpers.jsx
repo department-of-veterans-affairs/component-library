@@ -84,6 +84,10 @@ export const propStructure = comp => {
     propObj[prop.attr] = {
       description: prop.docs,
       required: prop.required,
+      defaultValue: { value: prop.default }, // Used in subcomponents
+      type: {
+        name: prop.type, // Used in subcomponents
+      },
       // Assigns the argType to the Properties category
       table: {
         category: 'Properties',
