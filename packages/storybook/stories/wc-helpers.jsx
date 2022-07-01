@@ -84,7 +84,9 @@ export const propStructure = comp => {
     propObj[prop.attr] = {
       description: prop.docs,
       required: prop.required,
-      defaultValue: { value: prop.default }, // Used in subcomponents
+      defaultValue: {
+        value: prop.type === 'boolean' ? !!prop.default : prop.default,
+      }, // Used in subcomponents
       type: {
         name: prop.type, // Used in subcomponents
       },
@@ -92,7 +94,7 @@ export const propStructure = comp => {
       table: {
         category: 'Properties',
         defaultValue: {
-          summary: prop.default,
+          summary: prop.type === 'boolean' ? !!prop.default : prop.default,
         },
         type: { summary: prop.type },
       },
