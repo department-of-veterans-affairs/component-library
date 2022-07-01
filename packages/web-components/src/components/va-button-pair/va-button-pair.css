@@ -1,30 +1,37 @@
 :host {
   display: flex;
+  flex-direction: column;
 }
 
-:host va-button::part(button) {
-  width: 130px;
+:host([continue]:not([continue='false'])) {
+  flex-direction: row;
 }
 
-:host va-button + va-button::part(button) {
+va-button::part(button) {
+  width: 280px;
+}
+
+:host([continue]:not([continue='false'])) va-button + va-button::part(button) {
   margin-left: 12px;
   margin-right: 0;
 }
 
-@media (max-width: 320px) {
-  :host {
-    margin: 0 auto;
-    width: 280px;
-  }
-}
-
 @media (max-width: 481px) {
   :host {
-    margin: 0 auto;
     width: 441px;
   }
 
-  :host va-button::part(button) {
+  :host([continue]:not([continue='false'])) va-button::part(button) {
     width: 210px;
+  }
+}
+
+@media (max-width: 320px) {
+  :host {
+    width: 280px;
+  }
+
+  :host([continue]:not([continue='false'])) va-button::part(button) {
+    width: 130px;
   }
 }
