@@ -17,3 +17,14 @@
     width: 280px;
   }
 }
+
+@media (max-width: 481px) {
+  :host {
+    margin: 0 auto;
+    width: 441px;
+  }
+
+  :host va-button::part(button) {
+    width: 210px;
+  }
+}
