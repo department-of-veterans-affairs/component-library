@@ -35,7 +35,7 @@ export class VaButton {
   /**
    * If `true`, the component-library-analytics event is disabled.
    */
-  @Prop({ reflect: true }) disableAnalytics?: boolean = false;
+  @Prop() disableAnalytics?: boolean = false;
 
   /**
    * If `true`, the click event will not fire.
@@ -45,7 +45,7 @@ export class VaButton {
   /**
    * The aria-label of the component.
    */
-  @Prop({ reflect: true }) label?: string; // could use this.el.getAttribute('aria-label') but this is more explicit
+  @Prop() label?: string; // could use this.el.getAttribute('aria-label') but this is more explicit
 
   /**
    * If `true`, the button will use the secondary variant.
@@ -55,12 +55,12 @@ export class VaButton {
   /**
    * If `true`, the button will submit form data when clicked.
    */
-  @Prop({ reflect: true }) submit?: boolean = false;
+  @Prop() submit?: boolean = false;
 
   /**
    * The text displayed on the button. If `continue` or `back` is true, the value of text is ignored.
    */
-  @Prop({ reflect: true }) text?: string;
+  @Prop() text?: string;
 
   /**
    * The event used to track usage of the component.
