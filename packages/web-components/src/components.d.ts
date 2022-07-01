@@ -186,7 +186,7 @@ export namespace Components {
     }
     interface VaButtonPair {
         /**
-          * If true, button pair will use Confirm and Cancel for button text.
+          * If `true`, button pair will use Confirm and Cancel for button text.
          */
         "confirm"?: boolean;
         /**
@@ -1148,7 +1148,7 @@ declare namespace LocalJSX {
     }
     interface VaButtonPair {
         /**
-          * If true, button pair will use Confirm and Cancel for button text.
+          * If `true`, button pair will use Confirm and Cancel for button text.
          */
         "confirm"?: boolean;
         /**
