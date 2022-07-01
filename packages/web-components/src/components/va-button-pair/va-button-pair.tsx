@@ -100,27 +100,6 @@ export class VaButtonPair {
       submit,
     } = this;
 
-    if (confirm) {
-      return (
-        <Host>
-          <va-button
-            disable-analytics={disableAnalytics}
-            label={primaryLabel}
-            onClick={handlePrimaryClick}
-            text="Confirm"
-            submit={submit}
-          />
-          <va-button
-            disable-analytics={disableAnalytics}
-            label={secondaryLabel}
-            onClick={handleSecondaryClick}
-            secondary
-            text="Cancel"
-          />
-        </Host>
-      );
-    }
-
     if (_continue) {
       return (
         <Host>
@@ -141,23 +120,25 @@ export class VaButtonPair {
       );
     }
 
-    return (
-      <Host>
-        <va-button
-          disable-analytics={disableAnalytics}
-          label={primaryLabel}
-          onClick={handlePrimaryClick}
-          submit={submit}
-          text="Yes"
-        />
-        <va-button
-          disable-analytics={disableAnalytics}
-          label={secondaryLabel}
-          onClick={handleSecondaryClick}
-          secondary
-          text="No"
-        />
-      </Host>
-    );
+    if (confirm || !_continue) {
+      return (
+        <Host>
+          <va-button
+            disable-analytics={disableAnalytics}
+            label={primaryLabel}
+            onClick={handlePrimaryClick}
+            text={confirm ? 'Confirm' : 'Yes'}
+            submit={submit}
+          />
+          <va-button
+            disable-analytics={disableAnalytics}
+            label={secondaryLabel}
+            onClick={handleSecondaryClick}
+            secondary
+            text={confirm ? 'Cancel' : 'No'}
+          />
+        </Host>
+      );
+    }
   }
 }
