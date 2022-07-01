@@ -35,7 +35,7 @@ export class VaNumberInput {
   /**
    * Set the input to required and render the (Required) text.
    */
-  @Prop() required?: boolean;
+  @Prop() required?: boolean = false;
 
   /**
    * The inputmode attribute.
@@ -45,7 +45,7 @@ export class VaNumberInput {
   /**
    * Emit component-library-analytics events on the blur event.
    */
-  @Prop() enableAnalytics?: boolean;
+  @Prop() enableAnalytics?: boolean = false;
 
   /**
    * The name to pass to the input element.

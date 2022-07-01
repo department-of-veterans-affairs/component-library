@@ -27,32 +27,32 @@ export class VaSelect {
   /**
    * Whether or not this is a required field.
    */
-  @Prop() required: boolean;
+  @Prop() required?: boolean = false;
 
   /**
    * Text label for the field.
    */
-  @Prop() label: string;
+  @Prop() label!: string;
 
   /**
    * Name attribute for the select field.
    */
-  @Prop() name: string;
+  @Prop() name!: string;
 
   /**
    * Selected value (will get updated on select).
    */
-  @Prop({ reflect: true, mutable: true }) value: string;
+  @Prop({ reflect: true, mutable: true }) value?: string;
 
   /**
    * Error message to display. When defined, this indicates an error.
    */
-  @Prop() error: string;
+  @Prop() error?: string;
 
   /**
    * Whether or not to fire the analytics events
    */
-  @Prop() enableAnalytics: boolean;
+  @Prop() enableAnalytics?: boolean = false;
 
   /**
    * The event attached to select's onkeydown

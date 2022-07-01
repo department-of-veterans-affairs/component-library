@@ -34,17 +34,17 @@ export class VaPagination {
   /**
    * Aria-label suffix text for buttons
    */
-  @Prop() ariaLabelSuffix: string = '';
+  @Prop() ariaLabelSuffix?: string = '';
 
   /**
    * Whether or not an analytics event will be fired
    */
-  @Prop() enableAnalytics: boolean = true;
+  @Prop() enableAnalytics?: boolean = true;
 
   /**
    * The maximum number of pages to show at once
    */
-  @Prop() maxPageListLength: number = 10;
+  @Prop() maxPageListLength?: number = 10;
 
   /**
    * The current page number
@@ -60,7 +60,7 @@ export class VaPagination {
    * Display last page number when the page count exceeds
    * `maxPageListLength`
    */
-  @Prop() showLastPage: boolean;
+  @Prop() showLastPage?: boolean = false;
 
   private handlePageSelect = (page, eventID) => {
     this.pageSelect.emit({ page });

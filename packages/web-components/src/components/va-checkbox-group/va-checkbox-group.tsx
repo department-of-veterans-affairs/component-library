@@ -23,22 +23,22 @@ export class VaCheckboxGroup {
   /**
    * The text label for the checkbox group.
    */
-  @Prop() label: string;
+  @Prop() label!: string;
 
   /**
    * Whether or not this input field is required.
    */
-  @Prop() required: boolean = false;
+  @Prop() required?: boolean = false;
 
   /**
    * A string with an error message.
    */
-  @Prop() error: string;
+  @Prop() error?: string;
 
   /**
    * Whether or not an analytics event will be fired.
    */
-  @Prop() enableAnalytics: boolean;
+  @Prop() enableAnalytics?: boolean = false;
 
   /**
    * The event used to track usage of the component. This is emitted when an
