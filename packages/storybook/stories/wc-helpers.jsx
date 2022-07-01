@@ -89,6 +89,7 @@ export const propStructure = comp => {
       }, // Used in subcomponents
       type: {
         name: prop.type, // Used in subcomponents
+        required: prop.required,
       },
       // Assigns the argType to the Properties category
       table: {
