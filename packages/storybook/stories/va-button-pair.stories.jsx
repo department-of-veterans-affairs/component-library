@@ -19,6 +19,7 @@ export default {
 
 const defaultArgs = {
   'confirm': undefined,
+  'continue': undefined,
   'disable-analytics': undefined,
   'primary-label': undefined,
   'secondary-label': undefined,
@@ -27,6 +28,7 @@ const defaultArgs = {
 
 const Template = ({
   confirm,
+  'continue': _continue,
   'disable-analytics': disableAnalytics,
   'primary-label': primaryLabel,
   'secondary-label': secondaryLabel,
@@ -35,6 +37,7 @@ const Template = ({
   return (
     <VaButtonPair
       confirm={confirm}
+      continue={_continue}
       disable-analytics={disableAnalytics}
       primaryLabel={primaryLabel}
       secondaryLabel={secondaryLabel}
@@ -55,4 +58,10 @@ export const Confirm = Template.bind(null);
 Confirm.args = {
   ...defaultArgs,
   confirm: true,
+};
+
+export const Continue = Template.bind(null);
+Continue.args = {
+  ...defaultArgs,
+  continue: true,
 };

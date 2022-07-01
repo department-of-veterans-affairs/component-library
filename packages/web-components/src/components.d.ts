@@ -190,6 +190,10 @@ export namespace Components {
          */
         "confirm"?: boolean;
         /**
+          * If `true`, button pair will use Continue and Back for button text.
+         */
+        "continue"?: boolean;
+        /**
           * If `true`, the component-library-analytics event is disabled.
          */
         "disableAnalytics"?: boolean;
@@ -1151,6 +1155,10 @@ declare namespace LocalJSX {
           * If `true`, button pair will use Confirm and Cancel for button text.
          */
         "confirm"?: boolean;
+        /**
+          * If `true`, button pair will use Continue and Back for button text.
+         */
+        "continue"?: boolean;
         /**
           * If `true`, the component-library-analytics event is disabled.
          */

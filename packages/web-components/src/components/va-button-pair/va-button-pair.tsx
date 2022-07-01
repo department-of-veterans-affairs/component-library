@@ -12,6 +12,11 @@ export class VaButtonPair {
   @Prop() confirm?: boolean = false;
 
   /**
+   * If `true`, button pair will use Continue and Back for button text.
+   */
+  @Prop() continue?: boolean = false;
+
+  /**
    * If `true`, the component-library-analytics event is disabled.
    */
   @Prop() disableAnalytics?: boolean = false;
@@ -86,6 +91,7 @@ export class VaButtonPair {
   render() {
     const {
       confirm,
+      continue: _continue,
       disableAnalytics,
       handlePrimaryClick,
       handleSecondaryClick,
@@ -115,20 +121,41 @@ export class VaButtonPair {
       );
     }
 
+    if (_continue) {
+      return (
+        <Host>
+          <va-button
+            back
+            disable-analytics={disableAnalytics}
+            label={secondaryLabel}
+            onClick={handleSecondaryClick}
+          />
+          <va-button
+            continue
+            disable-analytics={disableAnalytics}
+            label={primaryLabel}
+            onClick={handlePrimaryClick}
+            submit={submit}
+          />
+        </Host>
+      );
+    }
+
     return (
       <Host>
         <va-button
-          back
-          disable-analytics={disableAnalytics}
-          label={secondaryLabel}
-          onClick={handleSecondaryClick}
-        />
-        <va-button
-          continue
           disable-analytics={disableAnalytics}
           label={primaryLabel}
           onClick={handlePrimaryClick}
           submit={submit}
+          text="Yes"
+        />
+        <va-button
+          disable-analytics={disableAnalytics}
+          label={secondaryLabel}
+          onClick={handleSecondaryClick}
+          secondary
+          text="No"
         />
       </Host>
     );
