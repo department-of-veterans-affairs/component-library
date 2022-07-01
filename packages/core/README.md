@@ -51,13 +51,13 @@ You'll need to choose what type of version update to make:
 
 > If you are unsure of what to pick, do a major version update on modules that are changing.
 
-### 2. Merge your PR to master
+### 2. Merge your PR to main
 
-Once your changes are approved, squash merge them to master. Also, if your change is a breaking change, please prefix your commit message with `BREAKING CHANGE:`. Also keep in mind that your commit messages will be in a changelog that people use to figure out what has changed between releases, so make sure it accurately describes your changes.
+Once your changes are approved, squash merge them to main. Also, if your change is a breaking change, please prefix your commit message with `BREAKING CHANGE:`. Also keep in mind that your commit messages will be in a changelog that people use to figure out what has changed between releases, so make sure it accurately describes your changes.
 
 ### 3. Build and publish
 
-- Checkout the master branch
+- Checkout the main branch
 - Run `yarn build`
 - Run `npm publish`
 

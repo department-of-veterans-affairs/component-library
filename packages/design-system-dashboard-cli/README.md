@@ -21,7 +21,7 @@ Before you can use this tool, you'll need the following:
 Get started by running `yarn` to install the dependencies, and you're off!
 
 **Important:** This tool searches your local copy of `vets-website`, so make
-sure it's on the `master` branch and has the latest changes!
+sure it's on the `main` branch and has the latest changes!
 
 ### Add the latest usage data to BigQuery
 
