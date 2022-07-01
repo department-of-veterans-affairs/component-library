@@ -145,7 +145,7 @@ export class VaMemorableDate {
   /**
    * Whether or not an analytics event will be fired.
    */
-  @Prop() enableAnalytics: boolean;
+  @Prop() enableAnalytics: boolean = false;
 
   /**
    * The event used to track usage of the component. This is emitted when an

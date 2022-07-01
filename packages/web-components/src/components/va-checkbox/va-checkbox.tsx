@@ -38,7 +38,7 @@ export class VaCheckbox {
   /**
    * Set the input to required and render the (Required) text.
    */
-  @Prop() required?: boolean;
+  @Prop() required?: boolean = false;
 
   /**
    * True if the analytics event should fire.
