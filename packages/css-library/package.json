@@ -6,11 +6,13 @@
     "dist/*.css"
   ],
   "scripts": {
+    "build:tokens": "style-dictionary build",
     "build": "sass --load-path=../../node_modules/@uswds/uswds/packages/ src/stylesheets:dist/",
     "build:minify": "yarn build --style compressed --no-source-map"
   },
   "devDependencies": {
     "@uswds/uswds": "^3.0.1",
-    "sass": "^1.51.0"
+    "sass": "^1.51.0",
+    "style-dictionary": "^3.7.1"
   }
 }
