@@ -4,24 +4,24 @@ name: Node.js CI
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
   pull_request:
-    branches: [ main ]
+    branches: [main]
 
 jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-    - name: Use Node.js 14.x
-      uses: actions/setup-node@v2
-      with:
-        node-version: 14.x
-        cache: 'yarn'
-    - run: yarn install
-    - name: Install dependencies in react-components
-      run: yarn install
-      working-directory: packages/react-components
-    - run: yarn workspace @department-of-veterans-affairs/react-components run build
-    - run: yarn workspace @department-of-veterans-affairs/web-components run build
-    - run: yarn workspaces foreach -v run test
+      - uses: actions/checkout@v2
+      - name: Use Node.js 14.x
+        uses: actions/setup-node@v2
+        with:
+          node-version: 14.x
+          cache: 'yarn'
+      - run: yarn install
+      - name: Install dependencies in react-components
+        run: yarn install
+        working-directory: packages/react-components
+      - run: yarn workspace @department-of-veterans-affairs/react-components run build
+      - run: yarn workspace @department-of-veterans-affairs/web-components run build
+      - run: yarn workspaces foreach -v run test
