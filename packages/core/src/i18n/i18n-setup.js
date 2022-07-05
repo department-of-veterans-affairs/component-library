@@ -20,31 +20,25 @@ i18next.use(languageDetector).init({
 
 export { i18next };
 
-// Set up an IIFE so we don't pollute the global scope
-(() => {
-  const intervalId = setInterval(() => {
-    const main = document.querySelector('main');
+window.addEventListener('load', event => {
+  console.log('DOM fully loaded and parsed');
 
-    if (main) {
-      const langAttr = main.getAttribute('lang');
-      if (langAttr) i18next.changeLanguage(langAttr);
-      const observer = new MutationObserver(mutations => {
-        mutations.forEach(mutation => {
-          if (
-            mutation.type === 'attributes' &&
-            mutation.attributeName === 'lang'
-          ) {
-            i18next.changeLanguage(main.getAttribute('lang'));
-          }
-        });
+  const element = document.querySelector('main');
+
+  if (element) {
+    const observer = new MutationObserver(mutations => {
+      mutations.forEach(mutation => {
+        if (
+          mutation.type === 'attributes' &&
+          mutation.attributeName === 'lang'
+        ) {
+          i18next.changeLanguage(element.getAttribute('lang'));
+        }
       });
+    });
 
-      observer.observe(main, {
-        attributes: true,
-      });
-      clearInterval(intervalId);
-    }
-  });
-
-  setTimeout(() => clearInterval(intervalId), 1000);
-})();
+    observer.observe(element, {
+      attributes: true,
+    });
+  }
+});
