@@ -126,6 +126,7 @@ describe('va-checkbox', () => {
         description:
           'Description content in a slot.Testing nested nodes. And multiple slots.',
         checked: true,
+        required: false,
       },
     });
   });

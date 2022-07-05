@@ -27,12 +27,12 @@ export class VaTable {
   /**
    * The zero-based index of the column to sort by (Doesn't work in IE11). Optional.
    */
-  @Prop() sortColumn: number;
+  @Prop() sortColumn?: number;
 
   /**
    * Whether the initial sort state will be descending or not.
    */
-  @Prop() descending: boolean = false;
+  @Prop() descending?: boolean = false;
 
   /**
    * The next direction to sort the rows

@@ -40,7 +40,7 @@ export class VaPromoBanner {
   /**
    * Analytics tracking function(s) will not be called
    */
-  @Prop() disableAnalytics: boolean;
+  @Prop() disableAnalytics?: boolean = false;
 
   /**
    * Fires when the component is closed by clicking on the close icon.

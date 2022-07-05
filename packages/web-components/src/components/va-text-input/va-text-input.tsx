@@ -47,7 +47,7 @@ export class VaTextInput {
   /**
    * Set the input to required and render the (Required) text.
    */
-  @Prop() required?: boolean;
+  @Prop() required?: boolean = false;
 
   /**
    * The inputmode attribute.
@@ -86,7 +86,7 @@ export class VaTextInput {
   /**
    * Emit component-library-analytics events on the blur event.
    */
-  @Prop() enableAnalytics?: boolean;
+  @Prop() enableAnalytics?: boolean = false;
 
   /**
    * The name to pass to the input element.
@@ -114,7 +114,7 @@ export class VaTextInput {
   /**
    * Adds styling based on status value
    */
-  @Prop() success?: boolean;
+  @Prop() success?: boolean = false;
 
   /**
    * The event used to track usage of the component. This is emitted when the
@@ -144,7 +144,7 @@ export class VaTextInput {
    */
   private getMaxlength() {
     if (this.maxlength <= 0) {
-      consoleDevError("The maxlength prop must be positive!");
+      consoleDevError('The maxlength prop must be positive!');
       return undefined;
     }
 

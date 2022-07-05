@@ -10,47 +10,47 @@ export namespace Components {
         /**
           * Whether or not the accordion items will have borders
          */
-        "bordered": boolean;
+        "bordered"?: boolean;
         /**
-          * If true, doesn't fire the CustomEvent which can be used for analytics tracking.
+          * If `true`, doesn't fire the CustomEvent which can be used for analytics tracking.
          */
-        "disableAnalytics": boolean;
+        "disableAnalytics"?: boolean;
         /**
           * True if only a single item can be opened at once
          */
-        "openSingle": boolean;
+        "openSingle"?: boolean;
         /**
           * Optional accordion section heading text. Only used in analytics event. Default is null.
          */
-        "sectionHeading": string;
+        "sectionHeading"?: string;
     }
     interface VaAccordionItem {
         /**
           * The accordion item header text
          */
-        "header": string;
+        "header"?: string;
         /**
           * Header level for button wrapper. Must be between 1 and 6
          */
-        "level": number;
+        "level"?: number;
         /**
           * True if the item is open
          */
-        "open": boolean;
+        "open"?: boolean;
         /**
           * Optional accordion item subheader text. Default is null.
          */
-        "subheader": string;
+        "subheader"?: string;
     }
     interface VaAdditionalInfo {
         /**
-          * If true, doesn't fire the CustomEvent which can be used for analytics tracking.
+          * If `true`, doesn't fire the CustomEvent which can be used for analytics tracking.
          */
-        "disableAnalytics": boolean;
+        "disableAnalytics"?: boolean;
         /**
-          * If true, left blue border and padding is removed.
+          * If `true`, left blue border and padding is removed.
          */
-        "disableBorder": boolean;
+        "disableBorder"?: boolean;
         /**
           * The text to trigger the expansion
          */
@@ -58,47 +58,47 @@ export namespace Components {
     }
     interface VaAlert {
         /**
-          * If true, renders the alert with only a background color corresponding to the status - no icon or left border.
+          * If `true`, renders the alert with only a background color corresponding to the status - no icon or left border.
          */
-        "backgroundOnly": boolean;
+        "backgroundOnly"?: boolean;
         /**
           * Aria-label text for the close button.
          */
-        "closeBtnAriaLabel": string;
+        "closeBtnAriaLabel"?: string;
         /**
-          * If true, a close button will be displayed.
+          * If `true`, a close button will be displayed.
          */
-        "closeable": boolean;
+        "closeable"?: boolean;
         /**
-          * If true, doesn't fire the CustomEvent which can be used for analytics tracking.
+          * If `true`, doesn't fire the CustomEvent which can be used for analytics tracking.
          */
-        "disableAnalytics": boolean;
+        "disableAnalytics"?: boolean;
         /**
-          * If true, the alert will be full width. Should be for emergency communication only.
+          * If `true`, the alert will be full width. Should be for emergency communication only.
          */
-        "fullWidth": boolean;
+        "fullWidth"?: boolean;
         /**
-          * This option only takes effect when background-only is true. If true, the background-only alert will include an icon.
+          * This option only takes effect when background-only is true. If `true`, the background-only alert will include an icon.
          */
-        "showIcon": boolean;
+        "showIcon"?: boolean;
         /**
           * Determines the icon and border/background color. One of `info`, `error`, `success`, `warning`, or `continue`
          */
-        "status": string;
+        "status"?: string;
         /**
-          * If true, the alert will be visible.
+          * If `true`, the alert will be visible.
          */
-        "visible": boolean;
+        "visible"?: boolean;
     }
     interface VaAlertExpandable {
         /**
-          * If true, doesn't fire the CustomEvent which can be used for analytics tracking.
+          * If `true`, doesn't fire the CustomEvent which can be used for analytics tracking.
          */
-        "disableAnalytics": boolean;
+        "disableAnalytics"?: boolean;
         /**
-          * If true, the status icon is removed.
+          * If `true`, the status icon is removed.
          */
-        "iconless": boolean;
+        "iconless"?: boolean;
         /**
           * Determines the icon and background color. One of `info`, `error`, `success`, `warning`, or `continue`
          */
@@ -114,7 +114,7 @@ export namespace Components {
         /**
           * If true, doesn't fire the CustomEvent which can be used for analytics tracking.
          */
-        "disableAnalytics": boolean;
+        "disableAnalytics"?: boolean;
         /**
           * The headline of the banner.
          */
@@ -122,29 +122,29 @@ export namespace Components {
         /**
           * Enable the close functionality. The banner will be closed until storage is cleared.
          */
-        "showClose": boolean;
+        "showClose"?: boolean;
         /**
           * The type of the banner. One of 'info', 'error', 'success', 'continue', or 'warning'. This affects both the icon of the AlertBox and the top border color.
          */
-        "type": string;
+        "type"?: string;
         /**
           * A boolean that when false makes it so that the banner does not render.
          */
-        "visible": boolean;
+        "visible"?: boolean;
         /**
           * Enable sessionStorage for the Banner otherwise storage if showClose is enabled will default to localStorage
          */
-        "windowSession": boolean;
+        "windowSession"?: boolean;
     }
     interface VaBreadcrumbs {
         /**
           * Analytics tracking function(s) will not be called
          */
-        "disableAnalytics": boolean;
+        "disableAnalytics"?: boolean;
         /**
           * Adds an aria-label attribute to the <nav /> element.
          */
-        "label": string;
+        "label"?: string;
     }
     interface VaButton {
         /**
@@ -188,7 +188,7 @@ export namespace Components {
         /**
           * Whether the checkbox is checked or not.  Note: Because this isn't reflective, vaCheckbox.getAttribute('checked') will not reflect the correct value. Use the property vaCheckbox.checked instead.
          */
-        "checked": boolean;
+        "checked"?: boolean;
         /**
           * The description to render. If this prop exists, va-checkbox will render it instead of the named slot.
          */
@@ -196,7 +196,7 @@ export namespace Components {
         /**
           * True if the analytics event should fire.
          */
-        "enableAnalytics": boolean;
+        "enableAnalytics"?: boolean;
         /**
           * The error message to render.
          */
@@ -214,11 +214,11 @@ export namespace Components {
         /**
           * Whether or not an analytics event will be fired.
          */
-        "enableAnalytics": boolean;
+        "enableAnalytics"?: boolean;
         /**
           * A string with an error message.
          */
-        "error": string;
+        "error"?: string;
         /**
           * The text label for the checkbox group.
          */
@@ -226,7 +226,7 @@ export namespace Components {
         /**
           * Whether or not this input field is required.
          */
-        "required": boolean;
+        "required"?: boolean;
     }
     interface VaDate {
         /**
@@ -236,7 +236,7 @@ export namespace Components {
         /**
           * The error message to render (if any) This prop should be leveraged to display any custom validations needed for this component
          */
-        "error": string;
+        "error"?: string;
         /**
           * Label for the field.
          */
@@ -244,7 +244,7 @@ export namespace Components {
         /**
           * Whether or not only the Month and Year inputs should be displayed.
          */
-        "monthYearOnly": boolean;
+        "monthYearOnly"?: boolean;
         /**
           * Used to create unique name attributes for each input.
          */
@@ -252,11 +252,11 @@ export namespace Components {
         /**
           * Render marker indicating field is required.
          */
-        "required": boolean;
+        "required"?: boolean;
         /**
           * Set the default date value must be in YYYY-MM-DD format.
          */
-        "value": string;
+        "value"?: string;
     }
     interface VaFeaturedContent {
     }
@@ -264,11 +264,11 @@ export namespace Components {
         /**
           * Analytics tracking function(s) will be called. Form components are disabled by default due to PII/PHI concerns.
          */
-        "enableAnalytics": boolean;
+        "enableAnalytics"?: boolean;
         /**
           * An aria label
          */
-        "label": string;
+        "label"?: string;
         /**
           * The message visible on screen when loading
          */
@@ -276,7 +276,7 @@ export namespace Components {
         /**
           * Set to true if the loading indicator should capture focus
          */
-        "setFocus": boolean;
+        "setFocus"?: boolean;
     }
     interface VaMemorableDate {
         /**
@@ -286,7 +286,7 @@ export namespace Components {
         /**
           * The error message to render (if any) This prop should be leveraged to display any custom validations needed for this component
          */
-        "error": string;
+        "error"?: string;
         /**
           * Label for the field.
          */
@@ -298,11 +298,11 @@ export namespace Components {
         /**
           * Render marker indicating field is required.
          */
-        "required": boolean;
+        "required"?: boolean;
         /**
           * Set the default date value must be in YYYY-MM-DD format.
          */
-        "value": string;
+        "value"?: string;
     }
     interface VaModal {
         /**
@@ -333,7 +333,7 @@ export namespace Components {
         /**
           * If the modal is visible or not
          */
-        "visible": boolean;
+        "visible"?: boolean;
     }
     interface VaNumberInput {
         /**
@@ -383,15 +383,15 @@ export namespace Components {
         /**
           * Aria-label suffix text for buttons
          */
-        "ariaLabelSuffix": string;
+        "ariaLabelSuffix"?: string;
         /**
           * Whether or not an analytics event will be fired
          */
-        "enableAnalytics": boolean;
+        "enableAnalytics"?: boolean;
         /**
           * The maximum number of pages to show at once
          */
-        "maxPageListLength": number;
+        "maxPageListLength"?: number;
         /**
           * The current page number
          */
@@ -403,7 +403,7 @@ export namespace Components {
         /**
           * Display last page number when the page count exceeds `maxPageListLength`
          */
-        "showLastPage": boolean;
+        "showLastPage"?: boolean;
     }
     interface VaProcessList {
     }
@@ -411,11 +411,11 @@ export namespace Components {
         /**
           * Whether or not an analytics event will be fired.
          */
-        "enableAnalytics": boolean;
+        "enableAnalytics"?: boolean;
         /**
           * The text label for the progress bar.
          */
-        "label": string;
+        "label"?: string;
         /**
           * Percent of progress made. 0 to 100.
          */
@@ -425,7 +425,7 @@ export namespace Components {
         /**
           * Analytics tracking function(s) will not be called
          */
-        "disableAnalytics": boolean;
+        "disableAnalytics"?: boolean;
         /**
           * `href` attribute for the anchor tag.
          */
@@ -439,11 +439,11 @@ export namespace Components {
         /**
           * Whether or not an analytics event will be fired.
          */
-        "enableAnalytics": boolean;
+        "enableAnalytics"?: boolean;
         /**
           * A string with an error message.
          */
-        "error": string;
+        "error"?: string;
         /**
           * The text label for the radio group.
          */
@@ -451,17 +451,17 @@ export namespace Components {
         /**
           * Whether or not this input field is required.
          */
-        "required": boolean;
+        "required"?: boolean;
     }
     interface VaRadioOption {
         /**
           * Optional string for the ariaDescribedBy attribute.
          */
-        "ariaDescribedby": string;
+        "ariaDescribedby"?: string;
         /**
           * Whether or not the option is selected.
          */
-        "checked": boolean;
+        "checked"?: boolean;
         /**
           * The text label for the input element.
          */
@@ -501,11 +501,11 @@ export namespace Components {
         /**
           * Whether or not an analytics event will be fired.
          */
-        "enableAnalytics": boolean;
+        "enableAnalytics"?: boolean;
         /**
           * An override for the default aria label.
          */
-        "label": string;
+        "label"?: string;
         /**
           * The total number of segments in the progress bar
          */
@@ -515,11 +515,11 @@ export namespace Components {
         /**
           * Whether or not to fire the analytics events
          */
-        "enableAnalytics": boolean;
+        "enableAnalytics"?: boolean;
         /**
           * Error message to display. When defined, this indicates an error.
          */
-        "error": string;
+        "error"?: string;
         /**
           * Text label for the field.
          */
@@ -531,21 +531,21 @@ export namespace Components {
         /**
           * Whether or not this is a required field.
          */
-        "required": boolean;
+        "required"?: boolean;
         /**
           * Selected value (will get updated on select).
          */
-        "value": string;
+        "value"?: string;
     }
     interface VaTable {
         /**
           * Whether the initial sort state will be descending or not.
          */
-        "descending": boolean;
+        "descending"?: boolean;
         /**
           * The zero-based index of the column to sort by (Doesn't work in IE11). Optional.
          */
-        "sortColumn": number;
+        "sortColumn"?: number;
         /**
           * The title of the table
          */
@@ -561,19 +561,19 @@ export namespace Components {
         /**
           * Optional phone number extension
          */
-        "extension": number;
+        "extension"?: number;
         /**
           * Indicates if this is a number meant to be called from outside the US. Prepends a "+1" to the formatted number.
          */
-        "international": boolean;
+        "international"?: boolean;
         /**
           * Indicates if the phone number can be clicked or not
          */
-        "notClickable": boolean;
+        "notClickable"?: boolean;
         /**
           * Optional vanity phone number. Replaces the last 4 digits with the vanity text input
          */
-        "vanity": string;
+        "vanity"?: string;
     }
     interface VaTextInput {
         /**
@@ -905,7 +905,7 @@ declare namespace LocalJSX {
          */
         "bordered"?: boolean;
         /**
-          * If true, doesn't fire the CustomEvent which can be used for analytics tracking.
+          * If `true`, doesn't fire the CustomEvent which can be used for analytics tracking.
          */
         "disableAnalytics"?: boolean;
         /**
@@ -945,11 +945,11 @@ declare namespace LocalJSX {
     }
     interface VaAdditionalInfo {
         /**
-          * If true, doesn't fire the CustomEvent which can be used for analytics tracking.
+          * If `true`, doesn't fire the CustomEvent which can be used for analytics tracking.
          */
         "disableAnalytics"?: boolean;
         /**
-          * If true, left blue border and padding is removed.
+          * If `true`, left blue border and padding is removed.
          */
         "disableBorder"?: boolean;
         /**
@@ -959,11 +959,11 @@ declare namespace LocalJSX {
         /**
           * The text to trigger the expansion
          */
-        "trigger"?: string;
+        "trigger": string;
     }
     interface VaAlert {
         /**
-          * If true, renders the alert with only a background color corresponding to the status - no icon or left border.
+          * If `true`, renders the alert with only a background color corresponding to the status - no icon or left border.
          */
         "backgroundOnly"?: boolean;
         /**
@@ -971,15 +971,15 @@ declare namespace LocalJSX {
          */
         "closeBtnAriaLabel"?: string;
         /**
-          * If true, a close button will be displayed.
+          * If `true`, a close button will be displayed.
          */
         "closeable"?: boolean;
         /**
-          * If true, doesn't fire the CustomEvent which can be used for analytics tracking.
+          * If `true`, doesn't fire the CustomEvent which can be used for analytics tracking.
          */
         "disableAnalytics"?: boolean;
         /**
-          * If true, the alert will be full width. Should be for emergency communication only.
+          * If `true`, the alert will be full width. Should be for emergency communication only.
          */
         "fullWidth"?: boolean;
         /**
@@ -995,7 +995,7 @@ declare namespace LocalJSX {
          */
         "onVa-component-did-load"?: (event: CustomEvent<any>) => void;
         /**
-          * This option only takes effect when background-only is true. If true, the background-only alert will include an icon.
+          * This option only takes effect when background-only is true. If `true`, the background-only alert will include an icon.
          */
         "showIcon"?: boolean;
         /**
@@ -1003,17 +1003,17 @@ declare namespace LocalJSX {
          */
         "status"?: string;
         /**
-          * If true, the alert will be visible.
+          * If `true`, the alert will be visible.
          */
         "visible"?: boolean;
     }
     interface VaAlertExpandable {
         /**
-          * If true, doesn't fire the CustomEvent which can be used for analytics tracking.
+          * If `true`, doesn't fire the CustomEvent which can be used for analytics tracking.
          */
         "disableAnalytics"?: boolean;
         /**
-          * If true, the status icon is removed.
+          * If `true`, the status icon is removed.
          */
         "iconless"?: boolean;
         /**
@@ -1027,7 +1027,7 @@ declare namespace LocalJSX {
         /**
           * The text to trigger the expansion
          */
-        "trigger"?: string;
+        "trigger": string;
     }
     interface VaBackToTop {
     }
@@ -1137,7 +1137,7 @@ declare namespace LocalJSX {
         /**
           * The label for the checkbox.
          */
-        "label"?: string;
+        "label": string;
         /**
           * The event used to track usage of the component. This is emitted when the input value changes and enableAnalytics is true.
          */
@@ -1163,7 +1163,7 @@ declare namespace LocalJSX {
         /**
           * The text label for the checkbox group.
          */
-        "label"?: string;
+        "label": string;
         /**
           * The event used to track usage of the component. This is emitted when an input value changes and enableAnalytics is true.
          */
@@ -1428,7 +1428,7 @@ declare namespace LocalJSX {
         /**
           * Percent of progress made. 0 to 100.
          */
-        "percent"?: number;
+        "percent": number;
     }
     interface VaPromoBanner {
         /**
@@ -1464,7 +1464,7 @@ declare namespace LocalJSX {
         /**
           * The text label for the radio group.
          */
-        "label"?: string;
+        "label": string;
         /**
           * The event used to track usage of the component. This is emitted when a radio option is selected and enableAnalytics is true.
          */
@@ -1490,11 +1490,11 @@ declare namespace LocalJSX {
         /**
           * The text label for the input element.
          */
-        "label"?: string;
+        "label": string;
         /**
           * The name attribute for the input element.
          */
-        "name"?: string;
+        "name": string;
         /**
           * The event emitted when the selected option value changes
          */
@@ -1502,7 +1502,7 @@ declare namespace LocalJSX {
         /**
           * The value attribute for the input element.
          */
-        "value"?: string;
+        "value": string;
     }
     interface VaSearchInput {
         /**
@@ -1526,7 +1526,7 @@ declare namespace LocalJSX {
         /**
           * The current segment in progress
          */
-        "current"?: number;
+        "current": number;
         /**
           * Whether or not an analytics event will be fired.
          */
@@ -1542,7 +1542,7 @@ declare namespace LocalJSX {
         /**
           * The total number of segments in the progress bar
          */
-        "total"?: number;
+        "total": number;
     }
     interface VaSelect {
         /**
@@ -1556,11 +1556,11 @@ declare namespace LocalJSX {
         /**
           * Text label for the field.
          */
-        "label"?: string;
+        "label": string;
         /**
           * Name attribute for the select field.
          */
-        "name"?: string;
+        "name": string;
         /**
           * The event used to track usage of the component. This is emitted when an option is selected and enableAnalytics is true.
          */
