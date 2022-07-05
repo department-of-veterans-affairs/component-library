@@ -18,7 +18,7 @@ export const Description = () => (
     </p>
     <p>
       For more information, see the Design System{' '}
-      <a href="https://github.com/department-of-veterans-affairs/vets-design-system-documentation/blob/master/src/_design/icons.md">
+      <a href="https://github.com/department-of-veterans-affairs/vets-design-system-documentation/blob/main/src/_design/icons.md">
         icon documentation
       </a>
       .

@@ -2,7 +2,7 @@ name: Build storybook & deploy
 on:
   push:
     branches:
-      - master
+      - main
 
 jobs:
   deploy:
@@ -13,7 +13,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
         with:
-          ref: master
+          ref: main
       - name: Use Node.js 14.x
         uses: actions/setup-node@v2
         with:
