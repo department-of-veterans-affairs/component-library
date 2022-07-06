@@ -186,10 +186,6 @@ export namespace Components {
     }
     interface VaButtonPair {
         /**
-          * If `true`, button pair will use Confirm and Cancel for button text.
-         */
-        "confirm"?: boolean;
-        /**
           * If `true`, button pair will use Continue and Back for button text.
          */
         "continue"?: boolean;
@@ -209,6 +205,10 @@ export namespace Components {
           * If `true`, the primary button will submit form data when clicked.
          */
         "submit"?: boolean;
+        /**
+          * If `true`, button pair will use Update and Cancel for button text.
+         */
+        "update"?: boolean;
     }
     interface VaCheckbox {
         /**
@@ -1152,10 +1152,6 @@ declare namespace LocalJSX {
     }
     interface VaButtonPair {
         /**
-          * If `true`, button pair will use Confirm and Cancel for button text.
-         */
-        "confirm"?: boolean;
-        /**
           * If `true`, button pair will use Continue and Back for button text.
          */
         "continue"?: boolean;
@@ -1187,6 +1183,10 @@ declare namespace LocalJSX {
           * If `true`, the primary button will submit form data when clicked.
          */
         "submit"?: boolean;
+        /**
+          * If `true`, button pair will use Update and Cancel for button text.
+         */
+        "update"?: boolean;
     }
     interface VaCheckbox {
         /**

@@ -18,25 +18,24 @@ export default {
 };
 
 const defaultArgs = {
-  'confirm': undefined,
   'continue': undefined,
   'disable-analytics': undefined,
   'primary-label': undefined,
   'secondary-label': undefined,
   'submit': undefined,
+  'update': undefined,
 };
 
 const Template = ({
-  confirm,
   'continue': _continue,
   'disable-analytics': disableAnalytics,
   'primary-label': primaryLabel,
   'secondary-label': secondaryLabel,
   submit,
+  update,
 }) => {
   return (
     <VaButtonPair
-      confirm={confirm}
       continue={_continue}
       disable-analytics={disableAnalytics}
       primaryLabel={primaryLabel}
@@ -44,6 +43,7 @@ const Template = ({
       submit={submit}
       onPrimaryClick={e => console.log(e)}
       onSecondaryClick={e => console.log(e)}
+      update={update}
     />
   );
 };
@@ -54,10 +54,10 @@ Default.args = {
 };
 Default.argTypes = propStructure(buttonPairDocs);
 
-export const Confirm = Template.bind(null);
-Confirm.args = {
+export const Update = Template.bind(null);
+Update.args = {
   ...defaultArgs,
-  confirm: true,
+  update: true,
 };
 
 export const Continue = Template.bind(null);

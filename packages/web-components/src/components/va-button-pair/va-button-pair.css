@@ -16,6 +16,21 @@ va-button::part(button) {
   margin-right: 0;
 }
 
+@media (min-width: 481px) {
+  :host {
+    flex-direction: row;
+  }
+
+  va-button + va-button::part(button) {
+    margin-left: 12px;
+    margin-right: 0;
+  }
+
+  va-button::part(button) {
+    width: 210px;
+  }
+}
+
 @media (max-width: 481px) {
   :host {
     width: 441px;
@@ -28,6 +43,7 @@ va-button::part(button) {
 
 @media (max-width: 320px) {
   :host {
+    margin: 0 auto;
     width: 280px;
   }
 

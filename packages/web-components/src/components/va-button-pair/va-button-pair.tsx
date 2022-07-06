@@ -7,11 +7,6 @@ import { Component, Event, EventEmitter, Host, h, Prop } from '@stencil/core';
 })
 export class VaButtonPair {
   /**
-   * If `true`, button pair will use Confirm and Cancel for button text.
-   */
-  @Prop() confirm?: boolean = false;
-
-  /**
    * If `true`, button pair will use Continue and Back for button text.
    */
   @Prop() continue?: boolean = false;
@@ -35,6 +30,11 @@ export class VaButtonPair {
    * If `true`, the primary button will submit form data when clicked.
    */
   @Prop() submit?: boolean = false;
+
+  /**
+   * If `true`, button pair will use Update and Cancel for button text.
+   */
+  @Prop() update?: boolean = false;
 
   /**
    * Fires when the primary button is clicked.
@@ -90,7 +90,6 @@ export class VaButtonPair {
 
   render() {
     const {
-      confirm,
       continue: _continue,
       disableAnalytics,
       handlePrimaryClick,
@@ -98,6 +97,7 @@ export class VaButtonPair {
       primaryLabel,
       secondaryLabel,
       submit,
+      update,
     } = this;
 
     if (_continue) {
@@ -120,14 +120,14 @@ export class VaButtonPair {
       );
     }
 
-    if (confirm || !_continue) {
+    if (update || !_continue) {
       return (
         <Host>
           <va-button
             disable-analytics={disableAnalytics}
             label={primaryLabel}
             onClick={handlePrimaryClick}
-            text={confirm ? 'Confirm' : 'Yes'}
+            text={update ? 'Update' : 'Yes'}
             submit={submit}
           />
           <va-button
@@ -135,7 +135,7 @@ export class VaButtonPair {
             label={secondaryLabel}
             onClick={handleSecondaryClick}
             secondary
-            text={confirm ? 'Cancel' : 'No'}
+            text={update ? 'Cancel' : 'No'}
           />
         </Host>
       );
