@@ -19,27 +19,27 @@ export class VaRadioOption {
   /**
    * The name attribute for the input element.
    */
-  @Prop() name: string;
+  @Prop() name!: string;
 
   /**
    * The text label for the input element.
    */
-  @Prop() label: string;
+  @Prop() label!: string;
 
   /**
    * The value attribute for the input element.
    */
-  @Prop() value: string;
+  @Prop() value!: string;
 
   /**
    * Whether or not the option is selected.
    */
-  @Prop() checked: boolean;
+  @Prop() checked?: boolean = false;
 
   /**
    * Optional string for the ariaDescribedBy attribute.
    */
-  @Prop() ariaDescribedby: string;
+  @Prop() ariaDescribedby?: string;
 
   /**
    * The event emitted when the selected option value changes

@@ -9,22 +9,22 @@ export class VaSegmentedProgressBar {
   /**
    * Whether or not an analytics event will be fired.
    */
-  @Prop() enableAnalytics: boolean;
+  @Prop() enableAnalytics?: boolean = false;
 
   /**
    * The current segment in progress
    */
-  @Prop() current: number;
+  @Prop() current!: number;
 
   /**
    * The total number of segments in the progress bar
    */
-  @Prop() total: number;
+  @Prop() total!: number;
 
   /**
    * An override for the default aria label.
    */
-  @Prop() label: string;
+  @Prop() label?: string;
 
   /**
    * The event used to track usage of the component. This is emitted when the

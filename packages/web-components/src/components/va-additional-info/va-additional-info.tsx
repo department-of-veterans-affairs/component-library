@@ -23,17 +23,17 @@ export class VaAdditionalInfo {
   /**
    * The text to trigger the expansion
    */
-  @Prop() trigger: string;
+  @Prop() trigger!: string;
 
   /**
-   * If true, doesn't fire the CustomEvent which can be used for analytics tracking.
+   * If `true`, doesn't fire the CustomEvent which can be used for analytics tracking.
    */
-  @Prop() disableAnalytics: boolean;
+  @Prop() disableAnalytics?: boolean = false;
 
   /**
-   * If true, left blue border and padding is removed.
+   * If `true`, left blue border and padding is removed.
    */
-  @Prop() disableBorder: boolean;
+  @Prop() disableBorder?: boolean = false;
 
   /**
    * The event used to track usage of the component. This is emitted when an

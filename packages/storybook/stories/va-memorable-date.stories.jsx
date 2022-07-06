@@ -73,7 +73,7 @@ const CustomValidationTemplate = ({ label, name, required, error, value }) => {
       </div>
       <div className="vads-u-margin-top--2">
         <a
-          href="https://github.com/department-of-veterans-affairs/component-library/tree/master/packages/storybook/stories"
+          href="https://github.com/department-of-veterans-affairs/component-library/tree/main/packages/storybook/stories"
           target="_blank"
         >
           View validation code in our repo
