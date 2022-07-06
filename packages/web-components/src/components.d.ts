@@ -184,6 +184,32 @@ export namespace Components {
          */
         "text"?: string;
     }
+    interface VaButtonPair {
+        /**
+          * If `true`, button pair will use Continue and Back for button text.
+         */
+        "continue"?: boolean;
+        /**
+          * If `true`, the component-library-analytics event is disabled.
+         */
+        "disableAnalytics"?: boolean;
+        /**
+          * Applies to the primary button.
+         */
+        "primaryLabel"?: string;
+        /**
+          * Applies to the secondary button.
+         */
+        "secondaryLabel"?: string;
+        /**
+          * If `true`, the primary button will submit form data when clicked.
+         */
+        "submit"?: boolean;
+        /**
+          * If `true`, button pair will use Update and Cancel for button text.
+         */
+        "update"?: boolean;
+    }
     interface VaCheckbox {
         /**
           * Whether the checkbox is checked or not.  Note: Because this isn't reflective, vaCheckbox.getAttribute('checked') will not reflect the correct value. Use the property vaCheckbox.checked instead.
@@ -725,6 +751,12 @@ declare global {
         prototype: HTMLVaButtonElement;
         new (): HTMLVaButtonElement;
     };
+    interface HTMLVaButtonPairElement extends Components.VaButtonPair, HTMLStencilElement {
+    }
+    var HTMLVaButtonPairElement: {
+        prototype: HTMLVaButtonPairElement;
+        new (): HTMLVaButtonPairElement;
+    };
     interface HTMLVaCheckboxElement extends Components.VaCheckbox, HTMLStencilElement {
     }
     var HTMLVaCheckboxElement: {
@@ -873,6 +905,7 @@ declare global {
         "va-banner": HTMLVaBannerElement;
         "va-breadcrumbs": HTMLVaBreadcrumbsElement;
         "va-button": HTMLVaButtonElement;
+        "va-button-pair": HTMLVaButtonPairElement;
         "va-checkbox": HTMLVaCheckboxElement;
         "va-checkbox-group": HTMLVaCheckboxGroupElement;
         "va-date": HTMLVaDateElement;
@@ -1116,6 +1149,44 @@ declare namespace LocalJSX {
           * The text displayed on the button. If `continue` or `back` is true, the value of text is ignored.
          */
         "text"?: string;
+    }
+    interface VaButtonPair {
+        /**
+          * If `true`, button pair will use Continue and Back for button text.
+         */
+        "continue"?: boolean;
+        /**
+          * If `true`, the component-library-analytics event is disabled.
+         */
+        "disableAnalytics"?: boolean;
+        /**
+          * The event used to track usage of the component.
+         */
+        "onComponent-library-analytics"?: (event: CustomEvent<any>) => void;
+        /**
+          * Fires when the primary button is clicked.
+         */
+        "onPrimaryClick"?: (event: CustomEvent<any>) => void;
+        /**
+          * Fires when the secondary button is clicked.
+         */
+        "onSecondaryClick"?: (event: CustomEvent<any>) => void;
+        /**
+          * Applies to the primary button.
+         */
+        "primaryLabel"?: string;
+        /**
+          * Applies to the secondary button.
+         */
+        "secondaryLabel"?: string;
+        /**
+          * If `true`, the primary button will submit form data when clicked.
+         */
+        "submit"?: boolean;
+        /**
+          * If `true`, button pair will use Update and Cancel for button text.
+         */
+        "update"?: boolean;
     }
     interface VaCheckbox {
         /**
@@ -1736,6 +1807,7 @@ declare namespace LocalJSX {
         "va-banner": VaBanner;
         "va-breadcrumbs": VaBreadcrumbs;
         "va-button": VaButton;
+        "va-button-pair": VaButtonPair;
         "va-checkbox": VaCheckbox;
         "va-checkbox-group": VaCheckboxGroup;
         "va-date": VaDate;
@@ -1774,6 +1846,7 @@ declare module "@stencil/core" {
             "va-banner": LocalJSX.VaBanner & JSXBase.HTMLAttributes<HTMLVaBannerElement>;
             "va-breadcrumbs": LocalJSX.VaBreadcrumbs & JSXBase.HTMLAttributes<HTMLVaBreadcrumbsElement>;
             "va-button": LocalJSX.VaButton & JSXBase.HTMLAttributes<HTMLVaButtonElement>;
+            "va-button-pair": LocalJSX.VaButtonPair & JSXBase.HTMLAttributes<HTMLVaButtonPairElement>;
             "va-checkbox": LocalJSX.VaCheckbox & JSXBase.HTMLAttributes<HTMLVaCheckboxElement>;
             "va-checkbox-group": LocalJSX.VaCheckboxGroup & JSXBase.HTMLAttributes<HTMLVaCheckboxGroupElement>;
             "va-date": LocalJSX.VaDate & JSXBase.HTMLAttributes<HTMLVaDateElement>;
