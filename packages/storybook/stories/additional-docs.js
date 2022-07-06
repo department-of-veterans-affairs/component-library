@@ -140,6 +140,10 @@ export const additionalDocs = {
     maturityCategory: CAUTION,
     maturityLevel: CANDIDATE,
   },
+  'va-button-pair': {
+    maturityCategory: CAUTION,
+    maturityLevel: CANDIDATE,
+  },
   'va-checkbox': {
     guidanceHref: 'form/checkbox',
     maturityCategory: USE,

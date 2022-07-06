@@ -1,0 +1,53 @@
+:host {
+  display: flex;
+  flex-direction: column;
+}
+
+:host([continue]:not([continue='false'])) {
+  flex-direction: row;
+}
+
+va-button::part(button) {
+  width: 280px;
+}
+
+:host([continue]:not([continue='false'])) va-button + va-button::part(button) {
+  margin-left: 12px;
+  margin-right: 0;
+}
+
+@media (min-width: 481px) {
+  :host {
+    flex-direction: row;
+  }
+
+  va-button + va-button::part(button) {
+    margin-left: 12px;
+    margin-right: 0;
+  }
+
+  va-button::part(button) {
+    width: 210px;
+  }
+}
+
+@media (max-width: 481px) {
+  :host {
+    width: 441px;
+  }
+
+  :host([continue]:not([continue='false'])) va-button::part(button) {
+    width: 210px;
+  }
+}
+
+@media (max-width: 320px) {
+  :host {
+    margin: 0 auto;
+    width: 280px;
+  }
+
+  :host([continue]:not([continue='false'])) va-button::part(button) {
+    width: 130px;
+  }
+}

@@ -20,17 +20,17 @@ export class VaButton {
   /**
    * If `true`, the button will use `Back` as its text and an icon to represent going back in form flows.
    */
-  @Prop() back?: boolean = false;
+  @Prop({ reflect: true }) back?: boolean = false;
 
   /**
    * If `true`, the button will use the big variant.
    */
-  @Prop() big?: boolean = false;
+  @Prop({ reflect: true }) big?: boolean = false;
 
   /**
    * If `true`, the button will use `Continue` as its text and an icon to represent proceeding forward in form flows.
    */
-  @Prop() continue?: boolean = false;
+  @Prop({ reflect: true }) continue?: boolean = false;
 
   /**
    * If `true`, the component-library-analytics event is disabled.
@@ -40,7 +40,7 @@ export class VaButton {
   /**
    * If `true`, the click event will not fire.
    */
-  @Prop() disabled?: boolean = false;
+  @Prop({ reflect: true }) disabled?: boolean = false;
 
   /**
    * The aria-label of the component.
@@ -50,7 +50,7 @@ export class VaButton {
   /**
    * If `true`, the button will use the secondary variant.
    */
-  @Prop() secondary?: boolean = false;
+  @Prop({ reflect: true }) secondary?: boolean = false;
 
   /**
    * If `true`, the button will submit form data when clicked.
@@ -128,6 +128,7 @@ export class VaButton {
           aria-disabled={ariaDisabled}
           aria-label={label || buttonText}
           type={type}
+          part="button"
         >
           {back && !_continue && (
             <i aria-hidden="true" class="fa fa-angles-left" />
