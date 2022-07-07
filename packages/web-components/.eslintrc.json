@@ -13,12 +13,15 @@
   },
   "plugins": ["react", "i18next"],
   "rules": {
-    "i18next/no-literal-string": [2, {"mode": "jsx-only", "jsx-attributes": { "include": ["aria-label"] }}]
+    "i18next/no-literal-string": [2, {"mode": "jsx-only", "jsx-attributes": { "include": ["aria-label"] }, "should-validate-template": true}]
   },
   "overrides": [
     {
       "files": [
-        "**/*.spec.tsx"
+        "**/*.spec.tsx",
+        "**/*.spec.ts",
+        "src/testing/**/*",
+        "**/*.e2e.ts"
       ],
       "rules": {
         "i18next/no-literal-string": 0
