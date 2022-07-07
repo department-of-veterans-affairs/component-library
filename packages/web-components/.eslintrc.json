@@ -13,6 +13,6 @@
   },
   "plugins": ["react", "i18next"],
   "rules": {
-    "i18next/no-literal-string": 2
+    "i18next/no-literal-string": [2, {"mode": "jsx-only", "jsx-attributes": { "include": ["aria-label"] }}]
   }
 }
