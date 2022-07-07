@@ -201,7 +201,7 @@ export class VaTextInput {
           <label htmlFor="inputField" part="label">
             {label}{' '}
             {required && (
-              <span class="required">(*{i18next.t('required')})</span>
+              <span class="required">{i18next.t('required')}</span>
             )}
           </label>
         )}
@@ -228,7 +228,7 @@ export class VaTextInput {
         />
         {maxlength && value?.length >= maxlength && (
           <small aria-live="polite" part="validation">
-            ({i18next.t('max-chars', { length: maxlength })})
+            {i18next.t('max-chars', { length: maxlength })}
           </small>
         )}
         {minlength && value?.length < minlength && (
