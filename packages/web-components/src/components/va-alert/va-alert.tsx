@@ -154,8 +154,10 @@ export class VaAlert {
       'bg-only': backgroundOnly,
       'hide-icon': backgroundOnly && !showIcon,
     });
+    /* eslint-disable i18next/no-literal-string */
     const role = status === 'error' ? 'alert' : null;
     const ariaLive = status === 'error' ? 'assertive' : null;
+    /* eslint-enable i18next/no-literal-string */
 
     if (!visible) return <div aria-live="polite" />;
 
