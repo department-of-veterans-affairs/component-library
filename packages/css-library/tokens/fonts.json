@@ -1,0 +1,12 @@
+{
+  "font": {
+    "family": {
+      "sans": { "value": "'Source Sans Pro', 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif" },
+      "serif": { "value": "Bitter, Georgia, Cambria, 'Times New Roman', Times, serif" }
+    },
+    "weight": {
+      "normal": { "value": "400"},
+      "bold": { "value": "700"}
+    }
+  }
+}
