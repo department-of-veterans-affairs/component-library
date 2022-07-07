@@ -32,6 +32,7 @@ export class VaTextInput {
   /**
    * Input types we will allow to be specified with the "type" prop.
    */
+  /* eslint-disable-next-line i18next/no-literal-string */
   allowedInputTypes = ['email', 'number', 'search', 'tel', 'text', 'url'];
 
   /**
@@ -132,6 +133,7 @@ export class VaTextInput {
       consoleDevError(
         `The input type "${this.type}" is invalid or unsupported!`,
       );
+      /* eslint-disable-next-line i18next/no-literal-string */
       return 'text';
     }
 

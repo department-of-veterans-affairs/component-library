@@ -76,12 +76,14 @@ export class VaAdditionalInfo {
   // Ensures that the CSS animation is consistent and uses the correct max-height for its content
   updateInfoMaxHeight() {
     const infoElm = this.el.shadowRoot.getElementById('info');
+    /* eslint-disable i18next/no-literal-string */
     const contentHeight = infoElm.scrollHeight + 'px';
     // the additional 2em is #info margin-top and margin-bottom when open
     infoElm.style.setProperty(
       '--calc-max-height',
       'calc(' + contentHeight + ' + 2rem)',
     );
+    /* eslint-enable i18next/no-literal-string */
   }
 
   componentDidLoad() {

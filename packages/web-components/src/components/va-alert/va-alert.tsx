@@ -115,6 +115,7 @@ export class VaAlert {
       // This is where we handle the edge case of the user being on IE11
       const children = this.el.shadowRoot.childNodes;
       const headerList = children.filter((node: any) =>
+        /* eslint-disable-next-line i18next/no-literal-string */
         ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'].includes(
           node.tagName.toLowerCase(),
         ),
