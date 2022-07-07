@@ -7,6 +7,24 @@
     "weight": {
       "normal": { "value": "400"},
       "bold": { "value": "700"}
+    },
+    "style": {
+      "normal": { "value": "normal" },
+      "italic": { "value": "italic" }
+    },
+    "size": {
+      "sm": { "value": "15px" },
+      "base": { "value": "16px" },
+      "md": { "value": "17px" },
+      "lg": { "value": "20px" },
+      "xl": { "value": "30px" },
+      "2xl": { "value": "40px" },
+      "h1": { "value": "{font.size.2xl}" },
+      "h2": { "value": "{font.size.xl}" },
+      "h3": { "value": "{font.size.lg}" },
+      "h4": { "value": "{font.size.md}" },
+      "h5": { "value": "{font.size.sm}" },
+      "h6": { "value": "{font.size.sm}" }
     }
   }
 }
