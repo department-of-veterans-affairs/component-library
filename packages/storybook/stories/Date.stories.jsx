@@ -3,7 +3,7 @@ import { Date } from '@department-of-veterans-affairs/component-library';
 import { StoryDocs } from './wc-helpers';
 
 export default {
-  title: 'Components/Date',
+  title: 'Deprecated/Date - React',
   component: Date,
   parameters: {
     componentSubtitle: 'Date React component',

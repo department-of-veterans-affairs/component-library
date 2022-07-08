@@ -10,7 +10,8 @@ addons.setConfig({
       if (
         item.parent === 'components' ||
         item.parent === 'components-banners' ||
-        item.parent === 'components-buttons'
+        item.parent === 'components-buttons' ||
+        item.parent === 'deprecated'
       ) {
         const maturityCategory =
           additionalDocs[item.name] &&

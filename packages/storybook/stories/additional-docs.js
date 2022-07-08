@@ -26,15 +26,15 @@ export const additionalDocs = {
     maturityCategory: USE,
     maturityLevel: BEST_PRACTICE,
   },
-  'Breadcrumbs': {
+  'Breadcrumbs - React': {
     maturityCategory: DONT_USE,
     maturityLevel: DEPRECATED,
   },
-  'Checkbox': {
+  'Checkbox - React': {
     maturityCategory: DONT_USE,
     maturityLevel: DEPRECATED,
   },
-  'Date': {
+  'Date - React': {
     maturityCategory: DONT_USE,
     maturityLevel: DEPRECATED,
   },
@@ -47,14 +47,14 @@ export const additionalDocs = {
   },
   'MaintenanceBanner': {
     maturityCategory: CAUTION,
-    maturityLevel: CANDIDATE,
+    maturityLevel: AVAILABLE,
   },
 
-  'Modal': {
+  'Modal - React': {
     maturityCategory: DONT_USE,
     maturityLevel: DEPRECATED,
   },
-  'NumberInput': {
+  'NumberInput - React': {
     maturityCategory: DONT_USE,
     maturityLevel: DEPRECATED,
   },
@@ -64,7 +64,7 @@ export const additionalDocs = {
     maturityCategory: USE,
     maturityLevel: DEPLOYED,
   },
-  'Pagination': {
+  'Pagination - React': {
     maturityCategory: DONT_USE,
     maturityLevel: DEPRECATED,
   },
@@ -74,11 +74,11 @@ export const additionalDocs = {
     maturityCategory: USE,
     maturityLevel: DEPLOYED,
   },
-  'RadioButtons': {
+  'RadioButtons - React': {
     maturityCategory: DONT_USE,
     maturityLevel: DEPRECATED,
   },
-  'Select': {
+  'Select - React': {
     maturityCategory: DONT_USE,
     maturityLevel: DEPRECATED,
   },
@@ -89,7 +89,7 @@ export const additionalDocs = {
     maturityCategory: USE,
     maturityLevel: BEST_PRACTICE,
   },
-  'Table': {
+  'Table - React': {
     maturityCategory: DONT_USE,
     maturityLevel: DEPRECATED,
   },
@@ -104,7 +104,7 @@ export const additionalDocs = {
     maturityCategory: DONT_USE,
     maturityLevel: DEPRECATED,
   },
-  'TextInput': {
+  'TextInput - React': {
     maturityCategory: DONT_USE,
     maturityLevel: DEPRECATED,
   },
