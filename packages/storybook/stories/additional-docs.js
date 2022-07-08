@@ -12,6 +12,10 @@ export const additionalDocs = {
     maturityCategory: USE,
     maturityLevel: DEPLOYED,
   },
+  'Accept terms prompt': {
+    maturityCategory: CAUTION,
+    maturityLevel: AVAILABLE,
+  },
   // MDX
   'Address block': {
     guidanceHref: 'address-block',
@@ -45,11 +49,46 @@ export const additionalDocs = {
     maturityCategory: USE,
     maturityLevel: BEST_PRACTICE,
   },
+  'Dropdown panel': {
+    maturityCategory: CAUTION,
+    maturityLevel: AVAILABLE,
+  },
+  'Expanding group': {
+    maturityCategory: CAUTION,
+    maturityLevel: AVAILABLE,
+  },
+  'File input': {
+    maturityCategory: USE,
+    maturityLevel: DEPLOYED,
+  },
+  'Help menu': {
+    maturityCategory: CAUTION,
+    maturityLevel: AVAILABLE,
+  },
+  'Icon - base': {
+    maturityCategory: CAUTION,
+    maturityLevel: AVAILABLE
+  },
+  'Icon - help': {
+    maturityCategory: CAUTION,
+    maturityLevel: AVAILABLE,
+  },
+  'Icon - search': {
+    maturityCategory: CAUTION,
+    maturityLevel: AVAILABLE,
+  },
+  'Icon - user': {
+    maturityCategory: CAUTION,
+    maturityLevel: AVAILABLE,
+  },
   'MaintenanceBanner': {
     maturityCategory: CAUTION,
     maturityLevel: AVAILABLE,
   },
-
+  'MonthYear': {
+    maturityCategory: USE,
+    maturityLevel: DEPLOYED,
+  },
   'Modal - React': {
     maturityCategory: DONT_USE,
     maturityLevel: DEPRECATED,
@@ -67,6 +106,10 @@ export const additionalDocs = {
   'Pagination - React': {
     maturityCategory: DONT_USE,
     maturityLevel: DEPRECATED,
+  },
+  'Privacy agreement': {
+    maturityCategory: CAUTION,
+    maturityLevel: AVAILABLE,
   },
   'ProgressButton': {
     guidanceHref: 'button/progress-button',
@@ -88,6 +131,10 @@ export const additionalDocs = {
     guidanceName: 'Sidenav',
     maturityCategory: USE,
     maturityLevel: BEST_PRACTICE,
+  },
+  'System down view': {
+    maturityCategory: CAUTION,
+    maturityLevel: AVAILABLE,
   },
   'Table - React': {
     maturityCategory: DONT_USE,

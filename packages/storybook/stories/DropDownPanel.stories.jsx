@@ -1,9 +1,16 @@
 import React, { useState } from 'react';
 import DropDownPanel from '../../react-components/src/components/DropDownPanel/DropDownPanel';
+import { StoryDocs } from './wc-helpers';
 
 export default {
-  title: 'Components/DropDownPanel',
+  title: 'Components/Dropdown panel',
   component: DropDownPanel,
+  parameters: {
+    componentSubtitle: 'Dropdown panel React component',
+    docs: {
+      page: () => <StoryDocs componentName="Dropdown panel" />,
+    },
+  },
 };
 
 export const Default = () => {

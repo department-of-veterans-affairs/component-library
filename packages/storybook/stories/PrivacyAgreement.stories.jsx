@@ -1,10 +1,16 @@
 import React, { useState } from 'react';
-
 import PrivacyAgreement from '../../react-components/src/components/PrivacyAgreement/PrivacyAgreement';
+import { StoryDocs } from './wc-helpers';
 
 export default {
-  title: 'Components/PrivacyAgreement',
+  title: 'Components/Privacy agreement',
   component: PrivacyAgreement,
+  parameters: {
+    componentSubtitle: 'Privacy agreement React component',
+    docs: {
+      page: () => <StoryDocs componentName="Privacy agreement" />,
+    },
+  },
 };
 
 const Template = args => {

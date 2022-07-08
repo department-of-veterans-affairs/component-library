@@ -11,6 +11,7 @@ addons.setConfig({
         item.parent === 'components' ||
         item.parent === 'components-banners' ||
         item.parent === 'components-buttons' ||
+        item.parent === 'components-icons' ||
         item.parent === 'deprecated'
       ) {
         const maturityCategory =

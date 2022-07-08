@@ -1,12 +1,18 @@
 import React from 'react';
-
 import IconSearch from '../../react-components/src/components/IconSearch/IconSearch';
+import { StoryDocs } from './wc-helpers';
 
 export default {
-  title: 'Components/Icons/IconSearch',
+  title: 'Components/Icons/Icon - search',
   component: IconSearch,
   argTypes: {
     color: { control: 'color' },
+  },
+  parameters: {
+    componentSubtitle: 'Search icon',
+    docs: {
+      page: () => <StoryDocs componentName="Icon - search" />,
+    },
   },
 };
 

@@ -1,9 +1,16 @@
 import React from 'react';
 import FileInput from '../../react-components/src/components/FileInput/FileInput';
+import { StoryDocs } from './wc-helpers';
 
 export default {
-  title: 'Components/FileInput',
+  title: 'Components/File input',
   component: FileInput,
+  parameters: {
+    componentSubtitle: 'File input React component',
+    docs: {
+      page: () => <StoryDocs componentName="File input" />,
+    },
+  },
 };
 
 const Template = args => (
