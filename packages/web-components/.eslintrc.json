@@ -16,7 +16,8 @@
     "i18next/no-literal-string": [
       2,
       {
-        "mode": "all", "jsx-attributes": { "include": ["aria-label"] },
+        "mode": "all",
+        "jsx-attributes": { "include": ["aria-label", "text"] },
         "object-properties": { "exclude": ["tag", "styleUrl", "componentName", "eventName", "action"]},
         "words": { "exclude": ["", " ", "\\d", "-\\d", "tabindex.*", "vads.*", "aria-.*", "true", "false", "checked"] },
         "callees": { "exclude": ["i18next.*", "Listen", "consoleDevError",  "querySelector.*", "InputEvent", "Watch", "createElement", "removeAttribute", "getAttribute", "getElement.*", "NumberFormat", "CustomEvent", "SubmitEvent", "addEventListener", "getSlottedNodes", "add", "remove", "contains", "split", "classnames"] },
