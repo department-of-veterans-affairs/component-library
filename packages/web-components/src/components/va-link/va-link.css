@@ -10,12 +10,7 @@
 }
 
 :host([active]:not([active='false'])) a {
-  display: flex;
   font-weight: 700;
-}
-
-i {
-  margin-top: 2px;
 }
 
 i::before {
