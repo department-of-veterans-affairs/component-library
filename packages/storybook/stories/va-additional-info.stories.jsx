@@ -2,13 +2,14 @@ import React from 'react';
 import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
 
 const additionalInfoDocs = getWebComponentDocs('va-additional-info');
+const componentName = 'Additional info';
 
 export default {
-  title: 'Components/Additional info',
+  title: `Components/${componentName}`,
   parameters: {
     componentSubtitle: `va-additional-info`,
     docs: {
-      page: () => <StoryDocs data={additionalInfoDocs} />,
+      page: () => <StoryDocs componentName={componentName} data={additionalInfoDocs} />,
     },
     actions: {
       handles: ['component-library-analytics'],

@@ -5,13 +5,14 @@ import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
 VaModal.displayName = 'VaModal';
 
 const modalDocs = getWebComponentDocs('va-modal');
+const componentName = 'Modal';
 
 export default {
-  title: 'Components/Modal',
+  title: `Components/${componentName}`,
   parameters: {
     componentSubtitle: `va-modal`,
     docs: {
-      page: () => <StoryDocs data={modalDocs} />,
+      page: () => <StoryDocs componentName={componentName} data={modalDocs} />,
     },
   },
   argTypes: {

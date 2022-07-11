@@ -215,11 +215,6 @@ export const additionalDocs = {
     maturityCategory: USE,
     maturityLevel: DEPLOYED,
   },
-  'va-file-input': {
-    guidanceHref: 'form/file-input',
-    maturityCategory: CAUTION,
-    maturityLevel: CANDIDATE,
-  },
   'va-link': {
     maturityCategory: CAUTION,
     maturityLevel: CANDIDATE,

@@ -5,13 +5,14 @@ import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
 VaMemorableDate.displayName = 'VaMemorableDate';
 
 const memorableDateInputDocs = getWebComponentDocs('va-memorable-date');
+const componentName = 'Memorable date';
 
 export default {
-  title: 'Components/Memorable date',
+  title: `Components/${componentName}`,
   parameters: {
     componentSubtitle: `va-memorable-date`,
     docs: {
-      page: () => <StoryDocs data={memorableDateInputDocs} />,
+      page: () => <StoryDocs componentName={componentName} data={memorableDateInputDocs} />,
     },
   },
 };

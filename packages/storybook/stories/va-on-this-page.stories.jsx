@@ -2,13 +2,14 @@ import React from 'react';
 import { getWebComponentDocs, StoryDocs } from './wc-helpers';
 
 const otpDocs = getWebComponentDocs('va-on-this-page');
+const componentName = 'On this page';
 
 export default {
-  title: 'Components/On this page',
+  title: `Components/${componentName}`,
   parameters: {
     componentSubtitle: 'va-on-this-page',
     docs: {
-      page: () => <StoryDocs data={otpDocs} />,
+      page: () => <StoryDocs componentName={componentName} data={otpDocs} />,
     },
   },
 };

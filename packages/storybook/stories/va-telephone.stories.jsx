@@ -7,6 +7,7 @@ import {
 import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
 
 const telephoneDocs = getWebComponentDocs('va-telephone');
+const componentName = 'Telephone';
 
 // This builds the available "CONTACTS" list table
 // Descriptions are available in the contacts.js file
@@ -27,7 +28,7 @@ const Contacts = () => (
 );
 
 export default {
-  title: 'Components/Telephone',
+  title: `Components/${componentName}`,
   parameters: {
     componentSubtitle: `va-telephone`,
     actions: {
@@ -35,7 +36,7 @@ export default {
     },
     docs: {
       page: () => (
-        <StoryDocs data={telephoneDocs}>
+        <StoryDocs componentName={componentName} data={telephoneDocs}>
           <Contacts />
           <br />
         </StoryDocs>

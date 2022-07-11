@@ -3,13 +3,14 @@ import React from 'react';
 import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
 
 const featuredContentDocs = getWebComponentDocs('va-featured-content');
+const componentName = 'Featured content';
 
 export default {
-  title: 'Components/Featured content',
+  title: `Components/${componentName}`,
   parameters: {
     componentSubtitle: `va-featured-content`,
     docs: {
-      page: () => <StoryDocs data={featuredContentDocs} />,
+      page: () => <StoryDocs componentName={componentName} data={featuredContentDocs} />,
     },
   },
 };

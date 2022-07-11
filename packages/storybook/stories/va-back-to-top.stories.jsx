@@ -2,13 +2,14 @@ import React from 'react';
 import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
 
 const bttDocs = getWebComponentDocs('va-back-to-top');
+const componentName = 'Back to top';
 
 export default {
-  title: 'Components/Back to top',
+  title: `Components/${componentName}`,
   parameters: {
     componentSubtitle: `va-back-to-top`,
     docs: {
-      page: () => <StoryDocs data={bttDocs} />,
+      page: () => <StoryDocs componentName={componentName} data={bttDocs} />,
     },
   },
 };

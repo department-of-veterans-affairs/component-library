@@ -8,14 +8,15 @@ import {
 
 const radioDocs = getWebComponentDocs('va-radio');
 const radioItem = getWebComponentDocs('va-radio-option');
+const componentName = 'Radio button';
 
 export default {
-  title: 'Components/Radio button',
+  title: `Components/${componentName}`,
   subcomponents: componentStructure(radioItem),
   parameters: {
     componentSubtitle: `va-radio`,
     docs: {
-      page: () => <StoryDocs data={radioDocs} />,
+      page: () => <StoryDocs componentName={componentName} data={radioDocs} />,
     },
   },
 };

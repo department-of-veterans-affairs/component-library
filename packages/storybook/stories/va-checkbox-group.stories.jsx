@@ -8,9 +8,10 @@ import {
 
 const checkBoxGroupDocs = getWebComponentDocs('va-checkbox-group');
 const checkbox = getWebComponentDocs('va-checkbox');
+const componentName = 'Checkbox group';
 
 export default {
-  title: 'Components/Checkbox group',
+  title: `Components/${componentName}`,
   subcomponents: componentStructure(checkbox),
   parameters: {
     componentSubtitle: 'va-checkbox-group',
@@ -18,7 +19,7 @@ export default {
       handles: ['component-library-analytics'],
     },
     docs: {
-      page: () => <StoryDocs data={checkBoxGroupDocs} />,
+      page: () => <StoryDocs componentName={componentName} data={checkBoxGroupDocs} />,
     },
   },
 };

@@ -3,13 +3,14 @@ import React, { useEffect, useState } from 'react';
 import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
 
 const selectDocs = getWebComponentDocs('va-select');
+const componentName = 'Select';
 
 export default {
-  title: 'Components/Select',
+  title: `Components/${componentName}`,
   parameters: {
     componentSubtitle: 'va-select',
     docs: {
-      page: () => <StoryDocs data={selectDocs} />,
+      page: () => <StoryDocs componentName={componentName} data={selectDocs} />,
     },
   },
 };

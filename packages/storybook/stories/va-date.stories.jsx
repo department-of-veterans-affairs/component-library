@@ -5,13 +5,14 @@ import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
 VaDate.displayName = 'VaDate';
 
 const dateDocs = getWebComponentDocs('va-date');
+const componentName = 'Date';
 
 export default {
-  title: 'Components/Date',
+  title: `Components/${componentName}`,
   parameters: {
     componentSubtitle: `va-date`,
     docs: {
-      page: () => <StoryDocs data={dateDocs} />,
+      page: () => <StoryDocs componentName={componentName} data={dateDocs} />,
     },
   },
 };

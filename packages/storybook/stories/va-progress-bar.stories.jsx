@@ -2,13 +2,14 @@ import React from 'react';
 import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
 
 const progressBarDocs = getWebComponentDocs('va-progress-bar');
+const componentName = 'Progress bar - activity';
 
 export default {
-  title: 'Components/Progress bar - activity',
+  title: `Components/${componentName}`,
   parameters: {
     componentSubtitle: `va-progress-bar`,
     docs: {
-      page: () => <StoryDocs data={progressBarDocs} />,
+      page: () => <StoryDocs componentName={componentName} data={progressBarDocs} />,
     },
   },
 };

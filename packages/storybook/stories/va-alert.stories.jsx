@@ -3,13 +3,14 @@ import { VaAlert } from '@department-of-veterans-affairs/web-components/react-bi
 import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
 
 const alertDocs = getWebComponentDocs('va-alert');
+const componentName = 'Alert';
 
 export default {
   /* 👇 The title prop is optional.
    * See https://storybook.js.org/docs/react/configure/overview#configure-story-loading
    * to learn how to generate automatic titles
    */
-  title: 'Components/Alert',
+  title: `Components/${componentName}`,
   argTypes: {
     headline: {
       table: {
@@ -25,7 +26,7 @@ export default {
   parameters: {
     componentSubtitle: `va-alert`,
     docs: {
-      page: () => <StoryDocs data={alertDocs} />,
+      page: () => <StoryDocs componentName={componentName} data={alertDocs} />,
     },
   },
 };
