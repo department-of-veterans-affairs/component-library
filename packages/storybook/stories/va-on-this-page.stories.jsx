@@ -4,9 +4,9 @@ import { getWebComponentDocs, StoryDocs } from './wc-helpers';
 const otpDocs = getWebComponentDocs('va-on-this-page');
 
 export default {
-  title: 'Components/va-on-this-page',
+  title: 'Components/On this page',
   parameters: {
-    componentSubtitle: 'On this page web component',
+    componentSubtitle: 'va-on-this-page',
     docs: {
       page: () => <StoryDocs data={otpDocs} />,
     },

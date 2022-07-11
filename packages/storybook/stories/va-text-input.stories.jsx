@@ -5,9 +5,9 @@ import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
 const textInputDocs = getWebComponentDocs('va-text-input');
 
 export default {
-  title: 'Components/va-text-input',
+  title: 'Components/Text input',
   parameters: {
-    componentSubtitle: `Text input web component`,
+    componentSubtitle: `va-text-input`,
     docs: {
       page: () => <StoryDocs data={textInputDocs} />,
     },

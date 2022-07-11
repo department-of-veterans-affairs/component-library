@@ -5,9 +5,9 @@ import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
 const processListDocs = getWebComponentDocs('va-process-list');
 
 export default {
-  title: 'Components/va-process-list',
+  title: 'Components/Process list',
   parameters: {
-    componentSubtitle: `Process list web component`,
+    componentSubtitle: `va-process-list`,
     docs: {
       page: () => <StoryDocs data={processListDocs} />,
     },

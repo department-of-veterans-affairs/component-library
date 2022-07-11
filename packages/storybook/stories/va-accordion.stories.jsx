@@ -10,10 +10,10 @@ const accordionDocs = getWebComponentDocs('va-accordion');
 const accordionItem = getWebComponentDocs('va-accordion-item');
 
 export default {
-  title: 'Components/va-accordion',
+  title: 'Components/Accordion',
   subcomponents: componentStructure(accordionItem),
   parameters: {
-    componentSubtitle: `Accordion web component`,
+    componentSubtitle: `va-accordion`,
     docs: {
       page: () => <StoryDocs data={accordionDocs} />,
     },

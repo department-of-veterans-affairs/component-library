@@ -7,9 +7,9 @@ VaDate.displayName = 'VaDate';
 const dateDocs = getWebComponentDocs('va-date');
 
 export default {
-  title: 'Components/va-date',
+  title: 'Components/Date',
   parameters: {
-    componentSubtitle: `Date web component`,
+    componentSubtitle: `va-date`,
     docs: {
       page: () => <StoryDocs data={dateDocs} />,
     },

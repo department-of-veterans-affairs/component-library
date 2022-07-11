@@ -4,9 +4,9 @@ import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
 const buttonDocs = getWebComponentDocs('va-button');
 
 export default {
-  title: 'Components/va-button',
+  title: 'Components/Button',
   parameters: {
-    componentSubtitle: `Button web component`,
+    componentSubtitle: `va-button`,
     docs: {
       page: () => <StoryDocs data={buttonDocs} />,
     },
