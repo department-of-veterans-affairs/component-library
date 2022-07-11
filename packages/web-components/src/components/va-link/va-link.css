@@ -5,9 +5,36 @@
 }
 
 :host a {
+  cursor: pointer;
   text-decoration: underline;
 }
 
 :host([active]:not([active='false'])) a {
   font-weight: 700;
+}
+
+i::before {
+  display: inline-block;
+  font-family: 'Font Awesome 5 Free';
+  font-style: normal;
+  font-variant: normal;
+  font-weight: 900;
+  line-height: 1;
+  text-rendering: auto;
+}
+
+:host([active]:not([active='false'])) i::before {
+  content: '\f105';
+}
+
+:host([download]:not([download='false'])) i::before {
+  content: '\f019';
+}
+
+:host([video]:not([video='false'])) i::before {
+  content: '\f144';
+}
+
+:host([channel]:not([channel='false'])) i::before {
+  content: '\f167';
 }
