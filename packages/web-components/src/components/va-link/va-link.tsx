@@ -1,4 +1,4 @@
-import { Component, Host, h, Prop } from '@stencil/core';
+import { Component, Host, h, Prop, Fragment } from '@stencil/core';
 
 @Component({
   tag: 'va-link',
@@ -40,6 +40,7 @@ export class VaLink {
 
   render() {
     const {
+      active,
       channel,
       download,
       filename,
@@ -58,8 +59,17 @@ export class VaLink {
           rel={channel || video ? 'noopener' : undefined}
           target={channel || video ? '_blank' : undefined}
         >
-          <i aria-hidden="true" />
-          <slot></slot>
+          {active ? (
+            <Fragment>
+              <slot></slot>
+              <i aria-hidden="true" />
+            </Fragment>
+          ) : (
+            <Fragment>
+              <i aria-hidden="true" />
+              <slot></slot>
+            </Fragment>
+          )}
         </a>
       </Host>
     );

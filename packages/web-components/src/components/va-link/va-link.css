@@ -1,3 +1,13 @@
+@import '../../mixins/links.css';
+
 :host {
   display: block;
+}
+
+:host a {
+  text-decoration: underline;
+}
+
+:host([active]:not([active='false'])) a {
+  font-weight: 700;
 }
