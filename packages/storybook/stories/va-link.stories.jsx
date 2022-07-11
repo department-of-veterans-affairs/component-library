@@ -90,7 +90,7 @@ Channel.args = {
   channel: true,
   children: (
     <Fragment>
-      Go to the video about VA disability compensation <dfn>on Youtube</dfn>
+      Veteran's Affairs <dfn>Youtube</dfn>
     </Fragment>
   ),
 };
