@@ -79,7 +79,7 @@ Video.args = {
   video: true,
   children: (
     <Fragment>
-      Go to the video about VA disability compensation <dfn>on Youtube</dfn>
+      Go to the video about VA disability compensation <dfn>on YouTube</dfn>
     </Fragment>
   ),
 };
@@ -90,7 +90,7 @@ Channel.args = {
   channel: true,
   children: (
     <Fragment>
-      Veteran's Affairs <dfn>Youtube</dfn>
+      Veteran's Affairs <dfn>YouTube</dfn>
     </Fragment>
   ),
 };
