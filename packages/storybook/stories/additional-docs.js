@@ -24,7 +24,7 @@ export const additionalDocs = {
     maturityLevel: DEPLOYED,
   },
   // MDX
-  'Button': {
+  'Button - CSS': {
     guidanceHref: 'button',
     guidanceName: 'Button',
     maturityCategory: USE,
