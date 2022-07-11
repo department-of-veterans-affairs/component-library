@@ -50,7 +50,7 @@ Default.args = {
   ...defaultArgs,
   children: 'Find out if you qualify for this program and how to apply',
 };
-Default.argTypes = propStructure(linkDocks);
+Default.argTypes = propStructure(linkDocs);
 
 export const Active = Template.bind(null);
 Active.args = {
