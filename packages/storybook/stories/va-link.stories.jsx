@@ -17,15 +17,35 @@ const defaultArgs = {
   active: undefined,
   channel: undefined,
   download: undefined,
-  href: undefined,
+  href: 'https://www.va.gov',
   filename: undefined,
   video: undefined,
 };
 
-const Template = ({
+const Template = ({ active, channel, download, href, filename, video }) => {
+  return (
+    <va-link
+      active={active}
+      channel={channel}
+      download={download}
+      href={href}
+      filename={filename}
+      video={video}
+    >
+      Find out if you qualify for this program and how to apply
+    </va-link>
+  );
+};
+
+export const Default = Template.bind(null);
+Default.args = {
+  ...defaultArgs,
+};
+Default.argTypes = propStructure(linkDocs);
+
+const ActiveTemplate = ({
   active,
   channel,
-  children,
   download,
   href,
   filename,
@@ -40,57 +60,100 @@ const Template = ({
       filename={filename}
       video={video}
     >
-      {children}
+      Share your VA medical records
     </va-link>
   );
 };
 
-export const Default = Template.bind(null);
-Default.args = {
-  ...defaultArgs,
-  children: 'Find out if you qualify for this program and how to apply',
-};
-Default.argTypes = propStructure(linkDocs);
-
-export const Active = Template.bind(null);
+export const Active = ActiveTemplate.bind(null);
 Active.args = {
   ...defaultArgs,
   active: true,
-  children: 'Share your VA medical records',
 };
 
-export const Download = Template.bind(null);
-Download.args = {
-  ...defaultArgs,
-  download: true,
-  children: (
-    <Fragment>
+const DownloadTemplate = ({
+  active,
+  channel,
+  download,
+  href,
+  filename,
+  video,
+}) => {
+  return (
+    <va-link
+      active={active}
+      channel={channel}
+      download={download}
+      href={href}
+      filename={filename}
+      video={video}
+    >
       Download VA form 10-10EZ
       <dfn>
         (<abbr title="Portable Document Format">PDF</abbr>, 5 pages)
       </dfn>
-    </Fragment>
-  ),
+    </va-link>
+  );
 };
 
-export const Video = Template.bind(null);
+export const Download = DownloadTemplate.bind(null);
+Download.args = {
+  ...defaultArgs,
+  download: true,
+};
+
+const VideoTemplate = ({
+  active,
+  channel,
+  download,
+  href,
+  filename,
+  video,
+}) => {
+  return (
+    <va-link
+      active={active}
+      channel={channel}
+      download={download}
+      href={href}
+      filename={filename}
+      video={video}
+    >
+      Go to the video about VA disability compensation <dfn>on YouTube</dfn>
+    </va-link>
+  );
+};
+
+export const Video = VideoTemplate.bind(null);
 Video.args = {
   ...defaultArgs,
   video: true,
-  children: (
-    <Fragment>
-      Go to the video about VA disability compensation <dfn>on YouTube</dfn>
-    </Fragment>
-  ),
 };
 
-export const Channel = Template.bind(null);
+const ChannelTemplate = ({
+  active,
+  channel,
+  download,
+  href,
+  filename,
+  video,
+}) => {
+  return (
+    <va-link
+      active={active}
+      channel={channel}
+      download={download}
+      href={href}
+      filename={filename}
+      video={video}
+    >
+      Veteran's Affairs <dfn>YouTube</dfn>
+    </va-link>
+  );
+};
+
+export const Channel = ChannelTemplate.bind(null);
 Channel.args = {
   ...defaultArgs,
   channel: true,
-  children: (
-    <Fragment>
-      Veteran's Affairs <dfn>YouTube</dfn>
-    </Fragment>
-  ),
 };
