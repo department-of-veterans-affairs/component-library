@@ -10,12 +10,20 @@
 }
 
 :host([active]:not([active='false'])) a {
+  display: flex;
   font-weight: 700;
 }
 
+i {
+  margin-top: 2px;
+}
+
 i::before {
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
   display: inline-block;
   font-family: 'Font Awesome 5 Free';
+  font-size: 1.6rem;
   font-style: normal;
   font-variant: normal;
   font-weight: 900;
@@ -40,5 +48,7 @@ i::before {
 
 :host([channel]:not([channel='false'])) i::before {
   content: '\f167';
+  font-family: 'Font Awesome 5 Brands';
+  font-weight: 400;
   margin-right: 8px;
 }
