@@ -25,16 +25,20 @@ i::before {
 
 :host([active]:not([active='false'])) i::before {
   content: '\f105';
+  margin-left: 8px;
 }
 
 :host([download]:not([download='false'])) i::before {
   content: '\f019';
+  margin-right: 8px;
 }
 
 :host([video]:not([video='false'])) i::before {
   content: '\f144';
+  margin-right: 8px;
 }
 
 :host([channel]:not([channel='false'])) i::before {
   content: '\f167';
+  margin-right: 8px;
 }
