@@ -14,7 +14,7 @@
   "plugins": ["react", "i18next"],
   "rules": {
     "i18next/no-literal-string": [
-      2,
+      1,
       {
         "mode": "all",
         "jsx-attributes": { "include": ["aria-label", "text", "label"] },
