@@ -296,6 +296,10 @@ export namespace Components {
          */
         "channel"?: boolean;
         /**
+          * If `true`, the component-library-analytics event is disabled.
+         */
+        "disableAnalytics"?: boolean;
+        /**
           * If `true`, the link will be treated as a download, and a download icon will be displayed before the anchor text.
          */
         "download"?: boolean;
@@ -1331,6 +1335,10 @@ declare namespace LocalJSX {
          */
         "channel"?: boolean;
         /**
+          * If `true`, the component-library-analytics event is disabled.
+         */
+        "disableAnalytics"?: boolean;
+        /**
           * If `true`, the link will be treated as a download, and a download icon will be displayed before the anchor text.
          */
         "download"?: boolean;
@@ -1342,6 +1350,10 @@ declare namespace LocalJSX {
           * The href attribute of the anchor.
          */
         "href": string;
+        /**
+          * The event used to track usage of the component.
+         */
+        "onComponent-library-analytics"?: (event: CustomEvent<any>) => void;
         /**
           * If `true`, a video icon will be displayed before the anchor text.
          */
