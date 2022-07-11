@@ -286,6 +286,32 @@ export namespace Components {
     }
     interface VaFeaturedContent {
     }
+    interface VaLink {
+        /**
+          * If `true`, the anchor text will be bolded and include a right arrow icon.
+         */
+        "active"?: boolean;
+        /**
+          * If `true`, a channel icon will be displayed before the anchor text.
+         */
+        "channel"?: boolean;
+        /**
+          * If `true`, the link will be treated as a download, and a download icon will be displayed before the anchor text.
+         */
+        "download"?: boolean;
+        /**
+          * The suggested filename. Only valid if download is `true`.
+         */
+        "filename"?: string;
+        /**
+          * The href attribute of the anchor.
+         */
+        "href": string;
+        /**
+          * If `true`, a video icon will be displayed before the anchor text.
+         */
+        "video"?: boolean;
+    }
     interface VaLoadingIndicator {
         /**
           * Analytics tracking function(s) will be called. Form components are disabled by default due to PII/PHI concerns.
@@ -781,6 +807,12 @@ declare global {
         prototype: HTMLVaFeaturedContentElement;
         new (): HTMLVaFeaturedContentElement;
     };
+    interface HTMLVaLinkElement extends Components.VaLink, HTMLStencilElement {
+    }
+    var HTMLVaLinkElement: {
+        prototype: HTMLVaLinkElement;
+        new (): HTMLVaLinkElement;
+    };
     interface HTMLVaLoadingIndicatorElement extends Components.VaLoadingIndicator, HTMLStencilElement {
     }
     var HTMLVaLoadingIndicatorElement: {
@@ -910,6 +942,7 @@ declare global {
         "va-checkbox-group": HTMLVaCheckboxGroupElement;
         "va-date": HTMLVaDateElement;
         "va-featured-content": HTMLVaFeaturedContentElement;
+        "va-link": HTMLVaLinkElement;
         "va-loading-indicator": HTMLVaLoadingIndicatorElement;
         "va-memorable-date": HTMLVaMemorableDateElement;
         "va-modal": HTMLVaModalElement;
@@ -1287,6 +1320,32 @@ declare namespace LocalJSX {
         "value"?: string;
     }
     interface VaFeaturedContent {
+    }
+    interface VaLink {
+        /**
+          * If `true`, the anchor text will be bolded and include a right arrow icon.
+         */
+        "active"?: boolean;
+        /**
+          * If `true`, a channel icon will be displayed before the anchor text.
+         */
+        "channel"?: boolean;
+        /**
+          * If `true`, the link will be treated as a download, and a download icon will be displayed before the anchor text.
+         */
+        "download"?: boolean;
+        /**
+          * The suggested filename. Only valid if download is `true`.
+         */
+        "filename"?: string;
+        /**
+          * The href attribute of the anchor.
+         */
+        "href": string;
+        /**
+          * If `true`, a video icon will be displayed before the anchor text.
+         */
+        "video"?: boolean;
     }
     interface VaLoadingIndicator {
         /**
@@ -1812,6 +1871,7 @@ declare namespace LocalJSX {
         "va-checkbox-group": VaCheckboxGroup;
         "va-date": VaDate;
         "va-featured-content": VaFeaturedContent;
+        "va-link": VaLink;
         "va-loading-indicator": VaLoadingIndicator;
         "va-memorable-date": VaMemorableDate;
         "va-modal": VaModal;
@@ -1851,6 +1911,7 @@ declare module "@stencil/core" {
             "va-checkbox-group": LocalJSX.VaCheckboxGroup & JSXBase.HTMLAttributes<HTMLVaCheckboxGroupElement>;
             "va-date": LocalJSX.VaDate & JSXBase.HTMLAttributes<HTMLVaDateElement>;
             "va-featured-content": LocalJSX.VaFeaturedContent & JSXBase.HTMLAttributes<HTMLVaFeaturedContentElement>;
+            "va-link": LocalJSX.VaLink & JSXBase.HTMLAttributes<HTMLVaLinkElement>;
             "va-loading-indicator": LocalJSX.VaLoadingIndicator & JSXBase.HTMLAttributes<HTMLVaLoadingIndicatorElement>;
             "va-memorable-date": LocalJSX.VaMemorableDate & JSXBase.HTMLAttributes<HTMLVaMemorableDateElement>;
             "va-modal": LocalJSX.VaModal & JSXBase.HTMLAttributes<HTMLVaModalElement>;
