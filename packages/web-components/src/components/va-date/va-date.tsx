@@ -95,9 +95,11 @@ export class VaDate {
     });
     // Ternary to prevent NaN displaying as value for Year
     // Ternary to prevent Month or Day from displaying as single digit
+    /* eslint-disable i18next/no-literal-string */
     const val = `${year ? year : ''}-${
       month ? numFormatter.format(month) : ''
     }-${day ? numFormatter.format(day) : ''}`.replace(/-+$/, '');
+    /* eslint-enable i18next/no-literal-string */
 
     this.value = val ? val : null;
   }

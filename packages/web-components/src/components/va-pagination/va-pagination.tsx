@@ -116,6 +116,7 @@ export class VaPagination {
     if (keyCode === 'Enter' || keyCode === ' ') {
       e.preventDefault();
       if (!pageNumber) return;
+      /* eslint-disable-next-line i18next/no-literal-string */
       this.handlePageSelect(pageNumber, 'nav-paginate-number');
     }
   };

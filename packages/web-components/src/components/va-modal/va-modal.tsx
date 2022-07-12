@@ -336,12 +336,14 @@ export class VaModal {
       : 'va-modal-inner';
     const bodyClass = status ? 'va-modal-alert-body' : 'va-modal-body';
     const titleClass = status ? 'va-modal-alert-title' : 'va-modal-title';
+    /* eslint-disable i18next/no-literal-string */
     const ariaRole = status => {
       if (status === 'warning' || status === 'error') {
         return 'alertdialog';
       }
       return 'dialog';
     };
+    /* eslint-enable i18next/no-literal-string */
     const btnAriaLabel = modalTitle
       ? `Close ${modalTitle} modal`
       : 'Close modal';

@@ -84,6 +84,7 @@ export class VaAccordion {
     if (this.openSingle) {
       getSlottedNodes(this.el, 'va-accordion-item')
         .filter(item => item !== clickedItem)
+        /* eslint-disable-next-line i18next/no-literal-string */
         .forEach(item => (item as Element).setAttribute('open', 'false'));
     }
 
@@ -103,6 +104,7 @@ export class VaAccordion {
       this.componentLibraryAnalytics.emit(detail);
     }
 
+    /* eslint-disable-next-line i18next/no-literal-string */
     clickedItem.setAttribute('open', !prevAttr);
 
     if (!this.isScrolledIntoView(clickedItem)) {
@@ -133,6 +135,7 @@ export class VaAccordion {
   private expandCollapseAll = (expanded: boolean) => {
     this.expanded = expanded;
     getSlottedNodes(this.el, 'va-accordion-item').forEach(item =>
+      /* eslint-disable-next-line i18next/no-literal-string */
       (item as Element).setAttribute('open', `${expanded}`),
     );
   };

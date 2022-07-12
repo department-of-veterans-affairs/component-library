@@ -1,3 +1,4 @@
+/* eslint-disable i18next/no-literal-string */
 /**
  * Code needed to trap focus within a modal. Modified from
  * https://github.com/ionic-team/ionic-framework/blob/main/core/src/utils/overlays.ts#L85

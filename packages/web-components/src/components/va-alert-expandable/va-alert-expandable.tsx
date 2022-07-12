@@ -81,6 +81,7 @@ export class VaAlertExpandable {
   }
 
   // Ensures that the CSS animation is consistent and uses the correct max-height for its content
+  /* eslint-disable i18next/no-literal-string */
   updateAlertBodyMaxHeight() {
     const bodyElm = this.el.shadowRoot.getElementById('alert-body');
     const contentHeight = bodyElm.scrollHeight + 'px';
@@ -90,6 +91,7 @@ export class VaAlertExpandable {
       'calc(' + contentHeight + ' + 2rem)',
     );
   }
+  /* eslint-enable i18next/no-literal-string */
 
   componentDidLoad() {
     this.updateAlertBodyMaxHeight();
@@ -104,8 +106,10 @@ export class VaAlertExpandable {
       open: open,
       closed: !open,
     });
+    /* eslint-disable i18next/no-literal-string */
     const role = status === 'error' ? 'alert' : null;
     const ariaLive = status === 'error' ? 'assertive' : null;
+    /* eslint-enable i18next/no-literal-string */
 
     return (
       <Host>

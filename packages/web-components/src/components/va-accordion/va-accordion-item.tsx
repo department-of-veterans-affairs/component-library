@@ -103,6 +103,8 @@ export class VaAccordionItem {
 
     const Header = () =>
       h(
+        // TODO: Remove level & header prop & let the slot do its work
+        /* eslint-disable-next-line i18next/no-literal-string */
         this.slotTag || ieSlotCheckTag || `h${this.level}`,
         null,
         <button

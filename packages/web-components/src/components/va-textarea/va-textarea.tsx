@@ -131,7 +131,7 @@ export class VaTextarea {
       <Host>
         <label htmlFor="textarea">
           {label}
-          {required && <span class="required">(*{i18next.t('required')})</span>}
+          {required && <span class="required">{i18next.t('required')}</span>}
         </label>
         {error && (
           <span id="error-message" role="alert">
@@ -150,7 +150,7 @@ export class VaTextarea {
         />
         {maxlength && value?.length >= maxlength && (
           <small aria-live="polite">
-            ({i18next.t('max-chars', { length: maxlength })})
+            {i18next.t('max-chars', { length: maxlength })}
           </small>
         )}
       </Host>
