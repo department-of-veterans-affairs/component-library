@@ -1,0 +1,30 @@
+{
+  "font": {
+    "family": {
+      "sans": { "value": "'Source Sans Pro', 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif" },
+      "serif": { "value": "Bitter, Georgia, Cambria, 'Times New Roman', Times, serif" }
+    },
+    "weight": {
+      "normal": { "value": "400"},
+      "bold": { "value": "700"}
+    },
+    "style": {
+      "normal": { "value": "normal" },
+      "italic": { "value": "italic" }
+    },
+    "size": {
+      "sm": { "value": "1.5rem" },
+      "base": { "value": "1.6rem" },
+      "md": { "value": "1.7rem" },
+      "lg": { "value": "2rem" },
+      "xl": { "value": "3rem" },
+      "2xl": { "value": "4rem" },
+      "h1": { "value": "{font.size.2xl}" },
+      "h2": { "value": "{font.size.xl}" },
+      "h3": { "value": "{font.size.lg}" },
+      "h4": { "value": "{font.size.md}" },
+      "h5": { "value": "{font.size.sm}" },
+      "h6": { "value": "{font.size.sm}" }
+    }
+  }
+}
