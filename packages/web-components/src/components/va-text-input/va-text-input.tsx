@@ -229,12 +229,12 @@ export class VaTextInput {
           part="input"
         />
         {maxlength && value?.length >= maxlength && (
-          <small aria-live="polite" part="validation">
+          <small part="validation">
             {i18next.t('max-chars', { length: maxlength })}
           </small>
         )}
         {minlength && value?.length < minlength && (
-          <small aria-live="polite" part="validation">
+          <small part="validation">
             (Min. {minlength} characters)
           </small>
         )}
