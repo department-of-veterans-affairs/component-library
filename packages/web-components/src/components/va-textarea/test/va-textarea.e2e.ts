@@ -44,7 +44,7 @@ describe('va-textarea', () => {
     // Render the error message text
     const requiredSpan = await page.find('va-textarea >>> .required');
     // This is the key for i18next
-    expect(requiredSpan).toEqualText('(*required)');
+    expect(requiredSpan).toEqualText('required');
   });
 
   it('passes an aXe check', async () => {
@@ -145,7 +145,7 @@ describe('va-textarea', () => {
     expect(await textareaEl.getProperty('value')).toBe('222');
     // This is the i18next key surrounded by parentheses
     expect((await page.find('va-textarea >>> small')).innerText).toContain(
-      '(max-chars)',
+      'max-chars',
     );
   });
 

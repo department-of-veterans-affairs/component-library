@@ -17,6 +17,10 @@ This repo uses [`Chromatic`](https://www.chromatic.com/) to streamline reviews b
 - Your branch must contain only lowercase letters, numbers and dashes
 - Your branch must not exceed 37 characters
 
+### Content language
+
+Our web components have linting which checks for hard-coded user-facing strings. At the moment this linting isn't integrated into CI - so you will only see it if you run `yarn lint` or if your editor has ESLint integration through a plugin.
+
 ## Publishing
 
 ### Updating the version

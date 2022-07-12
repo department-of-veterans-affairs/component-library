@@ -125,7 +125,7 @@ export class VaNumberInput {
       <Host>
         <label id="inputField-label" htmlFor="inputField">
           {label}{' '}
-          {required && <span class="required">(*{i18next.t('required')})</span>}
+          {required && <span class="required">{i18next.t('required')}</span>}
         </label>
         {error && (
           <span id="error-message" role="alert">

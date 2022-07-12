@@ -142,7 +142,7 @@ export class VaSelect {
         <label htmlFor="select" id="select-label" part="label">
           {label}
           {required && (
-            <span class="required">{`(*${i18next.t('required')})`}</span>
+            <span class="required">{i18next.t('required')}</span>
           )}
         </label>
         {error && (
