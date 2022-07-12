@@ -180,4 +180,14 @@ describe('va-button', () => {
     await button.click();
     expect(clickSpy).toHaveReceivedEventTimes(0);
   });
+
+  it('has the correct aria-label when label is given', async () => {
+    const page = await newE2EPage();
+    await page.setContent(
+      '<va-button label="Edit dependent" text="Edit"></va-button>',
+    );
+
+    const button = await page.find('va-button >>> button');
+    expect(button.getAttribute('aria-label')).toEqual('Edit dependent');
+  });
 });
