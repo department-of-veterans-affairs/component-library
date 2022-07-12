@@ -11,10 +11,10 @@ describe('va-number-input', () => {
     expect(element).toEqualHtml(`
       <va-number-input class="hydrated" label="Hello, world">
         <mock:shadow-root>
-          <label for="inputField" id="inputField-label">
+          <label for="inputField">
             Hello, world
           </label>
-          <input aria-labelledby="inputField-label" id="inputField" type="number" />
+          <input id="inputField" type="number" />
         </mock:shadow-root>
       </va-number-input>
     `);
