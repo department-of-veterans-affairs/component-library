@@ -112,13 +112,13 @@ export class VaLink {
       );
     }
 
-    // Channel link variant
-    if (channel) {
+    // Channel and Video link variant
+    if (channel || video) {
       return (
         <Host>
           <a href={href} onClick={handleClick} rel="noopener" target="_blank">
             <i aria-hidden="true" />
-            {text} <dfn>YouTube</dfn>
+            {text} <dfn>{channel ? 'YouTube' : 'on YouTube'}</dfn>
           </a>
         </Host>
       );
@@ -134,24 +134,9 @@ export class VaLink {
             {filetype && (
               <dfn>
                 (<abbr title={getAbbreviationTitle()}>{filetype}</abbr>
-                {pages &&
-                  typeof pages === 'number' &&
-                  `, ${pages.toString()} pages`}
-                )
+                {pages && `, ${pages} pages`})
               </dfn>
             )}
-          </a>
-        </Host>
-      );
-    }
-
-    // Video link variant
-    if (video) {
-      return (
-        <Host>
-          <a href={href} onClick={handleClick} rel="noopener" target="_blank">
-            <i aria-hidden="true" />
-            {text} <dfn>on YouTube</dfn>
           </a>
         </Host>
       );
