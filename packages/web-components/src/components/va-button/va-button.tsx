@@ -126,7 +126,7 @@ export class VaButton {
       <Host>
         <button
           aria-disabled={ariaDisabled}
-          aria-label={label || buttonText}
+          aria-label={label}
           type={type}
           part="button"
         >
