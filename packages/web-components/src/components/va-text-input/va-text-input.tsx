@@ -32,6 +32,7 @@ export class VaTextInput {
   /**
    * Input types we will allow to be specified with the "type" prop.
    */
+  /* eslint-disable-next-line i18next/no-literal-string */
   allowedInputTypes = ['email', 'number', 'search', 'tel', 'text', 'url'];
 
   /**
@@ -132,6 +133,7 @@ export class VaTextInput {
       consoleDevError(
         `The input type "${this.type}" is invalid or unsupported!`,
       );
+      /* eslint-disable-next-line i18next/no-literal-string */
       return 'text';
     }
 
@@ -201,7 +203,7 @@ export class VaTextInput {
           <label htmlFor="inputField" part="label">
             {label}{' '}
             {required && (
-              <span class="required">(*{i18next.t('required')})</span>
+              <span class="required">{i18next.t('required')}</span>
             )}
           </label>
         )}
@@ -227,12 +229,12 @@ export class VaTextInput {
           part="input"
         />
         {maxlength && value?.length >= maxlength && (
-          <small aria-live="polite" part="validation">
-            ({i18next.t('max-chars', { length: maxlength })})
+          <small part="validation">
+            {i18next.t('max-chars', { length: maxlength })}
           </small>
         )}
         {minlength && value?.length < minlength && (
-          <small aria-live="polite" part="validation">
+          <small part="validation">
             (Min. {minlength} characters)
           </small>
         )}

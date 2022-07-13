@@ -85,9 +85,11 @@ export class VaMemorableDate {
     const numFormatter = new Intl.NumberFormat('en-US', {
       minimumIntegerDigits: 2,
     });
+    /* eslint-disable i18next/no-literal-string */
     this.value = `${year}-${month ? numFormatter.format(monthNum) : ''}-${
       day ? numFormatter.format(dayNum) : ''
     }`;
+    /* eslint-enable i18next/no-literal-string */
 
     const daysForSelectedMonth = monthNum > 0 ? days[monthNum] : [];
     const leapYear = checkLeapYear(yearNum);
@@ -127,9 +129,11 @@ export class VaMemorableDate {
       currentYear = target.value;
     }
 
+    /* eslint-disable i18next/no-literal-string */
     this.value = `${currentYear}-${currentMonth ? currentMonth : ''}-${
       currentDay ? currentDay : ''
     }`;
+    /* eslint-enable i18next/no-literal-string */
 
     // This event should always fire to allow for validation handling
     this.dateChange.emit(event);

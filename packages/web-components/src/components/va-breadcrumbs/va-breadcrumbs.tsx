@@ -70,6 +70,7 @@ export class VaBreadcrumbs {
       const li = document.createElement('li');
       li.classList.add('va-breadcrumbs-li');
       if (index === anchorNodes.length - 1) {
+        /* eslint-disable-next-line i18next/no-literal-string */
         crumb.setAttribute('aria-current', 'page');
       }
       crumb.parentNode.replaceChild(li, crumb);

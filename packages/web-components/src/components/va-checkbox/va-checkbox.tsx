@@ -125,10 +125,9 @@ export class VaCheckbox {
           id="checkbox-element"
           checked={checked}
           aria-describedby={error ? 'error-message' : undefined}
-          aria-labelledby="checkbox-label"
           onChange={this.handleChange}
         />
-        <label htmlFor="checkbox-element" id="checkbox-label">
+        <label htmlFor="checkbox-element">
           {label}
           {required && <span class="required">(*Required)</span>}
         </label>

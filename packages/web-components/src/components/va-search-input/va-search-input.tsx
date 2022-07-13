@@ -348,6 +348,7 @@ export class VaSearchInput {
      */
     const isCombobox = formattedSuggestions.length;
     const ariaAutoComplete = isCombobox ? 'list' : 'none';
+    /* eslint-disable-next-line i18next/no-literal-string */
     const ariaControls = isCombobox ? 'va-search-listbox' : undefined;
     /**
      * If isCombobox is false, set aria-expanded to undefined
@@ -359,9 +360,11 @@ export class VaSearchInput {
         ? 'true'
         : 'false'
       : undefined;
+    /* eslint-disable i18next/no-literal-string */
     const ariaHasPopup = isCombobox ? 'listbox' : undefined;
     const role = isCombobox ? 'combobox' : undefined;
     const type = this.el.getAttribute('type') || 'text';
+    /* eslint-enable i18next/no-literal-string */
 
     return (
       <Host onBlur={handleBlur}>
