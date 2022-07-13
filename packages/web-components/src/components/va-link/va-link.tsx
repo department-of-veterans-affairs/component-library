@@ -1,12 +1,4 @@
-import {
-  Component,
-  Event,
-  EventEmitter,
-  Host,
-  h,
-  Prop,
-  Fragment,
-} from '@stencil/core';
+import { Component, Event, EventEmitter, Host, h, Prop } from '@stencil/core';
 
 @Component({
   tag: 'va-link',
@@ -44,7 +36,20 @@ export class VaLink {
    */
   @Prop() filename?: string;
 
-  // @Prop() type?: string;
+  /**
+   * The type of the file. Only displayed if download is `true`.
+   */
+  @Prop() filetype?: 'PDF';
+
+  /**
+   * The number of pages of the file. Only displayed if download is `true`.
+   */
+  @Prop() pages?: number;
+
+  /**
+   * The anchor text.
+   */
+  @Prop() text!: string;
 
   /**
    * If `true`, a video icon will be displayed before the anchor text.
@@ -74,40 +79,89 @@ export class VaLink {
     });
   };
 
+  private getAbbreviationTitle = () => {
+    const { filetype } = this;
+    if (!filetype) return;
+    if (filetype === 'PDF') return 'Portable Document Format';
+  };
+
   render() {
     const {
       active,
       channel,
       download,
+      filetype,
       filename,
+      getAbbreviationTitle,
       handleClick,
       href,
-      // type
+      pages,
+      text,
       video,
     } = this;
 
+    // Active link variant
+    if (active) {
+      return (
+        <Host>
+          <a href={href} onClick={handleClick}>
+            {text}
+            <i aria-hidden="true" />
+          </a>
+        </Host>
+      );
+    }
+
+    // Channel link variant
+    if (channel) {
+      return (
+        <Host>
+          <a href={href} onClick={handleClick} rel="noopener" target="_blank">
+            <i aria-hidden="true" />
+            {text} <dfn>YouTube</dfn>
+          </a>
+        </Host>
+      );
+    }
+
+    // Download link variant
+    if (download) {
+      return (
+        <Host>
+          <a href={href} download={filename} onClick={handleClick}>
+            <i aria-hidden="true" />
+            {text}{' '}
+            {filetype && (
+              <dfn>
+                (<abbr title={getAbbreviationTitle()}>{filetype}</abbr>
+                {pages &&
+                  typeof pages === 'number' &&
+                  `, ${pages.toString()} pages`}
+                )
+              </dfn>
+            )}
+          </a>
+        </Host>
+      );
+    }
+
+    // Video link variant
+    if (video) {
+      return (
+        <Host>
+          <a href={href} onClick={handleClick} rel="noopener" target="_blank">
+            <i aria-hidden="true" />
+            {text} <dfn>on YouTube</dfn>
+          </a>
+        </Host>
+      );
+    }
+
+    // Default
     return (
       <Host>
-        <a
-          href={href}
-          download={download ? filename : undefined}
-          // Property 'type' does not exist on type 'AnchorHTMLAttributes<HTMLAnchorElement>'
-          // type={download ? type : undefined}
-          onClick={handleClick}
-          rel={channel || video ? 'noopener' : undefined}
-          target={channel || video ? '_blank' : undefined}
-        >
-          {active ? (
-            <Fragment>
-              <slot></slot>
-              <i aria-hidden="true" />
-            </Fragment>
-          ) : (
-            <Fragment>
-              <i aria-hidden="true" />
-              <slot></slot>
-            </Fragment>
-          )}
+        <a href={href} onClick={handleClick}>
+          {text}
         </a>
       </Host>
     );

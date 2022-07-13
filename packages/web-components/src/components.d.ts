@@ -308,9 +308,21 @@ export namespace Components {
          */
         "filename"?: string;
         /**
+          * The type of the file. Only displayed if download is `true`.
+         */
+        "filetype"?: 'PDF';
+        /**
           * The href attribute of the anchor.
          */
         "href": string;
+        /**
+          * The number of pages of the file. Only displayed if download is `true`.
+         */
+        "pages"?: number;
+        /**
+          * The anchor text.
+         */
+        "text": string;
         /**
           * If `true`, a video icon will be displayed before the anchor text.
          */
@@ -1347,6 +1359,10 @@ declare namespace LocalJSX {
          */
         "filename"?: string;
         /**
+          * The type of the file. Only displayed if download is `true`.
+         */
+        "filetype"?: 'PDF';
+        /**
           * The href attribute of the anchor.
          */
         "href": string;
@@ -1354,6 +1370,14 @@ declare namespace LocalJSX {
           * The event used to track usage of the component.
          */
         "onComponent-library-analytics"?: (event: CustomEvent<any>) => void;
+        /**
+          * The number of pages of the file. Only displayed if download is `true`.
+         */
+        "pages"?: number;
+        /**
+          * The anchor text.
+         */
+        "text": string;
         /**
           * If `true`, a video icon will be displayed before the anchor text.
          */

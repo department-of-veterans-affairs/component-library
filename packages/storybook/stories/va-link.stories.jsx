@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
 
 const linkDocs = getWebComponentDocs('va-link');
@@ -14,146 +14,79 @@ export default {
 };
 
 const defaultArgs = {
-  active: undefined,
-  channel: undefined,
-  download: undefined,
-  href: 'https://www.va.gov',
-  filename: undefined,
-  video: undefined,
+  'active': undefined,
+  'channel': undefined,
+  'disable-analytics': undefined,
+  'download': undefined,
+  'href': 'https://www.va.gov',
+  'filename': undefined,
+  'filetype': undefined,
+  'pages': undefined,
+  'text': undefined,
+  'video': undefined,
 };
 
-const Template = ({ active, channel, download, href, filename, video }) => {
+const Template = ({
+  active,
+  channel,
+  'disable-analytics': disableAnalytics,
+  download,
+  href,
+  filename,
+  filetype,
+  pages,
+  text,
+  video,
+}) => {
   return (
     <va-link
       active={active}
       channel={channel}
+      disable-analytics={disableAnalytics}
       download={download}
       href={href}
       filename={filename}
+      filetype={filetype}
+      pages={pages}
+      text={text}
       video={video}
-    >
-      Find out if you qualify for this program and how to apply
-    </va-link>
+    />
   );
 };
 
 export const Default = Template.bind(null);
 Default.args = {
   ...defaultArgs,
+  text: 'Find out if you qualify for this program and how to apply',
 };
 Default.argTypes = propStructure(linkDocs);
 
-const ActiveTemplate = ({
-  active,
-  channel,
-  download,
-  href,
-  filename,
-  video,
-}) => {
-  return (
-    <va-link
-      active={active}
-      channel={channel}
-      download={download}
-      href={href}
-      filename={filename}
-      video={video}
-    >
-      Share your VA medical records
-    </va-link>
-  );
-};
-
-export const Active = ActiveTemplate.bind(null);
+export const Active = Template.bind(null);
 Active.args = {
   ...defaultArgs,
   active: true,
+  text: 'Share your VA medical records',
 };
 
-const DownloadTemplate = ({
-  active,
-  channel,
-  download,
-  href,
-  filename,
-  video,
-}) => {
-  return (
-    <va-link
-      active={active}
-      channel={channel}
-      download={download}
-      href={href}
-      filename={filename}
-      video={video}
-    >
-      Download VA form 10-10EZ
-      <dfn>
-        (<abbr title="Portable Document Format">PDF</abbr>, 5 pages)
-      </dfn>
-    </va-link>
-  );
-};
-
-export const Download = DownloadTemplate.bind(null);
+export const Download = Template.bind(null);
 Download.args = {
   ...defaultArgs,
   download: true,
+  text: 'Download VA form 10-10EZ',
+  filetype: 'PDF',
+  pages: '5',
 };
 
-const VideoTemplate = ({
-  active,
-  channel,
-  download,
-  href,
-  filename,
-  video,
-}) => {
-  return (
-    <va-link
-      active={active}
-      channel={channel}
-      download={download}
-      href={href}
-      filename={filename}
-      video={video}
-    >
-      Go to the video about VA disability compensation <dfn>on YouTube</dfn>
-    </va-link>
-  );
-};
-
-export const Video = VideoTemplate.bind(null);
+export const Video = Template.bind(null);
 Video.args = {
   ...defaultArgs,
   video: true,
+  text: 'Go to the video about VA disability compensation',
 };
 
-const ChannelTemplate = ({
-  active,
-  channel,
-  download,
-  href,
-  filename,
-  video,
-}) => {
-  return (
-    <va-link
-      active={active}
-      channel={channel}
-      download={download}
-      href={href}
-      filename={filename}
-      video={video}
-    >
-      Veteran's Affairs <dfn>YouTube</dfn>
-    </va-link>
-  );
-};
-
-export const Channel = ChannelTemplate.bind(null);
+export const Channel = Template.bind(null);
 Channel.args = {
   ...defaultArgs,
   channel: true,
+  text: `Veteran's Affairs`,
 };

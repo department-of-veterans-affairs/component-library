@@ -47,3 +47,11 @@ i::before {
   font-weight: 400;
   margin-right: 8px;
 }
+
+dfn {
+  font-style: normal;
+}
+
+abbr {
+  text-decoration: none;
+}
