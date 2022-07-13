@@ -74,7 +74,7 @@ Download.args = {
   download: true,
   text: 'Download VA form 10-10EZ',
   filetype: 'PDF',
-  pages: '5',
+  pages: 5,
 };
 
 export const Video = Template.bind(null);
