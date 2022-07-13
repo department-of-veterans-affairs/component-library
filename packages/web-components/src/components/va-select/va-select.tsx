@@ -139,7 +139,7 @@ export class VaSelect {
 
     return (
       <Host>
-        <label htmlFor="select" id="select-label" part="label">
+        <label htmlFor="select" part="label">
           {label}
           {required && (
             <span class="required">{i18next.t('required')}</span>
@@ -152,7 +152,6 @@ export class VaSelect {
         )}
         <slot onSlotchange={() => this.populateOptions()}></slot>
         <select
-          aria-labelledby="select-label"
           aria-describedby={error ? 'error-message' : undefined}
           id="select"
           name={name}
