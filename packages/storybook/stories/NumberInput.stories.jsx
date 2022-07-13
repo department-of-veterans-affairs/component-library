@@ -8,7 +8,7 @@ export default {
   parameters: {
     componentSubtitle: 'Number input React component',
     docs: {
-      page: () => <StoryDocs componentName="NumberInput" />,
+      page: () => <StoryDocs componentName="NumberInput - React" />,
     },
   },
 };

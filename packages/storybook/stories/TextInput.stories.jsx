@@ -8,7 +8,7 @@ export default {
   parameters: {
     componentSubtitle: 'Text input React component',
     docs: {
-      page: () => <StoryDocs componentName="TextInput" />,
+      page: () => <StoryDocs componentName="TextInput - React" />,
     },
   },
 };
