@@ -44,7 +44,7 @@ describe('va-date', () => {
 
   it('puts an aria-describedby attribute on child components when there is an error', async () => {
     const page = await newE2EPage();
-    await page.setContent('<va--date error="This is a mistake" />');
+    await page.setContent('<va-date error="This is a mistake" />');
 
     const firstInput= await page.find('va-date >>> va-select:nth-child(1)');
     const secondInput = await page.find('va-date >>> va-select:nth-child(2)');
