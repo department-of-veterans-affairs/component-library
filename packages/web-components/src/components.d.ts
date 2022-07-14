@@ -288,6 +288,10 @@ export namespace Components {
     }
     interface VaLink {
         /**
+          * The title used in the abbr element. If filetype is PDF, the abbr title will be Portable Document Format.
+         */
+        "abbrTitle"?: string;
+        /**
           * If `true`, the anchor text will be bolded and include a right arrow icon.
          */
         "active"?: boolean;
@@ -310,7 +314,7 @@ export namespace Components {
         /**
           * The type of the file. Only displayed if download is `true`.
          */
-        "filetype"?: 'PDF';
+        "filetype"?: string;
         /**
           * The href attribute of the anchor.
          */
@@ -1339,6 +1343,10 @@ declare namespace LocalJSX {
     }
     interface VaLink {
         /**
+          * The title used in the abbr element. If filetype is PDF, the abbr title will be Portable Document Format.
+         */
+        "abbrTitle"?: string;
+        /**
           * If `true`, the anchor text will be bolded and include a right arrow icon.
          */
         "active"?: boolean;
@@ -1361,7 +1369,7 @@ declare namespace LocalJSX {
         /**
           * The type of the file. Only displayed if download is `true`.
          */
-        "filetype"?: 'PDF';
+        "filetype"?: string;
         /**
           * The href attribute of the anchor.
          */

@@ -7,6 +7,11 @@ import { Component, Event, EventEmitter, Host, h, Prop } from '@stencil/core';
 })
 export class VaLink {
   /**
+   * The title used in the abbr element. If filetype is PDF, the abbr title will be Portable Document Format.
+   */
+  @Prop() abbrTitle?: string;
+
+  /**
    * If `true`, the anchor text will be bolded and include a right arrow icon.
    */
   @Prop() active?: boolean = false;
@@ -39,7 +44,7 @@ export class VaLink {
   /**
    * The type of the file. Only displayed if download is `true`.
    */
-  @Prop() filetype?: 'PDF';
+  @Prop() filetype?: string;
 
   /**
    * The number of pages of the file. Only displayed if download is `true`.
@@ -80,9 +85,9 @@ export class VaLink {
   };
 
   private getAbbreviationTitle = () => {
-    const { filetype } = this;
-    if (!filetype) return;
+    const { abbrTitle, filetype } = this;
     if (filetype === 'PDF') return 'Portable Document Format';
+    return abbrTitle;
   };
 
   render() {
