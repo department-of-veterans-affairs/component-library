@@ -215,13 +215,14 @@ export class VaDate {
           </legend>
           <slot />
           {error && (
-            <span class="error-message" role="alert">
+            <span id="error-message" role="alert">
               <span class="sr-only">Error</span> {error}
             </span>
           )}
           <div class="date-container">
             <va-select
               label="Month"
+              aria-describedby={error ? 'error-message' : undefined}
               name={`${name}Month`}
               // Value must be a string
               value={month?.toString()}
@@ -238,6 +239,7 @@ export class VaDate {
             {!monthYearOnly && (
               <va-select
                 label="Day"
+                aria-describedby={error ? 'error-message' : undefined}
                 name={`${name}Day`}
                 // If day value set is greater than amount of days in the month
                 // set to empty string instead
@@ -256,6 +258,7 @@ export class VaDate {
             )}
             <va-text-input
               label="Year"
+              aria-describedby={error ? 'error-message' : undefined}
               name={`${name}Year`}
               maxlength={4}
               minlength={4}
