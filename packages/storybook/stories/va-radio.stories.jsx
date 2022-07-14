@@ -14,7 +14,7 @@ export default {
   title: `Components/${componentName}`,
   subcomponents: componentStructure(radioItem),
   parameters: {
-    componentSubtitle: `va-radio`,
+    componentSubtitle: `va-radio web component`,
     docs: {
       page: () => <StoryDocs componentName={componentName} data={radioDocs} />,
     },

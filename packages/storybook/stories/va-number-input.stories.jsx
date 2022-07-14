@@ -7,7 +7,7 @@ const componentName = 'Number input';
 export default {
   title: `Components/${componentName}`,
   parameters: {
-    componentSubtitle: `va-number-input`,
+    componentSubtitle: `va-number-input web component`,
     docs: {
       page: () => <StoryDocs componentName={componentName} data={numberInputDocs} />,
     },

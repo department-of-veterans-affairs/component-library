@@ -24,7 +24,7 @@ export default {
     },
   },
   parameters: {
-    componentSubtitle: `va-alert`,
+    componentSubtitle: `va-alert web component`,
     docs: {
       page: () => <StoryDocs componentName={componentName} data={alertDocs} />,
     },

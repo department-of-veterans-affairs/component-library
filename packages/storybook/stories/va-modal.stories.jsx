@@ -10,7 +10,7 @@ const componentName = 'Modal';
 export default {
   title: `Components/${componentName}`,
   parameters: {
-    componentSubtitle: `va-modal`,
+    componentSubtitle: `va-modal web component`,
     docs: {
       page: () => <StoryDocs componentName={componentName} data={modalDocs} />,
     },

@@ -7,7 +7,7 @@ const componentName = 'Additional info';
 export default {
   title: `Components/${componentName}`,
   parameters: {
-    componentSubtitle: `va-additional-info`,
+    componentSubtitle: `va-additional-info web component`,
     docs: {
       page: () => <StoryDocs componentName={componentName} data={additionalInfoDocs} />,
     },

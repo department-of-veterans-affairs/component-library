@@ -10,7 +10,7 @@ const componentName = 'Search input';
 export default {
   title: `Components/${componentName}`,
   parameters: {
-    componentSubtitle: 'va-search-input',
+    componentSubtitle: 'va-search-input web component',
     docs: {
       page: () => <StoryDocs componentName={componentName} data={searchDocs} />,
     },

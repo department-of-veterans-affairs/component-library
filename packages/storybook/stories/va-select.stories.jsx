@@ -8,7 +8,7 @@ const componentName = 'Select';
 export default {
   title: `Components/${componentName}`,
   parameters: {
-    componentSubtitle: 'va-select',
+    componentSubtitle: 'va-select web component',
     docs: {
       page: () => <StoryDocs componentName={componentName} data={selectDocs} />,
     },

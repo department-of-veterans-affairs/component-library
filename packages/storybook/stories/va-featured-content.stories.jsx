@@ -8,7 +8,7 @@ const componentName = 'Featured content';
 export default {
   title: `Components/${componentName}`,
   parameters: {
-    componentSubtitle: `va-featured-content`,
+    componentSubtitle: `va-featured-content web component`,
     docs: {
       page: () => <StoryDocs componentName={componentName} data={featuredContentDocs} />,
     },

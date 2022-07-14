@@ -30,7 +30,7 @@ const Contacts = () => (
 export default {
   title: `Components/${componentName}`,
   parameters: {
-    componentSubtitle: `va-telephone`,
+    componentSubtitle: `va-telephone web component`,
     actions: {
       handles: ['component-library-analytics'],
     },

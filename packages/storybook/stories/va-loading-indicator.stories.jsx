@@ -8,7 +8,7 @@ const componentName = 'Loading indicator';
 export default {
   title: `Components/${componentName}`,
   parameters: {
-    componentSubtitle: `va-loading-indicator`,
+    componentSubtitle: `va-loading-indicator web component`,
     docs: {
       page: () => <StoryDocs componentName={componentName} data={loadingIndicatorDocs} />,
     },

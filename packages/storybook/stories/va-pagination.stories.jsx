@@ -9,7 +9,7 @@ const componentName = 'Pagination';
 export default {
   title: `Components/${componentName}`,
   parameters: {
-    componentSubtitle: `va-pagination`,
+    componentSubtitle: `va-pagination web component`,
     docs: {
       page: () => <StoryDocs componentName={componentName} data={paginationDocs} />,
     },

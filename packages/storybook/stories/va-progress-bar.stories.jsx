@@ -7,7 +7,7 @@ const componentName = 'Progress bar - activity';
 export default {
   title: `Components/${componentName}`,
   parameters: {
-    componentSubtitle: `va-progress-bar`,
+    componentSubtitle: `va-progress-bar web component`,
     docs: {
       page: () => <StoryDocs componentName={componentName} data={progressBarDocs} />,
     },

@@ -14,7 +14,7 @@ export default {
   title: `Components/${componentName}`,
   subcomponents: componentStructure(accordionItem),
   parameters: {
-    componentSubtitle: `va-accordion`,
+    componentSubtitle: `va-accordion web component`,
     docs: {
       page: () => <StoryDocs componentName={componentName} data={accordionDocs} />,
     },

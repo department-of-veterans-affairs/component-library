@@ -27,8 +27,8 @@ export const additionalDocs = {
   'Button - CSS': {
     guidanceHref: 'button',
     guidanceName: 'Button',
-    maturityCategory: USE,
-    maturityLevel: BEST_PRACTICE,
+    maturityCategory: DONT_USE,
+    maturityLevel: DEPRECATED,
   },
   'Breadcrumbs - React': {
     maturityCategory: DONT_USE,

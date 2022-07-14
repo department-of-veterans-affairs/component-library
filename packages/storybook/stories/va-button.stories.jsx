@@ -7,7 +7,7 @@ const componentName = 'Button';
 export default {
   title: `Components/${componentName}`,
   parameters: {
-    componentSubtitle: `va-button`,
+    componentSubtitle: `va-button web component`,
     docs: {
       page: () => <StoryDocs componentName={componentName} data={buttonDocs} />,
     },

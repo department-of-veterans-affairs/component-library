@@ -9,7 +9,7 @@ const componentName = 'Checkbox';
 export default {
   title: `Components/${componentName}`,
   parameters: {
-    componentSubtitle: `va-checkbox`,
+    componentSubtitle: `va-checkbox web component`,
     docs: {
       page: () => <StoryDocs componentName={componentName} data={checkboxDocs} />,
     },

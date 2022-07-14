@@ -8,7 +8,7 @@ const componentName = 'Textarea';
 export default {
   title: `Components/${componentName}`,
   parameters: {
-    componentSubtitle: `va-textarea`,
+    componentSubtitle: `va-textarea web component`,
     docs: {
       page: () => <StoryDocs componentName={componentName} data={textareaDocs} />,
     },

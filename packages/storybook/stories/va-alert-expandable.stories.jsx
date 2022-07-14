@@ -7,7 +7,7 @@ const componentName = 'Alert - expandable';
 export default {
   title: `Components/${componentName}`,
   parameters: {
-    componentSubtitle: `va-alert-expandable`,
+    componentSubtitle: `va-alert-expandable web component`,
     docs: {
       page: () => <StoryDocs componentName={componentName} data={alertExpandableDocs} />,
     },

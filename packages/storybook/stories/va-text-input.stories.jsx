@@ -8,7 +8,7 @@ const componentName = 'Text input';
 export default {
   title: `Components/${componentName}`,
   parameters: {
-    componentSubtitle: `va-text-input`,
+    componentSubtitle: `va-text-input web component`,
     docs: {
       page: () => <StoryDocs componentName={componentName} data={textInputDocs} />,
     },

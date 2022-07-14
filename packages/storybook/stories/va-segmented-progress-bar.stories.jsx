@@ -9,7 +9,7 @@ const componentName = 'Progress bar - segmented';
 export default {
   title: `Components/${componentName}`,
   parameters: {
-    componentSubtitle: `va-segmented-progress-bar`,
+    componentSubtitle: `va-segmented-progress-bar web component`,
     docs: {
       page: () => <StoryDocs componentName={componentName} data={segmentedProgressBarDocs} />,
     },

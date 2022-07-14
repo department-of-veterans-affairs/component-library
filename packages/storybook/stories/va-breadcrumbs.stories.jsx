@@ -7,7 +7,7 @@ const componentName = 'Breadcrumbs';
 export default {
   title: `Components/${componentName}`,
   parameters: {
-    componentSubtitle: 'va-breadcrumbs',
+    componentSubtitle: 'va-breadcrumbs web component',
     docs: {
       page: () => <StoryDocs componentName={componentName} data={breadcrumbsDocs} />,
     },

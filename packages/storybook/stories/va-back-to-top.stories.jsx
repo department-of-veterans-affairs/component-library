@@ -7,7 +7,7 @@ const componentName = 'Back to top';
 export default {
   title: `Components/${componentName}`,
   parameters: {
-    componentSubtitle: `va-back-to-top`,
+    componentSubtitle: `va-back-to-top web component`,
     docs: {
       page: () => <StoryDocs componentName={componentName} data={bttDocs} />,
     },

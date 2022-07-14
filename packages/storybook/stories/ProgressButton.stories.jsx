@@ -6,7 +6,7 @@ export default {
   title: 'Components/Buttons/ProgressButton',
   component: ProgressButton,
   parameters: {
-    componentSubtitle: 'Progress button component',
+    componentSubtitle: 'Progress button  React component',
     docs: {
       page: () => <StoryDocs componentName="ProgressButton" />,
     },

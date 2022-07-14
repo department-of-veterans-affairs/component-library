@@ -10,7 +10,7 @@ const componentName = 'Memorable date';
 export default {
   title: `Components/${componentName}`,
   parameters: {
-    componentSubtitle: `va-memorable-date`,
+    componentSubtitle: `va-memorable-date web component`,
     docs: {
       page: () => <StoryDocs componentName={componentName} data={memorableDateInputDocs} />,
     },

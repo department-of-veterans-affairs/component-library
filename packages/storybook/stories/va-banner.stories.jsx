@@ -7,7 +7,7 @@ const componentName = 'Banner';
 export default {
   title: `Components/${componentName}`,
   parameters: {
-    componentSubtitle: `va-banner`,
+    componentSubtitle: `va-banner web component`,
     docs: {
       page: () => <StoryDocs componentName={componentName} data={bannerDocs} />,
     },

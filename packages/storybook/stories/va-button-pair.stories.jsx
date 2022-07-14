@@ -11,7 +11,7 @@ const componentName = 'Button pair';
 export default {
   title: `Components/${componentName}`,
   parameters: {
-    componentSubtitle: `va-button-pair`,
+    componentSubtitle: `va-button-pair web component`,
     docs: {
       page: () => <StoryDocs componentName={componentName} data={buttonPairDocs} />,
     },

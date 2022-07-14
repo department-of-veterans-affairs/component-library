@@ -10,7 +10,7 @@ const componentName = 'Date';
 export default {
   title: `Components/${componentName}`,
   parameters: {
-    componentSubtitle: `va-date`,
+    componentSubtitle: `va-date web component`,
     docs: {
       page: () => <StoryDocs componentName={componentName} data={dateDocs} />,
     },

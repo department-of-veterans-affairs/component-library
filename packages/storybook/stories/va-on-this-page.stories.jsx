@@ -7,7 +7,7 @@ const componentName = 'On this page';
 export default {
   title: `Components/${componentName}`,
   parameters: {
-    componentSubtitle: 'va-on-this-page',
+    componentSubtitle: 'va-on-this-page web component',
     docs: {
       page: () => <StoryDocs componentName={componentName} data={otpDocs} />,
     },

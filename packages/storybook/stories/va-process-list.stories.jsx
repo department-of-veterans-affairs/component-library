@@ -8,7 +8,7 @@ const componentName = 'Process list';
 export default {
   title: `Components/${componentName}`,
   parameters: {
-    componentSubtitle: `va-process-list`,
+    componentSubtitle: `va-process-list web component`,
     docs: {
       page: () => <StoryDocs componentName={componentName} data={processListDocs} />,
     },

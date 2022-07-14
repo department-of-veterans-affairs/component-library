@@ -14,7 +14,7 @@ export default {
   title: `Components/${componentName}`,
   subcomponents: componentStructure(checkbox),
   parameters: {
-    componentSubtitle: 'va-checkbox-group',
+    componentSubtitle: 'va-checkbox-group web component',
     actions: {
       handles: ['component-library-analytics'],
     },

@@ -7,7 +7,7 @@ const componentName = 'Table';
 export default {
   title: `Components/${componentName}`,
   parameters: {
-    componentSubtitle: 'va-table',
+    componentSubtitle: 'va-table web component',
     docs: {
       page: () => <StoryDocs componentName={componentName} data={tableDocs} />,
     },

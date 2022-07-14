@@ -7,7 +7,7 @@ const componentName = 'Promo banner';
 export default {
   title: `Components/${componentName}`,
   parameters: {
-    componentSubtitle: 'va-promo-banner',
+    componentSubtitle: 'va-promo-banner web component',
     docs: {
       page: () => <StoryDocs componentName={componentName} data={promoBannerDocs} />,
     },
