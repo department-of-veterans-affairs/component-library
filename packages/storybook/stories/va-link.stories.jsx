@@ -14,6 +14,7 @@ export default {
 };
 
 const defaultArgs = {
+  'abbr-title': undefined,
   'active': undefined,
   'channel': undefined,
   'disable-analytics': undefined,
@@ -27,6 +28,7 @@ const defaultArgs = {
 };
 
 const Template = ({
+  'abbr-title': abbrTitle,
   active,
   channel,
   'disable-analytics': disableAnalytics,
@@ -40,6 +42,7 @@ const Template = ({
 }) => {
   return (
     <va-link
+      abbr-title={abbrTitle}
       active={active}
       channel={channel}
       disable-analytics={disableAnalytics}
