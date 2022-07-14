@@ -176,6 +176,8 @@ export class VaMemorableDate {
 
     const [year, month, day] = (value || '').split('-');
 
+    const describedBy = ["dateHint", error ? "error-message" : null].join(" ")
+
     // Error attribute should be leveraged for custom error messaging
     // Fieldset has an implicit aria role of group
     return (
@@ -190,7 +192,7 @@ export class VaMemorableDate {
           </legend>
           <slot />
           {error && (
-            <span class="error-message" role="alert">
+            <span id="error-message" role="alert">
               <span class="sr-only">Error</span> {error}
             </span>
           )}
@@ -201,7 +203,7 @@ export class VaMemorableDate {
               maxlength={2}
               minlength={2}
               pattern="[0-9]*"
-              aria-describedby="dateHint"
+              aria-describedby={describedBy}
               // Value must be a string
               // if NaN provide empty string
               value={month?.toString()}
@@ -217,7 +219,7 @@ export class VaMemorableDate {
               maxlength={2}
               minlength={2}
               pattern="[0-9]*"
-              aria-describedby="dateHint"
+              aria-describedby={describedBy}
               // Value must be a string
               // if NaN provide empty string
               value={day?.toString()}
@@ -233,7 +235,7 @@ export class VaMemorableDate {
               maxlength={4}
               minlength={4}
               pattern="[0-9]*"
-              aria-describedby="dateHint"
+              aria-describedby={describedBy}
               // Value must be a string
               // if NaN provide empty string
               value={year?.toString()}

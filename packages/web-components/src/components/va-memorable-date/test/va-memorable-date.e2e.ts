@@ -45,6 +45,12 @@ describe('va-memorable-date', () => {
 
     // Render the error message text
     const error = await page.find('va-memorable-date >>> span.error-message');
+    const firstInput= await page.find('va-memorable-date >>> va-text-input:nth-child(1)');
+    const secondInput = await page.find('va-memorable-date >>> va-text-input:nth-child(2)');
+    const thirdInput = await page.find('va-memorable-date >>> va-text-input:nth-child(3)');
+    expect(firstInput.getAttribute('aria-describedby')).toContain('error-message');
+    expect(secondInput.getAttribute('aria-describedby')).toContain('error-message');
+    expect(thirdInput.getAttribute('aria-describedby')).toContain('error-message');
     expect(error.innerText).toContain('This is a mistake');
   });
 
