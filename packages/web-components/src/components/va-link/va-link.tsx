@@ -71,9 +71,8 @@ export class VaLink {
   })
   componentLibraryAnalytics: EventEmitter;
 
+  /** @ts-ignore */
   private handleClick = (e: MouseEvent): void => {
-    // TODO: remove console.log
-    console.log(e);
     if (this.disableAnalytics) return;
     this.componentLibraryAnalytics.emit({
       componentName: 'va-link',
