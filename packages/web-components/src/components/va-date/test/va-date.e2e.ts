@@ -38,7 +38,7 @@ describe('va-date', () => {
     await page.setContent('<va-date error="This is a mistake" />');
 
     // Render the error message text
-    const error = await page.find('va-date >>> span.error-message');
+    const error = await page.find('va-date >>> span#error-message');
     expect(error.innerText).toContain('This is a mistake');
   });
 
@@ -66,7 +66,7 @@ describe('va-date', () => {
     await page.waitForChanges();
 
     // Assert
-    const errorSpan = await page.find('va-date >>> span.error-message');
+    const errorSpan = await page.find('va-date >>> span#error-message');
     expect(errorSpan.textContent).toContain("Fill me out");
   });
 
