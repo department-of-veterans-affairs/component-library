@@ -176,7 +176,10 @@ export class VaMemorableDate {
 
     const [year, month, day] = (value || '').split('-');
 
-    const describedBy = ["dateHint", error ? "error-message" : null].join(" ")
+    // Add the `error-message` to the id list if there is an error
+    const describedBy = ["dateHint", error ? "error-message" : null]
+      .filter(id => !!id)
+      .join(" ");
 
     // Error attribute should be leveraged for custom error messaging
     // Fieldset has an implicit aria role of group
