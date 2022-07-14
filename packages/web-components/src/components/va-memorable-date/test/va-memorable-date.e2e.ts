@@ -44,7 +44,7 @@ describe('va-memorable-date', () => {
     await page.setContent('<va-memorable-date error="This is a mistake" />');
 
     // Render the error message text
-    const error = await page.find('va-memorable-date >>> span.error-message');
+    const error = await page.find('va-memorable-date >>> span#error-message');
     const firstInput= await page.find('va-memorable-date >>> va-text-input:nth-child(1)');
     const secondInput = await page.find('va-memorable-date >>> va-text-input:nth-child(2)');
     const thirdInput = await page.find('va-memorable-date >>> va-text-input:nth-child(3)');
