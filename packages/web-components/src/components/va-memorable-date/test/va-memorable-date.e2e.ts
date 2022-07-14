@@ -45,13 +45,20 @@ describe('va-memorable-date', () => {
 
     // Render the error message text
     const error = await page.find('va-memorable-date >>> span#error-message');
+
+    expect(error.innerText).toContain('This is a mistake');
+  });
+
+  it('puts an aria-describedby attribute on child components when there is an error', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-memorable-date error="This is a mistake" />');
+
     const firstInput= await page.find('va-memorable-date >>> va-text-input:nth-child(1)');
     const secondInput = await page.find('va-memorable-date >>> va-text-input:nth-child(2)');
     const thirdInput = await page.find('va-memorable-date >>> va-text-input:nth-child(3)');
     expect(firstInput.getAttribute('aria-describedby')).toContain('error-message');
     expect(secondInput.getAttribute('aria-describedby')).toContain('error-message');
     expect(thirdInput.getAttribute('aria-describedby')).toContain('error-message');
-    expect(error.innerText).toContain('This is a mistake');
   });
 
   it('renders a required span', async () => {
