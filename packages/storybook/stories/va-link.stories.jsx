@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
 
 const linkDocs = getWebComponentDocs('va-link');
@@ -41,6 +41,48 @@ const Template = ({
   video,
 }) => {
   return (
+    <Fragment>
+      If you need help to gather your information or fill out your
+      application/form,{' '}
+      <va-link
+        abbr-title={abbrTitle}
+        active={active}
+        channel={channel}
+        disable-analytics={disableAnalytics}
+        download={download}
+        href={href}
+        filename={filename}
+        filetype={filetype}
+        pages={pages}
+        text={text}
+        video={video}
+      />
+    </Fragment>
+  );
+};
+
+export const Default = Template.bind(null);
+Default.args = {
+  ...defaultArgs,
+  href: 'https://va.gov/vso/',
+  text: 'contact a local Veterans Service Organization (VSO)',
+};
+Default.argTypes = propStructure(linkDocs);
+
+const VariantTemplate = ({
+  'abbr-title': abbrTitle,
+  active,
+  channel,
+  'disable-analytics': disableAnalytics,
+  download,
+  href,
+  filename,
+  filetype,
+  pages,
+  text,
+  video,
+}) => {
+  return (
     <va-link
       abbr-title={abbrTitle}
       active={active}
@@ -57,21 +99,14 @@ const Template = ({
   );
 };
 
-export const Default = Template.bind(null);
-Default.args = {
-  ...defaultArgs,
-  text: 'Find out if you qualify for this program and how to apply',
-};
-Default.argTypes = propStructure(linkDocs);
-
-export const Active = Template.bind(null);
+export const Active = VariantTemplate.bind(null);
 Active.args = {
   ...defaultArgs,
   active: true,
   text: 'Share your VA medical records',
 };
 
-export const Download = Template.bind(null);
+export const Download = VariantTemplate.bind(null);
 Download.args = {
   ...defaultArgs,
   download: true,
@@ -80,14 +115,14 @@ Download.args = {
   pages: 5,
 };
 
-export const Video = Template.bind(null);
+export const Video = VariantTemplate.bind(null);
 Video.args = {
   ...defaultArgs,
   video: true,
   text: 'Go to the video about VA disability compensation',
 };
 
-export const Channel = Template.bind(null);
+export const Channel = VariantTemplate.bind(null);
 Channel.args = {
   ...defaultArgs,
   channel: true,
