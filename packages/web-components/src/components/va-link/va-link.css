@@ -1,7 +1,7 @@
 @import '../../mixins/links.css';
 
 :host {
-  display: block;
+  display: inline-block;
 }
 
 :host a {
@@ -23,29 +23,28 @@ i::before {
   font-variant: normal;
   font-weight: 900;
   line-height: 1;
+  margin-right: 0.8rem;
   text-rendering: auto;
 }
 
 :host([active]:not([active='false'])) i::before {
-  content: '\f105';
-  margin-left: 8px;
+  content: '\f105'; /* fa-angle-right */
+  margin-left: 0.8rem;
+  margin-right: 0;
 }
 
 :host([download]:not([download='false'])) i::before {
-  content: '\f019';
-  margin-right: 8px;
+  content: '\f019'; /* fa-download */
 }
 
 :host([video]:not([video='false'])) i::before {
-  content: '\f144';
-  margin-right: 8px;
+  content: '\f144'; /* fa-circle-play */
 }
 
 :host([channel]:not([channel='false'])) i::before {
-  content: '\f167';
+  content: '\f167'; /* fa-youtube */
   font-family: 'Font Awesome 5 Brands';
   font-weight: 400;
-  margin-right: 8px;
 }
 
 dfn {
