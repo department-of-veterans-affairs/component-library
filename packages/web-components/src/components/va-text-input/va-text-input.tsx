@@ -46,6 +46,12 @@ export class VaTextInput {
   @Prop() error?: string;
 
   /**
+   * Whether or not `aria-invalid` will be set on the inner input. Useful when
+   * composing the component into something larger, like a date component.
+   */
+  @Prop() invalid?: boolean = false;
+
+  /**
    * Set the input to required and render the (Required) text.
    */
   @Prop() required?: boolean = false;
@@ -185,6 +191,7 @@ export class VaTextInput {
     const {
       label,
       error,
+      invalid,
       inputmode,
       required,
       value,
@@ -220,7 +227,7 @@ export class VaTextInput {
           onInput={handleInput}
           onBlur={handleBlur}
           aria-describedby={error ? 'error-message' : undefined}
-          aria-invalid={error ? 'true' : 'false'}
+          aria-invalid={(invalid || error) ? 'true' : 'false'}
           inputmode={inputmode ? inputmode : undefined}
           maxlength={maxlength}
           minlength={minlength}

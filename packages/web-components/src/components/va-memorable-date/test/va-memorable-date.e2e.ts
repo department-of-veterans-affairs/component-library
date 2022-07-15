@@ -158,7 +158,7 @@ describe('va-memorable-date', () => {
     expect(elementDay.getAttribute('value')).toBe('12');
   });
 
-  it('fires a error message onBlur if date is invalid and component is required', async () => {
+  it('fires an error message onBlur if date is invalid and component is required', async () => {
     const page = await newE2EPage();
     await page.setContent(
       '<va-memorable-date value="1999-05-03" name="test" required="true" />',
@@ -182,6 +182,49 @@ describe('va-memorable-date', () => {
     await handleYear.press('Tab');
     await page.waitForChanges();
     expect(date.getAttribute('error')).toEqual('');
+  });
+
+  it('sets the appropriate aria-invalid attribute', async () => {
+    const page = await newE2EPage();
+    await page.setContent(
+      '<va-memorable-date value="1999-05-03" name="test" required="true" />',
+    );
+    const handleYear = await page.$('pierce/[name="testYear"]');
+    const handleMonth = await page.$('pierce/[name="testMonth"]');
+    const handleDay = await page.$('pierce/[name="testDay"]');
+    const getAriaInvalid =
+      (element: HTMLElement) => element.getAttribute('aria-invalid');
+
+    // Click three times to select all text in input
+    await handleYear.click({ clickCount: 3 });
+    await handleYear.press('2');
+    // Trigger Blur
+    await handleYear.press('Tab');
+
+    // Year only has one character - should be invalid
+    await page.waitForChanges();
+    let invalidYear = await handleYear.evaluate(getAriaInvalid);
+    let invalidMonth = await handleMonth.evaluate(getAriaInvalid);
+    let invalidDay = await handleDay.evaluate(getAriaInvalid);
+
+    expect(invalidYear).toEqual('true');
+    expect(invalidMonth).toEqual('false');
+    expect(invalidDay).toEqual('false');
+
+    await handleYear.press('0');
+    await handleYear.press('2');
+    await handleYear.press('2');
+    // Trigger Blur
+    await handleYear.press('Tab');
+    await page.waitForChanges();
+
+    invalidYear = await handleYear.evaluate(getAriaInvalid);
+    invalidMonth = await handleMonth.evaluate(getAriaInvalid);
+    invalidDay = await handleDay.evaluate(getAriaInvalid);
+
+    expect(invalidYear).toEqual('false');
+    expect(invalidMonth).toEqual('false');
+    expect(invalidDay).toEqual('false');
   });
 
   it('emits dateBlur event', async () => {
