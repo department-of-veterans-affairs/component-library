@@ -15,7 +15,7 @@ describe('va-text-input', () => {
             Hello, world
           </label>
           <slot></slot>
-          <input id="inputField" type="text" part="input" />
+          <input id="inputField" type="text" part="input" aria-invalid="false" />
         </mock:shadow-root>
       </va-text-input>
     `);
@@ -38,7 +38,7 @@ describe('va-text-input', () => {
             Name of issue
           </label>
           <slot></slot>
-          <input id="inputField" type="text" part="input" />
+          <input id="inputField" type="text" part="input" aria-invalid="false" />
         </mock:shadow-root>
         <p className="vads-u-font-weight--normal label-description">
           You can only add an issue that you've already received a VA decision
@@ -54,7 +54,9 @@ describe('va-text-input', () => {
 
     // Render the error message text
     const error = await page.find('va-text-input >>> span#error-message');
+    const input = await page.find('va-text-input >>> input');
     expect(error.innerText).toContain('This is a mistake');
+    expect(input.getAttribute('aria-invalid')).toEqual('true');
   });
 
   it('adds new aria-describedby for error message', async () => {
@@ -88,7 +90,7 @@ describe('va-text-input', () => {
             This is a field <span class="required">required</span>
           </label>
           <slot></slot>
-          <input id="inputField" type="text" required="" part="input" />
+          <input id="inputField" type="text" required="" part="input" aria-invalid="false" />
         </mock:shadow-root>
       </va-text-input>
     `);
