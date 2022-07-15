@@ -29,8 +29,18 @@ i::before {
 
 :host([active]:not([active='false'])) i::before {
   content: '\f105'; /* fa-angle-right */
+  margin-bottom: 0.1rem;
   margin-left: 0.8rem;
   margin-right: 0;
+  vertical-align: middle;
+}
+
+:host([active]:not([active='false'])) a:focus i::before,
+:host([active]:not([active='false'])) a:hover i::before {
+  margin-left: 1.2rem;
+  transition-duration: 0.3s;
+  transition-timing-function: ease-in-out;
+  transition-property: margin;
 }
 
 :host([download]:not([download='false'])) i::before {
