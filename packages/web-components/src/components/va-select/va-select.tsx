@@ -153,6 +153,7 @@ export class VaSelect {
         <slot onSlotchange={() => this.populateOptions()}></slot>
         <select
           aria-describedby={error ? 'error-message' : undefined}
+          aria-invalid={error ? 'true' : 'false'}
           id="select"
           name={name}
           required={required || null}
