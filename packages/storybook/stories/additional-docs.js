@@ -167,6 +167,10 @@ export const additionalDocs = {
     maturityCategory: USE,
     maturityLevel: DEPLOYED,
   },
+  'va-link': {
+    maturityCategory: CAUTION,
+    maturityLevel: CANDIDATE,
+  },
   'va-loading-indicator': {
     maturityCategory: USE,
     maturityLevel: BEST_PRACTICE,
