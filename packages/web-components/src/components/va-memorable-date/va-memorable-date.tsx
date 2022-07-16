@@ -103,8 +103,7 @@ export class VaMemorableDate {
     this.invalidYear = (
       !year ||
       yearNum < minYear ||
-      yearNum > maxYear ||
-      (!leapYear && monthNum === 2 && dayNum > 28)
+      yearNum > maxYear
     );
 
     this.invalidMonth = (
