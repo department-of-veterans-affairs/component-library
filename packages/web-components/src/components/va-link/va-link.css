@@ -1,0 +1,66 @@
+@import '../../mixins/links.css';
+
+:host {
+  display: inline;
+}
+
+:host a {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+:host([active]:not([active='false'])) a {
+  font-weight: 700;
+}
+
+i::before {
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  display: inline-block;
+  font-family: 'Font Awesome 5 Free';
+  font-size: 1.6rem;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: 900;
+  line-height: 1;
+  margin-right: 0.8rem;
+  text-rendering: auto;
+}
+
+:host([active]:not([active='false'])) i::before {
+  content: '\f105'; /* fa-angle-right */
+  margin-bottom: 0.1rem;
+  margin-left: 0.8rem;
+  margin-right: 0;
+  vertical-align: middle;
+}
+
+:host([active]:not([active='false'])) a:focus i::before,
+:host([active]:not([active='false'])) a:hover i::before {
+  margin-left: 1.2rem;
+  transition-duration: 0.3s;
+  transition-timing-function: ease-in-out;
+  transition-property: margin;
+}
+
+:host([download]:not([download='false'])) i::before {
+  content: '\f019'; /* fa-download */
+}
+
+:host([video]:not([video='false'])) i::before {
+  content: '\f144'; /* fa-circle-play */
+}
+
+:host([channel]:not([channel='false'])) i::before {
+  content: '\f167'; /* fa-youtube */
+  font-family: 'Font Awesome 5 Brands';
+  font-weight: 400;
+}
+
+dfn {
+  font-style: normal;
+}
+
+abbr {
+  text-decoration: none;
+}
