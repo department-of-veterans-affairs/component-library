@@ -59,6 +59,16 @@ describe('va-text-input', () => {
     expect(input.getAttribute('aria-invalid')).toEqual('true');
   });
 
+  it('sets aria-invalid based on error prop', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-text-input invalid />');
+
+    const error = await page.find('va-text-input >>> span#error-message');
+    const input = await page.find('va-text-input >>> input');
+    expect(error).toEqual(null);
+    expect(input.getAttribute('aria-invalid')).toEqual('true');
+  });
+
   it('adds new aria-describedby for error message', async () => {
     const page = await newE2EPage();
     await page.setContent('<va-text-input />');
