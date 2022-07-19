@@ -59,7 +59,7 @@ describe('va-text-input', () => {
     expect(input.getAttribute('aria-invalid')).toEqual('true');
   });
 
-  it('sets aria-invalid based on error prop', async () => {
+  it('sets aria-invalid based on invalid prop', async () => {
     const page = await newE2EPage();
     await page.setContent('<va-text-input invalid />');
 
