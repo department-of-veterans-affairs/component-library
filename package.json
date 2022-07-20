@@ -18,7 +18,14 @@
     "trim": "^0.0.3",
     "prism": "^1.27.0"
   },
+  "scripts": {
+    "semantic-release": "yarn workspaces run semantic-release -e semantic-release-monorepo"
+  },
   "dependencies": {
     "webpack": "5"
+  },
+  "devDependencies": {
+    "semantic-release": "^19.0.3",
+    "semantic-release-monorepo": "^7.0.5"
   }
 }
