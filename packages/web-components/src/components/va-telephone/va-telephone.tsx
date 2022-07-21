@@ -35,6 +35,12 @@ export class VaTelephone {
   @Prop() international?: boolean = false;
 
   /**
+   * Indicates if this is a number meant to be called
+   * from a teletypewriter for deaf users.
+   */
+  @Prop() tty?: boolean = false;
+
+  /**
    * Optional vanity phone number.
    * Replaces the last 4 digits with the vanity text input
    */
@@ -60,6 +66,7 @@ export class VaTelephone {
     extension: number,
     international: boolean = false,
     vanity: string,
+    tty: boolean = false,
   ): string {
     let formattedNum = num;
     if (num.length === 10) {
@@ -72,12 +79,15 @@ export class VaTelephone {
         formattedNum = `${area}-${local}-${vanity} (${last4})`;
       }
     }
+    if (tty) {
+      formattedNum = `TTY: ${formattedNum}`;
+    }
     return formattedNum;
   }
 
   /**
    * Format telephone number for screen readers
-   * @param {string} number - Expected a formatted phone number with or without extension
+   * @param {string} number - Expected a formatted phone number with or without extension or TTY pretext
    * @param {string} vanity - Using vanity prop set on the component to remove extra text added
    * via formatPhoneNumber to create the vanity number
    * @return {string} - Combined phone number parts within the label separated by
@@ -87,9 +97,14 @@ export class VaTelephone {
     const numberType = vanity
       ? number.split(/[^\d]+/)
       : number.split(/[^\d\w]+/);
+
     return numberType
       .filter(n => n)
-      .map(chunk => (chunk === 'ext' ? 'extension' : chunk.split('').join(' ')))
+      .map(chunk => {
+        if (chunk === 'ext')
+          return 'extension';
+        return chunk === 'TTY' ? 'TTY' : chunk.split('').join(' ');
+      })
       .join('. ');
   }
 
@@ -114,12 +129,13 @@ export class VaTelephone {
   }
 
   render() {
-    const { contact, extension, notClickable, international, vanity } = this;
+    const { contact, extension, notClickable, international, tty, vanity } = this;
     const formattedNumber = VaTelephone.formatPhoneNumber(
       contact,
       extension,
       international,
       vanity,
+      tty
     );
     const formattedAriaLabel = `${VaTelephone.formatTelLabel(
       formattedNumber,

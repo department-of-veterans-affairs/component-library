@@ -30,6 +30,10 @@ describe('formatPhoneNumber', () => {
   it('formats a contact number with vanity prop', () => {
     expect(VaTelephone.formatPhoneNumber(contact, null, null, vanity)).toBe('888-555-ABCD (1234)');
   });
+
+  it('formats a TTY number', () => {
+    expect(VaTelephone.formatPhoneNumber(N11, null, null, null, true)).toBe('TTY: 911');
+  });
 });
 
 describe('formatTelLabel', () => {
@@ -44,6 +48,7 @@ describe('formatTelLabel', () => {
     null
   );
   const formattedNumberWithVanity = VaTelephone.formatPhoneNumber(contact, null, null, vanity);
+  const formattedTTYNumber = VaTelephone.formatPhoneNumber(contact, null, null, null, true);
   it('formats a phone number into an assistive tech label', () => {
     expect(VaTelephone.formatTelLabel(formattedNumber, null)).toBe(
       '8 8 8. 5 5 5. 1 2 3 4',
@@ -59,6 +64,12 @@ describe('formatTelLabel', () => {
   it('formats a phone number into an assistive tech label with vanity', () => {
     expect(VaTelephone.formatTelLabel(formattedNumberWithVanity, vanity)).toBe(
       '8 8 8. 5 5 5. 1 2 3 4',
+    );
+  });
+
+  it('formats a TTY phone number', () => {
+    expect(VaTelephone.formatTelLabel(formattedTTYNumber, null)).toBe(
+      'TTY. 8 8 8. 5 5 5. 1 2 3 4',
     );
   });
 });
