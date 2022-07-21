@@ -51,6 +51,7 @@ const Template = ({
   international,
   ariaDescribedby,
   vanity,
+  tty,
 }) => {
   return (
     <div>
@@ -64,6 +65,7 @@ const Template = ({
         international={international}
         aria-describedby={ariaDescribedby}
         vanity={vanity}
+        tty={tty}
       ></va-telephone>
     </div>
   );
@@ -74,6 +76,7 @@ const defaultArgs = {
   'extension': undefined,
   'not-clickable': false,
   'international': false,
+  'tty': false,
   'vanity': undefined,
 };
 
@@ -105,6 +108,12 @@ export const International = Template.bind(null);
 International.args = {
   ...defaultArgs,
   international: true,
+};
+
+export const TTY = Template.bind(null);
+TTY.args = {
+  ...defaultArgs,
+  tty: true,
 };
 
 export const AriaDescribedBy = Template.bind(null);
