@@ -17,7 +17,7 @@ describe('va-omb-info', () => {
             </span>
           </div>
           <div>
-            <va-button class="hydrated"></va-button>
+            <va-button class="hydrated" secondary></va-button>
           </div>
           <va-modal class="hydrated">
             <slot></slot>
@@ -32,5 +32,34 @@ describe('va-omb-info', () => {
     await page.setContent('<va-omb-info exp-date="12/31/2077"></va-omb-info>');
 
     await axeCheck(page);
+  });
+
+  it('displays respondent burden when given a value for res-burden', async () => {
+    const page = await newE2EPage();
+    await page.setContent(
+      '<va-omb-info exp-date="12/31/2077" res-burden="120"></va-omb-info>',
+    );
+    const divElements = await page.findAll(`va-omb-info >>> div`);
+    let resBurden;
+    divElements.map(div => {
+      if (div.innerText.includes('Respondent burden: 120 minutes'))
+        resBurden = div;
+    });
+
+    expect(resBurden).toBeTruthy();
+  });
+
+  it('displays omb number when given a value for omb-number', async () => {
+    const page = await newE2EPage();
+    await page.setContent(
+      '<va-omb-info exp-date="12/31/2077" res-burden="120" omb-number="12-3456"></va-omb-info>',
+    );
+    const divElements = await page.findAll(`va-omb-info >>> div`);
+    let ombNumber;
+    divElements.map(div => {
+      if (div.innerText.includes('OMB Control #: 12-3456')) ombNumber = div;
+    });
+
+    expect(ombNumber).toBeTruthy();
   });
 });
