@@ -10,6 +10,7 @@ export class VaOmbInfo {
   @Element() el: HTMLElement;
 
   modalContents: HTMLDivElement | null = null;
+
   /**
    * If `true`, privacy act statement modal will be visible.
    */
@@ -129,7 +130,8 @@ export class VaOmbInfo {
         <div>
           <va-button
             onClick={toggleModalVisible}
-            text="Privacy Act Statement"
+            secondary
+            text="View Privacy Act Statement"
           />
         </div>
         <va-modal
