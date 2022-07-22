@@ -3,7 +3,6 @@ import {
   Component,
   Event,
   EventEmitter,
-  Host,
   Prop,
   Element,
   forceUpdate,
@@ -127,10 +126,11 @@ export class VaTextarea {
   render() {
     const { label, error, placeholder, name, required, value } = this;
     const maxlength = this.getMaxlength();
+    const wrapperClasses = classnames('usa-form-group', {'usa-form-group--error': error });
     const labelClasses = classnames('usa-label', {'usa-label--error': error });
 
     return (
-      <Host>
+      <div class={wrapperClasses}>
         <label htmlFor="textarea" class={labelClasses}>
           {label}
           {required && <span class="usa-label--required">{i18next.t('required')}</span>}
@@ -156,7 +156,7 @@ export class VaTextarea {
             {i18next.t('max-chars', { length: maxlength })}
           </small>
         )}
-      </Host>
+      </div>
     );
   }
 }
