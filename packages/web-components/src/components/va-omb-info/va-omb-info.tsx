@@ -1,5 +1,4 @@
 import { Component, Host, h, Prop, State, Element } from '@stencil/core';
-import { getSlottedNodes } from '../../utils/utils';
 
 @Component({
   tag: 'va-omb-info',
@@ -43,8 +42,10 @@ export class VaOmbInfo {
   };
 
   private handleSlotChange = () => {
-    if (getSlottedNodes(this.el, null)?.length) return;
+    this.modalContents = null;
+  };
 
+  componentWillLoad() {
     /* eslint-disable i18next/no-literal-string */
     this.modalContents = (
       <div>
@@ -98,7 +99,7 @@ export class VaOmbInfo {
       </div>
     );
     /* eslint-enable i18next/no-literal-string */
-  };
+  }
 
   render() {
     const {
