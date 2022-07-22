@@ -68,3 +68,30 @@ WithCustomRespondentBurdenBenefitType.args = {
   'omb-number': '12-3456',
   'res-burden': 90,
 };
+
+const SlotTemplate = ({
+  'benefit-type': benefitType,
+  'exp-date': expDate,
+  'omb-number': ombNumber,
+  'res-burden': resBurden,
+}) => {
+  return (
+    <va-omb-info
+      benefit-type={benefitType}
+      exp-date={expDate}
+      omb-number={ombNumber}
+      res-burden={resBurden}
+    >
+      Passing children content will override the default privacy act statement
+    </va-omb-info>
+  );
+};
+
+export const Children = SlotTemplate.bind(null);
+Children.args = {
+  ...defaultArgs,
+  'benefit-type': undefined,
+  'exp-date': '12/31/2077',
+  'omb-number': '12-3456',
+  'res-burden': 120,
+};
