@@ -1,3 +1,7 @@
 :host {
   display: block;
 }
+
+div > span {
+  font-weight: 700;
+}
