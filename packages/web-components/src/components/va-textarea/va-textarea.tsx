@@ -137,7 +137,7 @@ export class VaTextarea {
         </label>
         {error && (
           <span id="error-message" class="usa-error-message" role="alert">
-            <span class="sr-only">{i18next.t('error')}</span> {error}
+            <span class="usa-sr-only">{i18next.t('error')}</span> {error}
           </span>
         )}
         <textarea
