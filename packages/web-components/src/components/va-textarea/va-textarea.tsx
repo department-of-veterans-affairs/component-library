@@ -10,6 +10,7 @@ import {
   h,
 } from '@stencil/core';
 import i18next from 'i18next';
+import classnames from 'classnames';
 import { consoleDevError } from '../../utils/utils';
 
 if (Build.isTesting) {
@@ -126,19 +127,21 @@ export class VaTextarea {
   render() {
     const { label, error, placeholder, name, required, value } = this;
     const maxlength = this.getMaxlength();
+    const labelClasses = classnames('usa-label', {'usa-label--error': error });
 
     return (
       <Host>
-        <label htmlFor="textarea">
+        <label htmlFor="textarea" class={labelClasses}>
           {label}
-          {required && <span class="required">{i18next.t('required')}</span>}
+          {required && <span class="usa-label--required">{i18next.t('required')}</span>}
         </label>
         {error && (
-          <span id="error-message" role="alert">
+          <span id="error-message" class="usa-error-message" role="alert">
             <span class="sr-only">{i18next.t('error')}</span> {error}
           </span>
         )}
         <textarea
+          class="usa-textarea"
           aria-describedby={error ? 'error-message' : undefined}
           onInput={this.handleInput}
           onBlur={this.handleBlur}
