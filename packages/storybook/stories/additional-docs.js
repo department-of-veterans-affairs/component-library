@@ -184,6 +184,10 @@ export const additionalDocs = {
     maturityCategory: USE,
     maturityLevel: DEPLOYED,
   },
+  'va-omb-info': {
+    maturityCategory: CAUTION,
+    maturityLevel: CANDIDATE,
+  },
   'va-on-this-page': {
     maturityCategory: USE,
     maturityLevel: BEST_PRACTICE,
