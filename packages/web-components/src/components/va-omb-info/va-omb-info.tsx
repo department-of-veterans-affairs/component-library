@@ -49,10 +49,9 @@ export class VaOmbInfo {
     /* eslint-disable i18next/no-literal-string */
     this.modalContents = (
       <div>
-        <h3>Privacy Act Statement</h3>
         {this.resBurden && (
           <p>
-            <span>Respondent Burden:</span> We need this information to
+            <strong>Respondent Burden:</strong> We need this information to
             determine your eligibility for {this.benefitType} (38 U.S.C. 3471).
             Title 38, United States Code, allows us to ask for this information.
             We estimate that you will need an average of {this.resBurden}{' '}
@@ -68,16 +67,16 @@ export class VaOmbInfo {
           </p>
         )}
         <p>
-          <span>Privacy Act Notice:</span> The VA will not disclose information
-          collected on this form to any source other than what has been
-          authorized under the Privacy Act of 1974 or title 38, Code of Federal
-          Regulations, section 1.576 for routine uses (e.g., the VA sends
-          educational forms or letters with a veteran’s identifying information
-          to the Veteran’s school or training establishment to (1) assist the
-          veteran in the completion of claims forms or (2) for the VA to obtain
-          further information as may be necessary from the school for VA to
-          properly process the Veteran’s education claim or to monitor his or
-          her progress during training) as identified in the VA system of
+          <strong>Privacy Act Notice:</strong> The VA will not disclose
+          information collected on this form to any source other than what has
+          been authorized under the Privacy Act of 1974 or title 38, Code of
+          Federal Regulations, section 1.576 for routine uses (e.g., the VA
+          sends educational forms or letters with a veteran’s identifying
+          information to the Veteran’s school or training establishment to (1)
+          assist the veteran in the completion of claims forms or (2) for the VA
+          to obtain further information as may be necessary from the school for
+          VA to properly process the Veteran’s education claim or to monitor his
+          or her progress during training) as identified in the VA system of
           records, 58VA21/22/28, Compensation, Pension, Education, and
           Vocational Rehabilitation and Employment Records - VA, and published
           in the Federal Register. Your obligation to respond is required to
@@ -117,16 +116,16 @@ export class VaOmbInfo {
       <Host>
         {resBurden && (
           <div>
-            Respondent burden: <span>{resBurden} minutes</span>
+            Respondent burden: <strong>{resBurden} minutes</strong>
           </div>
         )}
         {ombNumber && (
           <div>
-            OMB Control #: <span>{ombNumber}</span>
+            OMB Control #: <strong>{ombNumber}</strong>
           </div>
         )}
         <div>
-          Expiration date: <span>{expDate}</span>
+          Expiration date: <strong>{expDate}</strong>
         </div>
         <div>
           <va-button

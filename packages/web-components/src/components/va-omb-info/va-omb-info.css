@@ -2,6 +2,6 @@
   display: block;
 }
 
-div > span {
+strong {
   font-weight: 700;
 }
