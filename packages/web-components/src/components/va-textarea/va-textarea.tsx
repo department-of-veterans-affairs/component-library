@@ -23,7 +23,7 @@ if (Build.isTesting) {
  */
 @Component({
   tag: 'va-textarea',
-  styleUrl: 'va-textarea.css',
+  styleUrl: 'va-textarea.scss',
   shadow: true,
 })
 export class VaTextarea {
