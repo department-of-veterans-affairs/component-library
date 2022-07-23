@@ -9,7 +9,11 @@ export const config: Config = {
   namespace: 'component-library',
   globalStyle: 'src/global/main.css',
   plugins: [
-    sass({ includePaths: ["../../node_modules/@uswds/uswds/packages/"] }),
+    sass({ includePaths: ["../../node_modules/@uswds/uswds/packages/"],
+      injectGlobalPaths: [
+        'src/global/settings.scss',
+      ]
+    }),
     postcss({
       plugins: [postcssSass({ verbose: true, loadPaths: ["../../node_modules/@uswds/uswds/foo"] }), url({ url: 'inline' })],
     }),
