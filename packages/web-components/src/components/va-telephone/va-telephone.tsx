@@ -57,6 +57,15 @@ export class VaTelephone {
   })
   componentLibraryAnalytics: EventEmitter;
 
+  static splitContact(contact: string) :string[] {
+    if (contact.length === 10) {
+      const regex = /(?<area>\d{3})(?<local>\d{3})(?<last4>\d{4})/g;
+      const { area, local, last4 } = regex.exec(contact).groups;
+      return [area, local, last4];
+    }
+    return [contact];
+  }
+
   /**
    * Format telephone number for display.
    * `international` and `extension` args only work on 10 digit contacts
@@ -70,8 +79,7 @@ export class VaTelephone {
   ): string {
     let formattedNum = num;
     if (num.length === 10) {
-      const regex = /(?<area>\d{3})(?<local>\d{3})(?<last4>\d{4})/g;
-      const { area, local, last4 } = regex.exec(num).groups;
+      const [ area, local, last4 ] = VaTelephone.splitContact(num);
       formattedNum = `${area}-${local}-${last4}`;
       if (international) formattedNum = `+1-${formattedNum}`;
       if (extension) formattedNum = `${formattedNum}, ext. ${extension}`;
@@ -87,25 +95,27 @@ export class VaTelephone {
 
   /**
    * Format telephone number for screen readers
-   * @param {string} number - Expected a formatted phone number with or without extension or TTY pretext
-   * @param {string} vanity - Using vanity prop set on the component to remove extra text added
-   * via formatPhoneNumber to create the vanity number
+   * @param {string} contact - The 10 or 3 digit contact prop
+   * @param {number} ext - The extension number
+   * @param {boolean} tty - Whether or not this is a TTY number
    * @return {string} - Combined phone number parts within the label separated by
    * periods, e.g. "800-555-1212" becomes "8 0 0. 5 5 5. 1 2 1 2"
    */
-  static formatTelLabel(number: string, vanity: string): string {
-    const numberType = vanity
-      ? number.split(/[^\d]+/)
-      : number.split(/[^\d\w]+/);
+  static formatTelLabel(contact: string, ext: number, tty: boolean, international: boolean): string {
+    const spaceCharsOut = chars => chars.split('').join(' ');
+    let labelPieces = VaTelephone.splitContact(contact)
+      .map(spaceCharsOut);
 
-    return numberType
-      .filter(n => n)
-      .map(chunk => {
-        if (chunk === 'ext')
-          return 'extension';
-        return chunk === 'TTY' ? 'TTY' : chunk.split('').join(' ');
-      })
-      .join('. ');
+    if (international)
+      labelPieces.unshift('1');
+    if (tty)
+      labelPieces.unshift('TTY');
+    if (ext) {
+      labelPieces.push('extension');
+      labelPieces.push(spaceCharsOut(ext.toString()));
+    }
+
+    return labelPieces.join('. ');
   }
 
   static createHref(contact: string, extension: number): string {
@@ -138,8 +148,10 @@ export class VaTelephone {
       tty
     );
     const formattedAriaLabel = `${VaTelephone.formatTelLabel(
-      formattedNumber,
-      vanity,
+      contact,
+      extension,
+      tty,
+      international
     )}.`;
 
     return notClickable ? (

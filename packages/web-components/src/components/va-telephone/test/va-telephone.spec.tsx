@@ -39,39 +39,30 @@ describe('formatPhoneNumber', () => {
 describe('formatTelLabel', () => {
   const contact = '8885551234';
   const extension = 123;
-  const vanity = 'ABCD';
-  const formattedNumber = VaTelephone.formatPhoneNumber(contact, null, null, null);
-  const formattedNumberWithExt = VaTelephone.formatPhoneNumber(
-    contact,
-    extension,
-    null,
-    null
-  );
-  const formattedNumberWithVanity = VaTelephone.formatPhoneNumber(contact, null, null, vanity);
-  const formattedTTYNumber = VaTelephone.formatPhoneNumber(contact, null, null, null, true);
   it('formats a phone number into an assistive tech label', () => {
-    expect(VaTelephone.formatTelLabel(formattedNumber, null)).toBe(
+    expect(VaTelephone.formatTelLabel(contact, null, false, false)).toBe(
       '8 8 8. 5 5 5. 1 2 3 4',
     );
   });
 
   it('formats a phone number with extension into an assistive tech label', () => {
-    expect(VaTelephone.formatTelLabel(formattedNumberWithExt, null)).toBe(
+    expect(VaTelephone.formatTelLabel(contact, extension, false, false)).toBe(
       '8 8 8. 5 5 5. 1 2 3 4. extension. 1 2 3',
     );
   });
 
-  it('formats a phone number into an assistive tech label with vanity', () => {
-    expect(VaTelephone.formatTelLabel(formattedNumberWithVanity, vanity)).toBe(
-      '8 8 8. 5 5 5. 1 2 3 4',
-    );
-  });
-
   it('formats a TTY phone number', () => {
-    expect(VaTelephone.formatTelLabel(formattedTTYNumber, null)).toBe(
+    expect(VaTelephone.formatTelLabel(contact, null, true, false)).toBe(
       'TTY. 8 8 8. 5 5 5. 1 2 3 4',
     );
   });
+
+  it('formats an international phone number', () => {
+    expect(VaTelephone.formatTelLabel(contact, null, false, true)).toBe(
+      '1. 8 8 8. 5 5 5. 1 2 3 4',
+    );
+  });
+
 });
 
 describe('createHref', () => {
