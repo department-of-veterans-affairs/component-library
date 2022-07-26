@@ -4,13 +4,13 @@ import {
   EventEmitter,
   Host,
   Prop,
+  State,
   h,
   Element,
 } from '@stencil/core';
 
 import {
   days,
-  isFullDate,
   checkLeapYear,
   maxMonths,
   maxYear,
@@ -76,8 +76,12 @@ export class VaMemorableDate {
   })
   dateBlur: EventEmitter;
 
+  @State() invalidDay: boolean = false;
+  @State() invalidMonth: boolean = false;
+  @State() invalidYear: boolean = false;
+
   private handleDateBlur = (event: FocusEvent) => {
-    const [year, month, day] = (this.value || '').split('-').map(val => val);
+    const [year, month, day] = (this.value || '').split('-');
     const yearNum = parseInt(year);
     const monthNum = parseInt(month);
     const dayNum = parseInt(day);
@@ -93,20 +97,39 @@ export class VaMemorableDate {
 
     const daysForSelectedMonth = monthNum > 0 ? days[monthNum] : [];
     const leapYear = checkLeapYear(yearNum);
-    // Check validity of date if invalid provide message and error state styling
+
+    if (this.required) {
+      // Set the state so that we can set aria-invalid on the right component
+      this.invalidYear = (
+        !year ||
+        yearNum < minYear ||
+        yearNum > maxYear
+      );
+
+      this.invalidMonth = (
+        !month ||
+        monthNum < minMonths ||
+        monthNum > maxMonths
+      );
+
+      this.invalidDay =  (
+        !day ||
+        dayNum < minMonths ||
+        dayNum > daysForSelectedMonth.length
+      );
+
+      if (!leapYear && monthNum === 2 && dayNum > 28) {
+        this.invalidYear = true;
+        this.invalidMonth = true;
+        this.invalidDay = true;
+      }
+    }
+
     if (
-      yearNum < minYear ||
-      yearNum > maxYear ||
-      monthNum < minMonths ||
-      monthNum > maxMonths ||
-      dayNum < minMonths ||
-      dayNum > daysForSelectedMonth.length ||
-      day === '' ||
-      month === '' ||
-      year === '' ||
-      (!leapYear && monthNum === 2 && dayNum > 28) ||
-      (this.required && !isFullDate(this.value))
-    ) {
+      this.invalidYear ||
+      this.invalidMonth ||
+      this.invalidDay)
+    {
       this.error = 'Please enter a valid date';
     } else if (this.error !== 'Please enter a valid date') {
       this.error;
@@ -202,6 +225,7 @@ export class VaMemorableDate {
               minlength={2}
               pattern="[0-9]*"
               aria-describedby="dateHint"
+              invalid={this.invalidMonth}
               // Value must be a string
               // if NaN provide empty string
               value={month?.toString()}
@@ -218,6 +242,7 @@ export class VaMemorableDate {
               minlength={2}
               pattern="[0-9]*"
               aria-describedby="dateHint"
+              invalid={this.invalidDay}
               // Value must be a string
               // if NaN provide empty string
               value={day?.toString()}
@@ -234,6 +259,7 @@ export class VaMemorableDate {
               minlength={4}
               pattern="[0-9]*"
               aria-describedby="dateHint"
+              invalid={this.invalidYear}
               // Value must be a string
               // if NaN provide empty string
               value={year?.toString()}

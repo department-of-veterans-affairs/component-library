@@ -50,6 +50,12 @@ export class VaSelect {
   @Prop() error?: string;
 
   /**
+   * Whether or not `aria-invalid` will be set on the inner select. Useful when
+   * composing the component into something larger, like a date component.
+   */
+  @Prop() invalid?: boolean = false;
+
+  /**
    * Whether or not to fire the analytics events
    */
   @Prop() enableAnalytics?: boolean = false;
@@ -135,7 +141,7 @@ export class VaSelect {
   }
 
   render() {
-    const { error, label, required, name } = this;
+    const { error, invalid, label, required, name } = this;
 
     return (
       <Host>
@@ -153,6 +159,7 @@ export class VaSelect {
         <slot onSlotchange={() => this.populateOptions()}></slot>
         <select
           aria-describedby={error ? 'error-message' : undefined}
+          aria-invalid={(invalid || error) ? 'true' : 'false'}
           id="select"
           name={name}
           required={required || null}

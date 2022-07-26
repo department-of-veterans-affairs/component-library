@@ -593,6 +593,10 @@ export namespace Components {
          */
         "error"?: string;
         /**
+          * Whether or not `aria-invalid` will be set on the inner select. Useful when composing the component into something larger, like a date component.
+         */
+        "invalid"?: boolean;
+        /**
           * Text label for the field.
          */
         "label": string;
@@ -670,6 +674,10 @@ export namespace Components {
     | 'tel'
     | 'text'
     | 'url';
+        /**
+          * Whether or not `aria-invalid` will be set on the inner input. Useful when composing the component into something larger, like a date component.
+         */
+        "invalid"?: boolean;
         /**
           * The label for the text input.
          */
@@ -1728,6 +1736,10 @@ declare namespace LocalJSX {
          */
         "error"?: string;
         /**
+          * Whether or not `aria-invalid` will be set on the inner select. Useful when composing the component into something larger, like a date component.
+         */
+        "invalid"?: boolean;
+        /**
           * Text label for the field.
          */
         "label": string;
@@ -1821,6 +1833,10 @@ declare namespace LocalJSX {
     | 'tel'
     | 'text'
     | 'url';
+        /**
+          * Whether or not `aria-invalid` will be set on the inner input. Useful when composing the component into something larger, like a date component.
+         */
+        "invalid"?: boolean;
         /**
           * The label for the text input.
          */

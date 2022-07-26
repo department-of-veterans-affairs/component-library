@@ -72,8 +72,10 @@ describe('va-radio', () => {
     const page = await newE2EPage();
     await page.setContent('<va-radio error="This is an error"></va-radio>');
 
-    const element = await page.find('va-radio >>> #error-message');
-    expect(element).toEqualHtml(`
+    const element = await page.find('va-radio');
+    const errorElement = await page.find('va-radio >>> #error-message');
+    expect(element.getAttribute('aria-invalid')).toEqual('true');
+    expect(errorElement).toEqualHtml(`
      <span id="error-message" role="alert">
        <span class="sr-only">
          Error

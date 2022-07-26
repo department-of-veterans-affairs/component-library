@@ -14,7 +14,7 @@ describe('va-number-input', () => {
           <label for="inputField">
             Hello, world
           </label>
-          <input id="inputField" type="number" />
+          <input id="inputField" type="number" aria-invalid="false" />
         </mock:shadow-root>
       </va-number-input>
     `);
@@ -26,7 +26,9 @@ describe('va-number-input', () => {
 
     // Render the error message text
     const error = await page.find('va-number-input >>> span#error-message');
+    const input = await page.find('va-number-input >>> input');
     expect(error.innerText).toContain('This is a mistake');
+    expect(input.getAttribute('aria-invalid')).toEqual('true');
   });
 
   it('renders a required span', async () => {
