@@ -2,7 +2,6 @@ import { Config } from '@stencil/core';
 import { postcss } from '@stencil/postcss';
 import { sass } from '@stencil/sass';
 import url from 'postcss-url';
-import postcssSass from '@csstools/postcss-sass';
 import { reactOutputTarget } from '@stencil/react-output-target';
 
 export const config: Config = {
@@ -15,7 +14,7 @@ export const config: Config = {
       ]
     }),
     postcss({
-      plugins: [postcssSass({ verbose: true, loadPaths: ["../../node_modules/@uswds/uswds/foo"] }), url({ url: 'inline' })],
+      plugins: [url({ url: 'inline' })],
     }),
   ],
   // This is for IE11 support

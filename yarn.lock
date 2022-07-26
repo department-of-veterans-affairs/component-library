@@ -1802,26 +1802,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@csstools/postcss-sass@npm:^5.0.1":
-  version: 5.0.1
-  resolution: "@csstools/postcss-sass@npm:5.0.1"
-  dependencies:
-    "@csstools/sass-import-resolve": ^1.0.0
-    sass: ^1.49.7
-    source-map: ~0.7.3
-  peerDependencies:
-    postcss: ^8.4.6
-  checksum: b55aa05056cee7200b73a9610ee79f09d0f755f318188322c9f59566c0bfc89d38d11d99b7fc25bec2c4334bf342ab7a379fa74dfb516f61da52e8cefeb6e2e2
-  languageName: node
-  linkType: hard
-
-"@csstools/sass-import-resolve@npm:^1.0.0":
-  version: 1.0.0
-  resolution: "@csstools/sass-import-resolve@npm:1.0.0"
-  checksum: 7f2d0399e2c09521fe50c0a0209e7fd3ebee76b75c08d440f897a0406fa0eed086f168342352274827f8e8864d3ccef22aed3aeaf3aad0499ccdec5912f10de9
-  languageName: node
-  linkType: hard
-
 "@department-of-veterans-affairs/component-library-monorepo@workspace:.":
   version: 0.0.0-use.local
   resolution: "@department-of-veterans-affairs/component-library-monorepo@workspace:."
@@ -1982,7 +1962,6 @@ __metadata:
   dependencies:
     "@axe-core/puppeteer": ^4.4.0
     "@babel/core": ^7.12.13
-    "@csstools/postcss-sass": ^5.0.1
     "@department-of-veterans-affairs/formation": ^7.0.1
     "@stencil/core": ^2.10.0
     "@stencil/postcss": ^2.0.0
@@ -17715,19 +17694,6 @@ resolve@^2.0.0-next.3:
   languageName: node
   linkType: hard
 
-"sass@npm:^1.49.7":
-  version: 1.53.0
-  resolution: "sass@npm:1.53.0"
-  dependencies:
-    chokidar: ">=3.0.0 <4.0.0"
-    immutable: ^4.0.0
-    source-map-js: ">=0.6.2 <2.0.0"
-  bin:
-    sass: sass.js
-  checksum: 4bcb0617d6a4d1f2c089a1cb5c32f65a9ee874b23559f2742fab07cf8478fb74ad20c0730cf9f93915d7dbfc258901f89970674228c3ac91c3883a0a62a0ddab
-  languageName: node
-  linkType: hard
-
 "sass@npm:^1.51.0":
   version: 1.51.0
   resolution: "sass@npm:1.51.0"
@@ -18336,13 +18302,6 @@ resolve@^2.0.0-next.3:
   version: 0.7.3
   resolution: "source-map@npm:0.7.3"
   checksum: cd24efb3b8fa69b64bf28e3c1b1a500de77e84260c5b7f2b873f88284df17974157cc88d386ee9b6d081f08fdd8242f3fc05c953685a6ad81aad94c7393dedea
-  languageName: node
-  linkType: hard
-
-"source-map@npm:~0.7.3":
-  version: 0.7.4
-  resolution: "source-map@npm:0.7.4"
-  checksum: 01cc5a74b1f0e1d626a58d36ad6898ea820567e87f18dfc9d24a9843a351aaa2ec09b87422589906d6ff1deed29693e176194dc88bcae7c9a852dc74b311dbf5
   languageName: node
   linkType: hard
 
