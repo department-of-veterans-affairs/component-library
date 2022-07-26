@@ -75,7 +75,7 @@ describe('va-memorable-date', () => {
     await handleYear.press('Tab');
 
     await page.waitForChanges();
-    expect(date.getAttribute('error')).toEqual('');
+    expect(date.getAttribute('error')).toEqual(null);
   });
 
   it('sets a label', async () => {
@@ -288,7 +288,7 @@ describe('va-memorable-date', () => {
       expect(invalidDay).toEqual('false');
     });
 
-    it.only('correctly indicates an invalid day', async () => {
+    it('correctly indicates an invalid day', async () => {
       const page = await newE2EPage();
       await page.setContent(
         '<va-memorable-date value="1999-05-03" name="test" required="true" />',
@@ -429,7 +429,7 @@ describe('va-memorable-date', () => {
   it('checks for valid year month and day', async () => {
     const page = await newE2EPage();
 
-    await page.setContent('<va-memorable-date name="test"/>');
+    await page.setContent('<va-memorable-date name="test" required/>');
     const date = await page.find('va-memorable-date');
     const handleMonth = await page.$('pierce/[name="testMonth"]');
     const handleDay = await page.$('pierce/[name="testDay"]');
