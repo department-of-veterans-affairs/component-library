@@ -27,45 +27,45 @@ export class VaAlert {
    * One of `info`, `error`, `success`, `warning`, or `continue`
    */
   //  Reflect Prop into DOM for va-banner: https://stenciljs.com/docs/properties#prop-options
-  @Prop({reflect: true}) status: string = 'info';
+  @Prop({ reflect: true }) status?: string = 'info';
 
   /**
-   * If true, renders the alert with only a background color corresponding
+   * If `true`, renders the alert with only a background color corresponding
    * to the status - no icon or left border.
    */
-  @Prop() backgroundOnly: boolean = false;
+  @Prop() backgroundOnly?: boolean = false;
 
   /**
-   * This option only takes effect when background-only is true. If true, the background-only alert will
+   * This option only takes effect when background-only is true. If `true`, the background-only alert will
    * include an icon.
    */
-  @Prop() showIcon: boolean = false;
+  @Prop() showIcon?: boolean = false;
 
   /**
-   * If true, doesn't fire the CustomEvent which can be used for analytics tracking.
+   * If `true`, doesn't fire the CustomEvent which can be used for analytics tracking.
    */
-  @Prop() disableAnalytics: boolean = false;
+  @Prop() disableAnalytics?: boolean = false;
 
   /**
-   * If true, the alert will be visible.
+   * If `true`, the alert will be visible.
    */
-  @Prop() visible: boolean = true;
+  @Prop() visible?: boolean = true;
 
   /**
    * Aria-label text for the close button.
    */
-  @Prop() closeBtnAriaLabel: string = 'Close notification';
+  @Prop() closeBtnAriaLabel?: string = 'Close notification';
 
   /**
-   * If true, a close button will be displayed.
+   * If `true`, a close button will be displayed.
    */
-  @Prop() closeable: boolean = false;
+  @Prop() closeable?: boolean = false;
 
   /**
-   * If true, the alert will be full width.
+   * If `true`, the alert will be full width.
    * Should be for emergency communication only.
    */
-  @Prop() fullWidth: boolean = false;
+  @Prop() fullWidth?: boolean = false;
 
   /**
    * Fires when the component has successfully finished rendering for the first
@@ -115,6 +115,7 @@ export class VaAlert {
       // This is where we handle the edge case of the user being on IE11
       const children = this.el.shadowRoot.childNodes;
       const headerList = children.filter((node: any) =>
+        /* eslint-disable-next-line i18next/no-literal-string */
         ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'].includes(
           node.tagName.toLowerCase(),
         ),
@@ -153,14 +154,20 @@ export class VaAlert {
       'bg-only': backgroundOnly,
       'hide-icon': backgroundOnly && !showIcon,
     });
+    /* eslint-disable i18next/no-literal-string */
     const role = status === 'error' ? 'alert' : null;
     const ariaLive = status === 'error' ? 'assertive' : null;
+    /* eslint-enable i18next/no-literal-string */
 
     if (!visible) return <div aria-live="polite" />;
 
     return (
       <Host>
-        <div role={this.el.getAttribute('data-role') || role} aria-live={ariaLive} class={classes}>
+        <div
+          role={this.el.getAttribute('data-role') || role}
+          aria-live={ariaLive}
+          class={classes}
+        >
           <i aria-hidden="true" role="img"></i>
           <div
             class="body"

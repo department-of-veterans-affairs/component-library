@@ -140,6 +140,10 @@ export const additionalDocs = {
     maturityCategory: CAUTION,
     maturityLevel: CANDIDATE,
   },
+  'va-button-pair': {
+    maturityCategory: CAUTION,
+    maturityLevel: CANDIDATE,
+  },
   'va-checkbox': {
     guidanceHref: 'form/checkbox',
     maturityCategory: USE,
@@ -156,12 +160,17 @@ export const additionalDocs = {
     maturityLevel: DEPLOYED,
   },
   'va-memorable-date': {
+    guidanceHref: 'form/memorable-date',
     maturityCategory: CAUTION,
     maturityLevel: CANDIDATE,
   },
   'va-featured-content': {
     maturityCategory: USE,
     maturityLevel: DEPLOYED,
+  },
+  'va-link': {
+    maturityCategory: CAUTION,
+    maturityLevel: CANDIDATE,
   },
   'va-loading-indicator': {
     maturityCategory: USE,

@@ -19,12 +19,12 @@ export class VaBreadcrumbs {
   /**
    * Adds an aria-label attribute to the <nav /> element.
    */
-  @Prop() label: string = 'Breadcrumb';
+  @Prop() label?: string = 'Breadcrumb';
 
   /**
    * Analytics tracking function(s) will not be called
    */
-  @Prop() disableAnalytics: boolean;
+  @Prop() disableAnalytics?: boolean = false;
 
   /**
    * The event used to track usage of the component. This is emitted when a
@@ -70,6 +70,7 @@ export class VaBreadcrumbs {
       const li = document.createElement('li');
       li.classList.add('va-breadcrumbs-li');
       if (index === anchorNodes.length - 1) {
+        /* eslint-disable-next-line i18next/no-literal-string */
         crumb.setAttribute('aria-current', 'page');
       }
       crumb.parentNode.replaceChild(li, crumb);

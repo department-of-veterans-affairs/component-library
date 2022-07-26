@@ -35,7 +35,7 @@ export class VaNumberInput {
   /**
    * Set the input to required and render the (Required) text.
    */
-  @Prop() required?: boolean;
+  @Prop() required?: boolean = false;
 
   /**
    * The inputmode attribute.
@@ -45,7 +45,7 @@ export class VaNumberInput {
   /**
    * Emit component-library-analytics events on the blur event.
    */
-  @Prop() enableAnalytics?: boolean;
+  @Prop() enableAnalytics?: boolean = false;
 
   /**
    * The name to pass to the input element.
@@ -123,9 +123,9 @@ export class VaNumberInput {
     } = this;
     return (
       <Host>
-        <label id="inputField-label" htmlFor="inputField">
+        <label htmlFor="inputField">
           {label}{' '}
-          {required && <span class="required">(*{i18next.t('required')})</span>}
+          {required && <span class="required">{i18next.t('required')}</span>}
         </label>
         {error && (
           <span id="error-message" role="alert">
@@ -134,7 +134,6 @@ export class VaNumberInput {
         )}
         <input
           aria-describedby={error ? 'error-message' : undefined}
-          aria-labelledby="inputField-label"
           id="inputField"
           type="number"
           inputmode={inputmode ? inputmode : null}

@@ -22,7 +22,7 @@ export class VaCheckbox {
   /**
    * The label for the checkbox.
    */
-  @Prop() label: string;
+  @Prop() label!: string;
 
   /**
    * The error message to render.
@@ -38,12 +38,12 @@ export class VaCheckbox {
   /**
    * Set the input to required and render the (Required) text.
    */
-  @Prop() required?: boolean;
+  @Prop() required?: boolean = false;
 
   /**
    * True if the analytics event should fire.
    */
-  @Prop() enableAnalytics: boolean = false;
+  @Prop() enableAnalytics?: boolean = false;
 
   /**
    * Whether the checkbox is checked or not.
@@ -52,7 +52,7 @@ export class VaCheckbox {
    * will not reflect the correct value. Use the property vaCheckbox.checked
    * instead.
    */
-  @Prop({ mutable: true }) checked: boolean = false;
+  @Prop({ mutable: true }) checked?: boolean = false;
 
   /**
    * The event emitted when the input value changes.
@@ -125,10 +125,9 @@ export class VaCheckbox {
           id="checkbox-element"
           checked={checked}
           aria-describedby={error ? 'error-message' : undefined}
-          aria-labelledby="checkbox-label"
           onChange={this.handleChange}
         />
-        <label htmlFor="checkbox-element" id="checkbox-label">
+        <label htmlFor="checkbox-element">
           {label}
           {required && <span class="required">(*Required)</span>}
         </label>

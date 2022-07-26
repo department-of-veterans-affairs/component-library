@@ -66,6 +66,7 @@ export class VaBackToTop {
     // This ensures that when the button is revealed but not docked,
     // its width is the same as its parent.
     const undockedWidth = this.el.getBoundingClientRect().width;
+    /* eslint-disable-next-line i18next/no-literal-string */
     this.el.style.setProperty('--undocked-width', `${undockedWidth}px`);
 
     return (

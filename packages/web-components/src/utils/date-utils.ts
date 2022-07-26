@@ -18,6 +18,7 @@ export const months = [
   { label: 'December', value: 12 },
 ];
 
+/* eslint-disable i18next/no-literal-string */
 export const twentyNineDays = [
   '1',
   '2',
@@ -161,3 +162,4 @@ export const validKeys = [
   'Tab',
   'Delete',
 ];
+/* eslint-enable i18next/no-literal-string */

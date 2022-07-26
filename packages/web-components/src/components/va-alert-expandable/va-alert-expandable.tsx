@@ -25,22 +25,22 @@ export class VaAlertExpandable {
    * Determines the icon and background color.
    * One of `info`, `error`, `success`, `warning`, or `continue`
    */
-   @Prop() status?: 'continue' | 'error' | 'info' | 'success' | 'warning'; 
+  @Prop() status?: 'continue' | 'error' | 'info' | 'success' | 'warning';
 
   /**
    * The text to trigger the expansion
    */
-  @Prop() trigger: string = '';
+  @Prop() trigger!: string;
 
   /**
-   * If true, doesn't fire the CustomEvent which can be used for analytics tracking.
+   * If `true`, doesn't fire the CustomEvent which can be used for analytics tracking.
    */
-  @Prop() disableAnalytics: boolean = false;
+  @Prop() disableAnalytics?: boolean = false;
 
   /**
-   * If true, the status icon is removed.
+   * If `true`, the status icon is removed.
    */
-  @Prop() iconless: boolean = false;
+  @Prop() iconless?: boolean = false;
 
   /**
    * The event used to track usage of the component. This is emitted when an
@@ -81,6 +81,7 @@ export class VaAlertExpandable {
   }
 
   // Ensures that the CSS animation is consistent and uses the correct max-height for its content
+  /* eslint-disable i18next/no-literal-string */
   updateAlertBodyMaxHeight() {
     const bodyElm = this.el.shadowRoot.getElementById('alert-body');
     const contentHeight = bodyElm.scrollHeight + 'px';
@@ -90,6 +91,7 @@ export class VaAlertExpandable {
       'calc(' + contentHeight + ' + 2rem)',
     );
   }
+  /* eslint-enable i18next/no-literal-string */
 
   componentDidLoad() {
     this.updateAlertBodyMaxHeight();
@@ -97,10 +99,17 @@ export class VaAlertExpandable {
 
   render() {
     const { status, open, iconless } = this;
-    const alertClasses = classnames('alert-expandable', status, { 'hide-icon': iconless });
-    const bodyClasses = classnames('alert-expandable-body', { 'open': open, 'closed': !open });
+    const alertClasses = classnames('alert-expandable', status, {
+      'hide-icon': iconless,
+    });
+    const bodyClasses = classnames('alert-expandable-body', {
+      open: open,
+      closed: !open,
+    });
+    /* eslint-disable i18next/no-literal-string */
     const role = status === 'error' ? 'alert' : null;
     const ariaLive = status === 'error' ? 'assertive' : null;
+    /* eslint-enable i18next/no-literal-string */
 
     return (
       <Host>

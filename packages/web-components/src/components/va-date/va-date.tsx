@@ -37,7 +37,7 @@ export class VaDate {
   /**
    * Render marker indicating field is required.
    */
-  @Prop() required: boolean;
+  @Prop() required?: boolean = false;
 
   /**
    * Label for the field.
@@ -53,17 +53,17 @@ export class VaDate {
    * The error message to render (if any)
    * This prop should be leveraged to display any custom validations needed for this component
    */
-  @Prop() error: string;
+  @Prop() error?: string;
 
   /**
    * Whether or not only the Month and Year inputs should be displayed.
    */
-  @Prop() monthYearOnly: boolean = false;
+  @Prop() monthYearOnly?: boolean = false;
 
   /**
    * Set the default date value must be in YYYY-MM-DD format.
    */
-  @Prop({ mutable: true }) value: string;
+  @Prop({ mutable: true }) value?: string;
 
   /**
    * Fires when the date input loses focus after its value was changed
@@ -95,9 +95,11 @@ export class VaDate {
     });
     // Ternary to prevent NaN displaying as value for Year
     // Ternary to prevent Month or Day from displaying as single digit
+    /* eslint-disable i18next/no-literal-string */
     const val = `${year ? year : ''}-${
       month ? numFormatter.format(month) : ''
     }-${day ? numFormatter.format(day) : ''}`.replace(/-+$/, '');
+    /* eslint-enable i18next/no-literal-string */
 
     this.value = val ? val : null;
   }
@@ -111,24 +113,24 @@ export class VaDate {
     const daysForSelectedMonth = month > 0 ? days[month] : [];
     const leapYear = checkLeapYear(year);
 
-    const expectedDateFormat = this.monthYearOnly ? isMonthYearDate : isFullDate;
+    const expectedDateFormat = this.monthYearOnly
+      ? isMonthYearDate
+      : isFullDate;
 
     // Check validity of date if invalid provide message and error state styling
     if (
-      !this.error && (
-      year < minYear ||
-      year > maxYear ||
-      month < minMonths ||
-      month > maxMonths ||
-      (!this.monthYearOnly && (
-        day < minMonths ||
-        day > daysForSelectedMonth.length ||
-        !day)) ||
-      !month ||
-      !year ||
-      (!leapYear && month === 2 && day > 28) ||
-      (this.required && !expectedDateFormat(this.value))
-    )) {
+      !this.error &&
+      (year < minYear ||
+        year > maxYear ||
+        month < minMonths ||
+        month > maxMonths ||
+        (!this.monthYearOnly &&
+          (day < minMonths || day > daysForSelectedMonth.length || !day)) ||
+        !month ||
+        !year ||
+        (!leapYear && month === 2 && day > 28) ||
+        (this.required && !expectedDateFormat(this.value)))
+    ) {
       this.error = 'Please enter a valid date';
     } else if (this.error !== 'Please enter a valid date') {
       this.error;
@@ -152,7 +154,11 @@ export class VaDate {
       currentYear = target.value;
     }
 
-    this.setValue(parseInt(currentYear), parseInt(currentMonth), parseInt(currentDay))
+    this.setValue(
+      parseInt(currentYear),
+      parseInt(currentMonth),
+      parseInt(currentDay),
+    );
 
     // This event should always fire to allow for validation handling
     this.dateChange.emit(event);
@@ -168,7 +174,7 @@ export class VaDate {
   /**
    * Whether or not an analytics event will be fired.
    */
-  @Prop() enableAnalytics: boolean;
+  @Prop() enableAnalytics: boolean = false;
 
   /**
    * The event used to track usage of the component. This is emitted when an
@@ -209,13 +215,14 @@ export class VaDate {
           </legend>
           <slot />
           {error && (
-            <span class="error-message" role="alert">
+            <span id="error-message" role="alert">
               <span class="sr-only">Error</span> {error}
             </span>
           )}
           <div class="date-container">
             <va-select
               label="Month"
+              aria-describedby={error ? 'error-message' : undefined}
               name={`${name}Month`}
               // Value must be a string
               value={month?.toString()}
@@ -232,6 +239,7 @@ export class VaDate {
             {!monthYearOnly && (
               <va-select
                 label="Day"
+                aria-describedby={error ? 'error-message' : undefined}
                 name={`${name}Day`}
                 // If day value set is greater than amount of days in the month
                 // set to empty string instead
@@ -250,6 +258,7 @@ export class VaDate {
             )}
             <va-text-input
               label="Year"
+              aria-describedby={error ? 'error-message' : undefined}
               name={`${name}Year`}
               maxlength={4}
               minlength={4}

@@ -28,18 +28,18 @@ export class VaLoadingIndicator {
   /**
    * An aria label
    */
-  @Prop() label: string = 'Loading';
+  @Prop() label?: string = 'Loading';
 
   /**
    * Set to true if the loading indicator should capture focus
    */
-  @Prop() setFocus: boolean = false;
+  @Prop() setFocus?: boolean = false;
 
   /**
    * Analytics tracking function(s) will be called. Form components
    * are disabled by default due to PII/PHI concerns.
    */
-  @Prop() enableAnalytics: boolean;
+  @Prop() enableAnalytics?: boolean = false;
 
   /**
    * The event used to track usage of the component.

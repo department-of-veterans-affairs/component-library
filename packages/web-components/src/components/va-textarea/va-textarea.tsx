@@ -1,4 +1,14 @@
-import { Build, Component, Event, EventEmitter, Host, Prop, Element, forceUpdate, h } from '@stencil/core';
+import {
+  Build,
+  Component,
+  Event,
+  EventEmitter,
+  Host,
+  Prop,
+  Element,
+  forceUpdate,
+  h,
+} from '@stencil/core';
 import i18next from 'i18next';
 import { consoleDevError } from '../../utils/utils';
 
@@ -42,7 +52,7 @@ export class VaTextarea {
   /**
    * Set the input to required and render the (Required) text.
    */
-  @Prop() required?: boolean;
+  @Prop() required?: boolean = false;
 
   /**
    * The maximum number of characters allowed in the input.
@@ -58,7 +68,7 @@ export class VaTextarea {
   /**
    * Emit component-library-analytics events on the blur event.
    */
-  @Prop() enableAnalytics?: boolean;
+  @Prop() enableAnalytics?: boolean = false;
 
   /**
    * The event used to track usage of the component. This is emitted when
@@ -98,7 +108,7 @@ export class VaTextarea {
         },
       });
     }
-  }
+  };
 
   /**
    * This ensures that the `maxlength` property will be positive
@@ -106,7 +116,7 @@ export class VaTextarea {
    */
   private getMaxlength() {
     if (this.maxlength <= 0) {
-      consoleDevError("The maxlength prop must be positive!");
+      consoleDevError('The maxlength prop must be positive!');
       return undefined;
     }
 
@@ -114,19 +124,20 @@ export class VaTextarea {
   }
 
   render() {
-    const {label, error, placeholder, name, required, value} = this;
+    const { label, error, placeholder, name, required, value } = this;
     const maxlength = this.getMaxlength();
 
     return (
       <Host>
         <label htmlFor="textarea">
           {label}
-          {required && <span class="required">(*{i18next.t('required')})</span>}
+          {required && <span class="required">{i18next.t('required')}</span>}
         </label>
-        {error && <span id="error-message" role="alert">
-          <span class="sr-only">{i18next.t('error')}</span> {error}
+        {error && (
+          <span id="error-message" role="alert">
+            <span class="sr-only">{i18next.t('error')}</span> {error}
           </span>
-        }
+        )}
         <textarea
           aria-describedby={error ? 'error-message' : undefined}
           onInput={this.handleInput}
@@ -138,8 +149,8 @@ export class VaTextarea {
           value={value}
         />
         {maxlength && value?.length >= maxlength && (
-          <small aria-live="polite">
-            ({i18next.t('max-chars', { length: maxlength })})
+          <small>
+            {i18next.t('max-chars', { length: maxlength })}
           </small>
         )}
       </Host>

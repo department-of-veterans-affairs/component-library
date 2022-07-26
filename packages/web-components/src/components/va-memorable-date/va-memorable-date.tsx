@@ -35,7 +35,7 @@ export class VaMemorableDate {
   /**
    * Render marker indicating field is required.
    */
-  @Prop() required: boolean;
+  @Prop() required?: boolean = false;
 
   /**
    * Label for the field.
@@ -51,12 +51,12 @@ export class VaMemorableDate {
    * The error message to render (if any)
    * This prop should be leveraged to display any custom validations needed for this component
    */
-  @Prop() error: string;
+  @Prop() error?: string;
 
   /**
    * Set the default date value must be in YYYY-MM-DD format.
    */
-  @Prop({ mutable: true }) value: string;
+  @Prop({ mutable: true }) value?: string;
 
   /**
    * Fires when the date input loses focus after its value was changed
@@ -85,9 +85,11 @@ export class VaMemorableDate {
     const numFormatter = new Intl.NumberFormat('en-US', {
       minimumIntegerDigits: 2,
     });
+    /* eslint-disable i18next/no-literal-string */
     this.value = `${year}-${month ? numFormatter.format(monthNum) : ''}-${
       day ? numFormatter.format(dayNum) : ''
     }`;
+    /* eslint-enable i18next/no-literal-string */
 
     const daysForSelectedMonth = monthNum > 0 ? days[monthNum] : [];
     const leapYear = checkLeapYear(yearNum);
@@ -127,9 +129,11 @@ export class VaMemorableDate {
       currentYear = target.value;
     }
 
+    /* eslint-disable i18next/no-literal-string */
     this.value = `${currentYear}-${currentMonth ? currentMonth : ''}-${
       currentDay ? currentDay : ''
     }`;
+    /* eslint-enable i18next/no-literal-string */
 
     // This event should always fire to allow for validation handling
     this.dateChange.emit(event);
@@ -145,7 +149,7 @@ export class VaMemorableDate {
   /**
    * Whether or not an analytics event will be fired.
    */
-  @Prop() enableAnalytics: boolean;
+  @Prop() enableAnalytics: boolean = false;
 
   /**
    * The event used to track usage of the component. This is emitted when an
@@ -186,7 +190,7 @@ export class VaMemorableDate {
           </legend>
           <slot />
           {error && (
-            <span class="error-message" role="alert">
+            <span id="error-message" role="alert">
               <span class="sr-only">Error</span> {error}
             </span>
           )}
