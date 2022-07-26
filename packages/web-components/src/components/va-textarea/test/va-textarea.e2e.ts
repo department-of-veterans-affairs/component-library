@@ -10,10 +10,12 @@ describe('va-textarea', () => {
     expect(element).toEqualHtml(`
       <va-textarea class="hydrated" label="Describe your situation">
         <mock:shadow-root>
-          <label for="textarea">
-            Describe your situation
-          </label>
-          <textarea id="textarea"></textarea>
+          <div class="usa-form-group">
+            <label class="usa-label" for="textarea">
+              Describe your situation
+            </label>
+            <textarea class="usa-textarea" id="textarea"></textarea>
+          </div>
         </mock:shadow-root>
       </va-textarea>
     `);
@@ -42,7 +44,7 @@ describe('va-textarea', () => {
     await page.setContent('<va-textarea label="This is a field" required />');
 
     // Render the error message text
-    const requiredSpan = await page.find('va-textarea >>> .required');
+    const requiredSpan = await page.find('va-textarea >>> .usa-label--required');
     // This is the key for i18next
     expect(requiredSpan).toEqualText('required');
   });
