@@ -13,7 +13,7 @@ describe('va-textarea', () => {
           <label for="textarea">
             Describe your situation
           </label>
-          <textarea id="textarea"></textarea>
+          <textarea id="textarea" aria-invalid="false"></textarea>
         </mock:shadow-root>
       </va-textarea>
     `);
@@ -25,7 +25,9 @@ describe('va-textarea', () => {
 
     // Render the error message text
     const error = await page.find('va-textarea >>> span#error-message');
+    const textarea = await page.find('va-textarea >>> textarea');
     expect(error.innerText).toContain('This is a mistake');
+    expect(textarea.getAttribute('aria-invalid')).toEqual('true');
   });
 
   it('adds new aria-describedby for error message', async () => {
