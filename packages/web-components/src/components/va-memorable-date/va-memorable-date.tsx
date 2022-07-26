@@ -214,7 +214,7 @@ export class VaMemorableDate {
           </legend>
           <slot />
           {error && (
-            <span class="error-message" role="alert">
+            <span id="error-message" role="alert">
               <span class="sr-only">Error</span> {error}
             </span>
           )}

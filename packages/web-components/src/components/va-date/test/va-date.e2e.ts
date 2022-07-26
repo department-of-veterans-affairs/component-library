@@ -38,8 +38,20 @@ describe('va-date', () => {
     await page.setContent('<va-date error="This is a mistake" />');
 
     // Render the error message text
-    const error = await page.find('va-date >>> span.error-message');
+    const error = await page.find('va-date >>> span#error-message');
     expect(error.innerText).toContain('This is a mistake');
+  });
+
+  it('puts an aria-describedby attribute on child components when there is an error', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-date error="This is a mistake" />');
+
+    const firstInput= await page.find('va-date >>> va-select:nth-child(1)');
+    const secondInput = await page.find('va-date >>> va-select:nth-child(2)');
+    const thirdInput = await page.find('va-date >>> va-text-input');
+    expect(firstInput.getAttribute('aria-describedby')).toContain('error-message');
+    expect(secondInput.getAttribute('aria-describedby')).toContain('error-message');
+    expect(thirdInput.getAttribute('aria-describedby')).toContain('error-message');
   });
 
   it('renders a required span', async () => {
@@ -84,7 +96,7 @@ describe('va-date', () => {
     await page.waitForChanges();
 
     // Assert
-    const errorSpan = await page.find('va-date >>> span.error-message');
+    const errorSpan = await page.find('va-date >>> span#error-message');
     expect(errorSpan.textContent).toContain("Fill me out");
   });
 

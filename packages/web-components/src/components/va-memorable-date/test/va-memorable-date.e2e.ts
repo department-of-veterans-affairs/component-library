@@ -44,7 +44,7 @@ describe('va-memorable-date', () => {
     await page.setContent('<va-memorable-date error="This is a mistake" />');
 
     // Render the error message text
-    const error = await page.find('va-memorable-date >>> span.error-message');
+    const error = await page.find('va-memorable-date >>> span#error-message');
     expect(error.innerText).toContain('This is a mistake');
   });
 
