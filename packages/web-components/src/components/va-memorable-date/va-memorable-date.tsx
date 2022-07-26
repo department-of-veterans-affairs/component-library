@@ -11,7 +11,6 @@ import {
 
 import {
   days,
-  // isFullDate,
   checkLeapYear,
   maxMonths,
   maxYear,
