@@ -1,6 +1,4 @@
 @use "uswds-core" with ( 
-    $theme-body-font-size: 10 
+    $theme-body-font-size: 10,
+    $theme-focus-color: "gold-20v"
 );
-// @forward "uswds-theme";
-// @forward "uswds";
-// @forward "uswds-theme-custom-styles";
