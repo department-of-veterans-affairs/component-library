@@ -50,6 +50,24 @@ describe('va-date', () => {
     expect(requiredSpan).not.toBeNull();
   });
 
+  it('does not validate without required prop', async () => {
+    const page = await newE2EPage();
+    await page.setContent(
+      '<va-date value="1999-05-03" name="test" />',
+    );
+    const date = await page.find('va-date');
+    const handleYear = await page.$('pierce/[name="testYear"]');
+
+    // Click three times to select all text in input
+    await handleYear.click({ clickCount: 3 });
+    await handleYear.press('2');
+    // Trigger Blur
+    await handleYear.press('Tab');
+
+    await page.waitForChanges();
+    expect(date.getAttribute('error')).toEqual(null);
+  });
+
   it('allows for a custom required message', async () => {
     const page = await newE2EPage();
     await page.setContent('<va-date value="2000-01-01" name="test" label="This is a field" required="Fill me out" />');
@@ -396,7 +414,7 @@ describe('va-date', () => {
   it('checks for valid year month and day', async () => {
     const page = await newE2EPage();
 
-    await page.setContent('<va-date name="test"/>');
+    await page.setContent('<va-date name="test" required/>');
     const date = await page.find('va-date');
     const handleMonth = await page.$('pierce/[name="testMonth"]');
     const handleDay = await page.$('pierce/[name="testDay"]');
@@ -419,7 +437,7 @@ describe('va-date', () => {
   describe('monthYearOnly variant', () => {
     it('only displays month and year fields', async () => {
       const page = await newE2EPage();
-      await page.setContent('<va-date month-year-only/>');
+      await page.setContent('<va-date month-year-only required/>');
       const monthInput = await page.find('va-date >>> va-select.select-month')
       const dayInput = await page.find('va-date >>> va-select.select-day');
       const yearInput = await page.find('va-date >>> va-text-input.input-year')
@@ -452,7 +470,7 @@ describe('va-date', () => {
  
     it('checks for valid year and month', async () => {
       const page = await newE2EPage();
-      await page.setContent('<va-date month-year-only name="test"/>');
+      await page.setContent('<va-date month-year-only name="test" required/>');
 
       const date = await page.find('va-date');
       const handleMonth = await page.$('pierce/[name="testMonth"]');

@@ -60,6 +60,24 @@ describe('va-memorable-date', () => {
     expect(requiredSpan).not.toBeNull();
   });
 
+  it('does not validate without required prop', async () => {
+    const page = await newE2EPage();
+    await page.setContent(
+      '<va-memorable-date value="1999-05-03" name="test" />',
+    );
+    const date = await page.find('va-memorable-date');
+    const handleYear = await page.$('pierce/[name="testYear"]');
+
+    // Click three times to select all text in input
+    await handleYear.click({ clickCount: 3 });
+    await handleYear.press('2');
+    // Trigger Blur
+    await handleYear.press('Tab');
+
+    await page.waitForChanges();
+    expect(date.getAttribute('error')).toEqual('');
+  });
+
   it('sets a label', async () => {
     const page = await newE2EPage();
     await page.setContent('<va-memorable-date label="This is a label" />');

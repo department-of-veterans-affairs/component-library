@@ -98,30 +98,32 @@ export class VaMemorableDate {
 
     const daysForSelectedMonth = monthNum > 0 ? days[monthNum] : [];
     const leapYear = checkLeapYear(yearNum);
-    // Check validity of date if invalid provide message and error state styling
-    // Set the state so that we can set aria-invalid on the right component
-    this.invalidYear = (
-      !year ||
-      yearNum < minYear ||
-      yearNum > maxYear
-    );
 
-    this.invalidMonth = (
-      !month ||
-      monthNum < minMonths ||
-      monthNum > maxMonths
-    );
+    if (this.required) {
+      // Set the state so that we can set aria-invalid on the right component
+      this.invalidYear = (
+        !year ||
+        yearNum < minYear ||
+        yearNum > maxYear
+      );
 
-    this.invalidDay =  (
-      !day ||
-      dayNum < minMonths ||
-      dayNum > daysForSelectedMonth.length
-    );
+      this.invalidMonth = (
+        !month ||
+        monthNum < minMonths ||
+        monthNum > maxMonths
+      );
 
-    if (!leapYear && monthNum === 2 && dayNum > 28) {
-      this.invalidYear = true;
-      this.invalidMonth = true;
-      this.invalidDay = true;
+      this.invalidDay =  (
+        !day ||
+        dayNum < minMonths ||
+        dayNum > daysForSelectedMonth.length
+      );
+
+      if (!leapYear && monthNum === 2 && dayNum > 28) {
+        this.invalidYear = true;
+        this.invalidMonth = true;
+        this.invalidDay = true;
+      }
     }
 
     if (

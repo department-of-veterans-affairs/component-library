@@ -118,29 +118,31 @@ export class VaDate {
     const daysForSelectedMonth = month > 0 ? days[month] : [];
     const leapYear = checkLeapYear(year);
 
-    this.invalidYear = (
-      !year ||
-      year < minYear ||
-      year > maxYear
-    );
+    if (this.required) {
+      this.invalidYear = (
+        !year ||
+        year < minYear ||
+        year > maxYear
+      );
 
-    this.invalidMonth = (
-      !month ||
-      month < minMonths ||
-      month > maxMonths
-    );
+      this.invalidMonth = (
+        !month ||
+        month < minMonths ||
+        month > maxMonths
+      );
 
-    this.invalidDay = (
-      !this.monthYearOnly && (
-        !day ||
-        day < minMonths ||
-        day > daysForSelectedMonth.length)
-    );
+      this.invalidDay = (
+        !this.monthYearOnly && (
+          !day ||
+          day < minMonths ||
+          day > daysForSelectedMonth.length)
+      );
 
-    if (!leapYear && month === 2 && day > 28) {
-      this.invalidYear = true;
-      this.invalidMonth = true;
-      this.invalidDay = true;
+      if (!leapYear && month === 2 && day > 28) {
+        this.invalidYear = true;
+        this.invalidMonth = true;
+        this.invalidDay = true;
+      }
     }
 
     if (
