@@ -134,6 +134,7 @@ export class VaNumberInput {
         )}
         <input
           aria-describedby={error ? 'error-message' : undefined}
+          aria-invalid={error ? 'true' : 'false'}
           id="inputField"
           type="number"
           inputmode={inputmode ? inputmode : null}

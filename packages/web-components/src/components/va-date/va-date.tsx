@@ -4,6 +4,7 @@ import {
   EventEmitter,
   Host,
   Prop,
+  State,
   h,
   Element,
 } from '@stencil/core';
@@ -11,8 +12,6 @@ import {
 import {
   months,
   days,
-  isFullDate,
-  isMonthYearDate,
   checkLeapYear,
   maxMonths,
   maxYear,
@@ -83,6 +82,10 @@ export class VaDate {
   })
   dateBlur: EventEmitter;
 
+  @State() invalidDay: boolean = false;
+  @State() invalidMonth: boolean = false;
+  @State() invalidYear: boolean = false;
+
   /**
    * Set the value prop as an ISO-8601 date using provided arguments.
    * Strips trailing hyphens and sets date to be null if the
@@ -113,23 +116,38 @@ export class VaDate {
     const daysForSelectedMonth = month > 0 ? days[month] : [];
     const leapYear = checkLeapYear(year);
 
-    const expectedDateFormat = this.monthYearOnly
-      ? isMonthYearDate
-      : isFullDate;
+    if (this.required) {
+      this.invalidYear = (
+        !year ||
+        year < minYear ||
+        year > maxYear
+      );
 
-    // Check validity of date if invalid provide message and error state styling
+      this.invalidMonth = (
+        !month ||
+        month < minMonths ||
+        month > maxMonths
+      );
+
+      this.invalidDay = (
+        !this.monthYearOnly && (
+          !day ||
+          day < minMonths ||
+          day > daysForSelectedMonth.length)
+      );
+
+      if (!leapYear && month === 2 && day > 28) {
+        this.invalidYear = true;
+        this.invalidMonth = true;
+        this.invalidDay = true;
+      }
+    }
+
     if (
       !this.error &&
-      (year < minYear ||
-        year > maxYear ||
-        month < minMonths ||
-        month > maxMonths ||
-        (!this.monthYearOnly &&
-          (day < minMonths || day > daysForSelectedMonth.length || !day)) ||
-        !month ||
-        !year ||
-        (!leapYear && month === 2 && day > 28) ||
-        (this.required && !expectedDateFormat(this.value)))
+      (this.invalidYear ||
+        this.invalidMonth ||
+        this.invalidDay)
     ) {
       this.error = 'Please enter a valid date';
     } else if (this.error !== 'Please enter a valid date') {
@@ -227,6 +245,7 @@ export class VaDate {
               // Value must be a string
               value={month?.toString()}
               onVaSelect={handleDateChange}
+              invalid={this.invalidMonth}
               class="select-month"
               aria-label="Please enter two digits for the month"
             >
@@ -246,6 +265,7 @@ export class VaDate {
                 // Value must be a string
                 value={daysForSelectedMonth.length < day ? '' : day?.toString()}
                 onVaSelect={handleDateChange}
+                invalid={this.invalidDay}
                 class="select-day"
                 aria-label="Please enter two digits for the day"
               >
@@ -266,6 +286,7 @@ export class VaDate {
               // Value must be a string
               // Checking is NaN if so provide empty string
               value={year ? year.toString() : ''}
+              invalid={this.invalidYear}
               onInput={handleDateChange}
               onKeyDown={handleDateKey}
               class="input-year"

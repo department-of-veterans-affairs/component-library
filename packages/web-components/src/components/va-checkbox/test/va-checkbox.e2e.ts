@@ -10,6 +10,14 @@ describe('va-checkbox', () => {
     expect(element).toHaveClass('hydrated');
   });
 
+  it('renders with aria-invalid set to false by default', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-checkbox></va-checkbox>');
+
+    const input = await page.find('va-checkbox >>> input');
+    expect(input.getAttribute('aria-invalid')).toEqual('false');
+  });
+
   it('renders a label', async () => {
     const page = await newE2EPage();
     await page.setContent('<va-checkbox label="Cool label, right?" />');
@@ -23,6 +31,8 @@ describe('va-checkbox', () => {
       '<va-checkbox error="Something went horribly wrong" />',
     );
     const element = await page.find('va-checkbox >>> #error-message');
+    const input = await page.find('va-checkbox >>> input');
+    expect(input.getAttribute('aria-invalid')).toEqual('true');
     expect(element.textContent).toContain('Something went horribly wrong');
   });
 
