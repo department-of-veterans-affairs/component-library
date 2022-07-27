@@ -59,7 +59,7 @@ export class VaAlert {
   /**
    * If `true`, a close button will be displayed.
    */
-  @Prop() closeable?: boolean = false;
+  @Prop({ reflect: true }) closeable?: boolean = false;
 
   /**
    * If `true`, the alert will be full width.
