@@ -14,18 +14,20 @@ describe('va-modal', () => {
 
     const element = await page.find('va-modal');
     expect(element).toEqualHtml(`
-      <va-modal aria-label="Example Title modal" aria-modal="true" class="hydrated va-modal" modal-title="Example Title" role="dialog" visible>
+      <va-modal class="hydrated" modal-title="Example Title" visible>
         <mock:shadow-root>
-          <div class="va-modal-inner" tabindex="-1">
-            <button aria-label="Close Example Title modal" class="va-modal-close" type="button">
-              <i aria-hidden="true"></i>
-            </button>
-            <div class="va-modal-body">
-              <div role="document">
-                <h1 class="va-modal-title" tabindex="-1">
-                  Example Title
-                </h1>
-                <slot></slot>
+          <div aria-label="Example Title modal" aria-modal="true" class="va-modal" role="dialog">
+            <div class="va-modal-inner" tabindex="-1">
+              <button aria-label="Close Example Title modal" class="va-modal-close" type="button">
+                <i aria-hidden="true"></i>
+              </button>
+              <div class="va-modal-body">
+                <div role="document">
+                  <h1 class="va-modal-title" tabindex="-1">
+                    Example Title
+                  </h1>
+                  <slot></slot>
+                </div>
               </div>
             </div>
           </div>
