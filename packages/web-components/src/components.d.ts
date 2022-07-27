@@ -390,6 +390,10 @@ export namespace Components {
          */
         "initialFocusSelector"?: string;
         /**
+          * If `true`, modal will be wider.
+         */
+        "large"?: boolean;
+        /**
           * Title/header text for the modal
          */
         "modalTitle"?: string;
@@ -1489,6 +1493,10 @@ declare namespace LocalJSX {
           * Selector to explicitly specify which element should receive focus when the modal is open, if the initially focused element is not the first focusable element in the document
          */
         "initialFocusSelector"?: string;
+        /**
+          * If `true`, modal will be wider.
+         */
+        "large"?: boolean;
         /**
           * Title/header text for the modal
          */

@@ -228,7 +228,6 @@ i::before {
 
   .va-modal-inner {
     top: 0;
-    transform: none;
   }
 
   .va-modal-alert .alert-actions {
@@ -239,4 +238,9 @@ i::before {
   .va-modal-alert .alert-actions button + button {
     margin: 1.6rem 0 0 0;
   }
+}
+
+:host([large]:not([large='false'])) .va-modal-inner {
+  max-width: 75rem;
+  width: 75vw;
 }

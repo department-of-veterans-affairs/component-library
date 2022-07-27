@@ -93,6 +93,11 @@ export class VaModal {
   @Prop() disableAnalytics?: boolean = false;
 
   /**
+   * If `true`, modal will be wider.
+   */
+  @Prop({ reflect: true }) large?: boolean = false;
+
+  /**
    * Title/header text for the modal
    */
   @Prop() modalTitle?: string;

@@ -135,6 +135,7 @@ export class VaOmbInfo {
           />
         </div>
         <va-modal
+          large
           modalTitle="Privacy Act Statement"
           onCloseEvent={toggleModalVisible}
           visible={visible}
