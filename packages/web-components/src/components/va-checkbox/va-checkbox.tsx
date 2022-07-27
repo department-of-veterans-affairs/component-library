@@ -125,6 +125,7 @@ export class VaCheckbox {
           id="checkbox-element"
           checked={checked}
           aria-describedby={error ? 'error-message' : undefined}
+          aria-invalid={error ? 'true' : 'false'}
           onChange={this.handleChange}
         />
         <label htmlFor="checkbox-element">

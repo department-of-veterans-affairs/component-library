@@ -140,6 +140,7 @@ export class VaTextarea {
         )}
         <textarea
           aria-describedby={error ? 'error-message' : undefined}
+          aria-invalid={error ? 'true' : 'false'}
           onInput={this.handleInput}
           onBlur={this.handleBlur}
           id="textarea"

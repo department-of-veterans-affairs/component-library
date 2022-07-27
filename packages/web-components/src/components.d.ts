@@ -615,6 +615,10 @@ export namespace Components {
          */
         "error"?: string;
         /**
+          * Whether or not `aria-invalid` will be set on the inner select. Useful when composing the component into something larger, like a date component.
+         */
+        "invalid"?: boolean;
+        /**
           * Text label for the field.
          */
         "label": string;
@@ -665,6 +669,10 @@ export namespace Components {
          */
         "notClickable"?: boolean;
         /**
+          * Indicates if this is a number meant to be called from a teletypewriter for deaf users.
+         */
+        "tty"?: boolean;
+        /**
           * Optional vanity phone number. Replaces the last 4 digits with the vanity text input
          */
         "vanity"?: string;
@@ -692,6 +700,10 @@ export namespace Components {
     | 'tel'
     | 'text'
     | 'url';
+        /**
+          * Whether or not `aria-invalid` will be set on the inner input. Useful when composing the component into something larger, like a date component.
+         */
+        "invalid"?: boolean;
         /**
           * The label for the text input.
          */
@@ -1779,6 +1791,10 @@ declare namespace LocalJSX {
          */
         "error"?: string;
         /**
+          * Whether or not `aria-invalid` will be set on the inner select. Useful when composing the component into something larger, like a date component.
+         */
+        "invalid"?: boolean;
+        /**
           * Text label for the field.
          */
         "label": string;
@@ -1845,6 +1861,10 @@ declare namespace LocalJSX {
          */
         "onComponent-library-analytics"?: (event: CustomEvent<any>) => void;
         /**
+          * Indicates if this is a number meant to be called from a teletypewriter for deaf users.
+         */
+        "tty"?: boolean;
+        /**
           * Optional vanity phone number. Replaces the last 4 digits with the vanity text input
          */
         "vanity"?: string;
@@ -1872,6 +1892,10 @@ declare namespace LocalJSX {
     | 'tel'
     | 'text'
     | 'url';
+        /**
+          * Whether or not `aria-invalid` will be set on the inner input. Useful when composing the component into something larger, like a date component.
+         */
+        "invalid"?: boolean;
         /**
           * The label for the text input.
          */
