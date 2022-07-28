@@ -1,4 +1,5 @@
 import React from 'react';
+import { useEffect, useState } from 'react';
 import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
 
 const segmentedProgressBarDocs = getWebComponentDocs(
@@ -17,49 +18,67 @@ export default {
 
 const Template = ({
   'enable-analytics': enableAnalytics,
-  current,
+  // current,
   total,
   label,
-}) => (
-  // Wrapper for spacing when viewing in storybook
-  // Component can be used without it
-  <div style={{ margin: '3em' }}>
-    <div
-      className="schemaform-title"
-      style={{ alignItems: 'baseline', display: 'flex', marginBottom: '3rem' }}
-    >
-      <h1
-        data-testid="form-title"
-        style={{ marginBottom: 0, paddingRight: '10px' }}
-      >
-        Apply for health care
-      </h1>
+}) => {
+  const [current, setCurrent] = useState(2);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setCurrent(3);
+    }, 8000);
+  }, []);
+
+  return (
+    // Wrapper for spacing when viewing in storybook
+    // Component can be used without it
+    <div style={{ margin: '3em' }}>
       <div
-        className="schemaform-subtitle"
-        data-testid="form-subtitle"
-        style={{ fontSize: '2rem' }}
+        className="schemaform-title"
+        style={{
+          alignItems: 'baseline',
+          display: 'flex',
+          marginBottom: '3rem',
+        }}
       >
-        Form 10-10EZ
+        <h1
+          data-testid="form-title"
+          style={{ marginBottom: 0, paddingRight: '10px' }}
+        >
+          Apply for health care
+        </h1>
+        <div
+          className="schemaform-subtitle"
+          data-testid="form-subtitle"
+          style={{ fontSize: '2rem' }}
+        >
+          Form 10-10EZ
+        </div>
+      </div>
+      <va-segmented-progress-bar
+        enable-analytics={enableAnalytics}
+        current={current}
+        total={total}
+        label={label}
+      ></va-segmented-progress-bar>
+      <div
+        className="schemaform-chapter-progress"
+        style={{ paddingLeft: '2rem' }}
+      >
+        <div className="nav-header nav-header-schemaform">
+          <h2
+            id="nav-form-header"
+            className="vads-u-font-size--h4"
+            tabIndex="-1"
+          >
+            Step {current} of {total}: VA Benefits
+          </h2>
+        </div>
       </div>
     </div>
-    <va-segmented-progress-bar
-      enable-analytics={enableAnalytics}
-      current={current}
-      total={total}
-      label={label}
-    ></va-segmented-progress-bar>
-    <div
-      className="schemaform-chapter-progress"
-      style={{ paddingLeft: '2rem' }}
-    >
-      <div className="nav-header nav-header-schemaform">
-        <h2 id="nav-form-header" className="vads-u-font-size--h4" tabIndex="-1">
-          Step 2 of 6: VA Benefits
-        </h2>
-      </div>
-    </div>
-  </div>
-);
+  );
+};
 
 const defaultArgs = {
   'enable-analytics': false,

@@ -46,12 +46,19 @@ const Template = ({
   name,
   value,
   required,
-  error,
+  // error,
   'aria-live-region-text': ariaLiveRegionText,
   options,
   'use-add-button': useAddButton,
 }) => {
   const [modifiedOptions, setModifiedOptions] = useState(options);
+  const [error, setError] = useState('');
+
+  useEffect(() => {
+    setTimeout(() => {
+      setError('This is an example error');
+    }, 8000);
+  }, []);
 
   return (
     <>
