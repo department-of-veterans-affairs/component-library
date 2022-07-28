@@ -17,7 +17,8 @@
     "node-fetch": "^2.6.7",
     "trim": "^0.0.3",
     "prism": "^1.27.0",
-    "scss-tokenizer": "^0.4.2"
+    "scss-tokenizer": "^0.4.2",
+    "terser": "5.14.2"
   },
   "dependencies": {
     "webpack": "5"
