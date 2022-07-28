@@ -27,7 +27,9 @@ button:hover {
   color: var(--color-primary);
 }
 
+:host([back]:not([back='false'])) button:active,
 :host([back]:not([back='false'])) button:hover,
+:host([secondary]:not([secondary='false'])) button:active,
 :host([secondary]:not([secondary='false'])) button:hover {
   box-shadow: inset 0 0 0 2px var(--color-primary-darker);
   color: var(--color-primary-darker);
