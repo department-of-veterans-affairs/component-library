@@ -26,6 +26,8 @@ window.addEventListener('load', event => {
   const element = document.querySelector('main');
 
   if (element) {
+    const langAttr = element.getAttribute('lang');
+    if (langAttr) i18next.changeLanguage(langAttr);
     const observer = new MutationObserver(mutations => {
       mutations.forEach(mutation => {
         if (
