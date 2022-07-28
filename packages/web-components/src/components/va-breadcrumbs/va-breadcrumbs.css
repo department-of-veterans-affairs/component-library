@@ -14,8 +14,8 @@ ul {
   list-style: square;
   margin: 0 auto;
   max-width: 100rem;
-  padding-left: 0.9375rem;
-  padding-right: 0.9375rem;
+  padding-left: 0.8rem;
+  padding-right: 0.8rem;
   position: relative;
   width: 100%;
 }
