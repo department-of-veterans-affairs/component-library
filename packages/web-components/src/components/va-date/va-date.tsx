@@ -7,6 +7,7 @@ import {
   State,
   h,
   Element,
+  Fragment,
 } from '@stencil/core';
 
 import {
@@ -117,24 +118,13 @@ export class VaDate {
     const leapYear = checkLeapYear(year);
 
     if (this.required) {
-      this.invalidYear = (
-        !year ||
-        year < minYear ||
-        year > maxYear
-      );
+      this.invalidYear = !year || year < minYear || year > maxYear;
 
-      this.invalidMonth = (
-        !month ||
-        month < minMonths ||
-        month > maxMonths
-      );
+      this.invalidMonth = !month || month < minMonths || month > maxMonths;
 
-      this.invalidDay = (
-        !this.monthYearOnly && (
-          !day ||
-          day < minMonths ||
-          day > daysForSelectedMonth.length)
-      );
+      this.invalidDay =
+        !this.monthYearOnly &&
+        (!day || day < minMonths || day > daysForSelectedMonth.length);
 
       if (!leapYear && month === 2 && day > 28) {
         this.invalidYear = true;
@@ -145,9 +135,7 @@ export class VaDate {
 
     if (
       !this.error &&
-      (this.invalidYear ||
-        this.invalidMonth ||
-        this.invalidDay)
+      (this.invalidYear || this.invalidMonth || this.invalidDay)
     ) {
       this.error = 'Please enter a valid date';
     } else if (this.error !== 'Please enter a valid date') {
@@ -232,11 +220,13 @@ export class VaDate {
             {label} {required && <span class="required">(*Required)</span>}
           </legend>
           <slot />
-          {error && (
-            <span id="error-message" role="alert">
-              <span class="sr-only">Error</span> {error}
-            </span>
-          )}
+          <span id="error-message" role="alert">
+            {error && (
+              <Fragment>
+                <span class="sr-only">Error</span> {error}
+              </Fragment>
+            )}
+          </span>
           <div class="date-container">
             <va-select
               label="Month"
