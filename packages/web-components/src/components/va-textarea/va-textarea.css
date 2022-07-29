@@ -34,3 +34,7 @@ textarea {
   margin: 0.4rem 0;
   resize: inherit;
 }
+
+:host([error]:not([error=''])) textarea {
+  padding-right: 0.7rem;
+}
