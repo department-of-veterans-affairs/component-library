@@ -34,10 +34,6 @@ export const additionalDocs = {
     maturityCategory: DONT_USE,
     maturityLevel: DEPRECATED,
   },
-  'Date': {
-    maturityCategory: DONT_USE,
-    maturityLevel: DEPRECATED,
-  },
   // MDX
   'Divider': {
     guidanceHref: 'divider',
