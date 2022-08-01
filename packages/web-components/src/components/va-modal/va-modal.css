@@ -6,26 +6,40 @@
 
 .va-modal {
   background: rgba(50, 58, 69, 0.8);
-  content: ' ';
+  bottom: 0;
+  box-sizing: border-box;
   display: block;
   height: 100%;
   left: 0;
+  overflow-y: auto;
+  padding: 1.5rem;
   position: fixed;
+  scroll-behavior: smooth;
+  text-align: center;
   top: 0;
   width: 100%;
   z-index: 6;
 }
 
+.va-modal:before {
+  content: '';
+  display: inline-block;
+  height: 100%;
+  vertical-align: middle;
+}
+
 .va-modal-inner {
   background: var(--color-white);
+  bottom: 0;
   box-sizing: border-box;
-  margin: auto;
+  cursor: auto;
+  display: inline-block;
+  margin: 1.25rem auto;
   max-width: 40rem;
   position: relative;
-  top: 50%;
-  transform: translateY(-50%);
+  text-align: left;
+  vertical-align: middle;
   width: 100%;
-  cursor: auto;
 }
 
 .va-modal-close {
@@ -106,7 +120,7 @@ i::before {
 .va-modal-alert {
   border-left-style: solid;
   border-left-width: 10px;
-  display: table;
+  display: inline-flex;
   max-width: 60rem;
   padding: 3.2rem 6.4rem 3.2rem 2.4rem;
 }
@@ -196,6 +210,15 @@ i::before {
   .alert-actions button {
     width: 100%;
   }
+
+  .va-modal-alert .alert-actions {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .va-modal-alert .alert-actions button + button {
+    margin: 1.6rem 0 0 0;
+  }
 }
 
 @media screen and (max-width: 481px) {
@@ -205,6 +228,19 @@ i::before {
 
   .va-modal-inner {
     top: 0;
-    transform: none;
   }
+
+  .va-modal-alert .alert-actions {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .va-modal-alert .alert-actions button + button {
+    margin: 1.6rem 0 0 0;
+  }
+}
+
+:host([large]:not([large='false'])) .va-modal-inner {
+  max-width: 75rem;
+  width: 75vw;
 }

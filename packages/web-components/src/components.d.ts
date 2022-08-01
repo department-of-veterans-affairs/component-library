@@ -390,6 +390,10 @@ export namespace Components {
          */
         "initialFocusSelector"?: string;
         /**
+          * If `true`, modal will be wider.
+         */
+        "large"?: boolean;
+        /**
           * Title/header text for the modal
          */
         "modalTitle"?: string;
@@ -444,6 +448,24 @@ export namespace Components {
           * The value for the input.
          */
         "value"?: string;
+    }
+    interface VaOmbInfo {
+        /**
+          * The name of the benefit displayed in the Respondent Burden section of the Privacy Act Statement.
+         */
+        "benefitType"?: string;
+        /**
+          * The form expiration date.
+         */
+        "expDate": string;
+        /**
+          * The OMB control number or form number.
+         */
+        "ombNumber"?: string;
+        /**
+          * Displays the Respondent Burden section in the Privacy Act Statement modal and how many minutes the form is expected to take.
+         */
+        "resBurden"?: number;
     }
     interface VaOnThisPage {
         /**
@@ -869,6 +891,12 @@ declare global {
         prototype: HTMLVaNumberInputElement;
         new (): HTMLVaNumberInputElement;
     };
+    interface HTMLVaOmbInfoElement extends Components.VaOmbInfo, HTMLStencilElement {
+    }
+    var HTMLVaOmbInfoElement: {
+        prototype: HTMLVaOmbInfoElement;
+        new (): HTMLVaOmbInfoElement;
+    };
     interface HTMLVaOnThisPageElement extends Components.VaOnThisPage, HTMLStencilElement {
     }
     var HTMLVaOnThisPageElement: {
@@ -979,6 +1007,7 @@ declare global {
         "va-memorable-date": HTMLVaMemorableDateElement;
         "va-modal": HTMLVaModalElement;
         "va-number-input": HTMLVaNumberInputElement;
+        "va-omb-info": HTMLVaOmbInfoElement;
         "va-on-this-page": HTMLVaOnThisPageElement;
         "va-pagination": HTMLVaPaginationElement;
         "va-process-list": HTMLVaProcessListElement;
@@ -1477,6 +1506,10 @@ declare namespace LocalJSX {
          */
         "initialFocusSelector"?: string;
         /**
+          * If `true`, modal will be wider.
+         */
+        "large"?: boolean;
+        /**
           * Title/header text for the modal
          */
         "modalTitle"?: string;
@@ -1551,6 +1584,24 @@ declare namespace LocalJSX {
           * The value for the input.
          */
         "value"?: string;
+    }
+    interface VaOmbInfo {
+        /**
+          * The name of the benefit displayed in the Respondent Burden section of the Privacy Act Statement.
+         */
+        "benefitType"?: string;
+        /**
+          * The form expiration date.
+         */
+        "expDate": string;
+        /**
+          * The OMB control number or form number.
+         */
+        "ombNumber"?: string;
+        /**
+          * Displays the Respondent Burden section in the Privacy Act Statement modal and how many minutes the form is expected to take.
+         */
+        "resBurden"?: number;
     }
     interface VaOnThisPage {
         /**
@@ -1944,6 +1995,7 @@ declare namespace LocalJSX {
         "va-memorable-date": VaMemorableDate;
         "va-modal": VaModal;
         "va-number-input": VaNumberInput;
+        "va-omb-info": VaOmbInfo;
         "va-on-this-page": VaOnThisPage;
         "va-pagination": VaPagination;
         "va-process-list": VaProcessList;
@@ -1984,6 +2036,7 @@ declare module "@stencil/core" {
             "va-memorable-date": LocalJSX.VaMemorableDate & JSXBase.HTMLAttributes<HTMLVaMemorableDateElement>;
             "va-modal": LocalJSX.VaModal & JSXBase.HTMLAttributes<HTMLVaModalElement>;
             "va-number-input": LocalJSX.VaNumberInput & JSXBase.HTMLAttributes<HTMLVaNumberInputElement>;
+            "va-omb-info": LocalJSX.VaOmbInfo & JSXBase.HTMLAttributes<HTMLVaOmbInfoElement>;
             "va-on-this-page": LocalJSX.VaOnThisPage & JSXBase.HTMLAttributes<HTMLVaOnThisPageElement>;
             "va-pagination": LocalJSX.VaPagination & JSXBase.HTMLAttributes<HTMLVaPaginationElement>;
             "va-process-list": LocalJSX.VaProcessList & JSXBase.HTMLAttributes<HTMLVaProcessListElement>;
