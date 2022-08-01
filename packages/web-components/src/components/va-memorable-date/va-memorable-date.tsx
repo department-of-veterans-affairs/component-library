@@ -7,6 +7,7 @@ import {
   State,
   h,
   Element,
+  Fragment,
 } from '@stencil/core';
 
 import {
@@ -100,23 +101,13 @@ export class VaMemorableDate {
 
     if (this.required) {
       // Set the state so that we can set aria-invalid on the right component
-      this.invalidYear = (
-        !year ||
-        yearNum < minYear ||
-        yearNum > maxYear
-      );
+      this.invalidYear = !year || yearNum < minYear || yearNum > maxYear;
 
-      this.invalidMonth = (
-        !month ||
-        monthNum < minMonths ||
-        monthNum > maxMonths
-      );
+      this.invalidMonth =
+        !month || monthNum < minMonths || monthNum > maxMonths;
 
-      this.invalidDay =  (
-        !day ||
-        dayNum < minMonths ||
-        dayNum > daysForSelectedMonth.length
-      );
+      this.invalidDay =
+        !day || dayNum < minMonths || dayNum > daysForSelectedMonth.length;
 
       if (!leapYear && monthNum === 2 && dayNum > 28) {
         this.invalidYear = true;
@@ -125,11 +116,7 @@ export class VaMemorableDate {
       }
     }
 
-    if (
-      this.invalidYear ||
-      this.invalidMonth ||
-      this.invalidDay)
-    {
+    if (this.invalidYear || this.invalidMonth || this.invalidDay) {
       this.error = 'Please enter a valid date';
     } else if (this.error !== 'Please enter a valid date') {
       this.error;
@@ -212,11 +199,13 @@ export class VaMemorableDate {
             </div>
           </legend>
           <slot />
-          {error && (
-            <span id="error-message" role="alert">
-              <span class="sr-only">Error</span> {error}
-            </span>
-          )}
+          <span id="error-message" role="alert">
+            {error && (
+              <Fragment>
+                <span class="sr-only">Error</span> {error}
+              </Fragment>
+            )}
+          </span>
           <div class="date-container">
             <va-text-input
               label="Month"

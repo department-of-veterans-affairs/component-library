@@ -26,6 +26,9 @@ describe('va-segmented-progress-bar', () => {
             <div class="progress-segment"></div>
             <div class="progress-segment"></div>
           </div>
+          <span aria-atomic="true" aria-live="polite" class="sr-only">
+            Step 3 of 6
+          </span>
         </mock:shadow-root>
       </va-segmented-progress-bar>
     `);

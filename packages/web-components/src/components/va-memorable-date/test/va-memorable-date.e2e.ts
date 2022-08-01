@@ -18,6 +18,7 @@ describe('va-memorable-date', () => {
             </div>
           </legend>
           <slot></slot>
+          <span id="error-message" role="alert"></span>
           <div class='date-container'>
             <va-text-input aria-describedby='dateHint' class='hydrated input-month'></va-text-input>
             <va-text-input aria-describedby='dateHint' class='hydrated input-day'></va-text-input>
@@ -54,9 +55,7 @@ describe('va-memorable-date', () => {
       '<va-memorable-date label="This is a field" required />',
     );
 
-    const requiredSpan = await page.find(
-      'va-memorable-date >>> span.required',
-    );
+    const requiredSpan = await page.find('va-memorable-date >>> span.required');
     expect(requiredSpan).not.toBeNull();
   });
 
@@ -211,8 +210,8 @@ describe('va-memorable-date', () => {
       const handleYear = await page.$('pierce/[name="testYear"]');
       const handleMonth = await page.$('pierce/[name="testMonth"]');
       const handleDay = await page.$('pierce/[name="testDay"]');
-      const getAriaInvalid =
-        (element: HTMLElement) => element.getAttribute('aria-invalid');
+      const getAriaInvalid = (element: HTMLElement) =>
+        element.getAttribute('aria-invalid');
 
       // Click three times to select all text in input
       await handleYear.click({ clickCount: 3 });
@@ -254,8 +253,8 @@ describe('va-memorable-date', () => {
       const handleYear = await page.$('pierce/[name="testYear"]');
       const handleMonth = await page.$('pierce/[name="testMonth"]');
       const handleDay = await page.$('pierce/[name="testDay"]');
-      const getAriaInvalid =
-        (element: HTMLElement) => element.getAttribute('aria-invalid');
+      const getAriaInvalid = (element: HTMLElement) =>
+        element.getAttribute('aria-invalid');
 
       // Click three times to select all text in input
       await handleMonth.click({ clickCount: 3 });
@@ -296,8 +295,8 @@ describe('va-memorable-date', () => {
       const handleYear = await page.$('pierce/[name="testYear"]');
       const handleMonth = await page.$('pierce/[name="testMonth"]');
       const handleDay = await page.$('pierce/[name="testDay"]');
-      const getAriaInvalid =
-        (element: HTMLElement) => element.getAttribute('aria-invalid');
+      const getAriaInvalid = (element: HTMLElement) =>
+        element.getAttribute('aria-invalid');
 
       // Click three times to select all text in input
       await handleDay.click({ clickCount: 3 });

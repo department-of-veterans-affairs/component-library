@@ -166,3 +166,7 @@ i {
 i.fa-times-circle::before {
   content: '\F057'; /* fa-times-circle*/
 }
+
+:host([closeable]:not([closeable='false'])) .alert {
+  padding-right: 5.7rem;
+}

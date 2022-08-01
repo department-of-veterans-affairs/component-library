@@ -14,6 +14,7 @@ describe('va-number-input', () => {
           <label for="inputField">
             Hello, world
           </label>
+          <span id="error-message" role="alert"></span>
           <input id="inputField" type="number" aria-invalid="false" />
         </mock:shadow-root>
       </va-number-input>
@@ -37,7 +38,9 @@ describe('va-number-input', () => {
       '<va-number-input label="This is a field" required />',
     );
 
-    const requiredSpan = await page.find('va-number-input >>> label > span.required');
+    const requiredSpan = await page.find(
+      'va-number-input >>> label > span.required',
+    );
     // The actual text value depends on the language of the document
     expect(requiredSpan).not.toBeNull();
   });

@@ -62,6 +62,9 @@ export class VaProgressBar {
         >
           <div class="progress-bar-inner" style={{ width: `${percent}%` }} />
         </div>
+        <span aria-atomic="true" aria-live="polite" class="sr-only">
+          {percent.toFixed(0)}% complete
+        </span>
       </Host>
     );
   }
