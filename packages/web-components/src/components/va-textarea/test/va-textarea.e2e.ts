@@ -4,7 +4,9 @@ import { axeCheck } from '../../../testing/test-helpers';
 describe('va-textarea', () => {
   it('renders', async () => {
     const page = await newE2EPage();
-    await page.setContent('<va-textarea label="Describe your situation"></va-textarea>');
+    await page.setContent(
+      '<va-textarea label="Describe your situation"></va-textarea>',
+    );
 
     const element = await page.find('va-textarea');
     expect(element).toEqualHtml(`
@@ -13,6 +15,7 @@ describe('va-textarea', () => {
           <label for="textarea">
             Describe your situation
           </label>
+          <span id="error-message" role="alert"></span>
           <textarea id="textarea" aria-invalid="false"></textarea>
         </mock:shadow-root>
       </va-textarea>
@@ -36,7 +39,9 @@ describe('va-textarea', () => {
 
     // Render the error message text
     const textareaEl = await page.find('va-textarea >>> textarea ');
-    expect(textareaEl.getAttribute('aria-describedby')).toContain('error-message');
+    expect(textareaEl.getAttribute('aria-describedby')).toContain(
+      'error-message',
+    );
   });
 
   it('renders a required span', async () => {
@@ -62,9 +67,7 @@ describe('va-textarea', () => {
   it('fires an analytics event when enableAnalytics is true', async () => {
     const page = await newE2EPage();
 
-    await page.setContent(
-      '<va-textarea label="Something" enable-analytics/>',
-    );
+    await page.setContent('<va-textarea label="Something" enable-analytics/>');
 
     const analyticsSpy = await page.spyOnEvent('component-library-analytics');
 
@@ -121,9 +124,15 @@ describe('va-textarea', () => {
 
     // Act
     await textareaEl.press('a');
-    const firstValue = await page.$eval("va-textarea", (comp : HTMLTextAreaElement) => comp.value)
+    const firstValue = await page.$eval(
+      'va-textarea',
+      (comp: HTMLTextAreaElement) => comp.value,
+    );
     await textareaEl.press('s');
-    const secondValue = await page.$eval("va-textarea", (comp : HTMLTextAreaElement) => comp.value)
+    const secondValue = await page.$eval(
+      'va-textarea',
+      (comp: HTMLTextAreaElement) => comp.value,
+    );
 
     // Assert
     expect(inputSpy).toHaveReceivedEventTimes(2);
@@ -133,9 +142,7 @@ describe('va-textarea', () => {
 
   it('adds a max character limit with descriptive text', async () => {
     const page = await newE2EPage();
-    await page.setContent(
-      '<va-textarea maxlength="3" value="22"/>',
-    );
+    await page.setContent('<va-textarea maxlength="3" value="22"/>');
 
     // Level-setting expectations
     const textareaEl = await page.find('va-textarea >>> textarea');
@@ -161,7 +168,9 @@ describe('va-textarea', () => {
 
     // Test the functionality
     await textareaEl.type('Hello, nice to meet you');
-    expect(await textareaEl.getProperty('value')).toBe('Hello, nice to meet you');
+    expect(await textareaEl.getProperty('value')).toBe(
+      'Hello, nice to meet you',
+    );
     expect(await page.find('va-textarea >>> small')).toBeNull();
   });
 
@@ -175,7 +184,9 @@ describe('va-textarea', () => {
 
     // Test the functionality
     await textareaEl.type('Hello, nice to meet you');
-    expect(await textareaEl.getProperty('value')).toBe('Hello, nice to meet you');
+    expect(await textareaEl.getProperty('value')).toBe(
+      'Hello, nice to meet you',
+    );
     expect(await page.find('va-textarea >>> small')).toBeNull();
   });
 });

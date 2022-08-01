@@ -15,6 +15,7 @@ describe('va-text-input', () => {
             Hello, world
           </label>
           <slot></slot>
+          <span id="error-message" role="alert"></span>
           <input id="inputField" type="text" part="input" aria-invalid="false" />
         </mock:shadow-root>
       </va-text-input>
@@ -38,6 +39,7 @@ describe('va-text-input', () => {
             Name of issue
           </label>
           <slot></slot>
+          <span id="error-message" role="alert"></span>
           <input id="inputField" type="text" part="input" aria-invalid="false" />
         </mock:shadow-root>
         <p className="vads-u-font-weight--normal label-description">
@@ -63,9 +65,7 @@ describe('va-text-input', () => {
     const page = await newE2EPage();
     await page.setContent('<va-text-input invalid />');
 
-    const error = await page.find('va-text-input >>> span#error-message');
     const input = await page.find('va-text-input >>> input');
-    expect(error).toEqual(null);
     expect(input.getAttribute('aria-invalid')).toEqual('true');
   });
 
@@ -100,6 +100,7 @@ describe('va-text-input', () => {
             This is a field <span class="required">required</span>
           </label>
           <slot></slot>
+          <span id="error-message" role="alert"></span>
           <input id="inputField" type="text" required="" part="input" aria-invalid="false" />
         </mock:shadow-root>
       </va-text-input>

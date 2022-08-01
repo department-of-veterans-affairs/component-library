@@ -19,6 +19,7 @@ describe('va-select', () => {
           <label for="select" part="label">
             A label
           </label>
+          <span id="error-message" role="alert"></span>
           <slot></slot>
           <select id="select" part="select" aria-invalid="false">
             <option value="">Please choose an option</option>
@@ -48,10 +49,7 @@ describe('va-select', () => {
     const page = await newE2EPage();
     await page.setContent('<va-select invalid />');
 
-    // Render the error message text
-    const error = await page.find('va-select >>> span#error-message');
     const input = await page.find('va-select >>> select');
-    expect(error).toEqual(null);
     expect(input.getAttribute('aria-invalid')).toEqual('true');
   });
 

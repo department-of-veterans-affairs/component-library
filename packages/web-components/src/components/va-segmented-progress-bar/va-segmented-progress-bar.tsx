@@ -73,6 +73,9 @@ export class VaSegmentedProgressBar {
             />
           ))}
         </div>
+        <span aria-atomic="true" aria-live="polite" class="sr-only">
+          Step {current} of {total}
+        </span>
       </Host>
     );
   }
