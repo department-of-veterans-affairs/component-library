@@ -12,6 +12,7 @@ import {
 
 import webComponentDocs from '@department-of-veterans-affairs/web-components/component-docs.json';
 import { additionalDocs } from './additional-docs';
+import { category, level } from './maturity-scale';
 
 /**
  * Return the JSON object matching a specific component tag
@@ -129,6 +130,21 @@ export function Guidance({ href, name }) {
   );
 }
 
+const getDocsTagValue = (tagName, docsTags = []) => {
+  return docsTags
+    .filter(item => item.name === tagName)
+    .map(item => item.text)
+}
+
+const getMaturityScale = (docsTags = []) => {
+  const maturityCategory = getDocsTagValue('maturityCategory', docsTags).toString();
+  const maturityLevel = getDocsTagValue('maturityLevel', docsTags).toString();
+  return {
+    category: category[maturityCategory.toUpperCase()],
+    level: level[maturityLevel.toUpperCase()],
+  };
+}
+
 export function MaturityScale({ category, level }) {
   if (!category || !level) return null;
 
@@ -234,16 +250,16 @@ export function StoryDocs({ componentName, data, children }) {
   const componentDocs = additionalDocs?.[component];
   const componentData = data ? { ...data, ...componentDocs } : null;
 
-  const maturityCategory = componentDocs?.maturityCategory;
-  const maturityLevel = componentDocs?.maturityLevel;
+  const maturityScale = getMaturityScale(data.docsTags);
+
+  const maturityCategory = maturityScale.category ?? componentDocs?.maturityCategory;
+  const maturityLevel = maturityScale.level ?? componentDocs?.maturityLevel;
   // This feels a bit awkward, but I didn't want to use a magic number
   const _componentName = data?.tag?.slice('va-'.length);
   // Default the guidance values to be based on the web component's
   // tag name where possible
-  const {
-    guidanceHref = _componentName,
-    guidanceName = capitalize(_componentName)?.replaceAll('-', ' '),
-  } = componentDocs;
+  const guidanceHref = componentDocs?._componentName;
+  const guidanceName = capitalize(_componentName)?.replaceAll('-',' ');
 
   return (
     <>

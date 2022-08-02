@@ -286,14 +286,4 @@ export const additionalDocs = {
     maturityCategory: USE,
     maturityLevel: BEST_PRACTICE,
   },
-  'va-text-input': {
-    guidanceHref: 'form/text-input',
-    maturityCategory: USE,
-    maturityLevel: DEPLOYED,
-  },
-  'va-textarea': {
-    guidanceHref: 'form/textarea',
-    maturityCategory: USE,
-    maturityLevel: DEPLOYED,
-  },
 };
