@@ -1,10 +1,13 @@
-@use "uswds-core/src/styles/mixins/utility-builder" as *;
-@use "uswds-core/src/styles/functions" as *;
-@use "../utilities" as *;
+@use 'uswds-core/src/styles/mixins/utility-builder' as *;
+@use 'uswds-core/src/styles/functions' as *;
+@use '../utilities' as *;
 
 $utilities-package: map-collect(
   $u-color,
-  $u-bg-color
+  $u-bg-color,
+  $u-display,
+  $u-border,
+  $u-font
 );
 
 // Generate all utility classes

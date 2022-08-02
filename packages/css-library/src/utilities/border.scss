@@ -1,0 +1,97 @@
+@use 'uswds-core/src/styles/functions' as *;
+@use '../tokens/border' as *;
+@use '../tokens/color' as *;
+@use './settings' as *;
+
+$u-border-base: (
+  border: (
+    base: 'vads-border',
+    modifiers: null,
+    values: map-collect($tokens-border),
+    settings: $responsive,
+    property: 'border',
+    type: 'utility',
+  ),
+);
+
+$u-border-top: (
+  border-top: (
+    base: 'vads-border-top',
+    modifiers: null,
+    values: map-collect($tokens-border),
+    settings: $color-settings,
+    property: 'border-top',
+    type: 'utility',
+  ),
+);
+
+$u-border-right: (
+  border-right: (
+    base: 'vads-border-right',
+    modifiers: null,
+    values: map-collect($tokens-border),
+    settings: $color-settings,
+    property: 'border-right',
+    type: 'utility',
+  ),
+);
+
+$u-border-bottom: (
+  border-bottom: (
+    base: 'vads-border-bottom',
+    modifiers: null,
+    values: map-collect($tokens-border),
+    settings: $color-settings,
+    property: 'border-bottom',
+    type: 'utility',
+  ),
+);
+
+$u-border-left: (
+  border-left: (
+    base: 'vads-border-left',
+    modifiers: null,
+    values: map-collect($tokens-border),
+    settings: $color-settings,
+    property: 'border-left',
+    type: 'utility',
+  ),
+);
+
+$u-border-style: (
+  border-style: (
+    base: 'vads-border-style',
+    modifiers: null,
+    values: map-collect($tokens-border-style),
+    settings: $color-settings,
+    property: 'border-style',
+    type: 'utility',
+  ),
+);
+
+$u-border-color: (
+  border-color: (
+    base: 'vads-border-color',
+    modifiers: null,
+    values:
+      map-collect(
+        $tokens-color-basic,
+        $tokens-color-grayscale,
+        $tokens-color-tertiary,
+        $tokens-color-hub
+      ),
+    settings: $color-settings,
+    property: 'border-color',
+    type: 'utility',
+  ),
+);
+
+$u-border: map-collect(
+  $u-border-base,
+  $u-border-top,
+  $u-border-right,
+  $u-border-bottom,
+  $u-border-left,
+  $u-border-style,
+  $u-border-color
+);

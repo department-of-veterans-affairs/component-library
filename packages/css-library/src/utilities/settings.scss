@@ -6,3 +6,12 @@ $color-settings: (
   hover: false,
   visited: false,
 ) !default;
+
+$responsive: (
+  output: true,
+  responsive: true,
+  active: false,
+  focus: false,
+  hover: false,
+  visited: false,
+) !default;

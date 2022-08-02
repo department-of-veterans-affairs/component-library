@@ -1,0 +1,54 @@
+@use 'uswds-core/src/styles/functions' as *;
+@use '../tokens/font' as *;
+@use './settings' as *;
+
+$u-font-family: (
+  font-family: (
+    base: 'vads-font-family',
+    modifiers: null,
+    values: map-collect($tokens-font-family),
+    settings: $color-settings,
+    property: 'font-family',
+    type: 'utility',
+  ),
+);
+
+$u-font-size: (
+  font-size: (
+    base: 'vads-font-size',
+    modifiers: null,
+    values: map-collect($tokens-font-size),
+    settings: $responsive,
+    property: 'font-size',
+    type: 'utility',
+  ),
+);
+
+$u-font-style: (
+  font-style: (
+    base: 'vads-font-style',
+    modifiers: null,
+    values: map-collect($tokens-font-style),
+    settings: $color-settings,
+    property: 'font-style',
+    type: 'utility',
+  ),
+);
+
+$u-font-weight: (
+  font-weight: (
+    base: 'vads-font-weight',
+    modifiers: null,
+    values: map-collect($tokens-font-weight),
+    settings: $color-settings,
+    property: 'font-weight',
+    type: 'utility',
+  ),
+);
+
+$u-font: map-collect(
+  $u-font-family,
+  $u-font-size,
+  $u-font-style,
+  $u-font-weight
+);
