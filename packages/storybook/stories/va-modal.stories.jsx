@@ -27,6 +27,7 @@ export default {
 const Template = ({
   'click-to-close': clickToClose,
   'disable-analytics': disableAnalytics,
+  large,
   'modal-title': modalTitle,
   'initial-focus-selector': initialFocusSelector,
   primaryButtonClick,
@@ -46,6 +47,7 @@ const Template = ({
       <VaModal
         clickToClose={clickToClose}
         disableAnalytics={disableAnalytics}
+        large={large}
         modalTitle={modalTitle}
         initialFocusSelector={initialFocusSelector}
         onCloseEvent={onCloseEvent}
@@ -74,6 +76,7 @@ const Template = ({
 const defaultArgs = {
   'click-to-close': false,
   'disable-analytics': false,
+  'large': undefined,
   'modal-title': 'Modal title goes here',
   'initial-focus-selector': undefined,
   'status': undefined,
@@ -123,6 +126,7 @@ WithoutTitle.args = { ...defaultArgs, 'modal-title': undefined };
 export const WithNestedWebComponents = ({
   'click-to-close': clickToClose,
   'disable-analytics': disableAnalytics,
+  large,
   'modal-title': modalTitle,
   'initial-focus-selector': initialFocusSelector,
   primaryButtonClick,
@@ -144,6 +148,7 @@ export const WithNestedWebComponents = ({
       <VaModal
         clickToClose={clickToClose}
         disableAnalytics={disableAnalytics}
+        large={large}
         modalTitle={modalTitle}
         initialFocusSelector={initialFocusSelector}
         onCloseEvent={onCloseEvent}
@@ -174,6 +179,7 @@ WithNestedWebComponents.args = defaultArgs;
 const CrisisTemplate = ({
   'click-to-close': clickToClose,
   'disable-analytics': disableAnalytics,
+  large,
   'modal-title': modalTitle,
   'initial-focus-selector': initialFocusSelector,
   primaryButtonClick,
@@ -208,6 +214,7 @@ const CrisisTemplate = ({
       <VaModal
         clickToClose={clickToClose}
         disableAnalytics={disableAnalytics}
+        large={large}
         modalTitle={modalTitle}
         initialFocusSelector={initialFocusSelector}
         onCloseEvent={onCloseEvent}
@@ -260,3 +267,6 @@ CrisisLineModal.args = {
   'secondary-button-text': undefined,
   'modal-title': 'Get help from Veterans Crisis Line',
 };
+
+export const Large = Template.bind(null);
+Large.args = { ...defaultArgs, large: true };

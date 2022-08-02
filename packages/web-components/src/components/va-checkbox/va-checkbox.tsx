@@ -6,6 +6,7 @@ import {
   Host,
   h,
   Prop,
+  Fragment,
 } from '@stencil/core';
 
 /**
@@ -115,11 +116,13 @@ export class VaCheckbox {
         <div id="description">
           {description ? <p>{description}</p> : <slot name="description" />}
         </div>
-        {error && (
-          <span id="error-message" role="alert">
-            <span class="sr-only">Error</span> {error}
-          </span>
-        )}
+        <span id="error-message" role="alert">
+          {error && (
+            <Fragment>
+              <span class="sr-only">Error</span> {error}
+            </Fragment>
+          )}
+        </span>
         <input
           type="checkbox"
           id="checkbox-element"
