@@ -1,0 +1,90 @@
+@use 'uswds-core/src/styles/functions' as *;
+@use '../tokens/flexbox' as *;
+@use './settings' as *;
+
+// TODO: responsive
+@for $i from 1 through length($tokens-flex) {
+  $flex-value: nth(map-values($tokens-flex), $i);
+  $flex-grow-value: nth(map-values($tokens-flex-grow), $i);
+  $name: nth(map-keys($tokens-flex), $i);
+
+  .vads-flex-#{$name} {
+    flex: $flex-value;
+    flex-grow: $flex-grow-value;
+  }
+}
+
+$u-flex-direction: (
+  flex-direction: (
+    base: 'vads-flex-direction',
+    modifiers: null,
+    values: map-collect($tokens-flex-direction),
+    settings: $responsive,
+    property: 'flex-direction',
+    type: 'utility',
+  ),
+);
+
+$u-flex-wrap: (
+  flex-wrap: (
+    base: 'vads-flex-wrap',
+    modifiers: null,
+    values: map-collect($tokens-flex-wrap),
+    settings: $responsive,
+    property: 'flex-wrap',
+    type: 'utility',
+  ),
+);
+
+$u-align-items: (
+  align-items: (
+    base: 'vads-align-items',
+    modifiers: null,
+    values: map-collect($tokens-align-items),
+    settings: $responsive,
+    property: 'align-items',
+    type: 'utility',
+  ),
+);
+
+$u-justify-content: (
+  justify-content: (
+    base: 'vads-justify-content',
+    modifiers: null,
+    values: map-collect($tokens-justify-content),
+    settings: $responsive,
+    property: 'justify-content',
+    type: 'utility',
+  ),
+);
+
+$u-align-content: (
+  align-content: (
+    base: 'vads-align-content',
+    modifiers: null,
+    values: map-collect($tokens-align-content),
+    settings: $responsive,
+    property: 'align-content',
+    type: 'utility',
+  ),
+);
+
+$u-order: (
+  order: (
+    base: 'vads-order',
+    modifiers: null,
+    values: map-collect($tokens-order),
+    settings: $responsive,
+    property: 'order',
+    type: 'utility',
+  ),
+);
+
+$u-flexbox: map-collect(
+  $u-flex-direction,
+  $u-flex-wrap,
+  $u-align-items,
+  $u-justify-content,
+  $u-align-content,
+  $u-order
+);
