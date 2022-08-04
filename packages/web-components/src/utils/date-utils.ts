@@ -1,3 +1,4 @@
+import { Components } from '../components';
 export const maxYear = new Date().getFullYear() + 100;
 export const minYear = 1900;
 export const maxMonths = 12;
@@ -134,6 +135,42 @@ export const days = {
 export function checkLeapYear(year) {
   //three conditions to find out the leap year
   return (0 == year % 4 && 0 != year % 100) || 0 == year % 400;
+}
+
+export function validate(component: Components.VaDate, year: number, month: number, day: number) : void {
+
+  const leapYear = checkLeapYear(year);
+  const daysForSelectedMonth = leapYear && month == 2 ? 29 : days[month]?.length || 0;
+
+  console.log('Validation', component.required, year, month, day)
+  console.log('days for selected month', daysForSelectedMonth)
+  // Begin built-in validation
+  if (year && (year < minYear || year > maxYear)) {
+    component.invalidYear = true;
+    component.error = `Please enter a year between ${minYear} and ${maxYear}`;
+  }
+  else {
+    component.invalidYear = false;
+  }
+
+  if (month && (month < minMonths || month > maxMonths)) {
+    component.invalidMonth = true;
+    component.error = `Please enter a month between ${minMonths} and ${maxMonths}`;
+  }
+  else {
+    component.invalidMonth = false;
+  }
+
+  if (component.required && (!year || !month || (!component.monthYearOnly && !day))) {
+    component.invalidYear = !year;
+    component.invalidMonth = !month;
+    component.invalidDay = this.monthYearOnly ? false : !day;
+    component.error = "Please enter a complete date";
+  }
+
+  if (!component.invalidYear && !component.invalidMonth && !component.invalidDay) {
+    component.error = null;
+  }
 }
 
 // Allow 0-9, Backspace, Delete, Left and Right Arrow, and Tab to clear data or move to next field

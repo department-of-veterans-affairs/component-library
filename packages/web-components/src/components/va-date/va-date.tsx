@@ -4,7 +4,6 @@ import {
   EventEmitter,
   Host,
   Prop,
-  State,
   h,
   Element,
   Fragment,
@@ -13,11 +12,7 @@ import {
 import {
   months,
   days,
-  checkLeapYear,
-  maxMonths,
-  maxYear,
-  minMonths,
-  minYear,
+  validate,
   validKeys,
 } from '../../utils/date-utils';
 
@@ -86,9 +81,9 @@ export class VaDate {
   })
   dateBlur: EventEmitter;
 
-  @State() invalidDay: boolean = false;
-  @State() invalidMonth: boolean = false;
-  @State() invalidYear: boolean = false;
+  @Prop({ mutable: true }) invalidDay: boolean = false;
+  @Prop({ mutable: true }) invalidMonth: boolean = false;
+  @Prop({ mutable: true }) invalidYear: boolean = false;
 
   /**
    * Set the value prop as an ISO-8601 date using provided arguments.
@@ -115,48 +110,9 @@ export class VaDate {
     const [year, month, day] = (this.value || '')
       .split('-')
       .map(val => parseInt(val) || null);
+
     this.setValue(year, month, day);
-
-    const leapYear = checkLeapYear(year);
-    const daysForSelectedMonth = leapYear && month == 2 ? 29 : days[month]?.length || 0;
-
-    // Begin built-in validation
-    if (year && (year < minYear || year > maxYear)) {
-      this.invalidYear = true;
-      this.error = `Please enter a year between ${minYear} and ${maxYear}`;
-    }
-    else {
-      this.invalidYear = false;
-    }
-
-    if (month && (month < minMonths || month > maxMonths)) {
-      this.invalidMonth = true;
-      this.error = `Please enter a month between ${minMonths} and ${maxMonths}`;
-    }
-    else {
-      this.invalidMonth = false;
-    }
-
-    if (!this.monthYearOnly && (day &&
-      (day < minMonths || day > daysForSelectedMonth))) {
-      this.invalidDay = true;
-      this.error = `Please enter a day between ${minMonths} and ${daysForSelectedMonth}`;
-    }
-    else {
-      this.invalidDay = false;
-    }
-
-    if (this.required && (!year || !month || (!this.monthYearOnly && !day))) {
-      this.invalidYear = !year;
-      this.invalidMonth = !month;
-      this.invalidDay = this.monthYearOnly ? false : !day;
-      this.error = "Please enter a complete date";
-    }
-
-    if (!this.invalidYear && !this.invalidMonth && !this.invalidDay) {
-      this.error = null;
-    }
-
+    validate(this, year, month, day);
     this.dateBlur.emit(event);
   };
 
