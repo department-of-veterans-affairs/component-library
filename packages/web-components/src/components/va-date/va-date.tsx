@@ -112,7 +112,7 @@ export class VaDate {
       .map(val => parseInt(val) || null);
 
     this.setValue(year, month, day);
-    validate(this, year, month, day);
+    validate(this, year, month, day, this.monthYearOnly);
     this.dateBlur.emit(event);
   };
 

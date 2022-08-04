@@ -1,8 +1,8 @@
 import { Components } from '../components';
-export const maxYear = new Date().getFullYear() + 100;
-export const minYear = 1900;
-export const maxMonths = 12;
-export const minMonths = 1;
+const maxYear = new Date().getFullYear() + 100;
+const minYear = 1900;
+const maxMonths = 12;
+const minMonths = 1;
 
 export const months = [
   { label: 'January', value: 1 },
@@ -20,7 +20,7 @@ export const months = [
 ];
 
 /* eslint-disable i18next/no-literal-string */
-export const twentyNineDays = [
+const twentyNineDays = [
   '1',
   '2',
   '3',
@@ -51,7 +51,7 @@ export const twentyNineDays = [
   '28',
   '29',
 ];
-export const thirtyDays = [
+const thirtyDays = [
   '1',
   '2',
   '3',
@@ -83,7 +83,7 @@ export const thirtyDays = [
   '29',
   '30',
 ];
-export const thirtyOneDays = [
+const thirtyOneDays = [
   '1',
   '2',
   '3',
@@ -132,12 +132,12 @@ export const days = {
   12: thirtyOneDays,
 };
 
-export function checkLeapYear(year) {
+function checkLeapYear(year) {
   //three conditions to find out the leap year
   return (0 == year % 4 && 0 != year % 100) || 0 == year % 400;
 }
 
-export function validate(component: Components.VaDate, year: number, month: number, day: number) : void {
+export function validate(component: Components.VaDate | Components.VaMemorableDate, year: number, month: number, day: number, monthYearOnly : boolean = false) : void {
 
   const leapYear = checkLeapYear(year);
   const daysForSelectedMonth = leapYear && month == 2 ? 29 : days[month]?.length || 0;
@@ -161,7 +161,7 @@ export function validate(component: Components.VaDate, year: number, month: numb
     component.invalidMonth = false;
   }
 
-  if (component.required && (!year || !month || (!component.monthYearOnly && !day))) {
+  if (component.required && (!year || !month || (!monthYearOnly && !day))) {
     component.invalidYear = !year;
     component.invalidMonth = !month;
     component.invalidDay = this.monthYearOnly ? false : !day;
