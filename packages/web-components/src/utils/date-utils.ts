@@ -132,7 +132,11 @@ export const days = {
   12: thirtyOneDays,
 };
 
-function checkLeapYear(year) {
+/**
+ * Return true if the year is a leap year.
+ * (Exported for testing purposes)
+ */
+export function checkLeapYear(year: number) {
   //three conditions to find out the leap year
   return (0 == year % 4 && 0 != year % 100) || 0 == year % 400;
 }
