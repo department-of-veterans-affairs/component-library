@@ -1,0 +1,20 @@
+@use 'uswds-core/src/styles/functions' as *;
+@use './settings' as *;
+
+$u-position: (
+  position: (
+    base: 'vads-position',
+    modifiers: null,
+    values:
+      map-collect(
+        (
+          absolute: absolute,
+          fixed: fixed,
+          relative: relative,
+        )
+      ),
+    settings: $position-settings,
+    property: 'position',
+    type: 'utility',
+  ),
+);

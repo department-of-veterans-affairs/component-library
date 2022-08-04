@@ -1,21 +1,48 @@
 @use './_variables' as *;
 
 $tokens-flex: (
-  '1': 1 0 0%,
-  '2': 2 0 0%,
-  '3': 3 0 0%,
-  '4': 4 0 0%,
-  'fill': 1 0 0%,
-  'auto': 0 0 auto,
-);
-
-$tokens-flex-grow: (
-  '1': 1,
-  '2': 2,
-  '3': 3,
-  '4': 4,
-  'fill': 1,
-  'auto': 0,
+  1: (
+    slug: '1',
+    content: 1 0 0%,
+    extend: (
+      'flex-grow': 1,
+    ),
+  ),
+  2: (
+    slug: '2',
+    content: 2 0 0%,
+    extend: (
+      'flex-grow': 2,
+    ),
+  ),
+  3: (
+    slug: '3',
+    content: 3 0 0%,
+    extend: (
+      'flex-grow': 3,
+    ),
+  ),
+  4: (
+    slug: '4',
+    content: 4 0 0%,
+    extend: (
+      'flex-grow': 4,
+    ),
+  ),
+  auto: (
+    slug: 'auto',
+    content: 0 0 auto,
+    extend: (
+      'flex-grow': 0,
+    ),
+  ),
+  fill: (
+    slug: 'fill',
+    content: 1 0 0%,
+    extend: (
+      'flex-grow': 1,
+    ),
+  ),
 );
 
 $tokens-flex-direction: (

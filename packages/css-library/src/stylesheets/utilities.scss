@@ -2,7 +2,13 @@
 @use 'uswds-core/src/styles/functions' as *;
 @use '../utilities' as *;
 
-$utilities-package: map-collect($u-color, $u-bg-color, $u-flexbox);
+$utilities-package: map-collect(
+  $u-color,
+  $u-bg-color,
+  $u-flexbox,
+  $u-visibility,
+  $u-position
+);
 
 // Generate all utility classes
 @include render-utilities-in($utilities-package);
