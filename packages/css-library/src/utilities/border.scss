@@ -6,54 +6,16 @@
 $u-border-base: (
   border: (
     base: 'vads-border',
-    modifiers: null,
+    modifiers: (
+      noModifier: '',
+      'top': '-top',
+      'right': '-right',
+      'bottom': '-bottom',
+      'left': '-left',
+    ),
     values: map-collect($tokens-border),
     settings: $responsive,
     property: 'border',
-    type: 'utility',
-  ),
-);
-
-$u-border-top: (
-  border-top: (
-    base: 'vads-border-top',
-    modifiers: null,
-    values: map-collect($tokens-border),
-    settings: $color-settings,
-    property: 'border-top',
-    type: 'utility',
-  ),
-);
-
-$u-border-right: (
-  border-right: (
-    base: 'vads-border-right',
-    modifiers: null,
-    values: map-collect($tokens-border),
-    settings: $color-settings,
-    property: 'border-right',
-    type: 'utility',
-  ),
-);
-
-$u-border-bottom: (
-  border-bottom: (
-    base: 'vads-border-bottom',
-    modifiers: null,
-    values: map-collect($tokens-border),
-    settings: $color-settings,
-    property: 'border-bottom',
-    type: 'utility',
-  ),
-);
-
-$u-border-left: (
-  border-left: (
-    base: 'vads-border-left',
-    modifiers: null,
-    values: map-collect($tokens-border),
-    settings: $color-settings,
-    property: 'border-left',
     type: 'utility',
   ),
 );
@@ -86,12 +48,4 @@ $u-border-color: (
   ),
 );
 
-$u-border: map-collect(
-  $u-border-base,
-  $u-border-top,
-  $u-border-right,
-  $u-border-bottom,
-  $u-border-left,
-  $u-border-style,
-  $u-border-color
-);
+$u-border: map-collect($u-border-base, $u-border-style, $u-border-color);
