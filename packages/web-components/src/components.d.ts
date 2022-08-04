@@ -286,6 +286,24 @@ export namespace Components {
     }
     interface VaFeaturedContent {
     }
+    interface VaFileInput {
+        /**
+          * The text displayed on the button.
+         */
+        "buttontext"?: string;
+        /**
+          * The error message to render.
+         */
+        "error"?: string;
+        /**
+          * The label for the button input.
+         */
+        "label"?: string;
+        /**
+          * Set the input to required and render the (Required) text.
+         */
+        "required"?: boolean;
+    }
     interface VaLink {
         /**
           * The title used in the abbr element. If filetype is PDF, the abbr title will be Portable Document Format.
@@ -861,6 +879,12 @@ declare global {
         prototype: HTMLVaFeaturedContentElement;
         new (): HTMLVaFeaturedContentElement;
     };
+    interface HTMLVaFileInputElement extends Components.VaFileInput, HTMLStencilElement {
+    }
+    var HTMLVaFileInputElement: {
+        prototype: HTMLVaFileInputElement;
+        new (): HTMLVaFileInputElement;
+    };
     interface HTMLVaLinkElement extends Components.VaLink, HTMLStencilElement {
     }
     var HTMLVaLinkElement: {
@@ -1002,6 +1026,7 @@ declare global {
         "va-checkbox-group": HTMLVaCheckboxGroupElement;
         "va-date": HTMLVaDateElement;
         "va-featured-content": HTMLVaFeaturedContentElement;
+        "va-file-input": HTMLVaFileInputElement;
         "va-link": HTMLVaLinkElement;
         "va-loading-indicator": HTMLVaLoadingIndicatorElement;
         "va-memorable-date": HTMLVaMemorableDateElement;
@@ -1381,6 +1406,28 @@ declare namespace LocalJSX {
         "value"?: string;
     }
     interface VaFeaturedContent {
+    }
+    interface VaFileInput {
+        /**
+          * The text displayed on the button.
+         */
+        "buttontext"?: string;
+        /**
+          * The error message to render.
+         */
+        "error"?: string;
+        /**
+          * The label for the button input.
+         */
+        "label"?: string;
+        /**
+          * The event emitted when the input value changes.
+         */
+        "onVaChange"?: (event: CustomEvent<any>) => void;
+        /**
+          * Set the input to required and render the (Required) text.
+         */
+        "required"?: boolean;
     }
     interface VaLink {
         /**
@@ -1990,6 +2037,7 @@ declare namespace LocalJSX {
         "va-checkbox-group": VaCheckboxGroup;
         "va-date": VaDate;
         "va-featured-content": VaFeaturedContent;
+        "va-file-input": VaFileInput;
         "va-link": VaLink;
         "va-loading-indicator": VaLoadingIndicator;
         "va-memorable-date": VaMemorableDate;
@@ -2031,6 +2079,7 @@ declare module "@stencil/core" {
             "va-checkbox-group": LocalJSX.VaCheckboxGroup & JSXBase.HTMLAttributes<HTMLVaCheckboxGroupElement>;
             "va-date": LocalJSX.VaDate & JSXBase.HTMLAttributes<HTMLVaDateElement>;
             "va-featured-content": LocalJSX.VaFeaturedContent & JSXBase.HTMLAttributes<HTMLVaFeaturedContentElement>;
+            "va-file-input": LocalJSX.VaFileInput & JSXBase.HTMLAttributes<HTMLVaFileInputElement>;
             "va-link": LocalJSX.VaLink & JSXBase.HTMLAttributes<HTMLVaLinkElement>;
             "va-loading-indicator": LocalJSX.VaLoadingIndicator & JSXBase.HTMLAttributes<HTMLVaLoadingIndicatorElement>;
             "va-memorable-date": LocalJSX.VaMemorableDate & JSXBase.HTMLAttributes<HTMLVaMemorableDateElement>;
