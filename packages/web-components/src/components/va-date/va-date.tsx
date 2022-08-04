@@ -111,38 +111,49 @@ export class VaDate {
   private handleDateBlur = (event: FocusEvent) => {
     const [year, month, day] = (this.value || '')
       .split('-')
-      .map(val => parseInt(val));
+      .map(val => parseInt(val) || null);
     this.setValue(year, month, day);
 
-    const daysForSelectedMonth = month > 0 ? days[month] : [];
     const leapYear = checkLeapYear(year);
+    const daysForSelectedMonth = leapYear && month == 2 ? 29 : days[month]?.length || 0;
 
-    if (this.required) {
-      this.invalidYear = !year || year < minYear || year > maxYear;
-
-      this.invalidMonth = !month || month < minMonths || month > maxMonths;
-
-      this.invalidDay =
-        !this.monthYearOnly &&
-        (!day || day < minMonths || day > daysForSelectedMonth.length);
-
-      if (!leapYear && month === 2 && day > 28) {
-        this.invalidYear = true;
-        this.invalidMonth = true;
-        this.invalidDay = true;
-      }
+    // Begin built-in validation
+    if (year && (year < minYear || year > maxYear)) {
+      this.invalidYear = true;
+      this.error = `Please enter a year between ${minYear} and ${maxYear}`;
+    }
+    else {
+      this.invalidYear = false;
     }
 
-    if (
-      !this.error &&
-      (this.invalidYear || this.invalidMonth || this.invalidDay)
-    ) {
-      this.error = 'Please enter a valid date';
-    } else if (this.error !== 'Please enter a valid date') {
-      this.error;
-    } else {
-      this.error = '';
+    if (month && (month < minMonths || month > maxMonths)) {
+      this.invalidMonth = true;
+      this.error = `Please enter a month between ${minMonths} and ${maxMonths}`;
     }
+    else {
+      this.invalidMonth = false;
+    }
+
+    if (!this.monthYearOnly && (day &&
+      (day < minMonths || day > daysForSelectedMonth))) {
+      this.invalidDay = true;
+      this.error = `Please enter a day between ${minMonths} and ${daysForSelectedMonth}`;
+    }
+    else {
+      this.invalidDay = false;
+    }
+
+    if (this.required && (!year || !month || (!this.monthYearOnly && !day))) {
+      this.invalidYear = !year;
+      this.invalidMonth = !month;
+      this.invalidDay = this.monthYearOnly ? false : !day;
+      this.error = "Please enter a complete date";
+    }
+
+    if (!this.invalidYear && !this.invalidMonth && !this.invalidDay) {
+      this.error = null;
+    }
+
     this.dateBlur.emit(event);
   };
 
