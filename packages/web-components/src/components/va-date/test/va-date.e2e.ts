@@ -62,7 +62,7 @@ describe('va-date', () => {
     expect(requiredSpan).not.toBeNull();
   });
 
-  it('does not validate without required prop', async () => {
+  it('does basic validation without required prop', async () => {
     const page = await newE2EPage();
     await page.setContent(
       '<va-date value="1999-05-03" name="test" />',
@@ -77,7 +77,7 @@ describe('va-date', () => {
     await handleYear.press('Tab');
 
     await page.waitForChanges();
-    expect(date.getAttribute('error')).toEqual(null);
+    expect(date.getAttribute('error')).toEqual("Please enter a year between 1900 and 2122");
   });
 
   it('allows for a custom required message', async () => {
@@ -189,10 +189,10 @@ describe('va-date', () => {
     expect(elementYear.getAttribute('value')).toBe('2022');
   });
 
-  it('displays an error message onBlur if date is invalid and component is required', async () => {
+  it('displays an error message onBlur if year is invalid', async () => {
     const page = await newE2EPage();
     await page.setContent(
-      '<va-date value="1999-05-03" name="test" required="true" />',
+      '<va-date value="1999-05-03" name="test" />',
     );
     const date = await page.find('va-date');
     const handleYear = await page.$('pierce/[name="testYear"]');
@@ -204,7 +204,7 @@ describe('va-date', () => {
     await handleYear.press('Tab');
 
     await page.waitForChanges();
-    expect(date.getAttribute('error')).toEqual('Please enter a valid date');
+    expect(date.getAttribute('error')).toEqual('Please enter a year between 1900 and 2122');
 
     await handleYear.press('0');
     await handleYear.press('2');
@@ -212,7 +212,7 @@ describe('va-date', () => {
     // Trigger Blur
     await handleYear.press('Tab');
     await page.waitForChanges();
-    expect(date.getAttribute('error')).toEqual('');
+    expect(date.getAttribute('error')).toEqual(null);
   });
 
   describe('invalid subcomponents', () => {
@@ -432,8 +432,10 @@ describe('va-date', () => {
     const handleDay = await page.$('pierce/[name="testDay"]');
     const handleYear = await page.$('pierce/[name="testYear"]');
     // Month
+    // This is a blank option
     await handleMonth.select();
     // Day
+    // This is a blank option
     await handleDay.select();
     // Year
     await handleYear.press('3');
@@ -443,7 +445,7 @@ describe('va-date', () => {
     // Trigger Blur
     await handleYear.press('Tab');
     await page.waitForChanges();
-    expect(date.getAttribute('error')).toEqual('Please enter a valid date');
+    expect(date.getAttribute('error')).toEqual('Please enter a complete date');
   });
 
   describe('monthYearOnly variant', () => {
@@ -498,7 +500,7 @@ describe('va-date', () => {
       // Trigger Blur
       await handleYear.press('Tab');
       await page.waitForChanges();
-      expect(date.getAttribute('error')).toEqual('Please enter a valid date');
+      expect(date.getAttribute('error')).toEqual('Please enter a complete date');
     });
 
     it('sets the value as ISO-8601 date with reduced precision', async () => {
