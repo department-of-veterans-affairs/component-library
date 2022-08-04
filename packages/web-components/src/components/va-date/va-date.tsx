@@ -53,7 +53,7 @@ export class VaDate {
    * The error message to render (if any)
    * This prop should be leveraged to display any custom validations needed for this component
    */
-  @Prop() error?: string;
+  @Prop({ reflect: true }) error?: string;
 
   /**
    * Whether or not only the Month and Year inputs should be displayed.
@@ -225,7 +225,7 @@ export class VaDate {
     // Error attribute should be leveraged for custom error messaging
     // Fieldset has an implicit aria role of group
     return (
-      <Host value={value} error={error} onBlur={handleDateBlur}>
+      <Host value={value} onBlur={handleDateBlur}>
         <fieldset>
           <legend>
             {label} {required && <span class="required">(*Required)</span>}
