@@ -63,7 +63,10 @@ export class VaDate {
   /**
    * Set the default date value must be in YYYY-MM-DD format.
    */
-  @Prop({ mutable: true }) value?: string;
+  @Prop({
+    mutable: true,
+    reflect: true
+  }) value?: string;
 
   /**
    * Fires when the date input loses focus after its value was changed
@@ -222,10 +225,9 @@ export class VaDate {
       .map(val => parseInt(val));
     const daysForSelectedMonth = month > 0 ? days[month] : [];
 
-    // Error attribute should be leveraged for custom error messaging
     // Fieldset has an implicit aria role of group
     return (
-      <Host value={value} onBlur={handleDateBlur}>
+      <Host onBlur={handleDateBlur}>
         <fieldset>
           <legend>
             {label} {required && <span class="required">(*Required)</span>}
