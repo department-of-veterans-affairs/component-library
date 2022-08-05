@@ -288,6 +288,10 @@ export namespace Components {
     }
     interface VaFileInput {
         /**
+          * A comma-separated list of unique file type specifiers.
+         */
+        "accept"?: string;
+        /**
           * The text displayed on the button.
          */
         "buttontext"?: string;
@@ -299,6 +303,14 @@ export namespace Components {
           * The label for the button input.
          */
         "label"?: string;
+        /**
+          * Allow the input to accept multiple files.
+         */
+        "multiple"?: boolean;
+        /**
+          * The name for the input element.
+         */
+        "name"?: string;
         /**
           * Set the input to required and render the (Required) text.
          */
@@ -1409,6 +1421,10 @@ declare namespace LocalJSX {
     }
     interface VaFileInput {
         /**
+          * A comma-separated list of unique file type specifiers.
+         */
+        "accept"?: string;
+        /**
           * The text displayed on the button.
          */
         "buttontext"?: string;
@@ -1420,6 +1436,14 @@ declare namespace LocalJSX {
           * The label for the button input.
          */
         "label"?: string;
+        /**
+          * Allow the input to accept multiple files.
+         */
+        "multiple"?: boolean;
+        /**
+          * The name for the input element.
+         */
+        "name"?: string;
         /**
           * The event emitted when the input value changes.
          */

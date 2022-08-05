@@ -16,29 +16,36 @@ export default {
 
 const defaultArgs = {
   'label': 'This is the file upload label',
+  'name': 'my-file-input',
   'buttontext': 'Upload a document or file',
-  'error': undefined,
   'required': false,
+  'multiple': true,
+  'error': undefined,
 };
 
 const Template = ({
   label,
+  name,
   buttontext,
   error,
   required,
+  multiple
 }) => {
   return (
     <va-file-input
       label={label}
+      name={name}
       buttontext={buttontext}
-      error={error}
       required={required}
+      multiple={multiple}
+      error={error}
     />
   );
 };
 
 const I18nTemplate = ({
     label,
+    name,
     buttontext,
     error,
     required
@@ -57,8 +64,8 @@ const I18nTemplate = ({
       </button>
       <va-file-input
         label={label}
+        name={name}
         buttontext={buttontext}
-        error={error}
         required={required}
       />
     </>

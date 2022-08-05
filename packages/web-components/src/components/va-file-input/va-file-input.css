@@ -5,6 +5,10 @@
   font-family: var(--font-source-sans);
 }
 
+label[part="label"] {
+  display: block;
+}
+
 .file-input-button {
   align-items: center;
   background-color: var(--color-white);

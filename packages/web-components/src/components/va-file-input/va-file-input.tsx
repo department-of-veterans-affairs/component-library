@@ -32,6 +32,11 @@ export class VaFileInput {
   @Prop() label?: string;
 
   /**
+   * The name for the input element.
+   */
+   @Prop() name?: string;
+
+  /**
    * The text displayed on the button.
    */
   @Prop() buttontext?: string = i18next.t('Upload a document or file');
@@ -40,6 +45,16 @@ export class VaFileInput {
    * Set the input to required and render the (Required) text.
    */
   @Prop() required?: boolean = false;
+
+  /**
+   * Allow the input to accept multiple files.
+   */
+   @Prop() multiple?: boolean = false;
+
+  /**
+   * A comma-separated list of unique file type specifiers.
+   */
+   @Prop() accept?: string;
 
   /**
    * The error message to render.
@@ -51,16 +66,25 @@ export class VaFileInput {
    */
    @Event() vaChange: EventEmitter;
 
-  private handleInput = (e: Event) => {
+  private handleChange = (e: Event) => {
     const target = e.target as HTMLInputElement;
     this.vaChange.emit(target.files);
+    /**
+     * clear the original input, otherwise events will be triggered
+     * with empty file arrays and sometimes uploading a file twice will
+     * not work.
+     * TODO: this is from the React version. Try to repro the issue it's 
+     * solving for.
+     */
+    target.value = null;
+    // TODO: For testing only.
     // eslint-disable-next-line i18next/no-literal-string
-    console.log('target.files', target.files)
+    console.log('target.files', target.files);
   };
 
   private handleKeyPress = (e: KeyboardEvent) => {
     if (e.key === 'Enter' || e.key === ' ') {
-      document.getElementById('fileInputField').click();
+      this.el.shadowRoot.getElementById('fileInputField').click();
     }
   }
 
@@ -75,49 +99,54 @@ export class VaFileInput {
   }
 
   render() {
-    const { label, buttontext, required, error } = this;
+    const { 
+      label,
+      name, 
+      buttontext, 
+      required, 
+      multiple,
+      accept,
+      error 
+    } = this;
     return (
       <Host>
-        {/* TODO:  additionalClass? */}
-        <div class="hello-world">
-          {label && (
-            <label htmlFor="fileInputField" part="label">
-              {label}{' '}
-              {required && <span class="required">{i18next.t('required')}</span>}
-            </label>
-          )}
-          <slot></slot>
-           {/* TODO: Error style */}
-          <span id="error-message" role="alert">
-            {error && (
-              <Fragment>
-                <span class="sr-only">{i18next.t('error')}</span> 
-                {error}
-              </Fragment>
-            )}
-          </span>
-          {/* TODO: Progress bar? */}
-          <label
-            role="button"
-            tabIndex={0}
-            htmlFor="fileInputField"
-            onKeyPress={this.handleKeyPress}
-            aria-describedby={error ? 'error-message' : undefined}
-            class="file-input-button"
-          >
-            {buttontext}
+        {label && (
+          <label htmlFor="fileInputField" part="label">
+            {label}{' '}
+            {required && <span class="required">{i18next.t('required')}</span>}
           </label>
-          {/* TODO: Add props */}
-          <input
-              multiple={false}
-              style={{ display: 'none' }}
-              type="file"
-              accept="jpg,jpeg"
-              id="fileInputField"
-              name="my-input"
-              onInput={this.handleInput}
-            />
-        </div>
+        )}
+        {/* TODO: Check positioning of the slot for displaying progress bar & file name */}
+        <slot></slot>
+          {/* TODO: Error style */}
+        <span id="error-message" role="alert">
+          {error && (
+            <Fragment>
+              <span class="sr-only">{i18next.t('error')}</span> 
+              {error}
+            </Fragment>
+          )}
+        </span>
+        {/* TODO: Progress bar? */}
+        <label
+          role="button"
+          tabIndex={0}
+          htmlFor="fileInputField"
+          onKeyPress={this.handleKeyPress}
+          aria-describedby={error ? 'error-message' : undefined}
+          class="file-input-button"
+        >
+          {buttontext}
+        </label>
+        <input
+            multiple={multiple}
+            style={{ display: 'none' }}
+            type="file"
+            accept={accept}
+            id="fileInputField"
+            name={name}
+            onChange={this.handleChange}
+          />
       </Host>
     );
   }
