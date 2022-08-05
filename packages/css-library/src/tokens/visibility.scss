@@ -3,7 +3,6 @@ $tokens-visibility: (
   'visible': visible,
 );
 
-// TODO: responsive
 .vads-visibility-screen-reader {
   border: 0;
   clip: rect(0, 0, 0, 0);
@@ -15,4 +14,26 @@ $tokens-visibility: (
   position: absolute;
   width: 1px;
   word-wrap: normal;
+}
+
+$u-breakpoints: (
+  'mobile-lg': 30em,
+  'tablet': 40em,
+  'desktop': 64em,
+);
+@each $media-key, $media-value in $u-breakpoints {
+  @media all and (min-width: #{$media-value}) {
+    .#{$media-key}\:vads-visibility-screen-reader {
+      border: 0;
+      clip: rect(0, 0, 0, 0);
+      clip-path: inset(50%);
+      height: 1px;
+      margin: -1px;
+      overflow: hidden;
+      padding: 0;
+      position: absolute;
+      width: 1px;
+      word-wrap: normal;
+    }
+  }
 }
