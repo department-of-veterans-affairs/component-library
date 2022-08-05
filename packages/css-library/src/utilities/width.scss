@@ -1,0 +1,38 @@
+@use 'uswds-core/src/styles/functions' as *;
+@use '../tokens/width' as *;
+@use './settings' as *;
+
+$u-width-base: (
+  width: (
+    base: 'vads-width',
+    modifiers: null,
+    values: map-collect($tokens-width),
+    settings: $width-settings,
+    property: 'width',
+    type: 'utility',
+  ),
+);
+
+$u-min-width: (
+  min-width: (
+    base: 'vads-min-width',
+    modifiers: null,
+    values: map-collect($tokens-min-width),
+    settings: $width-settings,
+    property: 'min-width',
+    type: 'utility',
+  ),
+);
+
+$u-max-width: (
+  max-width: (
+    base: 'vads-max-width',
+    modifiers: null,
+    values: map-collect($tokens-max-width),
+    settings: $width-settings,
+    property: 'max-width',
+    type: 'utility',
+  ),
+);
+
+$u-width: map-collect($u-width-base, $u-min-width, $u-max-width);
