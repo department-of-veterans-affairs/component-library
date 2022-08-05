@@ -14,7 +14,7 @@ $u-border-base: (
       'left': '-left',
     ),
     values: map-collect($tokens-border),
-    settings: $responsive,
+    settings: $border-settings,
     property: 'border',
     type: 'utility',
   ),
@@ -22,10 +22,10 @@ $u-border-base: (
 
 $u-border-style: (
   border-style: (
-    base: 'vads-border-style',
+    base: 'vads-border',
     modifiers: null,
     values: map-collect($tokens-border-style),
-    settings: $color-settings,
+    settings: $border-other-settings,
     property: 'border-style',
     type: 'utility',
   ),
@@ -33,7 +33,7 @@ $u-border-style: (
 
 $u-border-color: (
   border-color: (
-    base: 'vads-border-color',
+    base: 'vads-border',
     modifiers: null,
     values:
       map-collect(
@@ -42,7 +42,7 @@ $u-border-color: (
         $tokens-color-tertiary,
         $tokens-color-hub
       ),
-    settings: $color-settings,
+    settings: $border-other-settings,
     property: 'border-color',
     type: 'utility',
   ),

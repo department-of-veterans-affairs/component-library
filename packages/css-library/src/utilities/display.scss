@@ -4,10 +4,10 @@
 
 $u-display: (
   display: (
-    base: 'vads-display',
+    base: 'vads',
     modifiers: null,
     values: map-collect($tokens-display),
-    settings: $responsive,
+    settings: $display-settings,
     property: 'display',
     type: 'utility',
   ),
