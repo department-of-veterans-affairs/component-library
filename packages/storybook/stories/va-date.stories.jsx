@@ -17,8 +17,9 @@ export default {
 };
 
 const defaultArgs = {
-  'label': 'Date of birth',
-  'name': 'test',
+  'label':
+    'What’s the date or anticipated date of your release from active duty?',
+  'name': 'discharge-date',
   'required': false,
   'error': undefined,
   'value': undefined,
