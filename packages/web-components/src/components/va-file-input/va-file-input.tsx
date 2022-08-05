@@ -66,18 +66,20 @@ export class VaFileInput {
    */
    @Event() vaChange: EventEmitter;
 
-  private handleChange = (e: Event) => {
+  private handleInput = (e: Event) => {
     const target = e.target as HTMLInputElement;
-    this.vaChange.emit(target.files);
+    this.vaChange.emit({files: target?.files});
     /**
-     * clear the original input, otherwise events will be triggered
+     * TODO: this is from the React version. Try to repro the issue it's 
+     * solving for. Might not be needed anymore.
+     * 
+     * Clear the original input, otherwise events will be triggered
      * with empty file arrays and sometimes uploading a file twice will
      * not work.
-     * TODO: this is from the React version. Try to repro the issue it's 
-     * solving for.
      */
     target.value = null;
-    // TODO: For testing only.
+
+    // TODO: Remove; for testing only.
     // eslint-disable-next-line i18next/no-literal-string
     console.log('target.files', target.files);
   };
@@ -128,6 +130,7 @@ export class VaFileInput {
           )}
         </span>
         {/* TODO: Progress bar? */}
+        {/* TODO: Disabled? */}
         <label
           role="button"
           tabIndex={0}
@@ -145,7 +148,7 @@ export class VaFileInput {
             accept={accept}
             id="fileInputField"
             name={name}
-            onChange={this.handleChange}
+            onInput={this.handleInput}
           />
       </Host>
     );
