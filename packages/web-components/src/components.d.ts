@@ -1445,7 +1445,7 @@ declare namespace LocalJSX {
          */
         "name"?: string;
         /**
-          * The event emitted when the input value changes.
+          * The event emitted when the file input value changes.
          */
         "onVaChange"?: (event: CustomEvent<any>) => void;
         /**

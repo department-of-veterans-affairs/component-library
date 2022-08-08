@@ -34,7 +34,7 @@ export class VaFileInput {
   /**
    * The name for the input element.
    */
-   @Prop() name?: string;
+  @Prop() name?: string;
 
   /**
    * The text displayed on the button.
@@ -49,12 +49,12 @@ export class VaFileInput {
   /**
    * Allow the input to accept multiple files.
    */
-   @Prop() multiple?: boolean = false;
+  @Prop() multiple?: boolean = false;
 
   /**
    * A comma-separated list of unique file type specifiers.
    */
-   @Prop() accept?: string;
+  @Prop() accept?: string;
 
   /**
    * The error message to render.
@@ -62,13 +62,17 @@ export class VaFileInput {
   @Prop() error?: string;
 
   /**
-   * The event emitted when the input value changes.
+   * The event emitted when the file input value changes.
    */
-   @Event() vaChange: EventEmitter;
+  @Event() vaChange: EventEmitter;
 
-  private handleInput = (e: Event) => {
+  private handleChange = (e: Event) => {
     const target = e.target as HTMLInputElement;
-    this.vaChange.emit({files: target?.files});
+    // TODO: Remove; for testing only.
+    // eslint-disable-next-line i18next/no-literal-string
+    console.log('target.files', target.files);
+
+    this.vaChange.emit({files: target.files});
     /**
      * TODO: this is from the React version. Try to repro the issue it's 
      * solving for. Might not be needed anymore.
@@ -78,16 +82,16 @@ export class VaFileInput {
      * not work.
      */
     target.value = null;
-
-    // TODO: Remove; for testing only.
-    // eslint-disable-next-line i18next/no-literal-string
-    console.log('target.files', target.files);
   };
 
-  private handleKeyPress = (e: KeyboardEvent) => {
+  private handleButtonKeyPress = (e: KeyboardEvent) => {
     if (e.key === 'Enter' || e.key === ' ') {
-      this.el.shadowRoot.getElementById('fileInputField').click();
+      this.handleButtonClick();
     }
+  }
+
+  private handleButtonClick = () => {
+    this.el.shadowRoot.getElementById('fileInputField').click();
   }
 
   connectedCallback() {
@@ -108,19 +112,16 @@ export class VaFileInput {
       required, 
       multiple,
       accept,
-      error 
+      error
     } = this;
     return (
       <Host>
         {label && (
           <label htmlFor="fileInputField" part="label">
-            {label}{' '}
+            {label}
             {required && <span class="required">{i18next.t('required')}</span>}
           </label>
         )}
-        {/* TODO: Check positioning of the slot for displaying progress bar & file name */}
-        <slot></slot>
-          {/* TODO: Error style */}
         <span id="error-message" role="alert">
           {error && (
             <Fragment>
@@ -129,26 +130,20 @@ export class VaFileInput {
             </Fragment>
           )}
         </span>
-        {/* TODO: Progress bar? */}
-        {/* TODO: Disabled? */}
-        <label
-          role="button"
-          tabIndex={0}
-          htmlFor="fileInputField"
-          onKeyPress={this.handleKeyPress}
+        <va-button
+          onKeyPress={this.handleButtonKeyPress}
+          onClick={this.handleButtonClick}
+          secondary
+          text={buttontext}
           aria-describedby={error ? 'error-message' : undefined}
-          class="file-input-button"
-        >
-          {buttontext}
-        </label>
+        />
         <input
             multiple={multiple}
-            style={{ display: 'none' }}
             type="file"
             accept={accept}
             id="fileInputField"
             name={name}
-            onInput={this.handleInput}
+            onChange={this.handleChange}
           />
       </Host>
     );
