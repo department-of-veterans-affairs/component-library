@@ -1,6 +1,6 @@
 {
   "name": "@department-of-veterans-affairs/web-components",
-  "version": "4.10.1",
+  "version": "4.10.2-0",
   "description": "Stencil Component Starter",
   "main": "dist/index.cjs.js",
   "module": "dist/index.js",
@@ -61,5 +61,6 @@
     "@department-of-veterans-affairs/formation": "^8.0.0",
     "i18next": "*",
     "i18next-browser-languagedetector": "*"
-  }
+  },
+  "stableVersion": "4.10.1"
 }
