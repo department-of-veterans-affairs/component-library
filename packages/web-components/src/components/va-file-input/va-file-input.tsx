@@ -62,9 +62,25 @@ export class VaFileInput {
   @Prop() error?: string;
 
   /**
+   * Emit component-library-analytics events on the blur event.
+   */
+   @Prop() enableAnalytics?: boolean = false;
+
+  /**
    * The event emitted when the file input value changes.
    */
   @Event() vaChange: EventEmitter;
+
+  /**
+   * The event used to track usage of the component. This is emitted when the
+   * file input changes and enableAnalytics is true.
+   */
+   @Event({
+    eventName: 'component-library-analytics',
+    composed: true,
+    bubbles: true,
+  })
+  componentLibraryAnalytics: EventEmitter;
 
   private handleChange = (e: Event) => {
     const target = e.target as HTMLInputElement;
@@ -75,6 +91,17 @@ export class VaFileInput {
      * not work.
      */
     target.value = null;
+
+    // TODO: Analytics details.
+    if (this.enableAnalytics) {
+      this.componentLibraryAnalytics.emit({
+        componentName: 'va-file-input',
+        action: 'change',
+        details: {
+          label: this.label
+        },
+      });
+    }
   };
 
   private handleButtonKeyPress = (e: KeyboardEvent) => {

@@ -50,8 +50,7 @@ const Template = ({
       required={required}
       multiple={multiple}
       error={error}
-    ><p>hello world!</p>
-    </va-file-input>
+    />
   );
 };
 
@@ -105,5 +104,5 @@ Internationalization.args = {
   required: true,
 };
 
-// export const WithAnalytics = Template.bind(null);
-// WithAnalytics.args = { ...defaultArgs, 'enable-analytics': true };
+export const WithAnalytics = Template.bind(null);
+WithAnalytics.args = { ...defaultArgs, 'enable-analytics': true };

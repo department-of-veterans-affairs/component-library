@@ -296,6 +296,10 @@ export namespace Components {
          */
         "buttontext"?: string;
         /**
+          * Emit component-library-analytics events on the blur event.
+         */
+        "enableAnalytics"?: boolean;
+        /**
           * The error message to render.
          */
         "error"?: string;
@@ -1429,6 +1433,10 @@ declare namespace LocalJSX {
          */
         "buttontext"?: string;
         /**
+          * Emit component-library-analytics events on the blur event.
+         */
+        "enableAnalytics"?: boolean;
+        /**
           * The error message to render.
          */
         "error"?: string;
@@ -1444,6 +1452,10 @@ declare namespace LocalJSX {
           * The name for the input element.
          */
         "name"?: string;
+        /**
+          * The event used to track usage of the component. This is emitted when the file input changes and enableAnalytics is true.
+         */
+        "onComponent-library-analytics"?: (event: CustomEvent<any>) => void;
         /**
           * The event emitted when the file input value changes.
          */
