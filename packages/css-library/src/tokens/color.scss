@@ -1,0 +1,69 @@
+@use "./_variables" as *;
+
+// Our colors
+$tokens-color-basic: (
+  "base": $color-base,
+  "white": $color-white,
+  "black": $color-black,
+  "orange": false,
+  "link-default": $color-link-default,
+  "warning-message": $color-warning-message,
+  "gibill-accent": $color-gibill-accent,
+  "primary": $color-primary,
+  "primary-darker": $color-primary-darker,
+  "primary-darkest": $color-primary-darkest,
+  "primary-alt": $color-primary-alt,
+  "primary-alt-dark": $color-primary-alt-dark,
+  "primary-alt-darkest": $color-primary-alt-darkest,
+  "primary-alt-light": $color-primary-alt-light,
+  "primary-alt-lightest": $color-primary-alt-lightest,
+  "secondary": $color-secondary,
+  "secondary-dark": $color-secondary-dark,
+  "secondary-darkest": $color-secondary-darkest,
+  "secondary-light": $color-secondary-light,
+  "secondary-lightest": $color-secondary-lightest,
+);
+
+$tokens-color-grayscale: (
+  "gray": $color-gray,
+  "gray-dark": $color-gray-dark,
+  "gray-medium": $color-gray-medium,
+  "gray-light": $color-gray-light,
+  "gray-light-alt": $color-gray-light-alt,
+  "gray-lighter": $color-gray-lighter,
+  "gray-lightest": $color-gray-lightest,
+  "gray-warm-dark": $color-gray-warm-dark,
+  "gray-warm-light": $color-gray-warm-light,
+  "gray-cool-light": $color-gray-cool-light,
+);
+
+$tokens-color-tertiary: (
+  "gold": "#fdb81e",
+  "gold-darker": "#988530",
+  "gold-light": "#f9c642",
+  "gold-lighter": "#fad980",
+  "gold-lightest": "#fff1d2",
+  "green": "#2e8540",
+  "green-darker": "#195c27",
+  "green-light": "#4aa564",
+  "green-lighter": "#94bfa2",
+  "green-lightest": "#e7f4e4",
+  "cool-blue": "#205493",
+  "cool-blue-light": "#4773aa",
+  "cool-blue-lighter": "#8ba6ca",
+  "cool-blue-lightest": "#dce4ef",
+);
+
+// TODO: Consider removing these since they aren't used
+$tokens-color-hub: (
+  "hub-health-care": "#3f57a6",
+  "hub-education": "#21827f",
+  "hub-disability": "#a23737",
+  "hub-careers": "#bd5727",
+  "hub-pension": "#3e8520",
+  "hub-housing": "#8e704f",
+  "hub-life-insurance": "#6f7a41",
+  "hub-burials": "#357ab2",
+  "hub-family-member": "#003e73",
+  "hub-service-member": "#003e73",
+);

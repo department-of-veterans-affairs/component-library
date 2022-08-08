@@ -8,10 +8,15 @@ import {
   Prop,
   State,
   h,
+  Watch,
+  Fragment,
 } from '@stencil/core';
 import i18next from 'i18next';
 import { getSlottedNodes } from '../../utils/utils';
 
+/**
+ * @nativeHandler onKeyDown
+ */
 @Component({
   tag: 'va-select',
   styleUrl: 'va-select.css',
@@ -23,32 +28,38 @@ export class VaSelect {
   /**
    * Whether or not this is a required field.
    */
-  @Prop() required: boolean;
+  @Prop() required?: boolean = false;
 
   /**
    * Text label for the field.
    */
-  @Prop() label: string;
+  @Prop() label!: string;
 
   /**
    * Name attribute for the select field.
    */
-  @Prop() name: string;
+  @Prop() name!: string;
 
   /**
    * Selected value (will get updated on select).
    */
-  @Prop({ reflect: true, mutable: true }) value: string;
+  @Prop({ reflect: true, mutable: true }) value?: string;
 
   /**
    * Error message to display. When defined, this indicates an error.
    */
-  @Prop() error: string;
+  @Prop() error?: string;
+
+  /**
+   * Whether or not `aria-invalid` will be set on the inner select. Useful when
+   * composing the component into something larger, like a date component.
+   */
+  @Prop() invalid?: boolean = false;
 
   /**
    * Whether or not to fire the analytics events
    */
-  @Prop() enableAnalytics: boolean;
+  @Prop() enableAnalytics?: boolean = false;
 
   /**
    * The event attached to select's onkeydown
@@ -125,25 +136,31 @@ export class VaSelect {
     );
   }
 
+  @Watch('value')
+  handleValueChange() {
+    this.populateOptions();
+  }
+
   render() {
-    const { error, label, required, name } = this;
-    const errorSpanId = error ? 'error' : undefined;
+    const { error, invalid, label, required, name } = this;
 
     return (
       <Host>
         <label htmlFor="select" part="label">
           {label}
-          {required && <span>{`(*${i18next.t('required')})`}</span>}
+          {required && <span class="required">{i18next.t('required')}</span>}
         </label>
-
-        {error && (
-          <span id={errorSpanId} role="alert">
-            {error}
-          </span>
-        )}
+        <span id="error-message" role="alert">
+          {error && (
+            <Fragment>
+              <span class="sr-only">{i18next.t('error')}</span> {error}
+            </Fragment>
+          )}
+        </span>
         <slot onSlotchange={() => this.populateOptions()}></slot>
         <select
-          aria-describedby={errorSpanId}
+          aria-describedby={error ? 'error-message' : undefined}
+          aria-invalid={invalid || error ? 'true' : 'false'}
           id="select"
           name={name}
           required={required || null}

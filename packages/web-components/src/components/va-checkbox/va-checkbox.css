@@ -1,3 +1,6 @@
+@import '../../mixins/accessibility.css';
+@import '../../mixins/form-field-error.css';
+
 :host {
   display: block;
   --visible-checkbox-size: 2rem;
@@ -10,8 +13,6 @@
 }
 
 #error-message {
-    color: var(--color-secondary-dark);
-    display: block;
     margin-bottom: 1.2rem;
 }
 
@@ -66,19 +67,9 @@ input:not([disabled]):focus+label:before {
   outline: none;
 }
 
-:host([error]:not([error=''])) {
-  border-left: 4px solid var(--color-secondary-dark);
-  padding-left: 1.8rem;
-  position: relative;
-}
-
-:host([error]) label, :host([error]) span {
-    font-weight: 700;
-}
-
-:host([required]) label > span {
+.required {
   color: var(--color-secondary-dark);
-  margin: 0px 0.35rem;
+  margin: 0 0.35rem;
 }
 
 ::slotted([slot='description']){

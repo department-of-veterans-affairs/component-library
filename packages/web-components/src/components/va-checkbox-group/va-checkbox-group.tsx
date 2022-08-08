@@ -7,6 +7,7 @@ import {
   Listen,
   Prop,
   h,
+  Fragment,
 } from '@stencil/core';
 
 /**
@@ -23,22 +24,22 @@ export class VaCheckboxGroup {
   /**
    * The text label for the checkbox group.
    */
-  @Prop() label: string;
+  @Prop() label!: string;
 
   /**
    * Whether or not this input field is required.
    */
-  @Prop() required: boolean = false;
+  @Prop() required?: boolean = false;
 
   /**
    * A string with an error message.
    */
-  @Prop() error: string;
+  @Prop() error?: string;
 
   /**
    * Whether or not an analytics event will be fired.
    */
-  @Prop() enableAnalytics: boolean;
+  @Prop() enableAnalytics?: boolean = false;
 
   /**
    * The event used to track usage of the component. This is emitted when an
@@ -70,17 +71,20 @@ export class VaCheckboxGroup {
   }
 
   render() {
+    const { label, required, error } = this;
     return (
       <Host role="group">
         <legend>
-          {this.label}
-          {this.required && <span class="required-span">(*Required)</span>}
+          {label}
+          {required && <span class="required">(*Required)</span>}
         </legend>
-        {this.error && (
-          <span class="error-message" role="alert">
-            <span class="sr-only">Error:</span> {this.error}
-          </span>
-        )}
+        <span id="error-message" role="alert">
+          {error && (
+            <Fragment>
+              <span class="sr-only">Error</span> {error}
+            </Fragment>
+          )}
+        </span>
         <slot></slot>
       </Host>
     );

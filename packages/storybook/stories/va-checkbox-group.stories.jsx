@@ -1,9 +1,9 @@
 import React from 'react';
-import { generateEventsDescription } from './events';
 import {
   getWebComponentDocs,
   componentStructure,
   propStructure,
+  StoryDocs,
 } from './wc-helpers';
 
 const checkBoxGroupDocs = getWebComponentDocs('va-checkbox-group');
@@ -13,17 +13,12 @@ export default {
   title: 'Components/va-checkbox-group',
   subcomponents: componentStructure(checkbox),
   parameters: {
-    componentSubtitle: 'Checkbox Group web component',
+    componentSubtitle: 'Checkbox group web component',
     actions: {
       handles: ['component-library-analytics'],
     },
     docs: {
-      description: {
-        component:
-          `<a className="vads-c-action-link--blue" href="https://design.va.gov/components/form/checkbox">View guidance for the Checkbox Group component in the Design System</a>` +
-          '\n' +
-          generateEventsDescription(checkBoxGroupDocs),
-      },
+      page: () => <StoryDocs data={checkBoxGroupDocs} />,
     },
   },
 };
@@ -54,13 +49,13 @@ const defaultArgs = {
   'error': null,
 };
 
-export const Default = Template.bind({});
+export const Default = Template.bind(null);
 Default.args = {
   ...defaultArgs,
 };
 Default.argTypes = propStructure(checkBoxGroupDocs);
 
-export const Error = Template.bind({});
+export const Error = Template.bind(null);
 Error.args = {
   ...defaultArgs,
   error: 'There has been an error',
@@ -84,7 +79,7 @@ const SingleCheckboxTemplate = ({
   );
 };
 
-export const SingleCheckbox = SingleCheckboxTemplate.bind({});
+export const SingleCheckbox = SingleCheckboxTemplate.bind(null);
 SingleCheckbox.args = {
   ...defaultArgs,
 };

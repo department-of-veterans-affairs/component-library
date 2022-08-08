@@ -19,8 +19,9 @@ describe('va-select', () => {
           <label for="select" part="label">
             A label
           </label>
+          <span id="error-message" role="alert"></span>
           <slot></slot>
-          <select id="select" part="select">
+          <select id="select" part="select" aria-invalid="false">
             <option value="">Please choose an option</option>
             <option value="foo">Foo</option>
             <option value="bar">Bar</option>
@@ -31,6 +32,25 @@ describe('va-select', () => {
         <option value="bar">Bar</option>
       </va-select>
     `);
+  });
+
+  it('renders an error message', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-select error="This is a mistake" />');
+
+    // Render the error message text
+    const error = await page.find('va-select >>> span#error-message');
+    const input = await page.find('va-select >>> select');
+    expect(error.innerText).toContain('This is a mistake');
+    expect(input.getAttribute('aria-invalid')).toEqual('true');
+  });
+
+  it('sets aria-invalid based on invalid prop', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-select invalid />');
+
+    const input = await page.find('va-select >>> select');
+    expect(input.getAttribute('aria-invalid')).toEqual('true');
   });
 
   it('changes its value prop when selected', async () => {

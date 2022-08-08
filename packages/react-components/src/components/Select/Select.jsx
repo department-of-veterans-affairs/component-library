@@ -6,6 +6,10 @@ import { makeField } from '../../helpers/fields';
 
 import dispatchAnalyticsEvent from '../../helpers/analytics';
 
+if (!i18next.exists('collapse-all-aria-label')) {
+  import('../../../i18n-setup');
+}
+
 /**
  * A form select with a label that can display error messages.
  *

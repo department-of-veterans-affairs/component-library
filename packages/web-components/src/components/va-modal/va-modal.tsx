@@ -93,6 +93,11 @@ export class VaModal {
   @Prop() disableAnalytics?: boolean = false;
 
   /**
+   * If `true`, modal will be wider.
+   */
+  @Prop({ reflect: true }) large?: boolean = false;
+
+  /**
    * Title/header text for the modal
    */
   @Prop() modalTitle?: string;
@@ -122,7 +127,7 @@ export class VaModal {
   /**
    * If the modal is visible or not
    */
-  @Prop() visible: boolean = false;
+  @Prop() visible?: boolean = false;
 
   /**
    * Local state to track if the shift key is pressed
@@ -239,30 +244,27 @@ export class VaModal {
       this.closeButton, // close button first
       ...modalContent,
       ...actionButtons, // action buttons last
-    ].reduce(
-      (focusableElms, elm: HTMLElement) => {
-        // find not-hidden elements
-        if (elm && (elm.offsetWidth || elm.offsetHeight)) {
-          // hydrated class likely on web components
-          if (elm.classList.contains('hydrated')) {
-            const shadowElms = Array.from(
-              elm.shadowRoot.querySelectorAll(focusableQueryString) || [],
-            );
-            if (shadowElms.length) {
-              // add the web component and focusable shadow elements
-              // document.activeElement targets the web component but the event
-              // is composed, so crosses shadow DOM and shows up in composedPath
-              focusableElms.push(elm);
-              return focusableElms.concat(shadowElms);
-            }
-          } else {
+    ].reduce((focusableElms, elm: HTMLElement) => {
+      // find not-hidden elements
+      if (elm && (elm.offsetWidth || elm.offsetHeight)) {
+        // hydrated class likely on web components
+        if (elm.classList.contains('hydrated')) {
+          const shadowElms = Array.from(
+            elm.shadowRoot.querySelectorAll(focusableQueryString) || [],
+          );
+          if (shadowElms.length) {
+            // add the web component and focusable shadow elements
+            // document.activeElement targets the web component but the event
+            // is composed, so crosses shadow DOM and shows up in composedPath
             focusableElms.push(elm);
+            return focusableElms.concat(shadowElms);
           }
+        } else {
+          focusableElms.push(elm);
         }
-        return focusableElms;
-      },
-      [],
-    );
+      }
+      return focusableElms;
+    }, []);
   }
 
   // This method traps the focus inside our web component, prevents scrolling outside
@@ -277,11 +279,9 @@ export class VaModal {
 
     // If an initialFocusSelector is provided, the element will be focused on modal open
     // if it exists. You are able to focus elements in both light and shadow DOM.
-    const initialFocus = (
-      this.el.querySelector(this.initialFocusSelector) ||
+    const initialFocus = (this.el.querySelector(this.initialFocusSelector) ||
       this.el.shadowRoot.querySelector(this.initialFocusSelector) ||
-      this.closeButton
-    ) as HTMLElement;
+      this.closeButton) as HTMLElement;
     initialFocus.focus();
 
     // Prevents scrolling outside modal
@@ -341,67 +341,71 @@ export class VaModal {
       : 'va-modal-inner';
     const bodyClass = status ? 'va-modal-alert-body' : 'va-modal-body';
     const titleClass = status ? 'va-modal-alert-title' : 'va-modal-title';
+    /* eslint-disable i18next/no-literal-string */
     const ariaRole = status => {
       if (status === 'warning' || status === 'error') {
         return 'alertdialog';
       }
       return 'dialog';
     };
+    /* eslint-enable i18next/no-literal-string */
     const btnAriaLabel = modalTitle
       ? `Close ${modalTitle} modal`
       : 'Close modal';
 
     return (
-      <Host
-        aria-label={ariaLabel}
-        aria-modal="true"
-        class="va-modal"
-        role={ariaRole(status)}
-      >
-        <div class={wrapperClass} tabIndex={-1}>
-          <button
-            aria-label={btnAriaLabel}
-            class="va-modal-close"
-            onClick={e => this.handleClose(e)}
-            ref={el => (this.closeButton = el as HTMLButtonElement)}
-            type="button"
-          >
-            <i aria-hidden="true" />
-          </button>
-          <div class={bodyClass}>
-            <div role="document">
-              {modalTitle && (
-                <h1 class={titleClass} tabIndex={-1}>
-                  {modalTitle}
-                </h1>
-              )}
-              <slot></slot>
-            </div>
-            {((primaryButtonClick && primaryButtonText) ||
-              (secondaryButtonClick && secondaryButtonText)) && (
-              <div
-                class="alert-actions"
-                ref={el => (this.alertActions = el as HTMLDivElement)}
-              >
-                {primaryButtonClick && primaryButtonText && (
-                  <button
-                    onClick={e => this.handlePrimaryButtonClick(e)}
-                    type="button"
-                  >
-                    {primaryButtonText}
-                  </button>
+      <Host>
+        <div
+          aria-label={ariaLabel}
+          aria-modal="true"
+          class="va-modal"
+          role={ariaRole(status)}
+        >
+          <div class={wrapperClass} tabIndex={-1}>
+            <button
+              aria-label={btnAriaLabel}
+              class="va-modal-close"
+              onClick={e => this.handleClose(e)}
+              ref={el => (this.closeButton = el as HTMLButtonElement)}
+              type="button"
+            >
+              <i aria-hidden="true" />
+            </button>
+            <div class={bodyClass}>
+              <div role="document">
+                {modalTitle && (
+                  <h1 class={titleClass} tabIndex={-1}>
+                    {modalTitle}
+                  </h1>
                 )}
-                {secondaryButtonClick && secondaryButtonText && (
-                  <button
-                    class="button-secondary"
-                    onClick={e => this.handleSecondaryButtonClick(e)}
-                    type="button"
-                  >
-                    {secondaryButtonText}
-                  </button>
-                )}
+                <slot></slot>
               </div>
-            )}
+              {((primaryButtonClick && primaryButtonText) ||
+                (secondaryButtonClick && secondaryButtonText)) && (
+                <div
+                  class="alert-actions"
+                  ref={el => (this.alertActions = el as HTMLDivElement)}
+                >
+                  {primaryButtonClick && primaryButtonText && (
+                    <button
+                      onClick={e => this.handlePrimaryButtonClick(e)}
+                      type="button"
+                    >
+                      {primaryButtonText}
+                    </button>
+                  )}
+                  {secondaryButtonClick && secondaryButtonText && (
+                    <button
+                      class="button-secondary"
+                      onClick={e => this.handleSecondaryButtonClick(e)}
+                      type="button"
+                    >
+                      {secondaryButtonText}
+                    </button>
+                  )}
+                </div>
+              )}
+            </div>
           </div>
         </div>
       </Host>

@@ -1,3 +1,8 @@
+export const maxYear = new Date().getFullYear() + 100;
+export const minYear = 1900;
+export const maxMonths = 12;
+export const minMonths = 1;
+
 export const months = [
   { label: 'January', value: 1 },
   { label: 'February', value: 2 },
@@ -13,6 +18,7 @@ export const months = [
   { label: 'December', value: 12 },
 ];
 
+/* eslint-disable i18next/no-literal-string */
 export const twentyNineDays = [
   '1',
   '2',
@@ -125,6 +131,27 @@ export const days = {
   12: thirtyOneDays,
 };
 
-export function isFullDate(date) {
-  return /\d{4}-\d{1,2}-\d{1,2}/.test(date);
+export function checkLeapYear(year) {
+  //three conditions to find out the leap year
+  return (0 == year % 4 && 0 != year % 100) || 0 == year % 400;
 }
+
+// Allow 0-9, Backspace, Delete, Left and Right Arrow, and Tab to clear data or move to next field
+export const validKeys = [
+  '0',
+  '1',
+  '2',
+  '3',
+  '4',
+  '5',
+  '6',
+  '7',
+  '8',
+  '9',
+  'Backspace',
+  'ArrowRight',
+  'ArrowLeft',
+  'Tab',
+  'Delete',
+];
+/* eslint-enable i18next/no-literal-string */

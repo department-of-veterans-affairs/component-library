@@ -10,6 +10,14 @@ describe('va-checkbox', () => {
     expect(element).toHaveClass('hydrated');
   });
 
+  it('renders with aria-invalid set to false by default', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-checkbox></va-checkbox>');
+
+    const input = await page.find('va-checkbox >>> input');
+    expect(input.getAttribute('aria-invalid')).toEqual('false');
+  });
+
   it('renders a label', async () => {
     const page = await newE2EPage();
     await page.setContent('<va-checkbox label="Cool label, right?" />');
@@ -23,6 +31,8 @@ describe('va-checkbox', () => {
       '<va-checkbox error="Something went horribly wrong" />',
     );
     const element = await page.find('va-checkbox >>> #error-message');
+    const input = await page.find('va-checkbox >>> input');
+    expect(input.getAttribute('aria-invalid')).toEqual('true');
     expect(element.textContent).toContain('Something went horribly wrong');
   });
 
@@ -30,7 +40,7 @@ describe('va-checkbox', () => {
     const page = await newE2EPage();
     await page.setContent('<va-checkbox label="I am Checkbox" required/>');
     const element = await page.find('va-checkbox >>> .required');
-    expect(element.textContent).toContain('(Required)');
+    expect(element.textContent).toContain('(*Required)');
   });
 
   it('renders a description', async () => {
@@ -73,18 +83,6 @@ describe('va-checkbox', () => {
     // Render the error message text
     const inputEl = await page.find('va-checkbox >>> input');
     expect(inputEl.getAttribute('aria-describedby')).toContain('error-message');
-  });
-
-  it('appends to an existing aria-describedby for error message', async () => {
-    const page = await newE2EPage();
-    await page.setContent(
-      '<va-checkbox error="This is a mistake" aria-describedby="random-thing" />',
-    );
-
-    // Render the error message text
-    const error = await page.find('va-checkbox >>> input');
-    expect(error.getAttribute('aria-describedby')).toContain('random-thing');
-    expect(error.getAttribute('aria-describedby')).toContain('error-message');
   });
 
   it('passes an aXe check', async () => {
@@ -138,6 +136,7 @@ describe('va-checkbox', () => {
         description:
           'Description content in a slot.Testing nested nodes. And multiple slots.',
         checked: true,
+        required: false,
       },
     });
   });

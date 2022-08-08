@@ -1,0 +1,21 @@
+@use "uswds-core/src/styles/functions" as *;
+@use "../tokens/color" as *;
+@use "./settings" as *;
+
+// Config for background-color utility classes
+$u-bg-color: (
+  background-color: (
+    base: "vads-bg",
+    modifiers: null,
+    values:
+      map-collect(
+        $tokens-color-basic,
+        $tokens-color-grayscale,
+        $tokens-color-tertiary,
+        $tokens-color-hub
+      ),
+    settings: $color-settings,
+    property: "background-color",
+    type: "utility",
+  ),
+);

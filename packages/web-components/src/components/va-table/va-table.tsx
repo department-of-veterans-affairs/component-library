@@ -27,12 +27,12 @@ export class VaTable {
   /**
    * The zero-based index of the column to sort by (Doesn't work in IE11). Optional.
    */
-  @Prop() sortColumn: number;
+  @Prop() sortColumn?: number;
 
   /**
    * Whether the initial sort state will be descending or not.
    */
-  @Prop() descending: boolean = false;
+  @Prop() descending?: boolean = false;
 
   /**
    * The next direction to sort the rows
@@ -51,11 +51,13 @@ export class VaTable {
     this.headers = elementChildren(headerRow) as Array<HTMLElement>;
     const columns = [];
 
+    /* eslint-disable i18next/no-literal-string */
     this.headers.forEach((item: HTMLVaTableRowElement) => {
       columns.push(item.textContent);
       item.setAttribute('role', 'columnheader');
       item.setAttribute('scope', 'col');
     });
+    /* eslint-enable i18next/no-literal-string */
 
     if (this.sortColumn >= 0 && columns.length > this.sortColumn) {
       const icon = this.sortAscending ? ascendingIcon : descendingIcon;
@@ -102,8 +104,10 @@ export class VaTable {
 
         // This allows the responsive table in mobile view to display
         // a column header
+        /* eslint-disable i18next/no-literal-string */
         cell.setAttribute('data-label', columns[colNum]);
         cell.setAttribute('role', 'cell');
+        /* eslint-enable i18next/no-literal-string */
       });
     });
   }

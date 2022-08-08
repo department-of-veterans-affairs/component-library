@@ -1,7 +1,6 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
-import { generateEventsDescription } from './events';
-import { getWebComponentDocs, propStructure } from './wc-helpers';
+import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
 
 const textareaDocs = getWebComponentDocs('va-textarea');
 
@@ -10,12 +9,7 @@ export default {
   parameters: {
     componentSubtitle: `Textarea web component`,
     docs: {
-      description: {
-        component:
-          `<a className="vads-c-action-link--blue" href="https://design.va.gov/components/form/textarea">View guidance for the Textarea component in the Design System</a>` +
-          '\n' +
-          generateEventsDescription(textareaDocs),
-      },
+      page: () => <StoryDocs data={textareaDocs} />,
     },
   },
 };
@@ -57,22 +51,52 @@ const Template = ({
   );
 };
 
-export const Default = Template.bind({});
+const ResizableTemplate = ({
+  name,
+  label,
+  'enable-analytics': enableAnalytics,
+  required,
+  error,
+  maxlength,
+  value,
+  placeholder,
+}) => {
+  return (
+    <va-textarea
+      class="resize-y"
+      name={name}
+      label={label}
+      enable-analytics={enableAnalytics}
+      required={required}
+      error={error}
+      maxlength={maxlength}
+      value={value}
+      placeholder={placeholder}
+      onBlur={e => console.log('blur event', e)}
+      onInput={e => console.log('input event value', e.target.value)}
+    />
+  );
+};
+
+export const Default = Template.bind(null);
 Default.args = { ...defaultArgs };
 Default.argTypes = propStructure(textareaDocs);
 
-export const Error = Template.bind({});
+export const Error = Template.bind(null);
 Error.args = { ...defaultArgs, error: 'This is an error message' };
 
-export const Required = Template.bind({});
+export const Required = Template.bind(null);
 Required.args = { ...defaultArgs, required: true };
 
-export const MaxLength = Template.bind({});
+export const MaxLength = Template.bind(null);
 MaxLength.args = {
   ...defaultArgs,
   maxlength: '16',
   placeholder: 'No more than 16 characters',
 };
 
-export const WithAnalytics = Template.bind({});
+export const WithAnalytics = Template.bind(null);
 WithAnalytics.args = { ...defaultArgs, 'enable-analytics': true };
+
+export const ResizableControl = ResizableTemplate.bind(null);
+ResizableTemplate.args = { ...defaultArgs };

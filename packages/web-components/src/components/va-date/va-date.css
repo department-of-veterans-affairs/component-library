@@ -1,9 +1,11 @@
 @import '../../../src/mixins/accessibility.css';
+@import '../../mixins/form-field-error.css';
 
 :host {
   display: block;
   font-family: var(--font-source-sans);
   margin-top: 3rem;
+  color: var(--color-gray);
 }
 
 fieldset {
@@ -14,45 +16,40 @@ fieldset {
 
 legend {
   border: 0;
-  padding: 0;
+  padding: 0 0 0.8rem 0;
+  color: var(--color-base);
 }
 
 span.required {
   color: var(--color-secondary-dark);
 }
 
-:host([error]:not([error=''])),
-:host([invalid]) {
-  border-left: 4px solid var(--color-secondary-dark);
-  margin-top: 3rem;
-  padding-bottom: 0.8rem;
-  padding-left: 1.5rem;
-  padding-top: 0.8rem;
-  position: relative;
-  right: 1.9rem;
-}
-
-:host([error]:not([error=''])) label,
-:host([error]:not([error=''])) span,
-:host([invalid]) label,
-:host([invalid]) span {
+:host([error]:not([error=''])) legend {
   font-weight: 700;
 }
 
 :host([error]:not([error=''])) va-select::part(select),
-:host([error]:not([error=''])) va-text-input::part(input),
-:host([invalid]) va-select::part(select),
-:host([invalid]) va-text-input::part(input) {
-  border: 2px solid var(--color-secondary-dark);
+:host([error]:not([error=''])) va-text-input::part(input) {
+  border: 4px solid var(--color-secondary-dark);
 }
 
-.error-message {
+#error-message {
   color: var(--color-secondary-dark);
   display: block;
 }
 
+:host([error]:not([error=''])) #error-message {
+  padding-top: 0.8rem;
+}
+
 .date-container {
   display: flex;
+  color: var(--color-base);
+  padding-top: 0.8rem;
+}
+
+:host([error]:not([error=''])) .date-container {
+  padding-top: 0;
 }
 
 .select-month {
@@ -74,6 +71,6 @@ va-text-input::part(label) {
   margin-top: 0;
 }
 
-va-text-input::part(validation){
+va-text-input::part(validation) {
   display: none;
 }

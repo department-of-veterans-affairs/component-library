@@ -7,6 +7,7 @@ import {
   Event,
   EventEmitter,
   forceUpdate,
+  Fragment,
 } from '@stencil/core';
 import i18next from 'i18next';
 import { Build } from '@stencil/core';
@@ -17,6 +18,10 @@ if (Build.isTesting) {
   i18next.init({ lng: 'cimode' });
 }
 
+/**
+ * @nativeHandler onInput
+ * @nativeHandler onBlur
+ */
 @Component({
   tag: 'va-text-input',
   styleUrl: 'va-text-input.css',
@@ -28,6 +33,7 @@ export class VaTextInput {
   /**
    * Input types we will allow to be specified with the "type" prop.
    */
+  /* eslint-disable-next-line i18next/no-literal-string */
   allowedInputTypes = ['email', 'number', 'search', 'tel', 'text', 'url'];
 
   /**
@@ -41,9 +47,15 @@ export class VaTextInput {
   @Prop() error?: string;
 
   /**
+   * Whether or not `aria-invalid` will be set on the inner input. Useful when
+   * composing the component into something larger, like a date component.
+   */
+  @Prop() invalid?: boolean = false;
+
+  /**
    * Set the input to required and render the (Required) text.
    */
-  @Prop() required?: boolean;
+  @Prop() required?: boolean = false;
 
   /**
    * The inputmode attribute.
@@ -65,6 +77,7 @@ export class VaTextInput {
 
   /**
    * The maximum number of characters allowed in the input.
+   * Negative and zero values will be ignored.
    */
   @Prop() maxlength?: number;
 
@@ -81,7 +94,7 @@ export class VaTextInput {
   /**
    * Emit component-library-analytics events on the blur event.
    */
-  @Prop() enableAnalytics?: boolean;
+  @Prop() enableAnalytics?: boolean = false;
 
   /**
    * The name to pass to the input element.
@@ -109,7 +122,7 @@ export class VaTextInput {
   /**
    * Adds styling based on status value
    */
-  @Prop() success?: boolean;
+  @Prop() success?: boolean = false;
 
   /**
    * The event used to track usage of the component. This is emitted when the
@@ -127,10 +140,24 @@ export class VaTextInput {
       consoleDevError(
         `The input type "${this.type}" is invalid or unsupported!`,
       );
+      /* eslint-disable-next-line i18next/no-literal-string */
       return 'text';
     }
 
     return this.type;
+  }
+
+  /**
+   * This ensures that the `maxlength` property will be positive
+   * or it won't be used at all
+   */
+  private getMaxlength() {
+    if (this.maxlength <= 0) {
+      consoleDevError('The maxlength prop must be positive!');
+      return undefined;
+    }
+
+    return this.maxlength;
   }
 
   private handleInput = (e: Event) => {
@@ -162,46 +189,61 @@ export class VaTextInput {
   }
 
   render() {
-    const describedBy = this.error ? 'error-message' : null; // Null so we don't add the attribute if we have an empty string
-    const inputMode = this.inputmode ? this.inputmode : null; // Null so we don't add the attribute if we have an empty string
+    const {
+      label,
+      error,
+      invalid,
+      inputmode,
+      required,
+      value,
+      minlength,
+      pattern,
+      name,
+      handleInput,
+      handleBlur,
+    } = this;
     const type = this.getInputType();
+    const maxlength = this.getMaxlength();
 
     return (
       <Host>
-        {this.label && (
+        {label && (
           <label htmlFor="inputField" part="label">
-            {this.label}{' '}
-            {this.required && (
-              <span class="required">(*{i18next.t('required')})</span>
-            )}
+            {label}{' '}
+            {required && <span class="required">{i18next.t('required')}</span>}
           </label>
         )}
         <slot></slot>
-        {this.error && <span id="error-message">{this.error}</span>}
+        <span id="error-message" role="alert">
+          {error && (
+            <Fragment>
+              <span class="sr-only">{i18next.t('error')}</span> {error}
+            </Fragment>
+          )}
+        </span>
         <input
           id="inputField"
           type={type}
-          value={this.value}
-          onInput={this.handleInput}
-          onBlur={this.handleBlur}
-          aria-describedby={describedBy}
-          inputmode={inputMode}
-          maxlength={this.maxlength}
-          minlength={this.minlength}
-          pattern={this.pattern}
-          name={this.name}
-          required={this.required || null}
+          value={value}
+          onInput={handleInput}
+          onBlur={handleBlur}
+          aria-describedby={error ? 'error-message' : undefined}
+          aria-invalid={invalid || error ? 'true' : 'false'}
+          inputmode={inputmode ? inputmode : undefined}
+          maxlength={maxlength}
+          minlength={minlength}
+          pattern={pattern}
+          name={name}
+          required={required || null}
           part="input"
         />
-        {this.maxlength && this.value?.length >= this.maxlength && (
-          <small aria-live="polite" part="validation">
-            ({i18next.t('max-chars', { length: this.maxlength })})
+        {maxlength && value?.length >= maxlength && (
+          <small part="validation">
+            {i18next.t('max-chars', { length: maxlength })}
           </small>
         )}
-        {this.minlength && this.value?.length < this.minlength && (
-          <small aria-live="polite" part="validation">
-            (Min. {this.minlength} characters)
-          </small>
+        {minlength && value?.length < minlength && (
+          <small part="validation">(Min. {minlength} characters)</small>
         )}
       </Host>
     );

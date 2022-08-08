@@ -1,11 +1,17 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
-import { getWebComponentDocs, propStructure } from './wc-helpers';
+import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
 
 const featuredContentDocs = getWebComponentDocs('va-featured-content');
 
 export default {
   title: 'Components/va-featured-content',
+  parameters: {
+    componentSubtitle: `Featured content web component`,
+    docs: {
+      page: () => <StoryDocs data={featuredContentDocs} />,
+    },
+  },
 };
 
 const Template = () => (
@@ -35,5 +41,5 @@ const Template = () => (
   </va-featured-content>
 );
 
-export const Default = Template.bind({});
+export const Default = Template.bind(null);
 Default.argTypes = propStructure(featuredContentDocs);

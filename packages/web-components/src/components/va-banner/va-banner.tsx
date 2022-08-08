@@ -10,6 +10,14 @@ import {
 } from '@stencil/core';
 
 const DISMISSED_BANNERS_KEY = 'DISMISSED_BANNERS';
+
+/**
+ * Reset the banners in storage by opening Developer Tools in the browser
+ * and then clicking on the Application Tab. Under Storage you will see
+ * both Local and Session Storage check each Storage to see if a
+ * DISMISSED_BANNERS Key exists. If it does right click and delete it and
+ * refresh your page to see the banners again.
+ */
 @Component({
   tag: 'va-banner',
   styleUrl: 'va-banner.css',
@@ -21,33 +29,35 @@ export class VaBanner {
   /**
    * If true, doesn't fire the CustomEvent which can be used for analytics tracking.
    */
-  @Prop() disableAnalytics: boolean = false;
+  @Prop() disableAnalytics?: boolean = false;
 
   /**
    * Enable the close functionality. The banner will be closed until storage is cleared.
    * */
-  @Prop() showClose: boolean = false;
+  @Prop() showClose?: boolean = false;
 
   /**
    * The headline of the banner.
    * */
   @Prop() headline: string;
 
+  /* eslint-disable i18next/no-literal-string */
   /**
    * The type of the banner. One of 'info', 'error', 'success', 'continue', or 'warning'. This affects both the icon of the AlertBox and the top border color.
    * */
-  @Prop() type: string = 'info';
+  @Prop() type?: string = 'info';
+  /* eslint-enable i18next/no-literal-string */
 
   /**
    * A boolean that when false makes it so that the banner does not render.
    * */
-  @Prop() visible: boolean = true;
+  @Prop() visible?: boolean = true;
 
   /**
    * Enable sessionStorage for the Banner otherwise storage
    * if showClose is enabled will default to localStorage
    * */
-  @Prop() windowSession: boolean = false;
+  @Prop() windowSession?: boolean = false;
 
   /**
    * Keep track of locally dismissed Banners
@@ -65,6 +75,7 @@ export class VaBanner {
   })
   componentLibraryAnalytics: EventEmitter;
 
+  /* eslint-disable-next-line i18next/no-literal-string */
   private prepareBannerID = () => `${this.headline}:${this.el.innerHTML}`;
 
   private dismiss = () => {

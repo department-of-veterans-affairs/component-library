@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { VaModal } from '@department-of-veterans-affairs/web-components/react-bindings';
-import { getWebComponentDocs, propStructure } from './wc-helpers';
-import { generateEventsDescription } from './events';
+import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
 
 VaModal.displayName = 'VaModal';
 
@@ -10,15 +9,10 @@ const modalDocs = getWebComponentDocs('va-modal');
 export default {
   title: 'Components/va-modal',
   parameters: {
-    docs: {
-      description: {
-        component:
-          `<a className="vads-c-action-link--blue" href="https://design.va.gov/components/modal">View guidance for the Modal component in the Design System</a>` +
-          '\n' +
-          generateEventsDescription(modalDocs),
-      },
-    },
     componentSubtitle: `Modal web component`,
+    docs: {
+      page: () => <StoryDocs data={modalDocs} />,
+    },
   },
   argTypes: {
     status: {
@@ -33,6 +27,7 @@ export default {
 const Template = ({
   'click-to-close': clickToClose,
   'disable-analytics': disableAnalytics,
+  large,
   'modal-title': modalTitle,
   'initial-focus-selector': initialFocusSelector,
   primaryButtonClick,
@@ -52,6 +47,7 @@ const Template = ({
       <VaModal
         clickToClose={clickToClose}
         disableAnalytics={disableAnalytics}
+        large={large}
         modalTitle={modalTitle}
         initialFocusSelector={initialFocusSelector}
         onCloseEvent={onCloseEvent}
@@ -80,6 +76,7 @@ const Template = ({
 const defaultArgs = {
   'click-to-close': false,
   'disable-analytics': false,
+  'large': undefined,
   'modal-title': 'Modal title goes here',
   'initial-focus-selector': undefined,
   'status': undefined,
@@ -90,31 +87,31 @@ const defaultArgs = {
   'secondary-button-text': 'Secondary button',
 };
 
-export const Default = Template.bind({});
+export const Default = Template.bind(null);
 Default.args = {
   ...defaultArgs,
 };
 Default.argTypes = propStructure(modalDocs);
 
 // Statuses
-export const Info = Template.bind({});
+export const Info = Template.bind(null);
 Info.args = { ...defaultArgs, status: 'info' };
-export const Continue = Template.bind({});
+export const Continue = Template.bind(null);
 Continue.args = { ...defaultArgs, status: 'continue' };
-export const Success = Template.bind({});
+export const Success = Template.bind(null);
 Success.args = { ...defaultArgs, status: 'success' };
-export const Warning = Template.bind({});
+export const Warning = Template.bind(null);
 Warning.args = { ...defaultArgs, status: 'warning' };
-export const Error = Template.bind({});
+export const Error = Template.bind(null);
 Error.args = { ...defaultArgs, status: 'error' };
 
-export const ClickOutsideToClose = Template.bind({});
+export const ClickOutsideToClose = Template.bind(null);
 ClickOutsideToClose.args = {
   ...defaultArgs,
   'click-to-close': true,
 };
 
-export const WithoutButtons = Template.bind({});
+export const WithoutButtons = Template.bind(null);
 WithoutButtons.args = {
   ...defaultArgs,
   'primaryButtonClick': undefined,
@@ -123,12 +120,13 @@ WithoutButtons.args = {
   'secondary-button-text': undefined,
 };
 
-export const WithoutTitle = Template.bind({});
+export const WithoutTitle = Template.bind(null);
 WithoutTitle.args = { ...defaultArgs, 'modal-title': undefined };
 
 export const WithNestedWebComponents = ({
   'click-to-close': clickToClose,
   'disable-analytics': disableAnalytics,
+  large,
   'modal-title': modalTitle,
   'initial-focus-selector': initialFocusSelector,
   primaryButtonClick,
@@ -150,6 +148,7 @@ export const WithNestedWebComponents = ({
       <VaModal
         clickToClose={clickToClose}
         disableAnalytics={disableAnalytics}
+        large={large}
         modalTitle={modalTitle}
         initialFocusSelector={initialFocusSelector}
         onCloseEvent={onCloseEvent}
@@ -180,6 +179,7 @@ WithNestedWebComponents.args = defaultArgs;
 const CrisisTemplate = ({
   'click-to-close': clickToClose,
   'disable-analytics': disableAnalytics,
+  large,
   'modal-title': modalTitle,
   'initial-focus-selector': initialFocusSelector,
   primaryButtonClick,
@@ -214,6 +214,7 @@ const CrisisTemplate = ({
       <VaModal
         clickToClose={clickToClose}
         disableAnalytics={disableAnalytics}
+        large={large}
         modalTitle={modalTitle}
         initialFocusSelector={initialFocusSelector}
         onCloseEvent={onCloseEvent}
@@ -257,7 +258,7 @@ const CrisisTemplate = ({
   );
 };
 
-export const CrisisLineModal = CrisisTemplate.bind({});
+export const CrisisLineModal = CrisisTemplate.bind(null);
 CrisisLineModal.args = {
   ...defaultArgs,
   'primaryButtonClick': undefined,
@@ -266,3 +267,6 @@ CrisisLineModal.args = {
   'secondary-button-text': undefined,
   'modal-title': 'Get help from Veterans Crisis Line',
 };
+
+export const Large = Template.bind(null);
+Large.args = { ...defaultArgs, large: true };

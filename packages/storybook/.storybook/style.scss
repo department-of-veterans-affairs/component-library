@@ -9,10 +9,27 @@ $formation-asset-path: '~@department-of-veterans-affairs/formation/assets';
 // This is causing the show code button to overlap with components
 // Height Auto fixes Firefox Bug with height being set to a fixed 70px value
 .docs-story {
+  & > div {
+    margin: 0;
     & > div {
-        margin: 0;
-        & > div {
-            height: auto;
-        }
+      height: auto;
     }
+  }
+}
+
+a.sbdocs-a {
+  color: var(--color-link-default);
+  font-size: 1.6rem;
+  transition-duration: 0.3s;
+  transition-timing-function: ease-in-out;
+  transition-property: color, background-color, border-color;
+}
+
+a.sbdocs-a,
+a.sbdocs-a:hover {
+  text-decoration: underline;
+}
+
+.resize-y {
+  resize: vertical;
 }

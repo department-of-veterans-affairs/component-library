@@ -1,11 +1,9 @@
 import AcceptTermsPrompt from './AcceptTermsPrompt';
 import AdditionalInfo from './AdditionalInfo';
 import AlertBox, { ALERT_TYPE } from './AlertBox';
-import Banner from './Banner';
 import Breadcrumbs from './Breadcrumbs';
 import Checkbox from './Checkbox';
 import CheckboxGroup from './CheckboxGroup';
-import CollapsiblePanel from './CollapsiblePanel';
 import Date from './Date';
 import DropDownPanel from './DropDownPanel';
 import ExpandingGroup from './ExpandingGroup';
@@ -24,7 +22,6 @@ import OMBInfo from './OMBInfo';
 import Pagination from './Pagination';
 import PrivacyAgreement from './PrivacyAgreement';
 import ProgressButton from './ProgressButton';
-import PromoBanner, { PROMO_BANNER_TYPES } from './PromoBanner';
 import RadioButtons from './RadioButtons';
 import Select from './Select';
 import SystemDownView from './SystemDownView';
@@ -35,7 +32,6 @@ import Telephone, {
   PATTERNS as PHONE_PATTERNS,
   patternsMap as PHONE_PATTERNS_MAP,
 } from './Telephone';
-import TextArea from './TextArea';
 import TextInput from './TextInput';
 
 import './i18n-setup';
@@ -45,11 +41,9 @@ export {
   AdditionalInfo,
   AlertBox,
   ALERT_TYPE,
-  Banner,
   Breadcrumbs,
   Checkbox,
   CheckboxGroup,
-  CollapsiblePanel,
   Date,
   DropDownPanel,
   ExpandingGroup,
@@ -68,8 +62,6 @@ export {
   Pagination,
   PrivacyAgreement,
   ProgressButton,
-  PromoBanner,
-  PROMO_BANNER_TYPES,
   RadioButtons,
   Select,
   SystemDownView,
@@ -79,6 +71,5 @@ export {
   contactsMap,
   PHONE_PATTERNS,
   PHONE_PATTERNS_MAP,
-  TextArea,
   TextInput,
 };

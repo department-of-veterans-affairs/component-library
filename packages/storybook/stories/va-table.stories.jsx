@@ -1,15 +1,16 @@
 import React from 'react';
-import { generateEventsDescription } from './events';
-import {
-  getWebComponentDocs,
-  componentStructure,
-  propStructure,
-} from './wc-helpers';
+import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
 
-const accordionDocs = getWebComponentDocs('va-table');
+const tableDocs = getWebComponentDocs('va-table');
 
 export default {
   title: 'Components/va-table',
+  parameters: {
+    componentSubtitle: 'Table web component',
+    docs: {
+      page: () => <StoryDocs data={tableDocs} />,
+    },
+  },
 };
 const data = [
   [
@@ -77,7 +78,7 @@ export const Default = Template.bind({ data });
 Default.args = {
   ...defaultArgs,
 };
-Default.argTypes = propStructure(accordionDocs);
+Default.argTypes = propStructure(tableDocs);
 
 export const Sortable = Template.bind({ data });
 Sortable.args = {
@@ -85,7 +86,7 @@ Sortable.args = {
   'sort-column': 2,
 };
 
-export const MissingData = Template.bind({});
+export const MissingData = Template.bind(null);
 MissingData.args = {
   ...defaultArgs,
   rows: [
@@ -98,7 +99,7 @@ MissingData.args = {
   ],
 };
 
-export const CustomComponents = Template.bind({});
+export const CustomComponents = Template.bind(null);
 CustomComponents.args = {
   ...defaultArgs,
   rows: [

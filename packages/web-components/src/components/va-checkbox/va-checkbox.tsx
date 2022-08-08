@@ -6,8 +6,12 @@ import {
   Host,
   h,
   Prop,
+  Fragment,
 } from '@stencil/core';
 
+/**
+ * @nativeHandler onBlur
+ */
 @Component({
   tag: 'va-checkbox',
   styleUrl: 'va-checkbox.css',
@@ -19,7 +23,7 @@ export class VaCheckbox {
   /**
    * The label for the checkbox.
    */
-  @Prop() label: string;
+  @Prop() label!: string;
 
   /**
    * The error message to render.
@@ -35,12 +39,12 @@ export class VaCheckbox {
   /**
    * Set the input to required and render the (Required) text.
    */
-  @Prop() required?: boolean;
+  @Prop() required?: boolean = false;
 
   /**
    * True if the analytics event should fire.
    */
-  @Prop() enableAnalytics: boolean = false;
+  @Prop() enableAnalytics?: boolean = false;
 
   /**
    * Whether the checkbox is checked or not.
@@ -49,12 +53,7 @@ export class VaCheckbox {
    * will not reflect the correct value. Use the property vaCheckbox.checked
    * instead.
    */
-  @Prop({ mutable: true }) checked: boolean = false;
-
-  /**
-   * The aria-describedby attribute for the input element in the shadow DOM.
-   */
-  @Prop() ariaDescribedby: string = '';
+  @Prop({ mutable: true }) checked?: boolean = false;
 
   /**
    * The event emitted when the input value changes.
@@ -110,30 +109,31 @@ export class VaCheckbox {
   };
 
   render() {
-    const describedBy = `${this.ariaDescribedby} description ${
-      this.error && 'error-message'
-    }`.trim();
+    const { error, label, required, description, checked } = this;
 
     return (
       <Host>
         <div id="description">
-          {this.description ? (
-            <p>{this.description}</p>
-          ) : (
-            <slot name="description" />
-          )}
+          {description ? <p>{description}</p> : <slot name="description" />}
         </div>
-        {this.error && <span id="error-message">{this.error}</span>}
+        <span id="error-message" role="alert">
+          {error && (
+            <Fragment>
+              <span class="sr-only">Error</span> {error}
+            </Fragment>
+          )}
+        </span>
         <input
           type="checkbox"
           id="checkbox-element"
-          checked={this.checked}
-          aria-describedby={describedBy}
+          checked={checked}
+          aria-describedby={error ? 'error-message' : undefined}
+          aria-invalid={error ? 'true' : 'false'}
           onChange={this.handleChange}
         />
         <label htmlFor="checkbox-element">
-          {this.label}
-          {this.required && <span class="required">(Required)</span>}
+          {label}
+          {required && <span class="required">(*Required)</span>}
         </label>
       </Host>
     );

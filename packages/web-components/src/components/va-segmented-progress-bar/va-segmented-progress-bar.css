@@ -1,3 +1,5 @@
+@import '../../mixins/accessibility.css';
+
 .progress-bar-segmented {
   display: flex;
   width: 100%;

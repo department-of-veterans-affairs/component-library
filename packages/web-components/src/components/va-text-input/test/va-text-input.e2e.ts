@@ -15,7 +15,8 @@ describe('va-text-input', () => {
             Hello, world
           </label>
           <slot></slot>
-          <input id="inputField" type="text" part="input" />
+          <span id="error-message" role="alert"></span>
+          <input id="inputField" type="text" part="input" aria-invalid="false" />
         </mock:shadow-root>
       </va-text-input>
     `);
@@ -38,7 +39,8 @@ describe('va-text-input', () => {
             Name of issue
           </label>
           <slot></slot>
-          <input id="inputField" type="text" part="input" />
+          <span id="error-message" role="alert"></span>
+          <input id="inputField" type="text" part="input" aria-invalid="false" />
         </mock:shadow-root>
         <p className="vads-u-font-weight--normal label-description">
           You can only add an issue that you've already received a VA decision
@@ -54,22 +56,32 @@ describe('va-text-input', () => {
 
     // Render the error message text
     const error = await page.find('va-text-input >>> span#error-message');
+    const input = await page.find('va-text-input >>> input');
     expect(error.innerText).toContain('This is a mistake');
+    expect(input.getAttribute('aria-invalid')).toEqual('true');
+  });
+
+  it('sets aria-invalid based on invalid prop', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-text-input invalid />');
+
+    const input = await page.find('va-text-input >>> input');
+    expect(input.getAttribute('aria-invalid')).toEqual('true');
   });
 
   it('adds new aria-describedby for error message', async () => {
     const page = await newE2EPage();
     await page.setContent('<va-text-input />');
     // Check that error is empty
-    const el = await page.find('va-text-input'); 
+    const el = await page.find('va-text-input');
     const inputEl = await page.find('va-text-input >>> input');
     expect(inputEl.getAttribute('aria-describedby')).toBeNull();
     // Render the error message text as empty string
-    el.setProperty('error', "");
+    el.setProperty('error', '');
     await page.waitForChanges();
     expect(inputEl.getAttribute('aria-describedby')).toBeNull();
     // Render the error message text as real value
-    el.setProperty('error', "Testing Error");
+    el.setProperty('error', 'Testing Error');
     await page.waitForChanges();
     expect(inputEl.getAttribute('aria-describedby')).not.toBeNull();
     expect(inputEl.getAttribute('aria-describedby')).toContain('error-message');
@@ -85,10 +97,11 @@ describe('va-text-input', () => {
       <va-text-input class="hydrated" label="This is a field" required="">
         <mock:shadow-root>
           <label for="inputField" part="label">
-            This is a field <span class="required">(*required)</span>
+            This is a field <span class="required">required</span>
           </label>
           <slot></slot>
-          <input id="inputField" type="text" required="" part="input" />
+          <span id="error-message" role="alert"></span>
+          <input id="inputField" type="text" required="" part="input" aria-invalid="false" />
         </mock:shadow-root>
       </va-text-input>
     `);
@@ -155,9 +168,15 @@ describe('va-text-input', () => {
 
     // Act
     await inputEl.press('a');
-    const firstValue = await page.$eval("va-text-input", (comp : HTMLInputElement) => comp.value)
+    const firstValue = await page.$eval(
+      'va-text-input',
+      (comp: HTMLInputElement) => comp.value,
+    );
     await inputEl.press('s');
-    const secondValue = await page.$eval("va-text-input", (comp : HTMLInputElement) => comp.value)
+    const secondValue = await page.$eval(
+      'va-text-input',
+      (comp: HTMLInputElement) => comp.value,
+    );
 
     // Assert
     expect(inputSpy).toHaveReceivedEventTimes(2);
@@ -203,6 +222,34 @@ describe('va-text-input', () => {
     expect((await page.find('va-text-input >>> small')).innerText).toContain(
       '(Min. 2 characters)',
     );
+  });
+
+  it('ignores negative maxlength values', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-text-input maxlength="-5"/>');
+
+    // Level-setting expectations
+    const inputEl = await page.find('va-text-input >>> input');
+    expect(await page.find('va-text-input >>> small')).toBeNull();
+
+    // Test the functionality
+    await inputEl.type('Hello, nice to meet you');
+    expect(await inputEl.getProperty('value')).toBe('Hello, nice to meet you');
+    expect(await page.find('va-text-input >>> small')).toBeNull();
+  });
+
+  it('ignores a maxlength of zero', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-text-input maxlength="0"/>');
+
+    // Level-setting expectations
+    const inputEl = await page.find('va-text-input >>> input');
+    expect(await page.find('va-text-input >>> small')).toBeNull();
+
+    // Test the functionality
+    await inputEl.type('Hello, nice to meet you');
+    expect(await inputEl.getProperty('value')).toBe('Hello, nice to meet you');
+    expect(await page.find('va-text-input >>> small')).toBeNull();
   });
 
   it('allows manually setting the type attribute', async () => {
@@ -255,17 +302,18 @@ describe('va-text-input', () => {
     await page.setContent('<va-text-input success />');
 
     const input = await page.find('va-text-input >>> input');
+    // rgb(46, 133, 64) is equal to #2e8540 and --color-green CSS variable
     expect((await input.getComputedStyle()).borderBottomColor).toEqual(
-      'rgb(91, 97, 107)',
+      'rgb(46, 133, 64)',
     );
     expect((await input.getComputedStyle()).borderLeftColor).toEqual(
-      'rgb(91, 97, 107)',
+      'rgb(46, 133, 64)',
     );
     expect((await input.getComputedStyle()).borderRightColor).toEqual(
-      'rgb(91, 97, 107)',
+      'rgb(46, 133, 64)',
     );
     expect((await input.getComputedStyle()).borderTopColor).toEqual(
-      'rgb(91, 97, 107)',
+      'rgb(46, 133, 64)',
     );
   });
 });

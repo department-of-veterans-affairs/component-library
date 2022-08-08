@@ -23,17 +23,17 @@ export class VaAdditionalInfo {
   /**
    * The text to trigger the expansion
    */
-  @Prop() trigger: string;
+  @Prop() trigger!: string;
 
   /**
-   * If true, doesn't fire the CustomEvent which can be used for analytics tracking.
+   * If `true`, doesn't fire the CustomEvent which can be used for analytics tracking.
    */
-  @Prop() disableAnalytics: boolean;
+  @Prop() disableAnalytics?: boolean = false;
 
   /**
-   * If true, left blue border and padding is removed.
+   * If `true`, left blue border and padding is removed.
    */
-  @Prop() disableBorder: boolean;
+  @Prop() disableBorder?: boolean = false;
 
   /**
    * The event used to track usage of the component. This is emitted when an
@@ -76,12 +76,14 @@ export class VaAdditionalInfo {
   // Ensures that the CSS animation is consistent and uses the correct max-height for its content
   updateInfoMaxHeight() {
     const infoElm = this.el.shadowRoot.getElementById('info');
+    /* eslint-disable i18next/no-literal-string */
     const contentHeight = infoElm.scrollHeight + 'px';
     // the additional 2em is #info margin-top and margin-bottom when open
     infoElm.style.setProperty(
       '--calc-max-height',
       'calc(' + contentHeight + ' + 2rem)',
     );
+    /* eslint-enable i18next/no-literal-string */
   }
 
   componentDidLoad() {

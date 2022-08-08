@@ -1,45 +1,26 @@
 @import '../../mixins/inputs.css';
 @import '../../mixins/accessibility.css';
+@import '../../mixins/form-field-error.css';
 
 :host {
   display: block;
 }
 
-:host([required]) label > span {
+.required {
   color: var(--color-secondary-dark);
   margin: 0 0.35em;
 }
 
-:host([error]) {
-  border-left: 4px solid var(--color-secondary-dark);
-  margin-top: 3rem;
-  padding-bottom: 0.8rem;
-  padding-left: 1.5rem;
-  padding-top: 0.8rem;
-  position: relative;
-  right: 1.9rem;
-}
-
-:host([error]) label {
-  margin-top: 0;
-}
-
-:host([error]) label,
-:host([error]) > span {
+:host([error]:not([error=''])) label,
+:host([error]:not([error=''])) > span {
   display: block;
   font-size: 1.6rem;
-  font-weight: 700;
 }
 
-:host([error]) > span {
+:host([error]:not([error=''])) > span {
   color: var(--color-secondary-dark);
   padding-bottom: 3px;
   padding-top: 3px;
-}
-
-:host([error]) select,
-select:invalid {
-  border: 3px solid var(--color-secondary-dark);
 }
 
 ::slotted(option) {
@@ -58,5 +39,5 @@ select {
   background-position: right 1.3rem center;
   background-repeat: no-repeat;
   background-size: 1rem;
-  padding-right: 3rem;
+  padding: 0.8rem 3rem 0.8rem 0.7em;
 }

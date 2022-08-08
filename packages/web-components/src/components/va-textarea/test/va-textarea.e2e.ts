@@ -4,16 +4,19 @@ import { axeCheck } from '../../../testing/test-helpers';
 describe('va-textarea', () => {
   it('renders', async () => {
     const page = await newE2EPage();
-    await page.setContent('<va-textarea label="Describe your situation"></va-textarea>');
+    await page.setContent(
+      '<va-textarea label="Describe your situation"></va-textarea>',
+    );
 
     const element = await page.find('va-textarea');
     expect(element).toEqualHtml(`
       <va-textarea class="hydrated" label="Describe your situation">
         <mock:shadow-root>
-          <label for="textarea" id="textarea-label">
+          <label for="textarea">
             Describe your situation
           </label>
-          <textarea aria-labelledby="textarea-label" id="textarea"></textarea>
+          <span id="error-message" role="alert"></span>
+          <textarea id="textarea" aria-invalid="false"></textarea>
         </mock:shadow-root>
       </va-textarea>
     `);
@@ -25,7 +28,9 @@ describe('va-textarea', () => {
 
     // Render the error message text
     const error = await page.find('va-textarea >>> span#error-message');
+    const textarea = await page.find('va-textarea >>> textarea');
     expect(error.innerText).toContain('This is a mistake');
+    expect(textarea.getAttribute('aria-invalid')).toEqual('true');
   });
 
   it('adds new aria-describedby for error message', async () => {
@@ -34,7 +39,9 @@ describe('va-textarea', () => {
 
     // Render the error message text
     const textareaEl = await page.find('va-textarea >>> textarea ');
-    expect(textareaEl.getAttribute('aria-describedby')).toContain('error-message');
+    expect(textareaEl.getAttribute('aria-describedby')).toContain(
+      'error-message',
+    );
   });
 
   it('renders a required span', async () => {
@@ -44,7 +51,7 @@ describe('va-textarea', () => {
     // Render the error message text
     const requiredSpan = await page.find('va-textarea >>> .required');
     // This is the key for i18next
-    expect(requiredSpan).toEqualText('(*required)');
+    expect(requiredSpan).toEqualText('required');
   });
 
   it('passes an aXe check', async () => {
@@ -60,9 +67,7 @@ describe('va-textarea', () => {
   it('fires an analytics event when enableAnalytics is true', async () => {
     const page = await newE2EPage();
 
-    await page.setContent(
-      '<va-textarea label="Something" enable-analytics/>',
-    );
+    await page.setContent('<va-textarea label="Something" enable-analytics/>');
 
     const analyticsSpy = await page.spyOnEvent('component-library-analytics');
 
@@ -119,9 +124,15 @@ describe('va-textarea', () => {
 
     // Act
     await textareaEl.press('a');
-    const firstValue = await page.$eval("va-textarea", (comp : HTMLTextAreaElement) => comp.value)
+    const firstValue = await page.$eval(
+      'va-textarea',
+      (comp: HTMLTextAreaElement) => comp.value,
+    );
     await textareaEl.press('s');
-    const secondValue = await page.$eval("va-textarea", (comp : HTMLTextAreaElement) => comp.value)
+    const secondValue = await page.$eval(
+      'va-textarea',
+      (comp: HTMLTextAreaElement) => comp.value,
+    );
 
     // Assert
     expect(inputSpy).toHaveReceivedEventTimes(2);
@@ -131,9 +142,7 @@ describe('va-textarea', () => {
 
   it('adds a max character limit with descriptive text', async () => {
     const page = await newE2EPage();
-    await page.setContent(
-      '<va-textarea maxlength="3" value="22"/>',
-    );
+    await page.setContent('<va-textarea maxlength="3" value="22"/>');
 
     // Level-setting expectations
     const textareaEl = await page.find('va-textarea >>> textarea');
@@ -145,8 +154,39 @@ describe('va-textarea', () => {
     expect(await textareaEl.getProperty('value')).toBe('222');
     // This is the i18next key surrounded by parentheses
     expect((await page.find('va-textarea >>> small')).innerText).toContain(
-      '(max-chars)',
+      'max-chars',
     );
   });
 
+  it('ignores negative maxlength values', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-textarea maxlength="-5"/>');
+
+    // Level-setting expectations
+    const textareaEl = await page.find('va-textarea >>> textarea');
+    expect(await page.find('va-textarea >>> small')).toBeNull();
+
+    // Test the functionality
+    await textareaEl.type('Hello, nice to meet you');
+    expect(await textareaEl.getProperty('value')).toBe(
+      'Hello, nice to meet you',
+    );
+    expect(await page.find('va-textarea >>> small')).toBeNull();
+  });
+
+  it('ignores a maxlength of zero', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-textarea maxlength="0"/>');
+
+    // Level-setting expectations
+    const textareaEl = await page.find('va-textarea >>> textarea');
+    expect(await page.find('va-textarea >>> small')).toBeNull();
+
+    // Test the functionality
+    await textareaEl.type('Hello, nice to meet you');
+    expect(await textareaEl.getProperty('value')).toBe(
+      'Hello, nice to meet you',
+    );
+    expect(await page.find('va-textarea >>> small')).toBeNull();
+  });
 });

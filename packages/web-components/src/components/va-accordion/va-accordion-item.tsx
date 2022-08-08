@@ -1,4 +1,13 @@
-import { Component, Element, Event, EventEmitter, Host, Prop, State, h } from '@stencil/core';
+import {
+  Component,
+  Element,
+  Event,
+  EventEmitter,
+  Host,
+  Prop,
+  State,
+  h,
+} from '@stencil/core';
 import { getSlottedNodes } from '../../utils/utils';
 @Component({
   tag: 'va-accordion-item',
@@ -7,8 +16,8 @@ import { getSlottedNodes } from '../../utils/utils';
 })
 export class VaAccordionItem {
   /**
-  * Reference to host element
-  */
+   * Reference to host element
+   */
   @Element() el: HTMLElement;
 
   /**
@@ -23,22 +32,22 @@ export class VaAccordionItem {
   /**
    * The accordion item header text
    */
-  @Prop() header: string;
+  @Prop() header?: string;
 
   /**
    * Optional accordion item subheader text. Default is null.
    */
-  @Prop() subheader: string = null;
+  @Prop() subheader?: string = null;
 
   /**
    * True if the item is open
    */
-  @Prop() open: boolean = false;
+  @Prop() open?: boolean = false;
 
   /**
    * Header level for button wrapper. Must be between 1 and 6
    */
-  @Prop() level: number = 2;
+  @Prop() level?: number = 2;
 
   /**
    * Local State for slot=headline replacement of props (header).
@@ -66,11 +75,10 @@ export class VaAccordionItem {
   // Function allows us to provide context to state
   // State is then being digested by the Header Function below
   private populateStateValues() {
-    getSlottedNodes(this.el, null).forEach(
-      (node: HTMLSlotElement) => {
-        this.slotHeader = node.innerHTML
-        this.slotTag = node.tagName.toLowerCase()
-      })
+    getSlottedNodes(this.el, null).forEach((node: HTMLSlotElement) => {
+      this.slotHeader = node.innerHTML;
+      this.slotTag = node.tagName.toLowerCase();
+    });
   }
 
   componentDidLoad() {
@@ -87,27 +95,34 @@ export class VaAccordionItem {
     // IE11 is unable to run onSlotChange
     // Check needed to populate Accordion Item Header information
     // When using slot="headline" to set the information
-    const ieSlotCheckTag = this.el.querySelector('[slot="headline"]')?.tagName.toLowerCase()
-    const ieSlotCheckHeader = this.el.querySelector('[slot="headline"]')?.innerHTML
+    const ieSlotCheckTag = this.el
+      .querySelector('[slot="headline"]')
+      ?.tagName.toLowerCase();
+    const ieSlotCheckHeader =
+      this.el.querySelector('[slot="headline"]')?.innerHTML;
 
     const Header = () =>
       h(
+        // TODO: Remove level & header prop & let the slot do its work
+        /* eslint-disable-next-line i18next/no-literal-string */
         this.slotTag || ieSlotCheckTag || `h${this.level}`,
         null,
         <button
-          ref={el => { this.expandButton = el }}
+          ref={el => {
+            this.expandButton = el;
+          }}
           onClick={this.toggleOpen.bind(this)}
           aria-expanded={this.open ? 'true' : 'false'}
           aria-controls="content"
         >
           {this.slotHeader || ieSlotCheckHeader || this.header}
-          {this.subheader ? (<p>{this.subheader}</p>) : false}
+          {this.subheader ? <p>{this.subheader}</p> : false}
         </button>,
       );
     return (
       <Host>
         <Header />
-        <slot name="headline" onSlotchange={() => this.populateStateValues()}/>
+        <slot name="headline" onSlotchange={() => this.populateStateValues()} />
         <div id="content">
           <slot />
         </div>

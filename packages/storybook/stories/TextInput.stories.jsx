@@ -1,10 +1,16 @@
 import React, { useEffect, useState } from 'react';
-
 import TextInput from '../../react-components/src/components/TextInput/TextInput';
+import { StoryDocs } from './wc-helpers';
 
 export default {
-  title: 'Components/TextInput (deprecated)',
+  title: 'Components/TextInput',
   component: TextInput,
+  parameters: {
+    componentSubtitle: 'Text input React component',
+    docs: {
+      page: () => <StoryDocs componentName="TextInput" />,
+    },
+  },
 };
 
 const Template = args => {
@@ -45,43 +51,43 @@ const defaultArgs = {
   },
 };
 
-export const Default = Template.bind({});
+export const Default = Template.bind(null);
 Default.args = {
   ...defaultArgs,
 };
 
-export const Internationalization = I18nTemplate.bind({});
+export const Internationalization = I18nTemplate.bind(null);
 Internationalization.args = {
   ...defaultArgs,
   required: true,
 };
 
-export const ErrorMessage = Template.bind({});
+export const ErrorMessage = Template.bind(null);
 ErrorMessage.args = {
   ...defaultArgs,
   errorMessage: 'There was a problem',
 };
 
-export const Required = Template.bind({});
+export const Required = Template.bind(null);
 Required.args = {
   ...defaultArgs,
   required: true,
 };
 
-export const WithPlaceholder = Template.bind({});
+export const WithPlaceholder = Template.bind(null);
 WithPlaceholder.args = {
   ...defaultArgs,
   placeholder: 'This is a placeholder',
 };
 
-export const MaxChars = Template.bind({});
+export const MaxChars = Template.bind(null);
 MaxChars.args = {
   ...defaultArgs,
   charMax: 16,
   placeholder: 'No more than 16 characters',
 };
 
-export const Autocomplete = Template.bind({});
+export const Autocomplete = Template.bind(null);
 Autocomplete.args = {
   ...defaultArgs,
   autocomplete: 'email',
@@ -90,7 +96,7 @@ Autocomplete.args = {
   placeholder: 'This should autocomplete using email addresses',
 };
 
-export const WithAnalytics = Template.bind({});
+export const WithAnalytics = Template.bind(null);
 WithAnalytics.args = {
   ...defaultArgs,
   enableAnalytics: true,

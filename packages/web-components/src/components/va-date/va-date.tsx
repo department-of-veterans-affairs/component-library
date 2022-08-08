@@ -1,16 +1,43 @@
-import { Component, Event, EventEmitter, Host, Prop, h } from '@stencil/core';
+import {
+  Component,
+  Event,
+  EventEmitter,
+  Host,
+  Prop,
+  State,
+  h,
+  Element,
+  Fragment,
+} from '@stencil/core';
 
-import { months, days, isFullDate } from '../../utils/date-utils';
+import {
+  months,
+  days,
+  checkLeapYear,
+  maxMonths,
+  maxYear,
+  minMonths,
+  minYear,
+  validKeys,
+} from '../../utils/date-utils';
+
+/**
+ * By default all date components have the following validation:
+ * - Cannot have blank values
+ * - Month and Day must be valid numbers
+ * - The Year cannot fall outside of the range of 1900 through the current year plus 100 years
+ */
 @Component({
   tag: 'va-date',
   styleUrl: 'va-date.css',
   shadow: true,
 })
 export class VaDate {
+  @Element() el: HTMLElement;
   /**
    * Render marker indicating field is required.
    */
-  @Prop() required: boolean;
+  @Prop() required?: boolean = false;
 
   /**
    * Label for the field.
@@ -26,12 +53,17 @@ export class VaDate {
    * The error message to render (if any)
    * This prop should be leveraged to display any custom validations needed for this component
    */
-  @Prop() error: string;
+  @Prop() error?: string;
+
+  /**
+   * Whether or not only the Month and Year inputs should be displayed.
+   */
+  @Prop() monthYearOnly?: boolean = false;
 
   /**
    * Set the default date value must be in YYYY-MM-DD format.
    */
-  @Prop({ mutable: true }) value: string;
+  @Prop({ mutable: true }) value?: string;
 
   /**
    * Fires when the date input loses focus after its value was changed
@@ -51,7 +83,66 @@ export class VaDate {
   })
   dateBlur: EventEmitter;
 
+  @State() invalidDay: boolean = false;
+  @State() invalidMonth: boolean = false;
+  @State() invalidYear: boolean = false;
+
+  /**
+   * Set the value prop as an ISO-8601 date using provided arguments.
+   * Strips trailing hyphens and sets date to be null if the
+   * date values are all NaNs.
+   */
+  private setValue(year: number, month: number, day: number): void {
+    // Use a leading zero for numbers < 10
+    const numFormatter = new Intl.NumberFormat('en-US', {
+      minimumIntegerDigits: 2,
+    });
+    // Ternary to prevent NaN displaying as value for Year
+    // Ternary to prevent Month or Day from displaying as single digit
+    /* eslint-disable i18next/no-literal-string */
+    const val = `${year ? year : ''}-${
+      month ? numFormatter.format(month) : ''
+    }-${day ? numFormatter.format(day) : ''}`.replace(/-+$/, '');
+    /* eslint-enable i18next/no-literal-string */
+
+    this.value = val ? val : null;
+  }
+
   private handleDateBlur = (event: FocusEvent) => {
+    const [year, month, day] = (this.value || '')
+      .split('-')
+      .map(val => parseInt(val));
+    this.setValue(year, month, day);
+
+    const daysForSelectedMonth = month > 0 ? days[month] : [];
+    const leapYear = checkLeapYear(year);
+
+    if (this.required) {
+      this.invalidYear = !year || year < minYear || year > maxYear;
+
+      this.invalidMonth = !month || month < minMonths || month > maxMonths;
+
+      this.invalidDay =
+        !this.monthYearOnly &&
+        (!day || day < minMonths || day > daysForSelectedMonth.length);
+
+      if (!leapYear && month === 2 && day > 28) {
+        this.invalidYear = true;
+        this.invalidMonth = true;
+        this.invalidDay = true;
+      }
+    }
+
+    if (
+      !this.error &&
+      (this.invalidYear || this.invalidMonth || this.invalidDay)
+    ) {
+      this.error = 'Please enter a valid date';
+    } else if (this.error !== 'Please enter a valid date') {
+      this.error;
+    } else {
+      this.error = '';
+    }
     this.dateBlur.emit(event);
   };
 
@@ -61,31 +152,35 @@ export class VaDate {
     if (target.classList.contains('select-month')) {
       currentMonth = target.value;
     }
+    // This won't happen for monthYearOnly dates
     if (target.classList.contains('select-day')) {
       currentDay = target.value;
     }
     if (target.classList.contains('input-year')) {
       currentYear = target.value;
     }
-    // Use a leading zero for numbers < 10
-    const numFormatter = new Intl.NumberFormat('en-US', {
-      minimumIntegerDigits: 2,
-    });
 
-    // If Month or Date Select are chosen as empty return ''
-    // Otherwise convert numbers less than 10 to have a leading 0
-    this.value = `${currentYear}-${
-      currentMonth ? numFormatter.format(parseInt(currentMonth)) : ''
-    }-${currentDay ? numFormatter.format(parseInt(currentDay)) : ''}`;
+    this.setValue(
+      parseInt(currentYear),
+      parseInt(currentMonth),
+      parseInt(currentDay),
+    );
 
     // This event should always fire to allow for validation handling
     this.dateChange.emit(event);
   };
 
+  private handleDateKey = (event: KeyboardEvent) => {
+    if (validKeys.indexOf(event.key) < 0) {
+      event.preventDefault();
+      return false;
+    }
+  };
+
   /**
    * Whether or not an analytics event will be fired.
    */
-  @Prop() enableAnalytics: boolean;
+  @Prop() enableAnalytics: boolean = false;
 
   /**
    * The event used to track usage of the component. This is emitted when an
@@ -106,45 +201,43 @@ export class VaDate {
       error,
       handleDateBlur,
       handleDateChange,
+      handleDateKey,
+      monthYearOnly,
       value,
     } = this;
 
-    // Convert string to number to remove leading 0 on values less than 10
     const [year, month, day] = (value || '')
       .split('-')
-      .map(val => parseInt(val, 10));
-
+      .map(val => parseInt(val));
     const daysForSelectedMonth = month > 0 ? days[month] : [];
 
-    // Check validity of date if invalid provide message and error state styling
-    const dateInvalid =
-      required && (!isFullDate(value) || day > daysForSelectedMonth.length)
-        ? 'Please provide a valid date'
-        : null;
-
-    // Setting new attribute to avoid conflicts with only using error attribute
     // Error attribute should be leveraged for custom error messaging
     // Fieldset has an implicit aria role of group
     return (
-      <Host value={value} invalid={dateInvalid}>
-        <fieldset aria-label="Select Month and two digit day XX and four digit year format XXXX">
+      <Host value={value} error={error} onBlur={handleDateBlur}>
+        <fieldset>
           <legend>
             {label} {required && <span class="required">(*Required)</span>}
           </legend>
-          {(error || dateInvalid) && (
-            <span class="error-message" role="alert">
-              <span class="sr-only">Error</span> {error || dateInvalid}
-            </span>
-          )}
+          <slot />
+          <span id="error-message" role="alert">
+            {error && (
+              <Fragment>
+                <span class="sr-only">Error</span> {error}
+              </Fragment>
+            )}
+          </span>
           <div class="date-container">
             <va-select
               label="Month"
+              aria-describedby={error ? 'error-message' : undefined}
               name={`${name}Month`}
               // Value must be a string
               value={month?.toString()}
               onVaSelect={handleDateChange}
-              onBlur={handleDateBlur}
+              invalid={this.invalidMonth}
               class="select-month"
+              aria-label="Please enter two digits for the month"
             >
               <option value=""></option>
               {months &&
@@ -152,25 +245,30 @@ export class VaDate {
                   <option value={month.value}>{month.label}</option>
                 ))}
             </va-select>
-            <va-select
-              label="Day"
-              name={`${name}Day`}
-              // If day value set is greater than amount of days in the month
-              // set to empty string instead
-              // Value must be a string
-              value={daysForSelectedMonth.length < day ? '' : day?.toString()}
-              onVaSelect={handleDateChange}
-              onBlur={handleDateBlur}
-              class="select-day"
-            >
-              <option value=""></option>
-              {daysForSelectedMonth &&
-                daysForSelectedMonth.map(day => (
-                  <option value={day}>{day}</option>
-                ))}
-            </va-select>
+            {!monthYearOnly && (
+              <va-select
+                label="Day"
+                aria-describedby={error ? 'error-message' : undefined}
+                name={`${name}Day`}
+                // If day value set is greater than amount of days in the month
+                // set to empty string instead
+                // Value must be a string
+                value={daysForSelectedMonth.length < day ? '' : day?.toString()}
+                onVaSelect={handleDateChange}
+                invalid={this.invalidDay}
+                class="select-day"
+                aria-label="Please enter two digits for the day"
+              >
+                <option value=""></option>
+                {daysForSelectedMonth &&
+                  daysForSelectedMonth.map(day => (
+                    <option value={day}>{day}</option>
+                  ))}
+              </va-select>
+            )}
             <va-text-input
               label="Year"
+              aria-describedby={error ? 'error-message' : undefined}
               name={`${name}Year`}
               maxlength={4}
               minlength={4}
@@ -178,11 +276,13 @@ export class VaDate {
               // Value must be a string
               // Checking is NaN if so provide empty string
               value={year ? year.toString() : ''}
+              invalid={this.invalidYear}
               onInput={handleDateChange}
-              onBlur={handleDateBlur}
+              onKeyDown={handleDateKey}
               class="input-year"
               inputmode="numeric"
               type="text"
+              aria-label="Please enter four digits for the year"
             />
           </div>
         </fieldset>

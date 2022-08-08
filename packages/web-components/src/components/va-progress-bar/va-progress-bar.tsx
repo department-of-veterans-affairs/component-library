@@ -9,17 +9,17 @@ export class VaProgressBar {
   /**
    * Whether or not an analytics event will be fired.
    */
-  @Prop() enableAnalytics: boolean;
+  @Prop() enableAnalytics?: boolean = false;
 
   /**
    * Percent of progress made. 0 to 100.
    */
-  @Prop() percent: number;
+  @Prop() percent!: number;
 
   /**
    * The text label for the progress bar.
    */
-  @Prop() label: string;
+  @Prop() label?: string;
 
   /**
    * The event used to track usage of the component. This is emitted when percent
@@ -62,6 +62,9 @@ export class VaProgressBar {
         >
           <div class="progress-bar-inner" style={{ width: `${percent}%` }} />
         </div>
+        <span aria-atomic="true" aria-live="polite" class="sr-only">
+          {percent.toFixed(0)}% complete
+        </span>
       </Host>
     );
   }

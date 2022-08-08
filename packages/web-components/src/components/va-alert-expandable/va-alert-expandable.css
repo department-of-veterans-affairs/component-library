@@ -3,7 +3,6 @@
 
 :host {
   display: block;
-  margin: 0 1.2rem 0.8rem;
 }
 
 :host([status='warning']) {

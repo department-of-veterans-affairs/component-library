@@ -6,10 +6,15 @@ import {
   h,
   Event,
   EventEmitter,
-  forceUpdate
+  forceUpdate,
+  Fragment,
 } from '@stencil/core';
 import i18next from 'i18next';
 
+/**
+ * @nativeHandler onInput
+ * @nativeHandler onBlur
+ */
 @Component({
   tag: 'va-number-input',
   styleUrl: 'va-number-input.css',
@@ -31,7 +36,7 @@ export class VaNumberInput {
   /**
    * Set the input to required and render the (Required) text.
    */
-  @Prop() required?: boolean;
+  @Prop() required?: boolean = false;
 
   /**
    * The inputmode attribute.
@@ -41,7 +46,7 @@ export class VaNumberInput {
   /**
    * Emit component-library-analytics events on the blur event.
    */
-  @Prop() enableAnalytics?: boolean;
+  @Prop() enableAnalytics?: boolean = false;
 
   /**
    * The name to pass to the input element.
@@ -105,26 +110,44 @@ export class VaNumberInput {
   }
 
   render() {
+    const {
+      label,
+      required,
+      error,
+      inputmode,
+      name,
+      max,
+      min,
+      value,
+      handleBlur,
+      handleInput,
+    } = this;
     return (
       <Host>
-        {this.label && (
-          <label htmlFor="inputField">
-            {this.label}{' '}
-            {this.required && <span class="required">(*{i18next.t('required')})</span>}
-          </label>
-        )}
-        {this.error && <span id="error-message">{this.error}</span>}
+        <label htmlFor="inputField">
+          {label}{' '}
+          {required && <span class="required">{i18next.t('required')}</span>}
+        </label>
+        <span id="error-message" role="alert">
+          {error && (
+            <Fragment>
+              <span class="sr-only">{i18next.t('error')}</span> {error}
+            </Fragment>
+          )}
+        </span>
         <input
+          aria-describedby={error ? 'error-message' : undefined}
+          aria-invalid={error ? 'true' : 'false'}
           id="inputField"
           type="number"
-          inputmode={this.inputmode ? this.inputmode : null}
-          name={this.name}
-          max={this.max}
-          min={this.min}
-          value={this.value}
-          required={this.required || null}
-          onInput={this.handleInput}
-          onBlur={this.handleBlur}
+          inputmode={inputmode ? inputmode : null}
+          name={name}
+          max={max}
+          min={min}
+          value={value}
+          required={required || null}
+          onInput={handleInput}
+          onBlur={handleBlur}
         />
       </Host>
     );

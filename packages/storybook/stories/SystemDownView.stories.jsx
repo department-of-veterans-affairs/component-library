@@ -14,5 +14,5 @@ const defaultArgs = {
   messageLine2: 'The explanation goes here.',
 };
 
-export const Default = Template.bind({});
+export const Default = Template.bind(null);
 Default.args = { ...defaultArgs };
