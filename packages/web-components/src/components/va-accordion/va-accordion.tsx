@@ -194,9 +194,10 @@ export class VaAccordion {
                 : i18next.t('expand-all-aria-label')
             }
           >
+            { /**TODO: Revert these hardcoded strings before merging */}
             {this.expanded
-              ? `${i18next.t('collapse-all')} -`
-              : `${i18next.t('expand-all')} +`}
+              ? "Collapse all -"
+              : "Expand all +"}
           </button>
         )}
         <slot />
