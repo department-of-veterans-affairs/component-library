@@ -11,7 +11,11 @@ label[part="label"] {
 }
 
 #error-message{
-  margin-bottom: 0.8rem;
+  margin-bottom: 0.3rem;
+}
+
+va-button {
+  margin-bottom: -0.8rem;
 }
 
 .required {

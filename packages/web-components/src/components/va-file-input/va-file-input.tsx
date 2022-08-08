@@ -68,15 +68,8 @@ export class VaFileInput {
 
   private handleChange = (e: Event) => {
     const target = e.target as HTMLInputElement;
-    // TODO: Remove; for testing only.
-    // eslint-disable-next-line i18next/no-literal-string
-    console.log('target.files', target.files);
-
     this.vaChange.emit({files: target.files});
     /**
-     * TODO: this is from the React version. Try to repro the issue it's 
-     * solving for. Might not be needed anymore.
-     * 
      * Clear the original input, otherwise events will be triggered
      * with empty file arrays and sometimes uploading a file twice will
      * not work.
@@ -112,7 +105,7 @@ export class VaFileInput {
       required, 
       multiple,
       accept,
-      error
+      error,
     } = this;
     return (
       <Host>
@@ -122,6 +115,7 @@ export class VaFileInput {
             {required && <span class="required">{i18next.t('required')}</span>}
           </label>
         )}
+        <slot></slot>
         <span id="error-message" role="alert">
           {error && (
             <Fragment>
@@ -139,6 +133,7 @@ export class VaFileInput {
         />
         <input
             multiple={multiple}
+            style={{ display: 'none' }}
             type="file"
             accept={accept}
             id="fileInputField"
