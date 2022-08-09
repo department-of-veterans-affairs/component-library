@@ -39,7 +39,7 @@ export class VaFileInput {
   /**
    * The text displayed on the button.
    */
-  @Prop() buttontext?: string = i18next.t('Upload a document or file');
+  @Prop() buttontext?: string;
 
   /**
    * Set the input to required and render the (Required) text.
@@ -62,7 +62,7 @@ export class VaFileInput {
   @Prop() error?: string;
 
   /**
-   * Emit component-library-analytics events on the blur event.
+   * Emit component-library-analytics events on the file input change event.
    */
    @Prop() enableAnalytics?: boolean = false;
 
