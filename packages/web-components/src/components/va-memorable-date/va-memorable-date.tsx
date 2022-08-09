@@ -46,12 +46,12 @@ export class VaMemorableDate {
    * The error message to render (if any)
    * This prop should be leveraged to display any custom validations needed for this component
    */
-  @Prop() error?: string;
+  @Prop({ reflect: true, mutable: true }) error?: string;
 
   /**
    * Set the default date value must be in YYYY-MM-DD format.
    */
-  @Prop({ mutable: true }) value?: string;
+  @Prop({ mutable: true, reflect: true }) value?: string;
 
   /**
    * Fires when the date input loses focus after its value was changed
@@ -158,7 +158,7 @@ export class VaMemorableDate {
     // Error attribute should be leveraged for custom error messaging
     // Fieldset has an implicit aria role of group
     return (
-      <Host value={value} error={error} onBlur={handleDateBlur}>
+      <Host onBlur={handleDateBlur}>
         <fieldset>
           <legend>
             {label} {required && <span class="required">(*Required)</span>}
