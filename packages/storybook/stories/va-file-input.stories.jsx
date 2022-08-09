@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
 
 const fileInputDocs = getWebComponentDocs('va-file-input');
@@ -25,6 +25,10 @@ const defaultArgs = {
   'enable-analytics': false,
 };
 
+const handleChangeEvent = (event) => {
+  alert(`Uploaded event received: ${event?.detail?.files[0]?.name}`)
+};
+
 const Template = ({
   label,
   name,
@@ -35,16 +39,20 @@ const Template = ({
   multiple,
   'enable-analytics': enableAnalytics,
 }) => {
+  const ref = useRef(null);
 
   useEffect( () => {
-      const fileInput = document.querySelector('va-file-input');
-      fileInput.addEventListener('vaChange', (event) => {
-        alert(`Successfully uploaded ${event.detail.files[0].name}`)
-      });
+    const element = ref.current;
+    element.addEventListener('vaChange', handleChangeEvent);
+
+    return () => {
+      element.removeEventListener('vaChange', handleChangeEvent);
+    };
   }, [])
 
   return (
     <va-file-input
+      ref={ref}
       label={label}
       name={name}
       buttontext={buttontext}
@@ -53,7 +61,7 @@ const Template = ({
       multiple={multiple}
       error={error}
       enable-analytics={enableAnalytics}
-    / >
+    />
   );
 };
 
@@ -68,6 +76,17 @@ const I18nTemplate = ({
   'enable-analytics': enableAnalytics,
 }) => {
   const [lang, setLang] = useState('en');
+  const ref = useRef(null);
+
+  useEffect( () => {
+    const element = ref.current;
+    element.addEventListener('vaChange', handleChangeEvent);
+
+    return () => {
+      element.removeEventListener('vaChange', handleChangeEvent);
+    };
+  }, [])
+
   return (
     <>
       <button
@@ -81,6 +100,7 @@ const I18nTemplate = ({
         Switch language
       </button>
         <va-file-input
+          ref={ref}
           label={label}
           name={name}
           buttontext={buttontext}
