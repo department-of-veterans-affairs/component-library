@@ -104,13 +104,7 @@ export class VaFileInput {
     }
   };
 
-  private handleButtonKeyPress = (e: KeyboardEvent) => {
-    if (e.key === 'Enter' || e.key === ' ') {
-      this.handleButtonClick();
-    }
-  }
-
-  private handleButtonClick = () => {
+  private handleButtonClick = () => { 
     this.el.shadowRoot.getElementById('fileInputField').click();
   }
 
@@ -153,11 +147,10 @@ export class VaFileInput {
         </span>
         <va-button
           id="fileInputButton"
-          aria-label={label}
-          onKeyPress={this.handleButtonKeyPress}
+          aria-label={i18next.t(label)}
           onClick={this.handleButtonClick}
           secondary
-          text={buttontext}
+          text={i18next.t(buttontext)}
           aria-describedby={error ? 'error-message' : undefined}
         />
         <input

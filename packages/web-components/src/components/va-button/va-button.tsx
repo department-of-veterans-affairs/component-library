@@ -12,9 +12,6 @@ import {
  * @nativeHandler onClick
  */
 
-/**
- * @nativeHandler onKeyPress
- */
 @Component({
   tag: 'va-button',
   styleUrl: 'va-button.css',
