@@ -83,7 +83,7 @@ describe('va-date', () => {
 
     it('allows for a custom required message', async () => {
       const page = await newE2EPage();
-      await page.setContent('<va-date value="2000-01-01" name="test" label="This is a field" required="Fill me out" />');
+      await page.setContent('<va-date value="2000-01-01" name="test" label="This is a field" required />');
 
       // Act
       const handleYear = await page.$('pierce/[name="testYear"]');
@@ -101,7 +101,7 @@ describe('va-date', () => {
       expect(errorSpan.textContent).toContain("Fill me out");
     });
     
-    it('displays an error message onBlur if year is invalid', async () => {
+    it('resets error to null when fixed', async () => {
       const page = await newE2EPage();
       await page.setContent(
         '<va-date value="1999-05-03" name="test" />',
