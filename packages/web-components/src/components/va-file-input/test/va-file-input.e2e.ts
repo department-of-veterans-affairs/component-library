@@ -10,10 +10,10 @@ describe('va-file-input', () => {
     expect(element).toEqualHtml(`
     <va-file-input label="This is the file upload label" buttontext="Upload a file" required="false" multiple="false" class="hydrated">
         <mock:shadow-root>
-          <label for="fileInputField" part="label">This is the file upload label</label>
+          <label for="fileInputButton">This is the file upload label</label>
           <slot></slot>
           <span id="error-message" role="alert"></span>
-          <va-button secondary class="hydrated"></va-button>
+          <va-button id="fileInputButton" aria-label="This is the file upload label" secondary="" class="hydrated"></va-button>
           <input type="file" id="fileInputField" style="display: none;">
         </mock:shadow-root>
       </va-text-input>
