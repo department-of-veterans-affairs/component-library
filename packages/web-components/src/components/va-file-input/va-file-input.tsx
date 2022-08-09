@@ -137,7 +137,7 @@ export class VaFileInput {
     return (
       <Host>
         {label && (
-          <label htmlFor="fileInputField" part="label">
+          <label htmlFor="fileInputButton">
             {label}
             {required && <span class="required">{i18next.t('required')}</span>}
           </label>
@@ -152,6 +152,8 @@ export class VaFileInput {
           )}
         </span>
         <va-button
+          id="fileInputButton"
+          aria-label={label}
           onKeyPress={this.handleButtonKeyPress}
           onClick={this.handleButtonClick}
           secondary
@@ -159,11 +161,11 @@ export class VaFileInput {
           aria-describedby={error ? 'error-message' : undefined}
         />
         <input
+            id="fileInputField"
             multiple={multiple}
             style={{ display: 'none' }}
             type="file"
             accept={accept}
-            id="fileInputField"
             name={name}
             onChange={this.handleChange}
           />
