@@ -44,6 +44,38 @@ describe('va-file-input', () => {
     expect(requiredSpan).not.toBeNull();
   });
 
+  it('the `multiple` attributes exists if set', async () => {
+    const page = await newE2EPage();
+    await page.setContent(`<va-file-input buttontext="Upload a file" multiple="true" />`);
+
+    const fileInput = await page.find('va-file-input >>> input');
+    expect(fileInput.getAttribute('multiple')).toBeTruthy;
+  });
+
+  it('the `multiple` attributes does not apply if omitted', async () => {
+    const page = await newE2EPage();
+    await page.setContent(`<va-file-input buttontext="Upload a file" />`);
+
+    const fileInput = await page.find('va-file-input >>> input');
+    expect(fileInput.getAttribute('multiple')).toBeFalsy;
+  });
+
+  it('the `accept` attribute exists if set', async () => {
+    const page = await newE2EPage();
+    await page.setContent(`<va-file-input buttontext="Upload a file" accept=".png" />`);
+
+    const fileInput = await page.find('va-file-input >>> input');
+    expect(fileInput.getAttribute('accept')).toBeTruthy;
+  });
+
+  it('the `accept` attribute does not apply if omitted', async () => {
+    const page = await newE2EPage();
+    await page.setContent(`<va-file-input buttontext="Upload a file" />`);
+
+    const fileInput = await page.find('va-file-input >>> input');
+    expect(fileInput.getAttribute('accept')).toBeFalsy;
+  });
+
   it('passes an aXe check', async () => {
     const page = await newE2EPage();
 
