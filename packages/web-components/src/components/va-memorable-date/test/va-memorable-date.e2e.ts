@@ -252,26 +252,24 @@ describe('va-memorable-date', () => {
       );
       const handleYear = await page.$('pierce/[name="testYear"]');
       const handleMonth = await page.$('pierce/[name="testMonth"]');
-      const handleDay = await page.$('pierce/[name="testDay"]');
       const getAriaInvalid = (element: HTMLElement) =>
         element.getAttribute('aria-invalid');
 
       // Click three times to select all text in input
       await handleMonth.click({ clickCount: 3 });
-      await handleMonth.press('0');
+      await handleMonth.press('3');
+      await handleMonth.press('9');
       // Trigger Blur
       await handleYear.press('Tab');
 
       await page.waitForChanges();
       let invalidYear = await handleYear.evaluate(getAriaInvalid);
       let invalidMonth = await handleMonth.evaluate(getAriaInvalid);
-      let invalidDay = await handleDay.evaluate(getAriaInvalid);
 
       expect(invalidYear).toEqual('false');
       expect(invalidMonth).toEqual('true');
-      // Day is invalid because month is 0
-      expect(invalidDay).toEqual('true');
 
+      await handleMonth.press('Backspace');
       await handleMonth.press('Backspace');
       await handleMonth.press('4');
       // Trigger Blur
@@ -280,11 +278,9 @@ describe('va-memorable-date', () => {
 
       invalidYear = await handleYear.evaluate(getAriaInvalid);
       invalidMonth = await handleMonth.evaluate(getAriaInvalid);
-      invalidDay = await handleDay.evaluate(getAriaInvalid);
 
       expect(invalidYear).toEqual('false');
       expect(invalidMonth).toEqual('false');
-      expect(invalidDay).toEqual('false');
     });
 
     it('correctly indicates an invalid day', async () => {
@@ -423,31 +419,5 @@ describe('va-memorable-date', () => {
     await handleYear.press('Tab');
     await page.waitForChanges();
     expect(date.getAttribute('value')).toBe('--');
-  });
-
-  it.only('checks for valid year month and day', async () => {
-    const page = await newE2EPage();
-
-    await page.setContent('<va-memorable-date name="test" required/>');
-    const date = await page.find('va-memorable-date');
-    const handleMonth = await page.$('pierce/[name="testMonth"]');
-    const handleDay = await page.$('pierce/[name="testDay"]');
-    const handleYear = await page.$('pierce/[name="testYear"]');
-    // Month
-    await handleMonth.press('0');
-    await handleMonth.press('Tab');
-    // Day
-    await handleDay.press('9');
-    await handleDay.press('9');
-    await handleDay.press('Tab');
-    // Year
-    await handleYear.press('3');
-    await handleYear.press('0');
-    await handleYear.press('0');
-    await handleYear.press('0');
-    // Trigger Blur
-    await handleYear.press('Tab');
-    await page.waitForChanges();
-    expect(date.getAttribute('error')).toEqual('Please enter a year between 1900 and 2122');
   });
 });
