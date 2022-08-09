@@ -1,5 +1,6 @@
 import { newE2EPage } from '@stencil/core/testing';
 import { axeCheck } from '../../../testing/test-helpers';
+const path = require('path');
 
 describe('va-file-input', () => {
   it('renders', async () => {
@@ -74,6 +75,24 @@ describe('va-file-input', () => {
 
     const fileInput = await page.find('va-file-input >>> input');
     expect(fileInput.getAttribute('accept')).toBeFalsy;
+  });
+
+  it('emits the vaChange event only once', async () => {
+    const page = await newE2EPage();
+    await page.setContent(`<va-file-input buttontext="Upload a file" />`);
+    
+    const fileUploadSpy = await page.spyOnEvent('vaChange');
+    const filePath = path.relative(process.cwd(), __dirname + '/1x1.png');
+    const input = (
+      await page.waitForFunction(() =>
+        document.querySelector("va-file-input").shadowRoot.querySelector("input[type=file]")
+      )
+    ).asElement();
+
+    await input.uploadFile(filePath);
+    await page.waitForChanges();
+
+    expect(fileUploadSpy).toHaveReceivedEventTimes(1);
   });
 
   it('passes an aXe check', async () => {
