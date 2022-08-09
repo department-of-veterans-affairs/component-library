@@ -86,6 +86,22 @@ export class VaDate {
   @Prop({ mutable: true }) invalidYear: boolean = false;
 
   /**
+   * Whether or not an analytics event will be fired.
+   */
+  @Prop() enableAnalytics: boolean = false;
+
+  /**
+   * The event used to track usage of the component. This is emitted when an
+   * input value changes and enableAnalytics is true.
+   */
+  @Event({
+    eventName: 'component-library-analytics',
+    composed: true,
+    bubbles: true,
+  })
+  componentLibraryAnalytics: EventEmitter;
+
+  /**
    * Set the value prop as an ISO-8601 date using provided arguments.
    * Strips trailing hyphens and sets date to be null if the
    * date values are all NaNs.
@@ -146,22 +162,6 @@ export class VaDate {
       return false;
     }
   };
-
-  /**
-   * Whether or not an analytics event will be fired.
-   */
-  @Prop() enableAnalytics: boolean = false;
-
-  /**
-   * The event used to track usage of the component. This is emitted when an
-   * input value changes and enableAnalytics is true.
-   */
-  @Event({
-    eventName: 'component-library-analytics',
-    composed: true,
-    bubbles: true,
-  })
-  componentLibraryAnalytics: EventEmitter;
 
   render() {
     const {
