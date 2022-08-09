@@ -132,3 +132,8 @@ div.warning i.alert-status-icon::before {
 div.error i.alert-status-icon::before {
   content: '\F06A';
 }
+
+::slotted(*) {
+  margin-bottom: 0 !important;
+  margin-top: 0 !important;
+}
