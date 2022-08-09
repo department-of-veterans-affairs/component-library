@@ -22,7 +22,7 @@ describe('va-file-input', () => {
 
   it('displays an error message when `error` is defined', async () => {
     const page = await newE2EPage();
-    await page.setContent(`<va-file-input error="This is an error" />`);
+    await page.setContent(`<va-file-input error="This is an error" buttontext="Upload a file" />`);
 
     const errorSpan = await page.find('va-file-input >>> #error-message');
     expect(errorSpan.innerText.includes('This is an error')).toBe(true);
@@ -38,7 +38,7 @@ describe('va-file-input', () => {
 
   it('renders a required span', async () => {
     const page = await newE2EPage();
-    await page.setContent(`<va-file-input required label="Example file input." />`);
+    await page.setContent(`<va-file-input required label="Example file input." buttontext="Upload a file"/>`);
 
     const requiredSpan = await page.find('va-file-input >>> .required');
     expect(requiredSpan).not.toBeNull();
@@ -46,7 +46,7 @@ describe('va-file-input', () => {
 
   it('the `multiple` attributes exists if set', async () => {
     const page = await newE2EPage();
-    await page.setContent(`<va-file-input buttontext="Upload a file" multiple="true" />`);
+    await page.setContent(`<va-file-input buttontext="Upload a file" multiple="true" buttontext="Upload a file"/>`);
 
     const fileInput = await page.find('va-file-input >>> input');
     expect(fileInput.getAttribute('multiple')).toBeTruthy;
@@ -80,7 +80,7 @@ describe('va-file-input', () => {
     const page = await newE2EPage();
 
     await page.setContent(
-      '<va-file-input required label="This is a test" error="With an error message"/>',
+      '<va-file-input required label="This is a test" buttontext="Upload a file" error="With an error message"/>',
     );
 
     await axeCheck(page);
