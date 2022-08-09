@@ -212,10 +212,10 @@ describe('va-date', () => {
         expect(invalidDay).toEqual('false');
       });
 
-      it.only('correctly indicates an invalid day', async () => {
+      it('correctly indicates an invalid day', async () => {
         const page = await newE2EPage();
         await page.setContent(
-          '<va-date value="1999-05-03" name="test" />',
+          '<va-date name="test" />',
         );
         const handleYear = await page.$('pierce/[name="testYear"]');
         const handleMonth = await page.$('pierce/[name="testMonth"]');
@@ -224,9 +224,9 @@ describe('va-date', () => {
           (element: HTMLElement) => element.getAttribute('aria-invalid');
 
         // Click three times to select all text in input
-        await handleDay.click({ clickCount: 3 });
-        await handleDay.select('0');
+        await handleMonth.select('3');
         // Trigger Blur
+        await handleYear.type('1995');
         await handleYear.press('Tab');
 
         // Month only has one character - should be invalid

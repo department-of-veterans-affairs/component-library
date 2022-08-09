@@ -159,7 +159,7 @@ export function validate(component: Components.VaDate | Components.VaMemorableDa
 
   // Check day before month so that the month error message has a change to override
   // We don't know the upper limit on days until we know the month
-  if (day && (day < minMonths || day > daysForSelectedMonth)) {
+  if (!monthYearOnly && (!day || day < minMonths || day > daysForSelectedMonth)) {
     component.invalidDay = true;
     component.error = `Please enter a day between ${minMonths} and ${daysForSelectedMonth}`;
   }
