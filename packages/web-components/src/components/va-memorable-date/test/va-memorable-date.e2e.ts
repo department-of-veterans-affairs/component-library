@@ -59,7 +59,7 @@ describe('va-memorable-date', () => {
     expect(requiredSpan).not.toBeNull();
   });
 
-  it('does not validate without required prop', async () => {
+  it('does basic validation without required prop', async () => {
     const page = await newE2EPage();
     await page.setContent(
       '<va-memorable-date value="1999-05-03" name="test" />',
@@ -74,7 +74,7 @@ describe('va-memorable-date', () => {
     await handleYear.press('Tab');
 
     await page.waitForChanges();
-    expect(date.getAttribute('error')).toEqual(null);
+    expect(date.getAttribute('error')).toEqual("Please enter a year between 1900 and 2122");
   });
 
   it('sets a label', async () => {
@@ -175,7 +175,7 @@ describe('va-memorable-date', () => {
     expect(elementDay.getAttribute('value')).toBe('12');
   });
 
-  it('fires an error message onBlur if date is invalid and component is required', async () => {
+  it('displays an error message onBlur if date is invalid', async () => {
     const page = await newE2EPage();
     await page.setContent(
       '<va-memorable-date value="1999-05-03" name="test" required="true" />',
@@ -190,7 +190,7 @@ describe('va-memorable-date', () => {
     await handleYear.press('Tab');
 
     await page.waitForChanges();
-    expect(date.getAttribute('error')).toEqual('Please enter a valid date');
+    expect(date.getAttribute('error')).toEqual('Please enter a year between 1900 and 2122');
 
     await handleYear.press('0');
     await handleYear.press('2');
@@ -198,7 +198,7 @@ describe('va-memorable-date', () => {
     // Trigger Blur
     await handleYear.press('Tab');
     await page.waitForChanges();
-    expect(date.getAttribute('error')).toEqual('');
+    expect(date.getAttribute('error')).toEqual(null);
   });
 
   describe('invalid subcomponents', () => {
@@ -425,7 +425,7 @@ describe('va-memorable-date', () => {
     expect(date.getAttribute('value')).toBe('--');
   });
 
-  it('checks for valid year month and day', async () => {
+  it.only('checks for valid year month and day', async () => {
     const page = await newE2EPage();
 
     await page.setContent('<va-memorable-date name="test" required/>');
@@ -448,6 +448,6 @@ describe('va-memorable-date', () => {
     // Trigger Blur
     await handleYear.press('Tab');
     await page.waitForChanges();
-    expect(date.getAttribute('error')).toEqual('Please enter a valid date');
+    expect(date.getAttribute('error')).toEqual('Please enter a year between 1900 and 2122');
   });
 });
