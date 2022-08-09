@@ -124,10 +124,12 @@ export class VaAlertExpandable {
             class="alert-expandable-trigger"
           >
             <i class="alert-status-icon" aria-hidden="true" role="img"></i>
-            <span class="alert-expandable-title">
-              <span class="sr-only">Alert:&nbsp;</span>
-              {this.trigger}
-            </span>
+            <div>
+              <span class="alert-expandable-title">
+                <span class="sr-only">Alert:&nbsp;</span>
+                {this.trigger}
+              </span>
+            </div>
             <i class="fa-angle-down" role="presentation" />
           </a>
           <div id="alert-body" class={bodyClasses}>
