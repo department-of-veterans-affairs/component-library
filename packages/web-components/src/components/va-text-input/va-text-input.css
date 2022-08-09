@@ -1,3 +1,4 @@
+@import '../../mixins/focusable.css';
 @import '../../mixins/accessibility.css';
 @import '../../mixins/form-field-error.css';
 
@@ -30,11 +31,6 @@ input {
   max-width: 46rem;
   padding: 1rem 0.7em;
   width: 100%;
-}
-
-input:not([disabled]):focus {
-  outline: 2px solid var(--color-gold-light);
-  outline-offset: 2px;
 }
 
 :host([success]:not([success='false'])) input {
