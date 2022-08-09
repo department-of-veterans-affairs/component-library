@@ -22,6 +22,7 @@ const defaultArgs = {
   'required': false,
   'multiple': false,
   'error': null,
+  'enable-analytics': false,
 };
 
 const Template = ({
@@ -31,7 +32,8 @@ const Template = ({
   accept,
   error,
   required,
-  multiple
+  multiple,
+  'enable-analytics': enableAnalytics,
 }) => {
 
   useEffect( () => {
@@ -50,7 +52,8 @@ const Template = ({
       required={required}
       multiple={multiple}
       error={error}
-    />
+      enable-analytics={enableAnalytics}
+    / >
   );
 };
 
@@ -61,7 +64,8 @@ const I18nTemplate = ({
   accept,
   error,
   required,
-  multiple
+  multiple,
+  'enable-analytics': enableAnalytics,
 }) => {
   const [lang, setLang] = useState('en');
   return (
@@ -84,6 +88,7 @@ const I18nTemplate = ({
           required={required}
           multiple={multiple}
           error={error}
+          enable-analytics={enableAnalytics}
       />
     </>
   );
