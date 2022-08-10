@@ -97,6 +97,25 @@ describe('va-memorable-date', () => {
       expect(date.getAttribute('error')).toEqual("Please enter a month between 1 and 12");
     });
 
+    it('does day validation without required prop', async () => {
+      const page = await newE2EPage();
+      await page.setContent(
+        '<va-memorable-date value="1999-05-03" name="test" />',
+      );
+      const date = await page.find('va-memorable-date');
+      const handleYear = await page.$('pierce/[name="testYear"]');
+      const handleDay = await page.$('pierce/[name="testDay"]');
+
+      // Click three times to select all text in input
+      await handleDay.click({ clickCount: 3 });
+      await handleDay.type('50');
+      // Trigger Blur
+      await handleYear.press('Tab');
+
+      await page.waitForChanges();
+      expect(date.getAttribute('error')).toEqual("Please enter a day between 1 and 31");
+    });
+
     it('resets error to null when fixed', async () => {
       const page = await newE2EPage();
       await page.setContent(
