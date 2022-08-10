@@ -307,6 +307,66 @@ describe('va-memorable-date', () => {
         expect(invalidMonth).toEqual('false');
         expect(invalidDay).toEqual('false');
       });
+
+      it('passes the invalidDay prop correctly', async () => {
+        const page = await newE2EPage();
+        await page.setContent(
+          '<va-memorable-date name="test" invalid-day />',
+        );
+        const handleYear = await page.$('pierce/[name="testYear"]');
+        const handleMonth = await page.$('pierce/[name="testMonth"]');
+        const handleDay = await page.$('pierce/[name="testDay"]');
+        const getAriaInvalid =
+          (element: HTMLElement) => element.getAttribute('aria-invalid');
+
+        let invalidYear = await handleYear.evaluate(getAriaInvalid);
+        let invalidMonth = await handleMonth.evaluate(getAriaInvalid);
+        let invalidDay = await handleDay.evaluate(getAriaInvalid);
+
+        expect(invalidYear).toEqual('false');
+        expect(invalidMonth).toEqual('false');
+        expect(invalidDay).toEqual('true');
+     });
+
+      it('passes the invalidMonth prop correctly', async () => {
+        const page = await newE2EPage();
+        await page.setContent(
+          '<va-memorable-date name="test" invalid-month />',
+        );
+        const handleYear = await page.$('pierce/[name="testYear"]');
+        const handleMonth = await page.$('pierce/[name="testMonth"]');
+        const handleDay = await page.$('pierce/[name="testDay"]');
+        const getAriaInvalid =
+          (element: HTMLElement) => element.getAttribute('aria-invalid');
+
+        let invalidYear = await handleYear.evaluate(getAriaInvalid);
+        let invalidMonth = await handleMonth.evaluate(getAriaInvalid);
+        let invalidDay = await handleDay.evaluate(getAriaInvalid);
+
+        expect(invalidYear).toEqual('false');
+        expect(invalidMonth).toEqual('true');
+        expect(invalidDay).toEqual('false');
+     });
+
+      it('passes the invalidYear prop correctly', async () => {
+        const page = await newE2EPage();
+        await page.setContent(
+          '<va-memorable-date name="test" invalid-year />',
+        );
+        const handleYear = await page.$('pierce/[name="testYear"]');
+        const handleMonth = await page.$('pierce/[name="testMonth"]');
+        const handleDay = await page.$('pierce/[name="testDay"]');
+        const getAriaInvalid =
+          (element: HTMLElement) => element.getAttribute('aria-invalid');
+
+        let invalidYear = await handleYear.evaluate(getAriaInvalid);
+        let invalidMonth = await handleMonth.evaluate(getAriaInvalid);
+        let invalidDay = await handleDay.evaluate(getAriaInvalid);
+
+        expect(invalidYear).toEqual('true');
+        expect(invalidMonth).toEqual('false');
+        expect(invalidDay).toEqual('false');
+     });
     });
   });
 
