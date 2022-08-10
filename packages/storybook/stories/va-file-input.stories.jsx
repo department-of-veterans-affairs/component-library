@@ -1,6 +1,9 @@
 /* eslint-disable react/prop-types */
-import React, { useState, useEffect, useCallback, useRef } from 'react';
+import React, { useState } from 'react';
+import { VaFileInput } from '@department-of-veterans-affairs/web-components/react-bindings';
 import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
+
+VaFileInput.displayName = 'VaFileInput';
 
 const fileInputDocs = getWebComponentDocs('va-file-input');
 
@@ -21,12 +24,9 @@ const defaultArgs = {
   'accept': 'image/*',
   'required': false,
   'multiple': false,
-  'error': null,
+  'error': "",
   'enable-analytics': false,
-};
-
-const handleChangeEvent = (event) => {
-  alert(`Uploaded event received: ${event?.detail?.files[0]?.name}`)
+  'vaChange': (event) => window.alert(`File change event received: ${event?.detail?.files[0]?.name}`)
 };
 
 const Template = ({
@@ -38,21 +38,10 @@ const Template = ({
   required,
   multiple,
   'enable-analytics': enableAnalytics,
+  vaChange,
 }) => {
-  const ref = useRef(null);
-
-  useEffect( () => {
-    const element = ref.current;
-    element.addEventListener('vaChange', handleChangeEvent);
-
-    return () => {
-      element.removeEventListener('vaChange', handleChangeEvent);
-    };
-  }, [])
-
   return (
-    <va-file-input
-      ref={ref}
+    <VaFileInput
       label={label}
       name={name}
       buttontext={buttontext}
@@ -61,6 +50,7 @@ const Template = ({
       multiple={multiple}
       error={error}
       enable-analytics={enableAnalytics}
+      onVaChange={vaChange}
     />
   );
 };
@@ -74,19 +64,9 @@ const I18nTemplate = ({
   required,
   multiple,
   'enable-analytics': enableAnalytics,
+  vaChange
 }) => {
   const [lang, setLang] = useState('en');
-  const ref = useRef(null);
-
-  useEffect( () => {
-    const element = ref.current;
-    element.addEventListener('vaChange', handleChangeEvent);
-
-    return () => {
-      element.removeEventListener('vaChange', handleChangeEvent);
-    };
-  }, [])
-
   return (
     <>
       <button
@@ -99,8 +79,7 @@ const I18nTemplate = ({
       >
         Switch language
       </button>
-        <va-file-input
-          ref={ref}
+        <VaFileInput
           label={label}
           name={name}
           buttontext={buttontext}
@@ -109,6 +88,7 @@ const I18nTemplate = ({
           multiple={multiple}
           error={error}
           enable-analytics={enableAnalytics}
+          onVaChange={vaChange}   
       />
     </>
   );
