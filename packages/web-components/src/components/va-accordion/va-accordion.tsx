@@ -62,6 +62,26 @@ export class VaAccordion {
   })
   componentLibraryAnalytics: EventEmitter;
 
+  /**
+   * Whether or not the accordion items will have borders
+   */
+  @Prop() bordered?: boolean = false;
+
+  /**
+   * True if only a single item can be opened at once
+   */
+  @Prop() openSingle?: boolean = false;
+
+  /**
+   * If `true`, doesn't fire the CustomEvent which can be used for analytics tracking.
+   */
+  @Prop() disableAnalytics?: boolean = false;
+
+  /**
+   * Optional accordion section heading text. Only used in analytics event. Default is null.
+   */
+  @Prop() sectionHeading?: string = null;
+
   @Listen('accordionItemToggled')
   itemToggledHandler(event: CustomEvent) {
     // The event target is the button, and it has a parent which is a header.
@@ -151,25 +171,6 @@ export class VaAccordion {
     return elemTop >= 0 && elemTop <= window.innerHeight;
   }
 
-  /**
-   * Whether or not the accordion items will have borders
-   */
-  @Prop() bordered?: boolean = false;
-
-  /**
-   * True if only a single item can be opened at once
-   */
-  @Prop() openSingle?: boolean = false;
-
-  /**
-   * If `true`, doesn't fire the CustomEvent which can be used for analytics tracking.
-   */
-  @Prop() disableAnalytics?: boolean = false;
-
-  /**
-   * Optional accordion section heading text. Only used in analytics event. Default is null.
-   */
-  @Prop() sectionHeading?: string = null;
 
   connectedCallback() {
     i18next.on('languageChanged', () => {
