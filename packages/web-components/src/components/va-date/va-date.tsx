@@ -128,7 +128,7 @@ export class VaDate {
   private handleDateBlur = (event: FocusEvent) => {
     const [year, month, day] = (this.value || '')
       .split('-')
-      .map(val => parseInt(val) || null);
+      .map(val => parseInt(val));
 
     this.setValue(year, month, day);
     // Run built-in validation. Any custom validation
