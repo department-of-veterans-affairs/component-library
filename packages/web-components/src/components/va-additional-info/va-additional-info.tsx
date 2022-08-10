@@ -101,10 +101,10 @@ export class VaAdditionalInfo {
           onClick={this.toggleOpen.bind(this)}
           onKeyDown={this.handleKeydown.bind(this)}
         >
-          <span class="additional-info-title">
-            {this.trigger}
-            <i class="fa-angle-down" role="presentation" />
-          </span>
+          <div>
+            <span class="additional-info-title">{this.trigger}</span>
+          </div>
+          <i class="fa-angle-down" role="presentation" />
         </a>
         <div id="info" class={this.open ? 'open' : 'closed'}>
           <slot></slot>

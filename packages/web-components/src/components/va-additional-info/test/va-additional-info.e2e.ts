@@ -14,10 +14,12 @@ describe('va-additional-info', () => {
       <va-additional-info trigger="More info" class="hydrated">
         <mock:shadow-root>
           <a aria-controls="info" aria-expanded="false" role="button" tabindex="0">
-            <span class="additional-info-title">
-              More info
-              <i class="fa-angle-down" role="presentation"></i>
-            </span>
+            <div>
+              <span class="additional-info-title">
+                More info
+                </span>
+            </div>
+            <i class="fa-angle-down" role="presentation"></i>
           </a>
           <div class="closed" id="info" style="--calc-max-height:calc(0px + 2rem);">
             <slot></slot>
