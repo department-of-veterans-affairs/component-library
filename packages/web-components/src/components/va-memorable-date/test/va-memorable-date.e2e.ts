@@ -60,7 +60,6 @@ describe('va-memorable-date', () => {
   });
 
   describe('validation', () => {
-
     it('does year validation without required prop', async () => {
       const page = await newE2EPage();
       await page.setContent(
@@ -79,7 +78,26 @@ describe('va-memorable-date', () => {
       expect(date.getAttribute('error')).toEqual("Please enter a year between 1900 and 2122");
     });
 
-    it('displays an error message onBlur if date is invalid', async () => {
+    it('does month validation without required prop', async () => {
+      const page = await newE2EPage();
+      await page.setContent(
+        '<va-memorable-date value="1999-05-03" name="test" />',
+      );
+      const date = await page.find('va-memorable-date');
+      const handleYear = await page.$('pierce/[name="testYear"]');
+      const handleMonth = await page.$('pierce/[name="testMonth"]');
+
+      // Click three times to select all text in input
+      await handleMonth.click({ clickCount: 3 });
+      await handleMonth.type('50');
+      // Trigger Blur
+      await handleYear.press('Tab');
+
+      await page.waitForChanges();
+      expect(date.getAttribute('error')).toEqual("Please enter a month between 1 and 12");
+    });
+
+    it('resets error to null when fixed', async () => {
       const page = await newE2EPage();
       await page.setContent(
         '<va-memorable-date value="1999-05-03" name="test" required="true" />',

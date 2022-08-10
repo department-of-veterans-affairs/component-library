@@ -81,6 +81,10 @@ describe('va-date', () => {
       expect(date.getAttribute('error')).toEqual("Please enter a year between 1900 and 2122");
     });
 
+    // We don't have month or day validation here like we do for
+    // memorable-date because select components prevent the wrong thing
+    // from being chosen
+
     it('allows for a custom required message', async () => {
       const page = await newE2EPage();
       await page.setContent('<va-date value="2000-01-01" name="test" label="This is a field" required />');
