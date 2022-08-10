@@ -11,7 +11,7 @@ import {
 import { getSlottedNodes } from '../../utils/utils';
 @Component({
   tag: 'va-accordion-item',
-  styleUrl: 'va-accordion-item.css',
+  styleUrl: 'va-accordion-item.scss',
   shadow: true,
 })
 export class VaAccordionItem {

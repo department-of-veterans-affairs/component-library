@@ -42,7 +42,7 @@ if (Build.isTesting) {
  */
 @Component({
   tag: 'va-accordion',
-  styleUrl: 'va-accordion.css',
+  styleUrl: 'va-accordion.scss',
   shadow: true,
 })
 export class VaAccordion {
@@ -170,7 +170,6 @@ export class VaAccordion {
     // Only partially || completely visible elements return true
     return elemTop >= 0 && elemTop <= window.innerHeight;
   }
-
 
   connectedCallback() {
     i18next.on('languageChanged', () => {
