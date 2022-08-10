@@ -14,9 +14,9 @@ export const config: Config = {
       //   'src/global/settings.scss',
       // ]
     }),
-    postcss({
-      plugins: [url({ url: 'inline' })],
-    }),
+    // postcss({
+    //   plugins: [url({ url: 'inline' })],
+    // }),
   ],
   // This is for IE11 support
   // https://stenciljs.com/docs/config-extras

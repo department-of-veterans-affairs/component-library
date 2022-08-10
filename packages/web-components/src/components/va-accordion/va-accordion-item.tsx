@@ -111,6 +111,7 @@ export class VaAccordionItem {
           ref={el => {
             this.expandButton = el;
           }}
+          class="usa-accordion__button"
           onClick={this.toggleOpen.bind(this)}
           aria-expanded={this.open ? 'true' : 'false'}
           aria-controls="content"
