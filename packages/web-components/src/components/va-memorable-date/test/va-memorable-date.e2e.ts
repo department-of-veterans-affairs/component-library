@@ -193,6 +193,7 @@ describe('va-memorable-date', () => {
         );
         const handleYear = await page.$('pierce/[name="testYear"]');
         const handleMonth = await page.$('pierce/[name="testMonth"]');
+        const handleDay = await page.$('pierce/[name="testDay"]');
         const getAriaInvalid = (element: HTMLElement) =>
           element.getAttribute('aria-invalid');
 
@@ -206,9 +207,12 @@ describe('va-memorable-date', () => {
         await page.waitForChanges();
         let invalidYear = await handleYear.evaluate(getAriaInvalid);
         let invalidMonth = await handleMonth.evaluate(getAriaInvalid);
+        let invalidDay = await handleDay.evaluate(getAriaInvalid);
 
         expect(invalidYear).toEqual('false');
         expect(invalidMonth).toEqual('true');
+        // Day is invalid because we don't know the upper limit based on a valid month
+        expect(invalidDay).toEqual('true');
 
         await handleMonth.press('Backspace');
         await handleMonth.press('Backspace');
@@ -219,9 +223,11 @@ describe('va-memorable-date', () => {
 
         invalidYear = await handleYear.evaluate(getAriaInvalid);
         invalidMonth = await handleMonth.evaluate(getAriaInvalid);
+        invalidDay = await handleDay.evaluate(getAriaInvalid);
 
         expect(invalidYear).toEqual('false');
         expect(invalidMonth).toEqual('false');
+        expect(invalidDay).toEqual('false');
       });
 
       it('correctly indicates an invalid day', async () => {
