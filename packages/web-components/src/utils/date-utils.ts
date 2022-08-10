@@ -167,7 +167,6 @@ export function validate(component: Components.VaDate | Components.VaMemorableDa
     component.invalidDay = false;
   }
 
-
   if (month && (month < minMonths || month > maxMonths)) {
     component.invalidMonth = true;
     component.error = `Please enter a month between ${minMonths} and ${maxMonths}`;
@@ -179,7 +178,7 @@ export function validate(component: Components.VaDate | Components.VaMemorableDa
   if (component.required && (!year || !month || (!monthYearOnly && !day))) {
     component.invalidYear = !year;
     component.invalidMonth = !month;
-    component.invalidDay = this.monthYearOnly ? false : !day;
+    component.invalidDay = monthYearOnly ? false : !day;
     component.error = "Please enter a complete date";
   }
 
