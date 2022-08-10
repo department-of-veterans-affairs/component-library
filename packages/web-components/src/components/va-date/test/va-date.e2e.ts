@@ -85,6 +85,21 @@ describe('va-date', () => {
     // memorable-date because select components prevent the wrong thing
     // from being chosen
 
+   it('does validation for required components', async () => {
+      const page = await newE2EPage();
+      await page.setContent(
+        '<va-date name="test" required />',
+      );
+      const date = await page.find('va-date');
+      const handleYear = await page.$('pierce/[name="testYear"]');
+
+      // Trigger Blur
+      await handleYear.press('Tab');
+      await page.waitForChanges();
+
+      expect(date.getAttribute('error')).toEqual("Please enter a complete date");
+    });
+
     it('allows for a custom required message', async () => {
       const page = await newE2EPage();
       await page.setContent('<va-date value="2000-01-01" name="test" label="This is a field" required />');

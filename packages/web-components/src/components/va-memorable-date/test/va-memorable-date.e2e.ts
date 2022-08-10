@@ -116,6 +116,42 @@ describe('va-memorable-date', () => {
       expect(date.getAttribute('error')).toEqual("Please enter a day between 1 and 31");
     });
 
+   it('does validation for required components', async () => {
+      const page = await newE2EPage();
+      await page.setContent(
+        '<va-memorable-date name="test" required />',
+      );
+      const date = await page.find('va-memorable-date');
+      const handleYear = await page.$('pierce/[name="testYear"]');
+
+      // Trigger Blur
+      await handleYear.press('Tab');
+      await page.waitForChanges();
+
+      expect(date.getAttribute('error')).toEqual("Please enter a complete date");
+    });
+
+    it('allows for a custom required message', async () => {
+      const page = await newE2EPage();
+      await page.setContent('<va-memorable-date value="2000-01-01" name="test" label="This is a field" required />');
+
+      // Act
+      const handleYear = await page.$('pierce/[name="testYear"]');
+      // Click three times to select all text in input
+      await handleYear.click({ clickCount: 3 });
+      await handleYear.press('2');
+      await handleYear.press('Tab');
+      // This would be done in the onDateChange handler
+      await page.$eval('va-memorable-date', (elm: any) => {
+        elm.error= 'Fill me out';
+      });
+      await page.waitForChanges();
+
+      // Assert
+      const errorSpan = await page.find('va-memorable-date >>> span#error-message');
+      expect(errorSpan.textContent).toContain("Fill me out");
+    });
+
     it('resets error to null when fixed', async () => {
       const page = await newE2EPage();
       await page.setContent(
