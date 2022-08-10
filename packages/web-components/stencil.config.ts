@@ -2,6 +2,7 @@ import { Config } from '@stencil/core';
 import { postcss } from '@stencil/postcss';
 import { sass } from '@stencil/sass';
 import url from 'postcss-url';
+import * as path from 'path';
 import { reactOutputTarget } from '@stencil/react-output-target';
 
 export const config: Config = {
@@ -14,9 +15,15 @@ export const config: Config = {
       //   'src/global/settings.scss',
       // ]
     }),
-    // postcss({
-    //   plugins: [url({ url: 'inline' })],
-    // }),
+    postcss({
+      plugins: [url({
+        url: 'inline',
+        basePath: [
+          path.resolve('../../node_modules/@uswds/uswds/dist/img'),
+          // './src/assets',
+        ]
+      })],
+    }),
   ],
   // This is for IE11 support
   // https://stenciljs.com/docs/config-extras
