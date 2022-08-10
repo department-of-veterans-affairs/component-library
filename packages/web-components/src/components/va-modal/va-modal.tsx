@@ -354,12 +354,13 @@ export class VaModal {
       : 'Close modal';
 
     return (
-      <Host>
+      <Host
+      aria-label={ariaLabel}
+      aria-modal="true"
+      role={ariaRole(status)}
+      >
         <div
-          aria-label={ariaLabel}
-          aria-modal="true"
           class="va-modal"
-          role={ariaRole(status)}
         >
           <div class={wrapperClass} tabIndex={-1}>
             <button
