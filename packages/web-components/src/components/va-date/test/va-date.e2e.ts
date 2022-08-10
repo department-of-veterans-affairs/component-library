@@ -191,49 +191,8 @@ describe('va-date', () => {
         expect(invalidDay).toEqual('false');
       });
 
-      // Month invalidation isn't here since a select box prevents
+      // Month & day invalidation isn't here since a select box prevents
       // an invalid month from being selected.
-
-      it('correctly indicates an invalid day', async () => {
-        const page = await newE2EPage();
-        await page.setContent(
-          '<va-date name="test" />',
-        );
-        const handleYear = await page.$('pierce/[name="testYear"]');
-        const handleMonth = await page.$('pierce/[name="testMonth"]');
-        const handleDay = await page.$('pierce/[name="testDay"]');
-        const getAriaInvalid =
-          (element: HTMLElement) => element.getAttribute('aria-invalid');
-
-        // We need a month in order to determine if the day is valid
-        await handleMonth.select('3');
-        // Trigger Blur
-        await handleYear.type('1995');
-        await handleYear.press('Tab');
-
-        // Month only has one character - should be invalid
-        await page.waitForChanges();
-        let invalidYear = await handleYear.evaluate(getAriaInvalid);
-        let invalidMonth = await handleMonth.evaluate(getAriaInvalid);
-        let invalidDay = await handleDay.evaluate(getAriaInvalid);
-
-        expect(invalidYear).toEqual('false');
-        expect(invalidMonth).toEqual('false');
-        expect(invalidDay).toEqual('true');
-
-        await handleDay.select('4');
-        // Trigger Blur
-        await handleYear.press('Tab');
-        await page.waitForChanges();
-
-        invalidYear = await handleYear.evaluate(getAriaInvalid);
-        invalidMonth = await handleMonth.evaluate(getAriaInvalid);
-        invalidDay = await handleDay.evaluate(getAriaInvalid);
-
-        expect(invalidYear).toEqual('false');
-        expect(invalidMonth).toEqual('false');
-        expect(invalidDay).toEqual('false');
-      });
 
       it('passes the invalidDay prop correctly', async () => {
         const page = await newE2EPage();
