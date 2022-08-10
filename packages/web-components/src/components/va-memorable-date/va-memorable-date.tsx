@@ -90,8 +90,9 @@ export class VaMemorableDate {
     }`;
     /* eslint-enable i18next/no-literal-string */
 
+    // Run built-in validation. Any custom validation
+    // will happen afterwards
     validate(this, yearNum, monthNum, dayNum);
-
     this.dateBlur.emit(event);
   };
 

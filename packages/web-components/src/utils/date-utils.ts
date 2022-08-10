@@ -141,13 +141,23 @@ export function checkLeapYear(year: number) {
   return (0 == year % 4 && 0 != year % 100) || 0 == year % 400;
 }
 
-export function validate(component: Components.VaDate | Components.VaMemorableDate, year: number, month: number, day: number, monthYearOnly : boolean = false) : void {
+/**
+ * This is used to validate date components and:
+ * 1. Indicate which field fails the built-in validation
+ * 1. Supply an error message to help resolve the issue
+ *
+ * It relies on the component's mutable props.
+ */
+export function validate(
+  component: Components.VaDate | Components.VaMemorableDate,
+  year: number,
+  month: number,
+  day: number,
+  monthYearOnly : boolean = false) : void {
 
   const leapYear = checkLeapYear(year);
   const daysForSelectedMonth = leapYear && month == 2 ? 29 : days[month]?.length || 0;
 
-  console.log('Validation', component.required, year, month, day)
-  console.log('days for selected month', daysForSelectedMonth)
   // Begin built-in validation
   if (year && (year < minYear || year > maxYear)) {
     component.invalidYear = true;
@@ -182,6 +192,7 @@ export function validate(component: Components.VaDate | Components.VaMemorableDa
     component.error = "Please enter a complete date";
   }
 
+  // Remove any error message if none of the fields are marked as invalid
   if (!component.invalidYear && !component.invalidMonth && !component.invalidDay) {
     component.error = null;
   }

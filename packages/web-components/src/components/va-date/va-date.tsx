@@ -48,7 +48,10 @@ export class VaDate {
    * The error message to render (if any)
    * This prop should be leveraged to display any custom validations needed for this component
    */
-  @Prop({ reflect: true }) error?: string;
+  @Prop({
+    mutable: true,
+    reflect: true
+  }) error?: string;
 
   /**
    * Whether or not only the Month and Year inputs should be displayed.
@@ -128,6 +131,8 @@ export class VaDate {
       .map(val => parseInt(val) || null);
 
     this.setValue(year, month, day);
+    // Run built-in validation. Any custom validation
+    // will happen afterwards
     validate(this, year, month, day, this.monthYearOnly);
     this.dateBlur.emit(event);
   };
