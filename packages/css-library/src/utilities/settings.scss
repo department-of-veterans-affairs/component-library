@@ -1,6 +1,51 @@
+$border-settings: (
+  output: true,
+  responsive: true,
+  active: false,
+  focus: false,
+  hover: false,
+  visited: false,
+) !default;
+
+$border-other-settings: (
+  output: true,
+  responsive: false,
+  active: false,
+  focus: false,
+  hover: false,
+  visited: false,
+) !default;
+
 $color-settings: (
   output: true,
   responsive: false,
+  active: false,
+  focus: false,
+  hover: false,
+  visited: false,
+) !default;
+
+$display-settings: (
+  output: true,
+  responsive: true,
+  active: false,
+  focus: false,
+  hover: false,
+  visited: false,
+) !default;
+
+$font-settings: (
+  output: true,
+  responsive: false,
+  active: false,
+  focus: false,
+  hover: false,
+  visited: false,
+) !default;
+
+$font-size-settings: (
+  output: true,
+  responsive: true,
   active: false,
   focus: false,
   hover: false,
