@@ -3,11 +3,16 @@
 @use '../utilities' as *;
 
 $utilities-package: map-collect(
-  $u-color,
   $u-bg-color,
-  $u-display,
   $u-border,
-  $u-font
+  $u-color,
+  $u-display,
+  $u-font,
+  $u-height,
+  $u-line-height,
+  $u-text-align,
+  $u-text-decoration,
+  $u-width
 );
 
 // Generate all utility classes

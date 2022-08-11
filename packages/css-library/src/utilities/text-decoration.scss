@@ -1,0 +1,14 @@
+@use 'uswds-core/src/styles/functions' as *;
+@use '../tokens/text-decoration' as *;
+@use './settings' as *;
+
+$u-text-decoration: (
+  text-decoration: (
+    base: 'vads-text',
+    modifiers: null,
+    values: map-collect($tokens-text-decoration),
+    settings: $text-decoration-settings,
+    property: 'text-decoration',
+    type: 'utility',
+  ),
+);
