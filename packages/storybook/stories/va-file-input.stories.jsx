@@ -26,7 +26,7 @@ const defaultArgs = {
   'multiple': false,
   'error': "",
   'enable-analytics': false,
-  'vaChange': (event) => window.alert(`File change event received: ${event?.detail?.files[0]?.name}`)
+  'vaChange': (event) => alert(`File change event received: ${event?.detail?.files[0]?.name}`)
 };
 
 const Template = ({
