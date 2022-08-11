@@ -3,12 +3,10 @@ import {
   Element,
   Event,
   EventEmitter,
-  Host,
   Prop,
   State,
   h,
 } from '@stencil/core';
-import { getSlottedNodes } from '../../utils/utils';
 @Component({
   tag: 'va-accordion-item',
   styleUrl: 'va-accordion-item.scss',
@@ -19,6 +17,8 @@ export class VaAccordionItem {
    * Reference to host element
    */
   @Element() el: HTMLElement;
+
+  headlineSlot!: HTMLElement;
 
   /**
    * This event is fired so that va-accordion element can manage which items are opened or closed
@@ -75,10 +75,9 @@ export class VaAccordionItem {
   // Function allows us to provide context to state
   // State is then being digested by the Header Function below
   private populateStateValues() {
-    getSlottedNodes(this.el, null).forEach((node: HTMLSlotElement) => {
-      this.slotHeader = node.innerHTML;
-      this.slotTag = node.tagName.toLowerCase();
-    });
+    const node = this.headlineSlot.firstElementChild;
+    this.slotHeader = node.innerHTML;
+    this.slotTag = node.tagName.toLowerCase();
   }
 
   componentDidLoad() {
@@ -121,13 +120,13 @@ export class VaAccordionItem {
         </button>,
       );
     return (
-      <Host>
+      <div class="usa-accordion__content">
         <Header />
-        <slot name="headline" onSlotchange={() => this.populateStateValues()} />
+        <slot name="headline" ref={el => this.headlineSlot= el as HTMLElement} onSlotchange={() => this.populateStateValues()} />
         <div id="content">
           <slot />
         </div>
-      </Host>
+      </div>
     );
   }
 }

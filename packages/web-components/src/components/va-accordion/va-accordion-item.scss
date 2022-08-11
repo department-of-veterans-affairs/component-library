@@ -1,18 +1,6 @@
 @import 'usa-accordion/src/styles';
 @import '../../mixins/focusable.css';
 
-:host {
-  display: block;
-}
-
-:host(:not(:last-child)) {
-  margin-bottom: 0.8rem;
-}
-
-:host(:last-child) {
-  margin-bottom: 0.5rem;
-}
-
 :host(:not([open])) #content,
 :host([open='false']) #content {
   display: none;
