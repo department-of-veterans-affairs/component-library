@@ -1,6 +1,7 @@
 export default {
   'error': 'Error',
   'required': '(*Required)',
+  'required_feminine': '(*Required)',
   'max-chars': '(Max. {{length}} characters)',
   'date-of-birth': 'Date of birth',
   'month': 'Month',

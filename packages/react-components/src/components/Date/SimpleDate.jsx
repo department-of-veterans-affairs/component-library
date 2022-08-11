@@ -90,7 +90,9 @@ export const SimpleDate = ({
       <legend className="vads-u-font-size--base vads-u-font-weight--normal">
         {label || i18next.t('date-of-birth')}
         {required && (
-          <span className="form-required-span">(*{i18next.t('required')})</span>
+          <span className="form-required-span">
+            (*{i18next.t('required', { context: 'feminine' })})
+          </span>
         )}
       </legend>
       {errorSpan}
