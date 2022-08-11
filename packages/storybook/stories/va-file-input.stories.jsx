@@ -20,7 +20,7 @@ export default {
 const defaultArgs = {
   'label': 'This is the file upload label',
   'name': 'my-file-input',
-  'buttonText': 'Upload file',
+  'button-text': 'Upload file',
   'accept': 'image/*',
   'required': false,
   'multiple': false,
@@ -32,7 +32,7 @@ const defaultArgs = {
 const Template = ({
   label,
   name,
-  buttonText,
+  'button-text': buttonText,
   accept,
   error,
   required,
@@ -58,7 +58,7 @@ const Template = ({
 const I18nTemplate = ({
   label,
   name,
-  buttonText,
+  'button-text': buttonText,
   accept,
   error,
   required,
