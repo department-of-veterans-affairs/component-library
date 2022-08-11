@@ -20,7 +20,9 @@
 }
 
 a {
-  display: block;
+  align-items: flex-start;
+  cursor: pointer;
+  display: flex;
 }
 
 .additional-info-title {
