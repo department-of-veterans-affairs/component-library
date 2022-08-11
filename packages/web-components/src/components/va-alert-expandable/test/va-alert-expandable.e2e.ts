@@ -16,11 +16,13 @@ describe('va-alert-expandable', () => {
         <div class="alert-expandable warning">
           <a role="button" aria-controls="alert-body" aria-expanded="false" tabindex="0" class="alert-expandable-trigger">
             <i class="alert-status-icon" aria-hidden="true" role="img"></i>
-            <span class="alert-expandable-title">
-              <span class="sr-only">Alert:&nbsp;</span>
-              Limited services and hours
-            </span>
-            <i class="fa-angle-down" role="presentation"></i>
+            <div>
+              <span class="alert-expandable-title">
+                <span class="sr-only">Alert:&nbsp;</span>
+                Limited services and hours
+              </span>
+              <i class="fa-angle-down" role="presentation"></i>
+            </div>
           </a>
           <div id="alert-body" class="alert-expandable-body closed" style="--calc-max-height:calc(0px + 2rem);">
             <slot></slot>
@@ -215,7 +217,8 @@ describe('va-alert-expandable', () => {
     const page = await newE2EPage();
     await page.setContent(`
       <va-alert-expandable status="warning" trigger="Click here for a treat!" disable-analytics>
-        <div style="height:50px;padding:10px 0;margin:5px 0;">We're out of treats! Try again later.</div>
+        <div style="height:50px;padding:10px 0;margin:5px 0;">We're out of treats! Try again later.
+        </div>
       </va-alert-expandable>
     `);
     const handle = await page.waitForSelector('pierce/#alert-body');
@@ -225,7 +228,8 @@ describe('va-alert-expandable', () => {
     const calcMaxHeight = await handle.evaluate((domElement: HTMLElement) =>
       domElement.style.getPropertyValue('--calc-max-height'),
     );
-    // 50px from height + 20px from padding + 10px from margin
-    expect(calcMaxHeight).toEqual('calc(80px + 2rem)');
+    // 50px from height + 20px from padding
+    // margin-bottom and margin-top is set to 0 for first slotted child
+    expect(calcMaxHeight).toEqual('calc(70px + 2rem)');
   });
 });
