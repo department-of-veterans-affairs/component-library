@@ -4,7 +4,6 @@ import {
   EventEmitter,
   Host,
   Prop,
-  State,
   h,
   Element,
   Fragment,
@@ -13,11 +12,7 @@ import {
 import {
   months,
   days,
-  checkLeapYear,
-  maxMonths,
-  maxYear,
-  minMonths,
-  minYear,
+  validate,
   validKeys,
 } from '../../utils/date-utils';
 
@@ -53,7 +48,10 @@ export class VaDate {
    * The error message to render (if any)
    * This prop should be leveraged to display any custom validations needed for this component
    */
-  @Prop() error?: string;
+  @Prop({
+    mutable: true,
+    reflect: true
+  }) error?: string;
 
   /**
    * Whether or not only the Month and Year inputs should be displayed.
@@ -63,7 +61,10 @@ export class VaDate {
   /**
    * Set the default date value must be in YYYY-MM-DD format.
    */
-  @Prop({ mutable: true }) value?: string;
+  @Prop({
+    mutable: true,
+    reflect: true
+  }) value?: string;
 
   /**
    * Fires when the date input loses focus after its value was changed
@@ -83,9 +84,25 @@ export class VaDate {
   })
   dateBlur: EventEmitter;
 
-  @State() invalidDay: boolean = false;
-  @State() invalidMonth: boolean = false;
-  @State() invalidYear: boolean = false;
+  @Prop({ mutable: true }) invalidDay: boolean = false;
+  @Prop({ mutable: true }) invalidMonth: boolean = false;
+  @Prop({ mutable: true }) invalidYear: boolean = false;
+
+  /**
+   * Whether or not an analytics event will be fired.
+   */
+  @Prop() enableAnalytics: boolean = false;
+
+  /**
+   * The event used to track usage of the component. This is emitted when an
+   * input value changes and enableAnalytics is true.
+   */
+  @Event({
+    eventName: 'component-library-analytics',
+    composed: true,
+    bubbles: true,
+  })
+  componentLibraryAnalytics: EventEmitter;
 
   /**
    * Set the value prop as an ISO-8601 date using provided arguments.
@@ -112,37 +129,11 @@ export class VaDate {
     const [year, month, day] = (this.value || '')
       .split('-')
       .map(val => parseInt(val));
+
     this.setValue(year, month, day);
-
-    const daysForSelectedMonth = month > 0 ? days[month] : [];
-    const leapYear = checkLeapYear(year);
-
-    if (this.required) {
-      this.invalidYear = !year || year < minYear || year > maxYear;
-
-      this.invalidMonth = !month || month < minMonths || month > maxMonths;
-
-      this.invalidDay =
-        !this.monthYearOnly &&
-        (!day || day < minMonths || day > daysForSelectedMonth.length);
-
-      if (!leapYear && month === 2 && day > 28) {
-        this.invalidYear = true;
-        this.invalidMonth = true;
-        this.invalidDay = true;
-      }
-    }
-
-    if (
-      !this.error &&
-      (this.invalidYear || this.invalidMonth || this.invalidDay)
-    ) {
-      this.error = 'Please enter a valid date';
-    } else if (this.error !== 'Please enter a valid date') {
-      this.error;
-    } else {
-      this.error = '';
-    }
+    // Run built-in validation. Any custom validation
+    // will happen afterwards
+    validate(this, year, month, day, this.monthYearOnly);
     this.dateBlur.emit(event);
   };
 
@@ -177,22 +168,6 @@ export class VaDate {
     }
   };
 
-  /**
-   * Whether or not an analytics event will be fired.
-   */
-  @Prop() enableAnalytics: boolean = false;
-
-  /**
-   * The event used to track usage of the component. This is emitted when an
-   * input value changes and enableAnalytics is true.
-   */
-  @Event({
-    eventName: 'component-library-analytics',
-    composed: true,
-    bubbles: true,
-  })
-  componentLibraryAnalytics: EventEmitter;
-
   render() {
     const {
       required,
@@ -211,10 +186,9 @@ export class VaDate {
       .map(val => parseInt(val));
     const daysForSelectedMonth = month > 0 ? days[month] : [];
 
-    // Error attribute should be leveraged for custom error messaging
     // Fieldset has an implicit aria role of group
     return (
-      <Host value={value} error={error} onBlur={handleDateBlur}>
+      <Host onBlur={handleDateBlur}>
         <fieldset>
           <legend>
             {label} {required && <span class="required">(*Required)</span>}

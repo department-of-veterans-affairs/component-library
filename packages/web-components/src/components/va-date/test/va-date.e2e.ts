@@ -62,42 +62,198 @@ describe('va-date', () => {
     expect(requiredSpan).not.toBeNull();
   });
 
-  it('does not validate without required prop', async () => {
-    const page = await newE2EPage();
-    await page.setContent(
-      '<va-date value="1999-05-03" name="test" />',
-    );
-    const date = await page.find('va-date');
-    const handleYear = await page.$('pierce/[name="testYear"]');
+  describe('validation', () => {
+    it('does year validation without required prop', async () => {
+      const page = await newE2EPage();
+      await page.setContent(
+        '<va-date value="1999-05-03" name="test" />',
+      );
+      const date = await page.find('va-date');
+      const handleYear = await page.$('pierce/[name="testYear"]');
 
-    // Click three times to select all text in input
-    await handleYear.click({ clickCount: 3 });
-    await handleYear.press('2');
-    // Trigger Blur
-    await handleYear.press('Tab');
+      // Click three times to select all text in input
+      await handleYear.click({ clickCount: 3 });
+      await handleYear.press('2');
+      // Trigger Blur
+      await handleYear.press('Tab');
 
-    await page.waitForChanges();
-    expect(date.getAttribute('error')).toEqual(null);
-  });
-
-  it('allows for a custom required message', async () => {
-    const page = await newE2EPage();
-    await page.setContent('<va-date value="2000-01-01" name="test" label="This is a field" required="Fill me out" />');
-
-    // Act
-    const handleYear = await page.$('pierce/[name="testYear"]');
-    // Click three times to select all text in input
-    await handleYear.click({ clickCount: 3 });
-    await handleYear.press('2');
-    await handleYear.press('Tab');
-    await page.$eval('va-date', (elm: any) => {
-      elm.error= 'Fill me out';
+      await page.waitForChanges();
+      expect(date.getAttribute('error')).toEqual("Please enter a year between 1900 and 2122");
     });
-    await page.waitForChanges();
 
-    // Assert
-    const errorSpan = await page.find('va-date >>> span#error-message');
-    expect(errorSpan.textContent).toContain("Fill me out");
+    // We don't have month or day validation here like we do for
+    // memorable-date because select components prevent the wrong thing
+    // from being chosen
+
+   it('does validation for required components', async () => {
+      const page = await newE2EPage();
+      await page.setContent(
+        '<va-date name="test" required />',
+      );
+      const date = await page.find('va-date');
+      const handleYear = await page.$('pierce/[name="testYear"]');
+
+      // Trigger Blur
+      await handleYear.press('Tab');
+      await page.waitForChanges();
+
+      expect(date.getAttribute('error')).toEqual("Please enter a complete date");
+    });
+
+    it('allows for a custom required message', async () => {
+      const page = await newE2EPage();
+      await page.setContent('<va-date value="2000-01-01" name="test" label="This is a field" required />');
+
+      // Act
+      const handleYear = await page.$('pierce/[name="testYear"]');
+      // Click three times to select all text in input
+      await handleYear.click({ clickCount: 3 });
+      await handleYear.press('2');
+      await handleYear.press('Tab');
+      // This would be done in the onDateChange handler
+      await page.$eval('va-date', (elm: any) => {
+        elm.error= 'Fill me out';
+      });
+      await page.waitForChanges();
+
+      // Assert
+      const errorSpan = await page.find('va-date >>> span#error-message');
+      expect(errorSpan.textContent).toContain("Fill me out");
+    });
+    
+    it('resets error to null when fixed', async () => {
+      const page = await newE2EPage();
+      await page.setContent(
+        '<va-date value="1999-05-03" name="test" />',
+      );
+      const date = await page.find('va-date');
+      const handleYear = await page.$('pierce/[name="testYear"]');
+
+      // Click three times to select all text in input
+      await handleYear.click({ clickCount: 3 });
+      await handleYear.press('2');
+      // Trigger Blur
+      await handleYear.press('Tab');
+
+      await page.waitForChanges();
+      expect(date.getAttribute('error')).toEqual('Please enter a year between 1900 and 2122');
+
+      await handleYear.press('0');
+      await handleYear.press('2');
+      await handleYear.press('2');
+      // Trigger Blur
+      await handleYear.press('Tab');
+      await page.waitForChanges();
+      expect(date.getAttribute('error')).toEqual(null);
+    });
+
+    describe('invalid subcomponents', () => {
+      it('correctly indicates an invalid year', async () => {
+        const page = await newE2EPage();
+        await page.setContent(
+          '<va-date value="1999-05-03" name="test" required="true" />',
+        );
+        const handleYear = await page.$('pierce/[name="testYear"]');
+        const handleMonth = await page.$('pierce/[name="testMonth"]');
+        const handleDay = await page.$('pierce/[name="testDay"]');
+        const getAriaInvalid =
+          (element: HTMLElement) => element.getAttribute('aria-invalid');
+
+        // Click three times to select all text in input
+        await handleYear.click({ clickCount: 3 });
+        await handleYear.press('2');
+        // Trigger Blur
+        await handleYear.press('Tab');
+
+        // Year only has one character - should be invalid
+        await page.waitForChanges();
+        let invalidYear = await handleYear.evaluate(getAriaInvalid);
+        let invalidMonth = await handleMonth.evaluate(getAriaInvalid);
+        let invalidDay = await handleDay.evaluate(getAriaInvalid);
+
+        expect(invalidYear).toEqual('true');
+        expect(invalidMonth).toEqual('false');
+        expect(invalidDay).toEqual('false');
+
+        await handleYear.press('0');
+        await handleYear.press('2');
+        await handleYear.press('2');
+        // Trigger Blur
+        await handleYear.press('Tab');
+        await page.waitForChanges();
+
+        invalidYear = await handleYear.evaluate(getAriaInvalid);
+        invalidMonth = await handleMonth.evaluate(getAriaInvalid);
+        invalidDay = await handleDay.evaluate(getAriaInvalid);
+
+        expect(invalidYear).toEqual('false');
+        expect(invalidMonth).toEqual('false');
+        expect(invalidDay).toEqual('false');
+      });
+
+      // Month & day invalidation isn't here since a select box prevents
+      // an invalid month from being selected.
+
+      it('passes the invalidDay prop correctly', async () => {
+        const page = await newE2EPage();
+        await page.setContent(
+          '<va-date name="test" invalid-day />',
+        );
+        const handleYear = await page.$('pierce/[name="testYear"]');
+        const handleMonth = await page.$('pierce/[name="testMonth"]');
+        const handleDay = await page.$('pierce/[name="testDay"]');
+        const getAriaInvalid =
+          (element: HTMLElement) => element.getAttribute('aria-invalid');
+
+        let invalidYear = await handleYear.evaluate(getAriaInvalid);
+        let invalidMonth = await handleMonth.evaluate(getAriaInvalid);
+        let invalidDay = await handleDay.evaluate(getAriaInvalid);
+
+        expect(invalidYear).toEqual('false');
+        expect(invalidMonth).toEqual('false');
+        expect(invalidDay).toEqual('true');
+     });
+
+      it('passes the invalidMonth prop correctly', async () => {
+        const page = await newE2EPage();
+        await page.setContent(
+          '<va-date name="test" invalid-month />',
+        );
+        const handleYear = await page.$('pierce/[name="testYear"]');
+        const handleMonth = await page.$('pierce/[name="testMonth"]');
+        const handleDay = await page.$('pierce/[name="testDay"]');
+        const getAriaInvalid =
+          (element: HTMLElement) => element.getAttribute('aria-invalid');
+
+        let invalidYear = await handleYear.evaluate(getAriaInvalid);
+        let invalidMonth = await handleMonth.evaluate(getAriaInvalid);
+        let invalidDay = await handleDay.evaluate(getAriaInvalid);
+
+        expect(invalidYear).toEqual('false');
+        expect(invalidMonth).toEqual('true');
+        expect(invalidDay).toEqual('false');
+     });
+
+      it('passes the invalidYear prop correctly', async () => {
+        const page = await newE2EPage();
+        await page.setContent(
+          '<va-date name="test" invalid-year />',
+        );
+        const handleYear = await page.$('pierce/[name="testYear"]');
+        const handleMonth = await page.$('pierce/[name="testMonth"]');
+        const handleDay = await page.$('pierce/[name="testDay"]');
+        const getAriaInvalid =
+          (element: HTMLElement) => element.getAttribute('aria-invalid');
+
+        let invalidYear = await handleYear.evaluate(getAriaInvalid);
+        let invalidMonth = await handleMonth.evaluate(getAriaInvalid);
+        let invalidDay = await handleDay.evaluate(getAriaInvalid);
+
+        expect(invalidYear).toEqual('true');
+        expect(invalidMonth).toEqual('false');
+        expect(invalidDay).toEqual('false');
+     });
+    });
   });
 
   it('sets a label', async () => {
@@ -189,160 +345,6 @@ describe('va-date', () => {
     expect(elementYear.getAttribute('value')).toBe('2022');
   });
 
-  it('displays an error message onBlur if date is invalid and component is required', async () => {
-    const page = await newE2EPage();
-    await page.setContent(
-      '<va-date value="1999-05-03" name="test" required="true" />',
-    );
-    const date = await page.find('va-date');
-    const handleYear = await page.$('pierce/[name="testYear"]');
-
-    // Click three times to select all text in input
-    await handleYear.click({ clickCount: 3 });
-    await handleYear.press('2');
-    // Trigger Blur
-    await handleYear.press('Tab');
-
-    await page.waitForChanges();
-    expect(date.getAttribute('error')).toEqual('Please enter a valid date');
-
-    await handleYear.press('0');
-    await handleYear.press('2');
-    await handleYear.press('2');
-    // Trigger Blur
-    await handleYear.press('Tab');
-    await page.waitForChanges();
-    expect(date.getAttribute('error')).toEqual('');
-  });
-
-  describe('invalid subcomponents', () => {
-    it('correctly indicates an invalid year', async () => {
-      const page = await newE2EPage();
-      await page.setContent(
-        '<va-date value="1999-05-03" name="test" required="true" />',
-      );
-      const handleYear = await page.$('pierce/[name="testYear"]');
-      const handleMonth = await page.$('pierce/[name="testMonth"]');
-      const handleDay = await page.$('pierce/[name="testDay"]');
-      const getAriaInvalid =
-        (element: HTMLElement) => element.getAttribute('aria-invalid');
-
-      // Click three times to select all text in input
-      await handleYear.click({ clickCount: 3 });
-      await handleYear.press('2');
-      // Trigger Blur
-      await handleYear.press('Tab');
-
-      // Year only has one character - should be invalid
-      await page.waitForChanges();
-      let invalidYear = await handleYear.evaluate(getAriaInvalid);
-      let invalidMonth = await handleMonth.evaluate(getAriaInvalid);
-      let invalidDay = await handleDay.evaluate(getAriaInvalid);
-
-      expect(invalidYear).toEqual('true');
-      expect(invalidMonth).toEqual('false');
-      expect(invalidDay).toEqual('false');
-
-      await handleYear.press('0');
-      await handleYear.press('2');
-      await handleYear.press('2');
-      // Trigger Blur
-      await handleYear.press('Tab');
-      await page.waitForChanges();
-
-      invalidYear = await handleYear.evaluate(getAriaInvalid);
-      invalidMonth = await handleMonth.evaluate(getAriaInvalid);
-      invalidDay = await handleDay.evaluate(getAriaInvalid);
-
-      expect(invalidYear).toEqual('false');
-      expect(invalidMonth).toEqual('false');
-      expect(invalidDay).toEqual('false');
-    });
-
-    it('correctly indicates an invalid month', async () => {
-      const page = await newE2EPage();
-      await page.setContent(
-        '<va-date value="1999-05-03" name="test" required="true" />',
-      );
-      const handleYear = await page.$('pierce/[name="testYear"]');
-      const handleMonth = await page.$('pierce/[name="testMonth"]');
-      const handleDay = await page.$('pierce/[name="testDay"]');
-      const getAriaInvalid =
-        (element: HTMLElement) => element.getAttribute('aria-invalid');
-
-      // Click three times to select all text in input
-      await handleMonth.click({ clickCount: 3 });
-      await handleMonth.select('0');
-      // Trigger Blur
-      await handleYear.press('Tab');
-
-      // Month only has one character - should be invalid
-      await page.waitForChanges();
-      let invalidYear = await handleYear.evaluate(getAriaInvalid);
-      let invalidMonth = await handleMonth.evaluate(getAriaInvalid);
-      let invalidDay = await handleDay.evaluate(getAriaInvalid);
-
-      expect(invalidYear).toEqual('false');
-      expect(invalidMonth).toEqual('true');
-      // Day is also invalid because month is 0
-      expect(invalidDay).toEqual('true');
-
-      await handleMonth.select('4');
-      // Trigger Blur
-      await handleYear.press('Tab');
-      await page.waitForChanges();
-
-      invalidYear = await handleYear.evaluate(getAriaInvalid);
-      invalidMonth = await handleMonth.evaluate(getAriaInvalid);
-      invalidDay = await handleDay.evaluate(getAriaInvalid);
-
-      expect(invalidYear).toEqual('false');
-      expect(invalidMonth).toEqual('false');
-      expect(invalidDay).toEqual('false');
-    });
-
-    it('correctly indicates an invalid day', async () => {
-      const page = await newE2EPage();
-      await page.setContent(
-        '<va-date value="1999-05-03" name="test" required="true" />',
-      );
-      const handleYear = await page.$('pierce/[name="testYear"]');
-      const handleMonth = await page.$('pierce/[name="testMonth"]');
-      const handleDay = await page.$('pierce/[name="testDay"]');
-      const getAriaInvalid =
-        (element: HTMLElement) => element.getAttribute('aria-invalid');
-
-      // Click three times to select all text in input
-      await handleDay.click({ clickCount: 3 });
-      await handleDay.select('0');
-      // Trigger Blur
-      await handleYear.press('Tab');
-
-      // Month only has one character - should be invalid
-      await page.waitForChanges();
-      let invalidYear = await handleYear.evaluate(getAriaInvalid);
-      let invalidMonth = await handleMonth.evaluate(getAriaInvalid);
-      let invalidDay = await handleDay.evaluate(getAriaInvalid);
-
-      expect(invalidYear).toEqual('false');
-      expect(invalidMonth).toEqual('false');
-      expect(invalidDay).toEqual('true');
-
-      await handleDay.select('4');
-      // Trigger Blur
-      await handleYear.press('Tab');
-      await page.waitForChanges();
-
-      invalidYear = await handleYear.evaluate(getAriaInvalid);
-      invalidMonth = await handleMonth.evaluate(getAriaInvalid);
-      invalidDay = await handleDay.evaluate(getAriaInvalid);
-
-      expect(invalidYear).toEqual('false');
-      expect(invalidMonth).toEqual('false');
-      expect(invalidDay).toEqual('false');
-    });
-  })
-
   it('emits dateBlur event', async () => {
     const page = await newE2EPage();
 
@@ -423,29 +425,6 @@ describe('va-date', () => {
     expect(date.getAttribute('value')).toBeNull();
   });
 
-  it('checks for valid year month and day', async () => {
-    const page = await newE2EPage();
-
-    await page.setContent('<va-date name="test" required/>');
-    const date = await page.find('va-date');
-    const handleMonth = await page.$('pierce/[name="testMonth"]');
-    const handleDay = await page.$('pierce/[name="testDay"]');
-    const handleYear = await page.$('pierce/[name="testYear"]');
-    // Month
-    await handleMonth.select();
-    // Day
-    await handleDay.select();
-    // Year
-    await handleYear.press('3');
-    await handleYear.press('0');
-    await handleYear.press('0');
-    await handleYear.press('0');
-    // Trigger Blur
-    await handleYear.press('Tab');
-    await page.waitForChanges();
-    expect(date.getAttribute('error')).toEqual('Please enter a valid date');
-  });
-
   describe('monthYearOnly variant', () => {
     it('only displays month and year fields', async () => {
       const page = await newE2EPage();
@@ -480,7 +459,47 @@ describe('va-date', () => {
       expect(year.getAttribute('value')).toBe('1999');
     });
  
-    it('checks for valid year and month', async () => {
+    it('checks for valid year', async () => {
+      const page = await newE2EPage();
+      await page.setContent('<va-date month-year-only name="test"/>');
+
+      const date = await page.find('va-date');
+      const handleYear = await page.$('pierce/[name="testYear"]');
+
+      // Year
+      await handleYear.press('3');
+      await handleYear.press('0');
+      await handleYear.press('0');
+      await handleYear.press('0');
+
+      // Trigger Blur
+      await handleYear.press('Tab');
+      await page.waitForChanges();
+
+      expect(date.getAttribute('error')).toEqual('Please enter a year between 1900 and 2122');
+    });
+
+    it('checks for valid month', async () => {
+      const page = await newE2EPage();
+      await page.setContent('<va-date month-year-only name="test" required/>');
+
+      const date = await page.find('va-date');
+      const handleYear = await page.$('pierce/[name="testYear"]');
+
+      // Year
+      await handleYear.press('2');
+      await handleYear.press('0');
+      await handleYear.press('0');
+      await handleYear.press('0');
+
+      // Trigger Blur
+      await handleYear.press('Tab');
+      await page.waitForChanges();
+
+      expect(date.getAttribute('error')).toEqual('Please enter a complete date');
+    });
+
+    it('is valid without a day value', async () => {
       const page = await newE2EPage();
       await page.setContent('<va-date month-year-only name="test" required/>');
 
@@ -488,17 +507,19 @@ describe('va-date', () => {
       const handleMonth = await page.$('pierce/[name="testMonth"]');
       const handleYear = await page.$('pierce/[name="testYear"]');
 
-      // Month
-      await handleMonth.select();
       // Year
-      await handleYear.press('3');
+      await handleYear.press('2');
       await handleYear.press('0');
       await handleYear.press('0');
       await handleYear.press('0');
+      // Month
+      await handleMonth.select('2');
+
       // Trigger Blur
       await handleYear.press('Tab');
       await page.waitForChanges();
-      expect(date.getAttribute('error')).toEqual('Please enter a valid date');
+
+      expect(date.getAttribute('error')).toEqual(null);
     });
 
     it('sets the value as ISO-8601 date with reduced precision', async () => {
