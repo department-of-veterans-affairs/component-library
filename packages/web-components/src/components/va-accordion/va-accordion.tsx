@@ -89,17 +89,17 @@ export class VaAccordion {
     // The final parentNode will be a shadowRoot, and from there we get the host.
     // https://developer.mozilla.org/en-US/docs/Web/API/ShadowRoot/host
     const clickedItem =
-      event.detail.currentTarget.parentNode.parentNode.parentNode.host || // if we are on IE, `.host` won't be there
+      event.detail.currentTarget.parentNode.parentNode.parentNode || // if we are on IE, `.host` won't be there
       event.detail.currentTarget.parentNode.parentNode.parentNode;
     // Close the other items if this accordion isn't multi-selectable
 
     // Usage for slot to provide context to analytics for header and level
     let headerText;
     let headerLevel;
-    getSlottedNodes(clickedItem, null).map((node: HTMLSlotElement) => {
-      headerText = node?.innerHTML;
-      headerLevel = parseInt(node?.tagName?.toLowerCase().split('')[1]);
-    });
+    // getSlottedNodes(clickedItem, null).map((node: HTMLSlotElement) => {
+    //   headerText = node?.innerHTML;
+    //   headerLevel = parseInt(node?.tagName?.toLowerCase().split('')[1]);
+    // });
 
     if (this.openSingle) {
       getSlottedNodes(this.el, 'va-accordion-item')

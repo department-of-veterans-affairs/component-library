@@ -10,7 +10,7 @@ import {
 @Component({
   tag: 'va-accordion-item',
   styleUrl: 'va-accordion-item.scss',
-  shadow: true,
+  // shadow: true,
 })
 export class VaAccordionItem {
   /**

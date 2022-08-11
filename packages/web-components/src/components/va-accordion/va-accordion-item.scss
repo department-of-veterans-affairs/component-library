@@ -1,8 +1,8 @@
 @import 'usa-accordion/src/styles';
 @import '../../mixins/focusable.css';
 
-:host(:not([open])) #content,
-:host([open='false']) #content {
+// :not([open]) #content,
+[open='false'] #content {
   display: none;
 }
 
@@ -32,6 +32,6 @@ p {
 }
 
 /* Hiding since element would be duplicated via the Shadow DOM */
-::slotted([slot='headline']) {
+[slot='headline'] {
   display: none;
 }
