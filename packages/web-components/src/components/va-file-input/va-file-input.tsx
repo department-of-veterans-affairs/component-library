@@ -37,9 +37,9 @@ export class VaFileInput {
   @Prop() name?: string;
 
   /**
-   * The text displayed on the button.
+   * The text displayed on the button (required)
    */
-  @Prop() buttontext?: string;
+  @Prop() buttonText!: string;
 
   /**
    * Set the input to required and render the (Required) text.
@@ -122,7 +122,7 @@ export class VaFileInput {
     const { 
       label,
       name, 
-      buttontext, 
+      buttonText, 
       required, 
       multiple,
       accept,
@@ -150,7 +150,7 @@ export class VaFileInput {
           aria-label={i18next.t(label)}
           onClick={this.handleButtonClick}
           secondary
-          text={i18next.t(buttontext)}
+          text={i18next.t(buttonText) ? i18next.t(buttonText) : i18next.t('Upload file')}
           aria-describedby={error ? 'error-message' : undefined}
         />
         <input

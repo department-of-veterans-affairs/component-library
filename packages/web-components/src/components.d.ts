@@ -292,9 +292,9 @@ export namespace Components {
          */
         "accept"?: string;
         /**
-          * The text displayed on the button.
+          * The text displayed on the button (required)
          */
-        "buttontext"?: string;
+        "buttonText": string;
         /**
           * Emit component-library-analytics events on the file input change event.
          */
@@ -1429,9 +1429,9 @@ declare namespace LocalJSX {
          */
         "accept"?: string;
         /**
-          * The text displayed on the button.
+          * The text displayed on the button (required)
          */
-        "buttontext"?: string;
+        "buttonText": string;
         /**
           * Emit component-library-analytics events on the file input change event.
          */
