@@ -21,8 +21,8 @@ describe('va-alert-expandable', () => {
                 <span class="sr-only">Alert:&nbsp;</span>
                 Limited services and hours
               </span>
+              <i class="fa-angle-down" role="presentation"></i>
             </div>
-            <i class="fa-angle-down" role="presentation"></i>
           </a>
           <div id="alert-body" class="alert-expandable-body closed" style="--calc-max-height:calc(0px + 2rem);">
             <slot></slot>

@@ -103,8 +103,8 @@ export class VaAdditionalInfo {
         >
           <div>
             <span class="additional-info-title">{this.trigger}</span>
+            <i class="fa-angle-down" role="presentation" />
           </div>
-          <i class="fa-angle-down" role="presentation" />
         </a>
         <div id="info" class={this.open ? 'open' : 'closed'}>
           <slot></slot>

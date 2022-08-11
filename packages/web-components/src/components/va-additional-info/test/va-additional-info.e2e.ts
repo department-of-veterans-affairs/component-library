@@ -17,9 +17,9 @@ describe('va-additional-info', () => {
             <div>
               <span class="additional-info-title">
                 More info
-                </span>
+              </span>
+              <i class="fa-angle-down" role="presentation"></i>
             </div>
-            <i class="fa-angle-down" role="presentation"></i>
           </a>
           <div class="closed" id="info" style="--calc-max-height:calc(0px + 2rem);">
             <slot></slot>

@@ -129,8 +129,8 @@ export class VaAlertExpandable {
                 <span class="sr-only">Alert:&nbsp;</span>
                 {this.trigger}
               </span>
+              <i class="fa-angle-down" role="presentation" />
             </div>
-            <i class="fa-angle-down" role="presentation" />
           </a>
           <div id="alert-body" class={bodyClasses}>
             <slot></slot>
