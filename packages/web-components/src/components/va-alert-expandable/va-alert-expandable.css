@@ -26,7 +26,9 @@
 }
 
 .alert-expandable-trigger {
-  display: block;
+  align-items: flex-start;
+  cursor: pointer;
+  display: flex;
   padding: 1.2rem;
 }
 
@@ -101,9 +103,10 @@ a[aria-expanded='true'] i.fa-angle-down {
   transition: transform 0.15s linear;
 }
 
-i.alert-status-icon { 
+i.alert-status-icon {
   color: var(--color-gray-dark);
-  margin-right: 1.2rem; 
+  margin-top: 0.4rem;
+  margin-right: 1.2rem;
 }
 
 div.hide-icon i.alert-status-icon {
@@ -128,4 +131,9 @@ div.warning i.alert-status-icon::before {
 
 div.error i.alert-status-icon::before {
   content: '\F06A';
+}
+
+::slotted(*) {
+  margin-bottom: 0 !important;
+  margin-top: 0 !important;
 }
