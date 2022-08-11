@@ -1,18 +1,12 @@
 @use 'uswds-core/src/styles/functions' as *;
+@use '../tokens/position' as *;
 @use './settings' as *;
 
 $u-position: (
   position: (
     base: 'vads-position',
     modifiers: null,
-    values:
-      map-collect(
-        (
-          absolute: absolute,
-          fixed: fixed,
-          relative: relative,
-        )
-      ),
+    values: map-collect($tokens-position),
     settings: $position-settings,
     property: 'position',
     type: 'utility',
