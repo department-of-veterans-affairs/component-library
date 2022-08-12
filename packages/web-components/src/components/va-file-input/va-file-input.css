@@ -22,3 +22,7 @@ va-button {
   color: var(--color-secondary-dark);
   margin-left: 0.4rem;
 }
+
+.hidden {
+  display: none;
+}
