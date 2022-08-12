@@ -120,10 +120,10 @@ export class VaAccordionItem {
         </button>,
       );
     return (
-      <div class="usa-accordion__content">
+      <div>
         <Header />
         <slot name="headline" ref={el => this.headlineSlot= el as HTMLElement} onSlotchange={() => this.populateStateValues()} />
-        <div id="content">
+        <div id="content" class="usa-accordion__content">
           <slot />
         </div>
       </div>
