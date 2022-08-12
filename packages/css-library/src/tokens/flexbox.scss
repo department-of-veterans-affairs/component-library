@@ -1,0 +1,59 @@
+@use './_variables' as *;
+
+$tokens-flex: (
+  1: 1 0 0%,
+  2: 2 0 0%,
+  3: 3 0 0%,
+  4: 4 0 0%,
+  auto: 0 0 auto,
+  fill: 1 0 0%,
+);
+
+$tokens-flex-direction: (
+  'column': column,
+  'row': row,
+  'column-reverse': column-reverse,
+  'row-reverse': row-reverse,
+);
+
+$tokens-flex-wrap: (
+  'nowrap': nowrap,
+  'wrap': wrap,
+  'wrap-reverse': wrap-reverse,
+);
+
+$tokens-align-items: (
+  'stretch': stretch,
+  'flex-start': flex-start,
+  'flex-end': flex-end,
+  'center': center,
+  'baseline': baseline,
+);
+
+$tokens-justify-content: (
+  'flex-start': flex-start,
+  'flex-end': flex-end,
+  'center': center,
+  'space-between': space-between,
+  'space-around': space-around,
+  'space-evenly': space-evenly,
+);
+
+$tokens-align-content: (
+  'flex-start': flex-start,
+  'flex-end': flex-end,
+  'center': center,
+  'space-between': space-between,
+  'space-around': space-around,
+  'stretch': stretch,
+);
+
+$tokens-order: (
+  '1': 1,
+  '2': 2,
+  '3': 3,
+  '4': 4,
+  'first': -1,
+  'last': 999,
+  'initial': 0,
+);

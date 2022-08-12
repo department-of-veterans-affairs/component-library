@@ -1,0 +1,14 @@
+@use 'uswds-core/src/styles/functions' as *;
+@use '../tokens/visibility' as *;
+@use './settings' as *;
+
+$u-visibility: (
+  visibility: (
+    base: 'vads-visibility',
+    modifiers: null,
+    values: map-collect($tokens-visibility),
+    settings: $visibility-settings,
+    property: 'visibility',
+    type: 'utility',
+  ),
+);
