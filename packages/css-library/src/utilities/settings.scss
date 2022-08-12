@@ -61,6 +61,24 @@ $font-size-settings: (
   visited: false,
 ) !default;
 
+$height-settings: (
+  output: true,
+  responsive: true,
+  active: false,
+  focus: false,
+  hover: false,
+  visited: false,
+) !default;
+
+$line-height-settings: (
+  output: true,
+  responsive: true,
+  active: false,
+  focus: false,
+  hover: false,
+  visited: false,
+) !default;
+
 $position-settings: (
   output: true,
   responsive: true,
@@ -70,7 +88,34 @@ $position-settings: (
   visited: false,
 ) !default;
 
+$text-align-settings: (
+  output: true,
+  responsive: true,
+  active: false,
+  focus: false,
+  hover: false,
+  visited: false,
+) !default;
+
+$text-decoration-settings: (
+  output: true,
+  responsive: false,
+  active: false,
+  focus: false,
+  hover: false,
+  visited: false,
+) !default;
+
 $visibility-settings: (
+  output: true,
+  responsive: true,
+  active: false,
+  focus: false,
+  hover: false,
+  visited: false,
+) !default;
+
+$width-settings: (
   output: true,
   responsive: true,
   active: false,

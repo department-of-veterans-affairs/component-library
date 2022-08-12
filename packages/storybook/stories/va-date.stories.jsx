@@ -54,6 +54,7 @@ const Template = ({
 const CustomValidationTemplate = ({ label, name, required, error, value }) => {
   const [dateVal, setDateVal] = useState(value);
   const [errorVal, setErrorVal] = useState(error);
+  const [invalidYear, setInvalidYear] = useState(null);
   const today = new Date();
   // new Date as YYYY-MM-DD is giving the day prior to the day select
   // new Date as YYYY MM DD is giving the correct day selected
@@ -61,8 +62,11 @@ const CustomValidationTemplate = ({ label, name, required, error, value }) => {
   function handleDateBlur() {
     if (dateInput <= today) {
       setErrorVal('Date must be in the future');
+      // This won't always be the right thing, but it's just a demo
+      setInvalidYear(true);
     } else {
       setErrorVal('');
+      setInvalidYear(false);
     }
   }
 
@@ -73,6 +77,7 @@ const CustomValidationTemplate = ({ label, name, required, error, value }) => {
         name={name}
         required={required}
         error={errorVal}
+        invalidYear={invalidYear}
         value={dateVal}
         onDateBlur={() => handleDateBlur()}
         onDateChange={e => setDateVal(e.target.value)}

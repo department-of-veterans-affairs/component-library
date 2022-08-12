@@ -9,8 +9,13 @@ $utilities-package: map-collect(
   $u-display,
   $u-flexbox,
   $u-font,
+  $u-height,
+  $u-line-height,
   $u-position,
-  $u-visibility
+  $u-text-align,
+  $u-text-decoration,
+  $u-visibility,
+  $u-width
 );
 
 // Generate all utility classes

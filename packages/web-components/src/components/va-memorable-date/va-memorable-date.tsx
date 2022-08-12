@@ -4,19 +4,13 @@ import {
   EventEmitter,
   Host,
   Prop,
-  State,
   h,
   Element,
   Fragment,
 } from '@stencil/core';
 
 import {
-  days,
-  checkLeapYear,
-  maxMonths,
-  maxYear,
-  minMonths,
-  minYear,
+  validate,
   validKeys,
 } from '../../utils/date-utils';
 
@@ -52,12 +46,12 @@ export class VaMemorableDate {
    * The error message to render (if any)
    * This prop should be leveraged to display any custom validations needed for this component
    */
-  @Prop() error?: string;
+  @Prop({ reflect: true, mutable: true }) error?: string;
 
   /**
    * Set the default date value must be in YYYY-MM-DD format.
    */
-  @Prop({ mutable: true }) value?: string;
+  @Prop({ mutable: true, reflect: true }) value?: string;
 
   /**
    * Fires when the date input loses focus after its value was changed
@@ -77,9 +71,9 @@ export class VaMemorableDate {
   })
   dateBlur: EventEmitter;
 
-  @State() invalidDay: boolean = false;
-  @State() invalidMonth: boolean = false;
-  @State() invalidYear: boolean = false;
+  @Prop({ mutable: true }) invalidDay: boolean = false;
+  @Prop({ mutable: true }) invalidMonth: boolean = false;
+  @Prop({ mutable: true }) invalidYear: boolean = false;
 
   private handleDateBlur = (event: FocusEvent) => {
     const [year, month, day] = (this.value || '').split('-');
@@ -96,33 +90,9 @@ export class VaMemorableDate {
     }`;
     /* eslint-enable i18next/no-literal-string */
 
-    const daysForSelectedMonth = monthNum > 0 ? days[monthNum] : [];
-    const leapYear = checkLeapYear(yearNum);
-
-    if (this.required) {
-      // Set the state so that we can set aria-invalid on the right component
-      this.invalidYear = !year || yearNum < minYear || yearNum > maxYear;
-
-      this.invalidMonth =
-        !month || monthNum < minMonths || monthNum > maxMonths;
-
-      this.invalidDay =
-        !day || dayNum < minMonths || dayNum > daysForSelectedMonth.length;
-
-      if (!leapYear && monthNum === 2 && dayNum > 28) {
-        this.invalidYear = true;
-        this.invalidMonth = true;
-        this.invalidDay = true;
-      }
-    }
-
-    if (this.invalidYear || this.invalidMonth || this.invalidDay) {
-      this.error = 'Please enter a valid date';
-    } else if (this.error !== 'Please enter a valid date') {
-      this.error;
-    } else {
-      this.error = '';
-    }
+    // Run built-in validation. Any custom validation
+    // will happen afterwards
+    validate(this, yearNum, monthNum, dayNum);
     this.dateBlur.emit(event);
   };
 
@@ -189,7 +159,7 @@ export class VaMemorableDate {
     // Error attribute should be leveraged for custom error messaging
     // Fieldset has an implicit aria role of group
     return (
-      <Host value={value} error={error} onBlur={handleDateBlur}>
+      <Host onBlur={handleDateBlur}>
         <fieldset>
           <legend>
             {label} {required && <span class="required">(*Required)</span>}
