@@ -150,7 +150,7 @@ export class VaFileInput {
           aria-label={i18next.t(label)}
           onClick={this.handleButtonClick}
           secondary
-          text={i18next.t(buttonText) ? i18next.t(buttonText) : i18next.t('Upload file')}
+          text={buttonText ? i18next.t(buttonText) : i18next.t('Upload file')}
           aria-describedby={error ? 'error-message' : undefined}
         />
         <input

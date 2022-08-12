@@ -18,7 +18,7 @@ export default {
 };
 
 const defaultArgs = {
-  'label': 'This is the file upload label',
+  'label': 'Upload additional evidence',
   'name': 'my-file-input',
   'button-text': 'Upload file',
   'accept': 'image/*',
@@ -103,7 +103,7 @@ export const Required = Template.bind(null);
 Required.args = { ...defaultArgs, required: true };
 
 export const ErrorMessage = Template.bind(null);
-ErrorMessage.args = { ...defaultArgs, required: true, error: 'This is an error message' };
+ErrorMessage.args = { ...defaultArgs, required: true, error: "We couldn't upload your file" };
 
 export const Internationalization = I18nTemplate.bind(null);
 Internationalization.args = {
