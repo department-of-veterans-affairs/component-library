@@ -37,9 +37,9 @@ export class VaFileInput {
   @Prop() name?: string;
 
   /**
-   * The text displayed on the button (required)
+   * The text displayed on the button
    */
-  @Prop() buttonText!: string;
+  @Prop() buttonText: string;
 
   /**
    * Set the input to required and render the (Required) text.
@@ -92,7 +92,6 @@ export class VaFileInput {
      */
     target.value = null;
 
-    // TODO: Analytics details.
     if (this.enableAnalytics) {
       this.componentLibraryAnalytics.emit({
         componentName: 'va-file-input',
@@ -155,8 +154,8 @@ export class VaFileInput {
         />
         <input
             id="fileInputField"
+            class="hidden"
             multiple={multiple}
-            style={{ display: 'none' }}
             type="file"
             accept={accept}
             name={name}
