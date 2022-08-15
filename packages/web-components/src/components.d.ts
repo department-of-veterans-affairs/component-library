@@ -263,6 +263,9 @@ export namespace Components {
           * The error message to render (if any) This prop should be leveraged to display any custom validations needed for this component
          */
         "error"?: string;
+        "invalidDay": boolean;
+        "invalidMonth": boolean;
+        "invalidYear": boolean;
         /**
           * Label for the field.
          */
@@ -393,6 +396,9 @@ export namespace Components {
           * The error message to render (if any) This prop should be leveraged to display any custom validations needed for this component
          */
         "error"?: string;
+        "invalidDay": boolean;
+        "invalidMonth": boolean;
+        "invalidYear": boolean;
         /**
           * Label for the field.
          */
@@ -1388,6 +1394,9 @@ declare namespace LocalJSX {
           * The error message to render (if any) This prop should be leveraged to display any custom validations needed for this component
          */
         "error"?: string;
+        "invalidDay"?: boolean;
+        "invalidMonth"?: boolean;
+        "invalidYear"?: boolean;
         /**
           * Label for the field.
          */
@@ -1546,6 +1555,9 @@ declare namespace LocalJSX {
           * The error message to render (if any) This prop should be leveraged to display any custom validations needed for this component
          */
         "error"?: string;
+        "invalidDay"?: boolean;
+        "invalidMonth"?: boolean;
+        "invalidYear"?: boolean;
         /**
           * Label for the field.
          */

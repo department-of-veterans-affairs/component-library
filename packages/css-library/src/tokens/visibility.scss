@@ -1,0 +1,10 @@
+@use 'uswds-core/src/styles/mixins/general/screen-reader' as *;
+
+$tokens-visibility: (
+  'hidden': hidden,
+  'visible': visible,
+);
+
+.vads-visibility-screen-reader {
+  @include sr-only;
+}

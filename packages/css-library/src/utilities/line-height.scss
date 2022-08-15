@@ -1,0 +1,14 @@
+@use 'uswds-core/src/styles/functions' as *;
+@use '../tokens/line-height' as *;
+@use './settings' as *;
+
+$u-line-height: (
+  line-height: (
+    base: 'vads-line-height',
+    modifiers: null,
+    values: map-collect($tokens-line-height),
+    settings: $line-height-settings,
+    property: 'line-height',
+    type: 'utility',
+  ),
+);

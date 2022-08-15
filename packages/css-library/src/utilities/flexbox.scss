@@ -1,0 +1,90 @@
+@use 'uswds-core/src/styles/functions' as *;
+@use '../tokens/flexbox' as *;
+@use './settings' as *;
+
+$u-flex: (
+  flex: (
+    base: 'vads-flex',
+    modifiers: null,
+    values: map-collect($tokens-flex),
+    settings: $flex-settings,
+    property: 'flex',
+    type: 'utility',
+  ),
+);
+
+$u-flex-direction: (
+  flex-direction: (
+    base: 'vads-flex-direction',
+    modifiers: null,
+    values: map-collect($tokens-flex-direction),
+    settings: $flex-settings,
+    property: 'flex-direction',
+    type: 'utility',
+  ),
+);
+
+$u-flex-wrap: (
+  flex-wrap: (
+    base: 'vads-flex-wrap',
+    modifiers: null,
+    values: map-collect($tokens-flex-wrap),
+    settings: $flex-settings,
+    property: 'flex-wrap',
+    type: 'utility',
+  ),
+);
+
+$u-align-items: (
+  align-items: (
+    base: 'vads-align-items',
+    modifiers: null,
+    values: map-collect($tokens-align-items),
+    settings: $flex-settings,
+    property: 'align-items',
+    type: 'utility',
+  ),
+);
+
+$u-justify-content: (
+  justify-content: (
+    base: 'vads-justify-content',
+    modifiers: null,
+    values: map-collect($tokens-justify-content),
+    settings: $flex-settings,
+    property: 'justify-content',
+    type: 'utility',
+  ),
+);
+
+$u-align-content: (
+  align-content: (
+    base: 'vads-align-content',
+    modifiers: null,
+    values: map-collect($tokens-align-content),
+    settings: $flex-settings,
+    property: 'align-content',
+    type: 'utility',
+  ),
+);
+
+$u-order: (
+  order: (
+    base: 'vads-order',
+    modifiers: null,
+    values: map-collect($tokens-order),
+    settings: $flex-settings,
+    property: 'order',
+    type: 'utility',
+  ),
+);
+
+$u-flexbox: map-collect(
+  $u-flex,
+  $u-flex-direction,
+  $u-flex-wrap,
+  $u-align-items,
+  $u-justify-content,
+  $u-align-content,
+  $u-order
+);

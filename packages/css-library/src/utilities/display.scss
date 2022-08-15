@@ -1,0 +1,14 @@
+@use 'uswds-core/src/styles/functions' as *;
+@use '../tokens/display' as *;
+@use './settings' as *;
+
+$u-display: (
+  display: (
+    base: 'vads',
+    modifiers: null,
+    values: map-collect($tokens-display),
+    settings: $display-settings,
+    property: 'display',
+    type: 'utility',
+  ),
+);
