@@ -6,10 +6,6 @@
   font-family: var(--font-source-sans);
 }
 
-label[part="label"] {
-  display: block;
-}
-
 #error-message{
   margin-bottom: 0.3rem;
 }
