@@ -1440,7 +1440,7 @@ declare namespace LocalJSX {
         /**
           * The text displayed on the button
          */
-        "buttonText"?: string;
+        "buttonText": string;
         /**
           * Emit component-library-analytics events on the file input change event.
          */

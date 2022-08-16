@@ -39,7 +39,7 @@ export class VaFileInput {
   /**
    * The text displayed on the button
    */
-  @Prop() buttonText: string;
+  @Prop() buttonText!: string;
 
   /**
    * Set the input to required and render the (Required) text.
@@ -107,6 +107,16 @@ export class VaFileInput {
     this.el.shadowRoot.getElementById('fileInputField').click();
   }
 
+  /**
+   * Unable to set a default text value when the prop is marked
+   * as required so generating the default text with this utility.
+   * @returns 
+   */
+  private getButtonText = (): string => {
+    // eslint-disable-next-line i18next/no-literal-string
+    return this.buttonText ? this.buttonText : 'Upload file';
+  };
+
   connectedCallback() {
     i18next.on('languageChanged', () => {
       forceUpdate(this.el);
@@ -121,12 +131,14 @@ export class VaFileInput {
     const { 
       label,
       name, 
-      buttonText, 
       required, 
       multiple,
       accept,
       error,
     } = this;
+    
+    const text = this.getButtonText();
+
     return (
       <Host>
         {label && (
@@ -146,10 +158,10 @@ export class VaFileInput {
         </span>
         <va-button
           id="fileInputButton"
-          aria-label={i18next.t(label)}
+          aria-label={label}
           onClick={this.handleButtonClick}
           secondary
-          text={buttonText ? i18next.t(buttonText) : i18next.t('Upload file')}
+          text={text}
           aria-describedby={error ? 'error-message' : undefined}
         />
         <input
