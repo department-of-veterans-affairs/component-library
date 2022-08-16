@@ -32,11 +32,6 @@ export class VaAccordionItem {
   @Prop() subheader?: string = null;
 
   /**
-   * True if the item is open
-   */
-  @Prop() open?: boolean = false;
-
-  /**
    * Header level for button wrapper. Must be between 1 and 6
    */
   @Prop() level?: number = 2;
@@ -101,7 +96,6 @@ export class VaAccordionItem {
             this.expandButton = el;
           }}
           class="usa-accordion__button"
-          aria-expanded={this.open ? 'true' : 'false'}
           aria-controls={contentId}
         >
           {this.slotHeader || ieSlotCheckHeader || this.header}

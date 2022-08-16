@@ -34,10 +34,6 @@ export namespace Components {
          */
         "level"?: number;
         /**
-          * True if the item is open
-         */
-        "open"?: boolean;
-        /**
           * Optional accordion item subheader text. Default is null.
          */
         "subheader"?: string;
@@ -1057,10 +1053,6 @@ declare namespace LocalJSX {
           * Header level for button wrapper. Must be between 1 and 6
          */
         "level"?: number;
-        /**
-          * True if the item is open
-         */
-        "open"?: boolean;
         /**
           * Optional accordion item subheader text. Default is null.
          */
