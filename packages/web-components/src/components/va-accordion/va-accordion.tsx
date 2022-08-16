@@ -9,6 +9,7 @@ import {
   h,
   forceUpdate,
 } from '@stencil/core';
+import classnames from 'classnames';
 import { getSlottedNodes } from '../../utils/utils';
 import i18next from 'i18next';
 import { Build } from '@stencil/core';
@@ -107,7 +108,7 @@ export class VaAccordion {
 
   render() {
     const accordionProps = {
-      class: 'usa-accordion',
+      class: classnames('usa-accordion', { 'usa-accordion--bordered': this.bordered }),
       'data-allow-multiple': this.openSingle ? undefined : true
     };
     return (
