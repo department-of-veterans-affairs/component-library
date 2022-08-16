@@ -86,10 +86,10 @@ export class VaAccordion {
   // Expand or Collapse All Function for Button Click
   private expandCollapseAll = (expanded: boolean) => {
     this.expanded = expanded;
-    getSlottedNodes(this.el, 'va-accordion-item').forEach(item =>
-      /* eslint-disable-next-line i18next/no-literal-string */
-      (item as Element).setAttribute('open', `${expanded}`),
-    );
+    getSlottedNodes(this.el, 'va-accordion-item').forEach(item => {
+      const itemButton = (item as Element).firstElementChild.firstElementChild;
+      accordion.toggle(itemButton, expanded)
+    });
   };
 
   connectedCallback() {
