@@ -1,21 +1,16 @@
+/* eslint-disable i18next/no-literal-string */
 import { 
   Component, 
   Element, 
   Host, 
   h, 
   Prop, 
-  Build, 
   forceUpdate,
   Fragment,
   Event,
   EventEmitter
 } from '@stencil/core';
 import i18next from 'i18next';
-
-if (Build.isTesting) {
-  // Make i18next.t() return the key instead of the value
-  i18next.init({ lng: 'cimode' });
-}
 
 @Component({
   tag: 'va-file-input',
@@ -113,7 +108,6 @@ export class VaFileInput {
    * @returns 
    */
   private getButtonText = (): string => {
-    // eslint-disable-next-line i18next/no-literal-string
     return this.buttonText ? this.buttonText : 'Upload file';
   };
 
@@ -144,14 +138,14 @@ export class VaFileInput {
         {label && (
           <label htmlFor="fileInputButton">
             {label}
-            {required && <span class="required">{i18next.t('required')}</span>}
+            {required && <span class="required">(*Required)</span>}
           </label>
         )}
         <slot></slot>
         <span id="error-message" role="alert">
           {error && (
             <Fragment>
-              <span class="sr-only">{i18next.t('error')}</span> 
+              <span class="sr-only">Error</span> 
               {error}
             </Fragment>
           )}

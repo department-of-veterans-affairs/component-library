@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import React, { useState } from 'react';
+import React from 'react';
 import { VaFileInput } from '@department-of-veterans-affairs/web-components/react-bindings';
 import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
 
@@ -55,45 +55,6 @@ const Template = ({
   );
 };
 
-const I18nTemplate = ({
-  label,
-  name,
-  'button-text': buttonText,
-  accept,
-  error,
-  required,
-  multiple,
-  'enable-analytics': enableAnalytics,
-  vaChange
-}) => {
-  const [lang, setLang] = useState('en');
-  return (
-    <>
-      <button
-        style={{display:'block'}}
-        onClick={() => {
-          const newLang = lang === 'en' ? 'es' : 'en';
-          setLang(newLang);
-          document.querySelector('main').setAttribute('lang', newLang);
-        }}
-      >
-        Switch language
-      </button>
-        <VaFileInput
-          label={label}
-          name={name}
-          button-text={buttonText}
-          accept={accept}
-          required={required}
-          multiple={multiple}
-          error={error}
-          enable-analytics={enableAnalytics}
-          onVaChange={vaChange}   
-      />
-    </>
-  );
-};
-
 export const Default = Template.bind(null);
 Default.args = { ...defaultArgs };
 
@@ -104,12 +65,6 @@ Required.args = { ...defaultArgs, required: true };
 
 export const ErrorMessage = Template.bind(null);
 ErrorMessage.args = { ...defaultArgs, required: true, error: "We couldn't upload your file" };
-
-export const Internationalization = I18nTemplate.bind(null);
-Internationalization.args = {
-  ...defaultArgs,
-  required: true,
-};
 
 export const WithAnalytics = Template.bind(null);
 WithAnalytics.args = { ...defaultArgs, 'enable-analytics': true };
