@@ -23,7 +23,6 @@ const defaultArgs = {
   'button-text': 'Upload file',
   'accept': 'image/*',
   'required': false,
-  'multiple': false,
   'error': "",
   'enable-analytics': false,
   'vaChange': (event) => alert(`File change event received: ${event?.detail?.files[0]?.name}`)
@@ -36,7 +35,6 @@ const Template = ({
   accept,
   error,
   required,
-  multiple,
   'enable-analytics': enableAnalytics,
   vaChange,
 }) => {
@@ -47,7 +45,6 @@ const Template = ({
       button-text={buttonText}
       accept={accept}
       required={required}
-      multiple={multiple}
       error={error}
       enable-analytics={enableAnalytics}
       onVaChange={vaChange}

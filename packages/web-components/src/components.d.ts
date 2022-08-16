@@ -311,10 +311,6 @@ export namespace Components {
          */
         "label"?: string;
         /**
-          * Allow the input to accept multiple files.
-         */
-        "multiple"?: boolean;
-        /**
           * The name for the input element.
          */
         "name"?: string;
@@ -1440,7 +1436,7 @@ declare namespace LocalJSX {
         /**
           * The text displayed on the button
          */
-        "buttonText": string;
+        "buttonText"?: string;
         /**
           * Emit component-library-analytics events on the file input change event.
          */
@@ -1453,10 +1449,6 @@ declare namespace LocalJSX {
           * The label for the button input.
          */
         "label"?: string;
-        /**
-          * Allow the input to accept multiple files.
-         */
-        "multiple"?: boolean;
         /**
           * The name for the input element.
          */

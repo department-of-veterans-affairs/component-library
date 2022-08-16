@@ -34,17 +34,12 @@ export class VaFileInput {
   /**
    * The text displayed on the button
    */
-  @Prop() buttonText!: string;
+  @Prop() buttonText: string;
 
   /**
    * Set the input to required and render the (Required) text.
    */
   @Prop() required?: boolean = false;
-
-  /**
-   * Allow the input to accept multiple files.
-   */
-  @Prop() multiple?: boolean = false;
 
   /**
    * A comma-separated list of unique file type specifiers.
@@ -103,9 +98,8 @@ export class VaFileInput {
   }
 
   /**
-   * Unable to set a default text value when the prop is marked
-   * as required so generating the default text with this utility.
-   * @returns 
+   * Make sure the button text always has a value.
+   * @returns string - Button text to render.
    */
   private getButtonText = (): string => {
     return this.buttonText ? this.buttonText : 'Upload file';
@@ -126,7 +120,6 @@ export class VaFileInput {
       label,
       name, 
       required, 
-      multiple,
       accept,
       error,
     } = this;
@@ -160,8 +153,7 @@ export class VaFileInput {
         />
         <input
             id="fileInputField"
-            class="hidden"
-            multiple={multiple}
+            hidden
             type="file"
             accept={accept}
             name={name}
