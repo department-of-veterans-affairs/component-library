@@ -1,6 +1,10 @@
 @import 'usa-accordion/src/styles';
 @import '../../mixins/focusable.css';
 
+.usa-accordion__button {
+  box-sizing: border-box;
+}
+
 h1,
 h2,
 h3,
