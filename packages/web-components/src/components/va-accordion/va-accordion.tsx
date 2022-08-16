@@ -4,7 +4,6 @@ import {
   Event,
   EventEmitter,
   Host,
-  Listen,
   Prop,
   State,
   h,
@@ -84,75 +83,6 @@ export class VaAccordion {
    */
   @Prop() sectionHeading?: string = null;
 
-  @Listen('accordionItemToggled')
-  itemToggledHandler(event: CustomEvent) {
-    // The event target is the button, and it has a parent which is a header.
-    // It is the parent of the header (the root item) that we need to access
-    // The final parentNode will be a shadowRoot, and from there we get the host.
-    // https://developer.mozilla.org/en-US/docs/Web/API/ShadowRoot/host
-    const clickedItem =
-      event.detail.currentTarget.parentNode.parentNode.parentNode || // if we are on IE, `.host` won't be there
-      event.detail.currentTarget.parentNode.parentNode.parentNode;
-    // Close the other items if this accordion isn't multi-selectable
-
-    // Usage for slot to provide context to analytics for header and level
-    let headerText;
-    let headerLevel;
-    // getSlottedNodes(clickedItem, null).map((node: HTMLSlotElement) => {
-    //   headerText = node?.innerHTML;
-    //   headerLevel = parseInt(node?.tagName?.toLowerCase().split('')[1]);
-    // });
-
-    if (this.openSingle) {
-      getSlottedNodes(this.el, 'va-accordion-item')
-        .filter(item => item !== clickedItem)
-        /* eslint-disable-next-line i18next/no-literal-string */
-        .forEach(item => (item as Element).setAttribute('open', 'false'));
-    }
-
-    const prevAttr = clickedItem.getAttribute('open') === 'true' ? true : false;
-
-    if (!this.disableAnalytics) {
-      const detail = {
-        componentName: 'va-accordion',
-        action: prevAttr ? 'collapse' : 'expand',
-        details: {
-          header: headerText || clickedItem.header,
-          subheader: clickedItem.subheader,
-          level: headerLevel || clickedItem.level,
-          sectionHeading: this.sectionHeading,
-        },
-      };
-      this.componentLibraryAnalytics.emit(detail);
-    }
-
-    /* eslint-disable-next-line i18next/no-literal-string */
-    clickedItem.setAttribute('open', !prevAttr);
-
-    if (!this.isScrolledIntoView(clickedItem)) {
-      clickedItem.scrollIntoView();
-    }
-
-    // Check if all accordions are open or closed due to user clicks
-    this.accordionsOpened();
-  }
-
-  private accordionsOpened() {
-    // Track user clicks on va-accordion-item within an array to compare if all values are true or false
-    let accordionItems = [];
-    getSlottedNodes(this.el, 'va-accordion-item').forEach(item => {
-      accordionItems.push((item as Element).getAttribute('open'));
-    });
-    const allOpen = currentValue => currentValue === 'true';
-    const allClosed = currentValue => currentValue === 'false';
-    if (accordionItems.every(allOpen)) {
-      this.expanded = true;
-    }
-    if (accordionItems.every(allClosed)) {
-      this.expanded = false;
-    }
-  }
-
   // Expand or Collapse All Function for Button Click
   private expandCollapseAll = (expanded: boolean) => {
     this.expanded = expanded;
@@ -161,17 +91,6 @@ export class VaAccordion {
       (item as Element).setAttribute('open', `${expanded}`),
     );
   };
-
-  isScrolledIntoView(el: Element) {
-    const elemTop = el?.getBoundingClientRect().top;
-
-    if (!elemTop && elemTop !== 0) {
-      return false;
-    }
-
-    // Only partially || completely visible elements return true
-    return elemTop >= 0 && elemTop <= window.innerHeight;
-  }
 
   connectedCallback() {
     i18next.on('languageChanged', () => {
