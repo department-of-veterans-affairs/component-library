@@ -189,6 +189,7 @@ export class VaAccordion {
   render() {
     const accordionProps = {
       class: 'usa-accordion',
+      'data-allow-multiple': this.openSingle ? undefined : true
     };
     return (
       <Host {...accordionProps} >
