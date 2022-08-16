@@ -3,10 +3,13 @@ import {
   Element,
   Event,
   EventEmitter,
+  Host,
   Prop,
   State,
   h,
 } from '@stencil/core';
+import { uniqueId } from '../../../../react-components/src/helpers/utilities';
+
 @Component({
   tag: 'va-accordion-item',
   styleUrl: 'va-accordion-item.scss',
@@ -19,15 +22,6 @@ export class VaAccordionItem {
   @Element() el: HTMLElement;
 
   headlineSlot!: HTMLElement;
-
-  /**
-   * This event is fired so that va-accordion element can manage which items are opened or closed
-   */
-  @Event({
-    composed: true,
-    bubbles: true,
-  })
-  accordionItemToggled: EventEmitter;
 
   /**
    * The accordion item header text
@@ -66,10 +60,6 @@ export class VaAccordionItem {
    */
   private expandButton: HTMLButtonElement = null;
 
-  private toggleOpen(e: MouseEvent): void {
-    this.accordionItemToggled.emit(e);
-  }
-
   // Using onSlotChange to fire event on inital load
   // Data access from slot html element is being perfomed by this function
   // Function allows us to provide context to state
@@ -100,6 +90,8 @@ export class VaAccordionItem {
     const ieSlotCheckHeader =
       this.el.querySelector('[slot="headline"]')?.innerHTML;
 
+    const contentId = uniqueId("content");
+
     const Header = () =>
       h(
         // TODO: Remove level & header prop & let the slot do its work
@@ -111,22 +103,21 @@ export class VaAccordionItem {
             this.expandButton = el;
           }}
           class="usa-accordion__button"
-          onClick={this.toggleOpen.bind(this)}
           aria-expanded={this.open ? 'true' : 'false'}
-          aria-controls="content"
+          aria-controls={contentId}
         >
           {this.slotHeader || ieSlotCheckHeader || this.header}
           {this.subheader ? <p>{this.subheader}</p> : false}
         </button>,
       );
     return (
-      <div>
+      <Host class="usa-accordion__heading">
         <Header />
         <slot name="headline" ref={el => this.headlineSlot= el as HTMLElement} onSlotchange={() => this.populateStateValues()} />
-        <div id="content" class="usa-accordion__content">
+        <div id={contentId} class="usa-accordion__content">
           <slot />
         </div>
-      </div>
+      </Host>
     );
   }
 }

@@ -1,11 +1,6 @@
 @import 'usa-accordion/src/styles';
 @import '../../mixins/focusable.css';
 
-// :not([open]) #content,
-[open='false'] #content {
-  display: none;
-}
-
 h1,
 h2,
 h3,

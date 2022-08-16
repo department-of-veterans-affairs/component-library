@@ -1058,10 +1058,6 @@ declare namespace LocalJSX {
          */
         "level"?: number;
         /**
-          * This event is fired so that va-accordion element can manage which items are opened or closed
-         */
-        "onAccordionItemToggled"?: (event: CustomEvent<any>) => void;
-        /**
           * True if the item is open
          */
         "open"?: boolean;

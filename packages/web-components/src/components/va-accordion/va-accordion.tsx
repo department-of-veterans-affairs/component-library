@@ -13,6 +13,8 @@ import {
 import { getSlottedNodes } from '../../utils/utils';
 import i18next from 'i18next';
 import { Build } from '@stencil/core';
+// @ts-ignore
+import { accordion } from '@uswds/uswds/js';
 
 if (Build.isTesting) {
   // Make i18next.t() return the key instead of the value
@@ -175,6 +177,9 @@ export class VaAccordion {
     i18next.on('languageChanged', () => {
       forceUpdate(this.el);
     });
+
+    // Follow the USWDS3 pattern
+    accordion.on(this.el.shadowRoot);
   }
 
   disconnectedCallback() {
@@ -182,8 +187,11 @@ export class VaAccordion {
   }
 
   render() {
+    const accordionProps = {
+      class: 'usa-accordion',
+    };
     return (
-      <Host>
+      <Host {...accordionProps} >
         {!this.openSingle && (
           <button
             ref={el => (this.expandCollapseBtn = el as HTMLButtonElement)}
