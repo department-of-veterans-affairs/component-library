@@ -1,0 +1,14 @@
+@use 'uswds-core/src/styles/functions' as *;
+@use '../tokens/measure' as *;
+@use './settings' as *;
+
+$u-measure: (
+  measure: (
+    base: 'vads-measure',
+    modifiers: null,
+    values: map-collect($tokens-measure),
+    settings: $measure-settings,
+    property: 'max-width',
+    type: 'utility',
+  ),
+);

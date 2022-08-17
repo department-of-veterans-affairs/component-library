@@ -88,6 +88,15 @@ $margin-settings: (
   visited: false,
 ) !default;
 
+$measure-settings: (
+  output: true,
+  responsive: true,
+  active: false,
+  focus: false,
+  hover: false,
+  visited: false,
+) !default;
+
 $position-settings: (
   output: true,
   responsive: true,
