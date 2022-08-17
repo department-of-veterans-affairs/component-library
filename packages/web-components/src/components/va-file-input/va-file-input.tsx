@@ -22,7 +22,7 @@ export class VaFileInput {
   @Element() el: HTMLElement;
 
   /**
-   * The label for the button input.
+   * The label for the file input.
    */
   @Prop() label?: string;
 
@@ -32,12 +32,12 @@ export class VaFileInput {
   @Prop() name?: string;
 
   /**
-   * The text displayed on the button
+   * The text displayed on the button.
    */
   @Prop() buttonText: string;
 
   /**
-   * Set the input to required and render the (Required) text.
+   * Sets the input to required and renders the (*Required) text.
    */
   @Prop() required?: boolean = false;
 
@@ -98,7 +98,7 @@ export class VaFileInput {
   }
 
   /**
-   * Make sure the button text always has a value.
+   * Makes sure the button text always has a value.
    * @returns string - Button text to render.
    */
   private getButtonText = (): string => {

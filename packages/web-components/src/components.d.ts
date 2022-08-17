@@ -295,7 +295,7 @@ export namespace Components {
          */
         "accept"?: string;
         /**
-          * The text displayed on the button
+          * The text displayed on the button.
          */
         "buttonText": string;
         /**
@@ -307,7 +307,7 @@ export namespace Components {
          */
         "error"?: string;
         /**
-          * The label for the button input.
+          * The label for the file input.
          */
         "label"?: string;
         /**
@@ -315,7 +315,7 @@ export namespace Components {
          */
         "name"?: string;
         /**
-          * Set the input to required and render the (Required) text.
+          * Sets the input to required and renders the (*Required) text.
          */
         "required"?: boolean;
     }
@@ -1434,7 +1434,7 @@ declare namespace LocalJSX {
          */
         "accept"?: string;
         /**
-          * The text displayed on the button
+          * The text displayed on the button.
          */
         "buttonText"?: string;
         /**
@@ -1446,7 +1446,7 @@ declare namespace LocalJSX {
          */
         "error"?: string;
         /**
-          * The label for the button input.
+          * The label for the file input.
          */
         "label"?: string;
         /**
@@ -1462,7 +1462,7 @@ declare namespace LocalJSX {
          */
         "onVaChange"?: (event: CustomEvent<any>) => void;
         /**
-          * Set the input to required and render the (Required) text.
+          * Sets the input to required and renders the (*Required) text.
          */
         "required"?: boolean;
     }
