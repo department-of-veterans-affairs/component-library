@@ -1,0 +1,96 @@
+@use 'uswds-core/src/styles/functions' as *;
+@use '../tokens/margin' as *;
+@use './settings' as *;
+
+$u-margin-base: (
+  width: (
+    base: 'vads-margin',
+    modifiers: null,
+    values: map-collect($tokens-margin),
+    settings: $margin-settings,
+    property: 'margin',
+    type: 'utility',
+  ),
+);
+
+$u-margin-y: (
+  width: (
+    base: 'vads-margin-y',
+    modifiers: null,
+    values: map-collect($tokens-margin-y),
+    settings: $margin-settings,
+    property: (
+      margin-top,
+      margin-bottom,
+    ),
+    type: 'utility',
+  ),
+);
+
+$u-margin-top: (
+  width: (
+    base: 'vads-margin-top',
+    modifiers: null,
+    values: map-collect($tokens-margin-top),
+    settings: $margin-settings,
+    property: 'margin-top',
+    type: 'utility',
+  ),
+);
+
+$u-margin-bottom: (
+  width: (
+    base: 'vads-margin-bottom',
+    modifiers: null,
+    values: map-collect($tokens-margin-bottom),
+    settings: $margin-settings,
+    property: 'margin-bottom',
+    type: 'utility',
+  ),
+);
+
+$u-margin-x: (
+  width: (
+    base: 'vads-margin-x',
+    modifiers: null,
+    values: map-collect($tokens-margin-x),
+    settings: $margin-settings,
+    property: (
+      margin-left,
+      margin-right,
+    ),
+    type: 'utility',
+  ),
+);
+
+$u-margin-right: (
+  width: (
+    base: 'vads-margin-right',
+    modifiers: null,
+    values: map-collect($tokens-margin-right),
+    settings: $margin-settings,
+    property: 'margin-right',
+    type: 'utility',
+  ),
+);
+
+$u-margin-left: (
+  width: (
+    base: 'vads-margin-left',
+    modifiers: null,
+    values: map-collect($tokens-margin-left),
+    settings: $margin-settings,
+    property: 'margin-left',
+    type: 'utility',
+  ),
+);
+
+$u-margin: map-collect(
+  $u-margin-base,
+  $u-margin-y,
+  $u-margin-top,
+  $u-margin-bottom,
+  $u-margin-x,
+  $u-margin-right,
+  $u-margin-left
+);
