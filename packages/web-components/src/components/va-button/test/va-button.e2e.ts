@@ -156,8 +156,12 @@ describe('va-button', () => {
     expect(analyticsSpy).toHaveReceivedEventDetail({
       action: 'click',
       componentName: 'va-button',
-      // TODO: update analytics event details
-      details: {},
+      details: {
+        'button-background-color': '#0071bb',
+        'button-click-label': 'Edit',
+        'button-type': 'primary',
+        'event': 'cta-button-click',
+      },
     });
   });
 
