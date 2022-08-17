@@ -1,0 +1,66 @@
+@use 'uswds-core/src/styles/functions' as *;
+
+$tokens-margin: (
+  0: 0px,
+  1px: 1px,
+  0p25: 2px,
+  0p5: 4px,
+  1: 8px,
+  1p5: 12px,
+  2: 16px,
+  2p5: 20px,
+  3: 24px,
+  4: 32px,
+  5: 40px,
+  6: 48px,
+  7: 56px,
+  8: 64px,
+  9: 72px,
+);
+
+$tokens-negative-margin: (
+  neg9: -72px,
+  neg8: -64px,
+  neg7: -56px,
+  neg6: -48px,
+  neg5: -40px,
+  neg4: -32px,
+  neg3: -24px,
+  neg2p5: -20px,
+  neg2: -16px,
+  neg1p5: -12px,
+  neg1: -8px,
+  neg0p5: -4px,
+  neg0p25: -2px,
+  neg1px: -1px,
+);
+
+$tokens-margin-y: map-collect($tokens-margin, $tokens-negative-margin);
+
+$tokens-margin-top: map-collect($tokens-margin, $tokens-negative-margin);
+
+$tokens-margin-bottom: map-collect($tokens-margin, $tokens-negative-margin);
+
+$tokens-margin-x: map-collect(
+  $tokens-margin,
+  $tokens-negative-margin,
+  (
+    auto: -1px,
+  )
+);
+
+$tokens-margin-right: map-collect(
+  $tokens-margin,
+  $tokens-negative-margin,
+  (
+    auto: -1px,
+  )
+);
+
+$tokens-margin-left: map-collect(
+  $tokens-margin,
+  $tokens-negative-margin,
+  (
+    auto: -1px,
+  )
+);
