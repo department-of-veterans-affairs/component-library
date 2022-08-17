@@ -1,0 +1,50 @@
+@use 'uswds-core/src/styles/functions' as *;
+@use '../tokens/padding' as *;
+@use './settings' as *;
+
+$u-padding-base: (
+  padding: (
+    base: 'vads-padding',
+    modifiers: (
+      noModifier: '',
+      'top': '-top',
+      'bottom': '-bottom',
+      'right': '-right',
+      'left': '-left',
+    ),
+    values: map-collect($tokens-padding),
+    settings: $padding-settings,
+    property: 'padding',
+    type: 'utility',
+  ),
+);
+
+$u-padding-y: (
+  padding-y: (
+    base: 'vads-padding-y',
+    modifiers: null,
+    values: map-collect($tokens-padding),
+    settings: $padding-settings,
+    property: (
+      padding-top,
+      padding-bottom,
+    ),
+    type: 'utility',
+  ),
+);
+
+$u-padding-x: (
+  padding-x: (
+    base: 'vads-padding-x',
+    modifiers: null,
+    values: map-collect($tokens-padding),
+    settings: $padding-settings,
+    property: (
+      padding-left,
+      padding-right,
+    ),
+    type: 'utility',
+  ),
+);
+
+$u-padding: map-collect($u-padding-base, $u-padding-y, $u-padding-x);
