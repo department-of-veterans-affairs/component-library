@@ -5,12 +5,10 @@ import {
   Host, 
   h, 
   Prop, 
-  forceUpdate,
   Fragment,
   Event,
   EventEmitter
 } from '@stencil/core';
-import i18next from 'i18next';
 
 @Component({
   tag: 'va-file-input',
@@ -104,16 +102,6 @@ export class VaFileInput {
   private getButtonText = (): string => {
     return this.buttonText ? this.buttonText : 'Upload file';
   };
-
-  connectedCallback() {
-    i18next.on('languageChanged', () => {
-      forceUpdate(this.el);
-    });
-  }
-
-  disconnectedCallback() {
-    i18next.off('languageChanged');
-  }
 
   render() {
     const { 
