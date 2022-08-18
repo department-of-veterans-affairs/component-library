@@ -19,6 +19,12 @@ const DISMISSED_PROMO_BANNERS_LOCAL_STORAGE_KEY = 'DISMISSED_PROMO_BANNERS';
  * again. Alternatively you can change the id on the component since the new id
  * would not match the id in storage.
  */
+
+/**
+ * @componentName Promo banner
+ * @maturityCategory use
+ * @maturityLevel deployed
+ */
 @Component({
   tag: 'va-promo-banner',
   styleUrl: 'va-promo-banner.css',

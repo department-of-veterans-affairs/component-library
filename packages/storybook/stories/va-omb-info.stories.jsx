@@ -4,9 +4,9 @@ import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
 const ombInfoDocs = getWebComponentDocs('va-omb-info');
 
 export default {
-  title: 'Components/va-omb-info',
+  title: 'Components/OMB info',
   parameters: {
-    componentSubtitle: `OMB info web component`,
+    componentSubtitle: `va-omb-info web component`,
     docs: {
       page: () => <StoryDocs data={ombInfoDocs} />,
     },

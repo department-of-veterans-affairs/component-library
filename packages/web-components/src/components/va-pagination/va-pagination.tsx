@@ -9,6 +9,12 @@ import {
 } from '@stencil/core';
 import classnames from 'classnames';
 
+/**
+ * @componentName Pagination
+ * @maturityCategory use
+ * @maturityLevel deployed
+ */
+
 @Component({
   tag: 'va-pagination',
   styleUrl: 'va-pagination.css',

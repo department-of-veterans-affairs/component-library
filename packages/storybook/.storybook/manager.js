@@ -1,11 +1,17 @@
 import { addons } from '@storybook/addons';
 import React from 'react';
+import webComponentDocs from '@department-of-veterans-affairs/web-components/component-docs.json';
 import { additionalDocs } from '../stories/additional-docs';
 import { category } from '../stories/maturity-scale';
-import { getMaturityScale, getWebComponentDocs } from '../stories/wc-helpers';
+import { getMaturityScale } from '../stories/wc-helpers';
 
+/**
+ * Return the maturity category matching a specific component name
+ */
 const getMaturityCategory = (componentName) => {
-  const componentDocs = getWebComponentDocs(componentName)
+  const componentDocs = webComponentDocs.components.filter(comp => 
+    comp.docsTags.some(tag => tag.text === componentName))[0];
+  
   const maturityScale = getMaturityScale(componentDocs?.docsTags);
   return maturityScale['category'];
 }

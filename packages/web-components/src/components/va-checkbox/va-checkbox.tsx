@@ -11,6 +11,9 @@ import {
 
 /**
  * @nativeHandler onBlur
+ * @componentName Checkbox
+ * @maturityCategory use
+ * @maturityLevel deployed
  */
 @Component({
   tag: 'va-checkbox',

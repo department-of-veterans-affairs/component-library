@@ -7,6 +7,12 @@ import {
   h,
 } from '@stencil/core';
 
+/**
+ * @componentName Telephone
+ * @maturityCategory use
+ * @maturityLevel best_practice
+ */
+
 @Component({
   tag: 'va-telephone',
   styleUrl: 'va-telephone.css',

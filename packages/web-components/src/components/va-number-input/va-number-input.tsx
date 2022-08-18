@@ -14,6 +14,9 @@ import i18next from 'i18next';
 /**
  * @nativeHandler onInput
  * @nativeHandler onBlur
+ * @componentName Number input
+ * @maturityCategory use
+ * @maturityLevel deployed
  */
 @Component({
   tag: 'va-number-input',

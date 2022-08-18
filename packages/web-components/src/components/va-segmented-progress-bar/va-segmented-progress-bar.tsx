@@ -1,5 +1,11 @@
 import { Component, Event, EventEmitter, Host, Prop, h } from '@stencil/core';
 
+/**
+ * @componentName Progress bar - segmented
+ * @maturityCategory use
+ * @maturityLevel deployed
+ */
+
 @Component({
   tag: 'va-segmented-progress-bar',
   styleUrl: 'va-segmented-progress-bar.css',

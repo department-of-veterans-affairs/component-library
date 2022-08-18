@@ -16,6 +16,10 @@ export const additionalDocs = {
     maturityCategory: CAUTION,
     maturityLevel: AVAILABLE,
   },
+  'Accordion': {
+    maturityCategory: USE,
+    maturityLevel: BEST_PRACTICE,
+  },
   // MDX
   'Address block': {
     guidanceHref: 'address-block',
@@ -93,57 +97,26 @@ export const additionalDocs = {
     maturityCategory: DONT_USE,
     maturityLevel: DEPRECATED,
   },
+  'Number input': {
+    guidanceHref: 'form/number-input',
+    maturityCategory: USE,
+    maturityLevel: DEPLOYED,
+  },
   'NumberInput - React': {
     maturityCategory: DONT_USE,
     maturityLevel: DEPRECATED,
   },
-  'OMBInfo': {
+  'OMBInfo - React': {
     guidanceHref: 'omb-info',
     guidanceName: 'OMB info',
     maturityCategory: USE,
     maturityLevel: DEPLOYED,
   },
-  'Pagination - React': {
-    maturityCategory: DONT_USE,
-    maturityLevel: DEPRECATED,
-  },
-  'Privacy agreement': {
-    maturityCategory: CAUTION,
-    maturityLevel: AVAILABLE,
-  },
-  'ProgressButton': {
-    guidanceHref: 'button/progress-button',
-    guidanceName: 'Progress button',
-    maturityCategory: USE,
-    maturityLevel: DEPLOYED,
-  },
-  'RadioButtons - React': {
-    maturityCategory: DONT_USE,
-    maturityLevel: DEPRECATED,
-  },
-  'Select - React': {
-    maturityCategory: DONT_USE,
-    maturityLevel: DEPRECATED,
-  },
-  // MDX
-  'Sidenav': {
-    guidanceHref: 'sidenav',
-    guidanceName: 'Sidenav',
+  'On this page': {
     maturityCategory: USE,
     maturityLevel: BEST_PRACTICE,
   },
-  'System down view': {
-    maturityCategory: CAUTION,
-    maturityLevel: AVAILABLE,
-  },
-  'Table - React': {
-    maturityCategory: DONT_USE,
-    maturityLevel: DEPRECATED,
-  },
-  // MDX
-  'Tag': {
-    guidanceHref: 'tag',
-    guidanceName: 'Tag',
+  'Pagination': {
     maturityCategory: USE,
     maturityLevel: DEPLOYED,
   },
@@ -198,8 +171,6 @@ export const additionalDocs = {
   },
   'va-checkbox-group': {
     guidanceHref: 'form/checkbox',
-    maturityCategory: USE,
-    maturityLevel: DEPLOYED,
   },
   'va-date': {
     guidanceHref: 'form/date-input',

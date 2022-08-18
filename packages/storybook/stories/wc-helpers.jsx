@@ -15,11 +15,10 @@ import { additionalDocs } from './additional-docs';
 import { category, level } from './maturity-scale';
 
 /**
- * Return the JSON object matching a specific component name
+ * Return the JSON object matching a specific component tag
  */
-export const getWebComponentDocs = componentName =>
-  webComponentDocs.components.filter(comp => 
-    comp.docsTags.some(tag => tag.text === componentName))[0];
+ export const getWebComponentDocs = tag =>
+  webComponentDocs.components.filter(comp => comp.tag === tag)[0];
 
 /**
  * Construct an object appropriate for Storybook subcomponent documentation based

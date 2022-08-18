@@ -21,7 +21,11 @@ if (Build.isTesting) {
 /**
  * @nativeHandler onInput
  * @nativeHandler onBlur
+ * @componentName Textarea
+ * @maturityCategory use
+ * @maturityLevel deployed
  */
+ 
 @Component({
   tag: 'va-textarea',
   styleUrl: 'va-textarea.css',

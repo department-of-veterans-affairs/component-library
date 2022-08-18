@@ -8,15 +8,14 @@ import {
 
 const accordionDocs = getWebComponentDocs('va-accordion');
 const accordionItem = getWebComponentDocs('va-accordion-item');
-const componentName = 'Accordion';
 
 export default {
-  title: `Components/${componentName}`,
+  title: 'Components/Accordion',
   subcomponents: componentStructure(accordionItem),
   parameters: {
     componentSubtitle: `va-accordion web component`,
     docs: {
-      page: () => <StoryDocs componentName={componentName} data={accordionDocs} />,
+      page: () => <StoryDocs data={accordionDocs} />,
     },
   },
 };

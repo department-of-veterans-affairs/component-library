@@ -18,6 +18,12 @@ const DISMISSED_BANNERS_KEY = 'DISMISSED_BANNERS';
  * DISMISSED_BANNERS Key exists. If it does right click and delete it and
  * refresh your page to see the banners again.
  */
+
+/**
+ * @componentName Banner
+ * @maturityCategory use
+ * @maturityLevel deployed
+ */
 @Component({
   tag: 'va-banner',
   styleUrl: 'va-banner.css',

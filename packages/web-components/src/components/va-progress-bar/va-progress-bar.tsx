@@ -1,5 +1,11 @@
 import { Component, Event, EventEmitter, Host, Prop, h } from '@stencil/core';
 
+/**
+ * @componentName Progress bar - activity
+ * @maturityCategory use
+ * @maturityLevel deployed
+ */
+
 @Component({
   tag: 'va-progress-bar',
   styleUrl: 'va-progress-bar.css',
