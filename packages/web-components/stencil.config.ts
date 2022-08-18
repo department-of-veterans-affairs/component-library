@@ -10,10 +10,12 @@ export const config: Config = {
   globalStyle: 'src/global/main.css',
   plugins: [
     sass({
-      includePaths: ["../../node_modules/@uswds/uswds/packages/"],
-      // injectGlobalPaths: [
-      //   'src/global/settings.scss',
-      // ]
+      includePaths: [
+        "../../node_modules/@uswds/uswds/packages/",
+      ],
+      injectGlobalPaths: [
+        'src/global/settings.scss',
+      ]
     }),
     postcss({
       plugins: [url({
