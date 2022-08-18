@@ -15,10 +15,11 @@ import { additionalDocs } from './additional-docs';
 import { category, level } from './maturity-scale';
 
 /**
- * Return the JSON object matching a specific component tag
+ * Return the JSON object matching a specific component name
  */
-export const getWebComponentDocs = tag =>
-  webComponentDocs.components.filter(comp => comp.tag === tag)[0];
+export const getWebComponentDocs = componentName =>
+  webComponentDocs.components.filter(comp => 
+    comp.docsTags.some(tag => tag.text === componentName))[0];
 
 /**
  * Construct an object appropriate for Storybook subcomponent documentation based
@@ -136,7 +137,7 @@ const getDocsTagValue = (tagName, docsTags = []) => {
     .map(item => item.text)
 }
 
-const getMaturityScale = (docsTags = []) => {
+export const getMaturityScale = (docsTags = []) => {
   const maturityCategory = getDocsTagValue('maturityCategory', docsTags).toString();
   const maturityLevel = getDocsTagValue('maturityLevel', docsTags).toString();
   return {
@@ -209,9 +210,7 @@ function capitalize(text) {
  * - https://stenciljs.com/docs/docs-json#custom-jsdocs-tags
  */
 function NativeHandlers({ docsTags = [] }) {
-  const handlers = docsTags
-    .filter(item => item.name === 'nativeHandler')
-    .map(item => item.text);
+  const handlers = getDocsTagValue('nativeHandler', docsTags);
 
   if (!handlers.length) return null;
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
 
-const buttonDocs = getWebComponentDocs('va-button');
+const buttonDocs = getWebComponentDocs('Button');
 
 export default {
   title: 'Components/Button',
