@@ -8,7 +8,7 @@ export default {
   parameters: {
     componentSubtitle: 'Select React component',
     docs: {
-      page: () => <StoryDocs componentName="Select" />,
+      page: () => <StoryDocs componentName="Select - React" />,
     },
   },
 };

@@ -5,13 +5,6 @@ const { AVAILABLE, BEST_PRACTICE, CANDIDATE, DEPLOYED, DEPRECATED, PROPOSED } =
   level;
 
 export const additionalDocs = {
-  // MDX
-  'Action link': {
-    guidanceHref: 'link/action',
-    guidanceName: 'Action link',
-    maturityCategory: USE,
-    maturityLevel: DEPLOYED,
-  },
   'Accept terms prompt': {
     maturityCategory: CAUTION,
     maturityLevel: AVAILABLE,
@@ -26,13 +19,6 @@ export const additionalDocs = {
     guidanceName: 'Address block',
     maturityCategory: USE,
     maturityLevel: DEPLOYED,
-  },
-  // MDX
-  'Button - CSS': {
-    guidanceHref: 'button',
-    guidanceName: 'Button',
-    maturityCategory: DONT_USE,
-    maturityLevel: DEPRECATED,
   },
   'Breadcrumbs - React': {
     maturityCategory: DONT_USE,
@@ -85,13 +71,20 @@ export const additionalDocs = {
     maturityCategory: CAUTION,
     maturityLevel: AVAILABLE,
   },
-  'MaintenanceBanner': {
-    maturityCategory: CAUTION,
-    maturityLevel: AVAILABLE,
-  },
-  'MonthYear': {
+  // MDX
+  'Link - Action': {
+    guidanceHref: 'link/action',
+    guidanceName: 'Action link',
     maturityCategory: USE,
     maturityLevel: DEPLOYED,
+  },
+  'MaintenanceBanner': {
+    maturityCategory: USE,
+    maturityLevel: DEPLOYED,
+  },
+  'MonthYear - React': {
+    maturityCategory: DONT_USE,
+    maturityLevel: DEPRECATED,
   },
   'Modal - React': {
     maturityCategory: DONT_USE,
@@ -106,7 +99,7 @@ export const additionalDocs = {
     maturityCategory: DONT_USE,
     maturityLevel: DEPRECATED,
   },
-  'OMBInfo - React': {
+  'OMB info - React': {
     guidanceHref: 'omb-info',
     guidanceName: 'OMB info',
     maturityCategory: USE,

@@ -8,7 +8,7 @@ export default {
   parameters: {
     componentSubtitle: 'Checkbox React component',
     docs: {
-      page: () => <StoryDocs componentName="Checkbox" />,
+      page: () => <StoryDocs componentName="Checkbox - React" />,
     },
   },
 };

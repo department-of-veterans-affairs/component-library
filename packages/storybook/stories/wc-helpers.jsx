@@ -246,9 +246,9 @@ function CanvasLink() {
 export function StoryDocs({ componentName, data, children }) {
   const component = componentName || data?.tag;
   const componentDocs = additionalDocs?.[component];
-  const componentData = data ? { ...data, ...componentDocs } : null;
+  const componentData = data || componentDocs ? { ...data, ...componentDocs } : null;
 
-  const maturityScale = getMaturityScale(data.docsTags);
+  const maturityScale = componentDocs?.maturityCategory ? componentDocs : getMaturityScale(data.docsTags);
 
   const maturityCategory = maturityScale.category ?? componentDocs?.maturityCategory;
   const maturityLevel = maturityScale.level ?? componentDocs?.maturityLevel;
@@ -256,8 +256,8 @@ export function StoryDocs({ componentName, data, children }) {
   const _componentName = data?.tag?.slice('va-'.length);
   // Default the guidance values to be based on the web component's
   // tag name where possible
-  const guidanceHref = componentDocs?._componentName;
-  const guidanceName = capitalize(_componentName)?.replaceAll('-',' ');
+  const guidanceHref = componentDocs?.guidanceHref ?? _componentName;
+  const guidanceName = componentDocs?.guidanceName ?? capitalize(_componentName)?.replaceAll('-', ' ')
 
   return (
     <>

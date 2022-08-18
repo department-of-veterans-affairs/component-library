@@ -8,7 +8,7 @@ export default {
   parameters: {
     componentSubtitle: 'Date React component',
     docs: {
-      page: () => <StoryDocs componentName="Date" />,
+      page: () => <StoryDocs componentName="Date - React" />,
     },
   },
 };
