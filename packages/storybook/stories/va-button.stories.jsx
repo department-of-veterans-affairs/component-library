@@ -5,6 +5,7 @@ const buttonDocs = getWebComponentDocs('va-button');
 
 export default {
   title: 'Components/Button',
+  id: 'components/va-button',
   parameters: {
     componentSubtitle: `va-button web component`,
     docs: {

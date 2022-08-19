@@ -4,14 +4,14 @@ import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
 const segmentedProgressBarDocs = getWebComponentDocs(
   'va-segmented-progress-bar',
 );
-const componentName = 'Progress bar - segmented';
 
 export default {
-  title: `Components/${componentName}`,
+  title: 'Components/Progress bar - segmented',
+  id: 'components/va-segmented-progress-bar',
   parameters: {
     componentSubtitle: `va-segmented-progress-bar web component`,
     docs: {
-      page: () => <StoryDocs componentName={componentName} data={segmentedProgressBarDocs} />,
+      page: () => <StoryDocs data={segmentedProgressBarDocs} />,
     },
   },
 };

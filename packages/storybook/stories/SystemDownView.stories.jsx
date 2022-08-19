@@ -5,6 +5,7 @@ import { StoryDocs } from './wc-helpers';
 export default {
   title: 'Components/System down view',
   component: SystemDownView,
+  id: 'components/systemdownview',
   parameters: {
     componentSubtitle: 'System down view React component',
     docs: {

@@ -5,6 +5,7 @@ import { StoryDocs } from './wc-helpers';
 export default {
   title: 'Components/Expanding group',
   component: ExpandingGroup,
+  id: 'components/expandinggroup',
   parameters: {
     componentSubtitle: 'Expanding group React component',
     docs: {

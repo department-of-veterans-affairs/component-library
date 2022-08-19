@@ -4,14 +4,14 @@ import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
 
 VaPagination.displayName = 'VaPagination';
 const paginationDocs = getWebComponentDocs('va-pagination');
-const componentName = 'Pagination';
 
 export default {
-  title: `Components/${componentName}`,
+  title: 'Components/Pagination',
+  id: 'components/va-pagination',
   parameters: {
     componentSubtitle: `va-pagination web component`,
     docs: {
-      page: () => <StoryDocs componentName={componentName} data={paginationDocs} />,
+      page: () => <StoryDocs data={paginationDocs} />,
     },
   },
 };

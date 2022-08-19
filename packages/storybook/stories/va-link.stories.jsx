@@ -5,6 +5,7 @@ const linkDocs = getWebComponentDocs('va-link');
 
 export default {
   title: 'Components/Link',
+  id: 'components/va-link',
   parameters: {
     componentSubtitle: `va-link web component`,
     docs: {

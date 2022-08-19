@@ -5,6 +5,7 @@ import { StoryDocs } from './wc-helpers';
 export default {
   title: 'Components/Icons/Icon - user',
   component: IconUser,
+  id: 'components/icons/iconuser',
   argTypes: {
     color: { control: 'color' },
   },

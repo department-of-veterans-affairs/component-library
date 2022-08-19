@@ -5,6 +5,7 @@ import { StoryDocs } from './wc-helpers';
 export default {
   title: 'Components/Icons/Icon - search',
   component: IconSearch,
+  id: 'componets/icons/iconsearch',
   argTypes: {
     color: { control: 'color' },
   },

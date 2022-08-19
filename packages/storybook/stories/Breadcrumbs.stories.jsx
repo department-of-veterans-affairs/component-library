@@ -5,6 +5,7 @@ import { StoryDocs } from './wc-helpers';
 export default {
   title: 'Deprecated/Breadcrumbs - React',
   component: Breadcrumbs,
+  id: 'components/breadcrumbs',
   parameters: {
     componentSubtitle: 'Breadcrumbs React component',
     docs: {

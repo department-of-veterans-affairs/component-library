@@ -5,6 +5,7 @@ import { StoryDocs } from './wc-helpers';
 export default {
   title: 'Components/Dropdown panel',
   component: DropDownPanel,
+  id: 'components/dropdownpanel',
   parameters: {
     componentSubtitle: 'Dropdown panel React component',
     docs: {

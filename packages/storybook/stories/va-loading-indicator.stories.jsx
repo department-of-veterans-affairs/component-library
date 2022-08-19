@@ -3,14 +3,14 @@ import React, { useState } from 'react';
 import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
 
 const loadingIndicatorDocs = getWebComponentDocs('va-loading-indicator');
-const componentName = 'Loading indicator';
 
 export default {
-  title: `Components/${componentName}`,
+  title: 'Components/Loading indicator',
+  id: 'components/va-loading-indicator',
   parameters: {
     componentSubtitle: `va-loading-indicator web component`,
     docs: {
-      page: () => <StoryDocs componentName={componentName} data={loadingIndicatorDocs} />,
+      page: () => <StoryDocs data={loadingIndicatorDocs} />,
     },
     actions: {
       handles: ['component-library-analytics'],

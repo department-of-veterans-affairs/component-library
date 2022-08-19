@@ -5,6 +5,7 @@ import { StoryDocs } from './wc-helpers';
 export default {
   title: 'Components/Privacy agreement',
   component: PrivacyAgreement,
+  id: 'components/privacyagreement',
   parameters: {
     componentSubtitle: 'Privacy agreement React component',
     docs: {

@@ -3,7 +3,8 @@ import OMBInfo from '../../react-components/src/components/OMBInfo/OMBInfo';
 import { StoryDocs } from './wc-helpers';
 
 export default {
-  title: 'Deprecated/OMB info - React',
+  title: 'components/OMB info - React',
+  id: 'components/ombinfo',
   component: OMBInfo,
   parameters: {
     componentSubtitle: 'OMB info React component',

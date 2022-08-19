@@ -3,14 +3,14 @@ import React from 'react';
 import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
 
 const textareaDocs = getWebComponentDocs('va-textarea');
-const componentName = 'Textarea';
 
 export default {
-  title: `Components/${componentName}`,
+  title: `Components/Textarea`,
+  id: 'components/va-textarea',
   parameters: {
     componentSubtitle: `va-textarea web component`,
     docs: {
-      page: () => <StoryDocs componentName={componentName} data={textareaDocs} />,
+      page: () => <StoryDocs data={textareaDocs} />,
     },
   },
 };

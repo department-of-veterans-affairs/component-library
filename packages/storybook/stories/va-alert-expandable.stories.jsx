@@ -2,14 +2,14 @@ import React from 'react';
 import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
 
 const alertExpandableDocs = getWebComponentDocs('va-alert-expandable');
-const componentName = 'Alert - expandable';
 
 export default {
-  title: `Components/${componentName}`,
+  title: 'Components/Alert - expandable',
+  id: 'components/va-alert-expandable',
   parameters: {
     componentSubtitle: `va-alert-expandable web component`,
     docs: {
-      page: () => <StoryDocs componentName={componentName} data={alertExpandableDocs} />,
+      page: () => <StoryDocs data={alertExpandableDocs} />,
     },
     actions: {
       handles: ['component-library-analytics'],

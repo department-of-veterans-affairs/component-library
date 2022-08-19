@@ -6,14 +6,14 @@ import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
 VaButtonPair.displayName = 'VaButtonPair';
 
 const buttonPairDocs = getWebComponentDocs('va-button-pair');
-const componentName = 'Button pair';
 
 export default {
-  title: `Components/${componentName}`,
+  title: 'Components/Button pair',
+  id: 'components/va-button-pair',
   parameters: {
     componentSubtitle: `va-button-pair web component`,
     docs: {
-      page: () => <StoryDocs componentName={componentName} data={buttonPairDocs} />,
+      page: () => <StoryDocs data={buttonPairDocs} />,
     },
   },
 };

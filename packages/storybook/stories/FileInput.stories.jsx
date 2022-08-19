@@ -5,6 +5,7 @@ import { StoryDocs } from './wc-helpers';
 export default {
   title: 'Components/File input',
   component: FileInput,
+  id: 'components/fileinput',
   parameters: {
     componentSubtitle: 'File input React component',
     docs: {

@@ -5,6 +5,7 @@ import { StoryDocs } from './wc-helpers';
 export default {
   title: 'Components/Icons/Icon - base',
   component: IconBase,
+  id: 'components/icons/iconbase',
   parameters: {
     componentSubtitle: 'Icon base wrapper',
     docs: {

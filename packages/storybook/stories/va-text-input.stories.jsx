@@ -3,14 +3,14 @@ import React, { useState } from 'react';
 import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
 
 const textInputDocs = getWebComponentDocs('va-text-input');
-const componentName = 'Text input';
 
 export default {
-  title: `Components/${componentName}`,
+  title: `Components/Text input`,
+  id: 'components/va-text-input',
   parameters: {
     componentSubtitle: `va-text-input web component`,
     docs: {
-      page: () => <StoryDocs componentName={componentName} data={textInputDocs} />,
+      page: () => <StoryDocs data={textInputDocs} />,
     },
   },
   argTypes: {

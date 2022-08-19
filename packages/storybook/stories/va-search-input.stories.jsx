@@ -5,14 +5,14 @@ import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
 VaSearchInput.displayName = 'VaSearchInput';
 
 const searchDocs = getWebComponentDocs('va-search-input');
-const componentName = 'Search input';
 
 export default {
-  title: `Components/${componentName}`,
+  title: 'Components/Search input',
+  id: 'components/va-search-input',
   parameters: {
     componentSubtitle: 'va-search-input web component',
     docs: {
-      page: () => <StoryDocs componentName={componentName} data={searchDocs} />,
+      page: () => <StoryDocs data={searchDocs} />,
     },
   },
 };

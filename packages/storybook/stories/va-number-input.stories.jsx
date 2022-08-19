@@ -2,14 +2,14 @@ import React, { useEffect, useState } from 'react';
 import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
 
 const numberInputDocs = getWebComponentDocs('va-number-input');
-const componentName = 'Number input';
 
 export default {
-  title: `Components/${componentName}`,
+  title: 'Components/Number input',
+  id: 'components/va-number-input',
   parameters: {
     componentSubtitle: `va-number-input web component`,
     docs: {
-      page: () => <StoryDocs componentName={componentName} data={numberInputDocs} />,
+      page: () => <StoryDocs data={numberInputDocs} />,
     },
   },
   argTypes: {

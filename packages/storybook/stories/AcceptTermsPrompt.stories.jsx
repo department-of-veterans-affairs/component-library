@@ -5,6 +5,7 @@ import { StoryDocs } from './wc-helpers';
 export default {
   title: 'Components/Accept terms prompt',
   component: AcceptTermsPrompt,
+  id: 'components/accepttermsprompt',
   parameters: {
     componentSubtitle: 'Accept terms prompt React component',
     docs: {

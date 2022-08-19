@@ -5,6 +5,7 @@ import { StoryDocs } from './wc-helpers';
 export default {
   title: 'Components/Help menu',
   component: HelpMenu,
+  id: 'components/helpmenu',
   parameters: {
     componentSubtitle: 'Help menu React component',
     docs: {

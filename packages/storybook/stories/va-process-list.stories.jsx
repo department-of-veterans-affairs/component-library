@@ -3,14 +3,14 @@ import React from 'react';
 import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
 
 const processListDocs = getWebComponentDocs('va-process-list');
-const componentName = 'Process list';
 
 export default {
-  title: `Components/${componentName}`,
+  title: 'Components/Process list',
+  id: 'components/va-process-list',
   parameters: {
     componentSubtitle: `va-process-list web component`,
     docs: {
-      page: () => <StoryDocs componentName={componentName} data={processListDocs} />,
+      page: () => <StoryDocs data={processListDocs} />,
     },
   },
 };
