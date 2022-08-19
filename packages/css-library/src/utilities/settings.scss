@@ -43,6 +43,15 @@ $flex-settings: (
   visited: false,
 ) !default;
 
+$flex-grid-settings: (
+  output: true,
+  responsive: true,
+  active: false,
+  focus: false,
+  hover: false,
+  visited: false,
+) !default;
+
 $font-settings: (
   output: true,
   responsive: false,
