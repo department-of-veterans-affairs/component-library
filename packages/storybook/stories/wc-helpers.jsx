@@ -173,7 +173,7 @@ export function MaturityScale({ category, level }) {
 }
 
 export function CustomEventsDescription({ data }) {
-  if (!data || (data?.events?.length === 0 && data?.listeners?.length === 0)) {
+  if (!data?.events || (data?.events?.length === 0 && data?.listeners?.length === 0)) {
     return null;
   }
 
