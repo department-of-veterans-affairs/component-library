@@ -24,6 +24,7 @@ if (Build.isTesting) {
  * @componentName Textarea
  * @maturityCategory use
  * @maturityLevel deployed
+ * @guidanceHref form/textarea
  */
  
 @Component({

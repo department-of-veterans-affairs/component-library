@@ -9,10 +9,6 @@ export const additionalDocs = {
     maturityCategory: CAUTION,
     maturityLevel: AVAILABLE,
   },
-  'Accordion': {
-    maturityCategory: USE,
-    maturityLevel: BEST_PRACTICE,
-  },
   // MDX
   'Address block': {
     guidanceHref: 'address-block',
@@ -50,6 +46,7 @@ export const additionalDocs = {
   'File input': {
     maturityCategory: USE,
     maturityLevel: DEPLOYED,
+    guidanceHref: 'form/file-input',
   },
   'Help menu': {
     maturityCategory: CAUTION,
@@ -81,6 +78,7 @@ export const additionalDocs = {
   'Banner - Maintenance': {
     maturityCategory: USE,
     maturityLevel: DEPLOYED,
+    guidanceHref: 'banner/maintenance',
   },
   'MonthYear - React': {
     maturityCategory: DONT_USE,
@@ -92,8 +90,6 @@ export const additionalDocs = {
   },
   'Number input': {
     guidanceHref: 'form/number-input',
-    maturityCategory: USE,
-    maturityLevel: DEPLOYED,
   },
   'NumberInput - React': {
     maturityCategory: DONT_USE,
@@ -102,140 +98,63 @@ export const additionalDocs = {
   'OMB info - React': {
     guidanceHref: 'omb-info',
     guidanceName: 'OMB info',
+    maturityCategory: USE,
+    maturityLevel: DEPLOYED,
+  },
+  'Pagination - React': {
     maturityCategory: DONT_USE,
     maturityLevel: DEPRECATED,
+  },
+  'Privacy agreement': {
+    maturityCategory: CAUTION,
+    maturityLevel: AVAILABLE,
+  },
+  'Progress bar - segmented': {
+    guidanceHref: 'form/progress-bar-segmented',
+  },
+  'Promo banner': {
+    guidanceHref: 'promo-banners',
+  },
+  'Radio button': {
+    guidanceHref: 'form/radio-button',
+    guidanceName: 'Radio button',
+  },
+  'RadioButtons - React': {
+    maturityCategory: DONT_USE,
+    maturityLevel: DEPRECATED,
+  },
+  'Select': {
+    guidanceHref: 'form/select',
+    guidanceName: 'Select box',
+  },
+  'Select - React': {
+    maturityCategory: DONT_USE,
+    maturityLevel: DEPRECATED,
+  },
+  // MDX
+  'Sidenav': {
+    guidanceHref: 'sidenav',
+    guidanceName: 'Sidenav',
+    maturityCategory: USE,
+    maturityLevel: BEST_PRACTICE,
+  },
+  'System down view': {
+    maturityCategory: CAUTION,
+    maturityLevel: AVAILABLE,
+  },
+  'Table - React': {
+    maturityCategory: DONT_USE,
+    maturityLevel: DEPRECATED,
+  },
+  // MDX
+  'Tag': {
+    guidanceHref: 'tag',
+    guidanceName: 'Tag',
+    maturityCategory: USE,
+    maturityLevel: DEPLOYED,
   },
   'TextInput - React': {
     maturityCategory: DONT_USE,
     maturityLevel: DEPRECATED,
-  },
-  'va-accordion': {
-    maturityCategory: USE,
-    maturityLevel: BEST_PRACTICE,
-  },
-  'va-additional-info': {
-    maturityCategory: USE,
-    maturityLevel: DEPLOYED,
-  },
-  'va-alert': {
-    maturityCategory: USE,
-    maturityLevel: BEST_PRACTICE,
-  },
-  'va-alert-expandable': {
-    maturityCategory: CAUTION,
-    maturityLevel: CANDIDATE,
-  },
-  'va-back-to-top': {
-    maturityCategory: USE,
-    maturityLevel: DEPLOYED,
-  },
-  'va-banner': {
-    maturityCategory: USE,
-    maturityLevel: DEPLOYED,
-  },
-  'va-breadcrumbs': {
-    maturityCategory: USE,
-    maturityLevel: DEPLOYED,
-  },
-  'va-button': {
-    maturityCategory: CAUTION,
-    maturityLevel: CANDIDATE,
-  },
-  'va-button-pair': {
-    maturityCategory: CAUTION,
-    maturityLevel: CANDIDATE,
-  },
-  'va-checkbox': {
-    guidanceHref: 'form/checkbox',
-    maturityCategory: USE,
-    maturityLevel: DEPLOYED,
-  },
-  'va-checkbox-group': {
-    guidanceHref: 'form/checkbox',
-  },
-  'va-date': {
-    guidanceHref: 'form/date-input',
-    maturityCategory: USE,
-    maturityLevel: DEPLOYED,
-  },
-  'va-memorable-date': {
-    guidanceHref: 'form/memorable-date',
-    maturityCategory: CAUTION,
-    maturityLevel: CANDIDATE,
-  },
-  'va-featured-content': {
-    maturityCategory: USE,
-    maturityLevel: DEPLOYED,
-  },
-  'va-link': {
-    maturityCategory: CAUTION,
-    maturityLevel: CANDIDATE,
-  },
-  'va-loading-indicator': {
-    maturityCategory: USE,
-    maturityLevel: BEST_PRACTICE,
-  },
-  'va-modal': {
-    maturityCategory: USE,
-    maturityLevel: DEPLOYED,
-  },
-  'va-number-input': {
-    guidanceHref: 'form/number-input',
-    maturityCategory: USE,
-    maturityLevel: DEPLOYED,
-  },
-  'va-omb-info': {
-    maturityCategory: CAUTION,
-    maturityLevel: CANDIDATE,
-  },
-  'va-on-this-page': {
-    maturityCategory: USE,
-    maturityLevel: BEST_PRACTICE,
-  },
-  'va-pagination': {
-    maturityCategory: USE,
-    maturityLevel: DEPLOYED,
-  },
-  'va-process-list': {
-    maturityCategory: USE,
-    maturityLevel: DEPLOYED,
-  },
-  'va-progress-bar': {
-    maturityCategory: USE,
-    maturityLevel: DEPLOYED,
-  },
-  'va-promo-banner': {
-    guidanceHref: 'promo-banners',
-    maturityCategory: USE,
-    maturityLevel: DEPLOYED,
-  },
-  'va-radio': {
-    guidanceHref: 'form/radio-button',
-    guidanceName: 'Radio button',
-    maturityCategory: USE,
-    maturityLevel: DEPLOYED,
-  },
-  'va-search-input': {
-    maturityCategory: USE,
-    maturityLevel: DEPLOYED,
-  },
-  'va-segmented-progress-bar': {
-    guidanceHref: 'form/progress-bar-segmented',
-    maturityCategory: USE,
-    maturityLevel: DEPLOYED,
-  },
-  'va-select': {
-    guidanceHref: 'form/select',
-    guidanceName: 'Select box',
-    maturityCategory: USE,
-    maturityLevel: DEPLOYED,
-  },
-  'va-table': {
-    maturityCategory: USE,
-    maturityLevel: BEST_PRACTICE,
-  },
-  'va-telephone': {
-    maturityCategory: USE,
-    maturityLevel: BEST_PRACTICE,
   },
 };

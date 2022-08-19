@@ -4,6 +4,7 @@ import { Component, Event, EventEmitter, Host, Prop, h } from '@stencil/core';
  * @componentName Progress bar - segmented
  * @maturityCategory use
  * @maturityLevel deployed
+ * @guidanceHref form/progress-bar-segmented
  */
 
 @Component({

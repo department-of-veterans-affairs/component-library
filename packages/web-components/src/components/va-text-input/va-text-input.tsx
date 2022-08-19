@@ -24,6 +24,7 @@ if (Build.isTesting) {
  * @componentName Text input
  * @maturityCategory use
  * @maturityLevel deployed
+ * @guidanceHref form/text-input
  */
  
 @Component({

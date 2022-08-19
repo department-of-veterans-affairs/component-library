@@ -17,6 +17,7 @@ import { getSlottedNodes } from '../../utils/utils';
  * @componentName Radio button
  * @maturityCategory use
  * @maturityLevel deployed
+ * @guidanceHref form/radio-button
  */
 
 @Component({

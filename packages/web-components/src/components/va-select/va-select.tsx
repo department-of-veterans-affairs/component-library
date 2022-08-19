@@ -19,6 +19,7 @@ import { getSlottedNodes } from '../../utils/utils';
  * @componentName Select
  * @maturityCategory use
  * @maturityLevel deployed
+ * @guidanceHref form/select
  */
 
 @Component({

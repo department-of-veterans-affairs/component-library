@@ -15,6 +15,7 @@ import {
  * @componentName Checkbox group
  * @maturityCategory use
  * @maturityLevel deployed
+ * @guidanceHref form/checkbox
  */
 @Component({
   tag: 'va-checkbox-group',

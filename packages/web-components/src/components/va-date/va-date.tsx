@@ -27,6 +27,7 @@ import {
  * @componentName Date input
  * @maturityCategory use
  * @maturityLevel deployed
+ * @guidanceHref form/date-input
  */
 @Component({
   tag: 'va-date',

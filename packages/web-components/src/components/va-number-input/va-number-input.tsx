@@ -17,6 +17,7 @@ import i18next from 'i18next';
  * @componentName Number input
  * @maturityCategory use
  * @maturityLevel deployed
+ * @guidanceHref form/number-input
  */
 @Component({
   tag: 'va-number-input',

@@ -4,6 +4,7 @@ import { Component, Event, EventEmitter, Host, h, Prop } from '@stencil/core';
  * @componentName Button pair
  * @maturityCategory caution
  * @maturityLevel candidate
+ * @guidanceHref button/button-pair
  */
 @Component({
   tag: 'va-button-pair',

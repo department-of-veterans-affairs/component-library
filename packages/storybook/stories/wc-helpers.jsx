@@ -256,8 +256,8 @@ export function StoryDocs({ componentName, data, children }) {
   const _componentName = data?.tag?.slice('va-'.length);
   // Default the guidance values to be based on the web component's
   // tag name where possible
-  const guidanceHref = componentDocs?.guidanceHref ?? _componentName;
-  const guidanceName = componentDocs?.guidanceName ?? capitalize(_componentName)?.replaceAll('-', ' ')
+  const guidanceHref = getDocsTagValue('guidanceHref', data?.docsTags)[0] ?? (componentDocs?.guidanceHref ?? _componentName);
+  const guidanceName = componentDocs?.guidanceName ?? capitalize(_componentName)?.replaceAll('-', ' ') ?? componentName;
 
   return (
     <>

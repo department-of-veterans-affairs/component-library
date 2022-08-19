@@ -21,9 +21,10 @@ const DISMISSED_PROMO_BANNERS_LOCAL_STORAGE_KEY = 'DISMISSED_PROMO_BANNERS';
  */
 
 /**
- * @componentName Promo banner
+ * @componentName Banner - Promo
  * @maturityCategory use
  * @maturityLevel deployed
+ * @guidanceHref banner/promo
  */
 @Component({
   tag: 'va-promo-banner',

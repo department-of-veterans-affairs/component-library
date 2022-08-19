@@ -25,6 +25,7 @@ import {
  * @componentName Memorable date
  * @maturityCategory caution
  * @maturityLevel available
+ * @guidanceHref form/memorable-date
  */
 @Component({
   tag: 'va-memorable-date',
