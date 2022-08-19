@@ -88,9 +88,6 @@ export const additionalDocs = {
     maturityCategory: DONT_USE,
     maturityLevel: DEPRECATED,
   },
-  'Number input': {
-    guidanceHref: 'form/number-input',
-  },
   'NumberInput - React': {
     maturityCategory: DONT_USE,
     maturityLevel: DEPRECATED,
@@ -109,23 +106,9 @@ export const additionalDocs = {
     maturityCategory: CAUTION,
     maturityLevel: AVAILABLE,
   },
-  'Progress bar - segmented': {
-    guidanceHref: 'form/progress-bar-segmented',
-  },
-  'Promo banner': {
-    guidanceHref: 'promo-banners',
-  },
-  'Radio button': {
-    guidanceHref: 'form/radio-button',
-    guidanceName: 'Radio button',
-  },
   'RadioButtons - React': {
     maturityCategory: DONT_USE,
     maturityLevel: DEPRECATED,
-  },
-  'Select': {
-    guidanceHref: 'form/select',
-    guidanceName: 'Select box',
   },
   'Select - React': {
     maturityCategory: DONT_USE,
