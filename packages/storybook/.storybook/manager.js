@@ -23,10 +23,9 @@ addons.setConfig({
       const maturityCategoryFromDocs = getMaturityCategory(item.name);
       if (
         item.parent === 'components' ||
-        item.parent === 'components-banners' ||
-        item.parent === 'components-buttons' ||
         item.parent === 'components-icons' ||
-        item.parent === 'deprecated'
+        item.parent === 'deprecated' ||
+        item.parent === 'under-development'
       ) {
         const maturityCategory = 
           maturityCategoryFromDocs ?? 
