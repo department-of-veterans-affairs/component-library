@@ -8,9 +8,10 @@ VaFileInput.displayName = 'VaFileInput';
 const fileInputDocs = getWebComponentDocs('va-file-input');
 
 export default {
-  title: 'Components/va-file-input',
+  title: 'Under development/File input',
+  id: 'components/va-file-input',
   parameters: {
-    componentSubtitle: `File input web component`,
+    componentSubtitle: `va-file-input web component`,
     docs: {
       page: () => <StoryDocs data={fileInputDocs} />,
     },

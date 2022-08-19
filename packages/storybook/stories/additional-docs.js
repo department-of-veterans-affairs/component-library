@@ -43,7 +43,7 @@ export const additionalDocs = {
     maturityCategory: CAUTION,
     maturityLevel: AVAILABLE,
   },
-  'File input': {
+  'File input - React': {
     maturityCategory: USE,
     maturityLevel: DEPLOYED,
     guidanceHref: 'form/file-input',
