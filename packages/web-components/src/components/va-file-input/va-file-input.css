@@ -1,0 +1,20 @@
+@import '../../mixins/accessibility.css';
+@import '../../mixins/form-field-error.css';
+
+:host {
+  display: block;
+  font-family: var(--font-source-sans);
+}
+
+#error-message{
+  margin-bottom: 0.3rem;
+}
+
+va-button {
+  margin-bottom: -0.8rem;
+}
+
+.required {
+  color: var(--color-secondary-dark);
+  margin-left: 0.4rem;
+}

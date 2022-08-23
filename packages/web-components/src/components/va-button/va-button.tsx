@@ -11,6 +11,7 @@ import {
 /**
  * @nativeHandler onClick
  */
+
 @Component({
   tag: 'va-button',
   styleUrl: 'va-button.css',
