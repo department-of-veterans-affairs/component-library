@@ -38,27 +38,7 @@ $tokens-negative-margin: (
 
 $tokens-margin-y: map-collect($tokens-margin, $tokens-negative-margin);
 
-$tokens-margin-top: map-collect($tokens-margin, $tokens-negative-margin);
-
-$tokens-margin-bottom: map-collect($tokens-margin, $tokens-negative-margin);
-
 $tokens-margin-x: map-collect(
-  $tokens-margin,
-  $tokens-negative-margin,
-  (
-    auto: -1px,
-  )
-);
-
-$tokens-margin-right: map-collect(
-  $tokens-margin,
-  $tokens-negative-margin,
-  (
-    auto: -1px,
-  )
-);
-
-$tokens-margin-left: map-collect(
   $tokens-margin,
   $tokens-negative-margin,
   (
