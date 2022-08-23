@@ -355,58 +355,55 @@ export class VaModal {
 
     return (
       <Host
-      aria-label={ariaLabel}
-      aria-modal="true"
-      role={ariaRole(status)}
+        aria-label={ariaLabel}
+        aria-modal="true"
+        role={ariaRole(status)}
+        visible={visible}
       >
-        <div
-          class="va-modal"
-        >
-          <div class={wrapperClass} tabIndex={-1}>
-            <button
-              aria-label={btnAriaLabel}
-              class="va-modal-close"
-              onClick={e => this.handleClose(e)}
-              ref={el => (this.closeButton = el as HTMLButtonElement)}
-              type="button"
-            >
-              <i aria-hidden="true" />
-            </button>
-            <div class={bodyClass}>
-              <div role="document">
-                {modalTitle && (
-                  <h1 class={titleClass} tabIndex={-1}>
-                    {modalTitle}
-                  </h1>
-                )}
-                <slot></slot>
-              </div>
-              {((primaryButtonClick && primaryButtonText) ||
-                (secondaryButtonClick && secondaryButtonText)) && (
-                <div
-                  class="alert-actions"
-                  ref={el => (this.alertActions = el as HTMLDivElement)}
-                >
-                  {primaryButtonClick && primaryButtonText && (
-                    <button
-                      onClick={e => this.handlePrimaryButtonClick(e)}
-                      type="button"
-                    >
-                      {primaryButtonText}
-                    </button>
-                  )}
-                  {secondaryButtonClick && secondaryButtonText && (
-                    <button
-                      class="button-secondary"
-                      onClick={e => this.handleSecondaryButtonClick(e)}
-                      type="button"
-                    >
-                      {secondaryButtonText}
-                    </button>
-                  )}
-                </div>
+        <div class={wrapperClass} tabIndex={-1}>
+          <button
+            aria-label={btnAriaLabel}
+            class="va-modal-close"
+            onClick={e => this.handleClose(e)}
+            ref={el => (this.closeButton = el as HTMLButtonElement)}
+            type="button"
+          >
+            <i aria-hidden="true" />
+          </button>
+          <div class={bodyClass}>
+            <div role="document">
+              {modalTitle && (
+                <h1 class={titleClass} tabIndex={-1}>
+                  {modalTitle}
+                </h1>
               )}
+              <slot></slot>
             </div>
+            {((primaryButtonClick && primaryButtonText) ||
+              (secondaryButtonClick && secondaryButtonText)) && (
+              <div
+                class="alert-actions"
+                ref={el => (this.alertActions = el as HTMLDivElement)}
+              >
+                {primaryButtonClick && primaryButtonText && (
+                  <button
+                    onClick={e => this.handlePrimaryButtonClick(e)}
+                    type="button"
+                  >
+                    {primaryButtonText}
+                  </button>
+                )}
+                {secondaryButtonClick && secondaryButtonText && (
+                  <button
+                    class="button-secondary"
+                    onClick={e => this.handleSecondaryButtonClick(e)}
+                    type="button"
+                  >
+                    {secondaryButtonText}
+                  </button>
+                )}
+              </div>
+            )}
           </div>
         </div>
       </Host>

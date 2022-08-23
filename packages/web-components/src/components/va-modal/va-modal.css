@@ -4,11 +4,10 @@
   display: block;
 }
 
-.va-modal {
+:host([visible]:not([visible='false'])) {
   background: rgba(50, 58, 69, 0.8);
   bottom: 0;
   box-sizing: border-box;
-  display: block;
   height: 100%;
   left: 0;
   overflow-y: auto;
@@ -21,7 +20,7 @@
   z-index: 6;
 }
 
-.va-modal:before {
+:host:before {
   content: '';
   display: inline-block;
   height: 100%;
@@ -222,7 +221,7 @@ i::before {
 }
 
 @media screen and (max-width: 481px) {
-  .va-modal {
+  :host([visible]:not([visible='false'])) {
     overflow-y: scroll;
   }
 
