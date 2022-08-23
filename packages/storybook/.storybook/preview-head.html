@@ -20,29 +20,49 @@
     width: 100%;
     z-index: 100;
   }
+
+  .color-toggle {
+    display: block;
+  }
+
+  .color-toggle.toggle-closed {
+    display: none;
+  }
 </style>
 
+<script>
+  const handleClick = function() {
+    const colorToggle = document.querySelector('.color-toggle');
+    if (colorToggle) {
+      colorToggle.classList.toggle('toggle-closed');
+    }
+  }
+</script>
+
 <div class="color-toggle-wrap">
-  <va-radio
-    label="Toggle Color Palette"
-    class="color-toggle">
-    <va-radio-option
-      name="va-gov"
-      id="va-gov"
-      value="vagov"
-      label="VA.gov">
-    </va-radio-option>
-    <va-radio-option
-      name="uswds-closest"
-      id="uswds-closest"
-      value="uswds-closest"
-      label="USWDS closest color">
-    </va-radio-option>
-    <va-radio-option
-      name="uswds-components"
-      id="uswds-components"
-      value="uswds-components"
-      label="USWDS component color (va-text-input, va-alert, va-button)">
-    </va-radio-option>
-  </va-radio>
+  <div onclick="handleClick()" style="text-align:right;">Toggle</div>
+  <div class="color-toggle">
+    <va-radio
+      label="Toggle Color Palette"
+      class="color-toggle">
+      <va-radio-option
+        name="va-gov"
+        id="va-gov"
+        value="vagov"
+        label="VA.gov">
+      </va-radio-option>
+      <va-radio-option
+        name="uswds-closest"
+        id="uswds-closest"
+        value="uswds-closest"
+        label="USWDS closest color">
+      </va-radio-option>
+      <va-radio-option
+        name="uswds-components"
+        id="uswds-components"
+        value="uswds-components"
+        label="USWDS component color (va-text-input, va-alert, va-button)">
+      </va-radio-option>
+    </va-radio>
+  </div>
 </div>
