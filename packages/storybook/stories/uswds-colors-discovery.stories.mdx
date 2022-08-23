@@ -8,21 +8,30 @@ import './uswds-colors-discovery.style.scss';
 
 # Discovery: Aligning colors with USWDS
 
+<br />
+<br />
+<br />
+<br />
+
 ## References
 
-- <a href="https://civicactions.github.io/uswds-color-tool" target="_blank">
+- <a target="_blank" href="https://civicactions.github.io/uswds-color-tool">
 USWDS Color Tool
 </a>
 
 - <a target="_blank" href="https://embed.plnkr.co/plunk/ERaf37">Calculate difference in percentage between 2 hex colors</a>
 
 - <a target="_blank" href="https://github.com/department-of-veterans-affairs/component-library/blob/main/packages/web-components/src/global/variables.css">Web component color variables</a>
+
+- <a target="_blank" href="https://design.va.gov/foundation/color-palette">VA.gov design system color palette</a>
 ---
 
-| va.gov color   | USWDS Equivalent | % Diff     | Notes |
-|    :----:     |    :----:   |      :----:      |          ---: |
+## Closest color match
+
+| va.gov color   | USWDS | % Diff     | Notes |
+|    ----:     |    :----  |      :----:      |          :---: |
 | <div class="color-block" style={{backgroundColor: "var(--color-base)"}}>#212121</div> <br/> `--color-base` | <div class="color-block" style={{backgroundColor: "#1c1d1f"}}>#1c1d1f</div> <br /> `gray-cool-90` | 1%   | 
-| <div class="color-block" style={{backgroundColor: "var(--color-black)"}}>#000000</div> <br/> `--color-black` | <div class="color-block" style={{backgroundColor: "#0d1a12"}}>#0d1a12</div> <br /> `mint-90` | <strong>7%</strong>   |
+| <div class="color-block" style={{backgroundColor: "var(--color-black)"}}>#000000</div> <br/> `--color-black` | <div class="color-block" style={{backgroundColor: "#0d1a12"}}>#0d1a12</div> <br /> `mint-90` | <strong class="discovery-strong">7%</strong>   | `va-back-to-top` (hover)
 | <div class="color-block text-dark border" style={{backgroundColor: "var(--color-white)"}}>#ffffff</div> <br/> `--color-white` | <div class="color-block text-dark border" style={{backgroundColor: "#fcfcfc"}}>#fcfcfc</div> <br /> `gray-1` | 1%   |
 | <div class="color-block" style={{backgroundColor: "var(--color-gray)"}}>#5b616b</div> <br/> `--color-gray` | <div class="color-block" style={{backgroundColor: "#565c65"}}>#565c65</div> <br /> `gray-cool-60` | 3%   |
 | <div class="color-block" style={{backgroundColor: "var(--color-gray-medium)"}}>#757575</div> <br/> `--color-gray-medium` | <div class="color-block" style={{backgroundColor: "#757575"}}>#757575</div> <br /> `gray-50` | 0%   |
@@ -31,21 +40,42 @@ USWDS Color Tool
 | <div class="color-block text-dark" style={{backgroundColor: "var(--color-gray-lighter)"}}>#d6d7d9</div> <br/> `--color-gray-lighter` | <div class="color-block text-dark" style={{backgroundColor: "#dddddd"}}>#dddddd</div> <br /> `red-cool-90v` | 1%   |
 | <div class="color-block text-dark" style={{backgroundColor: "var(--color-gray-lightest)"}}>#f1f1f1</div> <br/> `--color-gray-lightest` | <div class="color-block text-dark" style={{backgroundColor: "#f0f0f0"}}>#f0f0f0</div> <br /> `gray-5` | 1%   |
 | <div class="color-block text-dark" style={{backgroundColor: "var(--color-gray-cool-light)"}}>#dce4ef</div> <br/> `--color-gray-cool-light` | <div class="color-block text-dark" style={{backgroundColor: "#dae9ee"}}>#dae9ee</div> <br /> `blue-cool-10` | 0%   |
-| <div class="color-block text-light" style={{backgroundColor: "var(--color-green)"}}>#2e8540</div> <br/> `--color-green` | <div class="color-block text-light" style={{backgroundColor: "#286846"}}>#286846</div> <br /> `mint-60` | <strong>4%</strong>   |
-| <div class="color-block text-light" style={{backgroundColor: "var(--color-green-lighter)"}}>#94bfa2</div> <br/> `--color-green-lighter` | <div class="color-block text-light" style={{backgroundColor: "#86b98e"}}>#86b98e</div> <br /> `green-cool-30` | <strong>5%</strong>   |
+| <div class="color-block text-light" style={{backgroundColor: "var(--color-green)"}}>#2e8540</div> <br/> `--color-green` | <div class="color-block text-light" style={{backgroundColor: "#286846"}}>#286846</div> <br /> `mint-60` | <strong class="discovery-strong">4%</strong>   | `va-alert` <br/> `va-modal` <br/> `va-number-input` <br/> `va-alert`
+| <div class="color-block text-light" style={{backgroundColor: "var(--color-green-lighter)"}}>#94bfa2</div> <br/> `--color-green-lighter` | <div class="color-block text-light" style={{backgroundColor: "#86b98e"}}>#86b98e</div> <br /> `green-cool-30` | <strong class="discovery-strong">5%</strong>   | `va-alert-expandable`
 | <div class="color-block text-dark" style={{backgroundColor: "var(--color-green-lightest)"}}>#e7f4e4</div> <br/> `--color-green-lightest` | <div class="color-block text-dark" style={{backgroundColor: "#e3f5e1"}}>#e3f5e1</div> <br /> `green-cool-5v` | 1%   |
 | <div class="color-block" style={{backgroundColor: "var(--color-gold)"}}>#fdb81e</div> <br/> `--color-gold` | <div class="color-block" style={{backgroundColor: "#ffbe2e"}}>#ffbe2e</div> <br /> `gold-20v` | 3%   |
 | <div class="color-block" style={{backgroundColor: "var(--color-gold-light)"}}>#f9c642</div> <br/> `--color-gold-light` | <div class="color-block" style={{backgroundColor: "#e6c74c"}}>#e6c74c</div> <br /> `yellow-20` | 1%   |
 | <div class="color-block text-dark" style={{backgroundColor: "var(--color-gold-lighter)"}}>#fad980</div> <br/> `--color-gold-lighter` | <div class="color-block text-dark" style={{backgroundColor: "#fee685"}}>#fee685</div> <br /> `yellow-10v` | 3%   |
 | <div class="color-block text-dark" style={{backgroundColor: "var(--color-gold-lightest)"}}>#fff1d2</div> <br/> `--color-gold-lightest` | <div class="color-block text-dark" style={{backgroundColor: "#faf3d1"}}>#faf3d1</div> <br /> `yellow-5` | 0%   |
-| <div class="color-block" style={{backgroundColor: "var(--color-link-default)"}}>#004795</div> <br/> `--color-link-default` | <div class="color-block" style={{backgroundColor: "#005ea2"}}>#005ea2</div> <br /> `blue-60` | <strong>4%</strong>   |
+| <div class="color-block" style={{backgroundColor: "var(--color-link-default)"}}>#004795</div> <br/> `--color-link-default` | <div class="color-block" style={{backgroundColor: "#005ea2"}}>#005ea2</div> <br /> `blue-60` | <strong class="discovery-strong">4%</strong>   | `va-accordion` <br/> `va-additional-info` <br/> `va-alert-expandable` <br/> `va-link` <br/> `va-on-this-page` <br/> `va-promo-banner` <br/> `va-pagination` <br/> `va-telephone`
 | <div class="color-block" style={{backgroundColor: "var(--color-link-visited)"}}>#4c2c92</div> <br/> `--color-link-visited` | <div class="color-block" style={{backgroundColor: "#54278f"}}>#54278f</div> <br /> `violet-70v` | 0%   |
-| <div class="color-block" style={{backgroundColor: "var(--color-primary)"}}>#0071bb</div> <br/> `--color-primary` | <div class="color-block" style={{backgroundColor: "#0076d6"}}>#0076d6</div> <br /> `blue-50v` | <strong>4%</strong>   |
+| <div class="color-block" style={{backgroundColor: "var(--color-primary)"}}>#0071bb</div> <br/> `--color-primary` | <div class="color-block" style={{backgroundColor: "#0076d6"}}>#0076d6</div> <br /> `blue-50v` | <strong class="discovery-strong">4%</strong>   | `va-additional-info` <br/> `va-alert-expandable` <br/> `va-alert` <br/> `va-button`<br/> `va-checkbox` <br/> `va-featured-content`<br/> `va-loading-indicator`<br/> `va-modal` <br/> `va-pagination` <br/> `va-radio-option` <br/> `va-search-input` <br/> `va-segmented-progress-bar` 
 | <div class="color-block" style={{backgroundColor: "var(--color-primary-darker)"}}>#003e73</div> <br/> `--color-primary-darker` | <div class="color-block" style={{backgroundColor: "#0b4778"}}>#0b4778</div> <br /> `blue-70v` | 3%   |
 | <div class="color-block" style={{backgroundColor: "var(--color-primary-alt-dark)"}}>#00a6d2</div> <br/> `--color-primary-alt-dark` | <div class="color-block" style={{backgroundColor: "#009ec1"}}>#009ec1</div> <br /> `cyan-40v` | 3%   |
 | <div class="color-block" style={{backgroundColor: "var(--color-primary-alt-darkest)"}}>#046b99</div> <br/> `--color-primary-alt-darkest` | <div class="color-block" style={{backgroundColor: "#07648d"}}>#07648d</div> <br /> `blue-cool-60v` | 3%   |
 | <div class="color-block text-dark" style={{backgroundColor: "var(--color-primary-alt-light)"}}>#9bdaf1</div> <br/> `--color-primary-alt-light` | <div class="color-block text-dark" style={{backgroundColor: "#99deea"}}>#99deea</div> <br /> `cyan-20` | 0%   |
 | <div class="color-block text-dark" style={{backgroundColor: "var(--color-primary-alt-lightest)"}}>#e1f3f8</div> <br/> `-color-primary-alt-lightest` | <div class="color-block text-dark" style={{backgroundColor: "#e1f3f8"}}>#e1f3f8</div> <br /> `blue-cool-5v` | 0%   |
-| <div class="color-block" style={{backgroundColor: "var(--color-secondary-dark)"}}>#cd2026</div> <br/> `--color-secondary-dark` | <div class="color-block" style={{backgroundColor: "#d83933"}}>#d83933</div> <br /> `red-50` | <strong>6%</strong>   |
+| <div class="color-block" style={{backgroundColor: "var(--color-secondary-dark)"}}>#cd2026</div> <br/> `--color-secondary-dark` | <div class="color-block" style={{backgroundColor: "#d83933"}}>#d83933</div> <br /> `red-50` | <strong class="discovery-strong">6%</strong>   | `va-alert` <br/> `va-checkbox-group` <br/> `va-checkbox` <br/>  `va-date` <br/> `va-file-input` <br/> `va-memorable-date` <br/> `va-modal` <br/> `va-number-input` <br/> `va-radio` <br/> `va-select` <br/> `va-text-input` <br/> `va-textarea` 
 | <div class="color-block" style={{backgroundColor: "var(--color-secondary-light)"}}>#e59393</div> <br/> `--color-secondary-light` | <div class="color-block" style={{backgroundColor: "#f2938c"}}>#f2938c</div> <br /> `red-30` | 1%   |
 | <div class="color-block text-dark" style={{backgroundColor: "var(--color-secondary-lightest)"}}>#f9dede</div> <br/> `--color-secondary-lightest` | <div class="color-block text-dark" style={{backgroundColor: "#f8e1de"}}>#f8e1de</div> <br /> `red-10` | 0%   |
+
+<br />
+
+## Component mapping (va-text-input, va-alert, va-button)
+
+Colors mapped to the USWDS components and not necessarily the "closest color" from the USWDS color palette.
+
+
+| va.gov color   | USWDS | % Diff     | Notes |
+|    ----:     |    :----  |      :----:      |          :---: |
+| <div class="color-block" style={{backgroundColor: "var(--color-secondary-dark)"}}>#cd2026</div> <br/> `--color-secondary-dark` | <div class="color-block" style={{backgroundColor: "#b50909"}}>#b50909</div> <br /> `red-60v` | <strong class="discovery-strong">10%</strong>   | `va-alert` <br/> `va-checkbox-group` <br/> `va-checkbox` <br/>  `va-date` <br/> `va-file-input` <br/> `va-memorable-date` <br/> `va-modal` <br/> `va-number-input` <br/> `va-radio` <br/> `va-select` <br/> `va-text-input` <br/> `va-textarea` 
+| <div class="color-block text-light" style={{backgroundColor: "var(--color-green)"}}>#2e8540</div> <br/> `--color-green` | <div class="color-block text-light" style={{backgroundColor: "#00a91c"}}>#00a91c</div> <br /> `green-cool-40v` | <strong class="discovery-strong">6%</strong>   | `va-alert` <br/> `va-modal` <br/> `va-number-input` <br/> `va-alert`
+| <div class="color-block text-light" style={{backgroundColor: "var(--color-primary-alt-dark)"}}>#00a6d2</div> <br/> `--color-primary-alt-dark` | <div class="color-block text-light" style={{backgroundColor: "#00bde3"}}>#00bde3</div> <br /> `green-cool-40v` | <strong class="discovery-strong">8%</strong>   | `va-alert`
+| <div class="color-block" style={{backgroundColor: "var(--color-gold)"}}>#fdb81e</div> <br/> `--color-gold` | <div class="color-block" style={{backgroundColor: "#ffbe2e"}}>#ffbe2e</div> <br /> `gold-20v` | 3%   |
+| <div class="color-block text-dark" style={{backgroundColor: "var(--color-primary-alt-light)"}}>#9bdaf1</div> <br/> `--color-primary-alt-light` | <div class="color-block text-dark" style={{backgroundColor: "#e7f6f8"}}>#e7f6f8</div> <br /> `cyan-5` | 1%   |
+| <div class="color-block text-dark" style={{backgroundColor: "var(--color-secondary-lightest)"}}>#f9dede</div> <br/> `--color-secondary-lightest` | <div class="color-block text-dark" style={{backgroundColor: "#f4e3db"}}>#f4e3db</div> <br /> `red-10` | 1%   |
+| <div class="color-block text-dark" style={{backgroundColor: "var(--color-green-lightest)"}}>#e7f4e4</div> <br/> `--color-green-lightest` | <div class="color-block text-dark" style={{backgroundColor: "#ecf3ec"}}>#ecf3ec</div> <br /> `green-cool-5` | 1%   |
+| <div class="color-block text-dark" style={{backgroundColor: "var(--color-gold-lightest)"}}>#fff1d2</div> <br/> `--color-gold-lightest` | <div class="color-block text-dark" style={{backgroundColor: "#faf3d1"}}>#faf3d1</div> <br /> `yellow-5` | 0%   |
+| <div class="color-block" style={{backgroundColor: "var(--color-primary)"}}>#0071bb</div> <br/> `--color-primary` | <div class="color-block" style={{backgroundColor: "#005ea2"}}>#005ea2</div> <br /> `blue-60v` | <strong class="discovery-strong">4%</strong>   | `va-additional-info` <br/> `va-alert-expandable` <br/> `va-alert` <br/> `va-button`<br/> `va-checkbox` <br/> `va-featured-content`<br/> `va-loading-indicator`<br/> `va-modal` <br/> `va-pagination` <br/> `va-radio-option` <br/> `va-search-input` <br/> `va-segmented-progress-bar`
+| <div class="color-block" style={{backgroundColor: "var(--color-primary-darker)"}}>#003e73</div> <br/> `--color-primary-darker` | <div class="color-block" style={{backgroundColor: "#1a4480"}}>#1a4480</div> <br /> `blue-warm-70v` | <strong class="discovery-strong">6%</strong>    | `va-button` <br/> `va-modal` <br/> `va-search-input`
+| <div class="color-block text-dark" style={{backgroundColor: "var(--color-gray-lighter)"}}>#d6d7d9</div> <br/> `--color-gray-lighter` | <div class="color-block text-dark" style={{backgroundColor: "#c9c9c9"}}>#c9c9c9</div> <br /> `gray-20` | <strong class="discovery-strong">5%</strong>   | `va-accordion-item` <br/> `va-button` <br/> `va-on-this-page` <br/> `va-promo-banner` <br/> `va-segmented-progress-bar`

@@ -107,4 +107,26 @@ export const decorators = [
 // https://github.com/facebook/react/issues/20895
 document.body.onload = function () {
   document.querySelector('#root').setAttribute('role', 'presentation');
+
+  const toggle = document.querySelector('.color-toggle');
+  toggle.addEventListener('vaValueChange', ({detail}) => { 
+    const value = detail?.value;
+    if (value === 'vagov') {
+      document.body.classList.add('vagov');
+      document.body.classList.remove('uswds-closest');
+      document.body.classList.remove('uswds-components');
+    }
+
+    if (value === 'uswds-closest') {
+      document.body.classList.add('uswds-closest');
+      document.body.classList.remove('vagov');
+      document.body.classList.remove('uswds-components');
+    }
+
+    if (value === 'uswds-components') {
+      document.body.classList.add('uswds-components');
+      document.body.classList.remove('vagov');
+      document.body.classList.remove('uswds-closest');
+    }
+  })
 };
