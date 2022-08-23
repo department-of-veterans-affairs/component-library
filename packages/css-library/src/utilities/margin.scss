@@ -15,82 +15,38 @@ $u-margin-base: (
 
 $u-margin-y: (
   margin-y: (
-    base: 'vads-margin-y',
-    modifiers: null,
+    base: 'vads-margin',
+    modifiers: (
+      'y': (
+        '-top',
+        '-bottom',
+      ),
+      'top': '-top',
+      'bottom': '-bottom',
+    ),
     values: map-collect($tokens-margin-y),
     settings: $margin-settings,
-    property: (
-      margin-top,
-      margin-bottom,
-    ),
-    type: 'utility',
-  ),
-);
-
-$u-margin-top: (
-  margin-top: (
-    base: 'vads-margin-top',
-    modifiers: null,
-    values: map-collect($tokens-margin-top),
-    settings: $margin-settings,
-    property: 'margin-top',
-    type: 'utility',
-  ),
-);
-
-$u-margin-bottom: (
-  margin-bottom: (
-    base: 'vads-margin-bottom',
-    modifiers: null,
-    values: map-collect($tokens-margin-bottom),
-    settings: $margin-settings,
-    property: 'margin-bottom',
+    property: 'margin',
     type: 'utility',
   ),
 );
 
 $u-margin-x: (
   margin-x: (
-    base: 'vads-margin-x',
-    modifiers: null,
+    base: 'vads-margin',
+    modifiers: (
+      'x': (
+        '-left',
+        '-right',
+      ),
+      'right': '-right',
+      'left': '-left',
+    ),
     values: map-collect($tokens-margin-x),
     settings: $margin-settings,
-    property: (
-      margin-left,
-      margin-right,
-    ),
+    property: 'margin',
     type: 'utility',
   ),
 );
 
-$u-margin-right: (
-  margin-right: (
-    base: 'vads-margin-right',
-    modifiers: null,
-    values: map-collect($tokens-margin-right),
-    settings: $margin-settings,
-    property: 'margin-right',
-    type: 'utility',
-  ),
-);
-
-$u-margin-left: (
-  margin-left: (
-    base: 'vads-margin-left',
-    modifiers: null,
-    values: map-collect($tokens-margin-left),
-    settings: $margin-settings,
-    property: 'margin-left',
-    type: 'utility',
-  ),
-);
-
-$u-margin: map-collect(
-  $u-margin-base,
-  $u-margin-y,
-  $u-margin-top,
-  $u-margin-bottom,
-  $u-margin-x,
-  $u-margin-right,
-  $u-margin-left
-);
+$u-margin: map-collect($u-margin-base, $u-margin-y, $u-margin-x);
