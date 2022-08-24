@@ -96,6 +96,14 @@ body.uswds-closest {
   --color-secondary-lightest: #f8e1de;
 }
 
+body.uswds-closest .usa-button-primary {
+  background-color: #0076d6;
+}
+
+body.uswds-closest .va-button-primary {
+  background-color: #286846!important;
+}
+
 body.uswds-components {
   --color-base: #1c1d1f;
   --color-black: #0d1a12;
@@ -125,4 +133,12 @@ body.uswds-components {
   --color-secondary-dark: #b50909; // cd2026
   --color-secondary-light: #f2938c;
   --color-secondary-lightest: #f4e3db; // f9dede
+}
+
+body.uswds-components .usa-button-primary {
+  background-color: #005ea2;
+}
+
+body.uswds-components .va-button-primary {
+  background-color: #00a91c!important;
 }
