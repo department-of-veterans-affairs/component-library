@@ -27,6 +27,7 @@ h6 {
 }
 
 button {
+  position: relative;
   cursor: pointer;
   width: 100%;
   border: 0;
