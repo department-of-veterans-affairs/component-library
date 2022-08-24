@@ -14,6 +14,9 @@
 }
 
 button {
+  /* The position and z-index are to keep the focus shadow above the first item */
+  position: relative;
+  z-index: 100;
   border: none;
   color: var(--color-link-default);
   background: transparent;
