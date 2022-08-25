@@ -318,7 +318,7 @@ export class VaModal {
     clearAllBodyScrollLocks();
     this.undoAriaHidden?.();
 
-    document.body.classList.remove('modal-open');
+    document.body?.classList?.remove('modal-open');
     this.savedFocus?.focus();
   }
 
