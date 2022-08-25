@@ -21,7 +21,7 @@ export default {
   },
 };
 
-const Template = ({
+const DuringTemplate = ({
   'disable-analytics': disableAnalytics,
   'show-close': showClose,
   headline,
@@ -29,6 +29,16 @@ const Template = ({
   visible,
   'window-session': windowSession,
 }) => {
+  const timeFormattingOptions = {
+    timeStyle: 'long',
+    timeZone: 'US/Eastern',
+  };
+  const formatter = new Intl.DateTimeFormat('en-US', timeFormattingOptions);
+  const now = new Date();
+  const date = new Intl.DateTimeFormat('en-US').format(now);
+  const start = formatter.format(now.setHours(now.getHours() - 1));
+  const end = formatter.format(now.setHours(now.getHours() + 2));
+
   return (
     <va-banner
       disable-analytics={disableAnalytics}
@@ -38,17 +48,63 @@ const Template = ({
       visible={visible}
       window-session={windowSession}
     >
-      Congress shall make no law respecting an establishment of religion, or
-      prohibiting the free exercise thereof; or abridging the freedom of speech,
-      or of the press; <a href="#">LINK TEST</a> or the right of the people
-      peaceably to assemble, and to petition the Government for a redress of
-      grievances.
+      <p>
+        We’re working on VA.gov right now. If you have trouble signing in or
+        using tools, check back after we’re finished. Thank you for your
+        patience.
+      </p>
+      <p>
+        <strong>Date:</strong> {date}
+      </p>
+      <p>
+        <strong>Start/End time:</strong> {start} to {end}
+      </p>
+    </va-banner>
+  );
+};
+
+const BeforeTemplate = ({
+  'disable-analytics': disableAnalytics,
+  'show-close': showClose,
+  headline,
+  type,
+  visible,
+  'window-session': windowSession,
+}) => {
+  const timeFormattingOptions = {
+    timeStyle: 'long',
+    timeZone: 'US/Eastern',
+  };
+  const formatter = new Intl.DateTimeFormat('en-US', timeFormattingOptions);
+  const now = new Date();
+  const date = new Intl.DateTimeFormat('en-US').format(now);
+  const start = formatter.format(now.setHours(now.getHours() + 1));
+  const end = formatter.format(now.setHours(now.getHours() + 2));
+  return (
+    <va-banner
+      disable-analytics={disableAnalytics}
+      show-close={showClose}
+      headline={headline}
+      type={type}
+      visible={visible}
+      window-session={windowSession}
+    >
+      <p>
+        We’ll be doing some work on VA.gov. The maintenance will last X hours.
+        During that time, you won’t be able to sign in or use tools.
+      </p>
+      <p>
+        <strong>Date:</strong> {date}
+      </p>
+      <p>
+        <strong>Start/End time:</strong> {start} to {end}
+      </p>
     </va-banner>
   );
 };
 
 const defaultArgs = {
-  'headline': 'This is a test',
+  'headline': 'Site maintenance',
   'show-close': false,
   'disable-analytics': false,
   'type': 'error',
@@ -56,13 +112,20 @@ const defaultArgs = {
   'window-session': false,
 };
 
-export const Default = Template.bind(null);
+export const Default = DuringTemplate.bind(null);
 Default.args = {
   ...defaultArgs,
 };
 Default.argTypes = propStructure(bannerDocs);
 
-export const Closeable = Template.bind(null);
+export const Warning = BeforeTemplate.bind(null);
+Warning.args = {
+  ...defaultArgs,
+  type: 'warning',
+  headline: 'Upcoming site maintenance',
+};
+
+export const Closeable = BeforeTemplate.bind(null);
 Closeable.args = {
   ...defaultArgs,
   'show-close': true,
