@@ -30,7 +30,9 @@ const DuringTemplate = ({
   'window-session': windowSession,
 }) => {
   const timeFormattingOptions = {
-    timeStyle: 'long',
+    hour: 'numeric',
+    minute: 'numeric',
+    timeZoneName: 'short',
     timeZone: 'US/Eastern',
   };
   const formatter = new Intl.DateTimeFormat('en-US', timeFormattingOptions);
@@ -122,12 +124,16 @@ const AdvanceTemplate = ({
   'window-session': windowSession,
 }) => {
   const timeFormattingOptions = {
-    timeStyle: 'long',
+    hour: 'numeric',
+    minute: 'numeric',
     timeZone: 'US/Eastern',
+    timeZoneName: 'short',
   };
   const formatter = new Intl.DateTimeFormat('en-US', timeFormattingOptions);
   const now = new Date();
-  const date = new Intl.DateTimeFormat('en-US').format(now);
+  const date = new Intl.DateTimeFormat('en-US', { dateStyle: 'full' }).format(
+    now,
+  );
   const start = formatter.format(now.setHours(now.getHours() + 1));
   const end = formatter.format(now.setHours(now.getHours() + 2));
   return (
