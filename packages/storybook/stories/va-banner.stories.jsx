@@ -74,10 +74,16 @@ const During24HourTemplate = ({
   'window-session': windowSession,
 }) => {
   const timeFormattingOptions = {
-    timeStyle: 'long',
-    dateStyle: 'full',
+    hour: 'numeric',
+    minute: 'numeric',
+    weekday: 'long',
+    month: 'long',
+    year: 'numeric',
+    day: 'numeric',
     timeZone: 'US/Eastern',
+    timeZoneName: 'short',
   };
+
   const formatter = new Intl.DateTimeFormat('en-US', timeFormattingOptions);
   const now = new Date();
   const start = formatter.format(now.setHours(now.getHours() - 12));
@@ -156,9 +162,14 @@ const Advance24HourTemplate = ({
   'window-session': windowSession,
 }) => {
   const timeFormattingOptions = {
-    timeStyle: 'long',
-    dateStyle: 'full',
+    hour: 'numeric',
+    minute: 'numeric',
+    weekday: 'long',
+    month: 'long',
+    year: 'numeric',
+    day: 'numeric',
     timeZone: 'US/Eastern',
+    timeZoneName: 'short',
   };
   const formatter = new Intl.DateTimeFormat('en-US', timeFormattingOptions);
   const now = new Date();
