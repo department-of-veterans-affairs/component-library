@@ -291,11 +291,6 @@ export class VaModal {
     // This is used to limit the screen reader to content inside the modal.
     this.undoAriaHidden = hideOthers(this.el);
 
-    // NOTE: With this PR (https://github.com/department-of-veterans-affairs/vets-website/pull/11712)
-    // we rely on the existence of `body.modal-open` to determine if a modal is
-    // currently open and adjust programmatic scrolling if there is.
-    document.body.classList.add('modal-open');
-
     // Conditionally track the event.
     if (!this.disableAnalytics) {
       const detail = {
@@ -317,8 +312,6 @@ export class VaModal {
   private teardownModal() {
     clearAllBodyScrollLocks();
     this.undoAriaHidden?.();
-
-    document.body?.classList?.remove('modal-open');
     this.savedFocus?.focus();
   }
 
