@@ -35,7 +35,9 @@ const DuringTemplate = ({
   };
   const formatter = new Intl.DateTimeFormat('en-US', timeFormattingOptions);
   const now = new Date();
-  const date = new Intl.DateTimeFormat('en-US').format(now);
+  const date = new Intl.DateTimeFormat('en-US', { dateStyle: 'full' }).format(
+    now,
+  );
   const start = formatter.format(now.setHours(now.getHours() - 1));
   const end = formatter.format(now.setHours(now.getHours() + 2));
 
@@ -132,7 +134,7 @@ const BeforeTemplate = ({
       window-session={windowSession}
     >
       <p>
-        We’ll be doing some work on VA.gov. The maintenance will last X hours.
+        We’ll be doing some work on VA.gov. The maintenance will last 2 hours.
         During that time, you won’t be able to sign in or use tools.
       </p>
       <p>
@@ -174,30 +176,35 @@ const defaultArgs = {
   'headline': 'Site maintenance',
   'show-close': false,
   'disable-analytics': false,
-  'type': 'error',
+  'type': 'warning',
   'visible': true,
   'window-session': false,
 };
 
-export const Default = DuringTemplate.bind(null);
+export const Default = BeforeTemplate.bind(null);
 Default.args = {
   ...defaultArgs,
 };
 Default.argTypes = propStructure(bannerDocs);
 
+export const During = DuringTemplate.bind(null);
+During.args = {
+  ...defaultArgs,
+  type: 'error',
+};
 export const During24Hours = During24HourTemplate.bind(null);
 During24Hours.args = {
   ...defaultArgs,
+  type: 'error',
 };
 
 export const Warning = BeforeTemplate.bind(null);
 Warning.args = {
   ...defaultArgs,
-  type: 'warning',
   headline: 'Upcoming site maintenance',
 };
 
-export const Closeable = BeforeTemplate.bind(null);
+export const Closeable = DuringTemplate.bind(null);
 Closeable.args = {
   ...defaultArgs,
   'show-close': true,
@@ -206,6 +213,5 @@ Closeable.args = {
 export const SiteStillAccessible = SiteAccessibleTemplate.bind(null);
 SiteStillAccessible.args = {
   ...defaultArgs,
-  type: 'warning',
   headline: 'We’re working on the site',
 };
