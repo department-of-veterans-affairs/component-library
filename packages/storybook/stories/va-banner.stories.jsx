@@ -103,6 +103,31 @@ const BeforeTemplate = ({
   );
 };
 
+const SiteAccessibleTemplate = ({
+  'disable-analytics': disableAnalytics,
+  'show-close': showClose,
+  headline,
+  type,
+  visible,
+  'window-session': windowSession,
+}) => {
+  return (
+    <va-banner
+      disable-analytics={disableAnalytics}
+      show-close={showClose}
+      headline={headline}
+      type={type}
+      visible={visible}
+      window-session={windowSession}
+    >
+      <p>
+        We’re working on VA.gov right now. You should still be able to use the
+        applications and tools. But if you have any trouble, please check back
+        soon.
+      </p>
+    </va-banner>
+  );
+};
 const defaultArgs = {
   'headline': 'Site maintenance',
   'show-close': false,
@@ -129,4 +154,11 @@ export const Closeable = BeforeTemplate.bind(null);
 Closeable.args = {
   ...defaultArgs,
   'show-close': true,
+};
+
+export const SiteStillAccessible = SiteAccessibleTemplate.bind(null);
+SiteStillAccessible.args = {
+  ...defaultArgs,
+  type: 'warning',
+  headline: 'We’re working on the site',
 };
