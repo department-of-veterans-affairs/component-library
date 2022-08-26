@@ -173,12 +173,13 @@ const SiteAccessibleTemplate = ({
   );
 };
 const defaultArgs = {
-  'headline': 'Site maintenance',
+  'headline': 'Upcoming site maintenance',
   'show-close': false,
   'disable-analytics': false,
   'type': 'warning',
   'visible': true,
   'window-session': false,
+  'show-close': true,
 };
 
 export const Default = BeforeTemplate.bind(null);
@@ -190,24 +191,14 @@ Default.argTypes = propStructure(bannerDocs);
 export const During = DuringTemplate.bind(null);
 During.args = {
   ...defaultArgs,
+  headline: 'Site maintenance',
   type: 'error',
 };
 export const During24Hours = During24HourTemplate.bind(null);
 During24Hours.args = {
   ...defaultArgs,
+  headline: 'Site maintenance',
   type: 'error',
-};
-
-export const Warning = BeforeTemplate.bind(null);
-Warning.args = {
-  ...defaultArgs,
-  headline: 'Upcoming site maintenance',
-};
-
-export const Closeable = DuringTemplate.bind(null);
-Closeable.args = {
-  ...defaultArgs,
-  'show-close': true,
 };
 
 export const SiteStillAccessible = SiteAccessibleTemplate.bind(null);
