@@ -107,7 +107,7 @@ const During24HourTemplate = ({
   );
 };
 
-const BeforeTemplate = ({
+const AdvanceTemplate = ({
   'disable-analytics': disableAnalytics,
   'show-close': showClose,
   headline,
@@ -142,6 +142,47 @@ const BeforeTemplate = ({
       </p>
       <p>
         <strong>Start/End time:</strong> {start} to {end}
+      </p>
+    </va-banner>
+  );
+};
+
+const Advance24HourTemplate = ({
+  'disable-analytics': disableAnalytics,
+  'show-close': showClose,
+  headline,
+  type,
+  visible,
+  'window-session': windowSession,
+}) => {
+  const timeFormattingOptions = {
+    timeStyle: 'long',
+    dateStyle: 'full',
+    timeZone: 'US/Eastern',
+  };
+  const formatter = new Intl.DateTimeFormat('en-US', timeFormattingOptions);
+  const now = new Date();
+  const start = formatter.format(now.setHours(now.getHours() + 12));
+  const end = formatter.format(now.setHours(now.getHours() + 24));
+
+  return (
+    <va-banner
+      disable-analytics={disableAnalytics}
+      show-close={showClose}
+      headline={headline}
+      type={type}
+      visible={visible}
+      window-session={windowSession}
+    >
+      <p>
+        We’ll be doing some work on VA.gov. The maintenance will last 24 hours.
+        During that time, you won’t be able to sign in or use tools.
+      </p>
+      <p>
+        <strong>Start:</strong> {start}
+      </p>
+      <p>
+        <strong>End:</strong> {end}
       </p>
     </va-banner>
   );
@@ -182,11 +223,16 @@ const defaultArgs = {
   'show-close': true,
 };
 
-export const Default = BeforeTemplate.bind(null);
+export const Default = AdvanceTemplate.bind(null);
 Default.args = {
   ...defaultArgs,
 };
 Default.argTypes = propStructure(bannerDocs);
+
+export const Advance24Hours = Advance24HourTemplate.bind(null);
+Advance24Hours.args = {
+  ...defaultArgs,
+};
 
 export const During = DuringTemplate.bind(null);
 During.args = {
