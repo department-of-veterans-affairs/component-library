@@ -63,6 +63,48 @@ const DuringTemplate = ({
   );
 };
 
+const During24HourTemplate = ({
+  'disable-analytics': disableAnalytics,
+  'show-close': showClose,
+  headline,
+  type,
+  visible,
+  'window-session': windowSession,
+}) => {
+  const timeFormattingOptions = {
+    timeStyle: 'long',
+    dateStyle: 'full',
+    timeZone: 'US/Eastern',
+  };
+  const formatter = new Intl.DateTimeFormat('en-US', timeFormattingOptions);
+  const now = new Date();
+  const start = formatter.format(now.setHours(now.getHours() - 12));
+  const end = formatter.format(now.setHours(now.getHours() + 12));
+
+  return (
+    <va-banner
+      disable-analytics={disableAnalytics}
+      show-close={showClose}
+      headline={headline}
+      type={type}
+      visible={visible}
+      window-session={windowSession}
+    >
+      <p>
+        We’re working on VA.gov right now. If you have trouble signing in or
+        using tools, check back after we’re finished. Thank you for your
+        patience.
+      </p>
+      <p>
+        <strong>Start:</strong> {start}
+      </p>
+      <p>
+        <strong>End:</strong> {end}
+      </p>
+    </va-banner>
+  );
+};
+
 const BeforeTemplate = ({
   'disable-analytics': disableAnalytics,
   'show-close': showClose,
@@ -142,6 +184,11 @@ Default.args = {
   ...defaultArgs,
 };
 Default.argTypes = propStructure(bannerDocs);
+
+export const During24Hours = During24HourTemplate.bind(null);
+During24Hours.args = {
+  ...defaultArgs,
+};
 
 export const Warning = BeforeTemplate.bind(null);
 Warning.args = {
