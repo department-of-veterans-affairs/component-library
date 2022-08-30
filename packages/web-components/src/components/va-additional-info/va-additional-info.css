@@ -42,8 +42,11 @@ a {
   opacity: 1;
   transition: max-height 700ms 0ms, opacity 500ms 200ms, visibility 500ms 200ms;
   max-height: var(--calc-max-height);
-  margin-top: 1.6rem;
+}
+
+#info {
   margin-bottom: 1.6rem;
+  margin-top: 1.6rem;
 }
 
 i {
@@ -69,4 +72,9 @@ i.fa-angle-down::before {
 a[aria-expanded='true'] i.fa-angle-down {
   transform: rotate(180deg);
   transition: transform 0.15s linear;
+}
+
+::slotted(*) {
+  margin-bottom: 0 !important;
+  margin-top: 0 !important;
 }

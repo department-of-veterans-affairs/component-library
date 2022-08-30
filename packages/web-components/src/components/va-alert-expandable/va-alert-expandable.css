@@ -75,6 +75,9 @@ div.continue .alert-expandable-trigger:hover {
   opacity: 1;
   transition: max-height 700ms 0ms, opacity 500ms 200ms, visibility 500ms 200ms;
   max-height: var(--calc-max-height);
+}
+
+#slot-wrap {
   padding: 1.2rem;
 }
 

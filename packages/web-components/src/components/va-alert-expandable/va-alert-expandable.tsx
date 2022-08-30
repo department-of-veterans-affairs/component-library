@@ -133,7 +133,9 @@ export class VaAlertExpandable {
             </div>
           </a>
           <div id="alert-body" class={bodyClasses}>
-            <slot></slot>
+            <div id="slot-wrap">
+              <slot></slot>
+            </div>
           </div>
         </div>
       </Host>
