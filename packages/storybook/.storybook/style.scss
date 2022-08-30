@@ -9,9 +9,10 @@ $formation-asset-path: '~@department-of-veterans-affairs/formation/assets';
 // This is causing the show code button to overlap with components
 // Height Auto fixes Firefox Bug with height being set to a fixed 70px value
 .docs-story {
-  & > div {
+  &>div {
     margin: 0;
-    & > div {
+
+    &>div {
       height: auto;
     }
   }
@@ -32,94 +33,4 @@ a.sbdocs-a:hover {
 
 .resize-y {
   resize: vertical;
-}
-
-.vamc-facility-expandable-alert {
-  display: inline-block;
-  margin-left: 0;
-  margin-right: 0;
-}
-
-@media screen and (min-width: 768px), print and (min-width: 768px) {
-.region-grid {
-    width: 65%;
-    padding-right: 12px;
-    padding-left: 0;
-}
-}
-
-.region-grid {
-  width: 100%;
-  padding-right: initial;
-  padding-left: initial;
-}
-
-.region-grid {
-  width: 65%;
-}
-
-.vads-u-margin-right--2 {
-  margin-right: 16px !important;
-}
-.vads-u-margin-bottom--2 {
-  margin-bottom: 16px !important;
-}
-
-.vads-u-margin-top--1 {
-  margin-top: 8px !important;
-}
-
-.usa-content p, .usa-content ul:not(.usa-accordion):not(.usa-accordion-bordered), .usa-content ol:not(.usa-accordion):not(.usa-accordion-bordered) {
-  max-width: 70rem;
-}
-
-.usa-content p, .usa-content ul:not(.usa-accordion):not(.usa-accordion-bordered), .usa-content ol:not(.usa-accordion):not(.usa-accordion-bordered) {
-  max-width: 70rem;
-}
-
-.medium-screen\:vads-u-margin-bottom--5 {
-  margin-bottom: 40px !important;
-}
-
-
-.small-screen\:vads-u-flex-direction--row {
-    flex-direction: row !important;
-}
-
-.vads-u-display--flex {
-  display: flex !important;
-}
-
-
-.usa-width-one-whole {
-    float: left;
-    display: block;
-    margin-right: 2.35765%!important;
-    width: 100%;
-}
-
-.usa-grid .usa-width-three-fourths {
-  width: 74.41059%;
-}
-
-.usa-width-three-fourths {
-  float: left;
-  display: block;
-  margin-right: 2.35765%;
-  width: 74.41059%;
-}
-
-.region-grid:not(:only-child):last-child {
-  width: 32%;
-}
-
-.region-grid {
-  margin-right: 12px;
-  padding-right: 12px;
-  padding-left: 0;
-}
-
-.region-grid:not(:only-child):last-child {
-  padding-right: 0;
-  padding-left: 12px;
 }
