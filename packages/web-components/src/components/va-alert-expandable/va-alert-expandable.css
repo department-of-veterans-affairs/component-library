@@ -68,6 +68,7 @@ div.continue .alert-expandable-trigger:hover {
   opacity: 0;
   max-height: 0;
   visibility: hidden;
+  overflow: hidden;
 }
 
 .alert-expandable-body.open {
