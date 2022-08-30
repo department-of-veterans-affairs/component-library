@@ -327,13 +327,6 @@ DismissableBackgroundOnlyIcon.args = {
   'onCloseEvent': () => console.log('Close event triggered'),
 };
 
-export const Fullwidth = Template.bind(null);
-Fullwidth.args = {
-  ...defaultArgs,
-  ...Warning.args,
-  'full-width': true,
-};
-
 export const BackgroundOnly = BackgroundOnlyTemplate.bind(null);
 BackgroundOnly.args = {
   ...defaultArgs,
