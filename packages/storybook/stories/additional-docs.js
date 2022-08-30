@@ -47,6 +47,7 @@ export const additionalDocs = {
     maturityCategory: USE,
     maturityLevel: DEPLOYED,
     guidanceHref: 'form/file-input',
+    guidanceName: 'File input',
   },
   'Help menu': {
     maturityCategory: CAUTION,
@@ -79,6 +80,7 @@ export const additionalDocs = {
     maturityCategory: USE,
     maturityLevel: DEPLOYED,
     guidanceHref: 'banner/maintenance',
+    guidanceName: 'Banner - maintenance'
   },
   'MonthYear - React': {
     maturityCategory: DONT_USE,
