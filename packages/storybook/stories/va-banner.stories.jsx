@@ -55,10 +55,16 @@ const defaultArgs = {
   'type': 'info',
   'visible': true,
   'window-session': false,
-  'show-close': true,
 };
+
 export const Default = Template.bind(null);
 Default.args = {
   ...defaultArgs,
 };
 Default.argTypes = propStructure(bannerDocs);
+
+export const Dismissible = Template.bind(null);
+Dismissible.args = {
+  ...defaultArgs,
+  'show-close': true,
+};
