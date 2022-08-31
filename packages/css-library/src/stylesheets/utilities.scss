@@ -8,7 +8,18 @@
       namespace: 'u-',
       output: false,
     ),
-  )
+  ),
+  $theme-utility-breakpoints: (
+    "card": false,
+    "card-lg": false,
+    "mobile": true,
+    "mobile-lg": false,
+    "tablet": true,
+    "tablet-lg": false,
+    "desktop": false,
+    "desktop-lg": true,
+    "widescreen": false
+  ),
 );
 @use 'uswds-core/src/styles/mixins/utility-builder' as *;
 @use 'uswds-core/src/styles/functions' as *;
