@@ -24,7 +24,7 @@ describe('va-alert-expandable', () => {
               <i class="fa-angle-down" role="presentation"></i>
             </div>
           </a>
-          <div id="alert-body" class="alert-expandable-body closed" style="--calc-max-height:calc(20px + 2rem);"><div id="slot-wrap"><slot></slot></div></div>
+          <div id="alert-body" class="alert-expandable-body closed" style="--calc-max-height:calc(38px + 2rem);"><div id="slot-wrap"><slot></slot></div></div>
         </div>
         </mock:shadow-root>
       </va-alert-expandable>
