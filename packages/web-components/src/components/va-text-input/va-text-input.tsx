@@ -21,7 +21,12 @@ if (Build.isTesting) {
 /**
  * @nativeHandler onInput
  * @nativeHandler onBlur
+ * @componentName Text input
+ * @maturityCategory use
+ * @maturityLevel deployed
+ * @guidanceHref form/text-input
  */
+ 
 @Component({
   tag: 'va-text-input',
   styleUrl: 'va-text-input.css',

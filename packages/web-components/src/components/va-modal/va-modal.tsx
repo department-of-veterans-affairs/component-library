@@ -17,6 +17,9 @@ import { focusableQueryString } from '../../utils/modal';
 /**
  * @click Used to detect clicks outside of modal contents to close modal.
  * @keydown Used to detect Escape key to close modal.
+ * @componentName Modal
+ * @maturityCategory use
+ * @maturityLevel deployed
  */
 @Component({
   tag: 'va-modal',

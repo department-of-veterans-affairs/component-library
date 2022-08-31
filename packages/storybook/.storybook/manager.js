@@ -1,20 +1,35 @@
 import { addons } from '@storybook/addons';
 import React from 'react';
+import webComponentDocs from '@department-of-veterans-affairs/web-components/component-docs.json';
 import { additionalDocs } from '../stories/additional-docs';
 import { category } from '../stories/maturity-scale';
+import { getMaturityScale } from '../stories/wc-helpers';
+
+/**
+ * Return the maturity category matching a specific component name
+ */
+const getMaturityCategory = (componentName) => {
+  const componentDocs = webComponentDocs.components.filter(comp => 
+    comp.docsTags.some(tag => tag.text === componentName))[0];
+  
+  const maturityScale = getMaturityScale(componentDocs?.docsTags);
+  return maturityScale['category'];
+}
 
 addons.setConfig({
   enableShortcuts: false,
   sidebar: {
     renderLabel: item => {
+      const maturityCategoryFromDocs = getMaturityCategory(item.name);
       if (
         item.parent === 'components' ||
-        item.parent === 'components-banners' ||
-        item.parent === 'components-buttons'
+        item.parent === 'components-icons' ||
+        item.parent === 'deprecated' ||
+        item.parent === 'under-development'
       ) {
-        const maturityCategory =
-          additionalDocs[item.name] &&
-          additionalDocs[item.name].maturityCategory;
+        const maturityCategory = 
+          maturityCategoryFromDocs ?? 
+          additionalDocs[item.name]?.maturityCategory;
 
         let backgroundColor;
         switch (maturityCategory) {

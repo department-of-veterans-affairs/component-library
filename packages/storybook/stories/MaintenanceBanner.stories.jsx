@@ -5,8 +5,9 @@ import MaintenanceBanner from '../../react-components/src/components/Maintenance
 import { StoryDocs } from './wc-helpers';
 
 export default {
-  title: 'Components/Banners/MaintenanceBanner',
+  title: 'Components/Banner - Maintenance',
   component: MaintenanceBanner,
+  id: 'components/banners-maintenancebanner',
   argTypes: {
     startsAt: { control: { type: 'date' } },
     expiresAt: { control: { type: 'date' } },
@@ -15,7 +16,7 @@ export default {
   parameters: {
     componentSubtitle: 'Maintenance banner React component',
     docs: {
-      page: () => <StoryDocs componentName="MaintenanceBanner" />,
+      page: () => <StoryDocs componentName="Banner - Maintenance" />,
     },
   },
 };

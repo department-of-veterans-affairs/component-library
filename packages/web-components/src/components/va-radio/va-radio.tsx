@@ -14,7 +14,12 @@ import { getSlottedNodes } from '../../utils/utils';
 /**
  * @keydown The event emitted when a key is pressed.
  * @radioOptionSelected The event emitted when the selected option value changes.
+ * @componentName Radio button
+ * @maturityCategory use
+ * @maturityLevel deployed
+ * @guidanceHref form/radio-button
  */
+
 @Component({
   tag: 'va-radio',
   styleUrl: 'va-radio.css',

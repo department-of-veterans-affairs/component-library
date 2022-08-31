@@ -3,12 +3,12 @@ import Modal from '../../react-components/src/components/Modal/Modal';
 import { StoryDocs } from './wc-helpers';
 
 export default {
-  title: 'Components/Modal',
+  title: 'Deprecated/Modal - React',
   component: Modal,
   parameters: {
     componentSubtitle: 'Modal React component',
     docs: {
-      page: () => <StoryDocs componentName="Modal" />,
+      page: () => <StoryDocs componentName="Modal - React" />,
     },
   },
 };

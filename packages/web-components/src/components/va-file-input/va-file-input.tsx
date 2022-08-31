@@ -10,6 +10,13 @@ import {
   EventEmitter
 } from '@stencil/core';
 
+/**
+ * @componentName File input
+ * @maturityCategory caution
+ * @maturityLevel candidate
+ * @guidanceHref form/file-input
+ */
+
 @Component({
   tag: 'va-file-input',
   styleUrl: 'va-file-input.css',

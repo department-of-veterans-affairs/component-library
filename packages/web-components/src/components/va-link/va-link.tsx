@@ -1,5 +1,11 @@
 import { Component, Event, EventEmitter, Host, h, Prop } from '@stencil/core';
 
+/**
+ * @componentName Link
+ * @maturityCategory caution
+ * @maturityLevel candidate
+ */
+
 @Component({
   tag: 'va-link',
   styleUrl: 'va-link.css',

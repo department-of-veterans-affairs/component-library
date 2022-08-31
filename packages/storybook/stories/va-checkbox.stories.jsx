@@ -6,9 +6,10 @@ import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
 const checkboxDocs = getWebComponentDocs('va-checkbox');
 
 export default {
-  title: 'Components/va-checkbox',
+  title: 'Components/Checkbox',
+  id: 'components/va-checkbox',
   parameters: {
-    componentSubtitle: `Checkbox web component`,
+    componentSubtitle: `va-checkbox web component`,
     docs: {
       page: () => <StoryDocs data={checkboxDocs} />,
     },
