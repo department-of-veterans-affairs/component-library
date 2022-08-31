@@ -1,5 +1,20 @@
-import { Component, Event, EventEmitter, h, Prop } from '@stencil/core';
+import {
+  Component,
+  Element,
+  Event,
+  EventEmitter,
+  forceUpdate,
+  h,
+  Prop
+} from '@stencil/core';
+import i18next from 'i18next';
+import { Build } from '@stencil/core';
 import { consoleDevError } from '../../utils/utils';
+
+if (Build.isTesting) {
+  // Make i18next.t() return the key instead of the value
+  i18next.init({ lng: 'cimode' });
+}
 
 /**
  * This component will render links based on the content around it. It scans the document for any `<h2>`
@@ -17,6 +32,8 @@ import { consoleDevError } from '../../utils/utils';
   shadow: true,
 })
 export class VaOnThisPage {
+  @Element() el: HTMLElement;
+
   /**
    * The event used to track usage of the component. This is emitted when the
    * user clicks on a link and enableAnalytics is true.
@@ -46,6 +63,16 @@ export class VaOnThisPage {
     });
   };
 
+  connectedCallback() {
+    i18next.on('languageChanged', () => {
+      forceUpdate(this.el);
+    });
+  }
+
+  disconnectedCallback() {
+    i18next.off('languageChanged');
+  }
+
   render() {
     const { handleOnClick } = this;
 
@@ -61,7 +88,7 @@ export class VaOnThisPage {
     return (
       <nav aria-labelledby="on-this-page">
         <dl>
-          <dt id="on-this-page">On this page</dt>
+          <dt id="on-this-page">{i18next.t('on-this-page')}</dt>
           <dd role="definition">
             {h2s.map(heading => (
               <a href={`#${heading.id}`} onClick={handleOnClick}>
