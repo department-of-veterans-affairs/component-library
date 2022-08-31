@@ -1,9 +1,16 @@
 import React, { useState } from 'react';
 import { MonthYear } from '@department-of-veterans-affairs/component-library';
+import { StoryDocs } from './wc-helpers';
 
 export default {
-  title: 'Components/MonthYear',
+  title: 'Deprecated/MonthYear - React',
   component: MonthYear,
+  parameters: {
+    componentSubtitle: 'MonthYear React component',
+    docs: {
+      page: () => <StoryDocs componentName="MonthYear - React" />,
+    },
+  },
 };
 
 const Template = args => {

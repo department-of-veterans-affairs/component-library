@@ -3,12 +3,12 @@ import Checkbox from '../../react-components/src/components/Checkbox/Checkbox';
 import { StoryDocs } from './wc-helpers';
 
 export default {
-  title: 'Components/Checkbox',
+  title: 'Deprecated/Checkbox - React',
   component: Checkbox,
   parameters: {
     componentSubtitle: 'Checkbox React component',
     docs: {
-      page: () => <StoryDocs componentName="Checkbox" />,
+      page: () => <StoryDocs componentName="Checkbox - React" />,
     },
   },
 };

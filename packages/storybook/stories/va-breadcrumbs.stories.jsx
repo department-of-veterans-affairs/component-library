@@ -4,9 +4,10 @@ import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
 const breadcrumbsDocs = getWebComponentDocs('va-breadcrumbs');
 
 export default {
-  title: 'Components/va-breadcrumbs',
+  title: 'Components/Breadcrumbs',
+  id: 'components/va-breadcrumbs',
   parameters: {
-    componentSubtitle: 'Breadcrumbs web component',
+    componentSubtitle: 'va-breadcrumbs web component',
     docs: {
       page: () => <StoryDocs data={breadcrumbsDocs} />,
     },

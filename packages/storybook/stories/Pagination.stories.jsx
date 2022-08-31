@@ -3,12 +3,12 @@ import Pagination from '../../react-components/src/components/Pagination/Paginat
 import { StoryDocs } from './wc-helpers';
 
 export default {
-  title: 'Components/Pagination',
+  title: 'Deprecated/Pagination - React',
   component: Pagination,
   parameters: {
     componentSubtitle: 'Pagination React component',
     docs: {
-      page: () => <StoryDocs componentName="Pagination" />,
+      page: () => <StoryDocs componentName="Pagination - React" />,
     },
   },
 };

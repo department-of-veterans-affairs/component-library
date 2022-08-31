@@ -3,12 +3,13 @@ import OMBInfo from '../../react-components/src/components/OMBInfo/OMBInfo';
 import { StoryDocs } from './wc-helpers';
 
 export default {
-  title: 'Components/OMBInfo',
+  title: 'components/OMB info - React',
+  id: 'components/ombinfo',
   component: OMBInfo,
   parameters: {
-    componentSubtitle: 'OMB info component',
+    componentSubtitle: 'OMB info React component',
     docs: {
-      page: () => <StoryDocs componentName="OMBInfo" />,
+      page: () => <StoryDocs componentName="OMB info - React" />,
     },
   },
 };

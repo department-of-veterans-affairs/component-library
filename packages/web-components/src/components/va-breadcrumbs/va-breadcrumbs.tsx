@@ -8,6 +8,11 @@ import {
   Prop,
 } from '@stencil/core';
 
+/**
+ * @componentName Breadcrumbs
+ * @maturityCategory use
+ * @maturityLevel deployed
+ */
 @Component({
   tag: 'va-breadcrumbs',
   styleUrl: 'va-breadcrumbs.css',

@@ -22,6 +22,13 @@ import {
  * - Month and Day must be valid numbers
  * - The Year cannot fall outside of the range of 1900 through the current year plus 100 years
  */
+
+/**
+ * @componentName Date input
+ * @maturityCategory use
+ * @maturityLevel deployed
+ * @guidanceHref form/date-input
+ */
 @Component({
   tag: 'va-date',
   styleUrl: 'va-date.css',

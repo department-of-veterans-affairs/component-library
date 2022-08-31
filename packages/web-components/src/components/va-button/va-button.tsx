@@ -9,7 +9,10 @@ import {
 } from '@stencil/core';
 
 /**
+ * @componentName Button
  * @nativeHandler onClick
+ * @maturityCategory caution
+ * @maturityLevel candidate
  */
 
 @Component({

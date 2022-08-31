@@ -5,6 +5,12 @@ import { consoleDevError } from '../../utils/utils';
  * This component will render links based on the content around it. It scans the document for any `<h2>`
  * elements that contain an `id` inside of an `<article>` and will create a list of links to the headings.
  */
+
+/**
+ * @componentName On this page
+ * @maturityCategory use
+ * @maturityLevel best_practice
+ */
 @Component({
   tag: 'va-on-this-page',
   styleUrl: 'va-on-this-page.css',

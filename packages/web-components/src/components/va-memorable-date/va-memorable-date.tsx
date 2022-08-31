@@ -20,6 +20,13 @@ import {
  * - Month and Day must be valid numbers
  * - The Year cannot fall outside of the range of 1900 through the current year plus 100 years
  */
+
+/**
+ * @componentName Memorable date
+ * @maturityCategory caution
+ * @maturityLevel available
+ * @guidanceHref form/memorable-date
+ */
 @Component({
   tag: 'va-memorable-date',
   styleUrl: 'va-memorable-date.css',

@@ -38,7 +38,10 @@ if (Build.isTesting) {
  */
 
 /**
+ * @componentName Accordion
  * @accordionItemToggled This event is fired when an accordion item is opened or closed
+ * @maturityCategory use
+ * @maturityLevel best_practice
  */
 @Component({
   tag: 'va-accordion',
