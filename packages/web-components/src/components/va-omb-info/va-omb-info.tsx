@@ -1,5 +1,10 @@
 import { Component, Host, h, Prop, State, Element } from '@stencil/core';
 
+/**
+ * @componentName OMB info
+ * @maturityCategory caution
+ * @maturityLevel candidate
+ */
 @Component({
   tag: 'va-omb-info',
   styleUrl: 'va-omb-info.css',

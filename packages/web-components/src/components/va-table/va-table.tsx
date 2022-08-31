@@ -9,6 +9,13 @@ import { quicksort, reverseQuicksort } from '../../utils/dom-sort';
  * Children of each row element should be `<span>` elements. Table
  * semantics will be added and numeric columns will be right aligned.
  */
+
+/**
+ * @componentName Table
+ * @maturityCategory use
+ * @maturityLevel best_practice
+ */
+
 @Component({
   tag: 'va-table',
   styleUrl: 'va-table.css',

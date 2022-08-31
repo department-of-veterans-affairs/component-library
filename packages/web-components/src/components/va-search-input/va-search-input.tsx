@@ -9,6 +9,12 @@ import {
   Watch,
 } from '@stencil/core';
 
+/**
+ * @componentName Search input
+ * @maturityCategory use
+ * @maturityLevel deployed
+ */
+
 @Component({
   tag: 'va-search-input',
   styleUrl: 'va-search-input.css',

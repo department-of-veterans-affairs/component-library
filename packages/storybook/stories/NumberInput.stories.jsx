@@ -3,12 +3,12 @@ import NumberInput from '../../react-components/src/components/NumberInput/Numbe
 import { StoryDocs } from './wc-helpers';
 
 export default {
-  title: 'Components/NumberInput',
+  title: 'Deprecated/NumberInput - React',
   component: NumberInput,
   parameters: {
     componentSubtitle: 'Number input React component',
     docs: {
-      page: () => <StoryDocs componentName="NumberInput" />,
+      page: () => <StoryDocs componentName="NumberInput - React" />,
     },
   },
 };

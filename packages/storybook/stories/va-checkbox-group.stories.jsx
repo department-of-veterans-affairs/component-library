@@ -10,10 +10,11 @@ const checkBoxGroupDocs = getWebComponentDocs('va-checkbox-group');
 const checkbox = getWebComponentDocs('va-checkbox');
 
 export default {
-  title: 'Components/va-checkbox-group',
+  title: 'Components/Checkbox group',
+  id: 'components/va-checkbox-group',
   subcomponents: componentStructure(checkbox),
   parameters: {
-    componentSubtitle: 'Checkbox group web component',
+    componentSubtitle: 'va-checkbox-group web component',
     actions: {
       handles: ['component-library-analytics'],
     },

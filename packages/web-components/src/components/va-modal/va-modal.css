@@ -20,7 +20,7 @@
   z-index: 6;
 }
 
-:host:before {
+:host([visible]:not([visible='false']))::before {
   content: '';
   display: inline-block;
   height: 100%;

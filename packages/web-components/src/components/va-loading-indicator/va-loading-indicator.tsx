@@ -8,6 +8,12 @@ import {
   h,
 } from '@stencil/core';
 
+/**
+ * @componentName Loading indicator
+ * @maturityCategory use
+ * @maturityLevel best_practice
+ */
+
 @Component({
   tag: 'va-loading-indicator',
   styleUrl: 'va-loading-indicator.css',

@@ -1,9 +1,17 @@
 import React from 'react';
 import AcceptTermsPrompt from '../../react-components/src/components/AcceptTermsPrompt/AcceptTermsPrompt';
+import { StoryDocs } from './wc-helpers';
 
 export default {
-  title: 'Components/AcceptTermsPrompt',
+  title: 'Components/Accept terms prompt',
   component: AcceptTermsPrompt,
+  id: 'components/accepttermsprompt',
+  parameters: {
+    componentSubtitle: 'Accept terms prompt React component',
+    docs: {
+      page: () => <StoryDocs componentName="Accept terms prompt" />,
+    },
+  },
 };
 
 const Template = args => <AcceptTermsPrompt terms={{ ...args }} />;

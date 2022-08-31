@@ -10,6 +10,11 @@ import {
   h,
 } from '@stencil/core';
 
+/**
+ * @componentName Additional info
+ * @maturityCategory use
+ * @maturityLevel deployed
+ */
 @Component({
   tag: 'va-additional-info',
   styleUrl: 'va-additional-info.css',

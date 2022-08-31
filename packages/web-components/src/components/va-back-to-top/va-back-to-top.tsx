@@ -13,6 +13,12 @@ import 'intersection-observer';
  * It uses `position: absolute` so the button will reveal when
  * the `span` is above the viewport.
  */
+
+/**
+ * @componentName Back to top
+ * @maturityCategory use
+ * @maturityLevel deployed
+ */
 @Component({
   tag: 'va-back-to-top',
   styleUrl: 'va-back-to-top.css',

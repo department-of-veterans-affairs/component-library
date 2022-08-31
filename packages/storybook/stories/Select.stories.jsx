@@ -3,12 +3,12 @@ import Select from '../../react-components/src/components/Select/Select';
 import { StoryDocs } from './wc-helpers';
 
 export default {
-  title: 'Components/Select',
+  title: 'Deprecated/Select - React',
   component: Select,
   parameters: {
     componentSubtitle: 'Select React component',
     docs: {
-      page: () => <StoryDocs componentName="Select" />,
+      page: () => <StoryDocs componentName="Select - React" />,
     },
   },
 };

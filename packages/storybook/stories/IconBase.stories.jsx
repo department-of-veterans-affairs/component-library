@@ -1,10 +1,17 @@
 import React from 'react';
-
 import IconBase from '../../react-components/src/components/IconBase/IconBase';
+import { StoryDocs } from './wc-helpers';
 
 export default {
-  title: 'Components/Icons/IconBase',
+  title: 'Components/Icons/Icon - base',
   component: IconBase,
+  id: 'components/icons/iconbase',
+  parameters: {
+    componentSubtitle: 'Icon base wrapper',
+    docs: {
+      page: () => <StoryDocs componentName="Icon - base" />,
+    },
+  },
 };
 
 export const Description = () => (

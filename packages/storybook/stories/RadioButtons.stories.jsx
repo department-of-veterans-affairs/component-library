@@ -3,12 +3,12 @@ import RadioButtons from '../../react-components/src/components/RadioButtons/Rad
 import { StoryDocs } from './wc-helpers';
 
 export default {
-  title: 'Components/RadioButtons',
+  title: 'Deprecated/RadioButtons - React',
   component: RadioButtons,
   parameters: {
     componentSubtitle: 'Radio buttons React component',
     docs: {
-      page: () => <StoryDocs componentName="RadioButtons" />,
+      page: () => <StoryDocs componentName="RadioButtons - React" />,
     },
   },
 };

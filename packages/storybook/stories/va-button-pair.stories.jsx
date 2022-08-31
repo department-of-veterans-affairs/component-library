@@ -8,9 +8,10 @@ VaButtonPair.displayName = 'VaButtonPair';
 const buttonPairDocs = getWebComponentDocs('va-button-pair');
 
 export default {
-  title: 'Components/va-button-pair',
+  title: 'Components/Button pair',
+  id: 'components/va-button-pair',
   parameters: {
-    componentSubtitle: `Button pair web component`,
+    componentSubtitle: `va-button-pair web component`,
     docs: {
       page: () => <StoryDocs data={buttonPairDocs} />,
     },

@@ -12,6 +12,10 @@ import {
 
 /**
  * @vaChange The event emitted when the input value changes.
+ * @componentName Checkbox group
+ * @maturityCategory use
+ * @maturityLevel deployed
+ * @guidanceHref form/checkbox
  */
 @Component({
   tag: 'va-checkbox-group',
