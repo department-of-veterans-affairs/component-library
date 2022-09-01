@@ -31,7 +31,7 @@
 
 $u-flex-grid-col: (
   flex-grid-col: (
-    base: 'vads',
+    base: 'vads-flex',
     modifiers: null,
     values: map-collect($tokens-flex-grid-col),
     settings: $flex-grid-settings,
@@ -42,7 +42,7 @@ $u-flex-grid-col: (
 
 $u-flex-grid-cols: (
   flex-grid-cols: (
-    base: 'vads-col',
+    base: 'vads-flex-col',
     modifiers: null,
     values: map-collect($tokens-flex-grid-cols),
     settings: $flex-grid-settings,
