@@ -16,7 +16,12 @@ import { getSlottedNodes } from '../../utils/utils';
 
 /**
  * @nativeHandler onKeyDown
+ * @componentName Select
+ * @maturityCategory use
+ * @maturityLevel deployed
+ * @guidanceHref form/select
  */
+
 @Component({
   tag: 'va-select',
   styleUrl: 'va-select.css',

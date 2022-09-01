@@ -1,0 +1,19 @@
+@use './_variables' as *;
+
+$tokens-padding: (
+  0: $units-0,
+  1px: $units-1px,
+  0p25: $units-0p25,
+  0p5: $units-0p5,
+  1: $units-1,
+  1p5: $units-1p5,
+  2: $units-2,
+  2p5: $units-2p5,
+  3: $units-3,
+  4: $units-4,
+  5: $units-5,
+  6: $units-6,
+  7: $units-7,
+  8: $units-8,
+  9: $units-9,
+);

@@ -11,6 +11,11 @@ import {
 } from '@stencil/core';
 import classnames from 'classnames';
 
+/**
+ * @componentName Alert - expandable
+ * @maturityCategory caution
+ * @maturityLevel candidate
+ */
 @Component({
   tag: 'va-alert-expandable',
   styleUrl: 'va-alert-expandable.css',

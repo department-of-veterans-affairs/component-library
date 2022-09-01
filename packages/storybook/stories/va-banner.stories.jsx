@@ -4,9 +4,10 @@ import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
 const bannerDocs = getWebComponentDocs('va-banner');
 
 export default {
-  title: 'Components/va-banner',
+  title: 'Components/Banner',
+  id: 'components/va-banner',
   parameters: {
-    componentSubtitle: `Banner web component`,
+    componentSubtitle: `va-banner web component`,
     docs: {
       page: () => <StoryDocs data={bannerDocs} />,
     },
@@ -38,20 +39,21 @@ const Template = ({
       visible={visible}
       window-session={windowSession}
     >
-      Congress shall make no law respecting an establishment of religion, or
-      prohibiting the free exercise thereof; or abridging the freedom of speech,
-      or of the press; <a href="#">LINK TEST</a> or the right of the people
-      peaceably to assemble, and to petition the Government for a redress of
-      grievances.
+      <p>
+        We have temporarily closed our Acute Psychiatry at our Lyons Campus. All
+        mental health admissions are being routed to our sister VA facilities in
+        New York, Bronx and Manhattan or to the community as appropriate.
+      </p>
+      <a href="#">Get updates on affected services and facilities</a>
     </va-banner>
   );
 };
 
 const defaultArgs = {
-  'headline': 'This is a test',
+  'headline': 'Temporary closure of acute psychiatry at Lyons',
   'show-close': false,
   'disable-analytics': false,
-  'type': 'error',
+  'type': 'info',
   'visible': true,
   'window-session': false,
 };
@@ -62,8 +64,8 @@ Default.args = {
 };
 Default.argTypes = propStructure(bannerDocs);
 
-export const Closeable = Template.bind(null);
-Closeable.args = {
+export const Dismissible = Template.bind(null);
+Dismissible.args = {
   ...defaultArgs,
   'show-close': true,
 };

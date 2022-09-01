@@ -88,6 +88,33 @@ $line-height-settings: (
   visited: false,
 ) !default;
 
+$margin-settings: (
+  output: true,
+  responsive: true,
+  active: false,
+  focus: false,
+  hover: false,
+  visited: false,
+) !default;
+
+$measure-settings: (
+  output: true,
+  responsive: true,
+  active: false,
+  focus: false,
+  hover: false,
+  visited: false,
+) !default;
+
+$padding-settings: (
+  output: true,
+  responsive: true,
+  active: false,
+  focus: false,
+  hover: false,
+  visited: false,
+) !default;
+
 $position-settings: (
   output: true,
   responsive: true,

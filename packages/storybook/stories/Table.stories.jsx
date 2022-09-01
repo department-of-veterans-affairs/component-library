@@ -3,12 +3,12 @@ import Table from '../../react-components/src/components/Table/Table';
 import { StoryDocs } from './wc-helpers';
 
 export default {
-  title: 'Components/Table',
+  title: 'Deprecated/Table - React',
   component: Table,
   parameters: {
     componentSubtitle: 'Table React component',
     docs: {
-      page: () => <StoryDocs componentName="Table" />,
+      page: () => <StoryDocs componentName="Table - React" />,
     },
   },
 };

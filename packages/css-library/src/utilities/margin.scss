@@ -1,0 +1,52 @@
+@use 'uswds-core/src/styles/functions' as *;
+@use '../tokens/margin' as *;
+@use './settings' as *;
+
+$u-margin-base: (
+  margin: (
+    base: 'vads-margin',
+    modifiers: null,
+    values: map-collect($tokens-margin),
+    settings: $margin-settings,
+    property: 'margin',
+    type: 'utility',
+  ),
+);
+
+$u-margin-y: (
+  margin-y: (
+    base: 'vads-margin',
+    modifiers: (
+      'y': (
+        '-top',
+        '-bottom',
+      ),
+      'top': '-top',
+      'bottom': '-bottom',
+    ),
+    values: map-collect($tokens-margin-y),
+    settings: $margin-settings,
+    property: 'margin',
+    type: 'utility',
+  ),
+);
+
+$u-margin-x: (
+  margin-x: (
+    base: 'vads-margin',
+    modifiers: (
+      'x': (
+        '-left',
+        '-right',
+      ),
+      'right': '-right',
+      'left': '-left',
+    ),
+    values: map-collect($tokens-margin-x),
+    settings: $margin-settings,
+    property: 'margin',
+    type: 'utility',
+  ),
+);
+
+$u-margin: map-collect($u-margin-base, $u-margin-y, $u-margin-x);
