@@ -4,14 +4,16 @@
     margin-bottom: 1.2rem;
 }
 
-:host([error]:not([error=''])) {
+:host([error]:not([error=''])), 
+:host([iserror="true"]) {
     border-left: 0.4rem solid  var(--color-secondary-dark);
     padding-left: 2rem;
     position: relative;
 }
 
 @media screen and (min-width: 1008px) {
-    :host([error]:not([error=''])) {
+    :host([error]:not([error=''])), 
+    :host([iserror="true"]) {
         margin-left: -2.4rem; /* padding left + border left */
     }
 }
@@ -21,7 +23,8 @@
 }
 
 :host([error]:not([error=''])) label,
-:host([error]:not([error=''])) span {
+:host([error]:not([error=''])) span, 
+:host([iserror="true"]) span {
     font-weight: 700;
 }
 

@@ -535,6 +535,20 @@ export namespace Components {
          */
         "showLastPage"?: boolean;
     }
+    interface VaPrivacyAgreement {
+        /**
+          * Whether the checkbox is checked or not.
+         */
+        "checked"?: boolean;
+        /**
+          * Emit component-library-analytics events on the blur event.
+         */
+        "enableAnalytics"?: boolean;
+        /**
+          * Whether to display the error message or not.
+         */
+        "isError"?: boolean;
+    }
     interface VaProcessList {
     }
     interface VaProgressBar {
@@ -951,6 +965,12 @@ declare global {
         prototype: HTMLVaPaginationElement;
         new (): HTMLVaPaginationElement;
     };
+    interface HTMLVaPrivacyAgreementElement extends Components.VaPrivacyAgreement, HTMLStencilElement {
+    }
+    var HTMLVaPrivacyAgreementElement: {
+        prototype: HTMLVaPrivacyAgreementElement;
+        new (): HTMLVaPrivacyAgreementElement;
+    };
     interface HTMLVaProcessListElement extends Components.VaProcessList, HTMLStencilElement {
     }
     var HTMLVaProcessListElement: {
@@ -1053,6 +1073,7 @@ declare global {
         "va-omb-info": HTMLVaOmbInfoElement;
         "va-on-this-page": HTMLVaOnThisPageElement;
         "va-pagination": HTMLVaPaginationElement;
+        "va-privacy-agreement": HTMLVaPrivacyAgreementElement;
         "va-process-list": HTMLVaProcessListElement;
         "va-progress-bar": HTMLVaProgressBarElement;
         "va-promo-banner": HTMLVaPromoBannerElement;
@@ -1734,6 +1755,28 @@ declare namespace LocalJSX {
          */
         "showLastPage"?: boolean;
     }
+    interface VaPrivacyAgreement {
+        /**
+          * Whether the checkbox is checked or not.
+         */
+        "checked"?: boolean;
+        /**
+          * Emit component-library-analytics events on the blur event.
+         */
+        "enableAnalytics"?: boolean;
+        /**
+          * Whether to display the error message or not.
+         */
+        "isError"?: boolean;
+        /**
+          * The event used to track usage of the component. This is emitted when the input is blurred and enableAnalytics is true.
+         */
+        "onComponent-library-analytics"?: (event: CustomEvent<any>) => void;
+        /**
+          * The event emitted when the checkbox changes.
+         */
+        "onVaChange"?: (event: CustomEvent<any>) => void;
+    }
     interface VaProcessList {
     }
     interface VaProgressBar {
@@ -2086,6 +2129,7 @@ declare namespace LocalJSX {
         "va-omb-info": VaOmbInfo;
         "va-on-this-page": VaOnThisPage;
         "va-pagination": VaPagination;
+        "va-privacy-agreement": VaPrivacyAgreement;
         "va-process-list": VaProcessList;
         "va-progress-bar": VaProgressBar;
         "va-promo-banner": VaPromoBanner;
@@ -2128,6 +2172,7 @@ declare module "@stencil/core" {
             "va-omb-info": LocalJSX.VaOmbInfo & JSXBase.HTMLAttributes<HTMLVaOmbInfoElement>;
             "va-on-this-page": LocalJSX.VaOnThisPage & JSXBase.HTMLAttributes<HTMLVaOnThisPageElement>;
             "va-pagination": LocalJSX.VaPagination & JSXBase.HTMLAttributes<HTMLVaPaginationElement>;
+            "va-privacy-agreement": LocalJSX.VaPrivacyAgreement & JSXBase.HTMLAttributes<HTMLVaPrivacyAgreementElement>;
             "va-process-list": LocalJSX.VaProcessList & JSXBase.HTMLAttributes<HTMLVaProcessListElement>;
             "va-progress-bar": LocalJSX.VaProgressBar & JSXBase.HTMLAttributes<HTMLVaProgressBarElement>;
             "va-promo-banner": LocalJSX.VaPromoBanner & JSXBase.HTMLAttributes<HTMLVaPromoBannerElement>;
