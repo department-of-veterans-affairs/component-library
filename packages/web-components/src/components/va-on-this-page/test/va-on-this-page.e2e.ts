@@ -13,7 +13,7 @@ describe('va-on-this-page', () => {
         <mock:shadow-root>
           <nav aria-labelledby="on-this-page">
             <dl>
-              <dt id="on-this-page">On this page</dt>
+              <dt id="on-this-page">on-this-page</dt>
               <dd role="definition"></dd>
             </dl>
           </nav>
@@ -60,7 +60,7 @@ describe('va-on-this-page', () => {
         <mock:shadow-root>
           <nav aria-labelledby="on-this-page">
             <dl>
-              <dt id="on-this-page">On this page</dt>
+              <dt id="on-this-page">on-this-page</dt>
               <dd role="definition">
                 <a href="#an-id">
                   <i aria-hidden="true" class="fa-arrow-down fas"></i>
@@ -99,7 +99,7 @@ describe('va-on-this-page', () => {
     <mock:shadow-root>
       <nav aria-labelledby="on-this-page">
         <dl>
-          <dt id="on-this-page">On this page</dt>
+          <dt id="on-this-page">on-this-page</dt>
           <dd role="definition">
             <a href="#foo">
               <i aria-hidden="true" class="fa-arrow-down fas"></i>
@@ -136,7 +136,7 @@ describe('va-on-this-page', () => {
         <mock:shadow-root>
           <nav aria-labelledby="on-this-page">
             <dl>
-              <dt id="on-this-page">On this page</dt>
+              <dt id="on-this-page">on-this-page</dt>
               <dd role="definition">
                 <a href="#an-id">
                   <i aria-hidden="true" class="fa-arrow-down fas"></i>

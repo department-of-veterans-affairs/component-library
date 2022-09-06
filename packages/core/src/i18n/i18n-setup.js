@@ -4,6 +4,7 @@ import LanguageDetector from 'i18next-browser-languagedetector';
 import mainTag from './language-detector';
 import enTranslation from './translations/en';
 import esTranslation from './translations/es';
+import tlTranslation from './translations/tl';
 
 const languageDetector = new LanguageDetector();
 languageDetector.addDetector(mainTag);
@@ -15,6 +16,7 @@ i18next.use(languageDetector).init({
   resources: {
     en: { translation: enTranslation },
     es: { translation: esTranslation },
+    tl: { translation: tlTranslation },
   },
 });
 
