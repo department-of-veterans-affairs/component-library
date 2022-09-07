@@ -42,6 +42,8 @@ if (Build.isTesting) {
  * @accordionItemToggled This event is fired when an accordion item is opened or closed
  * @maturityCategory use
  * @maturityLevel best_practice
+ * @translations English
+ * @translations Spanish
  */
 @Component({
   tag: 'va-accordion',
