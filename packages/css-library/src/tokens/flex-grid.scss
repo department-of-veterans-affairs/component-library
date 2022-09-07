@@ -1,0 +1,167 @@
+@use 'sass:math';
+@use './_variables' as *;
+
+$grid-columns: 12;
+
+$tokens-flex-grid-col: (
+  col: (
+    slug: 'col',
+    content: 1,
+    extend: (
+      box-sizing: border-box,
+      flex-basis: 0,
+      max-width: 100%,
+      min-height: $units-1px,
+      min-width: $units-0,
+      position: relative,
+      width: 100%,
+    ),
+  ),
+);
+
+$tokens-flex-grid-cols: (
+  1: (
+    slug: '1',
+    content: 0 0 math.div(1, $grid-columns) * 100%,
+    extend: (
+      box-sizing: border-box,
+      max-width: math.div(1, $grid-columns) * 100%,
+      min-height: $units-1px,
+      min-width: $units-0,
+      position: relative,
+      width: 100%,
+    ),
+  ),
+  2: (
+    slug: '2',
+    content: 0 0 math.div(2, $grid-columns) * 100%,
+    extend: (
+      box-sizing: border-box,
+      max-width: math.div(2, $grid-columns) * 100%,
+      min-height: $units-1px,
+      min-width: $units-0,
+      position: relative,
+      width: 100%,
+    ),
+  ),
+  3: (
+    slug: '3',
+    content: 0 0 math.div(3, $grid-columns) * 100%,
+    extend: (
+      box-sizing: border-box,
+      max-width: math.div(3, $grid-columns) * 100%,
+      min-height: $units-1px,
+      min-width: $units-0,
+      position: relative,
+      width: 100%,
+    ),
+  ),
+  4: (
+    slug: '4',
+    content: 0 0 math.div(4, $grid-columns) * 100%,
+    extend: (
+      box-sizing: border-box,
+      max-width: math.div(4, $grid-columns) * 100%,
+      min-height: $units-1px,
+      min-width: $units-0,
+      position: relative,
+      width: 100%,
+    ),
+  ),
+  5: (
+    slug: '5',
+    content: 0 0 math.div(5, $grid-columns) * 100%,
+    extend: (
+      box-sizing: border-box,
+      max-width: math.div(5, $grid-columns) * 100%,
+      min-height: $units-1px,
+      min-width: $units-0,
+      position: relative,
+      width: 100%,
+    ),
+  ),
+  6: (
+    slug: '6',
+    content: 0 0 math.div(6, $grid-columns) * 100%,
+    extend: (
+      box-sizing: border-box,
+      max-width: math.div(6, $grid-columns) * 100%,
+      min-height: $units-1px,
+      min-width: $units-0,
+      position: relative,
+      width: 100%,
+    ),
+  ),
+  7: (
+    slug: '7',
+    content: 0 0 math.div(7, $grid-columns) * 100%,
+    extend: (
+      box-sizing: border-box,
+      max-width: math.div(7, $grid-columns) * 100%,
+      min-height: $units-1px,
+      min-width: $units-0,
+      position: relative,
+      width: 100%,
+    ),
+  ),
+  8: (
+    slug: '8',
+    content: 0 0 math.div(8, $grid-columns) * 100%,
+    extend: (
+      box-sizing: border-box,
+      max-width: math.div(8, $grid-columns) * 100%,
+      min-height: $units-1px,
+      min-width: $units-0,
+      position: relative,
+      width: 100%,
+    ),
+  ),
+  9: (
+    slug: '9',
+    content: 0 0 math.div(9, $grid-columns) * 100%,
+    extend: (
+      box-sizing: border-box,
+      max-width: math.div(9, $grid-columns) * 100%,
+      min-height: $units-1px,
+      min-width: $units-0,
+      position: relative,
+      width: 100%,
+    ),
+  ),
+  10: (
+    slug: '10',
+    content: 0 0 math.div(10, $grid-columns) * 100%,
+    extend: (
+      box-sizing: border-box,
+      max-width: math.div(10, $grid-columns) * 100%,
+      min-height: $units-1px,
+      min-width: $units-0,
+      position: relative,
+      width: 100%,
+    ),
+  ),
+  11: (
+    slug: '11',
+    content: 0 0 math.div(11, $grid-columns) * 100%,
+    extend: (
+      box-sizing: border-box,
+      max-width: math.div(11, $grid-columns) * 100%,
+      min-height: $units-1px,
+      min-width: $units-0,
+      position: relative,
+      width: 100%,
+    ),
+  ),
+  12: (
+    slug: '12',
+    content: 0 0 math.div(12, $grid-columns) * 100%,
+    extend: (
+      box-sizing: border-box,
+      max-width: math.div(12, $grid-columns) * 100%,
+      min-height: $units-1px,
+      min-width: $units-0,
+      position: relative,
+      width: 100%,
+    ),
+  ),
+);
