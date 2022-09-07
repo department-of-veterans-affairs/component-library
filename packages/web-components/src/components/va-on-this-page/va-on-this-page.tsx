@@ -25,6 +25,9 @@ if (Build.isTesting) {
  * @componentName On this page
  * @maturityCategory use
  * @maturityLevel best_practice
+ * @translations English
+ * @translations Spanish
+ * @translations Tagalog
  */
 @Component({
   tag: 'va-on-this-page',
