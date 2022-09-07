@@ -57,7 +57,7 @@ Once your changes are approved, squash merge them to main. Also, if your change 
 
 ### 3. Build and publish
 
-**If you are not part of the Design System team, please submit a support request in #vfs-platform-support to the Design System Team requesting to publish your changes.**
+**If you are not part of the Design System team, please submit a support request in #vfs-platform-support to the Design System Team requesting to create a new release with your changes.**
 
 - Checkout the main branch
 - Run `yarn build`
