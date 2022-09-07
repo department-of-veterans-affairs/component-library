@@ -38,6 +38,8 @@ input+label {
   font-weight: 400;
   margin-left: 2.4rem;
   margin-top: 1.2rem;
+  display: inline-flex;
+  width: 100%;
 }
 
 /* The actual box */
@@ -51,7 +53,8 @@ input+label::before {
   box-shadow: 0 0 0 1px var(--color-gray-medium);
   content: "\A0";
   height: var(--visible-checkbox-size);
-  width: var(--visible-checkbox-size);
+  max-width: var(--visible-checkbox-size);
+  width: 100%;
 }
 
 input:checked+label::before {
