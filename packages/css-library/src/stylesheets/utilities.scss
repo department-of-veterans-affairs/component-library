@@ -1,3 +1,26 @@
+@use 'uswds-core' with (
+  $theme-namespace: (
+    'grid': (
+      namespace: 'vads-grid-',
+      output: true,
+    ),
+    'utility': (
+      namespace: 'u-',
+      output: false,
+    ),
+  ),
+  $theme-utility-breakpoints: (
+    "card": false,
+    "card-lg": false,
+    "mobile": true,
+    "mobile-lg": false,
+    "tablet": true,
+    "tablet-lg": false,
+    "desktop": false,
+    "desktop-lg": true,
+    "widescreen": false
+  ),
+);
 @use 'uswds-core/src/styles/mixins/utility-builder' as *;
 @use 'uswds-core/src/styles/functions' as *;
 @use '../utilities' as *;
@@ -7,6 +30,7 @@ $utilities-package: map-collect(
   $u-border,
   $u-color,
   $u-display,
+  $u-flex-grid,
   $u-flexbox,
   $u-font,
   $u-height,
