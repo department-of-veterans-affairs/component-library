@@ -223,7 +223,8 @@ describe('va-additional-info', () => {
     const calcMaxHeight = await handle.evaluate((domElement: HTMLElement) =>
       domElement.style.getPropertyValue('--calc-max-height'),
     );
-    // 50px from height + 20px from padding + 10px from margin
-    expect(calcMaxHeight).toEqual('calc(80px + 2rem)');
+    // 50px from height + 20px from padding
+    // margin-bottom and margin-top is set to 0 for first slotted child
+    expect(calcMaxHeight).toEqual('calc(70px + 2rem)');
   });
 });

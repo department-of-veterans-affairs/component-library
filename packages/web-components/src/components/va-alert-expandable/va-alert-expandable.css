@@ -68,6 +68,7 @@ div.continue .alert-expandable-trigger:hover {
   opacity: 0;
   max-height: 0;
   visibility: hidden;
+  overflow: hidden;
 }
 
 .alert-expandable-body.open {
@@ -75,7 +76,10 @@ div.continue .alert-expandable-trigger:hover {
   opacity: 1;
   transition: max-height 700ms 0ms, opacity 500ms 200ms, visibility 500ms 200ms;
   max-height: var(--calc-max-height);
-  padding: 1.2rem;
+}
+
+#slot-wrap {
+  margin: 1.2rem;
 }
 
 i {
