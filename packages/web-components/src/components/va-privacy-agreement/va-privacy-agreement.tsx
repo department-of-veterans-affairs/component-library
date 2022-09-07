@@ -16,7 +16,7 @@ export class VaPrivacyAgreement {
   /**
    * Whether the checkbox is checked or not.
    */
-  @Prop() checked?: boolean = false;
+  @Prop({ mutable: true }) checked?: boolean = false;
 
   /**
    * Whether to display the error message or not.
@@ -44,20 +44,20 @@ export class VaPrivacyAgreement {
    */
   @Event() vaChange: EventEmitter;
 
-  private handleBlur = (e: Event) => {
+  private handleCheckboxChange = (e: Event) => {
     this.checked = (e.target as HTMLInputElement).checked;
     this.vaChange.emit({ checked: this.checked });
 
     if (this.enableAnalytics) {
       this.componentLibraryAnalytics.emit({
         componentName: 'va-privacy-agreement',
-        action: 'blur',
+        action: 'click',
         details: {
           checked: this.checked
         },
       });
     }
-  };
+  }
 
   render() {
     return (
@@ -79,9 +79,9 @@ export class VaPrivacyAgreement {
         <va-checkbox
           required
           id="checkbox"
-          label='I have read and accept the privacy policy'
+          label="I have read and accept the privacy policy"
           checked={this.checked}
-          onBlur={this.handleBlur}
+          onVaChange={this.handleCheckboxChange}
         />
       </Host>
     );

@@ -26,7 +26,7 @@ const Template = ({
     checked,
     isError
 }) => {
-    const [isChecked, setIsChecked] = useState(false);
+    const [isChecked, setIsChecked] = useState(checked);
     const handler = (event) => setIsChecked(event?.detail?.checked);
 
     if (isChecked) {
@@ -36,6 +36,7 @@ const Template = ({
         <VaPrivacyAgreement
             checked={isChecked}
             isError={isError}
+            enableAnalytics={enableAnalytics}
             onVaChange={handler}
         />
     );
