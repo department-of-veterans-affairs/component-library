@@ -36,7 +36,6 @@ const Template = ({
         <VaPrivacyAgreement
             checked={isChecked}
             isError={isError}
-            enableAnalytics={enableAnalytics}
             onVaChange={handler}
         />
     );
