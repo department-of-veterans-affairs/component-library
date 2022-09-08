@@ -2,11 +2,10 @@
 import { Component, Host, h, Prop, Event, EventEmitter, Fragment } from '@stencil/core';
 
 /**
- * @componentName Privacy Agreement
+ * @componentName Privacy agreement
  * @maturityCategory caution
  * @maturityLevel candidate
  */
-
 @Component({
   tag: 'va-privacy-agreement',
   styleUrl: 'va-privacy-agreement.css',
