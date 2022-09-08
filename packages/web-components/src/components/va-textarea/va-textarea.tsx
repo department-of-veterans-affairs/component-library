@@ -25,6 +25,8 @@ if (Build.isTesting) {
  * @maturityCategory use
  * @maturityLevel deployed
  * @guidanceHref form/textarea
+ * @translations English
+ * @translations Spanish
  */
  
 @Component({
