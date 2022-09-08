@@ -29,7 +29,7 @@ export class VaPrivacyAgreement {
 
   /**
    * The event used to track usage of the component. This is emitted when the
-   * input is blurred and enableAnalytics is true.
+   * checked value changes and enableAnalytics is true.
    */
   @Event({
     eventName: 'component-library-analytics',
