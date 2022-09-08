@@ -12,12 +12,6 @@ See [design system](https://design.va.gov/components/) or [Storybook](https://de
 
 The issue tracker is disabled on this repo. To request a new component or a feature enhancement, please [open an issue here](https://github.com/department-of-veterans-affairs/vets-design-system-documentation/issues/new?assignees=&labels=vsp-design-system-team&template=feature_request.md)
 
-## Running Storybook locally
-
-From the `packages/storybook` directory, run the following commands:
-
-1. `yarn install`
-1. `yarn storybook`
 
 ## Web Components
 
@@ -25,17 +19,9 @@ The Design System team is working on replacing the React components in this libr
 
 ### Usage
 
-To use these Web Components in your own project, follow the [installation steps](https://design.va.gov/documentation/developers#load-the-web-component-library). This will allow the components to be used in JSX or HTML.
+To use these Web Components in your own project, follow the [installation steps](https://design.va.gov/about/developers#load-the-web-component-library). This will allow the components to be used in JSX or HTML.
 
-## Making a release
-
-Include a list of changes when you create a new release. Each bullet point should be one or two clear sentences. We have been using [Keep a changelog](https://keepachangelog.com/en/1.0.0/) informally and have had good success with it.
-
-## Publishing Module to NPM
-
-After you've tested and previewed your changes locally it's time to publish a new version of the package to NPM.
-
-> Prerequisite: you must be [registered](https://docs.npmjs.com/getting-started/publishing-npm-packages) with NPM, be a member of the "department-of-veterans-affairs" organization, and have the appropriate organization role to publish an update to the module. Verify that you are logged in correctly by running `npm whoami`. If you are unable to publish an update, confirm you are a member of the "department-of-veterans-affairs" organization by going to your Profile page on [npmjs.com](https://www.npmjs.com).
+## Contributing
 
 ### 1. Submit your PR
 
@@ -57,9 +43,7 @@ Once your changes are approved, squash merge them to main. Also, if your change 
 
 ### 3. Build and publish
 
-- Checkout the main branch
-- Run `yarn build`
-- Run `npm publish`
+**If you are not part of the Design System team, please submit a support request in #vfs-platform-support to the Design System Team requesting to create a new release with your changes.**
 
 <!--
 
