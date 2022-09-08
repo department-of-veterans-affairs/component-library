@@ -12,12 +12,6 @@ See [design system](https://design.va.gov/components/) or [Storybook](https://de
 
 The issue tracker is disabled on this repo. To request a new component or a feature enhancement, please [open an issue here](https://github.com/department-of-veterans-affairs/vets-design-system-documentation/issues/new?assignees=&labels=vsp-design-system-team&template=feature_request.md)
 
-## Running Storybook locally
-
-From the `packages/storybook` directory, run the following commands:
-
-1. `yarn install`
-1. `yarn storybook`
 
 ## Web Components
 
