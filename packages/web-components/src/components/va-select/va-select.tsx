@@ -20,6 +20,8 @@ import { getSlottedNodes } from '../../utils/utils';
  * @maturityCategory use
  * @maturityLevel deployed
  * @guidanceHref form/select
+ * @translations English
+ * @translations Spanish
  */
 
 @Component({

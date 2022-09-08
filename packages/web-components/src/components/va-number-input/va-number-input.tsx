@@ -18,6 +18,8 @@ import i18next from 'i18next';
  * @maturityCategory use
  * @maturityLevel deployed
  * @guidanceHref form/number-input
+ * @translations English
+ * @translations Spanish
  */
 @Component({
   tag: 'va-number-input',
