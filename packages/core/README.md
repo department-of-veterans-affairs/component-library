@@ -19,7 +19,7 @@ The Design System team is working on replacing the React components in this libr
 
 ### Usage
 
-To use these Web Components in your own project, follow the [installation steps](https://design.va.gov/documentation/developers#load-the-web-component-library). This will allow the components to be used in JSX or HTML.
+To use these Web Components in your own project, follow the [installation steps](https://design.va.gov/about/developers#load-the-web-component-library). This will allow the components to be used in JSX or HTML.
 
 ## Contributing
 
