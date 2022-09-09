@@ -14,6 +14,12 @@ import classnames from 'classnames';
  * control what is displayed for the alert's headline. Any children passed into
  * this component without a parent slot "headline" will render in the alert's body.
  */
+
+/**
+ * @componentName Alert
+ * @maturityCategory use
+ * @maturityLevel best_practice
+ */
 @Component({
   tag: 'va-alert',
   styleUrl: 'va-alert.css',

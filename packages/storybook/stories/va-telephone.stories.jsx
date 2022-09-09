@@ -27,9 +27,10 @@ const Contacts = () => (
 );
 
 export default {
-  title: 'Components/va-telephone',
+  title: `Components/Telephone`,
+  id: 'components/va-telephone',
   parameters: {
-    componentSubtitle: `Telephone web component`,
+    componentSubtitle: `va-telephone web component`,
     actions: {
       handles: ['component-library-analytics'],
     },

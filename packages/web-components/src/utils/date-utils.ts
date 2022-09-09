@@ -1,7 +1,8 @@
-export const maxYear = new Date().getFullYear() + 100;
-export const minYear = 1900;
-export const maxMonths = 12;
-export const minMonths = 1;
+import { Components } from '../components';
+const maxYear = new Date().getFullYear() + 100;
+const minYear = 1900;
+const maxMonths = 12;
+const minMonths = 1;
 
 export const months = [
   { label: 'January', value: 1 },
@@ -19,7 +20,7 @@ export const months = [
 ];
 
 /* eslint-disable i18next/no-literal-string */
-export const twentyNineDays = [
+const twentyNineDays = [
   '1',
   '2',
   '3',
@@ -50,7 +51,7 @@ export const twentyNineDays = [
   '28',
   '29',
 ];
-export const thirtyDays = [
+const thirtyDays = [
   '1',
   '2',
   '3',
@@ -82,7 +83,7 @@ export const thirtyDays = [
   '29',
   '30',
 ];
-export const thirtyOneDays = [
+const thirtyOneDays = [
   '1',
   '2',
   '3',
@@ -131,9 +132,70 @@ export const days = {
   12: thirtyOneDays,
 };
 
-export function checkLeapYear(year) {
+/**
+ * Return true if the year is a leap year.
+ * (Exported for testing purposes)
+ */
+export function checkLeapYear(year: number) {
   //three conditions to find out the leap year
   return (0 == year % 4 && 0 != year % 100) || 0 == year % 400;
+}
+
+/**
+ * This is used to validate date components and:
+ * 1. Indicate which field fails the built-in validation
+ * 1. Supply an error message to help resolve the issue
+ *
+ * It relies on the component's mutable props.
+ */
+export function validate(
+  component: Components.VaDate | Components.VaMemorableDate,
+  year: number,
+  month: number,
+  day: number,
+  monthYearOnly : boolean = false) : void {
+
+  const leapYear = checkLeapYear(year);
+  const daysForSelectedMonth = leapYear && month == 2 ? 29 : days[month]?.length || 0;
+
+  // Begin built-in validation
+  if (year && (year < minYear || year > maxYear)) {
+    component.invalidYear = true;
+    component.error = `Please enter a year between ${minYear} and ${maxYear}`;
+  }
+  else {
+    component.invalidYear = false;
+  }
+
+  // Check day before month so that the month error message has a change to override
+  // We don't know the upper limit on days until we know the month
+  if (!monthYearOnly && (day < minMonths || day > daysForSelectedMonth)) {
+    component.invalidDay = true;
+    component.error = `Please enter a day between ${minMonths} and ${daysForSelectedMonth}`;
+  }
+  else {
+    component.invalidDay = false;
+  }
+
+  if (month && (month < minMonths || month > maxMonths)) {
+    component.invalidMonth = true;
+    component.error = `Please enter a month between ${minMonths} and ${maxMonths}`;
+  }
+  else {
+    component.invalidMonth = false;
+  }
+
+  if (component.required && (!year || !month || (!monthYearOnly && !day))) {
+    component.invalidYear = !year;
+    component.invalidMonth = !month;
+    component.invalidDay = monthYearOnly ? false : !day;
+    component.error = "Please enter a complete date";
+  }
+
+  // Remove any error message if none of the fields are marked as invalid
+  if (!component.invalidYear && !component.invalidMonth && !component.invalidDay) {
+    component.error = null;
+  }
 }
 
 // Allow 0-9, Backspace, Delete, Left and Right Arrow, and Tab to clear data or move to next field

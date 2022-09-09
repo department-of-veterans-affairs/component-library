@@ -1,5 +1,11 @@
 import { Component, Event, EventEmitter, Host, Prop, h } from '@stencil/core';
 
+/**
+ * @componentName Progress bar - activity
+ * @maturityCategory use
+ * @maturityLevel deployed
+ */
+
 @Component({
   tag: 'va-progress-bar',
   styleUrl: 'va-progress-bar.css',
@@ -62,6 +68,9 @@ export class VaProgressBar {
         >
           <div class="progress-bar-inner" style={{ width: `${percent}%` }} />
         </div>
+        <span aria-atomic="true" aria-live="polite" class="sr-only">
+          {percent.toFixed(0)}% complete
+        </span>
       </Host>
     );
   }

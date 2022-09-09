@@ -7,6 +7,7 @@ import {
   Event,
   EventEmitter,
   forceUpdate,
+  Fragment,
 } from '@stencil/core';
 import i18next from 'i18next';
 import { Build } from '@stencil/core';
@@ -20,7 +21,14 @@ if (Build.isTesting) {
 /**
  * @nativeHandler onInput
  * @nativeHandler onBlur
+ * @componentName Text input
+ * @maturityCategory use
+ * @maturityLevel deployed
+ * @guidanceHref form/text-input
+ * @translations English
+ * @translations Spanish
  */
+ 
 @Component({
   tag: 'va-text-input',
   styleUrl: 'va-text-input.css',
@@ -209,17 +217,17 @@ export class VaTextInput {
         {label && (
           <label htmlFor="inputField" part="label">
             {label}{' '}
-            {required && (
-              <span class="required">{i18next.t('required')}</span>
-            )}
+            {required && <span class="required">{i18next.t('required')}</span>}
           </label>
         )}
         <slot></slot>
-        {error && (
-          <span id="error-message" role="alert">
-            <span class="sr-only">{i18next.t('error')}</span> {error}
-          </span>
-        )}
+        <span id="error-message" role="alert">
+          {error && (
+            <Fragment>
+              <span class="sr-only">{i18next.t('error')}</span> {error}
+            </Fragment>
+          )}
+        </span>
         <input
           id="inputField"
           type={type}
@@ -227,7 +235,7 @@ export class VaTextInput {
           onInput={handleInput}
           onBlur={handleBlur}
           aria-describedby={error ? 'error-message' : undefined}
-          aria-invalid={(invalid || error) ? 'true' : 'false'}
+          aria-invalid={invalid || error ? 'true' : 'false'}
           inputmode={inputmode ? inputmode : undefined}
           maxlength={maxlength}
           minlength={minlength}
@@ -242,9 +250,7 @@ export class VaTextInput {
           </small>
         )}
         {minlength && value?.length < minlength && (
-          <small part="validation">
-            (Min. {minlength} characters)
-          </small>
+          <small part="validation">(Min. {minlength} characters)</small>
         )}
       </Host>
     );

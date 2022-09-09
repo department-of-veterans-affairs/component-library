@@ -6,9 +6,10 @@ VaPagination.displayName = 'VaPagination';
 const paginationDocs = getWebComponentDocs('va-pagination');
 
 export default {
-  title: 'Components/va-pagination',
+  title: 'Components/Pagination',
+  id: 'components/va-pagination',
   parameters: {
-    componentSubtitle: `Pagination web component`,
+    componentSubtitle: `va-pagination web component`,
     docs: {
       page: () => <StoryDocs data={paginationDocs} />,
     },

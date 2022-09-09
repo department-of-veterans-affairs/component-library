@@ -8,6 +8,7 @@ import {
   Element,
   forceUpdate,
   h,
+  Fragment,
 } from '@stencil/core';
 import i18next from 'i18next';
 import { consoleDevError } from '../../utils/utils';
@@ -20,7 +21,14 @@ if (Build.isTesting) {
 /**
  * @nativeHandler onInput
  * @nativeHandler onBlur
+ * @componentName Textarea
+ * @maturityCategory use
+ * @maturityLevel deployed
+ * @guidanceHref form/textarea
+ * @translations English
+ * @translations Spanish
  */
+ 
 @Component({
   tag: 'va-textarea',
   styleUrl: 'va-textarea.css',
@@ -133,11 +141,15 @@ export class VaTextarea {
           {label}
           {required && <span class="required">{i18next.t('required')}</span>}
         </label>
-        {error && (
-          <span id="error-message" role="alert">
-            <span class="sr-only">{i18next.t('error')}</span> {error}
-          </span>
-        )}
+
+        <span id="error-message" role="alert">
+          {error && (
+            <Fragment>
+              <span class="sr-only">{i18next.t('error')}</span> {error}
+            </Fragment>
+          )}
+        </span>
+
         <textarea
           aria-describedby={error ? 'error-message' : undefined}
           aria-invalid={error ? 'true' : 'false'}
@@ -150,9 +162,7 @@ export class VaTextarea {
           value={value}
         />
         {maxlength && value?.length >= maxlength && (
-          <small>
-            {i18next.t('max-chars', { length: maxlength })}
-          </small>
+          <small>{i18next.t('max-chars', { length: maxlength })}</small>
         )}
       </Host>
     );

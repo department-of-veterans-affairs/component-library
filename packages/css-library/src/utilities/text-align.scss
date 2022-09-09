@@ -1,0 +1,14 @@
+@use 'uswds-core/src/styles/functions' as *;
+@use '../tokens/text-align' as *;
+@use './settings' as *;
+
+$u-text-align: (
+  text-align: (
+    base: 'vads-text',
+    modifiers: null,
+    values: map-collect($tokens-text-align),
+    settings: $text-align-settings,
+    property: 'text-align',
+    type: 'utility',
+  ),
+);

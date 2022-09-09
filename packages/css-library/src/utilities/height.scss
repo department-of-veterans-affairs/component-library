@@ -1,0 +1,38 @@
+@use 'uswds-core/src/styles/functions' as *;
+@use '../tokens/height' as *;
+@use './settings' as *;
+
+$u-height-base: (
+  height: (
+    base: 'vads-height',
+    modifiers: null,
+    values: map-collect($tokens-height),
+    settings: $height-settings,
+    property: 'height',
+    type: 'utility',
+  ),
+);
+
+$u-min-height: (
+  min-height: (
+    base: 'vads-min-height',
+    modifiers: null,
+    values: map-collect($tokens-min-height),
+    settings: $height-settings,
+    property: 'min-height',
+    type: 'utility',
+  ),
+);
+
+$u-max-height: (
+  max-height: (
+    base: 'vads-max-height',
+    modifiers: null,
+    values: map-collect($tokens-max-height),
+    settings: $height-settings,
+    property: 'max-height',
+    type: 'utility',
+  ),
+);
+
+$u-height: map-collect($u-height-base, $u-min-height, $u-max-height);

@@ -14,10 +14,12 @@ describe('va-additional-info', () => {
       <va-additional-info trigger="More info" class="hydrated">
         <mock:shadow-root>
           <a aria-controls="info" aria-expanded="false" role="button" tabindex="0">
-            <span class="additional-info-title">
-              More info
+            <div>
+              <span class="additional-info-title">
+                More info
+              </span>
               <i class="fa-angle-down" role="presentation"></i>
-            </span>
+            </div>
           </a>
           <div class="closed" id="info" style="--calc-max-height:calc(0px + 2rem);">
             <slot></slot>
@@ -221,7 +223,8 @@ describe('va-additional-info', () => {
     const calcMaxHeight = await handle.evaluate((domElement: HTMLElement) =>
       domElement.style.getPropertyValue('--calc-max-height'),
     );
-    // 50px from height + 20px from padding + 10px from margin
-    expect(calcMaxHeight).toEqual('calc(80px + 2rem)');
+    // 50px from height + 20px from padding
+    // margin-bottom and margin-top is set to 0 for first slotted child
+    expect(calcMaxHeight).toEqual('calc(70px + 2rem)');
   });
 });

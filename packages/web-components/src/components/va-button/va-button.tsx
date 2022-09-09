@@ -9,8 +9,12 @@ import {
 } from '@stencil/core';
 
 /**
+ * @componentName Button
  * @nativeHandler onClick
+ * @maturityCategory caution
+ * @maturityLevel candidate
  */
+
 @Component({
   tag: 'va-button',
   styleUrl: 'va-button.css',

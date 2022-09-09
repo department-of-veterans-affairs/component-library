@@ -7,12 +7,19 @@ import {
   Event,
   EventEmitter,
   forceUpdate,
+  Fragment,
 } from '@stencil/core';
 import i18next from 'i18next';
 
 /**
  * @nativeHandler onInput
  * @nativeHandler onBlur
+ * @componentName Number input
+ * @maturityCategory use
+ * @maturityLevel deployed
+ * @guidanceHref form/number-input
+ * @translations English
+ * @translations Spanish
  */
 @Component({
   tag: 'va-number-input',
@@ -127,11 +134,13 @@ export class VaNumberInput {
           {label}{' '}
           {required && <span class="required">{i18next.t('required')}</span>}
         </label>
-        {error && (
-          <span id="error-message" role="alert">
-            <span class="sr-only">{i18next.t('error')}</span> {error}
-          </span>
-        )}
+        <span id="error-message" role="alert">
+          {error && (
+            <Fragment>
+              <span class="sr-only">{i18next.t('error')}</span> {error}
+            </Fragment>
+          )}
+        </span>
         <input
           aria-describedby={error ? 'error-message' : undefined}
           aria-invalid={error ? 'true' : 'false'}

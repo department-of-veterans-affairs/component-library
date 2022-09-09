@@ -7,13 +7,19 @@ import {
   Listen,
   Prop,
   h,
+  Fragment,
 } from '@stencil/core';
 import { getSlottedNodes } from '../../utils/utils';
 
 /**
  * @keydown The event emitted when a key is pressed.
  * @radioOptionSelected The event emitted when the selected option value changes.
+ * @componentName Radio button
+ * @maturityCategory use
+ * @maturityLevel deployed
+ * @guidanceHref form/radio-button
  */
+
 @Component({
   tag: 'va-radio',
   styleUrl: 'va-radio.css',
@@ -177,11 +183,13 @@ export class VaRadio {
           {label}
           {required && <span class="required">(*Required)</span>}
         </legend>
-        {error && (
-          <span id="error-message" role="alert">
-            <span class="sr-only">Error</span> {error}
-          </span>
-        )}
+        <span id="error-message" role="alert">
+          {error && (
+            <Fragment>
+              <span class="sr-only">Error</span> {error}
+            </Fragment>
+          )}
+        </span>
         <slot></slot>
       </Host>
     );

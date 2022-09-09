@@ -5,9 +5,9 @@ import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
 const featuredContentDocs = getWebComponentDocs('va-featured-content');
 
 export default {
-  title: 'Components/va-featured-content',
+  title: 'Components/Featured content',
   parameters: {
-    componentSubtitle: `Featured content web component`,
+    componentSubtitle: `va-featured-content web component`,
     docs: {
       page: () => <StoryDocs data={featuredContentDocs} />,
     },

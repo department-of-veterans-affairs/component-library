@@ -1,0 +1,31 @@
+@use './_variables' as *;
+
+$tokens-font-family: (
+  'sans': $font-family-sans,
+  'serif': $font-family-serif,
+);
+
+$tokens-font-size: (
+  'sm': $font-size-sm,
+  'base': $font-size-base,
+  'md': $font-size-md,
+  'lg': $font-size-lg,
+  'xl': $font-size-xl,
+  '2xl': $font-size-2xl,
+  'h1': $font-size-h1,
+  'h2': $font-size-h2,
+  'h3': $font-size-h3,
+  'h4': $font-size-h4,
+  'h5': $font-size-h5,
+  'h6': $font-size-h6,
+);
+
+$tokens-font-style: (
+  'italic': $font-style-italic,
+  'normal': $font-style-normal,
+);
+
+$tokens-font-weight: (
+  'bold': $font-weight-bold,
+  'normal': $font-weight-normal,
+);

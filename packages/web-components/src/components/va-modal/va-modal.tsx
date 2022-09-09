@@ -17,6 +17,9 @@ import { focusableQueryString } from '../../utils/modal';
 /**
  * @click Used to detect clicks outside of modal contents to close modal.
  * @keydown Used to detect Escape key to close modal.
+ * @componentName Modal
+ * @maturityCategory use
+ * @maturityLevel deployed
  */
 @Component({
   tag: 'va-modal',
@@ -93,6 +96,11 @@ export class VaModal {
   @Prop() disableAnalytics?: boolean = false;
 
   /**
+   * If `true`, modal will be wider.
+   */
+  @Prop({ reflect: true }) large?: boolean = false;
+
+  /**
    * Title/header text for the modal
    */
   @Prop() modalTitle?: string;
@@ -122,7 +130,7 @@ export class VaModal {
   /**
    * If the modal is visible or not
    */
-  @Prop() visible?: boolean = false;
+  @Prop({ reflect: true }) visible?: boolean = false;
 
   /**
    * Local state to track if the shift key is pressed
@@ -286,11 +294,6 @@ export class VaModal {
     // This is used to limit the screen reader to content inside the modal.
     this.undoAriaHidden = hideOthers(this.el);
 
-    // NOTE: With this PR (https://github.com/department-of-veterans-affairs/vets-website/pull/11712)
-    // we rely on the existence of `body.modal-open` to determine if a modal is
-    // currently open and adjust programmatic scrolling if there is.
-    document.body.classList.add('modal-open');
-
     // Conditionally track the event.
     if (!this.disableAnalytics) {
       const detail = {
@@ -312,8 +315,6 @@ export class VaModal {
   private teardownModal() {
     clearAllBodyScrollLocks();
     this.undoAriaHidden?.();
-
-    document.body.classList.remove('modal-open');
     this.savedFocus?.focus();
   }
 
@@ -349,12 +350,7 @@ export class VaModal {
       : 'Close modal';
 
     return (
-      <Host
-        aria-label={ariaLabel}
-        aria-modal="true"
-        class="va-modal"
-        role={ariaRole(status)}
-      >
+      <Host aria-label={ariaLabel} aria-modal="true" role={ariaRole(status)}>
         <div class={wrapperClass} tabIndex={-1}>
           <button
             aria-label={btnAriaLabel}

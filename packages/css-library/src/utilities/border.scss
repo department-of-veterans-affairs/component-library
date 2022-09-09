@@ -1,0 +1,51 @@
+@use 'uswds-core/src/styles/functions' as *;
+@use '../tokens/border' as *;
+@use '../tokens/color' as *;
+@use './settings' as *;
+
+$u-border-base: (
+  border: (
+    base: 'vads-border',
+    modifiers: (
+      noModifier: '',
+      'top': '-top',
+      'right': '-right',
+      'bottom': '-bottom',
+      'left': '-left',
+    ),
+    values: map-collect($tokens-border),
+    settings: $border-settings,
+    property: 'border',
+    type: 'utility',
+  ),
+);
+
+$u-border-style: (
+  border-style: (
+    base: 'vads-border',
+    modifiers: null,
+    values: map-collect($tokens-border-style),
+    settings: $border-other-settings,
+    property: 'border-style',
+    type: 'utility',
+  ),
+);
+
+$u-border-color: (
+  border-color: (
+    base: 'vads-border',
+    modifiers: null,
+    values:
+      map-collect(
+        $tokens-color-basic,
+        $tokens-color-grayscale,
+        $tokens-color-tertiary,
+        $tokens-color-hub
+      ),
+    settings: $border-other-settings,
+    property: 'border-color',
+    type: 'utility',
+  ),
+);
+
+$u-border: map-collect($u-border-base, $u-border-style, $u-border-color);

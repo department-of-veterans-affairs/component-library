@@ -7,9 +7,10 @@ VaDate.displayName = 'VaDate';
 const dateDocs = getWebComponentDocs('va-date');
 
 export default {
-  title: 'Components/va-date',
+  title: 'Components/Date input',
+  id: 'components/va-date',
   parameters: {
-    componentSubtitle: `Date web component`,
+    componentSubtitle: `va-date web component`,
     docs: {
       page: () => <StoryDocs data={dateDocs} />,
     },
@@ -17,8 +18,9 @@ export default {
 };
 
 const defaultArgs = {
-  'label': 'Date of birth',
-  'name': 'test',
+  'label':
+    'What’s the date or anticipated date of your release from active duty?',
+  'name': 'discharge-date',
   'required': false,
   'error': undefined,
   'value': undefined,
@@ -53,6 +55,7 @@ const Template = ({
 const CustomValidationTemplate = ({ label, name, required, error, value }) => {
   const [dateVal, setDateVal] = useState(value);
   const [errorVal, setErrorVal] = useState(error);
+  const [invalidYear, setInvalidYear] = useState(null);
   const today = new Date();
   // new Date as YYYY-MM-DD is giving the day prior to the day select
   // new Date as YYYY MM DD is giving the correct day selected
@@ -60,8 +63,11 @@ const CustomValidationTemplate = ({ label, name, required, error, value }) => {
   function handleDateBlur() {
     if (dateInput <= today) {
       setErrorVal('Date must be in the future');
+      // This won't always be the right thing, but it's just a demo
+      setInvalidYear(true);
     } else {
       setErrorVal('');
+      setInvalidYear(false);
     }
   }
 
@@ -72,6 +78,7 @@ const CustomValidationTemplate = ({ label, name, required, error, value }) => {
         name={name}
         required={required}
         error={errorVal}
+        invalidYear={invalidYear}
         value={dateVal}
         onDateBlur={() => handleDateBlur()}
         onDateChange={e => setDateVal(e.target.value)}

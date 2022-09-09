@@ -11,6 +11,11 @@ import {
 } from '@stencil/core';
 import classnames from 'classnames';
 
+/**
+ * @componentName Alert - expandable
+ * @maturityCategory caution
+ * @maturityLevel candidate
+ */
 @Component({
   tag: 'va-alert-expandable',
   styleUrl: 'va-alert-expandable.css',
@@ -124,14 +129,18 @@ export class VaAlertExpandable {
             class="alert-expandable-trigger"
           >
             <i class="alert-status-icon" aria-hidden="true" role="img"></i>
-            <span class="alert-expandable-title">
-              <span class="sr-only">Alert:&nbsp;</span>
-              {this.trigger}
-            </span>
-            <i class="fa-angle-down" role="presentation" />
+            <div>
+              <span class="alert-expandable-title">
+                <span class="sr-only">Alert:&nbsp;</span>
+                {this.trigger}
+              </span>
+              <i class="fa-angle-down" role="presentation" />
+            </div>
           </a>
           <div id="alert-body" class={bodyClasses}>
-            <slot></slot>
+            <div id="slot-wrap">
+              <slot></slot>
+            </div>
           </div>
         </div>
       </Host>

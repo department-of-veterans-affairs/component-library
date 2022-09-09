@@ -1,6 +1,159 @@
+$border-settings: (
+  output: true,
+  responsive: true,
+  active: false,
+  focus: false,
+  hover: false,
+  visited: false,
+) !default;
+
+$border-other-settings: (
+  output: true,
+  responsive: false,
+  active: false,
+  focus: false,
+  hover: false,
+  visited: false,
+) !default;
+
 $color-settings: (
   output: true,
   responsive: false,
+  active: false,
+  focus: false,
+  hover: false,
+  visited: false,
+) !default;
+
+$display-settings: (
+  output: true,
+  responsive: true,
+  active: false,
+  focus: false,
+  hover: false,
+  visited: false,
+) !default;
+
+$flex-settings: (
+  output: true,
+  responsive: true,
+  active: false,
+  focus: false,
+  hover: false,
+  visited: false,
+) !default;
+
+$flex-grid-settings: (
+  output: true,
+  responsive: true,
+  active: false,
+  focus: false,
+  hover: false,
+  visited: false,
+) !default;
+
+$font-settings: (
+  output: true,
+  responsive: false,
+  active: false,
+  focus: false,
+  hover: false,
+  visited: false,
+) !default;
+
+$font-size-settings: (
+  output: true,
+  responsive: true,
+  active: false,
+  focus: false,
+  hover: false,
+  visited: false,
+) !default;
+
+$height-settings: (
+  output: true,
+  responsive: true,
+  active: false,
+  focus: false,
+  hover: false,
+  visited: false,
+) !default;
+
+$line-height-settings: (
+  output: true,
+  responsive: true,
+  active: false,
+  focus: false,
+  hover: false,
+  visited: false,
+) !default;
+
+$margin-settings: (
+  output: true,
+  responsive: true,
+  active: false,
+  focus: false,
+  hover: false,
+  visited: false,
+) !default;
+
+$measure-settings: (
+  output: true,
+  responsive: true,
+  active: false,
+  focus: false,
+  hover: false,
+  visited: false,
+) !default;
+
+$padding-settings: (
+  output: true,
+  responsive: true,
+  active: false,
+  focus: false,
+  hover: false,
+  visited: false,
+) !default;
+
+$position-settings: (
+  output: true,
+  responsive: true,
+  active: false,
+  focus: false,
+  hover: false,
+  visited: false,
+) !default;
+
+$text-align-settings: (
+  output: true,
+  responsive: true,
+  active: false,
+  focus: false,
+  hover: false,
+  visited: false,
+) !default;
+
+$text-decoration-settings: (
+  output: true,
+  responsive: false,
+  active: false,
+  focus: false,
+  hover: false,
+  visited: false,
+) !default;
+
+$visibility-settings: (
+  output: true,
+  responsive: true,
+  active: false,
+  focus: false,
+  hover: false,
+  visited: false,
+) !default;
+
+$width-settings: (
+  output: true,
+  responsive: true,
   active: false,
   focus: false,
   hover: false,

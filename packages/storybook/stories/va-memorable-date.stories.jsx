@@ -7,9 +7,10 @@ VaMemorableDate.displayName = 'VaMemorableDate';
 const memorableDateInputDocs = getWebComponentDocs('va-memorable-date');
 
 export default {
-  title: 'Components/va-memorable-date',
+  title: 'Components/Memorable date',
+  id: 'components/va-memorable-date',
   parameters: {
-    componentSubtitle: `Memorable date web component`,
+    componentSubtitle: `va-memorable-date web component`,
     docs: {
       page: () => <StoryDocs data={memorableDateInputDocs} />,
     },

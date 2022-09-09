@@ -1,0 +1,54 @@
+@use 'uswds-core/src/styles/functions' as *;
+@use '../tokens/flex-grid' as *;
+@use './settings' as *;
+
+.vads-flex-grid-container {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 100rem;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+
+
+  @media screen and (min-width: 64em) {
+    padding-left: 3rem;
+    padding-right: 3rem;
+  }
+}
+
+.vads-flex-grid-container-full {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 100%;
+  padding: 0;
+}
+
+.vads-flex-row {
+  display: flex;
+  flex-wrap: wrap;
+  min-width: 100%;
+}
+
+$u-flex-grid-col: (
+  flex-grid-col: (
+    base: 'vads-flex',
+    modifiers: null,
+    values: map-collect($tokens-flex-grid-col),
+    settings: $flex-grid-settings,
+    property: 'flex-grow',
+    type: 'utility',
+  ),
+);
+
+$u-flex-grid-cols: (
+  flex-grid-cols: (
+    base: 'vads-flex-col',
+    modifiers: null,
+    values: map-collect($tokens-flex-grid-cols),
+    settings: $flex-grid-settings,
+    property: 'flex',
+    type: 'utility',
+  ),
+);
+
+$u-flex-grid: map-collect($u-flex-grid-cols, $u-flex-grid-cols);

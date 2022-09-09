@@ -263,6 +263,9 @@ export namespace Components {
           * The error message to render (if any) This prop should be leveraged to display any custom validations needed for this component
          */
         "error"?: string;
+        "invalidDay": boolean;
+        "invalidMonth": boolean;
+        "invalidYear": boolean;
         /**
           * Label for the field.
          */
@@ -285,6 +288,36 @@ export namespace Components {
         "value"?: string;
     }
     interface VaFeaturedContent {
+    }
+    interface VaFileInput {
+        /**
+          * A comma-separated list of unique file type specifiers.
+         */
+        "accept"?: string;
+        /**
+          * The text displayed on the button.
+         */
+        "buttonText": string;
+        /**
+          * Emit component-library-analytics events on the file input change event.
+         */
+        "enableAnalytics"?: boolean;
+        /**
+          * The error message to render.
+         */
+        "error"?: string;
+        /**
+          * The label for the file input.
+         */
+        "label"?: string;
+        /**
+          * The name for the input element.
+         */
+        "name"?: string;
+        /**
+          * Sets the input to required and renders the (*Required) text.
+         */
+        "required"?: boolean;
     }
     interface VaLink {
         /**
@@ -359,6 +392,9 @@ export namespace Components {
           * The error message to render (if any) This prop should be leveraged to display any custom validations needed for this component
          */
         "error"?: string;
+        "invalidDay": boolean;
+        "invalidMonth": boolean;
+        "invalidYear": boolean;
         /**
           * Label for the field.
          */
@@ -389,6 +425,10 @@ export namespace Components {
           * Selector to explicitly specify which element should receive focus when the modal is open, if the initially focused element is not the first focusable element in the document
          */
         "initialFocusSelector"?: string;
+        /**
+          * If `true`, modal will be wider.
+         */
+        "large"?: boolean;
         /**
           * Title/header text for the modal
          */
@@ -444,6 +484,24 @@ export namespace Components {
           * The value for the input.
          */
         "value"?: string;
+    }
+    interface VaOmbInfo {
+        /**
+          * The name of the benefit displayed in the Respondent Burden section of the Privacy Act Statement.
+         */
+        "benefitType"?: string;
+        /**
+          * The form expiration date.
+         */
+        "expDate": string;
+        /**
+          * The OMB control number or form number.
+         */
+        "ombNumber"?: string;
+        /**
+          * Displays the Respondent Burden section in the Privacy Act Statement modal and how many minutes the form is expected to take.
+         */
+        "resBurden"?: number;
     }
     interface VaOnThisPage {
         /**
@@ -839,6 +897,12 @@ declare global {
         prototype: HTMLVaFeaturedContentElement;
         new (): HTMLVaFeaturedContentElement;
     };
+    interface HTMLVaFileInputElement extends Components.VaFileInput, HTMLStencilElement {
+    }
+    var HTMLVaFileInputElement: {
+        prototype: HTMLVaFileInputElement;
+        new (): HTMLVaFileInputElement;
+    };
     interface HTMLVaLinkElement extends Components.VaLink, HTMLStencilElement {
     }
     var HTMLVaLinkElement: {
@@ -868,6 +932,12 @@ declare global {
     var HTMLVaNumberInputElement: {
         prototype: HTMLVaNumberInputElement;
         new (): HTMLVaNumberInputElement;
+    };
+    interface HTMLVaOmbInfoElement extends Components.VaOmbInfo, HTMLStencilElement {
+    }
+    var HTMLVaOmbInfoElement: {
+        prototype: HTMLVaOmbInfoElement;
+        new (): HTMLVaOmbInfoElement;
     };
     interface HTMLVaOnThisPageElement extends Components.VaOnThisPage, HTMLStencilElement {
     }
@@ -974,11 +1044,13 @@ declare global {
         "va-checkbox-group": HTMLVaCheckboxGroupElement;
         "va-date": HTMLVaDateElement;
         "va-featured-content": HTMLVaFeaturedContentElement;
+        "va-file-input": HTMLVaFileInputElement;
         "va-link": HTMLVaLinkElement;
         "va-loading-indicator": HTMLVaLoadingIndicatorElement;
         "va-memorable-date": HTMLVaMemorableDateElement;
         "va-modal": HTMLVaModalElement;
         "va-number-input": HTMLVaNumberInputElement;
+        "va-omb-info": HTMLVaOmbInfoElement;
         "va-on-this-page": HTMLVaOnThisPageElement;
         "va-pagination": HTMLVaPaginationElement;
         "va-process-list": HTMLVaProcessListElement;
@@ -1318,6 +1390,9 @@ declare namespace LocalJSX {
           * The error message to render (if any) This prop should be leveraged to display any custom validations needed for this component
          */
         "error"?: string;
+        "invalidDay"?: boolean;
+        "invalidMonth"?: boolean;
+        "invalidYear"?: boolean;
         /**
           * Label for the field.
          */
@@ -1352,6 +1427,44 @@ declare namespace LocalJSX {
         "value"?: string;
     }
     interface VaFeaturedContent {
+    }
+    interface VaFileInput {
+        /**
+          * A comma-separated list of unique file type specifiers.
+         */
+        "accept"?: string;
+        /**
+          * The text displayed on the button.
+         */
+        "buttonText"?: string;
+        /**
+          * Emit component-library-analytics events on the file input change event.
+         */
+        "enableAnalytics"?: boolean;
+        /**
+          * The error message to render.
+         */
+        "error"?: string;
+        /**
+          * The label for the file input.
+         */
+        "label"?: string;
+        /**
+          * The name for the input element.
+         */
+        "name"?: string;
+        /**
+          * The event used to track usage of the component. This is emitted when the file input changes and enableAnalytics is true.
+         */
+        "onComponent-library-analytics"?: (event: CustomEvent<any>) => void;
+        /**
+          * The event emitted when the file input value changes.
+         */
+        "onVaChange"?: (event: CustomEvent<any>) => void;
+        /**
+          * Sets the input to required and renders the (*Required) text.
+         */
+        "required"?: boolean;
     }
     interface VaLink {
         /**
@@ -1434,6 +1547,9 @@ declare namespace LocalJSX {
           * The error message to render (if any) This prop should be leveraged to display any custom validations needed for this component
          */
         "error"?: string;
+        "invalidDay"?: boolean;
+        "invalidMonth"?: boolean;
+        "invalidYear"?: boolean;
         /**
           * Label for the field.
          */
@@ -1476,6 +1592,10 @@ declare namespace LocalJSX {
           * Selector to explicitly specify which element should receive focus when the modal is open, if the initially focused element is not the first focusable element in the document
          */
         "initialFocusSelector"?: string;
+        /**
+          * If `true`, modal will be wider.
+         */
+        "large"?: boolean;
         /**
           * Title/header text for the modal
          */
@@ -1551,6 +1671,24 @@ declare namespace LocalJSX {
           * The value for the input.
          */
         "value"?: string;
+    }
+    interface VaOmbInfo {
+        /**
+          * The name of the benefit displayed in the Respondent Burden section of the Privacy Act Statement.
+         */
+        "benefitType"?: string;
+        /**
+          * The form expiration date.
+         */
+        "expDate": string;
+        /**
+          * The OMB control number or form number.
+         */
+        "ombNumber"?: string;
+        /**
+          * Displays the Respondent Burden section in the Privacy Act Statement modal and how many minutes the form is expected to take.
+         */
+        "resBurden"?: number;
     }
     interface VaOnThisPage {
         /**
@@ -1939,11 +2077,13 @@ declare namespace LocalJSX {
         "va-checkbox-group": VaCheckboxGroup;
         "va-date": VaDate;
         "va-featured-content": VaFeaturedContent;
+        "va-file-input": VaFileInput;
         "va-link": VaLink;
         "va-loading-indicator": VaLoadingIndicator;
         "va-memorable-date": VaMemorableDate;
         "va-modal": VaModal;
         "va-number-input": VaNumberInput;
+        "va-omb-info": VaOmbInfo;
         "va-on-this-page": VaOnThisPage;
         "va-pagination": VaPagination;
         "va-process-list": VaProcessList;
@@ -1979,11 +2119,13 @@ declare module "@stencil/core" {
             "va-checkbox-group": LocalJSX.VaCheckboxGroup & JSXBase.HTMLAttributes<HTMLVaCheckboxGroupElement>;
             "va-date": LocalJSX.VaDate & JSXBase.HTMLAttributes<HTMLVaDateElement>;
             "va-featured-content": LocalJSX.VaFeaturedContent & JSXBase.HTMLAttributes<HTMLVaFeaturedContentElement>;
+            "va-file-input": LocalJSX.VaFileInput & JSXBase.HTMLAttributes<HTMLVaFileInputElement>;
             "va-link": LocalJSX.VaLink & JSXBase.HTMLAttributes<HTMLVaLinkElement>;
             "va-loading-indicator": LocalJSX.VaLoadingIndicator & JSXBase.HTMLAttributes<HTMLVaLoadingIndicatorElement>;
             "va-memorable-date": LocalJSX.VaMemorableDate & JSXBase.HTMLAttributes<HTMLVaMemorableDateElement>;
             "va-modal": LocalJSX.VaModal & JSXBase.HTMLAttributes<HTMLVaModalElement>;
             "va-number-input": LocalJSX.VaNumberInput & JSXBase.HTMLAttributes<HTMLVaNumberInputElement>;
+            "va-omb-info": LocalJSX.VaOmbInfo & JSXBase.HTMLAttributes<HTMLVaOmbInfoElement>;
             "va-on-this-page": LocalJSX.VaOnThisPage & JSXBase.HTMLAttributes<HTMLVaOnThisPageElement>;
             "va-pagination": LocalJSX.VaPagination & JSXBase.HTMLAttributes<HTMLVaPaginationElement>;
             "va-process-list": LocalJSX.VaProcessList & JSXBase.HTMLAttributes<HTMLVaProcessListElement>;

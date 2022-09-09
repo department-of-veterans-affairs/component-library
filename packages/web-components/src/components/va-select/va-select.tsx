@@ -9,13 +9,21 @@ import {
   State,
   h,
   Watch,
+  Fragment,
 } from '@stencil/core';
 import i18next from 'i18next';
 import { getSlottedNodes } from '../../utils/utils';
 
 /**
  * @nativeHandler onKeyDown
+ * @componentName Select
+ * @maturityCategory use
+ * @maturityLevel deployed
+ * @guidanceHref form/select
+ * @translations English
+ * @translations Spanish
  */
+
 @Component({
   tag: 'va-select',
   styleUrl: 'va-select.css',
@@ -147,19 +155,19 @@ export class VaSelect {
       <Host>
         <label htmlFor="select" part="label">
           {label}
-          {required && (
-            <span class="required">{i18next.t('required')}</span>
-          )}
+          {required && <span class="required">{i18next.t('required')}</span>}
         </label>
-        {error && (
-          <span id="error-message" role="alert">
-            <span class="sr-only">{i18next.t('error')}</span> {error}
-          </span>
-        )}
+        <span id="error-message" role="alert">
+          {error && (
+            <Fragment>
+              <span class="sr-only">{i18next.t('error')}</span> {error}
+            </Fragment>
+          )}
+        </span>
         <slot onSlotchange={() => this.populateOptions()}></slot>
         <select
           aria-describedby={error ? 'error-message' : undefined}
-          aria-invalid={(invalid || error) ? 'true' : 'false'}
+          aria-invalid={invalid || error ? 'true' : 'false'}
           id="select"
           name={name}
           required={required || null}

@@ -1,5 +1,10 @@
 import { Component, Host, h } from '@stencil/core';
 
+/**
+ * @componentName Featured content
+ * @maturityCategory use
+ * @maturityLevel deployed
+ */
 @Component({
   tag: 'va-featured-content',
   styleUrl: 'va-featured-content.css',

@@ -23,8 +23,11 @@ describe('va-progress-bar', () => {
             <div
               class="progress-bar-inner"
               style="width: 35%;"
-            />
-          </div>
+            ></div>
+            </div>
+            <span aria-atomic="true" aria-live="polite" class="sr-only">
+              35% complete
+            </span>
         </mock:shadow-root>
       </va-progress-bar>
     `);
@@ -107,8 +110,11 @@ describe('va-progress-bar', () => {
             <div
               class="progress-bar-inner"
               style="width: 17.3098%;"
-            />
+            ></div>
           </div>
+          <span aria-atomic="true" aria-live="polite" class="sr-only">
+            17% complete
+          </span>
         </mock:shadow-root>
       </va-progress-bar>
     `);

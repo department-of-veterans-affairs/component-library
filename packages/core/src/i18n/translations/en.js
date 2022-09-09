@@ -23,4 +23,5 @@ export default {
   'october': 'October',
   'november': 'November',
   'december': 'December',
+  'on-this-page': 'On this page',
 };
