@@ -97,17 +97,6 @@ function isValidPartialDate(day, month, year) {
   return true;
 }
 
-function isValidPartialMonthYear(month, year) {
-  if (typeof month === 'object') {
-    throw new Error('Pass a month and a year to function');
-  }
-  if (month && (Number(month) > 12 || Number(month) < 1)) {
-    return false;
-  }
-
-  return isValidPartialDate(null, null, year);
-}
-
 function isBlankMonthYear(field) {
   return isBlank(field.month.value) && isBlank(field.year.value);
 }
@@ -182,7 +171,6 @@ export {
   isValidMonetaryValue,
   isValidPhone,
   isValidPartialDate,
-  isValidPartialMonthYear,
   isValidRequiredField,
   isValidValue,
   validateCustomFormComponent,
