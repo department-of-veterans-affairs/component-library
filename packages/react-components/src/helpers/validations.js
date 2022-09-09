@@ -4,13 +4,6 @@ const maxYear = new Date().getFullYear() + 100;
 /**
  * General Validations *
  */
-function validateIfDirty(field, validator) {
-  if (field.dirty) {
-    return validator(field.value);
-  }
-
-  return true;
-}
 
 function validateCustomFormComponent(customValidation) {
   // Allow devs to pass in an array of validations with messages and display the first failed one
@@ -67,26 +60,6 @@ function isBlankDateField(field) {
 
 function isFullDate(date) {
   return /\d{4}-\d{1,2}-\d{1,2}/.test(date);
-}
-
-function isNotBlankDateField(field) {
-  return (
-    isNotBlank(field.day.value) &&
-    isNotBlank(field.month.value) &&
-    isNotBlank(field.year.value)
-  );
-}
-
-function isDirtyDate(date) {
-  return date.day.dirty && date.year.dirty && date.month.dirty;
-}
-
-function validateIfDirtyDate(dayField, monthField, yearField, validator) {
-  if (isDirtyDate({ day: dayField, month: monthField, year: yearField })) {
-    return validator(dayField.value, monthField.value, yearField.value);
-  }
-
-  return true;
 }
 
 function isValidPartialDate(day, month, year) {
@@ -170,10 +143,8 @@ export {
   isBlank,
   isBlankDateField,
   isBlankMonthYear,
-  isDirtyDate,
   isFullDate,
   isNotBlank,
-  isNotBlankDateField,
   isValidEmail,
   isValidFullNameField,
   isValidField,
@@ -186,7 +157,5 @@ export {
   isValidRequiredField,
   isValidValue,
   validateCustomFormComponent,
-  validateIfDirty,
-  validateIfDirtyDate,
   isValidRoutingNumber,
 };
