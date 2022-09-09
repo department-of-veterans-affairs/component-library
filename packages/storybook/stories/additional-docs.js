@@ -24,10 +24,6 @@ export const additionalDocs = {
     maturityCategory: DONT_USE,
     maturityLevel: DEPRECATED,
   },
-  'Date - React': {
-    maturityCategory: DONT_USE,
-    maturityLevel: DEPRECATED,
-  },
   // MDX
   'Divider': {
     guidanceHref: 'divider',
@@ -55,7 +51,7 @@ export const additionalDocs = {
   },
   'Icon - base': {
     maturityCategory: CAUTION,
-    maturityLevel: AVAILABLE
+    maturityLevel: AVAILABLE,
   },
   'Icon - help': {
     maturityCategory: CAUTION,
@@ -80,7 +76,7 @@ export const additionalDocs = {
     maturityCategory: USE,
     maturityLevel: DEPLOYED,
     guidanceHref: 'banner/maintenance',
-    guidanceName: 'Banner - maintenance'
+    guidanceName: 'Banner - maintenance',
   },
   'MonthYear - React': {
     maturityCategory: DONT_USE,
