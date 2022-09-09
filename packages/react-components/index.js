@@ -4,7 +4,6 @@ import AlertBox, { ALERT_TYPE } from './AlertBox';
 import Breadcrumbs from './Breadcrumbs';
 import Checkbox from './Checkbox';
 import CheckboxGroup from './CheckboxGroup';
-import Date from './Date';
 import DropDownPanel from './DropDownPanel';
 import ExpandingGroup from './ExpandingGroup';
 import FileInput from './FileInput';
@@ -43,7 +42,6 @@ export {
   Breadcrumbs,
   Checkbox,
   CheckboxGroup,
-  Date,
   DropDownPanel,
   ExpandingGroup,
   FileInput,
