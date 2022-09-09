@@ -15,7 +15,6 @@ import IconUser from './IconUser';
 import LoadingIndicator from './LoadingIndicator';
 import MaintenanceBanner from './MaintenanceBanner';
 import Modal from './Modal';
-import NumberInput from './NumberInput';
 import OMBInfo from './OMBInfo';
 import Pagination from './Pagination';
 import PrivacyAgreement from './PrivacyAgreement';
@@ -53,7 +52,6 @@ export {
   LoadingIndicator,
   MaintenanceBanner,
   Modal,
-  NumberInput,
   OMBInfo,
   Pagination,
   PrivacyAgreement,

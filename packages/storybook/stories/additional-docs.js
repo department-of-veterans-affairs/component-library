@@ -82,10 +82,6 @@ export const additionalDocs = {
     maturityCategory: DONT_USE,
     maturityLevel: DEPRECATED,
   },
-  'NumberInput - React': {
-    maturityCategory: DONT_USE,
-    maturityLevel: DEPRECATED,
-  },
   'OMB info - React': {
     guidanceHref: 'omb-info',
     guidanceName: 'OMB info',
