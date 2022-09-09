@@ -42,10 +42,6 @@ function isValidMonths(value) {
   return Number(value) >= 0;
 }
 
-function isBlankMonthYear(field) {
-  return isBlank(field.month.value) && isBlank(field.year.value);
-}
-
 /**
  * Field Validations *
  */
@@ -102,7 +98,6 @@ export {
   minYear,
   maxYear,
   isBlank,
-  isBlankMonthYear,
   isValidEmail,
   isValidFullNameField,
   isValidField,
