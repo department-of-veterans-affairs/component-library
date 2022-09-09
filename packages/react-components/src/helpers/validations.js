@@ -2,20 +2,6 @@
  * General Validations *
  */
 
-function validateCustomFormComponent(customValidation) {
-  // Allow devs to pass in an array of validations with messages and display the first failed one
-  if (Array.isArray(customValidation)) {
-    if (customValidation.some(validator => !validator.valid)) {
-      return customValidation.filter(validator => !validator.valid)[0];
-    }
-    // Also allow objects for custom validation
-  } else if (typeof customValidation === 'object' && !customValidation.valid) {
-    return customValidation;
-  }
-
-  return { valid: true, message: null };
-}
-
 function isBlank(value) {
   return value === '';
 }
@@ -89,6 +75,5 @@ export {
   isValidMonetaryValue,
   isValidPhone,
   isValidValue,
-  validateCustomFormComponent,
   isValidRoutingNumber,
 };
