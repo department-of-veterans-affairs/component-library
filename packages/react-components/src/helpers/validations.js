@@ -1,23 +1,6 @@
-const minYear = 1900;
-const maxYear = new Date().getFullYear() + 100;
-
 /**
  * General Validations *
  */
-
-function validateCustomFormComponent(customValidation) {
-  // Allow devs to pass in an array of validations with messages and display the first failed one
-  if (Array.isArray(customValidation)) {
-    if (customValidation.some(validator => !validator.valid)) {
-      return customValidation.filter(validator => !validator.valid)[0];
-    }
-    // Also allow objects for custom validation
-  } else if (typeof customValidation === 'object' && !customValidation.valid) {
-    return customValidation;
-  }
-
-  return { valid: true, message: null };
-}
 
 function isBlank(value) {
   return value === '';
@@ -29,40 +12,6 @@ function isValidValue(validator, value) {
 
 function isValidField(validator, field) {
   return isBlank(field.value) || validator(field.value);
-}
-
-/**
- * Date Validations *
- */
-function isValidYear(value) {
-  return Number(value) >= minYear && Number(value) <= maxYear;
-}
-
-function isValidMonths(value) {
-  return Number(value) >= 0;
-}
-
-function isValidPartialDate(day, month, year) {
-  if (year && !isValidYear(year)) {
-    return false;
-  }
-
-  return true;
-}
-
-function isValidPartialMonthYear(month, year) {
-  if (typeof month === 'object') {
-    throw new Error('Pass a month and a year to function');
-  }
-  if (month && (Number(month) > 12 || Number(month) < 1)) {
-    return false;
-  }
-
-  return isValidPartialDate(null, null, year);
-}
-
-function isBlankMonthYear(field) {
-  return isBlank(field.month.value) && isBlank(field.year.value);
 }
 
 /**
@@ -118,20 +67,13 @@ function isValidRoutingNumber(value) {
 }
 
 export {
-  minYear,
-  maxYear,
   isBlank,
-  isBlankMonthYear,
   isValidEmail,
   isValidFullNameField,
   isValidField,
-  isValidMonths,
   isValidName,
   isValidMonetaryValue,
   isValidPhone,
-  isValidPartialDate,
-  isValidPartialMonthYear,
   isValidValue,
-  validateCustomFormComponent,
   isValidRoutingNumber,
 };

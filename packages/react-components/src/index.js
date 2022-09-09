@@ -15,7 +15,6 @@ import IconUser from './components/IconUser/IconUser';
 import LoadingIndicator from './components/LoadingIndicator/LoadingIndicator';
 import MaintenanceBanner from './components/MaintenanceBanner/MaintenanceBanner';
 import Modal from './components/Modal/Modal';
-import MonthYear from './components/MonthYear/MonthYear';
 import NumberInput from './components/NumberInput/NumberInput';
 import OMBInfo from './components/OMBInfo/OMBInfo';
 import Pagination from './components/Pagination/Pagination';
@@ -52,7 +51,6 @@ export {
   LoadingIndicator,
   MaintenanceBanner,
   Modal,
-  MonthYear,
   NumberInput,
   OMBInfo,
   Pagination,
