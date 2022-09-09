@@ -23,20 +23,12 @@ function isBlank(value) {
   return value === '';
 }
 
-function isNotBlank(value) {
-  return value !== '';
-}
-
 function isValidValue(validator, value) {
   return isBlank(value) || validator(value);
 }
 
 function isValidField(validator, field) {
   return isBlank(field.value) || validator(field.value);
-}
-
-function isValidRequiredField(validator, field) {
-  return isNotBlank(field.value) && validator(field.value);
 }
 
 /**
@@ -144,7 +136,6 @@ export {
   isBlankDateField,
   isBlankMonthYear,
   isFullDate,
-  isNotBlank,
   isValidEmail,
   isValidFullNameField,
   isValidField,
@@ -154,7 +145,6 @@ export {
   isValidPhone,
   isValidPartialDate,
   isValidPartialMonthYear,
-  isValidRequiredField,
   isValidValue,
   validateCustomFormComponent,
   isValidRoutingNumber,
