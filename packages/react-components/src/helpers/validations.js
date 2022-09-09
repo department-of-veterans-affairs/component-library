@@ -42,14 +42,6 @@ function isValidMonths(value) {
   return Number(value) >= 0;
 }
 
-function isValidPartialDate(day, month, year) {
-  if (year && !isValidYear(year)) {
-    return false;
-  }
-
-  return true;
-}
-
 function isBlankMonthYear(field) {
   return isBlank(field.month.value) && isBlank(field.year.value);
 }
@@ -118,7 +110,6 @@ export {
   isValidName,
   isValidMonetaryValue,
   isValidPhone,
-  isValidPartialDate,
   isValidValue,
   validateCustomFormComponent,
   isValidRoutingNumber,
