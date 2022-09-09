@@ -42,10 +42,6 @@ function isValidMonths(value) {
   return Number(value) >= 0;
 }
 
-function isFullDate(date) {
-  return /\d{4}-\d{1,2}-\d{1,2}/.test(date);
-}
-
 function isValidPartialDate(day, month, year) {
   if (year && !isValidYear(year)) {
     return false;
@@ -126,7 +122,6 @@ export {
   maxYear,
   isBlank,
   isBlankMonthYear,
-  isFullDate,
   isValidEmail,
   isValidFullNameField,
   isValidField,
