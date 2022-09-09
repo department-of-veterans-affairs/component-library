@@ -1,6 +1,3 @@
-const minYear = 1900;
-const maxYear = new Date().getFullYear() + 100;
-
 /**
  * General Validations *
  */
@@ -29,17 +26,6 @@ function isValidValue(validator, value) {
 
 function isValidField(validator, field) {
   return isBlank(field.value) || validator(field.value);
-}
-
-/**
- * Date Validations *
- */
-function isValidYear(value) {
-  return Number(value) >= minYear && Number(value) <= maxYear;
-}
-
-function isValidMonths(value) {
-  return Number(value) >= 0;
 }
 
 /**
@@ -95,13 +81,10 @@ function isValidRoutingNumber(value) {
 }
 
 export {
-  minYear,
-  maxYear,
   isBlank,
   isValidEmail,
   isValidFullNameField,
   isValidField,
-  isValidMonths,
   isValidName,
   isValidMonetaryValue,
   isValidPhone,
