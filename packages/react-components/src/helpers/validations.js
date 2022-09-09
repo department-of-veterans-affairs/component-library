@@ -42,14 +42,6 @@ function isValidMonths(value) {
   return Number(value) >= 0;
 }
 
-function isBlankDateField(field) {
-  return (
-    isBlank(field.day.value) &&
-    isBlank(field.month.value) &&
-    isBlank(field.year.value)
-  );
-}
-
 function isFullDate(date) {
   return /\d{4}-\d{1,2}-\d{1,2}/.test(date);
 }
@@ -133,7 +125,6 @@ export {
   minYear,
   maxYear,
   isBlank,
-  isBlankDateField,
   isBlankMonthYear,
   isFullDate,
   isValidEmail,
