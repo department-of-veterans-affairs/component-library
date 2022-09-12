@@ -78,15 +78,7 @@ export const additionalDocs = {
     guidanceHref: 'banner/maintenance',
     guidanceName: 'Banner - maintenance',
   },
-  'MonthYear - React': {
-    maturityCategory: DONT_USE,
-    maturityLevel: DEPRECATED,
-  },
   'Modal - React': {
-    maturityCategory: DONT_USE,
-    maturityLevel: DEPRECATED,
-  },
-  'NumberInput - React': {
     maturityCategory: DONT_USE,
     maturityLevel: DEPRECATED,
   },
