@@ -12,7 +12,7 @@ describe('va-privacy-agreement', () => {
       <mock:shadow-root>
         <span>
           Please read and accept the
-          <a href="/privacy/" target="_blank">
+          <a href="/privacy-policy/" target="_blank">
             privacy policy
           </a>
         </span>
