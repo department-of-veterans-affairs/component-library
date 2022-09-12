@@ -63,7 +63,7 @@ export class VaPrivacyAgreement {
       <Host>
         <span>
           Please read and accept the&nbsp;
-          <a target="_blank" href="/privacy/">
+          <a target="_blank" href="/privacy-policy/">
             privacy policy
           </a>
         </span>
