@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import React from 'react';
+import React, { useState } from 'react';
 import { VaFileInput } from '@department-of-veterans-affairs/web-components/react-bindings';
 import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
 
@@ -61,7 +61,34 @@ Default.argTypes = propStructure(fileInputDocs);
 export const Required = Template.bind(null);
 Required.args = { ...defaultArgs, required: true };
 
-export const ErrorMessage = Template.bind(null);
+const ErrorTemplate = ({
+  label,
+  name,
+  'button-text': buttonText,
+  accept,
+  error,
+  required,
+  'enable-analytics': enableAnalytics,
+  vaChange,
+}) => {
+  const [isError, setIsError] = useState();
+  const handleErrorTrigger = (event) => setIsError("We couldn't upload your file");
+
+  return (
+    <VaFileInput
+      label={label}
+      name={name}
+      button-text={buttonText}
+      accept={accept}
+      required={required}
+      error={isError}
+      enable-analytics={enableAnalytics}
+      onVaChange={handleErrorTrigger}
+    />
+  );
+};
+
+export const ErrorMessage = ErrorTemplate.bind(null);
 ErrorMessage.args = { ...defaultArgs, required: true, error: "We couldn't upload your file" };
 
 export const WithAnalytics = Template.bind(null);

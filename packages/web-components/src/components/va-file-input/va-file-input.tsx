@@ -144,6 +144,7 @@ export class VaFileInput {
           onClick={this.handleButtonClick}
           secondary
           text={text}
+          label={label}
           aria-describedby={error ? 'error-message' : undefined}
         />
         <input
