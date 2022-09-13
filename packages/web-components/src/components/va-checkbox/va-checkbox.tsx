@@ -136,7 +136,7 @@ export class VaCheckbox {
           onChange={this.handleChange}
         />
         <label htmlFor="checkbox-element">
-          <span>{label} {required && <span class="required">(*Required)</span>}</span>
+          {label} {required && <span class="required">(*Required)</span>}
         </label>
       </Host>
     );
