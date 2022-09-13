@@ -20,7 +20,7 @@ export class VaPrivacyAgreement {
   /**
    * Whether to display the error message or not.
    */
-  @Prop() isError?: boolean = false;
+  @Prop() showError?: boolean = false;
 
   /**
    * Emit component-library-analytics events on the blur event.
@@ -68,7 +68,7 @@ export class VaPrivacyAgreement {
           </a>
         </span>
         <span id="error-message" role="alert">
-          {(this.isError && !this.checked) && (
+          {(this.showError && !this.checked) && (
             <Fragment>
               <span class="sr-only">error</span>
               You must accept the privacy policy before continuing

@@ -19,25 +19,25 @@ export default {
 
 const defaultArgs = {
     checked: false,
-    'is-error': false,
+    'show-error': false,
     'enable-analytics': false,
 };
 
 const Template = ({
     checked,
-    'is-error': isError,
+    'show-error': showError,
     'enable-analytics': enableAnalytics,
 }) => {
     const [isChecked, setIsChecked] = useState(checked);
     const handler = (event) => setIsChecked(event?.detail?.checked);
 
     if (isChecked) {
-        isError = false;
+        showError = false;
     }
     return (
         <VaPrivacyAgreement
             checked={isChecked}
-            isError={isError}
+            showError={showError}
             enable-analytics={enableAnalytics}
             onVaChange={handler}
         />
@@ -50,7 +50,7 @@ Default.args = { ...defaultArgs };
 Default.argTypes = propStructure(privacyAgreementDocs);
 
 export const WithError = Template.bind(null);
-WithError.args = { ...defaultArgs, 'is-error': true };
+WithError.args = { ...defaultArgs, 'show-error': true };
 
 export const WithAnalytics = Template.bind(null);
 WithAnalytics.args = { ...defaultArgs, 'enable-analytics': true };

@@ -59,11 +59,11 @@ describe('va-privacy-agreement', () => {
     expect(checkedValue).toBeFalsy();
   });
 
-  it('displays an error message when `isError` prop is present', async () => {
+  it('displays an error message when `showError` prop is present', async () => {
     const page = await newE2EPage();
 
     await page.setContent(
-      '<va-privacy-agreement is-error />',
+      '<va-privacy-agreement show-error />',
     );
 
     const errorSpan = await page.find('va-privacy-agreement >>> #error-message');
@@ -72,7 +72,7 @@ describe('va-privacy-agreement', () => {
     expect(errorSpan.textContent).toContain('You must accept the privacy policy before continuing');
   });
 
-  it('does not display an error message when `isError` prop is not present', async () => {
+  it('does not display an error message when `showError` prop is not present', async () => {
     const page = await newE2EPage();
 
     await page.setContent(

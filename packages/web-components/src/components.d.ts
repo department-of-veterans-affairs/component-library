@@ -547,7 +547,7 @@ export namespace Components {
         /**
           * Whether to display the error message or not.
          */
-        "isError"?: boolean;
+        "showError"?: boolean;
     }
     interface VaProcessList {
     }
@@ -1765,17 +1765,17 @@ declare namespace LocalJSX {
          */
         "enableAnalytics"?: boolean;
         /**
-          * Whether to display the error message or not.
-         */
-        "isError"?: boolean;
-        /**
-          * The event used to track usage of the component. This is emitted when the input is blurred and enableAnalytics is true.
+          * The event used to track usage of the component. This is emitted when the checked value changes and enableAnalytics is true.
          */
         "onComponent-library-analytics"?: (event: CustomEvent<any>) => void;
         /**
           * The event emitted when the checkbox changes.
          */
         "onVaChange"?: (event: CustomEvent<any>) => void;
+        /**
+          * Whether to display the error message or not.
+         */
+        "showError"?: boolean;
     }
     interface VaProcessList {
     }
