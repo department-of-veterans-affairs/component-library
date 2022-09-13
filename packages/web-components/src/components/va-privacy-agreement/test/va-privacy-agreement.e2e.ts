@@ -69,7 +69,7 @@ describe('va-privacy-agreement', () => {
     const errorSpan = await page.find('va-privacy-agreement >>> #error-message');
     const text = errorSpan.textContent;
     console.log('text', text);
-    expect(errorSpan.textContent).toContain('You must accept the privacy policy before continuing');
+    expect(errorSpan.textContent).toContain('You must accept the privacy policy before continuing.');
   });
 
   it('does not display an error message when `showError` prop is not present', async () => {

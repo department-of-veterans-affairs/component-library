@@ -71,7 +71,7 @@ export class VaPrivacyAgreement {
           {(this.showError && !this.checked) && (
             <Fragment>
               <span class="sr-only">error</span>
-              You must accept the privacy policy before continuing
+              You must accept the privacy policy before continuing.
             </Fragment>
           )}
         </span>
