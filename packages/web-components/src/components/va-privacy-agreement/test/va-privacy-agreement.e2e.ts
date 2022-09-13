@@ -14,7 +14,7 @@ describe('va-privacy-agreement', () => {
           Please read and accept the
           <a href="/privacy-policy/" target="_blank">
             privacy policy
-          </a>
+          </a>.
         </span>
         <span id="error-message" role="alert"></span>
         <va-checkbox class="hydrated" id="checkbox"></va-checkbox>
