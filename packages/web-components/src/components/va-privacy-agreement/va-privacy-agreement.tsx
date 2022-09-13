@@ -1,4 +1,3 @@
-/* eslint-disable i18next/no-literal-string */
 import { Component, Host, h, Prop, Event, EventEmitter, Fragment } from '@stencil/core';
 
 /**
