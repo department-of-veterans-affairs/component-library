@@ -65,7 +65,7 @@ export class VaPrivacyAgreement {
           Please read and accept the&nbsp;
           <a target="_blank" href="/privacy-policy/">
             privacy policy
-          </a>
+          </a>.
         </span>
         <span id="error-message" role="alert">
           {(this.showError && !this.checked) && (
