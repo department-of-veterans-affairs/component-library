@@ -158,10 +158,14 @@ export function validate(
   const leapYear = checkLeapYear(year);
   const daysForSelectedMonth = leapYear && month == 2 ? 29 : days[month]?.length || 0;
 
+  const yearError = `Please enter a year between ${minYear} and ${maxYear}`;
+  const monthError = `Please enter a month between ${minMonths} and ${maxMonths}`;
+  const dayError = `Please enter a day between ${minMonths} and ${daysForSelectedMonth}`;
+
   // Begin built-in validation
   if (year && (year < minYear || year > maxYear)) {
     component.invalidYear = true;
-    component.error = `Please enter a year between ${minYear} and ${maxYear}`;
+    component.error = yearError;
   }
   else {
     component.invalidYear = false;
@@ -171,15 +175,22 @@ export function validate(
   // We don't know the upper limit on days until we know the month
   if (!monthYearOnly && (day < minMonths || day > daysForSelectedMonth)) {
     component.invalidDay = true;
-    component.error = `Please enter a day between ${minMonths} and ${daysForSelectedMonth}`;
+    component.error = dayError;
+
+    // We need a valid month in order to determine the day
+    if (!month || month < minMonths || month > maxMonths) {
+      component.invalidMonth = true;
+      component.error = monthError;
+    }
   }
   else {
     component.invalidDay = false;
   }
 
+  // We allow for an empty month in case the component isn't required
   if (month && (month < minMonths || month > maxMonths)) {
     component.invalidMonth = true;
-    component.error = `Please enter a month between ${minMonths} and ${maxMonths}`;
+    component.error = monthError
   }
   else {
     component.invalidMonth = false;
