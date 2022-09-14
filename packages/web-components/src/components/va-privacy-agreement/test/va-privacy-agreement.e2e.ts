@@ -8,18 +8,20 @@ describe('va-privacy-agreement', () => {
 
     const element = await page.find('va-privacy-agreement');
     expect(element).toEqualHtml(`
-    <va-privacy-agreement checked="" class="hydrated">
-      <mock:shadow-root>
-        <span>
-          Please read and accept the
-          <a href="/privacy-policy/">
-            privacy policy
-          </a>.
-        </span>
-        <span id="error-message" role="alert"></span>
-        <va-checkbox class="hydrated" id="checkbox"></va-checkbox>
-      </mock:shadow-root>
-    </va-privacy-agreement>
+     <va-privacy-agreement checked="" class="hydrated">
+       <mock:shadow-root>
+         <va-checkbox class="hydrated" id="checkbox">
+           <span slot="description">
+             Please read and accept the
+             <a href="/privacy-policy/" target="_blank">
+               privacy policy
+             </a>
+             <i aria-hidden="true" class="fa-arrow-up-right-from-square" role="img"></i>
+             (opens in a new window).
+           </span>
+         </va-checkbox>
+       </mock:shadow-root>
+     </va-privacy-agreement>
     `);
   });
 
@@ -59,41 +61,21 @@ describe('va-privacy-agreement', () => {
     expect(checkedValue).toBeFalsy();
   });
 
-  it('displays an error message when `showError` prop is present', async () => {
-    const page = await newE2EPage();
-
-    await page.setContent(
-      '<va-privacy-agreement show-error />',
-    );
-
-    const errorSpan = await page.find('va-privacy-agreement >>> #error-message');
-    const text = errorSpan.textContent;
-    console.log('text', text);
-    expect(errorSpan.textContent).toContain('You must accept the privacy policy before continuing.');
-  });
-
-  it('does not display an error message when `showError` prop is not present', async () => {
-    const page = await newE2EPage();
-
-    await page.setContent(
-      '<va-privacy-agreement />',
-    );
-
-    const errorSpan = await page.find('va-privacy-agreement >>> #error-message');
-    const text = errorSpan.textContent;
-    console.log('text', text);
-    expect(errorSpan.textContent).toBe('');
-  });
-
   it('emits the vaChange event', async () => {
     const page = await newE2EPage();
     await page.setContent(
       '<va-privacy-agreement />',
     );
     const changeSpy = await page.spyOnEvent('vaChange');
-    const vaCheckbox = await page.find('va-privacy-agreement >>> va-checkbox');
+    const input = (
+      await page.waitForFunction(() =>
+        document.querySelector('va-privacy-agreement')
+          .shadowRoot.querySelector('va-checkbox')
+          .shadowRoot.querySelector('input')
+      )
+    ).asElement();
 
-    await vaCheckbox.click();
+    await input.click();
 
     expect(changeSpy).toHaveReceivedEventDetail({ checked: true });
   });
@@ -104,9 +86,15 @@ describe('va-privacy-agreement', () => {
       '<va-privacy-agreement enable-analytics />',
     );
     const analyticsSpy = await page.spyOnEvent('component-library-analytics');
-    const vaCheckbox = await page.find('va-privacy-agreement >>> va-checkbox');
+    const input = (
+      await page.waitForFunction(() =>
+        document.querySelector('va-privacy-agreement')
+          .shadowRoot.querySelector('va-checkbox')
+          .shadowRoot.querySelector('input')
+      )
+    ).asElement();
 
-    await vaCheckbox.click();
+    await input.click();
 
     expect(analyticsSpy).toHaveReceivedEventDetail({
       action: 'click',
@@ -116,7 +104,7 @@ describe('va-privacy-agreement', () => {
       },
     });
 
-    await vaCheckbox.click();
+    await input.click();
 
     expect(analyticsSpy).toHaveReceivedEventDetail({
       action: 'click',
