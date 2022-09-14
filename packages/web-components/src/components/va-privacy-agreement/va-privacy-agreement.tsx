@@ -1,4 +1,4 @@
-import { Component, Host, h, Prop, Event, EventEmitter, Fragment } from '@stencil/core';
+import { Component, Host, h, Prop, Event, EventEmitter } from '@stencil/core';
 
 /**
  * @componentName Privacy agreement
@@ -57,30 +57,30 @@ export class VaPrivacyAgreement {
     }
   }
 
+  private errorMessage() {
+    return (this.showError && !this.checked) 
+    ? "You must accept the privacy policy before continuing."
+    : null;
+  }
+
   render() {
     return (
       <Host>
-        <span>
-          Please read and accept the&nbsp;
-          <a href="/privacy-policy/">
-            privacy policy
-          </a>.
-        </span>
-        <span id="error-message" role="alert">
-          {(this.showError && !this.checked) && (
-            <Fragment>
-              <span class="sr-only">error</span>
-              You must accept the privacy policy before continuing.
-            </Fragment>
-          )}
-        </span>
         <va-checkbox
           required
+          error={this.errorMessage()}
           id="checkbox"
-          label="I have read and accept the privacy policy"
+          label="I have read and accept the privacy policy."
           checked={this.checked}
           onVaChange={this.handleCheckboxChange}
-        />
+        >
+          <span slot="description">
+            Please read and accept the&nbsp;
+            <a href="/privacy-policy/">
+              privacy policy
+            </a>.
+          </span>
+        </va-checkbox>
       </Host>
     );
   }
