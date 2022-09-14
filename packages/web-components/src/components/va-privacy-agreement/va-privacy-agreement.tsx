@@ -78,7 +78,7 @@ export class VaPrivacyAgreement {
             Please read and accept the&nbsp;
             <a href="/privacy-policy/" target="_blank">
               privacy policy
-            </a> <i class="fa-arrow-up-right-from-square" aria-hidden="true" role="img"></i> (opens in a new window).
+            </a><i class="fa-arrow-up-right-from-square" aria-hidden="true" role="img"></i> (opens in a new window).
           </span>
         </va-checkbox>
       </Host>
