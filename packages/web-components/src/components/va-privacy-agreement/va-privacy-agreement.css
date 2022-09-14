@@ -8,3 +8,7 @@
 a {
   color: var(--color-link-default);
 }
+
+#error-message {
+  margin-bottom: -1.2rem;
+}
