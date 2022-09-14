@@ -6,6 +6,7 @@ const featuredContentDocs = getWebComponentDocs('va-featured-content');
 
 export default {
   title: 'Components/Featured content',
+  id: 'components/va-featured-content',
   parameters: {
     componentSubtitle: `va-featured-content web component`,
     docs: {
