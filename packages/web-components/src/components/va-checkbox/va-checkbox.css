@@ -13,7 +13,16 @@
 }
 
 #error-message {
-    margin-bottom: 1.2rem;
+    margin-bottom: 0;
+    font-weight: 700;
+}
+
+:host([error]:not([error=""])) input + label {
+  margin-top: 1.2rem;
+}
+
+:host([error]:not([error=""])) label > span {
+  font-weight: normal;
 }
 
 :host([error]:not([error=""])) label > span {
