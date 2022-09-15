@@ -14,10 +14,10 @@ describe('va-privacy-agreement', () => {
            <span slot="description">
              Please read and accept the
              <a href="/privacy-policy/" target="_blank">
-               privacy policy
-             </a>
-             <i aria-hidden="true" class="fa-arrow-up-right-from-square" role="img"></i>
-             (opens in a new window).
+               privacy policy 
+               <i aria-hidden="true" class="fa-arrow-up-right-from-square" role="img"></i>
+               <span class="sr-only">opens in a new window</span>
+             </a>.
            </span>
          </va-checkbox>
        </mock:shadow-root>

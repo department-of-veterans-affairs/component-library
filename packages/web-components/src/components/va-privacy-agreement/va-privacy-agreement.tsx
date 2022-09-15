@@ -77,8 +77,10 @@ export class VaPrivacyAgreement {
           <span slot="description">
             Please read and accept the&nbsp;
             <a href="/privacy-policy/" target="_blank">
-              privacy policy
-            </a><i class="fa-arrow-up-right-from-square" aria-hidden="true" role="img"></i> (opens in a new window).
+              privacy policy 
+              <i class="fa-arrow-up-right-from-square" aria-hidden="true" role="img"></i>
+              <span class="sr-only">opens in a new window</span>
+            </a>.
           </span>
         </va-checkbox>
       </Host>
