@@ -145,4 +145,17 @@ describe('validate', () => {
     expect(memorableDateComponent.invalidMonth).toEqual(false);
     expect(memorableDateComponent.invalidDay).toEqual(false);
   });
+
+  it('overrides an invalid day message with an invalid month message', () => {
+    const memorableDateComponent = {} as Components.VaMemorableDate;
+    const year = 2000;
+    const month = null;
+    const day = 500;
+
+    validate(memorableDateComponent, year, month, day);
+
+    expect(memorableDateComponent.error).toEqual('Please enter a month between 1 and 12');
+    expect(memorableDateComponent.invalidMonth).toEqual(true);
+    expect(memorableDateComponent.invalidDay).toEqual(true);
+  });
 });
