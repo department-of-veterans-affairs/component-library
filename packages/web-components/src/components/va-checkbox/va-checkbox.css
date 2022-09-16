@@ -16,10 +16,6 @@
   margin-bottom: 1.2rem;
 }
 
-:host([error]:not([error=""])) label > span {
-  font-weight: normal;
-}
-
 input {
   /* Make the clickable element the same size and position as the box */
   height: var(--visible-checkbox-size);
