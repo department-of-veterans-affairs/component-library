@@ -15,6 +15,7 @@ describe('va-radio', () => {
     await page.setContent(
       `
       <va-radio>
+        <div slot="hint">Hint text</div>
         <va-radio-option checked label="Option 1" value="1"></va-radio-option>
         <va-radio-option label="Option 2" value="2"></va-radio-option>
         <va-radio-option label="Option 3" value="3"></va-radio-option>
@@ -66,6 +67,18 @@ describe('va-radio', () => {
 
     expect(await options[0].getProperty('checked')).toBeFalsy();
     expect(await options[1].getProperty('checked')).toBeTruthy();
+  });
+
+  it('renders hint text if included', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-radio><div class="hint-text" slot="hint">hint text</div></va-radio>');
+
+    const element = await page.find('.hint-text');
+    expect(element).toEqualHtml(`
+      <div class="hint-text" slot="hint">
+        hint text
+      </div>
+    `);
   });
 
   it('renders an error message if passed', async () => {

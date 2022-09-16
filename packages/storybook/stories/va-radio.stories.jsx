@@ -25,6 +25,7 @@ const Template = ({
   'enable-analytics': enableAnalytics,
   error,
   label,
+  hint,
   required,
 }) => {
   return (
@@ -34,6 +35,7 @@ const Template = ({
       label={label}
       required={required}
     >
+      {hint && <div slot="hint">{hint}</div>}
       <va-radio-option label="Option one" name="example" value="1" />
       <va-radio-option label="Option two" name="example" value="2" />
     </va-radio>
@@ -83,6 +85,7 @@ const IdUsageTemplate = ({
 const defaultArgs = {
   'enable-analytics': false,
   'label': 'This is a label',
+  'hint': '',
   'required': false,
   'error': null,
 };
@@ -92,6 +95,18 @@ Default.args = {
   ...defaultArgs,
 };
 Default.argTypes = propStructure(radioDocs);
+
+export const Hint = Template.bind(null);
+Hint.args = {
+  ...defaultArgs,
+  hint: (
+    <div className="vads-u-margin-bottom--1">
+      <va-additional-info trigger="Why is this required?">
+        Because there is no option three
+      </va-additional-info>
+    </div>
+  ),
+}
 
 export const Error = Template.bind(null);
 Error.args = {

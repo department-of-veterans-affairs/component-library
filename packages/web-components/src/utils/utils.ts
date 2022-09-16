@@ -30,9 +30,11 @@ export function getSlottedNodes(
       (node: any) => node.tagName === 'SLOT',
     ).length > 0;
 
-  // This will only get the first slot on a component
+  // This will check all the slots on a component
   const children = hasShadowDOM
-    ? root.shadowRoot.querySelector('slot').assignedNodes()
+    ? Array.from(root.shadowRoot.querySelectorAll('slot')).map(
+        el => el.assignedNodes?.(),
+      ).flat()
     : root.shadowRoot.childNodes;
 
   return nodeName !== null ? Array.from(children).filter(

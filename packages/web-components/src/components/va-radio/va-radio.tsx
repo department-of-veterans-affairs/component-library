@@ -72,6 +72,7 @@ export class VaRadio {
   handleKeyDown(event: KeyboardEvent) {
     const currentNode = event.target as HTMLVaRadioOptionElement;
     const radioOptionNodes = getSlottedNodes(this.el, 'va-radio-option');
+
     if (!radioOptionNodes.length) return;
 
     const currentNodeIndex = radioOptionNodes.findIndex(
@@ -183,6 +184,7 @@ export class VaRadio {
           {label}
           {required && <span class="required">(*Required)</span>}
         </legend>
+        <slot name="hint"></slot>
         <span id="error-message" role="alert">
           {error && (
             <Fragment>
