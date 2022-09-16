@@ -25,6 +25,7 @@
 #dateHint {
   padding: 0.8rem 0 0;
   color: var(--color-gray);
+  font-weight: 700;
   line-height: 1.5;
 }
 

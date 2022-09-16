@@ -1,6 +1,7 @@
 #error-message {
     color: var(--color-secondary-dark);
     display: block;
+    font-weight: 700;
     margin-bottom: 1.2rem;
 }
 
@@ -18,11 +19,6 @@
 
 :host([error]:not([error=''])) label {
     margin-top: 0;
-}
-
-:host([error]:not([error=''])) label,
-:host([error]:not([error=''])) span {
-    font-weight: 700;
 }
 
 :host([error]:not([error=''])) input, 
