@@ -141,6 +141,7 @@ export class VaFileInput {
         <va-button
           id="fileInputButton"
           aria-label={label}
+          label={label}
           onClick={this.handleButtonClick}
           secondary
           text={text}
