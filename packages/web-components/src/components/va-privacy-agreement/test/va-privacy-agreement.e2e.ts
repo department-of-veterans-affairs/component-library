@@ -131,7 +131,7 @@ describe('va-privacy-agreement', () => {
 
   it('displays an error message when `showError` is defined', async () => {
     const page = await newE2EPage();
-    await page.setContent(`<va-privacy-agreement show-error />`);
+    await page.setContent('<va-privacy-agreement show-error />');
 
     const checkbox = await page.find('va-privacy-agreement >>> va-checkbox');
 
