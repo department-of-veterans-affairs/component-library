@@ -69,6 +69,9 @@ export class VaRadioOption {
         id={this.el.id || label}
       >
         <label htmlFor={label}>{label}</label>
+        <div class="description">
+          <slot></slot>
+        </div>
       </Host>
     );
   }

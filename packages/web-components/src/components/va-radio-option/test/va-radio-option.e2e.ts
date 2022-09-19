@@ -18,9 +18,23 @@ describe('va-radio-option', () => {
     <va-radio-option id="yes2" label="Yes - Any Veteran" name="yes" value="2" aria-checked="false" aria-label="yes" role="radio" class="hydrated">
       <mock:shadow-root>
         <label for="Yes - Any Veteran">Yes - Any Veteran</label>
+        <div class="description">
+          <slot></slot>
+        </div>
       </mock:shadow-root>
     </va-radio-option>
   `);
+  });
+
+  it('renders slotted content', async () => {
+    const page = await newE2EPage();
+    await page.setContent(`
+      <va-radio-option label="An option">
+        <p>This is an option description</p>
+      </va-radio-option>
+    `);
+    const description = await page.find('va-radio-option');
+    expect(description.textContent).toContain('This is an option description')
   });
 
   it('sets checked to true based on prop', async () => {
@@ -46,4 +60,5 @@ describe('va-radio-option', () => {
 
     expect(changeSpy).toHaveReceivedEvent();
   });
+
 });

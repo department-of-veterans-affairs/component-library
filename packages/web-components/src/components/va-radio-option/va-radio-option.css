@@ -50,3 +50,7 @@ label::before {
   outline: 2px solid var(--color-gold-light);
   outline-offset: 6px;
 }
+
+.description {
+  margin-left: 3em;
+}
