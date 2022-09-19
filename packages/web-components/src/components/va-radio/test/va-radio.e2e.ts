@@ -46,6 +46,38 @@ describe('va-radio', () => {
     await axeCheck(page);
   });
 
+  it('falls back to name + value if the id is not defined', async () => {
+    const page = await newE2EPage();
+    await page.setContent(`
+      <va-radio>
+        <va-radio-option name="test" label="Option 1" value="1"></va-radio-option>
+        <va-radio-option name="test" label="Option 2" value="2"></va-radio-option>
+        <va-radio-option name="test" label="Option 3" value="3"></va-radio-option>
+      </va-radio>
+    `);
+
+    const options = await page.findAll('va-radio-option');
+
+    expect(await options[0].getProperty('id')).toEqual('test1');
+    expect(await options[1].getProperty('id')).toEqual('test2');
+    expect(await options[2].getProperty('id')).toEqual('test3');
+
+    const result = index => `
+      <va-radio-option aria-checked="false" aria-label="test" id="test${index}" label="Option ${index}" name="test" value="${index}" role="radio" class="hydrated" tabindex="${index === 1 ? 0 : -1}">
+        <mock:shadow-root>
+          <label for="test${index}">Option ${index}</label>
+          <div class="description">
+            <slot></slot>
+          </div>
+        </mock:shadow-root>
+      </va-radio-option>
+    `;
+
+    expect(options[0]).toEqualHtml(result(1));
+    expect(options[1]).toEqualHtml(result(2));
+    expect(options[2]).toEqualHtml(result(3));
+  });
+
   it('unchecks current option when other button is checked', async () => {
     const page = await newE2EPage();
     await page.setContent(
