@@ -129,4 +129,13 @@ describe('va-privacy-agreement', () => {
     expect(analyticsSpy).not.toHaveReceivedEvent();
   });
 
+  it('displays an error message when `showError` is defined', async () => {
+    const page = await newE2EPage();
+    await page.setContent(`<va-privacy-agreement show-error />`);
+
+    const checkbox = await page.find('va-privacy-agreement >>> va-checkbox');
+
+    expect(checkbox).toEqualAttribute('error', 'You must accept the privacy policy before continuing.');
+  });
+
 });

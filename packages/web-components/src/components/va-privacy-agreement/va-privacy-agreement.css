@@ -1,5 +1,4 @@
 @import '../../mixins/accessibility.css';
-@import '../../mixins/form-field-error.css';
 
 :host {
   display: block;
