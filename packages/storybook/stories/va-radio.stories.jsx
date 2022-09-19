@@ -26,6 +26,7 @@ const Template = ({
   error,
   label,
   hint,
+  tile,
   required,
 }) => {
   return (
@@ -33,6 +34,7 @@ const Template = ({
       enable-analytics={enableAnalytics}
       error={error}
       label={label}
+      tile={tile}
       required={required}
     >
       {hint && <div slot="hint">{hint}</div>}
@@ -86,6 +88,7 @@ const defaultArgs = {
   'enable-analytics': false,
   'label': 'This is a label',
   'hint': '',
+  'tile': false,
   'required': false,
   'error': null,
 };
@@ -107,6 +110,12 @@ Hint.args = {
     </div>
   ),
 }
+
+export const Tile = Template.bind(null);
+Tile.args = {
+  ...defaultArgs,
+  tile: true,
+};
 
 export const Error = Template.bind(null);
 Error.args = {

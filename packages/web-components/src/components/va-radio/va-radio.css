@@ -5,6 +5,11 @@
   display: block;
   border: none;
   padding: 0;
+  /* This is to overwrite any previous inherited value */
+  --item-tile-border: none;
+  --item-tile-padding-y: 0;
+  --item-tile-selected-border: none;
+  --item-tile-selected-background: none;
 }
 
 .required {
@@ -20,4 +25,13 @@ legend {
   color: inherit;
   line-height: inherit;
   margin-bottom: 1.2rem;
+}
+
+/* If `tile` is present and if it is *not* false */
+:host([tile='true']),
+:host([tile='']) {
+  --item-tile-border: 2px solid var(--color-gray-light);
+  --item-tile-padding-y: 1em;
+  --item-tile-selected-border: 2px solid var(--color-primary-alt-darkest);
+  --item-tile-selected-background: var(--color-gray-cool-light);
 }

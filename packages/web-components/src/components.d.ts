@@ -582,6 +582,10 @@ export namespace Components {
           * Whether or not this input field is required.
          */
         "required"?: boolean;
+        /**
+          * Add css to make a tile appearance
+         */
+        "tile"?: boolean;
     }
     interface VaRadioOption {
         /**
@@ -1801,6 +1805,10 @@ declare namespace LocalJSX {
           * Whether or not this input field is required.
          */
         "required"?: boolean;
+        /**
+          * Add css to make a tile appearance
+         */
+        "tile"?: boolean;
     }
     interface VaRadioOption {
         /**

@@ -16,6 +16,10 @@ label {
   margin: 0;
   width: 100%;
   padding-left: 2.4rem;
+  padding-top: var(--item-tile-padding-y);
+  padding-bottom: var(--item-tile-padding-y);
+  border: var(--item-tile-border);
+  border-radius: 0.25em;
 }
 
 label::before {
@@ -30,6 +34,11 @@ label::before {
   background-color: var(--color-white);
   content: '\A0';
   display: inline-block;
+}
+
+:host([aria-checked="true"]) label {
+  border: var(--item-tile-selected-border);
+  background: var(--item-tile-selected-background);
 }
 
 :host([aria-checked='true']) label::before {
