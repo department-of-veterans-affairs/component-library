@@ -116,7 +116,7 @@ describe('va-privacy-agreement', () => {
 
   });
 
-  it('does not fire analytics event when enableAnalytics prop is not set', async () => {
+  it('does not fire analytics event when `enableAnalytics` prop is not set', async () => {
     const page = await newE2EPage();
     await page.setContent(
       '<va-privacy-agreement />',
