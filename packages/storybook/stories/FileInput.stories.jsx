@@ -3,7 +3,7 @@ import FileInput from '../../react-components/src/components/FileInput/FileInput
 import { StoryDocs } from './wc-helpers';
 
 export default {
-  title: 'Components/File input - React',
+  title: 'Deprecated/File input - React',
   component: FileInput,
   id: 'components/fileinput',
   parameters: {
