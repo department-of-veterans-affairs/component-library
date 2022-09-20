@@ -42,8 +42,6 @@ export const additionalDocs = {
   'File input - React': {
     maturityCategory: DONT_USE,
     maturityLevel: DEPRECATED,
-    guidanceHref: 'form/file-input',
-    guidanceName: 'File input',
   },
   'Help menu': {
     maturityCategory: CAUTION,
