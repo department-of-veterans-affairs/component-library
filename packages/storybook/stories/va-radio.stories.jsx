@@ -108,6 +108,31 @@ const OptionDescriptionTemplate = ({
   );
 };
 
+const TileTemplate = ({
+  'enable-analytics': enableAnalytics,
+  error,
+  label,
+  description,
+  required,
+}) => {
+  return (
+    <va-radio
+      enable-analytics={enableAnalytics}
+      error={error}
+      label={label}
+      tile
+    >
+      <va-radio-option label="Option one" name="example" value="1" />
+      <va-radio-option label="Option two" name="example" value="2">
+        <div>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+        </div>
+      </va-radio-option>
+      <va-radio-option label="Option three" name="example" value="3" />
+    </va-radio>
+  );
+};
+
 const defaultArgs = {
   'enable-analytics': false,
   'label': 'This is a label',
@@ -136,12 +161,10 @@ Hint.args = {
 }
 
 export const Description = OptionDescriptionTemplate.bind(null);
+Description.args = defaultArgs;
 
-export const Tile = Template.bind(null);
-Tile.args = {
-  ...defaultArgs,
-  tile: true,
-};
+export const Tile = TileTemplate.bind(null);
+Tile.args = defaultArgs;
 
 export const Error = Template.bind(null);
 Error.args = {

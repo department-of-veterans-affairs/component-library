@@ -17,9 +17,11 @@ describe('va-radio-option', () => {
     expect(element).toEqualHtml(`
     <va-radio-option id="yes2" label="Yes - Any Veteran" name="yes" value="2" aria-checked="false" aria-label="yes" role="radio" class="hydrated">
       <mock:shadow-root>
-        <label for="yes2">Yes - Any Veteran</label>
-        <div class="description">
-          <slot></slot>
+        <div class="tile">
+          <label for="yes2">Yes - Any Veteran</label>
+          <div class="description">
+            <slot></slot>
+          </div>
         </div>
       </mock:shadow-root>
     </va-radio-option>

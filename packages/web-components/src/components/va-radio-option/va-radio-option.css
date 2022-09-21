@@ -16,10 +16,6 @@ label {
   margin: 0;
   width: 100%;
   padding-left: 2.4rem;
-  padding-top: var(--item-tile-padding-y);
-  padding-bottom: var(--item-tile-padding-y);
-  border: var(--item-tile-border);
-  border-radius: 0.25em;
 }
 
 label::before {
@@ -36,7 +32,14 @@ label::before {
   display: inline-block;
 }
 
-:host([aria-checked="true"]) label {
+.tile {
+  padding-top: var(--item-tile-padding-y);
+  padding-bottom: var(--item-tile-padding-y);
+  border: var(--item-tile-border);
+  border-radius: 0.25em;
+}
+
+:host([aria-checked="true"]) .tile {
   border: var(--item-tile-selected-border);
   background: var(--item-tile-selected-background);
 }
@@ -53,4 +56,5 @@ label::before {
 
 .description {
   margin-left: 3em;
+  padding-right: 2em;
 }

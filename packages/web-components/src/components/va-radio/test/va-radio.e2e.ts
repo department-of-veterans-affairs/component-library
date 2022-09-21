@@ -65,9 +65,11 @@ describe('va-radio', () => {
     const result = index => `
       <va-radio-option aria-checked="false" aria-label="test" id="test${index}" label="Option ${index}" name="test" value="${index}" role="radio" class="hydrated" tabindex="${index === 1 ? 0 : -1}">
         <mock:shadow-root>
-          <label for="test${index}">Option ${index}</label>
-          <div class="description">
-            <slot></slot>
+          <div class="tile">
+            <label for="test${index}">Option ${index}</label>
+            <div class="description">
+              <slot></slot>
+            </div>
           </div>
         </mock:shadow-root>
       </va-radio-option>
