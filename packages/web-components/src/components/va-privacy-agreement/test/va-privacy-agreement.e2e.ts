@@ -94,7 +94,8 @@ describe('va-privacy-agreement', () => {
       )
     ).asElement();
 
-    await input.click();
+    input.click();
+    await page.waitForChanges();
 
     expect(analyticsSpy).toHaveReceivedEventDetail({
       action: 'click',
@@ -104,7 +105,8 @@ describe('va-privacy-agreement', () => {
       },
     });
 
-    await input.click();
+    input.click();
+    await page.waitForChanges();
 
     expect(analyticsSpy).toHaveReceivedEventDetail({
       action: 'click',
@@ -122,9 +124,16 @@ describe('va-privacy-agreement', () => {
       '<va-privacy-agreement />',
     );
     const analyticsSpy = await page.spyOnEvent('component-library-analytics');
-    const vaCheckbox = await page.find('va-privacy-agreement >>> va-checkbox');
+    const input = (
+      await page.waitForFunction(() =>
+        document.querySelector('va-privacy-agreement')
+          .shadowRoot.querySelector('va-checkbox')
+          .shadowRoot.querySelector('input')
+      )
+    ).asElement();
 
-    await vaCheckbox.click();
+    input.click();
+    await page.waitForChanges();
 
     expect(analyticsSpy).not.toHaveReceivedEvent();
   });
