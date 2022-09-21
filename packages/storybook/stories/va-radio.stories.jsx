@@ -58,11 +58,11 @@ const IdUsageTemplate = ({
         label={label}
         required={required}
       >
-        <va-radio-option id="no1" label="No" name="no" value="1" />
+        <va-radio-option id="no1" label="No" name="group1" value="1" />
         <va-radio-option
           id="yes1"
           label="Yes - Any Veteran"
-          name="yes"
+          name="group1"
           value="2"
         />
       </va-radio>
@@ -72,11 +72,11 @@ const IdUsageTemplate = ({
         label={label}
         required={required}
       >
-        <va-radio-option id="no2" label="No" name="no" value="1" />
+        <va-radio-option id="no2" label="No" name="group2" value="1" />
         <va-radio-option
           id="yes2"
           label="Yes - Any Veteran"
-          name="yes"
+          name="group2"
           value="2"
         />
       </va-radio>
