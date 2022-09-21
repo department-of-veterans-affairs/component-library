@@ -1,8 +1,11 @@
-import '@department-of-veterans-affairs/formation/dist/formation.min.css';
+// import '@department-of-veterans-affairs/formation/dist/formation.min.css';
 import './style.scss';
-import '@department-of-veterans-affairs/formation/dist/formation';
+// import '@department-of-veterans-affairs/formation/dist/formation';
 
-import '@department-of-veterans-affairs/component-library/dist/main.css';
+// import '@department-of-veterans-affairs/component-library/dist/main.css';
+import '@department-of-veterans-affairs/css-library/dist/fonts.css';
+import '@department-of-veterans-affairs/css-library/dist/utilities.css';
+// import '@department-of-veterans-affairs/css-library/dist/assets';
 import {
   applyPolyfills,
   defineCustomElements,
