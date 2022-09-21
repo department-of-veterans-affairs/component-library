@@ -13,7 +13,7 @@ import {
 /**
  * @componentName File input
  * @maturityCategory caution
- * @maturityLevel candidate
+ * @maturityLevel available
  * @guidanceHref form/file-input
  */
 

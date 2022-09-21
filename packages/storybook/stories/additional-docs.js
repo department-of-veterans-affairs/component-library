@@ -40,10 +40,8 @@ export const additionalDocs = {
     maturityLevel: AVAILABLE,
   },
   'File input - React': {
-    maturityCategory: USE,
-    maturityLevel: DEPLOYED,
-    guidanceHref: 'form/file-input',
-    guidanceName: 'File input',
+    maturityCategory: DONT_USE,
+    maturityLevel: DEPRECATED,
   },
   'Help menu': {
     maturityCategory: CAUTION,
@@ -92,7 +90,7 @@ export const additionalDocs = {
     maturityCategory: DONT_USE,
     maturityLevel: DEPRECATED,
   },
-  'Privacy agreement': {
+  'Privacy agreement - React': {
     maturityCategory: CAUTION,
     maturityLevel: AVAILABLE,
   },

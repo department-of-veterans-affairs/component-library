@@ -1,0 +1,28 @@
+@import '../../mixins/accessibility.css';
+
+:host {
+  display: block;
+}
+
+a {
+  color: var(--color-link-default);
+}
+
+i {
+  font-family: 'Font Awesome 5 Free';
+  font-style: normal;
+  font-weight: 900;
+  line-height: 1;
+}
+
+i.fa-arrow-up-right-from-square {
+  display: inline-block;
+  color: var(--color-link-default);
+  font-size: 1.2rem;
+  margin: 0.5rem;
+}
+
+
+i.fa-arrow-up-right-from-square::before {
+  content: '\f35d';
+}

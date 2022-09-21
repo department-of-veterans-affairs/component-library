@@ -32,7 +32,7 @@ export class VaCheckbox {
   /**
    * The error message to render.
    */
-  @Prop() error?: string;
+   @Prop({ reflect: true }) error?: string;
 
   /**
    * The description to render. If this prop exists, va-checkbox will render it
