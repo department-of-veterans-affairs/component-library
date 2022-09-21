@@ -90,7 +90,7 @@ export const additionalDocs = {
     maturityCategory: DONT_USE,
     maturityLevel: DEPRECATED,
   },
-  'Privacy agreement': {
+  'Privacy agreement - React': {
     maturityCategory: CAUTION,
     maturityLevel: AVAILABLE,
   },

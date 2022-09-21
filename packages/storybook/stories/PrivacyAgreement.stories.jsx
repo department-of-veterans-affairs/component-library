@@ -3,13 +3,13 @@ import PrivacyAgreement from '../../react-components/src/components/PrivacyAgree
 import { StoryDocs } from './wc-helpers';
 
 export default {
-  title: 'Components/Privacy agreement',
+  title: 'Components/Privacy agreement - React',
   component: PrivacyAgreement,
   id: 'components/privacyagreement',
   parameters: {
     componentSubtitle: 'Privacy agreement React component',
     docs: {
-      page: () => <StoryDocs componentName="Privacy agreement" />,
+      page: () => <StoryDocs componentName="Privacy agreement - React" />,
     },
   },
 };
