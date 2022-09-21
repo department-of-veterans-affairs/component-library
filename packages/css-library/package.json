@@ -3,11 +3,12 @@
   "private": true,
   "packageManager": "yarn@3.2.0",
   "files": [
-    "dist/*.css"
+    "dist/"
   ],
   "scripts": {
     "build:tokens": "style-dictionary build",
-    "build": "sass --load-path=../../node_modules/@uswds/uswds/packages/ src/stylesheets:dist/",
+    "copy-assets": "cp -r src/assets/ dist",
+    "build": "yarn copy-assets && sass --load-path=../../node_modules/@uswds/uswds/packages/ src/stylesheets:dist/",
     "build:minify": "yarn build --style compressed --no-source-map"
   },
   "devDependencies": {
