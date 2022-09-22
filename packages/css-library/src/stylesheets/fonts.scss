@@ -1,25 +1,26 @@
-@font-face {
-  font-family: "Bitter";
-  font-style: normal;
-  font-weight: 400;
-  src:
-    local("Bitter Regular"),
-    local("Bitter-Regular"),
-    url('assets/fonts/bitter-regular.woff2') format("woff2"),
-    url('assets/fonts/bitter-regular.ttf') format("truetype");
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215;
-}
+@use "uswds-core/src/styles/settings/settings-typography" with (
+  $theme-typeface-tokens: (
+    bitter: (
+      display-name: 'Bitter',
+      cap-height: 364px
+      )
+    ),
+  $theme-font-serif-custom-src: (
+    dir: 'assets/fonts',
+    roman: (
+      100: false,
+      200: false,
+      300: false,
+      400: 'bitter-regular',
+      500: false,
+      600: false,
+      700: 'bitter-bold',
+      800: false,
+      900: false,
+    ),
+  ),
+  $theme-font-type-serif: 'bitter',
+  $theme-font-type-mono: false
+);
 
-/* latin */
-@font-face {
-  font-family: "Bitter";
-  font-style: normal;
-  font-weight: 700;
-  src:
-    local("Bitter Bold"),
-    local("Bitter-Bold"),
-    url('assets/fonts/bitter-bold.woff2') format("woff2"),
-    url('assets/fonts/bitter-bold.ttf') format("truetype");
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215;
-}
-
+@use "uswds-fonts/src/styles/font-face";
