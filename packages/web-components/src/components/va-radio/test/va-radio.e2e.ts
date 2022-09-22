@@ -63,11 +63,13 @@ describe('va-radio', () => {
     expect(await options[2].getProperty('id')).toEqual('test3');
 
     const result = index => `
-      <va-radio-option aria-checked="false" aria-label="test" id="test${index}" label="Option ${index}" name="test" value="${index}" role="radio" class="hydrated" tabindex="${index === 1 ? 0 : -1}">
+      <va-radio-option aria-checked="false" id="test${index}" label="Option ${index}" name="test" value="${index}" role="radio" class="hydrated" tabindex="${index === 1 ? 0 : -1}">
         <mock:shadow-root>
           <div class="tile">
-            <label for="test${index}">Option ${index}</label>
-            <div class="description">
+            <label for="test${index}" aria-describedby="description">
+              Option ${index}
+            </label>
+            <div id="description">
               <slot></slot>
             </div>
           </div>

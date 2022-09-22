@@ -61,7 +61,6 @@ export class VaRadioOption {
       <Host
         aria-checked={checked ? `${checked}` : 'false'}
         aria-describedby={(checked && ariaDescribedby) || null}
-        aria-label={name}
         checked={checked}
         name={name}
         onClick={() => this.handleChange()}
@@ -70,8 +69,8 @@ export class VaRadioOption {
         id={id}
       >
         <div class="tile">
-          <label htmlFor={id}>{label}</label>
-          <div class="description">
+          <label htmlFor={id} aria-describedby="description">{label}</label>
+          <div id="description">
             <slot></slot>
           </div>
         </div>

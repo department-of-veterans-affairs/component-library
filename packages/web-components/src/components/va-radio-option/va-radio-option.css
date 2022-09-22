@@ -54,7 +54,7 @@ label::before {
   outline-offset: 6px;
 }
 
-.description {
+#description {
   margin-left: 3em;
   padding-right: 2em;
 }

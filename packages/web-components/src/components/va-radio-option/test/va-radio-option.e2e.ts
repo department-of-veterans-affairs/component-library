@@ -15,11 +15,13 @@ describe('va-radio-option', () => {
 
     const element = await page.find('va-radio-option');
     expect(element).toEqualHtml(`
-    <va-radio-option id="yes2" label="Yes - Any Veteran" name="yes" value="2" aria-checked="false" aria-label="yes" role="radio" class="hydrated">
+    <va-radio-option id="yes2" label="Yes - Any Veteran" name="yes" value="2" aria-checked="false" role="radio" class="hydrated">
       <mock:shadow-root>
         <div class="tile">
-          <label for="yes2">Yes - Any Veteran</label>
-          <div class="description">
+          <label for="yes2" aria-describedby="description">
+            Yes - Any Veteran
+          </label>
+          <div id="description">
             <slot></slot>
           </div>
         </div>
