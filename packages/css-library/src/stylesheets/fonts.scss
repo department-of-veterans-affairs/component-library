@@ -1,12 +1,27 @@
 @use "uswds-core/src/styles/settings/settings-typography" with (
+  $theme-font-path: 'fonts',
   $theme-typeface-tokens: (
     bitter: (
       display-name: 'Bitter',
       cap-height: 364px
       )
     ),
+  $theme-font-sans-custom-src: (
+    dir: 'source-sans-pro',
+    roman: (
+      100: false,
+      200: false,
+      300: false,
+      400: 'sourcesanspro-regular-webfont',
+      500: false,
+      600: false,
+      700: 'sourcesanspro-bold-webfont',
+      800: false,
+      900: false,
+    ),
+  ),
   $theme-font-serif-custom-src: (
-    dir: 'assets/fonts',
+    dir: '../fonts',
     roman: (
       100: false,
       200: false,

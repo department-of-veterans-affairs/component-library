@@ -7,7 +7,7 @@
   ],
   "scripts": {
     "build:tokens": "style-dictionary build",
-    "copy-assets": "cp -r src/assets/ dist",
+    "copy-assets": "cp -r src/assets/ dist && cp -r ../../node_modules/@uswds/uswds/dist/fonts/source-sans-pro dist/fonts",
     "build": "yarn copy-assets && sass --load-path=../../node_modules/@uswds/uswds/packages/ src/stylesheets:dist/",
     "build:minify": "yarn build --style compressed --no-source-map"
   },
