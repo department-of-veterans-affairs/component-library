@@ -183,8 +183,13 @@ export class VaRadio {
 
   render() {
     const { label, required, error } = this;
+    const ariaLabel = label + (required ? ' required' : '');
     return (
-      <Host role="radiogroup" aria-invalid={error ? 'true' : 'false'}>
+      <Host
+        role="radiogroup"
+        aria-invalid={error ? 'true' : 'false'}
+        aria-label={ariaLabel}
+      >
         <legend>
           {label}
           {required && <span class="required">(*Required)</span>}
