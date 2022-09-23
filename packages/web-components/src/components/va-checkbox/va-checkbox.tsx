@@ -103,6 +103,10 @@ export class VaCheckbox {
         required: this.required,
         checked: this.checked,
       },
+      ga4: {
+        form_value: this.checked,
+        required: this.required
+      }
     });
   };
 
