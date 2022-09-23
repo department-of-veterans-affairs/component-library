@@ -36,10 +36,24 @@ export const config: Config = {
     },
     {
       type: 'dist-custom-elements-bundle',
+      copy: [
+        {
+          src: '../../../node_modules/@uswds/uswds/dist/img/usa-icons/*.svg',
+          dest: 'dist/assets',
+          warn: true,
+        }
+      ]
     },
     {
       type: 'www',
       serviceWorker: null, // disable service workers
+      copy: [
+        {
+          src: '../../../node_modules/@uswds/uswds/dist/img/usa-icons/*.svg',
+          dest: 'build/assets',
+          warn: true,
+        }
+      ]
     },
   ],
 };
