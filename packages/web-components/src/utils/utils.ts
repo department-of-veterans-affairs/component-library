@@ -20,7 +20,7 @@ export function isNumeric(value: string): boolean {
 export function getSlottedNodes(
   root: HTMLElement,
   nodeName: string | null,
-  getAllSlots: boolean | false,
+  getAllSlots?: boolean | false,
 ): Array<Node> {
   // If the browser is using the shadowDOM, the childNodes should be an array of two things:
   // A `<style>` element and a `<slot>` element
@@ -31,14 +31,14 @@ export function getSlottedNodes(
       (node: any) => node.tagName === 'SLOT',
     ).length > 0;
 
-  let children;
+  let children: NodeList|Node[];
   if (getAllSlots) {
     // This will check all the slots on a component
     children = hasShadowDOM
       ? Array.from(root.shadowRoot.querySelectorAll('slot')).map(
           el => el.assignedNodes?.(),
         ).flat()
-      : Array.from(root.shadowRoot.childNodes);
+      : root.shadowRoot.childNodes;
     } else {
       // This will only get the first slot on a component
       children = hasShadowDOM
