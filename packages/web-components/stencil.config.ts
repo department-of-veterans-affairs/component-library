@@ -38,7 +38,7 @@ export const config: Config = {
       type: 'dist-custom-elements-bundle',
       copy: [
         {
-          src: '../../../node_modules/@uswds/uswds/dist/img/usa-icons/*.svg',
+          src: '../../../node_modules/@uswds/uswds/dist/img/*.svg',
           dest: 'dist/assets',
           warn: true,
         }
@@ -49,7 +49,7 @@ export const config: Config = {
       serviceWorker: null, // disable service workers
       copy: [
         {
-          src: '../../../node_modules/@uswds/uswds/dist/img/usa-icons/*.svg',
+          src: '../../../node_modules/@uswds/uswds/dist/img/*.svg',
           dest: 'build/assets',
           warn: true,
         }

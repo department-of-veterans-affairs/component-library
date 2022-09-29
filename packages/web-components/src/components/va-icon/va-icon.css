@@ -1,3 +1,13 @@
 :host {
   display: block;
 }
+
+/* Copied from USWDS styles */
+/* https://github.com/uswds/uswds/blob/358679dbb9f3918b87540004d0a211f83ea79831/packages/usa-icon/src/styles/_usa-icon.scss#L13-L21 */
+.usa-icon {
+  display: inline-block;
+  fill: currentColor;
+  height: 1em;
+  position: relative;
+  width: 1em;
+}

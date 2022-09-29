@@ -1,5 +1,4 @@
-import { Component, Host, Prop, getAssetPath, h } from '@stencil/core';
-import ascendingIcon from '../../assets/sort-arrow-up.svg?format=text';
+import { Component, Prop, getAssetPath, h } from '@stencil/core';
 
 @Component({
   tag: 'va-icon',
@@ -12,12 +11,12 @@ export class VaIcon {
   @Prop() icon!: string;
 
   render() {
-    const path = getAssetPath(`./assets/${this.icon}.svg`);
+    const path = getAssetPath("./assets/sprite.svg");
     console.log('PATH', path)
     return (
-      <Host >
-        <div innerHTML={ascendingIcon}></div>
-    </Host>
+      <svg class="usa-icon" aria-hidden="true" focusable="false" role="img">
+        <use xlinkHref={`${path}#${this.icon}`}></use>
+      </svg>
     );
   }
 
