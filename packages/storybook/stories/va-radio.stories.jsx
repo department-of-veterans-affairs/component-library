@@ -29,25 +29,30 @@ const Template = ({
   required,
 }) => {
   const [value, setValue] = useState('');
+  const [radioOptionSelected, setRadioOptionSelected] = useState('');
 
   useEffect(() => {
     const radio = document.querySelector('va-radio');
     radio.addEventListener('vaValueChange', e => {
       setValue(e?.detail?.value);
     });
+    radio.addEventListener('radioOptionSelected', e => {
+      setRadioOptionSelected(e?.detail?.value);
+    });
   }, [])
   return (
     <>
-    <va-radio
-      enable-analytics={enableAnalytics}
-      error={error}
-      label={label}
-      required={required}
-    >
-      <va-radio-option label="Option one" name="example" value="1" />
-      <va-radio-option label="Option two" name="example" value="2" />
-    </va-radio>
-    <p>Selected value: {value}</p>
+      <va-radio
+        enable-analytics={enableAnalytics}
+        error={error}
+        label={label}
+        required={required}
+      >
+        <va-radio-option label="Option one" name="example" value="1" />
+        <va-radio-option label="Option two" name="example" value="2" />
+      </va-radio>
+    <p>vaValueChange Selected value: {value}</p>
+    <p>radioOptionSelected Selected value: {radioOptionSelected}</p>
     </>
   );
 };
