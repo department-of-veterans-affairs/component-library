@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect, useState, setState } from 'react';
+
 import {
   getWebComponentDocs,
   componentStructure,
@@ -27,7 +28,16 @@ const Template = ({
   label,
   required,
 }) => {
+  const [value, setValue] = useState('');
+
+  useEffect(() => {
+    const radio = document.querySelector('va-radio');
+    radio.addEventListener('vaValueChange', e => {
+      setValue(e?.detail?.value);
+    });
+  }, [])
   return (
+    <>
     <va-radio
       enable-analytics={enableAnalytics}
       error={error}
@@ -37,6 +47,8 @@ const Template = ({
       <va-radio-option label="Option one" name="example" value="1" />
       <va-radio-option label="Option two" name="example" value="2" />
     </va-radio>
+    <p>Selected value: {value}</p>
+    </>
   );
 };
 
