@@ -1,10 +1,15 @@
 import React from 'react';
+import { VaRadio, VaRadioOption} from '@department-of-veterans-affairs/web-components/react-bindings';
+
 import {
   getWebComponentDocs,
   componentStructure,
   propStructure,
   StoryDocs,
 } from './wc-helpers';
+
+VaRadio.displayName = 'VaRadio';
+VaRadioOption.displayName = 'VaRadioOption';
 
 const radioDocs = getWebComponentDocs('va-radio');
 const radioItem = getWebComponentDocs('va-radio-option');
@@ -28,15 +33,17 @@ const Template = ({
   required,
 }) => {
   return (
-    <va-radio
-      enable-analytics={enableAnalytics}
+    <>
+    <VaRadio 
+      enableAnalytics={enableAnalytics}
       error={error}
       label={label}
-      required={required}
-    >
-      <va-radio-option label="Option one" name="example" value="1" />
-      <va-radio-option label="Option two" name="example" value="2" />
-    </va-radio>
+      required={required} 
+      onVaValueChange={e => console.log('Selected radio option:', e?.detail?.value)}>
+      <VaRadioOption label="Option one" name="example" value="1" />
+      <VaRadioOption label="Option two" name="example" value="2" />
+    </VaRadio>
+    </>
   );
 };
 
@@ -48,34 +55,35 @@ const IdUsageTemplate = ({
 }) => {
   return (
     <>
-      <va-radio
-        enable-analytics={enableAnalytics}
+      <VaRadio 
+        enableAnalytics={enableAnalytics}
         error={error}
         label={label}
-        required={required}
-      >
-        <va-radio-option id="no1" label="No" name="no" value="1" />
-        <va-radio-option
+        required={required} 
+        onVaValueChange={e => console.log('Selected radio option:', e?.detail?.value)}>
+        <VaRadioOption id="no1" label="No" name="myOption" value="no" />
+        <VaRadioOption
           id="yes1"
           label="Yes - Any Veteran"
-          name="yes"
-          value="2"
+          name="myOption"
+          value="yes"
         />
-      </va-radio>
-      <va-radio
-        enable-analytics={enableAnalytics}
+      </VaRadio>
+
+      <VaRadio 
+        enableAnalytics={enableAnalytics}
         error={error}
         label={label}
-        required={required}
-      >
-        <va-radio-option id="no2" label="No" name="no" value="1" />
-        <va-radio-option
+        required={required} 
+        onVaValueChange={e => console.log('Selected radio option:', e?.detail?.value)}>
+        <VaRadioOption id="no2" label="No" name="myOption" value="no" />
+        <VaRadioOption
           id="yes2"
           label="Yes - Any Veteran"
-          name="yes"
-          value="2"
+          name="myOption"
+          value="yes"
         />
-      </va-radio>
+      </VaRadio>
     </>
   );
 };
