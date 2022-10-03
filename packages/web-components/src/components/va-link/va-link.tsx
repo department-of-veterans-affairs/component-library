@@ -84,7 +84,8 @@ export class VaLink {
       componentName: 'va-link',
       action: 'click',
       details: {
-        // TODO: add analytics event details
+        event: 'nav-link-click',
+        'link-click-label': this.text,
       },
     });
   };
