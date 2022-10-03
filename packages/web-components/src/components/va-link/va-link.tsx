@@ -84,7 +84,6 @@ export class VaLink {
       componentName: 'va-link',
       action: 'click',
       details: {
-        event: 'nav-link-click',
         'link-click-label': this.text,
       },
     });
