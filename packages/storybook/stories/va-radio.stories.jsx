@@ -33,6 +33,25 @@ const Template = ({
   required,
 }) => {
   return (
+    <va-radio
+      enable-analytics={enableAnalytics}
+      error={error}
+      label={label}
+      required={required}
+    >
+      <va-radio-option label="Option one" name="example" value="1" />
+      <va-radio-option label="Option two" name="example" value="2" />
+    </va-radio>
+  );
+};
+
+const ReactBindingExample = ({
+  'enable-analytics': enableAnalytics,
+  error,
+  label,
+  required,
+}) => {
+  return (
     <>
     <VaRadio 
       enableAnalytics={enableAnalytics}
@@ -55,35 +74,34 @@ const IdUsageTemplate = ({
 }) => {
   return (
     <>
-      <VaRadio 
-        enableAnalytics={enableAnalytics}
+      <va-radio
+        enable-analytics={enableAnalytics}
         error={error}
         label={label}
-        required={required} 
-        onVaValueChange={e => console.log('Selected radio option:', e?.detail?.value)}>
-        <VaRadioOption id="no1" label="No" name="myOption" value="no" />
-        <VaRadioOption
+        required={required}
+      >
+        <va-radio-option id="no1" label="No" name="example" value="1" />
+        <va-radio-option
           id="yes1"
           label="Yes - Any Veteran"
-          name="myOption"
-          value="yes"
+          name="example"
+          value="2"
         />
-      </VaRadio>
-
-      <VaRadio 
-        enableAnalytics={enableAnalytics}
+      </va-radio>
+      <va-radio
+        enable-analytics={enableAnalytics}
         error={error}
         label={label}
-        required={required} 
-        onVaValueChange={e => console.log('Selected radio option:', e?.detail?.value)}>
-        <VaRadioOption id="no2" label="No" name="myOption" value="no" />
-        <VaRadioOption
+        required={required}
+      >
+        <va-radio-option id="no2" label="No" name="example" value="1" />
+        <va-radio-option
           id="yes2"
           label="Yes - Any Veteran"
-          name="myOption"
-          value="yes"
+          name="example"
+          value="2"
         />
-      </VaRadio>
+      </va-radio>
     </>
   );
 };
@@ -100,6 +118,11 @@ Default.args = {
   ...defaultArgs,
 };
 Default.argTypes = propStructure(radioDocs);
+
+export const ReactBinding = ReactBindingExample.bind(null);
+ReactBinding.args = {
+  ...defaultArgs,
+};
 
 export const Error = Template.bind(null);
 Error.args = {
