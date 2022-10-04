@@ -119,8 +119,8 @@ Default.args = {
 };
 Default.argTypes = propStructure(radioDocs);
 
-export const ReactBinding = ReactBindingExample.bind(null);
-ReactBinding.args = {
+export const ReactWithCustomEvent = ReactBindingExample.bind(null);
+ReactWithCustomEvent.args = {
   ...defaultArgs,
 };
 
