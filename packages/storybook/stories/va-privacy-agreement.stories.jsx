@@ -7,7 +7,7 @@ VaPrivacyAgreement.displayName = 'VaPrivacyAgreement';
 const privacyAgreementDocs = getWebComponentDocs('va-privacy-agreement');
 
 export default {
-    title: 'Under development/Privacy agreement',
+    title: 'Components/Privacy agreement',
     id: 'components/va-privacy-agreement',
     parameters: {
         componentSubtitle: 'va-privacy-agreement web component',
