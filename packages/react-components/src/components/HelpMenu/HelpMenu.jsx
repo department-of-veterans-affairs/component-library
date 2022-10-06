@@ -1,12 +1,10 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import DropDownPanel from '../DropDownPanel/DropDownPanel';
-import IconHelp from '../IconHelp/IconHelp';
 import Telephone, { CONTACTS, PATTERNS } from '../Telephone/Telephone';
 
 class HelpMenu extends React.Component {
   render() {
-    const icon = <IconHelp color="#fff" role="presentation" />;
 
     return (
       <DropDownPanel
@@ -14,7 +12,7 @@ class HelpMenu extends React.Component {
         clickHandler={this.props.clickHandler}
         cssClass={this.props.cssClass}
         id="helpmenu"
-        icon={icon}
+        icon={null}
         isOpen={this.props.isOpen}
       >
         <div>
