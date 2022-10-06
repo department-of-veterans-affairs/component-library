@@ -1,4 +1,3 @@
-import AcceptTermsPrompt from './components/AcceptTermsPrompt/AcceptTermsPrompt';
 import AdditionalInfo from './components/AdditionalInfo/AdditionalInfo';
 import AlertBox, { ALERT_TYPE } from './components/AlertBox/AlertBox';
 import Breadcrumbs from './components/Breadcrumbs/Breadcrumbs';
@@ -32,7 +31,7 @@ import Telephone, {
 import TextInput from './components/TextInput/TextInput';
 
 export {
-  AcceptTermsPrompt,
+
   AdditionalInfo,
   AlertBox,
   ALERT_TYPE,
