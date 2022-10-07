@@ -19,6 +19,7 @@ import OMBInfo from './components/OMBInfo/OMBInfo';
 import Pagination from './components/Pagination/Pagination';
 import PrivacyAgreement from './components/PrivacyAgreement/PrivacyAgreement';
 import ProgressButton from './components/ProgressButton/ProgressButton';
+import RadioButtons from './components/RadioButtons/RadioButtons';
 import Select from './components/Select/Select';
 import SystemDownView from './components/SystemDownView/SystemDownView';
 import Table from './components/Table/Table';
@@ -53,6 +54,7 @@ export {
   Pagination,
   PrivacyAgreement,
   ProgressButton,
+  RadioButtons,
   Select,
   SystemDownView,
   Table,
