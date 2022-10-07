@@ -6,7 +6,6 @@ import CheckboxGroup from './components/CheckboxGroup/CheckboxGroup';
 import DropDownPanel from './components/DropDownPanel/DropDownPanel';
 import ExpandingGroup from './components/ExpandingGroup/ExpandingGroup';
 import FileInput from './components/FileInput/FileInput';
-import HelpMenu from './components/HelpMenu/HelpMenu';
 import IconBase from './components/IconBase/IconBase';
 import IconHelp from './components/IconHelp/IconHelp';
 import IconSearch from './components/IconSearch/IconSearch';
@@ -40,7 +39,6 @@ export {
   DropDownPanel,
   ExpandingGroup,
   FileInput,
-  HelpMenu,
   IconBase,
   IconHelp,
   IconSearch,
