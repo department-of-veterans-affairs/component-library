@@ -43,10 +43,6 @@ export const additionalDocs = {
     maturityCategory: DONT_USE,
     maturityLevel: DEPRECATED,
   },
-  'Help menu': {
-    maturityCategory: CAUTION,
-    maturityLevel: AVAILABLE,
-  },
   'Icon - base': {
     maturityCategory: CAUTION,
     maturityLevel: AVAILABLE,
