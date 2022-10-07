@@ -94,10 +94,6 @@ export const additionalDocs = {
     maturityCategory: CAUTION,
     maturityLevel: AVAILABLE,
   },
-  'RadioButtons - React': {
-    maturityCategory: DONT_USE,
-    maturityLevel: DEPRECATED,
-  },
   'Select - React': {
     maturityCategory: DONT_USE,
     maturityLevel: DEPRECATED,
