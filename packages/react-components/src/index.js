@@ -16,7 +16,6 @@ import MaintenanceBanner from './components/MaintenanceBanner/MaintenanceBanner'
 import Modal from './components/Modal/Modal';
 import OMBInfo from './components/OMBInfo/OMBInfo';
 import Pagination from './components/Pagination/Pagination';
-import PrivacyAgreement from './components/PrivacyAgreement/PrivacyAgreement';
 import ProgressButton from './components/ProgressButton/ProgressButton';
 import RadioButtons from './components/RadioButtons/RadioButtons';
 import Select from './components/Select/Select';
@@ -51,7 +50,6 @@ export {
   Modal,
   OMBInfo,
   Pagination,
-  PrivacyAgreement,
   ProgressButton,
   RadioButtons,
   Select,
