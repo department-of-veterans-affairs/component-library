@@ -5,10 +5,6 @@ const { AVAILABLE, BEST_PRACTICE, CANDIDATE, DEPLOYED, DEPRECATED, PROPOSED } =
   level;
 
 export const additionalDocs = {
-  'Accept terms prompt': {
-    maturityCategory: CAUTION,
-    maturityLevel: AVAILABLE,
-  },
   // MDX
   'Address block': {
     guidanceHref: 'address-block',
@@ -42,10 +38,6 @@ export const additionalDocs = {
   'File input - React': {
     maturityCategory: DONT_USE,
     maturityLevel: DEPRECATED,
-  },
-  'Help menu': {
-    maturityCategory: CAUTION,
-    maturityLevel: AVAILABLE,
   },
   'Icon - base': {
     maturityCategory: CAUTION,

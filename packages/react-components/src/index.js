@@ -1,4 +1,3 @@
-import AcceptTermsPrompt from './components/AcceptTermsPrompt/AcceptTermsPrompt';
 import AdditionalInfo from './components/AdditionalInfo/AdditionalInfo';
 import AlertBox, { ALERT_TYPE } from './components/AlertBox/AlertBox';
 import Breadcrumbs from './components/Breadcrumbs/Breadcrumbs';
@@ -7,7 +6,6 @@ import CheckboxGroup from './components/CheckboxGroup/CheckboxGroup';
 import DropDownPanel from './components/DropDownPanel/DropDownPanel';
 import ExpandingGroup from './components/ExpandingGroup/ExpandingGroup';
 import FileInput from './components/FileInput/FileInput';
-import HelpMenu from './components/HelpMenu/HelpMenu';
 import IconBase from './components/IconBase/IconBase';
 import IconSearch from './components/IconSearch/IconSearch';
 import IconUser from './components/IconUser/IconUser';
@@ -30,7 +28,7 @@ import Telephone, {
 import TextInput from './components/TextInput/TextInput';
 
 export {
-  AcceptTermsPrompt,
+
   AdditionalInfo,
   AlertBox,
   ALERT_TYPE,
@@ -40,7 +38,6 @@ export {
   DropDownPanel,
   ExpandingGroup,
   FileInput,
-  HelpMenu,
   IconBase,
   IconSearch,
   IconUser,

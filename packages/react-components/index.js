@@ -1,4 +1,3 @@
-import AcceptTermsPrompt from './AcceptTermsPrompt';
 import AdditionalInfo from './AdditionalInfo';
 import AlertBox, { ALERT_TYPE } from './AlertBox';
 import Breadcrumbs from './Breadcrumbs';
@@ -7,7 +6,6 @@ import CheckboxGroup from './CheckboxGroup';
 import DropDownPanel from './DropDownPanel';
 import ExpandingGroup from './ExpandingGroup';
 import FileInput from './FileInput';
-import HelpMenu from './HelpMenu';
 import IconBase from './IconBase';
 import IconSearch from './IconSearch';
 import IconUser from './IconUser';
@@ -32,7 +30,6 @@ import TextInput from './TextInput';
 import './i18n-setup';
 
 export {
-  AcceptTermsPrompt,
   AdditionalInfo,
   AlertBox,
   ALERT_TYPE,
@@ -42,7 +39,6 @@ export {
   DropDownPanel,
   ExpandingGroup,
   FileInput,
-  HelpMenu,
   IconBase,
   IconSearch,
   IconUser,
