@@ -1,4 +1,3 @@
-import AcceptTermsPrompt from './AcceptTermsPrompt';
 import AdditionalInfo from './AdditionalInfo';
 import AlertBox, { ALERT_TYPE } from './AlertBox';
 import Breadcrumbs from './Breadcrumbs';
@@ -32,7 +31,6 @@ import TextInput from './TextInput';
 import './i18n-setup';
 
 export {
-  AcceptTermsPrompt,
   AdditionalInfo,
   AlertBox,
   ALERT_TYPE,
