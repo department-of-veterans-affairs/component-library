@@ -7,7 +7,6 @@ import DropDownPanel from './components/DropDownPanel/DropDownPanel';
 import ExpandingGroup from './components/ExpandingGroup/ExpandingGroup';
 import FileInput from './components/FileInput/FileInput';
 import IconBase from './components/IconBase/IconBase';
-import IconHelp from './components/IconHelp/IconHelp';
 import IconSearch from './components/IconSearch/IconSearch';
 import IconUser from './components/IconUser/IconUser';
 import LoadingIndicator from './components/LoadingIndicator/LoadingIndicator';
@@ -40,7 +39,6 @@ export {
   ExpandingGroup,
   FileInput,
   IconBase,
-  IconHelp,
   IconSearch,
   IconUser,
   LoadingIndicator,

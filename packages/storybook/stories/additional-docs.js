@@ -43,10 +43,6 @@ export const additionalDocs = {
     maturityCategory: CAUTION,
     maturityLevel: AVAILABLE,
   },
-  'Icon - help': {
-    maturityCategory: CAUTION,
-    maturityLevel: AVAILABLE,
-  },
   'Icon - search': {
     maturityCategory: CAUTION,
     maturityLevel: AVAILABLE,
