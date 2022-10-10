@@ -10,6 +10,22 @@ describe('va-radio', () => {
     expect(element).toHaveClass('hydrated');
   });
 
+  it('set the aria-label to match the label prop', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-radio label="Testing"></va-radio>');
+
+    const element = await page.find('va-radio');
+    expect(element.getAttribute('aria-label')).toEqual('Testing');
+  });
+
+  it('appends "required" to the aria-label', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-radio label="Testing" required></va-radio>');
+
+    const element = await page.find('va-radio');
+    expect(element.getAttribute('aria-label')).toEqual('Testing required');
+  });
+
   it('passes an axe check', async () => {
     const page = await newE2EPage();
     await page.setContent(
