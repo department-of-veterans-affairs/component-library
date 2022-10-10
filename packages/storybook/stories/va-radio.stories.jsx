@@ -26,7 +26,6 @@ const Template = ({
   error,
   label,
   hint,
-  tile,
   required,
 }) => {
   return (
@@ -34,7 +33,6 @@ const Template = ({
       enable-analytics={enableAnalytics}
       error={error}
       label={label}
-      tile={tile}
       required={required}
     >
       {hint && <div slot="hint">{hint}</div>}
