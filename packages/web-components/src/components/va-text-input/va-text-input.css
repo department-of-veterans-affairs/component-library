@@ -23,6 +23,7 @@ input {
   box-sizing: border-box;
   color: var(--color-base);
   display: block;
+  font-family: var(--font-source-sans);
   font-size: 1.6rem;
   height: 4.2rem;
   line-height: 1.3;

@@ -3,7 +3,7 @@ import { Component, Host, h, Prop, Event, EventEmitter } from '@stencil/core';
 /**
  * @componentName Privacy agreement
  * @maturityCategory caution
- * @maturityLevel candidate
+ * @maturityLevel available
  */
 @Component({
   tag: 'va-privacy-agreement',
