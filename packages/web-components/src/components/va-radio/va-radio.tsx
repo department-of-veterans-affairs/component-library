@@ -44,11 +44,6 @@ export class VaRadio {
   @Prop() error?: string;
 
   /**
-   * Add css to make a tile appearance
-   */
-  @Prop() tile?: boolean = false;
-
-  /**
    * Whether or not an analytics event will be fired.
    */
   @Prop() enableAnalytics?: boolean = false;

@@ -68,12 +68,7 @@ export class VaRadioOption {
         value={value}
         id={id}
       >
-        <div class="tile">
-          <label htmlFor={id} aria-describedby="description">{label}</label>
-          <div id="description">
-            <slot></slot>
-          </div>
-        </div>
+        <label htmlFor={id}>{label}</label>
       </Host>
     );
   }

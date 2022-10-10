@@ -30,17 +30,6 @@ describe('va-radio-option', () => {
   `);
   });
 
-  it('renders slotted content', async () => {
-    const page = await newE2EPage();
-    await page.setContent(`
-      <va-radio-option label="An option">
-        <p>This is an option description</p>
-      </va-radio-option>
-    `);
-    const description = await page.find('va-radio-option');
-    expect(description.textContent).toContain('This is an option description')
-  });
-
   it('sets the ID based on the name and value, if not passed as a prop', async () => {
     const page = await newE2EPage();
     await page.setContent(

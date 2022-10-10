@@ -32,18 +32,6 @@ label::before {
   display: inline-block;
 }
 
-.tile {
-  padding-top: var(--item-tile-padding-y);
-  padding-bottom: var(--item-tile-padding-y);
-  border: var(--item-tile-border);
-  border-radius: 0.25em;
-}
-
-:host([aria-checked="true"]) .tile {
-  border: var(--item-tile-selected-border);
-  background: var(--item-tile-selected-background);
-}
-
 :host([aria-checked='true']) label::before {
   background-color: var(--color-primary);
   box-shadow: 0 0 0 2px var(--color-white), 0 0 0 4px var(--color-primary);
@@ -52,9 +40,4 @@ label::before {
 :host(:focus) label::before {
   outline: 2px solid var(--color-gold-light);
   outline-offset: 6px;
-}
-
-#description {
-  margin-left: 3em;
-  padding-right: 2em;
 }
