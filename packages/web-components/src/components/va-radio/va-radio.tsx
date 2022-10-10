@@ -34,6 +34,11 @@ export class VaRadio {
   @Prop() label!: string;
 
   /**
+   * Optional hint text for the radio group.
+   */
+  @Prop() hint!: string;
+
+  /**
    * Whether or not this input field is required.
    */
   @Prop() required?: boolean = false;
@@ -177,7 +182,7 @@ export class VaRadio {
   }
 
   render() {
-    const { label, required, error } = this;
+    const { label, hint, required, error } = this;
     const ariaLabel = label + (required ? ' required' : '');
     return (
       <Host
@@ -189,7 +194,7 @@ export class VaRadio {
           {label}
           {required && <span class="required">(*Required)</span>}
         </legend>
-        <slot name="hint"></slot>
+        {hint && <span class="hint-text">{hint}</span>}
         <span id="error-message" role="alert">
           {error && (
             <Fragment>

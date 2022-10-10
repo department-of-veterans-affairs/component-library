@@ -34,8 +34,8 @@ const Template = ({
       error={error}
       label={label}
       required={required}
+      hint={hint}
     >
-      {hint && <div slot="hint">{hint}</div>}
       <va-radio-option label="Option one" name="example" value="1" />
       <va-radio-option label="Option two" name="example" value="2" />
     </va-radio>
@@ -99,13 +99,7 @@ Default.argTypes = propStructure(radioDocs);
 export const Hint = Template.bind(null);
 Hint.args = {
   ...defaultArgs,
-  hint: (
-    <div className="vads-u-margin-bottom--1">
-      <va-additional-info trigger="Why is this required?">
-        Because there is no option three
-      </va-additional-info>
-    </div>
-  ),
+  hint: "We're asking this because of XYZ",
 };
 
 export const Error = Template.bind(null);
