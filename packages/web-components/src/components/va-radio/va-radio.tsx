@@ -76,7 +76,7 @@ export class VaRadio {
   @Listen('keydown')
   handleKeyDown(event: KeyboardEvent) {
     const currentNode = event.target as HTMLVaRadioOptionElement;
-    const radioOptionNodes = getSlottedNodes(this.el, 'va-radio-option', true);
+    const radioOptionNodes = getSlottedNodes(this.el, 'va-radio-option');
 
     if (!radioOptionNodes.length) return;
 
@@ -133,7 +133,7 @@ export class VaRadio {
   radioOptionSelectedHandler(event: CustomEvent): void {
     const clickedItem = event.target as HTMLVaRadioOptionElement;
 
-    getSlottedNodes(this.el, 'va-radio-option', true)
+    getSlottedNodes(this.el, 'va-radio-option')
       .filter(item => item !== clickedItem)
       .forEach((item: HTMLVaRadioOptionElement) => {
         this.deselectCurrentNode(item);
@@ -170,7 +170,7 @@ export class VaRadio {
   }
 
   componentDidLoad(): void {
-    getSlottedNodes(this.el, 'va-radio-option', true).forEach(
+    getSlottedNodes(this.el, 'va-radio-option').forEach(
       (node: HTMLVaRadioOptionElement, index: number) => {
         if (index === 0) {
           node.setAttribute('tabindex', '0');
