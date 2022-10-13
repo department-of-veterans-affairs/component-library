@@ -1,3 +1,15 @@
 export default {
+  'error': 'Error',
+  'required': '(*Kailangan)',
+  'max-chars': '(Pinakamarami ang {{length}} character)',
+  'date-of-birth': 'Petsa ng Kapanganakan',
+  'month': 'Buwan',
+  'day': 'Araw',
+  'year': 'Taon',
+  'year-range': 'Mangyaring ilagay ang taon sa pagitan ng {{start}} at {{end}}',
+  'expand-all': 'I-expand lahat',
+  'collapse-all': 'I-collapse ang lahat',
+  'expand-all-aria-label': 'I-expand ang lahat ng accordion',
+  'collapse-all-aria-label': 'I-collapse ang lahat ng accordion',
   'on-this-page': 'Sa pahinang ito',
 };
