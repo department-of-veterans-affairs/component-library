@@ -108,8 +108,8 @@ const I18nTemplate = ({ label, name, required, error, value }) => {
 
   return (
     <>
-      {lang}
       <button onClick={e => setLang('en')}>English</button>
+      <button onClick={e => setLang('es')}>Spanish</button>
       <button onClick={e => setLang('tl')}>Tagalog</button>
       <VaMemorableDate
         label={label}
