@@ -34,6 +34,7 @@ if (Build.isTesting) {
  * @maturityLevel available
  * @guidanceHref form/memorable-date
  * @translations English
+ * @translations Spanish
  * @translations Tagalog
  */
 @Component({
