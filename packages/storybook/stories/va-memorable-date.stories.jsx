@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { VaMemorableDate } from '@department-of-veterans-affairs/web-components/react-bindings';
 import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
 
@@ -98,32 +98,6 @@ const WithHintTextTemplate = ({ name, label, error, required, value }) => {
   );
 };
 
-const I18nTemplate = ({ label, name, required, error, value }) => {
-
-  const [lang, setLang] = useState('en');
-
-  useEffect(() => {
-    document.querySelector('main').setAttribute('lang', lang);
-  }, [lang]);
-
-  return (
-    <>
-      <button onClick={e => setLang('es')}>Español</button>
-      <button onClick={e => setLang('en')}>English</button>
-      <button onClick={e => setLang('tl')}>Tagalog</button>
-      <VaMemorableDate
-        label={label}
-        name={name}
-        required={required}
-        error={error}
-        value={value}
-        onDateBlur={e => console.log(e, 'DATE BLUR FIRED')}
-        onDateChange={e => console.log(e, 'DATE CHANGE FIRED')}
-      />
-    </>
-  );
-};
-
 export const Default = Template.bind(null);
 Default.args = { ...defaultArgs };
 Default.argTypes = propStructure(memorableDateInputDocs);
@@ -147,10 +121,4 @@ CustomValidation.args = {
   ...defaultArgs,
   required: true,
   value: '2022-04-19',
-};
-
-export const Internationalization = I18nTemplate.bind(null);
-Internationalization.args = {
-  ...defaultArgs,
-  required: true,
 };
