@@ -27,8 +27,9 @@ if (Build.isTesting) {
  * @guidanceHref form/text-input
  * @translations English
  * @translations Spanish
+ * @translations Tagalog
  */
- 
+
 @Component({
   tag: 'va-text-input',
   styleUrl: 'va-text-input.css',
