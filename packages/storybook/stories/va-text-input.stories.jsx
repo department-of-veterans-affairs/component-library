@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
 
 const textInputDocs = getWebComponentDocs('va-text-input');
@@ -102,17 +102,14 @@ const I18nTemplate = ({
   type,
 }) => {
   const [lang, setLang] = useState('en');
+  useEffect(() => {
+    document.querySelector('main').setAttribute('lang', lang);
+  }, [lang]);
   return (
     <>
-      <button
-        onClick={() => {
-          const newLang = lang === 'en' ? 'es' : 'en';
-          setLang(newLang);
-          document.querySelector('main').setAttribute('lang', newLang);
-        }}
-      >
-        Switch language
-      </button>
+      <button onClick={e => setLang('es')}>Español</button>
+      <button onClick={e => setLang('en')}>English</button>
+      <button onClick={e => setLang('tl')}>Tagalog</button>
       <va-text-input
         name={name}
         label={label}
