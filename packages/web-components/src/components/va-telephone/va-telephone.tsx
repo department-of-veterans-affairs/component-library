@@ -47,6 +47,12 @@ export class VaTelephone {
   @Prop() tty?: boolean = false;
 
   /**
+   * Indicates if this is a number meant to be used 
+   * to text.
+   */
+  @Prop() sms?: boolean = false;
+
+  /**
    * Optional vanity phone number.
    * Replaces the last 4 digits with the vanity text input
    */
@@ -82,6 +88,7 @@ export class VaTelephone {
     international: boolean = false,
     vanity: string,
     tty: boolean = false,
+    sms: boolean = false,
   ): string {
     let formattedNum = num;
     if (num.length === 10) {
@@ -96,6 +103,9 @@ export class VaTelephone {
     if (tty) {
       formattedNum = `TTY: ${formattedNum}`;
     }
+    if (sms) {
+      formattedNum = `Text: ${formattedNum}`;
+    }
     return formattedNum;
   }
 
@@ -104,10 +114,11 @@ export class VaTelephone {
    * @param {string} contact - The 10 or 3 digit contact prop
    * @param {number} ext - The extension number
    * @param {boolean} tty - Whether or not this is a TTY number
+   * @param {boolean} tty - Whether or not this is an SMS number
    * @return {string} - Combined phone number parts within the label separated by
    * periods, e.g. "800-555-1212" becomes "8 0 0. 5 5 5. 1 2 1 2"
    */
-  static formatTelLabel(contact: string, ext: number, tty: boolean, international: boolean): string {
+  static formatTelLabel(contact: string, ext: number, tty: boolean, international: boolean, sms: boolean): string {
     const spaceCharsOut = chars => chars.split('').join(' ');
     let labelPieces = VaTelephone.splitContact(contact)
       .map(spaceCharsOut);
@@ -116,6 +127,8 @@ export class VaTelephone {
       labelPieces.unshift('1');
     if (tty)
       labelPieces.unshift('TTY');
+    if (sms)
+      labelPieces.unshift('Text');
     if (ext) {
       labelPieces.push('extension');
       labelPieces.push(spaceCharsOut(ext.toString()));
@@ -124,12 +137,18 @@ export class VaTelephone {
     return labelPieces.join('. ');
   }
 
-  static createHref(contact: string, extension: number): string {
+  static createHref(contact: string, extension: number, sms: boolean): string {
     const isN11 = contact.length === 3;
     // extension format ";ext=" from RFC3966 https://tools.ietf.org/html/rfc3966#page-5
     // but it seems that using a comma to pause for 2 seconds might be a better
     // solution - see https://dsva.slack.com/archives/C8E985R32/p1589814301103200
-    const href = `tel:${isN11 ? contact : `+1${contact}`}`;
+    let href = `tel:+1${contact}`;
+    if (isN11) {
+      href = `tel:${contact}`;
+    } 
+    if (sms) {
+      href = `sms:+${contact}`;
+    }
     return `${href}${extension ? `,${extension}` : ''}`;
   }
 
@@ -145,19 +164,21 @@ export class VaTelephone {
   }
 
   render() {
-    const { contact, extension, notClickable, international, tty, vanity } = this;
+    const { contact, extension, notClickable, international, tty, sms, vanity } = this;
     const formattedNumber = VaTelephone.formatPhoneNumber(
       contact,
       extension,
       international,
       vanity,
-      tty
+      tty,
+      sms
     );
     const formattedAriaLabel = `${VaTelephone.formatTelLabel(
       contact,
       extension,
       tty,
-      international
+      international,
+      sms
     )}.`;
 
     return notClickable ? (
@@ -167,7 +188,7 @@ export class VaTelephone {
       </Fragment>
     ) : (
       <a
-        href={VaTelephone.createHref(contact, extension)}
+        href={VaTelephone.createHref(contact, extension, sms)}
         aria-label={formattedAriaLabel}
         onClick={this.handleClick.bind(this)}
       >

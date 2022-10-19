@@ -5,6 +5,7 @@ describe('formatPhoneNumber', () => {
   const N11 = '911';
   const extension = 123;
   const vanity = 'ABCD';
+  const sms = '123456';
   it('formats a contact number with no extension', () => {
     expect(VaTelephone.formatPhoneNumber(contact, null, null, null)).toBe('888-555-1234');
   });
@@ -34,32 +35,43 @@ describe('formatPhoneNumber', () => {
   it('formats a TTY number', () => {
     expect(VaTelephone.formatPhoneNumber(N11, null, null, null, true)).toBe('TTY: 911');
   });
+
+  it('formats an SMS number', () => {
+    expect(VaTelephone.formatPhoneNumber(sms, null, null, null, null, true)).toBe('Text: 123456');
+  });
 });
 
 describe('formatTelLabel', () => {
   const contact = '8885551234';
   const extension = 123;
+  const sms = '123456';
   it('formats a phone number into an assistive tech label', () => {
-    expect(VaTelephone.formatTelLabel(contact, null, false, false)).toBe(
+    expect(VaTelephone.formatTelLabel(contact, null, false, false, false)).toBe(
       '8 8 8. 5 5 5. 1 2 3 4',
     );
   });
 
   it('formats a phone number with extension into an assistive tech label', () => {
-    expect(VaTelephone.formatTelLabel(contact, extension, false, false)).toBe(
+    expect(VaTelephone.formatTelLabel(contact, extension, false, false, false)).toBe(
       '8 8 8. 5 5 5. 1 2 3 4. extension. 1 2 3',
     );
   });
 
   it('formats a TTY phone number', () => {
-    expect(VaTelephone.formatTelLabel(contact, null, true, false)).toBe(
+    expect(VaTelephone.formatTelLabel(contact, null, true, false, false)).toBe(
       'TTY. 8 8 8. 5 5 5. 1 2 3 4',
     );
   });
 
   it('formats an international phone number', () => {
-    expect(VaTelephone.formatTelLabel(contact, null, false, true)).toBe(
+    expect(VaTelephone.formatTelLabel(contact, null, false, true, false)).toBe(
       '1. 8 8 8. 5 5 5. 1 2 3 4',
+    );
+  });
+
+  it('formats an SMS phone number', () => {
+    expect(VaTelephone.formatTelLabel(sms, null, false, false, true)).toBe(
+      'Text. 1 2 3 4 5 6',
     );
   });
 
@@ -69,15 +81,19 @@ describe('createHref', () => {
   const contact = '8885551234';
   const n11 = '911';
   const extension = 123;
+  const sms = '123456';
   it('creates a tel link for a phone number', () => {
-    expect(VaTelephone.createHref(contact, null)).toBe('tel:+18885551234');
+    expect(VaTelephone.createHref(contact, null, false)).toBe('tel:+18885551234');
+  });
+  it('creates a sms link for an sms number', () => {
+    expect(VaTelephone.createHref(sms, null, true)).toBe('sms:+123456');
   });
   it('creates a tel link for a phone number with extension', () => {
-    expect(VaTelephone.createHref(contact, extension)).toBe(
+    expect(VaTelephone.createHref(contact, extension, false)).toBe(
       'tel:+18885551234,123',
     );
   });
   it('creates a tel link for an N11 number', () => {
-    expect(VaTelephone.createHref(n11, null)).toBe('tel:911');
+    expect(VaTelephone.createHref(n11, null, false)).toBe('tel:911');
   });
 });
