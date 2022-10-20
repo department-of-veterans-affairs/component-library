@@ -111,7 +111,7 @@ export class VaOmbInfo {
     // when setting the visibility of the modal.
     const el = this.findParentNodeBeforeBody(this.el) as HTMLElement;
     if (el) {
-      const value = `${!this.visible}`;
+      const value = this.visible ? 'false' : null;
       this.updateNodeAriaHidden(el, value);
     }
   }
@@ -141,10 +141,8 @@ export class VaOmbInfo {
    * @param value 
    */
   private updateNodeAriaHidden = (node: HTMLElement, value: string) => {
-    if (node) {
-      node.ariaHidden = value || 'false';
-      node.dataset.ariaHidden = value || 'false';
-    }
+      node.ariaHidden = value || null;
+      node.dataset.ariaHidden = value || null;
   }
 
   render() {
