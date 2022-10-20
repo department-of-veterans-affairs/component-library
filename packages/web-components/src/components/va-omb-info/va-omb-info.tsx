@@ -117,18 +117,20 @@ export class VaOmbInfo {
   }
 
   /**
-   * Find the top level parent node immediately before the `BODY` element.
+   * Walk up DOM to find the top level parent node that is 
+   * immediately before the `BODY` element.
    * @param node 
-   * @returns parentNode
+   * @returns node
    */
   private findParentNodeBeforeBody = (node: HTMLElement) => {
     let parent = node.parentNode;
+    let prevNode = null;
     while (parent) {
       if (parent.nodeName === 'BODY') {
-        return true;
+        return prevNode;
       }
+      prevNode = parent;
       parent = parent.parentNode;
-      return parent;
     }
     return false;
   }
@@ -139,8 +141,10 @@ export class VaOmbInfo {
    * @param value 
    */
   private updateNodeAriaHidden = (node: HTMLElement, value: string) => {
-    node.ariaHidden = value;
-    node.dataset.ariaHidden = value;
+    if (node) {
+      node.ariaHidden = value;
+      node.dataset.ariaHidden = value;
+    }
   }
 
   render() {
