@@ -147,7 +147,7 @@ export class VaTelephone {
       href = `tel:${contact}`;
     } 
     if (sms) {
-      href = `sms:+${contact}`;
+      href = `sms:${contact}`;
     }
     return `${href}${extension ? `,${extension}` : ''}`;
   }

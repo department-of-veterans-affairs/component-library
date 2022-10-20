@@ -86,7 +86,7 @@ describe('createHref', () => {
     expect(VaTelephone.createHref(contact, null, false)).toBe('tel:+18885551234');
   });
   it('creates a sms link for an sms number', () => {
-    expect(VaTelephone.createHref(sms, null, true)).toBe('sms:+123456');
+    expect(VaTelephone.createHref(sms, null, true)).toBe('sms:123456');
   });
   it('creates a tel link for a phone number with extension', () => {
     expect(VaTelephone.createHref(contact, extension, false)).toBe(
