@@ -109,10 +109,10 @@ export class VaOmbInfo {
   componentDidUpdate() {
     // Toggle the components parent node aria-hidden attribute 
     // when setting the visibility of the modal.
-    const parentNode = this.findParentNodeBeforeBody(this.el) as HTMLElement;
-    if (parentNode) {
+    const el = this.findParentNodeBeforeBody(this.el) as HTMLElement;
+    if (el) {
       const value = `${!this.visible}`;
-      this.updateNodeAriaHidden(parentNode, value);
+      this.updateNodeAriaHidden(el, value);
     }
   }
 
@@ -142,8 +142,8 @@ export class VaOmbInfo {
    */
   private updateNodeAriaHidden = (node: HTMLElement, value: string) => {
     if (node) {
-      node.ariaHidden = value;
-      node.dataset.ariaHidden = value;
+      node.ariaHidden = value || 'false';
+      node.dataset.ariaHidden = value || 'false';
     }
   }
 
