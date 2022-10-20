@@ -106,6 +106,43 @@ export class VaOmbInfo {
     /* eslint-enable i18next/no-literal-string */
   }
 
+  componentDidUpdate() {
+    // Toggle the components parent node aria-hidden attribute 
+    // when setting the visibility of the modal.
+    const parentNode = this.findParentNodeBeforeBody(this.el) as HTMLElement;
+    if (parentNode) {
+      const value = `${!this.visible}`;
+      this.updateNodeAriaHidden(parentNode, value);
+    }
+  }
+
+  /**
+   * Find the top level parent node immediately before the `BODY` element.
+   * @param node 
+   * @returns parentNode
+   */
+  private findParentNodeBeforeBody = (node: HTMLElement) => {
+    let parent = node.parentNode;
+    while (parent) {
+      if (parent.nodeName === 'BODY') {
+        return true;
+      }
+      parent = parent.parentNode;
+      return parent;
+    }
+    return false;
+  }
+
+  /**
+   * Updates the aria-hidden value on a provided node.
+   * @param node 
+   * @param value 
+   */
+  private updateNodeAriaHidden = (node: HTMLElement, value: string) => {
+    node.ariaHidden = value;
+    node.dataset.ariaHidden = value;
+  }
+
   render() {
     const {
       expDate,
