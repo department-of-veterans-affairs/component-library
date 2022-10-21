@@ -414,6 +414,10 @@ export namespace Components {
     }
     interface VaModal {
         /**
+          * DOM-nodes that should not be hidden from screen readers.
+         */
+        "ariaHiddenNodeExceptions"?: HTMLElement[];
+        /**
           * Click outside modal will trigger closeEvent
          */
         "clickToClose"?: boolean;
@@ -1601,6 +1605,10 @@ declare namespace LocalJSX {
         "value"?: string;
     }
     interface VaModal {
+        /**
+          * DOM-nodes that should not be hidden from screen readers.
+         */
+        "ariaHiddenNodeExceptions"?: HTMLElement[];
         /**
           * Click outside modal will trigger closeEvent
          */

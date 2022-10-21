@@ -106,45 +106,6 @@ export class VaOmbInfo {
     /* eslint-enable i18next/no-literal-string */
   }
 
-  componentDidUpdate() {
-    // Toggle the components parent node aria-hidden attribute 
-    // when setting the visibility of the modal.
-    const el = this.findParentNodeBeforeBody(this.el) as HTMLElement;
-    if (el) {
-      const value = this.visible ? 'false' : null;
-      this.updateNodeAriaHidden(el, value);
-    }
-  }
-
-  /**
-   * Walk up DOM to find the top level parent node that is 
-   * immediately before the `BODY` element.
-   * @param node 
-   * @returns node
-   */
-  private findParentNodeBeforeBody = (node: HTMLElement) => {
-    let parent = node.parentNode;
-    let prevNode = null;
-    while (parent) {
-      if (parent.nodeName === 'BODY') {
-        return prevNode;
-      }
-      prevNode = parent;
-      parent = parent.parentNode;
-    }
-    return false;
-  }
-
-  /**
-   * Updates the aria-hidden value on a provided node.
-   * @param node 
-   * @param value 
-   */
-  private updateNodeAriaHidden = (node: HTMLElement, value: string) => {
-      node.ariaHidden = value || null;
-      node.dataset.ariaHidden = value || null;
-  }
-
   render() {
     const {
       expDate,
@@ -184,6 +145,7 @@ export class VaOmbInfo {
           modalTitle="Privacy Act Statement"
           onCloseEvent={toggleModalVisible}
           visible={visible}
+          ariaHiddenNodeExceptions={[this.el]}
         >
           <slot onSlotchange={handleSlotChange}></slot>
           {modalContents}
