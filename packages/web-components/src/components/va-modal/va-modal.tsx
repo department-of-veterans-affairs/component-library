@@ -299,7 +299,7 @@ export class VaModal {
     const hideExceptions = [...this.ariaHiddenNodeExceptions, this.el] as HTMLElement[];
 
     // Sets aria-hidden="true" to all elements outside of the modal except
-    // for the elements in hideExceptionElements.
+    // for the elements in the hideExceptions array.
     // This is used to limit the screen reader to content inside the modal.
     this.undoAriaHidden = hideOthers(hideExceptions);
 
