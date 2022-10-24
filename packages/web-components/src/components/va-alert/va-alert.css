@@ -113,6 +113,7 @@ div.error > i::before {
 
 div.bg-only.hide-icon > i::before {
   content: '';
+  margin-right: 0;
 }
 
 div.bg-only {
