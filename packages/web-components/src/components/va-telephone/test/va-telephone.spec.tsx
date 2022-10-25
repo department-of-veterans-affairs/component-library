@@ -33,18 +33,18 @@ describe('formatPhoneNumber', () => {
   });
 
   it('formats a TTY number', () => {
-    expect(VaTelephone.formatPhoneNumber(N11, null, null, null, true)).toBe('TTY: 911');
+    expect(VaTelephone.formatPhoneNumber(N11, null, null, null, true)).toBe('911');
   });
 
   it('formats an SMS number', () => {
-    expect(VaTelephone.formatPhoneNumber(sms, null, null, null, null, true)).toBe('Text: 123456');
+    expect(VaTelephone.formatPhoneNumber(sms, null, null, null, null, true)).toBe('123456');
   });
 });
 
 describe('formatTelLabel', () => {
   const contact = '8885551234';
   const extension = 123;
-  const sms = '123456';
+  const smsContact = '123456';
   it('formats a phone number into an assistive tech label', () => {
     expect(VaTelephone.formatTelLabel(contact, null, false, false, false)).toBe(
       '8 8 8. 5 5 5. 1 2 3 4',
@@ -70,11 +70,34 @@ describe('formatTelLabel', () => {
   });
 
   it('formats an SMS phone number', () => {
-    expect(VaTelephone.formatTelLabel(sms, null, false, false, true)).toBe(
+    expect(VaTelephone.formatTelLabel(smsContact, null, false, false, true)).toBe(
       'Text. 1 2 3 4 5 6',
     );
   });
 
+  it('creates an SMS phone number label', () => {
+    expect(VaTelephone.createTelLabel(false, true)).toBe(
+      'Text: ',
+    );
+  });
+
+  it('creates an TTY phone number label', () => {
+    expect(VaTelephone.createTelLabel(true, false)).toBe(
+      'TTY: ',
+    );
+  });
+
+  it('does not create a phone number label if SMS and TTY are false', () => {
+    expect(VaTelephone.createTelLabel(false, false)).toBe(
+      '',
+    );
+  });
+
+  it('does not create a phone number label if SMS and TTY are true', () => {
+    expect(VaTelephone.createTelLabel(true, true)).toBe(
+      '',
+    );
+  });
 });
 
 describe('createHref', () => {

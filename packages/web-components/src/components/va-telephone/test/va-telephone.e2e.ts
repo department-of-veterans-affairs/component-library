@@ -137,9 +137,11 @@ describe('va-telephone', () => {
     await page.setContent('<va-telephone contact="711" tty></va-telephone>');
 
     const link = await page.find('va-telephone >>> a');
+    const span = await page.find('va-telephone >>> span');
     expect(link.getAttribute('aria-label')).toEqual('TTY. 7 1 1.');
     expect(link.getAttribute('href')).toEqual('tel:711');
-    expect(link.innerText).toEqual('TTY: 711');
+    expect(link.innerText).toEqual('711');
+    expect(span.innerText).toEqual('TTY: ');
   });
 
   it('handles an SMS contact', async () => {
@@ -147,9 +149,11 @@ describe('va-telephone', () => {
     await page.setContent('<va-telephone contact="123456" sms></va-telephone>');
 
     const link = await page.find('va-telephone >>> a');
+    const span = await page.find('va-telephone >>> span');
     expect(link.getAttribute('aria-label')).toEqual('Text. 1 2 3 4 5 6.');
     expect(link.getAttribute('href')).toEqual('sms:123456');
-    expect(link.innerText).toEqual('Text: 123456');
+    expect(link.innerText).toEqual('123456');
+    expect(span.innerText).toEqual('Text: ');
   });
 
   it('handles a vanity number as a contact prop', async () => {

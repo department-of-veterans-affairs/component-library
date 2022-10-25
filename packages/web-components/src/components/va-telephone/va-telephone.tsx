@@ -101,10 +101,10 @@ export class VaTelephone {
       }
     }
     if (tty) {
-      formattedNum = `TTY: ${formattedNum}`;
+      formattedNum = `${formattedNum}`;
     }
     if (sms) {
-      formattedNum = `Text: ${formattedNum}`;
+      formattedNum = `${formattedNum}`;
     }
     return formattedNum;
   }
@@ -114,7 +114,7 @@ export class VaTelephone {
    * @param {string} contact - The 10 or 3 digit contact prop
    * @param {number} ext - The extension number
    * @param {boolean} tty - Whether or not this is a TTY number
-   * @param {boolean} tty - Whether or not this is an SMS number
+   * @param {boolean} sms - Whether or not this is an SMS number
    * @return {string} - Combined phone number parts within the label separated by
    * periods, e.g. "800-555-1212" becomes "8 0 0. 5 5 5. 1 2 1 2"
    */
@@ -152,6 +152,18 @@ export class VaTelephone {
     return `${href}${extension ? `,${extension}` : ''}`;
   }
 
+  static createTelLabel(tty: boolean, sms: boolean): string {
+    let label = '';
+    if (tty) {
+      label = 'TTY: ';
+    }
+    if (sms) {
+      label = 'Text: ';
+    }
+    // If both tty & sms are true, we don't want to display a label.
+    return tty && sms ? '' : label;
+  }
+
   private handleClick(): void {
     this.componentLibraryAnalytics.emit({
       componentName: 'va-telephone',
@@ -181,19 +193,24 @@ export class VaTelephone {
       sms
     )}.`;
 
+    const telLabel = `${VaTelephone.createTelLabel(tty, sms)}`;
+
     return notClickable ? (
       <Fragment>
         <span aria-hidden="true">{formattedNumber}</span>
         <span class="sr-only">{formattedAriaLabel}</span>
       </Fragment>
     ) : (
-      <a
-        href={VaTelephone.createHref(contact, extension, sms)}
-        aria-label={formattedAriaLabel}
-        onClick={this.handleClick.bind(this)}
-      >
-        {formattedNumber}
-      </a>
+      <Fragment>
+        {telLabel ? <span>{telLabel}</span> : ''}
+        <a
+          href={VaTelephone.createHref(contact, extension, sms)}
+          aria-label={formattedAriaLabel}
+          onClick={this.handleClick.bind(this)}
+        >
+          {formattedNumber}
+        </a>
+      </Fragment>
     );
   }
 }
