@@ -1,4 +1,3 @@
-import AcceptTermsPrompt from './AcceptTermsPrompt';
 import AdditionalInfo from './AdditionalInfo';
 import AlertBox, { ALERT_TYPE } from './AlertBox';
 import Breadcrumbs from './Breadcrumbs';
@@ -7,9 +6,7 @@ import CheckboxGroup from './CheckboxGroup';
 import DropDownPanel from './DropDownPanel';
 import ExpandingGroup from './ExpandingGroup';
 import FileInput from './FileInput';
-import HelpMenu from './HelpMenu';
 import IconBase from './IconBase';
-import IconHelp from './IconHelp';
 import IconSearch from './IconSearch';
 import IconUser from './IconUser';
 import LoadingIndicator from './LoadingIndicator';
@@ -17,7 +14,6 @@ import MaintenanceBanner from './MaintenanceBanner';
 import Modal from './Modal';
 import OMBInfo from './OMBInfo';
 import Pagination from './Pagination';
-import PrivacyAgreement from './PrivacyAgreement';
 import ProgressButton from './ProgressButton';
 import RadioButtons from './RadioButtons';
 import Select from './Select';
@@ -34,7 +30,6 @@ import TextInput from './TextInput';
 import './i18n-setup';
 
 export {
-  AcceptTermsPrompt,
   AdditionalInfo,
   AlertBox,
   ALERT_TYPE,
@@ -44,9 +39,7 @@ export {
   DropDownPanel,
   ExpandingGroup,
   FileInput,
-  HelpMenu,
   IconBase,
-  IconHelp,
   IconSearch,
   IconUser,
   LoadingIndicator,
@@ -54,7 +47,6 @@ export {
   Modal,
   OMBInfo,
   Pagination,
-  PrivacyAgreement,
   ProgressButton,
   RadioButtons,
   Select,

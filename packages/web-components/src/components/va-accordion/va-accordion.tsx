@@ -44,6 +44,7 @@ if (Build.isTesting) {
  * @maturityLevel best_practice
  * @translations English
  * @translations Spanish
+ * @translations Tagalog
  */
 @Component({
   tag: 'va-accordion',
