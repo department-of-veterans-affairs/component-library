@@ -72,26 +72,31 @@ export class VaButtonPair {
 
   private handlePrimaryClick = (e: MouseEvent) => {
     this.primaryClick.emit(e);
-    if (this.disableAnalytics) return;
-    this.componentLibraryAnalytics.emit({
-      componentName: 'va-button-pair',
-      action: 'click',
-      details: {
-        // TODO: add analytics event details
-      },
-    });
+    if (!this.disableAnalytics) {
+      const detail = {
+        componentName: 'va-button-pair',
+        action: 'click',
+        details: {
+          type: 'primary',
+        },
+      };
+      this.componentLibraryAnalytics.emit(detail);
+    }
   };
 
   private handleSecondaryClick = (e: MouseEvent) => {
     this.secondaryClick.emit(e);
-    if (this.disableAnalytics) return;
-    this.componentLibraryAnalytics.emit({
-      componentName: 'va-button-pair',
-      action: 'click',
-      details: {
-        // TODO: add analytics event details
-      },
-    });
+
+    if (!this.disableAnalytics) {
+      const detail = {
+        componentName: 'va-button-pair',
+        action: 'click',
+        details: {
+          type: 'secondary',
+        },
+      };
+      this.componentLibraryAnalytics.emit(detail);
+    }
   };
 
   render() {

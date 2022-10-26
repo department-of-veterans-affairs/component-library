@@ -142,6 +142,20 @@ export class VaDate {
     // will happen afterwards
     validate(this, year, month, day, this.monthYearOnly);
     this.dateBlur.emit(event);
+
+    if (this.enableAnalytics) {
+      const detail = {
+        componentName: 'va-date',
+        action: 'blur',
+        details: {
+          year,
+          month,
+          day,
+          'month-year-only': this.monthYearOnly,
+        },
+      };
+      this.componentLibraryAnalytics.emit(detail);
+    }
   };
 
   private handleDateChange = (event: Event) => {
