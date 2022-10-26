@@ -76,9 +76,7 @@ export class VaButton {
   })
   componentLibraryAnalytics: EventEmitter;
 
-  private handleClick = (e: MouseEvent): void => {
-    // TODO: remove console.log
-    console.log(e);
+  private handleClick = (): void => {
     if (this.disableAnalytics) return;
     this.componentLibraryAnalytics.emit({
       componentName: 'va-button',
@@ -112,7 +110,7 @@ export class VaButton {
       e.stopPropagation();
       return;
     }
-    this.handleClick(e);
+    this.handleClick();
   }
 
   render() {
