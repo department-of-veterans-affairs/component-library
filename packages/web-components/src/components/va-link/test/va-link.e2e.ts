@@ -113,10 +113,11 @@ describe('va-link', () => {
     const anchor = await page.find('va-link >>> a');
     await anchor.click();
     expect(analyticsSpy).toHaveReceivedEventDetail({
-      action: 'click',
       componentName: 'va-link',
-      // TODO: update analytics event details
-      details: {},
+      action: 'click',
+      details: {
+        'link-click-label': 'Find out if you qualify for this program and how to apply'
+      },
     });
   });
 
