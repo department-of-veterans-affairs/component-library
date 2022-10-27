@@ -101,6 +101,20 @@ export class VaMemorableDate {
     // will happen afterwards
     validate(this, yearNum, monthNum, dayNum);
     this.dateBlur.emit(event);
+
+    if (this.enableAnalytics) {
+      const detail = {
+        componentName: 'va-memorable-date',
+        action: 'blur',
+        details: {
+          label: this.label,
+          year: yearNum,
+          month: monthNum,
+          day: dayNum,
+        },
+      };
+      this.componentLibraryAnalytics.emit(detail);
+    }
   };
 
   private handleDateChange = (event: Event) => {

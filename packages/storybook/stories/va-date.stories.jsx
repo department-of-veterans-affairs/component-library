@@ -184,3 +184,6 @@ CustomValidation.args = {
   required: true,
   value: '2022-04-19',
 };
+
+export const WithAnalytics = Template.bind(null);
+WithAnalytics.args = { ...defaultArgs, 'enable-analytics': true };
