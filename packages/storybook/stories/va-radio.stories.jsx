@@ -88,6 +88,7 @@ const IdUsageTemplate = ({
           value="2"
         />
       </va-radio>
+      <br />
       <va-radio
         enable-analytics={enableAnalytics}
         error={error}
@@ -119,8 +120,8 @@ Default.args = {
 };
 Default.argTypes = propStructure(radioDocs);
 
-export const ReactWithCustomEvent = ReactBindingExample.bind(null);
-ReactWithCustomEvent.args = {
+export const ReactBindingWithCustomEvent = ReactBindingExample.bind(null);
+ReactBindingWithCustomEvent.args = {
   ...defaultArgs,
 };
 
@@ -130,8 +131,8 @@ Error.args = {
   error: 'There has been an error',
 };
 
-export const IdUsage = IdUsageTemplate.bind(null);
-IdUsage.args = {
+export const IDUsage = IdUsageTemplate.bind(null);
+IDUsage.args = {
   ...defaultArgs,
   required: true,
 };
