@@ -124,6 +124,3 @@ Internationalization.args = {
   ...defaultArgs,
   required: true,
 };
-
-export const WithAnalytics = Template.bind(null);
-WithAnalytics.args = { ...defaultArgs, 'enable-analytics': true };
