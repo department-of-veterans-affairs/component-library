@@ -10,6 +10,14 @@ describe('va-radio', () => {
     expect(element).toHaveClass('hydrated');
   });
 
+  it('overrides the aria-label on the host element', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-radio label="Testing" aria-label="my label"></va-radio>');
+
+    const element = await page.find('va-radio');
+    expect(element.getAttribute('aria-label')).not.toEqual('my label');
+  });
+
   it('set the aria-label to match the label prop', async () => {
     const page = await newE2EPage();
     await page.setContent('<va-radio label="Testing"></va-radio>');
