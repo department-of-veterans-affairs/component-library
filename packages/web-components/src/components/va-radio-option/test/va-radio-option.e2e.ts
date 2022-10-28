@@ -15,12 +15,25 @@ describe('va-radio-option', () => {
 
     const element = await page.find('va-radio-option');
     expect(element).toEqualHtml(`
-    <va-radio-option id="yes2" label="Yes - Any Veteran" name="yes" value="2" aria-checked="false" aria-label="yes" role="radio" class="hydrated">
+    <va-radio-option id="yes2" label="Yes - Any Veteran" name="yes" value="2" aria-checked="false" role="radio" class="hydrated">
       <mock:shadow-root>
-        <label for="Yes - Any Veteran">Yes - Any Veteran</label>
+        <label for="yes2">
+          Yes - Any Veteran
+        </label>
       </mock:shadow-root>
     </va-radio-option>
   `);
+  });
+
+  it('sets the ID based on the name and value, if not passed as a prop', async () => {
+    const page = await newE2EPage();
+    await page.setContent(
+      '<va-radio-option name="test" label="An option with spaces" value="1"></va-radio-option>',
+    );
+
+    const inputEl = await page.find('va-radio-option');
+
+    expect(await inputEl.getProperty('id')).toEqual('test1');
   });
 
   it('sets checked to true based on prop', async () => {
@@ -46,4 +59,5 @@ describe('va-radio-option', () => {
 
     expect(changeSpy).toHaveReceivedEvent();
   });
+
 });
