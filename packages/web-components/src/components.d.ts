@@ -1835,7 +1835,7 @@ declare namespace LocalJSX {
         /**
           * Optional hint text for the radio group.
          */
-        "hint": string;
+        "hint"?: string;
         /**
           * The text label for the radio group.
          */

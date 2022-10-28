@@ -36,7 +36,7 @@ export class VaRadio {
   /**
    * Optional hint text for the radio group.
    */
-  @Prop() hint!: string;
+  @Prop() hint: string;
 
   /**
    * Whether or not this input field is required.
