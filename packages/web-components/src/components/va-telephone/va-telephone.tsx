@@ -135,12 +135,13 @@ export class VaTelephone {
     // extension format ";ext=" from RFC3966 https://tools.ietf.org/html/rfc3966#page-5
     // but it seems that using a comma to pause for 2 seconds might be a better
     // solution - see https://dsva.slack.com/archives/C8E985R32/p1589814301103200
-    let href = `tel:+1${contact}`;
-    if (isN11) {
-      href = `tel:${contact}`;
-    } 
+    let href = null;
     if (sms) {
       href = `sms:${contact}`;
+    } else if (isN11) {
+      href = `tel:${contact}`;
+    } else {
+      href = `tel:+1${contact}`;
     }
     return `${href}${extension ? `,${extension}` : ''}`;
   }
