@@ -88,7 +88,6 @@ export class VaTelephone {
     international: boolean = false,
     vanity: string,
     tty: boolean = false,
-    sms: boolean = false,
   ): string {
     let formattedNum = num;
     if (num.length === 10) {
@@ -101,10 +100,7 @@ export class VaTelephone {
       }
     }
     if (tty) {
-      formattedNum = `${formattedNum}`;
-    }
-    if (sms) {
-      formattedNum = `${formattedNum}`;
+      formattedNum = `TTY: ${formattedNum}`;
     }
     return formattedNum;
   }
@@ -114,11 +110,10 @@ export class VaTelephone {
    * @param {string} contact - The 10 or 3 digit contact prop
    * @param {number} ext - The extension number
    * @param {boolean} tty - Whether or not this is a TTY number
-   * @param {boolean} sms - Whether or not this is an SMS number
    * @return {string} - Combined phone number parts within the label separated by
    * periods, e.g. "800-555-1212" becomes "8 0 0. 5 5 5. 1 2 1 2"
    */
-  static formatTelLabel(contact: string, ext: number, tty: boolean, international: boolean, sms: boolean): string {
+  static formatTelLabel(contact: string, ext: number, tty: boolean, international: boolean): string {
     const spaceCharsOut = chars => chars.split('').join(' ');
     let labelPieces = VaTelephone.splitContact(contact)
       .map(spaceCharsOut);
@@ -127,8 +122,6 @@ export class VaTelephone {
       labelPieces.unshift('1');
     if (tty)
       labelPieces.unshift('TTY');
-    if (sms)
-      labelPieces.unshift('Text');
     if (ext) {
       labelPieces.push('extension');
       labelPieces.push(spaceCharsOut(ext.toString()));
@@ -152,18 +145,6 @@ export class VaTelephone {
     return `${href}${extension ? `,${extension}` : ''}`;
   }
 
-  static createTelLabel(tty: boolean, sms: boolean): string {
-    let label = '';
-    if (tty) {
-      label = 'TTY: ';
-    }
-    if (sms) {
-      label = 'Text: ';
-    }
-    // If both tty & sms are true, we don't want to display a label.
-    return tty && sms ? '' : label;
-  }
-
   private handleClick(): void {
     this.componentLibraryAnalytics.emit({
       componentName: 'va-telephone',
@@ -176,24 +157,20 @@ export class VaTelephone {
   }
 
   render() {
-    const { contact, extension, notClickable, international, tty, sms, vanity } = this;
+    const { contact, extension, notClickable, international, tty, vanity, sms } = this;
     const formattedNumber = VaTelephone.formatPhoneNumber(
       contact,
       extension,
       international,
       vanity,
-      tty,
-      sms
+      tty
     );
     const formattedAriaLabel = `${VaTelephone.formatTelLabel(
       contact,
       extension,
       tty,
-      international,
-      sms
+      international
     )}.`;
-
-    const telLabel = `${VaTelephone.createTelLabel(tty, sms)}`;
 
     return notClickable ? (
       <Fragment>
@@ -201,16 +178,13 @@ export class VaTelephone {
         <span class="sr-only">{formattedAriaLabel}</span>
       </Fragment>
     ) : (
-      <Fragment>
-        {telLabel ? <span>{telLabel}</span> : ''}
-        <a
-          href={VaTelephone.createHref(contact, extension, sms)}
-          aria-label={formattedAriaLabel}
-          onClick={this.handleClick.bind(this)}
-        >
-          {formattedNumber}
-        </a>
-      </Fragment>
+      <a
+        href={VaTelephone.createHref(contact, extension, sms)}
+        aria-label={formattedAriaLabel}
+        onClick={this.handleClick.bind(this)}
+      >
+        {formattedNumber}
+      </a>
     );
   }
 }
