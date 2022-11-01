@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable react/no-unescaped-entities */
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
 
 const checkboxDocs = getWebComponentDocs('va-checkbox');
@@ -25,24 +25,47 @@ const defaultArgs = {
   'enable-analytics': false,
 };
 
-const Template = ({
-  checked,
-  description,
-  'enable-analytics': enableAnalytics,
-  error,
-  label,
-  required,
-}) => (
-  <va-checkbox
-    checked={checked}
-    description={description}
-    enable-analytics={enableAnalytics}
-    error={error}
-    label={label}
-    required={required}
-    onBlur={e => console.log(e)}
-  />
-);
+const vaCheckbox = args => {
+  const {   
+    checked,
+    description,
+    'enable-analytics': enableAnalytics,
+    error,
+    label,
+    required, 
+    ...rest
+  } = args;
+
+  return (
+    <va-checkbox
+        checked={checked}
+        description={description}
+        enable-analytics={enableAnalytics}
+        error={error}
+        label={label}
+        required={required}
+        onBlur={e => console.log(e)}
+      />
+  )
+}
+
+const Template = args => vaCheckbox(args);
+
+const I18nTemplate = args => {
+  const [lang, setLang] = useState('en');
+
+  useEffect(() => {
+    document.querySelector('main').setAttribute('lang', lang);
+  }, [lang]);
+
+  return (
+    <div>
+      <button onClick={e => setLang('es')}>Español</button>
+      <button onClick={e => setLang('en')}>English</button>
+      <button onClick={e => setLang('tl')}>Tagalog</button>
+      {vaCheckbox(args)}
+    </div>
+)};
 
 export const Default = Template.bind(null);
 Default.args = { ...defaultArgs };
@@ -82,3 +105,12 @@ Required.args = { ...defaultArgs, required: true };
 
 export const WithAnalytics = Template.bind(null);
 WithAnalytics.args = { ...defaultArgs, 'enable-analytics': true };
+
+export const Internationalization = I18nTemplate.bind(null);
+Internationalization.args = {
+  ...defaultArgs,
+  description:
+    'Notice how the red line to the left also covers this description.',
+  error: 'There has been a problem',
+  required: true,
+};
