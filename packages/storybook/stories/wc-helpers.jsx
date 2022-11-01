@@ -82,7 +82,7 @@ const getEventObj = array => {
  */
 export const propStructure = comp => {
   const props = comp.props.reduce((propObj, prop) => {
-    propObj[prop.attr] = {
+    propObj[prop.attr || prop.name] = {
       description: prop.docs,
       required: prop.required,
       defaultValue: {
