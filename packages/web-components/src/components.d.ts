@@ -593,6 +593,10 @@ export namespace Components {
          */
         "error"?: string;
         /**
+          * Optional hint text for the radio group.
+         */
+        "hint": string;
+        /**
           * The text label for the radio group.
          */
         "label": string;
@@ -1836,6 +1840,10 @@ declare namespace LocalJSX {
           * A string with an error message.
          */
         "error"?: string;
+        /**
+          * Optional hint text for the radio group.
+         */
+        "hint"?: string;
         /**
           * The text label for the radio group.
          */

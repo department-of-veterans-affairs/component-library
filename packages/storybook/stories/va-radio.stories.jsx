@@ -30,6 +30,7 @@ const Template = ({
   'enable-analytics': enableAnalytics,
   error,
   label,
+  hint,
   required,
 }) => {
   return (
@@ -38,6 +39,7 @@ const Template = ({
       error={error}
       label={label}
       required={required}
+      hint={hint}
     >
       <va-radio-option label="Option one" name="example" value="1" />
       <va-radio-option label="Option two" name="example" value="2" />
@@ -80,11 +82,11 @@ const IdUsageTemplate = ({
         label={label}
         required={required}
       >
-        <va-radio-option id="no1" label="No" name="example" value="1" />
+        <va-radio-option id="no1" label="No" name="group1" value="1" />
         <va-radio-option
           id="yes1"
           label="Yes - Any Veteran"
-          name="example"
+          name="group1"
           value="2"
         />
       </va-radio>
@@ -94,11 +96,11 @@ const IdUsageTemplate = ({
         label={label}
         required={required}
       >
-        <va-radio-option id="no2" label="No" name="example" value="1" />
+        <va-radio-option id="no2" label="No" name="group2" value="1" />
         <va-radio-option
           id="yes2"
           label="Yes - Any Veteran"
-          name="example"
+          name="group2"
           value="2"
         />
       </va-radio>
@@ -109,6 +111,7 @@ const IdUsageTemplate = ({
 const defaultArgs = {
   'enable-analytics': false,
   'label': 'This is a label',
+  'hint': '',
   'required': false,
   'error': null,
 };
@@ -118,6 +121,12 @@ Default.args = {
   ...defaultArgs,
 };
 Default.argTypes = propStructure(radioDocs);
+
+export const Hint = Template.bind(null);
+Hint.args = {
+  ...defaultArgs,
+  hint: "We're asking this because of XYZ",
+};
 
 export const ReactWithCustomEvent = ReactBindingExample.bind(null);
 ReactWithCustomEvent.args = {
