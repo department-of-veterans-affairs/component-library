@@ -34,6 +34,11 @@ export class VaRadio {
   @Prop() label!: string;
 
   /**
+   * Optional hint text for the radio group.
+   */
+  @Prop() hint: string;
+
+  /**
    * Whether or not this input field is required.
    */
   @Prop() required?: boolean = false;
@@ -72,6 +77,7 @@ export class VaRadio {
   handleKeyDown(event: KeyboardEvent) {
     const currentNode = event.target as HTMLVaRadioOptionElement;
     const radioOptionNodes = getSlottedNodes(this.el, 'va-radio-option');
+
     if (!radioOptionNodes.length) return;
 
     const currentNodeIndex = radioOptionNodes.findIndex(
@@ -176,13 +182,19 @@ export class VaRadio {
   }
 
   render() {
-    const { label, required, error } = this;
+    const { label, hint, required, error } = this;
+    const ariaLabel = label + (required ? ' required' : '');
     return (
-      <Host role="radiogroup" aria-invalid={error ? 'true' : 'false'}>
+      <Host
+        role="radiogroup"
+        aria-invalid={error ? 'true' : 'false'}
+        aria-label={ariaLabel}
+      >
         <legend>
           {label}
           {required && <span class="required">(*Required)</span>}
         </legend>
+        {hint && <span class="hint-text">{hint}</span>}
         <span id="error-message" role="alert">
           {error && (
             <Fragment>
