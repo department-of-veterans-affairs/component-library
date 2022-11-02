@@ -727,6 +727,10 @@ export namespace Components {
          */
         "notClickable"?: boolean;
         /**
+          * Indicates if this is a number meant to be used  to text.
+         */
+        "sms"?: boolean;
+        /**
           * Indicates if this is a number meant to be called from a teletypewriter for deaf users.
          */
         "tty"?: boolean;
@@ -2006,6 +2010,10 @@ declare namespace LocalJSX {
           * The event used to track usage of the component. This is emitted when clicking on an anchor link.
          */
         "onComponent-library-analytics"?: (event: CustomEvent<any>) => void;
+        /**
+          * Indicates if this is a number meant to be used  to text.
+         */
+        "sms"?: boolean;
         /**
           * Indicates if this is a number meant to be called from a teletypewriter for deaf users.
          */

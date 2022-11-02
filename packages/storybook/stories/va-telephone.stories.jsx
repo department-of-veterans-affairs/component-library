@@ -53,6 +53,7 @@ const Template = ({
   ariaDescribedby,
   vanity,
   tty,
+  sms
 }) => {
   return (
     <div>
@@ -67,6 +68,7 @@ const Template = ({
         aria-describedby={ariaDescribedby}
         vanity={vanity}
         tty={tty}
+        sms={sms}
       ></va-telephone>
     </div>
   );
@@ -78,6 +80,7 @@ const defaultArgs = {
   'not-clickable': false,
   'international': false,
   'tty': false,
+  'sms': false,
   'vanity': undefined,
 };
 
@@ -115,6 +118,13 @@ export const TTY = Template.bind(null);
 TTY.args = {
   ...defaultArgs,
   tty: true,
+};
+
+export const SMS = Template.bind(null);
+SMS.args = {
+  ...defaultArgs,
+  sms: true,
+  contact: '838255'
 };
 
 export const AriaDescribedBy = Template.bind(null);

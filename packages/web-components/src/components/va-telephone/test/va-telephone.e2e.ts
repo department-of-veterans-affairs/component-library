@@ -142,6 +142,16 @@ describe('va-telephone', () => {
     expect(link.innerText).toEqual('TTY: 711');
   });
 
+  it('handles an SMS contact', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-telephone contact="123456" sms></va-telephone>');
+
+    const link = await page.find('va-telephone >>> a');
+    expect(link.getAttribute('aria-label')).toEqual('1 2 3 4 5 6.');
+    expect(link.getAttribute('href')).toEqual('sms:123456');
+    expect(link.innerText).toEqual('123456');
+  });
+
   it('handles a vanity number as a contact prop', async () => {
     const page = await newE2EPage();
     await page.setContent('<va-telephone contact="8772228387" vanity="VETS"></va-telephone>');
