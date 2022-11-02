@@ -105,5 +105,6 @@ ValidRange.args = {
 export const Internationalization = I18nTemplate.bind(null);
 Internationalization.args = {
   ...defaultArgs,
+  error: 'There has been a problem',
   required: true,
 };
