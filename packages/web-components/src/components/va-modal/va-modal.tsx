@@ -133,6 +133,12 @@ export class VaModal {
   @Prop({ reflect: true }) visible?: boolean = false;
 
   /**
+   * Additional DOM-nodes that should not be hidden from screen readers. 
+   * Useful when an open modal shouldn't hide all content behind the overlay.
+   */
+  @Prop() ariaHiddenNodeExceptions?: HTMLElement[] = [];
+
+  /**
    * Local state to track if the shift key is pressed
    */
   @State() shifted: boolean = false;
@@ -290,9 +296,13 @@ export class VaModal {
     // Prevents scrolling outside modal
     disableBodyScroll(this.el);
 
-    // Sets aria-hidden="true" to all elements outside of the modal.
+    // The elements to exclude from aria-hidden.
+    const hideExceptions = [...this.ariaHiddenNodeExceptions, this.el] as HTMLElement[];
+
+    // Sets aria-hidden="true" to all elements outside of the modal except
+    // for the elements in the hideExceptions array.
     // This is used to limit the screen reader to content inside the modal.
-    this.undoAriaHidden = hideOthers(this.el);
+    this.undoAriaHidden = hideOthers(hideExceptions);
 
     // Conditionally track the event.
     if (!this.disableAnalytics) {

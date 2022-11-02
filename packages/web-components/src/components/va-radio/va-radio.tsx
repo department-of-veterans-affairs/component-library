@@ -3,6 +3,7 @@ import {
   Element,
   Event,
   EventEmitter,
+  forceUpdate,
   Host,
   Listen,
   Prop,
@@ -10,6 +11,13 @@ import {
   Fragment,
 } from '@stencil/core';
 import { getSlottedNodes } from '../../utils/utils';
+import i18next from 'i18next';
+import { Build } from '@stencil/core';
+
+if (Build.isTesting) {
+  // Make i18next.t() return the key instead of the value
+  i18next.init({ lng: 'cimode' });
+}
 
 /**
  * @keydown The event emitted when a key is pressed.
@@ -18,6 +26,9 @@ import { getSlottedNodes } from '../../utils/utils';
  * @maturityCategory use
  * @maturityLevel deployed
  * @guidanceHref form/radio-button
+ * @translations English
+ * @translations Spanish
+ * @translations Tagalog
  */
 
 @Component({
@@ -32,6 +43,11 @@ export class VaRadio {
    * The text label for the radio group.
    */
   @Prop() label!: string;
+
+  /**
+   * Optional hint text for the radio group.
+   */
+  @Prop() hint: string;
 
   /**
    * Whether or not this input field is required.
@@ -72,6 +88,7 @@ export class VaRadio {
   handleKeyDown(event: KeyboardEvent) {
     const currentNode = event.target as HTMLVaRadioOptionElement;
     const radioOptionNodes = getSlottedNodes(this.el, 'va-radio-option');
+
     if (!radioOptionNodes.length) return;
 
     const currentNodeIndex = radioOptionNodes.findIndex(
@@ -175,18 +192,34 @@ export class VaRadio {
     );
   }
 
+  connectedCallback() {
+    i18next.on('languageChanged', () => {
+      forceUpdate(this.el);
+    });
+  }
+
+  disconnectedCallback() {
+    i18next.off('languageChanged');
+  }
+
   render() {
-    const { label, required, error } = this;
+    const { label, hint, required, error } = this;
+    const ariaLabel = label + (required ? ' required' : '');
     return (
-      <Host role="radiogroup" aria-invalid={error ? 'true' : 'false'}>
+      <Host
+        role="radiogroup"
+        aria-invalid={error ? 'true' : 'false'}
+        aria-label={ariaLabel}
+      >
         <legend>
           {label}
-          {required && <span class="required">(*Required)</span>}
+          {required && <span class="required">{i18next.t('required')}</span>}
         </legend>
+        {hint && <span class="hint-text">{hint}</span>}
         <span id="error-message" role="alert">
           {error && (
             <Fragment>
-              <span class="sr-only">Error</span> {error}
+              <span class="sr-only">{i18next.t('error')}</span> {error}
             </Fragment>
           )}
         </span>

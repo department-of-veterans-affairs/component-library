@@ -47,6 +47,12 @@ export class VaTelephone {
   @Prop() tty?: boolean = false;
 
   /**
+   * Indicates if this is a number meant to be used 
+   * to text.
+   */
+  @Prop() sms?: boolean = false;
+
+  /**
    * Optional vanity phone number.
    * Replaces the last 4 digits with the vanity text input
    */
@@ -124,12 +130,19 @@ export class VaTelephone {
     return labelPieces.join('. ');
   }
 
-  static createHref(contact: string, extension: number): string {
+  static createHref(contact: string, extension: number, sms: boolean): string {
     const isN11 = contact.length === 3;
     // extension format ";ext=" from RFC3966 https://tools.ietf.org/html/rfc3966#page-5
     // but it seems that using a comma to pause for 2 seconds might be a better
     // solution - see https://dsva.slack.com/archives/C8E985R32/p1589814301103200
-    const href = `tel:${isN11 ? contact : `+1${contact}`}`;
+    let href = null;
+    if (sms) {
+      href = `sms:${contact}`;
+    } else if (isN11) {
+      href = `tel:${contact}`;
+    } else {
+      href = `tel:+1${contact}`;
+    }
     return `${href}${extension ? `,${extension}` : ''}`;
   }
 
@@ -145,7 +158,7 @@ export class VaTelephone {
   }
 
   render() {
-    const { contact, extension, notClickable, international, tty, vanity } = this;
+    const { contact, extension, notClickable, international, tty, vanity, sms } = this;
     const formattedNumber = VaTelephone.formatPhoneNumber(
       contact,
       extension,
@@ -167,7 +180,7 @@ export class VaTelephone {
       </Fragment>
     ) : (
       <a
-        href={VaTelephone.createHref(contact, extension)}
+        href={VaTelephone.createHref(contact, extension, sms)}
         aria-label={formattedAriaLabel}
         onClick={this.handleClick.bind(this)}
       >

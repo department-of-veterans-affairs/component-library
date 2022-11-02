@@ -20,6 +20,7 @@ import i18next from 'i18next';
  * @guidanceHref form/number-input
  * @translations English
  * @translations Spanish
+ * @translations Tagalog
  */
 @Component({
   tag: 'va-number-input',

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   getWebComponentDocs,
   componentStructure,
@@ -24,12 +24,14 @@ export default {
   },
 };
 
-const Template = ({
-  'enable-analytics': enableAnalytics,
-  error,
-  label,
-  required,
-}) => {
+const vaCheckboxGroup = args => {
+  const {
+    'enable-analytics': enableAnalytics,
+    error,
+    label,
+    required,
+    ...rest
+  } = args;
   return (
     <va-checkbox-group
       enable-analytics={enableAnalytics}
@@ -40,8 +42,26 @@ const Template = ({
       <va-checkbox label="Option one" name="example" value="1" />
       <va-checkbox label="Option two" name="example" value="2" />
     </va-checkbox-group>
-  );
-};
+  )
+}
+
+const Template = args => vaCheckboxGroup(args);
+
+const I18nTemplate = args => {
+  const [lang, setLang] = useState('en');
+
+  useEffect(() => {
+    document.querySelector('main').setAttribute('lang', lang);
+  }, [lang]);
+
+  return (
+    <div>
+      <button onClick={e => setLang('es')}>Español</button>
+      <button onClick={e => setLang('en')}>English</button>
+      <button onClick={e => setLang('tl')}>Tagalog</button>
+      {vaCheckboxGroup(args)}
+    </div>
+)};
 
 const defaultArgs = {
   'enable-analytics': false,
@@ -61,6 +81,9 @@ Error.args = {
   ...defaultArgs,
   error: 'There has been an error',
 };
+
+export const Required = Template.bind(null);
+Required.args = { ...defaultArgs, required: true };
 
 const SingleCheckboxTemplate = ({
   'enable-analytics': enableAnalytics,
@@ -83,4 +106,11 @@ const SingleCheckboxTemplate = ({
 export const SingleCheckbox = SingleCheckboxTemplate.bind(null);
 SingleCheckbox.args = {
   ...defaultArgs,
+};
+
+export const Internationalization = I18nTemplate.bind(null);
+Internationalization.args = {
+  ...defaultArgs,
+  error: 'There has been a problem',
+  required: true,
 };
