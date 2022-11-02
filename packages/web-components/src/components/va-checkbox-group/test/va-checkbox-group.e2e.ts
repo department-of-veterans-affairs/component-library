@@ -34,7 +34,7 @@ describe('va-checkbox-group', () => {
     const element = await page.find('va-checkbox-group >>> #error-message');
     expect(element).toEqualHtml(`
      <span id="error-message" role="alert">
-       <span class="sr-only">Error</span>
+       <span class="sr-only">error</span>
        This is an error
      </span>
     `);
@@ -61,7 +61,7 @@ describe('va-checkbox-group', () => {
     const element = await page.find('va-checkbox-group >>> .required');
     expect(element).toEqualHtml(`
       <span class="required">
-        (*Required)
+        required
       </span>
     `);
   });

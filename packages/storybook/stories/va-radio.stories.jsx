@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { VaRadio, VaRadioOption} from '@department-of-veterans-affairs/web-components/react-bindings';
 
 import {
@@ -26,13 +26,15 @@ export default {
   },
 };
 
-const Template = ({
-  'enable-analytics': enableAnalytics,
-  error,
-  label,
-  hint,
-  required,
-}) => {
+const vaRadioConst = args => {
+  const {   
+    'enable-analytics': enableAnalytics,
+    error,
+    label,
+    hint,
+    required,
+    ...rest
+  } = args;
   return (
     <va-radio
       enable-analytics={enableAnalytics}
@@ -44,8 +46,26 @@ const Template = ({
       <va-radio-option label="Option one" name="example" value="1" />
       <va-radio-option label="Option two" name="example" value="2" />
     </va-radio>
-  );
-};
+  )
+}
+
+const Template = args => vaRadioConst(args);
+
+const I18nTemplate = args => {
+  const [lang, setLang] = useState('en');
+
+  useEffect(() => {
+    document.querySelector('main').setAttribute('lang', lang);
+  }, [lang]);
+
+  return (
+    <div>
+      <button onClick={e => setLang('es')}>Español</button>
+      <button onClick={e => setLang('en')}>English</button>
+      <button onClick={e => setLang('tl')}>Tagalog</button>
+      {vaRadioConst(args)}
+    </div>
+)};
 
 const ReactBindingExample = ({
   'enable-analytics': enableAnalytics,
@@ -142,5 +162,12 @@ Error.args = {
 export const IdUsage = IdUsageTemplate.bind(null);
 IdUsage.args = {
   ...defaultArgs,
+  required: true,
+};
+
+export const Internationalization = I18nTemplate.bind(null);
+Internationalization.args = {
+  ...defaultArgs,
+  error: 'There has been a problem',
   required: true,
 };
