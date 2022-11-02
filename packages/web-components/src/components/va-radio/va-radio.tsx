@@ -26,6 +26,9 @@ if (Build.isTesting) {
  * @maturityCategory use
  * @maturityLevel deployed
  * @guidanceHref form/radio-button
+ * @translations English
+ * @translations Spanish
+ * @translations Tagalog
  */
 
 @Component({

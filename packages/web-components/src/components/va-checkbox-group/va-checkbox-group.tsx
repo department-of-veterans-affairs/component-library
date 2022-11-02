@@ -24,6 +24,9 @@ if (Build.isTesting) {
  * @maturityCategory use
  * @maturityLevel deployed
  * @guidanceHref form/checkbox
+ * @translations English
+ * @translations Spanish
+ * @translations Tagalog
  */
 @Component({
   tag: 'va-checkbox-group',
