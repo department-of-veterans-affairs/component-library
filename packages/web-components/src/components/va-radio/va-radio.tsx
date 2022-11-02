@@ -3,6 +3,7 @@ import {
   Element,
   Event,
   EventEmitter,
+  forceUpdate,
   Host,
   Listen,
   Prop,
@@ -10,6 +11,13 @@ import {
   Fragment,
 } from '@stencil/core';
 import { getSlottedNodes } from '../../utils/utils';
+import i18next from 'i18next';
+import { Build } from '@stencil/core';
+
+if (Build.isTesting) {
+  // Make i18next.t() return the key instead of the value
+  i18next.init({ lng: 'cimode' });
+}
 
 /**
  * @keydown The event emitted when a key is pressed.
@@ -181,6 +189,16 @@ export class VaRadio {
     );
   }
 
+  connectedCallback() {
+    i18next.on('languageChanged', () => {
+      forceUpdate(this.el);
+    });
+  }
+
+  disconnectedCallback() {
+    i18next.off('languageChanged');
+  }
+
   render() {
     const { label, hint, required, error } = this;
     const ariaLabel = label + (required ? ' required' : '');
@@ -192,13 +210,13 @@ export class VaRadio {
       >
         <legend>
           {label}
-          {required && <span class="required">(*Required)</span>}
+          {required && <span class="required">{i18next.t('required')}</span>}
         </legend>
         {hint && <span class="hint-text">{hint}</span>}
         <span id="error-message" role="alert">
           {error && (
             <Fragment>
-              <span class="sr-only">Error</span> {error}
+              <span class="sr-only">{i18next.t('error')}</span> {error}
             </Fragment>
           )}
         </span>

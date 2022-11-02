@@ -124,7 +124,7 @@ describe('va-radio', () => {
     const element = await page.find('va-radio >>> .required');
     expect(element).toEqualHtml(`
       <span class="required">
-        (*Required)
+        required
       </span>
     `);
   });
