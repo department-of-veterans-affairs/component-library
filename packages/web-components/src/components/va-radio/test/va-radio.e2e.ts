@@ -110,7 +110,7 @@ describe('va-radio', () => {
     expect(errorElement).toEqualHtml(`
      <span id="error-message" role="alert">
        <span class="sr-only">
-         Error
+         error
        </span>
        This is an error
      </span>
@@ -124,7 +124,7 @@ describe('va-radio', () => {
     const element = await page.find('va-radio >>> .required');
     expect(element).toEqualHtml(`
       <span class="required">
-        (*Required)
+        required
       </span>
     `);
   });

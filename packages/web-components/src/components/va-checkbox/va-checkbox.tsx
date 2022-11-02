@@ -3,11 +3,19 @@ import {
   Element,
   Event,
   EventEmitter,
+  forceUpdate,
   Host,
   h,
   Prop,
   Fragment,
 } from '@stencil/core';
+import i18next from 'i18next';
+import { Build } from '@stencil/core';
+
+if (Build.isTesting) {
+  // Make i18next.t() return the key instead of the value
+  i18next.init({ lng: 'cimode' });
+}
 
 /**
  * @nativeHandler onBlur
@@ -15,6 +23,9 @@ import {
  * @maturityCategory use
  * @maturityLevel deployed
  * @guidanceHref form/checkbox
+ * @translations English
+ * @translations Spanish
+ * @translations Tagalog
  */
 @Component({
   tag: 'va-checkbox',
@@ -112,6 +123,16 @@ export class VaCheckbox {
     if (this.enableAnalytics) this.fireAnalyticsEvent();
   };
 
+  connectedCallback() {
+    i18next.on('languageChanged', () => {
+      forceUpdate(this.el);
+    });
+  }
+
+  disconnectedCallback() {
+    i18next.off('languageChanged');
+  }
+
   render() {
     const { error, label, required, description, checked } = this;
 
@@ -123,7 +144,7 @@ export class VaCheckbox {
         <span id="error-message" role="alert">
           {error && (
             <Fragment>
-              <span class="sr-only">Error</span> {error}
+              <span class="sr-only">{i18next.t('error')}</span> {error}
             </Fragment>
           )}
         </span>
@@ -137,7 +158,7 @@ export class VaCheckbox {
         />
         <label htmlFor="checkbox-element">
           <span>
-            {label} {required && <span class="required">(*Required)</span>}
+            {label} {required && <span class="required">{i18next.t('required')}</span>}
           </span>
         </label>
       </Host>
