@@ -70,15 +70,17 @@ export class VaPagination {
 
   private handlePageSelect = (page, eventID) => {
     this.pageSelect.emit({ page });
-    if (!this.enableAnalytics) return;
-    this.componentLibraryAnalytics.emit({
-      componentName: 'va-pagination',
-      action: 'linkClick',
-      details: {
-        'event': eventID,
-        'paginate-page-number': page,
-      },
-    });
+    if (this.enableAnalytics) {
+      const detail = {
+        componentName: 'va-pagination',
+        action: 'linkClick',
+        details: {
+          'event': eventID,
+          'paginate-page-number': page,
+        },
+      };
+      this.componentLibraryAnalytics.emit(detail);
+    }
   };
 
   private pageNumbers = () => {

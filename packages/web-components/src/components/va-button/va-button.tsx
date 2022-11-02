@@ -77,17 +77,19 @@ export class VaButton {
   componentLibraryAnalytics: EventEmitter;
 
   private handleClick = (): void => {
-    if (this.disableAnalytics) return;
-    this.componentLibraryAnalytics.emit({
-      componentName: 'va-button',
-      action: 'click',
-      details: {
-        event: 'cta-button-click',
-        'button-type': this.secondary ? 'secondary' : 'primary',
-        'button-click-label': this.getButtonText(),
-        'button-background-color': this.secondary ? 'white' : '#0071bb',
-      },
-    });
+    if (!this.disableAnalytics) {
+      const detail = {
+        componentName: 'va-button',
+        action: 'click',
+        details: {
+          event: 'cta-button-click',
+          'button-type': this.secondary ? 'secondary' : 'primary',
+          'button-click-label': this.getButtonText(),
+          'button-background-color': this.secondary ? 'white' : '#0071bb',
+        },
+      }
+      this.componentLibraryAnalytics.emit(detail);
+    }
   };
 
   private getButtonText = (): string => {
