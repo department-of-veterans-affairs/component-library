@@ -414,6 +414,10 @@ export namespace Components {
     }
     interface VaModal {
         /**
+          * Additional DOM-nodes that should not be hidden from screen readers.  Useful when an open modal shouldn't hide all content behind the overlay.
+         */
+        "ariaHiddenNodeExceptions"?: HTMLElement[];
+        /**
           * Click outside modal will trigger closeEvent
          */
         "clickToClose"?: boolean;
@@ -589,6 +593,10 @@ export namespace Components {
          */
         "error"?: string;
         /**
+          * Optional hint text for the radio group.
+         */
+        "hint": string;
+        /**
           * The text label for the radio group.
          */
         "label": string;
@@ -718,6 +726,10 @@ export namespace Components {
           * Indicates if the phone number can be clicked or not
          */
         "notClickable"?: boolean;
+        /**
+          * Indicates if this is a number meant to be used  to text.
+         */
+        "sms"?: boolean;
         /**
           * Indicates if this is a number meant to be called from a teletypewriter for deaf users.
          */
@@ -1602,6 +1614,10 @@ declare namespace LocalJSX {
     }
     interface VaModal {
         /**
+          * Additional DOM-nodes that should not be hidden from screen readers.  Useful when an open modal shouldn't hide all content behind the overlay.
+         */
+        "ariaHiddenNodeExceptions"?: HTMLElement[];
+        /**
           * Click outside modal will trigger closeEvent
          */
         "clickToClose"?: boolean;
@@ -1829,6 +1845,10 @@ declare namespace LocalJSX {
          */
         "error"?: string;
         /**
+          * Optional hint text for the radio group.
+         */
+        "hint"?: string;
+        /**
           * The text label for the radio group.
          */
         "label": string;
@@ -1990,6 +2010,10 @@ declare namespace LocalJSX {
           * The event used to track usage of the component. This is emitted when clicking on an anchor link.
          */
         "onComponent-library-analytics"?: (event: CustomEvent<any>) => void;
+        /**
+          * Indicates if this is a number meant to be used  to text.
+         */
+        "sms"?: boolean;
         /**
           * Indicates if this is a number meant to be called from a teletypewriter for deaf users.
          */

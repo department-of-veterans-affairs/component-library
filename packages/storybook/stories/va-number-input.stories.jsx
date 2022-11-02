@@ -34,17 +34,19 @@ const defaultArgs = {
   'max': undefined,
 };
 
-const Template = ({
-  name,
-  label,
-  'enable-analytics': enableAnalytics,
-  required,
-  error,
-  value,
-  inputmode,
-  min,
-  max,
-}) => {
+const vaNumberInput = args => {
+  const {   
+    name,
+    label,
+    'enable-analytics': enableAnalytics,
+    required,
+    error,
+    value,
+    inputmode,
+    min,
+    max,
+    ...rest
+  } = args;
   return (
     <va-number-input
       name={name}
@@ -59,45 +61,26 @@ const Template = ({
       onInput={e => console.log('input event value:', e.target.value)}
       onBlur={e => console.log('blur event', e)}
     />
-  );
-};
+  )
+}
 
-const I18nTemplate = ({
-  name,
-  label,
-  'enable-analytics': enableAnalytics,
-  required,
-  error,
-  value,
-  inputmode,
-  min,
-  max,
-}) => {
+const Template = args => vaNumberInput(args);
+
+const I18nTemplate = args => {
   const [lang, setLang] = useState('en');
 
   useEffect(() => {
     document.querySelector('main').setAttribute('lang', lang);
   }, [lang]);
+
   return (
-    <>
+    <div>
       <button onClick={e => setLang('es')}>Español</button>
       <button onClick={e => setLang('en')}>English</button>
-      <va-number-input
-        name={name}
-        label={label}
-        enable-analytics={enableAnalytics}
-        required={required}
-        error={error}
-        value={value}
-        inputmode={inputmode}
-        max={max}
-        min={min}
-        onInput={e => console.log('input event value:', e.target.value)}
-        onBlur={e => console.log('blur event', e)}
-      />
-    </>
-  );
-};
+      <button onClick={e => setLang('tl')}>Tagalog</button>
+      {vaNumberInput(args)}
+    </div>
+)};
 
 export const Default = Template.bind(null);
 Default.args = { ...defaultArgs };
@@ -122,5 +105,6 @@ ValidRange.args = {
 export const Internationalization = I18nTemplate.bind(null);
 Internationalization.args = {
   ...defaultArgs,
+  error: 'There has been a problem',
   required: true,
 };

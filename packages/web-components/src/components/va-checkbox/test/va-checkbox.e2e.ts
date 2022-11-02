@@ -40,7 +40,7 @@ describe('va-checkbox', () => {
     const page = await newE2EPage();
     await page.setContent('<va-checkbox label="I am Checkbox" required/>');
     const element = await page.find('va-checkbox >>> .required');
-    expect(element.textContent).toContain('(*Required)');
+    expect(element.textContent).toContain('required');
   });
 
   it('renders a description', async () => {

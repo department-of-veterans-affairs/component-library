@@ -10,11 +10,35 @@ describe('va-radio', () => {
     expect(element).toHaveClass('hydrated');
   });
 
+  it('overrides the aria-label on the host element', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-radio label="Testing" aria-label="my label"></va-radio>');
+
+    const element = await page.find('va-radio');
+    expect(element.getAttribute('aria-label')).not.toEqual('my label');
+  });
+
+  it('set the aria-label to match the label prop', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-radio label="Testing"></va-radio>');
+
+    const element = await page.find('va-radio');
+    expect(element.getAttribute('aria-label')).toEqual('Testing');
+  });
+
+  it('appends "required" to the aria-label', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-radio label="Testing" required></va-radio>');
+
+    const element = await page.find('va-radio');
+    expect(element.getAttribute('aria-label')).toEqual('Testing required');
+  });
+
   it('passes an axe check', async () => {
     const page = await newE2EPage();
     await page.setContent(
       `
-      <va-radio>
+      <va-radio hint="Hint text">
         <va-radio-option checked label="Option 1" value="1"></va-radio-option>
         <va-radio-option label="Option 2" value="2"></va-radio-option>
         <va-radio-option label="Option 3" value="3"></va-radio-option>
@@ -68,6 +92,14 @@ describe('va-radio', () => {
     expect(await options[1].getProperty('checked')).toBeTruthy();
   });
 
+  it('renders hint text if included', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-radio hint="Some hint text"></va-radio>');
+
+    const hint = await page.find('va-radio >>> .hint-text');
+    expect(hint.textContent).toEqual("Some hint text");
+  });
+
   it('renders an error message if passed', async () => {
     const page = await newE2EPage();
     await page.setContent('<va-radio error="This is an error"></va-radio>');
@@ -78,7 +110,7 @@ describe('va-radio', () => {
     expect(errorElement).toEqualHtml(`
      <span id="error-message" role="alert">
        <span class="sr-only">
-         Error
+         error
        </span>
        This is an error
      </span>
@@ -92,7 +124,7 @@ describe('va-radio', () => {
     const element = await page.find('va-radio >>> .required');
     expect(element).toEqualHtml(`
       <span class="required">
-        (*Required)
+        required
       </span>
     `);
   });

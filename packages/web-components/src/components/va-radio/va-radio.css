@@ -12,6 +12,10 @@
   margin: 0 0.35rem;
 }
 
+.hint-text {
+  color: var(--color-gray);
+}
+
 legend {
   display: block;
   max-width: 46rem;
