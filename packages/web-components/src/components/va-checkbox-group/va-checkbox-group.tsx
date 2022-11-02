@@ -3,12 +3,20 @@ import {
   Element,
   Event,
   EventEmitter,
+  forceUpdate,
   Host,
   Listen,
   Prop,
   h,
   Fragment,
 } from '@stencil/core';
+import i18next from 'i18next';
+import { Build } from '@stencil/core';
+
+if (Build.isTesting) {
+  // Make i18next.t() return the key instead of the value
+  i18next.init({ lng: 'cimode' });
+}
 
 /**
  * @vaChange The event emitted when the input value changes.
@@ -74,18 +82,28 @@ export class VaCheckboxGroup {
     });
   }
 
+  connectedCallback() {
+    i18next.on('languageChanged', () => {
+      forceUpdate(this.el);
+    });
+  }
+
+  disconnectedCallback() {
+    i18next.off('languageChanged');
+  }
+
   render() {
     const { label, required, error } = this;
     return (
       <Host role="group">
         <legend>
           {label}
-          {required && <span class="required">(*Required)</span>}
+          {required && <span class="required">{i18next.t('required')}</span>}
         </legend>
         <span id="error-message" role="alert">
           {error && (
             <Fragment>
-              <span class="sr-only">Error</span> {error}
+              <span class="sr-only">{i18next.t('error')}</span> {error}
             </Fragment>
           )}
         </span>

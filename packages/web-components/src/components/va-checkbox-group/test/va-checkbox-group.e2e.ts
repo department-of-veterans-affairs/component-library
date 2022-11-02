@@ -61,7 +61,7 @@ describe('va-checkbox-group', () => {
     const element = await page.find('va-checkbox-group >>> .required');
     expect(element).toEqualHtml(`
       <span class="required">
-        (*Required)
+        required
       </span>
     `);
   });

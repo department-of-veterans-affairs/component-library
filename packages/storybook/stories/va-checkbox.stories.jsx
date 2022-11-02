@@ -35,17 +35,16 @@ const vaCheckbox = args => {
     required, 
     ...rest
   } = args;
-
   return (
     <va-checkbox
-        checked={checked}
-        description={description}
-        enable-analytics={enableAnalytics}
-        error={error}
-        label={label}
-        required={required}
-        onBlur={e => console.log(e)}
-      />
+      checked={checked}
+      description={description}
+      enable-analytics={enableAnalytics}
+      error={error}
+      label={label}
+      required={required}
+      onBlur={e => console.log(e)}
+    />
   )
 }
 
