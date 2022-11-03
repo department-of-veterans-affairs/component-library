@@ -33,7 +33,7 @@ if (Build.isTesting) {
 
 @Component({
   tag: 'va-radio',
-  styleUrl: 'va-radio.css',
+  styleUrl: 'va-radio.scss',
   shadow: true,
 })
 export class VaRadio {
@@ -63,6 +63,11 @@ export class VaRadio {
    * Whether or not an analytics event will be fired.
    */
   @Prop() enableAnalytics?: boolean = false;
+
+  /**
+   * Whether or not the component will use USWDS styling.
+   */
+   @Prop() uswds?: boolean = false;
 
   /**
    * The event used to track usage of the component. This is emitted when a
@@ -203,28 +208,47 @@ export class VaRadio {
   }
 
   render() {
-    const { label, hint, required, error } = this;
+    const { label, hint, required, error, uswds } = this;
     const ariaLabel = label + (required ? ' required' : '');
-    return (
-      <Host
-        role="radiogroup"
-        aria-invalid={error ? 'true' : 'false'}
-        aria-label={ariaLabel}
-      >
-        <legend>
-          {label}
-          {required && <span class="required">{i18next.t('required')}</span>}
-        </legend>
-        {hint && <span class="hint-text">{hint}</span>}
-        <span id="error-message" role="alert">
-          {error && (
-            <Fragment>
-              <span class="sr-only">{i18next.t('error')}</span> {error}
-            </Fragment>
-          )}
-        </span>
-        <slot></slot>
-      </Host>
-    );
+
+    if (uswds) {
+      return ( 
+        <Host
+          role="radiogroup"
+          aria-invalid={error ? 'true' : 'false'}
+          aria-label={ariaLabel}
+        >
+          <fieldset class="usa-fieldset">
+            <legend class="usa-legend">
+              {label}
+              {required && <span class="required">{i18next.t('required')}</span>}
+            </legend>
+            {hint && <span class="usa-hint">{hint}</span>}
+          </fieldset>
+        </Host>
+       )
+    } else {
+      return (
+        <Host
+          role="radiogroup"
+          aria-invalid={error ? 'true' : 'false'}
+          aria-label={ariaLabel}
+        >
+          <legend>
+            {label}
+            {required && <span class="required">{i18next.t('required')}</span>}
+          </legend>
+          {hint && <span class="hint-text">{hint}</span>}
+          <span id="error-message" role="alert">
+            {error && (
+              <Fragment>
+                <span class="usa-sr-only">{i18next.t('error')}</span> {error}
+              </Fragment>
+            )}
+          </span>
+          <slot></slot>
+        </Host>
+      );
+    }
   }
 }

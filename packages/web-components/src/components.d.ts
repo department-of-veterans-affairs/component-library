@@ -604,6 +604,10 @@ export namespace Components {
           * Whether or not this input field is required.
          */
         "required"?: boolean;
+        /**
+          * Whether or not the component will use USWDS styling.
+         */
+        "uswds"?: boolean;
     }
     interface VaRadioOption {
         /**
@@ -622,6 +626,10 @@ export namespace Components {
           * The name attribute for the input element.
          */
         "name": string;
+        /**
+          * Whether or not the component will use USWDS styling.
+         */
+        "uswds"?: boolean;
         /**
           * The value attribute for the input element.
          */
@@ -1864,6 +1872,10 @@ declare namespace LocalJSX {
           * Whether or not this input field is required.
          */
         "required"?: boolean;
+        /**
+          * Whether or not the component will use USWDS styling.
+         */
+        "uswds"?: boolean;
     }
     interface VaRadioOption {
         /**
@@ -1886,6 +1898,10 @@ declare namespace LocalJSX {
           * The event emitted when the selected option value changes
          */
         "onRadioOptionSelected"?: (event: CustomEvent<any>) => void;
+        /**
+          * Whether or not the component will use USWDS styling.
+         */
+        "uswds"?: boolean;
         /**
           * The value attribute for the input element.
          */

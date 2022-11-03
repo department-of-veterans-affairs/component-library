@@ -128,12 +128,50 @@ const IdUsageTemplate = ({
   );
 };
 
+const USWDSTemplate = ({
+  'enable-analytics': enableAnalytics,
+  error,
+  label,
+  required,
+  uswds,
+  hint
+}) => {
+  return (
+    <>
+      <va-radio
+        enable-analytics={enableAnalytics}
+        error={error}
+        label={label}
+        required={required}
+        uswds={uswds}
+        hint={hint}
+      >
+        <va-radio-option 
+          id="no1" 
+          label="No" 
+          name="group1" 
+          value="1" 
+          uswds 
+        />
+        <va-radio-option
+          id="yes1"
+          label="Yes - Any Veteran"
+          name="group1"
+          value="2"
+          uswds
+        />
+      </va-radio>
+    </>
+  );
+};
+
 const defaultArgs = {
   'enable-analytics': false,
   'label': 'This is a label',
   'hint': '',
   'required': false,
   'error': null,
+  'uswds': false,
 };
 
 export const Default = Template.bind(null);
@@ -141,6 +179,13 @@ Default.args = {
   ...defaultArgs,
 };
 Default.argTypes = propStructure(radioDocs);
+
+export const USWDSStyle = USWDSTemplate.bind(null);
+USWDSStyle.args = {
+  ...defaultArgs,
+  uswds: true,
+  hint: "We're asking this because of XYZ",
+};
 
 export const Hint = Template.bind(null);
 Hint.args = {
