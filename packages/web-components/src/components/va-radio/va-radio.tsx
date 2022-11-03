@@ -224,6 +224,14 @@ export class VaRadio {
               {required && <span class="required">{i18next.t('required')}</span>}
             </legend>
             {hint && <span class="usa-hint">{hint}</span>}
+            <span class ="usa-error-message" role="alert">
+              {error && (
+                <Fragment>
+                  <span class="usa-sr-only">{i18next.t('error')}</span> {error}
+                </Fragment>
+              )}
+            </span>
+            <slot></slot>
           </fieldset>
         </Host>
        )
@@ -242,7 +250,7 @@ export class VaRadio {
           <span id="error-message" role="alert">
             {error && (
               <Fragment>
-                <span class="usa-sr-only">{i18next.t('error')}</span> {error}
+                <span class="sr-only">{i18next.t('error')}</span> {error}
               </Fragment>
             )}
           </span>

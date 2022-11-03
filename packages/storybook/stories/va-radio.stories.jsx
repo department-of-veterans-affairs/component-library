@@ -151,14 +151,14 @@ const USWDSTemplate = ({
           label="No" 
           name="group1" 
           value="1" 
-          uswds 
+          uswds={uswds} 
         />
         <va-radio-option
           id="yes1"
           label="Yes - Any Veteran"
           name="group1"
           value="2"
-          uswds
+          uswds={uswds}
         />
       </va-radio>
     </>

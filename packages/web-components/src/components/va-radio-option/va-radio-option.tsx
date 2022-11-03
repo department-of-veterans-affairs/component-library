@@ -10,7 +10,7 @@ import {
 
 @Component({
   tag: 'va-radio-option',
-  styleUrl: 'va-radio-option.css',
+  styleUrl: 'va-radio-option.scss',
   shadow: true,
 })
 export class VaRadioOption {
@@ -37,6 +37,12 @@ export class VaRadioOption {
   @Prop() checked?: boolean = false;
 
   /**
+   * Whether or not the component will use USWDS styling.
+   */
+   @Prop() uswds?: boolean = false;
+
+
+  /**
    * Optional string for the ariaDescribedBy attribute.
    */
   @Prop() ariaDescribedby?: string;
@@ -55,21 +61,39 @@ export class VaRadioOption {
   }
 
   render() {
-    const { checked, ariaDescribedby, name, value, label } = this;
+    const { checked, ariaDescribedby, name, value, label, uswds } = this;
     const id = this.el.id || (name + value);
-    return (
-      <Host
-        aria-checked={checked ? `${checked}` : 'false'}
-        aria-describedby={(checked && ariaDescribedby) || null}
-        checked={checked}
-        name={name}
-        onClick={() => this.handleChange()}
-        role="radio"
-        value={value}
-        id={id}
-      >
-        <label htmlFor={id}>{label}</label>
-      </Host>
-    );
+
+    if (uswds) {
+      return (
+        <div class="usa-radio">
+          <input
+            class="usa-radio__input"
+            id={id}
+            type="radio"
+            name={name}
+            value={value}
+            checked={checked}
+            onClick={() => this.handleChange()}
+          />
+          <label htmlFor={id} class="usa-radio__label">{label}</label>
+        </div>
+      )
+    } else {
+      return (
+        <Host
+          aria-checked={checked ? `${checked}` : 'false'}
+          aria-describedby={(checked && ariaDescribedby) || null}
+          checked={checked}
+          name={name}
+          onClick={() => this.handleChange()}
+          role="radio"
+          value={value}
+          id={id}
+        >
+          <label htmlFor={id}>{label}</label>
+        </Host>
+      );
+    }
   }
 }
