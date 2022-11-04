@@ -615,6 +615,10 @@ export namespace Components {
          */
         "checked"?: boolean;
         /**
+          * The description text for the option
+         */
+        "description": string;
+        /**
           * The text label for the input element.
          */
         "label": string;
@@ -1874,6 +1878,10 @@ declare namespace LocalJSX {
           * Whether or not the option is selected.
          */
         "checked"?: boolean;
+        /**
+          * The description text for the option
+         */
+        "description"?: string;
         /**
           * The text label for the input element.
          */

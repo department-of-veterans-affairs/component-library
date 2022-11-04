@@ -27,7 +27,7 @@ export default {
 };
 
 const vaRadioConst = args => {
-  const {   
+  const {
     'enable-analytics': enableAnalytics,
     error,
     label,
@@ -75,11 +75,11 @@ const ReactBindingExample = ({
 }) => {
   return (
     <>
-    <VaRadio 
+    <VaRadio
       enableAnalytics={enableAnalytics}
       error={error}
       label={label}
-      required={required} 
+      required={required}
       onVaValueChange={e => console.log('Selected radio option:', e?.detail?.value)}>
       <VaRadioOption label="Option one" name="example" value="1" />
       <VaRadioOption label="Option two" name="example" value="2" />
@@ -128,6 +128,41 @@ const IdUsageTemplate = ({
   );
 };
 
+const DescriptionTemplate = args => {
+  const {
+    'enable-analytics': enableAnalytics,
+    error,
+    label,
+    hint,
+    required,
+    description1,
+    description2,
+    ...rest
+  } = args;
+  return (
+    <va-radio
+      enable-analytics={enableAnalytics}
+      error={error}
+      label={label}
+      required={required}
+      hint={hint}
+    >
+      <va-radio-option
+        label="Option one"
+        description={description1}
+        name="example"
+        value="1"
+      />
+      <va-radio-option
+        label="Option two"
+        description={description2}
+        name="example"
+        value="2"
+      />
+    </va-radio>
+  )
+}
+
 const defaultArgs = {
   'enable-analytics': false,
   'label': 'This is a label',
@@ -146,6 +181,13 @@ export const Hint = Template.bind(null);
 Hint.args = {
   ...defaultArgs,
   hint: "We're asking this because of XYZ",
+};
+
+export const Description = DescriptionTemplate.bind(null);
+Description.args = {
+  ...defaultArgs,
+  description1: "Option 1 description",
+  description2: "Option 2 description",
 };
 
 export const ReactWithCustomEvent = ReactBindingExample.bind(null);

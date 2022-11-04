@@ -27,6 +27,11 @@ export class VaRadioOption {
   @Prop() label!: string;
 
   /**
+   * The description text for the option
+   */
+  @Prop() description: string;
+
+  /**
    * The value attribute for the input element.
    */
   @Prop() value!: string;
@@ -55,7 +60,7 @@ export class VaRadioOption {
   }
 
   render() {
-    const { checked, ariaDescribedby, name, value, label } = this;
+    const { checked, ariaDescribedby, name, value, label, description } = this;
     const id = this.el.id || (name + value);
     return (
       <Host
@@ -68,7 +73,12 @@ export class VaRadioOption {
         value={value}
         id={id}
       >
-        <label htmlFor={id}>{label}</label>
+        <label part="label" htmlFor={id}>
+          {label}
+          {description && (
+            <div class="description" part="description">{description}</div>
+          )}
+        </label>
       </Host>
     );
   }

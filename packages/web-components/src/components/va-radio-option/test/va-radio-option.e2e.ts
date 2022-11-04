@@ -17,7 +17,7 @@ describe('va-radio-option', () => {
     expect(element).toEqualHtml(`
     <va-radio-option id="yes2" label="Yes - Any Veteran" name="yes" value="2" aria-checked="false" role="radio" class="hydrated">
       <mock:shadow-root>
-        <label for="yes2">
+        <label part="label" for="yes2">
           Yes - Any Veteran
         </label>
       </mock:shadow-root>
@@ -34,6 +34,30 @@ describe('va-radio-option', () => {
     const inputEl = await page.find('va-radio-option');
 
     expect(await inputEl.getProperty('id')).toEqual('test1');
+  });
+
+  it('renders description', async () => {
+    const page = await newE2EPage();
+    await page.setContent(`
+      <va-radio-option
+        id="opt1"
+        label="An option"
+        description="This is an option description"
+      />
+    `);
+    const element = await page.find('va-radio-option');
+    expect(element).toEqualHtml(`
+    <va-radio-option id="opt1" label="An option" name="yes" value="2" aria-checked="false" role="radio" class="hydrated">
+      <mock:shadow-root>
+        <label part="label" for="opt1">
+          An option
+          <div class="description" part="description">
+            This is an option description
+          </div>
+        </label>
+      </mock:shadow-root>
+    </va-radio-option>
+  `);
   });
 
   it('sets checked to true based on prop', async () => {
