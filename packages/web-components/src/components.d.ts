@@ -619,6 +619,10 @@ export namespace Components {
          */
         "checked"?: boolean;
         /**
+          * Whether or not the radio option is disabled. Can be used if the USWDS option is active.
+         */
+        "disabled"?: boolean;
+        /**
           * The text label for the input element.
          */
         "label": string;
@@ -1886,6 +1890,10 @@ declare namespace LocalJSX {
           * Whether or not the option is selected.
          */
         "checked"?: boolean;
+        /**
+          * Whether or not the radio option is disabled. Can be used if the USWDS option is active.
+         */
+        "disabled"?: boolean;
         /**
           * The text label for the input element.
          */

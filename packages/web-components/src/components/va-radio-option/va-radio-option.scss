@@ -1,4 +1,11 @@
-@import 'usa-radio/src/styles';
+@use 'uswds-core/src/styles/settings/settings-typography' with (
+  $theme-body-font-size: 10
+);
+@use 'uswds-core/src/styles/mixins/utilities/font';
+@use 'uswds-core/src/styles/mixins/helpers/checkbox-and-radio-colors';
+@use 'uswds-elements/src/styles/sizing';
+@use 'usa-radio/src/styles/usa-radio';
+@use 'uswds-core/src/styles/mixins/general/screen-reader';
 
 // VA Design System Styles
 @import '../../mixins/inputs.css';

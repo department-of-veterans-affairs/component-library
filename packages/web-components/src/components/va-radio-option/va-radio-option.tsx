@@ -7,6 +7,7 @@ import {
   Prop,
   h,
 } from '@stencil/core';
+import classnames from 'classnames';
 
 @Component({
   tag: 'va-radio-option',
@@ -39,8 +40,12 @@ export class VaRadioOption {
   /**
    * Whether or not the component will use USWDS styling.
    */
-   @Prop() uswds?: boolean = false;
+  @Prop() uswds?: boolean = false;
 
+  /**
+   * Whether or not the radio option is disabled. Can be used if the USWDS option is active.
+   */
+  @Prop() disabled?: boolean = false;
 
   /**
    * Optional string for the ariaDescribedBy attribute.
@@ -61,19 +66,25 @@ export class VaRadioOption {
   }
 
   render() {
-    const { checked, ariaDescribedby, name, value, label, uswds } = this;
+    const { checked, ariaDescribedby, name, value, label, uswds, disabled } = this;
     const id = this.el.id || (name + value);
+
+    const inputClass = classnames({
+      'usa-radio__input': true,
+      // 'usa-radio__input--tile': true,
+    });
 
     if (uswds) {
       return (
         <div class="usa-radio">
           <input
-            class="usa-radio__input"
+            class={inputClass}
             id={id}
             type="radio"
             name={name}
             value={value}
             checked={checked}
+            disabled={disabled}
             onClick={() => this.handleChange()}
           />
           <label htmlFor={id} class="usa-radio__label">{label}</label>

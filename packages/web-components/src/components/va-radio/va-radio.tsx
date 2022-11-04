@@ -214,6 +214,7 @@ export class VaRadio {
     if (uswds) {
       return ( 
         <Host
+          class="usa-form"
           role="radiogroup"
           aria-invalid={error ? 'true' : 'false'}
           aria-label={ariaLabel}

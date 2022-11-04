@@ -134,7 +134,7 @@ const USWDSTemplate = ({
   label,
   required,
   uswds,
-  hint
+  hint,
 }) => {
   return (
     <>
@@ -147,17 +147,32 @@ const USWDSTemplate = ({
         hint={hint}
       >
         <va-radio-option 
-          id="no1" 
-          label="No" 
+          id="soujourner-truth" 
+          label="Soujourner Truth" 
           name="group1" 
           value="1" 
           uswds={uswds} 
         />
         <va-radio-option
-          id="yes1"
-          label="Yes - Any Veteran"
+          id="frederick-douglass"
+          label="Frederick Douglass"
           name="group1"
           value="2"
+          uswds={uswds}
+        />
+        <va-radio-option
+          id="booker-t-washington"
+          label="Booker T. Washington"
+          name="group1"
+          value="3"
+          uswds={uswds}
+        />
+        <va-radio-option
+          id="george-washington-carver"
+          label="George Washington Carver"
+          name="group1"
+          value="4"
+          disabled={true}
           uswds={uswds}
         />
       </va-radio>
@@ -184,6 +199,16 @@ export const USWDSStyle = USWDSTemplate.bind(null);
 USWDSStyle.args = {
   ...defaultArgs,
   uswds: true,
+  label: 'Select one historical figure',
+  hint: "We're asking this because of XYZ",
+  error: 'This is an error',
+};
+
+export const USWDSStyleTiled = USWDSTemplate.bind(null);
+USWDSStyleTiled.args = {
+  ...defaultArgs,
+  uswds: true,
+  label: 'Select one historical figure',
   hint: "We're asking this because of XYZ",
 };
 
