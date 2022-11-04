@@ -180,4 +180,68 @@ describe('va-pagination', () => {
 
     expect(lastPageButton.textContent).toEqual('50');
   });
+
+  it('fires an analytics event when a page number is clicked', async () => {
+    const page = await newE2EPage();
+    await page.setContent(
+      '<va-pagination page="2" pages="5" />',
+    );
+
+    const analyticsSpy = await page.spyOnEvent('component-library-analytics');
+
+    const buttonInner = await page.find('va-pagination >>> button.button-inner.button-active');
+    await buttonInner.click();
+
+    expect(analyticsSpy).toHaveReceivedEventDetail({
+      action: 'linkClick',
+      componentName: 'va-pagination',
+      details: {
+        event: 'nav-paginate-number',
+        'page-number': 2,
+      },
+    });
+  });
+
+  it('fires an analytics event the previous button is clicked', async () => {
+    const page = await newE2EPage();
+    await page.setContent(
+      '<va-pagination page="2" pages="5" />',
+    );
+
+    const analyticsSpy = await page.spyOnEvent('component-library-analytics');
+
+    const buttonPrev = await page.find('va-pagination >>> button.button-prev');
+    await buttonPrev.click();
+
+    expect(analyticsSpy).toHaveReceivedEventDetail({
+      action: 'linkClick',
+      componentName: 'va-pagination',
+      details: {
+        event: 'nav-paginate-previous',
+        'page-number': 1,
+      },
+    });
+  });
+
+  it('fires an analytics event the next button is clicked', async () => {
+    const page = await newE2EPage();
+    await page.setContent(
+      '<va-pagination page="2" pages="5" />',
+    );
+
+    const analyticsSpy = await page.spyOnEvent('component-library-analytics');
+
+    const buttonNext = await page.find('va-pagination >>> button.button-next');
+    await buttonNext.click();
+
+    expect(analyticsSpy).toHaveReceivedEventDetail({
+      action: 'linkClick',
+      componentName: 'va-pagination',
+      details: {
+        event: 'nav-paginate-next',
+        'page-number': 3,
+      },
+    });
+  });
+
 });
