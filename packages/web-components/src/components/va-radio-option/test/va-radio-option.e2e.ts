@@ -41,13 +41,15 @@ describe('va-radio-option', () => {
     await page.setContent(`
       <va-radio-option
         id="opt1"
+        name="opts"
         label="An option"
         description="This is an option description"
+        value="option1"
       />
     `);
     const element = await page.find('va-radio-option');
     expect(element).toEqualHtml(`
-    <va-radio-option id="opt1" label="An option" name="yes" value="2" aria-checked="false" role="radio" class="hydrated">
+    <va-radio-option id="opt1" name="opts" label="An option" description="This is an option description" name="opt1" value="option1" aria-checked="false" role="radio" class="hydrated">
       <mock:shadow-root>
         <label part="label" for="opt1">
           An option
