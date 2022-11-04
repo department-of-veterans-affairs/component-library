@@ -211,12 +211,12 @@ export class VaRadio {
         aria-invalid={error ? 'true' : 'false'}
         aria-label={ariaLabel}
       >
-        <legend>
+        <legend part="legend">
           {label}
           {required && <span class="required">{i18next.t('required')}</span>}
         </legend>
-        {hint && <span class="hint-text">{hint}</span>}
-        <span id="error-message" role="alert">
+        {hint && <span part="hint" class="hint-text">{hint}</span>}
+        <span id="error-message" part="error" role="alert">
           {error && (
             <Fragment>
               <span class="sr-only">{i18next.t('error')}</span> {error}

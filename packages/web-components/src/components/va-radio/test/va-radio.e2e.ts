@@ -108,7 +108,7 @@ describe('va-radio', () => {
     const errorElement = await page.find('va-radio >>> #error-message');
     expect(element.getAttribute('aria-invalid')).toEqual('true');
     expect(errorElement).toEqualHtml(`
-     <span id="error-message" role="alert">
+     <span id="error-message" part="error" role="alert">
        <span class="sr-only">
          error
        </span>
