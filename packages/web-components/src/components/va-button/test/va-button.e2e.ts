@@ -157,10 +157,10 @@ describe('va-button', () => {
       action: 'click',
       componentName: 'va-button',
       details: {
-        'button-background-color': '#0071bb',
-        'button-click-label': 'Edit',
-        'button-type': 'primary',
-        'event': 'cta-button-click',
+        'background-color': '#0071bb',
+        label: 'Edit',
+        type: 'primary',
+        event: 'cta-button-click',
       },
     });
   });

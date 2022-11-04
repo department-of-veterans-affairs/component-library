@@ -116,7 +116,7 @@ describe('va-link', () => {
       componentName: 'va-link',
       action: 'click',
       details: {
-        'link-click-label': 'Find out if you qualify for this program and how to apply'
+        label: 'Find out if you qualify for this program and how to apply'
       },
     });
   });

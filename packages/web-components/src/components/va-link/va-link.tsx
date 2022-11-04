@@ -84,7 +84,7 @@ export class VaLink {
         componentName: 'va-link',
         action: 'click',
         details: {
-          'link-click-label': this.text,
+          label: this.text,
         },
       }
       this.componentLibraryAnalytics.emit(detail);

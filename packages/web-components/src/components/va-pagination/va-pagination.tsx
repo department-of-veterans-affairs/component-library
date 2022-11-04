@@ -76,7 +76,7 @@ export class VaPagination {
         action: 'linkClick',
         details: {
           'event': eventID,
-          'paginate-page-number': page,
+          'page-number': page,
         },
       };
       this.componentLibraryAnalytics.emit(detail);
