@@ -1,11 +1,36 @@
 @use 'uswds-core/src/styles/settings/settings-typography' with (
   $theme-body-font-size: 10
 );
-@use 'uswds-core/src/styles/mixins/utilities/font';
+// @use 'uswds-core/src/styles/settings/settings-components' with (
+//   $theme-input-select-size: 4,
+// );
+
+// @use 'uswds-core/src/styles/mixins/utilities/font';
+// @use 'uswds-core/src/styles/functions/utilities/etc';
+// @use 'uswds-elements/src/styles/sizing';
+// @use 'uswds-core/src/styles/mixins/general/focus-outline';
+// @use 'uswds-core/src/styles/mixins/typography/typeset';
+// @use 'uswds-core/src/styles/functions/color/color-token-family';
+// @use 'uswds-core/src/styles/functions/color/color-token-grade';
+// @use 'uswds-core/src/styles/functions/color/color-token-variant';
+// @use 'usa-checkbox/src/styles/usa-checkbox';
+
 @use 'uswds-core/src/styles/mixins/helpers/checkbox-and-radio-colors';
-@use 'uswds-elements/src/styles/sizing';
 @use 'usa-radio/src/styles/usa-radio';
-@use 'uswds-core/src/styles/mixins/general/screen-reader';
+
+// .usa-radio__label-description {
+//   font-size: 16px;
+//   line-height: 1.5;
+// }
+
+:host(:focus) label.usa-radio__label::before {
+  outline: 2px solid var(--color-gold-light);
+  outline-offset: 4px;
+}
+
+:host([disabled='true']:focus) label.usa-radio__label::before {
+  outline: none;
+}
 
 // VA Design System Styles
 @import '../../mixins/inputs.css';

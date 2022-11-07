@@ -135,9 +135,11 @@ const USWDSTemplate = ({
   required,
   uswds,
   hint,
+  tile
 }) => {
   return (
     <>
+      <p>DEFAULT</p>
       <va-radio
         enable-analytics={enableAnalytics}
         error={error}
@@ -176,6 +178,54 @@ const USWDSTemplate = ({
           uswds={uswds}
         />
       </va-radio>
+
+      <br/>
+
+      <p>TILED</p>
+
+      <va-radio
+        enable-analytics={enableAnalytics}
+        error={error}
+        label={label}
+        required={required}
+        uswds={uswds}
+        hint={hint}
+      >
+        <va-radio-option 
+          id="soujourner-truth" 
+          label="Soujourner Truth" 
+          name="group1" 
+          value="1" 
+          uswds={uswds}
+          tile={true}
+        />
+        <va-radio-option
+          id="frederick-douglass"
+          label="Frederick Douglass"
+          name="group1"
+          value="2"
+          uswds={uswds}
+          tile={true}
+          description="This is optional text that can be used to describe the label in more detail."
+        />
+        <va-radio-option
+          id="booker-t-washington"
+          label="Booker T. Washington"
+          name="group1"
+          value="3"
+          uswds={uswds}
+          tile={true}
+        />
+        <va-radio-option
+          id="george-washington-carver"
+          label="George Washington Carver"
+          name="group1"
+          value="4"
+          disabled={true}
+          uswds={uswds}
+          tile={true}
+        />
+      </va-radio>
     </>
   );
 };
@@ -201,15 +251,7 @@ USWDSStyle.args = {
   uswds: true,
   label: 'Select one historical figure',
   hint: "We're asking this because of XYZ",
-  error: 'This is an error',
-};
-
-export const USWDSStyleTiled = USWDSTemplate.bind(null);
-USWDSStyleTiled.args = {
-  ...defaultArgs,
-  uswds: true,
-  label: 'Select one historical figure',
-  hint: "We're asking this because of XYZ",
+  // error: 'This is an error',
 };
 
 export const Hint = Template.bind(null);

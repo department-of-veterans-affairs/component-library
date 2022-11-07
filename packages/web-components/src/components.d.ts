@@ -619,6 +619,10 @@ export namespace Components {
          */
         "checked"?: boolean;
         /**
+          * Description of the option displayed below the option label. Available when uswds is true.
+         */
+        "description"?: string;
+        /**
           * Whether or not the radio option is disabled. Can be used if the USWDS option is active.
          */
         "disabled"?: boolean;
@@ -630,6 +634,10 @@ export namespace Components {
           * The name attribute for the input element.
          */
         "name": string;
+        /**
+          * Whether or not the component will display as a tile. Available when uswds is true.
+         */
+        "tile"?: boolean;
         /**
           * Whether or not the component will use USWDS styling.
          */
@@ -1891,6 +1899,10 @@ declare namespace LocalJSX {
          */
         "checked"?: boolean;
         /**
+          * Description of the option displayed below the option label. Available when uswds is true.
+         */
+        "description"?: string;
+        /**
           * Whether or not the radio option is disabled. Can be used if the USWDS option is active.
          */
         "disabled"?: boolean;
@@ -1906,6 +1918,10 @@ declare namespace LocalJSX {
           * The event emitted when the selected option value changes
          */
         "onRadioOptionSelected"?: (event: CustomEvent<any>) => void;
+        /**
+          * Whether or not the component will display as a tile. Available when uswds is true.
+         */
+        "tile"?: boolean;
         /**
           * Whether or not the component will use USWDS styling.
          */

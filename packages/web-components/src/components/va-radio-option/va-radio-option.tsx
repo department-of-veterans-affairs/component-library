@@ -43,6 +43,16 @@ export class VaRadioOption {
   @Prop() uswds?: boolean = false;
 
   /**
+   * Whether or not the component will display as a tile. Available when uswds is true.
+   */
+   @Prop() tile?: boolean = false;
+
+  /**
+   * Description of the option displayed below the option label. Available when uswds is true.
+   */
+   @Prop() description?: string;
+
+  /**
    * Whether or not the radio option is disabled. Can be used if the USWDS option is active.
    */
   @Prop() disabled?: boolean = false;
@@ -71,7 +81,7 @@ export class VaRadioOption {
 
     const inputClass = classnames({
       'usa-radio__input': true,
-      // 'usa-radio__input--tile': true,
+      'usa-radio__input--tile': this.uswds && this.tile,
     });
 
     if (uswds) {
@@ -87,7 +97,10 @@ export class VaRadioOption {
             disabled={disabled}
             onClick={() => this.handleChange()}
           />
-          <label htmlFor={id} class="usa-radio__label">{label}</label>
+          <label htmlFor={id} class="usa-radio__label">
+            {label}
+            {this.description && <span class="usa-radio__label-description">{this.description}</span>}
+          </label>
         </div>
       )
     } else {
