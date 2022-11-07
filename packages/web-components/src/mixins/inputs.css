@@ -1,7 +1,8 @@
 @import './focusable.css';
-input,
-select,
-textarea {
+
+:host(:not([uswds])) input,
+:host(:not([uswds])) select,
+:host(:not([uswds])) textarea {
   appearance: none;
   border: 0.1rem solid var(--color-gray);
   border-radius: 0;

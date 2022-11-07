@@ -1,41 +1,15 @@
-@use 'uswds-core/src/styles/settings/settings-typography' with (
-  $theme-body-font-size: 10
-);
-@use 'uswds-core/src/styles/mixins/utilities/font';
-@use 'uswds-core/src/styles/mixins/helpers/checkbox-and-radio-colors';
-@use 'uswds-core/src/styles/placeholders/forms';
+@use 'uswds-helpers/src/styles/usa-sr-only';
+@use 'usa-form/src/styles/usa-form';
 @use 'usa-fieldset/src/styles/usa-fieldset';
 @use 'usa-legend/src/styles/usa-legend';
 @use 'usa-hint/src/styles/usa-hint';
-@use 'uswds-helpers/src/styles/usa-sr-only';
 @use 'usa-error-message/src/styles/usa-error-message';
-@use 'usa-form/src/styles/usa-form';
 
-// VA Design System Styles
-@import '../../mixins/accessibility.css';
-@import '../../mixins/form-field-error.css';
+@import '../../mixins/uswds-error-border.css';
+@import 'va-radio-v1.scss'; // To be removed when USWDS is implemented.
 
 :host {
   display: block;
   border: none;
   padding: 0;
-}
-
-.required {
-  color: var(--color-secondary-dark);
-  margin: 0 0.35rem;
-}
-
-.hint-text {
-  color: var(--color-gray);
-}
-
-legend {
-  display: block;
-  max-width: 46rem;
-  font-weight: inherit;
-  font-size: inherit;
-  color: inherit;
-  line-height: inherit;
-  margin-bottom: 1.2rem;
 }

@@ -214,12 +214,11 @@ export class VaRadio {
     if (uswds) {
       return ( 
         <Host
-          class="usa-form"
           role="radiogroup"
           aria-invalid={error ? 'true' : 'false'}
           aria-label={ariaLabel}
         >
-          <fieldset class="usa-fieldset">
+          <fieldset class="usa-form usa-fieldset">
             <legend class="usa-legend">
               {label}
               {required && <span class="required">{i18next.t('required')}</span>}

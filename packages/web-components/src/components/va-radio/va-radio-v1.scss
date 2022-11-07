@@ -1,0 +1,21 @@
+@import '../../mixins/accessibility.css';
+@import '../../mixins/form-field-error.css';
+
+.required {
+  color: var(--color-secondary-dark);
+  margin: 0 0.35rem;
+}
+
+.hint-text {
+  color: var(--color-gray);
+}
+
+:host:not([uswds]) legend {
+  display: block;
+  max-width: 46rem;
+  font-weight: inherit;
+  font-size: inherit;
+  color: inherit;
+  line-height: inherit;
+  margin-bottom: 1.2rem;
+}

@@ -1,27 +1,7 @@
-@use 'uswds-core/src/styles/settings/settings-typography' with (
-  $theme-body-font-size: 10
-);
-// @use 'uswds-core/src/styles/settings/settings-components' with (
-//   $theme-input-select-size: 4,
-// );
-
-// @use 'uswds-core/src/styles/mixins/utilities/font';
-// @use 'uswds-core/src/styles/functions/utilities/etc';
-// @use 'uswds-elements/src/styles/sizing';
-// @use 'uswds-core/src/styles/mixins/general/focus-outline';
-// @use 'uswds-core/src/styles/mixins/typography/typeset';
-// @use 'uswds-core/src/styles/functions/color/color-token-family';
-// @use 'uswds-core/src/styles/functions/color/color-token-grade';
-// @use 'uswds-core/src/styles/functions/color/color-token-variant';
-// @use 'usa-checkbox/src/styles/usa-checkbox';
-
 @use 'uswds-core/src/styles/mixins/helpers/checkbox-and-radio-colors';
 @use 'usa-radio/src/styles/usa-radio';
 
-// .usa-radio__label-description {
-//   font-size: 16px;
-//   line-height: 1.5;
-// }
+@import './va-radio-option-v1.css'; // To be removed when USWDS is implemented.
 
 :host(:focus) label.usa-radio__label::before {
   outline: 2px solid var(--color-gold-light);
@@ -32,47 +12,6 @@
   outline: none;
 }
 
-// VA Design System Styles
-@import '../../mixins/inputs.css';
-
 :host {
   display: block;
-  margin-top: 1rem;
-}
-
-:host(:focus) {
-  outline: none !important;
-}
-
-label {
-  box-sizing: border-box;
-  outline: none;
-  display: inline-block;
-  margin: 0;
-  width: 100%;
-  padding-left: 2.4rem;
-}
-
-label::before {
-  box-sizing: border-box;
-  border-radius: 100%;
-  box-shadow: 0 0 0 2px var(--color-white), 0 0 0 3px var(--color-gray-medium);
-  height: 1.4rem;
-  line-height: 1.4rem;
-  margin-right: 1rem;
-  width: 1.4rem;
-  background: var(--color-white);
-  background-color: var(--color-white);
-  content: '\A0';
-  display: inline-block;
-}
-
-:host([aria-checked='true']) label::before {
-  background-color: var(--color-primary);
-  box-shadow: 0 0 0 2px var(--color-white), 0 0 0 4px var(--color-primary);
-}
-
-:host(:focus) label::before {
-  outline: 2px solid var(--color-gold-light);
-  outline-offset: 6px;
 }
