@@ -10,7 +10,7 @@
   color: var(--color-gray);
 }
 
-:host:not([uswds]) legend {
+:host(:not([uswds])) legend {
   display: block;
   max-width: 46rem;
   font-weight: inherit;
