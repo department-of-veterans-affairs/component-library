@@ -214,7 +214,6 @@ export class VaRadio {
     if (uswds) {
       return ( 
         <Host
-          role="radiogroup"
           aria-invalid={error ? 'true' : 'false'}
           aria-label={ariaLabel}
         >
@@ -223,7 +222,7 @@ export class VaRadio {
               {label}
               {required && <span class="required">{i18next.t('required')}</span>}
             </legend>
-            <span class ="usa-error-message" role="alert">
+            <span class="usa-error-message" role="alert">
               {error && (
                 <Fragment>
                   <span class="usa-sr-only">{i18next.t('error')}</span> {error}

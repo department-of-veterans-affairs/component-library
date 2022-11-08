@@ -264,15 +264,6 @@ const USWDSTemplate = ({
           uswds={uswds}
           tile={true}
         />
-        <va-radio-option
-          id="george-washington-carver"
-          label="George Washington Carver"
-          name="group1"
-          value="4"
-          disabled={true}
-          uswds={uswds}
-          tile={true}
-        />
       </va-radio>
     </>
   );
