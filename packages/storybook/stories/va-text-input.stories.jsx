@@ -97,6 +97,7 @@ const I18nTemplate = ({
   required,
   error,
   maxlength,
+  minlength,
   value,
   inputmode,
   type,
@@ -118,6 +119,7 @@ const I18nTemplate = ({
         required={required}
         error={error}
         maxlength={maxlength}
+        minlength={minlength}
         value={value}
         inputmode={inputmode}
         type={type}
@@ -150,6 +152,12 @@ export const MaxLength = Template.bind(null);
 MaxLength.args = {
   ...defaultArgs,
   maxlength: '16',
+};
+
+export const MinLength = Template.bind(null);
+MinLength.args = {
+  ...defaultArgs,
+  minlength: '3',
 };
 
 export const Range = Template.bind(null);

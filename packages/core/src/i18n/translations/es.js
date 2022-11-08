@@ -2,6 +2,7 @@ export default {
   'error': 'Error',
   'required': '(*Requerido)',
   'max-chars': '(Número máximo de caracteres: {{length}})',
+  'min-chars': '(Número mínimo de caracteres: {{length}})',
   'date-of-birth': 'Fecha de nacimiento',
   'month': 'Mes',
   'day': 'Día',
@@ -24,4 +25,5 @@ export default {
   'november': 'Noviembre',
   'december': 'Diciembre',
   'on-this-page': 'En esta página',
+  'date-hint': 'Ingrese dos dígitos para el mes y cuatro dígitos para el año',
 };

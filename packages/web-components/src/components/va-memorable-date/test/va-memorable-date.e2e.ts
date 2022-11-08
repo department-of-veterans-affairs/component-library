@@ -13,9 +13,7 @@ describe('va-memorable-date', () => {
       <mock:shadow-root>
         <fieldset>
           <legend>
-            <div id='dateHint'>
-            Please enter two digits for the month and day and four digits for the year.
-            </div>
+            <div id='dateHint'>date-hint.</div>
           </legend>
           <slot></slot>
           <span id="error-message" role="alert"></span>

@@ -251,7 +251,9 @@ export class VaTextInput {
           </small>
         )}
         {minlength && value?.length < minlength && (
-          <small part="validation">(Min. {minlength} characters)</small>
+          <small part="validation">
+            {i18next.t('min-chars', { length: minlength })}
+          </small>
         )}
       </Host>
     );
