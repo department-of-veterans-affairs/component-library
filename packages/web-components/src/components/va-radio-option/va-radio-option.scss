@@ -1,0 +1,17 @@
+@use 'uswds-core/src/styles/mixins/helpers/checkbox-and-radio-colors';	
+@use 'usa-radio/src/styles/usa-radio';	
+
+@import './va-radio-option.css'; // To be removed when USWDS is implemented.	
+
+:host(:focus) label.usa-radio__label::before {	
+  outline: 2px solid var(--color-gold-light);	
+  outline-offset: 4px;	
+}	
+
+:host([disabled='true']:focus) label.usa-radio__label::before {	
+  outline: none;	
+}	
+
+:host {	
+  display: block;	
+}	
