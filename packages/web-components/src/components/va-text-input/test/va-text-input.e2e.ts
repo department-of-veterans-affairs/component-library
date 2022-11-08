@@ -220,7 +220,7 @@ describe('va-text-input', () => {
     await inputEl.press('2');
     expect(await inputEl.getProperty('value')).toBe('2');
     expect((await page.find('va-text-input >>> small')).innerText).toContain(
-      '(Min. 2 characters)',
+      'min-chars',
     );
   });
 
