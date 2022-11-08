@@ -223,7 +223,6 @@ export class VaRadio {
               {label}
               {required && <span class="required">{i18next.t('required')}</span>}
             </legend>
-            {hint && <span class="usa-hint">{hint}</span>}
             <span class ="usa-error-message" role="alert">
               {error && (
                 <Fragment>
@@ -231,6 +230,7 @@ export class VaRadio {
                 </Fragment>
               )}
             </span>
+            {hint && <span class="usa-hint">{hint}</span>}
             <slot></slot>
           </fieldset>
         </Host>

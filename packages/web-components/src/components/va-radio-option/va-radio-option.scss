@@ -1,17 +1,86 @@
-@use 'uswds-core/src/styles/mixins/helpers/checkbox-and-radio-colors';	
-@use 'usa-radio/src/styles/usa-radio';	
+@use "uswds-core" with ( 
+  $theme-body-font-size: 10,
+  $theme-input-select-size: 4,
+  $theme-input-tile-border-radius: 'lg',
+); /* To be removed when Formation is removed. */
 
-@import './va-radio-option.css'; // To be removed when USWDS is implemented.	
+@use 'uswds-core/src/styles/mixins/helpers/checkbox-and-radio-colors';
+@use 'usa-radio/src/styles/usa-radio';
+
+:host {	
+  display: block;	
+}
 
 :host(:focus) label.usa-radio__label::before {	
   outline: 2px solid var(--color-gold-light);	
   outline-offset: 4px;	
-}	
+}
 
 :host([disabled='true']:focus) label.usa-radio__label::before {	
   outline: none;	
-}	
+}
 
-:host {	
-  display: block;	
-}	
+/* Styles to be removed when Formation is removed */
+
+:host([uswds]) .usa-radio__label {
+  line-height: 1.5; // USWDS: 1.3
+  margin-top: 1.25rem; // USWDS: 0.5rem
+  padding-left: 3rem; // USWDS: 2.75rem
+}
+
+:host([uswds]) .usa-radio__label-description {
+  font-size: 16px; // USWDS: 0.93rem
+} 
+
+:host([uswds]) .usa-radio__input--tile+[class*=__label] {
+  padding: 1.25rem 1.5rem 1.25rem 4.25rem; // USWDS: 0.75rem 1rem 0.75rem 2.5rem
+}
+
+:host([uswds]) .usa-radio__input--tile+[class*=__label]::before {
+  left: 1rem; // USWDS: -0.25rem
+}
+
+/* Original Components Styles. */
+
+@import '../../mixins/inputs.css';
+
+:host(:not([uswds])) {
+  margin-top: 1rem;
+}
+
+:host(:focus) {
+  outline: none !important;
+}
+
+:host(:not([uswds])) label {
+  box-sizing: border-box;
+  outline: none;
+  display: inline-block;
+  margin: 0;
+  width: 100%;
+  padding-left: 2.4rem;
+}
+
+:host(:not([uswds])) label::before {
+  box-sizing: border-box;
+  border-radius: 100%;
+  box-shadow: 0 0 0 2px var(--color-white), 0 0 0 3px var(--color-gray-medium);
+  height: 1.4rem;
+  line-height: 1.4rem;
+  margin-right: 1rem;
+  width: 1.4rem;
+  background: var(--color-white);
+  background-color: var(--color-white);
+  content: '\A0';
+  display: inline-block;
+}
+
+:host(:not([uswds])[aria-checked='true']) label::before {
+  background-color: var(--color-primary);
+  box-shadow: 0 0 0 2px var(--color-white), 0 0 0 4px var(--color-primary);
+}
+
+:host(:not([uswds]):focus) label::before {
+  outline: 2px solid var(--color-gold-light);
+  outline-offset: 6px;
+}
