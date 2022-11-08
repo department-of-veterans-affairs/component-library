@@ -711,7 +711,7 @@ export namespace Components {
     }
     interface VaTelephone {
         /**
-          * 3 or 10 digit string representing the contact number
+          * Numeric string representing the contact number. Typical length is 3 or 10 digits - SMS short codes will be 5 or 6 digits.
          */
         "contact": string;
         /**
@@ -1991,7 +1991,7 @@ declare namespace LocalJSX {
     }
     interface VaTelephone {
         /**
-          * 3 or 10 digit string representing the contact number
+          * Numeric string representing the contact number. Typical length is 3 or 10 digits - SMS short codes will be 5 or 6 digits.
          */
         "contact": string;
         /**
