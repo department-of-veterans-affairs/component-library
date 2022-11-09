@@ -206,7 +206,6 @@ const USWDSTemplate = ({
           value="2"
           uswds={uswds}
           tile={true}
-          description="This is optional text that can be used to describe the label in more detail."
         />
         <va-radio-option
           id="booker-t-washington"
@@ -221,6 +220,7 @@ const USWDSTemplate = ({
           label="George Washington Carver"
           name="group1"
           value="4"
+          description="This is optional text that can be used to describe the label in more detail."
           disabled={true}
           uswds={uswds}
           tile={true}
@@ -254,13 +254,13 @@ const USWDSTemplate = ({
           value="2"
           uswds={uswds}
           tile={true}
-          description="This is optional text that can be used to describe the label in more detail."
         />
         <va-radio-option
           id="booker-t-washington"
           label="Booker T. Washington"
           name="group1"
           value="3"
+          description="This is optional text that can be used to describe the label in more detail."
           uswds={uswds}
           tile={true}
         />
@@ -289,7 +289,6 @@ USWDSStyle.args = {
   ...defaultArgs,
   uswds: true,
   label: 'Select one historical figure',
-  hint: "We're asking this because of XYZ"
 };
 
 export const Hint = Template.bind(null);

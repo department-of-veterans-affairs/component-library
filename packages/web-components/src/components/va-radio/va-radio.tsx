@@ -10,6 +10,7 @@ import {
   h,
   Fragment,
 } from '@stencil/core';
+import classnames from 'classnames';
 import { getSlottedNodes } from '../../utils/utils';
 import i18next from 'i18next';
 import { Build } from '@stencil/core';
@@ -92,7 +93,8 @@ export class VaRadio {
   @Listen('keydown')
   handleKeyDown(event: KeyboardEvent) {
     const currentNode = event.target as HTMLVaRadioOptionElement;
-    const radioOptionNodes = getSlottedNodes(this.el, 'va-radio-option');
+    const radioOptionNodes = (getSlottedNodes(this.el, 'va-radio-option') as HTMLVaRadioOptionElement[])
+      .filter(node => !node.disabled);
 
     if (!radioOptionNodes.length) return;
 
@@ -211,6 +213,12 @@ export class VaRadio {
     const { label, hint, required, error, uswds } = this;
     const ariaLabel = label + (required ? ' required' : '');
 
+
+    const legendClass = classnames({
+      'usa-legend': true,
+      'usa-label--error': error
+    });
+
     if (uswds) {
       return ( 
         <Host
@@ -218,7 +226,7 @@ export class VaRadio {
           aria-label={ariaLabel}
         >
           <fieldset class="usa-form usa-fieldset">
-            <legend class="usa-legend">
+            <legend class={legendClass}>
               {label}
               {required && <span class="required">{i18next.t('required')}</span>}
             </legend>
