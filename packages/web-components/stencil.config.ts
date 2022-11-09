@@ -10,9 +10,6 @@ export const config: Config = {
   plugins: [
     sass({ 
       includePaths: ["../../node_modules/@uswds/uswds/packages/"],
-      // injectGlobalPaths: [
-      //   'src/global/settings.scss',
-      // ]
     }),
     postcss({
       plugins: [url({ url: 'inline' })],
