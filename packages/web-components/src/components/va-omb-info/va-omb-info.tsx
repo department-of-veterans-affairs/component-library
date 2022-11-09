@@ -2,8 +2,8 @@ import { Component, Host, h, Prop, State, Element } from '@stencil/core';
 
 /**
  * @componentName OMB info
- * @maturityCategory caution
- * @maturityLevel candidate
+ * @maturityCategory use
+ * @maturityLevel best_practice
  */
 @Component({
   tag: 'va-omb-info',
