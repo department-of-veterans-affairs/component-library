@@ -562,4 +562,42 @@ describe('va-memorable-date', () => {
     await page.waitForChanges();
     expect(date.getAttribute('value')).toBe('--');
   });
+
+  it('fires an analytics event when enableAnalytics is true', async () => {
+    const page = await newE2EPage();
+    await page.setContent(
+      '<va-memorable-date enable-analytics name="test" label="Example label" />',
+    );
+    const analyticsSpy = await page.spyOnEvent('component-library-analytics');
+    const handleMonth = await page.$('pierce/[name="testMonth"]');
+    const handleDay = await page.$('pierce/[name="testDay"]');
+    const handleYear = await page.$('pierce/[name="testYear"]');
+
+    // Month
+    await handleMonth.press('1');
+    await handleMonth.press('Tab');
+    // Day
+    await handleDay.press('2');
+    await handleDay.press('Tab');
+    // Year
+    await handleYear.press('2');
+    await handleYear.press('0');
+    await handleYear.press('2');
+    await handleYear.press('2');
+    // Trigger Blur
+    await handleYear.press('Tab');
+    await page.waitForChanges();
+
+    expect(analyticsSpy).toHaveReceivedEventTimes(1);
+    expect(analyticsSpy).toHaveReceivedEventDetail({
+      action: 'blur',
+      componentName: 'va-memorable-date',
+      details: {
+        label: 'Example label',
+        year: 2022,
+        month: 1,
+        day: 2,
+      },
+    });
+  });
 });
