@@ -99,7 +99,7 @@ export class VaRadioOption {
           />
           <label htmlFor={id} class="usa-radio__label">
             {label}
-            {this.description && <span class="usa-radio__label-description">{this.description}</span>}
+            {this.description && <span class="usa-radio__label-description" aria-describedby={id}>{this.description}</span>}
           </label>
         </div>
       )
