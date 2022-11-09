@@ -20,7 +20,7 @@ import {
 })
 export class VaTelephone {
   /**
-   * 3 or 10 digit string representing the contact number
+   * Numeric string representing the contact number. Typical length is 3 or 10 digits - SMS short codes will be 5 or 6 digits.
    */
   @Prop() contact!: string;
 

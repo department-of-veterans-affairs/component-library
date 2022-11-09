@@ -2,6 +2,7 @@ import {
   Component,
   Event,
   EventEmitter,
+  forceUpdate,
   Host,
   Prop,
   h,
@@ -13,6 +14,14 @@ import {
   validate,
   validKeys,
 } from '../../utils/date-utils';
+
+import i18next from 'i18next';
+import { Build } from '@stencil/core';
+
+if (Build.isTesting) {
+  // Make i18next.t() return the key instead of the value
+  i18next.init({ lng: 'cimode' });
+}
 
 /**
  * By default all date components have the following validation:
@@ -26,6 +35,8 @@ import {
  * @maturityCategory caution
  * @maturityLevel available
  * @guidanceHref form/memorable-date
+ * @translations English
+ * @translations Spanish
  */
 @Component({
   tag: 'va-memorable-date',
@@ -163,6 +174,16 @@ export class VaMemorableDate {
   })
   componentLibraryAnalytics: EventEmitter;
 
+  connectedCallback() {
+    i18next.on('languageChanged', () => {
+      forceUpdate(this.el);
+    });
+  }
+
+  disconnectedCallback() {
+    i18next.off('languageChanged');
+  }
+
   render() {
     const {
       required,
@@ -183,23 +204,20 @@ export class VaMemorableDate {
       <Host onBlur={handleDateBlur}>
         <fieldset>
           <legend>
-            {label} {required && <span class="required">(*Required)</span>}
-            <div id="dateHint">
-              Please enter two digits for the month and day and four digits for
-              the year.
-            </div>
+            {label} {required && <span class="required">{i18next.t('required')}</span>}
+            <div id="dateHint">{i18next.t('date-hint')}.</div>
           </legend>
           <slot />
           <span id="error-message" role="alert">
             {error && (
               <Fragment>
-                <span class="sr-only">Error</span> {error}
+                <span class="sr-only">{i18next.t('error')}</span> {error}
               </Fragment>
             )}
           </span>
           <div class="date-container">
             <va-text-input
-              label="Month"
+              label={i18next.t('month')}
               name={`${name}Month`}
               maxlength={2}
               minlength={2}
@@ -216,7 +234,7 @@ export class VaMemorableDate {
               type="text"
             />
             <va-text-input
-              label="Day"
+              label={i18next.t('day')}
               name={`${name}Day`}
               maxlength={2}
               minlength={2}
@@ -233,7 +251,7 @@ export class VaMemorableDate {
               type="text"
             />
             <va-text-input
-              label="Year"
+              label={i18next.t('year')}
               name={`${name}Year`}
               maxlength={4}
               minlength={4}
