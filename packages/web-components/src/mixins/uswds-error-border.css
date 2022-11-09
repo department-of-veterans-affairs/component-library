@@ -1,5 +1,5 @@
 :host([error][uswds]:not([error=''])) {
-    border-left: 0.4rem solid #b50909;
+    border-left: 0.4rem solid #b50909; /* USWDS red-60v, $theme-color-error-dark */
     padding-left: 1rem;
     position: relative;
 }
