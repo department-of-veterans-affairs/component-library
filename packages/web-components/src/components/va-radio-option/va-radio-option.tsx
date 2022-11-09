@@ -97,9 +97,9 @@ export class VaRadioOption {
             disabled={disabled}
             onClick={() => this.handleChange()}
           />
-          <label htmlFor={id} class="usa-radio__label">
+          <label htmlFor={id} id="option-label" class="usa-radio__label">
             {label}
-            {this.description && <span class="usa-radio__label-description" aria-describedby={id}>{this.description}</span>}
+            {this.description && <span class="usa-radio__label-description" aria-describedby="option-label">{this.description}</span>}
           </label>
         </div>
       )
