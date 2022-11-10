@@ -36,7 +36,7 @@ describe('va-pagination', () => {
 
     const element = await page.find('va-pagination');
     expect(element).toEqualHtml(`
-      <va-pagination class="hydrated" page="3" pages="5" role="navigation">
+      <va-pagination class="hydrated" page="3" pages="5" role="navigation" aria-label="Pagination">
         <mock:shadow-root>
           <ul class="pagination-prev">
           <li>
