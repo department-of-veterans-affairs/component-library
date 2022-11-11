@@ -3,8 +3,9 @@ import './style.scss';
 import '@department-of-veterans-affairs/formation/dist/formation';
 
 import '@department-of-veterans-affairs/component-library/dist/main.css';
-import { VaAccordion } from '@department-of-veterans-affairs/web-components/dist/components/va-accordion';
-import { VaAccordionItem } from '@department-of-veterans-affairs/web-components/dist/components/va-accordion-item';
+
+import { VaAccordion } from '@department-of-veterans-affairs/component-library/dist/components/va-accordion';
+import { VaAccordionItem } from '@department-of-veterans-affairs/component-library/dist/components/va-accordion-item';
 
 customElements.define('va-accordion', VaAccordion);
 customElements.define('va-accordion-item', VaAccordionItem);
