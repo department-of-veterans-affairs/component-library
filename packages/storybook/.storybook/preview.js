@@ -3,14 +3,11 @@ import './style.scss';
 import '@department-of-veterans-affairs/formation/dist/formation';
 
 import '@department-of-veterans-affairs/component-library/dist/main.css';
-import {
-  applyPolyfills,
-  defineCustomElements,
-} from '@department-of-veterans-affairs/component-library';
+import { VaAccordion } from '@department-of-veterans-affairs/web-components/dist/components/va-accordion';
+import { VaAccordionItem } from '@department-of-veterans-affairs/web-components/dist/components/va-accordion-item';
 
-applyPolyfills().then(() => {
-  defineCustomElements();
-});
+customElements.define('va-accordion', VaAccordion);
+customElements.define('va-accordion-item', VaAccordionItem);
 
 // This CustomEvent polyfill is for IE11:
 // https://developer.mozilla.org/en-US/docs/Web/API/CustomEvent/CustomEvent#polyfill
