@@ -160,7 +160,6 @@ describe('va-button', () => {
         'background-color': '#0071bb',
         label: 'Edit',
         type: 'primary',
-        event: 'cta-button-click',
       },
     });
   });
