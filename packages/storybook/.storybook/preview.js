@@ -1,6 +1,6 @@
-// import '@department-of-veterans-affairs/formation/dist/formation.min.css';
+import '@department-of-veterans-affairs/formation/dist/formation.min.css';
 import './style.scss';
-// import '@department-of-veterans-affairs/formation/dist/formation';
+import '@department-of-veterans-affairs/formation/dist/formation';
 
 import '@department-of-veterans-affairs/component-library/dist/main.css';
 import {
@@ -107,4 +107,48 @@ export const decorators = [
 // https://github.com/facebook/react/issues/20895
 document.body.onload = function () {
   document.querySelector('#root').setAttribute('role', 'presentation');
+
+  (() => {
+    const oldPushState = history.pushState;
+    history.pushState = function pushState() {
+      const ret = oldPushState.apply(this, arguments);
+      window.dispatchEvent(new Event('pushstate'));
+      window.dispatchEvent(new Event('locationchange'));
+      return ret;
+    };
+
+    const oldReplaceState = history.replaceState;
+    history.replaceState = function replaceState() {
+      const ret = oldReplaceState.apply(this, arguments);
+      window.dispatchEvent(new Event('replacestate'));
+      window.dispatchEvent(new Event('locationchange'));
+      return ret;
+    };
+
+    window.addEventListener('popstate', () => {
+      window.dispatchEvent(new Event('locationchange'));
+    });
+  })();
+
+  if (location.href.includes('uswds')) {
+    document.documentElement.style.fontSize = '16px';
+    document.body.style.fontSize = '16px';
+    document.querySelector('.maturity .usa-label').style.fontSize = '16px';
+  } else {
+    document.documentElement.style.fontSize = '10px';
+    document.body.style.fontSize = '1.6rem';
+    document.querySelector('.maturity .usa-label').style.fontSize = '1.6rem';
+  }
+
+  window.addEventListener('locationchange', (event) => {
+    if (location.href.includes('uswds')) {
+      document.documentElement.style.fontSize = '16px';
+      document.body.style.fontSize = '16px';
+      document.querySelectorAll('.maturity .usa-label').style.fontSize = '16px';
+    } else {
+      document.documentElement.style.fontSize = '10px';
+      document.body.style.fontSize = '1.6rem';
+      document.querySelector('.maturity .usa-label').style.fontSize = '1.6rem';
+    }
+  });
 };
