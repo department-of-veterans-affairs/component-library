@@ -36,6 +36,33 @@ applyPolyfills().then(() => {
   window.CustomEvent = CustomEvent;
 })();
 
+/**
+ * Detect if the URL has changed. When the URL has changed, the
+ * custom event `locationchange` will dispatch.
+ * The native events `hashchange` and `popstate` are not reliable.
+ */
+(() => {
+  const oldPushState = history.pushState;
+  history.pushState = function pushState() {
+    const ret = oldPushState.apply(this, arguments);
+    window.dispatchEvent(new Event('pushstate'));
+    window.dispatchEvent(new Event('locationchange'));
+    return ret;
+  };
+
+  const oldReplaceState = history.replaceState;
+  history.replaceState = function replaceState() {
+    const ret = oldReplaceState.apply(this, arguments);
+    window.dispatchEvent(new Event('replacestate'));
+    window.dispatchEvent(new Event('locationchange'));
+    return ret;
+  };
+
+  window.addEventListener('popstate', () => {
+    window.dispatchEvent(new Event('locationchange'));
+  });
+})();
+
 const viewports = {
   xsmall: {
     name: 'XSmall Screen',
@@ -102,53 +129,61 @@ export const decorators = [
   ),
 ];
 
+/**
+ * The dynamic CSS added when the URL has `uswds` in it.
+ * body, html, .usa-label, button
+ */
+function addUswdsStyles() {
+  
+  document.documentElement.style.fontSize = '16px';
+  document.body.style.fontSize = '16px';
+  const label = document.querySelector('.usa-label');
+  if (label) {
+    label.style.padding = '1px 6px';
+    label.style.fontSize = '16px';
+  }
+  const buttons = document.querySelectorAll('button');
+  buttons.forEach(button => {
+    button.style.padding = '10px 20px';
+  });
+}
+
+/**
+ * The dynamic CSS added when the URL does not have `uswds` in it.
+ * These styles are from Formation.
+ * body, html, .usa-label, button
+ */
+function addFormationStyles() {
+  document.documentElement.style.fontSize = '10px';
+  document.body.style.fontSize = '1.6rem';
+  const label = document.querySelector('.usa-label');
+  if (label) {
+    label.style.padding = '0.1rem 0.7rem';
+    label.style.fontSize = '1.5rem';
+  }
+  const buttons = document.querySelectorAll('button');
+  buttons.forEach(button => {
+    button.style.padding = '1rem 2rem';
+  });
+}
+
 // Fix for React 17/NVDA bug where React root is read as "clickable"
 // https://github.com/nvaccess/nvda/issues/13262
 // https://github.com/facebook/react/issues/20895
 document.body.onload = function () {
   document.querySelector('#root').setAttribute('role', 'presentation');
 
-  (() => {
-    const oldPushState = history.pushState;
-    history.pushState = function pushState() {
-      const ret = oldPushState.apply(this, arguments);
-      window.dispatchEvent(new Event('pushstate'));
-      window.dispatchEvent(new Event('locationchange'));
-      return ret;
-    };
+  console.log('location.href has uswds?', location.href.includes('uswds'));
 
-    const oldReplaceState = history.replaceState;
-    history.replaceState = function replaceState() {
-      const ret = oldReplaceState.apply(this, arguments);
-      window.dispatchEvent(new Event('replacestate'));
-      window.dispatchEvent(new Event('locationchange'));
-      return ret;
-    };
-
-    window.addEventListener('popstate', () => {
-      window.dispatchEvent(new Event('locationchange'));
-    });
-  })();
-
-  if (location.href.includes('uswds')) {
-    document.documentElement.style.fontSize = '16px';
-    document.body.style.fontSize = '16px';
-    document.querySelector('.maturity .usa-label').style.fontSize = '16px';
-  } else {
-    document.documentElement.style.fontSize = '10px';
-    document.body.style.fontSize = '1.6rem';
-    document.querySelector('.maturity .usa-label').style.fontSize = '1.6rem';
-  }
+  // Initial page load dynamic styles.
+  location.href.includes('uswds') ? addUswdsStyles() : addFormationStyles();
 
   window.addEventListener('locationchange', (event) => {
+    console.log('** location.href has uswds?', location.href.includes('uswds'))
     if (location.href.includes('uswds')) {
-      document.documentElement.style.fontSize = '16px';
-      document.body.style.fontSize = '16px';
-      document.querySelectorAll('.maturity .usa-label').style.fontSize = '16px';
+      addUswdsStyles();
     } else {
-      document.documentElement.style.fontSize = '10px';
-      document.body.style.fontSize = '1.6rem';
-      document.querySelector('.maturity .usa-label').style.fontSize = '1.6rem';
+      addFormationStyles();
     }
   });
 };
