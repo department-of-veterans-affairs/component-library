@@ -316,4 +316,16 @@ describe('va-text-input', () => {
       'rgb(46, 133, 64)',
     );
   });
+
+  it('checks for autocomplete attribute', async () => {
+    const page = await newE2EPage();
+    await page.setContent(
+      '<va-text-input autocomplete="email" />',
+    );
+
+    // Level-setting expectations
+    const inputEl = await page.find('va-text-input >>> input');
+    expect(await inputEl.getProperty('autocomplete')).toBe('email');
+    expect(await page.find('va-text-input >>> small')).toBeNull();
+  });
 });

@@ -207,6 +207,7 @@ export class VaTextInput {
       minlength,
       pattern,
       name,
+      autocomplete,
       handleInput,
       handleBlur,
     } = this;
@@ -242,6 +243,7 @@ export class VaTextInput {
           minlength={minlength}
           pattern={pattern}
           name={name}
+          autocomplete={autocomplete}
           required={required || null}
           part="input"
         />
