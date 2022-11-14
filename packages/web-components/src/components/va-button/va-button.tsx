@@ -82,7 +82,6 @@ export class VaButton {
         componentName: 'va-button',
         action: 'click',
         details: {
-          event: 'cta-button-click',
           type: this.secondary ? 'secondary' : 'primary',
           label: this.getButtonText(),
           'background-color': this.secondary ? 'white' : '#0071bb',
