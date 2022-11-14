@@ -3,12 +3,14 @@ import './style.scss';
 import '@department-of-veterans-affairs/formation/dist/formation';
 
 import '@department-of-veterans-affairs/component-library/dist/main.css';
+import {
+  applyPolyfills,
+  defineCustomElements,
+} from '@department-of-veterans-affairs/component-library';
 
-import { VaAccordion } from '@department-of-veterans-affairs/component-library/dist/components/va-accordion';
-import { VaAccordionItem } from '@department-of-veterans-affairs/component-library/dist/components/va-accordion-item';
-
-customElements.define('va-accordion', VaAccordion);
-customElements.define('va-accordion-item', VaAccordionItem);
+applyPolyfills().then(() => {
+  defineCustomElements();
+});
 
 // This CustomEvent polyfill is for IE11:
 // https://developer.mozilla.org/en-US/docs/Web/API/CustomEvent/CustomEvent#polyfill
@@ -82,7 +84,13 @@ export const parameters = {
   options: {
     storySort: {
       method: 'alphabetical',
-      order: ['About', ['Introduction'], 'Components', 'Under development', 'Deprecated'],
+      order: [
+        'About',
+        ['Introduction'],
+        'Components',
+        'Under development',
+        'Deprecated',
+      ],
     },
   },
   viewport: {
