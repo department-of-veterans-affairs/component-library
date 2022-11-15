@@ -741,7 +741,7 @@ export namespace Components {
     }
     interface VaTextInput {
         /**
-          * What to tell the browser to auto-complete the field with.
+          * Allows the browser to automatically complete the input.
          */
         "autocomplete"?: string;
         /**
@@ -2025,7 +2025,7 @@ declare namespace LocalJSX {
     }
     interface VaTextInput {
         /**
-          * What to tell the browser to auto-complete the field with.
+          * Allows the browser to automatically complete the input.
          */
         "autocomplete"?: string;
         /**
