@@ -57,6 +57,11 @@ module.exports = {
           to: './',
           context: path.resolve(__dirname, '../', 'web-components'),
         },
+        {
+          from: 'components/**/*',
+          to: './',
+          context: path.resolve(__dirname, '../', 'web-components/dist'),
+        },
       ],
     }),
   ],
