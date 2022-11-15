@@ -326,6 +326,5 @@ describe('va-text-input', () => {
     // Level-setting expectations
     const inputEl = await page.find('va-text-input >>> input');
     expect(await inputEl.getProperty('autocomplete')).toBe('email');
-    expect(await page.find('va-text-input >>> small')).toBeNull();
   });
 });
