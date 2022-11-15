@@ -157,7 +157,6 @@ describe('va-button', () => {
       action: 'click',
       componentName: 'va-button',
       details: {
-        'background-color': '#0071bb',
         label: 'Edit',
         type: 'primary',
       },
