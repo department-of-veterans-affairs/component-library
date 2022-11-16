@@ -741,7 +741,7 @@ export namespace Components {
     }
     interface VaTextInput {
         /**
-          * What to tell the browser to auto-complete the field with.
+          * Allows the browser to automatically complete the input.
          */
         "autocomplete"?: string;
         /**
@@ -837,6 +837,126 @@ export namespace Components {
          */
         "value"?: string;
     }
+}
+export interface VaAccordionCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLVaAccordionElement;
+}
+export interface VaAccordionItemCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLVaAccordionItemElement;
+}
+export interface VaAdditionalInfoCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLVaAdditionalInfoElement;
+}
+export interface VaAlertCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLVaAlertElement;
+}
+export interface VaAlertExpandableCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLVaAlertExpandableElement;
+}
+export interface VaBannerCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLVaBannerElement;
+}
+export interface VaBreadcrumbsCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLVaBreadcrumbsElement;
+}
+export interface VaButtonCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLVaButtonElement;
+}
+export interface VaButtonPairCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLVaButtonPairElement;
+}
+export interface VaCheckboxCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLVaCheckboxElement;
+}
+export interface VaCheckboxGroupCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLVaCheckboxGroupElement;
+}
+export interface VaDateCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLVaDateElement;
+}
+export interface VaFileInputCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLVaFileInputElement;
+}
+export interface VaLinkCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLVaLinkElement;
+}
+export interface VaLoadingIndicatorCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLVaLoadingIndicatorElement;
+}
+export interface VaMemorableDateCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLVaMemorableDateElement;
+}
+export interface VaModalCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLVaModalElement;
+}
+export interface VaNumberInputCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLVaNumberInputElement;
+}
+export interface VaOnThisPageCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLVaOnThisPageElement;
+}
+export interface VaPaginationCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLVaPaginationElement;
+}
+export interface VaPrivacyAgreementCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLVaPrivacyAgreementElement;
+}
+export interface VaProgressBarCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLVaProgressBarElement;
+}
+export interface VaPromoBannerCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLVaPromoBannerElement;
+}
+export interface VaRadioCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLVaRadioElement;
+}
+export interface VaRadioOptionCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLVaRadioOptionElement;
+}
+export interface VaSegmentedProgressBarCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLVaSegmentedProgressBarElement;
+}
+export interface VaSelectCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLVaSelectElement;
+}
+export interface VaTelephoneCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLVaTelephoneElement;
+}
+export interface VaTextInputCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLVaTextInputElement;
+}
+export interface VaTextareaCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLVaTextareaElement;
 }
 declare global {
     interface HTMLVaAccordionElement extends Components.VaAccordion, HTMLStencilElement {
@@ -1114,7 +1234,7 @@ declare namespace LocalJSX {
         /**
           * The event used to track usage of the component. This is emitted when an accordion item is toggled and disableAnalytics is not true.
          */
-        "onComponent-library-analytics"?: (event: CustomEvent<any>) => void;
+        "onComponent-library-analytics"?: (event: VaAccordionCustomEvent<any>) => void;
         /**
           * True if only a single item can be opened at once
          */
@@ -1136,7 +1256,7 @@ declare namespace LocalJSX {
         /**
           * This event is fired so that va-accordion element can manage which items are opened or closed
          */
-        "onAccordionItemToggled"?: (event: CustomEvent<any>) => void;
+        "onAccordionItemToggled"?: (event: VaAccordionItemCustomEvent<any>) => void;
         /**
           * True if the item is open
          */
@@ -1158,7 +1278,7 @@ declare namespace LocalJSX {
         /**
           * The event used to track usage of the component. This is emitted when an anchor link is clicked and disableAnalytics is not true.
          */
-        "onComponent-library-analytics"?: (event: CustomEvent<any>) => void;
+        "onComponent-library-analytics"?: (event: VaAdditionalInfoCustomEvent<any>) => void;
         /**
           * The text to trigger the expansion
          */
@@ -1188,15 +1308,15 @@ declare namespace LocalJSX {
         /**
           * Fires when the component is closed by clicking on the close icon. This fires only when closeable is true.
          */
-        "onCloseEvent"?: (event: CustomEvent<any>) => void;
+        "onCloseEvent"?: (event: VaAlertCustomEvent<any>) => void;
         /**
           * The event used to track usage of the component. This is emitted when an anchor link is clicked and disableAnalytics is not true.
          */
-        "onComponent-library-analytics"?: (event: CustomEvent<any>) => void;
+        "onComponent-library-analytics"?: (event: VaAlertCustomEvent<any>) => void;
         /**
           * Fires when the component has successfully finished rendering for the first time.
          */
-        "onVa-component-did-load"?: (event: CustomEvent<any>) => void;
+        "onVa-component-did-load"?: (event: VaAlertCustomEvent<any>) => void;
         /**
           * This option only takes effect when background-only is true. If `true`, the background-only alert will include an icon.
          */
@@ -1222,7 +1342,7 @@ declare namespace LocalJSX {
         /**
           * The event used to track usage of the component. This is emitted when an anchor link is clicked and disableAnalytics is not true.
          */
-        "onComponent-library-analytics"?: (event: CustomEvent<any>) => void;
+        "onComponent-library-analytics"?: (event: VaAlertExpandableCustomEvent<any>) => void;
         /**
           * Determines the icon and background color. One of `info`, `error`, `success`, `warning`, or `continue`
          */
@@ -1246,7 +1366,7 @@ declare namespace LocalJSX {
         /**
           * The event used to track usage of the component. This is emitted when an anchor link or the dismiss icon is clicked and disableAnalytics is not true.
          */
-        "onComponent-library-analytics"?: (event: CustomEvent<any>) => void;
+        "onComponent-library-analytics"?: (event: VaBannerCustomEvent<any>) => void;
         /**
           * Enable the close functionality. The banner will be closed until storage is cleared.
          */
@@ -1276,7 +1396,7 @@ declare namespace LocalJSX {
         /**
           * The event used to track usage of the component. This is emitted when a breadcrumb anchor is clicked and disableAnalytics is not true.
          */
-        "onComponent-library-analytics"?: (event: CustomEvent<any>) => void;
+        "onComponent-library-analytics"?: (event: VaBreadcrumbsCustomEvent<any>) => void;
     }
     interface VaButton {
         /**
@@ -1306,7 +1426,7 @@ declare namespace LocalJSX {
         /**
           * The event used to track usage of the component.
          */
-        "onComponent-library-analytics"?: (event: CustomEvent<any>) => void;
+        "onComponent-library-analytics"?: (event: VaButtonCustomEvent<any>) => void;
         /**
           * If `true`, the button will use the secondary variant.
          */
@@ -1332,15 +1452,15 @@ declare namespace LocalJSX {
         /**
           * The event used to track usage of the component.
          */
-        "onComponent-library-analytics"?: (event: CustomEvent<any>) => void;
+        "onComponent-library-analytics"?: (event: VaButtonPairCustomEvent<any>) => void;
         /**
           * Fires when the primary button is clicked.
          */
-        "onPrimaryClick"?: (event: CustomEvent<any>) => void;
+        "onPrimaryClick"?: (event: VaButtonPairCustomEvent<any>) => void;
         /**
           * Fires when the secondary button is clicked.
          */
-        "onSecondaryClick"?: (event: CustomEvent<any>) => void;
+        "onSecondaryClick"?: (event: VaButtonPairCustomEvent<any>) => void;
         /**
           * Applies to the primary button.
          */
@@ -1382,11 +1502,11 @@ declare namespace LocalJSX {
         /**
           * The event used to track usage of the component. This is emitted when the input value changes and enableAnalytics is true.
          */
-        "onComponent-library-analytics"?: (event: CustomEvent<any>) => void;
+        "onComponent-library-analytics"?: (event: VaCheckboxCustomEvent<any>) => void;
         /**
           * The event emitted when the input value changes.
          */
-        "onVaChange"?: (event: CustomEvent<any>) => void;
+        "onVaChange"?: (event: VaCheckboxCustomEvent<any>) => void;
         /**
           * Set the input to required and render the (Required) text.
          */
@@ -1408,7 +1528,7 @@ declare namespace LocalJSX {
         /**
           * The event used to track usage of the component. This is emitted when an input value changes and enableAnalytics is true.
          */
-        "onComponent-library-analytics"?: (event: CustomEvent<any>) => void;
+        "onComponent-library-analytics"?: (event: VaCheckboxGroupCustomEvent<any>) => void;
         /**
           * Whether or not this input field is required.
          */
@@ -1441,15 +1561,15 @@ declare namespace LocalJSX {
         /**
           * The event used to track usage of the component. This is emitted when an input value changes and enableAnalytics is true.
          */
-        "onComponent-library-analytics"?: (event: CustomEvent<any>) => void;
+        "onComponent-library-analytics"?: (event: VaDateCustomEvent<any>) => void;
         /**
           * Fires when the date input loses focus
          */
-        "onDateBlur"?: (event: CustomEvent<any>) => void;
+        "onDateBlur"?: (event: VaDateCustomEvent<any>) => void;
         /**
           * Fires when the date input loses focus after its value was changed
          */
-        "onDateChange"?: (event: CustomEvent<any>) => void;
+        "onDateChange"?: (event: VaDateCustomEvent<any>) => void;
         /**
           * Render marker indicating field is required.
          */
@@ -1489,11 +1609,11 @@ declare namespace LocalJSX {
         /**
           * The event used to track usage of the component. This is emitted when the file input changes and enableAnalytics is true.
          */
-        "onComponent-library-analytics"?: (event: CustomEvent<any>) => void;
+        "onComponent-library-analytics"?: (event: VaFileInputCustomEvent<any>) => void;
         /**
           * The event emitted when the file input value changes.
          */
-        "onVaChange"?: (event: CustomEvent<any>) => void;
+        "onVaChange"?: (event: VaFileInputCustomEvent<any>) => void;
         /**
           * Sets the input to required and renders the (*Required) text.
          */
@@ -1535,7 +1655,7 @@ declare namespace LocalJSX {
         /**
           * The event used to track usage of the component.
          */
-        "onComponent-library-analytics"?: (event: CustomEvent<any>) => void;
+        "onComponent-library-analytics"?: (event: VaLinkCustomEvent<any>) => void;
         /**
           * The number of pages of the file. Only displayed if download is `true`.
          */
@@ -1565,7 +1685,7 @@ declare namespace LocalJSX {
         /**
           * The event used to track usage of the component.
          */
-        "onComponent-library-analytics"?: (event: CustomEvent<any>) => void;
+        "onComponent-library-analytics"?: (event: VaLoadingIndicatorCustomEvent<any>) => void;
         /**
           * Set to true if the loading indicator should capture focus
          */
@@ -1594,15 +1714,15 @@ declare namespace LocalJSX {
         /**
           * The event used to track usage of the component. This is emitted when an input value changes and enableAnalytics is true.
          */
-        "onComponent-library-analytics"?: (event: CustomEvent<any>) => void;
+        "onComponent-library-analytics"?: (event: VaMemorableDateCustomEvent<any>) => void;
         /**
           * Fires when the date input loses focus
          */
-        "onDateBlur"?: (event: CustomEvent<any>) => void;
+        "onDateBlur"?: (event: VaMemorableDateCustomEvent<any>) => void;
         /**
           * Fires when the date input loses focus after its value was changed
          */
-        "onDateChange"?: (event: CustomEvent<any>) => void;
+        "onDateChange"?: (event: VaMemorableDateCustomEvent<any>) => void;
         /**
           * Render marker indicating field is required.
          */
@@ -1640,19 +1760,19 @@ declare namespace LocalJSX {
         /**
           * Fires when modal is closed.
          */
-        "onCloseEvent"?: (event: CustomEvent<any>) => void;
+        "onCloseEvent"?: (event: VaModalCustomEvent<any>) => void;
         /**
           * The event used to track usage of the component. Fires when a a page is selected if enable-analytics is true.
          */
-        "onComponent-library-analytics"?: (event: CustomEvent<any>) => void;
+        "onComponent-library-analytics"?: (event: VaModalCustomEvent<any>) => void;
         /**
           * Fires when primary button is clicked.
          */
-        "onPrimaryButtonClick"?: (event: CustomEvent<any>) => void;
+        "onPrimaryButtonClick"?: (event: VaModalCustomEvent<any>) => void;
         /**
           * Fires when secondary button is clicked.
          */
-        "onSecondaryButtonClick"?: (event: CustomEvent<any>) => void;
+        "onSecondaryButtonClick"?: (event: VaModalCustomEvent<any>) => void;
         /**
           * Primary button text
          */
@@ -1699,7 +1819,7 @@ declare namespace LocalJSX {
         /**
           * The event used to track usage of the component. This is emitted when the input is blurred and enableAnalytics is true.
          */
-        "onComponent-library-analytics"?: (event: CustomEvent<any>) => void;
+        "onComponent-library-analytics"?: (event: VaNumberInputCustomEvent<any>) => void;
         /**
           * Set the input to required and render the (Required) text.
          */
@@ -1735,7 +1855,7 @@ declare namespace LocalJSX {
         /**
           * The event used to track usage of the component. This is emitted when the user clicks on a link and enableAnalytics is true.
          */
-        "onComponent-library-analytics"?: (event: CustomEvent<any>) => void;
+        "onComponent-library-analytics"?: (event: VaOnThisPageCustomEvent<any>) => void;
     }
     interface VaPagination {
         /**
@@ -1753,11 +1873,11 @@ declare namespace LocalJSX {
         /**
           * The event used to track usage of the component. Fires when a a page is selected if enable-analytics is true.
          */
-        "onComponent-library-analytics"?: (event: CustomEvent<any>) => void;
+        "onComponent-library-analytics"?: (event: VaPaginationCustomEvent<any>) => void;
         /**
           * Fires when a page is selected
          */
-        "onPageSelect"?: (event: CustomEvent<any>) => void;
+        "onPageSelect"?: (event: VaPaginationCustomEvent<any>) => void;
         /**
           * The current page number
          */
@@ -1783,11 +1903,11 @@ declare namespace LocalJSX {
         /**
           * The event used to track usage of the component. This is emitted when the checked value changes and enableAnalytics is true.
          */
-        "onComponent-library-analytics"?: (event: CustomEvent<any>) => void;
+        "onComponent-library-analytics"?: (event: VaPrivacyAgreementCustomEvent<any>) => void;
         /**
           * The event emitted when the checkbox changes.
          */
-        "onVaChange"?: (event: CustomEvent<any>) => void;
+        "onVaChange"?: (event: VaPrivacyAgreementCustomEvent<any>) => void;
         /**
           * Whether to display the error message or not.
          */
@@ -1807,7 +1927,7 @@ declare namespace LocalJSX {
         /**
           * The event used to track usage of the component. This is emitted when percent is 0 or 100 and enableAnalytics is true.
          */
-        "onComponent-library-analytics"?: (event: CustomEvent<any>) => void;
+        "onComponent-library-analytics"?: (event: VaProgressBarCustomEvent<any>) => void;
         /**
           * Percent of progress made. 0 to 100.
          */
@@ -1825,11 +1945,11 @@ declare namespace LocalJSX {
         /**
           * Fires when the component is closed by clicking on the close icon.
          */
-        "onCloseEvent"?: (event: CustomEvent<any>) => void;
+        "onCloseEvent"?: (event: VaPromoBannerCustomEvent<any>) => void;
         /**
           * The event used to track usage of the component. This is emitted when an anchor link or the dismiss icon is clicked and disableAnalytics is not true.
          */
-        "onComponent-library-analytics"?: (event: CustomEvent<any>) => void;
+        "onComponent-library-analytics"?: (event: VaPromoBannerCustomEvent<any>) => void;
         /**
           * Controls which icon gets used. Options are 'announcement', 'news', or 'email-signup'.
          */
@@ -1855,11 +1975,11 @@ declare namespace LocalJSX {
         /**
           * The event used to track usage of the component. This is emitted when a radio option is selected and enableAnalytics is true.
          */
-        "onComponent-library-analytics"?: (event: CustomEvent<any>) => void;
+        "onComponent-library-analytics"?: (event: VaRadioCustomEvent<any>) => void;
         /**
           * The event emitted when the selected value changes
          */
-        "onVaValueChange"?: (event: CustomEvent<any>) => void;
+        "onVaValueChange"?: (event: VaRadioCustomEvent<any>) => void;
         /**
           * Whether or not this input field is required.
          */
@@ -1885,7 +2005,7 @@ declare namespace LocalJSX {
         /**
           * The event emitted when the selected option value changes
          */
-        "onRadioOptionSelected"?: (event: CustomEvent<any>) => void;
+        "onRadioOptionSelected"?: (event: VaRadioOptionCustomEvent<any>) => void;
         /**
           * The value attribute for the input element.
          */
@@ -1925,7 +2045,7 @@ declare namespace LocalJSX {
         /**
           * The event used to track usage of the component. This is emitted when the component renders and enableAnalytics is true.
          */
-        "onComponent-library-analytics"?: (event: CustomEvent<any>) => void;
+        "onComponent-library-analytics"?: (event: VaSegmentedProgressBarCustomEvent<any>) => void;
         /**
           * The total number of segments in the progress bar
          */
@@ -1955,15 +2075,15 @@ declare namespace LocalJSX {
         /**
           * The event used to track usage of the component. This is emitted when an option is selected and enableAnalytics is true.
          */
-        "onComponent-library-analytics"?: (event: CustomEvent<any>) => void;
+        "onComponent-library-analytics"?: (event: VaSelectCustomEvent<any>) => void;
         /**
           * The event attached to select's onkeydown
          */
-        "onVaKeyDown"?: (event: CustomEvent<any>) => void;
+        "onVaKeyDown"?: (event: VaSelectCustomEvent<any>) => void;
         /**
           * The event emitted when the selected value changes
          */
-        "onVaSelect"?: (event: CustomEvent<any>) => void;
+        "onVaSelect"?: (event: VaSelectCustomEvent<any>) => void;
         /**
           * Whether or not this is a required field.
          */
@@ -2009,7 +2129,7 @@ declare namespace LocalJSX {
         /**
           * The event used to track usage of the component. This is emitted when clicking on an anchor link.
          */
-        "onComponent-library-analytics"?: (event: CustomEvent<any>) => void;
+        "onComponent-library-analytics"?: (event: VaTelephoneCustomEvent<any>) => void;
         /**
           * Indicates if this is a number meant to be used  to text.
          */
@@ -2025,7 +2145,7 @@ declare namespace LocalJSX {
     }
     interface VaTextInput {
         /**
-          * What to tell the browser to auto-complete the field with.
+          * Allows the browser to automatically complete the input.
          */
         "autocomplete"?: string;
         /**
@@ -2069,7 +2189,7 @@ declare namespace LocalJSX {
         /**
           * The event used to track usage of the component. This is emitted when the input is blurred and enableAnalytics is true.
          */
-        "onComponent-library-analytics"?: (event: CustomEvent<any>) => void;
+        "onComponent-library-analytics"?: (event: VaTextInputCustomEvent<any>) => void;
         /**
           * The regular expression that the input element's value is checked against on submission
          */
@@ -2115,7 +2235,7 @@ declare namespace LocalJSX {
         /**
           * The event used to track usage of the component. This is emitted when the textarea is blurred and `enableAnalytics` is true
          */
-        "onComponent-library-analytics"?: (event: CustomEvent<any>) => void;
+        "onComponent-library-analytics"?: (event: VaTextareaCustomEvent<any>) => void;
         /**
           * The placeholder string.
          */
