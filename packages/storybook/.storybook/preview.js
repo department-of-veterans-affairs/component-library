@@ -146,13 +146,13 @@ function addFormationStyles() {
   document.body.style.fontSize = '1.6rem';
 }
 
-// Fix for React 17/NVDA bug where React root is read as "clickable"
-// https://github.com/nvaccess/nvda/issues/13262
-// https://github.com/facebook/react/issues/20895
 document.body.onload = function () {
+  // Fix for React 17/NVDA bug where React root is read as "clickable"
+  // https://github.com/nvaccess/nvda/issues/13262
+  // https://github.com/facebook/react/issues/20895
   document.querySelector('#root').setAttribute('role', 'presentation');
 
-  // Initial page load dynamic styles.
+  /** Styles added for USWDS 3 integration into Storybook **/
   location.href.includes('uswds') ? addUswdsStyles() : addFormationStyles();
 
   window.addEventListener('locationchange', (event) => {

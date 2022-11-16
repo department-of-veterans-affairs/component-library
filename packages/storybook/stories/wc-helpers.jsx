@@ -164,7 +164,7 @@ export function MaturityScale({ category, level }) {
   if (!colors) return null;
 
   return (
-    <div className="maturity vads-u-margin-bottom--3">
+    <div className="vads-u-margin-bottom--3">
       <span className={`usa-label ${colors}`}>
         {category}: {level}
       </span>
