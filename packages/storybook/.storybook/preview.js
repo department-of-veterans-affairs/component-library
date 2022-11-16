@@ -130,41 +130,20 @@ export const decorators = [
 ];
 
 /**
- * The dynamic CSS added when the URL has `uswds` in it.
- * body, html, .usa-label, button
+ * The dynamic CSS added when the URL has `uswds` in it: body, html
  */
 function addUswdsStyles() {
-  
   document.documentElement.style.fontSize = '16px';
   document.body.style.fontSize = '16px';
-  const label = document.querySelector('.usa-label');
-  if (label) {
-    label.style.padding = '1px 6px';
-    label.style.fontSize = '16px';
-  }
-  const buttons = document.querySelectorAll('button');
-  buttons.forEach(button => {
-    button.style.padding = '10px 20px';
-  });
 }
 
 /**
  * The dynamic CSS added when the URL does not have `uswds` in it.
- * These styles are from Formation.
- * body, html, .usa-label, button
+ * These styles reset Formation: body, html
  */
 function addFormationStyles() {
   document.documentElement.style.fontSize = '10px';
   document.body.style.fontSize = '1.6rem';
-  const label = document.querySelector('.usa-label');
-  if (label) {
-    label.style.padding = '0.1rem 0.7rem';
-    label.style.fontSize = '1.5rem';
-  }
-  const buttons = document.querySelectorAll('button');
-  buttons.forEach(button => {
-    button.style.padding = '1rem 2rem';
-  });
 }
 
 // Fix for React 17/NVDA bug where React root is read as "clickable"
@@ -173,17 +152,10 @@ function addFormationStyles() {
 document.body.onload = function () {
   document.querySelector('#root').setAttribute('role', 'presentation');
 
-  console.log('location.href has uswds?', location.href.includes('uswds'));
-
   // Initial page load dynamic styles.
   location.href.includes('uswds') ? addUswdsStyles() : addFormationStyles();
 
   window.addEventListener('locationchange', (event) => {
-    console.log('** location.href has uswds?', location.href.includes('uswds'))
-    if (location.href.includes('uswds')) {
-      addUswdsStyles();
-    } else {
-      addFormationStyles();
-    }
+    location.href.includes('uswds') ? addUswdsStyles() : addFormationStyles();
   });
 };
