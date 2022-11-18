@@ -1,6 +1,41 @@
-/*! font definitions could also be provided */
+@use "uswds-core/src/styles/settings/settings-typography" with (
+  $theme-font-path: 'fonts',
+  $theme-typeface-tokens: (
+    bitter: (
+      display-name: 'Bitter',
+      cap-height: 364px
+      )
+    ),
+  $theme-font-sans-custom-src: (
+    dir: 'source-sans-pro',
+    roman: (
+      100: false,
+      200: false,
+      300: false,
+      400: 'sourcesanspro-regular-webfont',
+      500: false,
+      600: false,
+      700: 'sourcesanspro-bold-webfont',
+      800: false,
+      900: false,
+    ),
+  ),
+  $theme-font-serif-custom-src: (
+    dir: 'bitter',
+    roman: (
+      100: false,
+      200: false,
+      300: false,
+      400: 'bitter-regular',
+      500: false,
+      600: false,
+      700: 'bitter-bold',
+      800: false,
+      900: false,
+    ),
+  ),
+  $theme-font-type-serif: 'bitter',
+  $theme-font-type-mono: false
+);
 
-// @font-face {
-//   font-family: "Bitter",
-//   src: url('some/asset/dir');
-// }
+@use "uswds-fonts/src/styles/font-face";
