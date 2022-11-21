@@ -22,12 +22,6 @@
   border: 2px solid var(--color-bg-gray-cool-50);
 }
 
-@media (min-width: 30em) {
-  .usa-form {
-    max-width: 304px;
-  }
-}
-
 /* Original Component Styles. */
 
 @import '../../mixins/accessibility.css';
