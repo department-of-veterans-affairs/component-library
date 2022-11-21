@@ -1,12 +1,12 @@
-@use "uswds-core" with ( 
-  $theme-body-font-size: 4,
-);
-
 @use 'uswds-core/src/styles/mixins/helpers/checkbox-and-radio-colors';
 @use 'usa-radio/src/styles/usa-radio';
 
 :host {	
   display: block;
+}
+
+:host(:focus) {
+  outline: none !important;
 }
 
 :host(:focus) label.usa-radio__label::before {	
@@ -32,10 +32,6 @@
 
 :host(:not([uswds])) {
   margin-top: 1rem;
-}
-
-:host(:focus) {
-  outline: none !important;
 }
 
 :host(:not([uswds])) label {
