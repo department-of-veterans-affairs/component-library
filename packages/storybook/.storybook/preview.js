@@ -41,18 +41,16 @@ applyPolyfills().then(() => {
  * The native events `hashchange` and `popstate` were not reliable.
  */
  (() => {
-  const oldPushState = history.pushState;
-  history.pushState = function pushState() {
-    const ret = oldPushState.apply(this, arguments);
+  const pushState = history.pushState;
+  history.pushState = function () {
+    pushState.apply(this, arguments);
     window.dispatchEvent(new Event('locationchange'));
-    return ret;
   };
 
-  const oldReplaceState = history.replaceState;
-  history.replaceState = function replaceState() {
-    const ret = oldReplaceState.apply(this, arguments);
+  const replaceState = history.replaceState;
+  history.replaceState = function () {
+    replaceState.apply(this, arguments);
     window.dispatchEvent(new Event('locationchange'));
-    return ret;
   };
 
   window.addEventListener('popstate', () => {
