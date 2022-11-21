@@ -1,6 +1,6 @@
-// import '@department-of-veterans-affairs/formation/dist/formation.min.css';
+import '@department-of-veterans-affairs/formation/dist/formation.min.css';
 import './style.scss';
-// import '@department-of-veterans-affairs/formation/dist/formation';
+import '@department-of-veterans-affairs/formation/dist/formation';
 
 import '@department-of-veterans-affairs/component-library/dist/main.css';
 import {
@@ -42,13 +42,13 @@ applyPolyfills().then(() => {
  */
  (() => {
   const pushState = history.pushState;
-  history.pushState = function () {
+  history.pushState = function() {
     pushState.apply(this, arguments);
     window.dispatchEvent(new Event('locationchange'));
   };
 
   const replaceState = history.replaceState;
-  history.replaceState = function () {
+  history.replaceState = function() {
     replaceState.apply(this, arguments);
     window.dispatchEvent(new Event('locationchange'));
   };
