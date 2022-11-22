@@ -277,7 +277,7 @@ const USWDSTiledError = ({
 
 const defaultArgs = {
   'enable-analytics': false,
-  'label': 'This is a label',
+  'label': 'Select one historical figure',
   'hint': '',
   'required': false,
   'error': null,
