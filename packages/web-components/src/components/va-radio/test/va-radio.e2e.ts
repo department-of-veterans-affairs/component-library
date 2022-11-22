@@ -434,9 +434,9 @@ describe('va-radio', () => {
     const page = await newE2EPage();
     await page.setContent('<va-radio uswds required></va-radio>');
 
-    const element = await page.find('va-radio >>> .required');
+    const element = await page.find('va-radio >>> .usa-label--required');
     expect(element).toEqualHtml(`
-      <span class="required">
+      <span class="usa-label--required">
         required
       </span>
     `);

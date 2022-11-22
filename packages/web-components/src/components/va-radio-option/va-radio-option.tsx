@@ -38,7 +38,7 @@ export class VaRadioOption {
   @Prop() checked?: boolean = false;
 
   /**
-   * Whether or not the component will use USWDS styling.
+   * Whether or not the component will use USWDS v3. styling.
    */
   @Prop() uswds?: boolean = false;
 
@@ -79,12 +79,11 @@ export class VaRadioOption {
     const { checked, ariaDescribedby, name, value, label, uswds, disabled } = this;
     const id = this.el.id || (name + value);
 
-    const inputClass = classnames({
-      'usa-radio__input': true,
-      'usa-radio__input--tile': this.uswds && this.tile,
-    });
-
     if (uswds) {
+      const inputClass = classnames({
+        'usa-radio__input': true,
+        'usa-radio__input--tile': this.tile,
+      });
       return (
         <div class="usa-radio">
           <input

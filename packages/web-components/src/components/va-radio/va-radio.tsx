@@ -66,7 +66,7 @@ export class VaRadio {
   @Prop() enableAnalytics?: boolean = false;
 
   /**
-   * Whether or not the component will use USWDS styling.
+   * Whether or not the component will use USWDS v3 styling.
    */
    @Prop() uswds?: boolean = false;
 
@@ -228,7 +228,7 @@ export class VaRadio {
           <fieldset class="usa-form usa-fieldset">
             <legend class={legendClass}>
               {label}
-              {required && <span class="required">{i18next.t('required')}</span>}
+              {required && <span class="usa-label--required"> {i18next.t('required')}</span>}
             </legend>
             <span class="usa-error-message" role="alert">
               {error && (

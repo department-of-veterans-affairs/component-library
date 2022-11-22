@@ -605,7 +605,7 @@ export namespace Components {
          */
         "required"?: boolean;
         /**
-          * Whether or not the component will use USWDS styling.
+          * Whether or not the component will use USWDS v3 styling.
          */
         "uswds"?: boolean;
     }
@@ -639,7 +639,7 @@ export namespace Components {
          */
         "tile"?: boolean;
         /**
-          * Whether or not the component will use USWDS styling.
+          * Whether or not the component will use USWDS v3. styling.
          */
         "uswds"?: boolean;
         /**
@@ -2005,7 +2005,7 @@ declare namespace LocalJSX {
          */
         "required"?: boolean;
         /**
-          * Whether or not the component will use USWDS styling.
+          * Whether or not the component will use USWDS v3 styling.
          */
         "uswds"?: boolean;
     }
@@ -2043,7 +2043,7 @@ declare namespace LocalJSX {
          */
         "tile"?: boolean;
         /**
-          * Whether or not the component will use USWDS styling.
+          * Whether or not the component will use USWDS v3. styling.
          */
         "uswds"?: boolean;
         /**
