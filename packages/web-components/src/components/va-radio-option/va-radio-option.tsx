@@ -76,13 +76,13 @@ export class VaRadioOption {
   }
 
   render() {
-    const { checked, ariaDescribedby, name, value, label, uswds, disabled } = this;
+    const { checked, ariaDescribedby, name, value, label, uswds, disabled, tile } = this;
     const id = this.el.id || (name + value);
 
     if (uswds) {
       const inputClass = classnames({
         'usa-radio__input': true,
-        'usa-radio__input--tile': this.tile,
+        'usa-radio__input--tile': tile,
       });
       return (
         <div class="usa-radio">

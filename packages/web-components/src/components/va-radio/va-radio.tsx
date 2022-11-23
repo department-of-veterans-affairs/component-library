@@ -215,13 +215,11 @@ export class VaRadio {
     const { label, hint, required, error, uswds } = this;
     const ariaLabel = label + (required ? ' required' : '');
 
-
-    const legendClass = classnames({
-      'usa-legend': true,
-      'usa-label--error': error
-    });
-
     if (uswds) {
+      const legendClass = classnames({
+        'usa-legend': true,
+        'usa-label--error': error
+      });
       return ( 
         <Host
           aria-invalid={error ? 'true' : 'false'}
