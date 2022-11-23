@@ -177,8 +177,6 @@ const USWDSTiled = ({
 }) => {
   return (
     <>
-      <p>TILED</p>
-
       <va-radio
         enable-analytics={enableAnalytics}
         error={error}
