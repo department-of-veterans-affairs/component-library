@@ -253,7 +253,7 @@ export class VaTextInput {
               {i18next.t('max-chars', { length: maxlength })}
             </small>
             <p class="sr-only" role="alert">
-              Limit reached. You can only use 16 characters in this field.
+              Limit reached. You can only use {maxlength} characters in this field.
             </p>
           </Fragment>
         )}
