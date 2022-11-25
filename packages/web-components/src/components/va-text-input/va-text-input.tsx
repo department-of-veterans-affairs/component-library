@@ -32,7 +32,7 @@ if (Build.isTesting) {
 
 @Component({
   tag: 'va-text-input',
-  styleUrl: 'va-text-input.css',
+  styleUrl: 'va-text-input.scss',
   shadow: true,
 })
 export class VaTextInput {
@@ -257,6 +257,34 @@ export class VaTextInput {
             {i18next.t('min-chars', { length: minlength })}
           </small>
         )}
+        <div>
+          <p>USWDS V. 3</p>
+          <label class="usa-label" htmlFor="input-type-text">Text input label</label>
+          <input class="usa-input" id="input-type-text" name="input-type-text" />
+          <label class="usa-label" htmlFor="input-focus">Text input focused</label>
+          <input class="usa-input usa-focus" id="input-focus" name="input-focus" />
+          <div class="usa-form-group usa-form-group--error">
+            <label class="usa-label usa-label--error" htmlFor="input-error"
+              >Text input error</label
+            >
+            <span class="usa-error-message" id="input-error-message" role="alert"
+              >Helpful error message</span
+            >
+            <input
+              class="usa-input usa-input--error"
+              id="input-error"
+              name="input-error"
+              aria-describedby="input-error-message"
+            />
+          </div>
+          <label class="usa-label" htmlFor="input-success">Text input success</label>
+          <input
+            class="usa-input usa-input--success"
+            id="input-success"
+            name="input-success"
+          />
+          <label class="usa-label" htmlFor="input-type-textarea">Text area label</label>
+        </div>
       </Host>
     );
   }

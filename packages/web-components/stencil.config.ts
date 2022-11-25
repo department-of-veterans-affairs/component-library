@@ -1,4 +1,5 @@
 import { Config } from '@stencil/core';
+import { sass } from '@stencil/sass';
 import { postcss } from '@stencil/postcss';
 import url from 'postcss-url';
 import { reactOutputTarget } from '@stencil/react-output-target';
@@ -7,6 +8,15 @@ export const config: Config = {
   namespace: 'component-library',
   globalStyle: 'src/global/main.css',
   plugins: [
+    sass({ 
+      includePaths: [
+        '../../node_modules/@uswds/uswds/packages/',
+        '../../node_modules/@department-of-veterans-affairs/css-library/src/tokens/',
+      ],
+      injectGlobalPaths: [
+        'src/global/settings.scss',
+      ]
+  }),
     postcss({
       plugins: [url({ url: 'inline' })],
     }),

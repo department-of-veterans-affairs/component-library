@@ -1,0 +1,32 @@
+@import 'variables';
+
+@import 'usa-label/src/styles';
+@import 'usa-input/src/styles';
+
+// ***** OVERRIDES ***** //
+
+.usa-focus {
+  outline: $color-orange solid 4px;
+}
+
+.usa-input--error {
+  border-width: 4px;
+  border-color: $color-primary;
+  border-style: solid;
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+.usa-form-group--error {
+  border-left: 4px solid $color-primary;
+  padding-left: 16px;
+  position: relative;
+}
+
+.usa-input--success {
+  border-width: 4px;
+  border-color: $color-secondary-light;
+  border-style: solid;
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
