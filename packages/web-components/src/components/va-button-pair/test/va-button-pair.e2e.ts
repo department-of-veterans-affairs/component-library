@@ -26,6 +26,7 @@ describe('va-button-pair', () => {
       action: 'click',
       details: {
         type: 'primary',
+        label: 'Yes',
       },
     });
   });
@@ -41,6 +42,7 @@ describe('va-button-pair', () => {
       action: 'click',
       details: {
         type: 'secondary',
+        label: 'No',
       },
     });
   });
