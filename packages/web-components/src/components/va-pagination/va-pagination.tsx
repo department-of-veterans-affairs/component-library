@@ -162,7 +162,7 @@ export class VaPagination {
     });
 
     return (
-      <Host role="navigation">
+      <Host role="navigation" aria-label="Pagination">
         <ul class="pagination-prev">
           {/* START PREV BUTTON */}
           {this.page > 1 && (

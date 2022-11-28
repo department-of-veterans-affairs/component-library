@@ -95,7 +95,7 @@ export class VaTextInput {
   @Prop() minlength?: number;
 
   /**
-   * What to tell the browser to auto-complete the field with.
+   * Allows the browser to automatically complete the input.
    */
   @Prop() autocomplete?: string;
 
@@ -207,6 +207,7 @@ export class VaTextInput {
       minlength,
       pattern,
       name,
+      autocomplete,
       handleInput,
       handleBlur,
     } = this;
@@ -242,6 +243,7 @@ export class VaTextInput {
           minlength={minlength}
           pattern={pattern}
           name={name}
+          autocomplete={autocomplete}
           required={required || null}
           part="input"
         />

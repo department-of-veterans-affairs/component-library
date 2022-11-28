@@ -34,3 +34,12 @@ a.sbdocs-a:hover {
 .resize-y {
   resize: vertical;
 }
+
+/** Global styles for USWDS 3 integration into Storybook **/
+.usa-label {
+  font-size: 15px!important;
+}
+
+button {
+  padding: 10px 20px!important;
+}
