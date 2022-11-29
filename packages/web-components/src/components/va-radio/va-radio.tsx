@@ -249,7 +249,7 @@ export class VaRadio {
           aria-invalid={error ? 'true' : 'false'}
           aria-label={ariaLabel}
         >
-          <legend>
+          <legend part="legend">
             {label}
             {required && <span class="required">{i18next.t('required')}</span>}
           </legend>
