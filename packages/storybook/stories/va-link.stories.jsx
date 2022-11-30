@@ -139,4 +139,5 @@ export const Calendar = VariantTemplate.bind(null);
 Calendar.args = {
   ...defaultArgs,
   calendar: true,
+  text: `Add to calendar`,
 };
