@@ -17,6 +17,7 @@ export default {
 const defaultArgs = {
   'abbr-title': undefined,
   'active': undefined,
+  'calendar': undefined,
   'channel': undefined,
   'disable-analytics': undefined,
   'download': undefined,
@@ -31,6 +32,7 @@ const defaultArgs = {
 const Template = ({
   'abbr-title': abbrTitle,
   active,
+  calendar,
   channel,
   'disable-analytics': disableAnalytics,
   download,
@@ -48,6 +50,7 @@ const Template = ({
       <va-link
         abbr-title={abbrTitle}
         active={active}
+        calendar={calendar}
         channel={channel}
         disable-analytics={disableAnalytics}
         download={download}
@@ -73,6 +76,7 @@ Default.argTypes = propStructure(linkDocs);
 const VariantTemplate = ({
   'abbr-title': abbrTitle,
   active,
+  calendar,
   channel,
   'disable-analytics': disableAnalytics,
   download,
@@ -87,6 +91,7 @@ const VariantTemplate = ({
     <va-link
       abbr-title={abbrTitle}
       active={active}
+      calendar={calendar}
       channel={channel}
       disable-analytics={disableAnalytics}
       download={download}
@@ -128,4 +133,10 @@ Channel.args = {
   ...defaultArgs,
   channel: true,
   text: `Veteran's Affairs`,
+};
+
+export const Calendar = VariantTemplate.bind(null);
+Calendar.args = {
+  ...defaultArgs,
+  calendar: true,
 };
