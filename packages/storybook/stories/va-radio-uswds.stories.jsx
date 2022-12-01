@@ -33,7 +33,6 @@ const vaRadioConst = args => {
     label,
     hint,
     required,
-    tile,
     uswds,
     ...rest
   } = args;
@@ -173,7 +172,6 @@ const USWDSTiled = ({
   required,
   uswds,
   hint,
-  tile
 }) => {
   return (
     <>
@@ -191,7 +189,7 @@ const USWDSTiled = ({
           name="group1" 
           value="1" 
           uswds={uswds}
-          tile={true}
+          tile
         />
         <va-radio-option
           id="frederick-douglass"
@@ -199,7 +197,7 @@ const USWDSTiled = ({
           name="group1"
           value="2"
           uswds={uswds}
-          tile={true}
+          tile
         />
         <va-radio-option
           id="booker-t-washington"
@@ -207,7 +205,7 @@ const USWDSTiled = ({
           name="group1"
           value="3"
           uswds={uswds}
-          tile={true}
+          tile
         />
         <va-radio-option
           id="george-washington-carver"
@@ -217,7 +215,7 @@ const USWDSTiled = ({
           description="This is optional text that can be used to describe the label in more detail."
           disabled={true}
           uswds={uswds}
-          tile={true}
+          tile
         />
       </va-radio>
     </>
@@ -231,7 +229,6 @@ const USWDSTiledError = ({
     required,
     uswds,
     hint,
-    tile
   }) => {
     return (
       <>
@@ -249,7 +246,7 @@ const USWDSTiledError = ({
                 name="group1" 
                 value="1" 
                 uswds={uswds}
-                tile={true}
+                tile
             />
             <va-radio-option
             id="frederick-douglass"
@@ -257,7 +254,7 @@ const USWDSTiledError = ({
             name="group1"
             value="2"
             uswds={uswds}
-            tile={true}
+            tile
             />
             <va-radio-option
             id="booker-t-washington"
@@ -266,7 +263,7 @@ const USWDSTiledError = ({
             value="3"
             description="This is optional text that can be used to describe the label in more detail."
             uswds={uswds}
-            tile={true}
+            tile
             />
             </va-radio>
       </>
