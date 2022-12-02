@@ -57,6 +57,10 @@ i::before {
   font-weight: 400;
 }
 
+:host([calendar]:not([calendar='false'])) i::before {
+  content: '\f133'; /* fa-calendar */
+}
+
 dfn {
   font-style: normal;
 }
