@@ -329,6 +329,10 @@ export namespace Components {
          */
         "active"?: boolean;
         /**
+          * If `true`, a calendar icon will be displayed before the anchor text.
+         */
+        "calendar"?: boolean;
+        /**
           * If `true`, a channel icon will be displayed before the anchor text.
          */
         "channel"?: boolean;
@@ -341,7 +345,7 @@ export namespace Components {
          */
         "download"?: boolean;
         /**
-          * The suggested filename. Only valid if download is `true`.
+          * The suggested filename. Only valid if download or calendar is `true`.
          */
         "filename"?: string;
         /**
@@ -1649,6 +1653,10 @@ declare namespace LocalJSX {
          */
         "active"?: boolean;
         /**
+          * If `true`, a calendar icon will be displayed before the anchor text.
+         */
+        "calendar"?: boolean;
+        /**
           * If `true`, a channel icon will be displayed before the anchor text.
          */
         "channel"?: boolean;
@@ -1661,7 +1669,7 @@ declare namespace LocalJSX {
          */
         "download"?: boolean;
         /**
-          * The suggested filename. Only valid if download is `true`.
+          * The suggested filename. Only valid if download or calendar is `true`.
          */
         "filename"?: string;
         /**
