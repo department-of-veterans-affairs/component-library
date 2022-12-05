@@ -1,4 +1,5 @@
-@import '../../mixins/inputs.css';
+@use 'uswds-core/src/styles/mixins/helpers/checkbox-and-radio-colors';
+@use 'usa-radio/src/styles/usa-radio';
 
 :host {
   display: block;
@@ -9,7 +10,24 @@
   outline: none !important;
 }
 
-label {
+:host(:focus) label.usa-radio__label::before {	
+  outline: 2px solid var(--color-gold-light);	
+  outline-offset: 4px;	
+}
+
+:host([disabled='true']:focus) label.usa-radio__label::before {	
+  outline: none;	
+}
+
+/* Original Components Styles. */
+
+@import '../../mixins/inputs.css';
+
+:host(:not([uswds])) {
+  margin-top: 1rem;
+}
+
+:host(:not([uswds])) label {
   box-sizing: border-box;
   outline: none;
   display: inline-block;
@@ -18,7 +36,7 @@ label {
   padding-left: 6px;
 }
 
-label::before {
+:host(:not([uswds])) label::before {
   box-sizing: border-box;
   border-radius: 100%;
   box-shadow: 0 0 0 2px var(--color-white), 0 0 0 3px var(--color-gray-medium);
@@ -32,12 +50,12 @@ label::before {
   display: inline-block;
 }
 
-:host([aria-checked='true']) label::before {
+:host(:not([uswds])[aria-checked='true']) label::before {
   background-color: var(--color-primary);
   box-shadow: 0 0 0 2px var(--color-white), 0 0 0 4px var(--color-primary);
 }
 
-:host(:focus) label::before {
+:host(:not([uswds]):focus) label::before {
   outline: 2px solid var(--color-gold-light);
   outline-offset: 6px;
 }

@@ -134,6 +134,7 @@ const defaultArgs = {
   'hint': '',
   'required': false,
   'error': null,
+  'uswds': false,
 };
 
 export const Default = Template.bind(null);
@@ -159,8 +160,8 @@ Error.args = {
   error: 'There has been an error',
 };
 
-export const IdUsage = IdUsageTemplate.bind(null);
-IdUsage.args = {
+export const IDUsage = IdUsageTemplate.bind(null);
+IDUsage.args = {
   ...defaultArgs,
   required: true,
 };
