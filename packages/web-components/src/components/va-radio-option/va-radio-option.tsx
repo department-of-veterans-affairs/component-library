@@ -7,10 +7,11 @@ import {
   Prop,
   h,
 } from '@stencil/core';
+import classnames from 'classnames';
 
 @Component({
   tag: 'va-radio-option',
-  styleUrl: 'va-radio-option.css',
+  styleUrl: 'va-radio-option.scss',
   shadow: true,
 })
 export class VaRadioOption {
@@ -37,6 +38,26 @@ export class VaRadioOption {
   @Prop() checked?: boolean = false;
 
   /**
+   * Whether or not the component will use USWDS v3. styling.
+   */
+  @Prop() uswds?: boolean = false;
+
+  /**
+   * Whether or not the component will display as a tile. Available when uswds is true.
+   */
+   @Prop() tile?: boolean = false;
+
+  /**
+   * Description of the option displayed below the option label. Available when uswds is true.
+   */
+   @Prop() description?: string;
+
+  /**
+   * Whether or not the radio option is disabled. Can be used if the USWDS option is active.
+   */
+  @Prop() disabled?: boolean = false;
+
+  /**
    * Optional string for the ariaDescribedBy attribute.
    */
   @Prop() ariaDescribedby?: string;
@@ -55,21 +76,47 @@ export class VaRadioOption {
   }
 
   render() {
-    const { checked, ariaDescribedby, name, value, label } = this;
+    const { checked, ariaDescribedby, name, value, label, uswds, disabled, tile } = this;
     const id = this.el.id || (name + value);
-    return (
-      <Host
-        aria-checked={checked ? `${checked}` : 'false'}
-        aria-describedby={(checked && ariaDescribedby) || null}
-        checked={checked}
-        name={name}
-        onClick={() => this.handleChange()}
-        role="radio"
-        value={value}
-        id={id}
-      >
-        <label htmlFor={id}>{label}</label>
-      </Host>
-    );
+
+    if (uswds) {
+      const inputClass = classnames({
+        'usa-radio__input': true,
+        'usa-radio__input--tile': tile,
+      });
+      return (
+        <div class="usa-radio">
+          <input
+            class={inputClass}
+            id={id}
+            type="radio"
+            name={name}
+            value={value}
+            checked={checked}
+            disabled={disabled}
+            onClick={() => this.handleChange()}
+          />
+          <label htmlFor={id} id="option-label" class="usa-radio__label">
+            {label}
+            {this.description && <span class="usa-radio__label-description" aria-describedby="option-label">{this.description}</span>}
+          </label>
+        </div>
+      )
+    } else {
+      return (
+        <Host
+          aria-checked={checked ? `${checked}` : 'false'}
+          aria-describedby={(checked && ariaDescribedby) || null}
+          checked={checked}
+          name={name}
+          onClick={() => this.handleChange()}
+          role="radio"
+          value={value}
+          id={id}
+        >
+          <label htmlFor={id}>{label}</label>
+        </Host>
+      );
+    }
   }
 }

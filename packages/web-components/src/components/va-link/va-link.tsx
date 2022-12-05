@@ -23,6 +23,11 @@ export class VaLink {
   @Prop() active?: boolean = false;
 
   /**
+   * If `true`, a calendar icon will be displayed before the anchor text.
+   */
+  @Prop() calendar?: boolean = false;
+
+  /**
    * If `true`, a channel icon will be displayed before the anchor text.
    */
   @Prop() channel?: boolean = false;
@@ -43,7 +48,7 @@ export class VaLink {
   @Prop() href!: string;
 
   /**
-   * The suggested filename. Only valid if download is `true`.
+   * The suggested filename. Only valid if download or calendar is `true`.
    */
   @Prop() filename?: string;
 
@@ -100,6 +105,7 @@ export class VaLink {
   render() {
     const {
       active,
+      calendar,
       channel,
       download,
       filetype,
@@ -134,6 +140,18 @@ export class VaLink {
           </a>
         </Host>
       );
+    }
+
+    // Calendar link variant
+    if (calendar) {
+      return (
+        <Host>
+         <a href={href} download={filename} onClick={handleClick}>
+          <i aria-hidden="true" />
+          {text}
+        </a>
+      </Host>
+      )
     }
 
     // Download link variant

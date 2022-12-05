@@ -10,6 +10,7 @@ import {
   h,
   Fragment,
 } from '@stencil/core';
+import classnames from 'classnames';
 import { getSlottedNodes } from '../../utils/utils';
 import i18next from 'i18next';
 import { Build } from '@stencil/core';
@@ -33,7 +34,7 @@ if (Build.isTesting) {
 
 @Component({
   tag: 'va-radio',
-  styleUrl: 'va-radio.css',
+  styleUrl: 'va-radio.scss',
   shadow: true,
 })
 export class VaRadio {
@@ -65,6 +66,11 @@ export class VaRadio {
   @Prop() enableAnalytics?: boolean = false;
 
   /**
+   * Whether or not the component will use USWDS v3 styling.
+   */
+   @Prop() uswds?: boolean = false;
+
+  /**
    * The event used to track usage of the component. This is emitted when a
    * radio option is selected and enableAnalytics is true.
    */
@@ -87,7 +93,8 @@ export class VaRadio {
   @Listen('keydown')
   handleKeyDown(event: KeyboardEvent) {
     const currentNode = event.target as HTMLVaRadioOptionElement;
-    const radioOptionNodes = getSlottedNodes(this.el, 'va-radio-option');
+    const radioOptionNodes = (getSlottedNodes(this.el, 'va-radio-option') as HTMLVaRadioOptionElement[])
+      .filter(node => !node.disabled);
 
     if (!radioOptionNodes.length) return;
 
@@ -107,6 +114,7 @@ export class VaRadio {
         break;
       case 'ArrowDown':
       case 'ArrowRight':
+        event.preventDefault();
         if (currentNodeIndex === radioOptionNodes.length - 1) {
           nextNode = radioOptionNodes[0];
           this.deselectCurrentNode(currentNode);
@@ -119,6 +127,7 @@ export class VaRadio {
         break;
       case 'ArrowUp':
       case 'ArrowLeft':
+        event.preventDefault();
         if (currentNodeIndex === 0) {
           nextNode = radioOptionNodes[radioOptionNodes.length - 1];
           this.deselectCurrentNode(currentNode);
@@ -203,28 +212,58 @@ export class VaRadio {
   }
 
   render() {
-    const { label, hint, required, error } = this;
+    const { label, hint, required, error, uswds } = this;
     const ariaLabel = label + (required ? ' required' : '');
-    return (
-      <Host
-        role="radiogroup"
-        aria-invalid={error ? 'true' : 'false'}
-        aria-label={ariaLabel}
-      >
-        <legend part="legend">
-          {label}
-          {required && <span class="required">{i18next.t('required')}</span>}
-        </legend>
-        {hint && <span class="hint-text">{hint}</span>}
-        <span id="error-message" role="alert">
-          {error && (
-            <Fragment>
-              <span class="sr-only">{i18next.t('error')}</span> {error}
-            </Fragment>
-          )}
-        </span>
-        <slot></slot>
-      </Host>
-    );
+
+    if (uswds) {
+      const legendClass = classnames({
+        'usa-legend': true,
+        'usa-label--error': error
+      });
+      return ( 
+        <Host
+          aria-invalid={error ? 'true' : 'false'}
+          aria-label={ariaLabel}
+        >
+          <fieldset class="usa-form usa-fieldset">
+            <legend class={legendClass}>
+              {label}
+              {required && <span class="usa-label--required"> {i18next.t('required')}</span>}
+            </legend>
+            <span class="usa-error-message" role="alert">
+              {error && (
+                <Fragment>
+                  <span class="usa-sr-only">{i18next.t('error')}</span> {error}
+                </Fragment>
+              )}
+            </span>
+            {hint && <span class="usa-hint">{hint}</span>}
+            <slot></slot>
+          </fieldset>
+        </Host>
+       )
+    } else {
+      return (
+        <Host
+          role="radiogroup"
+          aria-invalid={error ? 'true' : 'false'}
+          aria-label={ariaLabel}
+        >
+          <legend part="legend">
+            {label}
+            {required && <span class="required">{i18next.t('required')}</span>}
+          </legend>
+          {hint && <span class="hint-text">{hint}</span>}
+          <span id="error-message" role="alert">
+            {error && (
+              <Fragment>
+                <span class="sr-only">{i18next.t('error')}</span> {error}
+              </Fragment>
+            )}
+          </span>
+          <slot></slot>
+        </Host>
+      );
+    }
   }
 }

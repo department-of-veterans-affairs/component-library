@@ -42,13 +42,13 @@ applyPolyfills().then(() => {
  */
  (() => {
   const pushState = history.pushState;
-  history.pushState = function () {
+  history.pushState = function() {
     pushState.apply(this, arguments);
     window.dispatchEvent(new Event('locationchange'));
   };
 
   const replaceState = history.replaceState;
-  history.replaceState = function () {
+  history.replaceState = function() {
     replaceState.apply(this, arguments);
     window.dispatchEvent(new Event('locationchange'));
   };

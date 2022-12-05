@@ -1966,11 +1966,13 @@ __metadata:
     "@stencil/core": ^2.19.2
     "@stencil/postcss": ^2.0.0
     "@stencil/react-output-target": ^0.0.9
+    "@stencil/sass": ^2.0.0
     "@types/jest": ^26.0.20
     "@types/puppeteer": ^5.4.3
     "@types/react-dom": 16.0.9
     "@typescript-eslint/eslint-plugin": ^5.30.5
     "@typescript-eslint/parser": ^5.30.5
+    "@uswds/uswds": ^3.3.0
     animate.css: ^4.1.1
     aria-hidden: ^1.1.3
     babel-loader: ^8.2.2
@@ -2898,6 +2900,15 @@ __metadata:
   peerDependencies:
     "@stencil/core": ">=1.8.0"
   checksum: 974deacb010b9d7ca9ce195f5001f157b013a328be2d0d142e7a4e5094f251dfdd7f50a094acb1e906dabbaf69a84c1fb7e7aaaa6cd754b1bbe919f574cc447b
+  languageName: node
+  linkType: hard
+
+"@stencil/sass@npm:^2.0.0":
+  version: 2.0.0
+  resolution: "@stencil/sass@npm:2.0.0"
+  peerDependencies:
+    "@stencil/core": ">=2.0.0"
+  checksum: 382bbc6f30b57d68688fda527f9bf1041c236703e80c2b718947f43b2af250d6efd6530743f8d2b0068cde09ce4e7a97bd1916ba241a9c9043c23d88faeb2aab
   languageName: node
   linkType: hard
 
@@ -5033,6 +5044,18 @@ __metadata:
     receptor: 1.0.0
     resolve-id-refs: 0.1.0
   checksum: d13437cfd4af2ae9208dd88b3af969a52a46f5b9f23940b692759cbcf49a1f5c9e8fcaf55b5ebc008c8a0ee744313092aeab70e168771f921699575ec6d0f95a
+  languageName: node
+  linkType: hard
+
+"@uswds/uswds@npm:^3.3.0":
+  version: 3.3.0
+  resolution: "@uswds/uswds@npm:3.3.0"
+  dependencies:
+    classlist-polyfill: 1.0.3
+    object-assign: 4.1.1
+    receptor: 1.0.0
+    resolve-id-refs: 0.1.0
+  checksum: abac1654b42437669afd845b88849268db7edaaba2f3310d45bd66233a30a0a8badafd0bbc9dda2fa7cb7331a2c03dca2de68415008f4ca9ae2c5c16111b1e2d
   languageName: node
   linkType: hard
 

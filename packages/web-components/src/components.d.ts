@@ -329,6 +329,10 @@ export namespace Components {
          */
         "active"?: boolean;
         /**
+          * If `true`, a calendar icon will be displayed before the anchor text.
+         */
+        "calendar"?: boolean;
+        /**
           * If `true`, a channel icon will be displayed before the anchor text.
          */
         "channel"?: boolean;
@@ -341,7 +345,7 @@ export namespace Components {
          */
         "download"?: boolean;
         /**
-          * The suggested filename. Only valid if download is `true`.
+          * The suggested filename. Only valid if download or calendar is `true`.
          */
         "filename"?: string;
         /**
@@ -604,6 +608,10 @@ export namespace Components {
           * Whether or not this input field is required.
          */
         "required"?: boolean;
+        /**
+          * Whether or not the component will use USWDS v3 styling.
+         */
+        "uswds"?: boolean;
     }
     interface VaRadioOption {
         /**
@@ -615,6 +623,14 @@ export namespace Components {
          */
         "checked"?: boolean;
         /**
+          * Description of the option displayed below the option label. Available when uswds is true.
+         */
+        "description"?: string;
+        /**
+          * Whether or not the radio option is disabled. Can be used if the USWDS option is active.
+         */
+        "disabled"?: boolean;
+        /**
           * The text label for the input element.
          */
         "label": string;
@@ -622,6 +638,14 @@ export namespace Components {
           * The name attribute for the input element.
          */
         "name": string;
+        /**
+          * Whether or not the component will display as a tile. Available when uswds is true.
+         */
+        "tile"?: boolean;
+        /**
+          * Whether or not the component will use USWDS v3. styling.
+         */
+        "uswds"?: boolean;
         /**
           * The value attribute for the input element.
          */
@@ -1629,6 +1653,10 @@ declare namespace LocalJSX {
          */
         "active"?: boolean;
         /**
+          * If `true`, a calendar icon will be displayed before the anchor text.
+         */
+        "calendar"?: boolean;
+        /**
           * If `true`, a channel icon will be displayed before the anchor text.
          */
         "channel"?: boolean;
@@ -1641,7 +1669,7 @@ declare namespace LocalJSX {
          */
         "download"?: boolean;
         /**
-          * The suggested filename. Only valid if download is `true`.
+          * The suggested filename. Only valid if download or calendar is `true`.
          */
         "filename"?: string;
         /**
@@ -1984,6 +2012,10 @@ declare namespace LocalJSX {
           * Whether or not this input field is required.
          */
         "required"?: boolean;
+        /**
+          * Whether or not the component will use USWDS v3 styling.
+         */
+        "uswds"?: boolean;
     }
     interface VaRadioOption {
         /**
@@ -1994,6 +2026,14 @@ declare namespace LocalJSX {
           * Whether or not the option is selected.
          */
         "checked"?: boolean;
+        /**
+          * Description of the option displayed below the option label. Available when uswds is true.
+         */
+        "description"?: string;
+        /**
+          * Whether or not the radio option is disabled. Can be used if the USWDS option is active.
+         */
+        "disabled"?: boolean;
         /**
           * The text label for the input element.
          */
@@ -2006,6 +2046,14 @@ declare namespace LocalJSX {
           * The event emitted when the selected option value changes
          */
         "onRadioOptionSelected"?: (event: VaRadioOptionCustomEvent<any>) => void;
+        /**
+          * Whether or not the component will display as a tile. Available when uswds is true.
+         */
+        "tile"?: boolean;
+        /**
+          * Whether or not the component will use USWDS v3. styling.
+         */
+        "uswds"?: boolean;
         /**
           * The value attribute for the input element.
          */
