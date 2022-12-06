@@ -156,8 +156,10 @@ describe('va-button', () => {
     expect(analyticsSpy).toHaveReceivedEventDetail({
       action: 'click',
       componentName: 'va-button',
-      // TODO: update analytics event details
-      details: {},
+      details: {
+        label: 'Edit',
+        type: 'primary',
+      },
     });
   });
 

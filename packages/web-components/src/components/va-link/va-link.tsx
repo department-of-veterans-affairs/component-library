@@ -84,14 +84,16 @@ export class VaLink {
 
   /** @ts-ignore */
   private handleClick = (e: MouseEvent): void => {
-    if (this.disableAnalytics) return;
-    this.componentLibraryAnalytics.emit({
-      componentName: 'va-link',
-      action: 'click',
-      details: {
-        // TODO: add analytics event details
-      },
-    });
+    if (!this.disableAnalytics) {
+      const detail = {
+        componentName: 'va-link',
+        action: 'click',
+        details: {
+          label: this.text,
+        },
+      }
+      this.componentLibraryAnalytics.emit(detail);
+    }
   };
 
   private getAbbreviationTitle = () => {

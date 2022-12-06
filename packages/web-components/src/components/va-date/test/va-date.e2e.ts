@@ -543,4 +543,44 @@ describe('va-date', () => {
       expect(date.getAttribute('value')).toBe('2000-03');
     });
   });
+
+  it('fires an analytics event when enableAnalytics is true', async () => {
+    const page = await newE2EPage();
+    await page.setContent(
+      '<va-date enable-analytics name="test" />',
+    );
+    const analyticsSpy = await page.spyOnEvent('component-library-analytics');
+    const handleMonth = await page.$('pierce/[name="testMonth"]');
+    const handleDay = await page.$('pierce/[name="testDay"]');
+    const handleYear = await page.$('pierce/[name="testYear"]');
+
+    // Month
+    await handleMonth.select('2');
+    await page.waitForChanges();
+    // Day
+    await handleDay.select('1');
+    await page.waitForChanges();
+    // Year
+    await handleYear.press('2');
+    await handleYear.press('0');
+    await handleYear.press('0');
+    await handleYear.press('0');
+
+    // Trigger Blur
+    await handleYear.press('Tab');
+    await page.waitForChanges();
+
+    expect(analyticsSpy).toHaveReceivedEventTimes(1);
+    expect(analyticsSpy).toHaveReceivedEventDetail({
+      action: 'blur',
+      componentName: 'va-date',
+      details: {
+        day: 1,
+        month: 2,
+        year: 2000,
+        "month-year-only": false,
+      },
+    });
+  });
+
 });

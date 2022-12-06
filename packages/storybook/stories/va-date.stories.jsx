@@ -25,6 +25,7 @@ const defaultArgs = {
   'error': undefined,
   'value': undefined,
   'month-year-only': undefined,
+  'enable-analytics': false,
 };
 
 const Template = ({
@@ -34,6 +35,7 @@ const Template = ({
   error,
   'month-year-only': monthYearOnly,
   value,
+  'enable-analytics': enableAnalytics,
 }) => {
   return (
     <VaDate
@@ -48,6 +50,7 @@ const Template = ({
         console.log(e.target.value);
       }}
       onDateChange={e => console.log(e, 'DATE CHANGE FIRED')}
+      enableAnalytics={enableAnalytics}
     />
   );
 };
@@ -184,3 +187,6 @@ CustomValidation.args = {
   required: true,
   value: '2022-04-19',
 };
+
+export const WithAnalytics = Template.bind(null);
+WithAnalytics.args = { ...defaultArgs, 'enable-analytics': true };

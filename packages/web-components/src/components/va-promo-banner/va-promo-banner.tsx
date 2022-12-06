@@ -89,6 +89,18 @@ export class VaPromoBanner {
         JSON.stringify(updatedDismissedBanners),
       );
     }
+
+    if (!this.disableAnalytics) {
+      const detail = {
+        componentName: 'va-promo-banner',
+        action: 'close',
+        details: {
+          text: this.el.innerText,
+          type: this.type,
+        },
+      };
+      this.componentLibraryAnalytics.emit(detail);
+    }
   }
 
   private handleLinkClick(): void {

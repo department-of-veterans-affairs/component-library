@@ -76,17 +76,18 @@ export class VaButton {
   })
   componentLibraryAnalytics: EventEmitter;
 
-  private handleClick = (e: MouseEvent): void => {
-    // TODO: remove console.log
-    console.log(e);
-    if (this.disableAnalytics) return;
-    this.componentLibraryAnalytics.emit({
-      componentName: 'va-button',
-      action: 'click',
-      details: {
-        // TODO: add analytics event details
-      },
-    });
+  private handleClick = (): void => {
+    if (!this.disableAnalytics) {
+      const detail = {
+        componentName: 'va-button',
+        action: 'click',
+        details: {
+          type: this.secondary ? 'secondary' : 'primary',
+          label: this.getButtonText(),
+        },
+      }
+      this.componentLibraryAnalytics.emit(detail);
+    }
   };
 
   private getButtonText = (): string => {
@@ -109,7 +110,7 @@ export class VaButton {
       e.stopPropagation();
       return;
     }
-    this.handleClick(e);
+    this.handleClick();
   }
 
   render() {

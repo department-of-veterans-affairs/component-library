@@ -95,14 +95,15 @@ export class VaNumberInput {
 
   private handleBlur = () => {
     if (this.enableAnalytics) {
-      this.componentLibraryAnalytics.emit({
+      const detail = {
         componentName: 'va-number-input',
         action: 'blur',
         details: {
           label: this.label,
           value: this.value,
         },
-      });
+      };
+      this.componentLibraryAnalytics.emit(detail);
     }
   };
 

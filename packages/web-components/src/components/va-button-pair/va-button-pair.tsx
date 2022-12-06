@@ -1,4 +1,4 @@
-import { Component, Event, EventEmitter, Host, h, Prop } from '@stencil/core';
+import { Component, Event, EventEmitter, Host, h, Prop, Listen } from '@stencil/core';
 
 /**
  * @componentName Button pair
@@ -70,28 +70,39 @@ export class VaButtonPair {
   })
   componentLibraryAnalytics: EventEmitter;
 
+  /**
+   * Listen for the va-button GA event and capture it so 
+   * that we can emit a single va-button-pair GA event that includes
+   * the va-button details.
+   */
+  @Listen('component-library-analytics')
+  handleButtonAnalytics(event) {
+    // Prevent va-button-pair GA event from firing multiple times.
+    if (event.detail.componentName === 'va-button-pair') return;
+
+    // Prevent va-button GA event from firing.
+    event.stopPropagation();
+
+    if (!this.disableAnalytics) {
+      const detail = {
+        componentName: 'va-button-pair',
+        action: 'click',
+        details: {
+          type: null, 
+          label: null, 
+          ...event.detail?.details // Merging the va-button GA event details.
+        },
+      };
+      this.componentLibraryAnalytics.emit(detail);
+    }
+  }
+
   private handlePrimaryClick = (e: MouseEvent) => {
     this.primaryClick.emit(e);
-    if (this.disableAnalytics) return;
-    this.componentLibraryAnalytics.emit({
-      componentName: 'va-button-pair',
-      action: 'click',
-      details: {
-        // TODO: add analytics event details
-      },
-    });
   };
 
   private handleSecondaryClick = (e: MouseEvent) => {
     this.secondaryClick.emit(e);
-    if (this.disableAnalytics) return;
-    this.componentLibraryAnalytics.emit({
-      componentName: 'va-button-pair',
-      action: 'click',
-      details: {
-        // TODO: add analytics event details
-      },
-    });
   };
 
   render() {

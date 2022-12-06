@@ -22,10 +22,12 @@ describe('va-button-pair', () => {
     const primaryButton = await page.find('va-button-pair >>> va-button');
     await primaryButton.click();
     expect(analyticsSpy).toHaveReceivedEventDetail({
-      action: 'click',
       componentName: 'va-button-pair',
-      // TODO: update analytics event details
-      details: {},
+      action: 'click',
+      details: {
+        type: 'primary',
+        label: 'Yes',
+      },
     });
   });
 
@@ -36,10 +38,12 @@ describe('va-button-pair', () => {
     const buttons = await page.findAll('va-button-pair >>> va-button');
     await buttons[1].click();
     expect(analyticsSpy).toHaveReceivedEventDetail({
-      action: 'click',
       componentName: 'va-button-pair',
-      // TODO: update analytics event details
-      details: {},
+      action: 'click',
+      details: {
+        type: 'secondary',
+        label: 'No',
+      },
     });
   });
 
