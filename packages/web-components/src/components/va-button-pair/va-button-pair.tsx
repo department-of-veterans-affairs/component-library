@@ -77,10 +77,10 @@ export class VaButtonPair {
    */
   @Listen('component-library-analytics')
   handleButtonAnalytics(event) {
-    // This prevents the va-button-pair GA event from firing multiple times.
+    // Prevent va-button-pair GA event from firing multiple times.
     if (event.detail.componentName === 'va-button-pair') return;
 
-    // This prevents the va-button GA event from firing.
+    // Prevent va-button GA event from firing.
     event.stopPropagation();
 
     if (!this.disableAnalytics) {
