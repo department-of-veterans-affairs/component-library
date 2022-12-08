@@ -327,4 +327,27 @@ describe('va-text-input', () => {
     const inputEl = await page.find('va-text-input >>> input');
     expect(await inputEl.getProperty('autocomplete')).toBe('email');
   });
+
+  // Begin USWDS v3 test
+  it('uswds v3 renders', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<va-text-input label="Hello, world" uswds />');
+    const element = await page.find('va-text-input');
+
+    expect(element).toEqualHtml(`
+      <va-text-input class="hydrated" label="Hello, world" uswds="">
+        <mock:shadow-root>
+          <label for="inputField" class="usa-label" part="label">
+            Hello, world
+          </label>
+          <slot></slot>
+          <span class="usa-error-message" id="usa-error-message" role="alert"></span>
+          <input class="usa-input" id="inputField" part="input" type="text" aria-invalid="false" />
+        </mock:shadow-root>
+      </va-text-input>
+    `);
+  });
+
+
 });

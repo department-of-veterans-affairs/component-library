@@ -235,7 +235,7 @@ export class VaTextInput {
       return (
         <Host>
           {label && (
-            <label class={labelClass}>
+            <label htmlFor="inputField" class={labelClass} part="label">
               {label}
               {required && <span class="usa-label--required"> {i18next.t('required')}</span>}
             </label>
