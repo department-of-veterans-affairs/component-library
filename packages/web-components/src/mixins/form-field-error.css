@@ -17,7 +17,7 @@
     }
 }
 
-:host([error]:not([error=''])) label {
+:host([error]:not([error='']):not([uswds])) label {
     margin-top: 0;
 }
 
