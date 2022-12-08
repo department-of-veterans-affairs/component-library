@@ -1,0 +1,62 @@
+@use 'uswds-helpers/src/styles/usa-sr-only';
+@use 'usa-form/src/styles/usa-form';
+@use 'usa-label/src/styles/usa-label';
+@use 'usa-input/src/styles/usa-input';
+@use 'usa-error-message/src/styles/usa-error-message';
+
+@import '../../mixins/uswds-error-border.css';
+
+:host {
+  display: block;
+  font-family: var(--font-source-sans);
+}
+
+:host(:focus) {
+  outline: none !important;
+}
+
+:host([uswds]) input:not([disabled]):focus{	
+  outline: 2px solid var(--color-gold-light) !important;	
+  outline-offset: 2px;	
+}
+
+/** Original Component Style **/
+
+@import '../../mixins/accessibility.css';
+@import '../../mixins/form-field-error.css';
+
+:host(:not([uswds])) label {
+  display: block;
+  max-width: 46rem;
+  margin-top: 3rem;
+}
+
+span.required {
+  color: var(--color-secondary-dark);
+}
+
+:host(:not([uswds])) input {
+  appearance: none;
+  border: 0.1rem solid var(--color-gray);
+  border-radius: 0;
+  box-sizing: border-box;
+  color: var(--color-base);
+  display: block;
+  font-family: var(--font-source-sans);
+  font-size: 1.6rem;
+  height: 4.2rem;
+  line-height: 1.3;
+  margin: 0.2em 0;
+  max-width: 46rem;
+  padding: 1rem 0.7em;
+  width: 100%;
+}
+
+:host(:not([uswds]):focus) label::before {
+  outline: 2px solid var(--color-gold-light);
+  outline-offset: 6px;
+}
+
+:host([success]:not([success='false']):not([uswds])) input {
+  border: 4px solid var(--color-green);
+}

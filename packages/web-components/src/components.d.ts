@@ -823,6 +823,10 @@ export namespace Components {
          */
         "type"?: 'email' | 'number' | 'search' | 'tel' | 'text' | 'url';
         /**
+          * Whether or not the component will use USWDS v3 styling.
+         */
+        "uswds"?: boolean;
+        /**
           * The value for the input.
          */
         "value"?: string;
@@ -2254,6 +2258,10 @@ declare namespace LocalJSX {
           * The type attribute.
          */
         "type"?: 'email' | 'number' | 'search' | 'tel' | 'text' | 'url';
+        /**
+          * Whether or not the component will use USWDS v3 styling.
+         */
+        "uswds"?: boolean;
         /**
           * The value for the input.
          */
