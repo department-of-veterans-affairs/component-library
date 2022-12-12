@@ -6,6 +6,7 @@
 @import '../../mixins/uswds-error-border.css';
 
 :host {
+  color: var(--color-base);
   display: block;
   font-family: var(--font-source-sans);
 }
@@ -17,6 +18,14 @@
 :host([uswds]) input:not([disabled]):focus{	
   outline: 2px solid var(--color-gold-light);	
   outline-offset: 2px;	
+}
+
+input {
+  box-sizing: border-box;
+}
+
+input.usa-input {
+  color: var(--color-base);
 }
 
 /** Original Component Style **/
