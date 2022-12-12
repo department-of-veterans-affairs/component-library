@@ -240,7 +240,6 @@ export class VaTextInput {
               {required && <span class="usa-label--required"> {i18next.t('required')}</span>}
             </label>
           )}
-          {/* Hint text in slot? usa-hint? */}
           <slot></slot>
           <span class="usa-error-message" id="usa-error-message" role="alert">
             {error && (
