@@ -60,9 +60,9 @@ span.required {
   width: 100%;
 }
 
-:host(:not([uswds]):focus) label::before {
+:host(:not([uswds])) input:not([disabled]):focus {
   outline: 2px solid var(--color-gold-light);
-  outline-offset: 6px;
+  outline-offset: 2px;
 }
 
 :host([success]:not([success='false']):not([uswds])) input {
