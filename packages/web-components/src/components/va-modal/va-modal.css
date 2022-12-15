@@ -17,7 +17,7 @@
   text-align: center;
   top: 0;
   width: 100%;
-  z-index: 6;
+  z-index: 9001;
 }
 
 :host([visible]:not([visible='false']))::before {
