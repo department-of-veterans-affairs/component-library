@@ -135,6 +135,7 @@ const defaultArgs = {
   'required': false,
   'error': null,
   'uswds': false,
+  'hint': '',
 };
 
 export const Default = Template.bind(null);

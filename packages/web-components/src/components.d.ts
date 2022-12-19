@@ -228,6 +228,10 @@ export namespace Components {
          */
         "error"?: string;
         /**
+          * Optional hint text.
+         */
+        "hint"?: string;
+        /**
           * The label for the checkbox.
          */
         "label": string;
@@ -245,6 +249,10 @@ export namespace Components {
           * A string with an error message.
          */
         "error"?: string;
+        /**
+          * Optional hint text.
+         */
+        "hint"?: string;
         /**
           * The text label for the checkbox group.
          */
@@ -1520,6 +1528,10 @@ declare namespace LocalJSX {
          */
         "error"?: string;
         /**
+          * Optional hint text.
+         */
+        "hint"?: string;
+        /**
           * The label for the checkbox.
          */
         "label": string;
@@ -1545,6 +1557,10 @@ declare namespace LocalJSX {
           * A string with an error message.
          */
         "error"?: string;
+        /**
+          * Optional hint text.
+         */
+        "hint"?: string;
         /**
           * The text label for the checkbox group.
          */

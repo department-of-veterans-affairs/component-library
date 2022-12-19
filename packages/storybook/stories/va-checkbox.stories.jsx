@@ -23,6 +23,7 @@ const defaultArgs = {
   'required': false,
   'description': null,
   'enable-analytics': false,
+  'hint': null,
 };
 
 const vaCheckbox = args => {
@@ -33,6 +34,7 @@ const vaCheckbox = args => {
     error,
     label,
     required, 
+    hint,
     ...rest
   } = args;
   return (
@@ -42,6 +44,7 @@ const vaCheckbox = args => {
       enable-analytics={enableAnalytics}
       error={error}
       label={label}
+      hint={hint}
       required={required}
       onBlur={e => console.log(e)}
     />
@@ -62,7 +65,9 @@ const I18nTemplate = args => {
       <button onClick={e => setLang('es')}>Español</button>
       <button onClick={e => setLang('en')}>English</button>
       <button onClick={e => setLang('tl')}>Tagalog</button>
-      {vaCheckbox(args)}
+      <div style={{marginTop: '20px'}}>
+        {vaCheckbox(args)}
+      </div>
     </div>
 )};
 
@@ -72,6 +77,14 @@ Default.argTypes = propStructure(checkboxDocs);
 
 export const Checked = Template.bind(null);
 Checked.args = { ...defaultArgs, checked: true };
+
+
+export const Hint = Template.bind(null);
+Hint.args = {
+  ...defaultArgs,
+  description: 'Adding some descriptive text above the checkbox.',
+  hint: "We're asking this because of XYZ",
+};
 
 export const WithDescriptionString = Template.bind(null);
 WithDescriptionString.args = {
@@ -97,6 +110,7 @@ Error.args = {
   description:
     'Notice how the red line to the left also covers this description.',
   error: 'There has been a problem',
+  hint: "We're asking this because of XYZ",
 };
 
 export const Required = Template.bind(null);

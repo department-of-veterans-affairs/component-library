@@ -1,5 +1,6 @@
 @import '../../mixins/accessibility.css';
 @import '../../mixins/form-field-error.css';
+@import '../../mixins/hint-text.css';
 
 :host {
   display: block;
@@ -11,7 +12,7 @@
   font-size: 1.6rem;
   line-height: 2.4rem;
   font-weight: 700;
-  margin-bottom: 1.2rem;
+  margin-bottom: 0;
 }
 
 .required {
@@ -24,7 +25,7 @@ legend {
   max-width: 46rem;
   font-weight: inherit;
   font-size: inherit;
-  color: inherit;
+  /* color: inherit; */
   line-height: inherit;
-  margin-bottom: 1.2rem;
+  /* margin-bottom: 1.2rem; */
 }
