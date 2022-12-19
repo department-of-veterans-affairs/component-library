@@ -1,5 +1,6 @@
 @import '../va-text-input/va-text-input.css';
 @import '../../mixins/form-field-error.css';
+@import '../../mixins/hint-text.css';
 
 input[type='number'] {
   -moz-appearance: textfield;

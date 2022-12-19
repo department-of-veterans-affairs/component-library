@@ -32,6 +32,7 @@ const defaultArgs = {
   'inputmode': 'numeric',
   'min': undefined,
   'max': undefined,
+  hint: null,
 };
 
 const vaNumberInput = args => {
@@ -45,6 +46,7 @@ const vaNumberInput = args => {
     inputmode,
     min,
     max,
+    hint,
     ...rest
   } = args;
   return (
@@ -58,6 +60,7 @@ const vaNumberInput = args => {
       inputmode={inputmode}
       max={max}
       min={min}
+      hint={hint}
       onInput={e => console.log('input event value:', e.target.value)}
       onBlur={e => console.log('blur event', e)}
     />
@@ -78,7 +81,9 @@ const I18nTemplate = args => {
       <button onClick={e => setLang('es')}>Español</button>
       <button onClick={e => setLang('en')}>English</button>
       <button onClick={e => setLang('tl')}>Tagalog</button>
-      {vaNumberInput(args)}
+      <div style={{marginTop: '20px'}}>
+        {vaNumberInput(args)}
+      </div>
     </div>
 )};
 
@@ -91,6 +96,9 @@ Error.args = { ...defaultArgs, error: 'This is an error message' };
 
 export const Required = Template.bind(null);
 Required.args = { ...defaultArgs, required: true };
+
+export const WithHintText = Template.bind(null);
+WithHintText.args = { ...defaultArgs, hint: 'This is example hint text' };
 
 export const WithAnalytics = Template.bind(null);
 WithAnalytics.args = { ...defaultArgs, 'enable-analytics': true };
