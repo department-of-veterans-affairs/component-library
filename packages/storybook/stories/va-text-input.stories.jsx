@@ -185,7 +185,7 @@ Autocomplete.args = {
 export const WithAnalytics = Template.bind(null);
 WithAnalytics.args = { ...defaultArgs, 'enable-analytics': true };
 
-const WithHintTextTemplate = ({ name, label }) => {
+const AdditionalInfoTemplate = ({ name, label }) => {
   return (
     <va-text-input name={name} label={label}>
       <div className="vads-u-margin-bottom--1">
@@ -199,8 +199,8 @@ const WithHintTextTemplate = ({ name, label }) => {
   );
 };
 
-export const WithHintText = WithHintTextTemplate.bind(null);
-WithHintText.args = {
+export const WithAdditionalInfo = AdditionalInfoTemplate.bind(null);
+WithAdditionalInfo.args = {
   ...defaultArgs,
   label: 'Veteran’s Social Security number',
 };
