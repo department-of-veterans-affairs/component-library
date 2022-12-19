@@ -23,9 +23,10 @@ const defaultArgs = {
   required: false,
   error: undefined,
   value: undefined,
+  hint: null,
 };
 
-const Template = ({ label, name, required, error, value }) => {
+const Template = ({ label, name, required, error, value, hint }) => {
   return (
     <VaMemorableDate
       label={label}
@@ -33,6 +34,7 @@ const Template = ({ label, name, required, error, value }) => {
       required={required}
       error={error}
       value={value}
+      hint={hint}
       onDateBlur={e => console.log(e, 'DATE BLUR FIRED')}
       onDateChange={e => console.log(e, 'DATE CHANGE FIRED')}
     />
@@ -84,20 +86,6 @@ const CustomValidationTemplate = ({ label, name, required, error, value }) => {
   );
 };
 
-const WithHintTextTemplate = ({ name, label, error, required, value }) => {
-  return (
-    <va-memorable-date
-      label={label}
-      name={name}
-      required={required}
-      error={error}
-      value={value}
-    >
-      <div className="vads-u-margin-bottom--1">This is example hint text</div>
-    </va-memorable-date>
-  );
-};
-
 const I18nTemplate = ({ label, name, required, error, value }) => {
   const [lang, setLang] = useState('en');
 
@@ -128,12 +116,13 @@ Default.argTypes = propStructure(memorableDateInputDocs);
 export const Error = Template.bind(null);
 Error.args = { ...defaultArgs, error: 'Error Message Example' };
 
-export const WithHintText = WithHintTextTemplate.bind(null);
+export const WithHintText = Template.bind(null);
 WithHintText.args = {
   ...defaultArgs,
+  hint: "This is example hint text",
 };
 
-export const WithHintTextError = WithHintTextTemplate.bind(null);
+export const WithHintTextError = Template.bind(null);
 WithHintTextError.args = {
   ...defaultArgs,
   error: 'Error Message Example',

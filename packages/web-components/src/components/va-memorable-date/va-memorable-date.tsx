@@ -61,6 +61,11 @@ export class VaMemorableDate {
   @Prop() name!: string;
 
   /**
+   * Optional hint text.
+   */
+  @Prop() hint?: string;
+
+  /**
    * The error message to render (if any)
    * This prop should be leveraged to display any custom validations needed for this component
    */
@@ -194,6 +199,7 @@ export class VaMemorableDate {
       handleDateChange,
       handleDateKey,
       value,
+      hint,
     } = this;
 
     const [year, month, day] = (value || '').split('-');
@@ -207,6 +213,7 @@ export class VaMemorableDate {
             {label} {required && <span class="required">{i18next.t('required')}</span>}
             <div id="dateHint">{i18next.t('date-hint')}.</div>
           </legend>
+          {hint && <span class="hint-text">{hint}</span>}
           <slot />
           <span id="error-message" role="alert">
             {error && (
