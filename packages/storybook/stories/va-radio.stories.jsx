@@ -147,7 +147,7 @@ Default.argTypes = propStructure(radioDocs);
 export const Hint = Template.bind(null);
 Hint.args = {
   ...defaultArgs,
-  hint: "We're asking this because of XYZ",
+  hint: "This is example hint text",
 };
 
 export const ReactWithCustomEvent = ReactBindingExample.bind(null);

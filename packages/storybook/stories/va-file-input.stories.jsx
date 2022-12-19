@@ -26,6 +26,7 @@ const defaultArgs = {
   'required': false,
   'error': "",
   'enable-analytics': false,
+  hint: null,
   'vaChange': (event) => alert(`File change event received: ${event?.detail?.files[0]?.name}`)
 };
 
@@ -36,6 +37,7 @@ const Template = ({
   accept,
   error,
   required,
+  hint,
   'enable-analytics': enableAnalytics,
   vaChange,
 }) => {
@@ -47,6 +49,7 @@ const Template = ({
       accept={accept}
       required={required}
       error={error}
+      hint={hint}
       enable-analytics={enableAnalytics}
       onVaChange={vaChange}
     />
@@ -60,6 +63,9 @@ Default.argTypes = propStructure(fileInputDocs);
 
 export const Required = Template.bind(null);
 Required.args = { ...defaultArgs, required: true };
+
+export const WithHintText = Template.bind(null);
+WithHintText.args = { ...defaultArgs, hint: "This is example hint text" };
 
 export const ErrorMessage = Template.bind(null);
 ErrorMessage.args = { ...defaultArgs, required: true, error: "We couldn't upload your file" };
