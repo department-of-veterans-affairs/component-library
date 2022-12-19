@@ -48,6 +48,15 @@ $tokens-align-content: (
   'stretch': stretch,
 );
 
+$tokens-align-self: (
+  'auto': auto,
+  'flex-start': flex-start,
+  'flex-end': flex-end,
+  'center': center,
+  'baseline': baseline,
+  'stretch': stretch
+);
+
 $tokens-order: (
   '1': 1,
   '2': 2,
