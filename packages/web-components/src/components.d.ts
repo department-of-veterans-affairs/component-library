@@ -271,6 +271,10 @@ export namespace Components {
           * The error message to render (if any) This prop should be leveraged to display any custom validations needed for this component
          */
         "error"?: string;
+        /**
+          * Optional hint text.
+         */
+        "hint"?: string;
         "invalidDay": boolean;
         "invalidMonth": boolean;
         "invalidYear": boolean;
@@ -605,9 +609,9 @@ export namespace Components {
          */
         "error"?: string;
         /**
-          * Optional hint text for the radio group.
+          * Optional hint text.
          */
-        "hint": string;
+        "hint"?: string;
         /**
           * The text label for the radio group.
          */
@@ -1583,6 +1587,10 @@ declare namespace LocalJSX {
           * The error message to render (if any) This prop should be leveraged to display any custom validations needed for this component
          */
         "error"?: string;
+        /**
+          * Optional hint text.
+         */
+        "hint"?: string;
         "invalidDay"?: boolean;
         "invalidMonth"?: boolean;
         "invalidYear"?: boolean;
@@ -2009,7 +2017,7 @@ declare namespace LocalJSX {
          */
         "error"?: string;
         /**
-          * Optional hint text for the radio group.
+          * Optional hint text.
          */
         "hint"?: string;
         /**

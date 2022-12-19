@@ -83,7 +83,7 @@ export const Hint = Template.bind(null);
 Hint.args = {
   ...defaultArgs,
   description: 'Adding some descriptive text above the checkbox.',
-  hint: "We're asking this because of XYZ",
+  hint: "This is example hint text",
 };
 
 export const WithDescriptionString = Template.bind(null);

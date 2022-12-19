@@ -1,11 +1,11 @@
 @import '../../../src/mixins/accessibility.css';
 @import '../../mixins/form-field-error.css';
+@import '../../mixins/hint-text.css';
 
 :host {
   display: block;
   font-family: var(--font-source-sans);
   margin-top: 3rem;
-  color: var(--color-gray);
 }
 
 fieldset {
@@ -16,8 +16,7 @@ fieldset {
 
 legend {
   border: 0;
-  padding: 0 0 0.8rem 0;
-  color: var(--color-base);
+  padding: 0;
 }
 
 span.required {
@@ -32,16 +31,16 @@ span.required {
 #error-message {
   color: var(--color-secondary-dark);
   display: block;
+  margin-bottom: 0;
 }
 
 :host([error]:not([error=''])) #error-message {
-  padding-top: 0.8rem;
+  /* padding-top: 0.8rem; */
 }
 
 .date-container {
   display: flex;
-  color: var(--color-base);
-  padding-top: 0.8rem;
+  margin-top: 12px;
 }
 
 :host([error]:not([error=''])) .date-container {
