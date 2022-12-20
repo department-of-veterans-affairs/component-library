@@ -23,7 +23,6 @@ const defaultArgs = {
   required: false,
   error: undefined,
   value: undefined,
-  hint: null,
 };
 
 const Template = ({ label, name, required, error, value, hint }) => {
@@ -34,7 +33,6 @@ const Template = ({ label, name, required, error, value, hint }) => {
       required={required}
       error={error}
       value={value}
-      hint={hint}
       onDateBlur={e => console.log(e, 'DATE BLUR FIRED')}
       onDateChange={e => console.log(e, 'DATE CHANGE FIRED')}
     />
@@ -115,12 +113,6 @@ Default.argTypes = propStructure(memorableDateInputDocs);
 
 export const Error = Template.bind(null);
 Error.args = { ...defaultArgs, error: 'Error Message Example' };
-
-export const WithHintText = Template.bind(null);
-WithHintText.args = {
-  ...defaultArgs,
-  hint: "This is example hint text",
-};
 
 export const WithHintTextError = Template.bind(null);
 WithHintTextError.args = {
