@@ -220,15 +220,15 @@ export class VaRadio {
         'usa-legend': true,
         'usa-label--error': error
       });
-      return ( 
+      return (
         <Host
           aria-invalid={error ? 'true' : 'false'}
           aria-label={ariaLabel}
         >
           <fieldset class="usa-form usa-fieldset">
-            <legend class={legendClass}>
+            <legend class={legendClass} part="legend">
               {label}
-              {required && <span class="usa-label--required"> {i18next.t('required')}</span>}
+              {required && <span class="usa-label--required" part="required"> {i18next.t('required')}</span>}
             </legend>
             <span class="usa-error-message" role="alert">
               {error && (
@@ -251,7 +251,7 @@ export class VaRadio {
         >
           <legend part="legend">
             {label}
-            {required && <span class="required">{i18next.t('required')}</span>}
+            {required && <span class="required" part="required">{i18next.t('required')}</span>}
           </legend>
           {hint && <span class="hint-text">{hint}</span>}
           <span id="error-message" role="alert">
