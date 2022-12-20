@@ -115,6 +115,11 @@ export class VaTextInput {
   @Prop() pattern?: string;
 
   /**
+   * Optional hint text.
+   */
+  @Prop() hint?: string;
+
+  /**
    * The value for the input.
    */
   @Prop({ mutable: true, reflect: true }) value?: string;
@@ -208,6 +213,7 @@ export class VaTextInput {
       pattern,
       name,
       autocomplete,
+      hint,
       handleInput,
       handleBlur,
     } = this;
@@ -222,6 +228,7 @@ export class VaTextInput {
             {required && <span class="required">{i18next.t('required')}</span>}
           </label>
         )}
+        {hint && <span class="hint-text">{hint}</span>}
         <slot></slot>
         <span id="error-message" role="alert">
           {error && (

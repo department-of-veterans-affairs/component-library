@@ -805,6 +805,10 @@ export namespace Components {
          */
         "error"?: string;
         /**
+          * Optional hint text.
+         */
+        "hint"?: string;
+        /**
           * The inputmode attribute.
          */
         "inputmode"?: | 'decimal'
@@ -2260,6 +2264,10 @@ declare namespace LocalJSX {
           * The error message to render.
          */
         "error"?: string;
+        /**
+          * Optional hint text.
+         */
+        "hint"?: string;
         /**
           * The inputmode attribute.
          */

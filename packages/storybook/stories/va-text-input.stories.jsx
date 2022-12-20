@@ -51,6 +51,7 @@ const defaultArgs = {
   'type': undefined,
   'success': false,
   'pattern': undefined,
+  hint: null,
 };
 
 const Template = ({
@@ -67,6 +68,7 @@ const Template = ({
   type,
   success,
   pattern,
+  hint,
 }) => {
   return (
     <va-text-input
@@ -76,6 +78,7 @@ const Template = ({
       enable-analytics={enableAnalytics}
       required={required}
       error={error}
+      hint={hint}
       maxlength={maxlength}
       minlength={minlength}
       value={value}
@@ -198,6 +201,9 @@ const AdditionalInfoTemplate = ({ name, label }) => {
     </va-text-input>
   );
 };
+
+export const WithHintText = Template.bind(null);
+WithHintText.args = { ...defaultArgs, hint: "This is example hint text" };
 
 export const WithAdditionalInfo = AdditionalInfoTemplate.bind(null);
 WithAdditionalInfo.args = {
