@@ -52,6 +52,7 @@ const defaultArgs = {
   'success': false,
   'pattern': undefined,
   'uswds': true,
+  hint: null,
 };
 
 const Template = ({
@@ -69,6 +70,7 @@ const Template = ({
   success,
   pattern,
   uswds,
+  hint,
 }) => {
   return (
     <va-text-input
@@ -79,6 +81,7 @@ const Template = ({
       enable-analytics={enableAnalytics}
       required={required}
       error={error}
+      hint={hint}
       maxlength={maxlength}
       minlength={minlength}
       value={value}
@@ -190,10 +193,13 @@ Autocomplete.args = {
 export const WithAnalytics = Template.bind(null);
 WithAnalytics.args = { ...defaultArgs, 'enable-analytics': true };
 
-const WithHintTextTemplate = ({ name, label }) => {
+export const WithHintText = Template.bind(null);
+WithHintText.args = { ...defaultArgs, hint: 'This is hint text' };
+
+const WithAdditionalInfoTemplate = ({ name, label }) => {
   return (
-    <va-text-input name={name} label={label}>
-      <div className="vads-u-margin-bottom--1">
+    <va-text-input name={name} label={label} uswds>
+      <div>
         <va-additional-info trigger="Why is this required?">
           We need the Veteran’s Social Security number or tax identification
           number to process the application when it’s submitted online, but it’s
@@ -204,8 +210,8 @@ const WithHintTextTemplate = ({ name, label }) => {
   );
 };
 
-export const WithHintText = WithHintTextTemplate.bind(null);
-WithHintText.args = {
+export const WithAdditionalInfo = WithAdditionalInfoTemplate.bind(null);
+WithAdditionalInfo.args = {
   ...defaultArgs,
   label: 'Veteran’s Social Security number',
 };

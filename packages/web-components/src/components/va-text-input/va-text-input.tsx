@@ -116,6 +116,11 @@ export class VaTextInput {
   @Prop() pattern?: string;
 
   /**
+   * Optional hint text.
+   */
+  @Prop() hint?: string;
+
+  /**
    * The value for the input.
    */
   @Prop({ mutable: true, reflect: true }) value?: string;
@@ -217,7 +222,8 @@ export class VaTextInput {
       handleInput,
       handleBlur,
       uswds,
-      success
+      success,
+      hint
     } = this;
     const type = this.getInputType();
     const maxlength = this.getMaxlength();
@@ -240,6 +246,7 @@ export class VaTextInput {
               {required && <span class="usa-label--required"> {i18next.t('required')}</span>}
             </label>
           )}
+          {hint && <span class="usa-hint">{hint}</span>}
           <slot></slot>
           <span class="usa-error-message" id="usa-error-message" role="alert">
             {error && (
