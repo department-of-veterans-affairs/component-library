@@ -342,6 +342,7 @@ describe('va-text-input', () => {
             Hello, world
           </label>
           <slot></slot>
+          <span id="usa-error-message" role="alert"></span>
           <input class="usa-input" id="inputField" part="input" type="text" aria-invalid="false" />
         </mock:shadow-root>
       </va-text-input>
