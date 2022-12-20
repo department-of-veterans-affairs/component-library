@@ -869,6 +869,10 @@ export namespace Components {
          */
         "error"?: string;
         /**
+          * Optional hint text.
+         */
+        "hint"?: string;
+        /**
           * The label for the textarea.
          */
         "label"?: string;
@@ -2332,6 +2336,10 @@ declare namespace LocalJSX {
           * The error message to render.
          */
         "error"?: string;
+        /**
+          * Optional hint text.
+         */
+        "hint"?: string;
         /**
           * The label for the textarea.
          */
