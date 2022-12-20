@@ -721,6 +721,10 @@ export namespace Components {
          */
         "error"?: string;
         /**
+          * Optional hint text.
+         */
+        "hint"?: string;
+        /**
           * Whether or not `aria-invalid` will be set on the inner select. Useful when composing the component into something larger, like a date component.
          */
         "invalid"?: boolean;
@@ -2156,6 +2160,10 @@ declare namespace LocalJSX {
           * Error message to display. When defined, this indicates an error.
          */
         "error"?: string;
+        /**
+          * Optional hint text.
+         */
+        "hint"?: string;
         /**
           * Whether or not `aria-invalid` will be set on the inner select. Useful when composing the component into something larger, like a date component.
          */

@@ -69,6 +69,11 @@ export class VaSelect {
   @Prop() enableAnalytics?: boolean = false;
 
   /**
+   * Optional hint text.
+   */
+  @Prop() hint?: string;
+
+  /**
    * The event attached to select's onkeydown
    */
   @Event() vaKeyDown: EventEmitter;
@@ -149,7 +154,7 @@ export class VaSelect {
   }
 
   render() {
-    const { error, invalid, label, required, name } = this;
+    const { error, invalid, label, required, name, hint } = this;
 
     return (
       <Host>
@@ -157,6 +162,7 @@ export class VaSelect {
           {label}
           {required && <span class="required">{i18next.t('required')}</span>}
         </label>
+        {hint && <span class="hint-text">{hint}</span>}
         <span id="error-message" role="alert">
           {error && (
             <Fragment>

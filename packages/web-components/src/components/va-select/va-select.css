@@ -1,6 +1,7 @@
 @import '../../mixins/inputs.css';
 @import '../../mixins/accessibility.css';
 @import '../../mixins/form-field-error.css';
+@import '../../mixins/hint-text.css';
 
 :host {
   display: block;
@@ -19,8 +20,6 @@
 
 :host([error]:not([error=''])) > span {
   color: var(--color-secondary-dark);
-  padding-bottom: 3px;
-  padding-top: 3px;
 }
 
 ::slotted(option) {
