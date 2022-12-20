@@ -110,7 +110,6 @@ Error.args = {
   description:
     'Notice how the red line to the left also covers this description.',
   error: 'There has been a problem',
-  hint: "We're asking this because of XYZ",
 };
 
 export const Required = Template.bind(null);
