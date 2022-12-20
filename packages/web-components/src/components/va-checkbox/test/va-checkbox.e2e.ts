@@ -36,6 +36,15 @@ describe('va-checkbox', () => {
     expect(element.textContent).toContain('Something went horribly wrong');
   });
 
+  it('renders hint text', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-checkbox hint="This is hint text" />');
+
+    // Render the hint text
+    const hintTextElement = await page.find('va-checkbox >>> span.hint-text');
+    expect(hintTextElement.innerText).toContain('This is hint text');
+  });
+
   it('renders a required span', async () => {
     const page = await newE2EPage();
     await page.setContent('<va-checkbox label="I am Checkbox" required/>');

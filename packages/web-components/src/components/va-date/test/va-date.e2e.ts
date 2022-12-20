@@ -42,6 +42,15 @@ describe('va-date', () => {
     expect(error.innerText).toContain('This is a mistake');
   });
 
+  it('renders hint text', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-date hint="This is hint text" />');
+
+    // Render the hint text
+    const hintTextElement = await page.find('va-date >>> span.hint-text');
+    expect(hintTextElement.innerText).toContain('This is hint text');
+  });
+
   it('puts an aria-describedby attribute on child components when there is an error', async () => {
     const page = await newE2EPage();
     await page.setContent('<va-date error="This is a mistake" />');

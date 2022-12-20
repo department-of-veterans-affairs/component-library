@@ -32,6 +32,15 @@ describe('va-number-input', () => {
     expect(input.getAttribute('aria-invalid')).toEqual('true');
   });
 
+  it('renders hint text', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-number-input hint="This is hint text" />');
+
+    // Render the hint text
+    const hintTextElement = await page.find('va-number-input >>> span.hint-text');
+    expect(hintTextElement.innerText).toContain('This is hint text');
+  });
+
   it('renders a required span', async () => {
     const page = await newE2EPage();
     await page.setContent(

@@ -47,6 +47,15 @@ describe('va-memorable-date', () => {
     expect(error.innerText).toContain('This is a mistake');
   });
 
+  it('renders hint text', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-memorable-date hint="This is hint text" />');
+
+    // Render the hint text
+    const hintTextElement = await page.find('va-memorable-date >>> span.hint-text');
+    expect(hintTextElement.innerText).toContain('This is hint text');
+  });
+
   it('renders a required span', async () => {
     const page = await newE2EPage();
     await page.setContent(
