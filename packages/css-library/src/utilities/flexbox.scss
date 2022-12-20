@@ -68,6 +68,17 @@ $u-align-content: (
   ),
 );
 
+$u-align-self: (
+  align-self: (
+    base: 'vads-align-self',
+    modifiers: null,
+    values: map-collect($tokens-align-self),
+    settings: $flex-settings,
+    property: 'align-self',
+    type: 'utility',
+  ),
+);
+
 $u-order: (
   order: (
     base: 'vads-order',
@@ -86,5 +97,6 @@ $u-flexbox: map-collect(
   $u-align-items,
   $u-justify-content,
   $u-align-content,
+  $u-align-self,
   $u-order
 );
