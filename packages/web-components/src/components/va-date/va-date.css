@@ -34,10 +34,6 @@ span.required {
   margin-bottom: 0;
 }
 
-:host([error]:not([error=''])) #error-message {
-  /* padding-top: 0.8rem; */
-}
-
 .date-container {
   display: flex;
   margin-top: 12px;

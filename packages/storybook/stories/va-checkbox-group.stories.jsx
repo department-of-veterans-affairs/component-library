@@ -81,8 +81,8 @@ Default.args = {
 };
 Default.argTypes = propStructure(checkBoxGroupDocs);
 
-export const Hint = Template.bind(null);
-Hint.args = {
+export const WithHintText = Template.bind(null);
+WithHintText.args = {
   ...defaultArgs,
   hint: 'This is example hint text',
 };

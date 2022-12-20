@@ -79,8 +79,8 @@ export const Checked = Template.bind(null);
 Checked.args = { ...defaultArgs, checked: true };
 
 
-export const Hint = Template.bind(null);
-Hint.args = {
+export const WithHintText = Template.bind(null);
+WithHintText.args = {
   ...defaultArgs,
   description: 'Adding some descriptive text above the checkbox.',
   hint: "This is example hint text",

@@ -144,8 +144,8 @@ Default.args = {
 };
 Default.argTypes = propStructure(radioDocs);
 
-export const Hint = Template.bind(null);
-Hint.args = {
+export const WithHintText = Template.bind(null);
+WithHintText.args = {
   ...defaultArgs,
   hint: "This is example hint text",
 };
