@@ -76,6 +76,11 @@ export class VaCheckbox {
   @Event() vaChange: EventEmitter;
 
   /**
+   * Optional hint text.
+   */
+   @Prop() hint?: string;
+
+  /**
    * The event used to track usage of the component. This is emitted when the
    * input value changes and enableAnalytics is true.
    */
@@ -134,13 +139,14 @@ export class VaCheckbox {
   }
 
   render() {
-    const { error, label, required, description, checked } = this;
+    const { error, label, required, description, checked, hint } = this;
 
     return (
       <Host>
         <div id="description">
           {description ? <p>{description}</p> : <slot name="description" />}
         </div>
+        {hint && <span class="hint-text">{hint}</span>}
         <span id="error-message" role="alert">
           {error && (
             <Fragment>

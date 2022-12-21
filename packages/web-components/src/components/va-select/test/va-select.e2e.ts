@@ -45,6 +45,15 @@ describe('va-select', () => {
     expect(input.getAttribute('aria-invalid')).toEqual('true');
   });
 
+  it('renders hint text', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-select hint="This is hint text" />');
+
+    // Render the hint text
+    const hintTextElement = await page.find('va-select >>> span.hint-text');
+    expect(hintTextElement.innerText).toContain('This is hint text');
+  });
+
   it('sets aria-invalid based on invalid prop', async () => {
     const page = await newE2EPage();
     await page.setContent('<va-select invalid />');

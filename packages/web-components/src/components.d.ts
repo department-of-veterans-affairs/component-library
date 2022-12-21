@@ -228,6 +228,10 @@ export namespace Components {
          */
         "error"?: string;
         /**
+          * Optional hint text.
+         */
+        "hint"?: string;
+        /**
           * The label for the checkbox.
          */
         "label": string;
@@ -246,6 +250,10 @@ export namespace Components {
          */
         "error"?: string;
         /**
+          * Optional hint text.
+         */
+        "hint"?: string;
+        /**
           * The text label for the checkbox group.
          */
         "label": string;
@@ -263,6 +271,10 @@ export namespace Components {
           * The error message to render (if any) This prop should be leveraged to display any custom validations needed for this component
          */
         "error"?: string;
+        /**
+          * Optional hint text.
+         */
+        "hint"?: string;
         "invalidDay": boolean;
         "invalidMonth": boolean;
         "invalidYear": boolean;
@@ -306,6 +318,10 @@ export namespace Components {
           * The error message to render.
          */
         "error"?: string;
+        /**
+          * Optional hint text.
+         */
+        "hint"?: string;
         /**
           * The label for the file input.
          */
@@ -465,6 +481,10 @@ export namespace Components {
          */
         "error"?: string;
         /**
+          * Optional hint text.
+         */
+        "hint"?: string;
+        /**
           * The inputmode attribute.
          */
         "inputmode"?: 'decimal' | 'numeric';
@@ -597,9 +617,9 @@ export namespace Components {
          */
         "error"?: string;
         /**
-          * Optional hint text for the radio group.
+          * Optional hint text.
          */
-        "hint": string;
+        "hint"?: string;
         /**
           * The text label for the radio group.
          */
@@ -696,6 +716,10 @@ export namespace Components {
           * Error message to display. When defined, this indicates an error.
          */
         "error"?: string;
+        /**
+          * Optional hint text.
+         */
+        "hint"?: string;
         /**
           * Whether or not `aria-invalid` will be set on the inner select. Useful when composing the component into something larger, like a date component.
          */
@@ -844,6 +868,10 @@ export namespace Components {
           * The error message to render.
          */
         "error"?: string;
+        /**
+          * Optional hint text.
+         */
+        "hint"?: string;
         /**
           * The label for the textarea.
          */
@@ -1528,6 +1556,10 @@ declare namespace LocalJSX {
          */
         "error"?: string;
         /**
+          * Optional hint text.
+         */
+        "hint"?: string;
+        /**
           * The label for the checkbox.
          */
         "label": string;
@@ -1554,6 +1586,10 @@ declare namespace LocalJSX {
          */
         "error"?: string;
         /**
+          * Optional hint text.
+         */
+        "hint"?: string;
+        /**
           * The text label for the checkbox group.
          */
         "label": string;
@@ -1575,6 +1611,10 @@ declare namespace LocalJSX {
           * The error message to render (if any) This prop should be leveraged to display any custom validations needed for this component
          */
         "error"?: string;
+        /**
+          * Optional hint text.
+         */
+        "hint"?: string;
         "invalidDay"?: boolean;
         "invalidMonth"?: boolean;
         "invalidYear"?: boolean;
@@ -1630,6 +1670,10 @@ declare namespace LocalJSX {
           * The error message to render.
          */
         "error"?: string;
+        /**
+          * Optional hint text.
+         */
+        "hint"?: string;
         /**
           * The label for the file input.
          */
@@ -1833,6 +1877,10 @@ declare namespace LocalJSX {
          */
         "error"?: string;
         /**
+          * Optional hint text.
+         */
+        "hint"?: string;
+        /**
           * The inputmode attribute.
          */
         "inputmode"?: 'decimal' | 'numeric';
@@ -2001,7 +2049,7 @@ declare namespace LocalJSX {
          */
         "error"?: string;
         /**
-          * Optional hint text for the radio group.
+          * Optional hint text.
          */
         "hint"?: string;
         /**
@@ -2116,6 +2164,10 @@ declare namespace LocalJSX {
           * Error message to display. When defined, this indicates an error.
          */
         "error"?: string;
+        /**
+          * Optional hint text.
+         */
+        "hint"?: string;
         /**
           * Whether or not `aria-invalid` will be set on the inner select. Useful when composing the component into something larger, like a date component.
          */
@@ -2284,6 +2336,10 @@ declare namespace LocalJSX {
           * The error message to render.
          */
         "error"?: string;
+        /**
+          * Optional hint text.
+         */
+        "hint"?: string;
         /**
           * The label for the textarea.
          */

@@ -63,6 +63,11 @@ export class VaTextarea {
   @Prop() required?: boolean = false;
 
   /**
+   * Optional hint text.
+   */
+  @Prop() hint?: string;
+
+  /**
    * The maximum number of characters allowed in the input.
    * Negative and zero values will be ignored.
    */
@@ -132,7 +137,7 @@ export class VaTextarea {
   }
 
   render() {
-    const { label, error, placeholder, name, required, value } = this;
+    const { label, error, placeholder, name, required, value, hint } = this;
     const maxlength = this.getMaxlength();
 
     return (
@@ -141,7 +146,7 @@ export class VaTextarea {
           {label}
           {required && <span class="required">{i18next.t('required')}</span>}
         </label>
-
+        {hint && <span class="hint-text">{hint}</span>}
         <span id="error-message" role="alert">
           {error && (
             <Fragment>

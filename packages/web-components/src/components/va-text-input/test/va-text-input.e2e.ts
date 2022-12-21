@@ -111,6 +111,15 @@ describe('va-text-input', () => {
     expect(requiredSpan).not.toBeNull();
   });
 
+  it('renders hint text', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-text-input hint="This is hint text" />');
+
+    // Render the hint text
+    const hintTextElement = await page.find('va-text-input >>> span.hint-text');
+    expect(hintTextElement.innerText).toContain('This is hint text');
+  });
+
   it('passes an aXe check', async () => {
     const page = await newE2EPage();
 

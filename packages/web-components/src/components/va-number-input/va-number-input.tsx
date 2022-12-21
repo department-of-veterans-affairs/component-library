@@ -73,6 +73,11 @@ export class VaNumberInput {
   @Prop() max: number | string;
 
   /**
+   * Optional hint text.
+   */
+  @Prop() hint?: string;
+
+  /**
    * The value for the input.
    */
   @Prop({ mutable: true, reflect: true }) value?: string;
@@ -127,6 +132,7 @@ export class VaNumberInput {
       max,
       min,
       value,
+      hint,
       handleBlur,
       handleInput,
     } = this;
@@ -136,6 +142,7 @@ export class VaNumberInput {
           {label}{' '}
           {required && <span class="required">{i18next.t('required')}</span>}
         </label>
+        {hint && <span class="hint-text">{hint}</span>}
         <span id="error-message" role="alert">
           {error && (
             <Fragment>

@@ -219,11 +219,11 @@ export class VaTextInput {
       pattern,
       name,
       autocomplete,
+      hint,
       handleInput,
       handleBlur,
       uswds,
       success,
-      hint
     } = this;
     const type = this.getInputType();
     const maxlength = this.getMaxlength();
@@ -295,6 +295,7 @@ export class VaTextInput {
               {required && <span class="required">{i18next.t('required')}</span>}
             </label>
           )}
+          {hint && <span class="hint-text">{hint}</span>}
           <slot></slot>
           <span id="error-message" role="alert">
             {error && (

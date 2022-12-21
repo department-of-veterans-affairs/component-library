@@ -33,6 +33,15 @@ describe('va-textarea', () => {
     expect(textarea.getAttribute('aria-invalid')).toEqual('true');
   });
 
+  it('renders hint text', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-textarea hint="This is hint text" />');
+
+    // Render the hint text
+    const hintTextElement = await page.find('va-textarea >>> span.hint-text');
+    expect(hintTextElement.innerText).toContain('This is hint text');
+  });
+
   it('adds new aria-describedby for error message', async () => {
     const page = await newE2EPage();
     await page.setContent('<va-textarea error="This is a mistake" />');

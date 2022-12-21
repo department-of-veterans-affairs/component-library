@@ -51,6 +51,7 @@ const defaultArgs = {
   'type': undefined,
   'success': false,
   'pattern': undefined,
+  hint: null,
 };
 
 const Template = ({
@@ -67,6 +68,7 @@ const Template = ({
   type,
   success,
   pattern,
+  hint,
 }) => {
   return (
     <va-text-input
@@ -76,6 +78,7 @@ const Template = ({
       enable-analytics={enableAnalytics}
       required={required}
       error={error}
+      hint={hint}
       maxlength={maxlength}
       minlength={minlength}
       value={value}
@@ -185,7 +188,7 @@ Autocomplete.args = {
 export const WithAnalytics = Template.bind(null);
 WithAnalytics.args = { ...defaultArgs, 'enable-analytics': true };
 
-const WithHintTextTemplate = ({ name, label }) => {
+const AdditionalInfoTemplate = ({ name, label }) => {
   return (
     <va-text-input name={name} label={label}>
       <div className="vads-u-margin-bottom--1">
@@ -199,8 +202,11 @@ const WithHintTextTemplate = ({ name, label }) => {
   );
 };
 
-export const WithHintText = WithHintTextTemplate.bind(null);
-WithHintText.args = {
+export const WithHintText = Template.bind(null);
+WithHintText.args = { ...defaultArgs, hint: "This is example hint text" };
+
+export const WithAdditionalInfo = AdditionalInfoTemplate.bind(null);
+WithAdditionalInfo.args = {
   ...defaultArgs,
   label: 'Veteran’s Social Security number',
 };
