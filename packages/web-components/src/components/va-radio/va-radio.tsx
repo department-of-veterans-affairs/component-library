@@ -46,9 +46,9 @@ export class VaRadio {
   @Prop() label!: string;
 
   /**
-   * Optional hint text for the radio group.
+   * Optional hint text.
    */
-  @Prop() hint: string;
+  @Prop() hint?: string;
 
   /**
    * Whether or not this input field is required.
@@ -230,6 +230,7 @@ export class VaRadio {
               {label}
               {required && <span class="usa-label--required" part="required"> {i18next.t('required')}</span>}
             </legend>
+            {hint && <span class="usa-hint">{hint}</span>}
             <span class="usa-error-message" role="alert">
               {error && (
                 <Fragment>
@@ -237,7 +238,6 @@ export class VaRadio {
                 </Fragment>
               )}
             </span>
-            {hint && <span class="usa-hint">{hint}</span>}
             <slot></slot>
           </fieldset>
         </Host>

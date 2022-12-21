@@ -1,5 +1,6 @@
 @import '../../mixins/accessibility.css';
 @import '../../mixins/form-field-error.css';
+@import '../../mixins/hint-text.css';
 
 :host {
   display: block;
@@ -9,7 +10,7 @@
 
 :host p {
   margin-top: 0;
-  margin-bottom: 1.2rem;
+  margin-bottom: 0;
 }
 
 #error-message {

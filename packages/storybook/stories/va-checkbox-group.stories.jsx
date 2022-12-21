@@ -30,6 +30,7 @@ const vaCheckboxGroup = args => {
     error,
     label,
     required,
+    hint,
     ...rest
   } = args;
   return (
@@ -38,6 +39,7 @@ const vaCheckboxGroup = args => {
       error={error}
       label={label}
       required={required}
+      hint={hint}
     >
       <va-checkbox label="Option one" name="example" value="1" />
       <va-checkbox label="Option two" name="example" value="2" />
@@ -59,7 +61,9 @@ const I18nTemplate = args => {
       <button onClick={e => setLang('es')}>Español</button>
       <button onClick={e => setLang('en')}>English</button>
       <button onClick={e => setLang('tl')}>Tagalog</button>
-      {vaCheckboxGroup(args)}
+      <div style={{marginTop: '20px'}}>
+        {vaCheckboxGroup(args)}
+      </div>
     </div>
 )};
 
@@ -68,6 +72,7 @@ const defaultArgs = {
   'label': 'This is a label',
   'required': false,
   'error': null,
+  'hint': null,
 };
 
 export const Default = Template.bind(null);
@@ -75,6 +80,12 @@ Default.args = {
   ...defaultArgs,
 };
 Default.argTypes = propStructure(checkBoxGroupDocs);
+
+export const WithHintText = Template.bind(null);
+WithHintText.args = {
+  ...defaultArgs,
+  hint: 'This is example hint text',
+};
 
 export const Error = Template.bind(null);
 Error.args = {

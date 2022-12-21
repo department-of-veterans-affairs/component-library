@@ -40,6 +40,15 @@ describe('va-checkbox-group', () => {
     `);
   });
 
+  it('renders hint text', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-checkbox-group hint="This is hint text" />');
+
+    // Render the hint text
+    const hintTextElement = await page.find('va-checkbox-group >>> span.hint-text');
+    expect(hintTextElement.innerText).toContain('This is hint text');
+  });
+
   it('passes an axe check in error state', async () => {
     const page = await newE2EPage();
     await page.setContent(

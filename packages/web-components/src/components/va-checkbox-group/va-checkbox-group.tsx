@@ -57,6 +57,11 @@ export class VaCheckboxGroup {
   @Prop() enableAnalytics?: boolean = false;
 
   /**
+   * Optional hint text.
+   */
+  @Prop() hint?: string;
+
+  /**
    * The event used to track usage of the component. This is emitted when an
    * input value changes and enableAnalytics is true.
    */
@@ -96,13 +101,14 @@ export class VaCheckboxGroup {
   }
 
   render() {
-    const { label, required, error } = this;
+    const { label, required, error, hint } = this;
     return (
       <Host role="group">
         <legend>
           {label}
           {required && <span class="required">{i18next.t('required')}</span>}
         </legend>
+        {hint && <span class="hint-text">{hint}</span>}
         <span id="error-message" role="alert">
           {error && (
             <Fragment>

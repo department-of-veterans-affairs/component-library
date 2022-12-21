@@ -18,14 +18,11 @@
 
 @import '../../mixins/accessibility.css';
 @import '../../mixins/form-field-error.css';
+@import '../../mixins/hint-text.css';
 
 .required {
   color: var(--color-secondary-dark);
   margin: 0 0.35rem;
-}
-
-.hint-text {
-  color: var(--color-gray);
 }
 
 :host(:not([uswds])) legend {

@@ -113,8 +113,8 @@ const WithHintTextTemplate = ({ name, label, error, required, value }) => {
       required={required}
       error={error}
       value={value}
+      hint="This is example hint text"
     >
-      <div className="vads-u-margin-bottom--1">This is example hint text</div>
     </va-date>
   );
 };

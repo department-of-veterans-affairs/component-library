@@ -21,6 +21,7 @@ const defaultArgs = {
   'value': 'army',
   'required': false,
   'error': undefined,
+  hint: null,
   'aria-live-region-text': 'You selected',
   'options': [
     <option key="1" value="navy">
@@ -48,6 +49,7 @@ const Template = ({
   value,
   required,
   error,
+  hint,
   'aria-live-region-text': ariaLiveRegionText,
   options,
   'use-add-button': useAddButton,
@@ -76,6 +78,7 @@ const Template = ({
         value={value}
         required={required}
         error={error}
+        hint={hint}
         aria-live-region-text={ariaLiveRegionText}
         use-add-button={useAddButton}
       >
@@ -91,6 +94,9 @@ Default.argTypes = propStructure(selectDocs);
 
 export const Required = Template.bind(null);
 Required.args = { ...defaultArgs, required: true };
+
+export const WithHintText = Template.bind(null);
+WithHintText.args = { ...defaultArgs, hint: "This is example hint text" };
 
 export const ErrorMessage = Template.bind(null);
 ErrorMessage.args = { ...defaultArgs, error: 'There was a problem' };

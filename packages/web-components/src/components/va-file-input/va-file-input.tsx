@@ -57,6 +57,11 @@ export class VaFileInput {
   @Prop() error?: string;
 
   /**
+   * Optional hint text.
+   */
+  @Prop() hint?: string;
+
+  /**
    * Emit component-library-analytics events on the file input change event.
    */
    @Prop() enableAnalytics?: boolean = false;
@@ -117,6 +122,7 @@ export class VaFileInput {
       required, 
       accept,
       error,
+      hint,
     } = this;
     
     const text = this.getButtonText();
@@ -129,6 +135,7 @@ export class VaFileInput {
             {required && <span class="required">(*Required)</span>}
           </label>
         )}
+        {hint && <span class="hint-text">{hint}</span>}
         <slot></slot>
         <span id="error-message" role="alert">
           {error && (

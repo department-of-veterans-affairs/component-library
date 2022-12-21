@@ -52,6 +52,11 @@ export class VaDate {
   @Prop() name!: string;
 
   /**
+   * Optional hint text.
+   */
+  @Prop() hint?: string;
+
+  /**
    * The error message to render (if any)
    * This prop should be leveraged to display any custom validations needed for this component
    */
@@ -200,6 +205,7 @@ export class VaDate {
       handleDateKey,
       monthYearOnly,
       value,
+      hint,
     } = this;
 
     const [year, month, day] = (value || '')
@@ -214,6 +220,7 @@ export class VaDate {
           <legend>
             {label} {required && <span class="required">(*Required)</span>}
           </legend>
+          {hint && <span class="hint-text">{hint}</span>}
           <slot />
           <span id="error-message" role="alert">
             {error && (

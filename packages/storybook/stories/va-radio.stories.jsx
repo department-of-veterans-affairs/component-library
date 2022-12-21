@@ -135,6 +135,7 @@ const defaultArgs = {
   'required': false,
   'error': null,
   'uswds': false,
+  'hint': '',
 };
 
 export const Default = Template.bind(null);
@@ -143,10 +144,10 @@ Default.args = {
 };
 Default.argTypes = propStructure(radioDocs);
 
-export const Hint = Template.bind(null);
-Hint.args = {
+export const WithHintText = Template.bind(null);
+WithHintText.args = {
   ...defaultArgs,
-  hint: "We're asking this because of XYZ",
+  hint: "This is example hint text",
 };
 
 export const ReactWithCustomEvent = ReactBindingExample.bind(null);

@@ -37,6 +37,15 @@ describe('va-file-input', () => {
     expect(errorSpan.innerText).toBeNull;
   });
 
+  it('renders hint text', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-file-input hint="This is hint text" />');
+
+    // Render the hint text
+    const hintTextElement = await page.find('va-file-input >>> span.hint-text');
+    expect(hintTextElement.innerText).toContain('This is hint text');
+  });
+
   it('renders a required span', async () => {
     const page = await newE2EPage();
     await page.setContent(`<va-file-input required label="Example file input." buttonText="Upload a file"/>`);

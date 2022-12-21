@@ -24,6 +24,7 @@ const defaultArgs = {
   'maxlength': undefined,
   'value': undefined,
   'placeholder': '',
+  hint: null,
 };
 
 const Template = ({
@@ -35,6 +36,7 @@ const Template = ({
   maxlength,
   value,
   placeholder,
+  hint,
 }) => {
   return (
     <va-textarea
@@ -43,6 +45,7 @@ const Template = ({
       enable-analytics={enableAnalytics}
       required={required}
       error={error}
+      hint={hint}
       maxlength={maxlength}
       value={value}
       placeholder={placeholder}
@@ -95,6 +98,9 @@ MaxLength.args = {
   maxlength: '16',
   placeholder: 'No more than 16 characters',
 };
+
+export const WithHintText = Template.bind(null);
+WithHintText.args = { ...defaultArgs, hint: "This is example hint text" };
 
 export const WithAnalytics = Template.bind(null);
 WithAnalytics.args = { ...defaultArgs, 'enable-analytics': true };
