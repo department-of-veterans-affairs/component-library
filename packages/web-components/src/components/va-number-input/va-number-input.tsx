@@ -24,7 +24,7 @@ import i18next from 'i18next';
  */
 @Component({
   tag: 'va-number-input',
-  styleUrl: 'va-number-input.css',
+  styleUrl: 'va-number-input.scss',
   shadow: true,
 })
 export class VaNumberInput {

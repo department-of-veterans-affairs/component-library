@@ -9,6 +9,7 @@ import {
   forceUpdate,
   Fragment,
 } from '@stencil/core';
+import classnames from 'classnames';
 import i18next from 'i18next';
 import { Build } from '@stencil/core';
 import { consoleDevError } from '../../utils/utils';
@@ -32,7 +33,7 @@ if (Build.isTesting) {
 
 @Component({
   tag: 'va-text-input',
-  styleUrl: 'va-text-input.css',
+  styleUrl: 'va-text-input.scss',
   shadow: true,
 })
 export class VaTextInput {
@@ -138,6 +139,11 @@ export class VaTextInput {
   @Prop() success?: boolean = false;
 
   /**
+   * Whether or not the component will use USWDS v3 styling.
+   */
+   @Prop() uswds?: boolean = false;
+
+  /**
    * The event used to track usage of the component. This is emitted when the
    * input is blurred and enableAnalytics is true.
    */
@@ -216,55 +222,117 @@ export class VaTextInput {
       hint,
       handleInput,
       handleBlur,
+      uswds,
+      success,
     } = this;
     const type = this.getInputType();
     const maxlength = this.getMaxlength();
 
-    return (
-      <Host>
-        {label && (
-          <label htmlFor="inputField" part="label">
-            {label}{' '}
-            {required && <span class="required">{i18next.t('required')}</span>}
-          </label>
-        )}
-        {hint && <span class="hint-text">{hint}</span>}
-        <slot></slot>
-        <span id="error-message" role="alert">
-          {error && (
-            <Fragment>
-              <span class="sr-only">{i18next.t('error')}</span> {error}
-            </Fragment>
+    if (uswds) {
+      const labelClass = classnames({
+        'usa-label': true,
+        'usa-label--error': error,
+      });
+      const inputClass = classnames({
+        'usa-input': true,
+        'usa-input--success': success,
+        'usa-input--error': error,
+      });
+      return (
+        <Host>
+          {label && (
+            <label htmlFor="inputField" class={labelClass} part="label">
+              {label}
+              {required && <span class="usa-label--required"> {i18next.t('required')}</span>}
+            </label>
           )}
-        </span>
-        <input
-          id="inputField"
-          type={type}
-          value={value}
-          onInput={handleInput}
-          onBlur={handleBlur}
-          aria-describedby={error ? 'error-message' : undefined}
-          aria-invalid={invalid || error ? 'true' : 'false'}
-          inputmode={inputmode ? inputmode : undefined}
-          maxlength={maxlength}
-          minlength={minlength}
-          pattern={pattern}
-          name={name}
-          autocomplete={autocomplete}
-          required={required || null}
-          part="input"
-        />
-        {maxlength && value?.length >= maxlength && (
-          <small part="validation">
-            {i18next.t('max-chars', { length: maxlength })}
-          </small>
-        )}
-        {minlength && value?.length < minlength && (
-          <small part="validation">
-            {i18next.t('min-chars', { length: minlength })}
-          </small>
-        )}
+          {hint && <span class="usa-hint">{hint}</span>}
+          <slot></slot>
+          <span id="usa-error-message" role="alert">
+            {error && (
+              <Fragment>
+                <span class="usa-sr-only">{i18next.t('error')}</span> 
+                <span class="usa-error-message">{error}</span>
+              </Fragment>
+            )}
+          </span>
+          <input 
+            class={inputClass}
+            id="inputField"
+            type={type}
+            value={value}
+            onInput={handleInput}
+            onBlur={handleBlur}
+            aria-describedby={error ? 'usa-error-message' : undefined}
+            aria-invalid={invalid || error ? 'true' : 'false'}
+            inputmode={inputmode ? inputmode : undefined}
+            maxlength={maxlength}
+            minlength={minlength}
+            pattern={pattern}
+            name={name}
+            autocomplete={autocomplete}
+            required={required || null}
+            part="input"
+          />
+          {maxlength && value?.length >= maxlength && (
+            <small part="validation">
+              {i18next.t('max-chars', { length: maxlength })}
+            </small>
+          )}
+          {minlength && value?.length < minlength && (
+            <small part="validation">
+              {i18next.t('min-chars', { length: minlength })}
+            </small>
+          )}
       </Host>
-    );
+      );
+    } else{
+      return (
+        <Host>
+          {label && (
+            <label htmlFor="inputField" part="label">
+              {label}{' '}
+              {required && <span class="required">{i18next.t('required')}</span>}
+            </label>
+          )}
+          {hint && <span class="hint-text">{hint}</span>}
+          <slot></slot>
+          <span id="error-message" role="alert">
+            {error && (
+              <Fragment>
+                <span class="sr-only">{i18next.t('error')}</span> {error}
+              </Fragment>
+            )}
+          </span>
+          <input
+            id="inputField"
+            type={type}
+            value={value}
+            onInput={handleInput}
+            onBlur={handleBlur}
+            aria-describedby={error ? 'error-message' : undefined}
+            aria-invalid={invalid || error ? 'true' : 'false'}
+            inputmode={inputmode ? inputmode : undefined}
+            maxlength={maxlength}
+            minlength={minlength}
+            pattern={pattern}
+            name={name}
+            autocomplete={autocomplete}
+            required={required || null}
+            part="input"
+          />
+          {maxlength && value?.length >= maxlength && (
+            <small part="validation">
+              {i18next.t('max-chars', { length: maxlength })}
+            </small>
+          )}
+          {minlength && value?.length < minlength && (
+            <small part="validation">
+              {i18next.t('min-chars', { length: minlength })}
+            </small>
+          )}
+        </Host>
+      );
+    }
   }
 }
