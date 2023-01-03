@@ -60,6 +60,14 @@ describe('va-radio-option', () => {
     expect(changeSpy).toHaveReceivedEvent();
   });
 
+  it('displays an option description', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-radio-option description="Some description text"></va-radio>');
+
+    const description = await page.find('va-radio-option >>> .description');
+    expect(description.textContent).toEqual("Some description text");
+  });
+
   // Begin USWDS version test
 
   it('uswds version renders', async () => {
