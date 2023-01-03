@@ -17,7 +17,7 @@ describe('va-radio-option', () => {
     expect(element).toEqualHtml(`
     <va-radio-option id="yes2" label="Yes - Any Veteran" name="yes" value="2" aria-checked="false" role="radio" class="hydrated">
       <mock:shadow-root>
-        <label for="yes2">
+        <label for="yes2" id="option-label">
           Yes - Any Veteran
         </label>
       </mock:shadow-root>
@@ -62,7 +62,7 @@ describe('va-radio-option', () => {
 
   it('displays an option description', async () => {
     const page = await newE2EPage();
-    await page.setContent('<va-radio-option description="Some description text"></va-radio>');
+    await page.setContent('<va-radio-option description="Some description text"></va-radio-option>');
 
     const description = await page.find('va-radio-option >>> .description');
     expect(description.textContent).toEqual("Some description text");
@@ -70,7 +70,7 @@ describe('va-radio-option', () => {
 
   // Begin USWDS version test
 
-  it('uswds version renders', async () => {
+  it('uswds v3 renders', async () => {
     const page = await newE2EPage();
     await page.setContent('<va-radio-option uswds></va-radio-option>');
 
@@ -78,7 +78,7 @@ describe('va-radio-option', () => {
     expect(element).toHaveClass('hydrated');
   });
 
-  it('uswds version inserts and parses optional props and attributes correctly', async () => {
+  it('uswds v3 inserts and parses optional props and attributes correctly', async () => {
     const page = await newE2EPage();
     await page.setContent('<va-radio-option uswds id="yes2" label="Yes - Any Veteran" name="yes" value="2"></va-radio-option>');
 
@@ -97,7 +97,7 @@ describe('va-radio-option', () => {
     `);
   });
 
-  it('uswds version sets the ID based on the name and value, if not passed as a prop', async () => {
+  it('uswds v3 sets the ID based on the name and value, if not passed as a prop', async () => {
     const page = await newE2EPage();
     await page.setContent(
       '<va-radio-option uswds name="test" label="An option with spaces" value="1"></va-radio-option>',
@@ -108,7 +108,7 @@ describe('va-radio-option', () => {
     expect(await inputEl.getProperty('id')).toEqual('test1');
   });
 
-  it('uswds version sets checked to true based on prop', async () => {
+  it('uswds v3 sets checked to true based on prop', async () => {
     const page = await newE2EPage();
     await page.setContent(
       '<va-radio-option uswds checked label="An option"></va-radio-option>',
@@ -119,7 +119,7 @@ describe('va-radio-option', () => {
     expect(await inputEl.getProperty('checked')).toBeTruthy();
   });
 
-  it('uswds uswds version fires event for parent when changed', async () => {
+  it('uswds v3 fires event for parent when changed', async () => {
     const page = await newE2EPage();
     await page.setContent(
       '<va-radio-option uswds checked aria-describedby="test" label="A label" value="something" />',
@@ -132,7 +132,7 @@ describe('va-radio-option', () => {
     expect(changeSpy).toHaveReceivedEvent();
   });
 
-  it('uswds uswds version displays description text', async () => {
+  it('uswds v3 displays description text', async () => {
     const page = await newE2EPage();
     await page.setContent(
       '<va-radio-option uswds checked aria-describedby="test" label="A label" value="something" description="Example description" />',
