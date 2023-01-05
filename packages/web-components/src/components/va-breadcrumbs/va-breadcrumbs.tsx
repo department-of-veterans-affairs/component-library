@@ -90,8 +90,8 @@ export class VaBreadcrumbs {
   }
 
   componentDidLoad() {
-    // We are getting the slot nodes so that we can handle either receiving an anchor tag 
-    // or a list item with an anchor tag.
+    // We are getting the slot nodes so that we can handle either receiving an 
+    // anchor tag or a list item with an anchor tag.
     const slotNodes = (this.el.shadowRoot.querySelector('slot') as HTMLSlotElement)?.assignedNodes();
     if (!slotNodes) return;
 
@@ -108,17 +108,19 @@ export class VaBreadcrumbs {
   }
 
   /**
-   * This handles the use case of the component dynamically receiving new breadcrumb items.
-   * It will programmatically toggle the aria-current attribute on the last anchor tag
-   * and add the va-breadcrumbs-li class to the list item.
+   * This handles the use case of the component dynamically receiving
+   * new breadcrumb items. It will programmatically toggle the
+   * aria-current attribute on the last anchor tag and add the 
+   * va-breadcrumbs-li class to the list item.
    */
   handleSlotChange() {
     const slotNodes = (this.el.shadowRoot.querySelector('slot') as HTMLSlotElement)?.assignedNodes();
     if (!slotNodes) return;
 
     slotNodes.forEach((node: HTMLSlotElement, index: number) => {
-      // We are only handling li tags during slot change because it is expected that the dynamic state 
-      // usage of this component will only be adding new breadcrumbs items in the format of
+      // We are only handling li tags during slot change because it is 
+      // expected that the dynamic state  usage of this component will 
+      // only be adding new breadcrumbs items in the format of 
       // <li><a href="...">...</a></li>.
       if (node.nodeName === 'LI') {
         node.classList.add('va-breadcrumbs-li');
