@@ -1,6 +1,8 @@
 import { newE2EPage } from '@stencil/core/testing';
 import { axeCheck } from '../../../testing/test-helpers';
 
+const maxYear = new Date().getFullYear() + 100;
+
 describe('va-date', () => {
   it('renders', async () => {
     const page = await newE2EPage();
@@ -87,7 +89,7 @@ describe('va-date', () => {
       await handleYear.press('Tab');
 
       await page.waitForChanges();
-      expect(date.getAttribute('error')).toEqual("Please enter a year between 1900 and 2122");
+      expect(date.getAttribute('error')).toEqual(`Please enter a year between 1900 and ${maxYear}`);
     });
 
     // We don't have month or day validation here like we do for
@@ -145,7 +147,7 @@ describe('va-date', () => {
       await handleYear.press('Tab');
 
       await page.waitForChanges();
-      expect(date.getAttribute('error')).toEqual('Please enter a year between 1900 and 2122');
+      expect(date.getAttribute('error')).toEqual(`Please enter a year between 1900 and ${maxYear}`);
 
       await handleYear.press('0');
       await handleYear.press('2');
@@ -485,7 +487,7 @@ describe('va-date', () => {
       await handleYear.press('Tab');
       await page.waitForChanges();
 
-      expect(date.getAttribute('error')).toEqual('Please enter a year between 1900 and 2122');
+      expect(date.getAttribute('error')).toEqual(`Please enter a year between 1900 and ${maxYear}`);
     });
 
     it('checks for valid month', async () => {

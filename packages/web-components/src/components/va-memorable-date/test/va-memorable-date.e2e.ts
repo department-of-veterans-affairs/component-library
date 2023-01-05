@@ -1,6 +1,8 @@
 import { newE2EPage } from '@stencil/core/testing';
 import { axeCheck } from '../../../testing/test-helpers';
 
+const maxYear = new Date().getFullYear() + 100;
+
 describe('va-memorable-date', () => {
   it('renders', async () => {
     const page = await newE2EPage();
@@ -73,7 +75,7 @@ describe('va-memorable-date', () => {
       await handleYear.press('Tab');
 
       await page.waitForChanges();
-      expect(date.getAttribute('error')).toEqual("Please enter a year between 1900 and 2122");
+      expect(date.getAttribute('error')).toEqual(`Please enter a year between 1900 and ${maxYear}`);
     });
 
     it('does month validation without required prop', async () => {
@@ -165,7 +167,7 @@ describe('va-memorable-date', () => {
       await handleYear.press('Tab');
 
       await page.waitForChanges();
-      expect(date.getAttribute('error')).toEqual('Please enter a year between 1900 and 2122');
+      expect(date.getAttribute('error')).toEqual(`Please enter a year between 1900 and ${maxYear}`);
 
       await handleYear.press('0');
       await handleYear.press('2');
