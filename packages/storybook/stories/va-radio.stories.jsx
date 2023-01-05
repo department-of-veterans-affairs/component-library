@@ -63,6 +63,7 @@ const I18nTemplate = args => {
       <button onClick={e => setLang('es')}>Español</button>
       <button onClick={e => setLang('en')}>English</button>
       <button onClick={e => setLang('tl')}>Tagalog</button>
+      <br /><br />
       {vaRadioConst(args)}
     </div>
 )};
@@ -110,6 +111,7 @@ const IdUsageTemplate = ({
           value="2"
         />
       </va-radio>
+      <br />
       <va-radio
         enable-analytics={enableAnalytics}
         error={error}
@@ -127,6 +129,61 @@ const IdUsageTemplate = ({
     </>
   );
 };
+
+const OptionDescriptionExample = args => {
+  const {   
+    'enable-analytics': enableAnalytics,
+    error,
+    label,
+    hint,
+    required,
+    ...rest
+  } = args;
+  return (
+    <va-radio
+      enable-analytics={enableAnalytics}
+      error={error}
+      label={label}
+      required={required}
+      hint={hint}
+    >
+      <va-radio-option 
+        label="Option one" 
+        name="example" 
+        value="1" 
+        description="This is optional text that can be used to describe the label in more detail." />
+      <va-radio-option label="Option two" name="example" value="2" />
+    </va-radio>
+  )
+}
+
+const OptionTileExample = args => {
+  const {   
+    'enable-analytics': enableAnalytics,
+    error,
+    label,
+    hint,
+    required,
+    ...rest
+  } = args;
+  return (
+    <va-radio
+      enable-analytics={enableAnalytics}
+      error={error}
+      label={label}
+      required={required}
+      hint={hint}
+    >
+      <va-radio-option 
+        label="Option one" 
+        name="example" 
+        value="1" 
+        tile
+        description="This is optional text that can be used to describe the label in more detail." />
+      <va-radio-option label="Option two" name="example" value="2" tile />
+    </va-radio>
+  )
+}
 
 const defaultArgs = {
   'enable-analytics': false,
@@ -148,6 +205,16 @@ export const WithHintText = Template.bind(null);
 WithHintText.args = {
   ...defaultArgs,
   hint: "This is example hint text",
+};
+
+export const WithDescriptionText = OptionDescriptionExample.bind(null);
+WithDescriptionText.args = {
+  ...defaultArgs,
+};
+
+export const Tiled = OptionTileExample.bind(null);
+Tiled.args = {
+  ...defaultArgs,
 };
 
 export const ReactWithCustomEvent = ReactBindingExample.bind(null);

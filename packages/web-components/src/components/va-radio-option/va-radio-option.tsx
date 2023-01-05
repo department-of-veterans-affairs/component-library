@@ -76,7 +76,16 @@ export class VaRadioOption {
   }
 
   render() {
-    const { checked, ariaDescribedby, name, value, label, uswds, disabled, tile } = this;
+    const { 
+      checked, 
+      ariaDescribedby, 
+      name, 
+      value, 
+      label, 
+      uswds, 
+      disabled, 
+      tile, 
+      description } = this;
     const id = this.el.id || (name + value);
 
     if (uswds) {
@@ -98,7 +107,7 @@ export class VaRadioOption {
           />
           <label htmlFor={id} id="option-label" class="usa-radio__label">
             {label}
-            {this.description && <span class="usa-radio__label-description" aria-describedby="option-label">{this.description}</span>}
+            {description && <span class="usa-radio__label-description" aria-describedby="option-label">{description}</span>}
           </label>
         </div>
       )
@@ -114,7 +123,10 @@ export class VaRadioOption {
           value={value}
           id={id}
         >
-          <label htmlFor={id}>{label}</label>
+          <label htmlFor={id} id="option-label">
+            {label}
+            {description && <span class="description" aria-describedby="option-label">{description}</span>}
+          </label>
         </Host>
       );
     }
