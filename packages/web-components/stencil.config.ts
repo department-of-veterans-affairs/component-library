@@ -9,7 +9,10 @@ export const config: Config = {
   globalStyle: 'src/global/main.css',
   plugins: [
     sass({ 
-      includePaths: ["../../node_modules/@uswds/uswds/packages/"],
+      includePaths: [
+        '../../node_modules/@uswds/uswds/packages/',
+        'src/global/'
+      ],
     }),
     postcss({
       plugins: [url({ url: 'inline' })],
