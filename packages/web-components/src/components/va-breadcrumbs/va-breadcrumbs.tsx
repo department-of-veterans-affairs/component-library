@@ -129,7 +129,7 @@ export class VaBreadcrumbs {
       if (node.nodeName === 'LI') {
         node.classList.add('va-breadcrumbs-li');
         const anchor = node.querySelector('a');
-        const isAriaCurrent = anchor.getAttribute('aria-current');
+        const isAriaCurrent = anchor?.getAttribute('aria-current');
 
         if (isAriaCurrent && index !== slotNodes.length - 1) {
           anchor.removeAttribute('aria-current');
@@ -137,7 +137,7 @@ export class VaBreadcrumbs {
 
         if (index === slotNodes.length - 1) {
           /* eslint-disable-next-line i18next/no-literal-string */
-          anchor.setAttribute('aria-current', 'page');
+          anchor?.setAttribute('aria-current', 'page');
         }
       }
     });
