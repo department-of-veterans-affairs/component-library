@@ -114,7 +114,7 @@ export class VaBreadcrumbs {
    * va-breadcrumbs-li class to the list item.
    */
   handleSlotChange() {
-    // Get all of the slot nodes and filter out only but the anchor tags and list items.
+    // Get all of the slot nodes and filter out only the list items.
     const slotNodes = (this.el.shadowRoot.querySelector('slot') as HTMLSlotElement)
       ?.assignedNodes()
       .filter((node: HTMLSlotElement) => node.nodeName === 'LI');
@@ -122,7 +122,7 @@ export class VaBreadcrumbs {
     if (!slotNodes) return;
 
     slotNodes.forEach((node: HTMLSlotElement, index: number) => {
-      // We are only handling li tags during slot change because it is 
+      // We are only handling li nodes during slot change because it is 
       // expected that the dynamic state usage of this component will 
       // only be adding new breadcrumbs items in the format of 
       // <li><a href="...">...</a></li>.
