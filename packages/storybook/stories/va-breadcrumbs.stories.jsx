@@ -55,6 +55,7 @@ const DynamicCrumbsTemplate = ({
       <button onClick={e => replaceCrumbs()}>Replace Crumbs</button>
       <button onClick={e => resetCrumbs()}>Reset Crumbs</button>
       <br/>
+      <p>Note: The breadcrumbs passed into the slot must have list tags wrapping each anchor element.</p>
       {crumbs.length > 0 && (
         <va-breadcrumbs label={label} disable-analytics={disableAnalytics}>
           {crumbs?.map((crumb, i) => {
