@@ -59,8 +59,8 @@ const DynamicCrumbsTemplate = ({
         <va-breadcrumbs label={label} disable-analytics={disableAnalytics}>
           {crumbs?.map((crumb, i) => {
             return (
-              <li>
-                <a key={i} href={crumb.path}>
+              <li key={i}>
+                <a href={crumb.path}>
                   {crumb.label}
                 </a>
               </li>

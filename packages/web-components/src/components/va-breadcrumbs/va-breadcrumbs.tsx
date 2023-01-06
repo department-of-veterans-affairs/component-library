@@ -69,7 +69,7 @@ export class VaBreadcrumbs {
     }
   }
 
-  private handleAnchorNode(node, index, slotNodes) {
+  private handleAnchorNode(node: HTMLSlotElement, index: number, slotNodes: Node[]) {
     const li = document.createElement('li');
     li.classList.add('va-breadcrumbs-li');
     if (index === slotNodes.length - 1) {
@@ -80,7 +80,7 @@ export class VaBreadcrumbs {
     li.appendChild(node);
   }
 
-  private handleListNode(node, index, slotNodes) {
+  private handleListNode(node: HTMLSlotElement, index: number, slotNodes: Node[]) {
     node.classList.add('va-breadcrumbs-li');
     const anchor = node.querySelector('a');
     if (anchor && index === slotNodes.length - 1) {
@@ -98,7 +98,7 @@ export class VaBreadcrumbs {
     // This handles two different slot node scenarios:
     // 1. <li><a href="...">...</a></li>
     // 2. <a href="...">...</a>
-    slotNodes.forEach((node: HTMLAnchorElement, index: number) => {
+    slotNodes.forEach((node: HTMLSlotElement, index: number) => {
       if (node.nodeName === 'LI') { 
         this.handleListNode(node, index, slotNodes);
       } else if (node.nodeName === 'A') {
@@ -114,12 +114,16 @@ export class VaBreadcrumbs {
    * va-breadcrumbs-li class to the list item.
    */
   handleSlotChange() {
-    const slotNodes = (this.el.shadowRoot.querySelector('slot') as HTMLSlotElement)?.assignedNodes();
+    // Get all of the slot nodes and filter out only but the anchor tags and list items.
+    const slotNodes = (this.el.shadowRoot.querySelector('slot') as HTMLSlotElement)
+      ?.assignedNodes()
+      .filter((node: HTMLSlotElement) => node.nodeName === 'LI');
+
     if (!slotNodes) return;
 
     slotNodes.forEach((node: HTMLSlotElement, index: number) => {
       // We are only handling li tags during slot change because it is 
-      // expected that the dynamic state  usage of this component will 
+      // expected that the dynamic state usage of this component will 
       // only be adding new breadcrumbs items in the format of 
       // <li><a href="...">...</a></li>.
       if (node.nodeName === 'LI') {
@@ -127,7 +131,7 @@ export class VaBreadcrumbs {
         const anchor = node.querySelector('a');
         const isAriaCurrent = anchor.getAttribute('aria-current');
 
-        if (isAriaCurrent) {
+        if (isAriaCurrent && index !== slotNodes.length - 1) {
           anchor.removeAttribute('aria-current');
         }
 
