@@ -55,7 +55,7 @@ const DynamicCrumbsTemplate = ({
       <button onClick={e => replaceCrumbs()}>Replace Crumbs</button>
       <button onClick={e => resetCrumbs()}>Reset Crumbs</button>
       <br/>
-      <p>Note: The breadcrumbs passed into the slot must have list tags wrapping each anchor element.</p>
+      <p>Note: To rerender the breadcrumbs dynamically, the anchor links must be wrapped in list tags.</p>
       {crumbs.length > 0 && (
         <va-breadcrumbs label={label} disable-analytics={disableAnalytics}>
           {crumbs?.map((crumb, i) => {
@@ -85,5 +85,5 @@ Default.args = {
 };
 Default.argTypes = propStructure(breadcrumbsDocs);
 
-export const DynamicState = DynamicCrumbsTemplate.bind(null);
-DynamicState.args = { ...defaultArgs };
+export const RerenderState = DynamicCrumbsTemplate.bind(null);
+RerenderState.args = { ...defaultArgs };
