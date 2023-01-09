@@ -69,17 +69,77 @@ export class VaBreadcrumbs {
     }
   }
 
-  componentWillLoad() {
-    const anchorNodes = Array.from(this.el.querySelectorAll('a'));
-    anchorNodes.forEach((crumb: HTMLAnchorElement, index: number) => {
-      const li = document.createElement('li');
-      li.classList.add('va-breadcrumbs-li');
-      if (index === anchorNodes.length - 1) {
-        /* eslint-disable-next-line i18next/no-literal-string */
-        crumb.setAttribute('aria-current', 'page');
+  private handleAnchorNode(node: HTMLSlotElement, index: number, slotNodes: Node[]) {
+    const li = document.createElement('li');
+    li.classList.add('va-breadcrumbs-li');
+    if (index === slotNodes.length - 1) {
+      /* eslint-disable-next-line i18next/no-literal-string */
+      node.setAttribute('aria-current', 'page');
+    }
+    node.parentNode.replaceChild(li, node);
+    li.appendChild(node);
+  }
+
+  private handleListNode(node: HTMLSlotElement, index: number, slotNodes: Node[]) {
+    node.classList.add('va-breadcrumbs-li');
+    const anchor = node.querySelector('a');
+    if (anchor && index === slotNodes.length - 1) {
+      /* eslint-disable-next-line i18next/no-literal-string */
+      anchor.setAttribute('aria-current', 'page');
+    }
+  }
+
+  componentDidLoad() {
+    // We are getting the slot nodes so that we can handle either receiving an 
+    // anchor tag or a list item with an anchor tag.
+    const slotNodes = (this.el.shadowRoot.querySelector('slot') as HTMLSlotElement)?.assignedNodes();
+    if (!slotNodes) return;
+
+    // This handles two different slot node scenarios:
+    // 1. <li><a href="...">...</a></li>
+    // 2. <a href="...">...</a>
+    slotNodes.forEach((node: HTMLSlotElement, index: number) => {
+      if (node.nodeName === 'LI') { 
+        this.handleListNode(node, index, slotNodes);
+      } else if (node.nodeName === 'A') {
+        this.handleAnchorNode(node, index, slotNodes);
       }
-      crumb.parentNode.replaceChild(li, crumb);
-      li.appendChild(crumb);
+    });
+  }
+
+  /**
+   * This handles the use case of the component dynamically receiving
+   * new breadcrumb items. It will programmatically toggle the
+   * aria-current attribute on the last anchor tag and add the 
+   * va-breadcrumbs-li class to the list item.
+   */
+  handleSlotChange() {
+    // Get all of the slot nodes and filter out only the list items.
+    const slotNodes = (this.el.shadowRoot.querySelector('slot') as HTMLSlotElement)
+      ?.assignedNodes()
+      .filter((node: HTMLSlotElement) => node.nodeName === 'LI');
+
+    if (!slotNodes) return;
+
+    slotNodes.forEach((node: HTMLSlotElement, index: number) => {
+      // We are only handling li nodes during slot change because it is 
+      // expected that the dynamic state usage of this component will 
+      // only be adding new breadcrumbs items in the format of 
+      // <li><a href="...">...</a></li>.
+      if (node.nodeName === 'LI') {
+        node.classList.add('va-breadcrumbs-li');
+        const anchor = node.querySelector('a');
+        const isAriaCurrent = anchor?.getAttribute('aria-current');
+
+        if (isAriaCurrent && index !== slotNodes.length - 1) {
+          anchor.removeAttribute('aria-current');
+        }
+
+        if (index === slotNodes.length - 1) {
+          /* eslint-disable-next-line i18next/no-literal-string */
+          anchor?.setAttribute('aria-current', 'page');
+        }
+      }
     });
   }
 
@@ -90,7 +150,7 @@ export class VaBreadcrumbs {
       <Host>
         <nav aria-label={label}>
           <ul role="list" onClick={e => this.fireAnalyticsEvent(e)}>
-            <slot></slot>
+            <slot onSlotchange={this.handleSlotChange.bind(this)}></slot>
           </ul>
         </nav>
       </Host>

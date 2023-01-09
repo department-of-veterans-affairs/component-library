@@ -20,13 +20,46 @@ describe('va-breadcrumbs', () => {
     `);
   });
 
-  it('renders slotted content', async () => {
+  it('renders slotted content (anchor tags)', async () => {
     const page = await newE2EPage();
     await page.setContent(`
       <va-breadcrumbs>
         <a href="#home">Home</a>
         <a href="#one">Level One</a>
         <a href="#two">Level Two</a>
+      </va-breadcrumbs>
+    `);
+
+    const element = await page.find('va-breadcrumbs');
+    expect(element).toEqualHtml(`
+      <va-breadcrumbs class="hydrated">
+        <mock:shadow-root>
+          <nav aria-label="Breadcrumb">
+            <ul role="list">
+              <slot></slot>
+            </ul>
+          </nav>
+        </mock:shadow-root>
+        <li class="va-breadcrumbs-li">
+          <a href="#home">Home</a>
+        </li>
+        <li class="va-breadcrumbs-li">
+          <a href="#one">Level One</a>
+        </li>
+        <li class="va-breadcrumbs-li">
+          <a aria-current="page" href="#two">Level Two</a>
+        </li>
+      </va-breadcrumbs>
+    `);
+  });
+
+  it('renders slotted content (list items)', async () => {
+    const page = await newE2EPage();
+    await page.setContent(`
+      <va-breadcrumbs>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#one">Level One</a></li>
+        <li><a href="#two">Level Two</a></li>
       </va-breadcrumbs>
     `);
 
