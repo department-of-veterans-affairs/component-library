@@ -89,6 +89,7 @@ const I18nTemplate = ({ label, name, required, error, value }) => {
 
   useEffect(() => {
     document.querySelector('main').setAttribute('lang', lang);
+    window.dispatchEvent(new CustomEvent('langchange', { detail: { lang } } ));
   }, [lang]);
 
   return (

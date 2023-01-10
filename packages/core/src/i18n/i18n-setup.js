@@ -46,3 +46,14 @@ window.addEventListener('load', event => {
     });
   }
 });
+
+/**
+ * This handles updating the component language
+ * when toggled in Storybook during situations
+ * where the MutationObserver was not firing and a page refresh
+ * was required.
+ */
+window.addEventListener('langchange', (event) => {
+  const lang = event.detail?.lang;
+  i18next.changeLanguage(lang);
+});
