@@ -45,15 +45,29 @@ window.addEventListener('load', event => {
       attributes: true,
     });
   }
-});
 
-/**
- * This handles updating the component language
- * when toggled in Storybook during situations
- * where the MutationObserver was not firing and a page refresh
- * was required.
- */
-window.addEventListener('langchange', (event) => {
-  const lang = event.detail?.lang;
-  i18next.changeLanguage(lang);
+  /**
+   * Storybook specific events.
+   */
+  if (!element?.classList.contains('storybook')) return;
+  
+  /**
+   * This custom event fires when when the URL changes.
+   * Added for Storybook.
+   */
+  window.addEventListener('locationchange', () => {
+    const element = document.querySelector('main');
+    const lang = element?.getAttribute('lang', lang);
+    if (lang) i18next.changeLanguage(lang);
+  });
+  /**
+   * This handles updating the component language
+   * when toggled in Storybook during situations
+   * where the MutationObserver was not firing and a page refresh
+   * was required.
+   */
+  window.addEventListener('langchange', (event) => {
+    const lang = event.detail?.lang;
+    if (lang) i18next.changeLanguage(lang);
+  });
 });
