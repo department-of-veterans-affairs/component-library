@@ -1,7 +1,8 @@
 export default {
   'error': 'Error',
   'required': '(*Kailangan)',
-  'max-chars': '(Pinakamarami ang {{length}} character)',
+  'max-chars': '(Pinakamarami ang {{length}} karakter)',
+  'min-chars': '(Pinakamababa ang {{length}}) karakter)',
   'date-of-birth': 'Petsa ng Kapanganakan',
   'month': 'Buwan',
   'day': 'Araw',
@@ -12,4 +13,5 @@ export default {
   'expand-all-aria-label': 'I-expand ang lahat ng accordion',
   'collapse-all-aria-label': 'I-collapse ang lahat ng accordion',
   'on-this-page': 'Sa pahinang ito',
+  'date-hint': 'Mangyaring maglagay ang dalawang numero para sa buwan at apat na numero para sa taon',
 };
