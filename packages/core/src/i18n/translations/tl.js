@@ -2,7 +2,7 @@ export default {
   'error': 'Error',
   'required': '(*Kailangan)',
   'max-chars': '(Pinakamarami ang {{length}} karakter)',
-  'min-chars': '(Pinakamababa ang {{length}}) karakter)',
+  'min-chars': '(Pinakamababa ang {{length}} karakter)',
   'date-of-birth': 'Petsa ng Kapanganakan',
   'month': 'Buwan',
   'day': 'Araw',
