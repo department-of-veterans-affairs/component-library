@@ -208,7 +208,7 @@ export class VaPagination {
                   onKeyDown={e => this.handleKeyDown(e, pages)}
                   type="button"
                 >
-                  <span class="sr-only">Last page, page {pages}</span>{pages}
+                  <span class="sr-only">Page</span>{pages}
                 </button>
               </li>
             </Fragment>
