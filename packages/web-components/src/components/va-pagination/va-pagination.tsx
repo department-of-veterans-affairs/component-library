@@ -6,6 +6,7 @@ import {
   Host,
   h,
   Prop,
+  Element,
 } from '@stencil/core';
 import classnames from 'classnames';
 
@@ -21,6 +22,7 @@ import classnames from 'classnames';
   shadow: true,
 })
 export class VaPagination {
+  @Element() el: HTMLElement;
   /**
    * Fires when a page is selected
    */
@@ -70,6 +72,10 @@ export class VaPagination {
 
   private handlePageSelect = (page, eventID) => {
     this.pageSelect.emit({ page });
+
+    // Reset focus to the active page button.
+    (this.el.shadowRoot.activeElement as HTMLElement).blur();
+
     if (this.enableAnalytics) {
       const detail = {
         componentName: 'va-pagination',
@@ -124,6 +130,10 @@ export class VaPagination {
     if (keyCode === 'Enter' || keyCode === ' ') {
       e.preventDefault();
       if (!pageNumber) return;
+
+      // Reset focus to the active page button.
+      (this.el.shadowRoot.activeElement as HTMLElement).blur();
+
       /* eslint-disable-next-line i18next/no-literal-string */
       this.handlePageSelect(pageNumber, 'nav-paginate-number');
     }
@@ -146,7 +156,6 @@ export class VaPagination {
       return (
         <li>
           <button
-            data-page-id={pageNumber}
             aria-current={page === pageNumber ? 'true' : null}
             class={pageClass}
             onClick={() =>
@@ -192,7 +201,6 @@ export class VaPagination {
               </li>
               <li>
                 <button
-                  data-page-id={pages}
                   class="button-inner"
                   onClick={() =>
                     this.handlePageSelect(pages, 'nav-paginate-number')
