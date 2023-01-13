@@ -18,8 +18,8 @@ export default {
 
 const defaultArgs = {
   'page': 3,
-  'pages': 5,
-  'show-last-page': false,
+  'pages': 15,
+  'show-last-page': true,
 };
 
 const Template = ({
@@ -32,12 +32,16 @@ const Template = ({
     setPage(event.detail.page);
   };
   return (
-    <VaPagination
-      page={page}
-      pages={pages}
-      onPageSelect={handlePageSelect}
-      showLastPage={showLastPage}
-    />
+    <>
+      <h2>Current page: {page}</h2>
+      <br />
+      <VaPagination
+        page={page}
+        pages={pages}
+        onPageSelect={handlePageSelect}
+        showLastPage={showLastPage}
+      />
+    </>
   );
 };
 
