@@ -41,7 +41,7 @@
   },
   "v3-color": {
     "error": {
-      "darker": { "value": "#8b0a03"}
+      "dark": { "value": "#b50909"}
     }
   }
 }
