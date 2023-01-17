@@ -40,41 +40,41 @@ describe('va-pagination', () => {
         <mock:shadow-root>
           <ul class="pagination-prev">
           <li>
-            <button aria-label="Previous page " class="button-prev" type="button">
-              Prev
+            <button aria-label="Previous page" class="button-prev" type="button">
+              Previous
             </button>
           </li>
           </ul>
           <ul class="pagination-inner">
             <li>
-              <button aria-label="Page 1 " class="button-inner" type="button">
+              <button aria-label="Page 1" class="button-inner" type="button">
                 1
               </button>
             </li>
             <li>
-              <button aria-label="Page 2 " class="button-inner" type="button">
+              <button aria-label="Page 2" class="button-inner" type="button">
                 2
               </button>
             </li>
             <li>
-              <button aria-current="true" aria-label="Page 3 " class="button-active button-inner" type="button">
+              <button aria-current="true" aria-label="Page 3" class="button-active button-inner" type="button">
                 3
               </button>
             </li>
             <li>
-              <button aria-label="Page 4 " class="button-inner" type="button">
+              <button aria-label="Page 4" class="button-inner" type="button">
                 4
               </button>
             </li>
             <li>
-              <button aria-label="Page 5 " class="button-inner" type="button">
+              <button aria-label="Page 5" class="button-inner" type="button">
                 5
               </button>
             </li>
           </ul>
           <ul class="pagination-next">
             <li>
-              <button aria-label="Next page " class="button-next" type="button">
+              <button aria-label="Next page" class="button-next" type="button">
                 Next
               </button>
             </li>
@@ -125,7 +125,7 @@ describe('va-pagination', () => {
     `);
     const onPageSelectSpy = await page.spyOnEvent('pageSelect');
     const page5Button = await page.find(
-      'va-pagination >>> button[aria-label="Page 5 "]',
+      'va-pagination >>> button[aria-label="Page 5"]',
     );
     await page5Button.click();
     expect(onPageSelectSpy).toHaveReceivedEventDetail({ page: 5 });
@@ -141,7 +141,7 @@ describe('va-pagination', () => {
     await component.press('Tab');
 
     const focused = await page.find('va-pagination >>> button:focus');
-    expect(focused.textContent).toEqual('Prev');
+    expect(focused.textContent).toEqual('Previous');
   });
 
   it('should tab to prev button and select it using the enter key', async () => {
@@ -165,6 +165,9 @@ describe('va-pagination', () => {
     const activeButton = await page.find(
       'va-pagination >>> button[aria-current="true"]',
     );
+
+    console.log('*** activeButton', activeButton);
+
     expect(activeButton.textContent).toEqual('3');
   });
 
@@ -175,7 +178,7 @@ describe('va-pagination', () => {
     `);
 
     const lastPageButton = await page.find(
-      'va-pagination >>> button[aria-label*="Load last page"]',
+      'va-pagination >>> button[aria-label*="Page 50"]',
     );
 
     expect(lastPageButton.textContent).toEqual('50');

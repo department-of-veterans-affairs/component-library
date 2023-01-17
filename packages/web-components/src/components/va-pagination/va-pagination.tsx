@@ -147,16 +147,23 @@ export class VaPagination {
       return <div />;
     }
 
+    const previousAriaLabel = ariaLabelSuffix ? `Previous page ${ariaLabelSuffix}` : 'Previous page';
+    const nextAriaLabel = ariaLabelSuffix ? `Next page ${ariaLabelSuffix}` : 'Next page';
+    const lastPageAriaLabel = ariaLabelSuffix ? `Page ${pages} ${ariaLabelSuffix}` : `Page ${pages}`;
+
     const renderPages = this.pageNumbers().map(pageNumber => {
       const pageClass = classnames({
         'button-active': page === pageNumber,
         'button-inner': true,
       });
 
+      const pageAriaLabel = ariaLabelSuffix ? `Page ${pageNumber} ${ariaLabelSuffix}` : `Page ${pageNumber}`;
+
       return (
         <li>
           <button
             aria-current={page === pageNumber ? 'true' : null}
+            aria-label={pageAriaLabel}
             class={pageClass}
             onClick={() =>
               this.handlePageSelect(pageNumber, 'nav-paginate-number')
@@ -164,8 +171,7 @@ export class VaPagination {
             onKeyDown={e => this.handleKeyDown(e, pageNumber)}
             type="button"
           >
-            <span class="sr-only">Page</span>{pageNumber}
-            {ariaLabelSuffix && (<span class="sr-only"> {ariaLabelSuffix}</span>)}
+            {pageNumber}
           </button>
         </li>
       );
@@ -178,6 +184,7 @@ export class VaPagination {
           {this.page > 1 && (
             <li>
               <button
+                aria-label={previousAriaLabel}
                 class="button-prev"
                 onClick={() =>
                   this.handlePageSelect(this.page - 1, 'nav-paginate-previous')
@@ -185,8 +192,7 @@ export class VaPagination {
                 onKeyDown={e => this.handleKeyDown(e, this.page - 1)}
                 type="button"
               >
-                Previous<span class="sr-only"> Page</span>
-                {ariaLabelSuffix && (<span class="sr-only"> {ariaLabelSuffix}</span>)}
+                Previous
               </button>
             </li>
           )}
@@ -203,6 +209,7 @@ export class VaPagination {
               </li>
               <li>
                 <button
+                  aria-label={lastPageAriaLabel}
                   class="button-inner"
                   onClick={() =>
                     this.handlePageSelect(pages, 'nav-paginate-number')
@@ -210,8 +217,7 @@ export class VaPagination {
                   onKeyDown={e => this.handleKeyDown(e, pages)}
                   type="button"
                 >
-                  <span class="sr-only">Page</span>{pages}
-                  {ariaLabelSuffix && (<span class="sr-only"> {ariaLabelSuffix}</span>)}
+                  {pages}
                 </button>
               </li>
             </Fragment>
@@ -224,6 +230,7 @@ export class VaPagination {
           {this.pages > this.page && (
             <li>
               <button
+                aria-label={nextAriaLabel}
                 class="button-next"
                 onClick={() =>
                   this.handlePageSelect(this.page + 1, 'nav-paginate-next')
@@ -231,8 +238,7 @@ export class VaPagination {
                 onKeyDown={e => this.handleKeyDown(e, this.page + 1)}
                 type="button"
               >
-                Next<span class="sr-only"> Page</span>
-                {ariaLabelSuffix && (<span class="sr-only"> {ariaLabelSuffix}</span>)}
+                Next
               </button>
             </li>
           )}
