@@ -32,14 +32,12 @@ const Template = ({
     setPage(event.detail.page);
   };
   return (
-    <>
-      <VaPagination
-        page={page}
-        pages={pages}
-        onPageSelect={handlePageSelect}
-        showLastPage={showLastPage}
-      />
-    </>
+    <VaPagination
+      page={page}
+      pages={pages}
+      onPageSelect={handlePageSelect}
+      showLastPage={showLastPage}
+    />
   );
 };
 
