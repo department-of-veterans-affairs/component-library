@@ -131,9 +131,6 @@ export class VaPagination {
       e.preventDefault();
       if (!pageNumber) return;
 
-      // Reset focus to the active page button.
-      (this.el.shadowRoot.activeElement as HTMLElement).blur();
-
       /* eslint-disable-next-line i18next/no-literal-string */
       this.handlePageSelect(pageNumber, 'nav-paginate-number');
     }

@@ -1,5 +1,4 @@
 @import '../../mixins/focusable.css';
-@import '../../mixins/accessibility.css';
 
 :host {
   background-color: var(--color-white);

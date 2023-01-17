@@ -166,8 +166,6 @@ describe('va-pagination', () => {
       'va-pagination >>> button[aria-current="true"]',
     );
 
-    console.log('*** activeButton', activeButton);
-
     expect(activeButton.textContent).toEqual('3');
   });
 
