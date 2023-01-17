@@ -33,8 +33,6 @@ const Template = ({
   };
   return (
     <>
-      <h2>Current page: {page}</h2>
-      <br />
       <VaPagination
         page={page}
         pages={pages}
