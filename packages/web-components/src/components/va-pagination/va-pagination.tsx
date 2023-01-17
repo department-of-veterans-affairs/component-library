@@ -140,7 +140,7 @@ export class VaPagination {
   };
 
   render() {
-    const { page, pages, maxPageListLength, showLastPage } =
+    const { ariaLabelSuffix, page, pages, maxPageListLength, showLastPage } =
       this;
 
     if (pages === 1) {
@@ -165,6 +165,7 @@ export class VaPagination {
             type="button"
           >
             <span class="sr-only">Page</span>{pageNumber}
+            {ariaLabelSuffix && (<span class="sr-only"> {ariaLabelSuffix}</span>)}
           </button>
         </li>
       );
@@ -185,6 +186,7 @@ export class VaPagination {
                 type="button"
               >
                 Previous<span class="sr-only"> Page</span>
+                {ariaLabelSuffix && (<span class="sr-only"> {ariaLabelSuffix}</span>)}
               </button>
             </li>
           )}
@@ -209,6 +211,7 @@ export class VaPagination {
                   type="button"
                 >
                   <span class="sr-only">Page</span>{pages}
+                  {ariaLabelSuffix && (<span class="sr-only"> {ariaLabelSuffix}</span>)}
                 </button>
               </li>
             </Fragment>
@@ -228,7 +231,8 @@ export class VaPagination {
                 onKeyDown={e => this.handleKeyDown(e, this.page + 1)}
                 type="button"
               >
-                Next <span class="sr-only"> Page</span>
+                Next<span class="sr-only"> Page</span>
+                {ariaLabelSuffix && (<span class="sr-only"> {ariaLabelSuffix}</span>)}
               </button>
             </li>
           )}
