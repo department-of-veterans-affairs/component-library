@@ -12,11 +12,11 @@ describe('va-textarea', () => {
     expect(element).toEqualHtml(`
       <va-textarea class="hydrated" label="Describe your situation">
         <mock:shadow-root>
-          <label for="textarea">
+          <label for="textarea" part="label">
             Describe your situation
           </label>
           <span id="error-message" role="alert"></span>
-          <textarea id="textarea" aria-invalid="false"></textarea>
+          <textarea id="textarea" part="textarea" aria-invalid="false"></textarea>
         </mock:shadow-root>
       </va-textarea>
     `);
