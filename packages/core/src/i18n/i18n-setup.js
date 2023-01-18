@@ -24,6 +24,7 @@ export { i18next };
 
 window.addEventListener('load', event => {
   console.log('DOM fully loaded and parsed');
+  const element = document.querySelector('main');
 
   /**
    * Added for Storybook Docs. This adds a `main` element with a `lang` attribute
@@ -31,14 +32,12 @@ window.addEventListener('load', event => {
    * consistently in Storybook.
    */
   const docsRoot = document.querySelector('#docs-root');
-  if (docsRoot) {
+  if (!element && docsRoot) {
     const main = document.createElement('main');
     main.setAttribute('lang', 'en');
     docsRoot.parentNode.insertBefore(main, docsRoot);
     main.appendChild(docsRoot);
   }
-
-  const element = document.querySelector('main');
 
   if (element) {
     const langAttr = element.getAttribute('lang');
