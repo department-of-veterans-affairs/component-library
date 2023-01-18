@@ -25,6 +25,19 @@ export { i18next };
 window.addEventListener('load', event => {
   console.log('DOM fully loaded and parsed');
 
+  /**
+   * Added for Storybook Docs. This adds a `main` element with a `lang` attribute
+   * to the DOM. This is needed for the language detector to work 
+   * consistently in Storybook.
+   */
+  const storybookDocsRoot = document.querySelector('iframe#storybook-preview-iframe #docs-root');
+  if (storybookDocsRoot) {
+    const storybookMain = document.createElement('main');
+    storybookMain.setAttribute('lang', 'en');
+    storybookDocsRoot.parentNode.insertBefore(storybookMain, storybookDocsRoot);
+    storybookMain.appendChild(storybookDocsRoot);
+  }
+
   const element = document.querySelector('main');
 
   if (element) {
@@ -46,28 +59,4 @@ window.addEventListener('load', event => {
     });
   }
 
-  /**
-   * Storybook specific events.
-   */
-  if (!element?.classList.contains('storybook')) return;
-  
-  /**
-   * This custom event fires when when the URL changes.
-   * Added for Storybook.
-   */
-  window.addEventListener('locationchange', () => {
-    const element = document.querySelector('main');
-    const lang = element?.getAttribute('lang', lang);
-    if (lang) i18next.changeLanguage(lang);
-  });
-  /**
-   * This handles updating the component language
-   * when toggled in Storybook during situations
-   * where the MutationObserver was not firing and a page refresh
-   * was required.
-   */
-  window.addEventListener('langchange', (event) => {
-    const lang = event.detail?.lang;
-    if (lang) i18next.changeLanguage(lang);
-  });
 });

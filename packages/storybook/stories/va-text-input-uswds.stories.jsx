@@ -111,8 +111,7 @@ const I18nTemplate = ({
 }) => {
   const [lang, setLang] = useState('en');
   useEffect(() => {
-    document.querySelector('main').setAttribute('lang', lang);
-    window.dispatchEvent(new CustomEvent('langchange', { detail: { lang } } ));
+    document.querySelector('main')?.setAttribute('lang', lang);
   }, [lang]);
   return (
     <>
