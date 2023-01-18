@@ -30,12 +30,12 @@ window.addEventListener('load', event => {
    * to the DOM. This is needed for the language detector to work 
    * consistently in Storybook.
    */
-  const storybookDocsRoot = document.querySelector('iframe#storybook-preview-iframe #docs-root');
-  if (storybookDocsRoot) {
-    const storybookMain = document.createElement('main');
-    storybookMain.setAttribute('lang', 'en');
-    storybookDocsRoot.parentNode.insertBefore(storybookMain, storybookDocsRoot);
-    storybookMain.appendChild(storybookDocsRoot);
+  const docsRoot = document.querySelector('#docs-root');
+  if (docsRoot) {
+    const main = document.createElement('main');
+    main.setAttribute('lang', 'en');
+    docsRoot.parentNode.insertBefore(main, docsRoot);
+    main.appendChild(docsRoot);
   }
 
   const element = document.querySelector('main');
@@ -49,6 +49,7 @@ window.addEventListener('load', event => {
           mutation.type === 'attributes' &&
           mutation.attributeName === 'lang'
         ) {
+          console.log('MutationObserver fired!');
           i18next.changeLanguage(element.getAttribute('lang'));
         }
       });
@@ -59,4 +60,29 @@ window.addEventListener('load', event => {
     });
   }
 
+  /**
+   * Storybook specific events.
+   */
+  // if (!element?.classList.contains('storybook')) return;
+  
+  /**
+   * This custom event fires when when the URL changes.
+   * Added for Storybook.
+   */
+  // window.addEventListener('locationchange', () => {
+  //   const element = document.querySelector('main');
+  //   const lang = element?.getAttribute('lang', lang);
+  //   if (lang) i18next.changeLanguage(lang);
+  // });
+  /**
+   * This handles updating the component language
+   * when toggled in Storybook during situations
+   * where the MutationObserver was not firing and a page refresh
+   * was required.
+   */
+  // window.addEventListener('langchange', (event) => {
+  //   const lang = event.detail?.lang;
+  //   console.log('langchange', lang);
+  //   if (lang) i18next.changeLanguage(lang);
+  // });
 });
