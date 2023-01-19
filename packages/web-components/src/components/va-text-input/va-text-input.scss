@@ -4,7 +4,7 @@
 @use 'usa-error-message/src/styles/usa-error-message';
 @use 'usa-hint/src/styles/usa-hint';
 
-@import '../../mixins/uswds-error-border.css';
+@import '../../mixins/uswds-error-border.scss';
 
 :host {
   color: var(--color-base);
