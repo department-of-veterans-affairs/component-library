@@ -38,5 +38,10 @@
       "warm-light": { "value": "#e4e2e0"},
       "cool-light": { "value": "#dce4ef"}
     }
+  },
+  "v3-color": {
+    "error": {
+      "dark": { "value": "#b50909"}
+    }
   }
 }

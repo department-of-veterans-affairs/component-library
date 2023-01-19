@@ -6,7 +6,7 @@
 @use 'usa-hint/src/styles/usa-hint';
 @use 'usa-error-message/src/styles/usa-error-message';
 
-@import '../../mixins/uswds-error-border.css';
+@import '../../mixins/uswds-error-border.scss';
 
 :host {
   display: block;
