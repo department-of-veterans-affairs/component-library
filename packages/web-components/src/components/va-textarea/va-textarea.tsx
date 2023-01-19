@@ -142,7 +142,7 @@ export class VaTextarea {
 
     return (
       <Host>
-        <label htmlFor="textarea" part="label">
+        <label htmlFor="textarea">
           {label}
           {required && <span class="required">{i18next.t('required')}</span>}
         </label>
@@ -168,9 +168,7 @@ export class VaTextarea {
           part="textarea"
         />
         {maxlength && value?.length >= maxlength && (
-          <small part="validation">
-            {i18next.t('max-chars', { length: maxlength })}
-          </small>
+          <small>{i18next.t('max-chars', { length: maxlength })}</small>
         )}
       </Host>
     );
