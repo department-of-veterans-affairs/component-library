@@ -18,8 +18,8 @@ export default {
 
 const defaultArgs = {
   'page': 3,
-  'pages': 5,
-  'show-last-page': false,
+  'pages': 15,
+  'show-last-page': true,
 };
 
 const Template = ({
