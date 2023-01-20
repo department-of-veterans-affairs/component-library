@@ -1,4 +1,15 @@
+import i18next from 'i18next';
 import { Components } from '../components';
+
+import {
+  Build,
+} from '@stencil/core';
+
+if (Build.isTesting) {
+  // Make i18next.t() return the key instead of the value
+  i18next.init({ lng: 'cimode' });
+}
+
 const maxYear = new Date().getFullYear() + 100;
 const minYear = 1900;
 const maxMonths = 12;
@@ -162,7 +173,7 @@ export function validate(
   // Empty fields are acceptable unless the component is marked as required
   if (year && (year < minYear || year > maxYear)) {
     component.invalidYear = true;
-    component.error = `Please enter a year between ${minYear} and ${maxYear}`;
+    component.error = i18next.t('year-range', { start: minYear, end: maxYear });
   }
   else {
     component.invalidYear = false;
@@ -172,7 +183,7 @@ export function validate(
   // We don't know the upper limit on days until we know the month
   if (!monthYearOnly && (day < minMonths || day > daysForSelectedMonth)) {
     component.invalidDay = true;
-    component.error = `Please enter a day between ${minMonths} and ${daysForSelectedMonth}`;
+    component.error = i18next.t('day-range', { start: minMonths, end: daysForSelectedMonth });
   }
   else {
     component.invalidDay = false;
@@ -183,7 +194,7 @@ export function validate(
   if ((month && (month < minMonths || month > maxMonths)) ||
       (!month && component.invalidDay)) {
     component.invalidMonth = true;
-    component.error = `Please enter a month between ${minMonths} and ${maxMonths}`;
+    component.error = i18next.t('month-range', { start: minMonths, end: maxMonths });
   }
   else {
     component.invalidMonth = false;
@@ -193,7 +204,7 @@ export function validate(
     component.invalidYear = !year;
     component.invalidMonth = !month;
     component.invalidDay = monthYearOnly ? false : !day;
-    component.error = "Please enter a complete date";
+    component.error = i18next.t('date-error');
   }
 
   // Remove any error message if none of the fields are marked as invalid

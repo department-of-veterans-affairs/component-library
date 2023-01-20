@@ -19,7 +19,7 @@ describe('validate', () => {
 
     validate(memorableDateComponent, year, month, day);
 
-    expect(memorableDateComponent.error).toEqual(`Please enter a year between 1900 and ${currentYear + 100}`);
+    expect(memorableDateComponent.error).toEqual(`year-range`);
     expect(memorableDateComponent.invalidYear).toEqual(true);
   });
 
@@ -32,7 +32,7 @@ describe('validate', () => {
 
     validate(memorableDateComponent, year, month, day);
 
-    expect(memorableDateComponent.error).toEqual(`Please enter a year between 1900 and ${currentYear + 100}`);
+    expect(memorableDateComponent.error).toEqual(`year-range`);
     expect(memorableDateComponent.invalidYear).toEqual(true);
   });
 
@@ -44,7 +44,7 @@ describe('validate', () => {
 
     validate(memorableDateComponent, year, month, day);
 
-    expect(memorableDateComponent.error).toEqual('Please enter a month between 1 and 12');
+    expect(memorableDateComponent.error).toEqual('month-range');
     expect(memorableDateComponent.invalidMonth).toEqual(true);
   });
 
@@ -56,7 +56,7 @@ describe('validate', () => {
 
     validate(memorableDateComponent, year, month, day);
 
-    expect(memorableDateComponent.error).toEqual('Please enter a day between 1 and 31');
+    expect(memorableDateComponent.error).toEqual('day-range');
     expect(memorableDateComponent.invalidDay).toEqual(true);
   });
 
@@ -68,7 +68,7 @@ describe('validate', () => {
 
     validate(memorableDateComponent, year, month, day);
 
-    expect(memorableDateComponent.error).toEqual('Please enter a day between 1 and 31');
+    expect(memorableDateComponent.error).toEqual('day-range');
     expect(memorableDateComponent.invalidDay).toEqual(true);
   });
 
@@ -92,7 +92,7 @@ describe('validate', () => {
 
       validate(memorableDateComponent, year, month, day);
 
-      expect(memorableDateComponent.error).toEqual('Please enter a complete date');
+      expect(memorableDateComponent.error).toEqual('date-error');
       expect(memorableDateComponent.invalidYear).toEqual(true);
     });
 
@@ -104,7 +104,7 @@ describe('validate', () => {
 
       validate(memorableDateComponent, year, month, day);
 
-      expect(memorableDateComponent.error).toEqual('Please enter a complete date');
+      expect(memorableDateComponent.error).toEqual('date-error');
       expect(memorableDateComponent.invalidMonth).toEqual(true);
     });
 
@@ -116,7 +116,7 @@ describe('validate', () => {
 
       validate(memorableDateComponent, year, month, day);
 
-      expect(memorableDateComponent.error).toEqual('Please enter a complete date');
+      expect(memorableDateComponent.error).toEqual('date-error');
       expect(memorableDateComponent.invalidDay).toEqual(true);
     });
 
@@ -154,7 +154,7 @@ describe('validate', () => {
 
     validate(memorableDateComponent, year, month, day);
 
-    expect(memorableDateComponent.error).toEqual('Please enter a month between 1 and 12');
+    expect(memorableDateComponent.error).toEqual('month-range');
     expect(memorableDateComponent.invalidMonth).toEqual(true);
     expect(memorableDateComponent.invalidDay).toEqual(true);
   });

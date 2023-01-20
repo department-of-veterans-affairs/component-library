@@ -89,7 +89,7 @@ describe('va-date', () => {
       await handleYear.press('Tab');
 
       await page.waitForChanges();
-      expect(date.getAttribute('error')).toEqual(`Please enter a year between 1900 and ${maxYear}`);
+      expect(date.getAttribute('error')).toEqual(`year-range`);
     });
 
     // We don't have month or day validation here like we do for
@@ -108,7 +108,7 @@ describe('va-date', () => {
       await handleYear.press('Tab');
       await page.waitForChanges();
 
-      expect(date.getAttribute('error')).toEqual("Please enter a complete date");
+      expect(date.getAttribute('error')).toEqual("date-error");
     });
 
     it('allows for a custom required message', async () => {
@@ -147,7 +147,7 @@ describe('va-date', () => {
       await handleYear.press('Tab');
 
       await page.waitForChanges();
-      expect(date.getAttribute('error')).toEqual(`Please enter a year between 1900 and ${maxYear}`);
+      expect(date.getAttribute('error')).toEqual(`year-range`);
 
       await handleYear.press('0');
       await handleYear.press('2');
@@ -487,7 +487,7 @@ describe('va-date', () => {
       await handleYear.press('Tab');
       await page.waitForChanges();
 
-      expect(date.getAttribute('error')).toEqual(`Please enter a year between 1900 and ${maxYear}`);
+      expect(date.getAttribute('error')).toEqual(`year-range`);
     });
 
     it('checks for valid month', async () => {
@@ -507,7 +507,7 @@ describe('va-date', () => {
       await handleYear.press('Tab');
       await page.waitForChanges();
 
-      expect(date.getAttribute('error')).toEqual('Please enter a complete date');
+      expect(date.getAttribute('error')).toEqual('date-error');
     });
 
     it('is valid without a day value', async () => {

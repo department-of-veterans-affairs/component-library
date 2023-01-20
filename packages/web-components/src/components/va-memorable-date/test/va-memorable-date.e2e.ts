@@ -75,7 +75,7 @@ describe('va-memorable-date', () => {
       await handleYear.press('Tab');
 
       await page.waitForChanges();
-      expect(date.getAttribute('error')).toEqual(`Please enter a year between 1900 and ${maxYear}`);
+      expect(date.getAttribute('error')).toEqual(`year-range`);
     });
 
     it('does month validation without required prop', async () => {
@@ -94,7 +94,7 @@ describe('va-memorable-date', () => {
       await handleYear.press('Tab');
 
       await page.waitForChanges();
-      expect(date.getAttribute('error')).toEqual("Please enter a month between 1 and 12");
+      expect(date.getAttribute('error')).toEqual("month-range");
     });
 
     it('does day validation without required prop', async () => {
@@ -113,7 +113,7 @@ describe('va-memorable-date', () => {
       await handleYear.press('Tab');
 
       await page.waitForChanges();
-      expect(date.getAttribute('error')).toEqual("Please enter a day between 1 and 31");
+      expect(date.getAttribute('error')).toEqual("day-range");
     });
 
    it('does validation for required components', async () => {
@@ -128,7 +128,7 @@ describe('va-memorable-date', () => {
       await handleYear.press('Tab');
       await page.waitForChanges();
 
-      expect(date.getAttribute('error')).toEqual("Please enter a complete date");
+      expect(date.getAttribute('error')).toEqual("date-error");
     });
 
     it('allows for a custom required message', async () => {
@@ -167,7 +167,7 @@ describe('va-memorable-date', () => {
       await handleYear.press('Tab');
 
       await page.waitForChanges();
-      expect(date.getAttribute('error')).toEqual(`Please enter a year between 1900 and ${maxYear}`);
+      expect(date.getAttribute('error')).toEqual(`year-range`);
 
       await handleYear.press('0');
       await handleYear.press('2');
