@@ -6,6 +6,7 @@ import {
   Host,
   h,
   Prop,
+  Element,
 } from '@stencil/core';
 import classnames from 'classnames';
 
@@ -21,6 +22,7 @@ import classnames from 'classnames';
   shadow: true,
 })
 export class VaPagination {
+  @Element() el: HTMLElement;
   /**
    * Fires when a page is selected
    */
@@ -70,6 +72,10 @@ export class VaPagination {
 
   private handlePageSelect = (page, eventID) => {
     this.pageSelect.emit({ page });
+
+    // Reset focus to the active page button.
+    (this.el.shadowRoot.activeElement as HTMLElement).blur();
+
     if (this.enableAnalytics) {
       const detail = {
         componentName: 'va-pagination',
@@ -124,6 +130,7 @@ export class VaPagination {
     if (keyCode === 'Enter' || keyCode === ' ') {
       e.preventDefault();
       if (!pageNumber) return;
+
       /* eslint-disable-next-line i18next/no-literal-string */
       this.handlePageSelect(pageNumber, 'nav-paginate-number');
     }
@@ -137,17 +144,23 @@ export class VaPagination {
       return <div />;
     }
 
+    const previousAriaLabel = ariaLabelSuffix ? `Previous page ${ariaLabelSuffix}` : 'Previous page';
+    const nextAriaLabel = ariaLabelSuffix ? `Next page ${ariaLabelSuffix}` : 'Next page';
+    const lastPageAriaLabel = ariaLabelSuffix ? `Page ${pages} ${ariaLabelSuffix}` : `Page ${pages}`;
+
     const renderPages = this.pageNumbers().map(pageNumber => {
       const pageClass = classnames({
         'button-active': page === pageNumber,
         'button-inner': true,
       });
 
+      const pageAriaLabel = ariaLabelSuffix ? `Page ${pageNumber} ${ariaLabelSuffix}` : `Page ${pageNumber}`;
+
       return (
         <li>
           <button
             aria-current={page === pageNumber ? 'true' : null}
-            aria-label={`Page ${pageNumber} ${ariaLabelSuffix}`}
+            aria-label={pageAriaLabel}
             class={pageClass}
             onClick={() =>
               this.handlePageSelect(pageNumber, 'nav-paginate-number')
@@ -168,7 +181,7 @@ export class VaPagination {
           {this.page > 1 && (
             <li>
               <button
-                aria-label={`Previous page ${this.ariaLabelSuffix}`}
+                aria-label={previousAriaLabel}
                 class="button-prev"
                 onClick={() =>
                   this.handlePageSelect(this.page - 1, 'nav-paginate-previous')
@@ -176,7 +189,7 @@ export class VaPagination {
                 onKeyDown={e => this.handleKeyDown(e, this.page - 1)}
                 type="button"
               >
-                Prev
+                Previous
               </button>
             </li>
           )}
@@ -188,19 +201,12 @@ export class VaPagination {
           {/* START ELLIPSIS AND LAST BUTTON */}
           {showLastPage && page < pages - maxPageListLength + 1 && (
             <Fragment>
-              <li>
-                <button
-                  aria-label="..."
-                  class="button-inner"
-                  onKeyDown={e => this.handleKeyDown(e, null)}
-                  type="button"
-                >
-                  ...
-                </button>
+              <li role="presentation">
+                <span>...</span>
               </li>
               <li>
                 <button
-                  aria-label={`Load last page ${this.ariaLabelSuffix}`}
+                  aria-label={lastPageAriaLabel}
                   class="button-inner"
                   onClick={() =>
                     this.handlePageSelect(pages, 'nav-paginate-number')
@@ -221,7 +227,7 @@ export class VaPagination {
           {this.pages > this.page && (
             <li>
               <button
-                aria-label={`Next page ${this.ariaLabelSuffix}`}
+                aria-label={nextAriaLabel}
                 class="button-next"
                 onClick={() =>
                   this.handlePageSelect(this.page + 1, 'nav-paginate-next')
