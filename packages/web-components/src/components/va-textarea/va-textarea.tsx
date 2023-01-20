@@ -28,7 +28,7 @@ if (Build.isTesting) {
  * @translations English
  * @translations Spanish
  */
- 
+
 @Component({
   tag: 'va-textarea',
   styleUrl: 'va-textarea.css',
@@ -165,6 +165,7 @@ export class VaTextarea {
           name={name}
           maxLength={maxlength}
           value={value}
+          part="textarea"
         />
         {maxlength && value?.length >= maxlength && (
           <small>{i18next.t('max-chars', { length: maxlength })}</small>

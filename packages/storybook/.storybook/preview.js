@@ -124,9 +124,9 @@ export const parameters = {
 
 export const decorators = [
   Story => (
-    <main lang="en">
+    <div>
       <Story />
-    </main>
+    </div>
   ),
 ];
 
