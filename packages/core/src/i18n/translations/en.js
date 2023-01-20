@@ -7,6 +7,8 @@ export default {
   'month': 'Month',
   'day': 'Day',
   'year': 'Year',
+  'month-range': 'Please enter a month between {{start}} and {{end}}',
+  'day-range': 'Please enter a day between {{start}} and {{end}}',
   'year-range': 'Please enter a year between {{start}} and {{end}}',
   'expand-all': 'Expand all',
   'collapse-all': 'Collapse all',
@@ -26,4 +28,5 @@ export default {
   'december': 'December',
   'on-this-page': 'On this page',
   'date-hint': 'Please enter two digits for the month and four digits for the year',
+  'date-error': 'Please enter a complete date',
 };

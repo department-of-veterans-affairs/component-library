@@ -7,6 +7,8 @@ export default {
   'month': 'Buwan',
   'day': 'Araw',
   'year': 'Taon',
+  'month-range': 'Mangyaring ilagay ang buwan sa pagitan ng {{start}} at {{end}}',
+  'day-range': 'Mangyaring ilagay ang araw sa pagitan ng {{start}} at {{end}}',
   'year-range': 'Mangyaring ilagay ang taon sa pagitan ng {{start}} at {{end}}',
   'expand-all': 'I-expand lahat',
   'collapse-all': 'I-collapse ang lahat',
@@ -14,4 +16,5 @@ export default {
   'collapse-all-aria-label': 'I-collapse ang lahat ng accordion',
   'on-this-page': 'Sa pahinang ito',
   'date-hint': 'Mangyaring maglagay ang dalawang numero para sa buwan at apat na numero para sa taon',
+  'date-error': 'Mangyaring maglagay ng kumpletong petsa',
 };

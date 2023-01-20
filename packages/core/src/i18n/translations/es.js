@@ -7,6 +7,8 @@ export default {
   'month': 'Mes',
   'day': 'Día',
   'year': 'Año',
+  'month-range': 'Ingrese un mes entre {{start}} y {{end}}',
+  'day-range': 'Ingrese un día entre {{start}} y {{end}}',
   'year-range': 'Ingrese un año entre {{start}} y {{end}}',
   'expand-all': 'Expandir todo',
   'collapse-all': 'Contraer todo',
@@ -26,4 +28,5 @@ export default {
   'december': 'Diciembre',
   'on-this-page': 'En esta página',
   'date-hint': 'Ingrese dos dígitos para el mes y cuatro dígitos para el año',
+  'date-error': 'Ingrese una fecha completa',
 };
