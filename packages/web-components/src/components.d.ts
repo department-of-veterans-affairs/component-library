@@ -513,6 +513,16 @@ export namespace Components {
          */
         "value"?: string;
     }
+    interface VaOfficialGovBanner {
+        /**
+          * If `true`, the component-library-analytics event is disabled.
+         */
+        "disableAnalytics"?: boolean;
+        /**
+          * Accepts a top level domain (TLD) value of either `gov` or `mil`. Default is `gov`.
+         */
+        "tld": string;
+    }
     interface VaOmbInfo {
         /**
           * The name of the benefit displayed in the Respondent Burden section of the Privacy Act Statement.
@@ -970,6 +980,10 @@ export interface VaNumberInputCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLVaNumberInputElement;
 }
+export interface VaOfficialGovBannerCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLVaOfficialGovBannerElement;
+}
 export interface VaOnThisPageCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLVaOnThisPageElement;
@@ -1139,6 +1153,12 @@ declare global {
         prototype: HTMLVaNumberInputElement;
         new (): HTMLVaNumberInputElement;
     };
+    interface HTMLVaOfficialGovBannerElement extends Components.VaOfficialGovBanner, HTMLStencilElement {
+    }
+    var HTMLVaOfficialGovBannerElement: {
+        prototype: HTMLVaOfficialGovBannerElement;
+        new (): HTMLVaOfficialGovBannerElement;
+    };
     interface HTMLVaOmbInfoElement extends Components.VaOmbInfo, HTMLStencilElement {
     }
     var HTMLVaOmbInfoElement: {
@@ -1262,6 +1282,7 @@ declare global {
         "va-memorable-date": HTMLVaMemorableDateElement;
         "va-modal": HTMLVaModalElement;
         "va-number-input": HTMLVaNumberInputElement;
+        "va-official-gov-banner": HTMLVaOfficialGovBannerElement;
         "va-omb-info": HTMLVaOmbInfoElement;
         "va-on-this-page": HTMLVaOnThisPageElement;
         "va-pagination": HTMLVaPaginationElement;
@@ -1913,6 +1934,20 @@ declare namespace LocalJSX {
          */
         "value"?: string;
     }
+    interface VaOfficialGovBanner {
+        /**
+          * If `true`, the component-library-analytics event is disabled.
+         */
+        "disableAnalytics"?: boolean;
+        /**
+          * The event used to track usage of the component.
+         */
+        "onComponent-library-analytics"?: (event: VaOfficialGovBannerCustomEvent<any>) => void;
+        /**
+          * Accepts a top level domain (TLD) value of either `gov` or `mil`. Default is `gov`.
+         */
+        "tld"?: string;
+    }
     interface VaOmbInfo {
         /**
           * The name of the benefit displayed in the Respondent Burden section of the Privacy Act Statement.
@@ -2390,6 +2425,7 @@ declare namespace LocalJSX {
         "va-memorable-date": VaMemorableDate;
         "va-modal": VaModal;
         "va-number-input": VaNumberInput;
+        "va-official-gov-banner": VaOfficialGovBanner;
         "va-omb-info": VaOmbInfo;
         "va-on-this-page": VaOnThisPage;
         "va-pagination": VaPagination;
@@ -2433,6 +2469,7 @@ declare module "@stencil/core" {
             "va-memorable-date": LocalJSX.VaMemorableDate & JSXBase.HTMLAttributes<HTMLVaMemorableDateElement>;
             "va-modal": LocalJSX.VaModal & JSXBase.HTMLAttributes<HTMLVaModalElement>;
             "va-number-input": LocalJSX.VaNumberInput & JSXBase.HTMLAttributes<HTMLVaNumberInputElement>;
+            "va-official-gov-banner": LocalJSX.VaOfficialGovBanner & JSXBase.HTMLAttributes<HTMLVaOfficialGovBannerElement>;
             "va-omb-info": LocalJSX.VaOmbInfo & JSXBase.HTMLAttributes<HTMLVaOmbInfoElement>;
             "va-on-this-page": LocalJSX.VaOnThisPage & JSXBase.HTMLAttributes<HTMLVaOnThisPageElement>;
             "va-pagination": LocalJSX.VaPagination & JSXBase.HTMLAttributes<HTMLVaPaginationElement>;
