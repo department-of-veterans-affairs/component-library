@@ -97,7 +97,7 @@ export class VaOfficialGovBanner {
                     src="https://s3-us-gov-west-1.amazonaws.com/content.www.va.gov/img/icon-dot-gov.svg" 
                     role="presentation" 
                     alt="" />
-                  <div>
+                  <div class="media-block">
                     <p>
                       <strong>Official websites use .gov</strong><br />
                       A <strong>.gov</strong> website belongs to an official government
@@ -110,7 +110,7 @@ export class VaOfficialGovBanner {
                     src="https://s3-us-gov-west-1.amazonaws.com/content.www.va.gov/img/icon-https.svg" 
                     role="presentation" 
                     alt="" />
-                  <div>
+                  <div class="media-block">
                     <p>
                       <strong>Secure .gov websites use HTTPS</strong><br />
                       A <strong>lock</strong> (

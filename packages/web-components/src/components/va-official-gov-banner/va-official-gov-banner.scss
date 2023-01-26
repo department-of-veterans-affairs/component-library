@@ -36,10 +36,12 @@ header.expanded {
 }
 
 .inner {
-  display: flex!important;
-  flex-wrap: wrap!important;
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
   margin-right: auto;
-  max-width: 64rem;
+  margin-left: auto;
+  max-width: 880px;
   padding-left: 32px;
   padding-right: 32px;
 }
@@ -56,6 +58,29 @@ header.expanded {
   margin-right: 5px;
   margin-top: 2px;
   line-height: 1.1;
+}
+
+@media screen and (max-width: 768px) {
+  button {
+    flex: 1;
+  }
+  button[aria-expanded=true]::before {
+    bottom: 0;
+    top: 0;
+    position: absolute;
+    right: 0;
+    background-color: #e6e6e6;
+    content: "X";
+    display: block;
+    height: 3rem;
+    width: 3rem;
+  }
+  button[aria-expanded=true] span {
+    position: absolute;
+    left: -999em;
+    right: auto;
+    text-decoration: underline;
+  }
 }
 
 button:not([disabled]):focus {
@@ -120,22 +145,24 @@ button[aria-expanded=true]::after, button[aria-expanded=false]::after {
 }
 
 .content {
-  font-size: 16px;
   margin-left: auto;
   margin-right: auto;
+  max-width: 880px;
   background-color: transparent;
+  font-size: 16px ;
   overflow: hidden;
+  padding: 24px 32px 16px 16px;
   width: 100%;
-  padding-left: 1rem;
-  padding-right: 2rem;
-  padding-top: 1.5rem;
-  padding-bottom: 1rem;
 }
 
 .content img {
-  float: left;
-  margin-right: 1rem;
-  width: 3.8rem;
+  flex-shrink: 0;
+  margin-right: 8px;
+  width: 45px;
+}
+
+.content .media-block {
+  flex: 1 1 0%;
 }
 
 .content svg {
@@ -149,14 +176,17 @@ button[aria-expanded=true]::after, button[aria-expanded=false]::after {
 
 .grid-row {
   display: flex;
-  // flex-wrap: wrap;
+  flex-wrap: wrap;
+  margin-left: -0.75rem;
+  margin-right: -0.75rem;
+  margin-top: 0;
+  margin-bottom: 0;
 }
 
 .col {
   align-items: flex-start;
   display: flex;
-  flex: 0 1 auto;
-  width: 45%;
+  flex: 0 0 46%;
   padding-left: 0.75rem;
   padding-right: 0.75rem;
 }
