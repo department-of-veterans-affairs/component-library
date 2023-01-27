@@ -175,4 +175,38 @@ describe('va-select', () => {
 
     expect(keyDownSpy).toHaveReceivedEventTimes(2);
   });
+
+  // Begin USWDS v3 test
+  it('uswds v3 renders', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent(`
+      <va-select label="A label" value="bar" uswds>
+        <option value="">Please choose an option</option>
+        <option value="foo">Foo</option>
+        <option value="bar">Bar</option>
+      </va-select>
+    `);
+    const element = await page.find('va-select');
+
+    expect(element).toEqualHtml(`
+      <va-select label="A label" uswds="" value="bar" class="hydrated">
+        <mock:shadow-root>
+          <label class="usa-label" for="select" part="label">
+            A label
+          </label>
+          <span id="usa-error-message" role="alert"></span>
+          <slot></slot>
+          <select id="select" part="select" aria-invalid="false" class="usa-select">
+            <option value="">Please choose an option</option>
+            <option value="foo">Foo</option>
+            <option value="bar">Bar</option>
+          </select>
+        </mock:shadow-root>
+        <option value="">Please choose an option</option>
+        <option value="foo">Foo</option>
+        <option value="bar">Bar</option>
+      </va-select>
+    `);
+  });
 });
