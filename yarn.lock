@@ -1829,7 +1829,7 @@ __metadata:
     webpack-cli: ^4.8.0
   peerDependencies:
     "@department-of-veterans-affairs/formation": "*"
-    react: ^17
+    react: ^18
     react-dom: "*"
   languageName: unknown
   linkType: soft
