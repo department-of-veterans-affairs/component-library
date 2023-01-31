@@ -60,6 +60,12 @@ export class VaOfficialGovBanner {
     i18next.off('languageChanged');
   }
 
+  componentDidLoad(){
+    // Initial loading of formatted text.
+    this.govSiteExplanationText();
+    this.govSiteLockText();
+  }
+
   private handleClick = () => {
     const content = this.el.shadowRoot?.querySelector('.content') as HTMLElement;
     const button = this.el.shadowRoot?.querySelector('button') as HTMLElement;
