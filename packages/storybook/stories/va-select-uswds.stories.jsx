@@ -18,7 +18,7 @@ export default {
 const defaultArgs = {
   'label': 'Branch of Service',
   'name': 'branch',
-  'value': 'army',
+  'value': '',
   'required': false,
   'error': undefined,
   'uswds': true,
