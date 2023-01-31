@@ -29,4 +29,8 @@ export default {
   'on-this-page': 'En esta página',
   'date-hint': 'Ingrese dos dígitos para el mes y cuatro dígitos para el año',
   'date-error': 'Ingrese una fecha completa',
+  'gov-site-label': 'Un sitio oficial del Gobierno de Estados Unidos',
+  'gov-site-button': 'Así es como usted puede verificarlo',
+  'gov-site-website': 'Los sitios web oficiales usan .{{tld}}',
+  'gov-site-explanation': 'Un sitio web .{{tld}} pertenece a una organización oficial del Gobierno de Estados Unidos.',
 };
