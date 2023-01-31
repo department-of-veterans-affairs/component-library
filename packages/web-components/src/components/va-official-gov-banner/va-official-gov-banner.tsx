@@ -89,16 +89,42 @@ export class VaOfficialGovBanner {
   };
 
   /**
-   * This is a helper function will add <strong> tags around the 
+   * This  will add <strong> tags around the 
    * matching TLD value (.gov or .mil) in the text that is provided
    * and the innerHTML of the element will be updated.
-   * @param text - The text to be updated.
-   * @param elClass - The class of the innerHTML element.
    */
-  private boldTldText = (text, elClass) => {
-    const el = this.el.shadowRoot?.querySelector(`.${elClass}`) as HTMLElement;
+  private govSiteExplanationText = () => {
+    const el = this.el.shadowRoot?.querySelector('.gov-site-explanation-text') as HTMLElement;
     if (el) {
+      const text = i18next.t('gov-site-explanation', { tld: this.tld });
       el.innerHTML = text.replaceAll(`.${this.tld}`, `<strong>.${this.tld}</strong>`);
+    }
+  }
+
+  /**
+   * This will add <strong> tags around various words in the text that is provided
+   * as well as add the SVG lock image.
+   */
+  private govSiteLockText = () => {
+    const el = this.el.shadowRoot?.querySelector('.gov-site-lock-text') as HTMLElement;
+
+    // eslint-disable-next-line i18next/no-literal-string
+    const lockSvg = `(&nbsp;<span class="icon-lock"><svg xmlns="http://www.w3.org/2000/svg" width="52" height="64" viewBox="0 0 52 64" role="img" aria-labelledby="banner-lock-description" focusable="false">
+    <title id="banner-lock-title">Lock</title>
+    <desc id="banner-lock-description">Locked padlock icon</desc>
+    <path fill="#000000" fill-rule="evenodd" d="M26 0c10.493 0 19 8.507 19 19v9h3a4 4 0 0 1 4 4v28a4 4 0 0 1-4 4H4a4 4 0 0 1-4-4V32a4 4 0 0 1 4-4h3v-9C7 8.507 15.507 0 26 0zm0 8c-5.979 0-10.843 4.77-10.996 10.712L15 19v9h22v-9c0-6.075-4.925-11-11-11z"></path>
+    </svg></span>&nbsp;)`
+  
+    let html = i18next.t('gov-site-lock', { image: 'SVG' });
+
+    html = html.replace('SVG', lockSvg);
+    html = html.replace('lock', `<strong>lock</strong>`);
+    html = html.replace('candado', `<strong>candado</strong>`);
+    html = html.replace('https://', `<strong>https://</strong>`);
+    html = html.replace(`.${this.tld}`, `<strong>.${this.tld}</strong>`);
+
+    if (el) {
+      el.innerHTML = html;
     }
   }
 
@@ -145,13 +171,8 @@ export class VaOfficialGovBanner {
                     <div class="media-block">
                       <p>
                         <strong>{i18next.t('gov-site-website', { tld })}</strong><br />
-                        <span class="gov-site-explanation">
-                          {
-                            this.boldTldText(
-                              i18next.t('gov-site-explanation', { tld }), 
-                              'gov-site-explanation'
-                            )
-                          }
+                        <span class="gov-site-explanation-text">
+                          {this.govSiteExplanationText()}
                         </span>
                       </p>
                     </div>
@@ -164,16 +185,9 @@ export class VaOfficialGovBanner {
                     <div class="media-block">
                       <p>
                         <strong>{i18next.t('gov-site-https', { tld })}</strong><br />
-                        A <strong>lock</strong> (&nbsp;
-                        <span class="icon-lock">
-                          <svg xmlns="http://www.w3.org/2000/svg" width="52" height="64" viewBox="0 0 52 64" role="img" aria-labelledby="banner-lock-description" focusable="false">
-                            <title id="banner-lock-title">Lock</title>
-                            <desc id="banner-lock-description">Locked padlock icon</desc>
-                            <path fill="#000000" fill-rule="evenodd" d="M26 0c10.493 0 19 8.507 19 19v9h3a4 4 0 0 1 4 4v28a4 4 0 0 1-4 4H4a4 4 0 0 1-4-4V32a4 4 0 0 1 4-4h3v-9C7 8.507 15.507 0 26 0zm0 8c-5.979 0-10.843 4.77-10.996 10.712L15 19v9h22v-9c0-6.075-4.925-11-11-11z"></path>
-                          </svg> 
-                          </span>&nbsp;) or <strong>https://</strong> means you've safely connected to
-                        the .gov website. Share sensitive information only on official,
-                        secure websites.
+                        <span class="gov-site-lock-text">
+                          {this.govSiteLockText()}
+                        </span>
                       </p>
                     </div>
                   </div>
