@@ -1,6 +1,7 @@
 export default {
   'error': 'Error',
   'required': '(*Requerido)',
+  'select': '- Seleccione -',
   'max-chars': '(Número máximo de caracteres: {{length}})',
   'min-chars': '(Número mínimo de caracteres: {{length}})',
   'date-of-birth': 'Fecha de nacimiento',

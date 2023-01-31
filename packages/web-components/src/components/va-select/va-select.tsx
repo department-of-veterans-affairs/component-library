@@ -200,6 +200,7 @@ export class VaSelect {
             onChange={e => this.handleChange(e)}
             part="select"
           >
+            <option value="" selected>{i18next.t('select')}</option>
             {this.options}
           </select>
         </Host>
