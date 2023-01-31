@@ -15,21 +15,24 @@ export default {
 };
 
 const defaultArgs = {
-  'disable-analytics': false
+  'disable-analytics': false,
+  'tld': 'gov'
 };
 
 const Template = ({
-  'disable-analytics': disableAnalytics
+  'disable-analytics': disableAnalytics,
+  'tld': tld
 }) => {
   return (
     <va-official-gov-banner 
-      disable-analytics={disableAnalytics}>
+      disable-analytics={disableAnalytics} tld={tld}>
     </va-official-gov-banner>
   );
 };
 
 const I18nTemplate = ({
   'disable-analytics': disableAnalytics,
+  'tld': tld
 }) => {
   const [lang, setLang] = useState('en');
   useEffect(() => {
@@ -41,6 +44,7 @@ const I18nTemplate = ({
       <button onClick={e => setLang('en')}>English</button>
       <div style={{marginTop: '20px'}}>
         <va-official-gov-banner 
+          tld={tld}
           disable-analytics={disableAnalytics}>
         </va-official-gov-banner>
       </div>
@@ -48,10 +52,12 @@ const I18nTemplate = ({
   );
 };
 
-
 export const Default = Template.bind(null);
 Default.argTypes = propStructure(officialGovBannerDocs);
 Default.args = { ...defaultArgs };
+
+export const MilVariation = Template.bind(null);
+MilVariation.args = { ...defaultArgs, tld: 'mil' };
 
 export const Internationalization = I18nTemplate.bind(null);
 Internationalization.args = { ...defaultArgs };
