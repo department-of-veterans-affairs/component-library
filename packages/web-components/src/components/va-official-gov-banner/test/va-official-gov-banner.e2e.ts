@@ -41,7 +41,6 @@ describe('va-official-gov-banner', () => {
     expect(banner).toBeFalsy();
   });
 
-  // Toggles dropdown content
   it('toggles drop down content', async () => {
     const page = await newE2EPage();
     await page.setContent('<va-official-gov-banner />');
@@ -52,7 +51,6 @@ describe('va-official-gov-banner', () => {
     expect(button).toEqualAttribute("aria-expanded", "true");
   });
 
-  // fires an analytics event when the dropdown is clicked
   it('fires an analytics event when the content expand button is clicked', async () => {
     const page = await newE2EPage();
     await page.setContent('<va-official-gov-banner />');
