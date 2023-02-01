@@ -103,7 +103,7 @@ export class VaOfficialGovBanner {
     const el = this.el.shadowRoot?.querySelector('.gov-site-explanation-text') as HTMLElement;
     if (el) {
       const text = i18next.t('gov-site-explanation', { tld: this.tld });
-      el.innerHTML = text.replaceAll(`.${this.tld}`, `<strong>.${this.tld}</strong>`);
+      el.innerHTML = text.replace(`.${this.tld}`, `<strong>.${this.tld}</strong>`);
     }
   }
 
