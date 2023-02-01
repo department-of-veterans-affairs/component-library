@@ -71,24 +71,24 @@ export class VaOfficialGovBanner {
     const button = this.el.shadowRoot?.querySelector('button') as HTMLElement;
     const header = this.el.shadowRoot?.querySelector('header') as HTMLElement;
 
-    // button aria-expanded attribute
     button.setAttribute(
       'aria-expanded', 
       button.getAttribute('aria-expanded') === 'true' 
         ? 'false' 
         : 'true'
     );
-    // header `.expanded` class
+
     header.classList.toggle('expanded');
-    // content `hidden` attribute
+    // Toggle the hidden attribute on the content.
     content.hidden ? content.removeAttribute('hidden') : content.setAttribute('hidden', 'true');
 
-    // TODO: Add analytics details.
     if (!this.disableAnalytics) {
       const detail = {
         componentName: 'va-official-gov-banner',
         action: 'click',
-        details: { },
+        details: { 
+          event: 'int-official-gov-banner-expand',
+        },
       }
       this.componentLibraryAnalytics.emit(detail);
     }
