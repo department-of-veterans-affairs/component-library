@@ -737,6 +737,10 @@ export namespace Components {
          */
         "required"?: boolean;
         /**
+          * Whether or not the component will use USWDS v3 styling.
+         */
+        "uswds"?: boolean;
+        /**
           * Selected value (will get updated on select).
          */
         "value"?: string;
@@ -2196,6 +2200,10 @@ declare namespace LocalJSX {
           * Whether or not this is a required field.
          */
         "required"?: boolean;
+        /**
+          * Whether or not the component will use USWDS v3 styling.
+         */
+        "uswds"?: boolean;
         /**
           * Selected value (will get updated on select).
          */

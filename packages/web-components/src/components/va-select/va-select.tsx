@@ -11,6 +11,7 @@ import {
   Watch,
   Fragment,
 } from '@stencil/core';
+import classnames from 'classnames';
 import i18next from 'i18next';
 import { getSlottedNodes } from '../../utils/utils';
 
@@ -26,7 +27,7 @@ import { getSlottedNodes } from '../../utils/utils';
 
 @Component({
   tag: 'va-select',
-  styleUrl: 'va-select.css',
+  styleUrl: 'va-select.scss',
   shadow: true,
 })
 export class VaSelect {
@@ -67,6 +68,11 @@ export class VaSelect {
    * Whether or not to fire the analytics events
    */
   @Prop() enableAnalytics?: boolean = false;
+
+  /**
+   * Whether or not the component will use USWDS v3 styling.
+   */
+  @Prop() uswds?: boolean = false;
 
   /**
    * Optional hint text.
@@ -154,36 +160,81 @@ export class VaSelect {
   }
 
   render() {
-    const { error, invalid, label, required, name, hint } = this;
+    const { error, invalid, label, required, name, hint, uswds } = this;
 
-    return (
-      <Host>
-        <label htmlFor="select" part="label">
-          {label}
-          {required && <span class="required">{i18next.t('required')}</span>}
-        </label>
-        {hint && <span class="hint-text">{hint}</span>}
-        <span id="error-message" role="alert">
-          {error && (
-            <Fragment>
-              <span class="sr-only">{i18next.t('error')}</span> {error}
-            </Fragment>
+    if (uswds) {
+      const labelClass = classnames({
+        'usa-label': true,
+        'usa-label--error': error,
+      });
+      const selectClass = classnames({
+        'usa-select': true,
+        'usa-input--error': error,
+      });
+      return (
+        <Host>
+          {label && (
+            <label htmlFor="options" class={labelClass} part="label">
+              {label}
+              {required && <span class="usa-label--required"> {i18next.t('required')}</span>}
+            </label>
           )}
-        </span>
-        <slot onSlotchange={() => this.populateOptions()}></slot>
-        <select
-          aria-describedby={error ? 'error-message' : undefined}
-          aria-invalid={invalid || error ? 'true' : 'false'}
-          id="select"
-          name={name}
-          required={required || null}
-          onKeyDown={() => this.handleKeyDown()}
-          onChange={e => this.handleChange(e)}
-          part="select"
-        >
-          {this.options}
-        </select>
-      </Host>
-    );
+          {hint && <span class="usa-hint">{hint}</span>}
+          <span id="usa-error-message" role="alert">
+            {error && (
+              <Fragment>
+                <span class="usa-sr-only">{i18next.t('error')}</span> 
+                <span class="usa-error-message">{error}</span>
+              </Fragment>
+            )}
+          </span>
+          <slot onSlotchange={() => this.populateOptions()}></slot>
+          <select
+            class={selectClass}
+            aria-describedby={error ? 'error-message' : undefined}
+            aria-invalid={invalid || error ? 'true' : 'false'}
+            id="options"
+            name={name}
+            required={required || null}
+            onKeyDown={() => this.handleKeyDown()}
+            onChange={e => this.handleChange(e)}
+            part="select"
+          >
+            <option value="" selected>{i18next.t('select')}</option>
+            {this.options}
+          </select>
+        </Host>
+      )
+    } else {
+    return (
+        <Host>
+          <label htmlFor="select" part="label">
+            {label}
+            {required && <span class="required">{i18next.t('required')}</span>}
+          </label>
+          {hint && <span class="hint-text">{hint}</span>}
+          <span id="error-message" role="alert">
+            {error && (
+              <Fragment>
+                <span class="sr-only">{i18next.t('error')}</span> {error}
+              </Fragment>
+            )}
+          </span>
+          <slot onSlotchange={() => this.populateOptions()}></slot>
+          <select
+            aria-describedby={error ? 'error-message' : undefined}
+            aria-invalid={invalid || error ? 'true' : 'false'}
+            id="select"
+            name={name}
+            required={required || null}
+            onKeyDown={() => this.handleKeyDown()}
+            onChange={e => this.handleChange(e)}
+            part="select"
+          >
+            {this.options}
+          </select>
+        </Host>
+      );
+    };
   }
 }
