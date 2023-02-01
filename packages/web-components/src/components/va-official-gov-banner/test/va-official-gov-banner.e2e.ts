@@ -61,11 +61,15 @@ describe('va-official-gov-banner', () => {
     await button.click();
 
     expect(analyticsSpy).toHaveReceivedEventDetail({
-      action: 'click',
+      action: 'expand',
       componentName: 'va-official-gov-banner',
-      details: {
-        event: 'int-official-gov-banner-expand'
-      },
+    });
+
+    await button.click();
+
+    expect(analyticsSpy).toHaveReceivedEventDetail({
+      action: 'collapse',
+      componentName: 'va-official-gov-banner',
     });
   });
 });

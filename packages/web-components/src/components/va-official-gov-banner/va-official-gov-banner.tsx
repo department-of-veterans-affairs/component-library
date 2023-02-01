@@ -83,12 +83,10 @@ export class VaOfficialGovBanner {
     content.hidden ? content.removeAttribute('hidden') : content.setAttribute('hidden', 'true');
 
     if (!this.disableAnalytics) {
+      const isOpen = button.getAttribute('aria-expanded') === 'true';
       const detail = {
         componentName: 'va-official-gov-banner',
-        action: 'click',
-        details: { 
-          event: 'int-official-gov-banner-expand',
-        },
+        action: isOpen ? 'expand' : 'collapse',
       }
       this.componentLibraryAnalytics.emit(detail);
     }
