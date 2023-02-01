@@ -17,7 +17,7 @@ export default {
 
 const defaultArgs = {
   'label': 'Branch of Service',
-  'name': 'branch',
+  'name': 'options',
   'value': '',
   'required': false,
   'error': undefined,
