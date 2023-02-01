@@ -192,12 +192,12 @@ describe('va-select', () => {
     expect(element).toEqualHtml(`
       <va-select label="A label" uswds="" value="bar" class="hydrated">
         <mock:shadow-root>
-          <label class="usa-label" for="select" part="label">
+          <label class="usa-label" for="options" part="label">
             A label
           </label>
           <span id="usa-error-message" role="alert"></span>
           <slot></slot>
-          <select id="select" part="select" aria-invalid="false" class="usa-select">
+          <select id="options" part="select" aria-invalid="false" class="usa-select">
             <option value=""></option>
             <option value="">Please choose an option</option>
             <option value="foo">Foo</option>

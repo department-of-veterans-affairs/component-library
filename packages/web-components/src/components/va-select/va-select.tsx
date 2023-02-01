@@ -174,7 +174,7 @@ export class VaSelect {
       return (
         <Host>
           {label && (
-            <label htmlFor="select" class={labelClass} part="label">
+            <label htmlFor="options" class={labelClass} part="label">
               {label}
               {required && <span class="usa-label--required"> {i18next.t('required')}</span>}
             </label>
@@ -193,7 +193,7 @@ export class VaSelect {
             class={selectClass}
             aria-describedby={error ? 'error-message' : undefined}
             aria-invalid={invalid || error ? 'true' : 'false'}
-            id="select"
+            id="options"
             name={name}
             required={required || null}
             onKeyDown={() => this.handleKeyDown()}
@@ -208,7 +208,7 @@ export class VaSelect {
     } else {
     return (
         <Host>
-          <label htmlFor="options" part="label">
+          <label htmlFor="select" part="label">
             {label}
             {required && <span class="required">{i18next.t('required')}</span>}
           </label>
@@ -224,7 +224,7 @@ export class VaSelect {
           <select
             aria-describedby={error ? 'error-message' : undefined}
             aria-invalid={invalid || error ? 'true' : 'false'}
-            id="options"
+            id="select"
             name={name}
             required={required || null}
             onKeyDown={() => this.handleKeyDown()}
