@@ -11,6 +11,9 @@ import {
 import i18next from 'i18next';
 import { Build } from '@stencil/core';
 
+import iconHttpsSvg from '../../assets/icon-https.svg';
+import iconDotGovSvg from '../../assets/icon-dot-gov.svg';
+
 if (Build.isTesting) {
   // Make i18next.t() return the key instead of the value
   i18next.init({ lng: 'cimode' });
@@ -168,7 +171,7 @@ export class VaOfficialGovBanner {
                 <div class="grid-row">
                   <div class="col">
                     <img 
-                      src="https://s3-us-gov-west-1.amazonaws.com/content.www.va.gov/img/icon-dot-gov.svg" 
+                      src={iconHttpsSvg} 
                       role="presentation" 
                       alt="" />
                     <div class="media-block">
@@ -182,7 +185,7 @@ export class VaOfficialGovBanner {
                   </div>
                   <div class="col">
                     <img 
-                      src="https://s3-us-gov-west-1.amazonaws.com/content.www.va.gov/img/icon-https.svg" 
+                      src={iconDotGovSvg} 
                       role="presentation" 
                       alt="" />
                     <div class="media-block">
