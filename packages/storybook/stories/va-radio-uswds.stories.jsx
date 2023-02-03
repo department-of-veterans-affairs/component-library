@@ -27,13 +27,14 @@ export default {
 };
 
 const vaRadioConst = args => {
-  const {   
+  const {
     'enable-analytics': enableAnalytics,
     error,
     label,
     hint,
     required,
     uswds,
+    'label-header-level',
     ...rest
   } = args;
 
@@ -45,13 +46,14 @@ const vaRadioConst = args => {
         required={required}
         uswds={uswds}
         hint={hint}
+        label-header-level={labelHeaderLevel}
     >
-    <va-radio-option 
-      id="soujourner-truth" 
-      label="Soujourner Truth" 
-      name="group1" 
-      value="1" 
-      uswds={uswds} 
+    <va-radio-option
+      id="soujourner-truth"
+      label="Soujourner Truth"
+      name="group1"
+      value="1"
+      uswds={uswds}
     />
     <va-radio-option
       id="frederick-douglass"
@@ -106,12 +108,12 @@ const ReactBindingExample = ({
 }) => {
   return (
     <>
-    <VaRadio 
+    <VaRadio
         uswds
       enableAnalytics={enableAnalytics}
       error={error}
       label={label}
-      required={required} 
+      required={required}
       onVaValueChange={e => console.log('Selected radio option:', e?.detail?.value)}>
       <VaRadioOption uswds label="Option one" name="example" value="1" />
       <VaRadioOption uswds label="Option two" name="example" value="2" />
@@ -183,11 +185,11 @@ const USWDSTiled = ({
         uswds={uswds}
         hint={hint}
       >
-        <va-radio-option 
-          id="soujourner-truth" 
-          label="Soujourner Truth" 
-          name="group1" 
-          value="1" 
+        <va-radio-option
+          id="soujourner-truth"
+          label="Soujourner Truth"
+          name="group1"
+          value="1"
           uswds={uswds}
           tile
         />
@@ -240,11 +242,11 @@ const USWDSTiledError = ({
             uswds={uswds}
             hint={hint}
             >
-            <va-radio-option 
-                id="soujourner-truth" 
-                label="Soujourner Truth" 
-                name="group1" 
-                value="1" 
+            <va-radio-option
+                id="soujourner-truth"
+                label="Soujourner Truth"
+                name="group1"
+                value="1"
                 uswds={uswds}
                 tile
             />
@@ -277,6 +279,7 @@ const defaultArgs = {
   'required': false,
   'error': null,
   'uswds': true,
+  'label-header-level': '',
 };
 
 export const Default = Template.bind(null);
@@ -296,6 +299,12 @@ export const Hint = Template.bind(null);
 Hint.args = {
   ...defaultArgs,
   hint: "We're asking this because of XYZ",
+};
+
+export const LabelHeader = Template.bind(null);
+LabelHeader.args = {
+  ...defaultArgs,
+  'label-header-level': '3',
 };
 
 export const ReactWithCustomEvent = ReactBindingExample.bind(null);
