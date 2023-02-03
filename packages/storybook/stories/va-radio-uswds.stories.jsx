@@ -34,7 +34,7 @@ const vaRadioConst = args => {
     hint,
     required,
     uswds,
-    'label-header-level',
+    'label-header-level': labelHeaderLevel,
     ...rest
   } = args;
 
