@@ -71,6 +71,10 @@ export class VaRadio {
    @Prop() uswds?: boolean = false;
 
   /**
+   * Insert a header with defined level inside the label (legend)
+   */
+  @Prop() labelHeaderLevel?: string;
+  /**
    * The event used to track usage of the component. This is emitted when a
    * radio option is selected and enableAnalytics is true.
    */
@@ -189,6 +193,11 @@ export class VaRadio {
     node.focus();
   }
 
+  private getHeaderLevel() {
+    const number = parseInt(this.labelHeaderLevel, 10);
+    return number >= 1 && number <= 6 ? `H${number}` : null;
+  }
+
   componentDidLoad(): void {
     getSlottedNodes(this.el, 'va-radio-option').forEach(
       (node: HTMLVaRadioOptionElement, index: number) => {
@@ -214,6 +223,7 @@ export class VaRadio {
   render() {
     const { label, hint, required, error, uswds } = this;
     const ariaLabel = label + (required ? ' required' : '');
+    const Header = this.getHeaderLevel();
 
     if (uswds) {
       const legendClass = classnames({
@@ -227,7 +237,7 @@ export class VaRadio {
         >
           <fieldset class="usa-form usa-fieldset">
             <legend class={legendClass} part="legend">
-              {label}
+              {Header ? <Header part="header">{label}</Header> : label}
               {required && <span class="usa-label--required" part="required"> {i18next.t('required')}</span>}
             </legend>
             {hint && <span class="usa-hint">{hint}</span>}
@@ -250,7 +260,7 @@ export class VaRadio {
           aria-label={ariaLabel}
         >
           <legend part="legend">
-            {label}
+            {Header ? <Header part="header">{label}</Header> : label}
             {required && <span class="required" part="required">{i18next.t('required')}</span>}
           </legend>
           {hint && <span class="hint-text">{hint}</span>}
