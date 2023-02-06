@@ -793,6 +793,10 @@ export namespace Components {
     }
     interface VaTextInput {
         /**
+          * An optional message that will be read by screen readers when the input is focused.
+         */
+        "ariaDescribedbyMessage"?: string;
+        /**
           * Allows the browser to automatically complete the input.
          */
         "autocomplete"?: string;
@@ -2260,6 +2264,10 @@ declare namespace LocalJSX {
         "vanity"?: string;
     }
     interface VaTextInput {
+        /**
+          * An optional message that will be read by screen readers when the input is focused.
+         */
+        "ariaDescribedbyMessage"?: string;
         /**
           * Allows the browser to automatically complete the input.
          */
