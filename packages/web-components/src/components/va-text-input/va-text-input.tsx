@@ -229,10 +229,11 @@ export class VaTextInput {
       handleBlur,
       uswds,
       success,
+      ariaDescribedbyMessage
     } = this;
     const type = this.getInputType();
     const maxlength = this.getMaxlength();
-    const ariaDescribedby = `${this.ariaDescribedbyMessage ? 'input-message' : ''} ${this.error ? 'input-error-message' : ''}`
+    const ariaDescribedbyIds = `${ariaDescribedbyMessage ? 'input-message' : ''} ${error ? 'input-error-message' : ''}`
       .trim() || null; // Null so we don't add the attribute if we have an empty string
 
     if (uswds) {
@@ -270,7 +271,7 @@ export class VaTextInput {
             value={value}
             onInput={handleInput}
             onBlur={handleBlur}
-            aria-describedby={ariaDescribedby}
+            aria-describedby={ariaDescribedbyIds}
             aria-invalid={invalid || error ? 'true' : 'false'}
             inputmode={inputmode ? inputmode : undefined}
             maxlength={maxlength}
@@ -317,7 +318,7 @@ export class VaTextInput {
             value={value}
             onInput={handleInput}
             onBlur={handleBlur}
-            aria-describedby={ariaDescribedby}
+            aria-describedby={ariaDescribedbyIds}
             aria-invalid={invalid || error ? 'true' : 'false'}
             inputmode={inputmode ? inputmode : undefined}
             maxlength={maxlength}
@@ -328,9 +329,9 @@ export class VaTextInput {
             required={required || null}
             part="input"
           />
-          {this.ariaDescribedbyMessage && (
-            <span id='input-message'class="sr-only">
-              {this.ariaDescribedbyMessage}
+          {ariaDescribedbyMessage && (
+            <span id='input-message' class="sr-only">
+              {ariaDescribedbyMessage}
             </span>
           )}
           {maxlength && value?.length >= maxlength && (
