@@ -30,4 +30,10 @@ export default {
   'on-this-page': 'On this page',
   'date-hint': 'Please enter two digits for the month and four digits for the year',
   'date-error': 'Please enter a complete date',
+  'gov-site-label': 'An official website of the United States government',
+  'gov-site-button': "Here's how you know",
+  'gov-site-website': 'Official websites use .{{tld}}',
+  'gov-site-explanation': 'A .{{tld}} website belongs to an official government organization in the United States.',
+  'gov-site-https': 'Secure .{{tld}} websites use HTTPS',
+  'gov-site-lock': "A lock {{image}} or https:// means you've safely connected to the .{{tld}} website. Share sensitive information only on official, secure websites.",
 };
