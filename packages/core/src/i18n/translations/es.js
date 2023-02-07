@@ -30,4 +30,10 @@ export default {
   'on-this-page': 'En esta página',
   'date-hint': 'Ingrese dos dígitos para el mes y cuatro dígitos para el año',
   'date-error': 'Ingrese una fecha completa',
+  'gov-site-label': 'Un sitio oficial del Gobierno de Estados Unidos',
+  'gov-site-button': 'Así es como usted puede verificarlo',
+  'gov-site-website': 'Los sitios web oficiales usan .{{tld}}',
+  'gov-site-explanation': 'Un sitio web .{{tld}} pertenece a una organización oficial del Gobierno de Estados Unidos.',
+  'gov-site-https': 'Los sitios web seguros .{{tld}} usan HTTPS',
+  'gov-site-lock': "Un candado {{image}} o https:// significa que usted se conectó de forma segura a un sitio web .{{tld}}. Comparta información sensible sólo en sitios web oficiales y seguros.",
 };
