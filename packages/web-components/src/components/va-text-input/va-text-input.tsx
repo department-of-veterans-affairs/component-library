@@ -121,6 +121,11 @@ export class VaTextInput {
   @Prop() hint?: string;
 
   /**
+   * An optional message that will be read by screen readers when the input is focused.
+   */
+  @Prop() ariaDescribedbyMessage?: string;
+
+  /**
    * The value for the input.
    */
   @Prop({ mutable: true, reflect: true }) value?: string;
@@ -224,9 +229,12 @@ export class VaTextInput {
       handleBlur,
       uswds,
       success,
+      ariaDescribedbyMessage
     } = this;
     const type = this.getInputType();
     const maxlength = this.getMaxlength();
+    const ariaDescribedbyIds = `${ariaDescribedbyMessage ? 'input-message' : ''} ${error ? 'input-error-message' : ''}`
+      .trim() || null; // Null so we don't add the attribute if we have an empty string
 
     if (uswds) {
       const labelClass = classnames({
@@ -248,7 +256,7 @@ export class VaTextInput {
           )}
           {hint && <span class="usa-hint">{hint}</span>}
           <slot></slot>
-          <span id="usa-error-message" role="alert">
+          <span id="input-error-message" role="alert">
             {error && (
               <Fragment>
                 <span class="usa-sr-only">{i18next.t('error')}</span> 
@@ -263,7 +271,7 @@ export class VaTextInput {
             value={value}
             onInput={handleInput}
             onBlur={handleBlur}
-            aria-describedby={error ? 'usa-error-message' : undefined}
+            aria-describedby={ariaDescribedbyIds}
             aria-invalid={invalid || error ? 'true' : 'false'}
             inputmode={inputmode ? inputmode : undefined}
             maxlength={maxlength}
@@ -297,7 +305,7 @@ export class VaTextInput {
           )}
           {hint && <span class="hint-text">{hint}</span>}
           <slot></slot>
-          <span id="error-message" role="alert">
+          <span id="input-error-message" role="alert">
             {error && (
               <Fragment>
                 <span class="sr-only">{i18next.t('error')}</span> {error}
@@ -310,7 +318,7 @@ export class VaTextInput {
             value={value}
             onInput={handleInput}
             onBlur={handleBlur}
-            aria-describedby={error ? 'error-message' : undefined}
+            aria-describedby={ariaDescribedbyIds}
             aria-invalid={invalid || error ? 'true' : 'false'}
             inputmode={inputmode ? inputmode : undefined}
             maxlength={maxlength}
@@ -321,6 +329,11 @@ export class VaTextInput {
             required={required || null}
             part="input"
           />
+          {ariaDescribedbyMessage && (
+            <span id='input-message' class="sr-only">
+              {ariaDescribedbyMessage}
+            </span>
+          )}
           {maxlength && value?.length >= maxlength && (
             <small part="validation">
               {i18next.t('max-chars', { length: maxlength })}
