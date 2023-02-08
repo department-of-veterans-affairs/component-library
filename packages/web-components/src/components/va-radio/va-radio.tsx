@@ -223,7 +223,7 @@ export class VaRadio {
   render() {
     const { label, hint, required, error, uswds } = this;
     const ariaLabel = label + (required ? ' required' : '');
-    const Header = this.getHeaderLevel();
+    const HeaderLevel = this.getHeaderLevel();
 
     if (uswds) {
       const legendClass = classnames({
@@ -237,7 +237,7 @@ export class VaRadio {
         >
           <fieldset class="usa-form usa-fieldset">
             <legend class={legendClass} part="legend">
-              {Header ? <Header part="header">{label}</Header> : label}
+              {HeaderLevel ? <HeaderLevel part="header">{label}</HeaderLevel> : label}
               {required && <span class="usa-label--required" part="required"> {i18next.t('required')}</span>}
             </legend>
             {hint && <span class="usa-hint">{hint}</span>}
@@ -260,7 +260,7 @@ export class VaRadio {
           aria-label={ariaLabel}
         >
           <legend part="legend">
-            {Header ? <Header part="header">{label}</Header> : label}
+            {HeaderLevel ? <HeaderLevel part="header">{label}</HeaderLevel> : label}
             {required && <span class="required" part="required">{i18next.t('required')}</span>}
           </legend>
           {hint && <span class="hint-text">{hint}</span>}
