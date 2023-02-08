@@ -27,12 +27,13 @@ export default {
 };
 
 const vaRadioConst = args => {
-  const {   
+  const {
     'enable-analytics': enableAnalytics,
     error,
     label,
     hint,
     required,
+    'label-header-level': labelHeaderLevel,
     ...rest
   } = args;
   return (
@@ -42,6 +43,7 @@ const vaRadioConst = args => {
       label={label}
       required={required}
       hint={hint}
+      label-header-level={labelHeaderLevel}
     >
       <va-radio-option label="Option one" name="example" value="1" />
       <va-radio-option label="Option two" name="example" value="2" />
@@ -76,11 +78,11 @@ const ReactBindingExample = ({
 }) => {
   return (
     <>
-    <VaRadio 
+    <VaRadio
       enableAnalytics={enableAnalytics}
       error={error}
       label={label}
-      required={required} 
+      required={required}
       onVaValueChange={e => console.log('Selected radio option:', e?.detail?.value)}>
       <VaRadioOption label="Option one" name="example" value="1" />
       <VaRadioOption label="Option two" name="example" value="2" />
@@ -131,7 +133,7 @@ const IdUsageTemplate = ({
 };
 
 const OptionDescriptionExample = args => {
-  const {   
+  const {
     'enable-analytics': enableAnalytics,
     error,
     label,
@@ -147,10 +149,10 @@ const OptionDescriptionExample = args => {
       required={required}
       hint={hint}
     >
-      <va-radio-option 
-        label="Option one" 
-        name="example" 
-        value="1" 
+      <va-radio-option
+        label="Option one"
+        name="example"
+        value="1"
         description="This is optional text that can be used to describe the label in more detail." />
       <va-radio-option label="Option two" name="example" value="2" />
     </va-radio>
@@ -158,7 +160,7 @@ const OptionDescriptionExample = args => {
 }
 
 const OptionTileExample = args => {
-  const {   
+  const {
     'enable-analytics': enableAnalytics,
     error,
     label,
@@ -174,10 +176,10 @@ const OptionTileExample = args => {
       required={required}
       hint={hint}
     >
-      <va-radio-option 
-        label="Option one" 
-        name="example" 
-        value="1" 
+      <va-radio-option
+        label="Option one"
+        name="example"
+        value="1"
         tile
         description="This is optional text that can be used to describe the label in more detail." />
       <va-radio-option label="Option two" name="example" value="2" tile />
@@ -193,6 +195,7 @@ const defaultArgs = {
   'error': null,
   'uswds': false,
   'hint': '',
+  'label-header-level': '',
 };
 
 export const Default = Template.bind(null);
@@ -210,6 +213,12 @@ WithHintText.args = {
 export const WithDescriptionText = OptionDescriptionExample.bind(null);
 WithDescriptionText.args = {
   ...defaultArgs,
+};
+
+export const LabelHeader = Template.bind(null);
+LabelHeader.args = {
+  ...defaultArgs,
+  'label-header-level': '3',
 };
 
 export const Tiled = OptionTileExample.bind(null);
