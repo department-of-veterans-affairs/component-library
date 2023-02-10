@@ -17,9 +17,7 @@
     }
 }
 
-:host([error]:not([error='']):not([uswds])) label,
-:host([error]:not([error=''])) span {
-    font-weight: 700;
+:host([error]:not([error='']):not([uswds])) label {
     margin-top: 0;
 }
 
