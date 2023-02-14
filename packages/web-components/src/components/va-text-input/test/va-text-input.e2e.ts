@@ -89,7 +89,7 @@ describe('va-text-input', () => {
 
   it('adds aria-describedby input-message id', async () => {
     const page = await newE2EPage();
-    await page.setContent('<va-text-input aria-describedby-message="example message" />');
+    await page.setContent('<va-text-input message-aria-describedby="example message" />');
     const el = await page.find('va-text-input');
     const inputEl = await page.find('va-text-input >>> input');
 
@@ -142,7 +142,7 @@ describe('va-text-input', () => {
     const page = await newE2EPage();
 
     await page.setContent(
-      '<va-text-input required label="This is a test" error="With an error message"/>',
+      '<va-text-input required label="This is a test" error="With an error message" message-aria-describeby="with extra aria message"/>',
     );
 
     await axeCheck(page);

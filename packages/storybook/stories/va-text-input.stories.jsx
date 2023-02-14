@@ -51,7 +51,7 @@ const defaultArgs = {
   'type': undefined,
   'success': false,
   'pattern': undefined,
-  'aria-describedby-message': 'Optional description text for screen readers',
+  'message-aria-describedby': 'Optional description text for screen readers',
   hint: null,
 };
 
@@ -70,7 +70,7 @@ const Template = ({
   success,
   pattern,
   hint,
-  'aria-describedby-message': ariaDescribedbyMessage,
+  'message-aria-describedby': messageAriaDescribedby,
 }) => {
   return (
     <va-text-input
@@ -90,7 +90,7 @@ const Template = ({
       pattern={pattern}
       onBlur={e => console.log('blur event', e)}
       onInput={e => console.log('input event value', e.target.value)}
-      aria-describedby-message={ariaDescribedbyMessage}
+      message-aria-describedby={messageAriaDescribedby}
     />
   );
 };
