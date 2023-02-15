@@ -807,10 +807,6 @@ export namespace Components {
     }
     interface VaTextInput {
         /**
-          * An optional message that will be read by screen readers when the input is focused.
-         */
-        "ariaDescribedbyMessage"?: string;
-        /**
           * Allows the browser to automatically complete the input.
          */
         "autocomplete"?: string;
@@ -848,6 +844,10 @@ export namespace Components {
           * The maximum number of characters allowed in the input. Negative and zero values will be ignored.
          */
         "maxlength"?: number;
+        /**
+          * An optional message that will be read by screen readers when the input is focused.
+         */
+        "messageAriaDescribedby"?: string;
         /**
           * The minimum number of characters allowed in the input.
          */
@@ -2308,10 +2308,6 @@ declare namespace LocalJSX {
     }
     interface VaTextInput {
         /**
-          * An optional message that will be read by screen readers when the input is focused.
-         */
-        "ariaDescribedbyMessage"?: string;
-        /**
           * Allows the browser to automatically complete the input.
          */
         "autocomplete"?: string;
@@ -2349,6 +2345,10 @@ declare namespace LocalJSX {
           * The maximum number of characters allowed in the input. Negative and zero values will be ignored.
          */
         "maxlength"?: number;
+        /**
+          * An optional message that will be read by screen readers when the input is focused.
+         */
+        "messageAriaDescribedby"?: string;
         /**
           * The minimum number of characters allowed in the input.
          */
