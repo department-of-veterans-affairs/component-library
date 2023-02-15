@@ -144,6 +144,7 @@ button {
     border-radius: 0;
     box-shadow: none;
     margin: 0;
+    margin-bottom: -4px;
     text-align: left;
     left: 0;
     position: absolute;
@@ -249,17 +250,20 @@ button:hover {
   button[aria-expanded=true]::after, button[aria-expanded=true]:before {
     position: absolute;
     content: '';
-    height: 44px;
-    width: 44px;
+    height: 48px;
+    width: 48px;
     bottom: 0;
     top: 0;
     right: 0;
   }
   button[aria-expanded=true]::after {
-    background: url('../../../../../node_modules/@uswds/uswds/dist/img/usa-icons/close.svg') no-repeat center/24px 24px;
+    background: 0 0;
+    background-color: #005ea2;
+    -webkit-mask: url('../../../../../node_modules/@uswds/uswds/dist/img/usa-icons/close.svg') no-repeat center/contain;
+    mask: url('../../../../../node_modules/@uswds/uswds/dist/img/usa-icons/close.svg') no-repeat center/contain;
     display: inline-block;
-    height: 44px;
-    width: 44px;
+    height: 48px;
+    width: 48px;
     content: '';
     vertical-align: middle;
     margin-left: 0;
