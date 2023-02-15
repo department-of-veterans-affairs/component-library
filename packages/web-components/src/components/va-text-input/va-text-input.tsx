@@ -123,7 +123,7 @@ export class VaTextInput {
   /**
    * An optional message that will be read by screen readers when the input is focused.
    */
-  @Prop() ariaDescribedbyMessage?: string;
+  @Prop() messageAriaDescribedby?: string;
 
   /**
    * The value for the input.
@@ -229,11 +229,11 @@ export class VaTextInput {
       handleBlur,
       uswds,
       success,
-      ariaDescribedbyMessage
+      messageAriaDescribedby
     } = this;
     const type = this.getInputType();
     const maxlength = this.getMaxlength();
-    const ariaDescribedbyIds = `${ariaDescribedbyMessage ? 'input-message' : ''} ${error ? 'input-error-message' : ''}`
+    const ariaDescribedbyIds = `${messageAriaDescribedby ? 'input-message' : ''} ${error ? 'input-error-message' : ''}`
       .trim() || null; // Null so we don't add the attribute if we have an empty string
 
     if (uswds) {
@@ -329,9 +329,9 @@ export class VaTextInput {
             required={required || null}
             part="input"
           />
-          {ariaDescribedbyMessage && (
+          {messageAriaDescribedby && (
             <span id='input-message' class="sr-only">
-              {ariaDescribedbyMessage}
+              {messageAriaDescribedby}
             </span>
           )}
           {maxlength && value?.length >= maxlength && (
