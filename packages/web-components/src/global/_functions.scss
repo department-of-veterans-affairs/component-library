@@ -1,0 +1,15 @@
+@use 'sass:math';
+
+@import 'variables';
+
+// Uses $base-font-size from _variables.scss
+@function rem-override($original) {
+  @if unit($original) == 'rem' {
+    $rem-to-px: (math.div($original, 1rem)) * $base-font-size;
+    @return $rem-to-px;
+  }
+  @if unit($original) != 'px' {
+    @error 'This value must be in either px or rem';
+  }
+  @return $original;
+}

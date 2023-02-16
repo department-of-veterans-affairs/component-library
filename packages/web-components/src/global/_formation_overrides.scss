@@ -1,0 +1,20 @@
+@import '../../global/functions';
+
+.usa-label {
+  font-size: rem-override(1.06rem);
+}
+
+.usa-input {
+  height: rem-override(2.5rem);
+  margin-top: rem-override(0.5rem);
+  max-width: rem-override(30rem);
+  padding: rem-override(0.5rem);
+  font-size: rem-override(1.06rem);
+
+  &--success,
+  &--error {
+    padding-top: rem-override(0.25rem);
+    padding-bottom: rem-override(0.25rem);
+    border-width: rem-override(0.25rem);
+  }
+}
