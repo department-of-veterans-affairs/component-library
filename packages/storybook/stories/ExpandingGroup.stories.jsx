@@ -3,7 +3,7 @@ import ExpandingGroup from '../../react-components/src/components/ExpandingGroup
 import { StoryDocs } from './wc-helpers';
 
 export default {
-  title: 'Components/Expanding group',
+  title: 'Deprecated/Expanding group',
   component: ExpandingGroup,
   id: 'components/expandinggroup',
   parameters: {
