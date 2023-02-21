@@ -171,11 +171,17 @@ export class VaCheckbox {
         'usa-checkbox__input': true,
         'usa-checkbox__input--tile': tile,
       });
+      const descriptionClass = classnames({
+        'usa-legend': true,
+        'usa-label--error': error
+      });
       return (
         <Host>
-          <div id="description" class="usa-legend">
-            {description ? <span>{description}</span> : <slot name="description" />}
-          </div>
+          {description ? 
+            <div id="description" class={descriptionClass}><span>{description}</span></div> :
+            <slot name="description" />
+          }
+
           {hint && <span class="usa-hint">{hint}</span>}
           <span id="checkbox-error-message" role="alert">
             {error && (
