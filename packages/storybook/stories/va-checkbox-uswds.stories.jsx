@@ -17,7 +17,7 @@ export default {
 };
 
 const defaultArgs = {
-  'label': 'This is a cleverly-labelled checkbox',
+  'label': 'Sojourner Truth',
   'checked': false,
   'error': null,
   'required': false,
@@ -74,6 +74,34 @@ const I18nTemplate = args => {
     </div>
 )};
 
+const USWDSTiled = ({
+  checked,
+  description,
+  'enable-analytics': enableAnalytics,
+  'checkbox-description': checkboxDescription,
+  error,
+  label,
+  required, 
+  uswds,
+  hint,
+}) => {
+  return (
+    <>
+      <va-checkbox
+        uswds={uswds}
+        tile
+        checkbox-description={checkboxDescription}
+        checked={checked}
+        description={description}
+        enable-analytics={enableAnalytics}
+        error={error}
+        label={label}
+        hint={hint}
+        required={required} />
+    </>
+  );
+};
+
 export const Default = Template.bind(null);
 Default.args = { ...defaultArgs };
 Default.argTypes = propStructure(checkboxDocs);
@@ -86,6 +114,16 @@ export const WithHintText = Template.bind(null);
 WithHintText.args = {
   ...defaultArgs,
   description: 'Adding some descriptive text above the checkbox.',
+  hint: "This is example hint text",
+};
+
+export const Tiled = USWDSTiled.bind(null);
+Tiled.args = {
+  ...defaultArgs,
+  uswds: true,
+  tile: true,
+  description: 'Adding some descriptive text above the checkbox.',
+  'checkbox-description': 'This is optional text that can be used to describe the label in more detail.',
   hint: "This is example hint text",
 };
 

@@ -212,6 +212,10 @@ export namespace Components {
     }
     interface VaCheckbox {
         /**
+          * Description of the option displayed below the checkbox label. Available when uswds is true.
+         */
+        "checkboxDescription"?: string;
+        /**
           * Whether the checkbox is checked or not.  Note: Because this isn't reflective, vaCheckbox.getAttribute('checked') will not reflect the correct value. Use the property vaCheckbox.checked instead.
          */
         "checked"?: boolean;
@@ -239,6 +243,10 @@ export namespace Components {
           * Set the input to required and render the (Required) text.
          */
         "required"?: boolean;
+        /**
+          * Whether or not the component will display as a tile. Available when uswds is true.
+         */
+        "tile"?: boolean;
         /**
           * Whether or not the component will use USWDS v3 styling.
          */
@@ -1577,6 +1585,10 @@ declare namespace LocalJSX {
     }
     interface VaCheckbox {
         /**
+          * Description of the option displayed below the checkbox label. Available when uswds is true.
+         */
+        "checkboxDescription"?: string;
+        /**
           * Whether the checkbox is checked or not.  Note: Because this isn't reflective, vaCheckbox.getAttribute('checked') will not reflect the correct value. Use the property vaCheckbox.checked instead.
          */
         "checked"?: boolean;
@@ -1612,6 +1624,10 @@ declare namespace LocalJSX {
           * Set the input to required and render the (Required) text.
          */
         "required"?: boolean;
+        /**
+          * Whether or not the component will display as a tile. Available when uswds is true.
+         */
+        "tile"?: boolean;
         /**
           * Whether or not the component will use USWDS v3 styling.
          */

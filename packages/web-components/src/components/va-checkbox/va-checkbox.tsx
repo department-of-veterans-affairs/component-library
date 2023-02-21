@@ -9,6 +9,7 @@ import {
   Prop,
   Fragment,
 } from '@stencil/core';
+import classnames from 'classnames';
 import i18next from 'i18next';
 import { Build } from '@stencil/core';
 
@@ -34,6 +35,11 @@ if (Build.isTesting) {
 })
 export class VaCheckbox {
   @Element() el: HTMLElement;
+
+  /**
+   * The event emitted when the input value changes.
+   */
+  @Event() vaChange: EventEmitter;
 
   /**
    * The label for the checkbox.
@@ -71,19 +77,24 @@ export class VaCheckbox {
   @Prop({ mutable: true }) checked?: boolean = false;
 
   /**
-   * The event emitted when the input value changes.
-   */
-  @Event() vaChange: EventEmitter;
-
-  /**
    * Optional hint text.
    */
    @Prop() hint?: string;
 
   /**
+   * Whether or not the component will display as a tile. Available when uswds is true.
+   */
+  @Prop() tile?: boolean = false;
+
+  /**
    * Whether or not the component will use USWDS v3 styling.
    */
   @Prop() uswds?: boolean = false;
+
+  /**
+   * Description of the option displayed below the checkbox label. Available when uswds is true.
+   */
+  @Prop() checkboxDescription?: string;
 
   /**
    * The event used to track usage of the component. This is emitted when the
@@ -151,9 +162,15 @@ export class VaCheckbox {
       description, 
       checked, 
       hint, 
-      uswds } = this;
+      tile,
+      uswds, 
+      checkboxDescription } = this;
 
     if (uswds) {
+      const inputClass = classnames({
+        'usa-checkbox__input': true,
+        'usa-checkbox__input--tile': tile,
+      });
       return (
         <Host>
           <div id="description" class="usa-legend">
@@ -170,7 +187,7 @@ export class VaCheckbox {
           </span>
           <div class="usa-checkbox">
             <input
-              class="usa-checkbox__input"
+              class={inputClass}
               type="checkbox"
               id="checkbox-element"
               checked={checked}
@@ -178,8 +195,10 @@ export class VaCheckbox {
               aria-invalid={error ? 'true' : 'false'}
               onChange={this.handleChange}
             />
-            <label htmlFor="checkbox-element" class="usa-checkbox__label">
-              {label} {required && <span class="usa-label--required">{i18next.t('required')}</span>}
+            <label htmlFor="checkbox-element" id="option-label" class="usa-checkbox__label">
+              {label} &nbsp;
+              {required && <span class="usa-label--required">{i18next.t('required')}</span>}
+              {checkboxDescription && <span class="usa-checkbox__label-description" aria-describedby="option-label">{checkboxDescription}</span>}
             </label>
           </div>
         </Host>
