@@ -196,7 +196,7 @@ export class VaCheckbox {
               onChange={this.handleChange}
             />
             <label htmlFor="checkbox-element" id="option-label" class="usa-checkbox__label">
-              {label} &nbsp;
+              {label}&nbsp;
               {required && <span class="usa-label--required">{i18next.t('required')}</span>}
               {checkboxDescription && <span class="usa-checkbox__label-description" aria-describedby="option-label">{checkboxDescription}</span>}
             </label>
