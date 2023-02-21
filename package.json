@@ -2,7 +2,7 @@
   "name": "@department-of-veterans-affairs/component-library-monorepo",
   "description": "The monorepo containing the component library packages.",
   "private": true,
-  "version": "1.0.1",
+  "version": "1.0.0",
   "license": "MIT",
   "workspaces": [
     "packages/*"
