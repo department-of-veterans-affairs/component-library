@@ -40,15 +40,15 @@ applyPolyfills().then(() => {
  * The custom event locationchange will dispatch when the URL changes.
  * The native events `hashchange` and `popstate` were not reliable.
  */
-(() => {
+ (() => {
   const pushState = history.pushState;
-  history.pushState = function () {
+  history.pushState = function() {
     pushState.apply(this, arguments);
     window.dispatchEvent(new Event('locationchange'));
   };
 
   const replaceState = history.replaceState;
-  history.replaceState = function () {
+  history.replaceState = function() {
     replaceState.apply(this, arguments);
     window.dispatchEvent(new Event('locationchange'));
   };
@@ -130,9 +130,34 @@ export const decorators = [
   ),
 ];
 
+/**
+ * The dynamic CSS added when the URL has "uswds" in it.
+ * Specifically updates body and html tags.
+ */
+ function addUswdsStyles() {
+  document.documentElement.style.fontSize = '16px';
+  document.body.style.fontSize = '16px';
+}
+
+/**
+ * The dynamic CSS added when the URL does not have "uswds" in it.
+ * Specifically updates body and html tags.
+ */
+function addFormationStyles() {
+  document.documentElement.style.fontSize = '10px';
+  document.body.style.fontSize = '1.6rem';
+}
+
 document.body.onload = function () {
   // Fix for React 17/NVDA bug where React root is read as "clickable"
   // https://github.com/nvaccess/nvda/issues/13262
   // https://github.com/facebook/react/issues/20895
   document.querySelector('#root').setAttribute('role', 'presentation');
+
+  // Styles added for USWDS v3 integration into Storybook
+  location.href.includes('uswds') ? addUswdsStyles() : addFormationStyles();
+
+  window.addEventListener('locationchange', (event) => {
+    location.href.includes('uswds') ? addUswdsStyles() : addFormationStyles();
+  });
 };

@@ -1,7 +1,0 @@
-/*
-object-assign
-(c) Sindre Sorhus
-@license MIT
-*/
-
-/*!__STENCIL_STATIC_IMPORT_SWITCH__*/
