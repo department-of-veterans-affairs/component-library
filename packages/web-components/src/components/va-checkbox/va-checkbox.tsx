@@ -29,7 +29,7 @@ if (Build.isTesting) {
  */
 @Component({
   tag: 'va-checkbox',
-  styleUrl: 'va-checkbox.css',
+  styleUrl: 'va-checkbox.scss',
   shadow: true,
 })
 export class VaCheckbox {
@@ -79,6 +79,11 @@ export class VaCheckbox {
    * Optional hint text.
    */
    @Prop() hint?: string;
+
+  /**
+   * Whether or not the component will use USWDS v3 styling.
+   */
+  @Prop() uswds?: boolean = false;
 
   /**
    * The event used to track usage of the component. This is emitted when the
@@ -139,35 +144,75 @@ export class VaCheckbox {
   }
 
   render() {
-    const { error, label, required, description, checked, hint } = this;
+    const { 
+      error, 
+      label, 
+      required, 
+      description, 
+      checked, 
+      hint, 
+      uswds } = this;
 
-    return (
-      <Host>
-        <div id="description">
-          {description ? <p>{description}</p> : <slot name="description" />}
-        </div>
-        {hint && <span class="hint-text">{hint}</span>}
-        <span id="error-message" role="alert">
-          {error && (
-            <Fragment>
-              <span class="sr-only">{i18next.t('error')}</span> {error}
-            </Fragment>
-          )}
-        </span>
-        <input
-          type="checkbox"
-          id="checkbox-element"
-          checked={checked}
-          aria-describedby={error ? 'error-message' : undefined}
-          aria-invalid={error ? 'true' : 'false'}
-          onChange={this.handleChange}
-        />
-        <label htmlFor="checkbox-element">
-          <span>
-            {label} {required && <span class="required">{i18next.t('required')}</span>}
+    if (uswds) {
+      return (
+        <Host>
+          <div id="description" class="usa-legend">
+            {description ? <span>{description}</span> : <slot name="description" />}
+          </div>
+          {hint && <span class="usa-hint">{hint}</span>}
+          <span id="checkbox-error-message" role="alert">
+            {error && (
+              <Fragment>
+                <span class="usa-sr-only">{i18next.t('error')}</span> 
+                <span class="usa-error-message">{error}</span>
+              </Fragment>
+            )}
           </span>
-        </label>
-      </Host>
-    );
+          <div class="usa-checkbox">
+            <input
+              class="usa-checkbox__input"
+              type="checkbox"
+              id="checkbox-element"
+              checked={checked}
+              aria-describedby={error ? 'checkbox-error-message' : undefined}
+              aria-invalid={error ? 'true' : 'false'}
+              onChange={this.handleChange}
+            />
+            <label htmlFor="checkbox-element" class="usa-checkbox__label">
+              {label} {required && <span class="usa-label--required">{i18next.t('required')}</span>}
+            </label>
+          </div>
+        </Host>
+      );
+    } else {
+      return (
+        <Host>
+          <div id="description">
+            {description ? <p>{description}</p> : <slot name="description" />}
+          </div>
+          {hint && <span class="hint-text">{hint}</span>}
+          <span id="error-message" role="alert">
+            {error && (
+              <Fragment>
+                <span class="sr-only">{i18next.t('error')}</span> {error}
+              </Fragment>
+            )}
+          </span>
+          <input
+            type="checkbox"
+            id="checkbox-element"
+            checked={checked}
+            aria-describedby={error ? 'error-message' : undefined}
+            aria-invalid={error ? 'true' : 'false'}
+            onChange={this.handleChange}
+          />
+          <label htmlFor="checkbox-element">
+            <span>
+              {label} {required && <span class="required">{i18next.t('required')}</span>}
+            </span>
+          </label>
+        </Host>
+      );
+    }
   }
 }
