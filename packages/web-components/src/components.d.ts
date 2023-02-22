@@ -224,6 +224,10 @@ export namespace Components {
          */
         "description"?: string;
         /**
+          * Whether or not the checkbox option is disabled. Available when uswds is true.
+         */
+        "disabled"?: boolean;
+        /**
           * True if the analytics event should fire.
          */
         "enableAnalytics"?: boolean;
@@ -1600,6 +1604,10 @@ declare namespace LocalJSX {
           * The description to render. If this prop exists, va-checkbox will render it instead of the named slot.
          */
         "description"?: string;
+        /**
+          * Whether or not the checkbox option is disabled. Available when uswds is true.
+         */
+        "disabled"?: boolean;
         /**
           * True if the analytics event should fire.
          */

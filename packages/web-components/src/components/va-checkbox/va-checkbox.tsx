@@ -97,6 +97,11 @@ export class VaCheckbox {
   @Prop() checkboxDescription?: string;
 
   /**
+   * Whether or not the checkbox option is disabled. Available when uswds is true.
+   */
+  @Prop() disabled?: boolean = false;
+
+  /**
    * The event used to track usage of the component. This is emitted when the
    * input value changes and enableAnalytics is true.
    */
@@ -164,7 +169,8 @@ export class VaCheckbox {
       hint, 
       tile,
       uswds, 
-      checkboxDescription } = this;
+      checkboxDescription, 
+      disabled, } = this;
 
     if (uswds) {
       const inputClass = classnames({
@@ -199,6 +205,7 @@ export class VaCheckbox {
               checked={checked}
               aria-describedby={error ? 'checkbox-error-message' : undefined}
               aria-invalid={error ? 'true' : 'false'}
+              disabled={disabled}
               onChange={this.handleChange}
             />
             <label htmlFor="checkbox-element" id="option-label" class="usa-checkbox__label">

@@ -43,8 +43,10 @@ const vaCheckboxGroup = args => {
       hint={hint}
       uswds={uswds}
     >
-      <va-checkbox uswds label="Option one" name="example" value="1" />
-      <va-checkbox uswds label="Option two" name="example" value="2" />
+      <va-checkbox uswds label="Sojourner Truth" name="example" value="1" />
+      <va-checkbox uswds label="Frederick Douglass" name="example" value="2" />
+      <va-checkbox uswds label="Booker T. Washington" name="example" value="3" />
+      <va-checkbox uswds label="George Washington Carver" name="example" value="4" disabled />
     </va-checkbox-group>
   )
 }
@@ -100,9 +102,9 @@ const USWDSTiled = ({
           label="George Washington Carver"
           name="group1"
           value="4"
-          disabled={true}
           uswds={uswds}
           tile
+          disabled
         />
       </va-checkbox-group>
     </>
@@ -129,7 +131,7 @@ const I18nTemplate = args => {
 
 const defaultArgs = {
   'enable-analytics': false,
-  'label': 'This is a label',
+  'label': 'Select any historical figure',
   'required': false,
   'error': null,
   'hint': null,
@@ -192,6 +194,6 @@ Tiled.args = {
 export const Internationalization = I18nTemplate.bind(null);
 Internationalization.args = {
   ...defaultArgs,
-  error: 'There has been a problem',
+  error: 'This is a custom error message',
   required: true,
 };
