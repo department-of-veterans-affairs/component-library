@@ -202,7 +202,7 @@ describe('va-checkbox', () => {
     expect(await inputEl.getProperty('checked')).toBeTruthy();
   });
 
-  // Begin USWDS version test
+  // Begin USWDS v3 variation tests
   it('uswds v3 variation renders', async () => {
     const page = await newE2EPage();
     await page.setContent('<va-checkbox uswds></va-checkbox>');
