@@ -8,3 +8,99 @@ va-process-list li :is(h2, h3, h4, h5) {
   clear: none;
   padding-top: 0.3rem;
 }
+
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-weight: 200;
+  font-style: normal;
+  src: url('../../../../node_modules/@uswds/uswds/dist/fonts/source-sans-pro/sourcesanspro-extralight-webfont.woff') format("woff"),
+    url('../../../../node_modules/@uswds/uswds/dist/fonts/source-sans-pro/sourcesanspro-extralight-webfont.ttf') format("truetype");
+}
+
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-weight: 300;
+  font-style: normal;
+  src: url('../../../../node_modules/@uswds/uswds/dist/fonts/source-sans-pro/sourcesanspro-light-webfont.woff') format("woff"),
+    url('../../../../node_modules/@uswds/uswds/dist/fonts/source-sans-pro/sourcesanspro-light-webfont.ttf') format("truetype");
+}
+
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-weight: 400;
+  font-style: normal;
+  src: url('../../../../node_modules/@uswds/uswds/dist/fonts/source-sans-pro/sourcesanspro-regular-webfont.woff') format("woff"),
+    url('../../../../node_modules/@uswds/uswds/dist/fonts/source-sans-pro/sourcesanspro-regular-webfont.ttf') format("truetype");
+ }
+
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-weight: 600;
+  font-style: normal;
+  src: url('../../../../node_modules/@uswds/uswds/dist/fonts/source-sans-pro/sourcesanspro-semibold-webfont.woff') format("woff"),
+    url('../../../../node_modules/@uswds/uswds/dist/fonts/source-sans-pro/sourcesanspro-semibold-webfont.ttf') format("truetype");
+ }
+
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-weight: 700;
+  font-style: normal;
+  src: url('../../../../node_modules/@uswds/uswds/dist/fonts/source-sans-pro/sourcesanspro-bold-webfont.woff') format("woff"),
+    url('../../../../node_modules/@uswds/uswds/dist/fonts/source-sans-pro/sourcesanspro-bold-webfont.ttf') format("truetype");
+ }
+
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-weight: 900;
+  font-style: normal;
+  src: url('../../../../node_modules/@uswds/uswds/dist/fonts/source-sans-pro/sourcesanspro-black-webfont.woff') format("woff"),
+    url('../../../../node_modules/@uswds/uswds/dist/fonts/source-sans-pro/sourcesanspro-black-webfont.ttf') format("truetype");
+ }
+
+ @font-face {
+  font-family: 'Source Sans Pro';
+  font-weight: 200;
+  font-style: italic;
+  src: url('../../../../node_modules/@uswds/uswds/dist/fonts/source-sans-pro/sourcesanspro-extralightitalic-webfont.woff') format("woff"),
+    url('../../../../node_modules/@uswds/uswds/dist/fonts/source-sans-pro/sourcesanspro-extralightitalic-webfont.ttf') format("truetype");
+ }
+
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-weight: 300;
+  font-style: italic;
+  src: url('../../../../node_modules/@uswds/uswds/dist/fonts/source-sans-pro/sourcesanspro-lightitalic-webfont.woff') format("woff"),
+    url('../../../../node_modules/@uswds/uswds/dist/fonts/source-sans-pro/sourcesanspro-lightitalic-webfont.ttf') format("truetype");
+ }
+
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-weight: 400;
+  font-style: italic;
+  src: url('../../../../node_modules/@uswds/uswds/dist/fonts/source-sans-pro/sourcesanspro-italic-webfont.woff') format("woff"),
+    url('../../../../node_modules/@uswds/uswds/dist/fonts/source-sans-pro/sourcesanspro-italic-webfont.ttf') format("truetype");
+ }
+
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-weight: 600;
+  font-style: italic;
+  src: url('../../../../node_modules/@uswds/uswds/dist/fonts/source-sans-pro/sourcesanspro-semibolditalic-webfont.woff') format("woff"),
+    url('../../../../node_modules/@uswds/uswds/dist/fonts/source-sans-pro/sourcesanspro-semibolditalic-webfont.ttf') format("truetype");
+ }
+
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-weight: 700;
+  font-style: italic;
+  src: url('../../../../node_modules/@uswds/uswds/dist/fonts/source-sans-pro/sourcesanspro-bolditalic-webfont.woff') format("woff"),
+    url('../../../../node_modules/@uswds/uswds/dist/fonts/source-sans-pro/sourcesanspro-bolditalic-webfont.ttf') format("truetype");
+ }
+
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-weight: 900;
+  font-style: italic;
+  src: url('../../../../node_modules/@uswds/uswds/dist/fonts/source-sans-pro/sourcesanspro-blackitalic-webfont.woff') format("woff"),
+    url('../../../../node_modules/@uswds/uswds/dist/fonts/source-sans-pro/sourcesanspro-blackitalic-webfont.ttf') format("truetype");
+ }
