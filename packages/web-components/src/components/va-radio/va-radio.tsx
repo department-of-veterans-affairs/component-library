@@ -68,7 +68,7 @@ export class VaRadio {
   /**
    * Whether or not the component will use USWDS v3 styling.
    */
-   @Prop() uswds?: boolean = false;
+  @Prop() uswds?: boolean = false;
 
   /**
    * Insert a header with defined level inside the label (legend)
@@ -97,8 +97,9 @@ export class VaRadio {
   @Listen('keydown')
   handleKeyDown(event: KeyboardEvent) {
     const currentNode = event.target as HTMLVaRadioOptionElement;
-    const radioOptionNodes = (getSlottedNodes(this.el, 'va-radio-option') as HTMLVaRadioOptionElement[])
-      .filter(node => !node.disabled);
+    const radioOptionNodes = (
+      getSlottedNodes(this.el, 'va-radio-option') as HTMLVaRadioOptionElement[]
+    ).filter(node => !node.disabled);
 
     if (!radioOptionNodes.length) return;
 
@@ -195,6 +196,7 @@ export class VaRadio {
 
   private getHeaderLevel() {
     const number = parseInt(this.labelHeaderLevel, 10);
+    // eslint-disable-next-line i18next/no-literal-string
     return number >= 1 && number <= 6 ? `H${number}` : null;
   }
 
@@ -228,17 +230,23 @@ export class VaRadio {
     if (uswds) {
       const legendClass = classnames({
         'usa-legend': true,
-        'usa-label--error': error
+        'usa-label--error': error,
       });
       return (
-        <Host
-          aria-invalid={error ? 'true' : 'false'}
-          aria-label={ariaLabel}
-        >
+        <Host aria-invalid={error ? 'true' : 'false'} aria-label={ariaLabel}>
           <fieldset class="usa-form usa-fieldset">
             <legend class={legendClass} part="legend">
-              {HeaderLevel ? <HeaderLevel part="header">{label}</HeaderLevel> : label}
-              {required && <span class="usa-label--required" part="required"> {i18next.t('required')}</span>}
+              {HeaderLevel ? (
+                <HeaderLevel part="header">{label}</HeaderLevel>
+              ) : (
+                label
+              )}
+              {required && (
+                <span class="usa-label--required" part="required">
+                  {' '}
+                  {i18next.t('required')}
+                </span>
+              )}
             </legend>
             {hint && <span class="usa-hint">{hint}</span>}
             <span class="usa-error-message" role="alert">
@@ -251,7 +259,7 @@ export class VaRadio {
             <slot></slot>
           </fieldset>
         </Host>
-       )
+      );
     } else {
       return (
         <Host
@@ -260,8 +268,16 @@ export class VaRadio {
           aria-label={ariaLabel}
         >
           <legend part="legend">
-            {HeaderLevel ? <HeaderLevel part="header">{label}</HeaderLevel> : label}
-            {required && <span class="required" part="required">{i18next.t('required')}</span>}
+            {HeaderLevel ? (
+              <HeaderLevel part="header">{label}</HeaderLevel>
+            ) : (
+              label
+            )}
+            {required && (
+              <span class="required" part="required">
+                {i18next.t('required')}
+              </span>
+            )}
           </legend>
           {hint && <span class="hint-text">{hint}</span>}
           <span id="error-message" role="alert">
