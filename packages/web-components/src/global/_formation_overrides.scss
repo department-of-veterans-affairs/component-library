@@ -4,6 +4,10 @@
 .usa-input,
 .usa-label {
   font-size: rem-override(1.06rem);
+.usa-label {
+  margin-top: rem-override(1.5rem);
+  max-width: rem-override(30rem);
+}
 }
 
 .usa-input {
