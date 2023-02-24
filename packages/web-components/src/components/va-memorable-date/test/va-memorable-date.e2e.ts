@@ -600,4 +600,33 @@ describe('va-memorable-date', () => {
       },
     });
   });
+
+  // Begin USWDS v3 test
+  it('uswds v3 renders', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<va-memorable-date name="test"/>');
+    const date = await page.find('va-memorable-date');
+
+    expect(date).toEqualHtml(`
+      <va-memorable-date class="hydrated" name="test">
+        <mock:shadow-root>
+          <fieldset>
+            <legend>
+              <div id="dateHint">
+                date-hint.
+              </div>
+            </legend>
+        <slot></slot>
+        <span id="error-message" role="alert"></span>
+            <div class="date-container">
+              <va-text-input aria-describedby="dateHint" class="hydrated input-month"></va-text-input>
+              <va-text-input aria-describedby="dateHint" class="hydrated input-day"></va-text-input>
+              <va-text-input aria-describedby="dateHint" class="hydrated input-year" value=""></va-text-input>
+            </div>
+          </fieldset>
+        </mock:shadow-root>
+      </va-memorable-date>
+    `);
+  });
 });

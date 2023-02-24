@@ -420,6 +420,10 @@ export namespace Components {
          */
         "label": string;
         /**
+          * Whether or not to use the month as an input or select.
+         */
+        "monthSelect"?: boolean;
+        /**
           * Used to create unique name attributes for each input.
          */
         "name": string;
@@ -427,6 +431,10 @@ export namespace Components {
           * Render marker indicating field is required.
          */
         "required"?: boolean;
+        /**
+          * Whether or not the component will use USWDS v3 styling.
+         */
+        "uswds"?: boolean;
         /**
           * Set the default date value must be in YYYY-MM-DD format.
          */
@@ -1821,6 +1829,10 @@ declare namespace LocalJSX {
          */
         "label": string;
         /**
+          * Whether or not to use the month as an input or select.
+         */
+        "monthSelect"?: boolean;
+        /**
           * Used to create unique name attributes for each input.
          */
         "name": string;
@@ -1840,6 +1852,10 @@ declare namespace LocalJSX {
           * Render marker indicating field is required.
          */
         "required"?: boolean;
+        /**
+          * Whether or not the component will use USWDS v3 styling.
+         */
+        "uswds"?: boolean;
         /**
           * Set the default date value must be in YYYY-MM-DD format.
          */

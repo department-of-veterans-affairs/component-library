@@ -7,8 +7,8 @@ VaMemorableDate.displayName = 'VaMemorableDate';
 const memorableDateInputDocs = getWebComponentDocs('va-memorable-date');
 
 export default {
-  title: 'Components/Memorable date',
-  id: 'components/va-memorable-date',
+  title: 'USWDS/Memorable date USWDS',
+  id: 'usdws/va-memorable-date',
   parameters: {
     componentSubtitle: `va-memorable-date web component`,
     docs: {
@@ -23,11 +23,15 @@ const defaultArgs = {
   required: false,
   error: undefined,
   value: undefined,
+  uswds: true,
+  monthSelect: false,
 };
 
-const Template = ({ label, name, required, error, value, hint }) => {
+const Template = ({ label, name, required, error, uswds, value, monthSelect }) => {
   return (
     <VaMemorableDate
+      uswds={uswds}
+      monthSelect={monthSelect}
       label={label}
       name={name}
       required={required}
@@ -39,7 +43,7 @@ const Template = ({ label, name, required, error, value, hint }) => {
   );
 };
 
-const CustomValidationTemplate = ({ label, name, required, error, value }) => {
+const CustomValidationTemplate = ({ label, name, required, error, uswds, value }) => {
   const [dateVal, setDateVal] = useState(value);
   const [errorVal, setErrorVal] = useState(error);
   const today = new Date();
@@ -57,6 +61,7 @@ const CustomValidationTemplate = ({ label, name, required, error, value }) => {
   return (
     <>
       <VaMemorableDate
+        uswds={uswds}
         label={label}
         name={name}
         required={required}
@@ -84,7 +89,7 @@ const CustomValidationTemplate = ({ label, name, required, error, value }) => {
   );
 };
 
-const I18nTemplate = ({ label, name, required, error, value }) => {
+const I18nTemplate = ({ label, name, required, error, uswds, value }) => {
   const [lang, setLang] = useState('en');
 
   useEffect(() => {
@@ -97,14 +102,15 @@ const I18nTemplate = ({ label, name, required, error, value }) => {
       <button onClick={e => setLang('en')}>English</button>
       <button onClick={e => setLang('tl')}>Tagalog</button>
       <VaMemorableDate
-      label={label}
-      name={name}
-      required={required}
-      error={error}
-      value={value}
-      onDateBlur={e => console.log(e, 'DATE BLUR FIRED')}
-      onDateChange={e => console.log(e, 'DATE CHANGE FIRED')}
-    />
+        uswds={uswds}
+        label={label}
+        name={name}
+        required={required}
+        error={error}
+        value={value}
+        onDateBlur={e => console.log(e, 'DATE BLUR FIRED')}
+        onDateChange={e => console.log(e, 'DATE CHANGE FIRED')}
+      />
     </div>
 )};
 
@@ -113,7 +119,23 @@ Default.args = { ...defaultArgs };
 Default.argTypes = propStructure(memorableDateInputDocs);
 
 export const Error = Template.bind(null);
-Error.args = { ...defaultArgs, error: 'Error Message Example' };
+Error.args = { 
+  ...defaultArgs, 
+  error: 'Error Message Example',
+};
+
+export const WithMonthSelect = Template.bind(null);
+WithMonthSelect.args = {
+  ...defaultArgs,
+  monthSelect: true,
+};
+
+export const ErrorWithMonthSelect = Template.bind(null);
+ErrorWithMonthSelect.args = {
+  ...defaultArgs,
+  error: 'Error Message Example',
+  monthSelect: true,
+};
 
 export const CustomValidation = CustomValidationTemplate.bind(null);
 CustomValidation.args = {

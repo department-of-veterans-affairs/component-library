@@ -1,0 +1,68 @@
+@forward 'settings';
+
+@use 'uswds-helpers/src/styles/usa-sr-only';
+@use 'usa-fieldset/src/styles/usa-fieldset';
+@use 'usa-legend/src/styles/usa-legend';
+@use 'usa-form-group/src/styles/usa-form-group';
+@use 'usa-hint/src/styles/usa-hint';
+@use 'usa-error-message/src/styles/usa-error-message';
+// @use 'usa-icon/src/styles/usa-icon';
+// @use 'usa-label/src/styles/usa-label';
+// @use 'usa-input/src/styles/usa-input';
+// @use 'usa-select/src/styles/usa-select';
+@use 'usa-memorable-date/src/styles/usa-memorable-date';
+
+// @import '../va-text-input/va-text-input.scss';
+
+@import '../va-date/va-date.css';
+@import '../../mixins/form-field-error.css';
+
+
+// Override from USWDS
+.usa-form-group--day-input, .usa-form-group--month-input {
+  width: calc(16px * 3);
+}
+
+.usa-form-group--year-input {
+  width: calc(16px * 4.5);
+}
+
+.usa-form-group--month-select {
+  width: calc(16px * 15);
+}
+
+
+
+:host(:not([uswds])) .input-month,
+.input-day,
+.input-year {
+  margin-right: 1.6rem;
+}
+
+:host(:not([uswds])) .input-month,
+.input-day {
+  width: 4.8rem;
+}
+
+:host(:not([uswds])) .input-year {
+  width: 7.2rem;
+}
+
+:host(:not([uswds])) .input-month input,
+.input-day input,
+.input-year input {
+  padding: 0.8rem;
+}
+
+:host(:not([uswds])) #dateHint {
+  color: var(--color-gray);
+  line-height: 1.5;
+}
+
+slot:not([name])::slotted(*) {
+  margin-bottom: 0.8rem;
+}
+
+:host(:not([uswds])) #error-message {
+  margin-bottom: 0.8rem;
+}
