@@ -8,7 +8,7 @@ const memorableDateInputDocs = getWebComponentDocs('va-memorable-date');
 
 export default {
   title: 'USWDS/Memorable date USWDS',
-  id: 'usdws/va-memorable-date',
+  id: 'uswds/va-memorable-date',
   parameters: {
     componentSubtitle: `va-memorable-date web component`,
     docs: {
