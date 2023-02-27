@@ -62,7 +62,6 @@ const Template = ({
     <>
       {useAddButton && (
         <button
-          style={{fontSize: '1rem'}}
           onClick={() => {
             setModifiedOptions([
               ...modifiedOptions,
@@ -100,7 +99,7 @@ export const Required = Template.bind(null);
 Required.args = { ...defaultArgs, required: true };
 
 export const WithHintText = Template.bind(null);
-WithHintText.args = { ...defaultArgs, hint: "This is example hint text" };
+WithHintText.args = { ...defaultArgs, hint: 'This is example hint text' };
 
 export const ErrorMessage = Template.bind(null);
 ErrorMessage.args = { ...defaultArgs, error: 'There was a problem' };
@@ -118,8 +117,8 @@ const I18nTemplate = args => {
 
   return (
     <div>
-      <button style={{fontSize: '1rem'}} onClick={e => setLang('es')}>Español</button>
-      <button style={{fontSize: '1rem'}} onClick={e => setLang('en')}>English</button>
+      <button onClick={e => setLang('es')}>Español</button>
+      <button onClick={e => setLang('en')}>English</button>
       <va-select {...rest}>{options}</va-select>
     </div>
   );

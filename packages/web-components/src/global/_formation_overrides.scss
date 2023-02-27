@@ -9,7 +9,8 @@
 .usa-input,
 .usa-label,
 .usa-legend,
-.usa-radio__label {
+.usa-radio__label,
+.usa-select {
   font-size: rem-override(1.06rem);
 }
 
@@ -39,7 +40,7 @@
   }
 }
 
-.usa-input {
+.usa-input, .usa-select {
   height: rem-override(2.5rem);
   margin-top: rem-override(0.5rem);
   max-width: rem-override(30rem);
@@ -51,4 +52,8 @@
     padding-bottom: rem-override(0.25rem);
     border-width: rem-override(0.25rem);
   }
+}
+
+.usa-select {
+  background-size: rem-override(1.25rem);
 }
