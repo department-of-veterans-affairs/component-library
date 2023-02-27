@@ -1,4 +1,4 @@
 @use "uswds-core" with ($theme-image-path: '../../../../../node_modules/@uswds/uswds/dist/img/',
-  $theme-font-type-sans: 'source-sans-pro',
-  $theme-font-sans-custom-stack: '"Source Sans Pro", "Helvetica Neue", Helvetica, Arial, sans',
+  $theme-font-type-sans: 'source-sans-pro', // Formation override.
+  $theme-font-sans-custom-stack: '"Source Sans Pro", "Helvetica Neue", Helvetica, Arial, sans', // Formation override.
 );
