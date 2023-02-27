@@ -5,6 +5,7 @@
 @use 'usa-hint/src/styles/usa-hint';
 
 @import '../../mixins/uswds-error-border.scss';
+@import '../../global/formation_overrides';
 
 :host {
   color: var(--color-base);
@@ -16,9 +17,9 @@
   outline: none !important;
 }
 
-:host([uswds]) input:not([disabled]):focus{	
-  outline: 2px solid var(--color-gold-light);	
-  outline-offset: 2px;	
+:host([uswds]) input:not([disabled]):focus {
+  outline: 2px solid var(--color-gold-light);
+  outline-offset: 2px;
 }
 
 input {
