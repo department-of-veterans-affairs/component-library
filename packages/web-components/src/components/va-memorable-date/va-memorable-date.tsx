@@ -61,6 +61,11 @@ export class VaMemorableDate {
   @Prop() name!: string;
 
   /**
+   * Hint text string
+   */
+  @Prop() hint?: string;
+
+  /**
    * The error message to render (if any)
    * This prop should be leveraged to display any custom validations needed for this component
    */
@@ -189,6 +194,7 @@ export class VaMemorableDate {
       required,
       label,
       name,
+      hint,
       error,
       handleDateBlur,
       handleDateChange,
@@ -197,6 +203,9 @@ export class VaMemorableDate {
     } = this;
 
     const [year, month, day] = (value || '').split('-');
+    const describedbyIds = ['dateHint', hint ? 'hint' : '']
+      .filter(Boolean)
+      .join(' ');
 
     // Error attribute should be leveraged for custom error messaging
     // Fieldset has an implicit aria role of group
@@ -205,6 +214,7 @@ export class VaMemorableDate {
         <fieldset>
           <legend>
             {label} {required && <span class="required">{i18next.t('required')}</span>}
+            {hint && <div id="hint">{hint}</div>}
             <div id="dateHint">{i18next.t('date-hint')}.</div>
           </legend>
           <slot />
@@ -222,7 +232,7 @@ export class VaMemorableDate {
               maxlength={2}
               minlength={2}
               pattern="[0-9]*"
-              aria-describedby="dateHint"
+              aria-describedby={describedbyIds}
               invalid={this.invalidMonth}
               // Value must be a string
               // if NaN provide empty string
@@ -239,7 +249,7 @@ export class VaMemorableDate {
               maxlength={2}
               minlength={2}
               pattern="[0-9]*"
-              aria-describedby="dateHint"
+              aria-describedby={describedbyIds}
               invalid={this.invalidDay}
               // Value must be a string
               // if NaN provide empty string
@@ -256,7 +266,7 @@ export class VaMemorableDate {
               maxlength={4}
               minlength={4}
               pattern="[0-9]*"
-              aria-describedby="dateHint"
+              aria-describedby={describedbyIds}
               invalid={this.invalidYear}
               // Value must be a string
               // if NaN provide empty string

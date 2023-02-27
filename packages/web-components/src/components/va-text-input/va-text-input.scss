@@ -7,6 +7,7 @@
 @use 'usa-hint/src/styles/usa-hint';
 
 @import '../../mixins/uswds-error-border.scss';
+@import '../../global/formation_overrides';
 
 :host {
   color: var(--color-base);

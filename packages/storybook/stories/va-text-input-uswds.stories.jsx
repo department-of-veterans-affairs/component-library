@@ -52,7 +52,7 @@ const defaultArgs = {
   'success': false,
   'pattern': undefined,
   'uswds': true,
-  hint: null,
+  'hint': null,
 };
 
 const Template = ({
@@ -107,7 +107,7 @@ const I18nTemplate = ({
   value,
   inputmode,
   type,
-  uswds
+  uswds,
 }) => {
   const [lang, setLang] = useState('en');
   useEffect(() => {
@@ -115,9 +115,15 @@ const I18nTemplate = ({
   }, [lang]);
   return (
     <>
-      <button style={{fontSize: '1rem'}} onClick={e => setLang('es')}>Español</button>
-      <button style={{fontSize: '1rem'}} onClick={e => setLang('en')}>English</button>
-      <button style={{fontSize: '1rem'}} onClick={e => setLang('tl')}>Tagalog</button>
+      <button style={{ fontSize: '16px' }} onClick={e => setLang('es')}>
+        Español
+      </button>
+      <button style={{ fontSize: '16px' }} onClick={e => setLang('en')}>
+        English
+      </button>
+      <button style={{ fontSize: '16px' }} onClick={e => setLang('tl')}>
+        Tagalog
+      </button>
       <va-text-input
         uswds={uswds}
         name={name}
