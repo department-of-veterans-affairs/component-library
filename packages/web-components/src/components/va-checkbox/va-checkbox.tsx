@@ -184,7 +184,7 @@ export class VaCheckbox {
       return (
         <Host>
           {description ? 
-            <div id="description" class={descriptionClass}><span>{description}</span></div> :
+            <legend id="description" class={descriptionClass}>{description}</legend> :
             <slot name="description" />
           }
 
