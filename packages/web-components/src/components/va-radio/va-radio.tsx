@@ -251,7 +251,7 @@ export class VaRadio {
             <slot></slot>
           </fieldset>
         </Host>
-      )
+       )
     } else {
       return (
         <Host
