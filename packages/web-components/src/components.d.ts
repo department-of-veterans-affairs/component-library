@@ -432,6 +432,10 @@ export namespace Components {
           * The error message to render (if any) This prop should be leveraged to display any custom validations needed for this component
          */
         "error"?: string;
+        /**
+          * Hint text string
+         */
+        "hint"?: string;
         "invalidDay": boolean;
         "invalidMonth": boolean;
         "invalidYear": boolean;
@@ -1853,6 +1857,10 @@ declare namespace LocalJSX {
           * The error message to render (if any) This prop should be leveraged to display any custom validations needed for this component
          */
         "error"?: string;
+        /**
+          * Hint text string
+         */
+        "hint"?: string;
         "invalidDay"?: boolean;
         "invalidMonth"?: boolean;
         "invalidYear"?: boolean;
