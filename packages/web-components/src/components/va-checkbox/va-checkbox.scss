@@ -9,6 +9,7 @@
 @use 'usa-error-message/src/styles/usa-error-message';
 
 @import '../../mixins/uswds-error-border.scss';
+@import '../../global/formation_overrides';
 
 :host {
   display: block;
@@ -21,10 +22,6 @@
 .usa-checkbox__input:focus + [class*="__label"]::before {
   outline: 2px solid var(--color-gold-light);	
   outline-offset: 4px;
-}
-
-.usa-legend {
-  color: #1B1B1B;
 }
 
 /* Original Component Style */
