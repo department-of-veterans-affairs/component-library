@@ -45,12 +45,12 @@ export class VaRadioOption {
   /**
    * Whether or not the component will display as a tile. Available when uswds is true.
    */
-   @Prop() tile?: boolean = false;
+  @Prop() tile?: boolean = false;
 
   /**
    * Description of the option displayed below the option label. Available when uswds is true.
    */
-   @Prop() description?: string;
+  @Prop() description?: string;
 
   /**
    * Whether or not the radio option is disabled. Can be used if the USWDS option is active.
@@ -76,15 +76,15 @@ export class VaRadioOption {
   }
 
   render() {
-    const { 
-      checked, 
-      ariaDescribedby, 
-      name, 
-      value, 
-      label, 
-      uswds, 
-      disabled, 
-      tile, 
+    const {
+      checked,
+      ariaDescribedby,
+      name,
+      value,
+      label,
+      uswds,
+      disabled,
+      tile,
       description } = this;
     const id = this.el.id || (name + value);
 
