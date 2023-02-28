@@ -35,7 +35,11 @@
 }
 
 :host legend :is(h1, h2, h3, h4, h5, h6) {
-  font-family: var(--font-serif);
   display: inline;
   margin: 0px;
+}
+
+/* h6 remains as Source Sans Pro, everything else uses Bitter */
+:host legend :is(h1, h2, h3, h4, h5) {
+  font-family: var(--font-serif);
 }
