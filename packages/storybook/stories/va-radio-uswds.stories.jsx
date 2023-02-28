@@ -290,8 +290,8 @@ Default.args = {
 };
 Default.argTypes = propStructure(radioDocs);
 
-export const Tiled = USWDSTiled.bind(null);
-Tiled.args = {
+export const Tile = USWDSTiled.bind(null);
+Tile.args = {
   ...defaultArgs,
   uswds: true,
   label: 'Select one historical figure',

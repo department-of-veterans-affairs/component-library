@@ -52,3 +52,41 @@
     border-width: rem-override(0.25rem);
   }
 }
+
+.usa-checkbox {
+  &__label {
+    margin-top: rem-override(0.75rem);
+    padding-left: rem-override(2rem);
+    font-size: rem-override(1.06rem);
+
+    &::before {
+      height: rem-override(1.25rem);
+      width: rem-override(1.25rem);
+      margin-top: rem-override(0.064rem);
+    }
+  }
+
+  &__input--tile + [class*='__label'] {
+    border-radius: rem-override(0.25rem);
+    margin-top: rem-override(0.5rem);
+    padding: rem-override(0.75rem) rem-override(1rem) rem-override(0.75rem)
+      rem-override(2.5rem);
+
+    &::before {
+      left: rem-override(0.5rem);
+    }
+  }
+
+  &__label-description {
+    font-size: rem-override(0.93rem);
+    margin-top: rem-override(0.5rem);
+  }
+}
+
+.usa-error-message {
+  padding-bottom: rem-override(0.25rem);
+  padding-top: rem-override(0.25rem);
+}
+.usa-legend {
+  color: $v3-color-base-darkest;
+}

@@ -46,7 +46,7 @@ const vaRadioConst = args => {
       label-header-level={labelHeaderLevel}
     >
       <va-radio-option label="Option one" name="example" value="1" />
-      <va-radio-option label="Option two" name="example" value="2" />
+      <va-radio-option label="Option two with an extra long label, so we can get it to wrap" name="example" value="2" />
     </va-radio>
   )
 }
@@ -221,8 +221,8 @@ LabelHeader.args = {
   'label-header-level': '3',
 };
 
-export const Tiled = OptionTileExample.bind(null);
-Tiled.args = {
+export const Tile = OptionTileExample.bind(null);
+Tile.args = {
   ...defaultArgs,
 };
 

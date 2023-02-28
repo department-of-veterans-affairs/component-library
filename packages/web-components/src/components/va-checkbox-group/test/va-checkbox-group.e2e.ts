@@ -127,4 +127,133 @@ describe('va-checkbox-group', () => {
 
     expect(await options[0].getProperty('checked')).toBeTruthy();
   });
+
+  // Begin USWDS v3 variation tests
+
+  it('uswds v3 renders', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-checkbox-group uswds></va-checkbox-group>');
+
+    const element = await page.find('va-checkbox-group');
+    expect(element).toHaveClass('hydrated');
+  });
+
+  it('uswds v3 passes an axe check', async () => {
+    const page = await newE2EPage();
+    await page.setContent(
+      `
+      <va-checkbox-group uswds>
+        <va-checkbox uswds label="Option one" value="1"></va-checkbox>
+        <va-checkbox uswds label="Option 2" value="2"></va-checkbox>
+        <va-checkbox uswds label="Option 3" value="3" disabled></va-checkbox>
+      </va-checkbox-group>
+    `,
+    );
+
+    await axeCheck(page);
+  });
+
+  it('uswds v3 renders an error message if passed', async () => {
+    const page = await newE2EPage();
+    await page.setContent(
+      '<va-checkbox-group uswds error="This is an error"></va-checkbox-group>',
+    );
+
+    const element = await page.find('va-checkbox-group >>> #checkbox-error-message');
+    expect(element).toEqualHtml(`
+     <span id="checkbox-error-message" role="alert">
+        <span class="usa-sr-only">error</span>
+        <span class="usa-error-message">
+          This is an error
+        </span>
+     </span>
+    `);
+  });
+
+  it('uswds v3 renders hint text', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-checkbox-group uswds hint="This is hint text" />');
+
+    const hintTextElement = await page.find('va-checkbox-group >>> .usa-hint');
+    expect(hintTextElement.innerText).toContain('This is hint text');
+  });
+
+  it('uswds v3 passes an axe check in error state', async () => {
+    const page = await newE2EPage();
+    await page.setContent(
+      `
+      <va-checkbox-group uswds error="There has been an error" label="This is a label">
+        <va-checkbox uswds label="Option one" name="example" value="1"/>
+        <va-checkbox uswds label="Option two" name="example" value="2"/>
+      </va-checkbox-group>
+    `,
+    );
+
+    await axeCheck(page);
+  });
+
+  it('uswds v3 renders a required span based on prop', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-checkbox-group uswds required></va-checkbox-group>');
+
+    const element = await page.find('va-checkbox-group >>> .usa-label--required');
+    expect(element).toEqualHtml(`
+      <span class="usa-label--required">
+        required
+      </span>
+    `);
+  });
+
+  it('uswds v3 fires an analytics event when enableAnalytics is true', async () => {
+    const page = await newE2EPage();
+    await page.setContent(`
+      <va-checkbox-group uswds label="Regular label" enable-analytics>
+        <va-checkbox uswds label="First option" value="one"></va-checkbox>
+      </va-checkbox-group>
+      `);
+    const analyticsSpy = await page.spyOnEvent('component-library-analytics');
+    const checkboxEl = await page.find('va-checkbox >>> .usa-checkbox__label');
+    await checkboxEl.click();
+
+    expect(analyticsSpy).toHaveReceivedEventDetail({
+      action: 'change',
+      componentName: 'va-checkbox-group',
+      details: {
+        label: 'Regular label',
+        optionLabel: 'First option',
+        required: false,
+      },
+    });
+  });
+
+  it("uswds v3 doesn't fire an analytics event by default", async () => {
+    const page = await newE2EPage();
+    await page.setContent(`
+      <va-checkbox-group uswds label="Regular label">
+        <va-checkbox uswds label="First option" value="one"></va-checkbox>
+      </va-checkbox-group>
+      `);
+
+    const analyticsSpy = await page.spyOnEvent('component-library-analytics');
+    const inputEl = await page.find('va-checkbox >>> .usa-checkbox__label');
+    await inputEl.click();
+    expect(analyticsSpy).not.toHaveReceivedEvent();
+  });
+
+  it('uswds v3 checks option when using the space key', async () => {
+    const page = await newE2EPage();
+    await page.setContent(
+      `
+      <va-checkbox-group uswds>
+        <va-checkbox uswds label="Option 1" value="1"></va-checkbox>
+        <va-checkbox uswds label="Option 2" value="2"></va-checkbox>
+      </va-checkbox-group>
+    `,
+    );
+    const options = await page.findAll('va-checkbox >>> input');
+
+    await options[0].press('Space');
+
+    expect(await options[0].getProperty('checked')).toBeTruthy();
+  });
 });
