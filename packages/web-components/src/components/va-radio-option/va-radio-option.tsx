@@ -76,15 +76,15 @@ export class VaRadioOption {
   }
 
   render() {
-    const { 
-      checked, 
-      ariaDescribedby, 
-      name, 
-      value, 
-      label, 
-      uswds, 
-      disabled, 
-      tile, 
+    const {
+      checked,
+      ariaDescribedby,
+      name,
+      value,
+      label,
+      uswds,
+      disabled,
+      tile,
       description } = this;
     const id = this.el.id || (name + value);
 
@@ -124,8 +124,10 @@ export class VaRadioOption {
           id={id}
         >
           <label htmlFor={id} id="option-label">
-            {label}
-            {description && <span class="description" aria-describedby="option-label">{description}</span>}
+            <div>
+              {label}
+              {description && <span class="description" aria-describedby="option-label">{description}</span>}
+            </div>
           </label>
         </Host>
       );
