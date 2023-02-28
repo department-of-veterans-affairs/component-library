@@ -92,13 +92,15 @@ const I18nTemplate = args => {
 
   return (
     <div>
-      <button style={{fontSize: '1rem'}} onClick={e => setLang('es')}>Español</button>
-      <button style={{fontSize: '1rem'}} onClick={e => setLang('en')}>English</button>
-      <button style={{fontSize: '1rem'}} onClick={e => setLang('tl')}>Tagalog</button>
-      <br /><br />
+      <button onClick={e => setLang('es')}>Español</button>
+      <button onClick={e => setLang('en')}>English</button>
+      <button onClick={e => setLang('tl')}>Tagalog</button>
+      <br />
+      <br />
       {vaRadioConst(args)}
     </div>
-)};
+  );
+};
 
 const ReactBindingExample = ({
   'enable-analytics': enableAnalytics,

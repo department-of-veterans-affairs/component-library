@@ -1,13 +1,42 @@
 @import '../../global/functions';
 
+.usa-form {
+  font-size: rem-override(1rem);
+}
+
+.usa-fieldset,
 .usa-hint,
 .usa-input,
-.usa-label {
+.usa-label,
+.usa-legend,
+.usa-radio__label {
   font-size: rem-override(1.06rem);
-.usa-label {
+}
+
+.usa-radio__label-description {
+  font-size: rem-override(0.93rem);
+  margin-top: rem-override(0.5rem);
+}
+
+.usa-label,
+.usa-legend {
   margin-top: rem-override(1.5rem);
   max-width: rem-override(30rem);
 }
+
+.usa-radio__input {
+  font-size: rem-override(1.6rem);
+  border-width: rem-override(0.1rem);
+  height: rem-override(4.2rem);
+  max-width: rem-override(46rem);
+  padding: rem-override(1rem) 0.7em;
+
+  &--tile + [class*='__label'] {
+    border-radius: rem-override(0.25rem);
+    margin-top: rem-override(0.5rem);
+    padding: rem-override(0.75rem) rem-override(1rem) rem-override(0.75rem)
+      rem-override(2.5rem);
+  }
 }
 
 .usa-input {
