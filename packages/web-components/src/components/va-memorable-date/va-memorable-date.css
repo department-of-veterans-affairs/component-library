@@ -22,7 +22,8 @@
   padding: 0.8rem;
 }
 
-#dateHint {
+#dateHint,
+#hint {
   color: var(--color-gray);
   line-height: 1.5;
 }
