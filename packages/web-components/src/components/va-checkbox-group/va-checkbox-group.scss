@@ -1,14 +1,11 @@
-@forward 'settings';
-
 @use 'uswds-helpers/src/styles/usa-sr-only';
-@use 'usa-form/src/styles/usa-form';
 @use 'usa-fieldset/src/styles/usa-fieldset';
-@use 'usa-legend/src/styles/usa-legend';
 @use 'usa-label/src/styles/usa-label';
 @use 'usa-hint/src/styles/usa-hint';
 @use 'usa-error-message/src/styles/usa-error-message';
 
 @import '../../mixins/uswds-error-border.scss';
+@import '../../global/formation_overrides';
 
 :host {
   display: block;
@@ -16,13 +13,20 @@
   padding: 0;
 }
 
-/* Original Component Styles. */
+/* Original Component Style */
 
 @import '../../mixins/accessibility.css';
 @import '../../mixins/form-field-error.css';
 @import '../../mixins/hint-text.css';
 
-.required {
+:host(:not([uswds])) #error-message {
+  font-size: 1.6rem;
+  line-height: 2.4rem;
+  font-weight: 700;
+  margin-bottom: 0;
+}
+
+:host(:not([uswds])) .required {
   color: var(--color-secondary-dark);
   margin: 0 0.35rem;
 }
@@ -32,16 +36,5 @@
   max-width: 46rem;
   font-weight: inherit;
   font-size: inherit;
-  color: inherit;
   line-height: inherit;
-}
-
-:host legend :is(h1, h2, h3, h4, h5, h6) {
-  display: inline;
-  margin: 0px;
-}
-
-/* h6 remains as Source Sans Pro, everything else uses Bitter */
-:host legend :is(h1, h2, h3, h4, h5) {
-  font-family: var(--font-serif);
 }
