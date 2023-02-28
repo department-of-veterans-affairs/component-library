@@ -31,6 +31,23 @@ if (Build.isTesting) {
  * - The Year cannot fall outside of the range of 1900 through the current year plus 100 years
  */
 
+const makeOptions = () => ([
+  <option key="1" value="1">01 - {i18next.t('january')}</option>,
+  <option key="2" value="2">02 - {i18next.t('february')}</option>,
+  <option key="3" value="3">03 - {i18next.t('march')}</option>,
+  <option key="4" value="4">04 - {i18next.t('april')}</option>,
+  <option key="5" value="5">05 - {i18next.t('may')}</option>,
+  <option key="6" value="6">06 - {i18next.t('june')}</option>,
+  <option key="7" value="7">07 - {i18next.t('july')}</option>,
+  <option key="8" value="8">08 - {i18next.t('august')}</option>,
+  <option key="9" value="9">09 - {i18next.t('september')}</option>,
+  <option key="10" value="10">10 - {i18next.t('october')}</option>,
+  <option key="11" value="11">11 - {i18next.t('november')}</option>,
+  <option key="12" value="12">12 - {i18next.t('december')}</option>,
+]);
+
+let options = makeOptions();
+
 /**
  * @componentName Memorable date
  * @maturityCategory caution
@@ -190,6 +207,7 @@ export class VaMemorableDate {
   connectedCallback() {
     i18next.on('languageChanged', () => {
       forceUpdate(this.el);
+      options = makeOptions();
     });
   }
 
@@ -213,24 +231,10 @@ export class VaMemorableDate {
 
     const [year, month, day] = (value || '').split('-');
 
-    const options = [
-      <option key="1" value="1">01 - {i18next.t('january')}</option>,
-      <option key="2" value="2">02 - {i18next.t('february')}</option>,
-      <option key="3" value="3">03 - {i18next.t('march')}</option>,
-      <option key="4" value="4">04 - {i18next.t('april')}</option>,
-      <option key="5" value="5">05 - {i18next.t('may')}</option>,
-      <option key="6" value="6">06 - {i18next.t('june')}</option>,
-      <option key="7" value="7">07 - {i18next.t('july')}</option>,
-      <option key="8" value="8">08 - {i18next.t('august')}</option>,
-      <option key="9" value="9">09 - {i18next.t('september')}</option>,
-      <option key="10" value="10">10 - {i18next.t('october')}</option>,
-      <option key="11" value="11">11 - {i18next.t('november')}</option>,
-      <option key="12" value="12">12 - {i18next.t('december')}</option>,
-    ]
-
+    // const socials = i18next.t('socials', { returnObjects: true });
+    const hintText = monthSelect ? i18next.t('date-hint-with-select') : i18next.t('date-hint');
     const monthDisplay = monthSelect
     ? <div class="usa-form-group usa-form-group--month usa-form-group--select">
-      {i18next.t('january')}
       <va-select
         uswds
         label={i18next.t('month')}
@@ -274,7 +278,7 @@ export class VaMemorableDate {
               {label}
               {required && <span class="usa-label--required"> {i18next.t('required')}</span>}
             </legend>
-            <span class="usa-hint" id="dateHint">{i18next.t('date-hint')}.</span>
+            <span class="usa-hint" id="dateHint">{hintText}.</span>
             <slot />
             <span id="input-error-message" role="alert">
               {error && (
@@ -285,9 +289,7 @@ export class VaMemorableDate {
               )}
             </span>
             <div class="usa-memorable-date">
-              <div>
-                {monthDisplay}
-              </div>
+              {monthDisplay}
               <div class="usa-form-group usa-form-group--day">
                 <va-text-input
                   uswds

@@ -180,7 +180,7 @@ export class VaSelect {
             </label>
           )}
           {hint && <span class="usa-hint">{hint}</span>}
-          <span id="usa-error-message" role="alert">
+          <span id="input-error-message" role="alert">
             {error && (
               <Fragment>
                 <span class="usa-sr-only">{i18next.t('error')}</span> 
@@ -200,7 +200,7 @@ export class VaSelect {
             onChange={e => this.handleChange(e)}
             part="select"
           >
-            <option value="" selected>{i18next.t('select')}</option>
+            <option key="0" value="" selected>{i18next.t('select')}</option>
             {this.options}
           </select>
         </Host>
