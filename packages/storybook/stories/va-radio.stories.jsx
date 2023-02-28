@@ -221,8 +221,8 @@ LabelHeader.args = {
   'label-header-level': '3',
 };
 
-export const Tiled = OptionTileExample.bind(null);
-Tiled.args = {
+export const Tile = OptionTileExample.bind(null);
+Tile.args = {
   ...defaultArgs,
 };
 

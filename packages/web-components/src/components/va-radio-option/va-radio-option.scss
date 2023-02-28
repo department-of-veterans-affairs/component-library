@@ -1,6 +1,9 @@
+@forward 'settings';
+
 @use 'uswds-core/src/styles/mixins/helpers/checkbox-and-radio-colors';
 @use 'usa-radio/src/styles/usa-radio';
 
+@import '../../global/formation_overrides';
 :host {
   display: block;
   margin-top: 12px;

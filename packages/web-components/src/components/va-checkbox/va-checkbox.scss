@@ -1,27 +1,54 @@
+@forward 'settings';
+
+@use 'uswds-helpers/src/styles/usa-sr-only';
+@use 'usa-icon/src/styles/usa-icon';
+@use 'usa-checkbox/src/styles/usa-checkbox';
+@use 'usa-legend/src/styles/usa-legend';
+@use 'usa-label/src/styles/usa-label';
+@use 'usa-hint/src/styles/usa-hint';
+@use 'usa-error-message/src/styles/usa-error-message';
+
+@import '../../mixins/uswds-error-border.scss';
+@import '../../global/formation_overrides';
+
+:host {
+  display: block;
+}
+
+.usa-checkbox {
+  max-width: 320px;
+}
+
+.usa-checkbox__input:focus + [class*="__label"]::before {
+  outline: 2px solid var(--color-gold-light);	
+  outline-offset: 4px;
+}
+
+/* Original Component Style */
+
 @import '../../mixins/accessibility.css';
 @import '../../mixins/form-field-error.css';
 @import '../../mixins/hint-text.css';
 
-:host {
-  display: block;
+:host(:not([uswds])) {
   --visible-checkbox-size: 2rem;
   --visible-checkbox-top-margin: 0.14rem;
 }
 
-:host p {
+:host(:not([uswds])) p {
   margin-top: 0;
   margin-bottom: 0;
 }
 
-#error-message {
+:host(:not([uswds])) #error-message {
   margin-bottom: 0;
 }
 
-:host([error]:not([error=""])) input + label {
+:host([error]:not([error=""]):not([uswds])) input + label {
   margin-top: 1.2rem;
 }
 
-input {
+:host(:not([uswds])) input {
   /* Make the clickable element the same size and position as the box */
   height: var(--visible-checkbox-size);
   width: var(--visible-checkbox-size);
@@ -34,11 +61,11 @@ input {
   box-sizing: border-box;
 }
 
-label {
+:host(:not([uswds])) label {
   display: block;
 }
 
-input+label {
+:host(:not([uswds])) input+label {
   cursor: pointer;
   display: inline-flex;
   font-weight: 400;
@@ -48,7 +75,7 @@ input+label {
 }
 
 /* The actual box */
-input+label::before {
+:host(:not([uswds])) input+label::before {
   display: block;
   float: left;
   margin-top: var(--visible-checkbox-top-margin);
@@ -62,7 +89,7 @@ input+label::before {
   width: 100%;
 }
 
-input:checked+label::before {
+:host(:not([uswds])) input:checked+label::before {
   background-color: var(--color-primary);
   box-shadow: 0 0 0 1px var(--color-primary);
   background-image: url('../../assets/check.svg');
@@ -70,17 +97,17 @@ input:checked+label::before {
   background-repeat: no-repeat;
 }
 
-input:not([disabled]):focus+label:before {
+:host(:not([uswds])) input:not([disabled]):focus+label:before {
   outline: 2px solid var(--color-gold-light);
   outline-offset: 2px;
 }
 
-.required {
+:host(:not([uswds])) .required {
   color: var(--color-secondary-dark);
   margin: 0 0.35rem;
 }
 
-::slotted([slot='description']){
+:host(:not([uswds])) ::slotted([slot='description']){
   margin-top: 0 !important;
   margin-bottom: 1.2rem !important;
 }
