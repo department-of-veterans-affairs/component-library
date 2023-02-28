@@ -2,10 +2,10 @@
 
 @import 'variables';
 
-// Uses $base-v3-font-size from _variables.scss
+// Uses $v3-font-base-size from _variables.scss
 @function rem-override($original) {
   @if unit($original) == 'rem' {
-    $rem-to-px: (math.div($original, 1rem)) * $base-v3-font-size;
+    $rem-to-px: (math.div($original, 1rem)) * $v3-font-base-size;
     @return $rem-to-px;
   }
   @if unit($original) != 'px' {
