@@ -62,7 +62,7 @@ const Template = ({
     <>
       {useAddButton && (
         <button
-          style={{fontSize: '1rem'}}
+          style={{ fontSize: '16px' }}
           onClick={() => {
             setModifiedOptions([
               ...modifiedOptions,
@@ -118,8 +118,12 @@ const I18nTemplate = args => {
 
   return (
     <div>
-      <button style={{fontSize: '1rem'}} onClick={e => setLang('es')}>Español</button>
-      <button style={{fontSize: '1rem'}} onClick={e => setLang('en')}>English</button>
+      <button style={{ fontSize: '16px' }} onClick={e => setLang('es')}>
+        Español
+      </button>
+      <button style={{ fontSize: '16px' }} onClick={e => setLang('en')}>
+        English
+      </button>
       <va-select {...rest}>{options}</va-select>
     </div>
   );
