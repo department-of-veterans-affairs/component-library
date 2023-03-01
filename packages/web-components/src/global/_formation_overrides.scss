@@ -26,6 +26,9 @@
 }
 
 .usa-radio__label {
+  margin-top: rem-override(0.75rem);
+  padding-left: rem-override(2rem);
+
   &::before {
     height: rem-override(1.25rem);
     border-radius: rem-override(99rem);
