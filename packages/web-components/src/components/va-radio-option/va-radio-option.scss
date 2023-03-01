@@ -4,6 +4,7 @@
 @use 'usa-radio/src/styles/usa-radio';
 
 @import '../../global/formation_overrides';
+
 :host {
   display: block;
   margin-top: 12px;
@@ -71,13 +72,13 @@
   margin-top: 5px;
 }
 
-:host(:not([uswds])[tile="true"]) label {
+:host(:not([uswds])[tile='true']) label {
   padding: 12px 16px 12px 12px;
   border: 2px solid var(--color-gray-light);
   border-radius: 0.25em;
 }
 
-:host(:not([uswds])[tile="true"][aria-checked="true"]) label {
+:host(:not([uswds])[tile='true'][aria-checked='true']) label {
   border: 2px solid var(--color-primary-alt-darkest);
   background: var(--color-gray-cool-light);
 }
