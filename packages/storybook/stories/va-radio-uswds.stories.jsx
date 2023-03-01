@@ -33,7 +33,7 @@ const vaRadioConst = args => {
     label,
     hint,
     required,
-    uswds,
+    uswds = true,
     'label-header-level': labelHeaderLevel,
     ...rest
   } = args;
@@ -92,13 +92,21 @@ const I18nTemplate = args => {
 
   return (
     <div>
-      <button style={{fontSize: '1rem'}} onClick={e => setLang('es')}>Español</button>
-      <button style={{fontSize: '1rem'}} onClick={e => setLang('en')}>English</button>
-      <button style={{fontSize: '1rem'}} onClick={e => setLang('tl')}>Tagalog</button>
-      <br /><br />
+      <button style={{ fontSize: '16px' }} onClick={e => setLang('es')}>
+        Español
+      </button>
+      <button style={{ fontSize: '16px' }} onClick={e => setLang('en')}>
+        English
+      </button>
+      <button style={{ fontSize: '16px' }} onClick={e => setLang('tl')}>
+        Tagalog
+      </button>
+      <br />
+      <br />
       {vaRadioConst(args)}
     </div>
-)};
+  );
+};
 
 const ReactBindingExample = ({
   'enable-analytics': enableAnalytics,
