@@ -10,7 +10,7 @@ https://{{head.ref}}--60f9b557105290003b387cd5.chromatic.com
 - [ ] Add the appropriate version patch label (`major`, `minor`, `patch`, or `ignore-for-release`). 
     - See [How to choose a version number](https://github.com/department-of-veterans-affairs/component-library#how-to-choose-a-version-number) for guidance.
     - Use `ignore-for-release` if files haven't been changed in a component library package. (ie. only Storybook files)
-- [ ] Only increment the `/packages/core` version number if this will be the last PR merged before a release.
+- [ ] DST Only: Increment the `/packages/core` version number if this will be the last PR merged before a release.
 - [ ] Complete all sections below.
 - [ ] Delete this section once complete
 
