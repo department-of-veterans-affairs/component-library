@@ -8,7 +8,6 @@ import {
   h,
   Element,
   Fragment,
-  // Listen,
 } from '@stencil/core';
 
 import {
@@ -104,7 +103,6 @@ export class VaMemorableDate {
   @Prop({ mutable: true }) invalidMonth: boolean = false;
   @Prop({ mutable: true }) invalidYear: boolean = false;
 
-
   private handleDateBlur = (event: FocusEvent) => {
     const [year, month, day] = (this.value || '').split('-');
     const yearNum = parseInt(year);
@@ -190,7 +188,6 @@ export class VaMemorableDate {
   connectedCallback() {
     i18next.on('languageChanged', () => {
       forceUpdate(this.el);
-      this.handleDateChange;
     });
   }
 
