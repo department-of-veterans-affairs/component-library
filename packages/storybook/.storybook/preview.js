@@ -36,28 +36,6 @@ applyPolyfills().then(() => {
   window.CustomEvent = CustomEvent;
 })();
 
-/**
- * The custom event locationchange will dispatch when the URL changes.
- * The native events `hashchange` and `popstate` were not reliable.
- */
- (() => {
-  const pushState = history.pushState;
-  history.pushState = function() {
-    pushState.apply(this, arguments);
-    window.dispatchEvent(new Event('locationchange'));
-  };
-
-  const replaceState = history.replaceState;
-  history.replaceState = function() {
-    replaceState.apply(this, arguments);
-    window.dispatchEvent(new Event('locationchange'));
-  };
-
-  window.addEventListener('popstate', () => {
-    window.dispatchEvent(new Event('locationchange'));
-  });
-})();
-
 const viewports = {
   xsmall: {
     name: 'XSmall Screen',
