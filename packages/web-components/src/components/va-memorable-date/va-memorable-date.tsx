@@ -8,9 +8,11 @@ import {
   h,
   Element,
   Fragment,
+  State,
 } from '@stencil/core';
 
 import {
+  months,
   validate,
   validKeys,
 } from '../../utils/date-utils';
@@ -185,14 +187,30 @@ export class VaMemorableDate {
   })
   componentLibraryAnalytics: EventEmitter;
 
+  @State() options: Array<Node>;
+
   connectedCallback() {
     i18next.on('languageChanged', () => {
       forceUpdate(this.el);
+      this.populateOptions;
     });
   }
 
   disconnectedCallback() {
     i18next.off('languageChanged');
+  }
+
+  private populateOptions() {
+    this.options = months.map(
+      (month) => {
+        console.log(month);
+        return (
+          <option value={month.value} key={month.key}>
+          {month.label()}
+          </option>
+        );
+      },
+    );
   }
 
   render() {
@@ -211,20 +229,7 @@ export class VaMemorableDate {
 
     const [year, month, day] = (value || '').split('-');
 
-    const options = [
-      <option key="1" value="1">01 - {i18next.t('january')}</option>,
-      <option key="2" value="2">02 - {i18next.t('february')}</option>,
-      <option key="3" value="3">03 - {i18next.t('march')}</option>,
-      <option key="4" value="4">04 - {i18next.t('april')}</option>,
-      <option key="5" value="5">05 - {i18next.t('may')}</option>,
-      <option key="6" value="6">06 - {i18next.t('june')}</option>,
-      <option key="7" value="7">07 - {i18next.t('july')}</option>,
-      <option key="8" value="8">08 - {i18next.t('august')}</option>,
-      <option key="9" value="9">09 - {i18next.t('september')}</option>,
-      <option key="10" value="10">10 - {i18next.t('october')}</option>,
-      <option key="11" value="11">11 - {i18next.t('november')}</option>,
-      <option key="12" value="12">12 - {i18next.t('december')}</option>,
-    ]
+    this.populateOptions();
 
     const hintText = monthSelect ? i18next.t('date-hint-with-select') : i18next.t('date-hint');
     const monthDisplay = monthSelect
@@ -238,7 +243,7 @@ export class VaMemorableDate {
         onVaSelect={handleDateChange}
         class="usa-form-group--month-select"
       >
-        {options}
+        {this.options}
       </va-select>
     </div>
     : <div class="usa-form-group usa-form-group--month">
