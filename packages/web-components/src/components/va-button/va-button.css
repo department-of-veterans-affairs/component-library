@@ -15,11 +15,13 @@ button {
   margin: 0.5em 0.5em 0.5em 0;
 }
 
-button:active,
 button:hover {
   background-color: var(--color-primary-darker);
 }
 
+button:active {
+  background-color: var(--color-primary-darkest);
+}
 :host([back]:not([back='false'])) button,
 :host([secondary]:not([secondary='false'])) button {
   background-color: var(--color-white);
