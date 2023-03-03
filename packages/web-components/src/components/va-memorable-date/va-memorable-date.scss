@@ -48,7 +48,8 @@
   padding: 0.8rem;
 }
 
-:host(:not([uswds])) #dateHint {
+:host(:not([uswds])) #dateHint,
+#hint {
   color: var(--color-gray);
   line-height: 1.5;
 }
