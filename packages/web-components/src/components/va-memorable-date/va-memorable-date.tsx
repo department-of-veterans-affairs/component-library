@@ -208,7 +208,6 @@ export class VaMemorableDate {
   private populateOptions() {
     this.options = months.map(
       (month) => {
-        console.log(month);
         return (
           <option value={month.value} key={month.key}>
           {month.label()}
