@@ -26,5 +26,10 @@
       "h5": { "value": "{font.size.sm}" },
       "h6": { "value": "{font.size.sm}" }
     }
+  },
+  "v3-font": {
+    "base": {
+      "size": { "value": "16px"}
+    }
   }
 }

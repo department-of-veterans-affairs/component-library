@@ -212,6 +212,10 @@ export namespace Components {
     }
     interface VaCheckbox {
         /**
+          * Description of the option displayed below the checkbox label. Available when uswds is true.
+         */
+        "checkboxDescription"?: string;
+        /**
           * Whether the checkbox is checked or not.  Note: Because this isn't reflective, vaCheckbox.getAttribute('checked') will not reflect the correct value. Use the property vaCheckbox.checked instead.
          */
         "checked"?: boolean;
@@ -219,6 +223,10 @@ export namespace Components {
           * The description to render. If this prop exists, va-checkbox will render it instead of the named slot.
          */
         "description"?: string;
+        /**
+          * Whether or not the checkbox option is disabled. Available when uswds is true.
+         */
+        "disabled"?: boolean;
         /**
           * True if the analytics event should fire.
          */
@@ -239,6 +247,14 @@ export namespace Components {
           * Set the input to required and render the (Required) text.
          */
         "required"?: boolean;
+        /**
+          * Whether or not the component will display as a tile. Available when uswds is true.
+         */
+        "tile"?: boolean;
+        /**
+          * Whether or not the component will use USWDS v3 styling.
+         */
+        "uswds"?: boolean;
     }
     interface VaCheckboxGroup {
         /**
@@ -261,6 +277,10 @@ export namespace Components {
           * Whether or not this input field is required.
          */
         "required"?: boolean;
+        /**
+          * Whether or not the component will use USWDS v3 styling.
+         */
+        "uswds"?: boolean;
     }
     interface VaDate {
         /**
@@ -412,6 +432,10 @@ export namespace Components {
           * The error message to render (if any) This prop should be leveraged to display any custom validations needed for this component
          */
         "error"?: string;
+        /**
+          * Hint text string
+         */
+        "hint"?: string;
         "invalidDay": boolean;
         "invalidMonth": boolean;
         "invalidYear": boolean;
@@ -1581,6 +1605,10 @@ declare namespace LocalJSX {
     }
     interface VaCheckbox {
         /**
+          * Description of the option displayed below the checkbox label. Available when uswds is true.
+         */
+        "checkboxDescription"?: string;
+        /**
           * Whether the checkbox is checked or not.  Note: Because this isn't reflective, vaCheckbox.getAttribute('checked') will not reflect the correct value. Use the property vaCheckbox.checked instead.
          */
         "checked"?: boolean;
@@ -1588,6 +1616,10 @@ declare namespace LocalJSX {
           * The description to render. If this prop exists, va-checkbox will render it instead of the named slot.
          */
         "description"?: string;
+        /**
+          * Whether or not the checkbox option is disabled. Available when uswds is true.
+         */
+        "disabled"?: boolean;
         /**
           * True if the analytics event should fire.
          */
@@ -1616,6 +1648,14 @@ declare namespace LocalJSX {
           * Set the input to required and render the (Required) text.
          */
         "required"?: boolean;
+        /**
+          * Whether or not the component will display as a tile. Available when uswds is true.
+         */
+        "tile"?: boolean;
+        /**
+          * Whether or not the component will use USWDS v3 styling.
+         */
+        "uswds"?: boolean;
     }
     interface VaCheckboxGroup {
         /**
@@ -1642,6 +1682,10 @@ declare namespace LocalJSX {
           * Whether or not this input field is required.
          */
         "required"?: boolean;
+        /**
+          * Whether or not the component will use USWDS v3 styling.
+         */
+        "uswds"?: boolean;
     }
     interface VaDate {
         /**
@@ -1821,6 +1865,10 @@ declare namespace LocalJSX {
           * The error message to render (if any) This prop should be leveraged to display any custom validations needed for this component
          */
         "error"?: string;
+        /**
+          * Hint text string
+         */
+        "hint"?: string;
         "invalidDay"?: boolean;
         "invalidMonth"?: boolean;
         "invalidYear"?: boolean;

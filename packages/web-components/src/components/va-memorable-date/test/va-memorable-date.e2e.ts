@@ -40,6 +40,35 @@ describe('va-memorable-date', () => {
     await axeCheck(page);
   });
 
+  it('renders hint text', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-memorable-date label="Label" hint="hint text" required></va-memorable-date>');
+
+    const element = await page.find('va-memorable-date');
+    expect(element).toHaveClass('hydrated');
+    expect(element).toEqualHtml(`
+      <va-memorable-date class='hydrated' label='Label' hint='hint text' required=''>
+      <mock:shadow-root>
+        <fieldset>
+          <legend>
+            Label
+            <span class="required">required</span>
+            <div id="hint">hint text</div>
+            <div id='dateHint'>date-hint.</div>
+          </legend>
+          <slot></slot>
+          <span id="error-message" role="alert"></span>
+          <div class='date-container'>
+            <va-text-input aria-describedby='dateHint hint' class='hydrated input-month'></va-text-input>
+            <va-text-input aria-describedby='dateHint hint' class='hydrated input-day'></va-text-input>
+            <va-text-input aria-describedby='dateHint hint' class='hydrated input-year' value=''></va-text-input>
+          </div>
+        </fieldset>
+      </mock:shadow-root>
+    </va-memorable-date>
+  `);
+  });
+
   it('renders an error message', async () => {
     const page = await newE2EPage();
     await page.setContent('<va-memorable-date error="This is a mistake" />');

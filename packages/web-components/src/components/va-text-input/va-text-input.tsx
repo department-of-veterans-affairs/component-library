@@ -129,14 +129,6 @@ export class VaTextInput {
    * The value for the input.
    */
   @Prop({ mutable: true, reflect: true }) value?: string;
-  // TODO: Make the value prop reflective. Currently, it isn't because it screws
-  // up the input behavior. For now, the only "bug" is that the changed value
-  // isn't reflected in the DOM on the web component. That seems to be how the
-  // <input> is supposed to work, however:
-  // https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-value
-  //
-  // $('va-text-input').value will be correct
-  // $('va-text-input').getAttribute('value') will be incorrect
 
   /**
    * Adds styling based on status value
@@ -229,12 +221,14 @@ export class VaTextInput {
       handleBlur,
       uswds,
       success,
-      messageAriaDescribedby
+      messageAriaDescribedby,
     } = this;
     const type = this.getInputType();
     const maxlength = this.getMaxlength();
-    const ariaDescribedbyIds = `${messageAriaDescribedby ? 'input-message' : ''} ${error ? 'input-error-message' : ''}`
-      .trim() || null; // Null so we don't add the attribute if we have an empty string
+    const ariaDescribedbyIds =
+      `${messageAriaDescribedby ? 'input-message' : ''} ${
+        error ? 'input-error-message' : ''
+      }`.trim() || null; // Null so we don't add the attribute if we have an empty string
 
     if (uswds) {
       const labelClass = classnames({
@@ -251,7 +245,12 @@ export class VaTextInput {
           {label && (
             <label htmlFor="inputField" class={labelClass} part="label">
               {label}
-              {required && <span class="usa-label--required"> {i18next.t('required')}</span>}
+              {required && (
+                <span class="usa-label--required">
+                  {' '}
+                  {i18next.t('required')}
+                </span>
+              )}
             </label>
           )}
           {hint && <span class="usa-hint">{hint}</span>}
@@ -259,12 +258,12 @@ export class VaTextInput {
           <span id="input-error-message" role="alert">
             {error && (
               <Fragment>
-                <span class="usa-sr-only">{i18next.t('error')}</span> 
+                <span class="usa-sr-only">{i18next.t('error')}</span>
                 <span class="usa-error-message">{error}</span>
               </Fragment>
             )}
           </span>
-          <input 
+          <input
             class={inputClass}
             id="inputField"
             type={type}
@@ -292,15 +291,17 @@ export class VaTextInput {
               {i18next.t('min-chars', { length: minlength })}
             </small>
           )}
-      </Host>
+        </Host>
       );
-    } else{
+    } else {
       return (
         <Host>
           {label && (
             <label htmlFor="inputField" part="label">
               {label}{' '}
-              {required && <span class="required">{i18next.t('required')}</span>}
+              {required && (
+                <span class="required">{i18next.t('required')}</span>
+              )}
             </label>
           )}
           {hint && <span class="hint-text">{hint}</span>}
@@ -330,7 +331,7 @@ export class VaTextInput {
             part="input"
           />
           {messageAriaDescribedby && (
-            <span id='input-message' class="sr-only">
+            <span id="input-message" class="sr-only">
               {messageAriaDescribedby}
             </span>
           )}

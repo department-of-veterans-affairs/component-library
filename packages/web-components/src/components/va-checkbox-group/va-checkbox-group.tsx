@@ -10,6 +10,7 @@ import {
   h,
   Fragment,
 } from '@stencil/core';
+import classnames from 'classnames';
 import i18next from 'i18next';
 import { Build } from '@stencil/core';
 
@@ -30,7 +31,7 @@ if (Build.isTesting) {
  */
 @Component({
   tag: 'va-checkbox-group',
-  styleUrl: 'va-checkbox-group.css',
+  styleUrl: 'va-checkbox-group.scss',
   shadow: true,
 })
 export class VaCheckboxGroup {
@@ -60,6 +61,11 @@ export class VaCheckboxGroup {
    * Optional hint text.
    */
   @Prop() hint?: string;
+
+  /**
+   * Whether or not the component will use USWDS v3 styling.
+   */
+  @Prop() uswds?: boolean = false;
 
   /**
    * The event used to track usage of the component. This is emitted when an
@@ -101,23 +107,51 @@ export class VaCheckboxGroup {
   }
 
   render() {
-    const { label, required, error, hint } = this;
-    return (
-      <Host role="group">
-        <legend>
-          {label}
-          {required && <span class="required">{i18next.t('required')}</span>}
-        </legend>
-        {hint && <span class="hint-text">{hint}</span>}
-        <span id="error-message" role="alert">
-          {error && (
-            <Fragment>
-              <span class="sr-only">{i18next.t('error')}</span> {error}
-            </Fragment>
-          )}
-        </span>
-        <slot></slot>
-      </Host>
-    );
+    const { label, required, error, hint, uswds } = this;
+
+    if (uswds) {
+      const legendClass = classnames({
+        'usa-legend': true,
+        'usa-label--error': error
+      });
+      return (
+        <Host role="group">
+          <fieldset class="usa-fieldset">
+            <legend class={legendClass}>
+              {label}&nbsp;
+              {required && <span class="usa-label--required">{i18next.t('required')}</span>}
+            </legend>
+            {hint && <span class="usa-hint">{hint}</span>}
+            <span id="checkbox-error-message" role="alert">
+              {error && (
+                <Fragment>
+                  <span class="usa-sr-only">{i18next.t('error')}</span>
+                  <span class="usa-error-message">{error}</span>
+                </Fragment>
+              )}
+            </span>
+            <slot></slot>
+          </fieldset>
+        </Host>
+      )
+    } else  {
+      return (
+        <Host role="group">
+          <legend>
+            {label}
+            {required && <span class="required">{i18next.t('required')}</span>}
+          </legend>
+          {hint && <span class="hint-text">{hint}</span>}
+          <span id="error-message" role="alert">
+            {error && (
+              <Fragment>
+                <span class="sr-only">{i18next.t('error')}</span> {error}
+              </Fragment>
+            )}
+          </span>
+          <slot></slot>
+        </Host>
+      );
+    }
   }
 }

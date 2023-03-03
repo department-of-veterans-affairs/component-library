@@ -73,6 +73,11 @@ export class VaMemorableDate {
   @Prop() name!: string;
 
   /**
+   * Hint text string
+   */
+  @Prop() hint?: string;
+
+  /**
    * The error message to render (if any)
    * This prop should be leveraged to display any custom validations needed for this component
    */
@@ -218,6 +223,7 @@ export class VaMemorableDate {
       required,
       label,
       name,
+      hint,
       error,
       handleDateBlur,
       handleDateChange,
@@ -228,6 +234,9 @@ export class VaMemorableDate {
     } = this;
 
     const [year, month, day] = (value || '').split('-');
+    const describedbyIds = ['dateHint', hint ? 'hint' : '']
+      .filter(Boolean)
+      .join(' ');
 
     this.populateOptions();
 
@@ -238,7 +247,7 @@ export class VaMemorableDate {
         uswds
         label={i18next.t('month')}
         name={`${name}Month`}
-        aria-describedby="dateHint"
+        aria-describedby="describedbyIds"
         invalid={this.invalidMonth}
         onVaSelect={handleDateChange}
         class="usa-form-group--month-select"
@@ -254,7 +263,7 @@ export class VaMemorableDate {
         maxlength={2}
         minlength={2}
         pattern="[0-9]*"
-        aria-describedby="dateHint"
+        aria-describedby="describedbyIds"
         invalid={this.invalidMonth}
         // Value must be a string
         // if NaN provide empty string
@@ -297,7 +306,7 @@ export class VaMemorableDate {
                   maxlength={2}
                   minlength={2}
                   pattern="[0-9]*"
-                  aria-describedby="dateHint"
+                  aria-describedby="describedbyIds"
                   invalid={this.invalidDay}
                   // Value must be a string
                   // if NaN provide empty string
@@ -317,7 +326,7 @@ export class VaMemorableDate {
                   maxlength={4}
                   minlength={4}
                   pattern="[0-9]*"
-                  aria-describedby="dateHint"
+                  aria-describedby="describedbyIds"
                   invalid={this.invalidYear}
                   // Value must be a string
                   // if NaN provide empty string
@@ -356,7 +365,7 @@ export class VaMemorableDate {
                 maxlength={2}
                 minlength={2}
                 pattern="[0-9]*"
-                aria-describedby="dateHint"
+                aria-describedby="describedbyIds"
                 invalid={this.invalidMonth}
                 // Value must be a string
                 // if NaN provide empty string
@@ -373,7 +382,7 @@ export class VaMemorableDate {
                 maxlength={2}
                 minlength={2}
                 pattern="[0-9]*"
-                aria-describedby="dateHint"
+                aria-describedby="describedbyIds"
                 invalid={this.invalidDay}
                 // Value must be a string
                 // if NaN provide empty string
@@ -390,7 +399,7 @@ export class VaMemorableDate {
                 maxlength={4}
                 minlength={4}
                 pattern="[0-9]*"
-                aria-describedby="dateHint"
+                aria-describedby="describedbyIds"
                 invalid={this.invalidYear}
                 // Value must be a string
                 // if NaN provide empty string
