@@ -284,6 +284,7 @@ export class VaMemorableDate {
             <legend class="usa-legend">
               {label}
               {required && <span class="usa-label--required"> {i18next.t('required')}</span>}
+              {hint && <div id="hint">{hint}</div>}
             </legend>
             <span class="usa-hint" id="dateHint">{hintText}.</span>
             <slot />
@@ -347,6 +348,7 @@ export class VaMemorableDate {
           <fieldset>
             <legend>
               {label} {required && <span class="required">{i18next.t('required')}</span>}
+              {hint && <div id="hint">{hint}</div>}
               <div id="dateHint">{i18next.t('date-hint')}.</div>
             </legend>
             <slot />
