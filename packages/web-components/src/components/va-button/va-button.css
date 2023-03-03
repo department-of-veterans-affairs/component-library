@@ -15,7 +15,8 @@ button {
   margin: 0.5em 0.5em 0.5em 0;
 }
 
-button:hover {
+button:hover,
+button:focus {
   background-color: var(--color-primary-darker);
 }
 
