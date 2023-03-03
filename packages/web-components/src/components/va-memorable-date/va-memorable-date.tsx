@@ -247,7 +247,7 @@ export class VaMemorableDate {
         uswds
         label={i18next.t('month')}
         name={`${name}Month`}
-        aria-describedby="describedbyIds"
+        aria-describedby={describedbyIds}
         invalid={this.invalidMonth}
         onVaSelect={handleDateChange}
         class="usa-form-group--month-select"
@@ -263,7 +263,7 @@ export class VaMemorableDate {
         maxlength={2}
         minlength={2}
         pattern="[0-9]*"
-        aria-describedby="describedbyIds"
+        aria-describedby={describedbyIds}
         invalid={this.invalidMonth}
         // Value must be a string
         // if NaN provide empty string
@@ -306,7 +306,7 @@ export class VaMemorableDate {
                   maxlength={2}
                   minlength={2}
                   pattern="[0-9]*"
-                  aria-describedby="describedbyIds"
+                  aria-describedby={describedbyIds}
                   invalid={this.invalidDay}
                   // Value must be a string
                   // if NaN provide empty string
@@ -326,7 +326,7 @@ export class VaMemorableDate {
                   maxlength={4}
                   minlength={4}
                   pattern="[0-9]*"
-                  aria-describedby="describedbyIds"
+                  aria-describedby={describedbyIds}
                   invalid={this.invalidYear}
                   // Value must be a string
                   // if NaN provide empty string
@@ -365,7 +365,7 @@ export class VaMemorableDate {
                 maxlength={2}
                 minlength={2}
                 pattern="[0-9]*"
-                aria-describedby="describedbyIds"
+                aria-describedby={describedbyIds}
                 invalid={this.invalidMonth}
                 // Value must be a string
                 // if NaN provide empty string
@@ -382,7 +382,7 @@ export class VaMemorableDate {
                 maxlength={2}
                 minlength={2}
                 pattern="[0-9]*"
-                aria-describedby="describedbyIds"
+                aria-describedby={describedbyIds}
                 invalid={this.invalidDay}
                 // Value must be a string
                 // if NaN provide empty string
@@ -399,7 +399,7 @@ export class VaMemorableDate {
                 maxlength={4}
                 minlength={4}
                 pattern="[0-9]*"
-                aria-describedby="describedbyIds"
+                aria-describedby={describedbyIds}
                 invalid={this.invalidYear}
                 // Value must be a string
                 // if NaN provide empty string
