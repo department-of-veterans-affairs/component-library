@@ -10,22 +10,7 @@
 
 @import '../va-date/va-date.css';
 @import '../../mixins/form-field-error.css';
-
-
-// Override from USWDS
-.usa-form-group--day-input, .usa-form-group--month-input {
-  width: calc(16px * 3);
-}
-
-.usa-form-group--year-input {
-  width: calc(16px * 4.5);
-}
-
-.usa-form-group--month-select {
-  width: calc(16px * 15);
-}
-
-
+@import '../../global/formation_overrides';
 
 :host(:not([uswds])) .input-month,
 .input-day,
