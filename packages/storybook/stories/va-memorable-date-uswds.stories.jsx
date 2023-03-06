@@ -98,9 +98,9 @@ const I18nTemplate = ({ label, name, required, error, uswds, value }) => {
 
   return (
     <div>
-      <button style={{fontSize: '1rem'}} onClick={e => setLang('es')}>Español</button>
-      <button style={{fontSize: '1rem'}} onClick={e => setLang('en')}>English</button>
-      <button style={{fontSize: '1rem'}} onClick={e => setLang('tl')}>Tagalog</button>
+      <button style={{fontSize: '16px'}} onClick={e => setLang('es')}>Español</button>
+      <button style={{fontSize: '16px'}} onClick={e => setLang('en')}>English</button>
+      <button style={{fontSize: '16px'}} onClick={e => setLang('tl')}>Tagalog</button>
       <VaMemorableDate
         uswds={uswds}
         label={label}
