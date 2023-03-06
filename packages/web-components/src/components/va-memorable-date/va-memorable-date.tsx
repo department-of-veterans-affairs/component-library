@@ -192,24 +192,23 @@ export class VaMemorableDate {
   })
   componentLibraryAnalytics: EventEmitter;
 
-  @State() options: Array<Node>;
-
   connectedCallback() {
     i18next.on('languageChanged', () => {
       forceUpdate(this.el);
-      this.populateOptions;
     });
   }
-
+  
   disconnectedCallback() {
     i18next.off('languageChanged');
   }
+  
+  @State() options: Array<Node>;
 
   private populateOptions() {
     this.options = months.map(
       (month) => {
         return (
-          <option value={month.value} key={month.key}>
+          <option value={month.value} key={month.value}>
           {month.label()}
           </option>
         );
@@ -236,8 +235,9 @@ export class VaMemorableDate {
     const describedbyIds = ['dateHint', hint ? 'hint' : '']
       .filter(Boolean)
       .join(' ');
-
+      
     this.populateOptions();
+
 
     const hintText = monthSelect ? i18next.t('date-hint-with-select') : i18next.t('date-hint');
     const monthDisplay = monthSelect

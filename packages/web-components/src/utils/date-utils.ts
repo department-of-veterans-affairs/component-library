@@ -16,18 +16,18 @@ const maxMonths = 12;
 const minMonths = 1;
 
 export const months = [
-  { label: () => i18next.t('january'), value: 1, key: 1 },
-  { label: () => i18next.t('february'), value: 2, key: 1 },
-  { label: () => i18next.t('march'), value: 3, key: 1 },
-  { label: () => i18next.t('april'), value: 4, key: 1 },
-  { label: () => i18next.t('may'), value: 5, key: 1 },
-  { label: () => i18next.t('june'), value: 6, key: 1 },
-  { label: () => i18next.t('july'), value: 7, key: 1 },
-  { label: () => i18next.t('august'), value: 8, key: 1 },
-  { label: () => i18next.t('september'), value: 9, key: 1 },
-  { label: () => i18next.t('october'), value: 10, key: 1 },
-  { label: () => i18next.t('november'), value: 11, key: 1 },
-  { label: () => i18next.t('december'), value: 12, key: 1 },
+  { label: () => i18next.t('january'), value: 1 },
+  { label: () => i18next.t('february'), value: 2 },
+  { label: () => i18next.t('march'), value: 3 },
+  { label: () => i18next.t('april'), value: 4 },
+  { label: () => i18next.t('may'), value: 5 },
+  { label: () => i18next.t('june'), value: 6 },
+  { label: () => i18next.t('july'), value: 7 },
+  { label: () => i18next.t('august'), value: 8 },
+  { label: () => i18next.t('september'), value: 9 },
+  { label: () => i18next.t('october'), value: 10 },
+  { label: () => i18next.t('november'), value: 11 },
+  { label: () => i18next.t('december'), value: 12 },
 ];
 
 /* eslint-disable i18next/no-literal-string */
