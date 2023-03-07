@@ -8,9 +8,12 @@
 @use 'usa-error-message/src/styles/usa-error-message';
 @use 'usa-memorable-date/src/styles/usa-memorable-date';
 
+@import '../../global/formation_overrides';
+
+/** Original Component Style **/
+
 @import '../va-date/va-date.css';
 @import '../../mixins/form-field-error.css';
-@import '../../global/formation_overrides';
 
 :host(:not([uswds])) .input-month,
 .input-day,
