@@ -153,9 +153,9 @@ export class VaOfficialGovBanner {
                       src="https://s3-us-gov-west-1.amazonaws.com/content.www.va.gov/img/tiny-usa-flag.png"
                       alt="" />
                   </div>
-                  <div class="grid-col-fill">
+                  <div class="grid-col-fill" aria-hidden="true">
                     <p class="header-text">{i18next.t('gov-site-label')}</p>
-                    <p class="header-action" aria-hidden="true">{i18next.t('gov-site-button')}</p>
+                    <p class="header-action">{i18next.t('gov-site-button')}</p>
                   </div>
                   <button 
                     onClick={this.handleClick}
