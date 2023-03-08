@@ -288,7 +288,7 @@ export class VaMemorableDate {
             </legend>
             <span class="usa-hint" id="dateHint">{hintText}.</span>
             <slot />
-            <span id="input-error-message" role="alert">
+            <span id="error-message" role="alert">
               {error && (
                 <Fragment>
                   <span class="usa-sr-only">{i18next.t('error')}</span> 
