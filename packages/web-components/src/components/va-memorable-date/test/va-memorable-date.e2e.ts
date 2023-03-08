@@ -640,8 +640,8 @@ describe('va-memorable-date', () => {
     expect(element).toEqualHtml(`
       <va-memorable-date class="hydrated" name="test" uswds="">
         <mock:shadow-root>
-          <fieldset class="usa-fieldset">
-          <legend class="usa-legend"></legend>
+          <fieldset class="usa-fieldset usa-form">
+          <legend class="usa-legend" part="legend"></legend>
           <span class="usa-hint" id="dateHint">
               date-hint.
           </span>
@@ -683,8 +683,8 @@ describe('va-memorable-date', () => {
     expect(element).toEqualHtml(`
       <va-memorable-date class='hydrated' label='Label' hint='hint text' required='' uswds=''>
       <mock:shadow-root>
-        <fieldset class="usa-fieldset">
-          <legend class="usa-legend">
+        <fieldset class="usa-fieldset usa-form">
+          <legend class="usa-legend" part="legend">
             Label
             <span class="usa-label--required">
               required
