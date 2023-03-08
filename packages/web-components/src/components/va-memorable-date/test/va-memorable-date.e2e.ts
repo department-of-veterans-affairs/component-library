@@ -646,7 +646,7 @@ describe('va-memorable-date', () => {
               date-hint.
           </span>
           <slot></slot>
-          <span id="input-error-message" role="alert"></span>
+          <span id="error-message" role="alert"></span>
           <div class="usa-memorable-date">
             <div class="usa-form-group usa-form-group--month">
               <va-text-input aria-describedby="dateHint" class="hydrated usa-form-group--month-input" uswds=""></va-text-input>
@@ -697,7 +697,7 @@ describe('va-memorable-date', () => {
             date-hint.
           </span>
           <slot></slot>
-          <span id="input-error-message" role="alert"></span>
+          <span id="error-message" role="alert"></span>
           <div class="usa-memorable-date">
             <div class="usa-form-group usa-form-group--month">
               <va-text-input aria-describedby="dateHint hint" class="hydrated usa-form-group--month-input" uswds=""></va-text-input>
@@ -720,7 +720,7 @@ describe('va-memorable-date', () => {
     await page.setContent('<va-memorable-date error="This is a mistake" uswds />');
 
     // Render the error message text
-    const error = await page.find('va-memorable-date >>> span#input-error-message');
+    const error = await page.find('va-memorable-date >>> span#error-message');
     // expect(error).toEqualHtml('test');
     expect(error.innerText).toContain('This is a mistake');
   });
@@ -824,7 +824,7 @@ describe('va-memorable-date', () => {
       await page.waitForChanges();
 
       // Assert
-      const errorSpan = await page.find('va-memorable-date >>> span#input-error-message');
+      const errorSpan = await page.find('va-memorable-date >>> span#error-message');
       expect(errorSpan.textContent).toContain("Fill me out");
     });
 
