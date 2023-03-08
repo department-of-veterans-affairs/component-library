@@ -1,8 +1,14 @@
-#error-message, #input-error-message {
+#error-message {
     color: var(--color-secondary-dark);
     display: block;
     font-weight: 700;
     margin-bottom: 1.2rem;
+}
+
+#input-error-message {
+  color: var(--color-secondary-dark);
+  display: block;
+  font-weight: 700;
 }
 
 :host([error]:not([error=''])) {
