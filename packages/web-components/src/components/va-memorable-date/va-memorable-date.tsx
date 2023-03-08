@@ -247,10 +247,7 @@ export class VaMemorableDate {
 
     // Error attribute should be leveraged for custom error messaging
     // Fieldset has an implicit aria role of group
-    if(uswds) {    
-      const selectClass = classnames({
-        'usa-form-group--month-select': true
-      });
+    if(uswds) { 
       const monthDisplay = monthSelect
       ? <div class="usa-form-group usa-form-group--month usa-form-group--select">
         <va-select
@@ -260,7 +257,7 @@ export class VaMemorableDate {
           aria-describedby={describedbyIds}
           invalid={this.invalidMonth}
           onVaSelect={handleDateChange}
-          class={selectClass}
+          class='usa-form-group--month-select'
         >
           {this.options}
         </va-select>
@@ -284,12 +281,15 @@ export class VaMemorableDate {
           inputmode="numeric"
           type="text"
         />
-      </div>;
-
+      </div>;   
+      const legendClass = classnames({
+        'usa-legend': true,
+        'usa-label--error': error
+      });
       return (
         <Host onBlur={handleDateBlur}>
-          <fieldset class="usa-fieldset">
-            <legend class="usa-legend">
+          <fieldset class="usa-form usa-fieldset">
+            <legend class={legendClass} part="legend">
               {label}
               {required && <span class="usa-label--required"> {i18next.t('required')}</span>}
               {hint && <div id="hint">{hint}</div>}
