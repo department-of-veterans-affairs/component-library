@@ -7,6 +7,7 @@ import {
   Listen,
   Prop,
 } from '@stencil/core';
+import classnames from 'classnames';
 
 /**
  * @componentName Button
@@ -17,7 +18,7 @@ import {
 
 @Component({
   tag: 'va-button',
-  styleUrl: 'va-button.css',
+  styleUrl: 'va-button.scss',
   shadow: true,
 })
 export class VaButton {
@@ -65,6 +66,11 @@ export class VaButton {
    * The text displayed on the button. If `continue` or `back` is true, the value of text is ignored.
    */
   @Prop() text?: string;
+
+  /**
+   * Whether or not the component will use USWDS v3 styling.
+   */
+  @Prop() uswds?: boolean = false;
 
   /**
    * The event used to track usage of the component.
@@ -121,29 +127,65 @@ export class VaButton {
       getButtonText,
       label,
       submit,
+      secondary,
+      uswds
     } = this;
 
     const ariaDisabled = disabled ? 'true' : undefined;
     const buttonText = getButtonText();
     const type = submit ? 'submit' : 'button';
 
-    return (
-      <Host>
-        <button
-          aria-disabled={ariaDisabled}
-          aria-label={label}
-          type={type}
-          part="button"
-        >
-          {back && !_continue && (
-            <i aria-hidden="true" class="fa fa-angles-left" />
-          )}
-          {buttonText}
-          {_continue && !back && (
-            <i aria-hidden="true" class="fa fa-angles-right" />
-          )}
-        </button>
-      </Host>
-    );
+    if (uswds) {
+      const buttonClass = classnames({
+        'usa-button': true,
+        'usa-button--secondary': secondary
+      });
+      return (
+        <Host>
+          <button 
+            class={buttonClass}
+            aria-disabled={ariaDisabled}
+            aria-label={label}
+            type={type} 
+            part="button">
+              {buttonText}
+          </button>
+          {/* <button
+            aria-disabled={ariaDisabled}
+            aria-label={label}
+            type={type}
+            part="button"
+          >
+            {back && !_continue && (
+              <i aria-hidden="true" class="fa fa-angles-left" />
+            )}
+            {buttonText}
+            {_continue && !back && (
+              <i aria-hidden="true" class="fa fa-angles-right" />
+            )}
+          </button> */}
+        </Host>
+      )
+    } else {
+      return (
+        <Host>
+          <button
+            aria-disabled={ariaDisabled}
+            aria-label={label}
+            type={type}
+            part="button"
+          >
+            {back && !_continue && (
+              <i aria-hidden="true" class="fa fa-angles-left" />
+            )}
+            {buttonText}
+            {_continue && !back && (
+              <i aria-hidden="true" class="fa fa-angles-right" />
+            )}
+          </button>
+        </Host>
+      )
+    }
+
   }
 }
