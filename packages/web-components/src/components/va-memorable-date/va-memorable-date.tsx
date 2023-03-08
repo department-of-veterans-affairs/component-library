@@ -249,8 +249,6 @@ export class VaMemorableDate {
     // Fieldset has an implicit aria role of group
     if(uswds) {    
       const selectClass = classnames({
-        'usa-select': true,
-        'usa-input--error': error,
         'usa-form-group--month-select': true
       });
       const monthDisplay = monthSelect
