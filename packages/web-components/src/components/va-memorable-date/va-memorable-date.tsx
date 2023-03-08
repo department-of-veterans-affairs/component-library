@@ -19,6 +19,7 @@ import {
 
 import i18next from 'i18next';
 import { Build } from '@stencil/core';
+import classnames from 'classnames';
 
 if (Build.isTesting) {
   // Make i18next.t() return the key instead of the value
@@ -239,45 +240,54 @@ export class VaMemorableDate {
     this.populateOptions();
 
 
+
+
     const hintText = monthSelect ? i18next.t('date-hint-with-select') : i18next.t('date-hint');
-    const monthDisplay = monthSelect
-    ? <div class="usa-form-group usa-form-group--month usa-form-group--select">
-      <va-select
-        uswds
-        label={i18next.t('month')}
-        name={`${name}Month`}
-        aria-describedby={describedbyIds}
-        invalid={this.invalidMonth}
-        onVaSelect={handleDateChange}
-        class="usa-form-group--month-select"
-      >
-        {this.options}
-      </va-select>
-    </div>
-    : <div class="usa-form-group usa-form-group--month">
-      <va-text-input
-        uswds
-        label={i18next.t('month')}
-        name={`${name}Month`}
-        maxlength={2}
-        minlength={2}
-        pattern="[0-9]*"
-        aria-describedby={describedbyIds}
-        invalid={this.invalidMonth}
-        // Value must be a string
-        // if NaN provide empty string
-        value={month?.toString()}
-        onInput={handleDateChange}
-        onKeyDown={handleDateKey}
-        class="usa-form-group--month-input"
-        inputmode="numeric"
-        type="text"
-      />
-    </div>;
+
 
     // Error attribute should be leveraged for custom error messaging
     // Fieldset has an implicit aria role of group
-    if(uswds) {
+    if(uswds) {    
+      const selectClass = classnames({
+        'usa-select': true,
+        'usa-input--error': error,
+        'usa-form-group--month-select': true
+      });
+      const monthDisplay = monthSelect
+      ? <div class="usa-form-group usa-form-group--month usa-form-group--select">
+        <va-select
+          uswds
+          label={i18next.t('month')}
+          name={`${name}Month`}
+          aria-describedby={describedbyIds}
+          invalid={this.invalidMonth}
+          onVaSelect={handleDateChange}
+          class={selectClass}
+        >
+          {this.options}
+        </va-select>
+      </div>
+      : <div class="usa-form-group usa-form-group--month">
+        <va-text-input
+          uswds
+          label={i18next.t('month')}
+          name={`${name}Month`}
+          maxlength={2}
+          minlength={2}
+          pattern="[0-9]*"
+          aria-describedby={describedbyIds}
+          invalid={this.invalidMonth}
+          // Value must be a string
+          // if NaN provide empty string
+          value={month?.toString()}
+          onInput={handleDateChange}
+          onKeyDown={handleDateKey}
+          class="usa-form-group--month-input"
+          inputmode="numeric"
+          type="text"
+        />
+      </div>;
+
       return (
         <Host onBlur={handleDateBlur}>
           <fieldset class="usa-fieldset">
