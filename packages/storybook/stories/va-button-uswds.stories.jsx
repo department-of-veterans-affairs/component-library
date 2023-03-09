@@ -97,7 +97,6 @@ Back.args = {
   ...defaultArgs,
   back: true,
   text: undefined,
-  outline: true,
 };
 
 export const Disabled = Template.bind(null);

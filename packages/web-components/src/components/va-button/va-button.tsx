@@ -68,11 +68,6 @@ export class VaButton {
   @Prop() text?: string;
 
   /**
-   * If `true`, the button will display in an outline style. Available when uswds is true.
-   */
-  @Prop() outline?: boolean = false;
-
-  /**
    * Whether or not the component will use USWDS v3 styling.
    */
   @Prop() uswds?: boolean = false;
@@ -133,7 +128,6 @@ export class VaButton {
       label,
       submit,
       secondary,
-      outline,
       big,
       uswds
     } = this;
@@ -147,7 +141,7 @@ export class VaButton {
         'usa-button': true,
         'usa-button--secondary': secondary,
         'usa-button--big': big,
-        'usa-button--outline': outline,
+        'usa-button--outline': back,
       });
 
       return (
@@ -156,7 +150,7 @@ export class VaButton {
             class={buttonClass}
             aria-disabled={ariaDisabled}
             aria-label={label}
-            type={type} 
+            type={type}
             part="button">
               {back && !_continue && (
                   <i aria-hidden="true" class="fa fa-angles-left" />

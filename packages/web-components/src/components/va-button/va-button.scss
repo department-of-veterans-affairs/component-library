@@ -4,6 +4,13 @@
 
 @import '../../global/formation_overrides';
 
+:host([disabled]:not([disabled='false'])) button {
+  pointer-events: none;
+}
+
+:host([disabled]:not([disabled='false'])) {
+  cursor: not-allowed;
+}
 /* Original Component Styles. */
 
 @import '../../mixins/buttons.css';
@@ -32,7 +39,6 @@
   background-color: var(--color-primary-darkest);
 }
 
-// TODO: Adjust for v3?
 :host(:not([uswds])[back]:not([back='false'])) button,
 :host(:not([uswds])[secondary]:not([secondary='false'])) button {
   background-color: var(--color-white);
@@ -84,9 +90,9 @@ i.fa-angles-right::before {
   background-color: var(--color-gray-lighter);
   box-shadow: none;
   color: var(--color-white);
-  pointer-events: none;
+  // pointer-events: none;
 }
 
-:host(:not([uswds])[disabled]:not([disabled='false'])) {
-  cursor: not-allowed;
-}
+// :host(:not([uswds])[disabled]:not([disabled='false'])) {
+//   cursor: not-allowed;
+// }
