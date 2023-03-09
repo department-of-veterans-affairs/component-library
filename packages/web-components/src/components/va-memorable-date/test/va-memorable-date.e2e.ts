@@ -1054,7 +1054,7 @@ describe('va-memorable-date', () => {
     expect(label.innerText).toContain('This is a label');
   });
 
-  it('swds v3 sets a default date', async () => {
+  it('uswds v3 sets a default date', async () => {
     const page = await newE2EPage();
     await page.setContent('<va-memorable-date value="1999-05-03" uswds />');
 
@@ -1067,7 +1067,7 @@ describe('va-memorable-date', () => {
     expect(year.getAttribute('value')).toBe('1999');
   });
 
-  it('swds v3 updates date based on input fields', async () => {
+  it('uswds v3 updates date based on input fields', async () => {
     const page = await newE2EPage();
     await page.setContent(
       '<va-memorable-date value="1999-05-03" name="test" uswds />',
@@ -1103,7 +1103,7 @@ describe('va-memorable-date', () => {
     expect(date.getAttribute('value')).toBe('2022-07-21');
   });
 
-  it('swds v3 year input only allows for 4 characters to be used', async () => {
+  it('uswds v3 year input only allows for 4 characters to be used', async () => {
     const page = await newE2EPage();
     await page.setContent('<va-memorable-date name="test" uswds />');
 
@@ -1119,7 +1119,7 @@ describe('va-memorable-date', () => {
     expect(elementYear.getAttribute('value')).toBe('2022');
   });
 
-  it('swds v3 day and month input field only allows for a maximum of 2 characters to be used', async () => {
+  it('uswds v3 day and month input field only allows for a maximum of 2 characters to be used', async () => {
     const page = await newE2EPage();
     await page.setContent('<va-memorable-date name="test" uswds />');
 
@@ -1144,7 +1144,7 @@ describe('va-memorable-date', () => {
     expect(elementDay.getAttribute('value')).toBe('12');
   });
 
-  it('swds v3 emits dateBlur event', async () => {
+  it('uswds v3 emits dateBlur event', async () => {
     const page = await newE2EPage();
 
     await page.setContent(
@@ -1159,7 +1159,7 @@ describe('va-memorable-date', () => {
     expect(blurSpy).toHaveReceivedEvent();
   });
 
-  it('swds v3 emits dateChange event when input value is updated', async () => {
+  it('uswds v3 emits dateChange event when input value is updated', async () => {
     const page = await newE2EPage();
 
     await page.setContent(
@@ -1189,7 +1189,7 @@ describe('va-memorable-date', () => {
     expect(spy).toHaveReceivedEventTimes(6);
   });
 
-  it('swds v3 formats single digit days and months into 2 digits with a leading 0', async () => {
+  it('uswds v3 formats single digit days and months into 2 digits with a leading 0', async () => {
     const page = await newE2EPage();
 
     await page.setContent('<va-memorable-date name="test" uswds />');
@@ -1214,7 +1214,7 @@ describe('va-memorable-date', () => {
     expect(date.getAttribute('value')).toBe('2022-01-02');
   });
 
-  it('swds v3 only allows specific keys to be used inside input fields', async () => {
+  it('uswds v3 only allows specific keys to be used inside input fields', async () => {
     const page = await newE2EPage();
 
     await page.setContent('<va-memorable-date name="test" uswds />');
@@ -1239,7 +1239,7 @@ describe('va-memorable-date', () => {
     expect(date.getAttribute('value')).toBe('--');
   });
 
-  it('swds v3 fires an analytics event when enableAnalytics is true', async () => {
+  it('uswds v3 fires an analytics event when enableAnalytics is true', async () => {
     const page = await newE2EPage();
     await page.setContent(
       '<va-memorable-date enable-analytics name="test" label="Example label" uswds />',
