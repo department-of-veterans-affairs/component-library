@@ -192,4 +192,212 @@ describe('va-button', () => {
     const button = await page.find('va-button >>> button');
     expect(button.getAttribute('aria-label')).toEqual('Edit dependent');
   });
+
+  // Begin USWDS v3 Tests
+
+  it('uswds v3 renders a button with text Edit', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-button text="Edit" uswds></va-button>');
+    const element = await page.find('va-button');
+    expect(element).toEqualHtml(`
+    <va-button class="hydrated" text="Edit" uswds="">
+      <mock:shadow-root>
+        <button class="usa-button" part="button" type="button">
+          Edit
+        </button>
+      </mock:shadow-root>
+    </va-button>
+    `);
+  });
+
+  it('uswds v3 renders a secondary button variant', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-button text="Edit" secondary uswds></va-button>');
+    const button = await page.find('va-button >>> button');
+    expect((await button.getComputedStyle()).backgroundColor).toEqual(
+      'rgb(216, 57, 51)',
+    );
+  });
+
+  it('uswds v3 renders a big button variant', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-button text="Edit" big uswds></va-button>');
+    const button = await page.find('va-button >>> button');
+    expect((await button.getComputedStyle()).padding).toEqual('16px 24px');
+  });
+
+  it('uswds v3 renders an icon before the button text when back is true', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-button back uswds></va-button>');
+    const element = await page.find('va-button');
+    expect(element).toEqualHtml(`
+    <va-button back="" class="hydrated" uswds="">
+      <mock:shadow-root>
+        <button class="usa-button usa-button--outline" type="button" part="button">
+          <i aria-hidden="true" class="fa fa-angles-left"></i>
+          Back
+        </button>
+      </mock:shadow-root>
+    </va-button>
+    `);
+  });
+
+  it('uswds v3 renders an icon after the button text when continue is true', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-button continue uswds></va-button>');
+    const element = await page.find('va-button');
+    expect(element).toEqualHtml(`
+    <va-button uswds="" continue class="hydrated">
+      <mock:shadow-root>
+        <button class="usa-button" type="button" part="button">
+          Continue
+          <i aria-hidden="true" class="fa fa-angles-right"></i>
+        </button>
+      </mock:shadow-root>
+    </va-button>
+    `);
+  });
+
+  it('uswds v3 renders a button with an aria label of Edit John Smith', async () => {
+    const page = await newE2EPage();
+    await page.setContent(
+      '<va-button uswds text="Edit" label="Edit John Smith"></va-button>',
+    );
+    const element = await page.find('va-button');
+    expect(element).toEqualHtml(`
+    <va-button class="hydrated" label="Edit John Smith" text="Edit" uswds="" >
+      <mock:shadow-root>
+        <button aria-label="Edit John Smith" class="usa-button" part="button" type="button">
+          Edit
+        </button>
+      </mock:shadow-root>
+    </va-button>
+    `);
+  });
+
+  it('uswds v3 renders a submit button', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-button uswds text="Edit" submit></va-button>');
+    const element = await page.find('va-button');
+    expect(element).toEqualHtml(`
+    <va-button uswds="" class="hydrated" text="Edit" submit>
+      <mock:shadow-root>
+        <button class="usa-button" type="submit" part="button">
+          Edit
+        </button>
+      </mock:shadow-root>
+    </va-button>
+    `);
+  });
+
+  it('uswds v3 renders a disabled button', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-button uswds text="Edit" disabled></va-button>');
+    const element = await page.find('va-button');
+    expect(element).toEqualHtml(`
+    <va-button uswds="" class="hydrated" text="Edit" disabled>
+      <mock:shadow-root>
+        <button class="usa-button" aria-disabled="true" type="button" part="button">
+          Edit
+        </button>
+      </mock:shadow-root>
+    </va-button>
+    `);
+  });
+
+  it('uswds v3 ignores text value and displays Continue when continue is true', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-button uswds text="Edit" continue></va-button>');
+    const button = await page.find('va-button >>> button');
+    expect(button.textContent).toEqual('Continue');
+  });
+
+  it('uswds v3 ignores text value and displays Back when back is true', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-button uswds text="Edit" back></va-button>');
+    const button = await page.find('va-button >>> button');
+    expect(button.textContent).toEqual('Back');
+  });
+
+  it(`uswds v3 doesn't display icons if both continue and back are true`, async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-button uswds back continue></va-button>');
+    const element = await page.find('va-button');
+    expect(element).toEqualHtml(`
+    <va-button uswds="" class="hydrated" back continue>
+      <mock:shadow-root>
+        <button class="usa-button usa-button--outline" type="button" part="button">
+          Continue
+        </button>
+      </mock:shadow-root>
+    </va-button>
+    `);
+  });
+
+  it('uswds v3 passes an axe check', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-button uswds text="Edit"></va-button>');
+    await axeCheck(page);
+  });
+
+  it('uswds v3 fires analytics event when clicked', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-button uswds text="Edit"></va-button>');
+    const analyticsSpy = await page.spyOnEvent('component-library-analytics');
+    const button = await page.find('va-button >>> button');
+    await button.click();
+    expect(analyticsSpy).toHaveReceivedEventDetail({
+      action: 'click',
+      componentName: 'va-button',
+      details: {
+        label: 'Edit',
+        type: 'primary',
+      },
+    });
+  });
+
+  it(`uswds v3 doesn't fire analytics event when clicked and disableAnalytics is true`, async () => {
+    const page = await newE2EPage();
+    await page.setContent(
+      '<va-button uswds text="Edit" disable-analytics></va-button>',
+    );
+    const analyticsSpy = await page.spyOnEvent('component-library-analytics');
+    const button = await page.find('va-button >>> button');
+    await button.click();
+    expect(analyticsSpy).toHaveReceivedEventTimes(0);
+  });
+
+  it(`uswds v3 doesn't fire click event when disabled is true`, async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-button uswds text="Edit" disabled></va-button>');
+    const clickSpy = await page.spyOnEvent('click');
+    const button = await page.find('va-button >>> button');
+    await button.click();
+    expect(clickSpy).toHaveReceivedEventTimes(0);
+  });
+
+  it('uswds v3 has the correct aria-label when label is given', async () => {
+    const page = await newE2EPage();
+    await page.setContent(
+      '<va-button uswds label="Edit dependent" text="Edit"></va-button>',
+    );
+
+    const button = await page.find('va-button >>> button');
+    expect(button.getAttribute('aria-label')).toEqual('Edit dependent');
+  });
+
+  it(`uswds v3 displays in outline style when outline prop is set`, async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-button uswds text="Edit" outline></va-button>');
+    const element = await page.find('va-button');
+    expect(element).toEqualHtml(`
+    <va-button class="hydrated" outline="" text="Edit" uswds="">
+      <mock:shadow-root>
+        <button class="usa-button usa-button--outline" type="button" part="button">
+          Edit
+        </button>
+      </mock:shadow-root>
+    </va-button>
+    `);
+  });
 });
