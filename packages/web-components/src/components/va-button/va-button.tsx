@@ -128,6 +128,7 @@ export class VaButton {
       label,
       submit,
       secondary,
+      big,
       uswds
     } = this;
 
@@ -138,8 +139,10 @@ export class VaButton {
     if (uswds) {
       const buttonClass = classnames({
         'usa-button': true,
-        'usa-button--secondary': secondary
+        'usa-button--secondary': secondary,
+        'usa-button--big': big,
       });
+
       return (
         <Host>
           <button 
@@ -148,22 +151,14 @@ export class VaButton {
             aria-label={label}
             type={type} 
             part="button">
+              {back && !_continue && (
+                  <i aria-hidden="true" class="fa fa-angles-left" />
+                )}
               {buttonText}
+              {_continue && !back && (
+                <i aria-hidden="true" class="fa fa-angles-right" />
+              )}
           </button>
-          {/* <button
-            aria-disabled={ariaDisabled}
-            aria-label={label}
-            type={type}
-            part="button"
-          >
-            {back && !_continue && (
-              <i aria-hidden="true" class="fa fa-angles-left" />
-            )}
-            {buttonText}
-            {_continue && !back && (
-              <i aria-hidden="true" class="fa fa-angles-right" />
-            )}
-          </button> */}
         </Host>
       )
     } else {

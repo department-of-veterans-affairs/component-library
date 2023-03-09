@@ -23,7 +23,7 @@ const defaultArgs = {
   'label': undefined,
   'secondary': undefined,
   'submit': undefined,
-  'text': 'Edit',
+  'text': 'Default',
   'uswds': true,
 };
 
@@ -66,12 +66,14 @@ export const Secondary = Template.bind(null);
 Secondary.args = {
   ...defaultArgs,
   secondary: true,
+  text: "Secondary"
 };
 
 export const Big = Template.bind(null);
 Big.args = {
   ...defaultArgs,
   big: true,
+  text: "Big button",
 };
 
 export const Continue = Template.bind(null);
@@ -92,4 +94,5 @@ export const Disabled = Template.bind(null);
 Disabled.args = {
   ...defaultArgs,
   disabled: true,
+  text: "Disabled",
 };
