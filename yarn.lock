@@ -1844,9 +1844,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@department-of-veterans-affairs/formation@npm:^7.0.4":
-  version: 7.0.4
-  resolution: "@department-of-veterans-affairs/formation@npm:7.0.4"
+"@department-of-veterans-affairs/formation@npm:^7.0.5":
+  version: 7.0.5
+  resolution: "@department-of-veterans-affairs/formation@npm:7.0.5"
   dependencies:
     "@fortawesome/fontawesome-free": ^5.6.3
     domready: ^1.0.8
@@ -1856,7 +1856,7 @@ __metadata:
     "@fortawesome/fontawesome-free": ^5.6.3
     foundation-sites: 5
     uswds: ^1.6.10
-  checksum: 9558ca31d4201e49d050f31a785ae591f9f090c3434233dafa5c2a6fec77f57278fba017c77cebb48db94318ec612be5eef58cc54dfd532f7f17bc34e4f0d327
+  checksum: df331baf4a795f4f42d88e8c6c2d141b21cb388a43d00930c825aa16d8bf20d9eba921522eeb596e35e6701e1038eccd95cc20f730af3ad4f6eeff352cfa10a6
   languageName: node
   linkType: hard
 
@@ -1877,7 +1877,7 @@ __metadata:
     "@babel/plugin-syntax-import-meta": ^7.10.4
     "@babel/preset-env": ^7.12.10
     "@babel/preset-react": ^7.14.5
-    "@department-of-veterans-affairs/formation": ^7.0.4
+    "@department-of-veterans-affairs/formation": ^7.0.5
     "@department-of-veterans-affairs/web-components": "workspace:packages/web-components"
     "@testing-library/react": ^12.0.0
     "@testing-library/user-event": ^13.2.1
@@ -1934,7 +1934,7 @@ __metadata:
   dependencies:
     "@babel/core": ^7.15.8
     "@department-of-veterans-affairs/component-library": "workspace:packages/core"
-    "@department-of-veterans-affairs/formation": ^7.0.4
+    "@department-of-veterans-affairs/formation": ^7.0.5
     "@mdx-js/react": ^1.6.22
     "@storybook/addon-a11y": 6.4.19
     "@storybook/addon-actions": ^6.4.19
@@ -1962,7 +1962,7 @@ __metadata:
   dependencies:
     "@axe-core/puppeteer": ^4.4.0
     "@babel/core": ^7.12.13
-    "@department-of-veterans-affairs/formation": ^7.0.4
+    "@department-of-veterans-affairs/formation": ^7.0.5
     "@stencil/core": ^2.19.2
     "@stencil/postcss": ^2.0.0
     "@stencil/react-output-target": ^0.0.9
@@ -1989,7 +1989,7 @@ __metadata:
     react-dom: ^16.7.0
     typescript: ^4.3.5
   peerDependencies:
-    "@department-of-veterans-affairs/formation": ^7.0.4
+    "@department-of-veterans-affairs/formation": ^7.0.5
     i18next: "*"
     i18next-browser-languagedetector: "*"
   languageName: unknown
