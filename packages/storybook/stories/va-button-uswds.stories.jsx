@@ -35,6 +35,7 @@ const Template = ({
   disabled,
   label,
   secondary,
+  outline,
   submit,
   text,
   uswds
@@ -49,6 +50,7 @@ const Template = ({
       disabled={disabled}
       label={label}
       secondary={secondary}
+      outline={outline}
       submit={submit}
       text={text}
       onClick={e => console.log(e)}
@@ -67,6 +69,13 @@ Secondary.args = {
   ...defaultArgs,
   secondary: true,
   text: "Secondary"
+};
+
+export const Outline = Template.bind(null);
+Outline.args = {
+  ...defaultArgs,
+  outline: true,
+  text: "Outline"
 };
 
 export const Big = Template.bind(null);
@@ -88,6 +97,7 @@ Back.args = {
   ...defaultArgs,
   back: true,
   text: undefined,
+  outline: true,
 };
 
 export const Disabled = Template.bind(null);
