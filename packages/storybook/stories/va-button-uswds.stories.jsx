@@ -24,6 +24,7 @@ const defaultArgs = {
   'secondary': undefined,
   'submit': undefined,
   'text': 'Default',
+  'outline': undefined,
   'uswds': true,
 };
 
