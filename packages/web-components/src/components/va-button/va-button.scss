@@ -4,6 +4,9 @@
 
 @import '../../global/formation_overrides';
 
+:host {
+  display: inline-block;
+}
 :host([disabled]:not([disabled='false'])) button {
   pointer-events: none;
 }
@@ -14,10 +17,6 @@
 /* Original Component Styles. */
 
 @import '../../mixins/buttons.css';
-
-:host {
-  display: inline-block;
-}
 
 :host(:not([uswds])) button {
   align-items: center;
