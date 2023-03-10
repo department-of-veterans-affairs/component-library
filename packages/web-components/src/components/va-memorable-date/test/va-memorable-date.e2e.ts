@@ -1276,4 +1276,542 @@ describe('va-memorable-date', () => {
       },
     });
   });
+
+  // Begin USWDS v3 test with monthSelect prop
+  it('uswds v3 renders with monthSelect', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-memorable-date name="test" uswds month-select />');
+
+    const element = await page.find('va-memorable-date');
+    expect(element).toHaveClass('hydrated');
+    expect(element).toEqualHtml(`
+      <va-memorable-date class="hydrated" month-select="" name="test" uswds="">
+        <mock:shadow-root>
+          <fieldset class="usa-fieldset usa-form">
+          <legend class="usa-legend" part="legend"></legend>
+          <span class="usa-hint" id="dateHint">
+              date-hint-with-select.
+          </span>
+          <slot></slot>
+          <span id="error-message" role="alert"></span>
+          <div class="usa-memorable-date">
+            <div class="usa-form-group usa-form-group--month usa-form-group--select">
+              <va-select aria-describedby="dateHint" class="hydrated usa-form-group--month-select" uswds="">
+                <option value="1">
+                  january
+                </option>
+                <option value="2">
+                  february
+                </option>
+                <option value="3">
+                  march
+                </option>
+                <option value="4">
+                  april
+                </option>
+                <option value="5">
+                  may
+                </option>
+                <option value="6">
+                  june
+                </option>
+                <option value="7">
+                  july
+                </option>
+                <option value="8">
+                  august
+                </option>
+                <option value="9">
+                  september
+                </option>
+                <option value="10">
+                  october
+                </option>
+                <option value="11">
+                  november
+                </option>
+                <option value="12">
+                  december
+                </option>
+              </va-select>
+            </div>
+            <div class="usa-form-group usa-form-group--day">
+              <va-text-input aria-describedby="dateHint" class="hydrated usa-form-group--day-input" uswds=""></va-text-input>
+            </div>
+            <div class="usa-form-group usa-form-group--year">
+              <va-text-input aria-describedby="dateHint" class="hydrated usa-form-group--year-input" uswds="" value=""></va-text-input>
+            </div>
+          </div>
+          </fieldset>
+        </mock:shadow-root>
+      </va-memorable-date>
+    `);
+  });
+
+  it('uswds v3 passes an axe check with monthSelect', async () => {
+    const page = await newE2EPage();
+    await page.setContent(
+      `
+      <va-memorable-date day="5" label="Test Label" month="3" name="test" year="2000" uswds month-select></va-memorable-date>
+      `,
+    );
+    await axeCheck(page);
+  });
+
+  it('uswds v3 renders hint text with monthSelect', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-memorable-date label="Label" hint="hint text" required uswds month-select></va-memorable-date>');
+
+    const element = await page.find('va-memorable-date');
+    expect(element).toHaveClass('hydrated');
+    expect(element).toEqualHtml(`
+      <va-memorable-date class='hydrated' label='Label' hint='hint text' month-select='' required='' uswds=''>
+      <mock:shadow-root>
+        <fieldset class="usa-fieldset usa-form">
+          <legend class="usa-legend" part="legend">
+            Label
+            <span class="usa-label--required">
+              required
+            </span>
+            <div id="hint">
+              hint text
+            </div>
+          </legend>
+          <span class="usa-hint" id="dateHint">
+            date-hint-with-select.
+          </span>
+          <slot></slot>
+          <span id="error-message" role="alert"></span>
+          <div class="usa-memorable-date">
+            <div class="usa-form-group usa-form-group--month usa-form-group--select">
+              <va-select aria-describedby="dateHint hint" class="hydrated usa-form-group--month-select" uswds="">
+                <option value="1">
+                  january
+                </option>
+                <option value="2">
+                  february
+                </option>
+                <option value="3">
+                  march
+                </option>
+                <option value="4">
+                  april
+                </option>
+                <option value="5">
+                  may
+                </option>
+                <option value="6">
+                  june
+                </option>
+                <option value="7">
+                  july
+                </option>
+                <option value="8">
+                  august
+                </option>
+                <option value="9">
+                  september
+                </option>
+                <option value="10">
+                  october
+                </option>
+                <option value="11">
+                  november
+                </option>
+                <option value="12">
+                  december
+                </option>
+              </va-select>
+            </div>
+            <div class="usa-form-group usa-form-group--day">
+              <va-text-input aria-describedby="dateHint hint" class="hydrated usa-form-group--day-input" uswds=""></va-text-input>
+            </div>
+            <div class="usa-form-group usa-form-group--year">
+              <va-text-input aria-describedby="dateHint hint" class="hydrated usa-form-group--year-input" uswds="" value=""></va-text-input>
+            </div>
+          </div>
+        </fieldset>
+      </mock:shadow-root>
+    </va-memorable-date>
+    `);
+  });
+
+  it('uswds v3 renders an error message with monthSelect', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-memorable-date error="This is a mistake" uswds month-select />');
+
+    // Render the error message text
+    const error = await page.find('va-memorable-date >>> span#error-message');
+    // expect(error).toEqualHtml('test');
+    expect(error.innerText).toContain('This is a mistake');
+  });
+
+  it('uswds v3 renders a required span with monthSelect', async () => {
+    const page = await newE2EPage();
+    await page.setContent(
+      '<va-memorable-date label="This is a field" required uswds month-select />',
+    );
+
+    const requiredSpan = await page.find('va-memorable-date >>> span.usa-label--required');
+    expect(requiredSpan).not.toBeNull();
+  });
+
+  describe('uswds v3 validation with monthSelect', () => {
+    it('uswds v3 does year validation without required prop with monthSelect', async () => {
+      const page = await newE2EPage();
+      await page.setContent(
+        '<va-memorable-date value="1999-05-03" name="test" uswds month-select />',
+      );
+      const date = await page.find('va-memorable-date');
+      const handleYear = await page.$('pierce/[name="testYear"]');
+
+      // Click three times to select all text in input
+      await handleYear.click({ clickCount: 3 });
+      await handleYear.press('2');
+      // Trigger Blur
+      await handleYear.press('Tab');
+
+      await page.waitForChanges();
+      expect(date.getAttribute('error')).toEqual(`year-range`);
+    });
+
+    it('uswds v3 does day validation without required prop with monthSelect', async () => {
+      const page = await newE2EPage();
+      await page.setContent(
+        '<va-memorable-date value="1999-05-03" name="test" uswds month-select />',
+      );
+      const date = await page.find('va-memorable-date');
+      const handleYear = await page.$('pierce/[name="testYear"]');
+      const handleDay = await page.$('pierce/[name="testDay"]');
+
+      // Click three times to select all text in input
+      await handleDay.click({ clickCount: 3 });
+      await handleDay.type('50');
+      // Trigger Blur
+      await handleYear.press('Tab');
+
+      await page.waitForChanges();
+      expect(date.getAttribute('error')).toEqual("day-range");
+    });
+
+   it('uswds v3 does validation for required components with monthSelect', async () => {
+      const page = await newE2EPage();
+      await page.setContent(
+        '<va-memorable-date name="test" required uswds month-select />',
+      );
+      const date = await page.find('va-memorable-date');
+      const handleYear = await page.$('pierce/[name="testYear"]');
+
+      // Trigger Blur
+      await handleYear.press('Tab');
+      await page.waitForChanges();
+
+      expect(date.getAttribute('error')).toEqual("date-error");
+    });
+
+    it('uswds v3 allows for a custom required message with monthSelect', async () => {
+      const page = await newE2EPage();
+      await page.setContent('<va-memorable-date value="2000-01-01" name="test" label="This is a field" required uswds month-select />');
+
+      // Act
+      const handleYear = await page.$('pierce/[name="testYear"]');
+      // Click three times to select all text in input
+      await handleYear.click({ clickCount: 3 });
+      await handleYear.press('2');
+      await handleYear.press('Tab');
+      // This would be done in the onDateChange handler
+      await page.$eval('va-memorable-date', (elm: any) => {
+        elm.error= 'Fill me out';
+      });
+      await page.waitForChanges();
+
+      // Assert
+      const errorSpan = await page.find('va-memorable-date >>> span#error-message');
+      expect(errorSpan.textContent).toContain("Fill me out");
+    });
+
+    it('uswds v3 resets error to null when fixed with monthSelect', async () => {
+      const page = await newE2EPage();
+      await page.setContent(
+        '<va-memorable-date value="1999-05-03" name="test" required="true" uswds month-select />',
+      );
+      const date = await page.find('va-memorable-date');
+      const handleYear = await page.$('pierce/[name="testYear"]');
+
+      // Click three times to select all text in input
+      await handleYear.click({ clickCount: 3 });
+      await handleYear.press('2');
+      // Trigger Blur
+      await handleYear.press('Tab');
+
+      await page.waitForChanges();
+      expect(date.getAttribute('error')).toEqual(`year-range`);
+
+      await handleYear.press('0');
+      await handleYear.press('2');
+      await handleYear.press('2');
+      // Trigger Blur
+      await handleYear.press('Tab');
+      await page.waitForChanges();
+      expect(date.getAttribute('error')).toEqual(null);
+    });
+
+    describe('uswds v3 invalid subcomponents with monthSelect', () => {
+      it('uswds v3 correctly indicates an invalid year with monthSelect', async () => {
+        const page = await newE2EPage();
+        await page.setContent(
+          '<va-memorable-date value="1999-05-03" name="test" required="true" uswds month-select />',
+        );
+        const handleYear = await page.$('pierce/[name="testYear"]');
+        const handleMonth = await page.$('pierce/[name="testMonth"]');
+        const handleDay = await page.$('pierce/[name="testDay"]');
+        const getAriaInvalid = (element: HTMLElement) =>
+          element.getAttribute('aria-invalid');
+
+        // Click three times to select all text in input
+        await handleYear.click({ clickCount: 3 });
+        await handleYear.press('2');
+        // Trigger Blur
+        await handleYear.press('Tab');
+
+        // Year only has one character - should be invalid
+        await page.waitForChanges();
+        let invalidYear = await handleYear.evaluate(getAriaInvalid);
+        let invalidMonth = await handleMonth.evaluate(getAriaInvalid);
+        let invalidDay = await handleDay.evaluate(getAriaInvalid);
+
+        expect(invalidYear).toEqual('true');
+        expect(invalidMonth).toEqual('false');
+        expect(invalidDay).toEqual('false');
+
+        await handleYear.press('0');
+        await handleYear.press('2');
+        await handleYear.press('2');
+        // Trigger Blur
+        await handleYear.press('Tab');
+        await page.waitForChanges();
+
+        invalidYear = await handleYear.evaluate(getAriaInvalid);
+        invalidMonth = await handleMonth.evaluate(getAriaInvalid);
+        invalidDay = await handleDay.evaluate(getAriaInvalid);
+
+        expect(invalidYear).toEqual('false');
+        expect(invalidMonth).toEqual('false');
+        expect(invalidDay).toEqual('false');
+      });
+
+      it('uswds v3 correctly indicates an invalid day with monthSelect', async () => {
+        const page = await newE2EPage();
+        await page.setContent(
+          '<va-memorable-date value="1999-05-03" name="test" required="true" uswds month-select />',
+        );
+        const handleYear = await page.$('pierce/[name="testYear"]');
+        const handleMonth = await page.$('pierce/[name="testMonth"]');
+        const handleDay = await page.$('pierce/[name="testDay"]');
+        const getAriaInvalid = (element: HTMLElement) =>
+          element.getAttribute('aria-invalid');
+
+        // Click three times to select all text in input
+        await handleDay.click({ clickCount: 3 });
+        await handleDay.press('3');
+        await handleDay.press('9');
+        // Trigger Blur
+        await handleYear.press('Tab');
+
+        await page.waitForChanges();
+        let invalidYear = await handleYear.evaluate(getAriaInvalid);
+        let invalidMonth = await handleMonth.evaluate(getAriaInvalid);
+        let invalidDay = await handleDay.evaluate(getAriaInvalid);
+
+        expect(invalidYear).toEqual('false');
+        expect(invalidMonth).toEqual('false');
+        expect(invalidDay).toEqual('true');
+
+        await handleDay.press('Backspace');
+        await handleDay.press('1');
+        // Trigger Blur
+        await handleYear.press('Tab');
+        await page.waitForChanges();
+
+        invalidYear = await handleYear.evaluate(getAriaInvalid);
+        invalidMonth = await handleMonth.evaluate(getAriaInvalid);
+        invalidDay = await handleDay.evaluate(getAriaInvalid);
+
+        expect(invalidYear).toEqual('false');
+        expect(invalidMonth).toEqual('false');
+        expect(invalidDay).toEqual('false');
+      });
+
+      it('uswds v3 passes the invalidDay prop correctly with monthSelect', async () => {
+        const page = await newE2EPage();
+        await page.setContent(
+          '<va-memorable-date name="test" invalid-day uswds month-select />',
+        );
+        const handleYear = await page.$('pierce/[name="testYear"]');
+        const handleMonth = await page.$('pierce/[name="testMonth"]');
+        const handleDay = await page.$('pierce/[name="testDay"]');
+        const getAriaInvalid =
+          (element: HTMLElement) => element.getAttribute('aria-invalid');
+
+        let invalidYear = await handleYear.evaluate(getAriaInvalid);
+        let invalidMonth = await handleMonth.evaluate(getAriaInvalid);
+        let invalidDay = await handleDay.evaluate(getAriaInvalid);
+
+        expect(invalidYear).toEqual('false');
+        expect(invalidMonth).toEqual('false');
+        expect(invalidDay).toEqual('true');
+      });
+
+      it('uswds v3 passes the invalidMonth prop correctly with monthSelect', async () => {
+        const page = await newE2EPage();
+        await page.setContent(
+          '<va-memorable-date name="test" invalid-month uswds month-select />',
+        );
+        const handleYear = await page.$('pierce/[name="testYear"]');
+        const handleMonth = await page.$('pierce/[name="testMonth"]');
+        const handleDay = await page.$('pierce/[name="testDay"]');
+        const getAriaInvalid =
+          (element: HTMLElement) => element.getAttribute('aria-invalid');
+
+        let invalidYear = await handleYear.evaluate(getAriaInvalid);
+        let invalidMonth = await handleMonth.evaluate(getAriaInvalid);
+        let invalidDay = await handleDay.evaluate(getAriaInvalid);
+
+        expect(invalidYear).toEqual('false');
+        expect(invalidMonth).toEqual('true');
+        expect(invalidDay).toEqual('false');
+      });
+
+      it('uswds v3 passes the invalidYear prop correctly with monthSelect', async () => {
+        const page = await newE2EPage();
+        await page.setContent(
+          '<va-memorable-date name="test" invalid-year uswds month-select />',
+        );
+        const handleYear = await page.$('pierce/[name="testYear"]');
+        const handleMonth = await page.$('pierce/[name="testMonth"]');
+        const handleDay = await page.$('pierce/[name="testDay"]');
+        const getAriaInvalid =
+          (element: HTMLElement) => element.getAttribute('aria-invalid');
+
+        let invalidYear = await handleYear.evaluate(getAriaInvalid);
+        let invalidMonth = await handleMonth.evaluate(getAriaInvalid);
+        let invalidDay = await handleDay.evaluate(getAriaInvalid);
+
+        expect(invalidYear).toEqual('true');
+        expect(invalidMonth).toEqual('false');
+        expect(invalidDay).toEqual('false');
+      });
+    });
+  });
+
+  it('uswds v3 sets a label with monthSelect', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-memorable-date label="This is a label" uswds month-select />');
+
+    const label = await page.find('va-memorable-date >>> legend');
+    expect(label.innerText).toContain('This is a label');
+  });
+
+  it('uswds v3 emits dateBlur event with monthSelect', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent(
+      '<va-memorable-date value="1999-05-03" name="test" uswds month-select />',
+    );
+
+    const handleYear = await page.$('pierce/[name="testYear"]');
+    const blurSpy = await page.spyOnEvent('dateBlur');
+    // Trigger Blur
+    await handleYear.press('Tab');
+
+    expect(blurSpy).toHaveReceivedEvent();
+  });
+
+  it('uswds v3 formats single digit days and months into 2 digits with a leading 0 with monthSelect', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<va-memorable-date name="test" uswds month-select />');
+    const date = await page.find('va-memorable-date');
+    const handleMonth = await page.$('pierce/[name="testMonth"]');
+    const handleDay = await page.$('pierce/[name="testDay"]');
+    const handleYear = await page.$('pierce/[name="testYear"]');
+    // Month
+    await handleMonth.select('1');
+    await handleMonth.press('Tab');
+    // Day
+    await handleDay.press('2');
+    await handleDay.press('Tab');
+    // Year
+    await handleYear.press('2');
+    await handleYear.press('0');
+    await handleYear.press('2');
+    await handleYear.press('2');
+    // Trigger Blur
+    await handleYear.press('Tab');
+    await page.waitForChanges();
+    expect(date.getAttribute('value')).toBe('2022-01-02');
+  });
+
+  it('uswds v3 only allows specific keys to be used inside input fields with monthSelect', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<va-memorable-date name="test" uswds month-select />');
+    const date = await page.find('va-memorable-date');
+    const handleMonth = await page.$('pierce/[name="testMonth"]');
+    const handleDay = await page.$('pierce/[name="testDay"]');
+    const handleYear = await page.$('pierce/[name="testYear"]');
+    // Month
+    await handleMonth.select('a');
+    await handleMonth.press('Tab');
+    // Day
+    await handleDay.press('b');
+    await handleDay.press('Tab');
+    // Year
+    await handleYear.press('`');
+    await handleYear.press(']');
+    await handleYear.press('/');
+    await handleYear.press(',');
+    // Trigger Blur
+    await handleYear.press('Tab');
+    await page.waitForChanges();
+    expect(date.getAttribute('value')).toBe('--');
+  });
+
+  it('uswds v3 fires an analytics event when enableAnalytics is true with monthSelect', async () => {
+    const page = await newE2EPage();
+    await page.setContent(
+      '<va-memorable-date enable-analytics name="test" label="Example label" uswds month-select />',
+    );
+    const analyticsSpy = await page.spyOnEvent('component-library-analytics');
+    const handleMonth = await page.$('pierce/[name="testMonth"]');
+    const handleDay = await page.$('pierce/[name="testDay"]');
+    const handleYear = await page.$('pierce/[name="testYear"]');
+
+    // Month
+    await handleMonth.select('1');
+    await handleMonth.press('Tab');
+    // Day
+    await handleDay.press('2');
+    await handleDay.press('Tab');
+    // Year
+    await handleYear.press('2');
+    await handleYear.press('0');
+    await handleYear.press('2');
+    await handleYear.press('2');
+    // Trigger Blur
+    await handleYear.press('Tab');
+    await page.waitForChanges();
+
+    expect(analyticsSpy).toHaveReceivedEventTimes(1);
+    expect(analyticsSpy).toHaveReceivedEventDetail({
+      action: 'blur',
+      componentName: 'va-memorable-date',
+      details: {
+        label: 'Example label',
+        year: 2022,
+        month: 1,
+        day: 2,
+      },
+    });
+  });
 });
