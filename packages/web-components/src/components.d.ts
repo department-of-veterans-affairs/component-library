@@ -779,6 +779,10 @@ export namespace Components {
          */
         "name": string;
         /**
+          * Whether or not to add usa-input--error as class if error message is outside of component
+         */
+        "reflectInputError"?: boolean;
+        /**
           * Whether or not this is a required field.
          */
         "required"?: boolean;
@@ -2307,6 +2311,10 @@ declare namespace LocalJSX {
           * The event emitted when the selected value changes
          */
         "onVaSelect"?: (event: VaSelectCustomEvent<any>) => void;
+        /**
+          * Whether or not to add usa-input--error as class if error message is outside of component
+         */
+        "reflectInputError"?: boolean;
         /**
           * Whether or not this is a required field.
          */

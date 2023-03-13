@@ -258,6 +258,7 @@ export class VaMemorableDate {
           invalid={this.invalidMonth}
           onVaSelect={handleDateChange}
           class='usa-form-group--month-select'
+          reflectInputError={error ? true : false}
         >
           {this.options}
         </va-select>

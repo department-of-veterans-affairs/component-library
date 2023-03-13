@@ -59,6 +59,11 @@ export class VaSelect {
   @Prop() error?: string;
 
   /**
+   * Whether or not to add usa-input--error as class if error message is outside of component
+   */
+  @Prop() reflectInputError?: boolean = false;
+
+  /**
    * Whether or not `aria-invalid` will be set on the inner select. Useful when
    * composing the component into something larger, like a date component.
    */
@@ -160,7 +165,7 @@ export class VaSelect {
   }
 
   render() {
-    const { error, invalid, label, required, name, hint, uswds } = this;
+    const { error, reflectInputError, invalid, label, required, name, hint, uswds } = this;
 
     if (uswds) {
       const labelClass = classnames({
@@ -169,7 +174,7 @@ export class VaSelect {
       });
       const selectClass = classnames({
         'usa-select': true,
-        'usa-input--error': error,
+        'usa-input--error': error || reflectInputError,
       });
       return (
         <Host>
