@@ -210,13 +210,11 @@ describe('va-button', () => {
     `);
   });
 
-  it('uswds v3 renders a secondary button variant', async () => {
+  it('uswds v3 renders a secondary button variant (usa-button--outline)', async () => {
     const page = await newE2EPage();
     await page.setContent('<va-button text="Edit" secondary uswds></va-button>');
-    const button = await page.find('va-button >>> button');
-    expect((await button.getComputedStyle()).backgroundColor).toEqual(
-      'rgb(255, 255, 255)',
-    );
+    const button = await page.findAll("va-button >>> .usa-button--outline");
+    expect(button.length).toBe(1);
   });
 
   it('uswds v3 renders a big button variant', async () => {
