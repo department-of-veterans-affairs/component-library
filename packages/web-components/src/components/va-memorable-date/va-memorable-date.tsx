@@ -8,7 +8,6 @@ import {
   h,
   Element,
   Fragment,
-  State,
 } from '@stencil/core';
 
 import {
@@ -203,20 +202,6 @@ export class VaMemorableDate {
     i18next.off('languageChanged');
   }
   
-  @State() options: Array<Node>;
-
-  private populateOptions() {
-    this.options = months.map(
-      (month) => {
-        return (
-          <option value={month.value} key={month.value}>
-          {month.label()}
-          </option>
-        );
-      },
-    );
-  }
-
   render() {
     const {
       required,
@@ -236,11 +221,6 @@ export class VaMemorableDate {
     const describedbyIds = ['dateHint', hint ? 'hint' : '']
       .filter(Boolean)
       .join(' ');
-      
-    this.populateOptions();
-
-
-
 
     const hintText = monthSelect ? i18next.t('date-hint-with-select') : i18next.t('date-hint');
 
@@ -260,7 +240,10 @@ export class VaMemorableDate {
           class='usa-form-group--month-select'
           reflectInputError={error ? true : false}
         >
-          {this.options}
+        {months &&
+          months.map(month => (
+            <option value={month.value}>{month.label}</option>
+          ))}
         </va-select>
       </div>
       : <div class="usa-form-group usa-form-group--month">
