@@ -16,18 +16,18 @@ const maxMonths = 12;
 const minMonths = 1;
 
 export const months = [
-  { label: 'january', value: 1 },
-  { label: 'february', value: 2 },
-  { label: 'march', value: 3 },
-  { label: 'april', value: 4 },
-  { label: 'may', value: 5 },
-  { label: 'june', value: 6 },
-  { label: 'july', value: 7 },
-  { label: 'august', value: 8 },
-  { label: 'september', value: 9 },
-  { label: 'october', value: 10 },
-  { label: 'november', value: 11 },
-  { label: 'december', value: 12 },
+  { label: 'January', value: 1 },
+  { label: 'February', value: 2 },
+  { label: 'March', value: 3 },
+  { label: 'April', value: 4 },
+  { label: 'May', value: 5 },
+  { label: 'June', value: 6 },
+  { label: 'July', value: 7 },
+  { label: 'August', value: 8 },
+  { label: 'September', value: 9 },
+  { label: 'October', value: 10 },
+  { label: 'November', value: 11 },
+  { label: 'December', value: 12 },
 ];
 
 /* eslint-disable i18next/no-literal-string */
