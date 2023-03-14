@@ -144,9 +144,9 @@ CustomValidation.args = {
   value: '2022-04-19',
 };
 
-export const Internationalization = I18nTemplate.bind(null);
-Internationalization.args = {
-  ...defaultArgs,
-  error: 'Error Message Example',
-  required: true,
-};
+// export const Internationalization = I18nTemplate.bind(null);
+// Internationalization.args = {
+//   ...defaultArgs,
+//   error: 'Error Message Example',
+//   required: true,
+// };
