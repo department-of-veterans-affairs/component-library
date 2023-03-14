@@ -73,11 +73,6 @@ export class VaButton {
   @Prop() uswds?: boolean = false;
 
   /**
-   * If `true`, the button will display in an outline style. Available when uswds is true.
-   */
-  @Prop() outline?: boolean = false;
-
-  /**
    * The event used to track usage of the component.
    */
   @Event({
@@ -133,7 +128,6 @@ export class VaButton {
       label,
       submit,
       secondary,
-      outline,
       big,
       uswds
     } = this;
@@ -145,9 +139,8 @@ export class VaButton {
     if (uswds) {
       const buttonClass = classnames({
         'usa-button': true,
-        'usa-button--secondary': secondary,
         'usa-button--big': big,
-        'usa-button--outline': back || outline,
+        'usa-button--outline': back || secondary,
       });
 
       return (

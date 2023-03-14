@@ -215,7 +215,7 @@ describe('va-button', () => {
     await page.setContent('<va-button text="Edit" secondary uswds></va-button>');
     const button = await page.find('va-button >>> button');
     expect((await button.getComputedStyle()).backgroundColor).toEqual(
-      'rgb(216, 57, 51)',
+      'rgb(255, 255, 255)',
     );
   });
 
@@ -384,20 +384,5 @@ describe('va-button', () => {
 
     const button = await page.find('va-button >>> button');
     expect(button.getAttribute('aria-label')).toEqual('Edit dependent');
-  });
-
-  it(`uswds v3 displays in outline style when outline prop is set`, async () => {
-    const page = await newE2EPage();
-    await page.setContent('<va-button uswds text="Edit" outline></va-button>');
-    const element = await page.find('va-button');
-    expect(element).toEqualHtml(`
-    <va-button class="hydrated" outline="" text="Edit" uswds="">
-      <mock:shadow-root>
-        <button class="usa-button usa-button--outline" type="button" part="button">
-          Edit
-        </button>
-      </mock:shadow-root>
-    </va-button>
-    `);
   });
 });

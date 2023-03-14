@@ -172,10 +172,6 @@ export namespace Components {
          */
         "label"?: string;
         /**
-          * If `true`, the button will display in an outline style. Available when uswds is true.
-         */
-        "outline"?: boolean;
-        /**
           * If `true`, the button will use the secondary variant.
          */
         "secondary"?: boolean;
@@ -1552,10 +1548,6 @@ declare namespace LocalJSX {
           * The event used to track usage of the component.
          */
         "onComponent-library-analytics"?: (event: VaButtonCustomEvent<any>) => void;
-        /**
-          * If `true`, the button will display in an outline style. Available when uswds is true.
-         */
-        "outline"?: boolean;
         /**
           * If `true`, the button will use the secondary variant.
          */
