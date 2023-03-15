@@ -195,7 +195,7 @@ describe('va-select', () => {
           <label class="usa-label" for="options" part="label">
             A label
           </label>
-          <span id="usa-error-message" role="alert"></span>
+          <span id="input-error-message" role="alert"></span>
           <slot></slot>
           <select id="options" part="select" aria-invalid="false" class="usa-select">
             <option value=""></option>
