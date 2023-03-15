@@ -117,6 +117,27 @@
 
 .usa-select {
   background-size: rem-override(1.25rem);
+  background-position: right rem-override(0.5rem) center;
+}
+
+.usa-memorable-date .usa-form-group {
+  margin-top: 0px;
+}
+
+.usa-form-group--day, .usa-form-group--month, .usa-form-group--year {
+  margin-right: rem-override(1rem);
+}
+
+.usa-form-group--day-input, .usa-form-group--month-input {
+  width: rem-override(3rem);
+}
+
+.usa-form-group--year-input {
+  width: rem-override(4.5rem);
+}
+
+.usa-form-group--month-select {
+  width: rem-override(15rem);
 }
 
 .usa-button {

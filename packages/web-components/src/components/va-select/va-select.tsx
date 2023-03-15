@@ -59,6 +59,11 @@ export class VaSelect {
   @Prop() error?: string;
 
   /**
+   * Whether or not to add usa-input--error as class if error message is outside of component
+   */
+  @Prop() reflectInputError?: boolean = false;
+
+  /**
    * Whether or not `aria-invalid` will be set on the inner select. Useful when
    * composing the component into something larger, like a date component.
    */
@@ -72,7 +77,7 @@ export class VaSelect {
   /**
    * Whether or not the component will use USWDS v3 styling.
    */
-  @Prop() uswds?: boolean = false;
+  @Prop({reflect: true}) uswds?: boolean = false;
 
   /**
    * Optional hint text.
@@ -160,7 +165,7 @@ export class VaSelect {
   }
 
   render() {
-    const { error, invalid, label, required, name, hint, uswds } = this;
+    const { error, reflectInputError, invalid, label, required, name, hint, uswds } = this;
 
     if (uswds) {
       const labelClass = classnames({
@@ -169,7 +174,7 @@ export class VaSelect {
       });
       const selectClass = classnames({
         'usa-select': true,
-        'usa-input--error': error,
+        'usa-input--error': error || reflectInputError,
       });
       return (
         <Host>
@@ -180,7 +185,7 @@ export class VaSelect {
             </label>
           )}
           {hint && <span class="usa-hint">{hint}</span>}
-          <span id="usa-error-message" role="alert">
+          <span id="input-error-message" role="alert">
             {error && (
               <Fragment>
                 <span class="usa-sr-only">{i18next.t('error')}</span> 
@@ -200,7 +205,7 @@ export class VaSelect {
             onChange={e => this.handleChange(e)}
             part="select"
           >
-            <option value="" selected>{i18next.t('select')}</option>
+            <option key="0" value="" selected>{i18next.t('select')}</option>
             {this.options}
           </select>
         </Host>

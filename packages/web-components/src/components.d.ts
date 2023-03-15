@@ -448,6 +448,10 @@ export namespace Components {
          */
         "label": string;
         /**
+          * Whether or not to use the month as an input or select.
+         */
+        "monthSelect"?: boolean;
+        /**
           * Used to create unique name attributes for each input.
          */
         "name": string;
@@ -455,6 +459,10 @@ export namespace Components {
           * Render marker indicating field is required.
          */
         "required"?: boolean;
+        /**
+          * Whether or not the component will use USWDS v3 styling.
+         */
+        "uswds"?: boolean;
         /**
           * Set the default date value must be in YYYY-MM-DD format.
          */
@@ -774,6 +782,10 @@ export namespace Components {
           * Name attribute for the select field.
          */
         "name": string;
+        /**
+          * Whether or not to add usa-input--error as class if error message is outside of component
+         */
+        "reflectInputError"?: boolean;
         /**
           * Whether or not this is a required field.
          */
@@ -1877,6 +1889,10 @@ declare namespace LocalJSX {
          */
         "label": string;
         /**
+          * Whether or not to use the month as an input or select.
+         */
+        "monthSelect"?: boolean;
+        /**
           * Used to create unique name attributes for each input.
          */
         "name": string;
@@ -1896,6 +1912,10 @@ declare namespace LocalJSX {
           * Render marker indicating field is required.
          */
         "required"?: boolean;
+        /**
+          * Whether or not the component will use USWDS v3 styling.
+         */
+        "uswds"?: boolean;
         /**
           * Set the default date value must be in YYYY-MM-DD format.
          */
@@ -2299,6 +2319,10 @@ declare namespace LocalJSX {
           * The event emitted when the selected value changes
          */
         "onVaSelect"?: (event: VaSelectCustomEvent<any>) => void;
+        /**
+          * Whether or not to add usa-input--error as class if error message is outside of component
+         */
+        "reflectInputError"?: boolean;
         /**
           * Whether or not this is a required field.
          */
