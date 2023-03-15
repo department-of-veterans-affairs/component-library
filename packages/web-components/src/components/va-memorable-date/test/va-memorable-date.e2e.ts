@@ -1298,40 +1298,40 @@ describe('va-memorable-date', () => {
             <div class="usa-form-group usa-form-group--month usa-form-group--select">
               <va-select aria-describedby="dateHint" class="hydrated usa-form-group--month-select" uswds="">
                 <option value="1">
-                  january
+                  January
                 </option>
                 <option value="2">
-                  february
+                  February
                 </option>
                 <option value="3">
-                  march
+                  March
                 </option>
                 <option value="4">
-                  april
+                  April
                 </option>
                 <option value="5">
-                  may
+                  May
                 </option>
                 <option value="6">
-                  june
+                  June
                 </option>
                 <option value="7">
-                  july
+                  July
                 </option>
                 <option value="8">
-                  august
+                  August
                 </option>
                 <option value="9">
-                  september
+                  September
                 </option>
                 <option value="10">
-                  october
+                  October
                 </option>
                 <option value="11">
-                  november
+                  November
                 </option>
                 <option value="12">
-                  december
+                  December
                 </option>
               </va-select>
             </div>
@@ -1386,40 +1386,40 @@ describe('va-memorable-date', () => {
             <div class="usa-form-group usa-form-group--month usa-form-group--select">
               <va-select aria-describedby="dateHint hint" class="hydrated usa-form-group--month-select" uswds="">
                 <option value="1">
-                  january
+                  January
                 </option>
                 <option value="2">
-                  february
+                  February
                 </option>
                 <option value="3">
-                  march
+                  March
                 </option>
                 <option value="4">
-                  april
+                  April
                 </option>
                 <option value="5">
-                  may
+                  May
                 </option>
                 <option value="6">
-                  june
+                  June
                 </option>
                 <option value="7">
-                  july
+                  July
                 </option>
                 <option value="8">
-                  august
+                  August
                 </option>
                 <option value="9">
-                  september
+                  September
                 </option>
                 <option value="10">
-                  october
+                  October
                 </option>
                 <option value="11">
-                  november
+                  November
                 </option>
                 <option value="12">
-                  december
+                  December
                 </option>
               </va-select>
             </div>
