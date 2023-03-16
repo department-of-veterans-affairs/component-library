@@ -143,3 +143,15 @@
 .usa-form-group--month-select {
   width: rem-override(15rem);
 }
+
+.usa-button {
+  font-size: rem-override(1.06rem);
+  border-radius: rem-override(0.25rem);
+  margin-right: rem-override(0.5rem);
+  padding: rem-override(0.75rem) rem-override(1.25rem);
+  &--big {
+    border-radius: rem-override(0.25rem);
+    font-size: rem-override(1.46rem);
+    padding: rem-override(1rem) rem-override(1.5rem);
+  }
+}
