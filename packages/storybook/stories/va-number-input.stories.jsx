@@ -33,6 +33,7 @@ const defaultArgs = {
   'min': undefined,
   'max': undefined,
   hint: null,
+  'currency': false,
 };
 
 const vaNumberInput = args => {
@@ -47,6 +48,7 @@ const vaNumberInput = args => {
     min,
     max,
     hint,
+    currency,
     ...rest
   } = args;
   return (
@@ -63,6 +65,7 @@ const vaNumberInput = args => {
       hint={hint}
       onInput={e => console.log('input event value:', e.target.value)}
       onBlur={e => console.log('blur event', e)}
+      currency={currency}
     />
   )
 }
@@ -116,3 +119,9 @@ Internationalization.args = {
   error: 'There has been a problem',
   required: true,
 };
+
+export const WithCurrency = Template.bind(null);
+WithCurrency.args = {
+  ...defaultArgs,
+  currency: true
+}

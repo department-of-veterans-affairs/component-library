@@ -166,4 +166,11 @@ describe('va-number-input', () => {
       expect(inputEl.getAttribute('inputmode')).toBe(inputMode);
     }
   });
+
+  it('renders a "$" if currency flag set to true', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-number-input currency />');
+    const currencyTextElement = await page.find('va-number-input >>> div > span');
+    expect(currencyTextElement.innerText).toContain('$');
+  });
 });
