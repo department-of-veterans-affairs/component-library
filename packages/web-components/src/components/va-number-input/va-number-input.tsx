@@ -83,7 +83,7 @@ export class VaNumberInput {
   @Prop({ mutable: true, reflect: true }) value?: string;
 
   /**
-   * Is this input used for a currency value?
+   * Whether this component will be used to accept a currency value.
    */
   @Prop() currency?: boolean = false;
 

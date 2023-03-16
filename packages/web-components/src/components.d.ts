@@ -509,7 +509,7 @@ export namespace Components {
     }
     interface VaNumberInput {
         /**
-          * Is this input used for a currency value?
+          * Whether this component will be used to accept a currency value.
          */
         "currency"?: boolean;
         /**
@@ -1982,7 +1982,7 @@ declare namespace LocalJSX {
     }
     interface VaNumberInput {
         /**
-          * Is this input used for a currency value?
+          * Whether this component will be used to accept a currency value.
          */
         "currency"?: boolean;
         /**
