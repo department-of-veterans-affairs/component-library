@@ -11,3 +11,18 @@ input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
+
+:host > div {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+:host > div > span {
+  position: absolute;
+  left: 1rem;
+}
+
+:host > div > input.currency-input {
+  padding-left: 2.5rem;
+}

@@ -509,6 +509,10 @@ export namespace Components {
     }
     interface VaNumberInput {
         /**
+          * Is this input used for a currency value?
+         */
+        "currency"?: boolean;
+        /**
           * Emit component-library-analytics events on the blur event.
          */
         "enableAnalytics"?: boolean;
@@ -1977,6 +1981,10 @@ declare namespace LocalJSX {
         "visible"?: boolean;
     }
     interface VaNumberInput {
+        /**
+          * Is this input used for a currency value?
+         */
+        "currency"?: boolean;
         /**
           * Emit component-library-analytics events on the blur event.
          */
