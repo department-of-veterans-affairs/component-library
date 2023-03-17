@@ -1,0 +1,77 @@
+@forward 'settings';
+
+@use 'uswds-helpers/src/styles/usa-sr-only';
+@use 'usa-label/src/styles/usa-label';
+@use 'usa-input/src/styles/usa-input';
+@use 'usa-error-message/src/styles/usa-error-message';
+@use 'usa-hint/src/styles/usa-hint';
+@use 'usa-textarea/src/styles/usa-textarea';
+
+@import '../../mixins/uswds-error-border.scss';
+@import '../../global/formation_overrides';
+
+:host {
+  color: var(--color-base);
+  display: block;
+  font-family: var(--font-source-sans);
+}
+
+:host(:focus) {
+  outline: none !important;
+}
+
+:host([uswds]) input:not([disabled]):focus {
+  outline: 2px solid var(--color-gold-light);
+  outline-offset: 2px;
+}
+
+input {
+  box-sizing: border-box;
+}
+
+input.usa-input {
+  color: var(--color-base);
+}
+
+
+
+/** Original Component Style **/
+
+@import '../../mixins/accessibility.css';
+@import '../../mixins/focusable.css';
+@import '../../mixins/form-field-error.css';
+@import '../../mixins/hint-text.css';
+
+:host(:not([uswds])) {
+  display: block;
+  resize: both;
+}
+
+:host(:not([uswds])) label {
+  display: block;
+  max-width: 46rem;
+  margin-top: 3rem;
+}
+
+span.required {
+  color: var(--color-secondary-dark);
+  margin-left: 0.4rem;
+}
+
+:host(:not([uswds])) textarea {
+  font-family: var(--font-source-sans);
+  font-size: 16px;
+  line-height: 1.3;
+  display: block;
+  min-height: 5.2rem;
+  height: 16rem;
+  max-width: 48rem;
+  width: 100%;
+  padding: 1.2rem;
+  margin: 0.4rem 0;
+  resize: inherit;
+}
+
+:host([error]:not([error='']):host(:not([uswds]))) textarea {
+  padding-right: 0.7rem;
+}
