@@ -15,7 +15,6 @@ import Modal from './Modal';
 import OMBInfo from './OMBInfo';
 import Pagination from './Pagination';
 import ProgressButton from './ProgressButton';
-import RadioButtons from './RadioButtons';
 import Select from './Select';
 import SystemDownView from './SystemDownView';
 import Table from './Table';
@@ -48,7 +47,6 @@ export {
   OMBInfo,
   Pagination,
   ProgressButton,
-  RadioButtons,
   Select,
   SystemDownView,
   Table,
