@@ -6,7 +6,14 @@
 
 :host {
   display: inline-block;
+  --vads-c-button-sizing-height: auto;
+  --vads-c-button-sizing-width: auto;
+  --vads-c-button-margin-top: 0.5em;
+  --vads-c-button-margin-right: 0.5em;
+  --vads-c-button-margin-bottom: 0.5em;
+  --vads-c-button-margin-left: 0;
 }
+
 :host([disabled]:not([disabled='false'])) button {
   pointer-events: none;
 }
@@ -22,11 +29,14 @@
   align-items: center;
   background-color: var(--color-primary);
   border-radius: 5px;
-  color: var(--color-white);
+  color: var( --vads-c-button-font-color, var(--color-white));
   display: flex;
   font-size: 1.6rem;
   justify-content: center;
-  margin: 0.5em 0.5em 0.5em 0;
+  margin: var(--vads-c-button-margin-top, 0.5em) var(--vads-c-button-margin-right, 0.5em) var(--vads-c-button-margin-bottom, 0.5em) var(--vads-c-button-margin-left, 0);
+  width: var(--vads-c-button-sizing-width, auto);
+  height: var(--vads-c-button-sizing-height, auto);
+  min-width: var(--vads-c-button-sizing-minwidth, auto);
 }
 
 :host(:not([uswds])) button:hover,

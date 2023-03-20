@@ -14,6 +14,12 @@ import classnames from 'classnames';
  * @nativeHandler onClick
  * @maturityCategory caution
  * @maturityLevel candidate
+ * @customProperty --vads-c-button-sizing-height
+ * @customProperty --vads-c-button-sizing-width
+ * @customProperty --vads-c-button-margin-top
+ * @customProperty --vads-c-button-margin-right
+ * @customProperty --vads-c-button-margin-bottom
+  * @customProperty --vads-c-button-margin-left
  */
 
 @Component({
@@ -149,8 +155,7 @@ export class VaButton {
             class={buttonClass}
             aria-disabled={ariaDisabled}
             aria-label={label}
-            type={type}
-            part="button">
+            type={type}>
               {back && !_continue && (
                   <i aria-hidden="true" class="fa fa-angles-left" />
                 )}
@@ -168,7 +173,6 @@ export class VaButton {
             aria-disabled={ariaDisabled}
             aria-label={label}
             type={type}
-            part="button"
           >
             {back && !_continue && (
               <i aria-hidden="true" class="fa fa-angles-left" />

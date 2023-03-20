@@ -42,3 +42,16 @@ a.sbdocs-a:hover {
 button {
   padding: 10px 20px !important;
 }
+
+.my-custom-class {
+  // height: 4.2rem;
+  // width: fit-content;
+  // min-width: 78px;
+  // margin: 3px;
+  --vads-c-button-sizing-height: 4.2rem;
+  --vads-c-button-sizing-width: fit-content;
+  --vads-c-button-margin-top: 3px;
+  --vads-c-button-margin-right: 3px;
+  --vads-c-button-margin-bottom: 3px;
+  --vads-c-button-margin-left: 3px;
+}

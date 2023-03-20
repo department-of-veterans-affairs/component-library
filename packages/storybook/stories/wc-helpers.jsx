@@ -227,6 +227,44 @@ function NativeHandlers({ docsTags = [] }) {
   );
 }
 
+/**
+ * This function looks for the `@customProperties` doc tag and renders
+ * them in a list. Documentation:
+ * - https://stenciljs.com/docs/docs-json#custom-jsdocs-tags
+ */
+function CustomProperties({ docsTags = [] }) {
+  const handlers = getDocsTagValue('customProperty', docsTags);
+
+  if (!handlers.length) return null;
+
+  // const properties = handlers.join(', ');
+
+  return (
+    <div className="vads-u-margin-top--2">
+      This component uses the following custom styling properties:{' '}
+      {/* <strong>{properties}</strong>.  */}
+
+    <ul>
+      {handlers.map((handler, index) => {
+          return (
+            <li key={index}>
+              <strong>{handler}</strong>
+            </li>
+          );
+        }
+      )}
+    </ul>
+
+      Please see our documentation on{' '}
+      <a href="https://design.va.gov/about/developers#custom-properties">
+        how to use custom properties for customizing component styles
+      </a>
+      .
+    </div>
+  );
+}
+
+
 function CanvasLink() {
   // We're inside an iframe on the Docs page, so we need to get the parent
   const canvasLink = window.parent.location.href.replace('docs', 'story');
@@ -270,6 +308,7 @@ export function StoryDocs({ componentName, data, children }) {
       <CustomEventsDescription data={componentData} />
       <Description markdown={data?.docs} />
       <NativeHandlers docsTags={data?.docsTags} />
+      <CustomProperties docsTags={data?.docsTags} />
       <Primary />
       <ArgsTable story={PRIMARY_STORY} />
       <>{children}</>

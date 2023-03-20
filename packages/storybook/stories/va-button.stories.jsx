@@ -53,11 +53,44 @@ const Template = ({
   );
 };
 
+const CustomStyle = ({
+  back,
+  big,
+  'continue': _continue,
+  'disable-analytics': disableAnalytics,
+  disabled,
+  label,
+  secondary,
+  submit,
+  text,
+}) => {
+  return (
+    <va-button
+      class="my-custom-class"
+      back={back}
+      big={big}
+      continue={_continue}
+      disable-analytics={disableAnalytics}
+      disabled={disabled}
+      label={label}
+      secondary={secondary}
+      submit={submit}
+      text={text}
+      onClick={e => console.log(e)}
+    />
+  );
+};
+
 export const Primary = Template.bind(null);
 Primary.args = {
   ...defaultArgs,
 };
 Primary.argTypes = propStructure(buttonDocs);
+
+export const CustomProperties = CustomStyle.bind(null);
+CustomProperties.args = {
+  ...defaultArgs,
+};
 
 export const Secondary = Template.bind(null);
 Secondary.args = {
