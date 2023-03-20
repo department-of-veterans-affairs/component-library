@@ -215,7 +215,7 @@ describe('va-textarea', () => {
           </label>
           <slot></slot>
           <span id="input-error-message" role="alert"></span>
-          <textarea id="input-type-textarea" part="textarea" aria-invalid="false" class="usa-textarea"></textarea>
+          <textarea id="input-type-textarea" part="input-type-textarea" aria-invalid="false" class="usa-textarea"></textarea>
         </mock:shadow-root>
       </va-textarea>
     `);

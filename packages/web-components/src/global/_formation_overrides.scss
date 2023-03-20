@@ -143,9 +143,7 @@
 
 .usa-textarea {
   height: rem-override(10rem);
-  margin-top: rem-override(0.5rem);
-  max-width: rem-override(30rem);
-  padding: rem-override(0.5rem);
+  resize: inherit;
 }
 
 .usa-button {

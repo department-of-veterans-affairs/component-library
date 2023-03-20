@@ -189,7 +189,7 @@ export class VaTextarea {
             name={name}
             maxLength={maxlength}
             value={value}
-            part="textarea"
+            part="input-type-textarea"
           />
           {maxlength && value?.length >= maxlength && (
             <small>{i18next.t('max-chars', { length: maxlength })}</small>
