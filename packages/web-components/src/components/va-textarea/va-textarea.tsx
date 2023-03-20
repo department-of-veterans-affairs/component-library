@@ -158,7 +158,7 @@ export class VaTextarea {
       return (
         <Host>
           {label && (
-            <label htmlFor="textarea" class={labelClass} part="label">
+            <label htmlFor="input-type-textarea" class={labelClass} part="label">
               {label}
               {required && (
                 <span class="usa-label--required">
@@ -184,7 +184,7 @@ export class VaTextarea {
             aria-invalid={error ? 'true' : 'false'}
             onInput={this.handleInput}
             onBlur={this.handleBlur}
-            id="textarea"
+            id="input-type-textarea"
             placeholder={placeholder}
             name={name}
             maxLength={maxlength}
