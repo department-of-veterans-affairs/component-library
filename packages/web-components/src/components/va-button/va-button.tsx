@@ -19,7 +19,7 @@ import classnames from 'classnames';
  * @customProperty --vads-c-button-margin-top
  * @customProperty --vads-c-button-margin-right
  * @customProperty --vads-c-button-margin-bottom
-  * @customProperty --vads-c-button-margin-left
+ * @customProperty --vads-c-button-margin-left
  */
 
 @Component({
