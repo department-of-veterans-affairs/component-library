@@ -10,6 +10,10 @@
 @import '../../mixins/uswds-error-border.scss';
 @import '../../global/formation_overrides';
 
+.usa-textarea {
+  resize: inherit;
+}
+
 :host {
   color: var(--color-base);
   display: block;
