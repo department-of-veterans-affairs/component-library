@@ -359,4 +359,46 @@ describe('va-search-input', () => {
 
     expect(suggestions.length).toEqual(5);
   });
+
+  it('fires an analytics event when button is clicked', async () => {
+    const page = await newE2EPage();
+    await page.setContent(
+      '<va-search-input label="Search" value="benefits""></va-search-input>',
+    );
+
+    const analyticsSpy = await page.spyOnEvent('component-library-analytics');
+
+    const button = await page.find('va-search-input >>> button');
+    await button.click();
+
+    expect(analyticsSpy).toHaveReceivedEventDetail({
+      action: 'click',
+      componentName: 'va-search-input',
+      details: {
+        value: 'benefits',
+      },
+    });
+  });
+
+  it('fires an analytics event on blur', async () => {
+    const page = await newE2EPage();
+    await page.setContent(
+      '<va-search-input label="Search" value="benefits""></va-search-input>',
+    );
+
+    const analyticsSpy = await page.spyOnEvent('component-library-analytics');
+
+    const component = await page.find('va-search-input');
+    await component.press('Tab'); // on the input
+    await component.press('Tab'); // on the button
+    await component.press('Tab'); // off the component
+
+    expect(analyticsSpy).toHaveReceivedEventDetail({
+      action: 'blur',
+      componentName: 'va-search-input',
+      details: {
+        value: 'benefits',
+      },
+    });
+  });
 });
