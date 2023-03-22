@@ -1068,6 +1068,10 @@ export interface VaRadioOptionCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLVaRadioOptionElement;
 }
+export interface VaSearchInputCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLVaSearchInputElement;
+}
 export interface VaSegmentedProgressBarCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLVaSegmentedProgressBarElement;
@@ -2255,6 +2259,10 @@ declare namespace LocalJSX {
           * The aria-label for search input and button. Default is 'Search'.
          */
         "label"?: string;
+        /**
+          * The event used to track usage of the component. This is emitted when the search button is clicked and when blur occurs on the input field.
+         */
+        "onComponent-library-analytics"?: (event: VaSearchInputCustomEvent<any>) => void;
         /**
           * An array of strings containing suggestions to be displayed in listbox. This component displays up to 5 suggestions.
          */
