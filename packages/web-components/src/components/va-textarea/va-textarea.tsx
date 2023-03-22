@@ -10,6 +10,7 @@ import {
   h,
   Fragment,
 } from '@stencil/core';
+import classnames from 'classnames';
 import i18next from 'i18next';
 import { consoleDevError } from '../../utils/utils';
 
@@ -31,7 +32,7 @@ if (Build.isTesting) {
 
 @Component({
   tag: 'va-textarea',
-  styleUrl: 'va-textarea.css',
+  styleUrl: 'va-textarea.scss',
   shadow: true,
 })
 export class VaTextarea {
@@ -82,6 +83,11 @@ export class VaTextarea {
    * Emit component-library-analytics events on the blur event.
    */
   @Prop() enableAnalytics?: boolean = false;
+
+  /**
+   * Whether or not the component will use USWDS v3 styling.
+   */
+  @Prop() uswds?: boolean = false;
 
   /**
    * The event used to track usage of the component. This is emitted when
@@ -137,40 +143,91 @@ export class VaTextarea {
   }
 
   render() {
-    const { label, error, placeholder, name, required, value, hint } = this;
+    const { label, error, placeholder, name, required, value, hint, uswds } = this;
     const maxlength = this.getMaxlength();
 
-    return (
-      <Host>
-        <label htmlFor="textarea">
-          {label}
-          {required && <span class="required">{i18next.t('required')}</span>}
-        </label>
-        {hint && <span class="hint-text">{hint}</span>}
-        <span id="error-message" role="alert">
-          {error && (
-            <Fragment>
-              <span class="sr-only">{i18next.t('error')}</span> {error}
-            </Fragment>
+    if (uswds) {
+      const labelClass = classnames({
+        'usa-label': true,
+        'usa-label--error': error,
+      });
+      const inputClass = classnames({
+        'usa-textarea': true,
+        'usa-input--error': error,
+      });
+      return (
+        <Host>
+          {label && (
+            <label htmlFor="input-type-textarea" class={labelClass} part="label">
+              {label}
+              {required && (
+                <span class="usa-label--required">
+                  {' '}
+                  {i18next.t('required')}
+                </span>
+              )}
+            </label>
           )}
-        </span>
-
-        <textarea
-          aria-describedby={error ? 'error-message' : undefined}
-          aria-invalid={error ? 'true' : 'false'}
-          onInput={this.handleInput}
-          onBlur={this.handleBlur}
-          id="textarea"
-          placeholder={placeholder}
-          name={name}
-          maxLength={maxlength}
-          value={value}
-          part="textarea"
-        />
-        {maxlength && value?.length >= maxlength && (
-          <small>{i18next.t('max-chars', { length: maxlength })}</small>
-        )}
-      </Host>
-    );
+          {hint && <span class="usa-hint">{hint}</span>}
+          <slot></slot>
+          <span id="input-error-message" role="alert">
+            {error && (
+              <Fragment>
+                <span class="usa-sr-only">{i18next.t('error')}</span>
+                <span class="usa-error-message">{error}</span>
+              </Fragment>
+            )}
+          </span>
+          <textarea
+            class={inputClass}
+            aria-describedby={error ? 'error-message' : undefined}
+            aria-invalid={error ? 'true' : 'false'}
+            onInput={this.handleInput}
+            onBlur={this.handleBlur}
+            id="input-type-textarea"
+            placeholder={placeholder}
+            name={name}
+            maxLength={maxlength}
+            value={value}
+            part="input-type-textarea"
+          />
+          {maxlength && value?.length >= maxlength && (
+            <small>{i18next.t('max-chars', { length: maxlength })}</small>
+          )}
+        </Host>
+      );
+    } else {      
+      return (
+        <Host>
+          <label htmlFor="textarea">
+            {label}
+            {required && <span class="required">{i18next.t('required')}</span>}
+          </label>
+          {hint && <span class="hint-text">{hint}</span>}
+          <span id="error-message" role="alert">
+            {error && (
+              <Fragment>
+                <span class="sr-only">{i18next.t('error')}</span> {error}
+              </Fragment>
+            )}
+          </span>
+          <textarea
+            aria-describedby={error ? 'error-message' : undefined}
+            aria-invalid={error ? 'true' : 'false'}
+            onInput={this.handleInput}
+            onBlur={this.handleBlur}
+            id="textarea"
+            placeholder={placeholder}
+            name={name}
+            maxLength={maxlength}
+            value={value}
+            part="textarea"
+          />
+          {maxlength && value?.length >= maxlength && (
+            <small>{i18next.t('max-chars', { length: maxlength })}</small>
+          )}
+        </Host>
+      );
+    }
   }
 }

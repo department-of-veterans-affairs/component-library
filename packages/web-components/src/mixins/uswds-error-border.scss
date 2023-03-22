@@ -1,8 +1,9 @@
 @import 'variables';
+@import 'functions';
 
 :host([error][uswds]:not([error=''])) {
     border-left: 0.4rem solid $v3-color-error-dark; /* USWDS red-60v, $theme-color-error-dark */
-    padding-left: 1rem;
+    padding-left: rem-override(1rem);
     position: relative;
 }
 
