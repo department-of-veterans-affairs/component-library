@@ -6,7 +6,7 @@ const needHelpDocs = getWebComponentDocs('va-need-help');
 
 export default {
   title: 'Components/Need help?',
-  id: 'components/va-need-help',
+  id: 'components/form/va-need-help',
   parameters: {
     componentSubtitle: `va-need-help web component`,
     docs: {
