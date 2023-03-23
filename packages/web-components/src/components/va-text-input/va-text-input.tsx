@@ -1,4 +1,5 @@
 import {
+  Build,
   Component,
   Element,
   Prop,
@@ -11,7 +12,6 @@ import {
 } from '@stencil/core';
 import classnames from 'classnames';
 import i18next from 'i18next';
-import { Build } from '@stencil/core';
 import { consoleDevError } from '../../utils/utils';
 
 if (Build.isTesting) {
