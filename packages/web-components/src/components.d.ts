@@ -959,6 +959,10 @@ export namespace Components {
          */
         "required"?: boolean;
         /**
+          * Whether or not the component will use USWDS v3 styling.
+         */
+        "uswds"?: boolean;
+        /**
           * The value of the textarea
          */
         "value"?: string;
@@ -1067,6 +1071,10 @@ export interface VaRadioCustomEvent<T> extends CustomEvent<T> {
 export interface VaRadioOptionCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLVaRadioOptionElement;
+}
+export interface VaSearchInputCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLVaSearchInputElement;
 }
 export interface VaSegmentedProgressBarCustomEvent<T> extends CustomEvent<T> {
     detail: T;
@@ -2260,6 +2268,10 @@ declare namespace LocalJSX {
          */
         "label"?: string;
         /**
+          * The event used to track usage of the component. This is emitted when the search button is clicked and when blur occurs on the input field.
+         */
+        "onComponent-library-analytics"?: (event: VaSearchInputCustomEvent<any>) => void;
+        /**
           * An array of strings containing suggestions to be displayed in listbox. This component displays up to 5 suggestions.
          */
         "suggestions"?: any;
@@ -2511,6 +2523,10 @@ declare namespace LocalJSX {
           * Set the input to required and render the (Required) text.
          */
         "required"?: boolean;
+        /**
+          * Whether or not the component will use USWDS v3 styling.
+         */
+        "uswds"?: boolean;
         /**
           * The value of the textarea
          */
