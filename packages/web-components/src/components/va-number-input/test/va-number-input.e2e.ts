@@ -15,8 +15,10 @@ describe('va-number-input', () => {
             Hello, world
           </label>
           <span id="error-message" role="alert"></span>
-          <input id="inputField" type="number" aria-invalid="false" />
-        </mock:shadow-root>
+          <div>
+            <input id="inputField" type="number" aria-invalid="false" />
+          </div>
+          </mock:shadow-root>
       </va-number-input>
     `);
   });

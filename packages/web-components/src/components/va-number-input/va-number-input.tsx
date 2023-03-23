@@ -158,9 +158,10 @@ export class VaNumberInput {
         </span>
         <div>
           {/* eslint-disable-next-line i18next/no-literal-string */}
-          {currency && <span>$</span>}
+          {currency && <span id="symbol">$</span>}
           <input
             class={currency ? 'currency-input' : ''}
+            aria-labelledby={currency ? 'inputField symbol' : undefined}
             aria-describedby={error ? 'error-message' : undefined}
             aria-invalid={error ? 'true' : 'false'}
             id="inputField"
