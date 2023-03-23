@@ -1,0 +1,61 @@
+@forward 'settings';
+
+@use 'usa-button-group/src/styles/usa-button-group';
+
+@import '../../global/formation_overrides';
+
+:host {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Original Component Styles. */
+
+:host([continue]:not([continue='false']):not([uswds])) {
+  flex-direction: row;
+}
+
+:host(:not([uswds])) va-button::part(button) {
+  width: 280px;
+}
+
+:host([continue]:not([continue='false']):not([uswds])) va-button + va-button::part(button) {
+  margin-left: 12px;
+  margin-right: 0;
+}
+
+@media (min-width: 481px) {
+  :host(:not([uswds])) {
+    flex-direction: row;
+  }
+
+  :host(:not([uswds])) va-button + va-button::part(button) {
+    margin-left: 12px;
+    margin-right: 0;
+  }
+
+  :host(:not([uswds])) va-button::part(button) {
+    width: 210px;
+  }
+}
+
+@media (max-width: 481px) {
+  :host(:not([uswds])) {
+    width: 441px;
+  }
+
+  :host([continue]:not([continue='false']):not([uswds])) va-button::part(button) {
+    width: 210px;
+  }
+}
+
+@media (max-width: 320px) {
+  :host(:not([uswds])) {
+    margin: 0 auto;
+    width: 280px;
+  }
+
+  :host([continue]:not([continue='false']):not([uswds])) va-button::part(button) {
+    width: 130px;
+  }
+}

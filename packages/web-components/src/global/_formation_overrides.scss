@@ -156,3 +156,10 @@
     padding: rem-override(1rem) rem-override(1.5rem);
   }
 }
+
+.usa-button-group {
+  &__item {
+    margin: rem-override(0.25rem);
+  }
+  margin: 0px rem-override(-0.5rem);
+}
