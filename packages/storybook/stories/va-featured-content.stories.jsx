@@ -14,8 +14,9 @@ export default {
     },
   },
 };
+const defaultArgs = {};
 
-const Template = () => (
+const Template = ({}) => (
   <va-featured-content>
     <h3 slot="headline">
       If I'm a Veteran, can I get VR&E benefits and services?
