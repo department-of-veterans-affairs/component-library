@@ -183,6 +183,10 @@ export namespace Components {
           * The text displayed on the button. If `continue` or `back` is true, the value of text is ignored.
          */
         "text"?: string;
+        /**
+          * Whether or not the component will use USWDS v3 styling.
+         */
+        "uswds"?: boolean;
     }
     interface VaButtonPair {
         /**
@@ -212,6 +216,10 @@ export namespace Components {
     }
     interface VaCheckbox {
         /**
+          * Description of the option displayed below the checkbox label. Available when uswds is true.
+         */
+        "checkboxDescription"?: string;
+        /**
           * Whether the checkbox is checked or not.  Note: Because this isn't reflective, vaCheckbox.getAttribute('checked') will not reflect the correct value. Use the property vaCheckbox.checked instead.
          */
         "checked"?: boolean;
@@ -219,6 +227,10 @@ export namespace Components {
           * The description to render. If this prop exists, va-checkbox will render it instead of the named slot.
          */
         "description"?: string;
+        /**
+          * Whether or not the checkbox option is disabled. Available when uswds is true.
+         */
+        "disabled"?: boolean;
         /**
           * True if the analytics event should fire.
          */
@@ -239,6 +251,14 @@ export namespace Components {
           * Set the input to required and render the (Required) text.
          */
         "required"?: boolean;
+        /**
+          * Whether or not the component will display as a tile. Available when uswds is true.
+         */
+        "tile"?: boolean;
+        /**
+          * Whether or not the component will use USWDS v3 styling.
+         */
+        "uswds"?: boolean;
     }
     interface VaCheckboxGroup {
         /**
@@ -261,6 +281,10 @@ export namespace Components {
           * Whether or not this input field is required.
          */
         "required"?: boolean;
+        /**
+          * Whether or not the component will use USWDS v3 styling.
+         */
+        "uswds"?: boolean;
     }
     interface VaDate {
         /**
@@ -412,6 +436,10 @@ export namespace Components {
           * The error message to render (if any) This prop should be leveraged to display any custom validations needed for this component
          */
         "error"?: string;
+        /**
+          * Hint text string
+         */
+        "hint"?: string;
         "invalidDay": boolean;
         "invalidMonth": boolean;
         "invalidYear": boolean;
@@ -420,6 +448,10 @@ export namespace Components {
          */
         "label": string;
         /**
+          * Whether or not to use the month as an input or select.
+         */
+        "monthSelect"?: boolean;
+        /**
           * Used to create unique name attributes for each input.
          */
         "name": string;
@@ -427,6 +459,10 @@ export namespace Components {
           * Render marker indicating field is required.
          */
         "required"?: boolean;
+        /**
+          * Whether or not the component will use USWDS v3 styling.
+         */
+        "uswds"?: boolean;
         /**
           * Set the default date value must be in YYYY-MM-DD format.
          */
@@ -471,6 +507,8 @@ export namespace Components {
          */
         "visible"?: boolean;
     }
+    interface VaNeedHelp {
+    }
     interface VaNumberInput {
         /**
           * Emit component-library-analytics events on the blur event.
@@ -512,6 +550,16 @@ export namespace Components {
           * The value for the input.
          */
         "value"?: string;
+    }
+    interface VaOfficialGovBanner {
+        /**
+          * If `true`, the component-library-analytics event is disabled.
+         */
+        "disableAnalytics"?: boolean;
+        /**
+          * Accepts a top level domain (TLD) value of either `gov` or `mil`. Default is `gov`.
+         */
+        "tld": string;
     }
     interface VaOmbInfo {
         /**
@@ -625,6 +673,10 @@ export namespace Components {
          */
         "label": string;
         /**
+          * Insert a header with defined level inside the label (legend)
+         */
+        "labelHeaderLevel"?: string;
+        /**
           * Whether or not this input field is required.
          */
         "required"?: boolean;
@@ -733,9 +785,17 @@ export namespace Components {
          */
         "name": string;
         /**
+          * Whether or not to add usa-input--error as class if error message is outside of component
+         */
+        "reflectInputError"?: boolean;
+        /**
           * Whether or not this is a required field.
          */
         "required"?: boolean;
+        /**
+          * Whether or not the component will use USWDS v3 styling.
+         */
+        "uswds"?: boolean;
         /**
           * Selected value (will get updated on select).
          */
@@ -827,6 +887,10 @@ export namespace Components {
          */
         "maxlength"?: number;
         /**
+          * An optional message that will be read by screen readers when the input is focused.
+         */
+        "messageAriaDescribedby"?: string;
+        /**
           * The minimum number of characters allowed in the input.
          */
         "minlength"?: number;
@@ -892,6 +956,10 @@ export namespace Components {
           * Set the input to required and render the (Required) text.
          */
         "required"?: boolean;
+        /**
+          * Whether or not the component will use USWDS v3 styling.
+         */
+        "uswds"?: boolean;
         /**
           * The value of the textarea
          */
@@ -970,6 +1038,10 @@ export interface VaNumberInputCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLVaNumberInputElement;
 }
+export interface VaOfficialGovBannerCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLVaOfficialGovBannerElement;
+}
 export interface VaOnThisPageCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLVaOnThisPageElement;
@@ -997,6 +1069,10 @@ export interface VaRadioCustomEvent<T> extends CustomEvent<T> {
 export interface VaRadioOptionCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLVaRadioOptionElement;
+}
+export interface VaSearchInputCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLVaSearchInputElement;
 }
 export interface VaSegmentedProgressBarCustomEvent<T> extends CustomEvent<T> {
     detail: T;
@@ -1133,11 +1209,23 @@ declare global {
         prototype: HTMLVaModalElement;
         new (): HTMLVaModalElement;
     };
+    interface HTMLVaNeedHelpElement extends Components.VaNeedHelp, HTMLStencilElement {
+    }
+    var HTMLVaNeedHelpElement: {
+        prototype: HTMLVaNeedHelpElement;
+        new (): HTMLVaNeedHelpElement;
+    };
     interface HTMLVaNumberInputElement extends Components.VaNumberInput, HTMLStencilElement {
     }
     var HTMLVaNumberInputElement: {
         prototype: HTMLVaNumberInputElement;
         new (): HTMLVaNumberInputElement;
+    };
+    interface HTMLVaOfficialGovBannerElement extends Components.VaOfficialGovBanner, HTMLStencilElement {
+    }
+    var HTMLVaOfficialGovBannerElement: {
+        prototype: HTMLVaOfficialGovBannerElement;
+        new (): HTMLVaOfficialGovBannerElement;
     };
     interface HTMLVaOmbInfoElement extends Components.VaOmbInfo, HTMLStencilElement {
     }
@@ -1261,7 +1349,9 @@ declare global {
         "va-loading-indicator": HTMLVaLoadingIndicatorElement;
         "va-memorable-date": HTMLVaMemorableDateElement;
         "va-modal": HTMLVaModalElement;
+        "va-need-help": HTMLVaNeedHelpElement;
         "va-number-input": HTMLVaNumberInputElement;
+        "va-official-gov-banner": HTMLVaOfficialGovBannerElement;
         "va-omb-info": HTMLVaOmbInfoElement;
         "va-on-this-page": HTMLVaOnThisPageElement;
         "va-pagination": HTMLVaPaginationElement;
@@ -1499,6 +1589,10 @@ declare namespace LocalJSX {
           * The text displayed on the button. If `continue` or `back` is true, the value of text is ignored.
          */
         "text"?: string;
+        /**
+          * Whether or not the component will use USWDS v3 styling.
+         */
+        "uswds"?: boolean;
     }
     interface VaButtonPair {
         /**
@@ -1540,6 +1634,10 @@ declare namespace LocalJSX {
     }
     interface VaCheckbox {
         /**
+          * Description of the option displayed below the checkbox label. Available when uswds is true.
+         */
+        "checkboxDescription"?: string;
+        /**
           * Whether the checkbox is checked or not.  Note: Because this isn't reflective, vaCheckbox.getAttribute('checked') will not reflect the correct value. Use the property vaCheckbox.checked instead.
          */
         "checked"?: boolean;
@@ -1547,6 +1645,10 @@ declare namespace LocalJSX {
           * The description to render. If this prop exists, va-checkbox will render it instead of the named slot.
          */
         "description"?: string;
+        /**
+          * Whether or not the checkbox option is disabled. Available when uswds is true.
+         */
+        "disabled"?: boolean;
         /**
           * True if the analytics event should fire.
          */
@@ -1575,6 +1677,14 @@ declare namespace LocalJSX {
           * Set the input to required and render the (Required) text.
          */
         "required"?: boolean;
+        /**
+          * Whether or not the component will display as a tile. Available when uswds is true.
+         */
+        "tile"?: boolean;
+        /**
+          * Whether or not the component will use USWDS v3 styling.
+         */
+        "uswds"?: boolean;
     }
     interface VaCheckboxGroup {
         /**
@@ -1601,6 +1711,10 @@ declare namespace LocalJSX {
           * Whether or not this input field is required.
          */
         "required"?: boolean;
+        /**
+          * Whether or not the component will use USWDS v3 styling.
+         */
+        "uswds"?: boolean;
     }
     interface VaDate {
         /**
@@ -1780,6 +1894,10 @@ declare namespace LocalJSX {
           * The error message to render (if any) This prop should be leveraged to display any custom validations needed for this component
          */
         "error"?: string;
+        /**
+          * Hint text string
+         */
+        "hint"?: string;
         "invalidDay"?: boolean;
         "invalidMonth"?: boolean;
         "invalidYear"?: boolean;
@@ -1787,6 +1905,10 @@ declare namespace LocalJSX {
           * Label for the field.
          */
         "label": string;
+        /**
+          * Whether or not to use the month as an input or select.
+         */
+        "monthSelect"?: boolean;
         /**
           * Used to create unique name attributes for each input.
          */
@@ -1807,6 +1929,10 @@ declare namespace LocalJSX {
           * Render marker indicating field is required.
          */
         "required"?: boolean;
+        /**
+          * Whether or not the component will use USWDS v3 styling.
+         */
+        "uswds"?: boolean;
         /**
           * Set the default date value must be in YYYY-MM-DD format.
          */
@@ -1867,6 +1993,8 @@ declare namespace LocalJSX {
          */
         "visible"?: boolean;
     }
+    interface VaNeedHelp {
+    }
     interface VaNumberInput {
         /**
           * Emit component-library-analytics events on the blur event.
@@ -1912,6 +2040,20 @@ declare namespace LocalJSX {
           * The value for the input.
          */
         "value"?: string;
+    }
+    interface VaOfficialGovBanner {
+        /**
+          * If `true`, the component-library-analytics event is disabled.
+         */
+        "disableAnalytics"?: boolean;
+        /**
+          * The event used to track usage of the component.
+         */
+        "onComponent-library-analytics"?: (event: VaOfficialGovBannerCustomEvent<any>) => void;
+        /**
+          * Accepts a top level domain (TLD) value of either `gov` or `mil`. Default is `gov`.
+         */
+        "tld"?: string;
     }
     interface VaOmbInfo {
         /**
@@ -2057,6 +2199,10 @@ declare namespace LocalJSX {
          */
         "label": string;
         /**
+          * Insert a header with defined level inside the label (legend)
+         */
+        "labelHeaderLevel"?: string;
+        /**
           * The event used to track usage of the component. This is emitted when a radio option is selected and enableAnalytics is true.
          */
         "onComponent-library-analytics"?: (event: VaRadioCustomEvent<any>) => void;
@@ -2124,6 +2270,10 @@ declare namespace LocalJSX {
           * The aria-label for search input and button. Default is 'Search'.
          */
         "label"?: string;
+        /**
+          * The event used to track usage of the component. This is emitted when the search button is clicked and when blur occurs on the input field.
+         */
+        "onComponent-library-analytics"?: (event: VaSearchInputCustomEvent<any>) => void;
         /**
           * An array of strings containing suggestions to be displayed in listbox. This component displays up to 5 suggestions.
          */
@@ -2193,9 +2343,17 @@ declare namespace LocalJSX {
          */
         "onVaSelect"?: (event: VaSelectCustomEvent<any>) => void;
         /**
+          * Whether or not to add usa-input--error as class if error message is outside of component
+         */
+        "reflectInputError"?: boolean;
+        /**
           * Whether or not this is a required field.
          */
         "required"?: boolean;
+        /**
+          * Whether or not the component will use USWDS v3 styling.
+         */
+        "uswds"?: boolean;
         /**
           * Selected value (will get updated on select).
          */
@@ -2291,6 +2449,10 @@ declare namespace LocalJSX {
          */
         "maxlength"?: number;
         /**
+          * An optional message that will be read by screen readers when the input is focused.
+         */
+        "messageAriaDescribedby"?: string;
+        /**
           * The minimum number of characters allowed in the input.
          */
         "minlength"?: number;
@@ -2365,6 +2527,10 @@ declare namespace LocalJSX {
          */
         "required"?: boolean;
         /**
+          * Whether or not the component will use USWDS v3 styling.
+         */
+        "uswds"?: boolean;
+        /**
           * The value of the textarea
          */
         "value"?: string;
@@ -2389,7 +2555,9 @@ declare namespace LocalJSX {
         "va-loading-indicator": VaLoadingIndicator;
         "va-memorable-date": VaMemorableDate;
         "va-modal": VaModal;
+        "va-need-help": VaNeedHelp;
         "va-number-input": VaNumberInput;
+        "va-official-gov-banner": VaOfficialGovBanner;
         "va-omb-info": VaOmbInfo;
         "va-on-this-page": VaOnThisPage;
         "va-pagination": VaPagination;
@@ -2432,7 +2600,9 @@ declare module "@stencil/core" {
             "va-loading-indicator": LocalJSX.VaLoadingIndicator & JSXBase.HTMLAttributes<HTMLVaLoadingIndicatorElement>;
             "va-memorable-date": LocalJSX.VaMemorableDate & JSXBase.HTMLAttributes<HTMLVaMemorableDateElement>;
             "va-modal": LocalJSX.VaModal & JSXBase.HTMLAttributes<HTMLVaModalElement>;
+            "va-need-help": LocalJSX.VaNeedHelp & JSXBase.HTMLAttributes<HTMLVaNeedHelpElement>;
             "va-number-input": LocalJSX.VaNumberInput & JSXBase.HTMLAttributes<HTMLVaNumberInputElement>;
+            "va-official-gov-banner": LocalJSX.VaOfficialGovBanner & JSXBase.HTMLAttributes<HTMLVaOfficialGovBannerElement>;
             "va-omb-info": LocalJSX.VaOmbInfo & JSXBase.HTMLAttributes<HTMLVaOmbInfoElement>;
             "va-on-this-page": LocalJSX.VaOnThisPage & JSXBase.HTMLAttributes<HTMLVaOnThisPageElement>;
             "va-pagination": LocalJSX.VaPagination & JSXBase.HTMLAttributes<HTMLVaPaginationElement>;

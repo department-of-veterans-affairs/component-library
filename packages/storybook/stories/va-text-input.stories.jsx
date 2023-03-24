@@ -39,7 +39,7 @@ export default {
 
 const defaultArgs = {
   'name': 'my-input',
-  'label': 'My input',
+  'label': 'Text input label',
   'autocomplete': undefined,
   'enable-analytics': false,
   'required': false,
@@ -51,6 +51,7 @@ const defaultArgs = {
   'type': undefined,
   'success': false,
   'pattern': undefined,
+  'message-aria-describedby': 'Optional description text for screen readers',
   hint: null,
 };
 
@@ -69,6 +70,7 @@ const Template = ({
   success,
   pattern,
   hint,
+  'message-aria-describedby': messageAriaDescribedby,
 }) => {
   return (
     <va-text-input
@@ -88,6 +90,7 @@ const Template = ({
       pattern={pattern}
       onBlur={e => console.log('blur event', e)}
       onInput={e => console.log('input event value', e.target.value)}
+      message-aria-describedby={messageAriaDescribedby}
     />
   );
 };

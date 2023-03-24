@@ -1,0 +1,158 @@
+@import 'functions';
+
+.usa-form {
+  font-size: rem-override(1rem);
+}
+
+@media (min-width: 30em) {
+  .usa-form {
+    max-width: rem-override(20rem);
+  }
+}
+
+.usa-fieldset,
+.usa-hint,
+.usa-input,
+.usa-label,
+.usa-legend,
+.usa-radio__label,
+.usa-textarea,
+.usa-select {
+  font-size: rem-override(1.06rem);
+}
+
+.usa-label,
+.usa-legend {
+  margin-top: rem-override(1.5rem);
+  max-width: rem-override(30rem);
+}
+
+.usa-radio__label {
+  margin-top: rem-override(0.75rem);
+  padding-left: rem-override(2rem);
+
+  &::before {
+    height: rem-override(1.25rem);
+    border-radius: rem-override(99rem);
+    width: rem-override(1.25rem);
+    margin-top: rem-override(0.064rem);
+  }
+
+  &-description {
+    font-size: rem-override(0.93rem);
+    margin-top: rem-override(0.5rem);
+  }
+}
+
+.usa-radio__input {
+  font-size: rem-override(1.6rem);
+  border-width: rem-override(0.1rem);
+  height: rem-override(4.2rem);
+  max-width: rem-override(46rem);
+  padding: rem-override(1rem) 0.7em;
+
+  &--tile + [class*='__label'] {
+    border-radius: rem-override(0.25rem);
+    margin-top: rem-override(0.5rem);
+    padding: rem-override(0.75rem) rem-override(1rem) rem-override(0.75rem)
+      rem-override(2.5rem);
+
+    &::before {
+      left: rem-override(0.5rem);
+    }
+  }
+}
+
+.usa-input, .usa-select, .usa-textarea {
+  height: rem-override(2.5rem);
+  margin-top: rem-override(0.5rem);
+  max-width: rem-override(30rem);
+  padding: rem-override(0.5rem);
+
+  &--success,
+  &--error {
+    padding-top: rem-override(0.25rem);
+    padding-bottom: rem-override(0.25rem);
+    border-width: rem-override(0.25rem);
+  }
+}
+
+.usa-checkbox {
+  &__label {
+    margin-top: rem-override(0.75rem);
+    padding-left: rem-override(2rem);
+    font-size: rem-override(1.06rem);
+
+    &::before {
+      height: rem-override(1.25rem);
+      width: rem-override(1.25rem);
+      margin-top: rem-override(0.064rem);
+    }
+  }
+
+  &__input--tile + [class*='__label'] {
+    border-radius: rem-override(0.25rem);
+    margin-top: rem-override(0.5rem);
+    padding: rem-override(0.75rem) rem-override(1rem) rem-override(0.75rem)
+      rem-override(2.5rem);
+
+    &::before {
+      left: rem-override(0.5rem);
+    }
+  }
+
+  &__label-description {
+    font-size: rem-override(0.93rem);
+    margin-top: rem-override(0.5rem);
+  }
+}
+
+.usa-error-message {
+  padding-bottom: rem-override(0.25rem);
+  padding-top: rem-override(0.25rem);
+}
+
+.usa-legend {
+  color: $v3-color-base-darkest;
+}
+
+.usa-select {
+  background-size: rem-override(1.25rem);
+  background-position: right rem-override(0.5rem) center;
+}
+
+.usa-memorable-date .usa-form-group {
+  margin-top: 0px;
+}
+
+.usa-form-group--day, .usa-form-group--month, .usa-form-group--year {
+  margin-right: rem-override(1rem);
+}
+
+.usa-form-group--day-input, .usa-form-group--month-input {
+  width: rem-override(3rem);
+}
+
+.usa-form-group--year-input {
+  width: rem-override(4.5rem);
+}
+
+.usa-form-group--month-select {
+  width: rem-override(15rem);
+}
+
+.usa-textarea {
+  height: rem-override(10rem);
+}
+
+.usa-button {
+  font-size: rem-override(1.06rem);
+  border-radius: rem-override(0.25rem);
+  margin-right: rem-override(0.5rem);
+  padding: rem-override(0.75rem) rem-override(1.25rem);
+  &--big {
+    border-radius: rem-override(0.25rem);
+    font-size: rem-override(1.46rem);
+    padding: rem-override(1rem) rem-override(1.5rem);
+  }
+}

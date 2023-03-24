@@ -27,13 +27,14 @@ export default {
 };
 
 const vaRadioConst = args => {
-  const {   
+  const {
     'enable-analytics': enableAnalytics,
     error,
     label,
     hint,
     required,
-    uswds,
+    uswds = true,
+    'label-header-level': labelHeaderLevel,
     ...rest
   } = args;
 
@@ -45,13 +46,14 @@ const vaRadioConst = args => {
         required={required}
         uswds={uswds}
         hint={hint}
+        label-header-level={labelHeaderLevel}
     >
-    <va-radio-option 
-      id="soujourner-truth" 
-      label="Soujourner Truth" 
-      name="group1" 
-      value="1" 
-      uswds={uswds} 
+    <va-radio-option
+      id="soujourner-truth"
+      label="Soujourner Truth"
+      name="group1"
+      value="1"
+      uswds={uswds}
     />
     <va-radio-option
       id="frederick-douglass"
@@ -90,13 +92,21 @@ const I18nTemplate = args => {
 
   return (
     <div>
-      <button style={{fontSize: '1rem'}} onClick={e => setLang('es')}>Español</button>
-      <button style={{fontSize: '1rem'}} onClick={e => setLang('en')}>English</button>
-      <button style={{fontSize: '1rem'}} onClick={e => setLang('tl')}>Tagalog</button>
-      <br /><br />
+      <button style={{ fontSize: '16px' }} onClick={e => setLang('es')}>
+        Español
+      </button>
+      <button style={{ fontSize: '16px' }} onClick={e => setLang('en')}>
+        English
+      </button>
+      <button style={{ fontSize: '16px' }} onClick={e => setLang('tl')}>
+        Tagalog
+      </button>
+      <br />
+      <br />
       {vaRadioConst(args)}
     </div>
-)};
+  );
+};
 
 const ReactBindingExample = ({
   'enable-analytics': enableAnalytics,
@@ -106,12 +116,12 @@ const ReactBindingExample = ({
 }) => {
   return (
     <>
-    <VaRadio 
+    <VaRadio
         uswds
       enableAnalytics={enableAnalytics}
       error={error}
       label={label}
-      required={required} 
+      required={required}
       onVaValueChange={e => console.log('Selected radio option:', e?.detail?.value)}>
       <VaRadioOption uswds label="Option one" name="example" value="1" />
       <VaRadioOption uswds label="Option two" name="example" value="2" />
@@ -183,11 +193,11 @@ const USWDSTiled = ({
         uswds={uswds}
         hint={hint}
       >
-        <va-radio-option 
-          id="soujourner-truth" 
-          label="Soujourner Truth" 
-          name="group1" 
-          value="1" 
+        <va-radio-option
+          id="soujourner-truth"
+          label="Soujourner Truth"
+          name="group1"
+          value="1"
           uswds={uswds}
           tile
         />
@@ -240,11 +250,11 @@ const USWDSTiledError = ({
             uswds={uswds}
             hint={hint}
             >
-            <va-radio-option 
-                id="soujourner-truth" 
-                label="Soujourner Truth" 
-                name="group1" 
-                value="1" 
+            <va-radio-option
+                id="soujourner-truth"
+                label="Soujourner Truth"
+                name="group1"
+                value="1"
                 uswds={uswds}
                 tile
             />
@@ -277,6 +287,7 @@ const defaultArgs = {
   'required': false,
   'error': null,
   'uswds': true,
+  'label-header-level': '',
 };
 
 export const Default = Template.bind(null);
@@ -285,8 +296,8 @@ Default.args = {
 };
 Default.argTypes = propStructure(radioDocs);
 
-export const Tiled = USWDSTiled.bind(null);
-Tiled.args = {
+export const Tile = USWDSTiled.bind(null);
+Tile.args = {
   ...defaultArgs,
   uswds: true,
   label: 'Select one historical figure',
@@ -296,6 +307,12 @@ export const Hint = Template.bind(null);
 Hint.args = {
   ...defaultArgs,
   hint: "We're asking this because of XYZ",
+};
+
+export const LabelHeader = Template.bind(null);
+LabelHeader.args = {
+  ...defaultArgs,
+  'label-header-level': '3',
 };
 
 export const ReactWithCustomEvent = ReactBindingExample.bind(null);

@@ -11,12 +11,14 @@ import {
 } from '@stencil/core';
 
 import {
+  months,
   validate,
   validKeys,
 } from '../../utils/date-utils';
 
 import i18next from 'i18next';
 import { Build } from '@stencil/core';
+import classnames from 'classnames';
 
 if (Build.isTesting) {
   // Make i18next.t() return the key instead of the value
@@ -40,7 +42,7 @@ if (Build.isTesting) {
  */
 @Component({
   tag: 'va-memorable-date',
-  styleUrl: 'va-memorable-date.css',
+  styleUrl: 'va-memorable-date.scss',
   shadow: true,
 })
 export class VaMemorableDate {
@@ -51,6 +53,16 @@ export class VaMemorableDate {
   @Prop() required?: boolean = false;
 
   /**
+   * Whether or not the component will use USWDS v3 styling.
+   */
+  @Prop() uswds?: boolean = false;
+
+  /**
+   * Whether or not to use the month as an input or select.
+   */
+  @Prop() monthSelect?: boolean = false;
+
+  /**
    * Label for the field.
    */
   @Prop() label!: string;
@@ -59,6 +71,11 @@ export class VaMemorableDate {
    * Used to create unique name attributes for each input.
    */
   @Prop() name!: string;
+
+  /**
+   * Hint text string
+   */
+  @Prop() hint?: string;
 
   /**
    * The error message to render (if any)
@@ -128,16 +145,17 @@ export class VaMemorableDate {
     }
   };
 
-  private handleDateChange = (event: Event) => {
+  private handleDateChange = (event: CustomEvent) => {
     const target = event.target as HTMLInputElement;
+
     let [currentYear, currentMonth, currentDay] = (this.value || '').split('-');
-    if (target.classList.contains('input-month')) {
+    if (target.classList.contains('input-month') || target.classList.contains('usa-form-group--month-input') || target.classList.contains('usa-form-group--month-select')) {
       currentMonth = target.value;
     }
-    if (target.classList.contains('input-day')) {
+    if (target.classList.contains('input-day') || target.classList.contains('usa-form-group--day-input')) {
       currentDay = target.value;
     }
-    if (target.classList.contains('input-year')) {
+    if (target.classList.contains('input-year') || target.classList.contains('usa-form-group--year-input')) {
       currentYear = target.value;
     }
 
@@ -179,7 +197,7 @@ export class VaMemorableDate {
       forceUpdate(this.el);
     });
   }
-
+  
   disconnectedCallback() {
     i18next.off('languageChanged');
   }
@@ -189,87 +207,206 @@ export class VaMemorableDate {
       required,
       label,
       name,
+      hint,
       error,
       handleDateBlur,
       handleDateChange,
       handleDateKey,
       value,
+      uswds,
+      monthSelect,
     } = this;
 
     const [year, month, day] = (value || '').split('-');
+    const describedbyIds = ['dateHint', hint ? 'hint' : '']
+      .filter(Boolean)
+      .join(' ');
+      
+    const hintText = monthSelect ? i18next.t('date-hint-with-select') : i18next.t('date-hint');
+
 
     // Error attribute should be leveraged for custom error messaging
     // Fieldset has an implicit aria role of group
-    return (
-      <Host onBlur={handleDateBlur}>
-        <fieldset>
-          <legend>
-            {label} {required && <span class="required">{i18next.t('required')}</span>}
-            <div id="dateHint">{i18next.t('date-hint')}.</div>
-          </legend>
-          <slot />
-          <span id="error-message" role="alert">
-            {error && (
-              <Fragment>
-                <span class="sr-only">{i18next.t('error')}</span> {error}
-              </Fragment>
-            )}
-          </span>
-          <div class="date-container">
-            <va-text-input
-              label={i18next.t('month')}
-              name={`${name}Month`}
-              maxlength={2}
-              minlength={2}
-              pattern="[0-9]*"
-              aria-describedby="dateHint"
-              invalid={this.invalidMonth}
-              // Value must be a string
-              // if NaN provide empty string
-              value={month?.toString()}
-              onInput={handleDateChange}
-              onKeyDown={handleDateKey}
-              class="input-month"
-              inputmode="numeric"
-              type="text"
-            />
-            <va-text-input
-              label={i18next.t('day')}
-              name={`${name}Day`}
-              maxlength={2}
-              minlength={2}
-              pattern="[0-9]*"
-              aria-describedby="dateHint"
-              invalid={this.invalidDay}
-              // Value must be a string
-              // if NaN provide empty string
-              value={day?.toString()}
-              onInput={handleDateChange}
-              onKeyDown={handleDateKey}
-              class="input-day"
-              inputmode="numeric"
-              type="text"
-            />
-            <va-text-input
-              label={i18next.t('year')}
-              name={`${name}Year`}
-              maxlength={4}
-              minlength={4}
-              pattern="[0-9]*"
-              aria-describedby="dateHint"
-              invalid={this.invalidYear}
-              // Value must be a string
-              // if NaN provide empty string
-              value={year?.toString()}
-              onInput={handleDateChange}
-              onKeyDown={handleDateKey}
-              class="input-year"
-              inputmode="numeric"
-              type="text"
-            />
-          </div>
-        </fieldset>
-      </Host>
-    );
+    if(uswds) { 
+      const monthDisplay = monthSelect
+      ? <div class="usa-form-group usa-form-group--month usa-form-group--select">
+        <va-select
+          uswds
+          label={i18next.t('month')}
+          name={`${name}Month`}
+          aria-describedby={describedbyIds}
+          invalid={this.invalidMonth}
+          onVaSelect={handleDateChange}
+          class='usa-form-group--month-select'
+          reflectInputError={error ? true : false}
+        >
+          {months &&
+          months.map(month => (
+            <option value={month.value}>{month.label}</option>
+          ))}
+        </va-select>
+      </div>
+      : <div class="usa-form-group usa-form-group--month">
+        <va-text-input
+          uswds
+          label={i18next.t('month')}
+          name={`${name}Month`}
+          maxlength={2}
+          minlength={2}
+          pattern="[0-9]*"
+          aria-describedby={describedbyIds}
+          invalid={this.invalidMonth}
+          // Value must be a string
+          // if NaN provide empty string
+          value={month?.toString()}
+          onInput={handleDateChange}
+          onKeyDown={handleDateKey}
+          class="usa-form-group--month-input"
+          inputmode="numeric"
+          type="text"
+        />
+      </div>;   
+      const legendClass = classnames({
+        'usa-legend': true,
+        'usa-label--error': error
+      });
+      return (
+        <Host onBlur={handleDateBlur}>
+          <fieldset class="usa-form usa-fieldset">
+            <legend class={legendClass} part="legend">
+              {label}
+              {required && <span class="usa-label--required"> {i18next.t('required')}</span>}
+              {hint && <div id="hint">{hint}</div>}
+            </legend>
+            <span class="usa-hint" id="dateHint">{hintText}.</span>
+            <slot />
+            <span id="error-message" role="alert">
+              {error && (
+                <Fragment>
+                  <span class="usa-sr-only">{i18next.t('error')}</span> 
+                  <span class="usa-error-message">{error}</span>
+                </Fragment>
+              )}
+            </span>
+            <div class="usa-memorable-date">
+              {monthDisplay}
+              <div class="usa-form-group usa-form-group--day">
+                <va-text-input
+                  uswds
+                  label={i18next.t('day')}
+                  name={`${name}Day`}
+                  maxlength={2}
+                  minlength={2}
+                  pattern="[0-9]*"
+                  aria-describedby={describedbyIds}
+                  invalid={this.invalidDay}
+                  // Value must be a string
+                  // if NaN provide empty string
+                  value={day?.toString()}
+                  onInput={handleDateChange}
+                  onKeyDown={handleDateKey}
+                  class="usa-form-group--day-input"
+                  inputmode="numeric"
+                  type="text"
+                />
+              </div>
+              <div class="usa-form-group usa-form-group--year">
+                <va-text-input
+                  uswds
+                  label={i18next.t('year')}
+                  name={`${name}Year`}
+                  maxlength={4}
+                  minlength={4}
+                  pattern="[0-9]*"
+                  aria-describedby={describedbyIds}
+                  invalid={this.invalidYear}
+                  // Value must be a string
+                  // if NaN provide empty string
+                  value={year?.toString()}
+                  onInput={handleDateChange}
+                  onKeyDown={handleDateKey}
+                  class="usa-form-group--year-input"
+                  inputmode="numeric"
+                  type="text"
+                />
+              </div>
+            </div>
+          </fieldset>
+        </Host>
+      );
+    } else {
+      return (
+        <Host onBlur={handleDateBlur}>
+          <fieldset>
+            <legend>
+              {label} {required && <span class="required">{i18next.t('required')}</span>}
+              {hint && <div id="hint">{hint}</div>}
+              <div id="dateHint">{i18next.t('date-hint')}.</div>
+            </legend>
+            <slot />
+            <span id="error-message" role="alert">
+              {error && (
+                <Fragment>
+                  <span class="sr-only">{i18next.t('error')}</span> {error}
+                </Fragment>
+              )}
+            </span>
+            <div class="date-container">
+              <va-text-input
+                label={i18next.t('month')}
+                name={`${name}Month`}
+                maxlength={2}
+                minlength={2}
+                pattern="[0-9]*"
+                aria-describedby={describedbyIds}
+                invalid={this.invalidMonth}
+                // Value must be a string
+                // if NaN provide empty string
+                value={month?.toString()}
+                onInput={handleDateChange}
+                onKeyDown={handleDateKey}
+                class="input-month"
+                inputmode="numeric"
+                type="text"
+                />
+              <va-text-input
+                label={i18next.t('day')}
+                name={`${name}Day`}
+                maxlength={2}
+                minlength={2}
+                pattern="[0-9]*"
+                aria-describedby={describedbyIds}
+                invalid={this.invalidDay}
+                // Value must be a string
+                // if NaN provide empty string
+                value={day?.toString()}
+                onInput={handleDateChange}
+                onKeyDown={handleDateKey}
+                class="input-day"
+                inputmode="numeric"
+                type="text"
+                />
+              <va-text-input
+                label={i18next.t('year')}
+                name={`${name}Year`}
+                maxlength={4}
+                minlength={4}
+                pattern="[0-9]*"
+                aria-describedby={describedbyIds}
+                invalid={this.invalidYear}
+                // Value must be a string
+                // if NaN provide empty string
+                value={year?.toString()}
+                onInput={handleDateChange}
+                onKeyDown={handleDateKey}
+                class="input-year"
+                inputmode="numeric"
+                type="text"
+                />
+            </div>
+          </fieldset>
+        </Host>
+      );
+    }
   }
 }

@@ -1,0 +1,60 @@
+@forward 'settings';
+
+@use 'uswds-helpers/src/styles/usa-sr-only';
+@use 'usa-icon/src/styles/usa-icon';
+@use 'usa-label/src/styles/usa-label';
+@use 'usa-input/src/styles/usa-input';
+@use 'usa-error-message/src/styles/usa-error-message';
+@use 'usa-hint/src/styles/usa-hint';
+@use 'usa-select/src/styles/usa-select';
+
+@import '../../mixins/uswds-error-border.scss';
+@import '../../global/formation_overrides';
+
+:host {
+  color: var(--color-base);
+  display: block;
+  font-family: var(--font-source-sans);
+}
+
+/** Original Component Style **/
+
+@import '../../mixins/inputs.css';
+@import '../../mixins/accessibility.css';
+@import '../../mixins/form-field-error.css';
+@import '../../mixins/hint-text.css';
+
+span.required {
+  color: var(--color-secondary-dark);
+  margin: 0 0.35em;
+}
+
+:host([error]:not([error='']):not([uswds])) label,
+:host([error]:not([error='']):not([uswds])) > span {
+  display: block;
+  font-size: 1.6rem;
+}
+
+:host([error]:not([error='']):not([uswds])) > span {
+  color: var(--color-secondary-dark);
+}
+
+::slotted(option) {
+  display: none;
+}
+
+:host(:not([uswds])) label {
+  margin-top: 3rem;
+  max-width: 46rem;
+  display: block;
+}
+
+:host(:not([uswds])) select {
+  background-color: var(--color-white);
+  background-image: url('../../assets/arrow-both.svg');
+  background-position: right 1.3rem center;
+  background-repeat: no-repeat;
+  background-size: 1rem;
+  font-family: var(--font-source-sans);
+  padding: 0.8rem 3rem 0.8rem 0.7em;
+}

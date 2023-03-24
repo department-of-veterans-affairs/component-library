@@ -1,4 +1,5 @@
 import {
+  Build,
   Component,
   Element,
   Prop,
@@ -11,7 +12,6 @@ import {
 } from '@stencil/core';
 import classnames from 'classnames';
 import i18next from 'i18next';
-import { Build } from '@stencil/core';
 import { consoleDevError } from '../../utils/utils';
 
 if (Build.isTesting) {
@@ -121,17 +121,14 @@ export class VaTextInput {
   @Prop() hint?: string;
 
   /**
+   * An optional message that will be read by screen readers when the input is focused.
+   */
+  @Prop() messageAriaDescribedby?: string;
+
+  /**
    * The value for the input.
    */
   @Prop({ mutable: true, reflect: true }) value?: string;
-  // TODO: Make the value prop reflective. Currently, it isn't because it screws
-  // up the input behavior. For now, the only "bug" is that the changed value
-  // isn't reflected in the DOM on the web component. That seems to be how the
-  // <input> is supposed to work, however:
-  // https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-value
-  //
-  // $('va-text-input').value will be correct
-  // $('va-text-input').getAttribute('value') will be incorrect
 
   /**
    * Adds styling based on status value
@@ -141,7 +138,7 @@ export class VaTextInput {
   /**
    * Whether or not the component will use USWDS v3 styling.
    */
-   @Prop() uswds?: boolean = false;
+  @Prop({reflect: true}) uswds?: boolean = false;
 
   /**
    * The event used to track usage of the component. This is emitted when the
@@ -224,9 +221,14 @@ export class VaTextInput {
       handleBlur,
       uswds,
       success,
+      messageAriaDescribedby,
     } = this;
     const type = this.getInputType();
     const maxlength = this.getMaxlength();
+    const ariaDescribedbyIds =
+      `${messageAriaDescribedby ? 'input-message' : ''} ${
+        error ? 'input-error-message' : ''
+      }`.trim() || null; // Null so we don't add the attribute if we have an empty string
 
     if (uswds) {
       const labelClass = classnames({
@@ -243,27 +245,32 @@ export class VaTextInput {
           {label && (
             <label htmlFor="inputField" class={labelClass} part="label">
               {label}
-              {required && <span class="usa-label--required"> {i18next.t('required')}</span>}
+              {required && (
+                <span class="usa-label--required">
+                  {' '}
+                  {i18next.t('required')}
+                </span>
+              )}
             </label>
           )}
           {hint && <span class="usa-hint">{hint}</span>}
           <slot></slot>
-          <span id="usa-error-message" role="alert">
+          <span id="input-error-message" role="alert">
             {error && (
               <Fragment>
-                <span class="usa-sr-only">{i18next.t('error')}</span> 
+                <span class="usa-sr-only">{i18next.t('error')}</span>
                 <span class="usa-error-message">{error}</span>
               </Fragment>
             )}
           </span>
-          <input 
+          <input
             class={inputClass}
             id="inputField"
             type={type}
             value={value}
             onInput={handleInput}
             onBlur={handleBlur}
-            aria-describedby={error ? 'usa-error-message' : undefined}
+            aria-describedby={ariaDescribedbyIds}
             aria-invalid={invalid || error ? 'true' : 'false'}
             inputmode={inputmode ? inputmode : undefined}
             maxlength={maxlength}
@@ -284,20 +291,22 @@ export class VaTextInput {
               {i18next.t('min-chars', { length: minlength })}
             </small>
           )}
-      </Host>
+        </Host>
       );
-    } else{
+    } else {
       return (
         <Host>
           {label && (
             <label htmlFor="inputField" part="label">
               {label}{' '}
-              {required && <span class="required">{i18next.t('required')}</span>}
+              {required && (
+                <span class="required">{i18next.t('required')}</span>
+              )}
             </label>
           )}
           {hint && <span class="hint-text">{hint}</span>}
           <slot></slot>
-          <span id="error-message" role="alert">
+          <span id="input-error-message" role="alert">
             {error && (
               <Fragment>
                 <span class="sr-only">{i18next.t('error')}</span> {error}
@@ -310,7 +319,7 @@ export class VaTextInput {
             value={value}
             onInput={handleInput}
             onBlur={handleBlur}
-            aria-describedby={error ? 'error-message' : undefined}
+            aria-describedby={ariaDescribedbyIds}
             aria-invalid={invalid || error ? 'true' : 'false'}
             inputmode={inputmode ? inputmode : undefined}
             maxlength={maxlength}
@@ -321,6 +330,11 @@ export class VaTextInput {
             required={required || null}
             part="input"
           />
+          {messageAriaDescribedby && (
+            <span id="input-message" class="sr-only">
+              {messageAriaDescribedby}
+            </span>
+          )}
           {maxlength && value?.length >= maxlength && (
             <small part="validation">
               {i18next.t('max-chars', { length: maxlength })}

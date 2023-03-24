@@ -32,8 +32,8 @@ export const additionalDocs = {
     maturityLevel: AVAILABLE,
   },
   'Expanding group': {
-    maturityCategory: CAUTION,
-    maturityLevel: AVAILABLE,
+    maturityCategory: DONT_USE,
+    maturityLevel: DEPRECATED,
   },
   'File input - React': {
     maturityCategory: DONT_USE,

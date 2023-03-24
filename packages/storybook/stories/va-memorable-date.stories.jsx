@@ -19,6 +19,7 @@ export default {
 
 const defaultArgs = {
   label: 'Date of birth',
+  hint: '',
   name: 'test',
   required: false,
   error: undefined,
@@ -30,6 +31,7 @@ const Template = ({ label, name, required, error, value, hint }) => {
     <VaMemorableDate
       label={label}
       name={name}
+      hint={hint}
       required={required}
       error={error}
       value={value}
@@ -39,7 +41,22 @@ const Template = ({ label, name, required, error, value, hint }) => {
   );
 };
 
-const CustomValidationTemplate = ({ label, name, required, error, value }) => {
+const ExtraHintTemplate = ({ label, name, required, error, value, hint }) => {
+  return (
+    <VaMemorableDate
+      label={label}
+      name={name}
+      hint={hint}
+      required={required}
+      error={error}
+      value={value}
+      onDateBlur={e => console.log(e, 'DATE BLUR FIRED')}
+      onDateChange={e => console.log(e, 'DATE CHANGE FIRED')}
+    />
+  );
+};
+
+const CustomValidationTemplate = ({ label, name, required, error, value, hint }) => {
   const [dateVal, setDateVal] = useState(value);
   const [errorVal, setErrorVal] = useState(error);
   const today = new Date();
@@ -59,6 +76,7 @@ const CustomValidationTemplate = ({ label, name, required, error, value }) => {
       <VaMemorableDate
         label={label}
         name={name}
+        hint={hint}
         required={required}
         error={errorVal}
         value={dateVal}
@@ -84,7 +102,7 @@ const CustomValidationTemplate = ({ label, name, required, error, value }) => {
   );
 };
 
-const I18nTemplate = ({ label, name, required, error, value }) => {
+const I18nTemplate = ({ label, name, required, error, value, hint }) => {
   const [lang, setLang] = useState('en');
 
   useEffect(() => {
@@ -97,14 +115,15 @@ const I18nTemplate = ({ label, name, required, error, value }) => {
       <button onClick={e => setLang('en')}>English</button>
       <button onClick={e => setLang('tl')}>Tagalog</button>
       <VaMemorableDate
-      label={label}
-      name={name}
-      required={required}
-      error={error}
-      value={value}
-      onDateBlur={e => console.log(e, 'DATE BLUR FIRED')}
-      onDateChange={e => console.log(e, 'DATE CHANGE FIRED')}
-    />
+        label={label}
+        name={name}
+        hint={hint}
+        required={required}
+        error={error}
+        value={value}
+        onDateBlur={e => console.log(e, 'DATE BLUR FIRED')}
+        onDateChange={e => console.log(e, 'DATE CHANGE FIRED')}
+      />
     </div>
 )};
 
@@ -115,10 +134,10 @@ Default.argTypes = propStructure(memorableDateInputDocs);
 export const Error = Template.bind(null);
 Error.args = { ...defaultArgs, error: 'Error Message Example' };
 
-export const WithHintTextError = Template.bind(null);
-WithHintTextError.args = {
+export const ExtraHintText = ExtraHintTemplate.bind(null);
+ExtraHintText.args = {
   ...defaultArgs,
-  error: 'Error Message Example',
+  hint: 'Extra hint text',
 };
 
 export const CustomValidation = CustomValidationTemplate.bind(null);

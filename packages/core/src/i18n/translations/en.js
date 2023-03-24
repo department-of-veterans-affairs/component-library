@@ -1,6 +1,7 @@
 export default {
   'error': 'Error',
   'required': '(*Required)',
+  'select': '- Select -',
   'max-chars': '(Max. {{length}} characters)',
   'min-chars': '(Min. {{length}} characters)',
   'date-of-birth': 'Date of birth',
@@ -27,6 +28,13 @@ export default {
   'november': 'November',
   'december': 'December',
   'on-this-page': 'On this page',
-  'date-hint': 'Please enter two digits for the month and four digits for the year',
+  'date-hint': 'Please enter two digits for the month and day and four digits for the year',
+  'date-hint-with-select': 'For example: January 19 2000',
   'date-error': 'Please enter a complete date',
+  'gov-site-label': 'Official website of the United States government',
+  'gov-site-button': "Here's how you know",
+  'gov-site-website': 'Official websites use .{{tld}}',
+  'gov-site-explanation': 'A .{{tld}} website belongs to an official government organization in the United States.',
+  'gov-site-https': 'Secure .{{tld}} websites use HTTPS',
+  'gov-site-lock': "A lock {{image}} or https:// means you've safely connected to the .{{tld}} website. Share sensitive information only on official, secure websites.",
 };

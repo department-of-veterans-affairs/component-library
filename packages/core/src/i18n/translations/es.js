@@ -1,6 +1,7 @@
 export default {
   'error': 'Error',
   'required': '(*Requerido)',
+  'select': '- Seleccione -',
   'max-chars': '(Número máximo de caracteres: {{length}})',
   'min-chars': '(Número mínimo de caracteres: {{length}})',
   'date-of-birth': 'Fecha de nacimiento',
@@ -27,6 +28,13 @@ export default {
   'november': 'Noviembre',
   'december': 'Diciembre',
   'on-this-page': 'En esta página',
-  'date-hint': 'Ingrese dos dígitos para el mes y cuatro dígitos para el año',
+  'date-hint': 'Ingrese dos dígitos para el mes y el día y cuatro dígitos para el año',
+  'date-hint-with-select': 'Por ejemplo: Enero 19 2000',
   'date-error': 'Ingrese una fecha completa',
+  'gov-site-label': 'Un sitio oficial del Gobierno de Estados Unidos',
+  'gov-site-button': 'Así es como usted puede verificarlo',
+  'gov-site-website': 'Los sitios web oficiales usan .{{tld}}',
+  'gov-site-explanation': 'Un sitio web .{{tld}} pertenece a una organización oficial del Gobierno de Estados Unidos.',
+  'gov-site-https': 'Los sitios web seguros .{{tld}} usan HTTPS',
+  'gov-site-lock': "Un candado {{image}} o https:// significa que usted se conectó de forma segura a un sitio web .{{tld}}. Comparta información sensible sólo en sitios web oficiales y seguros.",
 };

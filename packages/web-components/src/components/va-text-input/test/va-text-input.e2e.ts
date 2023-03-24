@@ -15,7 +15,7 @@ describe('va-text-input', () => {
             Hello, world
           </label>
           <slot></slot>
-          <span id="error-message" role="alert"></span>
+          <span id="input-error-message" role="alert"></span>
           <input id="inputField" type="text" part="input" aria-invalid="false" />
         </mock:shadow-root>
       </va-text-input>
@@ -39,7 +39,7 @@ describe('va-text-input', () => {
             Name of issue
           </label>
           <slot></slot>
-          <span id="error-message" role="alert"></span>
+          <span id="input-error-message" role="alert"></span>
           <input id="inputField" type="text" part="input" aria-invalid="false" />
         </mock:shadow-root>
         <p className="vads-u-font-weight--normal label-description">
@@ -55,7 +55,7 @@ describe('va-text-input', () => {
     await page.setContent('<va-text-input error="This is a mistake" />');
 
     // Render the error message text
-    const error = await page.find('va-text-input >>> span#error-message');
+    const error = await page.find('va-text-input >>> span#input-error-message');
     const input = await page.find('va-text-input >>> input');
     expect(error.innerText).toContain('This is a mistake');
     expect(input.getAttribute('aria-invalid')).toEqual('true');
@@ -69,7 +69,7 @@ describe('va-text-input', () => {
     expect(input.getAttribute('aria-invalid')).toEqual('true');
   });
 
-  it('adds new aria-describedby for error message', async () => {
+  it('adds aria-describedby for error message', async () => {
     const page = await newE2EPage();
     await page.setContent('<va-text-input />');
     // Check that error is empty
@@ -87,6 +87,24 @@ describe('va-text-input', () => {
     expect(inputEl.getAttribute('aria-describedby')).toContain('error-message');
   });
 
+  it('adds aria-describedby input-message id', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-text-input message-aria-describedby="example message" />');
+    const el = await page.find('va-text-input');
+    const inputEl = await page.find('va-text-input >>> input');
+
+    // Render the example message aria-describedby id.
+    expect(inputEl.getAttribute('aria-describedby')).not.toBeNull();
+    expect(inputEl.getAttribute('aria-describedby')).toContain('input-message');
+
+    // If an error and aria-describedby-message is set, id's exist in aria-describedby.
+    el.setProperty('error', 'Testing Error');
+    await page.waitForChanges();
+    expect(inputEl.getAttribute('aria-describedby')).not.toBeNull();
+    expect(inputEl.getAttribute('aria-describedby')).toContain('error-message');
+    expect(inputEl.getAttribute('aria-describedby')).toContain('input-message');
+  });
+
   it('renders a required span', async () => {
     const page = await newE2EPage();
     await page.setContent('<va-text-input label="This is a field" required />');
@@ -100,7 +118,7 @@ describe('va-text-input', () => {
             This is a field <span class="required">required</span>
           </label>
           <slot></slot>
-          <span id="error-message" role="alert"></span>
+          <span id="input-error-message" role="alert"></span>
           <input id="inputField" type="text" required="" part="input" aria-invalid="false" />
         </mock:shadow-root>
       </va-text-input>
@@ -124,7 +142,7 @@ describe('va-text-input', () => {
     const page = await newE2EPage();
 
     await page.setContent(
-      '<va-text-input required label="This is a test" error="With an error message"/>',
+      '<va-text-input required label="This is a test" error="With an error message" message-aria-describeby="with extra aria message"/>',
     );
 
     await axeCheck(page);
@@ -351,7 +369,7 @@ describe('va-text-input', () => {
             Hello, world
           </label>
           <slot></slot>
-          <span id="usa-error-message" role="alert"></span>
+          <span id="input-error-message" role="alert"></span>
           <input class="usa-input" id="inputField" part="input" type="text" aria-invalid="false" />
         </mock:shadow-root>
       </va-text-input>

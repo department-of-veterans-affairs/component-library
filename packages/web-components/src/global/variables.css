@@ -24,6 +24,7 @@
   --color-link-visited: #4c2c92;
   --color-primary: #0071bb;
   --color-primary-darker: #003e73;
+  --color-primary-darkest: #112E51;
   --color-primary-alt-dark: #00a6d2;
   --color-primary-alt-darkest: #046b99;
   --color-primary-alt-light: #9bdaf1;
@@ -32,6 +33,7 @@
   --color-secondary-light: #e59393;
   --color-secondary-lightest: #f9dede;
   --v3-color-error-dark: #b50909;
+  --v3-color-base-darkest: #1B1B1B;
   --font-source-sans: 'Source Sans Pro', 'Helvetica Neue', Helvetica, Roboto,
     Arial, sans-serif;
   --font-serif: Bitter, Georgia, Cambria, 'Times New Roman', Times, serif;
