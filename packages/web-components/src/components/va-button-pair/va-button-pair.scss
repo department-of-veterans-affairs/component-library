@@ -9,6 +9,10 @@
   flex-direction: column;
 }
 
+va-button::part(button) {
+  margin-right: 0;
+}
+
 /* Original Component Styles. */
 
 :host([continue]:not([continue='false']):not([uswds])) {
