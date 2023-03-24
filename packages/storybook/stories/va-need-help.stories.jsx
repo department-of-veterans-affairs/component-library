@@ -6,7 +6,7 @@ const needHelpDocs = getWebComponentDocs('va-need-help');
 
 export default {
   title: 'Components/Need help?',
-  id: 'components/form/va-need-help',
+  id: 'components/va-need-help',
   parameters: {
     componentSubtitle: `va-need-help web component`,
     docs: {
@@ -15,7 +15,9 @@ export default {
   },
 };
 
-const Template = () => (
+const defaultArgs = {};
+
+const Template = ({}) => (
   <va-need-help>
     <div slot="content">
       <p>
