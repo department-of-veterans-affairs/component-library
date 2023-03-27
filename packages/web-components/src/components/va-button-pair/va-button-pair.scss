@@ -13,6 +13,12 @@ va-button::part(button) {
   margin-right: 0;
 }
 
+@media (max-width: 480px) {
+  :host([continue]:not([continue='false'])) .usa-button-group {
+    flex-direction: column-reverse;
+  }
+}
+
 /* Original Component Styles. */
 
 :host([continue]:not([continue='false']):not([uswds])) {
