@@ -198,11 +198,11 @@ export namespace Components {
          */
         "disableAnalytics"?: boolean;
         /**
-          * Applies to the primary button.
+          * Applies to the primary button aria-label.
          */
         "primaryLabel"?: string;
         /**
-          * Applies to the secondary button.
+          * Applies to the secondary button aria-label.
          */
         "secondaryLabel"?: string;
         /**
@@ -213,6 +213,10 @@ export namespace Components {
           * If `true`, button pair will use Update and Cancel for button text.
          */
         "update"?: boolean;
+        /**
+          * Whether or not the component will use USWDS v3 styling.
+         */
+        "uswds"?: boolean;
     }
     interface VaCheckbox {
         /**
@@ -1620,11 +1624,11 @@ declare namespace LocalJSX {
          */
         "onSecondaryClick"?: (event: VaButtonPairCustomEvent<any>) => void;
         /**
-          * Applies to the primary button.
+          * Applies to the primary button aria-label.
          */
         "primaryLabel"?: string;
         /**
-          * Applies to the secondary button.
+          * Applies to the secondary button aria-label.
          */
         "secondaryLabel"?: string;
         /**
@@ -1635,6 +1639,10 @@ declare namespace LocalJSX {
           * If `true`, button pair will use Update and Cancel for button text.
          */
         "update"?: boolean;
+        /**
+          * Whether or not the component will use USWDS v3 styling.
+         */
+        "uswds"?: boolean;
     }
     interface VaCheckbox {
         /**
