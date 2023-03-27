@@ -198,11 +198,11 @@ export namespace Components {
          */
         "disableAnalytics"?: boolean;
         /**
-          * Applies to the primary button.
+          * Applies to the primary button aria-label.
          */
         "primaryLabel"?: string;
         /**
-          * Applies to the secondary button.
+          * Applies to the secondary button aria-label.
          */
         "secondaryLabel"?: string;
         /**
@@ -1620,11 +1620,11 @@ declare namespace LocalJSX {
          */
         "onSecondaryClick"?: (event: VaButtonPairCustomEvent<any>) => void;
         /**
-          * Applies to the primary button.
+          * Applies to the primary button aria-label.
          */
         "primaryLabel"?: string;
         /**
-          * Applies to the secondary button.
+          * Applies to the secondary button aria-label.
          */
         "secondaryLabel"?: string;
         /**

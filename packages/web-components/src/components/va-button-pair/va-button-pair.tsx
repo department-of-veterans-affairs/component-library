@@ -23,12 +23,12 @@ export class VaButtonPair {
   @Prop() disableAnalytics?: boolean = false;
 
   /**
-   * Applies to the primary button.
+   * Applies to the primary button aria-label.
    */
   @Prop() primaryLabel?: string;
 
   /**
-   * Applies to the secondary button.
+   * Applies to the secondary button aria-label.
    */
   @Prop() secondaryLabel?: string;
 
