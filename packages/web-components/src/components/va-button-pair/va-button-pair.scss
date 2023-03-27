@@ -9,13 +9,16 @@
   flex-direction: column;
 }
 
-va-button::part(button) {
+:host([uswds]) va-button::part(button){
   margin-right: 0;
 }
 
 @media (max-width: 480px) {
   :host([continue]:not([continue='false'])) .usa-button-group {
     flex-direction: column-reverse;
+  }
+  :host([uswds]) va-button::part(button) {
+    width: 280px;
   }
 }
 
