@@ -14,11 +14,13 @@
 }
 
 @media (max-width: 480px) {
+  :host([uswds]) va-button {
+    display: block;
+  }
   :host([continue]:not([continue='false'])) .usa-button-group {
     flex-direction: column-reverse;
-  }
-  :host([uswds]) va-button::part(button) {
-    width: 280px;
+    margin: 0 auto;
+    width: 100%;
   }
 }
 
