@@ -59,7 +59,7 @@ If the version numbers have been updated in `main` and you're ready to publish, 
     1. `yarn install`
     2. `yarn build`
     3. `yarn build-bindings` (build React bindings)
-    4. (optional) `yarn watch:stencil`
+    4. `yarn watch:stencil` (optional)
 2. `cd ../react-components/`
     1. `yarn install`
     2. `yarn build`
