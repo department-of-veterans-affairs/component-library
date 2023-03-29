@@ -24,7 +24,7 @@ describe('va-alert-expandable', () => {
               <i class="fa-angle-down" role="presentation"></i>
             </div>
           </a>
-          <div id="alert-body" class="alert-expandable-body closed" style="--calc-max-height:calc(20px + 2rem);"><div id="slot-wrap"><slot></slot></div></div>
+          <div id="alert-body" class="alert-expandable-body closed" style="--calc-max-height:calc(19px + 2rem);"><div id="slot-wrap"><slot></slot></div></div>
         </div>
         </mock:shadow-root>
       </va-alert-expandable>
@@ -227,6 +227,6 @@ describe('va-alert-expandable', () => {
     );
     // 50px from height + 20px from inline padding + 39px from #slot-wrap element.
     // margin-bottom and margin-top is set to 0 for first slotted child.
-    expect(calcMaxHeight).toEqual('calc(109px + 2rem)');
+    expect(calcMaxHeight).toEqual('calc(108px + 2rem)');
   });
 });
