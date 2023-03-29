@@ -174,7 +174,7 @@ export function validate(
   if (year && (year < minYear || year > maxYear)) {
     component.invalidYear = true;
     component.error = 'year-range';
-    component.errorRange = { start: minYear, end: maxYear };
+    component.errorParameters = { start: minYear, end: maxYear };
   }
   else {
     component.invalidYear = false;
@@ -185,7 +185,7 @@ export function validate(
   if (!monthYearOnly && (day < minMonths || day > daysForSelectedMonth)) {
     component.invalidDay = true;
     component.error = 'day-range';
-    component.errorRange = { start: minMonths, end: daysForSelectedMonth };
+    component.errorParameters = { start: minMonths, end: daysForSelectedMonth };
   }
   else {
     component.invalidDay = false;
@@ -197,7 +197,7 @@ export function validate(
       (!month && component.invalidDay)) {
     component.invalidMonth = true;
     component.error = 'month-range';
-    component.errorRange = { start: minMonths, end: maxMonths };
+    component.errorParameters = { start: minMonths, end: maxMonths };
   }
   else {
     component.invalidMonth = false;

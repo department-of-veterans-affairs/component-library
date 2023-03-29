@@ -66,13 +66,14 @@ export class VaDate {
     reflect: true
   }) error?: string;
   /**
-   * The error message to render (if any)
-   * This prop should be leveraged to display any custom validations needed for this component
+   * The error range parameters to use for rendering the error message (if any)
+   * This prop should be used in conjunction with the error prop to specify a range for the day, month, or year.
+   * The start and end values should indicate the range of the day, month, or year within the component.
    */
   @Prop({
     mutable: true,
     reflect: true
-  }) errorRange?: { start: number, end: number };
+  }) errorParameters?: { start: number, end: number };
 
   /**
    * Whether or not only the Month and Year inputs should be displayed.
@@ -234,7 +235,7 @@ export class VaDate {
           <span id="error-message" role="alert">
             {error && (
               <Fragment>
-                <span class="sr-only">Error</span> {i18next.t(error, this.errorRange)}
+                <span class="sr-only">Error</span> {i18next.t(error, this.errorParameters)}
               </Fragment>
             )}
           </span>

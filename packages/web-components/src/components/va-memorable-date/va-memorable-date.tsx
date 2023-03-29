@@ -84,10 +84,11 @@ export class VaMemorableDate {
   @Prop({ reflect: true, mutable: true }) error?: string;
 
   /**
-   * The error message to render (if any)
-   * This prop should be leveraged to display any custom validations needed for this component
+   * The error range parameters to use for rendering the error message (if any)
+   * This prop should be used in conjunction with the error prop to specify a range for the day, month, or year.
+   * The start and end values should indicate the range of the day, month, or year within the component.
    */
-  @Prop({ reflect: true, mutable: true }) errorRange?: { start: number, end: number };
+  @Prop({ reflect: true, mutable: true }) errorParameters?: { start: number, end: number };
 
   /**
    * Set the default date value must be in YYYY-MM-DD format.
@@ -290,7 +291,7 @@ export class VaMemorableDate {
               {error && (
                 <Fragment>
                   <span class="usa-sr-only">{i18next.t('error')}</span> 
-                  <span class="usa-error-message">{i18next.t(error, this.errorRange)}</span>
+                  <span class="usa-error-message">{i18next.t(error, this.errorParameters)}</span>
                 </Fragment>
               )}
             </span>
@@ -353,7 +354,7 @@ export class VaMemorableDate {
             <span id="error-message" role="alert">
               {error && (
                 <Fragment>
-                  <span class="sr-only">{i18next.t('error')}</span> {i18next.t(error, this.errorRange)}
+                  <span class="sr-only">{i18next.t('error')}</span> {i18next.t(error, this.errorParameters)}
                 </Fragment>
               )}
             </span>
