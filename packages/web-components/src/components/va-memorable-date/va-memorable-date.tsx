@@ -290,7 +290,7 @@ export class VaMemorableDate {
               {error && (
                 <Fragment>
                   <span class="usa-sr-only">{i18next.t('error')}</span> 
-                  <span class="usa-error-message">{error}</span>
+                  <span class="usa-error-message">{i18next.t(error, this.errorRange)}</span>
                 </Fragment>
               )}
             </span>
