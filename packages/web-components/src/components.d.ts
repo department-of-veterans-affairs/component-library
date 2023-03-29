@@ -198,11 +198,11 @@ export namespace Components {
          */
         "disableAnalytics"?: boolean;
         /**
-          * Applies to the primary button.
+          * Applies to the primary button aria-label.
          */
         "primaryLabel"?: string;
         /**
-          * Applies to the secondary button.
+          * Applies to the secondary button aria-label.
          */
         "secondaryLabel"?: string;
         /**
@@ -213,6 +213,10 @@ export namespace Components {
           * If `true`, button pair will use Update and Cancel for button text.
          */
         "update"?: boolean;
+        /**
+          * Whether or not the component will use USWDS v3 styling.
+         */
+        "uswds"?: boolean;
     }
     interface VaCheckbox {
         /**
@@ -515,7 +519,13 @@ export namespace Components {
          */
         "visible"?: boolean;
     }
+    interface VaNeedHelp {
+    }
     interface VaNumberInput {
+        /**
+          * Whether this component will be used to accept a currency value.
+         */
+        "currency"?: boolean;
         /**
           * Emit component-library-analytics events on the blur event.
          */
@@ -963,6 +973,10 @@ export namespace Components {
          */
         "required"?: boolean;
         /**
+          * Whether or not the component will use USWDS v3 styling.
+         */
+        "uswds"?: boolean;
+        /**
           * The value of the textarea
          */
         "value"?: string;
@@ -1071,6 +1085,10 @@ export interface VaRadioCustomEvent<T> extends CustomEvent<T> {
 export interface VaRadioOptionCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLVaRadioOptionElement;
+}
+export interface VaSearchInputCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLVaSearchInputElement;
 }
 export interface VaSegmentedProgressBarCustomEvent<T> extends CustomEvent<T> {
     detail: T;
@@ -1207,6 +1225,12 @@ declare global {
         prototype: HTMLVaModalElement;
         new (): HTMLVaModalElement;
     };
+    interface HTMLVaNeedHelpElement extends Components.VaNeedHelp, HTMLStencilElement {
+    }
+    var HTMLVaNeedHelpElement: {
+        prototype: HTMLVaNeedHelpElement;
+        new (): HTMLVaNeedHelpElement;
+    };
     interface HTMLVaNumberInputElement extends Components.VaNumberInput, HTMLStencilElement {
     }
     var HTMLVaNumberInputElement: {
@@ -1341,6 +1365,7 @@ declare global {
         "va-loading-indicator": HTMLVaLoadingIndicatorElement;
         "va-memorable-date": HTMLVaMemorableDateElement;
         "va-modal": HTMLVaModalElement;
+        "va-need-help": HTMLVaNeedHelpElement;
         "va-number-input": HTMLVaNumberInputElement;
         "va-official-gov-banner": HTMLVaOfficialGovBannerElement;
         "va-omb-info": HTMLVaOmbInfoElement;
@@ -1607,11 +1632,11 @@ declare namespace LocalJSX {
          */
         "onSecondaryClick"?: (event: VaButtonPairCustomEvent<any>) => void;
         /**
-          * Applies to the primary button.
+          * Applies to the primary button aria-label.
          */
         "primaryLabel"?: string;
         /**
-          * Applies to the secondary button.
+          * Applies to the secondary button aria-label.
          */
         "secondaryLabel"?: string;
         /**
@@ -1622,6 +1647,10 @@ declare namespace LocalJSX {
           * If `true`, button pair will use Update and Cancel for button text.
          */
         "update"?: boolean;
+        /**
+          * Whether or not the component will use USWDS v3 styling.
+         */
+        "uswds"?: boolean;
     }
     interface VaCheckbox {
         /**
@@ -1992,7 +2021,13 @@ declare namespace LocalJSX {
          */
         "visible"?: boolean;
     }
+    interface VaNeedHelp {
+    }
     interface VaNumberInput {
+        /**
+          * Whether this component will be used to accept a currency value.
+         */
+        "currency"?: boolean;
         /**
           * Emit component-library-analytics events on the blur event.
          */
@@ -2268,6 +2303,10 @@ declare namespace LocalJSX {
          */
         "label"?: string;
         /**
+          * The event used to track usage of the component. This is emitted when the search button is clicked and when blur occurs on the input field.
+         */
+        "onComponent-library-analytics"?: (event: VaSearchInputCustomEvent<any>) => void;
+        /**
           * An array of strings containing suggestions to be displayed in listbox. This component displays up to 5 suggestions.
          */
         "suggestions"?: any;
@@ -2520,6 +2559,10 @@ declare namespace LocalJSX {
          */
         "required"?: boolean;
         /**
+          * Whether or not the component will use USWDS v3 styling.
+         */
+        "uswds"?: boolean;
+        /**
           * The value of the textarea
          */
         "value"?: string;
@@ -2544,6 +2587,7 @@ declare namespace LocalJSX {
         "va-loading-indicator": VaLoadingIndicator;
         "va-memorable-date": VaMemorableDate;
         "va-modal": VaModal;
+        "va-need-help": VaNeedHelp;
         "va-number-input": VaNumberInput;
         "va-official-gov-banner": VaOfficialGovBanner;
         "va-omb-info": VaOmbInfo;
@@ -2588,6 +2632,7 @@ declare module "@stencil/core" {
             "va-loading-indicator": LocalJSX.VaLoadingIndicator & JSXBase.HTMLAttributes<HTMLVaLoadingIndicatorElement>;
             "va-memorable-date": LocalJSX.VaMemorableDate & JSXBase.HTMLAttributes<HTMLVaMemorableDateElement>;
             "va-modal": LocalJSX.VaModal & JSXBase.HTMLAttributes<HTMLVaModalElement>;
+            "va-need-help": LocalJSX.VaNeedHelp & JSXBase.HTMLAttributes<HTMLVaNeedHelpElement>;
             "va-number-input": LocalJSX.VaNumberInput & JSXBase.HTMLAttributes<HTMLVaNumberInputElement>;
             "va-official-gov-banner": LocalJSX.VaOfficialGovBanner & JSXBase.HTMLAttributes<HTMLVaOfficialGovBannerElement>;
             "va-omb-info": LocalJSX.VaOmbInfo & JSXBase.HTMLAttributes<HTMLVaOmbInfoElement>;

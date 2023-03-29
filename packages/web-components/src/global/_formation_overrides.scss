@@ -16,6 +16,7 @@
 .usa-label,
 .usa-legend,
 .usa-radio__label,
+.usa-textarea,
 .usa-select {
   font-size: rem-override(1.06rem);
 }
@@ -62,7 +63,7 @@
   }
 }
 
-.usa-input, .usa-select {
+.usa-input, .usa-select, .usa-textarea {
   height: rem-override(2.5rem);
   margin-top: rem-override(0.5rem);
   max-width: rem-override(30rem);
@@ -144,6 +145,10 @@
   width: rem-override(15rem);
 }
 
+.usa-textarea {
+  height: rem-override(10rem);
+}
+
 .usa-button {
   font-size: rem-override(1.06rem);
   border-radius: rem-override(0.25rem);
@@ -154,4 +159,11 @@
     font-size: rem-override(1.46rem);
     padding: rem-override(1rem) rem-override(1.5rem);
   }
+}
+
+.usa-button-group {
+  &__item {
+    margin: rem-override(0.25rem);
+  }
+  margin: 0px rem-override(-0.5rem);
 }

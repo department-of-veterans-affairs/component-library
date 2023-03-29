@@ -70,7 +70,7 @@ export class VaButton {
   /**
    * Whether or not the component will use USWDS v3 styling.
    */
-  @Prop() uswds?: boolean = false;
+  @Prop({ reflect: true }) uswds?: boolean = false;
 
   /**
    * The event used to track usage of the component.

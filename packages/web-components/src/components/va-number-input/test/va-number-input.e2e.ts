@@ -15,8 +15,10 @@ describe('va-number-input', () => {
             Hello, world
           </label>
           <span id="error-message" role="alert"></span>
-          <input id="inputField" type="number" aria-invalid="false" />
-        </mock:shadow-root>
+          <div>
+            <input id="inputField" type="number" aria-invalid="false" />
+          </div>
+          </mock:shadow-root>
       </va-number-input>
     `);
   });
@@ -165,5 +167,12 @@ describe('va-number-input', () => {
       const inputEl = await page.find('va-number-input >>> input');
       expect(inputEl.getAttribute('inputmode')).toBe(inputMode);
     }
+  });
+
+  it('renders a "$" if currency flag set to true', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-number-input currency />');
+    const currencyTextElement = await page.find('va-number-input >>> div > span');
+    expect(currencyTextElement.innerText).toContain('$');
   });
 });

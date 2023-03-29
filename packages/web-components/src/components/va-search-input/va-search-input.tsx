@@ -7,6 +7,8 @@ import {
   Prop,
   State,
   Watch,
+  EventEmitter,
+  Event,
 } from '@stencil/core';
 
 /**
@@ -23,6 +25,17 @@ import {
 export class VaSearchInput {
   @Element() el: HTMLElement;
   inputRef!: HTMLInputElement;
+
+  /**
+   * The event used to track usage of the component. This is emitted when the
+   * search button is clicked and when blur occurs on the input field.
+   */
+  @Event({
+    eventName: 'component-library-analytics',
+    composed: true,
+    bubbles: true,
+  })
+  componentLibraryAnalytics: EventEmitter;
 
   /**
    * An array of suggestions with suggested text bolded
@@ -88,14 +101,23 @@ export class VaSearchInput {
   // Host event handlers
   /**
    * Closes listbox when focus is outside of the host element
+   * and fires analytics event.
    */
   private handleBlur = () => {
+    this.componentLibraryAnalytics.emit({
+      componentName: 'va-search-input',
+      action: 'blur',
+      details: {
+        value: this.value,
+      },
+    });
+
     if (!this.formattedSuggestions.length) return;
     this.isListboxOpen = false;
   };
 
   /**
-   * Fires a submit event
+   * Fires a submit and analytics events.
    */
   private handleSubmit = () => {
     this.inputRef.dispatchEvent(
@@ -105,6 +127,14 @@ export class VaSearchInput {
         composed: true,
       }),
     );
+
+    this.componentLibraryAnalytics.emit({
+      componentName: 'va-search-input',
+      action: 'click',
+      details: {
+        value: this.value,
+      },
+    });
   };
 
   // Input event handlers
