@@ -55,6 +55,7 @@ const Template = ({
 export const Default = Template.bind(null);
 Default.args = {
   ...defaultArgs,
+  continue: true,
 };
 Default.argTypes = propStructure(buttonPairDocs);
 
