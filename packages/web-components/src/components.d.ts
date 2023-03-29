@@ -296,6 +296,10 @@ export namespace Components {
          */
         "error"?: string;
         /**
+          * The error message to render (if any) This prop should be leveraged to display any custom validations needed for this component
+         */
+        "errorRange"?: { start: number, end: number };
+        /**
           * Optional hint text.
          */
         "hint"?: string;
@@ -436,6 +440,10 @@ export namespace Components {
           * The error message to render (if any) This prop should be leveraged to display any custom validations needed for this component
          */
         "error"?: string;
+        /**
+          * The error message to render (if any) This prop should be leveraged to display any custom validations needed for this component
+         */
+        "errorRange"?: { start: number, end: number };
         /**
           * Hint text string
          */
@@ -1709,6 +1717,10 @@ declare namespace LocalJSX {
          */
         "error"?: string;
         /**
+          * The error message to render (if any) This prop should be leveraged to display any custom validations needed for this component
+         */
+        "errorRange"?: { start: number, end: number };
+        /**
           * Optional hint text.
          */
         "hint"?: string;
@@ -1877,6 +1889,10 @@ declare namespace LocalJSX {
           * The error message to render (if any) This prop should be leveraged to display any custom validations needed for this component
          */
         "error"?: string;
+        /**
+          * The error message to render (if any) This prop should be leveraged to display any custom validations needed for this component
+         */
+        "errorRange"?: { start: number, end: number };
         /**
           * Hint text string
          */

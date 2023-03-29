@@ -8,6 +8,7 @@ import {
   Element,
   Fragment,
 } from '@stencil/core';
+import i18next from 'i18next';
 
 import {
   months,
@@ -64,6 +65,14 @@ export class VaDate {
     mutable: true,
     reflect: true
   }) error?: string;
+  /**
+   * The error message to render (if any)
+   * This prop should be leveraged to display any custom validations needed for this component
+   */
+  @Prop({
+    mutable: true,
+    reflect: true
+  }) errorRange?: { start: number, end: number };
 
   /**
    * Whether or not only the Month and Year inputs should be displayed.
@@ -225,7 +234,7 @@ export class VaDate {
           <span id="error-message" role="alert">
             {error && (
               <Fragment>
-                <span class="sr-only">Error</span> {error}
+                <span class="sr-only">Error</span> {i18next.t(error, this.errorRange)}
               </Fragment>
             )}
           </span>

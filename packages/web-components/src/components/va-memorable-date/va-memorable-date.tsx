@@ -84,6 +84,12 @@ export class VaMemorableDate {
   @Prop({ reflect: true, mutable: true }) error?: string;
 
   /**
+   * The error message to render (if any)
+   * This prop should be leveraged to display any custom validations needed for this component
+   */
+  @Prop({ reflect: true, mutable: true }) errorRange?: { start: number, end: number };
+
+  /**
    * Set the default date value must be in YYYY-MM-DD format.
    */
   @Prop({ mutable: true, reflect: true }) value?: string;
@@ -343,11 +349,11 @@ export class VaMemorableDate {
               {hint && <div id="hint">{hint}</div>}
               <div id="dateHint">{i18next.t('date-hint')}.</div>
             </legend>
-            <slot />
+            <slot /> 
             <span id="error-message" role="alert">
               {error && (
                 <Fragment>
-                  <span class="sr-only">{i18next.t('error')}</span> {error}
+                  <span class="sr-only">{i18next.t('error')}</span> {i18next.t(error, this.errorRange)}
                 </Fragment>
               )}
             </span>

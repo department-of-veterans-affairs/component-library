@@ -173,7 +173,8 @@ export function validate(
   // Empty fields are acceptable unless the component is marked as required
   if (year && (year < minYear || year > maxYear)) {
     component.invalidYear = true;
-    component.error = i18next.t('year-range', { start: minYear, end: maxYear });
+    component.error = 'year-range';
+    component.errorRange = { start: minYear, end: maxYear };
   }
   else {
     component.invalidYear = false;
@@ -183,7 +184,8 @@ export function validate(
   // We don't know the upper limit on days until we know the month
   if (!monthYearOnly && (day < minMonths || day > daysForSelectedMonth)) {
     component.invalidDay = true;
-    component.error = i18next.t('day-range', { start: minMonths, end: daysForSelectedMonth });
+    component.error = 'day-range';
+    component.errorRange = { start: minMonths, end: daysForSelectedMonth };
   }
   else {
     component.invalidDay = false;
@@ -194,7 +196,8 @@ export function validate(
   if ((month && (month < minMonths || month > maxMonths)) ||
       (!month && component.invalidDay)) {
     component.invalidMonth = true;
-    component.error = i18next.t('month-range', { start: minMonths, end: maxMonths });
+    component.error = 'month-range';
+    component.errorRange = { start: minMonths, end: maxMonths };
   }
   else {
     component.invalidMonth = false;
@@ -204,7 +207,7 @@ export function validate(
     component.invalidYear = !year;
     component.invalidMonth = !month;
     component.invalidDay = monthYearOnly ? false : !day;
-    component.error = i18next.t('date-error');
+    component.error = 'date-error';
   }
 
   // Remove any error message if none of the fields are marked as invalid
