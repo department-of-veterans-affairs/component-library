@@ -3,7 +3,7 @@ import SystemDownView from '../../react-components/src/components/SystemDownView
 import { StoryDocs } from './wc-helpers';
 
 export default {
-  title: 'Components/System down view',
+  title: 'Deprecated/System down view',
   component: SystemDownView,
   id: 'components/systemdownview',
   parameters: {

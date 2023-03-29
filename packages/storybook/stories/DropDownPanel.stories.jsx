@@ -3,7 +3,7 @@ import DropDownPanel from '../../react-components/src/components/DropDownPanel/D
 import { StoryDocs } from './wc-helpers';
 
 export default {
-  title: 'Components/Dropdown panel',
+  title: 'Deprecated/Dropdown panel',
   component: DropDownPanel,
   id: 'components/dropdownpanel',
   parameters: {
