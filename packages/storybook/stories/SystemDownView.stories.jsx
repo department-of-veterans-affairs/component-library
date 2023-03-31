@@ -9,7 +9,7 @@ export default {
   parameters: {
     componentSubtitle: 'System down view React component',
     docs: {
-      page: () => <StoryDocs componentName="System down view" />,
+      page: () => <StoryDocs componentName="System down view - React" />,
     },
   },
 };
