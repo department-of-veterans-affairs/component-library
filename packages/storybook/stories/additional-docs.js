@@ -27,11 +27,11 @@ export const additionalDocs = {
     maturityCategory: USE,
     maturityLevel: BEST_PRACTICE,
   },
-  'Dropdown panel': {
+  'Dropdown panel - React': {
     maturityCategory: DONT_USE,
     maturityLevel: DEPRECATED,
   },
-  'Expanding group': {
+  'Expanding group - React': {
     maturityCategory: DONT_USE,
     maturityLevel: DEPRECATED,
   },
@@ -93,7 +93,7 @@ export const additionalDocs = {
     maturityCategory: USE,
     maturityLevel: BEST_PRACTICE,
   },
-  'System down view': {
+  'System down view - React': {
     maturityCategory: DONT_USE,
     maturityLevel: DEPRECATED,
   },

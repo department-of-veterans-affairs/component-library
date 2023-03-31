@@ -9,7 +9,7 @@ export default {
   parameters: {
     componentSubtitle: 'Expanding group React component',
     docs: {
-      page: () => <StoryDocs componentName="Expanding group" />,
+      page: () => <StoryDocs componentName="Expanding group - React" />,
     },
   },
 };
