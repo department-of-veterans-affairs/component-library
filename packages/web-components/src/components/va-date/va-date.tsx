@@ -8,12 +8,14 @@ import {
   Element,
   Fragment,
 } from '@stencil/core';
+import i18next from 'i18next';
 
 import {
   months,
   days,
   validate,
   validKeys,
+  getErrorParameters,
 } from '../../utils/date-utils';
 
 /**
@@ -212,6 +214,9 @@ export class VaDate {
       .split('-')
       .map(val => parseInt(val));
     const daysForSelectedMonth = month > 0 ? days[month] : [];
+    const errorParameters = (error: string) => {
+      return getErrorParameters(error, year, month);
+    }
 
     // Fieldset has an implicit aria role of group
     return (
@@ -225,7 +230,7 @@ export class VaDate {
           <span id="error-message" role="alert">
             {error && (
               <Fragment>
-                <span class="sr-only">Error</span> {error}
+                <span class="sr-only">Error</span> {i18next.t(error, errorParameters(error))}
               </Fragment>
             )}
           </span>

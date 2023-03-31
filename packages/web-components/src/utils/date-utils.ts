@@ -167,13 +167,13 @@ export function validate(
   monthYearOnly : boolean = false) : void {
 
   const leapYear = checkLeapYear(year);
-  const daysForSelectedMonth = leapYear && month == 2 ? 29 : days[month]?.length || 0;
+  const maxDay = daysForSelectedMonth(leapYear, month);
 
   // Begin built-in validation.
   // Empty fields are acceptable unless the component is marked as required
   if (year && (year < minYear || year > maxYear)) {
     component.invalidYear = true;
-    component.error = i18next.t('year-range', { start: minYear, end: maxYear });
+    component.error = 'year-range';
   }
   else {
     component.invalidYear = false;
@@ -181,9 +181,9 @@ export function validate(
 
   // Check day before month so that the month error message has a change to override
   // We don't know the upper limit on days until we know the month
-  if (!monthYearOnly && (day < minMonths || day > daysForSelectedMonth)) {
+  if (!monthYearOnly && (day < minMonths || day > maxDay)) {
     component.invalidDay = true;
-    component.error = i18next.t('day-range', { start: minMonths, end: daysForSelectedMonth });
+    component.error = 'day-range';
   }
   else {
     component.invalidDay = false;
@@ -194,7 +194,7 @@ export function validate(
   if ((month && (month < minMonths || month > maxMonths)) ||
       (!month && component.invalidDay)) {
     component.invalidMonth = true;
-    component.error = i18next.t('month-range', { start: minMonths, end: maxMonths });
+    component.error = 'month-range';
   }
   else {
     component.invalidMonth = false;
@@ -204,13 +204,37 @@ export function validate(
     component.invalidYear = !year;
     component.invalidMonth = !month;
     component.invalidDay = monthYearOnly ? false : !day;
-    component.error = i18next.t('date-error');
+    component.error = 'date-error';
   }
 
   // Remove any error message if none of the fields are marked as invalid
   if (!component.invalidYear && !component.invalidMonth && !component.invalidDay) {
     component.error = null;
   }
+}
+
+export function getErrorParameters(
+  error: string,
+  year: number,
+  month: number) {
+
+  const leapYear = checkLeapYear(year);
+  const maxDay = daysForSelectedMonth(leapYear, month);
+
+  switch(error) {
+    case 'month-range':
+      return { start: 1, end: maxMonths };
+    case 'day-range':
+      return { start: 1, end: maxDay };
+    case 'year-range':
+      return { start: minYear, end: maxYear };
+    default:
+      return null;
+  }
+}
+
+const daysForSelectedMonth = (leapYear: boolean, month: number): number => {
+  return leapYear && month == 2 ? 29 : days[month]?.length || 0;
 }
 
 // Allow 0-9, Backspace, Delete, Left and Right Arrow, and Tab to clear data or move to next field
