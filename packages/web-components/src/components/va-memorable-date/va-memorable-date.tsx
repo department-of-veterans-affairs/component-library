@@ -11,6 +11,7 @@ import {
 } from '@stencil/core';
 
 import {
+  getErrorParameters,
   months,
   validate,
   validKeys,
@@ -82,13 +83,6 @@ export class VaMemorableDate {
    * This prop should be leveraged to display any custom validations needed for this component
    */
   @Prop({ reflect: true, mutable: true }) error?: string;
-
-  /**
-   * The error range parameters to use for rendering the error message (if any)
-   * This prop should be used in conjunction with the error prop to specify a range for the day, month, or year.
-   * The start and end values should indicate the range of the day, month, or year within the component.
-   */
-  @Prop({ reflect: true, mutable: true }) errorParameters?: { start: number, end: number };
 
   /**
    * Set the default date value must be in YYYY-MM-DD format.
@@ -231,6 +225,11 @@ export class VaMemorableDate {
       
     const hintText = monthSelect ? i18next.t('date-hint-with-select') : i18next.t('date-hint');
 
+    const errorParameters = (error: string) => {
+      const yearNum = parseInt(year);
+      const monthNum = parseInt(month);
+      return getErrorParameters(error, yearNum, monthNum);
+    }
 
     // Error attribute should be leveraged for custom error messaging
     // Fieldset has an implicit aria role of group
@@ -291,7 +290,7 @@ export class VaMemorableDate {
               {error && (
                 <Fragment>
                   <span class="usa-sr-only">{i18next.t('error')}</span> 
-                  <span class="usa-error-message">{i18next.t(error, this.errorParameters)}</span>
+                  <span class="usa-error-message">{i18next.t(error, errorParameters(error))}</span>
                 </Fragment>
               )}
             </span>
@@ -354,7 +353,7 @@ export class VaMemorableDate {
             <span id="error-message" role="alert">
               {error && (
                 <Fragment>
-                  <span class="sr-only">{i18next.t('error')}</span> {i18next.t(error, this.errorParameters)}
+                  <span class="sr-only">{i18next.t('error')}</span> {i18next.t(error, errorParameters(error))}
                 </Fragment>
               )}
             </span>

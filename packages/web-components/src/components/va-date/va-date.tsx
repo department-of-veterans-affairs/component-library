@@ -15,6 +15,7 @@ import {
   days,
   validate,
   validKeys,
+  getErrorParameters,
 } from '../../utils/date-utils';
 
 /**
@@ -65,15 +66,6 @@ export class VaDate {
     mutable: true,
     reflect: true
   }) error?: string;
-  /**
-   * The error range parameters to use for rendering the error message (if any)
-   * This prop should be used in conjunction with the error prop to specify a range for the day, month, or year.
-   * The start and end values should indicate the range of the day, month, or year within the component.
-   */
-  @Prop({
-    mutable: true,
-    reflect: true
-  }) errorParameters?: { start: number, end: number };
 
   /**
    * Whether or not only the Month and Year inputs should be displayed.
@@ -222,6 +214,9 @@ export class VaDate {
       .split('-')
       .map(val => parseInt(val));
     const daysForSelectedMonth = month > 0 ? days[month] : [];
+    const errorParameters = (error: string) => {
+      return getErrorParameters(error, year, month);
+    }
 
     // Fieldset has an implicit aria role of group
     return (
@@ -235,7 +230,7 @@ export class VaDate {
           <span id="error-message" role="alert">
             {error && (
               <Fragment>
-                <span class="sr-only">Error</span> {i18next.t(error, this.errorParameters)}
+                <span class="sr-only">Error</span> {i18next.t(error, errorParameters(error))}
               </Fragment>
             )}
           </span>

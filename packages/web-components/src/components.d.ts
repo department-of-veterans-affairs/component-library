@@ -300,10 +300,6 @@ export namespace Components {
          */
         "error"?: string;
         /**
-          * The error range parameters to use for rendering the error message (if any) This prop should be used in conjunction with the error prop to specify a range for the day, month, or year. The start and end values should indicate the range of the day, month, or year within the component.
-         */
-        "errorParameters"?: { start: number, end: number };
-        /**
           * Optional hint text.
          */
         "hint"?: string;
@@ -444,10 +440,6 @@ export namespace Components {
           * The error message to render (if any) This prop should be leveraged to display any custom validations needed for this component
          */
         "error"?: string;
-        /**
-          * The error range parameters to use for rendering the error message (if any) This prop should be used in conjunction with the error prop to specify a range for the day, month, or year. The start and end values should indicate the range of the day, month, or year within the component.
-         */
-        "errorParameters"?: { start: number, end: number };
         /**
           * Hint text string
          */
@@ -1746,10 +1738,6 @@ declare namespace LocalJSX {
          */
         "error"?: string;
         /**
-          * The error range parameters to use for rendering the error message (if any) This prop should be used in conjunction with the error prop to specify a range for the day, month, or year. The start and end values should indicate the range of the day, month, or year within the component.
-         */
-        "errorParameters"?: { start: number, end: number };
-        /**
           * Optional hint text.
          */
         "hint"?: string;
@@ -1918,10 +1906,6 @@ declare namespace LocalJSX {
           * The error message to render (if any) This prop should be leveraged to display any custom validations needed for this component
          */
         "error"?: string;
-        /**
-          * The error range parameters to use for rendering the error message (if any) This prop should be used in conjunction with the error prop to specify a range for the day, month, or year. The start and end values should indicate the range of the day, month, or year within the component.
-         */
-        "errorParameters"?: { start: number, end: number };
         /**
           * Hint text string
          */
