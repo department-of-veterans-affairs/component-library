@@ -41,7 +41,7 @@
 
 :host(:not([uswds])) #dateHint,
 #hint {
-  color: var(--color-gray-medium);
+  color: var(--color-gray);
   line-height: 1.5;
 }
 
@@ -50,5 +50,13 @@ slot:not([name])::slotted(*) {
 }
 
 :host(:not([uswds])) #error-message {
-  margin-bottom: 0.8rem;
+  margin-bottom: 0;
+}
+
+:host(:not([uswds])) .date-container {
+  margin-top: 16px;
+}
+
+.usa-memorable-date {
+  margin-top: 16px;
 }
