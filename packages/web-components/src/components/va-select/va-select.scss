@@ -58,3 +58,7 @@ span.required {
   font-family: var(--font-source-sans);
   padding: 0.8rem 3rem 0.8rem 0.7em;
 }
+
+:host .usa-select {
+  margin-bottom: 0;
+}

@@ -53,10 +53,7 @@ slot:not([name])::slotted(*) {
   margin-bottom: 0;
 }
 
-:host(:not([uswds])) .date-container {
-  margin-top: 16px;
-}
-
-.usa-memorable-date {
+:host(:not([uswds])) .date-container,
+:host .usa-memorable-date {
   margin-top: 16px;
 }
