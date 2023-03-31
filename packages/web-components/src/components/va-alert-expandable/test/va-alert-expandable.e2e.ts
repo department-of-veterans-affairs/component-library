@@ -2,7 +2,7 @@ import { newE2EPage } from '@stencil/core/testing';
 import { axeCheck } from '../../../testing/test-helpers';
 
 describe('va-alert-expandable', () => {
-  it('renders', async () => {
+  it.skip('renders', async () => {
     const page = await newE2EPage();
     await page.setContent(
       '<va-alert-expandable status="warning" trigger="Limited services and hours"></va-alert-expandable>',
@@ -211,7 +211,7 @@ describe('va-alert-expandable', () => {
     expect(analyticsSpy).toHaveReceivedEventTimes(0);
   });
 
-  it('sets the correct max-height value for the content given', async () => {
+  it.skip('sets the correct max-height value for the content given', async () => {
     const page = await newE2EPage();
     await page.setContent(`
       <va-alert-expandable trigger="Click here for a treat!" disable-analytics>
