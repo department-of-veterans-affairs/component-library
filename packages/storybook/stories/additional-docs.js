@@ -27,11 +27,11 @@ export const additionalDocs = {
     maturityCategory: USE,
     maturityLevel: BEST_PRACTICE,
   },
-  'Dropdown panel': {
-    maturityCategory: CAUTION,
-    maturityLevel: AVAILABLE,
+  'Dropdown panel - React': {
+    maturityCategory: DONT_USE,
+    maturityLevel: DEPRECATED,
   },
-  'Expanding group': {
+  'Expanding group - React': {
     maturityCategory: DONT_USE,
     maturityLevel: DEPRECATED,
   },
@@ -71,8 +71,8 @@ export const additionalDocs = {
   'OMB info - React': {
     guidanceHref: 'omb-info',
     guidanceName: 'OMB info',
-    maturityCategory: USE,
-    maturityLevel: DEPLOYED,
+    maturityCategory: DONT_USE,
+    maturityLevel: DEPRECATED,
   },
   'Pagination - React': {
     maturityCategory: DONT_USE,
@@ -93,9 +93,9 @@ export const additionalDocs = {
     maturityCategory: USE,
     maturityLevel: BEST_PRACTICE,
   },
-  'System down view': {
-    maturityCategory: CAUTION,
-    maturityLevel: AVAILABLE,
+  'System down view - React': {
+    maturityCategory: DONT_USE,
+    maturityLevel: DEPRECATED,
   },
   'Table - React': {
     maturityCategory: DONT_USE,

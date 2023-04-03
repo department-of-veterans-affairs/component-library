@@ -3,13 +3,13 @@ import ExpandingGroup from '../../react-components/src/components/ExpandingGroup
 import { StoryDocs } from './wc-helpers';
 
 export default {
-  title: 'Deprecated/Expanding group',
+  title: 'Deprecated/Expanding group - React',
   component: ExpandingGroup,
   id: 'components/expandinggroup',
   parameters: {
     componentSubtitle: 'Expanding group React component',
     docs: {
-      page: () => <StoryDocs componentName="Expanding group" />,
+      page: () => <StoryDocs componentName="Expanding group - React" />,
     },
   },
 };

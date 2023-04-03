@@ -83,6 +83,11 @@ export class VaNumberInput {
   @Prop({ mutable: true, reflect: true }) value?: string;
 
   /**
+   * Whether this component will be used to accept a currency value.
+   */
+  @Prop() currency?: boolean = false;
+
+  /**
    * The event used to track usage of the component. This is emitted when the
    * input is blurred and enableAnalytics is true.
    */
@@ -133,6 +138,7 @@ export class VaNumberInput {
       min,
       value,
       hint,
+      currency,
       handleBlur,
       handleInput,
     } = this;
@@ -150,20 +156,26 @@ export class VaNumberInput {
             </Fragment>
           )}
         </span>
-        <input
-          aria-describedby={error ? 'error-message' : undefined}
-          aria-invalid={error ? 'true' : 'false'}
-          id="inputField"
-          type="number"
-          inputmode={inputmode ? inputmode : null}
-          name={name}
-          max={max}
-          min={min}
-          value={value}
-          required={required || null}
-          onInput={handleInput}
-          onBlur={handleBlur}
-        />
+        <div>
+          {/* eslint-disable-next-line i18next/no-literal-string */}
+          {currency && <span id="symbol">$</span>}
+          <input
+            class={currency ? 'currency-input' : ''}
+            aria-labelledby={currency ? 'inputField symbol' : undefined}
+            aria-describedby={error ? 'error-message' : undefined}
+            aria-invalid={error ? 'true' : 'false'}
+            id="inputField"
+            type="number"
+            inputmode={inputmode ? inputmode : null}
+            name={name}
+            max={max}
+            min={min}
+            value={value}
+            required={required || null}
+            onInput={handleInput}
+            onBlur={handleBlur}
+            />
+          </div>
       </Host>
     );
   }

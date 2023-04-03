@@ -11,6 +11,7 @@ import {
 } from '@stencil/core';
 
 import {
+  getErrorParameters,
   months,
   validate,
   validKeys,
@@ -224,6 +225,11 @@ export class VaMemorableDate {
       
     const hintText = monthSelect ? i18next.t('date-hint-with-select') : i18next.t('date-hint');
 
+    const errorParameters = (error: string) => {
+      const yearNum = parseInt(year);
+      const monthNum = parseInt(month);
+      return getErrorParameters(error, yearNum, monthNum);
+    }
 
     // Error attribute should be leveraged for custom error messaging
     // Fieldset has an implicit aria role of group
@@ -284,7 +290,7 @@ export class VaMemorableDate {
               {error && (
                 <Fragment>
                   <span class="usa-sr-only">{i18next.t('error')}</span> 
-                  <span class="usa-error-message">{error}</span>
+                  <span class="usa-error-message">{i18next.t(error, errorParameters(error))}</span>
                 </Fragment>
               )}
             </span>
@@ -343,11 +349,11 @@ export class VaMemorableDate {
               {hint && <div id="hint">{hint}</div>}
               <div id="dateHint">{i18next.t('date-hint')}.</div>
             </legend>
-            <slot />
+            <slot /> 
             <span id="error-message" role="alert">
               {error && (
                 <Fragment>
-                  <span class="sr-only">{i18next.t('error')}</span> {error}
+                  <span class="sr-only">{i18next.t('error')}</span> {i18next.t(error, errorParameters(error))}
                 </Fragment>
               )}
             </span>
