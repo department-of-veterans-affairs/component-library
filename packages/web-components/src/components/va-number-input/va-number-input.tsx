@@ -9,6 +9,7 @@ import {
   forceUpdate,
   Fragment,
 } from '@stencil/core';
+import classnames from 'classnames';
 import i18next from 'i18next';
 
 /**
@@ -88,6 +89,11 @@ export class VaNumberInput {
   @Prop() currency?: boolean = false;
 
   /**
+   * Whether or not the component will use USWDS v3 styling.
+   */
+  @Prop() uswds?: boolean = false;
+
+  /**
    * The event used to track usage of the component. This is emitted when the
    * input is blurred and enableAnalytics is true.
    */
@@ -139,30 +145,45 @@ export class VaNumberInput {
       value,
       hint,
       currency,
+      uswds,
       handleBlur,
       handleInput,
     } = this;
-    return (
-      <Host>
-        <label htmlFor="inputField">
-          {label}{' '}
-          {required && <span class="required">{i18next.t('required')}</span>}
-        </label>
-        {hint && <span class="hint-text">{hint}</span>}
-        <span id="error-message" role="alert">
-          {error && (
-            <Fragment>
-              <span class="sr-only">{i18next.t('error')}</span> {error}
-            </Fragment>
+
+    if (uswds) {
+      const labelClasses = classnames({
+        'usa-label': true,
+        'usa-label--error': error,
+      });
+      const inputClasses = classnames({
+        'usa-input': true,
+        'usa-input--error': error,
+      });
+      return (
+        <Host>
+          {label && (
+            <label htmlFor="inputField" class={labelClasses}>
+              {label}
+              {required && (
+                <span class="usa-label--required">
+                  {' '}
+                  {i18next.t('required')}
+                </span>
+              )}
+            </label>
           )}
-        </span>
-        <div>
-          {/* eslint-disable-next-line i18next/no-literal-string */}
-          {currency && <span id="symbol">$</span>}
+          {hint && <span class="usa-hint">{hint}</span>}
+          <span id="input-error-message" role="alert">
+            {error && (
+              <Fragment>
+                <span class="usa-sr-only">{i18next.t('error')}</span>
+                <span class="usa-error-message">{error}</span>
+              </Fragment>
+            )}
+          </span>
           <input
-            class={currency ? 'currency-input' : ''}
-            aria-labelledby={currency ? 'inputField symbol' : undefined}
-            aria-describedby={error ? 'error-message' : undefined}
+            class={inputClasses}
+            aria-describedby={error ? 'input-error-message' : undefined}
             aria-invalid={error ? 'true' : 'false'}
             id="inputField"
             type="number"
@@ -175,8 +196,45 @@ export class VaNumberInput {
             onInput={handleInput}
             onBlur={handleBlur}
             />
-          </div>
-      </Host>
-    );
+        </Host>
+      );
+    } else {
+      return (
+        <Host>
+          <label htmlFor="inputField">
+            {label}{' '}
+            {required && <span class="required">{i18next.t('required')}</span>}
+          </label>
+          {hint && <span class="hint-text">{hint}</span>}
+          <span id="error-message" role="alert">
+            {error && (
+              <Fragment>
+                <span class="sr-only">{i18next.t('error')}</span> {error}
+              </Fragment>
+            )}
+          </span>
+          <div>
+            {/* eslint-disable-next-line i18next/no-literal-string */}
+            {currency && <span id="symbol">$</span>}
+            <input
+              class={currency ? 'currency-input' : ''}
+              aria-labelledby={currency ? 'inputField symbol' : undefined}
+              aria-describedby={error ? 'error-message' : undefined}
+              aria-invalid={error ? 'true' : 'false'}
+              id="inputField"
+              type="number"
+              inputmode={inputmode ? inputmode : null}
+              name={name}
+              max={max}
+              min={min}
+              value={value}
+              required={required || null}
+              onInput={handleInput}
+              onBlur={handleBlur}
+              />
+            </div>
+        </Host>
+      );
+    }
   }
 }
