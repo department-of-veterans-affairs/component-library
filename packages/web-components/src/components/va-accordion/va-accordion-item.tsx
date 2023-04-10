@@ -69,12 +69,6 @@ export class VaAccordionItem {
     this.accordionItemToggled.emit(e);
   }
 
-  // Using onSlotChange to fire event on inital load
-  // Data access from slot html element is being perfomed by this function
-  // Function allows us to provide context to state
-  // State is then being digested by the Header Function below
-
-
   componentDidLoad() {
     // auto-expand accordion if the window hash matches the ID
     if (this.el.id && this.el.id === window.location.hash.slice(1)) {
@@ -86,6 +80,8 @@ export class VaAccordionItem {
   }
 
   render() {
+    const headerText = this.el.shadowRoot.querySelector('[slot="headline"]')?.innerHTML;
+
     return (
       <Host>
         <button
@@ -95,6 +91,7 @@ export class VaAccordionItem {
           onClick={this.toggleOpen.bind(this)}
           aria-expanded={this.open ? 'true' : 'false'}
           aria-controls="content"
+          aria-label={`${this.open ? 'Collapse' : 'Expand'} ${headerText}`}
         >
           <slot name="headline" />
           <slot name="subheadline" />

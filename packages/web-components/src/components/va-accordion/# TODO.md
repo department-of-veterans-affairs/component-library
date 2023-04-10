@@ -16,5 +16,5 @@
 - [ ] unit tests
 - [ ] docs
   - section-header?
-
+- [ ] remove unneeded props
 - [ ] sub header look and feel
