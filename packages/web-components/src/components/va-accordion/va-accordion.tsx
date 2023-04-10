@@ -71,8 +71,9 @@ export class VaAccordion {
   @Listen('accordionItemToggled')
   itemToggledHandler(event: CustomEvent) {
 
+    // eslint-disable-next-line i18next/no-literal-string
+    const clickedItem = (event.target as HTMLElement).closest('va-accordion-item');
     // Usage for slot to provide context to analytics for header and level
-    const clickedItem = (event.target as any).querySelector('[slot="headline"]');
     const headerText = clickedItem.innerHTML;
     const headerLevel = parseInt(clickedItem.tagName.toLowerCase().split('')[1]);
 
@@ -85,7 +86,6 @@ export class VaAccordion {
     }
 
     const prevAttr = clickedItem.getAttribute('open') === 'true' ? true : false;
-
     if (!this.disableAnalytics) {
       const detail = {
         componentName: 'va-accordion',
@@ -101,7 +101,7 @@ export class VaAccordion {
     }
 
     /* eslint-disable-next-line i18next/no-literal-string */
-    clickedItem.setAttribute('open', !prevAttr);
+    clickedItem.setAttribute('open', !prevAttr ? "true" : "false");
 
     if (!this.isScrolledIntoView(clickedItem)) {
       clickedItem.scrollIntoView();

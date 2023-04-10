@@ -24,7 +24,7 @@ export default {
 const Template = args => {
   const { headline, level, ...rest } = args;
   return (
-    <va-accordion {...rest}>
+    <va-accordion {...rest} >
       <va-accordion-item id="first">
         {headline}
        Congress shall make no law respecting an establishment of religion, or
@@ -169,8 +169,8 @@ const StylingInHeader =() => {
   return (
     <va-accordion >
       <va-accordion-item>
-        <h3 slot='headline' class="vads-u-font-style--italic vads-u-margin--0">
-          <i class="fas fa-paperclip"></i>Did the thing!
+        <h3 slot='headline' className="vads-u-font-style--italic vads-u-margin--0">
+          <i className="fas fa-paperclip"></i>Did the thing!
         </h3>
         shall make no law respecting an establishment of religion, or
         prohibiting the free exercise thereof; or abridging the freedom of
@@ -178,11 +178,11 @@ const StylingInHeader =() => {
         assemble, and to petition the Government for a redress of grievances.
       </va-accordion-item>
       <va-accordion-item>
-        <h3 style={{fontWeight:400}} class="vads-u-margin--0" slot='headline'>
+        <h3 style={{fontWeight:400}} className="vads-u-margin--0" slot='headline'>
            Did the thing!
         </h3>
         <p style={{fontWeight:400}} slot='subheadline'>
-            <i class="fas fa-paperclip"></i>sub text!
+            <i className="fas fa-paperclip"></i>sub text!
         </p>
         A well regulated Militia, being necessary to the security of a free
         State, the right of the people to keep and bear Arms, shall not be

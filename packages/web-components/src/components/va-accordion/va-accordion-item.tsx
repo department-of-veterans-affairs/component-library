@@ -3,8 +3,7 @@ import {
   Element,
   Event,
   EventEmitter,
-  Fragment,
-
+  Host,
   Prop,
   State,
   h,
@@ -67,7 +66,6 @@ export class VaAccordionItem {
   private expandButton: HTMLButtonElement = null;
 
   private toggleOpen(e: MouseEvent): void {
-    console.log("toggled")
     this.accordionItemToggled.emit(e);
   }
 
@@ -89,7 +87,7 @@ export class VaAccordionItem {
 
   render() {
     return (
-      <Fragment>
+      <Host>
         <button
           ref={el => {
             this.expandButton = el;
@@ -104,7 +102,7 @@ export class VaAccordionItem {
         <div id="content">
           <slot />
         </div>
-      </Fragment>
+      </Host>
     );
   }
 }

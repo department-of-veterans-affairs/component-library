@@ -6,13 +6,13 @@
 - [x] classes in header
 - [x] icon in header
 - [x] Sub headers as slot
-- [ ] Toggle an item
+- [x] Toggle an item
 - [ ] Events that need to trigger
-- [ ] Expand all
+- [x] Expand all
   - [ ] needs to trigger all events
-- [ ] Open single
-- [ ] translation
-- [ ] analytics
+- [x] Open single
+- [x] translation
+- [x] analytics
 - [ ] unit tests
 - [ ] docs
   - section-header?
