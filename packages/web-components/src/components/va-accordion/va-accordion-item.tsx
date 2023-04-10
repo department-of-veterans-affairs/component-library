@@ -3,12 +3,12 @@ import {
   Element,
   Event,
   EventEmitter,
-  Host,
+  Fragment,
+
   Prop,
   State,
   h,
 } from '@stencil/core';
-import { getSlottedNodes } from '../../utils/utils';
 @Component({
   tag: 'va-accordion-item',
   styleUrl: 'va-accordion-item.css',
@@ -53,7 +53,7 @@ export class VaAccordionItem {
    * Local State for slot=headline replacement of props (header).
    * Provides context of the header text to the Accordion Item
    */
-  @State() slotHeader: string = null;
+  @State() slotHeader: any = null;
 
   /**
    * Local State for slot=headline replacement of props (level).
@@ -67,6 +67,7 @@ export class VaAccordionItem {
   private expandButton: HTMLButtonElement = null;
 
   private toggleOpen(e: MouseEvent): void {
+    console.log("toggled")
     this.accordionItemToggled.emit(e);
   }
 
@@ -74,12 +75,7 @@ export class VaAccordionItem {
   // Data access from slot html element is being perfomed by this function
   // Function allows us to provide context to state
   // State is then being digested by the Header Function below
-  private populateStateValues() {
-    getSlottedNodes(this.el, null).forEach((node: HTMLSlotElement) => {
-      this.slotHeader = node.innerHTML;
-      this.slotTag = node.tagName.toLowerCase();
-    });
-  }
+
 
   componentDidLoad() {
     // auto-expand accordion if the window hash matches the ID
@@ -92,21 +88,8 @@ export class VaAccordionItem {
   }
 
   render() {
-    // IE11 is unable to run onSlotChange
-    // Check needed to populate Accordion Item Header information
-    // When using slot="headline" to set the information
-    const ieSlotCheckTag = this.el
-      .querySelector('[slot="headline"]')
-      ?.tagName.toLowerCase();
-    const ieSlotCheckHeader =
-      this.el.querySelector('[slot="headline"]')?.innerHTML;
-
-    const Header = () =>
-      h(
-        // TODO: Remove level & header prop & let the slot do its work
-        /* eslint-disable-next-line i18next/no-literal-string */
-        this.slotTag || ieSlotCheckTag || `h${this.level}`,
-        null,
+    return (
+      <Fragment>
         <button
           ref={el => {
             this.expandButton = el;
@@ -115,18 +98,13 @@ export class VaAccordionItem {
           aria-expanded={this.open ? 'true' : 'false'}
           aria-controls="content"
         >
-          {this.slotHeader || ieSlotCheckHeader || this.header}
-          {this.subheader ? <p>{this.subheader}</p> : false}
-        </button>,
-      );
-    return (
-      <Host>
-        <Header />
-        <slot name="headline" onSlotchange={() => this.populateStateValues()} />
+          <slot name="headline" />
+          <slot name="subheadline" />
+        </button>
         <div id="content">
           <slot />
         </div>
-      </Host>
+      </Fragment>
     );
   }
 }

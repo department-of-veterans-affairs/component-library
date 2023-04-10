@@ -68,13 +68,11 @@ button[aria-expanded='false'] {
   background-image: url('../../assets/plus.svg');
 }
 
-p {
-  font-weight: 400;
-  line-height: 26px;
-  margin: 0;
+::slotted([slot='headline']) {
+ margin: 0 !important;
 }
 
-/* Hiding since element would be duplicated via the Shadow DOM */
-::slotted([slot='headline']) {
-  display: none;
-}
+::slotted([slot='subheadline']) {
+  font-weight: 400;
+  margin: 0 !important;
+ }
