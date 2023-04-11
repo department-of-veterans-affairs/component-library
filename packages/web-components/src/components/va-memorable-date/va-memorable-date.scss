@@ -17,6 +17,10 @@
   margin-top: 16px;
 }
 
+:host([uswds]) #error-message {
+  margin-bottom: 0;
+}
+
 /** Original Component Style **/
 
 @import '../va-date/va-date.css';
