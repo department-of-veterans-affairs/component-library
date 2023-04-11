@@ -72,7 +72,7 @@ button[aria-expanded='false'] {
  margin: 0 !important;
 }
 
-::slotted([slot='subheadline']) {
+::slotted([slot='subheader']), #subheader {
   font-weight: 400;
   margin: 0 !important;
  }

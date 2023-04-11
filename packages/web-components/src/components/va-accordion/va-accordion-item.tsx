@@ -80,8 +80,7 @@ export class VaAccordionItem {
   }
 
   render() {
-    const headerText = this.el.shadowRoot.querySelector('[slot="headline"]')?.innerHTML;
-
+    const headerText = this.el.querySelector('[slot="headline"]').innerHTML.replace(/(<([^>]+)>)/ig, '');
     return (
       <Host>
         <button
@@ -91,12 +90,12 @@ export class VaAccordionItem {
           onClick={this.toggleOpen.bind(this)}
           aria-expanded={this.open ? 'true' : 'false'}
           aria-controls="content"
-          aria-label={`${this.open ? 'Collapse' : 'Expand'} ${headerText}`}
+          aria-label={(`${headerText ?? ''}`).trim()}
         >
           <slot name="headline" />
-          <slot name="subheadline" />
+          {this.subheader ? <p id='subheader'>{this.subheader}</p> : <slot name="subheader" />}
         </button>
-        <div id="content">
+        <div tabIndex={0} id="content">
           <slot />
         </div>
       </Host>

@@ -52,7 +52,36 @@ const Template = args => {
   );
 };
 
-const TemplateSubheader = args => {
+const SubHeaderAsProp = args => {
+  const { ...rest } = args;
+  return (
+    <va-accordion {...rest}>
+      <va-accordion-item 
+        subheader="First Amendment subheader">
+        <h5 slot='headline'>
+          First Amendment
+        </h5>
+        Congress shall make no law respecting an establishment of religion, or
+        prohibiting the free exercise thereof; or abridging the freedom of
+        speech, or of the press; or the right of the people peaceably to
+        assemble, and to petition the Government for a redress of grievances.
+      </va-accordion-item>
+      <va-accordion-item
+        subheader="First Amendment subheader">
+        <h5 slot='headline'>
+          Second Amendment
+        </h5>
+        A well regulated Militia, being necessary to the security of a free
+        State, the right of the people to keep and bear Arms, shall not be
+        infringed.
+      </va-accordion-item>
+    </va-accordion>
+  );
+};
+
+
+
+const SubHeaderAsSlot = args => {
   const { ...rest } = args;
   return (
     <va-accordion {...rest}>
@@ -60,8 +89,8 @@ const TemplateSubheader = args => {
         <h5 slot='headline'>
           First Amendment
         </h5>
-        <p slot='subheadline'> 
-          First Amendment Subheadline
+        <p slot='subheader'> 
+          First Amendment subheader
         </p>
         Congress shall make no law respecting an establishment of religion, or
         prohibiting the free exercise thereof; or abridging the freedom of
@@ -72,8 +101,8 @@ const TemplateSubheader = args => {
         <h5 slot='headline'>
           Second Amendment
         </h5>
-        <p slot='subheadline'> 
-          First Amendment Subheadline
+        <p slot='subheader'> 
+          First Amendment subheader
         </p>
         A well regulated Militia, being necessary to the security of a free
         State, the right of the people to keep and bear Arms, shall not be
@@ -155,8 +184,13 @@ ChangeHeaderLevel.args = {
   level: 4,
 };
 
-export const Subheader = TemplateSubheader.bind(null);
+export const Subheader = SubHeaderAsSlot.bind(null);
 Subheader.args = {
+  ...defaultArgs,
+};
+
+export const SubheaderAsProp = SubHeaderAsProp.bind(null);
+SubheaderAsProp.args = {
   ...defaultArgs,
 };
 
@@ -181,7 +215,7 @@ const StylingInHeader =() => {
         <h3 style={{fontWeight:400}} className="vads-u-margin--0" slot='headline'>
            Did the thing!
         </h3>
-        <p style={{fontWeight:400}} slot='subheadline'>
+        <p style={{fontWeight:400}} slot='subheader'>
             <i className="fas fa-paperclip"></i>sub text!
         </p>
         A well regulated Militia, being necessary to the security of a free
