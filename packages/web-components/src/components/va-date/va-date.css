@@ -2,6 +2,21 @@
 @import '../../mixins/form-field-error.css';
 @import '../../mixins/hint-text.css';
 
+.usa-label--required {
+  color: var(--v3-color-error-dark);
+}
+
+.usa-error-message {
+  color: var(--v3-color-error-dark);
+}
+
+:host([uswds][error]:not([error=''])) va-select::part(select),
+:host([uswds][error]:not([error=''])) va-text-input::part(input) {
+  border: 4px solid var(--v3-color-error-dark);
+}
+
+/** Original Component Style **/
+
 :host {
   display: block;
   font-family: var(--font-source-sans);
