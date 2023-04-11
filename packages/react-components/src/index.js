@@ -16,7 +16,6 @@ import OMBInfo from './components/OMBInfo/OMBInfo';
 import Pagination from './components/Pagination/Pagination';
 import ProgressButton from './components/ProgressButton/ProgressButton';
 import Select from './components/Select/Select';
-import SystemDownView from './components/SystemDownView/SystemDownView';
 import Table from './components/Table/Table';
 import Telephone, {
   CONTACTS,
@@ -47,7 +46,6 @@ export {
   Pagination,
   ProgressButton,
   Select,
-  SystemDownView,
   Table,
   Telephone,
   CONTACTS,

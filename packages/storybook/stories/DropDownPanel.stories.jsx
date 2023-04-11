@@ -9,7 +9,7 @@ export default {
   parameters: {
     componentSubtitle: 'Dropdown panel React component',
     docs: {
-      page: () => <StoryDocs componentName="Dropdown panel" />,
+      page: () => <StoryDocs componentName="Dropdown panel - React" />,
     },
   },
 };

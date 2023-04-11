@@ -27,11 +27,11 @@ export const additionalDocs = {
     maturityCategory: USE,
     maturityLevel: BEST_PRACTICE,
   },
-  'Dropdown panel': {
+  'Dropdown panel - React': {
     maturityCategory: DONT_USE,
     maturityLevel: DEPRECATED,
   },
-  'Expanding group': {
+  'Expanding group - React': {
     maturityCategory: DONT_USE,
     maturityLevel: DEPRECATED,
   },
@@ -92,10 +92,6 @@ export const additionalDocs = {
     guidanceName: 'Sidenav',
     maturityCategory: USE,
     maturityLevel: BEST_PRACTICE,
-  },
-  'System down view': {
-    maturityCategory: DONT_USE,
-    maturityLevel: DEPRECATED,
   },
   'Table - React': {
     maturityCategory: DONT_USE,
