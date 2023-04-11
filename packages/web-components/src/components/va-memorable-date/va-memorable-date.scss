@@ -13,6 +13,10 @@
 @import '../../mixins/uswds-error-border.scss';
 @import '../../global/formation_overrides';
 
+.usa-memorable-date {
+  margin-top: 16px;
+}
+
 /** Original Component Style **/
 
 @import '../va-date/va-date.css';
@@ -53,7 +57,6 @@ slot:not([name])::slotted(*) {
   margin-bottom: 0;
 }
 
-:host(:not([uswds])) .date-container,
-:host .usa-memorable-date {
+:host(:not([uswds])) .date-container{
   margin-top: 16px;
 }
