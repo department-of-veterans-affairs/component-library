@@ -20,25 +20,25 @@
   .usa-button-group {
     margin: 0 auto;
     width: 100%;
-  }
-  :host([continue]:not([continue='false'])) .usa-button-group {
     flex-direction: column-reverse;
   }
 }
 
 /* Original Component Styles. */
 
-:host([continue]:not([continue='false']):not([uswds])) {
-  flex-direction: row;
-}
-
 :host(:not([uswds])) va-button::part(button) {
   width: 280px;
 }
 
-:host([continue]:not([continue='false']):not([uswds])) va-button + va-button::part(button) {
-  margin-left: 12px;
-  margin-right: 0;
+@media (min-width: 481px) {
+  :host([continue]:not([continue='false']):not([uswds])) {
+    flex-direction: row;
+  }
+
+  :host([continue]:not([continue='false']):not([uswds])) va-button + va-button::part(button) {
+    margin-left: 12px;
+    margin-right: 0;
+  }
 }
 
 @media (min-width: 481px) {
@@ -62,7 +62,10 @@
   }
 
   :host([continue]:not([continue='false']):not([uswds])) va-button::part(button) {
-    width: 210px;
+    width: 280px;
+  }
+  :host([continue]:not([continue='false'])) {
+    flex-direction: column-reverse;
   }
 }
 
@@ -73,6 +76,6 @@
   }
 
   :host([continue]:not([continue='false']):not([uswds])) va-button::part(button) {
-    width: 130px;
+    width: 280px;
   }
 }
