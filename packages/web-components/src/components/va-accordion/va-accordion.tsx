@@ -92,9 +92,9 @@ export class VaAccordion {
         componentName: 'va-accordion',
         action: prevAttr ? 'collapse' : 'expand',
         details: {
-          header: headerText || clickedItem.header,
+          header: headerText,
           subheader: clickedItem.subheader,
-          level: headerLevel || clickedItem.level,
+          level: headerLevel,
           sectionHeading: this.sectionHeading,
         },
       };

@@ -5,7 +5,6 @@ import {
   EventEmitter,
   Host,
   Prop,
-  State,
   h,
 } from '@stencil/core';
 @Component({
@@ -29,11 +28,6 @@ export class VaAccordionItem {
   accordionItemToggled: EventEmitter;
 
   /**
-   * The accordion item header text
-   */
-  @Prop() header?: string;
-
-  /**
    * Optional accordion item subheader text. Default is null.
    */
   @Prop() subheader?: string = null;
@@ -42,23 +36,6 @@ export class VaAccordionItem {
    * True if the item is open
    */
   @Prop() open?: boolean = false;
-
-  /**
-   * Header level for button wrapper. Must be between 1 and 6
-   */
-  @Prop() level?: number = 2;
-
-  /**
-   * Local State for slot=headline replacement of props (header).
-   * Provides context of the header text to the Accordion Item
-   */
-  @State() slotHeader: any = null;
-
-  /**
-   * Local State for slot=headline replacement of props (level).
-   * Provides context of the level to the Accordion Item
-   */
-  @State() slotTag: string = null;
 
   /**
    * Toggle button reference

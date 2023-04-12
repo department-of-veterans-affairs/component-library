@@ -26,14 +26,6 @@ export namespace Components {
     }
     interface VaAccordionItem {
         /**
-          * The accordion item header text
-         */
-        "header"?: string;
-        /**
-          * Header level for button wrapper. Must be between 1 and 6
-         */
-        "level"?: number;
-        /**
           * True if the item is open
          */
         "open"?: boolean;
@@ -1403,14 +1395,6 @@ declare namespace LocalJSX {
         "sectionHeading"?: string;
     }
     interface VaAccordionItem {
-        /**
-          * The accordion item header text
-         */
-        "header"?: string;
-        /**
-          * Header level for button wrapper. Must be between 1 and 6
-         */
-        "level"?: number;
         /**
           * This event is fired so that va-accordion element can manage which items are opened or closed
          */

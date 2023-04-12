@@ -279,6 +279,7 @@ describe('va-accordion', () => {
         level: 2,
         sectionHeading: null,
         subheader: null,
+        header: ''
       },
     });
   });
