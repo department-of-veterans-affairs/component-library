@@ -41,8 +41,8 @@ describe('va-accordion', () => {
     const page = await newE2EPage();
     await page.setContent(`
       <va-accordion>
-        <va-accordion-item header="First item">Some content</va-accordion-item>
-        <va-accordion-item header="Second item">A bit more</va-accordion-item>
+        <va-accordion-item><h2 slot="headline">First item</h2>Some content</va-accordion-item>
+        <va-accordion-item><h2 slot="headline">Second item</h2>A bit more</va-accordion-item>
       </va-accordion>`);
 
     await axeCheck(page);
@@ -51,10 +51,10 @@ describe('va-accordion', () => {
   it('closes one item when another opens if `open-single` is true', async () => {
     const page = await newE2EPage();
     await page.setContent(`
-      <va-accordion open-single>
-        <va-accordion-item header="First item">Some content</va-accordion-item>
-        <va-accordion-item header="Second item">A bit more</va-accordion-item>
-      </va-accordion>`);
+    <va-accordion open-single>
+      <va-accordion-item><h2 slot="headline">First item</h2>Some content</va-accordion-item>
+      <va-accordion-item><h2 slot="headline">Second item</h2>A bit more</va-accordion-item>
+    </va-accordion>`);
 
     const buttons = await page.findAll(
       'va-accordion-item >>> button[aria-expanded="false"]',
@@ -78,8 +78,8 @@ describe('va-accordion', () => {
     const page = await newE2EPage();
     await page.setContent(`
       <va-accordion>
-        <va-accordion-item header="First item">Some content</va-accordion-item>
-        <va-accordion-item header="Second item">A bit more</va-accordion-item>
+        <va-accordion-item><h2 slot="headline">First item</h2>Some content</va-accordion-item>
+        <va-accordion-item><h2 slot="headline">Second item</h2>A bit more</va-accordion-item>
       </va-accordion>`);
 
     const buttons = await page.findAll(
@@ -103,8 +103,8 @@ describe('va-accordion', () => {
     const page = await newE2EPage();
     await page.setContent(`
       <va-accordion>
-        <va-accordion-item header="First item">Some content</va-accordion-item>
-        <va-accordion-item header="Second item">A bit more</va-accordion-item>
+        <va-accordion-item><h2 slot="headline">First item</h2>Some content</va-accordion-item>
+        <va-accordion-item><h2 slot="headline">Second item</h2>A bit more</va-accordion-item>
       </va-accordion>`);
 
     const expandButton = await page.find('va-accordion >>> button');
@@ -120,8 +120,8 @@ describe('va-accordion', () => {
     const page = await newE2EPage();
     await page.setContent(`
       <va-accordion>
-        <va-accordion-item header="First item">Some content</va-accordion-item>
-        <va-accordion-item header="Second item">A bit more</va-accordion-item>
+        <va-accordion-item><h2 slot="headline">First item</h2>Some content</va-accordion-item>
+        <va-accordion-item><h2 slot="headline">Second item</h2>A bit more</va-accordion-item>
       </va-accordion>`);
 
     const expandButton = await page.find('va-accordion >>> button');
@@ -139,10 +139,11 @@ describe('va-accordion', () => {
   it('tracks which accordions are opened', async () => {
     const page = await newE2EPage();
     await page.setContent(`
-      <va-accordion>
-        <va-accordion-item header="First item">Some content</va-accordion-item>
-        <va-accordion-item header="Second item">A bit more</va-accordion-item>
-      </va-accordion>`);
+    <va-accordion>
+      <va-accordion-item><h2 slot="headline">First item</h2>Some content</va-accordion-item>
+      <va-accordion-item><h2 slot="headline">Second item</h2>A bit more</va-accordion-item>
+    </va-accordion>`);
+
     const accordionItemsButtons = await page.findAll(
       'va-accordion-item >>> button',
     );
@@ -163,7 +164,7 @@ describe('va-accordion', () => {
     const page = await newE2EPage();
     await page.setContent(`
       <va-accordion>
-        <va-accordion-item header="First item" subheader="First subheader">Some content</va-accordion-item>
+        <va-accordion-item  subheader="First subheader"><h2 slot="headline">First item</h2>Some content</va-accordion-item>
       </va-accordion>`);
 
     const analyticsSpy = await page.spyOnEvent('component-library-analytics');
@@ -190,7 +191,7 @@ describe('va-accordion', () => {
     const page = await newE2EPage();
     await page.setContent(`
       <va-accordion disable-analytics="true">
-        <va-accordion-item header="First item" subheader="First subheader">Some content</va-accordion-item>
+        <va-accordion-item  subheader="First subheader"><h2 slot="headline">First item</h2>Some content</va-accordion-item>
       </va-accordion>`);
 
     const analyticsSpy = await page.spyOnEvent('component-library-analytics');
@@ -206,7 +207,7 @@ describe('va-accordion', () => {
     const page = await newE2EPage();
     await page.setContent(`
       <va-accordion section-heading="The Section Heading">
-        <va-accordion-item header="First item" subheader="First subheader">Some content</va-accordion-item>
+        <va-accordion-item  subheader="First subheader"><h2 slot="headline">First item</h2>Some content</va-accordion-item>
       </va-accordion>`);
 
     const analyticsSpy = await page.spyOnEvent('component-library-analytics');
@@ -233,7 +234,7 @@ describe('va-accordion', () => {
     const page = await newE2EPage();
     await page.setContent(`
       <va-accordion section-heading="The Section Heading">
-        <va-accordion-item subheader="First subheader"><h3 slot="headline">First header</h3>Some content</va-accordion-item>
+        <va-accordion-item  subheader="First subheader"><h3 slot="headline">First header</h3>Some content</va-accordion-item>
       </va-accordion>`);
 
     const analyticsSpy = await page.spyOnEvent('component-library-analytics');
@@ -260,7 +261,7 @@ describe('va-accordion', () => {
     const page = await newE2EPage();
     await page.setContent(`
       <va-accordion>
-        <va-accordion-item></va-accordion-item>
+        <va-accordion-item><h2 slot="headline"></h2></va-accordion-item>
       </va-accordion>`);
 
     const analyticsSpy = await page.spyOnEvent('component-library-analytics');
