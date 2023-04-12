@@ -188,6 +188,7 @@ export class VaAccordion {
   }
 
   render() {
+    const accordionItemIDs = [...this.el.children].map((el) => {return el.id});
     return (
       <Host>
         {!this.openSingle && (
@@ -199,6 +200,8 @@ export class VaAccordion {
                 ? i18next.t('collapse-all-aria-label')
                 : i18next.t('expand-all-aria-label')
             }
+            aria-controls={accordionItemIDs.join(' ')}
+            aria-expanded={`${this.expanded}`}
           >
             {this.expanded
               ? `${i18next.t('collapse-all')} -`
