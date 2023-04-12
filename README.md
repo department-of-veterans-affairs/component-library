@@ -115,7 +115,17 @@ yarn test.watch
 In order to a single file, you can run:
 
 ```bash
+npx stencil test --e2e -- src/components/[component-name]/[component-name].e2e.ts
+```
+
+Replace `[component-name]` with the name of the component you want to test. Optionnally, you cad add `--watchAll` after `--e2e` to watch the file for changes. For example:
+
+```bash
 npx stencil test --e2e --watchAll -- src/components/[component-name]/[component-name].e2e.ts
 ```
 
-replace `[component-name]` with the name of the component you want to test.
+Another option is to use wildcards to query for certain tests. For example, to run all tests for the `va-alert` component, you can run:
+
+```bash
+npx stencil test --e2e  -- src/components/va-accordion/va-accordion-*
+```
