@@ -11,7 +11,7 @@
 @import '../../mixins/uswds-error-border.scss';
 @import '../../global/formation_overrides';
 
-:host {
+:host([uswds]) {
   color: var(--v3-color-base-darkest);
   display: block;
   font-family: var(--font-source-sans);
