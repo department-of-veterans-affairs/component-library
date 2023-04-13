@@ -16,7 +16,6 @@ import OMBInfo from './OMBInfo';
 import Pagination from './Pagination';
 import ProgressButton from './ProgressButton';
 import Select from './Select';
-import SystemDownView from './SystemDownView';
 import Table from './Table';
 import Telephone, {
   CONTACTS,
@@ -48,7 +47,6 @@ export {
   Pagination,
   ProgressButton,
   Select,
-  SystemDownView,
   Table,
   Telephone,
   CONTACTS,

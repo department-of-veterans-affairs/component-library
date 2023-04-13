@@ -93,10 +93,6 @@ export const additionalDocs = {
     maturityCategory: USE,
     maturityLevel: BEST_PRACTICE,
   },
-  'System down view - React': {
-    maturityCategory: DONT_USE,
-    maturityLevel: DEPRECATED,
-  },
   'Table - React': {
     maturityCategory: DONT_USE,
     maturityLevel: DEPRECATED,
