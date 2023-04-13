@@ -117,7 +117,8 @@ export class VaModal {
   @Prop() forcedModal?: boolean = false;
 
   /**
-   * Whether or not the component will be forced to take action.
+   * Whether or not the component will be using the unstyled button.
+   * This is only available for USWDS
    */
   @Prop() unstyled?: boolean = false;
 

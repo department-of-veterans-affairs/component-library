@@ -511,7 +511,7 @@ export namespace Components {
         "secondaryButtonText"?: string;
         "status"?: 'continue' | 'error' | 'info' | 'success' | 'warning';
         /**
-          * Whether or not the component will be forced to take action.
+          * Whether or not the component will be using the unstyled button. This is only available for USWDS
          */
         "unstyled"?: boolean;
         /**
@@ -2021,7 +2021,7 @@ declare namespace LocalJSX {
         "secondaryButtonText"?: string;
         "status"?: 'continue' | 'error' | 'info' | 'success' | 'warning';
         /**
-          * Whether or not the component will be forced to take action.
+          * Whether or not the component will be using the unstyled button. This is only available for USWDS
          */
         "unstyled"?: boolean;
         /**
