@@ -555,6 +555,10 @@ export namespace Components {
          */
         "required"?: boolean;
         /**
+          * Whether or not the component will use USWDS v3 styling.
+         */
+        "uswds"?: boolean;
+        /**
           * The value for the input.
          */
         "value"?: string;
@@ -2052,6 +2056,10 @@ declare namespace LocalJSX {
           * Set the input to required and render the (Required) text.
          */
         "required"?: boolean;
+        /**
+          * Whether or not the component will use USWDS v3 styling.
+         */
+        "uswds"?: boolean;
         /**
           * The value for the input.
          */
