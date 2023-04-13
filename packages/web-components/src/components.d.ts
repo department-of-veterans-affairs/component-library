@@ -86,6 +86,10 @@ export namespace Components {
          */
         "status"?: string;
         /**
+          * Whether or not the component will use USWDS v3 styling.
+         */
+        "uswds"?: boolean;
+        /**
           * If `true`, the alert will be visible.
          */
         "visible"?: boolean;
@@ -1487,6 +1491,10 @@ declare namespace LocalJSX {
           * Determines the icon and border/background color. One of `info`, `error`, `success`, `warning`, or `continue`
          */
         "status"?: string;
+        /**
+          * Whether or not the component will use USWDS v3 styling.
+         */
+        "uswds"?: boolean;
         /**
           * If `true`, the alert will be visible.
          */

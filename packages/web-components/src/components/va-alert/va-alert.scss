@@ -1,19 +1,28 @@
+@forward 'settings';
+
+@use 'usa-alert/src/styles/usa-alert';
+
+@import '../../global/formation_overrides';
+
+
+/* Original Component Styles. */
+
 @import '../../mixins/accessibility.css';
 @import '../../mixins/buttons.css';
 
-:host {
+:host(:not([uswds])) {
   display: block;
   background-color: var(--color-gray-lightest);
   position: relative;
 }
 
-:host([background-only='true']),
-:host([background-only='']) {
+:host(:not([uswds])[background-only='true']),
+:host(:not([uswds])[background-only='']) {
   background-color: unset;
 }
 
-:host([full-width='true']),
-:host([full-width='']) {
+:host(:not([uswds])[full-width='true']),
+:host(:not([uswds])[full-width='']) {
   border-top-style: solid;
   border-top-width: 8px;
   display: flex;
@@ -21,41 +30,41 @@
   justify-content: center;
 }
 
-:host([status='warning']) {
+:host(:not([uswds])[status='warning']) {
   border-color: var(--color-gold);
 }
-:host([status='info']) {
+:host(:not([uswds])[status='info']) {
   border-color: var(--color-primary-alt-dark);
 }
-:host([status='error']) {
+:host(:not([uswds])[status='error']) {
   border-color: var(--color-secondary-dark);
 }
-:host([status='continue']),
-:host([status='success']) {
+:host(:not([uswds])[status='continue']),
+:host(:not([uswds])[status='success']) {
   border-color: var(--color-green);
 }
 
-:host([full-width='']) div.alert,
-:host([full-width='true']) div.alert {
+:host(:not([uswds])[full-width='']) div.alert,
+:host(:not([uswds])[full-width='true']) div.alert {
   border-left: none;
   max-width: 1000px;
 }
 
 @media screen and (min-width: 1024px) {
-  :host([full-width='true']) .va-alert-close,
-  :host([full-width='']) .va-alert-close {
+  :host(:not([uswds])[full-width='true']) .va-alert-close,
+  :host(:not([uswds])[full-width='']) .va-alert-close {
     position: relative;
   }
 }
 
-::slotted([slot='headline']) {
+:host(:not([uswds])) ::slotted([slot='headline']) {
   font-size: 2rem !important;
   line-height: 26px !important;
   padding: 0 !important;
   margin: 0 !important;
 }
 
-div.alert {
+:host(:not([uswds])) div.alert {
   display: table;
   padding: 1.6rem 2rem 1.6rem 1.6rem;
   width: 100%;
@@ -63,82 +72,82 @@ div.alert {
   box-sizing: border-box;
 }
 
-div.alert:not(.bg-only) {
+:host(:not([uswds])) div.alert:not(.bg-only) {
   border-color: inherit;
   border-left-style: solid;
   border-left-width: 8px;
 }
 
-div.alert > i::before {
+:host(:not([uswds])) div.alert > i::before {
   display: flex;
   margin-right: 1.6rem;
 }
 
-div.body {
+:host(:not([uswds])) div.body {
   padding-left: 0;
   padding-right: 0;
   display: table-cell;
   vertical-align: middle;
   width: 100%;
 }
-::slotted(:not([slot])) {
+:host(:not([uswds])) ::slotted(:not([slot])) {
   margin-top: 2rem;
 }
 
-.bg-only ::slotted(*) {
+:host(:not([uswds])) .bg-only ::slotted(*) {
   margin-top: 0!important; /* Fix for Safari 15.3 and lower. */
 }
 
-div.info > i::before {
+:host(:not([uswds])) div.info > i::before {
   content: '\F05A';
 }
 
-div.continue > i::before {
+:host(:not([uswds])) div.continue > i::before {
   content: '\F023';
   color: var(--color-green);
 }
 
-div.success > i::before {
+:host(:not([uswds])) div.success > i::before {
   content: '\F00C';
   color: var(--color-green);
 }
 
-div.warning > i::before {
+:host(:not([uswds])) div.warning > i::before {
   content: '\F071';
 }
 
-div.error > i::before {
+:host(:not([uswds])) div.error > i::before {
   content: '\F06A';
   color: var(--color-secondary-dark);
 }
 
-div.bg-only.hide-icon > i::before {
+:host(:not([uswds])) div.bg-only.hide-icon > i::before {
   content: '';
   margin-right: 0;
 }
 
-div.bg-only {
+:host(:not([uswds])) div.bg-only {
   border: none;
   padding: 2rem;
 }
 
-.info.bg-only {
+:host(:not([uswds])) .info.bg-only {
   background-color: var(--color-primary-alt-lightest);
 }
-.continue.bg-only {
+:host(:not([uswds])) .continue.bg-only {
   background-color: var(--color-gray-lightest);
 }
-.success.bg-only {
+:host(:not([uswds])) .success.bg-only {
   background-color: var(--color-green-lightest);
 }
-.warning.bg-only {
+:host(:not([uswds])) .warning.bg-only {
   background-color: var(--color-gold-lightest);
 }
-.error.bg-only {
+:host(:not([uswds])) .error.bg-only {
   background-color: var(--color-secondary-lightest);
 }
 
-.va-alert-close {
+:host(:not([uswds])) .va-alert-close {
   margin: 1.6rem;
   padding: 0;
   width: auto;
@@ -153,11 +162,11 @@ div.bg-only {
   right: 0;
   top: 0;
 }
-.va-alert-close:hover {
+:host(:not([uswds])) .va-alert-close:hover {
   color: var(--color-base);
 }
 
-i {
+:host(:not([uswds])) i {
   font-family: 'Font Awesome 5 Free';
   font-size: 2.4rem;
   font-style: normal;
@@ -165,10 +174,10 @@ i {
   line-height: 1;
 }
 
-i.fa-times-circle::before {
+:host(:not([uswds])) i.fa-times-circle::before {
   content: '\F057'; /* fa-times-circle*/
 }
 
-:host([closeable]:not([closeable='false'])) .alert {
+:host(:not([uswds])[closeable]:not([closeable='false'])) .alert {
   padding-right: 5.7rem;
 }

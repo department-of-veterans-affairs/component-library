@@ -22,7 +22,7 @@ import classnames from 'classnames';
  */
 @Component({
   tag: 'va-alert',
-  styleUrl: 'va-alert.css',
+  styleUrl: 'va-alert.scss',
   shadow: true,
 })
 export class VaAlert {
@@ -72,6 +72,11 @@ export class VaAlert {
    * Should be for emergency communication only.
    */
   @Prop() fullWidth?: boolean = false;
+
+  /**
+   * Whether or not the component will use USWDS v3 styling.
+   */
+  @Prop() uswds?: boolean = false;
 
   /**
    * Fires when the component has successfully finished rendering for the first
@@ -155,7 +160,7 @@ export class VaAlert {
   }
 
   render() {
-    const { backgroundOnly, status, visible, closeable, showIcon } = this;
+    const { backgroundOnly, status, visible, closeable, showIcon, uswds } = this;
     const classes = classnames('alert', status, {
       'bg-only': backgroundOnly,
       'hide-icon': backgroundOnly && !showIcon,
@@ -166,6 +171,38 @@ export class VaAlert {
     /* eslint-enable i18next/no-literal-string */
 
     if (!visible) return <div aria-live="polite" />;
+
+    if (uswds) {
+      return (
+        <Host>
+          <div
+            role={this.el.getAttribute('data-role') || role}
+            aria-live={ariaLive}
+            class={classes}
+          >
+            <i aria-hidden="true" role="img"></i>
+            <div
+              class="body"
+              onClick={this.handleAlertBodyClick.bind(this)}
+              role="presentation"
+            >
+              {!backgroundOnly && <slot name="headline"></slot>}
+              <slot></slot>
+            </div>
+          </div>
+  
+          {closeable && (
+            <button
+              class="va-alert-close"
+              aria-label={this.closeBtnAriaLabel}
+              onClick={this.closeHandler.bind(this)}
+            >
+              <i aria-hidden="true" class="fa-times-circle" role="presentation" />
+            </button>
+          )}
+        </Host>
+      );
+    }
 
     return (
       <Host>
