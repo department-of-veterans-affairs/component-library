@@ -287,7 +287,7 @@ const CrisisTemplate = ({
             <ul>
               <li>
                 <a href="tel:18002738255">
-                  Call <strong>1-800-273-8255 (Press 1)</strong>
+                  Call <strong>1-800-273-8255<br/>(Press 1)</strong>
                 </a>
               </li>
               <li>
