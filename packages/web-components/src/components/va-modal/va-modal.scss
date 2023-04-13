@@ -59,6 +59,14 @@
   content: '\F071'; /* fa-triangle-exclamation */
 }
 
+.va-modal-alert {
+  border-left-style: solid;
+  border-left-width: 10px;
+  display: inline-flex;
+  padding: 3.2rem 6.4rem 3.2rem 2.4rem;
+}
+
+
 /** Original Component Style **/
 
 @import '../../mixins/buttons.css';
@@ -180,7 +188,7 @@ i::before {
   background-color: var(--color-gray-cool-light);
 }
 
-.va-modal-alert {
+:host(:not([uswds])) .va-modal-alert {
   border-left-style: solid;
   border-left-width: 10px;
   display: inline-flex;
