@@ -486,6 +486,10 @@ export namespace Components {
          */
         "disableAnalytics"?: boolean;
         /**
+          * Whether or not the component will be forced to take action.
+         */
+        "forcedModal"?: boolean;
+        /**
           * Selector to explicitly specify which element should receive focus when the modal is open, if the initially focused element is not the first focusable element in the document
          */
         "initialFocusSelector"?: string;
@@ -506,6 +510,14 @@ export namespace Components {
          */
         "secondaryButtonText"?: string;
         "status"?: 'continue' | 'error' | 'info' | 'success' | 'warning';
+        /**
+          * Whether or not the component will be forced to take action.
+         */
+        "unstyled"?: boolean;
+        /**
+          * Whether or not the component will use USWDS v3 styling.
+         */
+        "uswds"?: boolean;
         /**
           * If the modal is visible or not
          */
@@ -1964,6 +1976,10 @@ declare namespace LocalJSX {
          */
         "disableAnalytics"?: boolean;
         /**
+          * Whether or not the component will be forced to take action.
+         */
+        "forcedModal"?: boolean;
+        /**
           * Selector to explicitly specify which element should receive focus when the modal is open, if the initially focused element is not the first focusable element in the document
          */
         "initialFocusSelector"?: string;
@@ -2000,6 +2016,14 @@ declare namespace LocalJSX {
          */
         "secondaryButtonText"?: string;
         "status"?: 'continue' | 'error' | 'info' | 'success' | 'warning';
+        /**
+          * Whether or not the component will be forced to take action.
+         */
+        "unstyled"?: boolean;
+        /**
+          * Whether or not the component will use USWDS v3 styling.
+         */
+        "uswds"?: boolean;
         /**
           * If the modal is visible or not
          */
