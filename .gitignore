@@ -19,4 +19,4 @@ yarn-error.log*
 !.yarn/sdks
 !.yarn/versions
 .pnp.*
-packages/design-system-dashboard-cli/component-apps-and-owners-*.csv
+component-apps-and-owners-*.csv

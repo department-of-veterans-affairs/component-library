@@ -125,7 +125,10 @@ function writeCompPathOwnersToCSV(instancesByComponent) {
   // Uses the 'csv' library to transmute the array of arrays into a CSV string, then write it to a file
   csv.stringify(compInstPathOwnersOutput, (_, output) => {
     fs.writeFileSync(
-      path.resolve(__dirname, `../component-apps-and-owners-${today}.csv`),
+      path.resolve(
+        __dirname,
+        `../../../component-apps-and-owners-${today}.csv`
+      ),
       output
     );
   });
