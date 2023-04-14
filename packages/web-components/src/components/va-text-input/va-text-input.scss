@@ -11,6 +11,9 @@
 
 :host([uswds]) {
   color: var(--v3-color-base-darkest);
+}
+
+:host {
   display: block;
   font-family: var(--font-source-sans);
 }
