@@ -188,7 +188,9 @@ export class VaAccordion {
   }
 
   render() {
-    const accordionItemIDs = [...this.el.children].map((el) => {return el.id});
+    const accordionItemIDs = [...this.el.children]
+      .filter((el) => el.tagName.toLowerCase() === 'va-accordion-item')
+      .map((el) => el.id);
     return (
       <Host>
         {!this.openSingle && (
