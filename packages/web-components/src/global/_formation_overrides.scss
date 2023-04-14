@@ -17,6 +17,7 @@
 .usa-legend,
 .usa-radio__label,
 .usa-textarea,
+.usa-modal,
 .usa-select {
   font-size: rem-override(1.06rem);
 }
@@ -162,4 +163,47 @@
     margin: rem-override(0.25rem);
   }
   margin: 0px rem-override(-0.5rem);
+}
+
+.usa-modal {
+  border-radius: rem-override(0.5rem);
+  margin: rem-override(1.25rem) auto;
+  max-width: rem-override(30rem);
+}
+
+.usa-modal__content {
+  padding-top: rem-override(2rem);
+}
+
+.usa-modal--lg .usa-modal__main {
+  padding-bottom: rem-override(4rem);
+  padding-top: rem-override(1.25rem);
+  max-width: rem-override(40rem);
+}
+
+.usa-modal__main {
+  padding: rem-override(0.5rem) rem-override(2rem) rem-override(2rem);
+}
+
+.usa-modal__heading {
+  font-size: rem-override(1.34rem);
+}
+
+.usa-modal__footer {
+  margin-top: rem-override(1.5rem);
+}
+
+.usa-modal__close {
+  font-size: rem-override(.93rem);
+  margin: rem-override(-2rem) 0 0 auto;
+  padding: rem-override(0.25rem);
+}
+
+.usa-modal__close .usa-icon {
+  height: rem-override(2rem);
+  width: rem-override(2rem);
+}
+
+.usa-modal--lg {
+  max-width: rem-override(55rem);
 }
