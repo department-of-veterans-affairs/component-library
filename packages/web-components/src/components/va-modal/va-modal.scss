@@ -16,47 +16,54 @@
   padding: 0px // => Due to icons
 }
 
-:host([status='continue']) .usa-modal {
-  border-left-color: var(--color-green);
-}
-
-:host([status='continue']) .usa-modal::before {
-  color: var(--color-green);
-  content: '\F023'; /* fa-lock */
-}
-
-:host([status='error']) .usa-modal {
-  border-left-color: var(--color-secondary-dark);
-}
-
-:host([status='error']) .usa-modal::before {
-  color: var(--color-secondary-dark);
-  content: '\F06A'; /* fa-circle-exclamation */
-}
-
 :host([status='info']) .usa-modal {
   border-left-color: var(--color-primary-alt-dark);
+  background-color: var(--color-primary-alt-lightest);
 }
 
 :host([status='info']) .usa-modal::before {
+  color: var(--color-gray-dark);
   content: '\F05A'; /* fa-circle-info */
+}
+
+:host([status='continue']) .usa-modal {
+  border-left-color: var(--color-green);
+  background-color: var(--color-green-lightest);
+}
+
+:host([status='continue']) .usa-modal::before {
+  color: var(--color-gray-dark);
+  content: '\F023'; /* fa-lock */
 }
 
 :host([status='success']) .usa-modal {
   border-left-color: var(--color-green);
+  background-color: var(--color-green-lightest);
 }
 
 :host([status='success']) .usa-modal::before {
-  color: var(--color-green);
+  color: var(--color-gray-dark);
   content: '\F00C'; /* fa-check */
 }
 
 :host([status='warning']) .usa-modal {
   border-left-color: var(--color-gold);
+  background-color: var(--color-gold-lightest);
 }
 
 :host([status='warning']) .usa-modal::before {
+  color: var(--color-gray-dark);
   content: '\F071'; /* fa-triangle-exclamation */
+}
+
+:host([status='error']) .usa-modal {
+  border-left-color: var(--color-secondary-dark);
+  background-color: var(--color-secondary-lightest);
+}
+
+:host([status='error']) .usa-modal::before {
+  color: var(--color-gray-dark);
+  content: '\F06A'; /* fa-circle-exclamation */
 }
 
 .va-modal-alert {
