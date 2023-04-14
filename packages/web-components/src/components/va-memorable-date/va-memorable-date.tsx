@@ -268,10 +268,11 @@ export class VaMemorableDate {
           onInput={handleDateChange}
           onKeyDown={handleDateKey}
           class="usa-form-group--month-input"
+          reflectInputError={error ? true : false}
           inputmode="numeric"
           type="text"
         />
-      </div>;   
+      </div>;
       const legendClass = classnames({
         'usa-legend': true,
         'usa-label--error': error
@@ -312,6 +313,7 @@ export class VaMemorableDate {
                   onInput={handleDateChange}
                   onKeyDown={handleDateKey}
                   class="usa-form-group--day-input"
+                  reflectInputError={error ? true : false}
                   inputmode="numeric"
                   type="text"
                 />
@@ -332,6 +334,7 @@ export class VaMemorableDate {
                   onInput={handleDateChange}
                   onKeyDown={handleDateKey}
                   class="usa-form-group--year-input"
+                  reflectInputError={error ? true : false}
                   inputmode="numeric"
                   type="text"
                 />

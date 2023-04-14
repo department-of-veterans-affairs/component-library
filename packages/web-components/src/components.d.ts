@@ -927,6 +927,10 @@ export namespace Components {
          */
         "pattern"?: string;
         /**
+          * Whether or not to add usa-input--error as class if error message is outside of component
+         */
+        "reflectInputError"?: boolean;
+        /**
           * Set the input to required and render the (Required) text.
          */
         "required"?: boolean;
@@ -2516,6 +2520,10 @@ declare namespace LocalJSX {
           * The regular expression that the input element's value is checked against on submission
          */
         "pattern"?: string;
+        /**
+          * Whether or not to add usa-input--error as class if error message is outside of component
+         */
+        "reflectInputError"?: boolean;
         /**
           * Set the input to required and render the (Required) text.
          */
