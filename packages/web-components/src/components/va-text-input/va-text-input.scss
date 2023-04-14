@@ -9,8 +9,11 @@
 @import '../../mixins/uswds-error-border.scss';
 @import '../../global/formation_overrides';
 
+:host([uswds]) {
+  color: var(--v3-color-base-darkest);
+}
+
 :host {
-  color: var(--color-base);
   display: block;
   font-family: var(--font-source-sans);
 }
