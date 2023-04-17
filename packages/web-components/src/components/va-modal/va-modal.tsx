@@ -10,6 +10,7 @@ import {
   State,
   Watch,
 } from '@stencil/core';
+import classnames from 'classnames';
 import { clearAllBodyScrollLocks, disableBodyScroll } from 'body-scroll-lock';
 import { hideOthers, Undo } from 'aria-hidden';
 import { focusableQueryString } from '../../utils/modal';
@@ -23,7 +24,7 @@ import { focusableQueryString } from '../../utils/modal';
  */
 @Component({
   tag: 'va-modal',
-  styleUrl: 'va-modal.css',
+  styleUrl: 'va-modal.scss',
   shadow: true,
 })
 export class VaModal {
@@ -104,6 +105,22 @@ export class VaModal {
    * Title/header text for the modal
    */
   @Prop() modalTitle?: string;
+
+  /**
+   * Whether or not the component will use USWDS v3 styling.
+   */
+  @Prop() uswds?: boolean = false;
+
+  /**
+   * Whether or not the component will be forced to take action.
+   */
+  @Prop() forcedModal?: boolean = false;
+
+  /**
+   * Whether or not the component will be using the unstyled button.
+   * This is only available for USWDS
+   */
+  @Prop() unstyled?: boolean = false;
 
   /**
    * Selector to explicitly specify which element should receive
@@ -337,16 +354,14 @@ export class VaModal {
       secondaryButtonText,
       status,
       visible,
+      uswds,
+      forcedModal,
+      unstyled,
     } = this;
 
     if (!visible) return null;
 
     const ariaLabel = `${modalTitle} modal` || 'Modal';
-    const wrapperClass = status
-      ? 'va-modal-inner va-modal-alert'
-      : 'va-modal-inner';
-    const bodyClass = status ? 'va-modal-alert-body' : 'va-modal-body';
-    const titleClass = status ? 'va-modal-alert-title' : 'va-modal-title';
     /* eslint-disable i18next/no-literal-string */
     const ariaRole = status => {
       if (status === 'warning' || status === 'error') {
@@ -359,55 +374,156 @@ export class VaModal {
       ? `Close ${modalTitle} modal`
       : 'Close modal';
 
-    return (
-      <Host aria-label={ariaLabel} aria-modal="true" role={ariaRole(status)}>
-        <div class={wrapperClass} tabIndex={-1}>
-          <button
-            aria-label={btnAriaLabel}
-            class="va-modal-close"
-            onClick={e => this.handleClose(e)}
-            ref={el => (this.closeButton = el as HTMLButtonElement)}
-            type="button"
+    if(uswds) {
+      const wrapperClass = classnames({
+        'usa-modal': true,
+        'va-modal-alert': status,
+        'usa-modal--lg': this.large,
+      });
+      const contentClass = classnames({
+        'usa-modal__content': true,
+        'usa-modal-alert': status,
+      });
+      const bodyClass = classnames({
+        'usa-modal__main': true,
+        'usa-modal-alert': status,
+        'va-modal-alert-body': status,
+      });
+      const titleClass = classnames({
+        'usa-modal__heading': true,
+        'va-modal-alert-title': status,
+      });
+      const closingButton = forcedModal ? '' 
+      : <button
+          aria-label={btnAriaLabel}
+          class="va-modal-close"
+          onClick={e => this.handleClose(e)}
+          ref={el => (this.closeButton = el as HTMLButtonElement)}
+          type="button"
+        >
+          <i aria-hidden="true" />
+        </button>;
+      return (
+        <Host aria-label={ariaLabel} aria-modal="true" role={ariaRole(status)}>
+          <div class={wrapperClass} 
+            tabIndex={-1}
+            aria-labelledby="heading"
+            aria-describedby="description"
           >
-            <i aria-hidden="true" />
-          </button>
-          <div class={bodyClass}>
-            <div role="document">
-              {modalTitle && (
-                <h1 class={titleClass} tabIndex={-1}>
-                  {modalTitle}
-                </h1>
-              )}
-              <slot></slot>
+            <div class={contentClass}>
+              {closingButton}
+              <div class={bodyClass}>
+                <div role="document">
+                  {modalTitle && (
+                    <h2 class={titleClass} tabIndex={-1} id="heading">
+                      {modalTitle}
+                    </h2>
+                  )}
+                  <div class="usa-prose" id="description">
+                    <slot></slot>
+                  </div>
+                </div>
+                {((primaryButtonClick && primaryButtonText) ||
+                  (secondaryButtonClick && secondaryButtonText)) && (
+                  <div
+                    class="usa-modal__footer"
+                    ref={el => (this.alertActions = el as HTMLDivElement)}
+                  >
+                    <ul class="usa-button-group">
+                    {primaryButtonClick && primaryButtonText && (
+                      <li class="usa-button-group__item">
+                        <va-button
+                          onClick={e => this.handlePrimaryButtonClick(e)}
+                          text={primaryButtonText}
+                          uswds
+                          />
+                      </li>
+                    )}
+                    {secondaryButtonClick && secondaryButtonText && (
+                      <li class="usa-button-group__item">
+                        {!unstyled && (
+                          <va-button
+                            onClick={e => this.handlePrimaryButtonClick(e)}
+                            secondary
+                            text={secondaryButtonText}
+                            uswds
+                          />
+                        )}
+                        {unstyled && (
+                          <button
+                            onClick={e => this.handlePrimaryButtonClick(e)}
+                            type="button"
+                            class="usa-button usa-button--unstyled"
+                          >
+                            {secondaryButtonText}
+                          </button>
+                        )}
+                      </li>
+                    )}
+                    </ul>
+                  </div>
+                )}
+              </div>
             </div>
-            {((primaryButtonClick && primaryButtonText) ||
-              (secondaryButtonClick && secondaryButtonText)) && (
-              <div
-                class="alert-actions"
-                ref={el => (this.alertActions = el as HTMLDivElement)}
+          </div>
+        </Host>
+      );
+    } else {
+      const wrapperClass = status
+        ? 'va-modal-inner va-modal-alert'
+        : 'va-modal-inner';
+      const bodyClass = status ? 'va-modal-alert-body' : 'va-modal-body';
+      const titleClass = status ? 'va-modal-alert-title' : 'va-modal-title';
+      return (
+        <Host aria-label={ariaLabel} aria-modal="true" role={ariaRole(status)}>
+          <div class={wrapperClass} tabIndex={-1}>
+            <button
+              aria-label={btnAriaLabel}
+              class="va-modal-close"
+              onClick={e => this.handleClose(e)}
+              ref={el => (this.closeButton = el as HTMLButtonElement)}
+              type="button"
               >
-                {primaryButtonClick && primaryButtonText && (
-                  <button
+              <i aria-hidden="true" />
+            </button>
+            <div class={bodyClass}>
+              <div role="document">
+                {modalTitle && (
+                  <h1 class={titleClass} tabIndex={-1}>
+                    {modalTitle}
+                  </h1>
+                )}
+                <slot></slot>
+              </div>
+              {((primaryButtonClick && primaryButtonText) ||
+                (secondaryButtonClick && secondaryButtonText)) && (
+                  <div
+                  class="alert-actions"
+                  ref={el => (this.alertActions = el as HTMLDivElement)}
+                  >
+                  {primaryButtonClick && primaryButtonText && (
+                    <button
                     onClick={e => this.handlePrimaryButtonClick(e)}
                     type="button"
-                  >
-                    {primaryButtonText}
-                  </button>
-                )}
-                {secondaryButtonClick && secondaryButtonText && (
-                  <button
+                    >
+                      {primaryButtonText}
+                    </button>
+                  )}
+                  {secondaryButtonClick && secondaryButtonText && (
+                    <button
                     class="button-secondary"
                     onClick={e => this.handleSecondaryButtonClick(e)}
                     type="button"
-                  >
-                    {secondaryButtonText}
-                  </button>
-                )}
-              </div>
-            )}
+                    >
+                      {secondaryButtonText}
+                    </button>
+                  )}
+                </div>
+              )}
+            </div>
           </div>
-        </div>
-      </Host>
-    );
+        </Host>
+      );
+    }
   }
 }

@@ -1,7 +1,86 @@
+@forward 'settings';
+
+@use 'uswds-helpers/src/styles/usa-sr-only';
+@use 'usa-label/src/styles/usa-label';
+@use 'usa-error-message/src/styles/usa-error-message';
+@use 'usa-hint/src/styles/usa-hint';
+@use 'usa-button/src/styles/usa-button';
+@use 'usa-button-group/src/styles/usa-button-group';
+@use 'usa-icon/src/styles/usa-icon';
+@use 'usa-modal/src/styles/usa-modal';
+
+@import '../../mixins/uswds-error-border.scss';
+@import '../../global/formation_overrides';
+
+.usa-modal-alert {
+  padding: 0px // => Due to icons
+}
+
+:host([status='info']) .usa-modal {
+  border-left-color: var(--color-primary-alt-dark);
+  background-color: var(--color-primary-alt-lightest);
+}
+
+:host([status='info']) .usa-modal::before {
+  color: var(--color-gray-dark);
+  content: '\F05A'; /* fa-circle-info */
+}
+
+:host([status='continue']) .usa-modal {
+  border-left-color: var(--color-green);
+  background-color: var(--color-green-lightest);
+}
+
+:host([status='continue']) .usa-modal::before {
+  color: var(--color-gray-dark);
+  content: '\F023'; /* fa-lock */
+}
+
+:host([status='success']) .usa-modal {
+  border-left-color: var(--color-green);
+  background-color: var(--color-green-lightest);
+}
+
+:host([status='success']) .usa-modal::before {
+  color: var(--color-gray-dark);
+  content: '\F00C'; /* fa-check */
+}
+
+:host([status='warning']) .usa-modal {
+  border-left-color: var(--color-gold);
+  background-color: var(--color-gold-lightest);
+}
+
+:host([status='warning']) .usa-modal::before {
+  color: var(--color-gray-dark);
+  content: '\F071'; /* fa-triangle-exclamation */
+}
+
+:host([status='error']) .usa-modal {
+  border-left-color: var(--color-secondary-dark);
+  background-color: var(--color-secondary-lightest);
+}
+
+:host([status='error']) .usa-modal::before {
+  color: var(--color-gray-dark);
+  content: '\F06A'; /* fa-circle-exclamation */
+}
+
+.va-modal-alert {
+  border-left-style: solid;
+  border-left-width: 10px;
+  display: inline-flex;
+  padding: 3.2rem 6.4rem 3.2rem 2.4rem;
+}
+
+
+/** Original Component Style **/
+
 @import '../../mixins/buttons.css';
 
 :host {
   display: block;
+  
 }
 
 :host([visible]:not([visible='false'])) {
@@ -43,7 +122,7 @@
 
 .va-modal-close {
   background-color: transparent;
-  color: var(--color-primary);
+  color: var(--color-gray-dark);
   font-size: 2.25rem;
   padding: 0;
   position: absolute;
@@ -56,7 +135,7 @@
 }
 
 .va-modal-close:hover {
-  color: var(--color-primary-darker);
+  color: var(--color-base);
 }
 
 .va-modal-body {
@@ -116,7 +195,7 @@ i::before {
   background-color: var(--color-gray-cool-light);
 }
 
-.va-modal-alert {
+:host(:not([uswds])) .va-modal-alert {
   border-left-style: solid;
   border-left-width: 10px;
   display: inline-flex;

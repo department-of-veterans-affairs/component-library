@@ -14,6 +14,12 @@
 :host([disabled]:not([disabled='false'])) {
   cursor: not-allowed;
 }
+
+// Override transparent background from USWDS v3
+.usa-button--outline {
+  background-color: var(--color-white);
+}
+
 /* Original Component Styles. */
 
 @import '../../mixins/buttons.css';

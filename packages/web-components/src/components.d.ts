@@ -486,6 +486,10 @@ export namespace Components {
          */
         "disableAnalytics"?: boolean;
         /**
+          * Whether or not the component will be forced to take action.
+         */
+        "forcedModal"?: boolean;
+        /**
           * Selector to explicitly specify which element should receive focus when the modal is open, if the initially focused element is not the first focusable element in the document
          */
         "initialFocusSelector"?: string;
@@ -506,6 +510,14 @@ export namespace Components {
          */
         "secondaryButtonText"?: string;
         "status"?: 'continue' | 'error' | 'info' | 'success' | 'warning';
+        /**
+          * Whether or not the component will be using the unstyled button. This is only available for USWDS
+         */
+        "unstyled"?: boolean;
+        /**
+          * Whether or not the component will use USWDS v3 styling.
+         */
+        "uswds"?: boolean;
         /**
           * If the modal is visible or not
          */
@@ -914,6 +926,10 @@ export namespace Components {
           * The regular expression that the input element's value is checked against on submission
          */
         "pattern"?: string;
+        /**
+          * Whether or not to add usa-input--error as class if error message is outside of component
+         */
+        "reflectInputError"?: boolean;
         /**
           * Set the input to required and render the (Required) text.
          */
@@ -1968,6 +1984,10 @@ declare namespace LocalJSX {
          */
         "disableAnalytics"?: boolean;
         /**
+          * Whether or not the component will be forced to take action.
+         */
+        "forcedModal"?: boolean;
+        /**
           * Selector to explicitly specify which element should receive focus when the modal is open, if the initially focused element is not the first focusable element in the document
          */
         "initialFocusSelector"?: string;
@@ -2004,6 +2024,14 @@ declare namespace LocalJSX {
          */
         "secondaryButtonText"?: string;
         "status"?: 'continue' | 'error' | 'info' | 'success' | 'warning';
+        /**
+          * Whether or not the component will be using the unstyled button. This is only available for USWDS
+         */
+        "unstyled"?: boolean;
+        /**
+          * Whether or not the component will use USWDS v3 styling.
+         */
+        "uswds"?: boolean;
         /**
           * If the modal is visible or not
          */
@@ -2492,6 +2520,10 @@ declare namespace LocalJSX {
           * The regular expression that the input element's value is checked against on submission
          */
         "pattern"?: string;
+        /**
+          * Whether or not to add usa-input--error as class if error message is outside of component
+         */
+        "reflectInputError"?: boolean;
         /**
           * Set the input to required and render the (Required) text.
          */

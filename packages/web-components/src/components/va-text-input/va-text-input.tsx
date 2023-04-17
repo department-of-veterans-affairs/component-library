@@ -56,6 +56,11 @@ export class VaTextInput {
   @Prop() error?: string;
 
   /**
+   * Whether or not to add usa-input--error as class if error message is outside of component
+   */
+  @Prop() reflectInputError?: boolean = false;
+
+  /**
    * Whether or not `aria-invalid` will be set on the inner input. Useful when
    * composing the component into something larger, like a date component.
    */
@@ -208,6 +213,7 @@ export class VaTextInput {
     const {
       label,
       error,
+      reflectInputError,
       invalid,
       inputmode,
       required,
@@ -238,7 +244,7 @@ export class VaTextInput {
       const inputClass = classnames({
         'usa-input': true,
         'usa-input--success': success,
-        'usa-input--error': error,
+        'usa-input--error': error || reflectInputError,
       });
       return (
         <Host>
