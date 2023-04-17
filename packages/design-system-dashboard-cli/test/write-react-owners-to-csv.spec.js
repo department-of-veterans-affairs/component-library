@@ -24,7 +24,7 @@ describe('writeCompPathOwnersToCSV', () => {
     writeCompPathOwnersToCSV(SampleData);
     const csvPath = path.resolve(
       __dirname,
-      `../../../component-apps-and-owners-${today}.csv`
+      `../../component-apps-and-owners-${today}.csv`
     );
     console.log('csvPath:', csvPath);
     const csvFile = fs.existsSync(csvPath);
