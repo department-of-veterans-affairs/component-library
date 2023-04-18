@@ -263,21 +263,14 @@ export const Warning = Template.bind(null);
 Warning.args = {
   ...defaultArgs,
   headline: (
-    <h2 slot="headline">The health care application is down for maintenance</h2>
+    <h2 slot="headline">Warning status</h2>
   ),
   children: (
-    <div>
-      <p className="vads-u-margin-y--0">
-        We’re sorry. The health care application is currently down while we fix
-        a few things. We’ll be back up as soon as we can.
+    <>
+      <p>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.
       </p>
-      <p className="vads-u-margin-bottom--0">
-        In the meantime, you can call{' '}
-        <a href="tel:+18772228387">877-222-8387</a>, Monday &#8211; Friday, 8:00
-        a.m. &#8211; 8:00 p.m. (<abbr title="eastern time">ET</abbr>) and press
-        2 to complete this application over the phone.
-      </p>
-    </div>
+    </>
   ),
   status: 'warning',
 };

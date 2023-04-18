@@ -236,4 +236,17 @@
   .usa-alert--info .usa-alert__body::before {
     left: rem-override(1.5rem);
   }
+  .usa-alert--warning .usa-alert__body {
+    padding-left: rem-override(4rem);
+    padding-right: rem-override(4rem);
+    &::before {
+      left: rem-override(1.5rem);
+    }
+  }
+}
+
+.usa-alert--warning .usa-alert__body::before {
+  height: rem-override(2rem);
+  width: rem-override(2rem);
+  top: rem-override(0.75rem);
 }

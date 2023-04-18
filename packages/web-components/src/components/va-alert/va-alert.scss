@@ -18,13 +18,18 @@
 }
 
 // Unset USWDS icons for Font Awesome icons.
-.usa-alert--info .usa-alert__body::before {
+.usa-alert--info .usa-alert__body::before, 
+.usa-alert--warning .usa-alert__body::before {
   background: unset;
   -webkit-mask: unset;
 }
 
 .usa-alert--info .usa-alert__body::before {
   content: '\F05A'; /* fa-circle-info */
+}
+
+.usa-alert--warning .usa-alert__body::before {
+  content: '\F071'; /* fa-exclamation-triangle */
 }
 
 /* Original Component Styles. */
