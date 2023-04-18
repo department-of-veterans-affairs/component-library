@@ -161,10 +161,6 @@ export class VaAlert {
 
   render() {
     const { backgroundOnly, status, visible, closeable, showIcon, uswds } = this;
-    const classes = classnames('alert', status, {
-      'bg-only': backgroundOnly,
-      'hide-icon': backgroundOnly && !showIcon,
-    });
     /* eslint-disable i18next/no-literal-string */
     const role = status === 'error' ? 'alert' : null;
     const ariaLive = status === 'error' ? 'assertive' : null;
@@ -173,6 +169,10 @@ export class VaAlert {
     if (!visible) return <div aria-live="polite" />;
 
     if (uswds) {
+      const classes = classnames('usa-alert', `usa-alert--${status}`, {
+        'bg-only': backgroundOnly,
+        'hide-icon': backgroundOnly && !showIcon,
+      });
       return (
         <Host>
           <div
@@ -180,9 +180,8 @@ export class VaAlert {
             aria-live={ariaLive}
             class={classes}
           >
-            <i aria-hidden="true" role="img"></i>
             <div
-              class="body"
+              class="usa-alert__body"
               onClick={this.handleAlertBodyClick.bind(this)}
               role="presentation"
             >
@@ -203,6 +202,11 @@ export class VaAlert {
         </Host>
       );
     }
+
+    const classes = classnames('alert', status, {
+      'bg-only': backgroundOnly,
+      'hide-icon': backgroundOnly && !showIcon,
+    });
 
     return (
       <Host>

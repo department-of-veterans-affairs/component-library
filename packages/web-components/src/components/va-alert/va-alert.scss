@@ -4,6 +4,28 @@
 
 @import '../../global/formation_overrides';
 
+:host {
+  display: block;
+  position: relative;
+}
+
+.usa-alert__body::before {
+  font-family: "Font Awesome 5 Free";
+  font-size: 2.4rem;
+  font-style: normal;
+  font-weight: 900;
+  line-height: 1;
+}
+
+// Unset USWDS icons for Font Awesome icons.
+.usa-alert--info .usa-alert__body::before {
+  background: unset;
+  -webkit-mask: unset;
+}
+
+.usa-alert--info .usa-alert__body::before {
+  content: '\F05A'; /* fa-circle-info */
+}
 
 /* Original Component Styles. */
 
@@ -11,9 +33,7 @@
 @import '../../mixins/buttons.css';
 
 :host(:not([uswds])) {
-  display: block;
   background-color: var(--color-gray-lightest);
-  position: relative;
 }
 
 :host(:not([uswds])[background-only='true']),

@@ -46,13 +46,11 @@ const defaultArgs = {
     </h2>
   ),
   'children': (
-    <div>
-      <p className="vads-u-margin-y--0">
-        You can use our new mobile app to check the status of your claims or
-        appeals on your mobile device. Download the{' '}
-        <strong>VA: Health and Benefits</strong> mobile app to get started.
-      </p>
-    </div>
+    <p>
+      You can use our new mobile app to check the status of your claims or
+      appeals on your mobile device. Download the{' '}
+      <strong>VA: Health and Benefits</strong> mobile app to get started.
+    </p>
   ),
 };
 

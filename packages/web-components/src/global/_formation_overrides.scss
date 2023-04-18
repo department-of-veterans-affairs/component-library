@@ -207,3 +207,33 @@
 .usa-modal--lg {
   max-width: rem-override(55rem);
 }
+
+.usa-alert {
+  border-left-width: rem-override(0.5rem);
+  .usa-alert__body {
+    font-size: rem-override(1.06rem);
+    max-width: rem-override(64rem);
+    padding: rem-override(1rem);
+  }
+}
+
+@media (min-width: 64em) {
+  .usa-alert--info {
+    .usa-alert__body {
+      padding-left: rem-override(4rem);
+      padding-right: rem-override(4rem);
+      &::before {
+        height: rem-override(2rem);
+        width: rem-override(2rem);
+        left: rem-override(0.5rem);
+        top: rem-override(0.75rem);
+      }
+    }
+  }
+}
+
+@media (min-width: 64em) {
+  .usa-alert--info .usa-alert__body::before {
+    left: rem-override(1.5rem);
+  }
+}
