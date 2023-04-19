@@ -36,12 +36,12 @@ export class VaAccordionItem {
 
   /**
    * Optional accordion item subheader text. Default is null.
-   */
+  */
   @Prop() subheader?: string = null;
 
   /**
    * True if the item is open
-   */
+  */
   @Prop() open?: boolean = false;
 
   /**
@@ -92,33 +92,32 @@ export class VaAccordionItem {
   }
 
   render() {
-    // IE11 is unable to run onSlotChange
-    // Check needed to populate Accordion Item Header information
-    // When using slot="headline" to set the information
-    const ieSlotCheckTag = this.el
-      .querySelector('[slot="headline"]')
-      ?.tagName.toLowerCase();
-    const ieSlotCheckHeader =
-      this.el.querySelector('[slot="headline"]')?.innerHTML;
 
-    const Header = () =>
-      h(
-        // TODO: Remove level & header prop & let the slot do its work
-        /* eslint-disable-next-line i18next/no-literal-string */
-        this.slotTag || ieSlotCheckTag || `h${this.level}`,
-        null,
-        <button
-          ref={el => {
-            this.expandButton = el;
-          }}
-          onClick={this.toggleOpen.bind(this)}
-          aria-expanded={this.open ? 'true' : 'false'}
-          aria-controls="content"
-        >
-          {this.slotHeader || ieSlotCheckHeader || this.header}
-          {this.subheader ? <p>{this.subheader}</p> : false}
-        </button>,
+    const Header = () => {
+      const ieSlotCheckHeader =
+        this.el.querySelector('[slot="headline"]')?.innerHTML;
+
+      const headline = this.el.querySelector('[slot="headline"]');
+      const Tag = (headline && headline.tagName.includes('H'))
+        ? headline.tagName.toLowerCase()
+        : `h${this.level}`;
+      return (
+        <Tag>
+          <button
+            ref={el => {
+              this.expandButton = el;
+            }}
+            onClick={this.toggleOpen.bind(this)}
+            aria-expanded={this.open ? 'true' : 'false'}
+            aria-controls="content"
+          >
+            {<slot name="icon" />}
+            {this.slotHeader || this.header || ieSlotCheckHeader}
+            {this.subheader ? <p>{this.subheader}</p> : false}
+          </button>
+        </Tag>
       );
+    }
     return (
       <Host>
         <Header />
