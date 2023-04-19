@@ -165,7 +165,15 @@ export class VaAlert {
   }
 
   render() {
-    const { backgroundOnly, status, visible, closeable, showIcon, uswds, slim } = this;
+    const { 
+      backgroundOnly, 
+      status, 
+      visible, 
+      closeable, 
+      showIcon, 
+      uswds, 
+      slim 
+    } = this;
     /* eslint-disable i18next/no-literal-string */
     const role = status === 'error' ? 'alert' : null;
     const ariaLive = status === 'error' ? 'assertive' : null;

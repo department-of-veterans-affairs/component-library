@@ -17,7 +17,7 @@
   line-height: 1;
 }
 
-// Unset USWDS icons for Font Awesome icons.
+// Replace USWDS icons with Font Awesome icons.
 .usa-alert--info .usa-alert__body::before, 
 .usa-alert--warning .usa-alert__body::before,
 .usa-alert--success .usa-alert__body::before,
@@ -47,7 +47,6 @@
   }
 }
 
-// Using Font Awesome Icons instead of USWDW for now.
 .usa-alert--info .usa-alert__body::before {
   content: '\F05A'; /* fa-circle-info */
 }
@@ -98,12 +97,6 @@
 i.fa-times-circle::before {
   content: '\F057'; /* fa-times-circle*/
 }
-
-// div.bg-only.hide-icon .usa-alert__body::before, 
-// :host([status='continue']) div.bg-only.hide-icon .usa-alert__body::before {
-//   content: '';
-//   margin-right: 0;
-// }
 
 :host([uswds][background-only='true']) .usa-alert,
 :host([uswds][background-only='']) .usa-alert {
