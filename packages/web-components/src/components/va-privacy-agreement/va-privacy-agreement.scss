@@ -1,4 +1,5 @@
 @import '../../mixins/accessibility.css';
+@import '../../global/variables';
 
 :host {
   display: block;
@@ -6,6 +7,10 @@
 
 va-checkbox::part(checkbox) {
   max-width: 100%;
+}
+
+.privacy-policy {
+  font-size: 1.06 * $v3-font-base-size;
 }
 
 a {

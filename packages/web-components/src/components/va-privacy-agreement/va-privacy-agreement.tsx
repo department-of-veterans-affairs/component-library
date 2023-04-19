@@ -7,7 +7,7 @@ import { Component, Host, h, Prop, Event, EventEmitter } from '@stencil/core';
  */
 @Component({
   tag: 'va-privacy-agreement',
-  styleUrl: 'va-privacy-agreement.css',
+  styleUrl: 'va-privacy-agreement.scss',
   shadow: true,
 })
 export class VaPrivacyAgreement {
@@ -82,7 +82,7 @@ export class VaPrivacyAgreement {
             checked={this.checked}
             onVaChange={this.handleCheckboxChange}
           >
-            <span slot="description">
+            <span class="privacy-policy" slot="description">
               Please read and accept the&nbsp;
               <a href="/privacy-policy/" target="_blank">
                 privacy policy
