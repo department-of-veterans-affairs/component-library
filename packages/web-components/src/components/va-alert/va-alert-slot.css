@@ -7,7 +7,6 @@ va-alert[uswds] > h4,
 va-alert[uswds] > h5, 
 va-alert[uswds] > h6 {
   font-size: 21.28px; /* 1.33rem */
-  line-height: .9;
   margin-top: 0;
   margin-bottom: 8px; /* 0.5rem */
 }
