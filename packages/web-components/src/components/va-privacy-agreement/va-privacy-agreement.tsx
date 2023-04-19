@@ -20,7 +20,10 @@ export class VaPrivacyAgreement {
    * Whether to display the error message or not.
    */
   @Prop() showError?: boolean = false;
-
+  /**
+   * Whether or not the component will use USWDS v3 styling.
+   */
+  @Prop() uswds?: boolean = false;
   /**
    * Emit component-library-analytics events on the blur event.
    */
@@ -64,27 +67,59 @@ export class VaPrivacyAgreement {
   }
 
   render() {
-    return (
-      <Host>
-        <va-checkbox
-          required
-          error={this.errorMessage()}
-          id="checkbox"
-          label="I have read and accept the privacy policy."
-          checked={this.checked}
-          onVaChange={this.handleCheckboxChange}
-        >
-          <span slot="description">
-            Please read and accept the&nbsp;
-            <a href="/privacy-policy/" target="_blank">
-              privacy policy 
-              <i class="fa-arrow-up-right-from-square" aria-hidden="true" role="img"></i>
-              <span class="sr-only">opens in a new window</span>
-            </a>.
-          </span>
-        </va-checkbox>
-      </Host>
-    );
-  }
+    const { uswds } = this;
 
+    if (uswds) {
+      return (
+        <Host>
+          {/* <div style={{borderTop: '1px solid red'}}></div> */}
+          <va-checkbox
+            uswds={true}
+            required
+            error={this.errorMessage()}
+            id="checkbox"
+            label="I have read and accept the privacy policy."
+            checked={this.checked}
+            onVaChange={this.handleCheckboxChange}
+          >
+            <span slot="description">
+              Please read and accept the&nbsp;
+              <a href="/privacy-policy/" target="_blank">
+                privacy policy
+                <i
+                  class="fa-arrow-up-right-from-square"
+                  aria-hidden="true"
+                  role="img"
+                ></i>
+                <span class="sr-only">opens in a new window</span>
+              </a>
+              .
+            </span>
+          </va-checkbox>
+        </Host>
+      );
+    } else {
+      return (
+        <Host>
+          <va-checkbox
+            required
+            error={this.errorMessage()}
+            id="checkbox"
+            label="I have read and accept the privacy policy."
+            checked={this.checked}
+            onVaChange={this.handleCheckboxChange}
+          >
+            <span slot="description">
+              Please read and accept the&nbsp;
+              <a href="/privacy-policy/" target="_blank">
+                privacy policy 
+                <i class="fa-arrow-up-right-from-square" aria-hidden="true" role="img"></i>
+                <span class="sr-only">opens in a new window</span>
+              </a>.
+            </span>
+          </va-checkbox>
+        </Host>
+      )
+    }
+  }
 }

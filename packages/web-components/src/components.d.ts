@@ -636,6 +636,10 @@ export namespace Components {
           * Whether to display the error message or not.
          */
         "showError"?: boolean;
+        /**
+          * Whether or not the component will use USWDS v3 styling.
+         */
+        "uswds"?: boolean;
     }
     interface VaProcessList {
     }
@@ -2166,6 +2170,10 @@ declare namespace LocalJSX {
           * Whether to display the error message or not.
          */
         "showError"?: boolean;
+        /**
+          * Whether or not the component will use USWDS v3 styling.
+         */
+        "uswds"?: boolean;
     }
     interface VaProcessList {
     }

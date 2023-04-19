@@ -95,6 +95,7 @@
   background-image: url('../../assets/check.svg');
   background-position: 50%;
   background-repeat: no-repeat;
+  background-size: cover;
 }
 
 :host(:not([uswds])) input:not([disabled]):focus+label:before {
