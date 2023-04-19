@@ -49,6 +49,7 @@ export class VaAccordionItem {
    */
   @Prop() level?: number = 2;
 
+  @Prop() bold: boolean = true;
   /**
    * Local State for slot=headline replacement of props (header).
    * Provides context of the header text to the Accordion Item
@@ -94,13 +95,13 @@ export class VaAccordionItem {
   render() {
 
     const Header = () => {
-      const ieSlotCheckHeader =
-        this.el.querySelector('[slot="headline"]')?.innerHTML;
-
       const headline = this.el.querySelector('[slot="headline"]');
+      const ieSlotCheckHeader = headline?.innerHTML;
       const Tag = (headline && headline.tagName.includes('H'))
         ? headline.tagName.toLowerCase()
         : `h${this.level}`;
+      console.log(this.bold)
+      const boldness = this.bold ? 'bold' : 'normal';
       return (
         <Tag>
           <button
@@ -110,12 +111,13 @@ export class VaAccordionItem {
             onClick={this.toggleOpen.bind(this)}
             aria-expanded={this.open ? 'true' : 'false'}
             aria-controls="content"
+            style={{ fontWeight: boldness }}
           >
-            {<slot name="icon" />}
+            {< slot name="icon" />}
             {this.slotHeader || this.header || ieSlotCheckHeader}
             {this.subheader ? <p>{this.subheader}</p> : false}
           </button>
-        </Tag>
+        </Tag >
       );
     }
     return (
@@ -125,7 +127,7 @@ export class VaAccordionItem {
         <div id="content">
           <slot />
         </div>
-      </Host>
+      </Host >
     );
   }
 }
