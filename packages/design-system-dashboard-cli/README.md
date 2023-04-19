@@ -25,9 +25,15 @@ sure it's on the `main` branch and has the latest changes!
 
 ### Add the latest usage data to BigQuery
 
+First, make sure your terminal working directory is set to the root of the component-library repo. Then, make sure whatever branch you are working on is up-to-date with the latest from the `main` branch. The easiest way to do this is to stash any unsaved changes (`git stash`) and checkout main (git checkout main) followed by pulling down the latest from GitHub (git pull).
+
+Once your codebase is up-to-date, run this command from the root directory:
+
 ```sh
-yarn report
+./update-component-usage.sh
 ```
+
+This will go to each of the necessary packages within the component-library repo and run "yarn install" followed by "yarn build" for each. For the web-components package, "yarn build:bindings" is also run. Finally, the script will navigate to the design-system-dashboard-cli folder and run "yarn report".
 
 This will emit to `stdout` an `INSERT INTO` query for adding the newest values
 to the table in [BigQuery](https://console.cloud.google.com/bigquery).
@@ -37,7 +43,11 @@ Search for Domo in the [GitHub Issue
 Templates](https://github.com/department-of-veterans-affairs/va.gov-team/issues/new/choose)
 to get access to both Domo and BigQuery.
 
+This will also create a new file in the root directory with a file name like "component-apps-and-owners-{today's date}.csv". This is used to track which React components have been deprecated but which are still in use in production. This file includes which component is in use, in which application, and who the 'owner' of that app is, within both the vets-website repo and the content-build repo.
+
 ### Generate a CSV report
+
+To run the following yarn commands, make sure you are in the design-system-dashboard-cli folder, rather than the component-library root folder.
 
 ```sh
 yarn report:csv [--output path/to/file.csv]
