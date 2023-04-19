@@ -73,6 +73,9 @@
   padding: 3.2rem 6.4rem 3.2rem 2.4rem;
 }
 
+:host([uswds][closeable]:not([closeable="false"])) .usa-alert {
+  padding-right: 5.7rem;
+}
 
 /** Original Component Style **/
 
