@@ -242,16 +242,13 @@
       top: rem-override(0.75rem);
     }
   }
+  .usa-alert--slim .usa-alert__body {
+    padding-left: rem-override(3.5rem);
+  }
 }
 
 .usa-alert--slim .usa-alert__body {
   padding-bottom: rem-override(0.5rem);
   padding-top: rem-override(0.5rem);
   padding-left: rem-override(2.4166666667rem);
-}
-
-@media (min-width: 64em) {
-  .usa-alert--slim .usa-alert__body {
-    padding-left: rem-override(3.5rem);;
-  }
 }
