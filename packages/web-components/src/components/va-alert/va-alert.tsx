@@ -77,6 +77,11 @@ export class VaAlert {
    * Whether or not the component will use USWDS v3 styling.
    */
   @Prop() uswds?: boolean = false;
+  
+  /**
+   * Displays the slim variation. Available when USWDS is true.
+   */
+  @Prop() slim?: boolean = false;
 
   /**
    * Fires when the component has successfully finished rendering for the first
@@ -160,7 +165,7 @@ export class VaAlert {
   }
 
   render() {
-    const { backgroundOnly, status, visible, closeable, showIcon, uswds } = this;
+    const { backgroundOnly, status, visible, closeable, showIcon, uswds, slim } = this;
     /* eslint-disable i18next/no-literal-string */
     const role = status === 'error' ? 'alert' : null;
     const ariaLive = status === 'error' ? 'assertive' : null;
@@ -171,7 +176,9 @@ export class VaAlert {
     if (uswds) {
       const classes = classnames('usa-alert', `usa-alert--${status}`, {
         'bg-only': backgroundOnly,
-        'hide-icon': backgroundOnly && !showIcon,
+        'usa-alert--no-icon': backgroundOnly && !showIcon,
+        'usa-alert--success': (status === 'continue'),
+        'usa-alert--slim': slim
       });
       return (
         <Host>

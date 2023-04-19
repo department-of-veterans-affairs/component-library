@@ -82,6 +82,10 @@ export namespace Components {
          */
         "showIcon"?: boolean;
         /**
+          * Displays the slim variation. Available when USWDS is true.
+         */
+        "slim"?: boolean;
+        /**
           * Determines the icon and border/background color. One of `info`, `error`, `success`, `warning`, or `continue`
          */
         "status"?: string;
@@ -1503,6 +1507,10 @@ declare namespace LocalJSX {
           * This option only takes effect when background-only is true. If `true`, the background-only alert will include an icon.
          */
         "showIcon"?: boolean;
+        /**
+          * Displays the slim variation. Available when USWDS is true.
+         */
+        "slim"?: boolean;
         /**
           * Determines the icon and border/background color. One of `info`, `error`, `success`, `warning`, or `continue`
          */

@@ -32,6 +32,7 @@ VaAlert.displayName = 'VaAlert';
 
 const defaultArgs = {
   'uswds': true,
+  'slim': false,
   'status': 'info',
   'background-only': false,
   'show-icon': false,
@@ -46,7 +47,7 @@ const defaultArgs = {
     </h2>
   ),
   'children': (
-    <p>
+    <p className="vads-u-margin-y--0">
       You can use our new mobile app to check the status of your claims or
       appeals on your mobile device. Download the{' '}
       <strong>VA: Health and Benefits</strong> mobile app to get started.
@@ -56,6 +57,7 @@ const defaultArgs = {
 
 const Template = ({
   uswds,
+  slim,
   status,
   'background-only': backgroundOnly,
   'show-icon': showIcon,
@@ -71,6 +73,7 @@ const Template = ({
   if (onCloseEvent)
     return (
       <VaAlert
+        slim={slim}
         uswds={uswds}
         status={status}
         backgroundOnly={backgroundOnly}
@@ -90,6 +93,7 @@ const Template = ({
   return (
     <va-alert
       uswds={uswds}
+      slim={slim}
       status={status}
       background-only={backgroundOnly}
       show-icon={showIcon}
@@ -145,7 +149,7 @@ const BackgroundOnlyTemplate = ({
         full-width="false"
         class="vads-u-margin-bottom--1"
       >
-        <div>
+        <>
           <p className="vads-u-margin-top--0">
             We’re sorry for the interruption, but we’ve found some more
             information that we need you to review before you can apply for VA
@@ -153,7 +157,7 @@ const BackgroundOnlyTemplate = ({
             an account, you can create one now.
           </p>
           <button className="usa-button-primary">Sign in to VA.gov</button>
-        </div>
+        </>
       </va-alert>
       <va-alert
         uswds={uswds}
@@ -183,7 +187,7 @@ const BackgroundOnlyTemplate = ({
         full-width="false"
         class="vads-u-margin-bottom--1"
       >
-        <div>
+        <>
           <p className="vads-u-margin-y--0">
             We’re sorry. The health care application is currently down while we
             fix a few things. We’ll be back up as soon as we can.
@@ -194,7 +198,7 @@ const BackgroundOnlyTemplate = ({
             8:00 a.m. &#8211; 8:00 p.m. (<abbr title="eastern time">ET</abbr>)
             and press 2 to complete this application over the phone.
           </p>
-        </div>
+        </>
       </va-alert>
       <va-alert
         uswds={uswds}
@@ -207,14 +211,120 @@ const BackgroundOnlyTemplate = ({
         closeable={closeable}
         full-width="false"
       >
-        <div>
+        <>
           <p className="vads-u-margin-top--0">
             You can use our new mobile app to check the status of your claims or
             appeals on your mobile device. Download the{' '}
             <strong>VA: Health and Benefits</strong> mobile app to get started.
           </p>
           <button className="usa-button-primary">Sign in to VA.gov</button>
-        </div>
+        </>
+      </va-alert>
+    </>
+  );
+};
+
+const SlimTemplate = ({
+  'background-only': backgroundOnly,
+  'show-icon': showIcon,
+  'close-btn-aria-label': closeBtnAriaLabel,
+  closeable,
+  headline,
+  slim,
+  uswds,
+}) => {
+  return (
+    <>
+      <va-alert
+        uswds={uswds}
+        slim={slim}
+        status="info"
+        background-only={backgroundOnly}
+        show-icon={showIcon}
+        disable-analytics="false"
+        visible="true"
+        close-btn-aria-label={closeBtnAriaLabel}
+        closeable={closeable}
+        full-width="false"
+        class="vads-u-margin-bottom--1"
+      >
+        <p className="vads-u-margin-y--0">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.
+        </p>
+      </va-alert>
+      <va-alert
+        uswds={uswds}
+        slim={slim}
+        status="error"
+        background-only={backgroundOnly}
+        show-icon={showIcon}
+        disable-analytics="false"
+        visible="true"
+        close-btn-aria-label={closeBtnAriaLabel}
+        closeable={closeable}
+        full-width="false"
+        class="vads-u-margin-bottom--1"
+      >
+        <>
+          <p className="vads-u-margin-y--0">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.
+          </p>
+        </>
+      </va-alert>
+      <va-alert
+        uswds={uswds}
+        slim={slim}
+        status="success"
+        background-only={backgroundOnly}
+        show-icon={showIcon}
+        disable-analytics="false"
+        visible="true"
+        close-btn-aria-label={closeBtnAriaLabel}
+        closeable={closeable}
+        full-width="false"
+        class="vads-u-margin-bottom--1"
+      >
+        <p className="vads-u-margin-y--0">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.
+        </p>
+      </va-alert>
+      <va-alert
+        uswds={uswds}
+        slim={slim}
+        status="warning"
+        background-only={backgroundOnly}
+        show-icon={showIcon}
+        disable-analytics="false"
+        visible="true"
+        close-btn-aria-label={closeBtnAriaLabel}
+        closeable={closeable}
+        full-width="false"
+        class="vads-u-margin-bottom--1"
+      >
+        <>
+          <p className="vads-u-margin-y--0">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.
+          </p>
+        </>
+      </va-alert>
+      <va-alert
+        uswds={uswds}
+        slim={slim}
+        status="continue"
+        background-only={backgroundOnly}
+        show-icon={showIcon}
+        disable-analytics="false"
+        visible="true"
+        close-btn-aria-label={closeBtnAriaLabel}
+        closeable={closeable}
+        full-width="false"
+        class="vads-u-margin-bottom--1"
+      >
+        <>
+          <p className="vads-u-margin-y--0">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.
+          </p>
+        </>
       </va-alert>
     </>
   );
@@ -230,14 +340,14 @@ export const SignInOrToolPrompt = Template.bind(null);
 SignInOrToolPrompt.args = {
   ...defaultArgs,
   children: (
-    <div>
+    <>
       <p className="vads-u-margin-top--0">
         You can use our new mobile app to check the status of your claims or
         appeals on your mobile device. Download the{' '}
         <strong>VA: Health and Benefits</strong> mobile app to get started.
       </p>
       <button className="va-button-primary">Sign in to VA.gov</button>
-    </div>
+    </>
   ),
   status: 'continue',
 };
@@ -267,7 +377,7 @@ Warning.args = {
   ),
   children: (
     <>
-      <p>
+      <p className="vads-u-margin-top--0">
       Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.
       </p>
     </>
@@ -280,7 +390,7 @@ Error.args = {
   ...defaultArgs,
   headline: <h2 slot="headline">Please sign in to review your information</h2>,
   children: (
-    <div>
+    <>
       <p className="vads-u-margin-top--0">
         We’re sorry for the interruption, but we’ve found some more information
         that we need you to review before you can apply for VA health care.
@@ -288,7 +398,7 @@ Error.args = {
         can create one now.
       </p>
       <button className="usa-button-primary">Sign in to VA.gov</button>
-    </div>
+    </>
   ),
   status: 'error',
 };
@@ -336,6 +446,12 @@ BackgroundOnlyWithIcon.args = {
   ...defaultArgs,
   'background-only': true,
   'show-icon': true,
+};
+
+export const Slim = SlimTemplate.bind(null);
+Slim.args = {
+  ...defaultArgs,
+  slim: true,
 };
 
 export const NotVisible = Template.bind(null);

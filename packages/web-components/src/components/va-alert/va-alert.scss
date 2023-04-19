@@ -9,9 +9,9 @@
   position: relative;
 }
 
-.usa-alert__body::before {
+.usa-alert__body::before, :host([uswds]) i {
   font-family: "Font Awesome 5 Free";
-  font-size: 2.4rem;
+  font-size: 26px;
   font-style: normal;
   font-weight: 900;
   line-height: 1;
@@ -19,17 +19,95 @@
 
 // Unset USWDS icons for Font Awesome icons.
 .usa-alert--info .usa-alert__body::before, 
-.usa-alert--warning .usa-alert__body::before {
+.usa-alert--warning .usa-alert__body::before,
+.usa-alert--success .usa-alert__body::before,
+.usa-alert--error .usa-alert__body::before,
+.usa-alert--slim .usa-alert__body::before {
   background: unset;
   -webkit-mask: unset;
 }
 
+.usa-alert--info .usa-alert__body,
+.usa-alert--warning .usa-alert__body, 
+.usa-alert--success .usa-alert__body,
+.usa-alert--error .usa-alert__body {
+  &::before {
+    top: 18px;
+  }
+}
+
+.usa-alert--slim .usa-alert__body,
+.usa-alert--slim.usa-alert--info .usa-alert__body,
+.usa-alert--slim.usa-alert--warning .usa-alert__body, 
+.usa-alert--slim.usa-alert--success .usa-alert__body,
+.usa-alert--slim.usa-alert--error .usa-alert__body {
+  &::before {
+    top: 10px;
+    font-size: 22px;
+  }
+}
+
+// Using Font Awesome Icons instead of USWDW for now.
 .usa-alert--info .usa-alert__body::before {
   content: '\F05A'; /* fa-circle-info */
 }
 
 .usa-alert--warning .usa-alert__body::before {
   content: '\F071'; /* fa-exclamation-triangle */
+}
+
+.usa-alert--success .usa-alert__body::before {
+  content: '\F00C'; /* fa-check */
+}
+
+:host([status='continue']) .usa-alert--success .usa-alert__body::before {
+  content: '\F023'; /* fa-lock */
+}
+
+.usa-alert--error .usa-alert__body::before {
+  content: '\F06A'; /* fa-exclamation-circle */
+}
+
+@media screen and (min-width: 1024px) {
+  :host([full-width='true']) .va-alert-close,
+  :host([full-width='']) .va-alert-close {
+    position: relative;
+  }
+}
+
+.va-alert-close {
+  margin: 1.6rem;
+  padding: 0;
+  width: auto;
+  color: var(--color-gray-dark);
+  font-size: 2.25rem;
+  appearance: none;
+  border: 0;
+  cursor: pointer;
+  background: transparent;
+  display: block;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.va-alert-close:hover {
+  color: var(--color-base);
+}
+
+i.fa-times-circle::before {
+  content: '\F057'; /* fa-times-circle*/
+}
+
+// div.bg-only.hide-icon .usa-alert__body::before, 
+// :host([status='continue']) div.bg-only.hide-icon .usa-alert__body::before {
+//   content: '';
+//   margin-right: 0;
+// }
+
+:host([uswds][background-only='true']) .usa-alert,
+:host([uswds][background-only='']) .usa-alert {
+  border: none;
 }
 
 /* Original Component Styles. */
@@ -73,13 +151,6 @@
 :host(:not([uswds])[full-width='true']) div.alert {
   border-left: none;
   max-width: 1000px;
-}
-
-@media screen and (min-width: 1024px) {
-  :host(:not([uswds])[full-width='true']) .va-alert-close,
-  :host(:not([uswds])[full-width='']) .va-alert-close {
-    position: relative;
-  }
 }
 
 :host(:not([uswds])) ::slotted([slot='headline']) {
@@ -172,35 +243,12 @@
   background-color: var(--color-secondary-lightest);
 }
 
-:host(:not([uswds])) .va-alert-close {
-  margin: 1.6rem;
-  padding: 0;
-  width: auto;
-  color: var(--color-gray-dark);
-  font-size: 2.25rem;
-  appearance: none;
-  border: 0;
-  cursor: pointer;
-  background: transparent;
-  display: block;
-  position: absolute;
-  right: 0;
-  top: 0;
-}
-:host(:not([uswds])) .va-alert-close:hover {
-  color: var(--color-base);
-}
-
 :host(:not([uswds])) i {
   font-family: 'Font Awesome 5 Free';
   font-size: 2.4rem;
   font-style: normal;
   font-weight: 900;
   line-height: 1;
-}
-
-:host(:not([uswds])) i.fa-times-circle::before {
-  content: '\F057'; /* fa-times-circle*/
 }
 
 :host(:not([uswds])[closeable]:not([closeable='false'])) .alert {

@@ -1,11 +1,11 @@
 
 /* .usa-alert__heading */
-va-alert[uswds] h1, 
-va-alert[uswds] h2, 
-va-alert[uswds] h3, 
-va-alert[uswds] h4, 
-va-alert[uswds] h5, 
-va-alert[uswds] h6 {
+va-alert[uswds] > h1, 
+va-alert[uswds] > h2, 
+va-alert[uswds] > h3, 
+va-alert[uswds] > h4, 
+va-alert[uswds] > h5, 
+va-alert[uswds] > h6 {
   font-size: 21.28px; /* 1.33rem */
   line-height: .9;
   margin-top: 0;
@@ -13,7 +13,7 @@ va-alert[uswds] h6 {
 }
 
 /* .usa-alert__text */
-va-alert[uswds] > p {
+/* va-alert[uswds] > p {
   margin-bottom: 0;
   margin-top: 0;
-}
+} */
