@@ -103,6 +103,10 @@ i.fa-times-circle::before {
   border: none;
 }
 
+:host([closeable]:not([closeable="false"])) .usa-alert .usa-alert__body {
+  padding-right: 5.7rem;
+}
+
 /* Original Component Styles. */
 
 @import '../../mixins/accessibility.css';
