@@ -6,7 +6,9 @@
 const path = require('path');
 
 const commandLineArgs = require('command-line-args');
+// @ts-ignore
 const _ = require('lodash');
+const writeCompPathOwnersToCSV = require('./write-react-owners-to-csv');
 
 const {
   readAllModules,
@@ -56,6 +58,8 @@ function filterSearchedComponents(data, searchStrings = []) {
  */
 function tallyResults(vwComponents, contentBuildWC) {
   const data = {};
+  /** @type {{[component: string]: string[]}} */
+  const instancesByComponent = {};
   function incrementCount(componentName, appName) {
     if (!data[componentName]) data[componentName] = { total: 0 };
     if (!data[componentName][appName]) data[componentName][appName] = 0;
@@ -70,7 +74,17 @@ function tallyResults(vwComponents, contentBuildWC) {
 
     i.matches.forEach(m => {
       const componentName = m[1];
-      if (componentName) incrementCount(componentName, app);
+      if (componentName) {
+        incrementCount(componentName, app);
+
+        // If the component is not yet in the collection, initialize it as an empty array
+        if (!instancesByComponent[componentName])
+          instancesByComponent[componentName] = [];
+
+        // Only include the app path if it hasn't already been included previously
+        if (!instancesByComponent[componentName].includes(i.path))
+          instancesByComponent[componentName].push(i.path);
+      }
     });
   });
 
@@ -78,9 +92,22 @@ function tallyResults(vwComponents, contentBuildWC) {
   contentBuildWC.forEach(i => {
     i.matches.forEach(m => {
       const componentName = m[1];
-      incrementCount(componentName, 'Static content templates');
+      if (componentName) {
+        incrementCount(componentName, 'Static content templates');
+
+        // If the component is not yet in the collection, initialize it as an empty array
+        if (!instancesByComponent[componentName])
+          instancesByComponent[componentName] = [];
+
+        // Only include the app path if it hasn't already been included previously
+        if (!instancesByComponent[componentName].includes(i.path))
+          instancesByComponent[componentName].push(i.path);
+      }
     });
   });
+
+  // Function to write out as-yet-undeprecated component data
+  writeCompPathOwnersToCSV(instancesByComponent);
 
   return data;
 }
