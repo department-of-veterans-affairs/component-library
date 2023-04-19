@@ -156,7 +156,7 @@ const BackgroundOnlyTemplate = ({
             health care. Please sign in to VA.gov to review. If you don’t have
             an account, you can create one now.
           </p>
-          <button className="usa-button-primary">Sign in to VA.gov</button>
+          <button className="usa-button-primary" style={{width:'inherit'}}>Sign in to VA.gov</button>
         </>
       </va-alert>
       <va-alert
@@ -217,7 +217,7 @@ const BackgroundOnlyTemplate = ({
             appeals on your mobile device. Download the{' '}
             <strong>VA: Health and Benefits</strong> mobile app to get started.
           </p>
-          <button className="usa-button-primary">Sign in to VA.gov</button>
+          <button className="usa-button-primary" style={{width:'inherit'}}>Sign in to VA.gov</button>
         </>
       </va-alert>
     </>
@@ -346,7 +346,7 @@ SignInOrToolPrompt.args = {
         appeals on your mobile device. Download the{' '}
         <strong>VA: Health and Benefits</strong> mobile app to get started.
       </p>
-      <button className="va-button-primary">Sign in to VA.gov</button>
+      <button className="va-button-primary" style={{width:'inherit'}}>Sign in to VA.gov</button>
     </>
   ),
   status: 'continue',
@@ -397,7 +397,7 @@ Error.args = {
         Please sign in to VA.gov to review. If you don’t have an account, you
         can create one now.
       </p>
-      <button className="usa-button-primary">Sign in to VA.gov</button>
+      <button className="usa-button-primary" style={{width:'inherit'}}>Sign in to VA.gov</button>
     </>
   ),
   status: 'error',
