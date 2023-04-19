@@ -4,6 +4,10 @@
   display: block;
 }
 
+va-checkbox::part(checkbox) {
+  max-width: 100%;
+}
+
 a {
   color: var(--color-link-default);
 }

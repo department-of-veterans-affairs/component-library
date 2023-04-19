@@ -197,7 +197,7 @@ export class VaCheckbox {
               </Fragment>
             )}
           </span>
-          <div class="usa-checkbox">
+          <div class="usa-checkbox" part="checkbox">
             <input
               class={inputClass}
               type="checkbox"
