@@ -65,7 +65,7 @@ describe('va-privacy-agreement', () => {
    * Skipping the following tests because accessing the shadowRoot of the checkbox
    * in order to trigger an input click is flakey. The tests pass locally but fail in CI.
    */
-  it.skip('emits the vaChange event', async () => {
+  it('emits the vaChange event', async () => {
     const page = await newE2EPage();
     await page.setContent(
       '<va-privacy-agreement />',
@@ -84,7 +84,7 @@ describe('va-privacy-agreement', () => {
     expect(changeSpy).toHaveReceivedEventDetail({ checked: true });
   });
 
-  it.skip('fires analytics event when enableAnalytics prop is set', async () => {
+  it('fires analytics event when enableAnalytics prop is set', async () => {
     const page = await newE2EPage();
     await page.setContent(
       '<va-privacy-agreement enable-analytics />',
@@ -166,7 +166,7 @@ describe('va-privacy-agreement', () => {
              <a href="/privacy-policy/" target="_blank">
                privacy policy 
                <i aria-hidden="true" class="fa-arrow-up-right-from-square" role="img"></i>
-               <span class="sr-only">opens in a new window</span>
+               <span class="usa-sr-only">opens in a new window</span>
              </a>.
            </span>
          </va-checkbox>
@@ -234,7 +234,7 @@ describe('va-privacy-agreement', () => {
     expect(changeSpy).toHaveReceivedEventDetail({ checked: true });
   });
 
-  it.skip('uswds v3 fires analytics event when enableAnalytics prop is set', async () => {
+  it('uswds v3 fires analytics event when enableAnalytics prop is set', async () => {
     const page = await newE2EPage();
     await page.setContent(
       '<va-privacy-agreement enable-analytics uswds/>',
@@ -272,7 +272,7 @@ describe('va-privacy-agreement', () => {
 
   });
 
-  it.skip('uswds v3 does not fire analytics event when `enableAnalytics` prop is not set', async () => {
+  it('uswds v3 does not fire analytics event when `enableAnalytics` prop is not set', async () => {
     const page = await newE2EPage();
     await page.setContent(
       '<va-privacy-agreement uswds/>',

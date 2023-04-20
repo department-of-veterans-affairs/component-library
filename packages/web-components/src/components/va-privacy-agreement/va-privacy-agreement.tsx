@@ -72,9 +72,8 @@ export class VaPrivacyAgreement {
     if (uswds) {
       return (
         <Host>
-          {/* <div style={{borderTop: '1px solid red'}}></div> */}
           <va-checkbox
-            uswds={true}
+            uswds
             required
             error={this.errorMessage()}
             id="checkbox"
@@ -91,7 +90,7 @@ export class VaPrivacyAgreement {
                   aria-hidden="true"
                   role="img"
                 ></i>
-                <span class="sr-only">opens in a new window</span>
+                <span class="usa-sr-only">opens in a new window</span>
               </a>
               .
             </span>
