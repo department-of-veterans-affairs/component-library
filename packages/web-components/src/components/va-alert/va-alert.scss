@@ -67,6 +67,10 @@
   content: '\F06A'; /* fa-exclamation-circle */
 }
 
+:host([uswds]) .va-alert-close:hover {
+  color: var(--color-base);
+}
+
 @media screen and (min-width: 1024px) {
   :host([full-width='true']) .va-alert-close,
   :host([full-width='']) .va-alert-close {
@@ -88,10 +92,6 @@
   position: absolute;
   right: 0;
   top: 0;
-}
-
-.va-alert-close:hover {
-  color: var(--color-base);
 }
 
 i.fa-times-circle::before {
