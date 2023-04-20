@@ -103,7 +103,8 @@ export class VaLoadingIndicator {
 
   disconnectedCallback() {
     // Don't disconnect the observer before the callback runs
-    setTimeout(() => this.observer.disconnect());
+    const observer = this.observer;
+    setTimeout(() => observer.disconnect());
   }
 
   render() {
