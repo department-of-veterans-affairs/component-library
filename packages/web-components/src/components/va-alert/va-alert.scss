@@ -98,13 +98,39 @@ i.fa-times-circle::before {
   content: '\F057'; /* fa-times-circle*/
 }
 
-:host([uswds][background-only='true']) .usa-alert,
-:host([uswds][background-only='']) .usa-alert {
+.bg-only {
   border: none;
 }
 
 :host([closeable]:not([closeable="false"])) .usa-alert .usa-alert__body {
   padding-right: 5.7rem;
+}
+
+// Override USWDS background and border colors for VA styles.
+.usa-alert--warning {
+  border-color: var(--color-gold);
+}
+.usa-alert--info {
+  border-color: var(--color-primary-alt-dark);
+}
+.usa-alert--error {
+  border-color: var(--color-secondary-dark);
+}
+.usa-alert--success {
+  border-color: var(--color-green);
+}
+
+.usa-alert--info {
+  background-color: var(--color-primary-alt-lightest);
+}
+.usa-alert--success {
+  background-color: var(--color-gray-lightest);
+}
+.usa-alert--warning {
+  background-color: var(--color-gold-lightest);
+}
+.usa-alert--error {
+  background-color: var(--color-secondary-lightest);
 }
 
 /* Original Component Styles. */
