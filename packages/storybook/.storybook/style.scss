@@ -34,6 +34,7 @@ a.sbdocs-a:hover {
 .resize-y {
   resize: vertical;
 }
+
 /** Global styles for USWDS 3 integration into Storybook **/
 .usa-label {
   font-size: 15px !important;
@@ -41,4 +42,9 @@ a.sbdocs-a:hover {
 
 button {
   padding: 10px 20px !important;
+}
+
+
+.my-custom-class-example::part(accordion-header) {
+  background-color: red;
 }

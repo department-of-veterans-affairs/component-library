@@ -109,7 +109,7 @@ export class VaAccordionItem {
             onClick={this.toggleOpen.bind(this)}
             aria-expanded={this.open ? 'true' : 'false'}
             aria-controls="content"
-            part="button"
+            part="accordion-header"
           >
             {< slot name="icon" />}
             {this.slotHeader || this.header || ieSlotCheckHeader}
