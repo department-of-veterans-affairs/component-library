@@ -96,8 +96,11 @@ export class VaAccordionItem {
     const Header = () => {
       const headline = this.el.querySelector('[slot="headline"]');
       const ieSlotCheckHeader = headline?.innerHTML;
-      const Tag = (headline && headline.tagName.includes('H'))
+
+      // eslint-disable-next-line i18next/no-literal-string
+      const Tag = (headline && headline.tagName.includes("H"))
         ? headline.tagName.toLowerCase()
+        // eslint-disable-next-line i18next/no-literal-string
         : `h${this.level}`;
 
       return (
@@ -111,7 +114,7 @@ export class VaAccordionItem {
             aria-controls="content"
             part="accordion-header"
           >
-            {< slot name="icon" />}
+            < slot name="icon" />
             {this.slotHeader || this.header || ieSlotCheckHeader}
             {this.subheader ? <p>{this.subheader}</p> : false}
           </button>
