@@ -67,13 +67,10 @@ export class VaPrivacyAgreement {
   }
 
   render() {
-    const { uswds } = this;
-
-    if (uswds) {
       return (
         <Host>
           <va-checkbox
-            uswds
+            uswds={this.uswds}
             required
             error={this.errorMessage()}
             id="checkbox"
@@ -90,35 +87,12 @@ export class VaPrivacyAgreement {
                   aria-hidden="true"
                   role="img"
                 ></i>
-                <span class="usa-sr-only">opens in a new window</span>
+                <span class={this.uswds ? "usa-sr-only" : "sr-only"}>opens in a new window</span>
               </a>
               .
             </span>
           </va-checkbox>
         </Host>
       );
-    } else {
-      return (
-        <Host>
-          <va-checkbox
-            required
-            error={this.errorMessage()}
-            id="checkbox"
-            label="I have read and accept the privacy policy."
-            checked={this.checked}
-            onVaChange={this.handleCheckboxChange}
-          >
-            <span slot="description">
-              Please read and accept the&nbsp;
-              <a href="/privacy-policy/" target="_blank">
-                privacy policy 
-                <i class="fa-arrow-up-right-from-square" aria-hidden="true" role="img"></i>
-                <span class="sr-only">opens in a new window</span>
-              </a>.
-            </span>
-          </va-checkbox>
-        </Host>
-      )
-    }
   }
 }

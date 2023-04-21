@@ -24,6 +24,10 @@
   outline-offset: 4px;
 }
 
+.usa-checkbox__input:checked + [class*="__label"]::before {
+  background-size: 1.3rem;
+}
+
 /* Original Component Style */
 
 @import '../../mixins/accessibility.css';
@@ -95,7 +99,6 @@
   background-image: url('../../assets/check.svg');
   background-position: 50%;
   background-repeat: no-repeat;
-  background-size: cover;
 }
 
 :host(:not([uswds])) input:not([disabled]):focus+label:before {
