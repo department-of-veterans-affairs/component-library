@@ -49,7 +49,6 @@ export class VaAccordionItem {
    */
   @Prop() level?: number = 2;
 
-  @Prop() bold: boolean = true;
   /**
    * Local State for slot=headline replacement of props (header).
    * Provides context of the header text to the Accordion Item
@@ -100,8 +99,7 @@ export class VaAccordionItem {
       const Tag = (headline && headline.tagName.includes('H'))
         ? headline.tagName.toLowerCase()
         : `h${this.level}`;
-      console.log(this.bold)
-      const boldness = this.bold ? 'bold' : 'normal';
+
       return (
         <Tag>
           <button
@@ -111,7 +109,7 @@ export class VaAccordionItem {
             onClick={this.toggleOpen.bind(this)}
             aria-expanded={this.open ? 'true' : 'false'}
             aria-controls="content"
-            style={{ fontWeight: boldness }}
+            part="button"
           >
             {< slot name="icon" />}
             {this.slotHeader || this.header || ieSlotCheckHeader}

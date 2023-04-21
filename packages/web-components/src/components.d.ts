@@ -25,7 +25,6 @@ export namespace Components {
         "sectionHeading"?: string;
     }
     interface VaAccordionItem {
-        "bold": boolean;
         /**
           * The accordion item header text
          */
@@ -1432,7 +1431,6 @@ declare namespace LocalJSX {
         "sectionHeading"?: string;
     }
     interface VaAccordionItem {
-        "bold"?: boolean;
         /**
           * The accordion item header text
          */
