@@ -218,7 +218,6 @@ describe('va-checkbox', () => {
     );
 
     const hint = await page.find('va-checkbox >>> .usa-checkbox__label-description');
-    
     expect(hint.textContent).toEqual("Example checkbox description");
   });
 
