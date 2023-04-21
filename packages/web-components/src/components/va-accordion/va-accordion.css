@@ -19,5 +19,6 @@ button {
   background: transparent;
   padding: 1rem;
   cursor: pointer;
+  font-weight: bold;
   float: right;
 }
