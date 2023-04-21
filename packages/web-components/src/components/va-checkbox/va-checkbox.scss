@@ -52,7 +52,7 @@
   /* Make the clickable element the same size and position as the box */
   height: var(--visible-checkbox-size);
   width: var(--visible-checkbox-size);
-  margin: var(--visible-checkbox-top-margin) 0 0 2.4rem;
+  margin-top: var(--visible-checkbox-top-margin);
 
   padding: 0;
   opacity: 0;
@@ -69,7 +69,6 @@
   cursor: pointer;
   display: inline-flex;
   font-weight: 400;
-  margin-left: 2.4rem;
   margin-top: 1.2rem;
   width: 100%;
 }
