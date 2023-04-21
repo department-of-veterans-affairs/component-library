@@ -39,10 +39,10 @@
   "src/applications/discharge-wizard": ["vsa-public-websites-frontend"],
   "src/applications/search": ["vsa-public-websites-frontend"],
   "src/applications/resources-and-support": ["vsa-public-websites-frontend"],
-  "src/applications/facility-locator": ["vsa-public-websites-frontend"],
-  "src/applications/static-pages/facilities": ["vsa-public-websites-frontend"],
+  "src/applications/facility-locator": ["vsa-facilities-frontend"],
+  "src/applications/static-pages/facilities": ["vsa-facilities-frontend"],
   "src/applications/static-pages/tests/facilities": [
-    "vsa-public-websites-frontend"
+    "vsa-facilities-frontend"
   ],
   "src/applications/caregivers": ["benefits-team-1-frontend"],
   "src/applications/hca": ["benefits-team-1-frontend"],
