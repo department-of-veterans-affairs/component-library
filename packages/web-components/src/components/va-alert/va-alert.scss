@@ -120,16 +120,16 @@ i.fa-times-circle::before {
   border-color: var(--color-green);
 }
 
-.usa-alert--info {
+.usa-alert--info .usa-alert__body {
   background-color: var(--color-primary-alt-lightest);
 }
-.usa-alert--success {
+.usa-alert--success .usa-alert__body {
   background-color: var(--color-green-lightest);
 }
-.usa-alert--warning {
+.usa-alert--warning .usa-alert__body {
   background-color: var(--color-gold-lightest);
 }
-.usa-alert--error {
+.usa-alert--error .usa-alert__body {
   background-color: var(--color-secondary-lightest);
 }
 
