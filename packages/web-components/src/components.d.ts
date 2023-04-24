@@ -82,9 +82,17 @@ export namespace Components {
          */
         "showIcon"?: boolean;
         /**
+          * Displays the slim variation. Available when USWDS is true.
+         */
+        "slim"?: boolean;
+        /**
           * Determines the icon and border/background color. One of `info`, `error`, `success`, `warning`, or `continue`
          */
         "status"?: string;
+        /**
+          * Whether or not the component will use USWDS v3 styling.
+         */
+        "uswds"?: boolean;
         /**
           * If `true`, the alert will be visible.
          */
@@ -1504,9 +1512,17 @@ declare namespace LocalJSX {
          */
         "showIcon"?: boolean;
         /**
+          * Displays the slim variation. Available when USWDS is true.
+         */
+        "slim"?: boolean;
+        /**
           * Determines the icon and border/background color. One of `info`, `error`, `success`, `warning`, or `continue`
          */
         "status"?: string;
+        /**
+          * Whether or not the component will use USWDS v3 styling.
+         */
+        "uswds"?: boolean;
         /**
           * If `true`, the alert will be visible.
          */

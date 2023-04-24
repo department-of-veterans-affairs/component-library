@@ -1,0 +1,279 @@
+@forward 'settings';
+
+@use 'usa-alert/src/styles/usa-alert';
+
+@import '../../global/formation_overrides';
+
+:host {
+  display: block;
+  position: relative;
+}
+
+.usa-alert__body::before, :host([uswds]) i {
+  font-family: "Font Awesome 5 Free";
+  font-size: 26px;
+  font-style: normal;
+  font-weight: 900;
+  line-height: 1;
+}
+
+// Replace USWDS icons with Font Awesome icons.
+.usa-alert--info .usa-alert__body::before, 
+.usa-alert--warning .usa-alert__body::before,
+.usa-alert--success .usa-alert__body::before,
+.usa-alert--error .usa-alert__body::before,
+.usa-alert--slim .usa-alert__body::before {
+  background: unset;
+  -webkit-mask: unset;
+}
+
+.usa-alert--info .usa-alert__body,
+.usa-alert--warning .usa-alert__body, 
+.usa-alert--success .usa-alert__body,
+.usa-alert--error .usa-alert__body {
+  &::before {
+    top: 18px;
+  }
+}
+
+.usa-alert--slim .usa-alert__body,
+.usa-alert--slim.usa-alert--info .usa-alert__body,
+.usa-alert--slim.usa-alert--warning .usa-alert__body, 
+.usa-alert--slim.usa-alert--success .usa-alert__body,
+.usa-alert--slim.usa-alert--error .usa-alert__body {
+  &::before {
+    top: 10px;
+    font-size: 22px;
+  }
+}
+
+.usa-alert--info .usa-alert__body::before {
+  content: '\F05A'; /* fa-circle-info */
+}
+
+.usa-alert--warning .usa-alert__body::before {
+  content: '\F071'; /* fa-exclamation-triangle */
+}
+
+.usa-alert--success .usa-alert__body::before {
+  content: '\F00C'; /* fa-check */
+}
+
+:host([status='continue']) .usa-alert--success .usa-alert__body::before {
+  content: '\F023'; /* fa-lock */
+}
+
+.usa-alert--error .usa-alert__body::before {
+  content: '\F06A'; /* fa-exclamation-circle */
+}
+
+:host([uswds]) .va-alert-close:hover {
+  color: var(--color-base);
+}
+
+@media screen and (min-width: 1024px) {
+  :host([full-width='true']) .va-alert-close,
+  :host([full-width='']) .va-alert-close {
+    position: relative;
+  }
+}
+
+.va-alert-close {
+  margin: 1.6rem;
+  padding: 0;
+  width: auto;
+  color: var(--color-gray-dark);
+  font-size: 2.25rem;
+  appearance: none;
+  border: 0;
+  cursor: pointer;
+  background: transparent;
+  display: block;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+i.fa-times-circle::before {
+  content: '\F057'; /* fa-times-circle*/
+}
+
+.bg-only {
+  border: none;
+}
+
+:host([closeable]:not([closeable="false"])) .usa-alert .usa-alert__body {
+  padding-right: 5.7rem;
+}
+
+// Override USWDS background and border colors for VA styles.
+.usa-alert--warning {
+  border-color: var(--color-gold);
+}
+.usa-alert--info {
+  border-color: var(--color-primary-alt-dark);
+}
+.usa-alert--error {
+  border-color: var(--color-secondary-dark);
+}
+.usa-alert--success {
+  border-color: var(--color-green);
+}
+
+.usa-alert--info .usa-alert__body {
+  background-color: var(--color-primary-alt-lightest);
+}
+.usa-alert--success .usa-alert__body {
+  background-color: var(--color-green-lightest);
+}
+.usa-alert--warning .usa-alert__body {
+  background-color: var(--color-gold-lightest);
+}
+.usa-alert--error .usa-alert__body {
+  background-color: var(--color-secondary-lightest);
+}
+
+/* Original Component Styles. */
+
+@import '../../mixins/accessibility.css';
+@import '../../mixins/buttons.css';
+
+:host(:not([uswds])) {
+  background-color: var(--color-gray-lightest);
+}
+
+:host(:not([uswds])[background-only='true']),
+:host(:not([uswds])[background-only='']) {
+  background-color: unset;
+}
+
+:host(:not([uswds])[full-width='true']),
+:host(:not([uswds])[full-width='']) {
+  border-top-style: solid;
+  border-top-width: 8px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+:host(:not([uswds])[status='warning']) {
+  border-color: var(--color-gold);
+}
+:host(:not([uswds])[status='info']) {
+  border-color: var(--color-primary-alt-dark);
+}
+:host(:not([uswds])[status='error']) {
+  border-color: var(--color-secondary-dark);
+}
+:host(:not([uswds])[status='continue']),
+:host(:not([uswds])[status='success']) {
+  border-color: var(--color-green);
+}
+
+:host(:not([uswds])[full-width='']) div.alert,
+:host(:not([uswds])[full-width='true']) div.alert {
+  border-left: none;
+  max-width: 1000px;
+}
+
+:host(:not([uswds])) ::slotted([slot='headline']) {
+  font-size: 2rem !important;
+  line-height: 26px !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+:host(:not([uswds])) div.alert {
+  display: table;
+  padding: 1.6rem 2rem 1.6rem 1.6rem;
+  width: 100%;
+  vertical-align: middle;
+  box-sizing: border-box;
+}
+
+:host(:not([uswds])) div.alert:not(.bg-only) {
+  border-color: inherit;
+  border-left-style: solid;
+  border-left-width: 8px;
+}
+
+:host(:not([uswds])) div.alert > i::before {
+  display: flex;
+  margin-right: 1.6rem;
+}
+
+:host(:not([uswds])) div.body {
+  padding-left: 0;
+  padding-right: 0;
+  display: table-cell;
+  vertical-align: middle;
+  width: 100%;
+}
+:host(:not([uswds])) ::slotted(:not([slot])) {
+  margin-top: 2rem;
+}
+
+:host(:not([uswds])) .bg-only ::slotted(*) {
+  margin-top: 0!important; /* Fix for Safari 15.3 and lower. */
+}
+
+:host(:not([uswds])) div.info > i::before {
+  content: '\F05A';
+}
+
+:host(:not([uswds])) div.continue > i::before {
+  content: '\F023';
+  color: var(--color-green);
+}
+
+:host(:not([uswds])) div.success > i::before {
+  content: '\F00C';
+  color: var(--color-green);
+}
+
+:host(:not([uswds])) div.warning > i::before {
+  content: '\F071';
+}
+
+:host(:not([uswds])) div.error > i::before {
+  content: '\F06A';
+  color: var(--color-secondary-dark);
+}
+
+:host(:not([uswds])) div.bg-only.hide-icon > i::before {
+  content: '';
+  margin-right: 0;
+}
+
+:host(:not([uswds])) div.bg-only {
+  border: none;
+  padding: 2rem;
+}
+
+:host(:not([uswds])) .info.bg-only {
+  background-color: var(--color-primary-alt-lightest);
+}
+:host(:not([uswds])) .continue.bg-only {
+  background-color: var(--color-gray-lightest);
+}
+:host(:not([uswds])) .success.bg-only {
+  background-color: var(--color-green-lightest);
+}
+:host(:not([uswds])) .warning.bg-only {
+  background-color: var(--color-gold-lightest);
+}
+:host(:not([uswds])) .error.bg-only {
+  background-color: var(--color-secondary-lightest);
+}
+
+:host(:not([uswds])) i {
+  font-family: 'Font Awesome 5 Free';
+  font-size: 2.4rem;
+  font-style: normal;
+  font-weight: 900;
+  line-height: 1;
+}
+
+:host(:not([uswds])[closeable]:not([closeable='false'])) .alert {
+  padding-right: 5.7rem;
+}
