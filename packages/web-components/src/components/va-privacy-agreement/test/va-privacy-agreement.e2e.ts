@@ -175,6 +175,14 @@ describe('va-privacy-agreement', () => {
     `);
   });
 
+  it('uswds V3 renders error label when showError is true', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-privacy-agreement checked showError="true" uswds></va-privacy-agreement>');
+  
+    const element = await page.find('va-privacy-agreement >>> va-checkbox >>> span.usa-label--error');
+    expect(element).toBeTruthy();
+  });
+
   it('uswds v3 passes an aXe check - no error', async () => {
     const page = await newE2EPage();
 
