@@ -72,15 +72,14 @@ export class VaAccordion {
   itemToggledHandler(event: CustomEvent) {
     // eslint-disable-next-line i18next/no-literal-string
     const clickedItem = (event.target as HTMLElement).closest('va-accordion-item');
-    console.log(clickedItem)
     // Usage for slot to provide context to analytics for header and level
     const header = clickedItem.querySelector('[slot="headline"]');
     // using the slot to provide context to analytics for header and level
     let headerText
     let headerLevel
     if (header) {
-      headerText = header.innerHTML
-      headerLevel = parseInt(header.tagName.toLowerCase().split('')[1]);
+      headerText = header?.innerHTML
+      headerLevel = parseInt(header?.tagName?.toLowerCase().split('')[1]);
     } else {
       // using the props to provide context to analytics for header and level
       headerText = clickedItem.header
