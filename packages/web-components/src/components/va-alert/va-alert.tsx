@@ -22,7 +22,7 @@ import classnames from 'classnames';
  */
 @Component({
   tag: 'va-alert',
-  styleUrl: 'va-alert.css',
+  styleUrl: 'va-alert.scss',
   shadow: true,
 })
 export class VaAlert {
@@ -72,6 +72,16 @@ export class VaAlert {
    * Should be for emergency communication only.
    */
   @Prop() fullWidth?: boolean = false;
+
+  /**
+   * Whether or not the component will use USWDS v3 styling.
+   */
+  @Prop() uswds?: boolean = false;
+  
+  /**
+   * Displays the slim variation. Available when USWDS is true.
+   */
+  @Prop() slim?: boolean = false;
 
   /**
    * Fires when the component has successfully finished rendering for the first
@@ -155,17 +165,63 @@ export class VaAlert {
   }
 
   render() {
-    const { backgroundOnly, status, visible, closeable, showIcon } = this;
-    const classes = classnames('alert', status, {
-      'bg-only': backgroundOnly,
-      'hide-icon': backgroundOnly && !showIcon,
-    });
+    const { 
+      backgroundOnly, 
+      status, 
+      visible, 
+      closeable, 
+      showIcon, 
+      uswds, 
+      slim 
+    } = this;
     /* eslint-disable i18next/no-literal-string */
     const role = status === 'error' ? 'alert' : null;
     const ariaLive = status === 'error' ? 'assertive' : null;
     /* eslint-enable i18next/no-literal-string */
 
     if (!visible) return <div aria-live="polite" />;
+
+    if (uswds) {
+      const classes = classnames('usa-alert', `usa-alert--${status}`, {
+        'bg-only': backgroundOnly,
+        'usa-alert--no-icon': backgroundOnly && !showIcon,
+        'usa-alert--success': (status === 'continue'),
+        'usa-alert--slim': slim
+      });
+      return (
+        <Host>
+          <div
+            role={this.el.getAttribute('data-role') || role}
+            aria-live={ariaLive}
+            class={classes}
+          >
+            <div
+              class="usa-alert__body"
+              onClick={this.handleAlertBodyClick.bind(this)}
+              role="presentation"
+            >
+              {!backgroundOnly && <slot name="headline"></slot>}
+              <slot></slot>
+            </div>
+          </div>
+  
+          {closeable && (
+            <button
+              class="va-alert-close"
+              aria-label={this.closeBtnAriaLabel}
+              onClick={this.closeHandler.bind(this)}
+            >
+              <i aria-hidden="true" class="fa-times-circle" role="presentation" />
+            </button>
+          )}
+        </Host>
+      );
+    }
+
+    const classes = classnames('alert', status, {
+      'bg-only': backgroundOnly,
+      'hide-icon': backgroundOnly && !showIcon,
+    });
 
     return (
       <Host>

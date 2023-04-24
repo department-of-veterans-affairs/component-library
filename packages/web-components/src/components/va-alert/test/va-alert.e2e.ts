@@ -192,4 +192,157 @@ describe('va-alert', () => {
 
     expect(loadSpy).toHaveReceivedEvent();
   });
+
+
+  /** Begin USWDS v3 Tests */
+
+  it('uswds renders', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<va-alert uswds></va-alert>');
+    const element = await page.find('va-alert');
+
+    expect(element).toEqualHtml(`
+      <va-alert class="hydrated" status="info" uswds="">
+        <mock:shadow-root>
+          <div class="usa-alert usa-alert--info">
+            <div class="usa-alert__body" role="presentation">
+              <slot name="headline"></slot>
+              <slot></slot>
+            </div>
+          </div>
+        </mock:shadow-root>
+      </va-alert>
+    `);
+  });
+
+  it('uswds renders an empty div with a "polite" aria-live tag when not visible', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<va-alert uswds visible="false"></va-alert>');
+    const element = await page.find('va-alert');
+
+    expect(element).toEqualHtml(`
+      <va-alert class="hydrated" visible="false" status="info" uswds="">
+        <mock:shadow-root>
+          <div aria-live="polite"></div>
+        </mock:shadow-root>
+      </va-alert>
+    `);
+  });
+
+  it('uswds passes an axe check', async () => {
+    const page = await newE2EPage();
+    await page.setContent(
+      `<va-alert uswds><h3 slot="headline">Alert</h3>Alert content</va-alert>`,
+    );
+
+    await axeCheck(page);
+  });
+
+  it('uswds only shows a close icon if the closeable prop is passed', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-alert uswds>Alert</va-alert>');
+
+    const element = await page.find('va-alert');
+
+    let button = await page.find('va-alert >>> button');
+    expect(button).toBeNull();
+
+    element.setProperty('closeable', true);
+    await page.waitForChanges();
+    button = await page.find('va-alert >>> button');
+
+    expect(button).not.toBeNull();
+  });
+
+  it('uswds fires a custom "close" event when the close button is clicked', async () => {
+    const page = await newE2EPage();
+    await page.setContent(
+      '<va-alert uswds closeable="true">Content inside</va-alert>',
+    );
+
+    const closeSpy = await page.spyOnEvent('closeEvent');
+
+    const button = await page.find('va-alert >>> button');
+    await button.click();
+
+    expect(closeSpy).toHaveReceivedEventTimes(1);
+  });
+
+  it('uswds fires an analytics event when a link is clicked', async () => {
+    const page = await newE2EPage();
+    await page.setContent(
+      '<va-alert uswds><h4 slot="headline">This is an alert</h4><a href="#">This is a link</a></va-alert>',
+    );
+
+    const analyticsSpy = await page.spyOnEvent('component-library-analytics');
+
+    const link = await page.find('va-alert a');
+    await link.click();
+
+    expect(analyticsSpy).toHaveReceivedEventDetail({
+      action: 'linkClick',
+      componentName: 'va-alert',
+      details: {
+        headline: 'This is an alert',
+        backgroundOnly: false,
+        clickLabel: 'This is a link',
+        status: 'info',
+        closeable: false,
+      },
+    });
+  });
+
+  it('uswds uses a null headline in the analytics event detail when the heading is absent', async () => {
+    const page = await newE2EPage();
+    await page.setContent(
+      '<va-alert uswds><a href="#">This is a link</a></va-alert>',
+    );
+
+    const analyticsSpy = await page.spyOnEvent('component-library-analytics');
+
+    const link = await page.find('va-alert a');
+    await link.click();
+
+    expect(analyticsSpy).toHaveReceivedEventDetail({
+      action: 'linkClick',
+      componentName: 'va-alert',
+      details: {
+        headline: null,
+        backgroundOnly: false,
+        clickLabel: 'This is a link',
+        status: 'info',
+        closeable: false,
+      },
+    });
+  });
+
+  it('uswds does not fire an analytics event when disableAnalytics is passed', async () => {
+    const page = await newE2EPage();
+    await page.setContent(
+      '<va-alert uswds disable-analytics="true"><a href="#">This is a link</a></va-alert>',
+    );
+
+    const analyticsSpy = await page.spyOnEvent('component-library-analytics');
+
+    const link = await page.find('va-alert a');
+    await link.click();
+
+    expect(analyticsSpy).toHaveReceivedEventTimes(0);
+  });
+
+  it('uswds has the correct accessibility attributes when in an error state', async () => {
+    const page = await newE2EPage();
+    await page.setContent(
+      '<va-alert uswds status="error"><h4 slot="headline">This is an alert</h4><div>This is the alert content</div>',
+    );
+
+    const element = await page.find('va-alert >>> .usa-alert');
+
+    expect(element).toEqualAttributes({
+      'role': 'alert',
+      'aria-live': 'assertive',
+    });
+  });
 });
