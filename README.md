@@ -1,4 +1,5 @@
 # Component library
+
 ![Publishing workflow](https://github.com/department-of-veterans-affairs/component-library/actions/workflows/publish.yml/badge.svg)
 ![Latest version](https://img.shields.io/npm/v/@department-of-veterans-affairs/component-library)
 
@@ -13,7 +14,9 @@ The `design-system-dashboard-cli` package is used to gather metrics on design sy
 ## Contributing
 
 ### Branch naming
+
 This repo uses [`Chromatic`](https://www.chromatic.com/) to streamline reviews by publishing your changes online. A link containing your changes is automatically added to pull requests to aid others when reviewing your code. In order for this link to work, please follow these rules when naming your branch:
+
 - Your branch must contain only lowercase letters, numbers and dashes
 - Your branch must not exceed 37 characters
 
@@ -36,18 +39,22 @@ To publish changes from the `web-components` subpackage, make sure the version n
 This repo follows [semantic versioning](https://semver.org/). Here are some examples of which changes correspond to which version (MAJOR, MINOR, or PATCH) increase.
 
 #### Major
+
 - Component is removed
 - Component API is changed
 
 #### Minor
+
 - New component is added
 - New variant is added for a component
 
 ### Patch
+
 - Accessibility fix
 - Styling fix
 
 ### Releasing
+
 **If you are not part of the Design System team, please submit a support request in #vfs-platform-support to the Design System Team requesting to create a new release with your changes.**
 
 **For Design System Team only:**
@@ -79,10 +86,46 @@ This will allow you to run Storybook locally to view all components
     2. Stencil Dev Server is run in `dev` mode
 2. Within `component-library/packages/web-components/src/index.html` Web Components can be added inside of the `<body>` tag for testing
     1. Example:
+
     ```
     <body>
         <va-progress-bar label="Add a label here" percent={35}></va-progress-bar>
         <va-segmented-progress-bar current={2} total={6}></va-segmented-progress-bar>
     </body>
     ```
+
 3. Run `yarn serve` inside `packages/web-components/` to start the Stencil Dev Server
+
+## Testing
+
+### Running tests for web components
+
+To run units for the web-components project, the commands are:
+
+```bash
+yarn test
+```
+
+and
+
+```bash
+yarn test.watch
+```
+
+In order to a single file, you can run:
+
+```bash
+npx stencil test --e2e -- src/components/[component-name]/[component-name].e2e.ts
+```
+
+Replace `[component-name]` with the name of the component you want to test. Optionnally, you cad add `--watchAll` after `--e2e` to watch the file for changes. For example:
+
+```bash
+npx stencil test --e2e --watchAll -- src/components/[component-name]/[component-name].e2e.ts
+```
+
+Another option is to use wildcards to query for certain tests. For example, to run all tests for the `va-alert` component, you can run:
+
+```bash
+npx stencil test --e2e  -- src/components/va-accordion/va-accordion-*
+```
