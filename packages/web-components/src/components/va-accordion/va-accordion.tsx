@@ -70,22 +70,21 @@ export class VaAccordion {
 
   @Listen('accordionItemToggled')
   itemToggledHandler(event: CustomEvent) {
-    // The event target is the button, and it has a parent which is a header.
-    // It is the parent of the header (the root item) that we need to access
-    // The final parentNode will be a shadowRoot, and from there we get the host.
-    // https://developer.mozilla.org/en-US/docs/Web/API/ShadowRoot/host
-    const clickedItem =
-      event.detail.currentTarget.parentNode.parentNode.host || // if we are on IE, `.host` won't be there
-      event.detail.currentTarget.parentNode.parentNode;
-    // Close the other items if this accordion isn't multi-selectable
-
+    // eslint-disable-next-line i18next/no-literal-string
+    const clickedItem = (event.target as HTMLElement).closest('va-accordion-item');
     // Usage for slot to provide context to analytics for header and level
-    let headerText;
-    let headerLevel;
-    getSlottedNodes(clickedItem, null).map((node: HTMLSlotElement) => {
-      headerText = node?.innerHTML;
-      headerLevel = parseInt(node?.tagName?.toLowerCase().split('')[1]);
-    });
+    const header = clickedItem.querySelector('[slot="headline"]');
+    // using the slot to provide context to analytics for header and level
+    let headerText
+    let headerLevel
+    if (header) {
+      headerText = header?.innerHTML
+      headerLevel = parseInt(header?.tagName?.toLowerCase().split('')[1]);
+    } else {
+      // using the props to provide context to analytics for header and level
+      headerText = clickedItem.header
+      headerLevel = clickedItem.level
+    }
 
     if (this.openSingle) {
       getSlottedNodes(this.el, 'va-accordion-item')
@@ -97,6 +96,7 @@ export class VaAccordion {
     const prevAttr = clickedItem.getAttribute('open') === 'true' ? true : false;
 
     if (!this.disableAnalytics) {
+
       const detail = {
         componentName: 'va-accordion',
         action: prevAttr ? 'collapse' : 'expand',
@@ -111,7 +111,7 @@ export class VaAccordion {
     }
 
     /* eslint-disable-next-line i18next/no-literal-string */
-    clickedItem.setAttribute('open', !prevAttr);
+    clickedItem.setAttribute('open', !prevAttr ? "true" : "false");
 
     if (!this.isScrolledIntoView(clickedItem)) {
       clickedItem.scrollIntoView();
