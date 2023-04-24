@@ -78,7 +78,7 @@ export class VaPrivacyAgreement {
             checked={this.checked}
             onVaChange={this.handleCheckboxChange}
           >
-            <span class="privacy-policy" slot="description">
+            <span class="description" slot="description">
               Please read and accept the&nbsp;
               <a href="/privacy-policy/" target="_blank">
                 privacy policy

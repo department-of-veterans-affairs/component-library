@@ -207,3 +207,7 @@
 .usa-modal--lg {
   max-width: rem-override(55rem);
 }
+
+.usa-checkbox__input:checked + [class*="__label"]::before {
+  background-size: rem-override(0.75rem);
+}
