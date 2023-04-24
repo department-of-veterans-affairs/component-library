@@ -1,4 +1,5 @@
 import { Component, Host, h, Prop, Event, EventEmitter } from '@stencil/core';
+import classnames from 'classnames';
 
 /**
  * @componentName Privacy agreement
@@ -67,6 +68,10 @@ export class VaPrivacyAgreement {
   }
 
   render() {
+    const labelClass = classnames({
+      'usa-label--error': this.showError && this.uswds
+    });
+    
       return (
         <Host>
           <va-checkbox
@@ -78,7 +83,7 @@ export class VaPrivacyAgreement {
             checked={this.checked}
             onVaChange={this.handleCheckboxChange}
           >
-            <span class="description" slot="description">
+            <span class={`${labelClass} description`} slot="description">
               Please read and accept the&nbsp;
               <a href="/privacy-policy/" target="_blank">
                 privacy policy
