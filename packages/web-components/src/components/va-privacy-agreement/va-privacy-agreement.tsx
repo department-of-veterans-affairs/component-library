@@ -1,4 +1,5 @@
 import { Component, Host, h, Prop, Event, EventEmitter } from '@stencil/core';
+import classnames from 'classnames';
 
 /**
  * @componentName Privacy agreement
@@ -7,7 +8,7 @@ import { Component, Host, h, Prop, Event, EventEmitter } from '@stencil/core';
  */
 @Component({
   tag: 'va-privacy-agreement',
-  styleUrl: 'va-privacy-agreement.css',
+  styleUrl: 'va-privacy-agreement.scss',
   shadow: true,
 })
 export class VaPrivacyAgreement {
@@ -20,7 +21,10 @@ export class VaPrivacyAgreement {
    * Whether to display the error message or not.
    */
   @Prop() showError?: boolean = false;
-
+  /**
+   * Whether or not the component will use USWDS v3 styling.
+   */
+  @Prop() uswds?: boolean = false;
   /**
    * Emit component-library-analytics events on the blur event.
    */
@@ -64,27 +68,36 @@ export class VaPrivacyAgreement {
   }
 
   render() {
-    return (
-      <Host>
-        <va-checkbox
-          required
-          error={this.errorMessage()}
-          id="checkbox"
-          label="I have read and accept the privacy policy."
-          checked={this.checked}
-          onVaChange={this.handleCheckboxChange}
-        >
-          <span slot="description">
-            Please read and accept the&nbsp;
-            <a href="/privacy-policy/" target="_blank">
-              privacy policy 
-              <i class="fa-arrow-up-right-from-square" aria-hidden="true" role="img"></i>
-              <span class="sr-only">opens in a new window</span>
-            </a>.
-          </span>
-        </va-checkbox>
-      </Host>
-    );
+    const labelClass = classnames({
+      'usa-label--error': this.showError && this.uswds
+    });
+    
+      return (
+        <Host>
+          <va-checkbox
+            uswds={this.uswds}
+            required
+            error={this.errorMessage()}
+            id="checkbox"
+            label="I have read and accept the privacy policy."
+            checked={this.checked}
+            onVaChange={this.handleCheckboxChange}
+          >
+            <span class={`${labelClass} description`} slot="description">
+              Please read and accept the&nbsp;
+              <a href="/privacy-policy/" target="_blank">
+                privacy policy
+                <i
+                  class="fa-arrow-up-right-from-square"
+                  aria-hidden="true"
+                  role="img"
+                ></i>
+                <span class={this.uswds ? "usa-sr-only" : "sr-only"}>opens in a new window</span>
+              </a>
+              .
+            </span>
+          </va-checkbox>
+        </Host>
+      );
   }
-
 }

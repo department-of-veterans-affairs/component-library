@@ -14,10 +14,12 @@ describe('va-accordion-item', () => {
     <va-accordion-item class="hydrated">
       <mock:shadow-root>
         <h2>
-          <button aria-controls="content" aria-expanded="false"></button>
+          <button aria-controls="content" aria-expanded="false" part="accordion-header">
+             <slot name="icon"></slot>
+          </button>
         </h2>
         <slot name="headline"></slot>
-        <div id="content">
+        <div id="content" tabindex="0">
           <slot></slot>
         </div>
       </mock:shadow-root>

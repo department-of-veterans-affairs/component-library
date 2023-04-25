@@ -1,7 +1,19 @@
+@use 'uswds-helpers/src/styles/usa-sr-only';
+@use 'usa-label/src/styles/usa-label';
 @import '../../mixins/accessibility.css';
+@import '../../global/variables';
 
 :host {
   display: block;
+}
+
+va-checkbox::part(checkbox) {
+  max-width: 100%;
+}
+
+// Using Source Sans Pro normalization for v3. The base font size for v3 is 16px, which has been normalized to 16.96px
+:host([uswds]) .description {
+  font-size: 1.06 * $v3-font-base-size;
 }
 
 a {
