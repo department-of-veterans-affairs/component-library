@@ -3,7 +3,6 @@ import AlertBox, { ALERT_TYPE } from './components/AlertBox/AlertBox';
 import Breadcrumbs from './components/Breadcrumbs/Breadcrumbs';
 import Checkbox from './components/Checkbox/Checkbox';
 import CheckboxGroup from './components/CheckboxGroup/CheckboxGroup';
-import DropDownPanel from './components/DropDownPanel/DropDownPanel';
 import ExpandingGroup from './components/ExpandingGroup/ExpandingGroup';
 import FileInput from './components/FileInput/FileInput';
 import IconBase from './components/IconBase/IconBase';
@@ -33,7 +32,6 @@ export {
   Breadcrumbs,
   Checkbox,
   CheckboxGroup,
-  DropDownPanel,
   ExpandingGroup,
   FileInput,
   IconBase,

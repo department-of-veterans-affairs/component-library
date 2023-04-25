@@ -3,7 +3,6 @@ import AlertBox, { ALERT_TYPE } from './AlertBox';
 import Breadcrumbs from './Breadcrumbs';
 import Checkbox from './Checkbox';
 import CheckboxGroup from './CheckboxGroup';
-import DropDownPanel from './DropDownPanel';
 import ExpandingGroup from './ExpandingGroup';
 import FileInput from './FileInput';
 import IconBase from './IconBase';
@@ -34,7 +33,6 @@ export {
   Breadcrumbs,
   Checkbox,
   CheckboxGroup,
-  DropDownPanel,
   ExpandingGroup,
   FileInput,
   IconBase,
