@@ -33,6 +33,7 @@ const vaCheckbox = args => {
     checked,
     description,
     'enable-analytics': enableAnalytics,
+    checkboxDescription,
     error,
     label,
     required, 
@@ -47,6 +48,7 @@ const vaCheckbox = args => {
       checked={checked}
       description={description}
       enable-analytics={enableAnalytics}
+      checkbox-description={checkboxDescription}
       error={error}
       label={label}
       hint={hint}
@@ -82,7 +84,7 @@ Default.args = { ...defaultArgs };
 Default.argTypes = propStructure(checkboxDocs);
 
 export const Tile = Template.bind(null);
-Tile.args = { ...defaultArgs, tile: true };
+Tile.args = { ...defaultArgs, tile: true, checkboxDescription: 'This is optional text that can be used to describe the label in more detail.' };
 
 export const Checked = Template.bind(null);
 Checked.args = { ...defaultArgs, checked: true };
