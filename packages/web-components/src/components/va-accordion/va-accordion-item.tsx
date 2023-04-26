@@ -116,7 +116,11 @@ export class VaAccordionItem {
           >
             < slot name="icon" />
             {this.slotHeader || this.header || ieSlotCheckHeader}
-            {this.subheader ? <p>{this.subheader}</p> : false}
+            {this.subheader &&
+              <p part='accordion-subheader'>
+                < slot name="subheader-icon" />
+                {this.subheader}
+              </p>}
           </button>
         </Tag >
       );

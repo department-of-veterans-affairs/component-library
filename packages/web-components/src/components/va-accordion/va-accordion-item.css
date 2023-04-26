@@ -79,6 +79,7 @@ p {
   display: none;
 }
 
-::slotted([slot='icon']){
+::slotted([slot='icon']),
+::slotted([slot='subheader-icon']){
   margin-right: 1rem;
 }

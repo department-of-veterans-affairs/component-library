@@ -73,13 +73,40 @@ const TemplateSubheader = args => {
   );
 };
 
+const TemplateSubheaderIcon = args => {
+  const { headline, level, ...rest } = args;
+  return (
+    <va-accordion {...rest} >
+      <va-accordion-item id="first" subheader="First Amendment Subheader" class="my-custom-class-example">
+        {headline}
+        <i slot="subheader-icon" className="fas fa-paperclip"></i>
+        Congress shall make no law respecting an establishment of religion, or
+        prohibiting the free exercise thereof; or abridging the freedom of
+        speech, or of the press; or the right of the people peaceably to
+        assemble, and to petition the Government for a redress of grievances.
+      </va-accordion-item>
+      <va-accordion-item id="second" level={level} header="Second Amendment" subheader="Second Amendment Subheader" class="my-custom-class">
+        <i slot="subheader-icon" aria-hidden="true" className="fas fa-envelope"></i>
+        A well regulated Militia, being necessary to the security of a free
+        State, the right of the people to keep and bear Arms, shall not be
+        infringed.
+      </va-accordion-item>
+      <va-accordion-item id="third" level={level} header="Third Amendment" subheader="Third Amendment Subheader">
+        No Soldier shall, in time of peace be quartered in any house, without
+        the consent of the Owner, nor in time of war, but in a manner to be
+        prescribed by law.
+      </va-accordion-item>
+    </va-accordion>
+  );
+}
+
 const TemplateIconInHeader = args => {
   const { headline, level, ...rest } = args;
   return (
     <va-accordion {...rest}>
       <va-accordion-item id="first">
         {headline}
-        <i slot="icon" className="fas fa-paperclip"></i>
+        <i slot="icon" className="fas fa-paperclip" aria-hidden="true"></i>
         Congress shall make no law respecting an establishment of religion, or
         prohibiting the free exercise thereof; or abridging the freedom of
         speech, or of the press; or the right of the people peaceably to
@@ -169,6 +196,11 @@ ChangeHeaderLevel.args = {
 
 export const Subheader = TemplateSubheader.bind(null);
 Subheader.args = {
+  ...defaultArgs,
+};
+
+export const SubheaderIcon = TemplateSubheaderIcon.bind(null);
+SubheaderIcon.args = {
   ...defaultArgs,
 };
 
