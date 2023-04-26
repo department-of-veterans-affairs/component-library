@@ -117,3 +117,8 @@
   border-radius: 0.25em;
   width: 320px;
 }
+
+:host(:not([uswds])[tile='true']) input:checked + label {
+  background-color: rgba(0, 94, 162, 0.1);
+  border-color: rgb(0, 94, 162);
+}
