@@ -41,7 +41,7 @@ button {
   background-position: right 2rem center;
   background-repeat: no-repeat;
   background-size: 1.5rem;
-  display: flex;
+  display: block;
   /* This color assignment is for IE11 compatibility - the one in */
   /* the va-accordion's CSS with `:host` doesn't work well */
   color: var(--color-gray-dark);
