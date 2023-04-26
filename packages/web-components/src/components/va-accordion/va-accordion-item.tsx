@@ -114,11 +114,13 @@ export class VaAccordionItem {
             aria-controls="content"
             part="accordion-header"
           >
-            < slot name="icon" />
-            {this.slotHeader || this.header || ieSlotCheckHeader}
+            <span class="header-text">
+              <slot name="icon" />
+              {this.slotHeader || this.header || ieSlotCheckHeader}
+            </span>
             {this.subheader &&
-              <p part='accordion-subheader'>
-                < slot name="subheader-icon" />
+              <p class="subheader" part='accordion-subheader'>
+                <slot name="subheader-icon" />
                 {this.subheader}
               </p>}
           </button>

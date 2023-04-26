@@ -73,34 +73,7 @@ const TemplateSubheader = args => {
   );
 };
 
-const TemplateSubheaderIcon = args => {
-  const { headline, level, ...rest } = args;
-  return (
-    <va-accordion {...rest} >
-      <va-accordion-item id="first" subheader="First Amendment Subheader" class="my-custom-class-example">
-        {headline}
-        <i slot="subheader-icon" className="fas fa-paperclip"></i>
-        Congress shall make no law respecting an establishment of religion, or
-        prohibiting the free exercise thereof; or abridging the freedom of
-        speech, or of the press; or the right of the people peaceably to
-        assemble, and to petition the Government for a redress of grievances.
-      </va-accordion-item>
-      <va-accordion-item id="second" level={level} header="Second Amendment" subheader="Second Amendment Subheader" class="my-custom-class">
-        <i slot="subheader-icon" aria-hidden="true" className="fas fa-envelope"></i>
-        A well regulated Militia, being necessary to the security of a free
-        State, the right of the people to keep and bear Arms, shall not be
-        infringed.
-      </va-accordion-item>
-      <va-accordion-item id="third" level={level} header="Third Amendment" subheader="Third Amendment Subheader">
-        No Soldier shall, in time of peace be quartered in any house, without
-        the consent of the Owner, nor in time of war, but in a manner to be
-        prescribed by law.
-      </va-accordion-item>
-    </va-accordion>
-  );
-}
-
-const TemplateIconInHeader = args => {
+const TemplateIcons = args => {
   const { headline, level, ...rest } = args;
   return (
     <va-accordion {...rest}>
@@ -118,10 +91,20 @@ const TemplateIconInHeader = args => {
         State, the right of the people to keep and bear Arms, shall not be
         infringed.
       </va-accordion-item>
-      <va-accordion-item id="third" level={level} header="Third Amendment">
+      <va-accordion-item id="third" level={level} header="Third Amendment With a really long long header that is a thing that we should be planning for" subheader="Third Amendment Subheader With a really long long header that is a thing that we should be planning for">
+         <i slot='icon' className="fas fa-info-circle vads-u-color--green"></i>	
+         <i slot="subheader-icon" aria-hidden="true" className="fas fa-envelope"></i>
         No Soldier shall, in time of peace be quartered in any house, without
         the consent of the Owner, nor in time of war, but in a manner to be
         prescribed by law.
+      </va-accordion-item>
+      <va-accordion-item id="third" level={level} header="Fourth Amendment" subheader="Fourth Amendment Subheader">
+         <i slot='icon' className="fas fa-info-circle vads-u-color--green"></i>	
+         <i slot="subheader-icon" aria-hidden="true" className="fas fa-envelope"></i>
+         The right of the people to be secure in their persons, houses, papers, 
+         and effects, against unreasonable searches and seizures, shall not be violated,
+         and no Warrants shall issue, but upon probable cause, supported by Oath or affirmation, 
+         and particularly describing the place to be searched, and the persons or things to be seized.
       </va-accordion-item>
     </va-accordion>
   );
@@ -199,18 +182,13 @@ Subheader.args = {
   ...defaultArgs,
 };
 
-export const SubheaderIcon = TemplateSubheaderIcon.bind(null);
-SubheaderIcon.args = {
-  ...defaultArgs,
-};
-
 export const Internationalization = I18nTemplate.bind(null);
 Internationalization.args = {
   ...defaultArgs,
 };
 
-export const IconInHeader = TemplateIconInHeader.bind(null);
-IconInHeader.args = {
+export const UsingIcons = TemplateIcons.bind(null);
+UsingIcons.args = {
   ...defaultArgs,
 };
 
