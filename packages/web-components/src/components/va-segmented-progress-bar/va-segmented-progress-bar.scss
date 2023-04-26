@@ -1,0 +1,62 @@
+@use 'usa-step-indicator/src/styles/usa-step-indicator';
+@use 'uswds-helpers/src/styles/usa-sr-only';
+@import '../../mixins/accessibility.css';
+
+@import '../../global/formation_overrides';
+
+
+
+.usa-step-indicator__segment::after {
+  background-color: #919191; // USWDS design and sketch
+}
+@media (min-width: 40em) {
+  .usa-step-indicator--counters .usa-step-indicator__segment::before, .usa-step-indicator--counters-sm .usa-step-indicator__segment::before {
+    box-sizing: border-box;
+    box-shadow: inset 0 0 0 rem-override(0.25rem) #919191, 0 0 0 rem-override(0.25rem) #fff // USWDS design and sketch
+  }
+
+  .usa-step-indicator--counters .usa-step-indicator__segment--current::before, .usa-step-indicator--counters-sm .usa-step-indicator__segment--current::before,
+  .usa-step-indicator--counters .usa-step-indicator__segment--complete::before, .usa-step-indicator--counters-sm .usa-step-indicator__segment--complete::before {
+    box-shadow: 0 0 0 rem-override(0.25rem) #fff;
+  }
+}
+
+.usa-step-indicator__segment--current::after {
+  background-color: #005EA2; // USWDS design and sketch
+}
+
+.usa-step-indicator__segment--complete::after {
+  background-color: #162E51; // USWDS design and sketch
+}
+
+
+
+/** V1 Styles **/
+
+
+
+.progress-bar-segmented {
+  display: flex;
+  width: 100%;
+  height: 6px;
+}
+
+.progress-segment {
+  content: '&nbsp;';
+  flex: 1;
+  margin-left: 2px;
+  margin-right: 2px;
+  background-color: var(--color-gray-lighter);
+}
+
+.progress-segment:first-child {
+  margin-left: 0;
+}
+
+.progress-segment:last-child {
+  margin-right: 0;
+}
+
+.progress-segment-complete {
+  background-color: var(--color-primary);
+}

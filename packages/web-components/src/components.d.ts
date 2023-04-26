@@ -767,6 +767,14 @@ export namespace Components {
     }
     interface VaSegmentedProgressBar {
         /**
+          * Whether or not to center the step labels
+         */
+        "centeredLabels"?: boolean;
+        /**
+          * Show number counters for each step
+         */
+        "counters"?: "default" | "small";
+        /**
           * The current segment in progress
          */
         "current": number;
@@ -775,13 +783,25 @@ export namespace Components {
          */
         "enableAnalytics"?: boolean;
         /**
+          * Text of current step
+         */
+        "headingText"?: string;
+        /**
           * An override for the default aria label.
          */
         "label"?: string;
         /**
+          * Array of each step label (v3 only)
+         */
+        "labels"?: string;
+        /**
           * The total number of segments in the progress bar
          */
         "total": number;
+        /**
+          * Whether or not the component will use USWDS v3 styling.
+         */
+        "uswds"?: boolean;
     }
     interface VaSelect {
         /**
@@ -2337,6 +2357,14 @@ declare namespace LocalJSX {
     }
     interface VaSegmentedProgressBar {
         /**
+          * Whether or not to center the step labels
+         */
+        "centeredLabels"?: boolean;
+        /**
+          * Show number counters for each step
+         */
+        "counters"?: "default" | "small";
+        /**
           * The current segment in progress
          */
         "current": number;
@@ -2345,9 +2373,17 @@ declare namespace LocalJSX {
          */
         "enableAnalytics"?: boolean;
         /**
+          * Text of current step
+         */
+        "headingText"?: string;
+        /**
           * An override for the default aria label.
          */
         "label"?: string;
+        /**
+          * Array of each step label (v3 only)
+         */
+        "labels"?: string;
         /**
           * The event used to track usage of the component. This is emitted when the component renders and enableAnalytics is true.
          */
@@ -2356,6 +2392,10 @@ declare namespace LocalJSX {
           * The total number of segments in the progress bar
          */
         "total": number;
+        /**
+          * Whether or not the component will use USWDS v3 styling.
+         */
+        "uswds"?: boolean;
     }
     interface VaSelect {
         /**

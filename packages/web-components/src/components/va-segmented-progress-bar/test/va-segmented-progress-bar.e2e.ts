@@ -10,25 +10,27 @@ describe('va-segmented-progress-bar', () => {
     expect(element).toEqualHtml(`
       <va-segmented-progress-bar class="hydrated" current="3" total="6">
         <mock:shadow-root>
-          <div
-            class="progress-bar-segmented"
-            role="progressbar"
-            aria-valuenow="3"
-            aria-valuemin="0"
-            aria-valuemax="6"
-            aria-valuetext="Step 3 of 6"
-            aria-label="Step 3 of 6"
-          >
-            <div class="progress-segment progress-segment-complete"></div>
-            <div class="progress-segment progress-segment-complete"></div>
-            <div class="progress-segment progress-segment-complete"></div>
-            <div class="progress-segment"></div>
-            <div class="progress-segment"></div>
-            <div class="progress-segment"></div>
+          <div>
+            <div
+              class="progress-bar-segmented"
+              role="progressbar"
+              aria-valuenow="3"
+              aria-valuemin="0"
+              aria-valuemax="6"
+              aria-valuetext="Step 3 of 6"
+              aria-label="Step 3 of 6"
+            >
+              <div class="progress-segment progress-segment-complete"></div>
+              <div class="progress-segment progress-segment-complete"></div>
+              <div class="progress-segment progress-segment-complete"></div>
+              <div class="progress-segment"></div>
+              <div class="progress-segment"></div>
+              <div class="progress-segment"></div>
+            </div>
+            <span aria-atomic="true" aria-live="polite" class="sr-only">
+              Step 3 of 6
+            </span>
           </div>
-          <span aria-atomic="true" aria-live="polite" class="sr-only">
-            Step 3 of 6
-          </span>
         </mock:shadow-root>
       </va-segmented-progress-bar>
     `);

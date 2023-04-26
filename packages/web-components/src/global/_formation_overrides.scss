@@ -207,3 +207,75 @@
 .usa-modal--lg {
   max-width: rem-override(55rem);
 }
+
+.usa-step-indicator {
+  font-size: rem-override(1.06rem);
+  margin-bottom: rem-override(2rem);
+}
+
+.usa-step-indicator__segment {
+  max-width: rem-override(15rem);
+  min-height: rem-override(0.5rem);
+}
+
+.usa-step-indicator__segment::after {
+  height: rem-override(0.5rem);
+}
+
+.usa-step-indicator__heading {
+  font-size: rem-override(1.13rem);
+  margin: rem-override(1rem) 0px 0px;
+}
+
+.usa-step-indicator__current-step {
+  height: rem-override(2.5rem);
+  border-radius: rem-override(99rem);
+  width: rem-override(2.5rem);
+  padding: calc((rem-override(2.5rem) - 2.2ex) * 0.5);
+  box-sizing: border-box;
+}
+
+.usa-step-indicator__total-steps {
+  margin-right: rem-override(0.5rem);
+}
+
+@media (min-width: 40em) {
+  .usa-step-indicator--counters .usa-step-indicator__segment, .usa-step-indicator--counters-sm .usa-step-indicator__segment {
+    margin-top: rem-override(1.25rem);
+  }
+
+  .usa-step-indicator--counters-sm .usa-step-indicator__segment {
+    margin-top: rem-override(0.75rem);
+  }
+
+  .usa-step-indicator--counters .usa-step-indicator__segment::before, .usa-step-indicator--counters-sm .usa-step-indicator__segment::before {
+    height: rem-override(2.5rem);
+    border-radius: rem-override(99rem);
+    width: rem-override(2.5rem);
+    padding: calc((rem-override(2.5rem) - 1.8ex) * 0.5);
+    top: calc(rem-override(-1rem));
+  }
+
+  .usa-step-indicator--counters-sm .usa-step-indicator__segment::before {
+    height: rem-override(1.5rem);
+    border-radius: rem-override(99rem);
+    width: rem-override(1.5rem);
+    font-size: rem-override(0.93rem);
+    padding: calc(rem-override(0.25rem) + 1px);
+    top: rem-override(-0.5rem)
+  }
+
+  .usa-step-indicator__segment-label {
+    font-size: rem-override(1.06rem);
+    margin-top: rem-override(1rem);
+    padding-right: rem-override(2rem)
+  }
+
+  .usa-step-indicator--counters .usa-step-indicator__segment-label, .usa-step-indicator--counters-sm .usa-step-indicator__segment-label {
+    margin-top: rem-override(2rem);
+  }
+
+  .usa-step-indicator__segment::after {
+    height: rem-override(0.5rem);
+  }
+}
