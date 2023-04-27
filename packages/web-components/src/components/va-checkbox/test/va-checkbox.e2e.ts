@@ -221,6 +221,16 @@ describe('va-checkbox', () => {
     expect(hint.textContent).toEqual("Example checkbox description");
   });
 
+  it('uswds v3 has tile class added', async () => {
+    const page = await newE2EPage();
+    await page.setContent(
+      '<va-checkbox uswds tile label="Example label" />',
+    );
+
+    const input = await page.find('va-checkbox >>> .usa-checkbox__input');
+    expect(input).toHaveClass("usa-checkbox__input--tile");
+  });
+
   it('uswds v3 renders with aria-invalid set to false by default', async () => {
     const page = await newE2EPage();
     await page.setContent('<va-checkbox uswds></va-checkbox>');
