@@ -78,3 +78,7 @@ p {
 ::slotted([slot='headline']) {
   display: none;
 }
+
+::slotted([slot='icon']){
+  margin-right: 1rem;
+}

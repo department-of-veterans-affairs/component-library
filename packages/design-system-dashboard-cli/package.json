@@ -19,6 +19,7 @@
   "dependencies": {
     "chalk": "^4.1.0",
     "command-line-args": "^5.1.1",
+    "csv": "^6.2.8",
     "fast-memoize": "^2.5.2",
     "glob": "^7.1.6",
     "jsonexport": "^3.2.0",
