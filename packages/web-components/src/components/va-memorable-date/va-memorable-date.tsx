@@ -121,9 +121,9 @@ export class VaMemorableDate {
       minimumIntegerDigits: 2,
     });
     /* eslint-disable i18next/no-literal-string */
-    this.value = `${year}-${month ? numFormatter.format(monthNum) : ''}-${
+    this.value = year || month || day ? `${year}-${month ? numFormatter.format(monthNum) : ''}-${
       day ? numFormatter.format(dayNum) : ''
-    }`;
+    }` : '';
     /* eslint-enable i18next/no-literal-string */
 
     // Run built-in validation. Any custom validation
@@ -161,9 +161,7 @@ export class VaMemorableDate {
     }
 
     /* eslint-disable i18next/no-literal-string */
-    this.value = `${currentYear}-${currentMonth ? currentMonth : ''}-${
-      currentDay ? currentDay : ''
-    }`;
+    this.value = currentYear || currentMonth || currentDay ? `${currentYear}-${currentMonth ? currentMonth : ''}-${currentDay ? currentDay : ''}` : '';
     /* eslint-enable i18next/no-literal-string */
 
     // This event should always fire to allow for validation handling

@@ -589,7 +589,7 @@ describe('va-memorable-date', () => {
     // Trigger Blur
     await handleYear.press('Tab');
     await page.waitForChanges();
-    expect(date.getAttribute('value')).toBe('--');
+    expect(date.getAttribute('value')).toBe('');
   });
 
   it('fires an analytics event when enableAnalytics is true', async () => {
@@ -1236,7 +1236,7 @@ describe('va-memorable-date', () => {
     // Trigger Blur
     await handleYear.press('Tab');
     await page.waitForChanges();
-    expect(date.getAttribute('value')).toBe('--');
+    expect(date.getAttribute('value')).toBe('');
   });
 
   it('uswds v3 fires an analytics event when enableAnalytics is true', async () => {
@@ -1774,7 +1774,7 @@ describe('va-memorable-date', () => {
     // Trigger Blur
     await handleYear.press('Tab');
     await page.waitForChanges();
-    expect(date.getAttribute('value')).toBe('--');
+    expect(date.getAttribute('value')).toBe('');
   });
 
   it('uswds v3 fires an analytics event when enableAnalytics is true with monthSelect', async () => {
