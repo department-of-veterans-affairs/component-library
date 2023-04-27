@@ -70,9 +70,9 @@ const I18nTemplate = args => {
 
   return (
     <div>
-      <va-button uswds onClick={e => setLang('es')} style={{fontSize: '16px'}} text={"Español"} />
-      <va-button uswds onClick={e => setLang('en')} style={{fontSize: '16px'}} text={"English"} />
-      <va-button uswds onClick={e => setLang('tl')} style={{fontSize: '16px'}} text={"Tagalog"} />
+      <button onClick={e => setLang('es')} style={{fontSize: '16px'}} >Español</button>
+      <button onClick={e => setLang('en')} style={{fontSize: '16px'}} >English</button>
+      <button onClick={e => setLang('tl')} style={{fontSize: '16px'}} >Tagalog</button>
       <div style={{marginTop: '20px'}}>
         {vaCheckbox(args)}
       </div>
