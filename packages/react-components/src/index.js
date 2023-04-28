@@ -14,7 +14,6 @@ import MaintenanceBanner from './components/MaintenanceBanner/MaintenanceBanner'
 import Modal from './components/Modal/Modal';
 import OMBInfo from './components/OMBInfo/OMBInfo';
 import Pagination from './components/Pagination/Pagination';
-import ProgressButton from './components/ProgressButton/ProgressButton';
 import Select from './components/Select/Select';
 import Table from './components/Table/Table';
 import Telephone, {
@@ -44,7 +43,6 @@ export {
   Modal,
   OMBInfo,
   Pagination,
-  ProgressButton,
   Select,
   Table,
   Telephone,
