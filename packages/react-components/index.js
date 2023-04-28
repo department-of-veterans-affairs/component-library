@@ -13,7 +13,6 @@ import MaintenanceBanner from './MaintenanceBanner';
 import Modal from './Modal';
 import OMBInfo from './OMBInfo';
 import Pagination from './Pagination';
-import ProgressButton from './ProgressButton';
 import Select from './Select';
 import Table from './Table';
 import Telephone, {
@@ -43,7 +42,6 @@ export {
   Modal,
   OMBInfo,
   Pagination,
-  ProgressButton,
   Select,
   Table,
   Telephone,

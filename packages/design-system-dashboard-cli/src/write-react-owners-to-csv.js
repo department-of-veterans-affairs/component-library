@@ -15,7 +15,6 @@ const componentsToKeep = [
   'IconUser',
   'LoadingIndicator',
   'Pagination',
-  'ProgressButton',
   'Select',
   'Table',
   'TextInput',

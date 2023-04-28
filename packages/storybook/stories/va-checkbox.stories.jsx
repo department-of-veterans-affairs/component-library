@@ -24,6 +24,7 @@ const defaultArgs = {
   'description': null,
   'enable-analytics': false,
   'hint': null,
+  'tile': false,
 };
 
 const vaCheckbox = args => {
@@ -35,6 +36,7 @@ const vaCheckbox = args => {
     label,
     required, 
     hint,
+    tile,
     ...rest
   } = args;
   return (
@@ -46,6 +48,7 @@ const vaCheckbox = args => {
       label={label}
       hint={hint}
       required={required}
+      tile={tile}
       onBlur={e => console.log(e)}
     />
   )
@@ -74,6 +77,9 @@ const I18nTemplate = args => {
 export const Default = Template.bind(null);
 Default.args = { ...defaultArgs };
 Default.argTypes = propStructure(checkboxDocs);
+
+export const Tile = Template.bind(null);
+Tile.args = { ...defaultArgs, tile: true };
 
 export const Checked = Template.bind(null);
 Checked.args = { ...defaultArgs, checked: true };
