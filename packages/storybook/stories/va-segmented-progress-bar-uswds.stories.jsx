@@ -29,24 +29,6 @@ const Template = ({
   // Wrapper for spacing when viewing in storybook
   // Component can be used without it
   <div style={{ margin: '3em' }}>
-    <div
-      className="schemaform-title"
-      style={{ alignItems: 'baseline', display: 'flex', marginBottom: '3rem' }}
-    >
-      <h1
-        data-testid="form-title"
-        style={{ marginBottom: 0, paddingRight: '10px' }}
-      >
-        Apply for health care
-      </h1>
-      <div
-        className="schemaform-subtitle"
-        data-testid="form-subtitle"
-        style={{ fontSize: '2rem' }}
-      >
-        Form 10-10EZ
-      </div>
-    </div>
     <va-segmented-progress-bar
       enable-analytics={enableAnalytics}
       current={current}
