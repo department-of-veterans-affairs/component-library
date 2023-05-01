@@ -12,12 +12,12 @@
 @media (min-width: 40em) {
   .usa-step-indicator--counters .usa-step-indicator__segment::before, .usa-step-indicator--counters-sm .usa-step-indicator__segment::before {
     box-sizing: border-box;
-    box-shadow: inset 0 0 0 rem-override(0.25rem) #919191, 0 0 0 rem-override(0.25rem) #fff // USWDS design and sketch
+    box-shadow: inset 0 0 0 4px #919191, 0 0 0 4px #fff // USWDS design and sketch
   }
 
   .usa-step-indicator--counters .usa-step-indicator__segment--current::before, .usa-step-indicator--counters-sm .usa-step-indicator__segment--current::before,
   .usa-step-indicator--counters .usa-step-indicator__segment--complete::before, .usa-step-indicator--counters-sm .usa-step-indicator__segment--complete::before {
-    box-shadow: 0 0 0 rem-override(0.25rem) #fff;
+    box-shadow: 0 0 0 4px #fff;
   }
 }
 

@@ -1,4 +1,5 @@
 import { Component, Event, EventEmitter, Host, Prop, h } from '@stencil/core';
+import classNames from 'classnames';
 
 /**
  * @componentName Progress bar - segmented
@@ -44,17 +45,17 @@ export class VaSegmentedProgressBar {
   @Prop() labels?: string;
 
   /**
-  * Whether or not to center the step labels
+  * Whether or not to center the step labels (v3 only)
   */
   @Prop() centeredLabels?: boolean;
 
   /**
-  * Show number counters for each step
+  * Show number counters for each step (v3 only)
   */
   @Prop() counters?: "default" | "small";
 
   /**
-  * Text of current step
+  * Text of current step (v3 only)
   */
   @Prop() headingText?: string;
 
@@ -89,68 +90,85 @@ export class VaSegmentedProgressBar {
       labelsArray = labels.split(',');
     }
     const range = Array.from({ length: total }, (_, i) => i);
-    return (
-      <Host>
-        {
-          uswds ? (
-            <div class={`usa-step-indicator ${centeredLabels ? 'usa-step-indicator--center' : ''} ${counters && counters === 'default' ? 'usa-step-indicator--counters' : counters && counters === 'small' ? 'usa-step-indicator--counters-sm' : ''}`} aria-label="progress">
-              <ol class="usa-step-indicator__segments">
-                {range.map(step => (
-                  <li class={`usa-step-indicator__segment ${current > step + 1 ? 'usa-step-indicator__segment--complete' : ''} ${current === step + 1 ? 'usa-step-indicator__segment--current' : ''}`}>
-                    {
-                      labels ? (
-                        <span class="usa-step-indicator__segment-label">{labelsArray[step]}
-                          {
-                            current !== step + 1 ? (
-                              <span class="usa-sr-only">{current > step + 1 ? 'completed' : 'not completed'}</span>
-                            ) : null
-                          }
-                        </span>
-                      ) : null
-                    }
-                    
-                  </li>
-                ))}
-              </ol>
-              <div class="usa-step-indicator__header">
-                <h4 class="usa-step-indicator__heading">
-                  <span class="usa-step-indicator__heading-counter"
-                    ><span class="usa-sr-only">Step</span>
-                    <span class="usa-step-indicator__current-step">{current}</span>
-                    <span class="usa-step-indicator__total-steps"> of {total}</span>
-                  </span>
-                  <span class="usa-step-indicator__heading-text">{labels ? labelsArray[current - 1] : headingText}</span>
-                </h4>
-              </div>
-            </div>
 
-          ) : (
-            <div>
-              <div
-                class="progress-bar-segmented"
-                role="progressbar"
-                aria-label={label}
-                aria-valuenow={current}
-                aria-valuemin="0"
-                aria-valuemax={total}
-                aria-valuetext={label}
-              >
-                {range.map(step => (
-                  <div
-                    key={step}
-                    class={`progress-segment ${
-                      current > step ? 'progress-segment-complete' : ''
-                    }`}
-                  />
-                ))}
+    if (uswds) {
+      const indicatorClass = classNames({
+        'usa-step-indicator': true,
+        'usa-step-indicator--center': centeredLabels,
+        'usa-step-indicator--counters': counters === 'default',
+        'usa-step-indicator--counters-sm': counters === 'small'
+      })
+
+      const computeSegmentClass = (step) => {
+        return classNames({
+          'usa-step-indicator__segment': true,
+          'usa-step-indicator__segment--complete': current > step + 1,
+          'usa-step-indicator__segment--current': current === step + 1
+        });
+      }
+
+      return (
+        <Host>
+          <div class={indicatorClass} aria-label="progress">
+                <ol class="usa-step-indicator__segments">
+                  {range.map(step => (
+                    <li class={computeSegmentClass(step)}>
+                      {
+                        labels ? (
+                          <span class="usa-step-indicator__segment-label">{labelsArray[step]}
+                            {
+                              current !== step + 1 ? (
+                                <span class="usa-sr-only">{current > step + 1 ? 'completed' : 'not completed'}</span>
+                              ) : null
+                            }
+                          </span>
+                        ) : null
+                      }
+                      
+                    </li>
+                  ))}
+                </ol>
+                <div class="usa-step-indicator__header">
+                  <h4 class="usa-step-indicator__heading">
+                    <span class="usa-step-indicator__heading-counter"
+                      ><span class="usa-sr-only">Step</span>
+                      <span class="usa-step-indicator__current-step">{current}</span>
+                      <span class="usa-step-indicator__total-steps"> of {total}</span>
+                    </span>
+                    <span class="usa-step-indicator__heading-text">{labels ? labelsArray[current - 1] : headingText}</span>
+                  </h4>
+                </div>
               </div>
-              <span aria-atomic="true" aria-live="polite" class="sr-only">
-                Step {current} of {total}
-              </span>
-            </div>
-          )
-        }
         </Host>
-    );
+      )
+    } else {
+      return (
+        <Host>
+          <div>
+            <div
+              class="progress-bar-segmented"
+              role="progressbar"
+              aria-label={label}
+              aria-valuenow={current}
+              aria-valuemin="0"
+              aria-valuemax={total}
+              aria-valuetext={label}
+            >
+              {range.map(step => (
+                <div
+                  key={step}
+                  class={`progress-segment ${
+                    current > step ? 'progress-segment-complete' : ''
+                  }`}
+                />
+              ))}
+            </div>
+            <span aria-atomic="true" aria-live="polite" class="sr-only">
+              Step {current} of {total}
+            </span>
+          </div>
+        </Host>
+      )
+    }
   }
 }

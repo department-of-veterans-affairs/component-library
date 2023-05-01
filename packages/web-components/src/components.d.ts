@@ -779,11 +779,11 @@ export namespace Components {
     }
     interface VaSegmentedProgressBar {
         /**
-          * Whether or not to center the step labels
+          * Whether or not to center the step labels (v3 only)
          */
         "centeredLabels"?: boolean;
         /**
-          * Show number counters for each step
+          * Show number counters for each step (v3 only)
          */
         "counters"?: "default" | "small";
         /**
@@ -795,7 +795,7 @@ export namespace Components {
          */
         "enableAnalytics"?: boolean;
         /**
-          * Text of current step
+          * Text of current step (v3 only)
          */
         "headingText"?: string;
         /**
@@ -2381,11 +2381,11 @@ declare namespace LocalJSX {
     }
     interface VaSegmentedProgressBar {
         /**
-          * Whether or not to center the step labels
+          * Whether or not to center the step labels (v3 only)
          */
         "centeredLabels"?: boolean;
         /**
-          * Show number counters for each step
+          * Show number counters for each step (v3 only)
          */
         "counters"?: "default" | "small";
         /**
@@ -2397,7 +2397,7 @@ declare namespace LocalJSX {
          */
         "enableAnalytics"?: boolean;
         /**
-          * Text of current step
+          * Text of current step (v3 only)
          */
         "headingText"?: string;
         /**
