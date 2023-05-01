@@ -275,6 +275,10 @@
     margin-top: rem-override(2rem);
   }
 
+  .usa-step-indicator--center .usa-step-indicator__segment::before {
+    left: calc(50% - rem-override(1.375rem));
+  }
+
   .usa-step-indicator__segment::after {
     height: rem-override(0.5rem);
   }
