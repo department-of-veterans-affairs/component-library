@@ -3,7 +3,6 @@ import AlertBox, { ALERT_TYPE } from './components/AlertBox/AlertBox';
 import Breadcrumbs from './components/Breadcrumbs/Breadcrumbs';
 import Checkbox from './components/Checkbox/Checkbox';
 import CheckboxGroup from './components/CheckboxGroup/CheckboxGroup';
-import DropDownPanel from './components/DropDownPanel/DropDownPanel';
 import ExpandingGroup from './components/ExpandingGroup/ExpandingGroup';
 import FileInput from './components/FileInput/FileInput';
 import IconBase from './components/IconBase/IconBase';
@@ -14,7 +13,6 @@ import MaintenanceBanner from './components/MaintenanceBanner/MaintenanceBanner'
 import Modal from './components/Modal/Modal';
 import OMBInfo from './components/OMBInfo/OMBInfo';
 import Pagination from './components/Pagination/Pagination';
-import ProgressButton from './components/ProgressButton/ProgressButton';
 import Select from './components/Select/Select';
 import Table from './components/Table/Table';
 import Telephone, {
@@ -33,7 +31,6 @@ export {
   Breadcrumbs,
   Checkbox,
   CheckboxGroup,
-  DropDownPanel,
   ExpandingGroup,
   FileInput,
   IconBase,
@@ -44,7 +41,6 @@ export {
   Modal,
   OMBInfo,
   Pagination,
-  ProgressButton,
   Select,
   Table,
   Telephone,
