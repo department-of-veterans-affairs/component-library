@@ -6,9 +6,7 @@
 
 
 
-.usa-step-indicator__segment::after {
-  background-color: #919191; // USWDS design and sketch
-}
+
 @media (min-width: 40em) {
   .usa-step-indicator--counters .usa-step-indicator__segment::before, .usa-step-indicator--counters-sm .usa-step-indicator__segment::before {
     box-sizing: border-box;
@@ -20,15 +18,6 @@
     box-shadow: 0 0 0 4px #fff;
   }
 }
-
-.usa-step-indicator__segment--current::after {
-  background-color: #005EA2; // USWDS design and sketch
-}
-
-.usa-step-indicator__segment--complete::after {
-  background-color: #162E51; // USWDS design and sketch
-}
-
 
 
 /** V1 Styles **/
