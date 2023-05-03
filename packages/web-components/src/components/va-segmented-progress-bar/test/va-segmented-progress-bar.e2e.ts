@@ -97,7 +97,7 @@ describe('v3 va-segmented-progress-bar', () => {
     expect(element).toEqualHtml(`
       <va-segmented-progress-bar class=\"hydrated\" current=\"3\" total=\"6\" uswds=\"\">
         <mock:shadow-root>
-          <div aria-label=\"progress\" class=\"usa-step-indicator\">
+          <div aria-label=\"Step 3 of 6\" class=\"usa-step-indicator\">
             <ol class=\"usa-step-indicator__segments\">
               <li class=\"usa-step-indicator__segment usa-step-indicator__segment--complete\"></li>
               <li class=\"usa-step-indicator__segment usa-step-indicator__segment--complete\"></li>
