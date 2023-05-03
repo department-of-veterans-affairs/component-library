@@ -803,7 +803,7 @@ export namespace Components {
          */
         "label"?: string;
         /**
-          * Array of each step label (v3 only)
+          * String containing a list of step labels delimited by a semi-colon (v3 only) Example: `"Step 1;Step 2;Step 3"`
          */
         "labels"?: string;
         /**
@@ -2405,7 +2405,7 @@ declare namespace LocalJSX {
          */
         "label"?: string;
         /**
-          * Array of each step label (v3 only)
+          * String containing a list of step labels delimited by a semi-colon (v3 only) Example: `"Step 1;Step 2;Step 3"`
          */
         "labels"?: string;
         /**
