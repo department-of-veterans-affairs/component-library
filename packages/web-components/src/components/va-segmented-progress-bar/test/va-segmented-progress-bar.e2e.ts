@@ -177,16 +177,16 @@ describe('v3 va-segmented-progress-bar', () => {
 
   it("uswds - should render label text for header when labels are provided", async () => {
     const page = await newE2EPage({
-      html: '<va-segmented-progress-bar current="3" total="6" uswds heading-text="My Header" labels="step1,step2,step3,step4,step5,step6"></va-segmented-progress-bar>',
+      html: '<va-segmented-progress-bar current="3" total="6" uswds heading-text="My Header" labels="Personal Information;Household Status;Supporting Documents;Signature;Review and Submit"></va-segmented-progress-bar>',
     });
     const element = await page.find('va-segmented-progress-bar');
     const headerElement = element.shadowRoot.querySelector('span.usa-step-indicator__heading-text');
-    expect(headerElement.innerHTML).toEqual("step3");
+    expect(headerElement.innerHTML).toEqual("Supporting Documents");
   })
 
   it("uswds - should render labels when labels are provided", async () => {
     const page = await newE2EPage({
-      html: '<va-segmented-progress-bar current="3" total="6" uswds heading-text="My Header" labels="step1,step2,step3,step4,step5,step6"></va-segmented-progress-bar>',
+      html: '<va-segmented-progress-bar current="3" total="6" uswds heading-text="My Header" labels="Personal Information;Household Status;Supporting Documents;Signature;Review and Submit"></va-segmented-progress-bar>',
     });
     const element = await page.find('va-segmented-progress-bar');
     const segments = element.shadowRoot.querySelector('ol.usa-step-indicator__segments');
@@ -195,7 +195,7 @@ describe('v3 va-segmented-progress-bar', () => {
 
   it("uswds - should render counter numbers when counters = 'default'", async () => {
     const page = await newE2EPage({
-      html: '<va-segmented-progress-bar current="3" total="6" uswds labels="step1,step2,step3,step4,step5,step6" counters="default"></va-segmented-progress-bar>',
+      html: '<va-segmented-progress-bar current="3" total="6" uswds labels="Personal Information;Household Status;Supporting Documents;Signature;Review and Submit" counters="default"></va-segmented-progress-bar>',
     });
     const element = await page.find('va-segmented-progress-bar');
     const indicator = element.shadowRoot.querySelector('.usa-step-indicator');
@@ -204,7 +204,7 @@ describe('v3 va-segmented-progress-bar', () => {
 
   it("uswds - should render counter numbers when counters = 'small'", async () => {
     const page = await newE2EPage({
-      html: '<va-segmented-progress-bar current="3" total="6" uswds labels="step1,step2,step3,step4,step5,step6" counters="small"></va-segmented-progress-bar>',
+      html: '<va-segmented-progress-bar current="3" total="6" uswds labels="Personal Information;Household Status;Supporting Documents;Signature;Review and Submit" counters="small"></va-segmented-progress-bar>',
     });
     const element = await page.find('va-segmented-progress-bar');
     const indicator = element.shadowRoot.querySelector('.usa-step-indicator');
@@ -213,7 +213,7 @@ describe('v3 va-segmented-progress-bar', () => {
 
   it("uswds - should render centered labels when 'centered-labels' is true", async () => {
     const page = await newE2EPage({
-      html: '<va-segmented-progress-bar current="3" total="6" uswds labels="step1,step2,step3,step4,step5,step6" centered-labels></va-segmented-progress-bar>',
+      html: '<va-segmented-progress-bar current="3" total="6" uswds="true" centered-labels="true" labels="Personal Information;Household Status;Supporting Documents;Signature;Review and Submit"></va-segmented-progress-bar>',
     });
     const element = await page.find('va-segmented-progress-bar');
     const indicator = element.shadowRoot.querySelector('.usa-step-indicator');

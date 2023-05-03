@@ -87,7 +87,7 @@ export class VaSegmentedProgressBar {
     const { current, total, label = `Step ${current} of ${total}`, uswds, labels, centeredLabels, counters, headingText } = this;
     let labelsArray;
     if (labels) {
-      labelsArray = labels.split(',');
+      labelsArray = labels.split(';');
     }
     const range = Array.from({ length: total }, (_, i) => i);
 

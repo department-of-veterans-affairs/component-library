@@ -65,14 +65,14 @@ export const StepLabels = Template.bind(null);
 StepLabels.args = {
   ...defaultArgs,
   label: 'Label is here',
-  labels: ['Personal Information', 'Household Status', 'Supporting Documents', 'Signature', 'Review and Submit']
+  labels: "Personal Information;Household Status;Supporting Documents;Signature;Review and Submit"
 };
 
 export const CenteredStepLabels = Template.bind(null);
 CenteredStepLabels.args = {
   ...defaultArgs,
   label: 'Label is here',
-  labels: ['Personal Information', 'Household Status', 'Supporting Documents', 'Signature', 'Review and Submit'],
+  labels: "Personal Information;Household Status;Supporting Documents;Signature;Review and Submit",
   centeredLabels: true
 };
 
@@ -80,7 +80,7 @@ export const Counters = Template.bind(null);
 Counters.args = {
   ...defaultArgs,
   label: 'Label is here',
-  labels: ['Personal Information', 'Household Status', 'Supporting Documents', 'Signature', 'Review and Submit'],
+  labels: "Personal Information;Household Status;Supporting Documents;Signature;Review and Submit",
   counters: 'default'
 };
 
@@ -89,7 +89,7 @@ export const SmallCounters = Template.bind(null);
 SmallCounters.args = {
   ...defaultArgs,
   label: 'Label is here',
-  labels: ['Personal Information', 'Household Status', 'Supporting Documents', 'Signature', 'Review and Submit'],
+  labels: "Personal Information;Household Status;Supporting Documents;Signature;Review and Submit",
   counters: 'small'
 };
 
@@ -97,7 +97,7 @@ export const CenteredCounters = Template.bind(null);
 CenteredCounters.args = {
   ...defaultArgs,
   label: 'Label is here',
-  labels: ['Personal Information', 'Household Status', 'Supporting Documents', 'Signature', 'Review and Submit'],
+  labels: "Personal Information;Household Status;Supporting Documents;Signature;Review and Submit",
   counters: 'default',
   centeredLabels: true
 };
@@ -107,7 +107,7 @@ export const CenteredSmallCounters = Template.bind(null);
 CenteredSmallCounters.args = {
   ...defaultArgs,
   label: 'Label is here',
-  labels: ['Personal Information', 'Household Status', 'Supporting Documents', 'Signature', 'Review and Submit'],
+  labels: "Personal Information;Household Status;Supporting Documents;Signature;Review and Submit",
   counters: 'small',
   centeredLabels: true
 };
