@@ -74,7 +74,7 @@ va-text-input::part(label) {
 }
 
 va-text-input::part(label) {
-  margin-bottom: 1.2rem;
+  margin-bottom: 12px;
 }
 
 va-text-input::part(validation) {
