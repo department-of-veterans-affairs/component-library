@@ -109,7 +109,7 @@ export class VaSegmentedProgressBar {
 
       return (
         <Host>
-          <div class={indicatorClass} aria-label="progress">
+          <div class={indicatorClass} aria-label={label}>
                 <ol class="usa-step-indicator__segments">
                   {range.map(step => (
                     <li class={computeSegmentClass(step)}>
