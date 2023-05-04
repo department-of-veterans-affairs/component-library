@@ -28,7 +28,6 @@ export default {
 };
 
 const defaultArgs = {
-  'show-icon': false,
   'visible': true,
   'close-btn-aria-label': 'Close notification',
   'closeable': false,
@@ -43,16 +42,13 @@ const defaultArgs = {
 };
 
 const Template = ({
-  'show-icon': showIcon,
   visible,
   'close-btn-aria-label': closeBtnAriaLabel,
   closeable,
-  onCloseEvent,
   headline,
   children,
 }) => (
   <va-card
-    show-icon={showIcon}
     visible={visible}
     close-btn-aria-label={closeBtnAriaLabel}
     closeable={closeable}
@@ -72,5 +68,4 @@ export const Dismissable = Template.bind(null);
 Dismissable.args = {
   ...defaultArgs,
   closeable: true,
-  onCloseEvent: () => console.log('Close event triggered'),
 };

@@ -7,7 +7,6 @@ import {
   Prop, 
   h 
 } from '@stencil/core';
-import classnames from 'classnames';
 
 /**
  * Use a heading element with an attribute named slot and a value of "headline" to
@@ -29,10 +28,8 @@ import classnames from 'classnames';
 export class VaCard {
   @Element() el!: any;
 
-  @Prop() showIcon?: boolean = false;
-
   /**
-   * If `true`, the alert will be visible.
+   * If `true`, the card will be visible.
    */
   @Prop() visible?: boolean = true;
 
@@ -64,18 +61,13 @@ export class VaCard {
     const {
       visible,
       closeable,
-      showIcon,
     } = this;
 
     if (!visible) return <div aria-live="polite" />;
 
-    const classes = classnames('va-card', {
-      'hide-icon': !showIcon,
-    });
-
     return (
       <Host>
-        <div class={classes}>
+        <div class="va-card">
           <slot name="headline"></slot>
           <slot name="content"></slot>
         </div>

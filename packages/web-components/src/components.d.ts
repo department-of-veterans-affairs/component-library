@@ -235,9 +235,8 @@ export namespace Components {
           * If `true`, a close button will be displayed.
          */
         "closeable"?: boolean;
-        "showIcon"?: boolean;
         /**
-          * If `true`, the alert will be visible.
+          * If `true`, the card will be visible.
          */
         "visible"?: boolean;
     }
@@ -1723,9 +1722,8 @@ declare namespace LocalJSX {
           * Fires when the component is closed by clicking on the close icon. This fires only when closeable is true.
          */
         "onCloseEvent"?: (event: VaCardCustomEvent<any>) => void;
-        "showIcon"?: boolean;
         /**
-          * If `true`, the alert will be visible.
+          * If `true`, the card will be visible.
          */
         "visible"?: boolean;
     }
