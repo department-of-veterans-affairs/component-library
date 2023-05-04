@@ -18,11 +18,16 @@ export default {
 const defaultArgs = {};
 
 const Template = ({}) => (
+  <>
+  <p>Surrounding content</p>
   <va-card>
     <div slot="content">
       <h2 id="va-card_heading">Card heading</h2>
+      <p>Card body</p>
     </div>
   </va-card>
+  <p>Surrounding content</p>
+  </>
 );
 
 export const Default = Template.bind(null);

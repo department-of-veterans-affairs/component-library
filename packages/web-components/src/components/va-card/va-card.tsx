@@ -9,7 +9,7 @@ import { Component, Host, h } from '@stencil/core';
 
 @Component({
   tag: 'va-card',
-  styleUrl: 'va-card.css',
+  styleUrl: 'va-card.scss',
   shadow: true,
 })
 export class VaCard {
@@ -17,7 +17,7 @@ export class VaCard {
   render() {
     return (
       <Host>
-        <div class="va-card vads-u-background-color--white vads-u-padding--2 vads-u-margin-bottom--2p5">
+        <div class="va-card">
           <slot name="content"></slot>
         </div>
       </Host>
