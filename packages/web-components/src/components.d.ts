@@ -793,6 +793,14 @@ export namespace Components {
     }
     interface VaSegmentedProgressBar {
         /**
+          * Whether or not to center the step labels (v3 only)
+         */
+        "centeredLabels"?: boolean;
+        /**
+          * Show number counters for each step (v3 only)
+         */
+        "counters"?: "default" | "small";
+        /**
           * The current segment in progress
          */
         "current": number;
@@ -801,13 +809,25 @@ export namespace Components {
          */
         "enableAnalytics"?: boolean;
         /**
+          * Text of current step (v3 only)
+         */
+        "headingText"?: string;
+        /**
           * An override for the default aria label.
          */
         "label"?: string;
         /**
+          * String containing a list of step labels delimited by a semi-colon (v3 only) Example: `"Step 1;Step 2;Step 3"`
+         */
+        "labels"?: string;
+        /**
           * The total number of segments in the progress bar
          */
         "total": number;
+        /**
+          * Whether or not the component will use USWDS v3 styling.
+         */
+        "uswds"?: boolean;
     }
     interface VaSelect {
         /**
@@ -2404,6 +2424,14 @@ declare namespace LocalJSX {
     }
     interface VaSegmentedProgressBar {
         /**
+          * Whether or not to center the step labels (v3 only)
+         */
+        "centeredLabels"?: boolean;
+        /**
+          * Show number counters for each step (v3 only)
+         */
+        "counters"?: "default" | "small";
+        /**
           * The current segment in progress
          */
         "current": number;
@@ -2412,9 +2440,17 @@ declare namespace LocalJSX {
          */
         "enableAnalytics"?: boolean;
         /**
+          * Text of current step (v3 only)
+         */
+        "headingText"?: string;
+        /**
           * An override for the default aria label.
          */
         "label"?: string;
+        /**
+          * String containing a list of step labels delimited by a semi-colon (v3 only) Example: `"Step 1;Step 2;Step 3"`
+         */
+        "labels"?: string;
         /**
           * The event used to track usage of the component. This is emitted when the component renders and enableAnalytics is true.
          */
@@ -2423,6 +2459,10 @@ declare namespace LocalJSX {
           * The total number of segments in the progress bar
          */
         "total": number;
+        /**
+          * Whether or not the component will use USWDS v3 styling.
+         */
+        "uswds"?: boolean;
     }
     interface VaSelect {
         /**

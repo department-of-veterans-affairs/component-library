@@ -1,6 +1,6 @@
 {
   "name": "@department-of-veterans-affairs/web-components",
-  "version": "4.36.3",
+  "version": "4.37.1",
   "description": "Stencil Component Starter",
   "main": "dist/index.cjs.js",
   "module": "dist/index.js",
@@ -46,7 +46,7 @@
     "@types/react-dom": "16.0.9",
     "@typescript-eslint/eslint-plugin": "^5.30.5",
     "@typescript-eslint/parser": "^5.30.5",
-    "@uswds/uswds": "^3.3.0",
+    "@uswds/uswds": "^3.4.0",
     "animate.css": "^4.1.1",
     "babel-loader": "^8.2.2",
     "eslint": "^8.19.0",
