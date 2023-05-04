@@ -1,5 +1,57 @@
+:host {
+  display: block;
+  position: relative;
+}
+
 .va-card {
   box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.32);
   background-color: var(--color-white);
   padding: 1.6rem;
+}
+
+:host ::slotted([slot='headline']) {
+  font-size: 2rem !important;
+  line-height: 26px !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.va-card-close {
+  margin: 1.6rem;
+  padding: 0;
+  width: auto;
+  color: var(--color-gray-dark);
+  font-size: 2.25rem;
+  appearance: none;
+  border: 0;
+  cursor: pointer;
+  background: transparent;
+  display: block;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+:host i {
+  font-family: 'Font Awesome 5 Free';
+  font-size: 2.4rem;
+  font-style: normal;
+  font-weight: 900;
+  line-height: 1;
+}
+
+i.fa-times-circle::before {
+  content: '\F057'; /* fa-times-circle*/
+}
+
+.va-card-close:hover {
+  color: var(--color-base);
+  background-color: transparent;
+}
+
+.va-card-close:active, .va-card-close:focus {
+  color: var(--color-base);
+  background-color: transparent;
+  outline: 2px solid var(--color-gold-light);
+  outline-offset: 2px;
 }
