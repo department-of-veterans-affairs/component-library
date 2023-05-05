@@ -191,6 +191,21 @@ Autocomplete.args = {
 export const WithAnalytics = Template.bind(null);
 WithAnalytics.args = { ...defaultArgs, 'enable-analytics': true };
 
+export const WithHintText = Template.bind(null);
+WithHintText.args = { ...defaultArgs, hint: "This is example hint text" };
+
+const WithInlineHintTextTemplate = ({ name, label }) => {
+  return (
+    <>
+      <va-text-input name={name} label={label} />
+      <p>If your hint is very short it can be included in the label.</p>
+    </>
+  );
+};
+
+export const WithInlineHintText = WithInlineHintTextTemplate.bind(null);
+WithInlineHintText.args = { ...defaultArgs, label: "My input (with hint)" };
+
 const AdditionalInfoTemplate = ({ name, label }) => {
   return (
     <va-text-input name={name} label={label}>
@@ -204,9 +219,6 @@ const AdditionalInfoTemplate = ({ name, label }) => {
     </va-text-input>
   );
 };
-
-export const WithHintText = Template.bind(null);
-WithHintText.args = { ...defaultArgs, hint: "This is example hint text" };
 
 export const WithAdditionalInfo = AdditionalInfoTemplate.bind(null);
 WithAdditionalInfo.args = {
