@@ -12,27 +12,23 @@ describe('va-card', () => {
             <va-card class="hydrated">
             <mock:shadow-root>
                 <div class="va-card">
-                    <slot name="headline"></slot>
                     <slot name="content"></slot>
                 </div>
             </mock:shadow-root>
             </va-card>
       `);
+
+        expect(element).not.toHaveClass('show-shadow');
     }); 
 
-    it('renders an empty div with a "polite" aria-live tag when not visible', async () => {
+    it('renders box shadow', async () => {
         const page = await newE2EPage();
     
-        await page.setContent('<va-card visible="false"></va-card>');
-        const element = await page.find('va-card');
+        await page.setContent('<va-card show-shadow="true"></va-card>');
+        const element = await page.find('va-card >>> div');
     
-        expect(element).toEqualHtml(`
-          <va-card class="hydrated" visible="false">
-            <mock:shadow-root>
-              <div aria-live="polite"></div>
-            </mock:shadow-root>
-          </va-card>
-        `);
+        expect(element).toHaveClass('show-shadow');
+
     });
 
     it('passes an axe check', async () => {
