@@ -228,17 +228,9 @@ export namespace Components {
     }
     interface VaCard {
         /**
-          * Aria-label text for the close button.
+          * If `true`, a drop-shadow will be displayed
          */
-        "closeBtnAriaLabel"?: string;
-        /**
-          * If `true`, a close button will be displayed.
-         */
-        "closeable"?: boolean;
-        /**
-          * If `true`, the card will be visible.
-         */
-        "visible"?: boolean;
+        "showShadow"?: boolean;
     }
     interface VaCheckbox {
         /**
@@ -1090,10 +1082,6 @@ export interface VaButtonPairCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLVaButtonPairElement;
 }
-export interface VaCardCustomEvent<T> extends CustomEvent<T> {
-    detail: T;
-    target: HTMLVaCardElement;
-}
 export interface VaCheckboxCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLVaCheckboxElement;
@@ -1756,21 +1744,9 @@ declare namespace LocalJSX {
     }
     interface VaCard {
         /**
-          * Aria-label text for the close button.
+          * If `true`, a drop-shadow will be displayed
          */
-        "closeBtnAriaLabel"?: string;
-        /**
-          * If `true`, a close button will be displayed.
-         */
-        "closeable"?: boolean;
-        /**
-          * Fires when the component is closed by clicking on the close icon. This fires only when closeable is true.
-         */
-        "onCloseEvent"?: (event: VaCardCustomEvent<any>) => void;
-        /**
-          * If `true`, the card will be visible.
-         */
-        "visible"?: boolean;
+        "showShadow"?: boolean;
     }
     interface VaCheckbox {
         /**

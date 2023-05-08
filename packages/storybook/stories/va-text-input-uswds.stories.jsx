@@ -202,6 +202,18 @@ WithAnalytics.args = { ...defaultArgs, 'enable-analytics': true };
 export const WithHintText = Template.bind(null);
 WithHintText.args = { ...defaultArgs, hint: 'This is hint text' };
 
+const WithInlineHintTextTemplate = ({ name, label }) => {
+  return (
+    <>
+      <va-text-input name={name} label={label} />
+      <p>If your hint is very short it can be included in the label.</p>
+    </>
+  );
+};
+
+export const WithInlineHintText = WithInlineHintTextTemplate.bind(null);
+WithInlineHintText.args = { ...defaultArgs, label: "My input (with hint)" };
+
 const WithAdditionalInfoTemplate = ({ name, label }) => {
   return (
     <va-text-input name={name} label={label} uswds>

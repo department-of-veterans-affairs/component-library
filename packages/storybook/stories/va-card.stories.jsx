@@ -7,18 +7,6 @@ const cardDocs = getWebComponentDocs('va-card');
 export default {
   title: 'Components/Card',
   id: 'components/va-card',
-  argTypes: {
-    headline: {
-      table: {
-        disable: true,
-      },
-    }, 
-    children: {
-      table: {
-        disable: true,
-      },
-    },
-  },
   parameters: {
     componentSubtitle: `va-card web component`,
     docs: {
@@ -28,33 +16,18 @@ export default {
 };
 
 const defaultArgs = {
-  'visible': true,
-  'close-btn-aria-label': 'Close notification',
-  'closeable': false,
-  'headline': (
-    <h2 slot="headline">Card heading</h2>
-  ),
-  'children': (
-    <div slot="content">
-    <p>Card body</p>
-  </div>
-  )
+  'show-shadow': false,
 };
 
 const Template = ({
-  visible,
-  'close-btn-aria-label': closeBtnAriaLabel,
-  closeable,
-  headline,
-  children,
+  'show-shadow': showShadow,
 }) => (
   <va-card
-    visible={visible}
-    close-btn-aria-label={closeBtnAriaLabel}
-    closeable={closeable}
+    show-shadow={showShadow}
   >
-    {headline}
-    {children}
+    <div slot="content">
+      <p>Example card content</p>
+    </div>
   </va-card>
 );
 
@@ -64,8 +37,8 @@ Default.args = {
 };
 Default.argTypes = propStructure(cardDocs);
 
-export const Dismissable = Template.bind(null);
-Dismissable.args = {
+export const withDropShadow = Template.bind(null);
+withDropShadow.args = {
   ...defaultArgs,
-  closeable: true,
+  'show-shadow': true,
 };
