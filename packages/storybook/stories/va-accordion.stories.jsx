@@ -91,20 +91,12 @@ const TemplateIcons = args => {
         State, the right of the people to keep and bear Arms, shall not be
         infringed.
       </va-accordion-item>
-      <va-accordion-item id="third" level={level} header="Third Amendment With a really long long header that is a thing that we should be planning for" subheader="Third Amendment Subheader With a really long long header that is a thing that we should be planning for">
+      <va-accordion-item id="third" level={level} header="Third Amendment" subheader="Third Amendment Subheader">
          <i slot='icon' className="fas fa-info-circle vads-u-color--green"></i>	
          <i slot="subheader-icon" aria-hidden="true" className="fas fa-envelope"></i>
         No Soldier shall, in time of peace be quartered in any house, without
         the consent of the Owner, nor in time of war, but in a manner to be
         prescribed by law.
-      </va-accordion-item>
-      <va-accordion-item id="third" level={level} header="Fourth Amendment" subheader="Fourth Amendment Subheader">
-         <i slot='icon' className="fas fa-info-circle vads-u-color--green"></i>	
-         <i slot="subheader-icon" aria-hidden="true" className="fas fa-envelope"></i>
-         The right of the people to be secure in their persons, houses, papers, 
-         and effects, against unreasonable searches and seizures, shall not be violated,
-         and no Warrants shall issue, but upon probable cause, supported by Oath or affirmation, 
-         and particularly describing the place to be searched, and the persons or things to be seized.
       </va-accordion-item>
     </va-accordion>
   );

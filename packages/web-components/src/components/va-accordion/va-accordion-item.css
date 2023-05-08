@@ -87,8 +87,8 @@ p.subheader {
 
 ::slotted([slot='icon']),
 ::slotted([slot='subheader-icon']){
-  margin-right: 1rem;
   width: 1rem;
+  margin-right: 1.5rem;
 }
 
 ::slotted([slot='subheader-icon']) {
