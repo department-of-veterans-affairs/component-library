@@ -73,13 +73,13 @@ const TemplateSubheader = args => {
   );
 };
 
-const TemplateIconInHeader = args => {
+const TemplateIcons = args => {
   const { headline, level, ...rest } = args;
   return (
     <va-accordion {...rest}>
       <va-accordion-item id="first">
         {headline}
-        <i slot="icon" className="fas fa-paperclip"></i>
+        <i slot="icon" className="fas fa-paperclip" aria-hidden="true"></i>
         Congress shall make no law respecting an establishment of religion, or
         prohibiting the free exercise thereof; or abridging the freedom of
         speech, or of the press; or the right of the people peaceably to
@@ -91,7 +91,9 @@ const TemplateIconInHeader = args => {
         State, the right of the people to keep and bear Arms, shall not be
         infringed.
       </va-accordion-item>
-      <va-accordion-item id="third" level={level} header="Third Amendment">
+      <va-accordion-item id="third" level={level} header="Third Amendment" subheader="Third Amendment Subheader">
+         <i slot='icon' className="fas fa-info-circle vads-u-color--green"></i>	
+         <i slot="subheader-icon" aria-hidden="true" className="fas fa-envelope"></i>
         No Soldier shall, in time of peace be quartered in any house, without
         the consent of the Owner, nor in time of war, but in a manner to be
         prescribed by law.
@@ -177,8 +179,8 @@ Internationalization.args = {
   ...defaultArgs,
 };
 
-export const IconInHeader = TemplateIconInHeader.bind(null);
-IconInHeader.args = {
+export const UsingIcons = TemplateIcons.bind(null);
+UsingIcons.args = {
   ...defaultArgs,
 };
 
