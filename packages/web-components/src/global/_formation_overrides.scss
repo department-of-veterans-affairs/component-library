@@ -294,7 +294,6 @@
   }
 }
 
-
 .usa-alert {
   border-left-width: rem-override(0.5rem);
   .usa-alert__body {
@@ -309,7 +308,7 @@
 .usa-alert--success, 
 .usa-alert--error {
   .usa-alert__body {
-    padding-left: rem-override(2.9166666667rem);
+    padding-left: rem-override(2.91667rem);
     &::before {
       height: rem-override(2rem);
       width: rem-override(2rem);
