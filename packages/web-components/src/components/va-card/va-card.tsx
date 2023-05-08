@@ -1,18 +1,10 @@
 import { 
-  Component, 
-  Element,
-  Event,
-  EventEmitter,
+  Component,
   Host, 
   Prop, 
   h 
 } from '@stencil/core';
-
-/**
- * Use a heading element with an attribute named slot and a value of "headline" to
- * control what is displayed for the card's headline. Any children passed into
- * this component without a parent slot "headline" will render in the card's body.
- */
+import classnames from 'classnames';
 
 /**
  * @componentName Card
@@ -26,62 +18,24 @@ import {
   shadow: true,
 })
 export class VaCard {
-  @Element() el!: any;
-
   /**
-   * If `true`, the card will be visible.
+   * If `true`, a drop-shadow will be displayed
    */
-  @Prop() visible?: boolean = true;
+  @Prop() showShadow?: boolean = false;
 
-  /**
-   * Aria-label text for the close button.
-   */
-  @Prop() closeBtnAriaLabel?: string = 'Close notification';
-
-  /**
-   * If `true`, a close button will be displayed.
-   */
-  @Prop({ reflect: true }) closeable?: boolean = false;
-
-  /**
-   * Fires when the component is closed by clicking on the close icon. This fires only
-   * when closeable is true.
-   */
-  @Event({
-    composed: true,
-    bubbles: true,
-  })
-  closeEvent: EventEmitter;
-
-  private closeHandler(e: MouseEvent): void {
-    this.closeEvent.emit(e);
-  }
-  
   render() {
     const {
-      visible,
-      closeable,
+      showShadow
     } = this;
 
-    if (!visible) return <div aria-live="polite" />;
+    const classes = classnames('va-card',  {'show-shadow': showShadow});
 
     return (
       <Host>
-        <div class="va-card">
-          <slot name="headline"></slot>
+        <div class={classes}>
           <slot name="content"></slot>
         </div>
-        {closeable && (
-            <button
-              class="va-card-close"
-              aria-label={this.closeBtnAriaLabel}
-              onClick={this.closeHandler.bind(this)}
-            >
-              <i aria-hidden="true" class="fas fa-times-circle" role="presentation" />
-            </button>
-          )}
       </Host>
     );
   }
-
 }
