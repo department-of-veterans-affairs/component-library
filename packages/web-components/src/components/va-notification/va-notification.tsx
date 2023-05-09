@@ -6,6 +6,7 @@ import {
   Prop, 
   h 
 } from '@stencil/core';
+import classnames from 'classnames';
 
 /**
  * @componentName Notification
@@ -23,6 +24,8 @@ export class VaNotification {
    * If `true`, the card will be visible.
    */
   @Prop() visible?: boolean = true;
+
+  @Prop() symbol?: string = 'info';
 
   /**
    * Aria-label text for the close button.
@@ -51,30 +54,34 @@ export class VaNotification {
   render() {
     const {
       visible,
+      symbol,
       closeable
     } = this;
 
     if (!visible) return <div aria-live="polite" />;
 
+    const classes = classnames('va-notification', symbol)
+
     return (
       <Host>
-        <div class="va-notification" role="alert">
-          <va-card show-shadow>
+        <va-card show-shadow>
+          <div class={classes} role="alert">
+            <i aria-hidden="true" role="img" class={symbol}></i>
+            <div class="body" role="presentation">
               <slot></slot>
-              
-              {closeable && (
-                <button
-                  class="va-notification-close"
-                  aria-label={this.closeBtnAriaLabel}
-                  onClick={this.closeHandler.bind(this)}
-                >
-                  <i aria-hidden="true" class="fas fa-times-circle" role="presentation" />
-                </button>
-              )}
-          </va-card>
+            </div>
+          </div>
 
-
-        </div>
+          {closeable && (
+            <button
+              class="va-notification-close"
+              aria-label={this.closeBtnAriaLabel}
+              onClick={this.closeHandler.bind(this)}
+            >
+              <i aria-hidden="true" class="fas fa-times-circle" role="presentation" />
+            </button>
+          )}
+        </va-card>
       </Host>
     );
   }
