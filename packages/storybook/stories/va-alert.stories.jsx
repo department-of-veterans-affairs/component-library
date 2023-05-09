@@ -238,6 +238,32 @@ SignInOrToolPrompt.args = {
   status: 'continue',
 };
 
+export const SignInToStartYourApplication = Template.bind(null);
+SignInToStartYourApplication.args = {
+  ...defaultArgs,
+  headline: (
+    <h2 slot="headline">
+      Sign in now to save time and save your work in progress
+    </h2>
+  ),
+  children: (
+    <div>
+      <p className="vads-u-margin-top--0">
+        Here's how signing in now helps you:
+      </p>
+      <ul>
+        <li>We can fill in some of your information for you to save you time.</li>
+        <li>You can save your work in progress. You'll have 60 days from when you start or make updates to your application to come back and finish it.</li>
+      </ul>
+      <p><strong>Note:</strong> You can sign in after you start your application. But you'll lose any information you already filled in.</p>
+      <button className="usa-button-primary vads-u-margin-bottom--2">Sign in to start your application</button>
+      <p className="vads-u-margin-top--0 vads-u-margin-bottom--1">
+        <a href="#start">Start your application without signing in</a>
+      </p>
+    </div>
+  )
+};
+
 export const Success = Template.bind(null);
 Success.args = {
   ...defaultArgs,
