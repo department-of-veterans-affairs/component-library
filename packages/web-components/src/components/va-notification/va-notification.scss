@@ -1,0 +1,40 @@
+:host {
+    display: block;
+    position: relative;
+}
+
+:host ::slotted([slot='headline']) {
+    font-size: 2rem !important;
+    line-height: 26px !important;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+:host i {
+    font-family: 'Font Awesome 5 Free';
+    font-size: 2.4rem;
+    font-style: normal;
+    font-weight: 900;
+    line-height: 1;
+}
+
+i.fa-times-circle::before {
+    content: '\F057'; /* fa-times-circle*/
+}
+
+.va-notification-close {
+    margin: 1.6rem;
+    padding: 0px;
+    width: auto;
+    color: var(--color-gray-dark);
+    font-size: 2.25rem;
+    appearance: none;
+    border: 0px;
+    cursor: pointer;
+    background: transparent;
+    display: block;
+    position: absolute;
+    right: 0px;
+    top: 0px;
+}
+

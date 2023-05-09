@@ -1,6 +1,5 @@
 import { 
   Component, 
-  Element,
   Event,
   EventEmitter,
   Host, 
@@ -20,8 +19,6 @@ import {
   shadow: true,
 })
 export class VaNotification {
-  @Element() el!: any;
-
   /**
    * If `true`, the card will be visible.
    */
@@ -30,13 +27,13 @@ export class VaNotification {
   /**
    * Aria-label text for the close button.
    */
-  @Prop() closeBtnAriaLabel?: string = 'Close notification';
+    @Prop() closeBtnAriaLabel?: string = 'Close notification';
 
   /**
    * If `true`, a close button will be displayed.
    */
   @Prop({ reflect: true }) closeable?: boolean = false;
-
+  
   /**
    * Fires when the component is closed by clicking on the close icon. This fires only
    * when closeable is true.
@@ -46,21 +43,38 @@ export class VaNotification {
     bubbles: true,
   })
   closeEvent: EventEmitter;
-  
+
+  private closeHandler(e: MouseEvent): void {
+    this.closeEvent.emit(e);
+  }
+
   render() {
     const {
       visible,
-      closeable,
+      closeable
     } = this;
 
     if (!visible) return <div aria-live="polite" />;
 
     return (
       <Host>
-        <va-card 
-          closeable = {closeable}
-        >
-        </va-card>
+        <div class="va-notification" role="alert">
+          <va-card show-shadow>
+              <slot></slot>
+              
+              {closeable && (
+                <button
+                  class="va-notification-close"
+                  aria-label={this.closeBtnAriaLabel}
+                  onClick={this.closeHandler.bind(this)}
+                >
+                  <i aria-hidden="true" class="fas fa-times-circle" role="presentation" />
+                </button>
+              )}
+          </va-card>
+
+
+        </div>
       </Host>
     );
   }

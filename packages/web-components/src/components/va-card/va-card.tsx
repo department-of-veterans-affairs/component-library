@@ -33,7 +33,7 @@ export class VaCard {
     return (
       <Host>
         <div class={classes}>
-          <slot name="content"></slot>
+          <slot></slot>
         </div>
       </Host>
     );

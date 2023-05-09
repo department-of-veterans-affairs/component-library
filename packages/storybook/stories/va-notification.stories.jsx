@@ -32,12 +32,10 @@ const defaultArgs = {
   'close-btn-aria-label': 'Close notification',
   'closeable': false,
   'headline': (
-    <h2 slot="headline"> heading</h2>
+    <h2>Notification heading</h2>
   ),
   'children': (
-    <div slot="content">
-    <p> body</p>
-  </div>
+     <p>Notification body</p>
   )
 };
 
@@ -47,16 +45,18 @@ const Template = ({
   closeable,
   headline,
   children,
-}) => (
-  <va-notification
-    visible={visible}
-    close-btn-aria-label={closeBtnAriaLabel}
-    closeable={closeable}
-  >
-    {headline}
-    {children}
-  </va-notification>
-);
+}) => {
+  return (
+    <va-notification
+      visible={visible}
+      closeable={closeable}
+      closeBtnAriaLabel={closeBtnAriaLabel}
+    >
+      {headline}
+      {children}
+    </va-notification>
+  )
+  };
 
 export const Default = Template.bind(null);
 Default.args = {
