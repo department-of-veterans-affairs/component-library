@@ -29,20 +29,24 @@ export default {
 
 const defaultArgs = {
   'visible': true,
-  'symbol': 'info',
+  'symbol': 'none',
+  'href': 'https://www.va.gov/',
+  'text': 'Manage your notifications',
   'close-btn-aria-label': 'Close notification',
   'closeable': true,
   'headline': (
-    <h3 class="va-notification-headline">Notification heading</h3>
+    <h3 part="headline">Notification heading</h3>
   ),
   'children': (
      <p>Notification body</p>
-  )
+  ),
 };
 
 const Template = ({
   visible,
   symbol,
+  href,
+  text,
   'close-btn-aria-label': closeBtnAriaLabel,
   closeable,
   headline,
@@ -52,11 +56,14 @@ const Template = ({
     <va-notification
       visible={visible}
       symbol={symbol}
+      href={href}
+      text={text}
       closeable={closeable}
       closeBtnAriaLabel={closeBtnAriaLabel}
     >
       {headline}
       {children}
+      <va-link href={href} active text={text}/>
     </va-notification>
   )
   };
@@ -71,32 +78,34 @@ export const ActionRequired = Template.bind(null);
 ActionRequired.args = {
   ...defaultArgs,
   headline: (
-    <h3 class="va-notification-headline">
+    <h3 part="headline">
       You have a new education debt.
     </h3>
   ),
   children: (
-    <p className="vads-u-margin-y--0">
-      Date here
+    <p class="vads-u-margin-top--0">
+      <time datetime="2023-05-1 13:13:00">Wednesday, May 11 at 1:13pm</time>
     </p>
   ),
   symbol: 'action-required',
+  text: 'Manage your VA debt'
 };
 
 export const Update = Template.bind(null);
 Update.args = {
   ...defaultArgs,
   headline: (
-    <h3>
+    <h3 part="headline">
       Your claim status has been updated.
     </h3>
   ),
   children: (
-    <p className="vads-u-margin-y--0">
-      Date here
+    <p class="vads-u-margin-top--0">
+      <time datetime="2023-05-09 16:00:00">Monday, May 9 at 4:00pm</time>
     </p>
   ),
   symbol: 'update',
+  text: 'Manage your claims and appeals'
 };
 
 export const NotDismissable = Template.bind(null);

@@ -1,5 +1,6 @@
 import { 
   Component, 
+  Element,
   Event,
   EventEmitter,
   Host, 
@@ -20,12 +21,18 @@ import classnames from 'classnames';
   shadow: true,
 })
 export class VaNotification {
+  @Element() el!: any;
+
   /**
    * If `true`, the card will be visible.
    */
   @Prop() visible?: boolean = true;
 
-  @Prop() symbol?: string = 'info';
+  /**
+   * Symbol indicates type of notification 
+   * Current options are: action-required, update
+   */
+  @Prop() symbol?: string = 'none';
 
   /**
    * Aria-label text for the close button.
