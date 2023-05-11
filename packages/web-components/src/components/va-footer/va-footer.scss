@@ -1,0 +1,37 @@
+:host {
+  background-color: var(--color-primary-darkest);
+  color: var(--color-white);
+  display: block;
+}
+
+.footer-content {
+  display: flex;
+  max-width: 1024px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+h2 {
+  font-family: var(--font-serif);
+  font-size: 17px;
+}
+
+ul {
+  padding-left: 0;
+  margin-top: 0;
+  li {
+    list-style: none;
+  }
+}
+
+va-link::part(anchor) {
+  color: var(--color-white);
+  &:hover {
+    background-color: unset;
+    color: var(--color-gold);
+  }
+}
+
+.link-column {
+  margin-top: 52px;
+}

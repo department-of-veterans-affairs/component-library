@@ -122,7 +122,7 @@ export class VaLink {
     if (active) {
       return (
         <Host>
-          <a href={href} onClick={handleClick}>
+          <a href={href} onClick={handleClick} part="anchor">
             {text}
             <i aria-hidden="true" />
           </a>
@@ -134,7 +134,7 @@ export class VaLink {
     if (channel || video) {
       return (
         <Host>
-          <a href={href} onClick={handleClick} rel="noopener" target="_blank">
+          <a href={href} onClick={handleClick} rel="noopener" target="_blank" part="anchor">
             <i aria-hidden="true" />
             {text} <dfn>{channel ? 'YouTube' : 'on YouTube'}</dfn>
           </a>
@@ -146,7 +146,7 @@ export class VaLink {
     if (calendar) {
       return (
         <Host>
-         <a href={href} download={filename} onClick={handleClick}>
+         <a href={href} download={filename} onClick={handleClick} part="anchor">
           <i aria-hidden="true" />
           {text}
         </a>
@@ -158,7 +158,7 @@ export class VaLink {
     if (download) {
       return (
         <Host>
-          <a href={href} download={filename} onClick={handleClick}>
+          <a href={href} download={filename} onClick={handleClick} part="anchor">
             <i aria-hidden="true" />
             {text}{' '}
             {filetype && (
@@ -175,7 +175,7 @@ export class VaLink {
     // Default
     return (
       <Host>
-        <a href={href} onClick={handleClick}>
+        <a href={href} onClick={handleClick} part="anchor">
           {text}
         </a>
       </Host>

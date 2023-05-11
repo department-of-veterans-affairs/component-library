@@ -371,6 +371,8 @@ export namespace Components {
          */
         "required"?: boolean;
     }
+    interface VaFooter {
+    }
     interface VaLink {
         /**
           * The title used in the abbr element. If filetype is PDF, the abbr title will be Portable Document Format.
@@ -1245,6 +1247,12 @@ declare global {
         prototype: HTMLVaFileInputElement;
         new (): HTMLVaFileInputElement;
     };
+    interface HTMLVaFooterElement extends Components.VaFooter, HTMLStencilElement {
+    }
+    var HTMLVaFooterElement: {
+        prototype: HTMLVaFooterElement;
+        new (): HTMLVaFooterElement;
+    };
     interface HTMLVaLinkElement extends Components.VaLink, HTMLStencilElement {
     }
     var HTMLVaLinkElement: {
@@ -1405,6 +1413,7 @@ declare global {
         "va-date": HTMLVaDateElement;
         "va-featured-content": HTMLVaFeaturedContentElement;
         "va-file-input": HTMLVaFileInputElement;
+        "va-footer": HTMLVaFooterElement;
         "va-link": HTMLVaLinkElement;
         "va-loading-indicator": HTMLVaLoadingIndicatorElement;
         "va-memorable-date": HTMLVaMemorableDateElement;
@@ -1880,6 +1889,8 @@ declare namespace LocalJSX {
           * Sets the input to required and renders the (*Required) text.
          */
         "required"?: boolean;
+    }
+    interface VaFooter {
     }
     interface VaLink {
         /**
@@ -2671,6 +2682,7 @@ declare namespace LocalJSX {
         "va-date": VaDate;
         "va-featured-content": VaFeaturedContent;
         "va-file-input": VaFileInput;
+        "va-footer": VaFooter;
         "va-link": VaLink;
         "va-loading-indicator": VaLoadingIndicator;
         "va-memorable-date": VaMemorableDate;
@@ -2716,6 +2728,7 @@ declare module "@stencil/core" {
             "va-date": LocalJSX.VaDate & JSXBase.HTMLAttributes<HTMLVaDateElement>;
             "va-featured-content": LocalJSX.VaFeaturedContent & JSXBase.HTMLAttributes<HTMLVaFeaturedContentElement>;
             "va-file-input": LocalJSX.VaFileInput & JSXBase.HTMLAttributes<HTMLVaFileInputElement>;
+            "va-footer": LocalJSX.VaFooter & JSXBase.HTMLAttributes<HTMLVaFooterElement>;
             "va-link": LocalJSX.VaLink & JSXBase.HTMLAttributes<HTMLVaLinkElement>;
             "va-loading-indicator": LocalJSX.VaLoadingIndicator & JSXBase.HTMLAttributes<HTMLVaLoadingIndicatorElement>;
             "va-memorable-date": LocalJSX.VaMemorableDate & JSXBase.HTMLAttributes<HTMLVaMemorableDateElement>;
