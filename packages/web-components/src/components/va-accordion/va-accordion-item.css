@@ -68,10 +68,16 @@ button[aria-expanded='false'] {
   background-image: url('../../assets/plus.svg');
 }
 
-p {
+.header-text{
+  display: flex;
+}
+
+p.subheader {
   font-weight: 400;
   line-height: 26px;
   margin: 0;
+  margin-top: 0.25rem;
+  display: flex;
 }
 
 /* Hiding since element would be duplicated via the Shadow DOM */
@@ -79,6 +85,12 @@ p {
   display: none;
 }
 
-::slotted([slot='icon']){
-  margin-right: 1rem;
+::slotted([slot='icon']),
+::slotted([slot='subheader-icon']){
+  width: 1rem;
+  margin-right: 1.5rem;
+}
+
+::slotted([slot='subheader-icon']) {
+  margin-top: 0.5rem;
 }

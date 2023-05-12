@@ -8,8 +8,8 @@ import classnames from 'classnames';
 
 /**
  * @componentName Card
- * @maturityCategory dont_use
- * @maturityLevel proposed
+ * @maturityCategory caution
+ * @maturityLevel candidate
  */
 
 @Component({

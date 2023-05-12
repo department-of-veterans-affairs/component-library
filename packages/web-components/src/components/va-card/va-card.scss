@@ -1,7 +1,7 @@
-.va-card {
+:host {
   border: 1px solid var(--color-gray-medium);
   background-color: var(--color-white);
-  padding: 1.6rem;
+  padding: 16px;
 }
 
 .show-shadow {

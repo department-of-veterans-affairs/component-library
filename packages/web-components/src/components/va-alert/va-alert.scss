@@ -171,7 +171,9 @@ i.fa-times-circle::before {
 }
 
 :host(:not([uswds])[full-width='']) div.alert,
-:host(:not([uswds])[full-width='true']) div.alert {
+:host(:not([uswds])[full-width='true']) div.alert,
+:host(:not([uswds])[full-width=''][data-role="banner"]) div.alert,
+:host(:not([uswds])[full-width='true'][data-role="banner"]) div.alert {
   border-left: none;
   max-width: 1000px;
 }
