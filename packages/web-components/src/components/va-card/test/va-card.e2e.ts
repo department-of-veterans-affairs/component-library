@@ -12,7 +12,7 @@ describe('va-card', () => {
             <va-card class="hydrated">
             <mock:shadow-root>
                 <div class="va-card">
-                    <slot name="content"></slot>
+                    <slot></slot>
                 </div>
             </mock:shadow-root>
             </va-card>
