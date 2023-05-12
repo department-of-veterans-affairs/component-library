@@ -55,10 +55,23 @@ This repo follows [semantic versioning](https://semver.org/). Here are some exam
 
 ### Releasing
 
-**If you are not part of the Design System team, please submit a support request in #vfs-platform-support to the Design System Team requesting to create a new release with your changes.**
+Releases will occur no less often than at the beginning of each sprint (every other Wednesday), and may additionally be performed as-needed when critical bug fixes need to go out. Please reach out to us via #vfs-platform-support or #platform-design-system if you have a need for an unscheduled release.
 
 **For Design System Team only:**
-If the version numbers have been updated in `main` and you're ready to publish, [draft a new release](https://github.com/department-of-veterans-affairs/component-library/releases) where the tag follows the [`vX.Y.Z` semantic versioning structure](https://semver.org/). This tag should match the version found in `packages/core/package.json`. After creating a new tag, click the Generate release notes button. Verify the release notes look correct, and then click the Publish release button. Once a release is created, an attempt will be made to automatically publish the package(s) to npm using a GitHub action.
+
+1. If you are unsure if a new release should be created, check with the Release Manager and/or the rest of the team first, to make sure it's worth the effort at this time.
+2. Get the version number from `packages/core/package.json`, ensuring it's up-to-date and new.
+3. From the [repo's homepage](https://github.com/department-of-veterans-affairs/component-library) click on "Releases" in the right-hand sidebar.
+4. Click on the "Draft a new release" button near the top of the page.
+5. Click on the 'Choose a tag' drop-down and type the letter `v` followed by the new "core" version number (should look like `v16.1.0`). The target should remain `main`.
+6. For the release title, type the same thing you entered for the tag (`v{versionNumber}`).
+7. Click on the "Generate release notes" button. If the button is disabled, double-check that the tag/version number is correct and hasn't been released before.
+8. Review the release notes for any typos and/or unneeded notes. Remember that these release notes are intended for public use, so they should be professional in their tone and appearance.
+9. Take a screenshot of the release notes and post in the `#vsp-dst-engineers` channel on slack; ask for others to double-check that everything looks good and that there aren't any last-minute additions to the release that need to be included.
+10. Back in GitHub, ensure the "Set as the latest release" checkbox is checked.
+11. Press the "Publish release" button. GitHub Actions will take care of any necessary build and publishing steps.
+12. If [vets-website](https://github.com/department-of-veterans-affairs/vets-website) will need to take advantage of the latest release sooner than later, open a PR to update the dependency version there (update your local copy and then submit a PR to merge the latest version bump).
+13. Finally, go to your local copy of the [vets-design-system-documentation](https://github.com/department-of-veterans-affairs/vets-design-system-documentation) repo and update the version requirement, submitting a PR for that as well.
 
 # Running Build via Storybook
 
