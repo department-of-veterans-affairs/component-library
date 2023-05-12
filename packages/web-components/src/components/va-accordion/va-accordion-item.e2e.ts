@@ -15,7 +15,9 @@ describe('va-accordion-item', () => {
       <mock:shadow-root>
         <h2>
           <button aria-controls="content" aria-expanded="false" part="accordion-header">
-             <slot name="icon"></slot>
+            <span class="header-text">
+              <slot name="icon"></slot>
+            </span>
           </button>
         </h2>
         <slot name="headline"></slot>
@@ -53,7 +55,6 @@ describe('va-accordion-item', () => {
 
     expect(header.nodeName).toEqual('H6');
   });
-
 
   it('passes an axe check when open', async () => {
     const page = await newE2EPage();
@@ -158,6 +159,71 @@ describe('va-accordion-item', () => {
 
     expect(subheader).toEqualText('The subheader');
   });
+
+  it("render the sub header icon", async () => {
+    const page = await newE2EPage();
+    await page.setContent(
+      '<va-accordion-item header="The header" subheader="The subheader"><i slot="subheader-icon" aria-hidden="true" className="fas fa-envelope"></i>Content inside</va-accordion-item>',
+    );
+    const element = await page.find('va-accordion-item');
+    expect(element).toEqualHtml(
+      `<va-accordion-item class="hydrated" header="The header" subheader="The subheader">
+        <mock:shadow-root>
+        <h2>
+          <button aria-controls="content" aria-expanded="false" part="accordion-header">
+            <span class="header-text">
+              <slot name="icon"></slot>
+              The header
+            </span>
+            <p class="subheader" part="accordion-subheader">
+              <slot name="subheader-icon"></slot>
+              The subheader
+            </p>
+          </button>
+        </h2>
+        <slot name="headline"></slot>
+        <div id="content" tabindex="0">
+          <slot></slot>
+        </div>
+      </mock:shadow-root>
+      <i aria-hidden="true" classname="fas fa-envelope" slot="subheader-icon"></i>
+      Content inside
+    </va-accordion-item>`);
+  });
+  it("does not render the sub header icon if there is no sub header", async () => {
+    const page = await newE2EPage();
+    await page.setContent(
+      '<va-accordion-item header="The header"><i slot="subheader-icon" aria-hidden="true" className="fas fa-envelope"></i>Content inside</va-accordion-item>',
+    );
+    const element = await page.find('va-accordion-item');
+    expect(element).toEqualHtml(`<va-accordion-item class="hydrated" header="The header">
+      <mock:shadow-root>
+        <h2>
+          <button aria-controls="content" aria-expanded="false" part="accordion-header">
+            <span class="header-text">
+              <slot name="icon"></slot>
+              The header
+            </span>
+          </button>
+        </h2>
+        <slot name="headline"></slot>
+        <div id="content" tabindex="0">
+          <slot></slot>
+        </div>
+      </mock:shadow-root>
+      <i aria-hidden="true" classname="fas fa-envelope" slot="subheader-icon"></i>
+      Content inside
+    </va-accordion-item>`);
+  });
+  it('passes axe check with subheader icon', async () => {
+    const page = await newE2EPage();
+    await page.setContent(
+      '<va-accordion-item header="The header" subheader="The subheader"><i slot="subheader-icon" aria-hidden="true" className="fas fa-envelope"></i>Content inside</va-accordion-item>',
+    );
+
+    await axeCheck(page);
+
+  })
 
   // Skipping Test until fix can be found via ticket 33479
   // Test sometimes succeeds and other times fails
