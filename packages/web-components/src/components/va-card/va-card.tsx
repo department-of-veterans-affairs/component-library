@@ -8,8 +8,8 @@ import classnames from 'classnames';
 
 /**
  * @componentName Card
- * @maturityCategory dont_use
- * @maturityLevel proposed
+ * @maturityCategory caution
+ * @maturityLevel candidate
  */
 
 @Component({
@@ -33,7 +33,7 @@ export class VaCard {
     return (
       <Host>
         <div class={classes}>
-          <slot name="content"></slot>
+          <slot></slot>
         </div>
       </Host>
     );
