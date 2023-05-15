@@ -25,9 +25,7 @@ const Template = ({
   <va-card
     show-shadow={showShadow}
   >
-    <div slot="content">
-      <p>Example card content</p>
-    </div>
+    <p>Example card content</p>
   </va-card>
 );
 
