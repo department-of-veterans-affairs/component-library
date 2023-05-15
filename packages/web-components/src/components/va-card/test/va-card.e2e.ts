@@ -9,12 +9,10 @@ describe('va-card', () => {
         const element = await page.find('va-card');
     
         expect(element).toEqualHtml(`
-            <va-card class="hydrated">
-            <mock:shadow-root>
-                <div class="va-card">
+            <va-card class="hydrated va-card">
+                <mock:shadow-root>
                     <slot></slot>
-                </div>
-            </mock:shadow-root>
+                </mock:shadow-root>
             </va-card>
       `);
 
@@ -25,7 +23,7 @@ describe('va-card', () => {
         const page = await newE2EPage();
     
         await page.setContent('<va-card show-shadow="true"></va-card>');
-        const element = await page.find('va-card >>> div');
+        const element = await page.find('va-card');
     
         expect(element).toHaveClass('show-shadow');
 
@@ -35,7 +33,7 @@ describe('va-card', () => {
         const page = await newE2EPage();
 
         await page.setContent(
-          `<va-card><h3 slot="headline">Card</h3>Card content</va-card>`,
+          `<va-card><h3>Card</h3><p>Card content</p></va-card>`,
         );
     
         await axeCheck(page);

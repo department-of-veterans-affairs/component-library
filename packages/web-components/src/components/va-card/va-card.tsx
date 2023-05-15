@@ -31,10 +31,8 @@ export class VaCard {
     const classes = classnames('va-card',  {'show-shadow': showShadow});
 
     return (
-      <Host>
-        <div class={classes}>
-          <slot></slot>
-        </div>
+      <Host class={classes}>
+        <slot></slot>
       </Host>
     );
   }
