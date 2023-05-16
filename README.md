@@ -67,7 +67,7 @@ Releases will occur no less often than at the beginning of each sprint (every ot
 6. For the release title, type the same thing you entered for the tag (`v{versionNumber}`).
 7. Click on the "Generate release notes" button. If the button is disabled, double-check that the tag/version number is correct and hasn't been released before.
 8. Review the release notes for any typos and/or unneeded notes. Remember that these release notes are intended for public use, so they should be professional in their tone and appearance.
-9. Take a screenshot of the release notes and post in the `#vsp-dst-engineers` channel on slack; ask for others to double-check that everything looks good and that there aren't any last-minute additions to the release that need to be included.
+9. Take a screenshot of the release notes and post in the `#vsp-design-system-team` channel on slack; ask for others to double-check that everything looks good and that there aren't any last-minute additions to the release that need to be included.
 10. Back in GitHub, ensure the "Set as the latest release" checkbox is checked.
 11. Press the "Publish release" button. GitHub Actions will take care of any necessary build and publishing steps.
 12. If [vets-website](https://github.com/department-of-veterans-affairs/vets-website) will need to take advantage of the latest release sooner than later, open a PR to update the dependency version there (update your local copy and then submit a PR to merge the latest version bump).
