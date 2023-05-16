@@ -71,7 +71,7 @@ export class VaNotification {
 
     return (
       <Host>
-        <va-card show-shadow>
+        <va-card show-shadow="true">
           <div class={classes} role="alert">
             <i aria-hidden="true" role="img" class={symbol}></i>
             <div class="body" role="presentation">
