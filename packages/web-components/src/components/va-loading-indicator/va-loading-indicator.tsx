@@ -101,12 +101,6 @@ export class VaLoadingIndicator {
     });
   }
 
-  disconnectedCallback() {
-    // Don't disconnect the observer before the callback runs
-    const observer = this.observer;
-    setTimeout(() => observer.disconnect());
-  }
-
   render() {
     const { message, label } = this;
 
