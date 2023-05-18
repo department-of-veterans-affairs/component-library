@@ -95,7 +95,7 @@ export class VaNotification {
             <div class="body" role="presentation">
               <slot></slot>
               {href && text && (
-                <va-link active href={href}  text={text} />
+                <va-link active href={href} text={text} />
               )}
             </div>
           </div>

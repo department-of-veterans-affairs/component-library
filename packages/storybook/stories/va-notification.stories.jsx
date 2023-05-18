@@ -71,8 +71,6 @@ const Template = ({
 };
 
 const MultipleTemplate = ({
-  href,
-  text,
   'close-btn-aria-label': closeBtnAriaLabel,
   closeable,
   'has-border': hasBorder,
@@ -91,8 +89,8 @@ const MultipleTemplate = ({
         <h3 part="headline">
           You have a new education debt.
         </h3>
-        <p class="vads-u-margin-top--0">
-          <time datetime="2023-05-1 13:13:00">Wednesday, May 11 at 1:13pm</time>
+        <p className="vads-u-margin-top--0">
+          <time dateTime="2023-05-1 13:13:00">Wednesday, May 11 at 1:13pm</time>
         </p>
       </va-notification>
       <va-notification
@@ -107,8 +105,8 @@ const MultipleTemplate = ({
         <h3 part="headline">
           Your claim status has been updated.
         </h3>
-        <p class="vads-u-margin-top--0">
-          <time datetime="2023-05-09 16:00:00">Monday, May 9 at 4:00pm</time>
+        <p className="vads-u-margin-top--0">
+          <time dateTime="2023-05-09 16:00:00">Monday, May 9 at 4:00pm</time>
         </p>
       </va-notification>
     </>
@@ -130,8 +128,8 @@ ActionRequired.args = {
     </h3>
   ),
   children: (
-    <p class="vads-u-margin-top--0">
-      <time datetime="2023-05-1 13:13:00">Wednesday, May 11 at 1:13pm</time>
+    <p className="vads-u-margin-top--0">
+      <time dateTime="2023-05-1 13:13:00">Wednesday, May 11 at 1:13pm</time>
     </p>
   ),
   symbol: 'action-required',
@@ -147,8 +145,8 @@ Update.args = {
     </h3>
   ),
   children: (
-    <p class="vads-u-margin-top--0">
-      <time datetime="2023-05-09 16:00:00">Monday, May 9 at 4:00pm</time>
+    <p className="vads-u-margin-top--0">
+      <time dateTime="2023-05-09 16:00:00">Monday, May 9 at 4:00pm</time>
     </p>
   ),
   symbol: 'update',
@@ -170,8 +168,8 @@ NoBorder.args = {
     </h3>
   ),
   children: (
-    <p class="vads-u-margin-top--0">
-      <time datetime="2023-05-1 13:13:00">Wednesday, May 11 at 1:13pm</time>
+    <p className="vads-u-margin-top--0">
+      <time dateTime="2023-05-1 13:13:00">Wednesday, May 11 at 1:13pm</time>
     </p>
   ),
   symbol: 'action-required',
