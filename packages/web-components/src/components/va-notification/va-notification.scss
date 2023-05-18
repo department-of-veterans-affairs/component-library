@@ -3,6 +3,11 @@
     position: relative;
 }
 
+:host([has-border='false']) > va-card {
+    border: none !important;
+    box-shadow: none !important;
+}
+
 :host i {
     font-family: 'Font Awesome 5 Free';
     font-style: normal;
@@ -28,6 +33,8 @@ i.update::before {
     font-size: 3.2rem;
 }
 
+/** .va-notification is the div inside of va-card slot **/
+
 .va-notification {
     display: table;
     width: 100%;
@@ -46,8 +53,9 @@ slot::slotted([part="headline"]) {
     line-height: 2.2rem !important;
     padding-left: 0 !important;
     margin: 0 !important;
-
 }
+
+/** Close button **/
 
 .va-notification-close {
     margin: 1.8rem 1.2rem;

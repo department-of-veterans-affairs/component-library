@@ -549,9 +549,21 @@ export namespace Components {
          */
         "closeable"?: boolean;
         /**
+          * If `false`, card will not have border
+         */
+        "hasBorder"?: boolean;
+        /**
+          * Destination URL for link (optional)
+         */
+        "href"?: string;
+        /**
           * Symbol indicates type of notification  Current options are: action-required, update
          */
         "symbol"?: string;
+        /**
+          * Text for destination link (optional)
+         */
+        "text"?: string;
         /**
           * If `true`, the card will be visible.
          */
@@ -2137,6 +2149,14 @@ declare namespace LocalJSX {
          */
         "closeable"?: boolean;
         /**
+          * If `false`, card will not have border
+         */
+        "hasBorder"?: boolean;
+        /**
+          * Destination URL for link (optional)
+         */
+        "href"?: string;
+        /**
           * Fires when the component is closed by clicking on the close icon. This fires only when closeable is true.
          */
         "onCloseEvent"?: (event: VaNotificationCustomEvent<any>) => void;
@@ -2144,6 +2164,10 @@ declare namespace LocalJSX {
           * Symbol indicates type of notification  Current options are: action-required, update
          */
         "symbol"?: string;
+        /**
+          * Text for destination link (optional)
+         */
+        "text"?: string;
         /**
           * If `true`, the card will be visible.
          */

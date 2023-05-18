@@ -37,12 +37,27 @@ export class VaNotification {
   /**
    * Aria-label text for the close button.
    */
-    @Prop() closeBtnAriaLabel?: string = 'Close notification';
+  @Prop() closeBtnAriaLabel?: string = 'Close notification';
 
   /**
    * If `true`, a close button will be displayed.
    */
   @Prop({ reflect: true }) closeable?: boolean = false;
+
+  /**
+   * If `false`, card will not have border
+   */
+  @Prop({ reflect: true }) hasBorder?: boolean = true;
+
+  /**
+   * Destination URL for link (optional)
+   */
+    @Prop() href?: string = '';
+
+  /**
+   * Text for destination link (optional)
+   */
+    @Prop() text?: string = '';
   
   /**
    * Fires when the component is closed by clicking on the close icon. This fires only
@@ -62,12 +77,15 @@ export class VaNotification {
     const {
       visible,
       symbol,
-      closeable
+      href,
+      text,
+      closeable,
+      hasBorder
     } = this;
 
     if (!visible) return <div aria-live="polite" />;
 
-    const classes = classnames('va-notification', symbol)
+    const classes = classnames('va-notification', symbol, { 'has-border': hasBorder })
 
     return (
       <Host>
@@ -76,6 +94,9 @@ export class VaNotification {
             <i aria-hidden="true" role="img" class={symbol}></i>
             <div class="body" role="presentation">
               <slot></slot>
+              {href && text && (
+                <va-link active href={href}  text={text} />
+              )}
             </div>
           </div>
 
