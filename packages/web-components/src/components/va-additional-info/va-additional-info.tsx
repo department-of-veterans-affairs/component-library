@@ -9,6 +9,7 @@ import {
   State,
   h,
 } from '@stencil/core';
+import classnames from 'classnames';
 
 /**
  * @componentName Additional info
@@ -29,7 +30,10 @@ export class VaAdditionalInfo {
    * The text to trigger the expansion
    */
   @Prop() trigger!: string;
-
+  /**
+   * Whether or not the component will use USWDS v3 styling.
+   */
+  @Prop() uswds?: boolean = false;
   /**
    * If `true`, doesn't fire the CustomEvent which can be used for analytics tracking.
    */
@@ -96,25 +100,52 @@ export class VaAdditionalInfo {
   }
 
   render() {
-    return (
-      <Host>
-        <a
-          role="button"
-          aria-controls="info"
-          aria-expanded={this.open ? 'true' : 'false'}
-          tabIndex={0}
-          onClick={this.toggleOpen.bind(this)}
-          onKeyDown={this.handleKeydown.bind(this)}
-        >
-          <div>
-            <span class="additional-info-title">{this.trigger}</span>
-            <i class="fa-angle-down" role="presentation" />
+    if (this.uswds) {
+      const infoClass = classnames({
+        'open': this.open,
+        'closed': !this.open
+      });
+      return (
+        <Host>
+          <a
+            role="button"
+            aria-controls="info"
+            aria-expanded={this.open ? 'true' : 'false'}
+            tabIndex={0}
+            onClick={this.toggleOpen.bind(this)}
+            onKeyDown={this.handleKeydown.bind(this)}
+          >
+            <div>
+              <span class="additional-info-title">{this.trigger}</span>
+              <i class="fa-angle-down" role="presentation" />
+            </div>
+          </a>
+          <div id="info" class={`${infoClass}`}>
+            <slot></slot>
           </div>
-        </a>
-        <div id="info" class={this.open ? 'open' : 'closed'}>
-          <slot></slot>
-        </div>
-      </Host>
-    );
+        </Host>
+      );
+    } else {
+      return (
+        <Host>
+          <a
+            role="button"
+            aria-controls="info"
+            aria-expanded={this.open ? 'true' : 'false'}
+            tabIndex={0}
+            onClick={this.toggleOpen.bind(this)}
+            onKeyDown={this.handleKeydown.bind(this)}
+          >
+            <div>
+              <span class="additional-info-title">{this.trigger}</span>
+              <i class="fa-angle-down" role="presentation" />
+            </div>
+          </a>
+          <div id="info" class={this.open ? 'open' : 'closed'}>
+            <slot></slot>
+          </div>
+        </Host>
+      );
+    }
   }
 }

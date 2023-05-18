@@ -55,6 +55,10 @@ export namespace Components {
           * The text to trigger the expansion
          */
         "trigger": string;
+        /**
+          * Whether or not the component will use USWDS v3 styling.
+         */
+        "uswds"?: boolean;
     }
     interface VaAlert {
         /**
@@ -1493,6 +1497,10 @@ declare namespace LocalJSX {
           * The text to trigger the expansion
          */
         "trigger": string;
+        /**
+          * Whether or not the component will use USWDS v3 styling.
+         */
+        "uswds"?: boolean;
     }
     interface VaAlert {
         /**
