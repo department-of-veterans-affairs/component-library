@@ -553,6 +553,10 @@ export namespace Components {
          */
         "hasBorder"?: boolean;
         /**
+          * If `false`, card will not have the word "CLOSE" next to close icon
+         */
+        "hasCloseText"?: boolean;
+        /**
           * Destination URL for link (optional)
          */
         "href"?: string;
@@ -2152,6 +2156,10 @@ declare namespace LocalJSX {
           * If `false`, card will not have border
          */
         "hasBorder"?: boolean;
+        /**
+          * If `false`, card will not have the word "CLOSE" next to close icon
+         */
+        "hasCloseText"?: boolean;
         /**
           * Destination URL for link (optional)
          */

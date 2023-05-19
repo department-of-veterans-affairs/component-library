@@ -33,6 +33,7 @@ const defaultArgs = {
   'close-btn-aria-label': 'Close notification',
   'closeable': true,
   'has-border': true,
+  'has-close-text': false,
   'headline': (
     <h3 part="headline">Notification heading</h3>
   ),
@@ -51,6 +52,7 @@ const Template = ({
   'close-btn-aria-label': closeBtnAriaLabel,
   closeable,
   'has-border': hasBorder,
+  'has-close-text': hasCloseText,
   headline,
   children,
 }) => {
@@ -62,6 +64,7 @@ const Template = ({
       text={text}
       closeable={closeable}
       has-border={hasBorder}
+      has-close-text={hasCloseText}
       closeBtnAriaLabel={closeBtnAriaLabel}
     >
       {headline}
@@ -85,6 +88,7 @@ const MultipleTemplate = ({
         closeable={closeable}
         has-border={hasBorder}
         closeBtnAriaLabel={closeBtnAriaLabel}
+        class="vads-u-margin-bottom--1p5"
       >
         <h3 part="headline">
           You have a new education debt.
@@ -151,6 +155,24 @@ Update.args = {
   ),
   symbol: 'update',
   text: 'Manage your claims and appeals'
+};
+
+export const WithCloseText = Template.bind(null);
+WithCloseText.args = {
+  ...defaultArgs,
+  headline: (
+    <h3 part="headline">
+      You have a new education debt.
+    </h3>
+  ),
+  children: (
+    <p className="vads-u-margin-top--0">
+      <time dateTime="2023-05-1 13:13:00">Wednesday, May 11 at 1:13pm</time>
+    </p>
+  ),
+  symbol: 'action-required',
+  text: 'Manage your VA debt',
+  'has-close-text': true,
 };
 
 export const NotDismissable = Template.bind(null);

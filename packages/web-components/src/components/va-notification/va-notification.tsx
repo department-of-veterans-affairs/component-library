@@ -50,6 +50,11 @@ export class VaNotification {
   @Prop({ reflect: true }) hasBorder?: boolean = true;
 
   /**
+   * If `false`, card will not have the word "CLOSE" next to close icon
+   */
+    @Prop() hasCloseText?: boolean = false;
+
+  /**
    * Destination URL for link (optional)
    */
     @Prop() href?: string = '';
@@ -80,7 +85,8 @@ export class VaNotification {
       href,
       text,
       closeable,
-      hasBorder
+      hasBorder,
+      hasCloseText,
     } = this;
 
     if (!visible) return <div aria-live="polite" />;
@@ -94,9 +100,9 @@ export class VaNotification {
             <i aria-hidden="true" role="img" class={symbol}></i>
             <div class="body" role="presentation">
               <slot></slot>
-              {href && text && (
+              {(href && text) ? (
                 <va-link active href={href} text={text} />
-              )}
+              ) : null}
             </div>
           </div>
 
@@ -107,6 +113,9 @@ export class VaNotification {
               onClick={this.closeHandler.bind(this)}
             >
               <i aria-hidden="true" class="fas fa-times-circle" role="presentation" />
+              {hasCloseText && (
+                <span>CLOSE</span>
+              )}
             </button>
           )}
         </va-card>

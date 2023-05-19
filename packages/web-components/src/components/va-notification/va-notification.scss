@@ -62,6 +62,7 @@ slot::slotted([part="headline"]) {
     padding: 0px;
     width: auto;
     color: var(--color-gray-dark);
+    font-size: 16px;
     appearance: none;
     border: 0px;
     cursor: pointer;
@@ -82,4 +83,12 @@ slot::slotted([part="headline"]) {
     background-color: transparent;
     outline: 2px solid var(--color-gold-light);
     outline-offset: 2px;
+}
+
+.va-notification-close > i {
+    margin-right: 8px;
+}
+
+.va-notification-close > span {
+    font-weight: 600;
 }
