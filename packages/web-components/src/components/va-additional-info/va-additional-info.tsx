@@ -120,7 +120,7 @@ export class VaAdditionalInfo {
               <i class="fa-angle-down" role="presentation" />
             </div>
           </a>
-          <div id="info" class={`${infoClass}`}>
+          <div id="info" class={infoClass}>
             <slot></slot>
           </div>
         </Host>
