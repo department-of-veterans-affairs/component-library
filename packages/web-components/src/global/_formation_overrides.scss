@@ -151,10 +151,15 @@
   border-radius: rem-override(0.25rem);
   margin-right: rem-override(0.5rem);
   padding: rem-override(0.75rem) rem-override(1.25rem);
+
   &--big {
     border-radius: rem-override(0.25rem);
     font-size: rem-override(1.46rem);
     padding: rem-override(1rem) rem-override(1.5rem);
+  }
+
+  i {
+    font-size: rem-override(1rem);
   }
 }
 
@@ -303,9 +308,9 @@
   }
 }
 
-.usa-alert--info, 
-.usa-alert--warning, 
-.usa-alert--success, 
+.usa-alert--info,
+.usa-alert--warning,
+.usa-alert--success,
 .usa-alert--error {
   .usa-alert__body {
     padding-left: rem-override(2.91667rem);
@@ -319,9 +324,9 @@
 }
 
 @media (min-width: 64em) {
-  .usa-alert--info, 
-  .usa-alert--warning, 
-  .usa-alert--success, 
+  .usa-alert--info,
+  .usa-alert--warning,
+  .usa-alert--success,
   .usa-alert--error {
     .usa-alert__body {
       padding-left: rem-override(4rem);
