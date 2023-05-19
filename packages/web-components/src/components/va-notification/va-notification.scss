@@ -13,7 +13,7 @@
     font-style: normal;
     font-weight: 900;
     line-height: 1;
-    margin-right: 1.6rem;
+    margin-right: 16px;
 }
 
 i.fa-times-circle::before {
@@ -24,13 +24,13 @@ i.fa-times-circle::before {
 i.action-required::before {
     content: '\F06A'; /* fa-exclamation-circle */
     color: var(--color-secondary-dark);
-    font-size: 3.2rem;
+    font-size: 32px;
 }
 
 i.update::before {
     content: '\F05A'; /* fa-circle-info */
     color: var(--color-primary);
-    font-size: 3.2rem;
+    font-size: 32px;
 }
 
 /** .va-notification is the div inside of va-card slot **/
@@ -49,8 +49,8 @@ div.body {
 }
 
 slot::slotted([part="headline"]) {
-    font-size: 1.7rem !important;
-    line-height: 2.2rem !important;
+    font-size: 17px !important;
+    line-height: 22px !important;
     padding-left: 0 !important;
     margin: 0 !important;
 }
@@ -58,7 +58,7 @@ slot::slotted([part="headline"]) {
 /** Close button **/
 
 .va-notification-close {
-    margin: 1.8rem 1.2rem;
+    margin: 18px 12px;
     padding: 0px;
     width: auto;
     color: var(--color-gray-dark);
