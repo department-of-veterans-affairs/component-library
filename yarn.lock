@@ -1844,9 +1844,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@department-of-veterans-affairs/formation@npm:^7.0.5":
-  version: 7.0.5
-  resolution: "@department-of-veterans-affairs/formation@npm:7.0.5"
+"@department-of-veterans-affairs/formation@npm:^7.0.6":
+  version: 7.0.6
+  resolution: "@department-of-veterans-affairs/formation@npm:7.0.6"
   dependencies:
     "@fortawesome/fontawesome-free": ^5.6.3
     domready: ^1.0.8
@@ -1856,7 +1856,23 @@ __metadata:
     "@fortawesome/fontawesome-free": ^5.6.3
     foundation-sites: 5
     uswds: ^1.6.10
-  checksum: df331baf4a795f4f42d88e8c6c2d141b21cb388a43d00930c825aa16d8bf20d9eba921522eeb596e35e6701e1038eccd95cc20f730af3ad4f6eeff352cfa10a6
+  checksum: 98dc1f3c3fe95b90c1d609ded184e71f148831ae6e041537b2a9850432f6d21d343e768a531ad08d2aa279df24d720aecf7a719d78170df7a647f1d9a87784ef
+  languageName: node
+  linkType: hard
+
+"@department-of-veterans-affairs/formation@npm:^7.0.7":
+  version: 7.0.7
+  resolution: "@department-of-veterans-affairs/formation@npm:7.0.7"
+  dependencies:
+    "@fortawesome/fontawesome-free": ^5.6.3
+    domready: ^1.0.8
+    element-closest: ^3.0.1
+    foundation-sites: 5
+  peerDependencies:
+    "@fortawesome/fontawesome-free": ^5.6.3
+    foundation-sites: 5
+    uswds: ^1.6.10
+  checksum: ac231e173f0913a946e88d51cabdf403f17942bb821db25f3da2ed8d321f7b4dbd94d25aadcda71d0b8d89c39f855f717888d0610fa0385b0e5499dc1c37bcbb
   languageName: node
   linkType: hard
 
@@ -1877,7 +1893,7 @@ __metadata:
     "@babel/plugin-syntax-import-meta": ^7.10.4
     "@babel/preset-env": ^7.12.10
     "@babel/preset-react": ^7.14.5
-    "@department-of-veterans-affairs/formation": ^7.0.5
+    "@department-of-veterans-affairs/formation": ^7.0.7
     "@department-of-veterans-affairs/web-components": "workspace:packages/web-components"
     "@testing-library/react": ^12.0.0
     "@testing-library/user-event": ^13.2.1
@@ -1934,7 +1950,7 @@ __metadata:
   dependencies:
     "@babel/core": ^7.15.8
     "@department-of-veterans-affairs/component-library": "workspace:packages/core"
-    "@department-of-veterans-affairs/formation": ^7.0.5
+    "@department-of-veterans-affairs/formation": ^7.0.7
     "@mdx-js/react": ^1.6.22
     "@storybook/addon-a11y": 6.4.19
     "@storybook/addon-actions": ^6.4.19
@@ -1962,7 +1978,7 @@ __metadata:
   dependencies:
     "@axe-core/puppeteer": ^4.4.0
     "@babel/core": ^7.12.13
-    "@department-of-veterans-affairs/formation": ^7.0.5
+    "@department-of-veterans-affairs/formation": ^7.0.6
     "@stencil/core": ^2.19.2
     "@stencil/postcss": ^2.0.0
     "@stencil/react-output-target": ^0.0.9
@@ -1989,7 +2005,7 @@ __metadata:
     react-dom: ^16.7.0
     typescript: ^4.3.5
   peerDependencies:
-    "@department-of-veterans-affairs/formation": ^7.0.5
+    "@department-of-veterans-affairs/formation": ^7.0.7
     i18next: "*"
     i18next-browser-languagedetector: "*"
   languageName: unknown
