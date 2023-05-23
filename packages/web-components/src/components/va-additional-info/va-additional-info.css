@@ -6,7 +6,7 @@
 /* Add left side blue border if disable border prop disabled or not present */
 :host(:not([disable-border])) a[aria-expanded='true'] ~ #info,
 :host([disable-border='false']) a[aria-expanded='true'] ~ #info {
-  padding-left: calc(2rem - 7px);
+  padding-left: calc(20px - 7px);
   border-left: 7px solid transparent;
   border-left-color: var(--color-primary-alt-darkest);
 }
@@ -45,8 +45,8 @@ a {
 }
 
 #info {
-  margin-bottom: 1.6rem;
-  margin-top: 1.6rem;
+  margin-bottom: 16px;
+  margin-top: 16px;
 }
 
 i {
@@ -59,8 +59,8 @@ i {
 i.fa-angle-down {
   display: inline-block;
   color: var(--color-primary-alt-darkest);
-  font-size: 1.6rem;
-  margin: 0.5rem;
+  font-size: 16px;
+  margin: 5px;
   transform: rotate(0deg);
   transition: transform 0.15s linear;
 }
