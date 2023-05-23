@@ -20,7 +20,7 @@ export class VaLink {
   /**
    * If `true`, the anchor text will be bolded and include a right arrow icon.
    */
-  @Prop() active?: boolean = false;
+  @Prop({reflect: true}) active?: boolean = false;
 
   /**
    * If `true`, a calendar icon will be displayed before the anchor text.
