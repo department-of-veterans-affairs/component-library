@@ -9,10 +9,10 @@ describe('va-notification', () => {
     const element = await page.find('va-notification');
 
     expect(element).toEqualHtml(`
-      <va-notification class="hydrated">
+      <va-notification class="hydrated" has-border="">
         <mock:shadow-root>
           <va-card show-shadow="true" class="hydrated show-shadow va-card">
-            <div class="va-notification none" role="alert">
+            <div class="va-notification none has-border" role="alert">
               <i aria-hidden="true" role="img" class="none"></i>
               <div class="body" role="presentation">
                 <slot></slot>
@@ -32,7 +32,7 @@ describe('va-notification', () => {
     const element = await page.find('va-notification');
 
     expect(element).toEqualHtml(`
-      <va-notification class="hydrated" visible="false">
+      <va-notification class="hydrated" has-border="" visible="false">
         <mock:shadow-root>
           <div aria-live="polite"></div>
         </mock:shadow-root>
