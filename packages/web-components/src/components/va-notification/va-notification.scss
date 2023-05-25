@@ -48,11 +48,20 @@ div.body {
     width: 100%;
 }
 
-slot::slotted([part="headline"]) {
-    font-size: 17px !important;
-    line-height: 22px !important;
-    padding-left: 0 !important;
-    margin: 0 !important;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+  font-size: 17px;
+  font-family: var(--font-serif);
+  line-height: 22px;
+}
+
+p {
+    line-height: 24px;
 }
 
 /** Close button **/

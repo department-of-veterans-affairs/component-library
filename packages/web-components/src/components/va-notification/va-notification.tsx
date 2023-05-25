@@ -52,22 +52,27 @@ export class VaNotification {
   /**
    * If `false`, card will not have the word "CLOSE" next to close icon
    */
-    @Prop() hasCloseText?: boolean = false;
+  @Prop() hasCloseText?: boolean = false;
 
   /**
-   * Header for notification
+   * Headline for notification
    */
-    @Prop() header?: string;
+  @Prop() headline?: string;
+
+  /**
+   * Define level for headline
+   */
+  @Prop() headlineLevel?: string = '3';
 
   /**
    * Destination URL for link (optional)
    */
-    @Prop() href?: string;
+  @Prop() href?: string;
 
   /**
    * Text for destination link (optional)
    */
-    @Prop() text?: string;
+  @Prop() text?: string;
   
   /**
    * Fires when the component is closed by clicking on the close icon. This fires only
@@ -83,16 +88,23 @@ export class VaNotification {
     this.closeEvent.emit(e);
   }
 
+  private getHeadlineLevel() {
+    const number = parseInt(this.headlineLevel, 10);
+    return number >= 1 && number <= 6 ? `H${number}` : null;
+  }
+
   render() {
     const {
       visible,
       symbol,
+      headline,
       href,
       text,
       closeable,
       hasBorder,
       hasCloseText,
     } = this;
+    const HeadlineLevel = this.getHeadlineLevel();
 
     if (!visible) return <div aria-live="polite" />;
 
@@ -104,6 +116,7 @@ export class VaNotification {
           <div class={classes} role="alert">
             <i aria-hidden="true" role="img" class={symbol}></i>
             <div class="body" role="presentation">
+              {HeadlineLevel ? <HeadlineLevel part="headline">{headline}</HeadlineLevel> : headline}
               <slot></slot>
               {(href && text) ? (
                 <va-link active href={href} text={text} />

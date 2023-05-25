@@ -561,9 +561,13 @@ export namespace Components {
          */
         "hasCloseText"?: boolean;
         /**
-          * Header for notification
+          * Headline for notification
          */
-        "header"?: string;
+        "headline"?: string;
+        /**
+          * Define level for headline
+         */
+        "headlineLevel"?: string;
         /**
           * Destination URL for link (optional)
          */
@@ -2173,9 +2177,13 @@ declare namespace LocalJSX {
          */
         "hasCloseText"?: boolean;
         /**
-          * Header for notification
+          * Headline for notification
          */
-        "header"?: string;
+        "headline"?: string;
+        /**
+          * Define level for headline
+         */
+        "headlineLevel"?: string;
         /**
           * Destination URL for link (optional)
          */

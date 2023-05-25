@@ -7,12 +7,7 @@ const notificationDocs = getWebComponentDocs('va-notification');
 export default {
   title: 'Components/Notification',
   id: 'components/va-notification',
-  argTypes: { 
-    headline: {
-      table: {
-        disable: true,
-      },
-    },     
+  argTypes: {   
     children: {
       table: {
         disable: true,
@@ -34,9 +29,8 @@ const defaultArgs = {
   'closeable': true,
   'has-border': true,
   'has-close-text': false,
-  'headline': (
-    <h3 part="headline">Notification heading</h3>
-  ),
+  'headline': 'Notification heading',
+  'headline-level': '3',
   'children': (
      <p>Notification body</p>
   ),
@@ -47,19 +41,22 @@ const defaultArgs = {
 const Template = ({
   visible,
   symbol,
+  headline,
+  'headline-level': headlineLevel,
   href,
   text,
   'close-btn-aria-label': closeBtnAriaLabel,
   closeable,
   'has-border': hasBorder,
   'has-close-text': hasCloseText,
-  headline,
   children,
 }) => {
   return (
     <va-notification
       visible={visible}
       symbol={symbol}
+      headline={headline}
+      headline-level={headlineLevel}
       href={href}
       text={text}
       closeable={closeable}
@@ -67,7 +64,6 @@ const Template = ({
       has-close-text={hasCloseText}
       closeBtnAriaLabel={closeBtnAriaLabel}
     >
-      {headline}
       {children}
     </va-notification>
   )
@@ -83,6 +79,7 @@ const MultipleTemplate = ({
       <va-notification
         visible="true"
         symbol="action-required"
+        headline="You have a new education debt."
         href="https://www.va.gov/"
         text="Manage your VA debt"
         closeable={closeable}
@@ -90,9 +87,6 @@ const MultipleTemplate = ({
         closeBtnAriaLabel={closeBtnAriaLabel}
         class="vads-u-margin-bottom--1p5"
       >
-        <h3 part="headline">
-          You have a new education debt.
-        </h3>
         <p className="vads-u-margin-top--0">
           <time dateTime="2023-05-1 13:13:00">Wednesday, May 11 at 1:13pm</time>
         </p>
@@ -100,15 +94,13 @@ const MultipleTemplate = ({
       <va-notification
         visible="true"
         symbol="update"
+        headline="Your claim status has been updated."
         href="https://www.va.gov/"
         text="Manage your claims and appeals"
         closeable={closeable}
         has-border={hasBorder}
         closeBtnAriaLabel={closeBtnAriaLabel}
       >
-        <h3 part="headline">
-          Your claim status has been updated.
-        </h3>
         <p className="vads-u-margin-top--0">
           <time dateTime="2023-05-09 16:00:00">Monday, May 9 at 4:00pm</time>
         </p>
@@ -126,53 +118,53 @@ Default.argTypes = propStructure(notificationDocs);
 export const ActionRequired = Template.bind(null);
 ActionRequired.args = {
   ...defaultArgs,
-  headline: (
-    <h3 part="headline">
-      You have a new education debt.
-    </h3>
-  ),
   children: (
     <p className="vads-u-margin-top--0">
       <time dateTime="2023-05-1 13:13:00">Wednesday, May 11 at 1:13pm</time>
     </p>
   ),
   symbol: 'action-required',
+  headline: 'You have a new education debt.',
   text: 'Manage your VA debt'
 };
 
 export const Update = Template.bind(null);
 Update.args = {
   ...defaultArgs,
-  headline: (
-    <h3 part="headline">
-      Your claim status has been updated.
-    </h3>
-  ),
   children: (
     <p className="vads-u-margin-top--0">
       <time dateTime="2023-05-09 16:00:00">Monday, May 9 at 4:00pm</time>
     </p>
   ),
   symbol: 'update',
+  headline: 'Your claim status has been updated.',
   text: 'Manage your claims and appeals'
 };
 
 export const WithCloseText = Template.bind(null);
 WithCloseText.args = {
   ...defaultArgs,
-  headline: (
-    <h3 part="headline">
-      You have a new education debt.
-    </h3>
-  ),
   children: (
     <p className="vads-u-margin-top--0">
       <time dateTime="2023-05-1 13:13:00">Wednesday, May 11 at 1:13pm</time>
     </p>
   ),
   symbol: 'action-required',
+  headline: 'You have a new education debt.',
   text: 'Manage your VA debt',
   'has-close-text': true,
+};
+
+export const HeaderLevelChange = Template.bind(null);
+HeaderLevelChange.args = {
+  ...defaultArgs,
+  children: (
+    <p>The heading level of this notification is now an h5.</p>
+  ),
+  symbol: 'action-required',
+  headline: 'You have a new education debt.',
+  'headline-level': '5',
+  text: '',
 };
 
 export const NotDismissable = Template.bind(null);
@@ -184,17 +176,13 @@ NotDismissable.args = {
 export const NoBorder = Template.bind(null);
 NoBorder.args = {
   ...defaultArgs,
-  headline: (
-    <h3 part="headline">
-      You have a new education debt.
-    </h3>
-  ),
   children: (
     <p className="vads-u-margin-top--0">
       <time dateTime="2023-05-1 13:13:00">Wednesday, May 11 at 1:13pm</time>
     </p>
   ),
   symbol: 'action-required',
+  headline: 'You have a new education debt.',
   text: 'Manage your VA debt',
   closeable: false,
   'has-border': false,
