@@ -561,6 +561,10 @@ export namespace Components {
          */
         "hasCloseText"?: boolean;
         /**
+          * Header for notification
+         */
+        "header"?: string;
+        /**
           * Destination URL for link (optional)
          */
         "href"?: string;
@@ -2168,6 +2172,10 @@ declare namespace LocalJSX {
           * If `false`, card will not have the word "CLOSE" next to close icon
          */
         "hasCloseText"?: boolean;
+        /**
+          * Header for notification
+         */
+        "header"?: string;
         /**
           * Destination URL for link (optional)
          */

@@ -11,7 +11,7 @@ import classnames from 'classnames';
 
 /**
  * @componentName Notification
- * @maturityCategory dont_use
+ * @maturityCategory caution
  * @maturityLevel proposed
  */
 
@@ -55,14 +55,19 @@ export class VaNotification {
     @Prop() hasCloseText?: boolean = false;
 
   /**
+   * Header for notification
+   */
+    @Prop() header?: string;
+
+  /**
    * Destination URL for link (optional)
    */
-    @Prop() href?: string = '';
+    @Prop() href?: string;
 
   /**
    * Text for destination link (optional)
    */
-    @Prop() text?: string = '';
+    @Prop() text?: string;
   
   /**
    * Fires when the component is closed by clicking on the close icon. This fires only
