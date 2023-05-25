@@ -159,10 +159,9 @@ export const HeaderLevelChange = Template.bind(null);
 HeaderLevelChange.args = {
   ...defaultArgs,
   children: (
-    <p>The heading level of this notification is now an h5.</p>
+    <p>Font size remains the same regardless of header level.</p>
   ),
-  symbol: 'action-required',
-  headline: 'You have a new education debt.',
+  headline: 'The heading level of this notification is now an h5.',
   'headline-level': '5',
   text: '',
 };

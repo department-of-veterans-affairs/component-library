@@ -565,7 +565,7 @@ export namespace Components {
          */
         "headline"?: string;
         /**
-          * Define level for headline
+          * Define level for headline. Font size will remain the same regardless of header level.
          */
         "headlineLevel"?: string;
         /**
@@ -577,7 +577,7 @@ export namespace Components {
          */
         "symbol"?: string;
         /**
-          * Text for destination link (optional)
+          * Text for destination link. Set to empty string if you don't want a link.
          */
         "text"?: string;
         /**
@@ -2181,7 +2181,7 @@ declare namespace LocalJSX {
          */
         "headline"?: string;
         /**
-          * Define level for headline
+          * Define level for headline. Font size will remain the same regardless of header level.
          */
         "headlineLevel"?: string;
         /**
@@ -2197,7 +2197,7 @@ declare namespace LocalJSX {
          */
         "symbol"?: string;
         /**
-          * Text for destination link (optional)
+          * Text for destination link. Set to empty string if you don't want a link.
          */
         "text"?: string;
         /**

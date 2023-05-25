@@ -60,7 +60,7 @@ export class VaNotification {
   @Prop() headline?: string;
 
   /**
-   * Define level for headline
+   * Define level for headline. Font size will remain the same regardless of header level.
    */
   @Prop() headlineLevel?: string = '3';
 
@@ -70,7 +70,7 @@ export class VaNotification {
   @Prop() href?: string;
 
   /**
-   * Text for destination link (optional)
+   * Text for destination link. Set to empty string if you don't want a link.
    */
   @Prop() text?: string;
   
