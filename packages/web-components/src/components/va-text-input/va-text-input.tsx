@@ -308,7 +308,7 @@ export class VaTextInput {
       );
     } else {
       const inputClass = classnames({
-        [`usa-input--${this.width}`]: this.width,
+        [`usa-input--${width}`]: width,
       });
       return (
         <Host>
