@@ -82,6 +82,7 @@
   height: var(--visible-checkbox-size);
   max-width: var(--visible-checkbox-size);
   width: 100%;
+  background-color: var(--color-white);
 }
 
 :host(:not([uswds])) input:checked+label::before {
