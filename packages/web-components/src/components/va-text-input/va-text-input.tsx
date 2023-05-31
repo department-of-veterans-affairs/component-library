@@ -306,6 +306,9 @@ export class VaTextInput {
         </Host>
       );
     } else {
+      const inputClass = classnames({
+        [`usa-input--${this.width}`]: this.width,
+      });
       return (
         <Host>
           {label && (
@@ -326,6 +329,7 @@ export class VaTextInput {
             )}
           </span>
           <input
+            class={inputClass}
             id="inputField"
             type={type}
             value={value}
