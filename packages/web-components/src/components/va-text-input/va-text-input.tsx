@@ -233,6 +233,7 @@ export class VaTextInput {
       uswds,
       success,
       messageAriaDescribedby,
+      width,
     } = this;
     const type = this.getInputType();
     const maxlength = this.getMaxlength();
@@ -250,7 +251,7 @@ export class VaTextInput {
         'usa-input': true,
         'usa-input--success': success,
         'usa-input--error': error || reflectInputError,
-        [`usa-input--${this.width}`]: this.width,
+        [`usa-input--${width}`]: width,
       });
       return (
         <Host>
