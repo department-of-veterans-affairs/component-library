@@ -141,6 +141,11 @@ export class VaTextInput {
   @Prop() success?: boolean = false;
 
   /**
+   * Displays the input at a specific width. Accepts 2xs (4ex), xs (7ex), sm or small (10ex), md or medium (20ex), lg (30ex), xl (40ex), and 2xl (50ex).
+   */
+  @Prop() width?: string;
+
+  /**
    * Whether or not the component will use USWDS v3 styling.
    */
   @Prop({reflect: true}) uswds?: boolean = false;
@@ -245,6 +250,7 @@ export class VaTextInput {
         'usa-input': true,
         'usa-input--success': success,
         'usa-input--error': error || reflectInputError,
+        [`usa-input--${this.width}`]: this.width,
       });
       return (
         <Host>
