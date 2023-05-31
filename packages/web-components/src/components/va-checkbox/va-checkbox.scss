@@ -20,7 +20,7 @@
 }
 
 .usa-checkbox__input:focus + [class*="__label"]::before {
-  outline: 2px solid var(--color-gold-light);	
+  outline: 2px solid var(--color-gold-light);
   outline-offset: 4px;
 }
 
@@ -49,11 +49,7 @@
 }
 
 :host(:not([uswds])) input {
-  /* Make the clickable element the same size and position as the box */
-  height: var(--visible-checkbox-size);
-  width: var(--visible-checkbox-size);
-  margin-top: var(--visible-checkbox-top-margin);
-
+  margin: 0;
   padding: 0;
   opacity: 0;
   position: absolute;
