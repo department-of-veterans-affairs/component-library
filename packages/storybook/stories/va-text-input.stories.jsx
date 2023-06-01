@@ -134,6 +134,65 @@ const I18nTemplate = ({
   );
 };
 
+
+const WidthsTemplate = ({
+  name,
+  value,
+}) => {
+  return (
+    <>
+      <va-text-input
+        width="2xs"
+        name={name}
+        label='My input - 2xs'
+        value={value}
+      />
+
+      <va-text-input
+        width="xs"
+        name={name}
+        label='My input - xs'
+        value={value}
+      />  
+  
+      <va-text-input
+        width="sm"
+        name={name}
+        label='My input - sm'
+        value={value}
+      />
+
+      <va-text-input
+        width="md"
+        name={name}
+        label='My input - md'
+        value={value}
+      />
+
+      <va-text-input
+        width="lg"
+        name={name}
+        label='My input - lg'
+        value={value}
+      />
+
+      <va-text-input
+        width="xl"
+        name={name}
+        label='My input - xl'
+        value={value}
+      />
+
+      <va-text-input
+        width="2xl"
+        name={name}
+        label='My input - 2xl'
+        value={value}
+      />
+    </>
+  );
+};
+
 export const Default = Template.bind(null);
 Default.args = { ...defaultArgs };
 Default.argTypes = propStructure(textInputDocs);
@@ -224,4 +283,9 @@ export const WithAdditionalInfo = AdditionalInfoTemplate.bind(null);
 WithAdditionalInfo.args = {
   ...defaultArgs,
   label: 'Veteran’s Social Security number',
+};
+
+export const Widths = WidthsTemplate.bind(null);
+Widths.args = {
+  ...defaultArgs,
 };
