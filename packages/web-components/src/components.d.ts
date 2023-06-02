@@ -1034,6 +1034,10 @@ export namespace Components {
           * The value for the input.
          */
         "value"?: string;
+        /**
+          * Displays the input at a specific width. Accepts 2xs (4ex), xs (7ex), sm or small (10ex), md or medium (20ex), lg (30ex), xl (40ex), and 2xl (50ex).
+         */
+        "width"?: string;
     }
     interface VaTextarea {
         /**
@@ -2734,6 +2738,10 @@ declare namespace LocalJSX {
           * The value for the input.
          */
         "value"?: string;
+        /**
+          * Displays the input at a specific width. Accepts 2xs (4ex), xs (7ex), sm or small (10ex), md or medium (20ex), lg (30ex), xl (40ex), and 2xl (50ex).
+         */
+        "width"?: string;
     }
     interface VaTextarea {
         /**
