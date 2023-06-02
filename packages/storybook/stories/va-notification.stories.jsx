@@ -87,9 +87,7 @@ const MultipleTemplate = ({
         closeBtnAriaLabel={closeBtnAriaLabel}
         class="vads-u-margin-bottom--1p5"
       >
-        <p className="vads-u-margin-top--0">
-          <time dateTime="2023-05-1 13:13:00">Wednesday, May 11 at 1:13pm</time>
-        </p>
+        <time slot="date" dateTime="2023-05-1 13:13:00">Wednesday, May 11 at 1:13pm</time>
       </va-notification>
       <va-notification
         visible="true"
@@ -101,9 +99,7 @@ const MultipleTemplate = ({
         has-border={hasBorder}
         closeBtnAriaLabel={closeBtnAriaLabel}
       >
-        <p className="vads-u-margin-top--0">
-          <time dateTime="2023-05-09 16:00:00">Monday, May 9 at 4:00pm</time>
-        </p>
+        <time slot="date" dateTime="2023-05-1 13:13:00">Wednesday, May 11 at 1:13pm</time>
       </va-notification>
     </>
   )
@@ -119,9 +115,7 @@ export const ActionRequired = Template.bind(null);
 ActionRequired.args = {
   ...defaultArgs,
   children: (
-    <p className="vads-u-margin-top--0">
-      <time dateTime="2023-05-1 13:13:00">Wednesday, May 11 at 1:13pm</time>
-    </p>
+    <time slot="date" dateTime="2023-05-1 13:13:00">Wednesday, May 11 at 1:13pm</time>
   ),
   symbol: 'action-required',
   headline: 'You have a new education debt.',
@@ -132,9 +126,7 @@ export const Update = Template.bind(null);
 Update.args = {
   ...defaultArgs,
   children: (
-    <p className="vads-u-margin-top--0">
-      <time dateTime="2023-05-09 16:00:00">Monday, May 9 at 4:00pm</time>
-    </p>
+    <time slot="date" dateTime="2023-05-1 13:13:00">Wednesday, May 11 at 1:13pm</time>
   ),
   symbol: 'update',
   headline: 'Your claim status has been updated.',
@@ -145,9 +137,7 @@ export const WithCloseText = Template.bind(null);
 WithCloseText.args = {
   ...defaultArgs,
   children: (
-    <p className="vads-u-margin-top--0">
-      <time dateTime="2023-05-1 13:13:00">Wednesday, May 11 at 1:13pm</time>
-    </p>
+    <time slot="date" dateTime="2023-05-1 13:13:00">Wednesday, May 11 at 1:13pm</time>
   ),
   symbol: 'action-required',
   headline: 'You have a new education debt.',
@@ -179,9 +169,7 @@ export const NoBorder = Template.bind(null);
 NoBorder.args = {
   ...defaultArgs,
   children: (
-    <p className="vads-u-margin-top--0">
-      <time dateTime="2023-05-1 13:13:00">Wednesday, May 11 at 1:13pm</time>
-    </p>
+    <time slot="date" dateTime="2023-05-1 13:13:00">Wednesday, May 11 at 1:13pm</time>
   ),
   symbol: 'action-required',
   headline: 'You have a new education debt.',

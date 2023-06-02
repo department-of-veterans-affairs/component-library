@@ -8,6 +8,17 @@
     box-shadow: none !important;
 }
 
+::slotted([slot='date']) {
+    display: block;
+    color: var(--color-gray-dark);
+    font-size: 16px;
+}
+
+va-link {
+    display: block;
+    margin-top: 3px;
+}
+
 :host i {
     font-family: 'Font Awesome 5 Free';
     font-style: normal;

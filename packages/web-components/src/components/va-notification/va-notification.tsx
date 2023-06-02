@@ -117,6 +117,7 @@ export class VaNotification {
             <i aria-hidden="true" role="img" class={symbol}></i>
             <div class="body" role="presentation">
               {HeadlineLevel ? <HeadlineLevel part="headline">{headline}</HeadlineLevel> : headline}
+              <slot name="date"></slot>
               <slot></slot>
               {(href && text) ? (
                 <va-link active href={href} text={text} />
