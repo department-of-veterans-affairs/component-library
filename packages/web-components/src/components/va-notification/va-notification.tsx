@@ -90,7 +90,7 @@ export class VaNotification {
 
   private getHeadlineLevel() {
     const number = parseInt(this.headlineLevel, 10);
-    return number >= 1 && number <= 6 ? `H${number}` : null;
+    return number >= 1 && number <= 6 ? `H${number}` : `H3`;
   }
 
   render() {
