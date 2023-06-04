@@ -22,7 +22,6 @@ jobs:
       fail-fast: false
       matrix:
         language:
-          - typescript
           - javascript
     steps:
       - name: Run Code Scanning
