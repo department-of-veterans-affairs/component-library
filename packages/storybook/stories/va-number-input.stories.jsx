@@ -90,6 +90,64 @@ const I18nTemplate = args => {
     </div>
 )};
 
+const WidthsTemplate = ({
+  name,
+  value,
+}) => {
+  return (
+    <>
+      <va-number-input
+        width="2xs"
+        name={name}
+        label='My input - 2xs'
+        value={value}
+      />
+
+      <va-number-input
+        width="xs"
+        name={name}
+        label='My input - xs'
+        value={value}
+      />  
+  
+      <va-number-input
+        width="sm"
+        name={name}
+        label='My input - sm'
+        value={value}
+      />
+
+      <va-number-input
+        width="md"
+        name={name}
+        label='My input - md'
+        value={value}
+      />
+
+      <va-number-input
+        width="lg"
+        name={name}
+        label='My input - lg'
+        value={value}
+      />
+
+      <va-number-input
+        width="xl"
+        name={name}
+        label='My input - xl'
+        value={value}
+      />
+
+      <va-number-input
+        width="2xl"
+        name={name}
+        label='My input - 2xl'
+        value={value}
+      />
+    </>
+  );
+};
+
 export const Default = Template.bind(null);
 Default.args = { ...defaultArgs };
 Default.argTypes = propStructure(numberInputDocs);
@@ -125,3 +183,8 @@ WithCurrency.args = {
   ...defaultArgs,
   currency: true
 }
+
+export const Widths = WidthsTemplate.bind(null);
+Widths.args = {
+  ...defaultArgs,
+};
