@@ -15,7 +15,7 @@ import {
  */
 @Component({
   tag: 'va-breadcrumbs',
-  styleUrl: 'va-breadcrumbs.css',
+  styleUrl: 'va-breadcrumbs.scss',
   shadow: true,
 })
 export class VaBreadcrumbs {
@@ -25,7 +25,10 @@ export class VaBreadcrumbs {
    * Adds an aria-label attribute to the <nav /> element.
    */
   @Prop() label?: string = 'Breadcrumb';
-
+  /**
+     * Whether or not the component will use USWDS v3 styling.
+     */
+  @Prop() uswds?: boolean = false;
   /**
    * Analytics tracking function(s) will not be called
    */
@@ -144,16 +147,29 @@ export class VaBreadcrumbs {
   }
 
   render() {
-    const { label } = this;
+    const { label, uswds } = this;
 
-    return (
-      <Host>
-        <nav aria-label={label}>
-          <ul role="list" onClick={e => this.fireAnalyticsEvent(e)}>
-            <slot onSlotchange={this.handleSlotChange.bind(this)}></slot>
-          </ul>
-        </nav>
-      </Host>
-    );
+    if (uswds) {
+      return (
+        <Host>
+          <nav aria-label={label} class="usa-breadcrumb">
+            <ol role="list" onClick={e => this.fireAnalyticsEvent(e)} class="usa-breadcrumb__list">
+              <slot onSlotchange={this.handleSlotChange.bind(this)}></slot>
+            </ol>
+          </nav>
+        </Host>
+      );
+    }
+    else {
+      return (
+        <Host>
+          <nav aria-label={label}>
+            <ul role="list" onClick={e => this.fireAnalyticsEvent(e)}>
+              <slot onSlotchange={this.handleSlotChange.bind(this)}></slot>
+            </ul>
+          </nav>
+        </Host>
+      );
+    }
   }
 }
