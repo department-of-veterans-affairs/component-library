@@ -161,6 +161,10 @@ export namespace Components {
           * Whether or not the component will use USWDS v3 styling.
          */
         "uswds"?: boolean;
+        /**
+          * Whether or not the component will wrap the breadcrumbs.
+         */
+        "wrapping"?: boolean;
     }
     interface VaButton {
         /**
@@ -1652,6 +1656,10 @@ declare namespace LocalJSX {
           * Whether or not the component will use USWDS v3 styling.
          */
         "uswds"?: boolean;
+        /**
+          * Whether or not the component will wrap the breadcrumbs.
+         */
+        "wrapping"?: boolean;
     }
     interface VaButton {
         /**

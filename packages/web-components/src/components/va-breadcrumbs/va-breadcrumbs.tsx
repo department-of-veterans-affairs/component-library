@@ -7,6 +7,7 @@ import {
   h,
   Prop,
 } from '@stencil/core';
+import classnames from 'classnames';
 
 /**
  * @componentName Breadcrumbs
@@ -29,6 +30,10 @@ export class VaBreadcrumbs {
      * Whether or not the component will use USWDS v3 styling.
      */
   @Prop() uswds?: boolean = false;
+  /**
+     * Whether or not the component will wrap the breadcrumbs.
+     */
+  @Prop() wrapping?: boolean = false;
   /**
    * Analytics tracking function(s) will not be called
    */
@@ -147,12 +152,15 @@ export class VaBreadcrumbs {
   }
 
   render() {
-    const { label, uswds } = this;
+    const { label, uswds, wrapping } = this;
+    const wrapClass = classnames({
+      'usa-breadcrumb--wrap': wrapping
+    });
 
     if (uswds) {
       return (
         <Host>
-          <nav aria-label={label} class="usa-breadcrumb">
+          <nav aria-label={label} class={`usa-breadcrumb ${wrapClass}`}>
             <ol role="list" onClick={e => this.fireAnalyticsEvent(e)} class="usa-breadcrumb__list">
               <slot onSlotchange={this.handleSlotChange.bind(this)}></slot>
             </ol>
