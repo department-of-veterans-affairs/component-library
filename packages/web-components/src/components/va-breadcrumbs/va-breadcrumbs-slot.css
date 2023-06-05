@@ -48,9 +48,10 @@ va-breadcrumbs li > a {
   transition-timing-function: ease-in-out;
 }
 
-va-breadcrumbs li > a:hover {
+:host(:not([uswds])) va-breadcrumbs li > a:hover {
   background: rgba(0, 0, 0, 0.05);
 }
+
 
 va-breadcrumbs li > a:focus {
   outline: 2px solid var(--color-gold-light);
