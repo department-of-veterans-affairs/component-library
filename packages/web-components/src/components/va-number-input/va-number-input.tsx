@@ -89,6 +89,11 @@ export class VaNumberInput {
   @Prop() currency?: boolean = false;
 
   /**
+   * Displays the input at a specific width. Accepts 2xs (4ex), xs (7ex), sm or small (10ex), md or medium (20ex), lg (30ex), xl (40ex), and 2xl (50ex).
+   */
+  @Prop() width?: string;
+
+  /**
    * Whether or not the component will use USWDS v3 styling.
    */
   @Prop() uswds?: boolean = false;
@@ -148,6 +153,7 @@ export class VaNumberInput {
       uswds,
       handleBlur,
       handleInput,
+      width,
     } = this;
 
     if (uswds) {
@@ -158,6 +164,7 @@ export class VaNumberInput {
       const inputClasses = classnames({
         'usa-input': true,
         'usa-input--error': error,
+        [`usa-input--${width}`]: width,
       });
       return (
         <Host>
@@ -199,6 +206,10 @@ export class VaNumberInput {
         </Host>
       );
     } else {
+      const inputClass = classnames({
+        [`usa-input--${width}`]: width,
+        'currency-input': currency,
+      });
       return (
         <Host>
           <label htmlFor="inputField">
@@ -217,7 +228,7 @@ export class VaNumberInput {
             {/* eslint-disable-next-line i18next/no-literal-string */}
             {currency && <span id="symbol">$</span>}
             <input
-              class={currency ? 'currency-input' : ''}
+              class={inputClass}
               aria-labelledby={currency ? 'inputField symbol' : undefined}
               aria-describedby={error ? 'error-message' : undefined}
               aria-invalid={error ? 'true' : 'false'}
