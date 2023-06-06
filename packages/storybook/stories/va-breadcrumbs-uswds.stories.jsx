@@ -76,9 +76,9 @@ const DynamicCrumbsTemplate = ({
         >
           {crumbs?.map((crumb, i) => {
             return (
-              <li key={i}>
-                <a href={crumb.path}>{crumb.label}</a>
-              </li>
+              <a key={i} href={crumb.path}>
+                {crumb.label}
+              </a>
             );
           })}
         </va-breadcrumbs>

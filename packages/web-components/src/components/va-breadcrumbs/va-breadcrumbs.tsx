@@ -31,7 +31,7 @@ export class VaBreadcrumbs {
      */
   @Prop() uswds?: boolean = false;
   /**
-     * Whether or not the component will wrap the breadcrumbs.
+     * Whether or not the component will wrap the breadcrumbs. This prop is available when `uswds` is set to `true`.
      */
   @Prop() wrapping?: boolean = false;
   /**
@@ -79,7 +79,11 @@ export class VaBreadcrumbs {
 
   private handleAnchorNode(node: HTMLSlotElement, index: number, slotNodes: Node[]) {
     const li = document.createElement('li');
-    li.classList.add('va-breadcrumbs-li');
+    if (this.uswds) {
+      li.classList.add('usa-breadcrumb__list-item');
+    } else {
+      li.classList.add('va-breadcrumbs-li');
+    }
     if (index === slotNodes.length - 1) {
       /* eslint-disable-next-line i18next/no-literal-string */
       node.setAttribute('aria-current', 'page');
@@ -89,11 +93,24 @@ export class VaBreadcrumbs {
   }
 
   private handleListNode(node: HTMLSlotElement, index: number, slotNodes: Node[]) {
-    this.uswds ? node.classList.add('usa-breadcrumb__list-item') : node.classList.add('va-breadcrumbs-li');
+    if (this.uswds) {
+      node.classList.add('usa-breadcrumb__list-item');
+    } else {
+      node.classList.add('va-breadcrumbs-li');
+    }
     const anchor = node.querySelector('a');
     if (anchor && index === slotNodes.length - 1) {
       /* eslint-disable-next-line i18next/no-literal-string */
       anchor.setAttribute('aria-current', 'page');
+      if (this.uswds) {
+        // Replace the anchor with a span for the last list item.
+        const span = document.createElement('span');
+        span.textContent = anchor.textContent;
+        node.classList.add('usa-current');
+        node.replaceChild(span, anchor);
+        /* eslint-disable-next-line i18next/no-literal-string */
+        node?.setAttribute('aria-current', 'page');
+      }
     }
   }
 
@@ -135,7 +152,11 @@ export class VaBreadcrumbs {
       // only be adding new breadcrumbs items in the format of 
       // <li><a href="...">...</a></li>.
       if (node.nodeName === 'LI') {
-        this.uswds ? node.classList.add('usa-breadcrumb__list-item') : node.classList.add('va-breadcrumbs-li');
+        if (this.uswds) {
+          node.classList.add('usa-breadcrumb__list-item');
+        } else {
+          node.classList.add('va-breadcrumbs-li');
+        }
         const anchor = node.querySelector('a');
         const isAriaCurrent = anchor?.getAttribute('aria-current');
 
@@ -143,10 +164,25 @@ export class VaBreadcrumbs {
           anchor.removeAttribute('aria-current');
         }
 
+        if(this.uswds) {
+          const span = document.createElement('span');
+          span.textContent = anchor.textContent;
+          anchor.innerHTML = '';
+          anchor.appendChild(span);
+        }
+
         if (index === slotNodes.length - 1) {
-          this.uswds && node.classList.add('usa-current');
-          /* eslint-disable-next-line i18next/no-literal-string */
-          anchor?.setAttribute('aria-current', 'page');
+          if (this.uswds) {
+            const span = document.createElement('span');
+            span.textContent = anchor.textContent;
+            node.classList.add('usa-current');
+            node.replaceChild(span, anchor);
+            /* eslint-disable-next-line i18next/no-literal-string */
+            node?.setAttribute('aria-current', 'page');
+          } else {
+            /* eslint-disable-next-line i18next/no-literal-string */
+            anchor?.setAttribute('aria-current', 'page');
+          }
         }
       }
     });
@@ -155,13 +191,14 @@ export class VaBreadcrumbs {
   render() {
     const { label, uswds, wrapping } = this;
     const wrapClass = classnames({
+      'usa-breadcrumb': true,
       'usa-breadcrumb--wrap': wrapping
     });
 
     if (uswds) {
       return (
         <Host>
-          <nav aria-label={label} class={`usa-breadcrumb ${wrapClass}`}>
+          <nav aria-label={label} class={wrapClass}>
             <ol role="list" onClick={e => this.fireAnalyticsEvent(e)} class="usa-breadcrumb__list">
               <slot onSlotchange={this.handleSlotChange.bind(this)}></slot>
             </ol>

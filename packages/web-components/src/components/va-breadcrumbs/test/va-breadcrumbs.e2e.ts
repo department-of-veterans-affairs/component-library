@@ -184,14 +184,14 @@ describe('va-breadcrumbs', () => {
             </ol>
           </nav>
         </mock:shadow-root>
-        <li class="va-breadcrumbs-li">
-          <a href="#home">Home</a>
+        <li class="usa-breadcrumb__list-item">
+          <a href="#home"><span>Home</span></a>
         </li>
-        <li class="va-breadcrumbs-li">
-          <a href="#one">Level One</a>
+        <li class="usa-breadcrumb__list-item">
+          <a href="#one"><span>Level One</span></a>
         </li>
-        <li class="va-breadcrumbs-li">
-          <a aria-current="page" href="#two">Level Two</a>
+        <li class="usa-breadcrumb__list-item usa-current" aria-current="page">
+          <span>Level Two</span>
         </li>
       </va-breadcrumbs>
     `);
@@ -217,14 +217,14 @@ describe('va-breadcrumbs', () => {
             </ol>
           </nav>
         </mock:shadow-root>
-        <li class="va-breadcrumbs-li">
-          <a href="#home">Home</a>
+        <li class="usa-breadcrumb__list-item">
+          <a href="#home"><span>Home</span></a>
         </li>
-        <li class="va-breadcrumbs-li">
-          <a href="#one">Level One</a>
+        <li class="usa-breadcrumb__list-item">
+          <a href="#one"><span>Level One</span></a>
         </li>
-        <li class="va-breadcrumbs-li">
-          <a aria-current="page" href="#two">Level Two</a>
+        <li class="usa-breadcrumb__list-item usa-current" aria-current="page">
+          <span>Level Two</span>
         </li>
       </va-breadcrumbs>
     `);
@@ -265,7 +265,7 @@ describe('va-breadcrumbs', () => {
       details: {
         clickLabel: 'Level One',
         clickLevel: 2,
-        totalLevels: 3,
+        totalLevels: 2,
       },
     });
   });

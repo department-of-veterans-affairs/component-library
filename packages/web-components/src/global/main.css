@@ -1,5 +1,5 @@
 @import 'variables.css';
-@import '../components/va-breadcrumbs/va-breadcrumbs-slot.css';
+@import '../components/va-breadcrumbs/va-breadcrumbs-slot.scss';
 @import '../components/va-modal/va-modal-slot.css';
 @import '../components/va-table/va-table-slot.css';
 @import '../components/va-alert/va-alert-slot.css';

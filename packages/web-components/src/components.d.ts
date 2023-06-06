@@ -162,7 +162,7 @@ export namespace Components {
          */
         "uswds"?: boolean;
         /**
-          * Whether or not the component will wrap the breadcrumbs.
+          * Whether or not the component will wrap the breadcrumbs. This prop is available when `uswds` is set to `true`.
          */
         "wrapping"?: boolean;
     }
@@ -1657,7 +1657,7 @@ declare namespace LocalJSX {
          */
         "uswds"?: boolean;
         /**
-          * Whether or not the component will wrap the breadcrumbs.
+          * Whether or not the component will wrap the breadcrumbs. This prop is available when `uswds` is set to `true`.
          */
         "wrapping"?: boolean;
     }
