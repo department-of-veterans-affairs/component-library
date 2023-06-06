@@ -89,7 +89,7 @@ export class VaBreadcrumbs {
   }
 
   private handleListNode(node: HTMLSlotElement, index: number, slotNodes: Node[]) {
-    node.classList.add('va-breadcrumbs-li');
+    this.uswds ? node.classList.add('usa-breadcrumb__list-item') : node.classList.add('va-breadcrumbs-li');
     const anchor = node.querySelector('a');
     if (anchor && index === slotNodes.length - 1) {
       /* eslint-disable-next-line i18next/no-literal-string */
@@ -135,7 +135,7 @@ export class VaBreadcrumbs {
       // only be adding new breadcrumbs items in the format of 
       // <li><a href="...">...</a></li>.
       if (node.nodeName === 'LI') {
-        node.classList.add('va-breadcrumbs-li');
+        this.uswds ? node.classList.add('usa-breadcrumb__list-item') : node.classList.add('va-breadcrumbs-li');
         const anchor = node.querySelector('a');
         const isAriaCurrent = anchor?.getAttribute('aria-current');
 
@@ -144,6 +144,7 @@ export class VaBreadcrumbs {
         }
 
         if (index === slotNodes.length - 1) {
+          this.uswds && node.classList.add('usa-current');
           /* eslint-disable-next-line i18next/no-literal-string */
           anchor?.setAttribute('aria-current', 'page');
         }

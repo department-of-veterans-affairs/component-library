@@ -1,15 +1,15 @@
 va-breadcrumbs .va-breadcrumbs-li {
   display: inline-block;
   line-height: 1.5;
-  margin: 0.4rem 0;
-  padding: 0.4rem 0 0.4rem 0;
+  margin: 4px 0;
+  padding: 4px 0 4px 0;
   vertical-align: middle;
 }
 
 va-breadcrumbs .va-breadcrumbs-li::after {
   content: ' \203A ';
   display: inline-block;
-  padding: 0 0.56rem;
+  padding: 0 5.6px;
 }
 
 va-breadcrumbs .va-breadcrumbs-li:last-child::after {
@@ -28,7 +28,7 @@ va-breadcrumbs .va-breadcrumbs-li:last-child::after {
   va-breadcrumbs .va-breadcrumbs-li:nth-last-child(2)::before {
     content: ' \2039 ';
     display: inline-block;
-    padding: 0 0.24rem;
+    padding: 0 2.4px;
   }
 
   va-breadcrumbs .va-breadcrumbs-li:nth-last-child(2)::after {
@@ -42,7 +42,7 @@ va-breadcrumbs li > a {
   background-color: transparent;
   color: var(--color-link-default);
   display: inline-block;
-  padding: 0.2rem;
+  padding: 2px;
   transition-duration: 0.3s;
   transition-property: color, background-color, border-color;
   transition-timing-function: ease-in-out;
@@ -55,7 +55,7 @@ va-breadcrumbs li > a {
 
 va-breadcrumbs li > a:focus {
   outline: 2px solid var(--color-gold-light);
-  outline-offset: 0.2rem;
+  outline-offset: 2px;
 }
 
 va-breadcrumbs li > a[aria-current='page'] {
@@ -64,4 +64,23 @@ va-breadcrumbs li > a[aria-current='page'] {
   font-weight: bold;
   pointer-events: none;
   text-decoration: none;
+}
+
+/* USWDS v3 styles */
+va-breadcrumbs .usa-breadcrumb__list-item {
+  display: inline-block;
+  line-height: 1.5;
+  margin: 4px 0;
+  padding: 4px 0;
+  vertical-align: middle;
+}
+
+va-breadcrumbs .usa-breadcrumb__list-item::after {
+  content: '\203A';
+  display: inline-block;
+  padding: 0 5.6px;
+}
+
+va-breadcrumbs .usa-breadcrumb__list-item:last-child::after {
+  content: '';
 }
