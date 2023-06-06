@@ -116,7 +116,7 @@ export class VaNotification {
           <div class={classes} role="alert">
             <i aria-hidden="true" role="img" class={symbol}></i>
             <div class="body" role="presentation">
-              {HeadlineLevel ? <HeadlineLevel part="headline">{headline}</HeadlineLevel> : headline}
+              {HeadlineLevel ? <HeadlineLevel part="headline">{headline}</HeadlineLevel> : null}
               <slot name="date"></slot>
               <slot></slot>
               {(href && text) ? (

@@ -15,6 +15,8 @@ describe('va-notification', () => {
             <div class="va-notification none has-border" role="alert">
               <i aria-hidden="true" role="img" class="none"></i>
               <div class="body" role="presentation">
+                <h3 part="headline"></h3>
+                <slot name="date"></slot>
                 <slot></slot>
               </div>
             </div>
@@ -43,7 +45,7 @@ describe('va-notification', () => {
   it('passes an axe check', async () => {
     const page = await newE2EPage();
     await page.setContent(
-      `<va-notification><h3 part="headline">Notification</h3><p></p>Notification content</va-notification>`,
+      `<va-notification headline="Some header"><p>Notification content</p></va-notification>`,
     );
 
     await axeCheck(page);
