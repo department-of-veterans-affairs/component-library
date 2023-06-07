@@ -5,17 +5,17 @@ describe('va-notification', () => {
   it('renders', async () => {
     const page = await newE2EPage();
 
-    await page.setContent('<va-notification></va-notification>');
+    await page.setContent('<va-notification headline="Notification heading"></va-notification>');
     const element = await page.find('va-notification');
 
     expect(element).toEqualHtml(`
-      <va-notification class="hydrated" has-border="">
+      <va-notification class="hydrated" has-border="" headline="Notification heading">
         <mock:shadow-root>
           <va-card show-shadow="true" class="hydrated show-shadow va-card">
             <div class="va-notification none has-border" role="alert">
               <i aria-hidden="true" role="img" class="none"></i>
               <div class="body" role="presentation">
-                <h3 part="headline"></h3>
+                <h3 part="headline">Notification heading</h3>
                 <slot name="date"></slot>
                 <slot></slot>
               </div>
