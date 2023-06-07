@@ -543,6 +543,48 @@ export namespace Components {
     }
     interface VaNeedHelp {
     }
+    interface VaNotification {
+        /**
+          * Aria-label text for the close button.
+         */
+        "closeBtnAriaLabel"?: string;
+        /**
+          * If `true`, a close button will be displayed.
+         */
+        "closeable"?: boolean;
+        /**
+          * If `false`, card will not have border
+         */
+        "hasBorder"?: boolean;
+        /**
+          * If `false`, card will not have the word "CLOSE" next to close icon
+         */
+        "hasCloseText"?: boolean;
+        /**
+          * Headline for notification
+         */
+        "headline"?: string;
+        /**
+          * Define level for headline. Font size will remain the same regardless of header level.
+         */
+        "headlineLevel"?: string;
+        /**
+          * Destination URL for link (optional)
+         */
+        "href"?: string;
+        /**
+          * Symbol indicates type of notification  Current options are: action-required, update
+         */
+        "symbol"?: string;
+        /**
+          * Text for destination link. Set to empty string if you don't want a link.
+         */
+        "text"?: string;
+        /**
+          * If `true`, the card will be visible.
+         */
+        "visible"?: boolean;
+    }
     interface VaNumberInput {
         /**
           * Whether this component will be used to accept a currency value.
@@ -1112,6 +1154,10 @@ export interface VaModalCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLVaModalElement;
 }
+export interface VaNotificationCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLVaNotificationElement;
+}
 export interface VaNumberInputCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLVaNumberInputElement;
@@ -1299,6 +1345,12 @@ declare global {
         prototype: HTMLVaNeedHelpElement;
         new (): HTMLVaNeedHelpElement;
     };
+    interface HTMLVaNotificationElement extends Components.VaNotification, HTMLStencilElement {
+    }
+    var HTMLVaNotificationElement: {
+        prototype: HTMLVaNotificationElement;
+        new (): HTMLVaNotificationElement;
+    };
     interface HTMLVaNumberInputElement extends Components.VaNumberInput, HTMLStencilElement {
     }
     var HTMLVaNumberInputElement: {
@@ -1435,6 +1487,7 @@ declare global {
         "va-memorable-date": HTMLVaMemorableDateElement;
         "va-modal": HTMLVaModalElement;
         "va-need-help": HTMLVaNeedHelpElement;
+        "va-notification": HTMLVaNotificationElement;
         "va-number-input": HTMLVaNumberInputElement;
         "va-official-gov-banner": HTMLVaOfficialGovBannerElement;
         "va-omb-info": HTMLVaOmbInfoElement;
@@ -2114,6 +2167,52 @@ declare namespace LocalJSX {
     }
     interface VaNeedHelp {
     }
+    interface VaNotification {
+        /**
+          * Aria-label text for the close button.
+         */
+        "closeBtnAriaLabel"?: string;
+        /**
+          * If `true`, a close button will be displayed.
+         */
+        "closeable"?: boolean;
+        /**
+          * If `false`, card will not have border
+         */
+        "hasBorder"?: boolean;
+        /**
+          * If `false`, card will not have the word "CLOSE" next to close icon
+         */
+        "hasCloseText"?: boolean;
+        /**
+          * Headline for notification
+         */
+        "headline"?: string;
+        /**
+          * Define level for headline. Font size will remain the same regardless of header level.
+         */
+        "headlineLevel"?: string;
+        /**
+          * Destination URL for link (optional)
+         */
+        "href"?: string;
+        /**
+          * Fires when the component is closed by clicking on the close icon. This fires only when closeable is true.
+         */
+        "onCloseEvent"?: (event: VaNotificationCustomEvent<any>) => void;
+        /**
+          * Symbol indicates type of notification  Current options are: action-required, update
+         */
+        "symbol"?: string;
+        /**
+          * Text for destination link. Set to empty string if you don't want a link.
+         */
+        "text"?: string;
+        /**
+          * If `true`, the card will be visible.
+         */
+        "visible"?: boolean;
+    }
     interface VaNumberInput {
         /**
           * Whether this component will be used to accept a currency value.
@@ -2720,6 +2819,7 @@ declare namespace LocalJSX {
         "va-memorable-date": VaMemorableDate;
         "va-modal": VaModal;
         "va-need-help": VaNeedHelp;
+        "va-notification": VaNotification;
         "va-number-input": VaNumberInput;
         "va-official-gov-banner": VaOfficialGovBanner;
         "va-omb-info": VaOmbInfo;
@@ -2766,6 +2866,7 @@ declare module "@stencil/core" {
             "va-memorable-date": LocalJSX.VaMemorableDate & JSXBase.HTMLAttributes<HTMLVaMemorableDateElement>;
             "va-modal": LocalJSX.VaModal & JSXBase.HTMLAttributes<HTMLVaModalElement>;
             "va-need-help": LocalJSX.VaNeedHelp & JSXBase.HTMLAttributes<HTMLVaNeedHelpElement>;
+            "va-notification": LocalJSX.VaNotification & JSXBase.HTMLAttributes<HTMLVaNotificationElement>;
             "va-number-input": LocalJSX.VaNumberInput & JSXBase.HTMLAttributes<HTMLVaNumberInputElement>;
             "va-official-gov-banner": LocalJSX.VaOfficialGovBanner & JSXBase.HTMLAttributes<HTMLVaOfficialGovBannerElement>;
             "va-omb-info": LocalJSX.VaOmbInfo & JSXBase.HTMLAttributes<HTMLVaOmbInfoElement>;
