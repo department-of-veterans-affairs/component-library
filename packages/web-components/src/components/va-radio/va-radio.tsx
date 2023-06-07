@@ -231,14 +231,20 @@ export class VaRadio {
         'usa-label--error': error
       });
       return (
-        <Host
-          aria-invalid={error ? 'true' : 'false'}
-          aria-label={ariaLabel}
-        >
-          <fieldset class="usa-form usa-fieldset">
+        <Host aria-invalid={error ? 'true' : 'false'} aria-label={ariaLabel}>
+          <fieldset class="usa-form usa-fieldset" role="radiogroup">
             <legend class={legendClass} part="legend">
-              {HeaderLevel ? <HeaderLevel part="header">{label}</HeaderLevel> : label}
-              {required && <span class="usa-label--required" part="required"> {i18next.t('required')}</span>}
+              {HeaderLevel ? (
+                <HeaderLevel part="header">{label}</HeaderLevel>
+              ) : (
+                label
+              )}
+              {required && (
+                <span class="usa-label--required" part="required">
+                  {' '}
+                  {i18next.t('required')}
+                </span>
+              )}
             </legend>
             {hint && <span class="usa-hint">{hint}</span>}
             <span class="usa-error-message" role="alert">
@@ -251,27 +257,33 @@ export class VaRadio {
             <slot></slot>
           </fieldset>
         </Host>
-       )
+      );
     } else {
       return (
-        <Host
-          role="radiogroup"
-          aria-invalid={error ? 'true' : 'false'}
-          aria-label={ariaLabel}
-        >
-          <legend part="legend">
-            {HeaderLevel ? <HeaderLevel part="header">{label}</HeaderLevel> : label}
-            {required && <span class="required" part="required">{i18next.t('required')}</span>}
-          </legend>
-          {hint && <span class="hint-text">{hint}</span>}
-          <span id="error-message" role="alert">
-            {error && (
-              <Fragment>
-                <span class="sr-only">{i18next.t('error')}</span> {error}
-              </Fragment>
-            )}
-          </span>
-          <slot></slot>
+        <Host aria-invalid={error ? 'true' : 'false'} aria-label={ariaLabel}>
+          <fieldset role="radiogroup">
+            <legend part="legend">
+              {HeaderLevel ? (
+                <HeaderLevel part="header">{label}</HeaderLevel>
+              ) : (
+                label
+              )}
+              {required && (
+                <span class="required" part="required">
+                  {i18next.t('required')}
+                </span>
+              )}
+            </legend>
+            {hint && <span class="hint-text">{hint}</span>}
+            <span id="error-message" role="alert">
+              {error && (
+                <Fragment>
+                  <span class="sr-only">{i18next.t('error')}</span> {error}
+                </Fragment>
+              )}
+            </span>
+            <slot></slot>
+          </fieldset>
         </Host>
       );
     }
