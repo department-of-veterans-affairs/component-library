@@ -1,0 +1,86 @@
+@forward 'settings';
+@use 'uswds-helpers/src/styles/usa-sr-only';
+@use 'usa-button/src/styles/usa-button';
+@use 'usa-icon/src/styles/usa-icon';
+
+@import '../../global/formation_overrides';
+@import '../../mixins/buttons.css';
+
+
+
+.usa-maintenance-banner {
+  border-top: 8px solid;
+  background-color: var(--color-gray-lightest);
+  position: relative;
+}
+
+.usa-maintenance-banner--warning {
+  border-color: var(--color-gold);
+}
+
+.usa-maintenance-banner--error {
+  border-color: var(--color-secondary-dark);
+}
+
+.usa-maintenance-banner__title {
+  font-family: var(--font-serif);
+  margin: 0 0 8px;
+}
+
+.usa-maintenance-banner__body {
+  padding: 16px 56px;
+  position: relative;
+
+}
+
+.usa-maintenance-banner__body::before {
+  font-family: "Font Awesome 5 Free";
+  font-size: 26px;
+  font-style: normal;
+  font-weight: 900;
+  line-height: 1;
+  position: absolute;
+  height: 32px;
+  width: 32px;
+  top: 12px;
+  left: 18px;
+}
+
+.usa-maintenance-banner--warning .usa-maintenance-banner__body::before {
+  content: '\F071'; /* fa-exclamation-triangle */
+}
+
+.usa-maintenance-banner--error .usa-maintenance-banner__body::before {
+  content: '\F06A'; /* fa-exclamation-circle */
+  color: var(--color-secondary-dark);
+}
+
+.usa-maintenance-banner__close {
+  background-color: transparent;
+  color: var(--color-gray-dark);
+  font-size: 2.25rem;
+  padding: 0;
+  position: absolute;
+  margin: 16px;
+  right: 0;
+  top: 0;
+  width: auto;
+  z-index: 9;
+  white-space: nowrap;
+}
+
+.usa-maintenance-banner__close:hover {
+  color: var(--color-base);
+}
+
+.usa-maintenance-banner i::before {
+  -webkit-font-smoothing: antialiased;
+  content: '\F057'; /* fa-times-circle*/
+  display: inline-block;
+  font-family: 'Font Awesome 5 Free';
+  font-style: normal;
+  font-variant: normal;
+  font-weight: 900;
+  line-height: 1;
+  text-rendering: auto;
+}

@@ -1,5 +1,5 @@
 import { Components } from '../components';
-import { checkLeapYear, validate } from './date-utils';
+import { checkLeapYear, validate, formatDate, isDateAfter, isDateBefore, isDateSameDay } from './date-utils';
 
 describe('checkLeapYear', () => {
   it('determines an input year is a leap year', () => {
@@ -159,3 +159,56 @@ describe('validate', () => {
     expect(memorableDateComponent.invalidDay).toEqual(true);
   });
 });
+
+describe('formatDate', () => {
+  it('should return a formatted date when not options are provided', () => {
+    const result = formatDate(new Date('01/01/1990'));
+    expect(result).toEqual('Monday, January 1, 1990 at 2:00 AM')
+  })
+  it('should return a formatted date when options are provided', () => {
+    const result = formatDate(new Date('01/01/1990'), {dateStyle: 'short', timeStyle: 'long'});
+    expect(result).toEqual('1/1/90, 2:00:00 AM EST')
+  })
+});
+
+describe('isDateAfter', () => {
+  it('returns false if date1 is not after date2', () => {
+    const date1 = new Date(Date.UTC(2021, 11, 17, 8, 24, 0));
+    const date2 = new Date(Date.UTC(2022, 11, 17, 8, 24, 0));
+    expect(isDateAfter(date1, date2)).toEqual(false);
+  });
+
+  it('returns true if date1 is after date2', () => {
+    const date1 = new Date(Date.UTC(2022, 11, 17, 8, 24, 0));
+    const date2 = new Date(Date.UTC(2021, 11, 17, 8, 24, 0));
+    expect(isDateAfter(date1, date2)).toEqual(true);
+  });
+});
+
+describe('isDateBefore', () => {
+  it('returns true if date1 is before date2', () => {
+    const date1 = new Date(Date.UTC(1995, 11, 17, 8, 24, 0));
+    const date2 = new Date(Date.UTC(1996, 11, 17, 8, 24, 0));
+    expect(isDateBefore(date1, date2)).toEqual(true);
+  });
+
+  it('returns false if date1 is not before date2', () => {
+    const date1 = new Date(Date.UTC(1996, 11, 17, 8, 24, 0));
+    const date2 = new Date(Date.UTC(1995, 11, 17, 8, 24, 0));
+    expect(isDateBefore(date1, date2)).toEqual(false);
+  });
+});
+
+describe('isDateSameDay', () => {
+  it('returns true if date1 is on the same day as date2', () => {
+    const date1 = new Date(Date.UTC(2022, 11, 17, 8, 24, 0));
+    const date2 = new Date(Date.UTC(2022, 11, 17, 10, 24, 0));
+    expect(isDateSameDay(date1, date2)).toEqual(true);
+  });
+
+  it('returns false if date1 is not on the same day as date2', () => {
+    const date1 = new Date(Date.UTC(2022, 11, 17, 8, 24, 0));
+    const date2 = new Date(Date.UTC(1995, 11, 17, 8, 24, 0));
+    expect(isDateSameDay(date1, date2)).toEqual(false);
+  });
+})
