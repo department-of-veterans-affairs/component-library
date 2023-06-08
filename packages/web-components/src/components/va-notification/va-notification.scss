@@ -1,0 +1,114 @@
+:host {
+    display: block;
+    position: relative;
+}
+
+:host([has-border='false']) > va-card {
+    border: none !important;
+    box-shadow: none !important;
+}
+
+::slotted([slot='date']) {
+    display: block;
+    color: var(--color-gray-dark);
+    font-size: 16px;
+}
+
+va-link {
+    display: block;
+    margin-top: 3px;
+}
+
+:host i {
+    font-family: 'Font Awesome 5 Free';
+    font-style: normal;
+    font-weight: 900;
+    line-height: 1;
+    margin-right: 16px;
+}
+
+i.fa-times-circle::before {
+    content: '\F057'; /* fa-times-circle*/
+    font-size: 20px;
+} 
+
+i.action-required::before {
+    content: '\F06A'; /* fa-exclamation-circle */
+    color: var(--color-secondary-dark);
+    font-size: 32px;
+}
+
+i.update::before {
+    content: '\F05A'; /* fa-circle-info */
+    color: var(--color-primary);
+    font-size: 32px;
+}
+
+/** .va-notification is the div inside of va-card slot **/
+
+.va-notification {
+    display: table;
+    width: 100%;
+    vertical-align: middle;
+    box-sizing: border-box;
+}
+
+div.body {
+    display: table-cell;
+    vertical-align: middle;
+    width: 100%;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+  font-size: 17px;
+  font-family: var(--font-serif);
+  line-height: 22px;
+}
+
+p {
+    line-height: 24px;
+}
+
+/** Close button **/
+
+.va-notification-close {
+    margin: 18px 12px;
+    padding: 0px;
+    width: auto;
+    color: var(--color-gray-dark);
+    font-size: 16px;
+    appearance: none;
+    border: 0px;
+    cursor: pointer;
+    background: transparent;
+    display: block;
+    position: absolute;
+    right: 0px;
+    top: 0px;
+}
+
+.va-notification-close:hover {
+    color: var(--color-base);
+    background-color: transparent;
+}
+
+.va-notification-close:active, .va-notification-close:focus {
+    color: var(--color-base);
+    background-color: transparent;
+    outline: 2px solid var(--color-gold-light);
+    outline-offset: 2px;
+}
+
+.va-notification-close > i {
+    margin-right: 8px;
+}
+
+.va-notification-close > span {
+    font-weight: 600;
+}
