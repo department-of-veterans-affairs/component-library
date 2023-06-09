@@ -457,7 +457,7 @@ export namespace Components {
         /**
           * Whether or not an analytics event will be fired.
          */
-        "enableAnalytics"?: boolean;
+        "disableAnalytics"?: boolean;
         /**
           * A Date object used when downtime expires.
          */
@@ -2041,7 +2041,7 @@ declare namespace LocalJSX {
         /**
           * Whether or not an analytics event will be fired.
          */
-        "enableAnalytics"?: boolean;
+        "disableAnalytics"?: boolean;
         /**
           * A Date object used when downtime expires.
          */
@@ -2054,6 +2054,10 @@ declare namespace LocalJSX {
           * The title of the banner for downtime.
          */
         "maintenanceTitle"?: string;
+        /**
+          * Fires when the component is closed by clicking on the close icon.
+         */
+        "onCloseEvent"?: (event: VaMaintenanceBannerCustomEvent<any>) => void;
         /**
           * The event used to track usage of the component. This is emitted when the component renders and enableAnalytics is true.
          */

@@ -9,9 +9,8 @@ import {
 
 /**
  * @componentName Maintenance Banner
- * @maturityCategory use
- * @maturityLevel deployed
- * @guidanceHref form/maintenance-banner
+ * @maturityCategory caution
+ * @maturityLevel proposed
  */
 
 @Component({
@@ -25,7 +24,7 @@ export class VaMaintenanceBanner {
   /**
    * Whether or not an analytics event will be fired.
    */
-  @Prop() enableAnalytics?: boolean = false;
+  @Prop() disableAnalytics?: boolean = false;
   /**
    * A unique ID that will be used for conditionally rendering the banner based on if the user has dismissed it already.
    */
@@ -58,6 +57,16 @@ export class VaMaintenanceBanner {
    * The content of the banner for pre-downtime.
    */
   @Prop() warnContent: string;
+
+  /**
+   * Fires when the component is closed by clicking on the close icon.
+   */
+  @Event({
+    composed: true,
+    bubbles: true,
+  })
+  closeEvent: EventEmitter;
+
   /**
    * The event used to track usage of the component. This is emitted when the
    * component renders and enableAnalytics is true.
@@ -97,8 +106,20 @@ export class VaMaintenanceBanner {
   };
 
   onCloseAlert = () => {
-      window.localStorage.setItem('MAINTENANCE_BANNER', this.bannerId);
-      this.maintenanceBannerEl.remove();
+    this.closeEvent.emit();
+    window.localStorage.setItem('MAINTENANCE_BANNER', this.bannerId);
+    this.maintenanceBannerEl.remove();
+
+    if (!this.disableAnalytics) {
+      const detail = {
+        componentName: 'va-maintenance-banner',
+        action: 'close',
+        details: {
+          text: this.maintenanceBannerEl.innerText,
+        }
+      }
+      this.componentLibraryAnalytics.emit(detail);
+    }
   };
 
   render() {
@@ -118,22 +139,22 @@ export class VaMaintenanceBanner {
       const { warnTitle, warnContent, startsAt, maintenanceTitle, maintenanceContent } = this;
       const isWarning = isDateBefore(now, new Date(startsAt));
       const maintenanceBannerClass = classNames({
-        'usa-maintenance-banner': true,
-        'usa-maintenance-banner--warning': isWarning,
-        'usa-maintenance-banner--error': !isWarning
+        'maintenance-banner': true,
+        'maintenance-banner--warning': isWarning,
+        'maintenance-banner--error': !isWarning
       })
 
       return (
         <Host>
-            <div class={maintenanceBannerClass} ref={el => (this.maintenanceBannerEl = el as HTMLDivElement)}>
-                <div class="usa-maintenance-banner__body">
-                  <h4 class="usa-maintenance-banner__title">{isWarning ? warnTitle : maintenanceTitle}</h4>
-                  <div class="usa-maintenance-banner__content">{ isWarning ? warnContent : maintenanceContent}</div>
-                  <div class="usa-maintenance-banner__derived-content">{this.derivePostContent(new Date(startsAt), new Date(expiresAt))}</div>
+            <div class={maintenanceBannerClass} ref={el => (this.maintenanceBannerEl = el as HTMLDivElement)} role="banner">
+                <div class="maintenance-banner__body">
+                  <h4 class="maintenance-banner__title">{isWarning ? warnTitle : maintenanceTitle}</h4>
+                  <div class="maintenance-banner__content">{ isWarning ? warnContent : maintenanceContent}</div>
+                  <div class="maintenance-banner__derived-content">{this.derivePostContent(new Date(startsAt), new Date(expiresAt))}</div>
                 </div>
                 <button
                   aria-label="Close notification"
-                  class="usa-maintenance-banner__close"
+                  class="maintenance-banner__close"
                   onClick={this.onCloseAlert}
                   type="button"
                 >
