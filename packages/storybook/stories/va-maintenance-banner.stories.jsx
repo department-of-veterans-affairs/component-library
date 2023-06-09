@@ -4,7 +4,7 @@ import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
 const maintenanceBannerDocs = getWebComponentDocs('va-maintenance-banner');
 
 export default {
-  title: 'Components/Maintenance Banner',
+  title: 'Components/Banner - Maintenance',
   id: 'components/va-maintenance-banner',
   parameters: {
     componentSubtitle: `va-maintenance-banner web component`,
