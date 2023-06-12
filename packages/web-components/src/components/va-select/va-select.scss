@@ -24,6 +24,11 @@
   margin-bottom: 0;
 }
 
+:host([inert]) select {
+  border: 0;
+  background: none;
+}
+
 /** Original Component Style **/
 
 @import '../../mixins/inputs.css';
@@ -53,7 +58,6 @@ span.required {
 :host(:not([uswds])) label {
   margin-top: 3rem;
   max-width: 46rem;
-  display: block;
 }
 
 :host(:not([uswds])) select {
