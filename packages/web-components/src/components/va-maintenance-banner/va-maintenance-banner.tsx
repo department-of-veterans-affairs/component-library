@@ -146,15 +146,16 @@ export class VaMaintenanceBanner {
                       <slot name="maintenance-content"></slot>
                   }</div>
                   <div class="maintenance-banner__derived-content">{this.derivePostContent(new Date(startsAt), new Date(expiresAt))}</div>
-                </div>
-                <button
-                  aria-label="Close notification"
-                  class="maintenance-banner__close"
-                  onClick={this.onCloseAlert}
-                  type="button"
-                >
-                  <i aria-hidden="true" />
+                  <button
+                    aria-label="Close notification"
+                    class="maintenance-banner__close"
+                    onClick={this.onCloseAlert}
+                    type="button"
+                  >
+                    <i aria-hidden="true" />
                 </button>
+                </div>
+                
             </div>
         </Host>
       )
