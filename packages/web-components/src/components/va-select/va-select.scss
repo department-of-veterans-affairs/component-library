@@ -58,6 +58,7 @@ span.required {
 :host(:not([uswds])) label {
   margin-top: 3rem;
   max-width: 46rem;
+  display: block;
 }
 
 :host(:not([uswds])) select {
