@@ -6,6 +6,8 @@
   border-top: 8px solid;
   background-color: var(--color-gray-lightest);
   position: relative;
+  max-width: 1000px;
+  margin: 0px auto;
 }
 
 .maintenance-banner--warning {
@@ -19,6 +21,7 @@
 .maintenance-banner__title {
   font-family: var(--font-serif);
   margin: 0 0 8px;
+  font-size: 20px;
 }
 
 .maintenance-banner__body {
@@ -36,7 +39,7 @@
   position: absolute;
   height: 32px;
   width: 32px;
-  top: 12px;
+  top: 18px;
   left: 18px;
 }
 
