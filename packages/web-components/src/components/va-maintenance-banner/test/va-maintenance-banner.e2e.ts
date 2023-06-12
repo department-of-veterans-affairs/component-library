@@ -8,21 +8,24 @@ describe('USWDS maintenance-banner', () => {
         expiresAt = new Date();
     expiresAt.setHours(expiresAt.getHours() + 4);
     const page = await newE2EPage({
-      html: `<va-maintenance-banner banner-id="maintenance-banner" maintenance-title="Site maintenance" warn-title="Upcoming site maintenance" maintenance-content="We’re working on VA.gov right now. If you have trouble signing in or using tools, check back after we’re finished. Thank you for your patience." warn-content="We’ll be doing some work on VA.gov. The maintenance will last X hours. During that time, you won’t be able to sign in or use tools." starts-at="${startsAt}" expires-at="${expiresAt}" warn-starts-at="${startsAt}"></va-maintenance-banner>`,
+      html: `<va-maintenance-banner banner-id="maintenance-banner" maintenance-title="Site maintenance" warn-title="Upcoming site maintenance" starts-at="${startsAt}" expires-at="${expiresAt}" warn-starts-at="${startsAt}">
+              <div slot="maintenance-content">We’re working on VA.gov right now. If you have trouble signing in or using tools, check back after we’re finished. Thank you for your patience.</div>
+              <div slot="warn-content">We’ll be doing some work on VA.gov. The maintenance will last X hours. During that time, you won’t be able to sign in or use tools.</div>
+            </va-maintenance-banner>`,
     });
     const element = await page.find('va-maintenance-banner');
     expect(element).toEqualHtml(`
-      <va-maintenance-banner banner-id="maintenance-banner" class="hydrated" expires-at="${expiresAt}" maintenance-content="Weâ€™re working on VA.gov right now. If you have trouble signing in or using tools, check back after weâ€™re finished. Thank you for your patience." maintenance-title="Site maintenance" starts-at="${startsAt}" warn-content="Weâ€™ll be doing some work on VA.gov. The maintenance will last X hours. During that time, you wonâ€™t be able to sign in or use tools." warn-starts-at="${startsAt}" warn-title="Upcoming site maintenance">
+      <va-maintenance-banner banner-id="maintenance-banner" class="hydrated" expires-at="${expiresAt}" maintenance-title="Site maintenance" starts-at="${startsAt}" warn-starts-at="${startsAt}" warn-title="Upcoming site maintenance">
         <mock:shadow-root>
-          <div class="usa-maintenance-banner usa-maintenance-banner--error">
-            <div class="usa-maintenance-banner__body">
-              <h4 class="usa-maintenance-banner__title">
+          <div class="maintenance-banner maintenance-banner--error" role="banner">
+            <div class="maintenance-banner__body">
+              <h4 class="maintenance-banner__title">
                 Site maintenance
               </h4>
-              <div class="usa-maintenance-banner__content">
-                Weâ€™re working on VA.gov right now. If you have trouble signing in or using tools, check back after weâ€™re finished. Thank you for your patience.
+              <div class="maintenance-banner__content">
+                <slot name="maintenance-content"></slot>
               </div>
-              <div class="usa-maintenance-banner__derived-content">
+              <div class="maintenance-banner__derived-content">
               <div>
                 <p>
                   <strong>
@@ -39,11 +42,17 @@ describe('USWDS maintenance-banner', () => {
                 </div>
               </div>
             </div>
-            <button aria-label="Close notification" class="usa-maintenance-banner__close" type="button">
+            <button aria-label="Close notification" class="maintenance-banner__close" type="button">
               <i aria-hidden="true"></i>
             </button>
           </div>
         </mock:shadow-root>
+        <div slot="maintenance-content">
+          Weâ€™re working on VA.gov right now. If you have trouble signing in or using tools, check back after weâ€™re finished. Thank you for your patience.
+        </div>
+        <div slot="warn-content">
+          Weâ€™ll be doing some work on VA.gov. The maintenance will last X hours. During that time, you wonâ€™t be able to sign in or use tools.
+        </div>
       </va-maintenance-banner>
     `);
   });
@@ -92,21 +101,24 @@ describe('USWDS maintenance-banner', () => {
     startsAt.setDate(startsAt.getDate() + 1);
     expiresAt.setDate(expiresAt.getDate() + 2);
     const page = await newE2EPage({
-      html: `<va-maintenance-banner banner-id="maintenance-banner" maintenance-title="Site maintenance" warn-title="Upcoming site maintenance" maintenance-content="We’re working on VA.gov right now. If you have trouble signing in or using tools, check back after we’re finished. Thank you for your patience." warn-content="We’ll be doing some work on VA.gov. The maintenance will last X hours. During that time, you won’t be able to sign in or use tools." starts-at="${startsAt}" expires-at="${expiresAt}" warn-starts-at="${warnStartsAt}"></va-maintenance-banner>`,
+      html: `<va-maintenance-banner banner-id="maintenance-banner" maintenance-title="Site maintenance" warn-title="Upcoming site maintenance"  starts-at="${startsAt}" expires-at="${expiresAt}" warn-starts-at="${warnStartsAt}">
+              <div slot="maintenance-content">We’re working on VA.gov right now. If you have trouble signing in or using tools, check back after we’re finished. Thank you for your patience.</div>
+              <div slot="warn-content">We’ll be doing some work on VA.gov. The maintenance will last X hours. During that time, you won’t be able to sign in or use tools.</div>
+            </va-maintenance-banner>`,
     });
     const element = await page.find('va-maintenance-banner');
     expect(element).toEqualHtml(`
-      <va-maintenance-banner banner-id="maintenance-banner" class="hydrated" expires-at="${expiresAt}" maintenance-content="Weâ€™re working on VA.gov right now. If you have trouble signing in or using tools, check back after weâ€™re finished. Thank you for your patience." maintenance-title="Site maintenance" starts-at="${startsAt}" warn-content="Weâ€™ll be doing some work on VA.gov. The maintenance will last X hours. During that time, you wonâ€™t be able to sign in or use tools." warn-starts-at="${warnStartsAt}" warn-title="Upcoming site maintenance">
+      <va-maintenance-banner banner-id="maintenance-banner" class="hydrated" expires-at="${expiresAt}" maintenance-title="Site maintenance" starts-at="${startsAt}" warn-starts-at="${warnStartsAt}" warn-title="Upcoming site maintenance">
         <mock:shadow-root>
-          <div class="usa-maintenance-banner usa-maintenance-banner--warning">
-            <div class="usa-maintenance-banner__body">
-              <h4 class="usa-maintenance-banner__title">
+          <div class="maintenance-banner maintenance-banner--warning" role="banner">
+            <div class="maintenance-banner__body">
+              <h4 class="maintenance-banner__title">
                 Upcoming site maintenance
               </h4>
-              <div class="usa-maintenance-banner__content">
-                Weâ€™ll be doing some work on VA.gov. The maintenance will last X hours. During that time, you wonâ€™t be able to sign in or use tools.
+              <div class="maintenance-banner__content">
+              <slot name="warn-content"></slot>
               </div>
-              <div class="usa-maintenance-banner__derived-content">
+              <div class="maintenance-banner__derived-content">
               <div>
                 <p>
                   <strong>
@@ -123,11 +135,17 @@ describe('USWDS maintenance-banner', () => {
                 </div>
               </div>
             </div>
-            <button aria-label="Close notification" class="usa-maintenance-banner__close" type="button">
+            <button aria-label="Close notification" class="maintenance-banner__close" type="button">
               <i aria-hidden="true"></i>
             </button>
           </div>
         </mock:shadow-root>
+        <div slot="maintenance-content">
+          Weâ€™re working on VA.gov right now. If you have trouble signing in or using tools, check back after weâ€™re finished. Thank you for your patience.
+        </div>
+        <div slot="warn-content">
+          Weâ€™ll be doing some work on VA.gov. The maintenance will last X hours. During that time, you wonâ€™t be able to sign in or use tools.
+        </div>
       </va-maintenance-banner>
     `);
   });
