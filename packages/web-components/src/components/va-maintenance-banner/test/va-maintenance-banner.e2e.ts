@@ -6,7 +6,7 @@ describe('USWDS maintenance-banner', () => {
   it('uswds - renders', async () => {
     let startsAt = new Date(),
         expiresAt = new Date();
-    expiresAt.setHours(expiresAt.getHours() + 4);
+    expiresAt.setHours(expiresAt.getHours(), expiresAt.getMinutes() + 10);
     const page = await newE2EPage({
       html: `<va-maintenance-banner banner-id="maintenance-banner" maintenance-title="Site maintenance" warn-title="Upcoming site maintenance" starts-at="${startsAt}" expires-at="${expiresAt}" warn-starts-at="${startsAt}">
               <div slot="maintenance-content">We’re working on VA.gov right now. If you have trouble signing in or using tools, check back after we’re finished. Thank you for your patience.</div>
