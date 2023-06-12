@@ -10,7 +10,7 @@ import {
 /**
  * @componentName Maintenance Banner
  * @maturityCategory caution
- * @maturityLevel proposed
+ * @maturityLevel available
  */
 
 @Component({
@@ -19,8 +19,8 @@ import {
   shadow: true,
 })
 export class VaMaintenanceBanner {
-
   maintenanceBannerEl: HTMLDivElement;
+  maintenanceBannerContent: HTMLDivElement;
   /**
    * Whether or not an analytics event will be fired.
    */
@@ -106,7 +106,11 @@ export class VaMaintenanceBanner {
         componentName: 'va-maintenance-banner',
         action: 'close',
         details: {
-          text: this.maintenanceBannerEl.innerText,
+          header: isDateBefore(new Date(), new Date(this.startsAt)) ? this.warnTitle : this.maintenanceTitle,
+          warnStartsAt: this.warnStartsAt,
+          startsAt: this.startsAt,
+          expiresAt: this.expiresAt,
+          displayedContent: this.maintenanceBannerContent.innerText,
         }
       }
       this.componentLibraryAnalytics.emit(detail);
@@ -137,10 +141,10 @@ export class VaMaintenanceBanner {
 
       return (
         <Host>
-            <div class={maintenanceBannerClass} ref={el => (this.maintenanceBannerEl = el as HTMLDivElement)} role="banner">
+            <div class={maintenanceBannerClass} role="banner" ref={el => (this.maintenanceBannerEl = el as HTMLDivElement)}>
                 <div class="maintenance-banner__body">
                   <h4 class="maintenance-banner__title">{isWarning ? warnTitle : maintenanceTitle}</h4>
-                  <div class="maintenance-banner__content">{ 
+                  <div class="maintenance-banner__content" ref={el => (this.maintenanceBannerContent = el as HTMLDivElement)}>{ 
                     isWarning ? 
                       <slot name="warn-content"></slot> : 
                       <slot name="maintenance-content"></slot>
