@@ -463,10 +463,6 @@ export namespace Components {
          */
         "expiresAt": string;
         /**
-          * The content of the banner for downtime.
-         */
-        "maintenanceContent": string;
-        /**
           * The title of the banner for downtime.
          */
         "maintenanceTitle": string;
@@ -474,10 +470,6 @@ export namespace Components {
           * A Date object used when downtime starts.
          */
         "startsAt": string;
-        /**
-          * The content of the banner for pre-downtime.
-         */
-        "warnContent": string;
         /**
           * A Date object used when pre-downtime starts.
          */
@@ -2047,10 +2039,6 @@ declare namespace LocalJSX {
          */
         "expiresAt"?: string;
         /**
-          * The content of the banner for downtime.
-         */
-        "maintenanceContent"?: string;
-        /**
           * The title of the banner for downtime.
          */
         "maintenanceTitle"?: string;
@@ -2066,10 +2054,6 @@ declare namespace LocalJSX {
           * A Date object used when downtime starts.
          */
         "startsAt"?: string;
-        /**
-          * The content of the banner for pre-downtime.
-         */
-        "warnContent"?: string;
         /**
           * A Date object used when pre-downtime starts.
          */

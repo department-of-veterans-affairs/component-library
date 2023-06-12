@@ -42,10 +42,6 @@ export class VaMaintenanceBanner {
    */
   @Prop() maintenanceTitle: string;
   /**
-   * The content of the banner for downtime.
-   */
-  @Prop() maintenanceContent: string;
-  /**
    * A Date object used when pre-downtime starts.
    */
   @Prop() warnStartsAt: string;
@@ -53,11 +49,6 @@ export class VaMaintenanceBanner {
    * The title of the banner for pre-downtime.
    */
   @Prop() warnTitle: string;
-  /**
-   * The content of the banner for pre-downtime.
-   */
-  @Prop() warnContent: string;
-
   /**
    * Fires when the component is closed by clicking on the close icon.
    */
@@ -136,7 +127,7 @@ export class VaMaintenanceBanner {
       return null;
     }
     if (window.localStorage.getItem('MAINTENANCE_BANNER') !== this.bannerId) {
-      const { warnTitle, warnContent, startsAt, maintenanceTitle, maintenanceContent } = this;
+      const { warnTitle, startsAt, maintenanceTitle} = this;
       const isWarning = isDateBefore(now, new Date(startsAt));
       const maintenanceBannerClass = classNames({
         'maintenance-banner': true,
@@ -149,7 +140,11 @@ export class VaMaintenanceBanner {
             <div class={maintenanceBannerClass} ref={el => (this.maintenanceBannerEl = el as HTMLDivElement)} role="banner">
                 <div class="maintenance-banner__body">
                   <h4 class="maintenance-banner__title">{isWarning ? warnTitle : maintenanceTitle}</h4>
-                  <div class="maintenance-banner__content">{ isWarning ? warnContent : maintenanceContent}</div>
+                  <div class="maintenance-banner__content">{ 
+                    isWarning ? 
+                      <slot name="warn-content"></slot> : 
+                      <slot name="maintenance-content"></slot>
+                  }</div>
                   <div class="maintenance-banner__derived-content">{this.derivePostContent(new Date(startsAt), new Date(expiresAt))}</div>
                 </div>
                 <button
