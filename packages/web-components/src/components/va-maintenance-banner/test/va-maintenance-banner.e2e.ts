@@ -41,10 +41,11 @@ describe('USWDS maintenance-banner', () => {
                   </p>
                 </div>
               </div>
+              <button aria-label="Close notification" class="maintenance-banner__close" type="button">
+                <i aria-hidden="true"></i>
+              </button>
             </div>
-            <button aria-label="Close notification" class="maintenance-banner__close" type="button">
-              <i aria-hidden="true"></i>
-            </button>
+            
           </div>
         </mock:shadow-root>
         <div slot="maintenance-content">
@@ -134,10 +135,10 @@ describe('USWDS maintenance-banner', () => {
                   </p>
                 </div>
               </div>
+              <button aria-label="Close notification" class="maintenance-banner__close" type="button">
+                <i aria-hidden="true"></i>
+              </button>
             </div>
-            <button aria-label="Close notification" class="maintenance-banner__close" type="button">
-              <i aria-hidden="true"></i>
-            </button>
           </div>
         </mock:shadow-root>
         <div slot="maintenance-content">
