@@ -20,13 +20,13 @@
   font-family: var(--font-source-sans);
 }
 
-.usa-select {
-  margin-bottom: 0;
-}
-
-:host([inert]) select {
+:host([usdws][inert]) select {
   border: 0;
   background: none;
+}
+
+.usa-select {
+  margin-bottom: 0;
 }
 
 /** Original Component Style **/
