@@ -28,7 +28,6 @@ describe('validate', () => {
     const year = 3000;
     const month = 1;
     const day = 1;
-    const currentYear = new Date().getFullYear();
 
     validate(memorableDateComponent, year, month, day);
 
@@ -161,12 +160,12 @@ describe('validate', () => {
 });
 
 describe('formatDate', () => {
-  it('should return a formatted date when not options are provided', () => {
-    const result = formatDate(new Date('01/01/1990'));
+  it('should return a formatted date when no options are provided', () => {
+    const result = formatDate(new Date('Mon Jan 01 1990 02:00:00 GMT-0500'));
     expect(result).toEqual('Monday, January 1, 1990 at 2:00 AM')
   })
   it('should return a formatted date when options are provided', () => {
-    const result = formatDate(new Date('01/01/1990'), {dateStyle: 'short', timeStyle: 'long'});
+    const result = formatDate(new Date('Mon Jan 01 1990 02:00:00 GMT-0500'), {dateStyle: 'short', timeStyle: 'long'});
     expect(result).toEqual('1/1/90, 2:00:00 AM EST')
   })
 });
