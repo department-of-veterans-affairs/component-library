@@ -90,6 +90,72 @@ const I18nTemplate = args => {
     </div>
 )};
 
+const WidthsTemplate = ({
+  name,
+  value,
+  uswds,
+}) => {
+  return (
+    <>
+      <va-number-input
+        width="2xs"
+        uswds={uswds}
+        name={name}
+        label='My input - 2xs'
+        value={value}
+      />
+
+      <va-number-input
+        width="xs"
+        uswds={uswds}
+        name={name}
+        label='My input - xs'
+        value={value}
+      />  
+  
+      <va-number-input
+        width="sm"
+        uswds={uswds}
+        name={name}
+        label='My input - sm'
+        value={value}
+      />
+
+      <va-number-input
+        width="md"
+        uswds={uswds}
+        name={name}
+        label='My input - md'
+        value={value}
+      />
+
+      <va-number-input
+        width="lg"
+        uswds={uswds}
+        name={name}
+        label='My input - lg'
+        value={value}
+      />
+
+      <va-number-input
+        width="xl"
+        uswds={uswds}
+        name={name}
+        label='My input - xl'
+        value={value}
+      />
+
+      <va-number-input
+        width="2xl"
+        uswds={uswds}
+        name={name}
+        label='My input - 2xl'
+        value={value}
+      />
+    </>
+  );
+};
+
 export const Default = Template.bind(null);
 Default.args = { ...defaultArgs };
 Default.argTypes = propStructure(numberInputDocs);
@@ -120,3 +186,7 @@ Internationalization.args = {
   required: true,
 };
 
+export const Widths = WidthsTemplate.bind(null);
+Widths.args = {
+  ...defaultArgs,
+};

@@ -28,6 +28,12 @@
   margin: 0 0.35rem;
 }
 
+:host(:not([uswds])) fieldset {
+  border: none;
+  margin: 0;
+  padding: 0;
+}
+
 :host(:not([uswds])) legend {
   display: block;
   max-width: 46rem;
@@ -35,6 +41,7 @@
   font-size: inherit;
   color: inherit;
   line-height: inherit;
+  padding-inline: 0;
 }
 
 :host legend :is(h1, h2, h3, h4, h5, h6) {

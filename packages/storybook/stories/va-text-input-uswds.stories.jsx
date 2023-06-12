@@ -142,6 +142,72 @@ const I18nTemplate = ({
   );
 };
 
+const WidthsTemplate = ({
+  name,
+  value,
+  uswds,
+}) => {
+  return (
+    <>
+      <va-text-input
+        width="2xs"
+        uswds={uswds}
+        name={name}
+        label='My input - 2xs'
+        value={value}
+      />
+
+      <va-text-input
+        width="xs"
+        uswds={uswds}
+        name={name}
+        label='My input - xs'
+        value={value}
+      />  
+  
+      <va-text-input
+        width="sm"
+        uswds={uswds}
+        name={name}
+        label='My input - sm'
+        value={value}
+      />
+
+      <va-text-input
+        width="md"
+        uswds={uswds}
+        name={name}
+        label='My input - md'
+        value={value}
+      />
+
+      <va-text-input
+        width="lg"
+        uswds={uswds}
+        name={name}
+        label='My input - lg'
+        value={value}
+      />
+
+      <va-text-input
+        width="xl"
+        uswds={uswds}
+        name={name}
+        label='My input - xl'
+        value={value}
+      />
+
+      <va-text-input
+        width="2xl"
+        uswds={uswds}
+        name={name}
+        label='My input - 2xl'
+        value={value}
+      />
+    </>
+  );
+};
+
 export const Default = Template.bind(null);
 Default.args = { ...defaultArgs };
 Default.argTypes = propStructure(textInputDocs);
@@ -205,7 +271,7 @@ WithHintText.args = { ...defaultArgs, hint: 'This is hint text' };
 const WithInlineHintTextTemplate = ({ name, label }) => {
   return (
     <>
-      <va-text-input name={name} label={label} />
+      <va-text-input name={name} label={label} uswds />
       <p>If your hint is very short it can be included in the label.</p>
     </>
   );
@@ -232,4 +298,9 @@ export const WithAdditionalInfo = WithAdditionalInfoTemplate.bind(null);
 WithAdditionalInfo.args = {
   ...defaultArgs,
   label: 'Veteran’s Social Security number',
+};
+
+export const Widths = WidthsTemplate.bind(null);
+Widths.args = {
+  ...defaultArgs,
 };

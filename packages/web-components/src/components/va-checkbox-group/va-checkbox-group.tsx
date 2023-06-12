@@ -137,19 +137,23 @@ export class VaCheckboxGroup {
     } else  {
       return (
         <Host role="group">
-          <legend>
-            {label}
-            {required && <span class="required">{i18next.t('required')}</span>}
-          </legend>
-          {hint && <span class="hint-text">{hint}</span>}
-          <span id="error-message" role="alert">
-            {error && (
-              <Fragment>
-                <span class="sr-only">{i18next.t('error')}</span> {error}
-              </Fragment>
-            )}
-          </span>
-          <slot></slot>
+          <fieldset>
+            <legend>
+              {label}
+              {required && (
+                <span class="required">{i18next.t('required')}</span>
+              )}
+            </legend>
+            {hint && <span class="hint-text">{hint}</span>}
+            <span id="error-message" role="alert">
+              {error && (
+                <Fragment>
+                  <span class="sr-only">{i18next.t('error')}</span> {error}
+                </Fragment>
+              )}
+            </span>
+            <slot></slot>
+          </fieldset>
         </Host>
       );
     }
