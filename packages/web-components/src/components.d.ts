@@ -449,6 +449,36 @@ export namespace Components {
          */
         "setFocus"?: boolean;
     }
+    interface VaMaintenanceBanner {
+        /**
+          * A unique ID that will be used for conditionally rendering the banner based on if the user has dismissed it already.
+         */
+        "bannerId": string;
+        /**
+          * Whether or not an analytics event will be fired.
+         */
+        "disableAnalytics"?: boolean;
+        /**
+          * A Date object used when downtime expires.
+         */
+        "expiresAt": string;
+        /**
+          * The title of the banner for downtime.
+         */
+        "maintenanceTitle": string;
+        /**
+          * A Date object used when downtime starts.
+         */
+        "startsAt": string;
+        /**
+          * A Date object used when pre-downtime starts.
+         */
+        "warnStartsAt": string;
+        /**
+          * The title of the banner for pre-downtime.
+         */
+        "warnTitle": string;
+    }
     interface VaMemorableDate {
         /**
           * Whether or not an analytics event will be fired.
@@ -1146,6 +1176,10 @@ export interface VaLoadingIndicatorCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLVaLoadingIndicatorElement;
 }
+export interface VaMaintenanceBannerCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLVaMaintenanceBannerElement;
+}
 export interface VaMemorableDateCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLVaMemorableDateElement;
@@ -1327,6 +1361,12 @@ declare global {
         prototype: HTMLVaLoadingIndicatorElement;
         new (): HTMLVaLoadingIndicatorElement;
     };
+    interface HTMLVaMaintenanceBannerElement extends Components.VaMaintenanceBanner, HTMLStencilElement {
+    }
+    var HTMLVaMaintenanceBannerElement: {
+        prototype: HTMLVaMaintenanceBannerElement;
+        new (): HTMLVaMaintenanceBannerElement;
+    };
     interface HTMLVaMemorableDateElement extends Components.VaMemorableDate, HTMLStencilElement {
     }
     var HTMLVaMemorableDateElement: {
@@ -1484,6 +1524,7 @@ declare global {
         "va-file-input": HTMLVaFileInputElement;
         "va-link": HTMLVaLinkElement;
         "va-loading-indicator": HTMLVaLoadingIndicatorElement;
+        "va-maintenance-banner": HTMLVaMaintenanceBannerElement;
         "va-memorable-date": HTMLVaMemorableDateElement;
         "va-modal": HTMLVaModalElement;
         "va-need-help": HTMLVaNeedHelpElement;
@@ -2044,6 +2085,44 @@ declare namespace LocalJSX {
           * Set to true if the loading indicator should capture focus
          */
         "setFocus"?: boolean;
+    }
+    interface VaMaintenanceBanner {
+        /**
+          * A unique ID that will be used for conditionally rendering the banner based on if the user has dismissed it already.
+         */
+        "bannerId"?: string;
+        /**
+          * Whether or not an analytics event will be fired.
+         */
+        "disableAnalytics"?: boolean;
+        /**
+          * A Date object used when downtime expires.
+         */
+        "expiresAt"?: string;
+        /**
+          * The title of the banner for downtime.
+         */
+        "maintenanceTitle"?: string;
+        /**
+          * Fires when the component is closed by clicking on the close icon.
+         */
+        "onCloseEvent"?: (event: VaMaintenanceBannerCustomEvent<any>) => void;
+        /**
+          * The event used to track usage of the component. This is emitted when the component renders and enableAnalytics is true.
+         */
+        "onComponent-library-analytics"?: (event: VaMaintenanceBannerCustomEvent<any>) => void;
+        /**
+          * A Date object used when downtime starts.
+         */
+        "startsAt"?: string;
+        /**
+          * A Date object used when pre-downtime starts.
+         */
+        "warnStartsAt"?: string;
+        /**
+          * The title of the banner for pre-downtime.
+         */
+        "warnTitle"?: string;
     }
     interface VaMemorableDate {
         /**
@@ -2816,6 +2895,7 @@ declare namespace LocalJSX {
         "va-file-input": VaFileInput;
         "va-link": VaLink;
         "va-loading-indicator": VaLoadingIndicator;
+        "va-maintenance-banner": VaMaintenanceBanner;
         "va-memorable-date": VaMemorableDate;
         "va-modal": VaModal;
         "va-need-help": VaNeedHelp;
@@ -2863,6 +2943,7 @@ declare module "@stencil/core" {
             "va-file-input": LocalJSX.VaFileInput & JSXBase.HTMLAttributes<HTMLVaFileInputElement>;
             "va-link": LocalJSX.VaLink & JSXBase.HTMLAttributes<HTMLVaLinkElement>;
             "va-loading-indicator": LocalJSX.VaLoadingIndicator & JSXBase.HTMLAttributes<HTMLVaLoadingIndicatorElement>;
+            "va-maintenance-banner": LocalJSX.VaMaintenanceBanner & JSXBase.HTMLAttributes<HTMLVaMaintenanceBannerElement>;
             "va-memorable-date": LocalJSX.VaMemorableDate & JSXBase.HTMLAttributes<HTMLVaMemorableDateElement>;
             "va-modal": LocalJSX.VaModal & JSXBase.HTMLAttributes<HTMLVaModalElement>;
             "va-need-help": LocalJSX.VaNeedHelp & JSXBase.HTMLAttributes<HTMLVaNeedHelpElement>;
