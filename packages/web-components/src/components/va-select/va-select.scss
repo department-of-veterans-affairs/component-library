@@ -20,6 +20,11 @@
   font-family: var(--font-source-sans);
 }
 
+:host([uswds][inert]) select {
+  border: 0;
+  background: none;
+}
+
 .usa-select {
   margin-bottom: 0;
 }
