@@ -22,7 +22,7 @@ const defaultArgs = {
   'required': false,
   'error': undefined,
   'uswds': true,
-  hint: null,
+  'hint': null,
   'aria-live-region-text': 'You selected',
   'options': [
     <option key="1" value="navy">
@@ -108,7 +108,10 @@ const InertTemplate = ({
 
   return (
     <>
-      <p>To make this read only add <code>inert</code> to the element.</p>
+      <p>
+        This is an example of applying <code>inert</code> property for read only
+        purposes.
+      </p>
       {useAddButton && (
         <button
           style={{ fontSize: '16px' }}
@@ -150,7 +153,7 @@ export const Required = Template.bind(null);
 Required.args = { ...defaultArgs, required: true };
 
 export const WithHintText = Template.bind(null);
-WithHintText.args = { ...defaultArgs, hint: "This is example hint text" };
+WithHintText.args = { ...defaultArgs, hint: 'This is example hint text' };
 
 export const ErrorMessage = Template.bind(null);
 ErrorMessage.args = { ...defaultArgs, error: 'There was a problem' };
