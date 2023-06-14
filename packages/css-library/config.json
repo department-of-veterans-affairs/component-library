@@ -20,6 +20,16 @@
           "format": "scss/variables"
         }
       ]
+    },
+    "react-native": {
+      "transformGroup": "react-native",
+      "buildPath": "src/tokens/",
+      "files": [
+        {
+          "destination": "variables.js",
+          "format": "javascript/es6"
+        }
+      ]
     }
   }
 }
