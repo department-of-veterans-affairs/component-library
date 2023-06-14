@@ -21,7 +21,7 @@ const defaultArgs = {
   'value': 'army',
   'required': false,
   'error': undefined,
-  'hint': null,
+  hint: null,
   'aria-live-region-text': 'You selected',
   'options': [
     <option key="1" value="navy">
@@ -96,16 +96,13 @@ export const Required = Template.bind(null);
 Required.args = { ...defaultArgs, required: true };
 
 export const WithHintText = Template.bind(null);
-WithHintText.args = { ...defaultArgs, hint: 'This is example hint text' };
+WithHintText.args = { ...defaultArgs, hint: "This is example hint text" };
 
 export const ErrorMessage = Template.bind(null);
 ErrorMessage.args = { ...defaultArgs, error: 'There was a problem' };
 
 export const DynamicOptions = Template.bind(null);
 DynamicOptions.args = { ...defaultArgs, 'use-add-button': true };
-
-export const ReadOnly = Template.bind(null);
-ReadOnly.args = { ...defaultArgs, uswds: true, inert: true };
 
 const I18nTemplate = args => {
   const [lang, setLang] = useState('en');
