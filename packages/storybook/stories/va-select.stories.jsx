@@ -21,7 +21,7 @@ const defaultArgs = {
   'value': 'army',
   'required': false,
   'error': undefined,
-  hint: null,
+  'hint': null,
   'aria-live-region-text': 'You selected',
   'options': [
     <option key="1" value="navy">
@@ -53,7 +53,6 @@ const Template = ({
   'aria-live-region-text': ariaLiveRegionText,
   options,
   'use-add-button': useAddButton,
-  inert,
 }) => {
   const [modifiedOptions, setModifiedOptions] = useState(options);
 
@@ -82,7 +81,6 @@ const Template = ({
         hint={hint}
         aria-live-region-text={ariaLiveRegionText}
         use-add-button={useAddButton}
-        inert={inert}
       >
         {modifiedOptions}
       </va-select>
@@ -98,7 +96,7 @@ export const Required = Template.bind(null);
 Required.args = { ...defaultArgs, required: true };
 
 export const WithHintText = Template.bind(null);
-WithHintText.args = { ...defaultArgs, hint: "This is example hint text" };
+WithHintText.args = { ...defaultArgs, hint: 'This is example hint text' };
 
 export const ErrorMessage = Template.bind(null);
 ErrorMessage.args = { ...defaultArgs, error: 'There was a problem' };
@@ -107,7 +105,7 @@ export const DynamicOptions = Template.bind(null);
 DynamicOptions.args = { ...defaultArgs, 'use-add-button': true };
 
 export const ReadOnly = Template.bind(null);
-ReadOnly.args = { ...defaultArgs, 'uswds': true, 'inert': true };
+ReadOnly.args = { ...defaultArgs, uswds: true, inert: true };
 
 const I18nTemplate = args => {
   const [lang, setLang] = useState('en');
