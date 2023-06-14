@@ -92,6 +92,56 @@ const Template = ({
   );
 };
 
+const InertTemplate = ({
+  label,
+  name,
+  value,
+  required,
+  error,
+  uswds,
+  hint,
+  'aria-live-region-text': ariaLiveRegionText,
+  options,
+  'use-add-button': useAddButton,
+}) => {
+  const [modifiedOptions, setModifiedOptions] = useState(options);
+
+  return (
+    <>
+      <p>To make this read only add <code>inert</code> to the element.</p>
+      {useAddButton && (
+        <button
+          style={{ fontSize: '16px' }}
+          onClick={() => {
+            setModifiedOptions([
+              ...modifiedOptions,
+              <option key="6" value="new">
+                Something new
+              </option>,
+            ]);
+          }}
+        >
+          Add &quot;Something new&quot;
+        </button>
+      )}
+      <va-select
+        uswds={uswds}
+        label={label}
+        name={name}
+        value={'navy'}
+        required={required}
+        error={error}
+        hint={hint}
+        inert
+        aria-live-region-text={ariaLiveRegionText}
+        use-add-button={useAddButton}
+      >
+        {modifiedOptions}
+      </va-select>
+    </>
+  );
+};
+
 export const Default = Template.bind(null);
 Default.args = { ...defaultArgs };
 Default.argTypes = propStructure(selectDocs);
@@ -107,6 +157,9 @@ ErrorMessage.args = { ...defaultArgs, error: 'There was a problem' };
 
 export const DynamicOptions = Template.bind(null);
 DynamicOptions.args = { ...defaultArgs, 'use-add-button': true };
+
+export const ReadOnly = InertTemplate.bind(null);
+ReadOnly.args = { ...defaultArgs };
 
 const I18nTemplate = args => {
   const [lang, setLang] = useState('en');

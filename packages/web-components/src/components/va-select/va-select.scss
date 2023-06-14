@@ -20,7 +20,7 @@
   font-family: var(--font-source-sans);
 }
 
-:host([usdws][inert]) select {
+:host([uswds][inert]) select {
   border: 0;
   background: none;
 }
@@ -62,6 +62,7 @@ span.required {
 }
 
 :host(:not([uswds])) select {
+  background-color: red;
   background-color: var(--color-white);
   background-image: url('../../assets/arrow-both.svg');
   background-position: right 1.3rem center;
@@ -70,3 +71,8 @@ span.required {
   font-family: var(--font-source-sans);
   padding: 0.8rem 3rem 0.8rem 0.7em;
 }
+
+// :host([usdws][inert]) select {
+//   border: 0;
+//   background: none;
+// }

@@ -53,6 +53,7 @@ const Template = ({
   'aria-live-region-text': ariaLiveRegionText,
   options,
   'use-add-button': useAddButton,
+  inert,
 }) => {
   const [modifiedOptions, setModifiedOptions] = useState(options);
 
@@ -81,6 +82,7 @@ const Template = ({
         hint={hint}
         aria-live-region-text={ariaLiveRegionText}
         use-add-button={useAddButton}
+        inert={inert}
       >
         {modifiedOptions}
       </va-select>
@@ -103,6 +105,9 @@ ErrorMessage.args = { ...defaultArgs, error: 'There was a problem' };
 
 export const DynamicOptions = Template.bind(null);
 DynamicOptions.args = { ...defaultArgs, 'use-add-button': true };
+
+export const ReadOnly = Template.bind(null);
+ReadOnly.args = { ...defaultArgs, 'uswds': true, 'inert': true };
 
 const I18nTemplate = args => {
   const [lang, setLang] = useState('en');
