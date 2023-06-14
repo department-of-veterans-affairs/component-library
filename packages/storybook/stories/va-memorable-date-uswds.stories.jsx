@@ -119,8 +119,8 @@ Default.args = { ...defaultArgs };
 Default.argTypes = propStructure(memorableDateInputDocs);
 
 export const Error = Template.bind(null);
-Error.args = {
-  ...defaultArgs,
+Error.args = { 
+  ...defaultArgs, 
   error: 'Error Message Example',
 };
 
