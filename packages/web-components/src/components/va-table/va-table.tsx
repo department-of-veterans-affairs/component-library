@@ -54,9 +54,10 @@ export class VaTable {
     const elementChildren = (el: HTMLElement) =>
       Array.from(el.childNodes).filter(node => node.nodeName !== '#text');
 
-    const [headerRow, ...rows] = Array.from(
+    const headerRow = Array.from(
       this.el.querySelectorAll('va-table-row'),
-    );
+    )[0] as HTMLVaTableRowElement;
+
     this.headers = elementChildren(headerRow) as Array<HTMLElement>;
     const columns = [];
 
@@ -97,6 +98,9 @@ export class VaTable {
     const alignment = {};
 
     const handleCellAdjustments = () => {
+      const rows = Array.from(this.el.querySelectorAll('va-table-row'))
+        .filter((row) => row.slot !== 'headers') as Array<HTMLVaTableRowElement>;
+
       Array.from(rows).forEach((row, index) => {
         const cells = elementChildren(row);
 
