@@ -123,7 +123,7 @@ export class VaMemorableDate {
     /* eslint-disable i18next/no-literal-string */
     this.value = year || month || day ? `${year}-${month ? numFormatter.format(monthNum) : ''}-${
       day ? numFormatter.format(dayNum) : ''
-    }` : '';
+      }` : '';
     /* eslint-enable i18next/no-literal-string */
 
     // Run built-in validation. Any custom validation
@@ -196,7 +196,7 @@ export class VaMemorableDate {
       forceUpdate(this.el);
     });
   }
-  
+
   disconnectedCallback() {
     i18next.off('languageChanged');
   }
@@ -220,7 +220,7 @@ export class VaMemorableDate {
     const describedbyIds = ['dateHint', hint ? 'hint' : '']
       .filter(Boolean)
       .join(' ');
-      
+
     const hintText = monthSelect ? i18next.t('date-hint-with-select') : i18next.t('date-hint');
 
     const errorParameters = (error: string) => {
@@ -233,44 +233,48 @@ export class VaMemorableDate {
     // Fieldset has an implicit aria role of group
     if(uswds) { 
       const monthDisplay = monthSelect
-      ? <div class="usa-form-group usa-form-group--month usa-form-group--select">
-        <va-select
-          uswds
-          label={i18next.t('month')}
-          name={`${name}Month`}
-          aria-describedby={describedbyIds}
-          invalid={this.invalidMonth}
-          onVaSelect={handleDateChange}
-          class='usa-form-group--month-select'
-          reflectInputError={error ? true : false}
-        >
-          {months &&
-          months.map(month => (
-            <option value={month.value}>{month.label}</option>
-          ))}
-        </va-select>
-      </div>
-      : <div class="usa-form-group usa-form-group--month">
-        <va-text-input
-          uswds
-          label={i18next.t('month')}
-          name={`${name}Month`}
-          maxlength={2}
-          minlength={2}
-          pattern="[0-9]*"
-          aria-describedby={describedbyIds}
-          invalid={this.invalidMonth}
-          // Value must be a string
-          // if NaN provide empty string
-          value={month?.toString()}
-          onInput={handleDateChange}
-          onKeyDown={handleDateKey}
-          class="usa-form-group--month-input"
-          reflectInputError={error ? true : false}
-          inputmode="numeric"
-          type="text"
-        />
-      </div>;
+        ? <div class="usa-form-group usa-form-group--month usa-form-group--select">
+          <va-select
+            uswds
+            label={i18next.t('month')}
+            name={`${name}Month`}
+            aria-describedby={describedbyIds}
+            invalid={this.invalidMonth}
+            onVaSelect={handleDateChange}
+            class='usa-form-group--month-select'
+            reflectInputError={error ? true : false}
+            value={String(parseInt(month))}
+          >
+            {months &&
+              months.map(monthOption => (
+                <option value={monthOption.value} selected={monthOption.value === parseInt(month)}>
+                  {monthOption.label}
+                </option>
+              ))
+            }
+          </va-select>
+        </div>
+        : <div class="usa-form-group usa-form-group--month">
+          <va-text-input
+            uswds
+            label={i18next.t('month')}
+            name={`${name}Month`}
+            maxlength={2}
+            minlength={2}
+            pattern="[0-9]*"
+            aria-describedby={describedbyIds}
+            invalid={this.invalidMonth}
+            // Value must be a string
+            // if NaN provide empty string
+            value={month?.toString()}
+            onInput={handleDateChange}
+            onKeyDown={handleDateKey}
+            class="usa-form-group--month-input"
+            reflectInputError={error ? true : false}
+            inputmode="numeric"
+            type="text"
+          />
+        </div>;
       const legendClass = classnames({
         'usa-legend': true,
         'usa-label--error': error
@@ -288,7 +292,7 @@ export class VaMemorableDate {
             <span id="error-message" role="alert">
               {error && (
                 <Fragment>
-                  <span class="usa-sr-only">{i18next.t('error')}</span> 
+                  <span class="usa-sr-only">{i18next.t('error')}</span>
                   <span class="usa-error-message">{i18next.t(error, errorParameters(error))}</span>
                 </Fragment>
               )}
@@ -350,7 +354,7 @@ export class VaMemorableDate {
               {hint && <div id="hint">{hint}</div>}
               <div id="dateHint">{i18next.t('date-hint')}.</div>
             </legend>
-            <slot /> 
+            <slot />
             <span id="error-message" role="alert">
               {error && (
                 <Fragment>
@@ -375,7 +379,7 @@ export class VaMemorableDate {
                 class="input-month"
                 inputmode="numeric"
                 type="text"
-                />
+              />
               <va-text-input
                 label={i18next.t('day')}
                 name={`${name}Day`}
@@ -392,7 +396,7 @@ export class VaMemorableDate {
                 class="input-day"
                 inputmode="numeric"
                 type="text"
-                />
+              />
               <va-text-input
                 label={i18next.t('year')}
                 name={`${name}Year`}
@@ -409,7 +413,7 @@ export class VaMemorableDate {
                 class="input-year"
                 inputmode="numeric"
                 type="text"
-                />
+              />
             </div>
           </fieldset>
         </Host>

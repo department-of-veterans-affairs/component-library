@@ -119,8 +119,8 @@ Default.args = { ...defaultArgs };
 Default.argTypes = propStructure(memorableDateInputDocs);
 
 export const Error = Template.bind(null);
-Error.args = { 
-  ...defaultArgs, 
+Error.args = {
+  ...defaultArgs,
   error: 'Error Message Example',
 };
 
@@ -128,6 +128,7 @@ export const WithMonthSelect = Template.bind(null);
 WithMonthSelect.args = {
   ...defaultArgs,
   monthSelect: true,
+  value: '2022-04-19',
 };
 
 export const ErrorWithMonthSelect = Template.bind(null);
