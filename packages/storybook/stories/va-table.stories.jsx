@@ -228,14 +228,14 @@ const Pagination = args => {
       >
         <va-table-row slot="headers">
           {columns.map((col, index) => (
-            <span role="cell" key={`table-example-${index}`}>{col}</span>
+            <span key={`table-example-${index}`}>{col}</span>
           ))}
         </va-table-row>
 
         {currentData.map((row, i) => (
-          <va-table-row id={`table-example-${i}`} key={`table-example-${i}`}>
+          <va-table-row key={`table-example-${i}`}>
             {row.map(item => (
-              <span role="cell" key={`${item}-${i}`}>{item}</span>
+              <span key={`${item}-${i}`}>{item}</span>
             ))}
           </va-table-row>
         ))}

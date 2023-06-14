@@ -46,6 +46,8 @@ export class VaTable {
    */
   @State() sortAscending: boolean = !this.descending;
 
+  private observer: MutationObserver;
+
   componentDidLoad() {
     // For IE11 compatibility. `el.children` renders booleans instead of html elements,
     // so instead we use `el.childNodes` and filter out nodes that aren't a proper tag
@@ -93,30 +95,57 @@ export class VaTable {
 
     // Store alignment classes by column index.
     const alignment = {};
-    Array.from(rows).forEach((row, index) => {
-      const cells = elementChildren(row);
 
-      cells.forEach((cell: HTMLSpanElement, colNum) => {
-        // Look at the first row of data to determine type of data in column
-        // Right align columns with numeric data
-        if (index === 0 && isNumeric(cell.textContent)) {
-          alignment[colNum] = 'medium-screen:vads-u-text-align--right';
-          (this.headers[colNum] as HTMLElement).classList.add(
-            alignment[colNum],
-          );
-        }
-        if (alignment[colNum]) {
-          cell.classList.add(alignment[colNum]);
-        }
+    const handleCellAdjustments = () => {
+      Array.from(rows).forEach((row, index) => {
+        const cells = elementChildren(row);
 
-        // This allows the responsive table in mobile view to display
-        // a column header
-        /* eslint-disable i18next/no-literal-string */
-        cell.setAttribute('data-label', columns[colNum]);
-        cell.setAttribute('role', 'cell');
-        /* eslint-enable i18next/no-literal-string */
+        cells.forEach((cell: HTMLSpanElement, colNum) => {
+          // Look at the first row of data to determine type of data in column
+          // Right align columns with numeric data
+          if (index === 0 && isNumeric(cell.textContent)) {
+            // eslint-disable-next-line i18next/no-literal-string
+            alignment[colNum] = 'text-align-right';
+            (this.headers[colNum] as HTMLElement).classList.add(
+              alignment[colNum],
+            );
+          }
+          if (alignment[colNum]) {
+            cell.classList.add(alignment[colNum]);
+          }
+  
+          // This allows the responsive table in mobile view to display
+          // a column header
+          /* eslint-disable i18next/no-literal-string */
+          cell.setAttribute('data-label', columns[colNum]);
+          cell.setAttribute('role', 'cell');
+        });
       });
+    };
+
+    handleCellAdjustments();
+
+    // Watch for changes to the table body slot.
+    const slot = this.el.shadowRoot.querySelectorAll('slot')[1].assignedElements()[0] as HTMLSlotElement;
+    const callback = mutationList => {
+      for (const mutation of mutationList) {
+        if (mutation.type === 'childList') {
+          handleCellAdjustments();
+        }
+      }
+    };
+
+    this.observer = new MutationObserver(callback);
+    this.observer.observe(slot, {
+      childList: true,
+      subtree: true,
     });
+  }
+
+  disconnectedCallback() {
+    if (this.observer) {
+      this.observer.disconnect();
+    }
   }
 
   componentDidUpdate() {
