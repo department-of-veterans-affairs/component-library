@@ -5,7 +5,7 @@ import MaintenanceBanner from '../../react-components/src/components/Maintenance
 import { StoryDocs } from './wc-helpers';
 
 export default {
-  title: 'Components/Banner - Maintenance',
+  title: 'Components/Banner - Maintenance (React)',
   component: MaintenanceBanner,
   id: 'components/banners-maintenancebanner',
   argTypes: {

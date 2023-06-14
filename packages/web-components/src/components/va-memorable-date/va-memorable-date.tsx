@@ -231,25 +231,29 @@ export class VaMemorableDate {
 
     // Error attribute should be leveraged for custom error messaging
     // Fieldset has an implicit aria role of group
-    if(uswds) { 
+    if (uswds) {
       const monthDisplay = monthSelect
-      ? <div class="usa-form-group usa-form-group--month usa-form-group--select">
-        <va-select
-          uswds
-          label={i18next.t('month')}
-          name={`${name}Month`}
-          aria-describedby={describedbyIds}
-          invalid={this.invalidMonth}
-          onVaSelect={handleDateChange}
-          class='usa-form-group--month-select'
-          reflectInputError={error ? true : false}
-        >
-          {months &&
-          months.map(month => (
-            <option value={month.value}>{month.label}</option>
-          ))}
-        </va-select>
-      </div>
+        ? <div class="usa-form-group usa-form-group--month usa-form-group--select">
+          <va-select
+            uswds
+            label={i18next.t('month')}
+            name={`${name}Month`}
+            aria-describedby={describedbyIds}
+            invalid={this.invalidMonth}
+            onVaSelect={handleDateChange}
+            class='usa-form-group--month-select'
+            reflectInputError={error ? true : false}
+            value={month ? String(parseInt(month)) : month}
+          >
+            {months &&
+              months.map(monthOption => (
+                <option value={monthOption.value} selected={monthOption.value === parseInt(month)}>
+                  {monthOption.label}
+                </option>
+              ))
+            }
+          </va-select>
+        </div>
       : <div class="usa-form-group usa-form-group--month">
         <va-text-input
           uswds
