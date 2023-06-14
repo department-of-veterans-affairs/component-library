@@ -87,7 +87,7 @@ const paginationData = [
     '**3456',
   ],
   [
-    '04/05/2019',
+    '03/05/2019',
     '$3,261.10',
     'Compensation & Pension - Recurring',
     'Direct Deposit',
@@ -95,15 +95,7 @@ const paginationData = [
     '**3456',
   ],
   [
-    '04/05/2019',
-    '$3,261.10',
-    'Compensation & Pension - Recurring',
-    'Direct Deposit',
-    'BANK OF AMERICA, N.A.',
-    '**3456',,
-  ],
-  [
-    '04/05/2019',
+    '02/05/2019',
     '$3,261.10',
     'Compensation & Pension - Recurring',
     'Direct Deposit',
@@ -111,7 +103,7 @@ const paginationData = [
     '**3456',
   ],
   [
-    '04/05/2019',
+    '01/05/2019',
     '$3,261.10',
     'Compensation & Pension - Recurring',
     'Direct Deposit',
@@ -119,7 +111,7 @@ const paginationData = [
     '**3456',
   ],
   [
-    '04/05/2019',
+    '12/05/2018',
     '$3,261.10',
     'Compensation & Pension - Recurring',
     'Direct Deposit',
@@ -127,7 +119,7 @@ const paginationData = [
     '**3456',
   ],
   [
-    '04/05/2019',
+    '11/05/2018',
     '$3,261.10',
     'Compensation & Pension - Recurring',
     'Direct Deposit',
@@ -135,7 +127,7 @@ const paginationData = [
     '**3456',
   ],
   [
-    '04/05/2019',
+    '10/05/2018',
     '$3,261.10',
     'Compensation & Pension - Recurring',
     'Direct Deposit',
@@ -143,7 +135,7 @@ const paginationData = [
     '**3456',
   ],
   [
-    '04/05/2019',
+    '09/05/2018',
     '$3,261.10',
     'Compensation & Pension - Recurring',
     'Direct Deposit',
@@ -151,7 +143,7 @@ const paginationData = [
     '**3456',
   ],
   [
-    '04/05/2019',
+    '08/05/2018',
     '$3,261.10',
     'Compensation & Pension - Recurring',
     'Direct Deposit',
@@ -159,7 +151,7 @@ const paginationData = [
     '**3456',
   ],
   [
-    '04/05/2019',
+    '07/05/2018',
     '$3,261.10',
     'Compensation & Pension - Recurring',
     'Direct Deposit',
@@ -167,7 +159,7 @@ const paginationData = [
     '**3456',
   ],
   [
-    '04/05/2019',
+    '06/05/2018',
     '$3,261.10',
     'Compensation & Pension - Recurring',
     'Direct Deposit',
@@ -175,7 +167,7 @@ const paginationData = [
     '**3456',
   ],
   [
-    '04/05/2019',
+    '05/05/2018',
     '$3,261.10',
     'Compensation & Pension - Recurring',
     'Direct Deposit',
@@ -183,7 +175,15 @@ const paginationData = [
     '**3456',
   ],
   [
-    '04/05/2019',
+    '04/05/2018',
+    '$3,261.10',
+    'Compensation & Pension - Recurring',
+    'Direct Deposit',
+    'BANK OF AMERICA, N.A.',
+    '**3456',
+  ],
+  [
+    '03/05/2018',
     '$3,261.10',
     'Compensation & Pension - Recurring',
     'Direct Deposit',
@@ -205,34 +205,20 @@ const Pagination = args => {
   const MAX_PAGE_LIST_LENGTH = 10; // The maximum number of pages to show at once
   const MAX_ROWS = 5;
 
-  const [currentData, setCurrentData] = useState([]);
-  const [currentPage, setCurrentPage] = useState(1);
-  const numPages = useRef(0);
-  const paginatedData = useRef([]);
-
-  function paginateData (arr, size) {
-    return arr.reduce((acc, val, i) => {
-      let idx = Math.floor(i / size)
-      let page = acc[idx] || (acc[idx] = [])
-      page.push(val)
-  
-      return acc
-    }, [])
+  function paginate(array, page_size, page_number) {
+    return array.slice((page_number - 1) * page_size, page_number * page_size);
   }
 
-  console.log('paginateData', paginateData(rows, MAX_ROWS));
-  
-  useEffect(() => {
-    paginatedData.current = paginateData(rows, MAX_ROWS);
-    setCurrentData(paginatedData.current[currentPage - 1]);
-    numPages.current = paginatedData.current.length;
-  }, []);
+  const [currentData, setCurrentData] = useState(paginate(rows, MAX_ROWS, 1));
+  const [currentPage, setCurrentPage] = useState(1);
 
 
-  const onPageChange = (page) => {
-    setCurrentData(paginatedData.current[page - 1]);
+  function onPageChange (page) {
+    setCurrentData(paginate(rows, MAX_ROWS, page));
     setCurrentPage(page);
-  };
+  }
+
+  const numPages = Math.ceil(rows.length / MAX_ROWS);
 
   return (
     <main>
@@ -247,7 +233,7 @@ const Pagination = args => {
         </va-table-row>
 
         {currentData.map((row, i) => (
-          <va-table-row key={`table-example-${i}`}>
+          <va-table-row id={`table-example-${i}`} key={`table-example-${i}`}>
             {row.map(item => (
               <span role="cell" key={`${item}-${i}`}>{item}</span>
             ))}
@@ -257,7 +243,7 @@ const Pagination = args => {
       <VaPagination
         onPageSelect={(e) => onPageChange(e.detail.page)}
         page={currentPage}
-        pages={numPages.current}
+        pages={numPages}
         maxPageListLength={MAX_PAGE_LIST_LENGTH}
         showLastPage
       />
