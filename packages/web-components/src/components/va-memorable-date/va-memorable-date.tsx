@@ -15,6 +15,7 @@ import {
   months,
   validate,
   validKeys,
+  checkIsNaN,
 } from '../../utils/date-utils';
 
 import i18next from 'i18next';
@@ -116,6 +117,12 @@ export class VaMemorableDate {
     const yearNum = parseInt(year);
     const monthNum = parseInt(month);
     const dayNum = parseInt(day);
+    
+    if(!checkIsNaN(this, yearNum, monthNum, dayNum)) {
+      // if any fields are NaN do not continue validation
+      return;
+    }
+
     // Use a leading zero for numbers < 10
     const numFormatter = new Intl.NumberFormat('en-US', {
       minimumIntegerDigits: 2,
@@ -170,8 +177,8 @@ export class VaMemorableDate {
 
   private handleDateKey = (event: KeyboardEvent) => {
     if (validKeys.indexOf(event.key) < 0) {
-      event.preventDefault();
-      return false;
+      //event.preventDefault();
+      //return false;
     }
   };
 

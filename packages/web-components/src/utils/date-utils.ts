@@ -152,6 +152,54 @@ export function checkLeapYear(year: number) {
   return (0 == year % 4 && 0 != year % 100) || 0 == year % 400;
 }
 
+
+export function checkIsNaN(
+  component: Components.VaDate | Components.VaMemorableDate,
+  year: number,
+  month: number,
+  day: number,
+  monthYearOnly : boolean = false) : boolean {
+
+  // Begin NaN validation.
+  if (isNaN(year)) {
+    component.invalidYear = true;
+    component.error = 'year-range';
+  }
+  else {
+    component.invalidYear = false;
+  }
+
+  if (!monthYearOnly && isNaN(day)) {
+    component.invalidDay = true;
+    component.error = 'day-range';
+  }
+  else {
+    component.invalidDay = false;
+  }
+
+  if (isNaN(month)) {
+    component.invalidMonth = true;
+    component.error = 'month-range';
+  }
+  else {
+    component.invalidMonth = false;
+  }
+
+  if (component.required && (!year || !month || (!monthYearOnly && !day))) {
+    component.invalidYear = !year;
+    component.invalidMonth = !month;
+    component.invalidDay = monthYearOnly ? false : !day;
+    component.error = 'date-error';
+  }
+
+  // Remove any error message if none of the fields are marked as invalid
+  if (!component.invalidYear && !component.invalidMonth && !component.invalidDay) {
+    component.error = null;
+    return true;
+  }
+  return false;
+}
+
 /**
  * This is used to validate date components and:
  * 1. Indicate which field fails the built-in validation
