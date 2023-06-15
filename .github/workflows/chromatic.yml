@@ -39,3 +39,4 @@ jobs:
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
           storybookBuildDir: packages/storybook/storybook-static
           diagnostics: true
+          debug: true
