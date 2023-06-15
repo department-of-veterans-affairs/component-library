@@ -1844,7 +1844,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@department-of-veterans-affairs/formation@npm:^7.0.5, @department-of-veterans-affairs/formation@npm:^7.0.8":
+"@department-of-veterans-affairs/formation@npm:^7.0.8":
   version: 7.0.8
   resolution: "@department-of-veterans-affairs/formation@npm:7.0.8"
   dependencies:
@@ -1877,7 +1877,7 @@ __metadata:
     "@babel/plugin-syntax-import-meta": ^7.10.4
     "@babel/preset-env": ^7.12.10
     "@babel/preset-react": ^7.14.5
-    "@department-of-veterans-affairs/formation": ^7.0.5
+    "@department-of-veterans-affairs/formation": ^7.0.8
     "@department-of-veterans-affairs/web-components": "workspace:packages/web-components"
     "@testing-library/react": ^12.0.0
     "@testing-library/user-event": ^13.2.1
@@ -1962,7 +1962,7 @@ __metadata:
   dependencies:
     "@axe-core/puppeteer": ^4.4.0
     "@babel/core": ^7.12.13
-    "@department-of-veterans-affairs/formation": ^7.0.5
+    "@department-of-veterans-affairs/formation": ^7.0.8
     "@stencil/core": ^2.19.2
     "@stencil/postcss": ^2.0.0
     "@stencil/react-output-target": ^0.0.9
@@ -1989,7 +1989,7 @@ __metadata:
     react-dom: ^16.7.0
     typescript: ^4.3.5
   peerDependencies:
-    "@department-of-veterans-affairs/formation": ^7.0.5
+    "@department-of-veterans-affairs/formation": ^7.0.8
     i18next: "*"
     i18next-browser-languagedetector: "*"
   languageName: unknown
