@@ -20,5 +20,6 @@
   },
   "dependencies": {
     "webpack": "5"
-  }
+  },
+  "scripts": {}
 }
