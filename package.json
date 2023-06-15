@@ -1,7 +1,14 @@
 {
   "name": "@department-of-veterans-affairs/component-library-monorepo",
   "scripts": {
-    "test": "nothing-to-see"
+    "build": "stencil build --docs-json component-docs.json",
+    "build-bindings": "tsc -p tsconfig.bindings.json",
+    "lint": "eslint src/**/*{.ts,.tsx}",
+    "watch:stencil": "stencil build --watch",
+    "test": "stencil test --spec --e2e",
+    "test.watch": "stencil test --spec --e2e --watchAll",
+    "generate": "stencil generate",
+    "serve": "stencil build --dev --watch --serve"
   },
   "description": "The monorepo containing the component library packages.",
   "private": true,
