@@ -4,7 +4,7 @@
   "packageManager": "yarn@3.0.2",
   "scripts": {
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook --storybook-build-dir ../storybook-build"
+    "build-storybook": "build-storybook"
   },
   "dependencies": {
     "@department-of-veterans-affairs/component-library": "workspace:packages/core",
