@@ -14,8 +14,8 @@ import {
   months,
   days,
   validate,
-  validKeys,
   getErrorParameters,
+  checkIsNaN,
 } from '../../utils/date-utils';
 
 /**
@@ -142,7 +142,12 @@ export class VaDate {
   private handleDateBlur = (event: FocusEvent) => {
     const [year, month, day] = (this.value || '')
       .split('-')
-      .map(val => parseInt(val));
+      .map(val => Number(val));
+
+    if(!checkIsNaN(this, year, month, day, this.monthYearOnly)) {
+      // if any fields are NaN do not continue validation
+      return;
+    }
 
     this.setValue(year, month, day);
     // Run built-in validation. Any custom validation
@@ -189,13 +194,6 @@ export class VaDate {
     this.dateChange.emit(event);
   };
 
-  private handleDateKey = (event: KeyboardEvent) => {
-    if (validKeys.indexOf(event.key) < 0) {
-      event.preventDefault();
-      return false;
-    }
-  };
-
   render() {
     const {
       required,
@@ -204,7 +202,6 @@ export class VaDate {
       error,
       handleDateBlur,
       handleDateChange,
-      handleDateKey,
       monthYearOnly,
       value,
       hint,
@@ -285,7 +282,6 @@ export class VaDate {
               value={year ? year.toString() : ''}
               invalid={this.invalidYear}
               onInput={handleDateChange}
-              onKeyDown={handleDateKey}
               class="input-year"
               inputmode="numeric"
               type="text"

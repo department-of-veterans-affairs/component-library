@@ -1,5 +1,5 @@
 import { Components } from '../components';
-import { checkLeapYear, validate, formatDate, isDateAfter, isDateBefore, isDateSameDay } from './date-utils';
+import { checkLeapYear, validate, formatDate, isDateAfter, isDateBefore, isDateSameDay, checkIsNaN } from './date-utils';
 
 describe('checkLeapYear', () => {
   it('determines an input year is a leap year', () => {
@@ -209,5 +209,78 @@ describe('isDateSameDay', () => {
     const date1 = new Date(Date.UTC(2022, 11, 17, 8, 24, 0));
     const date2 = new Date(Date.UTC(1995, 11, 17, 8, 24, 0));
     expect(isDateSameDay(date1, date2)).toEqual(false);
+  });
+})
+
+describe('checkIsNaN', () => {
+  it('indicates when the year is NaN', () => {
+    const memorableDateComponent = {} as Components.VaMemorableDate;
+    const year = Number('1999n');
+    const month =  Number('1');
+    const day = Number('1');
+
+    const result = checkIsNaN(memorableDateComponent, year, month, day);
+
+    expect(result).toEqual(false);
+    expect(memorableDateComponent.error).toEqual(`year-range`);
+    expect(memorableDateComponent.invalidYear).toEqual(true);
+  });
+
+  it('indicates when the month is NaN', () => {
+    const memorableDateComponent = {} as Components.VaMemorableDate;
+    const year = Number('1999');
+    const month =  Number('1n');
+    const day = Number('1');
+
+    const result = checkIsNaN(memorableDateComponent, year, month, day);
+
+    expect(result).toEqual(false);
+    expect(memorableDateComponent.error).toEqual(`month-range`);
+    expect(memorableDateComponent.invalidMonth).toEqual(true);
+  });
+
+  it('indicates when the day is NaN', () => {
+    const memorableDateComponent = {} as Components.VaMemorableDate;
+    const year = Number('1999');
+    const month =  Number('1');
+    const day = Number('1n');
+
+    const result = checkIsNaN(memorableDateComponent, year, month, day);
+
+    expect(result).toEqual(false);
+    expect(memorableDateComponent.error).toEqual(`day-range`);
+    expect(memorableDateComponent.invalidDay).toEqual(true);
+  });
+
+  it('passes when the all inputs are number', () => {
+    const memorableDateComponent = {} as Components.VaMemorableDate;
+    const year = Number('1999');
+    const month =  Number('1');
+    const day = Number('1');
+
+    const result = checkIsNaN(memorableDateComponent, year, month, day);
+
+    expect(result).toEqual(true);
+    expect(memorableDateComponent.error).toEqual(null);
+    expect(memorableDateComponent.invalidYear).toEqual(false);
+    expect(memorableDateComponent.invalidMonth).toEqual(false);
+    expect(memorableDateComponent.invalidDay).toEqual(false);
+  });
+
+  it('removes error indicators when the values are valid', () => {
+    const memorableDateComponent = { error: 'Some error'} as Components.VaMemorableDate;
+    const year = Number('1999');
+    const month =  Number('1');
+    const day = Number('1');
+
+    const result = checkIsNaN(memorableDateComponent, year, month, day);
+
+    expect(result).toEqual(true);
+    expect(memorableDateComponent.error).toEqual(null);
+
+    expect(memorableDateComponent.error).toEqual(null);
+    expect(memorableDateComponent.invalidYear).toEqual(false);
+    expect(memorableDateComponent.invalidMonth).toEqual(false);
+    expect(memorableDateComponent.invalidDay).toEqual(false);
   });
 })
