@@ -128,6 +128,7 @@ export const WithMonthSelect = Template.bind(null);
 WithMonthSelect.args = {
   ...defaultArgs,
   monthSelect: true,
+  value: '2022-04-19',
 };
 
 export const ErrorWithMonthSelect = Template.bind(null);
