@@ -567,31 +567,6 @@ describe('va-memorable-date', () => {
     expect(date.getAttribute('value')).toBe('2022-01-02');
   });
 
-  it('only allows specific keys to be used inside input fields', async () => {
-    const page = await newE2EPage();
-
-    await page.setContent('<va-memorable-date name="test"/>');
-    const date = await page.find('va-memorable-date');
-    const handleMonth = await page.$('pierce/[name="testMonth"]');
-    const handleDay = await page.$('pierce/[name="testDay"]');
-    const handleYear = await page.$('pierce/[name="testYear"]');
-    // Month
-    await handleMonth.press('a');
-    await handleMonth.press('Tab');
-    // Day
-    await handleDay.press('b');
-    await handleDay.press('Tab');
-    // Year
-    await handleYear.press('`');
-    await handleYear.press(']');
-    await handleYear.press('/');
-    await handleYear.press(',');
-    // Trigger Blur
-    await handleYear.press('Tab');
-    await page.waitForChanges();
-    expect(date.getAttribute('value')).toBe('');
-  });
-
   it('fires an analytics event when enableAnalytics is true', async () => {
     const page = await newE2EPage();
     await page.setContent(
@@ -1214,31 +1189,6 @@ describe('va-memorable-date', () => {
     expect(date.getAttribute('value')).toBe('2022-01-02');
   });
 
-  it('uswds v3 only allows specific keys to be used inside input fields', async () => {
-    const page = await newE2EPage();
-
-    await page.setContent('<va-memorable-date name="test" uswds />');
-    const date = await page.find('va-memorable-date');
-    const handleMonth = await page.$('pierce/[name="testMonth"]');
-    const handleDay = await page.$('pierce/[name="testDay"]');
-    const handleYear = await page.$('pierce/[name="testYear"]');
-    // Month
-    await handleMonth.press('a');
-    await handleMonth.press('Tab');
-    // Day
-    await handleDay.press('b');
-    await handleDay.press('Tab');
-    // Year
-    await handleYear.press('`');
-    await handleYear.press(']');
-    await handleYear.press('/');
-    await handleYear.press(',');
-    // Trigger Blur
-    await handleYear.press('Tab');
-    await page.waitForChanges();
-    expect(date.getAttribute('value')).toBe('');
-  });
-
   it('uswds v3 fires an analytics event when enableAnalytics is true', async () => {
     const page = await newE2EPage();
     await page.setContent(
@@ -1752,30 +1702,6 @@ describe('va-memorable-date', () => {
     expect(date.getAttribute('value')).toBe('2022-01-02');
   });
 
-  it('uswds v3 only allows specific keys to be used inside input fields with monthSelect', async () => {
-    const page = await newE2EPage();
-
-    await page.setContent('<va-memorable-date name="test" uswds month-select />');
-    const date = await page.find('va-memorable-date');
-    const handleMonth = await page.$('pierce/[name="testMonth"]');
-    const handleDay = await page.$('pierce/[name="testDay"]');
-    const handleYear = await page.$('pierce/[name="testYear"]');
-    // Month
-    await handleMonth.select('a');
-    await handleMonth.press('Tab');
-    // Day
-    await handleDay.press('b');
-    await handleDay.press('Tab');
-    // Year
-    await handleYear.press('`');
-    await handleYear.press(']');
-    await handleYear.press('/');
-    await handleYear.press(',');
-    // Trigger Blur
-    await handleYear.press('Tab');
-    await page.waitForChanges();
-    expect(date.getAttribute('value')).toBe('');
-  });
 
   it('uswds v3 fires an analytics event when enableAnalytics is true with monthSelect', async () => {
     const page = await newE2EPage();

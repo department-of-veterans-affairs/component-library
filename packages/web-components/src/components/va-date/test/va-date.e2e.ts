@@ -476,7 +476,12 @@ describe('va-date', () => {
 
       const date = await page.find('va-date');
       const handleYear = await page.$('pierce/[name="testYear"]');
+      const handleMonth = await page.$('pierce/[name="testMonth"]');
 
+      // Month
+      await handleMonth.select('3');
+      await page.waitForChanges();
+      
       // Year
       await handleYear.press('3');
       await handleYear.press('0');
