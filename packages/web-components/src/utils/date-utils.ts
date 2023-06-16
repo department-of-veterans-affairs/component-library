@@ -152,7 +152,10 @@ export function checkLeapYear(year: number) {
   return (0 == year % 4 && 0 != year % 100) || 0 == year % 400;
 }
 
-
+/**
+ * Checks if any of the of inputs provided resolve to NaN
+ * Returns false if any are NaN and highlights component as error
+ */
 export function checkIsNaN(
   component: Components.VaDate | Components.VaMemorableDate,
   year: number,
@@ -192,7 +195,7 @@ export function checkIsNaN(
     component.error = 'date-error';
   }
 
-  // Remove any error message if none of the fields are marked as invalid
+  // Remove any error message if none of the fields are NaN
   if (!component.invalidYear && !component.invalidMonth && !component.invalidDay) {
     component.error = null;
     return true;
