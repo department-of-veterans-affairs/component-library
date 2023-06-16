@@ -1,6 +1,9 @@
 {
   "name": "@department-of-veterans-affairs/component-library-monorepo",
   "description": "The monorepo containing the component library packages.",
+  "scripts": {
+    "chromatic-bridge": "echo \"Nothing to see here\""
+  },
   "private": true,
   "version": "1.0.0",
   "license": "MIT",
