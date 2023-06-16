@@ -14,7 +14,6 @@ import {
   getErrorParameters,
   months,
   validate,
-  validKeys,
   checkIsNaN,
 } from '../../utils/date-utils';
 
@@ -114,9 +113,9 @@ export class VaMemorableDate {
 
   private handleDateBlur = (event: FocusEvent) => {
     const [year, month, day] = (this.value || '').split('-');
-    const yearNum = parseInt(year);
-    const monthNum = parseInt(month);
-    const dayNum = parseInt(day);
+    const yearNum = Number(year);
+    const monthNum = Number(month);
+    const dayNum = Number(day);
     
     if(!checkIsNaN(this, yearNum, monthNum, dayNum)) {
       // if any fields are NaN do not continue validation
@@ -175,13 +174,6 @@ export class VaMemorableDate {
     this.dateChange.emit(event);
   };
 
-  private handleDateKey = (event: KeyboardEvent) => {
-    if (validKeys.indexOf(event.key) < 0) {
-      //event.preventDefault();
-      //return false;
-    }
-  };
-
   /**
    * Whether or not an analytics event will be fired.
    */
@@ -217,7 +209,6 @@ export class VaMemorableDate {
       error,
       handleDateBlur,
       handleDateChange,
-      handleDateKey,
       value,
       uswds,
       monthSelect,
@@ -271,7 +262,6 @@ export class VaMemorableDate {
           // if NaN provide empty string
           value={month?.toString()}
           onInput={handleDateChange}
-          onKeyDown={handleDateKey}
           class="usa-form-group--month-input"
           reflectInputError={error ? true : false}
           inputmode="numeric"
@@ -316,7 +306,6 @@ export class VaMemorableDate {
                   // if NaN provide empty string
                   value={day?.toString()}
                   onInput={handleDateChange}
-                  onKeyDown={handleDateKey}
                   class="usa-form-group--day-input"
                   reflectInputError={error ? true : false}
                   inputmode="numeric"
@@ -337,7 +326,6 @@ export class VaMemorableDate {
                   // if NaN provide empty string
                   value={year?.toString()}
                   onInput={handleDateChange}
-                  onKeyDown={handleDateKey}
                   class="usa-form-group--year-input"
                   reflectInputError={error ? true : false}
                   inputmode="numeric"
@@ -378,7 +366,6 @@ export class VaMemorableDate {
                 // if NaN provide empty string
                 value={month?.toString()}
                 onInput={handleDateChange}
-                onKeyDown={handleDateKey}
                 class="input-month"
                 inputmode="numeric"
                 type="text"
@@ -395,7 +382,6 @@ export class VaMemorableDate {
                 // if NaN provide empty string
                 value={day?.toString()}
                 onInput={handleDateChange}
-                onKeyDown={handleDateKey}
                 class="input-day"
                 inputmode="numeric"
                 type="text"
@@ -412,7 +398,6 @@ export class VaMemorableDate {
                 // if NaN provide empty string
                 value={year?.toString()}
                 onInput={handleDateChange}
-                onKeyDown={handleDateKey}
                 class="input-year"
                 inputmode="numeric"
                 type="text"
