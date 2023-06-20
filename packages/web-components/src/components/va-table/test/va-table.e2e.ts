@@ -121,7 +121,7 @@ describe('va-table', () => {
   });
 
   it('right aligns columns with numeric data', async () => {
-    const rightAlignClass = 'medium-screen:vads-u-text-align--right';
+    const rightAlignClass = 'text-align-right';
     const page = await newE2EPage();
     await page.setContent(`
       <va-table>
