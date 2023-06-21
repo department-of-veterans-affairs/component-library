@@ -23,12 +23,24 @@ export namespace Components {
           * Optional accordion section heading text. Only used in analytics event. Default is null.
          */
         "sectionHeading"?: string;
+        /**
+          * Whether or not the component will use USWDS v3 styling.
+         */
+        "uswds"?: boolean;
     }
     interface VaAccordionItem {
+        /**
+          * The id of the accordion item, required for accessibility. (USWDS only)
+         */
+        "bordered"?: boolean;
         /**
           * The accordion item header text
          */
         "header"?: string;
+        /**
+          * The id of the accordion item, required for accessibility. (USWDS only)
+         */
+        "itemId"?: string;
         /**
           * Header level for button wrapper. Must be between 1 and 6
          */
@@ -41,6 +53,10 @@ export namespace Components {
           * Optional accordion item subheader text. Default is null.
          */
         "subheader"?: string;
+        /**
+          * Whether or not the component will use USWDS v3 styling.
+         */
+        "uswds"?: boolean;
     }
     interface VaAdditionalInfo {
         /**
@@ -1572,12 +1588,24 @@ declare namespace LocalJSX {
           * Optional accordion section heading text. Only used in analytics event. Default is null.
          */
         "sectionHeading"?: string;
+        /**
+          * Whether or not the component will use USWDS v3 styling.
+         */
+        "uswds"?: boolean;
     }
     interface VaAccordionItem {
+        /**
+          * The id of the accordion item, required for accessibility. (USWDS only)
+         */
+        "bordered"?: boolean;
         /**
           * The accordion item header text
          */
         "header"?: string;
+        /**
+          * The id of the accordion item, required for accessibility. (USWDS only)
+         */
+        "itemId"?: string;
         /**
           * Header level for button wrapper. Must be between 1 and 6
          */
@@ -1594,6 +1622,10 @@ declare namespace LocalJSX {
           * Optional accordion item subheader text. Default is null.
          */
         "subheader"?: string;
+        /**
+          * Whether or not the component will use USWDS v3 styling.
+         */
+        "uswds"?: boolean;
     }
     interface VaAdditionalInfo {
         /**
