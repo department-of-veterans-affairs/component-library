@@ -2,7 +2,6 @@ import React from 'react';
 import {
   CONTACTS,
   contactsMap,
-  Table,
 } from '@department-of-veterans-affairs/component-library';
 import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
 
@@ -10,20 +9,34 @@ const telephoneDocs = getWebComponentDocs('va-telephone');
 
 // This builds the available "CONTACTS" list table
 // Descriptions are available in the contacts.js file
-const fields = [
+const columns = [
   { label: 'Property name (CONTACTS.x)', value: 'key' },
-  { label: 'Phone number', value: 'value' },
+  { label: 'Phone number', value: 'phone' },
   { label: 'Description', value: 'description' },
 ];
+const data = Object.entries(contactsMap).map(c => ([
+  c[0], c[1].phoneNumber, c[1].description
+]));
+
 const Contacts = () => (
-  <Table
-    fields={fields}
-    data={Object.entries(contactsMap).map(c => ({
-      key: c[0],
-      value: <va-telephone contact={c[1].phoneNumber} />,
-      description: <div style={{ maxWidth: '30em' }}>{c[1].description}</div>,
-    }))}
-  />
+  <va-table>
+    <va-table-row slot="headers">
+      {columns.map((col) => (
+        <span key={col.value}>{col.label}</span>
+      ))}
+    </va-table-row>
+
+    {data.map((row, index) => (
+      <va-table-row key={`row-${index}`}>
+        {row.map((item, i) => {
+          if (i === 1) {
+            return <p><va-telephone key={`row-${i}`} contact={item}></va-telephone></p>
+          }
+          return <p key={`row-${i}`}>{item}</p>;
+        })}
+      </va-table-row>
+    ))}
+  </va-table>
 );
 
 export default {
