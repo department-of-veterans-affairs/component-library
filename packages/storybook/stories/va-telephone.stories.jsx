@@ -14,9 +14,9 @@ const columns = [
   { label: 'Phone number', value: 'phone' },
   { label: 'Description', value: 'description' },
 ];
-const data = Object.entries(contactsMap).map(c => ([
-  c[0], c[1].phoneNumber, c[1].description
-]));
+const data = Object.entries(contactsMap).map(c => (
+  {key: c[0], phoneNumber: c[1].phoneNumber, description: c[1].description}
+));
 
 const Contacts = () => (
   <va-table>
@@ -26,14 +26,11 @@ const Contacts = () => (
       ))}
     </va-table-row>
 
-    {data.map((row, index) => (
-      <va-table-row key={`row-${index}`}>
-        {row.map((item, i) => {
-          if (i === 1) {
-            return <p><va-telephone key={`row-${i}`} contact={item}></va-telephone></p>
-          }
-          return <p key={`row-${i}`}>{item}</p>;
-        })}
+    {data.map(row => (
+      <va-table-row key={row.key}>
+        <p>{row.key}</p>
+        <span><va-telephone contact={row.phoneNumber}></va-telephone></span>
+        <span>{row.description}</span>
       </va-table-row>
     ))}
   </va-table>
