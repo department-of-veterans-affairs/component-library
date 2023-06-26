@@ -31,12 +31,6 @@ export class VaAccordionItem {
   accordionItemToggled: EventEmitter;
 
   /**
-   * 
-   * Begin V1 Props
-   * 
-   */
-
-  /**
    * The accordion item header text
    */
   @Prop() header?: string;
@@ -57,17 +51,6 @@ export class VaAccordionItem {
   @Prop() level?: number = 2;
 
   /**
-   * 
-   * End V1 Props
-   * 
-   */
-
-  /**
-   * The id of the accordion item, required for accessibility. (USWDS only)
-   */
-  @Prop() itemId?: string;
-
-  /**
    * The id of the accordion item, required for accessibility. (USWDS only)
    */
   @Prop() bordered?: boolean = false;
@@ -76,13 +59,6 @@ export class VaAccordionItem {
    * Whether or not the component will use USWDS v3 styling.
    */
   @Prop() uswds?: boolean = false;
-
-
-  /**
-   * 
-   * Begin V1 state
-   * 
-   */
 
   /**
    * Local State for slot=headline replacement of props (header).
@@ -95,33 +71,6 @@ export class VaAccordionItem {
    * Provides context of the level to the Accordion Item
    */
   @State() slotTag: string = null;
-
-  /**
-   * 
-   * End V1 state
-   * 
-   */
-
-  private toggle(e) {
-    const content = this.expandButton.parentElement.nextElementSibling
-    if (content.hasAttribute('hidden')) {
-      this.accordionItemToggled.emit(e);
-      this.expandButton.setAttribute('aria-expanded', 'true');
-      content.removeAttribute('hidden');
-    } else {
-      this.expandButton.setAttribute('aria-expanded', 'false');
-      content.setAttribute('hidden', 'true');
-    }
-  }
-
-
-  /**
-   * 
-   * Begin V1 methods and variables
-   * 
-   */
-
-
 
   /**
    * Toggle button reference
@@ -147,54 +96,63 @@ export class VaAccordionItem {
     // auto-expand accordion if the window hash matches the ID
     if (this.el.id && this.el.id === window.location.hash.slice(1)) {
       const currentTarget = this.expandButton;
+      
       if (currentTarget) {
-        currentTarget.click();
+        this.open = true;
       }
     }
   }
-
-  /**
-   * 
-   * End V1
-   * 
-   */
-
-  
 
   render() {
     const {uswds} = this;
 
     if (uswds) {
-      const {itemId, bordered} = this;
+      const {bordered, header, subheader, level, open} = this;
       const accordionItemClass = classNames({
         'usa-accordion--bordered': bordered,
-      })
+      });
+      const Header = () => {
+        const headline = this.el.querySelector('[slot="headline"]');
+        const ieSlotCheckHeader = headline?.innerHTML;
+        // eslint-disable-next-line i18next/no-literal-string
+        const Tag = (headline && headline.tagName.includes("H"))
+          ? headline.tagName.toLowerCase()
+          // eslint-disable-next-line i18next/no-literal-string
+          : `h${level}`;
+
+        return (
+          <Tag class="usa-accordion__heading">
+            <button
+              type="button"
+              class="usa-accordion__button"
+              aria-expanded={open ? 'true' : 'false'}
+              aria-controls="content"
+              onClick={this.toggleOpen.bind(this)}
+              ref={el => {
+                this.expandButton = el;
+              }}
+            >
+              <span class="usa-accordion__header">
+                <slot name="icon" />
+                {this.slotHeader || header || ieSlotCheckHeader}
+              </span>
+              {this.subheader &&
+                <span class="usa-accordion__subheader">
+                  <slot name="subheader-icon" />
+                  {subheader}
+                </span>}
+            </button>
+          </Tag >
+        );
+      }
+
       return (
         <Host>
           <div class={accordionItemClass}>
-            <h4 class="usa-accordion__heading">
-              <button
-                type="button"
-                class="usa-accordion__button"
-                aria-expanded="false"
-                aria-controls={itemId}
-                onClick={this.toggle.bind(this)}
-                ref={el => {
-                  this.expandButton = el;
-                }}
-              >
-                <span class="usa-accordion__header">
-                  <slot name="header-icon"></slot>
-                  <slot name="header"></slot>
-                </span>
-                <span class="usa-accordion__subheader">
-                  <slot name="subheader-icon"></slot>
-                  <slot name="subheader"></slot>
-                </span>
-              </button>
-            </h4>
-            <div id={itemId} class="usa-accordion__content usa-prose" hidden>
-              <slot name="content"></slot>
+            <Header/>
+            <slot name="headline" onSlotchange={() => this.populateStateValues()} />
+            <div id="content" class="usa-accordion__content usa-prose" hidden={!open}>
+              <slot></slot>
             </div>
           </div>
         </Host>

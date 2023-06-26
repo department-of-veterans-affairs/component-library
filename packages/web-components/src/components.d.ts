@@ -38,10 +38,6 @@ export namespace Components {
          */
         "header"?: string;
         /**
-          * The id of the accordion item, required for accessibility. (USWDS only)
-         */
-        "itemId"?: string;
-        /**
           * Header level for button wrapper. Must be between 1 and 6
          */
         "level"?: number;
@@ -1602,10 +1598,6 @@ declare namespace LocalJSX {
           * The accordion item header text
          */
         "header"?: string;
-        /**
-          * The id of the accordion item, required for accessibility. (USWDS only)
-         */
-        "itemId"?: string;
         /**
           * Header level for button wrapper. Must be between 1 and 6
          */

@@ -12,7 +12,7 @@
   display: block;
 }
 
-.usa-accordion__header ::slotted([slot=header-icon]), .usa-accordion__subheader ::slotted([slot=subheader-icon]){
+.usa-accordion__header ::slotted([slot=icon]), .usa-accordion__subheader ::slotted([slot=subheader-icon]){
   margin-right: 15px;
   width: inherit;
 }
@@ -24,7 +24,32 @@
   margin-top: 2px;
 }
 
+.usa-accordion__button {
+  position: relative;
+}
 
+.usa-accordion__button[aria-expanded=false], .usa-accordion__button[aria-expanded=true] {
+  background-image: none;
+}
+
+.usa-accordion__button[aria-expanded=false]:after, .usa-accordion__button[aria-expanded=true]:after {
+  font-family: "Font Awesome 5 Free";
+  position: absolute;
+  right: 20px;
+  
+}
+
+.usa-accordion__button[aria-expanded=false]:after {
+  content: "\2b";
+  font-size: 20px;
+  top: calc(50% - 10px);
+}
+
+.usa-accordion__button[aria-expanded=true]:after {
+  content: "\f068";
+  font-size: 14px;
+  top: calc(50% - 6px);
+}
 
 :host {
   display: block;

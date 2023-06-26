@@ -99,17 +99,18 @@ export class VaAccordion {
   itemToggledHandler(event: CustomEvent) {
     
 
-    if (this.uswds && this.openSingle) {
-      let items = getSlottedNodes(this.el, 'va-accordion-item');
-      items.forEach((item) => {
-        let el = item as Element;
-        let button = el.shadowRoot.querySelector('button.usa-accordion__button') as HTMLButtonElement;
-        if (button.getAttribute('aria-expanded') === 'true') {
-          button.click()
-        }
-      })
-
-    } else {
+    /*if (this.uswds) {
+      if (this.openSingle) {
+        let items = getSlottedNodes(this.el, 'va-accordion-item');
+        items.forEach((item) => {
+          let el = item as Element;
+          let button = el.shadowRoot.querySelector('button.usa-accordion__button') as HTMLButtonElement;
+          if (button.getAttribute('aria-expanded') === 'true') {
+            button.click()
+          }
+        })
+      }
+    } else {*/
       // eslint-disable-next-line i18next/no-literal-string
       const clickedItem = (event.target as HTMLElement).closest('va-accordion-item');
       // Usage for slot to provide context to analytics for header and level
@@ -159,7 +160,7 @@ export class VaAccordion {
 
       // Check if all accordions are open or closed due to user clicks
       this.accordionsOpened();
-    }
+    //}
     
   }
 
@@ -182,10 +183,21 @@ export class VaAccordion {
   // Expand or Collapse All Function for Button Click
   private expandCollapseAll = (expanded: boolean) => {
     this.expanded = expanded;
-    getSlottedNodes(this.el, 'va-accordion-item').forEach(item =>
-      /* eslint-disable-next-line i18next/no-literal-string */
-      (item as Element).setAttribute('open', `${expanded}`),
-    );
+    getSlottedNodes(this.el, 'va-accordion-item').forEach((item) => {
+      if (this.uswds) {
+        let button = (item as Element).shadowRoot.querySelector('button.usa-accordion__button') as HTMLButtonElement,
+            buttonExpanded = button.getAttribute('aria-expanded') === 'true';
+        if (expanded && !buttonExpanded) {
+          button.click();
+        }
+        if (!expanded && buttonExpanded) {
+          button.click();
+        }
+      } else {
+        /* eslint-disable-next-line i18next/no-literal-string */
+        (item as Element).setAttribute('open', `${expanded}`)
+      }
+    });
   };
 
   isScrolledIntoView(el: Element) {
@@ -210,16 +222,39 @@ export class VaAccordion {
   }
 
   render() {
-    const {uswds = false} = this;
+    const {uswds = false, openSingle} = this;
     if (uswds) {
       const { bordered } = this;
       const accordionClass = classNames({
         'usa-accordion': true,
         'usa-accordion--bordered': bordered,
-      })
+      });
+      const accordionItemIDs = [...this.el.children]
+        .filter((el) => el.tagName.toLowerCase() === 'va-accordion-item')
+        .map((el) => el.itemId);
       return (
         <Host>
           <div class={ accordionClass } ref={(accordionContainer) => this.accordionContainer = accordionContainer}>
+            {
+              !openSingle ? (
+                <button
+                  class="va-accordion__button"
+                  ref={el => (this.expandCollapseBtn = el as HTMLButtonElement)}
+                  onClick={() => this.expandCollapseAll(!this.expanded)}
+                  aria-label={
+                    this.expanded
+                      ? i18next.t('collapse-all-aria-label')
+                      : i18next.t('expand-all-aria-label')
+                  }
+                  aria-controls={accordionItemIDs.join(' ')}
+                  aria-expanded={`${this.expanded}`}
+                >
+                  {this.expanded
+                    ? `${i18next.t('collapse-all')} -`
+                    : `${i18next.t('expand-all')} +`}
+                </button>
+              ) : null
+            }
             <slot></slot>
           </div>
         </Host>
@@ -230,7 +265,7 @@ export class VaAccordion {
         .map((el) => el.id);
       return (
         <Host>
-          {!this.openSingle && (
+          {!openSingle && (
             <button
               class="va-accordion__button"
               ref={el => (this.expandCollapseBtn = el as HTMLButtonElement)}

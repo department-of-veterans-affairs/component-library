@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { VaAccordion, VaAccordionItem } from '@department-of-veterans-affairs/web-components/react-bindings';
 import {
   getWebComponentDocs,
   componentStructure,
@@ -22,48 +21,42 @@ export default {
   },
 };
 
-const Template = args => {  
-  return (
-    <VaAccordion {...args}>
-      <VaAccordionItem uswds itemId="first">
-        <span slot="header">First Amendment</span>
-        <span slot="content">
-            <p>
-              Congress shall make no law respecting an establishment of religion, or
-              prohibiting the free exercise thereof; or abridging the freedom of speech,
-              or of the press; or the right of the people peaceably to assemble, and to
-              petition the Government for a redress of grievances.
-            </p>
-        </span>
-      </VaAccordionItem>
-      <VaAccordionItem uswds itemId="second">
-        <span slot="header">Second Amendment</span>
-        <span slot="content">
-            <p>
-              A well regulated Militia, being necessary to the security of a free State, 
-              the right of the people to keep and bear Arms, shall not be infringed.
-            </p>
-        </span>
-      </VaAccordionItem>
-      <VaAccordionItem uswds itemId="third">
-        <span slot="header">Third Amendment</span>
-        <span slot="content">
-            <p>
-            No Soldier shall, in time of peace be quartered in any house, without the 
-            consent of the Owner, nor in time of war, but in a manner to be prescribed by law.
-            </p>
-        </span>
-      </VaAccordionItem>
-    </VaAccordion>
-  );
-};
+const Template = args => (
+  <va-accordion {...args}>
+    <va-accordion-item uswds id="first" header="First Amendment">
+      <span>
+          <p>
+            Congress shall make no law respecting an establishment of religion, or
+            prohibiting the free exercise thereof; or abridging the freedom of speech,
+            or of the press; or the right of the people peaceably to assemble, and to
+            petition the Government for a redress of grievances.
+          </p>
+      </span>
+    </va-accordion-item>
+    <va-accordion-item uswds id="second" header="Second Amendment">
+      <span>
+          <p>
+            A well regulated Militia, being necessary to the security of a free State, 
+            the right of the people to keep and bear Arms, shall not be infringed.
+          </p>
+      </span>
+    </va-accordion-item>
+    <va-accordion-item uswds id="third" header="Third Amendment">
+      <span>
+          <p>
+          No Soldier shall, in time of peace be quartered in any house, without the 
+          consent of the Owner, nor in time of war, but in a manner to be prescribed by law.
+          </p>
+      </span>
+    </va-accordion-item>
+  </va-accordion>
+);
 
 const BorderedTemplate = args => {  
   return (
-    <VaAccordion {...args}>
-      <VaAccordionItem uswds itemId="first" bordered="true">
-        <span slot="header">First Amendment</span>
-        <span slot="content">
+    <va-accordion {...args}>
+      <va-accordion-item uswds id="first" bordered="true" header="First Amendment">
+        <span>
             <p>
               Congress shall make no law respecting an establishment of religion, or
               prohibiting the free exercise thereof; or abridging the freedom of speech,
@@ -71,118 +64,198 @@ const BorderedTemplate = args => {
               petition the Government for a redress of grievances.
             </p>
         </span>
-      </VaAccordionItem>
-      <VaAccordionItem uswds itemId="second" bordered="true">
-        <span slot="header">Second Amendment</span>
-        <span slot="content">
+      </va-accordion-item>
+      <va-accordion-item uswds id="second" bordered="true" header="Second Amendment">
+        <span>
             <p>
               A well regulated Militia, being necessary to the security of a free State, 
               the right of the people to keep and bear Arms, shall not be infringed.
             </p>
         </span>
-      </VaAccordionItem>
-      <VaAccordionItem uswds itemId="third" bordered="true">
-        <span slot="header">Third Amendment</span>
-        <span slot="content">
+      </va-accordion-item>
+      <va-accordion-item uswds id="third" bordered="true" header="Third Amendment">
+        <span>
             <p>
             No Soldier shall, in time of peace be quartered in any house, without the 
             consent of the Owner, nor in time of war, but in a manner to be prescribed by law.
             </p>
         </span>
-      </VaAccordionItem>
-    </VaAccordion>
+      </va-accordion-item>
+    </va-accordion>
   );
 };
 
-const TemplateSubheader = args => {
+const TemplateSubheader = args => (
+  <va-accordion {...args}>
+    <va-accordion-item uswds id="first" header="First Amendment" subheader="Subheader">
+      <span>
+          <p>
+            Congress shall make no law respecting an establishment of religion, or
+            prohibiting the free exercise thereof; or abridging the freedom of speech,
+            or of the press; or the right of the people peaceably to assemble, and to
+            petition the Government for a redress of grievances.
+          </p>
+      </span>
+    </va-accordion-item>
+    <va-accordion-item uswds id="second" header="Second Amendment" subheader="Subheader">
+      <span>
+          <p>
+            A well regulated Militia, being necessary to the security of a free State, 
+            the right of the people to keep and bear Arms, shall not be infringed.
+          </p>
+      </span>
+    </va-accordion-item>
+    <va-accordion-item uswds id="third" header="Third Amendment" subheader="Subheader">
+      <span>
+          <p>
+          No Soldier shall, in time of peace be quartered in any house, without the 
+          consent of the Owner, nor in time of war, but in a manner to be prescribed by law.
+          </p>
+      </span>
+    </va-accordion-item>
+  </va-accordion>
+);
+
+const TemplateIconHeaders = args => (
+  <va-accordion {...args}>
+    <va-accordion-item uswds id="first" header="First Amendment" subheader="Subheader">
+      <i slot="icon" className="fas fa-info-circle vads-u-color--green"/>
+      <i aria-hidden="true" className="fas fa-envelope" slot="subheader-icon"/>  
+      <span>
+          <p>
+            Congress shall make no law respecting an establishment of religion, or
+            prohibiting the free exercise thereof; or abridging the freedom of speech,
+            or of the press; or the right of the people peaceably to assemble, and to
+            petition the Government for a redress of grievances.
+          </p>
+      </span>
+    </va-accordion-item>
+    <va-accordion-item uswds id="second" header="Second Amendment" subheader="Subheader">
+      <i slot="icon" className="fas fa-info-circle vads-u-color--green"/>
+      <i aria-hidden="true" className="fas fa-envelope" slot="subheader-icon"/>  
+      <span>
+          <p>
+            A well regulated Militia, being necessary to the security of a free State, 
+            the right of the people to keep and bear Arms, shall not be infringed.
+          </p>
+      </span>
+    </va-accordion-item>
+    <va-accordion-item uswds id="third" header="Third Amendment" subheader="Subheader">
+      <i slot="icon" className="fas fa-info-circle vads-u-color--green"/>
+      <i aria-hidden="true" className="fas fa-envelope" slot="subheader-icon"/>  
+      <span>
+          <p>
+          No Soldier shall, in time of peace be quartered in any house, without the 
+          consent of the Owner, nor in time of war, but in a manner to be prescribed by law.
+          </p>
+      </span>
+    </va-accordion-item>
+  </va-accordion>
+);
+
+const TemplateHeadlineSlot = args => (
+  <va-accordion {...args}>
+    <va-accordion-item uswds id="first">
+      <h6 slot="headline">First Amendment</h6>
+      <span>
+          <p>
+            Congress shall make no law respecting an establishment of religion, or
+            prohibiting the free exercise thereof; or abridging the freedom of speech,
+            or of the press; or the right of the people peaceably to assemble, and to
+            petition the Government for a redress of grievances.
+          </p>
+      </span>
+    </va-accordion-item>
+    <va-accordion-item uswds id="second">
+    <h6 slot="headline">Second Amendment</h6>
+      <span>
+          <p>
+            A well regulated Militia, being necessary to the security of a free State, 
+            the right of the people to keep and bear Arms, shall not be infringed.
+          </p>
+      </span>
+    </va-accordion-item>
+    <va-accordion-item uswds id="third">
+      <h6 slot="headline">Third Amendment</h6>
+      <span>
+          <p>
+          No Soldier shall, in time of peace be quartered in any house, without the 
+          consent of the Owner, nor in time of war, but in a manner to be prescribed by law.
+          </p>
+      </span>
+    </va-accordion-item>
+  </va-accordion>
+);
+
+
+const TemplateLevel = args => (
+  <va-accordion {...args}>
+    <va-accordion-item uswds level="5" id="first" header="First Amendment">
+      <span>
+          <p>
+            Congress shall make no law respecting an establishment of religion, or
+            prohibiting the free exercise thereof; or abridging the freedom of speech,
+            or of the press; or the right of the people peaceably to assemble, and to
+            petition the Government for a redress of grievances.
+          </p>
+      </span>
+    </va-accordion-item>
+    <va-accordion-item uswds level="5" id="second" header="Second Amendment">
+      <span>
+          <p>
+            A well regulated Militia, being necessary to the security of a free State, 
+            the right of the people to keep and bear Arms, shall not be infringed.
+          </p>
+      </span>
+    </va-accordion-item>
+    <va-accordion-item uswds level="5" id="third" header="Third Amendment">
+      <span>
+          <p>
+          No Soldier shall, in time of peace be quartered in any house, without the 
+          consent of the Owner, nor in time of war, but in a manner to be prescribed by law.
+          </p>
+      </span>
+    </va-accordion-item>
+  </va-accordion>
+);
+
+const I18nTemplate = args => {
+  const [lang, setLang] = useState('en');
+
+  useEffect(() => {
+    document.querySelector('main').setAttribute('lang', lang);
+  }, [lang]);
+
   return (
-    <VaAccordion {...args}>
-      <VaAccordionItem uswds itemId="first" bordered="true">
-        <span slot="header">First Amendment</span>
-        <span slot="subheader">Subheader</span>
-        <span slot="content">
-            <p>
-              Congress shall make no law respecting an establishment of religion, or
-              prohibiting the free exercise thereof; or abridging the freedom of speech,
-              or of the press; or the right of the people peaceably to assemble, and to
-              petition the Government for a redress of grievances.
-            </p>
-        </span>
-      </VaAccordionItem>
-      <VaAccordionItem uswds itemId="second" bordered="true">
-        <span slot="header">Second Amendment</span>
-        <span slot="subheader">Subheader</span>
-        <span slot="content">
-            <p>
-              A well regulated Militia, being necessary to the security of a free State, 
-              the right of the people to keep and bear Arms, shall not be infringed.
-            </p>
-        </span>
-      </VaAccordionItem>
-      <VaAccordionItem uswds itemId="third" bordered="true">
-        <span slot="header">Third Amendment</span>
-        <span slot="subheader">Subheader</span>
-        <span slot="content">
-            <p>
-            No Soldier shall, in time of peace be quartered in any house, without the 
-            consent of the Owner, nor in time of war, but in a manner to be prescribed by law.
-            </p>
-        </span>
-      </VaAccordionItem>
-    </VaAccordion>
+    <div>
+      <button onClick={e => setLang('es')}>Español</button>
+      <button onClick={e => setLang('en')}>English</button>
+      <button onClick={e => setLang('tl')}>Tagalog</button>
+      <va-accordion uswds>
+        <va-accordion-item id="first" header="First Amendment" uswds>
+          Congress shall make no law respecting an establishment of religion, or
+          prohibiting the free exercise thereof; or abridging the freedom of
+          speech, or of the press; or the right of the people peaceably to
+          assemble, and to petition the Government for a redress of grievances.
+        </va-accordion-item>
+        <va-accordion-item id="second" header="Second Amendment" uswds>
+          A well regulated Militia, being necessary to the security of a free
+          State, the right of the people to keep and bear Arms, shall not be
+          infringed.
+        </va-accordion-item>
+        <va-accordion-item id="third" header="Third Amendment" uswds>
+          No Soldier shall, in time of peace be quartered in any house, without
+          the consent of the Owner, nor in time of war, but in a manner to be
+          prescribed by law.
+        </va-accordion-item>
+      </va-accordion>
+    </div>
   );
 };
-
-const TemplateIconHeaders = args => {
-  return (
-    <VaAccordion {...args}>
-      <VaAccordionItem uswds itemId="first" bordered="true">
-        <i slot="header-icon" className="fas fa-info-circle vads-u-color--green"/>
-        <span slot="header">First Amendment</span>
-        <i aria-hidden="true" className="fas fa-envelope" slot="subheader-icon"/>  
-        <span slot="subheader">Subheader</span>
-        <span slot="content">
-            <p>
-              Congress shall make no law respecting an establishment of religion, or
-              prohibiting the free exercise thereof; or abridging the freedom of speech,
-              or of the press; or the right of the people peaceably to assemble, and to
-              petition the Government for a redress of grievances.
-            </p>
-        </span>
-      </VaAccordionItem>
-      <VaAccordionItem uswds itemId="second" bordered="true">
-        <i slot="header-icon" className="fas fa-info-circle vads-u-color--green"/>
-        <span slot="header">Second Amendment</span>
-        <i aria-hidden="true" className="fas fa-envelope" slot="subheader-icon"/>  
-        <span slot="subheader">Subheader</span>
-        <span slot="content">
-            <p>
-              A well regulated Militia, being necessary to the security of a free State, 
-              the right of the people to keep and bear Arms, shall not be infringed.
-            </p>
-        </span>
-      </VaAccordionItem>
-      <VaAccordionItem uswds itemId="third" bordered="true">
-        <i slot="header-icon" className="fas fa-info-circle vads-u-color--green"/>
-        <span slot="header">Third Amendment</span>
-        <i aria-hidden="true" className="fas fa-envelope" slot="subheader-icon"/>  
-        <span slot="subheader">Subheader</span>
-        <span slot="content">
-            <p>
-            No Soldier shall, in time of peace be quartered in any house, without the 
-            consent of the Owner, nor in time of war, but in a manner to be prescribed by law.
-            </p>
-        </span>
-      </VaAccordionItem>
-    </VaAccordion>
-  );
-};
-
 
 
 const defaultArgs = {
   'bordered': false,
-  'headline': <h6 slot="headline">First Amendment Headline</h6>,
   'open-single': undefined,
   uswds: true
 };
@@ -212,5 +285,20 @@ Subheader.args = {
 
 export const IconHeaders = TemplateIconHeaders.bind(null);
 IconHeaders.args = {
+  ...defaultArgs,
+};
+
+export const HeadlineSlot = TemplateHeadlineSlot.bind(null);
+HeadlineSlot.args = {
+  ...defaultArgs,
+};
+
+export const CustomHeaderLevel = TemplateLevel.bind(null);
+CustomHeaderLevel.args = {
+  ...defaultArgs
+}
+
+export const Internationalization = I18nTemplate.bind(null);
+Internationalization.args = {
   ...defaultArgs,
 };
