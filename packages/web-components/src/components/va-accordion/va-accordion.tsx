@@ -231,7 +231,7 @@ export class VaAccordion {
       });
       const accordionItemIDs = [...this.el.children]
         .filter((el) => el.tagName.toLowerCase() === 'va-accordion-item')
-        .map((el) => el.itemId);
+        .map((el) => el.id);
       return (
         <Host>
           <div class={ accordionClass } ref={(accordionContainer) => this.accordionContainer = accordionContainer}>
