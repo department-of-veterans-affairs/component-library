@@ -22,13 +22,13 @@ const Contacts = () => (
   <va-table>
     <va-table-row slot="headers">
       {columns.map((col) => (
-        <p key={col.value}>{col.label}</p>
+        <span key={col.value}>{col.label}</span>
       ))}
     </va-table-row>
 
     {data.map(row => (
       <va-table-row key={row.key}>
-        <p>{row.key}</p>
+        <span>{row.key}</span>
         <span><va-telephone contact={row.phoneNumber}></va-telephone></span>
         <span>{row.description}</span>
       </va-table-row>
