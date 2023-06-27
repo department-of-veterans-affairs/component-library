@@ -380,3 +380,10 @@
 .usa-accordion__content {
   padding: rem-override(1rem) rem-override(1.25rem) rem-override(0.75rem);
 }
+
+.usa-accordion--bordered .usa-accordion__content {
+  border-bottom: rem-override(0.25rem) solid rgb(240, 240, 240);
+  border-left: rem-override(0.25rem) solid rgb(240, 240, 240);
+  border-right: rem-override(0.25rem) solid rgb(240, 240, 240);
+  padding-bottom: rem-override(1rem);
+}

@@ -51,7 +51,7 @@ export class VaAccordionItem {
   @Prop() level?: number = 2;
 
   /**
-   * The id of the accordion item, required for accessibility. (USWDS only)
+   * Whether or not the accordion item will have a border
    */
   @Prop() bordered?: boolean = false;
 

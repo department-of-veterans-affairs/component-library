@@ -8,10 +8,6 @@ import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 export namespace Components {
     interface VaAccordion {
         /**
-          * Whether or not the accordion items will have borders
-         */
-        "bordered"?: boolean;
-        /**
           * If `true`, doesn't fire the CustomEvent which can be used for analytics tracking.
          */
         "disableAnalytics"?: boolean;
@@ -30,7 +26,7 @@ export namespace Components {
     }
     interface VaAccordionItem {
         /**
-          * The id of the accordion item, required for accessibility. (USWDS only)
+          * Whether or not the accordion item will have a border
          */
         "bordered"?: boolean;
         /**
@@ -1565,10 +1561,6 @@ declare global {
 declare namespace LocalJSX {
     interface VaAccordion {
         /**
-          * Whether or not the accordion items will have borders
-         */
-        "bordered"?: boolean;
-        /**
           * If `true`, doesn't fire the CustomEvent which can be used for analytics tracking.
          */
         "disableAnalytics"?: boolean;
@@ -1591,7 +1583,7 @@ declare namespace LocalJSX {
     }
     interface VaAccordionItem {
         /**
-          * The id of the accordion item, required for accessibility. (USWDS only)
+          * Whether or not the accordion item will have a border
          */
         "bordered"?: boolean;
         /**

@@ -60,11 +60,6 @@ export class VaAccordion {
   @State() expanded = false;
 
   /**
-   * Whether or not the accordion items will have borders
-   */
-  @Prop() bordered?: boolean = false;
-
-  /**
    * True if only a single item can be opened at once
    */
   @Prop() openSingle?: boolean = false;
@@ -97,20 +92,6 @@ export class VaAccordion {
 
   @Listen('accordionItemToggled')
   itemToggledHandler(event: CustomEvent) {
-    
-
-    /*if (this.uswds) {
-      if (this.openSingle) {
-        let items = getSlottedNodes(this.el, 'va-accordion-item');
-        items.forEach((item) => {
-          let el = item as Element;
-          let button = el.shadowRoot.querySelector('button.usa-accordion__button') as HTMLButtonElement;
-          if (button.getAttribute('aria-expanded') === 'true') {
-            button.click()
-          }
-        })
-      }
-    } else {*/
       // eslint-disable-next-line i18next/no-literal-string
       const clickedItem = (event.target as HTMLElement).closest('va-accordion-item');
       // Usage for slot to provide context to analytics for header and level
@@ -160,8 +141,6 @@ export class VaAccordion {
 
       // Check if all accordions are open or closed due to user clicks
       this.accordionsOpened();
-    //}
-    
   }
 
   private accordionsOpened() {
@@ -222,12 +201,10 @@ export class VaAccordion {
   }
 
   render() {
-    const {uswds = false, openSingle} = this;
+    const {uswds, openSingle} = this;
     if (uswds) {
-      const { bordered } = this;
       const accordionClass = classNames({
         'usa-accordion': true,
-        'usa-accordion--bordered': bordered,
       });
       const accordionItemIDs = [...this.el.children]
         .filter((el) => el.tagName.toLowerCase() === 'va-accordion-item')
