@@ -69,6 +69,11 @@ h6 {
   font-size: 17px;
   font-family: var(--font-serif);
   line-height: 22px;
+  width: 66%;
+
+  @media (min-width: 768px) {
+        width: 100%;
+    }
 }
 
 p {
@@ -107,8 +112,10 @@ p {
 
 .va-notification-close > i {
     margin-right: 8px;
+    vertical-align: middle;
 }
 
 .va-notification-close > span {
     font-weight: 600;
+    margin-right: 5px;
 }
