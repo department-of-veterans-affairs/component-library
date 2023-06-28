@@ -362,13 +362,6 @@ export class VaModal {
     if (!visible) return null;
 
     const ariaLabel = `${modalTitle} modal` || 'Modal';
-    /* eslint-disable i18next/no-literal-string */
-    const ariaRole = status => {
-      if (status === 'warning' || status === 'error') {
-        return 'alertdialog';
-      }
-      return 'dialog';
-    };
     /* eslint-enable i18next/no-literal-string */
     const btnAriaLabel = modalTitle
       ? `Close ${modalTitle} modal`
@@ -404,11 +397,13 @@ export class VaModal {
           <i aria-hidden="true" />
         </button>;
       return (
-        <Host aria-label={ariaLabel} aria-modal="true" role={ariaRole(status)}>
+        <Host>
           <div class={wrapperClass} 
-            tabIndex={-1}
-            aria-labelledby="heading"
+            role={status === 'warning' || status === 'error' ? 'alertdialog' : 'dialog' }
+            aria-labelledby={ariaLabel}
             aria-describedby="description"
+            aria-modal="true"
+            tabIndex={-1}
           >
             <div class={contentClass}>
               {closingButton}
@@ -475,8 +470,14 @@ export class VaModal {
       const bodyClass = status ? 'va-modal-alert-body' : 'va-modal-body';
       const titleClass = status ? 'va-modal-alert-title' : 'va-modal-title';
       return (
-        <Host aria-label={ariaLabel} aria-modal="true" role={ariaRole(status)}>
-          <div class={wrapperClass} tabIndex={-1}>
+        <Host>
+          <div class={wrapperClass}
+            tabIndex={-1}
+            role={status === 'warning' || status === 'error' ? 'alertdialog' : 'dialog' }
+            aria-labelledby={ariaLabel}
+            aria-describedby="description"
+            aria-modal="true"
+          >
             <button
               aria-label={btnAriaLabel}
               class="va-modal-close"
@@ -493,7 +494,9 @@ export class VaModal {
                     {modalTitle}
                   </h1>
                 )}
-                <slot></slot>
+                <div id="modal-content">
+                  <slot></slot>
+                </div>
               </div>
               {((primaryButtonClick && primaryButtonText) ||
                 (secondaryButtonClick && secondaryButtonText)) && (
