@@ -7,27 +7,28 @@
 @import '../../mixins/focusable.css';
 
 
-
-.usa-accordion__header, .usa-accordion__subheader {
+/**
+  Custom classes and overrides to add in subheader and icon functionality
+*/
+.va-accordion__header, .va-accordion__subheader {
   display: block;
 }
 
-.usa-accordion__header ::slotted([slot=icon]), .usa-accordion__subheader ::slotted([slot=subheader-icon]){
+.va-accordion__header ::slotted([slot=icon]), .va-accordion__subheader ::slotted([slot=subheader-icon]){
   margin-right: 15px;
   width: inherit;
 }
 
-.usa-accordion__subheader {
+.va-accordion__subheader {
   font-weight: 400;
   font-size: 16px;
   line-height: 26px;
   margin-top: 2px;
 }
 
-.usa-accordion__button {
-  position: relative;
-}
-
+/**
+  Override to use font awesome icons
+*/
 .usa-accordion__button[aria-expanded=false] {
   background-image: url("data:image/svg+xml,%3C%3Fxml version%3D%221.0%22 encoding%3D%22UTF-8%22%3F%3E%3Csvg xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22 width%3D%2264%22 height%3D%2264%22 viewBox%3D%220 0 64 64%22%3E%3Ctitle%3Eplus%3C%2Ftitle%3E%3Cpath fill%3D%22%23171717%22 fill-rule%3D%22evenodd%22 d%3D%22M36 0c1.111 0 2.056.425 2.833 1.272.778.849 1.166 1.88 1.166 3.091V24h19.636c1.125 0 2.095.335 2.907 1.006l.184.16c.849.778 1.272 1.723 1.272 2.834v8c0 1.112-.425 2.057-1.272 2.834-.849.778-1.88 1.166-3.091 1.166H39.999v19.636c0 1.125-.335 2.094-1.006 2.906l-.16.185c-.778.848-1.722 1.272-2.833 1.272h-8.001c-1.111 0-2.056-.424-2.834-1.272-.778-.849-1.166-1.88-1.166-3.09V39.998H4.363c-1.125 0-2.094-.335-2.906-1.006l-.185-.16C.424 38.054 0 37.11 0 36v-8.001c0-1.111.424-2.056 1.272-2.834C2.121 24.387 3.152 24 4.363 24H24V4.363c0-1.125.335-2.094 1.006-2.906l.16-.185C25.944.423 26.889 0 28 0z%22%2F%3E%3C%2Fsvg%3E");
   background-size: 1.5rem;

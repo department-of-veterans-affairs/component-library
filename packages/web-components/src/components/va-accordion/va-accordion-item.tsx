@@ -132,12 +132,12 @@ export class VaAccordionItem {
                 this.expandButton = el;
               }}
             >
-              <span class="usa-accordion__header">
+              <span class="usa-accordion__header va-accordion__header">
                 <slot name="icon" />
                 {this.slotHeader || header || ieSlotCheckHeader}
               </span>
               {this.subheader &&
-                <span class="usa-accordion__subheader">
+                <span class="va-accordion__subheader">
                   <slot name="subheader-icon" />
                   {subheader}
                 </span>}
