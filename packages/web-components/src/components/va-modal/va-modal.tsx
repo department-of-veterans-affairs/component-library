@@ -475,7 +475,7 @@ export class VaModal {
             tabIndex={-1}
             role={status === 'warning' || status === 'error' ? 'alertdialog' : 'dialog' }
             aria-labelledby={ariaLabel}
-            aria-describedby="description"
+            aria-describedby="modal-content"
             aria-modal="true"
           >
             <button
