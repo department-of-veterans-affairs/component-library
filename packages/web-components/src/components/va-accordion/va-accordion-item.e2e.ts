@@ -262,7 +262,7 @@ describe('va-accordion-item', () => {
         <div>
           <h2 class="usa-accordion__heading">
             <button aria-controls="content" aria-expanded="false" class="usa-accordion__button" type="button">
-              <span class="usa-accordion__header">
+              <span class="usa-accordion__header va-accordion__header">
                 <slot name="icon"></slot>
               </span>
             </button>
@@ -391,7 +391,7 @@ describe('va-accordion-item', () => {
     );
 
     const element = await page.find('va-accordion-item');
-    let subheader = element.shadowRoot.querySelector('.usa-accordion__subheader');
+    let subheader = element.shadowRoot.querySelector('.va-accordion__subheader');
 
     expect(subheader.textContent).toEqualText('The subheader');
   });
@@ -403,7 +403,7 @@ describe('va-accordion-item', () => {
     );
 
     const element = await page.find('va-accordion-item');
-    let subheader = element.shadowRoot.querySelector('.usa-accordion__subheader');
+    let subheader = element.shadowRoot.querySelector('.va-accordion__subheader');
     expect(subheader.textContent).toEqualText('The subheader');
   });
 
@@ -419,11 +419,11 @@ describe('va-accordion-item', () => {
           <div>
             <h2 class="usa-accordion__heading">
               <button aria-controls="content" aria-expanded="false" class="usa-accordion__button" type="button">
-                <span class="usa-accordion__header">
+                <span class="usa-accordion__header va-accordion__header">
                   <slot name="icon"></slot>
                   The header
                 </span>
-                <span class="usa-accordion__subheader">
+                <span class="va-accordion__subheader">
                   <slot name="subheader-icon"></slot>
                   The subheader
                 </span>
@@ -452,7 +452,7 @@ describe('va-accordion-item', () => {
         <div>
           <h2 class="usa-accordion__heading">
             <button aria-controls="content" aria-expanded="false" class="usa-accordion__button" type="button">
-              <span class="usa-accordion__header">
+              <span class="usa-accordion__header va-accordion__header">
                 <slot name="icon"></slot>
                 The header
               </span>
