@@ -400,7 +400,7 @@ export class VaModal {
         <Host>
           <div class={wrapperClass} 
             role={status === 'warning' || status === 'error' ? 'alertdialog' : 'dialog' }
-            aria-labelledby={ariaLabel}
+            aria-label={ariaLabel}
             aria-describedby="description"
             aria-modal="true"
             tabIndex={-1}
@@ -474,7 +474,7 @@ export class VaModal {
           <div class={wrapperClass}
             tabIndex={-1}
             role={status === 'warning' || status === 'error' ? 'alertdialog' : 'dialog' }
-            aria-labelledby={ariaLabel}
+            aria-label={ariaLabel}
             aria-describedby="modal-content"
             aria-modal="true"
           >
