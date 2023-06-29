@@ -399,18 +399,17 @@ export class VaModal {
       return (
         <Host>
           <div class={wrapperClass} 
-            role={status === 'warning' || status === 'error' ? 'alertdialog' : 'dialog' }
+            role='dialog'
             aria-label={ariaLabel}
             aria-describedby="description"
             aria-modal="true"
-            tabIndex={-1}
           >
             <div class={contentClass}>
               {closingButton}
               <div class={bodyClass}>
                 <div role="document">
                   {modalTitle && (
-                    <h2 class={titleClass} tabIndex={-1} id="heading">
+                    <h2 class={titleClass} tabindex={-1} id="heading">
                       {modalTitle}
                     </h2>
                   )}
@@ -438,7 +437,7 @@ export class VaModal {
                       <li class="usa-button-group__item">
                         {!unstyled && (
                           <va-button
-                            onClick={e => this.handlePrimaryButtonClick(e)}
+                            onClick={e => this.handleSecondaryButtonClick(e)}
                             secondary
                             text={secondaryButtonText}
                             uswds
@@ -472,8 +471,7 @@ export class VaModal {
       return (
         <Host>
           <div class={wrapperClass}
-            tabIndex={-1}
-            role={status === 'warning' || status === 'error' ? 'alertdialog' : 'dialog' }
+            role='dialog'
             aria-label={ariaLabel}
             aria-describedby="modal-content"
             aria-modal="true"
@@ -490,7 +488,7 @@ export class VaModal {
             <div class={bodyClass}>
               <div role="document">
                 {modalTitle && (
-                  <h1 class={titleClass} tabIndex={-1}>
+                  <h1 class={titleClass} tabindex={-1}>
                     {modalTitle}
                   </h1>
                 )}
