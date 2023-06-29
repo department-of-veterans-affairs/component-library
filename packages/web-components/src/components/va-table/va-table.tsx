@@ -133,7 +133,7 @@ export class VaTable {
     const slot = this.el.shadowRoot.querySelectorAll('slot')[1].assignedElements()[0] as HTMLSlotElement;
     const callback = mutationList => {
       for (const mutation of mutationList) {
-        if (mutation.type === 'childList') {
+        if (mutation.type === 'childList' || mutation.type === 'characterData') {
           handleCellAdjustments();
         }
       }
@@ -143,6 +143,7 @@ export class VaTable {
     this.observer.observe(slot, {
       childList: true,
       subtree: true,
+      characterData: true,
     });
   }
 
