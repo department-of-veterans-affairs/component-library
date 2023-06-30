@@ -27,6 +27,14 @@
 }
 
 /**
+  Extend .usa-prose for max-width p tag in slot
+*/
+.usa-prose > ::slotted(p) {
+  line-height: 1.5;
+  max-width: 64ex;
+}
+
+/**
   Override to use font awesome icons
 */
 .usa-accordion__button[aria-expanded=false] {

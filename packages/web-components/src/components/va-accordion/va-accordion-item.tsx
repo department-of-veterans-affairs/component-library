@@ -152,7 +152,7 @@ export class VaAccordionItem {
             <Header/>
             <slot name="headline" onSlotchange={() => this.populateStateValues()} />
             <div id="content" class="usa-accordion__content usa-prose" hidden={!open}>
-              <slot></slot>
+              <slot/>
             </div>
           </div>
         </Host>
