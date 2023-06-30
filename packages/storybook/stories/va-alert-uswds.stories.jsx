@@ -33,7 +33,6 @@ VaAlert.displayName = 'VaAlert';
 const defaultArgs = {
   'uswds': true,
   'slim': false,
-  'no-icon': false,
   'status': 'info',
   'background-only': false,
   'disable-analytics': false,
