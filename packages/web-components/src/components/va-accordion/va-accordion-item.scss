@@ -39,6 +39,8 @@
   background-size: 1.5rem;
 }
 
+/** Original Component Style **/
+
 :host {
   display: block;
 }
@@ -86,7 +88,7 @@ button {
   color: var(--color-gray-dark);
 }
 
-button:hover {
+button:not(.usa-accordion__button):hover {
   background-color: var(--color-gray-lighter);
   /* This color assignment is for IE11 compatibility - the one in */
   /* the va-accordion's CSS with `:host` doesn't work well */
@@ -103,7 +105,7 @@ button:hover {
   overflow-wrap: break-word;
 }
 
-button[aria-expanded='false'] {
+button[aria-expanded='false']:not(.usa-accordion__button) {
   background-image: url('../../assets/plus.svg');
 }
 

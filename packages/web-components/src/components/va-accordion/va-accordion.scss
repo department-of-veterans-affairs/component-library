@@ -7,7 +7,9 @@
 
 @import '../../mixins/focusable.css';
 
-:host {
+/** Original Component Style **/
+
+:host(:not([uswds])) {
   display: block;
   width: 100%;
   color: var(--color-gray-dark);
@@ -15,8 +17,8 @@
 }
 
 /* If `bordered` is present and if it is *not* false */
-:host([bordered='true']),
-:host([bordered='']) {
+:host([bordered='true']:not([uswds])),
+:host([bordered='']:not([uswds])) {
   --item-border: 3px solid var(--color-gray-lightest);
 }
 

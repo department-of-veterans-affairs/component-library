@@ -22,9 +22,9 @@ export default {
 };
 
 const Template = args => {
-  const { headline, level } = args;
+  const { headline, level, ...rest } = args;
   return (
-    <va-accordion>
+    <va-accordion {...rest}>
       <va-accordion-item id="first">
         {headline}
         Congress shall make no law respecting an establishment of religion, or
