@@ -21,7 +21,7 @@ describe('va-accordion-item', () => {
           </button>
         </h2>
         <slot name="headline"></slot>
-        <div id="content" tabindex="0">
+        <div id="content">
           <slot></slot>
         </div>
       </mock:shadow-root>
@@ -182,7 +182,7 @@ describe('va-accordion-item', () => {
           </button>
         </h2>
         <slot name="headline"></slot>
-        <div id="content" tabindex="0">
+        <div id="content">
           <slot></slot>
         </div>
       </mock:shadow-root>
@@ -208,7 +208,7 @@ describe('va-accordion-item', () => {
           </button>
         </h2>
         <slot name="headline"></slot>
-        <div id="content" tabindex="0">
+        <div id="content">
           <slot></slot>
         </div>
       </mock:shadow-root>

@@ -198,10 +198,10 @@ export class VaAccordionItem {
         <Host>
           <Header />
           <slot name="headline" onSlotchange={() => this.populateStateValues()} />
-          <div id="content" tabIndex={0}>
+          <div id="content">
             <slot />
           </div>
-        </Host >
+        </Host>
       );
     }
   }
