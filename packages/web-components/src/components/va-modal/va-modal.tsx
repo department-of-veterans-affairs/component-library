@@ -362,13 +362,6 @@ export class VaModal {
     if (!visible) return null;
 
     const ariaLabel = `${modalTitle} modal` || 'Modal';
-    /* eslint-disable i18next/no-literal-string */
-    const ariaRole = status => {
-      if (status === 'warning' || status === 'error') {
-        return 'alertdialog';
-      }
-      return 'dialog';
-    };
     /* eslint-enable i18next/no-literal-string */
     const btnAriaLabel = modalTitle
       ? `Close ${modalTitle} modal`
@@ -404,18 +397,19 @@ export class VaModal {
           <i aria-hidden="true" />
         </button>;
       return (
-        <Host aria-label={ariaLabel} aria-modal="true" role={ariaRole(status)}>
+        <Host>
           <div class={wrapperClass} 
-            tabIndex={-1}
-            aria-labelledby="heading"
+            role={status === 'warning' || status === 'error' ? 'alertdialog' : 'dialog' }
+            aria-label={ariaLabel}
             aria-describedby="description"
+            aria-modal="true"
           >
             <div class={contentClass}>
               {closingButton}
               <div class={bodyClass}>
                 <div role="document">
                   {modalTitle && (
-                    <h2 class={titleClass} tabIndex={-1} id="heading">
+                    <h2 class={titleClass} tabindex={-1} id="heading">
                       {modalTitle}
                     </h2>
                   )}
@@ -443,7 +437,7 @@ export class VaModal {
                       <li class="usa-button-group__item">
                         {!unstyled && (
                           <va-button
-                            onClick={e => this.handlePrimaryButtonClick(e)}
+                            onClick={e => this.handleSecondaryButtonClick(e)}
                             secondary
                             text={secondaryButtonText}
                             uswds
@@ -475,8 +469,13 @@ export class VaModal {
       const bodyClass = status ? 'va-modal-alert-body' : 'va-modal-body';
       const titleClass = status ? 'va-modal-alert-title' : 'va-modal-title';
       return (
-        <Host aria-label={ariaLabel} aria-modal="true" role={ariaRole(status)}>
-          <div class={wrapperClass} tabIndex={-1}>
+        <Host>
+          <div class={wrapperClass}
+            role={status === 'warning' || status === 'error' ? 'alertdialog' : 'dialog' }
+            aria-label={ariaLabel}
+            aria-describedby="modal-content"
+            aria-modal="true"
+          >
             <button
               aria-label={btnAriaLabel}
               class="va-modal-close"
@@ -489,11 +488,13 @@ export class VaModal {
             <div class={bodyClass}>
               <div role="document">
                 {modalTitle && (
-                  <h1 class={titleClass} tabIndex={-1}>
+                  <h1 class={titleClass} tabindex={-1}>
                     {modalTitle}
                   </h1>
                 )}
-                <slot></slot>
+                <div id="modal-content">
+                  <slot></slot>
+                </div>
               </div>
               {((primaryButtonClick && primaryButtonText) ||
                 (secondaryButtonClick && secondaryButtonText)) && (
