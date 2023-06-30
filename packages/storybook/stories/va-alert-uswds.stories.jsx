@@ -33,9 +33,9 @@ VaAlert.displayName = 'VaAlert';
 const defaultArgs = {
   'uswds': true,
   'slim': false,
+  'no-icon': false,
   'status': 'info',
   'background-only': false,
-  'show-icon': false,
   'disable-analytics': false,
   'visible': true,
   'close-btn-aria-label': 'Close notification',
@@ -48,9 +48,7 @@ const defaultArgs = {
   ),
   'children': (
     <p className="vads-u-margin-y--0">
-      You can use our new mobile app to check the status of your claims or
-      appeals on your mobile device. Download the{' '}
-      <strong>VA: Health and Benefits</strong> mobile app to get started.
+      Lorem ipsum dolor sit amet, <a class="usa-link" href="javascript:void(0);">consectetur adipiscing</a> elit, sed do eiusmod.
     </p>
   ),
 };
@@ -60,7 +58,6 @@ const Template = ({
   slim,
   status,
   'background-only': backgroundOnly,
-  'show-icon': showIcon,
   'disable-analytics': disableAnalytics,
   visible,
   'close-btn-aria-label': closeBtnAriaLabel,
@@ -77,7 +74,6 @@ const Template = ({
         uswds={uswds}
         status={status}
         backgroundOnly={backgroundOnly}
-        showIcon={showIcon}
         disableAnalytics={disableAnalytics}
         visible={visible}
         closeBtnAriaLabel={closeBtnAriaLabel}
@@ -96,7 +92,6 @@ const Template = ({
       slim={slim}
       status={status}
       background-only={backgroundOnly}
-      show-icon={showIcon}
       disable-analytics={disableAnalytics}
       visible={visible}
       close-btn-aria-label={closeBtnAriaLabel}
@@ -113,7 +108,6 @@ const BackgroundOnlyTemplate = ({
   'background-only': backgroundOnly,
   'close-btn-aria-label': closeBtnAriaLabel,
   closeable,
-  headline,
   uswds,
 }) => {
   return (
@@ -215,10 +209,8 @@ const BackgroundOnlyTemplate = ({
 
 const SlimTemplate = ({
   'background-only': backgroundOnly,
-  'show-icon': showIcon,
   'close-btn-aria-label': closeBtnAriaLabel,
   closeable,
-  headline,
   slim,
   uswds,
 }) => {
@@ -229,7 +221,6 @@ const SlimTemplate = ({
         slim={slim}
         status="info"
         background-only={backgroundOnly}
-        show-icon={showIcon}
         disable-analytics="false"
         visible="true"
         close-btn-aria-label={closeBtnAriaLabel}
@@ -246,7 +237,6 @@ const SlimTemplate = ({
         slim={slim}
         status="error"
         background-only={backgroundOnly}
-        show-icon={showIcon}
         disable-analytics="false"
         visible="true"
         close-btn-aria-label={closeBtnAriaLabel}
@@ -265,7 +255,6 @@ const SlimTemplate = ({
         slim={slim}
         status="success"
         background-only={backgroundOnly}
-        show-icon={showIcon}
         disable-analytics="false"
         visible="true"
         close-btn-aria-label={closeBtnAriaLabel}
@@ -282,7 +271,6 @@ const SlimTemplate = ({
         slim={slim}
         status="warning"
         background-only={backgroundOnly}
-        show-icon={showIcon}
         disable-analytics="false"
         visible="true"
         close-btn-aria-label={closeBtnAriaLabel}
@@ -301,7 +289,6 @@ const SlimTemplate = ({
         slim={slim}
         status="continue"
         background-only={backgroundOnly}
-        show-icon={showIcon}
         disable-analytics="false"
         visible="true"
         close-btn-aria-label={closeBtnAriaLabel}
@@ -411,15 +398,6 @@ export const DismissableBackgroundOnly = Template.bind(null);
 DismissableBackgroundOnly.args = {
   ...defaultArgs,
   'background-only': true,
-  'closeable': true,
-  'onCloseEvent': () => console.log('Close event triggered'),
-};
-
-export const DismissableBackgroundOnlyIcon = Template.bind(null);
-DismissableBackgroundOnlyIcon.args = {
-  ...defaultArgs,
-  'background-only': true,
-  'show-icon': true,
   'closeable': true,
   'onCloseEvent': () => console.log('Close event triggered'),
 };

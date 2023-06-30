@@ -37,7 +37,6 @@ VaAlert.displayName = 'VaAlert';
 const defaultArgs = {
   'status': 'info',
   'background-only': false,
-  'show-icon': false,
   'disable-analytics': false,
   'visible': true,
   'close-btn-aria-label': 'Close notification',
@@ -60,7 +59,6 @@ const defaultArgs = {
 const Template = ({
   status,
   'background-only': backgroundOnly,
-  'show-icon': showIcon,
   'disable-analytics': disableAnalytics,
   visible,
   'close-btn-aria-label': closeBtnAriaLabel,
@@ -75,7 +73,6 @@ const Template = ({
       <VaAlert
         status={status}
         backgroundOnly={backgroundOnly}
-        showIcon={showIcon}
         disableAnalytics={disableAnalytics}
         visible={visible}
         closeBtnAriaLabel={closeBtnAriaLabel}
@@ -92,7 +89,6 @@ const Template = ({
     <va-alert
       status={status}
       background-only={backgroundOnly}
-      show-icon={showIcon}
       disable-analytics={disableAnalytics}
       visible={visible}
       close-btn-aria-label={closeBtnAriaLabel}
@@ -336,7 +332,6 @@ export const DismissableBackgroundOnlyIcon = Template.bind(null);
 DismissableBackgroundOnlyIcon.args = {
   ...defaultArgs,
   'background-only': true,
-  'show-icon': true,
   'closeable': true,
   'onCloseEvent': () => console.log('Close event triggered'),
 };
