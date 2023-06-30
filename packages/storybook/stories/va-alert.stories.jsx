@@ -328,14 +328,6 @@ DismissableBackgroundOnly.args = {
   'onCloseEvent': () => console.log('Close event triggered'),
 };
 
-export const DismissableBackgroundOnlyIcon = Template.bind(null);
-DismissableBackgroundOnlyIcon.args = {
-  ...defaultArgs,
-  'background-only': true,
-  'closeable': true,
-  'onCloseEvent': () => console.log('Close event triggered'),
-};
-
 export const BackgroundOnly = BackgroundOnlyTemplate.bind(null);
 BackgroundOnly.args = {
   ...defaultArgs,
