@@ -149,6 +149,7 @@ export namespace Components {
         "windowSession"?: boolean;
     }
     interface VaBreadcrumbs {
+        "breadcrumbList"?: string;
         /**
           * Analytics tracking function(s) will not be called
          */
@@ -1640,6 +1641,7 @@ declare namespace LocalJSX {
         "windowSession"?: boolean;
     }
     interface VaBreadcrumbs {
+        "breadcrumbList"?: string;
         /**
           * Analytics tracking function(s) will not be called
          */

@@ -6,6 +6,8 @@ import {
   Host,
   h,
   Prop,
+  Watch,
+  State
 } from '@stencil/core';
 import classnames from 'classnames';
 
@@ -34,6 +36,14 @@ export class VaBreadcrumbs {
      * Whether or not the component will wrap the breadcrumbs. This prop is available when `uswds` is set to `true`.
      */
   @Prop() wrapping?: boolean = false;
+
+  @Prop() breadcrumbList?: string;
+  @State() myInnerArray?: Array<{ label: string; href: string }>;
+
+  @Watch('breadcrumbList')
+  parseBreadcrumbListProp(newValue: string) {
+    if (newValue) this.myInnerArray = JSON.parse(newValue);
+  }
   /**
    * Analytics tracking function(s) will not be called
    */
@@ -132,6 +142,10 @@ export class VaBreadcrumbs {
     });
   }
 
+  componentWillLoad() {
+    this.parseBreadcrumbListProp(this.breadcrumbList);
+  }
+
   /**
    * This handles the use case of the component dynamically receiving
    * new breadcrumb items. It will programmatically toggle the
@@ -200,7 +214,17 @@ export class VaBreadcrumbs {
         <Host>
           <nav aria-label={label} class={wrapClass}>
             <ol role="list" onClick={e => this.fireAnalyticsEvent(e)} class="usa-breadcrumb__list">
-              <slot onSlotchange={this.handleSlotChange.bind(this)}></slot>
+              {this.myInnerArray.map((item, index) => (
+                <li class={`usa-breadcrumb__list-item ${index === this.myInnerArray.length - 1 ? 'usa-current' : ''}`}>
+                  {index === this.myInnerArray.length - 1 ? (
+                    <span>{item.label}</span>
+                  ) : (
+                    <a class="usa-breadcrumb__link" href={item.href}>
+                      <span>{item.label}</span>
+                    </a>
+                  )}
+                </li>
+              ))}
             </ol>
           </nav>
         </Host>

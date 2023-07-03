@@ -146,17 +146,24 @@ describe('va-breadcrumbs', () => {
 
   /** Begin USWDS v3 Tests */
 
-  it('uswds renders', async () => {
-    const page = await newE2EPage();
-    await page.setContent('<va-breadcrumbs uswds></va-breadcrumbs>');
-
+  it('uswds - renders', async () => {
+    const page = await newE2EPage({
+      html: '<va-breadcrumbs class="hydrated" label="test" disable-analytics="false" my-array=\'[{ "label": "Home", "href": "#home" }, { "label": "Current", "href": "#current" }]\' uswds></va-breadcrumbs>',
+    });
     const element = await page.find('va-breadcrumbs');
     expect(element).toEqualHtml(`
-      <va-breadcrumbs class="hydrated" uswds="">
+      <va-breadcrumbs class="hydrated" disable-analytics="false" label="test" my-array='[{ "label": "Home", "href": "#home" }, { "label": "Current", "href": "#current" }]' uswds>
         <mock:shadow-root>
-          <nav aria-label="Breadcrumb" class="usa-breadcrumb">
+          <nav aria-label="test" class="usa-breadcrumb">
             <ol class="usa-breadcrumb__list" role="list">
-              <slot></slot>
+              <li class="usa-breadcrumb__list-item">
+                <a class="usa-breadcrumb__link" href="#home">
+                  <span>Home</span>
+                </a>
+              </li>
+              <li class="usa-breadcrumb__list-item usa-current">
+                <span>Current</span>
+              </li>
             </ol>
           </nav>
         </mock:shadow-root>
@@ -164,93 +171,29 @@ describe('va-breadcrumbs', () => {
     `);
   });
 
-  it('uswds renders slotted content (anchor tags)', async () => {
+  it("uswds - should render wrap labels when 'wrapping' is true", async () => {
     const page = await newE2EPage();
     await page.setContent(`
-      <va-breadcrumbs uswds="">
-        <a href="#home">Home</a>
-        <a href="#one">Level One</a>
-        <a href="#two">Level Two</a>
-      </va-breadcrumbs>
+      <va-breadcrumbs disable-analytics="false" my-array=\'[{ "label": "This is a very long breadcrumb", "href": "#home" }, { "label": "Current", "href": "#current" }]\' uswds wrapping></va-breadcrumbs>
     `);
-
     const element = await page.find('va-breadcrumbs');
-    expect(element).toEqualHtml(`
-      <va-breadcrumbs class="hydrated" uswds="">
-        <mock:shadow-root>
-          <nav aria-label="Breadcrumb" class="usa-breadcrumb">
-            <ol class="usa-breadcrumb__list" role="list">
-              <slot></slot>
-            </ol>
-          </nav>
-        </mock:shadow-root>
-        <li class="usa-breadcrumb__list-item">
-          <a href="#home"><span>Home</span></a>
-        </li>
-        <li class="usa-breadcrumb__list-item">
-          <a href="#one"><span>Level One</span></a>
-        </li>
-        <li class="usa-breadcrumb__list-item usa-current" aria-current="page">
-          <span>Level Two</span>
-        </li>
-      </va-breadcrumbs>
-    `);
-  });
+    const indicator = element.shadowRoot.querySelector('.usa-breadcrumb');
+    expect(indicator.classList.contains('usa-breadcrumb--wrap')).toBe(true);
+  })
 
-  it('uswds renders slotted content (list items)', async () => {
+  it('uswds - passes an axe check', async () => {
     const page = await newE2EPage();
     await page.setContent(`
-      <va-breadcrumbs uswds="">
-        <li><a href="#home">Home</a></li>
-        <li><a href="#one">Level One</a></li>
-        <li><a href="#two">Level Two</a></li>
-      </va-breadcrumbs>
-    `);
-
-    const element = await page.find('va-breadcrumbs');
-    expect(element).toEqualHtml(`
-      <va-breadcrumbs class="hydrated" uswds="">
-        <mock:shadow-root>
-          <nav aria-label="Breadcrumb" class="usa-breadcrumb">
-            <ol class="usa-breadcrumb__list" role="list">
-              <slot></slot>
-            </ol>
-          </nav>
-        </mock:shadow-root>
-        <li class="usa-breadcrumb__list-item">
-          <a href="#home"><span>Home</span></a>
-        </li>
-        <li class="usa-breadcrumb__list-item">
-          <a href="#one"><span>Level One</span></a>
-        </li>
-        <li class="usa-breadcrumb__list-item usa-current" aria-current="page">
-          <span>Level Two</span>
-        </li>
-      </va-breadcrumbs>
-    `);
-  });
-
-  it('uswds passes an axe check', async () => {
-    const page = await newE2EPage();
-    await page.setContent(`
-      <va-breadcrumbs uswds="">
-        <a href="#home">Home</a>
-        <a href="#one">Level One</a>
-        <a href="#two">Level Two</a>
-      </va-breadcrumbs>
+      <va-breadcrumbs disable-analytics="false" my-array=\'[{ "label": "Home", "href": "#home" }, { "label": "Current", "href": "#current" }]\' uswds></va-breadcrumbs>
     `);
 
     await axeCheck(page);
   });
 
-  it('uswds v3 fires an analytics event when an anchor link is clicked', async () => {
+  it('uswds - fires an analytics event when an anchor link is clicked', async () => {
     const page = await newE2EPage();
     await page.setContent(`
-      <va-breadcrumbs uswds="">
-        <a href="#home">Home</a>
-        <a href="#one">Level One</a>
-        <a href="#two">Level Two</a>
-      </va-breadcrumbs>
+      <va-breadcrumbs disable-analytics="false" my-array=\'[{ "label": "Level One", "href": "#one" }, { "label": "Level two", "href": "#two" }, { "label": "Current", "href": "#current" }]\' uswds></va-breadcrumbs>
     `);
 
     const analyticsSpy = await page.spyOnEvent('component-library-analytics');
@@ -265,19 +208,15 @@ describe('va-breadcrumbs', () => {
       details: {
         clickLabel: 'Level One',
         clickLevel: 2,
-        totalLevels: 2,
+        totalLevels: 3,
       },
     });
   });
 
-  it(`uswds doesn't fire an analytics event with disable-analytics prop when an anchor link is clicked`, async () => {
+  it(`uswds - doesn't fire an analytics event with disable-analytics prop when an anchor link is clicked`, async () => {
     const page = await newE2EPage();
     await page.setContent(`
-      <va-breadcrumbs disable-analytics uswds="">
-        <a href="#home">Home</a>
-        <a href="#one">Level One</a>
-        <a href="#two">Level Two</a>
-      </va-breadcrumbs>
+    <va-breadcrumbs my-array=\'[{ "label": "Level One", "href": "#one" }, { "label": "Level two", "href": "#two" }, { "label": "Current", "href": "#current" }]\' uswds disable-analytics></va-breadcrumbs>
     `);
 
     const analyticsSpy = await page.spyOnEvent('component-library-analytics');

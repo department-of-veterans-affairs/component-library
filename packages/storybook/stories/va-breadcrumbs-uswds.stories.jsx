@@ -13,17 +13,19 @@ export default {
     },
   },
 };
+const dataArray = [
+  { label: 'Level one', href: '#one' },
+  { label: 'Level two', href: '#two' },
+  { label: 'Contact', href: '#contact' },
+];
 
 const Template = ({ label, 'disable-analytics': disableAnalytics, uswds }) => (
   <va-breadcrumbs
     uswds={uswds}
     label={label}
     disable-analytics={disableAnalytics}
-  >
-    <a href="#home">Home</a>
-    <a href="#one">Level one</a>
-    <a href="#two">Level two</a>
-  </va-breadcrumbs>
+    breadcrumb-list={JSON.stringify(dataArray)}
+  ></va-breadcrumbs>
 );
 
 const DynamicCrumbsTemplate = ({
@@ -31,22 +33,22 @@ const DynamicCrumbsTemplate = ({
   'disable-analytics': disableAnalytics,
 }) => {
   const breadcrumbs = [
-    { label: 'Level 1', path: '/#1' },
-    { label: 'Level 2', path: '/#2' },
-    { label: 'Level 3', path: '/#3' },
+    { label: 'Level 1', href: '/#1' },
+    { label: 'Level 2', href: '/#2' },
+    { label: 'Level 3', href: '/#3' },
   ];
 
   const breadcrumbs2 = [
-    { label: 'First Link', path: '#example1' },
-    { label: 'Second Link', path: '#example2' },
-    { label: 'Third Link', path: '#example3' },
-    { label: 'Fourth Link', path: '#example4' },
+    { label: 'First Link', href: '#example1' },
+    { label: 'Second Link', href: '#example2' },
+    { label: 'Third Link', href: '#example3' },
+    { label: 'Fourth Link', href: '#example4' },
   ];
   const [crumbs, setCrumbs] = useState(breadcrumbs);
   const addCrumb = () =>
     setCrumbs(arr => [
       ...arr,
-      { label: `Level ${arr.length + 1}`, path: `/#${arr.length + 1}` },
+      { label: `Level ${arr.length + 1}`, href: `/#${arr.length + 1}` },
     ]);
   const replaceCrumbs = () => setCrumbs(breadcrumbs2);
   const resetCrumbs = () => setCrumbs(breadcrumbs);
@@ -72,90 +74,10 @@ const DynamicCrumbsTemplate = ({
         <va-breadcrumbs
           label={label}
           disable-analytics={disableAnalytics}
+          breadcrumb-list={JSON.stringify(crumbs)}
           uswds
-        >
-          {crumbs?.map((crumb, i) => {
-            return (
-              <a key={i} href={crumb.path}>
-                {crumb.label}
-              </a>
-            );
-          })}
-        </va-breadcrumbs>
+        ></va-breadcrumbs>
       )}
-    </div>
-  );
-};
-
-const RDFATemplate = ({
-  label,
-  'disable-analytics': disableAnalytics,
-  uswds,
-}) => {
-  return (
-    <div>
-      <va-breadcrumbs
-        label={label}
-        disable-analytics={disableAnalytics}
-        uswds={uswds}
-      >
-        <li
-          property="itemListElement"
-          typeof="ListItem"
-          class="usa-breadcrumb__list-item"
-        >
-          <a
-            property="item"
-            typeof="WebPage"
-            href="javascript:void(0);"
-            class="usa-breadcrumb__link"
-          >
-            <span property="name">Home</span>
-          </a>
-          <meta property="position" content="1" />
-        </li>
-        <li
-          property="itemListElement"
-          typeof="ListItem"
-          class="usa-breadcrumb__list-item"
-        >
-          <a
-            property="item"
-            typeof="WebPage"
-            href="javascript:void(0);"
-            class="usa-breadcrumb__link"
-          >
-            <span property="name">Federal Contracting</span>
-          </a>
-          <meta property="position" content="2" />
-        </li>
-        <li
-          property="itemListElement"
-          typeof="ListItem"
-          class="usa-breadcrumb__list-item"
-        >
-          <a
-            property="item"
-            typeof="WebPage"
-            href="javascript:void(0);"
-            class="usa-breadcrumb__link"
-          >
-            <span property="name">Contracting assistance programs</span>
-          </a>
-          <meta property="position" content="3" />
-        </li>
-        <li
-          property="itemListElement"
-          typeof="ListItem"
-          class="usa-breadcrumb__list-item usa-current"
-          aria-current="page"
-        >
-          <span property="name">
-            Women-owned small business federal contracting program
-          </span>
-          <meta property="position" content="4" />
-        </li>
-      </va-breadcrumbs>
     </div>
   );
 };
@@ -166,33 +88,24 @@ const WrappingCrumbsTemplate = ({
   uswds,
   wrapping,
 }) => {
+  const breadcrumbs = [
+    { label: 'Home', href: '/#1' },
+    { label: 'Federal Contracting', href: '/#2' },
+    { label: 'Contracting assistance programs', href: '/#3' },
+    {
+      label: 'Women-owned small business federal contracting program',
+      href: '/#4',
+    },
+  ];
   return (
     <div>
       <va-breadcrumbs
         label={label}
         disable-analytics={disableAnalytics}
         uswds={uswds}
+        breadcrumb-list={JSON.stringify(breadcrumbs)}
         wrapping={wrapping}
-      >
-        <li class="usa-breadcrumb__list-item">
-          <a href="" class="usa-breadcrumb__link">
-            <span>Home</span>
-          </a>
-        </li>
-        <li class="usa-breadcrumb__list-item">
-          <a href="" class="usa-breadcrumb__link">
-            <span>Federal Contracting</span>
-          </a>
-        </li>
-        <li class="usa-breadcrumb__list-item">
-          <a href="" class="usa-breadcrumb__link">
-            <span>Contracting assistance programs</span>
-          </a>
-        </li>
-        <li class="usa-breadcrumb__list-item usa-current" aria-current="page">
-          <span>Women-owned small business federal contracting program</span>
-        </li>
-      </va-breadcrumbs>
+      ></va-breadcrumbs>
     </div>
   );
 };
@@ -200,6 +113,8 @@ const WrappingCrumbsTemplate = ({
 const defaultArgs = {
   'uswds': true,
   'label': 'Breadcrumb',
+  'breadcrumb-list':
+    '[{ "label": "Level One", "href": "#one" }, { "label": "Level two", "href": "#two" }, { "label": "Current", "href": "#current" }]',
   'disable-analytics': false,
   'wrapping': false,
 };
@@ -212,9 +127,6 @@ Default.argTypes = propStructure(breadcrumbsDocs);
 
 export const RerenderState = DynamicCrumbsTemplate.bind(null);
 RerenderState.args = { ...defaultArgs };
-
-export const RDFAState = RDFATemplate.bind(null);
-RDFAState.args = { ...defaultArgs };
 
 export const WrappingState = WrappingCrumbsTemplate.bind(null);
 WrappingState.args = { ...defaultArgs, wrapping: true };
