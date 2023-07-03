@@ -28,7 +28,7 @@ export default {
   'november': 'November',
   'december': 'December',
   'on-this-page': 'On this page',
-  'date-hint': 'Please enter two digits for the month and day and four digits for the year',
+  'date-hint': 'Please enter 2 digits for the month and day and 4 digits for the year',
   'date-hint-with-select': 'For example: January 19 2000',
   'date-error': 'Please enter a complete date',
   'gov-site-label': 'Official website of the United States government',

@@ -8,10 +8,6 @@ import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 export namespace Components {
     interface VaAccordion {
         /**
-          * Whether or not the accordion items will have borders
-         */
-        "bordered"?: boolean;
-        /**
           * If `true`, doesn't fire the CustomEvent which can be used for analytics tracking.
          */
         "disableAnalytics"?: boolean;
@@ -23,8 +19,16 @@ export namespace Components {
           * Optional accordion section heading text. Only used in analytics event. Default is null.
          */
         "sectionHeading"?: string;
+        /**
+          * Whether or not the component will use USWDS v3 styling.
+         */
+        "uswds"?: boolean;
     }
     interface VaAccordionItem {
+        /**
+          * Whether or not the accordion item will have a border
+         */
+        "bordered"?: boolean;
         /**
           * The accordion item header text
          */
@@ -41,6 +45,10 @@ export namespace Components {
           * Optional accordion item subheader text. Default is null.
          */
         "subheader"?: string;
+        /**
+          * Whether or not the component will use USWDS v3 styling.
+         */
+        "uswds"?: boolean;
     }
     interface VaAdditionalInfo {
         /**
@@ -1549,10 +1557,6 @@ declare global {
 declare namespace LocalJSX {
     interface VaAccordion {
         /**
-          * Whether or not the accordion items will have borders
-         */
-        "bordered"?: boolean;
-        /**
           * If `true`, doesn't fire the CustomEvent which can be used for analytics tracking.
          */
         "disableAnalytics"?: boolean;
@@ -1568,8 +1572,16 @@ declare namespace LocalJSX {
           * Optional accordion section heading text. Only used in analytics event. Default is null.
          */
         "sectionHeading"?: string;
+        /**
+          * Whether or not the component will use USWDS v3 styling.
+         */
+        "uswds"?: boolean;
     }
     interface VaAccordionItem {
+        /**
+          * Whether or not the accordion item will have a border
+         */
+        "bordered"?: boolean;
         /**
           * The accordion item header text
          */
@@ -1590,6 +1602,10 @@ declare namespace LocalJSX {
           * Optional accordion item subheader text. Default is null.
          */
         "subheader"?: string;
+        /**
+          * Whether or not the component will use USWDS v3 styling.
+         */
+        "uswds"?: boolean;
     }
     interface VaAdditionalInfo {
         /**
