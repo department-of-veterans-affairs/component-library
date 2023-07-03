@@ -34,7 +34,6 @@ const defaultArgs = {
   'uswds': true,
   'slim': false,
   'status': 'info',
-  'background-only': false,
   'disable-analytics': false,
   'visible': true,
   'close-btn-aria-label': 'Close notification',
@@ -56,7 +55,6 @@ const Template = ({
   uswds,
   slim,
   status,
-  'background-only': backgroundOnly,
   'disable-analytics': disableAnalytics,
   visible,
   'close-btn-aria-label': closeBtnAriaLabel,
@@ -72,7 +70,6 @@ const Template = ({
         slim={slim}
         uswds={uswds}
         status={status}
-        backgroundOnly={backgroundOnly}
         disableAnalytics={disableAnalytics}
         visible={visible}
         closeBtnAriaLabel={closeBtnAriaLabel}
@@ -90,7 +87,6 @@ const Template = ({
       uswds={uswds}
       slim={slim}
       status={status}
-      background-only={backgroundOnly}
       disable-analytics={disableAnalytics}
       visible={visible}
       close-btn-aria-label={closeBtnAriaLabel}
@@ -103,111 +99,7 @@ const Template = ({
   );
 };
 
-const BackgroundOnlyTemplate = ({
-  'background-only': backgroundOnly,
-  'close-btn-aria-label': closeBtnAriaLabel,
-  closeable,
-  uswds,
-}) => {
-  return (
-    <>
-      <va-alert
-        uswds={uswds}
-        status="info"
-        background-only={backgroundOnly}
-        disable-analytics="false"
-        visible="true"
-        close-btn-aria-label={closeBtnAriaLabel}
-        closeable={closeable}
-        full-width="false"
-        class="vads-u-margin-bottom--1"
-      >
-        <p className="vads-u-margin-y--0">
-          We'll come get you from the waiting room when it's time for your appointment to start. If you wait more than 15 minutes, tell a staff member.
-        </p>
-      </va-alert>
-      <va-alert
-        uswds={uswds}
-        status="error"
-        background-only={backgroundOnly}
-        disable-analytics="false"
-        visible="true"
-        close-btn-aria-label={closeBtnAriaLabel}
-        closeable={closeable}
-        full-width="false"
-        class="vads-u-margin-bottom--1"
-      >
-        <>
-          <p className="vads-u-margin-top--0">
-            We’re sorry for the interruption, but we’ve found some more
-            information that we need you to review before you can apply for VA
-            health care. Please sign in to VA.gov to review. If you don’t have
-            an account, you can create one now.
-          </p>
-          <a className="vads-c-action-link--green" href="#">Sign in to VA.gov</a>
-        </>
-      </va-alert>
-      <va-alert
-        uswds={uswds}
-        status="success"
-        background-only={backgroundOnly}
-        disable-analytics="false"
-        visible="true"
-        close-btn-aria-label={closeBtnAriaLabel}
-        closeable={closeable}
-        full-width="false"
-        class="vads-u-margin-bottom--1"
-      >
-        <p className="vads-u-margin-y--0">
-        <strong>We're processing your travel reimbursement claim.</strong> We'll send you a text
-          to let you know the status of your claim.
-        </p>
-      </va-alert>
-      <va-alert
-        uswds={uswds}
-        status="warning"
-        background-only={backgroundOnly}
-        disable-analytics="false"
-        visible="true"
-        close-btn-aria-label={closeBtnAriaLabel}
-        closeable={closeable}
-        full-width="false"
-        class="vads-u-margin-bottom--1"
-      >
-        <>
-          <p className="vads-u-margin-y--0 vads-u-margin-bottom--2">
-          We're sorry. Something went wrong on our end. We can't file a travel reimbursement
-            claim for you right now. But you can still file within <strong>30 days</strong> 
-            of the appointment.
-          </p>
-          <a href="#">Find out how to file for travel reimbursement</a>
-        </>
-      </va-alert>
-      <va-alert
-        uswds={uswds}
-        status="continue"
-        background-only={backgroundOnly}
-        disable-analytics="false"
-        visible="true"
-        close-btn-aria-label={closeBtnAriaLabel}
-        closeable={closeable}
-        full-width="false"
-      >
-        <>
-          <p className="vads-u-margin-top--0">
-            You can use our new mobile app to check the status of your claims or
-            appeals on your mobile device. Download the{' '}
-            <strong>VA: Health and Benefits</strong> mobile app to get started.
-          </p>
-          <a className="vads-c-action-link--green" href="#">Sign in to VA.gov</a>
-        </>
-      </va-alert>
-    </>
-  );
-};
-
 const SlimTemplate = ({
-  'background-only': backgroundOnly,
   'close-btn-aria-label': closeBtnAriaLabel,
   closeable,
   slim,
@@ -219,7 +111,6 @@ const SlimTemplate = ({
         uswds={uswds}
         slim={slim}
         status="info"
-        background-only={backgroundOnly}
         disable-analytics="false"
         visible="true"
         close-btn-aria-label={closeBtnAriaLabel}
@@ -235,7 +126,6 @@ const SlimTemplate = ({
         uswds={uswds}
         slim={slim}
         status="error"
-        background-only={backgroundOnly}
         disable-analytics="false"
         visible="true"
         close-btn-aria-label={closeBtnAriaLabel}
@@ -253,7 +143,6 @@ const SlimTemplate = ({
         uswds={uswds}
         slim={slim}
         status="success"
-        background-only={backgroundOnly}
         disable-analytics="false"
         visible="true"
         close-btn-aria-label={closeBtnAriaLabel}
@@ -269,7 +158,6 @@ const SlimTemplate = ({
         uswds={uswds}
         slim={slim}
         status="warning"
-        background-only={backgroundOnly}
         disable-analytics="false"
         visible="true"
         close-btn-aria-label={closeBtnAriaLabel}
@@ -287,7 +175,6 @@ const SlimTemplate = ({
         uswds={uswds}
         slim={slim}
         status="continue"
-        background-only={backgroundOnly}
         disable-analytics="false"
         visible="true"
         close-btn-aria-label={closeBtnAriaLabel}
@@ -391,20 +278,6 @@ Dismissable.args = {
   ...defaultArgs,
   closeable: true,
   onCloseEvent: () => console.log('Close event triggered'),
-};
-
-export const DismissableBackgroundOnly = Template.bind(null);
-DismissableBackgroundOnly.args = {
-  ...defaultArgs,
-  'background-only': true,
-  'closeable': true,
-  'onCloseEvent': () => console.log('Close event triggered'),
-};
-
-export const BackgroundOnly = BackgroundOnlyTemplate.bind(null);
-BackgroundOnly.args = {
-  ...defaultArgs,
-  'background-only': true,
 };
 
 export const Slim = SlimTemplate.bind(null);
