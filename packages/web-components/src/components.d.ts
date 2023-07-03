@@ -70,7 +70,7 @@ export namespace Components {
     }
     interface VaAlert {
         /**
-          * If `true`, renders the alert with only a background color corresponding to the status - no icon or left border.
+          * If `true`, renders the alert with only a background color corresponding to the status - no left border.
          */
         "backgroundOnly"?: boolean;
         /**
@@ -89,10 +89,6 @@ export namespace Components {
           * If `true`, the alert will be full width. Should be for emergency communication only.
          */
         "fullWidth"?: boolean;
-        /**
-          * This option only takes effect when background-only is true. If `true`, the background-only alert will include an icon.
-         */
-        "showIcon"?: boolean;
         /**
           * Displays the slim variation. Available when USWDS is true.
          */
@@ -1635,7 +1631,7 @@ declare namespace LocalJSX {
     }
     interface VaAlert {
         /**
-          * If `true`, renders the alert with only a background color corresponding to the status - no icon or left border.
+          * If `true`, renders the alert with only a background color corresponding to the status - no left border.
          */
         "backgroundOnly"?: boolean;
         /**
@@ -1666,10 +1662,6 @@ declare namespace LocalJSX {
           * Fires when the component has successfully finished rendering for the first time.
          */
         "onVa-component-did-load"?: (event: VaAlertCustomEvent<any>) => void;
-        /**
-          * This option only takes effect when background-only is true. If `true`, the background-only alert will include an icon.
-         */
-        "showIcon"?: boolean;
         /**
           * Displays the slim variation. Available when USWDS is true.
          */
