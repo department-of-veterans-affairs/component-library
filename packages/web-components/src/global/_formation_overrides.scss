@@ -354,3 +354,36 @@
 .usa-checkbox__input:checked + [class*="__label"]::before {
   background-size: rem-override(0.75rem);
 }
+
+.usa-accordion {
+  font-size: rem-override(1.06rem);
+}
+
+.usa-accordion__heading {
+  font-size: rem-override(1.06rem);
+}
+
+.usa-accordion__heading:not(:first-child) {
+  margin-top: rem-override(0.5rem);
+}
+
+.usa-accordion__button {
+  background-size: rem-override(1.5rem);
+  background-position: right rem-override(1.25rem) center;
+  padding: rem-override(1rem) rem-override(3.5rem) rem-override(1rem) rem-override(1.25rem)
+}
+
+.usa-accordion__button[aria-expanded=false] {
+  background-size: rem-override(1.5rem);
+}
+
+.usa-accordion__content {
+  padding: rem-override(1rem) rem-override(1.25rem) rem-override(0.75rem);
+}
+
+.usa-accordion--bordered .usa-accordion__content {
+  border-bottom: rem-override(0.25rem) solid rgb(240, 240, 240);
+  border-left: rem-override(0.25rem) solid rgb(240, 240, 240);
+  border-right: rem-override(0.25rem) solid rgb(240, 240, 240);
+  padding-bottom: rem-override(1rem);
+}
