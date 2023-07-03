@@ -14,9 +14,9 @@ describe('va-modal', () => {
 
     const element = await page.find('va-modal');
     expect(element).toEqualHtml(`
-      <va-modal aria-label="Example Title modal" aria-modal="true" class="hydrated" modal-title="Example Title" role="dialog" visible="">
+      <va-modal class="hydrated" modal-title="Example Title" visible="">
         <mock:shadow-root>
-          <div class="va-modal-inner" tabindex="-1">
+          <div aria-describedby="modal-content" aria-label="Example Title modal" aria-modal="true" class="va-modal-inner" role="dialog">
             <button aria-label="Close Example Title modal" class="va-modal-close" type="button">
               <i aria-hidden="true"></i>
             </button>
@@ -25,7 +25,9 @@ describe('va-modal', () => {
                 <h1 class="va-modal-title" tabindex="-1">
                   Example Title
                 </h1>
-                <slot></slot>
+                <div id="modal-content">
+                  <slot></slot>
+                </div>
               </div>
             </div>
           </div>
@@ -219,9 +221,9 @@ describe('va-modal', () => {
 
     const element = await page.find('va-modal');
     expect(element).toEqualHtml(`
-      <va-modal aria-label="Example Title modal" aria-modal="true" class="hydrated" modal-title="Example Title" role="dialog" uswds="" visible="">
+      <va-modal class="hydrated" modal-title="Example Title" uswds="" visible="">
         <mock:shadow-root>
-          <div aria-describedby="description" aria-labelledby="heading" class="usa-modal" tabindex="-1">
+        <div aria-describedby="description" aria-label="Example Title modal" aria-modal="true" class="usa-modal" role="dialog">
             <div class="usa-modal__content">
               <button aria-label="Close Example Title modal" class="va-modal-close" type="button">
                 <i aria-hidden="true"></i>
