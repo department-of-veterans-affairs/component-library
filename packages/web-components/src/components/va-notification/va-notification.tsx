@@ -5,7 +5,8 @@ import {
   EventEmitter,
   Host, 
   Prop, 
-  h 
+  h,
+  Listen,
 } from '@stencil/core';
 import classnames from 'classnames';
 
@@ -75,6 +76,11 @@ export class VaNotification {
   @Prop() text?: string;
   
   /**
+   * If `true`, the component-library-analytics event is disabled.
+   */
+  @Prop() disableAnalytics?: boolean = false;
+  
+  /**
    * Fires when the component is closed by clicking on the close icon. This fires only
    * when closeable is true.
    */
@@ -84,8 +90,56 @@ export class VaNotification {
   })
   closeEvent: EventEmitter;
 
+  /**
+   * The event used to track usage of the component.
+   */
+  @Event({
+    bubbles: true,
+    composed: true,
+    eventName: 'component-library-analytics',
+  })
+  componentLibraryAnalytics: EventEmitter;
+
+  /**
+   * Listen for the va-link GA event and capture it so 
+   * that we can emit a single va-notification GA event that includes
+   * the va-link details.
+   */
+  @Listen('component-library-analytics')
+  handleLinkAnalytics(event) {
+    // Prevent va-notification GA event from firing multiple times.
+    if (event.detail.componentName === 'va-notification') return;
+
+    // Prevent va-link GA event from firing.
+    event.stopPropagation();
+
+    if (!this.disableAnalytics) {
+      const detail = {
+        componentName: 'va-notification',
+        action: 'linkClick',
+        details: {
+          clickLabel: event.detail?.details?.label, // va-link text
+          type: this.symbol,
+          headline: this.headline,
+        },
+      };
+      this.componentLibraryAnalytics.emit(detail);
+    }
+  }
+
   private closeHandler(e: MouseEvent): void {
     this.closeEvent.emit(e);
+
+    if (!this.disableAnalytics) {
+      const detail = {
+        componentName: 'va-notification',
+        action: 'close',
+        details: {
+          headline: this.headline,
+        },
+      };
+      this.componentLibraryAnalytics.emit(detail);
+    }
   }
 
   private getHeadlineLevel() {
