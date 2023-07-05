@@ -13,6 +13,10 @@
   padding: 0;
 }
 
+:host([uswds]) {
+  margin-top: 24px;
+}
+
 /* Original Component Style */
 
 @import '../../mixins/accessibility.css';
