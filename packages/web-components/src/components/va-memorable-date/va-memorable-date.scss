@@ -17,6 +17,10 @@
   margin-top: 16px;
 }
 
+:host([uswds]) {
+  margin-top: 24px;
+}
+
 :host([uswds]) #error-message {
   margin-bottom: 0;
 }
