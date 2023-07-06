@@ -213,13 +213,13 @@ export class VaBreadcrumbs {
       return (
         <Host>
           <nav aria-label={label} class={wrapClass}>
-            <ol role="list" class="usa-breadcrumb__list">
+            <ol role="list" class="usa-breadcrumb__list" onClick={e => this.fireAnalyticsEvent(e)}>
               {this.myInnerArray.map((item, index) => (
                 <li class={`usa-breadcrumb__list-item ${index === this.myInnerArray.length - 1 ? 'usa-current' : ''}`}>
                   {index === this.myInnerArray.length - 1 ? (
                     <span>{item.label}</span>
                   ) : (
-                    <a class="usa-breadcrumb__link" href={item.href} onClick={e => this.fireAnalyticsEvent(e)}>
+                    <a class="usa-breadcrumb__link" href={item.href}>
                       <span>{item.label}</span>
                     </a>
                   )}
