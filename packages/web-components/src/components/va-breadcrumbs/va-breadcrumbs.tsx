@@ -213,7 +213,7 @@ export class VaBreadcrumbs {
       return (
         <Host>
           <nav aria-label={label} class={wrapClass}>
-            <ol role="list" class="usa-breadcrumb__list" onClick={e => this.fireAnalyticsEvent(e)}>
+            <ol role="list" onClick={e => this.fireAnalyticsEvent(e)} class="usa-breadcrumb__list">
               {this.myInnerArray.map((item, index) => (
                 <li class={`usa-breadcrumb__list-item ${index === this.myInnerArray.length - 1 ? 'usa-current' : ''}`}>
                   {index === this.myInnerArray.length - 1 ? (
