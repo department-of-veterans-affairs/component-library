@@ -208,10 +208,35 @@ SignInOrToolPrompt.args = {
         appeals on your mobile device. Download the{' '}
         <strong>VA: Health and Benefits</strong> mobile app to get started.
       </p>
-      <a className="vads-c-action-link--green" href="#">Sign in to VA.gov</a>
     </>
   ),
   status: 'continue',
+};
+
+export const SignInToStartYourApplication = Template.bind(null);
+SignInToStartYourApplication.args = {
+  ...defaultArgs,
+  headline: (
+    <h2 slot="headline">
+      Sign in now to save time and save your work in progress
+    </h2>
+  ),
+  children: (
+    <div>
+      <p className="vads-u-margin-top--0">
+        Here's how signing in now helps you:
+      </p>
+      <ul>
+        <li>We can fill in some of your information for you to save you time.</li>
+        <li>You can save your work in progress. You'll have 60 days from when you start or make updates to your application to come back and finish it.</li>
+      </ul>
+      <p><strong>Note:</strong> You can sign in after you start your application. But you'll lose any information you already filled in.</p>
+      <button class="usa-button-primary" type="button">Sign in to start your application</button>
+      <p>
+        <a href="#start">Start your application without signing in</a>
+      </p>
+    </div>
+  )
 };
 
 export const Success = Template.bind(null);
@@ -259,7 +284,7 @@ Error.args = {
         Please sign in to VA.gov to review. If you don’t have an account, you
         can create one now.
       </p>
-      <a className="vads-c-action-link--green" href="#">Sign in to VA.gov</a>
+      <button class="usa-button-primary" type="button">Sign in to VA.gov</button>
     </>
   ),
   status: 'error',
