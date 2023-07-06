@@ -93,10 +93,6 @@ export const additionalDocs = {
     maturityCategory: USE,
     maturityLevel: BEST_PRACTICE,
   },
-  'Table - React': {
-    maturityCategory: DONT_USE,
-    maturityLevel: DEPRECATED,
-  },
   // MDX
   'Tag': {
     guidanceHref: 'tag',

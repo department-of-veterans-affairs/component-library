@@ -37,7 +37,6 @@ VaAlert.displayName = 'VaAlert';
 const defaultArgs = {
   'status': 'info',
   'background-only': false,
-  'show-icon': false,
   'disable-analytics': false,
   'visible': true,
   'close-btn-aria-label': 'Close notification',
@@ -51,9 +50,7 @@ const defaultArgs = {
   'children': (
     <div>
       <p className="vads-u-margin-y--0">
-        You can use our new mobile app to check the status of your claims or
-        appeals on your mobile device. Download the{' '}
-        <strong>VA: Health and Benefits</strong> mobile app to get started.
+        We'll come get you from the waiting room when it's time for your appointment to start. If you wait more than 15 minutes, tell a staff member.
       </p>
     </div>
   ),
@@ -62,7 +59,6 @@ const defaultArgs = {
 const Template = ({
   status,
   'background-only': backgroundOnly,
-  'show-icon': showIcon,
   'disable-analytics': disableAnalytics,
   visible,
   'close-btn-aria-label': closeBtnAriaLabel,
@@ -77,7 +73,6 @@ const Template = ({
       <VaAlert
         status={status}
         backgroundOnly={backgroundOnly}
-        showIcon={showIcon}
         disableAnalytics={disableAnalytics}
         visible={visible}
         closeBtnAriaLabel={closeBtnAriaLabel}
@@ -94,7 +89,6 @@ const Template = ({
     <va-alert
       status={status}
       background-only={backgroundOnly}
-      show-icon={showIcon}
       disable-analytics={disableAnalytics}
       visible={visible}
       close-btn-aria-label={closeBtnAriaLabel}
@@ -109,7 +103,6 @@ const Template = ({
 
 const BackgroundOnlyTemplate = ({
   'background-only': backgroundOnly,
-  'show-icon': showIcon,
   'close-btn-aria-label': closeBtnAriaLabel,
   closeable,
   headline,
@@ -119,7 +112,6 @@ const BackgroundOnlyTemplate = ({
       <va-alert
         status="info"
         background-only={backgroundOnly}
-        show-icon={showIcon}
         disable-analytics="false"
         visible="true"
         close-btn-aria-label={closeBtnAriaLabel}
@@ -128,15 +120,12 @@ const BackgroundOnlyTemplate = ({
         class="vads-u-margin-bottom--1"
       >
         <p className="vads-u-margin-y--0">
-          You can use our new mobile app to check the status of your claims or
-          appeals on your mobile device. Download the{' '}
-          <strong>VA: Health and Benefits</strong> mobile app to get started.
+          We'll come get you from the waiting room when it's time for your appointment to start. If you wait more than 15 minutes, tell a staff member.
         </p>
       </va-alert>
       <va-alert
         status="error"
         background-only={backgroundOnly}
-        show-icon={showIcon}
         disable-analytics="false"
         visible="true"
         close-btn-aria-label={closeBtnAriaLabel}
@@ -151,13 +140,12 @@ const BackgroundOnlyTemplate = ({
             health care. Please sign in to VA.gov to review. If you don’t have
             an account, you can create one now.
           </p>
-          <button className="usa-button-primary">Sign in to VA.gov</button>
+          <a className="vads-c-action-link--green" href="#">Sign in to VA.gov</a>
         </div>
       </va-alert>
       <va-alert
         status="success"
         background-only={backgroundOnly}
-        show-icon={showIcon}
         disable-analytics="false"
         visible="true"
         close-btn-aria-label={closeBtnAriaLabel}
@@ -166,13 +154,13 @@ const BackgroundOnlyTemplate = ({
         class="vads-u-margin-bottom--1"
       >
         <p className="vads-u-margin-y--0">
-          You can now access health tools on VA.gov.
+          <strong>We're processing your travel reimbursement claim.</strong> We'll send you a text
+          to let you know the status of your claim.
         </p>
       </va-alert>
       <va-alert
         status="warning"
         background-only={backgroundOnly}
-        show-icon={showIcon}
         disable-analytics="false"
         visible="true"
         close-btn-aria-label={closeBtnAriaLabel}
@@ -181,22 +169,17 @@ const BackgroundOnlyTemplate = ({
         class="vads-u-margin-bottom--1"
       >
         <div>
-          <p className="vads-u-margin-y--0">
-            We’re sorry. The health care application is currently down while we
-            fix a few things. We’ll be back up as soon as we can.
+          <p className="vads-u-margin-y--0 vads-u-margin-bottom--2">
+            We're sorry. Something went wrong on our end. We can't file a travel reimbursement
+            claim for you right now. But you can still file within <strong>30 days</strong> 
+            of the appointment.
           </p>
-          <p className="vads-u-margin-bottom--0">
-            In the meantime, you can call{' '}
-            <a href="tel:+18772228387">877-222-8387</a>, Monday &#8211; Friday,
-            8:00 a.m. &#8211; 8:00 p.m. (<abbr title="eastern time">ET</abbr>)
-            and press 2 to complete this application over the phone.
-          </p>
+          <a href="#">Find out how to file for travel reimbursement</a>
         </div>
       </va-alert>
       <va-alert
         status="continue"
         background-only={backgroundOnly}
-        show-icon={showIcon}
         disable-analytics="false"
         visible="true"
         close-btn-aria-label={closeBtnAriaLabel}
@@ -209,7 +192,7 @@ const BackgroundOnlyTemplate = ({
             appeals on your mobile device. Download the{' '}
             <strong>VA: Health and Benefits</strong> mobile app to get started.
           </p>
-          <button className="usa-button-primary">Sign in to VA.gov</button>
+          <a className="vads-c-action-link--green" href="#">Sign in to VA.gov</a>
         </div>
       </va-alert>
     </>
@@ -232,7 +215,7 @@ SignInOrToolPrompt.args = {
         appeals on your mobile device. Download the{' '}
         <strong>VA: Health and Benefits</strong> mobile app to get started.
       </p>
-      <button className="va-button-primary">Sign in to VA.gov</button>
+      <a className="vads-c-action-link--green" href="#">Sign in to VA.gov</a>
     </div>
   ),
   status: 'continue',
@@ -256,8 +239,8 @@ SignInToStartYourApplication.args = {
         <li>You can save your work in progress. You'll have 60 days from when you start or make updates to your application to come back and finish it.</li>
       </ul>
       <p><strong>Note:</strong> You can sign in after you start your application. But you'll lose any information you already filled in.</p>
-      <button className="usa-button-primary vads-u-margin-bottom--2">Sign in to start your application</button>
-      <p className="vads-u-margin-top--0 vads-u-margin-bottom--1">
+      <a className="vads-c-action-link--green" href="#">Sign in to start your application</a>
+      <p className="vads-u-margin-bottom--1">
         <a href="#start">Start your application without signing in</a>
       </p>
     </div>
@@ -316,7 +299,7 @@ Error.args = {
         Please sign in to VA.gov to review. If you don’t have an account, you
         can create one now.
       </p>
-      <button className="usa-button-primary">Sign in to VA.gov</button>
+      <a className="vads-c-action-link--green" href="#">Sign in to VA.gov</a>
     </div>
   ),
   status: 'error',
@@ -337,34 +320,18 @@ Dismissable.args = {
   onCloseEvent: () => console.log('Close event triggered'),
 };
 
-export const DismissableBackgroundOnly = Template.bind(null);
-DismissableBackgroundOnly.args = {
+export const DismissableSlim = Template.bind(null);
+DismissableSlim.args = {
   ...defaultArgs,
   'background-only': true,
   'closeable': true,
   'onCloseEvent': () => console.log('Close event triggered'),
 };
 
-export const DismissableBackgroundOnlyIcon = Template.bind(null);
-DismissableBackgroundOnlyIcon.args = {
+export const Slim = BackgroundOnlyTemplate.bind(null);
+Slim.args = {
   ...defaultArgs,
   'background-only': true,
-  'show-icon': true,
-  'closeable': true,
-  'onCloseEvent': () => console.log('Close event triggered'),
-};
-
-export const BackgroundOnly = BackgroundOnlyTemplate.bind(null);
-BackgroundOnly.args = {
-  ...defaultArgs,
-  'background-only': true,
-};
-
-export const BackgroundOnlyWithIcon = BackgroundOnlyTemplate.bind(null);
-BackgroundOnlyWithIcon.args = {
-  ...defaultArgs,
-  'background-only': true,
-  'show-icon': true,
 };
 
 export const NotVisible = Template.bind(null);
