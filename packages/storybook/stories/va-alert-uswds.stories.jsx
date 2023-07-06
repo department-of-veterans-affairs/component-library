@@ -46,7 +46,7 @@ const defaultArgs = {
   ),
   'children': (
     <p className="vads-u-margin-y--0">
-      Lorem ipsum dolor sit amet, <a class="usa-link" href="javascript:void(0);">consectetur adipiscing</a> elit, sed do eiusmod.
+      Lorem ipsum dolor sit amet <a class="usa-link" href="javascript:void(0);">consectetur adipiscing</a> elit sed do eiusmod.
     </p>
   ),
 };
@@ -203,7 +203,7 @@ SignInOrToolPrompt.args = {
   ...defaultArgs,
   children: (
     <>
-      <p className="vads-u-margin-top--0">
+      <p className="vads-u-margin-y--0">
         You can use our new mobile app to check the status of your claims or
         appeals on your mobile device. Download the{' '}
         <strong>VA: Health and Benefits</strong> mobile app to get started.
@@ -264,7 +264,7 @@ Warning.args = {
   ),
   children: (
     <>
-      <p className="vads-u-margin-top--0">
+      <p className="vads-u-margin-y--0">
       Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.
       </p>
     </>
@@ -275,16 +275,12 @@ Warning.args = {
 export const Error = Template.bind(null);
 Error.args = {
   ...defaultArgs,
-  headline: <h2 slot="headline">Please sign in to review your information</h2>,
+  headline: <h2 slot="headline">Sorry, we couldn't find any eligible issues</h2>,
   children: (
     <>
-      <p className="vads-u-margin-top--0">
-        We’re sorry for the interruption, but we’ve found some more information
-        that we need you to review before you can apply for VA health care.
-        Please sign in to VA.gov to review. If you don’t have an account, you
-        can create one now.
+      <p className="vads-u-margin-y--0">
+        If you’d like to add an issue for review, select "Add a new issue" to get started.
       </p>
-      <button class="usa-button-primary" type="button">Sign in to VA.gov</button>
     </>
   ),
   status: 'error',
