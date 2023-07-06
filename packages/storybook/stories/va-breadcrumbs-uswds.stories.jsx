@@ -66,10 +66,6 @@ const DynamicCrumbsTemplate = ({
       <button onClick={e => replaceCrumbs()}>Replace Crumbs</button>
       <button onClick={e => resetCrumbs()}>Reset Crumbs</button>
       <br />
-      <p>
-        Note: To rerender the breadcrumbs dynamically, the anchor links must be
-        wrapped in list tags.
-      </p>
       {crumbs.length > 0 && (
         <va-breadcrumbs
           label={label}
