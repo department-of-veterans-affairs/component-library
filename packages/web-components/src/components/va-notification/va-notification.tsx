@@ -135,6 +135,7 @@ export class VaNotification {
         componentName: 'va-notification',
         action: 'close',
         details: {
+          type: this.symbol,
           headline: this.headline,
         },
       };
