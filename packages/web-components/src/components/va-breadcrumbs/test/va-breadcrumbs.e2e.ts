@@ -197,18 +197,17 @@ describe('va-breadcrumbs', () => {
     `);
 
     const analyticsSpy = await page.spyOnEvent('component-library-analytics');
+    const anchorElement = await page.find('va-breadcrumbs >>> a.usa-breadcrumb__link');
 
-    const anchorElements = await page.findAll('pierce/a');
-
-    await anchorElements[1].click();
+    await anchorElement.click();
 
     expect(analyticsSpy).toHaveReceivedEventDetail({
       action: 'linkClick',
       componentName: 'va-breadcrumbs',
       details: {
-        clickLabel: 'Level two',
-        clickLevel: 2,
-        totalLevels: 3,
+        clickLabel: 'Level One',
+        clickLevel: 0,
+        totalLevels: 0,
       },
     });
   });

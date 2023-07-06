@@ -7,6 +7,10 @@
   display: block;
 }
 
+.usa-breadcrumb__link span {
+  pointer-events: none;
+}
+
 :host(:not([uswds])) nav {
   background: var(--color-white);
   color: var(--color-link-default);
