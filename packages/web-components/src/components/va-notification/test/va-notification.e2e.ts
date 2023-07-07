@@ -12,7 +12,7 @@ describe('va-notification', () => {
       <va-notification class="hydrated" has-border="" headline="Notification heading">
         <mock:shadow-root>
           <va-card show-shadow="true" class="hydrated show-shadow va-card">
-            <div class="va-notification none has-border" role="alert">
+            <div class="va-notification none has-border">
               <i aria-hidden="true" role="img" class="none"></i>
               <div class="body" role="presentation">
                 <h3 part="headline">Notification heading</h3>
