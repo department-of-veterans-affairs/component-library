@@ -98,7 +98,7 @@ export class VaMaintenanceBanner {
           <strong>Date:</strong> {formatDate(maintenanceStartDateTime, {dateStyle: 'full'})}
         </p>
         <p>
-          <strong>Time:</strong> {formatDate(maintenanceStartDateTime, {timeStyle: 'short'})}
+          <strong>Time:</strong> {formatDate(maintenanceStartDateTime, {hour:'numeric', minute: 'numeric', timeZoneName: 'short'})}
         </p>
         <p>
           <strong>Duration:</strong> {duration}
