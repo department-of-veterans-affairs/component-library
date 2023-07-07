@@ -31,7 +31,7 @@
 }
 
 :host(:not([uswds])) {
-  width: 560px;
+  max-width: 560px;
 }
 
 :host(:not([uswds])) va-button::part(button) {
@@ -82,7 +82,7 @@
 @media (max-width: 320px) {
   :host(:not([uswds])) {
     margin: 0 auto;
-    width: 280px;
+    max-width: 280px;
   }
 
   :host([continue]:not([continue='false']):not([uswds])) va-button::part(button) {
