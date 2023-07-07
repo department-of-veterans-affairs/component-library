@@ -37,15 +37,9 @@ export class VaAlert {
 
   /**
    * If `true`, renders the alert with only a background color corresponding
-   * to the status - no icon or left border.
+   * to the status - no left border.
    */
   @Prop() backgroundOnly?: boolean = false;
-
-  /**
-   * This option only takes effect when background-only is true. If `true`, the background-only alert will
-   * include an icon.
-   */
-  @Prop() showIcon?: boolean = false;
 
   /**
    * If `true`, doesn't fire the CustomEvent which can be used for analytics tracking.
@@ -170,9 +164,8 @@ export class VaAlert {
       status, 
       visible, 
       closeable, 
-      showIcon, 
       uswds, 
-      slim 
+      slim,
     } = this;
     /* eslint-disable i18next/no-literal-string */
     const role = status === 'error' ? 'alert' : null;
@@ -184,7 +177,6 @@ export class VaAlert {
     if (uswds) {
       const classes = classnames('usa-alert', `usa-alert--${status}`, {
         'bg-only': backgroundOnly,
-        'usa-alert--no-icon': backgroundOnly && !showIcon,
         'usa-alert--success': (status === 'continue'),
         'usa-alert--slim': slim
       });
@@ -220,7 +212,6 @@ export class VaAlert {
 
     const classes = classnames('alert', status, {
       'bg-only': backgroundOnly,
-      'hide-icon': backgroundOnly && !showIcon,
     });
 
     return (

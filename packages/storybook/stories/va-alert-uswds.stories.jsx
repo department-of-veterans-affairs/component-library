@@ -34,8 +34,6 @@ const defaultArgs = {
   'uswds': true,
   'slim': false,
   'status': 'info',
-  'background-only': false,
-  'show-icon': false,
   'disable-analytics': false,
   'visible': true,
   'close-btn-aria-label': 'Close notification',
@@ -48,9 +46,7 @@ const defaultArgs = {
   ),
   'children': (
     <p className="vads-u-margin-y--0">
-      You can use our new mobile app to check the status of your claims or
-      appeals on your mobile device. Download the{' '}
-      <strong>VA: Health and Benefits</strong> mobile app to get started.
+      Lorem ipsum dolor sit amet <a class="usa-link" href="javascript:void(0);">consectetur adipiscing</a> elit sed do eiusmod.
     </p>
   ),
 };
@@ -59,8 +55,6 @@ const Template = ({
   uswds,
   slim,
   status,
-  'background-only': backgroundOnly,
-  'show-icon': showIcon,
   'disable-analytics': disableAnalytics,
   visible,
   'close-btn-aria-label': closeBtnAriaLabel,
@@ -76,8 +70,6 @@ const Template = ({
         slim={slim}
         uswds={uswds}
         status={status}
-        backgroundOnly={backgroundOnly}
-        showIcon={showIcon}
         disableAnalytics={disableAnalytics}
         visible={visible}
         closeBtnAriaLabel={closeBtnAriaLabel}
@@ -95,8 +87,6 @@ const Template = ({
       uswds={uswds}
       slim={slim}
       status={status}
-      background-only={backgroundOnly}
-      show-icon={showIcon}
       disable-analytics={disableAnalytics}
       visible={visible}
       close-btn-aria-label={closeBtnAriaLabel}
@@ -109,127 +99,9 @@ const Template = ({
   );
 };
 
-const BackgroundOnlyTemplate = ({
-  'background-only': backgroundOnly,
-  'show-icon': showIcon,
-  'close-btn-aria-label': closeBtnAriaLabel,
-  closeable,
-  headline,
-  uswds,
-}) => {
-  return (
-    <>
-      <va-alert
-        uswds={uswds}
-        status="info"
-        background-only={backgroundOnly}
-        show-icon={showIcon}
-        disable-analytics="false"
-        visible="true"
-        close-btn-aria-label={closeBtnAriaLabel}
-        closeable={closeable}
-        full-width="false"
-        class="vads-u-margin-bottom--1"
-      >
-        <p className="vads-u-margin-y--0">
-          You can use our new mobile app to check the status of your claims or
-          appeals on your mobile device. Download the{' '}
-          <strong>VA: Health and Benefits</strong> mobile app to get started.
-        </p>
-      </va-alert>
-      <va-alert
-        uswds={uswds}
-        status="error"
-        background-only={backgroundOnly}
-        show-icon={showIcon}
-        disable-analytics="false"
-        visible="true"
-        close-btn-aria-label={closeBtnAriaLabel}
-        closeable={closeable}
-        full-width="false"
-        class="vads-u-margin-bottom--1"
-      >
-        <>
-          <p className="vads-u-margin-top--0">
-            We’re sorry for the interruption, but we’ve found some more
-            information that we need you to review before you can apply for VA
-            health care. Please sign in to VA.gov to review. If you don’t have
-            an account, you can create one now.
-          </p>
-          <button className="usa-button-primary" style={{width:'inherit'}}>Sign in to VA.gov</button>
-        </>
-      </va-alert>
-      <va-alert
-        uswds={uswds}
-        status="success"
-        background-only={backgroundOnly}
-        show-icon={showIcon}
-        disable-analytics="false"
-        visible="true"
-        close-btn-aria-label={closeBtnAriaLabel}
-        closeable={closeable}
-        full-width="false"
-        class="vads-u-margin-bottom--1"
-      >
-        <p className="vads-u-margin-y--0">
-          You can now access health tools on VA.gov.
-        </p>
-      </va-alert>
-      <va-alert
-        uswds={uswds}
-        status="warning"
-        background-only={backgroundOnly}
-        show-icon={showIcon}
-        disable-analytics="false"
-        visible="true"
-        close-btn-aria-label={closeBtnAriaLabel}
-        closeable={closeable}
-        full-width="false"
-        class="vads-u-margin-bottom--1"
-      >
-        <>
-          <p className="vads-u-margin-y--0">
-            We’re sorry. The health care application is currently down while we
-            fix a few things. We’ll be back up as soon as we can.
-          </p>
-          <p className="vads-u-margin-bottom--0">
-            In the meantime, you can call{' '}
-            <a href="tel:+18772228387">877-222-8387</a>, Monday &#8211; Friday,
-            8:00 a.m. &#8211; 8:00 p.m. (<abbr title="eastern time">ET</abbr>)
-            and press 2 to complete this application over the phone.
-          </p>
-        </>
-      </va-alert>
-      <va-alert
-        uswds={uswds}
-        status="continue"
-        background-only={backgroundOnly}
-        show-icon={showIcon}
-        disable-analytics="false"
-        visible="true"
-        close-btn-aria-label={closeBtnAriaLabel}
-        closeable={closeable}
-        full-width="false"
-      >
-        <>
-          <p className="vads-u-margin-top--0">
-            You can use our new mobile app to check the status of your claims or
-            appeals on your mobile device. Download the{' '}
-            <strong>VA: Health and Benefits</strong> mobile app to get started.
-          </p>
-          <button className="usa-button-primary" style={{width:'inherit'}}>Sign in to VA.gov</button>
-        </>
-      </va-alert>
-    </>
-  );
-};
-
 const SlimTemplate = ({
-  'background-only': backgroundOnly,
-  'show-icon': showIcon,
   'close-btn-aria-label': closeBtnAriaLabel,
   closeable,
-  headline,
   slim,
   uswds,
 }) => {
@@ -239,8 +111,6 @@ const SlimTemplate = ({
         uswds={uswds}
         slim={slim}
         status="info"
-        background-only={backgroundOnly}
-        show-icon={showIcon}
         disable-analytics="false"
         visible="true"
         close-btn-aria-label={closeBtnAriaLabel}
@@ -256,8 +126,6 @@ const SlimTemplate = ({
         uswds={uswds}
         slim={slim}
         status="error"
-        background-only={backgroundOnly}
-        show-icon={showIcon}
         disable-analytics="false"
         visible="true"
         close-btn-aria-label={closeBtnAriaLabel}
@@ -275,8 +143,6 @@ const SlimTemplate = ({
         uswds={uswds}
         slim={slim}
         status="success"
-        background-only={backgroundOnly}
-        show-icon={showIcon}
         disable-analytics="false"
         visible="true"
         close-btn-aria-label={closeBtnAriaLabel}
@@ -292,8 +158,6 @@ const SlimTemplate = ({
         uswds={uswds}
         slim={slim}
         status="warning"
-        background-only={backgroundOnly}
-        show-icon={showIcon}
         disable-analytics="false"
         visible="true"
         close-btn-aria-label={closeBtnAriaLabel}
@@ -311,8 +175,6 @@ const SlimTemplate = ({
         uswds={uswds}
         slim={slim}
         status="continue"
-        background-only={backgroundOnly}
-        show-icon={showIcon}
         disable-analytics="false"
         visible="true"
         close-btn-aria-label={closeBtnAriaLabel}
@@ -341,15 +203,40 @@ SignInOrToolPrompt.args = {
   ...defaultArgs,
   children: (
     <>
-      <p className="vads-u-margin-top--0">
+      <p className="vads-u-margin-y--0">
         You can use our new mobile app to check the status of your claims or
         appeals on your mobile device. Download the{' '}
         <strong>VA: Health and Benefits</strong> mobile app to get started.
       </p>
-      <button className="va-button-primary" style={{width:'inherit'}}>Sign in to VA.gov</button>
     </>
   ),
   status: 'continue',
+};
+
+export const SignInToStartYourApplication = Template.bind(null);
+SignInToStartYourApplication.args = {
+  ...defaultArgs,
+  headline: (
+    <h2 slot="headline">
+      Sign in now to save time and save your work in progress
+    </h2>
+  ),
+  children: (
+    <div>
+      <p className="vads-u-margin-top--0">
+        Here's how signing in now helps you:
+      </p>
+      <ul>
+        <li>We can fill in some of your information for you to save you time.</li>
+        <li>You can save your work in progress. You'll have 60 days from when you start or make updates to your application to come back and finish it.</li>
+      </ul>
+      <p><strong>Note:</strong> You can sign in after you start your application. But you'll lose any information you already filled in.</p>
+      <button class="usa-button-primary" type="button">Sign in to start your application</button>
+      <p>
+        <a href="#start">Start your application without signing in</a>
+      </p>
+    </div>
+  )
 };
 
 export const Success = Template.bind(null);
@@ -377,7 +264,7 @@ Warning.args = {
   ),
   children: (
     <>
-      <p className="vads-u-margin-top--0">
+      <p className="vads-u-margin-y--0">
       Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.
       </p>
     </>
@@ -388,16 +275,12 @@ Warning.args = {
 export const Error = Template.bind(null);
 Error.args = {
   ...defaultArgs,
-  headline: <h2 slot="headline">Please sign in to review your information</h2>,
+  headline: <h2 slot="headline">Sorry, we couldn't find any eligible issues</h2>,
   children: (
     <>
-      <p className="vads-u-margin-top--0">
-        We’re sorry for the interruption, but we’ve found some more information
-        that we need you to review before you can apply for VA health care.
-        Please sign in to VA.gov to review. If you don’t have an account, you
-        can create one now.
+      <p className="vads-u-margin-y--0">
+        If you’d like to add an issue for review, select "Add a new issue" to get started.
       </p>
-      <button className="usa-button-primary" style={{width:'inherit'}}>Sign in to VA.gov</button>
     </>
   ),
   status: 'error',
@@ -416,36 +299,6 @@ Dismissable.args = {
   ...defaultArgs,
   closeable: true,
   onCloseEvent: () => console.log('Close event triggered'),
-};
-
-export const DismissableBackgroundOnly = Template.bind(null);
-DismissableBackgroundOnly.args = {
-  ...defaultArgs,
-  'background-only': true,
-  'closeable': true,
-  'onCloseEvent': () => console.log('Close event triggered'),
-};
-
-export const DismissableBackgroundOnlyIcon = Template.bind(null);
-DismissableBackgroundOnlyIcon.args = {
-  ...defaultArgs,
-  'background-only': true,
-  'show-icon': true,
-  'closeable': true,
-  'onCloseEvent': () => console.log('Close event triggered'),
-};
-
-export const BackgroundOnly = BackgroundOnlyTemplate.bind(null);
-BackgroundOnly.args = {
-  ...defaultArgs,
-  'background-only': true,
-};
-
-export const BackgroundOnlyWithIcon = BackgroundOnlyTemplate.bind(null);
-BackgroundOnlyWithIcon.args = {
-  ...defaultArgs,
-  'background-only': true,
-  'show-icon': true,
 };
 
 export const Slim = SlimTemplate.bind(null);

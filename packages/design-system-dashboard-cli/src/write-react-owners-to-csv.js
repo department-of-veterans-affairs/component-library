@@ -16,7 +16,6 @@ const componentsToKeep = [
   'LoadingIndicator',
   'Pagination',
   'Select',
-  'Table',
   'TextInput',
 ];
 

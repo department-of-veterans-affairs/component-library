@@ -14,7 +14,6 @@ import Modal from './components/Modal/Modal';
 import OMBInfo from './components/OMBInfo/OMBInfo';
 import Pagination from './components/Pagination/Pagination';
 import Select from './components/Select/Select';
-import Table from './components/Table/Table';
 import Telephone, {
   CONTACTS,
   contactsMap,
@@ -42,7 +41,6 @@ export {
   OMBInfo,
   Pagination,
   Select,
-  Table,
   Telephone,
   CONTACTS,
   contactsMap,
