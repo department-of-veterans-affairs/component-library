@@ -607,7 +607,7 @@ export namespace Components {
          */
         "href"?: string;
         /**
-          * Symbol indicates type of notification  Current options are: action-required, update
+          * Symbol indicates type of notification Current options are: action-required, update
          */
         "symbol"?: string;
         /**
@@ -2288,7 +2288,7 @@ declare namespace LocalJSX {
          */
         "onCloseEvent"?: (event: VaNotificationCustomEvent<any>) => void;
         /**
-          * Symbol indicates type of notification  Current options are: action-required, update
+          * Symbol indicates type of notification Current options are: action-required, update
          */
         "symbol"?: string;
         /**
