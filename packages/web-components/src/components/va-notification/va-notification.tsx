@@ -1,5 +1,5 @@
-import { 
-  Component, 
+import {
+  Component,
   Element,
   Event,
   EventEmitter,
@@ -30,7 +30,7 @@ export class VaNotification {
   @Prop() visible?: boolean = true;
 
   /**
-   * Symbol indicates type of notification 
+   * Symbol indicates type of notification
    * Current options are: action-required, update
    */
   @Prop() symbol?: string = 'none';
@@ -74,7 +74,7 @@ export class VaNotification {
    * Text for destination link. Set to empty string if you don't want a link.
    */
   @Prop() text?: string;
-  
+
   /**
    * If `true`, the component-library-analytics event is disabled.
    */
@@ -168,7 +168,7 @@ export class VaNotification {
     return (
       <Host>
         <va-card show-shadow="true">
-          <div class={classes} role="alert">
+          <div class={classes}>
             <i aria-hidden="true" role="img" class={symbol}></i>
             <div class="body" role="presentation">
               {headline ? <HeadlineLevel part="headline">{headline}</HeadlineLevel> : null}
