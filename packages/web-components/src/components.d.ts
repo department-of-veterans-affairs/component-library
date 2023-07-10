@@ -153,6 +153,9 @@ export namespace Components {
         "windowSession"?: boolean;
     }
     interface VaBreadcrumbs {
+        /**
+          * It represents a list of breadcrumbs with label, href and send as string. This prop is available when `uswds` is set to `true`.
+         */
         "breadcrumbList"?: string;
         /**
           * Analytics tracking function(s) will not be called
@@ -1743,6 +1746,9 @@ declare namespace LocalJSX {
         "windowSession"?: boolean;
     }
     interface VaBreadcrumbs {
+        /**
+          * It represents a list of breadcrumbs with label, href and send as string. This prop is available when `uswds` is set to `true`.
+         */
         "breadcrumbList"?: string;
         /**
           * Analytics tracking function(s) will not be called

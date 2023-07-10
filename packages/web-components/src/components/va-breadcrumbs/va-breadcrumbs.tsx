@@ -33,13 +33,25 @@ export class VaBreadcrumbs {
      */
   @Prop() uswds?: boolean = false;
   /**
-     * Whether or not the component will wrap the breadcrumbs. This prop is available when `uswds` is set to `true`.
-     */
+   *  Whether or not the component will wrap the breadcrumbs. This prop is available when `uswds` is set to `true`.
+   */
   @Prop() wrapping?: boolean = false;
-
+  /**
+   *  It represents a list of breadcrumbs with label, href and send as string. This prop is available when `uswds` is set to `true`.
+   */
   @Prop() breadcrumbList?: string;
+  /**
+   * 
+   * Represents an internal state of the component which stores the list of breadcrumbs parsed from the 'breadcrumbList' prop. 
+   * Each breadcrumb is represented as an object with two properties: 'label' and 'href'.
+   */
   @State() myInnerArray?: Array<{ label: string; href: string }>;
-
+  /**
+   * 
+   * This is a method that watches for changes in the 'breadcrumbList' prop. 
+   * When the 'breadcrumbList' prop changes, this method parses the new value (provided as a JSON-formatted string) 
+   * into a JavaScript object and assigns it to the 'myInnerArray' state.
+   */
   @Watch('breadcrumbList')
   parseBreadcrumbListProp(newValue: string) {
     if (newValue) this.myInnerArray = JSON.parse(newValue);
@@ -61,7 +73,7 @@ export class VaBreadcrumbs {
   componentLibraryAnalytics: EventEmitter;
 
   private getClickLevel(target: HTMLAnchorElement) {
-    const anchorNodes = Array.from(this.el.querySelectorAll('a'));
+    const anchorNodes = this.uswds ? Array.from(this.el.shadowRoot.querySelectorAll('a')) : Array.from(this.el.querySelectorAll('a'));
     const index = anchorNodes.findIndex((node: HTMLAnchorElement) =>
       node.isEqualNode(target),
     );
@@ -79,7 +91,7 @@ export class VaBreadcrumbs {
           details: {
             clickLabel: target.innerText.trim(),
             clickLevel: this.getClickLevel(target),
-            totalLevels: this.el.querySelectorAll('a').length,
+            totalLevels: this.uswds ? this.el.shadowRoot.querySelectorAll('a').length + 1 : this.el.querySelectorAll('a').length,
           },
         };
         this.componentLibraryAnalytics.emit(details);

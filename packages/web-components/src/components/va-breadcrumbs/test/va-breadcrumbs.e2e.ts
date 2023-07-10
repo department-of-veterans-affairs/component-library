@@ -193,22 +193,22 @@ describe('va-breadcrumbs', () => {
   it('uswds - fires an analytics event when an anchor link is clicked', async () => {
     const page = await newE2EPage();
     await page.setContent(`
-      <va-breadcrumbs disable-analytics="false" breadcrumb-list=\'[{ "label": "Level One", "href": "#one" }, { "label": "Level two", "href": "#two" }, { "label": "Current", "href": "#current" }]\' uswds></va-breadcrumbs>
+      <va-breadcrumbs breadcrumb-list=\'[{ "label": "Level One", "href": "#one" }, { "label": "Current", "href": "#current" }]\' uswds></va-breadcrumbs>
     `);
 
     const analyticsSpy = await page.spyOnEvent('component-library-analytics');
 
-    const anchorElements = await page.findAll('pierce/a');
+    const anchorElements = await page.findAll('va-breadcrumbs >>> a');
 
-    await anchorElements[1].click();
+    await anchorElements[0].click();
 
     expect(analyticsSpy).toHaveReceivedEventDetail({
       action: 'linkClick',
       componentName: 'va-breadcrumbs',
       details: {
-        clickLabel: 'Level two',
-        clickLevel: 2,
-        totalLevels: 3,
+        clickLabel: 'Level One',
+        clickLevel: 1,
+        totalLevels: 2,
       },
     });
   });
