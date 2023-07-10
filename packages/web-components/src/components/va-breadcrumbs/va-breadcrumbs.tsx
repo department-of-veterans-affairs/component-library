@@ -39,13 +39,13 @@ export class VaBreadcrumbs {
   /**
    *  It represents a list of breadcrumbs with label, href and send as string. This prop is available when `uswds` is set to `true`.
    */
-  @Prop() breadcrumbList?: string;
+  @Prop() breadcrumbList?: string = '';
   /**
    * 
    * Represents an internal state of the component which stores the list of breadcrumbs parsed from the 'breadcrumbList' prop. 
    * Each breadcrumb is represented as an object with two properties: 'label' and 'href'.
    */
-  @State() myInnerArray?: Array<{ label: string; href: string }>;
+  @State() breadcrumbsState?: Array<{ label: string; href: string }>;
   /**
    * 
    * This is a method that watches for changes in the 'breadcrumbList' prop. 
@@ -54,7 +54,7 @@ export class VaBreadcrumbs {
    */
   @Watch('breadcrumbList')
   parseBreadcrumbListProp(newValue: string) {
-    if (newValue) this.myInnerArray = JSON.parse(newValue);
+    if (newValue) this.breadcrumbsState = JSON.parse(newValue);
   }
   /**
    * Analytics tracking function(s) will not be called
@@ -226,9 +226,9 @@ export class VaBreadcrumbs {
         <Host>
           <nav aria-label={label} class={wrapClass}>
             <ol role="list" onClick={e => this.fireAnalyticsEvent(e)} class="usa-breadcrumb__list">
-              {this.myInnerArray.map((item, index) => (
-                <li class={`usa-breadcrumb__list-item ${index === this.myInnerArray.length - 1 ? 'usa-current' : ''}`}>
-                  {index === this.myInnerArray.length - 1 ? (
+              {this.breadcrumbsState.map((item, index) => (
+                <li class={`usa-breadcrumb__list-item ${index === this.breadcrumbsState.length - 1 ? 'usa-current' : ''}`}>
+                  {index === this.breadcrumbsState.length - 1 ? (
                     <span>{item.label}</span>
                   ) : (
                     <a class="usa-breadcrumb__link" href={item.href}>
