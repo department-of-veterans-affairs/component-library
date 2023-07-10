@@ -587,6 +587,10 @@ export namespace Components {
          */
         "closeable"?: boolean;
         /**
+          * If `true`, the component-library-analytics event is disabled.
+         */
+        "disableAnalytics"?: boolean;
+        /**
           * If `false`, card will not have border
          */
         "hasBorder"?: boolean;
@@ -2264,6 +2268,10 @@ declare namespace LocalJSX {
          */
         "closeable"?: boolean;
         /**
+          * If `true`, the component-library-analytics event is disabled.
+         */
+        "disableAnalytics"?: boolean;
+        /**
           * If `false`, card will not have border
          */
         "hasBorder"?: boolean;
@@ -2287,6 +2295,10 @@ declare namespace LocalJSX {
           * Fires when the component is closed by clicking on the close icon. This fires only when closeable is true.
          */
         "onCloseEvent"?: (event: VaNotificationCustomEvent<any>) => void;
+        /**
+          * The event used to track usage of the component.
+         */
+        "onComponent-library-analytics"?: (event: VaNotificationCustomEvent<any>) => void;
         /**
           * Symbol indicates type of notification  Current options are: action-required, update
          */
