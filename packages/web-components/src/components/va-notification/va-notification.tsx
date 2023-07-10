@@ -1,11 +1,12 @@
-import { 
-  Component, 
+import {
+  Component,
   Element,
   Event,
   EventEmitter,
   Host, 
   Prop, 
-  h 
+  h,
+  Listen,
 } from '@stencil/core';
 import classnames from 'classnames';
 
@@ -29,7 +30,7 @@ export class VaNotification {
   @Prop() visible?: boolean = true;
 
   /**
-   * Symbol indicates type of notification 
+   * Symbol indicates type of notification
    * Current options are: action-required, update
    */
   @Prop() symbol?: string = 'none';
@@ -73,6 +74,11 @@ export class VaNotification {
    * Text for destination link. Set to empty string if you don't want a link.
    */
   @Prop() text?: string;
+
+  /**
+   * If `true`, the component-library-analytics event is disabled.
+   */
+  @Prop() disableAnalytics?: boolean = false;
   
   /**
    * Fires when the component is closed by clicking on the close icon. This fires only
@@ -84,8 +90,57 @@ export class VaNotification {
   })
   closeEvent: EventEmitter;
 
+  /**
+   * The event used to track usage of the component.
+   */
+  @Event({
+    bubbles: true,
+    composed: true,
+    eventName: 'component-library-analytics',
+  })
+  componentLibraryAnalytics: EventEmitter;
+
+  /**
+   * Listen for the va-link GA event and capture it so 
+   * that we can emit a single va-notification GA event that includes
+   * the va-link details.
+   */
+  @Listen('component-library-analytics')
+  handleLinkAnalytics(event) {
+    // Prevent va-notification GA event from firing multiple times.
+    if (event.detail.componentName === 'va-notification') return;
+
+    // Prevent va-link GA event from firing.
+    event.stopPropagation();
+
+    if (!this.disableAnalytics) {
+      const detail = {
+        componentName: 'va-notification',
+        action: 'linkClick',
+        details: {
+          clickLabel: event.detail?.details?.label, // va-link text
+          type: this.symbol,
+          headline: this.headline,
+        },
+      };
+      this.componentLibraryAnalytics.emit(detail);
+    }
+  }
+
   private closeHandler(e: MouseEvent): void {
     this.closeEvent.emit(e);
+
+    if (!this.disableAnalytics) {
+      const detail = {
+        componentName: 'va-notification',
+        action: 'close',
+        details: {
+          type: this.symbol,
+          headline: this.headline,
+        },
+      };
+      this.componentLibraryAnalytics.emit(detail);
+    }
   }
 
   private getHeadlineLevel() {
@@ -113,7 +168,7 @@ export class VaNotification {
     return (
       <Host>
         <va-card show-shadow="true">
-          <div class={classes} role="alert">
+          <div class={classes}>
             <i aria-hidden="true" role="img" class={symbol}></i>
             <div class="body" role="presentation">
               {headline ? <HeadlineLevel part="headline">{headline}</HeadlineLevel> : null}
