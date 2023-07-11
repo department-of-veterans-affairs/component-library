@@ -37,7 +37,7 @@ export class VaBreadcrumbs {
    */
   @Prop() wrapping?: boolean = false;
   /**
-   *  It represents a list of breadcrumbs with label, href and send as string. This prop is available when `uswds` is set to `true`.
+   *  Represents a list of breadcrumbs. Use an array of objects with label and href properties, and then use JSON.stringify() to convert to a string. This prop is available when uswds is set to true.
    */
   @Prop() breadcrumbList?: string = '';
   /**
@@ -50,7 +50,7 @@ export class VaBreadcrumbs {
    * 
    * This is a method that watches for changes in the 'breadcrumbList' prop. 
    * When the 'breadcrumbList' prop changes, this method parses the new value (provided as a JSON-formatted string) 
-   * into a JavaScript object and assigns it to the 'myInnerArray' state.
+   * into a JavaScript object and assigns it to the 'breadcrumbsState' state.
    */
   @Watch('breadcrumbList')
   parseBreadcrumbListProp(newValue: string) {
@@ -101,11 +101,7 @@ export class VaBreadcrumbs {
 
   private handleAnchorNode(node: HTMLSlotElement, index: number, slotNodes: Node[]) {
     const li = document.createElement('li');
-    if (this.uswds) {
-      li.classList.add('usa-breadcrumb__list-item');
-    } else {
       li.classList.add('va-breadcrumbs-li');
-    }
     if (index === slotNodes.length - 1) {
       /* eslint-disable-next-line i18next/no-literal-string */
       node.setAttribute('aria-current', 'page');
@@ -115,24 +111,11 @@ export class VaBreadcrumbs {
   }
 
   private handleListNode(node: HTMLSlotElement, index: number, slotNodes: Node[]) {
-    if (this.uswds) {
-      node.classList.add('usa-breadcrumb__list-item');
-    } else {
-      node.classList.add('va-breadcrumbs-li');
-    }
+    node.classList.add('va-breadcrumbs-li');
     const anchor = node.querySelector('a');
     if (anchor && index === slotNodes.length - 1) {
       /* eslint-disable-next-line i18next/no-literal-string */
       anchor.setAttribute('aria-current', 'page');
-      if (this.uswds) {
-        // Replace the anchor with a span for the last list item.
-        const span = document.createElement('span');
-        span.textContent = anchor.textContent;
-        node.classList.add('usa-current');
-        node.replaceChild(span, anchor);
-        /* eslint-disable-next-line i18next/no-literal-string */
-        node?.setAttribute('aria-current', 'page');
-      }
     }
   }
 
@@ -227,7 +210,9 @@ export class VaBreadcrumbs {
           <nav aria-label={label} class={wrapClass}>
             <ol role="list" onClick={e => this.fireAnalyticsEvent(e)} class="usa-breadcrumb__list">
               {this.breadcrumbsState.map((item, index) => (
-                <li class={`usa-breadcrumb__list-item ${index === this.breadcrumbsState.length - 1 ? 'usa-current' : ''}`}>
+                <li
+                  class={`usa-breadcrumb__list-item ${index === this.breadcrumbsState.length - 1 ? 'usa-current' : ''}`}
+                  aria-current={index === this.breadcrumbsState.length - 1 ? "page" : undefined}>
                   {index === this.breadcrumbsState.length - 1 ? (
                     <span>{item.label}</span>
                   ) : (

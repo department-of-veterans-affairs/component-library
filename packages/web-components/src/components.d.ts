@@ -154,7 +154,7 @@ export namespace Components {
     }
     interface VaBreadcrumbs {
         /**
-          * It represents a list of breadcrumbs with label, href and send as string. This prop is available when `uswds` is set to `true`.
+          * Represents a list of breadcrumbs. Use an array of objects with label and href properties, and then use JSON.stringify() to convert to a string. This prop is available when uswds is set to true.
          */
         "breadcrumbList"?: string;
         /**
@@ -1751,7 +1751,7 @@ declare namespace LocalJSX {
     }
     interface VaBreadcrumbs {
         /**
-          * It represents a list of breadcrumbs with label, href and send as string. This prop is available when `uswds` is set to `true`.
+          * Represents a list of breadcrumbs. Use an array of objects with label and href properties, and then use JSON.stringify() to convert to a string. This prop is available when uswds is set to true.
          */
         "breadcrumbList"?: string;
         /**
