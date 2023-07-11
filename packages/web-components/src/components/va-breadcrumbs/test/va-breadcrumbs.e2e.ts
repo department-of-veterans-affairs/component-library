@@ -161,7 +161,7 @@ describe('va-breadcrumbs', () => {
                   <span>Home</span>
                 </a>
               </li>
-              <li class="usa-breadcrumb__list-item usa-current">
+              <li class="usa-breadcrumb__list-item usa-current" aria-current="page">
                 <span>Current</span>
               </li>
             </ol>
