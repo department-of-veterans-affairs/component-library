@@ -16,9 +16,9 @@ export default {
 
 const Template = ({ label, 'disable-analytics': disableAnalytics }) => (
   <va-breadcrumbs uswds label={label} disable-analytics={disableAnalytics}>
-    <va-breadcrumbs-item path="#home" label="Home" />
-    <va-breadcrumbs-item path="#one" label="Level one" />
-    <va-breadcrumbs-item path="#two" label="Level two" />
+    <li><a href="#home">Home</a></li>
+    <li><a href="#one">Level one</a></li>
+    <li><a href="#two">Level two</a></li>
   </va-breadcrumbs>
 );
 
@@ -59,7 +59,13 @@ const DynamicCrumbsTemplate = ({
       {crumbs.length > 0 && (
         <va-breadcrumbs uswds label={label} disable-analytics={disableAnalytics}>
           {crumbs?.map((crumb, i) => {
-            return <va-breadcrumbs-item key={i} path={crumb.path} label={crumb.label} />;
+            return (
+              <li key={i}>
+                <a href={crumb.path}>
+                  {crumb.label}
+                </a>
+              </li>
+            );
           })
         }
         </va-breadcrumbs>

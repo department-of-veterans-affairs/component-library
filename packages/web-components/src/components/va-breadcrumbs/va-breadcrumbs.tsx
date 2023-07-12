@@ -16,7 +16,7 @@ import {
 @Component({
   tag: 'va-breadcrumbs',
   styleUrl: 'va-breadcrumbs.scss',
-  shadow: true,
+  shadow: false,
 })
 export class VaBreadcrumbs {
   @Element() el: HTMLElement;
@@ -74,40 +74,52 @@ export class VaBreadcrumbs {
     }
   }
 
-  private handleAnchorNode(node: HTMLSlotElement, index: number, slotNodes: Node[]) {
-    const li = document.createElement('li');
-    li.classList.add('va-breadcrumbs-li');
-    if (index === slotNodes.length - 1) {
-      /* eslint-disable-next-line i18next/no-literal-string */
-      node.setAttribute('aria-current', 'page');
-    }
-    node.parentNode.replaceChild(li, node);
-    li.appendChild(node);
-  }
+  // private handleAnchorNode(node: HTMLSlotElement, index: number, slotNodes: Node[]) {
+  //   const li = document.createElement('li');
+  //   li.classList.add('va-breadcrumbs-li');
+  //   if (index === slotNodes.length - 1) {
+  //     /* eslint-disable-next-line i18next/no-literal-string */
+  //     node.setAttribute('aria-current', 'page');
+  //   }
+  //   node.parentNode.replaceChild(li, node);
+  //   li.appendChild(node);
+  // }
 
-  private handleListNode(node: HTMLSlotElement, index: number, slotNodes: Node[]) {
-    node.classList.add('va-breadcrumbs-li');
-    const anchor = node.querySelector('a');
-    if (anchor && index === slotNodes.length - 1) {
-      /* eslint-disable-next-line i18next/no-literal-string */
-      anchor.setAttribute('aria-current', 'page');
-    }
-  }
+  // private handleListNode(node: HTMLSlotElement, index: number, slotNodes: Node[]) {
+  //   console.log('node', node.nodeName);
+  //   this.uswds ? node.classList.add('usa-breadcrumb__list-item') : node.classList.add('va-breadcrumbs-li');
+  //   const anchor = node.querySelector('a');
+  //   if (anchor && index === slotNodes.length - 1) {
+  //     /* eslint-disable-next-line i18next/no-literal-string */
+  //     anchor.setAttribute('aria-current', 'page');
+  //   }
+  // }
 
   componentDidLoad() {
     // We are getting the slot nodes so that we can handle either receiving an 
     // anchor tag or a list item with an anchor tag.
-    const slotNodes = (this.el.shadowRoot.querySelector('slot') as HTMLSlotElement)?.assignedNodes();
-    if (!slotNodes) return;
+    const listItems = this.el.querySelectorAll('li')
+    if (!listItems) return;
 
     // This handles two different slot node scenarios:
     // 1. <li><a href="...">...</a></li>
     // 2. <a href="...">...</a>
-    slotNodes.forEach((node: HTMLSlotElement, index: number) => {
-      if (node.nodeName === 'LI') { 
-        this.handleListNode(node, index, slotNodes);
-      } else if (node.nodeName === 'A') {
-        this.handleAnchorNode(node, index, slotNodes);
+    listItems.forEach((item) => {
+      this.uswds ? item.classList.add('usa-breadcrumb__list-item') : item.classList.add('va-breadcrumbs-li');
+      // if (node.nodeName === 'LI') { 
+      //   this.handleListNode(node, index, slotNodes);
+      // } else if (node.nodeName === 'A') {
+      //   this.handleAnchorNode(node, index, slotNodes);
+      // }
+    });
+
+    const anchorItems = this.el.querySelectorAll('a')
+
+    anchorItems.forEach((item, i) => {
+      this.uswds ? item.classList.add('usa-breadcrumb__link') : null;
+      if (anchorItems.length - 1 === i) {
+        item.classList.add('usa-current');
+        item.setAttribute('aria-current', 'page');
       }
     });
   }

@@ -166,16 +166,6 @@ export namespace Components {
          */
         "uswds"?: boolean;
     }
-    interface VaBreadcrumbsItem {
-        /**
-          * Breadcrumb label
-         */
-        "label"?: string;
-        /**
-          * Breadcrumb path
-         */
-        "path"?: string;
-    }
     interface VaButton {
         /**
           * If `true`, the button will use `Back` as its text and an icon to represent going back in form flows.
@@ -1323,12 +1313,6 @@ declare global {
         prototype: HTMLVaBreadcrumbsElement;
         new (): HTMLVaBreadcrumbsElement;
     };
-    interface HTMLVaBreadcrumbsItemElement extends Components.VaBreadcrumbsItem, HTMLStencilElement {
-    }
-    var HTMLVaBreadcrumbsItemElement: {
-        prototype: HTMLVaBreadcrumbsItemElement;
-        new (): HTMLVaBreadcrumbsItemElement;
-    };
     interface HTMLVaButtonElement extends Components.VaButton, HTMLStencilElement {
     }
     var HTMLVaButtonElement: {
@@ -1542,7 +1526,6 @@ declare global {
         "va-back-to-top": HTMLVaBackToTopElement;
         "va-banner": HTMLVaBannerElement;
         "va-breadcrumbs": HTMLVaBreadcrumbsElement;
-        "va-breadcrumbs-item": HTMLVaBreadcrumbsItemElement;
         "va-button": HTMLVaButtonElement;
         "va-button-pair": HTMLVaButtonPairElement;
         "va-card": HTMLVaCardElement;
@@ -1775,16 +1758,6 @@ declare namespace LocalJSX {
           * USWDS variation
          */
         "uswds"?: boolean;
-    }
-    interface VaBreadcrumbsItem {
-        /**
-          * Breadcrumb label
-         */
-        "label"?: string;
-        /**
-          * Breadcrumb path
-         */
-        "path"?: string;
     }
     interface VaButton {
         /**
@@ -2940,7 +2913,6 @@ declare namespace LocalJSX {
         "va-back-to-top": VaBackToTop;
         "va-banner": VaBanner;
         "va-breadcrumbs": VaBreadcrumbs;
-        "va-breadcrumbs-item": VaBreadcrumbsItem;
         "va-button": VaButton;
         "va-button-pair": VaButtonPair;
         "va-card": VaCard;
@@ -2989,7 +2961,6 @@ declare module "@stencil/core" {
             "va-back-to-top": LocalJSX.VaBackToTop & JSXBase.HTMLAttributes<HTMLVaBackToTopElement>;
             "va-banner": LocalJSX.VaBanner & JSXBase.HTMLAttributes<HTMLVaBannerElement>;
             "va-breadcrumbs": LocalJSX.VaBreadcrumbs & JSXBase.HTMLAttributes<HTMLVaBreadcrumbsElement>;
-            "va-breadcrumbs-item": LocalJSX.VaBreadcrumbsItem & JSXBase.HTMLAttributes<HTMLVaBreadcrumbsItemElement>;
             "va-button": LocalJSX.VaButton & JSXBase.HTMLAttributes<HTMLVaButtonElement>;
             "va-button-pair": LocalJSX.VaButtonPair & JSXBase.HTMLAttributes<HTMLVaButtonPairElement>;
             "va-card": LocalJSX.VaCard & JSXBase.HTMLAttributes<HTMLVaCardElement>;
