@@ -387,3 +387,14 @@
   border-right: rem-override(0.25rem) solid rgb(240, 240, 240);
   padding-bottom: rem-override(1rem);
 }
+
+.usa-breadcrumb {
+  padding-bottom: rem-override(1rem);
+  padding-top: rem-override(1rem);
+  font-size: rem-override(1.06rem);
+}
+
+.usa-breadcrumb__list {
+  margin: 0 rem-override(-0.25rem);
+  padding: rem-override(0.25rem);
+}

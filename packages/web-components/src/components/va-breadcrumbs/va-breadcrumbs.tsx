@@ -15,7 +15,7 @@ import {
  */
 @Component({
   tag: 'va-breadcrumbs',
-  styleUrl: 'va-breadcrumbs.css',
+  styleUrl: 'va-breadcrumbs.scss',
   shadow: true,
 })
 export class VaBreadcrumbs {
@@ -30,6 +30,11 @@ export class VaBreadcrumbs {
    * Analytics tracking function(s) will not be called
    */
   @Prop() disableAnalytics?: boolean = false;
+
+  /**
+   * USWDS variation
+   */
+  @Prop() uswds?: boolean = false;
 
   /**
    * The event used to track usage of the component. This is emitted when a
@@ -144,7 +149,19 @@ export class VaBreadcrumbs {
   }
 
   render() {
-    const { label } = this;
+    const { label, uswds } = this;
+
+    if (uswds) {
+      return (
+        <Host>
+          <nav class="usa-breadcrumb" aria-label={label}>
+            <ol class="usa-breadcrumb__list" role="list" onClick={e => this.fireAnalyticsEvent(e)}>
+              <slot onSlotchange={this.handleSlotChange.bind(this)}></slot>
+            </ol>
+          </nav>
+        </Host>
+      );
+    }
 
     return (
       <Host>
