@@ -28,27 +28,27 @@ export class VaMaintenanceBanner {
   /**
    * A unique ID that will be used for conditionally rendering the banner based on if the user has dismissed it already.
    */
-  @Prop() bannerId: string;
+  @Prop() bannerId!: string;
   /**
-   * A Date object used when downtime starts.
+   * The Date/Time of when the maintenance is scheduled to begin.
    */
-  @Prop() startsAt: string;
+  @Prop() maintenanceStartDateTime!: string;
   /**
-   * A Date object used when downtime expires.
+   * The Date/Time of when the maintenance is scheduled to end.
    */
-  @Prop() expiresAt: string;
+  @Prop() maintenanceEndDateTime!: string;
   /**
-   * The title of the banner for downtime.
+   * The title of the banner shown during active maintenance.
    */
   @Prop() maintenanceTitle: string;
   /**
-   * A Date object used when pre-downtime starts.
+   * The Date/Time of when to be begin warning users of upcoming site maintenance.
    */
-  @Prop() warnStartsAt: string;
+  @Prop() upcomingWarnStartDateTime!: string;
   /**
-   * The title of the banner for pre-downtime.
+   * The title of the banner shown for upcoming site maintenance.
    */
-  @Prop() warnTitle: string;
+  @Prop() upcomingWarnTitle: string;
   /**
    * Fires when the component is closed by clicking on the close icon.
    */
@@ -69,16 +69,24 @@ export class VaMaintenanceBanner {
   })
   componentLibraryAnalytics: EventEmitter;
 
-  derivePostContent = ( startsAt: Date, expiresAt: Date) => {
-    if (isDateSameDay(startsAt, expiresAt)) {
+  derivePostContent = ( maintenanceStartDateTime: Date, maintenanceEndDateTime: Date) => {
+    let milliseconds = (maintenanceEndDateTime.getTime() - maintenanceStartDateTime.getTime());
+    const hours = Math.floor(milliseconds / (1000 * 60 * 60));
+    const minutes = ((milliseconds / (1000 * 60 * 60)) - hours) * 60 ;
+    const duration = `${hours > 0 ? hours + ' hours ' : ''} ${minutes > 0 ? minutes + ' minutes' : ''}`;
+
+
+    if (isDateSameDay(maintenanceStartDateTime, maintenanceEndDateTime)) {
       return (
         <div>
           <p>
-            <strong>Date:</strong> {formatDate(startsAt, {})}
+            <strong>Date:</strong> {formatDate(maintenanceStartDateTime, {dateStyle: 'full'})}
           </p>
           <p>
-            <strong>Start/End time:</strong> {formatDate(startsAt, {timeStyle: 'short'})}{' '}
-            to {formatDate(expiresAt, {timeStyle: 'short'})} ET
+            <strong>Time:</strong> {formatDate(maintenanceStartDateTime, {hour:'numeric', minute: 'numeric', timeZoneName: 'short'})}
+          </p>
+          <p>
+            <strong>Duration:</strong> {duration}
           </p>
         </div>
       );
@@ -87,10 +95,13 @@ export class VaMaintenanceBanner {
     return (
       <div>
         <p>
-          <strong>Start:</strong> {formatDate(startsAt)} ET
+          <strong>Date:</strong> {formatDate(maintenanceStartDateTime, {dateStyle: 'full'})}
         </p>
         <p>
-          <strong>End:</strong> {formatDate(expiresAt)} ET
+          <strong>Time:</strong> {formatDate(maintenanceStartDateTime, {hour:'numeric', minute: 'numeric', timeZoneName: 'short'})}
+        </p>
+        <p>
+          <strong>Duration:</strong> {duration}
         </p>
       </div>
     );
@@ -106,10 +117,10 @@ export class VaMaintenanceBanner {
         componentName: 'va-maintenance-banner',
         action: 'close',
         details: {
-          header: isDateBefore(new Date(), new Date(this.startsAt)) ? this.warnTitle : this.maintenanceTitle,
-          warnStartsAt: this.warnStartsAt,
-          startsAt: this.startsAt,
-          expiresAt: this.expiresAt,
+          header: isDateBefore(new Date(), new Date(this.maintenanceStartDateTime)) ? this.upcomingWarnTitle : this.maintenanceTitle,
+          upcomingWarnStartDateTime: this.upcomingWarnStartDateTime,
+          maintenanceStartDateTime: this.maintenanceStartDateTime,
+          maintenanceEndDateTime: this.maintenanceEndDateTime,
           displayedContent: this.maintenanceBannerContent.innerText,
         }
       }
@@ -118,21 +129,21 @@ export class VaMaintenanceBanner {
   };
 
   render() {
-    const {warnStartsAt, expiresAt} = this,
+    const {upcomingWarnStartDateTime, maintenanceEndDateTime} = this,
       now = new Date();
 
     // Escape early if it's before when it should show.
-    if (isDateBefore(now, new Date(warnStartsAt))) {
+    if (isDateBefore(now, new Date(upcomingWarnStartDateTime))) {
       return null;
     }
 
     // Escape early if it's after when it should show.
-    if (isDateAfter(now, new Date(expiresAt))) {
+    if (isDateAfter(now, new Date(maintenanceEndDateTime))) {
       return null;
     }
     if (window.localStorage.getItem('MAINTENANCE_BANNER') !== this.bannerId) {
-      const { warnTitle, startsAt, maintenanceTitle} = this;
-      const isWarning = isDateBefore(now, new Date(startsAt));
+      const { upcomingWarnTitle, maintenanceStartDateTime, maintenanceTitle} = this;
+      const isWarning = isDateBefore(now, new Date(maintenanceStartDateTime));
       const maintenanceBannerClass = classNames({
         'maintenance-banner': true,
         'maintenance-banner--warning': isWarning,
@@ -143,13 +154,13 @@ export class VaMaintenanceBanner {
         <Host>
             <div class={maintenanceBannerClass} role="banner" ref={el => (this.maintenanceBannerEl = el as HTMLDivElement)}>
                 <div class="maintenance-banner__body">
-                  <h4 class="maintenance-banner__title">{isWarning ? warnTitle : maintenanceTitle}</h4>
+                  <h4 class="maintenance-banner__title">{isWarning ? upcomingWarnTitle : maintenanceTitle}</h4>
                   <div class="maintenance-banner__content" ref={el => (this.maintenanceBannerContent = el as HTMLDivElement)}>{ 
                     isWarning ? 
                       <slot name="warn-content"></slot> : 
                       <slot name="maintenance-content"></slot>
                   }</div>
-                  <div class="maintenance-banner__derived-content">{this.derivePostContent(new Date(startsAt), new Date(expiresAt))}</div>
+                  <div class="maintenance-banner__derived-content">{this.derivePostContent(new Date(maintenanceStartDateTime), new Date(maintenanceEndDateTime))}</div>
                   <button
                     aria-label="Close notification"
                     class="maintenance-banner__close"
