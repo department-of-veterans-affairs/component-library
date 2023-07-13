@@ -95,6 +95,10 @@ a span.text {
   font-weight: 700;
 }
 
+a span.sr-only {
+  visibility: visible;
+}
+
 div.docked {
   position: relative;
   display: flex;
@@ -136,6 +140,10 @@ i::before {
     color: var(--color-link-default);
     display: inline-block;
     text-decoration: underline;
+  }
+
+  a span.sr-only {
+    visibility: hidden;
   }
 
   i {
