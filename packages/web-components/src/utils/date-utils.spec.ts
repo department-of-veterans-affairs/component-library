@@ -32,6 +32,8 @@ describe('validate', () => {
 
     expect(memorableDateComponent.error).toEqual(`year-range`);
     expect(memorableDateComponent.invalidYear).toEqual(true);
+    expect(memorableDateComponent.invalidMonth).toEqual(false);
+    expect(memorableDateComponent.invalidDay).toEqual(false);
   });
 
   it('indicates when the year is above the accepted range', () => {
@@ -44,6 +46,8 @@ describe('validate', () => {
 
     expect(memorableDateComponent.error).toEqual(`year-range`);
     expect(memorableDateComponent.invalidYear).toEqual(true);
+    expect(memorableDateComponent.invalidMonth).toEqual(false);
+    expect(memorableDateComponent.invalidDay).toEqual(false);
   });
 
   it('indicates when the month is above the accepted range', () => {
@@ -55,7 +59,10 @@ describe('validate', () => {
     validate(memorableDateComponent, year, month, day);
 
     expect(memorableDateComponent.error).toEqual('month-range');
+    expect(memorableDateComponent.invalidYear).toEqual(false);
     expect(memorableDateComponent.invalidMonth).toEqual(true);
+    // invalid month sets max days to zero
+    expect(memorableDateComponent.invalidDay).toEqual(true);
   });
 
   it('indicates when the day is above the accepted range', () => {
@@ -67,6 +74,8 @@ describe('validate', () => {
     validate(memorableDateComponent, year, month, day);
 
     expect(memorableDateComponent.error).toEqual('day-range');
+    expect(memorableDateComponent.invalidYear).toEqual(false);
+    expect(memorableDateComponent.invalidMonth).toEqual(false);
     expect(memorableDateComponent.invalidDay).toEqual(true);
   });
 
@@ -91,18 +100,23 @@ describe('validate', () => {
     validate(memorableDateComponent, year, month, day);
 
     expect(memorableDateComponent.error).toEqual('day-range');
+    expect(memorableDateComponent.invalidYear).toEqual(false);
+    expect(memorableDateComponent.invalidMonth).toEqual(false);
     expect(memorableDateComponent.invalidDay).toEqual(true);
   });
 
   it('does not validate day for the monthYearOnly variant', () => {
-    const dateComponent = {} as Components.VaDate;
+    const memorableDateComponent = {} as Components.VaDate;
     const year = 2000;
     const month = 1;
     const day = null;
 
-    validate(dateComponent, year, month, day, true);
+    validate(memorableDateComponent, year, month, day, true);
 
-    expect(dateComponent.error).toEqual(null);
+    expect(memorableDateComponent.error).toEqual(null);
+    expect(memorableDateComponent.invalidYear).toEqual(false);
+    expect(memorableDateComponent.invalidMonth).toEqual(false);
+    expect(memorableDateComponent.invalidDay).toEqual(false);
   });
 
   describe('required components', () => {
@@ -116,6 +130,8 @@ describe('validate', () => {
 
       expect(memorableDateComponent.error).toEqual('date-error');
       expect(memorableDateComponent.invalidYear).toEqual(true);
+      expect(memorableDateComponent.invalidMonth).toEqual(false);
+      expect(memorableDateComponent.invalidDay).toEqual(false);
     });
 
     it('indicates when the month is missing', () => {
@@ -127,7 +143,10 @@ describe('validate', () => {
       validate(memorableDateComponent, year, month, day);
 
       expect(memorableDateComponent.error).toEqual('date-error');
+      expect(memorableDateComponent.invalidYear).toEqual(false);
       expect(memorableDateComponent.invalidMonth).toEqual(true);
+      // invalid month sets max days to zero
+      expect(memorableDateComponent.invalidDay).toEqual(true);
     });
 
     it('indicates when the day is missing', () => {
@@ -139,6 +158,8 @@ describe('validate', () => {
       validate(memorableDateComponent, year, month, day);
 
       expect(memorableDateComponent.error).toEqual('date-error');
+      expect(memorableDateComponent.invalidYear).toEqual(false);
+      expect(memorableDateComponent.invalidMonth).toEqual(false);
       expect(memorableDateComponent.invalidDay).toEqual(true);
     });
 
@@ -151,11 +172,14 @@ describe('validate', () => {
       validate(memorableDateComponent, year, month, day, true);
 
       expect(memorableDateComponent.error).toEqual(null);
+      expect(memorableDateComponent.invalidYear).toEqual(false);
+      expect(memorableDateComponent.invalidMonth).toEqual(false);
+      expect(memorableDateComponent.invalidDay).toEqual(false);
     });
   });
 
   it('removes error indicators when the values are valid', () => {
-    const memorableDateComponent = { error: 'Some error'} as Components.VaMemorableDate;
+    const memorableDateComponent = { error: 'date-error'} as Components.VaMemorableDate;
     const year = 2000;
     const month = 1;
     const day = 1;
@@ -163,6 +187,20 @@ describe('validate', () => {
     validate(memorableDateComponent, year, month, day);
 
     expect(memorableDateComponent.error).toEqual(null);
+    expect(memorableDateComponent.invalidYear).toEqual(false);
+    expect(memorableDateComponent.invalidMonth).toEqual(false);
+    expect(memorableDateComponent.invalidDay).toEqual(false);
+  });
+
+  it('should not remove custom error even if values are valid', () => {
+    const memorableDateComponent = { error: 'Some error'} as Components.VaMemorableDate;
+    const year = 2000;
+    const month = 1;
+    const day = 1;
+
+    validate(memorableDateComponent, year, month, day);
+
+    expect(memorableDateComponent.error).toEqual('Some error');
     expect(memorableDateComponent.invalidYear).toEqual(false);
     expect(memorableDateComponent.invalidMonth).toEqual(false);
     expect(memorableDateComponent.invalidDay).toEqual(false);
@@ -177,7 +215,9 @@ describe('validate', () => {
     validate(memorableDateComponent, year, month, day);
 
     expect(memorableDateComponent.error).toEqual('month-range');
+    expect(memorableDateComponent.invalidYear).toEqual(false);
     expect(memorableDateComponent.invalidMonth).toEqual(true);
+    // invalid month sets max days to zero
     expect(memorableDateComponent.invalidDay).toEqual(true);
   });
 });
@@ -247,6 +287,8 @@ describe('checkIsNaN', () => {
     expect(result).toEqual(false);
     expect(memorableDateComponent.error).toEqual(`year-range`);
     expect(memorableDateComponent.invalidYear).toEqual(true);
+    expect(memorableDateComponent.invalidMonth).toEqual(false);
+    expect(memorableDateComponent.invalidDay).toEqual(false);
   });
 
   it('indicates when the month is NaN', () => {
@@ -259,7 +301,9 @@ describe('checkIsNaN', () => {
 
     expect(result).toEqual(false);
     expect(memorableDateComponent.error).toEqual(`month-range`);
+    expect(memorableDateComponent.invalidYear).toEqual(false);
     expect(memorableDateComponent.invalidMonth).toEqual(true);
+    expect(memorableDateComponent.invalidDay).toEqual(false);
   });
 
   it('indicates when the day is NaN', () => {
@@ -272,6 +316,8 @@ describe('checkIsNaN', () => {
 
     expect(result).toEqual(false);
     expect(memorableDateComponent.error).toEqual(`day-range`);
+    expect(memorableDateComponent.invalidYear).toEqual(false);
+    expect(memorableDateComponent.invalidMonth).toEqual(false);
     expect(memorableDateComponent.invalidDay).toEqual(true);
   });
 
@@ -291,7 +337,7 @@ describe('checkIsNaN', () => {
   });
 
   it('removes error indicators when the values are valid', () => {
-    const memorableDateComponent = { error: 'Some error'} as Components.VaMemorableDate;
+    const memorableDateComponent = { error: 'date-error'} as Components.VaMemorableDate;
     const year = Number('1999');
     const month =  Number('1');
     const day = Number('1');
@@ -300,12 +346,11 @@ describe('checkIsNaN', () => {
 
     expect(result).toEqual(true);
     expect(memorableDateComponent.error).toEqual(null);
-
-    expect(memorableDateComponent.error).toEqual(null);
     expect(memorableDateComponent.invalidYear).toEqual(false);
     expect(memorableDateComponent.invalidMonth).toEqual(false);
     expect(memorableDateComponent.invalidDay).toEqual(false);
   });
+<<<<<<< HEAD
 });
 
 describe('zeroPadStart', () => {
@@ -328,3 +373,21 @@ describe('zeroPadStart', () => {
     expect(zeroPadStart(9)).toEqual('09');
   });
 });
+=======
+
+  it('should not remove custom error even if values are valid', () => {
+    const memorableDateComponent = { error: 'Some error'} as Components.VaMemorableDate;
+    const year = Number('1999');
+    const month =  Number('1');
+    const day = Number('1');
+
+    const result = checkIsNaN(memorableDateComponent, year, month, day);
+
+    expect(result).toEqual(true);
+    expect(memorableDateComponent.error).toEqual('Some error');
+    expect(memorableDateComponent.invalidYear).toEqual(false);
+    expect(memorableDateComponent.invalidMonth).toEqual(false);
+    expect(memorableDateComponent.invalidDay).toEqual(false);
+  });
+});
+>>>>>>> 6b3471f (Update tests)
