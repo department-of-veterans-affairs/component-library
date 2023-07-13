@@ -152,18 +152,6 @@ export function checkLeapYear(year: number) {
   return (0 == year % 4 && 0 != year % 100) || 0 == year % 400;
 }
 
-/**
- * Checks for an internal or empty component error, then updates it.
- * We don't mess with the error if it was added externally
- */
-export function addError(
-  component: Components.VaDate | Components.VaMemorableDate,
-  error: string) : void {
-  if (!component.error || internalErrors.includes(component.error)) {
-    component.error = error;
-  }
-}
-
 export const internalErrors = [
   'year-range',
   'day-range',
@@ -185,7 +173,7 @@ export function checkIsNaN(
   // Begin NaN validation.
   if (isNaN(year)) {
     component.invalidYear = true;
-    addError(component, 'year-range');
+    component.error = 'year-range';
   }
   else {
     component.invalidYear = false;
@@ -193,7 +181,7 @@ export function checkIsNaN(
 
   if (!monthYearOnly && isNaN(day)) {
     component.invalidDay = true;
-    addError(component, 'day-range');
+    component.error = 'day-range';
   }
   else {
     component.invalidDay = false;
@@ -201,7 +189,7 @@ export function checkIsNaN(
 
   if (isNaN(month)) {
     component.invalidMonth = true;
-    addError(component, 'month-range');
+    component.error = 'month-range';
   }
   else {
     component.invalidMonth = false;
@@ -211,7 +199,7 @@ export function checkIsNaN(
     component.invalidYear = !year;
     component.invalidMonth = !month;
     component.invalidDay = monthYearOnly ? false : !day;
-    addError(component, 'date-error');
+    component.error = 'date-error';
   }
 
   // Remove any error message if none of the fields are NaN
@@ -248,7 +236,7 @@ export function validate(
     component.invalidYear = (!year || year < minYear || year > maxYear);
     component.invalidMonth = (!month || month < minMonths || month > maxMonths);
     component.invalidDay = monthYearOnly ? false : (!day || day < minMonths || day > maxDay);
-    addError(component, 'date-error');
+    component.error = 'date-error';
     return;
   }
 
@@ -256,7 +244,7 @@ export function validate(
   // Empty fields are acceptable unless the component is marked as required
   if (year && (year < minYear || year > maxYear)) {
     component.invalidYear = true;
-    addError(component, 'year-range');
+    component.error = 'year-range';
   }
   else {
     component.invalidYear = false;
@@ -266,7 +254,7 @@ export function validate(
   // We don't know the upper limit on days until we know the month
   if (!monthYearOnly && (day < minMonths || day > maxDay)) {
     component.invalidDay = true;
-    addError(component, 'day-range');
+    component.error = 'day-range';
   }
   else {
     component.invalidDay = false;
@@ -277,7 +265,7 @@ export function validate(
   if ((month && (month < minMonths || month > maxMonths)) ||
       (!month && component.invalidDay)) {
     component.invalidMonth = true;
-    addError(component, 'month-range');
+    component.error = 'month-range';
   }
   else {
     component.invalidMonth = false;
