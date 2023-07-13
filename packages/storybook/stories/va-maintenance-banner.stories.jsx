@@ -19,7 +19,7 @@ const Template = args => (
     
   >
     <div slot="warn-content">
-      <span>We’ll be doing some work on VA.gov. The&nbsp;<a href="https://depo-platform-documentation.scrollhelp.site/developer-docs/Frontend-developer-documentation.687931428.html">maintenance</a>&nbsp;will last X hours. During that time, you won’t be able to sign in or use tools.</span>
+      <span>We’ll be doing some work on VA.gov. The maintenance will last X hours. During that time, you won’t be able to sign in or use tools.</span>
     </div>
     <div slot="maintenance-content">
       We’re working on VA.gov right now. If you have trouble signing in or using tools, check back after we’re finished. Thank you for your patience.
@@ -27,19 +27,20 @@ const Template = args => (
   </va-maintenance-banner>
 );
 
-let expiresAt = new Date();
-expiresAt.setHours(expiresAt.getHours() + 4);
+let maintenanceEndDateTime = new Date();
+maintenanceEndDateTime.setHours(maintenanceEndDateTime.getHours() + 4);
+maintenanceEndDateTime.setMinutes(maintenanceEndDateTime.getMinutes() + 30);
 
-let warnStartsAt = new Date();
-warnStartsAt.setDate(warnStartsAt.getDate() - 1);
+let upcomingWarnStartDateTime = new Date();
+upcomingWarnStartDateTime.setDate(upcomingWarnStartDateTime.getDate() - 1);
 
 const defaultArgs = {
   'banner-id': 'maintenance-banner',
+  'upcoming-warn-title': 'Upcoming site maintenance',
+  'upcoming-warn-start-date-time': `${upcomingWarnStartDateTime}`,
   'maintenance-title': 'Site maintenance',
-  'warn-title': 'Upcoming site maintenance',
-  'starts-at': `${new Date()}`,
-  'expires-at': `${expiresAt}`,
-  'warn-starts-at': `${warnStartsAt}`
+  'maintenance-start-date-time': `${new Date()}`,
+  'maintenance-end-date-time': `${maintenanceEndDateTime}`
 };
 
 export const Default = Template.bind(null);
@@ -47,16 +48,17 @@ Default.args = {
   ...defaultArgs,
 };
 
-let startsAt = new Date();
-startsAt.setDate(startsAt.getDate() + 1);
-expiresAt.setDate(expiresAt.getDate() + 2);
-
+let maintenanceStartDateTime = new Date();
+maintenanceEndDateTime = new Date();
+maintenanceStartDateTime.setDate(maintenanceStartDateTime.getDate() + 1);
+maintenanceEndDateTime.setDate(maintenanceStartDateTime.getDate());
+maintenanceEndDateTime.setHours(maintenanceStartDateTime.getHours() + 2);
 export const MaintenanceWarning = Template.bind(null);
 MaintenanceWarning.args = {
   ...defaultArgs,
-  'starts-at': `${startsAt}`,
-  'expires-at': `${expiresAt}`,
-  'warn-starts-at': `${new Date()}` 
+  'maintenance-start-date-time': `${maintenanceStartDateTime}`,
+  'maintenance-end-date-time': `${maintenanceEndDateTime}`,
+  'upcoming-warn-start-date-time': `${new Date()}` 
 };
 
 Default.argTypes = propStructure(maintenanceBannerDocs);
