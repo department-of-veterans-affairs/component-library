@@ -317,7 +317,10 @@ export const formatDate = (
   date: Date,
   options: Intl.DateTimeFormatOptions = {
     dateStyle: 'full',
-    timeStyle: 'short'
+    timeStyle: 'short',
+    hour: 'numeric',
+    minute: 'numeric',
+    timeZoneName: 'short'
   },
   timeZone: string = 'America/New_York',
 ) => {
