@@ -59,6 +59,18 @@ describe('validate', () => {
     expect(memorableDateComponent.invalidDay).toEqual(true);
   });
 
+  it('indicates when the day is above range for non-leap years', () => {
+    const memorableDateComponent = { required: true} as Components.VaMemorableDate;
+    const year = 2023;
+    const month = 2;
+    const day = 29;
+
+    validate(memorableDateComponent, year, month, day);
+
+    expect(memorableDateComponent.error).toEqual('day-range');
+    expect(memorableDateComponent.invalidDay).toEqual(true);
+  });
+
   it('indicates when the day is below the accepted range', () => {
     const memorableDateComponent = {} as Components.VaMemorableDate;
     const year = 2000;
