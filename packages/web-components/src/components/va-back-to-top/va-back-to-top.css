@@ -42,8 +42,16 @@ a {
   position: absolute;
   transition: all 0.25s ease-in;
 }
-a:active, a:focus {
+a:not([disabled]):active, a:not([disabled]):focus {
   border-radius: 5px;
+  outline: 2px solid var(--color-gold-light);
+  outline-offset: 2px;
+}
+a:not([disabled]):hover {
+  background-color: var(--color-gray-cool-light);
+  border-radius: 0;
+  color: var(--color-primary-darker);
+  outline: none;
 }
 div.reveal a {
   border-bottom-left-radius: 5px;
