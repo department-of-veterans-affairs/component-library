@@ -68,7 +68,7 @@
 
 @media (max-width: 481px) {
   :host(:not([uswds])) {
-    width: 441px;
+    width: 100%;
   }
 
   :host([continue]:not([continue='false']):not([uswds])) va-button::part(button) {
