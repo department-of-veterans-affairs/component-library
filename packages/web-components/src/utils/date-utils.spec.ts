@@ -61,8 +61,7 @@ describe('validate', () => {
     expect(memorableDateComponent.error).toEqual('month-range');
     expect(memorableDateComponent.invalidYear).toEqual(false);
     expect(memorableDateComponent.invalidMonth).toEqual(true);
-    // invalid month sets max days to zero
-    expect(memorableDateComponent.invalidDay).toEqual(true);
+    expect(memorableDateComponent.invalidDay).toEqual(false);
   });
 
   it('indicates when the day is above the accepted range', () => {
@@ -145,8 +144,7 @@ describe('validate', () => {
       expect(memorableDateComponent.error).toEqual('date-error');
       expect(memorableDateComponent.invalidYear).toEqual(false);
       expect(memorableDateComponent.invalidMonth).toEqual(true);
-      // invalid month sets max days to zero
-      expect(memorableDateComponent.invalidDay).toEqual(true);
+      expect(memorableDateComponent.invalidDay).toEqual(false);
     });
 
     it('indicates when the day is missing', () => {
