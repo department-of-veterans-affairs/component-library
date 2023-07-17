@@ -31,6 +31,7 @@ a {
   border-bottom-right-radius: 0;
   border-top-right-radius: 0;
   bottom: 0;
+  color: var(--color-link-default);
   right: 0;
   background: rgba(255, 255, 255, 0.9);
   height: 48px;
