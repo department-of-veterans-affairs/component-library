@@ -1,8 +1,19 @@
 import { Components } from '../components';
-import { checkLeapYear, validate, formatDate, isDateAfter, isDateBefore, isDateSameDay, checkIsNaN } from './date-utils';
+import {
+  checkLeapYear,
+  validate,
+  formatDate,
+  isDateAfter,
+  isDateBefore,
+  isDateSameDay,
+  checkIsNaN,
+  zeroPadStart,
+} from './date-utils';
 
-describe('checkLeapYear', () => {
-  it('determines an input year is a leap year', () => {
+describe('checkLeapYear',
+() => {
+  it('determines an input year is a leap year',
+  () => {
     expect(checkLeapYear(1996)).toBeTruthy();
     expect(checkLeapYear(1995)).toBeFalsy();
     expect(checkLeapYear(199)).toBeFalsy();
@@ -283,4 +294,25 @@ describe('checkIsNaN', () => {
     expect(memorableDateComponent.invalidMonth).toEqual(false);
     expect(memorableDateComponent.invalidDay).toEqual(false);
   });
-})
+});
+
+describe('zeroPadStart', () => {
+  it('should return "00"', () => {
+    expect(zeroPadStart()).toEqual('00');
+    expect(zeroPadStart(null)).toEqual('00');
+    expect(zeroPadStart('')).toEqual('00');
+    expect(zeroPadStart(0)).toEqual('00');
+  });
+  it('should return numbers > 9 and < 100', () => {
+    expect(zeroPadStart(10)).toEqual('10');
+    expect(zeroPadStart('10')).toEqual('10');
+    expect(zeroPadStart(99)).toEqual('99');
+    expect(zeroPadStart('55')).toEqual('55');
+  });
+  it('should add leading zero to numbers < 10', () => {
+    expect(zeroPadStart(1)).toEqual('01');
+    expect(zeroPadStart(3)).toEqual('03');
+    expect(zeroPadStart('5')).toEqual('05');
+    expect(zeroPadStart(9)).toEqual('09');
+  });
+});
