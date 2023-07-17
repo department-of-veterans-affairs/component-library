@@ -26,8 +26,17 @@
 
 /* Original Component Styles. */
 
+:host(:not([uswds])) va-button {
+  flex: 1 1 auto;
+}
+
+:host(:not([uswds])) {
+  max-width: 560px;
+}
+
 :host(:not([uswds])) va-button::part(button) {
-  width: 280px;
+  max-width: 280px;
+  width: 100%;
 }
 
 @media (min-width: 481px) {
@@ -44,6 +53,7 @@
 @media (min-width: 481px) {
   :host(:not([uswds])) {
     flex-direction: row;
+    max-width: 420px;
   }
 
   :host(:not([uswds])) va-button + va-button::part(button) {
@@ -52,17 +62,17 @@
   }
 
   :host(:not([uswds])) va-button::part(button) {
-    width: 210px;
+    max-width: 210px;
   }
 }
 
 @media (max-width: 481px) {
   :host(:not([uswds])) {
-    width: 441px;
+    width: 100%;
   }
 
   :host([continue]:not([continue='false']):not([uswds])) va-button::part(button) {
-    width: 280px;
+    max-width: 280px;
   }
   :host([continue]:not([continue='false'])) {
     flex-direction: column-reverse;
@@ -72,10 +82,10 @@
 @media (max-width: 320px) {
   :host(:not([uswds])) {
     margin: 0 auto;
-    width: 280px;
+    max-width: 280px;
   }
 
   :host([continue]:not([continue='false']):not([uswds])) va-button::part(button) {
-    width: 280px;
+    max-width: 280px;
   }
 }
