@@ -348,7 +348,21 @@ describe('checkIsNaN', () => {
     expect(memorableDateComponent.invalidMonth).toEqual(false);
     expect(memorableDateComponent.invalidDay).toEqual(false);
   });
-<<<<<<< HEAD
+
+  it('should not remove custom error even if values are valid', () => {
+    const memorableDateComponent = { error: 'Some error'} as Components.VaMemorableDate;
+    const year = Number('1999');
+    const month =  Number('1');
+    const day = Number('1');
+
+    const result = checkIsNaN(memorableDateComponent, year, month, day);
+
+    expect(result).toEqual(true);
+    expect(memorableDateComponent.error).toEqual('Some error');
+    expect(memorableDateComponent.invalidYear).toEqual(false);
+    expect(memorableDateComponent.invalidMonth).toEqual(false);
+    expect(memorableDateComponent.invalidDay).toEqual(false);
+  });
 });
 
 describe('zeroPadStart', () => {
@@ -371,21 +385,3 @@ describe('zeroPadStart', () => {
     expect(zeroPadStart(9)).toEqual('09');
   });
 });
-=======
-
-  it('should not remove custom error even if values are valid', () => {
-    const memorableDateComponent = { error: 'Some error'} as Components.VaMemorableDate;
-    const year = Number('1999');
-    const month =  Number('1');
-    const day = Number('1');
-
-    const result = checkIsNaN(memorableDateComponent, year, month, day);
-
-    expect(result).toEqual(true);
-    expect(memorableDateComponent.error).toEqual('Some error');
-    expect(memorableDateComponent.invalidYear).toEqual(false);
-    expect(memorableDateComponent.invalidMonth).toEqual(false);
-    expect(memorableDateComponent.invalidDay).toEqual(false);
-  });
-});
->>>>>>> 6b3471f (Update tests)
