@@ -217,8 +217,7 @@ export function validate(
   day: number,
   monthYearOnly : boolean = false) : void {
 
-  const leapYear = checkLeapYear(year);
-  const maxDay = daysForSelectedMonth(leapYear, month);
+  const maxDay = daysForSelectedMonth(year, month);
 
   // Begin built-in validation.
   // Empty fields are acceptable unless the component is marked as required
@@ -269,8 +268,7 @@ export function getErrorParameters(
   year: number,
   month: number) {
 
-  const leapYear = checkLeapYear(year);
-  const maxDay = daysForSelectedMonth(leapYear, month);
+  const maxDay = daysForSelectedMonth(year, month);
 
   switch(error) {
     case 'month-range':
@@ -284,9 +282,12 @@ export function getErrorParameters(
   }
 }
 
-const daysForSelectedMonth = (leapYear: boolean, month: number): number => {
-  return leapYear && month == 2 ? 29 : days[month]?.length || 0;
-}
+// Get last day of the month (month is zero based, so we're +1 month, day 0);
+// new Date() will recalculate and go back to last day of the previous month.
+// Return 31 for undefined month or year to not invalidate the day with
+// partial data (this used to be set to zero by default)
+export const daysForSelectedMonth = (year: number, month: number): number =>
+  year && month ? new Date(year, month, 0).getDate() : 31;
 
 // Allow 0-9, Backspace, Delete, Left and Right Arrow, and Tab to clear data or move to next field
 export const validKeys = [
