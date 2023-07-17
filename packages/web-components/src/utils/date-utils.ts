@@ -352,4 +352,15 @@ export const isDateSameDay = (date1: Date, date2: Date) => {
     date1.getDay() === date2.getDay()
   );
 };
-/* eslint-enable i18next/no-literal-string */
+
+/**
+ * Returns a zero padded number
+ * Ex: '1' becomes '01'
+ * We could use Intl.NumberFormat('en-US', { minimumIntegerDigits: 2 }) or
+ * padStart(2, '0'), but we have Veterans that are still using Safari v9
+ * See https://caniuse.com/?search=Intl.NumberFormat
+ */
+export const zeroPadStart = (number: number | string) =>
+  `00${(number || '').toString()}`.slice(-2);
+
+  /* eslint-enable i18next/no-literal-string */
