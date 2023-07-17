@@ -152,6 +152,13 @@ export function checkLeapYear(year: number) {
   return (0 == year % 4 && 0 != year % 100) || 0 == year % 400;
 }
 
+export const internalErrors = [
+  'year-range',
+  'day-range',
+  'month-range',
+  'date-error'
+];
+
 /**
  * Checks if any of the of inputs provided resolve to NaN
  * Returns false if any are NaN and highlights component as error
@@ -196,8 +203,14 @@ export function checkIsNaN(
   }
 
   // Remove any error message if none of the fields are NaN
-  if (!component.invalidYear && !component.invalidMonth && !component.invalidDay) {
-    component.error = null;
+  if (
+    !component.invalidYear &&
+    !component.invalidMonth &&
+    !component.invalidDay
+  ) {
+    if (!component.error || internalErrors.includes(component.error)) {
+      component.error = null;
+    }
     return true;
   }
   return false;
@@ -218,6 +231,14 @@ export function validate(
   monthYearOnly : boolean = false) : void {
 
   const maxDay = daysForSelectedMonth(year, month);
+
+  if (component.required && (!year || !month || (!monthYearOnly && !day))) {
+    component.invalidYear = (!year || year < minYear || year > maxYear);
+    component.invalidMonth = (!month || month < minMonths || month > maxMonths);
+    component.invalidDay = monthYearOnly ? false : (!day || day < minMonths || day > maxDay);
+    component.error = 'date-error';
+    return;
+  }
 
   // Begin built-in validation.
   // Empty fields are acceptable unless the component is marked as required
@@ -250,15 +271,13 @@ export function validate(
     component.invalidMonth = false;
   }
 
-  if (component.required && (!year || !month || (!monthYearOnly && !day))) {
-    component.invalidYear = !year;
-    component.invalidMonth = !month;
-    component.invalidDay = monthYearOnly ? false : !day;
-    component.error = 'date-error';
-  }
-
   // Remove any error message if none of the fields are marked as invalid
-  if (!component.invalidYear && !component.invalidMonth && !component.invalidDay) {
+  if (
+    (!component.error || internalErrors.includes(component.error)) &&
+    !component.invalidYear &&
+    !component.invalidMonth &&
+    !component.invalidDay
+  ) {
     component.error = null;
   }
 }

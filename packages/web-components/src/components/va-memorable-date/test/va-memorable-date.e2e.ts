@@ -78,6 +78,24 @@ describe('va-memorable-date', () => {
     expect(error.innerText).toContain('This is a mistake');
   });
 
+  it('maintains custom error message after multiple blurs', async () => {
+    const page = await newE2EPage();
+
+    // await page.addScriptTag({ content: ``);
+    await page.setContent(
+      '<va-memorable-date value="1999-05-03" name="test" error="custom error" />',
+    );
+    const date = await page.find('va-memorable-date');
+
+    const handleYear = await page.$('pierce/[name="testYear"]');
+    // Trigger Blur
+    await handleYear.press('Tab');
+    // Trigger Blur twice
+    await handleYear.press('Tab');
+
+    expect(date.getAttribute('error')).toEqual('custom error');
+  });
+
   it('renders a required span', async () => {
     const page = await newE2EPage();
     await page.setContent(
@@ -697,6 +715,24 @@ describe('va-memorable-date', () => {
     const error = await page.find('va-memorable-date >>> span#error-message');
     // expect(error).toEqualHtml('test');
     expect(error.innerText).toContain('This is a mistake');
+  });
+
+  it('uswds v3 maintains custom error message after multiple blurs', async () => {
+    const page = await newE2EPage();
+
+    // await page.addScriptTag({ content: ``);
+    await page.setContent(
+      '<va-memorable-date value="1999-05-03" name="test" error="custom error" uswds />',
+    );
+    const date = await page.find('va-memorable-date');
+
+    const handleYear = await page.$('pierce/[name="testYear"]');
+    // Trigger Blur
+    await handleYear.press('Tab');
+    // Trigger Blur twice
+    await handleYear.press('Tab');
+
+    expect(date.getAttribute('error')).toEqual('custom error');
   });
 
   it('uswds v3 renders a required span', async () => {
