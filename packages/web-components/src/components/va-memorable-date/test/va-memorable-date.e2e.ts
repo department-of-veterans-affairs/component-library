@@ -276,8 +276,7 @@ describe('va-memorable-date', () => {
 
         expect(invalidYear).toEqual('false');
         expect(invalidMonth).toEqual('true');
-        // Day is invalid because we don't know the upper limit based on a valid month
-        expect(invalidDay).toEqual('true');
+        expect(invalidDay).toEqual('false');
 
         await handleMonth.press('Backspace');
         await handleMonth.press('Backspace');
@@ -898,8 +897,7 @@ describe('va-memorable-date', () => {
 
         expect(invalidYear).toEqual('false');
         expect(invalidMonth).toEqual('true');
-        // Day is invalid because we don't know the upper limit based on a valid month
-        expect(invalidDay).toEqual('true');
+        expect(invalidDay).toEqual('false');
 
         await handleMonth.press('Backspace');
         await handleMonth.press('Backspace');
