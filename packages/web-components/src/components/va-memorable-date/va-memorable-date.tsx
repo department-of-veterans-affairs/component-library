@@ -130,10 +130,13 @@ export class VaMemorableDate {
     }` : '';
     /* eslint-enable i18next/no-literal-string */
 
-    // Run built-in validation. Any custom validation
-    // will happen afterwards
-    validate(this, yearNum, monthNum, dayNum);
+    // Any custom validation will happen first; otherwise consumer code clearing
+    // errors will also remove internal errors.
     this.dateBlur.emit(event);
+
+    // Built-in validation is run after custom so internal errors override
+    // custom errors, e.g. Show invalid date instead of custom error
+    validate(this, yearNum, monthNum, dayNum);
 
     if (this.enableAnalytics) {
       const detail = {
