@@ -16,6 +16,7 @@ import {
   validate,
   getErrorParameters,
   checkIsNaN,
+  zeroPadStart,
 } from '../../utils/date-utils';
 
 /**
@@ -124,16 +125,12 @@ export class VaDate {
    * date values are all NaNs.
    */
   private setValue(year: number, month: number, day: number): void {
-    // Use a leading zero for numbers < 10
-    const numFormatter = new Intl.NumberFormat('en-US', {
-      minimumIntegerDigits: 2,
-    });
     // Ternary to prevent NaN displaying as value for Year
     // Ternary to prevent Month or Day from displaying as single digit
     /* eslint-disable i18next/no-literal-string */
     const val = `${year ? year : ''}-${
-      month ? numFormatter.format(month) : ''
-    }-${day ? numFormatter.format(day) : ''}`.replace(/-+$/, '');
+      month ? zeroPadStart(month) : ''
+    }-${day ? zeroPadStart(day) : ''}`.replace(/-+$/, '');
     /* eslint-enable i18next/no-literal-string */
 
     this.value = val ? val : null;
