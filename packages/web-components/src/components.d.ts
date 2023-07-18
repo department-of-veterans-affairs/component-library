@@ -161,6 +161,14 @@ export namespace Components {
           * Adds an aria-label attribute to the <nav /> element.
          */
         "label"?: string;
+        /**
+          * USWDS variation
+         */
+        "uswds"?: boolean;
+        /**
+          * Whether or not the component will wrap the breadcrumbs. This prop is available when `uswds` is set to `true`.
+         */
+        "wrapping"?: boolean;
     }
     interface VaButton {
         /**
@@ -1750,6 +1758,14 @@ declare namespace LocalJSX {
           * The event used to track usage of the component. This is emitted when a breadcrumb anchor is clicked and disableAnalytics is not true.
          */
         "onComponent-library-analytics"?: (event: VaBreadcrumbsCustomEvent<any>) => void;
+        /**
+          * USWDS variation
+         */
+        "uswds"?: boolean;
+        /**
+          * Whether or not the component will wrap the breadcrumbs. This prop is available when `uswds` is set to `true`.
+         */
+        "wrapping"?: boolean;
     }
     interface VaButton {
         /**

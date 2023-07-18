@@ -1,3 +1,9 @@
+@forward 'settings';
+@use 'usa-breadcrumb/src/styles/usa-breadcrumb';
+
+
+@import '../../global/formation_overrides';
+
 :host {
   display: block;
 }
