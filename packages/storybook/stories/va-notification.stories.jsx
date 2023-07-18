@@ -31,6 +31,7 @@ const defaultArgs = {
   'has-close-text': false,
   'headline': 'Notification heading',
   'headline-level': '3',
+  'date-time': 'Wednesday, May 11 at 1:13pm',
   'children': (
      <p>Notification body</p>
   ),
@@ -45,6 +46,7 @@ const Template = ({
   'headline-level': headlineLevel,
   href,
   text,
+  'date-time': dateTime,
   'close-btn-aria-label': closeBtnAriaLabel,
   closeable,
   'has-border': hasBorder,
@@ -57,6 +59,7 @@ const Template = ({
       symbol={symbol}
       headline={headline}
       headline-level={headlineLevel}
+      date-time={dateTime}
       href={href}
       text={text}
       closeable={closeable}
@@ -73,6 +76,7 @@ const MultipleTemplate = ({
   'close-btn-aria-label': closeBtnAriaLabel,
   closeable,
   'has-border': hasBorder,
+  'date-time': dateTime,
 }) => {
   return (
     <>
@@ -81,19 +85,21 @@ const MultipleTemplate = ({
         symbol="action-required"
         headline="You have a new education debt."
         href="https://www.va.gov/"
+        date-time={dateTime}
         text="Manage your VA debt"
         closeable={closeable}
         has-border={hasBorder}
         closeBtnAriaLabel={closeBtnAriaLabel}
         class="vads-u-margin-bottom--1p5"
       >
-        <time slot="date" dateTime="2023-05-1 13:13:00">Wednesday, May 11 at 1:13pm</time>
+        <time slot="date" dateTime={dateTime}>{dateTime}</time>
       </va-notification>
       <va-notification
         visible="true"
         symbol="update"
         headline="Your claim status has been updated."
         href="https://www.va.gov/"
+        date-time={dateTime}
         text="Manage your claims and appeals"
         closeable={closeable}
         has-border={hasBorder}
@@ -114,12 +120,13 @@ Default.argTypes = propStructure(notificationDocs);
 export const ActionRequired = Template.bind(null);
 ActionRequired.args = {
   ...defaultArgs,
-  children: (
-    <time slot="date" dateTime="2023-05-1 13:13:00">Wednesday, May 11 at 1:13pm</time>
-  ),
+  // children: (
+  //   <time slot="date" dateTime="2023-05-1 13:13:00">Wednesday, May 11 at 1:13pm</time>
+  // ),
   symbol: 'action-required',
   headline: 'You have a new education debt.',
-  text: 'Manage your VA debt'
+  text: 'Manage your VA debt',
+  dateTime: 'Wednesday, May 11 at 1:13pm',
 };
 
 export const Update = Template.bind(null);

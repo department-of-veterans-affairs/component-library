@@ -587,6 +587,10 @@ export namespace Components {
          */
         "closeable"?: boolean;
         /**
+          * Headline for notification
+         */
+        "dateTime"?: string;
+        /**
           * If `true`, the component-library-analytics event is disabled.
          */
         "disableAnalytics"?: boolean;
@@ -611,7 +615,7 @@ export namespace Components {
          */
         "href"?: string;
         /**
-          * Symbol indicates type of notification  Current options are: action-required, update
+          * Symbol indicates type of notification Current options are: action-required, update
          */
         "symbol"?: string;
         /**
@@ -2268,6 +2272,10 @@ declare namespace LocalJSX {
          */
         "closeable"?: boolean;
         /**
+          * Headline for notification
+         */
+        "dateTime"?: string;
+        /**
           * If `true`, the component-library-analytics event is disabled.
          */
         "disableAnalytics"?: boolean;
@@ -2300,7 +2308,7 @@ declare namespace LocalJSX {
          */
         "onComponent-library-analytics"?: (event: VaNotificationCustomEvent<any>) => void;
         /**
-          * Symbol indicates type of notification  Current options are: action-required, update
+          * Symbol indicates type of notification Current options are: action-required, update
          */
         "symbol"?: string;
         /**
