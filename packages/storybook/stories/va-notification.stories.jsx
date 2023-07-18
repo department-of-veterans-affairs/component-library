@@ -92,7 +92,6 @@ const MultipleTemplate = ({
         closeBtnAriaLabel={closeBtnAriaLabel}
         class="vads-u-margin-bottom--1p5"
       >
-        <time slot="date" dateTime={dateTime}>{dateTime}</time>
       </va-notification>
       <va-notification
         visible="true"
@@ -105,7 +104,6 @@ const MultipleTemplate = ({
         has-border={hasBorder}
         closeBtnAriaLabel={closeBtnAriaLabel}
       >
-        <time slot="date" dateTime="2023-05-1 13:13:00">Wednesday, May 11 at 1:13pm</time>
       </va-notification>
     </>
   )
@@ -120,21 +118,14 @@ Default.argTypes = propStructure(notificationDocs);
 export const ActionRequired = Template.bind(null);
 ActionRequired.args = {
   ...defaultArgs,
-  // children: (
-  //   <time slot="date" dateTime="2023-05-1 13:13:00">Wednesday, May 11 at 1:13pm</time>
-  // ),
   symbol: 'action-required',
   headline: 'You have a new education debt.',
   text: 'Manage your VA debt',
-  dateTime: 'Wednesday, May 11 at 1:13pm',
 };
 
 export const Update = Template.bind(null);
 Update.args = {
   ...defaultArgs,
-  children: (
-    <time slot="date" dateTime="2023-05-1 13:13:00">Wednesday, May 11 at 1:13pm</time>
-  ),
   symbol: 'update',
   headline: 'Your claim status has been updated.',
   text: 'Manage your claims and appeals'
@@ -143,9 +134,6 @@ Update.args = {
 export const WithCloseText = Template.bind(null);
 WithCloseText.args = {
   ...defaultArgs,
-  children: (
-    <time slot="date" dateTime="2023-05-1 13:13:00">Wednesday, May 11 at 1:13pm</time>
-  ),
   symbol: 'action-required',
   headline: 'You have a new education debt.',
   text: 'Manage your VA debt',
@@ -164,6 +152,7 @@ HeaderLevelChange.args = {
   headline: 'The heading level of this notification is now an h5.',
   'headline-level': '5',
   text: '',
+  dateTime: '',
 };
 
 export const NotDismissable = Template.bind(null);
@@ -175,9 +164,6 @@ NotDismissable.args = {
 export const NoBorder = Template.bind(null);
 NoBorder.args = {
   ...defaultArgs,
-  children: (
-    <time slot="date" dateTime="2023-05-1 13:13:00">Wednesday, May 11 at 1:13pm</time>
-  ),
   symbol: 'action-required',
   headline: 'You have a new education debt.',
   text: 'Manage your VA debt',

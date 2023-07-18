@@ -181,7 +181,6 @@ export class VaNotification {
             <div class="body" role="presentation">
               {headline ? <HeadlineLevel part="headline" aria-describedby={ariaDescribedByLabel}>{headline}</HeadlineLevel> : null}
               {dateTime ? <time dateTime={dateTime}>{dateTime}</time> : null}
-              {/* <slot name="date"></slot> */}
               <slot></slot>
               {(href && text) ? (
                 <va-link active href={href} text={text} />
