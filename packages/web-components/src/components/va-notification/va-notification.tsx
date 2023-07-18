@@ -66,7 +66,7 @@ export class VaNotification {
   @Prop() headlineLevel?: string = '3';
 
   /**
-   * Headline for notification
+   * Date and time for notification. This will be incorporated into a unique aria-describedby label
    */
     @Prop() dateTime?: string;
 
