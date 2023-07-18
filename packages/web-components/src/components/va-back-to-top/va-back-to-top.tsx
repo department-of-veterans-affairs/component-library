@@ -52,7 +52,8 @@ export class VaBackToTop {
     revealObserver.observe(this.revealPixel);
   }
 
-  navigateToTop() {
+  navigateToTop(event) {
+    event.preventDefault();
     // Focus the h1 tag on the page.
     const el = document.querySelector('h1');
     if (el) {
@@ -86,10 +87,13 @@ export class VaBackToTop {
           <div
             class={classnames({ docked: this.isDocked, reveal: this.revealed })}
           >
-            <button type="button" onClick={this.navigateToTop.bind(this)}>
-              <i aria-hidden="true" role="img"></i>
-              <span>Back to top</span>
-            </button>
+            <a href="#ds-back-to-top" onClick={this.navigateToTop.bind(this)}>
+              <span>
+                <i aria-hidden="true" role="img"></i>
+                <span class="sr-only">Back to top</span> {/* For small screen that only displays the arrow */}
+                <span class="text">Back to top</span>
+              </span>
+            </a>
           </div>
         </span>
       </Host>
