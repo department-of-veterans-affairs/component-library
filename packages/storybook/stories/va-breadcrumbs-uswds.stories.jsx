@@ -85,15 +85,6 @@ const WrappingCrumbsTemplate = ({
   uswds,
   wrapping,
 }) => {
-  // const breadcrumbs = [
-  //   { label: 'Home', href: '/#1' },
-  //   { label: 'Federal Contracting', href: '/#2' },
-  //   { label: 'Contracting assistance programs', href: '/#3' },
-  //   {
-  //     label: 'Women-owned small business federal contracting program',
-  //     href: '/#4',
-  //   },
-  // ];
   return (
     <div>
       <va-breadcrumbs

@@ -279,7 +279,7 @@ describe('va-breadcrumbs', () => {
       details: {
         clickLabel: 'Level One',
         clickLevel: 2,
-        totalLevels: 3,
+        totalLevels: 2,
       },
     });
   });

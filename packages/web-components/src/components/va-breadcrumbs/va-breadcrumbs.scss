@@ -25,3 +25,7 @@ ul {
   position: relative;
   width: 100%;
 }
+
+.usa-breadcrumb__link span {
+  pointer-events: none;
+}

@@ -63,7 +63,6 @@ export class VaBreadcrumbs {
     if (!this.disableAnalytics) {
       const target = event.target as HTMLAnchorElement;
 
-      console.log(target)
       // If it's a link being clicked, dispatch an analytics event
       if (target?.tagName === 'A') {
         const details = {
@@ -72,7 +71,7 @@ export class VaBreadcrumbs {
           details: {
             clickLabel: target.innerText.trim(),
             clickLevel: this.getClickLevel(target),
-            totalLevels: this.uswds ? this.el.querySelectorAll('a').length - 1 : this.el.querySelectorAll('a').length,
+            totalLevels: this.el.querySelectorAll('a').length,
           },
         };
         this.componentLibraryAnalytics.emit(details);
@@ -135,33 +134,33 @@ export class VaBreadcrumbs {
   
       // Check if we have list items, if not wrap anchorItems into list items
       if(listItems.length === 0 && anchorItems.length > 0) {
-          this.wrapAnchorsInList(anchorItems);
+        this.wrapAnchorsInList(anchorItems);
       }
   
       const updatedListItems = Array.from(this.el.querySelectorAll('li'));
       const updatedAnchorItems = Array.from(this.el.querySelectorAll('a'));
 
-        updatedListItems.forEach((item, i) => {
-            item.classList.add('usa-breadcrumb__list-item');
-            if (updatedListItems.length - 1 === i) {
-              item.classList.add('usa-current');
-              // eslint-disable-next-line i18next/no-literal-string
-              item.setAttribute('aria-current', 'page');
+      updatedListItems.forEach((item, i) => {
+        item.classList.add('usa-breadcrumb__list-item');
+        if (updatedListItems.length - 1 === i) {
+          item.classList.add('usa-current');
+          // eslint-disable-next-line i18next/no-literal-string
+          item.setAttribute('aria-current', 'page');
 
-              // Find the anchor child and replace it with a span
-              const anchor = item.querySelector('a');
-              if (anchor) {
-                const span = document.createElement('span');
-                span.innerHTML = anchor.innerHTML;
-                item.replaceChild(span, anchor);
-              }
-            }
-        });
+          // Find the anchor child and replace it with a span
+          const anchor = item.querySelector('a');
+          if (anchor) {
+            const span = document.createElement('span');
+            span.innerHTML = anchor.innerHTML;
+            item.replaceChild(span, anchor);
+          }
+        }
+      });
 
-        updatedAnchorItems.forEach((item) => {
-            item.classList.add('usa-breadcrumb__link');
-            this.wrapAnchorText(item);
-        });
+      updatedAnchorItems.forEach((item) => {
+        item.classList.add('usa-breadcrumb__link');
+        this.wrapAnchorText(item);
+      });
     } else {
       // We are getting the slot nodes so that we can handle either receiving an 
       // anchor tag or a list item with an anchor tag.
@@ -169,19 +168,19 @@ export class VaBreadcrumbs {
       const anchorItems = this.el.querySelectorAll('a');
       
       if (listItems.length > 0) {
-          // Scenario: <li><a href="...">...</a></li>
-          listItems.forEach((item, index) => {
-              if (item.nodeName === 'LI') { 
-                  this.handleListNode(item, index, listItems);
-              }
-          });
+        // Scenario: <li><a href="...">...</a></li>
+        listItems.forEach((item, index) => {
+          if (item.nodeName === 'LI') { 
+              this.handleListNode(item, index, listItems);
+          }
+        });
       } else if (anchorItems.length > 0) {
-          // Scenario: <a href="...">...</a>
-          anchorItems.forEach((item, index) => {
-              if (item.nodeName === 'A') {
-                  this.handleAnchorNode(item, index, anchorItems);
-              }
-          });
+        // Scenario: <a href="...">...</a>
+        anchorItems.forEach((item, index) => {
+          if (item.nodeName === 'A') {
+            this.handleAnchorNode(item, index, anchorItems);
+          }
+        });
       }
     }
   }
