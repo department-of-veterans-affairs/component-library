@@ -542,7 +542,7 @@ describe('va-text-input', () => {
   it('uswds adds a character limit with descriptive text', async () => {
     const page = await newE2EPage();
     await page.setContent(
-      '<va-text-input maxlength="3" value="22" uswds />',
+      '<va-text-input charcount maxlength="3" value="22" uswds />',
     );
 
     // Level-setting expectations
@@ -674,7 +674,7 @@ describe('va-text-input', () => {
   it('uswds shows chars allowed on load if maxlength set', async () => {
     const page = await newE2EPage();
     await page.setContent(
-      '<va-text-input uswds maxlength="10" />'
+      '<va-text-input uswds charcount maxlength="10" />'
     );
 
     const span = await page.find('va-text-input >>> span.usa-character-count__status')
@@ -685,7 +685,7 @@ describe('va-text-input', () => {
     const page = await newE2EPage();
 
     await page.setContent(
-      '<va-text-input uswds maxlength="10"/>'
+      '<va-text-input uswds charcount maxlength="10"/>'
     );
 
     const inputEl = await page.find('va-text-input >>> input');
@@ -696,11 +696,11 @@ describe('va-text-input', () => {
 
   });
 
-  it('uswds shows chars over limit as error', async () => {
+  it('uswds shows chars over limit as error and sets aria-invalid attribute', async () => {
     const page = await newE2EPage();
 
     await page.setContent(
-      '<va-text-input uswds maxlength="10"/>'
+      '<va-text-input uswds charcount maxlength="10"/>'
     );
 
     const inputEl = await page.find('va-text-input >>> input');
@@ -713,5 +713,8 @@ describe('va-text-input', () => {
     expect(color).toEqual(
       'rgb(181, 9, 9)',
     );
+
+    expect(inputEl.getAttribute('aria-invalid')).toBe("true");
   });
+
 });

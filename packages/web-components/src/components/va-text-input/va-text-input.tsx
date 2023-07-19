@@ -149,6 +149,13 @@ export class VaTextInput {
    * Whether or not the component will use USWDS v3 styling.
    */
   @Prop({reflect: true}) uswds?: boolean = false;
+  
+
+  /**
+   * Whether the component should show a character count message. 
+   * Has no effect without maxlength being set.
+   */
+  @Prop() charcount?: boolean = false;
 
   /**
    * The event used to track usage of the component. This is emitted when the
@@ -195,10 +202,9 @@ export class VaTextInput {
 
 /**
  * generates message to update character count if user includes maxlength prop for uswds
- * will update this method once translations are done 
+ * update this method once translations are done 
  */
   private getCharacterMessage() {
-    debugger;
     if (this.value === undefined) {
       return `${this.maxlength} character${plurality(this.maxlength)} allowed`;
     }
@@ -258,15 +264,15 @@ export class VaTextInput {
       success,
       messageAriaDescribedby,
       width,
+      charcount
     } = this;
     const type = this.getInputType();
     const maxlength = this.getMaxlength();
-    this.getCharacterMessage();
+    const charCountTooHigh = this.charcount && this.value && this.maxlength && (this.value.length > this.maxlength);
     const ariaDescribedbyIds =
       `${messageAriaDescribedby ? 'input-message' : ''} ${
         error ? 'input-error-message' : ''
-      }`.trim() || null; // Null so we don't add the attribute if we have an empty string
-
+      } ${charcount && maxlength ? 'charcount-message' : ''}`.trim() || null; // Null so we don't add the attribute if we have an empty string
     if (uswds) {
       const labelClass = classnames({
         'usa-label': true,
@@ -314,18 +320,23 @@ export class VaTextInput {
             onInput={handleInput}
             onBlur={handleBlur}
             aria-describedby={ariaDescribedbyIds}
-            aria-invalid={invalid || error ? 'true' : 'false'}
+            aria-invalid={invalid || error || charCountTooHigh ? 'true' : 'false'}
             inputmode={inputmode ? inputmode : undefined}
+            maxlength={charcount ? undefined : maxlength}
             pattern={pattern}
             name={name}
             autocomplete={autocomplete}
             required={required || null}
             part="input"
           />
-          {maxlength && (
-            <span class={messageClass}>
-              {this.getCharacterMessage()}
-            </span>
+          {charcount && maxlength && (
+            <Fragment>
+              <span class={messageClass} aria-hidden="true">
+                {this.getCharacterMessage()}
+              </span>
+              <span id="charcount-message" class="usa-sr-only">You can enter up to {maxlength} character{plurality(maxlength)}</span>
+              <span class="usa-sr-only" aria-live="polite">{this.getCharacterMessage()}</span>
+            </Fragment>
           )}
         </Host>
       );
