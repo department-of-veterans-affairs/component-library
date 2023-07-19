@@ -12,7 +12,7 @@ import {
 } from '@stencil/core';
 import classnames from 'classnames';
 import i18next from 'i18next';
-import { consoleDevError } from '../../utils/utils';
+import { consoleDevError, plurality } from '../../utils/utils';
 
 if (Build.isTesting) {
   // Make i18next.t() return the key instead of the value
@@ -191,6 +191,30 @@ export class VaTextInput {
     this.value = target.value;
   };
 
+  private
+
+/**
+ * generates message to update character count if user includes maxlength prop for uswds
+ * will update this method once translations are done 
+ */
+  private getCharacterMessage() {
+    debugger;
+    if (this.value === undefined) {
+      return `${this.maxlength} character${plurality(this.maxlength)} allowed`;
+    }
+
+    let message: string;
+    if (this.value.length <= this.maxlength) {
+      const chars = this.maxlength - this.value.length;
+      message = `${chars} character${plurality(chars)} left`;
+    } else {
+      const chars = this.value.length - this.maxlength;
+      message = `${chars} character${plurality(chars)} over limit`;
+    }
+
+    return message;
+  }
+
   private handleBlur = () => {
     if (this.enableAnalytics) {
       this.componentLibraryAnalytics.emit({
@@ -237,6 +261,7 @@ export class VaTextInput {
     } = this;
     const type = this.getInputType();
     const maxlength = this.getMaxlength();
+    this.getCharacterMessage();
     const ariaDescribedbyIds =
       `${messageAriaDescribedby ? 'input-message' : ''} ${
         error ? 'input-error-message' : ''
@@ -252,6 +277,11 @@ export class VaTextInput {
         'usa-input--success': success,
         'usa-input--error': error || reflectInputError,
         [`usa-input--${width}`]: width,
+      });
+      const messageClass = classnames({
+        'usa-hint': true,
+        'usa-character-count__status': true,
+        'usa-character-count__status--invalid': maxlength && this.value !== undefined && this.value.length > maxlength
       });
       return (
         <Host>
@@ -286,23 +316,16 @@ export class VaTextInput {
             aria-describedby={ariaDescribedbyIds}
             aria-invalid={invalid || error ? 'true' : 'false'}
             inputmode={inputmode ? inputmode : undefined}
-            maxlength={maxlength}
-            minlength={minlength}
             pattern={pattern}
             name={name}
             autocomplete={autocomplete}
             required={required || null}
             part="input"
           />
-          {maxlength && value?.length >= maxlength && (
-            <small part="validation">
-              {i18next.t('max-chars', { length: maxlength })}
-            </small>
-          )}
-          {minlength && value?.length < minlength && (
-            <small part="validation">
-              {i18next.t('min-chars', { length: minlength })}
-            </small>
+          {maxlength && (
+            <span class={messageClass}>
+              {this.getCharacterMessage()}
+            </span>
           )}
         </Host>
       );

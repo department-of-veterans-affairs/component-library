@@ -37,3 +37,12 @@ export function consoleDevError(message: string): void {
     console.error(message);
   }
 }
+
+/**
+ * 
+ * Take the length of a string; if the length is "1" then return blank string for no plurality
+ * otherwise return an 's' for plurality 
+ */
+export function plurality(length: number): string {
+  return length === 1 ? '' : 's';
+}

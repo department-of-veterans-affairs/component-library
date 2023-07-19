@@ -542,27 +542,28 @@ describe('va-text-input', () => {
   it('uswds adds a character limit with descriptive text', async () => {
     const page = await newE2EPage();
     await page.setContent(
-      '<va-text-input minlength="2" maxlength="3" value="22" uswds />',
+      '<va-text-input maxlength="3" value="22" uswds />',
     );
 
     // Level-setting expectations
     const inputEl = await page.find('va-text-input >>> input');
     expect(await inputEl.getProperty('value')).toBe('22');
-    expect(await page.find('va-text-input >>> small')).toBeNull();
+    const message = await page.find('va-text-input >>> span.usa-character-count__status')
+    expect(message.innerText).toBe('1 character left');
 
     // Test the functionality
     await inputEl.press('2');
     expect(await inputEl.getProperty('value')).toBe('222');
-    expect((await page.find('va-text-input >>> small')).innerText).toContain(
-      'max-chars',
+    expect((await page.find('va-text-input >>> span.usa-character-count__status')).innerText).toContain(
+      '0 characters left',
     );
 
     // Click three times to select all text in input
     await inputEl.click({ clickCount: 3 });
     await inputEl.press('2');
     expect(await inputEl.getProperty('value')).toBe('2');
-    expect((await page.find('va-text-input >>> small')).innerText).toContain(
-      'min-chars',
+    expect((await page.find('va-text-input >>> span.usa-character-count__status')).innerText).toContain(
+      '2 characters left',
     );
   });
 
@@ -572,12 +573,12 @@ describe('va-text-input', () => {
 
     // Level-setting expectations
     const inputEl = await page.find('va-text-input >>> input');
-    expect(await page.find('va-text-input >>> small')).toBeNull();
+    expect(await page.find('va-text-input >>> span.usa-character-count__status')).toBeNull();
 
     // Test the functionality
     await inputEl.type('Hello, nice to meet you');
     expect(await inputEl.getProperty('value')).toBe('Hello, nice to meet you');
-    expect(await page.find('va-text-input >>> small')).toBeNull();
+    expect(await page.find('va-text-input >>> span.usa-character-count__status')).toBeNull();
   });
 
   it('uswds ignores a maxlength of zero', async () => {
@@ -586,12 +587,12 @@ describe('va-text-input', () => {
 
     // Level-setting expectations
     const inputEl = await page.find('va-text-input >>> input');
-    expect(await page.find('va-text-input >>> small')).toBeNull();
+    expect(await page.find('va-text-input >>> span.usa-character-count__status')).toBeNull();
 
     // Test the functionality
     await inputEl.type('Hello, nice to meet you');
     expect(await inputEl.getProperty('value')).toBe('Hello, nice to meet you');
-    expect(await page.find('va-text-input >>> small')).toBeNull();
+    expect(await page.find('va-text-input >>> span.usa-character-count__status')).toBeNull();
   });
 
   it('uswds allows manually setting the type attribute', async () => {
@@ -670,4 +671,47 @@ describe('va-text-input', () => {
     expect(await inputEl.getProperty('autocomplete')).toBe('email');
   });
 
+  it('uswds shows chars allowed on load if maxlength set', async () => {
+    const page = await newE2EPage();
+    await page.setContent(
+      '<va-text-input uswds maxlength="10" />'
+    );
+
+    const span = await page.find('va-text-input >>> span.usa-character-count__status')
+    expect(span.innerText).toEqual('10 characters allowed');
+  });
+
+  it('uswds shows chars left if maxlength set', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent(
+      '<va-text-input uswds maxlength="10"/>'
+    );
+
+    const inputEl = await page.find('va-text-input >>> input');
+    await inputEl.type('Hello');
+    const span = await page.find('va-text-input >>> span.usa-character-count__status')
+
+    expect(span.innerText).toEqual('5 characters left');
+
+  });
+
+  it('uswds shows chars over limit as error', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent(
+      '<va-text-input uswds maxlength="10"/>'
+    );
+
+    const inputEl = await page.find('va-text-input >>> input');
+    await inputEl.type('This is too long');
+
+    const messageSpan = await page.find('va-text-input >>> span.usa-character-count__status');
+    expect(messageSpan.innerText).toEqual('6 characters over limit');
+
+    const {color} = await messageSpan.getComputedStyle()
+    expect(color).toEqual(
+      'rgb(181, 9, 9)',
+    );
+  });
 });
