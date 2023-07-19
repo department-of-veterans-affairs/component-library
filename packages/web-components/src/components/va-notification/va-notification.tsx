@@ -66,6 +66,11 @@ export class VaNotification {
   @Prop() headlineLevel?: string = '3';
 
   /**
+   * Date and time for notification. This will also be incorporated into a unique aria-describedby label.
+   */
+    @Prop() dateTime?: string;
+
+  /**
    * Destination URL for link (optional)
    */
   @Prop() href?: string;
@@ -153,6 +158,7 @@ export class VaNotification {
       visible,
       symbol,
       headline,
+      dateTime,
       href,
       text,
       closeable,
@@ -165,14 +171,16 @@ export class VaNotification {
 
     const classes = classnames('va-notification', symbol, { 'has-border': hasBorder })
 
+    const ariaDescribedByLabel = `${headline} ${dateTime}`;
+
     return (
       <Host>
         <va-card show-shadow="true">
           <div class={classes}>
             <i aria-hidden="true" role="img" class={symbol}></i>
             <div class="body" role="presentation">
-              {headline ? <HeadlineLevel part="headline">{headline}</HeadlineLevel> : null}
-              <slot name="date"></slot>
+              {headline ? <HeadlineLevel part="headline" aria-describedby={ariaDescribedByLabel}>{headline}</HeadlineLevel> : null}
+              {dateTime ? <time dateTime={dateTime}>{dateTime}</time> : null}
               <slot></slot>
               {(href && text) ? (
                 <va-link active href={href} text={text} />

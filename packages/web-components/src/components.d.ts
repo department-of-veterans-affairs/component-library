@@ -595,6 +595,10 @@ export namespace Components {
          */
         "closeable"?: boolean;
         /**
+          * Date and time for notification. This will be incorporated into a unique aria-describedby label
+         */
+        "dateTime"?: string;
+        /**
           * If `true`, the component-library-analytics event is disabled.
          */
         "disableAnalytics"?: boolean;
@@ -2283,6 +2287,10 @@ declare namespace LocalJSX {
           * If `true`, a close button will be displayed.
          */
         "closeable"?: boolean;
+        /**
+          * Date and time for notification. This will be incorporated into a unique aria-describedby label
+         */
+        "dateTime"?: string;
         /**
           * If `true`, the component-library-analytics event is disabled.
          */
