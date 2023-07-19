@@ -329,6 +329,11 @@ export class VaTextInput {
             required={required || null}
             part="input"
           />
+          { !charcount && maxlength && value?.length >= maxlength && (
+              <span class={messageClass} aria-live="polite">
+              {i18next.t('max-chars', { length: maxlength })}
+              </span>
+          )}
           {charcount && maxlength && (
             <Fragment>
               <span class={messageClass} aria-hidden="true">
