@@ -1,11 +1,16 @@
 #
-# Lint and Unit Test jobs that runs our lint:ci and test npm scripts
+# Mobile Testing
 #
 
 name: '[Mobile] CI Testing'
 
 on:
   pull_request:
+
+defaults:
+  run:
+    shell: bash
+    working-directory: packages/mobile-components
 
 jobs:
   testing:
