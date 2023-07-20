@@ -152,7 +152,7 @@ export class VaTextInput {
   
   /**
    * Whether the component should show a character count message. 
-   * Has no effect without maxlength being set.
+   * Has no effect without uswds and maxlength being set.
    */
   @Prop() charcount?: boolean = false;
 
@@ -244,12 +244,12 @@ export class VaTextInput {
     } = this;
     const type = this.getInputType();
     const maxlength = this.getMaxlength();
-    const charCountTooHigh = this.charcount && (this.value?.length > maxlength);
     const ariaDescribedbyIds =
       `${messageAriaDescribedby ? 'input-message' : ''} ${
         error ? 'input-error-message' : ''
       } ${charcount && maxlength ? 'charcount-message' : ''}`.trim() || null; // Null so we don't add the attribute if we have an empty string
     if (uswds) {
+      const charCountTooHigh = charcount && (value?.length > maxlength);
       const labelClass = classnames({
         'usa-label': true,
         'usa-label--error': error,
@@ -262,8 +262,8 @@ export class VaTextInput {
       });
       const messageClass = classnames({
         'usa-hint': true,
-        'usa-character-count__status': true,
-        'usa-character-count__status--invalid': maxlength && this.value !== undefined && this.value.length > maxlength
+        'usa-character-count__status': charcount,
+        'usa-character-count__status--invalid': charcount && maxlength && value?.length > maxlength
       });
       return (
         <Host>
@@ -313,10 +313,10 @@ export class VaTextInput {
           {charcount && maxlength && (
             <Fragment>
               <span class={messageClass} aria-hidden="true">
-                {getCharacterMessage(this.value, maxlength)}
+                {getCharacterMessage(value, maxlength)}
               </span>
               <span id="charcount-message" class="usa-sr-only">You can enter up to {maxlength} character{plurality(maxlength)}</span>
-              <span class="usa-sr-only" aria-live="polite">{getCharacterMessage(this.value, maxlength)}</span>
+              <span class="usa-sr-only" aria-live="polite">{getCharacterMessage(value, maxlength)}</span>
             </Fragment>
           )}
         </Host>

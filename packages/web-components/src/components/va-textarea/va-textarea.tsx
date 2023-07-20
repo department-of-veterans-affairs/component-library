@@ -12,7 +12,7 @@ import {
 } from '@stencil/core';
 import classnames from 'classnames';
 import i18next from 'i18next';
-import { consoleDevError } from '../../utils/utils';
+import { consoleDevError, getCharacterMessage, plurality } from '../../utils/utils';
 
 if (Build.isTesting) {
   // Make i18next.t() return the key instead of the value
@@ -90,6 +90,12 @@ export class VaTextarea {
   @Prop() uswds?: boolean = false;
 
   /**
+   * Whether the component should show a character count message. 
+   * Has no effect without uswds and maxlength being set.
+   */
+  @Prop() charcount?: boolean = false;
+
+  /**
    * The event used to track usage of the component. This is emitted when
    * the textarea is blurred and `enableAnalytics` is true
    */
@@ -143,10 +149,12 @@ export class VaTextarea {
   }
 
   render() {
-    const { label, error, placeholder, name, required, value, hint, uswds } = this;
+    const { label, error, placeholder, name, required, value, hint, uswds, charcount } = this;
     const maxlength = this.getMaxlength();
-
+    const ariaDescribedbyIds = `${error ? 'error-message' : ''} 
+    ${charcount && maxlength ? 'charcount-message' : ''}`.trim() || null;
     if (uswds) {
+      const charCountTooHigh = charcount && (value?.length > maxlength);
       const labelClass = classnames({
         'usa-label': true,
         'usa-label--error': error,
@@ -154,6 +162,11 @@ export class VaTextarea {
       const inputClass = classnames({
         'usa-textarea': true,
         'usa-input--error': error,
+      });
+      const messageClass = classnames({
+        'usa-hint': true,
+        'usa-character-count__status': charcount,
+        'usa-character-count__status--invalid': charcount && maxlength && value?.length > maxlength
       });
       return (
         <Host>
@@ -180,19 +193,30 @@ export class VaTextarea {
           </span>
           <textarea
             class={inputClass}
-            aria-describedby={error ? 'error-message' : undefined}
-            aria-invalid={error ? 'true' : 'false'}
+            aria-describedby={ariaDescribedbyIds}
+            aria-invalid={error || charCountTooHigh ? 'true' : 'false'}
             onInput={this.handleInput}
             onBlur={this.handleBlur}
             id="input-type-textarea"
             placeholder={placeholder}
             name={name}
-            maxLength={maxlength}
+            maxLength={charcount ? undefined : maxlength}
             value={value}
             part="input-type-textarea"
           />
-          {maxlength && value?.length >= maxlength && (
-            <small>{i18next.t('max-chars', { length: maxlength })}</small>
+          {!charcount && maxlength && value?.length >= maxlength && (
+              <span class={messageClass} aria-live="polite">
+              {i18next.t('max-chars', { length: maxlength })}
+              </span>
+          )}
+          {charcount && maxlength && (
+            <Fragment>
+              <span class={messageClass} aria-hidden="true">
+                {getCharacterMessage(value, maxlength)}
+              </span>
+              <span id="charcount-message" class="usa-sr-only">You can enter up to {maxlength} character{plurality(maxlength)}</span>
+              <span class="usa-sr-only" aria-live="polite">{getCharacterMessage(value, maxlength)}</span>
+            </Fragment>
           )}
         </Host>
       );

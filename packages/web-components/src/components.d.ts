@@ -1003,7 +1003,7 @@ export namespace Components {
          */
         "autocomplete"?: string;
         /**
-          * Whether the component should show a character count message.  Has no effect without maxlength being set.
+          * Whether the component should show a character count message.  Has no effect without uswds and maxlength being set.
          */
         "charcount"?: boolean;
         /**
@@ -1086,6 +1086,10 @@ export namespace Components {
         "width"?: string;
     }
     interface VaTextarea {
+        /**
+          * Whether the component should show a character count message.  Has no effect without uswds and maxlength being set.
+         */
+        "charcount"?: boolean;
         /**
           * Emit component-library-analytics events on the blur event.
          */
@@ -2772,7 +2776,7 @@ declare namespace LocalJSX {
          */
         "autocomplete"?: string;
         /**
-          * Whether the component should show a character count message.  Has no effect without maxlength being set.
+          * Whether the component should show a character count message.  Has no effect without uswds and maxlength being set.
          */
         "charcount"?: boolean;
         /**
@@ -2859,6 +2863,10 @@ declare namespace LocalJSX {
         "width"?: string;
     }
     interface VaTextarea {
+        /**
+          * Whether the component should show a character count message.  Has no effect without uswds and maxlength being set.
+         */
+        "charcount"?: boolean;
         /**
           * Emit component-library-analytics events on the blur event.
          */

@@ -361,7 +361,7 @@ describe('va-textarea', () => {
     await textareaEl.press('2');
     expect(await textareaEl.getProperty('value')).toBe('222');
     // This is the i18next key surrounded by parentheses
-    expect((await page.find('va-textarea >>> small')).innerText).toContain(
+    expect((await page.find('va-textarea >>> span.usa-hint')).innerText).toContain(
       'max-chars',
     );
   });
