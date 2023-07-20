@@ -69,7 +69,7 @@ const DynamicCrumbsTemplate = ({
           {crumbs?.map((crumb, i) => {
             return (
               <li key={i}>
-                <a href={crumb.path}>{crumb.label}</a>
+                <a href={crumb.href}>{crumb.label}</a>
               </li>
             );
           })}
