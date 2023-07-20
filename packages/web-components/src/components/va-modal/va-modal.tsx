@@ -87,6 +87,21 @@ export class VaModal {
   componentLibraryAnalytics: EventEmitter;
 
   /**
+   * Listen for the va-button GA event and capture it so 
+   * that we can emit a single va-modal GA event that includes
+   * the va-button details in handlePrimaryButtonClick and
+   * handleSecondaryButtonClick.
+   */
+  @Listen('component-library-analytics')
+  handleButtonClickAnalytics(event) {
+    // Prevent va-modal GA event from firing multiple times.
+    if (event.detail.componentName === 'va-modal') return;
+
+    // Prevent va-button GA event from firing.
+    event.stopPropagation();
+  }
+
+  /**
    * Click outside modal will trigger closeEvent
    */
   @Prop() clickToClose?: boolean = false;
@@ -248,10 +263,36 @@ export class VaModal {
 
   private handlePrimaryButtonClick(e: MouseEvent) {
     this.primaryButtonClick.emit(e);
+
+    if (!this.disableAnalytics) {
+      const detail = {
+        componentName: 'va-modal',
+        action: 'click',
+        details: {
+          clickLabel: this.primaryButtonText,
+          status: this.status,
+          title: this.modalTitle,
+        },
+      };
+      this.componentLibraryAnalytics.emit(detail);
+    }
   }
 
   private handleSecondaryButtonClick(e: MouseEvent) {
     this.secondaryButtonClick.emit(e);
+
+    if (!this.disableAnalytics) {
+      const detail = {
+        componentName: 'va-modal',
+        action: 'click',
+        details: {
+          clickLabel: this.secondaryButtonText,
+          status: this.status,
+          title: this.modalTitle,
+        },
+      };
+      this.componentLibraryAnalytics.emit(detail);
+    }
   }
 
   // Pass in an array of focusable elements and return non-hidden and elements
