@@ -22,4 +22,4 @@ jobs:
         with:
           node-version: 14.x
           cache: 'yarn'
-      - run: yarn --immutable
+      - run: pwd && yarn --immutable
