@@ -6,11 +6,6 @@ name: '[Code Quality] Code Checks'
 
 on:
   pull_request:
-  push:
-    branches:
-      - main
-      - develop
-      - 'release/v**'
 
 defaults:
   run:
@@ -28,4 +23,4 @@ jobs:
           # cache: 'yarn'
           # cache-dependency-path: 'VAMobile/yarn.lock'
       - name: Install dependencies
-        run: yarn install --frozen-lockfile --non-interactive
+        run: yarn install
