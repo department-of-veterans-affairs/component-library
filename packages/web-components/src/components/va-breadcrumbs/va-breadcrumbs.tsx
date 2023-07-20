@@ -127,8 +127,34 @@ export class VaBreadcrumbs {
     });
   }
 
+  private observer: MutationObserver;
+
+  disconnectedCallback() {
+    if (this.observer) {
+      this.observer.disconnect();
+    }
+  }
+
   componentDidLoad() {
     if (this.uswds) {
+      // Watch for changes to list items.
+      const breadcrumbList = this.el.querySelector('.usa-breadcrumb__list');
+      const callback = mutationList => {
+        for (const mutation of mutationList) {
+          if (mutation.type === 'childList') {
+            const listItems = this.el.querySelectorAll('li');
+            listItems.forEach((item) => {
+              item.classList.add('usa-breadcrumb__list-item');
+            });
+          }
+        }
+      };
+      this.observer = new MutationObserver(callback);
+      this.observer.observe(breadcrumbList, {
+        childList: true,
+        subtree: true,
+      });
+
       const listItems = Array.from(this.el.querySelectorAll('li'));
       const anchorItems = Array.from(this.el.querySelectorAll('a'));
   
@@ -186,7 +212,7 @@ export class VaBreadcrumbs {
   }
 
   /**
-   * This handles the use case of the component dynamically receiving
+   * v1 version: This handles the use case of the component dynamically receiving
    * new breadcrumb items. It will programmatically toggle the
    * aria-current attribute on the last anchor tag and add the 
    * va-breadcrumbs-li class to the list item.
@@ -233,7 +259,7 @@ export class VaBreadcrumbs {
         <Host>
           <nav class={wrapClass} aria-label={label}>
             <ol class="usa-breadcrumb__list" role="list" onClick={e => this.fireAnalyticsEvent(e)}>
-              <slot onSlotchange={this.handleSlotChange.bind(this)}></slot>
+              <slot name="list" onSlotchange={this.handleSlotChange.bind(this)}></slot>
             </ol>
           </nav>
         </Host>
