@@ -21,4 +21,4 @@ jobs:
         with:
           node-version: 14.x
           cache: 'yarn'
-      - run: cd packages/mobile-components && yarn --frozen-lockfile
+      - run: cd packages/mobile-components && yarn --immutable
