@@ -136,7 +136,6 @@ export class VaBreadcrumbs {
   }
 
   componentDidLoad() {
-    if (this.uswds) {
       // Watch for changes to list items.
       const breadcrumbList = this.el.querySelector('.usa-breadcrumb__list');
       const callback = mutationList => {
@@ -144,7 +143,11 @@ export class VaBreadcrumbs {
           if (mutation.type === 'childList') {
             const listItems = this.el.querySelectorAll('li');
             listItems.forEach((item) => {
-              item.classList.add('usa-breadcrumb__list-item');
+              if (this.uswds) {
+                item.classList.add('usa-breadcrumb__list-item');
+              } else {
+                // handle v1?
+              }  
             });
           }
         }
@@ -154,7 +157,7 @@ export class VaBreadcrumbs {
         childList: true,
         subtree: true,
       });
-
+    if (this.uswds) {
       const listItems = Array.from(this.el.querySelectorAll('li'));
       const anchorItems = Array.from(this.el.querySelectorAll('a'));
   
@@ -211,42 +214,6 @@ export class VaBreadcrumbs {
     }
   }
 
-  /**
-   * v1 version: This handles the use case of the component dynamically receiving
-   * new breadcrumb items. It will programmatically toggle the
-   * aria-current attribute on the last anchor tag and add the 
-   * va-breadcrumbs-li class to the list item.
-   */
-  handleSlotChange() {
-    // Get all of the slot nodes and filter out only the list items.
-    const slotNodes = (this.el.querySelector('slot') as HTMLSlotElement)
-      ?.assignedNodes()
-      .filter((node: HTMLSlotElement) => node.nodeName === 'LI');
-
-    if (!slotNodes) return;
-
-    slotNodes.forEach((node: HTMLSlotElement, index: number) => {
-      // We are only handling li nodes during slot change because it is 
-      // expected that the dynamic state usage of this component will 
-      // only be adding new breadcrumbs items in the format of 
-      // <li><a href="...">...</a></li>.
-      if (node.nodeName === 'LI') {
-        node.classList.add('va-breadcrumbs-li');
-        const anchor = node.querySelector('a');
-        const isAriaCurrent = anchor?.getAttribute('aria-current');
-
-        if (isAriaCurrent && index !== slotNodes.length - 1) {
-          anchor.removeAttribute('aria-current');
-        }
-
-        if (index === slotNodes.length - 1) {
-          /* eslint-disable-next-line i18next/no-literal-string */
-          anchor?.setAttribute('aria-current', 'page');
-        }
-      }
-    });
-  }
-
   render() {
     const { label, uswds, wrapping } = this;
     const wrapClass = classnames({
@@ -269,7 +236,7 @@ export class VaBreadcrumbs {
         <Host>
           <nav aria-label={label}>
             <ul role="list" onClick={e => this.fireAnalyticsEvent(e)}>
-              <slot onSlotchange={this.handleSlotChange.bind(this)}></slot>
+              <slot></slot>
             </ul>
           </nav>
         </Host>
