@@ -671,7 +671,7 @@ describe('va-text-input', () => {
     expect(await inputEl.getProperty('autocomplete')).toBe('email');
   });
 
-  it('uswds shows chars allowed on load if maxlength set', async () => {
+  it('uswds shows chars allowed on load if maxlength and charcount set', async () => {
     const page = await newE2EPage();
     await page.setContent(
       '<va-text-input uswds charcount maxlength="10" />'

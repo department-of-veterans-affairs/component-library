@@ -355,7 +355,7 @@ describe('va-textarea', () => {
     // Level-setting expectations
     const textareaEl = await page.find('va-textarea >>> textarea');
     expect(await textareaEl.getProperty('value')).toBe('22');
-    expect(await page.find('va-textarea >>> small')).toBeNull();
+    expect(await page.find('va-textarea >>> span.usa-hint')).toBeNull();
 
     // Test the functionality
     await textareaEl.press('2');
@@ -372,14 +372,14 @@ describe('va-textarea', () => {
 
     // Level-setting expectations
     const textareaEl = await page.find('va-textarea >>> textarea');
-    expect(await page.find('va-textarea >>> small')).toBeNull();
+    expect(await page.find('va-textarea >>> span.usa-hint')).toBeNull();
 
     // Test the functionality
     await textareaEl.type('Hello, nice to meet you');
     expect(await textareaEl.getProperty('value')).toBe(
       'Hello, nice to meet you',
     );
-    expect(await page.find('va-textarea >>> small')).toBeNull();
+    expect(await page.find('va-textarea >>> span.usa-hint')).toBeNull();
   });
 
   it('uswds v3 ignores a maxlength of zero', async () => {
@@ -388,13 +388,59 @@ describe('va-textarea', () => {
 
     // Level-setting expectations
     const textareaEl = await page.find('va-textarea >>> textarea');
-    expect(await page.find('va-textarea >>> small')).toBeNull();
+    expect(await page.find('va-textarea >>> span.usa-hint')).toBeNull();
 
     // Test the functionality
     await textareaEl.type('Hello, nice to meet you');
     expect(await textareaEl.getProperty('value')).toBe(
       'Hello, nice to meet you',
     );
-    expect(await page.find('va-textarea >>> small')).toBeNull();
+    expect(await page.find('va-textarea >>> span.usa-hint')).toBeNull();
+  });
+
+  it('uswds shows chars allowed on load if maxlength and charcount set', async () => {
+    const page = await newE2EPage();
+    await page.setContent(
+      '<va-textarea uswds charcount maxlength="10" />'
+    );
+
+    const span = await page.find('va-textarea >>> span.usa-character-count__status')
+    expect(span.innerText).toEqual('10 characters allowed');
+  });
+
+  it('uswds shows chars left if maxlength set', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent(
+      '<va-textarea uswds charcount maxlength="10"/>'
+    );
+
+    const inputEl = await page.find('va-textarea >>> textarea');
+    await inputEl.type('Hello');
+    const span = await page.find('va-textarea >>> span.usa-character-count__status')
+
+    expect(span.innerText).toEqual('5 characters left');
+
+  });
+
+  it('uswds shows chars over limit as error and sets aria-invalid attribute', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent(
+      '<va-textarea uswds charcount maxlength="10"/>'
+    );
+
+    const inputEl = await page.find('va-textarea >>> textarea');
+    await inputEl.type('This is too long');
+
+    const messageSpan = await page.find('va-textarea >>> span.usa-character-count__status');
+    expect(messageSpan.innerText).toEqual('6 characters over limit');
+
+    const {color} = await messageSpan.getComputedStyle()
+    expect(color).toEqual(
+      'rgb(181, 9, 9)',
+    );
+
+    expect(inputEl.getAttribute('aria-invalid')).toBe("true");
   });
 });
