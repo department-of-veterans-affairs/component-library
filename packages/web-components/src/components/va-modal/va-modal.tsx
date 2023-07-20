@@ -371,7 +371,7 @@ export class VaModal {
           status: this.status,
           title: this.modalTitle,
           primaryButtonText: this.primaryButtonText,
-          secondayButtonText: this.secondaryButtonText,
+          secondaryButtonText: this.secondaryButtonText,
         },
       };
       this.componentLibraryAnalytics.emit(detail);
@@ -545,6 +545,7 @@ export class VaModal {
                   >
                   {primaryButtonClick && primaryButtonText && (
                     <button
+                    id="modal-primary-button"
                     onClick={e => this.handlePrimaryButtonClick(e)}
                     type="button"
                     >
@@ -553,6 +554,7 @@ export class VaModal {
                   )}
                   {secondaryButtonClick && secondaryButtonText && (
                     <button
+                    id="modal-secondary-button"
                     class="button-secondary"
                     onClick={e => this.handleSecondaryButtonClick(e)}
                     type="button"

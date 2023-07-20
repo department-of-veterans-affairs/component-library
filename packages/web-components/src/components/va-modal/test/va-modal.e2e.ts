@@ -208,6 +208,70 @@ describe('va-modal', () => {
     );
   });
 
+  it('fires a single analytics event when va-modal displays', async () => {
+    const page = await newE2EPage();
+    await page.setContent(
+    `<va-modal modal-title="Example Title" status="info" primary-button-text="Primary button" secondary-button-text="Secondary button">
+      <p>Example modal content</p>
+    </va-modal>`,
+    );
+    const analyticsSpy = await page.spyOnEvent('component-library-analytics');
+    const modal = await page.find("va-modal");
+
+    await modal.setProperty("visible", true);
+    await page.waitForChanges()
+
+    expect(analyticsSpy).toHaveReceivedEventTimes(1);
+    expect(analyticsSpy).toHaveReceivedEventDetail({
+      componentName: 'va-modal',
+      action: 'show',
+      details: {
+        status: 'info',
+        title: 'Example Title',
+        primaryButtonText: "Primary button",
+        secondaryButtonText: "Secondary button"
+      },
+    });
+  });
+
+  it('fires a single analytics event for each button clicked', async () => {
+    const page = await newE2EPage();
+    await page.setContent(
+      `<va-modal modal-title="Example Title" visible status="info" primary-button-text="Primary button" secondary-button-text="Secondary button">
+      <p>Example modal content</p>
+    </va-modal>`,
+    );
+    const analyticsSpy = await page.spyOnEvent('component-library-analytics');
+    const primaryButton = await page.find('va-modal >>> #modal-primary-button');
+    const secondaryButton = await page.find('va-modal >>> #modal-secondary-button');
+
+    await primaryButton.click();
+
+    expect(analyticsSpy).toHaveReceivedEventTimes(1);
+    expect(analyticsSpy).toHaveReceivedEventDetail({
+      componentName: 'va-modal',
+      action: 'click',
+      details: {
+        status: 'info',
+        title: 'Example Title',
+        clickLabel: "Primary button",
+      },
+    });
+
+    await secondaryButton.click();
+
+    expect(analyticsSpy).toHaveReceivedEventTimes(2);
+    expect(analyticsSpy).toHaveReceivedEventDetail({
+      componentName: 'va-modal',
+      action: 'click',
+      details: {
+        status: 'info',
+        title: 'Example Title',
+        clickLabel: "Secondary button",
+      },
+    });
+  });
+
   // Begin USWDS v3 test
   it('uswds v3 renders', async () => {
     const page = await newE2EPage();
@@ -415,5 +479,69 @@ describe('va-modal', () => {
     expect(tab2Element.getAttribute('aria-label')).toEqual(
       'Close Example Title modal',
     );
+  });
+
+  it('uswds v3 fires a single analytics event when va-modal displays', async () => {
+    const page = await newE2EPage();
+    await page.setContent(
+    `<va-modal uswds modal-title="Example Title" status="info" primary-button-text="Primary button" secondary-button-text="Secondary button">
+      <p>Example modal content</p>
+    </va-modal>`,
+    );
+    const analyticsSpy = await page.spyOnEvent('component-library-analytics');
+    const modal = await page.find("va-modal");
+
+    await modal.setProperty("visible", true);
+    await page.waitForChanges()
+
+    expect(analyticsSpy).toHaveReceivedEventTimes(1);
+    expect(analyticsSpy).toHaveReceivedEventDetail({
+      componentName: 'va-modal',
+      action: 'show',
+      details: {
+        status: 'info',
+        title: 'Example Title',
+        primaryButtonText: "Primary button",
+        secondaryButtonText: "Secondary button"
+      },
+    });
+  });
+
+  it('uswds v3 fires a single analytics event for each button clicked', async () => {
+    const page = await newE2EPage();
+    await page.setContent(
+      `<va-modal uswds modal-title="Example Title" visible status="info" primary-button-text="Primary button" secondary-button-text="Secondary button">
+      <p>Example modal content</p>
+    </va-modal>`,
+    );
+    const analyticsSpy = await page.spyOnEvent('component-library-analytics');
+    const primaryButton = await page.find('va-modal >>> va-button');
+    const secondaryButton = await page.find('va-modal >>> va-button[secondary]');
+
+    await primaryButton.click();
+
+    expect(analyticsSpy).toHaveReceivedEventTimes(1);
+    expect(analyticsSpy).toHaveReceivedEventDetail({
+      componentName: 'va-modal',
+      action: 'click',
+      details: {
+        status: 'info',
+        title: 'Example Title',
+        clickLabel: "Primary button",
+      },
+    });
+
+    await secondaryButton.click();
+
+    expect(analyticsSpy).toHaveReceivedEventTimes(2);
+    expect(analyticsSpy).toHaveReceivedEventDetail({
+      componentName: 'va-modal',
+      action: 'click',
+      details: {
+        status: 'info',
+        title: 'Example Title',
+        clickLabel: "Secondary button",
+      },
+    });
   });
 });
