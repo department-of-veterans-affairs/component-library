@@ -259,7 +259,7 @@ export class VaBreadcrumbs {
         <Host>
           <nav class={wrapClass} aria-label={label}>
             <ol class="usa-breadcrumb__list" role="list" onClick={e => this.fireAnalyticsEvent(e)}>
-              <slot name="list" onSlotchange={this.handleSlotChange.bind(this)}></slot>
+              <slot name="list"></slot>
             </ol>
           </nav>
         </Host>
