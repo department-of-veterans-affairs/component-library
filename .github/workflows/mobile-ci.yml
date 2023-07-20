@@ -10,7 +10,6 @@ on:
 defaults:
   run:
     shell: bash
-    working-directory: packages/mobile-components
 
 jobs:
   testing:
@@ -22,4 +21,4 @@ jobs:
         with:
           node-version: 14.x
           cache: 'yarn'
-      - run: yarn --version
+      - run: cd packages/mobile-components && yarn --frozen-lockfile
