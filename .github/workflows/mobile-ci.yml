@@ -1,0 +1,31 @@
+#
+# Lint and Unit Test jobs that runs our lint:ci and test npm scripts
+#
+
+name: '[Code Quality] Code Checks'
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+      - develop
+      - 'release/v**'
+
+defaults:
+  run:
+    working-directory: packages/mobile-components
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      # Sets up node with v16 and restores global cache so we don't have to re-download dependencies
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+          # cache: 'yarn'
+          # cache-dependency-path: 'VAMobile/yarn.lock'
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile --non-interactive
