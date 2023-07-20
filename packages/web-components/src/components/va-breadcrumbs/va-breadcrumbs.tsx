@@ -136,27 +136,6 @@ export class VaBreadcrumbs {
   }
 
   componentDidLoad() {
-      // Watch for changes to list items.
-      const breadcrumbList = this.el.querySelector('.usa-breadcrumb__list');
-      const callback = mutationList => {
-        for (const mutation of mutationList) {
-          if (mutation.type === 'childList') {
-            const listItems = this.el.querySelectorAll('li');
-            listItems.forEach((item) => {
-              if (this.uswds) {
-                item.classList.add('usa-breadcrumb__list-item');
-              } else {
-                // handle v1?
-              }  
-            });
-          }
-        }
-      };
-      this.observer = new MutationObserver(callback);
-      this.observer.observe(breadcrumbList, {
-        childList: true,
-        subtree: true,
-      });
     if (this.uswds) {
       const listItems = Array.from(this.el.querySelectorAll('li'));
       const anchorItems = Array.from(this.el.querySelectorAll('a'));
@@ -212,6 +191,28 @@ export class VaBreadcrumbs {
         });
       }
     }
+
+    // Watch for changes to list items.
+    const breadcrumbList = this.el.querySelector('.usa-breadcrumb__list');
+    const callback = mutationList => {
+      for (const mutation of mutationList) {
+        if (mutation.type === 'childList') {
+          const listItems = this.el.querySelectorAll('li');
+          listItems.forEach((item) => {
+            if (this.uswds) {
+              item.classList.add('usa-breadcrumb__list-item');
+            } else {
+              // handle v1?
+            }  
+          });
+        }
+      }
+    };
+    this.observer = new MutationObserver(callback);
+    this.observer.observe(breadcrumbList, {
+      childList: true,
+      subtree: true,
+    });
   }
 
   render() {
