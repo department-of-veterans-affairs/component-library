@@ -41,7 +41,7 @@ const vaCheckbox = args => {
     uswds,
     hint,
     tile,
-    messageAriaDescribedBy,
+    'message-aria-describedby': messageAriaDescribedBy,
     ...rest
   } = args;
   return (
