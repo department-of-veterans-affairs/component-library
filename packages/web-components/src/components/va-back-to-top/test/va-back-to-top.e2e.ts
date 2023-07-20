@@ -45,7 +45,7 @@ describe('va-back-to-top', () => {
     const wrapper = await page.find('va-back-to-top >>> div');
     const notQuitePastRevealPoint = 199;
 
-    // Button shouldn't be revealed initially
+    // Link shouldn't be revealed initially
     expect(wrapper).not.toHaveClass('reveal');
 
     // Scroll until the `<span class="reveal-point">` is just at
@@ -53,14 +53,14 @@ describe('va-back-to-top', () => {
     await page.mouse.wheel({ deltaY: notQuitePastRevealPoint });
     await page.waitForChanges();
 
-    // Button _still_ shouldn't be revealed after a bit of scrolling
+    // Link _still_ shouldn't be revealed after a bit of scrolling
     expect(wrapper).not.toHaveClass('reveal');
 
     // Scroll a few pixels more to get past the `--reveal-breakpoint`
     await page.mouse.wheel({ deltaY: 10 });
     await page.waitForChanges();
 
-    // Button should be revealed with `.reveal-point` above the viewport
+    // Link should be revealed with `.reveal-point` above the viewport
     expect(wrapper).toHaveClass('reveal');
   });
 
@@ -77,7 +77,7 @@ describe('va-back-to-top', () => {
 
     expect(await wrapper.isIntersectingViewport()).toEqual(true);
 
-    // We've scrolled a lot - button should be docked
+    // We've scrolled a lot - link should be docked
     expect(wrapper).toHaveClass('docked');
   });
 
@@ -104,17 +104,17 @@ describe('va-back-to-top', () => {
 
   it('goes to top on click', async () => {
     const page = await pageSetup();
-    const button = await page.find('va-back-to-top >>> button');
+    const anchor = await page.find('va-back-to-top >>> a');
     const topHeading = await page.find('h1');
     const pastRevealPoint = 300;
 
-    // Scroll far enough to make the button visible
+    // Scroll far enough to make the anchor visible
     await page.mouse.wheel({ deltaY: pastRevealPoint });
     await page.waitForChanges();
 
     expect(await topHeading.isIntersectingViewport()).toEqual(false);
 
-    button.click();
+    anchor.click();
     await page.waitForChanges();
 
     expect(await topHeading.isIntersectingViewport()).toEqual(true);

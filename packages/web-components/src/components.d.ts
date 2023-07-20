@@ -467,25 +467,25 @@ export namespace Components {
          */
         "disableAnalytics"?: boolean;
         /**
-          * A Date object used when downtime expires.
+          * The Date/Time of when the maintenance is scheduled to end.
          */
-        "expiresAt": string;
+        "maintenanceEndDateTime": string;
         /**
-          * The title of the banner for downtime.
+          * The Date/Time of when the maintenance is scheduled to begin.
+         */
+        "maintenanceStartDateTime": string;
+        /**
+          * The title of the banner shown during active maintenance.
          */
         "maintenanceTitle": string;
         /**
-          * A Date object used when downtime starts.
+          * The Date/Time of when to be begin warning users of upcoming site maintenance.
          */
-        "startsAt": string;
+        "upcomingWarnStartDateTime": string;
         /**
-          * A Date object used when pre-downtime starts.
+          * The title of the banner shown for upcoming site maintenance.
          */
-        "warnStartsAt": string;
-        /**
-          * The title of the banner for pre-downtime.
-         */
-        "warnTitle": string;
+        "upcomingWarnTitle": string;
     }
     interface VaMemorableDate {
         /**
@@ -590,6 +590,10 @@ export namespace Components {
           * If `true`, a close button will be displayed.
          */
         "closeable"?: boolean;
+        /**
+          * Date and time for notification. This will be incorporated into a unique aria-describedby label
+         */
+        "dateTime"?: string;
         /**
           * If `true`, the component-library-analytics event is disabled.
          */
@@ -2110,17 +2114,21 @@ declare namespace LocalJSX {
         /**
           * A unique ID that will be used for conditionally rendering the banner based on if the user has dismissed it already.
          */
-        "bannerId"?: string;
+        "bannerId": string;
         /**
           * Whether or not an analytics event will be fired.
          */
         "disableAnalytics"?: boolean;
         /**
-          * A Date object used when downtime expires.
+          * The Date/Time of when the maintenance is scheduled to end.
          */
-        "expiresAt"?: string;
+        "maintenanceEndDateTime": string;
         /**
-          * The title of the banner for downtime.
+          * The Date/Time of when the maintenance is scheduled to begin.
+         */
+        "maintenanceStartDateTime": string;
+        /**
+          * The title of the banner shown during active maintenance.
          */
         "maintenanceTitle"?: string;
         /**
@@ -2132,17 +2140,13 @@ declare namespace LocalJSX {
          */
         "onComponent-library-analytics"?: (event: VaMaintenanceBannerCustomEvent<any>) => void;
         /**
-          * A Date object used when downtime starts.
+          * The Date/Time of when to be begin warning users of upcoming site maintenance.
          */
-        "startsAt"?: string;
+        "upcomingWarnStartDateTime": string;
         /**
-          * A Date object used when pre-downtime starts.
+          * The title of the banner shown for upcoming site maintenance.
          */
-        "warnStartsAt"?: string;
-        /**
-          * The title of the banner for pre-downtime.
-         */
-        "warnTitle"?: string;
+        "upcomingWarnTitle"?: string;
     }
     interface VaMemorableDate {
         /**
@@ -2275,6 +2279,10 @@ declare namespace LocalJSX {
           * If `true`, a close button will be displayed.
          */
         "closeable"?: boolean;
+        /**
+          * Date and time for notification. This will be incorporated into a unique aria-describedby label
+         */
+        "dateTime"?: string;
         /**
           * If `true`, the component-library-analytics event is disabled.
          */
