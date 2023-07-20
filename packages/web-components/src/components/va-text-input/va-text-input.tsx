@@ -12,7 +12,7 @@ import {
 } from '@stencil/core';
 import classnames from 'classnames';
 import i18next from 'i18next';
-import { consoleDevError, plurality } from '../../utils/utils';
+import { consoleDevError, getCharacterMessage, plurality } from '../../utils/utils';
 
 if (Build.isTesting) {
   // Make i18next.t() return the key instead of the value
@@ -150,7 +150,6 @@ export class VaTextInput {
    */
   @Prop({reflect: true}) uswds?: boolean = false;
   
-
   /**
    * Whether the component should show a character count message. 
    * Has no effect without maxlength being set.
@@ -197,29 +196,6 @@ export class VaTextInput {
     const target = e.target as HTMLInputElement;
     this.value = target.value;
   };
-
-  private
-
-/**
- * generates message to update character count if user includes maxlength prop for uswds
- * update this method once translations are done 
- */
-  private getCharacterMessage() {
-    if (this.value === undefined) {
-      return `${this.maxlength} character${plurality(this.maxlength)} allowed`;
-    }
-
-    let message: string;
-    if (this.value.length <= this.maxlength) {
-      const chars = this.maxlength - this.value.length;
-      message = `${chars} character${plurality(chars)} left`;
-    } else {
-      const chars = this.value.length - this.maxlength;
-      message = `${chars} character${plurality(chars)} over limit`;
-    }
-
-    return message;
-  }
 
   private handleBlur = () => {
     if (this.enableAnalytics) {
@@ -268,7 +244,7 @@ export class VaTextInput {
     } = this;
     const type = this.getInputType();
     const maxlength = this.getMaxlength();
-    const charCountTooHigh = this.charcount && this.value && this.maxlength && (this.value.length > this.maxlength);
+    const charCountTooHigh = this.charcount && (this.value?.length > maxlength);
     const ariaDescribedbyIds =
       `${messageAriaDescribedby ? 'input-message' : ''} ${
         error ? 'input-error-message' : ''
@@ -329,7 +305,7 @@ export class VaTextInput {
             required={required || null}
             part="input"
           />
-          { !charcount && maxlength && value?.length >= maxlength && (
+          {!charcount && maxlength && value?.length >= maxlength && (
               <span class={messageClass} aria-live="polite">
               {i18next.t('max-chars', { length: maxlength })}
               </span>
@@ -337,10 +313,10 @@ export class VaTextInput {
           {charcount && maxlength && (
             <Fragment>
               <span class={messageClass} aria-hidden="true">
-                {this.getCharacterMessage()}
+                {getCharacterMessage(this.value, maxlength)}
               </span>
               <span id="charcount-message" class="usa-sr-only">You can enter up to {maxlength} character{plurality(maxlength)}</span>
-              <span class="usa-sr-only" aria-live="polite">{this.getCharacterMessage()}</span>
+              <span class="usa-sr-only" aria-live="polite">{getCharacterMessage(this.value, maxlength)}</span>
             </Fragment>
           )}
         </Host>
