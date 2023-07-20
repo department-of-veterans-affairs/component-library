@@ -2,7 +2,7 @@
 # Lint and Unit Test jobs that runs our lint:ci and test npm scripts
 #
 
-name: 'Mobile Documentation'
+name: '[Mobile] Documentation'
 
 on:
   pull_request:

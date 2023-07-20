@@ -2,7 +2,7 @@
 # Lint and Unit Test jobs that runs our lint:ci and test npm scripts
 #
 
-name: '[Code Quality] Mobile CI Testing'
+name: '[Mobile] CI Testing'
 
 on:
   pull_request:
