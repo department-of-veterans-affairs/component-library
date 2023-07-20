@@ -2,6 +2,11 @@ name: Pull Request Labels
 on:
   pull_request:
     types: [opened, labeled, unlabeled, synchronize]
+    paths-ignore:
+      - 'mobile-components/**'
+      - 'mobile-documentation/**'
+      - 'mobile-icons/**'
+      - 'mobile-linting/**'
 jobs:
   label:
     runs-on: ubuntu-latest
