@@ -1,4 +1,3 @@
-import {expect, test} from '@jest/globals'
 import { sum } from './segmentedControl';
 
 test('adds 1 + 2 to equal 3', () => {
