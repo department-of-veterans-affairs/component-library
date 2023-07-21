@@ -1,3 +1,3 @@
-export function segmentedControl() {
-  console.log('segmentedControl function');
-}
+export const sum = (a: number, b: number) => {
+  return a + b;
+};

@@ -1,1 +1,1 @@
-import { segmentedControl } from "./segmentedControl/segmentedControl";
+import { sum } from './segmentedControl/segmentedControl';

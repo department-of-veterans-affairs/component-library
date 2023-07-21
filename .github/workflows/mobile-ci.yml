@@ -13,13 +13,19 @@ defaults:
     working-directory: packages/mobile-components
 
 jobs:
-  testing:
+  test-component-library:
+    name: Component Library Unit Tests
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - name: Use Node.js 14.x
-        uses: actions/setup-node@v3
+      - uses: actions/setup-node@v3
         with:
-          node-version: 14.x
+          node-version: '18'
           cache: 'yarn'
-      - run: pwd && yarn --immutable
+          cache-dependency-path: 'packages/components/yarn.lock'
+      - name: Install dependencies
+        working-directory: packages/components
+        run: yarn install --immutable
+      - name: yarn test
+        working-directory: packages/components
+        run: yarn test
