@@ -5,18 +5,18 @@ describe('va-notification', () => {
   it('renders', async () => {
     const page = await newE2EPage();
 
-    await page.setContent('<va-notification headline="Notification heading"></va-notification>');
+    await page.setContent('<va-notification headline="Notification heading" date-time="Tuesday, July 18"></va-notification>');
     const element = await page.find('va-notification');
 
     expect(element).toEqualHtml(`
-      <va-notification class="hydrated" has-border="" headline="Notification heading">
+      <va-notification class="hydrated" has-border="" headline="Notification heading" date-time="Tuesday, July 18">
         <mock:shadow-root>
           <va-card show-shadow="true" class="hydrated show-shadow va-card">
             <div class="va-notification none has-border">
               <i aria-hidden="true" role="img" class="none"></i>
               <div class="body" role="presentation">
-                <h3 part="headline">Notification heading</h3>
-                <slot name="date"></slot>
+                <h3 part="headline" aria-describedby="Notification heading Tuesday, July 18">Notification heading</h3>
+                <time datetime="Tuesday, July 18">Tuesday, July 18</time>
                 <slot></slot>
               </div>
             </div>

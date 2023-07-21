@@ -87,11 +87,20 @@ describe('va-checkbox', () => {
 
   it('adds new aria-describedby for error message', async () => {
     const page = await newE2EPage();
-    await page.setContent('<va-checkbox error="This is a mistake" />');
+    await page.setContent('<va-checkbox error="This is a mistake" message-aria-describedby="This is a message"/>');
 
     // Render the error message text
     const inputEl = await page.find('va-checkbox >>> input');
     expect(inputEl.getAttribute('aria-describedby')).toContain('error-message');
+  });
+
+  it('adds aria-describedby input-message id', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-checkbox message-aria-describedby="This is a message" />');
+
+    // Render the error message text
+    const inputEl = await page.find('va-checkbox >>> input');
+    expect(inputEl.getAttribute('aria-describedby')).toContain('input-message');
   });
 
   it('passes an aXe check', async () => {
