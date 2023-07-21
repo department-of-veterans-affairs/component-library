@@ -294,6 +294,11 @@ export class VaTextInput {
             required={required || null}
             part="input"
           />
+          {messageAriaDescribedby && (
+            <span id="input-message" class="sr-only">
+              {messageAriaDescribedby}
+            </span>
+          )}
           {maxlength && value?.length >= maxlength && (
             <small part="validation">
               {i18next.t('max-chars', { length: maxlength })}
