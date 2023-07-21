@@ -23,6 +23,9 @@ jobs:
           cache: 'yarn'
       - name: Install dependencies
         run: yarn install --immutable
+      - name: yarn install local
+        working-directory: packages/mobile-components
+        run: yarn install --immutable
       - name: yarn test
         working-directory: packages/mobile-components
         run: yarn test
