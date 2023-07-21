@@ -13,7 +13,7 @@ defaults:
     working-directory: packages/mobile-components
 
 jobs:
-  test-component-library:
+  unit-tests:
     name: Component Library Unit Tests
     runs-on: ubuntu-latest
     steps:
@@ -22,7 +22,6 @@ jobs:
         with:
           node-version: '18'
           cache: 'yarn'
-          cache-dependency-path: 'packages/mobile-components/yarn.lock'
       - name: Install dependencies
         working-directory: packages/mobile-components
         run: yarn install --immutable
