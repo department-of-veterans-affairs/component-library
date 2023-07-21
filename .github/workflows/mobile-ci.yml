@@ -22,10 +22,10 @@ jobs:
         with:
           node-version: '18'
           cache: 'yarn'
-          cache-dependency-path: 'packages/components/yarn.lock'
+          cache-dependency-path: 'packages/mobile-components/yarn.lock'
       - name: Install dependencies
-        working-directory: packages/components
+        working-directory: packages/mobile-components
         run: yarn install --immutable
       - name: yarn test
-        working-directory: packages/components
+        working-directory: packages/mobile-components
         run: yarn test
