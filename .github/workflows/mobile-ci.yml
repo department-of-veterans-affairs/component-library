@@ -10,7 +10,6 @@ on:
 defaults:
   run:
     shell: bash
-    working-directory: packages/mobile-components
 
 jobs:
   unit-tests:
@@ -23,7 +22,6 @@ jobs:
           node-version: '16'
           cache: 'yarn'
       - name: Install dependencies
-        working-directory: packages/mobile-components
         run: yarn install --immutable
       - name: yarn test
         working-directory: packages/mobile-components
