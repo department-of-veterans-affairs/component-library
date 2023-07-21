@@ -274,6 +274,10 @@ export namespace Components {
          */
         "label": string;
         /**
+          * An optional message that will be read by screen readers when the checkbox is focused.
+         */
+        "messageAriaDescribedby"?: string;
+        /**
           * Set the input to required and render the (Required) text.
          */
         "required"?: boolean;
@@ -586,6 +590,10 @@ export namespace Components {
           * If `true`, a close button will be displayed.
          */
         "closeable"?: boolean;
+        /**
+          * Date and time for notification. This will also be incorporated into a unique aria-describedby label.
+         */
+        "dateTime"?: string;
         /**
           * If `true`, the component-library-analytics event is disabled.
          */
@@ -1887,6 +1895,10 @@ declare namespace LocalJSX {
          */
         "label": string;
         /**
+          * An optional message that will be read by screen readers when the checkbox is focused.
+         */
+        "messageAriaDescribedby"?: string;
+        /**
           * The event used to track usage of the component. This is emitted when the input value changes and enableAnalytics is true.
          */
         "onComponent-library-analytics"?: (event: VaCheckboxCustomEvent<any>) => void;
@@ -2275,6 +2287,10 @@ declare namespace LocalJSX {
           * If `true`, a close button will be displayed.
          */
         "closeable"?: boolean;
+        /**
+          * Date and time for notification. This will also be incorporated into a unique aria-describedby label.
+         */
+        "dateTime"?: string;
         /**
           * If `true`, the component-library-analytics event is disabled.
          */
