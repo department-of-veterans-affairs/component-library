@@ -591,7 +591,7 @@ export namespace Components {
          */
         "closeable"?: boolean;
         /**
-          * Date and time for notification. This will be incorporated into a unique aria-describedby label
+          * Date and time for notification. This will also be incorporated into a unique aria-describedby label.
          */
         "dateTime"?: string;
         /**
@@ -2280,7 +2280,7 @@ declare namespace LocalJSX {
          */
         "closeable"?: boolean;
         /**
-          * Date and time for notification. This will be incorporated into a unique aria-describedby label
+          * Date and time for notification. This will also be incorporated into a unique aria-describedby label.
          */
         "dateTime"?: string;
         /**
