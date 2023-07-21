@@ -764,6 +764,10 @@ export namespace Components {
         "uswds"?: boolean;
     }
     interface VaProcessList {
+        /**
+          * Whether or not the component will use USWDS v3 styling.
+         */
+        "uswds"?: boolean;
     }
     interface VaProgressBar {
         /**
@@ -2489,6 +2493,10 @@ declare namespace LocalJSX {
         "uswds"?: boolean;
     }
     interface VaProcessList {
+        /**
+          * Whether or not the component will use USWDS v3 styling.
+         */
+        "uswds"?: boolean;
     }
     interface VaProgressBar {
         /**
