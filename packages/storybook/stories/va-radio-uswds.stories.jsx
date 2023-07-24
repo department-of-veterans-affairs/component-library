@@ -315,6 +315,25 @@ LabelHeader.args = {
   'label-header-level': '3',
 };
 
+export const OnBackground = props => (
+  <div style={{background: '#f1f1f1', padding: '30px 5px'}}>
+    <va-radio
+        label="This is a label"
+        uswds
+      >
+        <va-radio-option id="no1" label="No" name="group1" value="1" uswds />
+        <va-radio-option
+          id="yes1"
+          label="Yes - Any Veteran"
+          name="group1"
+          value="2"
+          uswds
+        />
+      </va-radio>
+  </div>
+);
+OnBackground.args = { ...defaultArgs };
+
 export const ReactWithCustomEvent = ReactBindingExample.bind(null);
 ReactWithCustomEvent.args = {
   ...defaultArgs,
