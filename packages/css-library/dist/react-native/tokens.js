@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Mon, 24 Jul 2023 20:51:46 GMT
+ * Generated on Mon, 24 Jul 2023 22:16:43 GMT
  */
 
 export const colorBase = "#212121";
@@ -23,6 +23,16 @@ export const colorSecondaryDark = "#cd2026";
 export const colorSecondaryDarkest = "#981b1e";
 export const colorSecondaryLight = "#e59393";
 export const colorSecondaryLightest = "#f9dede";
+export const colorGreen = "#2e8540";
+export const colorGreenDark = "#1e5f2f";
+export const colorGreenDarkest = "#0f3f1f";
+export const colorGreenLight = "#7dbf7c";
+export const colorGreenLighter = "#94bfa2";
+export const colorGreenLightest = "#e7f4e4";
+export const colorGold = "#fdb81e";
+export const colorGoldLight = "#f9c642";
+export const colorGoldLighter = "#fad980";
+export const colorGoldLightest = "#fff1d2";
 export const colorGray = "#5b616b";
 export const colorGrayDark = "#323a45";
 export const colorGrayMedium = "#757575";
