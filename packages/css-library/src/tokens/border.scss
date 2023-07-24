@@ -1,4 +1,4 @@
-@use './_variables' as *;
+@use "../../dist/scss/tokens" as *;
 
 $tokens-border: (
   '0': '0',
