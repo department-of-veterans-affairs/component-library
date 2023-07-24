@@ -59,7 +59,6 @@ export class VaBreadcrumbs {
   }
 
   private fireAnalyticsEvent(event: MouseEvent): void {
-    event.preventDefault();
     if (!this.disableAnalytics) {
       const target = event.target as HTMLAnchorElement;
 
@@ -112,6 +111,14 @@ export class VaBreadcrumbs {
     anchor.appendChild(spanElement);
   }
 
+  private observer: MutationObserver;
+
+  disconnectedCallback() {
+    if (this.observer) {
+      this.observer.disconnect();
+    }
+  }
+
   /**
    * This method takes an array of anchor elements and for each one, it creates a new 
    * list item, clones the anchor, and appends the cloned anchor to the list item. The 
@@ -131,7 +138,7 @@ export class VaBreadcrumbs {
     if (this.uswds) {
       const listItems = Array.from(this.el.querySelectorAll('li'));
       const anchorItems = Array.from(this.el.querySelectorAll('a'));
-  
+
       // Check if we have list items, if not wrap anchorItems into list items
       if(listItems.length === 0 && anchorItems.length > 0) {
         this.wrapAnchorsInList(anchorItems);
@@ -183,41 +190,96 @@ export class VaBreadcrumbs {
         });
       }
     }
-  }
 
-  /**
-   * This handles the use case of the component dynamically receiving
-   * new breadcrumb items. It will programmatically toggle the
-   * aria-current attribute on the last anchor tag and add the 
-   * va-breadcrumbs-li class to the list item.
-   */
-  handleSlotChange() {
-    // Get all of the slot nodes and filter out only the list items.
-    const slotNodes = (this.el.querySelector('slot') as HTMLSlotElement)
-      ?.assignedNodes()
-      .filter((node: HTMLSlotElement) => node.nodeName === 'LI');
-
-    if (!slotNodes) return;
-
-    slotNodes.forEach((node: HTMLSlotElement, index: number) => {
-      // We are only handling li nodes during slot change because it is 
-      // expected that the dynamic state usage of this component will 
-      // only be adding new breadcrumbs items in the format of 
-      // <li><a href="...">...</a></li>.
-      if (node.nodeName === 'LI') {
-        node.classList.add('va-breadcrumbs-li');
-        const anchor = node.querySelector('a');
-        const isAriaCurrent = anchor?.getAttribute('aria-current');
-
-        if (isAriaCurrent && index !== slotNodes.length - 1) {
-          anchor.removeAttribute('aria-current');
-        }
-
-        if (index === slotNodes.length - 1) {
-          /* eslint-disable-next-line i18next/no-literal-string */
-          anchor?.setAttribute('aria-current', 'page');
+    // Watch for changes to list items.
+    const breadcrumbList = this.uswds ? this.el.querySelector('.usa-breadcrumb__list') : this.el.querySelector('ul');
+    let callback;
+    if (this.uswds) {
+      callback = mutationList => {
+        for (const mutation of mutationList) {
+          if (mutation.type === 'childList') {
+            const listItems = Array.from(this.el.querySelectorAll('li'));
+            listItems.forEach((item, index) => {
+              // Adding common class
+              item.classList.add('usa-breadcrumb__list-item');
+      
+              // If the item is not the last item, ensure it doesn't have usa-current class or aria-current attribute
+              if(index !== listItems.length - 1) {
+                item.classList.remove('usa-current');
+                if(item.hasAttribute('aria-current')) {
+                  item.removeAttribute('aria-current');
+                }
+      
+                // Add anchor to second last element if it doesn't exist
+                const anchorTag = item.querySelector('a');
+                if (!anchorTag) {
+                  const anchor = document.createElement('a');
+                  // eslint-disable-next-line i18next/no-literal-string
+                  anchor.href = `/#${index+1}`;
+                  anchor.classList.add('usa-breadcrumb__link');
+                  anchor.innerHTML = item.innerHTML;
+                  item.innerHTML = '';
+                  item.appendChild(anchor);
+                }
+              }
+      
+              // If the item is the last item, ensure it has usa-current class and aria-current attribute
+              else if(index === listItems.length - 1) {
+                item.classList.add('usa-current');
+                // eslint-disable-next-line i18next/no-literal-string
+                item.setAttribute('aria-current', 'page');
+      
+                // Replace anchor tag with span in the last element
+                const anchorTag = item.querySelector('a');
+                if (anchorTag) {
+                  const span = document.createElement('span');
+                  span.innerHTML = anchorTag.innerHTML;
+                  item.replaceChild(span, anchorTag);
+                }
+              }
+            });
+          }
         }
       }
+  } else {
+    callback = mutationList => {
+      for (const mutation of mutationList) {
+        if (mutation.type === 'childList') {
+          const listItems = Array.from(this.el.querySelectorAll('li'));
+          const len = listItems.length;
+
+          listItems.forEach((item, index) => {
+            // 
+            if (index === listItems.length - 1) {
+              // Adding common class
+              item.classList.add('va-breadcrumbs-li');
+            }
+          });
+
+          // Remove aria-current from last second element
+          if (len > 1) {
+            const lastSecondLink = listItems[len - 2].querySelector('a');
+            if (lastSecondLink) {
+              lastSecondLink.removeAttribute('aria-current');
+            }
+          }
+          // Add aria-current to the last element
+          if (len > 0) {
+            const lastLink = listItems[len - 1].querySelector('a');
+            if (lastLink) {
+              // eslint-disable-next-line i18next/no-literal-string
+              lastLink.setAttribute('aria-current', 'page');
+            }
+          }
+        }
+      }
+    };
+    }
+      
+    this.observer = new MutationObserver(callback);
+    this.observer.observe(breadcrumbList, {
+      childList: true,
+      subtree: true,
     });
   }
 
@@ -233,7 +295,7 @@ export class VaBreadcrumbs {
         <Host>
           <nav class={wrapClass} aria-label={label}>
             <ol class="usa-breadcrumb__list" role="list" onClick={e => this.fireAnalyticsEvent(e)}>
-              <slot onSlotchange={this.handleSlotChange.bind(this)}></slot>
+              <slot name="list"></slot>
             </ol>
           </nav>
         </Host>
@@ -243,7 +305,7 @@ export class VaBreadcrumbs {
         <Host>
           <nav aria-label={label}>
             <ul role="list" onClick={e => this.fireAnalyticsEvent(e)}>
-              <slot onSlotchange={this.handleSlotChange.bind(this)}></slot>
+              <slot name="list"></slot>
             </ul>
           </nav>
         </Host>

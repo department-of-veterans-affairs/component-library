@@ -22,9 +22,11 @@ describe('va-breadcrumbs', () => {
     const page = await newE2EPage();
     await page.setContent(`
       <va-breadcrumbs>
-        <a href="#home">Home</a>
-        <a href="#one">Level One</a>
-        <a href="#two">Level Two</a>
+        <span slot="list">
+          <a href="#home">Home</a>
+          <a href="#one">Level One</a>
+          <a href="#two">Level Two</a>
+        </span>
       </va-breadcrumbs>
     `);
 
@@ -34,15 +36,17 @@ describe('va-breadcrumbs', () => {
         <!---->
           <nav aria-label="Breadcrumb">
             <ul role="list">
-              <li class="va-breadcrumbs-li">
-                <a href="#home">Home</a>
-              </li>
-              <li class="va-breadcrumbs-li">
-                <a href="#one">Level One</a>
-              </li>
-              <li class="va-breadcrumbs-li">
-                <a aria-current="page" href="#two">Level Two</a>
-              </li>
+              <span slot="list">
+                <li class="va-breadcrumbs-li">
+                  <a href="#home">Home</a>
+                </li>
+                <li class="va-breadcrumbs-li">
+                  <a href="#one">Level One</a>
+                </li>
+                <li class="va-breadcrumbs-li">
+                  <a aria-current="page" href="#two">Level Two</a>
+                </li>
+              </span>
             </ul>
           </nav>
       </va-breadcrumbs>
@@ -53,9 +57,11 @@ describe('va-breadcrumbs', () => {
     const page = await newE2EPage();
     await page.setContent(`
       <va-breadcrumbs>
-        <li><a href="#home">Home</a></li>
-        <li><a href="#one">Level One</a></li>
-        <li><a href="#two">Level Two</a></li>
+        <span slot="list">
+          <li><a href="#home">Home</a></li>
+          <li><a href="#one">Level One</a></li>
+          <li><a href="#two">Level Two</a></li>
+        </span>
       </va-breadcrumbs>
     `);
 
@@ -65,15 +71,17 @@ describe('va-breadcrumbs', () => {
         <!---->
         <nav aria-label="Breadcrumb">
           <ul role="list">
-            <li class="va-breadcrumbs-li">
-              <a href="#home">Home</a>
-            </li>
-            <li class="va-breadcrumbs-li">
-              <a href="#one">Level One</a>
-            </li>
-            <li class="va-breadcrumbs-li">
-              <a aria-current="page" href="#two">Level Two</a>
-            </li>
+            <span slot="list">
+              <li class="va-breadcrumbs-li">
+                <a href="#home">Home</a>
+              </li>
+              <li class="va-breadcrumbs-li">
+                <a href="#one">Level One</a>
+              </li>
+              <li class="va-breadcrumbs-li">
+                <a aria-current="page" href="#two">Level Two</a>
+              </li>
+            </span>
           </ul>
         </nav>
       </va-breadcrumbs>
@@ -84,9 +92,11 @@ describe('va-breadcrumbs', () => {
     const page = await newE2EPage();
     await page.setContent(`
       <va-breadcrumbs>
-        <a href="#home">Home</a>
-        <a href="#one">Level One</a>
-        <a href="#two">Level Two</a>
+        <span slot="list">
+          <a href="#home">Home</a>
+          <a href="#one">Level One</a>
+          <a href="#two">Level Two</a>
+        </span>
       </va-breadcrumbs>
     `);
 
@@ -172,9 +182,11 @@ describe('va-breadcrumbs', () => {
     const page = await newE2EPage();
     await page.setContent(`
       <va-breadcrumbs uswds>
-        <a href="#home">Home</a>
-        <a href="#one">Level One</a>
-        <a href="#two">Level Two</a>
+        <span slot="list">
+          <a href="#home">Home</a>
+          <a href="#one">Level One</a>
+          <a href="#two">Level Two</a>
+        </span>
       </va-breadcrumbs>
     `);
 
@@ -184,25 +196,27 @@ describe('va-breadcrumbs', () => {
         <!---->
         <nav aria-label="Breadcrumb" class="usa-breadcrumb">
           <ol role="list" class="usa-breadcrumb__list">
-            <li class="usa-breadcrumb__list-item">
-              <a href="#home" class="usa-breadcrumb__link">
+            <span slot="list">
+              <li class="usa-breadcrumb__list-item">
+                <a href="#home" class="usa-breadcrumb__link">
+                  <span>
+                    Home
+                  </span>
+                </a>
+              </li>
+              <li class="usa-breadcrumb__list-item">
+                <a href="#one" class="usa-breadcrumb__link">
+                  <span>
+                    Level One
+                  </span>
+                </a>
+              </li>
+              <li class="usa-breadcrumb__list-item usa-current" aria-current="page">
                 <span>
-                  Home
+                  Level Two
                 </span>
-              </a>
-            </li>
-            <li class="usa-breadcrumb__list-item">
-              <a href="#one" class="usa-breadcrumb__link">
-                <span>
-                  Level One
-                </span>
-              </a>
-            </li>
-            <li class="usa-breadcrumb__list-item usa-current" aria-current="page">
-              <span>
-                Level Two
-              </span>
-            </li>
+              </li>
+            </span>
           </ol>
         </nav>
       </va-breadcrumbs>
@@ -213,9 +227,11 @@ describe('va-breadcrumbs', () => {
     const page = await newE2EPage();
     await page.setContent(`
       <va-breadcrumbs uswds>
-        <li><a href="#home">Home</a></li>
-        <li><a href="#one">Level One</a></li>
-        <li><a href="#two">Level Two</a></li>
+        <span slot="list">
+          <li><a href="#home">Home</a></li>
+          <li><a href="#one">Level One</a></li>
+          <li><a href="#two">Level Two</a></li>
+        </span>
       </va-breadcrumbs>
     `);
 
@@ -225,19 +241,21 @@ describe('va-breadcrumbs', () => {
       <!---->
         <nav aria-label="Breadcrumb" class="usa-breadcrumb">
           <ol role="list" class="usa-breadcrumb__list">
-            <li class="usa-breadcrumb__list-item">
-              <a href="#home" class="usa-breadcrumb__link">
-                <span>Home</span>
-              </a>
-            </li>
-            <li class="usa-breadcrumb__list-item">
-              <a href="#one" class="usa-breadcrumb__link">
-                <span>Level One</span>
-              </a>
-            </li>
-            <li class="usa-breadcrumb__list-item usa-current" aria-current="page">
-              <span>Level Two</span>
-            </li>
+            <span slot="list">
+              <li class="usa-breadcrumb__list-item">
+                <a href="#home" class="usa-breadcrumb__link">
+                  <span>Home</span>
+                </a>
+              </li>
+              <li class="usa-breadcrumb__list-item">
+                <a href="#one" class="usa-breadcrumb__link">
+                  <span>Level One</span>
+                </a>
+              </li>
+              <li class="usa-breadcrumb__list-item usa-current" aria-current="page">
+                <span>Level Two</span>
+              </li>
+            </span>
           </ol>
         </nav>
     </va-breadcrumbs>
@@ -248,9 +266,11 @@ describe('va-breadcrumbs', () => {
     const page = await newE2EPage();
     await page.setContent(`
       <va-breadcrumbs uswds>
-        <a href="#home">Home</a>
-        <a href="#one">Level One</a>
-        <a href="#two">Level Two</a>
+        <span slot="list">
+          <a href="#home">Home</a>
+          <a href="#one">Level One</a>
+          <a href="#two">Level Two</a>
+        </span>
       </va-breadcrumbs>
     `);
 
