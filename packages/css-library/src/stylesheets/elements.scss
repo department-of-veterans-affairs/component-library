@@ -1,7 +1,7 @@
 /*! This is intentionally left empty for now */
+@use "uswds-core" as *;
 
 // Eventually this may have things like:
-//
-// p {
-//    @include @usa-paragraph
-// }
+p {
+  @include typeset-p;
+}
