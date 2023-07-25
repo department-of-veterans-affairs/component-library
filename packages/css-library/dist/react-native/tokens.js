@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Tue, 25 Jul 2023 16:04:23 GMT
+ * Generated on Tue, 25 Jul 2023 16:11:12 GMT
  */
 
 export const colorBase = "#212121";
@@ -63,7 +63,7 @@ export const fontSizeH3 = 32;
 export const fontSizeH4 = 27.2;
 export const fontSizeH5 = 24;
 export const fontSizeH6 = 24;
-export const v3FontBaseSize = "16px";
+export const v3FontBaseSize = "16";
 export const units0 = "0";
 export const units1 = 12.8;
 export const units2 = 25.6;
@@ -76,13 +76,13 @@ export const units8 = 102.4;
 export const units9 = 115.2;
 export const units10 = 128;
 export const units15 = 192;
-export const units1px = "1px";
-export const units0p25 = "2px";
+export const units1px = "1";
+export const units0p25 = "2";
 export const units0p5 = 6.4;
 export const units1p5 = 19.2;
 export const units2p5 = 32;
-export const unitsNeg1px = "-1px";
-export const unitsNeg0p25 = "-2px";
+export const unitsNeg1px = "-1";
+export const unitsNeg0p25 = "-2";
 export const unitsNeg0p5 = "-6.4";
 export const unitsNeg1 = "-12.8";
 export const unitsNeg1p5 = "-19.2";
