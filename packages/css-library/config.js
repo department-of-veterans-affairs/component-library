@@ -1,4 +1,27 @@
 const { transform } = require('@divriots/style-dictionary-to-figma');
+const StyleDictionary = require('style-dictionary');
+
+StyleDictionary.registerTransform({
+  name: 'size/base-font-16',
+  type: 'value',
+  matcher: function(token) {
+      return token.value.toString().includes('rem');
+  },
+  transformer: function(token) {
+    return parseFloat(token.value) * 16;
+  }
+});
+
+StyleDictionary.registerTransform({
+  name: 'size/remove-px-unit',
+  type: 'value',
+  matcher: function(token) {
+    return token.value.toString().includes('px');
+  },
+  transformer: function(token) {
+    return token.value.replace('px', '');
+  }
+});
 
 module.exports = {
   "source": ["tokens/**/*.json"],
@@ -9,7 +32,7 @@ module.exports = {
     },
   },
   platforms: {
-    json: {
+    figma: {
       transformGroup: 'js',
       buildPath: 'dist/figma/',
       files: [
@@ -39,8 +62,18 @@ module.exports = {
         }
       ]
     },
-    "react-native": {
-      transformGroup: 'react-native',
+    "react-native-json": {
+      transforms: ["size/base-font-16", "size/remove-px-unit"],
+      buildPath: 'dist/react-native/',
+      files: [
+        {
+          destination: 'tokens.json',
+          format: 'json/nested'
+        }
+      ]
+    },
+    "react-native-js": {
+      transforms: ["name/cti/camel", "size/object", "color/css", "size/base-font-16", "size/remove-px-unit"],
       buildPath: 'dist/react-native/',
       files: [
         {
