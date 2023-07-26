@@ -76,7 +76,7 @@ export class VaBreadcrumbs {
 
   private handleAnchorNode(node: HTMLSlotElement, index: number, slotNodes: Node[]) {
     const li = document.createElement('li');
-    li.classList.add('va-breadcrumbs-li');
+    this.uswds ? li.classList.add('usa-breadcrumb__list-item') : li.classList.add('va-breadcrumbs-li');
     if (index === slotNodes.length - 1) {
       /* eslint-disable-next-line i18next/no-literal-string */
       node.setAttribute('aria-current', 'page');
@@ -86,8 +86,9 @@ export class VaBreadcrumbs {
   }
 
   private handleListNode(node: HTMLSlotElement, index: number, slotNodes: Node[]) {
-    node.classList.add('va-breadcrumbs-li');
+    this.uswds ? node.classList.add('usa-breadcrumb__list-item') : node.classList.add('va-breadcrumbs-li');
     const anchor = node.querySelector('a');
+    this.uswds ? anchor.classList.add('usa-breadcrumb__link') : anchor.classList.add('va-breadcrumbs-link');
     if (anchor && index === slotNodes.length - 1) {
       /* eslint-disable-next-line i18next/no-literal-string */
       anchor.setAttribute('aria-current', 'page');
@@ -132,8 +133,9 @@ export class VaBreadcrumbs {
       // only be adding new breadcrumbs items in the format of 
       // <li><a href="...">...</a></li>.
       if (node.nodeName === 'LI') {
-        node.classList.add('va-breadcrumbs-li');
+        this.uswds ? node.classList.add('usa-breadcrumb__list-item') : node.classList.add('va-breadcrumbs-li');
         const anchor = node.querySelector('a');
+        this.uswds ? anchor.classList.add('usa-breadcrumb__link') : anchor.classList.add('va-breadcrumbs-link');
         const isAriaCurrent = anchor?.getAttribute('aria-current');
 
         if (isAriaCurrent && index !== slotNodes.length - 1) {
