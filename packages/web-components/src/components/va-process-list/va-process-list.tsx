@@ -11,7 +11,7 @@ import { Component, h, Prop } from '@stencil/core';
  */
 @Component({
   tag: 'va-process-list',
-  styleUrl: 'va-process-list.css',
+  styleUrl: 'va-process-list.scss',
   shadow: true,
 })
 export class VaProcessList {
@@ -22,15 +22,12 @@ export class VaProcessList {
 
   render() {
     const { uswds } = this;
-    console.log(uswds)
+    
     if (uswds) {
       return (
-        <div>
-          <div>Test</div>
-          <ol role="list">
-            <slot></slot>
-          </ol>
-        </div>
+        <ol role="list">
+          <slot></slot>
+        </ol>
       );
     } else {
       return (

@@ -57,4 +57,47 @@ describe('va-process-list', () => {
 
     await axeCheck(page);
   });
+
+  it('v3 uswds renders slotted nodes into an ordered list', async () => {
+    const page = await newE2EPage();
+    await page.setContent(`
+      <va-process-list uswds>
+        <li>
+          <h2>Step one</h2>
+          <p>Some content</p>
+        </li>
+        <li>
+          <h2>Step two</h2>
+          <p>Additional content</p>
+          <ul>
+            <li>Item one</li>
+            <li>Item two</li>
+          </ul>
+        </li>
+      </va-process-list>
+    `);
+
+    const element = await page.find('va-process-list');
+    expect(element).toEqualHtml(`
+      <va-process-list uswds class="hydrated">
+        <mock:shadow-root>
+          <ol role="list">
+            <slot></slot>
+          </ol>
+        </mock:shadow-root>
+        <li>
+          <h2>Step one</h2>
+          <p>Some content</p>
+        </li>
+        <li>
+          <h2>Step two</h2>
+          <p>Additional content</p>
+          <ul>
+            <li>Item one</li>
+            <li>Item two</li>
+          </ul>
+        </li>
+      </va-process-list>
+    `);
+  });
 });
