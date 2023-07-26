@@ -18,13 +18,14 @@ const dataArray = [
   { label: 'Level two', href: '#two' },
   { label: 'Contact', href: '#contact' },
 ];
+const test = ['test', 'test 2'];
 
 const Template = ({ label, 'disable-analytics': disableAnalytics, uswds }) => (
   <va-breadcrumbs
     uswds={uswds}
     label={label}
     disable-analytics={disableAnalytics}
-    breadcrumb-list={JSON.stringify(dataArray)}
+    breadcrumb-list={test}
   ></va-breadcrumbs>
 );
 
@@ -70,7 +71,7 @@ const DynamicCrumbsTemplate = ({
         <va-breadcrumbs
           label={label}
           disable-analytics={disableAnalytics}
-          breadcrumb-list={JSON.stringify(crumbs)}
+          breadcrumb-list={crumbs}
           uswds
         ></va-breadcrumbs>
       )}
@@ -99,7 +100,7 @@ const WrappingCrumbsTemplate = ({
         label={label}
         disable-analytics={disableAnalytics}
         uswds={uswds}
-        breadcrumb-list={JSON.stringify(breadcrumbs)}
+        breadcrumb-list={breadcrumbs}
         wrapping={wrapping}
       ></va-breadcrumbs>
     </div>

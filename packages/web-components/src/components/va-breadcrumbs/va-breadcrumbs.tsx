@@ -39,13 +39,13 @@ export class VaBreadcrumbs {
   /**
    *  Represents a list of breadcrumbs. Use an array of objects with label and href properties, and then use JSON.stringify() to convert to a string. This prop is available when uswds is set to true.
    */
-  @Prop() breadcrumbList?: string = '';
+  @Prop() breadcrumbList?: any;
   /**
    * 
    * Represents an internal state of the component which stores the list of breadcrumbs parsed from the 'breadcrumbList' prop. 
    * Each breadcrumb is represented as an object with two properties: 'label' and 'href'.
    */
-  @State() breadcrumbsState?: Array<{ label: string; href: string }>;
+  @State() formattedBreadcrumbs?: Array<{ label: string; href: string }> = [];
   /**
    * 
    * This is a method that watches for changes in the 'breadcrumbList' prop. 
@@ -53,8 +53,11 @@ export class VaBreadcrumbs {
    * into a JavaScript object and assigns it to the 'breadcrumbsState' state.
    */
   @Watch('breadcrumbList')
-  parseBreadcrumbListProp(newValue: string) {
-    if (newValue) this.breadcrumbsState = JSON.parse(newValue);
+  watchBreadcrumbListHandler(breadcrumbList) {
+    // breadcrumbList = JSON.parse(breadcrumbList);
+    // eslint-disable-next-line i18next/no-literal-string
+    console.log('watch: ', this.breadcrumbList)
+    this.updateBreadCrumbList(breadcrumbList);
   }
   /**
    * Analytics tracking function(s) will not be called
@@ -71,6 +74,12 @@ export class VaBreadcrumbs {
     bubbles: true,
   })
   componentLibraryAnalytics: EventEmitter;
+
+  private updateBreadCrumbList(breadcrumbList: Array<{ label: string; href: string }>) {
+    this.formattedBreadcrumbs = breadcrumbList;
+    // eslint-disable-next-line i18next/no-literal-string
+    console.log('updateBreadCrumbList: ', this.formattedBreadcrumbs);
+  }
 
   private getClickLevel(target: HTMLAnchorElement) {
     const anchorNodes = this.uswds ? Array.from(this.el.shadowRoot.querySelectorAll('a')) : Array.from(this.el.querySelectorAll('a'));
@@ -135,10 +144,21 @@ export class VaBreadcrumbs {
         this.handleAnchorNode(node, index, slotNodes);
       }
     });
+
+
+    // if (this.uswds) {
+    //   const breadcrumbs = JSON.parse(this.breadcrumbList);
+    //   console.log(breadcrumbs)
+    //   this.updateBreadCrumbList(breadcrumbs);
+    // }
   }
 
   componentWillLoad() {
-    this.parseBreadcrumbListProp(this.breadcrumbList);
+    if (this.uswds) {
+      // eslint-disable-next-line i18next/no-literal-string
+      console.log('componentWillLoad: ', JSON.stringify(this.breadcrumbList))
+      this.watchBreadcrumbListHandler(this.breadcrumbList)
+    }
   }
 
   /**
@@ -209,11 +229,11 @@ export class VaBreadcrumbs {
         <Host>
           <nav aria-label={label} class={wrapClass}>
             <ol role="list" onClick={e => this.fireAnalyticsEvent(e)} class="usa-breadcrumb__list">
-              {this.breadcrumbsState.map((item, index) => (
+              {this.formattedBreadcrumbs.map((item, index) => (
                 <li
-                  class={`usa-breadcrumb__list-item ${index === this.breadcrumbsState.length - 1 ? 'usa-current' : ''}`}
-                  aria-current={index === this.breadcrumbsState.length - 1 ? "page" : undefined}>
-                  {index === this.breadcrumbsState.length - 1 ? (
+                  class={`usa-breadcrumb__list-item ${index === this.formattedBreadcrumbs.length - 1 ? 'usa-current' : ''}`}
+                  aria-current={index === this.formattedBreadcrumbs.length - 1 ? "page" : undefined}>
+                  {index === this.formattedBreadcrumbs.length - 1 ? (
                     <span>{item.label}</span>
                   ) : (
                     <a class="usa-breadcrumb__link" href={item.href}>
