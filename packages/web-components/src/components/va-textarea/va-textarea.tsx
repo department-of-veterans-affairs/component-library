@@ -12,7 +12,7 @@ import {
 } from '@stencil/core';
 import classnames from 'classnames';
 import i18next from 'i18next';
-import { consoleDevError, getCharacterMessage, plurality } from '../../utils/utils';
+import { consoleDevError, getCharacterMessage } from '../../utils/utils';
 
 if (Build.isTesting) {
   // Make i18next.t() return the key instead of the value
@@ -152,7 +152,7 @@ export class VaTextarea {
     const { label, error, placeholder, name, required, value, hint, uswds, charcount } = this;
     const maxlength = this.getMaxlength();
     const ariaDescribedbyIds = `${error ? 'error-message' : ''} 
-    ${charcount && maxlength ? 'charcount-message' : ''}`.trim() || null;
+    ${ hint ? 'hint-message' : '' } ${charcount && maxlength ? 'charcount-message' : ''}`.trim() || null;
     if (uswds) {
       const charCountTooHigh = charcount && (value?.length > maxlength);
       const labelClass = classnames({
@@ -181,7 +181,7 @@ export class VaTextarea {
               )}
             </label>
           )}
-          {hint && <span class="usa-hint">{hint}</span>}
+          {hint && <span id="hint-message" class="usa-hint">{hint}</span>}
           <slot></slot>
           <span id="input-error-message" role="alert">
             {error && (
@@ -210,13 +210,9 @@ export class VaTextarea {
               </span>
           )}
           {charcount && maxlength && (
-            <Fragment>
-              <span class={messageClass} aria-hidden="true">
-                {getCharacterMessage(value, maxlength)}
-              </span>
-              <span id="charcount-message" class="usa-sr-only">You can enter up to {maxlength} character{plurality(maxlength)}</span>
-              <span class="usa-sr-only" aria-live="polite">{getCharacterMessage(value, maxlength)}</span>
-            </Fragment>
+            <span id="charcount-message" class={messageClass} aria-live="polite">
+              {getCharacterMessage(value, maxlength)}
+            </span>
           )}
         </Host>
       );
@@ -227,7 +223,7 @@ export class VaTextarea {
             {label}
             {required && <span class="required">{i18next.t('required')}</span>}
           </label>
-          {hint && <span class="hint-text">{hint}</span>}
+          {hint && <span id="hint-message" class="hint-text">{hint}</span>}
           <span id="error-message" role="alert">
             {error && (
               <Fragment>
