@@ -93,6 +93,3 @@ Default.args = { ...defaultArgs };
 Default.argTypes = propStructure(processListDocs);
 
 export const AdditionalStyling = UtilityStyling.bind(null);
-
-export const USWDS = Template.bind(null);
-USWDS.args = { ...defaultArgs, uswds:true };
