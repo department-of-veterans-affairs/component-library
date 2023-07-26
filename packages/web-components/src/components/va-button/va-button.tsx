@@ -55,7 +55,7 @@ export class VaButton {
   /**
    * If `true`, the button will use the primary alternate variant.
    */
-  @Prop({ reflect: true }) primaryAlternate?: boolean = false;
+  @Prop() primaryAlternate?: boolean = false;
 
   /**
    * If `true`, the button will use the secondary variant.
