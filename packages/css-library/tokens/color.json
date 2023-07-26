@@ -37,6 +37,14 @@
       "warm-dark": { "value": "#494440"},
       "warm-light": { "value": "#e4e2e0"},
       "cool-light": { "value": "#dce4ef"}
+    },
+    "green": {
+      "*": { "value": "#2e8540"},
+      "dark": { "value": "#1e5f2f"},
+      "darkest": { "value": "#0f3f1f"},
+      "light": { "value": "#7dbf7c"},
+      "lighter": { "value": "#94bfa2"},
+      "lightest": { "value": "#e7f4e4"}
     }
   },
   "v3-color": {

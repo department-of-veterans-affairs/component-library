@@ -20,6 +20,16 @@
   background-color: var(--color-white);
 }
 
+.va-button-primary--alternate {
+  background: var(--color-green);
+
+  &:hover,
+  &:focus {
+    background-color: var(--color-green-dark);
+    text-decoration: none;
+  }
+}
+
 /* Original Component Styles. */
 
 @import '../../mixins/buttons.css';
@@ -42,6 +52,16 @@
 
 :host(:not([uswds])) button:active {
   background-color: var(--color-primary-darkest);
+}
+
+:host(:not([uswds])) button.va-button-primary--alternate {
+  background: var(--color-green);
+
+  &:hover,
+  &:focus {
+    background-color: var(--color-green-dark);
+    text-decoration: none;
+  }
 }
 
 :host(:not([uswds])[back]:not([back='false'])) button,
@@ -96,3 +116,4 @@ i.fa-angles-right::before {
   box-shadow: none;
   color: var(--color-white);
 }
+
