@@ -75,8 +75,6 @@ export class VaBreadcrumbs {
 
   private updateBreadCrumbList(breadcrumbList: Array<{ label: string; href: string }>) {
     this.formattedBreadcrumbs = breadcrumbList;
-    // eslint-disable-next-line i18next/no-literal-string
-    console.log('updateBreadCrumbList: ', this.formattedBreadcrumbs);
   }
 
   private getClickLevel(target: HTMLAnchorElement) {
