@@ -4,6 +4,10 @@
       "sans": { "value": "'Source Sans Pro', 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif" },
       "serif": { "value": "Bitter, Georgia, Cambria, 'Times New Roman', Times, serif" }
     },
+    "serif": { "value": "Bitter, Georgia, Cambria, 'Times New Roman', Times, serif" },
+    "source": {
+      "sans": { "value": "'Source Sans Pro', 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif"}
+    },
     "weight": {
       "normal": { "value": "400"},
       "bold": { "value": "700"}
