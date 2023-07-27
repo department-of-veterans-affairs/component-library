@@ -54,9 +54,7 @@ export class VaBreadcrumbs {
    */
   @Watch('breadcrumbList')
   watchBreadcrumbListHandler(breadcrumbList) {
-    // breadcrumbList = JSON.parse(breadcrumbList);
-    // eslint-disable-next-line i18next/no-literal-string
-    console.log('watch: ', this.breadcrumbList)
+    if (!this.breadcrumbList?.length) return;
     this.updateBreadCrumbList(breadcrumbList);
   }
   /**
@@ -144,21 +142,32 @@ export class VaBreadcrumbs {
         this.handleAnchorNode(node, index, slotNodes);
       }
     });
-
-
-    // if (this.uswds) {
-    //   const breadcrumbs = JSON.parse(this.breadcrumbList);
-    //   console.log(breadcrumbs)
-    //   this.updateBreadCrumbList(breadcrumbs);
-    // }
   }
 
   componentWillLoad() {
     if (this.uswds) {
+      if (!this.breadcrumbList?.length) return;
+      
+      let potentialBreadcrumbs;
+      
+      if (Array.isArray(this.breadcrumbList)) {
+        potentialBreadcrumbs = this.breadcrumbList;
+      } else if (typeof this.breadcrumbList === 'string') {
+        try {
+          potentialBreadcrumbs = JSON.parse(this.breadcrumbList);
+        } catch (e) {
+          return;
+        }
+      } else return;
+      
+      // Now validate that potentialBreadcrumbs is an array of objects with the properties "label" and "href"
       // eslint-disable-next-line i18next/no-literal-string
-      console.log('componentWillLoad: ', JSON.stringify(this.breadcrumbList))
-      this.watchBreadcrumbListHandler(this.breadcrumbList)
+      if (Array.isArray(potentialBreadcrumbs) && potentialBreadcrumbs.every(item => typeof item === 'object' && item.hasOwnProperty('label') && item.hasOwnProperty('href'))) {
+        this.formattedBreadcrumbs = potentialBreadcrumbs;
+        this.updateBreadCrumbList(this.formattedBreadcrumbs);
+      } else return;
     }
+    
   }
 
   /**

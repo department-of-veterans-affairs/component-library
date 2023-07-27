@@ -9,3 +9,55 @@ va-process-list li :is(h2, h3, h4, h5) {
   clear: none;
   padding-top: 0.3rem;
 }
+
+@media (min-width: 30em) {
+  .usa-breadcrumb__list-item:not(:last-child)::after {
+    bottom: -0.2em;
+    margin-left: 0;
+    margin-right: 0;
+    height: 2ex;
+    position: relative;
+  }
+}
+
+@media (min-width: 30em) {
+  .usa-breadcrumb__list-item:not(:last-child)::after {
+    bottom: -0.2em;
+    margin-left: 0;
+    margin-right: 0;
+    height: 2ex;
+    position: relative;
+  }
+}
+
+@media (min-width: 30em) {
+  @supports ((-webkit-mask:url()) or (mask:url())) {
+    .usa-breadcrumb__list-item:not(:last-child)::after {
+      content: '';
+      display: inherit;
+      background: 0 0;
+      background-color: #757575;
+      -webkit-mask-image: url("../../../../node_modules/@uswds/uswds/dist/img/usa-icons/navigate_next.svg"),linear-gradient(transparent,transparent);
+      mask-image: url("../../../../node_modules/@uswds/uswds/dist/img/usa-icons/navigate_next.svg"),linear-gradient(transparent,transparent);
+      -webkit-mask-position: center center;
+      mask-position: center center;
+      -webkit-mask-repeat: no-repeat;
+      mask-repeat: no-repeat;
+      -webkit-mask-size: 2ex 2ex;
+      mask-size: 2ex 2ex;
+    }
+  }
+}
+
+@media (min-width: 30em) {
+  .usa-breadcrumb__list-item:not(:last-child)::after {
+    background-image: url("../../../../node_modules/@uswds/uswds/dist/img/usa-icons/navigate_next.svg");
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: 2ex 2ex;
+    display: inline-block;
+    width: 2ex;
+    content: "";
+    vertical-align: baseline;
+  }
+}

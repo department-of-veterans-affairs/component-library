@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
+import { VaBreadcrumbs } from '@department-of-veterans-affairs/web-components/react-bindings';
 
 const breadcrumbsDocs = getWebComponentDocs('va-breadcrumbs');
 
@@ -21,12 +22,12 @@ const dataArray = [
 const test = ['test', 'test 2'];
 
 const Template = ({ label, 'disable-analytics': disableAnalytics, uswds }) => (
-  <va-breadcrumbs
+  <VaBreadcrumbs
     uswds={uswds}
     label={label}
-    disable-analytics={disableAnalytics}
-    breadcrumb-list={test}
-  ></va-breadcrumbs>
+    disableAnalytics={disableAnalytics}
+    breadcrumbList={dataArray}
+  ></VaBreadcrumbs>
 );
 
 const DynamicCrumbsTemplate = ({
@@ -68,12 +69,12 @@ const DynamicCrumbsTemplate = ({
       <button onClick={e => resetCrumbs()}>Reset Crumbs</button>
       <br />
       {crumbs.length > 0 && (
-        <va-breadcrumbs
+        <VaBreadcrumbs
           label={label}
-          disable-analytics={disableAnalytics}
-          breadcrumb-list={crumbs}
+          disableAnalytics={disableAnalytics}
+          breadcrumbList={crumbs}
           uswds
-        ></va-breadcrumbs>
+        ></VaBreadcrumbs>
       )}
     </div>
   );
@@ -96,13 +97,13 @@ const WrappingCrumbsTemplate = ({
   ];
   return (
     <div>
-      <va-breadcrumbs
+      <VaBreadcrumbs
         label={label}
-        disable-analytics={disableAnalytics}
+        disableAnalytics={disableAnalytics}
         uswds={uswds}
-        breadcrumb-list={breadcrumbs}
+        breadcrumbList={breadcrumbs}
         wrapping={wrapping}
-      ></va-breadcrumbs>
+      ></VaBreadcrumbs>
     </div>
   );
 };
