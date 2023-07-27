@@ -154,10 +154,6 @@ export namespace Components {
     }
     interface VaBreadcrumbs {
         /**
-          * Represents a list of breadcrumbs. Use an array of objects with label and href properties, and then use JSON.stringify() to convert to a string. This prop is available when uswds is set to true.
-         */
-        "breadcrumbList"?: any;
-        /**
           * Analytics tracking function(s) will not be called
          */
         "disableAnalytics"?: boolean;
@@ -1758,10 +1754,6 @@ declare namespace LocalJSX {
         "windowSession"?: boolean;
     }
     interface VaBreadcrumbs {
-        /**
-          * Represents a list of breadcrumbs. Use an array of objects with label and href properties, and then use JSON.stringify() to convert to a string. This prop is available when uswds is set to true.
-         */
-        "breadcrumbList"?: any;
         /**
           * Analytics tracking function(s) will not be called
          */

@@ -14,20 +14,17 @@ export default {
     },
   },
 };
-const dataArray = [
-  { label: 'Level one', href: '#one' },
-  { label: 'Level two', href: '#two' },
-  { label: 'Contact', href: '#contact' },
-];
-const test = ['test', 'test 2'];
 
 const Template = ({ label, 'disable-analytics': disableAnalytics, uswds }) => (
-  <VaBreadcrumbs
-    uswds={uswds}
+  <va-breadcrumbs
     label={label}
-    disableAnalytics={disableAnalytics}
-    breadcrumbList={dataArray}
-  ></VaBreadcrumbs>
+    disable-analytics={disableAnalytics}
+    uswds={uswds}
+  >
+    <a href="#home">Home</a>
+    <a href="#one">Level one</a>
+    <a href="#two">Level two</a>
+  </va-breadcrumbs>
 );
 
 const DynamicCrumbsTemplate = ({
@@ -35,22 +32,22 @@ const DynamicCrumbsTemplate = ({
   'disable-analytics': disableAnalytics,
 }) => {
   const breadcrumbs = [
-    { label: 'Level 1', href: '/#1' },
-    { label: 'Level 2', href: '/#2' },
-    { label: 'Level 3', href: '/#3' },
+    { label: 'Level 1', path: '/#1' },
+    { label: 'Level 2', path: '/#2' },
+    { label: 'Level 3', path: '/#3' },
   ];
 
   const breadcrumbs2 = [
-    { label: 'First Link', href: '#example1' },
-    { label: 'Second Link', href: '#example2' },
-    { label: 'Third Link', href: '#example3' },
-    { label: 'Fourth Link', href: '#example4' },
+    { label: 'First Link', path: '#example1' },
+    { label: 'Second Link', path: '#example2' },
+    { label: 'Third Link', path: '#example3' },
+    { label: 'Fourth Link', path: '#example4' },
   ];
   const [crumbs, setCrumbs] = useState(breadcrumbs);
   const addCrumb = () =>
     setCrumbs(arr => [
       ...arr,
-      { label: `Level ${arr.length + 1}`, href: `/#${arr.length + 1}` },
+      { label: `Level ${arr.length + 1}`, path: `/#${arr.length + 1}` },
     ]);
   const replaceCrumbs = () => setCrumbs(breadcrumbs2);
   const resetCrumbs = () => setCrumbs(breadcrumbs);
@@ -69,12 +66,21 @@ const DynamicCrumbsTemplate = ({
       <button onClick={e => resetCrumbs()}>Reset Crumbs</button>
       <br />
       {crumbs.length > 0 && (
-        <VaBreadcrumbs
+        <va-breadcrumbs
           label={label}
-          disableAnalytics={disableAnalytics}
-          breadcrumbList={crumbs}
+          disable-analytics={disableAnalytics}
           uswds
-        ></VaBreadcrumbs>
+        >
+          {crumbs?.map((crumb, i) => {
+            return (
+              <li key={i}>
+                <a href={crumb.path}>
+                  <span>{crumb.label}</span>
+                </a>
+              </li>
+            );
+          })}
+        </va-breadcrumbs>
       )}
     </div>
   );
@@ -86,24 +92,21 @@ const WrappingCrumbsTemplate = ({
   uswds,
   wrapping,
 }) => {
-  const breadcrumbs = [
-    { label: 'Home', href: '/#1' },
-    { label: 'Federal Contracting', href: '/#2' },
-    { label: 'Contracting assistance programs', href: '/#3' },
-    {
-      label: 'Women-owned small business federal contracting program',
-      href: '/#4',
-    },
-  ];
   return (
     <div>
-      <VaBreadcrumbs
+      <va-breadcrumbs
         label={label}
-        disableAnalytics={disableAnalytics}
+        disable-analytics={disableAnalytics}
         uswds={uswds}
-        breadcrumbList={breadcrumbs}
         wrapping={wrapping}
-      ></VaBreadcrumbs>
+      >
+        <a href="#home">Home</a>
+        <a href="#one">Federal Contracting</a>
+        <a href="#one">Contracting assistance programs</a>
+        <a href="#two">
+          Women-owned small business federal contracting program
+        </a>
+      </va-breadcrumbs>
     </div>
   );
 };

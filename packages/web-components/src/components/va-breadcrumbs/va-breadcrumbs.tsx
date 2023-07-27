@@ -6,8 +6,7 @@ import {
   Host,
   h,
   Prop,
-  Watch,
-  State
+  State,
 } from '@stencil/core';
 import classnames from 'classnames';
 
@@ -39,7 +38,7 @@ export class VaBreadcrumbs {
   /**
    *  Represents a list of breadcrumbs. Use an array of objects with label and href properties, and then use JSON.stringify() to convert to a string. This prop is available when uswds is set to true.
    */
-  @Prop() breadcrumbList?: any;
+  // @Prop() breadcrumbList?: any;
   /**
    * 
    * Represents an internal state of the component which stores the list of breadcrumbs parsed from the 'breadcrumbList' prop. 
@@ -52,11 +51,11 @@ export class VaBreadcrumbs {
    * When the 'breadcrumbList' prop changes, this method parses the new value (provided as a JSON-formatted string) 
    * into a JavaScript object and assigns it to the 'breadcrumbsState' state.
    */
-  @Watch('breadcrumbList')
-  watchBreadcrumbListHandler(breadcrumbList) {
-    if (!this.breadcrumbList?.length) return;
-    this.updateBreadCrumbList(breadcrumbList);
-  }
+  // @Watch('breadcrumbList')
+  // watchBreadcrumbListHandler(breadcrumbList) {
+  //   if (!this.breadcrumbList?.length) return;
+  //   this.updateBreadCrumbList(breadcrumbList);
+  // }
   /**
    * Analytics tracking function(s) will not be called
    */
@@ -73,9 +72,9 @@ export class VaBreadcrumbs {
   })
   componentLibraryAnalytics: EventEmitter;
 
-  private updateBreadCrumbList(breadcrumbList: Array<{ label: string; href: string }> | string) {
-    this.formattedBreadcrumbs = typeof breadcrumbList === 'string' ? JSON.parse(breadcrumbList) : breadcrumbList;
-  }
+  // private updateBreadCrumbList(breadcrumbList: Array<{ label: string; href: string }> | string) {
+  //   this.formattedBreadcrumbs = typeof breadcrumbList === 'string' ? JSON.parse(breadcrumbList) : breadcrumbList;
+  // }
 
   private getClickLevel(target: HTMLAnchorElement) {
     const anchorNodes = this.uswds ? Array.from(this.el.shadowRoot.querySelectorAll('a')) : Array.from(this.el.querySelectorAll('a'));
@@ -106,8 +105,9 @@ export class VaBreadcrumbs {
 
   private handleAnchorNode(node: HTMLSlotElement, index: number, slotNodes: Node[]) {
     const li = document.createElement('li');
-      li.classList.add('va-breadcrumbs-li');
-    if (index === slotNodes.length - 1) {
+    
+    this.uswds ? li.classList.add('usa-breadcrumb__list-item')  : li.classList.add('va-breadcrumbs-li');
+    if (!this.uswds && index === slotNodes.length - 1) {
       /* eslint-disable-next-line i18next/no-literal-string */
       node.setAttribute('aria-current', 'page');
     }
@@ -116,9 +116,9 @@ export class VaBreadcrumbs {
   }
 
   private handleListNode(node: HTMLSlotElement, index: number, slotNodes: Node[]) {
-    node.classList.add('va-breadcrumbs-li');
+    this.uswds ? node.classList.add('usa-breadcrumb__list-item') : node.classList.add('va-breadcrumbs-li');
     const anchor = node.querySelector('a');
-    if (anchor && index === slotNodes.length - 1) {
+    if (!this.uswds && anchor && index === slotNodes.length - 1) {
       /* eslint-disable-next-line i18next/no-literal-string */
       anchor.setAttribute('aria-current', 'page');
     }
@@ -144,28 +144,8 @@ export class VaBreadcrumbs {
 
   componentWillLoad() {
     if (this.uswds) {
-      if (!this.breadcrumbList?.length) return;
-      
-      let potentialBreadcrumbs;
-      
-      if (Array.isArray(this.breadcrumbList)) {
-        potentialBreadcrumbs = this.breadcrumbList;
-      } else if (typeof this.breadcrumbList === 'string') {
-        try {
-          potentialBreadcrumbs = JSON.parse(this.breadcrumbList);
-        } catch (e) {
-          return;
-        }
-      } else return;
-      
-      // Now validate that potentialBreadcrumbs is an array of objects with the properties "label" and "href"
-      // eslint-disable-next-line i18next/no-literal-string
-      if (Array.isArray(potentialBreadcrumbs) && potentialBreadcrumbs.every(item => typeof item === 'object' && item.hasOwnProperty('label') && item.hasOwnProperty('href'))) {
-        this.formattedBreadcrumbs = potentialBreadcrumbs;
-        this.updateBreadCrumbList(this.formattedBreadcrumbs);
-      } else return;
+      // 
     }
-    
   }
 
   /**
@@ -182,6 +162,8 @@ export class VaBreadcrumbs {
 
     if (!slotNodes) return;
 
+    console.log(slotNodes)
+
     slotNodes.forEach((node: HTMLSlotElement, index: number) => {
       // We are only handling li nodes during slot change because it is 
       // expected that the dynamic state usage of this component will 
@@ -189,36 +171,62 @@ export class VaBreadcrumbs {
       // <li><a href="...">...</a></li>.
       if (node.nodeName === 'LI') {
         if (this.uswds) {
+          // Adding class to the list tag
           node.classList.add('usa-breadcrumb__list-item');
-        } else {
-          node.classList.add('va-breadcrumbs-li');
-        }
-        const anchor = node.querySelector('a');
-        const isAriaCurrent = anchor?.getAttribute('aria-current');
 
-        if (isAriaCurrent && index !== slotNodes.length - 1) {
-          anchor.removeAttribute('aria-current');
-        }
+          // Select the anchor in the current node
+          const anchor = node.querySelector('a');
 
-        if(this.uswds) {
+          // Create a span and set its text content to be the same as the anchor's
           const span = document.createElement('span');
-          span.textContent = anchor.textContent;
-          anchor.innerHTML = '';
-          anchor.appendChild(span);
-        }
-
-        if (index === slotNodes.length - 1) {
-          if (this.uswds) {
-            const span = document.createElement('span');
+          if (anchor) {
             span.textContent = anchor.textContent;
+  
+            // Clear the anchor's HTML and append the newly created span to it
+            anchor.innerHTML = '';
+            anchor.appendChild(span);
+          }
+
+          if (index === slotNodes.length - 1) {
+            // If this is the last element in the list, add the 'usa-current' class
+            // Replace the anchor with a span, and set the 'aria-current' attribute
             node.classList.add('usa-current');
             node.replaceChild(span, anchor);
             /* eslint-disable-next-line i18next/no-literal-string */
             node?.setAttribute('aria-current', 'page');
-          } else {
+          } else if (index === slotNodes.length - 2) {
+            let span = node.querySelector('span');
+
+            // Create a new anchor and append the span to it
+            const newAnchor = document.createElement('a');
+            newAnchor.appendChild(span);
+
+            if (!anchor) {
+              // If there wasn't an existing anchor, append the new anchor to the node
+              node.appendChild(newAnchor);
+            } else {
+              // If there was an existing anchor, replace it with the new one
+              node.replaceChild(newAnchor, anchor);
+            }
+
+            // If this is the second last element, do whatever needs to be done here
+            node.classList.remove('usa-current');
+            node.removeAttribute('aria-current');
+          }
+        } else {
+          node.classList.add('va-breadcrumbs-li');
+          const anchor = node.querySelector('a');
+          const isAriaCurrent = anchor?.getAttribute('aria-current');
+  
+          if (isAriaCurrent && index !== slotNodes.length - 1) {
+            anchor.removeAttribute('aria-current');
+          }
+          
+          if (index === slotNodes.length - 1) {
             /* eslint-disable-next-line i18next/no-literal-string */
             anchor?.setAttribute('aria-current', 'page');
           }
+  
         }
       }
     });
@@ -236,19 +244,7 @@ export class VaBreadcrumbs {
         <Host>
           <nav aria-label={label} class={wrapClass}>
             <ol role="list" onClick={e => this.fireAnalyticsEvent(e)} class="usa-breadcrumb__list">
-              {this.formattedBreadcrumbs.map((item, index) => (
-                <li
-                  class={`usa-breadcrumb__list-item ${index === this.formattedBreadcrumbs.length - 1 ? 'usa-current' : ''}`}
-                  aria-current={index === this.formattedBreadcrumbs.length - 1 ? "page" : undefined}>
-                  {index === this.formattedBreadcrumbs.length - 1 ? (
-                    <span>{item.label}</span>
-                  ) : (
-                    <a class="usa-breadcrumb__link" href={item.href}>
-                      <span>{item.label}</span>
-                    </a>
-                  )}
-                </li>
-              ))}
+              <slot onSlotchange={this.handleSlotChange.bind(this)}></slot>
             </ol>
           </nav>
         </Host>
