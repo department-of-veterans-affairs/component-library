@@ -3,11 +3,10 @@ import {
   Host,
   Prop,
   h,
+  getAssetPath
 } from '@stencil/core';
 import classnames from 'classnames';
 import { consoleDevError } from '../../utils/utils';
-import icons from '../../assets/sprite.svg';
-
 
 /**
  * @componentName Icon
@@ -19,6 +18,7 @@ import icons from '../../assets/sprite.svg';
   tag: 'va-icon',
   styleUrl: 'va-icon.scss',
   shadow: true,
+  assetsDirs: ['../../assets']
 })
 export class VaIcon {
   /**
@@ -55,7 +55,7 @@ export class VaIcon {
       'usa-icon': true,
       [`usa-icon--size-${size}`]: !!size,
     });
-    const imageSrc = `${icons}#${icon}`;
+    const imageSrc = `${getAssetPath('../../assets/sprite.svg')}#${icon}`;
     return (
       <Host>
         <svg
