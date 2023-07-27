@@ -73,8 +73,8 @@ export class VaBreadcrumbs {
   })
   componentLibraryAnalytics: EventEmitter;
 
-  private updateBreadCrumbList(breadcrumbList: Array<{ label: string; href: string }>) {
-    this.formattedBreadcrumbs = breadcrumbList;
+  private updateBreadCrumbList(breadcrumbList: Array<{ label: string; href: string }> | string) {
+    this.formattedBreadcrumbs = typeof breadcrumbList === 'string' ? JSON.parse(breadcrumbList) : breadcrumbList;
   }
 
   private getClickLevel(target: HTMLAnchorElement) {
