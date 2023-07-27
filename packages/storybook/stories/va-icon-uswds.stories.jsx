@@ -1,10 +1,11 @@
 import React from 'react';
-import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
+import { getWebComponentDocs, StoryDocs } from './wc-helpers';
+import './styles/va-icon.scss';
 
 const iconDocs = getWebComponentDocs('va-icon');
 
 export default {
-  title: 'USWDS/Icon',
+  title: 'USWDS/Icon USWDS',
   id: 'uswds/va-icon',
   parameters: {
     componentSubtitle: 'va-icon web component',
@@ -16,7 +17,7 @@ export default {
 
 const defaultArgs = {
   'icon': 'accessibility_new',
-  'size': 0,
+  'size': 7,
   'srtext': null
 }
 
@@ -30,17 +31,22 @@ const Template = ({
   );
 }
 
+export const WithSrText = Template.bind(null);
+WithSrText.args = {
+  ...defaultArgs, srtext: 'add some text for a screen reader here to describe the semantic meaning of the icon.'
+}
+
 const IconsTemplate = ({
   size
 }) => {
   return (
-    <div>
-      <va-icon icon="build" size="9" />
-      {/* {icons.map(icon => {
-        <div>
+    <div className='wrapper'>
+      {icons.map(icon => (
+        <div key={icon}>
           <va-icon icon={icon} size={size} />
+          <p>{icon}</p>
         </div>
-      })} */}
+      ))}
     </div>
   )
 }
