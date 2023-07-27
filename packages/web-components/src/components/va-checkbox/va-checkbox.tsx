@@ -102,6 +102,11 @@ export class VaCheckbox {
   @Prop() disabled?: boolean = false;
 
   /**
+   * An optional message that will be read by screen readers when the checkbox is focused.
+   */
+  @Prop() messageAriaDescribedby?: string;
+
+  /**
    * The event used to track usage of the component. This is emitted when the
    * input value changes and enableAnalytics is true.
    */
@@ -170,7 +175,9 @@ export class VaCheckbox {
       tile,
       uswds, 
       checkboxDescription, 
-      disabled, } = this;
+      disabled, 
+      messageAriaDescribedby,
+    } = this;
 
     if (uswds) {
       const inputClass = classnames({
@@ -181,6 +188,8 @@ export class VaCheckbox {
         'usa-legend': true,
         'usa-label--error': error
       });
+      const ariaDescribedbyIds = `${messageAriaDescribedby ? 'input-message' : ''} ${error ? 'checkbox-error-message' : ''}`
+      .trim() || null; // Null so we don't add the attribute if we have an empty string
       return (
         <Host>
           {description ? 
@@ -203,7 +212,7 @@ export class VaCheckbox {
               type="checkbox"
               id="checkbox-element"
               checked={checked}
-              aria-describedby={error ? 'checkbox-error-message' : undefined}
+              aria-describedby={ariaDescribedbyIds}
               aria-invalid={error ? 'true' : 'false'}
               disabled={disabled}
               onChange={this.handleChange}
@@ -213,10 +222,17 @@ export class VaCheckbox {
               {required && <span class="usa-label--required">{i18next.t('required')}</span>}
               {checkboxDescription && <span class="usa-checkbox__label-description" aria-describedby="option-label">{checkboxDescription}</span>}
             </label>
+            {messageAriaDescribedby && (
+              <span id='input-message' class="sr-only">
+                {messageAriaDescribedby}
+              </span>
+            )}
           </div>
         </Host>
       );
     } else {
+      const ariaDescribedbyIds = `${messageAriaDescribedby ? 'input-message' : ''} ${error ? 'error-message' : ''}`
+      .trim() || null; // Null so we don't add the attribute if we have an empty string
       return (
         <Host>
           <div id="description">
@@ -234,7 +250,7 @@ export class VaCheckbox {
             type="checkbox"
             id="checkbox-element"
             checked={checked}
-            aria-describedby={error ? 'error-message' : undefined}
+            aria-describedby={ariaDescribedbyIds}
             aria-invalid={error ? 'true' : 'false'}
             onChange={this.handleChange}
           />
@@ -243,6 +259,11 @@ export class VaCheckbox {
               {label} {required && <span class="required">{i18next.t('required')}</span>}
             </span>
           </label>
+          {messageAriaDescribedby && (
+            <span id='input-message' class="sr-only">
+              {messageAriaDescribedby}
+            </span>
+          )}
         </Host>
       );
     }

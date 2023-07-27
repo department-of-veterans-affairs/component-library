@@ -15,6 +15,7 @@ import {
   months,
   validate,
   checkIsNaN,
+  zeroPadStart,
 } from '../../utils/date-utils';
 
 import i18next from 'i18next';
@@ -116,26 +117,26 @@ export class VaMemorableDate {
     const yearNum = Number(year);
     const monthNum = Number(month);
     const dayNum = Number(day);
-    
+
     if(!checkIsNaN(this, yearNum, monthNum, dayNum)) {
       // if any fields are NaN do not continue validation
       return;
     }
 
-    // Use a leading zero for numbers < 10
-    const numFormatter = new Intl.NumberFormat('en-US', {
-      minimumIntegerDigits: 2,
-    });
     /* eslint-disable i18next/no-literal-string */
-    this.value = year || month || day ? `${year}-${month ? numFormatter.format(monthNum) : ''}-${
-      day ? numFormatter.format(dayNum) : ''
+    this.value = year || month || day ? `${year}-${
+      month ? zeroPadStart(monthNum) : ''}-${
+      day ? zeroPadStart(dayNum) : ''
     }` : '';
     /* eslint-enable i18next/no-literal-string */
 
-    // Run built-in validation. Any custom validation
-    // will happen afterwards
-    validate(this, yearNum, monthNum, dayNum);
+    // Any custom validation will happen first; otherwise consumer code clearing
+    // errors will also remove internal errors.
     this.dateBlur.emit(event);
+
+    // Built-in validation is run after custom so internal errors override
+    // custom errors, e.g. Show invalid date instead of custom error
+    validate(this, yearNum, monthNum, dayNum);
 
     if (this.enableAnalytics) {
       const detail = {
@@ -195,7 +196,7 @@ export class VaMemorableDate {
       forceUpdate(this.el);
     });
   }
-  
+
   disconnectedCallback() {
     i18next.off('languageChanged');
   }
@@ -218,7 +219,7 @@ export class VaMemorableDate {
     const describedbyIds = ['dateHint', hint ? 'hint' : '']
       .filter(Boolean)
       .join(' ');
-      
+
     const hintText = monthSelect ? i18next.t('date-hint-with-select') : i18next.t('date-hint');
 
     const errorParameters = (error: string) => {
@@ -289,7 +290,7 @@ export class VaMemorableDate {
             <span id="error-message" role="alert">
               {error && (
                 <Fragment>
-                  <span class="usa-sr-only">{i18next.t('error')}</span> 
+                  <span class="usa-sr-only">{i18next.t('error')}</span>
                   <span class="usa-error-message">{i18next.t(error, errorParameters(error))}</span>
                 </Fragment>
               )}
@@ -349,7 +350,7 @@ export class VaMemorableDate {
               {hint && <div id="hint">{hint}</div>}
               <div id="dateHint">{i18next.t('date-hint')}.</div>
             </legend>
-            <slot /> 
+            <slot />
             <span id="error-message" role="alert">
               {error && (
                 <Fragment>

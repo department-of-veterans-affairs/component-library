@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { VaModal } from '@department-of-veterans-affairs/web-components/react-bindings';
+import { VaModal, VaButtonPair } from '@department-of-veterans-affairs/web-components/react-bindings';
 import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
 
 VaModal.displayName = 'VaModal';
@@ -271,3 +271,63 @@ CrisisLineModal.args = {
 
 export const Large = Template.bind(null);
 Large.args = { ...defaultArgs, large: true };
+
+const ButtonPairTemplate = ({
+  'click-to-close': clickToClose,
+  'disable-analytics': disableAnalytics,
+  large,
+  'modal-title': modalTitle,
+  'initial-focus-selector': initialFocusSelector,
+  primaryButtonClick,
+  'primary-button-text': primaryButtonText,
+  secondaryButtonClick,
+  'secondary-button-text': secondaryButtonText,
+  status,
+  visible,
+  uswds,
+  forcedModal,
+}) => {
+  const [isVisible, setIsVisible] = useState(visible);
+  const onCloseEvent = () => setIsVisible(!isVisible);
+  const openModal = () => setIsVisible(true);
+  return (
+    <div>
+      <h1>Testing h1 heading</h1>
+      <button onClick={openModal}>Click here to open modal</button>
+      <VaModal
+        forcedModal={forcedModal}
+        clickToClose={clickToClose}
+        disableAnalytics={disableAnalytics}
+        large={large}
+        modalTitle={modalTitle}
+        initialFocusSelector={initialFocusSelector}
+        onCloseEvent={onCloseEvent}
+        onPrimaryButtonClick={primaryButtonClick}
+        primaryButtonText={primaryButtonText}
+        onSecondaryButtonClick={secondaryButtonClick}
+        secondaryButtonText={secondaryButtonText}
+        status={status}
+        visible={isVisible}
+      >
+        <p>
+          You have unsaved changes that will be lost.
+        </p>
+        <VaButtonPair
+          onPrimaryClick={() => {}}
+          onSecondaryClick={function noRefCheck() {}}
+        />
+      </VaModal>
+    </div>
+  );
+};
+
+
+
+export const WithButtonPair = ButtonPairTemplate.bind(null);
+WithButtonPair.args = {
+  ...defaultArgs,
+  'primaryButtonClick': undefined,
+  'primary-button-text': undefined,
+  'secondaryButtonClick': undefined,
+  'secondary-button-text': undefined,
+};

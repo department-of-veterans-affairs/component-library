@@ -26,6 +26,7 @@ const defaultArgs = {
   'hint': null,
   'uswds': true,
   'tile': false,
+  'message-aria-describedby': 'Optional description text for screen readers',
 };
 
 const vaCheckbox = args => {
@@ -40,6 +41,7 @@ const vaCheckbox = args => {
     uswds,
     hint,
     tile,
+    'message-aria-describedby': messageAriaDescribedBy,
     ...rest
   } = args;
   return (
@@ -55,6 +57,7 @@ const vaCheckbox = args => {
       required={required}
       tile={tile}
       onBlur={e => console.log(e)}
+      message-aria-describedby={messageAriaDescribedBy}
     />
   )
 }
@@ -114,6 +117,14 @@ export const WithDescriptionJSX = props => (
   </va-checkbox>
 );
 WithDescriptionJSX.args = { ...defaultArgs };
+
+export const OnBackground = props => (
+  <div style={{background: '#f1f1f1', padding: '30px 5px'}}>
+    <va-checkbox {...props} onBlur={e => console.log(e)}>
+    </va-checkbox>
+  </div>
+);
+OnBackground.args = { ...defaultArgs };
 
 export const Error = Template.bind(null);
 Error.args = {
