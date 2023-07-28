@@ -53,6 +53,7 @@ const defaultArgs = {
   'pattern': undefined,
   'uswds': true,
   'hint': null,
+  'message-aria-describedby': 'Optional description text for screen readers',
   'charcount': false
 };
 
@@ -71,6 +72,7 @@ const Template = ({
   pattern,
   uswds,
   hint,
+  'message-aria-describedby': messageAriaDescribedby,
   charcount
 }) => {
   return (
@@ -91,6 +93,7 @@ const Template = ({
       pattern={pattern}
       onBlur={e => console.log('blur event', e)}
       onInput={e => console.log('input event value', e.target.value)}
+      message-aria-describedby={messageAriaDescribedby}
       charcount={charcount}
     />
   );
@@ -108,6 +111,7 @@ const I18nTemplate = ({
   inputmode,
   type,
   uswds,
+  'message-aria-describedby': messageAriaDescribedby,
 }) => {
   const [lang, setLang] = useState('en');
   useEffect(() => {
@@ -136,6 +140,7 @@ const I18nTemplate = ({
         value={value}
         inputmode={inputmode}
         type={type}
+        message-aria-describedby={messageAriaDescribedby}
       />
     </>
   );
