@@ -3,6 +3,7 @@ import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
 import { VaBreadcrumbs } from '@department-of-veterans-affairs/web-components/react-bindings';
 
 const breadcrumbsDocs = getWebComponentDocs('va-breadcrumbs');
+VaBreadcrumbs.displayName = 'VaBreadcrumbs';
 
 export default {
   title: 'USWDS/Breadcrumbs USWDS',
@@ -17,9 +18,8 @@ export default {
 const dataArray = [
   { label: 'Level one', href: '#one' },
   { label: 'Level two', href: '#two' },
-  { label: 'Contact', href: '#contact' },
+  { label: 'Level three', href: '#three' },
 ];
-const test = ['test', 'test 2'];
 
 const Template = ({ label, 'disable-analytics': disableAnalytics, uswds }) => (
   <VaBreadcrumbs

@@ -37,13 +37,14 @@ export class VaBreadcrumbs {
    */
   @Prop() wrapping?: boolean = false;
   /**
-   *  Represents a list of breadcrumbs. Use an array of objects with label and href properties, and then use JSON.stringify() to convert to a string. This prop is available when uswds is set to true.
+   *  Represents a list of breadcrumbs. Use an array of objects with label and href properties, and then use JSON.stringify() to convert to a string. This prop is available when `uswds` is set to `true`.
    */
   @Prop() breadcrumbList?: any;
   /**
    * 
    * Represents an internal state of the component which stores the list of breadcrumbs parsed from the 'breadcrumbList' prop. 
    * Each breadcrumb is represented as an object with two properties: 'label' and 'href'.
+   * This state is used when `uswds` is set to `true`.
    */
   @State() formattedBreadcrumbs?: Array<{ label: string; href: string }> = [];
   /**
@@ -73,6 +74,14 @@ export class VaBreadcrumbs {
   })
   componentLibraryAnalytics: EventEmitter;
 
+  /**
+   * This method is used to update the formattedBreadcrumbs state.
+   * It is only invoked when the uswds attribute is set to true on the component.
+   * It either parses a JSON string into an array of breadcrumb objects or uses the passed array as is.
+   * 
+   * @param breadcrumbList - An array of breadcrumb objects or a stringified version of it.
+   * @private
+   */
   private updateBreadCrumbList(breadcrumbList: Array<{ label: string; href: string }> | string) {
     this.formattedBreadcrumbs = typeof breadcrumbList === 'string' ? JSON.parse(breadcrumbList) : breadcrumbList;
   }
@@ -142,6 +151,12 @@ export class VaBreadcrumbs {
     });
   }
 
+  /**
+   * This method is invoked once before the component is first rendered.
+   * It is only used when the uswds attribute is set to true on the component.
+   * Its main purpose is to validate and format the breadcrumbList prop, if present.
+   *
+   */
   componentWillLoad() {
     if (this.uswds) {
       if (!this.breadcrumbList?.length) return;
@@ -165,7 +180,6 @@ export class VaBreadcrumbs {
         this.updateBreadCrumbList(this.formattedBreadcrumbs);
       } else return;
     }
-    
   }
 
   /**
