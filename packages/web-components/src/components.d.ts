@@ -200,6 +200,10 @@ export namespace Components {
          */
         "label"?: string;
         /**
+          * If `true`, the button will use the primary alternate variant.
+         */
+        "primaryAlternate"?: boolean;
+        /**
           * If `true`, the button will use the secondary variant.
          */
         "secondary"?: boolean;
@@ -1812,6 +1816,10 @@ declare namespace LocalJSX {
           * The event used to track usage of the component.
          */
         "onComponent-library-analytics"?: (event: VaButtonCustomEvent<any>) => void;
+        /**
+          * If `true`, the button will use the primary alternate variant.
+         */
+        "primaryAlternate"?: boolean;
         /**
           * If `true`, the button will use the secondary variant.
          */
