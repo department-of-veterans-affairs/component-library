@@ -259,7 +259,6 @@ export class VaMemorableDate {
           label={i18next.t('month')}
           name={`${name}Month`}
           maxlength={2}
-          minlength={2}
           pattern="[0-9]*"
           aria-describedby={describedbyIds}
           invalid={this.invalidMonth}
@@ -303,7 +302,6 @@ export class VaMemorableDate {
                   label={i18next.t('day')}
                   name={`${name}Day`}
                   maxlength={2}
-                  minlength={2}
                   pattern="[0-9]*"
                   aria-describedby={describedbyIds}
                   invalid={this.invalidDay}
@@ -323,7 +321,6 @@ export class VaMemorableDate {
                   label={i18next.t('year')}
                   name={`${name}Year`}
                   maxlength={4}
-                  minlength={4}
                   pattern="[0-9]*"
                   aria-describedby={describedbyIds}
                   invalid={this.invalidYear}
