@@ -39,7 +39,7 @@ export class VaIcon {
 
   private getSize(): number | null {
     const sizes = [3, 4, 5, 6, 7, 8, 9];
-    if (!sizes.includes(this.size)) {
+    if (!!sizes && !sizes.includes(this.size)) {
       consoleDevError(
         `Size must be an integer between 3 and 9, inclusive.`,
       );
