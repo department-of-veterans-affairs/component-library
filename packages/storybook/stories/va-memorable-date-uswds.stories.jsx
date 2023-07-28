@@ -20,6 +20,7 @@ export default {
 const defaultArgs = {
   label: 'Date of birth',
   name: 'test',
+  hint: undefined,
   required: false,
   error: undefined,
   value: undefined,
@@ -27,13 +28,14 @@ const defaultArgs = {
   monthSelect: false,
 };
 
-const Template = ({ label, name, required, error, uswds, value, monthSelect }) => {
+const Template = ({ label, name, hint, required, error, uswds, value, monthSelect }) => {
   return (
     <VaMemorableDate
       uswds={uswds}
       monthSelect={monthSelect}
       label={label}
       name={name}
+      hint={hint}
       required={required}
       error={error}
       value={value}
@@ -43,7 +45,7 @@ const Template = ({ label, name, required, error, uswds, value, monthSelect }) =
   );
 };
 
-const CustomValidationTemplate = ({ label, name, required, error, uswds, value }) => {
+const CustomValidationTemplate = ({ label, name, hint, required, error, uswds, value }) => {
   const [dateVal, setDateVal] = useState(value);
   const [errorVal, setErrorVal] = useState(error);
   const today = new Date();
@@ -64,6 +66,7 @@ const CustomValidationTemplate = ({ label, name, required, error, uswds, value }
         uswds={uswds}
         label={label}
         name={name}
+        hint={hint}
         required={required}
         error={errorVal}
         invalidYear={!!errorVal || null}
@@ -120,6 +123,7 @@ const I18nTemplate = ({ label, name, required, error, uswds, value }) => {
         uswds={uswds}
         label={label}
         name={name}
+        hint={hint}
         required={required}
         error={error}
         value={value}
@@ -144,6 +148,14 @@ WithMonthSelect.args = {
   ...defaultArgs,
   monthSelect: true,
   value: '2022-04-19',
+};
+
+export const ExtraHintText = Template.bind(null);
+ExtraHintText.args = {
+  ...defaultArgs,
+  monthSelect: true,
+  value: '2022-04-19',
+  hint: 'Extra hint text',
 };
 
 export const ErrorWithMonthSelect = Template.bind(null);
