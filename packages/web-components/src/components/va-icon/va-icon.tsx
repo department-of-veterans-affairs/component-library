@@ -3,10 +3,11 @@ import {
   Host,
   Prop,
   h,
-  getAssetPath
 } from '@stencil/core';
 import classnames from 'classnames';
 import { consoleDevError } from '../../utils/utils';
+
+import sprite from '../../assets/sprite.svg';
 
 /**
  * @componentName Icon
@@ -55,7 +56,7 @@ export class VaIcon {
       'usa-icon': true,
       [`usa-icon--size-${size}`]: !!size,
     });
-    const imageSrc = `${getAssetPath('/assets/sprite.svg')}#${icon}`;
+    const imageSrc = `${sprite}#${icon}`;
     return (
       <Host>
         <svg
