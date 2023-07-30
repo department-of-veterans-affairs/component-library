@@ -25,7 +25,7 @@ export class VaProcessList {
     
     if (uswds) {
       return (
-        <ol role="list">
+        <ol role="list" class={'usa-process-list'}>
           <slot></slot>
         </ol>
       );

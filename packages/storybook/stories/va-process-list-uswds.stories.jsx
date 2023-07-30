@@ -20,8 +20,8 @@ const defaultArgs = {uswds: true};
 const Template = ({uswds}) => {
   return (
     <va-process-list uswds={uswds}>
-      <li>
-        <h3>Check to be sure you can request a Board Appeal</h3>
+      <li class="usa-process-list__item">
+        <h3 className='usa-process-list__heading'>Check to be sure you can request a Board Appeal</h3>
         <p>
           You can request a Board Appeal up to 1 year from the date on your
           decision notice. (Exception: if you have a contested claim, you have
@@ -40,8 +40,8 @@ const Template = ({uswds}) => {
           this same claim.
         </p>
       </li>
-      <li>
-        <h3>Gather your information</h3>
+      <li class="usa-process-list__item">
+        <h3 className='usa-process-list__heading'>Gather your information</h3>
         <p>Here’s what you’ll need to apply:</p>
         <ul>
           <li>Your mailing address</li>
@@ -51,8 +51,8 @@ const Template = ({uswds}) => {
           </li>
         </ul>
       </li>
-      <li>
-        <h3>Start your request</h3>
+      <li class="usa-process-list__item">
+        <h3 className='usa-process-list__heading'>Start your request</h3>
         <p>
           We’ll take you through each step of the process. It should take about
           30 minutes.
@@ -63,19 +63,23 @@ const Template = ({uswds}) => {
 };
 
 
-const AlternateIconsTemplate = ({uswds}) => {
+const StatusTemplate = ({uswds}) => {
     return (
       <va-process-list uswds={uswds}>
-        <li className='activeIcon'>
-          <h3>Active Icon</h3>
-          <p>Add the class activeIcon to the li element make the list icon active.</p>
+        <li className='activeIcon usa-process-list__item'>
+          <h3 className='usa-process-list__heading'>Active Icon</h3>
+          <p>Add the class <code>activeIcon</code> to the <code>li</code> element make the list icon blue.</p>
         </li>
-        <li className='checkIcon'>
-          <h3>Checkmark Icon</h3>
-          <p>Add the class checkIcon to the li element make the list icon a checkmark.</p>
+        <li className='checkIcon usa-process-list__item'>
+          <h3 className='usa-process-list__heading'>Checkmark Icon</h3>
+          <p>Add the class <code>checkIcon</code> to the <code>li</code> element make the list icon a checkmark.</p>
         </li>
-        <li>
-          <h3>Default Icon</h3>
+        <li className='pendingIcon usa-process-list__item'>
+          <h3 className='usa-process-list__heading'>Pending Icon</h3>
+          <p>Add the class <code>pendingIcon</code> to the <code>li</code> element make the list item grayed out.</p>
+        </li>
+        <li class="usa-process-list__item">
+          <h3 className='usa-process-list__heading'>Default Icon</h3>
         </li>
       </va-process-list>
     );
@@ -84,7 +88,7 @@ const AlternateIconsTemplate = ({uswds}) => {
 const UtilityStyling = ({uswds}) => {
   return (
     <va-process-list uswds={uswds}>
-      <li>
+      <li class="usa-process-list__item">
         <p>Look at me in mobile view</p>
         <va-additional-info
           trigger="Show more"
@@ -93,7 +97,7 @@ const UtilityStyling = ({uswds}) => {
           <img src="https://via.placeholder.com/350" />
         </va-additional-info>
       </li>
-      <li>
+      <li class="usa-process-list__item">
         <p className="vads-u-margin-top--0">Look at me in desktop view</p>
         <p className="vads-u-display--none medium-screen:vads-u-display--block vads-u-background-color--gray-cool-light">
           I'm only visible on desktop.
@@ -111,8 +115,8 @@ export const Default = Template.bind(null);
 Default.args = { ...defaultArgs };
 Default.argTypes = propStructure(processListDocs);
 
-export const AlternateIcons = AlternateIconsTemplate.bind(null);
-AlternateIcons.args = { ...defaultArgs };
+export const Status = StatusTemplate.bind(null);
+Status.args = { ...defaultArgs };
 
 export const AdditionalStyling = UtilityStyling.bind(null);
 AdditionalStyling.args = { ...defaultArgs };
