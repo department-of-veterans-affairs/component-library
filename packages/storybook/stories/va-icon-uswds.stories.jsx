@@ -1,5 +1,5 @@
 import React from 'react';
-import { getWebComponentDocs, StoryDocs } from './wc-helpers';
+import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
 import './styles/va-icon.scss';
 
 const iconDocs = getWebComponentDocs('va-icon');
@@ -33,8 +33,9 @@ const Template = ({
 
 export const WithSrText = Template.bind(null);
 WithSrText.args = {
-  ...defaultArgs, srtext: 'add some text for a screen reader here to describe the semantic meaning of the icon.'
-}
+  ...defaultArgs, srtext: 'add some text for a screen reader to describe the semantic meaning of the icon.'
+};
+WithSrText.argTypes = propStructure(iconDocs);
 
 const IconsTemplate = ({
   size
