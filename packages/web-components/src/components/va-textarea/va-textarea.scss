@@ -6,6 +6,7 @@
 @use 'usa-error-message/src/styles/usa-error-message';
 @use 'usa-hint/src/styles/usa-hint';
 @use 'usa-textarea/src/styles/usa-textarea';
+@use 'usa-character-count/src/styles/_usa-character-count';
 
 @import '../../mixins/uswds-error-border.scss';
 @import '../../global/formation_overrides';

@@ -188,6 +188,10 @@ export namespace Components {
          */
         "label"?: string;
         /**
+          * If `true`, the button will use the primary alternate variant.
+         */
+        "primaryAlternate"?: boolean;
+        /**
           * If `true`, the button will use the secondary variant.
          */
         "secondary"?: boolean;
@@ -1025,6 +1029,10 @@ export namespace Components {
          */
         "autocomplete"?: string;
         /**
+          * Whether the component should show a character count message.  Has no effect without uswds and maxlength being set.
+         */
+        "charcount"?: boolean;
+        /**
           * Emit component-library-analytics events on the blur event.
          */
         "enableAnalytics"?: boolean;
@@ -1104,6 +1112,10 @@ export namespace Components {
         "width"?: string;
     }
     interface VaTextarea {
+        /**
+          * Whether the component should show a character count message.  Has no effect without uswds and maxlength being set.
+         */
+        "charcount"?: boolean;
         /**
           * Emit component-library-analytics events on the blur event.
          */
@@ -1809,6 +1821,10 @@ declare namespace LocalJSX {
           * The event used to track usage of the component.
          */
         "onComponent-library-analytics"?: (event: VaButtonCustomEvent<any>) => void;
+        /**
+          * If `true`, the button will use the primary alternate variant.
+         */
+        "primaryAlternate"?: boolean;
         /**
           * If `true`, the button will use the secondary variant.
          */
@@ -2819,6 +2835,10 @@ declare namespace LocalJSX {
          */
         "autocomplete"?: string;
         /**
+          * Whether the component should show a character count message.  Has no effect without uswds and maxlength being set.
+         */
+        "charcount"?: boolean;
+        /**
           * Emit component-library-analytics events on the blur event.
          */
         "enableAnalytics"?: boolean;
@@ -2902,6 +2922,10 @@ declare namespace LocalJSX {
         "width"?: string;
     }
     interface VaTextarea {
+        /**
+          * Whether the component should show a character count message.  Has no effect without uswds and maxlength being set.
+         */
+        "charcount"?: boolean;
         /**
           * Emit component-library-analytics events on the blur event.
          */
