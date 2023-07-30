@@ -16,7 +16,7 @@ export default {
 }
 
 const defaultArgs = {
-  'icon': 'accessibility_new',
+  'icon': 'alarm',
   'size': 7,
   'srtext': null
 }
@@ -31,11 +31,12 @@ const Template = ({
   );
 }
 
-export const WithSrText = Template.bind(null);
-WithSrText.args = {
-  ...defaultArgs, srtext: 'add some text for a screen reader to describe the semantic meaning of the icon.'
+export const Default = Template.bind(null);
+Default.args = {
+  ...defaultArgs,
+  srtext: 'add some text for a screen reader to describe the icon\'s semantic meaning'
 };
-WithSrText.argTypes = propStructure(iconDocs);
+Default.argTypes = propStructure(iconDocs);
 
 const IconsTemplate = ({
   size
