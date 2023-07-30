@@ -1,41 +1,105 @@
-/* Colors from: */
-/*   https://design.va.gov/design/color-palette */
-/* Fonts from: */
-/*   https://github.com/department-of-veterans-affairs/veteran-facing-services-tools/blob/8d39616e957cb44b6664a658b2c51dca8076fe7e/packages/formation/sass/base/_b-variables.scss#L16-L17 */
-:root {
+/**
+ * Do not edit directly
+ * Generated on Thu, 27 Jul 2023 19:41:26 GMT
+ */
+
+ :root {
   --color-base: #212121;
-  --color-black: #000000;
   --color-white: #ffffff;
+  --color-black: #000000;
+  --color-orange: #eb7f29;
+  --color-link-default: #004795;
+  --color-link-visited: #4c2c92;
+  --color-warning-message: #fac922;
+  --color-gibill-accent: #fff1d2;
+  --color-primary: #0071bb;
+  --color-primary-darker: #003e73;
+  --color-primary-darkest: #112e51;
+  --color-primary-alt: #02bfe7;
+  --color-primary-alt-dark: #00a6d2;
+  --color-primary-alt-darkest: #046b99;
+  --color-primary-alt-light: #9bdaf1;
+  --color-primary-alt-lightest: #e1f3f8;
+  --color-secondary: #e31c3d;
+  --color-secondary-dark: #cd2026;
+  --color-secondary-darkest: #981b1e;
+  --color-secondary-light: #e59393;
+  --color-secondary-lightest: #f9dede;
   --color-gray: #5b616b;
-  --color-gray-medium: #757575;
   --color-gray-dark: #323a45;
+  --color-gray-medium: #757575;
   --color-gray-light: #aeb0b5;
+  --color-gray-light-alt: #eeeeee;
   --color-gray-lighter: #d6d7d9;
   --color-gray-lightest: #f1f1f1;
+  --color-gray-warm-dark: #494440;
+  --color-gray-warm-light: #e4e2e0;
   --color-gray-cool-light: #dce4ef;
   --color-green: #2e8540;
+  --color-green-dark: #1e5f2f;
+  --color-green-darker: #195c27;
+  --color-green-darkest: #0f3f1f;
+  --color-green-light: #7dbf7c;
   --color-green-lighter: #94bfa2;
   --color-green-lightest: #e7f4e4;
   --color-gold: #fdb81e;
   --color-gold-light: #f9c642;
   --color-gold-lighter: #fad980;
   --color-gold-lightest: #fff1d2;
-  --color-link-default: #004795;
-  --color-link-visited: #4c2c92;
-  --color-primary: #0071bb;
-  --color-primary-darker: #003e73;
-  --color-primary-darkest: #112E51;
-  --color-primary-alt-dark: #00a6d2;
-  --color-primary-alt-darkest: #046b99;
-  --color-primary-alt-light: #9bdaf1;
-  --color-primary-alt-lightest: #e1f3f8;
-  --color-secondary-dark: #cd2026;
-  --color-secondary-light: #e59393;
-  --color-secondary-lightest: #f9dede;
-  --color-blue-cool-lightest: #d9e8f6;
   --v3-color-error-dark: #b50909;
   --v3-color-base-darkest: #1B1B1B;
-  --font-source-sans: 'Source Sans Pro', 'Helvetica Neue', Helvetica, Roboto,
-    Arial, sans-serif;
+  --font-family-sans: 'Source Sans Pro', 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif;
+  --font-family-serif: Bitter, Georgia, Cambria, 'Times New Roman', Times, serif;
   --font-serif: Bitter, Georgia, Cambria, 'Times New Roman', Times, serif;
+  --font-source-sans: 'Source Sans Pro', 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif;
+  --font-weight-normal: 400;
+  --font-weight-bold: 700;
+  --font-style-normal: normal;
+  --font-style-italic: italic;
+  --font-size-sm: 1.5rem;
+  --font-size-base: 1.6rem;
+  --font-size-md: 1.7rem;
+  --font-size-lg: 2rem;
+  --font-size-xl: 3rem;
+  --font-size-2xl: 4rem;
+  --font-size-h1: 4rem;
+  --font-size-h2: 3rem;
+  --font-size-h3: 2rem;
+  --font-size-h4: 1.7rem;
+  --font-size-h5: 1.5rem;
+  --font-size-h6: 1.5rem;
+  --v3-font-base-size: 16px;
+  --units-0: 0;
+  --units-1: 0.8rem;
+  --units-2: 1.6rem;
+  --units-3: 2.4rem;
+  --units-4: 3.2rem;
+  --units-5: 4rem;
+  --units-6: 4.8rem;
+  --units-7: 5.6rem;
+  --units-8: 6.4rem;
+  --units-9: 7.2rem;
+  --units-10: 8rem;
+  --units-15: 12rem;
+  --units-1px: 1px;
+  --units-0p25: 2px;
+  --units-0p5: 0.4rem;
+  --units-1p5: 1.2rem;
+  --units-2p5: 2rem;
+  --units-neg-1px: -1px;
+  --units-neg-0p25: -2px;
+  --units-neg-0p5: -0.4rem;
+  --units-neg-1: -0.8rem;
+  --units-neg-1p5: -1.2rem;
+  --units-neg-2: -1.6rem;
+  --units-neg-2p5: -2rem;
+  --units-neg-3: -2.4rem;
+  --units-neg-4: -3.2rem;
+  --units-neg-5: -4rem;
+  --units-neg-6: -4.8rem;
+  --units-neg-7: -5.6rem;
+  --units-neg-8: -6.4rem;
+  --units-neg-9: -7.2rem;
+  --units-neg-10: -8rem;
+  --units-neg-15: -12rem;
 }

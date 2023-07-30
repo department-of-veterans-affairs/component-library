@@ -54,6 +54,7 @@ const defaultArgs = {
   'uswds': true,
   'hint': null,
   'message-aria-describedby': 'Optional description text for screen readers',
+  'charcount': false
 };
 
 const Template = ({
@@ -64,7 +65,6 @@ const Template = ({
   required,
   error,
   maxlength,
-  minlength,
   value,
   inputmode,
   type,
@@ -73,6 +73,7 @@ const Template = ({
   uswds,
   hint,
   'message-aria-describedby': messageAriaDescribedby,
+  charcount
 }) => {
   return (
     <va-text-input
@@ -85,7 +86,6 @@ const Template = ({
       error={error}
       hint={hint}
       maxlength={maxlength}
-      minlength={minlength}
       value={value}
       inputmode={inputmode}
       type={type}
@@ -94,6 +94,7 @@ const Template = ({
       onBlur={e => console.log('blur event', e)}
       onInput={e => console.log('input event value', e.target.value)}
       message-aria-describedby={messageAriaDescribedby}
+      charcount={charcount}
     />
   );
 };
@@ -106,7 +107,6 @@ const I18nTemplate = ({
   required,
   error,
   maxlength,
-  minlength,
   value,
   inputmode,
   type,
@@ -137,7 +137,6 @@ const I18nTemplate = ({
         required={required}
         error={error}
         maxlength={maxlength}
-        minlength={minlength}
         value={value}
         inputmode={inputmode}
         type={type}
@@ -239,20 +238,6 @@ MaxLength.args = {
   maxlength: '16',
 };
 
-export const MinLength = Template.bind(null);
-MinLength.args = {
-  ...defaultArgs,
-  minlength: '3',
-};
-
-export const Range = Template.bind(null);
-Range.args = {
-  ...defaultArgs,
-  label: 'Acceptable range 3 - 6 characters',
-  minlength: '3',
-  maxlength: '6',
-};
-
 export const Pattern = Template.bind(null);
 Pattern.args = {
   ...defaultArgs,
@@ -304,6 +289,9 @@ WithAdditionalInfo.args = {
   ...defaultArgs,
   label: 'Veteran’s Social Security number',
 };
+
+export const WithCharacterCount = Template.bind(null);
+WithCharacterCount.args = { ...defaultArgs, maxlength: '10', charcount: true}
 
 export const Widths = WidthsTemplate.bind(null);
 Widths.args = {

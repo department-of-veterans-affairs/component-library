@@ -26,6 +26,7 @@ const defaultArgs = {
   'placeholder': '',
   'uswds': true,
   'hint': null,
+  'charcount': false
 };
 
 const Template = ({
@@ -39,6 +40,7 @@ const Template = ({
   placeholder,
   uswds,
   hint,
+  charcount
 }) => {
   return (
     <va-textarea
@@ -54,6 +56,7 @@ const Template = ({
       placeholder={placeholder}
       onBlur={e => console.log('blur event', e)}
       onInput={e => console.log('input event value', e.target.value)}
+      charcount={charcount}
     />
   );
 };
@@ -114,3 +117,6 @@ WithAnalytics.args = { ...defaultArgs, 'enable-analytics': true };
 
 export const ResizableControl = ResizableTemplate.bind(null);
 ResizableControl.args = { ...defaultArgs };
+
+export const WithCharacterCount = Template.bind(null);
+WithCharacterCount.args = { ...defaultArgs, charcount: true, maxlength: '100'}

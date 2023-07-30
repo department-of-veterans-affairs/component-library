@@ -5,6 +5,7 @@
 @use 'usa-input/src/styles/usa-input';
 @use 'usa-error-message/src/styles/usa-error-message';
 @use 'usa-hint/src/styles/usa-hint';
+@use 'usa-character-count/src/styles/_usa-character-count';
 
 @import '../../mixins/uswds-error-border.scss';
 @import '../../mixins/uswds-input-width.scss';
@@ -37,10 +38,10 @@ input.usa-input {
 }
 
 /** Original Component Style **/
-
 @import '../../mixins/accessibility.css';
 @import '../../mixins/form-field-error.css';
 @import '../../mixins/hint-text.css';
+
 
 :host(:not([uswds])) label {
   display: block;
