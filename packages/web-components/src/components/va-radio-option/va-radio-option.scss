@@ -5,6 +5,11 @@
 
 @import '../../global/formation_overrides';
 
+
+.usa-radio {
+  background: transparent;
+}
+
 :host {
   display: block;
   margin-top: 12px;

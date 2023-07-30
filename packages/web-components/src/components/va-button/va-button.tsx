@@ -53,6 +53,11 @@ export class VaButton {
   @Prop() label?: string; // could use this.el.getAttribute('aria-label') but this is more explicit
 
   /**
+   * If `true`, the button will use the primary alternate variant.
+   */
+  @Prop() primaryAlternate?: boolean = false;
+
+  /**
    * If `true`, the button will use the secondary variant.
    */
   @Prop({ reflect: true }) secondary?: boolean = false;
@@ -128,6 +133,7 @@ export class VaButton {
       label,
       submit,
       secondary,
+      primaryAlternate,
       big,
       uswds
     } = this;
@@ -141,8 +147,8 @@ export class VaButton {
         'usa-button': true,
         'usa-button--big': big,
         'usa-button--outline': back || secondary,
+        'va-button-primary--alternate': primaryAlternate
       });
-
       return (
         <Host>
           <button 
@@ -162,9 +168,13 @@ export class VaButton {
         </Host>
       )
     } else {
+      const buttonClass = classnames({
+        'va-button-primary--alternate': primaryAlternate
+      });
       return (
         <Host>
           <button
+            class={buttonClass}
             aria-disabled={ariaDisabled}
             aria-label={label}
             type={type}
