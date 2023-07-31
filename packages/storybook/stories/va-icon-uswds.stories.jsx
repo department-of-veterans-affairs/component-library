@@ -17,7 +17,7 @@ export default {
 
 const defaultArgs = {
   'icon': 'alarm',
-  'size': 3,
+  'size': 4,
   'srtext': null
 }
 
