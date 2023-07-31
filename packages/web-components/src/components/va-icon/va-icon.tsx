@@ -22,17 +22,18 @@ import { consoleDevError } from '../../utils/utils';
 })
 export class VaIcon {
   /**
-   * the name of the icon to use
+   * The name of the icon to use
    */
   @Prop() icon!: string;
 
   /**
-   * the size variant of the icon
+   * The size variant of the icon,
+   * an integer between 3 and 9 inclusive
    */
   @Prop() size?: number;
 
   /**
-   * screen-reader text if the icon has semantic meaning 
+   * Screen-reader text if the icon has semantic meaning 
    * and is not purely decorative.
    */
   @Prop() srtext?: string;
@@ -65,7 +66,7 @@ export class VaIcon {
           focusable="false"
           role="img">
             {srtext && <title id="icon-title">{srtext}</title>}
-            <use xlinkHref={imageSrc}></use>
+            <use href={imageSrc}></use>
         </svg>
       </Host>
     );

@@ -395,15 +395,15 @@ export namespace Components {
     }
     interface VaIcon {
         /**
-          * the name of the icon to use
+          * The name of the icon to use
          */
         "icon": string;
         /**
-          * the size variant of the icon
+          * The size variant of the icon, an integer between 3 and 9 inclusive
          */
         "size"?: number;
         /**
-          * screen-reader text if the icon has semantic meaning  and is not purely decorative.
+          * Screen-reader text if the icon has semantic meaning  and is not purely decorative.
          */
         "srtext"?: string;
     }
@@ -2073,15 +2073,15 @@ declare namespace LocalJSX {
     }
     interface VaIcon {
         /**
-          * the name of the icon to use
+          * The name of the icon to use
          */
         "icon": string;
         /**
-          * the size variant of the icon
+          * The size variant of the icon, an integer between 3 and 9 inclusive
          */
         "size"?: number;
         /**
-          * screen-reader text if the icon has semantic meaning  and is not purely decorative.
+          * Screen-reader text if the icon has semantic meaning  and is not purely decorative.
          */
         "srtext"?: string;
     }

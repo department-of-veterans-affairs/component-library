@@ -39,10 +39,18 @@ describe('va-icon', () => {
     expect(titleEl.innerHTML).toEqual('this is a test...');
   });
 
-  it('passes an aXe check', async () => {
+  it('passes an aXe check when srtext is set', async () => {
     const page = await newE2EPage();
 
     await page.setContent('<va-icon icon="account_circle" size="5" srtext="this is a test..." />');
+
+    await axeCheck(page);
+  });
+
+  it('passes an aXe check when srtext is not set', async () => {
+    const page = await newE2EPage();
+
+    await page.setContent('<va-icon icon="account_circle" size="5" />');
 
     await axeCheck(page);
   });
