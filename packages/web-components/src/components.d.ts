@@ -154,6 +154,10 @@ export namespace Components {
     }
     interface VaBreadcrumbs {
         /**
+          * Represents a list of breadcrumbs. Use an array of objects with label and href properties, and then use JSON.stringify() to convert to a string. This prop is available when `uswds` is set to `true`.
+         */
+        "breadcrumbList"?: any;
+        /**
           * Analytics tracking function(s) will not be called
          */
         "disableAnalytics"?: boolean;
@@ -161,6 +165,14 @@ export namespace Components {
           * Adds an aria-label attribute to the <nav /> element.
          */
         "label"?: string;
+        /**
+          * Whether or not the component will use USWDS v3 styling.
+         */
+        "uswds"?: boolean;
+        /**
+          * Whether or not the component will wrap the breadcrumbs. This prop is available when `uswds` is set to `true`.
+         */
+        "wrapping"?: boolean;
     }
     interface VaButton {
         /**
@@ -392,6 +404,20 @@ export namespace Components {
           * Sets the input to required and renders the (*Required) text.
          */
         "required"?: boolean;
+    }
+    interface VaIcon {
+        /**
+          * The name of the icon to use
+         */
+        "icon": string;
+        /**
+          * The size variant of the icon, an integer between 3 and 9 inclusive
+         */
+        "size"?: number;
+        /**
+          * Screen-reader text if the icon has semantic meaning  and is not purely decorative.
+         */
+        "srtext"?: string;
     }
     interface VaLink {
         /**
@@ -1377,6 +1403,12 @@ declare global {
         prototype: HTMLVaFileInputElement;
         new (): HTMLVaFileInputElement;
     };
+    interface HTMLVaIconElement extends Components.VaIcon, HTMLStencilElement {
+    }
+    var HTMLVaIconElement: {
+        prototype: HTMLVaIconElement;
+        new (): HTMLVaIconElement;
+    };
     interface HTMLVaLinkElement extends Components.VaLink, HTMLStencilElement {
     }
     var HTMLVaLinkElement: {
@@ -1550,6 +1582,7 @@ declare global {
         "va-date": HTMLVaDateElement;
         "va-featured-content": HTMLVaFeaturedContentElement;
         "va-file-input": HTMLVaFileInputElement;
+        "va-icon": HTMLVaIconElement;
         "va-link": HTMLVaLinkElement;
         "va-loading-indicator": HTMLVaLoadingIndicatorElement;
         "va-maintenance-banner": HTMLVaMaintenanceBannerElement;
@@ -1759,6 +1792,10 @@ declare namespace LocalJSX {
     }
     interface VaBreadcrumbs {
         /**
+          * Represents a list of breadcrumbs. Use an array of objects with label and href properties, and then use JSON.stringify() to convert to a string. This prop is available when `uswds` is set to `true`.
+         */
+        "breadcrumbList"?: any;
+        /**
           * Analytics tracking function(s) will not be called
          */
         "disableAnalytics"?: boolean;
@@ -1770,6 +1807,14 @@ declare namespace LocalJSX {
           * The event used to track usage of the component. This is emitted when a breadcrumb anchor is clicked and disableAnalytics is not true.
          */
         "onComponent-library-analytics"?: (event: VaBreadcrumbsCustomEvent<any>) => void;
+        /**
+          * Whether or not the component will use USWDS v3 styling.
+         */
+        "uswds"?: boolean;
+        /**
+          * Whether or not the component will wrap the breadcrumbs. This prop is available when `uswds` is set to `true`.
+         */
+        "wrapping"?: boolean;
     }
     interface VaButton {
         /**
@@ -2049,6 +2094,20 @@ declare namespace LocalJSX {
           * Sets the input to required and renders the (*Required) text.
          */
         "required"?: boolean;
+    }
+    interface VaIcon {
+        /**
+          * The name of the icon to use
+         */
+        "icon": string;
+        /**
+          * The size variant of the icon, an integer between 3 and 9 inclusive
+         */
+        "size"?: number;
+        /**
+          * Screen-reader text if the icon has semantic meaning  and is not purely decorative.
+         */
+        "srtext"?: string;
     }
     interface VaLink {
         /**
@@ -2953,6 +3012,7 @@ declare namespace LocalJSX {
         "va-date": VaDate;
         "va-featured-content": VaFeaturedContent;
         "va-file-input": VaFileInput;
+        "va-icon": VaIcon;
         "va-link": VaLink;
         "va-loading-indicator": VaLoadingIndicator;
         "va-maintenance-banner": VaMaintenanceBanner;
@@ -3001,6 +3061,7 @@ declare module "@stencil/core" {
             "va-date": LocalJSX.VaDate & JSXBase.HTMLAttributes<HTMLVaDateElement>;
             "va-featured-content": LocalJSX.VaFeaturedContent & JSXBase.HTMLAttributes<HTMLVaFeaturedContentElement>;
             "va-file-input": LocalJSX.VaFileInput & JSXBase.HTMLAttributes<HTMLVaFileInputElement>;
+            "va-icon": LocalJSX.VaIcon & JSXBase.HTMLAttributes<HTMLVaIconElement>;
             "va-link": LocalJSX.VaLink & JSXBase.HTMLAttributes<HTMLVaLinkElement>;
             "va-loading-indicator": LocalJSX.VaLoadingIndicator & JSXBase.HTMLAttributes<HTMLVaLoadingIndicatorElement>;
             "va-maintenance-banner": LocalJSX.VaMaintenanceBanner & JSXBase.HTMLAttributes<HTMLVaMaintenanceBannerElement>;
