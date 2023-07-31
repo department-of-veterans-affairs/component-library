@@ -997,7 +997,7 @@ export namespace Components {
          */
         "notClickable"?: boolean;
         /**
-          * Indicates if this is a number meant to be used  to text.
+          * Indicates if this is a number meant to be used to text.
          */
         "sms"?: boolean;
         /**
@@ -2782,7 +2782,7 @@ declare namespace LocalJSX {
          */
         "onComponent-library-analytics"?: (event: VaTelephoneCustomEvent<any>) => void;
         /**
-          * Indicates if this is a number meant to be used  to text.
+          * Indicates if this is a number meant to be used to text.
          */
         "sms"?: boolean;
         /**
