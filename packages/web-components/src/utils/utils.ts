@@ -25,7 +25,7 @@ export function getSlottedNodes(
   const children = root.shadowRoot.querySelector('slot').assignedNodes()
 
   return nodeName !== null ? Array.from(children).filter(
-    item => item.nodeName.toLowerCase() === nodeName,
+        item => item.nodeName.toLowerCase() === nodeName,
   ) : Array.from(children);
 }
 
@@ -36,4 +36,38 @@ export function consoleDevError(message: string): void {
   if (Build.isDev && !Build.isTesting) {
     console.error(message);
   }
+}
+
+/**
+ *
+ * Take the length of a string; if the length is "1" then return blank string for no plurality
+ * otherwise return an 's' for plurality
+ */
+export function plurality(length: number): string {
+  return length === 1 ? '' : 's';
+}
+
+/**
+ * generates message to update character count if uswds prop set
+ * currently used in va-text-input and va-text-area v3 components
+ * update this method with translations instead of string literals
+ */
+export function getCharacterMessage(
+  value: string | undefined,
+  maxlength: number | undefined,
+): string {
+  if (value === undefined) {
+    return `${maxlength} character${plurality(maxlength)} allowed`;
+  }
+
+  let message: string;
+  if (value.length <= maxlength) {
+    const chars = maxlength - value.length;
+    message = `${chars} character${plurality(chars)} left`;
+  } else {
+    const chars = value.length - maxlength;
+    message = `${chars} character${plurality(chars)} over limit`;
+  }
+
+  return message;
 }

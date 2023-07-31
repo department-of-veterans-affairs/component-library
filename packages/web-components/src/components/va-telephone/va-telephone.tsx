@@ -47,7 +47,7 @@ export class VaTelephone {
   @Prop() tty?: boolean = false;
 
   /**
-   * Indicates if this is a number meant to be used 
+   * Indicates if this is a number meant to be used
    * to text.
    */
   @Prop() sms?: boolean = false;
@@ -69,13 +69,24 @@ export class VaTelephone {
   })
   componentLibraryAnalytics: EventEmitter;
 
+  static cleanContact(contact: string) :string {
+    return (contact || '').replace(/[^\d]/g, '');
+  }
+
   static splitContact(contact: string) :string[] {
-    if (contact.length === 10) {
-      const regex = /(?<area>\d{3})(?<local>\d{3})(?<last4>\d{4})/g;
-      const { area, local, last4 } = regex.exec(contact).groups;
-      return [area, local, last4];
+    const cleanedContact = VaTelephone.cleanContact(contact);
+    if (cleanedContact.length === 10) {
+      // const regex = /(?<area>\d{3})(?<local>\d{3})(?<last4>\d{4})/g;
+      // const { area, local, last4 } = regex.exec(contact).groups;
+      // *******
+      // Many Veterans are still using older browsers that do not support regexp
+      // named capture groups (e.g. Safari 11.0); see
+      // vets-design-system-documentation #1834
+      const regex = /^(\d{3})(\d{3})(\d{4})$/g;
+      const result = [...regex.exec(cleanedContact)];
+      return result.length === 4 ? result.slice(-3) : [cleanedContact];
     }
-    return [contact];
+    return [cleanedContact];
   }
 
   /**
@@ -89,9 +100,10 @@ export class VaTelephone {
     vanity: string,
     tty: boolean = false,
   ): string {
-    let formattedNum = num;
-    if (num.length === 10) {
-      const [ area, local, last4 ] = VaTelephone.splitContact(num);
+    const splitNumber = VaTelephone.splitContact(num);
+    let formattedNum = splitNumber.join('');
+    if (formattedNum.length === 10) {
+      const [ area, local, last4 ] = splitNumber;
       formattedNum = `${area}-${local}-${last4}`;
       if (international) formattedNum = `+1-${formattedNum}`;
       if (extension) formattedNum = `${formattedNum}, ext. ${extension}`;
@@ -131,17 +143,18 @@ export class VaTelephone {
   }
 
   static createHref(contact: string, extension: number, sms: boolean): string {
-    const isN11 = contact.length === 3;
+    const cleanedContact = VaTelephone.cleanContact(contact);
+    const isN11 = cleanedContact.length === 3;
     // extension format ";ext=" from RFC3966 https://tools.ietf.org/html/rfc3966#page-5
     // but it seems that using a comma to pause for 2 seconds might be a better
     // solution - see https://dsva.slack.com/archives/C8E985R32/p1589814301103200
     let href = null;
     if (sms) {
-      href = `sms:${contact}`;
+      href = `sms:${cleanedContact}`;
     } else if (isN11) {
-      href = `tel:${contact}`;
+      href = `tel:${cleanedContact}`;
     } else {
-      href = `tel:+1${contact}`;
+      href = `tel:+1${cleanedContact}`;
     }
     return `${href}${extension ? `,${extension}` : ''}`;
   }

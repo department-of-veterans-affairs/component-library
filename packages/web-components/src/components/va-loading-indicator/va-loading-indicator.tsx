@@ -73,7 +73,7 @@ export class VaLoadingIndicator {
           const loadingIndicatorRemoved =
             Array.from(mutation.removedNodes.values()).filter(
               (node: Element) =>
-                node.tagName.toLowerCase() === 'va-loading-indicator',
+                node?.tagName?.toLowerCase() === 'va-loading-indicator',
             ).length > 0;
 
           if (this.enableAnalytics && loadingIndicatorRemoved) {
