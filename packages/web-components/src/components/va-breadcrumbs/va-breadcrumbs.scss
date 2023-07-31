@@ -28,3 +28,15 @@
   position: relative;
   width: 100%;
 }
+
+:host([uswds]) .usa-breadcrumb__link {
+  color: var(--color-link-default);
+}
+
+:host([uswds]) .usa-breadcrumb__link:hover {
+  color: var(--color-primary-darker);
+}
+
+:host([uswds]) .usa-breadcrumb__list-item:not(:last-child)::after {
+  background: var(--color-gray-medium);
+}
