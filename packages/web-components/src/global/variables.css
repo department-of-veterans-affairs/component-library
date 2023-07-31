@@ -1,9 +1,9 @@
 /**
  * Do not edit directly
- * Generated on Thu, 27 Jul 2023 19:41:26 GMT
+ * Generated on Mon, 31 Jul 2023 18:43:57 GMT
  */
 
- :root {
+:root {
   --color-base: #212121;
   --color-white: #ffffff;
   --color-black: #000000;
@@ -46,6 +46,7 @@
   --color-gold-light: #f9c642;
   --color-gold-lighter: #fad980;
   --color-gold-lightest: #fff1d2;
+  --color-blue-cool-lightest: #dce4ef;
   --v3-color-error-dark: #b50909;
   --v3-color-base-darkest: #1B1B1B;
   --font-family-sans: 'Source Sans Pro', 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif;
