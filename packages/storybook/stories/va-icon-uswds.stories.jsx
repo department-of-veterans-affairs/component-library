@@ -17,7 +17,7 @@ export default {
 
 const defaultArgs = {
   'icon': 'alarm',
-  'size': 7,
+  'size': 3,
   'srtext': null
 }
 
@@ -55,7 +55,7 @@ const IconsTemplate = ({
 
 export const Icons = IconsTemplate.bind(null);
 Icons.args = {
-  ...defaultArgs, size: 7
+  ...defaultArgs
 }
 
 const icons = [
