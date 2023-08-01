@@ -62,10 +62,10 @@ describe('va-process-list', () => {
     const page = await newE2EPage();
     await page.setContent(`
       <va-process-list uswds>
-        <va-process-list-item uswds header="Step one">
+        <va-process-list-item header="Step one">
           <p>Some content</p>
         </va-process-list-item>
-        <va-process-list-item uswds header="Step two">
+        <va-process-list-item header="Step two">
           <p>Additional content</p>
           <ul>
             <li>Item one</li>
@@ -82,10 +82,10 @@ describe('va-process-list', () => {
     const page = await newE2EPage();
     await page.setContent(`
       <va-process-list uswds>
-        <va-process-list-item uswds header="Step one">
+        <va-process-list-item header="Step one">
           <p>Some content</p>
         </va-process-list-item>
-        <va-process-list-item uswds header="Step two">
+        <va-process-list-item header="Step two">
           <p>Additional content</p>
           <ul>
             <li>Item one</li>
@@ -103,12 +103,12 @@ describe('va-process-list', () => {
             <slot></slot>
           </ol>
         </mock:shadow-root>
-        <va-process-list-item class="hydrated usa-process-list__item" header="Step one" role="listitem" uswds="">
+        <va-process-list-item class="hydrated usa-process-list__item" header="Step one" role="listitem">
           <!---->  
           <h3 class="usa-process-list__heading">Step one</h3>
           <p>Some content</p>
         </va-process-list-item>
-        <va-process-list-item class="hydrated usa-process-list__item" header="Step two" role="listitem" uswds="">
+        <va-process-list-item class="hydrated usa-process-list__item" header="Step two" role="listitem">
           <!---->
           <h3 class="usa-process-list__heading">Step two</h3>
           <p>Additional content</p>

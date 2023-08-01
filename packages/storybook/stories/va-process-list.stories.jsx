@@ -62,10 +62,10 @@ const Template = ({}) => {
   );
 };
 
-const UtilityStyling = ({uswds}) => {
+const UtilityStyling = ({}) => {
   return (
-    <va-process-list uswds={uswds}>
-      <va-process-list-item uswds={uswds}>
+    <va-process-list>
+      <li>
         <p>Look at me in mobile view</p>
         <va-additional-info
           trigger="Show more"
@@ -73,8 +73,8 @@ const UtilityStyling = ({uswds}) => {
         >
           <img src="https://via.placeholder.com/350" />
         </va-additional-info>
-      </va-process-list-item>
-      <va-process-list-item uswds={uswds}>
+      </li>
+      <li>
         <p className="vads-u-margin-top--0">Look at me in desktop view</p>
         <p className="vads-u-display--none medium-screen:vads-u-display--block vads-u-background-color--gray-cool-light">
           I'm only visible on desktop.
@@ -83,7 +83,7 @@ const UtilityStyling = ({uswds}) => {
             And any global utility style will work.
           </span>
         </p>
-      </va-process-list-item>
+      </li>
     </va-process-list>
   );
 };

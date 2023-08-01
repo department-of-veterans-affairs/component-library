@@ -1,8 +1,8 @@
 import { Component, h, Prop } from '@stencil/core';
 
 /**
- * This component expects `<va-process-list-item>` elements as its children.
- * Or for v1 `<li>` elements are also acceptable
+ * For v3/uswds this component expects `<va-process-list-item>` elements as its children.
+ * For v1 this component expects `<li>` elements as its children.
  */
 
 /**

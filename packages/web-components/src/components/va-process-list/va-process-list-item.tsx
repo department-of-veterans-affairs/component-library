@@ -5,6 +5,7 @@ import {
     h,
   } from '@stencil/core';
 
+// Shadow DOM turned off so the va-process-list has visibility into component and can apply styles
 @Component({
   tag: 'va-process-list-item',
   styleUrl: 'va-process-list-item.scss',
@@ -37,30 +38,16 @@ export class VaProcessListItem {
   */
   @Prop() checkmark?: boolean = false;
 
-  /**
-  * Whether or not the component will use USWDS v3 styling.
-  */
-  @Prop() uswds?: boolean = false;
-
   render() { 
-    const {uswds, header, level} = this;
+    const {header, level} = this;
     // eslint-disable-next-line i18next/no-literal-string
     const HeaderTag = `h${level}`;
     
-    if (uswds) { 
-      return (
-        <Host role="listitem" class='usa-process-list__item'>
-            {header ? <HeaderTag class='usa-process-list__heading'>{header}</HeaderTag> : null}
-            <slot/>
-        </Host>
-      )
-    } else {
-      return (
-        <Host role="listitem">
-          {header ? <HeaderTag>{header}</HeaderTag> : null}
-          <slot/>
-        </Host>
-      )
-    }
+    return (
+      <Host role="listitem" class='usa-process-list__item'>
+        {header ? <HeaderTag class='usa-process-list__heading'>{header}</HeaderTag> : null}
+        <slot/>
+      </Host>
+    )
   }
 }

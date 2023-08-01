@@ -794,10 +794,6 @@ export namespace Components {
           * Whether or not the item is pending
          */
         "pending"?: boolean;
-        /**
-          * Whether or not the component will use USWDS v3 styling.
-         */
-        "uswds"?: boolean;
     }
     interface VaProgressBar {
         /**
@@ -2568,10 +2564,6 @@ declare namespace LocalJSX {
           * Whether or not the item is pending
          */
         "pending"?: boolean;
-        /**
-          * Whether or not the component will use USWDS v3 styling.
-         */
-        "uswds"?: boolean;
     }
     interface VaProgressBar {
         /**
