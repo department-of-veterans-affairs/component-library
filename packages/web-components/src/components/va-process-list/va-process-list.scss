@@ -28,7 +28,7 @@
 }
 
 :host([uswds]) ::slotted(va-process-list-item) {
-  border-left: 8px solid var(--color-blue-cool-lightest);
+  border-left: 8px solid var(--color-gray-cool-light);
 }
 
 :host([uswds]) ::slotted(va-process-list-item:last-child) {

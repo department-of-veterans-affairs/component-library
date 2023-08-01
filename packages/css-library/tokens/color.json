@@ -53,9 +53,6 @@
       "light": { "value": "#f9c642"},
       "lighter": { "value": "#fad980"},
       "lightest": { "value": "#fff1d2"}
-    },
-    "blue": {
-      "cool-lightest": { "value": "#dce4ef"}
     }
   },
   "v3-color": {
