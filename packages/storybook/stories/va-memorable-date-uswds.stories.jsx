@@ -20,6 +20,7 @@ export default {
 const defaultArgs = {
   label: 'Date of birth',
   name: 'test',
+  hint: undefined,
   required: false,
   error: undefined,
   value: undefined,
@@ -27,13 +28,14 @@ const defaultArgs = {
   monthSelect: false,
 };
 
-const Template = ({ label, name, required, error, uswds, value, monthSelect }) => {
+const Template = ({ label, name, hint, required, error, uswds, value, monthSelect }) => {
   return (
     <VaMemorableDate
       uswds={uswds}
       monthSelect={monthSelect}
       label={label}
       name={name}
+      hint={hint}
       required={required}
       error={error}
       value={value}
@@ -43,7 +45,7 @@ const Template = ({ label, name, required, error, uswds, value, monthSelect }) =
   );
 };
 
-const CustomValidationTemplate = ({ label, name, required, error, uswds, value }) => {
+const CustomValidationTemplate = ({ label, name, hint, required, error, uswds, value }) => {
   const [dateVal, setDateVal] = useState(value);
   const [errorVal, setErrorVal] = useState(error);
   const today = new Date();
@@ -64,8 +66,10 @@ const CustomValidationTemplate = ({ label, name, required, error, uswds, value }
         uswds={uswds}
         label={label}
         name={name}
+        hint={hint}
         required={required}
         error={errorVal}
+        invalidYear={!!errorVal || null}
         value={dateVal}
         onDateBlur={() => handleDateBlur()}
         onDateChange={e => setDateVal(e.target.value)}
@@ -78,6 +82,20 @@ const CustomValidationTemplate = ({ label, name, required, error, uswds, value }
         error prop to be dynamically set if the parameters are not met.
       </div>
       <div className="vads-u-margin-top--2">
+      <pre className="vads-u-font-size--sm vads-u-background-color--gray-lightest vads-u-padding--2"><code>
+const [dateVal, setDateVal] = useState(value);<br/>
+const [errorVal, setErrorVal] = useState(error);<br/>
+const today = new Date();<br/>
+// new Date as YYYY-MM-DD is giving the day prior to the day select<br/>
+// new Date as YYYY MM DD is giving the correct day selected<br/>
+const dateInput = new Date(dateVal.split('-').join(' '));<br/>
+function handleDateBlur() &#x7b;<br/>
+  if (dateInput &lt;= today) &#x7b;<br/>
+    setErrorVal('Date must be in the future');<br/>
+  &#x7d; else &#x7b;<br/>
+    setErrorVal('');<br/>
+  &#x7d;<br/>
+&#x7d;</code></pre>
         <a
           href="https://github.com/department-of-veterans-affairs/component-library/tree/main/packages/storybook/stories"
           target="_blank"
@@ -105,6 +123,7 @@ const I18nTemplate = ({ label, name, required, error, uswds, value }) => {
         uswds={uswds}
         label={label}
         name={name}
+        hint={hint}
         required={required}
         error={error}
         value={value}
@@ -119,8 +138,8 @@ Default.args = { ...defaultArgs };
 Default.argTypes = propStructure(memorableDateInputDocs);
 
 export const Error = Template.bind(null);
-Error.args = { 
-  ...defaultArgs, 
+Error.args = {
+  ...defaultArgs,
   error: 'Error Message Example',
 };
 
@@ -129,6 +148,14 @@ WithMonthSelect.args = {
   ...defaultArgs,
   monthSelect: true,
   value: '2022-04-19',
+};
+
+export const ExtraHintText = Template.bind(null);
+ExtraHintText.args = {
+  ...defaultArgs,
+  monthSelect: true,
+  value: '2022-04-19',
+  hint: 'Extra hint text',
 };
 
 export const ErrorWithMonthSelect = Template.bind(null);

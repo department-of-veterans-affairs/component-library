@@ -154,6 +154,10 @@ export namespace Components {
     }
     interface VaBreadcrumbs {
         /**
+          * Represents a list of breadcrumbs. Use an array of objects with label and href properties, and then use JSON.stringify() to convert to a string. This prop is available when `uswds` is set to `true`.
+         */
+        "breadcrumbList"?: any;
+        /**
           * Analytics tracking function(s) will not be called
          */
         "disableAnalytics"?: boolean;
@@ -161,6 +165,14 @@ export namespace Components {
           * Adds an aria-label attribute to the <nav /> element.
          */
         "label"?: string;
+        /**
+          * Whether or not the component will use USWDS v3 styling.
+         */
+        "uswds"?: boolean;
+        /**
+          * Whether or not the component will wrap the breadcrumbs. This prop is available when `uswds` is set to `true`.
+         */
+        "wrapping"?: boolean;
     }
     interface VaButton {
         /**
@@ -187,6 +199,10 @@ export namespace Components {
           * The aria-label of the component.
          */
         "label"?: string;
+        /**
+          * If `true`, the button will use the primary alternate variant.
+         */
+        "primaryAlternate"?: boolean;
         /**
           * If `true`, the button will use the secondary variant.
          */
@@ -273,6 +289,10 @@ export namespace Components {
           * The label for the checkbox.
          */
         "label": string;
+        /**
+          * An optional message that will be read by screen readers when the checkbox is focused.
+         */
+        "messageAriaDescribedby"?: string;
         /**
           * Set the input to required and render the (Required) text.
          */
@@ -385,6 +405,20 @@ export namespace Components {
          */
         "required"?: boolean;
     }
+    interface VaIcon {
+        /**
+          * The name of the icon to use
+         */
+        "icon": string;
+        /**
+          * The size variant of the icon, an integer between 3 and 9 inclusive
+         */
+        "size"?: number;
+        /**
+          * Screen-reader text if the icon has semantic meaning  and is not purely decorative.
+         */
+        "srtext"?: string;
+    }
     interface VaLink {
         /**
           * The title used in the abbr element. If filetype is PDF, the abbr title will be Portable Document Format.
@@ -463,25 +497,25 @@ export namespace Components {
          */
         "disableAnalytics"?: boolean;
         /**
-          * A Date object used when downtime expires.
+          * The Date/Time of when the maintenance is scheduled to end.
          */
-        "expiresAt": string;
+        "maintenanceEndDateTime": string;
         /**
-          * The title of the banner for downtime.
+          * The Date/Time of when the maintenance is scheduled to begin.
+         */
+        "maintenanceStartDateTime": string;
+        /**
+          * The title of the banner shown during active maintenance.
          */
         "maintenanceTitle": string;
         /**
-          * A Date object used when downtime starts.
+          * The Date/Time of when to be begin warning users of upcoming site maintenance.
          */
-        "startsAt": string;
+        "upcomingWarnStartDateTime": string;
         /**
-          * A Date object used when pre-downtime starts.
+          * The title of the banner shown for upcoming site maintenance.
          */
-        "warnStartsAt": string;
-        /**
-          * The title of the banner for pre-downtime.
-         */
-        "warnTitle": string;
+        "upcomingWarnTitle": string;
     }
     interface VaMemorableDate {
         /**
@@ -587,6 +621,10 @@ export namespace Components {
          */
         "closeable"?: boolean;
         /**
+          * Date and time for notification. This will also be incorporated into a unique aria-describedby label.
+         */
+        "dateTime"?: string;
+        /**
           * If `true`, the component-library-analytics event is disabled.
          */
         "disableAnalytics"?: boolean;
@@ -611,7 +649,7 @@ export namespace Components {
          */
         "href"?: string;
         /**
-          * Symbol indicates type of notification  Current options are: action-required, update
+          * Symbol indicates type of notification Current options are: action-required, update
          */
         "symbol"?: string;
         /**
@@ -985,7 +1023,7 @@ export namespace Components {
          */
         "notClickable"?: boolean;
         /**
-          * Indicates if this is a number meant to be used  to text.
+          * Indicates if this is a number meant to be used to text.
          */
         "sms"?: boolean;
         /**
@@ -1002,6 +1040,10 @@ export namespace Components {
           * Allows the browser to automatically complete the input.
          */
         "autocomplete"?: string;
+        /**
+          * Whether the component should show a character count message.  Has no effect without uswds and maxlength being set.
+         */
+        "charcount"?: boolean;
         /**
           * Emit component-library-analytics events on the blur event.
          */
@@ -1082,6 +1124,10 @@ export namespace Components {
         "width"?: string;
     }
     interface VaTextarea {
+        /**
+          * Whether the component should show a character count message.  Has no effect without uswds and maxlength being set.
+         */
+        "charcount"?: boolean;
         /**
           * Emit component-library-analytics events on the blur event.
          */
@@ -1357,6 +1403,12 @@ declare global {
         prototype: HTMLVaFileInputElement;
         new (): HTMLVaFileInputElement;
     };
+    interface HTMLVaIconElement extends Components.VaIcon, HTMLStencilElement {
+    }
+    var HTMLVaIconElement: {
+        prototype: HTMLVaIconElement;
+        new (): HTMLVaIconElement;
+    };
     interface HTMLVaLinkElement extends Components.VaLink, HTMLStencilElement {
     }
     var HTMLVaLinkElement: {
@@ -1530,6 +1582,7 @@ declare global {
         "va-date": HTMLVaDateElement;
         "va-featured-content": HTMLVaFeaturedContentElement;
         "va-file-input": HTMLVaFileInputElement;
+        "va-icon": HTMLVaIconElement;
         "va-link": HTMLVaLinkElement;
         "va-loading-indicator": HTMLVaLoadingIndicatorElement;
         "va-maintenance-banner": HTMLVaMaintenanceBannerElement;
@@ -1739,6 +1792,10 @@ declare namespace LocalJSX {
     }
     interface VaBreadcrumbs {
         /**
+          * Represents a list of breadcrumbs. Use an array of objects with label and href properties, and then use JSON.stringify() to convert to a string. This prop is available when `uswds` is set to `true`.
+         */
+        "breadcrumbList"?: any;
+        /**
           * Analytics tracking function(s) will not be called
          */
         "disableAnalytics"?: boolean;
@@ -1750,6 +1807,14 @@ declare namespace LocalJSX {
           * The event used to track usage of the component. This is emitted when a breadcrumb anchor is clicked and disableAnalytics is not true.
          */
         "onComponent-library-analytics"?: (event: VaBreadcrumbsCustomEvent<any>) => void;
+        /**
+          * Whether or not the component will use USWDS v3 styling.
+         */
+        "uswds"?: boolean;
+        /**
+          * Whether or not the component will wrap the breadcrumbs. This prop is available when `uswds` is set to `true`.
+         */
+        "wrapping"?: boolean;
     }
     interface VaButton {
         /**
@@ -1780,6 +1845,10 @@ declare namespace LocalJSX {
           * The event used to track usage of the component.
          */
         "onComponent-library-analytics"?: (event: VaButtonCustomEvent<any>) => void;
+        /**
+          * If `true`, the button will use the primary alternate variant.
+         */
+        "primaryAlternate"?: boolean;
         /**
           * If `true`, the button will use the secondary variant.
          */
@@ -1878,6 +1947,10 @@ declare namespace LocalJSX {
           * The label for the checkbox.
          */
         "label": string;
+        /**
+          * An optional message that will be read by screen readers when the checkbox is focused.
+         */
+        "messageAriaDescribedby"?: string;
         /**
           * The event used to track usage of the component. This is emitted when the input value changes and enableAnalytics is true.
          */
@@ -2022,6 +2095,20 @@ declare namespace LocalJSX {
          */
         "required"?: boolean;
     }
+    interface VaIcon {
+        /**
+          * The name of the icon to use
+         */
+        "icon": string;
+        /**
+          * The size variant of the icon, an integer between 3 and 9 inclusive
+         */
+        "size"?: number;
+        /**
+          * Screen-reader text if the icon has semantic meaning  and is not purely decorative.
+         */
+        "srtext"?: string;
+    }
     interface VaLink {
         /**
           * The title used in the abbr element. If filetype is PDF, the abbr title will be Portable Document Format.
@@ -2102,17 +2189,21 @@ declare namespace LocalJSX {
         /**
           * A unique ID that will be used for conditionally rendering the banner based on if the user has dismissed it already.
          */
-        "bannerId"?: string;
+        "bannerId": string;
         /**
           * Whether or not an analytics event will be fired.
          */
         "disableAnalytics"?: boolean;
         /**
-          * A Date object used when downtime expires.
+          * The Date/Time of when the maintenance is scheduled to end.
          */
-        "expiresAt"?: string;
+        "maintenanceEndDateTime": string;
         /**
-          * The title of the banner for downtime.
+          * The Date/Time of when the maintenance is scheduled to begin.
+         */
+        "maintenanceStartDateTime": string;
+        /**
+          * The title of the banner shown during active maintenance.
          */
         "maintenanceTitle"?: string;
         /**
@@ -2124,17 +2215,13 @@ declare namespace LocalJSX {
          */
         "onComponent-library-analytics"?: (event: VaMaintenanceBannerCustomEvent<any>) => void;
         /**
-          * A Date object used when downtime starts.
+          * The Date/Time of when to be begin warning users of upcoming site maintenance.
          */
-        "startsAt"?: string;
+        "upcomingWarnStartDateTime": string;
         /**
-          * A Date object used when pre-downtime starts.
+          * The title of the banner shown for upcoming site maintenance.
          */
-        "warnStartsAt"?: string;
-        /**
-          * The title of the banner for pre-downtime.
-         */
-        "warnTitle"?: string;
+        "upcomingWarnTitle"?: string;
     }
     interface VaMemorableDate {
         /**
@@ -2268,6 +2355,10 @@ declare namespace LocalJSX {
          */
         "closeable"?: boolean;
         /**
+          * Date and time for notification. This will also be incorporated into a unique aria-describedby label.
+         */
+        "dateTime"?: string;
+        /**
           * If `true`, the component-library-analytics event is disabled.
          */
         "disableAnalytics"?: boolean;
@@ -2300,7 +2391,7 @@ declare namespace LocalJSX {
          */
         "onComponent-library-analytics"?: (event: VaNotificationCustomEvent<any>) => void;
         /**
-          * Symbol indicates type of notification  Current options are: action-required, update
+          * Symbol indicates type of notification Current options are: action-required, update
          */
         "symbol"?: string;
         /**
@@ -2750,7 +2841,7 @@ declare namespace LocalJSX {
          */
         "onComponent-library-analytics"?: (event: VaTelephoneCustomEvent<any>) => void;
         /**
-          * Indicates if this is a number meant to be used  to text.
+          * Indicates if this is a number meant to be used to text.
          */
         "sms"?: boolean;
         /**
@@ -2767,6 +2858,10 @@ declare namespace LocalJSX {
           * Allows the browser to automatically complete the input.
          */
         "autocomplete"?: string;
+        /**
+          * Whether the component should show a character count message.  Has no effect without uswds and maxlength being set.
+         */
+        "charcount"?: boolean;
         /**
           * Emit component-library-analytics events on the blur event.
          */
@@ -2852,6 +2947,10 @@ declare namespace LocalJSX {
     }
     interface VaTextarea {
         /**
+          * Whether the component should show a character count message.  Has no effect without uswds and maxlength being set.
+         */
+        "charcount"?: boolean;
+        /**
           * Emit component-library-analytics events on the blur event.
          */
         "enableAnalytics"?: boolean;
@@ -2913,6 +3012,7 @@ declare namespace LocalJSX {
         "va-date": VaDate;
         "va-featured-content": VaFeaturedContent;
         "va-file-input": VaFileInput;
+        "va-icon": VaIcon;
         "va-link": VaLink;
         "va-loading-indicator": VaLoadingIndicator;
         "va-maintenance-banner": VaMaintenanceBanner;
@@ -2961,6 +3061,7 @@ declare module "@stencil/core" {
             "va-date": LocalJSX.VaDate & JSXBase.HTMLAttributes<HTMLVaDateElement>;
             "va-featured-content": LocalJSX.VaFeaturedContent & JSXBase.HTMLAttributes<HTMLVaFeaturedContentElement>;
             "va-file-input": LocalJSX.VaFileInput & JSXBase.HTMLAttributes<HTMLVaFileInputElement>;
+            "va-icon": LocalJSX.VaIcon & JSXBase.HTMLAttributes<HTMLVaIconElement>;
             "va-link": LocalJSX.VaLink & JSXBase.HTMLAttributes<HTMLVaLinkElement>;
             "va-loading-indicator": LocalJSX.VaLoadingIndicator & JSXBase.HTMLAttributes<HTMLVaLoadingIndicatorElement>;
             "va-maintenance-banner": LocalJSX.VaMaintenanceBanner & JSXBase.HTMLAttributes<HTMLVaMaintenanceBannerElement>;

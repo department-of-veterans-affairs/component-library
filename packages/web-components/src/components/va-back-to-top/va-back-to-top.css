@@ -1,6 +1,7 @@
 @import '../../../../../node_modules/animate.css/source/sliding_entrances/slideInUp.css';
 @import '../../../../../node_modules/animate.css/source/sliding_exits/slideOutDown.css';
 @import '../../mixins/buttons.css';
+@import '../../mixins/accessibility.css';
 
 #marginWrapper {
   display: block;
@@ -26,14 +27,15 @@ div {
   /* width: 100%;  /1* For debugging in browser *1/ */
 }
 
-button {
-  bottom: 0;
-  right: 0;
-  background-color: var(--color-gray-dark);
+a {
   border-bottom-right-radius: 0;
   border-top-right-radius: 0;
-  height: 44px;
-  width: 44px;
+  bottom: 0;
+  color: var(--color-link-default);
+  right: 0;
+  background: rgba(255, 255, 255, 0.9);
+  height: 48px;
+  width: 48px;
   margin-bottom: 0.5rem;
   opacity: 0;
   padding: 0;
@@ -41,32 +43,61 @@ button {
   position: absolute;
   transition: all 0.25s ease-in;
 }
-button:hover {
-  background-color: var(--color-black);
+a:not([disabled]):active, a:not([disabled]):focus {
+  border-radius: 5px;
+  outline: 2px solid var(--color-gold-light);
+  outline-offset: 2px;
 }
-div.reveal button {
+a:not([disabled]):hover {
+  background-color: var(--color-gray-cool-light);
+  border-radius: 0;
+  color: var(--color-primary-darker);
+  outline: none;
+}
+div.reveal a {
+  border-bottom-left-radius: 5px;
+  border-top-left-radius: 5px;
+  text-decoration: none;
   pointer-events: auto;
   opacity: 1;
   animation: slideInUp 0.25s;
 }
-div:not(.reveal) button {
+div.reveal a > span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+div:not(.reveal) a {
   animation: slideOutDown 0.25s;
 }
 
 @media (prefers-reduced-motion) {
-  button {
+  a {
     transition: none;
   }
-  div.reveal button {
+  div.reveal a {
     animation: none;
   }
-  div:not(.reveal) button {
+  div:not(.reveal) a {
     animation: none;
   }
 }
 
-button span {
+a > span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+}
+
+a span.text {
   display: none;
+  font-weight: 700;
+}
+
+a span.sr-only {
+  visibility: visible;
 }
 
 div.docked {
@@ -81,37 +112,46 @@ div:not(.docked):not(.reveal) {
   position: relative;
 }
 
-div.docked button {
+div.docked a {
   position: relative;
 }
 
 i {
-  font-size: 2rem;
-}
-i {
+  align-self: flex-start;
   font-family: 'Font Awesome 5 Free';
+  font-size: 2rem;
   font-style: normal;
   font-weight: 900;
+  padding-top: 10px;
 }
 i::before {
   content: '\F062'; /* fa-arrow-up*/
 }
 
 @media (min-width: 768px) {
-  button {
+  a {
+    height: 44px;
+    width: 44px;
     padding: 0 1.6rem;
+    text-decoration: none;
     width: auto;
-    border-bottom-right-radius: 5px;
-    border-top-right-radius: 5px;
   }
 
-  button span {
+  a span.text {
+    color: var(--color-link-default);
     display: inline-block;
+    text-decoration: underline;
+  }
+
+  a span.sr-only {
+    visibility: hidden;
   }
 
   i {
-    padding-right: 0.8rem;
-    padding-top: 1.2rem;
+    color: var(--color-link-default);
+    padding-right: 8px;
+    padding-top: 11px;
     font-size: 1em;
+    text-decoration: none;
   }
 }

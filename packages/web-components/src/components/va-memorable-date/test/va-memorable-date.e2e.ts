@@ -78,6 +78,24 @@ describe('va-memorable-date', () => {
     expect(error.innerText).toContain('This is a mistake');
   });
 
+  it('maintains custom error message after multiple blurs', async () => {
+    const page = await newE2EPage();
+
+    // await page.addScriptTag({ content: ``);
+    await page.setContent(
+      '<va-memorable-date value="1999-05-03" name="test" error="custom error" />',
+    );
+    const date = await page.find('va-memorable-date');
+
+    const handleYear = await page.$('pierce/[name="testYear"]');
+    // Trigger Blur
+    await handleYear.press('Tab');
+    // Trigger Blur twice
+    await handleYear.press('Tab');
+
+    expect(date.getAttribute('error')).toEqual('custom error');
+  });
+
   it('renders a required span', async () => {
     const page = await newE2EPage();
     await page.setContent(
@@ -276,8 +294,7 @@ describe('va-memorable-date', () => {
 
         expect(invalidYear).toEqual('false');
         expect(invalidMonth).toEqual('true');
-        // Day is invalid because we don't know the upper limit based on a valid month
-        expect(invalidDay).toEqual('true');
+        expect(invalidDay).toEqual('false');
 
         await handleMonth.press('Backspace');
         await handleMonth.press('Backspace');
@@ -616,10 +633,11 @@ describe('va-memorable-date', () => {
       <va-memorable-date class="hydrated" name="test" uswds="">
         <mock:shadow-root>
           <fieldset class="usa-fieldset usa-form">
-          <legend class="usa-legend" part="legend"></legend>
+          <legend class="usa-legend" part="legend">
           <span class="usa-hint" id="dateHint">
-              date-hint.
+            date-hint
           </span>
+          </legend>
           <slot></slot>
           <span id="error-message" role="alert"></span>
           <div class="usa-memorable-date">
@@ -664,13 +682,13 @@ describe('va-memorable-date', () => {
             <span class="usa-label--required">
               required
             </span>
-            <div id="hint">
+            <div class="usa-hint" id="hint">
               hint text
             </div>
+            <span class="usa-hint" id="dateHint">
+              date-hint
+            </span>
           </legend>
-          <span class="usa-hint" id="dateHint">
-            date-hint.
-          </span>
           <slot></slot>
           <span id="error-message" role="alert"></span>
           <div class="usa-memorable-date">
@@ -698,6 +716,24 @@ describe('va-memorable-date', () => {
     const error = await page.find('va-memorable-date >>> span#error-message');
     // expect(error).toEqualHtml('test');
     expect(error.innerText).toContain('This is a mistake');
+  });
+
+  it('uswds v3 maintains custom error message after multiple blurs', async () => {
+    const page = await newE2EPage();
+
+    // await page.addScriptTag({ content: ``);
+    await page.setContent(
+      '<va-memorable-date value="1999-05-03" name="test" error="custom error" uswds />',
+    );
+    const date = await page.find('va-memorable-date');
+
+    const handleYear = await page.$('pierce/[name="testYear"]');
+    // Trigger Blur
+    await handleYear.press('Tab');
+    // Trigger Blur twice
+    await handleYear.press('Tab');
+
+    expect(date.getAttribute('error')).toEqual('custom error');
   });
 
   it('uswds v3 renders a required span', async () => {
@@ -898,8 +934,7 @@ describe('va-memorable-date', () => {
 
         expect(invalidYear).toEqual('false');
         expect(invalidMonth).toEqual('true');
-        // Day is invalid because we don't know the upper limit based on a valid month
-        expect(invalidDay).toEqual('true');
+        expect(invalidDay).toEqual('false');
 
         await handleMonth.press('Backspace');
         await handleMonth.press('Backspace');
@@ -1238,10 +1273,11 @@ describe('va-memorable-date', () => {
       <va-memorable-date class="hydrated" month-select="" name="test" uswds="">
         <mock:shadow-root>
           <fieldset class="usa-fieldset usa-form">
-          <legend class="usa-legend" part="legend"></legend>
+          <legend class="usa-legend" part="legend">
           <span class="usa-hint" id="dateHint">
-              date-hint-with-select.
+          date-hint-with-select
           </span>
+          </legend>
           <slot></slot>
           <span id="error-message" role="alert"></span>
           <div class="usa-memorable-date">
@@ -1323,13 +1359,13 @@ describe('va-memorable-date', () => {
             <span class="usa-label--required">
               required
             </span>
-            <div id="hint">
+            <div class="usa-hint" id="hint">
               hint text
             </div>
+            <span class="usa-hint" id="dateHint">
+              date-hint-with-select
+            </span>
           </legend>
-          <span class="usa-hint" id="dateHint">
-            date-hint-with-select.
-          </span>
           <slot></slot>
           <span id="error-message" role="alert"></span>
           <div class="usa-memorable-date">

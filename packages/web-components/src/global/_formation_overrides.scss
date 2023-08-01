@@ -355,6 +355,17 @@
   background-size: rem-override(0.75rem);
 }
 
+.usa-breadcrumb {
+  padding-bottom: rem-override(1rem);
+  padding-top: rem-override(1rem);
+  font-size: rem-override(1.06rem);
+}
+
+.usa-breadcrumb__list {
+  margin: 0 rem-override(-0.25rem);
+  padding: rem-override(0.25rem);
+}
+
 .usa-accordion {
   font-size: rem-override(1.06rem);
 }
@@ -386,4 +397,43 @@
   border-left: rem-override(0.25rem) solid rgb(240, 240, 240);
   border-right: rem-override(0.25rem) solid rgb(240, 240, 240);
   padding-bottom: rem-override(1rem);
+}
+
+.usa-character-count__status {
+  padding-top: rem-override(0.25rem);
+}
+
+.usa-icon--size-3 {
+  height: rem-override(1.5rem);
+  width: rem-override(1.5rem);
+}
+
+.usa-icon--size-4 {
+  height: rem-override(2rem);
+  width: rem-override(2rem);
+}
+
+.usa-icon--size-5 {
+  height: rem-override(2.5rem);
+  width: rem-override(2.5rem);
+}
+
+.usa-icon--size-6 {
+  height: rem-override(3rem);
+  width: rem-override(3rem);
+}
+
+.usa-icon--size-7 {
+  height: rem-override(3.5rem);
+  width: rem-override(3.5rem);
+}
+
+.usa-icon--size-8 {
+  height: rem-override(4rem);
+  width: rem-override(4rem);
+}
+
+.usa-icon--size-9 {
+  height: rem-override(4.5rem);
+  width: rem-override(4.5rem);
 }

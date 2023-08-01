@@ -12,7 +12,7 @@ import {
 } from '@stencil/core';
 import classnames from 'classnames';
 import i18next from 'i18next';
-import { consoleDevError } from '../../utils/utils';
+import { consoleDevError, getCharacterMessage } from '../../utils/utils';
 
 if (Build.isTesting) {
   // Make i18next.t() return the key instead of the value
@@ -149,6 +149,12 @@ export class VaTextInput {
    * Whether or not the component will use USWDS v3 styling.
    */
   @Prop({reflect: true}) uswds?: boolean = false;
+  
+  /**
+   * Whether the component should show a character count message. 
+   * Has no effect without uswds and maxlength being set.
+   */
+  @Prop() charcount?: boolean = false;
 
   /**
    * The event used to track usage of the component. This is emitted when the
@@ -234,15 +240,16 @@ export class VaTextInput {
       success,
       messageAriaDescribedby,
       width,
+      charcount
     } = this;
     const type = this.getInputType();
     const maxlength = this.getMaxlength();
     const ariaDescribedbyIds =
       `${messageAriaDescribedby ? 'input-message' : ''} ${
         error ? 'input-error-message' : ''
-      }`.trim() || null; // Null so we don't add the attribute if we have an empty string
-
+      } ${ hint ? 'input-hint' : '' } ${charcount && maxlength ? 'charcount-message' : ''}`.trim() || null; // Null so we don't add the attribute if we have an empty string
     if (uswds) {
+      const charCountTooHigh = charcount && (value?.length > maxlength);
       const labelClass = classnames({
         'usa-label': true,
         'usa-label--error': error,
@@ -252,6 +259,11 @@ export class VaTextInput {
         'usa-input--success': success,
         'usa-input--error': error || reflectInputError,
         [`usa-input--${width}`]: width,
+      });
+      const messageClass = classnames({
+        'usa-hint': true,
+        'usa-character-count__status': charcount,
+        'usa-character-count__status--invalid': charcount && maxlength && value?.length > maxlength
       });
       return (
         <Host>
@@ -266,7 +278,7 @@ export class VaTextInput {
               )}
             </label>
           )}
-          {hint && <span class="usa-hint">{hint}</span>}
+          {hint && <span id="input-hint" class="usa-hint">{hint}</span>}
           <slot></slot>
           <span id="input-error-message" role="alert">
             {error && (
@@ -284,25 +296,29 @@ export class VaTextInput {
             onInput={handleInput}
             onBlur={handleBlur}
             aria-describedby={ariaDescribedbyIds}
-            aria-invalid={invalid || error ? 'true' : 'false'}
+            aria-invalid={invalid || error || charCountTooHigh ? 'true' : 'false'}
             inputmode={inputmode ? inputmode : undefined}
-            maxlength={maxlength}
-            minlength={minlength}
+            maxlength={charcount ? undefined : maxlength}
             pattern={pattern}
             name={name}
             autocomplete={autocomplete}
             required={required || null}
             part="input"
           />
-          {maxlength && value?.length >= maxlength && (
-            <small part="validation">
-              {i18next.t('max-chars', { length: maxlength })}
-            </small>
+          {messageAriaDescribedby && (
+            <span id="input-message" class="sr-only">
+              {messageAriaDescribedby}
+            </span>
           )}
-          {minlength && value?.length < minlength && (
-            <small part="validation">
-              {i18next.t('min-chars', { length: minlength })}
-            </small>
+          {!charcount && maxlength && value?.length >= maxlength && (
+              <span class={messageClass} aria-live="polite">
+              {i18next.t('max-chars', { length: maxlength })}
+              </span>
+          )}
+          {charcount && maxlength && (
+            <span id="charcount-message" class={messageClass} aria-live="polite">
+              {getCharacterMessage(value, maxlength)}
+            </span>
           )}
         </Host>
       );
@@ -320,7 +336,7 @@ export class VaTextInput {
               )}
             </label>
           )}
-          {hint && <span class="hint-text">{hint}</span>}
+          {hint && <span id="input-hint" class="hint-text">{hint}</span>}
           <slot></slot>
           <span id="input-error-message" role="alert">
             {error && (
