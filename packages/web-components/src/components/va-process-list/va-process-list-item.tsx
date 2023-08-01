@@ -50,14 +50,14 @@ export class VaProcessListItem {
     if (uswds) { 
       return (
         <Host role="listitem" class='usa-process-list__item'>
-            <HeaderTag class='usa-process-list__heading'>{header}</HeaderTag>
+            {header ? <HeaderTag class='usa-process-list__heading'>{header}</HeaderTag> : null}
             <slot/>
         </Host>
       )
     } else {
       return (
         <li>
-          <HeaderTag>{header}</HeaderTag>
+          {header ? <HeaderTag>{header}</HeaderTag> : null}
           <slot/>
         </li>
       )
