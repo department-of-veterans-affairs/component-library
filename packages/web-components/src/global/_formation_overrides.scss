@@ -411,3 +411,23 @@
   padding-bottom: rem-override(2rem);
   padding-left: calc(calc( (rem-override(2.5rem) / 2) - rem-override(0.25rem) ) * 2);
 }
+
+h1.usa-process-list__heading {
+  font-size: 4rem;
+}
+
+h2.usa-process-list__heading {
+  font-size: 3rem;
+}
+
+h3.usa-process-list__heading {
+  font-size: 2rem;
+}
+
+h4.usa-process-list__heading {
+  font-size: 1.7rem;
+}
+
+h5.usa-process-list__heading, h5.usa-process-list__heading{
+  font-size: 1.5rem;
+}
