@@ -70,11 +70,11 @@ const Template = ({uswds}) => {
 const StatusTemplate = ({uswds}) => {
   return (
     <va-process-list uswds={uswds}>
-      <va-process-list-item active header='Active Icon'>
-        <p>Add the prop <code>active</code> to make the list icon and header blue.</p>
-      </va-process-list-item>
       <va-process-list-item checked header='Checkmark Icon'>  
         <p>Add the prop <code>checked</code> to the list icon a checkmark.</p>
+      </va-process-list-item>
+      <va-process-list-item active header='Active Icon'>
+        <p>Add the prop <code>active</code> to make the list icon and header blue.</p>
       </va-process-list-item>
       <va-process-list-item pending header='Pending Icon'>
         <p>Add the prop <code>pending</code> list item and icon grayed out.</p>
@@ -83,7 +83,6 @@ const StatusTemplate = ({uswds}) => {
     </va-process-list>
   );
 };
-
 
 
 const HeaderSizeTemplate = ({uswds}) => {
@@ -95,6 +94,24 @@ const HeaderSizeTemplate = ({uswds}) => {
       <va-process-list-item header='Size h4' level='4'/>
       <va-process-list-item header='Size h5' level='5'/>
       <va-process-list-item header='Size h6' level='6'/>
+    </va-process-list>
+  );
+};
+
+const CustomSizingTemplate = ({uswds}) => {
+  return (
+    <va-process-list uswds={uswds}>
+      
+      <va-process-list-item header='Step One' level='2'>
+        <p class="vads-u-font-size--lg">Lorem ipsum dolor sit amet, consectetur adipiscing elit. </p>
+      </va-process-list-item>
+      <va-process-list-item header='Step Two' level='2'>
+        <p class="vads-u-font-size--lg">Aliquam id felis pulvinar ligula ultricies sollicitudin eget nec dui.</p>
+      </va-process-list-item>
+      <va-process-list-item header='Step Three' level='2'>
+        <p class="vads-u-font-size--lg">Cras augue velit, pellentesque sit amet nisl ut, tristique suscipit sem. Cras sollicitudin auctor mattis.</p>
+      </va-process-list-item>
+      
     </va-process-list>
   );
 };
@@ -134,6 +151,9 @@ Status.args = { ...defaultArgs };
 
 export const HeaderSize = HeaderSizeTemplate.bind(null);
 HeaderSize.args = { ...defaultArgs };
+
+export const CustomSizing = CustomSizingTemplate.bind(null);
+CustomSizing.args = { ...defaultArgs };
 
 export const AdditionalStyling = UtilityStyling.bind(null);
 AdditionalStyling.args = { ...defaultArgs };

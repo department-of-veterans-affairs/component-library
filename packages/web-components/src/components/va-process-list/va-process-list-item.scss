@@ -11,3 +11,28 @@ va-process-list-item[pending='true'] .usa-process-list__heading {
 va-process-list-item[active='true'] .usa-process-list__heading {
   color: var(--color-primary);
 }
+
+/* h6 remains as Source Sans Pro, everything else uses Bitter */
+.usa-process-list__heading:is(h1, h2, h3, h4, h5) {
+  font-family: var(--font-serif);
+}
+
+h1.usa-process-list__heading {
+  font-size: 40px;
+}
+
+h2.usa-process-list__heading {
+  font-size: 30px;
+}
+
+h3.usa-process-list__heading {
+  font-size: 20px;
+}
+
+h4.usa-process-list__heading {
+  font-size: 17px;
+}
+
+h5.usa-process-list__heading, h6.usa-process-list__heading{
+  font-size: 15px;
+}
