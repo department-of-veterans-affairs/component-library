@@ -143,4 +143,87 @@ describe('va-breadcrumbs', () => {
 
     expect(analyticsSpy).toHaveReceivedEventTimes(0);
   });
+
+  /** Begin USWDS v3 Tests */
+
+  it('uswds - renders', async () => {
+    const page = await newE2EPage({
+      html: '<va-breadcrumbs class="hydrated" label="test" disable-analytics="false" breadcrumb-list=\'[{ "label": "Home", "href": "#home" }, { "label": "Current", "href": "#current" }]\' uswds></va-breadcrumbs>',
+    });
+    const element = await page.find('va-breadcrumbs');
+    expect(element).toEqualHtml(`
+      <va-breadcrumbs class="hydrated" disable-analytics="false" label="test" breadcrumb-list='[{ "label": "Home", "href": "#home" }, { "label": "Current", "href": "#current" }]' uswds>
+        <mock:shadow-root>
+          <nav aria-label="test" class="usa-breadcrumb">
+            <ol class="usa-breadcrumb__list" role="list">
+              <li class="usa-breadcrumb__list-item">
+                <a class="usa-breadcrumb__link" href="#home">
+                  <span>Home</span>
+                </a>
+              </li>
+              <li class="usa-breadcrumb__list-item usa-current" aria-current="page">
+                <span>Current</span>
+              </li>
+            </ol>
+          </nav>
+        </mock:shadow-root>
+      </va-breadcrumbs>
+    `);
+  });
+
+  it("uswds - should render wrap labels when 'wrapping' is true", async () => {
+    const page = await newE2EPage();
+    await page.setContent(`
+      <va-breadcrumbs disable-analytics="false" breadcrumb-list=\'[{ "label": "This is a very long breadcrumb", "href": "#home" }, { "label": "Current", "href": "#current" }]\' uswds wrapping></va-breadcrumbs>
+    `);
+    const element = await page.find('va-breadcrumbs');
+    const indicator = element.shadowRoot.querySelector('.usa-breadcrumb');
+    expect(indicator.classList.contains('usa-breadcrumb--wrap')).toBe(true);
+  })
+
+  it('uswds - passes an axe check', async () => {
+    const page = await newE2EPage();
+    await page.setContent(`
+      <va-breadcrumbs disable-analytics="false" breadcrumb-list=\'[{ "label": "Home", "href": "#home" }, { "label": "Current", "href": "#current" }]\' uswds></va-breadcrumbs>
+    `);
+
+    await axeCheck(page);
+  });
+
+  it('uswds - fires an analytics event when an anchor link is clicked', async () => {
+    const page = await newE2EPage();
+    await page.setContent(`
+      <va-breadcrumbs breadcrumb-list=\'[{ "label": "Level One", "href": "#one" }, { "label": "Current", "href": "#current" }]\' uswds></va-breadcrumbs>
+    `);
+
+    const analyticsSpy = await page.spyOnEvent('component-library-analytics');
+
+    const anchorElements = await page.findAll('va-breadcrumbs >>> a');
+
+    await anchorElements[0].click();
+
+    expect(analyticsSpy).toHaveReceivedEventDetail({
+      action: 'linkClick',
+      componentName: 'va-breadcrumbs',
+      details: {
+        clickLabel: 'Level One',
+        clickLevel: 1,
+        totalLevels: 2,
+      },
+    });
+  });
+
+  it(`uswds - doesn't fire an analytics event with disable-analytics prop when an anchor link is clicked`, async () => {
+    const page = await newE2EPage();
+    await page.setContent(`
+    <va-breadcrumbs breadcrumb-list=\'[{ "label": "Level One", "href": "#one" }, { "label": "Level two", "href": "#two" }, { "label": "Current", "href": "#current" }]\' uswds disable-analytics></va-breadcrumbs>
+    `);
+
+    const analyticsSpy = await page.spyOnEvent('component-library-analytics');
+
+    const anchorElement = await page.find('pierce/a');
+    await anchorElement.click();
+
+    expect(analyticsSpy).toHaveReceivedEventTimes(0);
+  });
 });
