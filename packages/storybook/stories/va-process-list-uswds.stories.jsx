@@ -20,8 +20,7 @@ const defaultArgs = {uswds: true};
 const Template = ({uswds}) => {
   return (
     <va-process-list uswds={uswds}>
-      <li class="usa-process-list__item">
-        <h3 className='usa-process-list__heading'>Check to be sure you can request a Board Appeal</h3>
+      <va-process-list-item uswds={uswds} header="Check to be sure you can request a Board Appeal">
         <p>
           You can request a Board Appeal up to 1 year from the date on your
           decision notice. (Exception: if you have a contested claim, you have
@@ -39,9 +38,8 @@ const Template = ({uswds}) => {
           You can’t request a Board Appeal if you’ve already requested one for
           this same claim.
         </p>
-      </li>
-      <li class="usa-process-list__item">
-        <h3 className='usa-process-list__heading'>Gather your information</h3>
+      </va-process-list-item>
+      <va-process-list-item uswds={uswds} header='Gather your information'>
         <p>Here’s what you’ll need to apply:</p>
         <ul>
           <li>Your mailing address</li>
@@ -50,14 +48,13 @@ const Template = ({uswds}) => {
             the date on the decision notice you got in the mail)
           </li>
         </ul>
-      </li>
-      <li class="usa-process-list__item">
-        <h3 className='usa-process-list__heading'>Start your request</h3>
+      </va-process-list-item>
+      <va-process-list-item uswds={uswds} header='Start your request'>
         <p>
           We’ll take you through each step of the process. It should take about
           30 minutes.
         </p>
-      </li>
+      </va-process-list-item>
     </va-process-list>
   );
 };
@@ -66,21 +63,16 @@ const Template = ({uswds}) => {
 const StatusTemplate = ({uswds}) => {
     return (
       <va-process-list uswds={uswds}>
-        <li className='activeIcon usa-process-list__item'>
-          <h3 className='usa-process-list__heading'>Active Icon</h3>
-          <p>Add the class <code>activeIcon</code> to the <code>li</code> element make the list icon blue.</p>
-        </li>
-        <li className='checkIcon usa-process-list__item'>
-          <h3 className='usa-process-list__heading'>Checkmark Icon</h3>
-          <p>Add the class <code>checkIcon</code> to the <code>li</code> element make the list icon a checkmark.</p>
-        </li>
-        <li className='pendingIcon usa-process-list__item'>
-          <h3 className='usa-process-list__heading'>Pending Icon</h3>
-          <p>Add the class <code>pendingIcon</code> to the <code>li</code> element make the list item grayed out.</p>
-        </li>
-        <li class="usa-process-list__item">
-          <h3 className='usa-process-list__heading'>Default Icon</h3>
-        </li>
+        <va-process-list-item active uswds={uswds} header='Active Icon'>
+          <p>Add the prop <code>active</code> to make the list icon and header blue.</p>
+        </va-process-list-item>
+        <va-process-list-item checked uswds={uswds} header='Checkmark Icon'>  
+          <p>Add the prop <code>checked</code> to the list icon a checkmark.</p>
+        </va-process-list-item>
+        <va-process-list-item pending uswds={uswds} header='Pending Icon'>
+          <p>Add the prop <code>pending</code> list item and icon grayed out.</p>
+        </va-process-list-item>
+        <va-process-list-item uswds={uswds} header='Default Icon' />
       </va-process-list>
     );
   };
@@ -88,7 +80,7 @@ const StatusTemplate = ({uswds}) => {
 const UtilityStyling = ({uswds}) => {
   return (
     <va-process-list uswds={uswds}>
-      <li class="usa-process-list__item">
+      <va-process-list-item uswds={uswds}>
         <p>Look at me in mobile view</p>
         <va-additional-info
           trigger="Show more"
@@ -96,8 +88,8 @@ const UtilityStyling = ({uswds}) => {
         >
           <img src="https://via.placeholder.com/350" />
         </va-additional-info>
-      </li>
-      <li class="usa-process-list__item">
+      </va-process-list-item>
+      <va-process-list-item uswds={uswds}>
         <p className="vads-u-margin-top--0">Look at me in desktop view</p>
         <p className="vads-u-display--none medium-screen:vads-u-display--block vads-u-background-color--gray-cool-light">
           I'm only visible on desktop.
@@ -106,7 +98,7 @@ const UtilityStyling = ({uswds}) => {
             And any global utility style will work.
           </span>
         </p>
-      </li>
+      </va-process-list-item>
     </va-process-list>
   );
 };
