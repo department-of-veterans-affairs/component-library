@@ -154,6 +154,10 @@ export namespace Components {
     }
     interface VaBreadcrumbs {
         /**
+          * Represents a list of breadcrumbs. Use an array of objects with label and href properties, and then use JSON.stringify() to convert to a string. This prop is available when `uswds` is set to `true`.
+         */
+        "breadcrumbList"?: any;
+        /**
           * Analytics tracking function(s) will not be called
          */
         "disableAnalytics"?: boolean;
@@ -161,6 +165,14 @@ export namespace Components {
           * Adds an aria-label attribute to the <nav /> element.
          */
         "label"?: string;
+        /**
+          * Whether or not the component will use USWDS v3 styling.
+         */
+        "uswds"?: boolean;
+        /**
+          * Whether or not the component will wrap the breadcrumbs. This prop is available when `uswds` is set to `true`.
+         */
+        "wrapping"?: boolean;
     }
     interface VaButton {
         /**
@@ -1780,6 +1792,10 @@ declare namespace LocalJSX {
     }
     interface VaBreadcrumbs {
         /**
+          * Represents a list of breadcrumbs. Use an array of objects with label and href properties, and then use JSON.stringify() to convert to a string. This prop is available when `uswds` is set to `true`.
+         */
+        "breadcrumbList"?: any;
+        /**
           * Analytics tracking function(s) will not be called
          */
         "disableAnalytics"?: boolean;
@@ -1791,6 +1807,14 @@ declare namespace LocalJSX {
           * The event used to track usage of the component. This is emitted when a breadcrumb anchor is clicked and disableAnalytics is not true.
          */
         "onComponent-library-analytics"?: (event: VaBreadcrumbsCustomEvent<any>) => void;
+        /**
+          * Whether or not the component will use USWDS v3 styling.
+         */
+        "uswds"?: boolean;
+        /**
+          * Whether or not the component will wrap the breadcrumbs. This prop is available when `uswds` is set to `true`.
+         */
+        "wrapping"?: boolean;
     }
     interface VaButton {
         /**
