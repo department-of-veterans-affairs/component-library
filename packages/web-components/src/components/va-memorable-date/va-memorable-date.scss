@@ -25,6 +25,10 @@
   margin-bottom: 0;
 }
 
+.usa-hint {
+  display: block;
+}
+
 /** Original Component Style **/
 
 @import '../va-date/va-date.css';
@@ -52,7 +56,7 @@
 }
 
 :host(:not([uswds])) #dateHint,
-#hint {
+:host(:not([uswds])) #hint {
   color: var(--color-gray);
   line-height: 1.5;
 }

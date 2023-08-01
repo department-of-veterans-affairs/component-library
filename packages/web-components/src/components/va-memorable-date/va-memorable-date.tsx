@@ -282,9 +282,9 @@ export class VaMemorableDate {
             <legend class={legendClass} part="legend">
               {label}
               {required && <span class="usa-label--required"> {i18next.t('required')}</span>}
-              {hint && <div id="hint">{hint}</div>}
+              {hint && <div class="usa-hint" id="hint">{hint}</div>}
+              <span class="usa-hint" id="dateHint">{hintText}</span>
             </legend>
-            <span class="usa-hint" id="dateHint">{hintText}.</span>
             <slot />
             <span id="error-message" role="alert">
               {error && (
