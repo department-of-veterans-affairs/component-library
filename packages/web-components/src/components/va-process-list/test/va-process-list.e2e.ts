@@ -105,12 +105,12 @@ describe('va-process-list', () => {
         </mock:shadow-root>
         <va-process-list-item class="hydrated usa-process-list__item" header="Step one" role="listitem">
           <!---->  
-          <h4 class="usa-process-list__heading">Step one</h4>
+          <h5 class="usa-process-list__heading">Step one</h5>
           <p>Some content</p>
         </va-process-list-item>
         <va-process-list-item class="hydrated usa-process-list__item" header="Step two" role="listitem">
           <!---->
-          <h4 class="usa-process-list__heading">Step two</h4>
+          <h5 class="usa-process-list__heading">Step two</h5>
           <p>Additional content</p>
           <ul>
             <li>Item one</li>

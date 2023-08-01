@@ -21,7 +21,7 @@ export class VaProcessListItem {
   /**
   * Header level for item header. Must be between 1 and 6
   */
-  @Prop() level?: number = 4;
+  @Prop() level?: number = 5;
 
   /**
   * Whether or not the item is active
