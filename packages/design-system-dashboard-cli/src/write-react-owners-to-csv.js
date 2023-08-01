@@ -8,7 +8,6 @@ const componentsToKeep = [
   'AdditionalInfo',
   'AlertBox',
   'Checkbox',
-  'CheckboxGroup',
   'ExpandingGroup',
   'FileInput',
   'IconSearch',
