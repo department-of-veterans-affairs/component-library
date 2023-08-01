@@ -50,11 +50,15 @@ ol {
   list-style-position: outside;
 }
 
-::slotted(li:first-child) {
+:host(:not([uswds])) ::slotted(va-process-list-item) {
+  display: list-item;
+}
+
+:host(:not([uswds])) ::slotted(li:first-child), :host(:not([uswds])) ::slotted(va-process-list-item:first-child) {
   counter-reset: listCounter;
 }
 
-::slotted(li) {
+:host(:not([uswds])) ::slotted(li), :host(:not([uswds])) ::slotted(va-process-list-item) {
   counter-increment: listCounter;
   border-left: 8px solid var(--color-gray-light);
   padding: 0 0 3.2rem 3.2rem;
@@ -62,7 +66,7 @@ ol {
   margin: 0 !important;
 }
 
-::slotted(li):before {
+:host(:not([uswds])) ::slotted(li):before, :host(:not([uswds])) ::slotted(va-process-list-item):before {
   color: var(--color-white);
   content: counter(listCounter);
   float: left;
@@ -80,7 +84,7 @@ ol {
   box-sizing: border-box !important;
 }
 
-::slotted(li:last-child) {
+:host(:not([uswds])) ::slotted(li:last-child), :host(:not([uswds])) ::slotted(va-process-list-item:last-child) {
   border-left: 0;
   padding-left: calc(3.1rem + 8px);
 }
