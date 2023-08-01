@@ -15,6 +15,11 @@ export default {
       page: () => <StoryDocs data={processListDocs} />,
     },
   },
+  argTypes:{
+    uswds: {
+      control: false
+    }
+  }
 };
 
 const defaultArgs = {uswds: true};
