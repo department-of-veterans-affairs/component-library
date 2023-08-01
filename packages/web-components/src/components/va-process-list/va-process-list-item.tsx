@@ -56,10 +56,10 @@ export class VaProcessListItem {
       )
     } else {
       return (
-        <li>
+        <Host role="listitem">
           {header ? <HeaderTag>{header}</HeaderTag> : null}
           <slot/>
-        </li>
+        </Host>
       )
     }
   }
