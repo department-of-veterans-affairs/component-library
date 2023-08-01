@@ -412,6 +412,10 @@
   padding-left: calc(calc( (rem-override(2.5rem) / 2) - rem-override(0.25rem) ) * 2);
 }
 
+.usa-process-list__item:last-child {
+  border-left-width: rem-override(0.5rem); ;
+}
+
 h1.usa-process-list__heading {
   font-size: rem-override(4rem);
 }
