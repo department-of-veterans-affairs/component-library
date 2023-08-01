@@ -633,10 +633,11 @@ describe('va-memorable-date', () => {
       <va-memorable-date class="hydrated" name="test" uswds="">
         <mock:shadow-root>
           <fieldset class="usa-fieldset usa-form">
-          <legend class="usa-legend" part="legend"></legend>
+          <legend class="usa-legend" part="legend">
           <span class="usa-hint" id="dateHint">
-              date-hint.
+            date-hint
           </span>
+          </legend>
           <slot></slot>
           <span id="error-message" role="alert"></span>
           <div class="usa-memorable-date">
@@ -681,13 +682,13 @@ describe('va-memorable-date', () => {
             <span class="usa-label--required">
               required
             </span>
-            <div id="hint">
+            <div class="usa-hint" id="hint">
               hint text
             </div>
+            <span class="usa-hint" id="dateHint">
+              date-hint
+            </span>
           </legend>
-          <span class="usa-hint" id="dateHint">
-            date-hint.
-          </span>
           <slot></slot>
           <span id="error-message" role="alert"></span>
           <div class="usa-memorable-date">
@@ -1272,10 +1273,11 @@ describe('va-memorable-date', () => {
       <va-memorable-date class="hydrated" month-select="" name="test" uswds="">
         <mock:shadow-root>
           <fieldset class="usa-fieldset usa-form">
-          <legend class="usa-legend" part="legend"></legend>
+          <legend class="usa-legend" part="legend">
           <span class="usa-hint" id="dateHint">
-              date-hint-with-select.
+          date-hint-with-select
           </span>
+          </legend>
           <slot></slot>
           <span id="error-message" role="alert"></span>
           <div class="usa-memorable-date">
@@ -1357,13 +1359,13 @@ describe('va-memorable-date', () => {
             <span class="usa-label--required">
               required
             </span>
-            <div id="hint">
+            <div class="usa-hint" id="hint">
               hint text
             </div>
+            <span class="usa-hint" id="dateHint">
+              date-hint-with-select
+            </span>
           </legend>
-          <span class="usa-hint" id="dateHint">
-            date-hint-with-select.
-          </span>
           <slot></slot>
           <span id="error-message" role="alert"></span>
           <div class="usa-memorable-date">
