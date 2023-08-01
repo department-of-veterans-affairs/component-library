@@ -22,7 +22,7 @@ const defaultArgs = {uswds: true};
 const Template = ({uswds}) => {
   return (
     <va-process-list uswds={uswds}>
-      <va-process-list-item uswds={uswds} header="Check to be sure you can request a Board Appeal">
+      <va-process-list-item header="Check to be sure you can request a Board Appeal">
         <p>
           You can request a Board Appeal up to 1 year from the date on your
           decision notice. (Exception: if you have a contested claim, you have
@@ -41,7 +41,7 @@ const Template = ({uswds}) => {
           this same claim.
         </p>
       </va-process-list-item>
-      <va-process-list-item uswds={uswds} header='Gather your information'>
+      <va-process-list-item header='Gather your information'>
         <p>Here’s what you’ll need to apply:</p>
         <ul>
           <li>Your mailing address</li>
@@ -51,7 +51,7 @@ const Template = ({uswds}) => {
           </li>
         </ul>
       </va-process-list-item>
-      <va-process-list-item uswds={uswds} header='Start your request'>
+      <va-process-list-item header='Start your request'>
         <p>
           We’ll take you through each step of the process. It should take about
           30 minutes.
@@ -63,21 +63,36 @@ const Template = ({uswds}) => {
 
 
 const StatusTemplate = ({uswds}) => {
-    return (
-      <va-process-list uswds={uswds}>
-        <va-process-list-item active uswds={uswds} header='Active Icon'>
-          <p>Add the prop <code>active</code> to make the list icon and header blue.</p>
-        </va-process-list-item>
-        <va-process-list-item checked uswds={uswds} header='Checkmark Icon'>  
-          <p>Add the prop <code>checked</code> to the list icon a checkmark.</p>
-        </va-process-list-item>
-        <va-process-list-item pending uswds={uswds} header='Pending Icon'>
-          <p>Add the prop <code>pending</code> list item and icon grayed out.</p>
-        </va-process-list-item>
-        <va-process-list-item uswds={uswds} header='Default Icon' />
-      </va-process-list>
-    );
-  };
+  return (
+    <va-process-list uswds={uswds}>
+      <va-process-list-item active header='Active Icon'>
+        <p>Add the prop <code>active</code> to make the list icon and header blue.</p>
+      </va-process-list-item>
+      <va-process-list-item checked header='Checkmark Icon'>  
+        <p>Add the prop <code>checked</code> to the list icon a checkmark.</p>
+      </va-process-list-item>
+      <va-process-list-item pending header='Pending Icon'>
+        <p>Add the prop <code>pending</code> list item and icon grayed out.</p>
+      </va-process-list-item>
+      <va-process-list-item header='Default Icon' />
+    </va-process-list>
+  );
+};
+
+
+
+const HeaderSizeTemplate = ({uswds}) => {
+  return (
+    <va-process-list uswds={uswds}>
+      <va-process-list-item header='Size h1' level='1'/>
+      <va-process-list-item header='Size h2' level='2'/>
+      <va-process-list-item header='Size h3' level='3'/>
+      <va-process-list-item header='Size h4' level='4'/>
+      <va-process-list-item header='Size h5' level='5'/>
+      <va-process-list-item header='Size h6' level='6'/>
+    </va-process-list>
+  );
+};
 
 const UtilityStyling = ({uswds}) => {
   return (
@@ -111,6 +126,9 @@ Default.argTypes = propStructure(processListDocs);
 
 export const Status = StatusTemplate.bind(null);
 Status.args = { ...defaultArgs };
+
+export const HeaderSize = HeaderSizeTemplate.bind(null);
+HeaderSize.args = { ...defaultArgs };
 
 export const AdditionalStyling = UtilityStyling.bind(null);
 AdditionalStyling.args = { ...defaultArgs };

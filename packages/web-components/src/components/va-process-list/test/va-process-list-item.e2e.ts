@@ -30,7 +30,7 @@ describe('va-process-list-item', () => {
     expect(element).toEqualHtml(`
       <va-process-list-item class="hydrated usa-process-list__item" role="listitem" header="Heading">
         <!---->
-        <h3 class="usa-process-list__heading">Heading</h3>
+        <h4 class="usa-process-list__heading">Heading</h4>
         <p>Some content</p>
       </va-process-list-item>
     `);

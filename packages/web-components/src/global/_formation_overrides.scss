@@ -403,6 +403,7 @@
   margin-top: rem-override(-0.4rem);
   height: rem-override(2rem);
   width: rem-override(2rem);
+  border-radius: rem-override(99rem);
 }
 
 .usa-process-list__item {
@@ -432,6 +433,6 @@ h4.usa-process-list__heading {
   font-size: rem-override(1.7rem);
 }
 
-h5.usa-process-list__heading, h5.usa-process-list__heading{
+h5.usa-process-list__heading, h6.usa-process-list__heading{
   font-size: rem-override(1.5rem);
 }
