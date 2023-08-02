@@ -17,12 +17,25 @@
   margin-top: 16px;
 }
 
+.usa-form-group--month {
+  flex: 0 1 50%;
+  width: 50%;
+}
+
+.usa-form-group--month-select, .usa-form-group--month-input {
+  width: 100%;
+}
+
 :host([uswds]) {
   margin-top: 24px;
 }
 
 :host([uswds]) #error-message {
   margin-bottom: 0;
+}
+
+.usa-hint {
+  display: block;
 }
 
 /** Original Component Style **/
@@ -52,7 +65,7 @@
 }
 
 :host(:not([uswds])) #dateHint,
-#hint {
+:host(:not([uswds])) #hint {
   color: var(--color-gray);
   line-height: 1.5;
 }

@@ -24,6 +24,7 @@ const defaultArgs = {
   'secondary': undefined,
   'submit': undefined,
   'text': 'Edit',
+  'primary-alternate': undefined
 };
 
 const Template = ({
@@ -36,6 +37,7 @@ const Template = ({
   secondary,
   submit,
   text,
+  primaryAlternate
 }) => {
   return (
     <va-button
@@ -49,6 +51,7 @@ const Template = ({
       submit={submit}
       text={text}
       onClick={e => console.log(e)}
+      primary-alternate = {primaryAlternate}
     />
   );
 };
@@ -58,6 +61,13 @@ Primary.args = {
   ...defaultArgs,
 };
 Primary.argTypes = propStructure(buttonDocs);
+
+export const PrimaryAlternate = Template.bind(null);
+PrimaryAlternate.args = {
+  ...defaultArgs,
+  primaryAlternate: true,
+  text: "Primary Alternate"
+};
 
 export const Secondary = Template.bind(null);
 Secondary.args = {

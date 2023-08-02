@@ -22,6 +22,7 @@ const defaultArgs = {
   'disabled': undefined,
   'label': undefined,
   'secondary': undefined,
+  'primaryAlternate': undefined,
   'submit': undefined,
   'text': 'Default',
   'uswds': true,
@@ -35,6 +36,7 @@ const Template = ({
   disabled,
   label,
   secondary,
+  primaryAlternate,
   submit,
   text,
   uswds
@@ -49,6 +51,7 @@ const Template = ({
       disabled={disabled}
       label={label}
       secondary={secondary}
+      primary-alternate={primaryAlternate}
       submit={submit}
       text={text}
       onClick={e => console.log(e)}
@@ -61,6 +64,13 @@ Primary.args = {
   ...defaultArgs,
 };
 Primary.argTypes = propStructure(buttonDocs);
+
+export const PrimaryAlternate = Template.bind(null);
+PrimaryAlternate.args = {
+  ...defaultArgs,
+  primaryAlternate: true,
+  text: "Primary Alternate"
+};
 
 export const Secondary = Template.bind(null);
 Secondary.args = {
