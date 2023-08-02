@@ -99,6 +99,8 @@ export class VaAccordionItem {
       
       if (currentTarget) {
         this.open = true;
+        this.el.setAttribute('open', 'true');
+        this.el.scrollIntoView();
       }
     }
   }

@@ -152,6 +152,7 @@
   margin-right: rem-override(0.5rem);
   padding: rem-override(0.75rem) rem-override(1.25rem);
 
+  
   &--big {
     border-radius: rem-override(0.25rem);
     font-size: rem-override(1.46rem);
@@ -401,6 +402,31 @@
 
 .usa-character-count__status {
   padding-top: rem-override(0.25rem);
+}
+
+.usa-process-list {
+  font-size: rem-override(1.06rem);
+  padding-left: calc(rem-override(1rem));
+}
+
+.usa-process-list__item:before {
+  font-size: rem-override(1.06rem);
+  border-width: rem-override(0.25rem);
+  margin-top: rem-override(-0.4rem);
+  height: rem-override(2rem);
+  width: rem-override(2rem);
+  border-radius: rem-override(99rem);
+}
+
+.usa-process-list__item {
+  font-size: rem-override(1.06rem);
+  border-left-width: rem-override(0.5rem);
+  padding-bottom: rem-override(2rem);
+  padding-left: calc(calc( (rem-override(2.5rem) / 2) - rem-override(0.25rem) ) * 2);
+}
+
+.usa-process-list__item:last-child {
+  border-left-width: rem-override(0.5rem); ;
 }
 
 .usa-icon--size-3 {

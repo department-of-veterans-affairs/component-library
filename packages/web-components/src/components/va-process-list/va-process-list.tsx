@@ -1,7 +1,8 @@
-import { Component, h } from '@stencil/core';
+import { Component, h, Prop } from '@stencil/core';
 
 /**
- * This component expects `<li>` elements as its children.
+ * For v3/uswds this component expects `<va-process-list-item>` elements as its children.
+ * For v1 this component expects `<li>` elements as its children.
  */
 
 /**
@@ -11,15 +12,30 @@ import { Component, h } from '@stencil/core';
  */
 @Component({
   tag: 'va-process-list',
-  styleUrl: 'va-process-list.css',
+  styleUrl: 'va-process-list.scss',
   shadow: true,
 })
 export class VaProcessList {
+  /**
+   * Whether or not the component will use USWDS v3 styling.
+   */
+  @Prop() uswds?: boolean = false
+
   render() {
-    return (
-      <ol role="list">
-        <slot></slot>
-      </ol>
-    );
+    const { uswds } = this;
+    
+    if (uswds) {
+      return (
+        <ol role="list" class={'usa-process-list'}>
+          <slot></slot>
+        </ol>
+      );
+    } else {
+      return (
+        <ol role="list">
+          <slot></slot>
+        </ol>
+      );
+    }
   }
 }

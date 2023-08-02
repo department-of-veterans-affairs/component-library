@@ -2,7 +2,6 @@ import AdditionalInfo from './AdditionalInfo';
 import AlertBox, { ALERT_TYPE } from './AlertBox';
 import Breadcrumbs from './Breadcrumbs';
 import Checkbox from './Checkbox';
-import CheckboxGroup from './CheckboxGroup';
 import ExpandingGroup from './ExpandingGroup';
 import FileInput from './FileInput';
 import IconBase from './IconBase';
@@ -30,7 +29,6 @@ export {
   ALERT_TYPE,
   Breadcrumbs,
   Checkbox,
-  CheckboxGroup,
   ExpandingGroup,
   FileInput,
   IconBase,
