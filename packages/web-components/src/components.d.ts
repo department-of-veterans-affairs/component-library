@@ -794,6 +794,32 @@ export namespace Components {
         "uswds"?: boolean;
     }
     interface VaProcessList {
+        /**
+          * Whether or not the component will use USWDS v3 styling.
+         */
+        "uswds"?: boolean;
+    }
+    interface VaProcessListItem {
+        /**
+          * Whether or not the item is active
+         */
+        "active"?: boolean;
+        /**
+          * Whether or not the item should display the checkmark icon
+         */
+        "checkmark"?: boolean;
+        /**
+          * The process list item header text
+         */
+        "header"?: string;
+        /**
+          * Header level for item header. Must be between 1 and 6
+         */
+        "level"?: number;
+        /**
+          * Whether or not the item is pending
+         */
+        "pending"?: boolean;
     }
     interface VaProgressBar {
         /**
@@ -1493,6 +1519,12 @@ declare global {
         prototype: HTMLVaProcessListElement;
         new (): HTMLVaProcessListElement;
     };
+    interface HTMLVaProcessListItemElement extends Components.VaProcessListItem, HTMLStencilElement {
+    }
+    var HTMLVaProcessListItemElement: {
+        prototype: HTMLVaProcessListItemElement;
+        new (): HTMLVaProcessListItemElement;
+    };
     interface HTMLVaProgressBarElement extends Components.VaProgressBar, HTMLStencilElement {
     }
     var HTMLVaProgressBarElement: {
@@ -1597,6 +1629,7 @@ declare global {
         "va-pagination": HTMLVaPaginationElement;
         "va-privacy-agreement": HTMLVaPrivacyAgreementElement;
         "va-process-list": HTMLVaProcessListElement;
+        "va-process-list-item": HTMLVaProcessListItemElement;
         "va-progress-bar": HTMLVaProgressBarElement;
         "va-promo-banner": HTMLVaPromoBannerElement;
         "va-radio": HTMLVaRadioElement;
@@ -2564,6 +2597,32 @@ declare namespace LocalJSX {
         "uswds"?: boolean;
     }
     interface VaProcessList {
+        /**
+          * Whether or not the component will use USWDS v3 styling.
+         */
+        "uswds"?: boolean;
+    }
+    interface VaProcessListItem {
+        /**
+          * Whether or not the item is active
+         */
+        "active"?: boolean;
+        /**
+          * Whether or not the item should display the checkmark icon
+         */
+        "checkmark"?: boolean;
+        /**
+          * The process list item header text
+         */
+        "header"?: string;
+        /**
+          * Header level for item header. Must be between 1 and 6
+         */
+        "level"?: number;
+        /**
+          * Whether or not the item is pending
+         */
+        "pending"?: boolean;
     }
     interface VaProgressBar {
         /**
@@ -3027,6 +3086,7 @@ declare namespace LocalJSX {
         "va-pagination": VaPagination;
         "va-privacy-agreement": VaPrivacyAgreement;
         "va-process-list": VaProcessList;
+        "va-process-list-item": VaProcessListItem;
         "va-progress-bar": VaProgressBar;
         "va-promo-banner": VaPromoBanner;
         "va-radio": VaRadio;
@@ -3076,6 +3136,7 @@ declare module "@stencil/core" {
             "va-pagination": LocalJSX.VaPagination & JSXBase.HTMLAttributes<HTMLVaPaginationElement>;
             "va-privacy-agreement": LocalJSX.VaPrivacyAgreement & JSXBase.HTMLAttributes<HTMLVaPrivacyAgreementElement>;
             "va-process-list": LocalJSX.VaProcessList & JSXBase.HTMLAttributes<HTMLVaProcessListElement>;
+            "va-process-list-item": LocalJSX.VaProcessListItem & JSXBase.HTMLAttributes<HTMLVaProcessListItemElement>;
             "va-progress-bar": LocalJSX.VaProgressBar & JSXBase.HTMLAttributes<HTMLVaProgressBarElement>;
             "va-promo-banner": LocalJSX.VaPromoBanner & JSXBase.HTMLAttributes<HTMLVaPromoBannerElement>;
             "va-radio": LocalJSX.VaRadio & JSXBase.HTMLAttributes<HTMLVaRadioElement>;
