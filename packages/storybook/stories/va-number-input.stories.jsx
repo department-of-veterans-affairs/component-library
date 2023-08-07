@@ -34,6 +34,7 @@ const defaultArgs = {
   'max': undefined,
   hint: null,
   'currency': false,
+  'message-aria-describedby': 'Optional description text for screen readers',
 };
 
 const vaNumberInput = args => {
@@ -49,6 +50,7 @@ const vaNumberInput = args => {
     max,
     hint,
     currency,
+    'message-aria-describedby': messageAriaDescribedby,
     ...rest
   } = args;
   return (
@@ -66,6 +68,7 @@ const vaNumberInput = args => {
       onInput={e => console.log('input event value:', e.target.value)}
       onBlur={e => console.log('blur event', e)}
       currency={currency}
+      message-aria-describedby={messageAriaDescribedby}
     />
   )
 }

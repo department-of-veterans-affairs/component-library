@@ -79,6 +79,11 @@ export class VaNumberInput {
   @Prop() hint?: string;
 
   /**
+   * An optional message that will be read by screen readers when the input is focused.
+   */
+  @Prop() messageAriaDescribedby?: string;
+
+  /**
    * The value for the input.
    */
   @Prop({ mutable: true, reflect: true }) value?: string;
@@ -154,8 +159,12 @@ export class VaNumberInput {
       handleBlur,
       handleInput,
       width,
+      messageAriaDescribedby,
     } = this;
 
+    const ariaDescribedbyIds = `${messageAriaDescribedby ? 'input-message' : ''} ${error ? 'input-error-message' : ''}`
+    .trim() || null; // Null so we don't add the attribute if we have an empty string
+    
     if (uswds) {
       const labelClasses = classnames({
         'usa-label': true,
@@ -177,9 +186,9 @@ export class VaNumberInput {
                   {i18next.t('required')}
                 </span>
               )}
+              {hint && <span class="usa-hint">{hint}</span>}
             </label>
           )}
-          {hint && <span class="usa-hint">{hint}</span>}
           <span id="input-error-message" role="alert">
             {error && (
               <Fragment>
@@ -190,7 +199,7 @@ export class VaNumberInput {
           </span>
           <input
             class={inputClasses}
-            aria-describedby={error ? 'input-error-message' : undefined}
+            aria-describedby={ariaDescribedbyIds}
             aria-invalid={error ? 'true' : 'false'}
             id="inputField"
             type="number"
@@ -203,6 +212,11 @@ export class VaNumberInput {
             onInput={handleInput}
             onBlur={handleBlur}
             />
+            {messageAriaDescribedby && (
+              <span id="input-message" class="sr-only">
+                {messageAriaDescribedby}
+              </span>
+            )}
         </Host>
       );
     } else {
@@ -215,8 +229,8 @@ export class VaNumberInput {
           <label htmlFor="inputField">
             {label}{' '}
             {required && <span class="required">{i18next.t('required')}</span>}
+            {hint && <span class="hint-text">{hint}</span>}
           </label>
-          {hint && <span class="hint-text">{hint}</span>}
           <span id="error-message" role="alert">
             {error && (
               <Fragment>
@@ -230,7 +244,7 @@ export class VaNumberInput {
             <input
               class={inputClass}
               aria-labelledby={currency ? 'inputField symbol' : undefined}
-              aria-describedby={error ? 'error-message' : undefined}
+              aria-describedby={ariaDescribedbyIds}
               aria-invalid={error ? 'true' : 'false'}
               id="inputField"
               type="number"
@@ -243,6 +257,11 @@ export class VaNumberInput {
               onInput={handleInput}
               onBlur={handleBlur}
               />
+              {messageAriaDescribedby && (
+                <span id="input-message" class="sr-only">
+                  {messageAriaDescribedby}
+                </span>
+              )}
             </div>
         </Host>
       );
