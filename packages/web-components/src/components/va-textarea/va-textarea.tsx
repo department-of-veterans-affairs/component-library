@@ -232,6 +232,11 @@ export class VaTextarea {
               {getCharacterMessage(value, maxlength)}
             </span>
           )}
+          {messageAriaDescribedby && (
+            <span id="input-message" class="sr-only">
+              {messageAriaDescribedby}
+            </span>
+          )}
         </Host>
       );
     } else {      
@@ -250,7 +255,7 @@ export class VaTextarea {
             )}
           </span>
           <textarea
-            aria-describedby={error ? 'error-message' : undefined}
+            aria-describedby={ariaDescribedbyIds}
             aria-invalid={error ? 'true' : 'false'}
             onInput={this.handleInput}
             onBlur={this.handleBlur}
@@ -263,6 +268,11 @@ export class VaTextarea {
           />
           {maxlength && value?.length >= maxlength && (
             <small>{i18next.t('max-chars', { length: maxlength })}</small>
+          )}
+          {messageAriaDescribedby && (
+            <span id="input-message" class="sr-only">
+              {messageAriaDescribedby}
+            </span>
           )}
         </Host>
       );
