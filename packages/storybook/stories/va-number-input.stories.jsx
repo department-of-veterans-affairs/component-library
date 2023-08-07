@@ -172,6 +172,7 @@ ValidRange.args = {
   ...defaultArgs,
   min: 0,
   max: 4,
+  hint: "The valid range is 0 to 4",
 };
 
 export const Internationalization = I18nTemplate.bind(null);
