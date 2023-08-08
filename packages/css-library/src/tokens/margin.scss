@@ -1,5 +1,5 @@
 @use 'uswds-core/src/styles/functions' as *;
-@use "../../dist/scss/tokens" as *;
+@use "../../dist/tokens/scss/variables" as *;
 
 $tokens-margin: (
   0: $units-0,

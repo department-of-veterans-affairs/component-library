@@ -1,12 +1,16 @@
 # css-library
 
-## Utility Classes
+## Stylesheets
 
-The CSS utility class library is based on USWDS version 3. This library is intended to eventually replace the Formation CSS library.
+The stylesheets is based on USWDS version 3 and are intended to eventually replace the Formation CSS library:
+
+- fonts.css
+- elements.css
+- utilties.css
 
 To generate stylesheets, run `yarn build:stylesheets`
 
-## Tokens
+## Design Tokens
 
 The tokens generated in this library will be available in several different formats so that various tools and environments can use them.
 

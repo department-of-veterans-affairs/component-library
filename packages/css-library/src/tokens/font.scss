@@ -1,4 +1,4 @@
-@use "../../dist/scss/tokens" as *;
+@use "../../dist/tokens/scss/variables" as *;
 
 $tokens-font-family: (
   'sans': $font-family-sans,
