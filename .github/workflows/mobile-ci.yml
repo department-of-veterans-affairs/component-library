@@ -1,0 +1,31 @@
+#
+# Mobile Testing
+#
+
+name: '[Mobile] CI Testing'
+
+on:
+  pull_request:
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  unit-tests:
+    name: Component Library Unit Tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '14.x'
+          cache: 'yarn'
+      - name: Install dependencies
+        run: yarn install --immutable
+      - name: yarn install local
+        working-directory: packages/mobile-components
+        run: yarn install --immutable
+      - name: yarn test
+        working-directory: packages/mobile-components
+        run: yarn test
