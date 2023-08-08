@@ -1,4 +1,11 @@
+@use 'usa-pagination/src/styles/_usa-pagination.scss';
+@use 'usa-icon/src/styles/_usa-icon.scss';
+
 @import '../../mixins/focusable.css';
+
+:host([uswds]) .usa-pagination .usa-current {
+  background-color: var(--color-primary);
+}
 
 :host {
   background-color: var(--color-white);
