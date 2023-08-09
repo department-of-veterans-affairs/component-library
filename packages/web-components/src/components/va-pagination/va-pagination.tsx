@@ -74,7 +74,7 @@ export class VaPagination {
     this.pageSelect.emit({ page });
 
     // Reset focus to the active page button.
-    (this.el.shadowRoot.activeElement as HTMLElement).blur();
+    (this.el?.shadowRoot?.activeElement as HTMLElement)?.blur();
 
     if (this.enableAnalytics) {
       const detail = {
