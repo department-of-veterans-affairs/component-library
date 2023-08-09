@@ -49,9 +49,9 @@ if (Build.isTesting) {
 })
 export class VaMemorableDate {
 
-  monthfield: HTMLElement;
-  dayfield: HTMLElement;
-  yearfield: HTMLElement;
+  private monthfield: HTMLElement;
+  private dayfield: HTMLElement;
+  private yearfield: HTMLElement;
 
   @Element() el: HTMLElement;
   /**
