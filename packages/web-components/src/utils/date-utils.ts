@@ -170,6 +170,14 @@ export function checkIsNaN(
   day: number,
   monthYearOnly : boolean = false) : boolean {
 
+  // Check for nulls first, so that field specific errors do not get overwritten  
+  if (component.required && (!year || !month || (!monthYearOnly && !day))) {
+    component.invalidYear = !year;
+    component.invalidMonth = !month;
+    component.invalidDay = monthYearOnly ? false : !day;
+    component.error = 'date-error';
+  }
+
   // Begin NaN validation.
   if (isNaN(year)) {
     component.invalidYear = true;
@@ -194,13 +202,7 @@ export function checkIsNaN(
   else {
     component.invalidMonth = false;
   }
-
-  if (component.required && (!year || !month || (!monthYearOnly && !day))) {
-    component.invalidYear = !year;
-    component.invalidMonth = !month;
-    component.invalidDay = monthYearOnly ? false : !day;
-    component.error = 'date-error';
-  }
+  
 
   // Remove any error message if none of the fields are NaN
   if (
@@ -231,7 +233,6 @@ export function validate(
   monthYearOnly : boolean = false) : void {
 
   const maxDay = daysForSelectedMonth(year, month);
-
   if (component.required && (!year || !month || (!monthYearOnly && !day))) {
     component.invalidYear = (!year || year < minYear || year > maxYear);
     component.invalidMonth = (!month || month < minMonths || month > maxMonths);
