@@ -104,6 +104,7 @@ export class VaRadioOption {
             checked={checked}
             disabled={disabled}
             onClick={() => this.handleChange()}
+            tabIndex={-1}
           />
           <label htmlFor={id} id="option-label" class="usa-radio__label">
             {label}

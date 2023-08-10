@@ -89,7 +89,7 @@ describe('va-radio-option', () => {
     <va-radio-option uswds="" id="yes2" label="Yes - Any Veteran" name="yes" value="2" class="hydrated">
       <mock:shadow-root>
         <div class="usa-radio">
-          <input class="usa-radio__input" id="yes2" type="radio" name="yes" value="2">
+          <input class="usa-radio__input" id="yes2" type="radio" name="yes" tabindex="-1" value="2">
           <label class="usa-radio__label" for="yes2" id="option-label">
             Yes - Any Veteran
           </label>
