@@ -175,7 +175,7 @@ describe('va-memorable-date', () => {
       await handleYear.press('Tab');
       await page.waitForChanges();
 
-      expect(date.getAttribute('error')).toEqual("date-error");
+      expect(date.getAttribute('error')).toEqual("month-range");
     });
 
     it('allows for a custom required message', async () => {
@@ -815,7 +815,7 @@ describe('va-memorable-date', () => {
       await handleYear.press('Tab');
       await page.waitForChanges();
 
-      expect(date.getAttribute('error')).toEqual("date-error");
+      expect(date.getAttribute('error')).toEqual("month-range");
     });
 
     it('uswds v3 allows for a custom required message', async () => {
@@ -1492,7 +1492,7 @@ describe('va-memorable-date', () => {
       await handleYear.press('Tab');
       await page.waitForChanges();
 
-      expect(date.getAttribute('error')).toEqual("date-error");
+      expect(date.getAttribute('error')).toEqual("month-range");
     });
 
     it('uswds v3 allows for a custom required message with monthSelect', async () => {
