@@ -1,5 +1,0 @@
-dist
-
-# Style Dictionary output
-src/tokens/_variables.scss
-src/tokens/_variables.css
