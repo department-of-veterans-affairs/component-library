@@ -178,14 +178,15 @@ export class VaPagination {
       pages: totalPages,
       showLastPage,
     } = this;
-    
+
     // Make space for "... (last page number)" if not in range of the last page.
     const showEllipsisAndLastPage =
       showLastPage && currentPage < totalPages - maxPageListLength + 1;
-    
+
     const limit = showEllipsisAndLastPage
       ? maxPageListLength - 2
       : maxPageListLength;
+
     let end;
     let start;
 
@@ -203,8 +204,8 @@ export class VaPagination {
       start = 1;
       end = totalPages + 1;
     }
-    return this.makeArray(start, end);
-  };
+    return Array.from({ length: end - start }, (_, i) => i + start);
+  }
 
   private handleKeyDown = (e, pageNumber) => {
     const keyCode = e.key;
@@ -261,7 +262,6 @@ export class VaPagination {
     const lastPageAriaLabel = ariaLabelSuffix ? `Page ${pages} ${ariaLabelSuffix}` : `Page ${pages}`;
     if (uswds) {
       const pageNumbersToRender = this.pageNumbersUswds();
-      console.log('--->', pageNumbersToRender);
       const itemClasses = classnames({
         'usa-pagination__item': true,
         'usa-pagination__page-no': true
