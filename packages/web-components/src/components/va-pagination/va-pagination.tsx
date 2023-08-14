@@ -80,15 +80,15 @@ export class VaPagination {
   @Prop() unbounded?: boolean = false;
 
   /**
-   * If the page total is less than or equal to this limit, show them all. 
-   * Only relevant for uswds.
-   */
-  SHOW_ALL_PAGES: number = 7;
-
-  /**
   * Whether or not the component will use USWDS v3 styling.
   */
   @Prop() uswds?: boolean = false;
+
+  /**
+   * If the page total is less than or equal to this limit, show all pages. 
+   * Only relevant for uswds.
+   */
+  static SHOW_ALL_PAGES: number = 7;
 
   private handlePageSelect = (page, eventID) => {
     this.pageSelect.emit({ page });
@@ -114,8 +114,8 @@ export class VaPagination {
   }
 
   /**
-   * Generate a list of the continuous pages numbers to render, i.e.
-   * the page numbers to render not including the first/last page
+   * Generate a list of the continuous page numbers to render, i.e.
+   * the page numbers to render not including the first and/or last page
    */
   private pageNumbersUswds = () => {
     const {
@@ -133,7 +133,7 @@ export class VaPagination {
     let start;
     let end;
 
-    if (totalPages <= this.SHOW_ALL_PAGES) {
+    if (totalPages <= VaPagination.SHOW_ALL_PAGES) {
       return this.makeArray(1, totalPages);
     }
 
@@ -217,6 +217,37 @@ export class VaPagination {
     }
   };
 
+  /**
+   * Adding SVGs here because if SVGs are included in the render method, 
+   * the result is to render the page in xhtml not html
+   * and errors result. 
+   */
+  componentDidLoad() {
+    const prevIconDiv = this.el.shadowRoot?.querySelector("#previous-arrow-icon");
+    if (prevIconDiv) {
+      const previousIconPath = `${getAssetPath('/assets/sprite.svg')}#navigate_before`;
+      // eslint-disable-next-line i18next/no-literal-string
+      prevIconDiv.innerHTML = `<svg
+      class="usa-icon"
+      aria-hidden="true"
+      role="img">
+        <use href=${previousIconPath}></use>
+      </svg>`
+    }
+
+    const nextIconDiv = this.el.shadowRoot?.querySelector("#next-arrow-icon");
+    if (nextIconDiv) {
+      const nextIconPath = `${getAssetPath('/assets/sprite.svg')}#navigate_next`;
+      // eslint-disable-next-line i18next/no-literal-string
+      nextIconDiv.innerHTML = `<svg
+      class="usa-icon"
+      aria-hidden="true"
+      role="img">
+        <use href=${nextIconPath}></use>
+      </svg>`
+    }
+  }
+
   render() {
     const { ariaLabelSuffix, page, pages, maxPageListLength, showLastPage, uswds } =
       this;
@@ -229,29 +260,36 @@ export class VaPagination {
     const nextAriaLabel = ariaLabelSuffix ? `Next page ${ariaLabelSuffix}` : 'Next page';
     const lastPageAriaLabel = ariaLabelSuffix ? `Page ${pages} ${ariaLabelSuffix}` : `Page ${pages}`;
     if (uswds) {
-      const previousIconPath = `${getAssetPath('/assets/sprite.svg')}#navigate_before`;
-      const nextIconPath = `${getAssetPath('/assets/sprite.svg')}#navigate_next`;
       const pageNumbersToRender = this.pageNumbersUswds();
+      console.log('--->', pageNumbersToRender);
+      const itemClasses = classnames({
+        'usa-pagination__item': true,
+        'usa-pagination__page-no': true
+      });
+      const ellipsisClasses = classnames({
+        'usa-pagination__item': true,
+        'usa-pagination__overflow': true
+      });
+      const arrowClasses = classnames({
+        'usa-pagination__item': true,
+        'usa-pagination__arrow': true
+      });
+
       const previousButton = page > 1
         ? 
         <Fragment>
-          <li class="usa-pagination__item usa-pagination__arrow" aria-label={previousAriaLabel}>
+          <li class={arrowClasses} aria-label={previousAriaLabel}>
             <a class="usa-pagination__link usa-pagination__previous-page" href="javascript:void(0)">
-              <svg
-                  class="usa-icon"
-                  aria-hidden="true"
-                  role="img">
-                  <use href={previousIconPath}></use>
-              </svg>
+              <div id="previous-arrow-icon"></div>
               <span class="usa-pagination__link-text">Previous</span>  
             </a>
           </li>
           {!pageNumbersToRender.includes(1) && 
           <Fragment>
-            <li class="usa-pagination__item usa-pagination__page-no">
+            <li class={itemClasses}>
               <a href="javascript:void(0)" class="usa-pagination__button">1</a>
             </li>
-            <li class="usa-pagination__item usa-pagination__overflow" aria-label="ellipsis indicating non-visible pages" role="presentation">
+            <li class={ellipsisClasses} aria-label="ellipsis indicating non-visible pages" role="presentation">
               <span>...</span>
             </li> 
           </Fragment>}
@@ -265,7 +303,7 @@ export class VaPagination {
         })
 
         return (
-          <li class="usa-pagination__item usa-pagination__page-no">
+          <li class={itemClasses}>
             <a href="javascript:void(0)" class={anchorClasses}>{pageNumber}</a>
           </li>
         )
@@ -274,23 +312,18 @@ export class VaPagination {
       const nextButton = page < pages
         ?
         <Fragment>
-          {pages > this.SHOW_ALL_PAGES && <li class="usa-pagination__item usa-pagination__overflow" aria-label="ellipsis indicating non-visible pages" role="presentation">
+          {pages > VaPagination.SHOW_ALL_PAGES &&
+            <li class={ellipsisClasses} aria-label="ellipsis indicating non-visible pages" role="presentation">
             <span>...</span>
           </li>}
-          {!this.unbounded &&
-          <li class="usa-pagination__item usa-pagination__page-no">
+          {!this.unbounded && pages > VaPagination.SHOW_ALL_PAGES &&
+          <li class={itemClasses}>
             <a href="javascript:void(0)" class="usa-pagination__button">{pages}</a>
-          </li>
-          }
-          <li class="usa-pagination__item usa-pagination__arrow" aria-label={nextAriaLabel}>
+          </li>}
+          <li class={arrowClasses} aria-label={nextAriaLabel}>
             <a class="usa-pagination__link usa-pagination__next-page" href="javascript:void(0)">
-              <span class="usa-pagination__link-text">Next</span>
-              <svg
-                class="usa-icon"
-                aria-hidden="true"
-                role="img">
-                <use href={nextIconPath}></use>
-              </svg>
+              <span  class="usa-pagination__link-text">Next</span>
+              <div id="next-arrow-icon"></div>
             </a>
           </li>
         </Fragment>

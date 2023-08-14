@@ -3,6 +3,7 @@
 @use 'usa-icon/src/styles/_usa-icon.scss';
 
 @import '../../mixins/focusable.css';
+@import '../../global/formation_overrides';
 
 :host([uswds]) .usa-pagination .usa-current {
   background-color: var(--color-primary);
