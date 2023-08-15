@@ -25,6 +25,7 @@ const defaultArgs = {
   'value': undefined,
   'placeholder': '',
   hint: null,
+  'message-aria-describedby': 'Optional description text for screen readers',
 };
 
 const Template = ({
@@ -37,6 +38,7 @@ const Template = ({
   value,
   placeholder,
   hint,
+  'message-aria-describedby': messageAriaDescribedby,
 }) => {
   return (
     <va-textarea
@@ -51,6 +53,7 @@ const Template = ({
       placeholder={placeholder}
       onBlur={e => console.log('blur event', e)}
       onInput={e => console.log('input event value', e.target.value)}
+      message-aria-describedby={messageAriaDescribedby}
     />
   );
 };
