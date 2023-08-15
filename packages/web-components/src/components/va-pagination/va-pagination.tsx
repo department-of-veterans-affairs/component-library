@@ -88,7 +88,7 @@ export class VaPagination {
    * If the page total is less than or equal to this limit, show all pages. 
    * Only relevant for uswds.
    */
-  static SHOW_ALL_PAGES: number = 7;
+  SHOW_ALL_PAGES: number = 7;
 
   private handlePageSelect = (page, eventID) => {
     this.pageSelect.emit({ page });
@@ -133,7 +133,7 @@ export class VaPagination {
     let start;
     let end;
 
-    if (totalPages <= VaPagination.SHOW_ALL_PAGES) {
+    if (totalPages <= this.SHOW_ALL_PAGES) {
       return this.makeArray(1, totalPages);
     }
 
@@ -312,11 +312,11 @@ export class VaPagination {
       const nextButton = page < pages
         ?
         <Fragment>
-          {pages > VaPagination.SHOW_ALL_PAGES &&
+          {pages > this.SHOW_ALL_PAGES &&
             <li class={ellipsisClasses} aria-label="ellipsis indicating non-visible pages" role="presentation">
             <span>...</span>
           </li>}
-          {!this.unbounded && pages > VaPagination.SHOW_ALL_PAGES &&
+          {!this.unbounded && pages > this.SHOW_ALL_PAGES &&
           <li class={itemClasses}>
             <a href="javascript:void(0)" class="usa-pagination__button">{pages}</a>
           </li>}
