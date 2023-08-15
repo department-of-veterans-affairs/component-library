@@ -247,8 +247,8 @@ describe('va-pagination', () => {
 
 });
 
-describe('va-pagination - uswds', () => {
-  it.skip('renders', async () => {
+describe('uswds - va-pagination', () => {
+  it('uswds renders', async () => {
     const page = await newE2EPage();
     await page.setContent('<va-pagination></va-pagination>');
 
@@ -277,7 +277,7 @@ describe('va-pagination - uswds', () => {
     `);
   });
 
-  it('only selected "page" has selected class', async () => {
+  it('uswds v3 only selected "page" has selected class', async () => {
     const page = await newE2EPage();
     await page.setContent(`<va-pagination page="1" pages="24" max-page-list-length="7" uswds/>`);
     const firstPage = await page.findAll('va-pagination >>> li.usa-pagination__page-no a.usa-pagination__button.usa-current');
@@ -285,7 +285,7 @@ describe('va-pagination - uswds', () => {
     expect(firstPage[0].innerHTML).toEqual("1");
   });
 
-  it('renders first and last page with ellipses when middle pages do not contain them', async () => {
+  it('uswds v3 renders first and last page with ellipses when middle pages do not contain them', async () => {
     const page = await newE2EPage();
     await page.setContent(`<va-pagination page="10" pages="24" max-page-list-length="7" uswds/>`);
     const ellipses = await page.findAll('va-pagination >>> li.usa-pagination__overflow');
@@ -296,21 +296,21 @@ describe('va-pagination - uswds', () => {
     expect(pageNumbers[pageNumbers.length - 1].innerHTML).toEqual("24");
   });
 
-  it('does not render "Next" page when page is set to total pages', async () => {
+  it('uswds v3 does not render "Next" page when page is set to total pages', async () => {
     const page = await newE2EPage();
     await page.setContent(`<va-pagination page="24" pages="24" max-page-list-length="7" uswds/>`);
     const next = await page.find('va-pagination >>> a.usa-pagination__next-page');
     expect(next).toBeNull();
   });
 
-  it('does not show last page number if unbounded flag is set', async () => {
+  it('uswds v3 does not show last page number if unbounded flag is set', async () => {
     const page = await newE2EPage();
     await page.setContent(`<va-pagination page="1" pages="24" max-page-list-length="7" unbounded uswds/>`);
     const pageNumbers = await page.findAll('va-pagination >>> li.usa-pagination__page-no a.usa-pagination__button');
     expect(pageNumbers[pageNumbers.length - 1].innerHTML).toEqual("6");
   });
 
-  it('renders all pages if total pages less than or equal to 7', async () => {
+  it('uswds v3 renders all pages if total pages less than or equal to 7', async () => {
     const page = await newE2EPage();
     await page.setContent(`<va-pagination page="3" pages="7" max-page-list-length="7" uswds/>`);
   
