@@ -1838,9 +1838,9 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@department-of-veterans-affairs/css-library@workspace:packages/css-library"
   dependencies:
-    "@uswds/uswds": ^3.0.1
-    sass: ^1.51.0
-    style-dictionary: ^3.7.1
+    "@uswds/uswds": ^3.5.0
+    sass: ^1.64.1
+    style-dictionary: ^3.8.0
   languageName: unknown
   linkType: soft
 
@@ -5034,19 +5034,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@uswds/uswds@npm:^3.0.1":
-  version: 3.0.1
-  resolution: "@uswds/uswds@npm:3.0.1"
-  dependencies:
-    classlist-polyfill: 1.0.3
-    domready: 1.0.8
-    object-assign: 4.1.1
-    receptor: 1.0.0
-    resolve-id-refs: 0.1.0
-  checksum: d13437cfd4af2ae9208dd88b3af969a52a46f5b9f23940b692759cbcf49a1f5c9e8fcaf55b5ebc008c8a0ee744313092aeab70e168771f921699575ec6d0f95a
-  languageName: node
-  linkType: hard
-
 "@uswds/uswds@npm:^3.4.0":
   version: 3.4.1
   resolution: "@uswds/uswds@npm:3.4.1"
@@ -5056,6 +5043,18 @@ __metadata:
     receptor: 1.0.0
     resolve-id-refs: 0.1.0
   checksum: eb78953490a7c7d21b18dd22e813ae462ac6d931483d09141eb05addee4e3c24b3ca2aa58a18d25835e27a5e1c717c4e0d3749eaaed49d3f4ebe5149e6286432
+  languageName: node
+  linkType: hard
+
+"@uswds/uswds@npm:^3.5.0":
+  version: 3.5.0
+  resolution: "@uswds/uswds@npm:3.5.0"
+  dependencies:
+    classlist-polyfill: 1.0.3
+    object-assign: 4.1.1
+    receptor: 1.0.0
+    resolve-id-refs: 0.1.0
+  checksum: 51bb955aaf7d5c3fdaa63b04d6722b963e781cfdb2c061c2b8a3f0d8ea663e7f731c33097344912cdcbf73781c7f9829173f3fa4eb30b14ee2f598b3dda2a412
   languageName: node
   linkType: hard
 
@@ -8718,7 +8717,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"domready@npm:1.0.8, domready@npm:^1.0.8":
+"domready@npm:^1.0.8":
   version: 1.0.8
   resolution: "domready@npm:1.0.8"
   checksum: 5b0ee86650226e09f65c89b61d15fcfcda5925931dfffab5e9b82bf8ba96637286605fde1ac4addee19717bf7e486d4b49683e6f99038927560412113d96fde0
@@ -13471,12 +13470,21 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"json5@npm:^2.2.0, json5@npm:^2.2.1":
+"json5@npm:^2.2.1":
   version: 2.2.1
   resolution: "json5@npm:2.2.1"
   bin:
     json5: lib/cli.js
   checksum: 74b8a23b102a6f2bf2d224797ae553a75488b5adbaee9c9b6e5ab8b510a2fc6e38f876d4c77dea672d4014a44b2399e15f2051ac2b37b87f74c0c7602003543b
+  languageName: node
+  linkType: hard
+
+"json5@npm:^2.2.2":
+  version: 2.2.3
+  resolution: "json5@npm:2.2.3"
+  bin:
+    json5: lib/cli.js
+  checksum: 2a7436a93393830bce797d4626275152e37e877b265e94ca69c99e3d20c2b9dab021279146a39cdb700e71b2dd32a4cebd1514cd57cee102b1af906ce5040349
   languageName: node
   linkType: hard
 
@@ -17727,16 +17735,16 @@ resolve@^2.0.0-next.3:
   languageName: node
   linkType: hard
 
-"sass@npm:^1.51.0":
-  version: 1.51.0
-  resolution: "sass@npm:1.51.0"
+"sass@npm:^1.64.1":
+  version: 1.64.2
+  resolution: "sass@npm:1.64.2"
   dependencies:
     chokidar: ">=3.0.0 <4.0.0"
     immutable: ^4.0.0
     source-map-js: ">=0.6.2 <2.0.0"
   bin:
     sass: sass.js
-  checksum: d674fd87be863961d5e5233a148e381a72b06ca1749ffd95a08be2c3f4aa8fc77e3e21840347a84d7d4542cbf97cd6f9bfae19ecb1f5eefa6c207a3d8f923dbc
+  checksum: 43a5c9b9b3b6ba27feb5c45eba90edc437b15a30fd443f5d2623bbd59fe4a922f2a6a9990296c6a6c2b5bce7f401922c5049357415f50b745952c2d478bc5526
   languageName: node
   linkType: hard
 
@@ -18763,22 +18771,22 @@ resolve@^2.0.0-next.3:
   languageName: node
   linkType: hard
 
-"style-dictionary@npm:^3.7.1":
-  version: 3.7.1
-  resolution: "style-dictionary@npm:3.7.1"
+"style-dictionary@npm:^3.8.0":
+  version: 3.8.0
+  resolution: "style-dictionary@npm:3.8.0"
   dependencies:
     chalk: ^4.0.0
     change-case: ^4.1.2
     commander: ^8.3.0
     fs-extra: ^10.0.0
     glob: ^7.2.0
-    json5: ^2.2.0
+    json5: ^2.2.2
     jsonc-parser: ^3.0.0
     lodash: ^4.17.15
     tinycolor2: ^1.4.1
   bin:
     style-dictionary: bin/style-dictionary
-  checksum: f2793b51d4c91625d1ee3385a2438c3fb0723183812c47f0fcea96703fc3a8a433ba4b496a3ab3d793c9827229d74483b4d8916d624d7d9bde5d36e8b18831fe
+  checksum: ed2440c2d1bd84593f9f60ffbfbb7c85c9592d125e169ea63e2044fe681191e8c9c156853d82ae606f9adf6aacbaa162e03d5ef85b80be334d76e28a57bfc189
   languageName: node
   linkType: hard
 
