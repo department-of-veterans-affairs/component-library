@@ -51,7 +51,11 @@ const CustomValidationTemplate = ({ label, name, hint, required, error, uswds, v
   const today = new Date();
   // new Date as YYYY-MM-DD is giving the day prior to the day select
   // new Date as YYYY MM DD is giving the correct day selected
-  const dateInput = new Date(dateVal.split('-').join(' '));
+  const dateParts = dateVal.split('-');
+  const dateInput = new Date();
+  dateInput.setFullYear(dateParts[0]);
+  dateInput.setMonth(dateParts[1] - 1);
+  dateInput.setDate(dateParts[2]);
   function handleDateBlur() {
     if (dateInput <= today) {
       setErrorVal('Date must be in the future');
