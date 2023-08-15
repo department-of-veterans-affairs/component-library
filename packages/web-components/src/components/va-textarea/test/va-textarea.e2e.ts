@@ -234,7 +234,7 @@ describe('va-textarea', () => {
 
   it('uswds v3 renders hint text', async () => {
     const page = await newE2EPage();
-    await page.setContent('<va-textarea hint="This is hint text" uswds />');
+    await page.setContent('<va-textarea hint="This is hint text" label="Hello world" uswds />');
 
     // Render the hint text
     const hintTextElement = await page.find('va-textarea >>> span.usa-hint');

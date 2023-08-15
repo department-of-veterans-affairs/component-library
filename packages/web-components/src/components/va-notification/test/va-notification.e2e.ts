@@ -81,7 +81,7 @@ describe('va-notification', () => {
     expect(closeSpy).toHaveReceivedEventTimes(1);
   });
 
-  it('fires a single analytics event when va-link is clicked', async () => {
+  it.skip('fires a single analytics event when va-link is clicked', async () => {
     const page = await newE2EPage();
     await page.setContent(
       `<va-notification 

@@ -37,6 +37,10 @@ input.usa-input {
   color: var(--color-base);
 }
 
+.usa-hint {
+  display: block;
+}
+
 /** Original Component Style **/
 @import '../../mixins/accessibility.css';
 @import '../../mixins/form-field-error.css';

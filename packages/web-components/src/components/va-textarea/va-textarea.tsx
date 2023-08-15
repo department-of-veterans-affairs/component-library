@@ -69,6 +69,11 @@ export class VaTextarea {
   @Prop() hint?: string;
 
   /**
+   * An optional message that will be read by screen readers when the input is focused.
+   */
+  @Prop() messageAriaDescribedby?: string;
+
+  /**
    * The maximum number of characters allowed in the input.
    * Negative and zero values will be ignored.
    */
@@ -149,10 +154,23 @@ export class VaTextarea {
   }
 
   render() {
-    const { label, error, placeholder, name, required, value, hint, uswds, charcount } = this;
+    const { 
+      label, 
+      error, 
+      placeholder, 
+      name, 
+      required, 
+      value, 
+      hint, 
+      uswds, 
+      charcount, 
+      messageAriaDescribedby 
+    } = this;
+
     const maxlength = this.getMaxlength();
-    const ariaDescribedbyIds = `${error ? 'error-message' : ''} 
-    ${ hint ? 'hint-message' : '' } ${charcount && maxlength ? 'charcount-message' : ''}`.trim() || null;
+    const ariaDescribedbyIds = `${messageAriaDescribedby ? 'input-message' : ''} ${error ? 'error-message' : ''} 
+    ${charcount && maxlength ? 'charcount-message' : ''}`.trim() || null;
+
     if (uswds) {
       const charCountTooHigh = charcount && (value?.length > maxlength);
       const labelClass = classnames({
@@ -179,9 +197,9 @@ export class VaTextarea {
                   {i18next.t('required')}
                 </span>
               )}
+              {hint && <span class="usa-hint">{hint}</span>}
             </label>
           )}
-          {hint && <span id="hint-message" class="usa-hint">{hint}</span>}
           <slot></slot>
           <span id="input-error-message" role="alert">
             {error && (
@@ -214,6 +232,11 @@ export class VaTextarea {
               {getCharacterMessage(value, maxlength)}
             </span>
           )}
+          {messageAriaDescribedby && (
+            <span id="input-message" class="sr-only">
+              {messageAriaDescribedby}
+            </span>
+          )}
         </Host>
       );
     } else {      
@@ -222,8 +245,8 @@ export class VaTextarea {
           <label htmlFor="textarea">
             {label}
             {required && <span class="required">{i18next.t('required')}</span>}
+            {hint && <span class="hint-text">{hint}</span>}
           </label>
-          {hint && <span id="hint-message" class="hint-text">{hint}</span>}
           <span id="error-message" role="alert">
             {error && (
               <Fragment>
@@ -232,7 +255,7 @@ export class VaTextarea {
             )}
           </span>
           <textarea
-            aria-describedby={error ? 'error-message' : undefined}
+            aria-describedby={ariaDescribedbyIds}
             aria-invalid={error ? 'true' : 'false'}
             onInput={this.handleInput}
             onBlur={this.handleBlur}
@@ -245,6 +268,11 @@ export class VaTextarea {
           />
           {maxlength && value?.length >= maxlength && (
             <small>{i18next.t('max-chars', { length: maxlength })}</small>
+          )}
+          {messageAriaDescribedby && (
+            <span id="input-message" class="sr-only">
+              {messageAriaDescribedby}
+            </span>
           )}
         </Host>
       );

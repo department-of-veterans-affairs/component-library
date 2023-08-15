@@ -242,13 +242,15 @@ export class VaTextInput {
       width,
       charcount
     } = this;
+
     const type = this.getInputType();
     const maxlength = this.getMaxlength();
     const ariaDescribedbyIds =
       `${messageAriaDescribedby ? 'input-message' : ''} ${
         error ? 'input-error-message' : ''
-      } ${ hint ? 'input-hint' : '' } ${charcount && maxlength ? 'charcount-message' : ''}`.trim() || null; // Null so we don't add the attribute if we have an empty string
-    if (uswds) {
+      } ${charcount && maxlength ? 'charcount-message' : ''}`.trim() || null; // Null so we don't add the attribute if we have an empty string
+
+      if (uswds) {
       const charCountTooHigh = charcount && (value?.length > maxlength);
       const labelClass = classnames({
         'usa-label': true,
@@ -276,9 +278,9 @@ export class VaTextInput {
                   {i18next.t('required')}
                 </span>
               )}
+              {hint && <span class="usa-hint">{hint}</span>}
             </label>
           )}
-          {hint && <span id="input-hint" class="usa-hint">{hint}</span>}
           <slot></slot>
           <span id="input-error-message" role="alert">
             {error && (
@@ -334,9 +336,9 @@ export class VaTextInput {
               {required && (
                 <span class="required">{i18next.t('required')}</span>
               )}
+              {hint && <span class="hint-text">{hint}</span>}
             </label>
           )}
-          {hint && <span id="input-hint" class="hint-text">{hint}</span>}
           <slot></slot>
           <span id="input-error-message" role="alert">
             {error && (
@@ -369,7 +371,7 @@ export class VaTextInput {
             </span>
           )}
           {maxlength && value?.length >= maxlength && (
-            <small part="validation">
+            <small part="validation" aria-live="polite">
               {i18next.t('max-chars', { length: maxlength })}
             </small>
           )}
