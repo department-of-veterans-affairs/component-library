@@ -29,6 +29,16 @@ const Template = ({
   </va-card>
 );
 
+const CardExtendedTemplate = ({
+  'show-shadow': showShadow,
+}) => (
+  <va-card-extended
+    show-shadow={showShadow}
+  >
+    <p>Example card content</p>
+  </va-card-extended>
+);
+
 export const Default = Template.bind(null);
 Default.args = {
   ...defaultArgs,
@@ -37,6 +47,12 @@ Default.argTypes = propStructure(cardDocs);
 
 export const withDropShadow = Template.bind(null);
 withDropShadow.args = {
+  ...defaultArgs,
+  'show-shadow': true,
+};
+
+export const CardExtended = CardExtendedTemplate.bind(null);
+CardExtended.args = {
   ...defaultArgs,
   'show-shadow': true,
 };

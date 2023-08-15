@@ -256,6 +256,8 @@ export namespace Components {
          */
         "showShadow"?: boolean;
     }
+    interface VaCardExtended {
+    }
     interface VaCheckbox {
         /**
           * Description of the option displayed below the checkbox label. Available when uswds is true.
@@ -1399,6 +1401,12 @@ declare global {
         prototype: HTMLVaCardElement;
         new (): HTMLVaCardElement;
     };
+    interface HTMLVaCardExtendedElement extends Components.VaCardExtended, HTMLStencilElement {
+    }
+    var HTMLVaCardExtendedElement: {
+        prototype: HTMLVaCardExtendedElement;
+        new (): HTMLVaCardExtendedElement;
+    };
     interface HTMLVaCheckboxElement extends Components.VaCheckbox, HTMLStencilElement {
     }
     var HTMLVaCheckboxElement: {
@@ -1609,6 +1617,7 @@ declare global {
         "va-button": HTMLVaButtonElement;
         "va-button-pair": HTMLVaButtonPairElement;
         "va-card": HTMLVaCardElement;
+        "va-card-extended": HTMLVaCardExtendedElement;
         "va-checkbox": HTMLVaCheckboxElement;
         "va-checkbox-group": HTMLVaCheckboxGroupElement;
         "va-date": HTMLVaDateElement;
@@ -1946,6 +1955,8 @@ declare namespace LocalJSX {
           * If `true`, a drop-shadow will be displayed
          */
         "showShadow"?: boolean;
+    }
+    interface VaCardExtended {
     }
     interface VaCheckbox {
         /**
@@ -3066,6 +3077,7 @@ declare namespace LocalJSX {
         "va-button": VaButton;
         "va-button-pair": VaButtonPair;
         "va-card": VaCard;
+        "va-card-extended": VaCardExtended;
         "va-checkbox": VaCheckbox;
         "va-checkbox-group": VaCheckboxGroup;
         "va-date": VaDate;
@@ -3116,6 +3128,7 @@ declare module "@stencil/core" {
             "va-button": LocalJSX.VaButton & JSXBase.HTMLAttributes<HTMLVaButtonElement>;
             "va-button-pair": LocalJSX.VaButtonPair & JSXBase.HTMLAttributes<HTMLVaButtonPairElement>;
             "va-card": LocalJSX.VaCard & JSXBase.HTMLAttributes<HTMLVaCardElement>;
+            "va-card-extended": LocalJSX.VaCardExtended & JSXBase.HTMLAttributes<HTMLVaCardExtendedElement>;
             "va-checkbox": LocalJSX.VaCheckbox & JSXBase.HTMLAttributes<HTMLVaCheckboxElement>;
             "va-checkbox-group": LocalJSX.VaCheckboxGroup & JSXBase.HTMLAttributes<HTMLVaCheckboxGroupElement>;
             "va-date": LocalJSX.VaDate & JSXBase.HTMLAttributes<HTMLVaDateElement>;
