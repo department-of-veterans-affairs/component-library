@@ -224,28 +224,33 @@ export class VaPagination {
    * and errors result. 
    */
   componentDidLoad() {
-    const prevIconDiv = this.el.shadowRoot?.querySelector("#previous-arrow-icon");
-    if (prevIconDiv) {
-      const previousIconPath = `${getAssetPath('/assets/sprite.svg')}#navigate_before`;
+    function makeSvgString(icon: string) {
+      const path = `${getAssetPath('/assets/sprite.svg')}#${icon}`;
       // eslint-disable-next-line i18next/no-literal-string
-      prevIconDiv.innerHTML = `<svg
+      return `<svg
       class="usa-icon"
       aria-hidden="true"
       role="img">
-        <use href=${previousIconPath}></use>
-      </svg>`
+        <use href=${path}></use>
+      </svg>`;
+    }
+
+    //remove wrapper div around icon because it affects styling
+    function removeWrapper(wrapper: Element) {
+      wrapper.parentNode.insertBefore(wrapper.firstChild, wrapper);
+      wrapper.remove();
+    }
+
+    const prevIconDiv = this.el.shadowRoot?.querySelector("#previous-arrow-icon");
+    if (prevIconDiv) {
+      prevIconDiv.innerHTML = makeSvgString('navigate_before');
+      removeWrapper(prevIconDiv);
     }
 
     const nextIconDiv = this.el.shadowRoot?.querySelector("#next-arrow-icon");
     if (nextIconDiv) {
-      const nextIconPath = `${getAssetPath('/assets/sprite.svg')}#navigate_next`;
-      // eslint-disable-next-line i18next/no-literal-string
-      nextIconDiv.innerHTML = `<svg
-      class="usa-icon"
-      aria-hidden="true"
-      role="img">
-        <use href=${nextIconPath}></use>
-      </svg>`
+      nextIconDiv.innerHTML = makeSvgString('navigate_next');
+      removeWrapper(nextIconDiv);
     }
   }
 
@@ -322,7 +327,7 @@ export class VaPagination {
           </li>}
           <li class={arrowClasses} aria-label={nextAriaLabel}>
             <a class="usa-pagination__link usa-pagination__next-page" href="javascript:void(0)">
-              <span  class="usa-pagination__link-text">Next</span>
+              <span class="usa-pagination__link-text">Next</span>
               <div id="next-arrow-icon"></div>
             </a>
           </li>
