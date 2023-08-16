@@ -7,9 +7,12 @@ import {
   h,
   Prop,
   Element,
+  forceUpdate,
   getAssetPath
 } from '@stencil/core';
 import classnames from 'classnames';
+import i18next from 'i18next';
+
 import { makeArray } from '../../utils/utils';
 
 /**
@@ -254,6 +257,16 @@ export class VaPagination {
     }
   }
 
+  connectedCallback() {
+    i18next.on('languageChanged', () => {
+      forceUpdate(this.el);
+    });
+  }
+
+  disconnectedCallback() {
+    i18next.off('languageChanged');
+  }
+
   render() {
     const { ariaLabelSuffix, page, pages, maxPageListLength, showLastPage, uswds } =
       this;
@@ -286,7 +299,7 @@ export class VaPagination {
           <li class={arrowClasses} aria-label={previousAriaLabel}>
             <a class="usa-pagination__link usa-pagination__previous-page" href="javascript:void(0)">
               <div id="previous-arrow-icon"></div>
-              <span class="usa-pagination__link-text">Previous</span>  
+              <span class="usa-pagination__link-text">{i18next.t('previous')}</span>  
             </a>
           </li>
           {!pageNumbersToRender.includes(1) && 
@@ -327,7 +340,7 @@ export class VaPagination {
           </li>}
           <li class={arrowClasses} aria-label={nextAriaLabel}>
             <a class="usa-pagination__link usa-pagination__next-page" href="javascript:void(0)">
-              <span class="usa-pagination__link-text">Next</span>
+              <span class="usa-pagination__link-text">{i18next.t('next')}</span>
               <div id="next-arrow-icon"></div>
             </a>
           </li>
