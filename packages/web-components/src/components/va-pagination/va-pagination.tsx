@@ -125,6 +125,9 @@ export class VaPagination {
       unbounded
     } = this;
 
+    // radius is half the length of the visible pages
+    // use as a reference from the selected page to find
+    // start and end of the pages to render
     const radius = Math.floor(maxPageListLength / 2);
 
     //if the unbounded flag is set we don't include the last page
