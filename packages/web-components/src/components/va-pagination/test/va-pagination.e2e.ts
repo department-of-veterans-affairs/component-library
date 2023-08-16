@@ -296,7 +296,7 @@ describe('uswds - va-pagination', () => {
     expect(pageNumbers[pageNumbers.length - 1].innerHTML).toEqual("24");
   });
 
-  it('uswds v3 does not render "Next" page when page is set to total pages', async () => {
+  it('uswds v3 does not render a "Next" button when on last page', async () => {
     const page = await newE2EPage();
     await page.setContent(`<va-pagination page="24" pages="24" max-page-list-length="7" uswds/>`);
     const next = await page.find('va-pagination >>> a.usa-pagination__next-page');
@@ -310,7 +310,7 @@ describe('uswds - va-pagination', () => {
     expect(pageNumbers[pageNumbers.length - 1].innerHTML).toEqual("6");
   });
 
-  it('uswds v3 renders all pages if total pages less than or equal to 7', async () => {
+  it('uswds v3 renders all page numbers if total pages is less than or equal to 7', async () => {
     const page = await newE2EPage();
     await page.setContent(`<va-pagination page="3" pages="7" max-page-list-length="7" uswds/>`);
   
