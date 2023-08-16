@@ -10,6 +10,7 @@ import {
   getAssetPath
 } from '@stencil/core';
 import classnames from 'classnames';
+import { makeArray } from '../../utils/utils';
 
 /**
  * @componentName Pagination
@@ -109,10 +110,6 @@ export class VaPagination {
     }
   };
 
-  private makeArray(start, end) {
-    return Array.from({ length: end - start + 1 }, (_, i) => start + i);
-  }
-
   /**
    * Generate a list of the continuous page numbers to render, i.e.
    * the page numbers to render not including the first and/or last page
@@ -137,7 +134,7 @@ export class VaPagination {
     let end;
 
     if (totalPages <= this.SHOW_ALL_PAGES) {
-      return this.makeArray(1, totalPages);
+      return makeArray(1, totalPages);
     }
 
     // continuous pages start at 1
@@ -146,7 +143,7 @@ export class VaPagination {
       end = maxPageListLength >= totalPages
         ? totalPages
         : maxPageListLength - 1 - unboundedChar;
-      return this.makeArray(start, end);
+      return makeArray(start, end);
     }
 
     // continuous pages end at last page
@@ -156,7 +153,7 @@ export class VaPagination {
         //subtract 2 to account for having to add ellipsis and first page
         ? totalPages - (maxPageListLength - 2 - 1)
         : 1;
-      return this.makeArray(start, end);
+      return makeArray(start, end);
 
     // continuous pages don't start at 1 or end at last page
     } else {
@@ -171,7 +168,7 @@ export class VaPagination {
       }
     }
     
-    return this.makeArray(start, end);
+    return makeArray(start, end);
   }
 
   private pageNumbers = () => {
