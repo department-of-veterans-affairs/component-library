@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect }  from 'react';
 import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
 
 const paginationDocs = getWebComponentDocs('va-pagination');
@@ -77,3 +77,23 @@ export const WithSevenOrLessLast = Template.bind(null);
 WithSevenOrLessLast.args = {
   ...defaultArgs, pages: 7, page: 7
 }
+
+export const Internationalization = () => {
+  const [lang, setLang] = useState('en');
+
+  useEffect(() => {
+    document.querySelector('main').setAttribute('lang', lang);
+  }, [lang]);
+
+  return (
+    <div>
+      <button onClick={e => setLang('es')}>Español</button>
+      <button onClick={e => setLang('en')}>English</button>
+      <div style={{ marginTop: '20px' }}>
+        <h4>Default</h4>
+        <va-pagination page="10" pages="24" uswds />
+        <h4>Unbounded</h4>
+        <va-pagination page="10" pages="24" unbounded uswds />
+      </div>
+    </div>
+)};

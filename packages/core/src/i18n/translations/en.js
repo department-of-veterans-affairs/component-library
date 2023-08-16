@@ -37,4 +37,6 @@ export default {
   'gov-site-explanation': 'A .{{tld}} website belongs to an official government organization in the United States.',
   'gov-site-https': 'Secure .{{tld}} websites use HTTPS',
   'gov-site-lock': "A lock {{image}} or https:// means you've safely connected to the .{{tld}} website. Share sensitive information only on official, secure websites.",
+  'next': 'Next',
+  'previous': 'Previous'
 };
