@@ -8,12 +8,19 @@ import {
   Prop,
   Element,
   forceUpdate,
-  getAssetPath
+  getAssetPath,
 } from '@stencil/core';
 import classnames from 'classnames';
 import i18next from 'i18next';
+import { Build } from '@stencil/core';
+
 
 import { makeArray } from '../../utils/utils';
+
+if (Build.isTesting) {
+  // Make i18next.t() return the key instead of the value
+  i18next.init({ lng: 'cimode' });
+}
 
 /**
  * @componentName Pagination

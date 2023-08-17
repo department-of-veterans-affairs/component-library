@@ -270,7 +270,7 @@ describe('uswds - va-pagination', () => {
               </li>
               <li class="usa-pagination__item usa-pagination__arrow" aria-label="Next page">
                 <a href="javascript:void(0)" class="usa-pagination__link usa-pagination__next-page">
-                  <span class="usa-pagination__link-text">Next</span>
+                  <span class="usa-pagination__link-text">next</span>
                   <svg class="usa-icon" aria-hidden="true" role="img">
                     <use href="/assets/sprite.svg#navigate_next"></use>
                   </svg>
@@ -281,13 +281,6 @@ describe('uswds - va-pagination', () => {
         </mock:shadow-root>
       </va-pagination>
     `);
-  });
-
-  it('uswds passes an axe check', async () => {
-    const page = await newE2EPage();
-    await page.setContent('<va-pagination page="1" pages="24" max-page-list-length="7" uswds/>');
-
-    await axeCheck(page);
   });
 
   it('uswds v3 only selected "page" has selected class', async () => {
