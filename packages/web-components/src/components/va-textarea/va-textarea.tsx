@@ -95,7 +95,7 @@ export class VaTextarea {
   @Prop() uswds?: boolean = false;
 
   /**
-   * Whether the component should show a character count message. 
+   * Whether the component should show a character count message.
    * Has no effect without uswds and maxlength being set.
    */
   @Prop() charcount?: boolean = false;
@@ -154,22 +154,23 @@ export class VaTextarea {
   }
 
   render() {
-    const { 
-      label, 
-      error, 
-      placeholder, 
-      name, 
-      required, 
-      value, 
-      hint, 
-      uswds, 
-      charcount, 
-      messageAriaDescribedby 
+    const {
+      label,
+      error,
+      placeholder,
+      name,
+      required,
+      value,
+      hint,
+      uswds,
+      charcount,
+      messageAriaDescribedby
     } = this;
 
     const maxlength = this.getMaxlength();
-    const ariaDescribedbyIds = `${messageAriaDescribedby ? 'input-message' : ''} ${error ? 'error-message' : ''} 
-    ${charcount && maxlength ? 'charcount-message' : ''}`.trim() || null;
+    const ariaDescribedbyIds = `${error ? 'input-error-message' : ''} ${
+      charcount && maxlength ? 'charcount-message' : ''} ${
+      messageAriaDescribedby ? 'input-message' : ''}`.trim() || null;
 
     if (uswds) {
       const charCountTooHigh = charcount && (value?.length > maxlength);
@@ -239,7 +240,7 @@ export class VaTextarea {
           )}
         </Host>
       );
-    } else {      
+    } else {
       return (
         <Host>
           <label htmlFor="textarea">
@@ -247,7 +248,7 @@ export class VaTextarea {
             {required && <span class="required">{i18next.t('required')}</span>}
             {hint && <span class="hint-text">{hint}</span>}
           </label>
-          <span id="error-message" role="alert">
+          <span id="input-error-message" role="alert">
             {error && (
               <Fragment>
                 <span class="sr-only">{i18next.t('error')}</span> {error}

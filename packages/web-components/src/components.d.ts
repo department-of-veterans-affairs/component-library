@@ -1155,7 +1155,7 @@ export namespace Components {
     }
     interface VaTextarea {
         /**
-          * Whether the component should show a character count message.  Has no effect without uswds and maxlength being set.
+          * Whether the component should show a character count message. Has no effect without uswds and maxlength being set.
          */
         "charcount"?: boolean;
         /**
@@ -3018,7 +3018,7 @@ declare namespace LocalJSX {
     }
     interface VaTextarea {
         /**
-          * Whether the component should show a character count message.  Has no effect without uswds and maxlength being set.
+          * Whether the component should show a character count message. Has no effect without uswds and maxlength being set.
          */
         "charcount"?: boolean;
         /**

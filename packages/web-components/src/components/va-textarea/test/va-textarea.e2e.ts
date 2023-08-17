@@ -15,7 +15,7 @@ describe('va-textarea', () => {
           <label for="textarea">
             Describe your situation
           </label>
-          <span id="error-message" role="alert"></span>
+          <span id="input-error-message" role="alert"></span>
           <textarea id="textarea" part="textarea" aria-invalid="false"></textarea>
         </mock:shadow-root>
       </va-textarea>
@@ -27,7 +27,7 @@ describe('va-textarea', () => {
     await page.setContent('<va-textarea error="This is a mistake" />');
 
     // Render the error message text
-    const error = await page.find('va-textarea >>> span#error-message');
+    const error = await page.find('va-textarea >>> span#input-error-message');
     const textarea = await page.find('va-textarea >>> textarea');
     expect(error.innerText).toContain('This is a mistake');
     expect(textarea.getAttribute('aria-invalid')).toEqual('true');
@@ -48,8 +48,9 @@ describe('va-textarea', () => {
 
     // Render the error message text
     const textareaEl = await page.find('va-textarea >>> textarea ');
+    expect(textareaEl.getAttribute('aria-invalid')).toEqual('true');
     expect(textareaEl.getAttribute('aria-describedby')).toContain(
-      'error-message',
+      'input-error-message',
     );
   });
 
@@ -230,6 +231,9 @@ describe('va-textarea', () => {
     const textarea = await page.find('va-textarea >>> textarea');
     expect(error.innerText).toContain('This is a mistake');
     expect(textarea.getAttribute('aria-invalid')).toEqual('true');
+    expect(textarea.getAttribute('aria-describedby')).toContain(
+      'input-error-message',
+    );
   });
 
   it('uswds v3 renders hint text', async () => {
@@ -248,7 +252,7 @@ describe('va-textarea', () => {
     // Render the error message text
     const textareaEl = await page.find('va-textarea >>> textarea ');
     expect(textareaEl.getAttribute('aria-describedby')).toContain(
-      'error-message',
+      'input-error-message',
     );
   });
 
