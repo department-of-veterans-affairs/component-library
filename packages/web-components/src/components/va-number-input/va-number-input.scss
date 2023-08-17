@@ -1,5 +1,9 @@
 @import '../va-text-input/va-text-input.scss';
 
+.usa-hint {
+  display: block;
+}
+
 /** Original Component Style **/
 
 @import '../../mixins/form-field-error.css';

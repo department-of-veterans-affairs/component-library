@@ -1,4 +1,4 @@
-@use './_variables' as *;
+@use "../../dist/tokens/scss/variables" as *;
 
 $tokens-padding: (
   0: $units-0,

@@ -691,6 +691,10 @@ export namespace Components {
          */
         "max": number | string;
         /**
+          * An optional message that will be read by screen readers when the input is focused.
+         */
+        "messageAriaDescribedby"?: string;
+        /**
           * Minimum number value The min attribute specifies the minimum value for an input element.
          */
         "min": number | string;
@@ -1182,6 +1186,10 @@ export namespace Components {
           * The maximum number of characters allowed in the input. Negative and zero values will be ignored.
          */
         "maxlength"?: number;
+        /**
+          * An optional message that will be read by screen readers when the input is focused.
+         */
+        "messageAriaDescribedby"?: string;
         /**
           * The name for the input.
          */
@@ -2474,6 +2482,10 @@ declare namespace LocalJSX {
          */
         "max"?: number | string;
         /**
+          * An optional message that will be read by screen readers when the input is focused.
+         */
+        "messageAriaDescribedby"?: string;
+        /**
           * Minimum number value The min attribute specifies the minimum value for an input element.
          */
         "min"?: number | string;
@@ -3045,6 +3057,10 @@ declare namespace LocalJSX {
           * The maximum number of characters allowed in the input. Negative and zero values will be ignored.
          */
         "maxlength"?: number;
+        /**
+          * An optional message that will be read by screen readers when the input is focused.
+         */
+        "messageAriaDescribedby"?: string;
         /**
           * The name for the input.
          */
