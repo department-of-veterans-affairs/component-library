@@ -5,14 +5,14 @@ module.exports = {
   format: {
     figmaTokensPlugin: ({ dictionary }) => {
       // currently Figma only supports syncing colors, so only transform dictionary.tokens.color
-      const transformedTokens = transform(dictionary.tokens.color, { defaultTokenset: false, cleanMeta: ['filePath', 'isSource', 'original', 'attributes', 'category', 'type', 'path'] });
+      const transformedTokens = transform(dictionary.tokens.color, { cleanMeta: ['filePath', 'isSource', 'original', 'attributes', 'category', 'type', 'path'] });
       return JSON.stringify(transformedTokens, null, 2);
     },
   },
   platforms: {
     figma: {
       transformGroup: 'js',
-      buildPath: 'dist/tokens/figma/',
+      buildPath: 'dist/tokens/figma/colors/',
       files: [
         {
           destination: 'variables.json',
