@@ -131,7 +131,7 @@ In order to a single file, you can run:
 npx stencil test --e2e -- src/components/[component-name]/[component-name].e2e.ts
 ```
 
-Replace `[component-name]` with the name of the component you want to test. Optionnally, you cad add `--watchAll` after `--e2e` to watch the file for changes. For example:
+Replace `[component-name]` with the name of the component you want to test. Optionally, you can add `--watchAll` after `--e2e` to watch the file for changes. For example:
 
 ```bash
 npx stencil test --e2e --watchAll -- src/components/[component-name]/[component-name].e2e.ts
