@@ -15,6 +15,7 @@ import i18next from 'i18next';
 /**
  * @nativeHandler onInput
  * @nativeHandler onBlur
+ * @nativeHandler onWheel
  * @componentName Number input
  * @maturityCategory use
  * @maturityLevel deployed
@@ -133,6 +134,12 @@ export class VaNumberInput {
     }
   };
 
+  // prevent input value from changing if user accidentally scrolls while focused on input
+  private handleWheel = (e: Event) => {
+    e.preventDefault();
+  }
+
+
   connectedCallback() {
     i18next.on('languageChanged', () => {
       forceUpdate(this.el);
@@ -158,6 +165,7 @@ export class VaNumberInput {
       uswds,
       handleBlur,
       handleInput,
+      handleWheel,
       width,
       messageAriaDescribedby,
     } = this;
@@ -211,6 +219,7 @@ export class VaNumberInput {
             required={required || null}
             onInput={handleInput}
             onBlur={handleBlur}
+            onWheel={handleWheel}
             />
             {messageAriaDescribedby && (
               <span id="input-message" class="sr-only">
@@ -256,6 +265,7 @@ export class VaNumberInput {
               required={required || null}
               onInput={handleInput}
               onBlur={handleBlur}
+              onWheel={handleWheel}
               />
               {messageAriaDescribedby && (
                 <span id="input-message" class="sr-only">
