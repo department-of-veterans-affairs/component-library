@@ -25,7 +25,9 @@
       "value": "#fff1d2"
     },
     "primary": {
-      "value": "#0071bb",
+      "*": {
+        "value": "#0071bb"
+      },
       "darker": {
         "value": "#003e73"
       },
