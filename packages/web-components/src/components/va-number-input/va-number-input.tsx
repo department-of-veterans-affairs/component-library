@@ -202,7 +202,9 @@ export class VaNumberInput {
             aria-describedby={ariaDescribedbyIds}
             aria-invalid={error ? 'true' : 'false'}
             id="inputField"
-            type="number"
+            type='text'
+            inputMode='numeric'
+            pattern="[0-9]*"
             inputmode={inputmode ? inputmode : null}
             name={name}
             max={max}
@@ -247,8 +249,9 @@ export class VaNumberInput {
               aria-describedby={ariaDescribedbyIds}
               aria-invalid={error ? 'true' : 'false'}
               id="inputField"
-              type="number"
-              inputmode={inputmode ? inputmode : null}
+              type='text'
+              inputMode='numeric'
+              pattern="[0-9]*"
               name={name}
               max={max}
               min={min}
