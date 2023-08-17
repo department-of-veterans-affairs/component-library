@@ -250,11 +250,12 @@ describe('va-pagination', () => {
 describe('uswds - va-pagination', () => {
   it('uswds renders', async () => {
     const page = await newE2EPage();
-    await page.setContent('<va-pagination></va-pagination>');
+    await page.setContent('<va-pagination page="1" pages="3" uswds />');
 
     const element = await page.find('va-pagination');
+
     expect(element).toEqualHtml(`
-      <va-pagination page="1" pages="2" max-page-list-length="2" uswds class="hydrated">
+      <va-pagination page="1" pages="3" uswds class="hydrated">
         <mock:shadow-root>
           <nav class="usa-pagination">
             <ul class="usa-pagination__list">
@@ -264,10 +265,15 @@ describe('uswds - va-pagination', () => {
               <li class="usa-pagination__item usa-pagination__page-no">
                 <a href="javascript:void(0)" class="usa-pagination__button">2</a>
               </li>
+              <li class="usa-pagination__item usa-pagination__page-no">
+                <a href="javascript:void(0)" class="usa-pagination__button">3</a>
+              </li>
               <li class="usa-pagination__item usa-pagination__arrow" aria-label="Next page">
                 <a href="javascript:void(0)" class="usa-pagination__link usa-pagination__next-page">
                   <span class="usa-pagination__link-text">Next</span>
-                  <div id="next-icon-arrow"></div>
+                  <svg class="usa-icon" aria-hidden="true" role="img">
+                    <use href="/assets/sprite.svg#navigate_next"></use>
+                  </svg>
                 </a>
               </li>
             </ul>
@@ -275,6 +281,13 @@ describe('uswds - va-pagination', () => {
         </mock:shadow-root>
       </va-pagination>
     `);
+  });
+
+  it('uswds passes an axe check', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-pagination page="1" pages="24" max-page-list-length="7" uswds/>');
+
+    await axeCheck(page);
   });
 
   it('uswds v3 only selected "page" has selected class', async () => {
