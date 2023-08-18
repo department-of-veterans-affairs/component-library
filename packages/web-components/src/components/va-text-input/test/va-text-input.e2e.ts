@@ -356,6 +356,17 @@ describe('va-text-input', () => {
     expect(await inputEl.getProperty('autocomplete')).toBe('email');
   });
 
+  it('charcount and maxlength text does not display on memorable date', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-text-input class="memorable-date-input" label="This is a label" />');
+
+    const charcountMessageEl = await page.find('va-text-input >>> #charcount-message');
+    expect(charcountMessageEl).toBeNull();
+
+    const maxlengthMessageEl = await page.find('va-text-input >>> #maxlength-message');
+    expect(maxlengthMessageEl).toBeNull();
+  });
+
   // Begin USWDS tests
   it('uswds v3 renders', async () => {
     const page = await newE2EPage();

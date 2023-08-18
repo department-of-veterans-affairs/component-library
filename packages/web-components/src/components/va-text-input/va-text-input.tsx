@@ -372,12 +372,12 @@ export class VaTextInput {
             </span>
           )}
           {isMessageDisplayed && maxlength && value?.length >= maxlength && (
-            <small part="validation" aria-live="polite">
+            <small id="maxlength-message"  part="validation" aria-live="polite">
               {i18next.t('max-chars', { length: maxlength })}
             </small>
           )}
           {isMessageDisplayed && minlength && value?.length < minlength && (
-            <small part="validation">
+            <small id="charcount-message" part="validation">
               {i18next.t('min-chars', { length: minlength })}
             </small>
           )}
