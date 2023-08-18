@@ -40,6 +40,16 @@ export class VaSegmentedProgressBar {
   @Prop() uswds?: boolean;
 
   /**
+  * Header level for button wrapper. Must be between 1 and 6 (v3 only)
+  */
+  @Prop() headerLevel?: number = 4;
+
+  /**
+  * The term used to indicate the current progress for the heading "[progressTerm] 2 of 5". (Screen reader only)
+  */
+  @Prop() progressTerm?: string = 'Step';
+
+  /**
   * String containing a list of step labels delimited by a semi-colon (v3 only) Example: `"Step 1;Step 2;Step 3"`
   */
   @Prop() labels?: string;
@@ -84,7 +94,7 @@ export class VaSegmentedProgressBar {
   }
 
   render() {
-    const { current, total, label = `Step ${current} of ${total}`, uswds, labels, centeredLabels, counters, headingText } = this;
+    const { current, total, label = `Step ${current} of ${total}`, uswds, labels, centeredLabels, counters, headingText, headerLevel, progressTerm } = this;
     let labelsArray;
     if (labels) {
       labelsArray = labels.split(';');
@@ -92,6 +102,9 @@ export class VaSegmentedProgressBar {
     const range = Array.from({ length: total }, (_, i) => i);
 
     if (uswds) {
+
+      const Tag = `h${headerLevel}`;
+
       const indicatorClass = classNames({
         'usa-step-indicator': true,
         'usa-step-indicator--center': centeredLabels,
@@ -109,10 +122,10 @@ export class VaSegmentedProgressBar {
 
       return (
         <Host>
-          <div class={indicatorClass} aria-label={label}>
-                <ol class="usa-step-indicator__segments">
+          <div class={indicatorClass}>
+                <ol class="usa-step-indicator__segments" aria-hidden={labels ? null : 'true'}>
                   {range.map(step => (
-                    <li class={computeSegmentClass(step)}>
+                    <li class={computeSegmentClass(step)} aria-current={current===step + 1 ? 'step' : null}>
                       {
                         labels ? (
                           <span class="usa-step-indicator__segment-label">{labelsArray[step]}
@@ -128,16 +141,18 @@ export class VaSegmentedProgressBar {
                     </li>
                   ))}
                 </ol>
-                <div class="usa-step-indicator__header">
-                  <h4 class="usa-step-indicator__heading">
-                    <span class="usa-step-indicator__heading-counter"
-                      ><span class="usa-sr-only">Step</span>
-                      <span class="usa-step-indicator__current-step">{current}</span>
-                      <span class="usa-step-indicator__total-steps"> of {total}</span>
-                    </span>
-                    <span class="usa-step-indicator__heading-text">{labels ? labelsArray[current - 1] : headingText}</span>
-                  </h4>
-                </div>
+                {
+                  <div class="usa-step-indicator__header">
+                    <Tag class="usa-step-indicator__heading">
+                      <span class="usa-step-indicator__heading-counter">
+                        <span class="usa-sr-only">{progressTerm}</span>
+                        <span class="usa-step-indicator__current-step">{current}</span>
+                        <span class="usa-step-indicator__total-steps"> of {total}</span>
+                      </span>
+                      <span class="usa-step-indicator__heading-text">{labels ? labelsArray[current - 1] : headingText}</span>
+                    </Tag>
+                  </div>
+                }
               </div>
         </Host>
       )
@@ -164,7 +179,7 @@ export class VaSegmentedProgressBar {
               ))}
             </div>
             <span aria-atomic="true" aria-live="polite" class="sr-only">
-              Step {current} of {total}
+              {progressTerm} {current} of {total}
             </span>
           </div>
         </Host>
