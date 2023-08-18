@@ -719,4 +719,14 @@ describe('va-text-input', () => {
     expect(inputEl.getAttribute('aria-invalid')).toBe("true");
   });
 
+  it('uswds charcount and maxlength text does not display on memorable date', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-text-input class="memorable-date-input" label="This is a label" uswds />');
+
+    const charcountMessageEl = await page.find('va-text-input >>> #charcount-message');
+    expect(charcountMessageEl).toBeNull();
+
+    const maxlengthMessageEl = await page.find('va-text-input >>> #maxlength-message');
+    expect(maxlengthMessageEl).toBeNull();
+  });
 });
