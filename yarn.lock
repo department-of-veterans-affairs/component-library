@@ -1838,6 +1838,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@department-of-veterans-affairs/css-library@workspace:packages/css-library"
   dependencies:
+    "@divriots/style-dictionary-to-figma": ^0.4.0
     "@uswds/uswds": ^3.5.0
     sass: ^1.64.1
     style-dictionary: ^3.8.0
@@ -1999,6 +2000,13 @@ __metadata:
   version: 0.5.6
   resolution: "@discoveryjs/json-ext@npm:0.5.6"
   checksum: e97df618511fb202dffa2eb0d23e17dfb02943a70e5bc38f6b9603ad1cb1d6b525aa2b07ff9fb00b041abe425b341146ddd9e487f1e35ddadc8c6b8c56358ae0
+  languageName: node
+  linkType: hard
+
+"@divriots/style-dictionary-to-figma@npm:^0.4.0":
+  version: 0.4.0
+  resolution: "@divriots/style-dictionary-to-figma@npm:0.4.0"
+  checksum: 122dd221fa34ed40c40900c2d2adec2c345e12bb2d99f0a56b65cc381de94fbfc51ccf5a032f6ca22752a89b654ae1d2fa6ae86b7338bd19ff23f5322cf91828
   languageName: node
   linkType: hard
 
