@@ -16,7 +16,7 @@ describe('va-number-input', () => {
           </label>
           <span id="error-message" role="alert"></span>
           <div>
-            <input id="inputField" type="number" aria-invalid="false" />
+            <input id="inputField" inputmode="numeric" pattern="[0-9]+(\\.[0-9]{1,})?" type="text" aria-invalid="false" />
           </div>
           </mock:shadow-root>
       </va-number-input>
@@ -141,15 +141,6 @@ describe('va-number-input', () => {
     expect(analyticsSpy).not.toHaveReceivedEvent();
   });
 
-  it('defaults to type of number', async () => {
-    const page = await newE2EPage();
-    await page.setContent('<va-number-input />');
-
-    // Level-setting expectations
-    const inputEl = await page.find('va-number-input >>> input');
-    expect(inputEl.getAttribute('type')).toBe('number');
-  });
-
   it('sets a range based on min and max attributes', async () => {
     const page = await newE2EPage();
     await page.setContent('<va-number-input min="0" max="4" />');
@@ -157,16 +148,6 @@ describe('va-number-input', () => {
     const inputEl = await page.find('va-number-input >>> input');
     expect(inputEl.getAttribute('min')).toBe('0');
     expect(inputEl.getAttribute('max')).toBe('4');
-  });
-
-  it('allows manually setting the inputmode attribute', async () => {
-    const inputModes = ['decimal', 'numeric'];
-    for (const inputMode of inputModes) {
-      const page = await newE2EPage();
-      await page.setContent(`<va-number-input inputmode="${inputMode}" />`);
-      const inputEl = await page.find('va-number-input >>> input');
-      expect(inputEl.getAttribute('inputmode')).toBe(inputMode);
-    }
   });
 
   it('renders a "$" if currency flag set to true', async () => {
@@ -209,7 +190,7 @@ describe('va-number-input', () => {
             Hello, world
           </label>
           <span id="input-error-message" role="alert"></span>
-          <input aria-invalid="false" class="usa-input" id="inputField" type="number">
+          <input aria-invalid="false" class="usa-input" id="inputField" inputmode="numeric" pattern="[0-9]+(\\.[0-9]{1,})?" type="text">
         </mock:shadow-root>
       </va-number-input>
     `);
@@ -333,15 +314,6 @@ describe('va-number-input', () => {
     expect(analyticsSpy).not.toHaveReceivedEvent();
   });
 
-  it('uswds defaults to type of number', async () => {
-    const page = await newE2EPage();
-    await page.setContent('<va-number-input uswds />');
-
-    // Level-setting expectations
-    const inputEl = await page.find('va-number-input >>> input');
-    expect(inputEl.getAttribute('type')).toBe('number');
-  });
-
   it('uswds sets a range based on min and max attributes', async () => {
     const page = await newE2EPage();
     await page.setContent('<va-number-input min="0" max="4" uswds />');
@@ -349,16 +321,6 @@ describe('va-number-input', () => {
     const inputEl = await page.find('va-number-input >>> input');
     expect(inputEl.getAttribute('min')).toBe('0');
     expect(inputEl.getAttribute('max')).toBe('4');
-  });
-
-  it('uswds allows manually setting the inputmode attribute', async () => {
-    const inputModes = ['decimal', 'numeric'];
-    for (const inputMode of inputModes) {
-      const page = await newE2EPage();
-      await page.setContent(`<va-number-input inputmode="${inputMode}" uswds />`);
-      const inputEl = await page.find('va-number-input >>> input');
-      expect(inputEl.getAttribute('inputmode')).toBe(inputMode);
-    }
   });
 
   it('uswds adds aria-describedby input-message id', async () => {

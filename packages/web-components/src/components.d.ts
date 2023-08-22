@@ -679,10 +679,6 @@ export namespace Components {
          */
         "hint"?: string;
         /**
-          * The inputmode attribute.
-         */
-        "inputmode"?: 'decimal' | 'numeric';
-        /**
           * The label for the text input.
          */
         "label"?: string;
@@ -778,6 +774,14 @@ export namespace Components {
           * Display last page number when the page count exceeds `maxPageListLength`
          */
         "showLastPage"?: boolean;
+        /**
+          * Don't show last page when the page count exceeds `maxPageListLength` (but do show the ellipsis). Only relevant if uswds is true.
+         */
+        "unbounded"?: boolean;
+        /**
+          * Whether or not the component will use USWDS v3 styling.
+         */
+        "uswds"?: boolean;
     }
     interface VaPrivacyAgreement {
         /**
@@ -2470,10 +2474,6 @@ declare namespace LocalJSX {
          */
         "hint"?: string;
         /**
-          * The inputmode attribute.
-         */
-        "inputmode"?: 'decimal' | 'numeric';
-        /**
           * The label for the text input.
          */
         "label"?: string;
@@ -2589,6 +2589,14 @@ declare namespace LocalJSX {
           * Display last page number when the page count exceeds `maxPageListLength`
          */
         "showLastPage"?: boolean;
+        /**
+          * Don't show last page when the page count exceeds `maxPageListLength` (but do show the ellipsis). Only relevant if uswds is true.
+         */
+        "unbounded"?: boolean;
+        /**
+          * Whether or not the component will use USWDS v3 styling.
+         */
+        "uswds"?: boolean;
     }
     interface VaPrivacyAgreement {
         /**
