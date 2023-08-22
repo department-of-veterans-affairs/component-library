@@ -24,7 +24,10 @@ const Template = ({
   'heading-text': headingText,
   labels,
   centeredLabels,
-  counters
+  counters,
+  headerLevel,
+  progressTerm
+
 }) => (
   // Wrapper for spacing when viewing in storybook
   // Component can be used without it
@@ -39,6 +42,8 @@ const Template = ({
       labels={labels}
       centered-labels={centeredLabels}
       counters={counters}
+      header-level={headerLevel}
+      progress-term={progressTerm}
     ></va-segmented-progress-bar>
   </div>
 );
@@ -110,4 +115,25 @@ CenteredSmallCounters.args = {
   labels: "Personal Information;Household Status;Supporting Documents;Signature;Review and Submit",
   counters: 'small',
   centeredLabels: true
+};
+
+export const CustomHeaderLevel = Template.bind(null);
+CustomHeaderLevel.args = {
+  ...defaultArgs,
+  label: 'Label is here',
+  labels: "Personal Information;Household Status;Supporting Documents;Signature;Review and Submit",
+  counters: 'small',
+  centeredLabels: true,
+  headerLevel: 2
+};
+
+export const CustomProgressTerm = Template.bind(null);
+CustomProgressTerm.args = {
+  ...defaultArgs,
+  label: 'Label is here',
+  labels: "Personal Information;Household Status;Supporting Documents;Signature;Review and Submit",
+  counters: 'small',
+  centeredLabels: true,
+  headerLevel: 2,
+  progressTerm: 'Chapter'
 };
