@@ -243,9 +243,13 @@ export class VaTextInput {
       charcount
     } = this;
 
+    // When used in va-memorable-date, we don't want to display the help messages
+    // below the input fields. The va-memorable-date component displays that information itself.
     const isMessageDisplayed = !this.el.classList.contains('memorable-date-input') as boolean;
+
     const type = this.getInputType();
     const maxlength = this.getMaxlength();
+
     const ariaDescribedbyIds =
       `${messageAriaDescribedby ? 'input-message' : ''} ${
         error ? 'input-error-message' : ''
