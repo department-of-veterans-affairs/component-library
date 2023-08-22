@@ -59,6 +59,7 @@ describe('va-text-input', () => {
     const input = await page.find('va-text-input >>> input');
     expect(error.innerText).toContain('This is a mistake');
     expect(input.getAttribute('aria-invalid')).toEqual('true');
+    expect(input.getAttribute('aria-describedby')).toContain('input-error-message');
   });
 
   it('sets aria-invalid based on invalid prop', async () => {
@@ -131,7 +132,7 @@ describe('va-text-input', () => {
 
   it('renders hint text', async () => {
     const page = await newE2EPage();
-    await page.setContent('<va-text-input hint="This is hint text" />');
+    await page.setContent('<va-text-input hint="This is hint text" label="Hello world" />');
 
     // Render the hint text
     const hintTextElement = await page.find('va-text-input >>> span.hint-text');
@@ -385,6 +386,7 @@ describe('va-text-input', () => {
     const input = await page.find('va-text-input >>> input');
     expect(error.innerText).toContain('This is a mistake');
     expect(input.getAttribute('aria-invalid')).toEqual('true');
+    expect(input.getAttribute('aria-describedby')).toContain('input-error-message');
   });
 
   it('uswds sets aria-invalid based on invalid prop', async () => {
@@ -446,7 +448,7 @@ describe('va-text-input', () => {
 
   it('uswds renders hint text', async () => {
     const page = await newE2EPage();
-    await page.setContent('<va-text-input hint="This is hint text" uswds />');
+    await page.setContent('<va-text-input hint="This is hint text" label="hello, world" uswds />');
 
     // Render the hint text
     const hintTextElement = await page.find('va-text-input >>> .usa-hint');

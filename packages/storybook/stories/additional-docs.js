@@ -35,10 +35,6 @@ export const additionalDocs = {
     maturityCategory: DONT_USE,
     maturityLevel: DEPRECATED,
   },
-  'File input - React': {
-    maturityCategory: DONT_USE,
-    maturityLevel: DEPRECATED,
-  },
   'Icon - base': {
     maturityCategory: CAUTION,
     maturityLevel: AVAILABLE,

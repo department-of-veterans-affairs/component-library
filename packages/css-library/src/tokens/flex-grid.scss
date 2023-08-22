@@ -1,5 +1,5 @@
 @use 'sass:math';
-@use './_variables' as *;
+@use "../../dist/tokens/scss/variables" as *;
 
 $grid-columns: 12;
 

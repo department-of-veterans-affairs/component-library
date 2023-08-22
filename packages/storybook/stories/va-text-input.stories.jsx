@@ -210,13 +210,13 @@ export const Internationalization = I18nTemplate.bind(null);
 Internationalization.args = {
   ...defaultArgs,
   required: true,
-  maxlength: '16',
+  maxlength: '6',
 };
 
 export const MaxLength = Template.bind(null);
 MaxLength.args = {
   ...defaultArgs,
-  maxlength: '16',
+  maxlength: '6',
 };
 
 export const MinLength = Template.bind(null);

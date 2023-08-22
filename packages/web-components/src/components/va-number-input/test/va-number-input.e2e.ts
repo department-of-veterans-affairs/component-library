@@ -176,6 +176,24 @@ describe('va-number-input', () => {
     expect(currencyTextElement.innerText).toContain('$');
   });
 
+  it('adds aria-describedby input-message id', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-number-input message-aria-describedby="example message" />');
+    const el = await page.find('va-number-input');
+    const inputEl = await page.find('va-number-input >>> input');
+
+    // Render the example message aria-describedby id.
+    expect(inputEl.getAttribute('aria-describedby')).not.toBeNull();
+    expect(inputEl.getAttribute('aria-describedby')).toContain('input-message');
+
+    // If an error and aria-describedby-message is set, id's exist in aria-describedby.
+    el.setProperty('error', 'Testing Error');
+    await page.waitForChanges();
+    expect(inputEl.getAttribute('aria-describedby')).not.toBeNull();
+    expect(inputEl.getAttribute('aria-describedby')).toContain('error-message');
+    expect(inputEl.getAttribute('aria-describedby')).toContain('input-message');
+  });
+
   // Begin USWDS tests
 
   it('uswds renders', async () => {
@@ -210,7 +228,7 @@ describe('va-number-input', () => {
 
   it('uswds renders hint text', async () => {
     const page = await newE2EPage();
-    await page.setContent('<va-number-input hint="This is hint text" uswds />');
+    await page.setContent('<va-number-input label="Hello world" hint="This is hint text" uswds />');
 
     // Render the hint text
     const hintTextElement = await page.find('va-number-input >>> span.usa-hint');
@@ -342,4 +360,23 @@ describe('va-number-input', () => {
       expect(inputEl.getAttribute('inputmode')).toBe(inputMode);
     }
   });
+
+  it('uswds adds aria-describedby input-message id', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-number-input message-aria-describedby="example message" uswds />');
+    const el = await page.find('va-number-input');
+    const inputEl = await page.find('va-number-input >>> input');
+
+    // Render the example message aria-describedby id.
+    expect(inputEl.getAttribute('aria-describedby')).not.toBeNull();
+    expect(inputEl.getAttribute('aria-describedby')).toContain('input-message');
+
+    // If an error and aria-describedby-message is set, id's exist in aria-describedby.
+    el.setProperty('error', 'Testing Error');
+    await page.waitForChanges();
+    expect(inputEl.getAttribute('aria-describedby')).not.toBeNull();
+    expect(inputEl.getAttribute('aria-describedby')).toContain('error-message');
+    expect(inputEl.getAttribute('aria-describedby')).toContain('input-message');
+  });
+
 });

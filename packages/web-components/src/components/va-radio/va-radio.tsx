@@ -195,7 +195,7 @@ export class VaRadio {
 
   private getHeaderLevel() {
     const number = parseInt(this.labelHeaderLevel, 10);
-    return number >= 1 && number <= 6 ? `H${number}` : null;
+    return number >= 1 && number <= 6 ? `h${number}` : null;
   }
 
   componentDidLoad(): void {
