@@ -71,3 +71,9 @@ export function getCharacterMessage(
 
   return message;
 }
+
+// generate a list of positive consecutive integers from start to end, inclusive
+// start and end are both positive integers where start < end.
+export function makeArray(start: number, end: number) {
+  return Array.from({ length: end - start + 1 }, (_, i) => start + i);
+}
