@@ -463,3 +463,36 @@
   height: rem-override(4.5rem);
   width: rem-override(4.5rem);
 }
+
+.usa-pagination {
+  margin-bottom: rem-override(1rem);
+  margin-top: rem-override(1rem);
+  font-size: rem-override(1.06rem);
+}
+
+.usa-pagination__item {
+  height: rem-override(2.5rem);
+  margin-left: rem-override(0.25rem);
+  margin-right: rem-override(0.25rem);
+  min-width: rem-override(2.5rem);
+}
+
+.usa-pagination__button {
+  border-radius: rem-override(0.25rem);
+  padding: rem-override(0.5rem);
+}
+
+.usa-pagination__overflow {
+  padding: rem-override(0.5rem);
+}
+
+.usa-pagination .usa-icon {
+  height: rem-override(1.13rem);
+  width: rem-override(1.13rem);
+}
+
+@media (min-width: 40em) {
+  .usa-pagination__next-page {
+    margin-left: rem-override(1.25rem);
+  }
+}
