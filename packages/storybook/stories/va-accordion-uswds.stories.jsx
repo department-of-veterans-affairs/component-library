@@ -23,7 +23,7 @@ export default {
 
 const Template = args => (
   <va-accordion {...args}>
-    <va-accordion-item uswds id="first" header="First Amendment">
+    <va-accordion-item uswds id="first" header="Last Amendment">
         <p>
           Congress shall make no law respecting an establishment of religion, or
           prohibiting the free exercise thereof; or abridging the freedom of speech,
