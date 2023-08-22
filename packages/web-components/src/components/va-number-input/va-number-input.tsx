@@ -47,11 +47,6 @@ export class VaNumberInput {
   @Prop() required?: boolean = false;
 
   /**
-   * The inputmode attribute.
-   */
-  @Prop() inputmode?: 'decimal' | 'numeric';
-
-  /**
    * Emit component-library-analytics events on the blur event.
    */
   @Prop() enableAnalytics?: boolean = false;
@@ -148,7 +143,6 @@ export class VaNumberInput {
       label,
       required,
       error,
-      inputmode,
       name,
       max,
       min,
@@ -202,8 +196,9 @@ export class VaNumberInput {
             aria-describedby={ariaDescribedbyIds}
             aria-invalid={error ? 'true' : 'false'}
             id="inputField"
-            type="number"
-            inputmode={inputmode ? inputmode : null}
+            type="text"
+            inputmode="numeric"
+            pattern="[0-9]+(\.[0-9]{1,})?"
             name={name}
             max={max}
             min={min}
@@ -247,8 +242,9 @@ export class VaNumberInput {
               aria-describedby={ariaDescribedbyIds}
               aria-invalid={error ? 'true' : 'false'}
               id="inputField"
-              type="number"
-              inputmode={inputmode ? inputmode : null}
+              type="text"
+              inputmode="numeric"
+              pattern="[0-9]+(\.[0-9]{1,})?"
               name={name}
               max={max}
               min={min}
