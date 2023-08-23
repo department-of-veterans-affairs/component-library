@@ -11,7 +11,15 @@ export default {
     docs: {
       page: () => <StoryDocs data={numberInputDocs} />,
     },
-  }
+  },
+  argTypes: {
+    inputmode: {
+      control: {
+        type: 'select',
+        options: ['decimal', 'numeric'],
+      },
+    },
+  },
 };
 
 const defaultArgs = {
@@ -21,6 +29,7 @@ const defaultArgs = {
   'required': false,
   'error': undefined,
   'value': 0,
+  'inputmode': 'numeric',
   'min': undefined,
   'max': undefined,
   hint: null,
@@ -35,6 +44,7 @@ const vaNumberInput = args => {
     required,
     error,
     value,
+    inputmode,
     min,
     max,
     hint,
@@ -50,6 +60,7 @@ const vaNumberInput = args => {
       required={required}
       error={error}
       value={value}
+      inputmode={inputmode}
       max={max}
       min={min}
       hint={hint}
