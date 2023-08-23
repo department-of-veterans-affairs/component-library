@@ -679,6 +679,10 @@ export namespace Components {
          */
         "hint"?: string;
         /**
+          * The inputmode attribute.
+         */
+        "inputmode"?: 'decimal' | 'numeric';
+        /**
           * The label for the text input.
          */
         "label"?: string;
@@ -2473,6 +2477,10 @@ declare namespace LocalJSX {
           * Optional hint text.
          */
         "hint"?: string;
+        /**
+          * The inputmode attribute.
+         */
+        "inputmode"?: 'decimal' | 'numeric';
         /**
           * The label for the text input.
          */
