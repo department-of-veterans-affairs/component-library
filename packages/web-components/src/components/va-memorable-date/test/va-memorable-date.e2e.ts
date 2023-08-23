@@ -20,9 +20,9 @@ describe('va-memorable-date', () => {
           <slot></slot>
           <span id="error-message" role="alert"></span>
           <div class='date-container'>
-            <va-text-input aria-describedby='dateHint' class='hydrated input-month'></va-text-input>
-            <va-text-input aria-describedby='dateHint' class='hydrated input-day'></va-text-input>
-            <va-text-input aria-describedby='dateHint' class='hydrated input-year' value=''></va-text-input>
+            <va-text-input aria-describedby='dateHint' class='hydrated input-month memorable-date-input'></va-text-input>
+            <va-text-input aria-describedby='dateHint' class='hydrated input-day memorable-date-input'></va-text-input>
+            <va-text-input aria-describedby='dateHint' class='hydrated input-year memorable-date-input' value=''></va-text-input>
           </div>
         </fieldset>
       </mock:shadow-root>
@@ -59,9 +59,9 @@ describe('va-memorable-date', () => {
           <slot></slot>
           <span id="error-message" role="alert"></span>
           <div class='date-container'>
-            <va-text-input aria-describedby='dateHint hint' class='hydrated input-month'></va-text-input>
-            <va-text-input aria-describedby='dateHint hint' class='hydrated input-day'></va-text-input>
-            <va-text-input aria-describedby='dateHint hint' class='hydrated input-year' value=''></va-text-input>
+            <va-text-input aria-describedby='dateHint hint' class='hydrated input-month memorable-date-input'></va-text-input>
+            <va-text-input aria-describedby='dateHint hint' class='hydrated input-day memorable-date-input'></va-text-input>
+            <va-text-input aria-describedby='dateHint hint' class='hydrated input-year memorable-date-input' value=''></va-text-input>
           </div>
         </fieldset>
       </mock:shadow-root>
@@ -642,13 +642,13 @@ describe('va-memorable-date', () => {
           <span id="error-message" role="alert"></span>
           <div class="usa-memorable-date">
             <div class="usa-form-group usa-form-group--month">
-              <va-text-input aria-describedby="dateHint" class="hydrated usa-form-group--month-input" uswds=""></va-text-input>
+              <va-text-input aria-describedby="dateHint" class="hydrated memorable-date-input usa-form-group--month-input" uswds=""></va-text-input>
             </div>
             <div class="usa-form-group usa-form-group--day">
-              <va-text-input aria-describedby="dateHint" class="hydrated usa-form-group--day-input" uswds=""></va-text-input>
+              <va-text-input aria-describedby="dateHint" class="hydrated memorable-date-input usa-form-group--day-input" uswds=""></va-text-input>
             </div>
             <div class="usa-form-group usa-form-group--year">
-              <va-text-input aria-describedby="dateHint" class="hydrated usa-form-group--year-input" uswds="" value=""></va-text-input>
+              <va-text-input aria-describedby="dateHint" class="hydrated memorable-date-input usa-form-group--year-input" uswds="" value=""></va-text-input>
             </div>
           </div>
           </fieldset>
@@ -693,13 +693,13 @@ describe('va-memorable-date', () => {
           <span id="error-message" role="alert"></span>
           <div class="usa-memorable-date">
             <div class="usa-form-group usa-form-group--month">
-              <va-text-input aria-describedby="dateHint hint" class="hydrated usa-form-group--month-input" uswds=""></va-text-input>
+              <va-text-input aria-describedby="dateHint hint" class="hydrated memorable-date-input usa-form-group--month-input" uswds=""></va-text-input>
             </div>
             <div class="usa-form-group usa-form-group--day">
-              <va-text-input aria-describedby="dateHint hint" class="hydrated usa-form-group--day-input" uswds=""></va-text-input>
+              <va-text-input aria-describedby="dateHint hint" class="hydrated memorable-date-input usa-form-group--day-input" uswds=""></va-text-input>
             </div>
             <div class="usa-form-group usa-form-group--year">
-              <va-text-input aria-describedby="dateHint hint" class="hydrated usa-form-group--year-input" uswds="" value=""></va-text-input>
+              <va-text-input aria-describedby="dateHint hint" class="hydrated memorable-date-input usa-form-group--year-input" uswds="" value=""></va-text-input>
             </div>
           </div>
         </fieldset>
@@ -1322,10 +1322,10 @@ describe('va-memorable-date', () => {
               </va-select>
             </div>
             <div class="usa-form-group usa-form-group--day">
-              <va-text-input aria-describedby="dateHint" class="hydrated usa-form-group--day-input" uswds=""></va-text-input>
+              <va-text-input aria-describedby="dateHint" class="hydrated memorable-date-input usa-form-group--day-input" uswds=""></va-text-input>
             </div>
             <div class="usa-form-group usa-form-group--year">
-              <va-text-input aria-describedby="dateHint" class="hydrated usa-form-group--year-input" uswds="" value=""></va-text-input>
+              <va-text-input aria-describedby="dateHint" class="hydrated memorable-date-input usa-form-group--year-input" uswds="" value=""></va-text-input>
             </div>
           </div>
           </fieldset>
@@ -1410,10 +1410,10 @@ describe('va-memorable-date', () => {
               </va-select>
             </div>
             <div class="usa-form-group usa-form-group--day">
-              <va-text-input aria-describedby="dateHint hint" class="hydrated usa-form-group--day-input" uswds=""></va-text-input>
+              <va-text-input aria-describedby="dateHint hint" class="hydrated memorable-date-input usa-form-group--day-input" uswds=""></va-text-input>
             </div>
             <div class="usa-form-group usa-form-group--year">
-              <va-text-input aria-describedby="dateHint hint" class="hydrated usa-form-group--year-input" uswds="" value=""></va-text-input>
+              <va-text-input aria-describedby="dateHint hint" class="hydrated memorable-date-input usa-form-group--year-input" uswds="" value=""></va-text-input>
             </div>
           </div>
         </fieldset>

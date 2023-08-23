@@ -286,7 +286,7 @@ export class VaMemorableDate {
           // if NaN provide empty string
           value={month?.toString()}
           onInput={handleDateChange}
-          class="usa-form-group--month-input"
+          class="usa-form-group--month-input memorable-date-input"
           reflectInputError={error ? true : false}
           inputmode="numeric"
           type="text"
@@ -330,7 +330,7 @@ export class VaMemorableDate {
                   // if NaN provide empty string
                   value={day?.toString()}
                   onInput={handleDateChange}
-                  class="usa-form-group--day-input"
+                  class="usa-form-group--day-input memorable-date-input"
                   reflectInputError={error ? true : false}
                   inputmode="numeric"
                   type="text"
@@ -350,7 +350,7 @@ export class VaMemorableDate {
                   // if NaN provide empty string
                   value={year?.toString()}
                   onInput={handleDateChange}
-                  class="usa-form-group--year-input"
+                  class="usa-form-group--year-input memorable-date-input"
                   reflectInputError={error ? true : false}
                   inputmode="numeric"
                   type="text"
@@ -391,7 +391,7 @@ export class VaMemorableDate {
                 // if NaN provide empty string
                 value={month?.toString()}
                 onInput={handleDateChange}
-                class="input-month"
+                class="input-month memorable-date-input"
                 inputmode="numeric"
                 type="text"
                 ref={(field) => this.monthfield = field}
@@ -408,7 +408,7 @@ export class VaMemorableDate {
                 // if NaN provide empty string
                 value={day?.toString()}
                 onInput={handleDateChange}
-                class="input-day"
+                class="input-day memorable-date-input"
                 inputmode="numeric"
                 type="text"
                 ref={(field) => this.dayfield = field}
@@ -425,7 +425,7 @@ export class VaMemorableDate {
                 // if NaN provide empty string
                 value={year?.toString()}
                 onInput={handleDateChange}
-                class="input-year"
+                class="input-year memorable-date-input"
                 inputmode="numeric"
                 type="text"
                 ref={(field) => this.yearfield = field}

@@ -84,6 +84,15 @@ describe('v1 va-segmented-progress-bar', () => {
     const analyticsSpy = await page.spyOnEvent('component-library-analytics');
     expect(analyticsSpy).not.toHaveReceivedEvent();
   });
+
+  it("should render correct progress text", async () => {
+    const page = await newE2EPage({
+      html: '<va-segmented-progress-bar current="3" total="6" progress-term="Chapter"></va-segmented-progress-bar>',
+    });
+    const element = await page.find('va-segmented-progress-bar');
+    const counter = element.shadowRoot.querySelector('.sr-only');
+    expect(counter.innerHTML.indexOf('Chapter')).not.toEqual(-1);
+  })
 });
 
 
@@ -97,11 +106,11 @@ describe('v3 va-segmented-progress-bar', () => {
     expect(element).toEqualHtml(`
       <va-segmented-progress-bar class=\"hydrated\" current=\"3\" total=\"6\" uswds=\"\">
         <mock:shadow-root>
-          <div aria-label=\"Step 3 of 6\" class=\"usa-step-indicator\">
-            <ol class=\"usa-step-indicator__segments\">
+          <div class=\"usa-step-indicator\">
+            <ol aria-hidden=\"true\" class=\"usa-step-indicator__segments\">
               <li class=\"usa-step-indicator__segment usa-step-indicator__segment--complete\"></li>
               <li class=\"usa-step-indicator__segment usa-step-indicator__segment--complete\"></li>
-              <li class=\"usa-step-indicator__segment usa-step-indicator__segment--current\"></li>
+              <li aria-current=\"step\" class=\"usa-step-indicator__segment usa-step-indicator__segment--current\"></li>
               <li class=\"usa-step-indicator__segment\"></li>
               <li class=\"usa-step-indicator__segment\"></li>
               <li class=\"usa-step-indicator__segment\"></li>
@@ -218,6 +227,24 @@ describe('v3 va-segmented-progress-bar', () => {
     const element = await page.find('va-segmented-progress-bar');
     const indicator = element.shadowRoot.querySelector('.usa-step-indicator');
     expect(indicator.classList.contains('usa-step-indicator--center')).toBe(true);
+  })
+
+  it("uswds - should render correct header level when prop defined", async () => {
+    const page = await newE2EPage({
+      html: '<va-segmented-progress-bar current="3" total="6" uswds="true" centered-labels="true" labels="Personal Information;Household Status;Supporting Documents;Signature;Review and Submit" header-level="2"></va-segmented-progress-bar>',
+    });
+    const element = await page.find('va-segmented-progress-bar');
+    const header = element.shadowRoot.querySelector('.usa-step-indicator__heading');
+    expect(header.tagName).toBe('H2');
+  })
+
+  it("uswds - should render correct progress text", async () => {
+    const page = await newE2EPage({
+      html: '<va-segmented-progress-bar current="3" total="6" uswds="true" centered-labels="true" labels="Personal Information;Household Status;Supporting Documents;Signature;Review and Submit" progress-term="Chapter"></va-segmented-progress-bar>',
+    });
+    const element = await page.find('va-segmented-progress-bar');
+    const counter = element.shadowRoot.querySelector('.usa-step-indicator__heading-counter .usa-sr-only');
+    expect(counter.innerHTML).toBe('Chapter');
   })
 });
 
