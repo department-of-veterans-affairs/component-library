@@ -3,6 +3,7 @@ import { postcss } from '@stencil/postcss';
 import { sass } from '@stencil/sass';
 import url from 'postcss-url';
 import { reactOutputTarget } from '@stencil/react-output-target';
+import * as path from 'path';
 
 export const config: Config = {
   namespace: 'component-library',
@@ -40,6 +41,9 @@ export const config: Config = {
     {
       type: 'dist',
       esmLoaderPath: '../loader',
+      copy: [
+        { src: 'assets', dest: path.join(__dirname, 'dist/assets')}
+      ]
     },
     {
       type: 'dist-custom-elements',
