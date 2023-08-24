@@ -177,7 +177,9 @@ export class VaMemorableDate {
     const target = event.target as HTMLInputElement;
 
     let [currentYear, currentMonth, currentDay] = (this.value || '').split('-');
-    if (target.classList.contains('input-month') || target.classList.contains('usa-form-group--month-input') || target.classList.contains('usa-form-group--month-select')) {
+    if (target.classList.contains('input-month') || target.classList.contains('usa-form-group--month-input')
+      || target.classList.contains('usa-form-group--month-select')
+      || target.classList.contains('uswds-usa-form-group--month-input')) {
       currentMonth = target.value;
     }
     if (target.classList.contains('input-day') || target.classList.contains('usa-form-group--day-input')) {
@@ -273,7 +275,7 @@ export class VaMemorableDate {
             }
           </va-select>
         </div>
-      : <div class="usa-form-group usa-form-group--month">
+      : <div class="usa-form-group uswds-usa-form-group--month">
         <va-text-input
           uswds
           label={i18next.t('month')}
@@ -286,7 +288,7 @@ export class VaMemorableDate {
           // if NaN provide empty string
           value={month?.toString()}
           onInput={handleDateChange}
-          class="usa-form-group--month-input memorable-date-input"
+          class="uswds-usa-form-group--month-input memorable-date-input"
           reflectInputError={error ? true : false}
           inputmode="numeric"
           type="text"
