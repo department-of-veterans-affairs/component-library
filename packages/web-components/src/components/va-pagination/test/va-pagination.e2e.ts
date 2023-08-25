@@ -246,3 +246,85 @@ describe('va-pagination', () => {
   });
 
 });
+
+describe('uswds - va-pagination', () => {
+  it('uswds renders', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-pagination page="1" pages="3" uswds />');
+
+    const element = await page.find('va-pagination');
+
+    expect(element).toEqualHtml(`
+      <va-pagination page="1" pages="3" uswds class="hydrated">
+        <mock:shadow-root>
+          <nav class="usa-pagination">
+            <ul class="usa-pagination__list">
+              <li class="usa-pagination__item usa-pagination__page-no">
+                <a href="javascript:void(0)" class="usa-pagination__button usa-current">1</a>
+              </li>
+              <li class="usa-pagination__item usa-pagination__page-no">
+                <a href="javascript:void(0)" class="usa-pagination__button">2</a>
+              </li>
+              <li class="usa-pagination__item usa-pagination__page-no">
+                <a href="javascript:void(0)" class="usa-pagination__button">3</a>
+              </li>
+              <li class="usa-pagination__item usa-pagination__arrow" aria-label="Next page">
+                <a href="javascript:void(0)" class="usa-pagination__link usa-pagination__next-page">
+                  <span class="usa-pagination__link-text">next</span>
+                  <svg class="usa-icon" aria-hidden="true" role="img">
+                    <use href="/assets/sprite.svg#navigate_next"></use>
+                  </svg>
+                </a>
+              </li>
+            </ul>
+          </nav>
+        </mock:shadow-root>
+      </va-pagination>
+    `);
+  });
+
+  it('uswds v3 only selected "page" has selected class', async () => {
+    const page = await newE2EPage();
+    await page.setContent(`<va-pagination page="1" pages="24" max-page-list-length="7" uswds/>`);
+    const firstPage = await page.findAll('va-pagination >>> li.usa-pagination__page-no a.usa-pagination__button.usa-current');
+    expect(firstPage.length).toEqual(1);
+    expect(firstPage[0].innerHTML).toEqual("1");
+  });
+
+  it('uswds v3 renders first and last page with ellipses when middle pages do not contain them', async () => {
+    const page = await newE2EPage();
+    await page.setContent(`<va-pagination page="10" pages="24" max-page-list-length="7" uswds/>`);
+    const ellipses = await page.findAll('va-pagination >>> li.usa-pagination__overflow');
+    expect(ellipses).toHaveLength(2);
+
+    const pageNumbers = await page.findAll('va-pagination >>> li.usa-pagination__page-no a.usa-pagination__button');
+    expect(pageNumbers[0].innerHTML).toEqual("1");
+    expect(pageNumbers[pageNumbers.length - 1].innerHTML).toEqual("24");
+  });
+
+  it('uswds v3 does not render a "Next" button when on last page', async () => {
+    const page = await newE2EPage();
+    await page.setContent(`<va-pagination page="24" pages="24" max-page-list-length="7" uswds/>`);
+    const next = await page.find('va-pagination >>> a.usa-pagination__next-page');
+    expect(next).toBeNull();
+  });
+
+  it('uswds v3 does not show last page number if unbounded flag is set', async () => {
+    const page = await newE2EPage();
+    await page.setContent(`<va-pagination page="1" pages="24" max-page-list-length="7" unbounded uswds/>`);
+    const pageNumbers = await page.findAll('va-pagination >>> li.usa-pagination__page-no a.usa-pagination__button');
+    expect(pageNumbers[pageNumbers.length - 1].innerHTML).toEqual("6");
+  });
+
+  it('uswds v3 renders all page numbers if total pages is less than or equal to 7', async () => {
+    const page = await newE2EPage();
+    await page.setContent(`<va-pagination page="3" pages="7" max-page-list-length="7" uswds/>`);
+  
+    const pageNumbers = [1, 2, 3, 4, 5, 6, 7];
+
+    const anchors = await page.findAll('va-pagination >>> a.usa-pagination__button');
+    for (const number of pageNumbers) {
+      expect(anchors[number - 1].innerHTML).toEqual(number.toString());
+    }
+  });
+});

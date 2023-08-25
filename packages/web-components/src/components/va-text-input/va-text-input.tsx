@@ -243,14 +243,19 @@ export class VaTextInput {
       charcount
     } = this;
 
+    // When used in va-memorable-date, we don't want to display the help messages
+    // below the input fields. The va-memorable-date component displays that information itself.
+    const isMessageDisplayed = !this.el.classList.contains('memorable-date-input') as boolean;
+
     const type = this.getInputType();
     const maxlength = this.getMaxlength();
+
     const ariaDescribedbyIds =
       `${messageAriaDescribedby ? 'input-message' : ''} ${
         error ? 'input-error-message' : ''
       } ${charcount && maxlength ? 'charcount-message' : ''}`.trim() || null; // Null so we don't add the attribute if we have an empty string
 
-      if (uswds) {
+    if (uswds) {
       const charCountTooHigh = charcount && (value?.length > maxlength);
       const labelClass = classnames({
         'usa-label': true,
@@ -312,12 +317,12 @@ export class VaTextInput {
               {messageAriaDescribedby}
             </span>
           )}
-          {!charcount && maxlength && value?.length >= maxlength && (
-              <span class={messageClass} aria-live="polite">
+          {isMessageDisplayed && !charcount && maxlength && value?.length >= maxlength && (
+              <span id="maxlength-message" class={messageClass} aria-live="polite">
               {i18next.t('max-chars', { length: maxlength })}
               </span>
           )}
-          {charcount && maxlength && (
+          {isMessageDisplayed && charcount && maxlength && (
             <span id="charcount-message" class={messageClass} aria-live="polite">
               {getCharacterMessage(value, maxlength)}
             </span>
@@ -370,13 +375,13 @@ export class VaTextInput {
               {messageAriaDescribedby}
             </span>
           )}
-          {maxlength && value?.length >= maxlength && (
-            <small part="validation" aria-live="polite">
+          {isMessageDisplayed && maxlength && value?.length >= maxlength && (
+            <small id="maxlength-message"  part="validation" aria-live="polite">
               {i18next.t('max-chars', { length: maxlength })}
             </small>
           )}
-          {minlength && value?.length < minlength && (
-            <small part="validation">
+          {isMessageDisplayed && minlength && value?.length < minlength && (
+            <small id="charcount-message" part="validation">
               {i18next.t('min-chars', { length: minlength })}
             </small>
           )}

@@ -778,6 +778,14 @@ export namespace Components {
           * Display last page number when the page count exceeds `maxPageListLength`
          */
         "showLastPage"?: boolean;
+        /**
+          * Don't show last page when the page count exceeds `maxPageListLength` (but do show the ellipsis). Only relevant if uswds is true.
+         */
+        "unbounded"?: boolean;
+        /**
+          * Whether or not the component will use USWDS v3 styling.
+         */
+        "uswds"?: boolean;
     }
     interface VaPrivacyAgreement {
         /**
@@ -957,6 +965,10 @@ export namespace Components {
          */
         "enableAnalytics"?: boolean;
         /**
+          * Header level for button wrapper. Must be between 1 and 6 (v3 only)
+         */
+        "headerLevel"?: number;
+        /**
           * Text of current step (v3 only)
          */
         "headingText"?: string;
@@ -968,6 +980,10 @@ export namespace Components {
           * String containing a list of step labels delimited by a semi-colon (v3 only) Example: `"Step 1;Step 2;Step 3"`
          */
         "labels"?: string;
+        /**
+          * The term used to indicate the current progress for the heading "[progressTerm] 2 of 5". (Screen reader only)
+         */
+        "progressTerm"?: string;
         /**
           * The total number of segments in the progress bar
          */
@@ -2581,6 +2597,14 @@ declare namespace LocalJSX {
           * Display last page number when the page count exceeds `maxPageListLength`
          */
         "showLastPage"?: boolean;
+        /**
+          * Don't show last page when the page count exceeds `maxPageListLength` (but do show the ellipsis). Only relevant if uswds is true.
+         */
+        "unbounded"?: boolean;
+        /**
+          * Whether or not the component will use USWDS v3 styling.
+         */
+        "uswds"?: boolean;
     }
     interface VaPrivacyAgreement {
         /**
@@ -2796,6 +2820,10 @@ declare namespace LocalJSX {
          */
         "enableAnalytics"?: boolean;
         /**
+          * Header level for button wrapper. Must be between 1 and 6 (v3 only)
+         */
+        "headerLevel"?: number;
+        /**
           * Text of current step (v3 only)
          */
         "headingText"?: string;
@@ -2811,6 +2839,10 @@ declare namespace LocalJSX {
           * The event used to track usage of the component. This is emitted when the component renders and enableAnalytics is true.
          */
         "onComponent-library-analytics"?: (event: VaSegmentedProgressBarCustomEvent<any>) => void;
+        /**
+          * The term used to indicate the current progress for the heading "[progressTerm] 2 of 5". (Screen reader only)
+         */
+        "progressTerm"?: string;
         /**
           * The total number of segments in the progress bar
          */
