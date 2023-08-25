@@ -22,6 +22,7 @@ const tokensToKeep = {
   'blue-cool': {
     file: 'blue-cool.json',
     colors: [
+      'blue-cool-60',
       'blue-cool-vivid-5',
       'blue-cool-vivid-20',
       'blue-cool-vivid-40',
@@ -30,15 +31,26 @@ const tokensToKeep = {
   },
   'blue-warm': {
     file: 'blue-warm.json',
-    colors: ['blue-warm-vivid-60', 'blue-warm-vivid-70', 'blue-warm-vivid-80'],
+    colors: [
+      'blue-warm-10',
+      'blue-warm-vivid-60',
+      'blue-warm-vivid-70',
+      'blue-warm-vivid-80',
+    ],
   },
   'cyan': {
     file: 'cyan.json',
-    colors: ['cyan-vivid-30'],
+    colors: ['cyan-5', 'cyan-20', 'cyan-vivid-30', 'cyan-vivid-40'],
   },
   'gold': {
     file: 'gold.json',
-    colors: ['gold-vivid-5'],
+    colors: [
+      'gold-vivid-5',
+      'gold-vivid-10',
+      'gold-vivid-20',
+      'gold-vivid-30',
+      'gold-vivid-50',
+    ],
   },
   'gray': {
     file: 'gray.json',
@@ -79,9 +91,48 @@ const tokensToKeep = {
       'gray-cool-90',
     ],
   },
+  'gray-warm': {
+    file: 'gray-warm.json',
+    colors: ['gray-warm-10', 'gray-warm-70'],
+  },
+  'green-cool': {
+    file: 'green-cool.json',
+    colors: [
+      'green-cool-5',
+      'green-cool-20',
+      'green-cool-40',
+      'green-cool-vivid-20',
+      'green-cool-vivid-40',
+      'green-cool-vivid-50',
+      'green-cool-vivid-60',
+    ],
+  },
   'orange': {
     file: 'orange.json',
     colors: ['orange-40'],
+  },
+  'red': {
+    file: 'red.json',
+    colors: ['red-30', 'red-50', 'red-70', 'red-vivid-60', 'red-vivid-70'],
+  },
+  'red-cool': {
+    file: 'red-cool.json',
+    colors: [
+      'red-cool-vivid-10',
+      'red-cool-vivid-50',
+      'red-cool-vivid-60',
+      'red-cool-vivid-70',
+    ],
+  },
+  'red-warm': {
+    file: 'red-warm.json',
+    colors: [
+      'red-warm-10',
+      'red-warm-80',
+      'red-warm-vivid-30',
+      'red-warm-vivid-50',
+      'red-warm-vivid-60',
+    ],
   },
   'violet': {
     file: 'violet.json',
@@ -89,7 +140,7 @@ const tokensToKeep = {
   },
   'yellow': {
     file: 'yellow.json',
-    colors: ['yellow-5'],
+    colors: ['yellow-5', 'yellow-vivid-10', 'yellow-vivid-20'],
   },
 };
 // Desired prefix/namespace for colors
