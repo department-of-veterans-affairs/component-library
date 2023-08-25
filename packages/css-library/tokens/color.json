@@ -3,11 +3,9 @@
     "base": { "value": "#212121"},
     "white": { "value": "#ffffff"},
     "black": { "value": "#000000"},
-    "orange": { "value": "#eb7f29"},
     "link-default": { "value": "#004795"},
     "link-visited": { "value": "#4c2c92"},
-    "warning-message": { "value": "#fac922"},
-    "gibill-accent": { "value": "#fff1d2"},
+    "feedback-warning-background": { "value": "#fac922"},
     "primary": {
       "*": { "value": "#0071bb"},
       "darker": { "value": "#003e73"},

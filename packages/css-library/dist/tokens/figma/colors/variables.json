@@ -9,20 +9,14 @@
     "black": {
       "value": "#000000"
     },
-    "orange": {
-      "value": "#eb7f29"
-    },
     "link-default": {
       "value": "#004795"
     },
     "link-visited": {
       "value": "#4c2c92"
     },
-    "warning-message": {
+    "feedback-warning-background": {
       "value": "#fac922"
-    },
-    "gibill-accent": {
-      "value": "#fff1d2"
     },
     "primary": {
       "*": {

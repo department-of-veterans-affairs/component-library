@@ -51,23 +51,6 @@
         "black"
       ]
     },
-    "orange": {
-      "value": "#eb7f29",
-      "filePath": "tokens/color.json",
-      "isSource": true,
-      "original": {
-        "value": "#eb7f29"
-      },
-      "name": "color-orange",
-      "attributes": {
-        "category": "color",
-        "type": "orange"
-      },
-      "path": [
-        "color",
-        "orange"
-      ]
-    },
     "link-default": {
       "value": "#004795",
       "filePath": "tokens/color.json",
@@ -102,38 +85,21 @@
         "link-visited"
       ]
     },
-    "warning-message": {
+    "feedback-warning-background": {
       "value": "#fac922",
       "filePath": "tokens/color.json",
       "isSource": true,
       "original": {
         "value": "#fac922"
       },
-      "name": "color-warning-message",
+      "name": "color-feedback-warning-background",
       "attributes": {
         "category": "color",
-        "type": "warning-message"
+        "type": "feedback-warning-background"
       },
       "path": [
         "color",
-        "warning-message"
-      ]
-    },
-    "gibill-accent": {
-      "value": "#fff1d2",
-      "filePath": "tokens/color.json",
-      "isSource": true,
-      "original": {
-        "value": "#fff1d2"
-      },
-      "name": "color-gibill-accent",
-      "attributes": {
-        "category": "color",
-        "type": "gibill-accent"
-      },
-      "path": [
-        "color",
-        "gibill-accent"
+        "feedback-warning-background"
       ]
     },
     "primary": {
