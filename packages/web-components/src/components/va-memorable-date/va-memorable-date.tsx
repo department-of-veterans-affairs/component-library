@@ -253,7 +253,7 @@ export class VaMemorableDate {
     // Fieldset has an implicit aria role of group
     if (uswds) {
       const monthDisplay = monthSelect
-        ? <div class="usa-form-group usa-form-group--month usa-form-group--select">
+        ? <div class="usa-form-group uswds-usa-form-group--month usa-form-group--select">
           <va-select
             uswds
             label={i18next.t('month')}
