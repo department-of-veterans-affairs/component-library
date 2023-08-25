@@ -30,9 +30,10 @@ describe('va-checkbox', () => {
     await page.setContent(
       '<va-checkbox error="Something went horribly wrong" />',
     );
-    const element = await page.find('va-checkbox >>> #error-message');
+    const element = await page.find('va-checkbox >>> #checkbox-error-message');
     const input = await page.find('va-checkbox >>> input');
     expect(input.getAttribute('aria-invalid')).toEqual('true');
+    expect(input.getAttribute('aria-describedby')).toEqual('checkbox-error-message');
     expect(element.textContent).toContain('Something went horribly wrong');
   });
 
@@ -58,7 +59,9 @@ describe('va-checkbox', () => {
       '<va-checkbox><p slot="description">This is a description!</p></va-checkbox',
     );
     const element = await page.find('va-checkbox');
+    const inputEl = await page.find('va-checkbox >>> input');
     expect(element).toEqualText('This is a description!');
+    expect(inputEl.getAttribute('aria-describedby')).toEqual('description');
   });
 
   // This test fails, but is here as documentation. The unknown slot and unnamed
@@ -79,10 +82,12 @@ describe('va-checkbox', () => {
       '<va-checkbox description="Description prop"><p slot="description">Slotted description</p></va-checkbox',
     );
     const element = await page.find('va-checkbox');
+    const inputEl = await page.find('va-checkbox >>> input');
     expect(element.shadowRoot.textContent).toContain('Description prop');
     expect(
       await page.find('va-checkbox >>> slot[name="description"]'),
     ).toBeNull();
+    expect(inputEl.getAttribute('aria-describedby')).toEqual('description');
   });
 
   it('adds new aria-describedby for error message', async () => {
@@ -91,7 +96,7 @@ describe('va-checkbox', () => {
 
     // Render the error message text
     const inputEl = await page.find('va-checkbox >>> input');
-    expect(inputEl.getAttribute('aria-describedby')).toContain('error-message');
+    expect(inputEl.getAttribute('aria-describedby')).toContain('checkbox-error-message');
   });
 
   it('adds aria-describedby input-message id', async () => {
@@ -101,6 +106,19 @@ describe('va-checkbox', () => {
     // Render the error message text
     const inputEl = await page.find('va-checkbox >>> input');
     expect(inputEl.getAttribute('aria-describedby')).toContain('input-message');
+  });
+
+  it('adds aria-describedby input-message, checkbox-error-message and description ids', async () => {
+    const page = await newE2EPage();
+    await page.setContent(
+      `<va-checkbox error="Something went horribly wrong" message-aria-describedby="This is a message">
+         <p slot="description">Slotted description</p>
+      </va-checkbox>`,
+    );
+
+    // Render the error message text
+    const inputEl = await page.find('va-checkbox >>> input');
+    expect(inputEl.getAttribute('aria-describedby')).toEqual('input-message checkbox-error-message description');
   });
 
   it('passes an aXe check', async () => {
@@ -157,6 +175,7 @@ describe('va-checkbox', () => {
         required: false,
       },
     });
+    expect(inputEl.getAttribute('aria-describedby')).toEqual('description');
   });
 
   it("doesn't fire an analytics event when enableAnalytics is false", async () => {
@@ -263,6 +282,7 @@ describe('va-checkbox', () => {
     const element = await page.find('va-checkbox >>> #checkbox-error-message');
     const input = await page.find('va-checkbox >>> input');
     expect(input.getAttribute('aria-invalid')).toEqual('true');
+    expect(input.getAttribute('aria-describedby')).toEqual('checkbox-error-message');
     expect(element.textContent).toContain('Something went horribly wrong');
   });
 
@@ -287,7 +307,9 @@ describe('va-checkbox', () => {
       '<va-checkbox uswds><p slot="description">This is a description!</p></va-checkbox',
     );
     const element = await page.find('va-checkbox');
+    const inputEl = await page.find('va-checkbox >>> input');
     expect(element).toEqualText('This is a description!');
+    expect(inputEl.getAttribute('aria-describedby')).toEqual('description');
   });
 
   it('uswds v3 should prefer rendering the description prop over the slotted element', async () => {
@@ -296,10 +318,12 @@ describe('va-checkbox', () => {
       '<va-checkbox uswds description="Description prop"><p slot="description">Slotted description</p></va-checkbox',
     );
     const element = await page.find('va-checkbox');
+    const inputEl = await page.find('va-checkbox >>> input');
     expect(element.shadowRoot.textContent).toContain('Description prop');
     expect(
       await page.find('va-checkbox >>> slot[name="description"]'),
     ).toBeNull();
+    expect(inputEl.getAttribute('aria-describedby')).toEqual('description');
   });
 
   it('uswds v3 adds new aria-describedby for error message', async () => {
@@ -318,6 +342,19 @@ describe('va-checkbox', () => {
     );
 
     await axeCheck(page);
+  });
+
+  it('uswds v3 adds aria-describedby input-message, checkbox-error-message and description ids', async () => {
+    const page = await newE2EPage();
+    await page.setContent(
+      `<va-checkbox uswds error="Something went horribly wrong" message-aria-describedby="This is a message">
+         <p slot="description">Slotted description</p>
+      </va-checkbox>`,
+    );
+
+    // Render the error message text
+    const inputEl = await page.find('va-checkbox >>> input');
+    expect(inputEl.getAttribute('aria-describedby')).toEqual('input-message checkbox-error-message description');
   });
 
   it('uswds v3 fires an analytics event when enableAnalytics is true', async () => {
