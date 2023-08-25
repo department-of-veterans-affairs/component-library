@@ -10,7 +10,6 @@ const componentsToKeep = [
   'Checkbox',
   'ExpandingGroup',
   'IconSearch',
-  'IconUser',
   'LoadingIndicator',
   'Pagination',
   'Select',
