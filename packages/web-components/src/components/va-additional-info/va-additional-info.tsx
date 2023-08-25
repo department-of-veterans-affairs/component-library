@@ -95,7 +95,7 @@ export class VaAdditionalInfo {
     /* eslint-enable i18next/no-literal-string */
   }
 
-  componentDidLoad() {
+  componentDidRender() {
     this.updateInfoMaxHeight();
   }
 
