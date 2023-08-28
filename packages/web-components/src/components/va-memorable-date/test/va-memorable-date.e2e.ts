@@ -641,8 +641,8 @@ describe('va-memorable-date', () => {
           <slot></slot>
           <span id="error-message" role="alert"></span>
           <div class="usa-memorable-date">
-            <div class="usa-form-group uswds-usa-form-group--month">
-              <va-text-input aria-describedby="dateHint" class="hydrated memorable-date-input uswds-usa-form-group--month-input" uswds=""></va-text-input>
+            <div class="usa-form-group v3-usa-form-group--month">
+              <va-text-input aria-describedby="dateHint" class="hydrated memorable-date-input v3-usa-form-group--month-input" uswds=""></va-text-input>
             </div>
             <div class="usa-form-group usa-form-group--day">
               <va-text-input aria-describedby="dateHint" class="hydrated memorable-date-input usa-form-group--day-input" uswds=""></va-text-input>
@@ -692,8 +692,8 @@ describe('va-memorable-date', () => {
           <slot></slot>
           <span id="error-message" role="alert"></span>
           <div class="usa-memorable-date">
-            <div class="usa-form-group uswds-usa-form-group--month">
-              <va-text-input aria-describedby="dateHint hint" class="hydrated memorable-date-input uswds-usa-form-group--month-input" uswds=""></va-text-input>
+            <div class="usa-form-group v3-usa-form-group--month">
+              <va-text-input aria-describedby="dateHint hint" class="hydrated memorable-date-input v3-usa-form-group--month-input" uswds=""></va-text-input>
             </div>
             <div class="usa-form-group usa-form-group--day">
               <va-text-input aria-describedby="dateHint hint" class="hydrated memorable-date-input usa-form-group--day-input" uswds=""></va-text-input>
@@ -1068,7 +1068,7 @@ describe('va-memorable-date', () => {
     const page = await newE2EPage();
     await page.setContent('<va-memorable-date value="1999-05-03" uswds />');
 
-    const month = await page.find('va-memorable-date >>> .uswds-usa-form-group--month-input');
+    const month = await page.find('va-memorable-date >>> .v3-usa-form-group--month-input');
     const day = await page.find('va-memorable-date >>> .usa-form-group--day-input');
     const year = await page.find('va-memorable-date >>> .usa-form-group--year-input');
 
@@ -1084,7 +1084,7 @@ describe('va-memorable-date', () => {
     );
 
     const date = await page.find('va-memorable-date');
-    const elementMonth = await page.find('va-memorable-date >>> .uswds-usa-form-group--month-input');
+    const elementMonth = await page.find('va-memorable-date >>> .v3-usa-form-group--month-input');
     const elementDay = await page.find('va-memorable-date >>> .usa-form-group--day-input');
     const elementYear = await page.find('va-memorable-date >>> .usa-form-group--year-input');
     const handleMonth = await page.$('pierce/[name="testMonth"]');
@@ -1133,7 +1133,7 @@ describe('va-memorable-date', () => {
     const page = await newE2EPage();
     await page.setContent('<va-memorable-date name="test" uswds />');
 
-    const elementMonth = await page.find('va-memorable-date >>> .uswds-usa-form-group--month-input');
+    const elementMonth = await page.find('va-memorable-date >>> .v3-usa-form-group--month-input');
     const handleMonth = await page.$('pierce/[name="testMonth"]');
     await handleMonth.press('2');
     await handleMonth.press('0');
@@ -1281,7 +1281,7 @@ describe('va-memorable-date', () => {
           <slot></slot>
           <span id="error-message" role="alert"></span>
           <div class="usa-memorable-date">
-            <div class="usa-form-group usa-form-group--select uswds-usa-form-group--month">
+            <div class="usa-form-group usa-form-group--select v3-usa-form-group--month">
               <va-select aria-describedby="dateHint" class="hydrated usa-form-group--month-select" uswds="">
                 <option value="1">
                   January
@@ -1369,7 +1369,7 @@ describe('va-memorable-date', () => {
           <slot></slot>
           <span id="error-message" role="alert"></span>
           <div class="usa-memorable-date">
-            <div class="usa-form-group usa-form-group--select uswds-usa-form-group--month">
+            <div class="usa-form-group usa-form-group--select v3-usa-form-group--month">
               <va-select aria-describedby="dateHint hint" class="hydrated usa-form-group--month-select" uswds="">
                 <option value="1">
                   January
