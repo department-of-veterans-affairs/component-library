@@ -7,7 +7,7 @@
       "value": "#ffffff"
     },
     "black": {
-      "value": "#000000"
+      "value": "{uswds-system-color-gray-100}"
     },
     "orange": {
       "value": "#eb7f29"
