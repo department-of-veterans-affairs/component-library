@@ -177,9 +177,7 @@ export class VaMemorableDate {
     const target = event.target as HTMLInputElement;
 
     let [currentYear, currentMonth, currentDay] = (this.value || '').split('-');
-    if (target.classList.contains('input-month') || target.classList.contains('usa-form-group--month-input')
-      || target.classList.contains('usa-form-group--month-select')
-      || target.classList.contains('usa-form-group--month-input')) {
+    if (target.classList.contains('input-month') || target.classList.contains('usa-form-group--month-input') || target.classList.contains('usa-form-group--month-select')) {
       currentMonth = target.value;
     }
     if (target.classList.contains('input-day') || target.classList.contains('usa-form-group--day-input')) {
