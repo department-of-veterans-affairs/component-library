@@ -1,17 +1,16 @@
 /**
  * Do not edit directly
- * Generated on Wed, 23 Aug 2023 14:46:33 GMT
+ * Generated on Tue, 29 Aug 2023 17:17:03 GMT
  */
 
 :root {
   --color-base: #212121;
   --color-white: #ffffff;
   --color-black: #000000;
-  --color-orange: #eb7f29;
   --color-link-default: #004795;
   --color-link-visited: #4c2c92;
   --color-warning-message: #fac922;
-  --color-gibill-accent: #fff1d2;
+  --color-feedback-warning-background: #fac922;
   --color-primary: #0071bb;
   --color-primary-darker: #003e73;
   --color-primary-darkest: #112e51;
@@ -114,15 +113,24 @@
   --uswds-system-color-blue-90: #11181d;
   --uswds-system-color-blue-vivid-50: #0076d6;
   --uswds-system-color-blue-vivid-60: #005ea2;
+  --uswds-system-color-blue-cool-60: #2e6276;
   --uswds-system-color-blue-cool-vivid-5: #e1f3f8;
   --uswds-system-color-blue-cool-vivid-20: #97d4ea;
   --uswds-system-color-blue-cool-vivid-40: #28a0cb;
   --uswds-system-color-blue-cool-vivid-60: #07648d;
+  --uswds-system-color-blue-warm-10: #e1e7f1;
   --uswds-system-color-blue-warm-vivid-60: #0050d8;
   --uswds-system-color-blue-warm-vivid-70: #1a4480;
   --uswds-system-color-blue-warm-vivid-80: #162e51;
+  --uswds-system-color-cyan-5: #e7f6f8;
+  --uswds-system-color-cyan-20: #99deea;
   --uswds-system-color-cyan-vivid-30: #00bde3;
+  --uswds-system-color-cyan-vivid-40: #009ec1;
   --uswds-system-color-gold-vivid-5: #fef0c8;
+  --uswds-system-color-gold-vivid-10: #ffe396;
+  --uswds-system-color-gold-vivid-20: #ffbe2e;
+  --uswds-system-color-gold-vivid-30: #e5a000;
+  --uswds-system-color-gold-vivid-50: #936f38;
   --uswds-system-color-gray-1: #fcfcfc;
   --uswds-system-color-gray-2: #f9f9f9;
   --uswds-system-color-gray-3: #f6f6f6;
@@ -152,7 +160,32 @@
   --uswds-system-color-gray-cool-70: #3d4551;
   --uswds-system-color-gray-cool-80: #2d2e2f;
   --uswds-system-color-gray-cool-90: #1c1d1f;
+  --uswds-system-color-gray-warm-10: #e6e6e2;
+  --uswds-system-color-gray-warm-70: #454540;
+  --uswds-system-color-green-cool-5: #ecf3ec;
+  --uswds-system-color-green-cool-20: #b4d0b9;
+  --uswds-system-color-green-cool-40: #5e9f69;
+  --uswds-system-color-green-cool-vivid-20: #70e17b;
+  --uswds-system-color-green-cool-vivid-40: #00a91c;
+  --uswds-system-color-green-cool-vivid-50: #008817;
+  --uswds-system-color-green-cool-vivid-60: #216e1f;
   --uswds-system-color-orange-40: #dd7533;
+  --uswds-system-color-red-30: #f2938c;
+  --uswds-system-color-red-50: #d83933;
+  --uswds-system-color-red-70: #6f3331;
+  --uswds-system-color-red-vivid-60: #b50909;
+  --uswds-system-color-red-vivid-70: #8b0a03;
+  --uswds-system-color-red-cool-vivid-10: #f8dfe2;
+  --uswds-system-color-red-cool-vivid-50: #e41d3d;
+  --uswds-system-color-red-cool-vivid-60: #b21d38;
+  --uswds-system-color-red-cool-vivid-70: #822133;
+  --uswds-system-color-red-warm-10: #f4e3db;
+  --uswds-system-color-red-warm-80: #332d29;
+  --uswds-system-color-red-warm-vivid-30: #f39268;
+  --uswds-system-color-red-warm-vivid-50: #d54309;
+  --uswds-system-color-red-warm-vivid-60: #9c3d10;
   --uswds-system-color-violet-vivid-70: #54278f;
   --uswds-system-color-yellow-5: #faf3d1;
+  --uswds-system-color-yellow-vivid-10: #fee685;
+  --uswds-system-color-yellow-vivid-20: #face00;
 }
