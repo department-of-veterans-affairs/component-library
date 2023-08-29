@@ -17,28 +17,19 @@
   margin-top: 16px;
 }
 
-.v3-usa-form-group--month {
+.usa-form-group--month {
   margin-right: 16px;
 }
 
-.v3-usa-form-group--month-input {
-  width: 48px;
-}
-
-.usa-form-group--month {
-  flex: 0 1 50%;
-  width: 50%;
-}
-
 .usa-form-group--month-input {
-  width: 100%;
+  width: 48px;
 }
 
 @media (max-width: 480px) {
   .usa-form-group--month-select {
     width: 100%;
   }
-  .v3-usa-form-group--month.usa-form-group--select {
+  .usa-form-group--select {
     flex: 0 1 50%;
     width: 50%;
   }
