@@ -43,10 +43,6 @@ export const additionalDocs = {
     maturityCategory: CAUTION,
     maturityLevel: AVAILABLE,
   },
-  'Icon - user': {
-    maturityCategory: CAUTION,
-    maturityLevel: AVAILABLE,
-  },
   // MDX
   'Link - Action': {
     guidanceHref: 'link/action',

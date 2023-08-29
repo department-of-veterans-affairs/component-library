@@ -5,7 +5,6 @@ import Checkbox from './components/Checkbox/Checkbox';
 import ExpandingGroup from './components/ExpandingGroup/ExpandingGroup';
 import IconBase from './components/IconBase/IconBase';
 import IconSearch from './components/IconSearch/IconSearch';
-import IconUser from './components/IconUser/IconUser';
 import LoadingIndicator from './components/LoadingIndicator/LoadingIndicator';
 import MaintenanceBanner from './components/MaintenanceBanner/MaintenanceBanner';
 import Modal from './components/Modal/Modal';
@@ -29,7 +28,6 @@ export {
   ExpandingGroup,
   IconBase,
   IconSearch,
-  IconUser,
   LoadingIndicator,
   MaintenanceBanner,
   Modal,
