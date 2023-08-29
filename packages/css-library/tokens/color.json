@@ -2,7 +2,7 @@
   "color": {
     "base": { "value": "#212121"},
     "white": { "value": "#ffffff"},
-    "black": { "value": "#000000"},
+    "black": { "value": "{uswds-system-color-gray-100}"},
     "link-default": { "value": "#004795"},
     "link-visited": { "value": "#4c2c92"},
     "feedback-warning-background": { "value": "#fac922"},
