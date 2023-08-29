@@ -15,6 +15,9 @@
     "link-visited": {
       "value": "#4c2c92"
     },
+    "warning-message": {
+      "value": "#fac922"
+    },
     "feedback-warning-background": {
       "value": "#fac922"
     },
