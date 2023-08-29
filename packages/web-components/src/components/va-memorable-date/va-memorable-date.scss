@@ -18,12 +18,21 @@
 }
 
 .usa-form-group--month {
-  flex: 0 1 50%;
-  width: 50%;
+  margin-right: 16px;
 }
 
-.usa-form-group--month-select, .usa-form-group--month-input {
-  width: 100%;
+.usa-form-group--month-input {
+  width: 48px;
+}
+
+@media (max-width: 480px) {
+  .usa-form-group--month-select {
+    width: 100%;
+  }
+  .usa-form-group--select {
+    flex: 0 1 50%;
+    width: 50%;
+  }
 }
 
 :host([uswds]) {
