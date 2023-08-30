@@ -3092,21 +3092,6 @@ through all possible variants
   );
 }
 */
-.vads-bg-gibill-accent {
-  background-color: #fff1d2;
-}
-
-/*
-@if map-deep-get($utility, settings, responsive) {
-  @include render-media-queries(
-    $utility,
-    $selector,
-    $property,
-    $value,
-    $val-props
-  );
-}
-*/
 .vads-bg-primary {
   background-color: #0071bb;
 }
@@ -4532,21 +4517,6 @@ through all possible variants
   );
 }
 */
-.vads-border-gibill-accent {
-  border-color: #fff1d2;
-}
-
-/*
-@if map-deep-get($utility, settings, responsive) {
-  @include render-media-queries(
-    $utility,
-    $selector,
-    $property,
-    $value,
-    $val-props
-  );
-}
-*/
 .vads-border-primary {
   border-color: #0071bb;
 }
@@ -5314,21 +5284,6 @@ through all possible variants
 */
 .vads-warning-message {
   color: #fac922;
-}
-
-/*
-@if map-deep-get($utility, settings, responsive) {
-  @include render-media-queries(
-    $utility,
-    $selector,
-    $property,
-    $value,
-    $val-props
-  );
-}
-*/
-.vads-gibill-accent {
-  color: #fff1d2;
 }
 
 /*
