@@ -1,4 +1,3 @@
-import AdditionalInfo from './AdditionalInfo';
 import AlertBox, { ALERT_TYPE } from './AlertBox';
 import Breadcrumbs from './Breadcrumbs';
 import Checkbox from './Checkbox';
@@ -22,7 +21,6 @@ import TextInput from './TextInput';
 import './i18n-setup';
 
 export {
-  AdditionalInfo,
   AlertBox,
   ALERT_TYPE,
   Breadcrumbs,
