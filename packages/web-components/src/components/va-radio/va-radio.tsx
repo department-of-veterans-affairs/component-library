@@ -232,7 +232,7 @@ export class VaRadio {
       });
       return (
         <Host aria-invalid={error ? 'true' : 'false'} aria-label={ariaLabel}>
-          <fieldset class="usa-form usa-fieldset" role="radiogroup">
+          <fieldset class="usa-fieldset" role="radiogroup">
             <legend class={legendClass} part="legend">
               {HeaderLevel ? (
                 <HeaderLevel part="header">{label}</HeaderLevel>
