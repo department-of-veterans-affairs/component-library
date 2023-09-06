@@ -10,7 +10,6 @@ import MaintenanceBanner from './components/MaintenanceBanner/MaintenanceBanner'
 import Modal from './components/Modal/Modal';
 import OMBInfo from './components/OMBInfo/OMBInfo';
 import Pagination from './components/Pagination/Pagination';
-import Select from './components/Select/Select';
 import Telephone, {
   CONTACTS,
   contactsMap,
@@ -33,7 +32,6 @@ export {
   Modal,
   OMBInfo,
   Pagination,
-  Select,
   Telephone,
   CONTACTS,
   contactsMap,

@@ -12,7 +12,6 @@ const componentsToKeep = [
   'IconSearch',
   'LoadingIndicator',
   'Pagination',
-  'Select',
   'TextInput',
 ];
 
