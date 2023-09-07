@@ -128,7 +128,7 @@ describe('va-radio-option', () => {
     );
 
     const changeSpy = await page.spyOnEvent('radioOptionSelected');
-    const inputEl = await page.find('va-radio-option');
+    const inputEl = await page.find('va-radio-option >>> label');
     await inputEl.click();
 
     expect(changeSpy).toHaveReceivedEvent();
