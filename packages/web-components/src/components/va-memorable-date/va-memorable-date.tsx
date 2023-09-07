@@ -49,10 +49,6 @@ if (Build.isTesting) {
 })
 export class VaMemorableDate {
 
-  private monthfield: HTMLElement;
-  private dayfield: HTMLElement;
-  private yearfield: HTMLElement;
-
   @Element() el: HTMLElement;
   /**
    * Render marker indicating field is required.
@@ -117,19 +113,6 @@ export class VaMemorableDate {
   @Prop({ mutable: true }) invalidMonth: boolean = false;
   @Prop({ mutable: true }) invalidYear: boolean = false;
 
-  private focusInvalidFields = () => {
-    if (this.invalidMonth) {
-      let input = this.monthfield.shadowRoot.querySelector('input, select') as HTMLElement;
-      input.focus();
-    } else if (this.invalidDay) {
-      let input = this.dayfield.shadowRoot.querySelector('input') as HTMLElement;
-      input.focus();
-    } else if (this.invalidYear) {
-      let input = this.yearfield.shadowRoot.querySelector('input') as HTMLElement;
-      input.focus();
-    }
-  }
-
   private handleDateBlur = (event: FocusEvent) => {
     const [year, month, day] = (this.value || '').split('-');
     const yearNum = Number(year);
@@ -138,7 +121,6 @@ export class VaMemorableDate {
 
     if(!checkIsNaN(this, yearNum, monthNum, dayNum)) {
       // if any fields are NaN do not continue validation
-      this.focusInvalidFields()
       return;
     }
 
@@ -156,7 +138,6 @@ export class VaMemorableDate {
     // Built-in validation is run after custom so internal errors override
     // custom errors, e.g. Show invalid date instead of custom error
     validate(this, yearNum, monthNum, dayNum);
-    this.focusInvalidFields();
 
     if (this.enableAnalytics) {
       const detail = {
@@ -262,7 +243,6 @@ export class VaMemorableDate {
             class='usa-form-group--month-select'
             reflectInputError={error ? true : false}
             value={month ? String(parseInt(month)) : month}
-            ref={(field) => this.monthfield = field}
           >
             {months &&
               months.map(monthOption => (
@@ -290,7 +270,6 @@ export class VaMemorableDate {
           reflectInputError={error ? true : false}
           inputmode="numeric"
           type="text"
-          ref={(field) => this.monthfield = field}
         />
       </div>;
       const legendClass = classnames({
@@ -334,7 +313,6 @@ export class VaMemorableDate {
                   reflectInputError={error ? true : false}
                   inputmode="numeric"
                   type="text"
-                  ref={(field) => this.dayfield = field}
                 />
               </div>
               <div class="usa-form-group usa-form-group--year">
@@ -354,7 +332,6 @@ export class VaMemorableDate {
                   reflectInputError={error ? true : false}
                   inputmode="numeric"
                   type="text"
-                  ref={(field) => this.yearfield = field}
                 />
               </div>
             </div>
@@ -394,7 +371,6 @@ export class VaMemorableDate {
                 class="input-month memorable-date-input"
                 inputmode="numeric"
                 type="text"
-                ref={(field) => this.monthfield = field}
                 />
               <va-text-input
                 label={i18next.t('day')}
@@ -411,7 +387,6 @@ export class VaMemorableDate {
                 class="input-day memorable-date-input"
                 inputmode="numeric"
                 type="text"
-                ref={(field) => this.dayfield = field}
                 />
               <va-text-input
                 label={i18next.t('year')}
@@ -428,7 +403,6 @@ export class VaMemorableDate {
                 class="input-year memorable-date-input"
                 inputmode="numeric"
                 type="text"
-                ref={(field) => this.yearfield = field}
                 />
             </div>
           </fieldset>
