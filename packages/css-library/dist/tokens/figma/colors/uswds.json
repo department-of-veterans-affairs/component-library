@@ -1,0 +1,265 @@
+{
+  "global": {
+    "uswds-system-color-blue-5": {
+      "value": "#eff6fb"
+    },
+    "uswds-system-color-blue-10": {
+      "value": "#d9e8f6"
+    },
+    "uswds-system-color-blue-20": {
+      "value": "#aacdec"
+    },
+    "uswds-system-color-blue-30": {
+      "value": "#73b3e7"
+    },
+    "uswds-system-color-blue-40": {
+      "value": "#4f97d1"
+    },
+    "uswds-system-color-blue-50": {
+      "value": "#2378c3"
+    },
+    "uswds-system-color-blue-60": {
+      "value": "#2c608a"
+    },
+    "uswds-system-color-blue-70": {
+      "value": "#274863"
+    },
+    "uswds-system-color-blue-80": {
+      "value": "#1f303e"
+    },
+    "uswds-system-color-blue-90": {
+      "value": "#11181d"
+    },
+    "uswds-system-color-blue-vivid-50": {
+      "value": "#0076d6"
+    },
+    "uswds-system-color-blue-vivid-60": {
+      "value": "#005ea2"
+    },
+    "uswds-system-color-blue-cool-60": {
+      "value": "#2e6276"
+    },
+    "uswds-system-color-blue-cool-vivid-5": {
+      "value": "#e1f3f8"
+    },
+    "uswds-system-color-blue-cool-vivid-20": {
+      "value": "#97d4ea"
+    },
+    "uswds-system-color-blue-cool-vivid-40": {
+      "value": "#28a0cb"
+    },
+    "uswds-system-color-blue-cool-vivid-60": {
+      "value": "#07648d"
+    },
+    "uswds-system-color-blue-warm-10": {
+      "value": "#e1e7f1"
+    },
+    "uswds-system-color-blue-warm-vivid-60": {
+      "value": "#0050d8"
+    },
+    "uswds-system-color-blue-warm-vivid-70": {
+      "value": "#1a4480"
+    },
+    "uswds-system-color-blue-warm-vivid-80": {
+      "value": "#162e51"
+    },
+    "uswds-system-color-cyan-5": {
+      "value": "#e7f6f8"
+    },
+    "uswds-system-color-cyan-20": {
+      "value": "#99deea"
+    },
+    "uswds-system-color-cyan-vivid-30": {
+      "value": "#00bde3"
+    },
+    "uswds-system-color-cyan-vivid-40": {
+      "value": "#009ec1"
+    },
+    "uswds-system-color-gold-vivid-5": {
+      "value": "#fef0c8"
+    },
+    "uswds-system-color-gold-vivid-10": {
+      "value": "#ffe396"
+    },
+    "uswds-system-color-gold-vivid-20": {
+      "value": "#ffbe2e"
+    },
+    "uswds-system-color-gold-vivid-30": {
+      "value": "#e5a000"
+    },
+    "uswds-system-color-gold-vivid-50": {
+      "value": "#936f38"
+    },
+    "uswds-system-color-gray-1": {
+      "value": "#fcfcfc"
+    },
+    "uswds-system-color-gray-2": {
+      "value": "#f9f9f9"
+    },
+    "uswds-system-color-gray-3": {
+      "value": "#f6f6f6"
+    },
+    "uswds-system-color-gray-4": {
+      "value": "#f3f3f3"
+    },
+    "uswds-system-color-gray-5": {
+      "value": "#f0f0f0"
+    },
+    "uswds-system-color-gray-10": {
+      "value": "#e6e6e6"
+    },
+    "uswds-system-color-gray-20": {
+      "value": "#c9c9c9"
+    },
+    "uswds-system-color-gray-30": {
+      "value": "#adadad"
+    },
+    "uswds-system-color-gray-40": {
+      "value": "#919191"
+    },
+    "uswds-system-color-gray-50": {
+      "value": "#757575"
+    },
+    "uswds-system-color-gray-60": {
+      "value": "#5c5c5c"
+    },
+    "uswds-system-color-gray-70": {
+      "value": "#454545"
+    },
+    "uswds-system-color-gray-80": {
+      "value": "#2e2e2e"
+    },
+    "uswds-system-color-gray-90": {
+      "value": "#1b1b1b"
+    },
+    "uswds-system-color-gray-100": {
+      "value": "#000000"
+    },
+    "uswds-system-color-gray-cool-1": {
+      "value": "#fbfcfd"
+    },
+    "uswds-system-color-gray-cool-2": {
+      "value": "#f7f9fa"
+    },
+    "uswds-system-color-gray-cool-3": {
+      "value": "#f5f6f7"
+    },
+    "uswds-system-color-gray-cool-4": {
+      "value": "#f1f3f6"
+    },
+    "uswds-system-color-gray-cool-5": {
+      "value": "#edeff0"
+    },
+    "uswds-system-color-gray-cool-10": {
+      "value": "#dfe1e2"
+    },
+    "uswds-system-color-gray-cool-20": {
+      "value": "#c6cace"
+    },
+    "uswds-system-color-gray-cool-30": {
+      "value": "#a9aeb1"
+    },
+    "uswds-system-color-gray-cool-40": {
+      "value": "#8d9297"
+    },
+    "uswds-system-color-gray-cool-50": {
+      "value": "#71767a"
+    },
+    "uswds-system-color-gray-cool-60": {
+      "value": "#565c65"
+    },
+    "uswds-system-color-gray-cool-70": {
+      "value": "#3d4551"
+    },
+    "uswds-system-color-gray-cool-80": {
+      "value": "#2d2e2f"
+    },
+    "uswds-system-color-gray-cool-90": {
+      "value": "#1c1d1f"
+    },
+    "uswds-system-color-gray-warm-10": {
+      "value": "#e6e6e2"
+    },
+    "uswds-system-color-gray-warm-70": {
+      "value": "#454540"
+    },
+    "uswds-system-color-green-cool-5": {
+      "value": "#ecf3ec"
+    },
+    "uswds-system-color-green-cool-20": {
+      "value": "#b4d0b9"
+    },
+    "uswds-system-color-green-cool-40": {
+      "value": "#5e9f69"
+    },
+    "uswds-system-color-green-cool-vivid-20": {
+      "value": "#70e17b"
+    },
+    "uswds-system-color-green-cool-vivid-40": {
+      "value": "#00a91c"
+    },
+    "uswds-system-color-green-cool-vivid-50": {
+      "value": "#008817"
+    },
+    "uswds-system-color-green-cool-vivid-60": {
+      "value": "#216e1f"
+    },
+    "uswds-system-color-orange-40": {
+      "value": "#dd7533"
+    },
+    "uswds-system-color-red-30": {
+      "value": "#f2938c"
+    },
+    "uswds-system-color-red-50": {
+      "value": "#d83933"
+    },
+    "uswds-system-color-red-70": {
+      "value": "#6f3331"
+    },
+    "uswds-system-color-red-vivid-60": {
+      "value": "#b50909"
+    },
+    "uswds-system-color-red-vivid-70": {
+      "value": "#8b0a03"
+    },
+    "uswds-system-color-red-cool-vivid-10": {
+      "value": "#f8dfe2"
+    },
+    "uswds-system-color-red-cool-vivid-50": {
+      "value": "#e41d3d"
+    },
+    "uswds-system-color-red-cool-vivid-60": {
+      "value": "#b21d38"
+    },
+    "uswds-system-color-red-cool-vivid-70": {
+      "value": "#822133"
+    },
+    "uswds-system-color-red-warm-10": {
+      "value": "#f4e3db"
+    },
+    "uswds-system-color-red-warm-80": {
+      "value": "#332d29"
+    },
+    "uswds-system-color-red-warm-vivid-30": {
+      "value": "#f39268"
+    },
+    "uswds-system-color-red-warm-vivid-50": {
+      "value": "#d54309"
+    },
+    "uswds-system-color-red-warm-vivid-60": {
+      "value": "#9c3d10"
+    },
+    "uswds-system-color-violet-vivid-70": {
+      "value": "#54278f"
+    },
+    "uswds-system-color-yellow-5": {
+      "value": "#faf3d1"
+    },
+    "uswds-system-color-yellow-vivid-10": {
+      "value": "#fee685"
+    },
+    "uswds-system-color-yellow-vivid-20": {
+      "value": "#face00"
+    }
+  }
+}
