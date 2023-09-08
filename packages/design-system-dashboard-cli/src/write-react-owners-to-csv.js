@@ -10,7 +10,6 @@ const componentsToKeep = [
   'ExpandingGroup',
   'IconSearch',
   'LoadingIndicator',
-  'Pagination',
   'Select',
   'TextInput',
 ];
