@@ -7,7 +7,7 @@
       "value": "#ffffff"
     },
     "black": {
-      "value": "{uswds-system-color-gray-100}"
+      "value": "{uswds.uswds-system-color-gray-100}"
     },
     "link-default": {
       "value": "#004795"

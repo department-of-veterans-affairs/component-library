@@ -8,6 +8,11 @@ module.exports = {
       const transformedTokens = transform(dictionary.tokens.color, { cleanMeta: ['filePath', 'isSource', 'original', 'attributes', 'category', 'type', 'path'] });
       return JSON.stringify(transformedTokens, null, 2);
     },
+    figmaUSWDSColorsTokensPlugin: ({ dictionary }) => {
+      
+      const transformedTokens = transform(dictionary.tokens.uswds, { cleanMeta: ['filePath', 'isSource', 'original', 'attributes', 'category', 'type', 'path'] });
+      return JSON.stringify(transformedTokens, null, 2);
+    },
   },
   platforms: {
     figma: {
@@ -17,6 +22,16 @@ module.exports = {
         {
           destination: 'variables.json',
           format: 'figmaTokensPlugin',
+        },
+      ],
+    },
+    uswds: {
+      transformGroup: 'js',
+      buildPath: 'dist/tokens/figma/colors/',
+      files: [
+        {
+          destination: 'uswds.json',
+          format: 'figmaUSWDSColorsTokensPlugin',
         },
       ],
     },

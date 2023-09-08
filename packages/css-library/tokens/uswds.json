@@ -1,4 +1,5 @@
 {
+  "uswds":{
   "uswds-system-color-blue-5": {
     "value": "#eff6fb"
   },
@@ -260,4 +261,5 @@
   "uswds-system-color-yellow-vivid-20": {
     "value": "#face00"
   }
+}
 }
