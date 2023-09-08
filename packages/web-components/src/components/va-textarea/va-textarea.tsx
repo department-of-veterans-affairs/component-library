@@ -234,7 +234,7 @@ export class VaTextarea {
             </span>
           )}
           {messageAriaDescribedby && (
-            <span id="input-message" class="sr-only">
+            <span id="input-message" class="sr-only dd-privacy-hidden">
               {messageAriaDescribedby}
             </span>
           )}
@@ -271,7 +271,7 @@ export class VaTextarea {
             <small>{i18next.t('max-chars', { length: maxlength })}</small>
           )}
           {messageAriaDescribedby && (
-            <span id="input-message" class="sr-only">
+            <span id="input-message" class="sr-only dd-privacy-hidden">
               {messageAriaDescribedby}
             </span>
           )}
