@@ -8,7 +8,6 @@ import LoadingIndicator from './components/LoadingIndicator/LoadingIndicator';
 import MaintenanceBanner from './components/MaintenanceBanner/MaintenanceBanner';
 import Modal from './components/Modal/Modal';
 import OMBInfo from './components/OMBInfo/OMBInfo';
-import Pagination from './components/Pagination/Pagination';
 import Select from './components/Select/Select';
 import Telephone, {
   CONTACTS,
@@ -30,7 +29,6 @@ export {
   MaintenanceBanner,
   Modal,
   OMBInfo,
-  Pagination,
   Select,
   Telephone,
   CONTACTS,
