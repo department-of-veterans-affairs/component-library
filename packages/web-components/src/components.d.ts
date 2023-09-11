@@ -961,6 +961,10 @@ export namespace Components {
          */
         "current": number;
         /**
+          * aria-describedby ids for improved accessibility when using the useDiv flag (v3 only)
+         */
+        "describedbyIds"?: string;
+        /**
           * Whether or not an analytics event will be fired.
          */
         "enableAnalytics"?: boolean;
@@ -988,6 +992,10 @@ export namespace Components {
           * The total number of segments in the progress bar
          */
         "total": number;
+        /**
+          * When true, this makes the segmented-progress-bar use a div instead of a heading (v3 only)
+         */
+        "useDiv"?: boolean;
         /**
           * Whether or not the component will use USWDS v3 styling.
          */
@@ -2816,6 +2824,10 @@ declare namespace LocalJSX {
          */
         "current": number;
         /**
+          * aria-describedby ids for improved accessibility when using the useDiv flag (v3 only)
+         */
+        "describedbyIds"?: string;
+        /**
           * Whether or not an analytics event will be fired.
          */
         "enableAnalytics"?: boolean;
@@ -2847,6 +2859,10 @@ declare namespace LocalJSX {
           * The total number of segments in the progress bar
          */
         "total": number;
+        /**
+          * When true, this makes the segmented-progress-bar use a div instead of a heading (v3 only)
+         */
+        "useDiv"?: boolean;
         /**
           * Whether or not the component will use USWDS v3 styling.
          */

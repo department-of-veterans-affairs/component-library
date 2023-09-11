@@ -26,8 +26,9 @@ const Template = ({
   centeredLabels,
   counters,
   headerLevel,
-  progressTerm
-
+  progressTerm,
+  'use-div': useDiv,
+  'describedby-ids': describedbyIds,
 }) => (
   // Wrapper for spacing when viewing in storybook
   // Component can be used without it
@@ -44,6 +45,8 @@ const Template = ({
       counters={counters}
       header-level={headerLevel}
       progress-term={progressTerm}
+      use-div={useDiv}
+      describedby-ids={describedbyIds}
     ></va-segmented-progress-bar>
   </div>
 );
@@ -56,7 +59,9 @@ const defaultArgs = {
   'heading-text': 'VA Benefits',
   'labels': undefined,
   'centered-labels': undefined,
-  'counters': undefined
+  'counters': undefined,
+  'use-div': false,
+  'describedby-ids': '',
 };
 
 export const Default = Template.bind(null);

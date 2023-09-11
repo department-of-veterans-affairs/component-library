@@ -70,6 +70,16 @@ export class VaSegmentedProgressBar {
   @Prop() headingText?: string;
 
   /**
+   * When true, this makes the segmented-progress-bar use a div instead of a heading (v3 only)
+   */
+  @Prop() useDiv?: boolean;
+
+  /**
+   * aria-describedby ids for improved accessibility when using the useDiv flag (v3 only)
+   */
+  @Prop() describedbyIds?: string;
+
+  /**
    * The event used to track usage of the component. This is emitted when the
    * component renders and enableAnalytics is true.
    */
@@ -94,7 +104,20 @@ export class VaSegmentedProgressBar {
   }
 
   render() {
-    const { current, total, label = `Step ${current} of ${total}`, uswds, labels, centeredLabels, counters, headingText, headerLevel, progressTerm } = this;
+    const {
+      current,
+      total,
+      label = `Step ${current} of ${total}`,
+      uswds,
+      labels,
+      centeredLabels,
+      counters,
+      headingText,
+      headerLevel,
+      progressTerm,
+      useDiv,
+      describedbyIds,
+    } = this;
     let labelsArray;
     if (labels) {
       labelsArray = labels.split(';');
@@ -103,7 +126,8 @@ export class VaSegmentedProgressBar {
 
     if (uswds) {
 
-      const Tag = `h${headerLevel}`;
+      // eslint-disable-next-line i18next/no-literal-string
+      const Tag = useDiv ? `div` : `h${headerLevel}`;
 
       const indicatorClass = classNames({
         'usa-step-indicator': true,
@@ -137,13 +161,12 @@ export class VaSegmentedProgressBar {
                           </span>
                         ) : null
                       }
-                      
                     </li>
                   ))}
                 </ol>
                 {
                   <div class="usa-step-indicator__header">
-                    <Tag class="usa-step-indicator__heading">
+                    <Tag class="usa-step-indicator__heading" aria-describedby={describedbyIds}>
                       <span class="usa-step-indicator__heading-counter">
                         <span class="usa-sr-only">{progressTerm}</span>
                         <span class="usa-step-indicator__current-step">{current}</span>
