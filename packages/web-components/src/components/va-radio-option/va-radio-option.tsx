@@ -12,7 +12,8 @@ import classnames from 'classnames';
 @Component({
   tag: 'va-radio-option',
   styleUrl: 'va-radio-option.scss',
-  shadow: true,
+  // TODO: With this `true`, `currentNode` gets set to the `va-radio-option`. `false` sets it to `<input>`.
+  shadow: false,
 })
 export class VaRadioOption {
   @Element() el: HTMLElement;
@@ -104,7 +105,7 @@ export class VaRadioOption {
             checked={checked}
             disabled={disabled}
             onClick={() => this.handleChange()}
-            tabIndex={-1}
+            // tabIndex={-1}
           />
           <label htmlFor={id} id="option-label" class="usa-radio__label">
             {label}

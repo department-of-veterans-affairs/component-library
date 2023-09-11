@@ -2,6 +2,7 @@
 .idea
 *.log
 tmp/
+*.code-workspace
 
 *.tern-port
 node_modules/
@@ -20,3 +21,4 @@ yarn-error.log*
 !.yarn/versions
 .pnp.*
 component-apps-and-owners-*.csv
+

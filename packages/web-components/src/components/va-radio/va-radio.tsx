@@ -97,6 +97,7 @@ export class VaRadio {
   @Listen('keydown')
   handleKeyDown(event: KeyboardEvent) {
     const currentNode = event.target as HTMLVaRadioOptionElement;
+    console.log(currentNode);
     const radioOptionNodes = (getSlottedNodes(this.el, 'va-radio-option') as HTMLVaRadioOptionElement[])
       .filter(node => !node.disabled);
 
@@ -184,13 +185,14 @@ export class VaRadio {
 
   private deselectCurrentNode(node: HTMLVaRadioOptionElement): void {
     node.removeAttribute('checked');
-    node.setAttribute('tabindex', '-1');
+    // node.setAttribute('tabindex', '-1');
   }
 
   private selectNextNode(node: HTMLVaRadioOptionElement): void {
     node.setAttribute('checked', '');
-    node.setAttribute('tabindex', '0');
+    // node.setAttribute('tabindex', '0');
     node.focus();
+    // node.click();
   }
 
   private getHeaderLevel() {
@@ -198,17 +200,18 @@ export class VaRadio {
     return number >= 1 && number <= 6 ? `h${number}` : null;
   }
 
-  componentDidLoad(): void {
-    getSlottedNodes(this.el, 'va-radio-option').forEach(
-      (node: HTMLVaRadioOptionElement, index: number) => {
-        if (index === 0) {
-          node.setAttribute('tabindex', '0');
-        } else {
-          node.setAttribute('tabindex', '-1');
-        }
-      },
-    );
-  }
+  // TODO: With this, the inital `currentNode` gets set to the `va-radio-option`. Without it, it gets set to the `<input>`.
+  // componentDidLoad(): void {
+  //   getSlottedNodes(this.el, 'va-radio-option').forEach(
+  //     (node: HTMLVaRadioOptionElement, index: number) => {
+  //       if (index === 0) {
+  //         node.setAttribute('tabindex', '0');
+  //       } else {
+  //         node.setAttribute('tabindex', '-1');
+  //       }
+  //     },
+  //   );
+  // }
 
   connectedCallback() {
     i18next.on('languageChanged', () => {
@@ -231,8 +234,9 @@ export class VaRadio {
         'usa-label--error': error
       });
       return (
-        <Host aria-invalid={error ? 'true' : 'false'} aria-label={ariaLabel}>
-          <fieldset class="usa-fieldset" role="radiogroup">
+        <Host>
+          <fieldset class="usa-fieldset">
+            {console.log(legendClass)}
             <legend class={legendClass} part="legend">
               {HeaderLevel ? (
                 <HeaderLevel part="header">{label}</HeaderLevel>

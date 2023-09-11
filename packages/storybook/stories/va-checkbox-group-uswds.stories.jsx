@@ -45,14 +45,24 @@ const vaCheckboxGroup = args => {
     >
       <va-checkbox uswds label="Sojourner Truth" name="example" value="1" />
       <va-checkbox uswds label="Frederick Douglass" name="example" value="2" />
-      <va-checkbox uswds label="Booker T. Washington" name="example" value="3" />
-      <va-checkbox uswds label="George Washington Carver" name="example" value="4" disabled />
+      <va-checkbox
+        uswds
+        label="Booker T. Washington"
+        name="example"
+        value="3"
+      />
+      <va-checkbox
+        uswds
+        label="George Washington Carver"
+        name="example"
+        value="4"
+        disabled
+      />
     </va-checkbox-group>
-  )
-}
+  );
+};
 
 const Template = args => vaCheckboxGroup(args);
-
 
 const USWDSTiled = ({
   'enable-analytics': enableAnalytics,
@@ -73,8 +83,8 @@ const USWDSTiled = ({
         hint={hint}
       >
         <va-checkbox
-          id="soujourner-truth"
-          label="Soujourner Truth"
+          id="sojourner-truth"
+          label="Sojourner Truth"
           checkbox-description="This is optional text that can be used to describe the label in more detail."
           name="group1"
           value="1"
@@ -120,14 +130,19 @@ const I18nTemplate = args => {
 
   return (
     <div>
-      <button onClick={e => setLang('es')} style={{fontSize: '16px'}}>Español</button>
-      <button onClick={e => setLang('en')} style={{fontSize: '16px'}}>English</button>
-      <button onClick={e => setLang('tl')} style={{fontSize: '16px'}}>Tagalog</button>
-      <div style={{marginTop: '20px'}}>
-        {vaCheckboxGroup(args)}
-      </div>
+      <button onClick={e => setLang('es')} style={{ fontSize: '16px' }}>
+        Español
+      </button>
+      <button onClick={e => setLang('en')} style={{ fontSize: '16px' }}>
+        English
+      </button>
+      <button onClick={e => setLang('tl')} style={{ fontSize: '16px' }}>
+        Tagalog
+      </button>
+      <div style={{ marginTop: '20px' }}>{vaCheckboxGroup(args)}</div>
     </div>
-)};
+  );
+};
 
 const defaultArgs = {
   'enable-analytics': false,
