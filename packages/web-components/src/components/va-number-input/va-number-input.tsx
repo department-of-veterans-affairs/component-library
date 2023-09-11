@@ -216,7 +216,7 @@ export class VaNumberInput {
             onBlur={handleBlur}
             />
             {messageAriaDescribedby && (
-              <span id="input-message" class="sr-only">
+              <span id="input-message" class="sr-only dd-privacy-hidden">
                 {messageAriaDescribedby}
               </span>
             )}
@@ -262,7 +262,7 @@ export class VaNumberInput {
               onBlur={handleBlur}
               />
               {messageAriaDescribedby && (
-                <span id="input-message" class="sr-only">
+                <span id="input-message" class="sr-only dd-privacy-hidden">
                   {messageAriaDescribedby}
                 </span>
               )}
