@@ -1,4 +1,3 @@
-import AdditionalInfo from './AdditionalInfo';
 import AlertBox, { ALERT_TYPE } from './AlertBox';
 import Breadcrumbs from './Breadcrumbs';
 import Checkbox from './Checkbox';
@@ -10,7 +9,6 @@ import MaintenanceBanner from './MaintenanceBanner';
 import Modal from './Modal';
 import OMBInfo from './OMBInfo';
 import Pagination from './Pagination';
-import Select from './Select';
 import Telephone, {
   CONTACTS,
   contactsMap,
@@ -22,7 +20,6 @@ import TextInput from './TextInput';
 import './i18n-setup';
 
 export {
-  AdditionalInfo,
   AlertBox,
   ALERT_TYPE,
   Breadcrumbs,
@@ -35,7 +32,6 @@ export {
   Modal,
   OMBInfo,
   Pagination,
-  Select,
   Telephone,
   CONTACTS,
   contactsMap,

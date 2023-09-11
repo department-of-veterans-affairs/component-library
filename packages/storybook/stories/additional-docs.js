@@ -74,10 +74,6 @@ export const additionalDocs = {
     maturityCategory: CAUTION,
     maturityLevel: AVAILABLE,
   },
-  'Select - React': {
-    maturityCategory: DONT_USE,
-    maturityLevel: DEPRECATED,
-  },
   // MDX
   'Sidenav': {
     guidanceHref: 'sidenav',

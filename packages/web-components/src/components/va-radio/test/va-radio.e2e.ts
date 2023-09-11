@@ -441,7 +441,10 @@ describe('va-radio', () => {
     expect(await options[0].getProperty('checked')).toBeTruthy();
     expect(await options[1].getProperty('checked')).toBeFalsy();
 
-    await options[1].click();
+    //without specifying center of element with this offset the click has no effect
+    await options[1].click({
+      offset: { x: 0, y: 0 }
+    });
 
     expect(await options[0].getProperty('checked')).toBeFalsy();
     expect(await options[1].getProperty('checked')).toBeTruthy();
@@ -493,7 +496,10 @@ describe('va-radio', () => {
       `);
     const analyticsSpy = await page.spyOnEvent('component-library-analytics');
     const inputEl = await page.find('va-radio-option');
-    await inputEl.click();
+    //without specifying center of element with this offset the click has no effect
+    await inputEl.click({
+      offset: { x: 0, y: 0 }
+    });
 
     expect(analyticsSpy).toHaveReceivedEventDetail({
       action: 'change',
@@ -531,7 +537,10 @@ describe('va-radio', () => {
 
     const changeSpy = await page.spyOnEvent('vaValueChange');
     const inputEl = await page.find('va-radio-option');
-    await inputEl.click();
+    //without specifying center of element with this offset the click has no effect
+    await inputEl.click({
+      offset: { x: 0, y: 0 }
+    });
 
     expect(changeSpy).toHaveReceivedEventDetail({ value: 'one' });
   });
