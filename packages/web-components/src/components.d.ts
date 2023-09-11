@@ -1087,7 +1087,7 @@ export namespace Components {
          */
         "autocomplete"?: string;
         /**
-          * Whether the component should show a character count message.  Has no effect without uswds and maxlength being set.
+          * Whether the component should show a character count message. Has no effect without uswds and maxlength being set.
          */
         "charcount"?: boolean;
         /**
@@ -2962,7 +2962,7 @@ declare namespace LocalJSX {
          */
         "autocomplete"?: string;
         /**
-          * Whether the component should show a character count message.  Has no effect without uswds and maxlength being set.
+          * Whether the component should show a character count message. Has no effect without uswds and maxlength being set.
          */
         "charcount"?: boolean;
         /**
