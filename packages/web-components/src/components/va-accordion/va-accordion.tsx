@@ -162,20 +162,8 @@ export class VaAccordion {
   // Expand or Collapse All Function for Button Click
   private expandCollapseAll = (expanded: boolean) => {
     this.expanded = expanded;
-    getSlottedNodes(this.el, 'va-accordion-item').forEach((item) => {
-      if (this.uswds) {
-        let button = (item as Element).shadowRoot.querySelector('button.usa-accordion__button') as HTMLButtonElement,
-            buttonExpanded = button.getAttribute('aria-expanded') === 'true';
-        if (expanded && !buttonExpanded) {
-          button.click();
-        }
-        if (!expanded && buttonExpanded) {
-          button.click();
-        }
-      } else {
-        /* eslint-disable-next-line i18next/no-literal-string */
-        (item as Element).setAttribute('open', `${expanded}`)
-      }
+    getSlottedNodes(this.el, 'va-accordion-item').forEach((item:HTMLElement) => {
+      item.setAttribute('open', `${expanded}`)
     });
   };
 
