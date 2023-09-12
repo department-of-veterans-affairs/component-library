@@ -208,7 +208,7 @@ SignInOrToolPrompt.args = {
         appeals on your mobile device. Download the{' '}
         <strong>VA: Health and Benefits</strong> mobile app to get started.
       </p>
-      <va-button primary-alternate text="Sign-in to VA.gov"></va-button>
+      <va-button uswds primary-alternate text="Sign-in to VA.gov"></va-button>
     </>
   ),
   status: 'continue',
@@ -232,7 +232,7 @@ SignInToStartYourApplication.args = {
         <li>You can save your work in progress. You'll have 60 days from when you start or make updates to your application to come back and finish it.</li>
       </ul>
       <p><strong>Note:</strong> You can sign in after you start your application. But you'll lose any information you already filled in.</p>
-      <button class="usa-button-primary" type="button">Sign in to start your application</button>
+      <va-button uswds text="Sign in to start your application"/>
       <p>
         <a href="#start">Start your application without signing in</a>
       </p>

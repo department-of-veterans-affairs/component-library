@@ -63,10 +63,10 @@ const DynamicCrumbsTemplate = ({
 
   return (
     <div>
-      <button onClick={e => addCrumb()}>Add Crumb</button>
-      <button onClick={e => removeCrumb()}>Remove Crumb</button>
-      <button onClick={e => replaceCrumbs()}>Replace Crumbs</button>
-      <button onClick={e => resetCrumbs()}>Reset Crumbs</button>
+      <va-button uswds onClick={e => addCrumb()} text="Add Crumb"/>
+      <va-button uswds onClick={e => removeCrumb()} text="Remove Crumb"/>
+      <va-button uswds onClick={e => replaceCrumbs()} text="Replace Crumbs"/>
+      <va-button uswds onClick={e => resetCrumbs()} text="Reset Crumbs"/>
       <br />
       {crumbs.length > 0 && (
         <VaBreadcrumbs

@@ -119,15 +119,10 @@ const I18nTemplate = ({
   }, [lang]);
   return (
     <>
-      <button style={{ fontSize: '16px' }} onClick={e => setLang('es')}>
-        Español
-      </button>
-      <button style={{ fontSize: '16px' }} onClick={e => setLang('en')}>
-        English
-      </button>
-      <button style={{ fontSize: '16px' }} onClick={e => setLang('tl')}>
-        Tagalog
-      </button>
+      <va-button uswds onClick={e => setLang('es')} text="Español"/>
+      <va-button uswds onClick={e => setLang('en')} text="English"/>
+      <va-button uswds onClick={e => setLang('tl')} text="Tagalog"/>
+      
       <va-text-input
         uswds={uswds}
         name={name}
