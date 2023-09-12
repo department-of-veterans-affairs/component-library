@@ -234,7 +234,7 @@ export class VaMemorableDate {
       uswds,
       monthSelect,
     } = this;
-    
+
     const [year, month, day] = (value || '').split('-');
     const describedbyIds = ['dateHint', hint ? 'hint' : '']
       .filter(Boolean)
@@ -260,7 +260,7 @@ export class VaMemorableDate {
             invalid={this.invalidMonth}
             onVaSelect={handleDateChange}
             class='usa-form-group--month-select'
-            reflectInputError={error ? true : false}
+            reflectInputError={error === 'month-range' ? true : false}
             value={month ? String(parseInt(month)) : month}
             ref={(field) => this.monthfield = field}
           >
@@ -287,7 +287,7 @@ export class VaMemorableDate {
           value={month?.toString()}
           onInput={handleDateChange}
           class="usa-form-group--month-input memorable-date-input"
-          reflectInputError={error ? true : false}
+            reflectInputError={error === 'month-range' ? true : false}
           inputmode="numeric"
           type="text"
           ref={(field) => this.monthfield = field}
@@ -331,7 +331,7 @@ export class VaMemorableDate {
                   value={day?.toString()}
                   onInput={handleDateChange}
                   class="usa-form-group--day-input memorable-date-input"
-                  reflectInputError={error ? true : false}
+                  reflectInputError={error === 'day-range' ? true : false}
                   inputmode="numeric"
                   type="text"
                   ref={(field) => this.dayfield = field}
@@ -351,7 +351,7 @@ export class VaMemorableDate {
                   value={year?.toString()}
                   onInput={handleDateChange}
                   class="usa-form-group--year-input memorable-date-input"
-                  reflectInputError={error ? true : false}
+                  reflectInputError={error === 'year-range' ? true : false}
                   inputmode="numeric"
                   type="text"
                   ref={(field) => this.yearfield = field}

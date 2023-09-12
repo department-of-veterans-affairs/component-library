@@ -58,16 +58,16 @@
   border: 0.1rem solid var(--color-gray);
 }
 
-:host([invalid-month]:not([uswds])) va-select.input-month::part(select),
-:host([invalid-month]:not([uswds])) va-text-input.input-month::part(input) {
+:host([error="month-range"]:not([error='']):not([uswds])) va-select.input-month::part(select),
+:host([error="month-range"]:not([error='']):not([uswds])) va-text-input.input-month::part(input) {
   border: 4px solid var(--color-secondary-dark);
 }
 
-:host([invalid-day]:not([uswds])) va-text-input.input-day::part(input) {
+:host([error="day-range"]:not([error='']):not([uswds])) va-text-input.input-day::part(input) {
   border: 4px solid var(--color-secondary-dark);
 }
 
-:host([invalid-year]:not([uswds])) va-text-input.input-year::part(input) {
+:host([error="year-range"]:not([error='']):not([uswds])) va-text-input.input-year::part(input) {
   border: 4px solid var(--color-secondary-dark);
 }
 
