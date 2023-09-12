@@ -8,7 +8,6 @@ import LoadingIndicator from './components/LoadingIndicator/LoadingIndicator';
 import MaintenanceBanner from './components/MaintenanceBanner/MaintenanceBanner';
 import Modal from './components/Modal/Modal';
 import OMBInfo from './components/OMBInfo/OMBInfo';
-import Select from './components/Select/Select';
 import Telephone, {
   CONTACTS,
   contactsMap,
@@ -29,7 +28,6 @@ export {
   MaintenanceBanner,
   Modal,
   OMBInfo,
-  Select,
   Telephone,
   CONTACTS,
   contactsMap,

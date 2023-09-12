@@ -6,11 +6,14 @@ const today = require('./today');
 
 const componentsToKeep = [
   'AlertBox',
+  'Breadcrumbs',
   'Checkbox',
   'ExpandingGroup',
   'IconSearch',
   'LoadingIndicator',
-  'Select',
+  'Modal',
+  'OMBInfo',
+  'Telephone',
   'TextInput',
 ];
 
