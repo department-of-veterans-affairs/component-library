@@ -256,4 +256,47 @@ describe('va-checkbox-group', () => {
 
     expect(await options[0].getProperty('checked')).toBeTruthy();
   });
+
+  it('uswds v3 renders H3 header in legend if included', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-checkbox-group uswds label="Testing H3" label-header-level="3" />');
+
+    const legend = await page.find('va-checkbox-group >>> legend');
+    expect(legend).toEqualHtml(`
+    <legend class="usa-legend">
+      <h3 part="header">Testing H3</h3>
+    </legend>
+  `);
+  });
+
+  it('renders H5 header in legend if included', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-checkbox-group uswds label="Testing H5" label-header-level="5" required></va-checkbox-group>');
+
+    const legend = await page.find('va-checkbox-group >>> legend');
+    expect(legend).toEqualHtml(`
+      <legend class="usa-legend">
+        <h5 part="header">Testing H5</h5>
+        <span class="usa-label--required">
+          required
+        </span>
+      </legend>
+ `);
+  });
+
+  it('renders legend text and ignores adding a header if an invalid level is included', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-checkbox-group uswds label="Testing" label-header-level="7" required></va-checkbox-group>');
+
+    const legend = await page.find('va-checkbox-group >>> legend');
+    expect(legend).toEqualHtml(`
+      <legend class="usa-legend">
+        Testing
+        <span class="usa-label--required">
+          required
+        </span>
+      </legend>
+   `);
+  });
+
 });

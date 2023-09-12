@@ -31,6 +31,7 @@ const vaCheckboxGroup = args => {
     label,
     required,
     hint,
+    'label-header-level': labelHeaderLevel,
     ...rest
   } = args;
   return (
@@ -40,6 +41,7 @@ const vaCheckboxGroup = args => {
       label={label}
       required={required}
       hint={hint}
+      label-header-level={labelHeaderLevel}
     >
       <va-checkbox label="Option one" name="example" value="1" />
       <va-checkbox label="Option two" name="example" value="2" />
@@ -73,6 +75,7 @@ const defaultArgs = {
   'required': false,
   'error': null,
   'hint': null,
+  'label-header-level': '',
 };
 
 export const Default = Template.bind(null);
@@ -80,6 +83,13 @@ Default.args = {
   ...defaultArgs,
 };
 Default.argTypes = propStructure(checkBoxGroupDocs);
+
+export const LabelHeader = Template.bind(null);
+LabelHeader.args = {
+  ...defaultArgs,
+  label: 'This is a label containing an H3',
+  'label-header-level': '3',
+};
 
 export const WithHintText = Template.bind(null);
 WithHintText.args = {

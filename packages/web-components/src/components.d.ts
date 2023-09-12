@@ -324,6 +324,10 @@ export namespace Components {
          */
         "label": string;
         /**
+          * Insert a header with defined level inside the label (legend)
+         */
+        "labelHeaderLevel"?: string;
+        /**
           * Whether or not this input field is required.
          */
         "required"?: boolean;
@@ -2046,6 +2050,10 @@ declare namespace LocalJSX {
           * The text label for the checkbox group.
          */
         "label": string;
+        /**
+          * Insert a header with defined level inside the label (legend)
+         */
+        "labelHeaderLevel"?: string;
         /**
           * The event used to track usage of the component. This is emitted when an input value changes and enableAnalytics is true.
          */
