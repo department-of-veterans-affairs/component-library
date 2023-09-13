@@ -367,6 +367,48 @@ describe('va-text-input', () => {
     expect(maxlengthMessageEl).toBeNull();
   });
 
+  it('renders H3 header in label if included', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-text-input label="Testing H3" label-header-level="3"> />');
+
+    const label = await page.find('va-text-input >>> label');
+    expect(label).toEqualHtml(`
+      <label for="inputField" part="label">
+        <h3 part="header">Testing H3</h3>
+      </label>
+    `);
+  });
+
+  it('renders H5 header in label if included', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-text-input label="Testing H5" label-header-level="5" required> />');
+
+    const label = await page.find('va-text-input >>> label');
+    expect(label).toEqualHtml(`
+      <label for="inputField" part="label">
+        <h5 part="header">Testing H5</h5>
+        <span class="required">
+          required
+        </span>
+      </label>
+ `);
+  });
+
+  it('renders label text and ignores adding a header if an invalid level is included', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-text-input label="Testing" label-header-level="7" required> />');
+
+    const label = await page.find('va-text-input >>> label');
+    expect(label).toEqualHtml(`
+      <label for="inputField" part="label">
+        Testing
+        <span class="required">
+          required
+        </span>
+      </label>
+   `);
+  });
+
   // Begin USWDS tests
   it('uswds v3 renders', async () => {
     const page = await newE2EPage();
@@ -739,5 +781,47 @@ describe('va-text-input', () => {
 
     const maxlengthMessageEl = await page.find('va-text-input >>> #maxlength-message');
     expect(maxlengthMessageEl).toBeNull();
+  });
+
+  it('renders H3 header in label if included', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-text-input label="Testing H3" label-header-level="3" uswds />');
+
+    const label = await page.find('va-text-input >>> label');
+    expect(label).toEqualHtml(`
+      <label class="usa-label" for="inputField" part="label">
+        <h3 part="header">Testing H3</h3>
+      </label>
+    `);
+  });
+
+  it('renders H5 header in label if included', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-text-input label="Testing H5" label-header-level="5" required uswds />');
+
+    const label = await page.find('va-text-input >>> label');
+    expect(label).toEqualHtml(`
+      <label class="usa-label" for="inputField" part="label">
+        <h5 part="header">Testing H5</h5>
+        <span class="usa-label--required">
+          required
+        </span>
+      </label>
+ `);
+  });
+
+  it('renders label text and ignores adding a header if an invalid level is included', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-text-input label="Testing" label-header-level="7" required uswds />');
+
+    const label = await page.find('va-text-input >>> label');
+    expect(label).toEqualHtml(`
+      <label class="usa-label" for="inputField" part="label">
+        Testing
+        <span class="usa-label--required">
+          required
+        </span>
+      </label>
+   `);
   });
 });

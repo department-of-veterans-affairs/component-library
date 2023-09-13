@@ -40,6 +40,7 @@ export default {
 const defaultArgs = {
   'name': 'my-input',
   'label': 'Text input label',
+  'label-header-level': '',
   'autocomplete': undefined,
   'enable-analytics': false,
   'required': false,
@@ -58,6 +59,7 @@ const defaultArgs = {
 const Template = ({
   name,
   label,
+  'label-header-level': labelHeaderLevel,
   autocomplete,
   'enable-analytics': enableAnalytics,
   required,
@@ -76,6 +78,7 @@ const Template = ({
     <va-text-input
       name={name}
       label={label}
+      label-header-level={labelHeaderLevel}
       autocomplete={autocomplete}
       enable-analytics={enableAnalytics}
       required={required}
@@ -153,8 +156,8 @@ const WidthsTemplate = ({
         name={name}
         label='My input - xs'
         value={value}
-      />  
-  
+      />
+
       <va-text-input
         width="sm"
         name={name}
@@ -196,6 +199,13 @@ const WidthsTemplate = ({
 export const Default = Template.bind(null);
 Default.args = { ...defaultArgs };
 Default.argTypes = propStructure(textInputDocs);
+
+export const WithHeader = Template.bind(null);
+WithHeader.args = {
+  ...defaultArgs,
+  'label-header-level': '3',
+  label: 'My input with H3 header',
+};
 
 export const Error = Template.bind(null);
 Error.args = { ...defaultArgs, error: 'This is an error message' };
