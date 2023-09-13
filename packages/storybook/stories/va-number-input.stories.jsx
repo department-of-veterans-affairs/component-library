@@ -25,6 +25,7 @@ export default {
 const defaultArgs = {
   'name': 'my-input',
   'label': 'My input',
+  // 'label-header-level': '',
   'enable-analytics': false,
   'required': false,
   'error': undefined,
@@ -38,9 +39,10 @@ const defaultArgs = {
 };
 
 const vaNumberInput = args => {
-  const {   
+  const {
     name,
     label,
+    'label-header-level': labelHeaderLevel,
     'enable-analytics': enableAnalytics,
     required,
     error,
@@ -52,11 +54,12 @@ const vaNumberInput = args => {
     currency,
     'message-aria-describedby': messageAriaDescribedby,
     ...rest
-  } = args;
+  } = args; console.log(args)
   return (
     <va-number-input
       name={name}
       label={label}
+      label-header-level={labelHeaderLevel}
       enable-analytics={enableAnalytics}
       required={required}
       error={error}
@@ -111,8 +114,8 @@ const WidthsTemplate = ({
         name={name}
         label='My input - xs'
         value={value}
-      />  
-  
+      />
+
       <va-number-input
         width="sm"
         name={name}
@@ -154,6 +157,13 @@ const WidthsTemplate = ({
 export const Default = Template.bind(null);
 Default.args = { ...defaultArgs };
 Default.argTypes = propStructure(numberInputDocs);
+
+export const WithHeader = Template.bind(null);
+WithHeader.args = {
+  ...defaultArgs,
+  label: 'My input inside H3',
+  'label-header-level': '3',
+};
 
 export const Error = Template.bind(null);
 Error.args = { ...defaultArgs, error: 'This is an error message' };

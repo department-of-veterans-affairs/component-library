@@ -11,6 +11,7 @@ import {
 } from '@stencil/core';
 import classnames from 'classnames';
 import i18next from 'i18next';
+import { getHeaderLevel } from '../../utils/utils';
 
 /**
  * @nativeHandler onInput
@@ -35,6 +36,11 @@ export class VaNumberInput {
    * The label for the text input.
    */
   @Prop() label?: string;
+
+  /**
+   * Insert a header with defined level inside the label (legend)
+   */
+  @Prop() labelHeaderLevel?: string;
 
   /**
    * The error message to render.
@@ -163,6 +169,7 @@ export class VaNumberInput {
       messageAriaDescribedby,
     } = this;
 
+    const HeaderLevel = getHeaderLevel(this.labelHeaderLevel);
     const ariaDescribedbyIds = `${messageAriaDescribedby ? 'input-message' : ''} ${error ? 'input-error-message' : ''}`
     .trim() || null; // Null so we don't add the attribute if we have an empty string
     const inputMode = inputmode ? inputmode : 'numeric';
@@ -181,7 +188,11 @@ export class VaNumberInput {
         <Host>
           {label && (
             <label htmlFor="inputField" class={labelClasses}>
-              {label}
+              {HeaderLevel ? (
+                <HeaderLevel part="header">{label}</HeaderLevel>
+              ) : (
+                label
+              )}
               {required && (
                 <span class="usa-label--required">
                   {' '}
@@ -230,7 +241,11 @@ export class VaNumberInput {
       return (
         <Host>
           <label htmlFor="inputField">
-            {label}{' '}
+            {HeaderLevel ? (
+              <HeaderLevel part="header">{label}</HeaderLevel>
+            ) : (
+              label
+            )}{' '}
             {required && <span class="required">{i18next.t('required')}</span>}
             {hint && <span class="hint-text">{hint}</span>}
           </label>

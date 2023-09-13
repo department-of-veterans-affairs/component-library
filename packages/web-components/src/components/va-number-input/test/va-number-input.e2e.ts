@@ -23,6 +23,39 @@ describe('va-number-input', () => {
     `);
   });
 
+  it('renders H3 header in label if included', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-number-input label="Testing H3" label-header-level="3" />');
+    const label = await page.find('va-number-input >>> label');
+    expect(label).toEqualHtml(`
+      <label for="inputField">
+        <h3 part="header">Testing H3</h3>
+      </label>
+    `);
+  });
+  it('renders H5 header in label if included', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-number-input label="Testing H5" label-header-level="5" required />');
+    const label = await page.find('va-number-input >>> label');
+    expect(label).toEqualHtml(`
+      <label for="inputField">
+        <h5 part="header">Testing H5</h5>
+        <span class="required"></span>
+      </label>
+ `);
+  });
+  it('renders label text and ignores adding a header if an invalid level is included', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-number-input label="Testing" label-header-level="7" required />');
+    const label = await page.find('va-number-input >>> label');
+    expect(label).toEqualHtml(`
+      <label for="inputField">
+        Testing
+        <span class="required"></span>
+      </label>
+   `);
+  });
+
   it('renders an error message', async () => {
     const page = await newE2EPage();
     await page.setContent('<va-number-input error="This is a mistake" />');
@@ -213,6 +246,39 @@ describe('va-number-input', () => {
         </mock:shadow-root>
       </va-number-input>
     `);
+  });
+
+  it('uswds renders H3 header in label if included', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-number-input label="Testing H3" label-header-level="3" uswds />');
+    const label = await page.find('va-number-input >>> label');
+    expect(label).toEqualHtml(`
+      <label class="usa-label" for="inputField">
+        <h3 part="header">Testing H3</h3>
+      </label>
+    `);
+  });
+  it('uswds renders H5 header in label if included', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-number-input label="Testing H5" label-header-level="5" required uswds />');
+    const label = await page.find('va-number-input >>> label');
+    expect(label).toEqualHtml(`
+      <label class="usa-label" for="inputField">
+        <h5 part="header">Testing H5</h5>
+        <span class="usa-label--required"></span>
+      </label>
+ `);
+  });
+  it('uswds renders label text and ignores adding a header if an invalid level is included', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-number-input label="Testing" label-header-level="7" required uswds />');
+    const label = await page.find('va-number-input >>> label');
+    expect(label).toEqualHtml(`
+      <label class="usa-label" for="inputField">
+        Testing
+        <span class="usa-label--required"></span>
+      </label>
+   `);
   });
 
   it('uswds renders an error message', async () => {

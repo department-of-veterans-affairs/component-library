@@ -8,6 +8,7 @@
 
 @import '../../mixins/form-field-error.css';
 @import '../../mixins/hint-text.css';
+@import '../../mixins/headers.css';
 
 :host(:not([uswds])) input[type='number'] {
   -moz-appearance: textfield;

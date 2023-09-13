@@ -77,3 +77,13 @@ export function getCharacterMessage(
 export function makeArray(start: number, end: number) {
   return Array.from({ length: end - start + 1 }, (_, i) => start + i);
 }
+
+/**
+ * Takes header level string value, parses and ensures it is a valid heading
+ * level, and returns a `H#` as a string to be rendered inside a label/legend
+ * @returns
+ */
+export function getHeaderLevel(level: string) {
+  const number = parseInt(level, 10);
+  return number >= 1 && number <= 6 ? `h${number}` : null;
+}
