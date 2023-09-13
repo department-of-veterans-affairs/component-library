@@ -369,7 +369,7 @@ describe('va-text-input', () => {
 
   it('renders H3 header in label if included', async () => {
     const page = await newE2EPage();
-    await page.setContent('<va-text-input label="Testing H3" label-header-level="3">/>');
+    await page.setContent('<va-text-input label="Testing H3" label-header-level="3" />');
 
     const label = await page.find('va-text-input >>> label');
     expect(label).toEqualHtml(`
