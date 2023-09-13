@@ -192,9 +192,9 @@ const I18nTemplate = args => {
 
   return (
     <div>
-      <button onClick={e => setLang('es')}>Español</button>
-      <button onClick={e => setLang('en')}>English</button>
-      <button onClick={e => setLang('tl')}>Tagalog</button>
+      <va-button uswds onClick={e => setLang('es')} text="Español"/>
+      <va-button uswds onClick={e => setLang('en')} text="English"/>
+      <va-button uswds onClick={e => setLang('tl')} text="Tagalog"/>
       <va-accordion uswds>
         <va-accordion-item id="first" header="First Amendment" uswds>
           <p>
