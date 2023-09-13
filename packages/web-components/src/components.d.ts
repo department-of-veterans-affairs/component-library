@@ -332,6 +332,8 @@ export namespace Components {
          */
         "uswds"?: boolean;
     }
+    interface VaCrisisLineModal {
+    }
     interface VaDate {
         /**
           * Whether or not an analytics event will be fired.
@@ -557,6 +559,10 @@ export namespace Components {
           * Set the default date value must be in YYYY-MM-DD format.
          */
         "value"?: string;
+    }
+    interface VaMinimalHeader {
+        "header"?: string;
+        "subheader"?: string;
     }
     interface VaModal {
         /**
@@ -1435,6 +1441,12 @@ declare global {
         prototype: HTMLVaCheckboxGroupElement;
         new (): HTMLVaCheckboxGroupElement;
     };
+    interface HTMLVaCrisisLineModalElement extends Components.VaCrisisLineModal, HTMLStencilElement {
+    }
+    var HTMLVaCrisisLineModalElement: {
+        prototype: HTMLVaCrisisLineModalElement;
+        new (): HTMLVaCrisisLineModalElement;
+    };
     interface HTMLVaDateElement extends Components.VaDate, HTMLStencilElement {
     }
     var HTMLVaDateElement: {
@@ -1482,6 +1494,12 @@ declare global {
     var HTMLVaMemorableDateElement: {
         prototype: HTMLVaMemorableDateElement;
         new (): HTMLVaMemorableDateElement;
+    };
+    interface HTMLVaMinimalHeaderElement extends Components.VaMinimalHeader, HTMLStencilElement {
+    }
+    var HTMLVaMinimalHeaderElement: {
+        prototype: HTMLVaMinimalHeaderElement;
+        new (): HTMLVaMinimalHeaderElement;
     };
     interface HTMLVaModalElement extends Components.VaModal, HTMLStencilElement {
     }
@@ -1635,6 +1653,7 @@ declare global {
         "va-card": HTMLVaCardElement;
         "va-checkbox": HTMLVaCheckboxElement;
         "va-checkbox-group": HTMLVaCheckboxGroupElement;
+        "va-crisis-line-modal": HTMLVaCrisisLineModalElement;
         "va-date": HTMLVaDateElement;
         "va-featured-content": HTMLVaFeaturedContentElement;
         "va-file-input": HTMLVaFileInputElement;
@@ -1643,6 +1662,7 @@ declare global {
         "va-loading-indicator": HTMLVaLoadingIndicatorElement;
         "va-maintenance-banner": HTMLVaMaintenanceBannerElement;
         "va-memorable-date": HTMLVaMemorableDateElement;
+        "va-minimal-header": HTMLVaMinimalHeaderElement;
         "va-modal": HTMLVaModalElement;
         "va-need-help": HTMLVaNeedHelpElement;
         "va-notification": HTMLVaNotificationElement;
@@ -2059,6 +2079,8 @@ declare namespace LocalJSX {
          */
         "uswds"?: boolean;
     }
+    interface VaCrisisLineModal {
+    }
     interface VaDate {
         /**
           * Whether or not an analytics event will be fired.
@@ -2332,6 +2354,10 @@ declare namespace LocalJSX {
           * Set the default date value must be in YYYY-MM-DD format.
          */
         "value"?: string;
+    }
+    interface VaMinimalHeader {
+        "header"?: string;
+        "subheader"?: string;
     }
     interface VaModal {
         /**
@@ -3116,6 +3142,7 @@ declare namespace LocalJSX {
         "va-card": VaCard;
         "va-checkbox": VaCheckbox;
         "va-checkbox-group": VaCheckboxGroup;
+        "va-crisis-line-modal": VaCrisisLineModal;
         "va-date": VaDate;
         "va-featured-content": VaFeaturedContent;
         "va-file-input": VaFileInput;
@@ -3124,6 +3151,7 @@ declare namespace LocalJSX {
         "va-loading-indicator": VaLoadingIndicator;
         "va-maintenance-banner": VaMaintenanceBanner;
         "va-memorable-date": VaMemorableDate;
+        "va-minimal-header": VaMinimalHeader;
         "va-modal": VaModal;
         "va-need-help": VaNeedHelp;
         "va-notification": VaNotification;
@@ -3166,6 +3194,7 @@ declare module "@stencil/core" {
             "va-card": LocalJSX.VaCard & JSXBase.HTMLAttributes<HTMLVaCardElement>;
             "va-checkbox": LocalJSX.VaCheckbox & JSXBase.HTMLAttributes<HTMLVaCheckboxElement>;
             "va-checkbox-group": LocalJSX.VaCheckboxGroup & JSXBase.HTMLAttributes<HTMLVaCheckboxGroupElement>;
+            "va-crisis-line-modal": LocalJSX.VaCrisisLineModal & JSXBase.HTMLAttributes<HTMLVaCrisisLineModalElement>;
             "va-date": LocalJSX.VaDate & JSXBase.HTMLAttributes<HTMLVaDateElement>;
             "va-featured-content": LocalJSX.VaFeaturedContent & JSXBase.HTMLAttributes<HTMLVaFeaturedContentElement>;
             "va-file-input": LocalJSX.VaFileInput & JSXBase.HTMLAttributes<HTMLVaFileInputElement>;
@@ -3174,6 +3203,7 @@ declare module "@stencil/core" {
             "va-loading-indicator": LocalJSX.VaLoadingIndicator & JSXBase.HTMLAttributes<HTMLVaLoadingIndicatorElement>;
             "va-maintenance-banner": LocalJSX.VaMaintenanceBanner & JSXBase.HTMLAttributes<HTMLVaMaintenanceBannerElement>;
             "va-memorable-date": LocalJSX.VaMemorableDate & JSXBase.HTMLAttributes<HTMLVaMemorableDateElement>;
+            "va-minimal-header": LocalJSX.VaMinimalHeader & JSXBase.HTMLAttributes<HTMLVaMinimalHeaderElement>;
             "va-modal": LocalJSX.VaModal & JSXBase.HTMLAttributes<HTMLVaModalElement>;
             "va-need-help": LocalJSX.VaNeedHelp & JSXBase.HTMLAttributes<HTMLVaNeedHelpElement>;
             "va-notification": LocalJSX.VaNotification & JSXBase.HTMLAttributes<HTMLVaNotificationElement>;
