@@ -13,6 +13,7 @@ import {
 import classnames from 'classnames';
 import i18next from 'i18next';
 import { Build } from '@stencil/core';
+import { getHeaderLevel } from '../../utils/utils';
 
 if (Build.isTesting) {
   // Make i18next.t() return the key instead of the value
@@ -101,11 +102,6 @@ export class VaCheckboxGroup {
     });
   }
 
-  private getHeaderLevel() {
-    const number = parseInt(this.labelHeaderLevel, 10);
-    return number >= 1 && number <= 6 ? `h${number}` : null;
-  }
-
   connectedCallback() {
     i18next.on('languageChanged', () => {
       forceUpdate(this.el);
@@ -118,7 +114,7 @@ export class VaCheckboxGroup {
 
   render() {
     const { label, required, error, hint, uswds } = this;
-    const HeaderLevel = this.getHeaderLevel();
+    const HeaderLevel = getHeaderLevel(this.labelHeaderLevel);
 
     if (uswds) {
       const legendClass = classnames({
