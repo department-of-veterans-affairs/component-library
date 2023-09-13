@@ -68,6 +68,11 @@ export class VaCheckboxGroup {
   @Prop() uswds?: boolean = false;
 
   /**
+   * Insert a header with defined level inside the label (legend)
+   */
+  @Prop() labelHeaderLevel?: string;
+
+  /**
    * The event used to track usage of the component. This is emitted when an
    * input value changes and enableAnalytics is true.
    */
@@ -96,6 +101,11 @@ export class VaCheckboxGroup {
     });
   }
 
+  private getHeaderLevel() {
+    const number = parseInt(this.labelHeaderLevel, 10);
+    return number >= 1 && number <= 6 ? `h${number}` : null;
+  }
+
   connectedCallback() {
     i18next.on('languageChanged', () => {
       forceUpdate(this.el);
@@ -108,6 +118,7 @@ export class VaCheckboxGroup {
 
   render() {
     const { label, required, error, hint, uswds } = this;
+    const HeaderLevel = this.getHeaderLevel();
 
     if (uswds) {
       const legendClass = classnames({
@@ -118,7 +129,11 @@ export class VaCheckboxGroup {
         <Host role="group">
           <fieldset class="usa-fieldset">
             <legend class={legendClass}>
-              {label}&nbsp;
+              {HeaderLevel ? (
+                <HeaderLevel part="header">{label}</HeaderLevel>
+              ) : (
+                label
+              )}&nbsp;
               {required && <span class="usa-label--required">{i18next.t('required')}</span>}
             </legend>
             {hint && <span class="usa-hint">{hint}</span>}
@@ -139,7 +154,11 @@ export class VaCheckboxGroup {
         <Host role="group">
           <fieldset>
             <legend>
-              {label}
+              {HeaderLevel ? (
+                <HeaderLevel part="header">{label}</HeaderLevel>
+              ) : (
+                label
+              )}
               {required && (
                 <span class="required">{i18next.t('required')}</span>
               )}
