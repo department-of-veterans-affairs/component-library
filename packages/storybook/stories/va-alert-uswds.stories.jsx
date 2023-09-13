@@ -208,7 +208,7 @@ SignInOrToolPrompt.args = {
         appeals on your mobile device. Download the{' '}
         <strong>VA: Health and Benefits</strong> mobile app to get started.
       </p>
-      <va-button uswds primary-alternate text="Sign-in to VA.gov"></va-button>
+      <va-button uswds primary-alternate text="Sign-in to VA.gov"/>
     </>
   ),
   status: 'continue',
