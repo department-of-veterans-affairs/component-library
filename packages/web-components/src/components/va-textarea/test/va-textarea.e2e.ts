@@ -42,6 +42,48 @@ describe('va-textarea', () => {
     expect(hintTextElement.innerText).toContain('This is hint text');
   });
 
+  it('renders H3 header in label if included', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-textarea label="Testing H3" label-header-level="3" />');
+
+    const label = await page.find('va-textarea >>> label');
+    expect(label).toEqualHtml(`
+      <label for="textarea">
+        <h3 part="header">Testing H3</h3>
+      </label>
+    `);
+  });
+
+  it('renders H5 header in label if included', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-textarea label="Testing H5" label-header-level="5" required />');
+
+    const label = await page.find('va-textarea >>> label');
+    expect(label).toEqualHtml(`
+      <label for="textarea">
+        <h5 part="header">Testing H5</h5>
+        <span class="required">
+          required
+        </span>
+      </label>
+ `);
+  });
+
+  it('renders label text and ignores adding a header if an invalid level is included', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-textarea label="Testing" label-header-level="7" required />');
+
+    const label = await page.find('va-textarea >>> label');
+    expect(label).toEqualHtml(`
+      <label for="textarea">
+        Testing
+        <span class="required">
+          required
+        </span>
+      </label>
+   `);
+  });
+
   it('adds new aria-describedby for error message', async () => {
     const page = await newE2EPage();
     await page.setContent('<va-textarea error="This is a mistake" />');
@@ -243,6 +285,48 @@ describe('va-textarea', () => {
     // Render the hint text
     const hintTextElement = await page.find('va-textarea >>> span.usa-hint');
     expect(hintTextElement.innerText).toContain('This is hint text');
+  });
+
+  it('uswds v3 renders H3 header in label if included', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-textarea label="Testing H3" label-header-level="3" uswds />');
+
+    const label = await page.find('va-textarea >>> label');
+    expect(label).toEqualHtml(`
+      <label class="usa-label" for="input-type-textarea" part="label">
+        <h3 part="header">Testing H3</h3>
+      </label>
+    `);
+  });
+
+  it('uswds v3 renders H5 header in label if included', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-textarea label="Testing H5" label-header-level="5" required uswds />');
+
+    const label = await page.find('va-textarea >>> label');
+    expect(label).toEqualHtml(`
+      <label class="usa-label" for="input-type-textarea" part="label">
+        <h5 part="header">Testing H5</h5>
+        <span class="usa-label--required">
+          required
+        </span>
+      </label>
+ `);
+  });
+
+  it('uswds v3 renders label text and ignores adding a header if an invalid level is included', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-textarea label="Testing" label-header-level="7" required uswds />');
+
+    const label = await page.find('va-textarea >>> label');
+    expect(label).toEqualHtml(`
+      <label class="usa-label" for="input-type-textarea" part="label">
+        Testing
+        <span class="usa-label--required">
+          required
+        </span>
+      </label>
+   `);
   });
 
   it('uswds v3 adds new aria-describedby for error message', async () => {

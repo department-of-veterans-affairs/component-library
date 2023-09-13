@@ -12,7 +12,11 @@ import {
 } from '@stencil/core';
 import classnames from 'classnames';
 import i18next from 'i18next';
-import { consoleDevError, getCharacterMessage } from '../../utils/utils';
+import {
+  consoleDevError,
+  getCharacterMessage,
+  getHeaderLevel,
+} from '../../utils/utils';
 
 if (Build.isTesting) {
   // Make i18next.t() return the key instead of the value
@@ -42,6 +46,11 @@ export class VaTextarea {
    * The label for the textarea.
    */
   @Prop() label?: string;
+
+  /**
+   * Insert a header with defined level inside the label (legend)
+   */
+  @Prop() labelHeaderLevel?: string;
 
   /**
    * The error message to render.
@@ -167,6 +176,7 @@ export class VaTextarea {
       messageAriaDescribedby
     } = this;
 
+    const HeaderLevel = getHeaderLevel(this.labelHeaderLevel);
     const maxlength = this.getMaxlength();
     const ariaDescribedbyIds = `${error ? 'input-error-message' : ''} ${
       charcount && maxlength ? 'charcount-message' : ''} ${
@@ -191,7 +201,11 @@ export class VaTextarea {
         <Host>
           {label && (
             <label htmlFor="input-type-textarea" class={labelClass} part="label">
-              {label}
+              {HeaderLevel ? (
+                <HeaderLevel part="header">{label}</HeaderLevel>
+              ) : (
+                label
+              )}
               {required && (
                 <span class="usa-label--required">
                   {' '}
@@ -244,7 +258,11 @@ export class VaTextarea {
       return (
         <Host>
           <label htmlFor="textarea">
-            {label}
+            {HeaderLevel ? (
+              <HeaderLevel part="header">{label}</HeaderLevel>
+            ) : (
+              label
+            )}
             {required && <span class="required">{i18next.t('required')}</span>}
             {hint && <span class="hint-text">{hint}</span>}
           </label>

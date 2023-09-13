@@ -18,6 +18,7 @@ export default {
 const defaultArgs = {
   'name': 'my-input',
   'label': 'Describe your situation',
+  'label-header-level': '',
   'enable-analytics': false,
   'required': false,
   'error': undefined,
@@ -33,6 +34,7 @@ const defaultArgs = {
 const Template = ({
   name,
   label,
+  'label-header-level': labelHeaderLevel,
   'enable-analytics': enableAnalytics,
   required,
   error,
@@ -49,6 +51,7 @@ const Template = ({
       uswds={uswds}
       name={name}
       label={label}
+      label-header-level={labelHeaderLevel}
       enable-analytics={enableAnalytics}
       required={required}
       error={error}
@@ -98,6 +101,13 @@ const ResizableTemplate = ({
 export const Default = Template.bind(null);
 Default.args = { ...defaultArgs };
 Default.argTypes = propStructure(textareaDocs);
+
+export const WithHeader = Template.bind(null);
+WithHeader.args = {
+  ...defaultArgs,
+  'label-header-level': '3',
+  label: 'My input with H3 header',
+};
 
 export const Error = Template.bind(null);
 Error.args = { ...defaultArgs, error: 'This is an error message' };

@@ -1195,6 +1195,10 @@ export namespace Components {
          */
         "label"?: string;
         /**
+          * Insert a header with defined level inside the label (legend)
+         */
+        "labelHeaderLevel"?: string;
+        /**
           * The maximum number of characters allowed in the input. Negative and zero values will be ignored.
          */
         "maxlength"?: number;
@@ -3077,6 +3081,10 @@ declare namespace LocalJSX {
           * The label for the textarea.
          */
         "label"?: string;
+        /**
+          * Insert a header with defined level inside the label (legend)
+         */
+        "labelHeaderLevel"?: string;
         /**
           * The maximum number of characters allowed in the input. Negative and zero values will be ignored.
          */
