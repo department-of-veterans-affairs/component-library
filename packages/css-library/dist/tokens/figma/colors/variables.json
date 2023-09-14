@@ -9,9 +9,6 @@
     "black": {
       "value": "{uswds-system-color-gray-100}"
     },
-    "orange": {
-      "value": "#eb7f29"
-    },
     "link-default": {
       "value": "#004795"
     },
@@ -21,8 +18,8 @@
     "warning-message": {
       "value": "#fac922"
     },
-    "gibill-accent": {
-      "value": "#fff1d2"
+    "feedback-warning-background": {
+      "value": "#fac922"
     },
     "primary": {
       "*": {

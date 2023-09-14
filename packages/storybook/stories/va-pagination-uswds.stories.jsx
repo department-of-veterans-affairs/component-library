@@ -87,8 +87,8 @@ export const Internationalization = () => {
 
   return (
     <div>
-      <button onClick={e => setLang('es')}>Español</button>
-      <button onClick={e => setLang('en')}>English</button>
+      <va-button uswds onClick={e => setLang('es')} text="Español"/>
+      <va-button uswds onClick={e => setLang('en')} text="English"/>
       <div style={{ marginTop: '20px' }}>
         <h4>Default</h4>
         <va-pagination page="10" pages="24" uswds />

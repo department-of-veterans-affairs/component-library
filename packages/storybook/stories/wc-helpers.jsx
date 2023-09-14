@@ -154,7 +154,7 @@ export function MaturityScale({ category, level }) {
       colors = 'vads-u-background-color--green-darker';
       break;
     case 'USE WITH CAUTION':
-      colors = 'vads-u-background-color--orange vads-u-color--base';
+      colors = 'storybook-background-color-orange vads-u-color--base';
       break;
     case "DON'T USE":
       colors = 'vads-u-background-color--secondary-darkest';
@@ -187,7 +187,7 @@ export function CustomEventsDescription({ data }) {
       This component has {events.length} custom{' '}
       {events.length > 1 ? 'events' : 'event'}: <strong>{eventNames}</strong>.
       Please see our documentation on{' '}
-      <a href="https://design.va.gov/about/developers#custom-events">
+      <a href="https://design.va.gov/about/developers/using-web-components#custom-events">
         how to use web component custom events
       </a>
       .
@@ -219,7 +219,7 @@ function NativeHandlers({ docsTags = [] }) {
     <div className="vads-u-margin-top--2">
       This component uses the following native handlers:{' '}
       <strong>{nativeEvents}</strong>. Please see our documentation on{' '}
-      <a href="https://design.va.gov/about/developers#native-events">
+      <a href="https://design.va.gov/about/developers/using-web-components#native-events">
         how to use web component native events
       </a>
       .
