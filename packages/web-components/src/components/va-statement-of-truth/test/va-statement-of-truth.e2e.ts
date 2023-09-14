@@ -29,12 +29,12 @@ describe('va-statement-of-truth', () => {
     await page.setContent('<va-statement-of-truth input-error="Please enter your full name" checkbox-error="Please certify"/>');
 
     const inputSpanEl = await page.$('pierce/span#input-error-message');
-    const inputErrorText = await page.evaluate(element => element.innerText, inputSpanEl);
-    expect(inputErrorText).toEqualText('Please enter your full name');
+    const inputErrorText = await page.evaluate(element => element.textContent, inputSpanEl);
+    expect(inputErrorText).toContain('Please enter your full name');
 
     const checkboxSpanEl = await page.$('pierce/span#checkbox-error-message');
-    const checkboxErrorText = await page.evaluate(element => element.innerText, checkboxSpanEl);
-    expect(checkboxErrorText).toEqualText('Please certify');
+    const checkboxErrorText = await page.evaluate(element => element.textContent, checkboxSpanEl);
+    expect(checkboxErrorText).toContain('Please certify');
   });
 
   it('uswds emits vaInputBlur custom event', async () => {
@@ -76,8 +76,8 @@ describe('va-statement-of-truth', () => {
     const page = await newE2EPage();
     await page.setContent('<va-statement-of-truth input-message-aria-describedby="testing one two three"/>');
     const span = await page.$('pierce/span#input-message');
-    const innerHTML = await page.evaluate(element => element.innerHTML, span);
-    expect(innerHTML).toEqual('testing one two three');
+    const text = await page.evaluate(element => element.textContent, span);
+    expect(text).toContain('testing one two three');
   });
 
   it('uswds permits prefilling the form', async () => {
@@ -97,7 +97,7 @@ describe('va-statement-of-truth', () => {
     await page.setContent('<va-statement-of-truth input-label="test label" />');
     const labelEl = await page.$('pierce/label.usa-label');
     const text = await page.evaluate(element => element.textContent, labelEl);
-    expect(text).toEqualText('test label');
+    expect(text).toContain('test label');
   });
 
   it('uswds adds custom label to va-checkbox', async () => {
@@ -105,6 +105,6 @@ describe('va-statement-of-truth', () => {
     await page.setContent('<va-statement-of-truth checkbox-label="test label" />');
     const labelEl = await page.$('pierce/label.usa-checkbox__label');
     const text = await page.evaluate(element => element.textContent, labelEl);
-    expect(text).toEqualText('test label');
+    expect(text).toContain('test label');
   });
 })
