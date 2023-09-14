@@ -1,4 +1,4 @@
-import { Component, Event, EventEmitter, Host, h, Prop, Listen } from '@stencil/core';
+import { Component, Element, State, Event, EventEmitter, Host, h, Prop, Listen } from '@stencil/core';
 
 /**
  * @componentName Button pair
@@ -12,6 +12,8 @@ import { Component, Event, EventEmitter, Host, h, Prop, Listen } from '@stencil/
   shadow: true,
 })
 export class VaButtonPair {
+  @Element() el: HTMLElement;
+
   /**
    * If `true`, button pair will use Continue and Back for button text.
    */
@@ -75,6 +77,12 @@ export class VaButtonPair {
   })
   componentLibraryAnalytics: EventEmitter;
 
+  @Listen('resize', { target: 'window' })
+  handleResize() {
+    this.reorderButtons();
+  }
+  @State() isReordered: boolean = false;
+
   /**
    * Listen for the va-button GA event and capture it so 
    * that we can emit a single va-button-pair GA event that includes
@@ -109,6 +117,31 @@ export class VaButtonPair {
   private handleSecondaryClick = (e: MouseEvent) => {
     this.secondaryClick.emit(e);
   };
+
+  componentDidLoad() {
+    this.reorderButtons();
+  }
+
+  reorderButtons() {
+    let container;
+    let buttons;
+
+    const groupSelector = this.uswds ? '.usa-button-group' : '.button-group';
+    const buttonSelector = this.uswds ? '.usa-button-group__item' : 'va-button';
+
+    container = this.el.shadowRoot.querySelector(groupSelector);
+    buttons = Array.from(container.querySelectorAll(buttonSelector));
+
+    const reverseAndAppendButtons = () => {
+      buttons.reverse();
+      buttons.forEach(button => container.appendChild(button));
+    };
+
+    if ((window.innerWidth <= 480 && !this.isReordered) || (window.innerWidth > 480 && this.isReordered)) {
+      reverseAndAppendButtons();
+      this.isReordered = !this.isReordered;
+    }
+  }
 
   render() {
     const {
@@ -153,19 +186,21 @@ export class VaButtonPair {
       } else {
         return (
           <Host>
-            <va-button
-              back
-              disable-analytics={disableAnalytics}
-              label={secondaryLabel}
-              onClick={handleSecondaryClick}
-            />
-            <va-button
-              continue
-              disable-analytics={disableAnalytics}
-              label={primaryLabel}
-              onClick={handlePrimaryClick}
-              submit={submit}
-            />
+            <div class="button-group">
+              <va-button
+                back
+                disable-analytics={disableAnalytics}
+                label={secondaryLabel}
+                onClick={handleSecondaryClick}
+              />
+              <va-button
+                continue
+                disable-analytics={disableAnalytics}
+                label={primaryLabel}
+                onClick={handlePrimaryClick}
+                submit={submit}
+              />
+            </div>
           </Host>
         );
       }
