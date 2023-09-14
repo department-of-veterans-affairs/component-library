@@ -14,8 +14,8 @@
 .va-logo {
   margin-right: 16px;
   background: url('../../assets/VA-seal.png') no-repeat;
-  height: 30px;
-  width: 48px;
+  min-height: 30px;
+  min-width: 48px;
 }
 
 .header-container {

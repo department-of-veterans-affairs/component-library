@@ -20,7 +20,9 @@ export class VaMinimalHeader {
         <va-crisis-line-modal/>
         <div class="va-flex">
           
-          <div class="va-logo"></div>
+          <a href="/" >
+            <div class="va-logo"></div>
+          </a>
           <div class='header-container'>
             <h1>{header}</h1>
             <h2>{subheader}</h2>
@@ -31,7 +33,3 @@ export class VaMinimalHeader {
   }
 
 }
-
-//<img src={getAssetPath("./assets/VA-seal.png")} />
-
-//<h1 class='va-logo'>VA</h1>
