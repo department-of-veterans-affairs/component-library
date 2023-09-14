@@ -92,15 +92,9 @@ const I18nTemplate = args => {
 
   return (
     <div>
-      <button style={{ fontSize: '16px' }} onClick={e => setLang('es')}>
-        Español
-      </button>
-      <button style={{ fontSize: '16px' }} onClick={e => setLang('en')}>
-        English
-      </button>
-      <button style={{ fontSize: '16px' }} onClick={e => setLang('tl')}>
-        Tagalog
-      </button>
+      <va-button uswds onClick={e => setLang('es')} text="Español"/>
+      <va-button uswds onClick={e => setLang('en')} text="English"/>
+      <va-button uswds onClick={e => setLang('tl')} text="Tagalog"/>
       <br />
       <br />
       {vaRadioConst(args)}
