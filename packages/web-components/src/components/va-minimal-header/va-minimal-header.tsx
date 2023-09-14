@@ -25,7 +25,8 @@ export class VaMinimalHeader {
           </a>
           <div class='header-container'>
             <h1>{header}</h1>
-            <h2>{subheader}</h2>
+            {this.subheader &&
+              <h2>{subheader}</h2>}
           </div>
         </div>
       </Host>

@@ -1,13 +1,13 @@
 import React from 'react';
-//import { VaMinimalHeader } from '@department-of-veterans-affairs/web-components/react-bindings';
-import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
+import { getWebComponentDocs, propStructure, StoryDocs, componentStructure } from './wc-helpers';
 
-//VaMinimalHeader.displayName = 'VaMinimalHeader';
 const minimalHeaderDocs = getWebComponentDocs('va-minimal-header');
+const vaCrisisLineModal = getWebComponentDocs('va-crisis-line-modal');
 
 export default {
   title: 'Components/MinimalHeader',
   id: 'components/va-minimal-header',
+  subcomponents: componentStructure(vaCrisisLineModal),
   parameters: {
     componentSubtitle: `va-minimal-header web component`,
     docs: {
@@ -17,14 +17,14 @@ export default {
 };
 
 const defaultArgs = {
+  header: "Authorization To Disclose Personal Information To A Third Party",
+  subheader: ""
 };
-const Template = ({
-
-}) => {
+const Template = ({ header, subheader }) => {
   return (
-    <va-minimal-header 
-      header="Authorization To Disclose Personal Information To A Third Party"
-      subheader="(VA Form 21-0845)"
+    <va-minimal-header
+      header={header}
+      subheader={subheader}
     />
   );
 };
@@ -34,3 +34,9 @@ Default.args = {
   ...defaultArgs,
 };
 Default.argTypes = propStructure(minimalHeaderDocs);
+
+export const withSubheader = Template.bind(null);
+withSubheader.args = {
+  ...defaultArgs,
+  subheader: "(VA Form 21-0845)",
+};
