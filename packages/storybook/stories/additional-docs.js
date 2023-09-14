@@ -66,17 +66,9 @@ export const additionalDocs = {
     maturityCategory: DONT_USE,
     maturityLevel: DEPRECATED,
   },
-  'Pagination - React': {
-    maturityCategory: DONT_USE,
-    maturityLevel: DEPRECATED,
-  },
   'Privacy agreement - React': {
     maturityCategory: CAUTION,
     maturityLevel: AVAILABLE,
-  },
-  'Select - React': {
-    maturityCategory: DONT_USE,
-    maturityLevel: DEPRECATED,
   },
   // MDX
   'Sidenav': {

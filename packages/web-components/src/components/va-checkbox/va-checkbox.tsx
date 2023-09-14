@@ -237,7 +237,7 @@ export class VaCheckbox {
               {checkboxDescription && <span class="usa-checkbox__label-description" aria-describedby="option-label">{checkboxDescription}</span>}
             </label>
             {messageAriaDescribedby && (
-              <span id='input-message' class="sr-only">
+              <span id='input-message' class="sr-only dd-privacy-hidden">
                 {messageAriaDescribedby}
               </span>
             )}
@@ -278,7 +278,7 @@ export class VaCheckbox {
             </span>
           </label>
           {messageAriaDescribedby && (
-            <span id='input-message' class="sr-only">
+            <span id='input-message' class="sr-only dd-privacy-hidden">
               {messageAriaDescribedby}
             </span>
           )}

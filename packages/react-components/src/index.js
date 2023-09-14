@@ -1,4 +1,3 @@
-import AdditionalInfo from './components/AdditionalInfo/AdditionalInfo';
 import AlertBox, { ALERT_TYPE } from './components/AlertBox/AlertBox';
 import Breadcrumbs from './components/Breadcrumbs/Breadcrumbs';
 import Checkbox from './components/Checkbox/Checkbox';
@@ -9,8 +8,6 @@ import LoadingIndicator from './components/LoadingIndicator/LoadingIndicator';
 import MaintenanceBanner from './components/MaintenanceBanner/MaintenanceBanner';
 import Modal from './components/Modal/Modal';
 import OMBInfo from './components/OMBInfo/OMBInfo';
-import Pagination from './components/Pagination/Pagination';
-import Select from './components/Select/Select';
 import Telephone, {
   CONTACTS,
   contactsMap,
@@ -20,7 +17,6 @@ import Telephone, {
 import TextInput from './components/TextInput/TextInput';
 
 export {
-  AdditionalInfo,
   AlertBox,
   ALERT_TYPE,
   Breadcrumbs,
@@ -32,8 +28,6 @@ export {
   MaintenanceBanner,
   Modal,
   OMBInfo,
-  Pagination,
-  Select,
   Telephone,
   CONTACTS,
   contactsMap,

@@ -149,9 +149,9 @@ export class VaTextInput {
    * Whether or not the component will use USWDS v3 styling.
    */
   @Prop({reflect: true}) uswds?: boolean = false;
-  
+
   /**
-   * Whether the component should show a character count message. 
+   * Whether the component should show a character count message.
    * Has no effect without uswds and maxlength being set.
    */
   @Prop() charcount?: boolean = false;
@@ -313,7 +313,7 @@ export class VaTextInput {
             part="input"
           />
           {messageAriaDescribedby && (
-            <span id="input-message" class="sr-only">
+            <span id="input-message" class="sr-only dd-privacy-hidden">
               {messageAriaDescribedby}
             </span>
           )}
@@ -371,7 +371,7 @@ export class VaTextInput {
             part="input"
           />
           {messageAriaDescribedby && (
-            <span id="input-message" class="sr-only">
+            <span id="input-message" class="sr-only dd-privacy-hidden">
               {messageAriaDescribedby}
             </span>
           )}

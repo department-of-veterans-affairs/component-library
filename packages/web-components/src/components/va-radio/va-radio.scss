@@ -26,6 +26,7 @@
 @import '../../mixins/accessibility.css';
 @import '../../mixins/form-field-error.css';
 @import '../../mixins/hint-text.css';
+@import '../../mixins/headers.css';
 
 .required {
   color: var(--color-secondary-dark);
@@ -46,14 +47,4 @@
   color: inherit;
   line-height: inherit;
   padding-inline: 0;
-}
-
-:host legend :is(h1, h2, h3, h4, h5, h6) {
-  display: inline;
-  margin: 0px;
-}
-
-/* h6 remains as Source Sans Pro, everything else uses Bitter */
-:host legend :is(h1, h2, h3, h4, h5) {
-  font-family: var(--font-serif);
 }
