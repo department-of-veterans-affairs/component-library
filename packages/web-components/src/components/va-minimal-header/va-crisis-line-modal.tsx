@@ -1,6 +1,6 @@
 import { Component, Host, State, h } from '@stencil/core';
 import arrowRightSvg from '../../assets/arrow-right-white.svg';
-import { CONTACTS } from '../../../../react-components/src/components/Telephone/contacts';
+import { CONTACTS } from '@department-of-veterans-affairs/component-library/contacts';
 
 @Component({
   tag: 'va-crisis-line-modal',
@@ -56,7 +56,6 @@ export class VACrisisLineModal {
                 aria-hidden="true"
               />
               {
-                // eslint-disable-next-line @department-of-veterans-affairs/prefer-telephone-component
                 <a href="tel:988">
                   Call <strong>988 and select 1</strong>
                 </a>

@@ -12,7 +12,7 @@ describe('va-minimal-header', () => {
         <mock:shadow-root>
           <va-official-gov-banner></va-official-gov-banner>
           <va-crisis-line-modal></va-crisis-line-modal>
-          <div class="va-flex">
+          <div class="va-header">
             <a href="/">
               <div class="va-logo"></div>
             </a>
@@ -35,7 +35,7 @@ describe('va-minimal-header', () => {
         <mock:shadow-root>
           <va-official-gov-banner></va-official-gov-banner>
           <va-crisis-line-modal></va-crisis-line-modal>
-          <div class="va-flex">
+          <div class="va-header">
             <a href="/">
               <div class="va-logo"></div>
             </a>

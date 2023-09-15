@@ -1,4 +1,5 @@
 import { Component, Host, h, Prop} from '@stencil/core';
+import vaSeal from '../../assets/va-seal.svg';
 
 @Component({
   tag: 'va-minimal-header',
@@ -18,10 +19,10 @@ export class VaMinimalHeader {
       <Host>
         <va-official-gov-banner/>
         <va-crisis-line-modal/>
-        <div class="va-flex">
+        <div class="va-header">
           
           <a href="/" >
-            <div class="va-logo"></div>
+            <img class="va-logo" src={vaSeal} aria-hidden="true"/>
           </a>
           <div class='header-container'>
             <h1>{header}</h1>
