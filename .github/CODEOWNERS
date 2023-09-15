@@ -5,7 +5,3 @@ packages/mobile-documentation @department-of-veterans-affairs/flagship-mobile-pl
 packages/mobile-icons @department-of-veterans-affairs/flagship-mobile-platform
 packages/mobile-linting @department-of-veterans-affairs/flagship-mobile-platform
 packages/mobile-tokens @department-of-veterans-affairs/flagship-mobile-platform
-
-.github/workflows/mobile-ci.yml @department-of-veterans-affairs/flagship-mobile-platform
-.github/workflows/mobile-publish.yml @department-of-veterans-affairs/flagship-mobile-platform
-.github/workflows/mobile-documentation.yml @department-of-veterans-affairs/flagship-mobile-platform
