@@ -55,7 +55,7 @@ button.va-crisis-line {
     position: absolute;
     right: 0;
     bottom: -5px;
-    border-radius: 0 0 0.2em 0.2em;
+    border-radius: 0 0 2.3px 2.3px;
     box-shadow: 0 2px 5px var(--color-base);
   }
 }
@@ -76,10 +76,11 @@ button.va-crisis-line {
 .va-crisis-line-icon {
   content: "";
   background: url(../../assets/VCL-icon-white.svg) no-repeat right 29%;
-  background-size: 1.75em auto;
-  background-position: 0.5em 0.5em;
-  width: 2.5em;
-  height: 2.1em;
+  background-size: 30px auto;
+  background-position: 8px 8px;
+  width: 40px;
+  height: 33.6px;
+  padding-right: 3px;
 
   transition-duration: 0.3s;
   transition-timing-function: ease-in-out;
@@ -87,25 +88,27 @@ button.va-crisis-line {
 
   @media(min-width: $small-desktop-screen) {
     background-color: $red-70v;
-    background-position: 0.4em 0.5em;
-    border-bottom-left-radius: 0.2em;
+    background-position: 6.4px 8px;
+    border-bottom-left-radius: 3.2px;
   }
 }
 
 .va-crisis-line-text {
-  padding: 0.5em;
+  padding: 8px;
 }
 
 .va-crisis-line-arrow {
   height: 13px;
   width: 16px;
-  padding-left: 0.5em;
+  padding-left: 8px;
+  padding-right: 8px;
+
 }
 
 .va-crisis-panel {
   color: var(--color-base);
   &-body {
-    padding: 1.5em;
+    padding: 24px;
     max-height: 100%;
   }
   &-title {
@@ -127,7 +130,7 @@ button.va-crisis-line {
         border-bottom: 1px solid var(--color-gray-light);
       }
       > a, > span {
-        padding: 0.5em 0;
+        padding: 8px 0;
         align-self: center;
       }
     }
@@ -136,7 +139,7 @@ button.va-crisis-line {
     color: var(--color-base) !important;
     font-size: 26px;
     width: 46px;
-    padding: 0.4em 0.3em;
+    padding: 6.4px 4.8px;
     align-self: center;
     flex-shrink: 0;
     font-family: "Font Awesome 5 Free";
@@ -144,7 +147,7 @@ button.va-crisis-line {
     font-weight: 900;
     &.fa-mobile {
       font-size: 38px;
-      padding: 0.15em 0.3em;
+      padding: 2.4px 4.8px;
     }
   }
   &-close.va-modal-close {

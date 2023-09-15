@@ -1,6 +1,6 @@
 import { Component, Host, State, h } from '@stencil/core';
 import arrowRightSvg from '../../assets/arrow-right-white.svg';
-import { CONTACTS } from '@department-of-veterans-affairs/component-library/contacts';
+import { CONTACTS } from '../../../../react-components/src/components/Telephone/contacts';
 
 @Component({
   tag: 'va-crisis-line-modal',
