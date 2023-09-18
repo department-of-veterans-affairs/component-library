@@ -28,7 +28,6 @@ const Template = ({
   headerLevel,
   progressTerm,
   'use-div': useDiv,
-  'describedby-ids': describedbyIds,
 }) => (
   // Wrapper for spacing when viewing in storybook
   // Component can be used without it
