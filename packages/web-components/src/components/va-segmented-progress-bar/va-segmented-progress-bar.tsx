@@ -75,11 +75,6 @@ export class VaSegmentedProgressBar {
   @Prop() useDiv?: boolean;
 
   /**
-   * aria-describedby ids for improved accessibility when using the useDiv flag (v3 only)
-   */
-  @Prop() describedbyIds?: string;
-
-  /**
    * The event used to track usage of the component. This is emitted when the
    * component renders and enableAnalytics is true.
    */
@@ -116,7 +111,6 @@ export class VaSegmentedProgressBar {
       headerLevel,
       progressTerm,
       useDiv,
-      describedbyIds,
     } = this;
     let labelsArray;
     if (labels) {
@@ -166,7 +160,7 @@ export class VaSegmentedProgressBar {
                 </ol>
                 {
                   <div class="usa-step-indicator__header">
-                    <Tag class="usa-step-indicator__heading" aria-describedby={describedbyIds}>
+                    <Tag class="usa-step-indicator__heading">
                       <span class="usa-step-indicator__heading-counter">
                         <span class="usa-sr-only">{progressTerm}</span>
                         <span class="usa-step-indicator__current-step">{current}</span>
