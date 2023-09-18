@@ -22,6 +22,7 @@
 @import '../../mixins/accessibility.css';
 @import '../../mixins/form-field-error.css';
 @import '../../mixins/hint-text.css';
+@import '../../mixins/headers.css';
 
 :host(:not([uswds])) #error-message {
   font-size: 1.6rem;

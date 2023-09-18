@@ -61,8 +61,8 @@ const Template = ({
   return (
     <>
       {useAddButton && (
-        <button
-          style={{ fontSize: '16px' }}
+        <va-button
+          uswds
           onClick={() => {
             setModifiedOptions([
               ...modifiedOptions,
@@ -71,9 +71,8 @@ const Template = ({
               </option>,
             ]);
           }}
-        >
-          Add &quot;Something new&quot;
-        </button>
+          text="Add &quot;Something new&quot;"
+        />
       )}
       <va-select
         uswds={uswds}
@@ -113,8 +112,8 @@ const InertTemplate = ({
         purposes.
       </p>
       {useAddButton && (
-        <button
-          style={{ fontSize: '16px' }}
+        <va-button
+          uswds
           onClick={() => {
             setModifiedOptions([
               ...modifiedOptions,
@@ -123,9 +122,8 @@ const InertTemplate = ({
               </option>,
             ]);
           }}
-        >
-          Add &quot;Something new&quot;
-        </button>
+          text="Add &quot;Something new&quot;"
+        />
       )}
       <va-select
         uswds={uswds}
@@ -174,12 +172,8 @@ const I18nTemplate = args => {
 
   return (
     <div>
-      <button style={{ fontSize: '16px' }} onClick={e => setLang('es')}>
-        Español
-      </button>
-      <button style={{ fontSize: '16px' }} onClick={e => setLang('en')}>
-        English
-      </button>
+      <va-button uswds onClick={e => setLang('es')} text="Español"/>
+      <va-button uswds onClick={e => setLang('en')} text="English"/>
       <va-select {...rest}>{options}</va-select>
     </div>
   );

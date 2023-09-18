@@ -31,6 +31,7 @@ const vaCheckboxGroup = args => {
     label,
     required,
     hint,
+    'label-header-level': labelHeaderLevel,
     uswds,
     ...rest
   } = args;
@@ -41,6 +42,7 @@ const vaCheckboxGroup = args => {
       label={label}
       required={required}
       hint={hint}
+      label-header-level={labelHeaderLevel}
       uswds={uswds}
     >
       <va-checkbox uswds label="Sojourner Truth" name="example" value="1" />
@@ -120,9 +122,9 @@ const I18nTemplate = args => {
 
   return (
     <div>
-      <button onClick={e => setLang('es')} style={{fontSize: '16px'}}>Español</button>
-      <button onClick={e => setLang('en')} style={{fontSize: '16px'}}>English</button>
-      <button onClick={e => setLang('tl')} style={{fontSize: '16px'}}>Tagalog</button>
+      <va-button uswds onClick={e => setLang('es')} style={{fontSize: '16px'}} text="Español"/>
+      <va-button uswds onClick={e => setLang('en')} style={{fontSize: '16px'}} text="English"/>
+      <va-button uswds onClick={e => setLang('tl')} style={{fontSize: '16px'}} text="Tagalog"/>
       <div style={{marginTop: '20px'}}>
         {vaCheckboxGroup(args)}
       </div>
@@ -136,6 +138,7 @@ const defaultArgs = {
   'error': null,
   'hint': null,
   'uswds': true,
+  'label-header-level': '',
 };
 
 export const Default = Template.bind(null);
@@ -143,6 +146,13 @@ Default.args = {
   ...defaultArgs,
 };
 Default.argTypes = propStructure(checkBoxGroupDocs);
+
+export const LabelHeader = Template.bind(null);
+LabelHeader.args = {
+  ...defaultArgs,
+  label: 'This is a label containing an H3',
+  'label-header-level': '3',
+};
 
 export const WithHintText = Template.bind(null);
 WithHintText.args = {
