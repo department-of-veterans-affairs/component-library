@@ -993,6 +993,10 @@ export namespace Components {
          */
         "total": number;
         /**
+          * When true, this makes the segmented-progress-bar use a div instead of a heading (v3 only)
+         */
+        "useDiv"?: boolean;
+        /**
           * Whether or not the component will use USWDS v3 styling.
          */
         "uswds"?: boolean;
@@ -2855,6 +2859,10 @@ declare namespace LocalJSX {
           * The total number of segments in the progress bar
          */
         "total": number;
+        /**
+          * When true, this makes the segmented-progress-bar use a div instead of a heading (v3 only)
+         */
+        "useDiv"?: boolean;
         /**
           * Whether or not the component will use USWDS v3 styling.
          */
