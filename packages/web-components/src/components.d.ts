@@ -961,10 +961,6 @@ export namespace Components {
          */
         "current": number;
         /**
-          * aria-describedby ids for improved accessibility when using the useDiv flag (v3 only)
-         */
-        "describedbyIds"?: string;
-        /**
           * Whether or not an analytics event will be fired.
          */
         "enableAnalytics"?: boolean;
@@ -2823,10 +2819,6 @@ declare namespace LocalJSX {
           * The current segment in progress
          */
         "current": number;
-        /**
-          * aria-describedby ids for improved accessibility when using the useDiv flag (v3 only)
-         */
-        "describedbyIds"?: string;
         /**
           * Whether or not an analytics event will be fired.
          */

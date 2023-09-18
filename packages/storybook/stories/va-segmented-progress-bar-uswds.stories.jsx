@@ -46,7 +46,6 @@ const Template = ({
       header-level={headerLevel}
       progress-term={progressTerm}
       use-div={useDiv}
-      describedby-ids={describedbyIds}
     ></va-segmented-progress-bar>
   </div>
 );
@@ -61,7 +60,6 @@ const defaultArgs = {
   'centered-labels': undefined,
   'counters': undefined,
   'use-div': false,
-  'describedby-ids': '',
 };
 
 export const Default = Template.bind(null);
