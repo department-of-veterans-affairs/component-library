@@ -76,7 +76,7 @@
 }
 
 @media (max-width: 320px) {
-  :host(:not([uswds])){
+  :host(:not([uswds])) {
     margin: 0 auto;
     max-width: 280px;
   }

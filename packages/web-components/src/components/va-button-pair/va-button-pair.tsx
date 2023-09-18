@@ -75,12 +75,6 @@ export class VaButtonPair {
   })
   componentLibraryAnalytics: EventEmitter;
 
-  // @Listen('resize', { target: 'window' })
-  // handleResize() {
-  //   this.reorderButtons();
-  // }
-  // @State() isReordered: boolean = false;
-
   /**
    * Listen for the va-button GA event and capture it so 
    * that we can emit a single va-button-pair GA event that includes
