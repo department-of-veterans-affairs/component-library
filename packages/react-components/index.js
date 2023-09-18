@@ -7,7 +7,6 @@ import IconSearch from './IconSearch';
 import LoadingIndicator from './LoadingIndicator';
 import MaintenanceBanner from './MaintenanceBanner';
 import Modal from './Modal';
-import OMBInfo from './OMBInfo';
 import Telephone, {
   CONTACTS,
   contactsMap,
@@ -29,7 +28,6 @@ export {
   LoadingIndicator,
   MaintenanceBanner,
   Modal,
-  OMBInfo,
   Telephone,
   CONTACTS,
   contactsMap,
