@@ -12,8 +12,6 @@ import { Component, Event, EventEmitter, Host, h, Prop, Listen } from '@stencil/
   shadow: true,
 })
 export class VaButtonPair {
-  // @Element() el: HTMLElement;
-
   /**
    * If `true`, button pair will use Continue and Back for button text.
    */
@@ -118,31 +116,6 @@ export class VaButtonPair {
     this.secondaryClick.emit(e);
   };
 
-  // componentDidLoad() {
-  //   this.reorderButtons();
-  // }
-
-  // reorderButtons() {
-  //   let container;
-  //   let buttons;
-
-  //   const groupSelector = this.uswds ? '.usa-button-group' : '.button-group';
-  //   const buttonSelector = this.uswds ? '.usa-button-group__item' : 'va-button';
-
-  //   container = this.el.shadowRoot.querySelector(groupSelector);
-  //   buttons = Array.from(container.querySelectorAll(buttonSelector));
-
-  //   const reverseAndAppendButtons = () => {
-  //     buttons.reverse();
-  //     buttons.forEach(button => container.appendChild(button));
-  //   };
-
-  //   if ((window.innerWidth <= 480 && !this.isReordered) || (window.innerWidth > 480 && this.isReordered)) {
-  //     reverseAndAppendButtons();
-  //     this.isReordered = !this.isReordered;
-  //   }
-  // }
-
   render() {
     const {
       continue: _continue,
@@ -186,21 +159,19 @@ export class VaButtonPair {
       } else {
         return (
           <Host>
-            {/* <div class="button-group"> */}
-              <va-button
-                back
-                disable-analytics={disableAnalytics}
-                label={secondaryLabel}
-                onClick={handleSecondaryClick}
-              />
-              <va-button
-                continue
-                disable-analytics={disableAnalytics}
-                label={primaryLabel}
-                onClick={handlePrimaryClick}
-                submit={submit}
-              />
-            {/* </div> */}
+            <va-button
+              back
+              disable-analytics={disableAnalytics}
+              label={secondaryLabel}
+              onClick={handleSecondaryClick}
+            />
+            <va-button
+              continue
+              disable-analytics={disableAnalytics}
+              label={primaryLabel}
+              onClick={handlePrimaryClick}
+              submit={submit}
+            />
           </Host>
         );
       }

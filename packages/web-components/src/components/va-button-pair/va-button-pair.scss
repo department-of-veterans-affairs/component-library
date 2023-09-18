@@ -4,7 +4,7 @@
 
 @import '../../global/formation_overrides';
 
-:host, .button-group {
+:host {
   display: flex;
   flex-direction: column;
 }
@@ -25,7 +25,7 @@
 
 /* Original Component Styles. */
 
-:host(:not([uswds])), .button-group va-button {
+:host(:not([uswds])) va-button {
   flex: 1 1 auto;
 }
 
@@ -33,55 +33,55 @@
   max-width: 560px;
 }
 
-:host(:not([uswds])) va-button::part(button), .button-group va-button::part(button) {
+:host(:not([uswds])) va-button::part(button) {
   max-width: 280px;
   width: 100%;
 }
 
 @media (min-width: 481px) {
-  :host([continue]:not([continue='false']):not([uswds])), .button-group {
+  :host([continue]:not([continue='false']):not([uswds])) {
     flex-direction: row;
   }
 
-  :host([continue]:not([continue='false']):not([uswds])) va-button + va-button::part(button), .button-group va-button + va-button::part(button) {
+  :host([continue]:not([continue='false']):not([uswds])) va-button + va-button::part(button) {
     margin-left: 12px;
     margin-right: 0;
   }
 }
 
 @media (min-width: 481px) {
-  :host(:not([uswds])), .button-group {
+  :host(:not([uswds])) {
     flex-direction: row;
     max-width: 420px;
   }
 
-  :host(:not([uswds])) va-button + va-button::part(button), .button-group va-button + va-button::part(button) {
+  :host(:not([uswds])) va-button + va-button::part(button) {
     margin-left: 12px;
     margin-right: 0;
   }
 
-  :host(:not([uswds])) va-button::part(button), .button-group va-button::part(button) {
+  :host(:not([uswds])) va-button::part(button) {
     max-width: 210px;
   }
 }
 
 @media (max-width: 481px) {
-  :host(:not([uswds])), .button-group {
+  :host(:not([uswds])) {
     width: 100%;
   }
 
-  :host([continue]:not([continue='false']):not([uswds])) va-button::part(button), .button-group va-button::part(button) {
+  :host([continue]:not([continue='false']):not([uswds])) va-button::part(button) {
     max-width: 280px;
   }
 }
 
 @media (max-width: 320px) {
-  :host(:not([uswds])), .button-group {
+  :host(:not([uswds])){
     margin: 0 auto;
     max-width: 280px;
   }
 
-  :host([continue]:not([continue='false']):not([uswds])) va-button::part(button), .button-group va-button::part(button) {
+  :host([continue]:not([continue='false']):not([uswds])) va-button::part(button) {
     max-width: 280px;
   }
 }
