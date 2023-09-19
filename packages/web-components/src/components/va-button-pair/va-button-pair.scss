@@ -21,6 +21,10 @@
     margin: 0 auto;
     width: 100%;
   }
+
+  :host([uswds]:not([continue])) .usa-button-group {
+    flex-direction: column-reverse;
+  }
 }
 
 /* Original Component Styles. */
