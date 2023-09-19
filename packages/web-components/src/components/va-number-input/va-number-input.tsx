@@ -132,11 +132,8 @@ export class VaNumberInput {
       };
       this.componentLibraryAnalytics.emit(detail);
     }
-    // Hardcoded string to get an E2E test for this, for some reason translations don't populate in the test environment.
-    /* eslint-disable i18next/no-literal-string */
-    let defaultError = i18next.exists('number-error') ? i18next.t('number-error') : 'Please enter a valid number';
-    /* eslint-enable i18next/no-literal-string */
-
+    
+    let defaultError = i18next.t('number-error');
     const target = e.target as HTMLInputElement,
       valid = target.checkValidity();
     if (!this.error && !valid) {
