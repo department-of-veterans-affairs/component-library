@@ -25,9 +25,9 @@ export class VaTelephone {
   @Prop() contact!: string;
 
   /**
-   * Optional phone number extension
+   * Optional numeric string phone number extension
    */
-  @Prop() extension?: number;
+  @Prop() extension?: string;
 
   /**
    * Indicates if the phone number can be clicked or not
@@ -95,7 +95,7 @@ export class VaTelephone {
    */
   static formatPhoneNumber(
     num: string,
-    extension: number,
+    extension: string,
     international: boolean = false,
     vanity: string,
     tty: boolean = false,
@@ -120,12 +120,12 @@ export class VaTelephone {
   /**
    * Format telephone number for screen readers
    * @param {string} contact - The 10 or 3 digit contact prop
-   * @param {number} ext - The extension number
+   * @param {string} ext - The extension numeric string
    * @param {boolean} tty - Whether or not this is a TTY number
    * @return {string} - Combined phone number parts within the label separated by
    * periods, e.g. "800-555-1212" becomes "8 0 0. 5 5 5. 1 2 1 2"
    */
-  static formatTelLabel(contact: string, ext: number, tty: boolean, international: boolean): string {
+  static formatTelLabel(contact: string, ext: string, tty: boolean, international: boolean): string {
     const spaceCharsOut = chars => chars.split('').join(' ');
     let labelPieces = VaTelephone.splitContact(contact)
       .map(spaceCharsOut);
@@ -142,7 +142,7 @@ export class VaTelephone {
     return labelPieces.join('. ');
   }
 
-  static createHref(contact: string, extension: number, sms: boolean): string {
+  static createHref(contact: string, extension: string, sms: boolean): string {
     const cleanedContact = VaTelephone.cleanContact(contact);
     const isN11 = cleanedContact.length === 3;
     // extension format ";ext=" from RFC3966 https://tools.ietf.org/html/rfc3966#page-5
