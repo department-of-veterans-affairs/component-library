@@ -120,7 +120,7 @@ export class VaNumberInput {
     this.value = target.value;
   };
 
-  private handleBlur = () => {
+  private handleBlur = (e: Event) => {
     if (this.enableAnalytics) {
       const detail = {
         componentName: 'va-number-input',
@@ -131,6 +131,18 @@ export class VaNumberInput {
         },
       };
       this.componentLibraryAnalytics.emit(detail);
+    }
+    // Hardcoded string to get an E2E test for this, for some reason translations don't populate in the test environment.
+    /* eslint-disable i18next/no-literal-string */
+    let defaultError = i18next.exists('number-error') ? i18next.t('number-error') : 'Please enter a valid number';
+    /* eslint-enable i18next/no-literal-string */
+
+    const target = e.target as HTMLInputElement,
+      valid = target.checkValidity();
+    if (!this.error && !valid) {
+      this.error = defaultError;
+    } else if (this.error && this.error === defaultError && valid) {
+      this.error = null;
     }
   };
 

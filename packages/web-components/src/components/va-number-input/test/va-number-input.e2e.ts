@@ -363,6 +363,19 @@ describe('va-number-input', () => {
 
   it('uswds adds aria-describedby input-message id', async () => {
     const page = await newE2EPage();
+    page.evaluateOnNewDocument(() => {
+      Object.defineProperty(navigator, "language", {
+        get: function() {
+          return "en";
+        }
+        
+      })
+      Object.defineProperty(navigator, "languages", {
+        get: function() {
+            return ["en"];
+        }
+    });
+    })
     await page.setContent('<va-number-input message-aria-describedby="example message" uswds />');
     const el = await page.find('va-number-input');
     const inputEl = await page.find('va-number-input >>> input');
@@ -378,5 +391,38 @@ describe('va-number-input', () => {
     expect(inputEl.getAttribute('aria-describedby')).toContain('error-message');
     expect(inputEl.getAttribute('aria-describedby')).toContain('input-message');
   });
+  /* ToDo: Un-skip the validation tests. Validation tests are skipped because 
+      there is not a clear way to mock the i18next translations and they are 
+      not loaded into the test environment
+  */
+  it.skip('should show validation message when error prop is undefined', async () => {
+    global.window.testVars = {
+      'number-error': 'Please enter a valid number'
+    }
+    const page = await newE2EPage();
+    await page.setContent('<div><va-number-input uswds label="test input" /></div>');
+    const inputEl = await page.find('va-number-input >>> input');
 
+    await inputEl.press('a');
+    await inputEl.press('b');
+    await inputEl.press('c');
+    await inputEl.press('Tab');
+
+    const label = await page.find('va-number-input >>> label');
+    expect(label.getAttribute('class')).toContain('usa-label--error')
+  })
+
+  it.skip('should not show default validation message when error prop is defined', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<div><va-number-input uswds label="test input" error="This is an error"/></div>');
+    const inputEl = await page.find('va-number-input >>> input');
+
+    await inputEl.press('a');
+    await inputEl.press('b');
+    await inputEl.press('c');
+    await inputEl.press('Tab');
+
+    const errorEl = await page.find('va-number-input >>> span.usa-error-message');
+    expect(errorEl.innerText).toBe('This is an error');
+  })
 });
