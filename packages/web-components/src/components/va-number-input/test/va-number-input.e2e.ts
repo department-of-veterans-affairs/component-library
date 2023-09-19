@@ -363,19 +363,6 @@ describe('va-number-input', () => {
 
   it('uswds adds aria-describedby input-message id', async () => {
     const page = await newE2EPage();
-    page.evaluateOnNewDocument(() => {
-      Object.defineProperty(navigator, "language", {
-        get: function() {
-          return "en";
-        }
-        
-      })
-      Object.defineProperty(navigator, "languages", {
-        get: function() {
-            return ["en"];
-        }
-    });
-    })
     await page.setContent('<va-number-input message-aria-describedby="example message" uswds />');
     const el = await page.find('va-number-input');
     const inputEl = await page.find('va-number-input >>> input');
@@ -396,9 +383,6 @@ describe('va-number-input', () => {
       not loaded into the test environment
   */
   it.skip('should show validation message when error prop is undefined', async () => {
-    global.window.testVars = {
-      'number-error': 'Please enter a valid number'
-    }
     const page = await newE2EPage();
     await page.setContent('<div><va-number-input uswds label="test input" /></div>');
     const inputEl = await page.find('va-number-input >>> input');
