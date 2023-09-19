@@ -25,7 +25,7 @@ const defaultArgs = {
   error: undefined,
   value: undefined,
   uswds: true,
-  monthSelect: false,
+  monthSelect: true,
 };
 
 const Template = ({ label, name, hint, required, error, uswds, value, monthSelect }) => {
@@ -147,17 +147,16 @@ Error.args = {
   error: 'Error Message Example',
 };
 
-export const WithMonthSelect = Template.bind(null);
-WithMonthSelect.args = {
+export const WithoutMonthSelect = Template.bind(null);
+WithoutMonthSelect.args = {
   ...defaultArgs,
-  monthSelect: true,
+  monthSelect: false,
   value: '2022-04-19',
 };
 
 export const ExtraHintText = Template.bind(null);
 ExtraHintText.args = {
   ...defaultArgs,
-  monthSelect: true,
   value: '2022-04-19',
   hint: 'Extra hint text',
 };
