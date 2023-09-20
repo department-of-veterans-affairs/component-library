@@ -27,13 +27,19 @@ const Template = ({
   'max-page-list-length': maxPageListLength,
   unbounded
 }) => {
+  const [page, setPage] = useState(currentPage);
+  const handlePageSelect = event => {
+    setPage(event.detail.page);
+  };
   return (
     <va-pagination
       page={page}
       pages={pages}
       max-page-list-length={maxPageListLength}
       uswds
-      unbounded={unbounded} />
+      unbounded={unbounded}
+      onPageSelect={handlePageSelect}
+    />
   );
 }
 
