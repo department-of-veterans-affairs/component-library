@@ -93,13 +93,13 @@ export const Internationalization = () => {
 
   return (
     <div>
-      <va-button uswds onClick={e => setLang('es')} text="Español"/>
-      <va-button uswds onClick={e => setLang('en')} text="English"/>
+      <va-button uswds onClick={() => setLang('es')} text="Español"/>
+      <va-button uswds onClick={() => setLang('en')} text="English"/>
       <div style={{ marginTop: '20px' }}>
         <h4>Default</h4>
-        <va-pagination page="10" pages="24" uswds />
+        <Default />
         <h4>Unbounded</h4>
-        <va-pagination page="10" pages="24" unbounded uswds />
+        <WithUnboundedFirst />
       </div>
     </div>
 )};
