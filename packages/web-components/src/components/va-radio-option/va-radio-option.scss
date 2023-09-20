@@ -19,16 +19,25 @@ va-radio-option {
   margin-top: 12px;
 }
 
-va-radio-option:focus {
+va-radio-option input:focus {
   outline: none !important;
 }
 
-va-radio-option:focus label.usa-radio__label::before {
+// Formation override
+va-radio-option label.usa-radio__label::before {
+  box-shadow: rgb(27, 27, 27) 0px 0px 0px 2px;
+  height: 20px;
+  width: 20px;
+  margin-left: 2px;
+
+}
+
+va-radio-option input:focus + label.usa-radio__label::before {
   outline: 2px solid var(--color-gold-light);
   outline-offset: 4px;
 }
 
-va-radio-option[disabled='true']:focus label.usa-radio__label::before {
+va-radio-option input[disabled='true']:focus + label.usa-radio__label::before {
   outline: none;
 }
 
