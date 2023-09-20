@@ -5,7 +5,7 @@
 
 @import '../../global/formation_overrides';
 
-:host label {
+va-radio-option label {
   max-width: 320px;
   box-sizing: border-box;
 }
@@ -14,33 +14,35 @@
   background: transparent;
 }
 
-:host {
+va-radio-option {
   display: block;
   margin-top: 12px;
 }
 
-:host(:focus) {
+va-radio-option:focus {
   outline: none !important;
 }
 
-:host(:focus) label.usa-radio__label::before {
+va-radio-option:focus label.usa-radio__label::before {
   outline: 2px solid var(--color-gold-light);
   outline-offset: 4px;
 }
 
-:host([disabled='true']:focus) label.usa-radio__label::before {
+va-radio-option[disabled='true']:focus label.usa-radio__label::before {
   outline: none;
 }
 
 /* Original Components Styles. */
 
-@import '../../mixins/inputs.css';
-
-:host(:not([uswds])) {
+va-radio-option:not([uswds]) {
   margin-top: 1rem;
 }
 
-:host(:not([uswds])) label {
+va-radio-option:not([uswds]) input {
+  appearance: none;
+}
+
+va-radio-option:not([uswds]) label {
   box-sizing: border-box;
   outline: none;
   display: flex;
@@ -51,7 +53,7 @@
   padding-left: 6px;
 }
 
-:host(:not([uswds])) label::before {
+va-radio-option:not([uswds]) label::before {
   box-sizing: border-box;
   border-radius: 100%;
   box-shadow: 0 0 0 2px var(--color-white), 0 0 0 3px var(--color-gray-medium);
@@ -67,28 +69,28 @@
   display: inline-block;
 }
 
-:host(:not([uswds])[aria-checked='true']) label::before {
+va-radio-option:not([uswds])[aria-checked='true'] label::before {
   background-color: var(--color-primary);
   box-shadow: 0 0 0 2px var(--color-white), 0 0 0 4px var(--color-primary);
 }
 
-:host(:not([uswds]):focus) label::before {
+va-radio-option:not([uswds]):focus label::before {
   outline: 2px solid var(--color-gold-light);
   outline-offset: 6px;
 }
 
-:host(:not([uswds])) .description {
+va-radio-option:not([uswds]) .description {
   display: block;
   margin-top: 5px;
 }
 
-:host(:not([uswds])[tile='true']) label {
+va-radio-option:not([uswds])[tile='true'] label {
   padding: 12px 16px 12px 12px;
   border: 2px solid var(--color-gray-light);
   border-radius: 0.25em;
 }
 
-:host(:not([uswds])[tile='true'][aria-checked='true']) label {
+va-radio-option:not([uswds])[tile='true'][aria-checked='true'] label {
   border: 2px solid var(--color-primary-alt-darkest);
   background: var(--color-gray-cool-light);
 }
