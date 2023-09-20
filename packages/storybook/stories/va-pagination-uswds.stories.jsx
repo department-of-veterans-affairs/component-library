@@ -22,7 +22,7 @@ const defaultArgs = {
 }
 
 const Template = ({
-  page,
+  'page': currentPage,
   pages,
   'max-page-list-length': maxPageListLength,
   unbounded
