@@ -32,9 +32,8 @@ va-radio-option label.usa-radio__label::before {
 
 }
 
-va-radio-option input:focus + label.usa-radio__label::before {
+va-radio-option .usa-radio__input:focus+[class*=__label]::before {
   outline: 2px solid var(--color-gold-light);
-  outline-offset: 4px;
 }
 
 va-radio-option input[disabled='true']:focus + label.usa-radio__label::before {
