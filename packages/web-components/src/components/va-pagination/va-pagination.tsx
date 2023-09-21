@@ -233,7 +233,7 @@ export class VaPagination {
    * the result is to render the page in xhtml not html
    * and errors result. 
    */
-  componentDidLoad() {
+  addIcons() {
     function makeSvgString(icon: string) {
       const path = `${getAssetPath('/assets/sprite.svg')}#${icon}`;
       // eslint-disable-next-line i18next/no-literal-string
@@ -245,25 +245,21 @@ export class VaPagination {
       </svg>`;
     }
 
-    //remove wrapper div around icon because it affects styling
-    function removeWrapper(wrapper: Element) {
-      wrapper.parentNode.insertBefore(wrapper.firstChild, wrapper);
-      wrapper.remove();
-    }
-
     const prevIconDiv = this.el.shadowRoot?.querySelector("#previous-arrow-icon");
     if (prevIconDiv) {
       prevIconDiv.innerHTML = makeSvgString('navigate_before');
-      removeWrapper(prevIconDiv);
     }
 
     const nextIconDiv = this.el.shadowRoot?.querySelector("#next-arrow-icon");
     if (nextIconDiv) {
       nextIconDiv.innerHTML = makeSvgString('navigate_next');
-      removeWrapper(nextIconDiv);
     }
   }
 
+  componentDidRender() {
+    this.addIcons();
+  }
+  
   connectedCallback() {
     i18next.on('languageChanged', () => {
       forceUpdate(this.el);
