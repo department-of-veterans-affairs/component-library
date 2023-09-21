@@ -31,7 +31,6 @@ export default {
   'date-hint': 'Ingrese 2 dígitos para el mes y el día y 4 dígitos para el año',
   'date-hint-with-select': 'Por ejemplo: Enero 19 2000',
   'date-error': 'Ingrese una fecha completa',
-  'number-error': 'Introduce un número válido',
   'gov-site-label': 'Un sitio oficial del Gobierno de Estados Unidos',
   'gov-site-button': 'Así es como usted puede verificarlo',
   'gov-site-website': 'Los sitios web oficiales usan .{{tld}}',

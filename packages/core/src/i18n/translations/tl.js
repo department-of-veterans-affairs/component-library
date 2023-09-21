@@ -16,6 +16,5 @@ export default {
   'collapse-all-aria-label': 'I-collapse ang lahat ng accordion',
   'on-this-page': 'Sa pahinang ito',
   'date-hint': 'Mangyaring magpasok ng 2 numero para sa buwan at araw at 4 na numero para sa taon',
-  'date-error': 'Mangyaring maglagay ng kumpletong petsa',
-  'number-error': 'Mangyaring magpasok ng wastong numero',
+  'date-error': 'Mangyaring maglagay ng kumpletong petsa'
 };

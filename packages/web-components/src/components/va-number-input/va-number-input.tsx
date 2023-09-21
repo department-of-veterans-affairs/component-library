@@ -11,6 +11,12 @@ import {
 } from '@stencil/core';
 import classnames from 'classnames';
 import i18next from 'i18next';
+import { Build } from '@stencil/core';
+
+if (Build.isTesting) {
+  // Make i18next.t() return the key instead of the value
+  i18next.init({ lng: 'cimode' });
+}
 
 /**
  * @nativeHandler onInput
@@ -246,7 +252,7 @@ export class VaNumberInput {
           <span id="error-message" role="alert">
             {error && (
               <Fragment>
-                <span class="sr-only">{i18next.t('error')}</span> {error}
+                <span class="sr-only">{i18next.t('error')}</span>{error}
               </Fragment>
             )}
           </span>

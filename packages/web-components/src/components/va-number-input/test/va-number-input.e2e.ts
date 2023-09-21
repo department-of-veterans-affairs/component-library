@@ -194,6 +194,31 @@ describe('va-number-input', () => {
     expect(inputEl.getAttribute('aria-describedby')).toContain('input-message');
   });
 
+  it('should show validation message when error prop is undefined', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<div><va-number-input label="test input" /></div>');
+    const inputEl = await page.find('va-number-input >>> input');
+
+    await inputEl.press('a');
+    await inputEl.press('b');
+    await inputEl.press('c');
+    await inputEl.press('Tab');
+    const errorEl = await page.find('va-number-input >>> #error-message');
+    expect(errorEl.innerText.indexOf('number-error')).not.toBe(-1);
+  })
+
+  it('should not show default validation message when error prop is defined', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<div><va-number-input label="test input" error="This is an error"/></div>');
+    const inputEl = await page.find('va-number-input >>> input');
+    await inputEl.press('a');
+    await inputEl.press('b');
+    await inputEl.press('c');
+    await inputEl.press('Tab');
+    const errorEl = await page.find('va-number-input >>> #error-message');
+    expect(errorEl.innerText.indexOf('This is an error')).not.toBe(-1);
+  })
+
   // Begin USWDS tests
 
   it('uswds renders', async () => {
@@ -378,11 +403,8 @@ describe('va-number-input', () => {
     expect(inputEl.getAttribute('aria-describedby')).toContain('error-message');
     expect(inputEl.getAttribute('aria-describedby')).toContain('input-message');
   });
-  /* ToDo: Un-skip the validation tests. Validation tests are skipped because 
-      there is not a clear way to mock the i18next translations and they are 
-      not loaded into the test environment
-  */
-  it.skip('should show validation message when error prop is undefined', async () => {
+  
+  it('uswds should show validation message when error prop is undefined', async () => {
     const page = await newE2EPage();
     await page.setContent('<div><va-number-input uswds label="test input" /></div>');
     const inputEl = await page.find('va-number-input >>> input');
@@ -391,12 +413,11 @@ describe('va-number-input', () => {
     await inputEl.press('b');
     await inputEl.press('c');
     await inputEl.press('Tab');
-
-    const label = await page.find('va-number-input >>> label');
-    expect(label.getAttribute('class')).toContain('usa-label--error')
+    const errorEl = await page.find('va-number-input >>> span.usa-error-message');
+    expect(errorEl).toEqualText('number-error');
   })
 
-  it.skip('should not show default validation message when error prop is defined', async () => {
+  it('uswds should not show default validation message when error prop is defined', async () => {
     const page = await newE2EPage();
     await page.setContent('<div><va-number-input uswds label="test input" error="This is an error"/></div>');
     const inputEl = await page.find('va-number-input >>> input');
