@@ -814,10 +814,10 @@ describe('va-memorable-date', () => {
       expect(date.getAttribute('error')).toEqual(`year-range`);
     });
 
-    it.skip('uswds v3 does month validation without required prop', async () => {
+    it('uswds v3 does month validation without required prop', async () => {
       const page = await newE2EPage();
       await page.setContent(
-        '<va-memorable-date value="1999-05-03" name="test" uswds />',
+        '<va-memorable-date name="test" uswds />',
       );
       const date = await page.find('va-memorable-date');
       const handleYear = await page.$('pierce/[name="testYear"]');
