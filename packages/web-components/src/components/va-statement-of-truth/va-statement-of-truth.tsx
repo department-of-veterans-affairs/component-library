@@ -132,7 +132,7 @@ export class VaStatementOfTruth {
     } = this;
     return (
       <Host>
-        <p>
+        <p class="font-sans-6">
           <strong>Note:</strong> According to federal law, there are criminal
           penalties, including a fine and/or imprisonment for up to 5 years,
           for withholding information or for providing incorrect information
@@ -141,7 +141,7 @@ export class VaStatementOfTruth {
         <article>
           <h3>{heading}</h3>
           <slot></slot>
-          <p>
+          <p class="font-sans-6">
             I have read and accept the&nbsp;
             <a href="/privacy-policy/" target="_blank">
               privacy policy
