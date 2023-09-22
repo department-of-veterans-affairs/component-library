@@ -184,30 +184,16 @@ export class VaRadio {
 
   private deselectCurrentNode(node: HTMLVaRadioOptionElement): void {
     node.removeAttribute('checked');
-    node.setAttribute('tabindex', '-1');
   }
 
   private selectNextNode(node: HTMLVaRadioOptionElement): void {
     node.setAttribute('checked', '');
-    node.setAttribute('tabindex', '0');
     node.focus();
   }
 
   private getHeaderLevel() {
     const number = parseInt(this.labelHeaderLevel, 10);
     return number >= 1 && number <= 6 ? `h${number}` : null;
-  }
-
-  componentDidLoad(): void {
-    getSlottedNodes(this.el, 'va-radio-option').forEach(
-      (node: HTMLVaRadioOptionElement, index: number) => {
-        if (index === 0) {
-          node.setAttribute('tabindex', '0');
-        } else {
-          node.setAttribute('tabindex', '-1');
-        }
-      },
-    );
   }
 
   connectedCallback() {
@@ -232,7 +218,7 @@ export class VaRadio {
       });
       return (
         <Host aria-invalid={error ? 'true' : 'false'} aria-label={ariaLabel}>
-          <fieldset class="usa-fieldset" role="radiogroup">
+          <fieldset class="usa-fieldset">
             <legend class={legendClass} part="legend">
               {HeaderLevel ? (
                 <HeaderLevel part="header">{label}</HeaderLevel>
@@ -261,7 +247,7 @@ export class VaRadio {
     } else {
       return (
         <Host aria-invalid={error ? 'true' : 'false'} aria-label={ariaLabel}>
-          <fieldset role="radiogroup">
+          <fieldset>
             <legend part="legend">
               {HeaderLevel ? (
                 <HeaderLevel part="header">{label}</HeaderLevel>
