@@ -23,7 +23,7 @@
   list-style: square;
   margin: 0 auto;
   max-width: 100rem;
-  padding-left: 0.8rem;
+  padding-left: 0;
   padding-right: 0.8rem;
   position: relative;
   width: 100%;
@@ -39,10 +39,4 @@
 
 :host([uswds]) .usa-breadcrumb__list-item:not(:last-child)::after {
   background: var(--color-gray-medium);
-}
-
-@media screen and (min-width: 768px) {
-  :host(:not([uswds])) ul {
-    padding-left: 0;
-  }
 }
