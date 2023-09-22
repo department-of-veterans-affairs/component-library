@@ -7,12 +7,6 @@ import IconSearch from './IconSearch';
 import LoadingIndicator from './LoadingIndicator';
 import MaintenanceBanner from './MaintenanceBanner';
 import Modal from './Modal';
-import Telephone, {
-  CONTACTS,
-  contactsMap,
-  PATTERNS as PHONE_PATTERNS,
-  patternsMap as PHONE_PATTERNS_MAP,
-} from './Telephone';
 import TextInput from './TextInput';
 
 import './i18n-setup';
@@ -28,10 +22,5 @@ export {
   LoadingIndicator,
   MaintenanceBanner,
   Modal,
-  Telephone,
-  CONTACTS,
-  contactsMap,
-  PHONE_PATTERNS,
-  PHONE_PATTERNS_MAP,
   TextInput,
 };

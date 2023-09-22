@@ -12,7 +12,6 @@ const componentsToKeep = [
   'IconSearch',
   'LoadingIndicator',
   'Modal',
-  'Telephone',
   'TextInput',
 ];
 

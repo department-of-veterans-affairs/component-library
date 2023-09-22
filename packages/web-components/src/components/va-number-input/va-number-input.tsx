@@ -11,6 +11,12 @@ import {
 } from '@stencil/core';
 import classnames from 'classnames';
 import i18next from 'i18next';
+import { Build } from '@stencil/core';
+
+if (Build.isTesting) {
+  // Make i18next.t() return the key instead of the value
+  i18next.init({ lng: 'cimode' });
+}
 
 /**
  * @nativeHandler onInput
@@ -120,7 +126,7 @@ export class VaNumberInput {
     this.value = target.value;
   };
 
-  private handleBlur = () => {
+  private handleBlur = (e: Event) => {
     if (this.enableAnalytics) {
       const detail = {
         componentName: 'va-number-input',
@@ -131,6 +137,17 @@ export class VaNumberInput {
         },
       };
       this.componentLibraryAnalytics.emit(detail);
+    }
+    
+    let defaultError = i18next.t('number-error');
+    const target = e.target as HTMLInputElement,
+      valid = target.checkValidity();
+    if (!this.error && !valid) {
+      this.error = defaultError;
+      this.el.setAttribute('error', defaultError);
+    } else if (this.error && this.error === defaultError && valid) {
+      this.error = null;
+      this.el.setAttribute('error', '');
     }
   };
 
@@ -237,7 +254,7 @@ export class VaNumberInput {
           <span id="error-message" role="alert">
             {error && (
               <Fragment>
-                <span class="sr-only">{i18next.t('error')}</span> {error}
+                <span class="sr-only">{i18next.t('error')}</span>{error}
               </Fragment>
             )}
           </span>

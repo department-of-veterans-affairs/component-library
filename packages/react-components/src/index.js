@@ -7,12 +7,6 @@ import IconSearch from './components/IconSearch/IconSearch';
 import LoadingIndicator from './components/LoadingIndicator/LoadingIndicator';
 import MaintenanceBanner from './components/MaintenanceBanner/MaintenanceBanner';
 import Modal from './components/Modal/Modal';
-import Telephone, {
-  CONTACTS,
-  contactsMap,
-  PATTERNS as PHONE_PATTERNS,
-  patternsMap as PHONE_PATTERNS_MAP,
-} from './components/Telephone/Telephone';
 import TextInput from './components/TextInput/TextInput';
 
 export {
@@ -26,10 +20,5 @@ export {
   LoadingIndicator,
   MaintenanceBanner,
   Modal,
-  Telephone,
-  CONTACTS,
-  contactsMap,
-  PHONE_PATTERNS,
-  PHONE_PATTERNS_MAP,
   TextInput,
 };

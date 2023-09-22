@@ -271,9 +271,11 @@ describe('uswds - va-pagination', () => {
               <li class="usa-pagination__item usa-pagination__arrow" aria-label="Next page">
                 <a href="javascript:void(0)" class="usa-pagination__link usa-pagination__next-page">
                   <span class="usa-pagination__link-text">next</span>
-                  <svg class="usa-icon" aria-hidden="true" role="img">
-                    <use href="/assets/sprite.svg#navigate_next"></use>
-                  </svg>
+                  <div id="next-arrow-icon">
+                    <svg class="usa-icon" aria-hidden="true" role="img">
+                      <use href="/assets/sprite.svg#navigate_next"></use>
+                    </svg>
+                  </div>
                 </a>
               </li>
             </ul>
