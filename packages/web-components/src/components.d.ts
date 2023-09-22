@@ -997,6 +997,10 @@ export namespace Components {
          */
         "total": number;
         /**
+          * When true, this makes the segmented-progress-bar use a div instead of a heading (v3 only)
+         */
+        "useDiv"?: boolean;
+        /**
           * Whether or not the component will use USWDS v3 styling.
          */
         "uswds"?: boolean;
@@ -1099,9 +1103,9 @@ export namespace Components {
          */
         "contact": string;
         /**
-          * Optional phone number extension
+          * Optional numeric string phone number extension
          */
-        "extension"?: number;
+        "extension"?: string;
         /**
           * Indicates if this is a number meant to be called from outside the US. Prepends a "+1" to the formatted number.
          */
@@ -2909,6 +2913,10 @@ declare namespace LocalJSX {
          */
         "total": number;
         /**
+          * When true, this makes the segmented-progress-bar use a div instead of a heading (v3 only)
+         */
+        "useDiv"?: boolean;
+        /**
           * Whether or not the component will use USWDS v3 styling.
          */
         "uswds"?: boolean;
@@ -3035,9 +3043,9 @@ declare namespace LocalJSX {
          */
         "contact": string;
         /**
-          * Optional phone number extension
+          * Optional numeric string phone number extension
          */
-        "extension"?: number;
+        "extension"?: string;
         /**
           * Indicates if this is a number meant to be called from outside the US. Prepends a "+1" to the formatted number.
          */
