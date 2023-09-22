@@ -144,8 +144,10 @@ export class VaNumberInput {
       valid = target.checkValidity();
     if (!this.error && !valid) {
       this.error = defaultError;
+      this.el.setAttribute('error', defaultError);
     } else if (this.error && this.error === defaultError && valid) {
       this.error = null;
+      this.el.setAttribute('error', '');
     }
   };
 
