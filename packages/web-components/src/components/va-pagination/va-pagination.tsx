@@ -314,7 +314,7 @@ export class VaPagination {
             <li class={itemClasses}>
               <a href="javascript:void(0)" class="usa-pagination__button">1</a>
             </li>
-            <li class={ellipsisClasses} aria-label="ellipsis indicating non-visible pages" role="presentation">
+            <li class={ellipsisClasses} aria-label="ellipsis indicating non-visible pages">
               <span>...</span>
             </li> 
           </Fragment>}
@@ -338,7 +338,7 @@ export class VaPagination {
         ?
         <Fragment>
           {pages > this.SHOW_ALL_PAGES &&
-            <li class={ellipsisClasses} aria-label="ellipsis indicating non-visible pages" role="presentation">
+            <li class={ellipsisClasses} aria-label="ellipsis indicating non-visible pages">
             <span>...</span>
           </li>}
           {!this.unbounded && pages > this.SHOW_ALL_PAGES &&
@@ -419,7 +419,7 @@ export class VaPagination {
             {/* START ELLIPSIS AND LAST BUTTON */}
             {showLastPage && page < pages - maxPageListLength + 1 && (
               <Fragment>
-                <li role="presentation">
+                <li>
                   <span>...</span>
                 </li>
                 <li>
