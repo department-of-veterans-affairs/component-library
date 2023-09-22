@@ -52,9 +52,6 @@ button.va-crisis-line {
 
   @media(min-width: $small-desktop-screen) {
     width: auto;
-    position: absolute;
-    right: 0;
-    bottom: -5px;
     border-radius: 0 0 2.3px 2.3px;
     box-shadow: 0 2px 5px var(--color-base);
   }
@@ -65,7 +62,7 @@ button.va-crisis-line {
   align-items: center;
   justify-content: center;
   margin: auto;
-  
+
 
   @media(min-width: $small-desktop-screen) {
     text-align: left;

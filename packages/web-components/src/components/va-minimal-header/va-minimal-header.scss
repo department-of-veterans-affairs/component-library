@@ -1,10 +1,10 @@
-.va-header{
+.va-header {
   display: flex;
   margin-left: auto;
   margin-right: auto;
   max-width: 1000px;
   background-color: #182c54;
-  color:var(--color-white);
+  color: var(--color-white);
   align-items: center;
   padding: 20px 16px;
   line-height: 22px;
@@ -29,5 +29,15 @@
     font-size: 20px;
     margin: 0;
     font-weight: 100;
+  }
+}
+
+$small-desktop-screen: 1008px;
+
+@media(min-width: $small-desktop-screen) {
+  va-crisis-line-modal::part(button) {
+    position: absolute;
+    right: 0;
+    bottom: -5px;
   }
 }
