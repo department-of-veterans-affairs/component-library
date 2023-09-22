@@ -31,6 +31,7 @@ export default {
   'date-hint': 'Please enter 2 digits for the month and day and 4 digits for the year',
   'date-hint-with-select': 'For example: January 19 2000',
   'date-error': 'Please enter a complete date',
+  'number-error': 'Please enter a valid number',
   'gov-site-label': 'Official website of the United States government',
   'gov-site-button': "Here's how you know",
   'gov-site-website': 'Official websites use .{{tld}}',

@@ -233,7 +233,7 @@ export class VaPagination {
    * the result is to render the page in xhtml not html
    * and errors result. 
    */
-  componentDidLoad() {
+  addIcons() {
     function makeSvgString(icon: string) {
       const path = `${getAssetPath('/assets/sprite.svg')}#${icon}`;
       // eslint-disable-next-line i18next/no-literal-string
@@ -245,25 +245,21 @@ export class VaPagination {
       </svg>`;
     }
 
-    //remove wrapper div around icon because it affects styling
-    function removeWrapper(wrapper: Element) {
-      wrapper.parentNode.insertBefore(wrapper.firstChild, wrapper);
-      wrapper.remove();
-    }
-
     const prevIconDiv = this.el.shadowRoot?.querySelector("#previous-arrow-icon");
     if (prevIconDiv) {
       prevIconDiv.innerHTML = makeSvgString('navigate_before');
-      removeWrapper(prevIconDiv);
     }
 
     const nextIconDiv = this.el.shadowRoot?.querySelector("#next-arrow-icon");
     if (nextIconDiv) {
       nextIconDiv.innerHTML = makeSvgString('navigate_next');
-      removeWrapper(nextIconDiv);
     }
   }
 
+  componentDidRender() {
+    this.addIcons();
+  }
+  
   connectedCallback() {
     i18next.on('languageChanged', () => {
       forceUpdate(this.el);
@@ -304,7 +300,12 @@ export class VaPagination {
         ? 
         <Fragment>
           <li class={arrowClasses} aria-label={previousAriaLabel}>
-            <a class="usa-pagination__link usa-pagination__previous-page" href="javascript:void(0)">
+            <a
+              onClick={() => this.handlePageSelect(page - 1, 'nav-paginate-number')}
+              onKeyDown={e => this.handleKeyDown(e, page - 1)}
+              class="usa-pagination__link usa-pagination__previous-page"
+              href="javascript:void(0)"
+            >
               <div id="previous-arrow-icon"></div>
               <span class="usa-pagination__link-text">{i18next.t('previous')}</span>  
             </a>
@@ -312,7 +313,11 @@ export class VaPagination {
           {!pageNumbersToRender.includes(1) && 
           <Fragment>
             <li class={itemClasses}>
-              <a href="javascript:void(0)" class="usa-pagination__button">1</a>
+              <a
+                onClick={() => this.handlePageSelect(1, 'nav-paginate-number')}
+                onKeyDown={e => this.handleKeyDown(e, 1)}
+                href="javascript:void(0)"
+                class="usa-pagination__button">1</a>
             </li>
             <li class={ellipsisClasses} aria-label="ellipsis indicating non-visible pages">
               <span>...</span>
@@ -329,7 +334,14 @@ export class VaPagination {
 
         return (
           <li class={itemClasses}>
-            <a href="javascript:void(0)" class={anchorClasses}>{pageNumber}</a>
+            <a
+              onClick={() => this.handlePageSelect(pageNumber, 'nav-paginate-number')}
+              onKeyDown={e => this.handleKeyDown(e, pageNumber)}
+              href="javascript:void(0)"
+              class={anchorClasses}
+            >
+              {pageNumber}
+            </a>
           </li>
         )
       });
@@ -343,10 +355,22 @@ export class VaPagination {
           </li>}
           {!this.unbounded && pages > this.SHOW_ALL_PAGES &&
           <li class={itemClasses}>
-            <a href="javascript:void(0)" class="usa-pagination__button">{pages}</a>
+              <a
+                onClick={() => this.handlePageSelect(pages, 'nav-paginate-number')}
+                onKeyDown={e => this.handleKeyDown(e, pages)}
+                href="javascript:void(0)"
+                class="usa-pagination__button"
+              >
+                {pages}
+              </a>
           </li>}
           <li class={arrowClasses} aria-label={nextAriaLabel}>
-            <a class="usa-pagination__link usa-pagination__next-page" href="javascript:void(0)">
+            <a
+              onClick={() => this.handlePageSelect(page + 1, 'nav-paginate-number')}
+              onKeyDown={e => this.handleKeyDown(e, page + 1)}
+              class="usa-pagination__link usa-pagination__next-page"
+              href="javascript:void(0)"
+            >
               <span class="usa-pagination__link-text">{i18next.t('next')}</span>
               <div id="next-arrow-icon"></div>
             </a>
