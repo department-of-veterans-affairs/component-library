@@ -85,8 +85,11 @@ describe('va-radio', () => {
 
     expect(await options[0].getProperty('checked')).toBeTruthy();
     expect(await options[1].getProperty('checked')).toBeFalsy();
-
-    await options[1].click();
+    await page.evaluate(() => {
+      const radios = document.querySelectorAll('va-radio-option input'),
+            radio = radios[1] as HTMLInputElement;
+      radio.click();
+    })
 
     expect(await options[0].getProperty('checked')).toBeFalsy();
     expect(await options[1].getProperty('checked')).toBeTruthy();
@@ -179,8 +182,10 @@ describe('va-radio', () => {
       </va-radio>
       `);
     const analyticsSpy = await page.spyOnEvent('component-library-analytics');
-    const inputEl = await page.find('va-radio-option');
-    await inputEl.click();
+    await page.evaluate(() => {
+      const radio = document.querySelector('va-radio-option input') as HTMLInputElement;
+      radio.click();
+    })
 
     expect(analyticsSpy).toHaveReceivedEventDetail({
       action: 'change',
@@ -202,9 +207,10 @@ describe('va-radio', () => {
       `);
 
     const analyticsSpy = await page.spyOnEvent('component-library-analytics');
-    const inputEl = await page.find('va-radio-option');
-    await inputEl.click();
-
+    await page.evaluate(() => {
+      const radio = document.querySelector('va-radio-option input') as HTMLInputElement;
+      radio.click();
+    })
     expect(analyticsSpy).not.toHaveReceivedEvent();
   });
 
@@ -217,9 +223,10 @@ describe('va-radio', () => {
       `);
 
     const changeSpy = await page.spyOnEvent('vaValueChange');
-    const inputEl = await page.find('va-radio-option');
-    await inputEl.click();
-
+    await page.evaluate(() => {
+      const radio = document.querySelector('va-radio-option input') as HTMLInputElement;
+      radio.click();
+    })
     expect(changeSpy).toHaveReceivedEventDetail({ value: 'one' });
   });
 
@@ -233,8 +240,8 @@ describe('va-radio', () => {
     `,
     );
     const options = await page.findAll('va-radio-option');
-
-    await options[0].press('Space');
+    const input = await options[0].find('input');
+    await input.press('Space');
 
     expect(await options[0].getProperty('checked')).toBeTruthy();
   });
@@ -251,8 +258,8 @@ describe('va-radio', () => {
     `,
     );
     const options = await page.findAll('va-radio-option');
-
-    await options[0].press('ArrowLeft');
+    const input = await options[0].find('input');
+    await input.press('ArrowLeft');
 
     expect(await options[2].getProperty('checked')).toBeTruthy();
   });
@@ -269,8 +276,8 @@ describe('va-radio', () => {
     `,
     );
     const options = await page.findAll('va-radio-option');
-
-    await options[0].press('ArrowLeft');
+    const input = await options[0].find('input');
+    await input.press('ArrowLeft');
 
     expect(await options[0].getProperty('checked')).toBeFalsy();
   });
@@ -287,8 +294,8 @@ describe('va-radio', () => {
     `,
     );
     const options = await page.findAll('va-radio-option');
-
-    await options[0].press('ArrowRight');
+    const input = await options[0].find('input');
+    await input.press('ArrowRight');
 
     expect(await options[1].getProperty('checked')).toBeTruthy();
   });
@@ -305,8 +312,8 @@ describe('va-radio', () => {
     `,
     );
     const options = await page.findAll('va-radio-option');
-
-    await options[0].press('ArrowRight');
+    const input = await options[0].find('input');
+    await input.press('ArrowRight');
 
     expect(await options[0].getProperty('checked')).toBeFalsy();
   });
@@ -322,8 +329,8 @@ describe('va-radio', () => {
     `,
     );
     const options = await page.findAll('va-radio-option');
-
-    await options[0].press('ArrowDown');
+    const input = await options[0].find('input');
+    await input.press('ArrowDown');
 
     expect(await options[1].getProperty('checked')).toBeTruthy();
   });
@@ -339,8 +346,8 @@ describe('va-radio', () => {
     `,
     );
     const options = await page.findAll('va-radio-option');
-
-    await options[0].press('ArrowDown');
+    const input = await options[0].find('input');
+    await input.press('ArrowDown');
 
     expect(await options[0].getProperty('checked')).toBeFalsy();
   });
@@ -356,8 +363,8 @@ describe('va-radio', () => {
     `,
     );
     const options = await page.findAll('va-radio-option');
-
-    await options[0].press('ArrowUp');
+    const input = await options[0].find('input');
+    await input.press('ArrowUp');
 
     expect(await options[1].getProperty('checked')).toBeTruthy();
   });
@@ -373,8 +380,8 @@ describe('va-radio', () => {
     `,
     );
     const options = await page.findAll('va-radio-option');
-
-    await options[1].press('ArrowUp');
+    const input = await options[1].find('input');
+    await input.press('ArrowUp');
 
     expect(await options[1].getProperty('checked')).toBeFalsy();
   });
@@ -555,8 +562,8 @@ describe('va-radio', () => {
     `,
     );
     const options = await page.findAll('va-radio-option');
-
-    await options[0].press('Space');
+    const input = await options[0].find('input');
+    await input.press('Space');
 
     expect(await options[0].getProperty('checked')).toBeTruthy();
   });
@@ -573,8 +580,8 @@ describe('va-radio', () => {
     `,
     );
     const options = await page.findAll('va-radio-option');
-
-    await options[0].press('ArrowLeft');
+    const input = await options[0].find('input');
+    await input.press('ArrowLeft');
 
     expect(await options[2].getProperty('checked')).toBeTruthy();
   });
@@ -591,8 +598,9 @@ describe('va-radio', () => {
     `,
     );
     const options = await page.findAll('va-radio-option');
+    const input = await options[0].find('input');
 
-    await options[0].press('ArrowLeft');
+    await input.press('ArrowLeft');
 
     expect(await options[0].getProperty('checked')).toBeFalsy();
   });
@@ -609,8 +617,8 @@ describe('va-radio', () => {
     `,
     );
     const options = await page.findAll('va-radio-option');
-
-    await options[0].press('ArrowRight');
+    const input = await options[0].find('input');
+    await input.press('ArrowRight');
 
     expect(await options[1].getProperty('checked')).toBeTruthy();
   });
@@ -627,8 +635,8 @@ describe('va-radio', () => {
     `,
     );
     const options = await page.findAll('va-radio-option');
-
-    await options[0].press('ArrowRight');
+    const input = await options[0].find('input');
+    await input.press('ArrowRight');
 
     expect(await options[0].getProperty('checked')).toBeFalsy();
   });
@@ -644,8 +652,8 @@ describe('va-radio', () => {
     `,
     );
     const options = await page.findAll('va-radio-option');
-
-    await options[0].press('ArrowDown');
+    const input = await options[0].find('input');
+    await input.press('ArrowDown');
 
     expect(await options[1].getProperty('checked')).toBeTruthy();
   });
@@ -661,8 +669,8 @@ describe('va-radio', () => {
     `,
     );
     const options = await page.findAll('va-radio-option');
-
-    await options[0].press('ArrowDown');
+    const input = await options[0].find('input');
+    await input.press('ArrowDown');
 
     expect(await options[0].getProperty('checked')).toBeFalsy();
   });
@@ -678,8 +686,8 @@ describe('va-radio', () => {
     `,
     );
     const options = await page.findAll('va-radio-option');
-
-    await options[0].press('ArrowUp');
+    const input = await options[0].find('input');
+    await input.press('ArrowUp');
 
     expect(await options[1].getProperty('checked')).toBeTruthy();
   });
@@ -695,8 +703,8 @@ describe('va-radio', () => {
     `,
     );
     const options = await page.findAll('va-radio-option');
-
-    await options[1].press('ArrowUp');
+    const input = await options[1].find('input');
+    await input.press('ArrowUp');
 
     expect(await options[1].getProperty('checked')).toBeFalsy();
   });

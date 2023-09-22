@@ -13,7 +13,6 @@ const componentsToKeep = [
   'LoadingIndicator',
   'Modal',
   'OMBInfo',
-  'Telephone',
   'TextInput',
 ];
 
