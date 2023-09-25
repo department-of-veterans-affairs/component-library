@@ -219,6 +219,7 @@ export const LabelHeader = Template.bind(null);
 LabelHeader.args = {
   ...defaultArgs,
   'label-header-level': '3',
+  'message-aria-describedby': 'Optional description text for screen readers',
 };
 
 export const Tile = OptionTileExample.bind(null);
