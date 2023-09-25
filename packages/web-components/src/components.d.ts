@@ -294,6 +294,10 @@ export namespace Components {
          */
         "messageAriaDescribedby"?: string;
         /**
+          * The name to pass to the checkbox element.
+         */
+        "name"?: string;
+        /**
           * Set the input to required and render the (Required) text.
          */
         "required"?: boolean;
@@ -999,6 +1003,10 @@ export namespace Components {
          */
         "total": number;
         /**
+          * When true, this makes the segmented-progress-bar use a div instead of a heading (v3 only)
+         */
+        "useDiv"?: boolean;
+        /**
           * Whether or not the component will use USWDS v3 styling.
          */
         "uswds"?: boolean;
@@ -1045,6 +1053,40 @@ export namespace Components {
          */
         "value"?: string;
     }
+    interface VaStatementOfTruth {
+        /**
+          * The error to be applied to the va-check-box element
+         */
+        "checkboxError": string;
+        /**
+          * The label for the va-checkbox-component
+         */
+        "checkboxLabel": string;
+        /**
+          * The flag to prefill the checked state of the va-checkbox component
+         */
+        "checked": boolean;
+        /**
+          * An optional custom header for the component
+         */
+        "heading": string;
+        /**
+          * The error to be applied to the va-text-input element
+         */
+        "inputError": string;
+        /**
+          * The label for the va-text-input component
+         */
+        "inputLabel": string;
+        /**
+          * An optional message that will be read by screen readers when the input in the va-text-input component is focused.
+         */
+        "inputMessageAriaDescribedby": string;
+        /**
+          * The value to pre-fill the va-text-input element
+         */
+        "inputValue": string;
+    }
     interface VaTable {
         /**
           * Whether the initial sort state will be descending or not.
@@ -1067,9 +1109,9 @@ export namespace Components {
          */
         "contact": string;
         /**
-          * Optional phone number extension
+          * Optional numeric string phone number extension
          */
-        "extension"?: number;
+        "extension"?: string;
         /**
           * Indicates if this is a number meant to be called from outside the US. Prepends a "+1" to the formatted number.
          */
@@ -1354,6 +1396,10 @@ export interface VaSelectCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLVaSelectElement;
 }
+export interface VaStatementOfTruthCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLVaStatementOfTruthElement;
+}
 export interface VaTelephoneCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLVaTelephoneElement;
@@ -1613,6 +1659,12 @@ declare global {
         prototype: HTMLVaSelectElement;
         new (): HTMLVaSelectElement;
     };
+    interface HTMLVaStatementOfTruthElement extends Components.VaStatementOfTruth, HTMLStencilElement {
+    }
+    var HTMLVaStatementOfTruthElement: {
+        prototype: HTMLVaStatementOfTruthElement;
+        new (): HTMLVaStatementOfTruthElement;
+    };
     interface HTMLVaTableElement extends Components.VaTable, HTMLStencilElement {
     }
     var HTMLVaTableElement: {
@@ -1685,6 +1737,7 @@ declare global {
         "va-search-input": HTMLVaSearchInputElement;
         "va-segmented-progress-bar": HTMLVaSegmentedProgressBarElement;
         "va-select": HTMLVaSelectElement;
+        "va-statement-of-truth": HTMLVaStatementOfTruthElement;
         "va-table": HTMLVaTableElement;
         "va-table-row": HTMLVaTableRowElement;
         "va-telephone": HTMLVaTelephoneElement;
@@ -2032,6 +2085,10 @@ declare namespace LocalJSX {
           * An optional message that will be read by screen readers when the checkbox is focused.
          */
         "messageAriaDescribedby"?: string;
+        /**
+          * The name to pass to the checkbox element.
+         */
+        "name"?: string;
         /**
           * The event used to track usage of the component. This is emitted when the input value changes and enableAnalytics is true.
          */
@@ -2882,6 +2939,10 @@ declare namespace LocalJSX {
          */
         "total": number;
         /**
+          * When true, this makes the segmented-progress-bar use a div instead of a heading (v3 only)
+         */
+        "useDiv"?: boolean;
+        /**
           * Whether or not the component will use USWDS v3 styling.
          */
         "uswds"?: boolean;
@@ -2940,6 +3001,52 @@ declare namespace LocalJSX {
          */
         "value"?: string;
     }
+    interface VaStatementOfTruth {
+        /**
+          * The error to be applied to the va-check-box element
+         */
+        "checkboxError"?: string;
+        /**
+          * The label for the va-checkbox-component
+         */
+        "checkboxLabel"?: string;
+        /**
+          * The flag to prefill the checked state of the va-checkbox component
+         */
+        "checked"?: boolean;
+        /**
+          * An optional custom header for the component
+         */
+        "heading"?: string;
+        /**
+          * The error to be applied to the va-text-input element
+         */
+        "inputError"?: string;
+        /**
+          * The label for the va-text-input component
+         */
+        "inputLabel"?: string;
+        /**
+          * An optional message that will be read by screen readers when the input in the va-text-input component is focused.
+         */
+        "inputMessageAriaDescribedby"?: string;
+        /**
+          * The value to pre-fill the va-text-input element
+         */
+        "inputValue"?: string;
+        /**
+          * The event emitted when the checked state of the va-checkbox changes
+         */
+        "onVaCheckboxChange"?: (event: VaStatementOfTruthCustomEvent<any>) => void;
+        /**
+          * The event emitted when the user tabs out of the input
+         */
+        "onVaInputBlur"?: (event: VaStatementOfTruthCustomEvent<any>) => void;
+        /**
+          * The event emitted when the value of the input changes
+         */
+        "onVaInputChange"?: (event: VaStatementOfTruthCustomEvent<any>) => void;
+    }
     interface VaTable {
         /**
           * Whether the initial sort state will be descending or not.
@@ -2962,9 +3069,9 @@ declare namespace LocalJSX {
          */
         "contact": string;
         /**
-          * Optional phone number extension
+          * Optional numeric string phone number extension
          */
-        "extension"?: number;
+        "extension"?: string;
         /**
           * Indicates if this is a number meant to be called from outside the US. Prepends a "+1" to the formatted number.
          */
@@ -3178,6 +3285,7 @@ declare namespace LocalJSX {
         "va-search-input": VaSearchInput;
         "va-segmented-progress-bar": VaSegmentedProgressBar;
         "va-select": VaSelect;
+        "va-statement-of-truth": VaStatementOfTruth;
         "va-table": VaTable;
         "va-table-row": VaTableRow;
         "va-telephone": VaTelephone;
@@ -3230,6 +3338,7 @@ declare module "@stencil/core" {
             "va-search-input": LocalJSX.VaSearchInput & JSXBase.HTMLAttributes<HTMLVaSearchInputElement>;
             "va-segmented-progress-bar": LocalJSX.VaSegmentedProgressBar & JSXBase.HTMLAttributes<HTMLVaSegmentedProgressBarElement>;
             "va-select": LocalJSX.VaSelect & JSXBase.HTMLAttributes<HTMLVaSelectElement>;
+            "va-statement-of-truth": LocalJSX.VaStatementOfTruth & JSXBase.HTMLAttributes<HTMLVaStatementOfTruthElement>;
             "va-table": LocalJSX.VaTable & JSXBase.HTMLAttributes<HTMLVaTableElement>;
             "va-table-row": LocalJSX.VaTableRow & JSXBase.HTMLAttributes<HTMLVaTableRowElement>;
             "va-telephone": LocalJSX.VaTelephone & JSXBase.HTMLAttributes<HTMLVaTelephoneElement>;
