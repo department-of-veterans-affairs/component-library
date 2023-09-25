@@ -284,16 +284,17 @@ export class VaMemorableDate {
               {required && <span class="usa-label--required"> {i18next.t('required')}</span>}
               {hint && <div class="usa-hint" id="hint">{hint}</div>}
               <span class="usa-hint" id="dateHint">{hintText}</span>
+              <span id="error-message" role="alert">
+                {error && (
+                  <Fragment>
+                    <span class="usa-sr-only">{i18next.t('error')}</span>
+                    <span class="usa-error-message">{i18next.t(error, errorParameters(error))}</span>
+                  </Fragment>
+                )}
+              </span>
             </legend>
             <slot />
-            <span id="error-message" role="alert">
-              {error && (
-                <Fragment>
-                  <span class="usa-sr-only">{i18next.t('error')}</span>
-                  <span class="usa-error-message">{i18next.t(error, errorParameters(error))}</span>
-                </Fragment>
-              )}
-            </span>
+            
             <div class="usa-memorable-date">
               {monthDisplay}
               <div class="usa-form-group usa-form-group--day">
@@ -346,15 +347,16 @@ export class VaMemorableDate {
               {label} {required && <span class="required">{i18next.t('required')}</span>}
               {hint && <div id="hint">{hint}</div>}
               <div id="dateHint">{i18next.t('date-hint')}.</div>
+              <span id="error-message" role="alert">
+                {error && (
+                  <Fragment>
+                    <span class="sr-only">{i18next.t('error')}</span> {i18next.t(error, errorParameters(error))}
+                  </Fragment>
+                )}
+              </span>
             </legend>
             <slot />
-            <span id="error-message" role="alert">
-              {error && (
-                <Fragment>
-                  <span class="sr-only">{i18next.t('error')}</span> {i18next.t(error, errorParameters(error))}
-                </Fragment>
-              )}
-            </span>
+            
             <div class="date-container">
               <va-text-input
                 label={i18next.t('month')}
