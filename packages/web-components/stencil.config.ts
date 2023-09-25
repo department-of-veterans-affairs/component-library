@@ -1,3 +1,4 @@
+/* eslint-disable i18next/no-literal-string */
 import { Config } from '@stencil/core';
 import { postcss } from '@stencil/postcss';
 import { sass } from '@stencil/sass';
@@ -9,7 +10,7 @@ export const config: Config = {
   namespace: 'component-library',
   globalStyle: 'src/global/main.css',
   plugins: [
-    sass({ 
+    sass({
       includePaths: [
         '../../node_modules/@uswds/uswds/packages/',
         'src/global/'
@@ -54,4 +55,9 @@ export const config: Config = {
       serviceWorker: null, // disable service workers
     },
   ],
+  testing: {
+    moduleNameMapper: {
+      '^.+.(svg)$': 'jest-transformer-svg',
+    },
+  },
 };

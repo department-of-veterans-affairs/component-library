@@ -2,12 +2,10 @@ import React from 'react';
 import { getWebComponentDocs, propStructure, StoryDocs, componentStructure } from './wc-helpers';
 
 const minimalHeaderDocs = getWebComponentDocs('va-minimal-header');
-const vaCrisisLineModal = getWebComponentDocs('va-crisis-line-modal');
 
 export default {
   title: 'Components/MinimalHeader',
   id: 'components/va-minimal-header',
-  subcomponents: componentStructure(vaCrisisLineModal),
   parameters: {
     componentSubtitle: `va-minimal-header web component`,
     docs: {
