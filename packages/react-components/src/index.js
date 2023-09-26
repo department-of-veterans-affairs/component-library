@@ -7,7 +7,6 @@ import IconSearch from './components/IconSearch/IconSearch';
 import LoadingIndicator from './components/LoadingIndicator/LoadingIndicator';
 import MaintenanceBanner from './components/MaintenanceBanner/MaintenanceBanner';
 import Modal from './components/Modal/Modal';
-import OMBInfo from './components/OMBInfo/OMBInfo';
 import TextInput from './components/TextInput/TextInput';
 
 export {
@@ -21,6 +20,5 @@ export {
   LoadingIndicator,
   MaintenanceBanner,
   Modal,
-  OMBInfo,
   TextInput,
 };
