@@ -107,6 +107,11 @@ export class VaCheckbox {
   @Prop() messageAriaDescribedby?: string;
 
   /**
+   * The name to pass to the checkbox element.
+   */
+  @Prop() name?: string;
+
+  /**
    * The event used to track usage of the component. This is emitted when the
    * input value changes and enableAnalytics is true.
    */
@@ -177,6 +182,7 @@ export class VaCheckbox {
       checkboxDescription,
       disabled,
       messageAriaDescribedby,
+      name
     } = this;
 
 
@@ -217,6 +223,7 @@ export class VaCheckbox {
             <input
               class={inputClass}
               type="checkbox"
+              name={name || null}
               id="checkbox-element"
               checked={checked}
               aria-describedby={ariaDescribedbyIds}
