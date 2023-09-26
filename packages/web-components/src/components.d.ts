@@ -875,6 +875,10 @@ export namespace Components {
          */
         "error"?: string;
         /**
+          * An optional message that will be read by screen readers when the header is focused. The label-header-level prop must be set for this to be active.
+         */
+        "headerAriaDescribedby"?: string;
+        /**
           * Optional hint text.
          */
         "hint"?: string;
@@ -886,10 +890,6 @@ export namespace Components {
           * Insert a header with defined level inside the label (legend)
          */
         "labelHeaderLevel"?: string;
-        /**
-          * An optional message that will be read by screen readers when the header is focused. The labelHeaderLevel prop must be set for this to be read.
-         */
-        "messageAriaDescribedby"?: string;
         /**
           * Whether or not this input field is required.
          */
@@ -2726,6 +2726,10 @@ declare namespace LocalJSX {
          */
         "error"?: string;
         /**
+          * An optional message that will be read by screen readers when the header is focused. The label-header-level prop must be set for this to be active.
+         */
+        "headerAriaDescribedby"?: string;
+        /**
           * Optional hint text.
          */
         "hint"?: string;
@@ -2737,10 +2741,6 @@ declare namespace LocalJSX {
           * Insert a header with defined level inside the label (legend)
          */
         "labelHeaderLevel"?: string;
-        /**
-          * An optional message that will be read by screen readers when the header is focused. The labelHeaderLevel prop must be set for this to be read.
-         */
-        "messageAriaDescribedby"?: string;
         /**
           * The event used to track usage of the component. This is emitted when a radio option is selected and enableAnalytics is true.
          */

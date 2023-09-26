@@ -76,10 +76,10 @@ export class VaRadio {
   @Prop() labelHeaderLevel?: string;
 
   /**
-   * An optional message that will be read by screen readers when the header is focused. The labelHeaderLevel
-   * prop must be set for this to be read.
+   * An optional message that will be read by screen readers when the header is focused. The label-header-level
+   * prop must be set for this to be active.
    */
-  @Prop() messageAriaDescribedby?: string;
+  @Prop() headerAriaDescribedby?: string;
 
   /**
    * The event used to track usage of the component. This is emitted when a
@@ -220,11 +220,11 @@ export class VaRadio {
       required, 
       error, 
       uswds, 
-      messageAriaDescribedby 
+      headerAriaDescribedby 
     } = this;
     const ariaLabel = label + (required ? ' required' : '');
     const HeaderLevel = this.getHeaderLevel();
-    const headerAriaDescribedbyId = messageAriaDescribedby ? 'header-message' : null;
+    const headerAriaDescribedbyId = headerAriaDescribedby ? 'header-message' : null;
 
     if (uswds) {
       const legendClass = classnames({
@@ -239,6 +239,11 @@ export class VaRadio {
                 <HeaderLevel part="header" aria-describedby={headerAriaDescribedbyId}>{label}</HeaderLevel>
               ) : (
                 label
+              )}
+              {headerAriaDescribedby && (
+                <span id="header-message" class="sr-only">
+                  {headerAriaDescribedby}
+                </span>
               )}
               {required && (
                 <span class="usa-label--required" part="required">
@@ -255,11 +260,6 @@ export class VaRadio {
                 </Fragment>
               )}
             </span>
-            {messageAriaDescribedby && (
-              <span id="header-message" class="sr-only">
-                {messageAriaDescribedby}
-              </span>
-            )}
             <slot></slot>
           </fieldset>
         </Host>
@@ -273,6 +273,11 @@ export class VaRadio {
                 <HeaderLevel part="header" aria-describedby={headerAriaDescribedbyId}>{label}</HeaderLevel>
               ) : (
                 label
+              )}
+              {headerAriaDescribedby && (
+                <span id="header-message" class="sr-only">
+                  {headerAriaDescribedby}
+                </span>
               )}
               {required && (
                 <span class="required" part="required">
@@ -288,11 +293,6 @@ export class VaRadio {
                 </Fragment>
               )}
             </span>
-            {messageAriaDescribedby && (
-              <span id="header-message" class="sr-only">
-                {messageAriaDescribedby}
-              </span>
-            )}
             <slot></slot>
           </fieldset>
         </Host>
