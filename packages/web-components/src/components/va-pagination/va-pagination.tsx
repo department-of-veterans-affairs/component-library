@@ -86,7 +86,7 @@ export class VaPagination {
    * Don't show last page when the page count exceeds
    * `maxPageListLength` (but do show the ellipsis).
    * Only relevant if uswds is true.
-   */ 
+   */
 
   @Prop() unbounded?: boolean = false;
 
@@ -96,7 +96,7 @@ export class VaPagination {
   @Prop() uswds?: boolean = false;
 
   /**
-   * If the page total is less than or equal to this limit, show all pages. 
+   * If the page total is less than or equal to this limit, show all pages.
    * Only relevant for uswds.
    */
   SHOW_ALL_PAGES: number = 7;
@@ -177,7 +177,7 @@ export class VaPagination {
         end = currentPage + (radius - 1 - unboundedChar);
       }
     }
-    
+
     return makeArray(start, end);
   }
 
@@ -229,9 +229,9 @@ export class VaPagination {
   };
 
   /**
-   * Adding SVGs here because if SVGs are included in the render method, 
+   * Adding SVGs here because if SVGs are included in the render method,
    * the result is to render the page in xhtml not html
-   * and errors result. 
+   * and errors result.
    */
   addIcons() {
     function makeSvgString(icon: string) {
@@ -259,7 +259,7 @@ export class VaPagination {
   componentDidRender() {
     this.addIcons();
   }
-  
+
   connectedCallback() {
     i18next.on('languageChanged', () => {
       forceUpdate(this.el);
@@ -297,7 +297,7 @@ export class VaPagination {
       });
 
       const previousButton = page > 1
-        ? 
+        ?
         <Fragment>
           <li class={arrowClasses} aria-label={previousAriaLabel}>
             <a
@@ -307,10 +307,10 @@ export class VaPagination {
               href="javascript:void(0)"
             >
               <div id="previous-arrow-icon"></div>
-              <span class="usa-pagination__link-text">{i18next.t('previous')}</span>  
+              <span class="usa-pagination__link-text">{i18next.t('previous')}</span>
             </a>
           </li>
-          {!pageNumbersToRender.includes(1) && 
+          {!pageNumbersToRender.includes(1) &&
           <Fragment>
             <li class={itemClasses}>
               <a
@@ -321,11 +321,11 @@ export class VaPagination {
             </li>
             <li class={ellipsisClasses} aria-label="ellipsis indicating non-visible pages">
               <span>...</span>
-            </li> 
+            </li>
           </Fragment>}
         </Fragment>
         : null;
-      
+
       const renderPages = pageNumbersToRender.map(pageNumber => {
         const anchorClasses = classnames({
           'usa-pagination__button': true,
@@ -380,7 +380,7 @@ export class VaPagination {
 
       return (
         <Host>
-          <nav class="usa-pagination">
+          <nav class="usa-pagination" aria-label="Pagination">
             <ul class="usa-pagination__list">
               {previousButton}
               {renderPages}
