@@ -35,6 +35,7 @@ const vaRadioConst = args => {
     required,
     uswds = true,
     'label-header-level': labelHeaderLevel,
+    'header-aria-describedby': headerAriaDescribedby,
     ...rest
   } = args;
 
@@ -47,6 +48,7 @@ const vaRadioConst = args => {
         uswds={uswds}
         hint={hint}
         label-header-level={labelHeaderLevel}
+        header-aria-describedby={headerAriaDescribedby}
     >
     <va-radio-option
       id="soujourner-truth"
@@ -282,6 +284,7 @@ const defaultArgs = {
   'error': null,
   'uswds': true,
   'label-header-level': '',
+  'header-aria-describedby': null,
 };
 
 export const Default = Template.bind(null);
