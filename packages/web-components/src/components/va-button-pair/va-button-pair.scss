@@ -20,6 +20,9 @@
   .usa-button-group {
     margin: 0 auto;
     width: 100%;
+  }
+
+  :host([uswds]:not([continue])) .usa-button-group {
     flex-direction: column-reverse;
   }
 }
@@ -73,9 +76,6 @@
 
   :host([continue]:not([continue='false']):not([uswds])) va-button::part(button) {
     max-width: 280px;
-  }
-  :host([continue]:not([continue='false'])) {
-    flex-direction: column-reverse;
   }
 }
 
