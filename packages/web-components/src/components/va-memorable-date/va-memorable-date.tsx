@@ -63,7 +63,7 @@ export class VaMemorableDate {
   /**
    * Whether or not to use the month as an input or select.
    */
-  @Prop() monthSelect?: boolean = false;
+  @Prop() monthSelect?: boolean = true;
 
   /**
    * Label for the field.
