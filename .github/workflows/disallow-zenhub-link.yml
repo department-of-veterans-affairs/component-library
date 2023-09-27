@@ -1,7 +1,7 @@
 name: "Disallow Zenhub Links"
 on:
   pull_request:
-    types:  [opened, edited, reopened, ready_for_review]
+    types:  [opened, edited, reopened, synchronize]
 
 jobs:
   check_pr:
