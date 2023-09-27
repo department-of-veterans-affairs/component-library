@@ -170,7 +170,7 @@ export function checkIsNaN(
   day: number,
   monthYearOnly : boolean = false) : boolean {
 
-  // Check for nulls first, so that field specific errors do not get overwritten  
+  // Check for nulls first, so that field specific errors do not get overwritten
   if (component.required && (!year || !month || (!monthYearOnly && !day))) {
     component.invalidYear = !year;
     component.invalidMonth = !month;
@@ -202,7 +202,7 @@ export function checkIsNaN(
   else {
     component.invalidMonth = false;
   }
-  
+
 
   // Remove any error message if none of the fields are NaN
   if (
@@ -338,9 +338,6 @@ export const formatDate = (
   options: Intl.DateTimeFormatOptions = {
     dateStyle: 'full',
     timeStyle: 'short',
-    hour: 'numeric',
-    minute: 'numeric',
-    timeZoneName: 'short'
   },
   timeZone: string = 'America/New_York',
 ) => {
