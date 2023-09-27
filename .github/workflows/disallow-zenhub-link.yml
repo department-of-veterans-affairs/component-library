@@ -12,3 +12,5 @@ jobs:
         bodyDoesNotContain: "zenhub.com"
         bodyContains: ''
         diffContains: ''
+        filesChanged: 1
+        linesChanged: 1
