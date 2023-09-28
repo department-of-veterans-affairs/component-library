@@ -879,6 +879,10 @@ export namespace Components {
          */
         "error"?: string;
         /**
+          * An optional message that will be read by screen readers when the header is focused. The label-header-level prop must be set for this to be active.
+         */
+        "headerAriaDescribedby"?: string;
+        /**
           * Optional hint text.
          */
         "hint"?: string;
@@ -2774,6 +2778,10 @@ declare namespace LocalJSX {
           * A string with an error message.
          */
         "error"?: string;
+        /**
+          * An optional message that will be read by screen readers when the header is focused. The label-header-level prop must be set for this to be active.
+         */
+        "headerAriaDescribedby"?: string;
         /**
           * Optional hint text.
          */
