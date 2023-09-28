@@ -1,6 +1,6 @@
 import { Component, Host, State, h } from '@stencil/core';
 import arrowRightSvg from '../../assets/arrow-right-white.svg';
-import { CONTACTS } from '../../../../react-components/src/components/Telephone/contacts';
+import { CONTACTS } from '../../index';
 
 /**
  * @componentName Crisis Line Modal
@@ -52,6 +52,7 @@ export class VACrisisLineModal {
           onPrimaryButtonClick={() => this.setNotVisible()}
           onCloseEvent={() => this.setNotVisible()}
           visible={this.isOpen}
+          large={true}
         >
           <div
             id="modal-crisisline"
@@ -106,7 +107,7 @@ export class VACrisisLineModal {
                     />
                     <p>
                       Call TTY if you have hearing loss{' '}
-                      <strong class="vads-u-margin-left--0p5">
+                      <strong>
                         <va-telephone tty contact={CONTACTS.CRISIS_TTY} />
                       </strong>
                     </p>
@@ -119,7 +120,6 @@ export class VACrisisLineModal {
                 >
                   VeteransCrisisLine.net
                 </a>
-                .
               </div>
             </div>
           </div>
