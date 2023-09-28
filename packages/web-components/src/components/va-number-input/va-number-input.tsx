@@ -254,7 +254,7 @@ export class VaNumberInput {
           <span id="error-message" role="alert">
             {error && (
               <Fragment>
-                <span class="sr-only">{i18next.t('error')}</span>{error}
+                <span class="sr-only">{i18next.t('error')}</span>{' '}{error}
               </Fragment>
             )}
           </span>
