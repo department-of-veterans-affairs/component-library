@@ -1,6 +1,6 @@
 import { Component, Host, State, h } from '@stencil/core';
 import arrowRightSvg from '../../assets/arrow-right-white.svg';
-import { CONTACTS } from '../../index';
+import { CONTACTS } from '../../contacts';
 
 /**
  * @componentName Crisis Line Modal
