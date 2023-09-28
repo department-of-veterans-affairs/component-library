@@ -7,7 +7,6 @@ export default {
   'month': 'Buwan',
   'day': 'Araw',
   'year': 'Taon',
-  'month-select': 'Mangyaring pumili ng isang buwan',
   'month-range': 'Mangyaring ilagay ang buwan sa pagitan ng {{start}} at {{end}}',
   'day-range': 'Mangyaring ilagay ang araw sa pagitan ng {{start}} at {{end}}',
   'year-range': 'Mangyaring ilagay ang taon sa pagitan ng {{start}} at {{end}}',
