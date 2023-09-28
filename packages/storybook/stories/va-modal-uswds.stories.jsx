@@ -80,7 +80,7 @@ const Template = ({
         visible={isVisible}
       >
         <p>
-          This is a succinct, helful {status} message
+          This is a succinct, helpful {status} message
         </p>
       </VaModal>
     </div>
