@@ -257,7 +257,7 @@ describe('uswds - va-pagination', () => {
     expect(element).toEqualHtml(`
       <va-pagination page="1" pages="3" uswds class="hydrated">
         <mock:shadow-root>
-          <nav class="usa-pagination">
+          <nav aria-label="Pagination" class="usa-pagination">
             <ul class="usa-pagination__list">
               <li class="usa-pagination__item usa-pagination__page-no">
                 <a href="javascript:void(0)" class="usa-pagination__button usa-current">1</a>
@@ -321,7 +321,7 @@ describe('uswds - va-pagination', () => {
   it('uswds v3 renders all page numbers if total pages is less than or equal to 7', async () => {
     const page = await newE2EPage();
     await page.setContent(`<va-pagination page="3" pages="7" max-page-list-length="7" uswds/>`);
-  
+
     const pageNumbers = [1, 2, 3, 4, 5, 6, 7];
 
     const anchors = await page.findAll('va-pagination >>> a.usa-pagination__button');
