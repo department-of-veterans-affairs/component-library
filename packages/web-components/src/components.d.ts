@@ -594,7 +594,7 @@ export namespace Components {
         /**
           * Title/header text for the modal
          */
-        "modalTitle"?: string;
+        "modalTitle": string;
         /**
           * Primary button text
          */
@@ -2430,7 +2430,7 @@ declare namespace LocalJSX {
         /**
           * Title/header text for the modal
          */
-        "modalTitle"?: string;
+        "modalTitle": string;
         /**
           * Fires when modal is closed.
          */

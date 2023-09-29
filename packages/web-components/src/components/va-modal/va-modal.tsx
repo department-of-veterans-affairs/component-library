@@ -119,7 +119,7 @@ export class VaModal {
   /**
    * Title/header text for the modal
    */
-  @Prop() modalTitle?: string;
+  @Prop() modalTitle!: string;
 
   /**
    * Whether or not the component will use USWDS v3 styling.

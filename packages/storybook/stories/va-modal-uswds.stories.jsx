@@ -169,9 +169,6 @@ WithoutButtons.args = {
   'secondary-button-text': undefined,
 };
 
-export const WithoutTitle = Template.bind(null);
-WithoutTitle.args = { ...defaultArgs, 'modal-title': undefined };
-
 export const WithNestedWebComponents = ({
   'click-to-close': clickToClose,
   'disable-analytics': disableAnalytics,
