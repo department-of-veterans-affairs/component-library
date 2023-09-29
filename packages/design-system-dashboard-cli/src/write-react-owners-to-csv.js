@@ -10,12 +10,11 @@ const componentsToKeep = [
   'Checkbox',
   'ExpandingGroup',
   'IconSearch',
-  'LoadingIndicator',
   'Modal',
   'TextInput',
 ];
 
-const hasMigrationScript = ['AlertBox', 'LoadingIndicator'];
+const hasMigrationScript = ['AlertBox'];
 
 function cleanPath(pathToClean) {
   const cwd = process.cwd();
