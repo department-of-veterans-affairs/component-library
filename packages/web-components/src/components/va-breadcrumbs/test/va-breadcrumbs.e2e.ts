@@ -162,7 +162,9 @@ describe('va-breadcrumbs', () => {
                 </a>
               </li>
               <li class="usa-breadcrumb__list-item usa-current" aria-current="page">
-                <span>Current</span>
+                <a class="usa-breadcrumb__link--current" href="#content">
+                  <span>Current</span>
+                </a>
               </li>
             </ol>
           </nav>
@@ -199,7 +201,6 @@ describe('va-breadcrumbs', () => {
     const analyticsSpy = await page.spyOnEvent('component-library-analytics');
 
     const anchorElements = await page.findAll('va-breadcrumbs >>> a');
-
     await anchorElements[0].click();
 
     expect(analyticsSpy).toHaveReceivedEventDetail({
@@ -208,7 +209,7 @@ describe('va-breadcrumbs', () => {
       details: {
         clickLabel: 'Level One',
         clickLevel: 1,
-        totalLevels: 2,
+        totalLevels: 3,
       },
     });
   });

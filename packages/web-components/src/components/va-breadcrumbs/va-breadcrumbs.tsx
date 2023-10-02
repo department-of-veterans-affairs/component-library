@@ -95,6 +95,7 @@ export class VaBreadcrumbs {
   }
 
   private fireAnalyticsEvent(event: MouseEvent): void {
+    
     if (!this.disableAnalytics) {
       const target = event.target as HTMLAnchorElement;
       // If it's a link being clicked, dispatch an analytics event
@@ -249,15 +250,17 @@ export class VaBreadcrumbs {
       return (
         <Host>
           <nav aria-label={label} class={wrapClass}>
-            <ol role="list" onClick={e => this.fireAnalyticsEvent(e)} class="usa-breadcrumb__list">
+            <ol role="list" class="usa-breadcrumb__list">
               {this.formattedBreadcrumbs.map((item, index) => (
                 <li
                   class={`usa-breadcrumb__list-item ${index === this.formattedBreadcrumbs.length - 1 ? 'usa-current' : ''}`}
                   aria-current={index === this.formattedBreadcrumbs.length - 1 ? "page" : undefined}>
                   {index === this.formattedBreadcrumbs.length - 1 ? (
-                    <span>{item.label}</span>
+                    <a class="usa-breadcrumb__link--current" href="#content" onClick={e => this.fireAnalyticsEvent(e)}>
+                      <span>{item.label}</span>
+                    </a>
                   ) : (
-                    <a class="usa-breadcrumb__link" href={item.href}>
+                    <a class="usa-breadcrumb__link" href={item.href} onClick={e => this.fireAnalyticsEvent(e)}>
                       <span>{item.label}</span>
                     </a>
                   )}

@@ -40,3 +40,9 @@
 :host([uswds]) .usa-breadcrumb__list-item:not(:last-child)::after {
   background: var(--color-gray-medium);
 }
+
+.usa-breadcrumb__link--current {
+  text-decoration: none;
+  color: var(--color-base);
+  font-weight: bold;
+}
