@@ -107,15 +107,22 @@ export class VaRadioOption {
             />
           <label class="usa-radio__label" htmlFor={id + 'input'}>
             {label}
-            {description && <span class="usa-radio__label-description" aria-describedby="option-label">{description}</span>}
+            {description && (
+              <span
+                class="usa-radio__label-description dd-privacy-hidden"
+                aria-describedby="option-label"
+              >
+                {description}
+              </span>
+            )}
           </label>
         </div>
       )
     } else {
       return (
         <Host aria-checked={checked ? `${checked}` : 'false'}>
-          <input 
-              type='radio' 
+          <input
+              type='radio'
               aria-describedby={(checked && ariaDescribedby) || null}
               checked={checked}
               name={name}
@@ -124,8 +131,17 @@ export class VaRadioOption {
               id={id + 'input'}
             />
           <label htmlFor={id + 'input'}>
-            {label}
-            {description && <span class="description" aria-describedby="option-label">{description}</span>}
+            <div>
+              {label}
+              {description && (
+                <span
+                  class="description dd-privacy-hidden"
+                  aria-describedby="option-label"
+                >
+                  {description}
+                </span>
+              )}
+            </div>
           </label>
         </Host>
       );
