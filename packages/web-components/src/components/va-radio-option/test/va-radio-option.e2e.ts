@@ -18,7 +18,7 @@ describe('va-radio-option', () => {
     <va-radio-option id="yes2" label="Yes - Any Veteran" name="yes" value="2" aria-checked="false" class="hydrated">
       <input id="yes2input" name="yes" type="radio" value="2">
       <label for="yes2input">
-        Yes - Any Veteran
+        <span>Yes - Any Veteran</span>
       </label>
     </va-radio-option>
   `);
@@ -68,6 +68,7 @@ describe('va-radio-option', () => {
 
     const description = await page.find('va-radio-option .description');
     expect(description.textContent).toEqual("Some description text");
+    expect(description.classList.contains('dd-privacy-hidden'))
   });
 
   // Begin USWDS version test
@@ -138,8 +139,9 @@ describe('va-radio-option', () => {
       '<va-radio-option uswds checked aria-describedby="test" label="A label" value="something" description="Example description" />',
     );
 
-    const hint = await page.find('va-radio-option .usa-radio__label-description');
-    expect(hint.textContent).toEqual("Example description");
+    const description = await page.find('va-radio-option .usa-radio__label-description');
+    expect(description.textContent).toEqual("Example description");
+    expect(description.classList.contains('dd-privacy-hidden'))
   });
 
 });
