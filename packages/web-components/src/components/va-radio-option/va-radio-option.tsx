@@ -131,7 +131,7 @@ export class VaRadioOption {
               id={id + 'input'}
             />
           <label htmlFor={id + 'input'}>
-            <div>
+            <span>
               {label}
               {description && (
                 <span
@@ -141,7 +141,7 @@ export class VaRadioOption {
                   {description}
                 </span>
               )}
-            </div>
+            </span>
           </label>
         </Host>
       );

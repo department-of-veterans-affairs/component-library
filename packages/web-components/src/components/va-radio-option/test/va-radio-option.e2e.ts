@@ -18,7 +18,7 @@ describe('va-radio-option', () => {
     <va-radio-option id="yes2" label="Yes - Any Veteran" name="yes" value="2" aria-checked="false" class="hydrated">
       <input id="yes2input" name="yes" type="radio" value="2">
       <label for="yes2input">
-        <div>Yes - Any Veteran</div>
+        <span>Yes - Any Veteran</span>
       </label>
     </va-radio-option>
   `);
