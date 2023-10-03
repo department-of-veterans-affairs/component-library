@@ -4,7 +4,7 @@ import { getWebComponentDocs, propStructure, StoryDocs, componentStructure } fro
 const minimalHeaderDocs = getWebComponentDocs('va-minimal-header');
 
 export default {
-  title: 'Components/MinimalHeader',
+  title: 'Components/Minimal Header',
   id: 'components/va-minimal-header',
   parameters: {
     componentSubtitle: `va-minimal-header web component`,

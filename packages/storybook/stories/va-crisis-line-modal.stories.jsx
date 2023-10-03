@@ -14,18 +14,9 @@ export default {
   },
 };
 
-const Template = () => {
-  return (
-    <>
-      <va-crisis-line-modal />
-    </>
-  );
+const Template = ({}) => {
+  return <va-crisis-line-modal />;
 };
-
-const defaultArgs = {};
 
 export const Default = Template.bind(null);
-Default.args = {
-  ...defaultArgs,
-};
 Default.argTypes = propStructure(crisisLineModalDocs);
