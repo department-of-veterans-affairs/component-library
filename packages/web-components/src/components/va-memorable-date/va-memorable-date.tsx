@@ -113,6 +113,10 @@ export class VaMemorableDate {
   @Prop({ mutable: true }) invalidMonth: boolean = false;
   @Prop({ mutable: true }) invalidYear: boolean = false;
 
+  private dayTouched: boolean = false;
+  private monthTouched: boolean = false;
+  private yearTouched: boolean = false;
+
   private handleDateBlur = (event: FocusEvent) => {
     const [year, month, day] = (this.value || '').split('-');
     const yearNum = Number(year);
@@ -137,7 +141,15 @@ export class VaMemorableDate {
 
     // Built-in validation is run after custom so internal errors override
     // custom errors, e.g. Show invalid date instead of custom error
-    validate(this, yearNum, monthNum, dayNum);
+    validate({
+               component: this,
+               year: yearNum,
+               month: monthNum,
+               day: dayNum,
+               yearTouched: this.yearTouched,
+               monthTouched: this.monthTouched,
+               dayTouched: this.dayTouched
+             });
 
     if (this.enableAnalytics) {
       const detail = {
@@ -160,12 +172,15 @@ export class VaMemorableDate {
     let [currentYear, currentMonth, currentDay] = (this.value || '').split('-');
     if (target.classList.contains('input-month') || target.classList.contains('usa-form-group--month-input') || target.classList.contains('usa-form-group--month-select')) {
       currentMonth = target.value;
+      this.monthTouched = true
     }
     if (target.classList.contains('input-day') || target.classList.contains('usa-form-group--day-input')) {
       currentDay = target.value;
+      this.dayTouched = true;
     }
     if (target.classList.contains('input-year') || target.classList.contains('usa-form-group--year-input')) {
       currentYear = target.value;
+      this.yearTouched = true
     }
 
     /* eslint-disable i18next/no-literal-string */

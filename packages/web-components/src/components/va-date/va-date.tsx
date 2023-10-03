@@ -103,6 +103,10 @@ export class VaDate {
   @Prop({ mutable: true }) invalidMonth: boolean = false;
   @Prop({ mutable: true }) invalidYear: boolean = false;
 
+  private dayTouched: boolean = false;
+  private monthTouched: boolean = false;
+  private yearTouched: boolean = false;
+
   /**
    * Whether or not an analytics event will be fired.
    */
@@ -149,7 +153,16 @@ export class VaDate {
     this.setValue(year, month, day);
     // Run built-in validation. Any custom validation
     // will happen afterwards
-    validate(this, year, month, day, this.monthYearOnly);
+    validate({
+               component: this,
+               year,
+               month,
+               day,
+               monthYearOnly: this.monthYearOnly,
+               yearTouched: this.yearTouched,
+               monthTouched: this.monthTouched,
+               dayTouched: this.dayTouched
+             });
     this.dateBlur.emit(event);
 
     if (this.enableAnalytics) {
@@ -172,13 +185,16 @@ export class VaDate {
     let [currentYear, currentMonth, currentDay] = (this.value || '').split('-');
     if (target.classList.contains('select-month')) {
       currentMonth = target.value;
+      this.monthTouched = true;
     }
     // This won't happen for monthYearOnly dates
     if (target.classList.contains('select-day')) {
       currentDay = target.value;
+      this.dayTouched = true;
     }
     if (target.classList.contains('input-year')) {
       currentYear = target.value;
+      this.yearTouched = true;
     }
 
     this.setValue(
