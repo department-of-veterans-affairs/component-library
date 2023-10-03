@@ -11,32 +11,38 @@
   pointer-events: none;
 }
 
-:host(:not([uswds])) nav {
-  background: var(--color-white);
-  color: var(--color-link-default);
-  font-size: inherit;
-  padding: 1.6rem 0;
+// Styles for V1 mode
+:host(:not([uswds='true'], [uswds=''])) {
+  nav {
+    background: var(--color-white);
+    color: var(--color-link-default);
+    font-size: inherit;
+    padding: 1.6rem 0;
+  }
+
+  ul {
+    box-sizing: border-box;
+    list-style: square;
+    margin: 0 auto;
+    max-width: 100rem;
+    padding-left: 0;
+    padding-right: 0;
+    position: relative;
+    width: 100%;
+  }
 }
 
-:host(:not([uswds])) ul {
-  box-sizing: border-box;
-  list-style: square;
-  margin: 0 auto;
-  max-width: 100rem;
-  padding-left: 0;
-  padding-right: 0;
-  position: relative;
-  width: 100%;
-}
+// Styles for V3 mode
+:host([uswds]:not([uswds='false'])) {
+  .usa-breadcrumb__link {
+    color: var(--color-link-default);
+  }
 
-:host([uswds]) .usa-breadcrumb__link {
-  color: var(--color-link-default);
-}
+  .usa-breadcrumb__link:hover {
+    color: var(--color-primary-darker);
+  }
 
-:host([uswds]) .usa-breadcrumb__link:hover {
-  color: var(--color-primary-darker);
-}
-
-:host([uswds]) .usa-breadcrumb__list-item:not(:last-child)::after {
-  background: var(--color-gray-medium);
+  .usa-breadcrumb__list-item:not(:last-child)::after {
+    background: var(--color-gray-medium);
+  }
 }
