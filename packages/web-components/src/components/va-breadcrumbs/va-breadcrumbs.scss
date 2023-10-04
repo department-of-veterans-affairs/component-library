@@ -45,4 +45,8 @@
   text-decoration: none;
   color: var(--color-base);
   font-weight: bold;
+
+  &:hover, &:active {
+    text-decoration: underline;
+  }
 }
