@@ -72,11 +72,12 @@ export class VACrisisLineModal {
                       class="fa fa-phone va-crisis-panel-icon"
                       aria-hidden="true"
                     />
-                    {
-                      <a href="tel:988">
-                        Call <strong>988 and select 1</strong>
-                      </a>
-                    }
+                    <span>
+                      Call{' '}
+                      <strong>
+                        <va-telephone contact="988" /> and select 1
+                      </strong>
+                    </span>
                   </li>
                   <li>
                     <i
@@ -85,7 +86,9 @@ export class VACrisisLineModal {
                     />
                     <span>
                       Text&nbsp;
-                      <va-telephone sms contact="838255" />
+                      <strong>
+                        <va-telephone sms contact="838255" />
+                      </strong>
                     </span>
                   </li>
                   <li>
@@ -108,7 +111,7 @@ export class VACrisisLineModal {
                     <p>
                       Call TTY if you have hearing loss{' '}
                       <strong>
-                        <va-telephone tty contact={CONTACTS.CRISIS_TTY} />
+                        <va-telephone contact={CONTACTS.CRISIS_TTY} />
                       </strong>
                     </p>
                   </li>
