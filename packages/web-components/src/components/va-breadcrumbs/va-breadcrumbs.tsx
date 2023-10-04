@@ -256,7 +256,7 @@ export class VaBreadcrumbs {
                   class={`usa-breadcrumb__list-item ${index === this.formattedBreadcrumbs.length - 1 ? 'usa-current' : ''}`}
                   aria-current={index === this.formattedBreadcrumbs.length - 1 ? "page" : undefined}>
                   {index === this.formattedBreadcrumbs.length - 1 ? (
-                    <a class="usa-breadcrumb__link--current" href="#content" onClick={e => this.fireAnalyticsEvent(e)}>
+                    <a class="va-breadcrumb__link--current" href="#content" onClick={e => this.fireAnalyticsEvent(e)}>
                       <span>{item.label}</span>
                     </a>
                   ) : (
