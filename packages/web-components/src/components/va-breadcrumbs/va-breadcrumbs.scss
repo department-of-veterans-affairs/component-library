@@ -41,12 +41,6 @@
   background: var(--color-gray-medium);
 }
 
-.va-breadcrumb__link--current {
-  text-decoration: none;
-  color: var(--color-base);
+.usa-current a {
   font-weight: bold;
-
-  &:hover, &:active {
-    text-decoration: underline;
-  }
 }
