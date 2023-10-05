@@ -111,7 +111,7 @@ export class VACrisisLineModal {
                     <p>
                       Call TTY if you have hearing loss{' '}
                       <strong>
-                        <va-telephone contact={CONTACTS.CRISIS_TTY} />
+                        <va-telephone tty contact={CONTACTS.CRISIS_TTY} />
                       </strong>
                     </p>
                   </li>
