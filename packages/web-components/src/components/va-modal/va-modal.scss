@@ -16,6 +16,22 @@
   padding: 0px // => Due to icons
 }
 
+
+.usa-modal__heading {
+  font-family: var(--font-serif);
+}
+
+.usa-modal {
+  &:not(.usa-modal--lg) {
+    width: auto; // USWDS style made it so that the modal was wider than it should be
+  }
+
+  & va-button {
+    width: 100%;
+  }
+}
+
+
 :host([status='info']) .usa-modal {
   border-left-color: var(--color-primary-alt-dark);
   background-color: var(--color-primary-alt-lightest);

@@ -40,3 +40,7 @@
 :host([uswds]) .usa-breadcrumb__list-item:not(:last-child)::after {
   background: var(--color-gray-medium);
 }
+
+.usa-current a {
+  font-weight: bold;
+}

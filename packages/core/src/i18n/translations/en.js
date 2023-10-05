@@ -8,6 +8,7 @@ export default {
   'month': 'Month',
   'day': 'Day',
   'year': 'Year',
+  'month-select': 'Please select a month',
   'month-range': 'Please enter a month between {{start}} and {{end}}',
   'day-range': 'Please enter a day between {{start}} and {{end}}',
   'year-range': 'Please enter a year between {{start}} and {{end}}',

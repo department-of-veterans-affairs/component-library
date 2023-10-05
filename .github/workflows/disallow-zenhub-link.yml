@@ -1,0 +1,16 @@
+name: "Disallow Zenhub Links"
+on:
+  pull_request:
+    types:  [opened, edited, reopened, synchronize]
+
+jobs:
+  check_pr:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Disallow zenhub links
+      uses: JJ/github-pr-contains-action@releases/v2
+      with:
+        github-token: ${{github.token}}
+        bodyDoesNotContain: "zenhub.com"
+        bodyContains: ''
+        diffContains: ''
