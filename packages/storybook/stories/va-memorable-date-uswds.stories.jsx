@@ -25,7 +25,7 @@ const defaultArgs = {
   error: undefined,
   value: undefined,
   uswds: true,
-  monthSelect: false,
+  monthSelect: true,
 };
 
 const Template = ({ label, name, hint, required, error, uswds, value, monthSelect }) => {
@@ -120,9 +120,9 @@ const I18nTemplate = ({ label, name, required, error, uswds, value }) => {
 
   return (
     <div>
-      <button style={{fontSize: '16px'}} onClick={e => setLang('es')}>Español</button>
-      <button style={{fontSize: '16px'}} onClick={e => setLang('en')}>English</button>
-      <button style={{fontSize: '16px'}} onClick={e => setLang('tl')}>Tagalog</button>
+      <va-button uswds style={{fontSize: '16px'}} onClick={e => setLang('es')} text="Español"/>
+      <va-button uswds style={{fontSize: '16px'}} onClick={e => setLang('en')} text="English"/>
+      <va-button uswds style={{fontSize: '16px'}} onClick={e => setLang('tl')} text="Tagalog"/>
       <VaMemorableDate
         uswds={uswds}
         label={label}
@@ -147,17 +147,16 @@ Error.args = {
   error: 'Error Message Example',
 };
 
-export const WithMonthSelect = Template.bind(null);
-WithMonthSelect.args = {
+export const WithoutMonthSelect = Template.bind(null);
+WithoutMonthSelect.args = {
   ...defaultArgs,
-  monthSelect: true,
+  monthSelect: false,
   value: '2022-04-19',
 };
 
 export const ExtraHintText = Template.bind(null);
 ExtraHintText.args = {
   ...defaultArgs,
-  monthSelect: true,
   value: '2022-04-19',
   hint: 'Extra hint text',
 };

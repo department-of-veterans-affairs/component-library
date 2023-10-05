@@ -23,8 +23,8 @@
   list-style: square;
   margin: 0 auto;
   max-width: 100rem;
-  padding-left: 0.8rem;
-  padding-right: 0.8rem;
+  padding-left: 0;
+  padding-right: 0;
   position: relative;
   width: 100%;
 }
@@ -39,4 +39,8 @@
 
 :host([uswds]) .usa-breadcrumb__list-item:not(:last-child)::after {
   background: var(--color-gray-medium);
+}
+
+.usa-current a {
+  font-weight: bold;
 }

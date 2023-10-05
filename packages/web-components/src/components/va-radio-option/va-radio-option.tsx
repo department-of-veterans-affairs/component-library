@@ -12,7 +12,7 @@ import classnames from 'classnames';
 @Component({
   tag: 'va-radio-option',
   styleUrl: 'va-radio-option.scss',
-  shadow: true,
+  shadow: false,
 })
 export class VaRadioOption {
   @Element() el: HTMLElement;
@@ -96,39 +96,52 @@ export class VaRadioOption {
       return (
         <div class="usa-radio">
           <input
-            class={inputClass}
-            id={id}
-            type="radio"
-            name={name}
-            value={value}
-            checked={checked}
-            disabled={disabled}
-            onClick={() => this.handleChange()}
-            tabIndex={-1}
-          />
-          <label htmlFor={id} id="option-label" class="usa-radio__label">
+              class={inputClass}
+              type="radio"
+              name={name}
+              value={value}
+              checked={checked}
+              disabled={disabled}
+              onClick={() => this.handleChange()}
+              id={id + 'input'}
+            />
+          <label class="usa-radio__label" htmlFor={id + 'input'}>
             {label}
-            {description && <span class="usa-radio__label-description" aria-describedby="option-label">{description}</span>}
+            {description && (
+              <span
+                class="usa-radio__label-description dd-privacy-hidden"
+                aria-describedby="option-label"
+              >
+                {description}
+              </span>
+            )}
           </label>
         </div>
       )
     } else {
       return (
-        <Host
-          aria-checked={checked ? `${checked}` : 'false'}
-          aria-describedby={(checked && ariaDescribedby) || null}
-          checked={checked}
-          name={name}
-          onClick={() => this.handleChange()}
-          role="radio"
-          value={value}
-          id={id}
-        >
-          <label htmlFor={id} id="option-label">
-            <div>
+        <Host aria-checked={checked ? `${checked}` : 'false'}>
+          <input
+              type='radio'
+              aria-describedby={(checked && ariaDescribedby) || null}
+              checked={checked}
+              name={name}
+              onClick={() => this.handleChange()}
+              value={value}
+              id={id + 'input'}
+            />
+          <label htmlFor={id + 'input'}>
+            <span>
               {label}
-              {description && <span class="description" aria-describedby="option-label">{description}</span>}
-            </div>
+              {description && (
+                <span
+                  class="description dd-privacy-hidden"
+                  aria-describedby="option-label"
+                >
+                  {description}
+                </span>
+              )}
+            </span>
           </label>
         </Host>
       );

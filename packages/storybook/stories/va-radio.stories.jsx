@@ -34,6 +34,7 @@ const vaRadioConst = args => {
     hint,
     required,
     'label-header-level': labelHeaderLevel,
+    'header-aria-describedby': headerAriaDescribedby,
     ...rest
   } = args;
   return (
@@ -44,6 +45,7 @@ const vaRadioConst = args => {
       required={required}
       hint={hint}
       label-header-level={labelHeaderLevel}
+      header-aria-describedby={headerAriaDescribedby}
     >
       <va-radio-option label="Option one" name="example" value="1" />
       <va-radio-option label="Option two with an extra long label, so we can get it to wrap" name="example" value="2" />
@@ -178,11 +180,11 @@ const OptionTileExample = args => {
     >
       <va-radio-option
         label="Option one"
-        name="example"
+        name="example-tile"
         value="1"
         tile
         description="This is optional text that can be used to describe the label in more detail." />
-      <va-radio-option label="Option two" name="example" value="2" tile />
+      <va-radio-option label="Option two" name="example-tile" value="2" tile />
     </va-radio>
   )
 }
@@ -196,6 +198,8 @@ const defaultArgs = {
   'uswds': false,
   'hint': '',
   'label-header-level': '',
+  'header-aria-describedby': '',
+  'header-aria-describedby': null,
 };
 
 export const Default = Template.bind(null);
@@ -219,6 +223,7 @@ export const LabelHeader = Template.bind(null);
 LabelHeader.args = {
   ...defaultArgs,
   'label-header-level': '3',
+  'header-aria-describedby': 'Optional description text for screen readers',
 };
 
 export const Tile = OptionTileExample.bind(null);

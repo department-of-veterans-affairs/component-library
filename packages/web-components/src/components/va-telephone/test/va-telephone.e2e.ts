@@ -190,7 +190,7 @@ describe('va-telephone', () => {
       componentName: 'va-telephone',
       details: {
         contact: '8779551234',
-        extension: 123,
+        extension: '123',
       },
     });
   });

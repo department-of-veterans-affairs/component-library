@@ -29,14 +29,14 @@ const defaultArgs = {
   'click-to-close': false,
   'disable-analytics': false,
   'large': undefined,
-  'modal-title': 'Are you sure you want to continue?',
+  'modal-title': 'Title',
   'initial-focus-selector': undefined,
   'status': undefined,
   'visible': false,
   'primaryButtonClick': () => window.alert('Primary button clicked!'),
-  'primary-button-text': 'Continue without saving',
+  'primary-button-text': 'Primary',
   'secondaryButtonClick': () => window.alert('Secondary button clicked!'),
-  'secondary-button-text': 'Go back',
+  'secondary-button-text': 'Secondary',
   'uswds': true,
   'forcedModal': false,
 };
@@ -62,7 +62,7 @@ const Template = ({
   return (
     <div>
       <h1>Testing h1 heading</h1>
-      <button onClick={openModal}>Click here to open modal</button>
+      <va-button uswds onClick={openModal} text="Click here to open modal"/>
       <VaModal
         forcedModal={forcedModal}
         uswds={uswds}
@@ -80,7 +80,7 @@ const Template = ({
         visible={isVisible}
       >
         <p>
-          You have unsaved changes that will be lost.
+          This is a succinct, helpful {status} message
         </p>
       </VaModal>
     </div>
@@ -106,7 +106,7 @@ const ForcedTemplate = ({
   return (
     <div>
       <h1>Testing h1 heading</h1>
-      <button onClick={openModal}>Click here to open modal</button>
+      <va-button uswds onClick={openModal} text="Click here to open modal"/>
       <VaModal
         forcedModal={forcedModal}
         uswds={uswds}
@@ -144,15 +144,15 @@ WithForcedAction.args = { ...defaultArgs, forcedModal: true };
 
 // Statuses
 export const Info = Template.bind(null);
-Info.args = { ...defaultArgs, status: 'info' };
+Info.args = { ...defaultArgs, 'modal-title': 'Info status', status: 'info' };
 export const Continue = Template.bind(null);
-Continue.args = { ...defaultArgs, status: 'continue' };
+Continue.args = { ...defaultArgs, 'modal-title': 'Continue status', status: 'continue' };
 export const Success = Template.bind(null);
-Success.args = { ...defaultArgs, status: 'success' };
+Success.args = { ...defaultArgs, 'modal-title': 'Success status', status: 'success' };
 export const Warning = Template.bind(null);
-Warning.args = { ...defaultArgs, status: 'warning' };
+Warning.args = { ...defaultArgs, 'modal-title': 'Warning status', status: 'warning' };
 export const Error = Template.bind(null);
-Error.args = { ...defaultArgs, status: 'error' };
+Error.args = { ...defaultArgs, 'modal-title': 'Error status', status: 'error' };
 
 export const ClickOutsideToClose = Template.bind(null);
 ClickOutsideToClose.args = {
@@ -193,7 +193,7 @@ export const WithNestedWebComponents = ({
   return (
     <div>
       <h1>Testing h1 heading</h1>
-      <button onClick={openModal}>Click here to open modal</button>
+      <va-button uswds onClick={openModal} text="Click here to open modal"/>
       <input id="pre-modal-input" type="checkbox" />
       <label htmlFor="pre-modal-input">Checkbox before the modal</label>
       <VaModal

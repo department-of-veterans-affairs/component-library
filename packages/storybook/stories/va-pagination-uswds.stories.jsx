@@ -1,5 +1,6 @@
 import React, { useState, useEffect }  from 'react';
 import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
+import { VaPagination } from '@department-of-veterans-affairs/web-components/react-bindings';
 
 const paginationDocs = getWebComponentDocs('va-pagination');
 
@@ -22,18 +23,24 @@ const defaultArgs = {
 }
 
 const Template = ({
-  page,
+  'page': currentPage,
   pages,
   'max-page-list-length': maxPageListLength,
   unbounded
 }) => {
+  const [page, setPage] = useState(currentPage);
+  const handlePageSelect = event => {
+    setPage(event.detail.page);
+  };
   return (
-    <va-pagination
+    <VaPagination
       page={page}
       pages={pages}
       max-page-list-length={maxPageListLength}
       uswds
-      unbounded={unbounded} />
+      unbounded={unbounded}
+      onPageSelect={handlePageSelect}
+    />
   );
 }
 
@@ -80,6 +87,8 @@ WithSevenOrLessLast.args = {
 
 export const Internationalization = () => {
   const [lang, setLang] = useState('en');
+  const [page1, setPage1] = useState(10);
+  const [page2, setPage2] = useState(10);
 
   useEffect(() => {
     document.querySelector('main').setAttribute('lang', lang);
@@ -87,13 +96,13 @@ export const Internationalization = () => {
 
   return (
     <div>
-      <button onClick={e => setLang('es')}>Español</button>
-      <button onClick={e => setLang('en')}>English</button>
+      <va-button uswds onClick={() => setLang('es')} text="Español"/>
+      <va-button uswds onClick={() => setLang('en')} text="English"/>
       <div style={{ marginTop: '20px' }}>
         <h4>Default</h4>
-        <va-pagination page="10" pages="24" uswds />
+        <VaPagination page={page1} pages={24} maxPageListLength={7} uswds onPageSelect={(event) => setPage1(event.detail.page) }/>
         <h4>Unbounded</h4>
-        <va-pagination page="10" pages="24" unbounded uswds />
+        <VaPagination page={page2} pages={24} maxPageListLength={7} unbounded uswds onPageSelect={(event) => setPage2(event.detail.page)}/>
       </div>
     </div>
 )};

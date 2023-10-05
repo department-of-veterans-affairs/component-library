@@ -1,3 +1,4 @@
+// @ts-ignore
 /**
  * Map of phone numbers to descriptions. This is only intended for documentation
  * purposes. Use CONTACTS.<key> to get the actual phone number.

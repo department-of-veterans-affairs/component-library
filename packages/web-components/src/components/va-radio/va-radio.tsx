@@ -74,6 +74,13 @@ export class VaRadio {
    * Insert a header with defined level inside the label (legend)
    */
   @Prop() labelHeaderLevel?: string;
+
+  /**
+   * An optional message that will be read by screen readers when the header is focused. The label-header-level
+   * prop must be set for this to be active.
+   */
+  @Prop() headerAriaDescribedby?: string;
+
   /**
    * The event used to track usage of the component. This is emitted when a
    * radio option is selected and enableAnalytics is true.
@@ -184,30 +191,16 @@ export class VaRadio {
 
   private deselectCurrentNode(node: HTMLVaRadioOptionElement): void {
     node.removeAttribute('checked');
-    node.setAttribute('tabindex', '-1');
   }
 
   private selectNextNode(node: HTMLVaRadioOptionElement): void {
     node.setAttribute('checked', '');
-    node.setAttribute('tabindex', '0');
     node.focus();
   }
 
   private getHeaderLevel() {
     const number = parseInt(this.labelHeaderLevel, 10);
     return number >= 1 && number <= 6 ? `h${number}` : null;
-  }
-
-  componentDidLoad(): void {
-    getSlottedNodes(this.el, 'va-radio-option').forEach(
-      (node: HTMLVaRadioOptionElement, index: number) => {
-        if (index === 0) {
-          node.setAttribute('tabindex', '0');
-        } else {
-          node.setAttribute('tabindex', '-1');
-        }
-      },
-    );
   }
 
   connectedCallback() {
@@ -221,9 +214,17 @@ export class VaRadio {
   }
 
   render() {
-    const { label, hint, required, error, uswds } = this;
+    const { 
+      label, 
+      hint, 
+      required, 
+      error, 
+      uswds, 
+      headerAriaDescribedby 
+    } = this;
     const ariaLabel = label + (required ? ' required' : '');
     const HeaderLevel = this.getHeaderLevel();
+    const headerAriaDescribedbyId = headerAriaDescribedby ? 'header-message' : null;
 
     if (uswds) {
       const legendClass = classnames({
@@ -232,12 +233,17 @@ export class VaRadio {
       });
       return (
         <Host aria-invalid={error ? 'true' : 'false'} aria-label={ariaLabel}>
-          <fieldset class="usa-fieldset" role="radiogroup">
+          <fieldset class="usa-fieldset">
             <legend class={legendClass} part="legend">
               {HeaderLevel ? (
-                <HeaderLevel part="header">{label}</HeaderLevel>
+                <HeaderLevel part="header" aria-describedby={headerAriaDescribedbyId}>{label}</HeaderLevel>
               ) : (
                 label
+              )}
+              {headerAriaDescribedby && (
+                <span id="header-message" class="sr-only">
+                  {headerAriaDescribedby}
+                </span>
               )}
               {required && (
                 <span class="usa-label--required" part="required">
@@ -261,12 +267,17 @@ export class VaRadio {
     } else {
       return (
         <Host aria-invalid={error ? 'true' : 'false'} aria-label={ariaLabel}>
-          <fieldset role="radiogroup">
+          <fieldset>
             <legend part="legend">
               {HeaderLevel ? (
-                <HeaderLevel part="header">{label}</HeaderLevel>
+                <HeaderLevel part="header" aria-describedby={headerAriaDescribedbyId}>{label}</HeaderLevel>
               ) : (
                 label
+              )}
+              {headerAriaDescribedby && (
+                <span id="header-message" class="sr-only">
+                  {headerAriaDescribedby}
+                </span>
               )}
               {required && (
                 <span class="required" part="required">
