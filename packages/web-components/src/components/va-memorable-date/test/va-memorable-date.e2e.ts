@@ -123,7 +123,7 @@ describe('va-memorable-date', () => {
       expect(date.getAttribute('error')).toEqual(`year-range`);
     });
 
-    it('does month validation without required prop', async () => {
+    it('does month validation without required prop and displays the correct error message', async () => {
       const page = await newE2EPage();
       await page.setContent(
         '<va-memorable-date value="1999-05-03" name="test" />',
@@ -140,6 +140,9 @@ describe('va-memorable-date', () => {
 
       await page.waitForChanges();
       expect(date.getAttribute('error')).toEqual("month-range");
+
+      const errorSpan = await page.find('va-memorable-date >>> span#error-message');
+      expect(errorSpan.textContent).toContain("month-range");
     });
 
     it('does day validation without required prop', async () => {
@@ -1473,7 +1476,7 @@ describe('va-memorable-date', () => {
       expect(date.getAttribute('error')).toEqual("day-range");
     });
 
-   it('uswds v3 without monthSelect does validation for required components', async () => {
+   it('uswds v3 without monthSelect does validation for required components and displays the correct error message', async () => {
       const page = await newE2EPage();
       await page.setContent(
         '<va-memorable-date name="test" required uswds month-select="false" />',
@@ -1486,6 +1489,27 @@ describe('va-memorable-date', () => {
       await page.waitForChanges();
 
       expect(date.getAttribute('error')).toEqual("month-range");
+
+      const errorSpan = await page.find('va-memorable-date >>> span#error-message');
+      expect(errorSpan.textContent).toContain("month-range");
+    });
+
+    it('uswds v3 with monthSelect displays the correct error message', async () => {
+      const page = await newE2EPage();
+      await page.setContent(
+        '<va-memorable-date name="test" required uswds month-select="true" />',
+      );
+      const date = await page.find('va-memorable-date');
+      const handleYear = await page.$('pierce/[name="testYear"]');
+
+      // Trigger Blur
+      await handleYear.press('Tab');
+      await page.waitForChanges();
+
+      expect(date.getAttribute('error')).toEqual("month-range");
+
+      const errorSpan = await page.find('va-memorable-date >>> span#error-message');
+      expect(errorSpan.textContent).toContain("month-select");
     });
 
     it('uswds v3 without monthSelect allows for a custom required message', async () => {

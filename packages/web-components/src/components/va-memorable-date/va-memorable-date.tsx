@@ -243,6 +243,15 @@ export class VaMemorableDate {
       const monthNum = parseInt(month);
       return getErrorParameters(error, yearNum, monthNum);
     }
+
+    const getErrorMessage = (error: string) => {
+      let key = error;
+      if (uswds && monthSelect && error === 'month-range') {
+        key = 'month-select';
+      }
+      return i18next.t(key, errorParameters(error))
+    }
+
     // Error attribute should be leveraged for custom error messaging
     // Fieldset has an implicit aria role of group
     if (uswds) {
@@ -305,7 +314,7 @@ export class VaMemorableDate {
               {error && (
                 <Fragment>
                   <span class="usa-sr-only">{i18next.t('error')}</span>
-                  <span class="usa-error-message">{i18next.t(error, errorParameters(error))}</span>
+                  <span class="usa-error-message">{getErrorMessage(error)}</span>
                 </Fragment>
               )}
             </span>
@@ -366,7 +375,7 @@ export class VaMemorableDate {
             <span id="error-message" role="alert">
               {error && (
                 <Fragment>
-                  <span class="sr-only">{i18next.t('error')}</span> {i18next.t(error, errorParameters(error))}
+                  <span class="sr-only">{i18next.t('error')}</span> {getErrorMessage(error)}
                 </Fragment>
               )}
             </span>
