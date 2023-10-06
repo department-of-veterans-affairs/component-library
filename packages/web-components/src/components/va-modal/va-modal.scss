@@ -81,7 +81,7 @@
 
 :host {
   display: block;
-  
+
 }
 
 :host([visible]:not([visible='false'])) {
@@ -196,7 +196,7 @@ i::before {
   background-color: var(--color-gray-cool-light);
 }
 
-:host(:not([uswds])) .va-modal-alert {
+:host(:not([uswds="true"],[uswds=""])) .va-modal-alert {
   border-left-style: solid;
   border-left-width: 10px;
   display: inline-flex;
