@@ -32,6 +32,7 @@ const vaRadioConst = args => {
     error,
     label,
     hint,
+    name = 'group',
     required,
     uswds = true,
     'label-header-level': labelHeaderLevel,
@@ -51,30 +52,26 @@ const vaRadioConst = args => {
         header-aria-describedby={headerAriaDescribedby}
     >
     <va-radio-option
-      id="soujourner-truth"
       label="Soujourner Truth"
-      name="group1"
+      name={name}
       value="1"
       uswds={uswds}
     />
     <va-radio-option
-      id="frederick-douglass"
       label="Frederick Douglass"
-      name="group1"
+      name={name}
       value="2"
       uswds={uswds}
     />
     <va-radio-option
-      id="booker-t-washington"
       label="Booker T. Washington"
-      name="group1"
+      name={name}
       value="3"
       uswds={uswds}
     />
     <va-radio-option
-      id="george-washington-carver"
       label="George Washington Carver"
-      name="group1"
+      name={name}
       value="4"
       disabled
       uswds={uswds}
@@ -190,33 +187,33 @@ const USWDSTiled = ({
         hint={hint}
       >
         <va-radio-option
-          id="soujourner-truth"
+          id="soujourner-truth1"
           label="Soujourner Truth"
-          name="group1"
+          name="group3"
           value="1"
           uswds={uswds}
           tile
         />
         <va-radio-option
-          id="frederick-douglass"
+          id="frederick-douglass1"
           label="Frederick Douglass"
-          name="group1"
+          name="group3"
           value="2"
           uswds={uswds}
           tile
         />
         <va-radio-option
-          id="booker-t-washington"
+          id="booker-t-washington1"
           label="Booker T. Washington"
-          name="group1"
+          name="group3"
           value="3"
           uswds={uswds}
           tile
         />
         <va-radio-option
-          id="george-washington-carver"
+          id="george-washington-carver1"
           label="George Washington Carver"
-          name="group1"
+          name="group3"
           value="4"
           description="This is optional text that can be used to describe the label in more detail."
           disabled={true}
@@ -247,25 +244,25 @@ const USWDSTiledError = ({
             hint={hint}
             >
             <va-radio-option
-                id="soujourner-truth"
+                id="soujourner-truth2"
                 label="Soujourner Truth"
-                name="group1"
+                name="group4"
                 value="1"
                 uswds={uswds}
                 tile
             />
             <va-radio-option
-            id="frederick-douglass"
+            id="frederick-douglass2"
             label="Frederick Douglass"
-            name="group1"
+            name="group4"
             value="2"
             uswds={uswds}
             tile
             />
             <va-radio-option
-            id="booker-t-washington"
+            id="booker-t-washington2"
             label="Booker T. Washington"
-            name="group1"
+            name="group4"
             value="3"
             description="This is optional text that can be used to describe the label in more detail."
             uswds={uswds}
@@ -297,12 +294,14 @@ export const Tile = USWDSTiled.bind(null);
 Tile.args = {
   ...defaultArgs,
   uswds: true,
+  name: 'tile-example',
   label: 'Select one historical figure',
 };
 
 export const Hint = Template.bind(null);
 Hint.args = {
   ...defaultArgs,
+  name: 'hint-example',
   hint: "We're asking this because of XYZ",
 };
 
@@ -310,6 +309,7 @@ export const LabelHeader = Template.bind(null);
 LabelHeader.args = {
   ...defaultArgs,
   'label-header-level': '3',
+  name: 'header-example',
   'header-aria-describedby': 'Optional description text for screen readers',
 };
 
@@ -319,11 +319,11 @@ export const OnBackground = props => (
         label="This is a label"
         uswds
       >
-        <va-radio-option id="no1" label="No" name="group1" value="1" uswds />
+        <va-radio-option id="no3" label="No" name="group5" value="1" uswds />
         <va-radio-option
-          id="yes1"
+          id="yes3"
           label="Yes - Any Veteran"
-          name="group1"
+          name="group5"
           value="2"
           uswds
         />
@@ -352,5 +352,6 @@ IDUsage.args = {
 export const Internationalization = I18nTemplate.bind(null);
 Internationalization.args = {
   ...defaultArgs,
+  name: 'i18n-example',
   required: true,
 };
