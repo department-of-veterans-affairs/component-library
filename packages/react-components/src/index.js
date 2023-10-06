@@ -1,6 +1,5 @@
 import AlertBox, { ALERT_TYPE } from './components/AlertBox/AlertBox';
 import Breadcrumbs from './components/Breadcrumbs/Breadcrumbs';
-import Checkbox from './components/Checkbox/Checkbox';
 import ExpandingGroup from './components/ExpandingGroup/ExpandingGroup';
 import IconBase from './components/IconBase/IconBase';
 import IconSearch from './components/IconSearch/IconSearch';
@@ -13,7 +12,6 @@ export {
   AlertBox,
   ALERT_TYPE,
   Breadcrumbs,
-  Checkbox,
   ExpandingGroup,
   IconBase,
   IconSearch,

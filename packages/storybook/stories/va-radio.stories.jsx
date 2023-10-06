@@ -180,11 +180,11 @@ const OptionTileExample = args => {
     >
       <va-radio-option
         label="Option one"
-        name="example"
+        name="example-tile"
         value="1"
         tile
         description="This is optional text that can be used to describe the label in more detail." />
-      <va-radio-option label="Option two" name="example" value="2" tile />
+      <va-radio-option label="Option two" name="example-tile" value="2" tile />
     </va-radio>
   )
 }
