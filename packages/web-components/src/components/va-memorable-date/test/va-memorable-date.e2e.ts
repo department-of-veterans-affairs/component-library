@@ -600,7 +600,7 @@ describe('va-memorable-date', () => {
     });
   });
 
-  it('Applies a unique name name attribute for each input', async () => {
+  it('Applies a unique name attribute for each input', async () => {
     const page = await newE2EPage();
     await page.setContent('<va-memorable-date name="test" />');
 
@@ -612,7 +612,7 @@ describe('va-memorable-date', () => {
     expect(dayInput).not.toBeNull();
   });
 
-  it('When the name prop is not set, the name attribute defaults to input type name', async () => {
+  it('When the name prop is not set, the input name attributes default to input type name', async () => {
     const page = await newE2EPage();
     await page.setContent('<va-memorable-date />');
 
@@ -1819,7 +1819,7 @@ describe('va-memorable-date', () => {
     });
   });
 
-  it('uswds v3 Applies a unique name name attribute for each input', async () => {
+  it('uswds v3 Applies a unique name attribute for each input', async () => {
     const page = await newE2EPage();
     await page.setContent('<va-memorable-date name="test" uswds />');
 
@@ -1831,7 +1831,7 @@ describe('va-memorable-date', () => {
     expect(dayInput).not.toBeNull();
   });
 
-  it('uswds v3 When the name prop is not set, the name attribute defaults to input type name', async () => {
+  it('uswds v3 When the name prop is not set, input name attributes default to input type name', async () => {
     const page = await newE2EPage();
     await page.setContent('<va-memorable-date uswds />');
 
