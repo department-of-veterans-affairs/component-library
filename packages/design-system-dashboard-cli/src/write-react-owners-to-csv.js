@@ -5,7 +5,6 @@ const codeowners = require('./codeowners.json');
 const today = require('./today');
 
 const componentsToKeep = [
-  'AlertBox',
   'Breadcrumbs',
   'Checkbox',
   'ExpandingGroup',
@@ -15,7 +14,7 @@ const componentsToKeep = [
   'TextInput',
 ];
 
-const hasMigrationScript = ['AlertBox', 'LoadingIndicator'];
+const hasMigrationScript = ['LoadingIndicator'];
 
 function cleanPath(pathToClean) {
   const cwd = process.cwd();
