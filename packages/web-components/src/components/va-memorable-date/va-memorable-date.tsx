@@ -287,7 +287,7 @@ export class VaMemorableDate {
             reflectInputError={error === 'month-range' ? true : false}
           inputmode="numeric"
           type="text"
-          error={this.invalidYear ? getErrorMessage(error) : null}
+          error={this.invalidMonth ? getErrorMessage(error) : null}
         />
       </div>;
       const legendClass = classnames({
