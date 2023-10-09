@@ -177,7 +177,6 @@ export function checkIsNaN(
     component.invalidDay = monthYearOnly ? false : !day;
     component.error = 'date-error';
   }
-  console.log(month);
   // Begin NaN validation.
   if (isNaN(year)) {
     component.invalidYear = true;
