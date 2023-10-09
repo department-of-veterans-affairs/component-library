@@ -184,7 +184,7 @@ export class VaSelect {
               {required && <span class="usa-label--required"> {i18next.t('required')}</span>}
             </label>
           )}
-          {hint && <span class="usa-hint">{hint}</span>}
+          {hint && <span class="usa-hint" id="input-hint">{hint}</span>}
           <span id="input-error-message" role="alert">
             {error && (
               <Fragment>
@@ -196,7 +196,7 @@ export class VaSelect {
           <slot onSlotchange={() => this.populateOptions()}></slot>
           <select
             class={selectClass}
-            aria-describedby={error ? 'error-message' : undefined}
+            aria-describedby={error ? 'input-error-message' : hint ? 'input-hint' : undefined}
             aria-invalid={invalid || error ? 'true' : 'false'}
             id="options"
             name={name}
@@ -217,7 +217,7 @@ export class VaSelect {
             {label}
             {required && <span class="required">{i18next.t('required')}</span>}
           </label>
-          {hint && <span class="hint-text">{hint}</span>}
+          {hint && <span class="hint-text" id="input-hint">{hint}</span>}
           <span id="error-message" role="alert">
             {error && (
               <Fragment>
@@ -227,7 +227,7 @@ export class VaSelect {
           </span>
           <slot onSlotchange={() => this.populateOptions()}></slot>
           <select
-            aria-describedby={error ? 'error-message' : undefined}
+            aria-describedby={error ? 'error-message' : hint ? 'input-hint' : undefined}
             aria-invalid={invalid || error ? 'true' : 'false'}
             id="select"
             name={name}
