@@ -17,8 +17,8 @@ describe('va-memorable-date', () => {
           <legend>
             <div id='dateHint'>date-hint.</div>
           </legend>
-          <slot></slot>
           <span id="error-message" role="alert"></span>
+          <slot></slot>
           <div class='date-container'>
             <va-text-input aria-describedby='dateHint' class='hydrated input-month memorable-date-input'></va-text-input>
             <va-text-input aria-describedby='dateHint' class='hydrated input-day memorable-date-input'></va-text-input>
@@ -56,8 +56,8 @@ describe('va-memorable-date', () => {
             <div id="hint">hint text</div>
             <div id='dateHint'>date-hint.</div>
           </legend>
-          <slot></slot>
           <span id="error-message" role="alert"></span>
+          <slot></slot>
           <div class='date-container'>
             <va-text-input aria-describedby='dateHint hint' class='hydrated input-month memorable-date-input'></va-text-input>
             <va-text-input aria-describedby='dateHint hint' class='hydrated input-day memorable-date-input'></va-text-input>
@@ -640,8 +640,8 @@ describe('va-memorable-date', () => {
             date-hint-with-select
           </span>
           </legend>
-          <slot></slot>
           <span id="error-message" role="alert"></span>
+          <slot></slot>
           <div class="usa-memorable-date">
             <div class="usa-form-group usa-form-group--select usa-form-group--month">
               <va-select aria-describedby="dateHint" class="hydrated usa-form-group--month-select" uswds="">
@@ -728,8 +728,8 @@ describe('va-memorable-date', () => {
               date-hint-with-select
             </span>
           </legend>
-          <slot></slot>
           <span id="error-message" role="alert"></span>
+          <slot></slot>
           <div class="usa-memorable-date">
             <div class="usa-form-group usa-form-group--select usa-form-group--month">
               <va-select aria-describedby="dateHint hint" class="hydrated usa-form-group--month-select" uswds="">
@@ -1324,8 +1324,8 @@ describe('va-memorable-date', () => {
           date-hint
           </span>
           </legend>
-          <slot></slot>
           <span id="error-message" role="alert"></span>
+          <slot></slot>
           <div class="usa-memorable-date">
             <div class="usa-form-group usa-form-group--month">
               <va-text-input aria-describedby="dateHint" class="hydrated memorable-date-input usa-form-group--month-input" uswds=""></va-text-input>
@@ -1375,8 +1375,8 @@ describe('va-memorable-date', () => {
               date-hint
             </span>
           </legend>
-          <slot></slot>
           <span id="error-message" role="alert"></span>
+          <slot></slot>
           <div class="usa-memorable-date">
             <div class="usa-form-group usa-form-group--month">
               <va-text-input aria-describedby="dateHint hint" class="hydrated memorable-date-input usa-form-group--month-input" uswds=""></va-text-input>
