@@ -402,7 +402,7 @@ export class VaModal {
 
     if (!visible) return null;
 
-    const ariaLabel = `${modalTitle} modal` || 'Modal';
+    const ariaLabel = modalTitle && modalTitle !== '' ? `${modalTitle} modal` : null;
     /* eslint-enable i18next/no-literal-string */
     const btnAriaLabel = modalTitle
       ? `Close ${modalTitle} modal`
