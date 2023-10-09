@@ -194,7 +194,7 @@ export class VaMemorableDate {
 
   componentDidLoad() {
     // We are setting the error on each va-text-input for screen readers, but do not want to show it visually. 
-    const textInputs = this.el.shadowRoot.querySelectorAll('va-text-input');
+    const textInputs = this.el.shadowRoot.querySelectorAll('va-text-input, va-select');
     textInputs.forEach((input) => {
       input.shadowRoot.querySelector('#input-error-message').classList.add('sr-only');
     });
@@ -260,6 +260,7 @@ export class VaMemorableDate {
             class='usa-form-group--month-select'
             reflectInputError={error === 'month-range' ? true : false}
             value={month ? String(parseInt(month)) : month}
+            error={this.invalidMonth ? getErrorMessage(error) : null}
           >
             {months &&
               months.map(monthOption => (
