@@ -17,8 +17,8 @@ describe('va-memorable-date', () => {
           <legend>
             <div id='dateHint'>date-hint.</div>
           </legend>
-          <slot></slot>
           <span id="error-message" role="alert"></span>
+          <slot></slot>
           <div class='date-container'>
             <va-text-input aria-describedby='dateHint' class='hydrated input-month memorable-date-input'></va-text-input>
             <va-text-input aria-describedby='dateHint' class='hydrated input-day memorable-date-input'></va-text-input>
@@ -56,8 +56,8 @@ describe('va-memorable-date', () => {
             <div id="hint">hint text</div>
             <div id='dateHint'>date-hint.</div>
           </legend>
-          <slot></slot>
           <span id="error-message" role="alert"></span>
+          <slot></slot>
           <div class='date-container'>
             <va-text-input aria-describedby='dateHint hint' class='hydrated input-month memorable-date-input'></va-text-input>
             <va-text-input aria-describedby='dateHint hint' class='hydrated input-day memorable-date-input'></va-text-input>
@@ -125,7 +125,7 @@ describe('va-memorable-date', () => {
       expect(date.getAttribute('error')).toEqual(`year-range`);
     });
 
-    it('does month validation without required prop', async () => {
+    it('does month validation without required prop and displays the correct error message', async () => {
       const page = await newE2EPage();
       await page.setContent(
         '<va-memorable-date value="1999-05-03" name="test" />',
@@ -142,6 +142,9 @@ describe('va-memorable-date', () => {
 
       await page.waitForChanges();
       expect(date.getAttribute('error')).toEqual("month-range");
+
+      const errorSpan = await page.find('va-memorable-date >>> span#error-message');
+      expect(errorSpan.textContent).toContain("month-range");
     });
 
     it('does day validation without required prop', async () => {
@@ -613,8 +616,8 @@ describe('va-memorable-date', () => {
             date-hint-with-select
           </span>
           </legend>
-          <slot></slot>
           <span id="error-message" role="alert"></span>
+          <slot></slot>
           <div class="usa-memorable-date">
             <div class="usa-form-group usa-form-group--select usa-form-group--month">
               <va-select aria-describedby="dateHint" class="hydrated usa-form-group--month-select" uswds="">
@@ -701,8 +704,8 @@ describe('va-memorable-date', () => {
               date-hint-with-select
             </span>
           </legend>
-          <slot></slot>
           <span id="error-message" role="alert"></span>
+          <slot></slot>
           <div class="usa-memorable-date">
             <div class="usa-form-group usa-form-group--select usa-form-group--month">
               <va-select aria-describedby="dateHint hint" class="hydrated usa-form-group--month-select" uswds="">
@@ -1297,8 +1300,8 @@ describe('va-memorable-date', () => {
           date-hint
           </span>
           </legend>
-          <slot></slot>
           <span id="error-message" role="alert"></span>
+          <slot></slot>
           <div class="usa-memorable-date">
             <div class="usa-form-group usa-form-group--month">
               <va-text-input aria-describedby="dateHint" class="hydrated memorable-date-input usa-form-group--month-input" uswds=""></va-text-input>
@@ -1348,8 +1351,8 @@ describe('va-memorable-date', () => {
               date-hint
             </span>
           </legend>
-          <slot></slot>
           <span id="error-message" role="alert"></span>
+          <slot></slot>
           <div class="usa-memorable-date">
             <div class="usa-form-group usa-form-group--month">
               <va-text-input aria-describedby="dateHint hint" class="hydrated memorable-date-input usa-form-group--month-input" uswds=""></va-text-input>
@@ -1475,7 +1478,7 @@ describe('va-memorable-date', () => {
       expect(date.getAttribute('error')).toEqual("day-range");
     });
 
-   it('uswds v3 without monthSelect does validation for required components', async () => {
+   it('uswds v3 without monthSelect does validation for required components and displays the correct error message', async () => {
       const page = await newE2EPage();
       await page.setContent(
         '<va-memorable-date name="test" required uswds month-select="false" />',
@@ -1488,6 +1491,27 @@ describe('va-memorable-date', () => {
       await page.waitForChanges();
 
       expect(date.getAttribute('error')).toEqual("month-range");
+
+      const errorSpan = await page.find('va-memorable-date >>> span#error-message');
+      expect(errorSpan.textContent).toContain("month-range");
+    });
+
+    it('uswds v3 with monthSelect displays the correct error message', async () => {
+      const page = await newE2EPage();
+      await page.setContent(
+        '<va-memorable-date name="test" required uswds month-select="true" />',
+      );
+      const date = await page.find('va-memorable-date');
+      const handleYear = await page.$('pierce/[name="testYear"]');
+
+      // Trigger Blur
+      await handleYear.press('Tab');
+      await page.waitForChanges();
+
+      expect(date.getAttribute('error')).toEqual("month-range");
+
+      const errorSpan = await page.find('va-memorable-date >>> span#error-message');
+      expect(errorSpan.textContent).toContain("month-select");
     });
 
     it('uswds v3 without monthSelect allows for a custom required message', async () => {

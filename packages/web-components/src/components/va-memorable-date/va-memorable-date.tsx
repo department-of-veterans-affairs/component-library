@@ -192,6 +192,14 @@ export class VaMemorableDate {
   })
   componentLibraryAnalytics: EventEmitter;
 
+  componentDidLoad() {
+    // We are setting the error on each va-text-input for screen readers, but do not want to show it visually. 
+    const textInputs = this.el.shadowRoot.querySelectorAll('va-text-input, va-select');
+    textInputs.forEach((input) => {
+      input.shadowRoot.querySelector('#input-error-message').classList.add('sr-only');
+    });
+  }
+
   connectedCallback() {
     i18next.on('languageChanged', () => {
       forceUpdate(this.el);
@@ -228,6 +236,15 @@ export class VaMemorableDate {
       const monthNum = parseInt(month);
       return getErrorParameters(error, yearNum, monthNum);
     }
+
+    const getErrorMessage = (error: string) => {
+      let key = error;
+      if (uswds && monthSelect && error === 'month-range') {
+        key = 'month-select';
+      }
+      return i18next.t(key, errorParameters(error))
+    }
+
     // Error attribute should be leveraged for custom error messaging
     // Fieldset has an implicit aria role of group
     if (uswds) {
@@ -243,6 +260,7 @@ export class VaMemorableDate {
             class='usa-form-group--month-select'
             reflectInputError={error === 'month-range' ? true : false}
             value={month ? String(parseInt(month)) : month}
+            error={this.invalidMonth ? getErrorMessage(error) : null}
           >
             {months &&
               months.map(monthOption => (
@@ -270,6 +288,7 @@ export class VaMemorableDate {
             reflectInputError={error === 'month-range' ? true : false}
           inputmode="numeric"
           type="text"
+          error={this.invalidMonth ? getErrorMessage(error) : null}
         />
       </div>;
       const legendClass = classnames({
@@ -285,15 +304,16 @@ export class VaMemorableDate {
               {hint && <div class="usa-hint" id="hint">{hint}</div>}
               <span class="usa-hint" id="dateHint">{hintText}</span>
             </legend>
-            <slot />
             <span id="error-message" role="alert">
               {error && (
                 <Fragment>
                   <span class="usa-sr-only">{i18next.t('error')}</span>
-                  <span class="usa-error-message">{i18next.t(error, errorParameters(error))}</span>
+                  <span class="usa-error-message">{getErrorMessage(error)}</span>
                 </Fragment>
               )}
             </span>
+            <slot />
+            
             <div class="usa-memorable-date">
               {monthDisplay}
               <div class="usa-form-group usa-form-group--day">
@@ -313,6 +333,7 @@ export class VaMemorableDate {
                   reflectInputError={error === 'day-range' ? true : false}
                   inputmode="numeric"
                   type="text"
+                  error={this.invalidDay ? getErrorMessage(error) : null}
                 />
               </div>
               <div class="usa-form-group usa-form-group--year">
@@ -332,6 +353,7 @@ export class VaMemorableDate {
                   reflectInputError={error === 'year-range' ? true : false}
                   inputmode="numeric"
                   type="text"
+                  error={this.invalidYear ? getErrorMessage(error) : null}
                 />
               </div>
             </div>
@@ -347,14 +369,14 @@ export class VaMemorableDate {
               {hint && <div id="hint">{hint}</div>}
               <div id="dateHint">{i18next.t('date-hint')}.</div>
             </legend>
-            <slot />
             <span id="error-message" role="alert">
               {error && (
                 <Fragment>
-                  <span class="sr-only">{i18next.t('error')}</span> {i18next.t(error, errorParameters(error))}
+                  <span class="sr-only">{i18next.t('error')}</span> {getErrorMessage(error)}
                 </Fragment>
               )}
             </span>
+            <slot />
             <div class="date-container">
               <va-text-input
                 label={i18next.t('month')}
@@ -371,6 +393,7 @@ export class VaMemorableDate {
                 class="input-month memorable-date-input"
                 inputmode="numeric"
                 type="text"
+                error={this.invalidMonth ? getErrorMessage(error) : null}
                 />
               <va-text-input
                 label={i18next.t('day')}
@@ -387,6 +410,7 @@ export class VaMemorableDate {
                 class="input-day memorable-date-input"
                 inputmode="numeric"
                 type="text"
+                error={this.invalidDay ? getErrorMessage(error) : null}
                 />
               <va-text-input
                 label={i18next.t('year')}
@@ -403,6 +427,7 @@ export class VaMemorableDate {
                 class="input-year memorable-date-input"
                 inputmode="numeric"
                 type="text"
+                error={this.invalidYear ? getErrorMessage(error) : null}
                 />
             </div>
           </fieldset>

@@ -6,7 +6,6 @@ const today = require('./today');
 
 const componentsToKeep = [
   'Breadcrumbs',
-  'Checkbox',
   'ExpandingGroup',
   'IconSearch',
   'LoadingIndicator',
