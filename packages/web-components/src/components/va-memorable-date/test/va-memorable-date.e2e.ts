@@ -16,8 +16,8 @@ describe('va-memorable-date', () => {
         <fieldset>
           <legend>
             <div id='dateHint'>date-hint.</div>
-            <span id="error-message" role="alert"></span>
           </legend>
+          <span id="error-message" role="alert"></span>
           <slot></slot>
           <div class='date-container'>
             <va-text-input aria-describedby='dateHint' class='hydrated input-month memorable-date-input'></va-text-input>
@@ -55,8 +55,8 @@ describe('va-memorable-date', () => {
             <span class="required">required</span>
             <div id="hint">hint text</div>
             <div id='dateHint'>date-hint.</div>
-            <span id="error-message" role="alert"></span>
           </legend>
+          <span id="error-message" role="alert"></span>
           <slot></slot>
           <div class='date-container'>
             <va-text-input aria-describedby='dateHint hint' class='hydrated input-month memorable-date-input'></va-text-input>
@@ -615,8 +615,8 @@ describe('va-memorable-date', () => {
           <span class="usa-hint" id="dateHint">
             date-hint-with-select
           </span>
-          <span id="error-message" role="alert"></span>
           </legend>
+          <span id="error-message" role="alert"></span>
           <slot></slot>
           <div class="usa-memorable-date">
             <div class="usa-form-group usa-form-group--select usa-form-group--month">
@@ -703,8 +703,8 @@ describe('va-memorable-date', () => {
             <span class="usa-hint" id="dateHint">
               date-hint-with-select
             </span>
-            <span id="error-message" role="alert"></span>
           </legend>
+          <span id="error-message" role="alert"></span>
           <slot></slot>
           <div class="usa-memorable-date">
             <div class="usa-form-group usa-form-group--select usa-form-group--month">
@@ -1299,8 +1299,8 @@ describe('va-memorable-date', () => {
           <span class="usa-hint" id="dateHint">
           date-hint
           </span>
-          <span id="error-message" role="alert"></span>
           </legend>
+          <span id="error-message" role="alert"></span>
           <slot></slot>
           <div class="usa-memorable-date">
             <div class="usa-form-group usa-form-group--month">
@@ -1350,8 +1350,8 @@ describe('va-memorable-date', () => {
             <span class="usa-hint" id="dateHint">
               date-hint
             </span>
-            <span id="error-message" role="alert"></span>
           </legend>
+          <span id="error-message" role="alert"></span>
           <slot></slot>
           <div class="usa-memorable-date">
             <div class="usa-form-group usa-form-group--month">
