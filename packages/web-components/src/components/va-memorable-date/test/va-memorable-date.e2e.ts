@@ -600,6 +600,30 @@ describe('va-memorable-date', () => {
     });
   });
 
+  it('Applies a unique name name attribute for each input', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-memorable-date name="test" />');
+
+    const yearInput = await page.$('pierce/[name="testYear"]');
+    const monthInput = await page.$('pierce/[name="testMonth"]');
+    const dayInput = await page.$('pierce/[name="testDay"]');
+    expect(yearInput).not.toBeNull();
+    expect(monthInput).not.toBeNull();
+    expect(dayInput).not.toBeNull();
+  });
+
+  it('When the name prop is not set, the name attribute defaults to input type name', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-memorable-date />');
+
+    const yearInput = await page.$('pierce/[name="Year"]');
+    const monthInput = await page.$('pierce/[name="Month"]');
+    const dayInput = await page.$('pierce/[name="Day"]');
+    expect(yearInput).not.toBeNull();
+    expect(monthInput).not.toBeNull();
+    expect(dayInput).not.toBeNull();
+  });
+
   // Begin USWDS v3 test
   it('uswds v3 renders', async () => {
     const page = await newE2EPage();
@@ -1793,5 +1817,29 @@ describe('va-memorable-date', () => {
         day: 2,
       },
     });
+  });
+
+  it('uswds v3 Applies a unique name name attribute for each input', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-memorable-date name="test" uswds />');
+
+    const yearInput = await page.$('pierce/[name="testYear"]');
+    const monthInput = await page.$('pierce/[name="testMonth"]');
+    const dayInput = await page.$('pierce/[name="testDay"]');
+    expect(yearInput).not.toBeNull();
+    expect(monthInput).not.toBeNull();
+    expect(dayInput).not.toBeNull();
+  });
+
+  it('uswds v3 When the name prop is not set, the name attribute defaults to input type name', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-memorable-date uswds />');
+
+    const yearInput = await page.$('pierce/[name="Year"]');
+    const monthInput = await page.$('pierce/[name="Month"]');
+    const dayInput = await page.$('pierce/[name="Day"]');
+    expect(yearInput).not.toBeNull();
+    expect(monthInput).not.toBeNull();
+    expect(dayInput).not.toBeNull();
   });
 });
