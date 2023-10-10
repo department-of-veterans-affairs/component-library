@@ -260,13 +260,13 @@ describe('uswds - va-pagination', () => {
           <nav aria-label="Pagination" class="usa-pagination">
             <ul class="usa-pagination__list">
               <li class="usa-pagination__item usa-pagination__page-no">
-                <a href="javascript:void(0)" class="usa-pagination__button usa-current">1</a>
+                <a aria-label="page 1" href="javascript:void(0)" class="usa-pagination__button usa-current">1</a>
               </li>
               <li class="usa-pagination__item usa-pagination__page-no">
-                <a href="javascript:void(0)" class="usa-pagination__button">2</a>
+                <a aria-label="page 2" href="javascript:void(0)" class="usa-pagination__button">2</a>
               </li>
               <li class="usa-pagination__item usa-pagination__page-no">
-                <a href="javascript:void(0)" class="usa-pagination__button">3</a>
+                <a aria-label="page 3" href="javascript:void(0)" class="usa-pagination__button">3</a>
               </li>
               <li class="usa-pagination__item usa-pagination__arrow" aria-label="Next page">
                 <a href="javascript:void(0)" class="usa-pagination__link usa-pagination__next-page">

@@ -317,7 +317,9 @@ export class VaPagination {
                 onClick={() => this.handlePageSelect(1, 'nav-paginate-number')}
                 onKeyDown={e => this.handleKeyDown(e, 1)}
                 href="javascript:void(0)"
-                class="usa-pagination__button">1</a>
+                class="usa-pagination__button"
+                aria-label="page 1, first page"
+                >1</a>
             </li>
             <li class={ellipsisClasses} aria-label="ellipsis indicating non-visible pages">
               <span>...</span>
@@ -332,6 +334,8 @@ export class VaPagination {
           'usa-current': page === pageNumber
         })
 
+        let pageAriaLabel = ariaLabelSuffix ? `page ${pageNumber} ${ariaLabelSuffix}` : `page ${pageNumber}`;
+        
         return (
           <li class={itemClasses}>
             <a
@@ -339,6 +343,7 @@ export class VaPagination {
               onKeyDown={e => this.handleKeyDown(e, pageNumber)}
               href="javascript:void(0)"
               class={anchorClasses}
+              aria-label={pageAriaLabel}
             >
               {pageNumber}
             </a>
@@ -360,6 +365,7 @@ export class VaPagination {
                 onKeyDown={e => this.handleKeyDown(e, pages)}
                 href="javascript:void(0)"
                 class="usa-pagination__button"
+                aria-label={`page ${pages}, last page`}
               >
                 {pages}
               </a>
