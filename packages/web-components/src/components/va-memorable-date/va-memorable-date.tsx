@@ -172,15 +172,12 @@ export class VaMemorableDate {
     let [currentYear, currentMonth, currentDay] = (this.value || '').split('-');
     if (target.classList.contains('input-month') || target.classList.contains('usa-form-group--month-input') || target.classList.contains('usa-form-group--month-select')) {
       currentMonth = target.value;
-      this.monthTouched = true
     }
     if (target.classList.contains('input-day') || target.classList.contains('usa-form-group--day-input')) {
       currentDay = target.value;
-      this.dayTouched = true;
     }
     if (target.classList.contains('input-year') || target.classList.contains('usa-form-group--year-input')) {
       currentYear = target.value;
-      this.yearTouched = true
     }
 
     /* eslint-disable i18next/no-literal-string */
@@ -190,6 +187,18 @@ export class VaMemorableDate {
     // This event should always fire to allow for validation handling
     this.dateChange.emit(event);
   };
+
+  private handleMonthBlur = () => {
+    this.monthTouched = true;
+  }
+
+  private handleDayBlur = () => {
+    this.dayTouched = true;
+  }
+
+  private handleYearBlur = () => {
+    this.yearTouched = true;
+  }
 
   /**
    * Whether or not an analytics event will be fired.
@@ -264,6 +273,7 @@ export class VaMemorableDate {
             aria-describedby={describedbyIds}
             invalid={this.invalidMonth}
             onVaSelect={handleDateChange}
+            onBlur={this.handleMonthBlur}
             class='usa-form-group--month-select'
             reflectInputError={error === 'month-range' ? true : false}
             value={month ? String(parseInt(month)) : month}
@@ -290,6 +300,7 @@ export class VaMemorableDate {
           // if NaN provide empty string
           value={month?.toString()}
           onInput={handleDateChange}
+          onBlur={this.handleMonthBlur}
           class="usa-form-group--month-input memorable-date-input"
             reflectInputError={error === 'month-range' ? true : false}
           inputmode="numeric"
@@ -333,6 +344,7 @@ export class VaMemorableDate {
                   // if NaN provide empty string
                   value={day?.toString()}
                   onInput={handleDateChange}
+                  onBlur={this.handleDayBlur}
                   class="usa-form-group--day-input memorable-date-input"
                   reflectInputError={error === 'day-range' ? true : false}
                   inputmode="numeric"
@@ -352,6 +364,7 @@ export class VaMemorableDate {
                   // if NaN provide empty string
                   value={year?.toString()}
                   onInput={handleDateChange}
+                  onBlur={this.handleYearBlur}
                   class="usa-form-group--year-input memorable-date-input"
                   reflectInputError={error === 'year-range' ? true : false}
                   inputmode="numeric"
@@ -392,6 +405,7 @@ export class VaMemorableDate {
                 // if NaN provide empty string
                 value={month?.toString()}
                 onInput={handleDateChange}
+                onBlur={this.handleMonthBlur}
                 class="input-month memorable-date-input"
                 inputmode="numeric"
                 type="text"
@@ -408,6 +422,7 @@ export class VaMemorableDate {
                 // if NaN provide empty string
                 value={day?.toString()}
                 onInput={handleDateChange}
+                onBlur={this.handleDayBlur}
                 class="input-day memorable-date-input"
                 inputmode="numeric"
                 type="text"
@@ -424,6 +439,7 @@ export class VaMemorableDate {
                 // if NaN provide empty string
                 value={year?.toString()}
                 onInput={handleDateChange}
+                onBlur={this.handleYearBlur}
                 class="input-year memorable-date-input"
                 inputmode="numeric"
                 type="text"

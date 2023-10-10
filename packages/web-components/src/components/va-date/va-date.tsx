@@ -185,16 +185,13 @@ export class VaDate {
     let [currentYear, currentMonth, currentDay] = (this.value || '').split('-');
     if (target.classList.contains('select-month')) {
       currentMonth = target.value;
-      this.monthTouched = true;
     }
     // This won't happen for monthYearOnly dates
     if (target.classList.contains('select-day')) {
       currentDay = target.value;
-      this.dayTouched = true;
     }
     if (target.classList.contains('input-year')) {
       currentYear = target.value;
-      this.yearTouched = true;
     }
 
     this.setValue(
@@ -206,6 +203,18 @@ export class VaDate {
     // This event should always fire to allow for validation handling
     this.dateChange.emit(event);
   };
+
+  private handleMonthBlur = () => {
+    this.monthTouched = true;
+  }
+
+  private handleDayBlur = () => {
+    this.dayTouched = true;
+  }
+
+  private handleYearBlur = () => {
+    this.yearTouched = true;
+  }
 
   render() {
     const {
@@ -252,6 +261,7 @@ export class VaDate {
               // Value must be a string
               value={month?.toString()}
               onVaSelect={handleDateChange}
+              onBlur={this.handleMonthBlur}
               invalid={this.invalidMonth}
               class="select-month"
               aria-label="Please enter two digits for the month"
@@ -272,6 +282,7 @@ export class VaDate {
                 // Value must be a string
                 value={daysForSelectedMonth.length < day ? '' : day?.toString()}
                 onVaSelect={handleDateChange}
+                onBlur={this.handleDayBlur}
                 invalid={this.invalidDay}
                 class="select-day"
                 aria-label="Please enter two digits for the day"
@@ -295,6 +306,7 @@ export class VaDate {
               value={year ? year.toString() : ''}
               invalid={this.invalidYear}
               onInput={handleDateChange}
+              onBlur={this.handleYearBlur}
               class="input-year"
               inputmode="numeric"
               type="text"
