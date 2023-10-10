@@ -18,7 +18,6 @@ import { consoleDevError } from '../../utils/utils';
   tag: 'va-icon',
   styleUrl: 'va-icon.scss',
   shadow: true,
-  assetsDirs: ['../../assets']
 })
 export class VaIcon {
   /**
