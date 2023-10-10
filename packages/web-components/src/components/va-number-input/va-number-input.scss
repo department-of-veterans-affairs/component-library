@@ -9,27 +9,29 @@
 @import '../../mixins/form-field-error.css';
 @import '../../mixins/hint-text.css';
 
-:host(:not([uswds])) input[type='number'] {
-  -moz-appearance: textfield;
-}
+:host(:not([uswds='true'], [uswds=''])) {
+  input[type='number'] {
+    -moz-appearance: textfield;
+  }
 
-:host(:not([uswds])) input::-webkit-outer-spin-button,
-:host(:not([uswds])) input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
 
-:host(:not([uswds])) > div {
-  position: relative;
-  display: flex;
-  align-items: center;
-}
+  > div {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
 
-:host(:not([uswds])) > div > span {
-  position: absolute;
-  left: 1rem;
-}
+  > div > span {
+    position: absolute;
+    left: 1rem;
+  }
 
-:host(:not([uswds])) > div > input.currency-input {
-  padding-left: 2.5rem;
+  > div > input.currency-input {
+    padding-left: 2.5rem;
+  }
 }
