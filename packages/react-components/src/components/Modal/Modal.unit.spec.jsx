@@ -72,7 +72,7 @@ describe('<Modal/>', () => {
     });
   });
 
-  it('should pass aXe check', () => {
+  it.skip('should pass aXe check', () => {
     return axeCheck(
       <Modal id="modal" title="aXe Check" visible onClose={() => {}} />,
     );

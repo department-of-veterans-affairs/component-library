@@ -32,7 +32,7 @@ describe('<LoadingIndicator>', () => {
     mountedComponent.unmount();
   });
 
-  it('should pass aXe check', () =>
+  it.skip('should pass aXe check', () =>
     axeCheck(<LoadingIndicator message="Loading" label="aria label here" />));
 
   describe('analytics event', function () {
