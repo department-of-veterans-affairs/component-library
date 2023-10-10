@@ -11,7 +11,6 @@ import vaSeal from '../../assets/va-seal.svg';
   tag: 'va-minimal-header',
   styleUrl: 'va-minimal-header.scss',
   shadow: true,
-  assetsDirs: ['./assets'],
 })
 
 export class VaMinimalHeader {
