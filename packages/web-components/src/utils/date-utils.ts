@@ -177,7 +177,6 @@ export function checkIsNaN(
     component.invalidDay = monthYearOnly ? false : !day;
     component.error = 'date-error';
   }
-
   // Begin NaN validation.
   if (isNaN(year)) {
     component.invalidYear = true;
@@ -195,7 +194,7 @@ export function checkIsNaN(
     component.invalidDay = false;
   }
 
-  if (isNaN(month)) {
+  if (isNaN(month) || month < 1) {
     component.invalidMonth = true;
     component.error = 'month-range';
   }
@@ -218,6 +217,17 @@ export function checkIsNaN(
   return false;
 }
 
+interface ValidateConfig {
+  component: Components.VaDate | Components.VaMemorableDate,
+  year: number,
+  month: number,
+  day: number,
+  monthYearOnly?: boolean,
+  yearTouched?: boolean,
+  monthTouched?: boolean,
+  dayTouched?: boolean,
+}
+
 /**
  * This is used to validate date components and:
  * 1. Indicate which field fails the built-in validation
@@ -225,12 +235,7 @@ export function checkIsNaN(
  *
  * It relies on the component's mutable props.
  */
-export function validate(
-  component: Components.VaDate | Components.VaMemorableDate,
-  year: number,
-  month: number,
-  day: number,
-  monthYearOnly : boolean = false) : void {
+export function validate({ component, year, month, day, monthYearOnly, yearTouched, monthTouched, dayTouched }: ValidateConfig) : void {
 
   const maxDay = daysForSelectedMonth(year, month);
   if (component.required && (!year || !month || (!monthYearOnly && !day))) {
@@ -242,8 +247,8 @@ export function validate(
   }
 
   // Begin built-in validation.
-  // Empty fields are acceptable unless the component is marked as required
-  if (year && (year < minYear || year > maxYear)) {
+  // Empty fields are acceptable when field is untouched. Otherwise must pass validation
+  if (yearTouched && (!year || year < minYear || year > maxYear)) {
     component.invalidYear = true;
     component.error = 'year-range';
   }
@@ -253,7 +258,7 @@ export function validate(
 
   // Check day before month so that the month error message has a change to override
   // We don't know the upper limit on days until we know the month
-  if (!monthYearOnly && (day < minMonths || day > maxDay)) {
+  if (dayTouched && !monthYearOnly && (!day || day < minMonths || day > maxDay)) {
     component.invalidDay = true;
     component.error = 'day-range';
   }
@@ -263,8 +268,7 @@ export function validate(
 
   // The month error message will trigger if the month is outside of the acceptable range,
   // but also if the day is invalid and there isn't a month value.
-  if ((month && (month < minMonths || month > maxMonths)) ||
-      (!month && component.invalidDay)) {
+  if (monthTouched && (!month || month < minMonths || month > maxMonths)) {
     component.invalidMonth = true;
     component.error = 'month-range';
   }
