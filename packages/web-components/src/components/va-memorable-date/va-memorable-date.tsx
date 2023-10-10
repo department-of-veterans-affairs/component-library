@@ -113,6 +113,10 @@ export class VaMemorableDate {
   @Prop({ mutable: true }) invalidMonth: boolean = false;
   @Prop({ mutable: true }) invalidYear: boolean = false;
 
+  private dayTouched: boolean = false;
+  private monthTouched: boolean = false;
+  private yearTouched: boolean = false;
+
   private handleDateBlur = (event: FocusEvent) => {
     const [year, month, day] = (this.value || '').split('-');
     const yearNum = Number(year);
@@ -137,7 +141,15 @@ export class VaMemorableDate {
 
     // Built-in validation is run after custom so internal errors override
     // custom errors, e.g. Show invalid date instead of custom error
-    validate(this, yearNum, monthNum, dayNum);
+    validate({
+               component: this,
+               year: yearNum,
+               month: monthNum,
+               day: dayNum,
+               yearTouched: this.yearTouched,
+               monthTouched: this.monthTouched,
+               dayTouched: this.dayTouched
+             });
 
     if (this.enableAnalytics) {
       const detail = {
@@ -175,6 +187,18 @@ export class VaMemorableDate {
     // This event should always fire to allow for validation handling
     this.dateChange.emit(event);
   };
+
+  private handleMonthBlur = () => {
+    this.monthTouched = true;
+  }
+
+  private handleDayBlur = () => {
+    this.dayTouched = true;
+  }
+
+  private handleYearBlur = () => {
+    this.yearTouched = true;
+  }
 
   /**
    * Whether or not an analytics event will be fired.
@@ -253,10 +277,11 @@ export class VaMemorableDate {
           <va-select
             uswds
             label={i18next.t('month')}
-            name={`${name}Month`}
+            name={name ? `${name}Month` : 'Month'}
             aria-describedby={describedbyIds}
             invalid={this.invalidMonth}
             onVaSelect={handleDateChange}
+            onBlur={this.handleMonthBlur}
             class='usa-form-group--month-select'
             reflectInputError={error === 'month-range' ? true : false}
             value={month ? String(parseInt(month)) : month}
@@ -275,7 +300,7 @@ export class VaMemorableDate {
         <va-text-input
           uswds
           label={i18next.t('month')}
-          name={`${name}Month`}
+          name={name ? `${name}Month` : 'Month'}
           maxlength={2}
           pattern="[0-9]*"
           aria-describedby={describedbyIds}
@@ -284,6 +309,7 @@ export class VaMemorableDate {
           // if NaN provide empty string
           value={month?.toString()}
           onInput={handleDateChange}
+          onBlur={this.handleMonthBlur}
           class="usa-form-group--month-input memorable-date-input"
             reflectInputError={error === 'month-range' ? true : false}
           inputmode="numeric"
@@ -320,7 +346,7 @@ export class VaMemorableDate {
                 <va-text-input
                   uswds
                   label={i18next.t('day')}
-                  name={`${name}Day`}
+                  name={name ? `${name}Day` : 'Day'}
                   maxlength={2}
                   pattern="[0-9]*"
                   aria-describedby={describedbyIds}
@@ -329,6 +355,7 @@ export class VaMemorableDate {
                   // if NaN provide empty string
                   value={day?.toString()}
                   onInput={handleDateChange}
+                  onBlur={this.handleDayBlur}
                   class="usa-form-group--day-input memorable-date-input"
                   reflectInputError={error === 'day-range' ? true : false}
                   inputmode="numeric"
@@ -340,7 +367,7 @@ export class VaMemorableDate {
                 <va-text-input
                   uswds
                   label={i18next.t('year')}
-                  name={`${name}Year`}
+                  name={name ? `${name}Year` : 'Year'}
                   maxlength={4}
                   pattern="[0-9]*"
                   aria-describedby={describedbyIds}
@@ -349,6 +376,7 @@ export class VaMemorableDate {
                   // if NaN provide empty string
                   value={year?.toString()}
                   onInput={handleDateChange}
+                  onBlur={this.handleYearBlur}
                   class="usa-form-group--year-input memorable-date-input"
                   reflectInputError={error === 'year-range' ? true : false}
                   inputmode="numeric"
@@ -380,7 +408,7 @@ export class VaMemorableDate {
             <div class="date-container">
               <va-text-input
                 label={i18next.t('month')}
-                name={`${name}Month`}
+                name={name ? `${name}Month` : 'Month'}
                 maxlength={2}
                 minlength={2}
                 pattern="[0-9]*"
@@ -390,6 +418,7 @@ export class VaMemorableDate {
                 // if NaN provide empty string
                 value={month?.toString()}
                 onInput={handleDateChange}
+                onBlur={this.handleMonthBlur}
                 class="input-month memorable-date-input"
                 inputmode="numeric"
                 type="text"
@@ -397,7 +426,7 @@ export class VaMemorableDate {
                 />
               <va-text-input
                 label={i18next.t('day')}
-                name={`${name}Day`}
+                name={name ? `${name}Day` : 'Day'}
                 maxlength={2}
                 minlength={2}
                 pattern="[0-9]*"
@@ -407,6 +436,7 @@ export class VaMemorableDate {
                 // if NaN provide empty string
                 value={day?.toString()}
                 onInput={handleDateChange}
+                onBlur={this.handleDayBlur}
                 class="input-day memorable-date-input"
                 inputmode="numeric"
                 type="text"
@@ -414,7 +444,7 @@ export class VaMemorableDate {
                 />
               <va-text-input
                 label={i18next.t('year')}
-                name={`${name}Year`}
+                name={name ? `${name}Year` : 'Year'}
                 maxlength={4}
                 minlength={4}
                 pattern="[0-9]*"
@@ -424,6 +454,7 @@ export class VaMemorableDate {
                 // if NaN provide empty string
                 value={year?.toString()}
                 onInput={handleDateChange}
+                onBlur={this.handleYearBlur}
                 class="input-year memorable-date-input"
                 inputmode="numeric"
                 type="text"

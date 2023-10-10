@@ -1,8 +1,6 @@
 import { newE2EPage } from '@stencil/core/testing';
 import { axeCheck } from '../../../testing/test-helpers';
 
-const maxYear = new Date().getFullYear() + 100;
-
 describe('va-memorable-date', () => {
   it('renders', async () => {
     const page = await newE2EPage();
@@ -598,6 +596,30 @@ describe('va-memorable-date', () => {
         day: 2,
       },
     });
+  });
+
+  it('Applies a unique name attribute for each input', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-memorable-date name="test" />');
+
+    const yearInput = await page.$('pierce/[name="testYear"]');
+    const monthInput = await page.$('pierce/[name="testMonth"]');
+    const dayInput = await page.$('pierce/[name="testDay"]');
+    expect(yearInput).not.toBeNull();
+    expect(monthInput).not.toBeNull();
+    expect(dayInput).not.toBeNull();
+  });
+
+  it('When the name prop is not set, the input name attributes default to input type name', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-memorable-date />');
+
+    const yearInput = await page.$('pierce/[name="Year"]');
+    const monthInput = await page.$('pierce/[name="Month"]');
+    const dayInput = await page.$('pierce/[name="Day"]');
+    expect(yearInput).not.toBeNull();
+    expect(monthInput).not.toBeNull();
+    expect(dayInput).not.toBeNull();
   });
 
   // Begin USWDS v3 test
@@ -1793,5 +1815,29 @@ describe('va-memorable-date', () => {
         day: 2,
       },
     });
+  });
+
+  it('uswds v3 Applies a unique name attribute for each input', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-memorable-date name="test" uswds />');
+
+    const yearInput = await page.$('pierce/[name="testYear"]');
+    const monthInput = await page.$('pierce/[name="testMonth"]');
+    const dayInput = await page.$('pierce/[name="testDay"]');
+    expect(yearInput).not.toBeNull();
+    expect(monthInput).not.toBeNull();
+    expect(dayInput).not.toBeNull();
+  });
+
+  it('uswds v3 When the name prop is not set, input name attributes default to input type name', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-memorable-date uswds />');
+
+    const yearInput = await page.$('pierce/[name="Year"]');
+    const monthInput = await page.$('pierce/[name="Month"]');
+    const dayInput = await page.$('pierce/[name="Day"]');
+    expect(yearInput).not.toBeNull();
+    expect(monthInput).not.toBeNull();
+    expect(dayInput).not.toBeNull();
   });
 });
