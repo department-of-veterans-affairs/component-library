@@ -1,8 +1,6 @@
 import { newE2EPage } from '@stencil/core/testing';
 import { axeCheck } from '../../../testing/test-helpers';
 
-const maxYear = new Date().getFullYear() + 100;
-
 describe('va-memorable-date', () => {
   it('renders', async () => {
     const page = await newE2EPage();
