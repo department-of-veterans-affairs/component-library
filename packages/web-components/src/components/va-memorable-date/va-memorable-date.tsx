@@ -216,6 +216,14 @@ export class VaMemorableDate {
   })
   componentLibraryAnalytics: EventEmitter;
 
+  componentDidLoad() {
+    // We are setting the error on each va-text-input for screen readers, but do not want to show it visually. 
+    const textInputs = this.el.shadowRoot.querySelectorAll('va-text-input, va-select');
+    textInputs.forEach((input) => {
+      input.shadowRoot.querySelector('#input-error-message').classList.add('sr-only');
+    });
+  }
+
   connectedCallback() {
     i18next.on('languageChanged', () => {
       forceUpdate(this.el);
@@ -269,7 +277,7 @@ export class VaMemorableDate {
           <va-select
             uswds
             label={i18next.t('month')}
-            name={`${name}Month`}
+            name={name ? `${name}Month` : 'Month'}
             aria-describedby={describedbyIds}
             invalid={this.invalidMonth}
             onVaSelect={handleDateChange}
@@ -277,6 +285,7 @@ export class VaMemorableDate {
             class='usa-form-group--month-select'
             reflectInputError={error === 'month-range' ? true : false}
             value={month ? String(parseInt(month)) : month}
+            error={this.invalidMonth ? getErrorMessage(error) : null}
           >
             {months &&
               months.map(monthOption => (
@@ -291,7 +300,7 @@ export class VaMemorableDate {
         <va-text-input
           uswds
           label={i18next.t('month')}
-          name={`${name}Month`}
+          name={name ? `${name}Month` : 'Month'}
           maxlength={2}
           pattern="[0-9]*"
           aria-describedby={describedbyIds}
@@ -305,6 +314,7 @@ export class VaMemorableDate {
             reflectInputError={error === 'month-range' ? true : false}
           inputmode="numeric"
           type="text"
+          error={this.invalidMonth ? getErrorMessage(error) : null}
         />
       </div>;
       const legendClass = classnames({
@@ -320,7 +330,6 @@ export class VaMemorableDate {
               {hint && <div class="usa-hint" id="hint">{hint}</div>}
               <span class="usa-hint" id="dateHint">{hintText}</span>
             </legend>
-            <slot />
             <span id="error-message" role="alert">
               {error && (
                 <Fragment>
@@ -329,13 +338,15 @@ export class VaMemorableDate {
                 </Fragment>
               )}
             </span>
+            <slot />
+            
             <div class="usa-memorable-date">
               {monthDisplay}
               <div class="usa-form-group usa-form-group--day">
                 <va-text-input
                   uswds
                   label={i18next.t('day')}
-                  name={`${name}Day`}
+                  name={name ? `${name}Day` : 'Day'}
                   maxlength={2}
                   pattern="[0-9]*"
                   aria-describedby={describedbyIds}
@@ -349,13 +360,14 @@ export class VaMemorableDate {
                   reflectInputError={error === 'day-range' ? true : false}
                   inputmode="numeric"
                   type="text"
+                  error={this.invalidDay ? getErrorMessage(error) : null}
                 />
               </div>
               <div class="usa-form-group usa-form-group--year">
                 <va-text-input
                   uswds
                   label={i18next.t('year')}
-                  name={`${name}Year`}
+                  name={name ? `${name}Year` : 'Year'}
                   maxlength={4}
                   pattern="[0-9]*"
                   aria-describedby={describedbyIds}
@@ -369,6 +381,7 @@ export class VaMemorableDate {
                   reflectInputError={error === 'year-range' ? true : false}
                   inputmode="numeric"
                   type="text"
+                  error={this.invalidYear ? getErrorMessage(error) : null}
                 />
               </div>
             </div>
@@ -384,7 +397,6 @@ export class VaMemorableDate {
               {hint && <div id="hint">{hint}</div>}
               <div id="dateHint">{i18next.t('date-hint')}.</div>
             </legend>
-            <slot />
             <span id="error-message" role="alert">
               {error && (
                 <Fragment>
@@ -392,10 +404,11 @@ export class VaMemorableDate {
                 </Fragment>
               )}
             </span>
+            <slot />
             <div class="date-container">
               <va-text-input
                 label={i18next.t('month')}
-                name={`${name}Month`}
+                name={name ? `${name}Month` : 'Month'}
                 maxlength={2}
                 minlength={2}
                 pattern="[0-9]*"
@@ -409,10 +422,11 @@ export class VaMemorableDate {
                 class="input-month memorable-date-input"
                 inputmode="numeric"
                 type="text"
+                error={this.invalidMonth ? getErrorMessage(error) : null}
                 />
               <va-text-input
                 label={i18next.t('day')}
-                name={`${name}Day`}
+                name={name ? `${name}Day` : 'Day'}
                 maxlength={2}
                 minlength={2}
                 pattern="[0-9]*"
@@ -426,10 +440,11 @@ export class VaMemorableDate {
                 class="input-day memorable-date-input"
                 inputmode="numeric"
                 type="text"
+                error={this.invalidDay ? getErrorMessage(error) : null}
                 />
               <va-text-input
                 label={i18next.t('year')}
-                name={`${name}Year`}
+                name={name ? `${name}Year` : 'Year'}
                 maxlength={4}
                 minlength={4}
                 pattern="[0-9]*"
@@ -443,6 +458,7 @@ export class VaMemorableDate {
                 class="input-year memorable-date-input"
                 inputmode="numeric"
                 type="text"
+                error={this.invalidYear ? getErrorMessage(error) : null}
                 />
             </div>
           </fieldset>

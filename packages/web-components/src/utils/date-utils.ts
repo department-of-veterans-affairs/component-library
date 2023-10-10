@@ -177,7 +177,6 @@ export function checkIsNaN(
     component.invalidDay = monthYearOnly ? false : !day;
     component.error = 'date-error';
   }
-
   // Begin NaN validation.
   if (isNaN(year)) {
     component.invalidYear = true;
@@ -195,7 +194,7 @@ export function checkIsNaN(
     component.invalidDay = false;
   }
 
-  if (isNaN(month)) {
+  if (isNaN(month) || month < 1) {
     component.invalidMonth = true;
     component.error = 'month-range';
   }

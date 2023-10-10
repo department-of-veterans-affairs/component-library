@@ -15,8 +15,8 @@ describe('va-memorable-date', () => {
           <legend>
             <div id='dateHint'>date-hint.</div>
           </legend>
-          <slot></slot>
           <span id="error-message" role="alert"></span>
+          <slot></slot>
           <div class='date-container'>
             <va-text-input aria-describedby='dateHint' class='hydrated input-month memorable-date-input'></va-text-input>
             <va-text-input aria-describedby='dateHint' class='hydrated input-day memorable-date-input'></va-text-input>
@@ -54,8 +54,8 @@ describe('va-memorable-date', () => {
             <div id="hint">hint text</div>
             <div id='dateHint'>date-hint.</div>
           </legend>
-          <slot></slot>
           <span id="error-message" role="alert"></span>
+          <slot></slot>
           <div class='date-container'>
             <va-text-input aria-describedby='dateHint hint' class='hydrated input-month memorable-date-input'></va-text-input>
             <va-text-input aria-describedby='dateHint hint' class='hydrated input-day memorable-date-input'></va-text-input>
@@ -598,6 +598,30 @@ describe('va-memorable-date', () => {
     });
   });
 
+  it('Applies a unique name attribute for each input', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-memorable-date name="test" />');
+
+    const yearInput = await page.$('pierce/[name="testYear"]');
+    const monthInput = await page.$('pierce/[name="testMonth"]');
+    const dayInput = await page.$('pierce/[name="testDay"]');
+    expect(yearInput).not.toBeNull();
+    expect(monthInput).not.toBeNull();
+    expect(dayInput).not.toBeNull();
+  });
+
+  it('When the name prop is not set, the input name attributes default to input type name', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-memorable-date />');
+
+    const yearInput = await page.$('pierce/[name="Year"]');
+    const monthInput = await page.$('pierce/[name="Month"]');
+    const dayInput = await page.$('pierce/[name="Day"]');
+    expect(yearInput).not.toBeNull();
+    expect(monthInput).not.toBeNull();
+    expect(dayInput).not.toBeNull();
+  });
+
   // Begin USWDS v3 test
   it('uswds v3 renders', async () => {
     const page = await newE2EPage();
@@ -614,8 +638,8 @@ describe('va-memorable-date', () => {
             date-hint-with-select
           </span>
           </legend>
-          <slot></slot>
           <span id="error-message" role="alert"></span>
+          <slot></slot>
           <div class="usa-memorable-date">
             <div class="usa-form-group usa-form-group--select usa-form-group--month">
               <va-select aria-describedby="dateHint" class="hydrated usa-form-group--month-select" uswds="">
@@ -702,8 +726,8 @@ describe('va-memorable-date', () => {
               date-hint-with-select
             </span>
           </legend>
-          <slot></slot>
           <span id="error-message" role="alert"></span>
+          <slot></slot>
           <div class="usa-memorable-date">
             <div class="usa-form-group usa-form-group--select usa-form-group--month">
               <va-select aria-describedby="dateHint hint" class="hydrated usa-form-group--month-select" uswds="">
@@ -1298,8 +1322,8 @@ describe('va-memorable-date', () => {
           date-hint
           </span>
           </legend>
-          <slot></slot>
           <span id="error-message" role="alert"></span>
+          <slot></slot>
           <div class="usa-memorable-date">
             <div class="usa-form-group usa-form-group--month">
               <va-text-input aria-describedby="dateHint" class="hydrated memorable-date-input usa-form-group--month-input" uswds=""></va-text-input>
@@ -1349,8 +1373,8 @@ describe('va-memorable-date', () => {
               date-hint
             </span>
           </legend>
-          <slot></slot>
           <span id="error-message" role="alert"></span>
+          <slot></slot>
           <div class="usa-memorable-date">
             <div class="usa-form-group usa-form-group--month">
               <va-text-input aria-describedby="dateHint hint" class="hydrated memorable-date-input usa-form-group--month-input" uswds=""></va-text-input>
@@ -1791,5 +1815,29 @@ describe('va-memorable-date', () => {
         day: 2,
       },
     });
+  });
+
+  it('uswds v3 Applies a unique name attribute for each input', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-memorable-date name="test" uswds />');
+
+    const yearInput = await page.$('pierce/[name="testYear"]');
+    const monthInput = await page.$('pierce/[name="testMonth"]');
+    const dayInput = await page.$('pierce/[name="testDay"]');
+    expect(yearInput).not.toBeNull();
+    expect(monthInput).not.toBeNull();
+    expect(dayInput).not.toBeNull();
+  });
+
+  it('uswds v3 When the name prop is not set, input name attributes default to input type name', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-memorable-date uswds />');
+
+    const yearInput = await page.$('pierce/[name="Year"]');
+    const monthInput = await page.$('pierce/[name="Month"]');
+    const dayInput = await page.$('pierce/[name="Day"]');
+    expect(yearInput).not.toBeNull();
+    expect(monthInput).not.toBeNull();
+    expect(dayInput).not.toBeNull();
   });
 });

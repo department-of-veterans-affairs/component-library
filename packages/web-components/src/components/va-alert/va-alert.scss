@@ -9,8 +9,9 @@
   position: relative;
 }
 
-.usa-alert__body::before, :host([uswds]) i {
-  font-family: "Font Awesome 5 Free";
+.usa-alert__body::before,
+:host([uswds]:not([uswds='false'])) i {
+  font-family: 'Font Awesome 5 Free';
   font-size: 26px;
   font-style: normal;
   font-weight: 900;
@@ -18,7 +19,7 @@
 }
 
 // Replace USWDS icons with Font Awesome icons.
-.usa-alert--info .usa-alert__body::before, 
+.usa-alert--info .usa-alert__body::before,
 .usa-alert--warning .usa-alert__body::before,
 .usa-alert--success .usa-alert__body::before,
 .usa-alert--error .usa-alert__body::before,
@@ -28,7 +29,7 @@
 }
 
 .usa-alert--info .usa-alert__body,
-.usa-alert--warning .usa-alert__body, 
+.usa-alert--warning .usa-alert__body,
 .usa-alert--success .usa-alert__body,
 .usa-alert--error .usa-alert__body {
   &::before {
@@ -38,7 +39,7 @@
 
 .usa-alert--slim .usa-alert__body,
 .usa-alert--slim.usa-alert--info .usa-alert__body,
-.usa-alert--slim.usa-alert--warning .usa-alert__body, 
+.usa-alert--slim.usa-alert--warning .usa-alert__body,
 .usa-alert--slim.usa-alert--success .usa-alert__body,
 .usa-alert--slim.usa-alert--error .usa-alert__body {
   &::before {
@@ -67,7 +68,7 @@
   content: '\F06A'; /* fa-exclamation-circle */
 }
 
-:host([uswds]) .va-alert-close:hover {
+:host([uswds]:not([uswds='false'])) .va-alert-close:hover {
   color: var(--color-base);
 }
 
@@ -102,7 +103,7 @@ i.fa-times-circle::before {
   border: none;
 }
 
-:host([closeable]:not([closeable="false"])) .usa-alert .usa-alert__body {
+:host([closeable]:not([closeable='false'])) .usa-alert .usa-alert__body {
   padding-right: 5.7rem;
 }
 
@@ -138,17 +139,17 @@ i.fa-times-circle::before {
 @import '../../mixins/accessibility.css';
 @import '../../mixins/buttons.css';
 
-:host(:not([uswds])) {
+:host(:not([uswds='true'], [uswds=''])) {
   background-color: var(--color-gray-lightest);
 }
 
-:host(:not([uswds])[background-only='true']),
-:host(:not([uswds])[background-only='']) {
+:host(:not([uswds='true'], [uswds=''])[background-only='true']),
+:host(:not([uswds='true'], [uswds=''])[background-only='']) {
   background-color: unset;
 }
 
-:host(:not([uswds])[full-width='true']),
-:host(:not([uswds])[full-width='']) {
+:host(:not([uswds='true'], [uswds=''])[full-width='true']),
+:host(:not([uswds='true'], [uswds=''])[full-width='']) {
   border-top-style: solid;
   border-top-width: 8px;
   display: flex;
@@ -156,121 +157,126 @@ i.fa-times-circle::before {
   justify-content: center;
 }
 
-:host(:not([uswds])[status='warning']) {
+:host(:not([uswds='true'], [uswds=''])[status='warning']) {
   border-color: var(--color-gold);
 }
-:host(:not([uswds])[status='info']) {
+:host(:not([uswds='true'], [uswds=''])[status='info']) {
   border-color: var(--color-primary-alt-dark);
 }
-:host(:not([uswds])[status='error']) {
+:host(:not([uswds='true'], [uswds=''])[status='error']) {
   border-color: var(--color-secondary-dark);
 }
-:host(:not([uswds])[status='continue']),
-:host(:not([uswds])[status='success']) {
+:host(:not([uswds='true'], [uswds=''])[status='continue']),
+:host(:not([uswds='true'], [uswds=''])[status='success']) {
   border-color: var(--color-green);
 }
 
-:host(:not([uswds])[full-width='']) div.alert,
-:host(:not([uswds])[full-width='true']) div.alert,
-:host(:not([uswds])[full-width=''][data-role="banner"]) div.alert,
-:host(:not([uswds])[full-width='true'][data-role="banner"]) div.alert {
+:host(:not([uswds='true'], [uswds=''])[full-width='']) div.alert,
+:host(:not([uswds='true'], [uswds=''])[full-width='true']) div.alert,
+:host(:not([uswds='true'], [uswds=''])[full-width=''][data-role='banner'])
+  div.alert,
+:host(:not([uswds='true'], [uswds=''])[full-width='true'][data-role='banner'])
+  div.alert {
   border-left: none;
   max-width: 1000px;
 }
 
-:host(:not([uswds])) ::slotted([slot='headline']) {
-  font-size: 2rem !important;
-  line-height: 26px !important;
-  padding: 0 !important;
-  margin: 0 !important;
+:host(:not([uswds='true'], [uswds=''])) {
+  ::slotted([slot='headline']) {
+    font-size: 2rem !important;
+    line-height: 26px !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  div.alert {
+    display: table;
+    padding: 1.6rem 2rem 1.6rem 1.6rem;
+    width: 100%;
+    vertical-align: middle;
+    box-sizing: border-box;
+  }
+
+  div.alert:not(.bg-only) {
+    border-color: inherit;
+    border-left-style: solid;
+    border-left-width: 8px;
+  }
+
+  div.alert > i::before {
+    display: flex;
+    margin-right: 1.6rem;
+  }
+
+  div.body {
+    padding-left: 0;
+    padding-right: 0;
+    display: table-cell;
+    vertical-align: middle;
+    width: 100%;
+  }
+  ::slotted(:not([slot])) {
+    margin-top: 2rem;
+  }
+
+  .bg-only ::slotted(*) {
+    margin-top: 0 !important; /* Fix for Safari 15.3 and lower. */
+  }
+
+  div.info > i::before {
+    content: '\F05A';
+  }
+
+  div.continue > i::before {
+    content: '\F023';
+    color: var(--color-green);
+  }
+
+  div.success > i::before {
+    content: '\F00C';
+    color: var(--color-green);
+  }
+
+  div.warning > i::before {
+    content: '\F071';
+  }
+
+  div.error > i::before {
+    content: '\F06A';
+    color: var(--color-secondary-dark);
+  }
+
+  div.bg-only {
+    border: none;
+    padding: 2rem;
+  }
+
+  .info.bg-only {
+    background-color: var(--color-primary-alt-lightest);
+  }
+  .continue.bg-only {
+    background-color: var(--color-gray-lightest);
+  }
+  .success.bg-only {
+    background-color: var(--color-green-lightest);
+  }
+  .warning.bg-only {
+    background-color: var(--color-gold-lightest);
+  }
+  .error.bg-only {
+    background-color: var(--color-secondary-lightest);
+  }
+
+  i {
+    font-family: 'Font Awesome 5 Free';
+    font-size: 2.4rem;
+    font-style: normal;
+    font-weight: 900;
+    line-height: 1;
+  }
 }
 
-:host(:not([uswds])) div.alert {
-  display: table;
-  padding: 1.6rem 2rem 1.6rem 1.6rem;
-  width: 100%;
-  vertical-align: middle;
-  box-sizing: border-box;
-}
-
-:host(:not([uswds])) div.alert:not(.bg-only) {
-  border-color: inherit;
-  border-left-style: solid;
-  border-left-width: 8px;
-}
-
-:host(:not([uswds])) div.alert > i::before {
-  display: flex;
-  margin-right: 1.6rem;
-}
-
-:host(:not([uswds])) div.body {
-  padding-left: 0;
-  padding-right: 0;
-  display: table-cell;
-  vertical-align: middle;
-  width: 100%;
-}
-:host(:not([uswds])) ::slotted(:not([slot])) {
-  margin-top: 2rem;
-}
-
-:host(:not([uswds])) .bg-only ::slotted(*) {
-  margin-top: 0!important; /* Fix for Safari 15.3 and lower. */
-}
-
-:host(:not([uswds])) div.info > i::before {
-  content: '\F05A';
-}
-
-:host(:not([uswds])) div.continue > i::before {
-  content: '\F023';
-  color: var(--color-green);
-}
-
-:host(:not([uswds])) div.success > i::before {
-  content: '\F00C';
-  color: var(--color-green);
-}
-
-:host(:not([uswds])) div.warning > i::before {
-  content: '\F071';
-}
-
-:host(:not([uswds])) div.error > i::before {
-  content: '\F06A';
-  color: var(--color-secondary-dark);
-}
-
-:host(:not([uswds])) div.bg-only {
-  border: none;
-  padding: 2rem;
-}
-
-:host(:not([uswds])) .info.bg-only {
-  background-color: var(--color-primary-alt-lightest);
-}
-:host(:not([uswds])) .continue.bg-only {
-  background-color: var(--color-gray-lightest);
-}
-:host(:not([uswds])) .success.bg-only {
-  background-color: var(--color-green-lightest);
-}
-:host(:not([uswds])) .warning.bg-only {
-  background-color: var(--color-gold-lightest);
-}
-:host(:not([uswds])) .error.bg-only {
-  background-color: var(--color-secondary-lightest);
-}
-
-:host(:not([uswds])) i {
-  font-family: 'Font Awesome 5 Free';
-  font-size: 2.4rem;
-  font-style: normal;
-  font-weight: 900;
-  line-height: 1;
-}
-
-:host(:not([uswds])[closeable]:not([closeable='false'])) .alert {
+:host(:not([uswds='true'], [uswds=''])[closeable]:not([closeable='false']))
+  .alert {
   padding-right: 5.7rem;
 }
