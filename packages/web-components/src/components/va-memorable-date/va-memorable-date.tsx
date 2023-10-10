@@ -253,7 +253,7 @@ export class VaMemorableDate {
           <va-select
             uswds
             label={i18next.t('month')}
-            name={`${name}Month`}
+            name={name ? `${name}Month` : 'Month'}
             aria-describedby={describedbyIds}
             invalid={this.invalidMonth}
             onVaSelect={handleDateChange}
@@ -275,7 +275,7 @@ export class VaMemorableDate {
         <va-text-input
           uswds
           label={i18next.t('month')}
-          name={`${name}Month`}
+          name={name ? `${name}Month` : 'Month'}
           maxlength={2}
           pattern="[0-9]*"
           aria-describedby={describedbyIds}
@@ -320,7 +320,7 @@ export class VaMemorableDate {
                 <va-text-input
                   uswds
                   label={i18next.t('day')}
-                  name={`${name}Day`}
+                  name={name ? `${name}Day` : 'Day'}
                   maxlength={2}
                   pattern="[0-9]*"
                   aria-describedby={describedbyIds}
@@ -340,7 +340,7 @@ export class VaMemorableDate {
                 <va-text-input
                   uswds
                   label={i18next.t('year')}
-                  name={`${name}Year`}
+                  name={name ? `${name}Year` : 'Year'}
                   maxlength={4}
                   pattern="[0-9]*"
                   aria-describedby={describedbyIds}
@@ -380,7 +380,7 @@ export class VaMemorableDate {
             <div class="date-container">
               <va-text-input
                 label={i18next.t('month')}
-                name={`${name}Month`}
+                name={name ? `${name}Month` : 'Month'}
                 maxlength={2}
                 minlength={2}
                 pattern="[0-9]*"
@@ -397,7 +397,7 @@ export class VaMemorableDate {
                 />
               <va-text-input
                 label={i18next.t('day')}
-                name={`${name}Day`}
+                name={name ? `${name}Day` : 'Day'}
                 maxlength={2}
                 minlength={2}
                 pattern="[0-9]*"
@@ -414,7 +414,7 @@ export class VaMemorableDate {
                 />
               <va-text-input
                 label={i18next.t('year')}
-                name={`${name}Year`}
+                name={name ? `${name}Year` : 'Year'}
                 maxlength={4}
                 minlength={4}
                 pattern="[0-9]*"
