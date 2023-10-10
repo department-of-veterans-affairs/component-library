@@ -1,8 +1,6 @@
 import { newE2EPage } from '@stencil/core/testing';
 import { axeCheck } from '../../../testing/test-helpers';
 
-const maxYear = new Date().getFullYear() + 100;
-
 describe('va-date', () => {
   it('renders', async () => {
     const page = await newE2EPage();
@@ -131,7 +129,7 @@ describe('va-date', () => {
       const errorSpan = await page.find('va-date >>> span#error-message');
       expect(errorSpan.textContent).toContain("Fill me out");
     });
-    
+
     it('resets error to null when fixed', async () => {
       const page = await newE2EPage();
       await page.setContent(
@@ -469,7 +467,7 @@ describe('va-date', () => {
       expect(month.getAttribute('value')).toBe('5');
       expect(year.getAttribute('value')).toBe('1999');
     });
- 
+
     it('checks for valid year', async () => {
       const page = await newE2EPage();
       await page.setContent('<va-date month-year-only name="test"/>');
@@ -481,7 +479,7 @@ describe('va-date', () => {
       // Month
       await handleMonth.select('3');
       await page.waitForChanges();
-      
+
       // Year
       await handleYear.press('3');
       await handleYear.press('0');
