@@ -12,7 +12,7 @@ const SampleData = {
 };
 
 describe('writeCompPathOwnersToCSV', () => {
-  it.skip('writes a CSV file', () => {
+  it('writes a CSV file', () => {
     expect(() => writeCompPathOwnersToCSV(SampleData)).not.toThrow();
   });
 });
