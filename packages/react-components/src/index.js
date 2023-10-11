@@ -8,8 +8,6 @@ import Modal from './components/Modal/Modal';
 import TextInput from './components/TextInput/TextInput';
 
 export {
-  AlertBox,
-  ALERT_TYPE,
   Breadcrumbs,
   ExpandingGroup,
   IconBase,
