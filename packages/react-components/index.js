@@ -1,6 +1,5 @@
 import AlertBox, { ALERT_TYPE } from './AlertBox';
 import Breadcrumbs from './Breadcrumbs';
-import Checkbox from './Checkbox';
 import ExpandingGroup from './ExpandingGroup';
 import IconBase from './IconBase';
 import IconSearch from './IconSearch';
@@ -14,7 +13,6 @@ export {
   AlertBox,
   ALERT_TYPE,
   Breadcrumbs,
-  Checkbox,
   ExpandingGroup,
   IconBase,
   IconSearch,

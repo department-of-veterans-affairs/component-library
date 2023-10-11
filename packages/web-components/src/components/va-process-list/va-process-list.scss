@@ -1,16 +1,18 @@
+@forward 'settings';
+
 @use 'uswds-helpers/src/styles/usa-sr-only';
 @use 'usa-process-list/src/styles/usa-process-list';
 @import '../../global/formation_overrides';
 
 
-:host([uswds]) {
+:host([uswds]:not([uswds='false'])) {
   counter-reset: usa-numbered-list;
 }
 
 ::slotted(va-process-list-item[checked='true']):before {
   color: var(--color-green) !important;
   border-color: var(--color-green) !important;
-  content: url(../../assets/green-check.svg) !important;  
+  content: url(../../assets/green-check.svg) !important;
 }
 
 ::slotted(va-process-list-item[active='true']):before {

@@ -1,14 +1,14 @@
 @import 'variables';
 @import 'functions';
 
-:host([error][uswds]:not([error=''])) {
+:host([error]:not([error=''])[uswds]:not([uswds='false'])) {
     border-left: 0.4rem solid $v3-color-error-dark; /* USWDS red-60v, $theme-color-error-dark */
     padding-left: rem-override(1rem);
     position: relative;
 }
 
 @media screen and (min-width: 1008px) {
-    :host([error][uswds]:not([error=''])) {
+    :host([error]:not([error=''])[uswds]:not([uswds='false'])) {
         margin-left: -1.4rem;
     }
 }

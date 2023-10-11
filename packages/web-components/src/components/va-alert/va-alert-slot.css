@@ -1,11 +1,6 @@
 
 /* .usa-alert__heading */
-va-alert[uswds] > h1, 
-va-alert[uswds] > h2, 
-va-alert[uswds] > h3, 
-va-alert[uswds] > h4, 
-va-alert[uswds] > h5, 
-va-alert[uswds] > h6 {
+:is(va-alert[uswds=''], va-alert[uswds='true']) > :is(h1, h2, h3, h4, h5, h6) {
   font-size: 21.28px; /* 1.33rem */
   margin-top: 0;
   margin-bottom: 8px; /* 0.5rem */
