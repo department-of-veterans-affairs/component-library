@@ -1,4 +1,3 @@
-import AlertBox, { ALERT_TYPE } from './components/AlertBox/AlertBox';
 import Breadcrumbs from './components/Breadcrumbs/Breadcrumbs';
 import ExpandingGroup from './components/ExpandingGroup/ExpandingGroup';
 import IconBase from './components/IconBase/IconBase';
