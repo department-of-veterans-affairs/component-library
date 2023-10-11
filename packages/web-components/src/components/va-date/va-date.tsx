@@ -103,10 +103,6 @@ export class VaDate {
   @Prop({ mutable: true }) invalidMonth: boolean = false;
   @Prop({ mutable: true }) invalidYear: boolean = false;
 
-  private dayTouched: boolean = false;
-  private monthTouched: boolean = false;
-  private yearTouched: boolean = false;
-
   /**
    * Whether or not an analytics event will be fired.
    */
@@ -153,16 +149,7 @@ export class VaDate {
     this.setValue(year, month, day);
     // Run built-in validation. Any custom validation
     // will happen afterwards
-    validate({
-               component: this,
-               year,
-               month,
-               day,
-               monthYearOnly: this.monthYearOnly,
-               yearTouched: this.yearTouched,
-               monthTouched: this.monthTouched,
-               dayTouched: this.dayTouched
-             });
+    validate(this, year, month, day, this.monthYearOnly);
     this.dateBlur.emit(event);
 
     if (this.enableAnalytics) {
@@ -203,18 +190,6 @@ export class VaDate {
     // This event should always fire to allow for validation handling
     this.dateChange.emit(event);
   };
-
-  private handleMonthBlur = () => {
-    this.monthTouched = true;
-  }
-
-  private handleDayBlur = () => {
-    this.dayTouched = true;
-  }
-
-  private handleYearBlur = () => {
-    this.yearTouched = true;
-  }
 
   render() {
     const {
@@ -261,7 +236,6 @@ export class VaDate {
               // Value must be a string
               value={month?.toString()}
               onVaSelect={handleDateChange}
-              onBlur={this.handleMonthBlur}
               invalid={this.invalidMonth}
               class="select-month"
               aria-label="Please enter two digits for the month"
@@ -282,7 +256,6 @@ export class VaDate {
                 // Value must be a string
                 value={daysForSelectedMonth.length < day ? '' : day?.toString()}
                 onVaSelect={handleDateChange}
-                onBlur={this.handleDayBlur}
                 invalid={this.invalidDay}
                 class="select-day"
                 aria-label="Please enter two digits for the day"
@@ -306,7 +279,6 @@ export class VaDate {
               value={year ? year.toString() : ''}
               invalid={this.invalidYear}
               onInput={handleDateChange}
-              onBlur={this.handleYearBlur}
               class="input-year"
               inputmode="numeric"
               type="text"
