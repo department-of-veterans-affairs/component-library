@@ -280,7 +280,7 @@ export class VaPagination {
 
     const previousAriaLabel = ariaLabelSuffix ? `Previous page ${ariaLabelSuffix}` : 'Previous page';
     const nextAriaLabel = ariaLabelSuffix ? `Next page ${ariaLabelSuffix}` : 'Next page';
-    const lastPageAriaLabel = ariaLabelSuffix ? `Page ${pages} ${ariaLabelSuffix}` : `Page ${pages}`;
+    const lastPageAriaLabel = ariaLabelSuffix ? `Page ${pages} ${ariaLabelSuffix}, last page` : `Page ${pages}, last page`;
     if (uswds) {
       const pageNumbersToRender = this.pageNumbersUswds();
       const itemClasses = classnames({
@@ -335,7 +335,12 @@ export class VaPagination {
         })
 
         let pageAriaLabel = ariaLabelSuffix ? `page ${pageNumber} ${ariaLabelSuffix}` : `page ${pageNumber}`;
-        
+        if (pageNumber === 1) {
+          pageAriaLabel = `${pageAriaLabel}, first page`;
+        }
+        if (pageNumber === pages) {
+          pageAriaLabel = `${pageAriaLabel}, last page`;
+        }
         return (
           <li class={itemClasses}>
             <a
@@ -402,8 +407,13 @@ export class VaPagination {
           'button-inner': true,
         });
 
-        const pageAriaLabel = ariaLabelSuffix ? `Page ${pageNumber} ${ariaLabelSuffix}` : `Page ${pageNumber}`;
-
+        let pageAriaLabel = ariaLabelSuffix ? `Page ${pageNumber} ${ariaLabelSuffix}` : `Page ${pageNumber}`;
+        if (pageNumber === 1) {
+          pageAriaLabel = `${pageAriaLabel}, first page`;
+        }
+        if (pageNumber === pages) {
+          pageAriaLabel = `${pageAriaLabel}, last page`;
+        }
         return (
           <li>
             <button
