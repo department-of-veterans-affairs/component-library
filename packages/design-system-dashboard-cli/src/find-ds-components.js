@@ -71,6 +71,7 @@ function tallyResults(vwComponents, contentBuildWC) {
   vwComponents.forEach(i => {
     const manifest = getManifest(i.path);
     const app = manifest ? manifest.appName : 'Platform(ish)';
+
     i.matches.forEach(m => {
       const componentName = m[1];
       if (componentName) {

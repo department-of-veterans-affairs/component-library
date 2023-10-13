@@ -75,6 +75,8 @@ If you supply search terms, it'll filter the result.
 
 ![filtered result](./img/filtered-result.png)
 
+If you supply the string `uswds` as a search term, it'll return all web component and react binding usages where the uswds prop is being used.
+
 **Note:** Search terms are case sensitive!
 
 Search terms may be regex.
