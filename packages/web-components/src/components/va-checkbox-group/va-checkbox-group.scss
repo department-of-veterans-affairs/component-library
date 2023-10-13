@@ -13,7 +13,7 @@
   padding: 0;
 }
 
-:host([uswds]) {
+:host([uswds]:not([uswds='false'])) {
   margin-top: 24px;
 }
 
@@ -24,29 +24,31 @@
 @import '../../mixins/hint-text.css';
 @import '../../mixins/headers.css';
 
-:host(:not([uswds])) #error-message {
-  font-size: 1.6rem;
-  line-height: 2.4rem;
-  font-weight: 700;
-  margin-bottom: 0;
-}
+:host(:not([uswds='true'], [uswds=''])) {
+  #error-message {
+    font-size: 1.6rem;
+    line-height: 2.4rem;
+    font-weight: 700;
+    margin-bottom: 0;
+  }
 
-:host(:not([uswds])) .required {
-  color: var(--color-secondary-dark);
-  margin: 0 0.35rem;
-}
+  .required {
+    color: var(--color-secondary-dark);
+    margin: 0 0.35rem;
+  }
 
-:host(:not([uswds])) fieldset {
-  border: none;
-  margin: 0;
-  padding: 0;
-}
+  fieldset {
+    border: none;
+    margin: 0;
+    padding: 0;
+  }
 
-:host(:not([uswds])) legend {
-  display: block;
-  max-width: 46rem;
-  font-weight: inherit;
-  font-size: inherit;
-  line-height: inherit;
-  padding-inline: 0;
+  legend {
+    display: block;
+    max-width: 46rem;
+    font-weight: inherit;
+    font-size: inherit;
+    line-height: inherit;
+    padding-inline: 0;
+  }
 }
