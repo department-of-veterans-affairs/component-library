@@ -5,12 +5,15 @@
 @import '../../mixins/focusable.css';
 @import '../../global/formation_overrides';
 
-:host([uswds]) a.usa-pagination__next-page > div, a.usa-pagination__previous-page > div {
-  display: flex;
-}
+:host([uswds]:not([uswds='false'])) {
+  a.usa-pagination__next-page > div,
+  a.usa-pagination__previous-page > div {
+    display: flex;
+  }
 
-:host([uswds]) .usa-pagination .usa-current {
-  background-color: var(--color-primary);
+  .usa-pagination .usa-current {
+    background-color: var(--color-primary);
+  }
 }
 
 :host {

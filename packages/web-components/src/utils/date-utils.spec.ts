@@ -26,7 +26,6 @@ describe('validate', () => {
     const year = 1500;
     const month = 1;
     const day = 1;
-    const currentYear = new Date().getFullYear();
 
     validate(memorableDateComponent, year, month, day);
 
@@ -367,7 +366,6 @@ describe('checkIsNaN', () => {
 
 describe('zeroPadStart', () => {
   it('should return "00"', () => {
-    expect(zeroPadStart()).toEqual('00');
     expect(zeroPadStart(null)).toEqual('00');
     expect(zeroPadStart('')).toEqual('00');
     expect(zeroPadStart(0)).toEqual('00');

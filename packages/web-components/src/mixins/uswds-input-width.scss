@@ -1,4 +1,4 @@
-:host(:not([uswds])) .usa-input, 
+:host(:not([uswds="true"],[uswds=""])) .usa-input,
 :host .usa-input {
   &--2xs {
     max-width: 5ex;

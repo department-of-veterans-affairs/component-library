@@ -11,7 +11,7 @@
 @import '../../mixins/uswds-error-border.scss';
 @import '../../global/formation_overrides';
 
-:host([uswds]) {
+:host([uswds]:not([uswds='false'])) {
   color: var(--v3-color-base-darkest);
 }
 
@@ -20,7 +20,7 @@
   font-family: var(--font-source-sans);
 }
 
-:host([uswds][inert]) select {
+:host([uswds]:not([uswds='false'])[inert]) select {
   border: 0;
   background: none;
 }
@@ -41,13 +41,13 @@ span.required {
   margin: 0 0.35em;
 }
 
-:host([error]:not([error='']):not([uswds])) label,
-:host([error]:not([error='']):not([uswds])) > span {
+:host([error]:not([error='']):not([uswds="true"],[uswds=""])) label,
+:host([error]:not([error='']):not([uswds="true"],[uswds=""])) > span {
   display: block;
   font-size: 1.6rem;
 }
 
-:host([error]:not([error='']):not([uswds])) > span {
+:host([error]:not([error='']):not([uswds="true"],[uswds=""])) > span {
   color: var(--color-secondary-dark);
 }
 
@@ -55,13 +55,13 @@ span.required {
   display: none;
 }
 
-:host(:not([uswds])) label {
+:host(:not([uswds="true"],[uswds=""])) label {
   margin-top: 3rem;
   max-width: 46rem;
   display: block;
 }
 
-:host(:not([uswds])) select {
+:host(:not([uswds="true"],[uswds=""])) select {
   background-color: var(--color-white);
   background-image: url('../../assets/arrow-both.svg');
   background-position: right 1.3rem center;

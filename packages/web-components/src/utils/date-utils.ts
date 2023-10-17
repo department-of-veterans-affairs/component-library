@@ -263,7 +263,7 @@ export function validate(
   // The month error message will trigger if the month is outside of the acceptable range,
   // but also if the day is invalid and there isn't a month value.
   if ((month && (month < minMonths || month > maxMonths)) ||
-      (!month && component.invalidDay)) {
+    (!month && component.invalidDay)) {
     component.invalidMonth = true;
     component.error = 'month-range';
   }
