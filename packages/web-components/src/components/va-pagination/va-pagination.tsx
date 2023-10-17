@@ -285,15 +285,18 @@ export class VaPagination {
       const pageNumbersToRender = this.pageNumbersUswds();
       const itemClasses = classnames({
         'usa-pagination__item': true,
-        'usa-pagination__page-no': true
+        'usa-pagination__page-no': true,
+        'va-pagination__item': true
       });
       const ellipsisClasses = classnames({
         'usa-pagination__item': true,
-        'usa-pagination__overflow': true
+        'usa-pagination__overflow': true,
+        'va-pagination__item': true
       });
       const arrowClasses = classnames({
         'usa-pagination__item': true,
-        'usa-pagination__arrow': true
+        'usa-pagination__arrow': true,
+
       });
 
       const previousButton = page > 1
