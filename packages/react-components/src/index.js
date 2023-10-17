@@ -4,6 +4,7 @@ import IconBase from './components/IconBase/IconBase';
 import IconSearch from './components/IconSearch/IconSearch';
 import LoadingIndicator from './components/LoadingIndicator/LoadingIndicator';
 import Modal from './components/Modal/Modal';
+import OMBInfo from './components/OMBInfo/OMBInfo';
 import TextInput from './components/TextInput/TextInput';
 
 export {
@@ -13,5 +14,6 @@ export {
   IconSearch,
   LoadingIndicator,
   Modal,
+  OMBInfo,
   TextInput,
 };

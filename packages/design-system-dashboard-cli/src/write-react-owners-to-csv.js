@@ -11,6 +11,7 @@ const componentsToKeep = [
   'IconSearch',
   'LoadingIndicator',
   'Modal',
+  'OMBInfo',
   'TextInput',
 ];
 

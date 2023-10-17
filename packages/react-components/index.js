@@ -4,6 +4,7 @@ import IconBase from './IconBase';
 import IconSearch from './IconSearch';
 import LoadingIndicator from './LoadingIndicator';
 import Modal from './Modal';
+import OMBInfo from './OMBInfo';
 import TextInput from './TextInput';
 
 import './i18n-setup';
@@ -15,5 +16,6 @@ export {
   IconSearch,
   LoadingIndicator,
   Modal,
+  OMBInfo,
   TextInput,
 };
