@@ -259,13 +259,13 @@ describe('uswds - va-pagination', () => {
         <mock:shadow-root>
           <nav aria-label="Pagination" class="usa-pagination">
             <ul class="usa-pagination__list">
-              <li class="usa-pagination__item usa-pagination__page-no">
+              <li class="usa-pagination__item usa-pagination__page-no va-pagination__item">
                 <a href="javascript:void(0)" class="usa-pagination__button usa-current">1</a>
               </li>
-              <li class="usa-pagination__item usa-pagination__page-no">
+              <li class="usa-pagination__item usa-pagination__page-no va-pagination__item">
                 <a href="javascript:void(0)" class="usa-pagination__button">2</a>
               </li>
-              <li class="usa-pagination__item usa-pagination__page-no">
+              <li class="usa-pagination__item usa-pagination__page-no va-pagination__item">
                 <a href="javascript:void(0)" class="usa-pagination__button">3</a>
               </li>
               <li class="usa-pagination__item usa-pagination__arrow" aria-label="Next page">
