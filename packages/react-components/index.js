@@ -7,7 +7,6 @@ import IconSearch from './IconSearch';
 import LoadingIndicator from './LoadingIndicator';
 import MaintenanceBanner from './MaintenanceBanner';
 import Modal from './Modal';
-import OMBInfo from './OMBInfo';
 import TextInput from './TextInput';
 
 import './i18n-setup';
@@ -23,6 +22,5 @@ export {
   LoadingIndicator,
   MaintenanceBanner,
   Modal,
-  OMBInfo,
   TextInput,
 };
