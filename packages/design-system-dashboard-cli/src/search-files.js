@@ -26,6 +26,8 @@ function readAllModules(rootDir) {
       `${rootDir}/**/_mock-form/**`,
       `${rootDir}/**/*.unit.@(js|jsx)`,
       `${rootDir}/**/*.spec.@(js|jsx)`,
+      `${rootDir}/**/ds-playground/**`,
+      `${rootDir}/**/ds-v3-playground/**`,
     ],
   });
 
