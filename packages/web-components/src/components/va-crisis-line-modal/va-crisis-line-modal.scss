@@ -1,7 +1,6 @@
 @forward 'settings';
 @import '../../mixins/focusable.css';
 
-$red-60v: #b51d09;
 $red-70v: #8b1303;
 
 $small-desktop-screen: 1008px;
@@ -9,7 +8,7 @@ $small-desktop-screen: 1008px;
 .va-crisis-line-container {
   position: relative;
   margin: auto;
-  background-color: $red-60v;
+  background-color: var(--color-secondary-dark);
 
   @media(min-width: $small-desktop-screen) {
     max-width: 97.5rem;
@@ -23,10 +22,11 @@ a {
 
 button.va-crisis-line {
   cursor: pointer;
-  background-color: $red-60v;
+  background-color: var(--color-secondary-dark);
   display: block;
   border-radius: 0;
   color: var(--color-white);
+  font-family: var(--font-source-sans);
   font-size: 16px;
   font-weight: normal;
   text-decoration: none;
@@ -47,7 +47,7 @@ button.va-crisis-line {
     background-color: $red-70v;
     .va-crisis-line-icon {
       @media(min-width: $small-desktop-screen) {
-        background-color: $red-60v;
+        background-color: var(--color-secondary-dark);
       }
     }
   }
@@ -84,6 +84,10 @@ button.va-crisis-line {
   transition-duration: 0.3s;
   transition-timing-function: ease-in-out;
   transition-property: background-color;
+
+  @media (max-width: 480px) {
+    display: none;
+  }
 
   @media(min-width: $small-desktop-screen) {
     background-color: $red-70v;
