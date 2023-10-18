@@ -262,10 +262,10 @@ describe('uswds - va-pagination', () => {
               <li class="usa-pagination__item usa-pagination__page-no">
                 <a aria-current="page" aria-label="page 1, first page" href="javascript:void(0)" class="usa-pagination__button usa-current">1</a>
               </li>
-              <li class="usa-pagination__item usa-pagination__page-no">
+              <li class="usa-pagination__item usa-pagination__page-no va-pagination__item">
                 <a aria-label="page 2" href="javascript:void(0)" class="usa-pagination__button">2</a>
               </li>
-              <li class="usa-pagination__item usa-pagination__page-no">
+              <li class="usa-pagination__item usa-pagination__page-no va-pagination__item">
                 <a aria-label="page 3, last page" href="javascript:void(0)" class="usa-pagination__button">3</a>
               </li>
               <li class="usa-pagination__item usa-pagination__arrow" aria-label="Next page">
