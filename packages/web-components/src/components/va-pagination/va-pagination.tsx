@@ -351,6 +351,7 @@ export class VaPagination {
               onKeyDown={e => this.handleKeyDown(e, pageNumber)}
               href="javascript:void(0)"
               class={anchorClasses}
+              aria-current={page === pageNumber ? 'page' : null}
               aria-label={pageAriaLabel}
             >
               {pageNumber}
