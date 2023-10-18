@@ -1,0 +1,102 @@
+---
+title: AlertBox
+name: AlertBox
+tags: informational, warning, error, success, continue, dismissable
+---
+
+import AlertBox, { ALERT_TYPE } from './AlertBox'
+
+
+### Code:
+```javascript
+import AlertBox, { ALERT_TYPE } from '@department-of-veterans-affairs/component-library/AlertBox'
+
+<div className="usa-width-one-whole">
+  <AlertBox
+    headline='Informational alert'
+    content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam id felis pulvinar ligula ultricies sollicitudin eget nec dui. Cras augue velit, pellentesque sit amet nisl ut, tristique suscipit sem. Cras sollicitudin auctor mattis."
+    status={ALERT_TYPE.INFO}
+    isVisible/>
+  <AlertBox
+    headline="Warning alert"
+    content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam id felis pulvinar ligula ultricies sollicitudin eget nec dui. Cras augue velit, pellentesque sit amet nisl ut, tristique suscipit sem. Cras sollicitudin auctor mattis."
+    status={ALERT_TYPE.WARNING} />
+  <AlertBox
+    headline="Error alert"
+    content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam id felis pulvinar ligula ultricies sollicitudin eget nec dui. Cras augue velit, pellentesque sit amet nisl ut, tristique suscipit sem. Cras sollicitudin auctor mattis."
+    status={ALERT_TYPE.ERROR} />
+  <AlertBox
+    headline="Success alert"
+    content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam id felis pulvinar ligula ultricies sollicitudin eget nec dui. Cras augue velit, pellentesque sit amet nisl ut, tristique suscipit sem. Cras sollicitudin auctor mattis."
+    status={ALERT_TYPE.SUCCESS} />
+  <AlertBox
+    headline="Continue alert"
+    content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam id felis pulvinar ligula ultricies sollicitudin eget nec dui. Cras augue velit, pellentesque sit amet nisl ut, tristique suscipit sem. Cras sollicitudin auctor mattis."
+    status={ALERT_TYPE.CONTINUE} />
+  <AlertBox
+    headline="Dismissable alert"
+    content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam id felis pulvinar ligula ultricies sollicitudin eget nec dui. Cras augue velit, pellentesque sit amet nisl ut, tristique suscipit sem. Cras sollicitudin auctor mattis."
+    status={ALERT_TYPE.INFO}
+    isVisible
+    onCloseAlert={() => {}}/>
+  <AlertBox
+    headline="Hidden alert"
+    content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam id felis pulvinar ligula ultricies sollicitudin eget nec dui. Cras augue velit, pellentesque sit amet nisl ut, tristique suscipit sem. Cras sollicitudin auctor mattis."
+    status={ALERT_TYPE.INFO}
+    isVisible={false}/>
+  <AlertBox
+    content={<p>Content without heading.</p>}
+    status={ALERT_TYPE.INFO}/>
+  <AlertBox
+    headline="Informational backgroundOnly alert"
+    content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam id felis pulvinar ligula ultricies sollicitudin eget nec dui. Cras augue velit, pellentesque sit amet nisl ut, tristique suscipit sem. Cras sollicitudin auctor mattis."
+    status={ALERT_TYPE.INFO}
+    backgroundOnly />
+</div>
+```
+
+### Rendered Component
+<div className="site-c-reactcomp__rendered">
+  <div>
+    <AlertBox
+      headline="Informational alert"
+      content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam id felis pulvinar ligula ultricies sollicitudin eget nec dui. Cras augue velit, pellentesque sit amet nisl ut, tristique suscipit sem. Cras sollicitudin auctor mattis."
+      status={ALERT_TYPE.INFO}
+      isVisible/>
+    <AlertBox
+      headline="Warning alert"
+      content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam id felis pulvinar ligula ultricies sollicitudin eget nec dui. Cras augue velit, pellentesque sit amet nisl ut, tristique suscipit sem. Cras sollicitudin auctor mattis."
+      status={ALERT_TYPE.WARNING} />
+    <AlertBox
+      headline="Error alert"
+      content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam id felis pulvinar ligula ultricies sollicitudin eget nec dui. Cras augue velit, pellentesque sit amet nisl ut, tristique suscipit sem. Cras sollicitudin auctor mattis."
+      status={ALERT_TYPE.ERROR} />
+    <AlertBox
+      headline="Success alert"
+      content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam id felis pulvinar ligula ultricies sollicitudin eget nec dui. Cras augue velit, pellentesque sit amet nisl ut, tristique suscipit sem. Cras sollicitudin auctor mattis."
+      status={ALERT_TYPE.SUCCESS} />
+    <AlertBox
+      headline="Continue alert"
+      content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam id felis pulvinar ligula ultricies sollicitudin eget nec dui. Cras augue velit, pellentesque sit amet nisl ut, tristique suscipit sem. Cras sollicitudin auctor mattis."
+      status={ALERT_TYPE.CONTINUE} />
+    <AlertBox
+      headline="Dismissable alert"
+      content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam id felis pulvinar ligula ultricies sollicitudin eget nec dui. Cras augue velit, pellentesque sit amet nisl ut, tristique suscipit sem. Cras sollicitudin auctor mattis."
+      status={ALERT_TYPE.INFO}
+      isVisible
+      onCloseAlert={() => {}}/>
+    <AlertBox
+      headline="Hidden alert"
+      content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam id felis pulvinar ligula ultricies sollicitudin eget nec dui. Cras augue velit, pellentesque sit amet nisl ut, tristique suscipit sem. Cras sollicitudin auctor mattis."
+      status={ALERT_TYPE.INFO}
+      isVisible={false}/>
+    <AlertBox
+      content={<p>Content without heading.</p>}
+      status={ALERT_TYPE.INFO}/>
+    <AlertBox
+      headline="Background Only alert"
+      content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam id felis pulvinar ligula ultricies sollicitudin eget nec dui. Cras augue velit, pellentesque sit amet nisl ut, tristique suscipit sem. Cras sollicitudin auctor mattis."
+      status={ALERT_TYPE.INFO}
+      backgroundOnly />
+  </div>
+</div>
