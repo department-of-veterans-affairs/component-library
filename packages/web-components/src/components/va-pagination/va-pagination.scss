@@ -5,6 +5,11 @@
 @import '../../mixins/focusable.css';
 @import '../../global/formation_overrides';
 
+// Formation does not specify box-sizing on li elements, this is needed for pagination to fit on 320px size screens
+.va-pagination__item {
+  box-sizing: border-box;
+}
+
 :host([uswds]:not([uswds='false'])) {
   a.usa-pagination__next-page > div,
   a.usa-pagination__previous-page > div {

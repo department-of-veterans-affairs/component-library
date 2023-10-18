@@ -285,15 +285,18 @@ export class VaPagination {
       const pageNumbersToRender = this.pageNumbersUswds();
       const itemClasses = classnames({
         'usa-pagination__item': true,
-        'usa-pagination__page-no': true
+        'usa-pagination__page-no': true,
+        'va-pagination__item': true
       });
       const ellipsisClasses = classnames({
         'usa-pagination__item': true,
-        'usa-pagination__overflow': true
+        'usa-pagination__overflow': true,
+        'va-pagination__item': true
       });
       const arrowClasses = classnames({
         'usa-pagination__item': true,
-        'usa-pagination__arrow': true
+        'usa-pagination__arrow': true,
+
       });
 
       const previousButton = page > 1
@@ -322,7 +325,7 @@ export class VaPagination {
                 >1</a>
             </li>
             <li class={ellipsisClasses} aria-label="ellipsis indicating non-visible pages">
-              <span>...</span>
+              <span>…</span>
             </li>
           </Fragment>}
         </Fragment>
@@ -348,6 +351,7 @@ export class VaPagination {
               onKeyDown={e => this.handleKeyDown(e, pageNumber)}
               href="javascript:void(0)"
               class={anchorClasses}
+              aria-current={page === pageNumber ? 'page' : null}
               aria-label={pageAriaLabel}
             >
               {pageNumber}
@@ -361,7 +365,7 @@ export class VaPagination {
         <Fragment>
           {pages > this.SHOW_ALL_PAGES &&
             <li class={ellipsisClasses} aria-label="ellipsis indicating non-visible pages">
-            <span>...</span>
+            <span>…</span>
           </li>}
           {!this.unbounded && pages > this.SHOW_ALL_PAGES &&
           <li class={itemClasses}>
@@ -460,7 +464,7 @@ export class VaPagination {
             {showLastPage && page < pages - maxPageListLength + 1 && (
               <Fragment>
                 <li>
-                  <span>...</span>
+                  <span>…</span>
                 </li>
                 <li>
                   <button
