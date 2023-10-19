@@ -2,7 +2,6 @@ import Breadcrumbs from './components/Breadcrumbs/Breadcrumbs';
 import ExpandingGroup from './components/ExpandingGroup/ExpandingGroup';
 import IconBase from './components/IconBase/IconBase';
 import IconSearch from './components/IconSearch/IconSearch';
-import MaintenanceBanner from './components/MaintenanceBanner/MaintenanceBanner';
 import Modal from './components/Modal/Modal';
 import TextInput from './components/TextInput/TextInput';
 
@@ -11,7 +10,6 @@ export {
   ExpandingGroup,
   IconBase,
   IconSearch,
-  MaintenanceBanner,
   Modal,
   TextInput,
 };
