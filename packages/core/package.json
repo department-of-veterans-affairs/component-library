@@ -11,6 +11,7 @@
     "*.js"
   ],
   "main": "dist/app.bundle.js",
+  "types": "dist/components/types/index.d.ts",
   "module": "src/main.js",
   "dependencies": {
     "@department-of-veterans-affairs/react-components": "workspace:*",
