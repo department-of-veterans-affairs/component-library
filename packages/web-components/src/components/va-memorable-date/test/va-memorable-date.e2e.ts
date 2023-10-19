@@ -171,8 +171,10 @@ describe('va-memorable-date', () => {
       );
       const date = await page.find('va-memorable-date');
       const handleYear = await page.$('pierce/[name="testYear"]');
+      const handleMonth = await page.$('pierce/[name="testMonth"]');
 
       // Trigger Blur
+      await handleMonth.press('Tab');
       await handleYear.press('Tab');
       await page.waitForChanges();
 
@@ -850,6 +852,7 @@ describe('va-memorable-date', () => {
 
       // Set an invalid value
       await handleMonth.select('');
+      await handleMonth.press('Tab');
       // Trigger Blur
       await handleYear.press('Tab');
 
@@ -883,8 +886,10 @@ describe('va-memorable-date', () => {
       );
       const date = await page.find('va-memorable-date');
       const handleYear = await page.$('pierce/[name="testYear"]');
+      const handleMonth = await page.$('pierce/[name="testMonth"]');
 
       // Trigger Blur
+      await handleMonth.press('Tab');
       await handleYear.press('Tab');
       await page.waitForChanges();
 
@@ -995,6 +1000,7 @@ describe('va-memorable-date', () => {
 
         // Select month value that doesn't exist
         await handleMonth.select('39');
+        await handleMonth.press('Tab');
         // Trigger Blur
         await handleYear.press('Tab');
 
@@ -1507,8 +1513,10 @@ describe('va-memorable-date', () => {
       );
       const date = await page.find('va-memorable-date');
       const handleYear = await page.$('pierce/[name="testYear"]');
+      const handleMonth = await page.$('pierce/[name="testMonth"]');
 
       // Trigger Blur
+      await handleMonth.press('Tab');
       await handleYear.press('Tab');
       await page.waitForChanges();
 
@@ -1525,8 +1533,10 @@ describe('va-memorable-date', () => {
       );
       const date = await page.find('va-memorable-date');
       const handleYear = await page.$('pierce/[name="testYear"]');
+      const handleMonth = await page.$('pierce/[name="testMonth"]');
 
       // Trigger Blur
+      await handleMonth.press('Tab');
       await handleYear.press('Tab');
       await page.waitForChanges();
 
