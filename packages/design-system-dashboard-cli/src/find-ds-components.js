@@ -143,6 +143,9 @@ function findUsedReactComponents(vwModules, regexPattern) {
  * Search vets-website and the content build for design system components.
  *
  * @param searchStrings {string[]} - The components to display usage for
+ *
+ * Passing in the string 'uswds' will output a list of all web components and
+ * web component react bindings where the uswds prop is used
  */
 function findComponents(searchStrings) {
   const vwModules = readAllModules(`${repos['vets-website']}/src`);
@@ -163,18 +166,30 @@ function findComponents(searchStrings) {
   );
 
   const wcTagRegex = /<(va-[^\s>]+)/gms;
-  const vwWebComponents = search(vwModules, wcTagRegex);
-  const contentBuildWC = search(contentTemplates, wcTagRegex);
+  const wcUswds3Regex = /<(Va[^\s]+|va-[^\s]+)(\s|\n)[^>]*?uswds/gms;
 
-  const vwComponents = [
-    ...usedReactComponents,
-    ...vwWebComponents,
-    ...usedReactBindings,
-  ];
+  let vwWebComponents;
+  let contentBuildWC;
+  let vwComponents;
+
+  if (searchStrings?.includes('uswds')) {
+    vwWebComponents = search(vwModules, wcUswds3Regex);
+    contentBuildWC = search(contentTemplates, wcUswds3Regex);
+    vwComponents = [...vwWebComponents];
+  } else {
+    vwWebComponents = search(vwModules, wcTagRegex);
+    contentBuildWC = search(contentTemplates, wcTagRegex);
+    vwComponents = [
+      ...usedReactComponents,
+      ...vwWebComponents,
+      ...usedReactBindings,
+    ];
+  }
 
   const data = tallyResults(vwComponents, contentBuildWC);
-
-  return filterSearchedComponents(data, searchStrings);
+  return searchStrings?.includes('uswds')
+    ? data
+    : filterSearchedComponents(data, searchStrings);
 }
 
 if (require.main === module) {
