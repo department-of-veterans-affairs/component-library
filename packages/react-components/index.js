@@ -3,7 +3,6 @@ import Breadcrumbs from './Breadcrumbs';
 import ExpandingGroup from './ExpandingGroup';
 import IconBase from './IconBase';
 import IconSearch from './IconSearch';
-import LoadingIndicator from './LoadingIndicator';
 import MaintenanceBanner from './MaintenanceBanner';
 import Modal from './Modal';
 import TextInput from './TextInput';
@@ -17,7 +16,6 @@ export {
   ExpandingGroup,
   IconBase,
   IconSearch,
-  LoadingIndicator,
   MaintenanceBanner,
   Modal,
   TextInput,
