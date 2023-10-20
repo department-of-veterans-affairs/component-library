@@ -22,7 +22,7 @@ a {
 
 button.va-crisis-line {
   cursor: pointer;
-  background-color: var(--color-secondary-dark);
+  background-color: var(--color-secondary-darkest);
   display: block;
   border-radius: 0;
   color: var(--color-white);
@@ -78,7 +78,7 @@ button.va-crisis-line {
   background-size: 30px auto;
   background-position: 8px 8px;
   width: 40px;
-  height: 33.6px;
+  height: 36px;
   padding-right: 3px;
 
   transition-duration: 0.3s;
@@ -90,8 +90,6 @@ button.va-crisis-line {
   }
 
   @media(min-width: $small-desktop-screen) {
-    background-color: $red-70v;
-    background-position: 6.4px 8px;
     border-bottom-left-radius: 3.2px;
   }
 }
