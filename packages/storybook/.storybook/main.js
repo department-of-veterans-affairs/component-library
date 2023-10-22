@@ -43,6 +43,12 @@ module.exports = {
       include: path.resolve(__dirname, '../'),
     });
 
+    config.plugins.push(
+      new webpack.DefinePlugin({
+        'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
+      }),
+    );
+
     // Return the altered config
     return config;
   },
