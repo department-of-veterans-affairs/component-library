@@ -14,14 +14,14 @@
   }
 }
 
+.va-logo-link:focus {
+  outline: 2px solid var(--color-gold-light);
+}
+
 .va-logo {
   margin-right: 8px;
   min-height: 30px;
   min-width: 48px;
-
-  &:focus {
-    outline: 2px solid var(--color-gold-light);
-  }
 
   @media (min-width: 481px) {
     margin-right: 16px;

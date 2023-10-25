@@ -25,8 +25,7 @@ export class VaMinimalHeader {
         <va-official-gov-banner/>
         <va-crisis-line-modal/>
         <div class="va-header">
-
-          <a href="/" aria-label="Link to Homepage">
+          <a href="/" aria-label="Link to Homepage" class="va-logo-link">
             <img class="va-logo" src={vaSeal} aria-hidden="true"/>
           </a>
           <div class='header-container'>
