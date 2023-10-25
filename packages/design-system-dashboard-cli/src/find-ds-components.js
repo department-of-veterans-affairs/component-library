@@ -56,15 +56,23 @@ function filterSearchedComponents(data, searchStrings = []) {
  *
  * @return {Object} - The component-name-keyed object containing the usage count
  */
-function tallyResults(vwComponents, contentBuildWC) {
+function tallyResults(vwComponents, contentBuildWC, uswdsComponents) {
   const data = {};
   /** @type {{[component: string]: string[]}} */
   const instancesByComponent = {};
+  // if data[componentName].uswds isn't present then initialize it, otherwise increment it
   function incrementCount(componentName, appName) {
     if (!data[componentName]) data[componentName] = { total: 0 };
     if (!data[componentName][appName]) data[componentName][appName] = 0;
     data[componentName][appName]++;
     data[componentName].total++;
+  }
+
+  function incrementUswdsCount(componentName) {
+    if (!data[componentName].uswds) {
+      data[componentName].uswds = 0;
+    }
+    data[componentName].uswds++;
   }
 
   // Count the components in vets-website
@@ -94,6 +102,23 @@ function tallyResults(vwComponents, contentBuildWC) {
       const componentName = m[1];
       if (componentName) {
         incrementCount(componentName, 'Static content templates');
+
+        // If the component is not yet in the collection, initialize it as an empty array
+        if (!instancesByComponent[componentName])
+          instancesByComponent[componentName] = [];
+
+        // Only include the app path if it hasn't already been included previously
+        if (!instancesByComponent[componentName].includes(i.path))
+          instancesByComponent[componentName].push(i.path);
+      }
+    });
+  });
+
+  uswdsComponents.forEach(i => {
+    i.matches.forEach(m => {
+      const componentName = m[1];
+      if (componentName) {
+        incrementUswdsCount(componentName);
 
         // If the component is not yet in the collection, initialize it as an empty array
         if (!instancesByComponent[componentName])
@@ -171,6 +196,7 @@ function findComponents(searchStrings) {
   let vwWebComponents;
   let contentBuildWC;
   let vwComponents;
+  const uswdsV3Components = [...search(vwModules, wcUswds3Regex)];
 
   if (searchStrings?.includes('uswds')) {
     vwWebComponents = search(vwModules, wcUswds3Regex);
@@ -186,7 +212,7 @@ function findComponents(searchStrings) {
     ];
   }
 
-  const data = tallyResults(vwComponents, contentBuildWC);
+  const data = tallyResults(vwComponents, contentBuildWC, uswdsV3Components);
   return searchStrings?.includes('uswds')
     ? data
     : filterSearchedComponents(data, searchStrings);
