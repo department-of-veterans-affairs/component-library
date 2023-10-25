@@ -48,6 +48,7 @@ export class VACrisisLineModal {
           </button>
         </div>
         <va-modal
+          clickToClose
           modalTitle="We’re here anytime, day or night – 24/7"
           onPrimaryButtonClick={() => this.setNotVisible()}
           onCloseEvent={() => this.setNotVisible()}
@@ -59,7 +60,7 @@ export class VACrisisLineModal {
             class="va-overlay va-modal va-modal-large"
             role="alertdialog"
           >
-            <div class="va-crisis-panel va-modal-inner">
+            <div class="va-crisis-panel va-modal-inner" role="dialog">
               <div class="va-overlay-body va-crisis-panel-body">
                 <p>
                   If you are a Veteran in crisis or concerned about one, connect
