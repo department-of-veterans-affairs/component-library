@@ -23,7 +23,7 @@ describe('validate', () => {
   describe('NaN validation', () => {
     it('indicates when the year is NaN', () => {
       const memorableDateComponent = {} as Components.VaMemorableDate;
-      const year = '1999n';
+      const year = NaN;
       const month = 1;
       const day = 1;
       const yearTouched = true;
@@ -134,7 +134,7 @@ describe('validate', () => {
     it('validates month when empty', () => {
       const memorableDateComponent = {} as Components.VaMemorableDate;
       const year = 1999;
-      const month = '';
+      const month = null;
       const day = 1;
       const monthTouched = true;
 
@@ -150,7 +150,7 @@ describe('validate', () => {
       const memorableDateComponent = {} as Components.VaMemorableDate;
       const year = 1999;
       const month = 1;
-      const day = '';
+      const day = null;
       const dayTouched = true;
 
       validate({ component: memorableDateComponent, year, month, day, dayTouched });
@@ -163,7 +163,7 @@ describe('validate', () => {
 
     it('validates year when empty', () => {
       const memorableDateComponent = {} as Components.VaMemorableDate;
-      const year = '';
+      const year = null;
       const month = 1;
       const day = 1;
       const yearTouched = true;
