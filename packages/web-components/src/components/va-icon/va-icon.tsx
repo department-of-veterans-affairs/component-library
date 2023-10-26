@@ -55,15 +55,7 @@ export class VaIcon {
       'usa-icon': true,
       [`usa-icon--size-${size}`]: !!size,
     });
-    let assetRootPath;
-
-    if (process.env.NODE_ENV === 'production') {
-      assetRootPath = '/storybook/';
-    } else {
-      assetRootPath = '/';
-    }
-
-    const imageSrc = `${getAssetPath(assetRootPath + 'assets/sprite.svg')}#${icon}`;
+    const imageSrc = `${getAssetPath('assets/sprite.svg')}#${icon}`;
     return (
       <Host>
         <svg
