@@ -12,6 +12,7 @@
 ::slotted(va-process-list-item[checkmark='true']):before {
   color: var(--color-green) !important;
   border-color: var(--color-green) !important;
+  content: url(../../assets/green-check.svg) !important; // Alt text is currently not supported in FF and Safari, This is a fallback declaration (10/27/2023)
   content: url(../../assets/green-check.svg) / "Completed" !important;
 }
 
