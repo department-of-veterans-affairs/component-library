@@ -65,5 +65,41 @@ describe('va-process-list-item', () => {
 
     await axeCheck(page);
   });
+  it('includes sr-only span for checkmark status', async () => {
+    const page = await newE2EPage();
+    await page.setContent(`
+      <ol>
+        <va-process-list-item header="Heading" checkmark>
+          <p>Some content</p>
+        </va-process-list>
+      </ol>
+    `);
+    const element = await page.find('va-process-list-item .sr-only');
+    expect(element.innerText).toEqual('Completed:');
+  })
+  it('includes sr-only span for pending status', async () => {
+    const page = await newE2EPage();
+    await page.setContent(`
+      <ol>
+        <va-process-list-item header="Heading" pending>
+          <p>Some content</p>
+        </va-process-list>
+      </ol>
+    `);
+    const element = await page.find('va-process-list-item .sr-only');
+    expect(element.innerText).toEqual('Pending:');
+  })
+  it('includes sr-only span for active status', async () => {
+    const page = await newE2EPage();
+    await page.setContent(`
+      <ol>
+        <va-process-list-item header="Heading" active>
+          <p>Some content</p>
+        </va-process-list>
+      </ol>
+    `);
+    const element = await page.find('va-process-list-item .sr-only');
+    expect(element.innerText).toEqual('Current Step:');
+  })
 })
 

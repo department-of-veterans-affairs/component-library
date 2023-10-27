@@ -39,12 +39,17 @@ export class VaProcessListItem {
   @Prop() checkmark?: boolean = false;
 
   render() { 
-    const {header, level} = this;
+    const {header, level, checkmark, active, pending} = this;
     // eslint-disable-next-line i18next/no-literal-string
     const HeaderTag = `h${level}`;
     
     return (
       <Host role="listitem" class='usa-process-list__item'>
+        {
+          checkmark || active || pending ? 
+            <span class='sr-only'>{checkmark ? 'Completed:' : active ? 'Current Step:' : pending ? 'Pending:' : null}</span>
+          : null
+        }
         {header ? <HeaderTag class='usa-process-list__heading'>{header}</HeaderTag> : null}
         <slot/>
       </Host>

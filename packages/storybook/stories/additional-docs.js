@@ -46,19 +46,7 @@ export const additionalDocs = {
     maturityCategory: USE,
     maturityLevel: DEPLOYED,
   },
-  'Banner - Maintenance': {
-    maturityCategory: USE,
-    maturityLevel: DEPLOYED,
-    guidanceHref: 'banner/maintenance',
-    guidanceName: 'Banner - maintenance',
-  },
   'Modal - React': {
-    maturityCategory: DONT_USE,
-    maturityLevel: DEPRECATED,
-  },
-  'OMB info - React': {
-    guidanceHref: 'omb-info',
-    guidanceName: 'OMB info',
     maturityCategory: DONT_USE,
     maturityLevel: DEPRECATED,
   },

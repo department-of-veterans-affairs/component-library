@@ -47,7 +47,7 @@ describe('va-pagination', () => {
           </ul>
           <ul class="pagination-inner">
             <li>
-              <button aria-label="Page 1" class="button-inner" type="button">
+              <button aria-label="Page 1, first page" class="button-inner" type="button">
                 1
               </button>
             </li>
@@ -67,7 +67,7 @@ describe('va-pagination', () => {
               </button>
             </li>
             <li>
-              <button aria-label="Page 5" class="button-inner" type="button">
+              <button aria-label="Page 5, last page" class="button-inner" type="button">
                 5
               </button>
             </li>
@@ -259,14 +259,14 @@ describe('uswds - va-pagination', () => {
         <mock:shadow-root>
           <nav aria-label="Pagination" class="usa-pagination">
             <ul class="usa-pagination__list">
-              <li class="usa-pagination__item usa-pagination__page-no">
-                <a href="javascript:void(0)" class="usa-pagination__button usa-current">1</a>
+              <li class="usa-pagination__item usa-pagination__page-no va-pagination__item">
+                <a aria-current="page" aria-label="page 1, first page" href="javascript:void(0)" class="usa-pagination__button usa-current">1</a>
               </li>
-              <li class="usa-pagination__item usa-pagination__page-no">
-                <a href="javascript:void(0)" class="usa-pagination__button">2</a>
+              <li class="usa-pagination__item usa-pagination__page-no va-pagination__item">
+                <a aria-label="page 2" href="javascript:void(0)" class="usa-pagination__button">2</a>
               </li>
-              <li class="usa-pagination__item usa-pagination__page-no">
-                <a href="javascript:void(0)" class="usa-pagination__button">3</a>
+              <li class="usa-pagination__item usa-pagination__page-no va-pagination__item">
+                <a aria-label="page 3, last page" href="javascript:void(0)" class="usa-pagination__button">3</a>
               </li>
               <li class="usa-pagination__item usa-pagination__arrow" aria-label="Next page">
                 <a href="javascript:void(0)" class="usa-pagination__link usa-pagination__next-page">

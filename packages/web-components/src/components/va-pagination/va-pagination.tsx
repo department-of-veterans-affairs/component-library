@@ -280,20 +280,23 @@ export class VaPagination {
 
     const previousAriaLabel = ariaLabelSuffix ? `Previous page ${ariaLabelSuffix}` : 'Previous page';
     const nextAriaLabel = ariaLabelSuffix ? `Next page ${ariaLabelSuffix}` : 'Next page';
-    const lastPageAriaLabel = ariaLabelSuffix ? `Page ${pages} ${ariaLabelSuffix}` : `Page ${pages}`;
+    const lastPageAriaLabel = ariaLabelSuffix ? `Page ${pages} ${ariaLabelSuffix}, last page` : `Page ${pages}, last page`;
     if (uswds) {
       const pageNumbersToRender = this.pageNumbersUswds();
       const itemClasses = classnames({
         'usa-pagination__item': true,
-        'usa-pagination__page-no': true
+        'usa-pagination__page-no': true,
+        'va-pagination__item': true
       });
       const ellipsisClasses = classnames({
         'usa-pagination__item': true,
-        'usa-pagination__overflow': true
+        'usa-pagination__overflow': true,
+        'va-pagination__item': true
       });
       const arrowClasses = classnames({
         'usa-pagination__item': true,
-        'usa-pagination__arrow': true
+        'usa-pagination__arrow': true,
+
       });
 
       const previousButton = page > 1
@@ -317,10 +320,12 @@ export class VaPagination {
                 onClick={() => this.handlePageSelect(1, 'nav-paginate-number')}
                 onKeyDown={e => this.handleKeyDown(e, 1)}
                 href="javascript:void(0)"
-                class="usa-pagination__button">1</a>
+                class="usa-pagination__button"
+                aria-label="page 1, first page"
+                >1</a>
             </li>
             <li class={ellipsisClasses} aria-label="ellipsis indicating non-visible pages">
-              <span>...</span>
+              <span>…</span>
             </li>
           </Fragment>}
         </Fragment>
@@ -332,6 +337,13 @@ export class VaPagination {
           'usa-current': page === pageNumber
         })
 
+        let pageAriaLabel = ariaLabelSuffix ? `page ${pageNumber} ${ariaLabelSuffix}` : `page ${pageNumber}`;
+        if (pageNumber === 1) {
+          pageAriaLabel = `${pageAriaLabel}, first page`;
+        }
+        if (pageNumber === pages) {
+          pageAriaLabel = `${pageAriaLabel}, last page`;
+        }
         return (
           <li class={itemClasses}>
             <a
@@ -339,6 +351,8 @@ export class VaPagination {
               onKeyDown={e => this.handleKeyDown(e, pageNumber)}
               href="javascript:void(0)"
               class={anchorClasses}
+              aria-current={page === pageNumber ? 'page' : null}
+              aria-label={pageAriaLabel}
             >
               {pageNumber}
             </a>
@@ -351,7 +365,7 @@ export class VaPagination {
         <Fragment>
           {pages > this.SHOW_ALL_PAGES &&
             <li class={ellipsisClasses} aria-label="ellipsis indicating non-visible pages">
-            <span>...</span>
+            <span>…</span>
           </li>}
           {!this.unbounded && pages > this.SHOW_ALL_PAGES &&
           <li class={itemClasses}>
@@ -360,6 +374,7 @@ export class VaPagination {
                 onKeyDown={e => this.handleKeyDown(e, pages)}
                 href="javascript:void(0)"
                 class="usa-pagination__button"
+                aria-label={`page ${pages}, last page`}
               >
                 {pages}
               </a>
@@ -396,8 +411,13 @@ export class VaPagination {
           'button-inner': true,
         });
 
-        const pageAriaLabel = ariaLabelSuffix ? `Page ${pageNumber} ${ariaLabelSuffix}` : `Page ${pageNumber}`;
-
+        let pageAriaLabel = ariaLabelSuffix ? `Page ${pageNumber} ${ariaLabelSuffix}` : `Page ${pageNumber}`;
+        if (pageNumber === 1) {
+          pageAriaLabel = `${pageAriaLabel}, first page`;
+        }
+        if (pageNumber === pages) {
+          pageAriaLabel = `${pageAriaLabel}, last page`;
+        }
         return (
           <li>
             <button
@@ -444,7 +464,7 @@ export class VaPagination {
             {showLastPage && page < pages - maxPageListLength + 1 && (
               <Fragment>
                 <li>
-                  <span>...</span>
+                  <span>…</span>
                 </li>
                 <li>
                   <button
