@@ -15,7 +15,7 @@ jobs:
         with:
           ref: main
       - name: Use secret as an environment variable
-        run: echo "MY_SECRET_KEY=${{ secrets.ENV }}" >> $GITHUB
+        run: echo "MY_SECRET_KEY=${{ secrets.ENV }}"
       - name: Use Node.js 14.x
         uses: actions/setup-node@v2
         with:
