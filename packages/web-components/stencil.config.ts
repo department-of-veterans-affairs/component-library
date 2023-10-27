@@ -51,7 +51,6 @@ export const config: Config = {
     },
     {
       type: 'www',
-      dir: process.env.ENV === 'production' ? '/storybook' : '',
       serviceWorker: null, // disable service workers
     },
   ],
