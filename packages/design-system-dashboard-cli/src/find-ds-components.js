@@ -171,7 +171,7 @@ function findUsedReactComponents(vwModules, regexPattern) {
       const componentNamesArray = lines
         .map(item => item.replace(/,+$/, ''))
         .filter(item => item.startsWith('Va'));
-      // For each component in componentNames, search the file that imports it for
+      // For each component in componentNamesArray, search the file that imports it for
       // all usages and push it into singleFileUses
       componentNamesArray.map(c => {
         const regEx = new RegExp(`<(${c})`, 'g');
