@@ -1,3 +1,4 @@
+/* eslint-disable i18next/no-literal-string */
 // @ts-ignore
 /**
  * Map of phone numbers to descriptions. This is only intended for documentation
@@ -92,7 +93,7 @@ export const contactsMap = Object.freeze({
  * Map of phone numbers. CONTACTS.GI_BILL, for example, will return the phone
  * number defined in contactsMap.
  */
-export const CONTACTS = Object.freeze(
+export const CONTACTS: { [x: string]: string } = Object.freeze(
   Object.entries(contactsMap).reduce(
     (allContacts, currentContact) => ({
       ...allContacts,
