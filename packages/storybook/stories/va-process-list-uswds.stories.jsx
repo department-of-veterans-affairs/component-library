@@ -70,14 +70,14 @@ const Template = ({uswds}) => {
 const StatusTemplate = ({uswds}) => {
   return (
     <va-process-list uswds={uswds}>
-      <va-process-list-item checked header='Checkmark Icon'>  
-        <p>Add the prop <code>checked</code> to the list icon a checkmark.</p>
+      <va-process-list-item checkmark header='Checkmark Icon'>  
+        <p>Add the prop <code>checkmark</code> to make the list icon a checkmark.</p>
       </va-process-list-item>
       <va-process-list-item active header='Active Icon'>
         <p>Add the prop <code>active</code> to make the list icon and header blue.</p>
       </va-process-list-item>
       <va-process-list-item pending header='Pending Icon'>
-        <p>Add the prop <code>pending</code> list item and icon grayed out.</p>
+        <p>Add the prop <code>pending</code> to make the list item and icon grayed out.</p>
       </va-process-list-item>
       <va-process-list-item header='Default Icon' />
     </va-process-list>

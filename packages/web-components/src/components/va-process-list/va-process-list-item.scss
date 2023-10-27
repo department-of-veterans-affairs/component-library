@@ -8,7 +8,7 @@
   display: list-item;
 }
 va-process-list-item[pending='true'] .usa-process-list__heading {
-  color: var(--color-gray-light);
+  color: var(--color-gray-medium);
 }
 va-process-list-item[active='true'] .usa-process-list__heading {
   color: var(--color-primary);
