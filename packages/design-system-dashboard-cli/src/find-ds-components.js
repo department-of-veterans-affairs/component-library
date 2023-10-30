@@ -56,15 +56,23 @@ function filterSearchedComponents(data, searchStrings = []) {
  *
  * @return {Object} - The component-name-keyed object containing the usage count
  */
-function tallyResults(vwComponents, contentBuildWC) {
+function tallyResults(vwComponents, contentBuildWC, uswdsComponents) {
   const data = {};
   /** @type {{[component: string]: string[]}} */
   const instancesByComponent = {};
+  // if data[componentName].uswds isn't present then initialize it, otherwise increment it
   function incrementCount(componentName, appName) {
     if (!data[componentName]) data[componentName] = { total: 0 };
     if (!data[componentName][appName]) data[componentName][appName] = 0;
     data[componentName][appName]++;
     data[componentName].total++;
+  }
+
+  function incrementUswdsCount(componentName) {
+    if (!data[componentName].uswds) {
+      data[componentName].uswds = 0;
+    }
+    data[componentName].uswds++;
   }
 
   // Count the components in vets-website
@@ -106,6 +114,23 @@ function tallyResults(vwComponents, contentBuildWC) {
     });
   });
 
+  uswdsComponents.forEach(i => {
+    i.matches.forEach(m => {
+      const componentName = m[1];
+      if (componentName) {
+        incrementUswdsCount(componentName);
+
+        // If the component is not yet in the collection, initialize it as an empty array
+        if (!instancesByComponent[componentName])
+          instancesByComponent[componentName] = [];
+
+        // Only include the app path if it hasn't already been included previously
+        if (!instancesByComponent[componentName].includes(i.path))
+          instancesByComponent[componentName].push(i.path);
+      }
+    });
+  });
+
   // Function to write out as-yet-undeprecated component data
   writeCompPathOwnersToCSV(instancesByComponent);
 
@@ -115,25 +140,44 @@ function tallyResults(vwComponents, contentBuildWC) {
 /**
  * Match component-library React component uses in individual files
  *
+ * It's possible a file imports more than one component at the same time
+ * using syntax like:
+ * import { VaTextInput, VaModal } from ....
+ * or:
+ * import {
+ *  VaTextInput,
+ *  VaModal,
+ * } from ...
+ *
+ * When this is the case, match.matches[1] (componentName = m[1] below),
+ * will look something like 'VaTextInput,\n VaModal,\n'. With this,
+ * componentName needs to become an array of component names, and each of those need
+ * to be iterated over using componentRegex to retrieve an accurate count.
  * @return {Object[]} - The result of multiple searches
  *
  */
 function findUsedReactComponents(vwModules, regexPattern) {
   // Get a list of files which import components from the component library
   const componentLibraryImports = search(vwModules, regexPattern);
-
   return componentLibraryImports.reduce((allFilesCompUses, match) => {
     // For each import in each file, find the component that's being imported
     // and search that file for how many times that component is _used_.
     const fileComponentUses = match.matches.reduce((singleFileUses, m) => {
-      // First item will be the import match, second will be the use
-      const componentName = m[1];
-      const componentRegex = new RegExp(`<(${componentName})`, 'g');
-      // Search each file that imports a component for each use of that component
-      // and add the search results to the return array
-      return singleFileUses.concat(
-        search(readFile(match.path), componentRegex)
-      );
+      // First item will be the import match, second will be a string of component names
+      const componentNames = m[1];
+      // componentNames looks like 'VaAlert,\n VaModal,\n' so first we split it on \n
+      const lines = componentNames.split('\n').map(line => line.trim());
+      // then we get rid of commas and keep anything beginning with Va
+      const componentNamesArray = lines
+        .map(item => item.replace(/,+$/, ''))
+        .filter(item => item.startsWith('Va'));
+      // For each component in componentNamesArray, search the file that imports it for
+      // all usages and push it into singleFileUses
+      componentNamesArray.map(c => {
+        const regEx = new RegExp(`<(${c})`, 'g');
+        singleFileUses.push(...search(readFile(match.path), regEx));
+      });
+      return singleFileUses;
     }, []);
     return allFilesCompUses.concat(fileComponentUses);
   }, []);
@@ -159,7 +203,7 @@ function findComponents(searchStrings) {
   );
 
   const usedBindingsRegex =
-    /import { ([^;]+) } from '@department-of-veterans-affairs\/component-library\/dist\/react-bindings'/gms;
+    /import {\s*([^;]+)\s*}\s*from '@department-of-veterans-affairs\/component-library\/dist\/react-bindings'/gms;
   const usedReactBindings = findUsedReactComponents(
     vwModules,
     usedBindingsRegex
@@ -171,6 +215,7 @@ function findComponents(searchStrings) {
   let vwWebComponents;
   let contentBuildWC;
   let vwComponents;
+  const uswdsV3Components = [...search(vwModules, wcUswds3Regex)];
 
   if (searchStrings?.includes('uswds')) {
     vwWebComponents = search(vwModules, wcUswds3Regex);
@@ -186,7 +231,7 @@ function findComponents(searchStrings) {
     ];
   }
 
-  const data = tallyResults(vwComponents, contentBuildWC);
+  const data = tallyResults(vwComponents, contentBuildWC, uswdsV3Components);
   return searchStrings?.includes('uswds')
     ? data
     : filterSearchedComponents(data, searchStrings);
