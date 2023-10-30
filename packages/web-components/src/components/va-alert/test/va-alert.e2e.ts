@@ -345,4 +345,49 @@ describe('va-alert', () => {
       'aria-live': 'assertive',
     });
   });
+
+  it('should set status to info if null', async () => {
+    const page = await newE2EPage();
+    await page.setContent(
+      '<va-alert uswds><h4 slot="headline">This is an alert</h4><div>This is the alert content</div>',
+    );
+
+    const element = await page.find('va-alert >>> .usa-alert');
+
+    expect(element.classList.contains('usa-alert--info')).toBeTruthy();
+  })
+
+  it('should set status to info if it is an empty string', async () => {
+    const page = await newE2EPage();
+    await page.setContent(
+      '<va-alert uswds status=""><h4 slot="headline">This is an alert</h4><div>This is the alert content</div>',
+    );
+
+    const element = await page.find('va-alert >>> .usa-alert');
+
+    expect(element.classList.contains('usa-alert--info')).toBeTruthy();
+  })
+
+  it('should set status to info if value not in pre-defined list', async () => {
+    const page = await newE2EPage();
+    await page.setContent(
+      '<va-alert uswds status="Fake"><h4 slot="headline">This is an alert</h4><div>This is the alert content</div>',
+    );
+
+    const element = await page.find('va-alert >>> .usa-alert');
+
+    expect(element.classList.contains('usa-alert--info')).toBeTruthy();
+  })
+
+  it('should not overwrite status if valid', async () => {
+    const page = await newE2EPage();
+    await page.setContent(
+      '<va-alert uswds status="continue"><h4 slot="headline">This is an alert</h4><div>This is the alert content</div>',
+    );
+
+    const element = await page.find('va-alert >>> .usa-alert');
+
+    expect(element.classList.contains('usa-alert--info')).toBeFalsy();
+    expect(element.classList.contains('usa-alert--continue')).toBeTruthy();
+  })
 });
