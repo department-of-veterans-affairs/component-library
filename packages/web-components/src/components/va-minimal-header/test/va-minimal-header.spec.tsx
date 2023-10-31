@@ -13,7 +13,7 @@ describe('va-minimal-header', () => {
           <va-official-gov-banner></va-official-gov-banner>
           <va-crisis-line-modal></va-crisis-line-modal>
           <div class="va-header">
-            <a href="/">
+            <a aria-label="Link to Homepage" class="va-logo-link" href="/">
               <img aria-hidden="true" class="va-logo" src="[object Object]">
             </a>
             <div class="header-container">
@@ -36,7 +36,7 @@ describe('va-minimal-header', () => {
           <va-official-gov-banner></va-official-gov-banner>
           <va-crisis-line-modal></va-crisis-line-modal>
           <div class="va-header">
-            <a href="/">
+            <a aria-label="Link to Homepage" class="va-logo-link" href="/">
               <img aria-hidden="true" class="va-logo" src="[object Object]">
             </a>
             <div class="header-container">
