@@ -9,10 +9,11 @@
   counter-reset: usa-numbered-list;
 }
 
-::slotted(va-process-list-item[checked='true']):before {
+::slotted(va-process-list-item[checkmark='true']):before {
   color: var(--color-green) !important;
   border-color: var(--color-green) !important;
-  content: url(../../assets/green-check.svg) !important;
+  content: url(../../assets/green-check.svg) !important; // Alt text is currently not supported in FF and Safari, This is a fallback declaration (10/27/2023)
+  content: url(../../assets/green-check.svg) / "Completed" !important;
 }
 
 ::slotted(va-process-list-item[active='true']):before {
@@ -21,12 +22,12 @@
 }
 
 ::slotted(va-process-list-item[pending='true']):before {
-  color: var(--color-gray-light) !important;
-  border-color: var(--color-gray-light) !important;
+  color: var(--color-gray-medium) !important;
+  border-color: var(--color-gray-medium) !important;
 }
 
 ::slotted(va-process-list-item[pending='true']) {
-  color: var(--color-gray-light) !important;
+  color: var(--color-gray-medium) !important;
 }
 
 ::slotted(va-process-list-item) {
