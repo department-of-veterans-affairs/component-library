@@ -30,6 +30,9 @@ module.exports = {
   core: {
     builder: 'webpack5',
   },
+  output: {
+    publicPath: process.env.ENV === 'production' ? '/storybook/' : '/',
+  },
 
   webpackFinal: async (config, { configType }) => {
     // `configType` has a value of 'DEVELOPMENT' or 'PRODUCTION'

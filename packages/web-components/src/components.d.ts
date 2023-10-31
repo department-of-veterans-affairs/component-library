@@ -94,9 +94,9 @@ export namespace Components {
          */
         "slim"?: boolean;
         /**
-          * Determines the icon and border/background color. One of `info`, `error`, `success`, `warning`, or `continue`
+          * Determines the icon and border/background color.
          */
-        "status"?: string;
+        "status"?: "info" | "warning" | "error" | "success" | "continue";
         /**
           * Whether or not the component will use USWDS v3 styling.
          */
@@ -140,9 +140,9 @@ export namespace Components {
          */
         "showClose"?: boolean;
         /**
-          * The type of the banner. One of 'info', 'error', 'success', 'continue', or 'warning'. This affects both the icon of the AlertBox and the top border color.
+          * The type of the banner. This affects both the icon of the AlertBox and the top border color.
          */
-        "type"?: string;
+        "type"?: "info" | "warning" | "error" | "success" | "continue";
         /**
           * A boolean that when false makes it so that the banner does not render.
          */
@@ -1862,9 +1862,9 @@ declare namespace LocalJSX {
          */
         "slim"?: boolean;
         /**
-          * Determines the icon and border/background color. One of `info`, `error`, `success`, `warning`, or `continue`
+          * Determines the icon and border/background color.
          */
-        "status"?: string;
+        "status"?: "info" | "warning" | "error" | "success" | "continue";
         /**
           * Whether or not the component will use USWDS v3 styling.
          */
@@ -1916,9 +1916,9 @@ declare namespace LocalJSX {
          */
         "showClose"?: boolean;
         /**
-          * The type of the banner. One of 'info', 'error', 'success', 'continue', or 'warning'. This affects both the icon of the AlertBox and the top border color.
+          * The type of the banner. This affects both the icon of the AlertBox and the top border color.
          */
-        "type"?: string;
+        "type"?: "info" | "warning" | "error" | "success" | "continue";
         /**
           * A boolean that when false makes it so that the banner does not render.
          */
