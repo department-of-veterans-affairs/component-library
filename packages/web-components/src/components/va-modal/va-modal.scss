@@ -13,9 +13,8 @@
 @import '../../global/formation_overrides';
 
 .usa-modal-alert {
-  padding: 0px // => Due to icons
+  padding: 0px; // => Due to icons
 }
-
 
 .usa-modal__heading {
   font-family: var(--font-serif);
@@ -31,6 +30,11 @@
   }
 }
 
+@media screen and (max-width: 481px) {
+  .usa-modal__content {
+    width: 85%;
+  }
+}
 
 :host([status='info']) .usa-modal {
   border-left-color: var(--color-primary-alt-dark);
@@ -90,14 +94,12 @@
   padding: 3.2rem 6.4rem 3.2rem 2.4rem;
 }
 
-
 /** Original Component Style **/
 
 @import '../../mixins/buttons.css';
 
 :host {
   display: block;
-
 }
 
 :host([visible]:not([visible='false'])) {
@@ -212,7 +214,7 @@ i::before {
   background-color: var(--color-gray-cool-light);
 }
 
-:host(:not([uswds="true"],[uswds=""])) .va-modal-alert {
+:host(:not([uswds='true'], [uswds=''])) .va-modal-alert {
   border-left-style: solid;
   border-left-width: 10px;
   display: inline-flex;

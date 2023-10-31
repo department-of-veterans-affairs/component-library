@@ -15,6 +15,7 @@ import { CONTACTS } from '../../contacts';
 })
 export class VACrisisLineModal {
   @State() isOpen: boolean = false;
+  parentNode: HTMLElement;
 
   setVisible() {
     this.isOpen = true;
@@ -22,6 +23,14 @@ export class VACrisisLineModal {
 
   setNotVisible() {
     this.isOpen = false;
+  }
+
+  private getParentNode() {
+    this.parentNode = document.querySelector('div.va-crisis-line-container');
+  }
+
+  connectedCallback() {
+    this.getParentNode();
   }
 
   render() {
@@ -54,18 +63,13 @@ export class VACrisisLineModal {
           onCloseEvent={() => this.setNotVisible()}
           visible={this.isOpen}
           large={true}
+          uswds={true}
+          ariaHiddenNodeExceptions={[this.parentNode]}
         >
-          <div
-            id="modal-crisisline"
-            class="va-overlay va-modal va-modal-large"
-            role="alertdialog"
-          >
-            <div class="va-crisis-panel va-modal-inner" role="dialog">
-              <div class="va-overlay-body va-crisis-panel-body">
-                <p>
-                  If you are a Veteran in crisis or concerned about one, connect
-                  with our caring, qualified responders for confidential help.
-                  Many of them are Veterans themselves.
+          <p>
+            If you are a Veteran in crisis or concerned about one, connect with
+            our caring, qualified responders for confidential help. Many of them
+            are Veterans themselves.
                 </p>
                 <ul class="va-crisis-panel-list">
                   <li>
@@ -117,6 +121,7 @@ export class VACrisisLineModal {
                     </p>
                   </li>
                 </ul>
+          <p>
                 Get more resources at{' '}
                 <a
                   class="no-external-icon"
@@ -124,9 +129,7 @@ export class VACrisisLineModal {
                 >
                   VeteransCrisisLine.net
                 </a>
-              </div>
-            </div>
-          </div>
+          </p>
         </va-modal>
       </Host>
     );
