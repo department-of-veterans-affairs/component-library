@@ -39,6 +39,7 @@ const defaultArgs = {
   'close-btn-aria-label': 'Close notification',
   'closeable': false,
   'full-width': false,
+  'background-only': false,
   'headline': (
     <h2 id="track-your-status-on-mobile" slot="headline">
       Track your claim or appeal on your mobile device
@@ -62,6 +63,7 @@ const Template = ({
   'full-width': fullWidth,
   headline,
   onCloseEvent,
+  'background-only': backgroundOnly,
   children,
 }) => {
   if (onCloseEvent)
@@ -76,6 +78,7 @@ const Template = ({
         closeable={closeable}
         fullWidth={fullWidth}
         onCloseEvent={onCloseEvent}
+        background-only={backgroundOnly}
       >
         {headline}
         {children}
@@ -92,6 +95,7 @@ const Template = ({
       close-btn-aria-label={closeBtnAriaLabel}
       closeable={closeable}
       full-width={fullWidth}
+      background-only={backgroundOnly}
     >
       {headline}
       {children}
@@ -301,6 +305,13 @@ Dismissable.args = {
   closeable: true,
   onCloseEvent: () => console.log('Close event triggered'),
 };
+
+export const BackgroundOnly = Template.bind(null);
+BackgroundOnly.args = {
+  ...defaultArgs,
+  'background-only': true,
+  status: 'fake'
+}
 
 export const Slim = SlimTemplate.bind(null);
 Slim.args = {
