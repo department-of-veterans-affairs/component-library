@@ -87,7 +87,7 @@ export class VaModal {
   componentLibraryAnalytics: EventEmitter;
 
   /**
-   * Listen for the va-button GA event and capture it so 
+   * Listen for the va-button GA event and capture it so
    * that we can emit a single va-modal GA event that includes
    * the va-button details in handlePrimaryButtonClick and
    * handleSecondaryButtonClick.
@@ -165,7 +165,7 @@ export class VaModal {
   @Prop({ reflect: true }) visible?: boolean = false;
 
   /**
-   * Additional DOM-nodes that should not be hidden from screen readers. 
+   * Additional DOM-nodes that should not be hidden from screen readers.
    * Useful when an open modal shouldn't hide all content behind the overlay.
    */
   @Prop() ariaHiddenNodeExceptions?: HTMLElement[] = [];
@@ -193,9 +193,10 @@ export class VaModal {
     }
   }
 
-  // This keydown event listener is used to close the modal when the user hits
-  // the Escape key.
-  @Listen('keydown', { target: 'window' })
+  // This keyup event listener is used to close the modal when the user hits
+  // the Escape key and check that focus remains trapped within the modal when
+  // pressing the Tab key
+  @Listen('keyup', { target: 'window' })
   handleKeyDown(e: KeyboardEvent) {
     if (!this.visible) return;
 
@@ -207,13 +208,16 @@ export class VaModal {
     // shift key state used for focus trap. The FocusEvent does not include a
     // way to check the key state
     this.shifted = e.shiftKey;
+
+    if (keyCode === 'Tab') {
+      this.handleFocus(e)
+    }
   }
 
   // This focusin event listener is used to trap focus within the modal. When
   // the focus is on an element outside of the modal, it is moved back to an
   // appropriate element within the modal, depending on the shift key state
-  @Listen('focusin', { target: 'body' })
-  handleFocus(e: FocusEvent) {
+  handleFocus(e: KeyboardEvent) {
     if (this.visible) {
       // focus path
       const path = Array.from(e.composedPath());
@@ -354,8 +358,11 @@ export class VaModal {
     // Prevents scrolling outside modal
     disableBodyScroll(this.el);
 
+    // Get the docs-root element (from Storybook) if present, so that it can be excluded
+    const docsRoot = document.querySelector('#docs-root');
+
     // The elements to exclude from aria-hidden.
-    const hideExceptions = [...this.ariaHiddenNodeExceptions, this.el] as HTMLElement[];
+    const hideExceptions = [...this.ariaHiddenNodeExceptions, docsRoot, this.el].flat() as HTMLElement[];
 
     // Sets aria-hidden="true" to all elements outside of the modal except
     // for the elements in the hideExceptions array.
@@ -427,7 +434,7 @@ export class VaModal {
         'usa-modal__heading': true,
         'va-modal-alert-title': status,
       });
-      const closingButton = forcedModal ? '' 
+      const closingButton = forcedModal ? ''
       : <button
           aria-label={btnAriaLabel}
           class="va-modal-close"
@@ -439,10 +446,9 @@ export class VaModal {
         </button>;
       return (
         <Host>
-          <div class={wrapperClass} 
+          <div class={wrapperClass}
             role={status === 'warning' || status === 'error' ? 'alertdialog' : 'dialog' }
             aria-label={ariaLabel}
-            aria-describedby="description"
             aria-modal="true"
           >
             <div class={contentClass}>

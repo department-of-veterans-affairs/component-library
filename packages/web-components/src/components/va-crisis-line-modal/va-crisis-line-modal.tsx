@@ -15,7 +15,6 @@ import { CONTACTS } from '../../contacts';
 })
 export class VACrisisLineModal {
   @State() isOpen: boolean = false;
-  parentNode: HTMLElement;
 
   setVisible() {
     this.isOpen = true;
@@ -25,14 +24,7 @@ export class VACrisisLineModal {
     this.isOpen = false;
   }
 
-  private getParentNode() {
-    this.parentNode = document.querySelector('div.va-crisis-line-container');
-  }
-
-  connectedCallback() {
-    this.getParentNode();
-  }
-
+  /* eslint-disable i18next/no-literal-string */
   render() {
     return (
       <Host>
@@ -57,14 +49,12 @@ export class VACrisisLineModal {
           </button>
         </div>
         <va-modal
-          clickToClose
           modalTitle="We’re here anytime, day or night – 24/7"
           onPrimaryButtonClick={() => this.setNotVisible()}
           onCloseEvent={() => this.setNotVisible()}
           visible={this.isOpen}
           large={true}
           uswds={true}
-          ariaHiddenNodeExceptions={[this.parentNode]}
         >
           <p>
             If you are a Veteran in crisis or concerned about one, connect with

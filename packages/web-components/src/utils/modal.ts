@@ -6,10 +6,11 @@
  * https://github.com/KittyGiraudel/focusable-selectors/blob/main/index.js
  */
  export const focusableQueryString = [
-  '.hydrated:not([tabindex^="-"])',
-  '[tabindex]:not([tabindex^="-"])',
-  'input:not([type=hidden]):not([tabindex^="-"])',
-  'textarea:not([tabindex^="-"])',
-  'button:not([tabindex^="-"])',
-  'select:not([tabindex^="-"])',
-].join(',');
+   '.hydrated:not([tabindex^="-"])',
+   '[tabindex]:not([tabindex^="-"])',
+   'a[href]:not([inert]):not([inert] *):not([tabindex^="-"])',
+   'input:not([type=hidden]):not([tabindex^="-"])',
+   'textarea:not([tabindex^="-"])',
+   'button:not([tabindex^="-"])',
+   'select:not([tabindex^="-"])',
+ ].join(',');
