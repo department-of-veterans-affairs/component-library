@@ -1,4 +1,5 @@
-import { Component, Host, h, getAssetPath} from '@stencil/core';
+import { Component, Host, h } from '@stencil/core';
+import vaSeal from '../../assets/va-logo-white.svg';
 
 /**
  * @componentName Minimal Footer
@@ -14,13 +15,12 @@ import { Component, Host, h, getAssetPath} from '@stencil/core';
 export class VAMinimalFooter {
 
   render() {
-    const imageSrc = getAssetPath(`../../assets/va-logo-white.png`);
 
     return (
       <Host>
         <div class="va-footer">
           <a href="/" >
-            <img class="va-logo" src={imageSrc} aria-hidden="true"/>
+            <img class="va-logo" src={vaSeal} aria-hidden="true"/>
           </a>
         </div>
       </Host>
