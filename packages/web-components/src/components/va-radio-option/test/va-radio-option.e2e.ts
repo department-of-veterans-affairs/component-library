@@ -68,7 +68,8 @@ describe('va-radio-option', () => {
 
     const description = await page.find('va-radio-option .description');
     expect(description.textContent).toEqual("Some description text");
-    expect(description.classList.contains('dd-privacy-hidden'))
+    expect(description.classList.contains('dd-privacy-hidden'));
+    expect(description.getAttribute('data-dd-action-name')).toEqual('description');
   });
 
   // Begin USWDS version test
@@ -141,7 +142,8 @@ describe('va-radio-option', () => {
 
     const description = await page.find('va-radio-option .usa-radio__label-description');
     expect(description.textContent).toEqual("Example description");
-    expect(description.classList.contains('dd-privacy-hidden'))
+    expect(description.classList.contains('dd-privacy-hidden'));
+    expect(description.getAttribute('data-dd-action-name')).toEqual('description');
   });
 
 });
