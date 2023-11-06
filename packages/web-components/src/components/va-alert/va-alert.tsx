@@ -30,10 +30,9 @@ export class VaAlert {
 
   /**
    * Determines the icon and border/background color.
-   * One of `info`, `error`, `success`, `warning`, or `continue`
    */
   //  Reflect Prop into DOM for va-banner: https://stenciljs.com/docs/properties#prop-options
-  @Prop({ reflect: true }) status?: string = 'info';
+  @Prop({ reflect: true }) status?: "info" | "warning" | "error" | "success" | "continue" = "info";
 
   /**
    * If `true`, renders the alert with only a background color corresponding
@@ -161,13 +160,19 @@ export class VaAlert {
   render() {
     const { 
       backgroundOnly, 
-      status, 
       visible, 
       closeable, 
       uswds, 
       slim,
     } = this;
+    let status = this.status;
     /* eslint-disable i18next/no-literal-string */
+
+    // Enforce pre-defined statuses
+    const definedStatuses = ["info", "warning", "error", "success", "continue"];
+    if (definedStatuses.indexOf(status) === -1) {
+      status = 'info'
+    }
     const role = status === 'error' ? 'alert' : null;
     const ariaLive = status === 'error' ? 'assertive' : null;
     /* eslint-enable i18next/no-literal-string */

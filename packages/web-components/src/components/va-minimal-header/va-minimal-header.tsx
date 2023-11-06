@@ -21,7 +21,7 @@ export class VaMinimalHeader {
     const {header, subheader} = this;
 
     return (
-      <Host>
+      <Host role="banner">
         <va-official-gov-banner/>
         <va-crisis-line-modal/>
         <div class="va-header">
