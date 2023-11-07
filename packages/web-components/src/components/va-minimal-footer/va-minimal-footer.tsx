@@ -20,7 +20,7 @@ export class VAMinimalFooter {
       <Host>
         <div class="va-footer">
           <a href="/" >
-            <img class="va-logo" src={vaSeal} aria-hidden="true"/>
+            <img class="va-logo" src={vaSeal} alt="VA.gov home"/>
           </a>
         </div>
       </Host>
