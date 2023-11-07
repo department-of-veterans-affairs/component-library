@@ -178,7 +178,7 @@ export class VaModal {
   /**
    * Save focusable children within the modal. Populated on setup
    */
-  @State() focusableChildren: HTMLElement[] = null;
+  focusableChildren: HTMLElement[] = null;
 
   // This click event listener is used to close the modal when clickToClose
   // is true and the user clicks the overlay outside of the modal contents.
@@ -358,16 +358,16 @@ export class VaModal {
     // Prevents scrolling outside modal
     disableBodyScroll(this.el);
 
-    // Get the docs-root element (from Storybook) if present, so that it can be excluded
-    const docsRoot = document.querySelector('#docs-root');
-
     // The elements to exclude from aria-hidden.
-    const hideExceptions = [...this.ariaHiddenNodeExceptions, docsRoot, this.el].flat() as HTMLElement[];
+    const hideExceptions = [...this.ariaHiddenNodeExceptions, this.el] as HTMLElement[];
 
     // Sets aria-hidden="true" to all elements outside of the modal except
     // for the elements in the hideExceptions array.
     // This is used to limit the screen reader to content inside the modal.
     this.undoAriaHidden = hideOthers(hideExceptions);
+
+    // "Unhides" the root element for Storybook, needed for screen readers
+    document.querySelector('#docs-root')?.setAttribute('aria-hidden', 'false');
 
     // Conditionally track the event.
     if (!this.disableAnalytics) {
