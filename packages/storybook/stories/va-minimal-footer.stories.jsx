@@ -14,6 +14,8 @@ export default {
   },
 };
 
+const defaultArgs = {};
+
 const Template = () => {
   return (
     <va-minimal-footer />
