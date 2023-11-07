@@ -11,8 +11,8 @@ describe('va-minimal-footer', () => {
       <va-minimal-footer>
         <mock:shadow-root>
           <div class="va-footer">
-            <a href="/">
-              <img alt="VA.gov home" class="va-logo" src="[object Object]">
+            <a href="/" title="Go to VA.gov">
+              <img alt="VA logo and Seal, U.S. Department of Veterans Affairs" class="va-logo" src="[object Object]">
             </a>
           </div>
         </mock:shadow-root>

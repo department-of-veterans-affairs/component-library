@@ -19,8 +19,8 @@ export class VAMinimalFooter {
     return (
       <Host>
         <div class="va-footer">
-          <a href="/" >
-            <img class="va-logo" src={vaSeal} alt="VA.gov home"/>
+          <a href="/" title="Go to VA.gov" >
+            <img class="va-logo" src={vaSeal} alt="VA logo and Seal, U.S. Department of Veterans Affairs"/>
           </a>
         </div>
       </Host>
