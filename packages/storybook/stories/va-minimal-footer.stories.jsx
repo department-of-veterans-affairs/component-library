@@ -14,9 +14,8 @@ export default {
   },
 };
 
-const defaultArgs = {};
 
-const Template = ({ }) => {
+const Template = ({}) => {
   return (
     <va-minimal-footer />
   );
