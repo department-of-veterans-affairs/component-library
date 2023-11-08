@@ -53,79 +53,72 @@ export class VACrisisLineModal {
           onCloseEvent={() => this.setNotVisible()}
           visible={this.isOpen}
           large={true}
+          uswds={true}
         >
-          <div
-            id="modal-crisisline"
-            class="va-overlay va-modal va-modal-large"
-            role="alertdialog"
-          >
-            <div class="va-crisis-panel va-modal-inner">
-              <div class="va-overlay-body va-crisis-panel-body">
-                <p>
-                  If you are a Veteran in crisis or concerned about one, connect
-                  with our caring, qualified responders for confidential help.
-                  Many of them are Veterans themselves.
-                </p>
-                <ul class="va-crisis-panel-list">
-                  <li>
-                    <i
-                      class="fa fa-phone va-crisis-panel-icon"
-                      aria-hidden="true"
-                    />
-                    <span>
-                      Call{' '}
-                      <strong>
-                        <va-telephone contact="988" /> and select 1
-                      </strong>
-                    </span>
-                  </li>
-                  <li>
-                    <i
-                      class="fa fa-mobile-alt va-crisis-panel-icon"
-                      aria-hidden="true"
-                    />
-                    <span>
-                      Text&nbsp;
-                      <strong>
-                        <va-telephone sms contact="838255" />
-                      </strong>
-                    </span>
-                  </li>
-                  <li>
-                    <i
-                      class="fa fa-comments va-crisis-panel-icon"
-                      aria-hidden="true"
-                    />
-                    <a
-                      class="no-external-icon"
-                      href="https://www.veteranscrisisline.net/get-help-now/chat/"
-                    >
-                      Start a confidential chat
-                    </a>
-                  </li>
-                  <li>
-                    <i
-                      class="fa fa-deaf va-crisis-panel-icon"
-                      aria-hidden="true"
-                    />
-                    <p>
-                      Call TTY if you have hearing loss{' '}
-                      <strong>
-                        <va-telephone tty contact={CONTACTS.CRISIS_TTY} />
-                      </strong>
-                    </p>
-                  </li>
-                </ul>
-                Get more resources at{' '}
-                <a
-                  class="no-external-icon"
-                  href="https://www.veteranscrisisline.net/"
-                >
-                  VeteransCrisisLine.net
-                </a>
-              </div>
-            </div>
-          </div>
+          <p>
+            If you are a Veteran in crisis or concerned about one, connect
+            with our caring, qualified responders for confidential help.
+            Many of them are Veterans themselves.
+          </p>
+          <ul class="va-crisis-panel-list">
+            <li>
+              <i
+                class="fa fa-phone va-crisis-panel-icon"
+                aria-hidden="true"
+              />
+              <span>
+                Call{' '}
+                <strong>
+                  <va-telephone contact="988" /> and select 1
+                </strong>
+              </span>
+            </li>
+            <li>
+              <i
+                class="fa fa-mobile-alt va-crisis-panel-icon"
+                aria-hidden="true"
+              />
+              <span>
+                Text&nbsp;
+                <strong>
+                  <va-telephone sms contact="838255" />
+                </strong>
+              </span>
+            </li>
+            <li>
+              <i
+                class="fa fa-comments va-crisis-panel-icon"
+                aria-hidden="true"
+              />
+              <a
+                class="no-external-icon"
+                href="https://www.veteranscrisisline.net/get-help-now/chat/"
+              >
+                Start a confidential chat
+              </a>
+            </li>
+            <li>
+              <i
+                class="fa fa-deaf va-crisis-panel-icon"
+                aria-hidden="true"
+              />
+              <p>
+                Call TTY if you have hearing loss{' '}
+                <strong>
+                  <va-telephone tty contact={CONTACTS.CRISIS_TTY} />
+                </strong>
+              </p>
+            </li>
+          </ul>
+          <p>
+            Get more resources at{' '}
+            <a
+              class="no-external-icon"
+              href="https://www.veteranscrisisline.net/"
+            >
+              VeteransCrisisLine.net
+            </a>
+          </p>
         </va-modal>
       </Host>
     );
