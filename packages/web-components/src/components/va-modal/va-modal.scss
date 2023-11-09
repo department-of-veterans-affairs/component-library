@@ -16,8 +16,8 @@
   padding: 0px // => Due to icons
 }
 
-
-.usa-modal__heading {
+.usa-modal__heading,
+.usa-modal--lg .usa-modal__heading {
   font-family: var(--font-serif);
 }
 
