@@ -13,8 +13,8 @@ describe('va-minimal-header', () => {
           <va-official-gov-banner></va-official-gov-banner>
           <va-crisis-line-modal></va-crisis-line-modal>
           <div class="va-header">
-            <a aria-label="Link to Homepage" class="va-logo-link" href="/">
-              <img aria-hidden="true" class="va-logo" src="[object Object]">
+            <a title="Go to VA.gov" class="va-logo-link" href="/">
+              <img alt="VA logo and Seal, U.S. Department of Veterans Affairs" class="va-logo" src="[object Object]">
             </a>
             <div class="header-container">
               <h1>Header</h1>
@@ -36,8 +36,8 @@ describe('va-minimal-header', () => {
           <va-official-gov-banner></va-official-gov-banner>
           <va-crisis-line-modal></va-crisis-line-modal>
           <div class="va-header">
-            <a aria-label="Link to Homepage" class="va-logo-link" href="/">
-              <img aria-hidden="true" class="va-logo" src="[object Object]">
+            <a title="Go to VA.gov" class="va-logo-link" href="/">
+              <img alt="VA logo and Seal, U.S. Department of Veterans Affairs" class="va-logo" src="[object Object]">
             </a>
             <div class="header-container">
               <h1>Header</h1>

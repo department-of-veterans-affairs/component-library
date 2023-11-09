@@ -25,8 +25,8 @@ export class VaMinimalHeader {
         <va-official-gov-banner />
         <va-crisis-line-modal />
         <div class="va-header">
-          <a href="/" aria-label="Link to Homepage" class="va-logo-link">
-            <img class="va-logo" src={vaSeal} aria-hidden="true" />
+          <a href="/" title="Go to VA.gov" class="va-logo-link">
+            <img class="va-logo" src={vaSeal} alt="VA logo and Seal, U.S. Department of Veterans Affairs" />
           </a>
           <div class="header-container">
             <h1>{header}</h1>
