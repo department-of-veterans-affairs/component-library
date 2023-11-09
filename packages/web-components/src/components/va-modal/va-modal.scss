@@ -342,6 +342,11 @@ i::before {
   .va-modal-alert .alert-actions button + button {
     margin: 1.6rem 0 0 0;
   }
+
+  .usa-modal--lg .usa-modal__main {
+    max-width: -webkit-fill-available;
+    max-width: -moz-fit-content;
+  }
 }
 
 :host([large]:not([large='false'])) .va-modal-inner {
