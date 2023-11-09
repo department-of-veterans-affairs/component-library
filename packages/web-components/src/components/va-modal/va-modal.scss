@@ -62,6 +62,15 @@
   content: '\F00C'; /* fa-check */
 }
 
+.usa-modal::before {
+  padding-top: 0;
+
+  :host([large='true']) &,
+  :host([large]:not([large='false'])) & {
+    padding-top: 20px;
+  }
+}
+
 :host([status='warning']) .usa-modal {
   border-left-color: var(--color-gold);
   background-color: var(--color-gold-lightest);
