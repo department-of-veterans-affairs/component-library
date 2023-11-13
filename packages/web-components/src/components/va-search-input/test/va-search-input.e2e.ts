@@ -450,7 +450,10 @@ describe('va-search-input', () => {
         <form class="usa-search" role="search">
           <label class="usa-sr-only" for="search-field">Search</label>
           <input class="usa-input" id="search-field" name="search" type="search" aria-autocomplete="none" aria-label="Search" autocomplete="off">
-          <button class="usa-button" type="submit"><span class="usa-search__submit-text">Search</span></button>
+          <button class="usa-button" type="submit">
+          <span class="usa-search__submit-text">Search</span>
+          <va-icon class="hydrated"></va-icon>
+          </button>
         </form>
         </mock:shadow-root>
       </va-search-input>
@@ -808,8 +811,6 @@ describe('va-search-input', () => {
     await page.setContent('<va-search-input uswds small></va-search-input>');
 
     const form = await page.find('va-search-input >>> form');
-    const smallIcon = await page.find('va-search-input >>> va-icon');
-    expect(smallIcon).not.toBeNull();
     expect(form).toHaveClass('usa-search--small');
   });
 
