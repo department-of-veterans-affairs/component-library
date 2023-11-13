@@ -462,13 +462,11 @@ export class VaSearchInput {
               onClick={handleButtonClick}
             >
               {!small && <span class="usa-search__submit-text">Search</span>}
-              {small &&
-                <va-icon
-                  icon="search"
-                  size={3}
-                  srtext="Search"
-                />
-              }
+              <va-icon
+                icon="search"
+                size={3}
+                srtext="Search"
+              />
             </button>
             {isListboxOpen && (
               <ul

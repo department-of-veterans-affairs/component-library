@@ -18,17 +18,19 @@ export default {
 };
 
 const Template = ({'button-text': buttonText, value, label, suggestions, uswds, small, big }) => (
-  <VaSearchInput
-    buttonText={buttonText}
-    value={value}
-    label={label}
-    onInput={e => console.log(e)}
-    onSubmit={e => console.log(e)}
-    suggestions={suggestions}
-    uswds={uswds}
-    small={small}
-    big={big}
-  />
+  <div style={{ height: '400px'}}>
+    <VaSearchInput
+      buttonText={buttonText}
+      value={value}
+      label={label}
+      onInput={e => console.log(e)}
+      onSubmit={e => console.log(e)}
+      suggestions={suggestions}
+      uswds={uswds}
+      small={small}
+      big={big}
+    />
+  </div>
 );
 
 const defaultArgs = {
