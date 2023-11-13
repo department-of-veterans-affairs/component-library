@@ -3,8 +3,8 @@ import {
   Element,
   Event,
   EventEmitter,
-  Host, 
-  Prop, 
+  Host,
+  Prop,
   h,
   Listen,
 } from '@stencil/core';
@@ -12,8 +12,8 @@ import classnames from 'classnames';
 
 /**
  * @componentName Notification
- * @maturityCategory caution
- * @maturityLevel proposed
+ * @maturityCategory dont_use
+ * @maturityLevel deprecated
  */
 
 @Component({
@@ -84,7 +84,7 @@ export class VaNotification {
    * If `true`, the component-library-analytics event is disabled.
    */
   @Prop() disableAnalytics?: boolean = false;
-  
+
   /**
    * Fires when the component is closed by clicking on the close icon. This fires only
    * when closeable is true.
@@ -106,7 +106,7 @@ export class VaNotification {
   componentLibraryAnalytics: EventEmitter;
 
   /**
-   * Listen for the va-link GA event and capture it so 
+   * Listen for the va-link GA event and capture it so
    * that we can emit a single va-notification GA event that includes
    * the va-link details.
    */
