@@ -437,27 +437,15 @@ describe('va-search-input', () => {
     await axeCheck(page);
   });
 
-  it('uswds renders with button with text', async () => {
+  it('uswds renders button with text', async () => {
     const page = await newE2EPage();
     await page.setContent(
       '<va-search-input uswds button-text="Search VA.gov"></va-search-input>',
     );
 
-    const element = await page.find('va-search-input');
-    expect(element).toEqualHtml(`
-      <va-search-input button-text="Search VA.gov" class="hydrated" value="" uswds="">
-        <mock:shadow-root>
-        <form class="usa-search" role="search">
-          <label class="usa-sr-only" for="search-field">Search</label>
-          <input class="usa-input" id="search-field" name="search" type="search" aria-autocomplete="none" aria-label="Search" autocomplete="off">
-          <button class="usa-button" type="submit">
-          <span class="usa-search__submit-text">Search</span>
-          <va-icon class="hydrated"></va-icon>
-          </button>
-        </form>
-        </mock:shadow-root>
-      </va-search-input>
-    `);
+    const submitTextEl = await page.find('va-search-input >> button');
+    const submitText = submitTextEl.textContent;
+    expect(submitText).toBe('Search VA.gov');
   });
 
   it('uswds fires input event on key press', async () => {

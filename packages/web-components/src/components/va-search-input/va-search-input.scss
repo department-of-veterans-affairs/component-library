@@ -34,27 +34,11 @@
   max-width: 100%;
 }
 
-/* if small prop is active, or, if mobile size is active, display va-icon search button */
-:host([small]:not([small='false'])) va-icon {
-  display: block;
-}
-
-.usa-search__submit-text {
-  display: none;
-}
-
 .usa-search [type=submit] {
   width: 48px;
 } 
 
 @media screen and (min-width: 480px) {  
-  :host(:not([small][small='true'])) va-icon, 
-  :host(:not([big][big='false'])) va-icon {
-    display: none;
-  } 
-  .usa-search__submit-text {
-    display: block;
-  } 
   :host .usa-search [type=submit] {
     width: auto;
   }
