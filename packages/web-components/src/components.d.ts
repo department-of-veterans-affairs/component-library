@@ -949,6 +949,10 @@ export namespace Components {
     }
     interface VaSearchInput {
         /**
+          * If `true`, the component will use the big variant. Only available when `uswds` is `true`.
+         */
+        "big"?: boolean;
+        /**
           * Text displayed inside the search button
          */
         "buttonText"?: string;
@@ -957,9 +961,17 @@ export namespace Components {
          */
         "label"?: string;
         /**
+          * If `true`, the component will use the small variant. Only available when `uswds` is `true`.
+         */
+        "small"?: boolean;
+        /**
           * An array of strings containing suggestions to be displayed in listbox. This component displays up to 5 suggestions.
          */
         "suggestions"?: any;
+        /**
+          * Whether or not the component will use USWDS v3 styling.
+         */
+        "uswds"?: boolean;
         /**
           * The value of the input field
          */
@@ -2881,6 +2893,10 @@ declare namespace LocalJSX {
     }
     interface VaSearchInput {
         /**
+          * If `true`, the component will use the big variant. Only available when `uswds` is `true`.
+         */
+        "big"?: boolean;
+        /**
           * Text displayed inside the search button
          */
         "buttonText"?: string;
@@ -2893,9 +2909,17 @@ declare namespace LocalJSX {
          */
         "onComponent-library-analytics"?: (event: VaSearchInputCustomEvent<any>) => void;
         /**
+          * If `true`, the component will use the small variant. Only available when `uswds` is `true`.
+         */
+        "small"?: boolean;
+        /**
           * An array of strings containing suggestions to be displayed in listbox. This component displays up to 5 suggestions.
          */
         "suggestions"?: any;
+        /**
+          * Whether or not the component will use USWDS v3 styling.
+         */
+        "uswds"?: boolean;
         /**
           * The value of the input field
          */

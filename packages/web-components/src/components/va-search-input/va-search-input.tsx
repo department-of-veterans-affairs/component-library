@@ -10,6 +10,7 @@ import {
   EventEmitter,
   Event,
 } from '@stencil/core';
+import classnames from 'classnames';
 
 /**
  * @componentName Search input
@@ -19,7 +20,7 @@ import {
 
 @Component({
   tag: 'va-search-input',
-  styleUrl: 'va-search-input.css',
+  styleUrl: 'va-search-input.scss',
   shadow: true,
 })
 export class VaSearchInput {
@@ -71,6 +72,21 @@ export class VaSearchInput {
   // $('va-search-input').getAttribute('value') will be incorrect
 
   /**
+   * Whether or not the component will use USWDS v3 styling.
+   */
+  @Prop() uswds?: boolean = false;
+
+  /**
+   * If `true`, the component will use the big variant. Only available when `uswds` is `true`.
+   */
+  @Prop() big?: boolean = false;
+
+  /**
+   * If `true`, the component will use the small variant. Only available when `uswds` is `true`.
+   */
+  @Prop() small?: boolean = false;
+
+  /**
    * If suggestions are provided, then format suggestions and open the listbox.
    * Limits suggestions to 5 and sorts them.
    */
@@ -120,7 +136,14 @@ export class VaSearchInput {
    * Fires a submit and analytics events.
    */
   private handleSubmit = () => {
-    this.inputRef.dispatchEvent(
+    const form = this.el.shadowRoot.querySelector('form');
+    if (form) {
+      form.onsubmit = (event) => {
+        event.preventDefault();
+      }
+    }
+
+    this.el.dispatchEvent(
       new SubmitEvent('submit', {
         bubbles: true,
         cancelable: true,
@@ -376,6 +399,9 @@ export class VaSearchInput {
       isListboxOpen,
       label,
       value,
+      uswds,
+      big,
+      small,
     } = this;
 
     /**
@@ -401,6 +427,77 @@ export class VaSearchInput {
     const role = isCombobox ? 'combobox' : undefined;
     const type = this.el.getAttribute('type') || 'text';
     /* eslint-enable i18next/no-literal-string */
+
+    if (uswds) {
+      const formClasses = classnames({
+        'usa-search': true,
+        'usa-search--big': big && !small,
+        'usa-search--small': small && !big,
+      });
+      return (
+        <Host onBlur={handleBlur}>
+          <form class={formClasses} role="search">
+            <label class="usa-sr-only" htmlFor="search-field">Search</label>
+            <input 
+              class="usa-input" 
+              id="search-field" 
+              name="search"
+              type="search"
+              ref={el => (this.inputRef = el as HTMLInputElement)}
+              aria-autocomplete={ariaAutoComplete}
+              aria-controls={ariaControls}
+              aria-expanded={ariaExpanded}
+              aria-haspopup={ariaHasPopup}
+              aria-label={label}
+              autocomplete="off"
+              onFocus={handleInputFocus}
+              onInput={handleInput}
+              onKeyDown={handleInputKeyDown}
+              role={role}
+              value={value}
+            />
+            <button 
+              class="usa-button" 
+              type="submit"
+              onClick={handleButtonClick}
+            >
+              {!small && <span class="usa-search__submit-text">Search</span>}
+              {small &&
+                <va-icon
+                  icon="search"
+                  size={3}
+                  srtext="Search"
+                />
+              }
+            </button>
+            {isListboxOpen && (
+              <ul
+                id="va-search-listbox"
+                aria-label="Search Suggestions"
+                role="listbox"
+              >
+                {formattedSuggestions.map(
+                  (suggestion: string | HTMLElement, index: number) => {
+                    return (
+                      <li
+                        id={`listbox-option-${index}`}
+                        class="va-search-suggestion"
+                        onClick={() => handleListboxClick(index)}
+                        onKeyDown={e => handleListboxKeyDown(e, index)}
+                        role="option"
+                        tabIndex={-1}
+                      >
+                        {suggestion}
+                      </li>
+                    );
+                  },
+                )}
+              </ul>
+            )}
+          </form>
+        </Host>
+      )
+    }
 
     return (
       <Host onBlur={handleBlur}>
