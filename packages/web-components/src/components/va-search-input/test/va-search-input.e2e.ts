@@ -729,7 +729,6 @@ describe('va-search-input', () => {
       'va-search-input >>> [role="option"]',
     );
 
-    console.log('*** firstSuggestion', firstSuggestion);
     await firstSuggestion.click();
 
     expect(submitSpy).toHaveReceivedEvent();
