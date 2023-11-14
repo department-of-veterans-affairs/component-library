@@ -439,7 +439,7 @@ export class VaSearchInput {
       return (
         <Host onBlur={handleBlur}>
           <form class={formClasses} role="search">
-            <label class="usa-sr-only" htmlFor="search-field">{buttonText}</label>
+            <label class="usa-sr-only" htmlFor="search-field">{label}</label>
             <input 
               class="usa-input" 
               id="search-field" 

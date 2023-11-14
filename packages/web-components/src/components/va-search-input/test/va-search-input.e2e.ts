@@ -437,15 +437,27 @@ describe('va-search-input', () => {
     await axeCheck(page);
   });
 
-  it('uswds renders button with text', async () => {
+  it('uswds renders with button with text', async () => {
     const page = await newE2EPage();
     await page.setContent(
       '<va-search-input uswds button-text="Search VA.gov"></va-search-input>',
     );
 
-    const submitTextEl = await page.find('va-search-input >> button');
-    const submitText = submitTextEl.textContent;
-    expect(submitText).toBe('Search VA.gov');
+    const element = await page.find('va-search-input');
+    expect(element).toEqualHtml(`
+      <va-search-input button-text="Search VA.gov" class="hydrated" value="" uswds="">
+        <mock:shadow-root>
+        <form class="usa-search" role="search">
+          <label class="usa-sr-only" for="search-field">Search</label>
+          <input class="usa-input" id="search-field" name="search" type="search" aria-autocomplete="none" aria-label="Search" autocomplete="off">
+          <button class="usa-button" type="submit">
+          <span class="usa-search__submit-text">Search VA.gov</span>
+          <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgd2lkdGg9IjI0Ij48cGF0aCBkPSJNMCAwaDI0djI0SDB6IiBmaWxsPSJub25lIi8+PHBhdGggZmlsbD0iI2ZmZiIgZD0iTTE1LjUgMTRoLS43OWwtLjI4LS4yN0E2LjQ3MSA2LjQ3MSAwIDAgMCAxNiA5LjUgNi41IDYuNSAwIDEgMCA5LjUgMTZjMS42MSAwIDMuMDktLjU5IDQuMjMtMS41N2wuMjcuMjh2Ljc5bDUgNC45OUwyMC40OSAxOWwtNC45OS01em0tNiAwQzcuMDEgMTQgNSAxMS45OSA1IDkuNVM3LjAxIDUgOS41IDUgMTQgNy4wMSAxNCA5LjUgMTEuOTkgMTQgOS41IDE0eiIvPjwvc3ZnPg==" class="usa-search__submit-icon" alt="Search">
+          </button>
+        </form>
+        </mock:shadow-root>
+      </va-search-input>
+    `);
   });
 
   it('uswds fires input event on key press', async () => {
