@@ -34,9 +34,9 @@ const Template = ({'button-text': buttonText, value, label, suggestions, uswds, 
 );
 
 const defaultArgs = {
-  'button-text': undefined,
+  'button-text': 'Search',
   'value': 'benefits',
-  'label': 'Search',
+  'label': 'Search VA.gov',
   'suggestions': undefined,
   'uswds': true,
   'small': false,

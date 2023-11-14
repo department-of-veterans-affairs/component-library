@@ -26,17 +26,9 @@
   top: 52px;
 }
 
-.usa-button {
-  line-height: 0;
-}
-
 .usa-input {
-  max-width: 100%;
+  max-width: 1024px;
 }
-
-.usa-search [type=submit] {
-  width: 48px;
-} 
 
 @media screen and (min-width: 480px) {  
   :host .usa-search [type=submit] {
