@@ -1919,7 +1919,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@department-of-veterans-affairs/css-library@npm:^0.0.1":
+"@department-of-veterans-affairs/css-library@npm:0.0.1":
   version: 0.0.1
   resolution: "@department-of-veterans-affairs/css-library@npm:0.0.1"
   dependencies:
@@ -2057,7 +2057,7 @@ __metadata:
   dependencies:
     "@axe-core/puppeteer": ^4.4.0
     "@babel/core": ^7.12.13
-    "@department-of-veterans-affairs/css-library": ^0.0.1
+    "@department-of-veterans-affairs/css-library": 0.0.1
     "@department-of-veterans-affairs/formation": ^7.0.8
     "@stencil/core": ^2.19.2
     "@stencil/postcss": ^2.0.0
