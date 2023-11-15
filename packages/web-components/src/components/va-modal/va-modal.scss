@@ -16,8 +16,8 @@
   padding: 0px // => Due to icons
 }
 
-
-.usa-modal__heading {
+.usa-modal__heading,
+.usa-modal--lg .usa-modal__heading {
   font-family: var(--font-serif);
 }
 
@@ -60,6 +60,15 @@
 :host([status='success']) .usa-modal::before {
   color: var(--color-gray-dark);
   content: '\F00C'; /* fa-check */
+}
+
+.usa-modal::before {
+  padding-top: 0;
+
+  :host([large='true']) &,
+  :host([large]:not([large='false'])) & {
+    padding-top: 20px;
+  }
 }
 
 :host([status='warning']) .usa-modal {
@@ -332,6 +341,11 @@ i::before {
 
   .va-modal-alert .alert-actions button + button {
     margin: 1.6rem 0 0 0;
+  }
+
+  .usa-modal--lg .usa-modal__main {
+    max-width: -webkit-fill-available;
+    max-width: -moz-fit-content;
   }
 }
 
