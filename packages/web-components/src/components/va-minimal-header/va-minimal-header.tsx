@@ -22,17 +22,15 @@ export class VaMinimalHeader {
 
     return (
       <Host role="banner">
-        <va-official-gov-banner/>
-        <va-crisis-line-modal/>
+        <va-official-gov-banner />
+        <va-crisis-line-modal />
         <div class="va-header">
-
-          <a href="/" title="Go to VA.gov">
-            <img class="va-logo" src={vaSeal} alt="VA logo and Seal, U.S. Department of Veterans Affairs"/>
+          <a href="/" title="Go to VA.gov" class="va-logo-link">
+            <img class="va-logo" src={vaSeal} alt="VA logo and Seal, U.S. Department of Veterans Affairs" />
           </a>
-          <div class='header-container'>
+          <div class="header-container">
             <h1>{header}</h1>
-            {this.subheader &&
-              <h2>{subheader}</h2>}
+            {this.subheader && <h2>{subheader}</h2>}
           </div>
         </div>
       </Host>
