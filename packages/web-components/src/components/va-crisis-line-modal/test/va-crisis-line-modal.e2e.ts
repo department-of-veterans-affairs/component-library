@@ -24,60 +24,56 @@ describe('va-crisis-line-modal', () => {
         </button>
       </div>
       <va-modal class=\"hydrated\" large=\"\">
-        <div class=\"va-modal va-modal-large va-overlay\" id=\"modal-crisisline\" role=\"alertdialog\">
-          <div class=\"va-crisis-panel va-modal-inner\">
-            <div class=\"va-crisis-panel-body va-overlay-body\">
-              <p>
-                If you are a Veteran in crisis or concerned about one, connect with our caring, qualified responders for confidential help. Many of them are Veterans themselves.
-              </p>
-              <ul class=\"va-crisis-panel-list\">
-                <li>
-                  <i aria-hidden=\"true\" class=\"fa fa-phone va-crisis-panel-icon\"></i>
-                  <span>
-                    Call
-                    <strong>
-                      <va-telephone class=\"hydrated\"></va-telephone>
-                      and select 1
-                    </strong>
-                  </span>
-                </li>
-                <li>
-                  <i aria-hidden=\"true\" class=\"fa fa-mobile-alt va-crisis-panel-icon\"></i>
-                  <span>
-                    Text
-                    <strong>
-                      <va-telephone class=\"hydrated\"></va-telephone>
-                    </strong>
-                  </span>
-                </li>
-                <li>
-                  <i aria-hidden=\"true\" class=\"fa fa-comments va-crisis-panel-icon\"></i>
-                  <a class=\"no-external-icon\" href=\"https://www.veteranscrisisline.net/get-help-now/chat/\">
-                    Start a confidential chat
-                  </a>
-                </li>
-                <li>
-                  <i aria-hidden=\"true\" class=\"fa fa-deaf va-crisis-panel-icon\"></i>
-                  <p>
-                    Call TTY if you have hearing loss
-                    <strong>
-                      <va-telephone class=\"hydrated\"></va-telephone>
-                    </strong>
-                  </p>
-                </li>
-              </ul>
-              Get more resources at
-              <a class=\"no-external-icon\" href=\"https://www.veteranscrisisline.net/\">
-                VeteransCrisisLine.net
-              </a>
-            </div>
-          </div>
-        </div>
+        <p>
+          If you are a Veteran in crisis or concerned about one, connect with our caring, qualified responders for confidential help. Many of them are Veterans themselves.
+        </p>
+        <ul class=\"va-crisis-panel-list\">
+          <li>
+            <i aria-hidden=\"true\" class=\"fa fa-phone va-crisis-panel-icon\"></i>
+            <span>
+              Call
+              <strong>
+                <va-telephone class=\"hydrated\"></va-telephone>
+                and select 1
+              </strong>
+            </span>
+          </li>
+          <li>
+            <i aria-hidden=\"true\" class=\"fa fa-mobile-alt va-crisis-panel-icon\"></i>
+            <span>
+              Text
+              <strong>
+                <va-telephone class=\"hydrated\"></va-telephone>
+              </strong>
+            </span>
+          </li>
+          <li>
+            <i aria-hidden=\"true\" class=\"fa fa-comments va-crisis-panel-icon\"></i>
+            <a class=\"no-external-icon\" href=\"https://www.veteranscrisisline.net/get-help-now/chat/\">
+              Start a confidential chat
+            </a>
+          </li>
+          <li>
+            <i aria-hidden=\"true\" class=\"fa fa-deaf va-crisis-panel-icon\"></i>
+            <p>
+              Call TTY if you have hearing loss
+              <strong>
+                <va-telephone class=\"hydrated\"></va-telephone>
+              </strong>
+            </p>
+          </li>
+        </ul>
+        <p>
+          Get more resources at
+          <a class=\"no-external-icon\" href=\"https://www.veteranscrisisline.net/\">
+            VeteransCrisisLine.net
+          </a>
+        </p>
       </va-modal>
     </mock:shadow-root>
   </va-crisis-line-modal>`);
   });
-  
+
   it('shows modal when triggered', async () => {
     const page = await newE2EPage();
     await page.setContent(`<va-crisis-line-modal />`);
