@@ -14,6 +14,10 @@
   }
 }
 
+.va-logo-link:focus {
+  outline: 2px solid var(--color-gold-light);
+}
+
 .va-logo {
   margin-right: 8px;
   min-height: 30px;

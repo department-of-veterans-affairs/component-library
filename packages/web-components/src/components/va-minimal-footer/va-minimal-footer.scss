@@ -1,0 +1,15 @@
+:host {
+  display: flex;
+  justify-content: center;
+  background-color: var(--color-primary-darkest);
+}
+
+.va-footer {
+  box-sizing: border-box;
+  width: 1000px;
+  padding: 32px 8px;
+
+  img.va-logo {
+    width: 200px;
+  }
+}

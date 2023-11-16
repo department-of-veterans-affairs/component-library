@@ -442,7 +442,6 @@ export class VaModal {
           <div class={wrapperClass}
             role={status === 'warning' || status === 'error' ? 'alertdialog' : 'dialog' }
             aria-label={ariaLabel}
-            aria-describedby="description"
             aria-modal="true"
           >
             <div class={contentClass}>
