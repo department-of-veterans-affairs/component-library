@@ -87,7 +87,7 @@ export class VaModal {
   componentLibraryAnalytics: EventEmitter;
 
   /**
-   * Listen for the va-button GA event and capture it so 
+   * Listen for the va-button GA event and capture it so
    * that we can emit a single va-modal GA event that includes
    * the va-button details in handlePrimaryButtonClick and
    * handleSecondaryButtonClick.
@@ -165,7 +165,7 @@ export class VaModal {
   @Prop({ reflect: true }) visible?: boolean = false;
 
   /**
-   * Additional DOM-nodes that should not be hidden from screen readers. 
+   * Additional DOM-nodes that should not be hidden from screen readers.
    * Useful when an open modal shouldn't hide all content behind the overlay.
    */
   @Prop() ariaHiddenNodeExceptions?: HTMLElement[] = [];
@@ -427,7 +427,7 @@ export class VaModal {
         'usa-modal__heading': true,
         'va-modal-alert-title': status,
       });
-      const closingButton = forcedModal ? '' 
+      const closingButton = forcedModal ? ''
       : <button
           aria-label={btnAriaLabel}
           class="va-modal-close"
@@ -439,10 +439,9 @@ export class VaModal {
         </button>;
       return (
         <Host>
-          <div class={wrapperClass} 
+          <div class={wrapperClass}
             role={status === 'warning' || status === 'error' ? 'alertdialog' : 'dialog' }
             aria-label={ariaLabel}
-            aria-describedby="description"
             aria-modal="true"
           >
             <div class={contentClass}>

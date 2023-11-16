@@ -1,6 +1,6 @@
 @use 'sass:math';
 
-@import 'variables';
+@import '~@department-of-veterans-affairs/css-library/dist/tokens/scss/variables.scss';
 
 // Uses $v3-font-base-size from _variables.scss
 @function rem-override($original) {
