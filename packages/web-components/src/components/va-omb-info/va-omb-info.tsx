@@ -50,6 +50,12 @@ export class VaOmbInfo {
     this.modalContents = null;
   };
 
+  // Redirects focus back to the modal, if the modal is open/visible
+  private trapFocus = () => {
+    const modalCloseButton = this.el.shadowRoot.querySelector('va-modal').shadowRoot.querySelector('button.va-modal-close') as HTMLElement;
+    modalCloseButton?.focus();
+  }
+
   componentWillLoad() {
     /* eslint-disable i18next/no-literal-string */
     this.modalContents = (
@@ -136,6 +142,7 @@ export class VaOmbInfo {
         <div>
           <va-button
             onClick={toggleModalVisible}
+            onFocusin={this.trapFocus}
             secondary
             text="View Privacy Act Statement"
           />

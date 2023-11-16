@@ -1,4 +1,4 @@
-import { Component, Host, State, h } from '@stencil/core';
+import { Component, Host, State, h, Element } from '@stencil/core';
 import arrowRightSvg from '../../assets/arrow-right-white.svg';
 import { CONTACTS } from '../../contacts';
 
@@ -14,6 +14,8 @@ import { CONTACTS } from '../../contacts';
   shadow: true,
 })
 export class VACrisisLineModal {
+  @Element() el: HTMLElement;
+
   @State() isOpen: boolean = false;
 
   setVisible() {
@@ -24,12 +26,21 @@ export class VACrisisLineModal {
     this.isOpen = false;
   }
 
+  // Redirects focus back to the modal, if the modal is open/visible
+  private trapFocus() {
+    const modalCloseButton = this.el.shadowRoot
+      .querySelector('va-modal')
+      .shadowRoot.querySelector('button.va-modal-close') as HTMLElement;
+    modalCloseButton?.focus();
+  }
+
   render() {
     return (
       <Host>
         <div class="va-crisis-line-container">
           <button
             onClick={() => this.setVisible()}
+            onFocusin={this.trapFocus}
             data-show="#modal-crisisline"
             class="va-crisis-line va-overlay-trigger"
             part="button"
