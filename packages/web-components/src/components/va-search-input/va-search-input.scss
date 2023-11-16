@@ -1,7 +1,47 @@
-@import '../../mixins/buttons.css';
-@import '../../mixins/inputs.css';
+@forward 'settings';
+
+@use 'uswds-helpers/src/styles/usa-sr-only';
+@use 'usa-search/src/styles/usa-search';
+@use 'usa-button/src/styles/usa-button';
+
+@import '../../mixins/uswds-error-border.scss';
+@import '../../global/formation_overrides';
 
 :host {
+  display: block;
+  border: none;
+  padding: 0;
+}
+
+:host([uswds]:not([uswds='false'])) .usa-input {
+  margin-top: 0;
+}
+
+:host([uswds]:not([uswds='false'])) #va-search-listbox {
+  top: 37px;
+  z-index: 1;
+}
+
+:host([uswds]:not([uswds='false'])[big="true"]) #va-search-listbox  {
+  top: 52px;
+}
+
+.usa-input {
+  max-width: 1024px;
+}
+
+@media screen and (min-width: 480px) {  
+  :host .usa-search [type=submit] {
+    width: auto;
+  }
+}
+
+/* Original Component Styles. */
+
+@import '../../mixins/inputs.css';
+@import '../../mixins/buttons.css';
+
+:host(:not([uswds="true"],[uswds=""])) {
   display: block;
   align-items: center;
   display: flex;
@@ -11,11 +51,11 @@
 #va-search-input {
   border-color: var(--color-gray);
   display: inline-block;
-  height: 4.8rem;
+  height: 48px;
   margin: 0;
   max-width: none;
-  min-width: 24.8rem;
-  padding: 1.2rem 0.8rem;
+  min-width: 248px;
+  padding: 12px 8px;
 }
 
 #va-search-input:focus {
@@ -27,7 +67,7 @@
   background-color: var(--color-primary);
   border-radius: 0 3px 3px 0;
   display: flex;
-  height: 4.8rem;
+  height: 48px;
 }
 
 #va-search-button:focus {
@@ -51,7 +91,7 @@ i::before {
 }
 
 #va-search-button-text {
-  margin-left: 0.4rem;
+  margin-left: 4px;
 }
 
 #va-search-listbox {
@@ -59,18 +99,18 @@ i::before {
   box-shadow: 0px 2px 6px 1px rgba(20, 20, 20, 0.14);
   display: block;
   left: 0;
-  line-height: 2.4rem;
+  line-height: 24px;
   list-style-type: none;
   margin: 0;
   padding: 0;
   position: absolute;
   right: 0;
-  top: 4.8rem;
+  top: 48px;
 }
 
 .va-search-suggestion {
   cursor: pointer;
-  padding: 0.8rem;
+  padding: 8px;
 }
 
 .va-search-suggestion[aria-selected='true'],
