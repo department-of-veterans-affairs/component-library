@@ -52,8 +52,15 @@ export class VaOmbInfo {
 
   // Redirects focus back to the modal, if the modal is open/visible
   private trapFocus = () => {
-    const modalCloseButton = this.el.shadowRoot.querySelector('va-modal').shadowRoot.querySelector('button.va-modal-close') as HTMLElement;
-    modalCloseButton?.focus();
+    const modal = this.el?.shadowRoot
+      .querySelector('va-modal')
+    const modalVisible = modal.getAttribute('visible')
+    if (modalVisible !== null && modalVisible !== 'false') {
+      const modalCloseButton = modal.shadowRoot.querySelector(
+        'button.va-modal-close',
+      ) as HTMLElement;
+      modalCloseButton.focus();
+    }
   }
 
   componentWillLoad() {

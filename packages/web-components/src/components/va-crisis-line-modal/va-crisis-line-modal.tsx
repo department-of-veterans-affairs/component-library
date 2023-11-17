@@ -28,10 +28,22 @@ export class VACrisisLineModal {
 
   // Redirects focus back to the modal, if the modal is open/visible
   private trapFocus() {
-    const modalCloseButton = this.el.shadowRoot
-      .querySelector('va-modal')
-      .shadowRoot.querySelector('button.va-modal-close') as HTMLElement;
-    modalCloseButton?.focus();
+    console.log("focus trap started")
+    const modal = this.el.shadowRoot.querySelector('va-modal');
+    console.log('modal:', modal)
+    const modalVisible = modal?.getAttribute('visible');
+    console.log(
+      'modalVisible',
+      modalVisible !== null && modalVisible !== 'false',
+    );
+    if (modalVisible !== null && modalVisible !== 'false') {
+      console.log("modal is visible");
+      const modalCloseButton = modal.shadowRoot.querySelector(
+        'button.va-modal-close',
+      ) as HTMLElement;
+      modalCloseButton.focus();
+      console.log("modal is focused");
+    }
   }
 
   render() {
