@@ -86,9 +86,7 @@ describe('va-crisis-line-modal', () => {
     const triggerButton = await page.find(
       'va-crisis-line-modal >>> button.va-overlay-trigger',
     );
-    console.log("found trigger button");
     await triggerButton.click();
-    console.log("trigger button clicked");
     await page.waitForChanges();
 
     // Check that the modal is visible
