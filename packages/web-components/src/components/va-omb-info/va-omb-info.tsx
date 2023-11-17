@@ -51,15 +51,15 @@ export class VaOmbInfo {
   };
 
   // Redirects focus back to the modal, if the modal is open/visible
-  private trapFocus = () => {
-    const modal = this.el?.shadowRoot
-      .querySelector('va-modal')
-    const modalVisible = modal.getAttribute('visible')
+  private trapFocus() {
+    const modal = this.el?.shadowRoot.querySelector('va-modal');
+    const modalVisible = modal?.getAttribute('visible');
+
     if (modalVisible !== null && modalVisible !== 'false') {
-      const modalCloseButton = modal.shadowRoot.querySelector(
+      const modalCloseButton = modal?.shadowRoot.querySelector(
         'button.va-modal-close',
       ) as HTMLElement;
-      modalCloseButton.focus();
+      modalCloseButton?.focus();
     }
   }
 
@@ -149,7 +149,7 @@ export class VaOmbInfo {
         <div>
           <va-button
             onClick={toggleModalVisible}
-            onFocusin={this.trapFocus}
+            onFocusin={() => this.trapFocus()}
             secondary
             text="View Privacy Act Statement"
           />

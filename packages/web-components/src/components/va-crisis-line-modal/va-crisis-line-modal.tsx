@@ -28,21 +28,14 @@ export class VACrisisLineModal {
 
   // Redirects focus back to the modal, if the modal is open/visible
   private trapFocus() {
-    console.log("focus trap started")
-    const modal = this.el.shadowRoot.querySelector('va-modal');
-    console.log('modal:', modal)
+    const modal = this.el?.shadowRoot.querySelector('va-modal');
     const modalVisible = modal?.getAttribute('visible');
-    console.log(
-      'modalVisible',
-      modalVisible !== null && modalVisible !== 'false',
-    );
+
     if (modalVisible !== null && modalVisible !== 'false') {
-      console.log("modal is visible");
-      const modalCloseButton = modal.shadowRoot.querySelector(
+      const modalCloseButton = modal?.shadowRoot.querySelector(
         'button.va-modal-close',
       ) as HTMLElement;
-      modalCloseButton.focus();
-      console.log("modal is focused");
+      modalCloseButton?.focus();
     }
   }
 
@@ -52,7 +45,7 @@ export class VACrisisLineModal {
         <div class="va-crisis-line-container">
           <button
             onClick={() => this.setVisible()}
-            onFocusin={this.trapFocus}
+            onFocusin={() => this.trapFocus()}
             data-show="#modal-crisisline"
             class="va-crisis-line va-overlay-trigger"
             part="button"
