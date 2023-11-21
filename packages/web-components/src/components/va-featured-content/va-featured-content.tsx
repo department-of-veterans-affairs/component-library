@@ -1,4 +1,4 @@
-import { Component, Host, h } from '@stencil/core';
+import { Component, Host, h, Prop } from '@stencil/core';
 
 /**
  * @componentName Featured content
@@ -7,18 +7,35 @@ import { Component, Host, h } from '@stencil/core';
  */
 @Component({
   tag: 'va-featured-content',
-  styleUrl: 'va-featured-content.css',
+  styleUrl: 'va-featured-content.scss',
   shadow: true,
 })
 export class VaFeaturedContent {
+  /**
+   * Whether or not the component will use USWDS v3 styling.
+   */
+  @Prop() uswds?: boolean = false;
+
   render() {
-    return (
-      <Host>
-        <div class="feature">
-          <slot name="headline"></slot>
-          <slot />
-        </div>
-      </Host>
-    );
+    const { uswds } = this;
+    if (uswds) {
+      return (
+        <Host>
+          <div class="usa-summary-box">
+            <slot name="headline"></slot>
+            <slot />
+          </div>
+        </Host>
+      );
+    } else {
+      return (
+        <Host>
+          <div class="feature">
+            <slot name="headline"></slot>
+            <slot />
+          </div>
+        </Host>
+      );
+    }
   }
 }

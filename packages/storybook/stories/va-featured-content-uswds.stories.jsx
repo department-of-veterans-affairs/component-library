@@ -5,8 +5,8 @@ import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
 const featuredContentDocs = getWebComponentDocs('va-featured-content');
 
 export default {
-  title: 'Components/Featured content',
-  id: 'components/va-featured-content',
+  title: 'USWDS/Featured content USWDS',
+  id: 'uswds/va-featured-content',
   parameters: {
     componentSubtitle: `va-featured-content web component`,
     docs: {
@@ -14,7 +14,7 @@ export default {
     },
   },
 };
-const defaultArgs = { uswds: false };
+const defaultArgs = { uswds: true };
 
 const Template = args => {
   const { uswds } = args

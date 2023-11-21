@@ -380,6 +380,10 @@ export namespace Components {
         "value"?: string;
     }
     interface VaFeaturedContent {
+        /**
+          * Whether or not the component will use USWDS v3 styling.
+         */
+        "uswds"?: boolean;
     }
     interface VaFileInput {
         /**
@@ -576,7 +580,7 @@ export namespace Components {
     }
     interface VaModal {
         /**
-          * Additional DOM-nodes that should not be hidden from screen readers.  Useful when an open modal shouldn't hide all content behind the overlay.
+          * Additional DOM-nodes that should not be hidden from screen readers. Useful when an open modal shouldn't hide all content behind the overlay.
          */
         "ariaHiddenNodeExceptions"?: HTMLElement[];
         /**
@@ -2221,6 +2225,10 @@ declare namespace LocalJSX {
         "value"?: string;
     }
     interface VaFeaturedContent {
+        /**
+          * Whether or not the component will use USWDS v3 styling.
+         */
+        "uswds"?: boolean;
     }
     interface VaFileInput {
         /**
@@ -2453,7 +2461,7 @@ declare namespace LocalJSX {
     }
     interface VaModal {
         /**
-          * Additional DOM-nodes that should not be hidden from screen readers.  Useful when an open modal shouldn't hide all content behind the overlay.
+          * Additional DOM-nodes that should not be hidden from screen readers. Useful when an open modal shouldn't hide all content behind the overlay.
          */
         "ariaHiddenNodeExceptions"?: HTMLElement[];
         /**
