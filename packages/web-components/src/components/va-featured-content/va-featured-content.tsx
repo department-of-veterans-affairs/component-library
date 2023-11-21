@@ -1,4 +1,4 @@
-import { Component, Host, h, Prop } from '@stencil/core';
+import { Component, Host, h, Prop, Element } from '@stencil/core';
 
 /**
  * @componentName Featured content
@@ -16,14 +16,32 @@ export class VaFeaturedContent {
    */
   @Prop() uswds?: boolean = false;
 
+  @Element() el: HTMLElement;
+
+  componentDidLoad() {
+    if (!this.uswds) {
+      return
+    }
+    // add uswds classes
+    const nodes = this.el.shadowRoot
+      .querySelectorAll('slot')
+    const headline = nodes[0];
+    const content = nodes[1];
+    
+    headline.classList.add('usa-summary-box__heading');
+    content.classList.add('usa-summary-box__text');
+  }
+
   render() {
     const { uswds } = this;
     if (uswds) {
       return (
         <Host>
-          <div class="usa-summary-box">
-            <slot name="headline"></slot>
-            <slot />
+          <div class="usa-summary-box" role="region" aria-labelledby="summary-box-key-information">
+            <div class="usa-summary-box__body">
+              <slot name="headline"></slot>
+              <slot />
+            </div>
           </div>
         </Host>
       );

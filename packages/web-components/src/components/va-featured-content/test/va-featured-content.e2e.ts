@@ -94,9 +94,11 @@ describe('va-featured-content', () => {
     expect(element).toEqualHtml(`
       <va-featured-content class="hydrated" uswds="">
         <mock:shadow-root>
-          <div class="usa-summary-box">
-            <slot name="headline"></slot>
-            <slot></slot>
+          <div aria-labelledby="summary-box-key-information" class="usa-summary-box" role="region">
+            <div class="usa-summary-box__body">
+              <slot class="usa-summary-box__heading" name="headline"></slot>
+              <slot class="usa-summary-box__text"></slot>
+            </div>
           </div>
         </mock:shadow-root>
         <h3 slot="headline">If I'm a Veteran, can I get VR&amp;E benefits and services?</h3>
