@@ -87,7 +87,6 @@ describe('va-crisis-line-modal', () => {
       'va-crisis-line-modal >>> button.va-overlay-trigger',
     );
     await triggerButton.click();
-    await page.waitForChanges();
 
     // Check that the modal is visible
     expect(modal.getAttribute('visible')).not.toBe(null);
