@@ -1,4 +1,4 @@
-import { Component, Host, State, h, Element } from '@stencil/core';
+import { Component, Host, State, h, Element, Listen } from '@stencil/core';
 import arrowRightSvg from '../../assets/arrow-right-white.svg';
 import { CONTACTS } from '../../contacts';
 
@@ -18,6 +18,11 @@ export class VACrisisLineModal {
 
   @State() isOpen: boolean = false;
 
+  /**
+   * Local state to track if the shift key is pressed
+   */
+  @State() shifted: boolean = false;
+
   setVisible() {
     this.isOpen = true;
   }
@@ -26,16 +31,30 @@ export class VACrisisLineModal {
     this.isOpen = false;
   }
 
+  // This keydown event listener tracks if the shift key is held down while changing focus
+  @Listen('keydown', { target: 'window' })
+  trackShiftKey(e: KeyboardEvent) {
+    this.shifted = e.shiftKey;
+  }
+
   // Redirects focus back to the modal, if the modal is open/visible
   private trapFocus() {
     const modal = this.el?.shadowRoot.querySelector('va-modal');
     const modalVisible = modal?.getAttribute('visible');
 
     if (modalVisible !== null && modalVisible !== 'false') {
-      const modalCloseButton = modal?.shadowRoot.querySelector(
-        'button.va-modal-close',
-      ) as HTMLElement;
-      modalCloseButton?.focus();
+      let focusedChild;
+      const query = this.shifted
+        ? '.last-focusable-child'
+        : '[role="document"]';
+      if (this.shifted) {
+        focusedChild = modal
+          ?.querySelector(query) as HTMLElement;
+      } else {
+        focusedChild = modal?.shadowRoot.querySelector(query) as HTMLElement;
+      }
+
+      focusedChild?.focus();
     }
   }
 

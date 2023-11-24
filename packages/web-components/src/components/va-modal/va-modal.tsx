@@ -344,11 +344,15 @@ export class VaModal {
     // find all focusable children within the modal, but maintain tab order
     this.focusableChildren = this.getFocusableChildren();
 
+    // find last focusable item so that focus can be redirected there when needed
+    const lastFocusChild = this.focusableChildren[this.focusableChildren.length - 1];
+    lastFocusChild.classList.add("last-focusable-child");
+
     // If an initialFocusSelector is provided, the element will be focused on modal open
     // if it exists. You are able to focus elements in both light and shadow DOM.
     const initialFocus = (this.el.querySelector(this.initialFocusSelector) ||
-      this.el.shadowRoot.querySelector(this.initialFocusSelector) ||
-      this.closeButton) as HTMLElement;
+    this.el.shadowRoot.querySelector(this.initialFocusSelector) ||
+    this.closeButton) as HTMLElement;
     initialFocus.focus();
 
     // Prevents scrolling outside modal
