@@ -1,6 +1,6 @@
 {
   "name": "@raytest/test1",
-  "version": "1.0.7",
+  "version": "1.0.10",
   "description": "a test package",
   "packageManager": "yarn@3.2.0",
   "main": "./dist/index.js",
@@ -8,8 +8,8 @@
   "scripts": {
     "build": "rm -rf ./dist && tsc",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "demo": "echo DEMOING $npm_package_name v $npm_package_version with WORKSPACES",
-    "demo2": "yarn build && npm publish publish --@raytest:registry=http://localhost:4873/"
+    "demo": "echo DEMOING $npm_package_name v $npm_package_version with WORKSPACES ",
+    "pub": "yarn build && npm publish --registry http://localhost:4873"
   },
   "files": [
     "dist"

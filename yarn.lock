@@ -1920,7 +1920,16 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@department-of-veterans-affairs/css-library@^0.0.1, @department-of-veterans-affairs/css-library@workspace:packages/css-library":
+"@department-of-veterans-affairs/css-library@npm:^0.0.1":
+  version: 0.0.1
+  resolution: "@department-of-veterans-affairs/css-library@npm:0.0.1"
+  dependencies:
+    "@divriots/style-dictionary-to-figma": ^0.4.0
+  checksum: 20ef0f4690babc8da12508d7b66af455bf7545011fca97dce90d2716aa873da4756f1e49951fe7748aea76484f479438db8c7356a6d82336ecb75de00f3be2ba
+  languageName: node
+  linkType: hard
+
+"@department-of-veterans-affairs/css-library@workspace:packages/css-library":
   version: 0.0.0-use.local
   resolution: "@department-of-veterans-affairs/css-library@workspace:packages/css-library"
   dependencies:
