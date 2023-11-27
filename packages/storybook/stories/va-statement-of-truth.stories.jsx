@@ -39,7 +39,7 @@ const Template = ({
   checkboxLabel
  }) => {
   return (
-    <div style={{ width: 600 }}>
+    <div style={{ maxWidth: 600 }}>
       <VaStatementOfTruth
         heading={heading}
         inputValue={inputValue}
