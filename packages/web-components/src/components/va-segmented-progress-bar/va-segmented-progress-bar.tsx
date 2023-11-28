@@ -185,7 +185,6 @@ export class VaSegmentedProgressBar {
               aria-valuemin="0"
               aria-valuemax={total}
               aria-valuetext={label}
-              aria-hidden="true"
             >
               {range.map(step => (
                 <div
@@ -196,9 +195,6 @@ export class VaSegmentedProgressBar {
                 />
               ))}
             </div>
-            <span aria-atomic="true" aria-live="polite" class="sr-only">
-              {progressTerm} {current} of {total}
-            </span>
           </div>
         </Host>
       )
