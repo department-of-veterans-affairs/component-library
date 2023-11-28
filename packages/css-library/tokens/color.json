@@ -56,10 +56,10 @@
   },
   "v3-color": {
     "error": {
-      "dark": { "value": "#b50909"}
+      "dark": { "value": "{uswds-system-color-red-vivid-60}"}
     },
     "base": {
-      "darkest": { "value": "#1B1B1B"}
+      "darkest": { "value": "{uswds-system-color-gray-90}"}
     }
   }
 }
