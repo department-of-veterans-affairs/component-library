@@ -195,9 +195,6 @@ export class VaSegmentedProgressBar {
                 />
               ))}
             </div>
-            <span aria-atomic="true" aria-live="polite" class="sr-only">
-              {progressTerm} {current} of {total}
-            </span>
           </div>
         </Host>
       )
