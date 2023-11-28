@@ -795,7 +795,7 @@
         "filePath": "tokens/color.json",
         "isSource": true,
         "original": {
-          "value": "#b50909"
+          "value": "{uswds-system-color-red-vivid-60}"
         },
         "name": "v3-color-error-dark",
         "attributes": {
@@ -812,11 +812,11 @@
     },
     "base": {
       "darkest": {
-        "value": "#1B1B1B",
+        "value": "#1b1b1b",
         "filePath": "tokens/color.json",
         "isSource": true,
         "original": {
-          "value": "#1B1B1B"
+          "value": "{uswds-system-color-gray-90}"
         },
         "name": "v3-color-base-darkest",
         "attributes": {
