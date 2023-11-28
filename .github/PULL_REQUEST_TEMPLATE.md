@@ -18,14 +18,14 @@ https://{{head.ref}}--60f9b557105290003b387cd5.chromatic.com
 Closes <ticket>
 
 ## QA Checklist
-- [ ] Component maitains 1:1 parity with design mocks
+- [ ] Component maintains 1:1 parity with design mocks
 - [ ] Text is consistent with what's been provided in the mocks
 - [ ] Component behaves as expected across breakpoints
 - [ ] Accessibility expert has signed off on code changes (if applicable. If not applicable provide reason why)
 - [ ] Designer has signed off on changes (if applicable. If not applicable provide reason why)
 - [ ] Tab order and focus state work as expected
 - [ ] Changes have been tested against screen readers (if applicable. If not applicable provide reason why)
-- [ ] New components are covered by e2e tests / updates to existing components are covered by existing test suite
+- [ ] New components are covered by e2e tests; updates to existing components are covered by existing test suite
 - [ ] Changes have been tested in vets-website using Verdaccio (if applicable. If not applicable provide reason why)
 
 ## Screenshots
