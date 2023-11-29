@@ -6,6 +6,7 @@
  * https://github.com/KittyGiraudel/focusable-selectors/blob/main/index.js
  */
  export const focusableQueryString = [
+  'a[href]:not([tabindex^="-"])',
   '.hydrated:not([tabindex^="-"])',
   '[tabindex]:not([tabindex^="-"])',
   'input:not([type=hidden]):not([tabindex^="-"])',
