@@ -37,7 +37,7 @@ export class VaFeaturedContent {
     if (uswds) {
       return (
         <Host>
-          <div class="usa-summary-box" role="region" aria-labelledby="summary-box-key-information">
+          <div class="usa-summary-box" role="region">
             <div class="usa-summary-box__body">
               <slot name="headline"></slot>
               <slot />
