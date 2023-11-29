@@ -26,6 +26,7 @@ const Template = ({
     show-shadow={showShadow}
   >
     <p>Example card content</p>
+    <i class="fas fa-phone-alt"></i>
   </va-card>
 );
 
