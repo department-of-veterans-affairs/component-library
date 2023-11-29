@@ -1,7 +1,1 @@
 *       @department-of-veterans-affairs/platform-design-system-team
-
-packages/mobile-components @department-of-veterans-affairs/flagship-mobile-platform
-packages/mobile-documentation @department-of-veterans-affairs/flagship-mobile-platform
-packages/mobile-icons @department-of-veterans-affairs/flagship-mobile-platform
-packages/mobile-linting @department-of-veterans-affairs/flagship-mobile-platform
-packages/mobile-tokens @department-of-veterans-affairs/flagship-mobile-platform
