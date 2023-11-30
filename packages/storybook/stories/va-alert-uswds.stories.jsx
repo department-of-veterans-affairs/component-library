@@ -306,13 +306,6 @@ Dismissable.args = {
   onCloseEvent: () => console.log('Close event triggered'),
 };
 
-export const BackgroundOnly = Template.bind(null);
-BackgroundOnly.args = {
-  ...defaultArgs,
-  'background-only': true,
-  status: 'fake'
-}
-
 export const Slim = SlimTemplate.bind(null);
 Slim.args = {
   ...defaultArgs,
