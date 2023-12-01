@@ -194,4 +194,19 @@ describe('va-telephone', () => {
       },
     });
   });
+
+  it('when messageAriaDescribedby exists, the message is added to the dom', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-telephone contact="8772228387" message-aria-describedby="main number"></va-telephone>');
+
+    const messageSpan = await page.find('va-telephone >>> #number-description');
+    expect(messageSpan).not.toBeNull();
+  });
+
+  it('passes an axe check when messageAriaDescribedby is set', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-telephone contact="8772228387" messageAriaDescribedby="main number"></va-telephone>');
+
+    await axeCheck(page);
+  });
 });

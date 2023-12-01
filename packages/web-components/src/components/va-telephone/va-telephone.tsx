@@ -5,6 +5,7 @@ import {
   Fragment,
   Prop,
   h,
+  Host,
 } from '@stencil/core';
 
 /**
@@ -57,6 +58,11 @@ export class VaTelephone {
    * Replaces the last 4 digits with the vanity text input
    */
   @Prop() vanity?: string;
+
+  /**
+   * An optional message that will be read by screen readers when the phone number is focused.
+   */
+  @Prop() messageAriaDescribedby?: string;
 
   /**
    * The event used to track usage of the component. This is emitted when
@@ -171,7 +177,16 @@ export class VaTelephone {
   }
 
   render() {
-    const { contact, extension, notClickable, international, tty, vanity, sms } = this;
+    const { 
+      contact, 
+      extension, 
+      notClickable, 
+      international, 
+      tty, 
+      vanity, 
+      sms, 
+      messageAriaDescribedby 
+    } = this;
     const formattedNumber = VaTelephone.formatPhoneNumber(
       contact,
       extension,
@@ -186,19 +201,32 @@ export class VaTelephone {
       international
     )}.`;
 
-    return notClickable ? (
-      <Fragment>
-        <span aria-hidden="true">{formattedNumber}</span>
-        <span class="sr-only">{formattedAriaLabel}</span>
-      </Fragment>
-    ) : (
-      <a
-        href={VaTelephone.createHref(contact, extension, sms)}
-        aria-label={formattedAriaLabel}
-        onClick={this.handleClick.bind(this)}
-      >
-        {formattedNumber}
-      </a>
+    // Null so we don't add the attribute if we have an empty string
+    const ariaDescribedbyIds = messageAriaDescribedby ? 'number-description' : null;
+
+    return ( 
+      <Host>
+        {notClickable ? (
+          <Fragment>
+            <span aria-hidden="true" aria-describedby={ariaDescribedbyIds}>{formattedNumber}</span>
+            <span class="sr-only">{formattedAriaLabel}</span>
+          </Fragment>
+        ) : (
+          <a
+            aria-describedby={ariaDescribedbyIds}
+            href={VaTelephone.createHref(contact, extension, sms)}
+            aria-label={formattedAriaLabel}
+            onClick={this.handleClick.bind(this)}
+          >
+            {formattedNumber}
+          </a>
+        )}
+        {messageAriaDescribedby && (
+          <span id="number-description" class="sr-only">
+            {messageAriaDescribedby}
+          </span>
+        )}
+      </Host>
     );
   }
 }
