@@ -10,10 +10,10 @@
       "value": "{uswds-system-color-gray-100}"
     },
     "link-default": {
-      "value": "#004795"
+      "value": "{uswds-system-color-blue-vivid-60}"
     },
     "link-visited": {
-      "value": "#4c2c92"
+      "value": "{uswds-system-color-violet-vivid-70}"
     },
     "warning-message": {
       "value": "#fac922"
@@ -23,29 +23,29 @@
     },
     "primary": {
       "*": {
-        "value": "#0071bb"
+        "value": "{uswds-system-color-blue-vivid-60}"
       },
       "darker": {
-        "value": "#003e73"
+        "value": "#000000"
       },
       "darkest": {
-        "value": "#112e51"
+        "value": "{uswds-system-color-blue-warm-vivid-80}"
       },
       "alt": {
         "*": {
-          "value": "#02bfe7"
+          "value": "{uswds-system-color-cyan-vivid-30}"
         },
         "dark": {
-          "value": "#00a6d2"
+          "value": "{uswds-system-color-blue-cool-vivid-40}"
         },
         "darkest": {
-          "value": "#046b99"
+          "value": "{uswds-system-color-blue-cool-vivid-60}"
         },
         "light": {
-          "value": "#9bdaf1"
+          "value": "{uswds-system-color-blue-cool-vivid-20}"
         },
         "lightest": {
-          "value": "#e1f3f8"
+          "value": "{uswds-system-color-blue-cool-vivid-5}"
         }
       }
     },

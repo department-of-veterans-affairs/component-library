@@ -8,7 +8,7 @@
   ],
   "scripts": {
     "build:tokens": "style-dictionary build",
-    "build:stylesheets": "sass --load-path=../../node_modules/@uswds/uswds/packages/ src/stylesheets:dist/",
+    "build:stylesheets": "sass --load-path=../../node_modules/@uswds/uswds/packages/ src/stylesheets:dist/ --style compressed",
     "build:minify": "yarn build:stylesheets --style compressed --no-source-map",
     "build": "yarn run copy && yarn build:tokens && yarn build:stylesheets",
     "copy": "node ./copy-uswds-color-tokens.js"

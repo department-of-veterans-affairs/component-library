@@ -1,65 +1,65 @@
 {
   "color": {
-    "base": { "value": "#212121"},
-    "white": { "value": "#ffffff"},
-    "black": { "value": "{uswds-system-color-gray-100}"},
-    "link-default": { "value": "#004795"},
-    "link-visited": { "value": "#4c2c92"},
-    "warning-message": { "value": "#fac922"},
-    "feedback-warning-background": { "value": "#fac922"},
+    "base": { "value": "#212121" },
+    "white": { "value": "#ffffff" },
+    "black": { "value": "{uswds-system-color-gray-100}" },
+    "link-default": { "value": "{uswds-system-color-blue-vivid-60}" },
+    "link-visited": { "value": "{uswds-system-color-violet-vivid-70}" },
+    "warning-message": { "value": "#fac922" },
+    "feedback-warning-background": { "value": "#fac922" },
     "primary": {
-      "*": { "value": "#0071bb"},
-      "darker": { "value": "#003e73"},
-      "darkest": { "value": "#112e51"},
+      "*": { "value": "{uswds-system-color-blue-vivid-60}" },
+      "darker": { "value": "uswds-system-color-blue-warm-vivid-70" },
+      "darkest": { "value": "{uswds-system-color-blue-warm-vivid-80}" },
       "alt": {
-        "*": { "value": "#02bfe7"},
-        "dark": { "value": "#00a6d2"},
-        "darkest": { "value": "#046b99"},
-        "light": { "value": "#9bdaf1"},
-        "lightest": { "value": "#e1f3f8"}
+        "*": { "value": "{uswds-system-color-cyan-vivid-30}" },
+        "dark": { "value": "{uswds-system-color-blue-cool-vivid-40}" },
+        "darkest": { "value": "{uswds-system-color-blue-cool-vivid-60}" },
+        "light": { "value": "{uswds-system-color-blue-cool-vivid-20}" },
+        "lightest": { "value": "{uswds-system-color-blue-cool-vivid-5}" }
       }
     },
     "secondary": {
-      "*": { "value": "#e31c3d"},
-      "dark": { "value": "#cd2026"},
-      "darkest": { "value": "#981b1e"},
-      "light": { "value": "#e59393"},
-      "lightest": { "value": "#f9dede"}
+      "*": { "value": "#e31c3d" },
+      "dark": { "value": "#cd2026" },
+      "darkest": { "value": "#981b1e" },
+      "light": { "value": "#e59393" },
+      "lightest": { "value": "#f9dede" }
     },
     "gray": {
-      "*": { "value": "#5b616b"},
-      "dark": { "value": "#323a45"},
-      "medium": { "value": "#757575"},
-      "light": { "value": "#aeb0b5"},
-      "light-alt": { "value": "#eeeeee"},
-      "lighter": { "value": "#d6d7d9"},
-      "lightest": { "value": "#f1f1f1"},
-      "warm-dark": { "value": "#494440"},
-      "warm-light": { "value": "#e4e2e0"},
-      "cool-light": { "value": "#dce4ef"}
+      "*": { "value": "#5b616b" },
+      "dark": { "value": "#323a45" },
+      "medium": { "value": "#757575" },
+      "light": { "value": "#aeb0b5" },
+      "light-alt": { "value": "#eeeeee" },
+      "lighter": { "value": "#d6d7d9" },
+      "lightest": { "value": "#f1f1f1" },
+      "warm-dark": { "value": "#494440" },
+      "warm-light": { "value": "#e4e2e0" },
+      "cool-light": { "value": "#dce4ef" }
     },
     "green": {
-      "*": { "value": "#2e8540"},
-      "dark": { "value": "#1e5f2f"},
-      "darker": { "value": "#195c27"},
-      "darkest": { "value": "#0f3f1f"},
-      "light": { "value": "#7dbf7c"},
-      "lighter": { "value": "#94bfa2"},
-      "lightest": { "value": "#e7f4e4"}
+      "*": { "value": "#2e8540" },
+      "dark": { "value": "#1e5f2f" },
+      "darker": { "value": "#195c27" },
+      "darkest": { "value": "#0f3f1f" },
+      "light": { "value": "#7dbf7c" },
+      "lighter": { "value": "#94bfa2" },
+      "lightest": { "value": "#e7f4e4" }
     },
     "gold": {
-      "*": { "value": "#fdb81e"},
-      "light": { "value": "#f9c642"},
-      "lighter": { "value": "#fad980"},
-      "lightest": { "value": "#fff1d2"}
+      "*": { "value": "#fdb81e" },
+      "light": { "value": "#f9c642" },
+      "lighter": { "value": "#fad980" },
+      "lightest": { "value": "#fff1d2" }
     }
   },
   "v3-color": {
     "error": {
-      "dark": { "value": "{uswds-system-color-red-vivid-60}"}
+      "dark": { "value": "{uswds-system-color-red-vivid-60}" }
     },
     "base": {
-      "darkest": { "value": "{uswds-system-color-gray-90}"}
+      "darkest": { "value": "{uswds-system-color-gray-90}" }
     }
   }
 }
