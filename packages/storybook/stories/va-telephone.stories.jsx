@@ -141,7 +141,7 @@ SMS.args = {
 export const AriaDescribedBy = Template.bind(null);
 AriaDescribedBy.args = {
   ...defaultArgs,
-  'message-aria-describedby': 'Main number',
+  'message-aria-describedby': 'Main number to facility',
 };
 
 export const VanityNumber = Template.bind(null);
