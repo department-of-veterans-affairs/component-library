@@ -35,20 +35,22 @@ const Template = ({
   'secondary-label': secondaryLabel,
   submit,
   update,
-  uswds
+  uswds,
 }) => {
   return (
-    <VaButtonPair
-      uswds={uswds}
-      continue={_continue}
-      disable-analytics={disableAnalytics}
-      primaryLabel={primaryLabel}
-      secondaryLabel={secondaryLabel}
-      submit={submit}
-      onPrimaryClick={e => console.log(e)}
-      onSecondaryClick={e => console.log(e)}
-      update={update}
-    />
+    <div style={{ paddingLeft: '8px' }}>
+      <VaButtonPair
+        uswds={uswds}
+        continue={_continue}
+        disable-analytics={disableAnalytics}
+        primaryLabel={primaryLabel}
+        secondaryLabel={secondaryLabel}
+        submit={submit}
+        onPrimaryClick={e => console.log(e)}
+        onSecondaryClick={e => console.log(e)}
+        update={update}
+      />
+    </div>
   );
 };
 
