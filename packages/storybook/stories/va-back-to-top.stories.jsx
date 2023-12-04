@@ -43,7 +43,7 @@ const Template = () => {
           height: '500px',
           display: 'flex',
           justifyContent: 'center',
-          background: '#112E51',
+          background: '#162e51',
           color: 'white',
         }}
       >
