@@ -68,7 +68,7 @@ const Template = ({
   return (
     <div>
       {messageAriaDescribedBy && (
-        <div>Main number to facility</div>
+        <span>Main number to facility</span>
       )}
       <va-telephone
         contact={contact}
