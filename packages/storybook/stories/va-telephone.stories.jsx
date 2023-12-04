@@ -67,6 +67,9 @@ const Template = ({
 }) => {
   return (
     <div>
+      {messageAriaDescribedBy && (
+        <div>Main number to facility</div>
+      )}
       <va-telephone
         contact={contact}
         extension={extension}
@@ -93,6 +96,7 @@ const defaultArgs = {
 
 export const Default = Template.bind(null);
 Default.args = {
+  'message-aria-describedby': false,
   ...defaultArgs,
 };
 Default.argTypes = propStructure(telephoneDocs);
@@ -137,7 +141,7 @@ SMS.args = {
 export const AriaDescribedBy = Template.bind(null);
 AriaDescribedBy.args = {
   ...defaultArgs,
-  'message-aria-describedby': 'Main number to facility',
+  'message-aria-describedby': 'Main number',
 };
 
 export const VanityNumber = Template.bind(null);
