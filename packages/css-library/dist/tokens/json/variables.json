@@ -140,11 +140,11 @@
         ]
       },
       "darker": {
-        "value": "#000000",
+        "value": "#1a4480",
         "filePath": "tokens/color.json",
         "isSource": true,
         "original": {
-          "value": "uswds-system-color-blue-warm-vivid-70"
+          "value": "{uswds-system-color-blue-warm-vivid-70}"
         },
         "name": "color-primary-darker",
         "attributes": {

@@ -26,7 +26,7 @@
         "value": "{uswds-system-color-blue-vivid-60}"
       },
       "darker": {
-        "value": "#000000"
+        "value": "{uswds-system-color-blue-warm-vivid-70}"
       },
       "darkest": {
         "value": "{uswds-system-color-blue-warm-vivid-80}"
