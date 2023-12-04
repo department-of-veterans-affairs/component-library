@@ -201,6 +201,7 @@ describe('va-telephone', () => {
 
     const messageSpan = await page.find('va-telephone >>> #number-description');
     expect(messageSpan).not.toBeNull();
+    expect(messageSpan.textContent).toBe('main number');
   });
 
   it('passes an axe check when messageAriaDescribedby is set', async () => {
