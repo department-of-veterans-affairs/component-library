@@ -108,9 +108,37 @@ export const decorators = [
   ),
 ];
 
+// Sets up a mutation observer to ensure that the storybook docs-root container doesn't get hidden by modals
+const observeDocsRoot = () => {
+  // The target for the observer
+  const targetNode = document.getElementById('docs-root');
+
+  // Configuration options for the observer
+  const config = {attributes: true, childList: false, subtree: false}
+
+  // Callback function that 'resets' the aria-hidden attribute to false
+  const callback = (
+    /** @type {MutationRecord[]} */ mutationList
+  ) => {
+    for (const mutation of mutationList) {
+      if (mutation.attributeName === 'aria-hidden' && targetNode?.getAttribute('aria-hidden') !== 'false') {
+        targetNode?.setAttribute('aria-hidden', 'false');
+      }
+    }
+  };
+
+  // Create an observer instance
+  const observer = new MutationObserver(callback);
+
+  // Start observing
+  if (targetNode) observer.observe(targetNode, config);
+}
+
 document.body.onload = function () {
   // Fix for React 17/NVDA bug where React root is read as "clickable"
   // https://github.com/nvaccess/nvda/issues/13262
   // https://github.com/facebook/react/issues/20895
   document.querySelector('#root').setAttribute('role', 'presentation');
+
+  observeDocsRoot();
 };
