@@ -25,10 +25,10 @@
       "*": {
         "value": "{uswds-system-color-blue-vivid-60}"
       },
-      "darker": {
+      "dark": {
         "value": "{uswds-system-color-blue-warm-vivid-70}"
       },
-      "darkest": {
+      "darker": {
         "value": "{uswds-system-color-blue-warm-vivid-80}"
       },
       "alt": {

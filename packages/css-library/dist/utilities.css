@@ -3107,7 +3107,7 @@ through all possible variants
   );
 }
 */
-.vads-bg-primary-darker {
+.vads-bg-primary-dark {
   background-color: #1a4480;
 }
 
@@ -3122,7 +3122,7 @@ through all possible variants
   );
 }
 */
-.vads-bg-primary-darkest {
+.vads-bg-primary-darker {
   background-color: #162e51;
 }
 
@@ -4532,7 +4532,7 @@ through all possible variants
   );
 }
 */
-.vads-border-primary-darker {
+.vads-border-primary-dark {
   border-color: #1a4480;
 }
 
@@ -4547,7 +4547,7 @@ through all possible variants
   );
 }
 */
-.vads-border-primary-darkest {
+.vads-border-primary-darker {
   border-color: #162e51;
 }
 
@@ -5312,7 +5312,7 @@ through all possible variants
   );
 }
 */
-.vads-primary-darker {
+.vads-primary-dark {
   color: #1a4480;
 }
 
@@ -5327,7 +5327,7 @@ through all possible variants
   );
 }
 */
-.vads-primary-darkest {
+.vads-primary-darker {
   color: #162e51;
 }
 

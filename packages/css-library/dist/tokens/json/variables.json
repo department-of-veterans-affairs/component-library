@@ -139,12 +139,31 @@
           "*"
         ]
       },
-      "darker": {
+      "dark": {
         "value": "#1a4480",
         "filePath": "tokens/color.json",
         "isSource": true,
         "original": {
           "value": "{uswds-system-color-blue-warm-vivid-70}"
+        },
+        "name": "color-primary-dark",
+        "attributes": {
+          "category": "color",
+          "type": "primary",
+          "item": "dark"
+        },
+        "path": [
+          "color",
+          "primary",
+          "dark"
+        ]
+      },
+      "darker": {
+        "value": "#162e51",
+        "filePath": "tokens/color.json",
+        "isSource": true,
+        "original": {
+          "value": "{uswds-system-color-blue-warm-vivid-80}"
         },
         "name": "color-primary-darker",
         "attributes": {
@@ -156,25 +175,6 @@
           "color",
           "primary",
           "darker"
-        ]
-      },
-      "darkest": {
-        "value": "#162e51",
-        "filePath": "tokens/color.json",
-        "isSource": true,
-        "original": {
-          "value": "{uswds-system-color-blue-warm-vivid-80}"
-        },
-        "name": "color-primary-darkest",
-        "attributes": {
-          "category": "color",
-          "type": "primary",
-          "item": "darkest"
-        },
-        "path": [
-          "color",
-          "primary",
-          "darkest"
         ]
       },
       "alt": {

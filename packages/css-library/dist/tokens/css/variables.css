@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Mon, 04 Dec 2023 21:56:24 GMT
+ * Generated on Tue, 05 Dec 2023 16:42:10 GMT
  */
 
 :root {
@@ -12,8 +12,8 @@
   --color-warning-message: #fac922;
   --color-feedback-warning-background: #fac922;
   --color-primary: #005ea2;
-  --color-primary-darker: #1a4480;
-  --color-primary-darkest: #162e51;
+  --color-primary-dark: #1a4480;
+  --color-primary-darker: #162e51;
   --color-primary-alt: #00bde3;
   --color-primary-alt-dark: #28a0cb;
   --color-primary-alt-darkest: #07648d;

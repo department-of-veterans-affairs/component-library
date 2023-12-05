@@ -9,8 +9,8 @@
     "feedback-warning-background": { "value": "#fac922" },
     "primary": {
       "*": { "value": "{uswds-system-color-blue-vivid-60}" },
-      "darker": { "value": "{uswds-system-color-blue-warm-vivid-70}" },
-      "darkest": { "value": "{uswds-system-color-blue-warm-vivid-80}" },
+      "dark": { "value": "{uswds-system-color-blue-warm-vivid-70}" },
+      "darker": { "value": "{uswds-system-color-blue-warm-vivid-80}" },
       "alt": {
         "*": { "value": "{uswds-system-color-cyan-vivid-30}" },
         "dark": { "value": "{uswds-system-color-blue-cool-vivid-40}" },
