@@ -75,6 +75,13 @@ export class VaBreadcrumbs {
   componentLibraryAnalytics: EventEmitter;
 
   /**
+   * Are the hrefs provided in the objects of the breadcrumbList to be used 
+   * in an app with a Router, e.g. React Router?
+   * Has no effect if uswds is false
+   */
+  @Prop() useRouter?: boolean = false;
+
+  /**
    * This method is used to update the formattedBreadcrumbs state.
    * It is only invoked when the uswds attribute is set to true on the component.
    * It either parses a JSON string into an array of breadcrumb objects or uses the passed array as is.
@@ -239,6 +246,29 @@ export class VaBreadcrumbs {
     });
   }
 
+  /**
+   * Changes the route when uswds and useRoute props are true.
+   * Route will be set to the href value in the breadcrumb.
+   */
+  handleRouteChange(e: MouseEvent, href: string): void {
+    e.preventDefault();
+    window.history.pushState(null, '', href);
+    // create event to notify Router
+    const popStateEvent = new PopStateEvent('popstate');
+    // notify Router
+    window.dispatchEvent(popStateEvent);
+  }
+
+  /**
+   * Handle click event on breadcrumb when uswds is true
+   */
+  uswdsHandler(e: MouseEvent, href: string) {
+    if (this.useRouter) {
+      this.handleRouteChange(e, href);
+    }
+    this.fireAnalyticsEvent(e);
+  }
+
   render() {
     const { label, uswds, wrapping } = this;
     const wrapClass = classnames({
@@ -260,7 +290,7 @@ export class VaBreadcrumbs {
                       <span>{item.label}</span>
                     </a>
                   ) : (
-                    <a class="usa-breadcrumb__link" href={item.href} onClick={e => this.fireAnalyticsEvent(e)}>
+                    <a class="usa-breadcrumb__link" href={item.href} onClick={e => this.uswdsHandler(e, item.href)}>
                       <span>{item.label}</span>
                     </a>
                   )}
