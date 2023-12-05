@@ -1,12 +1,12 @@
-import { 
-  Component, 
-  Host, 
-  h, 
-  EventEmitter, 
-  Event, 
-  Prop, 
-  Element, 
-  forceUpdate 
+import {
+  Component,
+  Host,
+  h,
+  EventEmitter,
+  Event,
+  Prop,
+  Element,
+  forceUpdate
 } from '@stencil/core';
 import i18next from 'i18next';
 import { Build } from '@stencil/core';
@@ -75,9 +75,9 @@ export class VaOfficialGovBanner {
     const header = this.el.shadowRoot?.querySelector('header') as HTMLElement;
 
     button.setAttribute(
-      'aria-expanded', 
-      button.getAttribute('aria-expanded') === 'true' 
-        ? 'false' 
+      'aria-expanded',
+      button.getAttribute('aria-expanded') === 'true'
+        ? 'false'
         : 'true'
     );
 
@@ -96,7 +96,7 @@ export class VaOfficialGovBanner {
   };
 
   /**
-   * This  will add <strong> tags around the 
+   * This will add <strong> tags around the
    * matching TLD value (.gov or .mil) in the text that is provided
    * and the innerHTML of the element will be updated.
    */
@@ -104,7 +104,9 @@ export class VaOfficialGovBanner {
     const el = this.el.shadowRoot?.querySelector('.gov-site-explanation-text') as HTMLElement;
     if (el) {
       const text = i18next.t('gov-site-explanation', { tld: this.tld });
-      el.innerHTML = text.replace(`.${this.tld}`, `<strong>.${this.tld}</strong>`);
+      if (text) {
+        el.innerHTML = text.replace(`.${this.tld}`, `<strong>.${this.tld}</strong>`);
+      }
     }
   }
 
@@ -121,7 +123,7 @@ export class VaOfficialGovBanner {
     <desc id="banner-lock-description">Locked padlock icon</desc>
     <path fill="#000000" fill-rule="evenodd" d="M26 0c10.493 0 19 8.507 19 19v9h3a4 4 0 0 1 4 4v28a4 4 0 0 1-4 4H4a4 4 0 0 1-4-4V32a4 4 0 0 1 4-4h3v-9C7 8.507 15.507 0 26 0zm0 8c-5.979 0-10.843 4.77-10.996 10.712L15 19v9h22v-9c0-6.075-4.925-11-11-11z"></path>
     </svg></span>&nbsp;)`
-  
+
     let html = i18next.t('gov-site-lock', { image: 'SVG', tld: this.tld });
 
     html = html.replace('SVG', lockSvg);
@@ -147,9 +149,9 @@ export class VaOfficialGovBanner {
               <header >
                 <div class="inner">
                   <div class="grid-col-auto">
-                    <img 
-                      role="presentation" 
-                      class="header-flag" 
+                    <img
+                      role="presentation"
+                      class="header-flag"
                       src="https://s3-us-gov-west-1.amazonaws.com/content.www.va.gov/img/tiny-usa-flag.png"
                       alt="" />
                   </div>
@@ -157,22 +159,22 @@ export class VaOfficialGovBanner {
                     <p class="header-text">{i18next.t('gov-site-label')}</p>
                     <p class="header-action">{i18next.t('gov-site-button')}</p>
                   </div>
-                  <button 
+                  <button
                     onClick={this.handleClick}
-                    type="button" 
-                    aria-expanded="false" 
+                    type="button"
+                    aria-expanded="false"
                     aria-controls="official-gov-banner">
                     <span class="button-text">{i18next.t('gov-site-button')}</span>
                   </button>
                 </div>
               </header>
-  
+
               <div class="content" id="official-gov-banner" hidden>
                 <div class="grid-row">
                   <div class="col">
-                    <img 
-                      src={iconHttpsSvg} 
-                      role="presentation" 
+                    <img
+                      src={iconHttpsSvg}
+                      role="presentation"
                       alt="" />
                     <div class="media-block">
                       <p>
@@ -184,9 +186,9 @@ export class VaOfficialGovBanner {
                     </div>
                   </div>
                   <div class="col">
-                    <img 
-                      src={iconDotGovSvg} 
-                      role="presentation" 
+                    <img
+                      src={iconDotGovSvg}
+                      role="presentation"
                       alt="" />
                     <div class="media-block">
                       <p>
@@ -199,7 +201,7 @@ export class VaOfficialGovBanner {
                   </div>
                 </div>
               </div>
-  
+
             </div>
           </section>
         </Host>

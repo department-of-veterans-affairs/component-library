@@ -1139,6 +1139,10 @@ export namespace Components {
          */
         "international"?: boolean;
         /**
+          * An optional message that will be read by screen readers when the phone number is focused.
+         */
+        "messageAriaDescribedby"?: string;
+        /**
           * Indicates if the phone number can be clicked or not
          */
         "notClickable"?: boolean;
@@ -3127,6 +3131,10 @@ declare namespace LocalJSX {
           * Indicates if this is a number meant to be called from outside the US. Prepends a "+1" to the formatted number.
          */
         "international"?: boolean;
+        /**
+          * An optional message that will be read by screen readers when the phone number is focused.
+         */
+        "messageAriaDescribedby"?: string;
         /**
           * Indicates if the phone number can be clicked or not
          */
