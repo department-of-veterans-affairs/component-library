@@ -3063,7 +3063,7 @@ through all possible variants
 }
 */
 .vads-bg-link-default {
-  background-color: #004795;
+  background-color: #005ea2;
 }
 
 /*
@@ -3093,7 +3093,22 @@ through all possible variants
 }
 */
 .vads-bg-primary {
-  background-color: #0071bb;
+  background-color: #005ea2;
+}
+
+/*
+@if map-deep-get($utility, settings, responsive) {
+  @include render-media-queries(
+    $utility,
+    $selector,
+    $property,
+    $value,
+    $val-props
+  );
+}
+*/
+.vads-bg-primary-dark {
+  background-color: #1a4480;
 }
 
 /*
@@ -3108,22 +3123,7 @@ through all possible variants
 }
 */
 .vads-bg-primary-darker {
-  background-color: #003e73;
-}
-
-/*
-@if map-deep-get($utility, settings, responsive) {
-  @include render-media-queries(
-    $utility,
-    $selector,
-    $property,
-    $value,
-    $val-props
-  );
-}
-*/
-.vads-bg-primary-darkest {
-  background-color: #112e51;
+  background-color: #162e51;
 }
 
 /*
@@ -3138,7 +3138,7 @@ through all possible variants
 }
 */
 .vads-bg-primary-alt {
-  background-color: #02bfe7;
+  background-color: #00bde3;
 }
 
 /*
@@ -3153,7 +3153,7 @@ through all possible variants
 }
 */
 .vads-bg-primary-alt-dark {
-  background-color: #00a6d2;
+  background-color: #28a0cb;
 }
 
 /*
@@ -3168,7 +3168,7 @@ through all possible variants
 }
 */
 .vads-bg-primary-alt-darkest {
-  background-color: #046b99;
+  background-color: #07648d;
 }
 
 /*
@@ -3183,7 +3183,7 @@ through all possible variants
 }
 */
 .vads-bg-primary-alt-light {
-  background-color: #9bdaf1;
+  background-color: #97d4ea;
 }
 
 /*
@@ -4488,7 +4488,7 @@ through all possible variants
 }
 */
 .vads-border-link-default {
-  border-color: #004795;
+  border-color: #005ea2;
 }
 
 /*
@@ -4518,7 +4518,22 @@ through all possible variants
 }
 */
 .vads-border-primary {
-  border-color: #0071bb;
+  border-color: #005ea2;
+}
+
+/*
+@if map-deep-get($utility, settings, responsive) {
+  @include render-media-queries(
+    $utility,
+    $selector,
+    $property,
+    $value,
+    $val-props
+  );
+}
+*/
+.vads-border-primary-dark {
+  border-color: #1a4480;
 }
 
 /*
@@ -4533,22 +4548,7 @@ through all possible variants
 }
 */
 .vads-border-primary-darker {
-  border-color: #003e73;
-}
-
-/*
-@if map-deep-get($utility, settings, responsive) {
-  @include render-media-queries(
-    $utility,
-    $selector,
-    $property,
-    $value,
-    $val-props
-  );
-}
-*/
-.vads-border-primary-darkest {
-  border-color: #112e51;
+  border-color: #162e51;
 }
 
 /*
@@ -4563,7 +4563,7 @@ through all possible variants
 }
 */
 .vads-border-primary-alt {
-  border-color: #02bfe7;
+  border-color: #00bde3;
 }
 
 /*
@@ -4578,7 +4578,7 @@ through all possible variants
 }
 */
 .vads-border-primary-alt-dark {
-  border-color: #00a6d2;
+  border-color: #28a0cb;
 }
 
 /*
@@ -4593,7 +4593,7 @@ through all possible variants
 }
 */
 .vads-border-primary-alt-darkest {
-  border-color: #046b99;
+  border-color: #07648d;
 }
 
 /*
@@ -4608,7 +4608,7 @@ through all possible variants
 }
 */
 .vads-border-primary-alt-light {
-  border-color: #9bdaf1;
+  border-color: #97d4ea;
 }
 
 /*
@@ -5268,7 +5268,7 @@ through all possible variants
 }
 */
 .vads-link-default {
-  color: #004795;
+  color: #005ea2;
 }
 
 /*
@@ -5298,7 +5298,22 @@ through all possible variants
 }
 */
 .vads-primary {
-  color: #0071bb;
+  color: #005ea2;
+}
+
+/*
+@if map-deep-get($utility, settings, responsive) {
+  @include render-media-queries(
+    $utility,
+    $selector,
+    $property,
+    $value,
+    $val-props
+  );
+}
+*/
+.vads-primary-dark {
+  color: #1a4480;
 }
 
 /*
@@ -5313,22 +5328,7 @@ through all possible variants
 }
 */
 .vads-primary-darker {
-  color: #003e73;
-}
-
-/*
-@if map-deep-get($utility, settings, responsive) {
-  @include render-media-queries(
-    $utility,
-    $selector,
-    $property,
-    $value,
-    $val-props
-  );
-}
-*/
-.vads-primary-darkest {
-  color: #112e51;
+  color: #162e51;
 }
 
 /*
@@ -5343,7 +5343,7 @@ through all possible variants
 }
 */
 .vads-primary-alt {
-  color: #02bfe7;
+  color: #00bde3;
 }
 
 /*
@@ -5358,7 +5358,7 @@ through all possible variants
 }
 */
 .vads-primary-alt-dark {
-  color: #00a6d2;
+  color: #28a0cb;
 }
 
 /*
@@ -5373,7 +5373,7 @@ through all possible variants
 }
 */
 .vads-primary-alt-darkest {
-  color: #046b99;
+  color: #07648d;
 }
 
 /*
@@ -5388,7 +5388,7 @@ through all possible variants
 }
 */
 .vads-primary-alt-light {
-  color: #9bdaf1;
+  color: #97d4ea;
 }
 
 /*
