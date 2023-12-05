@@ -27,9 +27,6 @@ describe('v1 va-segmented-progress-bar', () => {
               <div class="progress-segment"></div>
               <div class="progress-segment"></div>
             </div>
-            <span aria-atomic="true" aria-live="polite" class="sr-only">
-              Step 3 of 6
-            </span>
           </div>
         </mock:shadow-root>
       </va-segmented-progress-bar>
@@ -84,15 +81,6 @@ describe('v1 va-segmented-progress-bar', () => {
     const analyticsSpy = await page.spyOnEvent('component-library-analytics');
     expect(analyticsSpy).not.toHaveReceivedEvent();
   });
-
-  it("should render correct progress text", async () => {
-    const page = await newE2EPage({
-      html: '<va-segmented-progress-bar current="3" total="6" progress-term="Chapter"></va-segmented-progress-bar>',
-    });
-    const element = await page.find('va-segmented-progress-bar');
-    const counter = element.shadowRoot.querySelector('.sr-only');
-    expect(counter.innerHTML.indexOf('Chapter')).not.toEqual(-1);
-  })
 });
 
 
@@ -174,7 +162,7 @@ describe('v3 va-segmented-progress-bar', () => {
     const analyticsSpy = await page.spyOnEvent('component-library-analytics');
     expect(analyticsSpy).not.toHaveReceivedEvent();
   });
-  
+
   it("uswds - should render heading-text when labels are not provided", async () => {
     const page = await newE2EPage({
       html: '<va-segmented-progress-bar current="3" total="6" uswds heading-text="My Header"></va-segmented-progress-bar>',
