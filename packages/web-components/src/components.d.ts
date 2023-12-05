@@ -380,6 +380,10 @@ export namespace Components {
         "value"?: string;
     }
     interface VaFeaturedContent {
+        /**
+          * Whether or not the component will use USWDS v3 styling.
+         */
+        "uswds"?: boolean;
     }
     interface VaFileInput {
         /**
@@ -2225,6 +2229,10 @@ declare namespace LocalJSX {
         "value"?: string;
     }
     interface VaFeaturedContent {
+        /**
+          * Whether or not the component will use USWDS v3 styling.
+         */
+        "uswds"?: boolean;
     }
     interface VaFileInput {
         /**
