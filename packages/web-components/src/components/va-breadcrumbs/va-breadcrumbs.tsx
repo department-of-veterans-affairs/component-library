@@ -64,6 +64,13 @@ export class VaBreadcrumbs {
   @Prop() disableAnalytics?: boolean = false;
 
   /**
+   * Are the hrefs provided in the objects of the breadcrumbList to be used 
+   * in an app with a Router, e.g. React Router?
+   * Has no effect if uswds is false
+   */
+  @Prop() useRouter?: boolean = false;
+
+  /**
    * The event used to track usage of the component. This is emitted when a
    * breadcrumb anchor is clicked and disableAnalytics is not true.
    */
@@ -73,6 +80,16 @@ export class VaBreadcrumbs {
     bubbles: true,
   })
   componentLibraryAnalytics: EventEmitter;
+
+  /**
+   * Fires when user clicks on breadcrumb anchor tag.
+   * Has no effect unless uswds and useRouter are true
+   */
+    @Event({
+      composed: true,
+      bubbles: true,
+    })
+    routeChange: EventEmitter<{href: string}>;
 
   /**
    * This method is used to update the formattedBreadcrumbs state.
@@ -239,6 +256,25 @@ export class VaBreadcrumbs {
     });
   }
 
+   /**
+   * Emit event with payload equal to href of the link clinked
+   * Only fires when uswds and useRouter are true
+   */
+   handleRouteChange(e: MouseEvent, href: string): void {
+    e.preventDefault();
+    this.routeChange.emit({href});
+  }
+
+  /**
+   * Handle click event on breadcrumb when uswds is true
+   */
+  uswdsHandler(e: MouseEvent, href: string): void {
+    if (this.useRouter) {
+      this.handleRouteChange(e, href);
+    }
+    this.fireAnalyticsEvent(e);
+  }
+
   render() {
     const { label, uswds, wrapping } = this;
     const wrapClass = classnames({
@@ -260,7 +296,7 @@ export class VaBreadcrumbs {
                       <span>{item.label}</span>
                     </a>
                   ) : (
-                    <a class="usa-breadcrumb__link" href={item.href} onClick={e => this.fireAnalyticsEvent(e)}>
+                    <a class="usa-breadcrumb__link" href={item.href} onClick={e => this.uswdsHandler(e, item.href)}>
                       <span>{item.label}</span>
                     </a>
                   )}

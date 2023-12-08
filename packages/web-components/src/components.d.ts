@@ -166,6 +166,10 @@ export namespace Components {
          */
         "label"?: string;
         /**
+          * Are the hrefs provided in the objects of the breadcrumbList to be used  in an app with a Router, e.g. React Router? Has no effect if uswds is false
+         */
+        "useRouter"?: boolean;
+        /**
           * Whether or not the component will use USWDS v3 styling.
          */
         "uswds"?: boolean;
@@ -1974,6 +1978,14 @@ declare namespace LocalJSX {
           * The event used to track usage of the component. This is emitted when a breadcrumb anchor is clicked and disableAnalytics is not true.
          */
         "onComponent-library-analytics"?: (event: VaBreadcrumbsCustomEvent<any>) => void;
+        /**
+          * Fires when user clicks on breadcrumb anchor tag. Has no effect unless uswds and useRouter are true
+         */
+        "onRouteChange"?: (event: VaBreadcrumbsCustomEvent<{href: string}>) => void;
+        /**
+          * Are the hrefs provided in the objects of the breadcrumbList to be used  in an app with a Router, e.g. React Router? Has no effect if uswds is false
+         */
+        "useRouter"?: boolean;
         /**
           * Whether or not the component will use USWDS v3 styling.
          */
