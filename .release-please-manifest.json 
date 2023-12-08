@@ -1,0 +1,7 @@
+{
+    "packages/core":"33.0.0",
+    "packages/css-library":"0.0.2",
+    "packages/design-system-dashboard-cli":"0.0.1",
+    "packages/react-components":"26.0.0",
+    "packages/web-components":"4.51.0",
+}
