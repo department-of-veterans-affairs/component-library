@@ -108,6 +108,49 @@ const WrappingCrumbsTemplate = ({
   );
 };
 
+
+const WithRouterTemplate = ({
+  label,
+  'disable-analytics': disableAnalytics,
+  uswds,
+  wrapping
+}) => {
+  const breadcrumbs = [
+    { label: 'Home', href: '/#1' },
+    { label: 'Federal Contracting', href: '/#2', isRouterLink: true },
+    { label: 'Contracting assistance programs', href: '/#3', isRouterLink: true },
+    {
+      label: 'Women-owned small business federal contracting program',
+      href: '/#4',
+      isRouterLink: true
+    },
+  ];
+
+  function handleRouteChange({detail}) {
+    const { href } = detail;
+    console.log(`the href is: ${href}`)
+  }
+
+  return (
+    <div>
+      <p>Some of the breadcrumbs in this example have a <code>isRouterLink:true</code> property.
+        When the corresponding anchor tag is clicked these links emit a <code>route-change</code> event.
+        This event can be handled in a React component where utilities provided 
+        by React Router can be used to change the page under view.
+      </p>
+      <VaBreadcrumbs
+        label={label}
+        disableAnalytics={disableAnalytics}
+        uswds={uswds}
+        breadcrumbList={breadcrumbs}
+        wrapping={wrapping}
+        onRouteChange={handleRouteChange}
+      ></VaBreadcrumbs>
+    </div>
+  );
+};
+
+
 const defaultArgs = {
   'uswds': true,
   'label': 'Breadcrumb',
@@ -128,3 +171,6 @@ RerenderState.args = { ...defaultArgs };
 
 export const WrappingState = WrappingCrumbsTemplate.bind(null);
 WrappingState.args = { ...defaultArgs, wrapping: true };
+
+export const WithRouterLinkSupport = WithRouterTemplate.bind(null);
+WithRouterLinkSupport.args = { ...defaultArgs }
