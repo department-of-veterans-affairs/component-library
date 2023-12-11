@@ -47,45 +47,6 @@
   padding: 0 0 0.2em 0;
 }
 
-#content.interior .primary li p:first-of-type,
-#content.interior .primary ul + p {
-  font-weight: normal;
-  color: #323a45;
-  font-size: 1em;
-  padding-bottom: 0;
-}
-
-#content .section.primary {
-  background: none;
-  padding: 2em 0;
-  background: #005ea2;
-}
-#content .section.primary h1,
-#content .section.primary h2,
-#content .section.primary h3,
-#content .section.primary h4,
-#content .section.primary h5,
-#content .section.primary h6,
-#content .section.primary p,
-#content .section.primary li {
-  color: #ffffff;
-}
-#content .section.primary p {
-  color: #ffffff;
-}
-#content .section.primary a {
-  color: #ffffff;
-}
-#content .section.primary ul li {
-  list-style: square;
-}
-#content .section.secondary {
-  padding: 3em 0;
-}
-#content .section.secondary h3 {
-  font-size: 2.2em;
-}
-
 .va-nav-breadcrumbs--playbook {
   background: none;
   margin: 0 0 1em 0;
