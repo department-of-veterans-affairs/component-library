@@ -64,13 +64,6 @@ export class VaBreadcrumbs {
   @Prop() disableAnalytics?: boolean = false;
 
   /**
-   * Are the hrefs provided in the objects of the breadcrumbList to be used 
-   * in an app with a Router, e.g. React Router?
-   * Has no effect if uswds is false
-   */
-  @Prop() useRouter?: boolean = false;
-
-  /**
    * The event used to track usage of the component. This is emitted when a
    * breadcrumb anchor is clicked and disableAnalytics is not true.
    */
@@ -83,7 +76,8 @@ export class VaBreadcrumbs {
 
   /**
    * Fires when user clicks on breadcrumb anchor tag.
-   * Has no effect unless uswds and useRouter are true
+   * Has no effect unless uswds is true and the href of anchor tag is part of 
+   * breadcrumb object that also has isRouterLink: true
    */
     @Event({
       composed: true,
@@ -99,7 +93,7 @@ export class VaBreadcrumbs {
    * @param breadcrumbList - An array of breadcrumb objects or a stringified version of it.
    * @private
    */
-  private updateBreadCrumbList(breadcrumbList: Array<{ label: string; href: string }> | string) {
+  private updateBreadCrumbList(breadcrumbList: Array<{ label: string; href: string; isRouterLink?: boolean }> | string) {
     this.formattedBreadcrumbs = typeof breadcrumbList === 'string' ? JSON.parse(breadcrumbList) : breadcrumbList;
   }
 
@@ -258,7 +252,7 @@ export class VaBreadcrumbs {
 
    /**
    * Emit event with payload equal to href of the link clinked
-   * Only fires when uswds and useRouter are true
+   * Only fires if link is part of breadcrumb object that also has isLinkRouter = true property
    */
    handleRouteChange(e: MouseEvent, href: string): void {
     e.preventDefault();
@@ -268,8 +262,9 @@ export class VaBreadcrumbs {
   /**
    * Handle click event on breadcrumb when uswds is true
    */
-  uswdsHandler(e: MouseEvent, href: string): void {
-    if (this.useRouter) {
+  uswdsHandler(e: MouseEvent, breadcrumb: { href: string, isRouterLink?: boolean}): void {
+    const { href, isRouterLink } = breadcrumb;
+    if (isRouterLink) {
       this.handleRouteChange(e, href);
     }
     this.fireAnalyticsEvent(e);
@@ -296,7 +291,7 @@ export class VaBreadcrumbs {
                       <span>{item.label}</span>
                     </a>
                   ) : (
-                    <a class="usa-breadcrumb__link" href={item.href} onClick={e => this.uswdsHandler(e, item.href)}>
+                    <a class="usa-breadcrumb__link" href={item.href} onClick={e => this.uswdsHandler(e, item)}>
                       <span>{item.label}</span>
                     </a>
                   )}
