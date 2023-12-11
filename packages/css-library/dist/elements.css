@@ -1,3 +1,164 @@
 /*! This is intentionally left empty for now */
+/* 
+ Styles that are specific to VA.gov with element/tag.
+*/
+.feature {
+  background: #e1f3f8;
+  padding: 1em;
+  clear: both;
+  margin: 1.5em 0 1.5em 0;
+}
+.feature p {
+  color: inherit;
+  font: inherit;
+  margin-bottom: 0;
+  margin-top: 0;
+  padding-bottom: 0.5em;
+}
+.feature h2 {
+  margin-top: 0;
+}
+.feature h3 {
+  margin-top: 0;
+}
+.feature h4 {
+  margin-top: 0;
+}
+.feature ul {
+  margin: 0 0 0.5em 1.5em;
+  padding: 0;
+}
+.feature ul li {
+  list-style: square;
+  margin: 0;
+}
+
+.va-quicklinks ul {
+  margin-top: 12.8px;
+}
+.va-quicklinks li {
+  padding: 8.96px 0;
+}
+.va-quicklinks h3 {
+  line-height: 1.2em;
+  font-size: 1.65em;
+  color: #162e51;
+  margin: 0 0 16px 0;
+  padding: 0 0 0.2em 0;
+}
+
+.primary p {
+  padding-top: 0;
+  margin-top: 0;
+}
+
+#content.interior .primary li p:first-of-type,
+#content.interior .primary ul + p {
+  font-weight: normal;
+  color: #323a45;
+  font-size: 1em;
+  padding-bottom: 0;
+}
+
+#content .section.primary {
+  background: none;
+  padding: 2em 0;
+  background: #005ea2;
+}
+#content .section.primary h1,
+#content .section.primary h2,
+#content .section.primary h3,
+#content .section.primary h4,
+#content .section.primary h5,
+#content .section.primary h6,
+#content .section.primary p,
+#content .section.primary li {
+  color: #ffffff;
+}
+#content .section.primary p {
+  color: #ffffff;
+}
+#content .section.primary a {
+  color: #ffffff;
+}
+#content .section.primary ul li {
+  list-style: square;
+}
+#content .section.secondary {
+  padding: 3em 0;
+}
+#content .section.secondary h3 {
+  font-size: 2.2em;
+}
+
+.va-nav-breadcrumbs--playbook {
+  background: none;
+  margin: 0 0 1em 0;
+  padding: 0;
+}
+.va-nav-breadcrumbs--playbook h2 {
+  font-size: 1em;
+}
+.va-nav-breadcrumbs--playbook li {
+  text-transform: none;
+  margin: 0.25em 0;
+  padding: 0.1em;
+  display: inline-block;
+  line-height: 1.15em;
+  vertical-align: middle;
+  font-size: 1.35em;
+}
+.va-nav-breadcrumbs--playbook li:hover {
+  border-bottom: none;
+  text-decoration: none;
+}
+.va-nav-breadcrumbs--playbook a {
+  border-bottom: 3px solid #ffffff;
+  text-decoration: none;
+  color: #ffffff;
+}
+.va-nav-breadcrumbs--playbook a:hover {
+  text-decoration: none;
+  background: rgba(0, 0, 0, 0.05);
+  border-bottom: 3px solid #fdb81e;
+}
+
+.va-notice--banner p {
+  margin: 0;
+}
+.va-notice--banner a {
+  background-image: none;
+  color: inherit;
+  padding: 0;
+}
+
+.card {
+  position: relative;
+  margin: 0 0 1.5em 0;
+  padding: 1em;
+  border: 1px solid #f1f1f1;
+}
+.card dt {
+  font-weight: 700;
+}
+.card dd {
+  padding: 0;
+  margin: 0;
+}
+.card.templates {
+  height: 338px;
+}
+.card:after {
+  visibility: hidden;
+  display: block;
+  font-size: 0;
+  content: " ";
+  clear: both;
+  height: 0;
+}
+.card h4,
+.card h5 {
+  margin-top: 0;
+}
 
 /*# sourceMappingURL=elements.css.map */
