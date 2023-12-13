@@ -8,9 +8,6 @@
 
 @use "../../dist/tokens/scss/variables" as *;
 
-$small-screen:  481px;  // TODO: USWDSv3 breakpoints?
-$large-screen:  1201px; // TODO: USWDSv3 breakpoints?
-
 html,
 body {
   padding: 0;
