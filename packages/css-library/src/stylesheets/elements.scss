@@ -10,65 +10,6 @@
 
 $color-link-default-hover: rgba($color-black, 0.05);
 
-/* 
- Styles that are specific to VA.gov using CSS type selectors (elements/tags).
-*/
-
-.va-quicklinks {
-  ul {
-    margin-top: 12.8px; // Original 0.8rem to 16px base font
-  }
-  li {
-    padding: 8.96px 0; // Original 0.56rem to 16px base font
-  }
-  h3 {
-    line-height: 1.2em;
-    font-size: 1.65em;
-    color: $color-primary-darker;
-    margin: 0 0 16px 0; // Original 1rem to 16px base font
-    padding: 0 0 0.2em 0;
-  }
-}
-
-// Playbook and Facility Locator
-// Used in content-build: src/site/includes/breadcrumbs-playbook.html
-
-.va-nav-breadcrumbs--playbook {
-  background: none;
-  margin: 0 0 1em 0;
-  padding: 0;
-
-  h2 {
-    font-size: 1em;
-  }
-
-  li {
-    text-transform: none;
-    margin: 0.25em 0;
-    padding: 0.1em;
-    display: inline-block;
-    line-height: 1.15em;
-    vertical-align: middle;
-    font-size: 1.35em;
-
-    &:hover {
-      border-bottom: none;
-      text-decoration: none;
-    }
-  }
-
-  a {
-    border-bottom: 3px solid $color-white;
-    text-decoration: none;
-    color: $color-white;
-    &:hover {
-      text-decoration: none;
-      background: $color-link-default-hover;
-      border-bottom: 3px solid $color-gold;
-    }
-  }
-}
-
 // Notice / feedback banners
 
 .va-notice--banner {
