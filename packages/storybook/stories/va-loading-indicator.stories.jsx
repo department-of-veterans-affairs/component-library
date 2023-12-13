@@ -8,6 +8,7 @@ export default {
   title: 'Components/Loading indicator',
   id: 'components/va-loading-indicator',
   parameters: {
+    chromatic: { disableSnapshot: true },
     componentSubtitle: `va-loading-indicator web component`,
     docs: {
       page: () => <StoryDocs data={loadingIndicatorDocs} />,

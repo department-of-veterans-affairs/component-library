@@ -7,6 +7,7 @@ import {
   applyPolyfills,
   defineCustomElements,
 } from '@department-of-veterans-affairs/component-library';
+import 'loki/configure-react';
 
 applyPolyfills().then(() => {
   defineCustomElements();
