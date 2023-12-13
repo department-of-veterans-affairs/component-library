@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Tue, 05 Dec 2023 16:42:10 GMT
+ * Generated on Wed, 13 Dec 2023 18:24:38 GMT
  */
 
 :root {
@@ -8,6 +8,7 @@
   --color-white: #ffffff;
   --color-black: #000000;
   --color-link-default: #005ea2;
+  --color-link-default-hover: rgba(0,0,0, 0.05);
   --color-link-visited: #54278f;
   --color-warning-message: #fac922;
   --color-feedback-warning-background: #fac922;

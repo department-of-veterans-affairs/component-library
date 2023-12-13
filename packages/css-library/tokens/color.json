@@ -4,6 +4,11 @@
     "white": { "value": "#ffffff" },
     "black": { "value": "{uswds-system-color-gray-100}" },
     "link-default": { "value": "{uswds-system-color-blue-vivid-60}" },
+    "link-default-hover": { 
+      "rgb": "0,0,0",
+      "alpha": "0.05",
+      "value": "rgba({color.link-default-hover.rgb}, {color.link-default-hover.alpha})"
+    },
     "link-visited": { "value": "{uswds-system-color-violet-vivid-70}" },
     "warning-message": { "value": "#fac922" },
     "feedback-warning-background": { "value": "#fac922" },
