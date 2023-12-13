@@ -262,7 +262,7 @@ export class VaBreadcrumbs {
   /**
    * Handle click event on breadcrumb when uswds is true
    */
-  uswdsHandler(e: MouseEvent, breadcrumb: { href: string, isRouterLink?: boolean}): void {
+  handleClick(e: MouseEvent, breadcrumb: { href: string, isRouterLink?: boolean}): void {
     const { href, isRouterLink } = breadcrumb;
     if (isRouterLink) {
       this.handleRouteChange(e, href);
@@ -291,7 +291,7 @@ export class VaBreadcrumbs {
                       <span>{item.label}</span>
                     </a>
                   ) : (
-                    <a class="usa-breadcrumb__link" href={item.href} onClick={e => this.uswdsHandler(e, item)}>
+                    <a class="usa-breadcrumb__link" href={item.href} onClick={e => this.handleClick(e, item)}>
                       <span>{item.label}</span>
                     </a>
                   )}
