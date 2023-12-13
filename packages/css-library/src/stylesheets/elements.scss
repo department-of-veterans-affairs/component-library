@@ -8,10 +8,7 @@
 
 @use "../../dist/tokens/scss/variables" as *;
 
-$color-link-default-hover: rgba($color-black, 0.05);
-
 // Notice / feedback banners
-
 .va-notice--banner {
   p {
     margin: 0;
@@ -20,37 +17,5 @@ $color-link-default-hover: rgba($color-black, 0.05);
     background-image: none;
     color: inherit;
     padding: 0;
-  }
-}
-
-// Info cards
-
-.card {
-  position: relative;
-  margin: 0 0 1.5em 0;
-  padding: 1em;
-  border: 1px solid $color-gray-lightest;
-  dt {
-    font-weight: 700;
-  }
-  dd {
-    padding: 0;
-    margin: 0;
-  }
-  &.templates {
-    height: 338px;
-  }
-  &:after {
-    visibility: hidden;
-    display: block;
-    font-size: 0;
-    content: " ";
-    clear: both;
-    height: 0;
-  }
-
-  h4,
-  h5 {
-    margin-top: 0;
   }
 }
