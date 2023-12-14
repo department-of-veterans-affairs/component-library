@@ -156,3 +156,15 @@ input:focus:-ms-input-placeholder {
     font-size: 24px;
   }
 }
+
+// Notice / feedback banners
+.va-notice--banner {
+  p {
+    margin: 0;
+  }
+  a {
+    background-image: none;
+    color: inherit;
+    padding: 0;
+  }
+}
