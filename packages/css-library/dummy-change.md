@@ -7,3 +7,6 @@
 #### commit 2
     - a merge with main, special circumstances, not  logged  
     - before push v0.0.2
+#### commit 3
+    - changed secret variable  
+    - before push v0.0.2
