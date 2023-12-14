@@ -1,3 +1,11 @@
 /*! This is intentionally left empty for now */
+.va-notice--banner p {
+  margin: 0;
+}
+.va-notice--banner a {
+  background-image: none;
+  color: inherit;
+  padding: 0;
+}
 
 /*# sourceMappingURL=elements.css.map */

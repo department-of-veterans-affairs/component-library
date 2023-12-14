@@ -5,3 +5,17 @@
 // p {
 //    @include @usa-paragraph
 // }
+
+@use "../../dist/tokens/scss/variables" as *;
+
+// Notice / feedback banners
+.va-notice--banner {
+  p {
+    margin: 0;
+  }
+  a {
+    background-image: none;
+    color: inherit;
+    padding: 0;
+  }
+}
