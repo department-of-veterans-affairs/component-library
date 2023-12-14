@@ -159,6 +159,35 @@ input:focus:-ms-input-placeholder {
 
 // Notice / feedback banners
 .va-notice--banner {
+  background: $color-white;
+  margin: 0 0 0.75em 0;
+  padding: 0;
+  font-weight: 400;
+
+  @include media($medium-large-screen) {
+    background: $color-gray-lightest;
+    .usa-banner-inner {
+      padding-left: 1.5rem;
+    }
+
+    .usa-banner-content {
+      padding-left: 0;
+      padding-right: 0;
+    }
+  }
+
+  @include media($small-desktop-screen) {
+    .usa-banner-inner {
+      padding-left: 0rem;
+    }
+  }
+
+  &-inner {
+    margin: auto;
+    max-width: 97.5rem;
+    position: relative;
+  }
+
   p {
     margin: 0;
   }
