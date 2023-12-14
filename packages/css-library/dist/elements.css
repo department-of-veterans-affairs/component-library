@@ -138,5 +138,13 @@ input:focus:-ms-input-placeholder {
     font-size: 24px;
   }
 }
+.va-notice--banner p {
+  margin: 0;
+}
+.va-notice--banner a {
+  background-image: none;
+  color: inherit;
+  padding: 0;
+}
 
 /*# sourceMappingURL=elements.css.map */
