@@ -1,9 +1,8 @@
-name: Release and Publish
+name: Release and Publish Test
 
 on:
   push:
     branches:
-      - master
       - rm-relese-please-exp
 
 jobs:
