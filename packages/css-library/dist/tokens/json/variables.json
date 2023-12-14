@@ -99,15 +99,13 @@
       ]
     },
     "link-default-hover": {
-      "rgb": "0,0,0",
       "alpha": "0.05",
-      "value": "rgba(0,0,0, 0.05)",
+      "value": "rgba(#000000, 0.05)",
       "filePath": "tokens/color.json",
       "isSource": true,
       "original": {
-        "rgb": "0,0,0",
         "alpha": "0.05",
-        "value": "rgba({color.link-default-hover.rgb}, {color.link-default-hover.alpha})"
+        "value": "rgba({uswds-system-color-gray-100}, {color.link-default-hover.alpha})"
       },
       "name": "color-link-default-hover",
       "attributes": {

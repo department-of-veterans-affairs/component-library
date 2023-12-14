@@ -13,9 +13,8 @@
       "value": "{uswds-system-color-blue-vivid-60}"
     },
     "link-default-hover": {
-      "rgb": "0,0,0",
       "alpha": "0.05",
-      "value": "rgba(0,0,0, 0.05)"
+      "value": "rgba(#000000, 0.05)"
     },
     "link-visited": {
       "value": "{uswds-system-color-violet-vivid-70}"
