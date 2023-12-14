@@ -8,6 +8,155 @@
 
 @use "../../dist/tokens/scss/variables" as *;
 
+html,
+body {
+  padding: 0;
+  margin: 0;
+}
+
+html {
+  font-weight: 500;
+}
+
+body {
+  background: $color-white;
+  color: $color-base;
+}
+
+article > h1 {
+  margin-top: 0;
+}
+
+hr {
+  margin: 2.5em 0;
+  margin: 48px 0 40px; // converted to 16px base font: 3rem 0 2.5rem
+  border: 1px solid $color-gray-light;
+}
+
+#content abbr {
+  border-bottom: 0px;
+  text-decoration: none;
+  font-weight: inherit;
+  font-style: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+
+a {
+  color: $color-link-default;
+  text-decoration: underline;
+  -webkit-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+  -webkit-transition-timing-function: ease-in-out;
+  transition-timing-function: ease-in-out;
+  -webkit-transition-property: color, background-color, border-color;
+  transition-property: color, background-color, border-color;
+
+  &:hover {
+    background-color: $color-link-default-hover;
+    color: inherit;
+    text-decoration: underline;
+  }
+  &:active {
+    background: $color-link-default-hover;
+  }
+  &:visited,
+  &:visited abbr {
+    color: $uswds-system-color-violet-vivid-70;
+  }
+}
+
+// ====== Headings
+
+// H1 should only be used once at the top-level, so we can safely remove the margin-top.
+h1 {
+  margin-top: 0;
+}
+
+h6 {
+  margin: 0.5em 0 0;
+  text-transform: none;
+  font-weight: 700;
+}
+
+//======= Lists
+ul {
+  padding: 0 0 0 1.5em;
+  list-style: square;
+}
+
+ol {
+  margin: 0 0 0 1.25em;
+  list-style-position: outside;
+}
+
+ul,
+ol {
+  > ul,
+  ol {
+    margin: 0.5em 0 0.5em 1.2em;
+  }
+}
+
+// Definition lists
+dd {
+  margin-left: 0;
+}
+
+dd + dt {
+  margin-top: 1.5em;
+}
+
+// Figure / Caption
+figure {
+  font-size: 0.85em;
+  margin-left: -15px; // converted to 16px base font: -1.875rem/2
+  margin-right: -15px; // converted to 16px base font: -1.875rem/2
+
+  @media screen and (min-width: $large-screen), print and (min-width: $large-screen) {
+    margin-left: -16.66667%;
+    margin-right: -16.66667%;
+  }
+}
+
+figcaption {
+  color: $color-primary-darker;
+}
+
+input::-webkit-input-placeholder {
+  color: $color-gray;
+}
+input::-moz-placeholder {
+  color: $color-gray;
+}
+
+input:-ms-input-placeholder {
+  color: $color-gray;
+}
+
+// Visually clear placeholder text on focus
+input:focus::-webkit-input-placeholder {
+  color: transparent;
+}
+
+input:focus::-moz-placeholder {
+  color: transparent;
+}
+
+input:focus:-ms-input-placeholder {
+  color: transparent;
+}
+
+@media (max-width: $small-screen)  {
+  h1 {
+    font-size: 30px;
+  }
+
+  h2 {
+    font-size: 24px;
+  }
+}
+
 // Notice / feedback banners
 .va-notice--banner {
   p {

@@ -1,4 +1,34 @@
 {
+  "small-screen": {
+    "value": "481px",
+    "filePath": "tokens/breakpoints.json",
+    "isSource": true,
+    "original": {
+      "value": "481px"
+    },
+    "name": "small-screen",
+    "attributes": {
+      "category": "small-screen"
+    },
+    "path": [
+      "small-screen"
+    ]
+  },
+  "large-screen": {
+    "value": "1201px",
+    "filePath": "tokens/breakpoints.json",
+    "isSource": true,
+    "original": {
+      "value": "1201px"
+    },
+    "name": "large-screen",
+    "attributes": {
+      "category": "large-screen"
+    },
+    "path": [
+      "large-screen"
+    ]
+  },
   "color": {
     "base": {
       "value": "#212121",
@@ -66,6 +96,25 @@
       "path": [
         "color",
         "link-default"
+      ]
+    },
+    "link-default-hover": {
+      "alpha": "0.05",
+      "value": "rgba(#000000, 0.05)",
+      "filePath": "tokens/color.json",
+      "isSource": true,
+      "original": {
+        "alpha": "0.05",
+        "value": "rgba({uswds-system-color-gray-100}, {color.link-default-hover.alpha})"
+      },
+      "name": "color-link-default-hover",
+      "attributes": {
+        "category": "color",
+        "type": "link-default-hover"
+      },
+      "path": [
+        "color",
+        "link-default-hover"
       ]
     },
     "link-visited": {
