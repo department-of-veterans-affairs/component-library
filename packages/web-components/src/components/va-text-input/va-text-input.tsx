@@ -12,7 +12,7 @@ import {
 } from '@stencil/core';
 import classnames from 'classnames';
 import i18next from 'i18next';
-import { consoleDevError, getCharacterMessage } from '../../utils/utils';
+import { consoleDevError, getCharacterMessage, getHeaderLevel } from '../../utils/utils';
 
 if (Build.isTesting) {
   // Make i18next.t() return the key instead of the value
@@ -157,6 +157,26 @@ export class VaTextInput {
   @Prop() charcount?: boolean = false;
 
   /**
+   * Whether the component should use the new forms pattern. Has no effect unless uswds is true
+   */
+  @Prop() useFormsPattern?: boolean = false;
+
+  /**
+   * The heading level to use for the heading if usFormsPatter and uswds are true
+   */
+  @Prop() formHeadingLevel?: number;
+
+  /**
+   * The content of the heading. Not used unless useFormsPattern and uswds are true
+   */
+  @Prop() formHeading?: string;
+
+  /**
+   * The description of the form. Not used unless useFormsPattern and uswds are true
+   */
+  @Prop() formDescription?: string;
+
+  /**
    * The event used to track usage of the component. This is emitted when the
    * input is blurred and enableAnalytics is true.
    */
@@ -240,7 +260,11 @@ export class VaTextInput {
       success,
       messageAriaDescribedby,
       width,
-      charcount
+      charcount,
+      useFormsPattern,
+      formHeadingLevel,
+      formHeading,
+      formDescription
     } = this;
 
     // When used in va-memorable-date, we don't want to display the help messages
@@ -253,7 +277,9 @@ export class VaTextInput {
     const ariaDescribedbyIds =
       `${messageAriaDescribedby ? 'input-message' : ''} ${
         error ? 'input-error-message' : ''
-      } ${charcount && maxlength ? 'charcount-message' : ''}`.trim() || null; // Null so we don't add the attribute if we have an empty string
+        } ${charcount && maxlength ? 'charcount-message' : ''} ${
+        useFormsPattern && formHeading ? 'form-question' : ''
+      } ${ useFormsPattern && formDescription ? 'form-description' : ''}`.trim() || null; // Null so we don't add the attribute if we have an empty string
 
     if (uswds) {
       const charCountTooHigh = charcount && (value?.length > maxlength);
@@ -272,20 +298,34 @@ export class VaTextInput {
         'usa-character-count__status': charcount,
         'usa-character-count__status--invalid': charcount && maxlength && value?.length > maxlength
       });
+
+      let headingOrLabel = null;
+      if (useFormsPattern) {
+        const HeaderLevel = getHeaderLevel(formHeadingLevel);
+        headingOrLabel = (
+          <Fragment>
+            <HeaderLevel id="form-question">{formHeading}</HeaderLevel>
+            <div class="usa-legend" id="form-description">{formDescription}</div>
+          </Fragment>
+        )
+      } else if (label) {
+        headingOrLabel = (
+          <label htmlFor="inputField" class={labelClass} part="label">
+            {label}
+            {required && (
+              <span class="usa-label--required">
+                {' '}
+                {i18next.t('required')}
+              </span>
+            )}
+            {hint && <span class="usa-hint">{hint}</span>}
+          </label>
+        )
+      }
+      
       return (
         <Host>
-          {label && (
-            <label htmlFor="inputField" class={labelClass} part="label">
-              {label}
-              {required && (
-                <span class="usa-label--required">
-                  {' '}
-                  {i18next.t('required')}
-                </span>
-              )}
-              {hint && <span class="usa-hint">{hint}</span>}
-            </label>
-          )}
+          {headingOrLabel}
           <slot></slot>
           <span id="input-error-message" role="alert">
             {error && (

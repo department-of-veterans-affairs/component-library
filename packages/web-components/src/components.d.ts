@@ -1176,6 +1176,9 @@ export namespace Components {
           * The error message to render.
          */
         "error"?: string;
+        "formDescription"?: string;
+        "formHeading"?: string;
+        "formHeadingLevel"?: number;
         /**
           * Optional hint text.
          */
@@ -1234,6 +1237,10 @@ export namespace Components {
           * The type attribute.
          */
         "type"?: 'email' | 'number' | 'search' | 'tel' | 'text' | 'url';
+        /**
+          * Whether the component should use the new
+         */
+        "useFormsPattern"?: boolean;
         /**
           * Whether or not the component will use USWDS v3 styling.
          */
@@ -3173,6 +3180,9 @@ declare namespace LocalJSX {
           * The error message to render.
          */
         "error"?: string;
+        "formDescription"?: string;
+        "formHeading"?: string;
+        "formHeadingLevel"?: number;
         /**
           * Optional hint text.
          */
@@ -3235,6 +3245,10 @@ declare namespace LocalJSX {
           * The type attribute.
          */
         "type"?: 'email' | 'number' | 'search' | 'tel' | 'text' | 'url';
+        /**
+          * Whether the component should use the new
+         */
+        "useFormsPattern"?: boolean;
         /**
           * Whether or not the component will use USWDS v3 styling.
          */
