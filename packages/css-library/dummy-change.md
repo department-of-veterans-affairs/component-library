@@ -10,3 +10,6 @@
 #### commit 3
     - changed secret variable  
     - before push v0.0.2
+#### commit 4
+    - changed named of sercet variable to match repo level var  
+    - before push v0.0.2
