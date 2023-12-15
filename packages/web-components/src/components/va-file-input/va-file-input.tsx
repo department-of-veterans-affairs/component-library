@@ -1,13 +1,13 @@
 /* eslint-disable i18next/no-literal-string */
-import { 
-  Component, 
-  Element, 
-  Host, 
-  h, 
-  Prop, 
+import {
+  Component,
+  Element,
+  Host,
+  h,
+  Prop,
   Fragment,
   Event,
-  EventEmitter
+  EventEmitter,
 } from '@stencil/core';
 
 /**
@@ -22,7 +22,6 @@ import {
   styleUrl: 'va-file-input.css',
   shadow: true,
 })
-
 export class VaFileInput {
   @Element() el: HTMLElement;
 
@@ -64,7 +63,12 @@ export class VaFileInput {
   /**
    * Emit component-library-analytics events on the file input change event.
    */
-   @Prop() enableAnalytics?: boolean = false;
+  @Prop() enableAnalytics?: boolean = false;
+
+  /**
+   * Whether or not the component will use USWDS v3 styling.
+   */
+  @Prop({ reflect: true }) uswds?: boolean = false;
 
   /**
    * The event emitted when the file input value changes.
@@ -75,7 +79,7 @@ export class VaFileInput {
    * The event used to track usage of the component. This is emitted when the
    * file input changes and enableAnalytics is true.
    */
-   @Event({
+  @Event({
     eventName: 'component-library-analytics',
     composed: true,
     bubbles: true,
@@ -84,7 +88,7 @@ export class VaFileInput {
 
   private handleChange = (e: Event) => {
     const target = e.target as HTMLInputElement;
-    this.vaChange.emit({files: target.files});
+    this.vaChange.emit({ files: target.files });
     /**
      * Clear the original input, otherwise events will be triggered
      * with empty file arrays and sometimes uploading a file twice will
@@ -97,15 +101,15 @@ export class VaFileInput {
         componentName: 'va-file-input',
         action: 'change',
         details: {
-          label: this.label
+          label: this.label,
         },
       });
     }
   };
 
-  private handleButtonClick = () => { 
+  private handleButtonClick = () => {
     this.el.shadowRoot.getElementById('fileInputField').click();
-  }
+  };
 
   /**
    * Makes sure the button text always has a value.
@@ -116,45 +120,41 @@ export class VaFileInput {
   };
 
   render() {
-    const { 
-      label,
-      name, 
-      required, 
-      accept,
-      error,
-      hint,
-    } = this;
-    
+    const { label, name, required, accept, error, hint, uswds } = this;
+
     const text = this.getButtonText();
 
-    return (
-      <Host>
-        {label && (
-          <label htmlFor="fileInputButton">
-            {label}
-            {required && <span class="required">(*Required)</span>}
-          </label>
-        )}
-        {hint && <span class="hint-text">{hint}</span>}
-        <slot></slot>
-        <span id="error-message" role="alert">
-          {error && (
-            <Fragment>
-              <span class="sr-only">Error</span> 
-              {error}
-            </Fragment>
+    if (uswds) {
+      // V3 stuff here
+    } else {
+      return (
+        <Host>
+          {label && (
+            <label htmlFor="fileInputButton">
+              {label}
+              {required && <span class="required">(*Required)</span>}
+            </label>
           )}
-        </span>
-        <va-button
-          id="fileInputButton"
-          aria-label={label}
-          label={label}
-          onClick={this.handleButtonClick}
-          secondary
-          text={text}
-          aria-describedby={error ? 'error-message' : undefined}
-        />
-        <input
+          {hint && <span class="hint-text">{hint}</span>}
+          <slot></slot>
+          <span id="error-message" role="alert">
+            {error && (
+              <Fragment>
+                <span class="sr-only">Error</span>
+                {error}
+              </Fragment>
+            )}
+          </span>
+          <va-button
+            id="fileInputButton"
+            aria-label={label}
+            label={label}
+            onClick={this.handleButtonClick}
+            secondary
+            text={text}
+            aria-describedby={error ? 'error-message' : undefined}
+          />
+          <input
             id="fileInputField"
             hidden
             type="file"
@@ -162,8 +162,8 @@ export class VaFileInput {
             name={name}
             onChange={this.handleChange}
           />
-      </Host>
-    );
+        </Host>
+      );
+    }
   }
-
 }
