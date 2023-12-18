@@ -282,7 +282,8 @@ export class VaTextInput {
 
     const ariaLabeledByIds = 
     `${useFormsPattern && formHeading ? 'form-question' : ''} ${ 
-      useFormsPattern && formDescription ? 'form-description' : ''}`.trim() || null;
+      useFormsPattern && formDescription ? 'form-description' : ''} ${
+      useFormsPattern && label ? 'input-label' : ''}`.trim() || null;
 
       if (uswds) {
       const charCountTooHigh = charcount && (value?.length > maxlength);
@@ -314,7 +315,7 @@ export class VaTextInput {
               <div id="form-description" part="form-description">{formDescription}</div>
             }
             {label && 
-              <label htmlFor="inputField" class={labelClass} part="label">
+              <label id="input-label" class={labelClass} part="label">
                 {label}
                 {required && (
                   <span class="usa-label--required">
