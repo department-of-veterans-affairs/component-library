@@ -277,8 +277,7 @@ export class VaTextInput {
     const ariaDescribedbyIds =
       `${messageAriaDescribedby ? 'input-message' : ''} ${
         error ? 'input-error-message' : ''} ${
-        charcount && maxlength ? 'charcount-message' : ''} ${ 
-        useFormsPattern && formDescription ? 'form-description' : ''}`.trim() || null; // Null so we don't add the attribute if we have an empty string
+        charcount && maxlength ? 'charcount-message' : ''}`.trim() || null; // Null so we don't add the attribute if we have an empty string
 
     const ariaLabeledByIds = 
     `${useFormsPattern && formHeading ? 'form-question' : ''} ${ 

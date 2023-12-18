@@ -695,6 +695,18 @@ export namespace Components {
          */
         "error"?: string;
         /**
+          * The description of the form if `useFormsPattern` and `uswds` are true.
+         */
+        "formDescription"?: string;
+        /**
+          * The content of the heading if `useFormsPattern` and `uswds` are true.
+         */
+        "formHeading"?: string;
+        /**
+          * The heading level for the heading if `useFormsPattern` and `uswds` are true.
+         */
+        "formHeadingLevel"?: number;
+        /**
           * Optional hint text.
          */
         "hint"?: string;
@@ -726,6 +738,10 @@ export namespace Components {
           * Set the input to required and render the (Required) text.
          */
         "required"?: boolean;
+        /**
+          * Enabling this will add a heading and description for integrating into the forms pattern. `uswds` should be true.
+         */
+        "useFormsPattern"?: boolean;
         /**
           * Whether or not the component will use USWDS v3 styling.
          */
@@ -2620,6 +2636,18 @@ declare namespace LocalJSX {
          */
         "error"?: string;
         /**
+          * The description of the form if `useFormsPattern` and `uswds` are true.
+         */
+        "formDescription"?: string;
+        /**
+          * The content of the heading if `useFormsPattern` and `uswds` are true.
+         */
+        "formHeading"?: string;
+        /**
+          * The heading level for the heading if `useFormsPattern` and `uswds` are true.
+         */
+        "formHeadingLevel"?: number;
+        /**
           * Optional hint text.
          */
         "hint"?: string;
@@ -2655,6 +2683,10 @@ declare namespace LocalJSX {
           * Set the input to required and render the (Required) text.
          */
         "required"?: boolean;
+        /**
+          * Enabling this will add a heading and description for integrating into the forms pattern. `uswds` should be true.
+         */
+        "useFormsPattern"?: boolean;
         /**
           * Whether or not the component will use USWDS v3 styling.
          */

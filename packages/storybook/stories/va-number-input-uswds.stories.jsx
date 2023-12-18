@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
+import { getWebComponentDocs, propStructure, StoryDocs, applyFocus } from './wc-helpers';
 
 const numberInputDocs = getWebComponentDocs('va-number-input');
 
@@ -34,6 +34,10 @@ const defaultArgs = {
   'max': undefined,
   hint: null,
   uswds: true,
+  'use-forms-pattern': false,
+  'form-heading-level': null,
+  'form-heading': null,
+  'form-description': null,
 };
 
 const vaNumberInput = args => {
@@ -156,6 +160,56 @@ const WidthsTemplate = ({
   );
 };
 
+const FormsPatternTemplate = ({
+  name,
+  value,
+  uswds,
+}) => {
+  const handleClick = () => {
+    const header = document.getElementById('form-pattern-input')
+      ?.shadowRoot
+      ?.getElementById('form-question');
+
+    applyFocus(header);
+  }
+  return (
+    <>
+      <va-number-input
+        id="form-pattern-input"
+        required
+        uswds={uswds}
+        name={name}
+        label='Home phone number'
+        value=""
+        use-forms-pattern={true}
+        form-heading-level={1}
+        form-heading="Phone and email address"
+        form-description="This is an additional form description"
+      />
+
+      <va-number-input
+        required
+        uswds={uswds}
+        name={name}
+        label='Mobile phone number'
+        value=""
+      />  
+
+      <va-text-input
+        uswds={uswds}
+        name={name}
+        label='Email address'
+        value=""
+      />
+      <hr />
+      <va-button 
+        text="click to focus header" 
+        onClick={handleClick}>
+      </va-button>
+    </>
+  );
+};
+
 export const Default = Template.bind(null);
 Default.args = { ...defaultArgs };
 Default.argTypes = propStructure(numberInputDocs);
@@ -189,5 +243,10 @@ Internationalization.args = {
 
 export const Widths = WidthsTemplate.bind(null);
 Widths.args = {
+  ...defaultArgs,
+};
+
+export const FormsPattern = FormsPatternTemplate.bind(null);
+FormsPattern.args = {
   ...defaultArgs,
 };

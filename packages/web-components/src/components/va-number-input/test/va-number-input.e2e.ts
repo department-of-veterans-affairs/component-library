@@ -230,7 +230,7 @@ describe('va-number-input', () => {
     expect(element).toEqualHtml(`
       <va-number-input class="hydrated" label="Hello, world" uswds="">
         <mock:shadow-root>
-          <label for="inputField" class="usa-label">
+          <label for="inputField" class="usa-label" part="label">
             Hello, world
           </label>
           <span id="input-error-message" role="alert"></span>
@@ -430,4 +430,15 @@ describe('va-number-input', () => {
     const errorEl = await page.find('va-number-input >>> span.usa-error-message');
     expect(errorEl.innerText).toBe('This is an error');
   })
+
+  it('uswds useFormsPattern displays header and description', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-number-input label="This is a label" uswds use-forms-pattern form-heading-level="1" form-heading="This is a form header" form-description="This is a form description"/>');
+
+    const formHeader = await page.find('va-number-input >>> h1');
+    expect(formHeader.innerText).toEqual('This is a form header');
+
+    const formDescription = await page.find('va-number-input >>> #form-description');
+    expect(formDescription.innerText).toEqual('This is a form description');
+  });
 });

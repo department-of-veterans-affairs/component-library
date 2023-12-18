@@ -12,6 +12,7 @@ import {
 import classnames from 'classnames';
 import i18next from 'i18next';
 import { Build } from '@stencil/core';
+import { getHeaderLevel } from '../../utils/utils';
 
 if (Build.isTesting) {
   // Make i18next.t() return the key instead of the value
@@ -111,6 +112,26 @@ export class VaNumberInput {
   @Prop() uswds?: boolean = false;
 
   /**
+   * Enabling this will add a heading and description for integrating into the forms pattern. `uswds` should be true.
+   */
+  @Prop() useFormsPattern?: boolean = false;
+
+  /**
+   * The heading level for the heading if `useFormsPattern` and `uswds` are true.
+   */
+  @Prop() formHeadingLevel?: number = 3;
+
+  /**
+   * The content of the heading if `useFormsPattern` and `uswds` are true.
+   */
+  @Prop() formHeading?: string;
+
+  /**
+   * The description of the form if `useFormsPattern` and `uswds` are true.
+   */
+  @Prop() formDescription?: string;
+
+  /**
    * The event used to track usage of the component. This is emitted when the
    * input is blurred and enableAnalytics is true.
    */
@@ -178,10 +199,20 @@ export class VaNumberInput {
       handleInput,
       width,
       messageAriaDescribedby,
+      useFormsPattern,
+      formHeadingLevel,
+      formHeading,
+      formDescription
     } = this;
 
     const ariaDescribedbyIds = `${messageAriaDescribedby ? 'input-message' : ''} ${error ? 'input-error-message' : ''}`
     .trim() || null; // Null so we don't add the attribute if we have an empty string
+
+    const ariaLabeledByIds = 
+    `${useFormsPattern && formHeading ? 'form-question' : ''} ${ 
+      useFormsPattern && formDescription ? 'form-description' : ''} ${
+      useFormsPattern && label ? 'input-label' : ''}`.trim() || null;
+
     const inputMode = inputmode ? inputmode : 'numeric';
 
     if (uswds) {
@@ -194,20 +225,50 @@ export class VaNumberInput {
         'usa-input--error': error,
         [`usa-input--${width}`]: width,
       });
+
+      let headingOrLabel = null;
+      if (useFormsPattern) {
+        const HeaderLevel = getHeaderLevel(formHeadingLevel);
+        headingOrLabel = (
+          <Fragment>
+            {formHeading &&
+              <HeaderLevel id="form-question" part="form-header">{formHeading}</HeaderLevel>
+            }
+            {formDescription && 
+              <div id="form-description" class="usa-legend" part="form-description">{formDescription}</div>
+            }
+            {label && 
+              <label id="input-label" class={labelClasses} part="label">
+                {label}
+                {required && (
+                  <span class="usa-label--required">
+                    {' '}
+                    {i18next.t('required')}
+                  </span>
+                )}
+                {hint && <span class="usa-hint">{hint}</span>}
+              </label>
+            }
+          </Fragment>
+        )
+      } else {
+        headingOrLabel = (
+          <label htmlFor="inputField" class={labelClasses} part="label">
+            {label}
+            {required && (
+              <span class="usa-label--required">
+                {' '}
+                {i18next.t('required')}
+              </span>
+            )}
+            {hint && <span class="usa-hint">{hint}</span>}
+          </label>
+        )
+      }
+
       return (
         <Host>
-          {label && (
-            <label htmlFor="inputField" class={labelClasses}>
-              {label}
-              {required && (
-                <span class="usa-label--required">
-                  {' '}
-                  {i18next.t('required')}
-                </span>
-              )}
-              {hint && <span class="usa-hint">{hint}</span>}
-            </label>
-          )}
+          {headingOrLabel}
           <span id="input-error-message" role="alert">
             {error && (
               <Fragment>
@@ -219,6 +280,7 @@ export class VaNumberInput {
           <input
             class={inputClasses}
             aria-describedby={ariaDescribedbyIds}
+            aria-labelledby={ariaLabeledByIds}
             aria-invalid={error ? 'true' : 'false'}
             id="inputField"
             type="text"
