@@ -740,4 +740,15 @@ describe('va-text-input', () => {
     const maxlengthMessageEl = await page.find('va-text-input >>> #maxlength-message');
     expect(maxlengthMessageEl).toBeNull();
   });
+
+  it('uswds useFormsPattern displays header and description', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-text-input label="This is a label" uswds use-forms-pattern form-heading-level="1" form-heading="This is a form header" form-description="This is a form description"/>');
+
+    const formHeader = await page.find('va-text-input >>> h1');
+    expect(formHeader.innerText).toEqual('This is a form header');
+
+    const formDescription = await page.find('va-text-input >>> #form-description');
+    expect(formDescription.innerText).toEqual('This is a form description');
+  });
 });

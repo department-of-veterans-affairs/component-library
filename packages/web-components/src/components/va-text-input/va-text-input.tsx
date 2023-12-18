@@ -312,7 +312,7 @@ export class VaTextInput {
               <HeaderLevel id="form-question" part="form-header">{formHeading}</HeaderLevel>
             }
             {formDescription && 
-              <div id="form-description" part="form-description">{formDescription}</div>
+              <div id="form-description" class="usa-legend" part="form-description">{formDescription}</div>
             }
             {label && 
               <label id="input-label" class={labelClass} part="label">
