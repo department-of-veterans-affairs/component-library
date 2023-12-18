@@ -302,49 +302,45 @@ export class VaTextInput {
         'usa-character-count__status--invalid': charcount && maxlength && value?.length > maxlength
       });
 
-      let headingOrLabel = null;
+      let formsHeading = null;
       if (useFormsPattern) {
         const HeaderLevel = getHeaderLevel(formHeadingLevel);
-        headingOrLabel = (
+        formsHeading = (
           <Fragment>
             {formHeading &&
-              <HeaderLevel id="form-question" part="form-header">{formHeading}</HeaderLevel>
-            }
-            {formDescription && 
-              <div id="form-description" class="usa-legend" part="form-description">{formDescription}</div>
-            }
-            {label && 
-              <label id="input-label" class={labelClass} part="label">
-                {label}
-                {required && (
+              <HeaderLevel id="form-question" part="form-header">
+                {formHeading}
+                {!label && required && (
                   <span class="usa-label--required">
                     {' '}
                     {i18next.t('required')}
                   </span>
                 )}
-                {hint && <span class="usa-hint">{hint}</span>}
-              </label>
+              </HeaderLevel>
+            }
+            {formDescription && 
+              <div id="form-description" class="usa-legend" part="form-description">{formDescription}</div>
             }
           </Fragment>
-        )
-      } else {
-        headingOrLabel = (
-          <label htmlFor="inputField" class={labelClass} part="label">
-            {label}
-            {required && (
-              <span class="usa-label--required">
-                {' '}
-                {i18next.t('required')}
-              </span>
-            )}
-            {hint && <span class="usa-hint">{hint}</span>}
-          </label>
         )
       }
       
       return (
         <Host>
-          {headingOrLabel}
+          {formsHeading}
+          <div class="input-wrap">
+          {label && (
+            <label htmlFor="inputField" id="input-label" class={labelClass} part="label">
+              {label}
+              {required && (
+                <span class="usa-label--required">
+                  {' '}
+                  {i18next.t('required')}
+                </span>
+              )}
+              {hint && <span class="usa-hint">{hint}</span>}
+            </label>
+          )}
           <slot></slot>
           <span id="input-error-message" role="alert">
             {error && (
@@ -387,6 +383,7 @@ export class VaTextInput {
               {getCharacterMessage(value, maxlength)}
             </span>
           )}
+          </div>
         </Host>
       );
     } else {

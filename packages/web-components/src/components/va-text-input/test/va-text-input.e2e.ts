@@ -377,12 +377,14 @@ describe('va-text-input', () => {
     expect(element).toEqualHtml(`
       <va-text-input class="hydrated" label="Hello, world" uswds="">
         <mock:shadow-root>
-          <label for="inputField" class="usa-label" part="label">
+        <div class="input-wrap">
+          <label for="inputField" class="usa-label" id="input-label" part="label">
             Hello, world
-          </label>
-          <slot></slot>
-          <span id="input-error-message" role="alert"></span>
-          <input class="usa-input" id="inputField" part="input" type="text" aria-invalid="false" />
+            </label>
+            <slot></slot>
+            <span id="input-error-message" role="alert"></span>
+            <input class="usa-input" id="inputField" part="input" type="text" aria-invalid="false" />
+          </div>
         </mock:shadow-root>
       </va-text-input>
     `);

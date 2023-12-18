@@ -211,13 +211,13 @@ const WidthsTemplate = ({
   );
 };
 
-const FormsPatternTemplate = ({
+const FormsPatternMultipleTemplate = ({
   name,
   value,
   uswds,
 }) => {
   const handleClick = () => {
-    const header = document.getElementById('form-pattern-input')
+    const header = document.getElementById('form-pattern-multiple-input')
       ?.shadowRoot
       ?.getElementById('form-question');
 
@@ -226,7 +226,9 @@ const FormsPatternTemplate = ({
   return (
     <>
       <va-text-input
-        id="form-pattern-input"
+        required
+        error="This is an error message"
+        id="form-pattern-multiple-input"
         uswds={uswds}
         name={name}
         label='First Name'
@@ -251,6 +253,53 @@ const FormsPatternTemplate = ({
         value={value}
       />
       <hr />
+      <va-button 
+        text="click to focus header" 
+        onClick={handleClick}>
+      </va-button>
+    </>
+  );
+};
+
+const FormsPatternSingleTemplate = ({
+  name,
+  value,
+  uswds,
+  error,
+}) => {
+  const handleClick = () => {
+    const header = document.getElementById('form-pattern-single-input')
+      ?.shadowRoot
+      ?.getElementById('form-question');
+
+    applyFocus(header);
+  }
+  return (
+    <>
+      <va-text-input
+        required
+        id="form-pattern-single-input"
+        uswds={uswds}
+        name={name}
+        label={null}
+        value={value}
+        error={error}
+        use-forms-pattern={true}
+        form-heading-level={1}
+        form-heading="Enter the name of a historical figure"
+        form-description="This is an additional form description"
+      >
+        <p>HTML passed into the component slot:</p>
+        <ul>
+          <li>Sojourner Truth</li>
+          <li>Frederick Douglass</li>
+          <li>Booker T. Washington</li>
+          <li>George Washington Carver</li>
+        </ul>
+      </va-text-input>
+
+      <hr />
+
       <va-button 
         text="click to focus header" 
         onClick={handleClick}>
@@ -345,7 +394,18 @@ Widths.args = {
   ...defaultArgs,
 };
 
-export const FormsPattern = FormsPatternTemplate.bind(null);
-FormsPattern.args = {
+export const FormsPatternSingle = FormsPatternSingleTemplate.bind(null);
+FormsPatternSingle.args = {
+  ...defaultArgs,
+};
+
+export const FormsPatternSingleError = FormsPatternSingleTemplate.bind(null);
+FormsPatternSingleError.args = {
+  ...defaultArgs,
+  error: 'This is an error message',
+};
+
+export const FormsPatternMultiple = FormsPatternMultipleTemplate.bind(null);
+FormsPatternMultiple.args = {
   ...defaultArgs,
 };
