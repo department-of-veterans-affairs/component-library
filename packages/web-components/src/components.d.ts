@@ -1176,8 +1176,17 @@ export namespace Components {
           * The error message to render.
          */
         "error"?: string;
+        /**
+          * The description of the form if `useFormsPattern` and `uswds` are true.
+         */
         "formDescription"?: string;
+        /**
+          * The content of the heading if `useFormsPattern` and `uswds` are true.
+         */
         "formHeading"?: string;
+        /**
+          * The heading level for the heading if `useFormsPattern` and `uswds` are true.
+         */
         "formHeadingLevel"?: number;
         /**
           * Optional hint text.
@@ -1238,7 +1247,7 @@ export namespace Components {
          */
         "type"?: 'email' | 'number' | 'search' | 'tel' | 'text' | 'url';
         /**
-          * Whether the component should use the new
+          * Enabling this will add a heading and description for integrating into the forms pattern. `uswds` should be true.
          */
         "useFormsPattern"?: boolean;
         /**
@@ -3180,8 +3189,17 @@ declare namespace LocalJSX {
           * The error message to render.
          */
         "error"?: string;
+        /**
+          * The description of the form if `useFormsPattern` and `uswds` are true.
+         */
         "formDescription"?: string;
+        /**
+          * The content of the heading if `useFormsPattern` and `uswds` are true.
+         */
         "formHeading"?: string;
+        /**
+          * The heading level for the heading if `useFormsPattern` and `uswds` are true.
+         */
         "formHeadingLevel"?: number;
         /**
           * Optional hint text.
@@ -3246,7 +3264,7 @@ declare namespace LocalJSX {
          */
         "type"?: 'email' | 'number' | 'search' | 'tel' | 'text' | 'url';
         /**
-          * Whether the component should use the new
+          * Enabling this will add a heading and description for integrating into the forms pattern. `uswds` should be true.
          */
         "useFormsPattern"?: boolean;
         /**

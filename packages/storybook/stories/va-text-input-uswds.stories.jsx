@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import React, { useState, useEffect } from 'react';
-import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
+import { getWebComponentDocs, propStructure, StoryDocs, applyFocus } from './wc-helpers';
 
 const textInputDocs = getWebComponentDocs('va-text-input');
 
@@ -54,7 +54,11 @@ const defaultArgs = {
   'uswds': true,
   'hint': null,
   'message-aria-describedby': 'Optional description text for screen readers',
-  'charcount': false
+  'charcount': false,
+  'use-forms-pattern': false,
+  'form-heading-level': null,
+  'form-heading': null,
+  'form-description': null,
 };
 
 const Template = ({
@@ -207,6 +211,54 @@ const WidthsTemplate = ({
   );
 };
 
+const FormsPatternTemplate = ({
+  name,
+  value,
+  uswds,
+}) => {
+  const handleClick = () => {
+    const header = document.getElementById('form-pattern-input')
+      ?.shadowRoot
+      ?.getElementById('form-question');
+
+    applyFocus(header);
+  }
+  return (
+    <>
+      <va-text-input
+        id="form-pattern-input"
+        uswds={uswds}
+        name={name}
+        label='The label of an input field'
+        value={value}
+        use-forms-pattern={true}
+        form-heading-level={1}
+        form-heading="This is a form header"
+        form-description="This is a form description"
+      />
+
+      <va-text-input
+        uswds={uswds}
+        name={name}
+        label='The label of an input field'
+        value={value}
+      />  
+  
+      <va-text-input
+        uswds={uswds}
+        name={name}
+        label='The label of an input field'
+        value={value}
+      />
+      <br />
+      <va-button 
+        text="click to focus on header" 
+        onClick={handleClick}>
+      </va-button>
+    </>
+  );
+};
+
 export const Default = Template.bind(null);
 Default.args = { ...defaultArgs };
 Default.argTypes = propStructure(textInputDocs);
@@ -290,5 +342,10 @@ WithCharacterCount.args = { ...defaultArgs, maxlength: '10', charcount: true}
 
 export const Widths = WidthsTemplate.bind(null);
 Widths.args = {
+  ...defaultArgs,
+};
+
+export const WithFormsPattern = FormsPatternTemplate.bind(null);
+WithFormsPattern.args = {
   ...defaultArgs,
 };

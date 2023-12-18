@@ -157,22 +157,22 @@ export class VaTextInput {
   @Prop() charcount?: boolean = false;
 
   /**
-   * Whether the component should use the new forms pattern. Has no effect unless uswds is true
+   * Enabling this will add a heading and description for integrating into the forms pattern. `uswds` should be true.
    */
   @Prop() useFormsPattern?: boolean = false;
 
   /**
-   * The heading level to use for the heading if usFormsPatter and uswds are true
+   * The heading level for the heading if `useFormsPattern` and `uswds` are true.
    */
-  @Prop() formHeadingLevel?: number;
+  @Prop() formHeadingLevel?: number = 3;
 
   /**
-   * The content of the heading. Not used unless useFormsPattern and uswds are true
+   * The content of the heading if `useFormsPattern` and `uswds` are true.
    */
   @Prop() formHeading?: string;
 
   /**
-   * The description of the form. Not used unless useFormsPattern and uswds are true
+   * The description of the form if `useFormsPattern` and `uswds` are true.
    */
   @Prop() formDescription?: string;
 
@@ -277,11 +277,14 @@ export class VaTextInput {
     const ariaDescribedbyIds =
       `${messageAriaDescribedby ? 'input-message' : ''} ${
         error ? 'input-error-message' : ''
-        } ${charcount && maxlength ? 'charcount-message' : ''} ${
-        useFormsPattern && formHeading ? 'form-question' : ''
-      } ${ useFormsPattern && formDescription ? 'form-description' : ''}`.trim() || null; // Null so we don't add the attribute if we have an empty string
+        } ${charcount && maxlength ? 'charcount-message' : ''} 
+        ${ useFormsPattern && formDescription ? 'form-description' : ''}`.trim() || null; // Null so we don't add the attribute if we have an empty string
 
-    if (uswds) {
+    const ariaLabeledByIds = 
+    `${useFormsPattern && formHeading ? 'form-question' : ''} ${ 
+      useFormsPattern && formDescription ? 'form-description' : ''}`.trim() || null;
+
+      if (uswds) {
       const charCountTooHigh = charcount && (value?.length > maxlength);
       const labelClass = classnames({
         'usa-label': true,
@@ -304,11 +307,27 @@ export class VaTextInput {
         const HeaderLevel = getHeaderLevel(formHeadingLevel);
         headingOrLabel = (
           <Fragment>
-            <HeaderLevel id="form-question">{formHeading}</HeaderLevel>
-            <div class="usa-legend" id="form-description">{formDescription}</div>
+            {formHeading &&
+              <HeaderLevel id="form-question" part="form-header">{formHeading}</HeaderLevel>
+            }
+            {formDescription && 
+              <div id="form-description" part="form-description">{formDescription}</div>
+            }
+            {label && 
+              <label htmlFor="inputField" class={labelClass} part="label">
+                {label}
+                {required && (
+                  <span class="usa-label--required">
+                    {' '}
+                    {i18next.t('required')}
+                  </span>
+                )}
+                {hint && <span class="usa-hint">{hint}</span>}
+              </label>
+            }
           </Fragment>
         )
-      } else if (label) {
+      } else {
         headingOrLabel = (
           <label htmlFor="inputField" class={labelClass} part="label">
             {label}
@@ -343,6 +362,7 @@ export class VaTextInput {
             onInput={handleInput}
             onBlur={handleBlur}
             aria-describedby={ariaDescribedbyIds}
+            aria-labelledby={ariaLabeledByIds}
             aria-invalid={invalid || error || charCountTooHigh ? 'true' : 'false'}
             inputmode={inputmode ? inputmode : undefined}
             maxlength={charcount ? undefined : maxlength}

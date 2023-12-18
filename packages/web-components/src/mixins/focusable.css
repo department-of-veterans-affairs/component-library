@@ -7,6 +7,7 @@ a:not([disabled]):focus,
 h1:focus,
 input:not([disabled]):focus,
 textarea:not([disabled]):focus,
+#form-question
 [role='option']:focus {
   outline: 2px solid var(--color-gold-light);
   outline-offset: 2px;
