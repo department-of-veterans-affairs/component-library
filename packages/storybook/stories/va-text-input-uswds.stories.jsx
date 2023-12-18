@@ -229,30 +229,30 @@ const FormsPatternTemplate = ({
         id="form-pattern-input"
         uswds={uswds}
         name={name}
-        label='The label of an input field'
+        label='First Name'
         value={value}
         use-forms-pattern={true}
         form-heading-level={1}
-        form-heading="This is a form header"
-        form-description="This is a form description"
+        form-heading="Name and email address"
+        form-description="This is an additional form description"
       />
 
       <va-text-input
         uswds={uswds}
         name={name}
-        label='The label of an input field'
+        label='Last Name'
         value={value}
       />  
   
       <va-text-input
         uswds={uswds}
         name={name}
-        label='The label of an input field'
+        label='Email address'
         value={value}
       />
-      <br />
+      <hr />
       <va-button 
-        text="click to focus on header" 
+        text="click to focus header" 
         onClick={handleClick}>
       </va-button>
     </>
@@ -345,7 +345,7 @@ Widths.args = {
   ...defaultArgs,
 };
 
-export const WithFormsPattern = FormsPatternTemplate.bind(null);
-WithFormsPattern.args = {
+export const FormsPattern = FormsPatternTemplate.bind(null);
+FormsPattern.args = {
   ...defaultArgs,
 };
