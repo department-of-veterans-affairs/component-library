@@ -12,7 +12,7 @@ jobs:
       - uses: google-github-actions/release-please-action@v3
         id: release
         with:
-          token: ${{secrets.RELEASE_ACTION_TOKEN}}}
+          token: ${{secrets.RELEASE_ACTION_TOKEN}}
           release-type: node
           monorepo-tags: true
           command: manifest
