@@ -55,7 +55,7 @@ const defaultArgs = {
   'hint': null,
   'message-aria-describedby': 'Optional description text for screen readers',
   'charcount': false,
-  'use-forms-pattern': false,
+  'use-forms-pattern': null,
   'form-heading-level': null,
   'form-heading': null,
   'form-description': null,

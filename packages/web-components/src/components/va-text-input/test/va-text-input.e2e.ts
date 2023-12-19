@@ -775,4 +775,12 @@ describe('va-text-input', () => {
     const formDescription = await page.find('va-text-input >>> #form-description');
     expect(formDescription.innerText).toEqual('This is a form description');
   });
+
+  it('uswds useFormsPattern passes an aXe check', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-text-input label="This is a label" uswds use-forms-pattern="multiple" form-heading-level="1" form-heading="This is a form header" form-description="This is a form description"/>');
+
+
+    await axeCheck(page);
+  });
 });
