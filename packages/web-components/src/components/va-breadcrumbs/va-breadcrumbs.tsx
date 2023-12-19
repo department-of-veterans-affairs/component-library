@@ -75,6 +75,17 @@ export class VaBreadcrumbs {
   componentLibraryAnalytics: EventEmitter;
 
   /**
+   * Fires when user clicks on breadcrumb anchor tag.
+   * Has no effect unless uswds is true and the href of anchor tag is part of 
+   * breadcrumb object that also has isRouterLink: true
+   */
+    @Event({
+      composed: true,
+      bubbles: true,
+    })
+    routeChange: EventEmitter<{href: string}>;
+
+  /**
    * This method is used to update the formattedBreadcrumbs state.
    * It is only invoked when the uswds attribute is set to true on the component.
    * It either parses a JSON string into an array of breadcrumb objects or uses the passed array as is.
@@ -82,7 +93,7 @@ export class VaBreadcrumbs {
    * @param breadcrumbList - An array of breadcrumb objects or a stringified version of it.
    * @private
    */
-  private updateBreadCrumbList(breadcrumbList: Array<{ label: string; href: string }> | string) {
+  private updateBreadCrumbList(breadcrumbList: Array<{ label: string; href: string; isRouterLink?: boolean }> | string) {
     this.formattedBreadcrumbs = typeof breadcrumbList === 'string' ? JSON.parse(breadcrumbList) : breadcrumbList;
   }
 
@@ -239,6 +250,26 @@ export class VaBreadcrumbs {
     });
   }
 
+   /**
+   * Emit event with payload equal to href of the link clinked
+   * Only fires if link is part of breadcrumb object that also has isLinkRouter = true property
+   */
+   handleRouteChange(e: MouseEvent, href: string): void {
+    e.preventDefault();
+    this.routeChange.emit({href});
+  }
+
+  /**
+   * Handle click event on breadcrumb when uswds is true
+   */
+  handleClick(e: MouseEvent, breadcrumb: { href: string, isRouterLink?: boolean}): void {
+    const { href, isRouterLink } = breadcrumb;
+    if (isRouterLink) {
+      this.handleRouteChange(e, href);
+    }
+    this.fireAnalyticsEvent(e);
+  }
+
   render() {
     const { label, uswds, wrapping } = this;
     const wrapClass = classnames({
@@ -260,7 +291,7 @@ export class VaBreadcrumbs {
                       <span>{item.label}</span>
                     </a>
                   ) : (
-                    <a class="usa-breadcrumb__link" href={item.href} onClick={e => this.fireAnalyticsEvent(e)}>
+                    <a class="usa-breadcrumb__link" href={item.href} onClick={e => this.handleClick(e, item)}>
                       <span>{item.label}</span>
                     </a>
                   )}

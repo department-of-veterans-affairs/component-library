@@ -153,6 +153,10 @@ export class VaPagination {
       end = maxPageListLength >= totalPages
         ? totalPages
         : maxPageListLength - 1 - unboundedChar;
+      if(end === currentPage){
+        // make sure the next page is showing
+        end++;
+      }
       return makeArray(start, end);
     }
 
@@ -163,6 +167,10 @@ export class VaPagination {
         //subtract 2 to account for having to add ellipsis and first page
         ? totalPages - (maxPageListLength - 2 - 1)
         : 1;
+        if(start === currentPage){
+          // make sure the previous page is showing
+          start--;
+        }
       return makeArray(start, end);
 
     // continuous pages don't start at 1 or end at last page
@@ -359,9 +367,7 @@ export class VaPagination {
           </li>
         )
       });
-
-      const nextButton = page < pages
-        ?
+      const endEllipsisAndLastPage = pageNumbersToRender.indexOf(pages) === -1 ?
         <Fragment>
           {pages > this.SHOW_ALL_PAGES &&
             <li class={ellipsisClasses} aria-label="ellipsis indicating non-visible pages">
@@ -379,6 +385,12 @@ export class VaPagination {
                 {pages}
               </a>
           </li>}
+          </Fragment>
+          : null;
+      
+      const nextButton = page < pages
+        ?
+        <Fragment>
           <li class={arrowClasses} aria-label={nextAriaLabel}>
             <a
               onClick={() => this.handlePageSelect(page + 1, 'nav-paginate-number')}
@@ -399,6 +411,7 @@ export class VaPagination {
             <ul class="usa-pagination__list">
               {previousButton}
               {renderPages}
+              {endEllipsisAndLastPage}
               {nextButton}
             </ul>
           </nav>
