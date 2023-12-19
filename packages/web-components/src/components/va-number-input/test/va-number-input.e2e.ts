@@ -230,11 +230,13 @@ describe('va-number-input', () => {
     expect(element).toEqualHtml(`
       <va-number-input class="hydrated" label="Hello, world" uswds="">
         <mock:shadow-root>
-          <label for="inputField" class="usa-label" part="label">
-            Hello, world
-          </label>
-          <span id="input-error-message" role="alert"></span>
-          <input aria-invalid="false" class="usa-input" id="inputField" inputmode="numeric" pattern="[0-9]+(\\.[0-9]{1,})?" type="text">
+          <div class="input-wrap">
+            <label for="inputField" id="input-label" class="usa-label" part="label">
+              Hello, world
+            </label>
+            <span id="input-error-message" role="alert"></span>
+            <input aria-invalid="false" class="usa-input" id="inputField" inputmode="numeric" pattern="[0-9]+(\\.[0-9]{1,})?" type="text">
+          </div>
         </mock:shadow-root>
       </va-number-input>
     `);
@@ -431,14 +433,43 @@ describe('va-number-input', () => {
     expect(errorEl.innerText).toBe('This is an error');
   })
 
-  it('uswds useFormsPattern displays header and description', async () => {
+  it('uswds useFormsPattern displays header and description for the single field pattern', async () => {
     const page = await newE2EPage();
-    await page.setContent('<va-number-input label="This is a label" uswds use-forms-pattern form-heading-level="1" form-heading="This is a form header" form-description="This is a form description"/>');
+    await page.setContent('<va-number-input label="This is a label" uswds use-forms-pattern="single" form-heading-level="1" form-heading="This is a form header" form-description="This is a form description"/>');
 
     const formHeader = await page.find('va-number-input >>> h1');
     expect(formHeader.innerText).toEqual('This is a form header');
 
     const formDescription = await page.find('va-number-input >>> #form-description');
     expect(formDescription.innerText).toEqual('This is a form description');
+  });
+
+  it('uswds useFormsPattern displays header and description for the multiple fields pattern', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-number-input label="This is a label" uswds use-forms-pattern="multiple" form-heading-level="1" form-heading="This is a form header" form-description="This is a form description"/>');
+
+    const formHeader = await page.find('va-number-input >>> h1');
+    expect(formHeader.innerText).toEqual('This is a form header');
+
+    const formDescription = await page.find('va-number-input >>> #form-description');
+    expect(formDescription.innerText).toEqual('This is a form description');
+  });
+
+  it('uswds useFormsPattern does not display header and description if "single" or "multiple" is not indicated', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-number-input label="This is a label" uswds use-forms-pattern="multiple" form-heading-level="1" form-heading="This is a form header" form-description="This is a form description"/>');
+
+    const formHeader = await page.find('va-number-input >>> h1');
+    expect(formHeader.innerText).toEqual('This is a form header');
+
+    const formDescription = await page.find('va-number-input >>> #form-description');
+    expect(formDescription.innerText).toEqual('This is a form description');
+  });
+
+  it('uswds useFormsPattern passes an aXe check', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-number-input label="This is a label" uswds use-forms-pattern="multiple" form-heading-level="1" form-heading="This is a form header" form-description="This is a form description"/>');
+
+    await axeCheck(page);
   });
 });

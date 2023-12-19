@@ -112,9 +112,9 @@ export class VaNumberInput {
   @Prop() uswds?: boolean = false;
 
   /**
-   * Enabling this will add a heading and description for integrating into the forms pattern. `uswds` should be true.
+   * Enabling this will add a heading and description for integrating into the forms pattern. Accepts `single` or `multiple` to indicate if the form is a single input or will have multiple inputs. `uswds` should be true.
    */
-  @Prop() useFormsPattern?: boolean = false;
+  @Prop() useFormsPattern?: string;
 
   /**
    * The heading level for the heading if `useFormsPattern` and `uswds` are true.
@@ -226,49 +226,44 @@ export class VaNumberInput {
         [`usa-input--${width}`]: width,
       });
 
-      let headingOrLabel = null;
-      if (useFormsPattern) {
+      const isFormsPattern = useFormsPattern === 'single' || useFormsPattern === 'multiple' ? true : false;
+
+      let formsHeading = null;
+      if (isFormsPattern) {
         const HeaderLevel = getHeaderLevel(formHeadingLevel);
-        headingOrLabel = (
+        formsHeading = (
           <Fragment>
             {formHeading &&
-              <HeaderLevel id="form-question" part="form-header">{formHeading}</HeaderLevel>
+              <HeaderLevel id="form-question" part="form-header">
+                {formHeading}
+              </HeaderLevel>
             }
             {formDescription && 
               <div id="form-description" class="usa-legend" part="form-description">{formDescription}</div>
             }
-            {label && 
-              <label id="input-label" class={labelClasses} part="label">
-                {label}
-                {required && (
-                  <span class="usa-label--required">
-                    {' '}
-                    {i18next.t('required')}
-                  </span>
-                )}
-                {hint && <span class="usa-hint">{hint}</span>}
-              </label>
-            }
           </Fragment>
-        )
-      } else {
-        headingOrLabel = (
-          <label htmlFor="inputField" class={labelClasses} part="label">
-            {label}
-            {required && (
-              <span class="usa-label--required">
-                {' '}
-                {i18next.t('required')}
-              </span>
-            )}
-            {hint && <span class="usa-hint">{hint}</span>}
-          </label>
         )
       }
 
       return (
         <Host>
-          {headingOrLabel}
+          {formsHeading}
+          {isFormsPattern && (
+            <slot name="forms-pattern"></slot>
+          )}
+          <div class="input-wrap">
+          {label && (
+            <label htmlFor="inputField" id="input-label" class={labelClasses} part="label">
+              {label}
+              {required && (
+                <span class="usa-label--required">
+                  {' '}
+                  {i18next.t('required')}
+                </span>
+              )}
+              {hint && <span class="usa-hint">{hint}</span>}
+            </label>
+          )}
           <span id="input-error-message" role="alert">
             {error && (
               <Fragment>
@@ -299,6 +294,7 @@ export class VaNumberInput {
                 {messageAriaDescribedby}
               </span>
             )}
+          </div>
         </Host>
       );
     } else {

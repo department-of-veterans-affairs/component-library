@@ -34,7 +34,7 @@ const defaultArgs = {
   'max': undefined,
   hint: null,
   uswds: true,
-  'use-forms-pattern': false,
+  'use-forms-pattern': null,
   'form-heading-level': null,
   'form-heading': null,
   'form-description': null,
@@ -160,13 +160,13 @@ const WidthsTemplate = ({
   );
 };
 
-const FormsPatternTemplate = ({
+const FormsPatternMultipleTemplate = ({
   name,
   value,
   uswds,
 }) => {
   const handleClick = () => {
-    const header = document.getElementById('form-pattern-input')
+    const header = document.getElementById('form-pattern-multiple-input')
       ?.shadowRoot
       ?.getElementById('form-question');
 
@@ -175,33 +175,86 @@ const FormsPatternTemplate = ({
   return (
     <>
       <va-number-input
-        id="form-pattern-input"
         required
+        error="This is an error message"
+        id="form-pattern-multiple-input"
         uswds={uswds}
         name={name}
-        label='Home phone number'
+        label='Social security number'
+        hint="This is hint text"
         value=""
-        use-forms-pattern={true}
+        use-forms-pattern='multiple'
         form-heading-level={1}
-        form-heading="Phone and email address"
-        form-description="This is an additional form description"
-      />
+        form-heading="Identification information"
+        form-description="This is the additional form-description prop"
+      >
+      <div slot="forms-pattern">
+        <p>HTML passed into the forms-pattern slot:</p>
+        <ul>
+          <li>Social security number</li>
+          <li>VA file number</li>
+          <li>Service number</li>
+        </ul>
+      </div>
+      </va-number-input>
 
       <va-number-input
-        required
         uswds={uswds}
         name={name}
-        label='Mobile phone number'
+        label='VA file number'
+        hint="This is hint text"
         value=""
       />  
 
-      <va-text-input
+      <va-number-input
         uswds={uswds}
         name={name}
-        label='Email address'
+        label='Service number'
+        hint="This is hint text"
         value=""
       />
       <hr />
+      <va-button 
+        text="click to focus header" 
+        onClick={handleClick}>
+      </va-button>
+    </>
+  );
+};
+
+const FormsPatternSingleTemplate = ({
+  name,
+  value,
+  uswds,
+  error,
+}) => {
+  const id = (Math.floor(Math.random() * 10) + 1);
+  const handleClick = () => {
+    const header = document.getElementById(`form-pattern-single-input-${id}`)
+      ?.shadowRoot
+      ?.getElementById('form-question');
+
+    applyFocus(header);
+  }
+  return (
+    <>
+      <va-number-input
+        required
+        id={`form-pattern-single-input-${id}`}
+        uswds={uswds}
+        name={name}
+        label="VA file number"
+        hint="This is hint text"
+        value=""
+        error={error}
+        use-forms-pattern="single"
+        form-heading-level={1}
+        form-heading="Identification information"
+        form-description="This is the additional form-description prop"
+      ></va-number-input>
+
+      <hr />
+
       <va-button 
         text="click to focus header" 
         onClick={handleClick}>
@@ -246,7 +299,18 @@ Widths.args = {
   ...defaultArgs,
 };
 
-export const FormsPattern = FormsPatternTemplate.bind(null);
-FormsPattern.args = {
+export const FormsPatternSingle = FormsPatternSingleTemplate.bind(null);
+FormsPatternSingle.args = {
+  ...defaultArgs,
+};
+
+export const FormsPatternSingleError = FormsPatternSingleTemplate.bind(null);
+FormsPatternSingleError.args = {
+  ...defaultArgs,
+  error: 'This is an error message',
+};
+
+export const FormsPatternMultiple = FormsPatternMultipleTemplate.bind(null);
+FormsPatternMultiple.args = {
   ...defaultArgs,
 };
