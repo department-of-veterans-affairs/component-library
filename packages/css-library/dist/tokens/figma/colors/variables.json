@@ -1,7 +1,7 @@
 {
   "global": {
     "base": {
-      "value": "#212121"
+      "value": "{uswds-system-color-gray-90}"
     },
     "white": {
       "value": "#ffffff"
@@ -16,10 +16,10 @@
       "value": "{uswds-system-color-violet-vivid-70}"
     },
     "warning-message": {
-      "value": "#fac922"
+      "value": "{uswds-system-color-yellow-5}"
     },
     "feedback-warning-background": {
-      "value": "#fac922"
+      "value": "{uswds-system-color-yellow-5}"
     },
     "primary": {
       "*": {
@@ -51,88 +51,102 @@
     },
     "secondary": {
       "*": {
-        "value": "#e31c3d"
+        "value": "{uswds-system-color-red-50}"
       },
       "dark": {
-        "value": "#cd2026"
+        "value": "{uswds-system-color-red-vivid-60}"
       },
       "darkest": {
-        "value": "#981b1e"
+        "value": "{uswds-system-color-red-vivid-70}"
       },
       "light": {
-        "value": "#e59393"
+        "value": "{uswds-system-color-red-30}"
       },
       "lightest": {
-        "value": "#f9dede"
+        "value": "{uswds-system-color-red-cool-vivid-10}"
       }
     },
     "gray": {
       "*": {
-        "value": "#5b616b"
+        "value": "{uswds-system-color-gray-cool-60}"
       },
       "dark": {
-        "value": "#323a45"
+        "value": "{uswds-system-color-gray-cool-70}"
       },
       "medium": {
-        "value": "#757575"
+        "value": "{uswds-system-color-gray-50}"
       },
       "light": {
-        "value": "#aeb0b5"
+        "value": "{uswds-system-color-gray-cool-30}"
       },
       "light-alt": {
-        "value": "#eeeeee"
+        "value": "{uswds-system-color-gray-cool-5}"
       },
       "lighter": {
-        "value": "#d6d7d9"
+        "value": "{uswds-system-color-gray-cool-10}"
       },
       "lightest": {
-        "value": "#f1f1f1"
+        "value": "{uswds-system-color-gray-5}"
       },
       "warm-dark": {
-        "value": "#494440"
+        "value": "{uswds-system-color-gray-warm-70}"
       },
       "warm-light": {
-        "value": "#e4e2e0"
+        "value": "{uswds-system-color-gray-warm-10}"
       },
       "cool-light": {
-        "value": "#dce4ef"
+        "value": "{uswds-system-color-blue-warm-10}"
       }
     },
     "green": {
       "*": {
-        "value": "#2e8540"
+        "value": "{uswds-system-color-green-cool-vivid-50}"
       },
       "dark": {
-        "value": "#1e5f2f"
+        "value": "{uswds-system-color-green-cool-vivid-60}"
       },
       "darker": {
-        "value": "#195c27"
-      },
-      "darkest": {
-        "value": "#0f3f1f"
+        "value": "{uswds-system-color-green-cool-vivid-70}"
       },
       "light": {
-        "value": "#7dbf7c"
+        "value": "{uswds-system-color-green-cool-40}"
       },
       "lighter": {
-        "value": "#94bfa2"
+        "value": "{uswds-system-color-green-cool-20}"
       },
       "lightest": {
-        "value": "#e7f4e4"
+        "value": "{uswds-system-color-green-cool-5}"
       }
     },
     "gold": {
       "*": {
-        "value": "#fdb81e"
+        "value": "{uswds-system-color-gold-vivid-20}"
       },
       "light": {
-        "value": "#f9c642"
+        "value": "{uswds-system-color-yellow-vivid-20}"
       },
       "lighter": {
-        "value": "#fad980"
+        "value": "{uswds-system-color-gold-vivid-10}"
       },
       "lightest": {
-        "value": "#fff1d2"
+        "value": "{uswds-system-color-gold-vivid-5}"
+      },
+      "darker": {
+        "value": "{uswds-system-color-gold-vivid-50}"
+      }
+    },
+    "blue-cool": {
+      "*": {
+        "value": "{uswds-system-color-blue-warm-60}"
+      },
+      "light": {
+        "value": "{uswds-system-color-blue-warm-50}"
+      },
+      "lighter": {
+        "value": "{uswds-system-color-blue-warm-30}"
+      },
+      "lightest": {
+        "value": "{uswds-system-color-gray-warm-10}"
       }
     }
   }
