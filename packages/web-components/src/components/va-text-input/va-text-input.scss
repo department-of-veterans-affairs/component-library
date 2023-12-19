@@ -30,19 +30,6 @@
   outline-offset: 2px;
 }
 
-#form-question {
-  .usa-label--required {
-    font-size: 16.96px;
-    font-weight: normal;
-  }
-}
-
-:host([error]:not([error='false'])) #form-question {
-  .usa-label--required {
-    font-weight: 700;
-  }
-}
-
 input {
   box-sizing: border-box;
 }

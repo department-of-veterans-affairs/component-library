@@ -233,10 +233,10 @@ const FormsPatternMultipleTemplate = ({
         name={name}
         label='First Name'
         value={value}
-        use-forms-pattern={true}
+        use-forms-pattern='multiple'
         form-heading-level={1}
         form-heading="Name and email address"
-        form-description="This is an additional form description"
+        form-description="This is the additional form-description prop"
       />
 
       <va-text-input
@@ -267,8 +267,9 @@ const FormsPatternSingleTemplate = ({
   uswds,
   error,
 }) => {
+  const id = (Math.floor(Math.random() * 10) + 1);
   const handleClick = () => {
-    const header = document.getElementById('form-pattern-single-input')
+    const header = document.getElementById(`form-pattern-single-input-${id}`)
       ?.shadowRoot
       ?.getElementById('form-question');
 
@@ -278,24 +279,27 @@ const FormsPatternSingleTemplate = ({
     <>
       <va-text-input
         required
-        id="form-pattern-single-input"
+        id={`form-pattern-single-input-${id}`}
         uswds={uswds}
         name={name}
-        label={null}
+        label="Historical figure"
+        hint="This is hint text"
         value={value}
         error={error}
-        use-forms-pattern={true}
+        use-forms-pattern="single"
         form-heading-level={1}
         form-heading="Enter the name of a historical figure"
-        form-description="This is an additional form description"
+        form-description="This is the additional form-description prop"
       >
-        <p>HTML passed into the component slot:</p>
+      <div slot="forms-pattern">
+        <p>HTML passed into the forms-pattern slot:</p>
         <ul>
           <li>Sojourner Truth</li>
           <li>Frederick Douglass</li>
           <li>Booker T. Washington</li>
           <li>George Washington Carver</li>
         </ul>
+      </div>
       </va-text-input>
 
       <hr />

@@ -743,9 +743,31 @@ describe('va-text-input', () => {
     expect(maxlengthMessageEl).toBeNull();
   });
 
-  it('uswds useFormsPattern displays header and description', async () => {
+  it('uswds useFormsPattern displays header and description for the single field pattern', async () => {
     const page = await newE2EPage();
-    await page.setContent('<va-text-input label="This is a label" uswds use-forms-pattern form-heading-level="1" form-heading="This is a form header" form-description="This is a form description"/>');
+    await page.setContent('<va-text-input label="This is a label" uswds use-forms-pattern="single" form-heading-level="1" form-heading="This is a form header" form-description="This is a form description"/>');
+
+    const formHeader = await page.find('va-text-input >>> h1');
+    expect(formHeader.innerText).toEqual('This is a form header');
+
+    const formDescription = await page.find('va-text-input >>> #form-description');
+    expect(formDescription.innerText).toEqual('This is a form description');
+  });
+
+  it('uswds useFormsPattern displays header and description for the multiple fields pattern', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-text-input label="This is a label" uswds use-forms-pattern="multiple" form-heading-level="1" form-heading="This is a form header" form-description="This is a form description"/>');
+
+    const formHeader = await page.find('va-text-input >>> h1');
+    expect(formHeader.innerText).toEqual('This is a form header');
+
+    const formDescription = await page.find('va-text-input >>> #form-description');
+    expect(formDescription.innerText).toEqual('This is a form description');
+  });
+
+  it('uswds useFormsPattern does not display header and description if "single" or "multiple" is not indicated', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-text-input label="This is a label" uswds use-forms-pattern="multiple" form-heading-level="1" form-heading="This is a form header" form-description="This is a form description"/>');
 
     const formHeader = await page.find('va-text-input >>> h1');
     expect(formHeader.innerText).toEqual('This is a form header');

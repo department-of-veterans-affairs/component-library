@@ -157,9 +157,9 @@ export class VaTextInput {
   @Prop() charcount?: boolean = false;
 
   /**
-   * Enabling this will add a heading and description for integrating into the forms pattern. `uswds` should be true.
+   * Enabling this will add a heading and description for integrating into the forms pattern. Accepts `single` or `multiple` to indicate if the form is a single input or will have multiple inputs. `uswds` should be true.
    */
-  @Prop() useFormsPattern?: boolean = false;
+  @Prop() useFormsPattern?: string;
 
   /**
    * The heading level for the heading if `useFormsPattern` and `uswds` are true.
@@ -302,20 +302,16 @@ export class VaTextInput {
         'usa-character-count__status--invalid': charcount && maxlength && value?.length > maxlength
       });
 
+      const isFormsPattern = useFormsPattern === 'single' || useFormsPattern === 'multiple' ? true : false;
+
       let formsHeading = null;
-      if (useFormsPattern) {
+      if (isFormsPattern) {
         const HeaderLevel = getHeaderLevel(formHeadingLevel);
         formsHeading = (
           <Fragment>
             {formHeading &&
               <HeaderLevel id="form-question" part="form-header">
                 {formHeading}
-                {!label && required && (
-                  <span class="usa-label--required">
-                    {' '}
-                    {i18next.t('required')}
-                  </span>
-                )}
               </HeaderLevel>
             }
             {formDescription && 
@@ -328,6 +324,9 @@ export class VaTextInput {
       return (
         <Host>
           {formsHeading}
+          {isFormsPattern && (
+            <slot name="forms-pattern"></slot>
+          )}
           <div class="input-wrap">
           {label && (
             <label htmlFor="inputField" id="input-label" class={labelClass} part="label">
