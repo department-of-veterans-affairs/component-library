@@ -1,4 +1,6 @@
 {
+    "bootstrap-sha": "8e9695af82024c13ebfa46b305d7d11a1066a32c",
+    "last-release-sha": "8e9695af82024c13ebfa46b305d7d11a1066a32c",
     "packages":{
         "packages/core":{
             "component": "@department-of-veterans-affairs/component-library"
