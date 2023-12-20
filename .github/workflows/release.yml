@@ -9,12 +9,10 @@ jobs:
   release-please-packages:
     runs-on: ubuntu-latest
     steps:
-      - uses: google-github-actions/release-please-action@v4
+      - uses: google-github-actions/release-please-action@v3
         id: release
         with:
           token: ${{secrets.RELEASE_ACTION_TOKEN}}
           release-type: node
           monorepo-tags: true
           command: manifest
-          extra-args: '--num-commits=25'
-          release-pr-labels: 'ignore-for-release'
