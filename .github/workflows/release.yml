@@ -16,3 +16,4 @@ jobs:
           release-type: node
           monorepo-tags: true
           command: manifest
+          extra-args: '--only-changed --num-commits=20'
