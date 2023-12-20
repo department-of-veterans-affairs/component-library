@@ -15,5 +15,6 @@
         "packages/web-components":{
             "component": "@department-of-veterans-affairs/web-components"
         }
-    }
+    },
+    "bootstrap-sha":"8e9695af82024c13ebfa46b305d7d11a1066a32c"
 }

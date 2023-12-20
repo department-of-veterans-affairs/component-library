@@ -3,7 +3,7 @@ name: Release and Publish Test
 on:
   push:
     branches:
-      - rm-release-please-exp2
+      - rm-release-please-exp3
 
 jobs:
   release-please-packages:
