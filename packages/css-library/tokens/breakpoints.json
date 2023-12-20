@@ -1,0 +1,8 @@
+{
+  "small-screen": {
+    "value": "481px"
+  },
+  "large-screen": {
+    "value": "1201px"
+  }
+}

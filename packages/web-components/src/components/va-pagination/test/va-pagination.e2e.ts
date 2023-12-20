@@ -329,4 +329,24 @@ describe('uswds - va-pagination', () => {
       expect(anchors[number - 1].innerHTML).toEqual(number.toString());
     }
   });
+
+  it('uswds v3 renders an extra pagination item when the max-page-list-length is 6 and the page is 4', async () => {
+    // this is an edge case where even though it is set to 6 items, 7 items is the minimum needed to display everything needed
+    // [first page] [second page] [third/previous page] [fourth/current page] [fifth/next page] [ellipsis] [last page]
+    const page = await newE2EPage();
+    await page.setContent(`<va-pagination page="4" pages="24" max-page-list-length="6" uswds/>`);
+    const paginationItems = await page.findAll('va-pagination >>> li.usa-pagination__item');
+
+    // should be 9, the 6 page items, one ellipsis and 2 prev/next buttons
+    expect(paginationItems).toHaveLength(9);
+  });
+
+  it('uswds v3 renders an does not render an extra pagination item when the max-page-list-length is 6', async () => {
+    // a check to make sure the above edge case doesn't 
+    const page = await newE2EPage();
+    await page.setContent(`<va-pagination page="3" pages="24" max-page-list-length="6" uswds/>`);
+    const paginationItems = await page.findAll('va-pagination >>> li.usa-pagination__item');
+    // should be 8, 6 as set by the max-page-list-length, and 2 prev/next buttons
+    expect(paginationItems).toHaveLength(8);
+  });
 });
