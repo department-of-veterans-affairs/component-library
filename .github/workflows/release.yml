@@ -9,10 +9,21 @@ jobs:
   release-please-packages:
     runs-on: ubuntu-latest
     steps:
-      - uses: google-github-actions/release-please-action@v3
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Release Please
+        uses: google-github-actions/release-please-action@v3
         id: release
         with:
           token: ${{secrets.RELEASE_ACTION_TOKEN}}
           release-type: node
           monorepo-tags: true
           command: manifest
+
+      - name: Add Custom Label
+        run: |
+          pr_number=$(jq --raw-output .pull_request.number "$GITHUB_EVENT_PATH")
+          label_name="ignore-for-release"
+          api_url="https://api.github.com/repos/${GITHUB_REPOSITORY}/issues/${pr_number}/labels"
+          response=$(curl -s -X POST -H "Authorization: token ${{secrets.RELEASE_ACTION_TOKEN}}" -d "{\"labels\":[\"$label_name\"]}" "$api_url")
