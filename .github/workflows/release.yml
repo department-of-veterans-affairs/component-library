@@ -16,3 +16,4 @@ jobs:
           release-type: node
           monorepo-tags: true
           command: manifest
+          target-branch: rm-release-please-exp4
