@@ -109,29 +109,29 @@ i.fa-times-circle::before {
 
 // Override USWDS background and border colors for VA styles.
 .usa-alert--warning {
-  border-color: var(--color-gold);
+  border-color: var(--uswds-system-color-gold-vivid-20);
 }
 .usa-alert--info {
-  border-color: var(--color-primary-alt-dark);
+  border-color: var(--uswds-system-color-cyan-vivid-30);
 }
 .usa-alert--error {
-  border-color: var(--color-secondary-dark);
+  border-color: var(--uswds-system-color-red-warm-vivid-50);
 }
 .usa-alert--success {
-  border-color: var(--color-green);
+  border-color: var(--uswds-system-color-green-cool-vivid-40);
 }
 
 .usa-alert--info .usa-alert__body {
-  background-color: var(--color-primary-alt-lightest);
+  background-color: var(--uswds-system-color-cyan-5);
 }
 .usa-alert--success .usa-alert__body {
-  background-color: var(--color-green-lightest);
+  background-color: var(--uswds-system-color-green-cool-5);
 }
 .usa-alert--warning .usa-alert__body {
-  background-color: var(--color-gold-lightest);
+  background-color: var(--uswds-system-color-yellow-5);
 }
 .usa-alert--error .usa-alert__body {
-  background-color: var(--color-secondary-lightest);
+  background-color: var(--uswds-system-color-red-warm-10);
 }
 
 /* Original Component Styles. */
