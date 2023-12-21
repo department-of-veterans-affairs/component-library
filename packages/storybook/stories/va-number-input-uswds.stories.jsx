@@ -187,16 +187,7 @@ const FormsPatternMultipleTemplate = ({
         form-heading-level={1}
         form-heading="Identification information"
         form-description="This is the additional form-description prop"
-      >
-      <div slot="forms-pattern">
-        <p>HTML passed into the forms-pattern slot:</p>
-        <ul>
-          <li>Social security number</li>
-          <li>VA file number</li>
-          <li>Service number</li>
-        </ul>
-      </div>
-      </va-number-input>
+      />
 
       <va-number-input
         uswds={uswds}
@@ -243,7 +234,7 @@ const FormsPatternSingleTemplate = ({
         id={`form-pattern-single-input-${id}`}
         uswds={uswds}
         name={name}
-        label="VA file number"
+        label="Example number"
         hint="This is hint text"
         value=""
         error={error}
@@ -251,7 +242,16 @@ const FormsPatternSingleTemplate = ({
         form-heading-level={1}
         form-heading="Identification information"
         form-description="This is the additional form-description prop"
-      ></va-number-input>
+      >
+      <div slot="form-description">
+        <p>HTML passed into the forms-pattern slot:</p>
+        <ul>
+          <li>Social security number</li>
+          <li>VA file number</li>
+          <li>Service number</li>
+        </ul>
+      </div>
+      </va-number-input>
 
       <hr />
 

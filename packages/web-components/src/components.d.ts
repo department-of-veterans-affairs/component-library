@@ -695,10 +695,6 @@ export namespace Components {
          */
         "error"?: string;
         /**
-          * The description of the form if `useFormsPattern` and `uswds` are true.
-         */
-        "formDescription"?: string;
-        /**
           * The content of the heading if `useFormsPattern` and `uswds` are true.
          */
         "formHeading"?: string;
@@ -1192,10 +1188,6 @@ export namespace Components {
           * The error message to render.
          */
         "error"?: string;
-        /**
-          * The description of the form if `useFormsPattern` and `uswds` are true.
-         */
-        "formDescription"?: string;
         /**
           * The content of the heading if `useFormsPattern` and `uswds` are true.
          */
@@ -2640,10 +2632,6 @@ declare namespace LocalJSX {
          */
         "error"?: string;
         /**
-          * The description of the form if `useFormsPattern` and `uswds` are true.
-         */
-        "formDescription"?: string;
-        /**
           * The content of the heading if `useFormsPattern` and `uswds` are true.
          */
         "formHeading"?: string;
@@ -3225,10 +3213,6 @@ declare namespace LocalJSX {
           * The error message to render.
          */
         "error"?: string;
-        /**
-          * The description of the form if `useFormsPattern` and `uswds` are true.
-         */
-        "formDescription"?: string;
         /**
           * The content of the heading if `useFormsPattern` and `uswds` are true.
          */

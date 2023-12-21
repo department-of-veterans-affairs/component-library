@@ -127,11 +127,6 @@ export class VaNumberInput {
   @Prop() formHeading?: string;
 
   /**
-   * The description of the form if `useFormsPattern` and `uswds` are true.
-   */
-  @Prop() formDescription?: string;
-
-  /**
    * The event used to track usage of the component. This is emitted when the
    * input is blurred and enableAnalytics is true.
    */
@@ -202,7 +197,6 @@ export class VaNumberInput {
       useFormsPattern,
       formHeadingLevel,
       formHeading,
-      formDescription
     } = this;
 
     const ariaDescribedbyIds = `${messageAriaDescribedby ? 'input-message' : ''} ${error ? 'input-error-message' : ''}`
@@ -210,7 +204,7 @@ export class VaNumberInput {
 
     const ariaLabeledByIds = 
     `${useFormsPattern && formHeading ? 'form-question' : ''} ${ 
-      useFormsPattern && formDescription ? 'form-description' : ''} ${
+      useFormsPattern ? 'form-description' : ''} ${
       useFormsPattern && label ? 'input-label' : ''}`.trim() || null;
 
     const inputMode = inputmode ? inputmode : 'numeric';
@@ -238,9 +232,9 @@ export class VaNumberInput {
                 {formHeading}
               </HeaderLevel>
             }
-            {formDescription && 
-              <div id="form-description" class="usa-legend" part="form-description">{formDescription}</div>
-            }
+            <div id="form-description">
+              <slot name="form-description"></slot>
+            </div>
           </Fragment>
         )
       }
@@ -248,9 +242,6 @@ export class VaNumberInput {
       return (
         <Host>
           {formsHeading}
-          {isFormsPattern && (
-            <slot name="forms-pattern"></slot>
-          )}
           <div class="input-wrap">
           {label && (
             <label htmlFor="inputField" id="input-label" class={labelClasses} part="label">

@@ -289,10 +289,9 @@ const FormsPatternSingleTemplate = ({
         use-forms-pattern="single"
         form-heading-level={1}
         form-heading="Enter the name of a historical figure"
-        form-description="This is the additional form-description prop"
       >
-      <div slot="forms-pattern">
-        <p>HTML passed into the forms-pattern slot:</p>
+      <div slot="form-description">
+        <p>HTML passed into the form-description slot:</p>
         <ul>
           <li>Sojourner Truth</li>
           <li>Frederick Douglass</li>
