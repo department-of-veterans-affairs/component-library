@@ -107,32 +107,6 @@ i.fa-times-circle::before {
   padding-right: 5.7rem;
 }
 
-.usa-alert--warning {
-  border-color: var(--uswds-system-color-gold-vivid-20);
-}
-.usa-alert--info {
-  border-color: var(--uswds-system-color-cyan-vivid-30);
-}
-.usa-alert--error {
-  border-color: var(--uswds-system-color-red-warm-vivid-50);
-}
-.usa-alert--success {
-  border-color: var(--uswds-system-color-green-cool-vivid-40);
-}
-
-.usa-alert--info .usa-alert__body {
-  background-color: var(--uswds-system-color-cyan-5);
-}
-.usa-alert--success .usa-alert__body {
-  background-color: var(--uswds-system-color-green-cool-5);
-}
-.usa-alert--warning .usa-alert__body {
-  background-color: var(--uswds-system-color-yellow-5);
-}
-.usa-alert--error .usa-alert__body {
-  background-color: var(--uswds-system-color-red-warm-10);
-}
-
 /* Original Component Styles. */
 
 @import '../../mixins/accessibility.css';
