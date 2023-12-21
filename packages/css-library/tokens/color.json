@@ -63,13 +63,5 @@
       "lighter": { "value": "{uswds-system-color-blue-warm-30}"},
       "lightest": { "value": "{uswds-system-color-gray-warm-10}"}
     }
-  },
-  "v3-color": {
-    "error": {
-      "dark": { "value": "{uswds-system-color-red-vivid-60}" }
-    },
-    "base": {
-      "darkest": { "value": "{uswds-system-color-gray-90}" }
-    }
   }
 }

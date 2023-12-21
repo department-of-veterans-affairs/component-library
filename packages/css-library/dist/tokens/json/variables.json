@@ -915,50 +915,6 @@
       }
     }
   },
-  "v3-color": {
-    "error": {
-      "dark": {
-        "value": "#b50909",
-        "filePath": "tokens/color.json",
-        "isSource": true,
-        "original": {
-          "value": "{uswds-system-color-red-vivid-60}"
-        },
-        "name": "v3-color-error-dark",
-        "attributes": {
-          "category": "v3-color",
-          "type": "error",
-          "item": "dark"
-        },
-        "path": [
-          "v3-color",
-          "error",
-          "dark"
-        ]
-      }
-    },
-    "base": {
-      "darkest": {
-        "value": "#1b1b1b",
-        "filePath": "tokens/color.json",
-        "isSource": true,
-        "original": {
-          "value": "{uswds-system-color-gray-90}"
-        },
-        "name": "v3-color-base-darkest",
-        "attributes": {
-          "category": "v3-color",
-          "type": "base",
-          "item": "darkest"
-        },
-        "path": [
-          "v3-color",
-          "base",
-          "darkest"
-        ]
-      }
-    }
-  },
   "font": {
     "family": {
       "sans": {
