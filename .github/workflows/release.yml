@@ -16,4 +16,3 @@ jobs:
           release-type: node
           monorepo-tags: true
           command: manifest
-          target-branch: ${{ github.ref_name }}
