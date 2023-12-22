@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import React, { useState, useEffect } from 'react';
-import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
+import { getWebComponentDocs, propStructure, StoryDocs, applyFocus } from './wc-helpers';
 
 const textInputDocs = getWebComponentDocs('va-text-input');
 
@@ -54,7 +54,11 @@ const defaultArgs = {
   'uswds': true,
   'hint': null,
   'message-aria-describedby': 'Optional description text for screen readers',
-  'charcount': false
+  'charcount': false,
+  'use-forms-pattern': null,
+  'form-heading-level': null,
+  'form-heading': null,
+  'form-description': null,
 };
 
 const Template = ({
@@ -207,6 +211,106 @@ const WidthsTemplate = ({
   );
 };
 
+const FormsPatternMultipleTemplate = ({
+  name,
+  value,
+  uswds,
+}) => {
+  const handleClick = () => {
+    const header = document.getElementById('form-pattern-multiple-input')
+      ?.shadowRoot
+      ?.getElementById('form-question');
+
+    applyFocus(header);
+  }
+  return (
+    <>
+      <va-text-input
+        required
+        error="This is an error message"
+        id="form-pattern-multiple-input"
+        uswds={uswds}
+        name={name}
+        label='First Name'
+        value={value}
+        use-forms-pattern='multiple'
+        form-heading-level={1}
+        form-heading="Name and email address"
+        form-description="This is the additional form-description prop"
+      />
+
+      <va-text-input
+        uswds={uswds}
+        name={name}
+        label='Last Name'
+        value={value}
+      />  
+  
+      <va-text-input
+        uswds={uswds}
+        name={name}
+        label='Email address'
+        value={value}
+      />
+      <hr />
+      <va-button 
+        text="click to focus header" 
+        onClick={handleClick}>
+      </va-button>
+    </>
+  );
+};
+
+const FormsPatternSingleTemplate = ({
+  name,
+  value,
+  uswds,
+  error,
+}) => {
+  const id = (Math.floor(Math.random() * 10) + 1);
+  const handleClick = () => {
+    const header = document.getElementById(`form-pattern-single-input-${id}`)
+      ?.shadowRoot
+      ?.getElementById('form-question');
+
+    applyFocus(header);
+  }
+  return (
+    <>
+      <va-text-input
+        required
+        id={`form-pattern-single-input-${id}`}
+        uswds={uswds}
+        name={name}
+        label="Historical figure"
+        hint="This is hint text"
+        value={value}
+        error={error}
+        use-forms-pattern="single"
+        form-heading-level={1}
+        form-heading="Enter the name of a historical figure"
+      >
+      <div slot="form-description">
+        <p>HTML passed into the form-description slot:</p>
+        <ul>
+          <li>Sojourner Truth</li>
+          <li>Frederick Douglass</li>
+          <li>Booker T. Washington</li>
+          <li>George Washington Carver</li>
+        </ul>
+      </div>
+      </va-text-input>
+
+      <hr />
+
+      <va-button 
+        text="click to focus header" 
+        onClick={handleClick}>
+      </va-button>
+    </>
+  );
+};
+
 export const Default = Template.bind(null);
 Default.args = { ...defaultArgs };
 Default.argTypes = propStructure(textInputDocs);
@@ -290,5 +394,21 @@ WithCharacterCount.args = { ...defaultArgs, maxlength: '10', charcount: true}
 
 export const Widths = WidthsTemplate.bind(null);
 Widths.args = {
+  ...defaultArgs,
+};
+
+export const FormsPatternSingle = FormsPatternSingleTemplate.bind(null);
+FormsPatternSingle.args = {
+  ...defaultArgs,
+};
+
+export const FormsPatternSingleError = FormsPatternSingleTemplate.bind(null);
+FormsPatternSingleError.args = {
+  ...defaultArgs,
+  error: 'This is an error message',
+};
+
+export const FormsPatternMultiple = FormsPatternMultipleTemplate.bind(null);
+FormsPatternMultiple.args = {
   ...defaultArgs,
 };

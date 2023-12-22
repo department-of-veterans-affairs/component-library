@@ -377,12 +377,14 @@ describe('va-text-input', () => {
     expect(element).toEqualHtml(`
       <va-text-input class="hydrated" label="Hello, world" uswds="">
         <mock:shadow-root>
-          <label for="inputField" class="usa-label" part="label">
+        <div class="input-wrap">
+          <label for="inputField" class="usa-label" id="input-label" part="label">
             Hello, world
-          </label>
-          <slot></slot>
-          <span id="input-error-message" role="alert"></span>
-          <input class="usa-input" id="inputField" part="input" type="text" aria-invalid="false" />
+            </label>
+            <slot></slot>
+            <span id="input-error-message" role="alert"></span>
+            <input class="usa-input" id="inputField" part="input" type="text" aria-invalid="false" />
+          </div>
         </mock:shadow-root>
       </va-text-input>
     `);
@@ -739,5 +741,36 @@ describe('va-text-input', () => {
 
     const maxlengthMessageEl = await page.find('va-text-input >>> #maxlength-message');
     expect(maxlengthMessageEl).toBeNull();
+  });
+
+  it('uswds useFormsPattern displays header for the single field pattern', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-text-input label="This is a label" uswds use-forms-pattern="single" form-heading-level="1" form-heading="This is a form header" form-description="This is a form description"/>');
+
+    const formHeader = await page.find('va-text-input >>> h1');
+    expect(formHeader.innerText).toEqual('This is a form header');
+  });
+
+  it('uswds useFormsPattern displays header for the multiple fields pattern', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-text-input label="This is a label" uswds use-forms-pattern="multiple" form-heading-level="1" form-heading="This is a form header" form-description="This is a form description"/>');
+
+    const formHeader = await page.find('va-text-input >>> h1');
+    expect(formHeader.innerText).toEqual('This is a form header');
+  });
+
+  it('uswds useFormsPattern does not display header if "single" or "multiple" is not indicated', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-text-input label="This is a label" uswds use-forms-pattern="multiple" form-heading-level="1" form-heading="This is a form header" form-description="This is a form description"/>');
+
+    const formHeader = await page.find('va-text-input >>> h1');
+    expect(formHeader.innerText).toEqual('This is a form header');
+  });
+
+  it('uswds useFormsPattern passes an aXe check', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-text-input label="This is a label" uswds use-forms-pattern="multiple" form-heading-level="1" form-heading="This is a form header" form-description="This is a form description"/>');
+
+    await axeCheck(page);
   });
 });

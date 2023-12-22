@@ -77,3 +77,17 @@ export function getCharacterMessage(
 export function makeArray(start: number, end: number) {
   return Array.from({ length: end - start + 1 }, (_, i) => start + i);
 }
+
+/**
+ * return the heading level based on an integer input
+ * if invalid input return null
+ */
+export function getHeaderLevel(headerInput: number | string): string | null {
+  let headerLevel: number | null = null;
+  if (typeof headerInput === 'string') {
+    headerLevel = parseInt(headerInput, 10);
+  } else {
+    headerLevel = Math.floor(headerInput);
+  }
+  return headerLevel >= 1 && headerLevel <= 6 ? `h${headerLevel}` : null;
+}
