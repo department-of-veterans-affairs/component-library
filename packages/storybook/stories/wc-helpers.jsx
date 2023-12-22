@@ -281,3 +281,36 @@ StoryDocs.propTypes = {
   componentName: PropTypes.string,
   data: PropTypes.object,
 };
+
+/**
+ * This utility function will help us focus on an element in a web component for Storybook examples.
+ * A similar utility is used in vets-website.
+ * 
+ * https://github.com/department-of-veterans-affairs/vets-website/pull/23416
+ */
+export function applyFocus(el) {
+  if (el) {
+    // Use getAttribute to grab the "tabindex" attribute (returns string), not
+    // the "tabIndex" property (returns number). Focusable elements will
+    // automatically have a tabIndex of zero, otherwise it's -1.
+    const tabindex = el.getAttribute('tabindex');
+    // No need to add, or remove a tabindex="0"
+    if (el.tabIndex !== 0) {
+      el.setAttribute('tabindex', '-1');
+      if (typeof tabindex === 'undefined' || tabindex === null) {
+        // Remove tabindex on blur. If a web-component is focused using a -1
+        // tabindex and is not removed on blur, the shadow elements inside will
+        // not be focusable
+        el.addEventListener(
+          'blur',
+          () => {
+            el.removeAttribute('tabindex');
+          },
+          { once: true },
+        );
+      }
+    }
+
+    el.focus();
+  }
+}

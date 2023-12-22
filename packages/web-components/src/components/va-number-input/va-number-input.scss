@@ -1,5 +1,7 @@
 @import '../va-text-input/va-text-input.scss';
 
+@import '../../mixins/focusable.css';
+
 .usa-hint {
   display: block;
 }

@@ -12,7 +12,7 @@ import {
 } from '@stencil/core';
 import classnames from 'classnames';
 import i18next from 'i18next';
-import { consoleDevError, getCharacterMessage } from '../../utils/utils';
+import { consoleDevError, getCharacterMessage, getHeaderLevel } from '../../utils/utils';
 
 if (Build.isTesting) {
   // Make i18next.t() return the key instead of the value
@@ -157,6 +157,21 @@ export class VaTextInput {
   @Prop() charcount?: boolean = false;
 
   /**
+   * Enabling this will add a heading and description for integrating into the forms pattern. Accepts `single` or `multiple` to indicate if the form is a single input or will have multiple inputs. `uswds` should be true.
+   */
+  @Prop() useFormsPattern?: string;
+
+  /**
+   * The heading level for the heading if `useFormsPattern` and `uswds` are true.
+   */
+  @Prop() formHeadingLevel?: number = 3;
+
+  /**
+   * The content of the heading if `useFormsPattern` and `uswds` are true.
+   */
+  @Prop() formHeading?: string;
+
+  /**
    * The event used to track usage of the component. This is emitted when the
    * input is blurred and enableAnalytics is true.
    */
@@ -240,7 +255,10 @@ export class VaTextInput {
       success,
       messageAriaDescribedby,
       width,
-      charcount
+      charcount,
+      useFormsPattern,
+      formHeadingLevel,
+      formHeading,
     } = this;
 
     // When used in va-memorable-date, we don't want to display the help messages
@@ -252,10 +270,15 @@ export class VaTextInput {
 
     const ariaDescribedbyIds =
       `${messageAriaDescribedby ? 'input-message' : ''} ${
-        error ? 'input-error-message' : ''
-      } ${charcount && maxlength ? 'charcount-message' : ''}`.trim() || null; // Null so we don't add the attribute if we have an empty string
+        error ? 'input-error-message' : ''} ${
+        charcount && maxlength ? 'charcount-message' : ''}`.trim() || null; // Null so we don't add the attribute if we have an empty string
 
-    if (uswds) {
+    const ariaLabeledByIds = 
+    `${useFormsPattern && formHeading ? 'form-question' : ''} ${ 
+      useFormsPattern ? 'form-description' : ''} ${
+      useFormsPattern && label ? 'input-label' : ''}`.trim() || null;
+
+      if (uswds) {
       const charCountTooHigh = charcount && (value?.length > maxlength);
       const labelClass = classnames({
         'usa-label': true,
@@ -272,10 +295,31 @@ export class VaTextInput {
         'usa-character-count__status': charcount,
         'usa-character-count__status--invalid': charcount && maxlength && value?.length > maxlength
       });
+
+      const isFormsPattern = useFormsPattern === 'single' || useFormsPattern === 'multiple' ? true : false;
+      let formsHeading = null;
+      if (isFormsPattern) {
+        const HeaderLevel = getHeaderLevel(formHeadingLevel);
+        formsHeading = (
+          <Fragment>
+            {formHeading &&
+              <HeaderLevel id="form-question" part="form-header">
+                {formHeading}
+              </HeaderLevel>
+            }
+            <div id="form-description">
+              <slot name="form-description"></slot>
+            </div>
+          </Fragment>
+        )
+      }
+      
       return (
         <Host>
+          {formsHeading}
+          <div class="input-wrap">
           {label && (
-            <label htmlFor="inputField" class={labelClass} part="label">
+            <label htmlFor="inputField" id="input-label" class={labelClass} part="label">
               {label}
               {required && (
                 <span class="usa-label--required">
@@ -303,6 +347,7 @@ export class VaTextInput {
             onInput={handleInput}
             onBlur={handleBlur}
             aria-describedby={ariaDescribedbyIds}
+            aria-labelledby={ariaLabeledByIds}
             aria-invalid={invalid || error || charCountTooHigh ? 'true' : 'false'}
             inputmode={inputmode ? inputmode : undefined}
             maxlength={charcount ? undefined : maxlength}
@@ -327,6 +372,7 @@ export class VaTextInput {
               {getCharacterMessage(value, maxlength)}
             </span>
           )}
+          </div>
         </Host>
       );
     } else {

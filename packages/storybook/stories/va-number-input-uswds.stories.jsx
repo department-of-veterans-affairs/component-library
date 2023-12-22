@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
+import { getWebComponentDocs, propStructure, StoryDocs, applyFocus } from './wc-helpers';
 
 const numberInputDocs = getWebComponentDocs('va-number-input');
 
@@ -34,6 +34,10 @@ const defaultArgs = {
   'max': undefined,
   hint: null,
   uswds: true,
+  'use-forms-pattern': null,
+  'form-heading-level': null,
+  'form-heading': null,
+  'form-description': null,
 };
 
 const vaNumberInput = args => {
@@ -156,6 +160,109 @@ const WidthsTemplate = ({
   );
 };
 
+const FormsPatternMultipleTemplate = ({
+  name,
+  value,
+  uswds,
+}) => {
+  const handleClick = () => {
+    const header = document.getElementById('form-pattern-multiple-input')
+      ?.shadowRoot
+      ?.getElementById('form-question');
+
+    applyFocus(header);
+  }
+  return (
+    <>
+      <va-number-input
+        required
+        error="This is an error message"
+        id="form-pattern-multiple-input"
+        uswds={uswds}
+        name={name}
+        label='Social security number'
+        hint="This is hint text"
+        value=""
+        use-forms-pattern='multiple'
+        form-heading-level={1}
+        form-heading="Identification information"
+        form-description="This is the additional form-description prop"
+      />
+
+      <va-number-input
+        uswds={uswds}
+        name={name}
+        label='VA file number'
+        hint="This is hint text"
+        value=""
+      />  
+
+      <va-number-input
+        uswds={uswds}
+        name={name}
+        label='Service number'
+        hint="This is hint text"
+        value=""
+      />
+      <hr />
+      <va-button 
+        text="click to focus header" 
+        onClick={handleClick}>
+      </va-button>
+    </>
+  );
+};
+
+const FormsPatternSingleTemplate = ({
+  name,
+  value,
+  uswds,
+  error,
+}) => {
+  const id = (Math.floor(Math.random() * 10) + 1);
+  const handleClick = () => {
+    const header = document.getElementById(`form-pattern-single-input-${id}`)
+      ?.shadowRoot
+      ?.getElementById('form-question');
+
+    applyFocus(header);
+  }
+  return (
+    <>
+      <va-number-input
+        required
+        id={`form-pattern-single-input-${id}`}
+        uswds={uswds}
+        name={name}
+        label="Example number"
+        hint="This is hint text"
+        value=""
+        error={error}
+        use-forms-pattern="single"
+        form-heading-level={1}
+        form-heading="Identification information"
+        form-description="This is the additional form-description prop"
+      >
+      <div slot="form-description">
+        <p>HTML passed into the forms-pattern slot:</p>
+        <ul>
+          <li>Social security number</li>
+          <li>VA file number</li>
+          <li>Service number</li>
+        </ul>
+      </div>
+      </va-number-input>
+
+      <hr />
+
+      <va-button 
+        text="click to focus header" 
+        onClick={handleClick}>
+      </va-button>
+    </>
+  );
+};
+
 export const Default = Template.bind(null);
 Default.args = { ...defaultArgs };
 Default.argTypes = propStructure(numberInputDocs);
@@ -189,5 +296,21 @@ Internationalization.args = {
 
 export const Widths = WidthsTemplate.bind(null);
 Widths.args = {
+  ...defaultArgs,
+};
+
+export const FormsPatternSingle = FormsPatternSingleTemplate.bind(null);
+FormsPatternSingle.args = {
+  ...defaultArgs,
+};
+
+export const FormsPatternSingleError = FormsPatternSingleTemplate.bind(null);
+FormsPatternSingleError.args = {
+  ...defaultArgs,
+  error: 'This is an error message',
+};
+
+export const FormsPatternMultiple = FormsPatternMultipleTemplate.bind(null);
+FormsPatternMultiple.args = {
   ...defaultArgs,
 };

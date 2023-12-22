@@ -10,6 +10,7 @@
 @import '../../mixins/uswds-error-border.scss';
 @import '../../mixins/uswds-input-width.scss';
 @import '../../global/formation_overrides';
+@import '../../mixins/focusable.css';
 
 :host([uswds]:not([uswds='false'])) {
   color: var(--v3-color-base-darkest);
