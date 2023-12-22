@@ -2,7 +2,7 @@
 @import 'functions';
 
 :host([error]:not([error=''])[uswds]:not([uswds='false'])) {
-    border-left: 0.4rem solid $color-secondary-dark; /* USWDS red-60v, $theme-color-error-dark */
+    border-left: 0.4rem solid $color-secondary-dark;
     padding-left: rem-override(1rem);
     position: relative;
 }
