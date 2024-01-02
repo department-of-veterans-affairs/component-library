@@ -312,7 +312,7 @@ If this abort() is unexpected, build with -s ASSERTIONS=1 which can give more in
   --dark-color-context-background: rgba(255,255,255,.9);
   --dark-color-context-background-hover: rgba(0, 136, 250, 0.1);
   --dark-color-context-background-selected: #0088fa;
-  --dark-color-context-border: #edeff0;
+  --dark-color-context-border: #eeeeee;
   --dark-color-context-text: #000000;
   --dark-color-context-text-selected: #ffffff;
   --dark-color-dim: #8f949d;
