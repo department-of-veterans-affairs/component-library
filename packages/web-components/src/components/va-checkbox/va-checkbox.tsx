@@ -257,7 +257,7 @@ export class VaCheckbox {
             {description ? <p>{description}</p> : <slot name="description" />}
           </div>
           {hint && <span class="hint-text">{hint}</span>}
-          <span id="checkbox-error-message" role="alert">
+          <span id="checkbox-error-message" class="usa-error-message" role="alert">
             {error && (
               <Fragment>
                 <span class="sr-only">{i18next.t('error')}</span> {error}
