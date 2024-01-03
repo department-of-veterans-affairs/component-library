@@ -35,6 +35,7 @@ describe('va-checkbox', () => {
     expect(input.getAttribute('aria-invalid')).toEqual('true');
     expect(input.getAttribute('aria-describedby')).toEqual('checkbox-error-message');
     expect(element.textContent).toContain('Something went horribly wrong');
+    expect(element.className).toContain('usa-error-message');
   });
 
   it('renders hint text', async () => {
