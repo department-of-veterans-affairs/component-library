@@ -227,4 +227,67 @@ describe('va-breadcrumbs', () => {
 
     expect(analyticsSpy).toHaveReceivedEventTimes(0);
   });
+
+  it('uswds - renders when some links are router links', async () => {
+    const page = await newE2EPage({
+      html: '<va-breadcrumbs class="hydrated" label="test" disable-analytics="false" breadcrumb-list=\'[{ "label": "One", "href": "/one" }, { "label": "Two", "href": "/two", "isRouterLink": "true" }, { "label": "Three", "href": "/three", "isRouterLink": "true" }]\' uswds></va-breadcrumbs>',
+    });
+    const element = await page.find('va-breadcrumbs');
+    expect(element).toEqualHtml(`
+      <va-breadcrumbs class="hydrated" disable-analytics="false" label="test" breadcrumb-list='[{ "label": "One", "href": "/one" }, { "label": "Two", "href": "/two", "isRouterLink": "true" }, { "label": "Three", "href": "/three", "isRouterLink": "true" }]' uswds>
+        <mock:shadow-root>
+          <nav aria-label="test" class="usa-breadcrumb">
+            <ol class="usa-breadcrumb__list" role="list">
+              <li class="usa-breadcrumb__list-item">
+                <a class="usa-breadcrumb__link" href="/one">
+                  <span>One</span>
+                </a>
+              </li>
+              <li class="usa-breadcrumb__list-item">
+                <a class="usa-breadcrumb__link" href="/two">
+                  <span>Two</span>
+                </a>
+              </li>
+              <li class="usa-breadcrumb__list-item usa-current" aria-current="page">
+                <a class="usa-breadcrumb__link" href="#content">
+                  <span>Three</span>
+                </a>
+              </li>
+            </ol>
+          </nav>
+        </mock:shadow-root>
+      </va-breadcrumbs>
+    `);
+  });
+
+  it('uswds - fires a route-change event when an anchor link with isRouteLink is clicked', async () => {
+    const page = await newE2EPage();
+    await page.setContent(`
+    <va-breadcrumbs breadcrumb-list=\'[{ "label": "One", "href": "/one" }, { "label": "Two", "href": "/two", "isRouterLink": "true" }, { "label": "Three", "href": "/three", "isRouterLink": "true" }]\' uswds></va-breadcrumbs>
+    `);
+
+    const routeChangeSpy = await page.spyOnEvent('routeChange');
+
+    const anchorElements = await page.findAll('va-breadcrumbs >>> a');
+    await anchorElements[1].click();
+
+    expect(routeChangeSpy).toHaveReceivedEventDetail({
+      href: "/two",
+    });
+  });
+
+  it('uswds - does not fire a route-change event when an anchor link without isRouteLink is clicked', async () => {
+    const page = await newE2EPage();
+    await page.setContent(`
+    <va-breadcrumbs breadcrumb-list=\'[{ "label": "One", "href": "/one" }, { "label": "Two", "href": "/two", "isRouterLink": "true" }, { "label": "Three", "href": "/three", "isRouterLink": "true" }]\' uswds></va-breadcrumbs>
+    `);
+
+    const routeChangeSpy = await page.spyOnEvent('routeChange');
+
+    const anchorElements = await page.findAll('va-breadcrumbs >>> a');
+
+    await anchorElements[0].click();
+    expect(routeChangeSpy).not.toHaveReceivedEvent();
+  });
+
 });

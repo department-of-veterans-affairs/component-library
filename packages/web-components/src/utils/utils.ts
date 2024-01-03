@@ -22,11 +22,13 @@ export function getSlottedNodes(
   nodeName: string | null,
 ): Array<Node> {
   // This will only get the first slot on a component
-  const children = root.shadowRoot.querySelector('slot').assignedNodes()
+  const children = root.shadowRoot.querySelector('slot').assignedNodes();
 
-  return nodeName !== null ? Array.from(children).filter(
+  return nodeName !== null
+    ? Array.from(children).filter(
         item => item.nodeName.toLowerCase() === nodeName,
-  ) : Array.from(children);
+      )
+    : Array.from(children);
 }
 
 /**
@@ -83,14 +85,14 @@ export function makeArray(start: number, end: number) {
  * @desc returns whether or not the given argument is a DOM element.
  */
 const isElement = (value: any): boolean =>
-  value && typeof value === "object" && value.nodeType === 1;
+  value && typeof value === 'object' && value.nodeType === 1;
 
 /**
  * @name select
  * @desc selects elements from the DOM by class selector or ID selector
  */
 function select(selector: string, context?: HTMLElement): HTMLElement[] {
-  if (typeof selector !== "string") {
+  if (typeof selector !== 'string') {
     return [];
   }
 
@@ -106,10 +108,13 @@ function select(selector: string, context?: HTMLElement): HTMLElement[] {
  * @name selectOrMatches
  * @desc selects elements from a specific DOM context by class selector or ID selector.
  */
-export function selectOrMatches(selector: string, context?: HTMLElement): HTMLElement[] {
+export function selectOrMatches(
+  selector: string,
+  context?: HTMLElement,
+): HTMLElement[] {
   const selection = select(selector, context);
 
-  if (typeof selector !== "string") {
+  if (typeof selector !== 'string') {
     return selection;
   }
 
@@ -118,7 +123,7 @@ export function selectOrMatches(selector: string, context?: HTMLElement): HTMLEl
   }
 
   return selection;
-};
+}
 
 /**
  * Sanitizes strings of HTML to be output in innerHTML of an element
@@ -158,3 +163,17 @@ export const Sanitizer = {
     return result;
   },
 };
+
+/*
+ * return the heading level based on an integer input
+ * if invalid input return null
+ */
+export function getHeaderLevel(headerInput: number | string): string | null {
+  let headerLevel: number | null = null;
+  if (typeof headerInput === 'string') {
+    headerLevel = parseInt(headerInput, 10);
+  } else {
+    headerLevel = Math.floor(headerInput);
+  }
+  return headerLevel >= 1 && headerLevel <= 6 ? `h${headerLevel}` : null;
+}
