@@ -155,7 +155,7 @@
   margin-right: rem-override(0.5rem);
   padding: rem-override(0.75rem) rem-override(1.25rem);
 
-  
+
   &--big {
     border-radius: rem-override(0.25rem);
     font-size: rem-override(1.46rem);
@@ -552,4 +552,17 @@
 .usa-search--small .usa-search__submit-icon {
   height: rem-override(1.5rem);
   width: rem-override(1.5rem);
+}
+
+.usa-file-input {
+  max-width: rem-override(30rem);
+
+  &__target {
+    font-size: rem-override(1rem);
+    margin-top: rem-override(0.5rem);
+  }
+
+  &__instructions {
+    padding: rem-override(2rem) rem-override(1rem);
+  }
 }

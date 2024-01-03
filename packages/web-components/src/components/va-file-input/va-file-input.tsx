@@ -9,6 +9,9 @@ import {
   Event,
   EventEmitter,
 } from '@stencil/core';
+import classnames from 'classnames';
+import i18next from 'i18next';
+import { fileInput } from './va-file-input-upgrader';
 
 /**
  * @componentName File input
@@ -19,7 +22,7 @@ import {
 
 @Component({
   tag: 'va-file-input',
-  styleUrl: 'va-file-input.css',
+  styleUrl: 'va-file-input.scss',
   shadow: true,
 })
 export class VaFileInput {
@@ -59,6 +62,11 @@ export class VaFileInput {
    * Optional hint text.
    */
   @Prop() hint?: string;
+
+  /**
+   * Optionally allow multiple files (USWDS Only)
+   */
+  @Prop() multiple?: boolean = false;
 
   /**
    * Emit component-library-analytics events on the file input change event.
@@ -119,13 +127,68 @@ export class VaFileInput {
     return this.buttonText ? this.buttonText : 'Upload file';
   };
 
+  componentDidLoad() {
+    if (this.uswds === true) fileInput.init(this.el);
+  }
+
   render() {
-    const { label, name, required, accept, error, hint, uswds } = this;
+    const { label, name, required, accept, error, hint, multiple, uswds } =
+      this;
 
     const text = this.getButtonText();
 
     if (uswds) {
-      // V3 stuff here
+      const labelClass = classnames({
+        'usa-label': true,
+        'usa-label--error': error,
+      });
+      const inputClass = classnames({
+        'usa-file-input': true,
+        'usa-input--error': error,
+      });
+      const ariaDescribedbyIds =
+        `${hint ? 'input-hint-message' : ''} ${
+          error ? 'input-error-message' : ''
+        }`.trim() || null; // Null so we don't add the attribute if we have an empty string
+
+      return (
+        <Host>
+          {label && (
+            <label htmlFor="fileInputButton" class={labelClass} part="label">
+              {label}
+              {required && (
+                <span class="usa-label--required">
+                  {' '}
+                  {i18next.t('required')}
+                </span>
+              )}
+            </label>
+          )}
+          {hint && (
+            <span class="usa-hint" id="input-hint-message">
+              {hint}
+            </span>
+          )}
+          <slot></slot>
+          <span id="input-error-message" role="alert">
+            {error && (
+              <Fragment>
+                <span class="sr-only">{i18next.t('error')}</span>
+                <span class="usa-error-message">{error}</span>
+              </Fragment>
+            )}
+          </span>
+          <input
+            id="fileInputField"
+            class={inputClass}
+            type="file"
+            name={name}
+            accept={accept}
+            multiple={multiple}
+            aria-describedby={ariaDescribedbyIds}
+          />
+        </Host>
+      );
     } else {
       return (
         <Host>

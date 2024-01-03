@@ -1,0 +1,47 @@
+@forward 'settings';
+
+@use 'usa-file-input/src/styles/usa-file-input';
+@use 'usa-label/src/styles/usa-label';
+@use 'usa-hint/src/styles/usa-hint';
+@import '../../global/formation_overrides';
+
+/* Original Styles */
+@import '../../mixins/accessibility.css';
+@import '../../mixins/form-field-error.css';
+@import '../../mixins/hint-text.css';
+
+:host {
+  display: block;
+  font-family: var(--font-source-sans);
+}
+
+#error-message {
+  margin-bottom: 0.3rem;
+}
+
+va-button {
+  margin-bottom: -0.8rem;
+}
+
+.required {
+  color: var(--color-secondary-dark);
+  margin-left: 0.4rem;
+}
+
+/* V3/USWDS Styles */
+.usa-label--required,
+.usa-error-message {
+  color: var(--v3-color-error-dark);
+}
+
+:host([error]:not([error=''][uswds]:not([uswds='']))) {
+  border-left-color: var(--v3-color-error-dark);
+}
+
+.usa-file-input .usa-file-input__input[type] {
+  padding: 0;
+}
+
+.usa-file-input__choose {
+  color: var(--color-link-default);
+}
