@@ -164,7 +164,7 @@ export const Sanitizer = {
   },
 };
 
-/*
+/**
  * return the heading level based on an integer input
  * if invalid input return null
  */
