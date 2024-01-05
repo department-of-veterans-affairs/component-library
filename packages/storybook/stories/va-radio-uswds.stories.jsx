@@ -1,5 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { VaRadio, VaRadioOption} from '@department-of-veterans-affairs/web-components/react-bindings';
+import {
+  VaRadio,
+  VaRadioOption,
+} from '@department-of-veterans-affairs/web-components/react-bindings';
+import { applyFocus } from './wc-helpers';
 
 import {
   getWebComponentDocs,
@@ -15,8 +19,8 @@ const radioDocs = getWebComponentDocs('va-radio');
 const radioItem = getWebComponentDocs('va-radio-option');
 
 export default {
-    title: `USWDS/Radio button USWDS`,
-    id: 'uswds/va-radio',
+  title: `USWDS/Radio button USWDS`,
+  id: 'uswds/va-radio',
   subcomponents: componentStructure(radioItem),
   parameters: {
     componentSubtitle: `va-radio web component`,
@@ -42,43 +46,43 @@ const vaRadioConst = args => {
 
   return (
     <va-radio
-        enable-analytics={enableAnalytics}
-        error={error}
-        label={label}
-        required={required}
-        uswds={uswds}
-        hint={hint}
-        label-header-level={labelHeaderLevel}
-        header-aria-describedby={headerAriaDescribedby}
+      enable-analytics={enableAnalytics}
+      error={error}
+      label={label}
+      required={required}
+      uswds={uswds}
+      hint={hint}
+      label-header-level={labelHeaderLevel}
+      header-aria-describedby={headerAriaDescribedby}
     >
-    <va-radio-option
-      label="Soujourner Truth"
-      name={name}
-      value="1"
-      uswds={uswds}
-    />
-    <va-radio-option
-      label="Frederick Douglass"
-      name={name}
-      value="2"
-      uswds={uswds}
-    />
-    <va-radio-option
-      label="Booker T. Washington"
-      name={name}
-      value="3"
-      uswds={uswds}
-    />
-    <va-radio-option
-      label="George Washington Carver"
-      name={name}
-      value="4"
-      disabled
-      uswds={uswds}
-    />
-  </va-radio>
-  )
-}
+      <va-radio-option
+        label="Soujourner Truth"
+        name={name}
+        value="1"
+        uswds={uswds}
+      />
+      <va-radio-option
+        label="Frederick Douglass"
+        name={name}
+        value="2"
+        uswds={uswds}
+      />
+      <va-radio-option
+        label="Booker T. Washington"
+        name={name}
+        value="3"
+        uswds={uswds}
+      />
+      <va-radio-option
+        label="George Washington Carver"
+        name={name}
+        value="4"
+        disabled
+        uswds={uswds}
+      />
+    </va-radio>
+  );
+};
 
 const Template = args => vaRadioConst(args);
 
@@ -91,9 +95,9 @@ const I18nTemplate = args => {
 
   return (
     <div>
-      <va-button uswds onClick={e => setLang('es')} text="Español"/>
-      <va-button uswds onClick={e => setLang('en')} text="English"/>
-      <va-button uswds onClick={e => setLang('tl')} text="Tagalog"/>
+      <va-button uswds onClick={e => setLang('es')} text="Español" />
+      <va-button uswds onClick={e => setLang('en')} text="English" />
+      <va-button uswds onClick={e => setLang('tl')} text="Tagalog" />
       <br />
       <br />
       {vaRadioConst(args)}
@@ -109,16 +113,19 @@ const ReactBindingExample = ({
 }) => {
   return (
     <>
-    <VaRadio
+      <VaRadio
         uswds
-      enableAnalytics={enableAnalytics}
-      error={error}
-      label={label}
-      required={required}
-      onVaValueChange={e => console.log('Selected radio option:', e?.detail?.value)}>
-      <VaRadioOption uswds label="Option one" name="example" value="1" />
-      <VaRadioOption uswds label="Option two" name="example" value="2" />
-    </VaRadio>
+        enableAnalytics={enableAnalytics}
+        error={error}
+        label={label}
+        required={required}
+        onVaValueChange={e =>
+          console.log('Selected radio option:', e?.detail?.value)
+        }
+      >
+        <VaRadioOption uswds label="Option one" name="example" value="1" />
+        <VaRadioOption uswds label="Option two" name="example" value="2" />
+      </VaRadio>
     </>
   );
 };
@@ -226,52 +233,202 @@ const USWDSTiled = ({
 };
 
 const USWDSTiledError = ({
-    'enable-analytics': enableAnalytics,
-    error,
-    label,
-    required,
-    uswds,
-    hint,
-  }) => {
-    return (
-      <>
-        <va-radio
-            enable-analytics={enableAnalytics}
-            error='This is an error'
-            label={label}
-            required={required}
-            uswds={uswds}
-            hint={hint}
-            >
-            <va-radio-option
-                id="soujourner-truth2"
-                label="Soujourner Truth"
-                name="group4"
-                value="1"
-                uswds={uswds}
-                tile
-            />
-            <va-radio-option
-            id="frederick-douglass2"
-            label="Frederick Douglass"
-            name="group4"
-            value="2"
-            uswds={uswds}
-            tile
-            />
-            <va-radio-option
-            id="booker-t-washington2"
-            label="Booker T. Washington"
-            name="group4"
-            value="3"
-            description="This is optional text that can be used to describe the label in more detail."
-            uswds={uswds}
-            tile
-            />
-            </va-radio>
-      </>
-    );
+  'enable-analytics': enableAnalytics,
+  error,
+  label,
+  required,
+  uswds,
+  hint,
+}) => {
+  return (
+    <>
+      <va-radio
+        enable-analytics={enableAnalytics}
+        error="This is an error"
+        label={label}
+        required={required}
+        uswds={uswds}
+        hint={hint}
+      >
+        <va-radio-option
+          id="soujourner-truth2"
+          label="Soujourner Truth"
+          name="group4"
+          value="1"
+          uswds={uswds}
+          tile
+        />
+        <va-radio-option
+          id="frederick-douglass2"
+          label="Frederick Douglass"
+          name="group4"
+          value="2"
+          uswds={uswds}
+          tile
+        />
+        <va-radio-option
+          id="booker-t-washington2"
+          label="Booker T. Washington"
+          name="group4"
+          value="3"
+          description="This is optional text that can be used to describe the label in more detail."
+          uswds={uswds}
+          tile
+        />
+      </va-radio>
+    </>
+  );
+};
+
+const FormsPatternMultipleTemplate = ({ uswds, label }) => {
+  const handleClick = () => {
+    const header = document
+      .getElementById('form-pattern-multiple-input')
+      ?.shadowRoot?.getElementById('form-question');
+
+    applyFocus(header);
   };
+  return (
+    <>
+      <va-radio
+        required
+        error="This is an error"
+        id="form-pattern-multiple-input"
+        uswds={uswds}
+        label={label}
+        use-forms-pattern="multiple"
+        form-heading-level={1}
+        form-heading="History"
+        form-description="This is the additional form-description prop"
+      >
+        <va-radio-option
+          label="Soujourner Truth"
+          name="group6"
+          uswds
+          value="1"
+        />
+        <va-radio-option
+          label="Frederick Douglass"
+          name="group6"
+          uswds
+          value="2"
+        />
+        <va-radio-option
+          label="Booker T. Washington"
+          name="group6"
+          uswds
+          value="3"
+        />
+        <va-radio-option
+          label="George Washington Carver"
+          name="group6"
+          uswds
+          value="4"
+        />
+      </va-radio>
+
+      <va-radio
+        required
+        uswds={uswds}
+        label={label}
+        use-forms-pattern="multiple"
+      >
+        <va-radio-option
+          label="Soujourner Truth"
+          name="group7"
+          uswds
+          value="1"
+        />
+        <va-radio-option
+          label="Frederick Douglass"
+          name="group7"
+          uswds
+          value="2"
+        />
+        <va-radio-option
+          label="Booker T. Washington"
+          name="group7"
+          uswds
+          value="3"
+        />
+        <va-radio-option
+          label="George Washington Carver"
+          name="group7"
+          uswds
+          value="4"
+        />
+      </va-radio>
+
+      <hr />
+      <va-button text="click to focus header" onClick={handleClick}></va-button>
+    </>
+  );
+};
+
+const FormsPatternSingleTemplate = ({ uswds, required, error, label }) => {
+  const id = Math.floor(Math.random() * 10) + 1;
+  const handleClick = () => {
+    const header = document
+      .getElementById(`form-pattern-single-radio-${id}`)
+      ?.shadowRoot?.getElementById('form-question');
+
+    applyFocus(header);
+  };
+  return (
+    <>
+      <va-radio
+        required={required}
+        error={error}
+        id={`form-pattern-single-radio-${id}`}
+        uswds={uswds}
+        label={label}
+        use-forms-pattern="single"
+        form-heading-level={1}
+        form-heading="History"
+        form-description="This is the additional form-description prop"
+      >
+        <va-radio-option
+          label="Soujourner Truth"
+          name="group5"
+          uswds
+          value="1"
+        />
+        <va-radio-option
+          label="Frederick Douglass"
+          name="group5"
+          uswds
+          value="2"
+        />
+        <va-radio-option
+          label="Booker T. Washington"
+          name="group5"
+          uswds
+          value="3"
+        />
+        <va-radio-option
+          label="George Washington Carver"
+          name="group5"
+          uswds
+          value="4"
+        />
+
+        <div slot="form-description">
+          <p>HTML passed into the form-description slot:</p>
+          <ul>
+            <li>Sojourner Truth</li>
+            <li>Frederick Douglass</li>
+            <li>Booker T. Washington</li>
+            <li>George Washington Carver</li>
+          </ul>
+        </div>
+      </va-radio>
+
+      <hr />
+
+      <va-button text="click to focus header" onClick={handleClick}></va-button>
+    </>
+  );
+};
 
 const defaultArgs = {
   'enable-analytics': false,
@@ -282,6 +439,10 @@ const defaultArgs = {
   'uswds': true,
   'label-header-level': '',
   'header-aria-describedby': null,
+  'use-forms-pattern': null,
+  'form-heading-level': null,
+  'form-heading': null,
+  'form-description': null,
 };
 
 export const Default = Template.bind(null);
@@ -309,25 +470,22 @@ export const LabelHeader = Template.bind(null);
 LabelHeader.args = {
   ...defaultArgs,
   'label-header-level': '3',
-  name: 'header-example',
+  'name': 'header-example',
   'header-aria-describedby': 'Optional description text for screen readers',
 };
 
 export const OnBackground = props => (
-  <div style={{background: '#f1f1f1', padding: '30px 5px'}}>
-    <va-radio
-        label="This is a label"
+  <div style={{ background: '#f1f1f1', padding: '30px 5px' }}>
+    <va-radio label="This is a label" uswds>
+      <va-radio-option id="no3" label="No" name="group5" value="1" uswds />
+      <va-radio-option
+        id="yes3"
+        label="Yes - Any Veteran"
+        name="group5"
+        value="2"
         uswds
-      >
-        <va-radio-option id="no3" label="No" name="group5" value="1" uswds />
-        <va-radio-option
-          id="yes3"
-          label="Yes - Any Veteran"
-          name="group5"
-          value="2"
-          uswds
-        />
-      </va-radio>
+      />
+    </va-radio>
   </div>
 );
 OnBackground.args = { ...defaultArgs };
@@ -354,4 +512,20 @@ Internationalization.args = {
   ...defaultArgs,
   name: 'i18n-example',
   required: true,
+};
+
+export const FormsPatternSingle = FormsPatternSingleTemplate.bind(null);
+FormsPatternSingle.args = {
+  ...defaultArgs,
+};
+
+export const FormsPatternSingleError = FormsPatternSingleTemplate.bind(null);
+FormsPatternSingleError.args = {
+  ...defaultArgs,
+  error: 'This is an error message',
+};
+
+export const FormsPatternMultiple = FormsPatternMultipleTemplate.bind(null);
+FormsPatternMultiple.args = {
+  ...defaultArgs,
 };
