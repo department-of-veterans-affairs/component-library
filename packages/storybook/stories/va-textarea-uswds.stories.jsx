@@ -138,8 +138,18 @@ const FormsPatternSingleTemplate = ({
         onInput={e => console.log('input event value', e.target.value)}
         use-forms-pattern="single"
         form-heading-level={1}
-        form-heading="Enter additional information"
-      />
+        form-heading="Enter additional information">
+
+        <div slot="form-description">
+          <p>HTML passed into the form-description slot:</p>
+          <ul>
+            <li>Sojourner Truth</li>
+            <li>Frederick Douglass</li>
+            <li>Booker T. Washington</li>
+            <li>George Washington Carver</li>
+          </ul>
+        </div>
+      </va-textarea>
       <hr />
 
       <va-button 
@@ -199,7 +209,6 @@ const FormsPatternMultipleTemplate = ({
         label={"Describe your hopes"}
         enable-analytics={enableAnalytics}
         required={required}
-        error={error}
         hint={hint}
         maxlength={maxlength}
         value={value}
@@ -214,7 +223,6 @@ const FormsPatternMultipleTemplate = ({
         label={"Describe your dreams"}
         enable-analytics={enableAnalytics}
         required={required}
-        error={error}
         hint={hint}
         maxlength={maxlength}
         value={value}
@@ -272,3 +280,10 @@ FormsPatternSingleError.args = {
 
 export const FormsPatternMultiple = FormsPatternMultipleTemplate.bind(null);
 FormsPatternMultiple.args = { ...defaultArgs }
+
+
+export const FormsPatternMultipleError = FormsPatternMultipleTemplate.bind(null);
+FormsPatternMultipleError.args = { 
+  ...defaultArgs,
+   error:'This is an error message',
+}
