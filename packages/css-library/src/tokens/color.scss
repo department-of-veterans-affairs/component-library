@@ -37,20 +37,20 @@ $tokens-color-grayscale: (
 );
 
 $tokens-color-tertiary: (
-  "gold": "#fdb81e",
-  "gold-darker": "#988530",
-  "gold-light": "#f9c642",
-  "gold-lighter": "#fad980",
-  "gold-lightest": "#fff1d2",
-  "green": "#2e8540",
-  "green-darker": "#195c27",
-  "green-light": "#4aa564",
-  "green-lighter": "#94bfa2",
-  "green-lightest": "#e7f4e4",
-  "cool-blue": "#205493",
-  "cool-blue-light": "#4773aa",
-  "cool-blue-lighter": "#8ba6ca",
-  "cool-blue-lightest": "#dce4ef",
+  "gold": $color-gold,
+  "gold-darker": $color-gold-darker,
+  "gold-light": $color-gold-light,
+  "gold-lighter": $color-gold-lighter,
+  "gold-lightest": $color-gold-lightest,
+  "green": $color-green,
+  "green-darker": $color-green-darker,
+  "green-light": $color-green-light,
+  "green-lighter": $color-green-lighter,
+  "green-lightest": $color-green-lightest,
+  "cool-blue": $color-blue-cool,
+  "cool-blue-light": $color-blue-cool-light,
+  "cool-blue-lighter": $color-blue-cool-lighter,
+  "cool-blue-lightest": $color-blue-cool-lightest,
 );
 
 // TODO: Consider removing these since they aren't used
@@ -63,6 +63,6 @@ $tokens-color-hub: (
   "hub-housing": "#8e704f",
   "hub-life-insurance": "#6f7a41",
   "hub-burials": "#357ab2",
-  "hub-family-member": "#003e73",
-  "hub-service-member": "#003e73",
+  "hub-family-member": "#162e51",
+  "hub-service-member": "#162e51",
 );
