@@ -119,7 +119,7 @@ export const WithDescriptionJSX = props => (
 WithDescriptionJSX.args = { ...defaultArgs };
 
 export const OnBackground = props => (
-  <div style={{background: '#f1f1f1', padding: '30px 5px'}}>
+  <div style={{background: '#f0f0f0', padding: '30px 5px'}}>
     <va-checkbox {...props} onBlur={e => console.log(e)}>
     </va-checkbox>
   </div>

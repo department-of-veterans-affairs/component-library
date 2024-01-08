@@ -11,7 +11,7 @@ html {
 
 body {
   background: #ffffff;
-  color: #212121;
+  color: #1b1b1b;
 }
 
 article > h1 {
@@ -21,7 +21,7 @@ article > h1 {
 hr {
   margin: 2.5em 0;
   margin: 48px 0 40px;
-  border: 1px solid #aeb0b5;
+  border: 1px solid #a9aeb1;
 }
 
 #content abbr {
@@ -107,15 +107,15 @@ figcaption {
 }
 
 input::-webkit-input-placeholder {
-  color: #5b616b;
+  color: #565c65;
 }
 
 input::-moz-placeholder {
-  color: #5b616b;
+  color: #565c65;
 }
 
 input:-ms-input-placeholder {
-  color: #5b616b;
+  color: #565c65;
 }
 
 input:focus::-webkit-input-placeholder {

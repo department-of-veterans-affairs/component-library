@@ -3,11 +3,11 @@
 @import '../../mixins/hint-text.css';
 
 .usa-label--required {
-  color: var(--v3-color-error-dark);
+  color: var(--color-secondary-dark);
 }
 
 .usa-error-message {
-  color: var(--v3-color-error-dark);
+  color: var(--color-secondary-dark);
 }
 
 

@@ -1,6 +1,6 @@
 {
   "color": {
-    "base": { "value": "#212121" },
+    "base": { "value": "{uswds-system-color-gray-90}" },
     "white": { "value": "#ffffff" },
     "black": { "value": "{uswds-system-color-gray-100}" },
     "link-default": { "value": "{uswds-system-color-blue-vivid-60}" },
@@ -9,8 +9,8 @@
       "value": "rgba({uswds-system-color-gray-100}, {color.link-default-hover.alpha})"
     },
     "link-visited": { "value": "{uswds-system-color-violet-vivid-70}" },
-    "warning-message": { "value": "#fac922" },
-    "feedback-warning-background": { "value": "#fac922" },
+    "warning-message": { "value": "{uswds-system-color-yellow-5}" },
+    "feedback-warning-background": { "value": "{uswds-system-color-yellow-5}" },
     "primary": {
       "*": { "value": "{uswds-system-color-blue-vivid-60}" },
       "dark": { "value": "{uswds-system-color-blue-warm-vivid-70}" },
@@ -24,46 +24,44 @@
       }
     },
     "secondary": {
-      "*": { "value": "#e31c3d" },
-      "dark": { "value": "#cd2026" },
-      "darkest": { "value": "#981b1e" },
-      "light": { "value": "#e59393" },
-      "lightest": { "value": "#f9dede" }
+      "*": { "value": "{uswds-system-color-red-50}" },
+      "dark": { "value": "{uswds-system-color-red-vivid-60}" },
+      "darkest": { "value": "{uswds-system-color-red-vivid-70}" },
+      "light": { "value": "{uswds-system-color-red-30}" },
+      "lightest": { "value": "{uswds-system-color-red-cool-vivid-10}" }
     },
     "gray": {
-      "*": { "value": "#5b616b" },
-      "dark": { "value": "#323a45" },
-      "medium": { "value": "#757575" },
-      "light": { "value": "#aeb0b5" },
-      "light-alt": { "value": "#eeeeee" },
-      "lighter": { "value": "#d6d7d9" },
-      "lightest": { "value": "#f1f1f1" },
-      "warm-dark": { "value": "#494440" },
-      "warm-light": { "value": "#e4e2e0" },
-      "cool-light": { "value": "#dce4ef" }
+      "*": { "value": "{uswds-system-color-gray-cool-60}" },
+      "dark": { "value": "{uswds-system-color-gray-cool-70}" },
+      "medium": { "value": "{uswds-system-color-gray-50}" },
+      "light": { "value": "{uswds-system-color-gray-cool-30}" },
+      "light-alt": { "value": "{uswds-system-color-gray-cool-5}" },
+      "lighter": { "value": "{uswds-system-color-gray-cool-10}" },
+      "lightest": { "value": "{uswds-system-color-gray-5}" },
+      "warm-dark": { "value": "{uswds-system-color-gray-warm-70}" },
+      "warm-light": { "value": "{uswds-system-color-gray-warm-10}" },
+      "cool-light": { "value": "{uswds-system-color-blue-warm-10}" }
     },
     "green": {
-      "*": { "value": "#2e8540" },
-      "dark": { "value": "#1e5f2f" },
-      "darker": { "value": "#195c27" },
-      "darkest": { "value": "#0f3f1f" },
-      "light": { "value": "#7dbf7c" },
-      "lighter": { "value": "#94bfa2" },
-      "lightest": { "value": "#e7f4e4" }
+      "*": { "value": "{uswds-system-color-green-cool-vivid-50}" },
+      "dark": { "value": "{uswds-system-color-green-cool-vivid-60}" },
+      "darker": { "value": "{uswds-system-color-green-cool-vivid-70}" },
+      "light": { "value": "{uswds-system-color-green-cool-40}" },
+      "lighter": { "value": "{uswds-system-color-green-cool-20}" },
+      "lightest": { "value": "{uswds-system-color-green-cool-5}" }
     },
     "gold": {
-      "*": { "value": "#fdb81e" },
-      "light": { "value": "#f9c642" },
-      "lighter": { "value": "#fad980" },
-      "lightest": { "value": "#fff1d2" }
-    }
-  },
-  "v3-color": {
-    "error": {
-      "dark": { "value": "{uswds-system-color-red-vivid-60}" }
+      "*": { "value": "{uswds-system-color-gold-vivid-20}" },
+      "light": { "value": "{uswds-system-color-yellow-vivid-20}" },
+      "lighter": { "value": "{uswds-system-color-gold-vivid-10}" },
+      "lightest": { "value": "{uswds-system-color-gold-vivid-5}" },
+      "darker": { "value": "{uswds-system-color-gold-vivid-50}"}
     },
-    "base": {
-      "darkest": { "value": "{uswds-system-color-gray-90}" }
+    "blue-cool": {
+      "*": { "value": "{uswds-system-color-blue-warm-60}"},
+      "light": { "value": "{uswds-system-color-blue-warm-50}"},
+      "lighter": { "value": "{uswds-system-color-blue-warm-30}"},
+      "lightest": { "value": "{uswds-system-color-gray-warm-10}"}
     }
   }
 }

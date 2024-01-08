@@ -34,13 +34,13 @@ addons.setConfig({
         let backgroundColor;
         switch (maturityCategory) {
           case category.USE:
-            backgroundColor = '#195c27';
+            backgroundColor = '#154c21';
             break;
           case category.CAUTION:
-            backgroundColor = '#eb7f29';
+            backgroundColor = '#dd7533';
             break;
           case category.DONT_USE:
-            backgroundColor = '#981b1e';
+            backgroundColor = '#8b0a03';
             break;
         }
 

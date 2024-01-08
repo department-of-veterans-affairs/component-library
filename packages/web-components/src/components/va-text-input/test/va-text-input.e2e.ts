@@ -330,18 +330,18 @@ describe('va-text-input', () => {
     await page.setContent('<va-text-input success />');
 
     const input = await page.find('va-text-input >>> input');
-    // rgb(46, 133, 64) is equal to #2e8540 and --color-green CSS variable
+    // rgb(0, 136, 23) is equal to #008817 and --color-green CSS variable
     expect((await input.getComputedStyle()).borderBottomColor).toEqual(
-      'rgb(46, 133, 64)',
+      'rgb(0, 136, 23)',
     );
     expect((await input.getComputedStyle()).borderLeftColor).toEqual(
-      'rgb(46, 133, 64)',
+      'rgb(0, 136, 23)',
     );
     expect((await input.getComputedStyle()).borderRightColor).toEqual(
-      'rgb(46, 133, 64)',
+      'rgb(0, 136, 23)',
     );
     expect((await input.getComputedStyle()).borderTopColor).toEqual(
-      'rgb(46, 133, 64)',
+      'rgb(0, 136, 23)',
     );
   });
 
