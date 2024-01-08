@@ -298,7 +298,7 @@ const FormsPatternMultipleTemplate = ({ uswds, label }) => {
         label={label}
         use-forms-pattern="multiple"
         form-heading-level={1}
-        form-heading="History"
+        form-heading="Select one historical figure"
         form-description="This is the additional form-description prop"
       >
         <va-radio-option
@@ -381,44 +381,27 @@ const FormsPatternSingleTemplate = ({ uswds, required, error, label }) => {
         error={error}
         id={`form-pattern-single-radio-${id}`}
         uswds={uswds}
-        label={label}
         use-forms-pattern="single"
         form-heading-level={1}
-        form-heading="History"
+        form-heading="Burn pits2.1, did you serve in any of there locations?"
         form-description="This is the additional form-description prop"
       >
-        <va-radio-option
-          label="Soujourner Truth"
-          name="group5"
-          uswds
-          value="1"
-        />
-        <va-radio-option
-          label="Frederick Douglass"
-          name="group5"
-          uswds
-          value="2"
-        />
-        <va-radio-option
-          label="Booker T. Washington"
-          name="group5"
-          uswds
-          value="3"
-        />
-        <va-radio-option
-          label="George Washington Carver"
-          name="group5"
-          uswds
-          value="4"
-        />
+        <va-radio-option label="Yes" name="group5" uswds value="1" />
+        <va-radio-option label="No" name="group5" uswds value="2" />
+        <va-radio-option label="Not sure" name="group5" uswds value="3" />
 
         <div slot="form-description">
           <p>HTML passed into the form-description slot:</p>
           <ul>
-            <li>Sojourner Truth</li>
-            <li>Frederick Douglass</li>
-            <li>Booker T. Washington</li>
-            <li>George Washington Carver</li>
+            <li>Bahrain</li>
+            <li>Iraq</li>
+            <li>Kuwait</li>
+            <li>Oman</li>
+            <li>Qatar</li>
+            <li>Saudi Arabia</li>
+            <li>Somalia</li>
+            <li>The United Arab Emirates(UAE)</li>
+            <li>The airspace above any of these locations</li>
           </ul>
         </div>
       </va-radio>
