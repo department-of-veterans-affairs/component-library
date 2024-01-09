@@ -1,4 +1,4 @@
-import { Component, Host, h, Prop, Element } from '@stencil/core';
+import { Component, Host, h, Prop, State, Element } from '@stencil/core';
 
 /**
  * @componentName Featured content
@@ -16,7 +16,18 @@ export class VaFeaturedContent {
    */
   @Prop() uswds?: boolean = false;
 
+  /**
+   * Local State for slot=headline's text.
+   * Used to place an aria-label for role="region" with the same text as the heading.
+   */
+  @State() headlineText: string = null;
+
   @Element() el: HTMLElement;
+
+  componentWillLoad() {
+    let childElements = Array.from(this.el.children);
+    this.headlineText = childElements.find(element => element.slot === "headline").textContent;
+  }
 
   componentDidLoad() {
     if (!this.uswds) {
@@ -37,7 +48,7 @@ export class VaFeaturedContent {
     if (uswds) {
       return (
         <Host>
-          <div class="usa-summary-box" role="region">
+          <div class="usa-summary-box" role="region" aria-label={this.headlineText}>
             <div class="usa-summary-box__body">
               <slot name="headline"></slot>
               <slot />
