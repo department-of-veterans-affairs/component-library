@@ -17,7 +17,7 @@ export class VaFeaturedContent {
   @Prop() uswds?: boolean = false;
 
   /**
-   * Local State for slot=headline's text.
+   * Local state for slot=headline's text.
    * Used to place an aria-label for role="region" with the same text as the heading.
    */
   @State() headlineText: string = null;
@@ -26,7 +26,7 @@ export class VaFeaturedContent {
 
   componentWillLoad() {
     let childElements = Array.from(this.el.children);
-    this.headlineText = childElements.find(element => element.slot === "headline").textContent;
+    this.headlineText = childElements.find(element => element.slot === "headline").textContent.trim();
   }
 
   componentDidLoad() {
