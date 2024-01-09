@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { VaMemorableDate } from '@department-of-veterans-affairs/web-components/react-bindings';
-import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
+import { getWebComponentDocs, propStructure, StoryDocs, applyFocus } from './wc-helpers';
 
 VaMemorableDate.displayName = 'VaMemorableDate';
 
@@ -137,6 +137,107 @@ const I18nTemplate = ({ label, name, required, error, uswds, value }) => {
     </div>
 )};
 
+const FormsPatternSingleTemplate = ({ label, name, hint, required, error, uswds, value, monthSelect }) => {
+
+  const id = (Math.floor(Math.random() * 100) + 1);
+  const handleClick = () => {
+    const header = document.getElementById(`form-pattern-single-input-${id}`)
+      ?.shadowRoot
+      ?.getElementById('form-question');
+
+    applyFocus(header);
+  }
+  return (
+    <>
+      <VaMemorableDate
+        uswds={uswds}
+        monthSelect={monthSelect}
+        label={label}
+        name={name}
+        hint={hint}
+        required={required}
+        error={error}
+        value={value}
+        onDateBlur={e => console.log(e, 'DATE BLUR FIRED')}
+        onDateChange={e => console.log(e, 'DATE CHANGE FIRED')}
+        use-forms-pattern="single"
+        id={`form-pattern-single-input-${id}`}
+        form-heading-level={1}
+        form-heading="Enter a date"
+        form-description="This is the additional form-description prop"
+      >
+        <div slot="form-description">
+          <p>HTML passed into the form-description slot:</p>
+          <ul>
+            <li>Month</li>
+            <li>Day</li>
+            <li>Year</li>
+          </ul>
+        </div>
+      </VaMemorableDate>
+      <hr />
+
+      <va-button 
+        text="click to focus header" 
+        onClick={handleClick}>
+      </va-button>
+    </>
+  );
+};
+
+
+const FormsPatternMultipleTemplate = ({ label, name, hint, required, error, uswds, value, monthSelect }) => {
+
+  const handleClick = () => {
+    const header = document.getElementById(`form-pattern-single-input-multiple`)
+      ?.shadowRoot
+      ?.getElementById('form-question');
+
+    applyFocus(header);
+  }
+  return (
+    <>
+      <VaMemorableDate
+        uswds={uswds}
+        monthSelect={monthSelect}
+        label={label}
+        name={name}
+        hint={hint}
+        required={required}
+        error={error}
+        value={value}
+        onDateBlur={e => console.log(e, 'DATE BLUR FIRED')}
+        onDateChange={e => console.log(e, 'DATE CHANGE FIRED')}
+        use-forms-pattern="single"
+        id={`form-pattern-single-input-multiple`}
+        form-heading-level={1}
+        form-heading="Enter dates"
+        form-description="This is the additional form-description prop"
+      />
+      <VaMemorableDate
+        uswds={uswds}
+        monthSelect={monthSelect}
+        label={'Date of enrollment'}
+        name={name}
+        hint={hint}
+        required={required}
+        error={error}
+        value={value}
+        onDateBlur={e => console.log(e, 'DATE BLUR FIRED')}
+        onDateChange={e => console.log(e, 'DATE CHANGE FIRED')}
+        use-forms-pattern="single"
+        id={`form-pattern-single-input-multiple`}
+      />
+      <hr />
+
+      <va-button 
+        text="click to focus header" 
+        onClick={handleClick}>
+      </va-button>
+    </>
+  );
+};
+
 export const Default = Template.bind(null);
 Default.args = { ...defaultArgs };
 Default.argTypes = propStructure(memorableDateInputDocs);
@@ -181,3 +282,27 @@ CustomValidation.args = {
 //   error: 'Error Message Example',
 //   required: true,
 // };
+
+
+export const FormsPatternSingleWithMonthDropdown = FormsPatternSingleTemplate.bind(null);
+FormsPatternSingleWithMonthDropdown.args = {
+  ...defaultArgs,
+};
+
+
+export const FormsPatternSingleWithoutMonthDropdown = FormsPatternSingleTemplate.bind(null);
+FormsPatternSingleWithoutMonthDropdown.args = {
+  ...defaultArgs,
+  monthSelect: false,
+};
+
+export const FormsPatternSingleError = FormsPatternSingleTemplate.bind(null);
+FormsPatternSingleError.args = {
+  ...defaultArgs,
+  error: 'Error Message Example',
+};
+
+export const FormsPatternMultiple = FormsPatternMultipleTemplate.bind(null);
+FormsPatternMultiple.args = {
+  ...defaultArgs,
+};
