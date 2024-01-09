@@ -381,6 +381,7 @@ const FormsPatternSingleTemplate = ({ uswds, required, error, label }) => {
         error={error}
         id={`form-pattern-single-radio-${id}`}
         uswds={uswds}
+        label={label}
         use-forms-pattern="single"
         form-heading-level={1}
         form-heading="Burn pits2.1, did you serve in any of there locations?"

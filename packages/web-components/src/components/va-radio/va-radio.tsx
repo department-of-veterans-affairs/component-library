@@ -278,24 +278,26 @@ export class VaRadio {
           {formsHeading}
           <div class="input-wrap">
             <fieldset class="usa-fieldset">
-              <legend class={legendClass} part="legend">
-                {HeaderLevel ? (
-                  <HeaderLevel part="header" aria-describedby={headerAriaDescribedbyId}>{label}</HeaderLevel>
-                ) : (
-                  label
-                )}
-                {headerAriaDescribedby && (
-                  <span id="header-message" class="sr-only">
-                    {headerAriaDescribedby}
-                  </span>
-                )}
-                {required && (
-                  <span class="usa-label--required" part="required">
-                    {' '}
-                    {i18next.t('required')}
-                  </span>
-                )}
-              </legend>
+              {(!formHeading || useFormsPattern === 'multiple') && (
+                <legend class={legendClass} part="legend">
+                  {HeaderLevel ? (
+                    <HeaderLevel part="header" aria-describedby={headerAriaDescribedbyId}>{label}</HeaderLevel>
+                  ) : (
+                    label
+                  )}
+                  {headerAriaDescribedby && (
+                    <span id="header-message" class="sr-only">
+                      {headerAriaDescribedby}
+                    </span>
+                  )}
+                  {required && (
+                    <span class="usa-label--required" part="required">
+                      {' '}
+                      {i18next.t('required')}
+                    </span>
+                  )}
+                </legend>
+              )}
               {hint && <span class="usa-hint">{hint}</span>}
               <span class="usa-error-message" role="alert">
                 {error && (
