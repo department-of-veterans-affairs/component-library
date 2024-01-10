@@ -637,51 +637,14 @@ describe('va-memorable-date', () => {
           <fieldset class="usa-fieldset usa-form">
           <legend class="usa-legend" part="legend">
           <span class="usa-hint" id="dateHint">
-            date-hint-with-select
+            date-hint
           </span>
           </legend>
           <span id="error-message" role="alert"></span>
           <slot></slot>
           <div class="usa-memorable-date">
-            <div class="usa-form-group usa-form-group--select usa-form-group--month">
-              <va-select aria-describedby="dateHint" class="hydrated usa-form-group--month-select" uswds="">
-                <option value="1">
-                  January
-                </option>
-                <option value="2">
-                  February
-                </option>
-                <option value="3">
-                  March
-                </option>
-                <option value="4">
-                  April
-                </option>
-                <option value="5">
-                  May
-                </option>
-                <option value="6">
-                  June
-                </option>
-                <option value="7">
-                  July
-                </option>
-                <option value="8">
-                  August
-                </option>
-                <option value="9">
-                  September
-                </option>
-                <option value="10">
-                  October
-                </option>
-                <option value="11">
-                  November
-                </option>
-                <option value="12">
-                  December
-                </option>
-              </va-select>
+            <div class="usa-form-group usa-form-group--month">
+              <va-text-input aria-describedby="dateHint" class="hydrated memorable-date-input usa-form-group--month-input" uswds=""></va-text-input>
             </div>
             <div class="usa-form-group usa-form-group--day">
               <va-text-input aria-describedby="dateHint" class="hydrated memorable-date-input usa-form-group--day-input" uswds=""></va-text-input>
@@ -725,51 +688,14 @@ describe('va-memorable-date', () => {
               hint text
             </div>
             <span class="usa-hint" id="dateHint">
-              date-hint-with-select
+              date-hint
             </span>
           </legend>
           <span id="error-message" role="alert"></span>
           <slot></slot>
           <div class="usa-memorable-date">
-            <div class="usa-form-group usa-form-group--select usa-form-group--month">
-              <va-select aria-describedby="dateHint hint" class="hydrated usa-form-group--month-select" uswds="">
-                <option value="1">
-                  January
-                </option>
-                <option value="2">
-                  February
-                </option>
-                <option value="3">
-                  March
-                </option>
-                <option value="4">
-                  April
-                </option>
-                <option value="5">
-                  May
-                </option>
-                <option value="6">
-                  June
-                </option>
-                <option value="7">
-                  July
-                </option>
-                <option value="8">
-                  August
-                </option>
-                <option value="9">
-                  September
-                </option>
-                <option value="10">
-                  October
-                </option>
-                <option value="11">
-                  November
-                </option>
-                <option value="12">
-                  December
-                </option>
-              </va-select>
+            <div class="usa-form-group usa-form-group--month">
+              <va-text-input aria-describedby="dateHint hint" class="hydrated memorable-date-input usa-form-group--month-input" uswds=""></va-text-input>
             </div>
             <div class="usa-form-group usa-form-group--day">
               <va-text-input aria-describedby="dateHint hint" class="hydrated memorable-date-input usa-form-group--day-input" uswds=""></va-text-input>
@@ -844,7 +770,7 @@ describe('va-memorable-date', () => {
     it('uswds v3 does month validation without required prop', async () => {
       const page = await newE2EPage();
       await page.setContent(
-        '<va-memorable-date name="test" uswds />',
+        '<va-memorable-date name="test" uswds month-select />',
       );
       const date = await page.find('va-memorable-date');
       const handleYear = await page.$('pierce/[name="testYear"]');
@@ -990,7 +916,7 @@ describe('va-memorable-date', () => {
       it('uswds v3 correctly indicates an invalid month', async () => {
         const page = await newE2EPage();
         await page.setContent(
-          '<va-memorable-date value="1999-05-03" name="test" required="true" uswds />',
+          '<va-memorable-date value="1999-05-03" name="test" required="true" uswds month-select/>',
         );
         const handleYear = await page.$('pierce/[name="testYear"]');
         const handleMonth = await page.$('pierce/[name="testMonth"]');
@@ -1141,7 +1067,7 @@ describe('va-memorable-date', () => {
 
   it('uswds v3 sets a default date', async () => {
     const page = await newE2EPage();
-    await page.setContent('<va-memorable-date value="1999-05-03" uswds />');
+    await page.setContent('<va-memorable-date value="1999-05-03" uswds month-select/>');
 
     const month = await page.find('va-memorable-date >>> .usa-form-group--month-select');
     const day = await page.find('va-memorable-date >>> .usa-form-group--day-input');
@@ -1155,7 +1081,7 @@ describe('va-memorable-date', () => {
   it('uswds v3 updates date based on input fields', async () => {
     const page = await newE2EPage();
     await page.setContent(
-      '<va-memorable-date value="1999-05-03" name="test" uswds />',
+      '<va-memorable-date value="1999-05-03" name="test" uswds month-select />',
     );
 
     const date = await page.find('va-memorable-date');
@@ -1221,7 +1147,7 @@ describe('va-memorable-date', () => {
     const page = await newE2EPage();
 
     await page.setContent(
-      '<va-memorable-date value="1999-05-03" name="test" uswds />',
+      '<va-memorable-date value="1999-05-03" name="test" uswds month-select />',
     );
 
     const handleMonth = await page.$('pierce/[name="testMonth"]');
@@ -1277,7 +1203,7 @@ describe('va-memorable-date', () => {
   it('uswds v3 fires an analytics event when enableAnalytics is true', async () => {
     const page = await newE2EPage();
     await page.setContent(
-      '<va-memorable-date enable-analytics name="test" label="Example label" uswds />',
+      '<va-memorable-date enable-analytics name="test" label="Example label" uswds month-select />',
     );
     const analyticsSpy = await page.spyOnEvent('component-library-analytics');
     const handleMonth = await page.$('pierce/[name="testMonth"]');
@@ -1357,7 +1283,7 @@ describe('va-memorable-date', () => {
     await axeCheck(page);
   });
 
-  it('uswds v3 renders hint text without monthSelect', async () => {
+  it('uswds v3 renders hint text without month-select', async () => {
     const page = await newE2EPage();
     await page.setContent('<va-memorable-date label="Label" hint="hint text" required uswds month-select="false"></va-memorable-date>');
 
