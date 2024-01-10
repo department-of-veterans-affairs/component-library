@@ -211,12 +211,14 @@ describe('va-textarea', () => {
     expect(element).toEqualHtml(`
       <va-textarea class="hydrated" label="Describe your situation" uswds="">
         <mock:shadow-root>
-          <label class="usa-label" for="input-type-textarea" part="label">
-            Describe your situation
-          </label>
-          <slot></slot>
-          <span id="input-error-message" role="alert"></span>
-          <textarea id="input-type-textarea" part="input-type-textarea" aria-invalid="false" class="usa-textarea"></textarea>
+          <div class="input-wrap">
+            <label class="usa-label" for="input-type-textarea" id="input-label" part="label">
+              Describe your situation
+            </label>
+            <slot></slot>
+            <span id="input-error-message" role="alert"></span>
+            <textarea id="input-type-textarea" part="input-type-textarea" aria-invalid="false" class="usa-textarea"></textarea>
+          </div?
         </mock:shadow-root>
       </va-textarea>
     `);
@@ -447,4 +449,42 @@ describe('va-textarea', () => {
 
     expect(inputEl.getAttribute('aria-invalid')).toBe("true");
   });
+  
+  it('uswds useFormsPattern displays header for the single field pattern', async () => {
+    const page = await newE2EPage();
+    await page.setContent(
+      '<va-textarea use-forms-pattern="single" form-heading-level="1" form-heading="This is a form header" form-description="This is a form description" label="Describe your situation" uswds></va-textarea>',
+    );
+
+    const formHeader = await page.find('va-textarea >>> h1');
+    expect(formHeader.innerText).toEqual('This is a form header');
+  });
+
+  it('uswds useFormsPattern displays header for the multiple field pattern', async () => {
+    const page = await newE2EPage();
+    await page.setContent(
+      '<va-textarea use-forms-pattern="multiple" form-heading-level="1" form-heading="This is a form header" form-description="This is a form description" label="Describe your situation" uswds></va-textarea>',
+    );
+
+    const formHeader = await page.find('va-textarea >>> h1');
+    expect(formHeader.innerText).toEqual('This is a form header');
+  });
+
+  it('uswds useFormsPattern does not display header if "single" or "multiple" is not indicated', async () => {
+    const page = await newE2EPage();
+    await page.setContent(
+      '<va-textarea form-heading-level="1" form-heading="This is a form header" form-description="This is a form description" label="Describe your situation" uswds></va-textarea>',
+    );
+
+    const formHeader = await page.find('va-textarea >>> h1');
+    expect(formHeader).toBeNull();
+  });
+
+  it('uswds useFormsPattern passes an aXe check', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-textarea use-forms-pattern="single" form-heading-level="1" form-heading="This is a form header" form-description="This is a form description" label="Describe your situation" uswds></va-textarea>',);
+
+    await axeCheck(page);
+  });
+
 });
