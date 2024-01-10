@@ -384,7 +384,7 @@ const FormsPatternSingleTemplate = ({ uswds, required, error, label }) => {
         label={label}
         use-forms-pattern="single"
         form-heading-level={1}
-        form-heading="Burn pits2.1, did you serve in any of there locations?"
+        form-heading="Burn pit S2.1, did you serve in any of there locations?"
         form-description="This is the additional form-description prop"
       >
         <va-radio-option label="Yes" name="group5" uswds value="1" />

@@ -245,9 +245,8 @@ export class VaRadio {
     const HeaderLevel = this.getHeaderLevel();
     const headerAriaDescribedbyId = headerAriaDescribedby ? 'header-message' : null;
     const ariaLabeledByIds = 
-    `${useFormsPattern && formHeading ? 'form-question' : ''} ${ 
-      useFormsPattern ? 'form-description' : ''} ${
-      useFormsPattern && label ? 'input-label' : ''}`.trim() || null;
+    `${useFormsPattern && formHeading ? 'form-question' : ''} ${
+      useFormsPattern ? 'form-description' : ''}`.trim() || null;
 
     if (uswds) {
       const legendClass = classnames({
@@ -261,7 +260,7 @@ export class VaRadio {
       if (isFormsPattern) {
         const HeaderLevel = getHeaderLevel(formHeadingLevel);
         formsHeading = (
-          <Fragment>
+          <div id="form-heading-description" tabindex={0}>
             {formHeading &&
               <HeaderLevel id="form-question" part="form-header">
                 {formHeading}
@@ -270,7 +269,7 @@ export class VaRadio {
             <div id="form-description">
               <slot name="form-description"></slot>
             </div>
-          </Fragment>
+          </div>
         )
       }
       return (
