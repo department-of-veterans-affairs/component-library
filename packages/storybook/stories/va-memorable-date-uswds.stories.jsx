@@ -221,7 +221,6 @@ const FormsPatternMultipleTemplate = ({ label, name, hint, required, error, uswd
         name={name}
         hint={hint}
         required={required}
-        error={error}
         value={value}
         onDateBlur={e => console.log(e, 'DATE BLUR FIRED')}
         onDateChange={e => console.log(e, 'DATE CHANGE FIRED')}
@@ -305,4 +304,10 @@ FormsPatternSingleError.args = {
 export const FormsPatternMultiple = FormsPatternMultipleTemplate.bind(null);
 FormsPatternMultiple.args = {
   ...defaultArgs,
+};
+
+export const FormsPatternMultipleError = FormsPatternMultipleTemplate.bind(null);
+FormsPatternMultipleError.args = {
+  ...defaultArgs,
+  error: 'Error Message Example',
 };
