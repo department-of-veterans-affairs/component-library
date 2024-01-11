@@ -260,7 +260,7 @@ export class VaRadio {
       if (isFormsPattern) {
         const HeaderLevel = getHeaderLevel(formHeadingLevel);
         formsHeading = (
-          <div id="form-heading-description" tabindex={0}>
+          <Fragment>
             {formHeading &&
               <HeaderLevel id="form-question" part="form-header">
                 {formHeading}
@@ -269,14 +269,14 @@ export class VaRadio {
             <div id="form-description">
               <slot name="form-description"></slot>
             </div>
-          </div>
+          </Fragment>
         )
       }
       return (
-        <Host aria-invalid={error ? 'true' : 'false'} aria-label={ariaLabel} aria-labelledby={ariaLabeledByIds}>
+        <Host aria-invalid={error ? 'true' : 'false'}>
           {formsHeading}
           <div class="input-wrap">
-            <fieldset class="usa-fieldset">
+            <fieldset class="usa-fieldset" aria-labelledby={ariaLabeledByIds}>
               {(!formHeading || useFormsPattern === 'multiple') && (
                 <legend class={legendClass} part="legend">
                   {HeaderLevel ? (
