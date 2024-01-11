@@ -4,7 +4,8 @@
   "packageManager": "yarn@3.2.0",
   "files": [
     "dist/**/*.css",
-    "dist/**/*.scss"
+    "dist/**/*.scss",
+    "dist/**/*.json"
   ],
   "scripts": {
     "build:tokens": "style-dictionary build",
