@@ -1,4 +1,5 @@
 import { Component, Host, h, Prop, Element } from '@stencil/core';
+import { wrapAndAddClass, createNewBlankDiv} from '../../utils/shadow-wrapper';
 
 /**
  * @componentName Featured content
@@ -24,12 +25,18 @@ export class VaFeaturedContent {
     }
     // add uswds classes
     const nodes = this.el.shadowRoot
-      .querySelectorAll('slot')
+      .querySelectorAll('slot');
+    // instead of adding class to the slot
+    // we assign a new blank div element to it, as a placeholder
+    nodes.forEach(slot=>createNewBlankDiv(this, slot.name))
+  
     const headline = nodes[0];
     const content = nodes[1];
-    
-    headline.classList.add('usa-summary-box__heading');
-    content.classList.add('usa-summary-box__text');
+    //here we take the placeholder element,
+    // move the original content inside and apply the class
+    // the styles should now apply from the light dom
+    wrapAndAddClass(headline,'usa-summary-box__heading');
+    wrapAndAddClass(content, 'usa-summary-box__text');
   }
 
   render() {
