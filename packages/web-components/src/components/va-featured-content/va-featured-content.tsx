@@ -1,4 +1,4 @@
-import { Component, Host, h, Prop, State, Element } from '@stencil/core';
+import { Component, Host, h, Prop, Element } from '@stencil/core';
 
 /**
  * @componentName Featured content
@@ -20,7 +20,7 @@ export class VaFeaturedContent {
    * Local state for slot=headline's text.
    * Used to place an aria-label for role="region" with the same text as the heading.
    */
-  @State() headlineText: string = null;
+  private headlineText: string = null;
 
   @Element() el: HTMLElement;
 
