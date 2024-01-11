@@ -1,4 +1,4 @@
-import { Component, Host, h, Prop, Element } from '@stencil/core';
+import { Component, Host, h, Prop, Element, State } from '@stencil/core';
 
 /**
  * @componentName Featured content
@@ -20,16 +20,13 @@ export class VaFeaturedContent {
    * Local state for slot=headline's text.
    * Used to place an aria-label for role="region" with the same text as the heading.
    */
-  private headlineText: string = null;
+  @State() headlineText: string = null;
 
   @Element() el: HTMLElement;
 
   componentWillLoad() {
-    return new Promise<void>((resolve) => {
-      let childElements = Array.from(this.el.children);
-      this.headlineText = childElements.find(element => element.slot === "headline").textContent.trim();
-      resolve();
-    });
+    let childElements = Array.from(this.el.children);
+    this.headlineText = childElements.find(element => element.slot === "headline").textContent.trim();
   }
 
   componentDidLoad() {
