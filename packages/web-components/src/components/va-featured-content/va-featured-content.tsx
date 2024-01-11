@@ -25,8 +25,11 @@ export class VaFeaturedContent {
   @Element() el: HTMLElement;
 
   componentWillLoad() {
-    let childElements = Array.from(this.el.children);
-    this.headlineText = childElements.find(element => element.slot === "headline").textContent.trim();
+    return new Promise<void>((resolve) => {
+      let childElements = Array.from(this.el.children);
+      this.headlineText = childElements.find(element => element.slot === "headline").textContent.trim();
+      resolve();
+    });
   }
 
   componentDidLoad() {
@@ -41,6 +44,9 @@ export class VaFeaturedContent {
     
     headline.classList.add('usa-summary-box__heading');
     content.classList.add('usa-summary-box__text');
+
+    let childElements = Array.from(this.el.children);
+    this.headlineText = childElements.find(element => element.slot === "headline").textContent.trim();
   }
 
   render() {
