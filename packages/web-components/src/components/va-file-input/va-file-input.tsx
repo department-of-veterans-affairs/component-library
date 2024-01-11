@@ -79,6 +79,11 @@ export class VaFileInput {
   @Prop({ reflect: true }) uswds?: boolean = false;
 
   /**
+   * A random id used for listening to changes
+   */
+  changeListenerId: number;
+
+  /**
    * The event emitted when the file input value changes.
    */
   @Event() vaChange: EventEmitter;
@@ -94,9 +99,9 @@ export class VaFileInput {
   })
   componentLibraryAnalytics: EventEmitter;
 
-  private handleChange = (e: Event) => {
+  private handleChange = (e: Event, files?: any) => {
     const target = e.target as HTMLInputElement;
-    this.vaChange.emit({ files: target.files });
+    this.vaChange.emit({ files: target.files || files });
     /**
      * Clear the original input, otherwise events will be triggered
      * with empty file arrays and sometimes uploading a file twice will
@@ -127,8 +132,35 @@ export class VaFileInput {
     return this.buttonText ? this.buttonText : 'Upload file';
   };
 
+  private handleFileInputChange = (e: Event | CustomEvent) => {
+    const files = (e as CustomEvent).detail.files;
+    this.handleChange(e, files);
+  };
+
   componentDidLoad() {
     if (this.uswds === true) fileInput.init(this.el);
+  }
+
+  connectedCallback() {
+    if (this.uswds === true) {
+      // Generate and add a unique-ish id
+      const randomId = Math.floor(Math.random() * 10000);
+      this.changeListenerId = randomId;
+
+      document.addEventListener(
+        `fileInputChange${randomId}`,
+        this.handleFileInputChange,
+      );
+    }
+  }
+
+  disconnectedCallback() {
+    if (this.uswds === true) {
+      document.removeEventListener(
+        `fileInputChange${this.changeListenerId}`,
+        this.handleFileInputChange,
+      );
+    }
   }
 
   render() {
@@ -186,6 +218,7 @@ export class VaFileInput {
             accept={accept}
             multiple={multiple}
             aria-describedby={ariaDescribedbyIds}
+            data-input-id={this.changeListenerId}
           />
         </Host>
       );
