@@ -71,10 +71,10 @@ export class VaBanner {
    */
   /* eslint-disable i18next/no-literal-string */
   @Prop() dataRole?: string = 'region';
-  /* eslint-disable i18next/no-literal-string */
+  /* eslint-enable i18next/no-literal-string */
 
   /**
-   * Aria Label for the "region" of the nested alert.
+   * Aria Label for the "region" of the nested va-alert.
    */
   @Prop() dataLabel?: string;
 
