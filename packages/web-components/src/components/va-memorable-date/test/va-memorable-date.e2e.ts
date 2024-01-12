@@ -634,63 +634,65 @@ describe('va-memorable-date', () => {
     expect(element).toEqualHtml(`
       <va-memorable-date class="hydrated" name="test" uswds="">
         <mock:shadow-root>
-          <fieldset class="usa-fieldset usa-form">
-          <legend class="usa-legend" part="legend">
-          <span class="usa-hint" id="dateHint">
-            date-hint-with-select
-          </span>
-          </legend>
-          <span id="error-message" role="alert"></span>
-          <slot></slot>
-          <div class="usa-memorable-date">
-            <div class="usa-form-group usa-form-group--select usa-form-group--month">
-              <va-select aria-describedby="dateHint" class="hydrated usa-form-group--month-select" uswds="">
-                <option value="1">
-                  January
-                </option>
-                <option value="2">
-                  February
-                </option>
-                <option value="3">
-                  March
-                </option>
-                <option value="4">
-                  April
-                </option>
-                <option value="5">
-                  May
-                </option>
-                <option value="6">
-                  June
-                </option>
-                <option value="7">
-                  July
-                </option>
-                <option value="8">
-                  August
-                </option>
-                <option value="9">
-                  September
-                </option>
-                <option value="10">
-                  October
-                </option>
-                <option value="11">
-                  November
-                </option>
-                <option value="12">
-                  December
-                </option>
-              </va-select>
-            </div>
-            <div class="usa-form-group usa-form-group--day">
-              <va-text-input aria-describedby="dateHint" class="hydrated memorable-date-input usa-form-group--day-input" uswds=""></va-text-input>
-            </div>
-            <div class="usa-form-group usa-form-group--year">
-              <va-text-input aria-describedby="dateHint" class="hydrated memorable-date-input usa-form-group--year-input" uswds="" value=""></va-text-input>
-            </div>
+          <div class="input-wrap">
+            <fieldset class="usa-fieldset usa-form">
+              <legend class="usa-legend" id="input-label" part="legend">
+              <span class="usa-hint" id="dateHint">
+                date-hint-with-select
+              </span>
+              </legend>
+              <span id="error-message" role="alert"></span>
+              <slot></slot>
+              <div class="usa-memorable-date">
+                <div class="usa-form-group usa-form-group--select usa-form-group--month">
+                  <va-select aria-describedby="dateHint" class="hydrated usa-form-group--month-select" uswds="">
+                    <option value="1">
+                      January
+                    </option>
+                    <option value="2">
+                      February
+                    </option>
+                    <option value="3">
+                      March
+                    </option>
+                    <option value="4">
+                      April
+                    </option>
+                    <option value="5">
+                      May
+                    </option>
+                    <option value="6">
+                      June
+                    </option>
+                    <option value="7">
+                      July
+                    </option>
+                    <option value="8">
+                      August
+                    </option>
+                    <option value="9">
+                      September
+                    </option>
+                    <option value="10">
+                      October
+                    </option>
+                    <option value="11">
+                      November
+                    </option>
+                    <option value="12">
+                      December
+                    </option>
+                  </va-select>
+                </div>
+                <div class="usa-form-group usa-form-group--day">
+                  <va-text-input aria-describedby="dateHint" class="hydrated memorable-date-input usa-form-group--day-input" uswds=""></va-text-input>
+                </div>
+                <div class="usa-form-group usa-form-group--year">
+                  <va-text-input aria-describedby="dateHint" class="hydrated memorable-date-input usa-form-group--year-input" uswds="" value=""></va-text-input>
+                </div>
+              </div>
+            </fieldset>
           </div>
-          </fieldset>
         </mock:shadow-root>
       </va-memorable-date>
     `);
@@ -715,70 +717,72 @@ describe('va-memorable-date', () => {
     expect(element).toEqualHtml(`
       <va-memorable-date class='hydrated' label='Label' hint='hint text' required='' uswds=''>
       <mock:shadow-root>
-        <fieldset class="usa-fieldset usa-form">
-          <legend class="usa-legend" part="legend">
-            Label
-            <span class="usa-label--required">
-              required
-            </span>
-            <div class="usa-hint" id="hint">
-              hint text
+        <div class="input-wrap">
+          <fieldset class="usa-fieldset usa-form">
+            <legend class="usa-legend" id="input-label" part="legend">
+              Label
+              <span class="usa-label--required">
+                required
+              </span>
+              <div class="usa-hint" id="hint">
+                hint text
+              </div>
+              <span class="usa-hint" id="dateHint">
+                date-hint-with-select
+              </span>
+            </legend>
+            <span id="error-message" role="alert"></span>
+            <slot></slot>
+            <div class="usa-memorable-date">
+              <div class="usa-form-group usa-form-group--select usa-form-group--month">
+                <va-select aria-describedby="dateHint hint" class="hydrated usa-form-group--month-select" uswds="">
+                  <option value="1">
+                    January
+                  </option>
+                  <option value="2">
+                    February
+                  </option>
+                  <option value="3">
+                    March
+                  </option>
+                  <option value="4">
+                    April
+                  </option>
+                  <option value="5">
+                    May
+                  </option>
+                  <option value="6">
+                    June
+                  </option>
+                  <option value="7">
+                    July
+                  </option>
+                  <option value="8">
+                    August
+                  </option>
+                  <option value="9">
+                    September
+                  </option>
+                  <option value="10">
+                    October
+                  </option>
+                  <option value="11">
+                    November
+                  </option>
+                  <option value="12">
+                    December
+                  </option>
+                </va-select>
+              </div>
+              <div class="usa-form-group usa-form-group--day">
+                <va-text-input aria-describedby="dateHint hint" class="hydrated memorable-date-input usa-form-group--day-input" uswds=""></va-text-input>
+              </div>
+              <div class="usa-form-group usa-form-group--year">
+                <va-text-input aria-describedby="dateHint hint" class="hydrated memorable-date-input usa-form-group--year-input" uswds="" value=""></va-text-input>
+              </div>
             </div>
-            <span class="usa-hint" id="dateHint">
-              date-hint-with-select
-            </span>
-          </legend>
-          <span id="error-message" role="alert"></span>
-          <slot></slot>
-          <div class="usa-memorable-date">
-            <div class="usa-form-group usa-form-group--select usa-form-group--month">
-              <va-select aria-describedby="dateHint hint" class="hydrated usa-form-group--month-select" uswds="">
-                <option value="1">
-                  January
-                </option>
-                <option value="2">
-                  February
-                </option>
-                <option value="3">
-                  March
-                </option>
-                <option value="4">
-                  April
-                </option>
-                <option value="5">
-                  May
-                </option>
-                <option value="6">
-                  June
-                </option>
-                <option value="7">
-                  July
-                </option>
-                <option value="8">
-                  August
-                </option>
-                <option value="9">
-                  September
-                </option>
-                <option value="10">
-                  October
-                </option>
-                <option value="11">
-                  November
-                </option>
-                <option value="12">
-                  December
-                </option>
-              </va-select>
-            </div>
-            <div class="usa-form-group usa-form-group--day">
-              <va-text-input aria-describedby="dateHint hint" class="hydrated memorable-date-input usa-form-group--day-input" uswds=""></va-text-input>
-            </div>
-            <div class="usa-form-group usa-form-group--year">
-              <va-text-input aria-describedby="dateHint hint" class="hydrated memorable-date-input usa-form-group--year-input" uswds="" value=""></va-text-input>
-            </div>
-          </div>
-        </fieldset>
+          </fieldset>
+        </div>
       </mock:shadow-root>
     </va-memorable-date>
     `);
@@ -1322,26 +1326,28 @@ describe('va-memorable-date', () => {
     expect(element).toEqualHtml(`
       <va-memorable-date class="hydrated" month-select="false" name="test" uswds="">
         <mock:shadow-root>
-          <fieldset class="usa-fieldset usa-form">
-          <legend class="usa-legend" part="legend">
-          <span class="usa-hint" id="dateHint">
-          date-hint
-          </span>
-          </legend>
-          <span id="error-message" role="alert"></span>
-          <slot></slot>
-          <div class="usa-memorable-date">
-            <div class="usa-form-group usa-form-group--month">
-              <va-text-input aria-describedby="dateHint" class="hydrated memorable-date-input usa-form-group--month-input" uswds=""></va-text-input>
-            </div>
-            <div class="usa-form-group usa-form-group--day">
-              <va-text-input aria-describedby="dateHint" class="hydrated memorable-date-input usa-form-group--day-input" uswds=""></va-text-input>
-            </div>
-            <div class="usa-form-group usa-form-group--year">
-              <va-text-input aria-describedby="dateHint" class="hydrated memorable-date-input usa-form-group--year-input" uswds="" value=""></va-text-input>
-            </div>
+          <div class="input-wrap">
+            <fieldset class="usa-fieldset usa-form">
+              <legend class="usa-legend" id="input-label" part="legend">
+              <span class="usa-hint" id="dateHint">
+              date-hint
+              </span>
+              </legend>
+              <span id="error-message" role="alert"></span>
+              <slot></slot>
+              <div class="usa-memorable-date">
+                <div class="usa-form-group usa-form-group--month">
+                  <va-text-input aria-describedby="dateHint" class="hydrated memorable-date-input usa-form-group--month-input" uswds=""></va-text-input>
+                </div>
+                <div class="usa-form-group usa-form-group--day">
+                  <va-text-input aria-describedby="dateHint" class="hydrated memorable-date-input usa-form-group--day-input" uswds=""></va-text-input>
+                </div>
+                <div class="usa-form-group usa-form-group--year">
+                  <va-text-input aria-describedby="dateHint" class="hydrated memorable-date-input usa-form-group--year-input" uswds="" value=""></va-text-input>
+                </div>
+              </div>
+            </fieldset>
           </div>
-          </fieldset>
         </mock:shadow-root>
       </va-memorable-date>
     `);
@@ -1366,33 +1372,35 @@ describe('va-memorable-date', () => {
     expect(element).toEqualHtml(`
       <va-memorable-date class='hydrated' label='Label' hint='hint text' month-select='false' required='' uswds=''>
       <mock:shadow-root>
-        <fieldset class="usa-fieldset usa-form">
-          <legend class="usa-legend" part="legend">
-            Label
-            <span class="usa-label--required">
-              required
-            </span>
-            <div class="usa-hint" id="hint">
-              hint text
+        <div class="input-wrap">
+          <fieldset class="usa-fieldset usa-form">
+            <legend class="usa-legend" id="input-label" part="legend">
+              Label
+              <span class="usa-label--required">
+                required
+              </span>
+              <div class="usa-hint" id="hint">
+                hint text
+              </div>
+              <span class="usa-hint" id="dateHint">
+                date-hint
+              </span>
+            </legend>
+            <span id="error-message" role="alert"></span>
+            <slot></slot>
+            <div class="usa-memorable-date">
+              <div class="usa-form-group usa-form-group--month">
+                <va-text-input aria-describedby="dateHint hint" class="hydrated memorable-date-input usa-form-group--month-input" uswds=""></va-text-input>
+              </div>
+              <div class="usa-form-group usa-form-group--day">
+                <va-text-input aria-describedby="dateHint hint" class="hydrated memorable-date-input usa-form-group--day-input" uswds=""></va-text-input>
+              </div>
+              <div class="usa-form-group usa-form-group--year">
+                <va-text-input aria-describedby="dateHint hint" class="hydrated memorable-date-input usa-form-group--year-input" uswds="" value=""></va-text-input>
+              </div>
             </div>
-            <span class="usa-hint" id="dateHint">
-              date-hint
-            </span>
-          </legend>
-          <span id="error-message" role="alert"></span>
-          <slot></slot>
-          <div class="usa-memorable-date">
-            <div class="usa-form-group usa-form-group--month">
-              <va-text-input aria-describedby="dateHint hint" class="hydrated memorable-date-input usa-form-group--month-input" uswds=""></va-text-input>
-            </div>
-            <div class="usa-form-group usa-form-group--day">
-              <va-text-input aria-describedby="dateHint hint" class="hydrated memorable-date-input usa-form-group--day-input" uswds=""></va-text-input>
-            </div>
-            <div class="usa-form-group usa-form-group--year">
-              <va-text-input aria-describedby="dateHint hint" class="hydrated memorable-date-input usa-form-group--year-input" uswds="" value=""></va-text-input>
-            </div>
-          </div>
-        </fieldset>
+          </fieldset>
+        </div>
       </mock:shadow-root>
     </va-memorable-date>
     `);
@@ -1850,4 +1858,44 @@ describe('va-memorable-date', () => {
     expect(monthInput).not.toBeNull();
     expect(dayInput).not.toBeNull();
   });
+
+  it('uswds useFormsPattern displays header for the single field pattern', async () => {
+    const page = await newE2EPage();
+    await page.setContent(
+      '<va-memorable-date use-forms-pattern="single" form-heading-level="1" form-heading="This is a form header" form-description="This is a form description" label="Describe your situation" uswds></va-textarea>',
+    );
+
+    const formHeader = await page.find('va-memorable-date >>> h1');
+    expect(formHeader.innerText).toEqual('This is a form header');
+  });
+
+  it('uswds useFormsPattern displays header for the multiple field pattern', async () => {
+    const page = await newE2EPage();
+    await page.setContent(
+      '<va-memorable-date use-forms-pattern="multiple" form-heading-level="1" form-heading="This is a form header" form-description="This is a form description" label="Describe your situation" uswds></va-textarea>',
+    );
+
+    const formHeader = await page.find('va-memorable-date >>> h1');
+    expect(formHeader.innerText).toEqual('This is a form header');
+  });
+
+  it('uswds useFormsPattern does not display header if "single" or "multiple" is not indicated', async () => {
+    const page = await newE2EPage();
+    await page.setContent(
+      '<va-memorable-date form-heading-level="1" form-heading="This is a form header" form-description="This is a form description" label="Describe your situation" uswds></va-textarea>',
+    );
+
+    const formHeader = await page.find('va-textarea >>> h1');
+    expect(formHeader).toBeNull();
+  });
+
+  it('uswds useFormsPattern does not display header if "single" or "multiple" is not indicated', async () => {
+    const page = await newE2EPage();
+    await page.setContent(
+      '<va-memorable-date form-heading-level="1" form-heading="This is a form header" form-description="This is a form description" label="Describe your situation" uswds></va-textarea>',
+    );
+
+    await axeCheck(page);
+  });
+
 });
