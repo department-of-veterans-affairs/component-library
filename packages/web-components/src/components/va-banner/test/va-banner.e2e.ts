@@ -60,6 +60,25 @@ describe('va-banner', () => {
     expect(button).not.toBeNull();
   });
 
+  it('changes data-role when set', async () => {
+    const page = await newE2EPage();
+    await page.setContent(
+      '<va-banner headline="This is a test">Test Content</va-banner>',
+    );
+
+    const element = await page.find('va-banner');
+
+    let vaAlert = await page.find('va-banner >>> va-alert');
+    let button = vaAlert.shadowRoot.querySelector('button');
+    expect(button).toBeNull();
+
+    element.setProperty('showClose', true);
+    await page.waitForChanges();
+    vaAlert = await page.find('va-banner >>> va-alert');
+    button = vaAlert.shadowRoot.querySelector('button');
+    expect(button).not.toBeNull();
+  });
+
   it('does not display if dismissed', async () => {
     const page = await newE2EPage();
     await page.setContent(

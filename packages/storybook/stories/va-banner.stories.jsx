@@ -29,7 +29,12 @@ const Template = ({
   type,
   visible,
   'window-session': windowSession,
+  'data-role': dataRole,
+  'data-label': dataLabel,
 }) => {
+  console.log({
+    dataRole
+  })
   return (
     <va-banner
       disable-analytics={disableAnalytics}
@@ -38,6 +43,8 @@ const Template = ({
       type={type}
       visible={visible}
       window-session={windowSession}
+      data-role={dataRole}
+      data-label={dataLabel}
     >
       <p>
         We have temporarily closed our Acute Psychiatry at our Lyons Campus. All
@@ -56,6 +63,8 @@ const defaultArgs = {
   'type': 'info',
   'visible': true,
   'window-session': false,
+  'data-role': "region",
+  'data-label': "Info banner"
 };
 
 export const Default = Template.bind(null);

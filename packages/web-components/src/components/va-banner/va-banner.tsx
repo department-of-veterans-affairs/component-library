@@ -51,7 +51,7 @@ export class VaBanner {
   /**
    * The type of the banner. This affects both the icon of the AlertBox and the top border color.
    * */
-  @Prop() type?: "info" | "warning" | "error" | "success" | "continue" = 'info';
+  @Prop() type?: 'info' | 'warning' | 'error' | 'success' | 'continue' = 'info';
   /* eslint-enable i18next/no-literal-string */
 
   /**
@@ -64,6 +64,19 @@ export class VaBanner {
    * if showClose is enabled will default to localStorage
    * */
   @Prop() windowSession?: boolean = false;
+
+  /**
+   * A string which identifies the nested va-alert's role.
+   * Region is the correct role for a banner.
+   */
+  /* eslint-disable i18next/no-literal-string */
+  @Prop() dataRole?: string = 'region';
+  /* eslint-disable i18next/no-literal-string */
+
+  /**
+   * Aria Label for the "region" of the nested alert.
+   */
+  @Prop() dataLabel?: string;
 
   /**
    * Keep track of locally dismissed Banners
@@ -160,6 +173,11 @@ export class VaBanner {
     // Derive onCloseAlert depending if the close icon is shown.
     const onCloseAlert = this.showClose ? this.dismiss : undefined;
 
+    // Derive the banner Aria label i.e. Info Banner
+    const bannerAriaLabel =
+      this.dataLabel ||
+      `${this.type[0].toUpperCase()}${this.type.slice(1)} banner`;
+
     return (
       <Host>
         <va-alert
@@ -168,7 +186,8 @@ export class VaBanner {
           closeable={this.showClose}
           onCloseEvent={onCloseAlert}
           status={this.type}
-          data-role="banner"
+          data-role={this.dataRole || 'region'}
+          data-label={bannerAriaLabel}
         >
           <h3 slot="headline">{this.headline}</h3>
           <slot></slot>
