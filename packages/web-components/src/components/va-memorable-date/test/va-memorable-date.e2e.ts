@@ -627,12 +627,12 @@ describe('va-memorable-date', () => {
   // Begin USWDS v3 test
   it('uswds v3 renders', async () => {
     const page = await newE2EPage();
-    await page.setContent('<va-memorable-date name="test" uswds/>');
+    await page.setContent('<va-memorable-date name="test" uswds month-select />');
 
     const element = await page.find('va-memorable-date');
     expect(element).toHaveClass('hydrated');
     expect(element).toEqualHtml(`
-      <va-memorable-date class="hydrated" name="test" uswds="">
+      <va-memorable-date class="hydrated" name="test" uswds="" month-select>
         <mock:shadow-root>
           <div class="input-wrap">
             <fieldset class="usa-fieldset usa-form">
@@ -710,12 +710,12 @@ describe('va-memorable-date', () => {
 
   it('uswds v3 renders hint text', async () => {
     const page = await newE2EPage();
-    await page.setContent('<va-memorable-date label="Label" hint="hint text" required uswds></va-memorable-date>');
+    await page.setContent('<va-memorable-date label="Label" hint="hint text" required uswds month-select ></va-memorable-date>');
 
     const element = await page.find('va-memorable-date');
     expect(element).toHaveClass('hydrated');
     expect(element).toEqualHtml(`
-      <va-memorable-date class='hydrated' label='Label' hint='hint text' required='' uswds=''>
+      <va-memorable-date class='hydrated' label='Label' hint='hint text' required='' uswds='' month-select=''>
       <mock:shadow-root>
         <div class="input-wrap">
           <fieldset class="usa-fieldset usa-form">
@@ -848,7 +848,7 @@ describe('va-memorable-date', () => {
     it('uswds v3 does month validation without required prop', async () => {
       const page = await newE2EPage();
       await page.setContent(
-        '<va-memorable-date name="test" uswds />',
+        '<va-memorable-date name="test" uswds month-select />',
       );
       const date = await page.find('va-memorable-date');
       const handleYear = await page.$('pierce/[name="testYear"]');
@@ -867,7 +867,7 @@ describe('va-memorable-date', () => {
     it('uswds v3 does day validation without required prop', async () => {
       const page = await newE2EPage();
       await page.setContent(
-        '<va-memorable-date value="1999-05-03" name="test" uswds />',
+        '<va-memorable-date value="1999-05-03" name="test" uswds month-select/>',
       );
       const date = await page.find('va-memorable-date');
       const handleYear = await page.$('pierce/[name="testYear"]');
@@ -951,7 +951,7 @@ describe('va-memorable-date', () => {
       it('uswds v3 correctly indicates an invalid year', async () => {
         const page = await newE2EPage();
         await page.setContent(
-          '<va-memorable-date value="1999-05-03" name="test" required="true" uswds />',
+          '<va-memorable-date value="1999-05-03" name="test" required="true" uswds month-select/>',
         );
         const handleYear = await page.$('pierce/[name="testYear"]');
         const handleMonth = await page.$('pierce/[name="testMonth"]');
@@ -994,7 +994,7 @@ describe('va-memorable-date', () => {
       it('uswds v3 correctly indicates an invalid month', async () => {
         const page = await newE2EPage();
         await page.setContent(
-          '<va-memorable-date value="1999-05-03" name="test" required="true" uswds />',
+          '<va-memorable-date value="1999-05-03" name="test" required="true" uswds month-select/>',
         );
         const handleYear = await page.$('pierce/[name="testYear"]');
         const handleMonth = await page.$('pierce/[name="testMonth"]');
@@ -1034,7 +1034,7 @@ describe('va-memorable-date', () => {
       it('uswds v3 correctly indicates an invalid day', async () => {
         const page = await newE2EPage();
         await page.setContent(
-          '<va-memorable-date value="1999-05-03" name="test" required="true" uswds />',
+          '<va-memorable-date value="1999-05-03" name="test" required="true" uswds month-select />',
         );
         const handleYear = await page.$('pierce/[name="testYear"]');
         const handleMonth = await page.$('pierce/[name="testMonth"]');
@@ -1076,7 +1076,7 @@ describe('va-memorable-date', () => {
       it('uswds v3 passes the invalidDay prop correctly', async () => {
         const page = await newE2EPage();
         await page.setContent(
-          '<va-memorable-date name="test" invalid-day uswds />',
+          '<va-memorable-date name="test" invalid-day uswds month-select />',
         );
         const handleYear = await page.$('pierce/[name="testYear"]');
         const handleMonth = await page.$('pierce/[name="testMonth"]');
@@ -1096,7 +1096,7 @@ describe('va-memorable-date', () => {
       it('uswds v3 passes the invalidMonth prop correctly', async () => {
         const page = await newE2EPage();
         await page.setContent(
-          '<va-memorable-date name="test" invalid-month uswds />',
+          '<va-memorable-date name="test" invalid-month uswds month-select/>',
         );
         const handleYear = await page.$('pierce/[name="testYear"]');
         const handleMonth = await page.$('pierce/[name="testMonth"]');
@@ -1116,7 +1116,7 @@ describe('va-memorable-date', () => {
       it('uswds v3 passes the invalidYear prop correctly', async () => {
         const page = await newE2EPage();
         await page.setContent(
-          '<va-memorable-date name="test" invalid-year uswds />',
+          '<va-memorable-date name="test" invalid-year uswds month-select/>',
         );
         const handleYear = await page.$('pierce/[name="testYear"]');
         const handleMonth = await page.$('pierce/[name="testMonth"]');
@@ -1145,7 +1145,7 @@ describe('va-memorable-date', () => {
 
   it('uswds v3 sets a default date', async () => {
     const page = await newE2EPage();
-    await page.setContent('<va-memorable-date value="1999-05-03" uswds />');
+    await page.setContent('<va-memorable-date value="1999-05-03" uswds month-select/>');
 
     const month = await page.find('va-memorable-date >>> .usa-form-group--month-select');
     const day = await page.find('va-memorable-date >>> .usa-form-group--day-input');
@@ -1159,7 +1159,7 @@ describe('va-memorable-date', () => {
   it('uswds v3 updates date based on input fields', async () => {
     const page = await newE2EPage();
     await page.setContent(
-      '<va-memorable-date value="1999-05-03" name="test" uswds />',
+      '<va-memorable-date value="1999-05-03" name="test" uswds month-select />',
     );
 
     const date = await page.find('va-memorable-date');
@@ -1225,7 +1225,7 @@ describe('va-memorable-date', () => {
     const page = await newE2EPage();
 
     await page.setContent(
-      '<va-memorable-date value="1999-05-03" name="test" uswds />',
+      '<va-memorable-date value="1999-05-03" name="test" uswds month-select />',
     );
 
     const handleMonth = await page.$('pierce/[name="testMonth"]');
@@ -1281,7 +1281,7 @@ describe('va-memorable-date', () => {
   it('uswds v3 fires an analytics event when enableAnalytics is true', async () => {
     const page = await newE2EPage();
     await page.setContent(
-      '<va-memorable-date enable-analytics name="test" label="Example label" uswds />',
+      '<va-memorable-date enable-analytics name="test" label="Example label" uswds month-select />',
     );
     const analyticsSpy = await page.spyOnEvent('component-library-analytics');
     const handleMonth = await page.$('pierce/[name="testMonth"]');
@@ -1363,7 +1363,7 @@ describe('va-memorable-date', () => {
     await axeCheck(page);
   });
 
-  it('uswds v3 renders hint text without monthSelect', async () => {
+  it('uswds v3 renders hint text without month-select', async () => {
     const page = await newE2EPage();
     await page.setContent('<va-memorable-date label="Label" hint="hint text" required uswds month-select="false"></va-memorable-date>');
 
