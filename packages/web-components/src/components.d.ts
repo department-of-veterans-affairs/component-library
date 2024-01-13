@@ -132,7 +132,7 @@ export namespace Components {
     }
     interface VaBanner {
         /**
-          * Aria Label for the "region" of the nested alert.
+          * Aria Label for the "region" of the nested va-alert.
          */
         "dataLabel"?: string;
         /**
@@ -1981,7 +1981,7 @@ declare namespace LocalJSX {
     }
     interface VaBanner {
         /**
-          * Aria Label for the "region" of the nested alert.
+          * Aria Label for the "region" of the nested va-alert.
          */
         "dataLabel"?: string;
         /**
