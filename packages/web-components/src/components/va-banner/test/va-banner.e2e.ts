@@ -84,7 +84,7 @@ describe('va-banner', () => {
       </va-alert>
     `);
   });
-  it('still shows alert', async () => {
+  it('still shows alert aria', async () => {
     const page = await newE2EPage();
     await page.setContent(
       '<va-banner type="error" headline="This is an alert test"></va-banner>',
