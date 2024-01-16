@@ -132,41 +132,22 @@ export class VaFileInput {
     return this.buttonText ? this.buttonText : 'Upload file';
   };
 
-  private handleFileInputChange = (e: Event | CustomEvent) => {
-    const files = (e as CustomEvent).detail.files;
-    this.handleChange(e, files);
-  };
-
   componentDidLoad() {
-    if (this.uswds === true) fileInput.init(this.el);
-  }
-
-  connectedCallback() {
-    if (this.uswds === true) {
-      // Generate and add a unique-ish id
-      const randomId = Math.floor(Math.random() * 10000);
-      this.changeListenerId = randomId;
-
-      document.addEventListener(
-        `fileInputChange${randomId}`,
-        this.handleFileInputChange,
-      );
+    if (this.uswds) {
+      fileInput.init(this.el);
     }
   }
 
-  disconnectedCallback() {
-    if (this.uswds === true) {
-      document.removeEventListener(
-        `fileInputChange${this.changeListenerId}`,
-        this.handleFileInputChange,
-      );
+
+  connectedCallback() {
+    if (this.uswds) {
+      this.el.addEventListener('change', this.handleChange);
     }
   }
 
   render() {
     const { label, name, required, accept, error, hint, multiple, uswds } =
       this;
-
     const text = this.getButtonText();
 
     if (uswds) {
@@ -218,7 +199,6 @@ export class VaFileInput {
             accept={accept}
             multiple={multiple}
             aria-describedby={ariaDescribedbyIds}
-            data-input-id={this.changeListenerId}
           />
         </Host>
       );

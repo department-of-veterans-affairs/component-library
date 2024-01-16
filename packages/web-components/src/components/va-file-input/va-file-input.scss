@@ -29,6 +29,11 @@ va-button {
 }
 
 /* V3/USWDS Styles */
+
+[hidden] {
+  display: none;
+}
+
 .usa-label--required,
 .usa-error-message {
   color: var(--v3-color-error-dark);
