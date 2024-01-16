@@ -66,14 +66,6 @@ export class VaBanner {
   @Prop() windowSession?: boolean = false;
 
   /**
-   * A string which identifies the nested va-alert's role.
-   * Region is the correct role for a banner.
-   */
-  /* eslint-disable i18next/no-literal-string */
-  @Prop() dataRole?: string = 'region';
-  /* eslint-enable i18next/no-literal-string */
-
-  /**
    * Aria Label for the "region" of the nested va-alert.
    */
   @Prop() dataLabel?: string;
@@ -176,6 +168,7 @@ export class VaBanner {
     // Derive the banner Aria label i.e. Info Banner
     const bannerAriaLabel =
       this.dataLabel ||
+      // eslint-disable-next-line i18next/no-literal-string
       `${this.type[0].toUpperCase()}${this.type.slice(1)} banner`;
 
     return (
@@ -186,7 +179,7 @@ export class VaBanner {
           closeable={this.showClose}
           onCloseEvent={onCloseAlert}
           status={this.type}
-          data-role={this.dataRole || 'region'}
+          data-role="region"
           data-label={bannerAriaLabel}
         >
           <h3 slot="headline">{this.headline}</h3>
