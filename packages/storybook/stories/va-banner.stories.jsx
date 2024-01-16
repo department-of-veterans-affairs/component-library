@@ -32,9 +32,6 @@ const Template = ({
   'data-role': dataRole,
   'data-label': dataLabel,
 }) => {
-  console.log({
-    dataRole
-  })
   return (
     <va-banner
       disable-analytics={disableAnalytics}
