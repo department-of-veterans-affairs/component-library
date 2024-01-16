@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
+import { VaFileInput } from '@department-of-veterans-affairs/web-components/react-bindings';
 import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
 
 const fileInputDocs = getWebComponentDocs('va-file-input');
@@ -42,7 +43,7 @@ const Template = ({
   vaChange,
 }) => {
   return (
-    <va-file-input
+    <VaFileInput
       label={label}
       name={name}
       accept={accept}
