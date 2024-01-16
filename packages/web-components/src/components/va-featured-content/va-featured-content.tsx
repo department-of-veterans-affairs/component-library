@@ -14,6 +14,16 @@ export class VaFeaturedContent {
   /**
    * Whether or not the component will use USWDS v3 styling.
    */
+
+  /**
+   *  In styleUrl,  import/prep pertinent styles.
+   *  Those are rules any that begin with:
+   *  .usa-summary-box__heading,
+   *  .usa-summary-box__text 
+   *  Please note any styles that rely on ancesters
+   *  of the above will not be applied
+   **/
+
   @Prop() uswds?: boolean = false;
 
   @Element() el: HTMLElement;
@@ -30,6 +40,11 @@ export class VaFeaturedContent {
     
     headline.classList.add('usa-summary-box__heading');
     content.classList.add('usa-summary-box__text');
+    // Here I move the content of each of 
+    // the targeted slot elements into the shadow DOM
+    headline.append(...headline.assignedElements());
+    content.append(...content.assignedElements());
+
   }
 
   render() {
