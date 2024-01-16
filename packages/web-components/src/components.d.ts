@@ -136,10 +136,6 @@ export namespace Components {
          */
         "dataLabel"?: string;
         /**
-          * A string which identifies the nested va-alert's role. Region is the correct role for a banner.
-         */
-        "dataRole"?: string;
-        /**
           * If true, doesn't fire the CustomEvent which can be used for analytics tracking.
          */
         "disableAnalytics"?: boolean;
@@ -1996,10 +1992,6 @@ declare namespace LocalJSX {
           * Aria Label for the "region" of the nested va-alert.
          */
         "dataLabel"?: string;
-        /**
-          * A string which identifies the nested va-alert's role. Region is the correct role for a banner.
-         */
-        "dataRole"?: string;
         /**
           * If true, doesn't fire the CustomEvent which can be used for analytics tracking.
          */

@@ -29,7 +29,6 @@ const Template = ({
   type,
   visible,
   'window-session': windowSession,
-  'data-role': dataRole,
   'data-label': dataLabel,
 }) => {
   return (
@@ -40,7 +39,6 @@ const Template = ({
       type={type}
       visible={visible}
       window-session={windowSession}
-      data-role={dataRole}
       data-label={dataLabel}
     >
       <p>
@@ -60,7 +58,6 @@ const defaultArgs = {
   'type': 'info',
   'visible': true,
   'window-session': false,
-  'data-role': "region",
   'data-label': "Info banner"
 };
 
