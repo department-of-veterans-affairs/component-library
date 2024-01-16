@@ -199,6 +199,7 @@ export class VaFileInput {
             accept={accept}
             multiple={multiple}
             aria-describedby={ariaDescribedbyIds}
+            onChange = {this.handleChange}
           />
         </Host>
       );
