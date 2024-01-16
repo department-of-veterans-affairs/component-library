@@ -1,7 +1,12 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable react/no-unescaped-entities */
 import React, { useState, useEffect } from 'react';
-import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
+import {
+  getWebComponentDocs,
+  propStructure,
+  StoryDocs,
+  applyFocus,
+} from './wc-helpers';
 
 const checkboxDocs = getWebComponentDocs('va-checkbox');
 
@@ -27,17 +32,21 @@ const defaultArgs = {
   'uswds': true,
   'tile': false,
   'message-aria-describedby': 'Optional description text for screen readers',
+  'use-forms-pattern': null,
+  'form-heading-level': null,
+  'form-heading': null,
+  'form-description': null,
 };
 
 const vaCheckbox = args => {
-  const {   
+  const {
     checked,
     description,
     'enable-analytics': enableAnalytics,
     checkboxDescription,
     error,
     label,
-    required, 
+    required,
     uswds,
     hint,
     tile,
@@ -59,8 +68,8 @@ const vaCheckbox = args => {
       onBlur={e => console.log(e)}
       message-aria-describedby={messageAriaDescribedBy}
     />
-  )
-}
+  );
+};
 
 const Template = args => vaCheckbox(args);
 
@@ -73,31 +82,49 @@ const I18nTemplate = args => {
 
   return (
     <div>
-      <va-button uswds onClick={e => setLang('es')} style={{fontSize: '16px'}} text="Español"/>
-      <va-button uswds onClick={e => setLang('en')} style={{fontSize: '16px'}} text="English"/>
-      <va-button uswds onClick={e => setLang('tl')} style={{fontSize: '16px'}} text="Tagalog"/>
-      <div style={{marginTop: '20px'}}>
-        {vaCheckbox(args)}
-      </div>
+      <va-button
+        uswds
+        onClick={e => setLang('es')}
+        style={{ fontSize: '16px' }}
+        text="Español"
+      />
+      <va-button
+        uswds
+        onClick={e => setLang('en')}
+        style={{ fontSize: '16px' }}
+        text="English"
+      />
+      <va-button
+        uswds
+        onClick={e => setLang('tl')}
+        style={{ fontSize: '16px' }}
+        text="Tagalog"
+      />
+      <div style={{ marginTop: '20px' }}>{vaCheckbox(args)}</div>
     </div>
-)};
+  );
+};
 
 export const Default = Template.bind(null);
 Default.args = { ...defaultArgs };
 Default.argTypes = propStructure(checkboxDocs);
 
 export const Tile = Template.bind(null);
-Tile.args = { ...defaultArgs, tile: true, checkboxDescription: 'This is optional text that can be used to describe the label in more detail.' };
+Tile.args = {
+  ...defaultArgs,
+  tile: true,
+  checkboxDescription:
+    'This is optional text that can be used to describe the label in more detail.',
+};
 
 export const Checked = Template.bind(null);
 Checked.args = { ...defaultArgs, checked: true };
-
 
 export const WithHintText = Template.bind(null);
 WithHintText.args = {
   ...defaultArgs,
   description: 'Adding some descriptive text above the checkbox.',
-  hint: "This is example hint text",
+  hint: 'This is example hint text',
 };
 
 export const WithDescriptionString = Template.bind(null);
@@ -119,12 +146,132 @@ export const WithDescriptionJSX = props => (
 WithDescriptionJSX.args = { ...defaultArgs };
 
 export const OnBackground = props => (
-  <div style={{background: '#f0f0f0', padding: '30px 5px'}}>
-    <va-checkbox {...props} onBlur={e => console.log(e)}>
-    </va-checkbox>
+  <div style={{ background: '#f0f0f0', padding: '30px 5px' }}>
+    <va-checkbox {...props} onBlur={e => console.log(e)}></va-checkbox>
   </div>
 );
 OnBackground.args = { ...defaultArgs };
+
+const FormsPatternMultipleTemplate = ({
+  checked,
+  description,
+  'enable-analytics': enableAnalytics,
+  checkboxDescription,
+  error,
+  label,
+  required,
+  uswds,
+  hint,
+  tile,
+  'message-aria-describedby': messageAriaDescribedBy,
+}) => {
+  const handleClick = () => {
+    const header = document
+      .getElementById('form-pattern-multiple-input')
+      ?.shadowRoot?.getElementById('form-question');
+
+    applyFocus(header);
+  };
+  return (
+    <>
+      <va-checkbox
+        uswds={uswds}
+        checked={checked}
+        description={description}
+        enable-analytics={enableAnalytics}
+        checkbox-description={checkboxDescription}
+        error={error}
+        label={label}
+        hint={hint}
+        required={required}
+        tile={tile}
+        onBlur={e => console.log(e)}
+        id="form-pattern-multiple-input"
+        message-aria-describedby={messageAriaDescribedBy}
+        use-forms-pattern="multiple"
+        form-heading-level={1}
+        form-heading="Identification information"
+        form-description="This is the additional form-description prop"
+      />
+
+      <va-checkbox
+        uswds={uswds}
+        checked={checked}
+        description={description}
+        enable-analytics={enableAnalytics}
+        checkbox-description={checkboxDescription}
+        error={error}
+        label={label}
+        hint={hint}
+        required={required}
+        tile={tile}
+        onBlur={e => console.log(e)}
+        message-aria-describedby={messageAriaDescribedBy}
+      />
+      <hr />
+      <va-button text="click to focus header" onClick={handleClick}></va-button>
+    </>
+  );
+};
+
+const FormsPatternSingleTemplate = ({
+  checked,
+  description,
+  'enable-analytics': enableAnalytics,
+  checkboxDescription,
+  error,
+  label,
+  required,
+  uswds,
+  hint,
+  tile,
+  'message-aria-describedby': messageAriaDescribedBy,
+}) => {
+  const id = Math.floor(Math.random() * 10) + 1;
+  const handleClick = () => {
+    const header = document
+      .getElementById(`form-pattern-single-input-${id}`)
+      ?.shadowRoot?.getElementById('form-question');
+
+    applyFocus(header);
+  };
+  return (
+    <>
+      <va-checkbox
+        uswds={uswds}
+        checked={checked}
+        description={description}
+        enable-analytics={enableAnalytics}
+        checkbox-description={checkboxDescription}
+        error={error}
+        label={label}
+        hint={hint}
+        required={required}
+        tile={tile}
+        onBlur={e => console.log(e)}
+        message-aria-describedby={messageAriaDescribedBy}
+        id={`form-pattern-single-input-${id}`}
+        use-forms-pattern="single"
+        form-heading-level={1}
+        form-heading="Identification information"
+        form-description="This is the additional form-description prop"
+      >
+        <div slot="form-description">
+          <p>HTML passed into the forms-pattern slot:</p>
+          <ul>
+            <li>Social security number</li>
+            <li>VA file number</li>
+            <li>Service number</li>
+          </ul>
+        </div>
+      </va-checkbox>
+
+      <hr />
+
+      <va-button text="click to focus header" onClick={handleClick}></va-button>
+    </>
+  );
+};
 
 export const Error = Template.bind(null);
 Error.args = {
@@ -147,4 +294,20 @@ Internationalization.args = {
     'Notice how the red line to the left also covers this description.',
   error: 'There has been a problem',
   required: true,
+};
+
+export const FormsPatternSingle = FormsPatternSingleTemplate.bind(null);
+FormsPatternSingle.args = {
+  ...defaultArgs,
+};
+
+export const FormsPatternSingleError = FormsPatternSingleTemplate.bind(null);
+FormsPatternSingleError.args = {
+  ...defaultArgs,
+  error: 'This is an error message',
+};
+
+export const FormsPatternMultiple = FormsPatternMultipleTemplate.bind(null);
+FormsPatternMultiple.args = {
+  ...defaultArgs,
 };

@@ -12,6 +12,7 @@ import {
 import classnames from 'classnames';
 import i18next from 'i18next';
 import { Build } from '@stencil/core';
+import { getHeaderLevel } from '../../utils/utils';
 
 if (Build.isTesting) {
   // Make i18next.t() return the key instead of the value
@@ -110,6 +111,20 @@ export class VaCheckbox {
    * The name to pass to the checkbox element.
    */
   @Prop() name?: string;
+   /**
+   * Enabling this will add a heading and description for integrating into the forms pattern. Accepts `single` or `multiple` to indicate if the form is a single input or will have multiple inputs. `uswds` should be true.
+   */
+   @Prop() useFormsPattern?: string;
+
+   /**
+    * The heading level for the heading if `useFormsPattern` and `uswds` are true.
+    */
+   @Prop() formHeadingLevel?: number = 3;
+ 
+   /**
+    * The content of the heading if `useFormsPattern` and `uswds` are true.
+    */
+   @Prop() formHeading?: string;
 
   /**
    * The event used to track usage of the component. This is emitted when the
@@ -182,11 +197,18 @@ export class VaCheckbox {
       checkboxDescription,
       disabled,
       messageAriaDescribedby,
-      name
+      name,
+      useFormsPattern,
+      formHeadingLevel,
+      formHeading,
     } = this;
 
 
     const hasDescription = description || !!this.el.querySelector('[slot="description"]');
+    const ariaLabeledByIds = 
+    `${useFormsPattern && formHeading ? 'form-question' : ''} ${ 
+      useFormsPattern ? 'form-description' : ''} ${
+      useFormsPattern && label ? 'input-label' : ''}`.trim() || null;
 
     if (uswds) {
       const inputClass = classnames({
@@ -203,44 +225,67 @@ export class VaCheckbox {
         hasDescription ? 'description' : '',
         // Return null so we don't add the attribute if we have an empty string
       ].filter(Boolean).join(' ').trim() || null;
+      const isFormsPattern = useFormsPattern === 'single' || useFormsPattern === 'multiple' ? true : false;
+
+      let formsHeading = null;
+      if (isFormsPattern) {
+        const HeaderLevel = getHeaderLevel(formHeadingLevel);
+        formsHeading = (
+          <Fragment>
+            {formHeading &&
+              <HeaderLevel id="form-question" part="form-header">
+                {formHeading}
+              </HeaderLevel>
+            }
+            <div id="form-description">
+              <slot name="form-description"></slot>
+            </div>
+          </Fragment>
+        )
+      }
+
       return (
         <Host>
-          {description ?
-            <legend id="description" class={descriptionClass}>{description}</legend> :
-            <slot name="description" />
-          }
+          {formsHeading}
+          <div class="input-wrap">
+            {description ?
+              <legend id="description" class={descriptionClass}>{description}</legend> :
+              <slot name="description" />
+            }
 
-          {hint && <span class="usa-hint">{hint}</span>}
-          <span id="checkbox-error-message" role="alert">
-            {error && (
-              <Fragment>
-                <span class="usa-sr-only">{i18next.t('error')}</span>
-                <span class="usa-error-message">{error}</span>
-              </Fragment>
-            )}
-          </span>
-          <div class="usa-checkbox" part="checkbox">
-            <input
-              class={inputClass}
-              type="checkbox"
-              name={name || null}
-              id="checkbox-element"
-              checked={checked}
-              aria-describedby={ariaDescribedbyIds}
-              aria-invalid={error ? 'true' : 'false'}
-              disabled={disabled}
-              onChange={this.handleChange}
-            />
-            <label htmlFor="checkbox-element" id="option-label" class="usa-checkbox__label">
-              {label}&nbsp;
-              {required && <span class="usa-label--required">{i18next.t('required')}</span>}
-              {checkboxDescription && <span class="usa-checkbox__label-description" aria-describedby="option-label">{checkboxDescription}</span>}
-            </label>
-            {messageAriaDescribedby && (
-              <span id='input-message' class="sr-only dd-privacy-hidden">
-                {messageAriaDescribedby}
-              </span>
-            )}
+            {hint && <span class="usa-hint">{hint}</span>}
+            <span id="checkbox-error-message" role="alert">
+              {error && (
+                <Fragment>
+                  <span class="usa-sr-only">{i18next.t('error')}</span>
+                  <span class="usa-error-message">{error}</span>
+                </Fragment>
+              )}
+            </span>
+            <div class="usa-checkbox" part="checkbox">
+              <input
+                class={inputClass}
+                type="checkbox"
+                name={name || null}
+                id="checkbox-element"
+                checked={checked}
+                aria-describedby={ariaDescribedbyIds}
+                aria-invalid={error ? 'true' : 'false'}
+                aria-labelledby={ariaLabeledByIds}
+                disabled={disabled}
+                onChange={this.handleChange}
+              />
+              <label htmlFor="checkbox-element" id="option-label" class="usa-checkbox__label">
+                {label}&nbsp;
+                {required && <span class="usa-label--required">{i18next.t('required')}</span>}
+                {checkboxDescription && <span class="usa-checkbox__label-description" aria-describedby="option-label">{checkboxDescription}</span>}
+              </label>
+              {messageAriaDescribedby && (
+                <span id='input-message' class="sr-only dd-privacy-hidden">
+                  {messageAriaDescribedby}
+                </span>
+              )}
+            </div>
           </div>
         </Host>
       );
