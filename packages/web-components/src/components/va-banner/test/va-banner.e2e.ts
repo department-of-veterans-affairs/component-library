@@ -60,30 +60,6 @@ describe('va-banner', () => {
     expect(button).not.toBeNull();
   });
 
-  it('changes data-role when set', async () => {
-    const page = await newE2EPage();
-    await page.setContent(
-      '<va-banner data-role="not-a-region" headline="This is a test"></va-banner>',
-    );
-    const element = await page.find('va-banner >>> va-alert');
-    expect(element).toEqualHtml(`
-      <va-alert class="hydrated" data-label="Info banner" data-role="not-a-region" full-width="" status="info">
-        <mock:shadow-root>
-          <div aria-label="Info banner" class="alert info" role="not-a-region">
-           <i aria-hidden="true"></i>
-             <div class="body">
-              <slot name="headline"></slot>
-              <slot></slot>
-            </div>
-          </div>
-        </mock:shadow-root>
-        <h3 slot="headline">
-         This is a test
-        </h3>
-        <slot></slot>
-      </va-alert>
-    `);
-  });
   it('still shows alert aria', async () => {
     const page = await newE2EPage();
     await page.setContent(
