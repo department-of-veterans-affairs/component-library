@@ -565,4 +565,19 @@
   &__instructions {
     padding: rem-override(2rem) rem-override(1rem);
   }
+
+  &__preview {
+    padding: rem-override(0.25rem) rem-override(0.5rem);
+    font-size: rem-override(0.87rem);
+  }
+
+  &__preview-image--generic {
+    background-size: rem-override(1.5rem);
+  }
+
+  &__preview-image {
+    height: rem-override(2.5rem);
+    margin-right: rem-override(0.5rem);
+    width: rem-override(2.5rem);
+  }
 }
