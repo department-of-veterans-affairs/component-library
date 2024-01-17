@@ -190,7 +190,7 @@ export class VaAlert {
             role={this.el.getAttribute('data-role') || role}
             aria-live={ariaLive}
             class={classes}
-            aria-label={this.el.getAttribute('data-label') || role || null}
+            aria-label={this.el.getAttribute('data-label') || role}
           >
             <div
               class="usa-alert__body"
@@ -229,7 +229,7 @@ export class VaAlert {
           role={this.el.getAttribute('data-role') || role}
           aria-live={ariaLive}
           class={classes}
-          aria-label={this.el.getAttribute('data-label') || role || null}
+          aria-label={this.el.getAttribute('data-label') || role}
         >
           <i aria-hidden="true"></i>
           <div class="body" onClick={this.handleAlertBodyClick.bind(this)}>
