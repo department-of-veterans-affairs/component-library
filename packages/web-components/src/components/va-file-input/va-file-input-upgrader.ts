@@ -573,17 +573,7 @@ export const fileInput = {
 
       fileInputEl.addEventListener(
         'change',
-        e => {
-          // Send off a change event that can be picked up and processed by the web component
-          const target = e.target as HTMLInputElement;
-          const inputId = target.getAttribute('data-input-id');
-          const changeEvent = new CustomEvent(`fileInputChange${inputId}`, {
-            detail: { files: target.files },
-          });
-          document.dispatchEvent(changeEvent);
-
-          handleUpload(e, fileInputEl, instructions, dropTarget);
-        },
+        e => handleUpload(e, fileInputEl, instructions, dropTarget),
         false,
       );
     });
