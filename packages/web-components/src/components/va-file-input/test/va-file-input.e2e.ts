@@ -88,7 +88,7 @@ describe('va-file-input', () => {
 
   it('emits the vaChange event only once', async () => {
     const page = await newE2EPage();
-    await page.setContent(`<va-file-input buttonText="Upload a file" />`);
+    await page.setContent(`<va-file-input button-text="Upload a file" />`);
 
     const fileUploadSpy = await page.spyOnEvent('vaChange');
     const filePath = path.relative(process.cwd(), __dirname + '/1x1.png');
@@ -209,16 +209,13 @@ describe('va-file-input', () => {
 
     const fileUploadSpy = await page.spyOnEvent('vaChange');
     const filePath = path.relative(process.cwd(), __dirname + '/1x1.png');
-    const input = (
-      await page.waitForFunction(() =>
-        document
-          .querySelector('va-file-input')
-          .shadowRoot.querySelector('input[type=file]'),
-      )
-    ).asElement();
+    const instructions = await page.find('va-file-input >>> .usa-file-input__instructions');
+    expect(instructions).not.toBeNull();
 
-    await input.uploadFile(filePath);
-    await page.waitForChanges();
+    const input = await page.$('pierce/.usa-file-input__input');
+    expect(input).not.toBeNull();
+
+    await input.uploadFile(filePath).catch((e) => console.log('uploadFile error', e));
 
     expect(fileUploadSpy).toHaveReceivedEventTimes(1);
   });
