@@ -53,6 +53,15 @@
   "uswds-system-color-blue-warm-10": {
     "value": "#e1e7f1"
   },
+  "uswds-system-color-blue-warm-30": {
+    "value": "#98afd2"
+  },
+  "uswds-system-color-blue-warm-50": {
+    "value": "#4a77b4"
+  },
+  "uswds-system-color-blue-warm-60": {
+    "value": "#345d96"
+  },
   "uswds-system-color-blue-warm-vivid-60": {
     "value": "#0050d8"
   },
@@ -202,6 +211,9 @@
   },
   "uswds-system-color-green-cool-vivid-60": {
     "value": "#216e1f"
+  },
+  "uswds-system-color-green-cool-vivid-70": {
+    "value": "#154c21"
   },
   "uswds-system-color-orange-40": {
     "value": "#dd7533"

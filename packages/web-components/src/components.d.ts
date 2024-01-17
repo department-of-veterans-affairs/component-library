@@ -549,6 +549,14 @@ export namespace Components {
          */
         "error"?: string;
         /**
+          * The content of the heading if `useFormsPattern` and `uswds` are true.
+         */
+        "formHeading"?: string;
+        /**
+          * The heading level for the heading if `useFormsPattern` and `uswds` are true.
+         */
+        "formHeadingLevel"?: number;
+        /**
           * Hint text string
          */
         "hint"?: string;
@@ -571,6 +579,10 @@ export namespace Components {
           * Render marker indicating field is required.
          */
         "required"?: boolean;
+        /**
+          * Enabling this will add a heading and description for integrating into the forms pattern. Accepts `single` or `multiple` to indicate if the form is a single input or will have multiple inputs. `uswds` should be true.
+         */
+        "useFormsPattern"?: string;
         /**
           * Whether or not the component will use USWDS v3 styling.
          */
@@ -1293,6 +1305,14 @@ export namespace Components {
          */
         "error"?: string;
         /**
+          * The content of the heading if `useFormsPattern` and `uswds` are true.
+         */
+        "formHeading"?: string;
+        /**
+          * The heading level for the heading if `useFormsPattern` and `uswds` are true.
+         */
+        "formHeadingLevel"?: number;
+        /**
           * Optional hint text.
          */
         "hint"?: string;
@@ -1320,6 +1340,10 @@ export namespace Components {
           * Set the input to required and render the (Required) text.
          */
         "required"?: boolean;
+        /**
+          * Enabling this will add a heading and description for integrating into the forms pattern. Accepts `single` or `multiple` to indicate if the form is a single input or will have multiple inputs. `uswds` should be true.
+         */
+        "useFormsPattern"?: string;
         /**
           * Whether or not the component will use USWDS v3 styling.
          */
@@ -2458,6 +2482,14 @@ declare namespace LocalJSX {
          */
         "error"?: string;
         /**
+          * The content of the heading if `useFormsPattern` and `uswds` are true.
+         */
+        "formHeading"?: string;
+        /**
+          * The heading level for the heading if `useFormsPattern` and `uswds` are true.
+         */
+        "formHeadingLevel"?: number;
+        /**
           * Hint text string
          */
         "hint"?: string;
@@ -2492,6 +2524,10 @@ declare namespace LocalJSX {
           * Render marker indicating field is required.
          */
         "required"?: boolean;
+        /**
+          * Enabling this will add a heading and description for integrating into the forms pattern. Accepts `single` or `multiple` to indicate if the form is a single input or will have multiple inputs. `uswds` should be true.
+         */
+        "useFormsPattern"?: string;
         /**
           * Whether or not the component will use USWDS v3 styling.
          */
@@ -3330,6 +3366,14 @@ declare namespace LocalJSX {
          */
         "error"?: string;
         /**
+          * The content of the heading if `useFormsPattern` and `uswds` are true.
+         */
+        "formHeading"?: string;
+        /**
+          * The heading level for the heading if `useFormsPattern` and `uswds` are true.
+         */
+        "formHeadingLevel"?: number;
+        /**
           * Optional hint text.
          */
         "hint"?: string;
@@ -3361,6 +3405,10 @@ declare namespace LocalJSX {
           * Set the input to required and render the (Required) text.
          */
         "required"?: boolean;
+        /**
+          * Enabling this will add a heading and description for integrating into the forms pattern. Accepts `single` or `multiple` to indicate if the form is a single input or will have multiple inputs. `uswds` should be true.
+         */
+        "useFormsPattern"?: string;
         /**
           * Whether or not the component will use USWDS v3 styling.
          */

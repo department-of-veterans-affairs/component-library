@@ -10,6 +10,8 @@
 
 @import '../../mixins/uswds-error-border.scss';
 @import '../../global/formation_overrides';
+@import '../../mixins/focusable.css';
+
 
 .usa-textarea {
   resize: inherit;

@@ -13,7 +13,7 @@
 @import '../../mixins/focusable.css';
 
 :host([uswds]:not([uswds='false'])) {
-  color: var(--v3-color-base-darkest);
+  color: var(--color-base);
 }
 
 :host {

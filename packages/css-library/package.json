@@ -1,10 +1,11 @@
 {
   "name": "@department-of-veterans-affairs/css-library",
-  "version": "0.0.2",
+  "version": "0.3.0",
   "packageManager": "yarn@3.2.0",
   "files": [
     "dist/**/*.css",
-    "dist/**/*.scss"
+    "dist/**/*.scss",
+    "dist/**/*.json"
   ],
   "scripts": {
     "build:tokens": "style-dictionary build",
