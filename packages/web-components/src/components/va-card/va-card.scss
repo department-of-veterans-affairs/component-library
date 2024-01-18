@@ -11,4 +11,5 @@
 
 :host([background]:not([background='false'])) {
   background-color: var(--color-gray-lightest);
+  border: none;
 }
