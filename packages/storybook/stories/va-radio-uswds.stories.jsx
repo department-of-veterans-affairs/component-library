@@ -280,7 +280,7 @@ const USWDSTiledError = ({
   );
 };
 
-const FormsPatternMultipleTemplate = ({ uswds, label }) => {
+const FormsPatternMultipleTemplate = ({ uswds, label, required }) => {
   const handleClick = () => {
     const header = document
       .getElementById('form-pattern-multiple-input')
@@ -298,7 +298,7 @@ const FormsPatternMultipleTemplate = ({ uswds, label }) => {
         label={label}
         use-forms-pattern="multiple"
         form-heading-level={1}
-        form-heading="Select one historical figure"
+        form-heading="Multiple fields form pattern"
         form-description="This is the additional form-description prop"
       >
         <va-radio-option
@@ -328,35 +328,13 @@ const FormsPatternMultipleTemplate = ({ uswds, label }) => {
       </va-radio>
 
       <va-radio
-        required
+        required="true"
         uswds={uswds}
-        label={label}
-        use-forms-pattern="multiple"
+        label="Burn pit S2.1, did you serve in any of there locations?"
       >
-        <va-radio-option
-          label="Soujourner Truth"
-          name="group7"
-          uswds
-          value="1"
-        />
-        <va-radio-option
-          label="Frederick Douglass"
-          name="group7"
-          uswds
-          value="2"
-        />
-        <va-radio-option
-          label="Booker T. Washington"
-          name="group7"
-          uswds
-          value="3"
-        />
-        <va-radio-option
-          label="George Washington Carver"
-          name="group7"
-          uswds
-          value="4"
-        />
+        <va-radio-option label="Yes" name="group7" uswds value="1" />
+        <va-radio-option label="No" name="group7" uswds value="2" />
+        <va-radio-option label="Not sure" name="group7" uswds value="3" />
       </va-radio>
 
       <hr />
