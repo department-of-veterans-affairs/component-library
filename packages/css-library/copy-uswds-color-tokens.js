@@ -15,8 +15,13 @@ const tokensToKeep = {
       'blue-70',
       'blue-80',
       'blue-90',
+      'blue-vivid-5',
+      'blue-vivid-10',
+      'blue-vivid-20',
+      'blue-vivid-30',
       'blue-vivid-50',
       'blue-vivid-60',
+      'blue-vivid-80',
     ],
   },
   'blue-cool': {
@@ -96,7 +101,7 @@ const tokensToKeep = {
   },
   'gray-warm': {
     file: 'gray-warm.json',
-    colors: ['gray-warm-10', 'gray-warm-70'],
+    colors: ['gray-warm-10', 'gray-warm-70', 'gray-warm-90'],
   },
   'green-cool': {
     file: 'green-cool.json',
@@ -109,6 +114,7 @@ const tokensToKeep = {
       'green-cool-vivid-50',
       'green-cool-vivid-60',
       'green-cool-vivid-70',
+      'green-cool-vivid-80',
     ],
   },
   'orange': {
@@ -117,7 +123,15 @@ const tokensToKeep = {
   },
   'red': {
     file: 'red.json',
-    colors: ['red-30', 'red-50', 'red-70', 'red-vivid-60', 'red-vivid-70'],
+    colors: [
+      'red-30',
+      'red-50',
+      'red-70',
+      'red-vivid-40',
+      'red-vivid-60',
+      'red-vivid-70',
+      'red-vivid-80',
+    ],
   },
   'red-cool': {
     file: 'red-cool.json',
@@ -144,7 +158,12 @@ const tokensToKeep = {
   },
   'yellow': {
     file: 'yellow.json',
-    colors: ['yellow-5', 'yellow-vivid-10', 'yellow-vivid-20'],
+    colors: [
+      'yellow-5',
+      'yellow-vivid-10',
+      'yellow-vivid-20',
+      'yellow-vivid-80',
+    ],
   },
 };
 // Desired prefix/namespace for colors

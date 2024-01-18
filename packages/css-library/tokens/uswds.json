@@ -29,11 +29,26 @@
   "uswds-system-color-blue-90": {
     "value": "#11181d"
   },
+  "uswds-system-color-blue-vivid-5": {
+    "value": "#e8f5ff"
+  },
+  "uswds-system-color-blue-vivid-10": {
+    "value": "#cfe8ff"
+  },
+  "uswds-system-color-blue-vivid-20": {
+    "value": "#a1d3ff"
+  },
+  "uswds-system-color-blue-vivid-30": {
+    "value": "#58b4ff"
+  },
   "uswds-system-color-blue-vivid-50": {
     "value": "#0076d6"
   },
   "uswds-system-color-blue-vivid-60": {
     "value": "#005ea2"
+  },
+  "uswds-system-color-blue-vivid-80": {
+    "value": "#112f4e"
   },
   "uswds-system-color-blue-cool-60": {
     "value": "#2e6276"
@@ -191,6 +206,9 @@
   "uswds-system-color-gray-warm-70": {
     "value": "#454540"
   },
+  "uswds-system-color-gray-warm-90": {
+    "value": "#171716"
+  },
   "uswds-system-color-green-cool-5": {
     "value": "#ecf3ec"
   },
@@ -215,6 +233,9 @@
   "uswds-system-color-green-cool-vivid-70": {
     "value": "#154c21"
   },
+  "uswds-system-color-green-cool-vivid-80": {
+    "value": "#19311e"
+  },
   "uswds-system-color-orange-40": {
     "value": "#dd7533"
   },
@@ -227,11 +248,17 @@
   "uswds-system-color-red-70": {
     "value": "#6f3331"
   },
+  "uswds-system-color-red-vivid-40": {
+    "value": "#fb5a47"
+  },
   "uswds-system-color-red-vivid-60": {
     "value": "#b50909"
   },
   "uswds-system-color-red-vivid-70": {
     "value": "#8b0a03"
+  },
+  "uswds-system-color-red-vivid-80": {
+    "value": "#5c1111"
   },
   "uswds-system-color-red-cool-vivid-10": {
     "value": "#f8dfe2"
@@ -271,5 +298,8 @@
   },
   "uswds-system-color-yellow-vivid-20": {
     "value": "#face00"
+  },
+  "uswds-system-color-yellow-vivid-80": {
+    "value": "#422d19"
   }
 }
