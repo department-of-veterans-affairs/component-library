@@ -113,7 +113,7 @@ This will allow you to run Storybook locally to view all components
 
 ### Running tests for web components
 
-To run units for the web-components project, the commands are:
+To run unit tests for all components, the commands are:
 
 ```bash
 yarn test
@@ -125,20 +125,20 @@ and
 yarn test.watch
 ```
 
-In order to a single file, you can run:
+To test a single file, run:
 
 ```bash
-npx stencil test --e2e -- src/components/[component-name]/[component-name].e2e.ts
+npx stencil test --e2e -- src/components/[component-name]/test/[component-name].e2e.ts
 ```
 
 Replace `[component-name]` with the name of the component you want to test. Optionally, you can add `--watchAll` after `--e2e` to watch the file for changes. For example:
 
 ```bash
-npx stencil test --e2e --watchAll -- src/components/[component-name]/[component-name].e2e.ts
+npx stencil test --e2e --watchAll -- src/components/[component-name]/test/[component-name].e2e.ts
 ```
 
-Another option is to use wildcards to query for certain tests. For example, to run all tests for the `va-alert` component, you can run:
+Another option is to use wildcards to query for certain tests. For example, to run all tests for the `va-accordion` component, you can run:
 
 ```bash
-npx stencil test --e2e  -- src/components/va-accordion/va-accordion-*
+npx stencil test --e2e  -- src/components/va-accordion/test/va-accordion-*
 ```

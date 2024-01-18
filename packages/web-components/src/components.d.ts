@@ -96,7 +96,11 @@ export namespace Components {
         /**
           * Determines the icon and border/background color.
          */
-        "status"?: "info" | "warning" | "error" | "success" | "continue";
+        "status"?: | 'info'
+    | 'warning'
+    | 'error'
+    | 'success'
+    | 'continue';
         /**
           * Whether or not the component will use USWDS v3 styling.
          */
@@ -128,6 +132,10 @@ export namespace Components {
     }
     interface VaBanner {
         /**
+          * Aria Label for the "region" of the nested va-alert.
+         */
+        "dataLabel"?: string;
+        /**
           * If true, doesn't fire the CustomEvent which can be used for analytics tracking.
          */
         "disableAnalytics"?: boolean;
@@ -142,7 +150,7 @@ export namespace Components {
         /**
           * The type of the banner. This affects both the icon of the AlertBox and the top border color.
          */
-        "type"?: "info" | "warning" | "error" | "success" | "continue";
+        "type"?: 'info' | 'warning' | 'error' | 'success' | 'continue';
         /**
           * A boolean that when false makes it so that the banner does not render.
          */
@@ -1937,7 +1945,11 @@ declare namespace LocalJSX {
         /**
           * Determines the icon and border/background color.
          */
-        "status"?: "info" | "warning" | "error" | "success" | "continue";
+        "status"?: | 'info'
+    | 'warning'
+    | 'error'
+    | 'success'
+    | 'continue';
         /**
           * Whether or not the component will use USWDS v3 styling.
          */
@@ -1973,6 +1985,10 @@ declare namespace LocalJSX {
     }
     interface VaBanner {
         /**
+          * Aria Label for the "region" of the nested va-alert.
+         */
+        "dataLabel"?: string;
+        /**
           * If true, doesn't fire the CustomEvent which can be used for analytics tracking.
          */
         "disableAnalytics"?: boolean;
@@ -1991,7 +2007,7 @@ declare namespace LocalJSX {
         /**
           * The type of the banner. This affects both the icon of the AlertBox and the top border color.
          */
-        "type"?: "info" | "warning" | "error" | "success" | "continue";
+        "type"?: 'info' | 'warning' | 'error' | 'success' | 'continue';
         /**
           * A boolean that when false makes it so that the banner does not render.
          */
