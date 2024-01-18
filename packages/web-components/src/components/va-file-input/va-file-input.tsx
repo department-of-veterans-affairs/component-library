@@ -79,11 +79,6 @@ export class VaFileInput {
   @Prop({ reflect: true }) uswds?: boolean = false;
 
   /**
-   * A random id used for listening to changes
-   */
-  changeListenerId: number;
-
-  /**
    * The event emitted when the file input value changes.
    */
   @Event() vaChange: EventEmitter;
