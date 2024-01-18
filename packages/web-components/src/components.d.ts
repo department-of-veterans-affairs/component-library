@@ -96,7 +96,11 @@ export namespace Components {
         /**
           * Determines the icon and border/background color.
          */
-        "status"?: "info" | "warning" | "error" | "success" | "continue";
+        "status"?: | 'info'
+    | 'warning'
+    | 'error'
+    | 'success'
+    | 'continue';
         /**
           * Whether or not the component will use USWDS v3 styling.
          */
@@ -128,6 +132,10 @@ export namespace Components {
     }
     interface VaBanner {
         /**
+          * Aria Label for the "region" of the nested va-alert.
+         */
+        "dataLabel"?: string;
+        /**
           * If true, doesn't fire the CustomEvent which can be used for analytics tracking.
          */
         "disableAnalytics"?: boolean;
@@ -142,7 +150,7 @@ export namespace Components {
         /**
           * The type of the banner. This affects both the icon of the AlertBox and the top border color.
          */
-        "type"?: "info" | "warning" | "error" | "success" | "continue";
+        "type"?: 'info' | 'warning' | 'error' | 'success' | 'continue';
         /**
           * A boolean that when false makes it so that the banner does not render.
          */
@@ -541,6 +549,14 @@ export namespace Components {
          */
         "error"?: string;
         /**
+          * The content of the heading if `useFormsPattern` and `uswds` are true.
+         */
+        "formHeading"?: string;
+        /**
+          * The heading level for the heading if `useFormsPattern` and `uswds` are true.
+         */
+        "formHeadingLevel"?: number;
+        /**
           * Hint text string
          */
         "hint"?: string;
@@ -563,6 +579,10 @@ export namespace Components {
           * Render marker indicating field is required.
          */
         "required"?: boolean;
+        /**
+          * Enabling this will add a heading and description for integrating into the forms pattern. Accepts `single` or `multiple` to indicate if the form is a single input or will have multiple inputs. `uswds` should be true.
+         */
+        "useFormsPattern"?: string;
         /**
           * Whether or not the component will use USWDS v3 styling.
          */
@@ -1941,7 +1961,11 @@ declare namespace LocalJSX {
         /**
           * Determines the icon and border/background color.
          */
-        "status"?: "info" | "warning" | "error" | "success" | "continue";
+        "status"?: | 'info'
+    | 'warning'
+    | 'error'
+    | 'success'
+    | 'continue';
         /**
           * Whether or not the component will use USWDS v3 styling.
          */
@@ -1977,6 +2001,10 @@ declare namespace LocalJSX {
     }
     interface VaBanner {
         /**
+          * Aria Label for the "region" of the nested va-alert.
+         */
+        "dataLabel"?: string;
+        /**
           * If true, doesn't fire the CustomEvent which can be used for analytics tracking.
          */
         "disableAnalytics"?: boolean;
@@ -1995,7 +2023,7 @@ declare namespace LocalJSX {
         /**
           * The type of the banner. This affects both the icon of the AlertBox and the top border color.
          */
-        "type"?: "info" | "warning" | "error" | "success" | "continue";
+        "type"?: 'info' | 'warning' | 'error' | 'success' | 'continue';
         /**
           * A boolean that when false makes it so that the banner does not render.
          */
@@ -2466,6 +2494,14 @@ declare namespace LocalJSX {
          */
         "error"?: string;
         /**
+          * The content of the heading if `useFormsPattern` and `uswds` are true.
+         */
+        "formHeading"?: string;
+        /**
+          * The heading level for the heading if `useFormsPattern` and `uswds` are true.
+         */
+        "formHeadingLevel"?: number;
+        /**
           * Hint text string
          */
         "hint"?: string;
@@ -2500,6 +2536,10 @@ declare namespace LocalJSX {
           * Render marker indicating field is required.
          */
         "required"?: boolean;
+        /**
+          * Enabling this will add a heading and description for integrating into the forms pattern. Accepts `single` or `multiple` to indicate if the form is a single input or will have multiple inputs. `uswds` should be true.
+         */
+        "useFormsPattern"?: string;
         /**
           * Whether or not the component will use USWDS v3 styling.
          */
