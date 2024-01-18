@@ -565,14 +565,27 @@ export const fileInput = {
 
       dropTarget.addEventListener(
         'drop',
-        function handleDrop() {
+        function handleDrop(e) {
+          e.preventDefault(); // Prevents browser from opening file instead of adding it to input
           this.classList.remove(DRAG_CLASS);
+
+          // Because of the way 'drop' works differently from 'change', need to get files from the dataTransfer object
+          const dt = e.dataTransfer;
+          (e.target as HTMLInputElement).files = dt.files;
+          handleUpload(e, fileInputEl, instructions, dropTarget);
+
+          // Because we're preventing the default behavior, need to manually fire off a change event
+          const changeEvent = new CustomEvent('change', {
+            detail: { files: dt.files },
+          });
+          fileInputEl.dispatchEvent(changeEvent);
         },
         false,
       );
 
+      // Listens for "input" event so that it fires before the "change" event, which is being captured by the component
       fileInputEl.addEventListener(
-        'change',
+        'input',
         e => handleUpload(e, fileInputEl, instructions, dropTarget),
         false,
       );
