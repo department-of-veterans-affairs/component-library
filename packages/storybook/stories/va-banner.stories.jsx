@@ -29,6 +29,7 @@ const Template = ({
   type,
   visible,
   'window-session': windowSession,
+  'data-label': dataLabel,
 }) => {
   return (
     <va-banner
@@ -38,6 +39,7 @@ const Template = ({
       type={type}
       visible={visible}
       window-session={windowSession}
+      data-label={dataLabel}
     >
       <p>
         We have temporarily closed our Acute Psychiatry at our Lyons Campus. All
@@ -56,6 +58,7 @@ const defaultArgs = {
   'type': 'info',
   'visible': true,
   'window-session': false,
+  'data-label': "Info banner"
 };
 
 export const Default = Template.bind(null);

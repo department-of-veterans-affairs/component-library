@@ -32,7 +32,12 @@ export class VaAlert {
    * Determines the icon and border/background color.
    */
   //  Reflect Prop into DOM for va-banner: https://stenciljs.com/docs/properties#prop-options
-  @Prop({ reflect: true }) status?: "info" | "warning" | "error" | "success" | "continue" = "info";
+  @Prop({ reflect: true }) status?:
+    | 'info'
+    | 'warning'
+    | 'error'
+    | 'success'
+    | 'continue' = 'info';
 
   /**
    * If `true`, renders the alert with only a background color corresponding
@@ -70,7 +75,7 @@ export class VaAlert {
    * Whether or not the component will use USWDS v3 styling.
    */
   @Prop() uswds?: boolean = false;
-  
+
   /**
    * Displays the slim variation. Available when USWDS is true.
    */
@@ -158,20 +163,14 @@ export class VaAlert {
   }
 
   render() {
-    const { 
-      backgroundOnly, 
-      visible, 
-      closeable, 
-      uswds, 
-      slim,
-    } = this;
+    const { backgroundOnly, visible, closeable, uswds, slim } = this;
     let status = this.status;
     /* eslint-disable i18next/no-literal-string */
 
     // Enforce pre-defined statuses
-    const definedStatuses = ["info", "warning", "error", "success", "continue"];
+    const definedStatuses = ['info', 'warning', 'error', 'success', 'continue'];
     if (definedStatuses.indexOf(status) === -1) {
-      status = 'info'
+      status = 'info';
     }
     const role = status === 'error' ? 'alert' : null;
     const ariaLive = status === 'error' ? 'assertive' : null;
@@ -182,8 +181,8 @@ export class VaAlert {
     if (uswds) {
       const classes = classnames('usa-alert', `usa-alert--${status}`, {
         'bg-only': backgroundOnly,
-        'usa-alert--success': (status === 'continue'),
-        'usa-alert--slim': slim
+        'usa-alert--success': status === 'continue',
+        'usa-alert--slim': slim,
       });
       return (
         <Host>
@@ -191,6 +190,7 @@ export class VaAlert {
             role={this.el.getAttribute('data-role') || role}
             aria-live={ariaLive}
             class={classes}
+            aria-label={this.el.getAttribute('data-label') || role}
           >
             <div
               class="usa-alert__body"
@@ -201,14 +201,18 @@ export class VaAlert {
               <slot></slot>
             </div>
           </div>
-  
+
           {closeable && (
             <button
               class="va-alert-close"
               aria-label={this.closeBtnAriaLabel}
               onClick={this.closeHandler.bind(this)}
             >
-              <i aria-hidden="true" class="fa-times-circle" role="presentation" />
+              <i
+                aria-hidden="true"
+                class="fa-times-circle"
+                role="presentation"
+              />
             </button>
           )}
         </Host>
@@ -225,13 +229,10 @@ export class VaAlert {
           role={this.el.getAttribute('data-role') || role}
           aria-live={ariaLive}
           class={classes}
+          aria-label={this.el.getAttribute('data-label') || role}
         >
-          <i aria-hidden="true" role="img"></i>
-          <div
-            class="body"
-            onClick={this.handleAlertBodyClick.bind(this)}
-            role="presentation"
-          >
+          <i aria-hidden="true"></i>
+          <div class="body" onClick={this.handleAlertBodyClick.bind(this)}>
             {!backgroundOnly && <slot name="headline"></slot>}
             <slot></slot>
           </div>
@@ -243,7 +244,7 @@ export class VaAlert {
             aria-label={this.closeBtnAriaLabel}
             onClick={this.closeHandler.bind(this)}
           >
-            <i aria-hidden="true" class="fa-times-circle" role="presentation" />
+            <i aria-hidden="true" class="fa-times-circle" />
           </button>
         )}
       </Host>

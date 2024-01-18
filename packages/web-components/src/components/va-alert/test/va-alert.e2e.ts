@@ -12,8 +12,8 @@ describe('va-alert', () => {
       <va-alert class="hydrated" status="info">
         <mock:shadow-root>
           <div class="alert info">
-            <i aria-hidden="true" role="img"></i>
-            <div class="body" role="presentation">
+            <i aria-hidden="true"></i>
+            <div class="body">
               <slot name="headline"></slot>
               <slot></slot>
             </div>
@@ -202,7 +202,7 @@ describe('va-alert', () => {
     const element = await page.find('va-alert >>> .alert');
 
     expect(element.classList.contains('info')).toBeTruthy();
-  })
+  });
 
   it('should set status to info if it is an empty string', async () => {
     const page = await newE2EPage();
@@ -213,7 +213,7 @@ describe('va-alert', () => {
     const element = await page.find('va-alert >>> .alert');
 
     expect(element.classList.contains('info')).toBeTruthy();
-  })
+  });
 
   it('should set status to info if value not in pre-defined list', async () => {
     const page = await newE2EPage();
@@ -224,7 +224,7 @@ describe('va-alert', () => {
     const element = await page.find('va-alert >>> .alert');
 
     expect(element.classList.contains('info')).toBeTruthy();
-  })
+  });
 
   it('should not overwrite status if valid', async () => {
     const page = await newE2EPage();
@@ -236,8 +236,7 @@ describe('va-alert', () => {
 
     expect(element.classList.contains('info')).toBeFalsy();
     expect(element.classList.contains('continue')).toBeTruthy();
-  })
-
+  });
 
   /** Begin USWDS v3 Tests */
 
@@ -400,7 +399,7 @@ describe('va-alert', () => {
     const element = await page.find('va-alert >>> .usa-alert');
 
     expect(element.classList.contains('usa-alert--info')).toBeTruthy();
-  })
+  });
 
   it('uswds should set status to info if it is an empty string', async () => {
     const page = await newE2EPage();
@@ -411,7 +410,7 @@ describe('va-alert', () => {
     const element = await page.find('va-alert >>> .usa-alert');
 
     expect(element.classList.contains('usa-alert--info')).toBeTruthy();
-  })
+  });
 
   it('uswds should set status to info if value not in pre-defined list', async () => {
     const page = await newE2EPage();
@@ -422,7 +421,7 @@ describe('va-alert', () => {
     const element = await page.find('va-alert >>> .usa-alert');
 
     expect(element.classList.contains('usa-alert--info')).toBeTruthy();
-  })
+  });
 
   it('uswds should not overwrite status if valid', async () => {
     const page = await newE2EPage();
@@ -434,5 +433,5 @@ describe('va-alert', () => {
 
     expect(element.classList.contains('usa-alert--info')).toBeFalsy();
     expect(element.classList.contains('usa-alert--continue')).toBeTruthy();
-  })
+  });
 });
