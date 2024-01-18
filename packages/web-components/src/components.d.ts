@@ -260,6 +260,10 @@ export namespace Components {
     }
     interface VaCard {
         /**
+          * If `true`, the card will have a gray background.
+         */
+        "background"?: boolean;
+        /**
           * If `true`, a drop-shadow will be displayed
          */
         "showShadow"?: boolean;
@@ -2144,6 +2148,10 @@ declare namespace LocalJSX {
         "uswds"?: boolean;
     }
     interface VaCard {
+        /**
+          * If `true`, the card will have a gray background.
+         */
+        "background"?: boolean;
         /**
           * If `true`, a drop-shadow will be displayed
          */
