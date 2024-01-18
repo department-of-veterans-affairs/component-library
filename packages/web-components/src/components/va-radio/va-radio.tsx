@@ -239,7 +239,7 @@ export class VaRadio {
       headerAriaDescribedby,
       useFormsPattern,
       formHeadingLevel,
-      formHeading,
+      formHeading
     } = this;
     const ariaLabel = label + (required ? ' required' : '');
     const HeaderLevel = this.getHeaderLevel();
@@ -262,9 +262,9 @@ export class VaRadio {
         formsHeading = (
           <Fragment>
             {formHeading &&
-              <HeaderLevel id="form-question" part="form-header">
-                {formHeading}
-              </HeaderLevel>
+            <HeaderLevel id="form-question" part="form-header">
+              {formHeading}
+            </HeaderLevel>
             }
             <div id="form-description">
               <slot name="form-description"></slot>
@@ -273,7 +273,7 @@ export class VaRadio {
         )
       }
       return (
-        <Host aria-invalid={error ? 'true' : 'false'}>
+        <Host aria-invalid={error ? 'true' : 'false'} >
           {formsHeading}
           <div class="input-wrap">
             <fieldset class="usa-fieldset" aria-labelledby={ariaLabeledByIds}>
