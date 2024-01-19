@@ -456,35 +456,4 @@ describe('va-checkbox', () => {
     await checkboxLabelEl.click();
     expect(await checkboxEl.getProperty('checked')).toBeTruthy();
   });
-
-  it('uswds useFormsPattern displays header for the single field pattern', async () => {
-    const page = await newE2EPage();
-    await page.setContent('<va-checkbox label="This is a label" uswds use-forms-pattern="single" form-heading-level="1" form-heading="This is a form header" form-description="This is a form description"/>');
-
-    const formHeader = await page.find('va-checkbox >>> h1');
-    expect(formHeader.innerText).toEqual('This is a form header');
-  });
-
-  it('uswds useFormsPattern displays header for the multiple fields pattern', async () => {
-    const page = await newE2EPage();
-    await page.setContent('<va-checkbox label="This is a label" uswds use-forms-pattern="multiple" form-heading-level="1" form-heading="This is a form header" form-description="This is a form description"/>');
-
-    const formHeader = await page.find('va-checkbox >>> h1');
-    expect(formHeader.innerText).toEqual('This is a form header');
-  });
-
-  it('uswds useFormsPattern does not display header if "single" or "multiple" is not indicated', async () => {
-    const page = await newE2EPage();
-    await page.setContent('<va-checkbox label="This is a label" uswds use-forms-pattern="multiple" form-heading-level="1" form-heading="This is a form header" form-description="This is a form description"/>');
-
-    const formHeader = await page.find('va-checkbox >>> h1');
-    expect(formHeader.innerText).toEqual('This is a form header');
-  });
-
-  it('uswds useFormsPattern passes an aXe check', async () => {
-    const page = await newE2EPage();
-    await page.setContent('<va-checkbox label="This is a label" uswds use-forms-pattern="multiple" form-heading-level="1" form-heading="This is a form header" form-description="This is a form description"/>');
-
-    await axeCheck(page);
-  });
 });
