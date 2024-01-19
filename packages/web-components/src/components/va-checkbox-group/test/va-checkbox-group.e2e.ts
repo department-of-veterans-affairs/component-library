@@ -45,7 +45,7 @@ describe('va-checkbox-group', () => {
     await page.setContent('<va-checkbox-group hint="This is hint text" />');
 
     // Render the hint text
-    const hintTextElement = await page.find('va-checkbox-group >>> span.hint-text');
+    const hintTextElement = await page.find('va-checkbox-group >>> div.hint-text');
     expect(hintTextElement.innerText).toContain('This is hint text');
   });
 

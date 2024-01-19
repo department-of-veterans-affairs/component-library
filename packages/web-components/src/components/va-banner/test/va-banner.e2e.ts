@@ -11,7 +11,7 @@ describe('va-banner', () => {
     expect(element).toEqualHtml(`
      <va-banner class="hydrated">
        <mock:shadow-root>
-         <va-alert class="hydrated" full-width="" status="info" data-role="banner">
+         <va-alert class="hydrated" data-label="Info banner" data-role="region" full-width="" status="info">
            <h3 slot="headline"></h3>
            <slot></slot>
          </va-alert>
@@ -58,6 +58,31 @@ describe('va-banner', () => {
     vaAlert = await page.find('va-banner >>> va-alert');
     button = vaAlert.shadowRoot.querySelector('button');
     expect(button).not.toBeNull();
+  });
+
+  it('still shows alert aria', async () => {
+    const page = await newE2EPage();
+    await page.setContent(
+      '<va-banner type="error" headline="This is an alert test"></va-banner>',
+    );
+    const element = await page.find('va-banner >>> va-alert');
+    expect(element).toEqualHtml(`
+      <va-alert class="hydrated" data-label="Error banner" data-role="region" full-width="" status="error">
+        <mock:shadow-root>
+           <div aria-label="Error banner" aria-live="assertive" class="alert error" role="region">
+           <i aria-hidden="true"></i>
+             <div class="body">
+              <slot name="headline"></slot>
+              <slot></slot>
+            </div>
+          </div>
+        </mock:shadow-root>
+        <h3 slot="headline">
+         This is an alert test
+        </h3>
+        <slot></slot>
+      </va-alert>
+    `);
   });
 
   it('does not display if dismissed', async () => {
