@@ -11,7 +11,7 @@ describe('va-notification', () => {
     expect(element).toEqualHtml(`
       <va-notification class="hydrated" has-border="" headline="Notification heading" date-time="Tuesday, July 18">
         <mock:shadow-root>
-          <va-card show-shadow="true" class="hydrated show-shadow va-card">
+          <va-card show-shadow="true" class="hydrated">
             <div class="va-notification none has-border">
               <i aria-hidden="true" role="img" class="none"></i>
               <div class="body" role="presentation">
