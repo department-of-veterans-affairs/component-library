@@ -7,20 +7,6 @@
 @import '../../global/formation_overrides';
 
 /* V3/USWDS Styles */
-.usa-label--required,
-.usa-error-message {
-  color: var(--v3-color-error-dark);
-}
-
-
-.usa-file-input .usa-file-input__input[type] {
-  padding: 0;
-}
-
-.usa-file-input__choose {
-  color: var(--color-link-default);
-}
-
 [hidden] {
   display: none;
 }
