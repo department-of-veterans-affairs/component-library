@@ -423,6 +423,10 @@ export namespace Components {
          */
         "label"?: string;
         /**
+          * Optionally allow multiple files (USWDS Only)
+         */
+        "multiple"?: boolean;
+        /**
           * The name for the input element.
          */
         "name"?: string;
@@ -430,6 +434,10 @@ export namespace Components {
           * Sets the input to required and renders the (*Required) text.
          */
         "required"?: boolean;
+        /**
+          * Whether or not the component will use USWDS v3 styling.
+         */
+        "uswds"?: boolean;
     }
     interface VaIcon {
         /**
@@ -2336,6 +2344,10 @@ declare namespace LocalJSX {
          */
         "label"?: string;
         /**
+          * Optionally allow multiple files (USWDS Only)
+         */
+        "multiple"?: boolean;
+        /**
           * The name for the input element.
          */
         "name"?: string;
@@ -2351,6 +2363,10 @@ declare namespace LocalJSX {
           * Sets the input to required and renders the (*Required) text.
          */
         "required"?: boolean;
+        /**
+          * Whether or not the component will use USWDS v3 styling.
+         */
+        "uswds"?: boolean;
     }
     interface VaIcon {
         /**
