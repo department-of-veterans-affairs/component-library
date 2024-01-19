@@ -3,6 +3,8 @@ import { VaAlert } from '@department-of-veterans-affairs/web-components/react-bi
 import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
 
 const alertDocs = getWebComponentDocs('va-alert');
+// Remove backgroundOnly prop, this code and prop should be removed with the v1 version
+alertDocs.props = alertDocs.props.filter((prop) => prop.name !== 'backgroundOnly');
 
 export default {
   title: `USWDS/Alert USWDS`,
@@ -39,7 +41,6 @@ const defaultArgs = {
   'close-btn-aria-label': 'Close notification',
   'closeable': false,
   'full-width': false,
-  'background-only': false,
   'headline': (
     <h2 id="track-your-status-on-mobile" slot="headline">
       Track your claim or appeal on your mobile device
@@ -63,7 +64,6 @@ const Template = ({
   'full-width': fullWidth,
   headline,
   onCloseEvent,
-  'background-only': backgroundOnly,
   children,
 }) => {
   if (onCloseEvent)
@@ -78,7 +78,6 @@ const Template = ({
         closeable={closeable}
         fullWidth={fullWidth}
         onCloseEvent={onCloseEvent}
-        background-only={backgroundOnly}
       >
         {headline}
         {children}
@@ -95,7 +94,6 @@ const Template = ({
       close-btn-aria-label={closeBtnAriaLabel}
       closeable={closeable}
       full-width={fullWidth}
-      background-only={backgroundOnly}
     >
       {headline}
       {children}

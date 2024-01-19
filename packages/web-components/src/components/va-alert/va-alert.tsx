@@ -41,7 +41,7 @@ export class VaAlert {
 
   /**
    * If `true`, renders the alert with only a background color corresponding
-   * to the status - no left border.
+   * to the status - no left border. (v1 only)
    */
   @Prop() backgroundOnly?: boolean = false;
 
@@ -180,7 +180,6 @@ export class VaAlert {
 
     if (uswds) {
       const classes = classnames('usa-alert', `usa-alert--${status}`, {
-        'bg-only': backgroundOnly,
         'usa-alert--success': status === 'continue',
         'usa-alert--slim': slim,
       });
@@ -197,7 +196,7 @@ export class VaAlert {
               onClick={this.handleAlertBodyClick.bind(this)}
               role="presentation"
             >
-              {!backgroundOnly && <slot name="headline"></slot>}
+              <slot name="headline"></slot>
               <slot></slot>
             </div>
           </div>
