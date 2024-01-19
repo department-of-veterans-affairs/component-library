@@ -79,8 +79,8 @@
 
 @media screen and (min-width: 1024px) {
 
-  :host([full-width='true']) .va-alert-close,
-  :host([full-width='']) .va-alert-close {
+  :host(:not([uswds='true'], [uswds='']))[full-width='true'] .va-alert-close,
+  :host(:not([uswds='true'], [uswds='']))[full-width=''] .va-alert-close {
     position: relative;
   }
 }
