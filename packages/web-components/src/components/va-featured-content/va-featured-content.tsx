@@ -40,7 +40,9 @@ export class VaFeaturedContent {
           <div class="usa-summary-box" role="region">
             <div class="usa-summary-box__body">
               <slot name="headline"></slot>
-              <slot />
+              <div class="usa-summary-box__text">
+                <slot></slot>
+              </div>
             </div>
           </div>
         </Host>
