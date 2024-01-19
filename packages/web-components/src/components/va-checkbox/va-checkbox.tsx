@@ -110,9 +110,6 @@ export class VaCheckbox {
    * The name to pass to the checkbox element.
    */
   @Prop() name?: string;
-   /**
-   * Enabling this will add a heading and description for integrating into the forms pattern. Accepts `single` or `multiple` to indicate if the form is a single input or will have multiple inputs. `uswds` should be true.
-   */
 
   /**
    * The event used to track usage of the component. This is emitted when the
@@ -187,7 +184,6 @@ export class VaCheckbox {
       messageAriaDescribedby,
       name
     } = this;
-
 
     const hasDescription = description || !!this.el.querySelector('[slot="description"]');
 
