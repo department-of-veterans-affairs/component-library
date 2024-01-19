@@ -18,7 +18,7 @@ import {
 })
 export class VaCard {
   /**
-   * If `true`, a drop-shadow will be displayed
+   * If `true`, a drop-shadow will be displayed with a white background.
    */
   @Prop() showShadow?: boolean = false;
 

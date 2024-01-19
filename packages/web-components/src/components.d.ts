@@ -264,7 +264,7 @@ export namespace Components {
          */
         "background"?: boolean;
         /**
-          * If `true`, a drop-shadow will be displayed
+          * If `true`, a drop-shadow will be displayed with a white background.
          */
         "showShadow"?: boolean;
     }
@@ -2153,7 +2153,7 @@ declare namespace LocalJSX {
          */
         "background"?: boolean;
         /**
-          * If `true`, a drop-shadow will be displayed
+          * If `true`, a drop-shadow will be displayed with a white background.
          */
         "showShadow"?: boolean;
     }

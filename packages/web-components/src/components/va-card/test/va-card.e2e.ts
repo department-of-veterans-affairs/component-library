@@ -19,7 +19,7 @@ describe('va-card', () => {
         expect(element).not.toHaveClass('show-shadow');
     }); 
 
-    it('displays a box shadow', async () => {
+    it('displays a box shadow when show-shadow prop is set', async () => {
         const page = await newE2EPage();
     
         await page.setContent('<va-card show-shadow></va-card>');
@@ -30,7 +30,7 @@ describe('va-card', () => {
           );
     });
 
-    it('displays a gray background', async () => {
+    it('displays a gray background when background prop is set', async () => {
         const page = await newE2EPage();
     
         await page.setContent('<va-card background></va-card>');
@@ -39,6 +39,17 @@ describe('va-card', () => {
         // --color-gray-lightest which is #f0f0f0 and also rgb(240, 240, 240)
         expect((await element.getComputedStyle()).backgroundColor).toEqual(
             'rgb(240, 240, 240)',
+          );
+    });
+
+    it('displays a white background when show-shadow and background is set', async () => {
+        const page = await newE2EPage();
+    
+        await page.setContent('<va-card show-shadow background></va-card>');
+        const element = await page.find('va-card')
+
+        expect((await element.getComputedStyle()).backgroundColor).toEqual(
+            'rgb(255, 255, 255)',
           );
     });
 
