@@ -190,7 +190,7 @@ const FormsPatternMultipleTemplate = ({
         message-aria-describedby={messageAriaDescribedBy}
         use-forms-pattern="multiple"
         form-heading-level={1}
-        form-heading="Identification information"
+        form-heading="What's your relationship to the Veteran?"
         form-description="This is the additional form-description prop"
       />
 
@@ -253,7 +253,7 @@ const FormsPatternSingleTemplate = ({
         id={`form-pattern-single-input-${id}`}
         use-forms-pattern="single"
         form-heading-level={1}
-        form-heading="Identification information"
+        form-heading="What's your relationship to that Veteran?"
         form-description="This is the additional form-description prop"
       >
         <div slot="form-description">
