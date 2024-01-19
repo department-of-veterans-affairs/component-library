@@ -291,7 +291,7 @@ const FormsPatternMultipleTemplate = ({ uswds, label, required }) => {
   return (
     <>
       <va-radio
-        required
+        required={required}
         error="This is an error"
         id="form-pattern-multiple-input"
         uswds={uswds}
@@ -300,27 +300,32 @@ const FormsPatternMultipleTemplate = ({ uswds, label, required }) => {
         form-heading-level={1}
         form-heading="Multiple fields form pattern"
         form-description="This is the additional form-description prop"
+        header-aria-describedby={label}
       >
         <va-radio-option
           label="Soujourner Truth"
+          id="soujourner-truth6"
           name="group6"
           uswds
           value="1"
         />
         <va-radio-option
           label="Frederick Douglass"
+          id="frederick-douglass6"
           name="group6"
           uswds
           value="2"
         />
         <va-radio-option
           label="Booker T. Washington"
+          id="booker-t-washington6"
           name="group6"
           uswds
           value="3"
         />
         <va-radio-option
           label="George Washington Carver"
+          id="george-washington-carver6"
           name="group6"
           uswds
           value="4"
@@ -332,9 +337,15 @@ const FormsPatternMultipleTemplate = ({ uswds, label, required }) => {
         uswds={uswds}
         label="Burn pit S2.1, did you serve in any of there locations?"
       >
-        <va-radio-option label="Yes" name="group7" uswds value="1" />
-        <va-radio-option label="No" name="group7" uswds value="2" />
-        <va-radio-option label="Not sure" name="group7" uswds value="3" />
+        <va-radio-option label="Yes" name="group7" id="yes7" uswds value="1" />
+        <va-radio-option label="No" name="group7" id="no7" uswds value="2" />
+        <va-radio-option
+          label="Not sure"
+          name="group7"
+          id="not-sure7"
+          uswds
+          value="3"
+        />
       </va-radio>
 
       <hr />
@@ -343,7 +354,13 @@ const FormsPatternMultipleTemplate = ({ uswds, label, required }) => {
   );
 };
 
-const FormsPatternSingleTemplate = ({ uswds, required, error, label }) => {
+const FormsPatternSingleTemplate = ({
+  uswds,
+  required,
+  error,
+  label,
+  name,
+}) => {
   const id = Math.floor(Math.random() * 10) + 1;
   const handleClick = () => {
     const header = document
@@ -365,9 +382,9 @@ const FormsPatternSingleTemplate = ({ uswds, required, error, label }) => {
         form-heading="Burn pit S2.1, did you serve in any of there locations?"
         form-description="This is the additional form-description prop"
       >
-        <va-radio-option label="Yes" name="group5" uswds value="1" />
-        <va-radio-option label="No" name="group5" uswds value="2" />
-        <va-radio-option label="Not sure" name="group5" uswds value="3" />
+        <va-radio-option label="Yes" name={name} uswds value="11" />
+        <va-radio-option label="No" name={name} uswds value="22" />
+        <va-radio-option label="Not sure" name={name} uswds value="33" />
 
         <div slot="form-description">
           <p>HTML passed into the form-description slot:</p>
@@ -479,12 +496,14 @@ Internationalization.args = {
 export const FormsPatternSingle = FormsPatternSingleTemplate.bind(null);
 FormsPatternSingle.args = {
   ...defaultArgs,
+  name: 'single1',
 };
 
 export const FormsPatternSingleError = FormsPatternSingleTemplate.bind(null);
 FormsPatternSingleError.args = {
   ...defaultArgs,
   error: 'This is an error message',
+  name: 'single2',
 };
 
 export const FormsPatternMultiple = FormsPatternMultipleTemplate.bind(null);

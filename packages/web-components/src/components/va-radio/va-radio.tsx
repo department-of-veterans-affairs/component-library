@@ -246,7 +246,8 @@ export class VaRadio {
     const headerAriaDescribedbyId = headerAriaDescribedby ? 'header-message' : null;
     const ariaLabeledByIds = 
     `${useFormsPattern && formHeading ? 'form-question' : ''} ${
-      useFormsPattern ? 'form-description' : ''}`.trim() || null;
+      useFormsPattern ? 'form-description' : ''} ${
+      useFormsPattern === 'multiple' ? 'header-message' : ''}`.trim() || null;
 
     if (uswds) {
       const legendClass = classnames({
