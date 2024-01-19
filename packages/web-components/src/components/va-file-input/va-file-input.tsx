@@ -76,7 +76,7 @@ export class VaFileInput {
   /**
    * Whether or not the component will use USWDS v3 styling.
    */
-  @Prop({ reflect: true }) uswds?: boolean = false;
+  @Prop() uswds?: boolean = false;
 
   /**
    * The event emitted when the file input value changes.
