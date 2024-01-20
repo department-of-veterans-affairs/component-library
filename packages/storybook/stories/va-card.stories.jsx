@@ -17,13 +17,16 @@ export default {
 
 const defaultArgs = {
   'show-shadow': false,
+  background: false,
 };
 
 const Template = ({
   'show-shadow': showShadow,
+  background: background,
 }) => (
   <va-card
     show-shadow={showShadow}
+    background={background}
   >
     <p>Example card content</p>
   </va-card>
@@ -34,6 +37,12 @@ Default.args = {
   ...defaultArgs,
 };
 Default.argTypes = propStructure(cardDocs);
+
+export const withBackground = Template.bind(null);
+withBackground.args = {
+  ...defaultArgs,
+  background: true,
+};
 
 export const withDropShadow = Template.bind(null);
 withDropShadow.args = {
