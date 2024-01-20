@@ -1,4 +1,15 @@
 import { Component, Host, h, Prop, Element, State } from '@stencil/core';
+import { iterateAddAttrs, SlotTarget } from '../../utils/slot-child-class-append';
+
+const targetingArray:SlotTarget[] =[
+  { slotName: 'headline',
+    selectorClasses: [["h3","usa-summary-box__heading",true]],
+    selectorId: [['h3', 'summary-box-key-information']]
+  },
+  { slotName: '',
+    selectorClasses: [['a', 'usa-summary-box__link'], ['ul', 'usa-list']],
+  }
+];
 
 /**
  * @componentName Featured content
@@ -35,11 +46,11 @@ export class VaFeaturedContent {
       return
     }
     // add uswds classes
-    // const nodes = this.el.shadowRoot
+    const nodes = this.el.shadowRoot
     //   .querySelectorAll('slot')
     // const headline = nodes[0];
     // const content = nodes[1];
-
+    iterateAddAttrs( targetingArray, nodes);
     
     let childElements = Array.from(this.el.children);
     this.headlineText = childElements.find(element => element.slot === "headline").textContent.trim();
