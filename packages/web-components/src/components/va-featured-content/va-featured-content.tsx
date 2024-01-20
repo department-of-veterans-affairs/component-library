@@ -47,9 +47,6 @@ export class VaFeaturedContent {
     }
     // add uswds classes
     const nodes = this.el.shadowRoot
-    //   .querySelectorAll('slot')
-    // const headline = nodes[0];
-    // const content = nodes[1];
     iterateAddAttrs( targetingArray, nodes);
     
     let childElements = Array.from(this.el.children);
