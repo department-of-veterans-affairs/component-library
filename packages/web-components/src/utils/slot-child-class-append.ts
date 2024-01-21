@@ -89,14 +89,16 @@ export function addIdToSlottedElements(slotEl:HTMLSlotElement, selector:string, 
 // removes the slot attribute from all siblings 
 // and moves them into  the newly created div
 export function wrapSlotElements(slot:HTMLSlotElement, clss:string ) : null{
-    const children:Element[] = slot.assignedElements();
-    const wrapper:HTMLElement = document.createElement('div');
-    if (slot.name) { wrapper.slot = slot.name};
-    children.at(-1).after(wrapper);
-    wrapper.classList.add(clss);
-    for (let i=0; i<children.length; i++   ){ 
-        children[i].removeAttribute('slot');
-        wrapper.appendChild(children[i]);
-   }
+//     const children:Element[] = slot.assignedElements();
+//     const wrapper:HTMLElement = document.createElement('div');
+//     if (slot.name) { wrapper.slot = slot.name};
+//     children.at(-1).after(wrapper);
+//     wrapper.classList.add(clss);
+//     for (let i=0; i<children.length; i++   ){ 
+//         children[i].removeAttribute('slot');
+//         wrapper.appendChild(children[i]);
+//    }
+
+/// temporarily disabling this function
    return; 
 }
