@@ -26,7 +26,9 @@ export function iterateAddAttrs(targetingArray:SlotTarget[], shadow:ShadowRoot) 
             if (childCount >= 1){
                 const firstEl:Element = theSlotEl.assignedElements()[0];
                 const firstTag: string|null = firstEl?.tagName.toUpperCase();
-                if (firstTag !== "DIV" || childCount > 1) { wrapSlotElements(theSlotEl, slot.wrapperClass); }
+                if (firstTag !== "DIV" || childCount > 1) { 
+                   // wrapSlotElements(theSlotEl, slot.wrapperClass); 
+                }
                 if (firstTag  === "DIV" && childCount == 1) { firstEl.classList.add(slot.wrapperClass); }
             } 
         }  
@@ -89,16 +91,14 @@ export function addIdToSlottedElements(slotEl:HTMLSlotElement, selector:string, 
 // removes the slot attribute from all siblings 
 // and moves them into  the newly created div
 export function wrapSlotElements(slot:HTMLSlotElement, clss:string ) : null{
-//     const children:Element[] = slot.assignedElements();
-//     const wrapper:HTMLElement = document.createElement('div');
-//     if (slot.name) { wrapper.slot = slot.name};
-//     children.at(-1).after(wrapper);
-//     wrapper.classList.add(clss);
-//     for (let i=0; i<children.length; i++   ){ 
-//         children[i].removeAttribute('slot');
-//         wrapper.appendChild(children[i]);
-//    }
-
-/// temporarily disabling this function
+    const children:Element[] = slot.assignedElements();
+    const wrapper:HTMLElement = document.createElement('div');
+    if (slot.name) { wrapper.slot = slot.name};
+    children.at(-1).after(wrapper);
+    wrapper.classList.add(clss);
+    for (let i=0; i<children.length; i++   ){ 
+        children[i].removeAttribute('slot');
+        wrapper.appendChild(children[i]);
+   }
    return; 
 }
