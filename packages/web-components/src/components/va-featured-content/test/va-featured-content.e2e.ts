@@ -97,18 +97,22 @@ describe('va-featured-content', () => {
           <div class="usa-summary-box" role="region" aria-label="If I'm a Veteran, can I get VR&amp;E benefits and services?">
             <div class="usa-summary-box__body">
               <slot class="usa-summary-box__heading" name="headline"></slot>
-              <slot class="usa-summary-box__text"></slot>
+              <div class="usa-summary-box__text">
+                <slot class="usa-summary-box__text"></slot>
+              </div>
             </div>
           </div>
         </mock:shadow-root>
-        <h3 slot="headline">If I'm a Veteran, can I get VR&amp;E benefits and services?</h3>
-        <p>You may be eligible for VR&amp;E benefits and services if you're a Veteran, and you meet all of the requirements listed below.</p>
-        <p><strong>All of these must be true. You:</strong></p>
-        <ul>
-          <li>Didn't receive a dishonorable discharge, <strong>and</strong></li>
-          <li>Have a service-connected disability rating of at least 10% from VA, <strong>and</strong></li>
-          <li><a href="#">Apply for VR&amp;E services</a></li>
-        </ul>
+        <h3 slot="headline" class="usa-summary-box__heading" id="summary-box-key-information">If I'm a Veteran, can I get VR&amp;E benefits and services?</h3>
+        <div class="usa-summary-box__text">
+          <p>You may be eligible for VR&amp;E benefits and services if you're a Veteran, and you meet all of the requirements listed below.</p>
+          <p><strong>All of these must be true. You:</strong></p>
+          <ul class="usa-list">
+            <li>Didn't receive a dishonorable discharge, <strong>and</strong></li>
+            <li>Have a service-connected disability rating of at least 10% from VA, <strong>and</strong></li>
+            <li><a href="#" class="usa-summary-box__link">Apply for VR&amp;E services</a></li>
+          </ul>
+        </div>
       </va-featured-content>
     `);
   });
