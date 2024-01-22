@@ -571,10 +571,18 @@
     font-size: rem-override(0.87rem);
   }
 
+  &__preview-heading {
+    padding: rem-override(0.5rem);
+  }
+
   &__preview-image {
     height: rem-override(2.5rem);
     margin-right: rem-override(0.5rem);
     width: rem-override(2.5rem);
     background-size: rem-override(1.5rem);
+  }
+
+  .usa-file-input__input[type] {
+    padding: rem-override(0.5rem);
   }
 }
