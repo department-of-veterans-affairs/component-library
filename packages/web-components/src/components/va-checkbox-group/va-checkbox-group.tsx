@@ -135,8 +135,8 @@ export class VaCheckboxGroup {
                 label
               )}&nbsp;
               {required && <span class="usa-label--required">{i18next.t('required')}</span>}
+              {hint && <div class="usa-hint">{hint}</div>}
             </legend>
-            {hint && <span class="usa-hint">{hint}</span>}
             <span id="checkbox-error-message" role="alert">
               {error && (
                 <Fragment>
@@ -162,8 +162,9 @@ export class VaCheckboxGroup {
               {required && (
                 <span class="required">{i18next.t('required')}</span>
               )}
+              {hint && <div class="hint-text">{hint}</div>}
             </legend>
-            {hint && <span class="hint-text">{hint}</span>}
+            
             <span id="error-message" role="alert">
               {error && (
                 <Fragment>
