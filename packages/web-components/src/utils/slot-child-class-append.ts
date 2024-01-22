@@ -26,6 +26,8 @@ export function iterateAddAttrs(targetingArray:SlotTarget[], shadow:ShadowRoot) 
             if (childCount >= 1){
                 const firstEl:Element = theSlotEl.assignedElements()[0];
                 const firstTag: string|null = firstEl?.tagName.toUpperCase();
+                // this makes the assumption that if there is only one slotted element AND it's a div
+                // that the VFS team has wrapped the content in said div
                 if (firstTag !== "DIV" || childCount > 1) { 
                    wrapSlotElements(theSlotEl, slot.wrapperClass); 
                 }

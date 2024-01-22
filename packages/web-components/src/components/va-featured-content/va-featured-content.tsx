@@ -41,7 +41,7 @@ export class VaFeaturedContent {
     this.headlineText = childElements.find(element => element.slot === "headline").textContent.trim();
   }
 
-  componentDidLoad() {
+   componentDidLoad() {
     if (!this.uswds) {
       return
     }
@@ -58,7 +58,7 @@ export class VaFeaturedContent {
           <div class="usa-summary-box" role="region" aria-label={this.headlineText}>
             <div class="usa-summary-box__body">
               <slot name="headline"></slot>
-              <div class="usa-summary-box__text">
+              <div class="usa-summary-box__text" part="usa-summary-box__text">
                 <slot></slot>
               </div>
             </div>
