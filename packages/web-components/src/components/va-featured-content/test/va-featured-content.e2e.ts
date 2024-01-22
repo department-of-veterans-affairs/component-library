@@ -96,9 +96,9 @@ describe('va-featured-content', () => {
         <mock:shadow-root>
           <div class="usa-summary-box" role="region" aria-label="If I'm a Veteran, can I get VR&amp;E benefits and services?">
             <div class="usa-summary-box__body">
-              <slot class="usa-summary-box__heading" name="headline"></slot>
+              <slot name="headline"></slot>
               <div class="usa-summary-box__text">
-                <slot class="usa-summary-box__text"></slot>
+                <slot></slot>
               </div>
             </div>
           </div>

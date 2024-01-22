@@ -27,7 +27,7 @@ export function iterateAddAttrs(targetingArray:SlotTarget[], shadow:ShadowRoot) 
                 const firstEl:Element = theSlotEl.assignedElements()[0];
                 const firstTag: string|null = firstEl?.tagName.toUpperCase();
                 if (firstTag !== "DIV" || childCount > 1) { 
-                   // wrapSlotElements(theSlotEl, slot.wrapperClass); 
+                   wrapSlotElements(theSlotEl, slot.wrapperClass); 
                 }
                 if (firstTag  === "DIV" && childCount == 1) { firstEl.classList.add(slot.wrapperClass); }
             } 

@@ -48,10 +48,6 @@ export class VaFeaturedContent {
     // add uswds classes
     const nodes = this.el.shadowRoot
     iterateAddAttrs( targetingArray, nodes);
-    
-    let childElements = Array.from(this.el.children);
-    this.headlineText = childElements.find(element => element.slot === "headline").textContent.trim();
-
   }
 
   render() {
