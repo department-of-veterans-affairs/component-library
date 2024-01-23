@@ -260,7 +260,11 @@ export namespace Components {
     }
     interface VaCard {
         /**
-          * If `true`, a drop-shadow will be displayed
+          * If `true`, the card will have a gray background.
+         */
+        "background"?: boolean;
+        /**
+          * If `true`, a drop-shadow will be displayed with a white background.
          */
         "showShadow"?: boolean;
     }
@@ -328,6 +332,14 @@ export namespace Components {
          */
         "error"?: string;
         /**
+          * The content of the heading if `useFormsPattern` and `uswds` are true.
+         */
+        "formHeading"?: string;
+        /**
+          * The heading level for the heading if `useFormsPattern` and `uswds` are true.
+         */
+        "formHeadingLevel"?: number;
+        /**
           * Optional hint text.
          */
         "hint"?: string;
@@ -343,6 +355,10 @@ export namespace Components {
           * Whether or not this input field is required.
          */
         "required"?: boolean;
+        /**
+          * Enabling this will add a heading and description for integrating into the forms pattern. Accepts `single` or `multiple` to indicate if the form is a single input or will have multiple inputs. `uswds` should be true.
+         */
+        "useFormsPattern"?: string;
         /**
           * Whether or not the component will use USWDS v3 styling.
          */
@@ -2145,7 +2161,11 @@ declare namespace LocalJSX {
     }
     interface VaCard {
         /**
-          * If `true`, a drop-shadow will be displayed
+          * If `true`, the card will have a gray background.
+         */
+        "background"?: boolean;
+        /**
+          * If `true`, a drop-shadow will be displayed with a white background.
          */
         "showShadow"?: boolean;
     }
@@ -2221,6 +2241,14 @@ declare namespace LocalJSX {
          */
         "error"?: string;
         /**
+          * The content of the heading if `useFormsPattern` and `uswds` are true.
+         */
+        "formHeading"?: string;
+        /**
+          * The heading level for the heading if `useFormsPattern` and `uswds` are true.
+         */
+        "formHeadingLevel"?: number;
+        /**
           * Optional hint text.
          */
         "hint"?: string;
@@ -2240,6 +2268,10 @@ declare namespace LocalJSX {
           * Whether or not this input field is required.
          */
         "required"?: boolean;
+        /**
+          * Enabling this will add a heading and description for integrating into the forms pattern. Accepts `single` or `multiple` to indicate if the form is a single input or will have multiple inputs. `uswds` should be true.
+         */
+        "useFormsPattern"?: string;
         /**
           * Whether or not the component will use USWDS v3 styling.
          */

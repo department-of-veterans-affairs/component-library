@@ -45,7 +45,7 @@ describe('va-checkbox-group', () => {
     await page.setContent('<va-checkbox-group hint="This is hint text" />');
 
     // Render the hint text
-    const hintTextElement = await page.find('va-checkbox-group >>> span.hint-text');
+    const hintTextElement = await page.find('va-checkbox-group >>> div.hint-text');
     expect(hintTextElement.innerText).toContain('This is hint text');
   });
 
@@ -340,6 +340,54 @@ describe('va-checkbox-group', () => {
         </span>
       </legend>
    `);
+  });
+
+  it('uswds useFormsPattern displays header for the single field pattern', async () => {
+    const page = await newE2EPage();
+    await page.setContent(
+      `
+      <va-checkbox-group label="This is a label" uswds use-forms-pattern="single" form-heading-level="1" form-heading="This is a form header" form-description="This is a form description" uswds>
+        <va-checkbox uswds label="Option 1" value="1"></va-checkbox>
+        <va-checkbox uswds label="Option 2" value="2"></va-checkbox>
+      </va-checkbox-group>
+    `,);
+
+    const formHeader = await page.find('va-checkbox-group >>> h1');
+    expect(formHeader.innerText).toEqual('This is a form header');
+  });
+
+  it('uswds useFormsPattern displays header for the multiple fields pattern', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-checkbox-group label="This is a label" uswds use-forms-pattern="multiple" form-heading-level="1" form-heading="This is a form header" form-description="This is a form description"/>');
+
+    const formHeader = await page.find('va-checkbox-group >>> h1');
+    expect(formHeader.innerText).toEqual('This is a form header');
+  });
+
+  it('uswds useFormsPattern does not display header if "single" or "multiple" is not indicated', async () => {
+    const page = await newE2EPage();
+    await page.setContent(
+      `
+      <va-checkbox-group label="This is a label" uswds use-forms-pattern="multiple" form-heading-level="1" form-heading="This is a form header" form-description="This is a form description" uswds>
+        <va-checkbox uswds label="Option 1" value="1"></va-checkbox>
+        <va-checkbox uswds label="Option 2" value="2"></va-checkbox>
+      </va-checkbox-group>
+    `,);
+
+    const formHeader = await page.find('va-checkbox-group >>> h1');
+    expect(formHeader.innerText).toEqual('This is a form header');
+  });
+
+  it('uswds useFormsPattern passes an aXe check', async () => {
+    const page = await newE2EPage();
+    await page.setContent(
+      `
+      <va-checkbox-group label="This is a label" uswds use-forms-pattern="multiple" form-heading-level="1" form-heading="This is a form header" form-description="This is a form description" uswds>
+        <va-checkbox uswds label="Option 1" value="1"></va-checkbox>
+        <va-checkbox uswds label="Option 2" value="2"></va-checkbox>
+      </va-checkbox-group>
+    `,);
+    await axeCheck(page);
   });
 
 });
