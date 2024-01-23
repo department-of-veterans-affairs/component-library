@@ -196,7 +196,7 @@ export class VaAlert {
               onClick={this.handleAlertBodyClick.bind(this)}
               role="presentation"
             >
-              <slot name="headline"></slot>
+               {!slim && <slot name="headline"></slot>}
               <slot></slot>
             </div>
           </div>
