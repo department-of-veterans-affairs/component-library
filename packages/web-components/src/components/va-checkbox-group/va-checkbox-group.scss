@@ -8,6 +8,7 @@
 
 @import '../../mixins/uswds-error-border.scss';
 @import '../../global/formation_overrides';
+@import '../../mixins/focusable.css';
 
 :host {
   display: block;

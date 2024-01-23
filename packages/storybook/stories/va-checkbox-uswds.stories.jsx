@@ -30,14 +30,14 @@ const defaultArgs = {
 };
 
 const vaCheckbox = args => {
-  const {   
+  const {
     checked,
     description,
     'enable-analytics': enableAnalytics,
     checkboxDescription,
     error,
     label,
-    required, 
+    required,
     uswds,
     hint,
     tile,
@@ -59,8 +59,8 @@ const vaCheckbox = args => {
       onBlur={e => console.log(e)}
       message-aria-describedby={messageAriaDescribedBy}
     />
-  )
-}
+  );
+};
 
 const Template = args => vaCheckbox(args);
 
@@ -73,31 +73,49 @@ const I18nTemplate = args => {
 
   return (
     <div>
-      <va-button uswds onClick={e => setLang('es')} style={{fontSize: '16px'}} text="Español"/>
-      <va-button uswds onClick={e => setLang('en')} style={{fontSize: '16px'}} text="English"/>
-      <va-button uswds onClick={e => setLang('tl')} style={{fontSize: '16px'}} text="Tagalog"/>
-      <div style={{marginTop: '20px'}}>
-        {vaCheckbox(args)}
-      </div>
+      <va-button
+        uswds
+        onClick={e => setLang('es')}
+        style={{ fontSize: '16px' }}
+        text="Español"
+      />
+      <va-button
+        uswds
+        onClick={e => setLang('en')}
+        style={{ fontSize: '16px' }}
+        text="English"
+      />
+      <va-button
+        uswds
+        onClick={e => setLang('tl')}
+        style={{ fontSize: '16px' }}
+        text="Tagalog"
+      />
+      <div style={{ marginTop: '20px' }}>{vaCheckbox(args)}</div>
     </div>
-)};
+  );
+};
 
 export const Default = Template.bind(null);
 Default.args = { ...defaultArgs };
 Default.argTypes = propStructure(checkboxDocs);
 
 export const Tile = Template.bind(null);
-Tile.args = { ...defaultArgs, tile: true, checkboxDescription: 'This is optional text that can be used to describe the label in more detail.' };
+Tile.args = {
+  ...defaultArgs,
+  tile: true,
+  checkboxDescription:
+    'This is optional text that can be used to describe the label in more detail.',
+};
 
 export const Checked = Template.bind(null);
 Checked.args = { ...defaultArgs, checked: true };
-
 
 export const WithHintText = Template.bind(null);
 WithHintText.args = {
   ...defaultArgs,
   description: 'Adding some descriptive text above the checkbox.',
-  hint: "This is example hint text",
+  hint: 'This is example hint text',
 };
 
 export const WithDescriptionString = Template.bind(null);
@@ -119,9 +137,8 @@ export const WithDescriptionJSX = props => (
 WithDescriptionJSX.args = { ...defaultArgs };
 
 export const OnBackground = props => (
-  <div style={{background: '#f0f0f0', padding: '30px 5px'}}>
-    <va-checkbox {...props} onBlur={e => console.log(e)}>
-    </va-checkbox>
+  <div style={{ background: '#f0f0f0', padding: '30px 5px' }}>
+    <va-checkbox {...props} onBlur={e => console.log(e)}></va-checkbox>
   </div>
 );
 OnBackground.args = { ...defaultArgs };
