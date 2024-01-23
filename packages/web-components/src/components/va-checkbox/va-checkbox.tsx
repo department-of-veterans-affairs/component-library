@@ -185,7 +185,6 @@ export class VaCheckbox {
       name
     } = this;
 
-
     const hasDescription = description || !!this.el.querySelector('[slot="description"]');
 
     if (uswds) {
@@ -203,6 +202,7 @@ export class VaCheckbox {
         hasDescription ? 'description' : '',
         // Return null so we don't add the attribute if we have an empty string
       ].filter(Boolean).join(' ').trim() || null;
+
       return (
         <Host>
           {description ?
