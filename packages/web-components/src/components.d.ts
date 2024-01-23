@@ -70,7 +70,7 @@ export namespace Components {
     }
     interface VaAlert {
         /**
-          * If `true`, renders the alert with only a background color corresponding to the status - no left border.
+          * If `true`, renders the alert with only a background color corresponding to the status - no left border. (v1 only)
          */
         "backgroundOnly"?: boolean;
         /**
@@ -1927,7 +1927,7 @@ declare namespace LocalJSX {
     }
     interface VaAlert {
         /**
-          * If `true`, renders the alert with only a background color corresponding to the status - no left border.
+          * If `true`, renders the alert with only a background color corresponding to the status - no left border. (v1 only)
          */
         "backgroundOnly"?: boolean;
         /**
