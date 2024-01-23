@@ -185,7 +185,7 @@ export class VaFileInput {
           <span id="input-error-message" role="alert">
             {error && (
               <Fragment>
-                <span class="sr-only">{i18next.t('error')}</span>
+                <span class="usa-sr-only">{i18next.t('error')}</span>
                 <span class="usa-error-message">{error}</span>
               </Fragment>
             )}
