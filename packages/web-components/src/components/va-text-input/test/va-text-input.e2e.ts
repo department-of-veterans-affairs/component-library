@@ -556,9 +556,7 @@ describe('va-text-input', () => {
 
   it('uswds adds a character limit with descriptive text', async () => {
     const page = await newE2EPage();
-    await page.setContent(
-      '<va-text-input charcount maxlength="3" value="22" uswds />',
-    );
+    await page.setContent('<va-text-input maxlength="3" value="22" uswds />');
 
     // Level-setting expectations
     const inputEl = await page.find('va-text-input >>> input');
@@ -581,6 +579,27 @@ describe('va-text-input', () => {
       '2 characters left',
     );
   });
+
+   it('uswds respects the maxlength character limit', async () => {
+     const page = await newE2EPage();
+     await page.setContent('<va-text-input maxlength="2" value="22" uswds />');
+
+     // Level-setting expectations
+     const inputEl = await page.find('va-text-input >>> input');
+     expect(await inputEl.getProperty('value')).toBe('22');
+     const message = await page.find(
+       'va-text-input >>> span.usa-character-count__status',
+     );
+     expect(message.innerText).toBe('0 characters left');
+
+     // Test the functionality
+     await inputEl.press('2');
+     expect(await inputEl.getProperty('value')).toBe('22');
+     expect(
+       (await page.find('va-text-input >>> span.usa-character-count__status'))
+         .innerText,
+     ).toContain('0 characters left');
+   });
 
   it('uswds ignores negative maxlength values', async () => {
     const page = await newE2EPage();
@@ -686,22 +705,20 @@ describe('va-text-input', () => {
     expect(await inputEl.getProperty('autocomplete')).toBe('email');
   });
 
-  it('uswds shows chars allowed on load if maxlength and charcount set', async () => {
+  it('uswds shows chars allowed on load if maxlength set', async () => {
     const page = await newE2EPage();
-    await page.setContent(
-      '<va-text-input uswds charcount maxlength="10" />'
-    );
+    await page.setContent('<va-text-input uswds maxlength="10" />');
 
-    const span = await page.find('va-text-input >>> span.usa-character-count__status')
+    const span = await page.find(
+      'va-text-input >>> span.usa-character-count__status',
+    );
     expect(span.innerText).toEqual('10 characters allowed');
   });
 
   it('uswds shows chars left if maxlength set', async () => {
     const page = await newE2EPage();
 
-    await page.setContent(
-      '<va-text-input uswds charcount maxlength="10"/>'
-    );
+    await page.setContent('<va-text-input uswds maxlength="10"/>');
 
     const inputEl = await page.find('va-text-input >>> input');
     await inputEl.type('Hello');
@@ -709,27 +726,6 @@ describe('va-text-input', () => {
 
     expect(span.innerText).toEqual('5 characters left');
 
-  });
-
-  it('uswds shows chars over limit as error and sets aria-invalid attribute', async () => {
-    const page = await newE2EPage();
-
-    await page.setContent(
-      '<va-text-input uswds charcount maxlength="10"/>'
-    );
-
-    const inputEl = await page.find('va-text-input >>> input');
-    await inputEl.type('This is too long');
-
-    const messageSpan = await page.find('va-text-input >>> span.usa-character-count__status');
-    expect(messageSpan.innerText).toEqual('6 characters over limit');
-
-    const {color} = await messageSpan.getComputedStyle()
-    expect(color).toEqual(
-      'rgb(181, 9, 9)',
-    );
-
-    expect(inputEl.getAttribute('aria-invalid')).toBe("true");
   });
 
   it('uswds charcount and maxlength text does not display on memorable date', async () => {

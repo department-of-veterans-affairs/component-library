@@ -311,55 +311,66 @@ export class VaTextInput {
         <Host>
           {formsHeading}
           <div class="input-wrap">
-          {label && (
-            <label htmlFor="inputField" id="input-label" class={labelClass} part="label">
-              {label}
-              {required && (
-                <span class="usa-label--required">
-                  {' '}
-                  {i18next.t('required')}
-                </span>
-              )}
-              {hint && <span class="usa-hint">{hint}</span>}
-            </label>
-          )}
-          <slot></slot>
-          <span id="input-error-message" role="alert">
-            {error && (
-              <Fragment>
-                <span class="usa-sr-only">{i18next.t('error')}</span>
-                <span class="usa-error-message">{error}</span>
-              </Fragment>
+            {label && (
+              <label
+                htmlFor="inputField"
+                id="input-label"
+                class={labelClass}
+                part="label"
+              >
+                {label}
+                {required && (
+                  <span class="usa-label--required">
+                    {' '}
+                    {i18next.t('required')}
+                  </span>
+                )}
+                {hint && <span class="usa-hint">{hint}</span>}
+              </label>
             )}
-          </span>
-          <input
-            class={inputClass}
-            id="inputField"
-            type={type}
-            value={value}
-            onInput={handleInput}
-            onBlur={handleBlur}
-            aria-describedby={ariaDescribedbyIds}
-            aria-labelledby={ariaLabeledByIds}
-            aria-invalid={invalid || error || charCountTooHigh ? 'true' : 'false'}
-            inputmode={inputmode ? inputmode : undefined}
-            maxlength={maxlength ? undefined : maxlength}
-            pattern={pattern}
-            name={name}
-            autocomplete={autocomplete}
-            required={required || null}
-            part="input"
-          />
-          {messageAriaDescribedby && (
-            <span id="input-message" class="sr-only dd-privacy-hidden">
-              {messageAriaDescribedby}
+            <slot></slot>
+            <span id="input-error-message" role="alert">
+              {error && (
+                <Fragment>
+                  <span class="usa-sr-only">{i18next.t('error')}</span>
+                  <span class="usa-error-message">{error}</span>
+                </Fragment>
+              )}
             </span>
-          )}
-          {isMessageDisplayed && maxlength && (
-            <span id="charcount-message" class={messageClass} aria-live="polite">
-              {getCharacterMessage(value, maxlength)}
-            </span>
-          )}
+            <input
+              class={inputClass}
+              id="inputField"
+              type={type}
+              value={value}
+              onInput={handleInput}
+              onBlur={handleBlur}
+              aria-describedby={ariaDescribedbyIds}
+              aria-labelledby={ariaLabeledByIds}
+              aria-invalid={
+                invalid || error || charCountTooHigh ? 'true' : 'false'
+              }
+              inputmode={inputmode ? inputmode : undefined}
+              maxlength={maxlength}
+              pattern={pattern}
+              name={name}
+              autocomplete={autocomplete}
+              required={required || null}
+              part="input"
+            />
+            {messageAriaDescribedby && (
+              <span id="input-message" class="sr-only dd-privacy-hidden">
+                {messageAriaDescribedby}
+              </span>
+            )}
+            {isMessageDisplayed && maxlength && (
+              <span
+                id="charcount-message"
+                class={messageClass}
+                aria-live="polite"
+              >
+                {getCharacterMessage(value, maxlength)}
+              </span>
+            )}
           </div>
         </Host>
       );
