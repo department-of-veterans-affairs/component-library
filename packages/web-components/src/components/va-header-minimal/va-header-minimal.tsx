@@ -10,17 +10,18 @@ import {
 import vaSeal from '../../assets/va-seal.svg';
 
 /**
- * @componentName Minimal Header
+ * @componentName Header - minimal
  * @maturityCategory caution
  * @maturityLevel candidate
+ * @guidanceHref header/header-minimal
  */
 
 @Component({
-  tag: 'va-minimal-header',
-  styleUrl: 'va-minimal-header.scss',
+  tag: 'va-header-minimal',
+  styleUrl: 'va-header-minimal.scss',
   shadow: true,
 })
-export class VaMinimalHeader {
+export class VaHeaderMinimal {
   @Element() el: HTMLElement;
 
   /**
