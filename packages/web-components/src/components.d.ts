@@ -947,6 +947,14 @@ export namespace Components {
          */
         "error"?: string;
         /**
+          * The content of the heading if `useFormsPattern` and `uswds` are true.
+         */
+        "formHeading"?: string;
+        /**
+          * The heading level for the heading if `useFormsPattern` and `uswds` are true.
+         */
+        "formHeadingLevel"?: number;
+        /**
           * An optional message that will be read by screen readers when the header is focused. The label-header-level prop must be set for this to be active.
          */
         "headerAriaDescribedby"?: string;
@@ -966,6 +974,10 @@ export namespace Components {
           * Whether or not this input field is required.
          */
         "required"?: boolean;
+        /**
+          * Enabling this will add a heading and description for integrating into the forms pattern. Accepts `single` or `multiple` to indicate if the form is a single input or will have multiple inputs. `uswds` should be true.
+         */
+        "useFormsPattern"?: string;
         /**
           * Whether or not the component will use USWDS v3 styling.
          */
@@ -2976,6 +2988,14 @@ declare namespace LocalJSX {
          */
         "error"?: string;
         /**
+          * The content of the heading if `useFormsPattern` and `uswds` are true.
+         */
+        "formHeading"?: string;
+        /**
+          * The heading level for the heading if `useFormsPattern` and `uswds` are true.
+         */
+        "formHeadingLevel"?: number;
+        /**
           * An optional message that will be read by screen readers when the header is focused. The label-header-level prop must be set for this to be active.
          */
         "headerAriaDescribedby"?: string;
@@ -3003,6 +3023,10 @@ declare namespace LocalJSX {
           * Whether or not this input field is required.
          */
         "required"?: boolean;
+        /**
+          * Enabling this will add a heading and description for integrating into the forms pattern. Accepts `single` or `multiple` to indicate if the form is a single input or will have multiple inputs. `uswds` should be true.
+         */
+        "useFormsPattern"?: string;
         /**
           * Whether or not the component will use USWDS v3 styling.
          */
