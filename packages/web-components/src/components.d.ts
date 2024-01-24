@@ -70,7 +70,7 @@ export namespace Components {
     }
     interface VaAlert {
         /**
-          * If `true`, renders the alert with only a background color corresponding to the status - no left border.
+          * If `true`, renders the alert with only a background color corresponding to the status - no left border. (v1 only)
          */
         "backgroundOnly"?: boolean;
         /**
@@ -332,6 +332,14 @@ export namespace Components {
          */
         "error"?: string;
         /**
+          * The content of the heading if `useFormsPattern` and `uswds` are true.
+         */
+        "formHeading"?: string;
+        /**
+          * The heading level for the heading if `useFormsPattern` and `uswds` are true.
+         */
+        "formHeadingLevel"?: number;
+        /**
           * Optional hint text.
          */
         "hint"?: string;
@@ -347,6 +355,10 @@ export namespace Components {
           * Whether or not this input field is required.
          */
         "required"?: boolean;
+        /**
+          * Enabling this will add a heading and description for integrating into the forms pattern. Accepts `single` or `multiple` to indicate if the form is a single input or will have multiple inputs. `uswds` should be true.
+         */
+        "useFormsPattern"?: string;
         /**
           * Whether or not the component will use USWDS v3 styling.
          */
@@ -423,6 +435,10 @@ export namespace Components {
          */
         "label"?: string;
         /**
+          * Optionally allow multiple files (USWDS Only)
+         */
+        "multiple"?: boolean;
+        /**
           * The name for the input element.
          */
         "name"?: string;
@@ -430,6 +446,10 @@ export namespace Components {
           * Sets the input to required and renders the (*Required) text.
          */
         "required"?: boolean;
+        /**
+          * Whether or not the component will use USWDS v3 styling.
+         */
+        "uswds"?: boolean;
     }
     interface VaIcon {
         /**
@@ -1213,10 +1233,6 @@ export namespace Components {
          */
         "autocomplete"?: string;
         /**
-          * Whether the component should show a character count message. Has no effect without uswds and maxlength being set.
-         */
-        "charcount"?: boolean;
-        /**
           * Emit component-library-analytics events on the blur event.
          */
         "enableAnalytics"?: boolean;
@@ -1927,7 +1943,7 @@ declare namespace LocalJSX {
     }
     interface VaAlert {
         /**
-          * If `true`, renders the alert with only a background color corresponding to the status - no left border.
+          * If `true`, renders the alert with only a background color corresponding to the status - no left border. (v1 only)
          */
         "backgroundOnly"?: boolean;
         /**
@@ -2241,6 +2257,14 @@ declare namespace LocalJSX {
          */
         "error"?: string;
         /**
+          * The content of the heading if `useFormsPattern` and `uswds` are true.
+         */
+        "formHeading"?: string;
+        /**
+          * The heading level for the heading if `useFormsPattern` and `uswds` are true.
+         */
+        "formHeadingLevel"?: number;
+        /**
           * Optional hint text.
          */
         "hint"?: string;
@@ -2260,6 +2284,10 @@ declare namespace LocalJSX {
           * Whether or not this input field is required.
          */
         "required"?: boolean;
+        /**
+          * Enabling this will add a heading and description for integrating into the forms pattern. Accepts `single` or `multiple` to indicate if the form is a single input or will have multiple inputs. `uswds` should be true.
+         */
+        "useFormsPattern"?: string;
         /**
           * Whether or not the component will use USWDS v3 styling.
          */
@@ -2348,6 +2376,10 @@ declare namespace LocalJSX {
          */
         "label"?: string;
         /**
+          * Optionally allow multiple files (USWDS Only)
+         */
+        "multiple"?: boolean;
+        /**
           * The name for the input element.
          */
         "name"?: string;
@@ -2363,6 +2395,10 @@ declare namespace LocalJSX {
           * Sets the input to required and renders the (*Required) text.
          */
         "required"?: boolean;
+        /**
+          * Whether or not the component will use USWDS v3 styling.
+         */
+        "uswds"?: boolean;
     }
     interface VaIcon {
         /**
@@ -3285,10 +3321,6 @@ declare namespace LocalJSX {
           * Allows the browser to automatically complete the input.
          */
         "autocomplete"?: string;
-        /**
-          * Whether the component should show a character count message. Has no effect without uswds and maxlength being set.
-         */
-        "charcount"?: boolean;
         /**
           * Emit component-library-analytics events on the blur event.
          */
