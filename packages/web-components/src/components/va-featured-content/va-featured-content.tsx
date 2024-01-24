@@ -45,7 +45,7 @@ export class VaFeaturedContent {
     if (!this.uswds) {
       return
     }
-    // add uswds classes
+    /** Add uswds classes */
     const nodes = this.el.shadowRoot
     iterateAddAttrs( targetingArray, nodes);
   }
