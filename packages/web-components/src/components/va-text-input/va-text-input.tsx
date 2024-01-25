@@ -151,12 +151,6 @@ export class VaTextInput {
   @Prop({reflect: true}) uswds?: boolean = false;
 
   /**
-   * Whether the component should show a character count message.
-   * Has no effect without uswds and maxlength being set.
-   */
-  @Prop() charcount?: boolean = false;
-
-  /**
    * Enabling this will add a heading and description for integrating into the forms pattern. Accepts `single` or `multiple` to indicate if the form is a single input or will have multiple inputs. `uswds` should be true.
    */
   @Prop() useFormsPattern?: string;
@@ -255,7 +249,6 @@ export class VaTextInput {
       success,
       messageAriaDescribedby,
       width,
-      charcount,
       useFormsPattern,
       formHeadingLevel,
       formHeading,
@@ -271,15 +264,15 @@ export class VaTextInput {
     const ariaDescribedbyIds =
       `${messageAriaDescribedby ? 'input-message' : ''} ${
         error ? 'input-error-message' : ''} ${
-        charcount && maxlength ? 'charcount-message' : ''}`.trim() || null; // Null so we don't add the attribute if we have an empty string
+        maxlength ? 'charcount-message' : ''}`.trim() || null; // Null so we don't add the attribute if we have an empty string
 
-    const ariaLabeledByIds = 
-    `${useFormsPattern && formHeading ? 'form-question' : ''} ${ 
+    const ariaLabeledByIds =
+    `${useFormsPattern && formHeading ? 'form-question' : ''} ${
       useFormsPattern ? 'form-description' : ''} ${
       useFormsPattern && label ? 'input-label' : ''}`.trim() || null;
 
       if (uswds) {
-      const charCountTooHigh = charcount && (value?.length > maxlength);
+      const charCountTooHigh = maxlength && (value?.length > maxlength);
       const labelClass = classnames({
         'usa-label': true,
         'usa-label--error': error,
@@ -292,8 +285,8 @@ export class VaTextInput {
       });
       const messageClass = classnames({
         'usa-hint': true,
-        'usa-character-count__status': charcount,
-        'usa-character-count__status--invalid': charcount && maxlength && value?.length > maxlength
+        'usa-character-count__status': maxlength,
+        'usa-character-count__status--invalid': maxlength && value?.length > maxlength
       });
 
       const isFormsPattern = useFormsPattern === 'single' || useFormsPattern === 'multiple' ? true : false;
@@ -313,65 +306,71 @@ export class VaTextInput {
           </Fragment>
         )
       }
-      
+
       return (
         <Host>
           {formsHeading}
           <div class="input-wrap">
-          {label && (
-            <label htmlFor="inputField" id="input-label" class={labelClass} part="label">
-              {label}
-              {required && (
-                <span class="usa-label--required">
-                  {' '}
-                  {i18next.t('required')}
-                </span>
-              )}
-              {hint && <span class="usa-hint">{hint}</span>}
-            </label>
-          )}
-          <slot></slot>
-          <span id="input-error-message" role="alert">
-            {error && (
-              <Fragment>
-                <span class="usa-sr-only">{i18next.t('error')}</span>
-                <span class="usa-error-message">{error}</span>
-              </Fragment>
+            {label && (
+              <label
+                htmlFor="inputField"
+                id="input-label"
+                class={labelClass}
+                part="label"
+              >
+                {label}
+                {required && (
+                  <span class="usa-label--required">
+                    {' '}
+                    {i18next.t('required')}
+                  </span>
+                )}
+                {hint && <span class="usa-hint">{hint}</span>}
+              </label>
             )}
-          </span>
-          <input
-            class={inputClass}
-            id="inputField"
-            type={type}
-            value={value}
-            onInput={handleInput}
-            onBlur={handleBlur}
-            aria-describedby={ariaDescribedbyIds}
-            aria-labelledby={ariaLabeledByIds}
-            aria-invalid={invalid || error || charCountTooHigh ? 'true' : 'false'}
-            inputmode={inputmode ? inputmode : undefined}
-            maxlength={charcount ? undefined : maxlength}
-            pattern={pattern}
-            name={name}
-            autocomplete={autocomplete}
-            required={required || null}
-            part="input"
-          />
-          {messageAriaDescribedby && (
-            <span id="input-message" class="sr-only dd-privacy-hidden">
-              {messageAriaDescribedby}
+            <slot></slot>
+            <span id="input-error-message" role="alert">
+              {error && (
+                <Fragment>
+                  <span class="usa-sr-only">{i18next.t('error')}</span>
+                  <span class="usa-error-message">{error}</span>
+                </Fragment>
+              )}
             </span>
-          )}
-          {isMessageDisplayed && !charcount && maxlength && value?.length >= maxlength && (
-              <span id="maxlength-message" class={messageClass} aria-live="polite">
-              {i18next.t('max-chars', { length: maxlength })}
+            <input
+              class={inputClass}
+              id="inputField"
+              type={type}
+              value={value}
+              onInput={handleInput}
+              onBlur={handleBlur}
+              aria-describedby={ariaDescribedbyIds}
+              aria-labelledby={ariaLabeledByIds}
+              aria-invalid={
+                invalid || error || charCountTooHigh ? 'true' : 'false'
+              }
+              inputmode={inputmode ? inputmode : undefined}
+              maxlength={maxlength}
+              pattern={pattern}
+              name={name}
+              autocomplete={autocomplete}
+              required={required || null}
+              part="input"
+            />
+            {messageAriaDescribedby && (
+              <span id="input-message" class="sr-only dd-privacy-hidden">
+                {messageAriaDescribedby}
               </span>
-          )}
-          {isMessageDisplayed && charcount && maxlength && (
-            <span id="charcount-message" class={messageClass} aria-live="polite">
-              {getCharacterMessage(value, maxlength)}
-            </span>
-          )}
+            )}
+            {isMessageDisplayed && maxlength && (
+              <span
+                id="charcount-message"
+                class={messageClass}
+                aria-live="polite"
+              >
+                {getCharacterMessage(value, maxlength)}
+              </span>
+            )}
           </div>
         </Host>
       );

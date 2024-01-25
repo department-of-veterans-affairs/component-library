@@ -1,14 +1,17 @@
 /* eslint-disable i18next/no-literal-string */
-import { 
-  Component, 
-  Element, 
-  Host, 
-  h, 
-  Prop, 
+import {
+  Component,
+  Element,
+  Host,
+  h,
+  Prop,
   Fragment,
   Event,
-  EventEmitter
+  EventEmitter,
 } from '@stencil/core';
+import classnames from 'classnames';
+import i18next from 'i18next';
+import { fileInput } from './va-file-input-upgrader';
 
 /**
  * @componentName File input
@@ -19,10 +22,9 @@ import {
 
 @Component({
   tag: 'va-file-input',
-  styleUrl: 'va-file-input.css',
+  styleUrl: 'va-file-input.scss',
   shadow: true,
 })
-
 export class VaFileInput {
   @Element() el: HTMLElement;
 
@@ -62,9 +64,19 @@ export class VaFileInput {
   @Prop() hint?: string;
 
   /**
+   * Optionally allow multiple files (USWDS Only)
+   */
+  @Prop() multiple?: boolean = false;
+
+  /**
    * Emit component-library-analytics events on the file input change event.
    */
-   @Prop() enableAnalytics?: boolean = false;
+  @Prop() enableAnalytics?: boolean = false;
+
+  /**
+   * Whether or not the component will use USWDS v3 styling.
+   */
+  @Prop() uswds?: boolean = false;
 
   /**
    * The event emitted when the file input value changes.
@@ -75,16 +87,16 @@ export class VaFileInput {
    * The event used to track usage of the component. This is emitted when the
    * file input changes and enableAnalytics is true.
    */
-   @Event({
+  @Event({
     eventName: 'component-library-analytics',
     composed: true,
     bubbles: true,
   })
   componentLibraryAnalytics: EventEmitter;
 
-  private handleChange = (e: Event) => {
+  private handleChange = (e: Event, files?: any) => {
     const target = e.target as HTMLInputElement;
-    this.vaChange.emit({files: target.files});
+    this.vaChange.emit({ files: target.files || files });
     /**
      * Clear the original input, otherwise events will be triggered
      * with empty file arrays and sometimes uploading a file twice will
@@ -97,15 +109,15 @@ export class VaFileInput {
         componentName: 'va-file-input',
         action: 'change',
         details: {
-          label: this.label
+          label: this.label,
         },
       });
     }
   };
 
-  private handleButtonClick = () => { 
+  private handleButtonClick = () => {
     this.el.shadowRoot.getElementById('fileInputField').click();
-  }
+  };
 
   /**
    * Makes sure the button text always has a value.
@@ -115,46 +127,110 @@ export class VaFileInput {
     return this.buttonText ? this.buttonText : 'Upload file';
   };
 
+  componentDidLoad() {
+    if (this.uswds) fileInput.init(this.el);
+  }
+
+  connectedCallback() {
+    if (this.uswds) {
+      this.el.addEventListener('change', this.handleChange);
+    }
+  }
+
+  disconnectedCallback() {
+    if (this.uswds) {
+      this.el.removeEventListener('change', this.handleChange);
+    }
+  }
+
   render() {
-    const { 
-      label,
-      name, 
-      required, 
-      accept,
-      error,
-      hint,
-    } = this;
-    
+    const { label, name, required, accept, error, hint, multiple, uswds } =
+      this;
+
     const text = this.getButtonText();
 
-    return (
-      <Host>
-        {label && (
-          <label htmlFor="fileInputButton">
-            {label}
-            {required && <span class="required">(*Required)</span>}
-          </label>
-        )}
-        {hint && <span class="hint-text">{hint}</span>}
-        <slot></slot>
-        <span id="error-message" role="alert">
-          {error && (
-            <Fragment>
-              <span class="sr-only">Error</span> 
-              {error}
-            </Fragment>
+    if (uswds) {
+      const labelClass = classnames({
+        'usa-label': true,
+        'usa-label--error': error,
+      });
+      const inputClass = classnames({
+        'usa-file-input': true,
+        'usa-input--error': error,
+      });
+      const ariaDescribedbyIds =
+        `${hint ? 'input-hint-message' : ''} ${
+          error ? 'input-error-message' : ''
+        }`.trim() || null; // Null so we don't add the attribute if we have an empty string
+
+      return (
+        <Host>
+          {label && (
+            <label htmlFor="fileInputButton" class={labelClass} part="label">
+              {label}
+              {required && (
+                <span class="usa-label--required">
+                  {' '}
+                  {i18next.t('required')}
+                </span>
+              )}
+            </label>
           )}
-        </span>
-        <va-button
-          id="fileInputButton"
-          aria-label={label}
-          label={label}
-          onClick={this.handleButtonClick}
-          secondary
-          text={text}
-          aria-describedby={error ? 'error-message' : undefined}
-        />
-        <input
+          {hint && (
+            <span class="usa-hint" id="input-hint-message">
+              {hint}
+            </span>
+          )}
+          <slot></slot>
+          <span id="input-error-message" role="alert">
+            {error && (
+              <Fragment>
+                <span class="usa-sr-only">{i18next.t('error')}</span>
+                <span class="usa-error-message">{error}</span>
+              </Fragment>
+            )}
+          </span>
+          <input
+            id="fileInputField"
+            class={inputClass}
+            type="file"
+            name={name}
+            accept={accept}
+            multiple={multiple}
+            aria-describedby={ariaDescribedbyIds}
+            onChange={this.handleChange}
+          />
+        </Host>
+      );
+    } else {
+      return (
+        <Host>
+          {label && (
+            <label htmlFor="fileInputButton">
+              {label}
+              {required && <span class="required">(*Required)</span>}
+            </label>
+          )}
+          {hint && <span class="hint-text">{hint}</span>}
+          <slot></slot>
+          <span id="error-message" role="alert">
+            {error && (
+              <Fragment>
+                <span class="sr-only">Error</span>
+                {error}
+              </Fragment>
+            )}
+          </span>
+          <va-button
+            id="fileInputButton"
+            aria-label={label}
+            label={label}
+            onClick={this.handleButtonClick}
+            secondary
+            text={text}
+            aria-describedby={error ? 'error-message' : undefined}
+          />
+          <input
             id="fileInputField"
             hidden
             type="file"
@@ -162,8 +238,8 @@ export class VaFileInput {
             name={name}
             onChange={this.handleChange}
           />
-      </Host>
-    );
+        </Host>
+      );
+    }
   }
-
 }

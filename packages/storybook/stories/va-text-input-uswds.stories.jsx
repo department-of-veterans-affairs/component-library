@@ -54,7 +54,6 @@ const defaultArgs = {
   'uswds': true,
   'hint': null,
   'message-aria-describedby': 'Optional description text for screen readers',
-  'charcount': false,
   'use-forms-pattern': null,
   'form-heading-level': null,
   'form-heading': null,
@@ -76,8 +75,7 @@ const Template = ({
   pattern,
   uswds,
   hint,
-  'message-aria-describedby': messageAriaDescribedby,
-  charcount
+  'message-aria-describedby': messageAriaDescribedby
 }) => {
   return (
     <va-text-input
@@ -98,7 +96,6 @@ const Template = ({
       onBlur={e => console.log('blur event', e)}
       onInput={e => console.log('input event value', e.target.value)}
       message-aria-describedby={messageAriaDescribedby}
-      charcount={charcount}
     />
   );
 };
@@ -126,7 +123,7 @@ const I18nTemplate = ({
       <va-button uswds onClick={e => setLang('es')} text="Español"/>
       <va-button uswds onClick={e => setLang('en')} text="English"/>
       <va-button uswds onClick={e => setLang('tl')} text="Tagalog"/>
-      
+
       <va-text-input
         uswds={uswds}
         name={name}
@@ -166,8 +163,8 @@ const WidthsTemplate = ({
         name={name}
         label='My input - xs'
         value={value}
-      />  
-  
+      />
+
       <va-text-input
         width="sm"
         uswds={uswds}
@@ -244,8 +241,8 @@ const FormsPatternMultipleTemplate = ({
         name={name}
         label='Last Name'
         value={value}
-      />  
-  
+      />
+
       <va-text-input
         uswds={uswds}
         name={name}
@@ -253,8 +250,8 @@ const FormsPatternMultipleTemplate = ({
         value={value}
       />
       <hr />
-      <va-button 
-        text="click to focus header" 
+      <va-button
+        text="click to focus header"
         onClick={handleClick}>
       </va-button>
     </>
@@ -303,8 +300,8 @@ const FormsPatternSingleTemplate = ({
 
       <hr />
 
-      <va-button 
-        text="click to focus header" 
+      <va-button
+        text="click to focus header"
         onClick={handleClick}>
       </va-button>
     </>
@@ -328,12 +325,6 @@ export const Internationalization = I18nTemplate.bind(null);
 Internationalization.args = {
   ...defaultArgs,
   required: true,
-  maxlength: '6',
-};
-
-export const MaxLength = Template.bind(null);
-MaxLength.args = {
-  ...defaultArgs,
   maxlength: '6',
 };
 
@@ -390,7 +381,7 @@ WithAdditionalInfo.args = {
 };
 
 export const WithCharacterCount = Template.bind(null);
-WithCharacterCount.args = { ...defaultArgs, maxlength: '10', charcount: true}
+WithCharacterCount.args = { ...defaultArgs, maxlength: '10'}
 
 export const Widths = WidthsTemplate.bind(null);
 Widths.args = {
