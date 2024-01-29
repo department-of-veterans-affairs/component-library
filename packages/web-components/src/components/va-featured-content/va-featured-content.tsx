@@ -1,14 +1,22 @@
 import { Component, Host, h, Prop, Element, State } from '@stencil/core';
-import { iterateAddAttrs, SlotTarget } from '../../utils/slot-child-class-append';
+import {
+  iterateAddAttrs,
+  SlotTarget,
+} from '../../utils/slot-child-class-append';
 
-const targetingArray:SlotTarget[] =[
-  { slotName: 'headline',
-    selectorClasses: [["h3","usa-summary-box__heading",true]],
-    selectorId: [['h3', 'summary-box-key-information']]
+const targetingArray: SlotTarget[] = [
+  {
+    slotName: 'headline',
+    selectorClasses: [['h3', 'usa-summary-box__heading', true]],
+    selectorId: [['h3', 'summary-box-key-information']],
   },
-  { slotName: '',
-    selectorClasses: [['a', 'usa-summary-box__link'], ['ul', 'usa-list']],
-  }
+  {
+    slotName: '',
+    selectorClasses: [
+      ['a', 'usa-summary-box__link'],
+      ['ul', 'usa-list'],
+    ],
+  },
 ];
 
 /**
@@ -18,7 +26,10 @@ const targetingArray:SlotTarget[] =[
  */
 @Component({
   tag: 'va-featured-content',
-  styleUrl: 'va-featured-content.scss',
+  styleUrls: {
+    default: 'va-featured-content.scss',
+    uswds: 'va-featured-content-uswds.scss',
+  },
   shadow: true,
 })
 export class VaFeaturedContent {
@@ -38,16 +49,18 @@ export class VaFeaturedContent {
 
   componentWillLoad() {
     let childElements = Array.from(this.el.children);
-    this.headlineText = childElements.find(element => element.slot === "headline").textContent.trim();
+    this.headlineText = childElements
+      .find(element => element.slot === 'headline')
+      .textContent.trim();
   }
 
-   componentDidLoad() {
+  componentDidLoad() {
     if (!this.uswds) {
-      return
+      return;
     }
     /** Add uswds classes */
-    const nodes = this.el.shadowRoot
-    iterateAddAttrs( targetingArray, nodes);
+    const nodes = this.el.shadowRoot;
+    iterateAddAttrs(targetingArray, nodes);
   }
 
   render() {
@@ -55,7 +68,11 @@ export class VaFeaturedContent {
     if (uswds) {
       return (
         <Host>
-          <div class="usa-summary-box" role="region" aria-label={this.headlineText}>
+          <div
+            class="usa-summary-box"
+            role="region"
+            aria-label={this.headlineText}
+          >
             <div class="usa-summary-box__body">
               <slot name="headline"></slot>
               <div class="usa-summary-box__text" part="usa-summary-box__text">
