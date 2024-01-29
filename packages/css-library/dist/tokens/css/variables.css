@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Thu, 21 Dec 2023 22:08:30 GMT
+ * Generated on Mon, 29 Jan 2024 18:18:37 GMT
  */
 
 :root {
@@ -43,6 +43,7 @@
   --color-green-light: #5e9f69;
   --color-green-lighter: #b4d0b9;
   --color-green-lightest: #ecf3ec;
+  --color-orange: #dd7533;
   --color-gold: #ffbe2e;
   --color-gold-light: #face00;
   --color-gold-lighter: #ffe396;
@@ -52,6 +53,16 @@
   --color-blue-cool-light: #4a77b4;
   --color-blue-cool-lighter: #98afd2;
   --color-blue-cool-lightest: #e6e6e2;
+  --color-hub-health-care: #3f57a6;
+  --color-hub-education: #40807e;
+  --color-hub-disability: #a23737;
+  --color-hub-careers: #bd5727;
+  --color-hub-pension: #4d8055;
+  --color-hub-housing: #8e704f;
+  --color-hub-life-insurance: #6f7a41;
+  --color-hub-burials: #2378c3;
+  --color-hub-family-member: #162e51;
+  --color-hub-service-member: #162e51;
   --font-family-sans: 'Source Sans Pro', 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif;
   --font-family-serif: Bitter, Georgia, Cambria, 'Times New Roman', Times, serif;
   --font-serif: Bitter, Georgia, Cambria, 'Times New Roman', Times, serif;

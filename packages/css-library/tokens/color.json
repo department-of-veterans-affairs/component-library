@@ -50,6 +50,9 @@
       "lighter": { "value": "{uswds-system-color-green-cool-20}" },
       "lightest": { "value": "{uswds-system-color-green-cool-5}" }
     },
+    "orange": {
+      "*": { "value": "{uswds-system-color-orange-40}"}
+    },
     "gold": {
       "*": { "value": "{uswds-system-color-gold-vivid-20}" },
       "light": { "value": "{uswds-system-color-yellow-vivid-20}" },
@@ -62,6 +65,18 @@
       "light": { "value": "{uswds-system-color-blue-warm-50}"},
       "lighter": { "value": "{uswds-system-color-blue-warm-30}"},
       "lightest": { "value": "{uswds-system-color-gray-warm-10}"}
+    },
+    "hub": {
+      "health-care": {"value": "#3f57a6"},
+      "education": {"value": "#40807e"},
+      "disability": {"value": "#a23737"},
+      "careers": {"value": "#bd5727"},
+      "pension": {"value": "#4d8055"},
+      "housing": {"value": "#8e704f"},
+      "life-insurance": {"value": "#6f7a41"},
+      "burials": {"value": "#2378c3"},
+      "family-member": {"value": "#162e51"},
+      "service-member": {"value": "#162e51"}
     }
   }
 }
