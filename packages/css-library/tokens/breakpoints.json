@@ -6,13 +6,13 @@
     "value": "481px"
   },
   "medium-screen": {
-    "value": "600px"
+    "value": "640px"
   },
   "small-desktop-screen": {
     "value": "1008px"
   },
   "medium-large-screen": {
-    "value": "600px"
+    "value": "640px"
   },
   "large-screen": {
     "value": "1201px"
