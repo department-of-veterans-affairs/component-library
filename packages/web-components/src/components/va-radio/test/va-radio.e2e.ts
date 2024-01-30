@@ -709,4 +709,42 @@ describe('va-radio', () => {
     expect(await options[1].getProperty('checked')).toBeFalsy();
   });
 
+  it('uswds useFormsPattern displays header for the single field pattern', async () => {
+    const page = await newE2EPage();
+    await page.setContent(`
+      <va-radio label="This is a label" uswds use-forms-pattern="single" form-heading-level="1" form-heading="This is a form header" form-description="This is a form description">
+        <va-radio-option uswds label="Option 1" value="1"></va-radio-option>
+        <va-radio-option uswds checked label="Option 2" value="2"></va-radio-option>
+      </va-radio>
+      `);
+
+    const formHeader = await page.find('va-radio >>> h1');
+    expect(formHeader.innerText).toEqual('This is a form header');
+  });
+
+  it('uswds useFormsPattern displays header for the multiple fields pattern', async () => {
+    const page = await newE2EPage();
+    await page.setContent(`
+    <va-radio label="This is a label" uswds use-forms-pattern="multiple" form-heading-level="1" form-heading="This is a form header" form-description="This is a form description">
+      <va-radio-option uswds label="Option 1" value="1"></va-radio-option>
+      <va-radio-option uswds checked label="Option 2" value="2"></va-radio-option>
+    </va-radio>
+    `);
+
+    const formHeader = await page.find('va-radio >>> h1');
+    expect(formHeader.innerText).toEqual('This is a form header');
+  });
+
+  it('uswds useFormsPattern passes an aXe check', async () => {
+    const page = await newE2EPage();
+    await page.setContent(`
+    <va-radio label="This is a label" uswds use-forms-pattern="multiple" form-heading-level="1" form-heading="This is a form header" form-description="This is a form description">
+      <va-radio-option uswds label="Option 1" value="1"></va-radio-option>
+      <va-radio-option uswds checked label="Option 2" value="2"></va-radio-option>
+    </va-radio>
+    `);
+
+    await axeCheck(page);
+  });
+
 });
