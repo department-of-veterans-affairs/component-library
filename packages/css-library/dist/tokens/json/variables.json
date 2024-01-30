@@ -30,11 +30,11 @@
     ]
   },
   "medium-screen": {
-    "value": "600px",
+    "value": "640px",
     "filePath": "tokens/breakpoints.json",
     "isSource": true,
     "original": {
-      "value": "600px"
+      "value": "640px"
     },
     "name": "medium-screen",
     "attributes": {
@@ -60,11 +60,11 @@
     ]
   },
   "medium-large-screen": {
-    "value": "600px",
+    "value": "640px",
     "filePath": "tokens/breakpoints.json",
     "isSource": true,
     "original": {
-      "value": "600px"
+      "value": "640px"
     },
     "name": "medium-large-screen",
     "attributes": {
