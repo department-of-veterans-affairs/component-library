@@ -941,7 +941,7 @@
         "filePath": "tokens/color.json",
         "isSource": true,
         "original": {
-          "value": "#3f57a6"
+          "value": "{uswds-system-color-indigo-cool-60}"
         },
         "name": "color-hub-health-care",
         "attributes": {
@@ -960,7 +960,7 @@
         "filePath": "tokens/color.json",
         "isSource": true,
         "original": {
-          "value": "#40807e"
+          "value": "{uswds-system-color-mint-cool-50}"
         },
         "name": "color-hub-education",
         "attributes": {
@@ -979,7 +979,7 @@
         "filePath": "tokens/color.json",
         "isSource": true,
         "original": {
-          "value": "#a23737"
+          "value": "{uswds-system-color-red-60}"
         },
         "name": "color-hub-disability",
         "attributes": {
@@ -998,7 +998,7 @@
         "filePath": "tokens/color.json",
         "isSource": true,
         "original": {
-          "value": "#bd5727"
+          "value": "{uswds-system-color-orange-warm-50}"
         },
         "name": "color-hub-careers",
         "attributes": {
@@ -1017,7 +1017,7 @@
         "filePath": "tokens/color.json",
         "isSource": true,
         "original": {
-          "value": "#4d8055"
+          "value": "{uswds-system-color-green-cool-50}"
         },
         "name": "color-hub-pension",
         "attributes": {
@@ -1036,7 +1036,7 @@
         "filePath": "tokens/color.json",
         "isSource": true,
         "original": {
-          "value": "#8e704f"
+          "value": "{uswds-system-color-gold-50}"
         },
         "name": "color-hub-housing",
         "attributes": {
@@ -1055,7 +1055,7 @@
         "filePath": "tokens/color.json",
         "isSource": true,
         "original": {
-          "value": "#6f7a41"
+          "value": "{uswds-system-color-green-warm-50}"
         },
         "name": "color-hub-life-insurance",
         "attributes": {
@@ -1074,7 +1074,7 @@
         "filePath": "tokens/color.json",
         "isSource": true,
         "original": {
-          "value": "#2378c3"
+          "value": "{uswds-system-color-blue-50}"
         },
         "name": "color-hub-burials",
         "attributes": {
@@ -1093,7 +1093,7 @@
         "filePath": "tokens/color.json",
         "isSource": true,
         "original": {
-          "value": "#162e51"
+          "value": "{uswds-system-color-blue-warm-vivid-80}"
         },
         "name": "color-hub-family-member",
         "attributes": {
@@ -1112,7 +1112,7 @@
         "filePath": "tokens/color.json",
         "isSource": true,
         "original": {
-          "value": "#162e51"
+          "value": "{uswds-system-color-blue-warm-vivid-80}"
         },
         "name": "color-hub-service-member",
         "attributes": {
@@ -2524,6 +2524,21 @@
       "uswds-system-color-cyan-vivid-40"
     ]
   },
+  "uswds-system-color-gold-50": {
+    "value": "#8e704f",
+    "filePath": "tokens/uswds.json",
+    "isSource": true,
+    "original": {
+      "value": "#8e704f"
+    },
+    "name": "uswds-system-color-gold-50",
+    "attributes": {
+      "category": "uswds-system-color-gold-50"
+    },
+    "path": [
+      "uswds-system-color-gold-50"
+    ]
+  },
   "uswds-system-color-gold-vivid-5": {
     "value": "#fef0c8",
     "filePath": "tokens/uswds.json",
@@ -3064,6 +3079,21 @@
       "uswds-system-color-gray-warm-70"
     ]
   },
+  "uswds-system-color-green-warm-50": {
+    "value": "#6f7a41",
+    "filePath": "tokens/uswds.json",
+    "isSource": true,
+    "original": {
+      "value": "#6f7a41"
+    },
+    "name": "uswds-system-color-green-warm-50",
+    "attributes": {
+      "category": "uswds-system-color-green-warm-50"
+    },
+    "path": [
+      "uswds-system-color-green-warm-50"
+    ]
+  },
   "uswds-system-color-green-cool-5": {
     "value": "#ecf3ec",
     "filePath": "tokens/uswds.json",
@@ -3107,6 +3137,21 @@
     },
     "path": [
       "uswds-system-color-green-cool-40"
+    ]
+  },
+  "uswds-system-color-green-cool-50": {
+    "value": "#4d8055",
+    "filePath": "tokens/uswds.json",
+    "isSource": true,
+    "original": {
+      "value": "#4d8055"
+    },
+    "name": "uswds-system-color-green-cool-50",
+    "attributes": {
+      "category": "uswds-system-color-green-cool-50"
+    },
+    "path": [
+      "uswds-system-color-green-cool-50"
     ]
   },
   "uswds-system-color-green-cool-vivid-20": {
@@ -3199,6 +3244,21 @@
       "uswds-system-color-orange-40"
     ]
   },
+  "uswds-system-color-orange-warm-50": {
+    "value": "#bd5727",
+    "filePath": "tokens/uswds.json",
+    "isSource": true,
+    "original": {
+      "value": "#bd5727"
+    },
+    "name": "uswds-system-color-orange-warm-50",
+    "attributes": {
+      "category": "uswds-system-color-orange-warm-50"
+    },
+    "path": [
+      "uswds-system-color-orange-warm-50"
+    ]
+  },
   "uswds-system-color-red-30": {
     "value": "#f2938c",
     "filePath": "tokens/uswds.json",
@@ -3227,6 +3287,21 @@
     },
     "path": [
       "uswds-system-color-red-50"
+    ]
+  },
+  "uswds-system-color-red-60": {
+    "value": "#a23737",
+    "filePath": "tokens/uswds.json",
+    "isSource": true,
+    "original": {
+      "value": "#a23737"
+    },
+    "name": "uswds-system-color-red-60",
+    "attributes": {
+      "category": "uswds-system-color-red-60"
+    },
+    "path": [
+      "uswds-system-color-red-60"
     ]
   },
   "uswds-system-color-red-70": {
@@ -3467,6 +3542,36 @@
     },
     "path": [
       "uswds-system-color-yellow-vivid-20"
+    ]
+  },
+  "uswds-system-color-indigo-cool-60": {
+    "value": "#3f57a6",
+    "filePath": "tokens/uswds.json",
+    "isSource": true,
+    "original": {
+      "value": "#3f57a6"
+    },
+    "name": "uswds-system-color-indigo-cool-60",
+    "attributes": {
+      "category": "uswds-system-color-indigo-cool-60"
+    },
+    "path": [
+      "uswds-system-color-indigo-cool-60"
+    ]
+  },
+  "uswds-system-color-mint-cool-50": {
+    "value": "#40807e",
+    "filePath": "tokens/uswds.json",
+    "isSource": true,
+    "original": {
+      "value": "#40807e"
+    },
+    "name": "uswds-system-color-mint-cool-50",
+    "attributes": {
+      "category": "uswds-system-color-mint-cool-50"
+    },
+    "path": [
+      "uswds-system-color-mint-cool-50"
     ]
   }
 }

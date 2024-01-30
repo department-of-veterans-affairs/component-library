@@ -160,34 +160,34 @@
     },
     "hub": {
       "health-care": {
-        "value": "#3f57a6"
+        "value": "{uswds-system-color-indigo-cool-60}"
       },
       "education": {
-        "value": "#40807e"
+        "value": "{uswds-system-color-mint-cool-50}"
       },
       "disability": {
-        "value": "#a23737"
+        "value": "{uswds-system-color-red-60}"
       },
       "careers": {
-        "value": "#bd5727"
+        "value": "{uswds-system-color-orange-warm-50}"
       },
       "pension": {
-        "value": "#4d8055"
+        "value": "{uswds-system-color-green-cool-50}"
       },
       "housing": {
-        "value": "#8e704f"
+        "value": "{uswds-system-color-gold-50}"
       },
       "life-insurance": {
-        "value": "#6f7a41"
+        "value": "{uswds-system-color-green-warm-50}"
       },
       "burials": {
-        "value": "#2378c3"
+        "value": "{uswds-system-color-blue-50}"
       },
       "family-member": {
-        "value": "#162e51"
+        "value": "{uswds-system-color-blue-warm-vivid-80}"
       },
       "service-member": {
-        "value": "#162e51"
+        "value": "{uswds-system-color-blue-warm-vivid-80}"
       }
     }
   }
