@@ -55,14 +55,14 @@ $tokens-color-tertiary: (
 
 // TODO: Consider removing these since they aren't used
 $tokens-color-hub: (
-  "hub-health-care": "#3f57a6",
-  "hub-education": "#21827f",
-  "hub-disability": "#a23737",
-  "hub-careers": "#bd5727",
-  "hub-pension": "#3e8520",
-  "hub-housing": "#8e704f",
-  "hub-life-insurance": "#6f7a41",
-  "hub-burials": "#357ab2",
-  "hub-family-member": "#162e51",
-  "hub-service-member": "#162e51",
+  "hub-health-care": $color-hub-health-care,
+  "hub-education": $color-hub-education,
+  "hub-disability": $color-hub-disability,
+  "hub-careers": $color-hub-careers,
+  "hub-pension": $color-hub-pension,
+  "hub-housing": $color-hub-housing,
+  "hub-life-insurance": $color-hub-life-insurance,
+  "hub-burials": $color-hub-burials,
+  "hub-family-member": $color-hub-family-member,
+  "hub-service-member": $color-hub-service-member,
 );
