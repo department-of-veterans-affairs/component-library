@@ -451,6 +451,10 @@ export namespace Components {
          */
         "uswds"?: boolean;
     }
+    interface VaHeaderMinimal {
+        "header"?: string;
+        "subheader"?: string;
+    }
     interface VaIcon {
         /**
           * The name of the icon to use
@@ -617,10 +621,6 @@ export namespace Components {
         "value"?: string;
     }
     interface VaMinimalFooter {
-    }
-    interface VaMinimalHeader {
-        "header"?: string;
-        "subheader"?: string;
     }
     interface VaModal {
         /**
@@ -1629,6 +1629,12 @@ declare global {
         prototype: HTMLVaFileInputElement;
         new (): HTMLVaFileInputElement;
     };
+    interface HTMLVaHeaderMinimalElement extends Components.VaHeaderMinimal, HTMLStencilElement {
+    }
+    var HTMLVaHeaderMinimalElement: {
+        prototype: HTMLVaHeaderMinimalElement;
+        new (): HTMLVaHeaderMinimalElement;
+    };
     interface HTMLVaIconElement extends Components.VaIcon, HTMLStencilElement {
     }
     var HTMLVaIconElement: {
@@ -1664,12 +1670,6 @@ declare global {
     var HTMLVaMinimalFooterElement: {
         prototype: HTMLVaMinimalFooterElement;
         new (): HTMLVaMinimalFooterElement;
-    };
-    interface HTMLVaMinimalHeaderElement extends Components.VaMinimalHeader, HTMLStencilElement {
-    }
-    var HTMLVaMinimalHeaderElement: {
-        prototype: HTMLVaMinimalHeaderElement;
-        new (): HTMLVaMinimalHeaderElement;
     };
     interface HTMLVaModalElement extends Components.VaModal, HTMLStencilElement {
     }
@@ -1833,13 +1833,13 @@ declare global {
         "va-date": HTMLVaDateElement;
         "va-featured-content": HTMLVaFeaturedContentElement;
         "va-file-input": HTMLVaFileInputElement;
+        "va-header-minimal": HTMLVaHeaderMinimalElement;
         "va-icon": HTMLVaIconElement;
         "va-link": HTMLVaLinkElement;
         "va-loading-indicator": HTMLVaLoadingIndicatorElement;
         "va-maintenance-banner": HTMLVaMaintenanceBannerElement;
         "va-memorable-date": HTMLVaMemorableDateElement;
         "va-minimal-footer": HTMLVaMinimalFooterElement;
-        "va-minimal-header": HTMLVaMinimalHeaderElement;
         "va-modal": HTMLVaModalElement;
         "va-need-help": HTMLVaNeedHelpElement;
         "va-notification": HTMLVaNotificationElement;
@@ -2400,6 +2400,10 @@ declare namespace LocalJSX {
          */
         "uswds"?: boolean;
     }
+    interface VaHeaderMinimal {
+        "header"?: string;
+        "subheader"?: string;
+    }
     interface VaIcon {
         /**
           * The name of the icon to use
@@ -2594,10 +2598,6 @@ declare namespace LocalJSX {
         "value"?: string;
     }
     interface VaMinimalFooter {
-    }
-    interface VaMinimalHeader {
-        "header"?: string;
-        "subheader"?: string;
     }
     interface VaModal {
         /**
@@ -3500,13 +3500,13 @@ declare namespace LocalJSX {
         "va-date": VaDate;
         "va-featured-content": VaFeaturedContent;
         "va-file-input": VaFileInput;
+        "va-header-minimal": VaHeaderMinimal;
         "va-icon": VaIcon;
         "va-link": VaLink;
         "va-loading-indicator": VaLoadingIndicator;
         "va-maintenance-banner": VaMaintenanceBanner;
         "va-memorable-date": VaMemorableDate;
         "va-minimal-footer": VaMinimalFooter;
-        "va-minimal-header": VaMinimalHeader;
         "va-modal": VaModal;
         "va-need-help": VaNeedHelp;
         "va-notification": VaNotification;
@@ -3554,13 +3554,13 @@ declare module "@stencil/core" {
             "va-date": LocalJSX.VaDate & JSXBase.HTMLAttributes<HTMLVaDateElement>;
             "va-featured-content": LocalJSX.VaFeaturedContent & JSXBase.HTMLAttributes<HTMLVaFeaturedContentElement>;
             "va-file-input": LocalJSX.VaFileInput & JSXBase.HTMLAttributes<HTMLVaFileInputElement>;
+            "va-header-minimal": LocalJSX.VaHeaderMinimal & JSXBase.HTMLAttributes<HTMLVaHeaderMinimalElement>;
             "va-icon": LocalJSX.VaIcon & JSXBase.HTMLAttributes<HTMLVaIconElement>;
             "va-link": LocalJSX.VaLink & JSXBase.HTMLAttributes<HTMLVaLinkElement>;
             "va-loading-indicator": LocalJSX.VaLoadingIndicator & JSXBase.HTMLAttributes<HTMLVaLoadingIndicatorElement>;
             "va-maintenance-banner": LocalJSX.VaMaintenanceBanner & JSXBase.HTMLAttributes<HTMLVaMaintenanceBannerElement>;
             "va-memorable-date": LocalJSX.VaMemorableDate & JSXBase.HTMLAttributes<HTMLVaMemorableDateElement>;
             "va-minimal-footer": LocalJSX.VaMinimalFooter & JSXBase.HTMLAttributes<HTMLVaMinimalFooterElement>;
-            "va-minimal-header": LocalJSX.VaMinimalHeader & JSXBase.HTMLAttributes<HTMLVaMinimalHeaderElement>;
             "va-modal": LocalJSX.VaModal & JSXBase.HTMLAttributes<HTMLVaModalElement>;
             "va-need-help": LocalJSX.VaNeedHelp & JSXBase.HTMLAttributes<HTMLVaNeedHelpElement>;
             "va-notification": LocalJSX.VaNotification & JSXBase.HTMLAttributes<HTMLVaNotificationElement>;
