@@ -622,10 +622,6 @@ export namespace Components {
     }
     interface VaMinimalFooter {
     }
-    interface VaMinimalHeader {
-        "header"?: string;
-        "subheader"?: string;
-    }
     interface VaModal {
         /**
           * Additional DOM-nodes that should not be hidden from screen readers. Useful when an open modal shouldn't hide all content behind the overlay.
@@ -1675,12 +1671,6 @@ declare global {
         prototype: HTMLVaMinimalFooterElement;
         new (): HTMLVaMinimalFooterElement;
     };
-    interface HTMLVaMinimalHeaderElement extends Components.VaMinimalHeader, HTMLStencilElement {
-    }
-    var HTMLVaMinimalHeaderElement: {
-        prototype: HTMLVaMinimalHeaderElement;
-        new (): HTMLVaMinimalHeaderElement;
-    };
     interface HTMLVaModalElement extends Components.VaModal, HTMLStencilElement {
     }
     var HTMLVaModalElement: {
@@ -1850,7 +1840,6 @@ declare global {
         "va-maintenance-banner": HTMLVaMaintenanceBannerElement;
         "va-memorable-date": HTMLVaMemorableDateElement;
         "va-minimal-footer": HTMLVaMinimalFooterElement;
-        "va-minimal-header": HTMLVaMinimalHeaderElement;
         "va-modal": HTMLVaModalElement;
         "va-need-help": HTMLVaNeedHelpElement;
         "va-notification": HTMLVaNotificationElement;
@@ -2609,10 +2598,6 @@ declare namespace LocalJSX {
         "value"?: string;
     }
     interface VaMinimalFooter {
-    }
-    interface VaMinimalHeader {
-        "header"?: string;
-        "subheader"?: string;
     }
     interface VaModal {
         /**
@@ -3522,7 +3507,6 @@ declare namespace LocalJSX {
         "va-maintenance-banner": VaMaintenanceBanner;
         "va-memorable-date": VaMemorableDate;
         "va-minimal-footer": VaMinimalFooter;
-        "va-minimal-header": VaMinimalHeader;
         "va-modal": VaModal;
         "va-need-help": VaNeedHelp;
         "va-notification": VaNotification;
@@ -3577,7 +3561,6 @@ declare module "@stencil/core" {
             "va-maintenance-banner": LocalJSX.VaMaintenanceBanner & JSXBase.HTMLAttributes<HTMLVaMaintenanceBannerElement>;
             "va-memorable-date": LocalJSX.VaMemorableDate & JSXBase.HTMLAttributes<HTMLVaMemorableDateElement>;
             "va-minimal-footer": LocalJSX.VaMinimalFooter & JSXBase.HTMLAttributes<HTMLVaMinimalFooterElement>;
-            "va-minimal-header": LocalJSX.VaMinimalHeader & JSXBase.HTMLAttributes<HTMLVaMinimalHeaderElement>;
             "va-modal": LocalJSX.VaModal & JSXBase.HTMLAttributes<HTMLVaModalElement>;
             "va-need-help": LocalJSX.VaNeedHelp & JSXBase.HTMLAttributes<HTMLVaNeedHelpElement>;
             "va-notification": LocalJSX.VaNotification & JSXBase.HTMLAttributes<HTMLVaNotificationElement>;
