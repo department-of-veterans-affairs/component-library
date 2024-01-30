@@ -14,7 +14,7 @@ export class VaFeaturedContent {
   /**
    * Whether or not the component will use USWDS v3 styling.
    */
-  @Prop() uswds?: boolean = false;
+  @Prop() uswds?: boolean = true;
 
   /**
    * Local state for slot=headline's text.

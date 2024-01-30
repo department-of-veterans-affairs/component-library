@@ -124,7 +124,7 @@ export class VaModal {
   /**
    * Whether or not the component will use USWDS v3 styling.
    */
-  @Prop() uswds?: boolean = false;
+  @Prop() uswds?: boolean = true;
 
   /**
    * Whether or not the component will be forced to take action.

@@ -24,7 +24,7 @@ export class VaPrivacyAgreement {
   /**
    * Whether or not the component will use USWDS v3 styling.
    */
-  @Prop() uswds?: boolean = false;
+  @Prop() uswds?: boolean = true;
   /**
    * Emit component-library-analytics events on the blur event.
    */

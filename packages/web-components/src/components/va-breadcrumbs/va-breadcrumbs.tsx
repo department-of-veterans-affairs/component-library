@@ -31,7 +31,7 @@ export class VaBreadcrumbs {
   /**
      * Whether or not the component will use USWDS v3 styling.
      */
-  @Prop() uswds?: boolean = false;
+  @Prop() uswds?: boolean = true;
   /**
    *  Whether or not the component will wrap the breadcrumbs. This prop is available when `uswds` is set to `true`.
    */
