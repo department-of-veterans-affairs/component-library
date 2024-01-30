@@ -296,7 +296,7 @@ export class VaRadio {
                       {i18next.t('required')}
                     </span>
                   )}
-                  {hint && <span class="usa-hint">{hint}</span>}
+                  {hint && <div class="usa-hint">{hint}</div>}
                 </legend>
               )}
               <span class="usa-error-message" role="alert">
