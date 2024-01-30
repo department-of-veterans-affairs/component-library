@@ -451,6 +451,10 @@ export namespace Components {
          */
         "uswds"?: boolean;
     }
+    interface VaHeaderMinimal {
+        "header"?: string;
+        "subheader"?: string;
+    }
     interface VaIcon {
         /**
           * The name of the icon to use
@@ -1629,6 +1633,12 @@ declare global {
         prototype: HTMLVaFileInputElement;
         new (): HTMLVaFileInputElement;
     };
+    interface HTMLVaHeaderMinimalElement extends Components.VaHeaderMinimal, HTMLStencilElement {
+    }
+    var HTMLVaHeaderMinimalElement: {
+        prototype: HTMLVaHeaderMinimalElement;
+        new (): HTMLVaHeaderMinimalElement;
+    };
     interface HTMLVaIconElement extends Components.VaIcon, HTMLStencilElement {
     }
     var HTMLVaIconElement: {
@@ -1833,6 +1843,7 @@ declare global {
         "va-date": HTMLVaDateElement;
         "va-featured-content": HTMLVaFeaturedContentElement;
         "va-file-input": HTMLVaFileInputElement;
+        "va-header-minimal": HTMLVaHeaderMinimalElement;
         "va-icon": HTMLVaIconElement;
         "va-link": HTMLVaLinkElement;
         "va-loading-indicator": HTMLVaLoadingIndicatorElement;
@@ -2399,6 +2410,10 @@ declare namespace LocalJSX {
           * Whether or not the component will use USWDS v3 styling.
          */
         "uswds"?: boolean;
+    }
+    interface VaHeaderMinimal {
+        "header"?: string;
+        "subheader"?: string;
     }
     interface VaIcon {
         /**
@@ -3500,6 +3515,7 @@ declare namespace LocalJSX {
         "va-date": VaDate;
         "va-featured-content": VaFeaturedContent;
         "va-file-input": VaFileInput;
+        "va-header-minimal": VaHeaderMinimal;
         "va-icon": VaIcon;
         "va-link": VaLink;
         "va-loading-indicator": VaLoadingIndicator;
@@ -3554,6 +3570,7 @@ declare module "@stencil/core" {
             "va-date": LocalJSX.VaDate & JSXBase.HTMLAttributes<HTMLVaDateElement>;
             "va-featured-content": LocalJSX.VaFeaturedContent & JSXBase.HTMLAttributes<HTMLVaFeaturedContentElement>;
             "va-file-input": LocalJSX.VaFileInput & JSXBase.HTMLAttributes<HTMLVaFileInputElement>;
+            "va-header-minimal": LocalJSX.VaHeaderMinimal & JSXBase.HTMLAttributes<HTMLVaHeaderMinimalElement>;
             "va-icon": LocalJSX.VaIcon & JSXBase.HTMLAttributes<HTMLVaIconElement>;
             "va-link": LocalJSX.VaLink & JSXBase.HTMLAttributes<HTMLVaLinkElement>;
             "va-loading-indicator": LocalJSX.VaLoadingIndicator & JSXBase.HTMLAttributes<HTMLVaLoadingIndicatorElement>;
