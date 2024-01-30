@@ -1920,25 +1920,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@department-of-veterans-affairs/css-library@npm:^0.0.1":
-  version: 0.0.1
-  resolution: "@department-of-veterans-affairs/css-library@npm:0.0.1"
-  dependencies:
-    "@divriots/style-dictionary-to-figma": ^0.4.0
-  checksum: 20ef0f4690babc8da12508d7b66af455bf7545011fca97dce90d2716aa873da4756f1e49951fe7748aea76484f479438db8c7356a6d82336ecb75de00f3be2ba
-  languageName: node
-  linkType: hard
-
-"@department-of-veterans-affairs/css-library@npm:^0.2.0":
-  version: 0.2.0
-  resolution: "@department-of-veterans-affairs/css-library@npm:0.2.0"
-  dependencies:
-    "@divriots/style-dictionary-to-figma": ^0.4.0
-  checksum: cd1a106bbf988d447ff20c881ef5be9648bdcad3d67b21eb8debee116d93df795ce99729761748dfc32e021d18d2dd64937e0da4159a8f4790ce224208c7c0b4
-  languageName: node
-  linkType: hard
-
-"@department-of-veterans-affairs/css-library@workspace:packages/css-library":
+"@department-of-veterans-affairs/css-library@^0.3.1, @department-of-veterans-affairs/css-library@workspace:packages/css-library":
   version: 0.0.0-use.local
   resolution: "@department-of-veterans-affairs/css-library@workspace:packages/css-library"
   dependencies:
@@ -1948,6 +1930,15 @@ __metadata:
     style-dictionary: ^3.8.0
   languageName: unknown
   linkType: soft
+
+"@department-of-veterans-affairs/css-library@npm:^0.0.1":
+  version: 0.0.1
+  resolution: "@department-of-veterans-affairs/css-library@npm:0.0.1"
+  dependencies:
+    "@divriots/style-dictionary-to-figma": ^0.4.0
+  checksum: 20ef0f4690babc8da12508d7b66af455bf7545011fca97dce90d2716aa873da4756f1e49951fe7748aea76484f479438db8c7356a6d82336ecb75de00f3be2ba
+  languageName: node
+  linkType: hard
 
 "@department-of-veterans-affairs/formation@npm:^10.1.2":
   version: 10.1.2
@@ -2067,7 +2058,7 @@ __metadata:
   dependencies:
     "@axe-core/puppeteer": ^4.4.0
     "@babel/core": ^7.12.13
-    "@department-of-veterans-affairs/css-library": ^0.2.0
+    "@department-of-veterans-affairs/css-library": ^0.3.1
     "@department-of-veterans-affairs/formation": ^10.1.2
     "@stencil/core": ^2.19.2
     "@stencil/postcss": ^2.0.0
