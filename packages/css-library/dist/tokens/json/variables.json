@@ -59,21 +59,6 @@
       "small-desktop-screen"
     ]
   },
-  "medium-large-screen": {
-    "value": "640px",
-    "filePath": "tokens/breakpoints.json",
-    "isSource": true,
-    "original": {
-      "value": "640px"
-    },
-    "name": "medium-large-screen",
-    "attributes": {
-      "category": "medium-large-screen"
-    },
-    "path": [
-      "medium-large-screen"
-    ]
-  },
   "large-screen": {
     "value": "1201px",
     "filePath": "tokens/breakpoints.json",

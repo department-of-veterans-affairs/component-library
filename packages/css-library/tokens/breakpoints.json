@@ -11,9 +11,6 @@
   "small-desktop-screen": {
     "value": "1008px"
   },
-  "medium-large-screen": {
-    "value": "640px"
-  },
   "large-screen": {
     "value": "1201px"
   }
