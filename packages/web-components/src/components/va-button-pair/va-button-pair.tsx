@@ -134,7 +134,6 @@ export class VaButtonPair {
                   disable-analytics={disableAnalytics}
                   label={secondaryLabel}
                   onClick={handleSecondaryClick}
-                  uswds
                 />
               </li>
               <li class="usa-button-group__item">
@@ -144,7 +143,6 @@ export class VaButtonPair {
                   label={primaryLabel}
                   onClick={handlePrimaryClick}
                   submit={submit}
-                  uswds
                 />
               </li>
             </ul>
@@ -158,6 +156,7 @@ export class VaButtonPair {
               disable-analytics={disableAnalytics}
               label={secondaryLabel}
               onClick={handleSecondaryClick}
+              uswds={false}
             />
             <va-button
               continue
@@ -165,6 +164,7 @@ export class VaButtonPair {
               label={primaryLabel}
               onClick={handlePrimaryClick}
               submit={submit}
+              uswds={false}
             />
           </Host>
         );

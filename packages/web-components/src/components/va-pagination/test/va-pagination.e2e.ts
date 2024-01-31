@@ -4,11 +4,11 @@ import { axeCheck } from '../../../testing/test-helpers';
 describe('va-pagination', () => {
   it('renders', async () => {
     const page = await newE2EPage();
-    await page.setContent('<va-pagination></va-pagination>');
+    await page.setContent('<va-pagination uswds="false"></va-pagination>');
 
     const element = await page.find('va-pagination');
     expect(element).toEqualHtml(`
-      <va-pagination class="hydrated" role="navigation" aria-label="Pagination">
+      <va-pagination class="hydrated" role="navigation" aria-label="Pagination" uswds="false">
         <mock:shadow-root>
           <ul class="pagination-prev"></ul>
           <ul class="pagination-inner"></ul>
@@ -21,7 +21,7 @@ describe('va-pagination', () => {
   it('passes an axe check', async () => {
     const page = await newE2EPage();
     await page.setContent(`
-      <va-pagination page="3" pages="50">
+      <va-pagination page="3" pages="50" uswds="false">
       </va-pagination>
     `);
 
@@ -31,12 +31,12 @@ describe('va-pagination', () => {
   it('should show both "Prev" and "Next" if in a middle page', async () => {
     const page = await newE2EPage();
     await page.setContent(`
-    <va-pagination page="3" pages="5" />
+    <va-pagination page="3" pages="5" uswds="false"/>
     `);
 
     const element = await page.find('va-pagination');
     expect(element).toEqualHtml(`
-      <va-pagination class="hydrated" page="3" pages="5" role="navigation" aria-label="Pagination">
+      <va-pagination class="hydrated" page="3" pages="5" role="navigation" aria-label="Pagination" uswds="false">
         <mock:shadow-root>
           <ul class="pagination-prev">
           <li>
@@ -87,7 +87,7 @@ describe('va-pagination', () => {
   it('should show prev button but not next button if on the last page', async () => {
     const page = await newE2EPage();
     await page.setContent(`
-    <va-pagination page="5" pages="5" />
+    <va-pagination page="5" pages="5" uswds="false"/>
     `);
 
     const prevButton = await page.findAll('va-pagination >>> .button-prev');
@@ -99,7 +99,7 @@ describe('va-pagination', () => {
   it('should select previous page when prev button is clicked', async () => {
     const page = await newE2EPage();
     await page.setContent(`
-      <va-pagination page="3" pages="50" />
+      <va-pagination page="3" pages="50" uswds="false"/>
     `);
     const onPageSelectSpy = await page.spyOnEvent('pageSelect');
     const prevButton = await page.find('va-pagination >>> .button-prev');
@@ -110,7 +110,7 @@ describe('va-pagination', () => {
   it('should select next page when next button is clicked', async () => {
     const page = await newE2EPage();
     await page.setContent(`
-      <va-pagination page="3" pages="50" />
+      <va-pagination page="3" pages="50" uswds="false"/>
     `);
     const onPageSelectSpy = await page.spyOnEvent('pageSelect');
     const nextButton = await page.find('va-pagination >>> .button-next');
@@ -121,7 +121,7 @@ describe('va-pagination', () => {
   it('should select page 5 when page 5 button is clicked', async () => {
     const page = await newE2EPage();
     await page.setContent(`
-      <va-pagination page="3" pages="50" />
+      <va-pagination page="3" pages="50" uswds="false"/>
     `);
     const onPageSelectSpy = await page.spyOnEvent('pageSelect');
     const page5Button = await page.find(
@@ -134,7 +134,7 @@ describe('va-pagination', () => {
   it('should focus prev button when pressing tab inside component', async () => {
     const page = await newE2EPage();
     await page.setContent(`
-      <va-pagination page="3" pages="50" />
+      <va-pagination page="3" pages="50" uswds="false"/>
     `);
 
     const component = await page.find('va-pagination');
@@ -147,7 +147,7 @@ describe('va-pagination', () => {
   it('should tab to prev button and select it using the enter key', async () => {
     const page = await newE2EPage();
     await page.setContent(`
-    <va-pagination page="3" pages="50" />
+    <va-pagination page="3" pages="50" uswds="false"/>
     `);
     const onPageSelectSpy = await page.spyOnEvent('pageSelect');
     const component = await page.find('va-pagination');
@@ -159,7 +159,7 @@ describe('va-pagination', () => {
   it('should set aria-current to selected page', async () => {
     const page = await newE2EPage();
     await page.setContent(`
-    <va-pagination page="3" pages="50" />
+    <va-pagination page="3" pages="50" uswds="false"/>
     `);
 
     const activeButton = await page.find(
@@ -172,7 +172,7 @@ describe('va-pagination', () => {
   it('show the last page if enabled and there are more pages than max', async () => {
     const page = await newE2EPage();
     await page.setContent(`
-    <va-pagination page="3" pages="50" show-last-page />
+    <va-pagination page="3" pages="50" show-last-page uswds="false"/>
     `);
 
     const lastPageButton = await page.find(
@@ -185,7 +185,7 @@ describe('va-pagination', () => {
   it('fires an analytics event when a page number is clicked', async () => {
     const page = await newE2EPage();
     await page.setContent(
-      '<va-pagination page="2" pages="5" />',
+      '<va-pagination page="2" pages="5" uswds="false"/>',
     );
 
     const analyticsSpy = await page.spyOnEvent('component-library-analytics');
@@ -206,7 +206,7 @@ describe('va-pagination', () => {
   it('fires an analytics event the previous button is clicked', async () => {
     const page = await newE2EPage();
     await page.setContent(
-      '<va-pagination page="2" pages="5" />',
+      '<va-pagination page="2" pages="5" uswds="false"/>',
     );
 
     const analyticsSpy = await page.spyOnEvent('component-library-analytics');
@@ -227,7 +227,7 @@ describe('va-pagination', () => {
   it('fires an analytics event the next button is clicked', async () => {
     const page = await newE2EPage();
     await page.setContent(
-      '<va-pagination page="2" pages="5" />',
+      '<va-pagination page="2" pages="5" uswds="false"/>',
     );
 
     const analyticsSpy = await page.spyOnEvent('component-library-analytics');
@@ -250,12 +250,12 @@ describe('va-pagination', () => {
 describe('uswds - va-pagination', () => {
   it('uswds renders', async () => {
     const page = await newE2EPage();
-    await page.setContent('<va-pagination page="1" pages="3" uswds />');
+    await page.setContent('<va-pagination page="1" pages="3" />');
 
     const element = await page.find('va-pagination');
 
     expect(element).toEqualHtml(`
-      <va-pagination page="1" pages="3" uswds class="hydrated">
+      <va-pagination page="1" pages="3" class="hydrated">
         <mock:shadow-root>
           <nav aria-label="Pagination" class="usa-pagination">
             <ul class="usa-pagination__list">
@@ -287,7 +287,7 @@ describe('uswds - va-pagination', () => {
 
   it('uswds v3 only selected "page" has selected class', async () => {
     const page = await newE2EPage();
-    await page.setContent(`<va-pagination page="1" pages="24" max-page-list-length="7" uswds/>`);
+    await page.setContent(`<va-pagination page="1" pages="24" max-page-list-length="7"/>`);
     const firstPage = await page.findAll('va-pagination >>> li.usa-pagination__page-no a.usa-pagination__button.usa-current');
     expect(firstPage.length).toEqual(1);
     expect(firstPage[0].innerHTML).toEqual("1");
@@ -295,7 +295,7 @@ describe('uswds - va-pagination', () => {
 
   it('uswds v3 renders first and last page with ellipses when middle pages do not contain them', async () => {
     const page = await newE2EPage();
-    await page.setContent(`<va-pagination page="10" pages="24" max-page-list-length="7" uswds/>`);
+    await page.setContent(`<va-pagination page="10" pages="24" max-page-list-length="7"/>`);
     const ellipses = await page.findAll('va-pagination >>> li.usa-pagination__overflow');
     expect(ellipses).toHaveLength(2);
 
@@ -306,21 +306,21 @@ describe('uswds - va-pagination', () => {
 
   it('uswds v3 does not render a "Next" button when on last page', async () => {
     const page = await newE2EPage();
-    await page.setContent(`<va-pagination page="24" pages="24" max-page-list-length="7" uswds/>`);
+    await page.setContent(`<va-pagination page="24" pages="24" max-page-list-length="7"/>`);
     const next = await page.find('va-pagination >>> a.usa-pagination__next-page');
     expect(next).toBeNull();
   });
 
   it('uswds v3 does not show last page number if unbounded flag is set', async () => {
     const page = await newE2EPage();
-    await page.setContent(`<va-pagination page="1" pages="24" max-page-list-length="7" unbounded uswds/>`);
+    await page.setContent(`<va-pagination page="1" pages="24" max-page-list-length="7" unbounded/>`);
     const pageNumbers = await page.findAll('va-pagination >>> li.usa-pagination__page-no a.usa-pagination__button');
     expect(pageNumbers[pageNumbers.length - 1].innerHTML).toEqual("6");
   });
 
   it('uswds v3 renders all page numbers if total pages is less than or equal to 7', async () => {
     const page = await newE2EPage();
-    await page.setContent(`<va-pagination page="3" pages="7" max-page-list-length="7" uswds/>`);
+    await page.setContent(`<va-pagination page="3" pages="7" max-page-list-length="7"/>`);
 
     const pageNumbers = [1, 2, 3, 4, 5, 6, 7];
 
@@ -334,7 +334,7 @@ describe('uswds - va-pagination', () => {
     // this is an edge case where even though it is set to 6 items, 7 items is the minimum needed to display everything needed
     // [first page] [second page] [third/previous page] [fourth/current page] [fifth/next page] [ellipsis] [last page]
     const page = await newE2EPage();
-    await page.setContent(`<va-pagination page="4" pages="24" max-page-list-length="6" uswds/>`);
+    await page.setContent(`<va-pagination page="4" pages="24" max-page-list-length="6"/>`);
     const paginationItems = await page.findAll('va-pagination >>> li.usa-pagination__item');
 
     // should be 9, the 6 page items, one ellipsis and 2 prev/next buttons
@@ -344,7 +344,7 @@ describe('uswds - va-pagination', () => {
   it('uswds v3 renders an does not render an extra pagination item when the max-page-list-length is 6', async () => {
     // a check to make sure the above edge case doesn't 
     const page = await newE2EPage();
-    await page.setContent(`<va-pagination page="3" pages="24" max-page-list-length="6" uswds/>`);
+    await page.setContent(`<va-pagination page="3" pages="24" max-page-list-length="6"/>`);
     const paginationItems = await page.findAll('va-pagination >>> li.usa-pagination__item');
     // should be 8, 6 as set by the max-page-list-length, and 2 prev/next buttons
     expect(paginationItems).toHaveLength(8);

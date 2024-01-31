@@ -3,7 +3,7 @@ import { newE2EPage } from '@stencil/core/testing';
 describe('va-radio-option', () => {
   it('renders', async () => {
     const page = await newE2EPage();
-    await page.setContent('<va-radio-option></va-radio-option>');
+    await page.setContent('<va-radio-option uswds="false"></va-radio-option>');
 
     const element = await page.find('va-radio-option');
     expect(element).toHaveClass('hydrated');
@@ -11,11 +11,11 @@ describe('va-radio-option', () => {
 
   it('inserts and parses optional props and attributes correctly', async () => {
     const page = await newE2EPage();
-    await page.setContent('<va-radio-option id="yes2" label="Yes - Any Veteran" name="yes" value="2"></va-radio-option>');
+    await page.setContent('<va-radio-option id="yes2" label="Yes - Any Veteran" name="yes" value="2" uswds="false"></va-radio-option>');
 
     const element = await page.find('va-radio-option');
     expect(element).toEqualHtml(`
-    <va-radio-option id="yes2" label="Yes - Any Veteran" name="yes" value="2" aria-checked="false" class="hydrated">
+    <va-radio-option id="yes2" label="Yes - Any Veteran" name="yes" value="2" aria-checked="false" class="hydrated" uswds="false">
       <input id="yes2input" name="yes" type="radio" value="2">
       <label for="yes2input">
         <span>Yes - Any Veteran</span>
@@ -27,7 +27,7 @@ describe('va-radio-option', () => {
   it('sets the ID based on the name and value, if not passed as a prop', async () => {
     const page = await newE2EPage();
     await page.setContent(
-      '<va-radio-option name="test" label="An option with spaces" value="1"></va-radio-option>',
+      '<va-radio-option name="test" label="An option with spaces" value="1" uswds="false"></va-radio-option>',
     );
 
     const option = await page.find('va-radio-option'),
@@ -39,7 +39,7 @@ describe('va-radio-option', () => {
   it('sets checked to true based on prop', async () => {
     const page = await newE2EPage();
     await page.setContent(
-      '<va-radio-option checked label="An option"></va-radio-option>',
+      '<va-radio-option checked label="An option" uswds="false"></va-radio-option>',
     );
 
     const inputEl = await page.find('va-radio-option');
@@ -50,7 +50,7 @@ describe('va-radio-option', () => {
   it('fires event for parent when changed', async () => {
     const page = await newE2EPage();
     await page.setContent(
-      '<va-radio-option checked aria-describedby="test" label="A label" value="something" />',
+      '<va-radio-option checked aria-describedby="test" label="A label" value="something" uswds="false"/>',
     );
 
     const changeSpy = await page.spyOnEvent('radioOptionSelected');
@@ -64,7 +64,7 @@ describe('va-radio-option', () => {
 
   it('displays an option description', async () => {
     const page = await newE2EPage();
-    await page.setContent('<va-radio-option description="Some description text"></va-radio-option>');
+    await page.setContent('<va-radio-option description="Some description text" uswds="false"></va-radio-option>');
 
     const description = await page.find('va-radio-option .description');
     expect(description.textContent).toEqual("Some description text");
@@ -76,7 +76,7 @@ describe('va-radio-option', () => {
 
   it('uswds v3 renders', async () => {
     const page = await newE2EPage();
-    await page.setContent('<va-radio-option uswds></va-radio-option>');
+    await page.setContent('<va-radio-option></va-radio-option>');
 
     const element = await page.find('va-radio-option');
     expect(element).toHaveClass('hydrated');
@@ -84,11 +84,11 @@ describe('va-radio-option', () => {
 
   it('uswds v3 inserts and parses optional props and attributes correctly', async () => {
     const page = await newE2EPage();
-    await page.setContent('<va-radio-option uswds id="yes2" label="Yes - Any Veteran" name="yes" value="2"></va-radio-option>');
+    await page.setContent('<va-radio-option id="yes2" label="Yes - Any Veteran" name="yes" value="2"></va-radio-option>');
 
     const element = await page.find('va-radio-option');
     expect(element).toEqualHtml(`
-    <va-radio-option uswds="" id="yes2" label="Yes - Any Veteran" name="yes" value="2" class="hydrated">
+    <va-radio-option id="yes2" label="Yes - Any Veteran" name="yes" value="2" class="hydrated">
         <div class="usa-radio">
           <input class="usa-radio__input" id="yes2input" type="radio" name="yes" value="2">
           <label class="usa-radio__label" for="yes2input">
@@ -102,7 +102,7 @@ describe('va-radio-option', () => {
   it('uswds v3 sets the ID based on the name and value, if not passed as a prop', async () => {
     const page = await newE2EPage();
     await page.setContent(
-      '<va-radio-option uswds name="test" label="An option with spaces" value="1"></va-radio-option>',
+      '<va-radio-option name="test" label="An option with spaces" value="1"></va-radio-option>',
     );
 
     const inputEl = await page.find('va-radio-option input');
@@ -113,7 +113,7 @@ describe('va-radio-option', () => {
   it('uswds v3 sets checked to true based on prop', async () => {
     const page = await newE2EPage();
     await page.setContent(
-      '<va-radio-option uswds checked label="An option"></va-radio-option>',
+      '<va-radio-option checked label="An option"></va-radio-option>',
     );
 
     const inputEl = await page.find('va-radio-option');
@@ -124,7 +124,7 @@ describe('va-radio-option', () => {
   it('uswds v3 fires event for parent when changed', async () => {
     const page = await newE2EPage();
     await page.setContent(
-      '<va-radio-option uswds checked aria-describedby="test" label="A label" value="something" />',
+      '<va-radio-option checked aria-describedby="test" label="A label" value="something" />',
     );
 
     const changeSpy = await page.spyOnEvent('radioOptionSelected');
@@ -137,7 +137,7 @@ describe('va-radio-option', () => {
   it('uswds v3 displays description text', async () => {
     const page = await newE2EPage();
     await page.setContent(
-      '<va-radio-option uswds checked aria-describedby="test" label="A label" value="something" description="Example description" />',
+      '<va-radio-option checked aria-describedby="test" label="A label" value="something" description="Example description" />',
     );
 
     const description = await page.find('va-radio-option .usa-radio__label-description');

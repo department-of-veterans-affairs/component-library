@@ -77,7 +77,7 @@ export class VaSelect {
   /**
    * Whether or not the component will use USWDS v3 styling.
    */
-  @Prop({reflect: true}) uswds?: boolean = false;
+  @Prop({reflect: true}) uswds?: boolean = true;
 
   /**
    * Optional hint text.

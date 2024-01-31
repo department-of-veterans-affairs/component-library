@@ -4,7 +4,7 @@ import { axeCheck } from '../../../testing/test-helpers';
 describe('va-radio', () => {
   it('renders', async () => {
     const page = await newE2EPage();
-    await page.setContent('<va-radio></va-radio>');
+    await page.setContent('<va-radio uswds="false"></va-radio>');
 
     const element = await page.find('va-radio');
     expect(element).toHaveClass('hydrated');
@@ -12,7 +12,7 @@ describe('va-radio', () => {
 
   it('overrides the aria-label on the host element', async () => {
     const page = await newE2EPage();
-    await page.setContent('<va-radio label="Testing" aria-label="my label"></va-radio>');
+    await page.setContent('<va-radio label="Testing" aria-label="my label" uswds="false"></va-radio>');
 
     const element = await page.find('va-radio');
     expect(element.getAttribute('aria-label')).not.toEqual('my label');
@@ -20,7 +20,7 @@ describe('va-radio', () => {
 
   it('set the aria-label to match the label prop', async () => {
     const page = await newE2EPage();
-    await page.setContent('<va-radio label="Testing"></va-radio>');
+    await page.setContent('<va-radio label="Testing" uswds="false"></va-radio>');
 
     const element = await page.find('va-radio');
     expect(element.getAttribute('aria-label')).toEqual('Testing');
@@ -28,7 +28,7 @@ describe('va-radio', () => {
 
   it('appends "required" to the aria-label', async () => {
     const page = await newE2EPage();
-    await page.setContent('<va-radio label="Testing" required></va-radio>');
+    await page.setContent('<va-radio label="Testing" required uswds="false"></va-radio>');
 
     const element = await page.find('va-radio');
     expect(element.getAttribute('aria-label')).toEqual('Testing required');
@@ -38,10 +38,10 @@ describe('va-radio', () => {
     const page = await newE2EPage();
     await page.setContent(
       `
-      <va-radio hint="Hint text">
-        <va-radio-option checked label="Option 1" value="1"></va-radio-option>
-        <va-radio-option label="Option 2" value="2"></va-radio-option>
-        <va-radio-option label="Option 3" value="3"></va-radio-option>
+      <va-radio hint="Hint text" uswds="false">
+        <va-radio-option checked label="Option 1" value="1" uswds="false"></va-radio-option>
+        <va-radio-option label="Option 2" value="2" uswds="false"></va-radio-option>
+        <va-radio-option label="Option 3" value="3" uswds="false"></va-radio-option>
       </va-radio>
     `,
     );
@@ -53,15 +53,15 @@ describe('va-radio', () => {
     const page = await newE2EPage();
     await page.setContent(
       `
-      <va-radio>
-        <va-radio-option checked label="Option 1" value="1"></va-radio-option>
-        <va-radio-option label="Option 2" value="2"></va-radio-option>
-        <va-radio-option label="Option 3" value="3"></va-radio-option>
+      <va-radio uswds="false">
+        <va-radio-option checked label="Option 1" value="1" uswds="false"></va-radio-option>
+        <va-radio-option label="Option 2" value="2" uswds="false"></va-radio-option>
+        <va-radio-option label="Option 3" value="3" uswds="false"></va-radio-option>
       </va-radio>
-      <va-radio>
-        <va-radio-option checked id="RadioOption1" label="Option 1" value="1"></va-radio-option>
-        <va-radio-option id="RadioOption2" label="Option 2" value="2"></va-radio-option>
-        <va-radio-option id="RadioOption3" label="Option 3" value="3"></va-radio-option>
+      <va-radio uswds="false">
+        <va-radio-option checked id="RadioOption1" label="Option 1" value="1" uswds="false"></va-radio-option>
+        <va-radio-option id="RadioOption2" label="Option 2" value="2" uswds="false"></va-radio-option>
+        <va-radio-option id="RadioOption3" label="Option 3" value="3" uswds="false"></va-radio-option>
       </va-radio>
     `,
     );
@@ -73,10 +73,10 @@ describe('va-radio', () => {
     const page = await newE2EPage();
     await page.setContent(
       `
-      <va-radio>
-        <va-radio-option checked label="Option 1" value="1"></va-radio-option>
-        <va-radio-option label="Option 2" value="2"></va-radio-option>
-        <va-radio-option label="Option 3" value="3"></va-radio-option>
+      <va-radio uswds="false">
+        <va-radio-option checked label="Option 1" value="1" uswds="false"></va-radio-option>
+        <va-radio-option label="Option 2" value="2" uswds="false"></va-radio-option>
+        <va-radio-option label="Option 3" value="3" uswds="false"></va-radio-option>
       </va-radio>
     `,
     );
@@ -97,7 +97,7 @@ describe('va-radio', () => {
 
   it('renders hint text if included', async () => {
     const page = await newE2EPage();
-    await page.setContent('<va-radio hint="Some hint text"></va-radio>');
+    await page.setContent('<va-radio hint="Some hint text" uswds="false"></va-radio>');
 
     const hint = await page.find('va-radio >>> .hint-text');
     expect(hint.textContent).toEqual("Some hint text");
@@ -105,7 +105,7 @@ describe('va-radio', () => {
 
   it('renders H3 header in legend if included', async () => {
     const page = await newE2EPage();
-    await page.setContent('<va-radio label="Testing H3" label-header-level="3"></va-radio>');
+    await page.setContent('<va-radio label="Testing H3" label-header-level="3" uswds="false"></va-radio>');
 
     const legend = await page.find('va-radio >>> legend');
     expect(legend).toEqualHtml(`
@@ -117,7 +117,7 @@ describe('va-radio', () => {
 
   it('renders H5 header in legend if included', async () => {
     const page = await newE2EPage();
-    await page.setContent('<va-radio label="Testing H5" label-header-level="5" required></va-radio>');
+    await page.setContent('<va-radio label="Testing H5" label-header-level="5" required uswds="false"></va-radio>');
 
     const legend = await page.find('va-radio >>> legend');
     expect(legend).toEqualHtml(`
@@ -132,7 +132,7 @@ describe('va-radio', () => {
 
   it('renders legend text and ignores adding a header if an invalid level is included', async () => {
     const page = await newE2EPage();
-    await page.setContent('<va-radio label="Testing" label-header-level="7" required></va-radio>');
+    await page.setContent('<va-radio label="Testing" label-header-level="7" required uswds="false"></va-radio>');
 
     const legend = await page.find('va-radio >>> legend');
     expect(legend).toEqualHtml(`
@@ -147,7 +147,7 @@ describe('va-radio', () => {
 
   it('renders an error message if passed', async () => {
     const page = await newE2EPage();
-    await page.setContent('<va-radio error="This is an error"></va-radio>');
+    await page.setContent('<va-radio error="This is an error" uswds="false"></va-radio>');
 
     const element = await page.find('va-radio');
     const errorElement = await page.find('va-radio >>> #error-message');
@@ -164,7 +164,7 @@ describe('va-radio', () => {
 
   it('renders a required span based on prop', async () => {
     const page = await newE2EPage();
-    await page.setContent('<va-radio required></va-radio>');
+    await page.setContent('<va-radio required uswds="false"></va-radio>');
 
     const element = await page.find('va-radio >>> .required');
     expect(element).toEqualHtml(`
@@ -177,8 +177,8 @@ describe('va-radio', () => {
   it('fires an analytics event when enableAnalytics is true', async () => {
     const page = await newE2EPage();
     await page.setContent(`
-      <va-radio label="Regular label" enable-analytics>
-        <va-radio-option label="First option" value="one"></va-radio-option>
+      <va-radio label="Regular label" enable-analytics uswds="false">
+        <va-radio-option label="First option" value="one" uswds="false"></va-radio-option>
       </va-radio>
       `);
     const analyticsSpy = await page.spyOnEvent('component-library-analytics');
@@ -201,8 +201,8 @@ describe('va-radio', () => {
   it("doesn't fire an analytics event when enableAnalytics is false", async () => {
     const page = await newE2EPage();
     await page.setContent(`
-      <va-radio label="Regular label">
-        <va-radio-option label="First option" value="one"></va-radio-option>
+      <va-radio label="Regular label" uswds="false">
+        <va-radio-option label="First option" value="one" uswds="false"></va-radio-option>
       </va-radio>
       `);
 
@@ -217,8 +217,8 @@ describe('va-radio', () => {
   it('fires a vaValueChange event when the checked value changes', async () => {
     const page = await newE2EPage();
     await page.setContent(`
-      <va-radio label="Regular label">
-        <va-radio-option label="First option" value="one"></va-radio-option>
+      <va-radio label="Regular label" uswds="false">
+        <va-radio-option label="First option" value="one" uswds="false"></va-radio-option>
       </va-radio>
       `);
 
@@ -234,8 +234,8 @@ describe('va-radio', () => {
     const page = await newE2EPage();
     await page.setContent(
       `
-      <va-radio>
-        <va-radio-option label="Option 1" value="1"></va-radio-option>
+      <va-radio uswds="false">
+        <va-radio-option label="Option 1" value="1" uswds="false"></va-radio-option>
       </va-radio>
     `,
     );
@@ -250,10 +250,10 @@ describe('va-radio', () => {
     const page = await newE2EPage();
     await page.setContent(
       `
-      <va-radio>
-        <va-radio-option checked label="Option 1" value="1"></va-radio-option>
-        <va-radio-option label="Option 2" value="2"></va-radio-option>
-        <va-radio-option label="Option 3" value="3"></va-radio-option>
+      <va-radio uswds="false">
+        <va-radio-option checked label="Option 1" value="1" uswds="false"></va-radio-option>
+        <va-radio-option label="Option 2" value="2" uswds="false"></va-radio-option>
+        <va-radio-option label="Option 3" value="3" uswds="false"></va-radio-option>
       </va-radio>
     `,
     );
@@ -268,10 +268,10 @@ describe('va-radio', () => {
     const page = await newE2EPage();
     await page.setContent(
       `
-      <va-radio>
-        <va-radio-option checked label="Option 1" value="1"></va-radio-option>
-        <va-radio-option label="Option 2" value="2"></va-radio-option>
-        <va-radio-option label="Option 3" value="3"></va-radio-option>
+      <va-radio uswds="false">
+        <va-radio-option checked label="Option 1" value="1" uswds="false"></va-radio-option>
+        <va-radio-option label="Option 2" value="2" uswds="false"></va-radio-option>
+        <va-radio-option label="Option 3" value="3" uswds="false"></va-radio-option>
       </va-radio>
     `,
     );
@@ -286,10 +286,10 @@ describe('va-radio', () => {
     const page = await newE2EPage();
     await page.setContent(
       `
-      <va-radio>
-        <va-radio-option checked label="Option 1" value="1"></va-radio-option>
-        <va-radio-option label="Option 2" value="2"></va-radio-option>
-        <va-radio-option label="Option 3" value="3"></va-radio-option>
+      <va-radio uswds="false">
+        <va-radio-option checked label="Option 1" value="1" uswds="false"></va-radio-option>
+        <va-radio-option label="Option 2" value="2" uswds="false"></va-radio-option>
+        <va-radio-option label="Option 3" value="3" uswds="false"></va-radio-option>
       </va-radio>
     `,
     );
@@ -304,10 +304,10 @@ describe('va-radio', () => {
     const page = await newE2EPage();
     await page.setContent(
       `
-      <va-radio>
-        <va-radio-option checked label="Option 1" value="1"></va-radio-option>
-        <va-radio-option label="Option 2" value="2"></va-radio-option>
-        <va-radio-option label="Option 3" value="3"></va-radio-option>
+      <va-radio uswds="false">
+        <va-radio-option checked label="Option 1" value="1" uswds="false"></va-radio-option>
+        <va-radio-option label="Option 2" value="2" uswds="false"></va-radio-option>
+        <va-radio-option label="Option 3" value="3" uswds="false"></va-radio-option>
       </va-radio>
     `,
     );
@@ -322,9 +322,9 @@ describe('va-radio', () => {
     const page = await newE2EPage();
     await page.setContent(
       `
-      <va-radio>
-        <va-radio-option checked label="Option 1" value="1"></va-radio-option>
-        <va-radio-option label="Option 2" value="2"></va-radio-option>
+      <va-radio uswds="false">
+        <va-radio-option checked label="Option 1" value="1" uswds="false"></va-radio-option>
+        <va-radio-option label="Option 2" value="2" uswds="false"></va-radio-option>
       </va-radio>
     `,
     );
@@ -339,9 +339,9 @@ describe('va-radio', () => {
     const page = await newE2EPage();
     await page.setContent(
       `
-      <va-radio>
-        <va-radio-option checked label="Option 1" value="1"></va-radio-option>
-        <va-radio-option label="Option 2" value="2"></va-radio-option>
+      <va-radio uswds="false">
+        <va-radio-option checked label="Option 1" value="1" uswds="false"></va-radio-option>
+        <va-radio-option label="Option 2" value="2" uswds="false"></va-radio-option>
       </va-radio>
     `,
     );
@@ -356,9 +356,9 @@ describe('va-radio', () => {
     const page = await newE2EPage();
     await page.setContent(
       `
-      <va-radio>
-        <va-radio-option checked label="Option 1" value="1"></va-radio-option>
-        <va-radio-option label="Option 2" value="2"></va-radio-option>
+      <va-radio uswds="false">
+        <va-radio-option checked label="Option 1" value="1" uswds="false"></va-radio-option>
+        <va-radio-option label="Option 2" value="2" uswds="false"></va-radio-option>
       </va-radio>
     `,
     );
@@ -373,9 +373,9 @@ describe('va-radio', () => {
     const page = await newE2EPage();
     await page.setContent(
       `
-      <va-radio>
-        <va-radio-option label="Option 1" value="1"></va-radio-option>
-        <va-radio-option checked label="Option 2" value="2"></va-radio-option>
+      <va-radio uswds="false">
+        <va-radio-option label="Option 1" value="1" uswds="false"></va-radio-option>
+        <va-radio-option checked label="Option 2" value="2" uswds="false"></va-radio-option>
       </va-radio>
     `,
     );
@@ -390,7 +390,7 @@ describe('va-radio', () => {
 
   it('uswds version renders', async () => {
     const page = await newE2EPage();
-    await page.setContent('<va-radio uswds></va-radio>');
+    await page.setContent('<va-radio></va-radio>');
 
     const element = await page.find('va-radio');
     expect(element).toHaveClass('hydrated');
@@ -400,10 +400,10 @@ describe('va-radio', () => {
     const page = await newE2EPage();
     await page.setContent(
       `
-      <va-radio uswds hint="Hint text" label="Example">
-        <va-radio-option uswds checked label="Option 1" value="1"></va-radio-option>
-        <va-radio-option uswds label="Option 2" value="2"></va-radio-option>
-        <va-radio-option uswds label="Option 3" value="3"></va-radio-option>
+      <va-radio hint="Hint text" label="Example">
+        <va-radio-option checked label="Option 1" value="1"></va-radio-option>
+        <va-radio-option label="Option 2" value="2"></va-radio-option>
+        <va-radio-option label="Option 3" value="3"></va-radio-option>
       </va-radio>
     `,
     );
@@ -415,15 +415,15 @@ describe('va-radio', () => {
     const page = await newE2EPage();
     await page.setContent(
       `
-      <va-radio uswds>
-        <va-radio-option uswds checked label="Option 1" value="1"></va-radio-option>
-        <va-radio-option uswds label="Option 2" value="2"></va-radio-option>
-        <va-radio-option uswds label="Option 3" value="3"></va-radio-option>
+      <va-radio>
+        <va-radio-option checked label="Option 1" value="1"></va-radio-option>
+        <va-radio-option label="Option 2" value="2"></va-radio-option>
+        <va-radio-option label="Option 3" value="3"></va-radio-option>
       </va-radio>
-      <va-radio uswds>
-        <va-radio-option uswds checked id="RadioOption1" label="Option 1" value="1"></va-radio-option>
-        <va-radio-option uswds id="RadioOption2" label="Option 2" value="2"></va-radio-option>
-        <va-radio-option uswds id="RadioOption3" label="Option 3" value="3"></va-radio-option>
+      <va-radio>
+        <va-radio-option checked id="RadioOption1" label="Option 1" value="1"></va-radio-option>
+        <va-radio-option id="RadioOption2" label="Option 2" value="2"></va-radio-option>
+        <va-radio-option id="RadioOption3" label="Option 3" value="3"></va-radio-option>
       </va-radio>
     `,
     );
@@ -435,10 +435,10 @@ describe('va-radio', () => {
     const page = await newE2EPage();
     await page.setContent(
       `
-      <va-radio uswds>
-        <va-radio-option uswds checked label="Option 1" value="1"></va-radio-option>
-        <va-radio-option uswds label="Option 2" value="2"></va-radio-option>
-        <va-radio-option uswds label="Option 3" value="3"></va-radio-option>
+      <va-radio>
+        <va-radio-option checked label="Option 1" value="1"></va-radio-option>
+        <va-radio-option label="Option 2" value="2"></va-radio-option>
+        <va-radio-option label="Option 3" value="3"></va-radio-option>
       </va-radio>
     `,
     );
@@ -459,7 +459,7 @@ describe('va-radio', () => {
 
   it('uswds version renders hint text if included', async () => {
     const page = await newE2EPage();
-    await page.setContent('<va-radio uswds hint="Some hint text"></va-radio>');
+    await page.setContent('<va-radio hint="Some hint text"></va-radio>');
 
     const hint = await page.find('va-radio >>> .usa-hint');
     expect(hint.textContent).toEqual("Some hint text");
@@ -467,7 +467,7 @@ describe('va-radio', () => {
 
   it('uswds version renders an error message if passed', async () => {
     const page = await newE2EPage();
-    await page.setContent('<va-radio uswds error="This is an error"></va-radio>');
+    await page.setContent('<va-radio error="This is an error"></va-radio>');
 
     const element = await page.find('va-radio');
     const errorElement = await page.find('va-radio >>> .usa-error-message');
@@ -484,7 +484,7 @@ describe('va-radio', () => {
 
   it('uswds version renders a required span based on prop', async () => {
     const page = await newE2EPage();
-    await page.setContent('<va-radio uswds required></va-radio>');
+    await page.setContent('<va-radio required></va-radio>');
 
     const element = await page.find('va-radio >>> .usa-label--required');
     expect(element).toEqualHtml(`
@@ -497,8 +497,8 @@ describe('va-radio', () => {
   it('uswds version fires an analytics event when enableAnalytics is true', async () => {
     const page = await newE2EPage();
     await page.setContent(`
-      <va-radio uswds label="Regular label" enable-analytics>
-        <va-radio-option uswds label="First option" value="one"></va-radio-option>
+      <va-radio label="Regular label" enable-analytics>
+        <va-radio-option label="First option" value="one"></va-radio-option>
       </va-radio>
       `);
     const analyticsSpy = await page.spyOnEvent('component-library-analytics');
@@ -522,8 +522,8 @@ describe('va-radio', () => {
   it("uswds version doesn't fire an analytics event when enableAnalytics is false", async () => {
     const page = await newE2EPage();
     await page.setContent(`
-      <va-radio uswds label="Regular label">
-        <va-radio-option uswds label="First option" value="one"></va-radio-option>
+      <va-radio label="Regular label">
+        <va-radio-option label="First option" value="one"></va-radio-option>
       </va-radio>
       `);
 
@@ -537,8 +537,8 @@ describe('va-radio', () => {
   it('uswds version fires a vaValueChange event when the checked value changes', async () => {
     const page = await newE2EPage();
     await page.setContent(`
-      <va-radio uswds label="Regular label">
-        <va-radio-option uswds label="First option" value="one"></va-radio-option>
+      <va-radio label="Regular label">
+        <va-radio-option label="First option" value="one"></va-radio-option>
       </va-radio>
       `);
 
@@ -556,8 +556,8 @@ describe('va-radio', () => {
     const page = await newE2EPage();
     await page.setContent(
       `
-      <va-radio uswds>
-        <va-radio-option uswds label="Option 1" value="1"></va-radio-option>
+      <va-radio>
+        <va-radio-option label="Option 1" value="1"></va-radio-option>
       </va-radio>
     `,
     );
@@ -572,10 +572,10 @@ describe('va-radio', () => {
     const page = await newE2EPage();
     await page.setContent(
       `
-      <va-radio uswds>
-        <va-radio-option uswds checked label="Option 1" value="1"></va-radio-option>
-        <va-radio-option uswds label="Option 2" value="2"></va-radio-option>
-        <va-radio-option uswds label="Option 3" value="3"></va-radio-option>
+      <va-radio>
+        <va-radio-option checked label="Option 1" value="1"></va-radio-option>
+        <va-radio-option label="Option 2" value="2"></va-radio-option>
+        <va-radio-option label="Option 3" value="3"></va-radio-option>
       </va-radio>
     `,
     );
@@ -590,10 +590,10 @@ describe('va-radio', () => {
     const page = await newE2EPage();
     await page.setContent(
       `
-      <va-radio uswds>
-        <va-radio-option uswds checked label="Option 1" value="1"></va-radio-option>
-        <va-radio-option uswds label="Option 2" value="2"></va-radio-option>
-        <va-radio-option uswds label="Option 3" value="3"></va-radio-option>
+      <va-radio>
+        <va-radio-option checked label="Option 1" value="1"></va-radio-option>
+        <va-radio-option label="Option 2" value="2"></va-radio-option>
+        <va-radio-option label="Option 3" value="3"></va-radio-option>
       </va-radio>
     `,
     );
@@ -609,10 +609,10 @@ describe('va-radio', () => {
     const page = await newE2EPage();
     await page.setContent(
       `
-      <va-radio uswds>
-        <va-radio-option uswds checked label="Option 1" value="1"></va-radio-option>
-        <va-radio-option uswds label="Option 2" value="2"></va-radio-option>
-        <va-radio-option uswds label="Option 3" value="3"></va-radio-option>
+      <va-radio>
+        <va-radio-option checked label="Option 1" value="1"></va-radio-option>
+        <va-radio-option label="Option 2" value="2"></va-radio-option>
+        <va-radio-option label="Option 3" value="3"></va-radio-option>
       </va-radio>
     `,
     );
@@ -627,10 +627,10 @@ describe('va-radio', () => {
     const page = await newE2EPage();
     await page.setContent(
       `
-      <va-radio uswds>
-        <va-radio-option uswds checked label="Option 1" value="1"></va-radio-option>
-        <va-radio-option uswds label="Option 2" value="2"></va-radio-option>
-        <va-radio-option uswds label="Option 3" value="3"></va-radio-option>
+      <va-radio>
+        <va-radio-option checked label="Option 1" value="1"></va-radio-option>
+        <va-radio-option label="Option 2" value="2"></va-radio-option>
+        <va-radio-option label="Option 3" value="3"></va-radio-option>
       </va-radio>
     `,
     );
@@ -645,9 +645,9 @@ describe('va-radio', () => {
     const page = await newE2EPage();
     await page.setContent(
       `
-      <va-radio uswds>
-        <va-radio-option uswds checked label="Option 1" value="1"></va-radio-option>
-        <va-radio-option uswds label="Option 2" value="2"></va-radio-option>
+      <va-radio>
+        <va-radio-option checked label="Option 1" value="1"></va-radio-option>
+        <va-radio-option label="Option 2" value="2"></va-radio-option>
       </va-radio>
     `,
     );
@@ -662,9 +662,9 @@ describe('va-radio', () => {
     const page = await newE2EPage();
     await page.setContent(
       `
-      <va-radio uswds>
-        <va-radio-option uswds checked label="Option 1" value="1"></va-radio-option>
-        <va-radio-option uswds label="Option 2" value="2"></va-radio-option>
+      <va-radio>
+        <va-radio-option checked label="Option 1" value="1"></va-radio-option>
+        <va-radio-option label="Option 2" value="2"></va-radio-option>
       </va-radio>
     `,
     );
@@ -679,9 +679,9 @@ describe('va-radio', () => {
     const page = await newE2EPage();
     await page.setContent(
       `
-      <va-radio uswds>
-        <va-radio-option uswds checked label="Option 1" value="1"></va-radio-option>
-        <va-radio-option uswds label="Option 2" value="2"></va-radio-option>
+      <va-radio>
+        <va-radio-option checked label="Option 1" value="1"></va-radio-option>
+        <va-radio-option label="Option 2" value="2"></va-radio-option>
       </va-radio>
     `,
     );
@@ -696,9 +696,9 @@ describe('va-radio', () => {
     const page = await newE2EPage();
     await page.setContent(
       `
-      <va-radio uswds>
-        <va-radio-option uswds label="Option 1" value="1"></va-radio-option>
-        <va-radio-option uswds checked label="Option 2" value="2"></va-radio-option>
+      <va-radio>
+        <va-radio-option label="Option 1" value="1"></va-radio-option>
+        <va-radio-option checked label="Option 2" value="2"></va-radio-option>
       </va-radio>
     `,
     );
@@ -712,9 +712,9 @@ describe('va-radio', () => {
   it('uswds useFormsPattern displays header for the single field pattern', async () => {
     const page = await newE2EPage();
     await page.setContent(`
-      <va-radio label="This is a label" uswds use-forms-pattern="single" form-heading-level="1" form-heading="This is a form header" form-description="This is a form description">
-        <va-radio-option uswds label="Option 1" value="1"></va-radio-option>
-        <va-radio-option uswds checked label="Option 2" value="2"></va-radio-option>
+      <va-radio label="This is a label" use-forms-pattern="single" form-heading-level="1" form-heading="This is a form header" form-description="This is a form description">
+        <va-radio-option label="Option 1" value="1"></va-radio-option>
+        <va-radio-option checked label="Option 2" value="2"></va-radio-option>
       </va-radio>
       `);
 
@@ -725,9 +725,9 @@ describe('va-radio', () => {
   it('uswds useFormsPattern displays header for the multiple fields pattern', async () => {
     const page = await newE2EPage();
     await page.setContent(`
-    <va-radio label="This is a label" uswds use-forms-pattern="multiple" form-heading-level="1" form-heading="This is a form header" form-description="This is a form description">
-      <va-radio-option uswds label="Option 1" value="1"></va-radio-option>
-      <va-radio-option uswds checked label="Option 2" value="2"></va-radio-option>
+    <va-radio label="This is a label" use-forms-pattern="multiple" form-heading-level="1" form-heading="This is a form header" form-description="This is a form description">
+      <va-radio-option label="Option 1" value="1"></va-radio-option>
+      <va-radio-option checked label="Option 2" value="2"></va-radio-option>
     </va-radio>
     `);
 
@@ -738,9 +738,9 @@ describe('va-radio', () => {
   it('uswds useFormsPattern passes an aXe check', async () => {
     const page = await newE2EPage();
     await page.setContent(`
-    <va-radio label="This is a label" uswds use-forms-pattern="multiple" form-heading-level="1" form-heading="This is a form header" form-description="This is a form description">
-      <va-radio-option uswds label="Option 1" value="1"></va-radio-option>
-      <va-radio-option uswds checked label="Option 2" value="2"></va-radio-option>
+    <va-radio label="This is a label" use-forms-pattern="multiple" form-heading-level="1" form-heading="This is a form header" form-description="This is a form description">
+      <va-radio-option label="Option 1" value="1"></va-radio-option>
+      <va-radio-option checked label="Option 2" value="2"></va-radio-option>
     </va-radio>
     `);
 

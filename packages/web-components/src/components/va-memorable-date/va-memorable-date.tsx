@@ -311,7 +311,6 @@ export class VaMemorableDate {
       const monthDisplay = monthSelect
         ? <div class="usa-form-group usa-form-group--month usa-form-group--select">
           <va-select
-            uswds
             label={i18next.t('month')}
             name={name ? `${name}Month` : 'Month'}
             aria-describedby={describedbyIds}
@@ -335,7 +334,6 @@ export class VaMemorableDate {
         </div>
       : <div class="usa-form-group usa-form-group--month">
         <va-text-input
-          uswds
           label={i18next.t('month')}
           name={name ? `${name}Month` : 'Month'}
           maxlength={2}
@@ -384,7 +382,6 @@ export class VaMemorableDate {
                 {monthDisplay}
                 <div class="usa-form-group usa-form-group--day">
                   <va-text-input
-                    uswds
                     label={i18next.t('day')}
                     name={name ? `${name}Day` : 'Day'}
                     maxlength={2}
@@ -405,7 +402,6 @@ export class VaMemorableDate {
                 </div>
                 <div class="usa-form-group usa-form-group--year">
                   <va-text-input
-                    uswds
                     label={i18next.t('year')}
                     name={name ? `${name}Year` : 'Year'}
                     maxlength={4}
@@ -464,6 +460,7 @@ export class VaMemorableDate {
                 inputmode="numeric"
                 type="text"
                 error={this.invalidMonth ? getErrorMessage(error) : null}
+                uswds={false}
                 />
               <va-text-input
                 label={i18next.t('day')}
@@ -482,6 +479,7 @@ export class VaMemorableDate {
                 inputmode="numeric"
                 type="text"
                 error={this.invalidDay ? getErrorMessage(error) : null}
+                uswds={false}
                 />
               <va-text-input
                 label={i18next.t('year')}
@@ -500,6 +498,7 @@ export class VaMemorableDate {
                 inputmode="numeric"
                 type="text"
                 error={this.invalidYear ? getErrorMessage(error) : null}
+                uswds={false}
                 />
             </div>
           </fieldset>

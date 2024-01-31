@@ -473,7 +473,6 @@ export class VaModal {
                         <va-button
                           onClick={e => this.handlePrimaryButtonClick(e)}
                           text={primaryButtonText}
-                          uswds
                           />
                       </li>
                     )}
@@ -484,7 +483,6 @@ export class VaModal {
                             onClick={e => this.handleSecondaryButtonClick(e)}
                             secondary
                             text={secondaryButtonText}
-                            uswds
                           />
                         )}
                         {unstyled && (

@@ -5,11 +5,11 @@ describe('va-text-input', () => {
   it('renders', async () => {
     const page = await newE2EPage();
 
-    await page.setContent('<va-text-input label="Hello, world" />');
+    await page.setContent('<va-text-input label="Hello, world" uswds="false"/>');
     const element = await page.find('va-text-input');
 
     expect(element).toEqualHtml(`
-      <va-text-input class="hydrated" label="Hello, world">
+      <va-text-input class="hydrated" label="Hello, world" uswds="false">
         <mock:shadow-root>
           <label for="inputField" part="label">
             Hello, world
@@ -25,7 +25,7 @@ describe('va-text-input', () => {
   it('renders slotted content', async () => {
     const page = await newE2EPage();
     await page.setContent(`
-    <va-text-input label="Name of issue">
+    <va-text-input label="Name of issue" uswds="false">
       <p className="vads-u-font-weight--normal label-description">
         You can only add an issue that you've already received a VA decision
         notice for.
@@ -33,7 +33,7 @@ describe('va-text-input', () => {
     </va-text-input>`);
     const element = await page.find('va-text-input');
     expect(element).toEqualHtml(`
-      <va-text-input class="hydrated" label="Name of issue">
+      <va-text-input class="hydrated" label="Name of issue" uswds="false">
         <mock:shadow-root>
           <label for="inputField" part="label">
             Name of issue
@@ -52,7 +52,7 @@ describe('va-text-input', () => {
 
   it('renders an error message', async () => {
     const page = await newE2EPage();
-    await page.setContent('<va-text-input error="This is a mistake" />');
+    await page.setContent('<va-text-input error="This is a mistake" uswds="false"/>');
 
     // Render the error message text
     const error = await page.find('va-text-input >>> span#input-error-message');
@@ -64,7 +64,7 @@ describe('va-text-input', () => {
 
   it('sets aria-invalid based on invalid prop', async () => {
     const page = await newE2EPage();
-    await page.setContent('<va-text-input invalid />');
+    await page.setContent('<va-text-input invalid uswds="false"/>');
 
     const input = await page.find('va-text-input >>> input');
     expect(input.getAttribute('aria-invalid')).toEqual('true');
@@ -72,7 +72,7 @@ describe('va-text-input', () => {
 
   it('adds aria-describedby for error message', async () => {
     const page = await newE2EPage();
-    await page.setContent('<va-text-input />');
+    await page.setContent('<va-text-input uswds="false"/>');
     // Check that error is empty
     const el = await page.find('va-text-input');
     const inputEl = await page.find('va-text-input >>> input');
@@ -90,7 +90,7 @@ describe('va-text-input', () => {
 
   it('adds aria-describedby input-message id', async () => {
     const page = await newE2EPage();
-    await page.setContent('<va-text-input message-aria-describedby="example message" />');
+    await page.setContent('<va-text-input message-aria-describedby="example message" uswds="false"/>');
     const el = await page.find('va-text-input');
     const inputEl = await page.find('va-text-input >>> input');
 
@@ -108,12 +108,12 @@ describe('va-text-input', () => {
 
   it('renders a required span', async () => {
     const page = await newE2EPage();
-    await page.setContent('<va-text-input label="This is a field" required />');
+    await page.setContent('<va-text-input label="This is a field" required uswds="false"/>');
 
     const el = await page.find('va-text-input');
     // required="" is a weird thing that only happens in these tests
     expect(el).toEqualHtml(`
-      <va-text-input class="hydrated" label="This is a field" required="">
+      <va-text-input class="hydrated" label="This is a field" required="" uswds="false">
         <mock:shadow-root>
           <label for="inputField" part="label">
             This is a field <span class="required">required</span>
@@ -132,7 +132,7 @@ describe('va-text-input', () => {
 
   it('renders hint text', async () => {
     const page = await newE2EPage();
-    await page.setContent('<va-text-input hint="This is hint text" label="Hello world" />');
+    await page.setContent('<va-text-input hint="This is hint text" label="Hello world" uswds="false"/>');
 
     // Render the hint text
     const hintTextElement = await page.find('va-text-input >>> span.hint-text');
@@ -143,7 +143,7 @@ describe('va-text-input', () => {
     const page = await newE2EPage();
 
     await page.setContent(
-      '<va-text-input required label="This is a test" error="With an error message" message-aria-describeby="with extra aria message"/>',
+      '<va-text-input required label="This is a test" error="With an error message" message-aria-describeby="with extra aria message" uswds="false"/>',
     );
 
     await axeCheck(page);
@@ -153,7 +153,7 @@ describe('va-text-input', () => {
     const page = await newE2EPage();
 
     await page.setContent(
-      '<va-text-input label="Input Field" enable-analytics/>',
+      '<va-text-input label="Input Field" enable-analytics uswds="false"/>',
     );
 
     const analyticsSpy = await page.spyOnEvent('component-library-analytics');
@@ -177,7 +177,7 @@ describe('va-text-input', () => {
   it('emits blur event', async () => {
     const page = await newE2EPage();
 
-    await page.setContent('<va-text-input label="Input Field"/>');
+    await page.setContent('<va-text-input label="Input Field" uswds="false"/>');
 
     const inputEl = await page.find('va-text-input >>> input');
     const blurSpy = await page.spyOnEvent('blur');
@@ -189,7 +189,7 @@ describe('va-text-input', () => {
   it('emits input event with value updated', async () => {
     const page = await newE2EPage();
 
-    await page.setContent('<va-text-input label="Input Field"/>');
+    await page.setContent('<va-text-input label="Input Field" uswds="false"/>');
 
     const inputEl = await page.find('va-text-input >>> input');
     const inputSpy = await page.spyOnEvent('input');
@@ -215,7 +215,7 @@ describe('va-text-input', () => {
   it("doesn't fire analytics events", async () => {
     const page = await newE2EPage();
 
-    await page.setContent('<va-text-input label="Input Field"/>');
+    await page.setContent('<va-text-input label="Input Field" uswds="false"/>');
 
     const analyticsSpy = await page.spyOnEvent('component-library-analytics');
     const inputEl = await page.find('va-text-input >>> input');
@@ -228,7 +228,7 @@ describe('va-text-input', () => {
   it('adds a character limit with descriptive text', async () => {
     const page = await newE2EPage();
     await page.setContent(
-      '<va-text-input minlength="2" maxlength="3" value="22"/>',
+      '<va-text-input minlength="2" maxlength="3" value="22" uswds="false"/>',
     );
 
     // Level-setting expectations
@@ -254,7 +254,7 @@ describe('va-text-input', () => {
 
   it('ignores negative maxlength values', async () => {
     const page = await newE2EPage();
-    await page.setContent('<va-text-input maxlength="-5"/>');
+    await page.setContent('<va-text-input maxlength="-5" uswds="false"/>');
 
     // Level-setting expectations
     const inputEl = await page.find('va-text-input >>> input');
@@ -268,7 +268,7 @@ describe('va-text-input', () => {
 
   it('ignores a maxlength of zero', async () => {
     const page = await newE2EPage();
-    await page.setContent('<va-text-input maxlength="0"/>');
+    await page.setContent('<va-text-input maxlength="0" uswds="false"/>');
 
     // Level-setting expectations
     const inputEl = await page.find('va-text-input >>> input');
@@ -291,7 +291,7 @@ describe('va-text-input', () => {
     ];
     for (const inputType of allowedInputTypes) {
       const page = await newE2EPage();
-      await page.setContent(`<va-text-input type="${inputType}" />`);
+      await page.setContent(`<va-text-input type="${inputType}" uswds="false"/>`);
       const inputEl = await page.find('va-text-input >>> input');
       expect(inputEl.getAttribute('type')).toBe(inputType);
     }
@@ -299,7 +299,7 @@ describe('va-text-input', () => {
 
   it('defaults to text when the type attribute is invalid or unsupported', async () => {
     const page = await newE2EPage();
-    await page.setContent('<va-text-input type="textual" />');
+    await page.setContent('<va-text-input type="textual" uswds="false"/>');
 
     // Level-setting expectations
     const inputEl = await page.find('va-text-input >>> input');
@@ -319,7 +319,7 @@ describe('va-text-input', () => {
     ];
     for (const inputMode of inputModes) {
       const page = await newE2EPage();
-      await page.setContent(`<va-text-input inputmode="${inputMode}" />`);
+      await page.setContent(`<va-text-input inputmode="${inputMode}" uswds="false"/>`);
       const inputEl = await page.find('va-text-input >>> input');
       expect(inputEl.getAttribute('inputmode')).toBe(inputMode);
     }
@@ -327,7 +327,7 @@ describe('va-text-input', () => {
 
   it('displays a green border around input when success is true', async () => {
     const page = await newE2EPage();
-    await page.setContent('<va-text-input success />');
+    await page.setContent('<va-text-input success uswds="false"/>');
 
     const input = await page.find('va-text-input >>> input');
     // rgb(0, 136, 23) is equal to #008817 and --color-green CSS variable
@@ -348,7 +348,7 @@ describe('va-text-input', () => {
   it('checks for autocomplete attribute', async () => {
     const page = await newE2EPage();
     await page.setContent(
-      '<va-text-input autocomplete="email" />',
+      '<va-text-input autocomplete="email" uswds="false"/>',
     );
 
     // Level-setting expectations
@@ -358,7 +358,7 @@ describe('va-text-input', () => {
 
   it('charcount and maxlength text does not display on memorable date', async () => {
     const page = await newE2EPage();
-    await page.setContent('<va-text-input class="memorable-date-input" label="This is a label" />');
+    await page.setContent('<va-text-input class="memorable-date-input" label="This is a label" uswds="false"/>');
 
     const charcountMessageEl = await page.find('va-text-input >>> #charcount-message');
     expect(charcountMessageEl).toBeNull();
@@ -371,7 +371,7 @@ describe('va-text-input', () => {
   it('uswds v3 renders', async () => {
     const page = await newE2EPage();
 
-    await page.setContent('<va-text-input label="Hello, world" uswds />');
+    await page.setContent('<va-text-input label="Hello, world" />');
     const element = await page.find('va-text-input');
 
     expect(element).toEqualHtml(`
@@ -392,7 +392,7 @@ describe('va-text-input', () => {
 
   it('uswds renders an error message', async () => {
     const page = await newE2EPage();
-    await page.setContent('<va-text-input error="This is a mistake" uswds />');
+    await page.setContent('<va-text-input error="This is a mistake" />');
 
     // Render the error message text
     const error = await page.find('va-text-input >>> .usa-error-message');
@@ -404,7 +404,7 @@ describe('va-text-input', () => {
 
   it('uswds sets aria-invalid based on invalid prop', async () => {
     const page = await newE2EPage();
-    await page.setContent('<va-text-input invalid uswds />');
+    await page.setContent('<va-text-input invalid />');
 
     const input = await page.find('va-text-input >>> input');
     expect(input.getAttribute('aria-invalid')).toEqual('true');
@@ -412,7 +412,7 @@ describe('va-text-input', () => {
 
   it('uswds adds aria-describedby for error message', async () => {
     const page = await newE2EPage();
-    await page.setContent('<va-text-input uswds />');
+    await page.setContent('<va-text-input />');
     // Check that error is empty
     const el = await page.find('va-text-input');
     const inputEl = await page.find('va-text-input >>> input');
@@ -430,7 +430,7 @@ describe('va-text-input', () => {
 
   it('uswds adds aria-describedby input-message id', async () => {
     const page = await newE2EPage();
-    await page.setContent('<va-text-input message-aria-describedby="example message" uswds />');
+    await page.setContent('<va-text-input message-aria-describedby="example message" />');
     const el = await page.find('va-text-input');
     const inputEl = await page.find('va-text-input >>> input');
 
@@ -449,7 +449,7 @@ describe('va-text-input', () => {
   it('uswds renders a required span', async () => {
     const page = await newE2EPage();
     await page.setContent(
-      '<va-text-input label="This is a field" required uswds />',
+      '<va-text-input label="This is a field" required />',
     );
 
     const requiredSpan = await page.find(
@@ -461,7 +461,7 @@ describe('va-text-input', () => {
 
   it('uswds renders hint text', async () => {
     const page = await newE2EPage();
-    await page.setContent('<va-text-input hint="This is hint text" label="hello, world" uswds />');
+    await page.setContent('<va-text-input hint="This is hint text" label="hello, world" />');
 
     // Render the hint text
     const hintTextElement = await page.find('va-text-input >>> .usa-hint');
@@ -472,7 +472,7 @@ describe('va-text-input', () => {
     const page = await newE2EPage();
 
     await page.setContent(
-      '<va-text-input required label="This is a test" error="With an error message" message-aria-describeby="with extra aria message" uswds />',
+      '<va-text-input required label="This is a test" error="With an error message" message-aria-describeby="with extra aria message" />',
     );
 
     await axeCheck(page);
@@ -482,7 +482,7 @@ describe('va-text-input', () => {
     const page = await newE2EPage();
 
     await page.setContent(
-      '<va-text-input label="Input Field" enable-analytics uswds />',
+      '<va-text-input label="Input Field" enable-analytics />',
     );
 
     const analyticsSpy = await page.spyOnEvent('component-library-analytics');
@@ -506,7 +506,7 @@ describe('va-text-input', () => {
   it('uswds emits blur event uswds', async () => {
     const page = await newE2EPage();
 
-    await page.setContent('<va-text-input label="Input Field" uswds />');
+    await page.setContent('<va-text-input label="Input Field" />');
 
     const inputEl = await page.find('va-text-input >>> input');
     const blurSpy = await page.spyOnEvent('blur');
@@ -518,7 +518,7 @@ describe('va-text-input', () => {
   it('uswds emits input event with value updated', async () => {
     const page = await newE2EPage();
 
-    await page.setContent('<va-text-input label="Input Field" uswds />');
+    await page.setContent('<va-text-input label="Input Field" />');
 
     const inputEl = await page.find('va-text-input >>> input');
     const inputSpy = await page.spyOnEvent('input');
@@ -544,7 +544,7 @@ describe('va-text-input', () => {
   it("uswds doesn't fire analytics events", async () => {
     const page = await newE2EPage();
 
-    await page.setContent('<va-text-input label="Input Field" uswds />');
+    await page.setContent('<va-text-input label="Input Field" />');
 
     const analyticsSpy = await page.spyOnEvent('component-library-analytics');
     const inputEl = await page.find('va-text-input >>> input');
@@ -556,7 +556,7 @@ describe('va-text-input', () => {
 
   it('uswds adds a character limit with descriptive text', async () => {
     const page = await newE2EPage();
-    await page.setContent('<va-text-input maxlength="3" value="22" uswds />');
+    await page.setContent('<va-text-input maxlength="3" value="22" />');
 
     // Level-setting expectations
     const inputEl = await page.find('va-text-input >>> input');
@@ -582,7 +582,7 @@ describe('va-text-input', () => {
 
    it('uswds respects the maxlength character limit', async () => {
      const page = await newE2EPage();
-     await page.setContent('<va-text-input maxlength="2" value="22" uswds />');
+     await page.setContent('<va-text-input maxlength="2" value="22" />');
 
      // Level-setting expectations
      const inputEl = await page.find('va-text-input >>> input');
@@ -603,7 +603,7 @@ describe('va-text-input', () => {
 
   it('uswds ignores negative maxlength values', async () => {
     const page = await newE2EPage();
-    await page.setContent('<va-text-input maxlength="-5" uswds />');
+    await page.setContent('<va-text-input maxlength="-5" />');
 
     // Level-setting expectations
     const inputEl = await page.find('va-text-input >>> input');
@@ -617,7 +617,7 @@ describe('va-text-input', () => {
 
   it('uswds ignores a maxlength of zero', async () => {
     const page = await newE2EPage();
-    await page.setContent('<va-text-input maxlength="0" uswds />');
+    await page.setContent('<va-text-input maxlength="0" />');
 
     // Level-setting expectations
     const inputEl = await page.find('va-text-input >>> input');
@@ -640,7 +640,7 @@ describe('va-text-input', () => {
     ];
     for (const inputType of allowedInputTypes) {
       const page = await newE2EPage();
-      await page.setContent(`<va-text-input type="${inputType}" uswds />`);
+      await page.setContent(`<va-text-input type="${inputType}" />`);
       const inputEl = await page.find('va-text-input >>> input');
       expect(inputEl.getAttribute('type')).toBe(inputType);
     }
@@ -648,7 +648,7 @@ describe('va-text-input', () => {
 
   it('uswds defaults to text when the type attribute is invalid or unsupported', async () => {
     const page = await newE2EPage();
-    await page.setContent('<va-text-input type="textual" uswds />');
+    await page.setContent('<va-text-input type="textual" />');
 
     // Level-setting expectations
     const inputEl = await page.find('va-text-input >>> input');
@@ -668,7 +668,7 @@ describe('va-text-input', () => {
     ];
     for (const inputMode of inputModes) {
       const page = await newE2EPage();
-      await page.setContent(`<va-text-input inputmode="${inputMode}" uswds />`);
+      await page.setContent(`<va-text-input inputmode="${inputMode}" />`);
       const inputEl = await page.find('va-text-input >>> input');
       expect(inputEl.getAttribute('inputmode')).toBe(inputMode);
     }
@@ -676,7 +676,7 @@ describe('va-text-input', () => {
 
   it('uswds displays a green border around input when success is true', async () => {
     const page = await newE2EPage();
-    await page.setContent('<va-text-input success uswds />');
+    await page.setContent('<va-text-input success />');
 
     const input = await page.find('va-text-input >>> input');
     // rgb(0, 169, 28) is equal to #00A91C from the USWDS v3 system.
@@ -697,7 +697,7 @@ describe('va-text-input', () => {
   it('uswds checks for autocomplete attribute', async () => {
     const page = await newE2EPage();
     await page.setContent(
-      '<va-text-input autocomplete="email" uswds />',
+      '<va-text-input autocomplete="email" />',
     );
 
     // Level-setting expectations
@@ -707,7 +707,7 @@ describe('va-text-input', () => {
 
   it('uswds shows chars allowed on load if maxlength set', async () => {
     const page = await newE2EPage();
-    await page.setContent('<va-text-input uswds maxlength="10" />');
+    await page.setContent('<va-text-input maxlength="10" />');
 
     const span = await page.find(
       'va-text-input >>> span.usa-character-count__status',
@@ -718,7 +718,7 @@ describe('va-text-input', () => {
   it('uswds shows chars left if maxlength set', async () => {
     const page = await newE2EPage();
 
-    await page.setContent('<va-text-input uswds maxlength="10"/>');
+    await page.setContent('<va-text-input maxlength="10"/>');
 
     const inputEl = await page.find('va-text-input >>> input');
     await inputEl.type('Hello');
@@ -730,7 +730,7 @@ describe('va-text-input', () => {
 
   it('uswds charcount and maxlength text does not display on memorable date', async () => {
     const page = await newE2EPage();
-    await page.setContent('<va-text-input class="memorable-date-input" label="This is a label" uswds />');
+    await page.setContent('<va-text-input class="memorable-date-input" label="This is a label" />');
 
     const charcountMessageEl = await page.find('va-text-input >>> #charcount-message');
     expect(charcountMessageEl).toBeNull();
@@ -741,7 +741,7 @@ describe('va-text-input', () => {
 
   it('uswds useFormsPattern displays header for the single field pattern', async () => {
     const page = await newE2EPage();
-    await page.setContent('<va-text-input label="This is a label" uswds use-forms-pattern="single" form-heading-level="1" form-heading="This is a form header" form-description="This is a form description"/>');
+    await page.setContent('<va-text-input label="This is a label" use-forms-pattern="single" form-heading-level="1" form-heading="This is a form header" form-description="This is a form description"/>');
 
     const formHeader = await page.find('va-text-input >>> h1');
     expect(formHeader.innerText).toEqual('This is a form header');
@@ -749,7 +749,7 @@ describe('va-text-input', () => {
 
   it('uswds useFormsPattern displays header for the multiple fields pattern', async () => {
     const page = await newE2EPage();
-    await page.setContent('<va-text-input label="This is a label" uswds use-forms-pattern="multiple" form-heading-level="1" form-heading="This is a form header" form-description="This is a form description"/>');
+    await page.setContent('<va-text-input label="This is a label" use-forms-pattern="multiple" form-heading-level="1" form-heading="This is a form header" form-description="This is a form description"/>');
 
     const formHeader = await page.find('va-text-input >>> h1');
     expect(formHeader.innerText).toEqual('This is a form header');
@@ -757,7 +757,7 @@ describe('va-text-input', () => {
 
   it('uswds useFormsPattern does not display header if "single" or "multiple" is not indicated', async () => {
     const page = await newE2EPage();
-    await page.setContent('<va-text-input label="This is a label" uswds use-forms-pattern="multiple" form-heading-level="1" form-heading="This is a form header" form-description="This is a form description"/>');
+    await page.setContent('<va-text-input label="This is a label" use-forms-pattern="multiple" form-heading-level="1" form-heading="This is a form header" form-description="This is a form description"/>');
 
     const formHeader = await page.find('va-text-input >>> h1');
     expect(formHeader.innerText).toEqual('This is a form header');
@@ -765,7 +765,7 @@ describe('va-text-input', () => {
 
   it('uswds useFormsPattern passes an aXe check', async () => {
     const page = await newE2EPage();
-    await page.setContent('<va-text-input label="This is a label" uswds use-forms-pattern="multiple" form-heading-level="1" form-heading="This is a form header" form-description="This is a form description"/>');
+    await page.setContent('<va-text-input label="This is a label" use-forms-pattern="multiple" form-heading-level="1" form-heading="This is a form header" form-description="This is a form description"/>');
 
     await axeCheck(page);
   });
