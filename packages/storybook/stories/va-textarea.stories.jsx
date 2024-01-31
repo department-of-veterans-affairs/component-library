@@ -26,6 +26,7 @@ const defaultArgs = {
   'placeholder': '',
   hint: null,
   'message-aria-describedby': 'Optional description text for screen readers',
+  uswds: false,
 };
 
 const Template = ({
@@ -39,6 +40,7 @@ const Template = ({
   placeholder,
   hint,
   'message-aria-describedby': messageAriaDescribedby,
+  uswds,
 }) => {
   return (
     <va-textarea
@@ -54,6 +56,7 @@ const Template = ({
       onBlur={e => console.log('blur event', e)}
       onInput={e => console.log('input event value', e.target.value)}
       message-aria-describedby={messageAriaDescribedby}
+      uswds={uswds}
     />
   );
 };
@@ -67,6 +70,7 @@ const ResizableTemplate = ({
   maxlength,
   value,
   placeholder,
+  uswds,
 }) => {
   return (
     <va-textarea
@@ -81,6 +85,7 @@ const ResizableTemplate = ({
       placeholder={placeholder}
       onBlur={e => console.log('blur event', e)}
       onInput={e => console.log('input event value', e.target.value)}
+      uswds={uswds}
     />
   );
 };

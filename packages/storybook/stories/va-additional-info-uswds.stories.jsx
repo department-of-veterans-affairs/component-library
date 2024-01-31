@@ -18,14 +18,12 @@ export default {
 };
 
 const defaultArgs = {
-  'uswds': true,
   'trigger': 'Additional Information',
   'disable-border': false,
   'disable-analytics': false,
 };
 
 const Template = ({
-  uswds,
   trigger,
   'disable-border': disableBorder,
   'disable-analytics': disableAnalytics,
@@ -34,7 +32,6 @@ const Template = ({
     <>
       <p>Surrounding content.</p>
       <va-additional-info
-        uswds={uswds}
         trigger={trigger}
         disable-analytics={disableAnalytics}
         disable-border={disableBorder}

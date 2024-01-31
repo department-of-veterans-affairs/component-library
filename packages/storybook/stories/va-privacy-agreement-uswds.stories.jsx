@@ -21,14 +21,12 @@ const defaultArgs = {
   'checked': false,
   'show-error': false,
   'enable-analytics': false,
-  'uswds': true,
 };
 
 const Template = ({
   checked,
   'show-error': showError,
   'enable-analytics': enableAnalytics,
-  'uswds': uswds,
 }) => {
   const [isChecked, setIsChecked] = useState(checked);
   const handler = event => setIsChecked(event?.detail?.checked);
@@ -39,7 +37,6 @@ const Template = ({
   return (
     <VaPrivacyAgreement
       checked={isChecked}
-      uswds={uswds}
       showError={showError}
       enable-analytics={enableAnalytics}
       onVaChange={handler}

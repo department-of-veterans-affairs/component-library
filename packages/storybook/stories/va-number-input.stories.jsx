@@ -35,6 +35,7 @@ const defaultArgs = {
   hint: null,
   'currency': false,
   'message-aria-describedby': 'Optional description text for screen readers',
+  uswds: false,
 };
 
 const vaNumberInput = args => {
@@ -51,6 +52,7 @@ const vaNumberInput = args => {
     hint,
     currency,
     'message-aria-describedby': messageAriaDescribedby,
+    uswds,
     ...rest
   } = args;
   return (
@@ -69,6 +71,7 @@ const vaNumberInput = args => {
       onBlur={e => console.log('blur event', e)}
       currency={currency}
       message-aria-describedby={messageAriaDescribedby}
+      uswds={uswds}
     />
   )
 }
@@ -96,6 +99,7 @@ const I18nTemplate = args => {
 const WidthsTemplate = ({
   name,
   value,
+  uswds,
 }) => {
   return (
     <>
@@ -104,6 +108,7 @@ const WidthsTemplate = ({
         name={name}
         label='My input - 2xs'
         value={value}
+        uswds={uswds}
       />
 
       <va-number-input
@@ -111,6 +116,7 @@ const WidthsTemplate = ({
         name={name}
         label='My input - xs'
         value={value}
+        uswds={uswds}
       />  
   
       <va-number-input
@@ -118,6 +124,7 @@ const WidthsTemplate = ({
         name={name}
         label='My input - sm'
         value={value}
+        uswds={uswds}
       />
 
       <va-number-input
@@ -125,6 +132,7 @@ const WidthsTemplate = ({
         name={name}
         label='My input - md'
         value={value}
+        uswds={uswds}
       />
 
       <va-number-input
@@ -132,6 +140,7 @@ const WidthsTemplate = ({
         name={name}
         label='My input - lg'
         value={value}
+        uswds={uswds}
       />
 
       <va-number-input
@@ -139,6 +148,7 @@ const WidthsTemplate = ({
         name={name}
         label='My input - xl'
         value={value}
+        uswds={uswds}
       />
 
       <va-number-input
@@ -146,6 +156,7 @@ const WidthsTemplate = ({
         name={name}
         label='My input - 2xl'
         value={value}
+        uswds={uswds}
       />
     </>
   );

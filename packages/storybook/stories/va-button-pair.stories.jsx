@@ -25,6 +25,7 @@ const defaultArgs = {
   'secondary-label': undefined,
   'submit': undefined,
   'update': undefined,
+  'uswds': false
 };
 
 const Template = ({
@@ -34,6 +35,7 @@ const Template = ({
   'secondary-label': secondaryLabel,
   submit,
   update,
+  uswds
 }) => {
   return (
     <VaButtonPair
@@ -45,6 +47,7 @@ const Template = ({
       onPrimaryClick={e => console.log(e)}
       onSecondaryClick={e => console.log(e)}
       update={update}
+      uswds={uswds}
     />
   );
 };

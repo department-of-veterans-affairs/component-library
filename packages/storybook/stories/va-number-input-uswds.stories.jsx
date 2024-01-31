@@ -33,7 +33,6 @@ const defaultArgs = {
   'min': undefined,
   'max': undefined,
   hint: null,
-  uswds: true,
   'use-forms-pattern': null,
   'form-heading-level': null,
   'form-heading': null,
@@ -52,12 +51,10 @@ const vaNumberInput = args => {
     min,
     max,
     hint,
-    uswds,
     ...rest
   } = args;
   return (
     <va-number-input
-      uswds={uswds}
       name={name}
       label={label}
       enable-analytics={enableAnalytics}
@@ -85,9 +82,9 @@ const I18nTemplate = args => {
 
   return (
     <div>
-      <va-button uswds onClick={e => setLang('es')} text="Español"/>
-      <va-button uswds onClick={e => setLang('en')} text="English"/>
-      <va-button uswds onClick={e => setLang('tl')} text="Tagalog"/>
+      <va-button onClick={e => setLang('es')} text="Español"/>
+      <va-button onClick={e => setLang('en')} text="English"/>
+      <va-button onClick={e => setLang('tl')} text="Tagalog"/>
       <div style={{marginTop: '20px'}}>
         {vaNumberInput(args)}
       </div>
@@ -97,13 +94,11 @@ const I18nTemplate = args => {
 const WidthsTemplate = ({
   name,
   value,
-  uswds,
 }) => {
   return (
     <>
       <va-number-input
         width="2xs"
-        uswds={uswds}
         name={name}
         label='My input - 2xs'
         value={value}
@@ -111,7 +106,6 @@ const WidthsTemplate = ({
 
       <va-number-input
         width="xs"
-        uswds={uswds}
         name={name}
         label='My input - xs'
         value={value}
@@ -119,7 +113,6 @@ const WidthsTemplate = ({
   
       <va-number-input
         width="sm"
-        uswds={uswds}
         name={name}
         label='My input - sm'
         value={value}
@@ -127,7 +120,6 @@ const WidthsTemplate = ({
 
       <va-number-input
         width="md"
-        uswds={uswds}
         name={name}
         label='My input - md'
         value={value}
@@ -135,7 +127,6 @@ const WidthsTemplate = ({
 
       <va-number-input
         width="lg"
-        uswds={uswds}
         name={name}
         label='My input - lg'
         value={value}
@@ -143,7 +134,6 @@ const WidthsTemplate = ({
 
       <va-number-input
         width="xl"
-        uswds={uswds}
         name={name}
         label='My input - xl'
         value={value}
@@ -151,7 +141,6 @@ const WidthsTemplate = ({
 
       <va-number-input
         width="2xl"
-        uswds={uswds}
         name={name}
         label='My input - 2xl'
         value={value}
@@ -163,7 +152,6 @@ const WidthsTemplate = ({
 const FormsPatternMultipleTemplate = ({
   name,
   value,
-  uswds,
 }) => {
   const handleClick = () => {
     const header = document.getElementById('form-pattern-multiple-input')
@@ -178,7 +166,6 @@ const FormsPatternMultipleTemplate = ({
         required
         error="This is an error message"
         id="form-pattern-multiple-input"
-        uswds={uswds}
         name={name}
         label='Social security number'
         hint="This is hint text"
@@ -190,7 +177,6 @@ const FormsPatternMultipleTemplate = ({
       />
 
       <va-number-input
-        uswds={uswds}
         name={name}
         label='VA file number'
         hint="This is hint text"
@@ -198,7 +184,6 @@ const FormsPatternMultipleTemplate = ({
       />  
 
       <va-number-input
-        uswds={uswds}
         name={name}
         label='Service number'
         hint="This is hint text"
@@ -216,7 +201,6 @@ const FormsPatternMultipleTemplate = ({
 const FormsPatternSingleTemplate = ({
   name,
   value,
-  uswds,
   error,
 }) => {
   const id = (Math.floor(Math.random() * 10) + 1);
@@ -232,7 +216,6 @@ const FormsPatternSingleTemplate = ({
       <va-number-input
         required
         id={`form-pattern-single-input-${id}`}
-        uswds={uswds}
         name={name}
         label="Example number"
         hint="This is hint text"

@@ -26,7 +26,6 @@ const Template = ({'button-text': buttonText, value, label, suggestions, uswds, 
       onInput={e => console.log(e)}
       onSubmit={e => console.log(e)}
       suggestions={suggestions}
-      uswds={uswds}
       small={small}
       big={big}
     />
@@ -38,7 +37,6 @@ const defaultArgs = {
   'value': 'benefits',
   'label': 'Search VA.gov',
   'suggestions': undefined,
-  'uswds': true,
   'small': false,
   'big': false,
 };
@@ -117,7 +115,6 @@ const TypeaheadTemplate = ({ value, suggestions }) => {
         onInput={handleInput}
         onSubmit={handleSubmit}
         suggestions={latestSuggestions}
-        uswds={true}
       />
 
     </div>

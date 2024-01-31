@@ -25,7 +25,6 @@ const defaultArgs = {
   'secondary-label': undefined,
   'submit': undefined,
   'update': undefined,
-  'uswds': true,
 };
 
 const Template = ({
@@ -35,12 +34,10 @@ const Template = ({
   'secondary-label': secondaryLabel,
   submit,
   update,
-  uswds,
 }) => {
   return (
     <div style={{ paddingLeft: '8px' }}>
       <VaButtonPair
-        uswds={uswds}
         continue={_continue}
         disable-analytics={disableAnalytics}
         primaryLabel={primaryLabel}

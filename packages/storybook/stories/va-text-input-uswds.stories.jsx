@@ -51,7 +51,6 @@ const defaultArgs = {
   'type': undefined,
   'success': false,
   'pattern': undefined,
-  'uswds': true,
   'hint': null,
   'message-aria-describedby': 'Optional description text for screen readers',
   'use-forms-pattern': null,
@@ -73,13 +72,11 @@ const Template = ({
   type,
   success,
   pattern,
-  uswds,
   hint,
   'message-aria-describedby': messageAriaDescribedby
 }) => {
   return (
     <va-text-input
-      uswds={uswds}
       name={name}
       label={label}
       autocomplete={autocomplete}
@@ -120,12 +117,11 @@ const I18nTemplate = ({
   }, [lang]);
   return (
     <>
-      <va-button uswds onClick={e => setLang('es')} text="Español"/>
-      <va-button uswds onClick={e => setLang('en')} text="English"/>
-      <va-button uswds onClick={e => setLang('tl')} text="Tagalog"/>
+      <va-button onClick={e => setLang('es')} text="Español"/>
+      <va-button onClick={e => setLang('en')} text="English"/>
+      <va-button onClick={e => setLang('tl')} text="Tagalog"/>
 
       <va-text-input
-        uswds={uswds}
         name={name}
         label={label}
         autocomplete={autocomplete}
@@ -145,13 +141,11 @@ const I18nTemplate = ({
 const WidthsTemplate = ({
   name,
   value,
-  uswds,
 }) => {
   return (
     <>
       <va-text-input
         width="2xs"
-        uswds={uswds}
         name={name}
         label='My input - 2xs'
         value={value}
@@ -159,7 +153,6 @@ const WidthsTemplate = ({
 
       <va-text-input
         width="xs"
-        uswds={uswds}
         name={name}
         label='My input - xs'
         value={value}
@@ -167,7 +160,6 @@ const WidthsTemplate = ({
 
       <va-text-input
         width="sm"
-        uswds={uswds}
         name={name}
         label='My input - sm'
         value={value}
@@ -175,7 +167,6 @@ const WidthsTemplate = ({
 
       <va-text-input
         width="md"
-        uswds={uswds}
         name={name}
         label='My input - md'
         value={value}
@@ -183,7 +174,6 @@ const WidthsTemplate = ({
 
       <va-text-input
         width="lg"
-        uswds={uswds}
         name={name}
         label='My input - lg'
         value={value}
@@ -191,7 +181,6 @@ const WidthsTemplate = ({
 
       <va-text-input
         width="xl"
-        uswds={uswds}
         name={name}
         label='My input - xl'
         value={value}
@@ -199,7 +188,6 @@ const WidthsTemplate = ({
 
       <va-text-input
         width="2xl"
-        uswds={uswds}
         name={name}
         label='My input - 2xl'
         value={value}
@@ -226,7 +214,6 @@ const FormsPatternMultipleTemplate = ({
         required
         error="This is an error message"
         id="form-pattern-multiple-input"
-        uswds={uswds}
         name={name}
         label='First Name'
         value={value}
@@ -237,14 +224,12 @@ const FormsPatternMultipleTemplate = ({
       />
 
       <va-text-input
-        uswds={uswds}
         name={name}
         label='Last Name'
         value={value}
       />
 
       <va-text-input
-        uswds={uswds}
         name={name}
         label='Email address'
         value={value}
@@ -261,7 +246,6 @@ const FormsPatternMultipleTemplate = ({
 const FormsPatternSingleTemplate = ({
   name,
   value,
-  uswds,
   error,
 }) => {
   const id = (Math.floor(Math.random() * 10) + 1);
@@ -277,7 +261,6 @@ const FormsPatternSingleTemplate = ({
       <va-text-input
         required
         id={`form-pattern-single-input-${id}`}
-        uswds={uswds}
         name={name}
         label="Historical figure"
         hint="This is hint text"
@@ -351,7 +334,7 @@ WithHintText.args = { ...defaultArgs, hint: 'This is hint text' };
 const WithInlineHintTextTemplate = ({ name, label }) => {
   return (
     <>
-      <va-text-input name={name} label={label} uswds />
+      <va-text-input name={name} label={label} />
       <p>If your hint is very short it can be included in the label.</p>
     </>
   );
@@ -362,7 +345,7 @@ WithInlineHintText.args = { ...defaultArgs, label: "My input (with hint)" };
 
 const WithAdditionalInfoTemplate = ({ name, label }) => {
   return (
-    <va-text-input name={name} label={label} uswds>
+    <va-text-input name={name} label={label}>
       <div>
         <va-additional-info trigger="Why is this required?">
           We need the Veteran’s Social Security number or tax identification

@@ -24,7 +24,8 @@ const defaultArgs = {
   'secondary': undefined,
   'submit': undefined,
   'text': 'Edit',
-  'primary-alternate': undefined
+  'primary-alternate': undefined,
+  'uswds': uswds
 };
 
 const Template = ({
@@ -51,7 +52,8 @@ const Template = ({
       submit={submit}
       text={text}
       onClick={e => console.log(e)}
-      primary-alternate = {primaryAlternate}
+      primary-alternate={primaryAlternate}
+      uswds={uswds}
     />
   );
 };

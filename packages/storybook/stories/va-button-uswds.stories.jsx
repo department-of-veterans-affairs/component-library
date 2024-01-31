@@ -25,7 +25,6 @@ const defaultArgs = {
   'primaryAlternate': undefined,
   'submit': undefined,
   'text': 'Default',
-  'uswds': true,
 };
 
 const Template = ({
@@ -39,11 +38,9 @@ const Template = ({
   primaryAlternate,
   submit,
   text,
-  uswds
 }) => {
   return (
     <va-button
-      uswds={uswds}
       back={back}
       big={big}
       continue={_continue}

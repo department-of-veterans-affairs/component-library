@@ -17,7 +17,7 @@ export default {
   },
 };
 
-const Template = ({ 'button-text': buttonText, value, label, suggestions }) => (
+const Template = ({ 'button-text': buttonText, value, label, suggestions, uswds }) => (
   <VaSearchInput
     buttonText={buttonText}
     value={value}
@@ -25,6 +25,7 @@ const Template = ({ 'button-text': buttonText, value, label, suggestions }) => (
     onInput={e => console.log(e)}
     onSubmit={e => console.log(e)}
     suggestions={suggestions}
+    uswds={uswds}
   />
 );
 
@@ -33,6 +34,7 @@ const defaultArgs = {
   'value': 'benefits',
   'label': 'Search',
   'suggestions': undefined,
+  'uswds': false,
 };
 
 export const Default = Template.bind(null);
@@ -47,7 +49,7 @@ WithButtonText.args = {
   'button-text': 'Search',
 };
 
-const TypeaheadTemplate = ({ value, suggestions }) => {
+const TypeaheadTemplate = ({ value, suggestions, uswds }) => {
   const [latestSuggestions, setLatestSuggestions] = useState(suggestions);
 
   /**
@@ -96,6 +98,7 @@ const TypeaheadTemplate = ({ value, suggestions }) => {
         onInput={handleInput}
         onSubmit={handleSubmit}
         suggestions={latestSuggestions}
+        uswds={uswds}
       />
     </div>
   );

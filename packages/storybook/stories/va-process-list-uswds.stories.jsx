@@ -15,18 +15,12 @@ export default {
       page: () => <StoryDocs data={processListDocs} />,
     },
   },
-  argTypes:{
-    uswds: {
-      control: false
-    }
-  }
 };
 
-const defaultArgs = {uswds: true};
 
-const Template = ({uswds}) => {
+const Template = ({}) => {
   return (
-    <va-process-list uswds={uswds}>
+    <va-process-list>
       <va-process-list-item header="Check to be sure you can request a Board Appeal">
         <p>
           You can request a Board Appeal up to 1 year from the date on your
@@ -67,9 +61,9 @@ const Template = ({uswds}) => {
 };
 
 
-const StatusTemplate = ({uswds}) => {
+const StatusTemplate = () => {
   return (
-    <va-process-list uswds={uswds}>
+    <va-process-list>
       <va-process-list-item checkmark header='Checkmark Icon'>  
         <p>Add the prop <code>checkmark</code> to make the list icon a checkmark.</p>
       </va-process-list-item>
@@ -85,9 +79,9 @@ const StatusTemplate = ({uswds}) => {
 };
 
 
-const HeaderSizeTemplate = ({uswds}) => {
+const HeaderSizeTemplate = () => {
   return (
-    <va-process-list uswds={uswds}>
+    <va-process-list>
       <va-process-list-item header='Size h1' level='1'/>
       <va-process-list-item header='Size h2' level='2'/>
       <va-process-list-item header='Size h3' level='3'/>
@@ -98,9 +92,9 @@ const HeaderSizeTemplate = ({uswds}) => {
   );
 };
 
-const CustomSizingTemplate = ({uswds}) => {
+const CustomSizingTemplate = () => {
   return (
-    <va-process-list uswds={uswds}>
+    <va-process-list>
       
       <va-process-list-item header='Step One' level='2'>
         <p class="vads-u-font-size--lg">Lorem ipsum dolor sit amet, consectetur adipiscing elit. </p>
@@ -116,10 +110,10 @@ const CustomSizingTemplate = ({uswds}) => {
   );
 };
 
-const UtilityStyling = ({uswds}) => {
+const UtilityStyling = () => {
   return (
-    <va-process-list uswds={uswds}>
-      <va-process-list-item uswds={uswds}>
+    <va-process-list>
+      <va-process-list-item>
         <p>Look at me in mobile view</p>
         <va-additional-info
           trigger="Show more"
@@ -128,7 +122,7 @@ const UtilityStyling = ({uswds}) => {
           <img src="https://via.placeholder.com/350" />
         </va-additional-info>
       </va-process-list-item>
-      <va-process-list-item uswds={uswds}>
+      <va-process-list-item>
         <p className="vads-u-margin-top--0">Look at me in desktop view</p>
         <p className="vads-u-display--none medium-screen:vads-u-display--block vads-u-background-color--gray-cool-light">
           I'm only visible on desktop.

@@ -37,7 +37,6 @@ const defaultArgs = {
   'primary-button-text': 'Primary',
   'secondaryButtonClick': () => window.alert('Secondary button clicked!'),
   'secondary-button-text': 'Secondary',
-  'uswds': true,
   'forcedModal': false,
 };
 
@@ -53,7 +52,6 @@ const Template = ({
   'secondary-button-text': secondaryButtonText,
   status,
   visible,
-  uswds,
   forcedModal,
 }) => {
   const [isVisible, setIsVisible] = useState(visible);
@@ -65,7 +63,6 @@ const Template = ({
       <va-button uswds onClick={openModal} text="Click here to open modal"/>
       <VaModal
         forcedModal={forcedModal}
-        uswds={uswds}
         clickToClose={clickToClose}
         disableAnalytics={disableAnalytics}
         large={large}
@@ -97,7 +94,6 @@ const ForcedTemplate = ({
   'secondary-button-text': secondaryButtonText,
   status,
   visible,
-  uswds,
   forcedModal,
 }) => {
   const [isVisible, setIsVisible] = useState(visible);
@@ -106,10 +102,9 @@ const ForcedTemplate = ({
   return (
     <div>
       <h1>Testing h1 heading</h1>
-      <va-button uswds onClick={openModal} text="Click here to open modal"/>
+      <va-button onClick={openModal} text="Click here to open modal"/>
       <VaModal
         forcedModal={forcedModal}
-        uswds={uswds}
         clickToClose={clickToClose}
         disableAnalytics={disableAnalytics}
         large={large}
@@ -184,7 +179,6 @@ export const WithNestedWebComponents = ({
   'secondary-button-text': secondaryButtonText,
   status,
   visible,
-  uswds,
   forcedModal,
 }) => {
   const [isVisible, setIsVisible] = useState(visible);
@@ -198,7 +192,6 @@ export const WithNestedWebComponents = ({
       <label htmlFor="pre-modal-input">Checkbox before the modal</label>
       <VaModal
         forcedModal={forcedModal}
-        uswds={uswds}
         clickToClose={clickToClose}
         disableAnalytics={disableAnalytics}
         large={large}

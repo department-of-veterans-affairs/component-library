@@ -37,6 +37,7 @@ const Template = ({
   'secondary-button-text': secondaryButtonText,
   status,
   visible,
+  uswds,
 }) => {
   const [isVisible, setIsVisible] = useState(visible);
   const onCloseEvent = () => setIsVisible(!isVisible);
@@ -58,6 +59,7 @@ const Template = ({
         secondaryButtonText={secondaryButtonText}
         status={status}
         visible={isVisible}
+        uswds={uswds}
       >
         <p>
           A modal may pass any React nodes as children to be displayed within
@@ -86,6 +88,7 @@ const defaultArgs = {
   'primary-button-text': 'Primary button',
   'secondaryButtonClick': () => window.alert('Secondary button clicked!'),
   'secondary-button-text': 'Secondary button',
+  'uswds': false
 };
 
 export const Default = Template.bind(null);
@@ -136,6 +139,7 @@ export const WithNestedWebComponents = ({
   'secondary-button-text': secondaryButtonText,
   status,
   visible,
+  uswds,
 }) => {
   const [isVisible, setIsVisible] = useState(visible);
   const onCloseEvent = () => setIsVisible(!isVisible);
@@ -159,6 +163,7 @@ export const WithNestedWebComponents = ({
         secondaryButtonText={secondaryButtonText}
         status={status}
         visible={isVisible}
+        uswds={uswds}
       >
         <p>
           A modal may pass any React nodes as children to be displayed within
@@ -216,13 +221,15 @@ const ButtonPairTemplate = ({
         secondaryButtonText={secondaryButtonText}
         status={status}
         visible={isVisible}
+        uswds={uswds}
       >
         <p>
           You have unsaved changes that will be lost.
         </p>
         <VaButtonPair
           onPrimaryClick={() => {}}
-          onSecondaryClick={function noRefCheck() {}}
+          onSecondaryClick={function noRefCheck() { }}
+          uswds={uswds}
         />
       </VaModal>
     </div>

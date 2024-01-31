@@ -27,7 +27,8 @@ const defaultArgs = {
   'error': "",
   'enable-analytics': false,
   hint: null,
-  'vaChange': (event) => alert(`File change event received: ${event?.detail?.files[0]?.name}`)
+  'vaChange': (event) => alert(`File change event received: ${event?.detail?.files[0]?.name}`),
+  'uswds': false
 };
 
 const Template = ({
@@ -40,6 +41,7 @@ const Template = ({
   hint,
   'enable-analytics': enableAnalytics,
   vaChange,
+  uswds
 }) => {
   return (
     <VaFileInput
@@ -52,6 +54,7 @@ const Template = ({
       hint={hint}
       enable-analytics={enableAnalytics}
       onVaChange={vaChange}
+      uswds={uswds}
     />
   );
 };

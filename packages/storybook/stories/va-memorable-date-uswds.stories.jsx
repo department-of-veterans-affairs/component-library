@@ -24,14 +24,12 @@ const defaultArgs = {
   required: false,
   error: undefined,
   value: undefined,
-  uswds: true,
   monthSelect: false,
 };
 
-const Template = ({ label, name, hint, required, error, uswds, value, monthSelect }) => {
+const Template = ({ label, name, hint, required, error, value, monthSelect }) => {
   return (
     <VaMemorableDate
-      uswds={uswds}
       monthSelect={monthSelect}
       label={label}
       name={name}
@@ -45,7 +43,7 @@ const Template = ({ label, name, hint, required, error, uswds, value, monthSelec
   );
 };
 
-const CustomValidationTemplate = ({ label, name, hint, required, error, uswds, value }) => {
+const CustomValidationTemplate = ({ label, name, hint, required, error, value }) => {
   const [dateVal, setDateVal] = useState(value);
   const [errorVal, setErrorVal] = useState(error);
   const today = new Date();
@@ -67,7 +65,6 @@ const CustomValidationTemplate = ({ label, name, hint, required, error, uswds, v
   return (
     <>
       <VaMemorableDate
-        uswds={uswds}
         label={label}
         name={name}
         hint={hint}
@@ -111,7 +108,7 @@ function handleDateBlur() &#x7b;<br/>
   );
 };
 
-const I18nTemplate = ({ label, name, required, error, uswds, value }) => {
+const I18nTemplate = ({ label, name, required, error, value }) => {
   const [lang, setLang] = useState('en');
 
   useEffect(() => {
@@ -120,11 +117,10 @@ const I18nTemplate = ({ label, name, required, error, uswds, value }) => {
 
   return (
     <div>
-      <va-button uswds style={{fontSize: '16px'}} onClick={e => setLang('es')} text="Español"/>
-      <va-button uswds style={{fontSize: '16px'}} onClick={e => setLang('en')} text="English"/>
-      <va-button uswds style={{fontSize: '16px'}} onClick={e => setLang('tl')} text="Tagalog"/>
+      <va-button style={{fontSize: '16px'}} onClick={e => setLang('es')} text="Español"/>
+      <va-button style={{fontSize: '16px'}} onClick={e => setLang('en')} text="English"/>
+      <va-button style={{fontSize: '16px'}} onClick={e => setLang('tl')} text="Tagalog"/>
       <VaMemorableDate
-        uswds={uswds}
         label={label}
         name={name}
         hint={hint}
@@ -137,7 +133,7 @@ const I18nTemplate = ({ label, name, required, error, uswds, value }) => {
     </div>
 )};
 
-const FormsPatternSingleTemplate = ({ label, name, hint, required, error, uswds, value, monthSelect }) => {
+const FormsPatternSingleTemplate = ({ label, name, hint, required, error, value, monthSelect }) => {
 
   const id = (Math.floor(Math.random() * 100) + 1);
   const handleClick = () => {
@@ -150,7 +146,6 @@ const FormsPatternSingleTemplate = ({ label, name, hint, required, error, uswds,
   return (
     <>
       <VaMemorableDate
-        uswds={uswds}
         monthSelect={monthSelect}
         label={label}
         name={name}
@@ -186,7 +181,7 @@ const FormsPatternSingleTemplate = ({ label, name, hint, required, error, uswds,
 };
 
 
-const FormsPatternMultipleTemplate = ({ label, name, hint, required, error, uswds, value, monthSelect }) => {
+const FormsPatternMultipleTemplate = ({ label, name, hint, required, error, value, monthSelect }) => {
 
   const handleClick = () => {
     const header = document.getElementById(`form-pattern-single-input-multiple`)
@@ -198,7 +193,6 @@ const FormsPatternMultipleTemplate = ({ label, name, hint, required, error, uswd
   return (
     <>
       <VaMemorableDate
-        uswds={uswds}
         monthSelect={monthSelect}
         label={label}
         name={name}
@@ -215,7 +209,6 @@ const FormsPatternMultipleTemplate = ({ label, name, hint, required, error, uswd
         form-description="This is the additional form-description prop"
       />
       <VaMemorableDate
-        uswds={uswds}
         monthSelect={monthSelect}
         label={'Date of enrollment'}
         name={name}

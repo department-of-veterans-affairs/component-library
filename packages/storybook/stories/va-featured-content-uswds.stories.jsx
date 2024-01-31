@@ -14,12 +14,10 @@ export default {
     },
   },
 };
-const defaultArgs = { uswds: true };
 
-const Template = args => {
-  const { uswds } = args
+const Template = ({}) => {
   return (
-  <va-featured-content uswds={uswds}>
+  <va-featured-content >
     <h3 slot="headline">
       If I'm a Veteran, can I get VR&E benefits and services?
     </h3>

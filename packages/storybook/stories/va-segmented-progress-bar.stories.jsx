@@ -21,6 +21,7 @@ const Template = ({
   current,
   total,
   label,
+  uswds,
 }) => (
   // Wrapper for spacing when viewing in storybook
   // Component can be used without it
@@ -48,6 +49,7 @@ const Template = ({
       current={current}
       total={total}
       label={label}
+      uswds={uswds}
     ></va-segmented-progress-bar>
     <div
       className="schemaform-chapter-progress"
@@ -67,6 +69,7 @@ const defaultArgs = {
   'current': 2,
   'total': 6,
   'label': undefined,
+  uswds: false,
 };
 
 export const Default = Template.bind(null);

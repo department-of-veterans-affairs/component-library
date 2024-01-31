@@ -37,7 +37,6 @@ const Template = ({
       page={page}
       pages={pages}
       max-page-list-length={maxPageListLength}
-      uswds
       unbounded={unbounded}
       onPageSelect={handlePageSelect}
     />
@@ -96,13 +95,13 @@ export const Internationalization = () => {
 
   return (
     <div>
-      <va-button uswds onClick={() => setLang('es')} text="Español"/>
-      <va-button uswds onClick={() => setLang('en')} text="English"/>
+      <va-button onClick={() => setLang('es')} text="Español"/>
+      <va-button onClick={() => setLang('en')} text="English"/>
       <div style={{ marginTop: '20px' }}>
         <h4>Default</h4>
-        <VaPagination page={page1} pages={24} maxPageListLength={7} uswds onPageSelect={(event) => setPage1(event.detail.page) }/>
+        <VaPagination page={page1} pages={24} maxPageListLength={7} onPageSelect={(event) => setPage1(event.detail.page) }/>
         <h4>Unbounded</h4>
-        <VaPagination page={page2} pages={24} maxPageListLength={7} unbounded uswds onPageSelect={(event) => setPage2(event.detail.page)}/>
+        <VaPagination page={page2} pages={24} maxPageListLength={7} unbounded onPageSelect={(event) => setPage2(event.detail.page)}/>
       </div>
     </div>
 )};

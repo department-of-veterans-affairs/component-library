@@ -20,6 +20,7 @@ const defaultArgs = {
   'page': 3,
   'pages': 15,
   'show-last-page': true,
+  uswds: false,
 };
 
 const Template = ({
@@ -37,6 +38,7 @@ const Template = ({
       pages={pages}
       onPageSelect={handlePageSelect}
       showLastPage={showLastPage}
+      uswds={uswds}
     />
   );
 };

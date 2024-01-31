@@ -26,6 +26,7 @@ const defaultArgs = {
   'hint': null,
   'tile': false,
   'message-aria-describedby': 'Optional description text for screen readers',
+  'uswds': false
 };
 
 const vaCheckbox = args => {
@@ -39,6 +40,7 @@ const vaCheckbox = args => {
     hint,
     tile,
     'message-aria-describedby': messageAriaDescribedBy,
+    uswds,
     ...rest
   } = args;
   return (
@@ -53,6 +55,7 @@ const vaCheckbox = args => {
       tile={tile}
       onBlur={e => console.log(e)}
       message-aria-describedby={messageAriaDescribedBy}
+      uswds={uswds}
     />
   )
 }

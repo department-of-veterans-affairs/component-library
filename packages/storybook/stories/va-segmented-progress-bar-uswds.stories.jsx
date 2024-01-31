@@ -38,7 +38,6 @@ const Template = ({
       total={total}
       label={label}
       heading-text={headingText}
-      uswds
       labels={labels}
       centered-labels={centeredLabels}
       counters={counters}
