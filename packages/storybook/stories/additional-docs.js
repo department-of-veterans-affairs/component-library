@@ -1,8 +1,7 @@
 import { category, level } from './maturity-scale';
 
 const { CAUTION, DONT_USE, USE } = category;
-const { AVAILABLE, BEST_PRACTICE, CANDIDATE, DEPLOYED, DEPRECATED, PROPOSED } =
-  level;
+const { AVAILABLE, BEST_PRACTICE, DEPLOYED, DEPRECATED } = level;
 
 export const additionalDocs = {
   // MDX
