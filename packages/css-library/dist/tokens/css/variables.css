@@ -1,10 +1,13 @@
 /**
  * Do not edit directly
- * Generated on Tue, 30 Jan 2024 20:32:33 GMT
+ * Generated on Wed, 31 Jan 2024 21:35:35 GMT
  */
 
 :root {
+  --xsmall-screen: 320px;
   --small-screen: 481px;
+  --medium-screen: 640px;
+  --small-desktop-screen: 1008px;
   --large-screen: 1201px;
   --color-base: #1b1b1b;
   --color-white: #ffffff;
