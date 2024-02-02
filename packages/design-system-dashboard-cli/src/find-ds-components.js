@@ -8,7 +8,6 @@ const path = require('path');
 const commandLineArgs = require('command-line-args');
 // @ts-ignore
 const _ = require('lodash');
-const writeCompPathOwnersToCSV = require('./write-react-owners-to-csv');
 
 const {
   readAllModules,
@@ -131,9 +130,6 @@ function tallyResults(vwComponents, contentBuildWC, uswdsComponents) {
     });
   });
 
-  // Function to write out as-yet-undeprecated component data
-  writeCompPathOwnersToCSV(instancesByComponent);
-
   return data;
 }
 
@@ -189,7 +185,7 @@ function findUsedReactComponents(vwModules, regexPattern) {
  * @param searchStrings {string[]} - The components to display usage for
  *
  * Passing in the string 'uswds' will output a list of all web components and
- * web component react bindings where the uswds prop is used
+ * web component react bindings where the uswds prop is used and not set to false
  */
 function findComponents(searchStrings) {
   const vwModules = readAllModules(`${repos['vets-website']}/src`);
@@ -210,7 +206,9 @@ function findComponents(searchStrings) {
   );
 
   const wcTagRegex = /<(va-[^\s>]+)/gms;
-  const wcUswds3Regex = /<(Va[^\s]+|va-[^\s]+)(\s|\n)[^>]*?uswds/gms;
+  // Excludes uswds="false" (explicit opt-out)
+  const wcUswds3Regex =
+    /<(Va[^\s]+|va-[^\s]+)(\s|\n)[^>]*?uswds(?!=?"?'?false)/gms;
 
   let vwWebComponents;
   let contentBuildWC;
