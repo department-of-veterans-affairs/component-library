@@ -365,7 +365,8 @@ const addPreviewHeading = (fileInputEl, fileNames) => {
  */
 
 const handleChange = (e, fileInputEl, instructions, dropTarget) => {
-  const fileNames = e.target.files;
+  const multiple = fileInputEl.getAttribute('multiple'); // TODO: Double-check this works correctly when multiple is re-enabled
+  const fileNames = multiple ? e.target.files : [e.target.files[0]];
   const inputParent = dropTarget.closest(`.${DROPZONE_CLASS}`);
   const statusElement = inputParent.querySelector(`.${SR_ONLY_CLASS}`);
   const fileStore = [];

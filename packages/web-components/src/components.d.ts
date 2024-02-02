@@ -435,10 +435,6 @@ export namespace Components {
          */
         "label"?: string;
         /**
-          * Optionally allow multiple files (USWDS Only)
-         */
-        "multiple"?: boolean;
-        /**
           * The name for the input element.
          */
         "name"?: string;
@@ -2375,10 +2371,6 @@ declare namespace LocalJSX {
           * The label for the file input.
          */
         "label"?: string;
-        /**
-          * Optionally allow multiple files (USWDS Only)
-         */
-        "multiple"?: boolean;
         /**
           * The name for the input element.
          */
