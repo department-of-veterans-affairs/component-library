@@ -4,13 +4,7 @@ const csv = require('csv');
 const codeowners = require('./codeowners.json');
 const today = require('./today');
 
-const componentsToKeep = [
-  'AlertBox',
-  'ExpandingGroup',
-  'IconSearch',
-  'Modal',
-  'TextInput',
-];
+const componentsToKeep = ['AlertBox', 'ExpandingGroup', 'Modal'];
 
 const hasMigrationScript = ['AlertBox'];
 

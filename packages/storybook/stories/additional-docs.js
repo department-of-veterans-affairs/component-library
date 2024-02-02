@@ -27,14 +27,6 @@ export const additionalDocs = {
     maturityCategory: DONT_USE,
     maturityLevel: DEPRECATED,
   },
-  'Icon - base': {
-    maturityCategory: CAUTION,
-    maturityLevel: AVAILABLE,
-  },
-  'Icon - search': {
-    maturityCategory: CAUTION,
-    maturityLevel: AVAILABLE,
-  },
   // MDX
   'Link - Action': {
     guidanceHref: 'link/action',
@@ -63,9 +55,5 @@ export const additionalDocs = {
     guidanceName: 'Tag',
     maturityCategory: USE,
     maturityLevel: DEPLOYED,
-  },
-  'TextInput - React': {
-    maturityCategory: DONT_USE,
-    maturityLevel: DEPRECATED,
   },
 };
