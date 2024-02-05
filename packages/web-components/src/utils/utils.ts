@@ -58,7 +58,7 @@ export function getCharacterMessage(
   value: string | undefined,
   maxlength: number | undefined,
 ): string {
-  if (value === undefined) {
+  if (value === undefined || value === '') {
     return `${maxlength} character${plurality(maxlength)} allowed`;
   }
 

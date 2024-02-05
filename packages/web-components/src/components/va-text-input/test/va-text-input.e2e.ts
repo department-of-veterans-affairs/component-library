@@ -228,7 +228,7 @@ describe('va-text-input', () => {
   it('adds a character limit with descriptive text', async () => {
     const page = await newE2EPage();
     await page.setContent(
-      '<va-text-input minlength="2" maxlength="3" value="22"/>',
+      '<va-text-input minlength="2" maxlength="3" charcount value="22"/>',
     );
 
     // Level-setting expectations
@@ -556,7 +556,7 @@ describe('va-text-input', () => {
 
   it('uswds adds a character limit with descriptive text', async () => {
     const page = await newE2EPage();
-    await page.setContent('<va-text-input maxlength="3" value="22" uswds />');
+    await page.setContent('<va-text-input maxlength="3" value="22" charcount uswds />');
 
     // Level-setting expectations
     const inputEl = await page.find('va-text-input >>> input');
@@ -582,7 +582,7 @@ describe('va-text-input', () => {
 
    it('uswds respects the maxlength character limit', async () => {
      const page = await newE2EPage();
-     await page.setContent('<va-text-input maxlength="2" value="22" uswds />');
+     await page.setContent('<va-text-input maxlength="2" charcount value="22" uswds />');
 
      // Level-setting expectations
      const inputEl = await page.find('va-text-input >>> input');
@@ -705,9 +705,9 @@ describe('va-text-input', () => {
     expect(await inputEl.getProperty('autocomplete')).toBe('email');
   });
 
-  it('uswds shows chars allowed on load if maxlength set', async () => {
+  it('uswds shows chars allowed on load if maxlength and charcount set', async () => {
     const page = await newE2EPage();
-    await page.setContent('<va-text-input uswds maxlength="10" />');
+    await page.setContent('<va-text-input uswds maxlength="10" charcount />');
 
     const span = await page.find(
       'va-text-input >>> span.usa-character-count__status',
@@ -715,10 +715,10 @@ describe('va-text-input', () => {
     expect(span.innerText).toEqual('10 characters allowed');
   });
 
-  it('uswds shows chars left if maxlength set', async () => {
+  it('uswds shows chars left if maxlength and charcount set', async () => {
     const page = await newE2EPage();
 
-    await page.setContent('<va-text-input uswds maxlength="10"/>');
+    await page.setContent('<va-text-input uswds charcount maxlength="10"/>');
 
     const inputEl = await page.find('va-text-input >>> input');
     await inputEl.type('Hello');
