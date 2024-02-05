@@ -1,0 +1,26 @@
+@forward 'settings';
+
+@use 'usa-summary-box/src/styles/usa-summary-box';
+@import '../../global/formation_overrides';
+
+:host {
+  display: block;
+}
+
+.usa-summary-box  {
+    @extend .usa-summary-box;
+    background-color: green;
+}
+
+.usa-summary-box__body  {
+    @extend .usa-summary-box__body;
+}
+
+.usa-summary-box__text  {
+    @extend .usa-summary-box__text;
+}
+
+.usa-list  {
+    @extend .usa-list;
+    background-color: green;
+}

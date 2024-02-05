@@ -9,6 +9,10 @@ import * as path from 'path';
 export const config: Config = {
   namespace: 'component-library',
   globalStyle: 'src/global/main.css',
+  // This allows us to choose between multiple styleseets
+  // as 'modes', as defined in the global.ts function;
+  // currently beign used for v1 and uswds
+  globalScript: 'src/global/global.ts',
   plugins: [
     sass({
       includePaths: [
