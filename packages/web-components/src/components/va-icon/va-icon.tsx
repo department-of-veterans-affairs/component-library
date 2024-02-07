@@ -18,6 +18,7 @@ import { consoleDevError } from '../../utils/utils';
   tag: 'va-icon',
   styleUrl: 'va-icon.scss',
   shadow: true,
+  assetsDirs: ['../../assets'],
 })
 export class VaIcon {
   /**
@@ -32,7 +33,7 @@ export class VaIcon {
   @Prop() size?: number;
 
   /**
-   * Screen-reader text if the icon has semantic meaning 
+   * Screen-reader text if the icon has semantic meaning
    * and is not purely decorative.
    */
   @Prop() srtext?: string;

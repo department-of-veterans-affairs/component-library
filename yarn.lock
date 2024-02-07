@@ -1902,7 +1902,7 @@ __metadata:
   dependencies:
     "@babel/core": ^7.15.5
     "@department-of-veterans-affairs/react-components": "workspace:*"
-    "@department-of-veterans-affairs/web-components": "workspace:*"
+    "@department-of-veterans-affairs/web-components": 4.59.1-rc.4
     babel-loader: ^8.2.2
     copy-webpack-plugin: ^9.0.1
     css-loader: ^6.4.0
@@ -1911,6 +1911,7 @@ __metadata:
     mini-css-extract-plugin: ^2.4.2
     react-focus-on: ^3.5.1
     react-transition-group: ^1.0.0
+    svg-url-loader: ^8.0.0
     webpack: ^5.56.0
     webpack-cli: ^4.8.0
   peerDependencies:
@@ -2052,7 +2053,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@department-of-veterans-affairs/web-components@workspace:*, @department-of-veterans-affairs/web-components@workspace:packages/web-components":
+"@department-of-veterans-affairs/web-components@4.59.1-rc.4, @department-of-veterans-affairs/web-components@workspace:packages/web-components":
   version: 0.0.0-use.local
   resolution: "@department-of-veterans-affairs/web-components@workspace:packages/web-components"
   dependencies:
@@ -10190,7 +10191,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"file-loader@npm:^6.2.0":
+"file-loader@npm:^6.2.0, file-loader@npm:~6.2.0":
   version: 6.2.0
   resolution: "file-loader@npm:6.2.0"
   dependencies:
@@ -19017,6 +19018,17 @@ resolve@^2.0.0-next.3:
   version: 1.0.0
   resolution: "supports-preserve-symlinks-flag@npm:1.0.0"
   checksum: 53b1e247e68e05db7b3808b99b892bd36fb096e6fba213a06da7fab22045e97597db425c724f2bbd6c99a3c295e1e73f3e4de78592289f38431049e1277ca0ae
+  languageName: node
+  linkType: hard
+
+"svg-url-loader@npm:^8.0.0":
+  version: 8.0.0
+  resolution: "svg-url-loader@npm:8.0.0"
+  dependencies:
+    file-loader: ~6.2.0
+  peerDependencies:
+    webpack: ^5.0.0
+  checksum: 265271f6a5c049705b554518ff1e8b62ea8336e6a563bfbe64aac0c32a10e603fb14a7954c4613e82f6d48aec655284bdeab21022f320e00cf525804175929ad
   languageName: node
   linkType: hard
 

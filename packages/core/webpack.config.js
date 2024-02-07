@@ -26,6 +26,16 @@ module.exports = {
           'css-loader',
         ],
       },
+      {
+        test: /\.svg/,
+        use: {
+          loader: 'svg-url-loader',
+          options: {
+            limit: 1024,
+            publicPath: './',
+          },
+        },
+      },
     ],
   },
   resolve: {
@@ -66,6 +76,11 @@ module.exports = {
           from: '*',
           to: './components/types',
           context: path.resolve(__dirname, '../', 'web-components/dist/types'),
+        },
+        {
+          from: 'assets/**/*',
+          to: './',
+          context: path.resolve(__dirname, '../', 'web-components/dist'),
         },
       ],
     }),

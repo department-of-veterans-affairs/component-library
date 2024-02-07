@@ -32,6 +32,7 @@ if (Build.isTesting) {
   tag: 'va-pagination',
   styleUrl: 'va-pagination.scss',
   shadow: true,
+  assetsDirs: ['../../assets'],
 })
 export class VaPagination {
   @Element() el: HTMLElement;
@@ -387,7 +388,7 @@ export class VaPagination {
           </li>}
           </Fragment>
           : null;
-      
+
       const nextButton = page < pages
         ?
         <Fragment>
