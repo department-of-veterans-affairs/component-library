@@ -206,7 +206,7 @@ function findComponents(searchStrings) {
   );
 
   const wcTagRegex = /<(va-[^\s>]+)/gms;
-  // Excludes uswds="false" (explicit opt-out)
+  // Excludes uswds="false" (explicit opt-out) == only matches true if V3, else not V3
   const wcUswds3Regex =
     /<(Va[^\s]+|va-[^\s]+)(\s|\n)[^>]*?uswds(?!=?"?'?false)/gms;
 
