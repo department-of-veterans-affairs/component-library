@@ -89,7 +89,7 @@ function writeCompPathsToCSV({ breakoutType, components }) {
     'App',
     'Owner',
     // @ts-ignore
-    'Total in App',
+    `Total - ${components.length}`,
   ]);
 
   // Finally, we write to csv, one file per breakout type
