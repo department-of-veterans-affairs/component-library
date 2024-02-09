@@ -1,14 +1,14 @@
 import { newSpecPage } from '@stencil/core/testing';
-import { VaMinimalHeader } from '../va-minimal-header';
+import { VaHeaderMinimal } from '../va-header-minimal';
 
-describe('va-minimal-header', () => {
+describe('va-header-minimal', () => {
   it('renders', async () => {
     const page = await newSpecPage({
-      components: [VaMinimalHeader],
-      html: `<va-minimal-header header='Header'></va-minimal-header>`,
+      components: [VaHeaderMinimal],
+      html: `<va-header-minimal header='Header'></va-header-minimal>`,
     });
     expect(page.root).toEqualHtml(`
-      <va-minimal-header header='Header' role="banner">
+      <va-header-minimal header='Header' role="banner">
         <mock:shadow-root>
           <va-official-gov-banner></va-official-gov-banner>
           <va-crisis-line-modal></va-crisis-line-modal>
@@ -21,17 +21,17 @@ describe('va-minimal-header', () => {
             </div>
           </div>
         </mock:shadow-root>
-      </va-minimal-header>
+      </va-header-minimal>
     `);
   });
 
   it('renders with a subheader', async () => {
     const page = await newSpecPage({
-      components: [VaMinimalHeader],
-      html: `<va-minimal-header header='Header' subheader='Subheader'></va-minimal-header>`,
+      components: [VaHeaderMinimal],
+      html: `<va-header-minimal header='Header' subheader='Subheader'></va-header-minimal>`,
     });
     expect(page.root).toEqualHtml(`
-      <va-minimal-header header='Header' role="banner" subheader='Subheader'>
+      <va-header-minimal header='Header' role="banner" subheader='Subheader'>
         <mock:shadow-root>
           <va-official-gov-banner></va-official-gov-banner>
           <va-crisis-line-modal></va-crisis-line-modal>
@@ -45,7 +45,7 @@ describe('va-minimal-header', () => {
             </div>
           </div>
         </mock:shadow-root>
-      </va-minimal-header>
+      </va-header-minimal>
     `);
   });
 });

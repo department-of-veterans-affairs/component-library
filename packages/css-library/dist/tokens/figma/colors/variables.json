@@ -122,6 +122,11 @@
         "value": "{uswds-system-color-green-cool-5}"
       }
     },
+    "orange": {
+      "*": {
+        "value": "{uswds-system-color-orange-40}"
+      }
+    },
     "gold": {
       "*": {
         "value": "{uswds-system-color-gold-vivid-20}"
@@ -151,6 +156,38 @@
       },
       "lightest": {
         "value": "{uswds-system-color-gray-warm-10}"
+      }
+    },
+    "hub": {
+      "health-care": {
+        "value": "{uswds-system-color-indigo-cool-60}"
+      },
+      "education": {
+        "value": "{uswds-system-color-mint-cool-50}"
+      },
+      "disability": {
+        "value": "{uswds-system-color-red-60}"
+      },
+      "careers": {
+        "value": "{uswds-system-color-orange-warm-50}"
+      },
+      "pension": {
+        "value": "{uswds-system-color-green-cool-50}"
+      },
+      "housing": {
+        "value": "{uswds-system-color-gold-50}"
+      },
+      "life-insurance": {
+        "value": "{uswds-system-color-green-warm-50}"
+      },
+      "burials": {
+        "value": "{uswds-system-color-blue-50}"
+      },
+      "family-member": {
+        "value": "{uswds-system-color-blue-warm-vivid-80}"
+      },
+      "service-member": {
+        "value": "{uswds-system-color-blue-warm-vivid-80}"
       }
     }
   }
