@@ -46,10 +46,8 @@
 }
 
 .usa-radio__input {
-  font-size: rem-override(1.6rem);
-  border-width: rem-override(0.1rem);
-  height: rem-override(4.2rem);
-  max-width: rem-override(46rem);
+  height: rem-override(1rem);
+  max-width: 320px;
   padding: rem-override(1rem) 0.7em;
 
   &--tile + [class*='__label'] {
