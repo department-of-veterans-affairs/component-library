@@ -1,16 +1,16 @@
 import { Component, Host, h, Prop, Element, State } from '@stencil/core';
 
 /**
- * @componentName Featured content
+ * @componentName Summary box
  * @maturityCategory use
  * @maturityLevel deployed
  */
 @Component({
-  tag: 'va-featured-content',
-  styleUrl: 'va-featured-content.scss',
+  tag: 'va-summary-box',
+  styleUrl: 'va-summary-box.scss',
   shadow: true,
 })
-export class VaFeaturedContent {
+export class VaSummaryBox {
   /**
    * Whether or not the component will use USWDS v3 styling.
    */
