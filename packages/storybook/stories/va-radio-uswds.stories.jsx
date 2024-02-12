@@ -504,6 +504,7 @@ FormsPatternSingleError.args = {
   ...defaultArgs,
   error: 'This is an error message',
   name: 'single2',
+  required: true
 };
 
 export const FormsPatternMultiple = FormsPatternMultipleTemplate.bind(null);

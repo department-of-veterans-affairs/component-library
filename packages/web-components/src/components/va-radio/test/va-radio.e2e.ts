@@ -488,7 +488,7 @@ describe('va-radio', () => {
 
     const element = await page.find('va-radio >>> .usa-label--required');
     expect(element).toEqualHtml(`
-      <span class="usa-label--required" part="required">
+      <span class="usa-label--required">
         required
       </span>
     `);
