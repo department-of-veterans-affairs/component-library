@@ -17,6 +17,7 @@ export default {
   },
 };
 
+const defaultArgs = {};
 
 const Template = ({}) => {
   return (

@@ -57,6 +57,7 @@ const defaultArgs = {
   'form-heading-level': null,
   'form-heading': null,
   'form-description': null,
+  'charcount': false,
 };
 
 const Template = ({
@@ -73,7 +74,8 @@ const Template = ({
   success,
   pattern,
   hint,
-  'message-aria-describedby': messageAriaDescribedby
+  'message-aria-describedby': messageAriaDescribedby,
+  charcount
 }) => {
   return (
     <va-text-input
@@ -93,6 +95,7 @@ const Template = ({
       onBlur={e => console.log('blur event', e)}
       onInput={e => console.log('input event value', e.target.value)}
       message-aria-describedby={messageAriaDescribedby}
+      charcount={charcount}
     />
   );
 };
@@ -364,7 +367,7 @@ WithAdditionalInfo.args = {
 };
 
 export const WithCharacterCount = Template.bind(null);
-WithCharacterCount.args = { ...defaultArgs, maxlength: '10'}
+WithCharacterCount.args = { ...defaultArgs, maxlength: '10', charcount: true }
 
 export const Widths = WidthsTemplate.bind(null);
 Widths.args = {

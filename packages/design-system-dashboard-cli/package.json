@@ -11,6 +11,7 @@
     "report:csv": "node src/find-ds-components --csv",
     "report:forms": "node src/find-form-apps --csv",
     "search": "node src/find-ds-components",
+    "get-sheets": "node src/create-spreadsheets",
     "test": "jest",
     "prepare": "husky install"
   },

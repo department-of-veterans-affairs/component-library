@@ -36,7 +36,6 @@ const Template = ({
   error,
   required,
   hint,
-  multiple,
   'enable-analytics': enableAnalytics,
   vaChange,
 }) => {
@@ -48,7 +47,6 @@ const Template = ({
       required={required}
       error={error}
       hint={hint}
-      multiple={multiple}
       enable-analytics={enableAnalytics}
       onVaChange={vaChange}
     />
@@ -78,13 +76,14 @@ AcceptsAnyKindOfImage.args = {
   accept: 'image/*',
 };
 
-export const AcceptsMultipleFiles = Template.bind(null);
-AcceptsMultipleFiles.args = {
-  ...defaultArgs,
-  label: 'Input accepts multiple files',
-  hint: 'Select one or more files',
-  multiple: true,
-};
+// Temporarily not supporting this option
+// export const AcceptsMultipleFiles = Template.bind(null);
+// AcceptsMultipleFiles.args = {
+//   ...defaultArgs,
+//   label: 'Input accepts multiple files',
+//   hint: 'Select one or more files',
+//   multiple: true,
+// };
 
 export const ErrorMessage = Template.bind(null);
 ErrorMessage.args = {

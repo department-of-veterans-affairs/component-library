@@ -2,24 +2,25 @@
 import React from 'react';
 import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
 
-const featuredContentDocs = getWebComponentDocs('va-featured-content');
+const summaryBoxDocs = getWebComponentDocs('va-summary-box');
 
 export default {
-  title: 'Components/Featured content',
-  id: 'components/va-featured-content',
+  title: 'USWDS/Summary box USWDS',
+  id: 'uswds/va-summary-box',
   parameters: {
-    componentSubtitle: `va-featured-content web component`,
+    componentSubtitle: `va-summary-box web component`,
     docs: {
-      page: () => <StoryDocs data={featuredContentDocs} />,
+      page: () => <StoryDocs data={summaryBoxDocs} />,
     },
   },
 };
-const defaultArgs = { uswds: false };
 
-const Template = args => {
-  const { uswds } = args
+const defaultArgs = {};
+
+
+const Template = ({}) => {
   return (
-  <va-featured-content uswds={uswds}>
+  <va-summary-box>
     <h3 slot="headline">
       If I'm a Veteran, can I get VR&E benefits and services?
     </h3>
@@ -42,11 +43,11 @@ const Template = args => {
         <a href="#">Apply for VR&amp;E services</a>
       </li>
     </ul>
-  </va-featured-content>
+  </va-summary-box>
 );
 }
 
 export const Default = Template.bind(null);
 Default.args = defaultArgs;
-Default.argTypes = propStructure(featuredContentDocs);
+Default.argTypes = propStructure(summaryBoxDocs);
 

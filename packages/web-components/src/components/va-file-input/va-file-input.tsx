@@ -66,7 +66,7 @@ export class VaFileInput {
   /**
    * Optionally allow multiple files (USWDS Only)
    */
-  @Prop() multiple?: boolean = false;
+  // @Prop() multiple?: boolean = false; NOTE: disabling temporarily
 
   /**
    * Emit component-library-analytics events on the file input change event.
@@ -144,8 +144,7 @@ export class VaFileInput {
   }
 
   render() {
-    const { label, name, required, accept, error, hint, multiple, uswds } =
-      this;
+    const { label, name, required, accept, error, hint, uswds } = this;
 
     const text = this.getButtonText();
 
@@ -196,7 +195,6 @@ export class VaFileInput {
             type="file"
             name={name}
             accept={accept}
-            multiple={multiple}
             aria-describedby={ariaDescribedbyIds}
             onChange={this.handleChange}
           />

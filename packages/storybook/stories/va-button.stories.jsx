@@ -25,7 +25,7 @@ const defaultArgs = {
   'submit': undefined,
   'text': 'Edit',
   'primary-alternate': undefined,
-  'uswds': uswds
+  'uswds': false
 };
 
 const Template = ({
@@ -38,7 +38,8 @@ const Template = ({
   secondary,
   submit,
   text,
-  primaryAlternate
+  primaryAlternate,
+  uswds
 }) => {
   return (
     <va-button

@@ -53,7 +53,8 @@ const defaultArgs = {
   'pattern': undefined,
   'message-aria-describedby': 'Optional description text for screen readers',
   hint: null,
-  uswds: false
+  uswds: false,
+  charcount: false,
 };
 
 const Template = ({
@@ -73,6 +74,7 @@ const Template = ({
   hint,
   'message-aria-describedby': messageAriaDescribedby,
   uswds,
+  charcount,
 }) => {
   return (
     <va-text-input
@@ -94,6 +96,7 @@ const Template = ({
       onInput={e => console.log('input event value', e.target.value)}
       message-aria-describedby={messageAriaDescribedby}
       uswds={uswds}
+      charcount={charcount}
     />
   );
 };
@@ -230,12 +233,14 @@ export const MaxLength = Template.bind(null);
 MaxLength.args = {
   ...defaultArgs,
   maxlength: '6',
+  charcount: true
 };
 
 export const MinLength = Template.bind(null);
 MinLength.args = {
   ...defaultArgs,
   minlength: '3',
+  charcount: true
 };
 
 export const Range = Template.bind(null);
