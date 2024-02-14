@@ -296,7 +296,7 @@ export class VaRadio {
                     {headerAriaDescribedby}
                   </span>
                 )}
-                {required && <span class="usa-label--required">{i18next.t('required')}</span>}
+                {required && <span class="usa-label--required" part="required">{i18next.t('required')}</span>}
                 {hint && <div class="usa-hint">{hint}</div>}
               </legend>
               <span class="usa-error-message" role="alert">
