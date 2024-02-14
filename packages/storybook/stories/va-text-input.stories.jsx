@@ -53,6 +53,7 @@ const defaultArgs = {
   'pattern': undefined,
   'message-aria-describedby': 'Optional description text for screen readers',
   hint: null,
+  charcount: false,
 };
 
 const Template = ({
@@ -71,6 +72,7 @@ const Template = ({
   pattern,
   hint,
   'message-aria-describedby': messageAriaDescribedby,
+  charcount,
 }) => {
   return (
     <va-text-input
@@ -91,6 +93,7 @@ const Template = ({
       onBlur={e => console.log('blur event', e)}
       onInput={e => console.log('input event value', e.target.value)}
       message-aria-describedby={messageAriaDescribedby}
+      charcount
     />
   );
 };
@@ -217,12 +220,14 @@ export const MaxLength = Template.bind(null);
 MaxLength.args = {
   ...defaultArgs,
   maxlength: '6',
+  charcount: true
 };
 
 export const MinLength = Template.bind(null);
 MinLength.args = {
   ...defaultArgs,
   minlength: '3',
+  charcount: true
 };
 
 export const Range = Template.bind(null);

@@ -403,12 +403,6 @@ export namespace Components {
          */
         "value"?: string;
     }
-    interface VaFeaturedContent {
-        /**
-          * Whether or not the component will use USWDS v3 styling.
-         */
-        "uswds"?: boolean;
-    }
     interface VaFileInput {
         /**
           * A comma-separated list of unique file type specifiers.
@@ -434,10 +428,6 @@ export namespace Components {
           * The label for the file input.
          */
         "label"?: string;
-        /**
-          * Optionally allow multiple files (USWDS Only)
-         */
-        "multiple"?: boolean;
         /**
           * The name for the input element.
          */
@@ -1177,6 +1167,12 @@ export namespace Components {
          */
         "inputValue": string;
     }
+    interface VaSummaryBox {
+        /**
+          * Whether or not the component will use USWDS v3 styling.
+         */
+        "uswds"?: boolean;
+    }
     interface VaTable {
         /**
           * Whether the initial sort state will be descending or not.
@@ -1232,6 +1228,10 @@ export namespace Components {
           * Allows the browser to automatically complete the input.
          */
         "autocomplete"?: string;
+        /**
+          * Whether the component should show a character count message. Has no effect without uswds and maxlength being set.
+         */
+        "charcount"?: boolean;
         /**
           * Emit component-library-analytics events on the blur event.
          */
@@ -1617,12 +1617,6 @@ declare global {
         prototype: HTMLVaDateElement;
         new (): HTMLVaDateElement;
     };
-    interface HTMLVaFeaturedContentElement extends Components.VaFeaturedContent, HTMLStencilElement {
-    }
-    var HTMLVaFeaturedContentElement: {
-        prototype: HTMLVaFeaturedContentElement;
-        new (): HTMLVaFeaturedContentElement;
-    };
     interface HTMLVaFileInputElement extends Components.VaFileInput, HTMLStencilElement {
     }
     var HTMLVaFileInputElement: {
@@ -1785,6 +1779,12 @@ declare global {
         prototype: HTMLVaStatementOfTruthElement;
         new (): HTMLVaStatementOfTruthElement;
     };
+    interface HTMLVaSummaryBoxElement extends Components.VaSummaryBox, HTMLStencilElement {
+    }
+    var HTMLVaSummaryBoxElement: {
+        prototype: HTMLVaSummaryBoxElement;
+        new (): HTMLVaSummaryBoxElement;
+    };
     interface HTMLVaTableElement extends Components.VaTable, HTMLStencilElement {
     }
     var HTMLVaTableElement: {
@@ -1831,7 +1831,6 @@ declare global {
         "va-checkbox-group": HTMLVaCheckboxGroupElement;
         "va-crisis-line-modal": HTMLVaCrisisLineModalElement;
         "va-date": HTMLVaDateElement;
-        "va-featured-content": HTMLVaFeaturedContentElement;
         "va-file-input": HTMLVaFileInputElement;
         "va-header-minimal": HTMLVaHeaderMinimalElement;
         "va-icon": HTMLVaIconElement;
@@ -1859,6 +1858,7 @@ declare global {
         "va-segmented-progress-bar": HTMLVaSegmentedProgressBarElement;
         "va-select": HTMLVaSelectElement;
         "va-statement-of-truth": HTMLVaStatementOfTruthElement;
+        "va-summary-box": HTMLVaSummaryBoxElement;
         "va-table": HTMLVaTableElement;
         "va-table-row": HTMLVaTableRowElement;
         "va-telephone": HTMLVaTelephoneElement;
@@ -2344,12 +2344,6 @@ declare namespace LocalJSX {
          */
         "value"?: string;
     }
-    interface VaFeaturedContent {
-        /**
-          * Whether or not the component will use USWDS v3 styling.
-         */
-        "uswds"?: boolean;
-    }
     interface VaFileInput {
         /**
           * A comma-separated list of unique file type specifiers.
@@ -2375,10 +2369,6 @@ declare namespace LocalJSX {
           * The label for the file input.
          */
         "label"?: string;
-        /**
-          * Optionally allow multiple files (USWDS Only)
-         */
-        "multiple"?: boolean;
         /**
           * The name for the input element.
          */
@@ -3262,6 +3252,12 @@ declare namespace LocalJSX {
          */
         "onVaInputChange"?: (event: VaStatementOfTruthCustomEvent<any>) => void;
     }
+    interface VaSummaryBox {
+        /**
+          * Whether or not the component will use USWDS v3 styling.
+         */
+        "uswds"?: boolean;
+    }
     interface VaTable {
         /**
           * Whether the initial sort state will be descending or not.
@@ -3321,6 +3317,10 @@ declare namespace LocalJSX {
           * Allows the browser to automatically complete the input.
          */
         "autocomplete"?: string;
+        /**
+          * Whether the component should show a character count message. Has no effect without uswds and maxlength being set.
+         */
+        "charcount"?: boolean;
         /**
           * Emit component-library-analytics events on the blur event.
          */
@@ -3498,7 +3498,6 @@ declare namespace LocalJSX {
         "va-checkbox-group": VaCheckboxGroup;
         "va-crisis-line-modal": VaCrisisLineModal;
         "va-date": VaDate;
-        "va-featured-content": VaFeaturedContent;
         "va-file-input": VaFileInput;
         "va-header-minimal": VaHeaderMinimal;
         "va-icon": VaIcon;
@@ -3526,6 +3525,7 @@ declare namespace LocalJSX {
         "va-segmented-progress-bar": VaSegmentedProgressBar;
         "va-select": VaSelect;
         "va-statement-of-truth": VaStatementOfTruth;
+        "va-summary-box": VaSummaryBox;
         "va-table": VaTable;
         "va-table-row": VaTableRow;
         "va-telephone": VaTelephone;
@@ -3552,7 +3552,6 @@ declare module "@stencil/core" {
             "va-checkbox-group": LocalJSX.VaCheckboxGroup & JSXBase.HTMLAttributes<HTMLVaCheckboxGroupElement>;
             "va-crisis-line-modal": LocalJSX.VaCrisisLineModal & JSXBase.HTMLAttributes<HTMLVaCrisisLineModalElement>;
             "va-date": LocalJSX.VaDate & JSXBase.HTMLAttributes<HTMLVaDateElement>;
-            "va-featured-content": LocalJSX.VaFeaturedContent & JSXBase.HTMLAttributes<HTMLVaFeaturedContentElement>;
             "va-file-input": LocalJSX.VaFileInput & JSXBase.HTMLAttributes<HTMLVaFileInputElement>;
             "va-header-minimal": LocalJSX.VaHeaderMinimal & JSXBase.HTMLAttributes<HTMLVaHeaderMinimalElement>;
             "va-icon": LocalJSX.VaIcon & JSXBase.HTMLAttributes<HTMLVaIconElement>;
@@ -3580,6 +3579,7 @@ declare module "@stencil/core" {
             "va-segmented-progress-bar": LocalJSX.VaSegmentedProgressBar & JSXBase.HTMLAttributes<HTMLVaSegmentedProgressBarElement>;
             "va-select": LocalJSX.VaSelect & JSXBase.HTMLAttributes<HTMLVaSelectElement>;
             "va-statement-of-truth": LocalJSX.VaStatementOfTruth & JSXBase.HTMLAttributes<HTMLVaStatementOfTruthElement>;
+            "va-summary-box": LocalJSX.VaSummaryBox & JSXBase.HTMLAttributes<HTMLVaSummaryBoxElement>;
             "va-table": LocalJSX.VaTable & JSXBase.HTMLAttributes<HTMLVaTableElement>;
             "va-table-row": LocalJSX.VaTableRow & JSXBase.HTMLAttributes<HTMLVaTableRowElement>;
             "va-telephone": LocalJSX.VaTelephone & JSXBase.HTMLAttributes<HTMLVaTelephoneElement>;
