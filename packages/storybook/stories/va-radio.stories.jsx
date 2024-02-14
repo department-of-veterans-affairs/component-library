@@ -153,10 +153,10 @@ const OptionDescriptionExample = args => {
     >
       <va-radio-option
         label="Option one"
-        name="example"
+        name="example-description"
         value="1"
         description="This is optional text that can be used to describe the label in more detail." />
-      <va-radio-option label="Option two" name="example" value="2" />
+      <va-radio-option label="Option two" name="example-description" value="2" />
     </va-radio>
   )
 }
