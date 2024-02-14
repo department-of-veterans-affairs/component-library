@@ -1,4 +1,19 @@
 {
+  "xsmall-screen": {
+    "value": "320px",
+    "filePath": "tokens/breakpoints.json",
+    "isSource": true,
+    "original": {
+      "value": "320px"
+    },
+    "name": "xsmall-screen",
+    "attributes": {
+      "category": "xsmall-screen"
+    },
+    "path": [
+      "xsmall-screen"
+    ]
+  },
   "small-screen": {
     "value": "481px",
     "filePath": "tokens/breakpoints.json",
@@ -12,6 +27,36 @@
     },
     "path": [
       "small-screen"
+    ]
+  },
+  "medium-screen": {
+    "value": "640px",
+    "filePath": "tokens/breakpoints.json",
+    "isSource": true,
+    "original": {
+      "value": "640px"
+    },
+    "name": "medium-screen",
+    "attributes": {
+      "category": "medium-screen"
+    },
+    "path": [
+      "medium-screen"
+    ]
+  },
+  "small-desktop-screen": {
+    "value": "1008px",
+    "filePath": "tokens/breakpoints.json",
+    "isSource": true,
+    "original": {
+      "value": "1008px"
+    },
+    "name": "small-desktop-screen",
+    "attributes": {
+      "category": "small-desktop-screen"
+    },
+    "path": [
+      "small-desktop-screen"
     ]
   },
   "large-screen": {

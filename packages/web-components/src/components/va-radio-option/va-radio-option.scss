@@ -19,6 +19,10 @@ va-radio-option {
   margin-top: 12px;
 }
 
+va-radio-option input {
+  z-index: -1;
+}
+
 va-radio-option input:focus {
   outline: none !important;
 }
