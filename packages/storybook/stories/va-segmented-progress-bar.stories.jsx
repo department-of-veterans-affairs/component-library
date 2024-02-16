@@ -6,7 +6,7 @@ const segmentedProgressBarDocs = getWebComponentDocs(
 );
 
 export default {
-  title: 'Components/Progress bar - segmented',
+  title: 'V1 Components/Progress bar - segmented',
   id: 'components/va-segmented-progress-bar',
   parameters: {
     componentSubtitle: `va-segmented-progress-bar web component`,

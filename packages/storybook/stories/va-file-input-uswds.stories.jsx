@@ -6,7 +6,7 @@ import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
 const fileInputDocs = getWebComponentDocs('va-file-input');
 
 export default {
-  title: 'USWDS/File input USWDS',
+  title: 'Components/File input USWDS',
   id: 'uswds/va-file-input',
   parameters: {
     componentSubtitle: `va-file-input web component`,

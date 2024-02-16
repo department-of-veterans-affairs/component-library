@@ -87,8 +87,8 @@ export const parameters = {
       order: [
         'About',
         ['Introduction'],
-        'USWDS',
         'Components',
+        'V1 Components',
         'Under development',
         'Deprecated',
       ],

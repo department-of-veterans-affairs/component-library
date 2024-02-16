@@ -6,7 +6,7 @@ const processListDocs = getWebComponentDocs('va-process-list');
 const processListItemDocs = getWebComponentDocs('va-process-list-item');
 
 export default {
-  title: 'USWDS/Process list USWDS',
+  title: 'Components/Process list USWDS',
   id: 'uswds/va-process-list',
   subcomponents: componentStructure(processListItemDocs),
   parameters: {

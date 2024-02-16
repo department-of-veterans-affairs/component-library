@@ -5,7 +5,7 @@ import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
 const summaryBoxDocs = getWebComponentDocs('va-summary-box');
 
 export default {
-  title: 'USWDS/Summary box USWDS',
+  title: 'Components/Summary box USWDS',
   id: 'uswds/va-summary-box',
   parameters: {
     componentSubtitle: `va-summary-box web component`,

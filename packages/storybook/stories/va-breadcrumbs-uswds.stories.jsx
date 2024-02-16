@@ -6,7 +6,7 @@ const breadcrumbsDocs = getWebComponentDocs('va-breadcrumbs');
 VaBreadcrumbs.displayName = 'VaBreadcrumbs';
 
 export default {
-  title: 'USWDS/Breadcrumbs USWDS',
+  title: 'Components/Breadcrumbs USWDS',
   id: 'uswds/va-breadcrumbs',
   parameters: {
     componentSubtitle: 'va-breadcrumbs web component',

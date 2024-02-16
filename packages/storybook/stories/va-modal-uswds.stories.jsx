@@ -7,7 +7,7 @@ VaModal.displayName = 'VaModal';
 const modalDocs = getWebComponentDocs('va-modal');
 
 export default {
-  title: 'USWDS/Modal USWDS',
+  title: 'Components/Modal USWDS',
   id: 'uswds/va-modal',
   parameters: {
     componentSubtitle: `va-modal web component`,

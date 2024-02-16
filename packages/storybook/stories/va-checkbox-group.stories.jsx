@@ -10,7 +10,7 @@ const checkBoxGroupDocs = getWebComponentDocs('va-checkbox-group');
 const checkbox = getWebComponentDocs('va-checkbox');
 
 export default {
-  title: 'Components/Checkbox group',
+  title: 'V1 Components/Checkbox group',
   id: 'components/va-checkbox-group',
   subcomponents: componentStructure(checkbox),
   parameters: {

@@ -5,7 +5,7 @@ import { VaPagination } from '@department-of-veterans-affairs/web-components/rea
 const paginationDocs = getWebComponentDocs('va-pagination');
 
 export default {
-  title: 'USWDS/Pagination USWDS',
+  title: 'Components/Pagination USWDS',
   id: 'uswds/va-pagination',
   parameters: {
     componentSubtitle: 'va-pagination web component',
