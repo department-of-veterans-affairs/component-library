@@ -349,7 +349,7 @@ const FormsPatternSingleTemplate = ({
         label={label}
         use-forms-pattern="single"
         form-heading-level={1}
-        form-heading="Burn pit S2.1, did you serve in any of there locations?"
+        form-heading="Burn pit S2.1, did you serve in any of these locations?"
         form-description="This is the additional form-description prop"
       >
         <va-radio-option label="Yes" name={name} value="11" />
@@ -471,6 +471,7 @@ FormsPatternSingleError.args = {
   ...defaultArgs,
   error: 'This is an error message',
   name: 'single2',
+  required: true
 };
 
 export const FormsPatternMultiple = FormsPatternMultipleTemplate.bind(null);
