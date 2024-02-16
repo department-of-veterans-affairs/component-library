@@ -14,7 +14,7 @@
 }
 
 .usa-file-input__input {
-  box-sizing: border-box; // Formation override.
+  box-sizing: inherit;
   font-family: var(--font-source-sans);
 }
 
