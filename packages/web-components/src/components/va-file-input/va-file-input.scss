@@ -4,15 +4,21 @@
 @use 'usa-label/src/styles/usa-label';
 @use 'usa-hint/src/styles/usa-hint';
 @use 'uswds-helpers/src/styles/usa-sr-only';
+
 @import '../../mixins/uswds-error-border.scss';
 @import '../../global/formation_overrides';
+@import '../../mixins/focusable.css';
 
-/* V3/USWDS Styles */
 [hidden] {
   display: none;
 }
 
-/* Original Styles */
+.usa-file-input__input {
+  box-sizing: border-box; // Formation override.
+  font-family: var(--font-source-sans);
+}
+
+/** Original Component Style **/
 @import '../../mixins/accessibility.css';
 @import '../../mixins/form-field-error.css';
 @import '../../mixins/hint-text.css';
