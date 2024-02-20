@@ -17,7 +17,7 @@ describe('USWDS maintenance-banner', () => {
     expect(element).toEqualHtml(`
       <va-maintenance-banner banner-id="maintenance-banner" class="hydrated" maintenance-end-date-time="${expiresAt}" maintenance-title="Site maintenance" maintenance-start-date-time="${startsAt}" upcoming-warn-start-date-time="${startsAt}" upcoming-warn-title="Upcoming site maintenance">
         <mock:shadow-root>
-          <div class="maintenance-banner maintenance-banner--error" role="banner">
+          <div class="maintenance-banner maintenance-banner--error">
             <div class="maintenance-banner__body">
               <h4 class="maintenance-banner__title">
                 Site maintenance
@@ -31,13 +31,17 @@ describe('USWDS maintenance-banner', () => {
                   <strong>
                     Date:
                   </strong>
-                    ${formatDate(startsAt, {dateStyle: 'full'})}
+                    ${formatDate(startsAt, { dateStyle: 'full' })}
                   </p>
                 <p>
                   <strong>
                     Time:
                   </strong>
-                    ${formatDate(startsAt, {hour:'numeric', minute: 'numeric', timeZoneName: 'short'})}
+                    ${formatDate(startsAt, {
+                      hour: 'numeric',
+                      minute: 'numeric',
+                      timeZoneName: 'short',
+                    })}
                   </p>
                   <p>
                     <strong>
@@ -51,7 +55,7 @@ describe('USWDS maintenance-banner', () => {
                 <i aria-hidden="true"></i>
               </button>
             </div>
-            
+
           </div>
         </mock:shadow-root>
         <div slot="maintenance-content">
@@ -117,7 +121,7 @@ describe('USWDS maintenance-banner', () => {
     expect(element).toEqualHtml(`
       <va-maintenance-banner banner-id="maintenance-banner" class="hydrated" maintenance-end-date-time="${expiresAt}" maintenance-title="Site maintenance" maintenance-start-date-time="${startsAt}" upcoming-warn-start-date-time="${warnStartsAt}" upcoming-warn-title="Upcoming site maintenance">
         <mock:shadow-root>
-          <div class="maintenance-banner maintenance-banner--warning" role="banner">
+          <div class="maintenance-banner maintenance-banner--warning">
             <div class="maintenance-banner__body">
               <h4 class="maintenance-banner__title">
                 Upcoming site maintenance
@@ -131,13 +135,17 @@ describe('USWDS maintenance-banner', () => {
                   <strong>
                     Date:
                   </strong>
-                    ${formatDate(startsAt, {dateStyle: 'full'})}
+                    ${formatDate(startsAt, { dateStyle: 'full' })}
                   </p>
                 <p>
                   <strong>
                     Time:
                   </strong>
-                    ${formatDate(startsAt, {hour:'numeric', minute: 'numeric', timeZoneName: 'short'})}
+                    ${formatDate(startsAt, {
+                      hour: 'numeric',
+                      minute: 'numeric',
+                      timeZoneName: 'short',
+                    })}
                   </p>
                   <p>
                     <strong>
