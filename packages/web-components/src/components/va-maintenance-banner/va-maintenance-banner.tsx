@@ -152,12 +152,12 @@ export class VaMaintenanceBanner {
 
       return (
         <Host>
-            <div class={maintenanceBannerClass} role="banner" ref={el => (this.maintenanceBannerEl = el as HTMLDivElement)}>
+            <div class={maintenanceBannerClass} ref={el => (this.maintenanceBannerEl = el as HTMLDivElement)}>
                 <div class="maintenance-banner__body">
                   <h4 class="maintenance-banner__title">{isWarning ? upcomingWarnTitle : maintenanceTitle}</h4>
-                  <div class="maintenance-banner__content" ref={el => (this.maintenanceBannerContent = el as HTMLDivElement)}>{ 
-                    isWarning ? 
-                      <slot name="warn-content"></slot> : 
+                  <div class="maintenance-banner__content" ref={el => (this.maintenanceBannerContent = el as HTMLDivElement)}>{
+                    isWarning ?
+                      <slot name="warn-content"></slot> :
                       <slot name="maintenance-content"></slot>
                   }</div>
                   <div class="maintenance-banner__derived-content">{this.derivePostContent(new Date(maintenanceStartDateTime), new Date(maintenanceEndDateTime))}</div>
@@ -170,13 +170,13 @@ export class VaMaintenanceBanner {
                     <i aria-hidden="true" />
                 </button>
                 </div>
-                
+
             </div>
         </Host>
       )
     } else {
       return null
     }
-    
+
   }
 }
