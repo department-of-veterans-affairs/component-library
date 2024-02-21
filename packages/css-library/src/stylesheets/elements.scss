@@ -8,6 +8,8 @@
 
 @use "../../dist/tokens/scss/variables" as *;
 
+@import 'uswds-core/src/styles/mixins/typography/usa-content-styles';
+
 html,
 body {
   padding: 0;
@@ -71,6 +73,26 @@ a {
 // H1 should only be used once at the top-level, so we can safely remove the margin-top.
 h1 {
   margin-top: 0;
+}
+
+@include usa-headings-styles;
+
+h1, h2, h3, h4, h5 {
+  font-family: $font-family-serif;
+}
+
+h6 {
+  font-family: $font-family-sans;
+}
+
+@media (max-width: $small-screen)  {
+  h1 {
+    font-size: 30px;
+  }
+
+  h2 {
+    font-size: 24px;
+  }
 }
 
 h6 {
@@ -145,16 +167,6 @@ input:focus::-moz-placeholder {
 
 input:focus:-ms-input-placeholder {
   color: transparent;
-}
-
-@media (max-width: $small-screen)  {
-  h1 {
-    font-size: 30px;
-  }
-
-  h2 {
-    font-size: 24px;
-  }
 }
 
 // Notice / feedback banners
