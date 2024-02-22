@@ -16,7 +16,7 @@ export default {
 
 const Template = ({ label, 'disable-analytics': disableAnalytics }) => (
   <va-breadcrumbs label={label} disable-analytics={disableAnalytics}>
-    <a href="#home">Home</a>
+    <a href="#home">VA.gov home</a>
     <a href="#one">Level one</a>
     <a href="#two">Level two</a>
   </va-breadcrumbs>
@@ -27,13 +27,13 @@ const DynamicCrumbsTemplate = ({
   'disable-analytics': disableAnalytics 
 }) => {
   const breadcrumbs = [
-    {label: 'Level 1', path: '/#1'},
+    {label: 'VA.gov home', path: '/#1'},
     {label: 'Level 2', path: '/#2'},
     {label: 'Level 3', path: '/#3'},
   ];
 
   const breadcrumbs2 = [
-    {label: 'First Link', path: '#example1'},
+    {label: 'VA.gov home', path: '#example1'},
     {label: 'Second Link', path: '#example2'},
     {label: 'Third Link', path: '#example3'},
     {label: 'Fourth Link', path: '#example4'},
