@@ -165,6 +165,12 @@ export class VaTextInput {
    */
   @Prop() formHeading?: string;
 
+    /**
+   * Whether the component should show a character count message.
+   * Has no effect without uswds and maxlength being set.
+   */
+    @Prop() charcount?: boolean = false;
+
   /**
    * The event used to track usage of the component. This is emitted when the
    * input is blurred and enableAnalytics is true.
@@ -252,11 +258,8 @@ export class VaTextInput {
       useFormsPattern,
       formHeadingLevel,
       formHeading,
+      charcount
     } = this;
-
-    // When used in va-memorable-date, we don't want to display the help messages
-    // below the input fields. The va-memorable-date component displays that information itself.
-    const isMessageDisplayed = !this.el.classList.contains('memorable-date-input') as boolean;
 
     const type = this.getInputType();
     const maxlength = this.getMaxlength();
@@ -362,7 +365,7 @@ export class VaTextInput {
                 {messageAriaDescribedby}
               </span>
             )}
-            {isMessageDisplayed && maxlength && (
+            {charcount && maxlength && (
               <span
                 id="charcount-message"
                 class={messageClass}
@@ -420,12 +423,12 @@ export class VaTextInput {
               {messageAriaDescribedby}
             </span>
           )}
-          {isMessageDisplayed && maxlength && value?.length >= maxlength && (
+          {charcount && maxlength && value?.length >= maxlength && (
             <small id="maxlength-message"  part="validation" aria-live="polite">
               {i18next.t('max-chars', { length: maxlength })}
             </small>
           )}
-          {isMessageDisplayed && minlength && value?.length < minlength && (
+          {charcount && minlength && value?.length < minlength && (
             <small id="charcount-message" part="validation">
               {i18next.t('min-chars', { length: minlength })}
             </small>

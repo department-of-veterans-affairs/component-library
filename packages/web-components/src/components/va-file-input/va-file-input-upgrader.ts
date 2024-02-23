@@ -395,7 +395,7 @@ const handleChange = (e, fileInputEl, instructions, dropTarget) => {
       );
     };
 
-    // Not all files will be able to generate previews. In case this happens, we provide several types "generic previews" based on the file extension.
+    // Not all files will be able to generate previews. In case this happens, we provide several types of "generic previews" based on the file extension.
     reader.onloadend = function createFilePreview() {
       const previewImage = dropTarget.querySelector(
         `#${imageId}`,
@@ -573,6 +573,11 @@ export const fileInput = {
           // Because of the way 'drop' works differently from 'change', need to get files from the dataTransfer object
           const dt = e.dataTransfer;
           (e.target as HTMLInputElement).files = dt.files;
+
+          // Don't allow user to drop multiple files
+          if (dt.files.length > 1) {
+            return;
+          }
           handleUpload(e, fileInputEl, instructions, dropTarget);
 
           // Because we're preventing the default behavior, need to manually fire off a change event
