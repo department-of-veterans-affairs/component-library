@@ -94,6 +94,12 @@ export class VaBreadcrumbs {
    * @private
    */
   private updateBreadCrumbList(breadcrumbList: Array<{ label: string; href: string; isRouterLink?: boolean }> | string) {
+    const firstBreadcrumb = breadcrumbList[0] as { label: string; href: string }
+
+    if (firstBreadcrumb) {
+      firstBreadcrumb.label = 'VA.gov home';
+    }
+
     this.formattedBreadcrumbs = typeof breadcrumbList === 'string' ? JSON.parse(breadcrumbList) : breadcrumbList;
   }
 
@@ -220,13 +226,18 @@ export class VaBreadcrumbs {
           node.classList.add('va-breadcrumbs-li');
         }
         const anchor = node.querySelector('a');
+
+        if (index === 0 && anchor) {
+          anchor.innerText = 'VA.gov home';
+        }
+
         const isAriaCurrent = anchor?.getAttribute('aria-current');
 
         if (isAriaCurrent && index !== slotNodes.length - 1) {
           anchor.removeAttribute('aria-current');
         }
 
-        if(this.uswds) {
+        if (this.uswds) {
           const span = document.createElement('span');
           span.textContent = anchor.textContent;
           anchor.innerHTML = '';

@@ -41,7 +41,7 @@ describe('va-breadcrumbs', () => {
           </nav>
         </mock:shadow-root>
         <li class="va-breadcrumbs-li">
-          <a href="#home">Home</a>
+          <a href="#home">VA.gov home</a>
         </li>
         <li class="va-breadcrumbs-li">
           <a href="#one">Level One</a>
@@ -74,7 +74,7 @@ describe('va-breadcrumbs', () => {
           </nav>
         </mock:shadow-root>
         <li class="va-breadcrumbs-li">
-          <a href="#home">Home</a>
+          <a href="#home">VA.gov home</a>
         </li>
         <li class="va-breadcrumbs-li">
           <a href="#one">Level One</a>
@@ -144,6 +144,22 @@ describe('va-breadcrumbs', () => {
     expect(analyticsSpy).toHaveReceivedEventTimes(0);
   });
 
+  it('updates first anchor link label to "VA.gov home"', async () => {
+    const page = await newE2EPage();
+    await page.setContent(`
+      <va-breadcrumbs>
+        <a href="#home">not the right label</a>
+        <a href="#one">Level One</a>
+        <a href="#two">Level Two</a>
+      </va-breadcrumbs>
+    `);
+
+    const anchorElements = await page.findAll('pierce/a');
+    const firstAnchorText = anchorElements[0].innerText;
+    
+    expect(firstAnchorText).toBe('VA.gov home');
+  });
+
   /** Begin USWDS v3 Tests */
 
   it('uswds - renders', async () => {
@@ -158,7 +174,7 @@ describe('va-breadcrumbs', () => {
             <ol class="usa-breadcrumb__list" role="list">
               <li class="usa-breadcrumb__list-item">
                 <a class="usa-breadcrumb__link" href="#home">
-                  <span>Home</span>
+                  <span>VA.gov home</span>
                 </a>
               </li>
               <li class="usa-breadcrumb__list-item usa-current" aria-current="page">
@@ -207,7 +223,7 @@ describe('va-breadcrumbs', () => {
       action: 'linkClick',
       componentName: 'va-breadcrumbs',
       details: {
-        clickLabel: 'Level One',
+        clickLabel: 'VA.gov home',
         clickLevel: 1,
         totalLevels: 3,
       },
@@ -240,7 +256,7 @@ describe('va-breadcrumbs', () => {
             <ol class="usa-breadcrumb__list" role="list">
               <li class="usa-breadcrumb__list-item">
                 <a class="usa-breadcrumb__link" href="/one">
-                  <span>One</span>
+                  <span>VA.gov home</span>
                 </a>
               </li>
               <li class="usa-breadcrumb__list-item">
@@ -288,6 +304,18 @@ describe('va-breadcrumbs', () => {
 
     await anchorElements[0].click();
     expect(routeChangeSpy).not.toHaveReceivedEvent();
+  });
+
+  it('uswds - updates first anchor link to "VA.gov home"', async () => {
+    const page = await newE2EPage();
+    await page.setContent(`
+    <va-breadcrumbs breadcrumb-list=\'[{ "label": "One", "href": "/one" }, { "label": "Two", "href": "/two" }, { "label": "Three", "href": "/three" }]\' uswds></va-breadcrumbs>
+    `);
+
+    const anchorElements = await page.findAll('va-breadcrumbs >>> a');
+    const firstAnchorLabel = await anchorElements[0].getProperty('innerText');
+
+    expect(firstAnchorLabel).toBe('VA.gov home');
   });
 
 });
