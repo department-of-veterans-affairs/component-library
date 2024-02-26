@@ -160,6 +160,22 @@ describe('va-breadcrumbs', () => {
     expect(firstAnchorText).toBe('VA.gov home');
   });
 
+  it('does not update first anchor link label to "VA.gov home" when homeVeteransAffairs prop is false', async () => {
+    const page = await newE2EPage();
+    await page.setContent(`
+      <va-breadcrumbs home-veterans-affairs="false">
+        <a href="#home">home</a>
+        <a href="#one">Level One</a>
+        <a href="#two">Level Two</a>
+      </va-breadcrumbs>
+    `);
+
+    const anchorElements = await page.findAll('pierce/a');
+    const firstAnchorText = anchorElements[0].innerText;
+    
+    expect(firstAnchorText).toBe('home');
+  });
+
   /** Begin USWDS v3 Tests */
 
   it('uswds - renders', async () => {
@@ -316,6 +332,22 @@ describe('va-breadcrumbs', () => {
     const firstAnchorLabel = await anchorElements[0].getProperty('innerText');
 
     expect(firstAnchorLabel).toBe('VA.gov home');
+  });
+
+  it('uswds - does not update first anchor link label to "VA.gov home" when homeVeteransAffairs prop is false', async () => {
+    const page = await newE2EPage();
+    await page.setContent(`
+      <va-breadcrumbs home-veterans-affairs="false" uswds>
+        <a href="#home">home</a>
+        <a href="#one">Level One</a>
+        <a href="#two">Level Two</a>
+      </va-breadcrumbs>
+    `);
+
+    const anchorElements = await page.findAll('pierce/a');
+    const firstAnchorText = anchorElements[0].innerText;
+    
+    expect(firstAnchorText).toBe('home');
   });
 
 });
