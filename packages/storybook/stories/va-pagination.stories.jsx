@@ -27,6 +27,7 @@ const Template = ({
   'page': currentPage,
   pages,
   'show-last-page': showLastPage,
+  uswds
 }) => {
   const [page, setPage] = useState(currentPage);
   const handlePageSelect = event => {
