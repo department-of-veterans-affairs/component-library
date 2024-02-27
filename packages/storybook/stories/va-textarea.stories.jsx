@@ -5,7 +5,7 @@ import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
 const textareaDocs = getWebComponentDocs('va-textarea');
 
 export default {
-  title: `Components/Textarea`,
+  title: `V1 Components/Textarea`,
   id: 'components/va-textarea',
   parameters: {
     componentSubtitle: `va-textarea web component`,
