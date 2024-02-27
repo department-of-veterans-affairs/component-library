@@ -67,7 +67,6 @@ const vaRadioConst = args => {
         label="Booker T. Washington"
         name={name}
         value="3"
-        uswds={uswds}
       />
       <va-radio-option
         label="George Washington Carver"
@@ -259,7 +258,7 @@ const USWDSTiledError = ({
   );
 };
 
-const FormsPatternMultipleTemplate = ({ uswds, label, required }) => {
+const FormsPatternMultipleTemplate = ({ label, required }) => {
   const handleClick = () => {
     const header = document
       .getElementById('form-pattern-multiple-input')
