@@ -10,6 +10,7 @@
 
 @import '../../mixins/form-field-error.css';
 @import '../../mixins/hint-text.css';
+@import '~@department-of-veterans-affairs/css-library/dist/elements.css';
 
 :host(:not([uswds='true'], [uswds=''])) {
   input[type='number'] {

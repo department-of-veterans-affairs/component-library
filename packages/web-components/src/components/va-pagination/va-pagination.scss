@@ -15,9 +15,9 @@
   a.usa-pagination__previous-page > div {
     display: flex;
   }
-
-  .usa-pagination .usa-current {
-    background-color: var(--color-primary);
+  // ToDo: remove this when USWDS package is updated
+  .usa-pagination__overflow {
+    opacity: inherit;
   }
 }
 
