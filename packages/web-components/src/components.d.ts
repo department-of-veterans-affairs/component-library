@@ -170,6 +170,10 @@ export namespace Components {
          */
         "disableAnalytics"?: boolean;
         /**
+          * When true, the first breadcrumb label will be "VA.gov home".
+         */
+        "homeVeteransAffairs"?: boolean;
+        /**
           * Adds an aria-label attribute to the <nav /> element.
          */
         "label"?: string;
@@ -2062,6 +2066,10 @@ declare namespace LocalJSX {
           * Analytics tracking function(s) will not be called
          */
         "disableAnalytics"?: boolean;
+        /**
+          * When true, the first breadcrumb label will be "VA.gov home".
+         */
+        "homeVeteransAffairs"?: boolean;
         /**
           * Adds an aria-label attribute to the <nav /> element.
          */
