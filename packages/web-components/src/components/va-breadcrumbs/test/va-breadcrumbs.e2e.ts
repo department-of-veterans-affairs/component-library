@@ -147,7 +147,7 @@ describe('va-breadcrumbs', () => {
   it('updates first anchor link label to "VA.gov home"', async () => {
     const page = await newE2EPage();
     await page.setContent(`
-      <va-breadcrumbs>
+      <va-breadcrumbs uswds="false">
         <a href="#home">not the right label</a>
         <a href="#one">Level One</a>
         <a href="#two">Level Two</a>
