@@ -16,7 +16,7 @@ export default {
   },
 };
 const dataArray = [
-  { label: 'Level one', href: '#one' },
+  { label: 'VA.gov home', href: '#one' },
   { label: 'Level two', href: '#two' },
   { label: 'Level three', href: '#three' },
 ];
@@ -35,7 +35,7 @@ const DynamicCrumbsTemplate = ({
   'disable-analytics': disableAnalytics,
 }) => {
   const breadcrumbs = [
-    { label: 'Level 1', href: '/#1' },
+    { label: 'VA.gov home', href: '/#1' },
     { label: 'Level 2', href: '/#2' },
     { label: 'Level 3', href: '/#3' },
   ];
@@ -87,7 +87,7 @@ const WrappingCrumbsTemplate = ({
   wrapping,
 }) => {
   const breadcrumbs = [
-    { label: 'Home', href: '/#1' },
+    { label: 'VA.gov home', href: '/#1' },
     { label: 'Federal Contracting', href: '/#2' },
     { label: 'Contracting assistance programs', href: '/#3' },
     {
@@ -116,7 +116,7 @@ const WithRouterTemplate = ({
   wrapping
 }) => {
   const breadcrumbs = [
-    { label: 'Home', href: '/#1' },
+    { label: 'VA.gov home', href: '/#1' },
     { label: 'Federal Contracting', href: '/#2', isRouterLink: true },
     { label: 'Contracting assistance programs', href: '/#3', isRouterLink: true },
     {
@@ -183,7 +183,7 @@ const defaultArgs = {
   'uswds': true,
   'label': 'Breadcrumb',
   'breadcrumb-list':
-    '[{ "label": "Level One", "href": "#one" }, { "label": "Level two", "href": "#two" }, { "label": "Current", "href": "#current" }]',
+    '[{ "label": "VA.gov home", "href": "#one" }, { "label": "Level two", "href": "#two" }, { "label": "Current", "href": "#current" }]',
   'disable-analytics': false,
   'wrapping': false,
 };

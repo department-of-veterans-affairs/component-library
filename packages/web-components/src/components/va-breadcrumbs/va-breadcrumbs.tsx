@@ -40,6 +40,12 @@ export class VaBreadcrumbs {
    *  Represents a list of breadcrumbs. Use an array of objects with label and href properties, and then use JSON.stringify() to convert to a string. This prop is available when `uswds` is set to `true`.
    */
   @Prop() breadcrumbList?: any;
+
+  /**
+   *  When true, the first breadcrumb label will be "VA.gov home". 
+   */
+  @Prop() homeVeteransAffairs?: boolean = true;
+
   /**
    * 
    * Represents an internal state of the component which stores the list of breadcrumbs parsed from the 'breadcrumbList' prop. 
@@ -94,6 +100,12 @@ export class VaBreadcrumbs {
    * @private
    */
   private updateBreadCrumbList(breadcrumbList: Array<{ label: string; href: string; isRouterLink?: boolean }> | string) {
+    const firstBreadcrumb = breadcrumbList[0] as { label: string; href: string }
+
+    if (firstBreadcrumb && this.homeVeteransAffairs) {
+      firstBreadcrumb.label = 'VA.gov home';
+    }
+
     this.formattedBreadcrumbs = typeof breadcrumbList === 'string' ? JSON.parse(breadcrumbList) : breadcrumbList;
   }
 
@@ -220,13 +232,18 @@ export class VaBreadcrumbs {
           node.classList.add('va-breadcrumbs-li');
         }
         const anchor = node.querySelector('a');
+
+        if (index === 0 && anchor && this.homeVeteransAffairs) {
+          anchor.innerText = 'VA.gov home';
+        }
+
         const isAriaCurrent = anchor?.getAttribute('aria-current');
 
         if (isAriaCurrent && index !== slotNodes.length - 1) {
           anchor.removeAttribute('aria-current');
         }
 
-        if(this.uswds) {
+        if (this.uswds) {
           const span = document.createElement('span');
           span.textContent = anchor.textContent;
           anchor.innerHTML = '';
