@@ -38,6 +38,16 @@ export class VaButton {
   @Prop({ reflect: true }) continue?: boolean = false;
 
   /**
+   * If `true`, the button will display an icon to represent going back in form flows.
+   */
+  @Prop({ reflect: true }) chevronLeft?: boolean = false;
+
+  /**
+   * If `true`, the button will display icon to represent proceeding forward in form flows.
+   */
+  @Prop({ reflect: true }) chevronRight?: boolean = false;
+
+  /**
    * If `true`, the component-library-analytics event is disabled.
    */
   @Prop() disableAnalytics?: boolean = false;
@@ -96,7 +106,7 @@ export class VaButton {
           type: this.secondary ? 'secondary' : 'primary',
           label: this.getButtonText(),
         },
-      }
+      };
       this.componentLibraryAnalytics.emit(detail);
     }
   };
@@ -128,6 +138,8 @@ export class VaButton {
     const {
       back,
       continue: _continue,
+      chevronLeft,
+      chevronRight,
       disabled,
       getButtonText,
       label,
@@ -135,41 +147,22 @@ export class VaButton {
       secondary,
       primaryAlternate,
       big,
-      uswds
+      uswds,
     } = this;
 
     const ariaDisabled = disabled ? 'true' : undefined;
     const buttonText = getButtonText();
     const type = submit ? 'submit' : 'button';
 
+    const showLeftChevron = (back && !_continue) || chevronLeft;
+    const showRightChevron = (_continue && !back) || chevronRight;
+
     if (uswds) {
       const buttonClass = classnames({
         'usa-button': true,
         'usa-button--big': big,
         'usa-button--outline': back || secondary,
-        'va-button-primary--alternate': primaryAlternate
-      });
-      return (
-        <Host>
-          <button 
-            class={buttonClass}
-            aria-disabled={ariaDisabled}
-            aria-label={label}
-            type={type}
-            part="button">
-              {back && !_continue && (
-                  <i aria-hidden="true" class="fa fa-angles-left" />
-                )}
-              {buttonText}
-              {_continue && !back && (
-                <i aria-hidden="true" class="fa fa-angles-right" />
-              )}
-          </button>
-        </Host>
-      )
-    } else {
-      const buttonClass = classnames({
-        'va-button-primary--alternate': primaryAlternate
+        'va-button-primary--alternate': primaryAlternate,
       });
       return (
         <Host>
@@ -180,17 +173,39 @@ export class VaButton {
             type={type}
             part="button"
           >
-            {back && !_continue && (
+            {showLeftChevron ? (
               <i aria-hidden="true" class="fa fa-angles-left" />
-            )}
+            ) : null}
             {buttonText}
-            {_continue && !back && (
+            {showRightChevron ? (
               <i aria-hidden="true" class="fa fa-angles-right" />
-            )}
+            ) : null}
           </button>
         </Host>
-      )
+      );
+    } else {
+      const buttonClass = classnames({
+        'va-button-primary--alternate': primaryAlternate,
+      });
+      return (
+        <Host>
+          <button
+            class={buttonClass}
+            aria-disabled={ariaDisabled}
+            aria-label={label}
+            type={type}
+            part="button"
+          >
+            {showLeftChevron ? (
+              <i aria-hidden="true" class="fa fa-angles-left" />
+            ) : null}
+            {buttonText}
+            {showRightChevron ? (
+              <i aria-hidden="true" class="fa fa-angles-right" />
+            ) : null}
+          </button>
+        </Host>
+      );
     }
-
   }
 }
