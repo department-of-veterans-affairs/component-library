@@ -1,10 +1,4 @@
-import {
-  Component,
-  Host,
-  Prop,
-  h,
-  getAssetPath
-} from '@stencil/core';
+import { Component, Host, Prop, h, getAssetPath } from '@stencil/core';
 import classnames from 'classnames';
 import { consoleDevError } from '../../utils/utils';
 
@@ -17,7 +11,7 @@ import { consoleDevError } from '../../utils/utils';
 @Component({
   tag: 'va-icon',
   styleUrl: 'va-icon.scss',
-  assetsDirs: ['../../assets'],
+  assetsDirs: ['../assets'],
   shadow: true,
 })
 export class VaIcon {
@@ -41,9 +35,7 @@ export class VaIcon {
   private getSize(): number | null {
     const sizes = [3, 4, 5, 6, 7, 8, 9];
     if (!!this.size && !sizes.includes(this.size)) {
-      consoleDevError(
-        `Size must be an integer between 3 and 9, inclusive.`,
-      );
+      consoleDevError(`Size must be an integer between 3 and 9, inclusive.`);
       return null;
     }
     return this.size;
@@ -62,11 +54,12 @@ export class VaIcon {
         <svg
           class={iconClass}
           aria-labelledby={!!srtext ? 'icon-title' : null}
-          aria-hidden={!!srtext ? null : "true"}
+          aria-hidden={!!srtext ? null : 'true'}
           focusable="false"
-          role="img">
-            {srtext && <title id="icon-title">{srtext}</title>}
-            <use href={imageSrc}></use>
+          role="img"
+        >
+          {srtext && <title id="icon-title">{srtext}</title>}
+          <use href={imageSrc}></use>
         </svg>
       </Host>
     );

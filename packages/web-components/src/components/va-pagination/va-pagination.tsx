@@ -30,7 +30,7 @@ if (Build.isTesting) {
 @Component({
   tag: 'va-pagination',
   styleUrl: 'va-pagination.scss',
-  assetsDirs: ['../../assets'],
+  assetsDirs: ['../assets'],
   shadow: true,
 })
 export class VaPagination {

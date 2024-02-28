@@ -455,7 +455,7 @@ export namespace Components {
          */
         "size"?: number;
         /**
-          * Screen-reader text if the icon has semantic meaning  and is not purely decorative.
+          * Screen-reader text if the icon has semantic meaning and is not purely decorative.
          */
         "srtext"?: string;
     }
@@ -2404,7 +2404,7 @@ declare namespace LocalJSX {
          */
         "size"?: number;
         /**
-          * Screen-reader text if the icon has semantic meaning  and is not purely decorative.
+          * Screen-reader text if the icon has semantic meaning and is not purely decorative.
          */
         "srtext"?: string;
     }
