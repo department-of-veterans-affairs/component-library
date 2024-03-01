@@ -17,6 +17,7 @@ const tokensToKeep = {
       'blue-90',
       'blue-vivid-50',
       'blue-vivid-60',
+      'blue-vivid-70'
     ],
   },
   'blue-cool': {
