@@ -17,7 +17,7 @@ import {
 @Component({
   tag: 'va-loading-indicator',
   styleUrl: 'va-loading-indicator.css',
-  shadow: true,
+  shadow: false,
 })
 export class VaLoadingIndicator {
   @Element() el!: HTMLElement;
