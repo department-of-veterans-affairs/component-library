@@ -278,8 +278,14 @@
   "uswds-system-color-violet-vivid-70": {
     "value": "#54278f"
   },
+  "uswds-system-color-violet-warm-60": {
+    "value": "#864381"
+  },
   "uswds-system-color-yellow-5": {
     "value": "#faf3d1"
+  },
+  "uswds-system-color-yellow-50": {
+    "value": "#8a7237"
   },
   "uswds-system-color-yellow-vivid-10": {
     "value": "#fee685"

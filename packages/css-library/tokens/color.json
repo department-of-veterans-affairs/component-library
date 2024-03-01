@@ -66,6 +66,39 @@
       "lighter": { "value": "{uswds-system-color-blue-warm-30}"},
       "lightest": { "value": "{uswds-system-color-gray-warm-10}"}
     },
+    "aqua": {
+      "*": { "value": "{uswds-system-color-cyan-vivid-30}"},
+      "dark": {"value": "{uswds-system-color-cyan-vivid-40}"},
+      "lightest": {"value": "{uswds-system-color-blue-cool-vivid-5}"}
+    },
+    "blue": {
+      "*": { "value": "{uswds-system-color-blue-vivid-60}" },
+      "darkest": { "value": "{uswds-system-color-blue-warm-vivid-80}" }
+    },
+    "purple": {
+      "*": { "value": "{uswds-system-color-violet-vivid-70}"}
+    },
+    "light-blue": {
+      "*": { "value": "{uswds-system-color-blue-cool-vivid-60}"}
+    },
+    "red": {
+      "*": { "value": "{uswds-system-color-red-50}"},
+      "light": { "value": "{uswds-system-color-red-30}"},
+      "lightest": { "value": "{uswds-system-color-red-cool-vivid-10}"},
+      "dark": { "value": "{uswds-system-color-red-vivid-60}"}
+    },
+    "va-accent": {
+      "*": { "value": "{uswds-system-color-yellow-50}"}
+    },
+    "inset-bg": {
+      "*": { "value": "{uswds-system-color-cyan-5}"}
+    },
+    "old-browser-background-start": {
+      "*": { "value": "{uswds-system-color-blue-cool-vivid-60}"}
+    },
+    "old-browser-background-end": {
+      "*": { "value": "{uswds-system-color-blue-warm-vivid-80}"}
+    },
     "hub": {
       "health-care": {"value": "{uswds-system-color-indigo-cool-60}"},
       "education": {"value": "{uswds-system-color-mint-cool-50}"},
@@ -75,6 +108,7 @@
       "housing": {"value": "{uswds-system-color-gold-50}"},
       "life-insurance": {"value": "{uswds-system-color-green-warm-50}"},
       "burials": {"value": "{uswds-system-color-blue-50}"},
+      "records": {"value": "{uswds-system-color-violet-warm-60}"},
       "family-member": {"value": "{uswds-system-color-blue-warm-vivid-80}"},
       "service-member": {"value": "{uswds-system-color-blue-warm-vivid-80}"}
     }
