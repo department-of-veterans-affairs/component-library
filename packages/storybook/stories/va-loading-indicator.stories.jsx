@@ -57,6 +57,7 @@ const Template = ({
 export const Default = Template.bind(null);
 Default.args = { ...defaultArgs };
 Default.argTypes = propStructure(loadingIndicatorDocs);
+Default.parameters = { chromatic: { diffThreshold: 0.2 } }
 
 export const SetFocus = Template.bind(null);
 SetFocus.args = { ...defaultArgs, 'set-focus': true };

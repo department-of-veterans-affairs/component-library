@@ -17,7 +17,7 @@ import {
 @Component({
   tag: 'va-loading-indicator',
   styleUrl: 'va-loading-indicator.css',
-  shadow: false,
+  shadow: true,
 })
 export class VaLoadingIndicator {
   @Element() el!: HTMLElement;
@@ -113,7 +113,6 @@ export class VaLoadingIndicator {
           aria-label={label}
           aria-valuetext={message}
           tabindex="-1"
-          data-chromatic="ignore"
         />
         {message}
       </Host>
