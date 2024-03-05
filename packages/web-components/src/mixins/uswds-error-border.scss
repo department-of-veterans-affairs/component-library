@@ -2,7 +2,7 @@
 @import 'functions';
 
 :host([error]:not([error=''])[uswds]:not([uswds='false'])) {
-    border-left: 0.4rem solid $color-secondary-dark;
+    border-left: 0.4rem solid $vads-color-secondary-dark;
     padding-left: rem-override(1rem);
     position: relative;
 }
@@ -13,7 +13,7 @@
 
 :host([error]:not([error=''])[uswds]:not([uswds='false'])[use-forms-pattern='multiple']) {
     .input-wrap {
-        border-left: 0.4rem solid $color-secondary-dark;
+        border-left: 0.4rem solid $vads-color-secondary-dark;
         padding-left: rem-override(1rem);
         position: relative;
     }
