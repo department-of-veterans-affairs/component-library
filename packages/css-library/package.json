@@ -15,7 +15,7 @@
     "copy": "node ./copy-uswds-color-tokens.js"
   },
   "devDependencies": {
-    "@uswds/uswds": "^3.5.0",
+    "@uswds/uswds": "^3.7.1",
     "sass": "^1.64.1",
     "style-dictionary": "^3.8.0"
   },
