@@ -15,10 +15,6 @@
   a.usa-pagination__previous-page > div {
     display: flex;
   }
-  // ToDo: remove this when USWDS package is updated
-  .usa-pagination__overflow {
-    opacity: inherit;
-  }
 }
 
 :host {
