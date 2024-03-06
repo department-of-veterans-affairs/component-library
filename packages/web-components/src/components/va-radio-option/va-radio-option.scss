@@ -19,7 +19,7 @@ va-radio-option {
   margin-top: 12px;
 }
 
-:host([uswds]:not([uswds='false'])) input[type=radio] {
+input[type=radio].usa-radio__input {
   margin-left: unset;
   opacity: unset;
   right: auto;
