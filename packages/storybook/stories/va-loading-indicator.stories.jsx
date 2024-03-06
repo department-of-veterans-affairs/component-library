@@ -55,14 +55,14 @@ const Template = ({
 };
 
 export const Default = Template.bind(null);
-Default.args = { ...defaultArgs };
+Default.args = { ...defaultArgs, 'message': 'Loading your soda...' };
 Default.argTypes = propStructure(loadingIndicatorDocs);
-Default.parameters = { chromatic: { pauseAnimationAtEnd: false, diffThreshold: 0.2  } }
+Default.parameters = { chromatic: { pauseAnimationAtEnd: false, diffThreshold: 0.8  } }
 
 export const SetFocus = Template.bind(null);
-SetFocus.args = { ...defaultArgs, 'set-focus': true };
-SetFocus.parameters = { chromatic: { pauseAnimationAtEnd: false, diffThreshold: 0.7 } }
+SetFocus.args = { ...defaultArgs, 'set-focus': true, 'message': 'Loading your friends...' };
+SetFocus.parameters = { chromatic: { pauseAnimationAtEnd: false, diffThreshold: 0.9 } }
 
 export const EnableAnalytics = Template.bind(null);
-EnableAnalytics.args = { ...defaultArgs, 'enable-analytics': true };
+EnableAnalytics.args = { ...defaultArgs, 'enable-analytics': true, 'message': 'Loading your pop...' };
 EnableAnalytics.parameters = { chromatic: { pauseAnimationAtEnd: false, diffThreshold: 1 } }
