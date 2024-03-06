@@ -23,7 +23,6 @@ const dataArray = [
 
 const Template = ({ label, 'disable-analytics': disableAnalytics }) => (
   <VaBreadcrumbs
-    uswds
     label={label}
     disableAnalytics={disableAnalytics}
     breadcrumbList={dataArray}
@@ -63,17 +62,16 @@ const DynamicCrumbsTemplate = ({
 
   return (
     <div>
-      <va-button uswds onClick={e => addCrumb()} text="Add Crumb"/>
-      <va-button uswds onClick={e => removeCrumb()} text="Remove Crumb"/>
-      <va-button uswds onClick={e => replaceCrumbs()} text="Replace Crumbs"/>
-      <va-button uswds onClick={e => resetCrumbs()} text="Reset Crumbs"/>
+      <va-button onClick={e => addCrumb()} text="Add Crumb"/>
+      <va-button onClick={e => removeCrumb()} text="Remove Crumb"/>
+      <va-button onClick={e => replaceCrumbs()} text="Replace Crumbs"/>
+      <va-button onClick={e => resetCrumbs()} text="Reset Crumbs"/>
       <br />
       {crumbs.length > 0 && (
         <VaBreadcrumbs
           label={label}
           disableAnalytics={disableAnalytics}
           breadcrumbList={crumbs}
-          uswds
         ></VaBreadcrumbs>
       )}
     </div>
@@ -83,7 +81,6 @@ const DynamicCrumbsTemplate = ({
 const WrappingCrumbsTemplate = ({
   label,
   'disable-analytics': disableAnalytics,
-  uswds,
   wrapping,
 }) => {
   const breadcrumbs = [
@@ -100,7 +97,6 @@ const WrappingCrumbsTemplate = ({
       <VaBreadcrumbs
         label={label}
         disableAnalytics={disableAnalytics}
-        uswds={uswds}
         breadcrumbList={breadcrumbs}
         wrapping={wrapping}
       ></VaBreadcrumbs>
@@ -112,7 +108,6 @@ const WrappingCrumbsTemplate = ({
 const WithRouterTemplate = ({
   label,
   'disable-analytics': disableAnalytics,
-  uswds,
   wrapping
 }) => {
   const breadcrumbs = [
@@ -143,7 +138,7 @@ const WithRouterTemplate = ({
 import React from 'react';<br/>
 import &#x7b; useHistory &#x7d; from 'react-router-dom';<br/>
 <br/>
-const YourComponent &#61; (&#x7b; label, disableAnalytics, uswds, breadcrumbList, wrapping &#x7d;) &#61;&#62;  &#x7b;<br/>
+const YourComponent &#61; (&#x7b; label, disableAnalytics, breadcrumbList, wrapping &#x7d;) &#61;&#62;  &#x7b;<br/>
 &nbsp;const history &#61; useHistory();<br/>
 <br/>
 &nbsp;function handleRouteChange(&#x7b; detail &#x7d;) &#x7b;<br/>
@@ -156,7 +151,6 @@ const YourComponent &#61; (&#x7b; label, disableAnalytics, uswds, breadcrumbList
   &nbsp;&nbsp;&#60;VaBreadcrumbs<br/>
   &nbsp;&nbsp;&nbsp;label=&#x7b;label&#x7d;<br/>
   &nbsp;&nbsp;&nbsp;disableAnalytics=&#x7b;disableAnalytics&#x7d;<br/>
-  &nbsp;&nbsp;&nbsp;uswds=&#x7b;uswds&#x7d;<br/>
   &nbsp;&nbsp;&nbsp;breadcrumbList=&#x7b;breadcrumbs&#x7d;<br/>
   &nbsp;&nbsp;&nbsp;wrapping=&#x7b;wrapping&#x7d;<br/>
   &nbsp;&nbsp;&nbsp;onRouteChange=&#x7b;handleRouteChange&#x7d;<br/>
@@ -169,7 +163,6 @@ const YourComponent &#61; (&#x7b; label, disableAnalytics, uswds, breadcrumbList
       <VaBreadcrumbs
         label={label}
         disableAnalytics={disableAnalytics}
-        uswds={uswds}
         breadcrumbList={breadcrumbs}
         wrapping={wrapping}
         onRouteChange={handleRouteChange}
@@ -180,7 +173,6 @@ const YourComponent &#61; (&#x7b; label, disableAnalytics, uswds, breadcrumbList
 
 
 const defaultArgs = {
-  'uswds': true,
   'label': 'Breadcrumb',
   'breadcrumb-list':
     '[{ "label": "VA.gov home", "href": "#one" }, { "label": "Level two", "href": "#two" }, { "label": "Current", "href": "#current" }]',
