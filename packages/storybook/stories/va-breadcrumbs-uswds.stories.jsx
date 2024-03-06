@@ -21,9 +21,9 @@ const dataArray = [
   { label: 'Level three', href: '#three' },
 ];
 
-const Template = ({ label, 'disable-analytics': disableAnalytics, uswds }) => (
+const Template = ({ label, 'disable-analytics': disableAnalytics }) => (
   <VaBreadcrumbs
-    uswds={uswds}
+    uswds
     label={label}
     disableAnalytics={disableAnalytics}
     breadcrumbList={dataArray}
