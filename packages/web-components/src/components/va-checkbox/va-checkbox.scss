@@ -21,7 +21,7 @@
 }
 
 .usa-checkbox__input:focus + [class*='__label']::before {
-  outline: 2px solid var(--color-gold-light);
+  outline: 2px solid var(--vads-color-action-focus-on-light);
   outline-offset: 4px;
 }
 
@@ -79,29 +79,29 @@
     margin-right: 1rem;
     pointer-events: none;
     border-radius: 2px;
-    box-shadow: 0 0 0 1px var(--color-gray-medium);
+    box-shadow: 0 0 0 1px var(--vads-color-gray-medium);
     content: '\A0';
     height: var(--visible-checkbox-size);
     max-width: var(--visible-checkbox-size);
     width: 100%;
-    background-color: var(--color-white);
+    background-color: var(--vads-input-background-color-on-light);
   }
 
   input:checked + label::before {
-    background-color: var(--color-primary);
-    box-shadow: 0 0 0 1px var(--color-primary);
+    background-color: var(--vads-color-primary);
+    box-shadow: 0 0 0 1px var(--vads-color-primary);
     background-image: url('../../assets/check.svg');
     background-position: 50%;
     background-repeat: no-repeat;
   }
 
   input:not([disabled]):focus + label:before {
-    outline: 2px solid var(--color-gold-light);
+    outline: 2px solid var(--vads-color-action-focus-on-light);
     outline-offset: 2px;
   }
 
   .required {
-    color: var(--color-secondary-dark);
+    color: var(--vads-color-secondary-dark);
     margin: 0 0.35rem;
   }
 
@@ -113,7 +113,7 @@
 
 :host(:not([uswds='true'], [uswds=''])[tile='true']) label {
   padding: 12px 16px 12px 12px;
-  border: 2px solid var(--color-gray-light);
+  border: 2px solid var(--vads-color-base-light);
   border-radius: 0.25em;
   width: 320px;
 }

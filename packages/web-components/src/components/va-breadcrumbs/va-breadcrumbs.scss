@@ -14,8 +14,8 @@
 // Styles for V1 mode
 :host(:not([uswds='true'], [uswds=''])) {
   nav {
-    background: var(--color-white);
-    color: var(--color-link-default);
+    background: var(--vads-color-white);
+    color: var(--vads-color-link);
     font-size: inherit;
     padding: 1.6rem 0;
   }
@@ -35,15 +35,15 @@
 // Styles for V3 mode
 :host([uswds]:not([uswds='false'])) {
   .usa-breadcrumb__link {
-    color: var(--color-link-default);
+    color: var(--vads-color-link);
   }
 
   .usa-breadcrumb__link:hover {
-    color: var(--color-primary-dark);
+    color: var(--vads-color-primary-dark);
   }
 
   .usa-breadcrumb__list-item:not(:last-child)::after {
-    background: var(--color-gray-medium);
+    background: var(--vads-color-gray-medium);
   }
 }
 

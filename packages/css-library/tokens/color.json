@@ -14,10 +14,16 @@
   "vads-input-background-color-on-light": {
     "*": {"value": "#ffffff" }
   },
+  "vads-color-white": {
+    "*": {"value": "#ffffff"}
+  },
   "vads-label-hint-text-color-on-light": {
     "*": { "value": "{uswds-system-color-gray-50}" }
   },
   "vads-process-list-color-text-pending-on-light": {
+    "*": { "value": "{uswds-system-color-gray-50}" }
+  },
+  "vads-color-gray-medium": {
     "*": { "value": "{uswds-system-color-gray-50}" }
   },
   "vads-color-gray-light-alt": {
@@ -217,5 +223,14 @@
   },
   "vads-color-gold-lighter": {
     "*": { "value": "{uswds-system-color-gold-vivid-10}"}
+  },
+  "vads-color-gold-lightest": {
+    "*": { "value": "{uswds-system-color-gold-vivid-5}"}
+  },
+  "vads-color-black": {
+    "*":  { "value": "{uswds-system-color-gray-100}"}
+  },
+  "vads-color-green-lighter": {
+    "*": { "value": "{uswds-system-color-green-cool-20}"}
   }
 }

@@ -74,7 +74,7 @@
 }
 
 :host([uswds]:not([uswds='false'])) .va-alert-close:hover {
-  color: var(--color-base);
+  color: var(--vads-color-base);
 }
 
 @media screen and (min-width: 1024px) {
@@ -89,7 +89,7 @@
   margin: 1.6rem;
   padding: 0;
   width: auto;
-  color: var(--color-gray-dark);
+  color: var(--vads-color-base-darker);
   font-size: 2.25rem;
   appearance: none;
   border: 0;
@@ -120,7 +120,7 @@ i.fa-times-circle::before {
 @import '../../mixins/buttons.css';
 
 :host(:not([uswds='true'], [uswds=''])) {
-  background-color: var(--color-gray-lightest);
+  background-color: var(--vads-color-base-lightest);
 }
 
 :host(:not([uswds='true'], [uswds=''])[background-only='true']),
@@ -138,20 +138,20 @@ i.fa-times-circle::before {
 }
 
 :host(:not([uswds='true'], [uswds=''])[status='warning']) {
-  border-color: var(--color-gold);
+  border-color: var(--vads-color-warning);
 }
 
 :host(:not([uswds='true'], [uswds=''])[status='info']) {
-  border-color: var(--color-primary-alt-dark);
+  border-color: var(--vads-color-primary-alt-dark);
 }
 
 :host(:not([uswds='true'], [uswds=''])[status='error']) {
-  border-color: var(--color-secondary-dark);
+  border-color: var(--vads-color-secondary-dark);
 }
 
 :host(:not([uswds='true'], [uswds=''])[status='continue']),
 :host(:not([uswds='true'], [uswds=''])[status='success']) {
-  border-color: var(--color-green);
+  border-color: var(--vads-color-success-dark);
 }
 
 :host(:not([uswds='true'], [uswds=''])[full-width='']) div.alert,
@@ -212,12 +212,12 @@ i.fa-times-circle::before {
 
   div.continue>i::before {
     content: '\F023';
-    color: var(--color-green);
+    color: var(--vads-color-success-dark);
   }
 
   div.success>i::before {
     content: '\F00C';
-    color: var(--color-green);
+    color: var(--vads-color-success-dark);
   }
 
   div.warning>i::before {
@@ -226,7 +226,7 @@ i.fa-times-circle::before {
 
   div.error>i::before {
     content: '\F06A';
-    color: var(--color-secondary-dark);
+    color: var(--vads-color-secondary-dark);
   }
 
   div.bg-only {
@@ -235,23 +235,23 @@ i.fa-times-circle::before {
   }
 
   .info.bg-only {
-    background-color: var(--color-primary-alt-lightest);
+    background-color: var(--vads-color-primary-alt-lightest);
   }
 
   .continue.bg-only {
-    background-color: var(--color-gray-lightest);
+    background-color: var(--vads-color-base-lightest);
   }
 
   .success.bg-only {
-    background-color: var(--color-green-lightest);
+    background-color: var(--vads-color-success-lighter);
   }
 
   .warning.bg-only {
-    background-color: var(--color-gold-lightest);
+    background-color: var(--vads-color-gold-lightest);
   }
 
   .error.bg-only {
-    background-color: var(--color-secondary-lightest);
+    background-color: var(--vads-color-secondary-lightest);
   }
 
   i {

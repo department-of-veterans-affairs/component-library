@@ -21,7 +21,7 @@
 }
 
 :host article {
-  background-color: var(--color-gray-lightest);
+  background-color: var(--vads-color-base-lightest);
   padding: 1px 24px 24px 24px;
   margin-bottom: 24px;
 }
@@ -31,7 +31,7 @@ va-checkbox::part(checkbox) {
 }
 
 a {
-  color: var(--color-link-default);
+  color: var(--vads-color-link);
 }
 
 i {
@@ -43,7 +43,7 @@ i {
 
 i.fa-arrow-up-right-from-square {
   display: inline-block;
-  color: var(--color-link-default);
+  color: var(--vads-color-link);
   font-size: 1.2rem;
   margin: 0.5rem;
 }

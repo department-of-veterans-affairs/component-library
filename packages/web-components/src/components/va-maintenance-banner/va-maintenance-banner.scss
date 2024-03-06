@@ -4,16 +4,16 @@
 
 .maintenance-banner {
   border-top: 8px solid;
-  background-color: var(--color-gray-lightest);
+  background-color: var(--vads-color-base-lightest);
   position: relative;
 }
 
 .maintenance-banner--warning {
-  border-color: var(--color-gold);
+  border-color: var(--vads-color-warning);
 }
 
 .maintenance-banner--error {
-  border-color: var(--color-secondary-dark);
+  border-color: var(--vads-color-secondary-dark);
 }
 
 .maintenance-banner__title {
@@ -48,12 +48,12 @@
 
 .maintenance-banner--error .maintenance-banner__body::before {
   content: '\F06A'; /* fa-exclamation-circle */
-  color: var(--color-secondary-dark);
+  color: var(--vads-color-secondary-dark);
 }
 
 .maintenance-banner__close {
   background-color: transparent;
-  color: var(--color-gray-dark);
+  color: var(--vads-color-base-darker);
   font-size: 24px;
   padding: 0;
   position: absolute;
@@ -66,7 +66,7 @@
 }
 
 .maintenance-banner__close:hover {
-  color: var(--color-base);
+  color: var(--vads-color-base);
 }
 
 .maintenance-banner i::before {

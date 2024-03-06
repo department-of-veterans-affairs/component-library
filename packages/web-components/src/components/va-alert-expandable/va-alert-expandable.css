@@ -6,23 +6,23 @@
 }
 
 :host([status='warning']) {
-  background-color: var(--color-gold-lightest);
+  background-color: var(--vads-color-gold-lightest);
 }
 
 :host([status='info']) {
-  background-color: var(--color-primary-alt-lightest);
+  background-color: var(--vads-color-primary-alt-lightest);
 }
 
 :host([status='error']) {
-  background-color: var(--color-secondary-lightest);
+  background-color: var(--vads-color-secondary-lightest);
 }
 
 :host([status='success']) {
-  background-color: var(--color-green-lightest);
+  background-color: var(--vads-color-success-lighter);
 }
 
 :host([status='continue']) {
-  background-color: var(--color-gray-lightest);
+  background-color: var(--vads-color-base-lightest);
 }
 
 .alert-expandable-trigger {
@@ -33,29 +33,29 @@
 }
 
 div.warning .alert-expandable-trigger:hover {
-  background-color: var(--color-gold-lighter);
+  background-color: var(--vads-color-gold-lighter);
 }
 
 div.info .alert-expandable-trigger:hover {
-  background-color: var(--color-primary-alt-light);
+  background-color: var(--vads-color-primary-alt-light);
 }
 
 div.error .alert-expandable-trigger:hover {
-  background-color: var(--color-secondary-light);
+  background-color: var(--vads-color-secondary-light);
 }
 
 div.success .alert-expandable-trigger:hover {
-  background-color: var(--color-green-lighter);
+  background-color: var(--vads-color-green-lighter);
 }
 
 div.continue .alert-expandable-trigger:hover {
-  background-color: var(--color-gray-lighter);
+  background-color: var(--vads-color-base-lighter);
 }
 
 .alert-expandable-title {
   border-bottom-right-radius: 1px;
-  border-bottom: 2px dotted var(--color-primary-alt-dark);
-  color: var(--color-gray-dark);
+  border-bottom: 2px dotted var(--vads-color-primary-alt-dark);
+  color: var(--vads-color-base-darker);
   cursor: pointer;
   font-weight: 600;
 }
@@ -91,7 +91,7 @@ i {
 
 i.fa-angle-down {
   display: inline-block;
-  color: var(--color-gray-dark);
+  color: var(--vads-color-base-darker);
   font-size: 1.6rem;
   margin: 0.5rem;
   transform: rotate(0deg);
@@ -108,7 +108,7 @@ a[aria-expanded='true'] i.fa-angle-down {
 }
 
 i.alert-status-icon {
-  color: var(--color-gray-dark);
+  color: var(--vads-color-base-darker);
   margin-top: 0.4rem;
   margin-right: 1.2rem;
 }

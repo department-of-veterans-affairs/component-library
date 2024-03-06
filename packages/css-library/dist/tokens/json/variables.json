@@ -169,6 +169,25 @@
       ]
     }
   },
+  "vads-color-white": {
+    "*": {
+      "value": "#ffffff",
+      "filePath": "tokens/color.json",
+      "isSource": true,
+      "original": {
+        "value": "#ffffff"
+      },
+      "name": "vads-color-white",
+      "attributes": {
+        "category": "vads-color-white",
+        "type": "*"
+      },
+      "path": [
+        "vads-color-white",
+        "*"
+      ]
+    }
+  },
   "vads-label-hint-text-color-on-light": {
     "*": {
       "value": "#757575",
@@ -203,6 +222,25 @@
       },
       "path": [
         "vads-process-list-color-text-pending-on-light",
+        "*"
+      ]
+    }
+  },
+  "vads-color-gray-medium": {
+    "*": {
+      "value": "#757575",
+      "filePath": "tokens/color.json",
+      "isSource": true,
+      "original": {
+        "value": "{uswds-system-color-gray-50}"
+      },
+      "name": "vads-color-gray-medium",
+      "attributes": {
+        "category": "vads-color-gray-medium",
+        "type": "*"
+      },
+      "path": [
+        "vads-color-gray-medium",
         "*"
       ]
     }
@@ -1457,6 +1495,63 @@
       },
       "path": [
         "vads-color-gold-lighter",
+        "*"
+      ]
+    }
+  },
+  "vads-color-gold-lightest": {
+    "*": {
+      "value": "#fef0c8",
+      "filePath": "tokens/color.json",
+      "isSource": true,
+      "original": {
+        "value": "{uswds-system-color-gold-vivid-5}"
+      },
+      "name": "vads-color-gold-lightest",
+      "attributes": {
+        "category": "vads-color-gold-lightest",
+        "type": "*"
+      },
+      "path": [
+        "vads-color-gold-lightest",
+        "*"
+      ]
+    }
+  },
+  "vads-color-black": {
+    "*": {
+      "value": "#000000",
+      "filePath": "tokens/color.json",
+      "isSource": true,
+      "original": {
+        "value": "{uswds-system-color-gray-100}"
+      },
+      "name": "vads-color-black",
+      "attributes": {
+        "category": "vads-color-black",
+        "type": "*"
+      },
+      "path": [
+        "vads-color-black",
+        "*"
+      ]
+    }
+  },
+  "vads-color-green-lighter": {
+    "*": {
+      "value": "#b4d0b9",
+      "filePath": "tokens/color.json",
+      "isSource": true,
+      "original": {
+        "value": "{uswds-system-color-green-cool-20}"
+      },
+      "name": "vads-color-green-lighter",
+      "attributes": {
+        "category": "vads-color-green-lighter",
+        "type": "*"
+      },
+      "path": [
+        "vads-color-green-lighter",
         "*"
       ]
     }

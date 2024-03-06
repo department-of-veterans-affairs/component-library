@@ -8,7 +8,7 @@ $small-desktop-screen: 1008px;
 .va-crisis-line-container {
   position: relative;
   margin: auto;
-  background-color: var(--color-secondary-dark);
+  background-color: var(--vads-color-secondary-dark);
 
   @media(min-width: $small-desktop-screen) {
     max-width: 97.5rem;
@@ -17,15 +17,15 @@ $small-desktop-screen: 1008px;
 }
 
 a {
-  color: var(--color-link-default);
+  color: var(--vads-color-link);
 }
 
 button.va-crisis-line {
   cursor: pointer;
-  background-color: var(--color-secondary-darkest);
+  background-color: var(--vads-color-secondary-darkest);
   display: block;
   border-radius: 0;
-  color: var(--color-white);
+  color: var(--vads-button-color-text-primary-alt-on-light);
   font-family: var(--font-source-sans);
   font-size: 16px;
   font-weight: normal;
@@ -55,7 +55,7 @@ button.va-crisis-line {
   @media(min-width: $small-desktop-screen) {
     width: auto;
     border-radius: 0 0 2.3px 2.3px;
-    box-shadow: 0 2px 5px var(--color-base);
+    box-shadow: 0 2px 5px var(--vads-color-base);
   }
 }
 
@@ -107,12 +107,12 @@ button.va-crisis-line {
 }
 
 .va-crisis-panel {
-  color: var(--color-base);
+  color: var(--vads-color-base);
   &-body {
     max-height: 100%;
   }
   &-title {
-    color: var(--color-base);
+    color: var(--vads-color-base);
     padding-left: 41px;
     background-image: url(../../assets/VCL-icon-white.svg) no-repeat left;
     background-position: left 5px;
@@ -125,9 +125,9 @@ button.va-crisis-line {
       display: flex;
       min-height: 56px;
       margin-bottom: 0;
-      border-top: 1px solid var(--color-gray-light);
+      border-top: 1px solid var(--vads-color-base-light);
       &:last-child {
-        border-bottom: 1px solid var(--color-gray-light);
+        border-bottom: 1px solid var(--vads-color-base-light);
       }
       > a, > span {
         padding: 8px 0;
@@ -136,7 +136,7 @@ button.va-crisis-line {
     }
   }
   &-icon {
-    color: var(--color-base) !important;
+    color: var(--vads-color-base) !important;
     font-size: 26px;
     width: 46px;
     padding: 6.4px 4.8px;
@@ -152,10 +152,10 @@ button.va-crisis-line {
   }
   &-close.va-modal-close {
     font-size: 4rem;
-    color: var(--color-link-default);
+    color: var(--vads-color-link);
     padding-top: 0.1rem;
     &:hover {
-      color: var(--color-black);
+      color: var(--vads-color-black);
       background-color: transparent;
     }
   }
