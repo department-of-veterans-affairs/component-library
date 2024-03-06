@@ -113,6 +113,7 @@ export class VaLoadingIndicator {
           aria-label={label}
           aria-valuetext={message}
           tabindex="-1"
+          data-chromatic="ignore"
         />
         {message}
       </Host>
