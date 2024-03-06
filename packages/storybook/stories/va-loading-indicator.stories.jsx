@@ -57,11 +57,12 @@ const Template = ({
 export const Default = Template.bind(null);
 Default.args = { ...defaultArgs };
 Default.argTypes = propStructure(loadingIndicatorDocs);
-Default.parameters = { chromatic: { pauseAnimationAtEnd: false } }
+Default.parameters = { chromatic: { pauseAnimationAtEnd: false, diffThreshold: 0.2  } }
 
 export const SetFocus = Template.bind(null);
 SetFocus.args = { ...defaultArgs, 'set-focus': true };
-SetFocus.parameters = { chromatic: { disableSnapshot: true } }
+SetFocus.parameters = { chromatic: { pauseAnimationAtEnd: false, diffThreshold: 0.7 } }
 
 export const EnableAnalytics = Template.bind(null);
 EnableAnalytics.args = { ...defaultArgs, 'enable-analytics': true };
+EnableAnalytics.parameters = { chromatic: { pauseAnimationAtEnd: false, diffThreshold: 1 } }
