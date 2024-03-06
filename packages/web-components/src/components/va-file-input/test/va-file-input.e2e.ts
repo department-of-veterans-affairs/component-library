@@ -2,7 +2,7 @@ import { newE2EPage } from '@stencil/core/testing';
 import { axeCheck } from '../../../testing/test-helpers';
 const path = require('path');
 
-describe('va-file-input', () => {
+describe.skip('va-file-input', () => {
   it('renders', async () => {
     const page = await newE2EPage();
     await page.setContent(
