@@ -27,7 +27,9 @@ const Template = args => (
   </va-maintenance-banner>
 );
 
-let maintenanceEndDateTime = new Date();
+const maintenanceTime = new Date(2025, 5, 21);
+
+let maintenanceEndDateTime = new Date(maintenanceTime);
 maintenanceEndDateTime.setHours(maintenanceEndDateTime.getHours() + 4);
 maintenanceEndDateTime.setMinutes(maintenanceEndDateTime.getMinutes() + 30);
 
@@ -39,7 +41,7 @@ const defaultArgs = {
   'upcoming-warn-title': 'Upcoming site maintenance',
   'upcoming-warn-start-date-time': `${upcomingWarnStartDateTime}`,
   'maintenance-title': 'Site maintenance',
-  'maintenance-start-date-time': `${new Date()}`,
+  'maintenance-start-date-time': `${new Date(maintenanceTime)}`,
   'maintenance-end-date-time': `${maintenanceEndDateTime}`
 };
 
@@ -48,8 +50,8 @@ Default.args = {
   ...defaultArgs,
 };
 
-let maintenanceStartDateTime = new Date();
-maintenanceEndDateTime = new Date();
+let maintenanceStartDateTime = new Date(maintenanceTime);
+maintenanceEndDateTime = new Date(maintenanceTime);
 maintenanceStartDateTime.setDate(maintenanceStartDateTime.getDate() + 1);
 maintenanceEndDateTime.setDate(maintenanceStartDateTime.getDate());
 maintenanceEndDateTime.setHours(maintenanceStartDateTime.getHours() + 2);
