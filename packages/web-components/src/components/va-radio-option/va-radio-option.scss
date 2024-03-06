@@ -19,8 +19,11 @@ va-radio-option {
   margin-top: 12px;
 }
 
-va-radio-option input {
-  z-index: -1;
+:host([uswds]:not([uswds='false'])) input[type=radio] {
+  margin-left: unset;
+  opacity: unset;
+  right: auto;
+  left: -999em;
 }
 
 va-radio-option input:focus {
