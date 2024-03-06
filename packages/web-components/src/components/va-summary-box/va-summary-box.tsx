@@ -26,24 +26,29 @@ export class VaSummaryBox {
 
   componentWillLoad() {
     let childElements = Array.from(this.el.children);
-    this.headlineText = childElements.find(element => element.slot === "headline").textContent.trim();
+    this.headlineText =
+      childElements
+        .find(element => element.slot === 'headline')
+        ?.textContent.trim() || null;
   }
 
   componentDidLoad() {
     if (!this.uswds) {
-      return
+      return;
     }
     // add uswds classes
-    const nodes = this.el.shadowRoot
-      .querySelectorAll('slot')
+    const nodes = this.el.shadowRoot.querySelectorAll('slot');
     const headline = nodes[0];
     const content = nodes[1];
-    
+
     headline.classList.add('usa-summary-box__heading');
     content.classList.add('usa-summary-box__text');
 
     let childElements = Array.from(this.el.children);
-    this.headlineText = childElements.find(element => element.slot === "headline").textContent.trim();
+    this.headlineText =
+      childElements
+        .find(element => element.slot === 'headline')
+        ?.textContent.trim() || null;
   }
 
   render() {
@@ -51,7 +56,11 @@ export class VaSummaryBox {
     if (uswds) {
       return (
         <Host>
-          <div class="usa-summary-box" role="region" aria-label={this.headlineText}>
+          <div
+            class="usa-summary-box"
+            role="region"
+            aria-label={this.headlineText}
+          >
             <div class="usa-summary-box__body">
               <slot name="headline"></slot>
               <slot />
