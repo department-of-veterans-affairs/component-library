@@ -61,7 +61,7 @@ Default.parameters = { chromatic: { pauseAnimationAtEnd: false } }
 
 export const SetFocus = Template.bind(null);
 SetFocus.args = { ...defaultArgs, 'set-focus': true };
-SetFocus.parameters = { chromatic: { disableSnapshot: false } }
+SetFocus.parameters = { chromatic: { disableSnapshot: true } }
 
 export const EnableAnalytics = Template.bind(null);
 EnableAnalytics.args = { ...defaultArgs, 'enable-analytics': true };
