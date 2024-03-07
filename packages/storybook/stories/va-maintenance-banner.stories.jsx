@@ -27,7 +27,7 @@ const Template = args => (
   </va-maintenance-banner>
 );
 
-const maintenanceTime = new Date(2025, 5, 21);
+const maintenanceTime = new Date(2099, 5, 21);
 
 let maintenanceEndDateTime = new Date(maintenanceTime);
 maintenanceEndDateTime.setHours(maintenanceEndDateTime.getHours() + 4);
