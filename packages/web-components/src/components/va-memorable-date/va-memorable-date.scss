@@ -17,6 +17,8 @@
 
 .usa-memorable-date {
   margin-top: 16px;
+  // USWDS v3.7.1 set flex-wrap: wrap; This caused the year to always wrap when the month select option was active.
+  flex-wrap: nowrap;
 }
 
 .usa-form-group--month {
