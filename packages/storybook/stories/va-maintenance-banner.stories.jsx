@@ -63,6 +63,8 @@ MaintenanceWarning.args = {
   'maintenance-end-date-time': `${maintenanceEndDateTime}`,
   'upcoming-warn-start-date-time': `${new Date()}` 
 };
+Default.parameters = { chromatic: { diffThreshold: 0.8 } }
 
 Default.argTypes = propStructure(maintenanceBannerDocs);
+Default.parameters = { chromatic: { diffThreshold: 0.5 } }
 
