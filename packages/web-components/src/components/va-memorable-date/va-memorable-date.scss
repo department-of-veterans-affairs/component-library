@@ -39,11 +39,11 @@
   }
 }
 
-:host([uswds]:not([uswds='false'])) {
+:host(:not([uswds='false'])) {
   margin-top: 24px;
 }
 
-:host([uswds]:not([uswds='false'])) #error-message {
+:host(:not([uswds='false'])) #error-message {
   margin-bottom: 0;
 }
 
