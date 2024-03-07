@@ -89,7 +89,7 @@ export class VaCheckbox {
   /**
    * Whether or not the component will use USWDS v3 styling.
    */
-  @Prop({ reflect: true }) uswds?: boolean = false;
+  @Prop({ reflect: true }) uswds?: boolean = true;
 
   /**
    * Description of the option displayed below the checkbox label. Available when uswds is true.

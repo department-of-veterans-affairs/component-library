@@ -10,7 +10,7 @@
 }
 
 .usa-alert__body::before,
-:host([uswds]:not([uswds='false'])) i {
+:host(:not([uswds='false'])) i {
   font-family: 'Font Awesome 5 Free';
   font-size: 26px;
   font-style: normal;
@@ -73,14 +73,14 @@
   /* fa-exclamation-circle */
 }
 
-:host([uswds]:not([uswds='false'])) .va-alert-close:hover {
+:host(:not([uswds='false'])) .va-alert-close:hover {
   color: var(--color-base);
 }
 
 @media screen and (min-width: 1024px) {
 
-  :host(:not([uswds='true'], [uswds='']))[full-width='true'] .va-alert-close,
-  :host(:not([uswds='true'], [uswds='']))[full-width=''] .va-alert-close {
+  :host([uswds='false'])[full-width='true'] .va-alert-close,
+  :host([uswds='false'])[full-width=''] .va-alert-close {
     position: relative;
   }
 }
@@ -119,17 +119,17 @@ i.fa-times-circle::before {
 @import '../../mixins/accessibility.css';
 @import '../../mixins/buttons.css';
 
-:host(:not([uswds='true'], [uswds=''])) {
+:host([uswds='false']) {
   background-color: var(--color-gray-lightest);
 }
 
-:host(:not([uswds='true'], [uswds=''])[background-only='true']),
-:host(:not([uswds='true'], [uswds=''])[background-only='']) {
+:host([uswds='false'][background-only='true']),
+:host([uswds='false'][background-only='']) {
   background-color: unset;
 }
 
-:host(:not([uswds='true'], [uswds=''])[full-width='true']),
-:host(:not([uswds='true'], [uswds=''])[full-width='']) {
+:host([uswds='false'][full-width='true']),
+:host([uswds='false'][full-width='']) {
   border-top-style: solid;
   border-top-width: 8px;
   display: flex;
@@ -137,32 +137,32 @@ i.fa-times-circle::before {
   justify-content: center;
 }
 
-:host(:not([uswds='true'], [uswds=''])[status='warning']) {
+:host([uswds='false'][status='warning']) {
   border-color: var(--color-gold);
 }
 
-:host(:not([uswds='true'], [uswds=''])[status='info']) {
+:host([uswds='false'][status='info']) {
   border-color: var(--color-primary-alt-dark);
 }
 
-:host(:not([uswds='true'], [uswds=''])[status='error']) {
+:host([uswds='false'][status='error']) {
   border-color: var(--color-secondary-dark);
 }
 
-:host(:not([uswds='true'], [uswds=''])[status='continue']),
-:host(:not([uswds='true'], [uswds=''])[status='success']) {
+:host([uswds='false'][status='continue']),
+:host([uswds='false'][status='success']) {
   border-color: var(--color-green);
 }
 
-:host(:not([uswds='true'], [uswds=''])[full-width='']) div.alert,
-:host(:not([uswds='true'], [uswds=''])[full-width='true']) div.alert,
-:host(:not([uswds='true'], [uswds=''])[full-width=''][data-role='region']) div.alert,
-:host(:not([uswds='true'], [uswds=''])[full-width='true'][data-role='region']) div.alert {
+:host([uswds='false'][full-width='']) div.alert,
+:host([uswds='false'][full-width='true']) div.alert,
+:host([uswds='false'][full-width=''][data-role='region']) div.alert,
+:host([uswds='false'][full-width='true'][data-role='region']) div.alert {
   border-left: none;
   max-width: 1000px;
 }
 
-:host(:not([uswds='true'], [uswds=''])) {
+:host([uswds='false']) {
   ::slotted([slot='headline']) {
     font-size: 2rem !important;
     line-height: 26px !important;
@@ -263,6 +263,6 @@ i.fa-times-circle::before {
   }
 }
 
-:host(:not([uswds='true'], [uswds=''])[closeable]:not([closeable='false'])) .alert {
+:host([uswds='false'][closeable]:not([closeable='false'])) .alert {
   padding-right: 5.7rem;
 }

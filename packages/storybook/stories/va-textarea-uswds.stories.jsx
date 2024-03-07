@@ -5,7 +5,7 @@ import { getWebComponentDocs, propStructure, StoryDocs, applyFocus } from './wc-
 const textareaDocs = getWebComponentDocs('va-textarea');
 
 export default {
-  title: `USWDS/Textarea USWDS`,
+  title: `Components/Textarea USWDS`,
   id: 'uswds/va-textarea',
   parameters: {
     componentSubtitle: `va-textarea web component`,
@@ -24,7 +24,6 @@ const defaultArgs = {
   'maxlength': undefined,
   'value': undefined,
   'placeholder': '',
-  'uswds': true,
   'hint': null,
   'charcount': false,
   'message-aria-describedby': 'Optional description text for screen readers',
@@ -43,14 +42,12 @@ const Template = ({
   maxlength,
   value,
   placeholder,
-  uswds,
   hint,
   charcount,
   'message-aria-describedby': messageAriaDescribedby,
 }) => {
   return (
     <va-textarea
-      uswds={uswds}
       name={name}
       label={label}
       enable-analytics={enableAnalytics}
@@ -82,7 +79,6 @@ const ResizableTemplate = ({
 }) => {
   return (
     <va-textarea
-      uswds={uswds}
       class="resize-y"
       name={name}
       label={label}
@@ -108,7 +104,6 @@ const FormsPatternSingleTemplate = ({
   maxlength,
   value,
   placeholder,
-  uswds,
   hint,
 }) => {
   const id = (Math.floor(Math.random() * 100) + 1);
@@ -123,7 +118,6 @@ const FormsPatternSingleTemplate = ({
     <>
       <va-textarea
         id={`form-pattern-single-input-${id}`}
-        uswds={uswds}
         class="resize-y"
         name={name}
         label={label}
@@ -170,7 +164,6 @@ const FormsPatternMultipleTemplate = ({
   maxlength,
   value,
   placeholder,
-  uswds,
   hint,
 }) => {
   const id = (Math.floor(Math.random() * 100) + 1);
@@ -185,7 +178,6 @@ const FormsPatternMultipleTemplate = ({
     <>
       <va-textarea
         id={`form-pattern-multiple-input`}
-        uswds={uswds}
         class="resize-y"
         name={name}
         label={label}
@@ -203,7 +195,6 @@ const FormsPatternMultipleTemplate = ({
         form-heading="Enter additional information"
       />
       <va-textarea
-        uswds={uswds}
         class="resize-y"
         name={name}
         label={"Describe your hopes"}
@@ -217,7 +208,6 @@ const FormsPatternMultipleTemplate = ({
         onInput={e => console.log('input event value', e.target.value)}
       />
       <va-textarea
-        uswds={uswds}
         class="resize-y"
         name={name}
         label={"Describe your dreams"}

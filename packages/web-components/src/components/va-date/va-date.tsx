@@ -261,6 +261,7 @@ export class VaDate {
               invalid={this.invalidMonth}
               class="select-month"
               aria-label="Please enter two digits for the month"
+              uswds={false}
             >
               <option value=""></option>
               {months &&
@@ -282,6 +283,7 @@ export class VaDate {
                 invalid={this.invalidDay}
                 class="select-day"
                 aria-label="Please enter two digits for the day"
+                uswds={false}
               >
                 <option value=""></option>
                 {daysForSelectedMonth &&
@@ -307,6 +309,7 @@ export class VaDate {
               inputmode="numeric"
               type="text"
               aria-label="Please enter four digits for the year"
+              uswds={false}
             />
           </div>
         </fieldset>

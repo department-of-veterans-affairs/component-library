@@ -5,11 +5,11 @@ describe('va-alert', () => {
   it('renders', async () => {
     const page = await newE2EPage();
 
-    await page.setContent('<va-alert></va-alert>');
+    await page.setContent('<va-alert uswds="false"></va-alert>');
     const element = await page.find('va-alert');
 
     expect(element).toEqualHtml(`
-      <va-alert class="hydrated" status="info">
+      <va-alert class="hydrated" status="info" uswds="false">
         <mock:shadow-root>
           <div class="alert info">
             <i aria-hidden="true"></i>
@@ -26,11 +26,11 @@ describe('va-alert', () => {
   it('renders an empty div with a "polite" aria-live tag when not visible', async () => {
     const page = await newE2EPage();
 
-    await page.setContent('<va-alert visible="false"></va-alert>');
+    await page.setContent('<va-alert visible="false" uswds="false"></va-alert>');
     const element = await page.find('va-alert');
 
     expect(element).toEqualHtml(`
-      <va-alert class="hydrated" visible="false" status="info">
+      <va-alert class="hydrated" visible="false" status="info" uswds="false">
         <mock:shadow-root>
           <div aria-live="polite"></div>
         </mock:shadow-root>
@@ -41,7 +41,7 @@ describe('va-alert', () => {
   it('passes an axe check', async () => {
     const page = await newE2EPage();
     await page.setContent(
-      `<va-alert><h3 slot="headline">Alert</h3>Alert content</va-alert>`,
+      `<va-alert uswds="false"><h3 slot="headline">Alert</h3>Alert content</va-alert>`,
     );
 
     await axeCheck(page);
@@ -49,7 +49,7 @@ describe('va-alert', () => {
 
   it('only shows a close icon if the closeable prop is passed', async () => {
     const page = await newE2EPage();
-    await page.setContent('<va-alert>Alert</va-alert>');
+    await page.setContent('<va-alert uswds="false">Alert</va-alert>');
 
     const element = await page.find('va-alert');
 
@@ -66,7 +66,7 @@ describe('va-alert', () => {
   it('fires a custom "close" event when the close button is clicked', async () => {
     const page = await newE2EPage();
     await page.setContent(
-      '<va-alert closeable="true">Content inside</va-alert>',
+      '<va-alert closeable="true" uswds="false">Content inside</va-alert>',
     );
 
     const closeSpy = await page.spyOnEvent('closeEvent');
@@ -80,7 +80,7 @@ describe('va-alert', () => {
   it('fires an analytics event when a link is clicked', async () => {
     const page = await newE2EPage();
     await page.setContent(
-      '<va-alert><h4 slot="headline">This is an alert</h4><a href="#">This is a link</a></va-alert>',
+      '<va-alert uswds="false"><h4 slot="headline">This is an alert</h4><a href="#">This is a link</a></va-alert>',
     );
 
     const analyticsSpy = await page.spyOnEvent('component-library-analytics');
@@ -104,7 +104,7 @@ describe('va-alert', () => {
   it('uses a null headline in the analytics event detail when the heading is absent', async () => {
     const page = await newE2EPage();
     await page.setContent(
-      '<va-alert><a href="#">This is a link</a></va-alert>',
+      '<va-alert uswds="false"><a href="#">This is a link</a></va-alert>',
     );
 
     const analyticsSpy = await page.spyOnEvent('component-library-analytics');
@@ -128,7 +128,7 @@ describe('va-alert', () => {
   it('does not fire an analytics event when disableAnalytics is passed', async () => {
     const page = await newE2EPage();
     await page.setContent(
-      '<va-alert disable-analytics="true"><a href="#">This is a link</a></va-alert>',
+      '<va-alert disable-analytics="true" uswds="false"><a href="#">This is a link</a></va-alert>',
     );
 
     const analyticsSpy = await page.spyOnEvent('component-library-analytics');
@@ -142,7 +142,7 @@ describe('va-alert', () => {
   it('has the correct accessibility attributes when in an error state', async () => {
     const page = await newE2EPage();
     await page.setContent(
-      '<va-alert status="error"><h4 slot="headline">This is an alert</h4><div>This is the alert content</div>',
+      '<va-alert status="error" uswds="false"><h4 slot="headline">This is an alert</h4><div>This is the alert content</div>',
     );
 
     const element = await page.find('va-alert >>> .alert');
@@ -196,7 +196,7 @@ describe('va-alert', () => {
   it('should set status to info if null', async () => {
     const page = await newE2EPage();
     await page.setContent(
-      '<va-alert><h4 slot="headline">This is an alert</h4><div>This is the alert content</div>',
+      '<va-alert uswds="false"><h4 slot="headline">This is an alert</h4><div>This is the alert content</div>',
     );
 
     const element = await page.find('va-alert >>> .alert');
@@ -207,7 +207,7 @@ describe('va-alert', () => {
   it('should set status to info if it is an empty string', async () => {
     const page = await newE2EPage();
     await page.setContent(
-      '<va-alert status=""><h4 slot="headline">This is an alert</h4><div>This is the alert content</div>',
+      '<va-alert status="" uswds="false"><h4 slot="headline">This is an alert</h4><div>This is the alert content</div>',
     );
 
     const element = await page.find('va-alert >>> .alert');
@@ -218,7 +218,7 @@ describe('va-alert', () => {
   it('should set status to info if value not in pre-defined list', async () => {
     const page = await newE2EPage();
     await page.setContent(
-      '<va-alert status="Fake"><h4 slot="headline">This is an alert</h4><div>This is the alert content</div>',
+      '<va-alert status="Fake" uswds="false"><h4 slot="headline">This is an alert</h4><div>This is the alert content</div>',
     );
 
     const element = await page.find('va-alert >>> .alert');
@@ -229,7 +229,7 @@ describe('va-alert', () => {
   it('should not overwrite status if valid', async () => {
     const page = await newE2EPage();
     await page.setContent(
-      '<va-alert status="continue"><h4 slot="headline">This is an alert</h4><div>This is the alert content</div>',
+      '<va-alert status="continue" uswds="false"><h4 slot="headline" uswds="false">This is an alert</h4><div>This is the alert content</div>',
     );
 
     const element = await page.find('va-alert >>> .alert');
@@ -263,11 +263,11 @@ describe('va-alert', () => {
   it('uswds renders an empty div with a "polite" aria-live tag when not visible', async () => {
     const page = await newE2EPage();
 
-    await page.setContent('<va-alert uswds visible="false"></va-alert>');
+    await page.setContent('<va-alert visible="false"></va-alert>');
     const element = await page.find('va-alert');
 
     expect(element).toEqualHtml(`
-      <va-alert class="hydrated" visible="false" status="info" uswds="">
+      <va-alert class="hydrated" visible="false" status="info">
         <mock:shadow-root>
           <div aria-live="polite"></div>
         </mock:shadow-root>
@@ -278,7 +278,7 @@ describe('va-alert', () => {
   it('uswds passes an axe check', async () => {
     const page = await newE2EPage();
     await page.setContent(
-      `<va-alert uswds><h3 slot="headline">Alert</h3>Alert content</va-alert>`,
+      `<va-alert><h3 slot="headline">Alert</h3>Alert content</va-alert>`,
     );
 
     await axeCheck(page);
@@ -286,7 +286,7 @@ describe('va-alert', () => {
 
   it('uswds only shows a close icon if the closeable prop is passed', async () => {
     const page = await newE2EPage();
-    await page.setContent('<va-alert uswds>Alert</va-alert>');
+    await page.setContent('<va-alert>Alert</va-alert>');
 
     const element = await page.find('va-alert');
 
@@ -303,7 +303,7 @@ describe('va-alert', () => {
   it('uswds fires a custom "close" event when the close button is clicked', async () => {
     const page = await newE2EPage();
     await page.setContent(
-      '<va-alert uswds closeable="true">Content inside</va-alert>',
+      '<va-alert closeable="true">Content inside</va-alert>',
     );
 
     const closeSpy = await page.spyOnEvent('closeEvent');
@@ -317,7 +317,7 @@ describe('va-alert', () => {
   it('uswds fires an analytics event when a link is clicked', async () => {
     const page = await newE2EPage();
     await page.setContent(
-      '<va-alert uswds><h4 slot="headline">This is an alert</h4><a href="#">This is a link</a></va-alert>',
+      '<va-alert><h4 slot="headline">This is an alert</h4><a href="#">This is a link</a></va-alert>',
     );
 
     const analyticsSpy = await page.spyOnEvent('component-library-analytics');
@@ -341,7 +341,7 @@ describe('va-alert', () => {
   it('uswds uses a null headline in the analytics event detail when the heading is absent', async () => {
     const page = await newE2EPage();
     await page.setContent(
-      '<va-alert uswds><a href="#">This is a link</a></va-alert>',
+      '<va-alert><a href="#">This is a link</a></va-alert>',
     );
 
     const analyticsSpy = await page.spyOnEvent('component-library-analytics');
@@ -365,7 +365,7 @@ describe('va-alert', () => {
   it('uswds does not fire an analytics event when disableAnalytics is passed', async () => {
     const page = await newE2EPage();
     await page.setContent(
-      '<va-alert uswds disable-analytics="true"><a href="#">This is a link</a></va-alert>',
+      '<va-alert disable-analytics="true"><a href="#">This is a link</a></va-alert>',
     );
 
     const analyticsSpy = await page.spyOnEvent('component-library-analytics');
@@ -379,7 +379,7 @@ describe('va-alert', () => {
   it('uswds has the correct accessibility attributes when in an error state', async () => {
     const page = await newE2EPage();
     await page.setContent(
-      '<va-alert uswds status="error"><h4 slot="headline">This is an alert</h4><div>This is the alert content</div>',
+      '<va-alert status="error"><h4 slot="headline">This is an alert</h4><div>This is the alert content</div>',
     );
 
     const element = await page.find('va-alert >>> .usa-alert');
@@ -393,7 +393,7 @@ describe('va-alert', () => {
   it('uswds should set status to info if null', async () => {
     const page = await newE2EPage();
     await page.setContent(
-      '<va-alert uswds><h4 slot="headline">This is an alert</h4><div>This is the alert content</div>',
+      '<va-alert><h4 slot="headline">This is an alert</h4><div>This is the alert content</div>',
     );
 
     const element = await page.find('va-alert >>> .usa-alert');
@@ -404,7 +404,7 @@ describe('va-alert', () => {
   it('uswds should set status to info if it is an empty string', async () => {
     const page = await newE2EPage();
     await page.setContent(
-      '<va-alert uswds status=""><h4 slot="headline">This is an alert</h4><div>This is the alert content</div>',
+      '<va-alert status=""><h4 slot="headline">This is an alert</h4><div>This is the alert content</div>',
     );
 
     const element = await page.find('va-alert >>> .usa-alert');
@@ -415,7 +415,7 @@ describe('va-alert', () => {
   it('uswds should set status to info if value not in pre-defined list', async () => {
     const page = await newE2EPage();
     await page.setContent(
-      '<va-alert uswds status="Fake"><h4 slot="headline">This is an alert</h4><div>This is the alert content</div>',
+      '<va-alert status="Fake"><h4 slot="headline">This is an alert</h4><div>This is the alert content</div>',
     );
 
     const element = await page.find('va-alert >>> .usa-alert');
@@ -426,7 +426,7 @@ describe('va-alert', () => {
   it('uswds should not overwrite status if valid', async () => {
     const page = await newE2EPage();
     await page.setContent(
-      '<va-alert uswds status="continue"><h4 slot="headline">This is an alert</h4><div>This is the alert content</div>',
+      '<va-alert status="continue"><h4 slot="headline">This is an alert</h4><div>This is the alert content</div>',
     );
 
     const element = await page.find('va-alert >>> .usa-alert');
