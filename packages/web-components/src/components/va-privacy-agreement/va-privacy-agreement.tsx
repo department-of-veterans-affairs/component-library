@@ -71,10 +71,15 @@ export class VaPrivacyAgreement {
     const labelClass = classnames({
       'usa-label--error': this.showError && this.uswds
     });
+
+    const uswdsFalse = classnames({
+      'uwsds-false': !this.uswds
+    });
     
       return (
         <Host>
           <va-checkbox
+            class={uswdsFalse}
             uswds={this.uswds}
             required
             error={this.errorMessage()}

@@ -173,6 +173,7 @@ export class VaOmbInfo {
             secondary
             text="View Privacy Act Statement"
             uswds={false}
+            class="uswds-false"
           />
         </div>
         <va-modal

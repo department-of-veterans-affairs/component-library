@@ -307,7 +307,7 @@ const FormsPatternMultipleTemplate = ({ label, required }) => {
 
       <va-radio
         required="true"
-        label="Burn pit S2.1, did you serve in any of there locations?"
+        label="Burn pit S2.1, did you serve in any of these locations?"
       >
         <va-radio-option label="Yes" name="group7" id="yes7" value="1" />
         <va-radio-option label="No" name="group7" id="no7" value="2" />
