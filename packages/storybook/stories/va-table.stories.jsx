@@ -245,6 +245,7 @@ const Pagination = args => {
         pages={numPages}
         maxPageListLength={MAX_PAGE_LIST_LENGTH}
         showLastPage
+        uswds={false}
       />
     </main>
   );

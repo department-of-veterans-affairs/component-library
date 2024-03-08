@@ -70,7 +70,6 @@ const ResizableTemplate = ({
   maxlength,
   value,
   placeholder,
-  uswds,
 }) => {
   return (
     <va-textarea
@@ -85,7 +84,7 @@ const ResizableTemplate = ({
       placeholder={placeholder}
       onBlur={e => console.log('blur event', e)}
       onInput={e => console.log('input event value', e.target.value)}
-      uswds={uswds}
+      uswds={false}
     />
   );
 };

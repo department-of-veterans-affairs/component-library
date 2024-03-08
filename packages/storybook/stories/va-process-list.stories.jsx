@@ -22,9 +22,9 @@ export default {
 
 const defaultArgs = {uswds: false};
 
-const Template = ({uswds}) => {
+const Template = () => {
   return (
-    <va-process-list uswds={uswds}>
+    <va-process-list uswds={false}>
       <li>
         <h3>Check to be sure you can request a Board Appeal</h3>
         <p>
@@ -67,15 +67,15 @@ const Template = ({uswds}) => {
   );
 };
 
-const UtilityStyling = ({uswds}) => {
+const UtilityStyling = () => {
   return (
-    <va-process-list uswds={uswds}>
+    <va-process-list uswds={false}>
       <li>
         <p>Look at me in mobile view</p>
         <va-additional-info
           trigger="Show more"
           class="medium-screen:vads-u-display--none"
-          uswds={uswds}
+          uswds={false}
         >
           <img src="https://via.placeholder.com/350" />
         </va-additional-info>
