@@ -73,7 +73,7 @@ export class VaPrivacyAgreement {
     });
 
     const uswdsFalse = classnames({
-      'uwsds-false': !this.uswds
+      'uswds-false': !this.uswds
     });
     
       return (
