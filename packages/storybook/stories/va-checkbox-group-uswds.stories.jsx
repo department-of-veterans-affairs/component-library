@@ -284,7 +284,7 @@ const FormsPatternMultipleTemplate = ({
         />
       </va-checkbox-group>
       <hr />
-      <va-button text="click to focus header" onClick={handleClick}></va-button>
+      <va-button text="click to focus header" onClick={handleClick} uswds={false}></va-button>
     </>
   );
 };
@@ -348,7 +348,7 @@ const FormsPatternSingleTemplate = ({
 
       <hr />
 
-      <va-button text="click to focus header" onClick={handleClick} uswds="false"></va-button>
+      <va-button text="click to focus header" onClick={handleClick} uswds={false}></va-button>
     </>
   );
 };
