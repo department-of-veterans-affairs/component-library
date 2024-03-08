@@ -81,7 +81,7 @@ button {
   border: 0;
   text-align: left;
   font-family: var(--font-source-sans);
-  font-size: 1.6rem;
+  font-size: 1rem;
   font-weight: 700;
   line-height: 1.15;
   padding: 1.5rem 5.5rem 1.5rem 2rem;
@@ -89,7 +89,7 @@ button {
   background-image: url('../../assets/minus.svg');
   background-position: right 2rem center;
   background-repeat: no-repeat;
-  background-size: 1.5rem;
+  background-size: 1rem;
   display: block;
   /* This color assignment is for IE11 compatibility - the one in */
   /* the va-accordion's CSS with `:host` doesn't work well */

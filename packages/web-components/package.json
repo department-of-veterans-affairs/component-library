@@ -1,6 +1,6 @@
 {
   "name": "@department-of-veterans-affairs/web-components",
-  "version": "5.1.2",
+  "version": "5.1.2-rc3",
   "description": "Stencil Component Starter",
   "main": "dist/index.cjs.js",
   "module": "dist/index.js",
@@ -39,7 +39,7 @@
   "devDependencies": {
     "@axe-core/puppeteer": "^4.4.0",
     "@babel/core": "^7.12.13",
-    "@department-of-veterans-affairs/formation": "^10.1.2",
+    "@department-of-veterans-affairs/formation": "^10.1.2-rc6",
     "@stencil/postcss": "^2.0.0",
     "@stencil/react-output-target": "^0.0.9",
     "@stencil/sass": "^2.0.0",
@@ -63,7 +63,7 @@
     "typescript": "^4.3.5"
   },
   "peerDependencies": {
-    "@department-of-veterans-affairs/formation": "^10.1.2",
+    "@department-of-veterans-affairs/formation": "^10.1.2-rc6",
     "i18next": "*",
     "i18next-browser-languagedetector": "*"
   }
