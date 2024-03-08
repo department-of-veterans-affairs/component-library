@@ -117,6 +117,14 @@ export class VaSelect {
     i18next.off('languageChanged');
   }
 
+  componentDidLoad() {
+    // check if the element has a class named uswds-false added from parent
+    if (this.el.classList.contains('uswds-false')) {
+      // add attribute manually
+      this.el.setAttribute('uswds', 'false');
+    }
+  }
+
   private handleKeyDown() {
     this.vaKeyDown.emit();
   }

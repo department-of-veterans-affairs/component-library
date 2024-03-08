@@ -157,6 +157,7 @@ export class VaButtonPair {
               label={secondaryLabel}
               onClick={handleSecondaryClick}
               uswds={false}
+              class="uswds-false"
             />
             <va-button
               continue
@@ -165,6 +166,7 @@ export class VaButtonPair {
               onClick={handlePrimaryClick}
               submit={submit}
               uswds={false}
+              class="uswds-false"
             />
           </Host>
         );
@@ -183,7 +185,6 @@ export class VaButtonPair {
                 onClick={handlePrimaryClick}
                 text={update ? 'Update' : 'Yes'}
                 submit={submit}
-                uswds
               />
               </li>
               <li class="usa-button-group__item">
@@ -193,7 +194,6 @@ export class VaButtonPair {
                   onClick={handleSecondaryClick}
                   secondary
                   text={update ? 'Cancel' : 'No'}
-                  uswds
                 />
               </li>
             </ul>
@@ -208,6 +208,8 @@ export class VaButtonPair {
               onClick={handlePrimaryClick}
               text={update ? 'Update' : 'Yes'}
               submit={submit}
+              uswds={false}
+              class="uswds-false"
             />
             <va-button
               disable-analytics={disableAnalytics}
@@ -215,6 +217,8 @@ export class VaButtonPair {
               onClick={handleSecondaryClick}
               secondary
               text={update ? 'Cancel' : 'No'}
+              uswds={false}
+              class="uswds-false"
             />
           </Host>
         );
