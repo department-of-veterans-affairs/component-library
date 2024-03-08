@@ -1,6 +1,6 @@
 {
   "name": "@department-of-veterans-affairs/web-components",
-  "version": "5.1.1",
+  "version": "5.1.2",
   "description": "Stencil Component Starter",
   "main": "dist/index.cjs.js",
   "module": "dist/index.js",
@@ -31,6 +31,7 @@
     "@stencil/core": "^2.19.2",
     "aria-hidden": "^1.1.3",
     "body-scroll-lock": "^4.0.0-beta.0",
+    "chromatic": "^11.0.4",
     "classnames": "^2.3.1",
     "intersection-observer": "^0.12.0"
   },

@@ -541,6 +541,10 @@ export namespace Components {
          */
         "disableAnalytics"?: boolean;
         /**
+          * Override logic for whether to show error or warning
+         */
+        "isError": boolean;
+        /**
           * The Date/Time of when the maintenance is scheduled to end.
          */
         "maintenanceEndDateTime": string;
@@ -2501,6 +2505,10 @@ declare namespace LocalJSX {
           * Whether or not an analytics event will be fired.
          */
         "disableAnalytics"?: boolean;
+        /**
+          * Override logic for whether to show error or warning
+         */
+        "isError"?: boolean;
         /**
           * The Date/Time of when the maintenance is scheduled to end.
          */

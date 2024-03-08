@@ -7,6 +7,7 @@ import {
   Prop,
   h,
 } from '@stencil/core';
+import isChromatic from "chromatic/isChromatic";
 
 /**
  * @componentName Loading indicator
@@ -103,12 +104,17 @@ export class VaLoadingIndicator {
 
   render() {
     const { message, label } = this;
+    let className = "loading-indicator";
+
+    if (isChromatic()) {
+      className += " chromatic";
+    }
 
     return (
       <Host aria-live="polite">
         <div
           ref={el => (this.spinner = el as HTMLDivElement)}
-          class="loading-indicator"
+          class={className}
           role="progressbar"
           aria-label={label}
           aria-valuetext={message}
