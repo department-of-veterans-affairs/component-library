@@ -24,7 +24,7 @@ export class VaPrivacyAgreement {
   /**
    * Whether or not the component will use USWDS v3 styling.
    */
-  @Prop() uswds?: boolean = false;
+  @Prop() uswds?: boolean = true;
   /**
    * Emit component-library-analytics events on the blur event.
    */
@@ -71,11 +71,15 @@ export class VaPrivacyAgreement {
     const labelClass = classnames({
       'usa-label--error': this.showError && this.uswds
     });
+
+    const uswdsFalse = classnames({
+      'uswds-false': !this.uswds
+    });
     
       return (
         <Host>
           <va-checkbox
-            uswds={this.uswds}
+            class={uswdsFalse}
             required
             error={this.errorMessage()}
             id="checkbox"

@@ -9,12 +9,12 @@
   flex-direction: column;
 }
 
-:host([uswds]:not([uswds='false'])) va-button::part(button){
+:host(:not([uswds='false'])) va-button::part(button){
   margin-right: 0;
 }
 
 @media (max-width: 480px) {
-  :host([uswds]:not([uswds='false'])) va-button {
+  :host(:not([uswds='false'])) va-button {
     display: block;
   }
   .usa-button-group {
@@ -25,63 +25,63 @@
 
 /* Original Component Styles. */
 
-:host(:not([uswds="true"],[uswds=""])) va-button {
+:host([uswds='false']) va-button {
   flex: 1 1 auto;
 }
 
-:host(:not([uswds="true"],[uswds=""])) {
+:host([uswds='false']) {
   max-width: 560px;
 }
 
-:host(:not([uswds="true"],[uswds=""])) va-button::part(button) {
+:host([uswds='false']) va-button::part(button) {
   max-width: 280px;
   width: 100%;
 }
 
 @media (min-width: 481px) {
-  :host([continue]:not([continue='false']):not([uswds="true"],[uswds=""])) {
+  :host([continue]:not([continue='false'])[uswds='false']) {
     flex-direction: row;
   }
 
-  :host([continue]:not([continue='false']):not([uswds="true"],[uswds=""])) va-button + va-button::part(button) {
+  :host([continue]:not([continue='false'])[uswds='false']) va-button + va-button::part(button) {
     margin-left: 12px;
     margin-right: 0;
   }
 }
 
 @media (min-width: 481px) {
-  :host(:not([uswds="true"],[uswds=""])) {
+  :host([uswds='false']) {
     flex-direction: row;
     max-width: 420px;
   }
 
-  :host(:not([uswds="true"],[uswds=""])) va-button + va-button::part(button) {
+  :host([uswds='false']) va-button + va-button::part(button) {
     margin-left: 12px;
     margin-right: 0;
   }
 
-  :host(:not([uswds="true"],[uswds=""])) va-button::part(button) {
+  :host([uswds='false']) va-button::part(button) {
     max-width: 210px;
   }
 }
 
 @media (max-width: 481px) {
-  :host(:not([uswds="true"],[uswds=""])) {
+  :host([uswds='false']) {
     width: 100%;
   }
 
-  :host([continue]:not([continue='false']):not([uswds="true"],[uswds=""])) va-button::part(button) {
+  :host([continue]:not([continue='false'])[uswds='false']) va-button::part(button) {
     max-width: 280px;
   }
 }
 
 @media (max-width: 320px) {
-  :host(:not([uswds="true"],[uswds=""])) {
+  :host([uswds='false']) {
     margin: 0 auto;
     max-width: 280px;
   }
 
-  :host([continue]:not([continue='false']):not([uswds="true"],[uswds=""])) va-button::part(button) {
+  :host([continue]:not([continue='false'])[uswds='false']) va-button::part(button) {
     max-width: 280px;
   }
 }

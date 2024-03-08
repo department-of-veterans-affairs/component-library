@@ -5,7 +5,7 @@ describe('va-modal', () => {
   it('renders', async () => {
     const page = await newE2EPage();
     await page.setContent(`
-      <va-modal modal-title="Example Title" visible>
+      <va-modal modal-title="Example Title" visible uswds="false">
         <p>
           A modal may pass any React nodes as children to be displayed within it.
         </p>
@@ -14,7 +14,7 @@ describe('va-modal', () => {
 
     const element = await page.find('va-modal');
     expect(element).toEqualHtml(`
-      <va-modal class="hydrated" modal-title="Example Title" visible="">
+      <va-modal class="hydrated" modal-title="Example Title" visible="" uswds="false">
         <mock:shadow-root>
           <div aria-describedby="modal-content" aria-label="Example Title modal" aria-modal="true" class="va-modal-inner" role="dialog">
             <button aria-label="Close Example Title modal" class="last-focusable-child va-modal-close" type="button">
@@ -42,7 +42,7 @@ describe('va-modal', () => {
   it('passes an axe check when visible', async () => {
     const page = await newE2EPage();
     await page.setContent(`
-      <va-modal modal-title="Example Title" visible>
+      <va-modal modal-title="Example Title" visible uswds="false">
         <p>
           A modal may pass any React nodes as children to be displayed within it.
         </p>
@@ -55,7 +55,7 @@ describe('va-modal', () => {
   it('passes an axe check when not visible', async () => {
     const page = await newE2EPage();
     await page.setContent(`
-      <va-modal modal-title="Example Title">
+      <va-modal modal-title="Example Title" uswds="false">
         <p>
           A modal may pass any React nodes as children to be displayed within it.
         </p>
@@ -68,7 +68,7 @@ describe('va-modal', () => {
   it('should trigger closeEvent using the Escape key when modal is visible', async () => {
     const page = await newE2EPage();
     await page.setContent(`
-      <va-modal modal-title="Example Title" visible>
+      <va-modal modal-title="Example Title" visible uswds="false">
         <p>
           A modal may pass any React nodes as children to be displayed within it.
         </p>
@@ -85,7 +85,7 @@ describe('va-modal', () => {
   it('should not trigger closeEvent using the Escape key when modal is not visible', async () => {
     const page = await newE2EPage();
     await page.setContent(`
-      <va-modal modal-title="Example Title">
+      <va-modal modal-title="Example Title" uswds="false">
         <p>
           A modal may pass any React nodes as children to be displayed within it.
         </p>
@@ -102,7 +102,7 @@ describe('va-modal', () => {
   it('should open with focus assigned to close button', async () => {
     const page = await newE2EPage();
     await page.setContent(`
-      <va-modal modal-title="Example Title" visible>
+      <va-modal modal-title="Example Title" visible uswds="false">
         <p>
           A modal may pass any React nodes as children to be displayed within it.
         </p>
@@ -119,7 +119,7 @@ describe('va-modal', () => {
   it('should open with focus assigned to given selector', async () => {
     const page = await newE2EPage();
     await page.setContent(`
-      <va-modal modal-title="Example Title" visible initial-focus-selector=".va-modal-title">
+      <va-modal modal-title="Example Title" visible initial-focus-selector=".va-modal-title" uswds="false">
         <p>
           A modal may pass any React nodes as children to be displayed within it.
         </p>
@@ -135,7 +135,7 @@ describe('va-modal', () => {
     const page = await newE2EPage();
     await page.setContent(`
       <input id="pre-modal-checkbox" type="checkbox" />
-      <va-modal modal-title="Example Title" visible>
+      <va-modal modal-title="Example Title" visible uswds="false">
         <p>
           A modal may pass any React nodes as children to be displayed within it.
         </p>
@@ -174,7 +174,7 @@ describe('va-modal', () => {
     const page = await newE2EPage();
     await page.setContent(`
       <input id="pre-modal-checkbox" type="checkbox" />
-      <va-modal modal-title="Example Title" visible>
+      <va-modal modal-title="Example Title" visible uswds="false">
         <p>
           A modal may pass any React nodes as children to be displayed within it.
         </p>
@@ -211,7 +211,7 @@ describe('va-modal', () => {
   it('fires a single analytics event when va-modal displays', async () => {
     const page = await newE2EPage();
     await page.setContent(
-    `<va-modal modal-title="Example Title" status="info" primary-button-text="Primary button" secondary-button-text="Secondary button">
+    `<va-modal modal-title="Example Title" status="info" primary-button-text="Primary button" secondary-button-text="Secondary button" uswds="false">
       <p>Example modal content</p>
     </va-modal>`,
     );
@@ -237,7 +237,7 @@ describe('va-modal', () => {
   it('fires a single analytics event for each button clicked', async () => {
     const page = await newE2EPage();
     await page.setContent(
-      `<va-modal modal-title="Example Title" visible status="info" primary-button-text="Primary button" secondary-button-text="Secondary button">
+      `<va-modal modal-title="Example Title" visible status="info" primary-button-text="Primary button" secondary-button-text="Secondary button" uswds="false">
       <p>Example modal content</p>
     </va-modal>`,
     );
@@ -276,7 +276,7 @@ describe('va-modal', () => {
   it('uswds v3 renders', async () => {
     const page = await newE2EPage();
     await page.setContent(`
-      <va-modal modal-title="Example Title" visible uswds>
+      <va-modal modal-title="Example Title" visible>
         <p>
           A modal may pass any React nodes as children to be displayed within it.
         </p>
@@ -285,7 +285,7 @@ describe('va-modal', () => {
 
     const element = await page.find('va-modal');
     expect(element).toEqualHtml(`
-      <va-modal class="hydrated" modal-title="Example Title" uswds="" visible="">
+      <va-modal class="hydrated" modal-title="Example Title" visible="">
         <mock:shadow-root>
         <div aria-label="Example Title modal" aria-modal="true" class="usa-modal" role="dialog">
             <div class="usa-modal__content">
@@ -315,7 +315,7 @@ describe('va-modal', () => {
   it('uswds v3 passes an axe check when visible', async () => {
     const page = await newE2EPage();
     await page.setContent(`
-      <va-modal modal-title="Example Title" visible uswds>
+      <va-modal modal-title="Example Title" visible>
         <p>
           A modal may pass any React nodes as children to be displayed within it.
         </p>
@@ -328,7 +328,7 @@ describe('va-modal', () => {
   it('uswds v3 passes an axe check when not visible', async () => {
     const page = await newE2EPage();
     await page.setContent(`
-      <va-modal modal-title="Example Title" uswds>
+      <va-modal modal-title="Example Title">
         <p>
           A modal may pass any React nodes as children to be displayed within it.
         </p>
@@ -341,7 +341,7 @@ describe('va-modal', () => {
   it('uswds v3 should trigger closeEvent using the Escape key when modal is visible', async () => {
     const page = await newE2EPage();
     await page.setContent(`
-      <va-modal modal-title="Example Title" visible uswds>
+      <va-modal modal-title="Example Title" visible>
         <p>
           A modal may pass any React nodes as children to be displayed within it.
         </p>
@@ -358,7 +358,7 @@ describe('va-modal', () => {
   it('uswds v3 should not trigger closeEvent using the Escape key when modal is not visible', async () => {
     const page = await newE2EPage();
     await page.setContent(`
-      <va-modal modal-title="Example Title" uswds>
+      <va-modal modal-title="Example Title">
         <p>
           A modal may pass any React nodes as children to be displayed within it.
         </p>
@@ -375,7 +375,7 @@ describe('va-modal', () => {
   it('uswds v3 should open with focus assigned to close button', async () => {
     const page = await newE2EPage();
     await page.setContent(`
-      <va-modal modal-title="Example Title" visible uswds>
+      <va-modal modal-title="Example Title" visible>
         <p>
           A modal may pass any React nodes as children to be displayed within it.
         </p>
@@ -392,7 +392,7 @@ describe('va-modal', () => {
   it('uswds v3 should open with focus assigned to given selector', async () => {
     const page = await newE2EPage();
     await page.setContent(`
-      <va-modal modal-title="Example Title" visible initial-focus-selector=".usa-modal__heading" uswds>
+      <va-modal modal-title="Example Title" visible initial-focus-selector=".usa-modal__heading">
         <p>
           A modal may pass any React nodes as children to be displayed within it.
         </p>
@@ -408,7 +408,7 @@ describe('va-modal', () => {
     const page = await newE2EPage();
     await page.setContent(`
       <input id="pre-modal-checkbox" type="checkbox" />
-      <va-modal modal-title="Example Title" visible uswds>
+      <va-modal modal-title="Example Title" visible>
         <p>
           A modal may pass any React nodes as children to be displayed within it.
         </p>
@@ -447,7 +447,7 @@ describe('va-modal', () => {
     const page = await newE2EPage();
     await page.setContent(`
       <input id="pre-modal-checkbox" type="checkbox" />
-      <va-modal modal-title="Example Title" visible uswds>
+      <va-modal modal-title="Example Title" visible>
         <p>
           A modal may pass any React nodes as children to be displayed within it.
         </p>
@@ -484,7 +484,7 @@ describe('va-modal', () => {
   it('uswds v3 fires a single analytics event when va-modal displays', async () => {
     const page = await newE2EPage();
     await page.setContent(
-    `<va-modal uswds modal-title="Example Title" status="info" primary-button-text="Primary button" secondary-button-text="Secondary button">
+    `<va-modal modal-title="Example Title" status="info" primary-button-text="Primary button" secondary-button-text="Secondary button">
       <p>Example modal content</p>
     </va-modal>`,
     );
@@ -510,7 +510,7 @@ describe('va-modal', () => {
   it('uswds v3 fires a single analytics event for each button clicked', async () => {
     const page = await newE2EPage();
     await page.setContent(
-      `<va-modal uswds modal-title="Example Title" visible status="info" primary-button-text="Primary button" secondary-button-text="Secondary button">
+      `<va-modal modal-title="Example Title" visible status="info" primary-button-text="Primary button" secondary-button-text="Secondary button">
       <p>Example modal content</p>
     </va-modal>`,
     );

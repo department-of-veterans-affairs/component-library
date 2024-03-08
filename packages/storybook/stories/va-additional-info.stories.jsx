@@ -4,7 +4,7 @@ import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
 const additionalInfoDocs = getWebComponentDocs('va-additional-info');
 
 export default {
-  title: 'Components/Additional info',
+  title: 'V1 Components/Additional info',
   id: 'components/va-additional-info',
   parameters: {
     componentSubtitle: `va-additional-info web component`,
@@ -21,12 +21,14 @@ const defaultArgs = {
   'trigger': 'Additional Information',
   'disable-border': false,
   'disable-analytics': false,
+  'uswds': false
 };
 
 const Template = ({
   trigger,
   'disable-border': disableBorder,
   'disable-analytics': disableAnalytics,
+  uswds
 }) => {
   return (
     <>
@@ -35,6 +37,7 @@ const Template = ({
         trigger={trigger}
         disable-analytics={disableAnalytics}
         disable-border={disableBorder}
+        uswds={uswds}
       >
         <div>Here are some popular pets to consider</div>
         <ul>

@@ -4,7 +4,7 @@ import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
 const breadcrumbsDocs = getWebComponentDocs('va-breadcrumbs');
 
 export default {
-  title: 'Components/Breadcrumbs',
+  title: 'V1 Components/Breadcrumbs',
   id: 'components/va-breadcrumbs',
   parameters: {
     componentSubtitle: 'va-breadcrumbs web component',
@@ -14,8 +14,8 @@ export default {
   },
 };
 
-const Template = ({ label, 'disable-analytics': disableAnalytics }) => (
-  <va-breadcrumbs label={label} disable-analytics={disableAnalytics}>
+const Template = ({ label, 'disable-analytics': disableAnalytics, uswds }) => (
+  <va-breadcrumbs label={label} disable-analytics={disableAnalytics} uswds={uswds}>
     <a href="#home">VA.gov home</a>
     <a href="#one">Level one</a>
     <a href="#two">Level two</a>
@@ -24,7 +24,8 @@ const Template = ({ label, 'disable-analytics': disableAnalytics }) => (
 
 const DynamicCrumbsTemplate = ({ 
   label, 
-  'disable-analytics': disableAnalytics 
+  'disable-analytics': disableAnalytics,
+  uswds
 }) => {
   const breadcrumbs = [
     {label: 'VA.gov home', path: '/#1'},
@@ -57,7 +58,7 @@ const DynamicCrumbsTemplate = ({
       <br/>
       <p>Note: To rerender the breadcrumbs dynamically, the anchor links must be wrapped in list tags.</p>
       {crumbs.length > 0 && (
-        <va-breadcrumbs label={label} disable-analytics={disableAnalytics}>
+        <va-breadcrumbs label={label} disable-analytics={disableAnalytics} uswds={uswds}>
           {crumbs?.map((crumb, i) => {
             return (
               <li key={i}>
@@ -77,6 +78,7 @@ const DynamicCrumbsTemplate = ({
 const defaultArgs = {
   'label': 'Breadcrumb',
   'disable-analytics': false,
+  'uswds': false
 };
 
 export const Default = Template.bind(null);

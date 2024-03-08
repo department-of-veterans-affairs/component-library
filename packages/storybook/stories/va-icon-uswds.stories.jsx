@@ -5,7 +5,7 @@ import './styles/va-icon.scss';
 const iconDocs = getWebComponentDocs('va-icon');
 
 export default {
-  title: 'USWDS/Icon USWDS',
+  title: 'Components/Icon USWDS',
   id: 'uswds/va-icon',
   parameters: {
     componentSubtitle: 'va-icon web component',

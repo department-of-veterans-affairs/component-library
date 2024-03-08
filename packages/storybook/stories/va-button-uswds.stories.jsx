@@ -4,7 +4,7 @@ import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
 const buttonDocs = getWebComponentDocs('va-button');
 
 export default {
-  title: 'USWDS/Button USWDS',
+  title: 'Components/Button USWDS',
   id: 'uswds/va-button',
   parameters: {
     componentSubtitle: `va-button web component`,
@@ -25,7 +25,6 @@ const defaultArgs = {
   'primaryAlternate': undefined,
   'submit': undefined,
   'text': 'Default',
-  'uswds': true,
 };
 
 const Template = ({
@@ -39,11 +38,9 @@ const Template = ({
   primaryAlternate,
   submit,
   text,
-  uswds
 }) => {
   return (
     <va-button
-      uswds={uswds}
       back={back}
       big={big}
       continue={_continue}

@@ -88,7 +88,6 @@ export class VACrisisLineModal {
           onCloseEvent={() => this.setNotVisible()}
           visible={this.isOpen}
           large={true}
-          uswds={true}
         >
           <p>
             If you are a Veteran in crisis or concerned about one, connect

@@ -5,7 +5,7 @@ import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
 const summaryBoxDocs = getWebComponentDocs('va-summary-box');
 
 export default {
-  title: 'USWDS/Summary box USWDS',
+  title: 'Components/Summary box USWDS',
   id: 'uswds/va-summary-box',
   parameters: {
     componentSubtitle: `va-summary-box web component`,
@@ -14,12 +14,13 @@ export default {
     },
   },
 };
-const defaultArgs = { uswds: true };
 
-const Template = args => {
-  const { uswds } = args
+const defaultArgs = {};
+
+
+const Template = ({}) => {
   return (
-  <va-summary-box uswds={uswds}>
+  <va-summary-box>
     <h3 slot="headline">
       If I'm a Veteran, can I get VR&E benefits and services?
     </h3>

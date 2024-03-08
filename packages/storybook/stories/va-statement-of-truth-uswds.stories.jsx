@@ -2,12 +2,12 @@ import React from 'react';
 import { VaStatementOfTruth } from '@department-of-veterans-affairs/web-components/react-bindings';
 import { getWebComponentDocs, StoryDocs } from './wc-helpers';
 
-
 VaStatementOfTruth.displayName = 'VaStatementOfTruth';
+
 const statementOfTruthDocs = getWebComponentDocs('va-statement-of-truth');
 
 export default {
-  title: 'USWDS/Statement of Truth USWDS',
+  title: 'Components/Statement of Truth USWDS',
   id: 'uswds/va-statement-of-truth',
   parameters: {
     componentSubtitle: `va-statement-of-truth web component`,

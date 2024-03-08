@@ -9,7 +9,7 @@ export default {
    * See https://storybook.js.org/docs/react/configure/overview#configure-story-loading
    * to learn how to generate automatic titles
    */
-  title: `Components/Alert`,
+  title: `V1 Components/Alert`,
   id: 'components/va-alert',
   argTypes: {
     headline: {
@@ -54,6 +54,7 @@ const defaultArgs = {
       </p>
     </div>
   ),
+  'uswds': false
 };
 
 const Template = ({
@@ -67,6 +68,7 @@ const Template = ({
   headline,
   onCloseEvent,
   children,
+  uswds
 }) => {
   if (onCloseEvent)
     return (
@@ -79,6 +81,7 @@ const Template = ({
         closeable={closeable}
         fullWidth={fullWidth}
         onCloseEvent={onCloseEvent}
+        uswds={uswds}
       >
         {headline}
         {children}
@@ -94,6 +97,7 @@ const Template = ({
       close-btn-aria-label={closeBtnAriaLabel}
       closeable={closeable}
       full-width={fullWidth}
+      uswds={uswds}
     >
       {headline}
       {children}
@@ -106,6 +110,7 @@ const BackgroundOnlyTemplate = ({
   'close-btn-aria-label': closeBtnAriaLabel,
   closeable,
   headline,
+  uswds
 }) => {
   return (
     <>
@@ -118,6 +123,7 @@ const BackgroundOnlyTemplate = ({
         closeable={closeable}
         full-width="false"
         class="vads-u-margin-bottom--1"
+        uswds={uswds}
       >
         <p className="vads-u-margin-y--0">
           We'll come get you from the waiting room when it's time for your appointment to start. If you wait more than 15 minutes, tell a staff member.
@@ -132,6 +138,7 @@ const BackgroundOnlyTemplate = ({
         closeable={closeable}
         full-width="false"
         class="vads-u-margin-bottom--1"
+        uswds={uswds}
       >
         <div>
           <p className="vads-u-margin-y--0">
@@ -149,6 +156,7 @@ const BackgroundOnlyTemplate = ({
         closeable={closeable}
         full-width="false"
         class="vads-u-margin-bottom--1"
+        uswds={uswds}
       >
         <p className="vads-u-margin-y--0">
           <strong>We're processing your travel reimbursement claim.</strong> We'll send you a text
@@ -164,6 +172,7 @@ const BackgroundOnlyTemplate = ({
         closeable={closeable}
         full-width="false"
         class="vads-u-margin-bottom--1"
+        uswds={uswds}
       >
         <div>
           <p className="vads-u-margin-y--0 vads-u-margin-bottom--2">
@@ -182,6 +191,7 @@ const BackgroundOnlyTemplate = ({
         close-btn-aria-label={closeBtnAriaLabel}
         closeable={closeable}
         full-width="false"
+        uswds={uswds}
       >
         <div>
           <p className="vads-u-margin-top--0">
@@ -211,7 +221,7 @@ SignInOrToolPrompt.args = {
         appeals on your mobile device. Download the{' '}
         <strong>VA: Health and Benefits</strong> mobile app to get started.
       </p>
-      <va-button primary-alternate text="Sign-in to VA.gov"></va-button>
+      <va-button primary-alternate text="Sign-in to VA.gov" uswds="false"></va-button>
     </div>
   ),
   status: 'continue',

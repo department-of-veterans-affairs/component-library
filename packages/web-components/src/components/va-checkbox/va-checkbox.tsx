@@ -89,7 +89,7 @@ export class VaCheckbox {
   /**
    * Whether or not the component will use USWDS v3 styling.
    */
-  @Prop({ reflect: true }) uswds?: boolean = false;
+  @Prop({ reflect: true }) uswds?: boolean = true;
 
   /**
    * Description of the option displayed below the checkbox label. Available when uswds is true.
@@ -167,6 +167,14 @@ export class VaCheckbox {
 
   disconnectedCallback() {
     i18next.off('languageChanged');
+  }
+
+  componentDidLoad() {
+    // check if the element has a class named uswds-false added from parent
+    if (this.el.classList.contains('uswds-false')) {
+      // add attribute manually
+      this.el.setAttribute('uswds', 'false');
+    }
   }
 
   render() {

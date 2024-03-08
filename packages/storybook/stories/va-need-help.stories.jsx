@@ -5,7 +5,7 @@ import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
 const needHelpDocs = getWebComponentDocs('va-need-help');
 
 export default {
-  title: 'Components/Need help?',
+  title: 'V1 Components/Need help?',
   id: 'components/va-need-help',
   parameters: {
     componentSubtitle: `va-need-help web component`,

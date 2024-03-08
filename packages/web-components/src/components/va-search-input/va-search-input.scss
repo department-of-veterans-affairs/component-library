@@ -13,16 +13,16 @@
   padding: 0;
 }
 
-:host([uswds]:not([uswds='false'])) .usa-input {
+:host(:not([uswds='false'])) .usa-input {
   margin-top: 0;
 }
 
-:host([uswds]:not([uswds='false'])) #va-search-listbox {
+:host(:not([uswds='false'])) #va-search-listbox {
   top: 37px;
   z-index: 1;
 }
 
-:host([uswds]:not([uswds='false'])[big="true"]) #va-search-listbox  {
+:host(:not([uswds='false'])[big="true"]) #va-search-listbox  {
   top: 52px;
 }
 
@@ -41,7 +41,7 @@
 @import '../../mixins/inputs.css';
 @import '../../mixins/buttons.css';
 
-:host(:not([uswds="true"],[uswds=""])) {
+:host([uswds='false']) {
   display: block;
   align-items: center;
   display: flex;

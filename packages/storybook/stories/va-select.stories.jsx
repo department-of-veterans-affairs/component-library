@@ -5,7 +5,7 @@ import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
 const selectDocs = getWebComponentDocs('va-select');
 
 export default {
-  title: 'Components/Select',
+  title: 'V1 Components/Select',
   id: 'components/va-select',
   parameters: {
     componentSubtitle: 'va-select web component',
@@ -41,6 +41,7 @@ const defaultArgs = {
     </option>,
   ],
   'use-add-button': false,
+  'uswds': false,
 };
 
 const Template = ({
@@ -53,6 +54,7 @@ const Template = ({
   'aria-live-region-text': ariaLiveRegionText,
   options,
   'use-add-button': useAddButton,
+  uswds,
 }) => {
   const [modifiedOptions, setModifiedOptions] = useState(options);
 
@@ -81,6 +83,7 @@ const Template = ({
         hint={hint}
         aria-live-region-text={ariaLiveRegionText}
         use-add-button={useAddButton}
+        uswds={uswds}
       >
         {modifiedOptions}
       </va-select>

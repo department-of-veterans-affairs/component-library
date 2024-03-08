@@ -21,7 +21,7 @@
   }
 }
 
-:host([error]:not([error='']):not([uswds="true"],[uswds=""])) {
+:host([error]:not([error=''])[uswds='false']) {
   label {
     margin-top: 0;
   }

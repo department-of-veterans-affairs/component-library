@@ -7,11 +7,11 @@ describe('va-accordion-item', () => {
   it('renders', async () => {
     const page = await newE2EPage();
 
-    await page.setContent('<va-accordion-item></va-accordion-item>');
+    await page.setContent('<va-accordion-item uswds="false"></va-accordion-item>');
     const element = await page.find('va-accordion-item');
 
     expect(element).toEqualHtml(`
-    <va-accordion-item class="hydrated">
+    <va-accordion-item class="hydrated" uswds="false">
       <mock:shadow-root>
         <h2>
           <button aria-controls="content" aria-expanded="false" part="accordion-header">
@@ -31,7 +31,7 @@ describe('va-accordion-item', () => {
   it('allows the heading level to be changed via prop', async () => {
     const page = await newE2EPage();
     await page.setContent(
-      '<va-accordion-item header="The header">Content inside</va-accordion-item>',
+      '<va-accordion-item header="The header" uswds="false">Content inside</va-accordion-item>',
     );
     const element = await page.find('va-accordion-item');
     let header = element.shadowRoot.childNodes[0];
@@ -48,7 +48,7 @@ describe('va-accordion-item', () => {
   it('slot usage allows the heading level to be set directly', async () => {
     const page = await newE2EPage();
     await page.setContent(
-      '<va-accordion-item><h6 slot="headline">The header</h6>Content inside</va-accordion-item>',
+      '<va-accordion-item uswds="false"><h6 slot="headline">The header</h6>Content inside</va-accordion-item>',
     );
     const element = await page.find('va-accordion-item');
     let header = element.shadowRoot.childNodes[0];
@@ -59,7 +59,7 @@ describe('va-accordion-item', () => {
   it('passes an axe check when open', async () => {
     const page = await newE2EPage();
     await page.setContent(`
-        <va-accordion-item open header="First item">Some content</va-accordion-item>
+        <va-accordion-item open header="First item" uswds="false">Some content</va-accordion-item>
       `);
 
     await axeCheck(page);
@@ -68,7 +68,7 @@ describe('va-accordion-item', () => {
   it('slot usage passes an axe check when open', async () => {
     const page = await newE2EPage();
     await page.setContent(`
-        <va-accordion-item><h3 slot="headline">First header</h3>Some content</va-accordion-item>
+        <va-accordion-item uswds="false"><h3 slot="headline">First header</h3>Some content</va-accordion-item>
       `);
 
     await axeCheck(page);
@@ -77,7 +77,7 @@ describe('va-accordion-item', () => {
   it('passes an axe check when closed', async () => {
     const page = await newE2EPage();
     await page.setContent(`
-        <va-accordion-item header="First item">Some content</va-accordion-item>
+        <va-accordion-item header="First item" uswds="false">Some content</va-accordion-item>
       `);
 
     await axeCheck(page);
@@ -86,7 +86,7 @@ describe('va-accordion-item', () => {
   it('slot usage passes an axe check when closed', async () => {
     const page = await newE2EPage();
     await page.setContent(`
-        <va-accordion-item><h3 slot="headline">First header</h3>Some content</va-accordion-item>
+        <va-accordion-item uswds="false"><h3 slot="headline">First header</h3>Some content</va-accordion-item>
       `);
 
     await axeCheck(page);
@@ -95,7 +95,7 @@ describe('va-accordion-item', () => {
   it('sets aria-expanded to true based on prop', async () => {
     const page = await newE2EPage();
     await page.setContent(
-      '<va-accordion-item header="The header">Content inside</va-accordion-item>',
+      '<va-accordion-item header="The header" uswds="false">Content inside</va-accordion-item>',
     );
     const component = await page.find('va-accordion-item');
     const button = await page.find('va-accordion-item >>> button');
@@ -111,7 +111,7 @@ describe('va-accordion-item', () => {
   it('fires a custom event when the button is clicked', async () => {
     const page = await newE2EPage();
     await page.setContent(
-      '<va-accordion-item header="The header">Content inside</va-accordion-item>',
+      '<va-accordion-item header="The header" uswds="false">Content inside</va-accordion-item>',
     );
 
     const accordionItemToggled = await page.spyOnEvent('accordionItemToggled');
@@ -125,7 +125,7 @@ describe('va-accordion-item', () => {
   it('slot usage fires a custom event when the button is clicked', async () => {
     const page = await newE2EPage();
     await page.setContent(
-      '<va-accordion-item><h3 slot="headline">The header</h3>Content inside</va-accordion-item>',
+      '<va-accordion-item uswds="false"><h3 slot="headline">The header</h3>Content inside</va-accordion-item>',
     );
 
     const accordionItemToggled = await page.spyOnEvent('accordionItemToggled');
@@ -139,7 +139,7 @@ describe('va-accordion-item', () => {
   it('adds a subheader when the subheader prop is used', async () => {
     const page = await newE2EPage();
     await page.setContent(
-      '<va-accordion-item header="The header" subheader="The subheader">Content inside</va-accordion-item>',
+      '<va-accordion-item header="The header" subheader="The subheader" uswds="false">Content inside</va-accordion-item>',
     );
 
     const element = await page.find('va-accordion-item');
@@ -151,7 +151,7 @@ describe('va-accordion-item', () => {
   it('slot usage allows for a subheader when the subheader prop is used', async () => {
     const page = await newE2EPage();
     await page.setContent(
-      '<va-accordion-item subheader="The subheader"><h3 slot="headline">The header</h3>Content inside</va-accordion-item>',
+      '<va-accordion-item subheader="The subheader" uswds="false"><h3 slot="headline">The header</h3>Content inside</va-accordion-item>',
     );
 
     const element = await page.find('va-accordion-item');
@@ -163,11 +163,11 @@ describe('va-accordion-item', () => {
   it("render the sub header icon", async () => {
     const page = await newE2EPage();
     await page.setContent(
-      '<va-accordion-item header="The header" subheader="The subheader"><i slot="subheader-icon" aria-hidden="true" className="fas fa-envelope"></i>Content inside</va-accordion-item>',
+      '<va-accordion-item header="The header" subheader="The subheader" uswds="false"><i slot="subheader-icon" aria-hidden="true" className="fas fa-envelope"></i>Content inside</va-accordion-item>',
     );
     const element = await page.find('va-accordion-item');
     expect(element).toEqualHtml(
-      `<va-accordion-item class="hydrated" header="The header" subheader="The subheader">
+      `<va-accordion-item class="hydrated" header="The header" subheader="The subheader" uswds="false">
         <mock:shadow-root>
         <h2>
           <button aria-controls="content" aria-expanded="false" part="accordion-header">
@@ -193,11 +193,11 @@ describe('va-accordion-item', () => {
   it("does not render the sub header icon if there is no sub header", async () => {
     const page = await newE2EPage();
     await page.setContent(
-      '<va-accordion-item header="The header"><i slot="subheader-icon" aria-hidden="true" className="fas fa-envelope"></i>Content inside</va-accordion-item>',
+      '<va-accordion-item header="The header" uswds="false"><i slot="subheader-icon" aria-hidden="true" className="fas fa-envelope"></i>Content inside</va-accordion-item>',
     );
     const element = await page.find('va-accordion-item');
     expect(element).toEqualHtml(`
-    <va-accordion-item class="hydrated" header="The header">
+    <va-accordion-item class="hydrated" header="The header" uswds="false">
       <mock:shadow-root>
         <h2>
           <button aria-controls="content" aria-expanded="false" part="accordion-header">
@@ -219,7 +219,7 @@ describe('va-accordion-item', () => {
   it('passes axe check with subheader icon', async () => {
     const page = await newE2EPage();
     await page.setContent(
-      '<va-accordion-item header="The header" subheader="The subheader"><i slot="subheader-icon" aria-hidden="true" className="fas fa-envelope"></i>Content inside</va-accordion-item>',
+      '<va-accordion-item header="The header" subheader="The subheader" uswds="false"><i slot="subheader-icon" aria-hidden="true" className="fas fa-envelope"></i>Content inside</va-accordion-item>',
     );
 
     await axeCheck(page);

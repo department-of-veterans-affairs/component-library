@@ -6,12 +6,12 @@ describe('va-accordion', () => {
   it('renders', async () => {
     const page = await newE2EPage();
 
-    await page.setContent('<va-accordion></va-accordion>');
+    await page.setContent('<va-accordion uswds="false"></va-accordion>');
     const element = await page.find('va-accordion');
 
     // The i18next translation keys are being rendered
     expect(element).toEqualHtml(`
-      <va-accordion class="hydrated">
+      <va-accordion class="hydrated" uswds="false">
         <mock:shadow-root>
           <button aria-controls="" aria-expanded="false" aria-label="expand-all-aria-label" class="va-accordion__button">
             expand-all +
@@ -25,11 +25,11 @@ describe('va-accordion', () => {
   it('does not render expand collapse button if `open-single` is true', async () => {
     const page = await newE2EPage();
 
-    await page.setContent('<va-accordion open-single="true"></va-accordion>');
+    await page.setContent('<va-accordion open-single="true" uswds="false"></va-accordion>');
     const element = await page.find('va-accordion');
 
     expect(element).toEqualHtml(`
-      <va-accordion class="hydrated" open-single="true">
+      <va-accordion class="hydrated" open-single="true" uswds="false">
         <mock:shadow-root>
           <slot></slot>
         </mock:shadow-root>
@@ -40,9 +40,9 @@ describe('va-accordion', () => {
   it('passes an axe check', async () => {
     const page = await newE2EPage();
     await page.setContent(`
-      <va-accordion>
-        <va-accordion-item header="First item">Some content</va-accordion-item>
-        <va-accordion-item header="Second item">A bit more</va-accordion-item>
+      <va-accordion uswds="false">
+        <va-accordion-item header="First item" uswds="false">Some content</va-accordion-item>
+        <va-accordion-item header="Second item" uswds="false">A bit more</va-accordion-item>
       </va-accordion>`);
 
     await axeCheck(page);
@@ -51,9 +51,9 @@ describe('va-accordion', () => {
   it('closes one item when another opens if `open-single` is true', async () => {
     const page = await newE2EPage();
     await page.setContent(`
-      <va-accordion open-single>
-        <va-accordion-item header="First item">Some content</va-accordion-item>
-        <va-accordion-item header="Second item">A bit more</va-accordion-item>
+      <va-accordion open-single uswds="false">
+        <va-accordion-item header="First item" uswds="false">Some content</va-accordion-item>
+        <va-accordion-item header="Second item" uswds="false">A bit more</va-accordion-item>
       </va-accordion>`);
 
     const buttons = await page.findAll(
@@ -77,9 +77,9 @@ describe('va-accordion', () => {
   it('allows multiple items to be open by default', async () => {
     const page = await newE2EPage();
     await page.setContent(`
-      <va-accordion>
-        <va-accordion-item header="First item">Some content</va-accordion-item>
-        <va-accordion-item header="Second item">A bit more</va-accordion-item>
+      <va-accordion uswds="false">
+        <va-accordion-item header="First item" uswds="false">Some content</va-accordion-item>
+        <va-accordion-item header="Second item" uswds="false">A bit more</va-accordion-item>
       </va-accordion>`);
 
     const buttons = await page.findAll(
@@ -102,9 +102,9 @@ describe('va-accordion', () => {
   it('expands all items when `Expand all +` button is triggered', async () => {
     const page = await newE2EPage();
     await page.setContent(`
-      <va-accordion>
-        <va-accordion-item header="First item">Some content</va-accordion-item>
-        <va-accordion-item header="Second item">A bit more</va-accordion-item>
+      <va-accordion uswds="false">
+        <va-accordion-item header="First item" uswds="false">Some content</va-accordion-item>
+        <va-accordion-item header="Second item" uswds="false">A bit more</va-accordion-item>
       </va-accordion>`);
 
     const expandButton = await page.find('va-accordion >>> button');
@@ -119,9 +119,9 @@ describe('va-accordion', () => {
   it('collapses all items when `Collapse All -` button is triggered', async () => {
     const page = await newE2EPage();
     await page.setContent(`
-      <va-accordion>
-        <va-accordion-item header="First item">Some content</va-accordion-item>
-        <va-accordion-item header="Second item">A bit more</va-accordion-item>
+      <va-accordion uswds="false">
+        <va-accordion-item header="First item" uswds="false">Some content</va-accordion-item>
+        <va-accordion-item header="Second item" uswds="false">A bit more</va-accordion-item>
       </va-accordion>`);
 
     const expandButton = await page.find('va-accordion >>> button');
@@ -139,9 +139,9 @@ describe('va-accordion', () => {
   it('tracks which accordions are opened', async () => {
     const page = await newE2EPage();
     await page.setContent(`
-      <va-accordion>
-        <va-accordion-item header="First item">Some content</va-accordion-item>
-        <va-accordion-item header="Second item">A bit more</va-accordion-item>
+      <va-accordion uswds="false">
+        <va-accordion-item header="First item" uswds="false">Some content</va-accordion-item>
+        <va-accordion-item header="Second item" uswds="false">A bit more</va-accordion-item>
       </va-accordion>`);
     const accordionItemsButtons = await page.findAll(
       'va-accordion-item >>> button',
@@ -162,8 +162,8 @@ describe('va-accordion', () => {
   it('fires an analytics event when expanded', async () => {
     const page = await newE2EPage();
     await page.setContent(`
-      <va-accordion>
-        <va-accordion-item header="First item" subheader="First subheader">Some content</va-accordion-item>
+      <va-accordion uswds="false">
+        <va-accordion-item header="First item" subheader="First subheader" uswds="false">Some content</va-accordion-item>
       </va-accordion>`);
 
     const analyticsSpy = await page.spyOnEvent('component-library-analytics');
@@ -189,8 +189,8 @@ describe('va-accordion', () => {
   it('does not fire an analytics event when disableAnalytics is passed', async () => {
     const page = await newE2EPage();
     await page.setContent(`
-      <va-accordion disable-analytics="true">
-        <va-accordion-item header="First item" subheader="First subheader">Some content</va-accordion-item>
+      <va-accordion disable-analytics="true" uswds="false">
+        <va-accordion-item header="First item" subheader="First subheader" uswds="false">Some content</va-accordion-item>
       </va-accordion>`);
 
     const analyticsSpy = await page.spyOnEvent('component-library-analytics');
@@ -205,8 +205,8 @@ describe('va-accordion', () => {
   it('includes sectionHeading in analytics event when present', async () => {
     const page = await newE2EPage();
     await page.setContent(`
-      <va-accordion section-heading="The Section Heading">
-        <va-accordion-item header="First item" subheader="First subheader">Some content</va-accordion-item>
+      <va-accordion section-heading="The Section Heading" uswds="false">
+        <va-accordion-item header="First item" subheader="First subheader" uswds="false">Some content</va-accordion-item>
       </va-accordion>`);
 
     const analyticsSpy = await page.spyOnEvent('component-library-analytics');
@@ -232,8 +232,8 @@ describe('va-accordion', () => {
   it('slot usage includes correct header in analytics event when present', async () => {
     const page = await newE2EPage();
     await page.setContent(`
-      <va-accordion section-heading="The Section Heading">
-        <va-accordion-item subheader="First subheader"><h3 slot="headline">First header</h3>Some content</va-accordion-item>
+      <va-accordion section-heading="The Section Heading" uswds="false">
+        <va-accordion-item subheader="First subheader" uswds="false"><h3 slot="headline">First header</h3>Some content</va-accordion-item>
       </va-accordion>`);
 
     const analyticsSpy = await page.spyOnEvent('component-library-analytics');
@@ -259,8 +259,8 @@ describe('va-accordion', () => {
   it('fires an analytics event with default data when no props are provided', async () => {
     const page = await newE2EPage();
     await page.setContent(`
-      <va-accordion>
-        <va-accordion-item></va-accordion-item>
+      <va-accordion uswds="false">
+        <va-accordion-item uswds="false"></va-accordion-item>
       </va-accordion>`);
 
     const analyticsSpy = await page.spyOnEvent('component-library-analytics');

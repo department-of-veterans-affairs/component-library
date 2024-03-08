@@ -4,7 +4,7 @@ import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
 const buttonDocs = getWebComponentDocs('va-button');
 
 export default {
-  title: 'Components/Button',
+  title: 'V1 Components/Button',
   id: 'components/va-button',
   parameters: {
     componentSubtitle: `va-button web component`,
@@ -24,7 +24,8 @@ const defaultArgs = {
   'secondary': undefined,
   'submit': undefined,
   'text': 'Edit',
-  'primary-alternate': undefined
+  'primary-alternate': undefined,
+  'uswds': false
 };
 
 const Template = ({
@@ -37,7 +38,8 @@ const Template = ({
   secondary,
   submit,
   text,
-  primaryAlternate
+  primaryAlternate,
+  uswds
 }) => {
   return (
     <va-button
@@ -51,7 +53,8 @@ const Template = ({
       submit={submit}
       text={text}
       onClick={e => console.log(e)}
-      primary-alternate = {primaryAlternate}
+      primary-alternate={primaryAlternate}
+      uswds={uswds}
     />
   );
 };

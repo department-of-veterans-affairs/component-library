@@ -7,7 +7,7 @@ VaPrivacyAgreement.displayName = 'VaPrivacyAgreement';
 const privacyAgreementDocs = getWebComponentDocs('va-privacy-agreement');
 
 export default {
-  title: 'USWDS/Privacy agreement USWDS',
+  title: 'Components/Privacy agreement USWDS',
   id: 'uswds/va-privacy-agreement',
   parameters: {
     componentSubtitle: 'va-privacy-agreement web component',
@@ -21,14 +21,12 @@ const defaultArgs = {
   'checked': false,
   'show-error': false,
   'enable-analytics': false,
-  'uswds': true,
 };
 
 const Template = ({
   checked,
   'show-error': showError,
   'enable-analytics': enableAnalytics,
-  'uswds': uswds,
 }) => {
   const [isChecked, setIsChecked] = useState(checked);
   const handler = event => setIsChecked(event?.detail?.checked);
@@ -39,7 +37,6 @@ const Template = ({
   return (
     <VaPrivacyAgreement
       checked={isChecked}
-      uswds={uswds}
       showError={showError}
       enable-analytics={enableAnalytics}
       onVaChange={handler}

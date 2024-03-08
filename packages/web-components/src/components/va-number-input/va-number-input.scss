@@ -12,7 +12,7 @@
 @import '../../mixins/hint-text.css';
 @import '~@department-of-veterans-affairs/css-library/dist/elements.css';
 
-:host(:not([uswds='true'], [uswds=''])) {
+:host([uswds='false']) {
   input[type='number'] {
     -moz-appearance: textfield;
   }

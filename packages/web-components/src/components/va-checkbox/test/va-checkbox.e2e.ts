@@ -4,7 +4,7 @@ import { axeCheck } from '../../../testing/test-helpers';
 describe('va-checkbox', () => {
   it('renders', async () => {
     const page = await newE2EPage();
-    await page.setContent('<va-checkbox></va-checkbox>');
+    await page.setContent('<va-checkbox uswds="false"></va-checkbox>');
 
     const element = await page.find('va-checkbox');
     expect(element).toHaveClass('hydrated');
@@ -12,7 +12,7 @@ describe('va-checkbox', () => {
 
   it('renders with aria-invalid set to false by default', async () => {
     const page = await newE2EPage();
-    await page.setContent('<va-checkbox></va-checkbox>');
+    await page.setContent('<va-checkbox uswds="false"></va-checkbox>');
 
     const input = await page.find('va-checkbox >>> input');
     expect(input.getAttribute('aria-invalid')).toEqual('false');
@@ -20,7 +20,7 @@ describe('va-checkbox', () => {
 
   it('renders a label', async () => {
     const page = await newE2EPage();
-    await page.setContent('<va-checkbox label="Cool label, right?" />');
+    await page.setContent('<va-checkbox label="Cool label, right?" uswds="false"/>');
     const element = await page.find('va-checkbox >>> label');
     expect(element).not.toBeNull();
   });
@@ -28,7 +28,7 @@ describe('va-checkbox', () => {
   it('renders an error message', async () => {
     const page = await newE2EPage();
     await page.setContent(
-      '<va-checkbox error="Something went horribly wrong" />',
+      '<va-checkbox error="Something went horribly wrong" uswds="false"/>',
     );
     const element = await page.find('va-checkbox >>> #checkbox-error-message');
     const input = await page.find('va-checkbox >>> input');
@@ -40,7 +40,7 @@ describe('va-checkbox', () => {
 
   it('renders hint text', async () => {
     const page = await newE2EPage();
-    await page.setContent('<va-checkbox hint="This is hint text" />');
+    await page.setContent('<va-checkbox hint="This is hint text" uswds="false"/>');
 
     // Render the hint text
     const hintTextElement = await page.find('va-checkbox >>> span.hint-text');
@@ -49,7 +49,7 @@ describe('va-checkbox', () => {
 
   it('renders a required span', async () => {
     const page = await newE2EPage();
-    await page.setContent('<va-checkbox label="I am Checkbox" required/>');
+    await page.setContent('<va-checkbox label="I am Checkbox" required uswds="false"/>');
     const element = await page.find('va-checkbox >>> .required');
     expect(element.textContent).toContain('required');
   });
@@ -57,7 +57,7 @@ describe('va-checkbox', () => {
   it('renders a description', async () => {
     const page = await newE2EPage();
     await page.setContent(
-      '<va-checkbox><p slot="description">This is a description!</p></va-checkbox',
+      '<va-checkbox uswds="false"><p slot="description">This is a description!</p></va-checkbox',
     );
     const element = await page.find('va-checkbox');
     const inputEl = await page.find('va-checkbox >>> input');
@@ -71,7 +71,7 @@ describe('va-checkbox', () => {
   it.skip('does not render unknown content', async () => {
     const page = await newE2EPage();
     await page.setContent(
-      '<va-checkbox><p slot="nope">Should not show up</p><p>Nor should unnamed slotted content</p></va-checkbox',
+      '<va-checkbox uswds="false"><p slot="nope">Should not show up</p><p>Nor should unnamed slotted content</p></va-checkbox',
     );
     const element = await page.find('va-checkbox');
     expect(element).toEqualText('');
@@ -80,7 +80,7 @@ describe('va-checkbox', () => {
   it('should prefer rendering the description prop over the slotted element', async () => {
     const page = await newE2EPage();
     await page.setContent(
-      '<va-checkbox description="Description prop"><p slot="description">Slotted description</p></va-checkbox',
+      '<va-checkbox description="Description prop" uswds="false"><p slot="description">Slotted description</p></va-checkbox',
     );
     const element = await page.find('va-checkbox');
     const inputEl = await page.find('va-checkbox >>> input');
@@ -93,7 +93,7 @@ describe('va-checkbox', () => {
 
   it('adds new aria-describedby for error message', async () => {
     const page = await newE2EPage();
-    await page.setContent('<va-checkbox error="This is a mistake" message-aria-describedby="This is a message"/>');
+    await page.setContent('<va-checkbox error="This is a mistake" message-aria-describedby="This is a message" uswds="false"/>');
 
     // Render the error message text
     const inputEl = await page.find('va-checkbox >>> input');
@@ -102,7 +102,7 @@ describe('va-checkbox', () => {
 
   it('adds aria-describedby input-message id', async () => {
     const page = await newE2EPage();
-    await page.setContent('<va-checkbox message-aria-describedby="This is a message" />');
+    await page.setContent('<va-checkbox message-aria-describedby="This is a message" uswds="false"/>');
 
     // Render the error message text
     const inputEl = await page.find('va-checkbox >>> input');
@@ -112,7 +112,7 @@ describe('va-checkbox', () => {
   it('adds aria-describedby input-message, checkbox-error-message and description ids', async () => {
     const page = await newE2EPage();
     await page.setContent(
-      `<va-checkbox error="Something went horribly wrong" message-aria-describedby="This is a message">
+      `<va-checkbox error="Something went horribly wrong" message-aria-describedby="This is a message" uswds="false">
          <p slot="description">Slotted description</p>
       </va-checkbox>`,
     );
@@ -126,7 +126,7 @@ describe('va-checkbox', () => {
     const page = await newE2EPage();
 
     await page.setContent(
-      '<va-checkbox required label="This is a test" error="With an error message"/>',
+      '<va-checkbox required label="This is a test" error="With an error message" uswds="false"/>',
     );
 
     await axeCheck(page);
@@ -135,7 +135,7 @@ describe('va-checkbox', () => {
   it('fires an analytics event when enableAnalytics is true', async () => {
     const page = await newE2EPage();
     await page.setContent(
-      '<va-checkbox label="Just another checkbox here" enable-analytics required description="Description content"/>',
+      '<va-checkbox label="Just another checkbox here" enable-analytics required description="Description content" uswds="false"/>',
     );
     const analyticsSpy = await page.spyOnEvent('component-library-analytics');
     const inputEl = await page.find('va-checkbox >>> input');
@@ -156,7 +156,7 @@ describe('va-checkbox', () => {
   it('fires an analytics event with description slotted content', async () => {
     const page = await newE2EPage();
     await page.setContent(
-      `<va-checkbox label="Just another checkbox here" enable-analytics>
+      `<va-checkbox label="Just another checkbox here" enable-analytics uswds="false">
         <div slot="description">Description content in a slot.<p>Testing nested nodes.</p></div>
         <p slot="description">And multiple slots.</p>
        </va-checkbox`,
@@ -182,7 +182,7 @@ describe('va-checkbox', () => {
   it("doesn't fire an analytics event when enableAnalytics is false", async () => {
     const page = await newE2EPage();
     await page.setContent(
-      '<va-checkbox label="Just another checkbox here" required description="Description content"/>',
+      '<va-checkbox label="Just another checkbox here" required description="Description content" uswds="false"/>',
     );
     const analyticsSpy = await page.spyOnEvent('component-library-analytics');
     const inputEl = await page.find('va-checkbox >>> input');
@@ -194,7 +194,7 @@ describe('va-checkbox', () => {
   it('emits the vaChange event', async () => {
     const page = await newE2EPage();
     await page.setContent(
-      '<va-checkbox label="Just another checkbox here" required description="Description content"/>',
+      '<va-checkbox label="Just another checkbox here" required description="Description content" uswds="false"/>',
     );
     const changeSpy = await page.spyOnEvent('vaChange');
     const inputEl = await page.find('va-checkbox >>> input');
@@ -206,7 +206,7 @@ describe('va-checkbox', () => {
   it('emits blur event', async () => {
     const page = await newE2EPage();
     await page.setContent(
-      '<va-checkbox label="Just another checkbox here" required description="Description content"/>',
+      '<va-checkbox label="Just another checkbox here" required description="Description content" uswds="false"/>',
     );
     const blurSpy = await page.spyOnEvent('blur');
     const inputEl = await page.find('va-checkbox >>> input');
@@ -219,7 +219,7 @@ describe('va-checkbox', () => {
   it('updates the checked prop', async () => {
     const page = await newE2EPage();
     await page.setContent(
-      '<va-checkbox label="Just another checkbox here" checked/>',
+      '<va-checkbox label="Just another checkbox here" checked uswds="false"/>',
     );
     const inputEl = await page.find('va-checkbox >>> input');
     expect(await inputEl.getProperty('checked')).toBeTruthy();
@@ -234,7 +234,7 @@ describe('va-checkbox', () => {
   // Begin USWDS v3 variation tests
   it('uswds v3 variation renders', async () => {
     const page = await newE2EPage();
-    await page.setContent('<va-checkbox uswds></va-checkbox>');
+    await page.setContent('<va-checkbox></va-checkbox>');
 
     const element = await page.find('va-checkbox');
     expect(element).toHaveClass('hydrated');
@@ -243,7 +243,7 @@ describe('va-checkbox', () => {
   it('uswds v3 displays checkbox description text', async () => {
     const page = await newE2EPage();
     await page.setContent(
-      '<va-checkbox uswds label="Example label" checkbox-description="Example checkbox description" />',
+      '<va-checkbox label="Example label" checkbox-description="Example checkbox description" />',
     );
 
     const hint = await page.find('va-checkbox >>> .usa-checkbox__label-description');
@@ -253,7 +253,7 @@ describe('va-checkbox', () => {
   it('uswds v3 has tile class added', async () => {
     const page = await newE2EPage();
     await page.setContent(
-      '<va-checkbox uswds tile label="Example label" />',
+      '<va-checkbox tile label="Example label" />',
     );
 
     const input = await page.find('va-checkbox >>> .usa-checkbox__input');
@@ -262,7 +262,7 @@ describe('va-checkbox', () => {
 
   it('uswds v3 renders with aria-invalid set to false by default', async () => {
     const page = await newE2EPage();
-    await page.setContent('<va-checkbox uswds></va-checkbox>');
+    await page.setContent('<va-checkbox></va-checkbox>');
 
     const input = await page.find('va-checkbox >>> input');
     expect(input.getAttribute('aria-invalid')).toEqual('false');
@@ -270,7 +270,7 @@ describe('va-checkbox', () => {
 
   it('uswds v3 renders a label', async () => {
     const page = await newE2EPage();
-    await page.setContent('<va-checkbox uswds label="Cool label, right?" />');
+    await page.setContent('<va-checkbox label="Cool label, right?" />');
     const element = await page.find('va-checkbox >>> label');
     expect(element).not.toBeNull();
   });
@@ -278,7 +278,7 @@ describe('va-checkbox', () => {
   it('uswds v3 renders an error message', async () => {
     const page = await newE2EPage();
     await page.setContent(
-      '<va-checkbox uswds error="Something went horribly wrong" />',
+      '<va-checkbox error="Something went horribly wrong" />',
     );
     const element = await page.find('va-checkbox >>> #checkbox-error-message');
     const input = await page.find('va-checkbox >>> input');
@@ -289,7 +289,7 @@ describe('va-checkbox', () => {
 
   it('uswds v3 renders hint text', async () => {
     const page = await newE2EPage();
-    await page.setContent('<va-checkbox uswds hint="This is hint text" />');
+    await page.setContent('<va-checkbox hint="This is hint text" />');
 
     const hintTextElement = await page.find('va-checkbox >>> .usa-hint');
     expect(hintTextElement.innerText).toContain('This is hint text');
@@ -297,7 +297,7 @@ describe('va-checkbox', () => {
 
   it('uswds v3 renders a required span', async () => {
     const page = await newE2EPage();
-    await page.setContent('<va-checkbox uswds label="I am Checkbox" required/>');
+    await page.setContent('<va-checkbox label="I am Checkbox" required/>');
     const element = await page.find('va-checkbox >>> .usa-label--required');
     expect(element.textContent).toContain('required');
   });
@@ -305,7 +305,7 @@ describe('va-checkbox', () => {
   it('uswds v3 renders a description slot', async () => {
     const page = await newE2EPage();
     await page.setContent(
-      '<va-checkbox uswds><p slot="description">This is a description!</p></va-checkbox',
+      '<va-checkbox><p slot="description">This is a description!</p></va-checkbox',
     );
     const element = await page.find('va-checkbox');
     const inputEl = await page.find('va-checkbox >>> input');
@@ -316,7 +316,7 @@ describe('va-checkbox', () => {
   it('uswds v3 should prefer rendering the description prop over the slotted element', async () => {
     const page = await newE2EPage();
     await page.setContent(
-      '<va-checkbox uswds description="Description prop"><p slot="description">Slotted description</p></va-checkbox',
+      '<va-checkbox description="Description prop"><p slot="description">Slotted description</p></va-checkbox',
     );
     const element = await page.find('va-checkbox');
     const inputEl = await page.find('va-checkbox >>> input');
@@ -329,7 +329,7 @@ describe('va-checkbox', () => {
 
   it('uswds v3 adds new aria-describedby for error message', async () => {
     const page = await newE2EPage();
-    await page.setContent('<va-checkbox uswds error="This is a mistake" />');
+    await page.setContent('<va-checkbox error="This is a mistake" />');
 
     const inputEl = await page.find('va-checkbox >>> input');
     expect(inputEl.getAttribute('aria-describedby')).toContain('checkbox-error-message');
@@ -339,7 +339,7 @@ describe('va-checkbox', () => {
     const page = await newE2EPage();
 
     await page.setContent(
-      '<va-checkbox uswds required label="This is a test" error="With an error message"/>',
+      '<va-checkbox required label="This is a test" error="With an error message"/>',
     );
 
     await axeCheck(page);
@@ -348,7 +348,7 @@ describe('va-checkbox', () => {
   it('uswds v3 adds aria-describedby input-message, checkbox-error-message and description ids', async () => {
     const page = await newE2EPage();
     await page.setContent(
-      `<va-checkbox uswds error="Something went horribly wrong" message-aria-describedby="This is a message">
+      `<va-checkbox error="Something went horribly wrong" message-aria-describedby="This is a message">
          <p slot="description">Slotted description</p>
       </va-checkbox>`,
     );
@@ -361,7 +361,7 @@ describe('va-checkbox', () => {
   it('uswds v3 fires an analytics event when enableAnalytics is true', async () => {
     const page = await newE2EPage();
     await page.setContent(
-      '<va-checkbox uswds label="Just another checkbox here" enable-analytics required description="Description content"/>',
+      '<va-checkbox label="Just another checkbox here" enable-analytics required description="Description content"/>',
     );
     const analyticsSpy = await page.spyOnEvent('component-library-analytics');
     const checkboxEl = await page.find('va-checkbox >>> .usa-checkbox__label');
@@ -382,7 +382,7 @@ describe('va-checkbox', () => {
   it('uswds v3 fires an analytics event with description slotted content', async () => {
     const page = await newE2EPage();
     await page.setContent(
-      `<va-checkbox uswds label="Just another checkbox here" enable-analytics>
+      `<va-checkbox label="Just another checkbox here" enable-analytics>
         <div slot="description">Description content in a slot.<p>Testing nested nodes.</p></div>
         <p slot="description">And multiple slots.</p>
        </va-checkbox`,
@@ -407,7 +407,7 @@ describe('va-checkbox', () => {
   it("uswds v3 doesn't fire an analytics event when enableAnalytics is false", async () => {
     const page = await newE2EPage();
     await page.setContent(
-      '<va-checkbox uswds label="Just another checkbox here" required description="Description content"/>',
+      '<va-checkbox label="Just another checkbox here" required description="Description content"/>',
     );
     const analyticsSpy = await page.spyOnEvent('component-library-analytics');
     const checkboxEl = await page.find('va-checkbox >>> .usa-checkbox__label');
@@ -419,7 +419,7 @@ describe('va-checkbox', () => {
   it('uswds v3 emits the vaChange event', async () => {
     const page = await newE2EPage();
     await page.setContent(
-      '<va-checkbox uswds label="Just another checkbox here" required description="Description content"/>',
+      '<va-checkbox label="Just another checkbox here" required description="Description content"/>',
     );
     const changeSpy = await page.spyOnEvent('vaChange');
     const checkboxEl = await page.find('va-checkbox >>> .usa-checkbox__label');
@@ -431,7 +431,7 @@ describe('va-checkbox', () => {
   it('uswds v3 emits blur event', async () => {
     const page = await newE2EPage();
     await page.setContent(
-      '<va-checkbox uswds label="Just another checkbox here" required description="Description content"/>',
+      '<va-checkbox label="Just another checkbox here" required description="Description content"/>',
     );
     const blurSpy = await page.spyOnEvent('blur');
     const checkboxEl = await page.find('va-checkbox >>> .usa-checkbox__label');
@@ -444,7 +444,7 @@ describe('va-checkbox', () => {
   it('uswds v3 updates the checked prop', async () => {
     const page = await newE2EPage();
     await page.setContent(
-      '<va-checkbox uswds label="Just another checkbox here" checked />',
+      '<va-checkbox label="Just another checkbox here" checked />',
     );
     const checkboxEl = await page.find('va-checkbox >>> input');
     expect(await checkboxEl.getProperty('checked')).toBeTruthy();

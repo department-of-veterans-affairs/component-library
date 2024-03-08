@@ -7,7 +7,7 @@ VaDate.displayName = 'VaDate';
 const dateDocs = getWebComponentDocs('va-date');
 
 export default {
-  title: 'Components/Date input',
+  title: 'V1 Components/Date input',
   id: 'components/va-date',
   parameters: {
     componentSubtitle: `va-date web component`,

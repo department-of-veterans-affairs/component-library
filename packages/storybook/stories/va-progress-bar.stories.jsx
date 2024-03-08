@@ -4,7 +4,7 @@ import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
 const progressBarDocs = getWebComponentDocs('va-progress-bar');
 
 export default {
-  title: 'Components/Progress bar - activity',
+  title: 'V1 Components/Progress bar - activity',
   id: 'components/va-progress-bar',
   parameters: {
     componentSubtitle: `va-progress-bar web component`,

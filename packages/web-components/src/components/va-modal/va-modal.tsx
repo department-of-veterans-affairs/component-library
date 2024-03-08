@@ -124,7 +124,7 @@ export class VaModal {
   /**
    * Whether or not the component will use USWDS v3 styling.
    */
-  @Prop() uswds?: boolean = false;
+  @Prop() uswds?: boolean = true;
 
   /**
    * Whether or not the component will be forced to take action.
@@ -473,7 +473,6 @@ export class VaModal {
                         <va-button
                           onClick={e => this.handlePrimaryButtonClick(e)}
                           text={primaryButtonText}
-                          uswds
                           />
                       </li>
                     )}
@@ -484,7 +483,6 @@ export class VaModal {
                             onClick={e => this.handleSecondaryButtonClick(e)}
                             secondary
                             text={secondaryButtonText}
-                            uswds
                           />
                         )}
                         {unstyled && (

@@ -5,7 +5,7 @@ describe('va-summary-box', () => {
   it('renders v1', async () => {
     const page = await newE2EPage();
     await page.setContent(`
-      <va-summary-box>
+      <va-summary-box uswds="false">
         <h3 slot="headline">
           If I'm a Veteran, can I get VR&E benefits and services?
         </h3>
@@ -21,7 +21,7 @@ describe('va-summary-box', () => {
     const element = await page.find('va-summary-box');
 
     expect(element).toEqualHtml(`
-      <va-summary-box class="hydrated">
+      <va-summary-box class="hydrated" uswds="false">
         <mock:shadow-root>
           <div class="feature">
             <slot name="headline"></slot>
@@ -44,7 +44,7 @@ describe('va-summary-box', () => {
     const heading = "If I'm a Veteran, can I get VR&E benefits and services?";
     const page = await newE2EPage();
     await page.setContent(`
-      <va-summary-box>
+      <va-summary-box uswds="false">
         <h3 slot="headline">${heading}</h3>
       </va-summary-box>
     `);
@@ -56,7 +56,7 @@ describe('va-summary-box', () => {
   it('passes an axe check', async () => {
     const page = await newE2EPage();
     await page.setContent(`
-      <va-summary-box>
+      <va-summary-box uswds="false">
         <h3 slot="headline">
           If I'm a Veteran, can I get VR&E benefits and services?
         </h3>
@@ -76,7 +76,7 @@ describe('va-summary-box', () => {
   it('renders v3', async () => {
     const page = await newE2EPage();
     await page.setContent(`
-      <va-summary-box uswds>
+      <va-summary-box>
         <h3 slot="headline">
           If I'm a Veteran, can I get VR&E benefits and services?
         </h3>
@@ -92,7 +92,7 @@ describe('va-summary-box', () => {
     const element = await page.find('va-summary-box');
 
     expect(element).toEqualHtml(`
-      <va-summary-box class="hydrated" uswds="">
+      <va-summary-box class="hydrated">
         <mock:shadow-root>
           <div class="usa-summary-box" role="region" aria-label="If I'm a Veteran, can I get VR&amp;E benefits and services?">
             <div class="usa-summary-box__body">
@@ -117,7 +117,7 @@ describe('va-summary-box', () => {
     const heading = "If I'm a Veteran, can I get VR&E benefits and services?";
     const page = await newE2EPage();
     await page.setContent(`
-      <va-summary-box uswds>
+      <va-summary-box>
         <h3 slot="headline">${heading}</h3>
       </va-summary-box>
     `);
@@ -129,7 +129,7 @@ describe('va-summary-box', () => {
   it('passes an axe check', async () => {
     const page = await newE2EPage();
     await page.setContent(`
-      <va-summary-box uswds>
+      <va-summary-box>
         <h3 slot="headline">
           If I'm a Veteran, can I get VR&E benefits and services?
         </h3>

@@ -1,17 +1,17 @@
 @import '~@department-of-veterans-affairs/css-library/dist/tokens/scss/variables.scss';
 @import 'functions';
 
-:host([error]:not([error=''])[uswds]:not([uswds='false'])) {
+:host([error]:not([error='']):not([uswds='false'])) {
     border-left: 0.4rem solid $color-secondary-dark;
     padding-left: rem-override(1rem);
     position: relative;
 }
 
-:host([error]:not([error=''])[uswds]:not([uswds='false'])[use-forms-pattern='multiple']) {
+:host([error]:not([error='']):not([uswds='false'])[use-forms-pattern='multiple']) {
     border-left: none;
 }
 
-:host([error]:not([error=''])[uswds]:not([uswds='false'])[use-forms-pattern='multiple']) {
+:host([error]:not([error='']):not([uswds='false'])[use-forms-pattern='multiple']) {
     .input-wrap {
         border-left: 0.4rem solid $color-secondary-dark;
         padding-left: rem-override(1rem);
@@ -20,10 +20,10 @@
 }
 
 @media screen and (min-width: 1008px) {
-    :host([error]:not([error=''])[uswds]:not([uswds='false'])) {
+    :host([error]:not([error='']):not([uswds='false'])) {
         margin-left: -1.4rem;
     }
-    :host([error]:not([error=''])[uswds]:not([uswds='false'])[use-forms-pattern='multiple']) {
+    :host([error]:not([error='']):not([uswds='false'])[use-forms-pattern='multiple']) {
         .input-wrap {
             margin-left: -1.6rem;
         }
@@ -31,7 +31,7 @@
 }
 
 @media screen and (max-width: 1008px) { 
-    :host([error]:not([error=''])[uswds]:not([uswds='false'])[use-forms-pattern='multiple']) {
+    :host([error]:not([error='']):not([uswds='false'])[use-forms-pattern='multiple']) {
         padding-left: 0;
     }
 }

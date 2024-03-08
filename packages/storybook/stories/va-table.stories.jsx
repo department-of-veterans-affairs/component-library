@@ -5,7 +5,7 @@ import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
 const tableDocs = getWebComponentDocs('va-table');
 
 export default {
-  title: `Components/Table`,
+  title: `V1 Components/Table`,
   id: 'components/va-table',
   parameters: {
     componentSubtitle: 'va-table web component',
@@ -245,6 +245,7 @@ const Pagination = args => {
         pages={numPages}
         maxPageListLength={MAX_PAGE_LIST_LENGTH}
         showLastPage
+        uswds={false}
       />
     </main>
   );

@@ -74,7 +74,7 @@ export class VaAlert {
   /**
    * Whether or not the component will use USWDS v3 styling.
    */
-  @Prop() uswds?: boolean = false;
+  @Prop() uswds?: boolean = true;
 
   /**
    * Displays the slim variation. Available when USWDS is true.

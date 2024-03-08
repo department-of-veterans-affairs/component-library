@@ -19,7 +19,7 @@
   padding: 0;
 }
 
-:host([uswds]:not([uswds='false'])) {
+:host(:not([uswds='false'])) {
   margin-top: 24px;
 }
 
@@ -35,13 +35,13 @@
   margin: 0 0.35rem;
 }
 
-:host(:not([uswds="true"],[uswds=""])) fieldset {
+:host([uswds='false']) fieldset {
   border: none;
   margin: 0;
   padding: 0;
 }
 
-:host(:not([uswds="true"],[uswds=""])) legend {
+:host([uswds='false']) legend {
   display: block;
   max-width: 46rem;
   font-weight: inherit;
