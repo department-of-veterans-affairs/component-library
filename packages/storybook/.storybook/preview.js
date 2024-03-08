@@ -88,6 +88,7 @@ export const parameters = {
         'About',
         ['Introduction'],
         'Components',
+        'V1 Components',
         'Under development',
         'Deprecated',
       ],

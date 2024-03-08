@@ -6,7 +6,7 @@ import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
 const fileInputDocs = getWebComponentDocs('va-file-input');
 
 export default {
-  title: 'USWDS/File input USWDS',
+  title: 'Components/File input USWDS',
   id: 'uswds/va-file-input',
   parameters: {
     componentSubtitle: `va-file-input web component`,
@@ -24,7 +24,7 @@ const defaultArgs = {
   'error': '',
   'enable-analytics': false,
   'hint': null,
-  'uswds': true,
+  'multiple': false,
   'vaChange': event =>
     alert(`File change event received: ${event?.detail?.files[0]?.name}`),
 };
@@ -37,7 +37,6 @@ const Template = ({
   required,
   hint,
   'enable-analytics': enableAnalytics,
-  uswds,
   vaChange,
 }) => {
   return (
@@ -50,7 +49,6 @@ const Template = ({
       hint={hint}
       enable-analytics={enableAnalytics}
       onVaChange={vaChange}
-      uswds={uswds}
     />
   );
 };

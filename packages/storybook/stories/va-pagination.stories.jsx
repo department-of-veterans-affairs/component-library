@@ -6,7 +6,7 @@ VaPagination.displayName = 'VaPagination';
 const paginationDocs = getWebComponentDocs('va-pagination');
 
 export default {
-  title: 'Components/Pagination',
+  title: 'V1 Components/Pagination',
   id: 'components/va-pagination',
   parameters: {
     componentSubtitle: `va-pagination web component`,
@@ -20,12 +20,14 @@ const defaultArgs = {
   'page': 3,
   'pages': 15,
   'show-last-page': true,
+  uswds: false,
 };
 
 const Template = ({
   'page': currentPage,
   pages,
   'show-last-page': showLastPage,
+  uswds
 }) => {
   const [page, setPage] = useState(currentPage);
   const handlePageSelect = event => {
@@ -37,6 +39,7 @@ const Template = ({
       pages={pages}
       onPageSelect={handlePageSelect}
       showLastPage={showLastPage}
+      uswds={uswds}
     />
   );
 };

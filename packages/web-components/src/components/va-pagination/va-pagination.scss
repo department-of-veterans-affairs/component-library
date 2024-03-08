@@ -10,7 +10,7 @@
   box-sizing: border-box;
 }
 
-:host([uswds]:not([uswds='false'])) {
+:host(:not([uswds='false'])) {
   a.usa-pagination__next-page > div,
   a.usa-pagination__previous-page > div {
     display: flex;
