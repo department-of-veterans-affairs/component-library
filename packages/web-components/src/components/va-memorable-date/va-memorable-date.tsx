@@ -456,7 +456,7 @@ export class VaMemorableDate {
                 value={month?.toString()}
                 onInput={handleDateChange}
                 onBlur={this.handleMonthBlur}
-                class="input-month memorable-date-input"
+                class="input-month memorable-date-input uswds-false"
                 inputmode="numeric"
                 type="text"
                 error={this.invalidMonth ? getErrorMessage(error) : null}
@@ -475,7 +475,7 @@ export class VaMemorableDate {
                 value={day?.toString()}
                 onInput={handleDateChange}
                 onBlur={this.handleDayBlur}
-                class="input-day memorable-date-input"
+                class="input-day memorable-date-input uswds-false"
                 inputmode="numeric"
                 type="text"
                 error={this.invalidDay ? getErrorMessage(error) : null}
@@ -494,7 +494,7 @@ export class VaMemorableDate {
                 value={year?.toString()}
                 onInput={handleDateChange}
                 onBlur={this.handleYearBlur}
-                class="input-year memorable-date-input"
+                class="input-year memorable-date-input uswds-false"
                 inputmode="numeric"
                 type="text"
                 error={this.invalidYear ? getErrorMessage(error) : null}
