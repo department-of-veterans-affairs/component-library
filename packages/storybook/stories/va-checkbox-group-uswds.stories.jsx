@@ -361,7 +361,6 @@ SingleCheckbox.args = {
 export const Tile = USWDSTiled.bind(null);
 Tile.args = {
   ...defaultArgs,
-  uswds: true,
   label: 'Select any historical figure',
 };
 
