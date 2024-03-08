@@ -73,14 +73,13 @@ export class VaPrivacyAgreement {
     });
 
     const uswdsFalse = classnames({
-      'uwsds-false': !this.uswds
+      'uswds-false': !this.uswds
     });
     
       return (
         <Host>
           <va-checkbox
             class={uswdsFalse}
-            uswds={this.uswds}
             required
             error={this.errorMessage()}
             id="checkbox"

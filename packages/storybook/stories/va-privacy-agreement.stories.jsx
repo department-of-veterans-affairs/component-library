@@ -40,6 +40,7 @@ const Template = ({
             showError={showError}
             enable-analytics={enableAnalytics}
             onVaChange={handler}
+            uswds={false}
         />
     );
 };
