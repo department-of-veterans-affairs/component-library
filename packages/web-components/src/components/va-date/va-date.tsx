@@ -122,6 +122,12 @@ export class VaDate {
   })
   componentLibraryAnalytics: EventEmitter;
 
+  componentDidLoad() {
+    // add this attr so that error state css selectors will target inputs
+    // without causing conflict in memorable-date
+    this.el.setAttribute('uswds', 'false');
+  }
+
   /**
    * Set the value prop as an ISO-8601 date using provided arguments.
    * Strips trailing hyphens and sets date to be null if the
