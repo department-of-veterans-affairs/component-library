@@ -55,7 +55,7 @@ const Template = ({
 };
 
 export const Default = Template.bind(null);
-Default.args = { ...defaultArgs };
+Default.args = { ...defaultArgs};
 Default.argTypes = propStructure(loadingIndicatorDocs);
 
 export const SetFocus = Template.bind(null);
