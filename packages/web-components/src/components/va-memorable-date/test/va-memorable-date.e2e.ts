@@ -18,9 +18,9 @@ describe('va-memorable-date', () => {
           <span id="error-message" role="alert"></span>
           <slot></slot>
           <div class='date-container'>
-            <va-text-input aria-describedby='dateHint' class='hydrated input-month memorable-date-input'></va-text-input>
-            <va-text-input aria-describedby='dateHint' class='hydrated input-day memorable-date-input'></va-text-input>
-            <va-text-input aria-describedby='dateHint' class='hydrated input-year memorable-date-input' value=''></va-text-input>
+            <va-text-input aria-describedby='dateHint' class='hydrated input-month memorable-date-input uswds-false' uswds="false"></va-text-input>
+            <va-text-input aria-describedby='dateHint' class='hydrated input-day memorable-date-input uswds-false' uswds="false"></va-text-input>
+            <va-text-input aria-describedby='dateHint' class='hydrated input-year memorable-date-input uswds-false' uswds="false" value=''></va-text-input>
           </div>
         </fieldset>
       </mock:shadow-root>
@@ -57,9 +57,9 @@ describe('va-memorable-date', () => {
           <span id="error-message" role="alert"></span>
           <slot></slot>
           <div class='date-container'>
-            <va-text-input aria-describedby='dateHint hint' class='hydrated input-month memorable-date-input'></va-text-input>
-            <va-text-input aria-describedby='dateHint hint' class='hydrated input-day memorable-date-input'></va-text-input>
-            <va-text-input aria-describedby='dateHint hint' class='hydrated input-year memorable-date-input' value=''></va-text-input>
+            <va-text-input aria-describedby='dateHint hint' class='hydrated input-month memorable-date-input uswds-false' uswds="false"></va-text-input>
+            <va-text-input aria-describedby='dateHint hint' class='hydrated input-day memorable-date-input uswds-false' uswds="false"></va-text-input>
+            <va-text-input aria-describedby='dateHint hint' class='hydrated input-year memorable-date-input uswds-false' uswds="false" value=''></va-text-input>
           </div>
         </fieldset>
       </mock:shadow-root>

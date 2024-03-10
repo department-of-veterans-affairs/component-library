@@ -10,7 +10,7 @@ describe('va-privacy-agreement', () => {
     expect(element).toEqualHtml(`
      <va-privacy-agreement checked="" class="hydrated" uswds="false">
        <mock:shadow-root>
-         <va-checkbox class="hydrated" id="checkbox">
+         <va-checkbox class="hydrated uswds-false" uswds="false" id="checkbox">
            <span class="description" slot="description">
              Please read and accept the
              <a href="/privacy-policy/" target="_blank">
