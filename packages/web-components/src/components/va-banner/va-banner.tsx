@@ -182,6 +182,7 @@ export class VaBanner {
           data-role="region"
           data-label={bannerAriaLabel}
           uswds={false}
+          class="uswds-false"
         >
           <h3 slot="headline">{this.headline}</h3>
           <slot></slot>
