@@ -27,6 +27,7 @@ const defaultArgs = {
   'multiple': false,
   'vaChange': event =>
     alert(`File change event received: ${event?.detail?.files[0]?.name}`),
+  'uswds': true
 };
 
 const Template = ({
@@ -38,6 +39,7 @@ const Template = ({
   hint,
   'enable-analytics': enableAnalytics,
   vaChange,
+  uswds
 }) => {
   return (
     <VaFileInput
@@ -49,6 +51,7 @@ const Template = ({
       hint={hint}
       enable-analytics={enableAnalytics}
       onVaChange={vaChange}
+      uswds={uswds}
     />
   );
 };

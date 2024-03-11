@@ -76,7 +76,7 @@ export class VaFileInput {
   /**
    * Whether or not the component will use USWDS v3 styling.
    */
-  @Prop() uswds?: boolean = true;
+  @Prop() uswds?: boolean = false;
 
   /**
    * The event emitted when the file input value changes.
@@ -221,8 +221,6 @@ export class VaFileInput {
             secondary
             text={text}
             aria-describedby={error ? 'error-message' : undefined}
-            uswds={false}
-            class="uswds-false"
           />
           <input
             id="fileInputField"
