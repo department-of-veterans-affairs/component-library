@@ -10,7 +10,7 @@ const checkBoxGroupDocs = getWebComponentDocs('va-checkbox-group');
 const checkbox = getWebComponentDocs('va-checkbox');
 
 export default {
-  title: 'Components/Checkbox group',
+  title: 'V1 Components/Checkbox group',
   id: 'components/va-checkbox-group',
   subcomponents: componentStructure(checkbox),
   parameters: {
@@ -32,6 +32,7 @@ const vaCheckboxGroup = args => {
     required,
     hint,
     'label-header-level': labelHeaderLevel,
+    uswds,
     ...rest
   } = args;
   return (
@@ -42,9 +43,10 @@ const vaCheckboxGroup = args => {
       required={required}
       hint={hint}
       label-header-level={labelHeaderLevel}
+      uswds={uswds}
     >
-      <va-checkbox label="Option one" name="example" value="1" />
-      <va-checkbox label="Option two" name="example" value="2" />
+      <va-checkbox label="Option one" name="example" value="1" uswds={uswds} />
+      <va-checkbox label="Option two" name="example" value="2" uswds={uswds} />
     </va-checkbox-group>
   )
 }
@@ -76,6 +78,7 @@ const defaultArgs = {
   'error': null,
   'hint': null,
   'label-header-level': '',
+  'uswds': false,
 };
 
 export const Default = Template.bind(null);
@@ -111,6 +114,7 @@ const SingleCheckboxTemplate = ({
   error,
   label,
   required,
+  uswds,
 }) => {
   return (
     <va-checkbox-group
@@ -118,8 +122,10 @@ const SingleCheckboxTemplate = ({
       error={error}
       label={label}
       required={required}
+      uswds={uswds}
     >
-      <va-checkbox label="Option one" name="example" value="1" />
+      <va-checkbox label="Option one" name="example" value="1" uswds={uswds}
+/>
     </va-checkbox-group>
   );
 };

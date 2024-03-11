@@ -37,7 +37,7 @@ const Contacts = () => (
 );
 
 export default {
-  title: `Components/Telephone`,
+  title: `V1 Components/Telephone`,
   id: 'components/va-telephone',
   parameters: {
     componentSubtitle: `va-telephone web component`,

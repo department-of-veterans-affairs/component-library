@@ -16,7 +16,7 @@ describe('va-file-input', () => {
           <label for="fileInputButton">This is the file upload label</label>
           <slot></slot>
           <span id="error-message" role="alert"></span>
-          <va-button id="fileInputButton" aria-label="This is the file upload label" secondary="" class="hydrated"></va-button>
+          <va-button id="fileInputButton" aria-label="This is the file upload label" secondary="" class="hydrated uswds-false" uswds="false"></va-button>
           <input type="file" id="fileInputField" hidden>
         </mock:shadow-root>
       </va-text-input>

@@ -160,7 +160,6 @@ export class VaStatementOfTruth {
             value={inputValue}
             message-aria-describedby={inputMessageAriaDescribedby}
             required
-            uswds
             onInput={this.handleInputChange}
             onBlur={this.handleInputBlur}
             ref={(field) => this.inputField = field}
@@ -171,7 +170,6 @@ export class VaStatementOfTruth {
             label={checkboxLabel}
             required
             checked={checked}
-            uswds
             onVaChange={this.handleCheckboxChange}
             ref={(field) => this.checkboxField = field}
           />

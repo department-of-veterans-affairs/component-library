@@ -37,7 +37,7 @@ export class VaSegmentedProgressBar {
   /**
   * Whether or not the component will use USWDS v3 styling.
   */
-  @Prop() uswds?: boolean;
+  @Prop() uswds?: boolean = true;
 
   /**
   * Header level for button wrapper. Must be between 1 and 6 (v3 only)

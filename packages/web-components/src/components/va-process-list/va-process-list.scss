@@ -5,7 +5,7 @@
 @import '../../global/formation_overrides';
 
 
-:host([uswds]:not([uswds='false'])) {
+:host(:not([uswds='false'])) {
   counter-reset: usa-numbered-list;
 }
 

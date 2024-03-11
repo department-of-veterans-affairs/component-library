@@ -45,7 +45,7 @@ export class VaButtonPair {
   /**
    * Whether or not the component will use USWDS v3 styling.
    */
-  @Prop() uswds?: boolean = false;
+  @Prop() uswds?: boolean = true;
 
   /**
    * Fires when the primary button is clicked.
@@ -134,7 +134,6 @@ export class VaButtonPair {
                   disable-analytics={disableAnalytics}
                   label={secondaryLabel}
                   onClick={handleSecondaryClick}
-                  uswds
                 />
               </li>
               <li class="usa-button-group__item">
@@ -144,7 +143,6 @@ export class VaButtonPair {
                   label={primaryLabel}
                   onClick={handlePrimaryClick}
                   submit={submit}
-                  uswds
                 />
               </li>
             </ul>
@@ -158,6 +156,8 @@ export class VaButtonPair {
               disable-analytics={disableAnalytics}
               label={secondaryLabel}
               onClick={handleSecondaryClick}
+              uswds={false}
+              class="uswds-false"
             />
             <va-button
               continue
@@ -165,6 +165,8 @@ export class VaButtonPair {
               label={primaryLabel}
               onClick={handlePrimaryClick}
               submit={submit}
+              uswds={false}
+              class="uswds-false"
             />
           </Host>
         );
@@ -183,7 +185,6 @@ export class VaButtonPair {
                 onClick={handlePrimaryClick}
                 text={update ? 'Update' : 'Yes'}
                 submit={submit}
-                uswds
               />
               </li>
               <li class="usa-button-group__item">
@@ -193,7 +194,6 @@ export class VaButtonPair {
                   onClick={handleSecondaryClick}
                   secondary
                   text={update ? 'Cancel' : 'No'}
-                  uswds
                 />
               </li>
             </ul>
@@ -208,6 +208,8 @@ export class VaButtonPair {
               onClick={handlePrimaryClick}
               text={update ? 'Update' : 'Yes'}
               submit={submit}
+              uswds={false}
+              class="uswds-false"
             />
             <va-button
               disable-analytics={disableAnalytics}
@@ -215,6 +217,8 @@ export class VaButtonPair {
               onClick={handleSecondaryClick}
               secondary
               text={update ? 'Cancel' : 'No'}
+              uswds={false}
+              class="uswds-false"
             />
           </Host>
         );
