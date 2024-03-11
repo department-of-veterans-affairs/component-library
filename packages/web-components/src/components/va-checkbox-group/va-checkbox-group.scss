@@ -17,7 +17,7 @@
   padding: 0;
 }
 
-:host(:not[uswds='false']) {
+:host(:not([uswds='false'])) {
   margin-top: 24px;
 }
 
