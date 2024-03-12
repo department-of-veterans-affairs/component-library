@@ -32,6 +32,11 @@ export class VaHeaderMinimal {
   @Prop() header?: string;
   @Prop() subheader?: string;
 
+  /**
+   * Disables use of heading tags in the minimal header in favor of `<div>` tags. This is used when a heading level 1 needs to be used further down the page, as there should only be one heading level 1.
+   */
+  @Prop() disableHeadings?: boolean = false;
+
   // This keydown event listener tracks if the shift key is held down while changing focus
   @Listen('keydown', { target: 'window' })
   trackShiftKey(e: KeyboardEvent) {
@@ -57,7 +62,7 @@ export class VaHeaderMinimal {
   }
 
   render() {
-    const { header, subheader } = this;
+    const { header, subheader, disableHeadings: disableHeadings } = this;
 
     return (
       <Host role="banner">
@@ -68,8 +73,12 @@ export class VaHeaderMinimal {
             <img class="va-logo" src={vaSeal} alt="VA logo and Seal, U.S. Department of Veterans Affairs" />
           </a>
           <div class="header-container">
-            <h1>{header}</h1>
-            {this.subheader && <h2>{subheader}</h2>}
+            
+            {!disableHeadings ? <h1>{header}</h1> : <div class="header">{header}</div>}
+
+            {subheader && (
+              !disableHeadings ? <h2>{subheader}</h2> : <div class="subheader">{subheader}</div>
+            )}
           </div>
         </div>
       </Host>
