@@ -446,6 +446,10 @@ export namespace Components {
         "uswds"?: boolean;
     }
     interface VaHeaderMinimal {
+        /**
+          * Disables use of heading tags in the minimal header in favor of `<div>` tags. This is for when a heading level 1 needs to be used elsewhere, as there should only be one heading level 1 per page.
+         */
+        "disableHeadings"?: boolean;
         "header"?: string;
         "subheader"?: string;
     }
@@ -2403,6 +2407,10 @@ declare namespace LocalJSX {
         "uswds"?: boolean;
     }
     interface VaHeaderMinimal {
+        /**
+          * Disables use of heading tags in the minimal header in favor of `<div>` tags. This is for when a heading level 1 needs to be used elsewhere, as there should only be one heading level 1 per page.
+         */
+        "disableHeadings"?: boolean;
         "header"?: string;
         "subheader"?: string;
     }
