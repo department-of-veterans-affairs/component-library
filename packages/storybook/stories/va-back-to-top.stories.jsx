@@ -43,7 +43,7 @@ const Template = () => {
           height: '500px',
           display: 'flex',
           justifyContent: 'center',
-          background: 'var(--color-primary-darker)',
+          background: 'var(--vads-color-primary-darker)',
           color: 'white',
         }}
       >
