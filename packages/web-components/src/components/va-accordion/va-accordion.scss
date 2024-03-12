@@ -9,7 +9,7 @@
 
 /** Original Component Style **/
 
-:host(:not([uswds="true"],[uswds=""])) {
+:host([uswds='false']) {
   display: block;
   width: 100%;
   color: var(--vads-color-base-darker);
@@ -17,8 +17,8 @@
 }
 
 /* If `bordered` is present and if it is *not* false */
-:host([bordered='true']:not([uswds="true"],[uswds=""])),
-:host([bordered='']:not([uswds="true"],[uswds=""])) {
+:host([bordered='true'][uswds='false']),
+:host([bordered=''][uswds='false']) {
   --item-border: 3px solid var(--vads-color-base-lightest);
 }
 

@@ -4,7 +4,7 @@ import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
 const maintenanceBannerDocs = getWebComponentDocs('va-maintenance-banner');
 
 export default {
-  title: 'Components/Banner - Maintenance',
+  title: 'V1 Components/Banner - Maintenance',
   id: 'components/va-maintenance-banner',
   parameters: {
     componentSubtitle: `va-maintenance-banner web component`,
@@ -27,7 +27,9 @@ const Template = args => (
   </va-maintenance-banner>
 );
 
-let maintenanceEndDateTime = new Date();
+const maintenanceTime = new Date(2099, 5, 21);
+
+let maintenanceEndDateTime = new Date(maintenanceTime);
 maintenanceEndDateTime.setHours(maintenanceEndDateTime.getHours() + 4);
 maintenanceEndDateTime.setMinutes(maintenanceEndDateTime.getMinutes() + 30);
 
@@ -39,17 +41,18 @@ const defaultArgs = {
   'upcoming-warn-title': 'Upcoming site maintenance',
   'upcoming-warn-start-date-time': `${upcomingWarnStartDateTime}`,
   'maintenance-title': 'Site maintenance',
-  'maintenance-start-date-time': `${new Date()}`,
+  'maintenance-start-date-time': `${new Date(maintenanceTime)}`,
   'maintenance-end-date-time': `${maintenanceEndDateTime}`
 };
 
 export const Default = Template.bind(null);
 Default.args = {
   ...defaultArgs,
+  isError: true,
 };
 
-let maintenanceStartDateTime = new Date();
-maintenanceEndDateTime = new Date();
+let maintenanceStartDateTime = new Date(maintenanceTime);
+maintenanceEndDateTime = new Date(maintenanceTime);
 maintenanceStartDateTime.setDate(maintenanceStartDateTime.getDate() + 1);
 maintenanceEndDateTime.setDate(maintenanceStartDateTime.getDate());
 maintenanceEndDateTime.setHours(maintenanceStartDateTime.getHours() + 2);

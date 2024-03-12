@@ -22,6 +22,10 @@
   animation: spin 1.5s linear infinite;
 }
 
+.loading-indicator.chromatic:after {
+  animation: none;
+}
+
 .loading-indicator:focus {
   outline: none;
 }

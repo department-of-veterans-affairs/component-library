@@ -5,7 +5,7 @@ import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
 const textInputDocs = getWebComponentDocs('va-text-input');
 
 export default {
-  title: `Components/Text input`,
+  title: `V1 Components/Text input`,
   id: 'components/va-text-input',
   parameters: {
     componentSubtitle: `va-text-input web component`,
@@ -53,6 +53,7 @@ const defaultArgs = {
   'pattern': undefined,
   'message-aria-describedby': 'Optional description text for screen readers',
   hint: null,
+  uswds: false,
   charcount: false,
 };
 
@@ -72,6 +73,7 @@ const Template = ({
   pattern,
   hint,
   'message-aria-describedby': messageAriaDescribedby,
+  uswds,
   charcount,
 }) => {
   return (
@@ -93,7 +95,8 @@ const Template = ({
       onBlur={e => console.log('blur event', e)}
       onInput={e => console.log('input event value', e.target.value)}
       message-aria-describedby={messageAriaDescribedby}
-      charcount
+      uswds={uswds}
+      charcount={charcount}
     />
   );
 };
@@ -110,6 +113,7 @@ const I18nTemplate = ({
   value,
   inputmode,
   type,
+  uswds,
 }) => {
   const [lang, setLang] = useState('en');
   useEffect(() => {
@@ -132,6 +136,7 @@ const I18nTemplate = ({
         value={value}
         inputmode={inputmode}
         type={type}
+        uswds={uswds}
       />
     </>
   );
@@ -141,6 +146,7 @@ const I18nTemplate = ({
 const WidthsTemplate = ({
   name,
   value,
+  uswds
 }) => {
   return (
     <>
@@ -149,6 +155,7 @@ const WidthsTemplate = ({
         name={name}
         label='My input - 2xs'
         value={value}
+        uswds={uswds}
       />
 
       <va-text-input
@@ -156,6 +163,7 @@ const WidthsTemplate = ({
         name={name}
         label='My input - xs'
         value={value}
+        uswds={uswds}
       />  
   
       <va-text-input
@@ -163,6 +171,7 @@ const WidthsTemplate = ({
         name={name}
         label='My input - sm'
         value={value}
+        uswds={uswds}
       />
 
       <va-text-input
@@ -170,6 +179,7 @@ const WidthsTemplate = ({
         name={name}
         label='My input - md'
         value={value}
+        uswds={uswds}
       />
 
       <va-text-input
@@ -177,6 +187,7 @@ const WidthsTemplate = ({
         name={name}
         label='My input - lg'
         value={value}
+        uswds={uswds}
       />
 
       <va-text-input
@@ -184,6 +195,7 @@ const WidthsTemplate = ({
         name={name}
         label='My input - xl'
         value={value}
+        uswds={uswds}
       />
 
       <va-text-input
@@ -191,6 +203,7 @@ const WidthsTemplate = ({
         name={name}
         label='My input - 2xl'
         value={value}
+        uswds={uswds}
       />
     </>
   );
@@ -258,10 +271,10 @@ WithAnalytics.args = { ...defaultArgs, 'enable-analytics': true };
 export const WithHintText = Template.bind(null);
 WithHintText.args = { ...defaultArgs, hint: "This is example hint text" };
 
-const WithInlineHintTextTemplate = ({ name, label }) => {
+const WithInlineHintTextTemplate = ({ name, label, uswds }) => {
   return (
     <>
-      <va-text-input name={name} label={label} />
+      <va-text-input name={name} label={label} uswds={uswds}/>
       <p>If your hint is very short it can be included in the label.</p>
     </>
   );
@@ -270,9 +283,9 @@ const WithInlineHintTextTemplate = ({ name, label }) => {
 export const WithInlineHintText = WithInlineHintTextTemplate.bind(null);
 WithInlineHintText.args = { ...defaultArgs, label: "My input (with hint)" };
 
-const AdditionalInfoTemplate = ({ name, label }) => {
+const AdditionalInfoTemplate = ({ name, label, uswds }) => {
   return (
-    <va-text-input name={name} label={label}>
+    <va-text-input name={name} label={label} uswds={uswds}>
       <div className="vads-u-margin-bottom--1">
         <va-additional-info trigger="Why is this required?">
           We need the Veteran’s Social Security number or tax identification

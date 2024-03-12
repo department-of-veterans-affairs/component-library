@@ -76,7 +76,7 @@ export class VaSearchInput {
   /**
    * Whether or not the component will use USWDS v3 styling.
    */
-  @Prop() uswds?: boolean = false;
+  @Prop() uswds?: boolean = true;
 
   /**
    * If `true`, the component will use the big variant. Only available when `uswds` is `true`.

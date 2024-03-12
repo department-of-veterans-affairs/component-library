@@ -6,7 +6,7 @@ import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
 const checkboxDocs = getWebComponentDocs('va-checkbox');
 
 export default {
-  title: 'USWDS/Checkbox USWDS',
+  title: 'Components/Checkbox USWDS',
   id: 'uswds/va-checkbox',
   parameters: {
     componentSubtitle: `va-checkbox web component`,
@@ -24,7 +24,6 @@ const defaultArgs = {
   'description': null,
   'enable-analytics': false,
   'hint': null,
-  'uswds': true,
   'tile': false,
   'message-aria-describedby': 'Optional description text for screen readers',
 };
@@ -38,7 +37,6 @@ const vaCheckbox = args => {
     error,
     label,
     required,
-    uswds,
     hint,
     tile,
     'message-aria-describedby': messageAriaDescribedBy,
@@ -46,7 +44,6 @@ const vaCheckbox = args => {
   } = args;
   return (
     <va-checkbox
-      uswds={uswds}
       checked={checked}
       description={description}
       enable-analytics={enableAnalytics}
@@ -74,19 +71,16 @@ const I18nTemplate = args => {
   return (
     <div>
       <va-button
-        uswds
         onClick={e => setLang('es')}
         style={{ fontSize: '16px' }}
         text="Español"
       />
       <va-button
-        uswds
         onClick={e => setLang('en')}
         style={{ fontSize: '16px' }}
         text="English"
       />
       <va-button
-        uswds
         onClick={e => setLang('tl')}
         style={{ fontSize: '16px' }}
         text="Tagalog"

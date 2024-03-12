@@ -50,6 +50,10 @@ export class VaMaintenanceBanner {
    */
   @Prop() upcomingWarnTitle: string;
   /**
+   * Override logic for whether to show error or warning
+   */
+  @Prop() isError: boolean;
+  /**
    * Fires when the component is closed by clicking on the close icon.
    */
   @Event({
@@ -129,7 +133,7 @@ export class VaMaintenanceBanner {
   };
 
   render() {
-    const {upcomingWarnStartDateTime, maintenanceEndDateTime} = this,
+    const {upcomingWarnStartDateTime, maintenanceEndDateTime, isError} = this,
       now = new Date();
 
     // Escape early if it's before when it should show.
@@ -143,7 +147,8 @@ export class VaMaintenanceBanner {
     }
     if (window.localStorage.getItem('MAINTENANCE_BANNER') !== this.bannerId) {
       const { upcomingWarnTitle, maintenanceStartDateTime, maintenanceTitle} = this;
-      const isWarning = isDateBefore(now, new Date(maintenanceStartDateTime));
+      const isWarning = isDateBefore(now, new Date(maintenanceStartDateTime)) && !isError;
+
       const maintenanceBannerClass = classNames({
         'maintenance-banner': true,
         'maintenance-banner--warning': isWarning,

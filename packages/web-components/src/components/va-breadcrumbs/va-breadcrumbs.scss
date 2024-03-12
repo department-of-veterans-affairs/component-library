@@ -12,7 +12,7 @@
 }
 
 // Styles for V1 mode
-:host(:not([uswds='true'], [uswds=''])) {
+:host([uswds='false']) {
   nav {
     background: var(--vads-color-white);
     color: var(--vads-color-link);
@@ -33,7 +33,7 @@
 }
 
 // Styles for V3 mode
-:host([uswds]:not([uswds='false'])) {
+:host(:not([uswds='false'])) {
   .usa-breadcrumb__link {
     color: var(--vads-color-link);
   }

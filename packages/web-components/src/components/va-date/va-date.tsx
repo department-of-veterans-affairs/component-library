@@ -122,6 +122,12 @@ export class VaDate {
   })
   componentLibraryAnalytics: EventEmitter;
 
+  componentDidLoad() {
+    // add this attr so that error state css selectors will target inputs
+    // without causing conflict in memorable-date
+    this.el.setAttribute('uswds', 'false');
+  }
+
   /**
    * Set the value prop as an ISO-8601 date using provided arguments.
    * Strips trailing hyphens and sets date to be null if the
@@ -259,8 +265,9 @@ export class VaDate {
               onVaSelect={handleDateChange}
               onBlur={this.handleMonthBlur}
               invalid={this.invalidMonth}
-              class="select-month"
+              class="select-month uswds-false"
               aria-label="Please enter two digits for the month"
+              uswds={false}
             >
               <option value=""></option>
               {months &&
@@ -280,8 +287,9 @@ export class VaDate {
                 onVaSelect={handleDateChange}
                 onBlur={this.handleDayBlur}
                 invalid={this.invalidDay}
-                class="select-day"
+                class="select-day uswds-false"
                 aria-label="Please enter two digits for the day"
+                uswds={false}
               >
                 <option value=""></option>
                 {daysForSelectedMonth &&
@@ -303,10 +311,11 @@ export class VaDate {
               invalid={this.invalidYear}
               onInput={handleDateChange}
               onBlur={this.handleYearBlur}
-              class="input-year"
+              class="input-year uswds-false"
               inputmode="numeric"
               type="text"
               aria-label="Please enter four digits for the year"
+              uswds={false}
             />
           </div>
         </fieldset>

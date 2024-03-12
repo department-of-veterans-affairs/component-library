@@ -10,7 +10,7 @@ const accordionDocs = getWebComponentDocs('va-accordion');
 const accordionItem = getWebComponentDocs('va-accordion-item');
 
 export default {
-  title: 'USWDS/Accordion USWDS',
+  title: 'Components/Accordion USWDS',
   id: 'uswds/va-accordion',
   subcomponents: componentStructure(accordionItem),
   parameters: {
@@ -23,7 +23,7 @@ export default {
 
 const Template = args => (
   <va-accordion {...args}>
-    <va-accordion-item uswds id="first" header="First Amendment">
+    <va-accordion-item id="first" header="First Amendment">
         <p>
           Congress shall make no law respecting an establishment of religion, or
           prohibiting the free exercise thereof; or abridging the freedom of speech,
@@ -31,13 +31,13 @@ const Template = args => (
           petition the Government for a redress of grievances.
         </p>
     </va-accordion-item>
-    <va-accordion-item uswds id="second" header="Second Amendment">
+    <va-accordion-item id="second" header="Second Amendment">
         <p>
           A well regulated Militia, being necessary to the security of a free State, 
           the right of the people to keep and bear Arms, shall not be infringed.
         </p>
     </va-accordion-item>
-    <va-accordion-item uswds id="third" header="Third Amendment">
+    <va-accordion-item id="third" header="Third Amendment">
         <p>
           No Soldier shall, in time of peace be quartered in any house, without the 
           consent of the Owner, nor in time of war, but in a manner to be prescribed by law.
@@ -49,7 +49,7 @@ const Template = args => (
 const BorderedTemplate = args => {  
   return (
     <va-accordion {...args}>
-      <va-accordion-item uswds id="first" bordered="true" header="First Amendment">
+      <va-accordion-item id="first" bordered="true" header="First Amendment">
           <p>
             Congress shall make no law respecting an establishment of religion, or
             prohibiting the free exercise thereof; or abridging the freedom of speech,
@@ -57,13 +57,13 @@ const BorderedTemplate = args => {
             petition the Government for a redress of grievances.
           </p>
       </va-accordion-item>
-      <va-accordion-item uswds id="second" bordered="true" header="Second Amendment">
+      <va-accordion-item id="second" bordered="true" header="Second Amendment">
           <p>
             A well regulated Militia, being necessary to the security of a free State, 
             the right of the people to keep and bear Arms, shall not be infringed.
           </p>
       </va-accordion-item>
-      <va-accordion-item uswds id="third" bordered="true" header="Third Amendment">
+      <va-accordion-item id="third" bordered="true" header="Third Amendment">
           <p>
             No Soldier shall, in time of peace be quartered in any house, without the 
             consent of the Owner, nor in time of war, but in a manner to be prescribed by law.
@@ -75,7 +75,7 @@ const BorderedTemplate = args => {
 
 const TemplateSubheader = args => (
   <va-accordion {...args}>
-    <va-accordion-item uswds id="first" header="First Amendment" subheader="Subheader">
+    <va-accordion-item id="first" header="First Amendment" subheader="Subheader">
         <p>
           Congress shall make no law respecting an establishment of religion, or
           prohibiting the free exercise thereof; or abridging the freedom of speech,
@@ -83,13 +83,13 @@ const TemplateSubheader = args => (
           petition the Government for a redress of grievances.
         </p>
     </va-accordion-item>
-    <va-accordion-item uswds id="second" header="Second Amendment" subheader="Subheader">
+    <va-accordion-item id="second" header="Second Amendment" subheader="Subheader">
         <p>
           A well regulated Militia, being necessary to the security of a free State, 
           the right of the people to keep and bear Arms, shall not be infringed.
         </p>
     </va-accordion-item>
-    <va-accordion-item uswds id="third" header="Third Amendment" subheader="Subheader">
+    <va-accordion-item id="third" header="Third Amendment" subheader="Subheader">
         <p>
           No Soldier shall, in time of peace be quartered in any house, without the 
           consent of the Owner, nor in time of war, but in a manner to be prescribed by law.
@@ -100,7 +100,7 @@ const TemplateSubheader = args => (
 
 const TemplateIconHeaders = args => (
   <va-accordion {...args}>
-    <va-accordion-item uswds id="first" header="First Amendment" subheader="Subheader">
+    <va-accordion-item id="first" header="First Amendment" subheader="Subheader">
       <i slot="icon" className="fas fa-info-circle vads-u-color--green"/>
       <i aria-hidden="true" className="fas fa-envelope" slot="subheader-icon"/>  
       <p>
@@ -110,7 +110,7 @@ const TemplateIconHeaders = args => (
         petition the Government for a redress of grievances.
       </p>
     </va-accordion-item>
-    <va-accordion-item uswds id="second" header="Second Amendment" subheader="Subheader">
+    <va-accordion-item id="second" header="Second Amendment" subheader="Subheader">
       <i slot="icon" className="fas fa-info-circle vads-u-color--green"/>
       <i aria-hidden="true" className="fas fa-envelope" slot="subheader-icon"/>  
       <p>
@@ -118,7 +118,7 @@ const TemplateIconHeaders = args => (
         the right of the people to keep and bear Arms, shall not be infringed.
       </p>
     </va-accordion-item>
-    <va-accordion-item uswds id="third" header="Third Amendment" subheader="Subheader">
+    <va-accordion-item id="third" header="Third Amendment" subheader="Subheader">
       <i slot="icon" className="fas fa-info-circle vads-u-color--green"/>
       <i aria-hidden="true" className="fas fa-envelope" slot="subheader-icon"/>  
       <p>
@@ -131,7 +131,7 @@ const TemplateIconHeaders = args => (
 
 const TemplateHeadlineSlot = args => (
   <va-accordion {...args}>
-    <va-accordion-item uswds id="first">
+    <va-accordion-item id="first">
       <h6 slot="headline">First Amendment</h6>
       <p>
         Congress shall make no law respecting an establishment of religion, or
@@ -140,14 +140,14 @@ const TemplateHeadlineSlot = args => (
         petition the Government for a redress of grievances.
       </p>
     </va-accordion-item>
-    <va-accordion-item uswds id="second">
+    <va-accordion-item id="second">
       <h6 slot="headline">Second Amendment</h6>
       <p>
         A well regulated Militia, being necessary to the security of a free State, 
         the right of the people to keep and bear Arms, shall not be infringed.
       </p>
     </va-accordion-item>
-    <va-accordion-item uswds id="third">
+    <va-accordion-item id="third">
       <h6 slot="headline">Third Amendment</h6>
       <p>
         No Soldier shall, in time of peace be quartered in any house, without the 
@@ -160,7 +160,7 @@ const TemplateHeadlineSlot = args => (
 
 const TemplateLevel = args => (
   <va-accordion {...args}>
-    <va-accordion-item uswds level="5" id="first" header="First Amendment">
+    <va-accordion-item level="5" id="first" header="First Amendment">
       <p>
         Congress shall make no law respecting an establishment of religion, or
         prohibiting the free exercise thereof; or abridging the freedom of speech,
@@ -168,13 +168,13 @@ const TemplateLevel = args => (
         petition the Government for a redress of grievances.
       </p>
     </va-accordion-item>
-    <va-accordion-item uswds level="5" id="second" header="Second Amendment">
+    <va-accordion-item level="5" id="second" header="Second Amendment">
       <p>
         A well regulated Militia, being necessary to the security of a free State, 
         the right of the people to keep and bear Arms, shall not be infringed.
       </p>
     </va-accordion-item>
-    <va-accordion-item uswds level="5" id="third" header="Third Amendment">
+    <va-accordion-item level="5" id="third" header="Third Amendment">
         <p>
           No Soldier shall, in time of peace be quartered in any house, without the 
           consent of the Owner, nor in time of war, but in a manner to be prescribed by law.
@@ -192,11 +192,11 @@ const I18nTemplate = args => {
 
   return (
     <div>
-      <va-button uswds onClick={e => setLang('es')} text="Español"/>
-      <va-button uswds onClick={e => setLang('en')} text="English"/>
-      <va-button uswds onClick={e => setLang('tl')} text="Tagalog"/>
-      <va-accordion uswds>
-        <va-accordion-item id="first" header="First Amendment" uswds>
+      <va-button onClick={e => setLang('es')} text="Español"/>
+      <va-button onClick={e => setLang('en')} text="English"/>
+      <va-button onClick={e => setLang('tl')} text="Tagalog"/>
+      <va-accordion>
+        <va-accordion-item id="first" header="First Amendment">
           <p>
             Congress shall make no law respecting an establishment of religion, or
             prohibiting the free exercise thereof; or abridging the freedom of
@@ -204,14 +204,14 @@ const I18nTemplate = args => {
             assemble, and to petition the Government for a redress of grievances.
           </p>
         </va-accordion-item>
-        <va-accordion-item id="second" header="Second Amendment" uswds>
+        <va-accordion-item id="second" header="Second Amendment">
           <p>
             A well regulated Militia, being necessary to the security of a free
             State, the right of the people to keep and bear Arms, shall not be
             infringed.
           </p>
         </va-accordion-item>
-        <va-accordion-item id="third" header="Third Amendment" uswds>
+        <va-accordion-item id="third" header="Third Amendment">
           <p>
             No Soldier shall, in time of peace be quartered in any house, without
             the consent of the Owner, nor in time of war, but in a manner to be
@@ -225,7 +225,7 @@ const I18nTemplate = args => {
 
 const ManyItemsTemplate = args => (
   <va-accordion {...args}>
-    <va-accordion-item uswds id="first" header="First Amendment">
+    <va-accordion-item id="first" header="First Amendment">
         <p>
           Congress shall make no law respecting an establishment of religion, or
           prohibiting the free exercise thereof; or abridging the freedom of speech,
@@ -233,26 +233,26 @@ const ManyItemsTemplate = args => (
           petition the Government for a redress of grievances.
         </p>
     </va-accordion-item>
-    <va-accordion-item uswds id="second" header="Second Amendment">
+    <va-accordion-item id="second" header="Second Amendment">
         <p>
           A well regulated Militia, being necessary to the security of a free State, 
           the right of the people to keep and bear Arms, shall not be infringed.
         </p>
     </va-accordion-item>
-    <va-accordion-item uswds id="third" header="Third Amendment">
+    <va-accordion-item id="third" header="Third Amendment">
         <p>
           No Soldier shall, in time of peace be quartered in any house, without the 
           consent of the Owner, nor in time of war, but in a manner to be prescribed by law.
         </p>
     </va-accordion-item>
-    <va-accordion-item uswds id="fourth" header="Fourth Amendment">
+    <va-accordion-item id="fourth" header="Fourth Amendment">
         <p>
         The right of the people to be secure in their persons, houses, papers, and effects, against unreasonable searches and seizures, 
         shall not be violated, and no Warrants shall issue, but upon probable cause, supported by Oath or affirmation, and particularly 
         describing the place to be searched, and the persons or things to be seized.
         </p>
     </va-accordion-item>
-    <va-accordion-item uswds id="fifth" header="Fifth Amendment">
+    <va-accordion-item id="fifth" header="Fifth Amendment">
         <p>
         No person shall be held to answer for a capital, or otherwise infamous crime, unless on a presentment or indictment of a Grand Jury, 
         except in cases arising in the land or naval forces, or in the Militia, when in actual service in time of War or public danger; 
@@ -261,7 +261,7 @@ const ManyItemsTemplate = args => (
         shall private property be taken for public use, without just compensation.
         </p>
     </va-accordion-item>
-    <va-accordion-item uswds id="sixth" header="Sixth Amendment">
+    <va-accordion-item id="sixth" header="Sixth Amendment">
         <p>
         In all criminal prosecutions, the accused shall enjoy the right to a speedy and public trial, by an impartial jury of the State 
         and district wherein the crime shall have been committed, which district shall have been previously ascertained by law, and to 
@@ -269,23 +269,23 @@ const ManyItemsTemplate = args => (
         for obtaining witnesses in his favor, and to have the Assistance of Counsel for his defence.
         </p>
     </va-accordion-item>
-    <va-accordion-item uswds id="seventh" header="Seventh Amendment">
+    <va-accordion-item id="seventh" header="Seventh Amendment">
         <p>
         In Suits at common law, where the value in controversy shall exceed twenty dollars, the right of trial by jury shall be preserved, 
         and no fact tried by a jury, shall be otherwise re-examined in any Court of the United States, than according to the rules of the common law.
         </p>
     </va-accordion-item>
-    <va-accordion-item uswds id="eighth" header="Eighth Amendment">
+    <va-accordion-item id="eighth" header="Eighth Amendment">
         <p>
         Excessive bail shall not be required, nor excessive fines imposed, nor cruel and unusual punishments inflicted.
         </p>
     </va-accordion-item>
-    <va-accordion-item uswds id="ninth" header="Ninth Amendment">
+    <va-accordion-item id="ninth" header="Ninth Amendment">
         <p>
         The enumeration in the Constitution, of certain rights, shall not be construed to deny or disparage others retained by the people.
         </p>
     </va-accordion-item>
-    <va-accordion-item uswds id="tenth" header="Tenth Amendment">
+    <va-accordion-item id="tenth" header="Tenth Amendment">
         <p>
         The powers not delegated to the United States by the Constitution, nor prohibited by it to the States, are reserved to the States respectively, or to the people.
         </p>
@@ -297,7 +297,6 @@ const ManyItemsTemplate = args => (
 const defaultArgs = {
   'bordered': false,
   'open-single': undefined,
-  uswds: true
 };
 
 export const Default = Template.bind(null);

@@ -5,7 +5,7 @@ import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
 const loadingIndicatorDocs = getWebComponentDocs('va-loading-indicator');
 
 export default {
-  title: 'Components/Loading indicator',
+  title: 'V1 Components/Loading indicator',
   id: 'components/va-loading-indicator',
   parameters: {
     componentSubtitle: `va-loading-indicator web component`,
@@ -55,7 +55,7 @@ const Template = ({
 };
 
 export const Default = Template.bind(null);
-Default.args = { ...defaultArgs };
+Default.args = { ...defaultArgs};
 Default.argTypes = propStructure(loadingIndicatorDocs);
 
 export const SetFocus = Template.bind(null);

@@ -16,7 +16,7 @@
 
 
 
-:host([uswds]:not([uswds='false'])) {
+:host(:not([uswds='false'])) {
   color: var(--vads-color-base);
 }
 
@@ -29,7 +29,7 @@
   outline: none !important;
 }
 
-:host([uswds]:not([uswds='false'])) input:not([disabled]):focus {
+:host(:not([uswds='false'])) input:not([disabled]):focus {
   outline: 2px solid var(--vads-color-action-focus-on-light);
   outline-offset: 2px;
 }
@@ -52,7 +52,7 @@ input.usa-input {
 @import '../../mixins/hint-text.css';
 
 
-:host(:not([uswds="true"],[uswds=""])) label {
+:host([uswds='false']) label {
   display: block;
   max-width: 46rem;
   margin-top: 3rem;
@@ -63,7 +63,7 @@ span.required {
   color: var(--vads-color-secondary-dark);
 }
 
-:host(:not([uswds="true"],[uswds=""])) input {
+:host([uswds='false']) input {
   appearance: none;
   border: 0.1rem solid var(--vads-color-base-dark);
   border-radius: 0;
@@ -80,11 +80,11 @@ span.required {
   width: 100%;
 }
 
-:host(:not([uswds="true"],[uswds=""])) input:not([disabled]):focus {
+:host([uswds='false']) input:not([disabled]):focus {
   outline: 2px solid var(--vads-color-action-focus-on-light);
   outline-offset: 2px;
 }
 
-:host([success]:not([success='false']):not([uswds="true"],[uswds=""])) input {
+:host([success]:not([success='false'])[uswds='false']) input {
   border: 4px solid var(--vads-color-success-dark);
 }

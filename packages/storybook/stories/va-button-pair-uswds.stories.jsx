@@ -8,7 +8,7 @@ VaButtonPair.displayName = 'VaButtonPair';
 const buttonPairDocs = getWebComponentDocs('va-button-pair');
 
 export default {
-  title: 'USWDS/Button pair USWDS',
+  title: 'Components/Button pair USWDS',
   id: 'uswds/va-button-pair',
   parameters: {
     componentSubtitle: `va-button-pair web component`,
@@ -25,7 +25,6 @@ const defaultArgs = {
   'secondary-label': undefined,
   'submit': undefined,
   'update': undefined,
-  'uswds': true,
 };
 
 const Template = ({
@@ -35,12 +34,10 @@ const Template = ({
   'secondary-label': secondaryLabel,
   submit,
   update,
-  uswds,
 }) => {
   return (
     <div style={{ paddingLeft: '8px' }}>
       <VaButtonPair
-        uswds={uswds}
         continue={_continue}
         disable-analytics={disableAnalytics}
         primaryLabel={primaryLabel}

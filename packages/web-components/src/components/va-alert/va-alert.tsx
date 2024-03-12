@@ -74,7 +74,7 @@ export class VaAlert {
   /**
    * Whether or not the component will use USWDS v3 styling.
    */
-  @Prop() uswds?: boolean = false;
+  @Prop() uswds?: boolean = true;
 
   /**
    * Displays the slim variation. Available when USWDS is true.
@@ -160,6 +160,11 @@ export class VaAlert {
 
   componentDidLoad() {
     this.vaComponentDidLoad.emit();
+    // check if the element has a class named uswds-false added from parent
+    if (this.el.classList.contains('uswds-false')) {
+      // add attribute manually
+      this.el.setAttribute('uswds', 'false');
+    }
   }
 
   render() {
