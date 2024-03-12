@@ -4,10 +4,10 @@ input,
 select,
 textarea {
   appearance: none;
-  border: 0.1rem solid var(--color-gray);
+  border: 0.1rem solid var(--vads-color-base-dark);
   border-radius: 0;
   box-sizing: border-box;
-  color: var(--color-base);
+  color: var(--vads-color-base-darkest);
   display: block;
   font-size: 1.6rem;
   height: 4.2rem;
