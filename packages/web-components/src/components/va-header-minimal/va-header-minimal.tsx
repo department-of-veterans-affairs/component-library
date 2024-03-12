@@ -33,7 +33,7 @@ export class VaHeaderMinimal {
   @Prop() subheader?: string;
 
   /**
-   * Disables use of heading tags in the minimal header in favor of `<div>` tags. This is used when a heading level 1 needs to be used further down the page, as there should only be one heading level 1.
+   * Disables use of heading tags in the minimal header in favor of `<div>` tags. This is used when a heading level 1 needs to be used elsewhere, as there should only be one heading level 1 per page.
    */
   @Prop() disableHeadings?: boolean = false;
 
