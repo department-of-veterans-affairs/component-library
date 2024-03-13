@@ -112,7 +112,7 @@ header.expanded .header-action {
 }
 
 button:not([disabled]):focus {
-  outline: 2px solid var(--color-gold-light);
+  outline: 2px solid var(--vads-color-action-focus-on-light);
 }
 
 button[aria-expanded=false], button[aria-expanded=true] {

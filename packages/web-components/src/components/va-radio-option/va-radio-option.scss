@@ -39,7 +39,7 @@ va-radio-option label.usa-radio__label::before {
 }
 
 va-radio-option .usa-radio__input:focus + [class*='__label']::before {
-  outline: 2px solid var(--color-gold-light);
+  outline: 2px solid var(--vads-color-action-focus-on-light);
 }
 
 va-radio-option input[disabled='true']:focus + label.usa-radio__label::before {
@@ -68,27 +68,27 @@ va-radio-option[uswds='false'] {
   label::before {
     box-sizing: border-box;
     border-radius: 100%;
-    box-shadow: 0 0 0 2px var(--color-white), 0 0 0 3px var(--color-gray-medium);
+    box-shadow: 0 0 0 2px var(--vads-color-white), 0 0 0 3px var(--vads-color-gray-medium);
     height: 1.4rem;
     line-height: 1.4rem;
     margin-right: 1rem;
     width: 1.4rem;
     min-width: 1.4rem;
     max-width: 1.4rem;
-    background: var(--color-white);
-    background-color: var(--color-white);
+    background: var(--vads-color-white);
+    background-color: var(--vads-color-white);
     content: '\A0';
     display: inline-block;
   }
 }
 
 va-radio-option[uswds='false'][aria-checked='true'] label::before {
-  background-color: var(--color-primary);
-  box-shadow: 0 0 0 2px var(--color-white), 0 0 0 4px var(--color-primary);
+  background-color: var(--vads-color-primary);
+  box-shadow: 0 0 0 2px var(--vads-color-white), 0 0 0 4px var(--vads-color-primary);
 }
 
 va-radio-option[uswds='false']:focus label::before {
-  outline: 2px solid var(--color-gold-light);
+  outline: 2px solid var(--vads-color-action-focus-on-light);
   outline-offset: 6px;
 }
 
@@ -99,11 +99,11 @@ va-radio-option[uswds='false'] .description {
 
 va-radio-option[uswds='false'][tile='true'] label {
   padding: 12px 16px 12px 12px;
-  border: 2px solid var(--color-gray-light);
+  border: 2px solid var(--vads-color-base-light);
   border-radius: 0.25em;
 }
 
 va-radio-option[uswds='false'][tile='true'][aria-checked='true'] label {
-  border: 2px solid var(--color-primary-alt-darkest);
-  background: var(--color-gray-cool-light);
+  border: 2px solid var(--vads-color-primary-alt-darkest);
+  background: var(--vads-color-gray-cool-light);
 }

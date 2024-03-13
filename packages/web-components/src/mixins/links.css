@@ -2,7 +2,7 @@
 
 a {
   text-decoration: none;
-  color: var(--color-link-default);
+  color: var(--vads-color-link);
   transition-duration: 0.3s;
   transition-timing-function: ease-in-out;
   transition-property: color, background-color, border-color;
@@ -14,5 +14,5 @@ a:hover {
 }
 
 a:visited {
-  color: var(--color-link-visited);
+  color: var(--vads-color-link-visited);
 }

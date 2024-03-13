@@ -19,7 +19,7 @@
 }
 
 :host([error]:not([error=''])) .usa-file-input__target {
-  border-color: var(--color-secondary-dark);
+  border-color: var(--vads-color-secondary-dark);
   border-width: 2px;
 }
 
@@ -42,6 +42,6 @@ va-button {
 }
 
 .required {
-  color: var(--color-secondary-dark);
+  color: var(--vads-color-secondary-dark);
   margin-left: 0.4rem;
 }

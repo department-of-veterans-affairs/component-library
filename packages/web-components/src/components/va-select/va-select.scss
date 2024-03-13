@@ -12,7 +12,7 @@
 @import '../../global/formation_overrides';
 
 :host(:not([uswds='false'])) {
-  color: var(--color-base);
+  color: var(--vads-color-base);
 }
 
 :host {
@@ -37,7 +37,7 @@
 @import '../../mixins/hint-text.css';
 
 span.required {
-  color: var(--color-secondary-dark);
+  color: var(--vads-color-secondary-dark);
   margin: 0 0.35em;
 }
 
@@ -48,7 +48,7 @@ span.required {
 }
 
 :host([error]:not([error=''])[uswds='false']) > span {
-  color: var(--color-secondary-dark);
+  color: var(--vads-color-secondary-dark);
 }
 
 ::slotted(option) {
@@ -62,7 +62,7 @@ span.required {
 }
 
 :host([uswds='false']) select {
-  background-color: var(--color-white);
+  background-color: var(--vads-color-white);
   background-image: url('../../assets/arrow-both.svg');
   background-position: right 1.3rem center;
   background-repeat: no-repeat;

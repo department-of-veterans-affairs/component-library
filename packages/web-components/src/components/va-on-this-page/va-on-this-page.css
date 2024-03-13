@@ -2,7 +2,7 @@
 
 :host {
   display: block;
-  border: 1px solid var(--color-gray-light);
+  border: 1px solid var(--vads-color-base-light);
   border-radius: 4px;
   padding: 1em;
 }
@@ -51,5 +51,5 @@ i::before {
 }
 
 a:active {
-  background-color: var(--color-gray-lighter);
+  background-color: var(--vads-color-base-lighter);
 }

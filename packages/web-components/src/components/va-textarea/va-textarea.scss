@@ -19,7 +19,7 @@
 }
 
 :host {
-  color: var(--color-base);
+  color: var(--vads-color-base);
   display: block;
   resize: both;
   font-family: var(--font-source-sans);
@@ -47,7 +47,7 @@
 }
 
 :host([uswds='false']) span.required {
-  color: var(--color-secondary-dark);
+  color: var(--vads-color-secondary-dark);
   margin-left: 0.4rem;
 }
 

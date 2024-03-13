@@ -3,11 +3,11 @@
 @import '../../mixins/hint-text.css';
 
 .usa-label--required {
-  color: var(--color-secondary-dark);
+  color: var(--vads-color-secondary-dark);
 }
 
 .usa-error-message {
-  color: var(--color-secondary-dark);
+  color: var(--vads-color-secondary-dark);
 }
 
 
@@ -31,16 +31,16 @@ legend {
 }
 
 span.required {
-  color: var(--color-secondary-dark);
+  color: var(--vads-color-secondary-dark);
 }
 
 :host([error]:not([error=''])[uswds='false']) va-select::part(select),
 :host([error]:not([error=''])[uswds='false']) va-text-input::part(input) {
-  border: 4px solid var(--color-secondary-dark);
+  border: 4px solid var(--vads-color-secondary-dark);
 }
 
 #error-message {
-  color: var(--color-secondary-dark);
+  color: var(--vads-color-secondary-dark);
   display: block;
   margin-bottom: 0;
 }

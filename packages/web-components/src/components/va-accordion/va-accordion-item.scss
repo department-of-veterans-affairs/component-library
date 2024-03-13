@@ -72,7 +72,7 @@ button {
   font-weight: 700;
   line-height: 1.15;
   padding: 1.5rem 5.5rem 1.5rem 2rem;
-  background-color: var(--color-gray-lightest);
+  background-color: var(--vads-color-base-lightest);
   background-image: url('../../assets/minus.svg');
   background-position: right 2rem center;
   background-repeat: no-repeat;
@@ -80,18 +80,18 @@ button {
   display: block;
   /* This color assignment is for IE11 compatibility - the one in */
   /* the va-accordion's CSS with `:host` doesn't work well */
-  color: var(--color-gray-dark);
+  color: var(--vads-color-base-darker);
 }
 
 button:not(.usa-accordion__button):hover {
-  background-color: var(--color-gray-lighter);
+  background-color: var(--vads-color-base-lighter);
   /* This color assignment is for IE11 compatibility - the one in */
   /* the va-accordion's CSS with `:host` doesn't work well */
-  color: var(--color-gray-dark);
+  color: var(--vads-color-base-darker);
 }
 
 #content:not(.usa-accordion__content) {
-  background-color: var(--color-white);
+  background-color: var(--vads-color-white);
   overflow: auto;
   padding: 1.5rem 2rem;
   border-left: var(--item-border);

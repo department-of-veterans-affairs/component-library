@@ -40,7 +40,7 @@ va-breadcrumbs .va-breadcrumbs-li:last-child::after {
 
 va-breadcrumbs li > a {
   background-color: transparent;
-  color: var(--color-link-default);
+  color: var(--vads-color-link);
   display: inline-block;
   padding: 2px;
   transition-duration: 0.3s;
@@ -54,12 +54,12 @@ va-breadcrumbs li > a:hover {
 
 
 va-breadcrumbs li > a:focus {
-  outline: 2px solid var(--color-gold-light);
+  outline: 2px solid var(--vads-color-action-focus-on-light);
   outline-offset: 2px;
 }
 
 va-breadcrumbs li > a[aria-current='page'] {
-  color: var(--color-gray-dark);
+  color: var(--vads-color-base-darker);
   cursor: default;
   font-weight: bold;
   pointer-events: none;
