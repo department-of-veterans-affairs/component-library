@@ -1,4 +1,4 @@
-import { addons } from '@storybook/addons';
+import { addons } from '@storybook/preview-api';
 import React from 'react';
 import webComponentDocs from '@department-of-veterans-affairs/web-components/component-docs.json';
 import { additionalDocs } from '../stories/additional-docs';

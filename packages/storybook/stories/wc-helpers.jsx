@@ -5,7 +5,7 @@ import {
   Subtitle,
   Description,
   Primary,
-  ArgsTable,
+  //ArgsTable,
   Stories,
   PRIMARY_STORY,
 } from '@storybook/addon-docs';
@@ -271,7 +271,7 @@ export function StoryDocs({ componentName, data, children }) {
       <Description markdown={data?.docs} />
       <NativeHandlers docsTags={data?.docsTags} />
       <Primary />
-      <ArgsTable story={PRIMARY_STORY} />
+      
       <>{children}</>
       <Stories />
     </>
