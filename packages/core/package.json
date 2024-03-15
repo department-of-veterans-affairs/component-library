@@ -16,7 +16,7 @@
   "module": "src/main.js",
   "dependencies": {
     "@department-of-veterans-affairs/react-components": "workspace:*",
-    "@department-of-veterans-affairs/web-components": "v6.0.0-rc2",
+    "@department-of-veterans-affairs/web-components": "workspace:*",
     "i18next": "^21.6.14",
     "i18next-browser-languagedetector": "^6.1.4",
     "react-focus-on": "^3.5.1",
