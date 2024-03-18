@@ -1,12 +1,13 @@
 
 // Do not edit directly
-// Generated on Wed, 06 Mar 2024 20:27:42 GMT
+// Generated on Mon, 18 Mar 2024 21:10:45 GMT
 
 $xsmall-screen: 320px;
 $small-screen: 481px;
 $medium-screen: 640px;
 $small-desktop-screen: 1008px;
 $large-screen: 1201px;
+$color-link-default-hover: rgba(#000000, 0.05);
 $vads-button-color-background-primary-alt-active-on-light: #154c21;
 $vads-button-color-background-secondary-on-light: #ffffff;
 $vads-button-color-text-primary-alt-on-light: #ffffff;
@@ -18,6 +19,7 @@ $vads-process-list-color-text-pending-on-light: #757575;
 $vads-color-gray-medium: #757575;
 $vads-color-gray-light-alt: #edeff0;
 $vads-color-gray-warm-light: #e6e6e2;
+$vads-color-gray-warm-dark: #454540;
 $vads-color-gray-cool-light: #e1e7f1;
 $vads-color-action-focus-on-light: #face00;
 $vads-color-base: #1b1b1b;
@@ -45,6 +47,7 @@ $vads-color-hub-life-insurance: #6f7a41;
 $vads-color-hub-pension: #4d8055;
 $vads-color-hub-records: #6f7a41;
 $vads-color-hub-service-member: #162e51;
+$vads-color-hub-family-member: #162e51;
 $vads-color-info: #00bde3;
 $vads-color-info-dark: #009ec1;
 $vads-color-info-darker: #2e6276;
@@ -75,6 +78,7 @@ $vads-color-success-dark: #008817;
 $vads-color-success-darker: #216e1f;
 $vads-color-success-light: #70e17b;
 $vads-color-success-lighter: #ecf3ec;
+$vads-color-green-light: #5e9f69;
 $vads-color-va-accent: #8a7237;
 $vads-color-warning: #ffbe2e;
 $vads-color-warning-dark: #e5a000;
@@ -85,6 +89,9 @@ $vads-color-gold-lighter: #ffe396;
 $vads-color-gold-lightest: #fef0c8;
 $vads-color-black: #000000;
 $vads-color-green-lighter: #b4d0b9;
+$vads-color-blue-cool: #345d96;
+$vads-color-blue-cool-light: #4a77b4;
+$vads-color-blue-cool-lightest: #98afd2;
 $font-family-sans: 'Source Sans Pro', 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif;
 $font-family-serif: Bitter, Georgia, Cambria, 'Times New Roman', Times, serif;
 $font-serif: Bitter, Georgia, Cambria, 'Times New Roman', Times, serif;
@@ -240,3 +247,4 @@ $uswds-system-color-yellow-vivid-10: #fee685;
 $uswds-system-color-yellow-vivid-20: #face00;
 $uswds-system-color-indigo-cool-60: #3f57a6;
 $uswds-system-color-mint-cool-50: #40807e;
+$uswds-system-color-red-cool-10v: #f8dfe2;
