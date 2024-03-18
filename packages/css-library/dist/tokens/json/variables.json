@@ -74,6 +74,23 @@
       "large-screen"
     ]
   },
+  "color-link-default-hover": {
+    "alpha": "0.05",
+    "value": "rgba(#000000, 0.05)",
+    "filePath": "tokens/color.json",
+    "isSource": true,
+    "original": {
+      "alpha": "0.05",
+      "value": "rgba({uswds-system-color-gray-100}, {color-link-default-hover.alpha})"
+    },
+    "name": "color-link-default-hover",
+    "attributes": {
+      "category": "color-link-default-hover"
+    },
+    "path": [
+      "color-link-default-hover"
+    ]
+  },
   "vads-button-color-background-primary-alt-active-on-light": {
     "*": {
       "value": "#154c21",
@@ -279,6 +296,25 @@
       },
       "path": [
         "vads-color-gray-warm-light",
+        "*"
+      ]
+    }
+  },
+  "vads-color-gray-warm-dark": {
+    "*": {
+      "value": "#454540",
+      "filePath": "tokens/color.json",
+      "isSource": true,
+      "original": {
+        "value": "{uswds-system-color-gray-warm-70}"
+      },
+      "name": "vads-color-gray-warm-dark",
+      "attributes": {
+        "category": "vads-color-gray-warm-dark",
+        "type": "*"
+      },
+      "path": [
+        "vads-color-gray-warm-dark",
         "*"
       ]
     }
@@ -796,6 +832,25 @@
       ]
     }
   },
+  "vads-color-hub-family-member": {
+    "*": {
+      "value": "#162e51",
+      "filePath": "tokens/color.json",
+      "isSource": true,
+      "original": {
+        "value": "{uswds-system-color-blue-warm-vivid-80}"
+      },
+      "name": "vads-color-hub-family-member",
+      "attributes": {
+        "category": "vads-color-hub-family-member",
+        "type": "*"
+      },
+      "path": [
+        "vads-color-hub-family-member",
+        "*"
+      ]
+    }
+  },
   "vads-color-info": {
     "*": {
       "value": "#00bde3",
@@ -1258,7 +1313,7 @@
       "filePath": "tokens/color.json",
       "isSource": true,
       "original": {
-        "value": "{uswds-system-color-red-cool-vivid-10}"
+        "value": "{uswds-system-color-red-cool-10v}"
       },
       "name": "vads-color-secondary-lightest",
       "attributes": {
@@ -1362,6 +1417,25 @@
       },
       "path": [
         "vads-color-success-lighter",
+        "*"
+      ]
+    }
+  },
+  "vads-color-green-light": {
+    "*": {
+      "value": "#5e9f69",
+      "filePath": "tokens/color.json",
+      "isSource": true,
+      "original": {
+        "value": "{uswds-system-color-green-cool-40}"
+      },
+      "name": "vads-color-green-light",
+      "attributes": {
+        "category": "vads-color-green-light",
+        "type": "*"
+      },
+      "path": [
+        "vads-color-green-light",
         "*"
       ]
     }
@@ -1552,6 +1626,63 @@
       },
       "path": [
         "vads-color-green-lighter",
+        "*"
+      ]
+    }
+  },
+  "vads-color-blue-cool": {
+    "*": {
+      "value": "#345d96",
+      "filePath": "tokens/color.json",
+      "isSource": true,
+      "original": {
+        "value": "{uswds-system-color-blue-warm-60}"
+      },
+      "name": "vads-color-blue-cool",
+      "attributes": {
+        "category": "vads-color-blue-cool",
+        "type": "*"
+      },
+      "path": [
+        "vads-color-blue-cool",
+        "*"
+      ]
+    }
+  },
+  "vads-color-blue-cool-light": {
+    "*": {
+      "value": "#4a77b4",
+      "filePath": "tokens/color.json",
+      "isSource": true,
+      "original": {
+        "value": "{uswds-system-color-blue-warm-50}"
+      },
+      "name": "vads-color-blue-cool-light",
+      "attributes": {
+        "category": "vads-color-blue-cool-light",
+        "type": "*"
+      },
+      "path": [
+        "vads-color-blue-cool-light",
+        "*"
+      ]
+    }
+  },
+  "vads-color-blue-cool-lightest": {
+    "*": {
+      "value": "#98afd2",
+      "filePath": "tokens/color.json",
+      "isSource": true,
+      "original": {
+        "value": "{uswds-system-color-blue-warm-30}"
+      },
+      "name": "vads-color-blue-cool-lightest",
+      "attributes": {
+        "category": "vads-color-blue-cool-lightest",
+        "type": "*"
+      },
+      "path": [
+        "vads-color-blue-cool-lightest",
         "*"
       ]
     }
@@ -4045,6 +4176,21 @@
     },
     "path": [
       "uswds-system-color-mint-cool-50"
+    ]
+  },
+  "uswds-system-color-red-cool-10v": {
+    "value": "#f8dfe2",
+    "filePath": "tokens/uswds.json",
+    "isSource": true,
+    "original": {
+      "value": "#f8dfe2"
+    },
+    "name": "uswds-system-color-red-cool-10v",
+    "attributes": {
+      "category": "uswds-system-color-red-cool-10v"
+    },
+    "path": [
+      "uswds-system-color-red-cool-10v"
     ]
   }
 }
