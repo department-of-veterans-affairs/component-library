@@ -5,7 +5,7 @@ import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
 const tableDocs = getWebComponentDocs('va-table');
 
 export default {
-  title: `V1 Components/Table`,
+  title: 'V1 Components/Table',
   id: 'components/va-table',
   parameters: {
     componentSubtitle: 'va-table web component',
