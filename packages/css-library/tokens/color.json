@@ -1,4 +1,8 @@
 {
+  "color-link-default-hover": { 
+      "alpha": "0.05",
+      "value": "rgba({uswds-system-color-gray-100}, {color-link-default-hover.alpha})"
+  },
   "vads-button-color-background-primary-alt-active-on-light": {
     "*": { "value": "{uswds-system-color-green-cool-vivid-70}"}
   },
@@ -31,6 +35,9 @@
   },
   "vads-color-gray-warm-light": {
     "*": { "value": "{uswds-system-color-gray-warm-10}" }
+  },
+  "vads-color-gray-warm-dark": {
+    "*": { "value": "{uswds-system-color-gray-warm-70}"}
   },
   "vads-color-gray-cool-light": {
     "*": { "value": "{uswds-system-color-blue-warm-10}" }
@@ -113,6 +120,9 @@
   "vads-color-hub-service-member": {
     "*": { "value": "{uswds-system-color-blue-warm-vivid-80}"}
   },
+  "vads-color-hub-family-member": {
+    "*": { "value": "{uswds-system-color-blue-warm-vivid-80}"}
+  },
   "vads-color-info": {
     "*": { "value": "{uswds-system-color-cyan-vivid-30}"}
   },
@@ -186,7 +196,7 @@
     "*": { "value": "{uswds-system-color-red-30}"}
   },
   "vads-color-secondary-lightest": {
-    "*": { "value": "{uswds-system-color-red-cool-vivid-10}"}
+    "*": { "value": "{uswds-system-color-red-cool-10v}"}
   },
   "vads-color-success": {
     "*": { "value": "{uswds-system-color-green-cool-vivid-40}"}
@@ -202,6 +212,9 @@
   },
   "vads-color-success-lighter": {
     "*": { "value": "{uswds-system-color-green-cool-5}"}
+  },
+  "vads-color-green-light": {
+    "*": { "value": "{uswds-system-color-green-cool-40}"}
   },
   "vads-color-va-accent": {
     "*": { "value": "{uswds-system-color-yellow-50}"}
@@ -232,5 +245,14 @@
   },
   "vads-color-green-lighter": {
     "*": { "value": "{uswds-system-color-green-cool-20}"}
+  },
+  "vads-color-blue-cool": {
+    "*": { "value": "{uswds-system-color-blue-warm-60}"}
+  },
+  "vads-color-blue-cool-light": {
+    "*": { "value": "{uswds-system-color-blue-warm-50}"}
+  },
+  "vads-color-blue-cool-lightest": {
+    "*": { "value": "{uswds-system-color-blue-warm-30}"}
   }
 }
