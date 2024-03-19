@@ -115,9 +115,9 @@ export class VaAdditionalInfo {
             onClick={this.toggleOpen.bind(this)}
             onKeyDown={this.handleKeydown.bind(this)}
           >
-            <div>
+            <div class="additional-info-button">
               <span class="additional-info-title">{this.trigger}</span>
-              <i class="fa-angle-down" role="presentation" />
+              <va-icon icon="chevron_right" size={3}></va-icon>
             </div>
           </a>
           <div id="info" class={infoClass}>
@@ -136,9 +136,9 @@ export class VaAdditionalInfo {
             onClick={this.toggleOpen.bind(this)}
             onKeyDown={this.handleKeydown.bind(this)}
           >
-            <div>
+            <div class="additional-info-button">
               <span class="additional-info-title">{this.trigger}</span>
-              <i class="fa-angle-down" role="presentation" />
+              <va-icon icon="chevron_right" size={3}></va-icon>
             </div>
           </a>
           <div id="info" class={this.open ? 'open' : 'closed'}>

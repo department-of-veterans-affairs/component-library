@@ -46,28 +46,17 @@ a {
   margin-top: 16px;
 }
 
-i {
-  font-family: 'Font Awesome 5 Free';
-  font-style: normal;
-  font-weight: 900;
-  line-height: 1;
-}
-
-i.fa-angle-down {
+.additional-info-button va-icon {
   display: inline-block;
   color: var(--vads-color-primary-alt-darkest);
   font-size: 16px;
-  margin: 5px;
-  transform: rotate(0deg);
+  transform: rotate(90deg);
   transition: transform 0.15s linear;
+  line-height: 1;
 }
 
-i.fa-angle-down::before {
-  content: '\F107'; /* fa-angle-down*/
-}
-
-a[aria-expanded='true'] i.fa-angle-down {
-  transform: rotate(180deg);
+a[aria-expanded='true'] .additional-info-button va-icon {
+  transform: rotate(270deg);
   transition: transform 0.15s linear;
 }
 
