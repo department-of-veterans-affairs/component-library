@@ -162,7 +162,7 @@ export namespace Components {
     }
     interface VaBreadcrumbs {
         /**
-          * Represents a list of breadcrumbs. Use an array of objects with label and href properties, and then use JSON.stringify() to convert to a string. This prop is available when `uswds` is set to `true`.
+          * Represents a list of breadcrumbs. Use a JSON array of objects with label and href properties, then wrap in a string if using non-React-binding version. See Storybook examples for React-binding version. For pure web components, here's an example link: ``[{"href": "/link1", "label": "Link 1"}]`. This prop is available when `uswds` is set to `true`.
          */
         "breadcrumbList"?: any;
         /**
@@ -2067,7 +2067,7 @@ declare namespace LocalJSX {
     }
     interface VaBreadcrumbs {
         /**
-          * Represents a list of breadcrumbs. Use an array of objects with label and href properties, and then use JSON.stringify() to convert to a string. This prop is available when `uswds` is set to `true`.
+          * Represents a list of breadcrumbs. Use a JSON array of objects with label and href properties, then wrap in a string if using non-React-binding version. See Storybook examples for React-binding version. For pure web components, here's an example link: ``[{"href": "/link1", "label": "Link 1"}]`. This prop is available when `uswds` is set to `true`.
          */
         "breadcrumbList"?: any;
         /**
@@ -2087,9 +2087,9 @@ declare namespace LocalJSX {
          */
         "onComponent-library-analytics"?: (event: VaBreadcrumbsCustomEvent<any>) => void;
         /**
-          * Fires when user clicks on breadcrumb anchor tag. Has no effect unless uswds is true and the href of anchor tag is part of  breadcrumb object that also has isRouterLink: true
+          * Fires when user clicks on breadcrumb anchor tag. Has no effect unless uswds is true and the href of anchor tag is part of breadcrumb object that also has isRouterLink: true
          */
-        "onRouteChange"?: (event: VaBreadcrumbsCustomEvent<{href: string}>) => void;
+        "onRouteChange"?: (event: VaBreadcrumbsCustomEvent<{ href: string }>) => void;
         /**
           * Whether or not the component will use USWDS v3 styling.
          */
