@@ -3,8 +3,6 @@
 @use 'uswds-core/src/styles/mixins/helpers/checkbox-and-radio-colors';
 @use 'usa-radio/src/styles/usa-radio';
 
-@import '../../global/formation_overrides';
-
 va-radio-option label {
   max-width: 320px;
   box-sizing: border-box;

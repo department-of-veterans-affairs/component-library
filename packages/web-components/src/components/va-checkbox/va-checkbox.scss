@@ -9,7 +9,6 @@
 @use 'usa-error-message/src/styles/usa-error-message';
 
 @import '../../mixins/uswds-error-border.scss';
-@import '../../global/formation_overrides';
 
 :host {
   display: block;
@@ -32,7 +31,7 @@
 @import '../../mixins/hint-text.css';
 
 :host(:not([uswds='true'], [uswds=''])) {
-  --visible-checkbox-size: 2rem;
+  --visible-checkbox-size: 1.25rem;
   --visible-checkbox-top-margin: 0.14rem;
 
   p {

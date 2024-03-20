@@ -2,8 +2,6 @@
 
 @use 'usa-button/src/styles/usa-button';
 
-@import '../../global/formation_overrides';
-
 :host {
   display: inline-block;
 }
@@ -97,7 +95,7 @@
 
 i {
   font-family: 'Font Awesome 5 Free';
-  font-size: 1.6rem;
+  font-size: 1rem;
   font-style: normal;
   font-weight: 900;
   line-height: 1;

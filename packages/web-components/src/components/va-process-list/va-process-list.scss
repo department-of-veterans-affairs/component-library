@@ -2,8 +2,6 @@
 
 @use 'uswds-helpers/src/styles/usa-sr-only';
 @use 'usa-process-list/src/styles/usa-process-list';
-@import '../../global/formation_overrides';
-
 
 :host([uswds]:not([uswds='false'])) {
   counter-reset: usa-numbered-list;

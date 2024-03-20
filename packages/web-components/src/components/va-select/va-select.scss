@@ -9,7 +9,6 @@
 @use 'usa-select/src/styles/usa-select';
 
 @import '../../mixins/uswds-error-border.scss';
-@import '../../global/formation_overrides';
 
 :host([uswds]:not([uswds='false'])) {
   color: var(--color-base);

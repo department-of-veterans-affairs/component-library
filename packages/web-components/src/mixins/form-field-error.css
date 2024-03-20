@@ -10,14 +10,14 @@
 }
 
 :host([error]:not([error=''])) {
-  border-left: 0.4rem solid var(--color-secondary-dark);
+  border-left: 0.3rem solid var(--color-secondary-dark);
   padding-left: 2rem;
   position: relative;
 }
 
 @media screen and (min-width: 1008px) {
   :host([error]:not([error=''])) {
-    margin-left: -2.4rem; /* padding left + border left */
+    margin-left: -2.3rem; /* padding left + border left */
   }
 }
 

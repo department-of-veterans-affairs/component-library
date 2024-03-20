@@ -10,7 +10,6 @@
 @use 'usa-modal/src/styles/usa-modal';
 
 @import '../../mixins/uswds-error-border.scss';
-@import '../../global/formation_overrides';
 
 .usa-modal-alert {
   padding: 0px; // => Due to icons
@@ -76,10 +75,10 @@
 .usa-modal__main::before {
   padding-top: 0;
   position: absolute;
-  left: -1.6rem;
+  left: -1rem;
   top: 0;
   font-family: 'Font Awesome 5 Free';
-  font-size: 2rem;
+  font-size: 1.25rem;
   font-weight: 900;
 
   :host([large='true']) &,
@@ -113,7 +112,7 @@
   border-left-style: solid;
   border-left-width: 10px;
   display: inline-flex;
-  padding: 3.2rem 6.4rem 3.2rem 2.4rem;
+  padding: 2rem 4rem 2rem 1.5rem;
 }
 
 
@@ -166,10 +165,10 @@
 .va-modal-close {
   background-color: transparent;
   color: var(--color-gray-dark);
-  font-size: 2.25rem;
+  font-size: 1.4rem;
   padding: 0;
   position: absolute;
-  margin: 1.6rem;
+  margin: 1rem;
   right: 0;
   top: 0;
   width: auto;
@@ -262,14 +261,14 @@ i::before {
 
 .va-modal-alert .va-modal-alert-body {
   display: table-cell;
-  padding-left: 1.6rem;
+  padding-left: 1rem;
   padding-right: 0;
   width: 100%;
   vertical-align: middle;
 }
 
 .va-modal-alert-title {
-  margin: 0 0 2rem 0;
+  margin: 0 0 1.25rem 0;
 }
 
 :host([status='continue']) .va-modal-inner {

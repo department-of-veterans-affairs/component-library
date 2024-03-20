@@ -2,11 +2,15 @@
 
 @use 'uswds-helpers/src/styles/usa-sr-only';
 @use 'usa-process-list/src/styles/usa-process-list';
-@import '../../global/formation_overrides';
 
 .usa-process-list__item {
   display: list-item;
 }
+
+.usa-process-list__item::before {
+  box-sizing: border-box;
+}
+
 va-process-list-item[pending='true'] .usa-process-list__heading {
   color: var(--color-gray-medium);
 }
