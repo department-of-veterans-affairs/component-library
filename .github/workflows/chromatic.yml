@@ -26,11 +26,6 @@ jobs:
       - run: yarn workspace @department-of-veterans-affairs/react-components run build
       - run: yarn workspace @department-of-veterans-affairs/web-components run build
       - run: yarn workspace @department-of-veterans-affairs/component-library run build
-      - name: Install dependencies in storybook
-        run: yarn install
-        working-directory: packages/storybook
-      - run: yarn build-storybook --webpack-stats-json --storybook-base-dir /packages/storybook
-        working-directory: packages/storybook
       - name: Publish to Chromatic
         uses: chromaui/action@v1
         with:
@@ -38,4 +33,3 @@ jobs:
           # 👇 Chromatic projectToken, refer to the manage page to obtain it.
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
           onlyChanged: true
-          storybookBuildDir: packages/storybook/storybook-static
