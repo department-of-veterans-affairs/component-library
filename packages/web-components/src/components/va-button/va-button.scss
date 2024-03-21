@@ -15,6 +15,12 @@
   cursor: not-allowed;
 }
 
+// Fix to off-centered content in V3 when icon present
+.usa-button {
+  display: flex;
+  align-items: center;
+}
+
 // Override transparent background from USWDS v3
 .usa-button--outline {
   background-color: var(--vads-button-color-background-secondary-on-light);
@@ -93,24 +99,6 @@
   border-radius: 8px;
   font-size: 2.4rem;
   padding: 1.5rem 3rem;
-}
-
-i {
-  font-family: 'Font Awesome 5 Free';
-  font-size: 1.6rem;
-  font-style: normal;
-  font-weight: 900;
-  line-height: 1;
-}
-
-i.fa-angles-left::before {
-  content: '\F100';
-  margin-right: 8px;
-}
-
-i.fa-angles-right::before {
-  content: '\F101';
-  margin-left: 8px;
 }
 
 :host([uswds='false'][disabled]:not([disabled='false'])) button {
