@@ -431,16 +431,19 @@ export class VaModal {
         'usa-modal__heading': true,
         'va-modal-alert-title': status,
       });
-      const closingButton = forcedModal ? ''
-      : <button
+      const closingButton = forcedModal ? (
+        ''
+      ) : (
+        <button
           aria-label={btnAriaLabel}
           class="va-modal-close"
           onClick={e => this.handleClose(e)}
           ref={el => (this.closeButton = el as HTMLButtonElement)}
           type="button"
         >
-          <i aria-hidden="true" />
-        </button>;
+          <va-icon icon="cancel" size={4}></va-icon>
+        </button>
+      );
       return (
         <Host>
           <div class={wrapperClass}

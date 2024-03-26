@@ -166,7 +166,6 @@
 .va-modal-close {
   background-color: transparent;
   color: var(--vads-color-base-darker);
-  font-size: 2.25rem;
   padding: 0;
   position: absolute;
   margin: 1.6rem;
@@ -199,18 +198,6 @@ h1 {
 
 .va-modal-title {
   margin: 0 0 1.6rem 0;
-}
-
-i::before {
-  -webkit-font-smoothing: antialiased;
-  content: '\F057'; /* fa-times-circle*/
-  display: inline-block;
-  font-family: 'Font Awesome 5 Free';
-  font-style: normal;
-  font-variant: normal;
-  font-weight: 900;
-  line-height: 1;
-  text-rendering: auto;
 }
 
 .alert-actions button {
