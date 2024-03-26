@@ -62,7 +62,7 @@ export class VaPrivacyAgreement {
   }
 
   private errorMessage() {
-    return (this.showError && !this.checked) 
+    return (this.showError && !this.checked)
     ? "You must accept the privacy policy before continuing."
     : null;
   }
@@ -75,7 +75,7 @@ export class VaPrivacyAgreement {
     const uswdsFalse = classnames({
       'uswds-false': !this.uswds
     });
-    
+
       return (
         <Host>
           <va-checkbox
@@ -92,6 +92,7 @@ export class VaPrivacyAgreement {
               Please read and accept the&nbsp;
               <a href="/privacy-policy/" target="_blank">
                 privacy policy
+                {/* FIXME: Need a USWDS replacement for this icon */}
                 <i
                   class="fa-arrow-up-right-from-square"
                   aria-hidden="true"
