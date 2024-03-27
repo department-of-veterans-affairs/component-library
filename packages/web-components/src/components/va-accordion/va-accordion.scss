@@ -6,22 +6,22 @@
 
 /** Original Component Style **/
 
-:host(:not([uswds="true"],[uswds=""])) {
+:host([uswds='false']) {
   display: block;
   width: 100%;
-  color: var(--color-gray-dark);
+  color: var(--vads-color-base-darker);
   --item-border: none; /* This is to overwrite any previous inherited value */
 }
 
 /* If `bordered` is present and if it is *not* false */
-:host([bordered='true']:not([uswds="true"],[uswds=""])),
-:host([bordered='']:not([uswds="true"],[uswds=""])) {
-  --item-border: 3px solid var(--color-gray-lightest);
+:host([bordered='true'][uswds='false']),
+:host([bordered=''][uswds='false']) {
+  --item-border: 3px solid var(--vads-color-base-lightest);
 }
 
 button.va-accordion__button {
   border: none;
-  color: var(--color-link-default);
+  color: var(--vads-color-link);
   background: transparent;
   padding: 1rem;
   cursor: pointer;

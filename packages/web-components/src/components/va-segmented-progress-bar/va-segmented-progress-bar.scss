@@ -27,7 +27,7 @@
   flex: 1;
   margin-left: 2px;
   margin-right: 2px;
-  background-color: var(--color-gray-lighter);
+  background-color: var(--vads-color-base-lighter);
 }
 
 .progress-segment:first-child {
@@ -39,5 +39,5 @@
 }
 
 .progress-segment-complete {
-  background-color: var(--color-primary);
+  background-color: var(--vads-color-primary);
 }

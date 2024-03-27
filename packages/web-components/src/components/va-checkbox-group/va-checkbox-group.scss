@@ -16,7 +16,7 @@
   padding: 0;
 }
 
-:host([uswds]:not([uswds='false'])) {
+:host(:not([uswds='false'])) {
   margin-top: 24px;
 }
 
@@ -27,7 +27,7 @@
 @import '../../mixins/hint-text.css';
 @import '../../mixins/headers.css';
 
-:host(:not([uswds='true'], [uswds=''])) {
+:host([uswds='false']) {
   #error-message {
     font-size: 1.6rem;
     line-height: 2.4rem;
@@ -36,7 +36,7 @@
   }
 
   .required {
-    color: var(--color-secondary-dark);
+    color: var(--vads-color-secondary-dark);
     margin: 0 0.35rem;
   }
 

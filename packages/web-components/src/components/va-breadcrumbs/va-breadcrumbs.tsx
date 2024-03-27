@@ -29,34 +29,34 @@ export class VaBreadcrumbs {
    */
   @Prop() label?: string = 'Breadcrumb';
   /**
-     * Whether or not the component will use USWDS v3 styling.
-     */
-  @Prop() uswds?: boolean = false;
+   * Whether or not the component will use USWDS v3 styling.
+   */
+  @Prop() uswds?: boolean = true;
   /**
    *  Whether or not the component will wrap the breadcrumbs. This prop is available when `uswds` is set to `true`.
    */
   @Prop() wrapping?: boolean = false;
   /**
-   *  Represents a list of breadcrumbs. Use an array of objects with label and href properties, and then use JSON.stringify() to convert to a string. This prop is available when `uswds` is set to `true`.
+   *  Represents a list of breadcrumbs. Use a JSON array of objects with label and href properties, then wrap in a string if using non-React-binding version. See Storybook examples for React-binding version. For pure web components, here's an example link: ``[{"href": "/link1", "label": "Link 1"}]`. This prop is available when `uswds` is set to `true`.
    */
   @Prop() breadcrumbList?: any;
 
   /**
-   *  When true, the first breadcrumb label will be "VA.gov home". 
+   *  When true, the first breadcrumb label will be "VA.gov home".
    */
   @Prop() homeVeteransAffairs?: boolean = true;
 
   /**
-   * 
-   * Represents an internal state of the component which stores the list of breadcrumbs parsed from the 'breadcrumbList' prop. 
+   *
+   * Represents an internal state of the component which stores the list of breadcrumbs parsed from the 'breadcrumbList' prop.
    * Each breadcrumb is represented as an object with two properties: 'label' and 'href'.
    * This state is used when `uswds` is set to `true`.
    */
   @State() formattedBreadcrumbs?: Array<{ label: string; href: string }> = [];
   /**
-   * 
-   * This is a method that watches for changes in the 'breadcrumbList' prop. 
-   * When the 'breadcrumbList' prop changes, this method parses the new value (provided as a JSON-formatted string) 
+   *
+   * This is a method that watches for changes in the 'breadcrumbList' prop.
+   * When the 'breadcrumbList' prop changes, this method parses the new value (provided as a JSON-formatted string)
    * into a JavaScript object and assigns it to the 'breadcrumbsState' state.
    */
   @Watch('breadcrumbList')
@@ -82,35 +82,47 @@ export class VaBreadcrumbs {
 
   /**
    * Fires when user clicks on breadcrumb anchor tag.
-   * Has no effect unless uswds is true and the href of anchor tag is part of 
+   * Has no effect unless uswds is true and the href of anchor tag is part of
    * breadcrumb object that also has isRouterLink: true
    */
-    @Event({
-      composed: true,
-      bubbles: true,
-    })
-    routeChange: EventEmitter<{href: string}>;
+  @Event({
+    composed: true,
+    bubbles: true,
+  })
+  routeChange: EventEmitter<{ href: string }>;
 
   /**
    * This method is used to update the formattedBreadcrumbs state.
    * It is only invoked when the uswds attribute is set to true on the component.
    * It either parses a JSON string into an array of breadcrumb objects or uses the passed array as is.
-   * 
+   *
    * @param breadcrumbList - An array of breadcrumb objects or a stringified version of it.
    * @private
    */
-  private updateBreadCrumbList(breadcrumbList: Array<{ label: string; href: string; isRouterLink?: boolean }> | string) {
-    const firstBreadcrumb = breadcrumbList[0] as { label: string; href: string }
+  private updateBreadCrumbList(
+    breadcrumbList:
+      | Array<{ label: string; href: string; isRouterLink?: boolean }>
+      | string,
+  ) {
+    const firstBreadcrumb = breadcrumbList[0] as {
+      label: string;
+      href: string;
+    };
 
     if (firstBreadcrumb && this.homeVeteransAffairs) {
       firstBreadcrumb.label = 'VA.gov home';
     }
 
-    this.formattedBreadcrumbs = typeof breadcrumbList === 'string' ? JSON.parse(breadcrumbList) : breadcrumbList;
+    this.formattedBreadcrumbs =
+      typeof breadcrumbList === 'string'
+        ? JSON.parse(breadcrumbList)
+        : breadcrumbList;
   }
 
   private getClickLevel(target: HTMLAnchorElement) {
-    const anchorNodes = this.uswds ? Array.from(this.el.shadowRoot.querySelectorAll('a')) : Array.from(this.el.querySelectorAll('a'));
+    const anchorNodes = this.uswds
+      ? Array.from(this.el.shadowRoot.querySelectorAll('a'))
+      : Array.from(this.el.querySelectorAll('a'));
     const index = anchorNodes.findIndex((node: HTMLAnchorElement) =>
       node.isEqualNode(target),
     );
@@ -118,7 +130,6 @@ export class VaBreadcrumbs {
   }
 
   private fireAnalyticsEvent(event: MouseEvent): void {
-    
     if (!this.disableAnalytics) {
       const target = event.target as HTMLAnchorElement;
       // If it's a link being clicked, dispatch an analytics event
@@ -129,7 +140,9 @@ export class VaBreadcrumbs {
           details: {
             clickLabel: target.innerText.trim(),
             clickLevel: this.getClickLevel(target),
-            totalLevels: this.uswds ? this.el.shadowRoot.querySelectorAll('a').length + 1 : this.el.querySelectorAll('a').length,
+            totalLevels: this.uswds
+              ? this.el.shadowRoot.querySelectorAll('a').length + 1
+              : this.el.querySelectorAll('a').length,
           },
         };
         this.componentLibraryAnalytics.emit(details);
@@ -137,9 +150,13 @@ export class VaBreadcrumbs {
     }
   }
 
-  private handleAnchorNode(node: HTMLSlotElement, index: number, slotNodes: Node[]) {
+  private handleAnchorNode(
+    node: HTMLSlotElement,
+    index: number,
+    slotNodes: Node[],
+  ) {
     const li = document.createElement('li');
-      li.classList.add('va-breadcrumbs-li');
+    li.classList.add('va-breadcrumbs-li');
     if (index === slotNodes.length - 1) {
       /* eslint-disable-next-line i18next/no-literal-string */
       node.setAttribute('aria-current', 'page');
@@ -148,7 +165,11 @@ export class VaBreadcrumbs {
     li.appendChild(node);
   }
 
-  private handleListNode(node: HTMLSlotElement, index: number, slotNodes: Node[]) {
+  private handleListNode(
+    node: HTMLSlotElement,
+    index: number,
+    slotNodes: Node[],
+  ) {
     node.classList.add('va-breadcrumbs-li');
     const anchor = node.querySelector('a');
     if (anchor && index === slotNodes.length - 1) {
@@ -158,16 +179,18 @@ export class VaBreadcrumbs {
   }
 
   componentDidLoad() {
-    // We are getting the slot nodes so that we can handle either receiving an 
+    // We are getting the slot nodes so that we can handle either receiving an
     // anchor tag or a list item with an anchor tag.
-    const slotNodes = (this.el.shadowRoot.querySelector('slot') as HTMLSlotElement)?.assignedNodes();
+    const slotNodes = (
+      this.el.shadowRoot.querySelector('slot') as HTMLSlotElement
+    )?.assignedNodes();
     if (!slotNodes) return;
 
     // This handles two different slot node scenarios:
     // 1. <li><a href="...">...</a></li>
     // 2. <a href="...">...</a>
     slotNodes.forEach((node: HTMLSlotElement, index: number) => {
-      if (node.nodeName === 'LI') { 
+      if (node.nodeName === 'LI') {
         this.handleListNode(node, index, slotNodes);
       } else if (node.nodeName === 'A') {
         this.handleAnchorNode(node, index, slotNodes);
@@ -184,9 +207,9 @@ export class VaBreadcrumbs {
   componentWillLoad() {
     if (this.uswds) {
       if (!this.breadcrumbList?.length) return;
-      
+
       let potentialBreadcrumbs;
-      
+
       if (Array.isArray(this.breadcrumbList)) {
         potentialBreadcrumbs = this.breadcrumbList;
       } else if (typeof this.breadcrumbList === 'string') {
@@ -196,10 +219,18 @@ export class VaBreadcrumbs {
           return;
         }
       } else return;
-      
+
       // Now validate that potentialBreadcrumbs is an array of objects with the properties "label" and "href"
       // eslint-disable-next-line i18next/no-literal-string
-      if (Array.isArray(potentialBreadcrumbs) && potentialBreadcrumbs.every(item => typeof item === 'object' && item.hasOwnProperty('label') && item.hasOwnProperty('href'))) {
+      if (
+        Array.isArray(potentialBreadcrumbs) &&
+        potentialBreadcrumbs.every(
+          item =>
+            typeof item === 'object' &&
+            item.hasOwnProperty('label') &&
+            item.hasOwnProperty('href'),
+        )
+      ) {
         this.formattedBreadcrumbs = potentialBreadcrumbs;
         this.updateBreadCrumbList(this.formattedBreadcrumbs);
       } else return;
@@ -209,21 +240,23 @@ export class VaBreadcrumbs {
   /**
    * This handles the use case of the component dynamically receiving
    * new breadcrumb items. It will programmatically toggle the
-   * aria-current attribute on the last anchor tag and add the 
+   * aria-current attribute on the last anchor tag and add the
    * va-breadcrumbs-li class to the list item.
    */
   handleSlotChange() {
     // Get all of the slot nodes and filter out only the list items.
-    const slotNodes = (this.el.shadowRoot.querySelector('slot') as HTMLSlotElement)
+    const slotNodes = (
+      this.el.shadowRoot.querySelector('slot') as HTMLSlotElement
+    )
       ?.assignedNodes()
       .filter((node: HTMLSlotElement) => node.nodeName === 'LI');
 
     if (!slotNodes) return;
 
     slotNodes.forEach((node: HTMLSlotElement, index: number) => {
-      // We are only handling li nodes during slot change because it is 
-      // expected that the dynamic state usage of this component will 
-      // only be adding new breadcrumbs items in the format of 
+      // We are only handling li nodes during slot change because it is
+      // expected that the dynamic state usage of this component will
+      // only be adding new breadcrumbs items in the format of
       // <li><a href="...">...</a></li>.
       if (node.nodeName === 'LI') {
         if (this.uswds) {
@@ -267,19 +300,22 @@ export class VaBreadcrumbs {
     });
   }
 
-   /**
+  /**
    * Emit event with payload equal to href of the link clinked
    * Only fires if link is part of breadcrumb object that also has isLinkRouter = true property
    */
-   handleRouteChange(e: MouseEvent, href: string): void {
+  handleRouteChange(e: MouseEvent, href: string): void {
     e.preventDefault();
-    this.routeChange.emit({href});
+    this.routeChange.emit({ href });
   }
 
   /**
    * Handle click event on breadcrumb when uswds is true
    */
-  handleClick(e: MouseEvent, breadcrumb: { href: string, isRouterLink?: boolean}): void {
+  handleClick(
+    e: MouseEvent,
+    breadcrumb: { href: string; isRouterLink?: boolean },
+  ): void {
     const { href, isRouterLink } = breadcrumb;
     if (isRouterLink) {
       this.handleRouteChange(e, href);
@@ -291,7 +327,7 @@ export class VaBreadcrumbs {
     const { label, uswds, wrapping } = this;
     const wrapClass = classnames({
       'usa-breadcrumb': true,
-      'usa-breadcrumb--wrap': wrapping
+      'usa-breadcrumb--wrap': wrapping,
     });
 
     if (uswds) {
@@ -301,14 +337,31 @@ export class VaBreadcrumbs {
             <ol role="list" class="usa-breadcrumb__list">
               {this.formattedBreadcrumbs.map((item, index) => (
                 <li
-                  class={`usa-breadcrumb__list-item ${index === this.formattedBreadcrumbs.length - 1 ? 'usa-current' : ''}`}
-                  aria-current={index === this.formattedBreadcrumbs.length - 1 ? "page" : undefined}>
+                  class={`usa-breadcrumb__list-item ${
+                    index === this.formattedBreadcrumbs.length - 1
+                      ? 'usa-current'
+                      : ''
+                  }`}
+                  aria-current={
+                    index === this.formattedBreadcrumbs.length - 1
+                      ? 'page'
+                      : undefined
+                  }
+                >
                   {index === this.formattedBreadcrumbs.length - 1 ? (
-                    <a class="usa-breadcrumb__link" href="#content" onClick={e => this.fireAnalyticsEvent(e)}>
+                    <a
+                      class="usa-breadcrumb__link"
+                      href="#content"
+                      onClick={e => this.fireAnalyticsEvent(e)}
+                    >
                       <span>{item.label}</span>
                     </a>
                   ) : (
-                    <a class="usa-breadcrumb__link" href={item.href} onClick={e => this.handleClick(e, item)}>
+                    <a
+                      class="usa-breadcrumb__link"
+                      href={item.href}
+                      onClick={e => this.handleClick(e, item)}
+                    >
                       <span>{item.label}</span>
                     </a>
                   )}
@@ -318,8 +371,7 @@ export class VaBreadcrumbs {
           </nav>
         </Host>
       );
-    }
-    else {
+    } else {
       return (
         <Host>
           <nav aria-label={label}>

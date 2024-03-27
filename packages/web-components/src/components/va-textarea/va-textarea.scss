@@ -18,7 +18,7 @@
 }
 
 :host {
-  color: var(--color-base);
+  color: var(--vads-color-base);
   display: block;
   resize: both;
   font-family: var(--font-source-sans);
@@ -39,18 +39,18 @@
 @import '../../mixins/form-field-error.css';
 @import '../../mixins/hint-text.css';
 
-:host(:not([uswds="true"],[uswds=""])) label {
+:host([uswds='false']) label {
   display: block;
   max-width: 46rem;
   margin-top: 3rem;
 }
 
-:host(:not([uswds="true"],[uswds=""])) span.required {
-  color: var(--color-secondary-dark);
+:host([uswds='false']) span.required {
+  color: var(--vads-color-secondary-dark);
   margin-left: 0.4rem;
 }
 
-:host(:not([uswds="true"],[uswds=""])) textarea {
+:host([uswds='false']) textarea {
   font-family: var(--font-source-sans);
   font-size: 16px;
   line-height: 1.3;
@@ -64,6 +64,6 @@
   resize: inherit;
 }
 
-:host([error]:not([error='']):not([uswds="true"],[uswds=""])) textarea {
+:host([error]:not([error=''])[uswds='false']) textarea {
   padding-right: 0.7rem;
 }

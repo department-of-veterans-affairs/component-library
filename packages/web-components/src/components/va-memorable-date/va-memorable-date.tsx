@@ -58,7 +58,7 @@ export class VaMemorableDate {
   /**
    * Whether or not the component will use USWDS v3 styling.
    */
-  @Prop() uswds?: boolean = false;
+  @Prop() uswds?: boolean = true;
 
   /**
    * Enabling this will add a heading and description for integrating into the forms pattern. Accepts `single` or `multiple` to indicate if the form is a single input or will have multiple inputs. `uswds` should be true.
@@ -311,7 +311,6 @@ export class VaMemorableDate {
       const monthDisplay = monthSelect
         ? <div class="usa-form-group usa-form-group--month usa-form-group--select">
           <va-select
-            uswds
             label={i18next.t('month')}
             name={name ? `${name}Month` : 'Month'}
             aria-describedby={describedbyIds}
@@ -335,7 +334,6 @@ export class VaMemorableDate {
         </div>
       : <div class="usa-form-group usa-form-group--month">
         <va-text-input
-          uswds
           label={i18next.t('month')}
           name={name ? `${name}Month` : 'Month'}
           maxlength={2}
@@ -384,7 +382,6 @@ export class VaMemorableDate {
                 {monthDisplay}
                 <div class="usa-form-group usa-form-group--day">
                   <va-text-input
-                    uswds
                     label={i18next.t('day')}
                     name={name ? `${name}Day` : 'Day'}
                     maxlength={2}
@@ -405,7 +402,6 @@ export class VaMemorableDate {
                 </div>
                 <div class="usa-form-group usa-form-group--year">
                   <va-text-input
-                    uswds
                     label={i18next.t('year')}
                     name={name ? `${name}Year` : 'Year'}
                     maxlength={4}
@@ -460,10 +456,11 @@ export class VaMemorableDate {
                 value={month?.toString()}
                 onInput={handleDateChange}
                 onBlur={this.handleMonthBlur}
-                class="input-month memorable-date-input"
+                class="input-month memorable-date-input uswds-false"
                 inputmode="numeric"
                 type="text"
                 error={this.invalidMonth ? getErrorMessage(error) : null}
+                uswds={false}
                 />
               <va-text-input
                 label={i18next.t('day')}
@@ -478,10 +475,11 @@ export class VaMemorableDate {
                 value={day?.toString()}
                 onInput={handleDateChange}
                 onBlur={this.handleDayBlur}
-                class="input-day memorable-date-input"
+                class="input-day memorable-date-input uswds-false"
                 inputmode="numeric"
                 type="text"
                 error={this.invalidDay ? getErrorMessage(error) : null}
+                uswds={false}
                 />
               <va-text-input
                 label={i18next.t('year')}
@@ -496,10 +494,11 @@ export class VaMemorableDate {
                 value={year?.toString()}
                 onInput={handleDateChange}
                 onBlur={this.handleYearBlur}
-                class="input-year memorable-date-input"
+                class="input-year memorable-date-input uswds-false"
                 inputmode="numeric"
                 type="text"
                 error={this.invalidYear ? getErrorMessage(error) : null}
+                uswds={false}
                 />
             </div>
           </fieldset>

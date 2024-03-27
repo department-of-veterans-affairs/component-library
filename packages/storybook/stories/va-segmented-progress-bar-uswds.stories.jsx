@@ -6,7 +6,7 @@ const segmentedProgressBarDocs = getWebComponentDocs(
 );
 
 export default {
-  title: 'USWDS/Progress bar - segmented USWDS',
+  title: 'Components/Progress bar - segmented USWDS',
   id: 'uswds/va-segmented-progress-bar',
   parameters: {
     componentSubtitle: `va-segmented-progress-bar web component`,
@@ -38,7 +38,6 @@ const Template = ({
       total={total}
       label={label}
       heading-text={headingText}
-      uswds
       labels={labels}
       centered-labels={centeredLabels}
       counters={counters}

@@ -21,8 +21,8 @@ html {
 }
 
 body {
-  background: $color-white;
-  color: $color-base;
+  background: $vads-color-white;
+  color: $vads-color-base;
 }
 
 article > h1 {
@@ -32,7 +32,7 @@ article > h1 {
 hr {
   margin: 2.5em 0;
   margin: 48px 0 40px; // converted to 16px base font: 3rem 0 2.5rem
-  border: 1px solid $color-gray-light;
+  border: 1px solid $vads-color-base-light;
 }
 
 #content abbr {
@@ -45,7 +45,7 @@ hr {
 }
 
 a {
-  color: $color-link-default;
+  color: $vads-color-link;
   text-decoration: underline;
   -webkit-transition-duration: 0.3s;
   transition-duration: 0.3s;
@@ -64,7 +64,7 @@ a {
   }
   &:visited,
   &:visited abbr {
-    color: $uswds-system-color-violet-vivid-70;
+    color: $vads-color-link-visited;
   }
 }
 
@@ -164,18 +164,18 @@ figure {
 }
 
 figcaption {
-  color: $color-primary-darker;
+  color: $vads-color-primary-darker;
 }
 
 input::-webkit-input-placeholder {
-  color: $color-gray;
+  color: $vads-color-base-dark;
 }
 input::-moz-placeholder {
-  color: $color-gray;
+  color: $vads-color-base-dark;
 }
 
 input:-ms-input-placeholder {
-  color: $color-gray;
+  color: $vads-color-base-dark;
 }
 
 // Visually clear placeholder text on focus

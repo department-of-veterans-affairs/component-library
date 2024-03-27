@@ -11,7 +11,7 @@ describe('va-banner', () => {
     expect(element).toEqualHtml(`
      <va-banner class="hydrated">
        <mock:shadow-root>
-         <va-alert class="hydrated" data-label="Info banner" data-role="region" full-width="" status="info">
+         <va-alert class="hydrated uswds-false" data-label="Info banner" data-role="region" full-width="" status="info" uswds="false">
            <h3 slot="headline"></h3>
            <slot></slot>
          </va-alert>
@@ -67,7 +67,7 @@ describe('va-banner', () => {
     );
     const element = await page.find('va-banner >>> va-alert');
     expect(element).toEqualHtml(`
-      <va-alert class="hydrated" data-label="Error banner" data-role="region" full-width="" status="error">
+      <va-alert class="hydrated uswds-false" data-label="Error banner" data-role="region" full-width="" status="error" uswds="false">
         <mock:shadow-root>
            <div aria-label="Error banner" aria-live="assertive" class="alert error" role="region">
            <i aria-hidden="true"></i>

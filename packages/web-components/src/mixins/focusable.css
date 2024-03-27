@@ -1,7 +1,7 @@
 /* From the USWDS styles: */
 /*   https://github.com/uswds/uswds/blob/3dc296ec56cd621fe52d918701fd94621d96a198/src/stylesheets/core/mixins/_focus.scss#L12-L13 */
 button:not([disabled]):focus,
-:host(:not([uswds="true"],[uswds=""])) button:not([disabled]):active,
+:host([uswds='false']) button:not([disabled]):active,
 select:not([disabled]):focus,
 a:not([disabled]):focus,
 h1:focus,
@@ -9,6 +9,6 @@ input:not([disabled]):focus,
 textarea:not([disabled]):focus,
 #form-question
 [role='option']:focus {
-  outline: 2px solid var(--color-gold-light);
+  outline: 2px solid var(--vads-color-action-focus-on-light);
   outline-offset: 2px;
 }

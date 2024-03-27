@@ -89,7 +89,7 @@ export class VaCheckbox {
   /**
    * Whether or not the component will use USWDS v3 styling.
    */
-  @Prop({ reflect: true }) uswds?: boolean = false;
+  @Prop({ reflect: true }) uswds?: boolean = true;
 
   /**
    * Description of the option displayed below the checkbox label. Available when uswds is true.
@@ -169,6 +169,14 @@ export class VaCheckbox {
     i18next.off('languageChanged');
   }
 
+  componentDidLoad() {
+    // check if the element has a class named uswds-false added from parent
+    if (this.el.classList.contains('uswds-false')) {
+      // add attribute manually
+      this.el.setAttribute('uswds', 'false');
+    }
+  }
+
   render() {
     const {
       error,
@@ -231,10 +239,10 @@ export class VaCheckbox {
               disabled={disabled}
               onChange={this.handleChange}
             />
-            <label htmlFor="checkbox-element" id="option-label" class="usa-checkbox__label">
+            <label htmlFor="checkbox-element" id="option-label" class="usa-checkbox__label" part="label">
               {label}&nbsp;
               {required && <span class="usa-label--required">{i18next.t('required')}</span>}
-              {checkboxDescription && <span class="usa-checkbox__label-description" aria-describedby="option-label">{checkboxDescription}</span>}
+              {checkboxDescription && <span class="usa-checkbox__label-description" aria-describedby="option-label" part="description">{checkboxDescription}</span>}
             </label>
             {messageAriaDescribedby && (
               <span id='input-message' class="sr-only dd-privacy-hidden">

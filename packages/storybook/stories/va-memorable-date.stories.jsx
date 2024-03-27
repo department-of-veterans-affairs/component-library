@@ -7,7 +7,7 @@ VaMemorableDate.displayName = 'VaMemorableDate';
 const memorableDateInputDocs = getWebComponentDocs('va-memorable-date');
 
 export default {
-  title: 'Components/Memorable date',
+  title: 'V1 Components/Memorable date',
   id: 'components/va-memorable-date',
   parameters: {
     componentSubtitle: `va-memorable-date web component`,
@@ -24,9 +24,10 @@ const defaultArgs = {
   required: false,
   error: undefined,
   value: undefined,
+  uswds: false,
 };
 
-const Template = ({ label, name, required, error, value, hint }) => {
+const Template = ({ label, name, required, error, value, hint, uswds }) => {
   return (
     <VaMemorableDate
       label={label}
@@ -37,11 +38,12 @@ const Template = ({ label, name, required, error, value, hint }) => {
       value={value}
       onDateBlur={e => console.log(e, 'DATE BLUR FIRED')}
       onDateChange={e => console.log(e, 'DATE CHANGE FIRED')}
+      uswds={uswds}
     />
   );
 };
 
-const ExtraHintTemplate = ({ label, name, required, error, value, hint }) => {
+const ExtraHintTemplate = ({ label, name, required, error, value, hint, uswds }) => {
   return (
     <VaMemorableDate
       label={label}
@@ -52,11 +54,12 @@ const ExtraHintTemplate = ({ label, name, required, error, value, hint }) => {
       value={value}
       onDateBlur={e => console.log(e, 'DATE BLUR FIRED')}
       onDateChange={e => console.log(e, 'DATE CHANGE FIRED')}
+      uswds={uswds}
     />
   );
 };
 
-const CustomValidationTemplate = ({ label, name, required, error, value, hint }) => {
+const CustomValidationTemplate = ({ label, name, required, error, value, hint, uswds }) => {
   const [dateVal, setDateVal] = useState(value);
   const [errorVal, setErrorVal] = useState(error);
   const today = new Date();
@@ -83,6 +86,7 @@ const CustomValidationTemplate = ({ label, name, required, error, value, hint })
         value={dateVal}
         onDateBlur={() => handleDateBlur()}
         onDateChange={e => setDateVal(e.target.value)}
+        uswds={uswds}
       />
       <hr />
       <div>
@@ -117,7 +121,7 @@ function handleDateBlur() &#x7b;<br/>
   );
 };
 
-const I18nTemplate = ({ label, name, required, error, value, hint }) => {
+const I18nTemplate = ({ label, name, required, error, value, hint, uswds }) => {
   const [lang, setLang] = useState('en');
 
   useEffect(() => {
@@ -138,6 +142,7 @@ const I18nTemplate = ({ label, name, required, error, value, hint }) => {
         value={value}
         onDateBlur={e => console.log(e, 'DATE BLUR FIRED')}
         onDateChange={e => console.log(e, 'DATE CHANGE FIRED')}
+        uswds={uswds}
       />
     </div>
 )};

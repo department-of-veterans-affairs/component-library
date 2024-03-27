@@ -9,7 +9,7 @@ import {
 const minimalHeaderDocs = getWebComponentDocs('va-header-minimal');
 
 export default {
-  title: 'Components/Header - Minimal',
+  title: 'V1 Components/Header - Minimal',
   id: 'components/va-header-minimal',
   parameters: {
     componentSubtitle: `va-header-minimal web component`,
@@ -22,9 +22,10 @@ export default {
 const defaultArgs = {
   header: 'Authorization To Disclose Personal Information To A Third Party',
   subheader: '',
+  'disable-headings': false
 };
-const Template = ({ header, subheader }) => {
-  return <va-header-minimal header={header} subheader={subheader} />;
+const Template = ({ header, subheader, 'disable-headings': disableHeadings }) => {
+  return <va-header-minimal header={header} subheader={subheader} disable-headings={disableHeadings} />;
 };
 
 export const Default = Template.bind(null);

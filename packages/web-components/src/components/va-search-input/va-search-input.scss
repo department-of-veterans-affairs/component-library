@@ -12,16 +12,16 @@
   padding: 0;
 }
 
-:host([uswds]:not([uswds='false'])) .usa-input {
+:host(:not([uswds='false'])) .usa-input {
   margin-top: 0;
 }
 
-:host([uswds]:not([uswds='false'])) #va-search-listbox {
+:host(:not([uswds='false'])) #va-search-listbox {
   top: 37px;
   z-index: 1;
 }
 
-:host([uswds]:not([uswds='false'])[big="true"]) #va-search-listbox  {
+:host(:not([uswds='false'])[big="true"]) #va-search-listbox  {
   top: 52px;
 }
 
@@ -40,7 +40,7 @@
 @import '../../mixins/inputs.css';
 @import '../../mixins/buttons.css';
 
-:host(:not([uswds="true"],[uswds=""])) {
+:host([uswds='false']) {
   display: block;
   align-items: center;
   display: flex;
@@ -48,7 +48,7 @@
 }
 
 #va-search-input {
-  border-color: var(--color-gray);
+  border-color: var(--vads-color-base-dark);
   display: inline-block;
   height: 48px;
   margin: 0;
@@ -63,7 +63,7 @@
 
 #va-search-button {
   align-items: center;
-  background-color: var(--color-primary);
+  background-color: var(--vads-color-primary);
   border-radius: 0 3px 3px 0;
   display: flex;
   height: 48px;
@@ -75,7 +75,7 @@
 
 #va-search-button:active,
 #va-search-button:hover {
-  background-color: var(--color-primary-dark);
+  background-color: var(--vads-color-primary-dark);
 }
 
 i::before {
@@ -94,7 +94,7 @@ i::before {
 }
 
 #va-search-listbox {
-  background-color: var(--color-white);
+  background-color: var(--vads-color-white);
   box-shadow: 0px 2px 6px 1px rgba(20, 20, 20, 0.14);
   display: block;
   left: 0;
@@ -115,6 +115,6 @@ i::before {
 .va-search-suggestion[aria-selected='true'],
 .va-search-suggestion:focus,
 .va-search-suggestion:hover {
-  background-color: var(--color-primary);
-  color: var(--color-white);
+  background-color: var(--vads-color-primary);
+  color: var(--vads-color-white);
 }

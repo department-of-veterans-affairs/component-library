@@ -4,11 +4,11 @@ import { axeCheck } from '../../../testing/test-helpers';
 describe('va-breadcrumbs', () => {
   it('renders', async () => {
     const page = await newE2EPage();
-    await page.setContent('<va-breadcrumbs></va-breadcrumbs>');
+    await page.setContent('<va-breadcrumbs uswds="false"></va-breadcrumbs>');
 
     const element = await page.find('va-breadcrumbs');
     expect(element).toEqualHtml(`
-      <va-breadcrumbs class="hydrated">
+      <va-breadcrumbs class="hydrated" uswds="false">
         <mock:shadow-root>
           <nav aria-label="Breadcrumb">
             <ul role="list">
@@ -23,7 +23,7 @@ describe('va-breadcrumbs', () => {
   it('renders slotted content (anchor tags)', async () => {
     const page = await newE2EPage();
     await page.setContent(`
-      <va-breadcrumbs>
+      <va-breadcrumbs uswds="false">
         <a href="#home">Home</a>
         <a href="#one">Level One</a>
         <a href="#two">Level Two</a>
@@ -32,7 +32,7 @@ describe('va-breadcrumbs', () => {
 
     const element = await page.find('va-breadcrumbs');
     expect(element).toEqualHtml(`
-      <va-breadcrumbs class="hydrated">
+      <va-breadcrumbs class="hydrated" uswds="false">
         <mock:shadow-root>
           <nav aria-label="Breadcrumb">
             <ul role="list">
@@ -56,7 +56,7 @@ describe('va-breadcrumbs', () => {
   it('renders slotted content (list items)', async () => {
     const page = await newE2EPage();
     await page.setContent(`
-      <va-breadcrumbs>
+      <va-breadcrumbs uswds="false">
         <li><a href="#home">Home</a></li>
         <li><a href="#one">Level One</a></li>
         <li><a href="#two">Level Two</a></li>
@@ -65,7 +65,7 @@ describe('va-breadcrumbs', () => {
 
     const element = await page.find('va-breadcrumbs');
     expect(element).toEqualHtml(`
-      <va-breadcrumbs class="hydrated">
+      <va-breadcrumbs class="hydrated" uswds="false">
         <mock:shadow-root>
           <nav aria-label="Breadcrumb">
             <ul role="list">
@@ -89,7 +89,7 @@ describe('va-breadcrumbs', () => {
   it('passes an axe check', async () => {
     const page = await newE2EPage();
     await page.setContent(`
-      <va-breadcrumbs>
+      <va-breadcrumbs uswds="false">
         <a href="#home">Home</a>
         <a href="#one">Level One</a>
         <a href="#two">Level Two</a>
@@ -102,7 +102,7 @@ describe('va-breadcrumbs', () => {
   it('fires an analytics event when an anchor link is clicked', async () => {
     const page = await newE2EPage();
     await page.setContent(`
-      <va-breadcrumbs>
+      <va-breadcrumbs uswds="false">
         <a href="#home">Home</a>
         <a href="#one">Level One</a>
         <a href="#two">Level Two</a>
@@ -129,7 +129,7 @@ describe('va-breadcrumbs', () => {
   it(`doesn't fire an analytics event with disable-analytics prop when an anchor link is clicked`, async () => {
     const page = await newE2EPage();
     await page.setContent(`
-      <va-breadcrumbs disable-analytics>
+      <va-breadcrumbs disable-analytics uswds="false">
         <a href="#home">Home</a>
         <a href="#one">Level One</a>
         <a href="#two">Level Two</a>
@@ -147,7 +147,7 @@ describe('va-breadcrumbs', () => {
   it('updates first anchor link label to "VA.gov home"', async () => {
     const page = await newE2EPage();
     await page.setContent(`
-      <va-breadcrumbs>
+      <va-breadcrumbs uswds="false">
         <a href="#home">not the right label</a>
         <a href="#one">Level One</a>
         <a href="#two">Level Two</a>
@@ -180,11 +180,11 @@ describe('va-breadcrumbs', () => {
 
   it('uswds - renders', async () => {
     const page = await newE2EPage({
-      html: '<va-breadcrumbs class="hydrated" label="test" disable-analytics="false" breadcrumb-list=\'[{ "label": "Home", "href": "#home" }, { "label": "Current", "href": "#current" }]\' uswds></va-breadcrumbs>',
+      html: '<va-breadcrumbs class="hydrated" label="test" disable-analytics="false" breadcrumb-list=\'[{ "label": "Home", "href": "#home" }, { "label": "Current", "href": "#current" }]\'></va-breadcrumbs>',
     });
     const element = await page.find('va-breadcrumbs');
     expect(element).toEqualHtml(`
-      <va-breadcrumbs class="hydrated" disable-analytics="false" label="test" breadcrumb-list='[{ "label": "Home", "href": "#home" }, { "label": "Current", "href": "#current" }]' uswds>
+      <va-breadcrumbs class="hydrated" disable-analytics="false" label="test" breadcrumb-list='[{ "label": "Home", "href": "#home" }, { "label": "Current", "href": "#current" }]'>
         <mock:shadow-root>
           <nav aria-label="test" class="usa-breadcrumb">
             <ol class="usa-breadcrumb__list" role="list">
@@ -208,7 +208,7 @@ describe('va-breadcrumbs', () => {
   it("uswds - should render wrap labels when 'wrapping' is true", async () => {
     const page = await newE2EPage();
     await page.setContent(`
-      <va-breadcrumbs disable-analytics="false" breadcrumb-list=\'[{ "label": "This is a very long breadcrumb", "href": "#home" }, { "label": "Current", "href": "#current" }]\' uswds wrapping></va-breadcrumbs>
+      <va-breadcrumbs disable-analytics="false" breadcrumb-list=\'[{ "label": "This is a very long breadcrumb", "href": "#home" }, { "label": "Current", "href": "#current" }]\' wrapping></va-breadcrumbs>
     `);
     const element = await page.find('va-breadcrumbs');
     const indicator = element.shadowRoot.querySelector('.usa-breadcrumb');
@@ -218,7 +218,7 @@ describe('va-breadcrumbs', () => {
   it('uswds - passes an axe check', async () => {
     const page = await newE2EPage();
     await page.setContent(`
-      <va-breadcrumbs disable-analytics="false" breadcrumb-list=\'[{ "label": "Home", "href": "#home" }, { "label": "Current", "href": "#current" }]\' uswds></va-breadcrumbs>
+      <va-breadcrumbs disable-analytics="false" breadcrumb-list=\'[{ "label": "Home", "href": "#home" }, { "label": "Current", "href": "#current" }]\'></va-breadcrumbs>
     `);
 
     await axeCheck(page);
@@ -227,7 +227,7 @@ describe('va-breadcrumbs', () => {
   it('uswds - fires an analytics event when an anchor link is clicked', async () => {
     const page = await newE2EPage();
     await page.setContent(`
-      <va-breadcrumbs breadcrumb-list=\'[{ "label": "Level One", "href": "#one" }, { "label": "Current", "href": "#current" }]\' uswds></va-breadcrumbs>
+      <va-breadcrumbs breadcrumb-list=\'[{ "label": "Level One", "href": "#one" }, { "label": "Current", "href": "#current" }]\'></va-breadcrumbs>
     `);
 
     const analyticsSpy = await page.spyOnEvent('component-library-analytics');
@@ -249,7 +249,7 @@ describe('va-breadcrumbs', () => {
   it(`uswds - doesn't fire an analytics event with disable-analytics prop when an anchor link is clicked`, async () => {
     const page = await newE2EPage();
     await page.setContent(`
-    <va-breadcrumbs breadcrumb-list=\'[{ "label": "Level One", "href": "#one" }, { "label": "Level two", "href": "#two" }, { "label": "Current", "href": "#current" }]\' uswds disable-analytics></va-breadcrumbs>
+    <va-breadcrumbs breadcrumb-list=\'[{ "label": "Level One", "href": "#one" }, { "label": "Level two", "href": "#two" }, { "label": "Current", "href": "#current" }]\' disable-analytics></va-breadcrumbs>
     `);
 
     const analyticsSpy = await page.spyOnEvent('component-library-analytics');
@@ -262,11 +262,11 @@ describe('va-breadcrumbs', () => {
 
   it('uswds - renders when some links are router links', async () => {
     const page = await newE2EPage({
-      html: '<va-breadcrumbs class="hydrated" label="test" disable-analytics="false" breadcrumb-list=\'[{ "label": "One", "href": "/one" }, { "label": "Two", "href": "/two", "isRouterLink": "true" }, { "label": "Three", "href": "/three", "isRouterLink": "true" }]\' uswds></va-breadcrumbs>',
+      html: '<va-breadcrumbs class="hydrated" label="test" disable-analytics="false" breadcrumb-list=\'[{ "label": "One", "href": "/one" }, { "label": "Two", "href": "/two", "isRouterLink": "true" }, { "label": "Three", "href": "/three", "isRouterLink": "true" }]\'></va-breadcrumbs>',
     });
     const element = await page.find('va-breadcrumbs');
     expect(element).toEqualHtml(`
-      <va-breadcrumbs class="hydrated" disable-analytics="false" label="test" breadcrumb-list='[{ "label": "One", "href": "/one" }, { "label": "Two", "href": "/two", "isRouterLink": "true" }, { "label": "Three", "href": "/three", "isRouterLink": "true" }]' uswds>
+      <va-breadcrumbs class="hydrated" disable-analytics="false" label="test" breadcrumb-list='[{ "label": "One", "href": "/one" }, { "label": "Two", "href": "/two", "isRouterLink": "true" }, { "label": "Three", "href": "/three", "isRouterLink": "true" }]'>
         <mock:shadow-root>
           <nav aria-label="test" class="usa-breadcrumb">
             <ol class="usa-breadcrumb__list" role="list">
@@ -295,7 +295,7 @@ describe('va-breadcrumbs', () => {
   it('uswds - fires a route-change event when an anchor link with isRouteLink is clicked', async () => {
     const page = await newE2EPage();
     await page.setContent(`
-    <va-breadcrumbs breadcrumb-list=\'[{ "label": "One", "href": "/one" }, { "label": "Two", "href": "/two", "isRouterLink": "true" }, { "label": "Three", "href": "/three", "isRouterLink": "true" }]\' uswds></va-breadcrumbs>
+    <va-breadcrumbs breadcrumb-list=\'[{ "label": "One", "href": "/one" }, { "label": "Two", "href": "/two", "isRouterLink": "true" }, { "label": "Three", "href": "/three", "isRouterLink": "true" }]\'></va-breadcrumbs>
     `);
 
     const routeChangeSpy = await page.spyOnEvent('routeChange');
@@ -311,7 +311,7 @@ describe('va-breadcrumbs', () => {
   it('uswds - does not fire a route-change event when an anchor link without isRouteLink is clicked', async () => {
     const page = await newE2EPage();
     await page.setContent(`
-    <va-breadcrumbs breadcrumb-list=\'[{ "label": "One", "href": "/one" }, { "label": "Two", "href": "/two", "isRouterLink": "true" }, { "label": "Three", "href": "/three", "isRouterLink": "true" }]\' uswds></va-breadcrumbs>
+    <va-breadcrumbs breadcrumb-list=\'[{ "label": "One", "href": "/one" }, { "label": "Two", "href": "/two", "isRouterLink": "true" }, { "label": "Three", "href": "/three", "isRouterLink": "true" }]\'></va-breadcrumbs>
     `);
 
     const routeChangeSpy = await page.spyOnEvent('routeChange');

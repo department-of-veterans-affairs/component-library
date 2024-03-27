@@ -4,7 +4,7 @@ import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
 const bttDocs = getWebComponentDocs('va-back-to-top');
 
 export default {
-  title: 'Components/Back to top',
+  title: 'V1 Components/Back to top',
   id: 'components/va-back-to-top',
   parameters: {
     componentSubtitle: `va-back-to-top web component`,
@@ -43,7 +43,7 @@ const Template = () => {
           height: '500px',
           display: 'flex',
           justifyContent: 'center',
-          background: 'var(--color-primary-darker)',
+          background: 'var(--vads-color-primary-darker)',
           color: 'white',
         }}
       >

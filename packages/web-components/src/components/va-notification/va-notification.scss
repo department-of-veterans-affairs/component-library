@@ -10,7 +10,7 @@
 
 ::slotted([slot='date']) {
     display: block;
-    color: var(--color-gray-dark);
+    color: var(--vads-color-base-darker);
     font-size: 16px;
 }
 
@@ -34,13 +34,13 @@ i.fa-times-circle::before {
 
 i.action-required::before {
     content: '\F06A'; /* fa-exclamation-circle */
-    color: var(--color-secondary-dark);
+    color: var(--vads-color-secondary-dark);
     font-size: 32px;
 }
 
 i.update::before {
     content: '\F05A'; /* fa-circle-info */
-    color: var(--color-primary);
+    color: var(--vads-color-primary);
     font-size: 32px;
 }
 
@@ -86,7 +86,7 @@ p {
     margin: 18px 12px;
     padding: 0px;
     width: auto;
-    color: var(--color-gray-dark);
+    color: var(--vads-color-base-darker);
     font-size: 16px;
     appearance: none;
     border: 0px;
@@ -99,14 +99,14 @@ p {
 }
 
 .va-notification-close:hover {
-    color: var(--color-base);
+    color: var(--vads-color-base);
     background-color: transparent;
 }
 
 .va-notification-close:active, .va-notification-close:focus {
-    color: var(--color-base);
+    color: var(--vads-color-base);
     background-color: transparent;
-    outline: 2px solid var(--color-gold-light);
+    outline: 2px solid var(--vads-color-action-focus-on-light);
     outline-offset: 2px;
 }
 

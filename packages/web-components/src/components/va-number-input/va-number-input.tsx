@@ -109,7 +109,7 @@ export class VaNumberInput {
   /**
    * Whether or not the component will use USWDS v3 styling.
    */
-  @Prop() uswds?: boolean = false;
+  @Prop() uswds?: boolean = true;
 
   /**
    * Enabling this will add a heading and description for integrating into the forms pattern. Accepts `single` or `multiple` to indicate if the form is a single input or will have multiple inputs. `uswds` should be true.

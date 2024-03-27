@@ -103,58 +103,57 @@ function findComponents() {
   // Finds all of the web components, whether react-binding or not, V1 and V3
   const allWCTagRegex = /<(Va[^\s]+|va-[^\s]+)(\s|\n)[^>]*?/gms;
   // Finds all of the V3 web components, excludes uswds="false" (explicit opt-out)
-  const v3WCTagRegex =
-    /<(Va[^\s]+|va-[^\s]+)(\s|\n)[^>]*?uswds(?!=?"?'?false)/gms;
+  const v1WCTagRegex = /<(Va[^\s]+|va-[^\s]+)(\s|\n)[^>]*?uswds="?'?{?false/gms;
 
   // Start by getting all of the vets-website web components
-  // Even though the variable says "V1", this initially holds ALL of the components
+  // Even though the variable says "V3", this initially holds ALL of the components
   /** @type {componentPath[]} */
-  const vwV1WC = [...search(vwModules, allWCTagRegex)].reduce(
+  const vwV3WC = [...search(vwModules, allWCTagRegex)].reduce(
     flattenMatches,
     []
   );
 
-  // Next, search again but this time get only V3 components
+  // Next, search again but this time get only V1 components
   /** @type {componentPath[]} */
-  const vwV3WC = [...search(vwModules, v3WCTagRegex)].reduce(
+  const vwV1WC = [...search(vwModules, v1WCTagRegex)].reduce(
     flattenMatches,
     []
   );
 
-  // Next, remove all V3 components from the V1 collection, leaving only V1 components
-  vwV3WC.forEach(compPath => {
-    const foundIndex = vwV1WC.findIndex(
+  // Next, remove all V1 components from the V3 collection, leaving only V3 components
+  vwV1WC.forEach(compPath => {
+    const foundIndex = vwV3WC.findIndex(
       allCompPath =>
         compPath.path === allCompPath.path &&
         compPath.component === allCompPath.component
     );
     if (foundIndex) {
-      vwV1WC.splice(foundIndex, 1);
+      vwV3WC.splice(foundIndex, 1);
     }
   });
 
   // Now we can move onto searching the content-build repo
   // We again start by getting ALL of the web components (filter comes later)
-  const cbV1WC = [...search(cbTemplates, allWCTagRegex)].reduce(
+  const cbV3WC = [...search(cbTemplates, allWCTagRegex)].reduce(
     flattenMatches,
     []
   );
 
-  // Next we get all of the V3 web components
-  const cbV3WC = [...search(cbTemplates, v3WCTagRegex)].reduce(
+  // Next we get all of the V1 web components
+  const cbV1WC = [...search(cbTemplates, v1WCTagRegex)].reduce(
     flattenMatches,
     []
   );
 
   // Finally we filter out the V3 components from the V1 collection
-  cbV3WC.forEach(compPath => {
-    const foundIndex = cbV1WC.findIndex(
+  cbV1WC.forEach(compPath => {
+    const foundIndex = cbV3WC.findIndex(
       allCompPath =>
         compPath.path === allCompPath.path &&
         compPath.component === allCompPath.component
     );
     if (foundIndex) {
-      cbV1WC.splice(foundIndex, 1);
+      cbV3WC.splice(foundIndex, 1);
     }
   });
 

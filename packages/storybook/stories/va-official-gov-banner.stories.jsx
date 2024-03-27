@@ -4,7 +4,7 @@ import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
 const officialGovBannerDocs = getWebComponentDocs('va-official-gov-banner');
 
 export default {
-  title: 'Components/Banner - Official Gov',
+  title: 'V1 Components/Banner - Official Gov',
   id: 'components/va-official-gov-banner',
   parameters: {
     componentSubtitle: `va-official-gov-banner web component`,
