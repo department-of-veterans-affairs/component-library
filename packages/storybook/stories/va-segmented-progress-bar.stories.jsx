@@ -28,7 +28,7 @@ const Template = ({
   <div style={{ margin: '3em' }}>
     <div
       className="schemaform-title"
-      style={{ alignItems: 'baseline', display: 'flex', marginBottom: '3rem' }}
+      style={{ alignItems: 'baseline', display: 'flex', marginBottom: '1.9rem' }}
     >
       <h1
         data-testid="form-title"

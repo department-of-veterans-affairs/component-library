@@ -31,7 +31,7 @@ const Template = ({
 }) => (
   // Wrapper for spacing when viewing in storybook
   // Component can be used without it
-  <div style={{ margin: '3em' }}>
+  <div style={{ margin: '1.9rem' }}>
     <va-segmented-progress-bar
       enable-analytics={enableAnalytics}
       current={current}
