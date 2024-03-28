@@ -555,7 +555,7 @@ export class VaModal {
               ref={el => (this.closeButton = el as HTMLButtonElement)}
               type="button"
             >
-              <i aria-hidden="true" />
+              <va-icon icon="cancel" size={4}></va-icon>
             </button>
             <div class={bodyClass}>
               <div role="document">
