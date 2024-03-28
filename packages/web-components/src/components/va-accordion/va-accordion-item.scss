@@ -39,11 +39,11 @@
 }
 
 :host(:not(:last-child)) {
-  margin-bottom: 0.8rem;
+  margin-bottom: 0.5rem;
 }
 
 :host(:last-child) {
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.3125rem;
 }
 
 :host(:not([open])) #content,
@@ -69,7 +69,7 @@ button {
   font-size: 1rem;
   font-weight: 700;
   line-height: 1.15;
-  padding: 1.5rem 5.5rem 1.5rem 2rem;
+  padding: 0.9375rem 3.4375rem 0.9375rem 1.25rem;
   background-color: var(--vads-color-base-lightest);
   background-image: url('../../assets/minus.svg');
   background-position: right 2rem center;
@@ -91,7 +91,7 @@ button:not(.usa-accordion__button):hover {
 #content:not(.usa-accordion__content) {
   background-color: var(--vads-color-white);
   overflow: auto;
-  padding: 1.5rem 2rem;
+  padding: 0.9375rem 1.25rem;
   border-left: var(--item-border);
   border-right: var(--item-border);
   border-bottom: var(--item-border);

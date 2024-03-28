@@ -45,7 +45,7 @@
 }
 
 :host([error][uswds='false']:not([error=''])) input + label {
-  margin-top: 1.2rem;
+  margin-top: 0.75rem;
 }
 
 :host([uswds='false']) {
@@ -66,7 +66,7 @@
     cursor: pointer;
     display: inline-flex;
     font-weight: 400;
-    margin-top: 1.2rem;
+    margin-top: 0.75rem;
     width: 100%;
   }
 
@@ -75,7 +75,7 @@
     display: block;
     float: left;
     margin-top: var(--visible-checkbox-top-margin);
-    margin-right: 1rem;
+    margin-right: 0.625rem;
     pointer-events: none;
     border-radius: 2px;
     box-shadow: 0 0 0 1px var(--vads-color-gray-medium);

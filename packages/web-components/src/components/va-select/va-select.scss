@@ -43,7 +43,7 @@ span.required {
 :host([error]:not([error=''])[uswds='false']) label,
 :host([error]:not([error=''])[uswds='false']) > span {
   display: block;
-  font-size: 1.6rem;
+  font-size: 1rem;
 }
 
 :host([error]:not([error=''])[uswds='false']) > span {
@@ -65,7 +65,7 @@ span.required {
   background-image: url('../../assets/arrow-both.svg');
   background-position: right 1.3rem center;
   background-repeat: no-repeat;
-  background-size: 1rem;
+  background-size: 0.625rem;
   font-family: var(--font-source-sans);
-  padding: 0.8rem 3rem 0.8rem 0.7em;
+  padding: 0.5rem 1.875rem 0.5rem 0.7em;
 }

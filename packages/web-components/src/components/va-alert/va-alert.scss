@@ -162,7 +162,7 @@ i.fa-times-circle::before {
 
 :host([uswds='false']) {
   ::slotted([slot='headline']) {
-    font-size: 2rem !important;
+    font-size: 1.25rem !important;
     line-height: 26px !important;
     padding: 0 !important;
     margin: 0 !important;
@@ -170,7 +170,7 @@ i.fa-times-circle::before {
 
   div.alert {
     display: table;
-    padding: 1.6rem 2rem 1.6rem 1.6rem;
+    padding: 1rem 1.25rem 1rem 1rem;
     width: 100%;
     vertical-align: middle;
     box-sizing: border-box;
@@ -184,7 +184,7 @@ i.fa-times-circle::before {
 
   div.alert>i::before {
     display: flex;
-    margin-right: 1.6rem;
+    margin-right: 1rem;
   }
 
   div.body {
@@ -196,12 +196,12 @@ i.fa-times-circle::before {
   }
 
   ::slotted(:not([slot])) {
-    margin-top: 2rem;
+    margin-top: 1.25rem;
   }
 
   .bg-only ::slotted(*) {
     margin-top: 0 !important;
-    /* Fix for Safari 15.3 and lower. */
+    /* Fix for Safari 15.3margin-rightand lower. */
   }
 
   div.info>i::before {
@@ -254,7 +254,7 @@ i.fa-times-circle::before {
 
   i {
     font-family: 'Font Awesome 5 Free';
-    font-size: 2.4rem;
+    font-size: 1.5rem;
     font-style: normal;
     font-weight: 900;
     line-height: 1;
