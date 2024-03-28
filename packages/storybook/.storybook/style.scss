@@ -18,9 +18,17 @@ $formation-asset-path: '~@department-of-veterans-affairs/formation/assets';
   }
 }
 
+.sbdocs-wrapper {
+  padding: 2.5rem 20px !important;
+}
+
+.sbdocs-h1 {
+  font-size: 32px !important;
+}
+
 a.sbdocs-a {
   color: var(--color-link-default);
-  font-size: 1.6rem;
+  font-size: 1rem;
   transition-duration: 0.3s;
   transition-timing-function: ease-in-out;
   transition-property: color, background-color, border-color;

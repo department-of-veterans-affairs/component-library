@@ -196,7 +196,7 @@
     "*": { "value": "{uswds-system-color-red-30}"}
   },
   "vads-color-secondary-lightest": {
-    "*": { "value": "{uswds-system-color-red-cool-10v}"}
+    "*": { "value": "{uswds-system-color-red-cool-vivid-10}"}
   },
   "vads-color-success": {
     "*": { "value": "{uswds-system-color-green-cool-vivid-40}"}

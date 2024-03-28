@@ -3,7 +3,6 @@
 @use 'usa-icon/src/styles/_usa-icon.scss';
 
 @import '../../mixins/focusable.css';
-@import '../../global/formation_overrides';
 
 // Formation does not specify box-sizing on li elements, this is needed for pagination to fit on 320px size screens
 .va-pagination__item {

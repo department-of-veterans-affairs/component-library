@@ -11,12 +11,10 @@
 @use 'usa-memorable-date/src/styles/usa-memorable-date';
 
 @import '../../mixins/uswds-error-border.scss';
-@import '../../global/formation_overrides';
 @import '../../mixins/focusable.css';
 @import '~@department-of-veterans-affairs/css-library/dist/elements.css';
 
 .usa-memorable-date {
-  margin-top: 16px;
   // USWDS v3.7.1 set flex-wrap: wrap; This caused the year to always wrap when the month select option was active.
   flex-wrap: nowrap;
 }
@@ -26,7 +24,19 @@
 }
 
 .usa-form-group--month-input {
-  width: 48px;
+  width: 3rem;
+}
+
+.usa-form-group--month-select {
+  width: 15rem;
+}
+
+.usa-form-group--day-input {
+  width: 3rem;
+}
+
+.usa-form-group--year-input {
+  width: 4.5rem;
 }
 
 @media (max-width: 480px) {
