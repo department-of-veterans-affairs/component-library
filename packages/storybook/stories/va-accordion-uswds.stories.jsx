@@ -23,7 +23,7 @@ export default {
 
 const Template = args => (
   <va-accordion {...args}>
-    <va-accordion-item id="first" header="First Amendment" uswds={args.uswds}>
+    <va-accordion-item id="first" header="First Amendment">
         <p>
           Congress shall make no law respecting an establishment of religion, or
           prohibiting the free exercise thereof; or abridging the freedom of speech,
@@ -31,13 +31,13 @@ const Template = args => (
           petition the Government for a redress of grievances.
         </p>
     </va-accordion-item>
-    <va-accordion-item id="second" header="Second Amendment" uswds={args.uswds}>
+    <va-accordion-item id="second" header="Second Amendment">
         <p>
           A well regulated Militia, being necessary to the security of a free State,
           the right of the people to keep and bear Arms, shall not be infringed.
         </p>
     </va-accordion-item>
-    <va-accordion-item id="third" header="Third Amendment" uswds={args.uswds}>
+    <va-accordion-item id="third" header="Third Amendment">
         <p>
           No Soldier shall, in time of peace be quartered in any house, without the
           consent of the Owner, nor in time of war, but in a manner to be prescribed by law.
@@ -297,7 +297,6 @@ const ManyItemsTemplate = args => (
 const defaultArgs = {
   'bordered': false,
   'open-single': undefined,
-  'uswds': true,
 };
 
 export const Default = Template.bind(null);
