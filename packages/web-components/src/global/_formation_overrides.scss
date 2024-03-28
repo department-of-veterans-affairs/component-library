@@ -327,6 +327,29 @@
   }
 }
 
+@supports ((-webkit-mask: url("")) or (mask: url(""))) {
+  .usa-alert--info,
+  .usa-alert--warning,
+  .usa-alert--success,
+  .usa-alert--error {
+    .usa-alert__body::before {
+      mask-size: rem-override(2rem) rem-override(2rem);
+    }
+  }
+
+  // Slim Styles
+  .usa-alert--info.usa-alert--slim,
+  .usa-alert--warning.usa-alert--slim,
+  .usa-alert--success.usa-alert--slim,
+  .usa-alert--error.usa-alert--slim {
+    .usa-alert__body::before {
+      mask-size: rem-override(1.5rem) rem-override(1.5rem);
+      top: 5px;
+    }
+  }
+}
+
+
 @media (min-width: 64em) {
   .usa-alert--info,
   .usa-alert--warning,

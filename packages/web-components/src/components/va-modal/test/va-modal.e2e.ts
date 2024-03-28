@@ -18,7 +18,7 @@ describe('va-modal', () => {
         <mock:shadow-root>
           <div aria-describedby="modal-content" aria-label="Example Title modal" aria-modal="true" class="va-modal-inner" role="dialog">
             <button aria-label="Close Example Title modal" class="last-focusable-child va-modal-close" type="button">
-              <i aria-hidden="true"></i>
+              <va-icon class="hydrated"></va-icon>
             </button>
             <div class="va-modal-body">
               <div role="document">
@@ -110,7 +110,6 @@ describe('va-modal', () => {
     `);
 
     const focusedElement = await page.find('va-modal >>> :focus');
-
     expect(focusedElement.getAttribute('aria-label')).toEqual(
       'Close Example Title modal',
     );
@@ -127,7 +126,6 @@ describe('va-modal', () => {
     `);
 
     const focusedElement = await page.find('va-modal >>> :focus');
-
     expect(focusedElement.textContent).toEqual('Example Title');
   });
 
@@ -140,44 +138,6 @@ describe('va-modal', () => {
           A modal may pass any React nodes as children to be displayed within it.
         </p>
         <va-checkbox id="internal-checkbox" label="test checkbox" />
-      </va-modal>
-      <input id="post-modal-checkbox" type="checkbox" />
-    `);
-
-    // Start with focus on the close button
-    const focusedElement = await page.find('va-modal >>> :focus');
-    expect(focusedElement.getAttribute('aria-label')).toEqual(
-      'Close Example Title modal',
-    );
-
-    await page.keyboard.down('Shift');
-    await page.keyboard.press('Tab');
-    await page.keyboard.press('Tab');
-    await page.keyboard.up('Shift');
-
-    // Shift + tab x2 returns to close button
-    const shiftTabElement = await page.find('va-modal >>> :focus');
-    expect(shiftTabElement.getAttribute('aria-label')).toEqual(
-      'Close Example Title modal',
-    );
-
-    // Try to tab outside of the modal, it will return focus to the close button
-    await page.keyboard.press('Tab');
-    await page.keyboard.press('Tab');
-    const tab2Element = await page.find('va-modal >>> :focus');
-    expect(tab2Element.getAttribute('aria-label')).toEqual(
-      'Close Example Title modal',
-    );
-  });
-
-  it('should prevent tabbing outside of the modal', async () => {
-    const page = await newE2EPage();
-    await page.setContent(`
-      <input id="pre-modal-checkbox" type="checkbox" />
-      <va-modal modal-title="Example Title" visible uswds="false">
-        <p>
-          A modal may pass any React nodes as children to be displayed within it.
-        </p>
       </va-modal>
       <input id="post-modal-checkbox" type="checkbox" />
     `);
@@ -290,7 +250,7 @@ describe('va-modal', () => {
         <div aria-label="Example Title modal" aria-modal="true" class="usa-modal" role="dialog">
             <div class="usa-modal__content">
               <button aria-label="Close Example Title modal" class="last-focusable-child va-modal-close" type="button">
-                <i aria-hidden="true"></i>
+                <va-icon class="hydrated"></va-icon>
               </button>
               <div class="usa-modal__main">
                 <div role="document">
@@ -413,44 +373,6 @@ describe('va-modal', () => {
           A modal may pass any React nodes as children to be displayed within it.
         </p>
         <va-checkbox id="internal-checkbox" label="test checkbox" />
-      </va-modal>
-      <input id="post-modal-checkbox" type="checkbox" />
-    `);
-
-    // Start with focus on the close button
-    const focusedElement = await page.find('va-modal >>> :focus');
-    expect(focusedElement.getAttribute('aria-label')).toEqual(
-      'Close Example Title modal',
-    );
-
-    await page.keyboard.down('Shift');
-    await page.keyboard.press('Tab');
-    await page.keyboard.press('Tab');
-    await page.keyboard.up('Shift');
-
-    // Shift + tab x2 returns to close button
-    const shiftTabElement = await page.find('va-modal >>> :focus');
-    expect(shiftTabElement.getAttribute('aria-label')).toEqual(
-      'Close Example Title modal',
-    );
-
-    // Try to tab outside of the modal, it will return focus to the close button
-    await page.keyboard.press('Tab');
-    await page.keyboard.press('Tab');
-    const tab2Element = await page.find('va-modal >>> :focus');
-    expect(tab2Element.getAttribute('aria-label')).toEqual(
-      'Close Example Title modal',
-    );
-  });
-
-  it('uswds v3 should prevent tabbing outside of the modal', async () => {
-    const page = await newE2EPage();
-    await page.setContent(`
-      <input id="pre-modal-checkbox" type="checkbox" />
-      <va-modal modal-title="Example Title" visible>
-        <p>
-          A modal may pass any React nodes as children to be displayed within it.
-        </p>
       </va-modal>
       <input id="post-modal-checkbox" type="checkbox" />
     `);

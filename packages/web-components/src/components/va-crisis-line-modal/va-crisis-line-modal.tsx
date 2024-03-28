@@ -1,5 +1,4 @@
 import { Component, Host, State, h, Element, Listen } from '@stencil/core';
-import arrowRightSvg from '../../assets/arrow-right-white.svg';
 import { CONTACTS } from '../../contacts';
 
 /**
@@ -48,8 +47,7 @@ export class VACrisisLineModal {
         ? '.last-focusable-child'
         : '[role="document"]';
       if (this.shifted) {
-        focusedChild = modal
-          ?.querySelector(query) as HTMLElement;
+        focusedChild = modal?.querySelector(query) as HTMLElement;
       } else {
         focusedChild = modal?.shadowRoot.querySelector(query) as HTMLElement;
       }
@@ -74,11 +72,11 @@ export class VACrisisLineModal {
               <span class="va-crisis-line-text">
                 Talk to the <strong>Veterans Crisis Line</strong> now
               </span>
-              <img
-                class="va-crisis-line-arrow"
-                src={arrowRightSvg}
-                aria-hidden="true"
-              />
+              <va-icon
+                class="va-icon__right-arrow"
+                icon="navigate_next"
+                size={4}
+              ></va-icon>
             </div>
           </button>
         </div>
@@ -90,16 +88,13 @@ export class VACrisisLineModal {
           large={true}
         >
           <p>
-            If you are a Veteran in crisis or concerned about one, connect
-            with our caring, qualified responders for confidential help.
-            Many of them are Veterans themselves.
+            If you are a Veteran in crisis or concerned about one, connect with
+            our caring, qualified responders for confidential help. Many of them
+            are Veterans themselves.
           </p>
           <ul class="va-crisis-panel-list">
             <li>
-              <i
-                class="fa fa-phone va-crisis-panel-icon"
-                aria-hidden="true"
-              />
+              <va-icon class="va-clm__icon" icon="phone" size={4}></va-icon>
               <span>
                 Call{' '}
                 <strong>
@@ -108,6 +103,7 @@ export class VACrisisLineModal {
               </span>
             </li>
             <li>
+              {/* FIXME: Waiting on Designers */}
               <i
                 class="fa fa-mobile-alt va-crisis-panel-icon"
                 aria-hidden="true"
@@ -120,10 +116,7 @@ export class VACrisisLineModal {
               </span>
             </li>
             <li>
-              <i
-                class="fa fa-comments va-crisis-panel-icon"
-                aria-hidden="true"
-              />
+              <va-icon icon="chat" class="va-clm__icon" size={4}></va-icon>
               <a
                 class="no-external-icon"
                 href="https://www.veteranscrisisline.net/get-help-now/chat/"
@@ -132,10 +125,7 @@ export class VACrisisLineModal {
               </a>
             </li>
             <li>
-              <i
-                class="fa fa-deaf va-crisis-panel-icon"
-                aria-hidden="true"
-              />
+              <va-icon icon="deaf" class="va-clm__icon" size={4}></va-icon>
               <p>
                 Call TTY if you have hearing loss{' '}
                 <strong>

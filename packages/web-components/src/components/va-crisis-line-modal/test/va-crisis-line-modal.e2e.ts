@@ -19,7 +19,7 @@ describe('va-crisis-line-modal', () => {
               </strong>
               now
             </span>
-            <img aria-hidden=\"true\" class=\"va-crisis-line-arrow\" src=\"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0NDQuODE5IDQ0NC44MTkiIHdpZHRoPSI0NDQuODE5IiBoZWlnaHQ9IjQ0NC44MTkiPjxwYXRoIGZpbGw9IiNmZmYiIGQ9Ik0zNTIuMDI1IDE5Ni43MTJMMTY1Ljg4NSAxMC44NDhDMTU5LjAyOCAzLjYxNSAxNTAuNDY4IDAgMTQwLjE4NSAwcy0xOC44NCAzLjYyLTI1LjY5NiAxMC44NDhsLTIxLjcgMjEuNDE2Yy03LjA0NSA3LjA0My0xMC41NjcgMTUuNjA0LTEwLjU2NyAyNS42OTIgMCA5Ljg5NyAzLjUyIDE4LjU2IDEwLjU2NiAyNS45OEwyMzEuNTQ0IDIyMi40MSA5Mi43ODUgMzYxLjE2OGMtNy4wNCA3LjA0My0xMC41NjMgMTUuNjA0LTEwLjU2MyAyNS42OTMgMCA5LjkgMy41MiAxOC41NjYgMTAuNTY0IDI1Ljk4bDIxLjcgMjEuNDE3YzcuMDQzIDcuMDQzIDE1LjYxMiAxMC41NjQgMjUuNjk3IDEwLjU2NCAxMC4wOSAwIDE4LjY1Ni0zLjUyIDI1LjY5Ny0xMC41NjRMMzUyLjAyNSAyNDguMzljNy4wNDYtNy40MjMgMTAuNTctMTYuMDg0IDEwLjU3LTI1Ljk4LjAwMi0xMC4wOS0zLjUyNC0xOC42NTUtMTAuNTctMjUuNjk4eiIvPjwvc3ZnPg==\">
+            <va-icon class="hydrated va-icon__right-arrow"></va-icon>
           </div>
         </button>
       </div>
@@ -29,7 +29,7 @@ describe('va-crisis-line-modal', () => {
         </p>
         <ul class=\"va-crisis-panel-list\">
           <li>
-            <i aria-hidden=\"true\" class=\"fa fa-phone va-crisis-panel-icon\"></i>
+            <va-icon class="hydrated va-clm__icon"></va-icon>
             <span>
               Call
               <strong>
@@ -48,13 +48,13 @@ describe('va-crisis-line-modal', () => {
             </span>
           </li>
           <li>
-            <i aria-hidden=\"true\" class=\"fa fa-comments va-crisis-panel-icon\"></i>
+            <va-icon class="hydrated va-clm__icon"></va-icon>
             <a class=\"no-external-icon\" href=\"https://www.veteranscrisisline.net/get-help-now/chat/\">
               Start a confidential chat
             </a>
           </li>
           <li>
-            <i aria-hidden=\"true\" class=\"fa fa-deaf va-crisis-panel-icon\"></i>
+            <va-icon class="hydrated va-clm__icon"></va-icon>
             <p>
               Call TTY if you have hearing loss
               <strong>
