@@ -84,11 +84,11 @@
 }
 
 .va-alert-close {
-  margin: 1.6rem;
+  margin: 1rem;
   padding: 0;
   width: auto;
   color: var(--vads-color-base-darker);
-  font-size: 2.25rem;
+  font-size: 1.40625rem;
   appearance: none;
   border: 0;
   cursor: pointer;
@@ -262,5 +262,5 @@ i.fa-times-circle::before {
 }
 
 :host([uswds='false'][closeable]:not([closeable='false'])) .alert {
-  padding-right: 5.7rem;
+  padding-right: 3.5625rem;
 }
