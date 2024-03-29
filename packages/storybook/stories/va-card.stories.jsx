@@ -5,7 +5,7 @@ import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
 const cardDocs = getWebComponentDocs('va-card');
 
 export default {
-  title: 'V1 Components/Card',
+  title: 'Components/Card',
   id: 'components/va-card',
   parameters: {
     componentSubtitle: `va-card web component`,
