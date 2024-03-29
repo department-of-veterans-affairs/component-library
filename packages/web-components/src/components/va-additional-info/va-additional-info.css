@@ -46,16 +46,17 @@ a {
   margin-top: 16px;
 }
 
-.additional-info-button va-icon {
+.additional-info-icon {
   display: inline-block;
   color: var(--vads-color-primary-alt-darkest);
   font-size: 16px;
   transform: rotate(90deg);
   transition: transform 0.15s linear;
   line-height: 1;
+  vertical-align: bottom;
 }
 
-a[aria-expanded='true'] .additional-info-button va-icon {
+a[aria-expanded='true'] .additional-info-icon {
   transform: rotate(270deg);
   transition: transform 0.15s linear;
 }
