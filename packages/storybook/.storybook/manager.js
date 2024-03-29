@@ -9,6 +9,9 @@ import { getMaturityScale } from '../stories/wc-helpers';
  * Return the maturity category matching a specific component name
  */
 const getMaturityCategory = (componentName) => {
+  // remove USWDS from the componentName for matching in component-docs.json
+  componentName = componentName.replace(' USWDS', '');
+
   const componentDocs = webComponentDocs.components.filter(comp => 
     comp.docsTags.some(tag => tag.text === componentName))[0];
   
@@ -25,7 +28,8 @@ addons.setConfig({
         item.parent === 'components' ||
         item.parent === 'components-icons' ||
         item.parent === 'deprecated' ||
-        item.parent === 'under-development'
+        item.parent === 'under-development' ||
+        item.parent === 'v1-components'
       ) {
         const maturityCategory = 
           maturityCategoryFromDocs ?? 
