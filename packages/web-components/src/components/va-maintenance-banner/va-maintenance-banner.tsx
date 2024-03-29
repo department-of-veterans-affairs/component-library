@@ -8,7 +8,7 @@ import {
 } from '../../utils/date-utils';
 
 /**
- * @componentName Maintenance Banner
+ * @componentName Banner - Maintenance
  * @maturityCategory caution
  * @maturityLevel available
  */

@@ -10,7 +10,7 @@ import {
 import vaSeal from '../../assets/va-seal.svg';
 
 /**
- * @componentName Header - minimal
+ * @componentName Header - Minimal
  * @maturityCategory caution
  * @maturityLevel candidate
  * @guidanceHref header/header-minimal
