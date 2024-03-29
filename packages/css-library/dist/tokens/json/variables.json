@@ -29,12 +29,27 @@
       "small-screen"
     ]
   },
-  "medium-screen": {
+  "medium-mobile": {
     "value": "640px",
     "filePath": "tokens/breakpoints.json",
     "isSource": true,
     "original": {
       "value": "640px"
+    },
+    "name": "medium-mobile",
+    "attributes": {
+      "category": "medium-mobile"
+    },
+    "path": [
+      "medium-mobile"
+    ]
+  },
+  "medium-screen": {
+    "value": "768px",
+    "filePath": "tokens/breakpoints.json",
+    "isSource": true,
+    "original": {
+      "value": "768px"
     },
     "name": "medium-screen",
     "attributes": {
