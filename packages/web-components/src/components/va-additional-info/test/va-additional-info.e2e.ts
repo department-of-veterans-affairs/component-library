@@ -241,11 +241,11 @@ describe('va-additional-info', () => {
       <va-additional-info trigger="More info" class="hydrated" uswds="">
         <mock:shadow-root>
           <a aria-controls="info" aria-expanded="false" role="button" tabindex="0">
-            <div class="additional-info-button">
+            <div>
               <span class="additional-info-title">
                 More info
               </span>
-              <va-icon class="hydrated"></va-icon>
+              <va-icon class="additional-info-icon hydrated"></va-icon>
             </div>
           </a>
           <div class="closed" id="info" style="--calc-max-height:calc(0px + 2rem);">
