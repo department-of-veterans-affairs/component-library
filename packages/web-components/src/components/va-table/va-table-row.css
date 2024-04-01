@@ -42,11 +42,11 @@
   }
 
   ::slotted([role='cell']:first-child) {
-    margin-top: 1.6rem;
+    margin-top: 1rem;
   }
 
   ::slotted([role='cell']:last-child) {
-    margin-bottom: 1.6rem;
+    margin-bottom: 1rem;
     border-bottom: 0;
   }
 
