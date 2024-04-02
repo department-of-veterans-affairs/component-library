@@ -57,7 +57,7 @@ const Template = ({
     ></va-segmented-progress-bar>
     <div
       className="schemaform-chapter-progress"
-      style={{ paddingLeft: '2rem' }}
+      style={{ paddingLeft: '1.25rem' }}
     >
       <div className="nav-header nav-header-schemaform">
         <h2 id="nav-form-header" className="vads-u-font-size--h4" tabIndex="-1">
