@@ -40,6 +40,7 @@ const Template = ({
       onPageSelect={handlePageSelect}
       showLastPage={showLastPage}
       uswds={uswds}
+      test="test"
     />
   );
 };
