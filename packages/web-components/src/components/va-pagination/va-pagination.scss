@@ -104,17 +104,17 @@ button {
 
 @media (max-width: 768px) {
   .pagination-inner {
-    width: 20rem;
+    width: 12.5rem;
   }
 
   .pagination-next {
-    margin-right: -3rem;
-    padding-left: 1rem;
+    margin-right: -1.875rem;
+    padding-left: .625rem;
   }
 
   .pagination-prev {
-    margin-left: -3rem;
-    padding-right: 1rem;
+    margin-left: -1.875rem;
+    padding-right: .625rem;
   }
 }
 
@@ -133,8 +133,8 @@ button {
 @media (min-width: 768px) {
   .pagination-next,
   .pagination-prev {
-    padding-left: 1rem;
-    padding-right: 1rem;
+    padding-left: .625rem;
+    padding-right: .625rem;
   }
 }
 

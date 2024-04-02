@@ -150,7 +150,6 @@ const WidthsTemplate = ({
 }) => {
   return (
     <>
-      <div></div>
       <va-text-input
         width="2xs"
         name={name}
