@@ -221,6 +221,7 @@ const Pagination = args => {
 
   return (
     <main>
+      <div></div>
       <va-table
         table-title={tableTitle}
         descending={descending}
