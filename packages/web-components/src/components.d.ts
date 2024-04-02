@@ -1125,6 +1125,10 @@ export namespace Components {
          */
         "label": string;
         /**
+          * An optional message that will be read by screen readers when the input is focused.
+         */
+        "messageAriaDescribedby"?: string;
+        /**
           * Name attribute for the select field.
          */
         "name": string;
@@ -3197,6 +3201,10 @@ declare namespace LocalJSX {
           * Text label for the field.
          */
         "label": string;
+        /**
+          * An optional message that will be read by screen readers when the input is focused.
+         */
+        "messageAriaDescribedby"?: string;
         /**
           * Name attribute for the select field.
          */
