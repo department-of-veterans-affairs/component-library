@@ -46,6 +46,7 @@ const Template = ({
     <div>
       <h1>Testing h1 heading</h1>
       <button onClick={openModal}>Click here to open modal</button>
+      <div></div>
       <VaModal
         clickToClose={clickToClose}
         disableAnalytics={disableAnalytics}
@@ -146,6 +147,7 @@ export const WithNestedWebComponents = ({
   const openModal = () => setIsVisible(true);
   return (
     <div>
+      <div></div>
       <h1>Testing h1 heading</h1>
       <button onClick={openModal}>Click here to open modal</button>
       <input id="pre-modal-input" type="checkbox" />
@@ -205,6 +207,7 @@ const ButtonPairTemplate = ({
   const openModal = () => setIsVisible(true);
   return (
     <div>
+      <div></div>
       <h1>Testing h1 heading</h1>
       <button onClick={openModal}>Click here to open modal</button>
       <VaModal
