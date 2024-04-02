@@ -47,6 +47,7 @@ const Template = args => {
   const columns = ['Document title', 'Description', 'Year'];
   return (
     <main>
+      <div></div>
       <va-table
         table-title={tableTitle}
         sort-column={sortColumn}
