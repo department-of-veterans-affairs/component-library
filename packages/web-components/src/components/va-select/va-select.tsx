@@ -85,7 +85,7 @@ export class VaSelect {
   @Prop() hint?: string;
 
   /**
-   * An optional message that will be read by screen readers when the input is focused.
+   * An optional message that will be read by screen readers when the select is focused.
    */
   @Prop() messageAriaDescribedby?: string;
 
@@ -185,8 +185,7 @@ export class VaSelect {
       `${messageAriaDescribedby ? 'input-message' : ''} ${
         error ? errorID : ''} ${
         hint ? 'input-hint' : ''}`.trim() || null; // Null so we don't add the attribute if we have an empty string
-    console.log({ariaDescribedbyIds})
-    console.log({messageAriaDescribedby})
+    
     if (uswds) {
       const labelClass = classnames({
         'usa-label': true,
