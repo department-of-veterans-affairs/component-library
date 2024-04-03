@@ -214,13 +214,13 @@ describe('va-select', () => {
   it('adds aria-describedby input-message id', async () => {
     const page = await newE2EPage();
     await page.setContent(`
-      <va-select label="A label" value="foo" enable-analytics aria-describedby-message="example message">
+      <va-select label="A label" value="foo" enable-analytics message-aria-describedby="example message">
         <option value="foo">Foo</option>
         <option value="bar">Bar</option>
       </va-select>
     `);
     const el = await page.find('va-select');
-    const inputEl = await page.find('va-select >>> input');
+    const inputEl = await page.find('va-select >>> select');
 
     // Render the example message aria-describedby id.
     expect(inputEl.getAttribute('aria-describedby')).not.toBeNull();

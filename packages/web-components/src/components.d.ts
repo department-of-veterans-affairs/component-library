@@ -1125,7 +1125,7 @@ export namespace Components {
          */
         "label": string;
         /**
-          * An optional message that will be read by screen readers when the input is focused.
+          * An optional message that will be read by screen readers when the select is focused.
          */
         "messageAriaDescribedby"?: string;
         /**
@@ -3202,7 +3202,7 @@ declare namespace LocalJSX {
          */
         "label": string;
         /**
-          * An optional message that will be read by screen readers when the input is focused.
+          * An optional message that will be read by screen readers when the select is focused.
          */
         "messageAriaDescribedby"?: string;
         /**
