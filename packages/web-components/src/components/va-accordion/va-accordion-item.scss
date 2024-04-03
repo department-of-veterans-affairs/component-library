@@ -72,9 +72,9 @@ button {
   padding: 0.9375rem 3.4375rem 0.9375rem 1.25rem;
   background-color: var(--vads-color-base-lightest);
   background-image: url('../../assets/minus.svg');
-  background-position: right 2rem center;
+  background-position: right 1.25rem center;
   background-repeat: no-repeat;
-  background-size: 1rem;
+  background-size: .938rem;
   display: block;
   /* This color assignment is for IE11 compatibility - the one in */
   /* the va-accordion's CSS with `:host` doesn't work well */
@@ -121,10 +121,10 @@ p.subheader {
 
 ::slotted([slot='icon']),
 ::slotted([slot='subheader-icon']){
-  width: 1rem;
-  margin-right: 1.5rem;
+  width: .625rem;
+  margin-right: .938rem;
 }
 
 ::slotted([slot='subheader-icon']) {
-  margin-top: 0.5rem;
+  margin-top: 0.313rem;
 }
