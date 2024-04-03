@@ -1,0 +1,14 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+# Get the current branch name
+BRANCH_NAME=$(git rev-parse --abbrev-ref HEAD)
+
+# Calculate the length of the branch name
+BRANCH_NAME_LENGTH=${#BRANCH_NAME}
+
+# Check if the length is greater than 37
+if [ $BRANCH_NAME_LENGTH -gt 37 ]; then
+  echo "Branch name length is greater than 37 characters."
+  exit 1
+fi
