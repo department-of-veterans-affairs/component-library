@@ -1,6 +1,10 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
+##
+# Check if the branch name is valid for generating Chromatic Storybook preview links
+##
+
 # Get the current branch name
 BRANCH_NAME=$(git rev-parse --abbrev-ref HEAD)
 
@@ -14,6 +18,7 @@ if [ $BRANCH_NAME_LENGTH -gt 37 ]; then
   exit 1
 fi
 
+# lowercase letters, numbers, and dashes only
 VALID_BRANCH_REGEX='^[a-z\d]+[a-z\d\-]*$'
 
 if [[ ! $BRANCH_NAME =~ $VALID_BRANCH_REGEX ]]; then
