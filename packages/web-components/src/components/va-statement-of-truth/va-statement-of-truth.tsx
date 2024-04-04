@@ -145,12 +145,7 @@ export class VaStatementOfTruth {
             I have read and accept the&nbsp;
             <a href="/privacy-policy/" target="_blank">
               privacy policy
-              {/* FIXME: Needs USWDS replacement icon */}
-              <i
-                class="fa-arrow-up-right-from-square"
-                aria-hidden="true"
-                role="img"
-              ></i>
+              <va-icon class="privacy-policy-icon" icon="launch" size={2}></va-icon>
               <span class="usa-sr-only">opens in a new window</span>
             </a>
             .

@@ -103,11 +103,11 @@ export class VACrisisLineModal {
               </span>
             </li>
             <li>
-              {/* FIXME: Waiting on Designers */}
-              <i
-                class="fa fa-mobile-alt va-crisis-panel-icon"
-                aria-hidden="true"
-              />
+              <va-icon
+                icon="phone_iphone"
+                class="va-clm__icon"
+                size={4}
+              ></va-icon>
               <span>
                 Text&nbsp;
                 <strong>
