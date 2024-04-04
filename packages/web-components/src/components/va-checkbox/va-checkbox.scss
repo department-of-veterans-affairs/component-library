@@ -32,7 +32,7 @@
 
 :host([uswds='false']) {
   --visible-checkbox-size: 1.25rem;
-  --visible-checkbox-top-margin: 0.14rem;
+  --visible-checkbox-top-margin: 0.0875rem;
 
   p {
     margin-top: 0;
@@ -101,12 +101,12 @@
 
   .required {
     color: var(--vads-color-secondary-dark);
-    margin: 0 0.35rem;
+    margin: 0 0.21875rem;
   }
 
   ::slotted([slot='description']) {
     margin-top: 0 !important;
-    margin-bottom: 1.2rem !important;
+    margin-bottom: 0.75rem !important;
   }
 }
 
