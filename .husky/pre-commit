@@ -13,3 +13,11 @@ if [ $BRANCH_NAME_LENGTH -gt 37 ]; then
   echo "Branch name length is greater than 37 characters."
   exit 1
 fi
+
+VALID_BRANCH_REGEX='^[a-z\d]+[a-z\d\-]*'
+
+if [[ ! $BRANCH_NAME =~ $VALID_BRANCH_REGEX ]]; then
+  echo "Invalid branch name, name must start with a lowercase letter or"
+  echo "number, and include only lowercase letters, numbers, and dashes."
+  exit 1
+fi
