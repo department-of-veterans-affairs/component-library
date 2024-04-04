@@ -1,0 +1,44 @@
+@use 'usa-table/src/styles/usa-table';
+@import '~@department-of-veterans-affairs/css-library/dist/tokens/scss/variables.scss';
+
+
+:host([uswds='true']) table, 
+:host([uswds='true']) caption {
+  font-size: 1.06 * $v3-font-base-size;
+}
+
+:host(:not([uswds='true'])) {
+  display: table;
+  font-family: var(--font-source-sans);
+  border-collapse: collapse;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+
+::slotted([slot='headers']) {
+  background: var(--vads-color-base-lightest);
+  font-weight: 700;
+}
+
+:host(:not([uswds='true'])) caption {
+  text-align: left;
+  padding: 0 0 0.5rem;
+  font-weight: 700;
+  font-size: 2rem;
+  font-family: var(--font-serif);
+  margin-bottom: 1.2rem;
+}
+
+@media screen and (max-width: 768px) {
+  :host(:not([uswds='true'])) thead {
+    display: none;
+  }
+
+  ::slotted(va-table-row) {
+    border-bottom: 1px solid var(--vads-color-gray-medium);
+  }
+  ::slotted(va-table-row):first-child {
+    border-top: 1px solid var(--vads-color-gray-medium);
+  }
+}

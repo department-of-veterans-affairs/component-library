@@ -1186,6 +1186,7 @@ export namespace Components {
         "uswds"?: boolean;
     }
     interface VaTable {
+        "borderless"?: boolean;
         /**
           * Whether the initial sort state will be descending or not.
          */
@@ -1194,12 +1195,17 @@ export namespace Components {
           * The zero-based index of the column to sort by (Doesn't work in IE11). Optional.
          */
         "sortColumn"?: number;
+        "tableData"?: string | string[][];
         /**
           * The title of the table
          */
         "tableTitle": string;
+        "uswds"?: boolean;
     }
     interface VaTableRow {
+        "isHeader"?: boolean;
+        "rowData"?: string | string[];
+        "uswds"?: boolean;
     }
     interface VaTelephone {
         /**
@@ -3283,6 +3289,7 @@ declare namespace LocalJSX {
         "uswds"?: boolean;
     }
     interface VaTable {
+        "borderless"?: boolean;
         /**
           * Whether the initial sort state will be descending or not.
          */
@@ -3291,12 +3298,17 @@ declare namespace LocalJSX {
           * The zero-based index of the column to sort by (Doesn't work in IE11). Optional.
          */
         "sortColumn"?: number;
+        "tableData"?: string | string[][];
         /**
           * The title of the table
          */
         "tableTitle"?: string;
+        "uswds"?: boolean;
     }
     interface VaTableRow {
+        "isHeader"?: boolean;
+        "rowData"?: string | string[];
+        "uswds"?: boolean;
     }
     interface VaTelephone {
         /**

@@ -205,4 +205,60 @@ describe('va-table', () => {
       expect(sortIcon.getAttribute('aria-label')).toEqual('descending');
     });
   });
+
+  describe('va-table v3', () => {
+    const tableData = '[["Document title","Description","Year"],["Bill of Rights","The first ten amendments of the U.S. Constitution guaranteeing rights and freedoms.","1791"],["Declaration of Sentiments","A document written during the Seneca Falls Convention outlining the rights that American women should be entitled to as citizens.","1848"]]';
+
+    it('renders borderless table', async () => {
+      const page = await newE2EPage();
+      await page.setContent(`
+        <va-table table-data='${tableData}' uswds>
+          Caption for a table
+        </va-table>
+      `);
+      const element = await page.find('va-table');
+      expect(element).toEqualHtml(`
+      <va-table uswds table-data='${tableData}' class="hydrated">
+        <mock:shadow-root>
+          <table class="usa-table usa-table--borderless">
+            <caption>
+              <slot></slot>
+            </caption>
+            <thead>
+              <tr>
+                <th scope="col">Document title</th>
+                <th scope="col">Description</th>
+                <th scope="col">Year</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">Bill of Rights</th>
+                <td>The first ten amendments of the U.S. Constitution guaranteeing rights and freedoms.</td>
+                <td>1791</td>
+              </tr>
+              <tr>
+                <th scope="row">Declaration of Sentiments</th>
+                <td>A document written during the Seneca Falls Convention outlining the rights that American women should be entitled to as citizens.</td>
+                <td>1848</td>
+              </tr>
+            </tbody>
+          </table>
+        </mock:shadow-root>
+        Caption for a table
+      </va-table>
+      `);
+    });
+
+    it('passes an axe check', async () => {
+      const page = await newE2EPage();
+      await page.setContent(`
+        <va-table table-data='${tableData}' uswds>
+          Caption for a table
+        </va-table>
+      `);
+
+      await axeCheck(page);
+    });
+  })
 });
