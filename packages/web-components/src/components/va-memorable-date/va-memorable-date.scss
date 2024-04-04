@@ -69,7 +69,7 @@
 // Resets error border to not show for 'any' error, so we can only show for 'specific' errors
 :host([error][uswds='false']:not([error=''])) va-select::part(select),
 :host([error][uswds='false']:not([error=''])) va-text-input::part(input) {
-  border: 0.1rem solid var(--vads-color-base-dark);
+  border: 0.063rem solid var(--vads-color-base-dark);
 }
 
 :host([error='month-range'][uswds='false']:not([error='']))

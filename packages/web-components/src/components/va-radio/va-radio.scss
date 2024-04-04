@@ -31,7 +31,7 @@
 
 .required {
   color: var(--vads-color-secondary-dark);
-  margin: 0 0.35rem;
+  margin: 0 0.219rem;
 }
 
 :host([uswds='false']) fieldset {
@@ -42,7 +42,7 @@
 
 :host([uswds='false']) legend {
   display: block;
-  max-width: 46rem;
+  max-width: 28.75rem;
   font-weight: inherit;
   font-size: inherit;
   color: inherit;

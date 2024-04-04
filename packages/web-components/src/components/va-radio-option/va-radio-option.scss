@@ -47,7 +47,7 @@ va-radio-option input[disabled='true']:focus + label.usa-radio__label::before {
 /* Original Components Styles. */
 
 va-radio-option[uswds='false'] {
-  margin-top: 1rem;
+  margin-top: .625rem;
   input {
     appearance: none;
   }

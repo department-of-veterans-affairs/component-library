@@ -55,15 +55,15 @@ span.required {
 }
 
 :host([uswds='false']) label {
-  margin-top: 3rem;
-  max-width: 46rem;
+  margin-top: 1.875rem;
+  max-width: 28.75rem;
   display: block;
 }
 
 :host([uswds='false']) select {
   background-color: var(--vads-color-white);
   background-image: url('../../assets/arrow-both.svg');
-  background-position: right 1.3rem center;
+  background-position: right 0.813rem center;
   background-repeat: no-repeat;
   background-size: 0.625rem;
   font-family: var(--font-source-sans);

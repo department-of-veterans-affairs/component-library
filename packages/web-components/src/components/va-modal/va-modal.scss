@@ -13,7 +13,7 @@
 
 .usa-modal-alert {
   padding: 0px; // => Due to icons
-  margin-left: 1.6rem;
+  margin-left: 1rem;
 }
 
 .usa-modal__heading,
@@ -132,7 +132,7 @@
   height: 100%;
   left: 0;
   overflow-y: auto;
-  padding: 1.5rem;
+  padding: 0.938rem;
   position: fixed;
   scroll-behavior: smooth;
   text-align: center;
@@ -154,7 +154,7 @@
   box-sizing: border-box;
   cursor: auto;
   display: inline-block;
-  margin: 1.25rem auto;
+  margin: 0.781rem auto;
   max-width: 25rem;
   position: relative;
   text-align: left;
@@ -337,7 +337,7 @@ i::before {
   }
 
   .va-modal-alert .alert-actions button + button {
-    margin: 1.6rem 0 0 0;
+    margin: 1rem 0 0 0;
   }
 }
 
@@ -356,7 +356,7 @@ i::before {
   }
 
   .va-modal-alert .alert-actions button + button {
-    margin: 1.6rem 0 0 0;
+    margin: 1rem 0 0 0;
   }
 
   .usa-modal--lg .usa-modal__main {
