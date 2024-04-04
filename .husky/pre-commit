@@ -9,6 +9,7 @@ BRANCH_NAME_LENGTH=${#BRANCH_NAME}
 
 # Check if the length is greater than 37
 if [ $BRANCH_NAME_LENGTH -gt 37 ]; then
+  echo "Length of the current branch name is: $BRANCH_NAME_LENGTH"
   echo "Branch name length is greater than 37 characters."
   exit 1
 fi
