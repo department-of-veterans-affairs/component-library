@@ -308,6 +308,7 @@ const icons = [
   "upload_file",
   "verified",
   "verified_user",
+  "videocam",
   "visibility",
   "visibility_off",
   "volume_off",
