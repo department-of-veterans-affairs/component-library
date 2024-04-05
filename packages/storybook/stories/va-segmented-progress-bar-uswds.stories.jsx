@@ -6,7 +6,7 @@ const segmentedProgressBarDocs = getWebComponentDocs(
 );
 
 export default {
-  title: 'USWDS/Progress bar - segmented USWDS',
+  title: 'Components/Progress bar - segmented USWDS',
   id: 'uswds/va-segmented-progress-bar',
   parameters: {
     componentSubtitle: `va-segmented-progress-bar web component`,
@@ -26,8 +26,8 @@ const Template = ({
   centeredLabels,
   counters,
   headerLevel,
-  progressTerm
-
+  progressTerm,
+  'use-div': useDiv,
 }) => (
   // Wrapper for spacing when viewing in storybook
   // Component can be used without it
@@ -38,12 +38,12 @@ const Template = ({
       total={total}
       label={label}
       heading-text={headingText}
-      uswds
       labels={labels}
       centered-labels={centeredLabels}
       counters={counters}
       header-level={headerLevel}
       progress-term={progressTerm}
+      use-div={useDiv}
     ></va-segmented-progress-bar>
   </div>
 );
@@ -56,7 +56,8 @@ const defaultArgs = {
   'heading-text': 'VA Benefits',
   'labels': undefined,
   'centered-labels': undefined,
-  'counters': undefined
+  'counters': undefined,
+  'use-div': false,
 };
 
 export const Default = Template.bind(null);

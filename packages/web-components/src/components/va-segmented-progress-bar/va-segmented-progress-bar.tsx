@@ -37,7 +37,7 @@ export class VaSegmentedProgressBar {
   /**
   * Whether or not the component will use USWDS v3 styling.
   */
-  @Prop() uswds?: boolean;
+  @Prop() uswds?: boolean = true;
 
   /**
   * Header level for button wrapper. Must be between 1 and 6 (v3 only)
@@ -70,6 +70,11 @@ export class VaSegmentedProgressBar {
   @Prop() headingText?: string;
 
   /**
+   * When true, this makes the segmented-progress-bar use a div instead of a heading (v3 only)
+   */
+  @Prop() useDiv?: boolean;
+
+  /**
    * The event used to track usage of the component. This is emitted when the
    * component renders and enableAnalytics is true.
    */
@@ -94,7 +99,19 @@ export class VaSegmentedProgressBar {
   }
 
   render() {
-    const { current, total, label = `Step ${current} of ${total}`, uswds, labels, centeredLabels, counters, headingText, headerLevel, progressTerm } = this;
+    const {
+      current,
+      total,
+      label = `Step ${current} of ${total}`,
+      uswds,
+      labels,
+      centeredLabels,
+      counters,
+      headingText,
+      headerLevel,
+      progressTerm,
+      useDiv,
+    } = this;
     let labelsArray;
     if (labels) {
       labelsArray = labels.split(';');
@@ -103,7 +120,8 @@ export class VaSegmentedProgressBar {
 
     if (uswds) {
 
-      const Tag = `h${headerLevel}`;
+      // eslint-disable-next-line i18next/no-literal-string
+      const Tag = useDiv ? `div` : `h${headerLevel}`;
 
       const indicatorClass = classNames({
         'usa-step-indicator': true,
@@ -137,7 +155,6 @@ export class VaSegmentedProgressBar {
                           </span>
                         ) : null
                       }
-                      
                     </li>
                   ))}
                 </ol>
@@ -178,9 +195,6 @@ export class VaSegmentedProgressBar {
                 />
               ))}
             </div>
-            <span aria-atomic="true" aria-live="polite" class="sr-only">
-              {progressTerm} {current} of {total}
-            </span>
           </div>
         </Host>
       )

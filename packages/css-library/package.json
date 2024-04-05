@@ -1,18 +1,21 @@
 {
   "name": "@department-of-veterans-affairs/css-library",
-  "private": true,
+  "version": "0.5.1",
   "packageManager": "yarn@3.2.0",
   "files": [
-    "dist/*.css"
+    "dist/**/*.css",
+    "dist/**/*.scss",
+    "dist/**/*.json"
   ],
   "scripts": {
     "build:tokens": "style-dictionary build",
     "build:stylesheets": "sass --load-path=../../node_modules/@uswds/uswds/packages/ src/stylesheets:dist/",
     "build:minify": "yarn build:stylesheets --style compressed --no-source-map",
-    "build": "yarn build:tokens && yarn build:stylesheets"
+    "build": "yarn run copy && yarn build:tokens && yarn build:stylesheets",
+    "copy": "node ./copy-uswds-color-tokens.js"
   },
   "devDependencies": {
-    "@uswds/uswds": "^3.5.0",
+    "@uswds/uswds": "^3.7.1",
     "sass": "^1.64.1",
     "style-dictionary": "^3.8.0"
   },

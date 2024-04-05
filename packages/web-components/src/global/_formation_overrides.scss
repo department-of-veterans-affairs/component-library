@@ -62,6 +62,9 @@
       left: rem-override(0.5rem);
     }
   }
+  &:focus+[class*=__label]::before {
+    outline-offset: rem-override(0.25rem);
+  }
 }
 
 .usa-input, .usa-select, .usa-textarea {
@@ -114,7 +117,7 @@
 }
 
 .usa-legend {
-  color: $v3-color-base-darkest;
+  color: $vads-color-base;
 }
 
 .usa-select {
@@ -152,7 +155,7 @@
   margin-right: rem-override(0.5rem);
   padding: rem-override(0.75rem) rem-override(1.25rem);
 
-  
+
   &--big {
     border-radius: rem-override(0.25rem);
     font-size: rem-override(1.46rem);
@@ -494,5 +497,92 @@
 @media (min-width: 40em) {
   .usa-pagination__next-page {
     margin-left: rem-override(1.25rem);
+  }
+}
+
+.usa-search {
+  font-size: rem-override(1.06rem);
+}
+
+@media (min-width: 30em) {
+  .usa-search [type="submit"] {
+    padding-left: rem-override(1rem);
+    padding-right: rem-override(1rem);
+  }
+}
+
+.usa-search [type="submit"] {
+  height: rem-override(2rem);
+  width: rem-override(3rem);
+}
+
+[type="search"], .usa-search__input {
+  height: rem-override(2rem);
+  font-size: rem-override(1rem);
+}
+
+.usa-input {
+  max-width: rem-override(30rem);
+  padding: rem-override(0.5rem);
+}
+
+@media (min-width: 30em) {
+  .usa-search--big [type="search"], .usa-search--big .usa-search__input {
+    font-size: rem-override(1.06rem);
+    height: rem-override(3rem)
+  }
+}
+
+
+@media (min-width: 30em) {
+  .usa-search--big [type="submit"], .usa-search--big .usa-search__submit {
+    padding-left: rem-override(2rem);
+    padding-right: rem-override(2rem);
+    font-size: rem-override(1.46rem);
+    height: rem-override(3rem);
+  }
+}
+
+.usa-search--small [type="submit"], .usa-search--small .usa-search__submit {
+  padding-left: rem-override(0.75rem);
+  padding-right: rem-override(0.75rem);
+  min-width: rem-override(3rem);
+}
+
+.usa-search--small .usa-search__submit-icon {
+  height: rem-override(1.5rem);
+  width: rem-override(1.5rem);
+}
+
+.usa-file-input {
+  max-width: rem-override(30rem);
+
+  &__target {
+    font-size: rem-override(1rem);
+    margin-top: rem-override(0.5rem);
+  }
+
+  &__instructions {
+    padding: rem-override(2rem) rem-override(1rem);
+  }
+
+  &__preview {
+    padding: rem-override(0.25rem) rem-override(0.5rem);
+    font-size: rem-override(0.87rem);
+  }
+
+  &__preview-heading {
+    padding: rem-override(0.5rem);
+  }
+
+  &__preview-image {
+    height: rem-override(2.5rem);
+    margin-right: rem-override(0.5rem);
+    width: rem-override(2.5rem);
+    background-size: rem-override(1.5rem);
+  }
+
+  .usa-file-input__input[type] {
+    padding: rem-override(0.5rem);
   }
 }

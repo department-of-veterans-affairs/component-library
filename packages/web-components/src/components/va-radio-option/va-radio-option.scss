@@ -5,86 +5,105 @@
 
 @import '../../global/formation_overrides';
 
+va-radio-option label {
+  max-width: 320px;
+  box-sizing: border-box;
+}
 
 .usa-radio {
   background: transparent;
 }
 
-:host {
+va-radio-option {
   display: block;
   margin-top: 12px;
 }
 
-:host(:focus) {
+input[type=radio].usa-radio__input {
+  margin-left: unset;
+  opacity: unset;
+  right: auto;
+  left: -999em;
+}
+
+va-radio-option input:focus {
   outline: none !important;
 }
 
-:host(:focus) label.usa-radio__label::before {
-  outline: 2px solid var(--color-gold-light);
-  outline-offset: 4px;
+// Formation override
+va-radio-option label.usa-radio__label::before {
+  box-shadow: rgb(27, 27, 27) 0px 0px 0px 2px;
+  height: 20px;
+  width: 20px;
+  margin-left: 2px;
 }
 
-:host([disabled='true']:focus) label.usa-radio__label::before {
+va-radio-option .usa-radio__input:focus + [class*='__label']::before {
+  outline: 2px solid var(--vads-color-action-focus-on-light);
+}
+
+va-radio-option input[disabled='true']:focus + label.usa-radio__label::before {
   outline: none;
 }
 
 /* Original Components Styles. */
 
-@import '../../mixins/inputs.css';
-
-:host(:not([uswds])) {
+va-radio-option[uswds='false'] {
   margin-top: 1rem;
+  input {
+    appearance: none;
+  }
+
+  label {
+    box-sizing: border-box;
+    outline: none;
+    display: flex;
+    align-items: baseline;
+    margin: 0;
+    max-width: 320px;
+    width: auto;
+    padding-left: 6px;
+  }
+
+  label::before {
+    box-sizing: border-box;
+    border-radius: 100%;
+    box-shadow: 0 0 0 2px var(--vads-color-white), 0 0 0 3px var(--vads-color-gray-medium);
+    height: 1.4rem;
+    line-height: 1.4rem;
+    margin-right: 1rem;
+    width: 1.4rem;
+    min-width: 1.4rem;
+    max-width: 1.4rem;
+    background: var(--vads-color-white);
+    background-color: var(--vads-color-white);
+    content: '\A0';
+    display: inline-block;
+  }
 }
 
-:host(:not([uswds])) label {
-  box-sizing: border-box;
-  outline: none;
-  display: flex;
-  align-items: baseline;
-  margin: 0;
-  max-width: 320px;
-  width: auto;
-  padding-left: 6px;
+va-radio-option[uswds='false'][aria-checked='true'] label::before {
+  background-color: var(--vads-color-primary);
+  box-shadow: 0 0 0 2px var(--vads-color-white), 0 0 0 4px var(--vads-color-primary);
 }
 
-:host(:not([uswds])) label::before {
-  box-sizing: border-box;
-  border-radius: 100%;
-  box-shadow: 0 0 0 2px var(--color-white), 0 0 0 3px var(--color-gray-medium);
-  height: 1.4rem;
-  line-height: 1.4rem;
-  margin-right: 1rem;
-  width: 1.4rem;
-  min-width: 1.4rem;
-  max-width: 1.4rem;
-  background: var(--color-white);
-  background-color: var(--color-white);
-  content: '\A0';
-  display: inline-block;
-}
-
-:host(:not([uswds])[aria-checked='true']) label::before {
-  background-color: var(--color-primary);
-  box-shadow: 0 0 0 2px var(--color-white), 0 0 0 4px var(--color-primary);
-}
-
-:host(:not([uswds]):focus) label::before {
-  outline: 2px solid var(--color-gold-light);
+va-radio-option[uswds='false']:focus label::before {
+  outline: 2px solid var(--vads-color-action-focus-on-light);
   outline-offset: 6px;
 }
 
-:host(:not([uswds])) .description {
+va-radio-option[uswds='false'] .description {
   display: block;
   margin-top: 5px;
 }
 
-:host(:not([uswds])[tile='true']) label {
+va-radio-option[uswds='false'][tile='true'] label {
   padding: 12px 16px 12px 12px;
-  border: 2px solid var(--color-gray-light);
+  border: 2px solid var(--vads-color-base-light);
   border-radius: 0.25em;
 }
 
-:host(:not([uswds])[tile='true'][aria-checked='true']) label {
-  border: 2px solid var(--color-primary-alt-darkest);
-  background: var(--color-gray-cool-light);
+va-radio-option[uswds='false'][tile='true'][aria-checked='true'] label {
+  border: 2px solid var(--vads-color-primary-alt-darkest);
+  background: var(--vads-color-gray-cool-light);
 }

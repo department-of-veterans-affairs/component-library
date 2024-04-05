@@ -1,66 +1,258 @@
 {
-  "color": {
-    "base": { "value": "#212121"},
-    "white": { "value": "#ffffff"},
-    "black": { "value": "#000000"},
-    "orange": { "value": "#eb7f29"},
-    "link-default": { "value": "#004795"},
-    "link-visited": { "value": "#4c2c92"},
-    "warning-message": { "value": "#fac922"},
-    "gibill-accent": { "value": "#fff1d2"},
-    "primary": {
-      "*": { "value": "#0071bb"},
-      "darker": { "value": "#003e73"},
-      "darkest": { "value": "#112e51"},
-      "alt": {
-        "*": { "value": "#02bfe7"},
-        "dark": { "value": "#00a6d2"},
-        "darkest": { "value": "#046b99"},
-        "light": { "value": "#9bdaf1"},
-        "lightest": { "value": "#e1f3f8"}
-      }
-    },
-    "secondary": {
-      "*": { "value": "#e31c3d"},
-      "dark": { "value": "#cd2026"},
-      "darkest": { "value": "#981b1e"},
-      "light": { "value": "#e59393"},
-      "lightest": { "value": "#f9dede"}
-    },
-    "gray": {
-      "*": { "value": "#5b616b"},
-      "dark": { "value": "#323a45"},
-      "medium": { "value": "#757575"},
-      "light": { "value": "#aeb0b5"},
-      "light-alt": { "value": "#eeeeee"},
-      "lighter": { "value": "#d6d7d9"},
-      "lightest": { "value": "#f1f1f1"},
-      "warm-dark": { "value": "#494440"},
-      "warm-light": { "value": "#e4e2e0"},
-      "cool-light": { "value": "#dce4ef"}
-    },
-    "green": {
-      "*": { "value": "#2e8540"},
-      "dark": { "value": "#1e5f2f"},
-      "darker": { "value": "#195c27"},
-      "darkest": { "value": "#0f3f1f"},
-      "light": { "value": "#7dbf7c"},
-      "lighter": { "value": "#94bfa2"},
-      "lightest": { "value": "#e7f4e4"}
-    },
-    "gold": {
-      "*": { "value": "#fdb81e"},
-      "light": { "value": "#f9c642"},
-      "lighter": { "value": "#fad980"},
-      "lightest": { "value": "#fff1d2"}
-    }
+  "color-link-default-hover": { 
+      "alpha": "0.05",
+      "value": "rgba({uswds-system-color-gray-100}, {color-link-default-hover.alpha})"
   },
-  "v3-color": {
-    "error": {
-      "dark": { "value": "#b50909"}
-    },
-    "base": {
-      "darkest": { "value": "#1B1B1B"}
-    }
+  "vads-button-color-background-primary-alt-active-on-light": {
+    "*": { "value": "{uswds-system-color-green-cool-vivid-70}"}
+  },
+  "vads-button-color-background-secondary-on-light": {
+    "*": { "value": "#ffffff" }
+  },
+  "vads-button-color-text-primary-alt-on-light": {
+    "*": { "value": "#ffffff" }
+  },
+  "vads-button-color-text-primary-on-light": {
+    "*": { "value": "#ffffff" }
+  },
+  "vads-input-background-color-on-light": {
+    "*": {"value": "#ffffff" }
+  },
+  "vads-color-white": {
+    "*": {"value": "#ffffff"}
+  },
+  "vads-label-hint-text-color-on-light": {
+    "*": { "value": "{uswds-system-color-gray-50}" }
+  },
+  "vads-process-list-color-text-pending-on-light": {
+    "*": { "value": "{uswds-system-color-gray-50}" }
+  },
+  "vads-color-gray-medium": {
+    "*": { "value": "{uswds-system-color-gray-50}" }
+  },
+  "vads-color-gray-light-alt": {
+    "*": { "value": "{uswds-system-color-gray-cool-5}" }
+  },
+  "vads-color-gray-warm-light": {
+    "*": { "value": "{uswds-system-color-gray-warm-10}" }
+  },
+  "vads-color-gray-warm-dark": {
+    "*": { "value": "{uswds-system-color-gray-warm-70}"}
+  },
+  "vads-color-gray-cool-light": {
+    "*": { "value": "{uswds-system-color-blue-warm-10}" }
+  },
+  "vads-color-action-focus-on-light": {
+    "*": { "value": "{uswds-system-color-yellow-vivid-20}" }
+  },
+  "vads-color-base": {
+    "*": { "value": "{uswds-system-color-gray-90}" }
+  },
+  "vads-color-base-dark": {
+    "*": { "value": "{uswds-system-color-gray-cool-60}" }
+  },
+  "vads-color-base-darker": {
+    "*": { "value": "{uswds-system-color-gray-cool-70}" }
+  },
+  "vads-color-base-darkest": {
+    "*": { "value": "{uswds-system-color-gray-90}" }
+  },
+  "vads-color-base-light": {
+    "*": { "value": "{uswds-system-color-gray-cool-30}" }
+  },
+  "vads-color-base-lighter": {
+    "*": { "value": "{uswds-system-color-gray-cool-10}" }
+  },
+  "vads-color-base-lightest": {
+    "*": { "value": "{uswds-system-color-gray-5}" }
+  },
+  "vads-color-emergency": {
+    "*": { "value": "{uswds-system-color-red-warm-vivid-60}"}
+  },
+  "vads-color-emergency-dark": {
+    "*": { "value": "{uswds-system-color-red-warm-80}"}
+  },
+  "vads-color-error": {
+    "*": { "value": "{uswds-system-color-red-warm-vivid-50}"}
+  },
+  "vads-color-error-dark": {
+    "*": { "value": "{uswds-system-color-red-cool-vivid-60}"}
+  },
+  "vads-color-error-darker": {
+    "*": { "value": "{uswds-system-color-red-70}"}
+  },
+  "vads-color-error-light": {
+    "*": { "value": "{uswds-system-color-red-warm-vivid-30}"}
+  },
+  "vads-color-error-lighter": {
+    "*": { "value": "{uswds-system-color-red-warm-10}"}
+  },
+  "vads-color-gibill-accent": {
+    "*": { "value": "{uswds-system-color-gold-vivid-5}"}
+  },
+  "vads-color-hub-burials": {
+    "*": { "value": "{uswds-system-color-blue-50}"}
+  },
+  "vads-color-hub-careers": {
+    "*": { "value": "{uswds-system-color-orange-warm-50}"}
+  },
+  "vads-color-hub-disability": {
+    "*": { "value": "{uswds-system-color-red-60}"}
+  },
+  "vads-color-hub-education": {
+    "*": { "value": "{uswds-system-color-blue-warm-vivid-80}"}
+  },
+  "vads-color-hub-health-care": {
+    "*": { "value": "{uswds-system-color-indigo-cool-60}"}
+  },
+  "vads-color-hub-housing": {
+    "*": { "value": "{uswds-system-color-gold-50}"}
+  },
+  "vads-color-hub-life-insurance": {
+    "*": { "value": "{uswds-system-color-green-warm-50}"}
+  },
+  "vads-color-hub-pension": {
+    "*": { "value": "{uswds-system-color-green-cool-50}"}
+  },
+  "vads-color-hub-records": {
+    "*": { "value": "{uswds-system-color-green-warm-50}"}
+  },
+  "vads-color-hub-service-member": {
+    "*": { "value": "{uswds-system-color-blue-warm-vivid-80}"}
+  },
+  "vads-color-hub-family-member": {
+    "*": { "value": "{uswds-system-color-blue-warm-vivid-80}"}
+  },
+  "vads-color-info": {
+    "*": { "value": "{uswds-system-color-cyan-vivid-30}"}
+  },
+  "vads-color-info-dark": {
+    "*": { "value": "{uswds-system-color-cyan-vivid-40}"}
+  },
+  "vads-color-info-darker": {
+    "*": { "value": "{uswds-system-color-blue-cool-60}"}
+  },
+  "vads-color-info-light": {
+    "*": { "value": "{uswds-system-color-cyan-20}"}
+  },
+  "vads-color-info-lighter": {
+    "*": { "value": "{uswds-system-color-cyan-5}"}
+  },
+  "vads-color-ink": {
+    "*": { "value": "{uswds-system-color-gray-90}"}
+  },
+  "vads-color-inset-bg": {
+    "*": { "value": "{uswds-system-color-cyan-5}"}
+  },
+  "vads-color-link": {
+    "*": { "value": "{uswds-system-color-blue-vivid-60}"}
+  },
+  "vads-color-link-active": {
+    "*": { "value": "{uswds-system-color-blue-vivid-70}"}
+  },
+  "vads-color-link-visited": {
+    "*": { "value": "{uswds-system-color-violet-vivid-70}"}
+  },
+  "vads-color-primary": {
+    "*": { "value": "{uswds-system-color-blue-vivid-60}"}
+  },
+  "vads-color-primary-alt": {
+    "*": { "value": "{uswds-system-color-cyan-vivid-30}"}
+  },
+  "vads-color-primary-alt-dark": {
+    "*": { "value": "{uswds-system-color-blue-cool-vivid-40}"}
+  },
+  "vads-color-primary-alt-darkest": {
+    "*": { "value": "{uswds-system-color-blue-cool-vivid-60}"}
+  },
+  "vads-color-primary-alt-light": {
+    "*": { "value": "{uswds-system-color-blue-cool-vivid-20}"}
+  },
+  "vads-color-primary-alt-lightest": {
+    "*": { "value": "{uswds-system-color-blue-cool-vivid-5}"}
+  },
+  "vads-color-primary-dark": {
+    "*": { "value": "{uswds-system-color-blue-warm-vivid-70}"}
+  },
+  "vads-color-primary-darker": {
+    "*": { "value": "{uswds-system-color-blue-warm-vivid-80}"}
+  },
+  "vads-color-primary-light": {
+    "*": { "value": "{uswds-system-color-blue-30}"}
+  },
+  "vads-color-primary-lighter": {
+    "*": { "value": "{uswds-system-color-blue-10}"}
+  },
+  "vads-color-secondary": {
+    "*": { "value": "{uswds-system-color-red-50}"}
+  },
+  "vads-color-secondary-dark": {
+    "*": { "value": "{uswds-system-color-red-vivid-60}"}
+  },
+  "vads-color-secondary-darkest": {
+    "*": { "value": "{uswds-system-color-red-vivid-70}"}
+  },
+  "vads-color-secondary-light": {
+    "*": { "value": "{uswds-system-color-red-30}"}
+  },
+  "vads-color-secondary-lightest": {
+    "*": { "value": "{uswds-system-color-red-cool-10v}"}
+  },
+  "vads-color-success": {
+    "*": { "value": "{uswds-system-color-green-cool-vivid-40}"}
+  },
+  "vads-color-success-dark": {
+    "*": { "value": "{uswds-system-color-green-cool-vivid-50}"}
+  },
+  "vads-color-success-darker": {
+    "*": { "value": "{uswds-system-color-green-cool-vivid-60}"}
+  },
+  "vads-color-success-light": {
+    "*": { "value": "{uswds-system-color-green-cool-vivid-20}"}
+  },
+  "vads-color-success-lighter": {
+    "*": { "value": "{uswds-system-color-green-cool-5}"}
+  },
+  "vads-color-green-light": {
+    "*": { "value": "{uswds-system-color-green-cool-40}"}
+  },
+  "vads-color-va-accent": {
+    "*": { "value": "{uswds-system-color-yellow-50}"}
+  },
+  "vads-color-warning": {
+    "*": { "value": "{uswds-system-color-gold-vivid-20}"}
+  },
+  "vads-color-warning-dark": {
+    "*": { "value": "{uswds-system-color-gold-vivid-30}"}
+  },
+  "vads-color-warning-darker": {
+    "*": { "value": "{uswds-system-color-gold-vivid-50}"}
+  },
+  "vads-color-warning-light": {
+    "*": { "value": "{uswds-system-color-yellow-vivid-10}"}
+  },
+  "vads-color-warning-lighter": {
+    "*": { "value": "{uswds-system-color-yellow-5}"}
+  },
+  "vads-color-gold-lighter": {
+    "*": { "value": "{uswds-system-color-gold-vivid-10}"}
+  },
+  "vads-color-gold-lightest": {
+    "*": { "value": "{uswds-system-color-gold-vivid-5}"}
+  },
+  "vads-color-black": {
+    "*":  { "value": "{uswds-system-color-gray-100}"}
+  },
+  "vads-color-green-lighter": {
+    "*": { "value": "{uswds-system-color-green-cool-20}"}
+  },
+  "vads-color-blue-cool": {
+    "*": { "value": "{uswds-system-color-blue-warm-60}"}
+  },
+  "vads-color-blue-cool-light": {
+    "*": { "value": "{uswds-system-color-blue-warm-50}"}
+  },
+  "vads-color-blue-cool-lightest": {
+    "*": { "value": "{uswds-system-color-blue-warm-30}"}
   }
 }

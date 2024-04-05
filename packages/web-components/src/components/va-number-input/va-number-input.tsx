@@ -11,6 +11,13 @@ import {
 } from '@stencil/core';
 import classnames from 'classnames';
 import i18next from 'i18next';
+import { Build } from '@stencil/core';
+import { getHeaderLevel } from '../../utils/utils';
+
+if (Build.isTesting) {
+  // Make i18next.t() return the key instead of the value
+  i18next.init({ lng: 'cimode' });
+}
 
 /**
  * @nativeHandler onInput
@@ -102,7 +109,22 @@ export class VaNumberInput {
   /**
    * Whether or not the component will use USWDS v3 styling.
    */
-  @Prop() uswds?: boolean = false;
+  @Prop() uswds?: boolean = true;
+
+  /**
+   * Enabling this will add a heading and description for integrating into the forms pattern. Accepts `single` or `multiple` to indicate if the form is a single input or will have multiple inputs. `uswds` should be true.
+   */
+  @Prop() useFormsPattern?: string;
+
+  /**
+   * The heading level for the heading if `useFormsPattern` and `uswds` are true.
+   */
+  @Prop() formHeadingLevel?: number = 3;
+
+  /**
+   * The content of the heading if `useFormsPattern` and `uswds` are true.
+   */
+  @Prop() formHeading?: string;
 
   /**
    * The event used to track usage of the component. This is emitted when the
@@ -120,7 +142,7 @@ export class VaNumberInput {
     this.value = target.value;
   };
 
-  private handleBlur = () => {
+  private handleBlur = (e: Event) => {
     if (this.enableAnalytics) {
       const detail = {
         componentName: 'va-number-input',
@@ -131,6 +153,17 @@ export class VaNumberInput {
         },
       };
       this.componentLibraryAnalytics.emit(detail);
+    }
+    
+    let defaultError = i18next.t('number-error');
+    const target = e.target as HTMLInputElement,
+      valid = target.checkValidity();
+    if (!this.error && !valid) {
+      this.error = defaultError;
+      this.el.setAttribute('error', defaultError);
+    } else if (this.error && this.error === defaultError && valid) {
+      this.error = null;
+      this.el.setAttribute('error', '');
     }
   };
 
@@ -161,10 +194,19 @@ export class VaNumberInput {
       handleInput,
       width,
       messageAriaDescribedby,
+      useFormsPattern,
+      formHeadingLevel,
+      formHeading,
     } = this;
 
     const ariaDescribedbyIds = `${messageAriaDescribedby ? 'input-message' : ''} ${error ? 'input-error-message' : ''}`
     .trim() || null; // Null so we don't add the attribute if we have an empty string
+
+    const ariaLabeledByIds = 
+    `${useFormsPattern && formHeading ? 'form-question' : ''} ${ 
+      useFormsPattern ? 'form-description' : ''} ${
+      useFormsPattern && label ? 'input-label' : ''}`.trim() || null;
+
     const inputMode = inputmode ? inputmode : 'numeric';
 
     if (uswds) {
@@ -177,10 +219,32 @@ export class VaNumberInput {
         'usa-input--error': error,
         [`usa-input--${width}`]: width,
       });
+
+      const isFormsPattern = useFormsPattern === 'single' || useFormsPattern === 'multiple' ? true : false;
+
+      let formsHeading = null;
+      if (isFormsPattern) {
+        const HeaderLevel = getHeaderLevel(formHeadingLevel);
+        formsHeading = (
+          <Fragment>
+            {formHeading &&
+              <HeaderLevel id="form-question" part="form-header">
+                {formHeading}
+              </HeaderLevel>
+            }
+            <div id="form-description">
+              <slot name="form-description"></slot>
+            </div>
+          </Fragment>
+        )
+      }
+
       return (
         <Host>
+          {formsHeading}
+          <div class="input-wrap">
           {label && (
-            <label htmlFor="inputField" class={labelClasses}>
+            <label htmlFor="inputField" id="input-label" class={labelClasses} part="label">
               {label}
               {required && (
                 <span class="usa-label--required">
@@ -202,6 +266,7 @@ export class VaNumberInput {
           <input
             class={inputClasses}
             aria-describedby={ariaDescribedbyIds}
+            aria-labelledby={ariaLabeledByIds}
             aria-invalid={error ? 'true' : 'false'}
             id="inputField"
             type="text"
@@ -216,10 +281,11 @@ export class VaNumberInput {
             onBlur={handleBlur}
             />
             {messageAriaDescribedby && (
-              <span id="input-message" class="sr-only">
+              <span id="input-message" class="sr-only dd-privacy-hidden">
                 {messageAriaDescribedby}
               </span>
             )}
+          </div>
         </Host>
       );
     } else {
@@ -237,7 +303,7 @@ export class VaNumberInput {
           <span id="error-message" role="alert">
             {error && (
               <Fragment>
-                <span class="sr-only">{i18next.t('error')}</span> {error}
+                <span class="sr-only">{i18next.t('error')}</span>{' '}{error}
               </Fragment>
             )}
           </span>
@@ -262,7 +328,7 @@ export class VaNumberInput {
               onBlur={handleBlur}
               />
               {messageAriaDescribedby && (
-                <span id="input-message" class="sr-only">
+                <span id="input-message" class="sr-only dd-privacy-hidden">
                   {messageAriaDescribedby}
                 </span>
               )}

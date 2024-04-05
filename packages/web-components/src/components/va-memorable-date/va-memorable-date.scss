@@ -12,25 +12,38 @@
 
 @import '../../mixins/uswds-error-border.scss';
 @import '../../global/formation_overrides';
+@import '../../mixins/focusable.css';
+@import '~@department-of-veterans-affairs/css-library/dist/elements.css';
 
 .usa-memorable-date {
   margin-top: 16px;
+  // USWDS v3.7.1 set flex-wrap: wrap; This caused the year to always wrap when the month select option was active.
+  flex-wrap: nowrap;
 }
 
 .usa-form-group--month {
-  flex: 0 1 50%;
-  width: 50%;
+  margin-right: 16px;
 }
 
-.usa-form-group--month-select, .usa-form-group--month-input {
-  width: 100%;
+.usa-form-group--month-input {
+  width: 48px;
 }
 
-:host([uswds]) {
+@media (max-width: 480px) {
+  .usa-form-group--month-select {
+    width: 100%;
+  }
+  .usa-form-group--select {
+    flex: 0 1 50%;
+    width: 50%;
+  }
+}
+
+:host(:not([uswds='false'])) {
   margin-top: 24px;
 }
 
-:host([uswds]) #error-message {
+:host(:not([uswds='false'])) #error-message {
   margin-bottom: 0;
 }
 
@@ -43,37 +56,60 @@
 @import '../va-date/va-date.css';
 @import '../../mixins/form-field-error.css';
 
-:host(:not([uswds])) .input-month,
-.input-day,
-.input-year {
-  margin-right: 1.6rem;
+// Resets error border to not show for 'any' error, so we can only show for 'specific' errors
+:host([error][uswds='false']:not([error=''])) va-select::part(select),
+:host([error][uswds='false']:not([error=''])) va-text-input::part(input) {
+  border: 0.1rem solid var(--vads-color-base-dark);
 }
 
-:host(:not([uswds])) .input-month,
-.input-day {
-  width: 4.8rem;
+:host([error='month-range'][uswds='false']:not([error='']))
+  va-select.input-month::part(select),
+:host([error='month-range'][uswds='false']:not([error='']))
+  va-text-input.input-month::part(input) {
+  border: 4px solid var(--vads-color-secondary-dark);
 }
 
-:host(:not([uswds])) .input-year {
-  width: 7.2rem;
+:host([error='day-range'][uswds='false']:not([error='']))
+  va-text-input.input-day::part(input) {
+  border: 4px solid var(--vads-color-secondary-dark);
 }
 
-:host(:not([uswds])) .input-month input,
-.input-day input,
-.input-year input {
-  padding: 0.8rem;
+:host([error='year-range'][uswds='false']:not([error='']))
+  va-text-input.input-year::part(input) {
+  border: 4px solid var(--vads-color-secondary-dark);
 }
 
-:host(:not([uswds])) #dateHint,
-:host(:not([uswds])) #hint {
-  color: var(--color-gray);
-  line-height: 1.5;
+:host([uswds='false']) {
+  .input-month,
+  .input-day,
+  .input-year {
+    margin-right: 1.6rem;
+
+    input {
+      padding: 0.8rem;
+    }
+  }
+
+  .input-month,
+  .input-day {
+    width: 4.8rem;
+  }
+
+  .input-year {
+    width: 7.2rem;
+  }
+
+  #dateHint,
+  #hint {
+    color: var(--vads-color-base-dark);
+    line-height: 1.5;
+  }
+
+  #error-message {
+    margin-bottom: 0.8rem;
+  }
 }
 
 slot:not([name])::slotted(*) {
-  margin-bottom: 0.8rem;
-}
-
-:host(:not([uswds])) #error-message {
   margin-bottom: 0.8rem;
 }

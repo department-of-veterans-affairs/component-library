@@ -19,7 +19,7 @@ export class VaProcessList {
   /**
    * Whether or not the component will use USWDS v3 styling.
    */
-  @Prop() uswds?: boolean = false
+  @Prop() uswds?: boolean = true
 
   render() {
     const { uswds } = this;

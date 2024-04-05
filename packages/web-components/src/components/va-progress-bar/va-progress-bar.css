@@ -5,7 +5,7 @@ div {
 }
 
 .progress-bar {
-  border: 2px solid var(--color-primary);
+  border: 2px solid var(--vads-color-primary);
   border-radius: 1em;
   display: block;
   height: 1em;
@@ -14,7 +14,7 @@ div {
 }
 
 .progress-bar-inner {
-  background-color: var(--color-primary);
+  background-color: var(--vads-color-primary);
   content: '&nbsp;';
   display: block;
   height: 100%;

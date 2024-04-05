@@ -87,7 +87,7 @@ export class VaModal {
   componentLibraryAnalytics: EventEmitter;
 
   /**
-   * Listen for the va-button GA event and capture it so 
+   * Listen for the va-button GA event and capture it so
    * that we can emit a single va-modal GA event that includes
    * the va-button details in handlePrimaryButtonClick and
    * handleSecondaryButtonClick.
@@ -124,7 +124,7 @@ export class VaModal {
   /**
    * Whether or not the component will use USWDS v3 styling.
    */
-  @Prop() uswds?: boolean = false;
+  @Prop() uswds?: boolean = true;
 
   /**
    * Whether or not the component will be forced to take action.
@@ -165,7 +165,7 @@ export class VaModal {
   @Prop({ reflect: true }) visible?: boolean = false;
 
   /**
-   * Additional DOM-nodes that should not be hidden from screen readers. 
+   * Additional DOM-nodes that should not be hidden from screen readers.
    * Useful when an open modal shouldn't hide all content behind the overlay.
    */
   @Prop() ariaHiddenNodeExceptions?: HTMLElement[] = [];
@@ -178,7 +178,7 @@ export class VaModal {
   /**
    * Save focusable children within the modal. Populated on setup
    */
-  @State() focusableChildren: HTMLElement[] = null;
+  focusableChildren: HTMLElement[] = null;
 
   // This click event listener is used to close the modal when clickToClose
   // is true and the user clicks the overlay outside of the modal contents.
@@ -344,11 +344,15 @@ export class VaModal {
     // find all focusable children within the modal, but maintain tab order
     this.focusableChildren = this.getFocusableChildren();
 
+    // find last focusable item so that focus can be redirected there when needed
+    const lastFocusChild = this.focusableChildren[this.focusableChildren.length - 1];
+    lastFocusChild.classList.add("last-focusable-child");
+
     // If an initialFocusSelector is provided, the element will be focused on modal open
     // if it exists. You are able to focus elements in both light and shadow DOM.
     const initialFocus = (this.el.querySelector(this.initialFocusSelector) ||
-      this.el.shadowRoot.querySelector(this.initialFocusSelector) ||
-      this.closeButton) as HTMLElement;
+    this.el.shadowRoot.querySelector(this.initialFocusSelector) ||
+    this.closeButton) as HTMLElement;
     initialFocus.focus();
 
     // Prevents scrolling outside modal
@@ -402,7 +406,7 @@ export class VaModal {
 
     if (!visible) return null;
 
-    const ariaLabel = `${modalTitle} modal` || 'Modal';
+    const ariaLabel = modalTitle && modalTitle !== '' ? `${modalTitle} modal` : null;
     /* eslint-enable i18next/no-literal-string */
     const btnAriaLabel = modalTitle
       ? `Close ${modalTitle} modal`
@@ -427,7 +431,7 @@ export class VaModal {
         'usa-modal__heading': true,
         'va-modal-alert-title': status,
       });
-      const closingButton = forcedModal ? '' 
+      const closingButton = forcedModal ? ''
       : <button
           aria-label={btnAriaLabel}
           class="va-modal-close"
@@ -439,10 +443,9 @@ export class VaModal {
         </button>;
       return (
         <Host>
-          <div class={wrapperClass} 
+          <div class={wrapperClass}
             role={status === 'warning' || status === 'error' ? 'alertdialog' : 'dialog' }
             aria-label={ariaLabel}
-            aria-describedby="description"
             aria-modal="true"
           >
             <div class={contentClass}>
@@ -470,7 +473,6 @@ export class VaModal {
                         <va-button
                           onClick={e => this.handlePrimaryButtonClick(e)}
                           text={primaryButtonText}
-                          uswds
                           />
                       </li>
                     )}
@@ -481,7 +483,6 @@ export class VaModal {
                             onClick={e => this.handleSecondaryButtonClick(e)}
                             secondary
                             text={secondaryButtonText}
-                            uswds
                           />
                         )}
                         {unstyled && (

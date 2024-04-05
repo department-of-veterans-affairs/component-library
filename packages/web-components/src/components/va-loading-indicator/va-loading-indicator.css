@@ -16,10 +16,14 @@
   height: 3.5rem;
   margin: 1px;
   border-radius: 50%;
-  border: 8px solid var(--color-primary);
-  border-color: var(--color-primary) transparent var(--color-primary)
+  border: 8px solid var(--vads-color-primary);
+  border-color: var(--vads-color-primary) transparent var(--vads-color-primary)
     transparent;
   animation: spin 1.5s linear infinite;
+}
+
+.loading-indicator.chromatic:after {
+  animation: none;
 }
 
 .loading-indicator:focus {

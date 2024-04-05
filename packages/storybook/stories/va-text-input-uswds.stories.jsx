@@ -1,11 +1,11 @@
 /* eslint-disable react/prop-types */
 import React, { useState, useEffect } from 'react';
-import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
+import { getWebComponentDocs, propStructure, StoryDocs, applyFocus } from './wc-helpers';
 
 const textInputDocs = getWebComponentDocs('va-text-input');
 
 export default {
-  title: `USWDS/Text input USWDS`,
+  title: `Components/Text input USWDS`,
   id: 'uswds/va-text-input',
   parameters: {
     componentSubtitle: `va-text-input web component`,
@@ -51,10 +51,13 @@ const defaultArgs = {
   'type': undefined,
   'success': false,
   'pattern': undefined,
-  'uswds': true,
   'hint': null,
   'message-aria-describedby': 'Optional description text for screen readers',
-  'charcount': false
+  'use-forms-pattern': null,
+  'form-heading-level': null,
+  'form-heading': null,
+  'form-description': null,
+  'charcount': false,
 };
 
 const Template = ({
@@ -70,14 +73,12 @@ const Template = ({
   type,
   success,
   pattern,
-  uswds,
   hint,
   'message-aria-describedby': messageAriaDescribedby,
   charcount
 }) => {
   return (
     <va-text-input
-      uswds={uswds}
       name={name}
       label={label}
       autocomplete={autocomplete}
@@ -119,17 +120,11 @@ const I18nTemplate = ({
   }, [lang]);
   return (
     <>
-      <button style={{ fontSize: '16px' }} onClick={e => setLang('es')}>
-        Español
-      </button>
-      <button style={{ fontSize: '16px' }} onClick={e => setLang('en')}>
-        English
-      </button>
-      <button style={{ fontSize: '16px' }} onClick={e => setLang('tl')}>
-        Tagalog
-      </button>
+      <va-button onClick={e => setLang('es')} text="Español"/>
+      <va-button onClick={e => setLang('en')} text="English"/>
+      <va-button onClick={e => setLang('tl')} text="Tagalog"/>
+
       <va-text-input
-        uswds={uswds}
         name={name}
         label={label}
         autocomplete={autocomplete}
@@ -149,13 +144,11 @@ const I18nTemplate = ({
 const WidthsTemplate = ({
   name,
   value,
-  uswds,
 }) => {
   return (
     <>
       <va-text-input
         width="2xs"
-        uswds={uswds}
         name={name}
         label='My input - 2xs'
         value={value}
@@ -163,15 +156,13 @@ const WidthsTemplate = ({
 
       <va-text-input
         width="xs"
-        uswds={uswds}
         name={name}
         label='My input - xs'
         value={value}
-      />  
-  
+      />
+
       <va-text-input
         width="sm"
-        uswds={uswds}
         name={name}
         label='My input - sm'
         value={value}
@@ -179,7 +170,6 @@ const WidthsTemplate = ({
 
       <va-text-input
         width="md"
-        uswds={uswds}
         name={name}
         label='My input - md'
         value={value}
@@ -187,7 +177,6 @@ const WidthsTemplate = ({
 
       <va-text-input
         width="lg"
-        uswds={uswds}
         name={name}
         label='My input - lg'
         value={value}
@@ -195,7 +184,6 @@ const WidthsTemplate = ({
 
       <va-text-input
         width="xl"
-        uswds={uswds}
         name={name}
         label='My input - xl'
         value={value}
@@ -203,11 +191,107 @@ const WidthsTemplate = ({
 
       <va-text-input
         width="2xl"
-        uswds={uswds}
         name={name}
         label='My input - 2xl'
         value={value}
       />
+    </>
+  );
+};
+
+const FormsPatternMultipleTemplate = ({
+  name,
+  value,
+  uswds,
+}) => {
+  const handleClick = () => {
+    const header = document.getElementById('form-pattern-multiple-input')
+      ?.shadowRoot
+      ?.getElementById('form-question');
+
+    applyFocus(header);
+  }
+  return (
+    <>
+      <va-text-input
+        required
+        error="This is an error message"
+        id="form-pattern-multiple-input"
+        name={name}
+        label='First Name'
+        value={value}
+        use-forms-pattern='multiple'
+        form-heading-level={1}
+        form-heading="Name and email address"
+        form-description="This is the additional form-description prop"
+      />
+
+      <va-text-input
+        name={name}
+        label='Last Name'
+        value={value}
+      />
+
+      <va-text-input
+        name={name}
+        label='Email address'
+        value={value}
+      />
+      <hr />
+      <va-button
+        text="click to focus header"
+        onClick={handleClick}
+        uswds={false}>
+      </va-button>
+    </>
+  );
+};
+
+const FormsPatternSingleTemplate = ({
+  name,
+  value,
+  error,
+}) => {
+  const id = (Math.floor(Math.random() * 10) + 1);
+  const handleClick = () => {
+    const header = document.getElementById(`form-pattern-single-input-${id}`)
+      ?.shadowRoot
+      ?.getElementById('form-question');
+
+    applyFocus(header);
+  }
+  return (
+    <>
+      <va-text-input
+        required
+        id={`form-pattern-single-input-${id}`}
+        name={name}
+        label="Historical figure"
+        hint="This is hint text"
+        value={value}
+        error={error}
+        use-forms-pattern="single"
+        form-heading-level={1}
+        form-heading="Enter the name of a historical figure"
+      >
+      <div slot="form-description">
+        <p>HTML passed into the form-description slot:</p>
+        <ul>
+          <li>Sojourner Truth</li>
+          <li>Frederick Douglass</li>
+          <li>Booker T. Washington</li>
+          <li>George Washington Carver</li>
+        </ul>
+      </div>
+      </va-text-input>
+
+      <hr />
+
+      <va-button
+        text="click to focus header"
+        onClick={handleClick}
+        uswds={false}>
+      </va-button>
     </>
   );
 };
@@ -229,12 +313,6 @@ export const Internationalization = I18nTemplate.bind(null);
 Internationalization.args = {
   ...defaultArgs,
   required: true,
-  maxlength: '6',
-};
-
-export const MaxLength = Template.bind(null);
-MaxLength.args = {
-  ...defaultArgs,
   maxlength: '6',
 };
 
@@ -261,7 +339,7 @@ WithHintText.args = { ...defaultArgs, hint: 'This is hint text' };
 const WithInlineHintTextTemplate = ({ name, label }) => {
   return (
     <>
-      <va-text-input name={name} label={label} uswds />
+      <va-text-input name={name} label={label} />
       <p>If your hint is very short it can be included in the label.</p>
     </>
   );
@@ -272,7 +350,7 @@ WithInlineHintText.args = { ...defaultArgs, label: "My input (with hint)" };
 
 const WithAdditionalInfoTemplate = ({ name, label }) => {
   return (
-    <va-text-input name={name} label={label} uswds>
+    <va-text-input name={name} label={label}>
       <div>
         <va-additional-info trigger="Why is this required?">
           We need the Veteran’s Social Security number or tax identification
@@ -291,9 +369,25 @@ WithAdditionalInfo.args = {
 };
 
 export const WithCharacterCount = Template.bind(null);
-WithCharacterCount.args = { ...defaultArgs, maxlength: '10', charcount: true}
+WithCharacterCount.args = { ...defaultArgs, maxlength: '10', charcount: true }
 
 export const Widths = WidthsTemplate.bind(null);
 Widths.args = {
+  ...defaultArgs,
+};
+
+export const FormsPatternSingle = FormsPatternSingleTemplate.bind(null);
+FormsPatternSingle.args = {
+  ...defaultArgs,
+};
+
+export const FormsPatternSingleError = FormsPatternSingleTemplate.bind(null);
+FormsPatternSingleError.args = {
+  ...defaultArgs,
+  error: 'This is an error message',
+};
+
+export const FormsPatternMultiple = FormsPatternMultipleTemplate.bind(null);
+FormsPatternMultiple.args = {
   ...defaultArgs,
 };

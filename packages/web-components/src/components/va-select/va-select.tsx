@@ -77,12 +77,17 @@ export class VaSelect {
   /**
    * Whether or not the component will use USWDS v3 styling.
    */
-  @Prop({reflect: true}) uswds?: boolean = false;
+  @Prop({reflect: true}) uswds?: boolean = true;
 
   /**
    * Optional hint text.
    */
   @Prop() hint?: string;
+
+  /**
+   * An optional message that will be read by screen readers when the select is focused.
+   */
+  @Prop() messageAriaDescribedby?: string;
 
   /**
    * The event attached to select's onkeydown
@@ -115,6 +120,14 @@ export class VaSelect {
 
   disconnectedCallback() {
     i18next.off('languageChanged');
+  }
+
+  componentDidLoad() {
+    // check if the element has a class named uswds-false added from parent
+    if (this.el.classList.contains('uswds-false')) {
+      // add attribute manually
+      this.el.setAttribute('uswds', 'false');
+    }
   }
 
   private handleKeyDown() {
@@ -165,8 +178,14 @@ export class VaSelect {
   }
 
   render() {
-    const { error, reflectInputError, invalid, label, required, name, hint, uswds } = this;
+    const { error, reflectInputError, invalid, label, required, name, hint, messageAriaDescribedby, uswds } = this;
 
+    const errorID = uswds ? 'input-error-message': 'error-message';
+    const ariaDescribedbyIds = 
+      `${messageAriaDescribedby ? 'input-message' : ''} ${
+        error ? errorID : ''} ${
+        hint ? 'input-hint' : ''}`.trim() || null; // Null so we don't add the attribute if we have an empty string
+    
     if (uswds) {
       const labelClass = classnames({
         'usa-label': true,
@@ -184,8 +203,8 @@ export class VaSelect {
               {required && <span class="usa-label--required"> {i18next.t('required')}</span>}
             </label>
           )}
-          {hint && <span class="usa-hint">{hint}</span>}
-          <span id="input-error-message" role="alert">
+          {hint && <span class="usa-hint" id="input-hint">{hint}</span>}
+          <span id={errorID} role="alert">
             {error && (
               <Fragment>
                 <span class="usa-sr-only">{i18next.t('error')}</span> 
@@ -196,7 +215,7 @@ export class VaSelect {
           <slot onSlotchange={() => this.populateOptions()}></slot>
           <select
             class={selectClass}
-            aria-describedby={error ? 'error-message' : undefined}
+            aria-describedby={ariaDescribedbyIds}
             aria-invalid={invalid || error ? 'true' : 'false'}
             id="options"
             name={name}
@@ -208,6 +227,11 @@ export class VaSelect {
             <option key="0" value="" selected>{i18next.t('select')}</option>
             {this.options}
           </select>
+          {messageAriaDescribedby && (
+            <span id="input-message" class="sr-only dd-privacy-hidden">
+              {messageAriaDescribedby}
+            </span>
+          )}
         </Host>
       )
     } else {
@@ -217,8 +241,8 @@ export class VaSelect {
             {label}
             {required && <span class="required">{i18next.t('required')}</span>}
           </label>
-          {hint && <span class="hint-text">{hint}</span>}
-          <span id="error-message" role="alert">
+          {hint && <span class="hint-text" id="input-hint">{hint}</span>}
+          <span id={errorID} role="alert">
             {error && (
               <Fragment>
                 <span class="sr-only">{i18next.t('error')}</span> {error}
@@ -227,7 +251,7 @@ export class VaSelect {
           </span>
           <slot onSlotchange={() => this.populateOptions()}></slot>
           <select
-            aria-describedby={error ? 'error-message' : undefined}
+            aria-describedby={ariaDescribedbyIds}
             aria-invalid={invalid || error ? 'true' : 'false'}
             id="select"
             name={name}
@@ -238,6 +262,11 @@ export class VaSelect {
           >
             {this.options}
           </select>
+          {messageAriaDescribedby && (
+            <span id="input-message" class="sr-only dd-privacy-hidden">
+              {messageAriaDescribedby}
+            </span>
+          )}
         </Host>
       );
     };

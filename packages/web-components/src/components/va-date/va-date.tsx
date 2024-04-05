@@ -15,7 +15,6 @@ import {
   days,
   validate,
   getErrorParameters,
-  checkIsNaN,
   zeroPadStart,
 } from '../../utils/date-utils';
 
@@ -103,6 +102,10 @@ export class VaDate {
   @Prop({ mutable: true }) invalidMonth: boolean = false;
   @Prop({ mutable: true }) invalidYear: boolean = false;
 
+  private dayTouched: boolean = false;
+  private monthTouched: boolean = false;
+  private yearTouched: boolean = false;
+
   /**
    * Whether or not an analytics event will be fired.
    */
@@ -118,6 +121,12 @@ export class VaDate {
     bubbles: true,
   })
   componentLibraryAnalytics: EventEmitter;
+
+  componentDidLoad() {
+    // add this attr so that error state css selectors will target inputs
+    // without causing conflict in memorable-date
+    this.el.setAttribute('uswds', 'false');
+  }
 
   /**
    * Set the value prop as an ISO-8601 date using provided arguments.
@@ -141,15 +150,21 @@ export class VaDate {
       .split('-')
       .map(val => Number(val));
 
-    if(!checkIsNaN(this, year, month, day, this.monthYearOnly)) {
-      // if any fields are NaN do not continue validation
+    validate({
+               component: this,
+               year,
+               month,
+               day,
+               yearTouched: this.yearTouched,
+               monthTouched: this.monthTouched,
+               dayTouched: this.dayTouched
+             });
+
+    if (this.error) {
       return;
     }
 
     this.setValue(year, month, day);
-    // Run built-in validation. Any custom validation
-    // will happen afterwards
-    validate(this, year, month, day, this.monthYearOnly);
     this.dateBlur.emit(event);
 
     if (this.enableAnalytics) {
@@ -190,6 +205,18 @@ export class VaDate {
     // This event should always fire to allow for validation handling
     this.dateChange.emit(event);
   };
+
+  private handleMonthBlur = () => {
+    this.monthTouched = true;
+  }
+
+  private handleDayBlur = () => {
+    this.dayTouched = true;
+  }
+
+  private handleYearBlur = () => {
+    this.yearTouched = true;
+  }
 
   render() {
     const {
@@ -236,9 +263,11 @@ export class VaDate {
               // Value must be a string
               value={month?.toString()}
               onVaSelect={handleDateChange}
+              onBlur={this.handleMonthBlur}
               invalid={this.invalidMonth}
-              class="select-month"
+              class="select-month uswds-false"
               aria-label="Please enter two digits for the month"
+              uswds={false}
             >
               <option value=""></option>
               {months &&
@@ -256,9 +285,11 @@ export class VaDate {
                 // Value must be a string
                 value={daysForSelectedMonth.length < day ? '' : day?.toString()}
                 onVaSelect={handleDateChange}
+                onBlur={this.handleDayBlur}
                 invalid={this.invalidDay}
-                class="select-day"
+                class="select-day uswds-false"
                 aria-label="Please enter two digits for the day"
+                uswds={false}
               >
                 <option value=""></option>
                 {daysForSelectedMonth &&
@@ -279,10 +310,12 @@ export class VaDate {
               value={year ? year.toString() : ''}
               invalid={this.invalidYear}
               onInput={handleDateChange}
-              class="input-year"
+              onBlur={this.handleYearBlur}
+              class="input-year uswds-false"
               inputmode="numeric"
               type="text"
               aria-label="Please enter four digits for the year"
+              uswds={false}
             />
           </div>
         </fieldset>

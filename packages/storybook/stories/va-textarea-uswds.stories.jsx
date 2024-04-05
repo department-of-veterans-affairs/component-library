@@ -1,11 +1,11 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
-import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
+import { getWebComponentDocs, propStructure, StoryDocs, applyFocus } from './wc-helpers';
 
 const textareaDocs = getWebComponentDocs('va-textarea');
 
 export default {
-  title: `USWDS/Textarea USWDS`,
+  title: `Components/Textarea USWDS`,
   id: 'uswds/va-textarea',
   parameters: {
     componentSubtitle: `va-textarea web component`,
@@ -24,10 +24,13 @@ const defaultArgs = {
   'maxlength': undefined,
   'value': undefined,
   'placeholder': '',
-  'uswds': true,
   'hint': null,
   'charcount': false,
   'message-aria-describedby': 'Optional description text for screen readers',
+  'use-forms-pattern': null,
+  'form-heading-level': null,
+  'form-heading': null,
+  'form-description': null,
 };
 
 const Template = ({
@@ -39,14 +42,12 @@ const Template = ({
   maxlength,
   value,
   placeholder,
-  uswds,
   hint,
   charcount,
   'message-aria-describedby': messageAriaDescribedby,
 }) => {
   return (
     <va-textarea
-      uswds={uswds}
       name={name}
       label={label}
       enable-analytics={enableAnalytics}
@@ -78,7 +79,6 @@ const ResizableTemplate = ({
 }) => {
   return (
     <va-textarea
-      uswds={uswds}
       class="resize-y"
       name={name}
       label={label}
@@ -92,6 +92,143 @@ const ResizableTemplate = ({
       onBlur={e => console.log('blur event', e)}
       onInput={e => console.log('input event value', e.target.value)}
     />
+  );
+};
+
+const FormsPatternSingleTemplate = ({
+  name,
+  label,
+  'enable-analytics': enableAnalytics,
+  required,
+  error,
+  maxlength,
+  value,
+  placeholder,
+  hint,
+}) => {
+  const id = (Math.floor(Math.random() * 100) + 1);
+  const handleClick = () => {
+    const header = document.getElementById(`form-pattern-single-input-${id}`)
+      ?.shadowRoot
+      ?.getElementById('form-question');
+
+    applyFocus(header);
+  }
+  return (
+    <>
+      <va-textarea
+        id={`form-pattern-single-input-${id}`}
+        class="resize-y"
+        name={name}
+        label={label}
+        enable-analytics={enableAnalytics}
+        required={required}
+        error={error}
+        hint={hint}
+        maxlength={maxlength}
+        value={value}
+        placeholder={placeholder}
+        onBlur={e => console.log('blur event', e)}
+        onInput={e => console.log('input event value', e.target.value)}
+        use-forms-pattern="single"
+        form-heading-level={1}
+        form-heading="Enter additional information">
+
+        <div slot="form-description">
+          <p>HTML passed into the form-description slot:</p>
+          <ul>
+            <li>Sojourner Truth</li>
+            <li>Frederick Douglass</li>
+            <li>Booker T. Washington</li>
+            <li>George Washington Carver</li>
+          </ul>
+        </div>
+      </va-textarea>
+      <hr />
+
+      <va-button 
+        text="click to focus header" 
+        onClick={handleClick}
+        uswds={false}>
+      </va-button>
+    </>
+  );
+};
+
+
+const FormsPatternMultipleTemplate = ({
+  name,
+  label,
+  'enable-analytics': enableAnalytics,
+  required,
+  error,
+  maxlength,
+  value,
+  placeholder,
+  hint,
+}) => {
+  const id = (Math.floor(Math.random() * 100) + 1);
+  const handleClick = () => {
+    const header = document.getElementById(`form-pattern-multiple-input`)
+      ?.shadowRoot
+      ?.getElementById('form-question');
+
+    applyFocus(header);
+  }
+  return (
+    <>
+      <va-textarea
+        id={`form-pattern-multiple-input`}
+        class="resize-y"
+        name={name}
+        label={label}
+        enable-analytics={enableAnalytics}
+        required={required}
+        error={error}
+        hint={hint}
+        maxlength={maxlength}
+        value={value}
+        placeholder={placeholder}
+        onBlur={e => console.log('blur event', e)}
+        onInput={e => console.log('input event value', e.target.value)}
+        use-forms-pattern="multiple"
+        form-heading-level={1}
+        form-heading="Enter additional information"
+      />
+      <va-textarea
+        class="resize-y"
+        name={name}
+        label={"Describe your hopes"}
+        enable-analytics={enableAnalytics}
+        required={required}
+        hint={hint}
+        maxlength={maxlength}
+        value={value}
+        placeholder={placeholder}
+        onBlur={e => console.log('blur event', e)}
+        onInput={e => console.log('input event value', e.target.value)}
+      />
+      <va-textarea
+        class="resize-y"
+        name={name}
+        label={"Describe your dreams"}
+        enable-analytics={enableAnalytics}
+        required={required}
+        hint={hint}
+        maxlength={maxlength}
+        value={value}
+        placeholder={placeholder}
+        onBlur={e => console.log('blur event', e)}
+        onInput={e => console.log('input event value', e.target.value)}
+      />
+      <hr />
+
+      <va-button 
+        text="click to focus header"
+        onClick={handleClick}
+        uswds={false}>
+      </va-button>
+    </>
   );
 };
 
@@ -123,3 +260,22 @@ ResizableControl.args = { ...defaultArgs };
 
 export const WithCharacterCount = Template.bind(null);
 WithCharacterCount.args = { ...defaultArgs, charcount: true, maxlength: '100'}
+
+export const FormsPatternSingle = FormsPatternSingleTemplate.bind(null);
+FormsPatternSingle.args = { ...defaultArgs }
+
+export const FormsPatternSingleError = FormsPatternSingleTemplate.bind(null);
+FormsPatternSingleError.args = { 
+  ...defaultArgs,
+   error:'This is an error message',
+}
+
+export const FormsPatternMultiple = FormsPatternMultipleTemplate.bind(null);
+FormsPatternMultiple.args = { ...defaultArgs }
+
+
+export const FormsPatternMultipleError = FormsPatternMultipleTemplate.bind(null);
+FormsPatternMultipleError.args = { 
+  ...defaultArgs,
+   error:'This is an error message',
+}

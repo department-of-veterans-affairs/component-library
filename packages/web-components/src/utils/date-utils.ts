@@ -14,6 +14,7 @@ const maxYear = new Date().getFullYear() + 100;
 const minYear = 1900;
 const maxMonths = 12;
 const minMonths = 1;
+const minDays = 1;
 
 export const months = [
   { label: 'January', value: 1 },
@@ -159,127 +160,110 @@ export const internalErrors = [
   'date-error'
 ];
 
-/**
- * Checks if any of the of inputs provided resolve to NaN
- * Returns false if any are NaN and highlights component as error
- */
-export function checkIsNaN(
+interface ValidateConfig {
   component: Components.VaDate | Components.VaMemorableDate,
   year: number,
   month: number,
   day: number,
-  monthYearOnly : boolean = false) : boolean {
-
-  // Check for nulls first, so that field specific errors do not get overwritten  
-  if (component.required && (!year || !month || (!monthYearOnly && !day))) {
-    component.invalidYear = !year;
-    component.invalidMonth = !month;
-    component.invalidDay = monthYearOnly ? false : !day;
-    component.error = 'date-error';
-  }
-
-  // Begin NaN validation.
-  if (isNaN(year)) {
-    component.invalidYear = true;
-    component.error = 'year-range';
-  }
-  else {
-    component.invalidYear = false;
-  }
-
-  if (!monthYearOnly && isNaN(day)) {
-    component.invalidDay = true;
-    component.error = 'day-range';
-  }
-  else {
-    component.invalidDay = false;
-  }
-
-  if (isNaN(month)) {
-    component.invalidMonth = true;
-    component.error = 'month-range';
-  }
-  else {
-    component.invalidMonth = false;
-  }
-  
-
-  // Remove any error message if none of the fields are NaN
-  if (
-    !component.invalidYear &&
-    !component.invalidMonth &&
-    !component.invalidDay
-  ) {
-    if (!component.error || internalErrors.includes(component.error)) {
-      component.error = null;
-    }
-    return true;
-  }
-  return false;
+  monthYearOnly?: boolean,
+  yearTouched?: boolean,
+  monthTouched?: boolean,
+  dayTouched?: boolean,
 }
 
-/**
- * This is used to validate date components and:
- * 1. Indicate which field fails the built-in validation
- * 1. Supply an error message to help resolve the issue
- *
- * It relies on the component's mutable props.
- */
-export function validate(
-  component: Components.VaDate | Components.VaMemorableDate,
-  year: number,
-  month: number,
-  day: number,
-  monthYearOnly : boolean = false) : void {
+export function validate({
+                           component,
+                           year,
+                           month,
+                           day,
+                           monthYearOnly,
+                           yearTouched,
+                           monthTouched,
+                           dayTouched
+                         }: ValidateConfig): void {
 
-  const maxDay = daysForSelectedMonth(year, month);
-  if (component.required && (!year || !month || (!monthYearOnly && !day))) {
-    component.invalidYear = (!year || year < minYear || year > maxYear);
-    component.invalidMonth = (!month || month < minMonths || month > maxMonths);
-    component.invalidDay = monthYearOnly ? false : (!day || day < minMonths || day > maxDay);
-    component.error = 'date-error';
+  const maxDays = daysForSelectedMonth(year, month);
+
+  // Reset previous invalid states
+  component.invalidYear = false;
+  component.invalidMonth = false;
+  component.invalidDay = false;
+
+  // Check NaN and set errors based on NaN values
+  if (isNaN(month) && monthTouched) {
+    component.invalidMonth = true;
+    component.error = 'month-range';
+    return;
+  }
+  if (!monthYearOnly && isNaN(day) && dayTouched) {
+    component.invalidDay = true;
+    component.error = 'day-range';
+    return;
+  }
+  if (isNaN(year) && yearTouched) {
+    component.invalidYear = true;
+    component.error = 'year-range';
     return;
   }
 
-  // Begin built-in validation.
-  // Empty fields are acceptable unless the component is marked as required
-  if (year && (year < minYear || year > maxYear)) {
-    component.invalidYear = true;
-    component.error = 'year-range';
-  }
-  else {
-    component.invalidYear = false;
+  // Validate required fields
+  if (component.required && (!year || !month || (!monthYearOnly && !day))) {
+    if (monthTouched && !month) {
+      component.invalidMonth = true;
+      component.error = 'date-error';
+      return;
+    }
+    else if (dayTouched && !day && !monthYearOnly) {
+      component.invalidDay = true;
+      component.error = 'date-error';
+      return;
+    }
+    else if (yearTouched && !year) {
+      component.invalidYear = true;
+      component.error = 'date-error';
+      return;
+    }
   }
 
-  // Check day before month so that the month error message has a change to override
-  // We don't know the upper limit on days until we know the month
-  if (!monthYearOnly && (day < minMonths || day > maxDay)) {
-    component.invalidDay = true;
-    component.error = 'day-range';
-  }
-  else {
-    component.invalidDay = false;
-  }
-
-  // The month error message will trigger if the month is outside of the acceptable range,
-  // but also if the day is invalid and there isn't a month value.
-  if ((month && (month < minMonths || month > maxMonths)) ||
-      (!month && component.invalidDay)) {
+  // Check for empty values after the fields are touched
+  if (!month && monthTouched) {
     component.invalidMonth = true;
     component.error = 'month-range';
+    return;
   }
-  else {
-    component.invalidMonth = false;
+  if (!day && !monthYearOnly && dayTouched) {
+    component.invalidDay = true;
+    component.error = 'day-range';
+    return;
+  }
+  if (!year && yearTouched) {
+    component.invalidYear = true;
+    component.error = 'year-range';
+    return;
   }
 
-  // Remove any error message if none of the fields are marked as invalid
-  if (
-    (!component.error || internalErrors.includes(component.error)) &&
-    !component.invalidYear &&
-    !component.invalidMonth &&
-    !component.invalidDay
-  ) {
-    component.error = null;
+  // Validate year, month, and day ranges if they have a value regardless of whether they are required
+  if (month && (month < minMonths || month > maxMonths) && monthTouched) {
+    component.invalidMonth = true;
+    component.error = 'month-range';
+    return;
+  }
+  if (day && !monthYearOnly && (day < minDays || day > maxDays) && dayTouched) {
+    component.invalidDay = true;
+    component.error = 'day-range';
+    return;
+  }
+  if (year && (year < minYear || year > maxYear) && yearTouched) {
+    component.invalidYear = true;
+    component.error = 'year-range';
+    return;
+  }
+
+  // Remove any error message if none of the fields are invalid
+  if (!component.invalidYear && !component.invalidMonth && !component.invalidDay) {
+    if (!component.error || internalErrors.includes(component.error)) {
+      component.error = null;
+    }
   }
 }
 
@@ -338,9 +322,6 @@ export const formatDate = (
   options: Intl.DateTimeFormatOptions = {
     dateStyle: 'full',
     timeStyle: 'short',
-    hour: 'numeric',
-    minute: 'numeric',
-    timeZoneName: 'short'
   },
   timeZone: string = 'America/New_York',
 ) => {

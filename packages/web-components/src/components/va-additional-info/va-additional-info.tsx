@@ -33,7 +33,7 @@ export class VaAdditionalInfo {
   /**
    * Whether or not the component will use USWDS v3 styling.
    */
-  @Prop() uswds?: boolean = false;
+  @Prop() uswds?: boolean = true;
   /**
    * If `true`, doesn't fire the CustomEvent which can be used for analytics tracking.
    */
@@ -95,7 +95,7 @@ export class VaAdditionalInfo {
     /* eslint-enable i18next/no-literal-string */
   }
 
-  componentDidLoad() {
+  componentDidRender() {
     this.updateInfoMaxHeight();
   }
 

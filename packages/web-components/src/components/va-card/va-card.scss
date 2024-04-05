@@ -1,10 +1,19 @@
 :host {
   display: block;
-  border: 1px solid var(--color-gray-medium);
-  background-color: var(--color-white);
+  border: 1px solid var(--vads-color-gray-medium);
+  background-color: var(--vads-color-white);
   padding: 16px;
 }
 
-:host([show-shadow='true']) {
+:host([show-shadow]:not([show-shadow='false'])),
+// Do not allow a gray background when show-shadow is true
+:host([show-shadow]:not([show-shadow='false'])[background]:not([background='false'])) {
   box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.32);
+  border: 1px solid var(--vads-color-gray-medium);
+  background-color: var(--vads-color-white);
+}
+
+:host([background]:not([background='false'])) {
+  background-color: var(--vads-color-base-lightest);
+  border: none;
 }

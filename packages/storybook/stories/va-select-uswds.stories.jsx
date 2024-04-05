@@ -5,7 +5,7 @@ import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
 const selectDocs = getWebComponentDocs('va-select');
 
 export default {
-  title: 'USWDS/Select USWDS',
+  title: 'Components/Select USWDS',
   id: 'uswds/va-select',
   parameters: {
     componentSubtitle: 'va-select web component',
@@ -21,9 +21,9 @@ const defaultArgs = {
   'value': '',
   'required': false,
   'error': undefined,
-  'uswds': true,
   'hint': null,
   'aria-live-region-text': 'You selected',
+  'aria-describedby-message': 'Optional description text for screen readers',
   'options': [
     <option key="1" value="navy">
       Navy
@@ -50,9 +50,9 @@ const Template = ({
   value,
   required,
   error,
-  uswds,
   hint,
   'aria-live-region-text': ariaLiveRegionText,
+  'aria-describedby-message': ariaDescribedbyMessage,
   options,
   'use-add-button': useAddButton,
 }) => {
@@ -61,8 +61,7 @@ const Template = ({
   return (
     <>
       {useAddButton && (
-        <button
-          style={{ fontSize: '16px' }}
+        <va-button
           onClick={() => {
             setModifiedOptions([
               ...modifiedOptions,
@@ -71,12 +70,10 @@ const Template = ({
               </option>,
             ]);
           }}
-        >
-          Add &quot;Something new&quot;
-        </button>
+          text="Add &quot;Something new&quot;"
+        />
       )}
       <va-select
-        uswds={uswds}
         label={label}
         name={name}
         value={value}
@@ -84,6 +81,7 @@ const Template = ({
         error={error}
         hint={hint}
         aria-live-region-text={ariaLiveRegionText}
+        message-aria-describedby={ariaDescribedbyMessage}
         use-add-button={useAddButton}
       >
         {modifiedOptions}
@@ -98,7 +96,6 @@ const InertTemplate = ({
   value,
   required,
   error,
-  uswds,
   hint,
   'aria-live-region-text': ariaLiveRegionText,
   options,
@@ -113,8 +110,7 @@ const InertTemplate = ({
         purposes.
       </p>
       {useAddButton && (
-        <button
-          style={{ fontSize: '16px' }}
+        <va-button
           onClick={() => {
             setModifiedOptions([
               ...modifiedOptions,
@@ -123,12 +119,10 @@ const InertTemplate = ({
               </option>,
             ]);
           }}
-        >
-          Add &quot;Something new&quot;
-        </button>
+          text="Add &quot;Something new&quot;"
+        />
       )}
       <va-select
-        uswds={uswds}
         label={label}
         name={name}
         value={'navy'}
@@ -174,12 +168,8 @@ const I18nTemplate = args => {
 
   return (
     <div>
-      <button style={{ fontSize: '16px' }} onClick={e => setLang('es')}>
-        Español
-      </button>
-      <button style={{ fontSize: '16px' }} onClick={e => setLang('en')}>
-        English
-      </button>
+      <va-button onClick={e => setLang('es')} text="Español"/>
+      <va-button onClick={e => setLang('en')} text="English"/>
       <va-select {...rest}>{options}</va-select>
     </div>
   );

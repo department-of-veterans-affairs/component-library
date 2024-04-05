@@ -8,7 +8,7 @@ import {
 } from '../../utils/date-utils';
 
 /**
- * @componentName Maintenance Banner
+ * @componentName Banner - Maintenance
  * @maturityCategory caution
  * @maturityLevel available
  */
@@ -49,6 +49,10 @@ export class VaMaintenanceBanner {
    * The title of the banner shown for upcoming site maintenance.
    */
   @Prop() upcomingWarnTitle: string;
+  /**
+   * Override logic for whether to show error or warning
+   */
+  @Prop() isError: boolean;
   /**
    * Fires when the component is closed by clicking on the close icon.
    */
@@ -129,7 +133,7 @@ export class VaMaintenanceBanner {
   };
 
   render() {
-    const {upcomingWarnStartDateTime, maintenanceEndDateTime} = this,
+    const {upcomingWarnStartDateTime, maintenanceEndDateTime, isError} = this,
       now = new Date();
 
     // Escape early if it's before when it should show.
@@ -143,7 +147,8 @@ export class VaMaintenanceBanner {
     }
     if (window.localStorage.getItem('MAINTENANCE_BANNER') !== this.bannerId) {
       const { upcomingWarnTitle, maintenanceStartDateTime, maintenanceTitle} = this;
-      const isWarning = isDateBefore(now, new Date(maintenanceStartDateTime));
+      const isWarning = isDateBefore(now, new Date(maintenanceStartDateTime)) && !isError;
+
       const maintenanceBannerClass = classNames({
         'maintenance-banner': true,
         'maintenance-banner--warning': isWarning,
@@ -152,12 +157,12 @@ export class VaMaintenanceBanner {
 
       return (
         <Host>
-            <div class={maintenanceBannerClass} role="banner" ref={el => (this.maintenanceBannerEl = el as HTMLDivElement)}>
+            <div class={maintenanceBannerClass} ref={el => (this.maintenanceBannerEl = el as HTMLDivElement)}>
                 <div class="maintenance-banner__body">
                   <h4 class="maintenance-banner__title">{isWarning ? upcomingWarnTitle : maintenanceTitle}</h4>
-                  <div class="maintenance-banner__content" ref={el => (this.maintenanceBannerContent = el as HTMLDivElement)}>{ 
-                    isWarning ? 
-                      <slot name="warn-content"></slot> : 
+                  <div class="maintenance-banner__content" ref={el => (this.maintenanceBannerContent = el as HTMLDivElement)}>{
+                    isWarning ?
+                      <slot name="warn-content"></slot> :
                       <slot name="maintenance-content"></slot>
                   }</div>
                   <div class="maintenance-banner__derived-content">{this.derivePostContent(new Date(maintenanceStartDateTime), new Date(maintenanceEndDateTime))}</div>
@@ -170,13 +175,13 @@ export class VaMaintenanceBanner {
                     <i aria-hidden="true" />
                 </button>
                 </div>
-                
+
             </div>
         </Host>
       )
     } else {
       return null
     }
-    
+
   }
 }

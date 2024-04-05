@@ -4,13 +4,13 @@ import { axeCheck } from '../../../testing/test-helpers';
 describe('va-privacy-agreement', () => {
   it('renders', async () => {
     const page = await newE2EPage();
-    await page.setContent('<va-privacy-agreement checked></va-privacy-agreement>');
+    await page.setContent('<va-privacy-agreement checked uswds="false"></va-privacy-agreement>');
 
     const element = await page.find('va-privacy-agreement');
     expect(element).toEqualHtml(`
-     <va-privacy-agreement checked="" class="hydrated">
+     <va-privacy-agreement checked="" class="hydrated" uswds="false">
        <mock:shadow-root>
-         <va-checkbox class="hydrated" id="checkbox">
+         <va-checkbox class="hydrated uswds-false" uswds="false" id="checkbox">
            <span class="description" slot="description">
              Please read and accept the
              <a href="/privacy-policy/" target="_blank">
@@ -29,7 +29,7 @@ describe('va-privacy-agreement', () => {
     const page = await newE2EPage();
 
     await page.setContent(
-      '<va-privacy-agreement checked="true" />',
+      '<va-privacy-agreement checked="true" uswds="false"/>',
     );
 
     await axeCheck(page);
@@ -39,7 +39,7 @@ describe('va-privacy-agreement', () => {
     const page = await newE2EPage();
 
     await page.setContent(
-      '<va-privacy-agreement checked />',
+      '<va-privacy-agreement checked uswds="false"/>',
     );
 
     const vaCheckbox = await page.find('va-privacy-agreement >>> va-checkbox');
@@ -52,7 +52,7 @@ describe('va-privacy-agreement', () => {
     const page = await newE2EPage();
 
     await page.setContent(
-      '<va-privacy-agreement />',
+      '<va-privacy-agreement uswds="false"/>',
     );
 
     const vaCheckbox = await page.find('va-privacy-agreement >>> va-checkbox');
@@ -68,7 +68,7 @@ describe('va-privacy-agreement', () => {
   it.skip('emits the vaChange event', async () => {
     const page = await newE2EPage();
     await page.setContent(
-      '<va-privacy-agreement />',
+      '<va-privacy-agreement uswds="false"/>',
     );
     const changeSpy = await page.spyOnEvent('vaChange');
     const input = (
@@ -87,7 +87,7 @@ describe('va-privacy-agreement', () => {
   it.skip('fires analytics event when enableAnalytics prop is set', async () => {
     const page = await newE2EPage();
     await page.setContent(
-      '<va-privacy-agreement enable-analytics />',
+      '<va-privacy-agreement enable-analytics uswds="false"/>',
     );
     const analyticsSpy = await page.spyOnEvent('component-library-analytics');
     const input = (
@@ -144,7 +144,7 @@ describe('va-privacy-agreement', () => {
 
   it('displays an error message when `showError` is defined', async () => {
     const page = await newE2EPage();
-    await page.setContent('<va-privacy-agreement show-error />');
+    await page.setContent('<va-privacy-agreement show-error uswds="false"/>');
 
     const checkbox = await page.find('va-privacy-agreement >>> va-checkbox');
 

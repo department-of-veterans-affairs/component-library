@@ -10,6 +10,8 @@
 
 @import '../../mixins/uswds-error-border.scss';
 @import '../../global/formation_overrides';
+@import '../../mixins/focusable.css';
+@import '~@department-of-veterans-affairs/css-library/dist/elements.css';
 
 :host {
   display: block;
@@ -17,7 +19,7 @@
   padding: 0;
 }
 
-:host([uswds]) {
+:host(:not([uswds='false'])) {
   margin-top: 24px;
 }
 
@@ -26,19 +28,20 @@
 @import '../../mixins/accessibility.css';
 @import '../../mixins/form-field-error.css';
 @import '../../mixins/hint-text.css';
+@import '../../mixins/headers.css';
 
 .required {
-  color: var(--color-secondary-dark);
+  color: var(--vads-color-secondary-dark);
   margin: 0 0.35rem;
 }
 
-:host(:not([uswds])) fieldset {
+:host([uswds='false']) fieldset {
   border: none;
   margin: 0;
   padding: 0;
 }
 
-:host(:not([uswds])) legend {
+:host([uswds='false']) legend {
   display: block;
   max-width: 46rem;
   font-weight: inherit;
@@ -46,14 +49,4 @@
   color: inherit;
   line-height: inherit;
   padding-inline: 0;
-}
-
-:host legend :is(h1, h2, h3, h4, h5, h6) {
-  display: inline;
-  margin: 0px;
-}
-
-/* h6 remains as Source Sans Pro, everything else uses Bitter */
-:host legend :is(h1, h2, h3, h4, h5) {
-  font-family: var(--font-serif);
 }

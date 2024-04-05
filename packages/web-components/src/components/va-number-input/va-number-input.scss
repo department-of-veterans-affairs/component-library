@@ -1,5 +1,7 @@
 @import '../va-text-input/va-text-input.scss';
 
+@import '../../mixins/focusable.css';
+
 .usa-hint {
   display: block;
 }
@@ -8,28 +10,31 @@
 
 @import '../../mixins/form-field-error.css';
 @import '../../mixins/hint-text.css';
+@import '~@department-of-veterans-affairs/css-library/dist/elements.css';
 
-:host(:not([uswds])) input[type='number'] {
-  -moz-appearance: textfield;
-}
+:host([uswds='false']) {
+  input[type='number'] {
+    -moz-appearance: textfield;
+  }
 
-:host(:not([uswds])) input::-webkit-outer-spin-button,
-:host(:not([uswds])) input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
 
-:host(:not([uswds])) > div {
-  position: relative;
-  display: flex;
-  align-items: center;
-}
+  > div {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
 
-:host(:not([uswds])) > div > span {
-  position: absolute;
-  left: 1rem;
-}
+  > div > span {
+    position: absolute;
+    left: 1rem;
+  }
 
-:host(:not([uswds])) > div > input.currency-input {
-  padding-left: 2.5rem;
+  > div > input.currency-input {
+    padding-left: 2.5rem;
+  }
 }

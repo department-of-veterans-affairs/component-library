@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { VaMemorableDate } from '@department-of-veterans-affairs/web-components/react-bindings';
-import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
+import { getWebComponentDocs, propStructure, StoryDocs, applyFocus } from './wc-helpers';
 
 VaMemorableDate.displayName = 'VaMemorableDate';
 
 const memorableDateInputDocs = getWebComponentDocs('va-memorable-date');
 
 export default {
-  title: 'USWDS/Memorable date USWDS',
+  title: 'Components/Memorable date USWDS',
   id: 'uswds/va-memorable-date',
   parameters: {
     componentSubtitle: `va-memorable-date web component`,
@@ -24,14 +24,12 @@ const defaultArgs = {
   required: false,
   error: undefined,
   value: undefined,
-  uswds: true,
   monthSelect: false,
 };
 
-const Template = ({ label, name, hint, required, error, uswds, value, monthSelect }) => {
+const Template = ({ label, name, hint, required, error, value, monthSelect }) => {
   return (
     <VaMemorableDate
-      uswds={uswds}
       monthSelect={monthSelect}
       label={label}
       name={name}
@@ -45,7 +43,7 @@ const Template = ({ label, name, hint, required, error, uswds, value, monthSelec
   );
 };
 
-const CustomValidationTemplate = ({ label, name, hint, required, error, uswds, value }) => {
+const CustomValidationTemplate = ({ label, name, hint, required, error, value }) => {
   const [dateVal, setDateVal] = useState(value);
   const [errorVal, setErrorVal] = useState(error);
   const today = new Date();
@@ -67,7 +65,6 @@ const CustomValidationTemplate = ({ label, name, hint, required, error, uswds, v
   return (
     <>
       <VaMemorableDate
-        uswds={uswds}
         label={label}
         name={name}
         hint={hint}
@@ -111,7 +108,7 @@ function handleDateBlur() &#x7b;<br/>
   );
 };
 
-const I18nTemplate = ({ label, name, required, error, uswds, value }) => {
+const I18nTemplate = ({ label, name, required, error, value }) => {
   const [lang, setLang] = useState('en');
 
   useEffect(() => {
@@ -120,11 +117,10 @@ const I18nTemplate = ({ label, name, required, error, uswds, value }) => {
 
   return (
     <div>
-      <button style={{fontSize: '16px'}} onClick={e => setLang('es')}>Español</button>
-      <button style={{fontSize: '16px'}} onClick={e => setLang('en')}>English</button>
-      <button style={{fontSize: '16px'}} onClick={e => setLang('tl')}>Tagalog</button>
+      <va-button style={{fontSize: '16px'}} onClick={e => setLang('es')} text="Español"/>
+      <va-button style={{fontSize: '16px'}} onClick={e => setLang('en')} text="English"/>
+      <va-button style={{fontSize: '16px'}} onClick={e => setLang('tl')} text="Tagalog"/>
       <VaMemorableDate
-        uswds={uswds}
         label={label}
         name={name}
         hint={hint}
@@ -136,6 +132,105 @@ const I18nTemplate = ({ label, name, required, error, uswds, value }) => {
       />
     </div>
 )};
+
+const FormsPatternSingleTemplate = ({ label, name, hint, required, error, value, monthSelect }) => {
+
+  const id = (Math.floor(Math.random() * 100) + 1);
+  const handleClick = () => {
+    const header = document.getElementById(`form-pattern-single-input-${id}`)
+      ?.shadowRoot
+      ?.getElementById('form-question');
+
+    applyFocus(header);
+  }
+  return (
+    <>
+      <VaMemorableDate
+        monthSelect={monthSelect}
+        label={label}
+        name={name}
+        hint={hint}
+        required={required}
+        error={error}
+        value={value}
+        onDateBlur={e => console.log(e, 'DATE BLUR FIRED')}
+        onDateChange={e => console.log(e, 'DATE CHANGE FIRED')}
+        use-forms-pattern="single"
+        id={`form-pattern-single-input-${id}`}
+        form-heading-level={1}
+        form-heading="Enter a date"
+        form-description="This is the additional form-description prop"
+      >
+        <div slot="form-description">
+          <p>HTML passed into the form-description slot:</p>
+          <ul>
+            <li>Month</li>
+            <li>Day</li>
+            <li>Year</li>
+          </ul>
+        </div>
+      </VaMemorableDate>
+      <hr />
+
+      <va-button 
+        text="click to focus header" 
+        onClick={handleClick}
+        uswds={false}>
+      </va-button>
+    </>
+  );
+};
+
+
+const FormsPatternMultipleTemplate = ({ label, name, hint, required, error, value, monthSelect }) => {
+
+  const handleClick = () => {
+    const header = document.getElementById(`form-pattern-single-input-multiple`)
+      ?.shadowRoot
+      ?.getElementById('form-question');
+
+    applyFocus(header);
+  }
+  return (
+    <>
+      <VaMemorableDate
+        monthSelect={monthSelect}
+        label={label}
+        name={name}
+        hint={hint}
+        required={required}
+        error={error}
+        value={value}
+        onDateBlur={e => console.log(e, 'DATE BLUR FIRED')}
+        onDateChange={e => console.log(e, 'DATE CHANGE FIRED')}
+        use-forms-pattern="single"
+        id={`form-pattern-single-input-multiple`}
+        form-heading-level={1}
+        form-heading="Enter dates"
+        form-description="This is the additional form-description prop"
+      />
+      <VaMemorableDate
+        monthSelect={monthSelect}
+        label={'Date of enrollment'}
+        name={name}
+        hint={hint}
+        required={required}
+        value={value}
+        onDateBlur={e => console.log(e, 'DATE BLUR FIRED')}
+        onDateChange={e => console.log(e, 'DATE CHANGE FIRED')}
+        use-forms-pattern="single"
+        id={`form-pattern-single-input-multiple`}
+      />
+      <hr />
+
+      <va-button 
+        text="click to focus header" 
+        onClick={handleClick}
+        uswds={false}>
+      </va-button>
+    </>
+  );
+};
 
 export const Default = Template.bind(null);
 Default.args = { ...defaultArgs };
@@ -157,7 +252,6 @@ WithMonthSelect.args = {
 export const ExtraHintText = Template.bind(null);
 ExtraHintText.args = {
   ...defaultArgs,
-  monthSelect: true,
   value: '2022-04-19',
   hint: 'Extra hint text',
 };
@@ -182,3 +276,33 @@ CustomValidation.args = {
 //   error: 'Error Message Example',
 //   required: true,
 // };
+
+
+export const FormsPatternSingleWithMonthDropdown = FormsPatternSingleTemplate.bind(null);
+FormsPatternSingleWithMonthDropdown.args = {
+  ...defaultArgs,
+};
+
+
+export const FormsPatternSingleWithoutMonthDropdown = FormsPatternSingleTemplate.bind(null);
+FormsPatternSingleWithoutMonthDropdown.args = {
+  ...defaultArgs,
+  monthSelect: false,
+};
+
+export const FormsPatternSingleError = FormsPatternSingleTemplate.bind(null);
+FormsPatternSingleError.args = {
+  ...defaultArgs,
+  error: 'Error Message Example',
+};
+
+export const FormsPatternMultiple = FormsPatternMultipleTemplate.bind(null);
+FormsPatternMultiple.args = {
+  ...defaultArgs,
+};
+
+export const FormsPatternMultipleError = FormsPatternMultipleTemplate.bind(null);
+FormsPatternMultipleError.args = {
+  ...defaultArgs,
+  error: 'Error Message Example',
+};

@@ -10,7 +10,7 @@ const checkBoxGroupDocs = getWebComponentDocs('va-checkbox-group');
 const checkbox = getWebComponentDocs('va-checkbox');
 
 export default {
-  title: 'Components/Checkbox group',
+  title: 'V1 Components/Checkbox group',
   id: 'components/va-checkbox-group',
   subcomponents: componentStructure(checkbox),
   parameters: {
@@ -31,6 +31,8 @@ const vaCheckboxGroup = args => {
     label,
     required,
     hint,
+    'label-header-level': labelHeaderLevel,
+    uswds,
     ...rest
   } = args;
   return (
@@ -40,9 +42,11 @@ const vaCheckboxGroup = args => {
       label={label}
       required={required}
       hint={hint}
+      label-header-level={labelHeaderLevel}
+      uswds={uswds}
     >
-      <va-checkbox label="Option one" name="example" value="1" />
-      <va-checkbox label="Option two" name="example" value="2" />
+      <va-checkbox label="Option one" name="example" value="1" uswds={uswds} />
+      <va-checkbox label="Option two" name="example" value="2" uswds={uswds} />
     </va-checkbox-group>
   )
 }
@@ -73,6 +77,8 @@ const defaultArgs = {
   'required': false,
   'error': null,
   'hint': null,
+  'label-header-level': '',
+  'uswds': false,
 };
 
 export const Default = Template.bind(null);
@@ -80,6 +86,13 @@ Default.args = {
   ...defaultArgs,
 };
 Default.argTypes = propStructure(checkBoxGroupDocs);
+
+export const LabelHeader = Template.bind(null);
+LabelHeader.args = {
+  ...defaultArgs,
+  label: 'This is a label containing an H3',
+  'label-header-level': '3',
+};
 
 export const WithHintText = Template.bind(null);
 WithHintText.args = {
@@ -101,6 +114,7 @@ const SingleCheckboxTemplate = ({
   error,
   label,
   required,
+  uswds,
 }) => {
   return (
     <va-checkbox-group
@@ -108,8 +122,10 @@ const SingleCheckboxTemplate = ({
       error={error}
       label={label}
       required={required}
+      uswds={uswds}
     >
-      <va-checkbox label="Option one" name="example" value="1" />
+      <va-checkbox label="Option one" name="example" value="1" uswds={uswds}
+/>
     </va-checkbox-group>
   );
 };

@@ -1,4 +1,4 @@
-import { Component, Host, h, Prop, State, Element } from '@stencil/core';
+import { Component, Host, h, Prop, State, Element, Listen } from '@stencil/core';
 
 /**
  * @componentName OMB info
@@ -19,6 +19,11 @@ export class VaOmbInfo {
    * If `true`, privacy act statement modal will be visible.
    */
   @State() visible: boolean;
+
+  /**
+   * Local state to track if the shift key is pressed
+   */
+  @State() shifted: boolean = false;
 
   /* eslint-disable i18next/no-literal-string */
   /**
@@ -49,6 +54,34 @@ export class VaOmbInfo {
   private handleSlotChange = () => {
     this.modalContents = null;
   };
+
+  // This keydown event listener tracks if the shift key is held down while changing focus
+  @Listen('keydown', { target: 'window' })
+  trackShiftKey (e: KeyboardEvent) {
+    this.shifted = e.shiftKey;
+  }
+
+  // Redirects focus back to the modal, if the modal is open/visible
+  private trapFocus() {
+    const modal = this.el?.shadowRoot.querySelector('va-modal');
+    const modalVisible = modal?.getAttribute('visible');
+
+    if (modalVisible !== null && modalVisible !== 'false') {
+      let focusedChild;
+      const query = this.shifted
+        ? '.last-focusable-child'
+        : '[role="document"]';
+      if (this.shifted) {
+        focusedChild = modal
+          ?.querySelector('va-telephone')
+          .shadowRoot.querySelector(query) as HTMLElement;
+      } else {
+        focusedChild = modal?.shadowRoot.querySelector(query) as HTMLElement;
+      }
+
+      focusedChild?.focus();
+    }
+  }
 
   componentWillLoad() {
     /* eslint-disable i18next/no-literal-string */
@@ -136,8 +169,11 @@ export class VaOmbInfo {
         <div>
           <va-button
             onClick={toggleModalVisible}
+            onFocusin={() => this.trapFocus()}
             secondary
             text="View Privacy Act Statement"
+            uswds={false}
+            class="uswds-false"
           />
         </div>
         <va-modal
@@ -146,6 +182,7 @@ export class VaOmbInfo {
           onCloseEvent={toggleModalVisible}
           visible={visible}
           ariaHiddenNodeExceptions={[this.el]}
+          uswds={false}
         >
           <slot onSlotchange={handleSlotChange}></slot>
           {modalContents}

@@ -4,11 +4,11 @@ import { axeCheck } from '../../../testing/test-helpers';
 describe('v1 va-segmented-progress-bar', () => {
   it('renders', async () => {
     const page = await newE2EPage({
-      html: '<va-segmented-progress-bar current="3" total="6"></va-segmented-progress-bar>',
+      html: '<va-segmented-progress-bar current="3" total="6" uswds="false"></va-segmented-progress-bar>',
     });
     const element = await page.find('va-segmented-progress-bar');
     expect(element).toEqualHtml(`
-      <va-segmented-progress-bar class="hydrated" current="3" total="6">
+      <va-segmented-progress-bar class="hydrated" current="3" total="6" uswds="false">
         <mock:shadow-root>
           <div>
             <div
@@ -27,9 +27,6 @@ describe('v1 va-segmented-progress-bar', () => {
               <div class="progress-segment"></div>
               <div class="progress-segment"></div>
             </div>
-            <span aria-atomic="true" aria-live="polite" class="sr-only">
-              Step 3 of 6
-            </span>
           </div>
         </mock:shadow-root>
       </va-segmented-progress-bar>
@@ -39,7 +36,7 @@ describe('v1 va-segmented-progress-bar', () => {
   it('passes an axe check', async () => {
     const page = await newE2EPage();
     await page.setContent(
-      '<va-segmented-progress-bar current="3" total="6"></va-segmented-progress-bar>',
+      '<va-segmented-progress-bar current="3" total="6" uswds="false"></va-segmented-progress-bar>',
     );
     await axeCheck(page);
   });
@@ -47,7 +44,7 @@ describe('v1 va-segmented-progress-bar', () => {
   it('it should update the aria label based on changed ariaLabel prop', async () => {
     const page = await newE2EPage();
     await page.setContent(
-      '<va-segmented-progress-bar current="3" total="6" label="E2E Test"></va-segmented-progress-bar>',
+      '<va-segmented-progress-bar current="3" total="6" label="E2E Test" uswds="false"></va-segmented-progress-bar>',
     );
     const label = await page.find(
       'va-segmented-progress-bar >>> div.progress-bar-segmented',
@@ -58,7 +55,7 @@ describe('v1 va-segmented-progress-bar', () => {
   it('fires an analytics event when the component is mounted', async () => {
     const page = await newE2EPage();
     await page.setContent(
-      '<va-segmented-progress-bar enable-analytics></va-segmented-progress-bar>',
+      '<va-segmented-progress-bar enable-analytics uswds="false"></va-segmented-progress-bar>',
     );
     const analyticsSpy = await page.spyOnEvent('component-library-analytics');
     await page.$eval('va-segmented-progress-bar', (element: any) => {
@@ -79,20 +76,11 @@ describe('v1 va-segmented-progress-bar', () => {
   it("doesn't fire an analytics event when enable-analytics is false", async () => {
     const page = await newE2EPage();
     await page.setContent(
-      '<va-segmented-progress-bar current="3" total="6" aria-label="E2E Test"></va-segmented-progress-bar>',
+      '<va-segmented-progress-bar current="3" total="6" aria-label="E2E Test" uswds="false"></va-segmented-progress-bar>',
     );
     const analyticsSpy = await page.spyOnEvent('component-library-analytics');
     expect(analyticsSpy).not.toHaveReceivedEvent();
   });
-
-  it("should render correct progress text", async () => {
-    const page = await newE2EPage({
-      html: '<va-segmented-progress-bar current="3" total="6" progress-term="Chapter"></va-segmented-progress-bar>',
-    });
-    const element = await page.find('va-segmented-progress-bar');
-    const counter = element.shadowRoot.querySelector('.sr-only');
-    expect(counter.innerHTML.indexOf('Chapter')).not.toEqual(-1);
-  })
 });
 
 
@@ -100,11 +88,11 @@ describe('v1 va-segmented-progress-bar', () => {
 describe('v3 va-segmented-progress-bar', () => {
   it('uswds - renders', async () => {
     const page = await newE2EPage({
-      html: '<va-segmented-progress-bar current="3" total="6" uswds></va-segmented-progress-bar>',
+      html: '<va-segmented-progress-bar current="3" total="6"></va-segmented-progress-bar>',
     });
     const element = await page.find('va-segmented-progress-bar');
     expect(element).toEqualHtml(`
-      <va-segmented-progress-bar class=\"hydrated\" current=\"3\" total=\"6\" uswds=\"\">
+      <va-segmented-progress-bar class=\"hydrated\" current=\"3\" total=\"6\">
         <mock:shadow-root>
           <div class=\"usa-step-indicator\">
             <ol aria-hidden=\"true\" class=\"usa-step-indicator__segments\">
@@ -140,7 +128,7 @@ describe('v3 va-segmented-progress-bar', () => {
   it('uswds - passes an axe check', async () => {
     const page = await newE2EPage();
     await page.setContent(
-      '<va-segmented-progress-bar current="3" total="6" uswds></va-segmented-progress-bar>',
+      '<va-segmented-progress-bar current="3" total="6"></va-segmented-progress-bar>',
     );
     await axeCheck(page);
   });
@@ -148,7 +136,7 @@ describe('v3 va-segmented-progress-bar', () => {
   it('uswds - fires an analytics event when the component is mounted', async () => {
     const page = await newE2EPage();
     await page.setContent(
-      '<va-segmented-progress-bar enable-analytics uswds></va-segmented-progress-bar>',
+      '<va-segmented-progress-bar enable-analytics></va-segmented-progress-bar>',
     );
     const analyticsSpy = await page.spyOnEvent('component-library-analytics');
     await page.$eval('va-segmented-progress-bar', (element: any) => {
@@ -169,15 +157,15 @@ describe('v3 va-segmented-progress-bar', () => {
   it("uswds - doesn't fire an analytics event when enable-analytics is false", async () => {
     const page = await newE2EPage();
     await page.setContent(
-      '<va-segmented-progress-bar current="3" total="6" aria-label="E2E Test" uswds></va-segmented-progress-bar>',
+      '<va-segmented-progress-bar current="3" total="6" aria-label="E2E Test"></va-segmented-progress-bar>',
     );
     const analyticsSpy = await page.spyOnEvent('component-library-analytics');
     expect(analyticsSpy).not.toHaveReceivedEvent();
   });
-  
+
   it("uswds - should render heading-text when labels are not provided", async () => {
     const page = await newE2EPage({
-      html: '<va-segmented-progress-bar current="3" total="6" uswds heading-text="My Header"></va-segmented-progress-bar>',
+      html: '<va-segmented-progress-bar current="3" total="6" heading-text="My Header"></va-segmented-progress-bar>',
     });
     const element = await page.find('va-segmented-progress-bar');
     const headerElement = element.shadowRoot.querySelector('span.usa-step-indicator__heading-text');
@@ -186,7 +174,7 @@ describe('v3 va-segmented-progress-bar', () => {
 
   it("uswds - should render label text for header when labels are provided", async () => {
     const page = await newE2EPage({
-      html: '<va-segmented-progress-bar current="3" total="6" uswds heading-text="My Header" labels="Personal Information;Household Status;Supporting Documents;Signature;Review and Submit"></va-segmented-progress-bar>',
+      html: '<va-segmented-progress-bar current="3" total="6" heading-text="My Header" labels="Personal Information;Household Status;Supporting Documents;Signature;Review and Submit"></va-segmented-progress-bar>',
     });
     const element = await page.find('va-segmented-progress-bar');
     const headerElement = element.shadowRoot.querySelector('span.usa-step-indicator__heading-text');
@@ -195,7 +183,7 @@ describe('v3 va-segmented-progress-bar', () => {
 
   it("uswds - should render labels when labels are provided", async () => {
     const page = await newE2EPage({
-      html: '<va-segmented-progress-bar current="3" total="6" uswds heading-text="My Header" labels="Personal Information;Household Status;Supporting Documents;Signature;Review and Submit"></va-segmented-progress-bar>',
+      html: '<va-segmented-progress-bar current="3" total="6" heading-text="My Header" labels="Personal Information;Household Status;Supporting Documents;Signature;Review and Submit"></va-segmented-progress-bar>',
     });
     const element = await page.find('va-segmented-progress-bar');
     const segments = element.shadowRoot.querySelector('ol.usa-step-indicator__segments');
@@ -204,7 +192,7 @@ describe('v3 va-segmented-progress-bar', () => {
 
   it("uswds - should render counter numbers when counters = 'default'", async () => {
     const page = await newE2EPage({
-      html: '<va-segmented-progress-bar current="3" total="6" uswds labels="Personal Information;Household Status;Supporting Documents;Signature;Review and Submit" counters="default"></va-segmented-progress-bar>',
+      html: '<va-segmented-progress-bar current="3" total="6" labels="Personal Information;Household Status;Supporting Documents;Signature;Review and Submit" counters="default"></va-segmented-progress-bar>',
     });
     const element = await page.find('va-segmented-progress-bar');
     const indicator = element.shadowRoot.querySelector('.usa-step-indicator');
@@ -213,7 +201,7 @@ describe('v3 va-segmented-progress-bar', () => {
 
   it("uswds - should render counter numbers when counters = 'small'", async () => {
     const page = await newE2EPage({
-      html: '<va-segmented-progress-bar current="3" total="6" uswds labels="Personal Information;Household Status;Supporting Documents;Signature;Review and Submit" counters="small"></va-segmented-progress-bar>',
+      html: '<va-segmented-progress-bar current="3" total="6" labels="Personal Information;Household Status;Supporting Documents;Signature;Review and Submit" counters="small"></va-segmented-progress-bar>',
     });
     const element = await page.find('va-segmented-progress-bar');
     const indicator = element.shadowRoot.querySelector('.usa-step-indicator');
@@ -222,7 +210,7 @@ describe('v3 va-segmented-progress-bar', () => {
 
   it("uswds - should render centered labels when 'centered-labels' is true", async () => {
     const page = await newE2EPage({
-      html: '<va-segmented-progress-bar current="3" total="6" uswds="true" centered-labels="true" labels="Personal Information;Household Status;Supporting Documents;Signature;Review and Submit"></va-segmented-progress-bar>',
+      html: '<va-segmented-progress-bar current="3" total="6" centered-labels="true" labels="Personal Information;Household Status;Supporting Documents;Signature;Review and Submit"></va-segmented-progress-bar>',
     });
     const element = await page.find('va-segmented-progress-bar');
     const indicator = element.shadowRoot.querySelector('.usa-step-indicator');
@@ -231,7 +219,7 @@ describe('v3 va-segmented-progress-bar', () => {
 
   it("uswds - should render correct header level when prop defined", async () => {
     const page = await newE2EPage({
-      html: '<va-segmented-progress-bar current="3" total="6" uswds="true" centered-labels="true" labels="Personal Information;Household Status;Supporting Documents;Signature;Review and Submit" header-level="2"></va-segmented-progress-bar>',
+      html: '<va-segmented-progress-bar current="3" total="6" centered-labels="true" labels="Personal Information;Household Status;Supporting Documents;Signature;Review and Submit" header-level="2"></va-segmented-progress-bar>',
     });
     const element = await page.find('va-segmented-progress-bar');
     const header = element.shadowRoot.querySelector('.usa-step-indicator__heading');
@@ -240,7 +228,7 @@ describe('v3 va-segmented-progress-bar', () => {
 
   it("uswds - should render correct progress text", async () => {
     const page = await newE2EPage({
-      html: '<va-segmented-progress-bar current="3" total="6" uswds="true" centered-labels="true" labels="Personal Information;Household Status;Supporting Documents;Signature;Review and Submit" progress-term="Chapter"></va-segmented-progress-bar>',
+      html: '<va-segmented-progress-bar current="3" total="6" centered-labels="true" labels="Personal Information;Household Status;Supporting Documents;Signature;Review and Submit" progress-term="Chapter"></va-segmented-progress-bar>',
     });
     const element = await page.find('va-segmented-progress-bar');
     const counter = element.shadowRoot.querySelector('.usa-step-indicator__heading-counter .usa-sr-only');

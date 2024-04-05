@@ -4,8 +4,8 @@
   bottom: 0;
   left: 0;
   width: 100%;
-  background-color: var(--color-gray-lightest);
-  color: var(--color-link-default);
+  background-color: var(--vads-color-base-lightest);
+  color: var(--vads-color-link);
   font-weight: 700;
 }
 
@@ -21,7 +21,7 @@
   text-align: center;
   width: 100%;
   font-size: 2.15rem;
-  background-color: var(--color-white);
+  background-color: var(--vads-color-white);
   border-radius: 50%;
   height: 100%;
   height: 4.2rem;
@@ -54,9 +54,9 @@
   padding: 0.8rem;
   line-height: 2.2rem;
   text-decoration: none;
-  color: var(--color-link-default);
+  color: var(--vads-color-link);
   flex-grow: 2;
-  border-right: 1px solid var(--color-gray-lighter);
+  border-right: 1px solid var(--vads-color-base-lighter);
 }
 
 .va-banner-content-link:hover {
@@ -70,7 +70,7 @@
 button {
   background: none;
   background-color: transparent;
-  color: var(--color-link-default);
+  color: var(--vads-color-link);
   border: none;
   font-size: 2rem;
   padding: 0 1.6rem;

@@ -14,6 +14,7 @@ import classnames from 'classnames';
 import { getSlottedNodes } from '../../utils/utils';
 import i18next from 'i18next';
 import { Build } from '@stencil/core';
+import { getHeaderLevel } from '../../utils/utils';
 
 if (Build.isTesting) {
   // Make i18next.t() return the key instead of the value
@@ -68,12 +69,34 @@ export class VaRadio {
   /**
    * Whether or not the component will use USWDS v3 styling.
    */
-   @Prop() uswds?: boolean = false;
+   @Prop() uswds?: boolean = true;
 
   /**
    * Insert a header with defined level inside the label (legend)
    */
   @Prop() labelHeaderLevel?: string;
+
+  /**
+   * An optional message that will be read by screen readers when the header is focused. The label-header-level
+   * prop must be set for this to be active.
+   */
+  @Prop() headerAriaDescribedby?: string;
+
+  /**
+   * Enabling this will add a heading and description for integrating into the forms pattern. Accepts `single` or `multiple` to indicate if the form is a single input or will have multiple inputs. `uswds` should be true.
+   */
+  @Prop() useFormsPattern?: string;
+
+  /**
+   * The heading level for the heading if `useFormsPattern` and `uswds` are true.
+   */
+  @Prop() formHeadingLevel?: number = 3;
+
+  /**
+   * The content of the heading if `useFormsPattern` and `uswds` are true.
+   */
+  @Prop() formHeading?: string;
+
   /**
    * The event used to track usage of the component. This is emitted when a
    * radio option is selected and enableAnalytics is true.
@@ -184,30 +207,16 @@ export class VaRadio {
 
   private deselectCurrentNode(node: HTMLVaRadioOptionElement): void {
     node.removeAttribute('checked');
-    node.setAttribute('tabindex', '-1');
   }
 
   private selectNextNode(node: HTMLVaRadioOptionElement): void {
     node.setAttribute('checked', '');
-    node.setAttribute('tabindex', '0');
     node.focus();
   }
 
   private getHeaderLevel() {
     const number = parseInt(this.labelHeaderLevel, 10);
     return number >= 1 && number <= 6 ? `h${number}` : null;
-  }
-
-  componentDidLoad(): void {
-    getSlottedNodes(this.el, 'va-radio-option').forEach(
-      (node: HTMLVaRadioOptionElement, index: number) => {
-        if (index === 0) {
-          node.setAttribute('tabindex', '0');
-        } else {
-          node.setAttribute('tabindex', '-1');
-        }
-      },
-    );
   }
 
   connectedCallback() {
@@ -221,60 +230,109 @@ export class VaRadio {
   }
 
   render() {
-    const { label, hint, required, error, uswds } = this;
+    const { 
+      label, 
+      hint, 
+      required, 
+      error, 
+      uswds, 
+      headerAriaDescribedby,
+      useFormsPattern,
+      formHeadingLevel,
+      formHeading
+    } = this;
     const ariaLabel = label + (required ? ' required' : '');
     const HeaderLevel = this.getHeaderLevel();
+    const headerAriaDescribedbyId = headerAriaDescribedby ? 'header-message' : null;
+    const ariaLabeledByIds = 
+    `${useFormsPattern && formHeading ? 'form-question' : ''} ${
+      useFormsPattern ? 'form-description' : ''} ${
+      useFormsPattern === 'multiple' ? 'header-message' : ''}`.trim() || null;
 
     if (uswds) {
       const legendClass = classnames({
         'usa-legend': true,
         'usa-label--error': error
       });
+
+      const isFormsPattern = useFormsPattern === 'single' || useFormsPattern === 'multiple' ? true : false;
+
+      let formsHeading = null;
+      if (isFormsPattern) {
+        const HeaderLevel = getHeaderLevel(formHeadingLevel);
+        formsHeading = (
+          <Fragment>
+            {formHeading &&
+            <HeaderLevel id="form-question" part="form-header">
+              {formHeading}
+            </HeaderLevel>
+            }
+            <div id="form-description">
+              <slot name="form-description"></slot>
+            </div>
+          </Fragment>
+        )
+      }
       return (
-        <Host aria-invalid={error ? 'true' : 'false'} aria-label={ariaLabel}>
-          <fieldset class="usa-form usa-fieldset" role="radiogroup">
-            <legend class={legendClass} part="legend">
-              {HeaderLevel ? (
-                <HeaderLevel part="header">{label}</HeaderLevel>
-              ) : (
-                label
-              )}
-              {required && (
-                <span class="usa-label--required" part="required">
-                  {' '}
-                  {i18next.t('required')}
-                </span>
-              )}
-            </legend>
-            {hint && <span class="usa-hint">{hint}</span>}
-            <span class="usa-error-message" role="alert">
-              {error && (
-                <Fragment>
-                  <span class="usa-sr-only">{i18next.t('error')}</span> {error}
-                </Fragment>
-              )}
-            </span>
-            <slot></slot>
-          </fieldset>
+        <Host aria-invalid={error ? 'true' : 'false'} >
+          {formsHeading}
+          <div class="input-wrap">
+            <fieldset class="usa-fieldset" aria-labelledby={ariaLabeledByIds}>
+              <legend class={legendClass} part="legend">
+                {HeaderLevel ? (
+                  <HeaderLevel part="header" aria-describedby={headerAriaDescribedbyId}>{label}</HeaderLevel>
+                ) : (
+                  label
+                )}&nbsp;
+                {
+                  useFormsPattern === 'multiple' && (
+                    <span id="header-message" class="sr-only">
+                      {label}
+                    </span>
+                  )
+                }
+                {headerAriaDescribedby && (
+                  <span id="header-message" class="sr-only">
+                    {headerAriaDescribedby}
+                  </span>
+                )}
+                {required && <span class="usa-label--required" part="required">{i18next.t('required')}</span>}
+                {hint && <div class="usa-hint">{hint}</div>}
+              </legend>
+              <span class="usa-error-message" role="alert">
+                {error && (
+                  <Fragment>
+                    <span class="usa-sr-only">{i18next.t('error')}</span> {error}
+                  </Fragment>
+                )}
+              </span>
+              <slot></slot>
+            </fieldset>
+          </div>
         </Host>
       );
     } else {
       return (
         <Host aria-invalid={error ? 'true' : 'false'} aria-label={ariaLabel}>
-          <fieldset role="radiogroup">
+          <fieldset>
             <legend part="legend">
               {HeaderLevel ? (
-                <HeaderLevel part="header">{label}</HeaderLevel>
+                <HeaderLevel part="header" aria-describedby={headerAriaDescribedbyId}>{label}</HeaderLevel>
               ) : (
                 label
+              )}
+              {headerAriaDescribedby && (
+                <span id="header-message" class="sr-only">
+                  {headerAriaDescribedby}
+                </span>
               )}
               {required && (
                 <span class="required" part="required">
                   {i18next.t('required')}
                 </span>
               )}
+              {hint && <div class="hint-text">{hint}</div>}
             </legend>
-            {hint && <span class="hint-text">{hint}</span>}
             <span id="error-message" role="alert">
               {error && (
                 <Fragment>
