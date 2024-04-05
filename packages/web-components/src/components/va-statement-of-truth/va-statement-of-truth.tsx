@@ -144,8 +144,12 @@ export class VaStatementOfTruth {
           <p class="font-sans-6">
             I have read and accept the&nbsp;
             <a href="/privacy-policy/" target="_blank">
-              privacy policy
-              <va-icon class="privacy-policy-icon" icon="launch" size={2}></va-icon>
+              privacy policy{' '}
+              <va-icon
+                class="privacy-policy-icon"
+                icon="launch"
+                size={2}
+              ></va-icon>
               <span class="usa-sr-only">opens in a new window</span>
             </a>
             .

@@ -91,9 +91,15 @@ export class VaPrivacyAgreement {
             <span class={`${labelClass} description`} slot="description">
               Please read and accept the&nbsp;
               <a href="/privacy-policy/" target="_blank">
-                privacy policy
-                <va-icon class="privacy-policy-icon" icon='launch' size={2}></va-icon>
-                <span class={this.uswds ? "usa-sr-only" : "sr-only"}>opens in a new window</span>
+                privacy policy{' '}
+                <va-icon
+                  class="privacy-policy-icon"
+                  icon="launch"
+                  size={2}
+                ></va-icon>
+                <span class={this.uswds ? 'usa-sr-only' : 'sr-only'}>
+                  opens in a new window
+                </span>
               </a>
               .
             </span>
