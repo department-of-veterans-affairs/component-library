@@ -39,7 +39,7 @@ describe('va-crisis-line-modal', () => {
             </span>
           </li>
           <li>
-            <i aria-hidden=\"true\" class=\"fa fa-mobile-alt va-crisis-panel-icon\"></i>
+            <va-icon class="hydrated va-clm__icon"></va-icon>
             <span>
               Text
               <strong>
