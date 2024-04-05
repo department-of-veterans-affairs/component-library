@@ -1892,6 +1892,7 @@ __metadata:
   resolution: "@department-of-veterans-affairs/component-library-monorepo@workspace:."
   dependencies:
     "@department-of-veterans-affairs/css-library": ^0.0.1
+    husky: ^9.0.11
     webpack: 5
   languageName: unknown
   linkType: soft
@@ -11702,6 +11703,15 @@ fsevents@^1.2.7:
   bin:
     husky: lib/bin.js
   checksum: 80af5b882c3f37d72d775f15dc8d5a74f27856881f92338278ac017ab447695ee0d958cffec22ba4d0ae96532fb8ee5f99f4ca7b869bc91285e5adc0b8cdfeb3
+  languageName: node
+  linkType: hard
+
+"husky@npm:^9.0.11":
+  version: 9.0.11
+  resolution: "husky@npm:9.0.11"
+  bin:
+    husky: bin.mjs
+  checksum: 1aebc3334dc7ac6288ff5e1fb72cfb447cfa474e72cf7ba692e8c5698c573ab725c28c6a5088c9f8e6aca5f47d40fa7261beffbc07a4d307ca21656dc4571f07
   languageName: node
   linkType: hard
 
