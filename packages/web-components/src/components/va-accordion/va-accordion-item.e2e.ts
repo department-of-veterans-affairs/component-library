@@ -245,9 +245,9 @@ describe('va-accordion-item', () => {
 
 
 /**
- * 
+ *
  * Begin V3 Tests
- * 
+ *
  */
 describe('va-accordion-item', () => {
   it('renders', async () => {
@@ -261,14 +261,14 @@ describe('va-accordion-item', () => {
       <mock:shadow-root>
         <div>
           <h2 class="usa-accordion__heading">
-            <button aria-controls="content" aria-expanded="false" class="usa-accordion__button" type="button">
+            <button aria-controls="content" aria-expanded="false" class="usa-accordion__button" type="button" part="accordion-header">
               <span class="usa-accordion__header va-accordion__header">
                 <slot name="icon"></slot>
               </span>
             </button>
           </h2>
           <slot name="headline"></slot>
-          <div class="usa-accordion__content usa-prose" hidden="" id="content">
+          <div class="usa-accordion__content usa-prose" hidden="" id="content" part="accordion-content">
             <slot></slot>
           </div>
         </div>
@@ -418,7 +418,7 @@ describe('va-accordion-item', () => {
         <mock:shadow-root>
           <div>
             <h2 class="usa-accordion__heading">
-              <button aria-controls="content" aria-expanded="false" class="usa-accordion__button" type="button">
+              <button aria-controls="content" aria-expanded="false" class="usa-accordion__button" type="button" part="accordion-header">
                 <span class="usa-accordion__header va-accordion__header">
                   <slot name="icon"></slot>
                   The header
@@ -430,7 +430,7 @@ describe('va-accordion-item', () => {
               </button>
             </h2>
             <slot name="headline"></slot>
-            <div class="usa-accordion__content usa-prose" hidden="" id="content">
+            <div class="usa-accordion__content usa-prose" hidden="" id="content" part="accordion-content">
               <slot></slot>
             </div>
         </div>
@@ -451,7 +451,7 @@ describe('va-accordion-item', () => {
       <mock:shadow-root>
         <div>
           <h2 class="usa-accordion__heading">
-            <button aria-controls="content" aria-expanded="false" class="usa-accordion__button" type="button">
+            <button aria-controls="content" aria-expanded="false" class="usa-accordion__button" type="button" part="accordion-header">
               <span class="usa-accordion__header va-accordion__header">
                 <slot name="icon"></slot>
                 The header
@@ -459,7 +459,7 @@ describe('va-accordion-item', () => {
             </button>
           </h2>
           <slot name="headline"></slot>
-          <div class="usa-accordion__content usa-prose" hidden="" id="content">
+          <div class="usa-accordion__content usa-prose" hidden="" id="content" part="accordion-content">
             <slot></slot>
           </div>
         </div>

@@ -10,7 +10,7 @@ See [design system](https://design.va.gov/components/) or [Storybook](https://de
 
 ## Contributing
 
-The issue tracker is disabled on this repo. To request a new component or a feature enhancement, please [open an issue here](https://github.com/department-of-veterans-affairs/vets-design-system-documentation/issues/new?assignees=&labels=vsp-design-system-team&template=feature_request.md)
+The issue tracker is disabled on this repo. To request a new component or a feature enhancement, please [open an issue here](https://github.com/department-of-veterans-affairs/vets-design-system-documentation/issues/new?assignees=&labels=platform-design-system-team&template=feature_request.md)
 
 
 ## Web Components

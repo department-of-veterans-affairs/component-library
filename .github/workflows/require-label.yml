@@ -10,4 +10,4 @@ jobs:
         with:
           mode: exactly
           count: 1
-          labels: "patch, minor, major, ignore-for-release"
+          labels: "patch, minor, major, ignore-for-release, css-library"
