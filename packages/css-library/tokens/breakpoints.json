@@ -5,8 +5,11 @@
   "small-screen": {
     "value": "481px"
   },
-  "medium-screen": {
+  "medium-mobile": {
     "value": "640px"
+  },
+  "medium-screen": {
+    "value": "768px"
   },
   "small-desktop-screen": {
     "value": "1008px"

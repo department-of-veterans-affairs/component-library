@@ -4,7 +4,7 @@ import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
 const linkDocs = getWebComponentDocs('va-link');
 
 export default {
-  title: 'V1 Components/Link',
+  title: 'Components/Link',
   id: 'components/va-link',
   parameters: {
     componentSubtitle: `va-link web component`,

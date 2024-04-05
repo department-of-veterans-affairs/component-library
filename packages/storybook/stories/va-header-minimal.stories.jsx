@@ -9,7 +9,7 @@ import {
 const minimalHeaderDocs = getWebComponentDocs('va-header-minimal');
 
 export default {
-  title: 'V1 Components/Header - Minimal',
+  title: 'Components/Header - Minimal',
   id: 'components/va-header-minimal',
   parameters: {
     componentSubtitle: `va-header-minimal web component`,
