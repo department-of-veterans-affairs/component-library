@@ -44,6 +44,24 @@
   padding-right: 5.7rem;
 }
 
+// Overriding USWDS' default success icon when using the 'continue' status
+:host(:not([uswds="false"])) .usa-alert--continue.usa-alert--success .usa-alert__body::before {
+  mask: none;
+  background: transparent;
+}
+
+:host(:not([uswds="false"])) .va-alert__lock-icon {
+  position: absolute;
+  top: 12px;
+  left: 24px;
+}
+
+:host(:not([uswds="false"])) .usa-alert--continue.usa-alert--success.usa-alert--slim .va-alert__lock-icon {
+  position: absolute;
+  top: 6px;
+  left: 28px;
+}
+
 /* Original Component Styles. */
 
 @import '../../mixins/accessibility.css';

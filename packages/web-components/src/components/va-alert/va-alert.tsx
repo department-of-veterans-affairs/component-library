@@ -201,6 +201,13 @@ export class VaAlert {
               onClick={this.handleAlertBodyClick.bind(this)}
               role="presentation"
             >
+              {status === 'continue' && (
+                <va-icon
+                  class="va-alert__lock-icon"
+                  icon="lock"
+                  size={slim ? 3 : 4}
+                ></va-icon>
+              )}
               {!slim && <slot name="headline"></slot>}
               <slot></slot>
             </div>
