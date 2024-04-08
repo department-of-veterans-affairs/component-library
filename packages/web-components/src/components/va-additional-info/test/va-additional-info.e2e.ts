@@ -21,7 +21,7 @@ describe('va-additional-info', () => {
               <i class="fa-angle-down" role="presentation"></i>
             </div>
           </a>
-          <div class="closed" id="info" style="--calc-max-height:calc(0px + 2rem);">
+          <div class="closed" id="info" style="--calc-max-height:calc(0px + 1.125rem);">
             <slot></slot>
           </div>
         </mock:shadow-root>
@@ -225,7 +225,7 @@ describe('va-additional-info', () => {
     );
     // 50px from height + 20px from padding
     // margin-bottom and margin-top is set to 0 for first slotted child
-    expect(calcMaxHeight).toEqual('calc(70px + 2rem)');
+    expect(calcMaxHeight).toEqual('calc(70px + 1.125rem)');
   });
 
   // Begin USWDS v3 test
@@ -248,7 +248,7 @@ describe('va-additional-info', () => {
               <i class="fa-angle-down" role="presentation"></i>
             </div>
           </a>
-          <div class="closed" id="info" style="--calc-max-height:calc(0px + 2rem);">
+          <div class="closed" id="info" style="--calc-max-height:calc(0px + 1.125rem);">
             <slot></slot>
           </div>
         </mock:shadow-root>
@@ -452,6 +452,6 @@ describe('va-additional-info', () => {
     );
     // 50px from height + 20px from padding
     // margin-bottom and margin-top is set to 0 for first slotted child
-    expect(calcMaxHeight).toEqual('calc(70px + 2rem)');
+    expect(calcMaxHeight).toEqual('calc(70px + 1.125rem)');
   });
 });
