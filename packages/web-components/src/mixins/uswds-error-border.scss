@@ -1,5 +1,4 @@
 @import '~@department-of-veterans-affairs/css-library/dist/tokens/scss/variables.scss';
-@import 'functions';
 
 :host([error]:not([error='']):not([uswds='false'])) {
     border-left: 0.25rem solid $vads-color-secondary-dark;
