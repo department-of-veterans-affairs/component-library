@@ -4,7 +4,6 @@ import {
   Prop, 
   h 
 } from '@stencil/core';
-import classnames from 'classnames';
 
 /**
  * @componentName Card
@@ -19,19 +18,18 @@ import classnames from 'classnames';
 })
 export class VaCard {
   /**
-   * If `true`, a drop-shadow will be displayed
+   * If `true`, a drop-shadow will be displayed with a white background.
    */
   @Prop() showShadow?: boolean = false;
 
+  /**
+   * If `true`, the card will have a gray background.
+   */
+  @Prop() background?: boolean = false;
+
   render() {
-    const {
-      showShadow
-    } = this;
-
-    const classes = classnames('va-card',  {'show-shadow': showShadow});
-
     return (
-      <Host class={classes}>
+      <Host>
         <slot></slot>
       </Host>
     );

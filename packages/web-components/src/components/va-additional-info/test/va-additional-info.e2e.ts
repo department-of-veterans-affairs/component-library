@@ -5,13 +5,13 @@ describe('va-additional-info', () => {
   it('renders', async () => {
     const page = await newE2EPage();
     await page.setContent(
-      '<va-additional-info trigger="More info"></va-additional-info>',
+      '<va-additional-info trigger="More info" uswds="false"></va-additional-info>',
     );
 
     const element = await page.find('va-additional-info');
 
     expect(element).toEqualHtml(`
-      <va-additional-info trigger="More info" class="hydrated">
+      <va-additional-info trigger="More info" class="hydrated" uswds="false">
         <mock:shadow-root>
           <a aria-controls="info" aria-expanded="false" role="button" tabindex="0">
             <div>
@@ -32,7 +32,7 @@ describe('va-additional-info', () => {
   it('passes an axe check', async () => {
     const page = await newE2EPage();
     await page.setContent(
-      `<va-additional-info trigger="Additional information">
+      `<va-additional-info trigger="Additional information" uswds="false">
         <div>
           Additional content
         </div>
@@ -45,7 +45,7 @@ describe('va-additional-info', () => {
   it('passes an axe check when opened', async () => {
     const page = await newE2EPage();
     await page.setContent(
-      `<va-additional-info trigger="Additional information">
+      `<va-additional-info trigger="Additional information" uswds="false">
         <div>
           Additional content
         </div>
@@ -61,7 +61,7 @@ describe('va-additional-info', () => {
   it('expands when clicked', async () => {
     const page = await newE2EPage();
     await page.setContent(
-      `<va-additional-info trigger="Additional information">
+      `<va-additional-info trigger="Additional information" uswds="false">
         <div id="content">
           Additional content
         </div>
@@ -93,7 +93,7 @@ describe('va-additional-info', () => {
   it('has keyboard control for expanding & collapsing on spacebar', async () => {
     const page = await newE2EPage();
     await page.setContent(
-      `<va-additional-info trigger="Additional information">
+      `<va-additional-info trigger="Additional information" uswds="false">
         <div id="content">
           Additional content
         </div>
@@ -122,7 +122,7 @@ describe('va-additional-info', () => {
   it('has keyboard control for expanding & collapsing on enter', async () => {
     const page = await newE2EPage();
     await page.setContent(
-      `<va-additional-info trigger="Additional information">
+      `<va-additional-info trigger="Additional information" uswds="false">
         <div id="content">
           Additional content
         </div>
@@ -152,7 +152,7 @@ describe('va-additional-info', () => {
     const page = await newE2EPage();
 
     await page.setContent(`
-      <va-additional-info trigger="Whatever">
+      <va-additional-info trigger="Whatever" uswds="false">
         <div>More content</div>
       </va-additional-info>
     `);
@@ -175,7 +175,7 @@ describe('va-additional-info', () => {
     const page = await newE2EPage();
 
     await page.setContent(`
-      <va-additional-info trigger="Whatever">
+      <va-additional-info trigger="Whatever" uswds="false">
         <div>More content</div>
       </va-additional-info>
     `);
@@ -196,7 +196,7 @@ describe('va-additional-info', () => {
     const page = await newE2EPage();
 
     await page.setContent(`
-      <va-additional-info trigger="Whatever" disable-analytics>
+      <va-additional-info trigger="Whatever" disable-analytics uswds="false">
         <div>More content</div>
       </va-additional-info>
     `);
@@ -212,7 +212,7 @@ describe('va-additional-info', () => {
   it('sets the correct max-height value for the content given', async () => {
     const page = await newE2EPage();
     await page.setContent(`
-      <va-additional-info trigger="Click here for a treat!" disable-analytics>
+      <va-additional-info trigger="Click here for a treat!" disable-analytics uswds="false">
         <div style="height:50px;padding:10px 0;margin:5px 0;">We're out of treats! Try again later.</div>
       </va-additional-info>
     `);
@@ -349,7 +349,7 @@ describe('va-additional-info', () => {
   it('uswds v3 has keyboard control for expanding & collapsing on enter', async () => {
     const page = await newE2EPage();
     await page.setContent(
-      `<va-additional-info trigger="Additional information" uswds>
+      `<va-additional-info trigger="Additional information">
         <div id="content">
           Additional content
         </div>
@@ -379,7 +379,7 @@ describe('va-additional-info', () => {
     const page = await newE2EPage();
 
     await page.setContent(`
-      <va-additional-info trigger="Whatever" uswds>
+      <va-additional-info trigger="Whatever">
         <div>More content</div>
       </va-additional-info>
     `);
@@ -402,7 +402,7 @@ describe('va-additional-info', () => {
     const page = await newE2EPage();
 
     await page.setContent(`
-      <va-additional-info trigger="Whatever" uswds>
+      <va-additional-info trigger="Whatever">
         <div>More content</div>
       </va-additional-info>
     `);
@@ -423,7 +423,7 @@ describe('va-additional-info', () => {
     const page = await newE2EPage();
 
     await page.setContent(`
-      <va-additional-info trigger="Whatever" uswds disable-analytics>
+      <va-additional-info trigger="Whatever" disable-analytics>
         <div>More content</div>
       </va-additional-info>
     `);
@@ -439,7 +439,7 @@ describe('va-additional-info', () => {
   it('uswds v3 sets the correct max-height value for the content given', async () => {
     const page = await newE2EPage();
     await page.setContent(`
-      <va-additional-info trigger="Click here for a treat!" uswds disable-analytics>
+      <va-additional-info trigger="Click here for a treat!" disable-analytics>
         <div style="height:50px;padding:10px 0;margin:5px 0;">We're out of treats! Try again later.</div>
       </va-additional-info>
     `);

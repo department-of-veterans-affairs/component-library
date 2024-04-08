@@ -15,7 +15,7 @@ const radioDocs = getWebComponentDocs('va-radio');
 const radioItem = getWebComponentDocs('va-radio-option');
 
 export default {
-  title: `Components/Radio button`,
+  title: `V1 Components/Radio button`,
   id: 'components/va-radio',
   subcomponents: componentStructure(radioItem),
   parameters: {
@@ -35,6 +35,7 @@ const vaRadioConst = args => {
     required,
     'label-header-level': labelHeaderLevel,
     'header-aria-describedby': headerAriaDescribedby,
+    uswds,
     ...rest
   } = args;
   return (
@@ -46,9 +47,10 @@ const vaRadioConst = args => {
       hint={hint}
       label-header-level={labelHeaderLevel}
       header-aria-describedby={headerAriaDescribedby}
+      uswds={uswds}
     >
-      <va-radio-option label="Option one" name="example" value="1" />
-      <va-radio-option label="Option two with an extra long label, so we can get it to wrap" name="example" value="2" />
+      <va-radio-option label="Option one" name="example" value="1" uswds={uswds}/>
+      <va-radio-option label="Option two with an extra long label, so we can get it to wrap" name="example" value="2" uswds={uswds}/>
     </va-radio>
   )
 }
@@ -77,6 +79,7 @@ const ReactBindingExample = ({
   error,
   label,
   required,
+  uswds,
 }) => {
   return (
     <>
@@ -85,9 +88,10 @@ const ReactBindingExample = ({
       error={error}
       label={label}
       required={required}
+      uswds={uswds}
       onVaValueChange={e => console.log('Selected radio option:', e?.detail?.value)}>
-      <VaRadioOption label="Option one" name="example" value="1" />
-      <VaRadioOption label="Option two" name="example" value="2" />
+      <VaRadioOption label="Option one" name="example" value="1" uswds={uswds}/>
+      <VaRadioOption label="Option two" name="example" value="2" uswds={uswds}/>
     </VaRadio>
     </>
   );
@@ -98,6 +102,7 @@ const IdUsageTemplate = ({
   error,
   label,
   required,
+  uswds
 }) => {
   return (
     <>
@@ -106,13 +111,15 @@ const IdUsageTemplate = ({
         error={error}
         label={label}
         required={required}
+        uswds={uswds}
       >
-        <va-radio-option id="no1" label="No" name="group1" value="1" />
+        <va-radio-option id="no1" label="No" name="group1" value="1" uswds={uswds}/>
         <va-radio-option
           id="yes1"
           label="Yes - Any Veteran"
           name="group1"
           value="2"
+          uswds={uswds}
         />
       </va-radio>
       <br />
@@ -121,13 +128,15 @@ const IdUsageTemplate = ({
         error={error}
         label={label}
         required={required}
+        uswds={uswds}
       >
-        <va-radio-option id="no2" label="No" name="group2" value="1" />
+        <va-radio-option id="no2" label="No" name="group2" value="1" uswds={uswds}/>
         <va-radio-option
           id="yes2"
           label="Yes - Any Veteran"
           name="group2"
           value="2"
+          uswds={uswds}
         />
       </va-radio>
     </>
@@ -141,6 +150,7 @@ const OptionDescriptionExample = args => {
     label,
     hint,
     required,
+    uswds,
     ...rest
   } = args;
   return (
@@ -150,13 +160,15 @@ const OptionDescriptionExample = args => {
       label={label}
       required={required}
       hint={hint}
+      uswds={uswds}
     >
       <va-radio-option
         label="Option one"
-        name="example"
+        name="example-description"
         value="1"
+        uswds={uswds}
         description="This is optional text that can be used to describe the label in more detail." />
-      <va-radio-option label="Option two" name="example" value="2" />
+      <va-radio-option label="Option two" name="example-description" value="2" uswds={uswds}/>
     </va-radio>
   )
 }
@@ -168,6 +180,7 @@ const OptionTileExample = args => {
     label,
     hint,
     required,
+    uswds,
     ...rest
   } = args;
   return (
@@ -177,14 +190,16 @@ const OptionTileExample = args => {
       label={label}
       required={required}
       hint={hint}
+      uswds={uswds}
     >
       <va-radio-option
         label="Option one"
-        name="example"
+        name="example-tile"
         value="1"
         tile
+        uswds={uswds}
         description="This is optional text that can be used to describe the label in more detail." />
-      <va-radio-option label="Option two" name="example" value="2" tile />
+      <va-radio-option label="Option two" name="example-tile" value="2" tile uswds={uswds}/>
     </va-radio>
   )
 }

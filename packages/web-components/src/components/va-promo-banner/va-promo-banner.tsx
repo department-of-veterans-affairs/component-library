@@ -143,7 +143,7 @@ export class VaPromoBanner {
 
     return (
       <Host>
-        <div class="va-banner-body" role="banner">
+        <div class="va-banner-body">
           <i aria-hidden="true" class={this.type} role="presentation" />
           <a
             class="va-banner-content-link"

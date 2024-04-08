@@ -40,7 +40,7 @@ export class VaRadioOption {
   /**
    * Whether or not the component will use USWDS v3. styling.
    */
-  @Prop() uswds?: boolean = false;
+  @Prop() uswds?: boolean = true;
 
   /**
    * Whether or not the component will display as a tile. Available when uswds is true.
@@ -107,15 +107,23 @@ export class VaRadioOption {
             />
           <label class="usa-radio__label" htmlFor={id + 'input'}>
             {label}
-            {description && <span class="usa-radio__label-description" aria-describedby="option-label">{description}</span>}
+            {description && (
+              <span
+                class="usa-radio__label-description dd-privacy-hidden"
+                data-dd-action-name="description"
+                aria-describedby="option-label"
+              >
+                {description}
+              </span>
+            )}
           </label>
         </div>
       )
     } else {
       return (
         <Host aria-checked={checked ? `${checked}` : 'false'}>
-          <input 
-              type='radio' 
+          <input
+              type='radio'
               aria-describedby={(checked && ariaDescribedby) || null}
               checked={checked}
               name={name}
@@ -124,8 +132,18 @@ export class VaRadioOption {
               id={id + 'input'}
             />
           <label htmlFor={id + 'input'}>
-            {label}
-            {description && <span class="description" aria-describedby="option-label">{description}</span>}
+            <span>
+              {label}
+              {description && (
+                <span
+                  class="description dd-privacy-hidden"
+                  data-dd-action-name="description"
+                  aria-describedby="option-label"
+                >
+                  {description}
+                </span>
+              )}
+            </span>
           </label>
         </Host>
       );

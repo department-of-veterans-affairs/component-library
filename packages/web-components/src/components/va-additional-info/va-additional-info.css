@@ -8,7 +8,7 @@
 :host([disable-border='false']) a[aria-expanded='true'] ~ #info {
   padding-left: calc(20px - 7px);
   border-left: 7px solid transparent;
-  border-left-color: var(--color-primary-alt-darkest);
+  border-left-color: var(--vads-color-primary-alt-darkest);
 }
 
 #info {
@@ -27,8 +27,8 @@ a {
 
 .additional-info-title {
   border-bottom-right-radius: 1px;
-  border-bottom: 2px dotted var(--color-primary-alt-darkest);
-  color: var(--color-gray-dark);
+  border-bottom: 2px dotted var(--vads-color-primary-alt-darkest);
+  color: var(--vads-color-base-darker);
   cursor: pointer;
 }
 
@@ -55,7 +55,7 @@ i {
 
 i.fa-angle-down {
   display: inline-block;
-  color: var(--color-primary-alt-darkest);
+  color: var(--vads-color-primary-alt-darkest);
   font-size: 16px;
   margin: 5px;
   transform: rotate(0deg);

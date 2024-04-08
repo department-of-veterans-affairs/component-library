@@ -10,6 +10,8 @@
 
 @import '../../mixins/uswds-error-border.scss';
 @import '../../global/formation_overrides';
+@import '../../mixins/focusable.css';
+@import '~@department-of-veterans-affairs/css-library/dist/elements.css';
 
 :host {
   display: block;
@@ -17,7 +19,7 @@
   padding: 0;
 }
 
-:host([uswds]) {
+:host(:not([uswds='false'])) {
   margin-top: 24px;
 }
 
@@ -29,17 +31,17 @@
 @import '../../mixins/headers.css';
 
 .required {
-  color: var(--color-secondary-dark);
+  color: var(--vads-color-secondary-dark);
   margin: 0 0.35rem;
 }
 
-:host(:not([uswds])) fieldset {
+:host([uswds='false']) fieldset {
   border: none;
   margin: 0;
   padding: 0;
 }
 
-:host(:not([uswds])) legend {
+:host([uswds='false']) legend {
   display: block;
   max-width: 46rem;
   font-weight: inherit;

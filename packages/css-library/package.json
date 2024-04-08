@@ -1,9 +1,11 @@
 {
   "name": "@department-of-veterans-affairs/css-library",
-  "private": true,
+  "version": "0.5.1",
   "packageManager": "yarn@3.2.0",
   "files": [
-    "dist/*.css"
+    "dist/**/*.css",
+    "dist/**/*.scss",
+    "dist/**/*.json"
   ],
   "scripts": {
     "build:tokens": "style-dictionary build",
@@ -13,7 +15,7 @@
     "copy": "node ./copy-uswds-color-tokens.js"
   },
   "devDependencies": {
-    "@uswds/uswds": "^3.5.0",
+    "@uswds/uswds": "^3.7.1",
     "sass": "^1.64.1",
     "style-dictionary": "^3.8.0"
   },

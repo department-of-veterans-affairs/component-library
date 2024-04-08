@@ -60,25 +60,25 @@ const Template = ({
   extension,
   'not-clickable': notClickable,
   international,
-  ariaDescribedby,
   vanity,
   tty,
-  sms
+  sms,
+  'message-aria-describedby': messageAriaDescribedBy,
 }) => {
   return (
     <div>
-      {ariaDescribedby && (
-        <span id={ariaDescribedby}>Phone number title: </span>
+      {messageAriaDescribedBy && (
+        <span>Main number to facility</span>
       )}
       <va-telephone
         contact={contact}
         extension={extension}
         not-clickable={notClickable}
         international={international}
-        aria-describedby={ariaDescribedby}
         vanity={vanity}
         tty={tty}
         sms={sms}
+        message-aria-describedby={messageAriaDescribedBy}
       ></va-telephone>
     </div>
   );
@@ -96,6 +96,7 @@ const defaultArgs = {
 
 export const Default = Template.bind(null);
 Default.args = {
+  'message-aria-describedby': false,
   ...defaultArgs,
 };
 Default.argTypes = propStructure(telephoneDocs);
@@ -140,7 +141,7 @@ SMS.args = {
 export const AriaDescribedBy = Template.bind(null);
 AriaDescribedBy.args = {
   ...defaultArgs,
-  ariaDescribedby: 'numberDescription',
+  'message-aria-describedby': 'Main number to facility',
 };
 
 export const VanityNumber = Template.bind(null);

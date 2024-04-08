@@ -1,16 +1,18 @@
 {
   "name": "@department-of-veterans-affairs/component-library",
   "description": "VA.gov component library. Includes React and web components.",
-  "version": "23.0.0",
+  "version": "38.0.3",
   "license": "MIT",
   "scripts": {
     "build": "webpack"
   },
   "files": [
-    "dist/*",
+    "dist/",
+    "src/",
     "*.js"
   ],
   "main": "dist/app.bundle.js",
+  "types": "dist/components/types/index.d.ts",
   "module": "src/main.js",
   "dependencies": {
     "@department-of-veterans-affairs/react-components": "workspace:*",

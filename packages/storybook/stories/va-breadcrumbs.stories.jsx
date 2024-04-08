@@ -4,7 +4,7 @@ import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
 const breadcrumbsDocs = getWebComponentDocs('va-breadcrumbs');
 
 export default {
-  title: 'Components/Breadcrumbs',
+  title: 'V1 Components/Breadcrumbs',
   id: 'components/va-breadcrumbs',
   parameters: {
     componentSubtitle: 'va-breadcrumbs web component',
@@ -14,9 +14,9 @@ export default {
   },
 };
 
-const Template = ({ label, 'disable-analytics': disableAnalytics }) => (
-  <va-breadcrumbs label={label} disable-analytics={disableAnalytics}>
-    <a href="#home">Home</a>
+const Template = ({ label, 'disable-analytics': disableAnalytics, uswds }) => (
+  <va-breadcrumbs label={label} disable-analytics={disableAnalytics} uswds={uswds}>
+    <a href="#home">VA.gov home</a>
     <a href="#one">Level one</a>
     <a href="#two">Level two</a>
   </va-breadcrumbs>
@@ -24,16 +24,17 @@ const Template = ({ label, 'disable-analytics': disableAnalytics }) => (
 
 const DynamicCrumbsTemplate = ({ 
   label, 
-  'disable-analytics': disableAnalytics 
+  'disable-analytics': disableAnalytics,
+  uswds
 }) => {
   const breadcrumbs = [
-    {label: 'Level 1', path: '/#1'},
+    {label: 'VA.gov home', path: '/#1'},
     {label: 'Level 2', path: '/#2'},
     {label: 'Level 3', path: '/#3'},
   ];
 
   const breadcrumbs2 = [
-    {label: 'First Link', path: '#example1'},
+    {label: 'VA.gov home', path: '#example1'},
     {label: 'Second Link', path: '#example2'},
     {label: 'Third Link', path: '#example3'},
     {label: 'Fourth Link', path: '#example4'},
@@ -57,7 +58,7 @@ const DynamicCrumbsTemplate = ({
       <br/>
       <p>Note: To rerender the breadcrumbs dynamically, the anchor links must be wrapped in list tags.</p>
       {crumbs.length > 0 && (
-        <va-breadcrumbs label={label} disable-analytics={disableAnalytics}>
+        <va-breadcrumbs label={label} disable-analytics={disableAnalytics} uswds={uswds}>
           {crumbs?.map((crumb, i) => {
             return (
               <li key={i}>
@@ -77,6 +78,7 @@ const DynamicCrumbsTemplate = ({
 const defaultArgs = {
   'label': 'Breadcrumb',
   'disable-analytics': false,
+  'uswds': false
 };
 
 export const Default = Template.bind(null);

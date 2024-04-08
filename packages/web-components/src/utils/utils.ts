@@ -22,11 +22,13 @@ export function getSlottedNodes(
   nodeName: string | null,
 ): Array<Node> {
   // This will only get the first slot on a component
-  const children = root.shadowRoot.querySelector('slot').assignedNodes()
+  const children = root.shadowRoot.querySelector('slot').assignedNodes();
 
-  return nodeName !== null ? Array.from(children).filter(
+  return nodeName !== null
+    ? Array.from(children).filter(
         item => item.nodeName.toLowerCase() === nodeName,
-  ) : Array.from(children);
+      )
+    : Array.from(children);
 }
 
 /**
@@ -56,7 +58,7 @@ export function getCharacterMessage(
   value: string | undefined,
   maxlength: number | undefined,
 ): string {
-  if (value === undefined) {
+  if (value === undefined || value === '') {
     return `${maxlength} character${plurality(maxlength)} allowed`;
   }
 
@@ -76,4 +78,102 @@ export function getCharacterMessage(
 // start and end are both positive integers where start < end.
 export function makeArray(start: number, end: number) {
   return Array.from({ length: end - start + 1 }, (_, i) => start + i);
+}
+
+/**
+ * @name isElement
+ * @desc returns whether or not the given argument is a DOM element.
+ */
+const isElement = (value: any): boolean =>
+  value && typeof value === 'object' && value.nodeType === 1;
+
+/**
+ * @name select
+ * @desc selects elements from the DOM by class selector or ID selector
+ */
+function select(selector: string, context?: HTMLElement): HTMLElement[] {
+  if (typeof selector !== 'string') {
+    return [];
+  }
+
+  if (!context || !isElement(context)) {
+    return [];
+  }
+
+  const selection = context.shadowRoot.querySelectorAll(selector);
+  return Array.from(selection) as HTMLElement[];
+}
+
+/**
+ * @name selectOrMatches
+ * @desc selects elements from a specific DOM context by class selector or ID selector.
+ */
+export function selectOrMatches(
+  selector: string,
+  context?: HTMLElement,
+): HTMLElement[] {
+  const selection = select(selector, context);
+
+  if (typeof selector !== 'string') {
+    return selection;
+  }
+
+  if (isElement(context) && context.matches(selector)) {
+    selection.push(context);
+  }
+
+  return selection;
+}
+
+/**
+ * Sanitizes strings of HTML to be output in innerHTML of an element
+ */
+export const Sanitizer = {
+  _entity: /[&<>"'/]/g,
+
+  /* eslint-disable i18next/no-literal-string */
+  _entities: {
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;',
+    '"': '&quot;',
+    "'": '&apos;',
+    '/': '&#x2F;',
+  },
+  /* eslint-enable i18next/no-literal-string */
+
+  getEntity: function (s) {
+    return Sanitizer._entities[s];
+  },
+
+  /**
+   * Escapes HTML for all values in a tagged template string.
+   */
+  escapeHTML: function (strings: string | string[]) {
+    var result = '';
+
+    for (var i = 0; i < strings.length; i++) {
+      result += strings[i];
+      if (i + 1 < arguments.length) {
+        var value = arguments[i + 1] || '';
+        result += String(value).replace(Sanitizer._entity, Sanitizer.getEntity);
+      }
+    }
+
+    return result;
+  },
+};
+
+/**
+ * return the heading level based on an integer input
+ * if invalid input return null
+ */
+export function getHeaderLevel(headerInput: number | string): string | null {
+  let headerLevel: number | null = null;
+  if (typeof headerInput === 'string') {
+    headerLevel = parseInt(headerInput, 10);
+  } else {
+    headerLevel = Math.floor(headerInput);
+  }
+  return headerLevel >= 1 && headerLevel <= 6 ? `h${headerLevel}` : null;
 }

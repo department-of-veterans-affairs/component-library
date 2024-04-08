@@ -67,7 +67,7 @@ Releases will occur no less often than at the beginning of each sprint (every ot
 6. For the release title, type the same thing you entered for the tag (`v{versionNumber}`).
 7. Click on the "Generate release notes" button. If the button is disabled, double-check that the tag/version number is correct and hasn't been released before.
 8. Review the release notes for any typos and/or unneeded notes. Remember that these release notes are intended for public use, so they should be professional in their tone and appearance.
-9. Take a screenshot of the release notes and post in the `#vsp-design-system-team` channel on slack; ask for others to double-check that everything looks good and that there aren't any last-minute additions to the release that need to be included.
+9. Take a screenshot of the release notes and post in the `#platform-design-system-team` channel on slack; ask for others to double-check that everything looks good and that there aren't any last-minute additions to the release that need to be included.
 10. Back in GitHub, ensure the "Set as the latest release" checkbox is checked.
 11. Press the "Publish release" button. GitHub Actions will take care of any necessary build and publishing steps.
 12. If [vets-website](https://github.com/department-of-veterans-affairs/vets-website) will need to take advantage of the latest release sooner than later, open a PR to update the dependency version there (update your local copy and then submit a PR to merge the latest version bump).
@@ -113,7 +113,7 @@ This will allow you to run Storybook locally to view all components
 
 ### Running tests for web components
 
-To run units for the web-components project, the commands are:
+To run unit tests for all components, the commands are:
 
 ```bash
 yarn test
@@ -125,20 +125,20 @@ and
 yarn test.watch
 ```
 
-In order to a single file, you can run:
+To test a single file, run:
 
 ```bash
-npx stencil test --e2e -- src/components/[component-name]/[component-name].e2e.ts
+npx stencil test --e2e -- src/components/[component-name]/test/[component-name].e2e.ts
 ```
 
 Replace `[component-name]` with the name of the component you want to test. Optionally, you can add `--watchAll` after `--e2e` to watch the file for changes. For example:
 
 ```bash
-npx stencil test --e2e --watchAll -- src/components/[component-name]/[component-name].e2e.ts
+npx stencil test --e2e --watchAll -- src/components/[component-name]/test/[component-name].e2e.ts
 ```
 
-Another option is to use wildcards to query for certain tests. For example, to run all tests for the `va-alert` component, you can run:
+Another option is to use wildcards to query for certain tests. For example, to run all tests for the `va-accordion` component, you can run:
 
 ```bash
-npx stencil test --e2e  -- src/components/va-accordion/va-accordion-*
+npx stencil test --e2e  -- src/components/va-accordion/test/va-accordion-*
 ```

@@ -19,7 +19,7 @@
 
 ::slotted(*) {
   display: table-cell;
-  border: 1px solid var(--color-gray);
+  border: 1px solid var(--vads-color-base-dark);
   padding: 1rem 1.5rem;
 }
 
@@ -29,10 +29,10 @@
 
 @media screen and (max-width: 768px) {
   :host {
-    border-bottom: 1px solid var(--color-gray-medium);
+    border-bottom: 1px solid var(--vads-color-gray-medium);
   }
   :host:first-child {
-    border-top: 1px solid var(--color-gray-medium);
+    border-top: 1px solid var(--vads-color-gray-medium);
   }
 
   ::slotted([role='cell']) {

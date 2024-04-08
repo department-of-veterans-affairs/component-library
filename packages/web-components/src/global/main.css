@@ -1,4 +1,4 @@
-@import 'variables.css';
+@import '~@department-of-veterans-affairs/css-library/dist/tokens/css/variables.css';
 @import '../components/va-breadcrumbs/va-breadcrumbs-slot.css';
 @import '../components/va-modal/va-modal-slot.css';
 @import '../components/va-table/va-table-slot.css';

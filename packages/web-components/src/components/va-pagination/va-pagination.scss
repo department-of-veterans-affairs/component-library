@@ -5,17 +5,21 @@
 @import '../../mixins/focusable.css';
 @import '../../global/formation_overrides';
 
-:host([uswds]) a.usa-pagination__next-page > div, a.usa-pagination__previous-page > div {
-  display: flex;
+// Formation does not specify box-sizing on li elements, this is needed for pagination to fit on 320px size screens
+.va-pagination__item {
+  box-sizing: border-box;
 }
 
-:host([uswds]) .usa-pagination .usa-current {
-  background-color: var(--color-primary);
+:host(:not([uswds='false'])) {
+  a.usa-pagination__next-page > div,
+  a.usa-pagination__previous-page > div {
+    display: flex;
+  }
 }
 
 :host {
-  background-color: var(--color-white);
-  border-top: 1px solid var(--color-gray-lightest);
+  background-color: var(--vads-color-white);
+  border-top: 1px solid var(--vads-color-base-lightest);
   display: flex;
   font-family: var(--font-source-sans);
   justify-content: center;
@@ -39,7 +43,7 @@ button {
   -webkit-font-smoothing: auto;
   background-color: transparent;
   border: 0;
-  color: var(--color-link-default);
+  color: var(--vads-color-link);
   cursor: pointer;
   display: inline-flex;
   font-family: inherit;
@@ -61,14 +65,14 @@ button {
 .button-next:hover,
 .button-prev:hover {
   background-color: transparent;
-  color: var(--color-link-default);
+  color: var(--vads-color-link);
   text-decoration: underline;
 }
 
 .pagination-next:hover,
 .pagination-prev:hover {
   text-decoration: underline;
-  text-decoration-color: var(--color-primary);
+  text-decoration-color: var(--vads-color-primary);
 }
 
 .pagination-inner {
@@ -88,8 +92,8 @@ button {
 .button-inner[aria-current='true'],
 .button-inner:hover,
 .button-inner:focus {
-  background-color: var(--color-primary);
-  color: var(--color-white);
+  background-color: var(--vads-color-primary);
+  color: var(--vads-button-color-text-primary-on-light);
 }
 
 .pagination-inner,

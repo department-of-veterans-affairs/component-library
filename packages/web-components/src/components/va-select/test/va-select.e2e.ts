@@ -5,7 +5,7 @@ describe('va-select', () => {
   it('renders', async () => {
     const page = await newE2EPage();
     await page.setContent(`
-      <va-select label="A label" value="bar">
+      <va-select label="A label" value="bar" uswds="false">
         <option value="">Please choose an option</option>
         <option value="foo">Foo</option>
         <option value="bar">Bar</option>
@@ -14,7 +14,7 @@ describe('va-select', () => {
     const element = await page.find('va-select');
 
     expect(element).toEqualHtml(`
-      <va-select label="A label" value="bar" class="hydrated">
+      <va-select label="A label" value="bar" class="hydrated" uswds="false">
         <mock:shadow-root>
           <label for="select" part="label">
             A label
@@ -36,7 +36,7 @@ describe('va-select', () => {
 
   it('renders an error message', async () => {
     const page = await newE2EPage();
-    await page.setContent('<va-select error="This is a mistake" />');
+    await page.setContent('<va-select error="This is a mistake" uswds="false" />');
 
     // Render the error message text
     const error = await page.find('va-select >>> span#error-message');
@@ -47,7 +47,7 @@ describe('va-select', () => {
 
   it('renders hint text', async () => {
     const page = await newE2EPage();
-    await page.setContent('<va-select hint="This is hint text" />');
+    await page.setContent('<va-select hint="This is hint text" uswds="false"/>');
 
     // Render the hint text
     const hintTextElement = await page.find('va-select >>> span.hint-text');
@@ -56,7 +56,7 @@ describe('va-select', () => {
 
   it('sets aria-invalid based on invalid prop', async () => {
     const page = await newE2EPage();
-    await page.setContent('<va-select invalid />');
+    await page.setContent('<va-select invalid uswds="false"/>');
 
     const input = await page.find('va-select >>> select');
     expect(input.getAttribute('aria-invalid')).toEqual('true');
@@ -65,7 +65,7 @@ describe('va-select', () => {
   it('changes its value prop when selected', async () => {
     const page = await newE2EPage();
     await page.setContent(`
-      <va-select value="bar">
+      <va-select value="bar" uswds="false">
         <option value="">Please choose an option</option>
         <option value="foo">Foo</option>
         <option value="bar">Bar</option>
@@ -86,7 +86,7 @@ describe('va-select', () => {
   it('passes an axe check', async () => {
     const page = await newE2EPage();
     await page.setContent(`
-        <va-select label="A label">
+        <va-select label="A label" uswds="false">
           <option value="">Please select an option</option>
           <option value="foo">Foo</option>
           <option value="bar">Bar</option>
@@ -99,7 +99,7 @@ describe('va-select', () => {
   it('does not fire an analytics event without enable-enalytics prop', async () => {
     const page = await newE2EPage();
     await page.setContent(`
-      <va-select label="A label" value="foo">
+      <va-select label="A label" value="foo" uswds="false">
         <option value="foo">Foo</option>
         <option value="bar">Bar</option>
       </va-select>
@@ -117,7 +117,7 @@ describe('va-select', () => {
   it('fires an analytics event when the selected value changes', async () => {
     const page = await newE2EPage();
     await page.setContent(`
-      <va-select label="A label" value="foo" enable-analytics>
+      <va-select label="A label" value="foo" enable-analytics uswds="false">
         <option value="foo">Foo</option>
         <option value="bar">Bar</option>
       </va-select>
@@ -142,7 +142,7 @@ describe('va-select', () => {
   it('fires a custom event when the selected value changes', async () => {
     const page = await newE2EPage();
     await page.setContent(`
-      <va-select label="A label" value="foo" enable-analytics>
+      <va-select label="A label" value="foo" enable-analytics uswds="false">
         <option value="foo">Foo</option>
         <option value="bar">Bar</option>
       </va-select>
@@ -160,7 +160,7 @@ describe('va-select', () => {
   it('fires a custom event when a keydown happens in the select element', async () => {
     const page = await newE2EPage();
     await page.setContent(`
-      <va-select label="A label" value="foo" enable-analytics>
+      <va-select label="A label" value="foo" enable-analytics uswds="false">
         <option value="foo">Foo</option>
         <option value="bar">Bar</option>
       </va-select>
@@ -181,7 +181,7 @@ describe('va-select', () => {
     const page = await newE2EPage();
 
     await page.setContent(`
-      <va-select label="A label" value="bar" uswds>
+      <va-select label="A label" value="bar">
         <option value="">Please choose an option</option>
         <option value="foo">Foo</option>
         <option value="bar">Bar</option>
@@ -190,7 +190,7 @@ describe('va-select', () => {
     const element = await page.find('va-select');
 
     expect(element).toEqualHtml(`
-      <va-select label="A label" uswds="" value="bar" class="hydrated">
+      <va-select label="A label" value="bar" uswds="" class="hydrated">
         <mock:shadow-root>
           <label class="usa-label" for="options" part="label">
             A label
@@ -209,5 +209,28 @@ describe('va-select', () => {
         <option value="bar">Bar</option>
       </va-select>
     `);
+  });
+
+  it('adds aria-describedby input-message id', async () => {
+    const page = await newE2EPage();
+    await page.setContent(`
+      <va-select label="A label" value="foo" enable-analytics message-aria-describedby="example message">
+        <option value="foo">Foo</option>
+        <option value="bar">Bar</option>
+      </va-select>
+    `);
+    const el = await page.find('va-select');
+    const inputEl = await page.find('va-select >>> select');
+
+    // Render the example message aria-describedby id.
+    expect(inputEl.getAttribute('aria-describedby')).not.toBeNull();
+    expect(inputEl.getAttribute('aria-describedby')).toContain('input-message');
+
+    // If an error and aria-describedby-message is set, id's exist in aria-describedby.
+    el.setProperty('error', 'Testing Error');
+    await page.waitForChanges();
+    expect(inputEl.getAttribute('aria-describedby')).not.toBeNull();
+    expect(inputEl.getAttribute('aria-describedby')).toContain('error-message');
+    expect(inputEl.getAttribute('aria-describedby')).toContain('input-message');
   });
 });

@@ -3,7 +3,7 @@
 }
 
 .need-help h2 {
-  border-bottom: 3px solid var(--color-primary);
+  border-bottom: 3px solid var(--vads-color-primary);
   margin: 0.3em 0;
   font-family: var(--font-serif);
   font-size: 1.35em;

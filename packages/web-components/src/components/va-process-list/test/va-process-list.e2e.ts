@@ -5,7 +5,7 @@ describe('va-process-list', () => {
   it('renders slotted nodes into an ordered list', async () => {
     const page = await newE2EPage();
     await page.setContent(`
-      <va-process-list>
+      <va-process-list uswds="false">
         <li>
           <h2>Step one</h2>
           <p>Some content</p>
@@ -23,7 +23,7 @@ describe('va-process-list', () => {
 
     const element = await page.find('va-process-list');
     expect(element).toEqualHtml(`
-      <va-process-list class="hydrated">
+      <va-process-list class="hydrated" uswds="false">
         <mock:shadow-root>
           <ol role="list">
             <slot></slot>
@@ -48,7 +48,7 @@ describe('va-process-list', () => {
   it('passes an axe check', async () => {
     const page = await newE2EPage();
     await page.setContent(`
-        <va-process-list>
+        <va-process-list uswds="false">
           <li>One</li>
           <li>Two</li>
           <li>Three</li>
@@ -81,7 +81,7 @@ describe('va-process-list', () => {
   it('v3 uswds renders slotted nodes into an ordered list', async () => {
     const page = await newE2EPage();
     await page.setContent(`
-      <va-process-list uswds>
+      <va-process-list>
         <va-process-list-item header="Step one">
           <p>Some content</p>
         </va-process-list-item>
@@ -97,7 +97,7 @@ describe('va-process-list', () => {
 
     const element = await page.find('va-process-list');
     expect(element).toEqualHtml(`
-      <va-process-list class="hydrated " uswds class="hydrated">
+      <va-process-list class="hydrated" class="hydrated">
         <mock:shadow-root>
           <ol class="usa-process-list" role="list">
             <slot></slot>

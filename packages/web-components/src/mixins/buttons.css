@@ -3,7 +3,7 @@ button {
   appearance: none;
   border: 0;
   border-radius: 5px;
-  color: var(--color-white);
+  color: var(--vads-button-color-text-primary-alt-on-light);
   cursor: pointer;
   display: inline-block;
   font-family: var(--font-source-sans);

@@ -1,0 +1,20 @@
+{
+  "xsmall-screen": {
+    "value": "320px"
+  },
+  "small-screen": {
+    "value": "481px"
+  },
+  "medium-mobile": {
+    "value": "640px"
+  },
+  "medium-screen": {
+    "value": "768px"
+  },
+  "small-desktop-screen": {
+    "value": "1008px"
+  },
+  "large-screen": {
+    "value": "1201px"
+  }
+}

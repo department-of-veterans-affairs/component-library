@@ -17,15 +17,15 @@
 
 // Override transparent background from USWDS v3
 .usa-button--outline {
-  background-color: var(--color-white);
+  background-color: var(--vads-button-color-background-secondary-on-light);
 }
 
 .va-button-primary--alternate {
-  background: var(--color-green);
+  background: var(--vads-color-success-dark);
 
   &:hover,
   &:focus {
-    background-color: var(--color-green-darker);
+    background-color: var(--vads-button-color-background-primary-alt-active-on-light);
     text-decoration: none;
   }
 }
@@ -34,60 +34,62 @@
 
 @import '../../mixins/buttons.css';
 
-:host(:not([uswds])) button {
-  align-items: center;
-  background-color: var(--color-primary);
-  border-radius: 5px;
-  color: var(--color-white);
-  display: flex;
-  font-size: 1.6rem;
-  justify-content: center;
-  margin: 0.5em 0.5em 0.5em 0;
-}
+:host([uswds='false']) {
+  button {
+    align-items: center;
+    background-color: var(--vads-color-primary);
+    border-radius: 5px;
+    color: var(--vads-button-color-text-primary-alt-on-light);
+    display: flex;
+    font-size: 1.6rem;
+    justify-content: center;
+    margin: 0.5em 0.5em 0.5em 0;
+  }
 
-:host(:not([uswds])) button:hover,
-:host(:not([uswds])) button:focus {
-  background-color: var(--color-primary-darker);
-}
+  button:hover,
+  button:focus {
+    background-color: var(--vads-color-primary-dark);
+  }
 
-:host(:not([uswds])) button:active {
-  background-color: var(--color-primary-darkest);
-}
+  button:active {
+    background-color: var(--vads-color-primary-darker);
+  }
 
-:host(:not([uswds])) button.va-button-primary--alternate {
-  background: var(--color-green);
+  button.va-button-primary--alternate {
+    background: var(--vads-color-success-dark);
 
-  &:hover,
-  &:focus {
-    background-color: var(--color-green-darker);
-    text-decoration: none;
+    &:hover,
+    &:focus {
+      background-color: var(--vads-button-color-background-primary-alt-active-on-light);
+      text-decoration: none;
+    }
   }
 }
 
-:host(:not([uswds])[back]:not([back='false'])) button,
-:host(:not([uswds])[secondary]:not([secondary='false'])) button {
-  background-color: var(--color-white);
-  box-shadow: inset 0 0 0 2px var(--color-primary);
-  color: var(--color-primary);
+:host([uswds='false'][back]:not([back='false'])) button,
+:host([uswds='false'][secondary]:not([secondary='false'])) button {
+  background-color: var(--vads-button-color-background-secondary-on-light);
+  box-shadow: inset 0 0 0 2px var(--vads-color-primary);
+  color: var(--vads-color-primary);
 }
 
-:host(:not([uswds])[back]:not([back='false'])) button:active,
-:host(:not([uswds])[back]:not([back='false'])) button:hover,
-:host(:not([uswds])[secondary]:not([secondary='false'])) button:active,
-:host(:not([uswds])[secondary]:not([secondary='false'])) button:hover {
-  background-color: var(--color-gray-cool-light);
-  box-shadow: inset 0 0 0 2px var(--color-primary-darker);
-  color: var(--color-primary-darker);
+:host([uswds='false'][back]:not([back='false'])) button:active,
+:host([uswds='false'][back]:not([back='false'])) button:hover,
+:host([uswds='false'][secondary]:not([secondary='false'])) button:active,
+:host([uswds='false'][secondary]:not([secondary='false'])) button:hover {
+  background-color: var(--vads-color-gray-cool-light);
+  box-shadow: inset 0 0 0 2px var(--vads-color-primary-dark);
+  color: var(--vads-color-primary-dark);
 }
 
-:host(:not([uswds])[back]:not([back='false'])) button:focus,
-:host(:not([uswds])[secondary]:not([secondary='false'])) button:focus {
-  background-color: var(--color-gray-cool-light);
-  box-shadow: inset 0 0 0 2px var(--color-primary);
-  color: var(--color-primary);
+:host([uswds='false'][back]:not([back='false'])) button:focus,
+:host([uswds='false'][secondary]:not([secondary='false'])) button:focus {
+  background-color: var(--vads-color-gray-cool-light);
+  box-shadow: inset 0 0 0 2px var(--vads-color-primary);
+  color: var(--vads-color-primary);
 }
 
-:host(:not([uswds])[big]:not([big='false'])) button {
+:host([uswds='false'][big]:not([big='false'])) button {
   border-radius: 8px;
   font-size: 2.4rem;
   padding: 1.5rem 3rem;
@@ -111,9 +113,8 @@ i.fa-angles-right::before {
   margin-left: 8px;
 }
 
-:host(:not([uswds])[disabled]:not([disabled='false'])) button {
-  background-color: var(--color-gray-lighter);
+:host([uswds='false'][disabled]:not([disabled='false'])) button {
+  background-color: var(--vads-color-base-lighter);
   box-shadow: none;
-  color: var(--color-white);
+  color: var(--vads-button-color-text-primary-alt-on-light);
 }
-

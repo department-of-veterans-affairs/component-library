@@ -5,7 +5,7 @@ import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
 const selectDocs = getWebComponentDocs('va-select');
 
 export default {
-  title: 'USWDS/Select USWDS',
+  title: 'Components/Select USWDS',
   id: 'uswds/va-select',
   parameters: {
     componentSubtitle: 'va-select web component',
@@ -21,9 +21,9 @@ const defaultArgs = {
   'value': '',
   'required': false,
   'error': undefined,
-  'uswds': true,
   'hint': null,
   'aria-live-region-text': 'You selected',
+  'aria-describedby-message': 'Optional description text for screen readers',
   'options': [
     <option key="1" value="navy">
       Navy
@@ -50,9 +50,9 @@ const Template = ({
   value,
   required,
   error,
-  uswds,
   hint,
   'aria-live-region-text': ariaLiveRegionText,
+  'aria-describedby-message': ariaDescribedbyMessage,
   options,
   'use-add-button': useAddButton,
 }) => {
@@ -62,7 +62,6 @@ const Template = ({
     <>
       {useAddButton && (
         <va-button
-          uswds
           onClick={() => {
             setModifiedOptions([
               ...modifiedOptions,
@@ -75,7 +74,6 @@ const Template = ({
         />
       )}
       <va-select
-        uswds={uswds}
         label={label}
         name={name}
         value={value}
@@ -83,6 +81,7 @@ const Template = ({
         error={error}
         hint={hint}
         aria-live-region-text={ariaLiveRegionText}
+        message-aria-describedby={ariaDescribedbyMessage}
         use-add-button={useAddButton}
       >
         {modifiedOptions}
@@ -97,7 +96,6 @@ const InertTemplate = ({
   value,
   required,
   error,
-  uswds,
   hint,
   'aria-live-region-text': ariaLiveRegionText,
   options,
@@ -113,7 +111,6 @@ const InertTemplate = ({
       </p>
       {useAddButton && (
         <va-button
-          uswds
           onClick={() => {
             setModifiedOptions([
               ...modifiedOptions,
@@ -126,7 +123,6 @@ const InertTemplate = ({
         />
       )}
       <va-select
-        uswds={uswds}
         label={label}
         name={name}
         value={'navy'}
@@ -172,8 +168,8 @@ const I18nTemplate = args => {
 
   return (
     <div>
-      <va-button uswds onClick={e => setLang('es')} text="Español"/>
-      <va-button uswds onClick={e => setLang('en')} text="English"/>
+      <va-button onClick={e => setLang('es')} text="Español"/>
+      <va-button onClick={e => setLang('en')} text="English"/>
       <va-select {...rest}>{options}</va-select>
     </div>
   );

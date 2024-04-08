@@ -1,0 +1,21 @@
+{
+    "bootstrap-sha": "8e9695af82024c13ebfa46b305d7d11a1066a32c",
+    "last-release-sha": "8e9695af82024c13ebfa46b305d7d11a1066a32c",
+    "packages":{
+        "packages/core":{
+            "component": "@department-of-veterans-affairs/component-library"
+        },
+        "packages/css-library":{
+            "component": "@department-of-veterans-affairs/css-library"
+        },
+        "packages/design-system-dashboard-cli":{
+            "component": "dst-dashboard"
+        },
+        "packages/react-components":{
+            "component": "@department-of-veterans-affairs/react-components"
+        },
+        "packages/web-components":{
+            "component": "@department-of-veterans-affairs/web-components"
+        }
+    }
+}

@@ -12,14 +12,6 @@ export const additionalDocs = {
     maturityCategory: USE,
     maturityLevel: DEPLOYED,
   },
-  'Breadcrumbs - React': {
-    maturityCategory: DONT_USE,
-    maturityLevel: DEPRECATED,
-  },
-  'Checkbox - React': {
-    maturityCategory: DONT_USE,
-    maturityLevel: DEPRECATED,
-  },
   // MDX
   'Divider': {
     guidanceHref: 'divider',
@@ -35,14 +27,6 @@ export const additionalDocs = {
     maturityCategory: DONT_USE,
     maturityLevel: DEPRECATED,
   },
-  'Icon - base': {
-    maturityCategory: CAUTION,
-    maturityLevel: AVAILABLE,
-  },
-  'Icon - search': {
-    maturityCategory: CAUTION,
-    maturityLevel: AVAILABLE,
-  },
   // MDX
   'Link - Action': {
     guidanceHref: 'link/action',
@@ -50,19 +34,7 @@ export const additionalDocs = {
     maturityCategory: USE,
     maturityLevel: DEPLOYED,
   },
-  'Banner - Maintenance': {
-    maturityCategory: USE,
-    maturityLevel: DEPLOYED,
-    guidanceHref: 'banner/maintenance',
-    guidanceName: 'Banner - maintenance',
-  },
   'Modal - React': {
-    maturityCategory: DONT_USE,
-    maturityLevel: DEPRECATED,
-  },
-  'OMB info - React': {
-    guidanceHref: 'omb-info',
-    guidanceName: 'OMB info',
     maturityCategory: DONT_USE,
     maturityLevel: DEPRECATED,
   },
@@ -83,9 +55,5 @@ export const additionalDocs = {
     guidanceName: 'Tag',
     maturityCategory: USE,
     maturityLevel: DEPLOYED,
-  },
-  'TextInput - React': {
-    maturityCategory: DONT_USE,
-    maturityLevel: DEPRECATED,
   },
 };
