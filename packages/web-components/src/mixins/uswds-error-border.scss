@@ -3,7 +3,7 @@
 
 :host([error]:not([error='']):not([uswds='false'])) {
     border-left: 0.25rem solid $vads-color-secondary-dark;
-    padding-left: rem-override(1rem);
+    padding-left: 1rem;
     position: relative;
 }
 
@@ -14,7 +14,7 @@
 :host([error]:not([error='']):not([uswds='false'])[use-forms-pattern='multiple']) {
     .input-wrap {
         border-left: 0.25rem solid $vads-color-secondary-dark;
-        padding-left: rem-override(1rem);
+        padding-left: 1rem;
         position: relative;
     }
 }
