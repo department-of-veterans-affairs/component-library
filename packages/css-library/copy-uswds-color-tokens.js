@@ -17,6 +17,7 @@ const tokensToKeep = {
       'blue-90',
       'blue-vivid-50',
       'blue-vivid-60',
+      'blue-vivid-70'
     ],
   },
   'blue-cool': {
@@ -33,6 +34,9 @@ const tokensToKeep = {
     file: 'blue-warm.json',
     colors: [
       'blue-warm-10',
+      'blue-warm-30',
+      'blue-warm-50',
+      'blue-warm-60',
       'blue-warm-vivid-60',
       'blue-warm-vivid-70',
       'blue-warm-vivid-80',
@@ -50,6 +54,7 @@ const tokensToKeep = {
       'gold-vivid-20',
       'gold-vivid-30',
       'gold-vivid-50',
+      'gold-50'
     ],
   },
   'gray': {
@@ -95,25 +100,35 @@ const tokensToKeep = {
     file: 'gray-warm.json',
     colors: ['gray-warm-10', 'gray-warm-70'],
   },
+  'green-warm': {
+    file: 'green-warm.json',
+    colors: ['green-warm-50']
+  },
   'green-cool': {
     file: 'green-cool.json',
     colors: [
       'green-cool-5',
       'green-cool-20',
       'green-cool-40',
+      'green-cool-50',
       'green-cool-vivid-20',
       'green-cool-vivid-40',
       'green-cool-vivid-50',
       'green-cool-vivid-60',
+      'green-cool-vivid-70',
     ],
   },
   'orange': {
     file: 'orange.json',
     colors: ['orange-40'],
   },
+  'orange-warm': {
+    file: 'orange-warm.json',
+    colors: ['orange-warm-50']
+  },
   'red': {
     file: 'red.json',
-    colors: ['red-30', 'red-50', 'red-70', 'red-vivid-60', 'red-vivid-70'],
+    colors: ['red-30', 'red-50', 'red-60', 'red-70', 'red-vivid-60', 'red-vivid-70'],
   },
   'red-cool': {
     file: 'red-cool.json',
@@ -138,10 +153,22 @@ const tokensToKeep = {
     file: 'violet.json',
     colors: ['violet-vivid-70'],
   },
+  'violet-warm': {
+    file: 'violet-warm.json',
+    colors: ['violet-warm-60']
+  },
   'yellow': {
     file: 'yellow.json',
-    colors: ['yellow-5', 'yellow-vivid-10', 'yellow-vivid-20'],
+    colors: ['yellow-5', 'yellow-50', 'yellow-vivid-10', 'yellow-vivid-20'],
   },
+  'indigo-cool': {
+    file: 'indigo-cool.json',
+    colors: ['indigo-cool-60']
+  },
+  'mint-cool': {
+    file: 'mint-cool.json',
+    colors: ['mint-cool-50']
+  }
 };
 // Desired prefix/namespace for colors
 const prefix = 'uswds-system-color';

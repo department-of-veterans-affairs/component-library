@@ -4,7 +4,7 @@ import { axeCheck } from '../../../testing/test-helpers';
 describe('va-checkbox-group', () => {
   it('renders', async () => {
     const page = await newE2EPage();
-    await page.setContent('<va-checkbox-group></va-checkbox-group>');
+    await page.setContent('<va-checkbox-group uswds="false"></va-checkbox-group>');
 
     const element = await page.find('va-checkbox-group');
     expect(element).toHaveClass('hydrated');
@@ -14,10 +14,10 @@ describe('va-checkbox-group', () => {
     const page = await newE2EPage();
     await page.setContent(
       `
-      <va-checkbox-group>
-        <va-checkbox label="Option one" value="1"></va-checkbox>
-        <va-checkbox label="Option 2" value="2"></va-checkbox>
-        <va-checkbox label="Option 3" value="3"></va-checkbox>
+      <va-checkbox-group uswds="false">
+        <va-checkbox label="Option one" value="1" uswds="false"></va-checkbox>
+        <va-checkbox label="Option 2" value="2" uswds="false"></va-checkbox>
+        <va-checkbox label="Option 3" value="3" uswds="false"></va-checkbox>
       </va-checkbox-group>
     `,
     );
@@ -28,7 +28,7 @@ describe('va-checkbox-group', () => {
   it('renders an error message if passed', async () => {
     const page = await newE2EPage();
     await page.setContent(
-      '<va-checkbox-group error="This is an error"></va-checkbox-group>',
+      '<va-checkbox-group error="This is an error" uswds="false"></va-checkbox-group>',
     );
 
     const element = await page.find('va-checkbox-group >>> #error-message');
@@ -42,10 +42,10 @@ describe('va-checkbox-group', () => {
 
   it('renders hint text', async () => {
     const page = await newE2EPage();
-    await page.setContent('<va-checkbox-group hint="This is hint text" />');
+    await page.setContent('<va-checkbox-group hint="This is hint text" uswds="false"/>');
 
     // Render the hint text
-    const hintTextElement = await page.find('va-checkbox-group >>> span.hint-text');
+    const hintTextElement = await page.find('va-checkbox-group >>> div.hint-text');
     expect(hintTextElement.innerText).toContain('This is hint text');
   });
 
@@ -53,9 +53,9 @@ describe('va-checkbox-group', () => {
     const page = await newE2EPage();
     await page.setContent(
       `
-      <va-checkbox-group error="There has been an error" label="This is a label">
-        <va-checkbox label="Option one" name="example" value="1"/>
-        <va-checkbox label="Option two" name="example" value="2"/>
+      <va-checkbox-group error="There has been an error" label="This is a label" uswds="false">
+        <va-checkbox label="Option one" name="example" value="1" uswds="false"/>
+        <va-checkbox label="Option two" name="example" value="2" uswds="false"/>
       </va-checkbox-group>
     `,
     );
@@ -65,7 +65,7 @@ describe('va-checkbox-group', () => {
 
   it('renders a required span based on prop', async () => {
     const page = await newE2EPage();
-    await page.setContent('<va-checkbox-group required></va-checkbox-group>');
+    await page.setContent('<va-checkbox-group required uswds="false"></va-checkbox-group uswds="false">');
 
     const element = await page.find('va-checkbox-group >>> .required');
     expect(element).toEqualHtml(`
@@ -78,8 +78,8 @@ describe('va-checkbox-group', () => {
   it('fires an analytics event when enableAnalytics is true', async () => {
     const page = await newE2EPage();
     await page.setContent(`
-      <va-checkbox-group label="Regular label" enable-analytics>
-        <va-checkbox label="First option" value="one"></va-checkbox>
+      <va-checkbox-group label="Regular label" enable-analytics uswds="false">
+        <va-checkbox label="First option" value="one" uswds="false"></va-checkbox>
       </va-checkbox-group>
       `);
     const analyticsSpy = await page.spyOnEvent('component-library-analytics');
@@ -100,8 +100,8 @@ describe('va-checkbox-group', () => {
   it("doesn't fire an analytics event by default", async () => {
     const page = await newE2EPage();
     await page.setContent(`
-      <va-checkbox-group label="Regular label">
-        <va-checkbox label="First option" value="one"></va-checkbox>
+      <va-checkbox-group label="Regular label" uswds="false">
+        <va-checkbox label="First option" value="one" uswds="false"></va-checkbox>
       </va-checkbox-group>
       `);
 
@@ -115,9 +115,9 @@ describe('va-checkbox-group', () => {
     const page = await newE2EPage();
     await page.setContent(
       `
-      <va-checkbox-group>
-        <va-checkbox label="Option 1" value="1"></va-checkbox>
-        <va-checkbox label="Option 2" value="2"></va-checkbox>
+      <va-checkbox-group uswds="false">
+        <va-checkbox label="Option 1" value="1" uswds="false"></va-checkbox>
+        <va-checkbox label="Option 2" value="2" uswds="false"></va-checkbox>
       </va-checkbox-group>
     `,
     );
@@ -130,7 +130,7 @@ describe('va-checkbox-group', () => {
 
   it('renders H3 header in legend if included', async () => {
     const page = await newE2EPage();
-    await page.setContent('<va-checkbox-group label="Testing H3" label-header-level="3" />');
+    await page.setContent('<va-checkbox-group label="Testing H3" label-header-level="3" uswds="false"/>');
 
     const legend = await page.find('va-checkbox-group >>> legend');
     expect(legend).toEqualHtml(`
@@ -142,7 +142,7 @@ describe('va-checkbox-group', () => {
 
   it('renders H5 header in legend if included', async () => {
     const page = await newE2EPage();
-    await page.setContent('<va-checkbox-group label="Testing H5" label-header-level="5" required></va-checkbox-group>');
+    await page.setContent('<va-checkbox-group label="Testing H5" label-header-level="5" required uswds="false"></va-checkbox-group>');
 
     const legend = await page.find('va-checkbox-group >>> legend');
     expect(legend).toEqualHtml(`
@@ -157,7 +157,7 @@ describe('va-checkbox-group', () => {
 
   it('renders legend text and ignores adding a header if an invalid level is included', async () => {
     const page = await newE2EPage();
-    await page.setContent('<va-checkbox-group label="Testing" label-header-level="7" required></va-checkbox-group>');
+    await page.setContent('<va-checkbox-group label="Testing" label-header-level="7" required uswds="false"></va-checkbox-group>');
 
     const legend = await page.find('va-checkbox-group >>> legend');
     expect(legend).toEqualHtml(`
@@ -175,7 +175,7 @@ describe('va-checkbox-group', () => {
 
   it('uswds v3 renders', async () => {
     const page = await newE2EPage();
-    await page.setContent('<va-checkbox-group uswds></va-checkbox-group>');
+    await page.setContent('<va-checkbox-group></va-checkbox-group>');
 
     const element = await page.find('va-checkbox-group');
     expect(element).toHaveClass('hydrated');
@@ -185,10 +185,10 @@ describe('va-checkbox-group', () => {
     const page = await newE2EPage();
     await page.setContent(
       `
-      <va-checkbox-group uswds>
-        <va-checkbox uswds label="Option one" value="1"></va-checkbox>
-        <va-checkbox uswds label="Option 2" value="2"></va-checkbox>
-        <va-checkbox uswds label="Option 3" value="3" disabled></va-checkbox>
+      <va-checkbox-group >
+        <va-checkbox label="Option one" value="1"></va-checkbox>
+        <va-checkbox label="Option 2" value="2"></va-checkbox>
+        <va-checkbox label="Option 3" value="3" disabled></va-checkbox>
       </va-checkbox-group>
     `,
     );
@@ -199,7 +199,7 @@ describe('va-checkbox-group', () => {
   it('uswds v3 renders an error message if passed', async () => {
     const page = await newE2EPage();
     await page.setContent(
-      '<va-checkbox-group uswds error="This is an error"></va-checkbox-group>',
+      '<va-checkbox-group error="This is an error"></va-checkbox-group>',
     );
 
     const element = await page.find('va-checkbox-group >>> #checkbox-error-message');
@@ -215,7 +215,7 @@ describe('va-checkbox-group', () => {
 
   it('uswds v3 renders hint text', async () => {
     const page = await newE2EPage();
-    await page.setContent('<va-checkbox-group uswds hint="This is hint text" />');
+    await page.setContent('<va-checkbox-group hint="This is hint text" />');
 
     const hintTextElement = await page.find('va-checkbox-group >>> .usa-hint');
     expect(hintTextElement.innerText).toContain('This is hint text');
@@ -225,9 +225,9 @@ describe('va-checkbox-group', () => {
     const page = await newE2EPage();
     await page.setContent(
       `
-      <va-checkbox-group uswds error="There has been an error" label="This is a label">
-        <va-checkbox uswds label="Option one" name="example" value="1"/>
-        <va-checkbox uswds label="Option two" name="example" value="2"/>
+      <va-checkbox-group error="There has been an error" label="This is a label">
+        <va-checkbox label="Option one" name="example" value="1"/>
+        <va-checkbox label="Option two" name="example" value="2"/>
       </va-checkbox-group>
     `,
     );
@@ -237,7 +237,7 @@ describe('va-checkbox-group', () => {
 
   it('uswds v3 renders a required span based on prop', async () => {
     const page = await newE2EPage();
-    await page.setContent('<va-checkbox-group uswds required></va-checkbox-group>');
+    await page.setContent('<va-checkbox-group required></va-checkbox-group>');
 
     const element = await page.find('va-checkbox-group >>> .usa-label--required');
     expect(element).toEqualHtml(`
@@ -250,8 +250,8 @@ describe('va-checkbox-group', () => {
   it('uswds v3 fires an analytics event when enableAnalytics is true', async () => {
     const page = await newE2EPage();
     await page.setContent(`
-      <va-checkbox-group uswds label="Regular label" enable-analytics>
-        <va-checkbox uswds label="First option" value="one"></va-checkbox>
+      <va-checkbox-group label="Regular label" enable-analytics>
+        <va-checkbox label="First option" value="one"></va-checkbox>
       </va-checkbox-group>
       `);
     const analyticsSpy = await page.spyOnEvent('component-library-analytics');
@@ -272,8 +272,8 @@ describe('va-checkbox-group', () => {
   it("uswds v3 doesn't fire an analytics event by default", async () => {
     const page = await newE2EPage();
     await page.setContent(`
-      <va-checkbox-group uswds label="Regular label">
-        <va-checkbox uswds label="First option" value="one"></va-checkbox>
+      <va-checkbox-group label="Regular label">
+        <va-checkbox label="First option" value="one"></va-checkbox>
       </va-checkbox-group>
       `);
 
@@ -288,8 +288,8 @@ describe('va-checkbox-group', () => {
     await page.setContent(
       `
       <va-checkbox-group uswds>
-        <va-checkbox uswds label="Option 1" value="1"></va-checkbox>
-        <va-checkbox uswds label="Option 2" value="2"></va-checkbox>
+        <va-checkbox label="Option 1" value="1"></va-checkbox>
+        <va-checkbox label="Option 2" value="2"></va-checkbox>
       </va-checkbox-group>
     `,
     );
@@ -302,7 +302,7 @@ describe('va-checkbox-group', () => {
 
   it('uswds v3 renders H3 header in legend if included', async () => {
     const page = await newE2EPage();
-    await page.setContent('<va-checkbox-group uswds label="Testing H3" label-header-level="3" />');
+    await page.setContent('<va-checkbox-group label="Testing H3" label-header-level="3" />');
 
     const legend = await page.find('va-checkbox-group >>> legend');
     expect(legend).toEqualHtml(`
@@ -314,7 +314,7 @@ describe('va-checkbox-group', () => {
 
   it('renders H5 header in legend if included', async () => {
     const page = await newE2EPage();
-    await page.setContent('<va-checkbox-group uswds label="Testing H5" label-header-level="5" required></va-checkbox-group>');
+    await page.setContent('<va-checkbox-group label="Testing H5" label-header-level="5" required></va-checkbox-group>');
 
     const legend = await page.find('va-checkbox-group >>> legend');
     expect(legend).toEqualHtml(`
@@ -329,7 +329,7 @@ describe('va-checkbox-group', () => {
 
   it('renders legend text and ignores adding a header if an invalid level is included', async () => {
     const page = await newE2EPage();
-    await page.setContent('<va-checkbox-group uswds label="Testing" label-header-level="7" required></va-checkbox-group>');
+    await page.setContent('<va-checkbox-group label="Testing" label-header-level="7" required></va-checkbox-group>');
 
     const legend = await page.find('va-checkbox-group >>> legend');
     expect(legend).toEqualHtml(`
@@ -340,6 +340,54 @@ describe('va-checkbox-group', () => {
         </span>
       </legend>
    `);
+  });
+
+  it('uswds useFormsPattern displays header for the single field pattern', async () => {
+    const page = await newE2EPage();
+    await page.setContent(
+      `
+      <va-checkbox-group label="This is a label" uswds use-forms-pattern="single" form-heading-level="1" form-heading="This is a form header" form-description="This is a form description">
+        <va-checkbox label="Option 1" value="1"></va-checkbox>
+        <va-checkbox label="Option 2" value="2"></va-checkbox>
+      </va-checkbox-group>
+    `,);
+
+    const formHeader = await page.find('va-checkbox-group >>> h1');
+    expect(formHeader.innerText).toEqual('This is a form header');
+  });
+
+  it('uswds useFormsPattern displays header for the multiple fields pattern', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-checkbox-group label="This is a label" uswds use-forms-pattern="multiple" form-heading-level="1" form-heading="This is a form header" form-description="This is a form description"/>');
+
+    const formHeader = await page.find('va-checkbox-group >>> h1');
+    expect(formHeader.innerText).toEqual('This is a form header');
+  });
+
+  it('uswds useFormsPattern does not display header if "single" or "multiple" is not indicated', async () => {
+    const page = await newE2EPage();
+    await page.setContent(
+      `
+      <va-checkbox-group label="This is a label" uswds use-forms-pattern="multiple" form-heading-level="1" form-heading="This is a form header" form-description="This is a form description">
+        <va-checkbox label="Option 1" value="1"></va-checkbox>
+        <va-checkbox label="Option 2" value="2"></va-checkbox>
+      </va-checkbox-group>
+    `,);
+
+    const formHeader = await page.find('va-checkbox-group >>> h1');
+    expect(formHeader.innerText).toEqual('This is a form header');
+  });
+
+  it('uswds useFormsPattern passes an aXe check', async () => {
+    const page = await newE2EPage();
+    await page.setContent(
+      `
+      <va-checkbox-group label="This is a label" use-forms-pattern="multiple" form-heading-level="1" form-heading="This is a form header" form-description="This is a form description" uswds>
+        <va-checkbox label="Option 1" value="1"></va-checkbox>
+        <va-checkbox label="Option 2" value="2"></va-checkbox>
+      </va-checkbox-group>
+    `,);
+    await axeCheck(page);
   });
 
 });

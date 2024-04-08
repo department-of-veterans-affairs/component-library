@@ -6,6 +6,7 @@ import {
   h,
   Listen,
   Prop,
+  Element
 } from '@stencil/core';
 import classnames from 'classnames';
 
@@ -22,6 +23,8 @@ import classnames from 'classnames';
   shadow: true,
 })
 export class VaButton {
+  @Element() el: HTMLElement;
+
   /**
    * If `true`, the button will use `Back` as its text and an icon to represent going back in form flows.
    */
@@ -75,7 +78,7 @@ export class VaButton {
   /**
    * Whether or not the component will use USWDS v3 styling.
    */
-  @Prop({ reflect: true }) uswds?: boolean = false;
+  @Prop({ reflect: true }) uswds?: boolean = true;
 
   /**
    * The event used to track usage of the component.
@@ -86,6 +89,14 @@ export class VaButton {
     eventName: 'component-library-analytics',
   })
   componentLibraryAnalytics: EventEmitter;
+
+  componentDidLoad() {
+    // check if the element has a class named uswds-false added from parent
+    if (this.el.classList.contains('uswds-false')) {
+      // add attribute manually
+      this.el.setAttribute('uswds', 'false');
+    }
+  }
 
   private handleClick = (): void => {
     if (!this.disableAnalytics) {
@@ -123,6 +134,7 @@ export class VaButton {
     }
     this.handleClick();
   }
+
 
   render() {
     const {

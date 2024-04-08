@@ -5,11 +5,11 @@ describe('va-number-input', () => {
   it('renders', async () => {
     const page = await newE2EPage();
 
-    await page.setContent('<va-number-input label="Hello, world" />');
+    await page.setContent('<va-number-input label="Hello, world" uswds="false"/>');
     const element = await page.find('va-number-input');
 
     expect(element).toEqualHtml(`
-      <va-number-input class="hydrated" label="Hello, world">
+      <va-number-input class="hydrated" label="Hello, world" uswds="false">
         <mock:shadow-root>
           <label for="inputField">
             Hello, world
@@ -25,7 +25,7 @@ describe('va-number-input', () => {
 
   it('renders an error message', async () => {
     const page = await newE2EPage();
-    await page.setContent('<va-number-input error="This is a mistake" />');
+    await page.setContent('<va-number-input error="This is a mistake" uswds="false"/>');
 
     // Render the error message text
     const error = await page.find('va-number-input >>> span#error-message');
@@ -36,7 +36,7 @@ describe('va-number-input', () => {
 
   it('renders hint text', async () => {
     const page = await newE2EPage();
-    await page.setContent('<va-number-input hint="This is hint text" />');
+    await page.setContent('<va-number-input hint="This is hint text" uswds="false"/>');
 
     // Render the hint text
     const hintTextElement = await page.find('va-number-input >>> span.hint-text');
@@ -46,7 +46,7 @@ describe('va-number-input', () => {
   it('renders a required span', async () => {
     const page = await newE2EPage();
     await page.setContent(
-      '<va-number-input label="This is a field" required />',
+      '<va-number-input label="This is a field" required uswds="false"/>',
     );
 
     const requiredSpan = await page.find(
@@ -60,7 +60,7 @@ describe('va-number-input', () => {
     const page = await newE2EPage();
 
     await page.setContent(
-      '<va-number-input required label="This is a test" error="With an error message"/>',
+      '<va-number-input required label="This is a test" error="With an error message" uswds="false"/>',
     );
 
     await axeCheck(page);
@@ -70,7 +70,7 @@ describe('va-number-input', () => {
     const page = await newE2EPage();
 
     await page.setContent(
-      '<va-number-input label="Input Field" enable-analytics/>',
+      '<va-number-input label="Input Field" enable-analytics uswds="false"/>',
     );
 
     const analyticsSpy = await page.spyOnEvent('component-library-analytics');
@@ -94,7 +94,7 @@ describe('va-number-input', () => {
   it('emits blur event', async () => {
     const page = await newE2EPage();
 
-    await page.setContent('<va-number-input label="Input Field"/>');
+    await page.setContent('<va-number-input label="Input Field" uswds="false"/>');
 
     const inputEl = await page.find('va-number-input >>> input');
     const blurSpy = await page.spyOnEvent('blur');
@@ -106,7 +106,7 @@ describe('va-number-input', () => {
   it('emits input event with value updated', async () => {
     const page = await newE2EPage();
 
-    await page.setContent('<va-number-input label="Input Field"/>');
+    await page.setContent('<va-number-input label="Input Field" uswds="false"/>');
 
     const inputEl = await page.find('va-number-input >>> input');
     const inputSpy = await page.spyOnEvent('input');
@@ -131,7 +131,7 @@ describe('va-number-input', () => {
   it("doesn't fire analytics events", async () => {
     const page = await newE2EPage();
 
-    await page.setContent('<va-number-input label="Input Field"/>');
+    await page.setContent('<va-number-input label="Input Field" uswds="false"/>');
 
     const analyticsSpy = await page.spyOnEvent('component-library-analytics');
     const inputEl = await page.find('va-number-input >>> input');
@@ -143,7 +143,7 @@ describe('va-number-input', () => {
 
   it('defaults to type of text', async () => {
     const page = await newE2EPage();
-    await page.setContent('<va-number-input />');
+    await page.setContent('<va-number-input uswds="false"/>');
 
     // Level-setting expectations
     const inputEl = await page.find('va-number-input >>> input');
@@ -152,7 +152,7 @@ describe('va-number-input', () => {
 
   it('sets a range based on min and max attributes', async () => {
     const page = await newE2EPage();
-    await page.setContent('<va-number-input min="0" max="4" />');
+    await page.setContent('<va-number-input min="0" max="4" uswds="false"/>');
 
     const inputEl = await page.find('va-number-input >>> input');
     expect(inputEl.getAttribute('min')).toBe('0');
@@ -163,7 +163,7 @@ describe('va-number-input', () => {
     const inputModes = ['decimal', 'numeric'];
     for (const inputMode of inputModes) {
       const page = await newE2EPage();
-      await page.setContent(`<va-number-input inputmode="${inputMode}" />`);
+      await page.setContent(`<va-number-input inputmode="${inputMode}" uswds="false"/>`);
       const inputEl = await page.find('va-number-input >>> input');
       expect(inputEl.getAttribute('inputmode')).toBe(inputMode);
     }
@@ -171,14 +171,14 @@ describe('va-number-input', () => {
 
   it('renders a "$" if currency flag set to true', async () => {
     const page = await newE2EPage();
-    await page.setContent('<va-number-input currency />');
+    await page.setContent('<va-number-input currency uswds="false"/>');
     const currencyTextElement = await page.find('va-number-input >>> div > span');
     expect(currencyTextElement.innerText).toContain('$');
   });
 
   it('adds aria-describedby input-message id', async () => {
     const page = await newE2EPage();
-    await page.setContent('<va-number-input message-aria-describedby="example message" />');
+    await page.setContent('<va-number-input message-aria-describedby="example message" uswds="false"/>');
     const el = await page.find('va-number-input');
     const inputEl = await page.find('va-number-input >>> input');
 
@@ -196,7 +196,7 @@ describe('va-number-input', () => {
 
   it('should show validation message when error prop is undefined', async () => {
     const page = await newE2EPage();
-    await page.setContent('<div><va-number-input label="test input" /></div>');
+    await page.setContent('<div><va-number-input label="test input" uswds="false"/></div>');
     const inputEl = await page.find('va-number-input >>> input');
 
     await inputEl.press('a');
@@ -209,7 +209,7 @@ describe('va-number-input', () => {
 
   it('should not show default validation message when error prop is defined', async () => {
     const page = await newE2EPage();
-    await page.setContent('<div><va-number-input label="test input" error="This is an error"/></div>');
+    await page.setContent('<div><va-number-input label="test input" error="This is an error" uswds="false"/></div>');
     const inputEl = await page.find('va-number-input >>> input');
     await inputEl.press('a');
     await inputEl.press('b');
@@ -224,17 +224,19 @@ describe('va-number-input', () => {
   it('uswds renders', async () => {
     const page = await newE2EPage();
 
-    await page.setContent('<va-number-input label="Hello, world" uswds />');
+    await page.setContent('<va-number-input label="Hello, world"/>');
     const element = await page.find('va-number-input');
 
     expect(element).toEqualHtml(`
-      <va-number-input class="hydrated" label="Hello, world" uswds="">
+      <va-number-input class="hydrated" label="Hello, world">
         <mock:shadow-root>
-          <label for="inputField" class="usa-label">
-            Hello, world
-          </label>
-          <span id="input-error-message" role="alert"></span>
-          <input aria-invalid="false" class="usa-input" id="inputField" inputmode="numeric" pattern="[0-9]+(\\.[0-9]{1,})?" type="text">
+          <div class="input-wrap">
+            <label for="inputField" id="input-label" class="usa-label" part="label">
+              Hello, world
+            </label>
+            <span id="input-error-message" role="alert"></span>
+            <input aria-invalid="false" class="usa-input" id="inputField" inputmode="numeric" pattern="[0-9]+(\\.[0-9]{1,})?" type="text">
+          </div>
         </mock:shadow-root>
       </va-number-input>
     `);
@@ -242,7 +244,7 @@ describe('va-number-input', () => {
 
   it('uswds renders an error message', async () => {
     const page = await newE2EPage();
-    await page.setContent('<va-number-input error="This is a mistake" uswds />');
+    await page.setContent('<va-number-input error="This is a mistake" />');
 
     // Render the error message text
     const error = await page.find('va-number-input >>> .usa-error-message');
@@ -253,7 +255,7 @@ describe('va-number-input', () => {
 
   it('uswds renders hint text', async () => {
     const page = await newE2EPage();
-    await page.setContent('<va-number-input label="Hello world" hint="This is hint text" uswds />');
+    await page.setContent('<va-number-input label="Hello world" hint="This is hint text" />');
 
     // Render the hint text
     const hintTextElement = await page.find('va-number-input >>> span.usa-hint');
@@ -263,7 +265,7 @@ describe('va-number-input', () => {
   it('uswds renders a required span', async () => {
     const page = await newE2EPage();
     await page.setContent(
-      '<va-number-input label="This is a field" required uswds />',
+      '<va-number-input label="This is a field" required />',
     );
 
     const requiredSpan = await page.find(
@@ -277,7 +279,7 @@ describe('va-number-input', () => {
     const page = await newE2EPage();
 
     await page.setContent(
-      '<va-number-input required label="This is a test" error="With an error message" uswds />',
+      '<va-number-input required label="This is a test" error="With an error message" />',
     );
 
     await axeCheck(page);
@@ -287,7 +289,7 @@ describe('va-number-input', () => {
     const page = await newE2EPage();
 
     await page.setContent(
-      '<va-number-input label="Input Field" enable-analytics uswds />',
+      '<va-number-input label="Input Field" enable-analytics />',
     );
 
     const analyticsSpy = await page.spyOnEvent('component-library-analytics');
@@ -311,7 +313,7 @@ describe('va-number-input', () => {
   it('uswds emits blur event', async () => {
     const page = await newE2EPage();
 
-    await page.setContent('<va-number-input label="Input Field" uswds />');
+    await page.setContent('<va-number-input label="Input Field" />');
 
     const inputEl = await page.find('va-number-input >>> input');
     const blurSpy = await page.spyOnEvent('blur');
@@ -323,7 +325,7 @@ describe('va-number-input', () => {
   it('uswds emits input event with value updated', async () => {
     const page = await newE2EPage();
 
-    await page.setContent('<va-number-input label="Input Field" uswds />');
+    await page.setContent('<va-number-input label="Input Field" />');
 
     const inputEl = await page.find('va-number-input >>> input');
     const inputSpy = await page.spyOnEvent('input');
@@ -348,7 +350,7 @@ describe('va-number-input', () => {
   it("uswds doesn't fire analytics events", async () => {
     const page = await newE2EPage();
 
-    await page.setContent('<va-number-input label="Input Field" uswds />');
+    await page.setContent('<va-number-input label="Input Field" />');
 
     const analyticsSpy = await page.spyOnEvent('component-library-analytics');
     const inputEl = await page.find('va-number-input >>> input');
@@ -360,7 +362,7 @@ describe('va-number-input', () => {
 
   it('uswds defaults to type of text', async () => {
     const page = await newE2EPage();
-    await page.setContent('<va-number-input uswds />');
+    await page.setContent('<va-number-input />');
 
     // Level-setting expectations
     const inputEl = await page.find('va-number-input >>> input');
@@ -369,7 +371,7 @@ describe('va-number-input', () => {
 
   it('uswds sets a range based on min and max attributes', async () => {
     const page = await newE2EPage();
-    await page.setContent('<va-number-input min="0" max="4" uswds />');
+    await page.setContent('<va-number-input min="0" max="4" />');
 
     const inputEl = await page.find('va-number-input >>> input');
     expect(inputEl.getAttribute('min')).toBe('0');
@@ -380,7 +382,7 @@ describe('va-number-input', () => {
     const inputModes = ['decimal', 'numeric'];
     for (const inputMode of inputModes) {
       const page = await newE2EPage();
-      await page.setContent(`<va-number-input inputmode="${inputMode}" uswds />`);
+      await page.setContent(`<va-number-input inputmode="${inputMode}" />`);
       const inputEl = await page.find('va-number-input >>> input');
       expect(inputEl.getAttribute('inputmode')).toBe(inputMode);
     }
@@ -388,7 +390,7 @@ describe('va-number-input', () => {
 
   it('uswds adds aria-describedby input-message id', async () => {
     const page = await newE2EPage();
-    await page.setContent('<va-number-input message-aria-describedby="example message" uswds />');
+    await page.setContent('<va-number-input message-aria-describedby="example message" />');
     const el = await page.find('va-number-input');
     const inputEl = await page.find('va-number-input >>> input');
 
@@ -406,7 +408,7 @@ describe('va-number-input', () => {
   
   it('uswds should show validation message when error prop is undefined', async () => {
     const page = await newE2EPage();
-    await page.setContent('<div><va-number-input uswds label="test input" /></div>');
+    await page.setContent('<div><va-number-input label="test input" /></div>');
     const inputEl = await page.find('va-number-input >>> input');
 
     await inputEl.press('a');
@@ -419,7 +421,7 @@ describe('va-number-input', () => {
 
   it('uswds should not show default validation message when error prop is defined', async () => {
     const page = await newE2EPage();
-    await page.setContent('<div><va-number-input uswds label="test input" error="This is an error"/></div>');
+    await page.setContent('<div><va-number-input label="test input" error="This is an error"/></div>');
     const inputEl = await page.find('va-number-input >>> input');
 
     await inputEl.press('a');
@@ -430,4 +432,35 @@ describe('va-number-input', () => {
     const errorEl = await page.find('va-number-input >>> span.usa-error-message');
     expect(errorEl.innerText).toBe('This is an error');
   })
+
+  it('uswds useFormsPattern displays header for the single field pattern', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-number-input label="This is a label" use-forms-pattern="single" form-heading-level="1" form-heading="This is a form header" form-description="This is a form description"/>');
+
+    const formHeader = await page.find('va-number-input >>> h1');
+    expect(formHeader.innerText).toEqual('This is a form header');
+  });
+
+  it('uswds useFormsPattern displays header for the multiple fields pattern', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-number-input label="This is a label" use-forms-pattern="multiple" form-heading-level="1" form-heading="This is a form header" form-description="This is a form description"/>');
+
+    const formHeader = await page.find('va-number-input >>> h1');
+    expect(formHeader.innerText).toEqual('This is a form header');
+  });
+
+  it('uswds useFormsPattern does not display header if "single" or "multiple" is not indicated', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-number-input label="This is a label" use-forms-pattern="multiple" form-heading-level="1" form-heading="This is a form header" form-description="This is a form description"/>');
+
+    const formHeader = await page.find('va-number-input >>> h1');
+    expect(formHeader.innerText).toEqual('This is a form header');
+  });
+
+  it('uswds useFormsPattern passes an aXe check', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-number-input label="This is a label" use-forms-pattern="multiple" form-heading-level="1" form-heading="This is a form header" form-description="This is a form description"/>');
+
+    await axeCheck(page);
+  });
 });

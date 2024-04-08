@@ -58,7 +58,7 @@ export class VaAccordionItem {
   /**
    * Whether or not the component will use USWDS v3 styling.
    */
-  @Prop() uswds?: boolean = false;
+  @Prop() uswds?: boolean = true;
 
   /**
    * Local State for slot=headline replacement of props (header).
@@ -96,7 +96,7 @@ export class VaAccordionItem {
     // auto-expand accordion if the window hash matches the ID
     if (this.el.id && this.el.id === window.location.hash.slice(1)) {
       const currentTarget = this.expandButton;
-      
+
       if (currentTarget) {
         this.open = true;
         this.el.setAttribute('open', 'true');
@@ -133,6 +133,7 @@ export class VaAccordionItem {
               ref={el => {
                 this.expandButton = el;
               }}
+              part="accordion-header"
             >
               <span class="usa-accordion__header va-accordion__header">
                 <slot name="icon" />
@@ -153,7 +154,12 @@ export class VaAccordionItem {
           <div class={accordionItemClass}>
             <Header/>
             <slot name="headline" onSlotchange={() => this.populateStateValues()} />
-            <div id="content" class="usa-accordion__content usa-prose" hidden={!open}>
+            <div
+              id="content"
+              class="usa-accordion__content usa-prose"
+              hidden={!open}
+              part="accordion-content"
+            >
               <slot/>
             </div>
           </div>

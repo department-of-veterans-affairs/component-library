@@ -101,8 +101,10 @@ describe('va-date', () => {
       );
       const date = await page.find('va-date');
       const handleYear = await page.$('pierce/[name="testYear"]');
+      const handleMonth = await page.$('pierce/[name="testMonth"]');
 
       // Trigger Blur
+      await handleMonth.press('Tab');
       await handleYear.press('Tab');
       await page.waitForChanges();
 
@@ -499,6 +501,9 @@ describe('va-date', () => {
 
       const date = await page.find('va-date');
       const handleYear = await page.$('pierce/[name="testYear"]');
+      const handleMonth = await page.$('pierce/[name="testMonth"]');
+
+      await handleMonth.press('Tab');
 
       // Year
       await handleYear.press('2');

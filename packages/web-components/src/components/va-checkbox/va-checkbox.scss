@@ -21,7 +21,7 @@
 }
 
 .usa-checkbox__input:focus + [class*='__label']::before {
-  outline: 2px solid var(--color-gold-light);
+  outline: 2px solid var(--vads-color-action-focus-on-light);
   outline-offset: 4px;
 }
 
@@ -31,7 +31,7 @@
 @import '../../mixins/form-field-error.css';
 @import '../../mixins/hint-text.css';
 
-:host(:not([uswds='true'], [uswds=''])) {
+:host([uswds='false']) {
   --visible-checkbox-size: 2rem;
   --visible-checkbox-top-margin: 0.14rem;
 
@@ -45,11 +45,11 @@
   }
 }
 
-:host([error]:not([error='']):not([uswds='true'], [uswds=''])) input + label {
+:host([error][uswds='false']:not([error=''])) input + label {
   margin-top: 1.2rem;
 }
 
-:host(:not([uswds='true'], [uswds=''])) {
+:host([uswds='false']) {
   input {
     margin: 0;
     padding: 0;
@@ -79,29 +79,29 @@
     margin-right: 1rem;
     pointer-events: none;
     border-radius: 2px;
-    box-shadow: 0 0 0 1px var(--color-gray-medium);
+    box-shadow: 0 0 0 1px var(--vads-color-gray-medium);
     content: '\A0';
     height: var(--visible-checkbox-size);
     max-width: var(--visible-checkbox-size);
     width: 100%;
-    background-color: var(--color-white);
+    background-color: var(--vads-input-background-color-on-light);
   }
 
   input:checked + label::before {
-    background-color: var(--color-primary);
-    box-shadow: 0 0 0 1px var(--color-primary);
+    background-color: var(--vads-color-primary);
+    box-shadow: 0 0 0 1px var(--vads-color-primary);
     background-image: url('../../assets/check.svg');
     background-position: 50%;
     background-repeat: no-repeat;
   }
 
   input:not([disabled]):focus + label:before {
-    outline: 2px solid var(--color-gold-light);
+    outline: 2px solid var(--vads-color-action-focus-on-light);
     outline-offset: 2px;
   }
 
   .required {
-    color: var(--color-secondary-dark);
+    color: var(--vads-color-secondary-dark);
     margin: 0 0.35rem;
   }
 
@@ -111,14 +111,14 @@
   }
 }
 
-:host(:not([uswds='true'], [uswds=''])[tile='true']) label {
+:host([uswds='false'][tile='true']) label {
   padding: 12px 16px 12px 12px;
-  border: 2px solid var(--color-gray-light);
+  border: 2px solid var(--vads-color-base-light);
   border-radius: 0.25em;
   width: 320px;
 }
 
-:host(:not([uswds='true'], [uswds=''])[tile='true']) input:checked + label {
+:host([uswds='false'][tile='true']) input:checked + label {
   background-color: rgba(0, 94, 162, 0.1);
   border-color: rgb(0, 94, 162);
 }

@@ -5,9 +5,9 @@ import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
 const notificationDocs = getWebComponentDocs('va-notification');
 
 export default {
-  title: 'Components/Notification',
+  title: 'Deprecated/Notification',
   id: 'components/va-notification',
-  argTypes: {   
+  argTypes: {
     children: {
       table: {
         disable: true,

@@ -7,7 +7,7 @@ VaModal.displayName = 'VaModal';
 const modalDocs = getWebComponentDocs('va-modal');
 
 export default {
-  title: 'USWDS/Modal USWDS',
+  title: 'Components/Modal USWDS',
   id: 'uswds/va-modal',
   parameters: {
     componentSubtitle: `va-modal web component`,
@@ -37,7 +37,6 @@ const defaultArgs = {
   'primary-button-text': 'Primary',
   'secondaryButtonClick': () => window.alert('Secondary button clicked!'),
   'secondary-button-text': 'Secondary',
-  'uswds': true,
   'forcedModal': false,
 };
 
@@ -53,7 +52,6 @@ const Template = ({
   'secondary-button-text': secondaryButtonText,
   status,
   visible,
-  uswds,
   forcedModal,
 }) => {
   const [isVisible, setIsVisible] = useState(visible);
@@ -65,7 +63,6 @@ const Template = ({
       <va-button uswds onClick={openModal} text="Click here to open modal"/>
       <VaModal
         forcedModal={forcedModal}
-        uswds={uswds}
         clickToClose={clickToClose}
         disableAnalytics={disableAnalytics}
         large={large}
@@ -97,7 +94,6 @@ const ForcedTemplate = ({
   'secondary-button-text': secondaryButtonText,
   status,
   visible,
-  uswds,
   forcedModal,
 }) => {
   const [isVisible, setIsVisible] = useState(visible);
@@ -106,10 +102,9 @@ const ForcedTemplate = ({
   return (
     <div>
       <h1>Testing h1 heading</h1>
-      <va-button uswds onClick={openModal} text="Click here to open modal"/>
+      <va-button onClick={openModal} text="Click here to open modal"/>
       <VaModal
         forcedModal={forcedModal}
-        uswds={uswds}
         clickToClose={clickToClose}
         disableAnalytics={disableAnalytics}
         large={large}
@@ -184,7 +179,6 @@ export const WithNestedWebComponents = ({
   'secondary-button-text': secondaryButtonText,
   status,
   visible,
-  uswds,
   forcedModal,
 }) => {
   const [isVisible, setIsVisible] = useState(visible);
@@ -198,7 +192,6 @@ export const WithNestedWebComponents = ({
       <label htmlFor="pre-modal-input">Checkbox before the modal</label>
       <VaModal
         forcedModal={forcedModal}
-        uswds={uswds}
         clickToClose={clickToClose}
         disableAnalytics={disableAnalytics}
         large={large}
@@ -229,98 +222,3 @@ export const WithNestedWebComponents = ({
 };
 WithNestedWebComponents.args = defaultArgs;
 
-const CrisisTemplate = ({
-  'click-to-close': clickToClose,
-  'disable-analytics': disableAnalytics,
-  large,
-  'modal-title': modalTitle,
-  'initial-focus-selector': initialFocusSelector,
-  primaryButtonClick,
-  'primary-button-text': primaryButtonText,
-  secondaryButtonClick,
-  'secondary-button-text': secondaryButtonText,
-  status,
-  visible,
-  uswds,
-  forcedModal,
-}) => {
-  const [isVisible, setIsVisible] = useState(visible);
-  const onCloseEvent = () => setIsVisible(!isVisible);
-  const openModal = () => setIsVisible(true);
-  return (
-    <div>
-      <div
-        className="va-crisis-line"
-        style={{ position: 'static', height: '600px', maxWidth: 'none' }}
-      >
-        <div className="va-flex">
-          <button
-            data-show="#modal-crisisline"
-            className="va-crisis-line-button va-overlay-trigger"
-            onClick={openModal}
-          >
-            <span className="va-flex">
-              <span className="vcl"></span>
-              Get help from Veterans Crisis Line
-            </span>
-          </button>
-        </div>
-      </div>
-      <VaModal
-        forcedModal={forcedModal}
-        uswds={uswds}
-        clickToClose={clickToClose}
-        disableAnalytics={disableAnalytics}
-        large={large}
-        modalTitle={modalTitle}
-        initialFocusSelector={initialFocusSelector}
-        onCloseEvent={onCloseEvent}
-        onPrimaryButtonClick={primaryButtonClick}
-        primaryButtonText={primaryButtonText}
-        onSecondaryButtonClick={secondaryButtonClick}
-        secondaryButtonText={secondaryButtonText}
-        status={status}
-        visible={isVisible}
-      >
-        <div className="va-crisis-panel" style={{ transform: 'none' }}>
-          <div className="va-overlay-body va-crisis-panel-body">
-            <ul>
-              <li>
-                <a href="tel:18002738255">
-                  Call <strong>1-800-273-8255<br/>(Press 1)</strong>
-                </a>
-              </li>
-              <li>
-                <a href="sms:838255">
-                  Text to <b>838255</b>
-                </a>
-              </li>
-              <li>
-                <a href="https://www.veteranscrisisline.net/ChatTermsOfService.aspx?account=Veterans%20Chat">
-                  Chat <b>confidentially now</b>
-                </a>
-              </li>
-            </ul>
-            <p>
-              If you are in crisis or having thoughts of suicide, visit{' '}
-              <a href="https://www.veteranscrisisline.net/">
-                VeteransCrisisLine.net
-              </a>{' '}
-              for more resources.
-            </p>
-          </div>
-        </div>
-      </VaModal>
-    </div>
-  );
-};
-
-export const CrisisLineModal = CrisisTemplate.bind(null);
-CrisisLineModal.args = {
-  ...defaultArgs,
-  'primaryButtonClick': undefined,
-  'primary-button-text': undefined,
-  'secondaryButtonClick': undefined,
-  'secondary-button-text': undefined,
-  'modal-title': 'Get help from Veterans Crisis Line',
-};

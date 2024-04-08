@@ -70,7 +70,7 @@ export namespace Components {
     }
     interface VaAlert {
         /**
-          * If `true`, renders the alert with only a background color corresponding to the status - no left border.
+          * If `true`, renders the alert with only a background color corresponding to the status - no left border. (v1 only)
          */
         "backgroundOnly"?: boolean;
         /**
@@ -94,9 +94,13 @@ export namespace Components {
          */
         "slim"?: boolean;
         /**
-          * Determines the icon and border/background color. One of `info`, `error`, `success`, `warning`, or `continue`
+          * Determines the icon and border/background color.
          */
-        "status"?: string;
+        "status"?: | 'info'
+    | 'warning'
+    | 'error'
+    | 'success'
+    | 'continue';
         /**
           * Whether or not the component will use USWDS v3 styling.
          */
@@ -128,6 +132,10 @@ export namespace Components {
     }
     interface VaBanner {
         /**
+          * Aria Label for the "region" of the nested va-alert.
+         */
+        "dataLabel"?: string;
+        /**
           * If true, doesn't fire the CustomEvent which can be used for analytics tracking.
          */
         "disableAnalytics"?: boolean;
@@ -140,9 +148,9 @@ export namespace Components {
          */
         "showClose"?: boolean;
         /**
-          * The type of the banner. One of 'info', 'error', 'success', 'continue', or 'warning'. This affects both the icon of the AlertBox and the top border color.
+          * The type of the banner. This affects both the icon of the AlertBox and the top border color.
          */
-        "type"?: string;
+        "type"?: 'info' | 'warning' | 'error' | 'success' | 'continue';
         /**
           * A boolean that when false makes it so that the banner does not render.
          */
@@ -154,13 +162,17 @@ export namespace Components {
     }
     interface VaBreadcrumbs {
         /**
-          * Represents a list of breadcrumbs. Use an array of objects with label and href properties, and then use JSON.stringify() to convert to a string. This prop is available when `uswds` is set to `true`.
+          * Represents a list of breadcrumbs. Use a JSON array of objects with label and href properties, then wrap in a string if using non-React-binding version. See Storybook examples for React-binding version. For pure web components, here's an example link: ``[{"href": "/link1", "label": "Link 1"}]`. This prop is available when `uswds` is set to `true`.
          */
         "breadcrumbList"?: any;
         /**
           * Analytics tracking function(s) will not be called
          */
         "disableAnalytics"?: boolean;
+        /**
+          * When true, the first breadcrumb label will be "VA.gov home".
+         */
+        "homeVeteransAffairs"?: boolean;
         /**
           * Adds an aria-label attribute to the <nav /> element.
          */
@@ -252,7 +264,11 @@ export namespace Components {
     }
     interface VaCard {
         /**
-          * If `true`, a drop-shadow will be displayed
+          * If `true`, the card will have a gray background.
+         */
+        "background"?: boolean;
+        /**
+          * If `true`, a drop-shadow will be displayed with a white background.
          */
         "showShadow"?: boolean;
     }
@@ -320,6 +336,14 @@ export namespace Components {
          */
         "error"?: string;
         /**
+          * The content of the heading if `useFormsPattern` and `uswds` are true.
+         */
+        "formHeading"?: string;
+        /**
+          * The heading level for the heading if `useFormsPattern` and `uswds` are true.
+         */
+        "formHeadingLevel"?: number;
+        /**
           * Optional hint text.
          */
         "hint"?: string;
@@ -336,9 +360,15 @@ export namespace Components {
          */
         "required"?: boolean;
         /**
+          * Enabling this will add a heading and description for integrating into the forms pattern. Accepts `single` or `multiple` to indicate if the form is a single input or will have multiple inputs. `uswds` should be true.
+         */
+        "useFormsPattern"?: string;
+        /**
           * Whether or not the component will use USWDS v3 styling.
          */
         "uswds"?: boolean;
+    }
+    interface VaCrisisLineModal {
     }
     interface VaDate {
         /**
@@ -377,8 +407,6 @@ export namespace Components {
          */
         "value"?: string;
     }
-    interface VaFeaturedContent {
-    }
     interface VaFileInput {
         /**
           * A comma-separated list of unique file type specifiers.
@@ -412,6 +440,18 @@ export namespace Components {
           * Sets the input to required and renders the (*Required) text.
          */
         "required"?: boolean;
+        /**
+          * Whether or not the component will use USWDS v3 styling.
+         */
+        "uswds"?: boolean;
+    }
+    interface VaHeaderMinimal {
+        /**
+          * Disables use of heading tags in the minimal header in favor of `<div>` tags. This is for when a heading level 1 needs to be used elsewhere, as there should only be one heading level 1 per page.
+         */
+        "disableHeadings"?: boolean;
+        "header"?: string;
+        "subheader"?: string;
     }
     interface VaIcon {
         /**
@@ -423,7 +463,7 @@ export namespace Components {
          */
         "size"?: number;
         /**
-          * Screen-reader text if the icon has semantic meaning  and is not purely decorative.
+          * Screen-reader text if the icon has semantic meaning and is not purely decorative.
          */
         "srtext"?: string;
     }
@@ -505,6 +545,10 @@ export namespace Components {
          */
         "disableAnalytics"?: boolean;
         /**
+          * Override logic for whether to show error or warning
+         */
+        "isError": boolean;
+        /**
           * The Date/Time of when the maintenance is scheduled to end.
          */
         "maintenanceEndDateTime": string;
@@ -535,6 +579,14 @@ export namespace Components {
          */
         "error"?: string;
         /**
+          * The content of the heading if `useFormsPattern` and `uswds` are true.
+         */
+        "formHeading"?: string;
+        /**
+          * The heading level for the heading if `useFormsPattern` and `uswds` are true.
+         */
+        "formHeadingLevel"?: number;
+        /**
           * Hint text string
          */
         "hint"?: string;
@@ -558,6 +610,10 @@ export namespace Components {
          */
         "required"?: boolean;
         /**
+          * Enabling this will add a heading and description for integrating into the forms pattern. Accepts `single` or `multiple` to indicate if the form is a single input or will have multiple inputs. `uswds` should be true.
+         */
+        "useFormsPattern"?: string;
+        /**
           * Whether or not the component will use USWDS v3 styling.
          */
         "uswds"?: boolean;
@@ -566,9 +622,11 @@ export namespace Components {
          */
         "value"?: string;
     }
+    interface VaMinimalFooter {
+    }
     interface VaModal {
         /**
-          * Additional DOM-nodes that should not be hidden from screen readers.  Useful when an open modal shouldn't hide all content behind the overlay.
+          * Additional DOM-nodes that should not be hidden from screen readers. Useful when an open modal shouldn't hide all content behind the overlay.
          */
         "ariaHiddenNodeExceptions"?: HTMLElement[];
         /**
@@ -683,6 +741,14 @@ export namespace Components {
          */
         "error"?: string;
         /**
+          * The content of the heading if `useFormsPattern` and `uswds` are true.
+         */
+        "formHeading"?: string;
+        /**
+          * The heading level for the heading if `useFormsPattern` and `uswds` are true.
+         */
+        "formHeadingLevel"?: number;
+        /**
           * Optional hint text.
          */
         "hint"?: string;
@@ -714,6 +780,10 @@ export namespace Components {
           * Set the input to required and render the (Required) text.
          */
         "required"?: boolean;
+        /**
+          * Enabling this will add a heading and description for integrating into the forms pattern. Accepts `single` or `multiple` to indicate if the form is a single input or will have multiple inputs. `uswds` should be true.
+         */
+        "useFormsPattern"?: string;
         /**
           * Whether or not the component will use USWDS v3 styling.
          */
@@ -879,6 +949,14 @@ export namespace Components {
          */
         "error"?: string;
         /**
+          * The content of the heading if `useFormsPattern` and `uswds` are true.
+         */
+        "formHeading"?: string;
+        /**
+          * The heading level for the heading if `useFormsPattern` and `uswds` are true.
+         */
+        "formHeadingLevel"?: number;
+        /**
           * An optional message that will be read by screen readers when the header is focused. The label-header-level prop must be set for this to be active.
          */
         "headerAriaDescribedby"?: string;
@@ -898,6 +976,10 @@ export namespace Components {
           * Whether or not this input field is required.
          */
         "required"?: boolean;
+        /**
+          * Enabling this will add a heading and description for integrating into the forms pattern. Accepts `single` or `multiple` to indicate if the form is a single input or will have multiple inputs. `uswds` should be true.
+         */
+        "useFormsPattern"?: string;
         /**
           * Whether or not the component will use USWDS v3 styling.
          */
@@ -943,6 +1025,10 @@ export namespace Components {
     }
     interface VaSearchInput {
         /**
+          * If `true`, the component will use the big variant. Only available when `uswds` is `true`.
+         */
+        "big"?: boolean;
+        /**
           * Text displayed inside the search button
          */
         "buttonText"?: string;
@@ -951,9 +1037,17 @@ export namespace Components {
          */
         "label"?: string;
         /**
+          * If `true`, the component will use the small variant. Only available when `uswds` is `true`.
+         */
+        "small"?: boolean;
+        /**
           * An array of strings containing suggestions to be displayed in listbox. This component displays up to 5 suggestions.
          */
         "suggestions"?: any;
+        /**
+          * Whether or not the component will use USWDS v3 styling.
+         */
+        "uswds"?: boolean;
         /**
           * The value of the input field
          */
@@ -1031,6 +1125,10 @@ export namespace Components {
          */
         "label": string;
         /**
+          * An optional message that will be read by screen readers when the select is focused.
+         */
+        "messageAriaDescribedby"?: string;
+        /**
           * Name attribute for the select field.
          */
         "name": string;
@@ -1085,6 +1183,12 @@ export namespace Components {
          */
         "inputValue": string;
     }
+    interface VaSummaryBox {
+        /**
+          * Whether or not the component will use USWDS v3 styling.
+         */
+        "uswds"?: boolean;
+    }
     interface VaTable {
         /**
           * Whether the initial sort state will be descending or not.
@@ -1114,6 +1218,10 @@ export namespace Components {
           * Indicates if this is a number meant to be called from outside the US. Prepends a "+1" to the formatted number.
          */
         "international"?: boolean;
+        /**
+          * An optional message that will be read by screen readers when the phone number is focused.
+         */
+        "messageAriaDescribedby"?: string;
         /**
           * Indicates if the phone number can be clicked or not
          */
@@ -1148,6 +1256,14 @@ export namespace Components {
           * The error message to render.
          */
         "error"?: string;
+        /**
+          * The content of the heading if `useFormsPattern` and `uswds` are true.
+         */
+        "formHeading"?: string;
+        /**
+          * The heading level for the heading if `useFormsPattern` and `uswds` are true.
+         */
+        "formHeadingLevel"?: number;
         /**
           * Optional hint text.
          */
@@ -1207,6 +1323,10 @@ export namespace Components {
          */
         "type"?: 'email' | 'number' | 'search' | 'tel' | 'text' | 'url';
         /**
+          * Enabling this will add a heading and description for integrating into the forms pattern. Accepts `single` or `multiple` to indicate if the form is a single input or will have multiple inputs. `uswds` should be true.
+         */
+        "useFormsPattern"?: string;
+        /**
           * Whether or not the component will use USWDS v3 styling.
          */
         "uswds"?: boolean;
@@ -1232,6 +1352,14 @@ export namespace Components {
           * The error message to render.
          */
         "error"?: string;
+        /**
+          * The content of the heading if `useFormsPattern` and `uswds` are true.
+         */
+        "formHeading"?: string;
+        /**
+          * The heading level for the heading if `useFormsPattern` and `uswds` are true.
+         */
+        "formHeadingLevel"?: number;
         /**
           * Optional hint text.
          */
@@ -1260,6 +1388,10 @@ export namespace Components {
           * Set the input to required and render the (Required) text.
          */
         "required"?: boolean;
+        /**
+          * Enabling this will add a heading and description for integrating into the forms pattern. Accepts `single` or `multiple` to indicate if the form is a single input or will have multiple inputs. `uswds` should be true.
+         */
+        "useFormsPattern"?: string;
         /**
           * Whether or not the component will use USWDS v3 styling.
          */
@@ -1489,23 +1621,29 @@ declare global {
         prototype: HTMLVaCheckboxGroupElement;
         new (): HTMLVaCheckboxGroupElement;
     };
+    interface HTMLVaCrisisLineModalElement extends Components.VaCrisisLineModal, HTMLStencilElement {
+    }
+    var HTMLVaCrisisLineModalElement: {
+        prototype: HTMLVaCrisisLineModalElement;
+        new (): HTMLVaCrisisLineModalElement;
+    };
     interface HTMLVaDateElement extends Components.VaDate, HTMLStencilElement {
     }
     var HTMLVaDateElement: {
         prototype: HTMLVaDateElement;
         new (): HTMLVaDateElement;
     };
-    interface HTMLVaFeaturedContentElement extends Components.VaFeaturedContent, HTMLStencilElement {
-    }
-    var HTMLVaFeaturedContentElement: {
-        prototype: HTMLVaFeaturedContentElement;
-        new (): HTMLVaFeaturedContentElement;
-    };
     interface HTMLVaFileInputElement extends Components.VaFileInput, HTMLStencilElement {
     }
     var HTMLVaFileInputElement: {
         prototype: HTMLVaFileInputElement;
         new (): HTMLVaFileInputElement;
+    };
+    interface HTMLVaHeaderMinimalElement extends Components.VaHeaderMinimal, HTMLStencilElement {
+    }
+    var HTMLVaHeaderMinimalElement: {
+        prototype: HTMLVaHeaderMinimalElement;
+        new (): HTMLVaHeaderMinimalElement;
     };
     interface HTMLVaIconElement extends Components.VaIcon, HTMLStencilElement {
     }
@@ -1536,6 +1674,12 @@ declare global {
     var HTMLVaMemorableDateElement: {
         prototype: HTMLVaMemorableDateElement;
         new (): HTMLVaMemorableDateElement;
+    };
+    interface HTMLVaMinimalFooterElement extends Components.VaMinimalFooter, HTMLStencilElement {
+    }
+    var HTMLVaMinimalFooterElement: {
+        prototype: HTMLVaMinimalFooterElement;
+        new (): HTMLVaMinimalFooterElement;
     };
     interface HTMLVaModalElement extends Components.VaModal, HTMLStencilElement {
     }
@@ -1651,6 +1795,12 @@ declare global {
         prototype: HTMLVaStatementOfTruthElement;
         new (): HTMLVaStatementOfTruthElement;
     };
+    interface HTMLVaSummaryBoxElement extends Components.VaSummaryBox, HTMLStencilElement {
+    }
+    var HTMLVaSummaryBoxElement: {
+        prototype: HTMLVaSummaryBoxElement;
+        new (): HTMLVaSummaryBoxElement;
+    };
     interface HTMLVaTableElement extends Components.VaTable, HTMLStencilElement {
     }
     var HTMLVaTableElement: {
@@ -1695,14 +1845,16 @@ declare global {
         "va-card": HTMLVaCardElement;
         "va-checkbox": HTMLVaCheckboxElement;
         "va-checkbox-group": HTMLVaCheckboxGroupElement;
+        "va-crisis-line-modal": HTMLVaCrisisLineModalElement;
         "va-date": HTMLVaDateElement;
-        "va-featured-content": HTMLVaFeaturedContentElement;
         "va-file-input": HTMLVaFileInputElement;
+        "va-header-minimal": HTMLVaHeaderMinimalElement;
         "va-icon": HTMLVaIconElement;
         "va-link": HTMLVaLinkElement;
         "va-loading-indicator": HTMLVaLoadingIndicatorElement;
         "va-maintenance-banner": HTMLVaMaintenanceBannerElement;
         "va-memorable-date": HTMLVaMemorableDateElement;
+        "va-minimal-footer": HTMLVaMinimalFooterElement;
         "va-modal": HTMLVaModalElement;
         "va-need-help": HTMLVaNeedHelpElement;
         "va-notification": HTMLVaNotificationElement;
@@ -1722,6 +1874,7 @@ declare global {
         "va-segmented-progress-bar": HTMLVaSegmentedProgressBarElement;
         "va-select": HTMLVaSelectElement;
         "va-statement-of-truth": HTMLVaStatementOfTruthElement;
+        "va-summary-box": HTMLVaSummaryBoxElement;
         "va-table": HTMLVaTableElement;
         "va-table-row": HTMLVaTableRowElement;
         "va-telephone": HTMLVaTelephoneElement;
@@ -1806,7 +1959,7 @@ declare namespace LocalJSX {
     }
     interface VaAlert {
         /**
-          * If `true`, renders the alert with only a background color corresponding to the status - no left border.
+          * If `true`, renders the alert with only a background color corresponding to the status - no left border. (v1 only)
          */
         "backgroundOnly"?: boolean;
         /**
@@ -1842,9 +1995,13 @@ declare namespace LocalJSX {
          */
         "slim"?: boolean;
         /**
-          * Determines the icon and border/background color. One of `info`, `error`, `success`, `warning`, or `continue`
+          * Determines the icon and border/background color.
          */
-        "status"?: string;
+        "status"?: | 'info'
+    | 'warning'
+    | 'error'
+    | 'success'
+    | 'continue';
         /**
           * Whether or not the component will use USWDS v3 styling.
          */
@@ -1880,6 +2037,10 @@ declare namespace LocalJSX {
     }
     interface VaBanner {
         /**
+          * Aria Label for the "region" of the nested va-alert.
+         */
+        "dataLabel"?: string;
+        /**
           * If true, doesn't fire the CustomEvent which can be used for analytics tracking.
          */
         "disableAnalytics"?: boolean;
@@ -1896,9 +2057,9 @@ declare namespace LocalJSX {
          */
         "showClose"?: boolean;
         /**
-          * The type of the banner. One of 'info', 'error', 'success', 'continue', or 'warning'. This affects both the icon of the AlertBox and the top border color.
+          * The type of the banner. This affects both the icon of the AlertBox and the top border color.
          */
-        "type"?: string;
+        "type"?: 'info' | 'warning' | 'error' | 'success' | 'continue';
         /**
           * A boolean that when false makes it so that the banner does not render.
          */
@@ -1910,13 +2071,17 @@ declare namespace LocalJSX {
     }
     interface VaBreadcrumbs {
         /**
-          * Represents a list of breadcrumbs. Use an array of objects with label and href properties, and then use JSON.stringify() to convert to a string. This prop is available when `uswds` is set to `true`.
+          * Represents a list of breadcrumbs. Use a JSON array of objects with label and href properties, then wrap in a string if using non-React-binding version. See Storybook examples for React-binding version. For pure web components, here's an example link: ``[{"href": "/link1", "label": "Link 1"}]`. This prop is available when `uswds` is set to `true`.
          */
         "breadcrumbList"?: any;
         /**
           * Analytics tracking function(s) will not be called
          */
         "disableAnalytics"?: boolean;
+        /**
+          * When true, the first breadcrumb label will be "VA.gov home".
+         */
+        "homeVeteransAffairs"?: boolean;
         /**
           * Adds an aria-label attribute to the <nav /> element.
          */
@@ -1925,6 +2090,10 @@ declare namespace LocalJSX {
           * The event used to track usage of the component. This is emitted when a breadcrumb anchor is clicked and disableAnalytics is not true.
          */
         "onComponent-library-analytics"?: (event: VaBreadcrumbsCustomEvent<any>) => void;
+        /**
+          * Fires when user clicks on breadcrumb anchor tag. Has no effect unless uswds is true and the href of anchor tag is part of breadcrumb object that also has isRouterLink: true
+         */
+        "onRouteChange"?: (event: VaBreadcrumbsCustomEvent<{ href: string }>) => void;
         /**
           * Whether or not the component will use USWDS v3 styling.
          */
@@ -2028,7 +2197,11 @@ declare namespace LocalJSX {
     }
     interface VaCard {
         /**
-          * If `true`, a drop-shadow will be displayed
+          * If `true`, the card will have a gray background.
+         */
+        "background"?: boolean;
+        /**
+          * If `true`, a drop-shadow will be displayed with a white background.
          */
         "showShadow"?: boolean;
     }
@@ -2104,6 +2277,14 @@ declare namespace LocalJSX {
          */
         "error"?: string;
         /**
+          * The content of the heading if `useFormsPattern` and `uswds` are true.
+         */
+        "formHeading"?: string;
+        /**
+          * The heading level for the heading if `useFormsPattern` and `uswds` are true.
+         */
+        "formHeadingLevel"?: number;
+        /**
           * Optional hint text.
          */
         "hint"?: string;
@@ -2124,9 +2305,15 @@ declare namespace LocalJSX {
          */
         "required"?: boolean;
         /**
+          * Enabling this will add a heading and description for integrating into the forms pattern. Accepts `single` or `multiple` to indicate if the form is a single input or will have multiple inputs. `uswds` should be true.
+         */
+        "useFormsPattern"?: string;
+        /**
           * Whether or not the component will use USWDS v3 styling.
          */
         "uswds"?: boolean;
+    }
+    interface VaCrisisLineModal {
     }
     interface VaDate {
         /**
@@ -2177,8 +2364,6 @@ declare namespace LocalJSX {
          */
         "value"?: string;
     }
-    interface VaFeaturedContent {
-    }
     interface VaFileInput {
         /**
           * A comma-separated list of unique file type specifiers.
@@ -2220,6 +2405,18 @@ declare namespace LocalJSX {
           * Sets the input to required and renders the (*Required) text.
          */
         "required"?: boolean;
+        /**
+          * Whether or not the component will use USWDS v3 styling.
+         */
+        "uswds"?: boolean;
+    }
+    interface VaHeaderMinimal {
+        /**
+          * Disables use of heading tags in the minimal header in favor of `<div>` tags. This is for when a heading level 1 needs to be used elsewhere, as there should only be one heading level 1 per page.
+         */
+        "disableHeadings"?: boolean;
+        "header"?: string;
+        "subheader"?: string;
     }
     interface VaIcon {
         /**
@@ -2231,7 +2428,7 @@ declare namespace LocalJSX {
          */
         "size"?: number;
         /**
-          * Screen-reader text if the icon has semantic meaning  and is not purely decorative.
+          * Screen-reader text if the icon has semantic meaning and is not purely decorative.
          */
         "srtext"?: string;
     }
@@ -2321,6 +2518,10 @@ declare namespace LocalJSX {
          */
         "disableAnalytics"?: boolean;
         /**
+          * Override logic for whether to show error or warning
+         */
+        "isError"?: boolean;
+        /**
           * The Date/Time of when the maintenance is scheduled to end.
          */
         "maintenanceEndDateTime": string;
@@ -2359,6 +2560,14 @@ declare namespace LocalJSX {
          */
         "error"?: string;
         /**
+          * The content of the heading if `useFormsPattern` and `uswds` are true.
+         */
+        "formHeading"?: string;
+        /**
+          * The heading level for the heading if `useFormsPattern` and `uswds` are true.
+         */
+        "formHeadingLevel"?: number;
+        /**
           * Hint text string
          */
         "hint"?: string;
@@ -2394,6 +2603,10 @@ declare namespace LocalJSX {
          */
         "required"?: boolean;
         /**
+          * Enabling this will add a heading and description for integrating into the forms pattern. Accepts `single` or `multiple` to indicate if the form is a single input or will have multiple inputs. `uswds` should be true.
+         */
+        "useFormsPattern"?: string;
+        /**
           * Whether or not the component will use USWDS v3 styling.
          */
         "uswds"?: boolean;
@@ -2402,9 +2615,11 @@ declare namespace LocalJSX {
          */
         "value"?: string;
     }
+    interface VaMinimalFooter {
+    }
     interface VaModal {
         /**
-          * Additional DOM-nodes that should not be hidden from screen readers.  Useful when an open modal shouldn't hide all content behind the overlay.
+          * Additional DOM-nodes that should not be hidden from screen readers. Useful when an open modal shouldn't hide all content behind the overlay.
          */
         "ariaHiddenNodeExceptions"?: HTMLElement[];
         /**
@@ -2543,6 +2758,14 @@ declare namespace LocalJSX {
          */
         "error"?: string;
         /**
+          * The content of the heading if `useFormsPattern` and `uswds` are true.
+         */
+        "formHeading"?: string;
+        /**
+          * The heading level for the heading if `useFormsPattern` and `uswds` are true.
+         */
+        "formHeadingLevel"?: number;
+        /**
           * Optional hint text.
          */
         "hint"?: string;
@@ -2578,6 +2801,10 @@ declare namespace LocalJSX {
           * Set the input to required and render the (Required) text.
          */
         "required"?: boolean;
+        /**
+          * Enabling this will add a heading and description for integrating into the forms pattern. Accepts `single` or `multiple` to indicate if the form is a single input or will have multiple inputs. `uswds` should be true.
+         */
+        "useFormsPattern"?: string;
         /**
           * Whether or not the component will use USWDS v3 styling.
          */
@@ -2779,6 +3006,14 @@ declare namespace LocalJSX {
          */
         "error"?: string;
         /**
+          * The content of the heading if `useFormsPattern` and `uswds` are true.
+         */
+        "formHeading"?: string;
+        /**
+          * The heading level for the heading if `useFormsPattern` and `uswds` are true.
+         */
+        "formHeadingLevel"?: number;
+        /**
           * An optional message that will be read by screen readers when the header is focused. The label-header-level prop must be set for this to be active.
          */
         "headerAriaDescribedby"?: string;
@@ -2806,6 +3041,10 @@ declare namespace LocalJSX {
           * Whether or not this input field is required.
          */
         "required"?: boolean;
+        /**
+          * Enabling this will add a heading and description for integrating into the forms pattern. Accepts `single` or `multiple` to indicate if the form is a single input or will have multiple inputs. `uswds` should be true.
+         */
+        "useFormsPattern"?: string;
         /**
           * Whether or not the component will use USWDS v3 styling.
          */
@@ -2855,6 +3094,10 @@ declare namespace LocalJSX {
     }
     interface VaSearchInput {
         /**
+          * If `true`, the component will use the big variant. Only available when `uswds` is `true`.
+         */
+        "big"?: boolean;
+        /**
           * Text displayed inside the search button
          */
         "buttonText"?: string;
@@ -2867,9 +3110,17 @@ declare namespace LocalJSX {
          */
         "onComponent-library-analytics"?: (event: VaSearchInputCustomEvent<any>) => void;
         /**
+          * If `true`, the component will use the small variant. Only available when `uswds` is `true`.
+         */
+        "small"?: boolean;
+        /**
           * An array of strings containing suggestions to be displayed in listbox. This component displays up to 5 suggestions.
          */
         "suggestions"?: any;
+        /**
+          * Whether or not the component will use USWDS v3 styling.
+         */
+        "uswds"?: boolean;
         /**
           * The value of the input field
          */
@@ -2951,6 +3202,10 @@ declare namespace LocalJSX {
          */
         "label": string;
         /**
+          * An optional message that will be read by screen readers when the select is focused.
+         */
+        "messageAriaDescribedby"?: string;
+        /**
           * Name attribute for the select field.
          */
         "name": string;
@@ -3029,6 +3284,12 @@ declare namespace LocalJSX {
          */
         "onVaInputChange"?: (event: VaStatementOfTruthCustomEvent<any>) => void;
     }
+    interface VaSummaryBox {
+        /**
+          * Whether or not the component will use USWDS v3 styling.
+         */
+        "uswds"?: boolean;
+    }
     interface VaTable {
         /**
           * Whether the initial sort state will be descending or not.
@@ -3058,6 +3319,10 @@ declare namespace LocalJSX {
           * Indicates if this is a number meant to be called from outside the US. Prepends a "+1" to the formatted number.
          */
         "international"?: boolean;
+        /**
+          * An optional message that will be read by screen readers when the phone number is focused.
+         */
+        "messageAriaDescribedby"?: string;
         /**
           * Indicates if the phone number can be clicked or not
          */
@@ -3096,6 +3361,14 @@ declare namespace LocalJSX {
           * The error message to render.
          */
         "error"?: string;
+        /**
+          * The content of the heading if `useFormsPattern` and `uswds` are true.
+         */
+        "formHeading"?: string;
+        /**
+          * The heading level for the heading if `useFormsPattern` and `uswds` are true.
+         */
+        "formHeadingLevel"?: number;
         /**
           * Optional hint text.
          */
@@ -3159,6 +3432,10 @@ declare namespace LocalJSX {
          */
         "type"?: 'email' | 'number' | 'search' | 'tel' | 'text' | 'url';
         /**
+          * Enabling this will add a heading and description for integrating into the forms pattern. Accepts `single` or `multiple` to indicate if the form is a single input or will have multiple inputs. `uswds` should be true.
+         */
+        "useFormsPattern"?: string;
+        /**
           * Whether or not the component will use USWDS v3 styling.
          */
         "uswds"?: boolean;
@@ -3184,6 +3461,14 @@ declare namespace LocalJSX {
           * The error message to render.
          */
         "error"?: string;
+        /**
+          * The content of the heading if `useFormsPattern` and `uswds` are true.
+         */
+        "formHeading"?: string;
+        /**
+          * The heading level for the heading if `useFormsPattern` and `uswds` are true.
+         */
+        "formHeadingLevel"?: number;
         /**
           * Optional hint text.
          */
@@ -3217,6 +3502,10 @@ declare namespace LocalJSX {
          */
         "required"?: boolean;
         /**
+          * Enabling this will add a heading and description for integrating into the forms pattern. Accepts `single` or `multiple` to indicate if the form is a single input or will have multiple inputs. `uswds` should be true.
+         */
+        "useFormsPattern"?: string;
+        /**
           * Whether or not the component will use USWDS v3 styling.
          */
         "uswds"?: boolean;
@@ -3239,14 +3528,16 @@ declare namespace LocalJSX {
         "va-card": VaCard;
         "va-checkbox": VaCheckbox;
         "va-checkbox-group": VaCheckboxGroup;
+        "va-crisis-line-modal": VaCrisisLineModal;
         "va-date": VaDate;
-        "va-featured-content": VaFeaturedContent;
         "va-file-input": VaFileInput;
+        "va-header-minimal": VaHeaderMinimal;
         "va-icon": VaIcon;
         "va-link": VaLink;
         "va-loading-indicator": VaLoadingIndicator;
         "va-maintenance-banner": VaMaintenanceBanner;
         "va-memorable-date": VaMemorableDate;
+        "va-minimal-footer": VaMinimalFooter;
         "va-modal": VaModal;
         "va-need-help": VaNeedHelp;
         "va-notification": VaNotification;
@@ -3266,6 +3557,7 @@ declare namespace LocalJSX {
         "va-segmented-progress-bar": VaSegmentedProgressBar;
         "va-select": VaSelect;
         "va-statement-of-truth": VaStatementOfTruth;
+        "va-summary-box": VaSummaryBox;
         "va-table": VaTable;
         "va-table-row": VaTableRow;
         "va-telephone": VaTelephone;
@@ -3290,14 +3582,16 @@ declare module "@stencil/core" {
             "va-card": LocalJSX.VaCard & JSXBase.HTMLAttributes<HTMLVaCardElement>;
             "va-checkbox": LocalJSX.VaCheckbox & JSXBase.HTMLAttributes<HTMLVaCheckboxElement>;
             "va-checkbox-group": LocalJSX.VaCheckboxGroup & JSXBase.HTMLAttributes<HTMLVaCheckboxGroupElement>;
+            "va-crisis-line-modal": LocalJSX.VaCrisisLineModal & JSXBase.HTMLAttributes<HTMLVaCrisisLineModalElement>;
             "va-date": LocalJSX.VaDate & JSXBase.HTMLAttributes<HTMLVaDateElement>;
-            "va-featured-content": LocalJSX.VaFeaturedContent & JSXBase.HTMLAttributes<HTMLVaFeaturedContentElement>;
             "va-file-input": LocalJSX.VaFileInput & JSXBase.HTMLAttributes<HTMLVaFileInputElement>;
+            "va-header-minimal": LocalJSX.VaHeaderMinimal & JSXBase.HTMLAttributes<HTMLVaHeaderMinimalElement>;
             "va-icon": LocalJSX.VaIcon & JSXBase.HTMLAttributes<HTMLVaIconElement>;
             "va-link": LocalJSX.VaLink & JSXBase.HTMLAttributes<HTMLVaLinkElement>;
             "va-loading-indicator": LocalJSX.VaLoadingIndicator & JSXBase.HTMLAttributes<HTMLVaLoadingIndicatorElement>;
             "va-maintenance-banner": LocalJSX.VaMaintenanceBanner & JSXBase.HTMLAttributes<HTMLVaMaintenanceBannerElement>;
             "va-memorable-date": LocalJSX.VaMemorableDate & JSXBase.HTMLAttributes<HTMLVaMemorableDateElement>;
+            "va-minimal-footer": LocalJSX.VaMinimalFooter & JSXBase.HTMLAttributes<HTMLVaMinimalFooterElement>;
             "va-modal": LocalJSX.VaModal & JSXBase.HTMLAttributes<HTMLVaModalElement>;
             "va-need-help": LocalJSX.VaNeedHelp & JSXBase.HTMLAttributes<HTMLVaNeedHelpElement>;
             "va-notification": LocalJSX.VaNotification & JSXBase.HTMLAttributes<HTMLVaNotificationElement>;
@@ -3317,6 +3611,7 @@ declare module "@stencil/core" {
             "va-segmented-progress-bar": LocalJSX.VaSegmentedProgressBar & JSXBase.HTMLAttributes<HTMLVaSegmentedProgressBarElement>;
             "va-select": LocalJSX.VaSelect & JSXBase.HTMLAttributes<HTMLVaSelectElement>;
             "va-statement-of-truth": LocalJSX.VaStatementOfTruth & JSXBase.HTMLAttributes<HTMLVaStatementOfTruthElement>;
+            "va-summary-box": LocalJSX.VaSummaryBox & JSXBase.HTMLAttributes<HTMLVaSummaryBoxElement>;
             "va-table": LocalJSX.VaTable & JSXBase.HTMLAttributes<HTMLVaTableElement>;
             "va-table-row": LocalJSX.VaTableRow & JSXBase.HTMLAttributes<HTMLVaTableRowElement>;
             "va-telephone": LocalJSX.VaTelephone & JSXBase.HTMLAttributes<HTMLVaTelephoneElement>;

@@ -1,3 +1,5 @@
+@forward 'settings';
+
 @use 'uswds-helpers/src/styles/usa-sr-only';
 @use 'usa-fieldset/src/styles/usa-fieldset';
 @use 'usa-label/src/styles/usa-label';
@@ -6,6 +8,8 @@
 
 @import '../../mixins/uswds-error-border.scss';
 @import '../../global/formation_overrides';
+@import '../../mixins/focusable.css';
+@import '~@department-of-veterans-affairs/css-library/dist/elements.css';
 
 :host {
   display: block;
@@ -13,7 +17,7 @@
   padding: 0;
 }
 
-:host([uswds]) {
+:host(:not([uswds='false'])) {
   margin-top: 24px;
 }
 
@@ -24,29 +28,31 @@
 @import '../../mixins/hint-text.css';
 @import '../../mixins/headers.css';
 
-:host(:not([uswds])) #error-message {
-  font-size: 1.6rem;
-  line-height: 2.4rem;
-  font-weight: 700;
-  margin-bottom: 0;
-}
+:host([uswds='false']) {
+  #error-message {
+    font-size: 1.6rem;
+    line-height: 2.4rem;
+    font-weight: 700;
+    margin-bottom: 0;
+  }
 
-:host(:not([uswds])) .required {
-  color: var(--color-secondary-dark);
-  margin: 0 0.35rem;
-}
+  .required {
+    color: var(--vads-color-secondary-dark);
+    margin: 0 0.35rem;
+  }
 
-:host(:not([uswds])) fieldset {
-  border: none;
-  margin: 0;
-  padding: 0;
-}
+  fieldset {
+    border: none;
+    margin: 0;
+    padding: 0;
+  }
 
-:host(:not([uswds])) legend {
-  display: block;
-  max-width: 46rem;
-  font-weight: inherit;
-  font-size: inherit;
-  line-height: inherit;
-  padding-inline: 0;
+  legend {
+    display: block;
+    max-width: 46rem;
+    font-weight: inherit;
+    font-size: inherit;
+    line-height: inherit;
+    padding-inline: 0;
+  }
 }

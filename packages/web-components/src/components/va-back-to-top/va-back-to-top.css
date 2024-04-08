@@ -31,7 +31,7 @@ a {
   border-bottom-right-radius: 0;
   border-top-right-radius: 0;
   bottom: 0;
-  color: var(--color-link-default);
+  color: var(--vads-color-link);
   right: 0;
   background: rgba(255, 255, 255, 0.9);
   height: 48px;
@@ -45,13 +45,13 @@ a {
 }
 a:not([disabled]):active, a:not([disabled]):focus {
   border-radius: 5px;
-  outline: 2px solid var(--color-gold-light);
+  outline: 2px solid var(--vads-color-action-focus-on-light);
   outline-offset: 2px;
 }
 a:not([disabled]):hover {
-  background-color: var(--color-gray-cool-light);
+  background-color: var(--vads-color-gray-cool-light);
   border-radius: 0;
-  color: var(--color-primary-darker);
+  color: var(--vads-color-primary-darker);
   outline: none;
 }
 div.reveal a {
@@ -138,7 +138,7 @@ i::before {
   }
 
   a span.text {
-    color: var(--color-link-default);
+    color: var(--vads-color-link);
     display: inline-block;
     text-decoration: underline;
   }
@@ -148,7 +148,7 @@ i::before {
   }
 
   i {
-    color: var(--color-link-default);
+    color: var(--vads-color-link);
     padding-right: 8px;
     padding-top: 11px;
     font-size: 1em;

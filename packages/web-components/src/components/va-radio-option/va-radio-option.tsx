@@ -40,7 +40,7 @@ export class VaRadioOption {
   /**
    * Whether or not the component will use USWDS v3. styling.
    */
-  @Prop() uswds?: boolean = false;
+  @Prop() uswds?: boolean = true;
 
   /**
    * Whether or not the component will display as a tile. Available when uswds is true.
@@ -110,6 +110,7 @@ export class VaRadioOption {
             {description && (
               <span
                 class="usa-radio__label-description dd-privacy-hidden"
+                data-dd-action-name="description"
                 aria-describedby="option-label"
               >
                 {description}
@@ -136,6 +137,7 @@ export class VaRadioOption {
               {description && (
                 <span
                   class="description dd-privacy-hidden"
+                  data-dd-action-name="description"
                   aria-describedby="option-label"
                 >
                   {description}

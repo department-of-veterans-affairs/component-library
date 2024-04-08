@@ -8,7 +8,7 @@
 }
 
 ::slotted([slot='headers']) {
-  background: var(--color-gray-lightest);
+  background: var(--vads-color-base-lightest);
   font-weight: 700;
 }
 
@@ -27,9 +27,9 @@ caption {
   }
 
   ::slotted(va-table-row) {
-    border-bottom: 1px solid var(--color-gray-medium);
+    border-bottom: 1px solid var(--vads-color-gray-medium);
   }
   ::slotted(va-table-row):first-child {
-    border-top: 1px solid var(--color-gray-medium);
+    border-top: 1px solid var(--vads-color-gray-medium);
   }
 }

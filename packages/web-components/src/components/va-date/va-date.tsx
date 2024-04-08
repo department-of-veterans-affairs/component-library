@@ -15,7 +15,6 @@ import {
   days,
   validate,
   getErrorParameters,
-  checkIsNaN,
   zeroPadStart,
 } from '../../utils/date-utils';
 
@@ -123,6 +122,12 @@ export class VaDate {
   })
   componentLibraryAnalytics: EventEmitter;
 
+  componentDidLoad() {
+    // add this attr so that error state css selectors will target inputs
+    // without causing conflict in memorable-date
+    this.el.setAttribute('uswds', 'false');
+  }
+
   /**
    * Set the value prop as an ISO-8601 date using provided arguments.
    * Strips trailing hyphens and sets date to be null if the
@@ -145,24 +150,21 @@ export class VaDate {
       .split('-')
       .map(val => Number(val));
 
-    if(!checkIsNaN(this, year, month, day, this.monthYearOnly)) {
-      // if any fields are NaN do not continue validation
-      return;
-    }
-
-    this.setValue(year, month, day);
-    // Run built-in validation. Any custom validation
-    // will happen afterwards
     validate({
                component: this,
                year,
                month,
                day,
-               monthYearOnly: this.monthYearOnly,
                yearTouched: this.yearTouched,
                monthTouched: this.monthTouched,
                dayTouched: this.dayTouched
              });
+
+    if (this.error) {
+      return;
+    }
+
+    this.setValue(year, month, day);
     this.dateBlur.emit(event);
 
     if (this.enableAnalytics) {
@@ -263,8 +265,9 @@ export class VaDate {
               onVaSelect={handleDateChange}
               onBlur={this.handleMonthBlur}
               invalid={this.invalidMonth}
-              class="select-month"
+              class="select-month uswds-false"
               aria-label="Please enter two digits for the month"
+              uswds={false}
             >
               <option value=""></option>
               {months &&
@@ -284,8 +287,9 @@ export class VaDate {
                 onVaSelect={handleDateChange}
                 onBlur={this.handleDayBlur}
                 invalid={this.invalidDay}
-                class="select-day"
+                class="select-day uswds-false"
                 aria-label="Please enter two digits for the day"
+                uswds={false}
               >
                 <option value=""></option>
                 {daysForSelectedMonth &&
@@ -307,10 +311,11 @@ export class VaDate {
               invalid={this.invalidYear}
               onInput={handleDateChange}
               onBlur={this.handleYearBlur}
-              class="input-year"
+              class="input-year uswds-false"
               inputmode="numeric"
               type="text"
               aria-label="Please enter four digits for the year"
+              uswds={false}
             />
           </div>
         </fieldset>

@@ -3,9 +3,11 @@ import { VaAlert } from '@department-of-veterans-affairs/web-components/react-bi
 import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
 
 const alertDocs = getWebComponentDocs('va-alert');
+// Remove backgroundOnly prop, this code and prop should be removed with the v1 version
+alertDocs.props = alertDocs.props.filter((prop) => prop.name !== 'backgroundOnly');
 
 export default {
-  title: `USWDS/Alert USWDS`,
+  title: `Components/Alert USWDS`,
   id: 'uswds/va-alert',
   argTypes: {
     headline: {
@@ -31,7 +33,6 @@ export default {
 VaAlert.displayName = 'VaAlert';
 
 const defaultArgs = {
-  'uswds': true,
   'slim': false,
   'status': 'info',
   'disable-analytics': false,
@@ -52,7 +53,6 @@ const defaultArgs = {
 };
 
 const Template = ({
-  uswds,
   slim,
   status,
   'disable-analytics': disableAnalytics,
@@ -68,7 +68,6 @@ const Template = ({
     return (
       <VaAlert
         slim={slim}
-        uswds={uswds}
         status={status}
         disableAnalytics={disableAnalytics}
         visible={visible}
@@ -84,7 +83,6 @@ const Template = ({
 
   return (
     <va-alert
-      uswds={uswds}
       slim={slim}
       status={status}
       disable-analytics={disableAnalytics}
@@ -108,7 +106,6 @@ const SlimTemplate = ({
   return (
     <>
       <va-alert
-        uswds={uswds}
         slim={slim}
         status="info"
         disable-analytics="false"
@@ -123,7 +120,6 @@ const SlimTemplate = ({
         </p>
       </va-alert>
       <va-alert
-        uswds={uswds}
         slim={slim}
         status="error"
         disable-analytics="false"
@@ -140,7 +136,6 @@ const SlimTemplate = ({
         </>
       </va-alert>
       <va-alert
-        uswds={uswds}
         slim={slim}
         status="success"
         disable-analytics="false"
@@ -155,7 +150,6 @@ const SlimTemplate = ({
         </p>
       </va-alert>
       <va-alert
-        uswds={uswds}
         slim={slim}
         status="warning"
         disable-analytics="false"
@@ -172,7 +166,6 @@ const SlimTemplate = ({
         </>
       </va-alert>
       <va-alert
-        uswds={uswds}
         slim={slim}
         status="continue"
         disable-analytics="false"
@@ -232,7 +225,7 @@ SignInToStartYourApplication.args = {
         <li>You can save your work in progress. You'll have 60 days from when you start or make updates to your application to come back and finish it.</li>
       </ul>
       <p><strong>Note:</strong> You can sign in after you start your application. But you'll lose any information you already filled in.</p>
-      <va-button uswds text="Sign in to start your application"/>
+      <va-button text="Sign in to start your application"/>
       <p>
         <a href="#start">Start your application without signing in</a>
       </p>
