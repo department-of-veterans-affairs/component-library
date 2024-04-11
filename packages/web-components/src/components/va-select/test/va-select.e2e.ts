@@ -210,4 +210,27 @@ describe('va-select', () => {
       </va-select>
     `);
   });
+
+  it('adds aria-describedby input-message id', async () => {
+    const page = await newE2EPage();
+    await page.setContent(`
+      <va-select label="A label" value="foo" enable-analytics message-aria-describedby="example message">
+        <option value="foo">Foo</option>
+        <option value="bar">Bar</option>
+      </va-select>
+    `);
+    const el = await page.find('va-select');
+    const inputEl = await page.find('va-select >>> select');
+
+    // Render the example message aria-describedby id.
+    expect(inputEl.getAttribute('aria-describedby')).not.toBeNull();
+    expect(inputEl.getAttribute('aria-describedby')).toContain('input-message');
+
+    // If an error and aria-describedby-message is set, id's exist in aria-describedby.
+    el.setProperty('error', 'Testing Error');
+    await page.waitForChanges();
+    expect(inputEl.getAttribute('aria-describedby')).not.toBeNull();
+    expect(inputEl.getAttribute('aria-describedby')).toContain('error-message');
+    expect(inputEl.getAttribute('aria-describedby')).toContain('input-message');
+  });
 });

@@ -4,7 +4,7 @@ import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
 const minimalFooterDocs = getWebComponentDocs('va-minimal-footer');
 
 export default {
-  title: 'V1 Components/Minimal Footer',
+  title: 'Components/Minimal Footer',
   id: 'components/va-minimal-footer',
   parameters: {
     componentSubtitle: `va-minimal-footer web component`,
