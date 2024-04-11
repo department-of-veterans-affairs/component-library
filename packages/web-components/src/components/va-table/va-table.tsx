@@ -1,10 +1,10 @@
-import { Component, Element, Host, Prop, State,  h } from '@stencil/core';
+import { Component, Element, Host, Prop, State, Event, EventEmitter, h } from '@stencil/core';
 import classnames from 'classnames';
 import { isNumeric } from '../../utils/utils';
 import ascendingIcon from '../../assets/sort-arrow-up.svg?format=text';
 import descendingIcon from '../../assets/sort-arrow-down.svg?format=text';
 import { quicksort, reverseQuicksort } from '../../utils/dom-sort';
-
+import { TableCell, TableRows } from './tableTypes';
 /**
  * This component expects `<va-table-row>` elements as children.
  * Children of each row element should be `<span>` elements. Table
@@ -16,6 +16,14 @@ import { quicksort, reverseQuicksort } from '../../utils/dom-sort';
  * @maturityCategory use
  * @maturityLevel best_practice
  */
+
+// type TableCell  = {
+//   text: string;
+//   href?: string;
+//   isRouterLink?: boolean;
+// } | string;
+
+// type TableRows = TableCell[][];
 
 @Component({
   tag: 'va-table',
@@ -44,22 +52,45 @@ export class VaTable {
 
   @Prop() uswds?: boolean = false;
 
+  /**
+   * If uswds is true, shouldl the table be borderless or not.
+   */
   @Prop() borderless?: boolean = true;
 
-  @Prop() tableData?: string | string[][];// = '[["Document title","Description","Year"],["Bill of Rights","The first ten amendments of the U.S. Constitution guaranteeing rights and freedoms.","1791"],["Declaration of Sentiments","A document written during the Seneca Falls Convention outlining the rights that American women should be entitled to as citizens.","1848"]]';
-
-  @State() formattedTableData?: string[][];
+  /**
+   * The data used to render the table. Should be an array of arrays, with the first
+   * row representing the table headers and the subsequent rows the table body. Each string or object
+   * in the header or table body arrays is rendered in a table cell.
+   * The data can be passed as a string (if using the pure web component) or as an 
+   * object if using the React binding. 
+   * Each cell can be a string or an object; use an object if the cell is to contain a link or a React Router link.
+   */
+  @Prop() tableData?: string | TableRows;
+  
+  /**
+   * The table data passed to the component as an object.
+   */
+  
+  @State() formattedTableData?: TableRows;
 
   /**
    * The next direction to sort the rows
    */
   @State() sortAscending: boolean = !this.descending;
 
+  /**
+   * This event is fired if a React Router link in a table cell is clicked on
+   */
+  @Event({
+    composed: true,
+    bubbles: true,
+  })
+  routeChange: EventEmitter<{ href: string }>;
+
   private observer: MutationObserver;
 
   componentWillLoad() {
     if (this.uswds) {
-      debugger
       const data = typeof this.tableData === 'string'
         ? JSON.parse(this.tableData)
         : this.tableData;
@@ -201,15 +232,50 @@ export class VaTable {
     this.sortAscending = !this.sortAscending;
   }
 
-  makeTableRow(row: string[]): JSX.Element {
+  // handler for React Router link
+  handleRouteChange(e: MouseEvent, href: string): void {
+    e.preventDefault();
+    this.routeChange.emit({ href });
+  }
+
+  /**
+   * generate the contents of a table cell
+   */
+  getCellContent(cell: TableCell | string): JSX.Element | string {
+    let content: JSX.Element | string;
+    if (typeof cell === 'string') {
+      content = cell;
+    } else {
+      const { text, href, isRouterLink } = cell;
+      if (href) {
+        if (isRouterLink) {
+          content =
+          <va-link
+            href={href}
+            text={text}
+            onClick={e => this.handleRouteChange(e, href)}/>
+        } else {
+          content = <va-link href={href} text={text} />
+        }
+      } else {
+        content = text;
+      }
+    }
+    return content;
+  }
+
+  /**
+   * make the markup for a table row using an array of table row data
+   */
+  makeTableRow(row: TableCell[]): JSX.Element {
     return (
       <tr>
         {row.map((item, i) => {
-          const cell = i === 0
-          ? <th scope="row">{item}</th>
-          : <td>{item}</td>
-          return cell;
-        } )}
+          const content = this.getCellContent(item);
+          return i === 0
+          ? <th scope="row">{content}</th>
+          : <td>{content}</td>
+        })}
       </tr>
     )
   }

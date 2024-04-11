@@ -5,6 +5,7 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
+import { TableRows } from "./components/va-table/tableTypes";
 export namespace Components {
     interface VaAccordion {
         /**
@@ -1186,6 +1187,9 @@ export namespace Components {
         "uswds"?: boolean;
     }
     interface VaTable {
+        /**
+          * If uswds is true, shouldl the table be borderless or not.
+         */
         "borderless"?: boolean;
         /**
           * Whether the initial sort state will be descending or not.
@@ -1195,7 +1199,10 @@ export namespace Components {
           * The zero-based index of the column to sort by (Doesn't work in IE11). Optional.
          */
         "sortColumn"?: number;
-        "tableData"?: string | string[][];
+        /**
+          * The data used to render the table. Should be an array of arrays, with the first row representing the table headers and the subsequent rows the table body. Each string or object in the header or table body arrays is rendered in a table cell. The data can be passed as a string (if using the pure web component) or as an  object if using the React binding.  Each cell can be a string or an object; use an object if the cell is to contain a link or a React Router link.
+         */
+        "tableData"?: string | TableRows;
         /**
           * The title of the table
          */
@@ -1531,6 +1538,10 @@ export interface VaSelectCustomEvent<T> extends CustomEvent<T> {
 export interface VaStatementOfTruthCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLVaStatementOfTruthElement;
+}
+export interface VaTableCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLVaTableElement;
 }
 export interface VaTelephoneCustomEvent<T> extends CustomEvent<T> {
     detail: T;
@@ -3289,16 +3300,26 @@ declare namespace LocalJSX {
         "uswds"?: boolean;
     }
     interface VaTable {
+        /**
+          * If uswds is true, shouldl the table be borderless or not.
+         */
         "borderless"?: boolean;
         /**
           * Whether the initial sort state will be descending or not.
          */
         "descending"?: boolean;
         /**
+          * This event is fired if a React Router link in a table cell is clicked on
+         */
+        "onRouteChange"?: (event: VaTableCustomEvent<{ href: string }>) => void;
+        /**
           * The zero-based index of the column to sort by (Doesn't work in IE11). Optional.
          */
         "sortColumn"?: number;
-        "tableData"?: string | string[][];
+        /**
+          * The data used to render the table. Should be an array of arrays, with the first row representing the table headers and the subsequent rows the table body. Each string or object in the header or table body arrays is rendered in a table cell. The data can be passed as a string (if using the pure web component) or as an  object if using the React binding.  Each cell can be a string or an object; use an object if the cell is to contain a link or a React Router link.
+         */
+        "tableData"?: string | TableRows;
         /**
           * The title of the table
          */
