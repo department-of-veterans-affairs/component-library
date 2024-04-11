@@ -6,9 +6,11 @@ import descendingIcon from '../../assets/sort-arrow-down.svg?format=text';
 import { quicksort, reverseQuicksort } from '../../utils/dom-sort';
 import { TableCell, TableRows } from './tableTypes';
 /**
- * This component expects `<va-table-row>` elements as children.
+ * V1 version of this component expects `<va-table-row>` elements as children.
  * Children of each row element should be `<span>` elements. Table
  * semantics will be added and numeric columns will be right aligned.
+ * 
+ * V3 version expects an array of arrays representing table data
  */
 
 /**
@@ -16,14 +18,6 @@ import { TableCell, TableRows } from './tableTypes';
  * @maturityCategory use
  * @maturityLevel best_practice
  */
-
-// type TableCell  = {
-//   text: string;
-//   href?: string;
-//   isRouterLink?: boolean;
-// } | string;
-
-// type TableRows = TableCell[][];
 
 @Component({
   tag: 'va-table',
@@ -50,6 +44,9 @@ export class VaTable {
    */
   @Prop() descending?: boolean = false;
 
+  /**
+   * Whether this component will use the uswds styling.
+   */
   @Prop() uswds?: boolean = false;
 
   /**
