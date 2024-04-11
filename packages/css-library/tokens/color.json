@@ -27,6 +27,15 @@
   "vads-process-list-color-text-pending-on-light": {
     "*": { "value": "{uswds-system-color-gray-50}" }
   },
+  "vads-color-base-gray-lighter": {
+    "*": { "value": "{uswds-system-color-gray-30}"}
+  },
+  "vads-color-base-gray-darker": {
+    "*": { "value": "{uswds-system-color-gray-80}"}
+  },
+  "vads-color-gray-darkest-on-dark": {
+    "*": { "value": "{uswds-system-color-gray-warm-90}"}
+  },
   "vads-color-gray-medium": {
     "*": { "value": "{uswds-system-color-gray-50}" }
   },
@@ -81,6 +90,9 @@
   "vads-color-error-darker": {
     "*": { "value": "{uswds-system-color-red-70}"}
   },
+  "vads-color-error-darker-on-dark": {
+    "*": { "value": "{uswds-system-color-red-vivid-80}"}
+  },
   "vads-color-error-light": {
     "*": { "value": "{uswds-system-color-red-warm-vivid-30}"}
   },
@@ -132,6 +144,9 @@
   "vads-color-info-darker": {
     "*": { "value": "{uswds-system-color-blue-cool-60}"}
   },
+  "vads-color-info-darker-on-dark": {
+    "*": { "value": "{uswds-system-color-blue-vivid-80}"}
+  },
   "vads-color-info-light": {
     "*": { "value": "{uswds-system-color-cyan-20}"}
   },
@@ -155,6 +170,9 @@
   },
   "vads-color-primary": {
     "*": { "value": "{uswds-system-color-blue-vivid-60}"}
+  },
+  "vads-color-primary-on-dark": {
+    "*": { "value": "{uswds-system-color-blue-vivid-30}"}
   },
   "vads-color-primary-alt": {
     "*": { "value": "{uswds-system-color-cyan-vivid-30}"}
@@ -186,6 +204,9 @@
   "vads-color-secondary": {
     "*": { "value": "{uswds-system-color-red-50}"}
   },
+  "vads-color-secondary-on-dark": {
+    "*": { "value": "{uswds-system-color-red-vivid-40}"}
+  },
   "vads-color-secondary-dark": {
     "*": { "value": "{uswds-system-color-red-vivid-60}"}
   },
@@ -206,6 +227,9 @@
   },
   "vads-color-success-darker": {
     "*": { "value": "{uswds-system-color-green-cool-vivid-60}"}
+  },
+  "vads-color-success-darker-on-dark": {
+    "*": { "value": "{uswds-system-color-green-cool-vivid-80}"}
   },
   "vads-color-success-light": {
     "*": { "value": "{uswds-system-color-green-cool-vivid-20}"}
@@ -228,11 +252,17 @@
   "vads-color-warning-darker": {
     "*": { "value": "{uswds-system-color-gold-vivid-50}"}
   },
+  "vads-color-warning-darker-on-dark": {
+    "*": { "value": "{uswds-system-color-yellow-vivid-80}"}
+  },
   "vads-color-warning-light": {
     "*": { "value": "{uswds-system-color-yellow-vivid-10}"}
   },
   "vads-color-warning-lighter": {
     "*": { "value": "{uswds-system-color-yellow-5}"}
+  },
+  "vads-color-gold-light": {
+    "*": { "value": "{uswds-system-color-yellow-vivid-20}"}
   },
   "vads-color-gold-lighter": {
     "*": { "value": "{uswds-system-color-gold-vivid-10}"}
