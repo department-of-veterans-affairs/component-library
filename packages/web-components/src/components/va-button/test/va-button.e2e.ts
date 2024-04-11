@@ -41,7 +41,7 @@ describe('va-button', () => {
     <va-button class="hydrated" back uswds="false">
       <mock:shadow-root>
         <button type="button" part="button">
-          <va-icon class="hydrated"></va-icon>
+          <va-icon class="hydrated va-button--icon"></va-icon>
           Back
         </button>
       </mock:shadow-root>
@@ -58,7 +58,7 @@ describe('va-button', () => {
       <mock:shadow-root>
         <button type="button" part="button">
           Continue
-          <va-icon class="hydrated"></va-icon>
+          <va-icon class="hydrated va-button--icon"></va-icon>
         </button>
       </mock:shadow-root>
     </va-button>
@@ -244,7 +244,7 @@ describe('va-button', () => {
     <va-button back="" class="hydrated" uswds="">
       <mock:shadow-root>
         <button class="usa-button usa-button--outline" type="button" part="button">
-          <va-icon class="hydrated"></va-icon>
+          <va-icon class="hydrated va-button--icon"></va-icon>
           Back
         </button>
       </mock:shadow-root>
@@ -261,7 +261,7 @@ describe('va-button', () => {
       <mock:shadow-root>
         <button class="usa-button" type="button" part="button">
           Continue
-          <va-icon class="hydrated"></va-icon>
+          <va-icon class="hydrated va-button--icon"></va-icon>
         </button>
       </mock:shadow-root>
     </va-button>
