@@ -16,9 +16,24 @@
 }
 
 // Fix to off-centered content in V3 when icon present
-.usa-button {
-  display: flex;
-  align-items: center;
+:host(:is([back], [continue])) .usa-button {
+   position: relative;
+}
+:host([back]) .usa-button {
+  padding-left: 36px;
+  padding-right: 16px;
+
+  .va-button--icon {
+    left: 8px;
+  }
+}
+:host([continue]) .usa-button {
+  padding-left: 16px;
+  padding-right: 36px;
+}
+.va-button--icon {
+  position: absolute;
+  top: 8px;
 }
 
 // Override transparent background from USWDS v3

@@ -171,11 +171,19 @@ export class VaButton {
             part="button"
           >
             {back && !_continue && (
-              <va-icon icon="navigate_far_before" size={3}></va-icon>
+              <va-icon
+                class="va-button--icon"
+                icon="navigate_far_before"
+                size={3}
+              ></va-icon>
             )}
             {buttonText}
             {_continue && !back && (
-              <va-icon icon="navigate_far_next" size={3}></va-icon>
+              <va-icon
+                class="va-button--icon"
+                icon="navigate_far_next"
+                size={3}
+              ></va-icon>
             )}
           </button>
         </Host>
@@ -194,11 +202,19 @@ export class VaButton {
             part="button"
           >
             {back && !_continue && (
-              <va-icon icon="navigate_far_before" size={2}></va-icon>
+              <va-icon
+                class="va-button--icon"
+                icon="navigate_far_before"
+                size={2}
+              ></va-icon>
             )}
             {buttonText}
             {_continue && !back && (
-              <va-icon icon="navigate_far_next" size={2}></va-icon>
+              <va-icon
+                class="va-button--icon"
+                icon="navigate_far_next"
+                size={2}
+              ></va-icon>
             )}
           </button>
         </Host>
