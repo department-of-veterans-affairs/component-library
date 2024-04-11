@@ -91,7 +91,8 @@ export class VaPrivacyAgreement {
             <span class={`${labelClass} description`} slot="description">
               Please read and accept the&nbsp;
               <a href="/privacy-policy/" target="_blank">
-                privacy policy{' '}
+                privacy policy
+
                 <va-icon
                   class="privacy-policy-icon"
                   icon="launch"
