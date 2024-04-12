@@ -1211,6 +1211,9 @@ export namespace Components {
           * The title of the table
          */
         "tableTitle": string;
+        /**
+          * Whether this component will use the uswds styling.
+         */
         "uswds"?: boolean;
     }
     interface VaTableRow {
@@ -3332,6 +3335,9 @@ declare namespace LocalJSX {
           * The title of the table
          */
         "tableTitle"?: string;
+        /**
+          * Whether this component will use the uswds styling.
+         */
         "uswds"?: boolean;
     }
     interface VaTableRow {
