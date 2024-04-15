@@ -16,24 +16,23 @@
 }
 
 // Fix to off-centered content in V3 when icon present
-:host(:is([back], [continue])) .usa-button {
-   position: relative;
-}
-:host([back]) .usa-button {
-  padding-left: 36px;
-  padding-right: 16px;
-
-  .va-button--icon {
-    left: 8px;
+:host([back]:not([back='false'])), :host([continue]:not([continue='false'])) {
+  button.usa-button {
+    padding-top: 8px;
   }
 }
-:host([continue]) .usa-button {
-  padding-left: 16px;
-  padding-right: 36px;
-}
 .va-button--icon {
-  position: absolute;
-  top: 8px;
+  display: inline-block;
+  height: 0;
+  vertical-align: text-top;
+}
+:host([big]:not([big="false"]):is([back], [continue])) {
+  button.usa-button {
+    padding-top: 12px;
+  }
+  .va-button--icon {
+    vertical-align: sub;
+  }
 }
 
 // Override transparent background from USWDS v3
