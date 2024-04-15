@@ -50,7 +50,7 @@ export class VaTable {
   @Prop() uswds?: boolean = false;
 
   /**
-   * If uswds is true, shouldl the table be borderless or not.
+   * If uswds is true, should the table be borderless or not.
    */
   @Prop() borderless?: boolean = true;
 
