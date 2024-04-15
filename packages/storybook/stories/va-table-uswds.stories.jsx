@@ -73,6 +73,14 @@ const tableDataWithRouterLinks = [
   }, "An executive order granting freedom to slaves in designated southern states.", "1863"]
 ];
 
+const tableDataWithTestIds = [
+  ["Document title", "Description", "Year"],
+  [{ text: "Declaration of Independence", testId: "this-is-a-test-id"}, "Statement adopted by the Continental Congress declaring independence from the British Empire.", "1776"],
+  [{ text: "Bill of Rights", testId: "this-is-another-test-id" }, "The first ten amendments of the U.S. Constitution guaranteeing rights and freedoms.", "1791"],
+  ["Declaration of Sentiments", "A document written during the Seneca Falls Convention outlining the rights that American women should be entitled to as citizens.", "1848"],
+  ["Emancipation Proclamation", "An executive order granting freedom to slaves in designated southern states.", "1863"]
+];
+
 const Template = ({ tableData, uswds, borderless }) => {
   return (
     <VaTable uswds={uswds} borderless={borderless} tableData={tableData} >
@@ -141,6 +149,14 @@ const YourComponent &#61; (&#x7b; uswds, borderless, tableData &#x7d;) &#61;&#62
   );
 }
 
+const WithTestId = ({ tableData, uswds, borderless }) => {
+  return (
+    <VaTable uswds={uswds} borderless={borderless} tableData={tableData} >
+      This is a borderless table with test ids in some of its cells.
+    </VaTable>
+  );
+};
+
 export const Default = Template.bind(null);
 
 Default.args = {
@@ -155,8 +171,14 @@ BorderlessWithLinks.args = {
   ...defaultArgs
 }
 
-export const BorderlessTableWithRouterLinks = RouterLinks.bind(null);
-BorderlessTableWithRouterLinks.args = {
+export const BorderlessWithRouterLinks = RouterLinks.bind(null);
+BorderlessWithRouterLinks.args = {
   tableData: tableDataWithRouterLinks,
+  ...defaultArgs
+}
+
+export const BorderlessWithTestId = WithTestId.bind(null);
+BorderlessWithTestId.args = {
+  tableData: tableDataWithTestIds,
   ...defaultArgs
 }

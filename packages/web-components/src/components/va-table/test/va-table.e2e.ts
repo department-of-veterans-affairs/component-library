@@ -305,5 +305,20 @@ describe('va-table', () => {
       await vaLink.click();
       expect(routeChangeSpy).toHaveReceivedEvent();
     });
+
+
+    it('adds a test id', async () => {
+      const tableDataWithTestIds = '[["Document title","Description","Year"],[{"text":"Declaration of Independence","testId":"this-is-a-test-id","isRouterLink":true},"Statement adopted by the Continental Congress declaring independence from the British Empire.","1776"],[{"text":"Bill of Rights","href":"https://www.archives.gov/founding-docs/bill-of-rights-transcript","isRouterLink":true},"The first ten amendments of the U.S. Constitution guaranteeing rights and freedoms.","1791"],[{"text":"Declaration of Sentiments","href":"https://www.nps.gov/wori/learn/historyculture/declaration-of-sentiments.htm","isRouterLink":true},"A document written during the Seneca Falls Convention outlining the rights that American women should be entitled to as citizens.","1848"],[{"text":"Emancipation Proclamation","href":"https://www.archives.gov/exhibits/featured-documents/emancipation-proclamation?_ga=2.100862977.1665893808.1712776954-1250436154.1712776953","isRouterLink":true},"An executive order granting freedom to slaves in designated southern states.","1863"]]';
+      const page = await newE2EPage();
+      await page.setContent(`
+        <va-table table-data='${tableDataWithTestIds}' uswds>
+          Caption for a table
+        </va-table>
+      `);
+
+      const dataElement = await page.find('va-table >>> span[data-testid="this-is-a-test-id"]');
+
+      expect(dataElement).toBeDefined()
+    })
   })
 });

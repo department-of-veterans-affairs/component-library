@@ -243,7 +243,7 @@ export class VaTable {
     if (typeof cell === 'string') {
       content = cell;
     } else {
-      const { text, href, isRouterLink } = cell;
+      const { text, href, isRouterLink, testId } = cell;
       if (href) {
         if (isRouterLink) {
           content =
@@ -256,6 +256,9 @@ export class VaTable {
         }
       } else {
         content = text;
+      }
+      if (testId) {
+        content = <span data-testid={testId}>{content}</span>
       }
     }
     return content;

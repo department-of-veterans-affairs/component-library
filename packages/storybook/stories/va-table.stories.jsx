@@ -251,21 +251,6 @@ const Pagination = args => {
   );
 };
 
-const V3Template = (args) => {
-  const { borderless } = args;
-  const columns = ['Document title', 'Description', 'Year'];
-  const tableData = [columns, ...data];
-  return (
-    <main>
-      <VaTable uswds={true} borderless={borderless} tableData={tableData} />
-    </main>
-  );
-};
-
-export const Borderless = V3Template.bind({ data });
-Borderless.args = {
-  borderless: true
-}
 
 export const Default = Template.bind({ data });
 Default.args = {
