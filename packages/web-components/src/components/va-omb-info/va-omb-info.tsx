@@ -182,7 +182,6 @@ export class VaOmbInfo {
           onCloseEvent={toggleModalVisible}
           visible={visible}
           ariaHiddenNodeExceptions={[this.el]}
-          uswds={false}
         >
           <slot onSlotchange={handleSlotChange}></slot>
           {modalContents}

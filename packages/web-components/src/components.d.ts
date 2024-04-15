@@ -663,13 +663,9 @@ export namespace Components {
         "secondaryButtonText"?: string;
         "status"?: 'continue' | 'error' | 'info' | 'success' | 'warning';
         /**
-          * Whether or not the component will be using the unstyled button. This is only available for USWDS
+          * Whether or not the component will be using the unstyled button.
          */
         "unstyled"?: boolean;
-        /**
-          * Whether or not the component will use USWDS v3 styling.
-         */
-        "uswds"?: boolean;
         /**
           * If the modal is visible or not
          */
@@ -2672,13 +2668,9 @@ declare namespace LocalJSX {
         "secondaryButtonText"?: string;
         "status"?: 'continue' | 'error' | 'info' | 'success' | 'warning';
         /**
-          * Whether or not the component will be using the unstyled button. This is only available for USWDS
+          * Whether or not the component will be using the unstyled button.
          */
         "unstyled"?: boolean;
-        /**
-          * Whether or not the component will use USWDS v3 styling.
-         */
-        "uswds"?: boolean;
         /**
           * If the modal is visible or not
          */
