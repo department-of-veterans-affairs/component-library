@@ -19,7 +19,7 @@ if [ $BRANCH_NAME_LENGTH -gt 37 ]; then
 fi
 
 # lowercase letters, numbers, and dashes only
-VALID_BRANCH_REGEX='^[a-z\d]+[a-z\d\-]*$'
+VALID_BRANCH_REGEX='^[a-z0-9]+[a-z0-9\-]*$'
 
 if [[ ! $BRANCH_NAME =~ $VALID_BRANCH_REGEX ]]; then
   echo "Branch name must start with a lowercase letter or"
