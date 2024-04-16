@@ -62,6 +62,14 @@ va-text-input::part(validation) {
   width: 48px;
 }
 
+.usa-form-group--day-input {
+  width: 3rem;
+}
+
+.usa-form-group--year-input {
+  width: 4.5rem;
+}
+
 @media (max-width: 480px) {
   .usa-form-group--month-select {
     width: 100%;
