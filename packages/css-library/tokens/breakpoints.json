@@ -5,7 +5,7 @@
   "small-screen": {
     "value": "481px"
   },
-  "medium-mobile": {
+  "tablet": {
     "value": "640px"
   },
   "medium-screen": {
