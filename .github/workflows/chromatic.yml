@@ -34,3 +34,4 @@ jobs:
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
           onlyChanged: true
           workingDir: packages/storybook
+          skip: "dependabot/**"

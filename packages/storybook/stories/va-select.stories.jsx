@@ -23,6 +23,7 @@ const defaultArgs = {
   'error': undefined,
   hint: null,
   'aria-live-region-text': 'You selected',
+  'aria-describedby-message': 'Optional description text for screen readers',
   'options': [
     <option key="1" value="navy">
       Navy
@@ -52,6 +53,7 @@ const Template = ({
   error,
   hint,
   'aria-live-region-text': ariaLiveRegionText,
+  'aria-describedby-message': ariaDescribedbyMessage,
   options,
   'use-add-button': useAddButton,
   uswds,
@@ -82,6 +84,7 @@ const Template = ({
         error={error}
         hint={hint}
         aria-live-region-text={ariaLiveRegionText}
+        message-aria-describedby={ariaDescribedbyMessage}
         use-add-button={useAddButton}
         uswds={uswds}
       >
