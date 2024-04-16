@@ -51,6 +51,11 @@ export class VaSearchInput {
   @State() isListboxOpen: boolean;
 
   /**
+   * A boolean indicating whether listbox is open or closed
+   */
+  @State() isTouched: boolean = false;
+
+  /**
    * Text displayed inside the search button
    */
   @Prop() buttonText?: string  = 'Search';
@@ -176,6 +181,7 @@ export class VaSearchInput {
    * Opens listbox when search input has focus and suggestions are provided
    */
   private handleInputFocus = () => {
+    this.isTouched = true;
     if (this.formattedSuggestions.length && !this.isListboxOpen) {
       this.isListboxOpen = true;
     }
@@ -374,6 +380,7 @@ export class VaSearchInput {
    */
   private updateSuggestions = (suggestionsArr: string[]) => {
     // If it's an empty array, reset formatted suggestions and close the listbox
+    
     if (!suggestionsArr.length) {
       this.formattedSuggestions = [];
       this.isListboxOpen = false;
@@ -384,6 +391,12 @@ export class VaSearchInput {
       .slice(0, 5)
       .sort()
       .map(suggestion => this.formatSuggestion(suggestion));
+
+    if(!this.isTouched) {
+      // only open the listbox after the search input has been touched
+      this.isListboxOpen = false;
+      return
+    }
     this.isListboxOpen = true;
   };
 
@@ -439,7 +452,7 @@ export class VaSearchInput {
       return (
         <Host onBlur={handleBlur}>
           <form class={formClasses} role="search">
-            <label class="usa-sr-only" htmlFor="search-field">{label}</label>
+            <label class="usa-sr-only kokokok" htmlFor="search-field">{label}</label>
             <input 
               class="usa-input" 
               id="search-field" 
