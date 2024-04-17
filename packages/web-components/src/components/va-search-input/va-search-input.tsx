@@ -392,12 +392,8 @@ export class VaSearchInput {
       .sort()
       .map(suggestion => this.formatSuggestion(suggestion));
 
-    if(!this.isTouched) {
-      // only open the listbox after the search input has been touched
-      this.isListboxOpen = false;
-      return
-    }
-    this.isListboxOpen = true;
+    // only open the listbox after the search input has been touched
+    this.isTouched ? this.isListboxOpen = true : this.isListboxOpen = false;
   };
 
   render() {
@@ -452,7 +448,7 @@ export class VaSearchInput {
       return (
         <Host onBlur={handleBlur}>
           <form class={formClasses} role="search">
-            <label class="usa-sr-only kokokok" htmlFor="search-field">{label}</label>
+            <label class="usa-sr-only" htmlFor="search-field">{label}</label>
             <input 
               class="usa-input" 
               id="search-field" 
