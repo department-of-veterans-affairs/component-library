@@ -579,11 +579,11 @@ export namespace Components {
          */
         "error"?: string;
         /**
-          * The content of the heading if `useFormsPattern` and `uswds` are true.
+          * The content of the heading if `useFormsPattern`.
          */
         "formHeading"?: string;
         /**
-          * The heading level for the heading if `useFormsPattern` and `uswds` are true.
+          * The heading level for the heading if `useFormsPattern`.
          */
         "formHeadingLevel"?: number;
         /**
@@ -610,13 +610,9 @@ export namespace Components {
          */
         "required"?: boolean;
         /**
-          * Enabling this will add a heading and description for integrating into the forms pattern. Accepts `single` or `multiple` to indicate if the form is a single input or will have multiple inputs. `uswds` should be true.
+          * Enabling this will add a heading and description for integrating into the forms pattern. Accepts `single` or `multiple` to indicate if the form is a single input or will have multiple inputs.
          */
         "useFormsPattern"?: string;
-        /**
-          * Whether or not the component will use USWDS v3 styling.
-         */
-        "uswds"?: boolean;
         /**
           * Set the default date value must be in YYYY-MM-DD format.
          */
@@ -2560,11 +2556,11 @@ declare namespace LocalJSX {
          */
         "error"?: string;
         /**
-          * The content of the heading if `useFormsPattern` and `uswds` are true.
+          * The content of the heading if `useFormsPattern`.
          */
         "formHeading"?: string;
         /**
-          * The heading level for the heading if `useFormsPattern` and `uswds` are true.
+          * The heading level for the heading if `useFormsPattern`.
          */
         "formHeadingLevel"?: number;
         /**
@@ -2603,13 +2599,9 @@ declare namespace LocalJSX {
          */
         "required"?: boolean;
         /**
-          * Enabling this will add a heading and description for integrating into the forms pattern. Accepts `single` or `multiple` to indicate if the form is a single input or will have multiple inputs. `uswds` should be true.
+          * Enabling this will add a heading and description for integrating into the forms pattern. Accepts `single` or `multiple` to indicate if the form is a single input or will have multiple inputs.
          */
         "useFormsPattern"?: string;
-        /**
-          * Whether or not the component will use USWDS v3 styling.
-         */
-        "uswds"?: boolean;
         /**
           * Set the default date value must be in YYYY-MM-DD format.
          */
