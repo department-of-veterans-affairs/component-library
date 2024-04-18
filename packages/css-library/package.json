@@ -11,7 +11,7 @@
     "build:tokens": "style-dictionary build",
     "build:stylesheets": "sass --load-path=../../node_modules/@uswds/uswds/packages/ src/stylesheets:dist/",
     "build:minify": "yarn build:stylesheets --style compressed --no-source-map",
-    "build": "yarn run copy && yarn build:tokens && yarn build:stylesheets",
+    "build": "yarn run copy && yarn build:tokens && yarn build:stylesheets && yarn build:minify",
     "copy": "node ./copy-uswds-color-tokens.js"
   },
   "devDependencies": {
