@@ -44,7 +44,7 @@ const vaCheckbox = args => {
     ...rest
   } = args;
   return (
-    <va-checkbox
+    <va-checkbox id="test"
       checked={checked}
       description={description}
       enable-analytics={enableAnalytics}

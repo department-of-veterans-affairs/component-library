@@ -44,7 +44,7 @@ const vaRadioConst = args => {
   } = args;
 
   return (
-    <va-radio
+    <va-radio id="test"
       enable-analytics={enableAnalytics}
       error={error}
       label={label}

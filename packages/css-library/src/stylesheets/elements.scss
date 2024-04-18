@@ -6,6 +6,11 @@
 //    @include @usa-paragraph
 // }
 
+/**
+  THIS STYLES BELOW ARE ONLY HERE FOR COMPONENT-LIBRARY COMPATIBILITY.
+  AND WILL BE MOVED TO /base/_va.scss FOR THE 16px ROOT FONT SIZE UPDATE.
+**/
+
 @use "../../dist/tokens/scss/variables" as *;
 
 @import 'uswds-core/src/styles/mixins/typography/usa-content-styles';
