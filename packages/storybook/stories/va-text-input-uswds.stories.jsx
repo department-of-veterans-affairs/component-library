@@ -78,7 +78,7 @@ const Template = ({
   charcount
 }) => {
   return (
-    <va-text-input id="test"
+    <va-text-input
       name={name}
       label={label}
       autocomplete={autocomplete}

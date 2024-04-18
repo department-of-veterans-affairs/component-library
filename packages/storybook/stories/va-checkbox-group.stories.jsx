@@ -117,7 +117,7 @@ const SingleCheckboxTemplate = ({
   uswds,
 }) => {
   return (
-    <va-checkbox-group id="test"
+    <va-checkbox-group
       enable-analytics={enableAnalytics}
       error={error}
       label={label}

@@ -37,7 +37,7 @@ const Template = ({ label, name, hint, required, error, value, monthSelect }) =>
       required={required}
       error={error}
       value={value}
-      onDateBlur={e => console.log(e, 'DATE BLUR FIRED test')}
+      onDateBlur={e => console.log(e, 'DATE BLUR FIRED')}
       onDateChange={e => console.log(e, 'DATE CHANGE FIRED')}
     />
   );

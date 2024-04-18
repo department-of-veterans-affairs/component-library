@@ -65,7 +65,7 @@ const I18nTemplate = args => {
   }, [lang]);
 
   return (
-    <div id="test">
+    <div>
       <button onClick={e => setLang('es')}>Español</button>
       <button onClick={e => setLang('en')}>English</button>
       <button onClick={e => setLang('tl')}>Tagalog</button>

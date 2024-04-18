@@ -165,7 +165,7 @@ const FormsPatternMultipleTemplate = ({
       <va-number-input
         required
         error="This is an error message"
-        id="form-pattern-multiple-input-test"
+        id="form-pattern-multiple-input"
         name={name}
         label='Social security number'
         hint="This is hint text"

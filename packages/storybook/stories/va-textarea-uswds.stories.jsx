@@ -47,7 +47,7 @@ const Template = ({
   'message-aria-describedby': messageAriaDescribedby,
 }) => {
   return (
-    <va-textarea id="test"
+    <va-textarea
       name={name}
       label={label}
       enable-analytics={enableAnalytics}

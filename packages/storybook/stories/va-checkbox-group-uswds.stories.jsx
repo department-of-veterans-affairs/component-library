@@ -44,7 +44,7 @@ const vaCheckboxGroup = args => {
       hint={hint}
       label-header-level={labelHeaderLevel}
     >
-      <va-checkbox label="Sojourner Truth" name="example test" value="1" />
+      <va-checkbox label="Sojourner Truth" name="example" value="1" />
       <va-checkbox label="Frederick Douglass" name="example" value="2" />
       <va-checkbox
         label="Booker T. Washington"

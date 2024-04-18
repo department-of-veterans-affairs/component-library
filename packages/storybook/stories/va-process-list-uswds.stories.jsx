@@ -21,7 +21,7 @@ const defaultArgs = {};
 
 const Template = ({}) => {
   return (
-    <va-process-list id="test">
+    <va-process-list>
       <va-process-list-item header="Check to be sure you can request a Board Appeal">
         <p>
           You can request a Board Appeal up to 1 year from the date on your
