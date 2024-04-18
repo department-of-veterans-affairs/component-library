@@ -1,0 +1,35 @@
+@use "../../dist/tokens/scss/variables" as *;
+
+@use 'uswds-core' with (
+  $theme-show-notifications: false,
+  // TODO: verify USWDS font path
+  $theme-font-path: '../node_modules/@uswds/uswds/dist/fonts',
+);
+
+//============ MIXINS & OTHER FUNCTIONS ==============//
+@import './override-function';
+@import './mixins';
+
+//============ PORTED VARIABLES ==============//
+$em-base: 100%;
+
+// TODO: Georgia font files not included in the css-library dist folder.
+$georgia: "Georgia", "Cambria", "Times New Roman", "Times", serif;
+$font-serif: "Bitter", $georgia;
+
+$lead-font-size: scale-rem(2rem);
+$font-normal: 400;
+$lead-line-height: 1.7;
+$lead-max-width: scale-rem(77rem);
+$lead-line-height: 1.7;
+
+//============ VENDOR PARTIALS ==============//
+@import 'lib/normalize';
+
+// ----- VA BASE (VARIABLES/HELPERS) ---- //
+@import 'base/fonts';
+
+// ----- VA GENERAL (MAIN FILE/OTHER) ---- //
+@import 'base/va';
+
+
