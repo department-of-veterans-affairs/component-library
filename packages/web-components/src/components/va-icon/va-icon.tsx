@@ -1,4 +1,4 @@
-import { Component, Host, Prop, h, getAssetPath } from '@stencil/core';
+import { Component, Host, Prop, h } from '@stencil/core';
 import classnames from 'classnames';
 import { consoleDevError } from '../../utils/utils';
 
