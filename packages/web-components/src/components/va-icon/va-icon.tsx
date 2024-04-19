@@ -1,6 +1,7 @@
 import { Component, Host, Prop, h } from '@stencil/core';
 import classnames from 'classnames';
 import { consoleDevError } from '../../utils/utils';
+import Sprite from '../../assets/sprite.svg';
 
 /**
  * @componentName Icon
@@ -48,7 +49,7 @@ export class VaIcon {
       'usa-icon': true,
       [`usa-icon--size-${size}`]: !!size,
     });
-    const imageSrc = `/img/sprite.svg#${icon}`;
+    const imageSrc = `${Sprite}#${icon}`;
     return (
       <Host>
         <svg
