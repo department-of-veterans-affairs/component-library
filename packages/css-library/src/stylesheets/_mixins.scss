@@ -1,4 +1,4 @@
-//============ PORTED MIXINS ==============//
+//============ PORTED MIXINS FROM FORMATION ==============//
 
 // This is an override on Neat's media mixin to create media queries for both screen and print
 // https://github.com/thoughtbot/neat/blob/v1.8.0/app/assets/stylesheets/grid/_media.scss
@@ -43,5 +43,192 @@ $default-feature: min-width;
       @content;
       $grid-columns: $default-grid-columns !global;
     }
+  }
+}
+
+$color-gray-light:#aeb0b5;
+$focus-outline: 2px dotted $color-gray-light;
+$focus-spacing: 3px;
+
+// Focus state mixin
+@mixin focus {
+  outline: $focus-outline;
+  outline-offset: $focus-spacing;
+}
+
+// Used for creating the source string for fonts using @font-face
+// Reference: http://goo.gl/Ru1bKP
+
+@function font-url-prefixer($asset-pipeline) {
+  @if $asset-pipeline == true {
+    @return font-url;
+  } @else {
+    @return url;
+  }
+}
+
+@function font-source-declaration(
+  $font-family,
+  $file-path,
+  $asset-pipeline,
+  $file-formats,
+  $font-url) {
+
+  $src: ();
+
+  $formats-map: (
+    eot:   "#{$file-path}.eot?#iefix" format("embedded-opentype"),
+    woff2: "#{$file-path}.woff2" format("woff2"),
+    woff:  "#{$file-path}.woff" format("woff"),
+    ttf:   "#{$file-path}.ttf" format("truetype"),
+    svg:   "#{$file-path}.svg##{$font-family}" format("svg")
+  );
+
+  @each $key, $values in $formats-map {
+    @if contains($file-formats, $key) {
+      $file-path: nth($values, 1);
+      $font-format: nth($values, 2);
+
+      @if $asset-pipeline == true {
+        $src: append($src, font-url($file-path) $font-format, comma);
+      } @else {
+        $src: append($src, url($file-path) $font-format, comma);
+      }
+    }
+  }
+
+  @return $src;
+}
+
+$asset-pipeline: false;
+
+@mixin font-face(
+  $font-family,
+  $file-path,
+  $weight: normal,
+  $style: normal,
+  $asset-pipeline: $asset-pipeline,
+  $file-formats: eot woff2 woff ttf svg) {
+
+  $font-url-prefix: font-url-prefixer($asset-pipeline);
+
+  @font-face {
+    font-family: $font-family;
+    font-style: $style;
+    font-weight: $weight;
+
+    src: font-source-declaration(
+      $font-family,
+      $file-path,
+      $asset-pipeline,
+      $file-formats,
+      $font-url-prefix
+    );
+  }
+}
+
+/**
+  /uswds/dist/scss/lib/addons/_margin.scss
+**/
+@mixin margin($vals...) {
+  @include directional-property(margin, false, $vals...);
+}
+
+/**
+  uswds/src/stylesheets/lib/helpers/_directional-values.scss
+**/
+
+/// Directional-property mixins are shorthands for writing properties like the following
+///
+/// @ignore You can also use `false` instead of `null`.
+///
+/// @param {List} $vals
+///   List of directional values
+///
+/// @example scss - Usage
+///   .element {
+///     @include border-style(dotted null);
+///     @include margin(null 0 10px);
+///   }
+///
+/// @example css - CSS Output
+///   .element {
+///     border-bottom-style: dotted;
+///     border-top-style: dotted;
+///     margin-bottom: 10px;
+///     margin-left: 0;
+///     margin-right: 0;
+///   }
+///
+/// @require {function} contains-falsy
+///
+/// @return {List}
+
+@function collapse-directionals($vals) {
+  $output: null;
+
+  $a: nth($vals, 1);
+  $b: if(length($vals) < 2, $a, nth($vals, 2));
+  $c: if(length($vals) < 3, $a, nth($vals, 3));
+  $d: if(length($vals) < 2, $a, nth($vals, if(length($vals) < 4, 2, 4)));
+
+  @if $a == 0 { $a: 0; }
+  @if $b == 0 { $b: 0; }
+  @if $c == 0 { $c: 0; }
+  @if $d == 0 { $d: 0; }
+
+  @if $a == $b and $a == $c and $a == $d { $output: $a;          }
+  @else if $a == $c and $b == $d         { $output: $a $b;       }
+  @else if $b == $d                      { $output: $a $b $c;    }
+  @else                                  { $output: $a $b $c $d; }
+
+  @return $output;
+}
+
+/// Output directional properties, for instance `margin`.
+///
+/// @access private
+///
+/// @param {String} $pre
+///   Prefix to use
+/// @param {String} $suf
+///   Suffix to use
+/// @param {List} $vals
+///   List of values
+///
+/// @require {function} collapse-directionals
+/// @require {function} contains-falsy
+
+@mixin directional-property($pre, $suf, $vals) {
+  // Property Names
+  $top:    $pre + "-top"    + if($suf, "-#{$suf}", "");
+  $bottom: $pre + "-bottom" + if($suf, "-#{$suf}", "");
+  $left:   $pre + "-left"   + if($suf, "-#{$suf}", "");
+  $right:  $pre + "-right"  + if($suf, "-#{$suf}", "");
+  $all:    $pre +             if($suf, "-#{$suf}", "");
+
+  $vals: collapse-directionals($vals);
+
+  @if contains-falsy($vals) {
+    @if nth($vals, 1) { #{$top}: nth($vals, 1); }
+
+    @if length($vals) == 1 {
+      @if nth($vals, 1) { #{$right}: nth($vals, 1); }
+    } @else {
+      @if nth($vals, 2) { #{$right}: nth($vals, 2); }
+    }
+
+    @if length($vals) == 2 {
+      @if nth($vals, 1) { #{$bottom}: nth($vals, 1); }
+      @if nth($vals, 2) { #{$left}:   nth($vals, 2); }
+    } @else if length($vals) == 3 {
+      @if nth($vals, 3) { #{$bottom}: nth($vals, 3); }
+      @if nth($vals, 2) { #{$left}:   nth($vals, 2); }
+    } @else if length($vals) == 4 {
+      @if nth($vals, 3) { #{$bottom}: nth($vals, 3); }
+      @if nth($vals, 4) { #{$left}:   nth($vals, 4); }
+    }
+  } @else {
+    #{$all}: $vals;
   }
 }

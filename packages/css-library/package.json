@@ -11,9 +11,11 @@
     "build:tokens": "style-dictionary build",
     "build:stylesheets": "sass --load-path=../../node_modules/@uswds/uswds/packages/ src/stylesheets:dist/",
     "build:minify": "yarn build:stylesheets --style compressed --no-source-map",
-    "build": "yarn run clean && yarn run copy && yarn build:tokens && yarn build:stylesheets",
-    "clean": "rimraf dist/*",
-    "copy-assets": "cp -rv src/assets/fonts dist/fonts/",
+    "build:minify-core": "sass --style compressed --no-source-map dist/core.css:dist/core.min.css",
+    "build": "yarn run clean-dist && yarn run copy && yarn build:tokens && yarn build:stylesheets && yarn build:minify-core",
+    "clean-dist": "rimraf dist/*",
+    "copy-assets": "cp -rv src/assets/fonts dist/fonts/ && yarn run copy-assets-formation-overrides",
+    "copy-assets-formation-overrides": "cp -rv src/stylesheets/formation-overrides/img dist/img/",
     "copy": "node ./copy-uswds-color-tokens.js && yarn run copy-assets"
   },
   "devDependencies": {

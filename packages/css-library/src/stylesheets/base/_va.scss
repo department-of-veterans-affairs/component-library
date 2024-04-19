@@ -2,6 +2,8 @@
 
 @import 'uswds-core/src/styles/mixins/typography/usa-content-styles';
 
+$lead-max-width: scale-rem(77rem);
+
 html,
 body {
   padding: 0;
@@ -16,7 +18,7 @@ html {
 body {
   background: $vads-color-white;
   color: $vads-color-base;
-  // font-family: $font-sans;
+  // font-family: $font-family-sans;
   // font-size: $base-font-size;
   font-size: 16px;
   font-family: inherit;
@@ -362,7 +364,7 @@ article > h1 {
 .va-introtext {
   font-family: $font-serif;
   font-size: $lead-font-size;
-  font-weight: $font-normal;
+  font-weight: $font-weight-normal;
   line-height: $lead-line-height;
   max-width: $lead-max-width;
 

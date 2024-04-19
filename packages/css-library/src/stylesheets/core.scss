@@ -10,26 +10,29 @@
 @import './override-function';
 @import './mixins';
 
-//============ PORTED VARIABLES ==============//
-$em-base: 100%;
-
-// TODO: Georgia font files not included in the css-library dist folder.
-$georgia: "Georgia", "Cambria", "Times New Roman", "Times", serif;
-$font-serif: "Bitter", $georgia;
-
-$lead-font-size: scale-rem(2rem);
-$font-normal: 400;
-$lead-line-height: 1.7;
-$lead-max-width: scale-rem(77rem);
-$lead-line-height: 1.7;
-
 //============ VENDOR PARTIALS ==============//
 @import 'lib/normalize';
+
+//============ PORTED VARIABLES ==============//
+@import './formation-overrides/variables';
+
+//============ USWDS v1 ==============//
+@import 'formation-overrides/core/fonts';
+@import 'formation-overrides/core/utilities';
+@import 'formation-overrides/core/base';
 
 // ----- VA BASE (VARIABLES/HELPERS) ---- //
 @import 'base/fonts';
 
+// ---- USWDS v1 STANDARDS ELEMENTS/COMPONENTS --- //
+@import 'formation-overrides/elements/buttons';
+@import 'formation-overrides/elements/inputs';
+@import 'formation-overrides/elements/labels';
+@import 'formation-overrides/elements/lists';
+@import 'formation-overrides/elements/table';
+@import 'formation-overrides/elements/typography';
+@import 'formation-overrides/components/accordions';
+
 // ----- VA GENERAL (MAIN FILE/OTHER) ---- //
 @import 'base/va';
-
 
