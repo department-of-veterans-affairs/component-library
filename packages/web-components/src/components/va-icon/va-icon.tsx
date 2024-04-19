@@ -48,7 +48,7 @@ export class VaIcon {
       'usa-icon': true,
       [`usa-icon--size-${size}`]: !!size,
     });
-    const imageSrc = `${getAssetPath('/assets/sprite.svg')}#${icon}`;
+    const imageSrc = `/img/sprite.svg#${icon}`;
     return (
       <Host>
         <svg
