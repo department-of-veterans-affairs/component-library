@@ -60,7 +60,7 @@ export class VaIcon {
           role="img"
         >
           {srtext && <title id="icon-title">{srtext}</title>}
-          <use href={imageSrc}></use>
+          <use xlinkHref={imageSrc}></use>
         </svg>
       </Host>
     );
