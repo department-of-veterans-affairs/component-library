@@ -6,9 +6,12 @@ import { quicksort, reverseQuicksort } from '../../../utils/dom-sort';
 import classnames from 'classnames';
 
 /**
- * This component expects `<va-table-row>` elements as children.
+ * The V1 version of this component expects `<va-table-row>` elements as children.
  * Children of each row element should be `<span>` elements. Table
  * semantics will be added and numeric columns will be right aligned.
+ * 
+ * The V3 version expects <span> elements as children where each span corresponds to a cell
+ * in a flattened 2D table.
  */
 
 /**
