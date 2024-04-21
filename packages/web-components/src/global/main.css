@@ -1,7 +1,7 @@
 @import '~@department-of-veterans-affairs/css-library/dist/tokens/css/variables.css';
 @import '../components/va-breadcrumbs/va-breadcrumbs-slot.css';
 @import '../components/va-modal/va-modal-slot.css';
-@import '../components/va-table-inner/va-table-slot.css';
+@import '../components/va-table/va-table-inner/va-table-slot.css';
 @import '../components/va-alert/va-alert-slot.css';
 
 va-process-list li :is(h2, h3, h4, h5) {

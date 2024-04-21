@@ -1,5 +1,5 @@
 import { newE2EPage } from '@stencil/core/testing';
-import { axeCheck } from '../../../testing/test-helpers';
+import { axeCheck } from '../../../../testing/test-helpers';
 
 const sortSetup = async (opts = { ascending: true }) => {
   const page = await newE2EPage();
