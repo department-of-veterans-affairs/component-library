@@ -1197,7 +1197,44 @@ export namespace Components {
         /**
           * The title of the table
          */
+        "tableTitle"?: string;
+        /**
+          * If uswds is true, the type of table
+         */
+        "tableType"?: | 'borderless'
+    | 'striped';
+        /**
+          * Whether or not the component will use USWDS v3 styling.
+         */
+        "uswds"?: boolean;
+    }
+    interface VaTableInner {
+        /**
+          * If uswds is true, the number of columns in the table
+         */
+        "cols"?: number;
+        /**
+          * Whether the initial sort state will be descending or not.
+         */
+        "descending"?: boolean;
+        "rows"?: number;
+        /**
+          * The zero-based index of the column to sort by (Doesn't work in IE11). Optional.
+         */
+        "sortColumn"?: number;
+        /**
+          * The title of the table
+         */
         "tableTitle": string;
+        /**
+          * If uswds is true, the type of table to be used
+         */
+        "tableType"?: | 'borderless'
+    | 'striped';
+        /**
+          * Whether or not the component will use USWDS v3 styling.
+         */
+        "uswds"?: boolean;
     }
     interface VaTableRow {
     }
@@ -1803,6 +1840,12 @@ declare global {
         prototype: HTMLVaTableElement;
         new (): HTMLVaTableElement;
     };
+    interface HTMLVaTableInnerElement extends Components.VaTableInner, HTMLStencilElement {
+    }
+    var HTMLVaTableInnerElement: {
+        prototype: HTMLVaTableInnerElement;
+        new (): HTMLVaTableInnerElement;
+    };
     interface HTMLVaTableRowElement extends Components.VaTableRow, HTMLStencilElement {
     }
     var HTMLVaTableRowElement: {
@@ -1872,6 +1915,7 @@ declare global {
         "va-statement-of-truth": HTMLVaStatementOfTruthElement;
         "va-summary-box": HTMLVaSummaryBoxElement;
         "va-table": HTMLVaTableElement;
+        "va-table-inner": HTMLVaTableInnerElement;
         "va-table-row": HTMLVaTableRowElement;
         "va-telephone": HTMLVaTelephoneElement;
         "va-text-input": HTMLVaTextInputElement;
@@ -3295,6 +3339,43 @@ declare namespace LocalJSX {
           * The title of the table
          */
         "tableTitle"?: string;
+        /**
+          * If uswds is true, the type of table
+         */
+        "tableType"?: | 'borderless'
+    | 'striped';
+        /**
+          * Whether or not the component will use USWDS v3 styling.
+         */
+        "uswds"?: boolean;
+    }
+    interface VaTableInner {
+        /**
+          * If uswds is true, the number of columns in the table
+         */
+        "cols"?: number;
+        /**
+          * Whether the initial sort state will be descending or not.
+         */
+        "descending"?: boolean;
+        "rows"?: number;
+        /**
+          * The zero-based index of the column to sort by (Doesn't work in IE11). Optional.
+         */
+        "sortColumn"?: number;
+        /**
+          * The title of the table
+         */
+        "tableTitle"?: string;
+        /**
+          * If uswds is true, the type of table to be used
+         */
+        "tableType"?: | 'borderless'
+    | 'striped';
+        /**
+          * Whether or not the component will use USWDS v3 styling.
+         */
+        "uswds"?: boolean;
     }
     interface VaTableRow {
     }
@@ -3551,6 +3632,7 @@ declare namespace LocalJSX {
         "va-statement-of-truth": VaStatementOfTruth;
         "va-summary-box": VaSummaryBox;
         "va-table": VaTable;
+        "va-table-inner": VaTableInner;
         "va-table-row": VaTableRow;
         "va-telephone": VaTelephone;
         "va-text-input": VaTextInput;
@@ -3605,6 +3687,7 @@ declare module "@stencil/core" {
             "va-statement-of-truth": LocalJSX.VaStatementOfTruth & JSXBase.HTMLAttributes<HTMLVaStatementOfTruthElement>;
             "va-summary-box": LocalJSX.VaSummaryBox & JSXBase.HTMLAttributes<HTMLVaSummaryBoxElement>;
             "va-table": LocalJSX.VaTable & JSXBase.HTMLAttributes<HTMLVaTableElement>;
+            "va-table-inner": LocalJSX.VaTableInner & JSXBase.HTMLAttributes<HTMLVaTableInnerElement>;
             "va-table-row": LocalJSX.VaTableRow & JSXBase.HTMLAttributes<HTMLVaTableRowElement>;
             "va-telephone": LocalJSX.VaTelephone & JSXBase.HTMLAttributes<HTMLVaTelephoneElement>;
             "va-text-input": LocalJSX.VaTextInput & JSXBase.HTMLAttributes<HTMLVaTextInputElement>;
