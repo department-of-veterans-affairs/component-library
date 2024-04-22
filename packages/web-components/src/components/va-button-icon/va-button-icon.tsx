@@ -26,11 +26,6 @@ export class VaButtonIcon {
   @Element() el: HTMLElement;
 
   /**
-   * If `true`, the button will use the big variant.
-   */
-  @Prop({ reflect: true }) big?: boolean = false;
-
-  /**
    * If `true`, the component-library-analytics event is disabled.
    */
   @Prop() disableAnalytics?: boolean = false;
@@ -46,29 +41,18 @@ export class VaButtonIcon {
   @Prop() label?: string; // could use this.el.getAttribute('aria-label') but this is more explicit
 
   /**
-   * If `true`, the button will use the primary alternate variant.
+   * The type of button this will render as, currently a limited number of options
    */
-  @Prop() primaryAlternate?: boolean = false;
 
-  /**
-   * If `true`, the button will use the secondary variant.
-   */
-  @Prop({ reflect: true }) secondary?: boolean = false;
-
-  /**
-   * If `true`, the button will submit form data when clicked.
-   */
-  @Prop() submit?: boolean = false;
-
-  /**
-   * The text displayed on the button. If `continue` or `back` is true, the value of text is ignored.
-   */
-  @Prop() text?: string;
-
-  /**
-   * Whether or not the component will use USWDS v3 styling.
-   */
-  @Prop({ reflect: true }) uswds?: boolean = true;
+  private buttonTypeMap = {
+    // eslint-disable-next-line i18next/no-literal-string
+    'change-file': { icon: 'attach_file', text: 'Change File' },
+    // eslint-disable-next-line i18next/no-literal-string
+    'delete': { icon: 'delete', text: 'Delete' },
+    // eslint-disable-next-line i18next/no-literal-string
+    'cancel': { icon: 'close', text: 'Cancel' },
+  };
+  @Prop() buttonType: keyof typeof this.buttonTypeMap;
 
   /**
    * The event used to track usage of the component.
@@ -80,33 +64,19 @@ export class VaButtonIcon {
   })
   componentLibraryAnalytics: EventEmitter;
 
-  componentDidLoad() {
-    // check if the element has a class named uswds-false added from parent
-    if (this.el.classList.contains('uswds-false')) {
-      // add attribute manually
-      this.el.setAttribute('uswds', 'false');
-    }
-  }
-
   private handleClick = (): void => {
     if (!this.disableAnalytics) {
       const detail = {
         componentName: 'va-button',
         action: 'click',
         details: {
-          type: this.secondary ? 'secondary' : 'primary',
-          label: this.getButtonText(),
+          // eslint-disable-next-line i18next/no-literal-string
+          type: 'primary',
+          label: this.buttonTypeMap[this.buttonType].text,
         },
       };
       this.componentLibraryAnalytics.emit(detail);
     }
-  };
-
-  private getButtonText = (): string => {
-    if (this.continue) return 'Continue';
-    if (this.back) return 'Back';
-
-    return this.text;
   };
 
   /**
@@ -126,72 +96,31 @@ export class VaButtonIcon {
   }
 
   render() {
-    const {
-      back,
-      continue: _continue,
-      disabled,
-      getButtonText,
-      label,
-      submit,
-      secondary,
-      primaryAlternate,
-      big,
-      uswds,
-    } = this;
+    const { disabled, label, buttonType } = this;
 
     const ariaDisabled = disabled ? 'true' : undefined;
-    const buttonText = getButtonText();
-    const type = submit ? 'submit' : 'button';
+    const buttonClass = classnames({
+      'usa-button': true,
+      'va-button-icon--destructive':
+        buttonType === 'cancel' || buttonType === 'delete',
+    });
 
-    if (uswds) {
-      const buttonClass = classnames({
-        'usa-button': true,
-        'usa-button--big': big,
-        'usa-button--outline': back || secondary,
-        'va-button-primary--alternate': primaryAlternate,
-      });
-      return (
-        <Host>
-          <button
-            class={buttonClass}
-            aria-disabled={ariaDisabled}
-            aria-label={label}
-            type={type}
-            part="button"
-          >
-            {back && !_continue && (
-              <va-icon icon="navigate_far_before" size={3}></va-icon>
-            )}
-            {buttonText}
-            {_continue && !back && (
-              <va-icon icon="navigate_far_next" size={3}></va-icon>
-            )}
-          </button>
-        </Host>
-      );
-    } else {
-      const buttonClass = classnames({
-        'va-button-primary--alternate': primaryAlternate,
-      });
-      return (
-        <Host>
-          <button
-            class={buttonClass}
-            aria-disabled={ariaDisabled}
-            aria-label={label}
-            type={type}
-            part="button"
-          >
-            {back && !_continue && (
-              <va-icon icon="navigate_far_before" size={3}></va-icon>
-            )}
-            {buttonText}
-            {_continue && !back && (
-              <va-icon icon="navigate_far_next" size={3}></va-icon>
-            )}
-          </button>
-        </Host>
-      );
-    }
+    return (
+      <Host>
+        <button
+          class={buttonClass}
+          aria-disabled={ariaDisabled}
+          aria-label={label}
+          type="button"
+          part="button"
+        >
+          <va-icon
+            icon={this.buttonTypeMap[buttonType].icon}
+            size={3}
+          ></va-icon>
+          {this.buttonTypeMap[buttonType].text}
+        </button>
+      </Host>
+    );
   }
 }
