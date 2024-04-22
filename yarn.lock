@@ -2063,7 +2063,7 @@ __metadata:
     "@department-of-veterans-affairs/formation": ^10.1.2
     "@stencil/core": ^2.19.2
     "@stencil/postcss": ^2.0.0
-    "@stencil/react-output-target": ^0.0.9
+    "@stencil/react-output-target": ^0.4.0
     "@stencil/sass": ^2.0.0
     "@types/jest": ^26.0.20
     "@types/puppeteer": ^5.4.3
@@ -3043,12 +3043,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@stencil/react-output-target@npm:^0.0.9":
-  version: 0.0.9
-  resolution: "@stencil/react-output-target@npm:0.0.9"
+"@stencil/react-output-target@npm:^0.4.0":
+  version: 0.4.0
+  resolution: "@stencil/react-output-target@npm:0.4.0"
   peerDependencies:
-    "@stencil/core": ">=1.8.0"
-  checksum: 974deacb010b9d7ca9ce195f5001f157b013a328be2d0d142e7a4e5094f251dfdd7f50a094acb1e906dabbaf69a84c1fb7e7aaaa6cd754b1bbe919f574cc447b
+    "@stencil/core": ^2.9.0 || ^3.0.0-beta.0
+  checksum: a88a53f4d8f41c0b0a665f59dddd88986be095b6ed3d9fbbab30f5376cd1247c7d04711fe6ac0530777ddb67d5b79bbc2c6660d49409449e39fb2bf186f76ccd
   languageName: node
   linkType: hard
 
