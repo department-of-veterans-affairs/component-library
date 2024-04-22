@@ -5,9 +5,8 @@
 
 @import '../override-function';
 
-// TODO: Verify font and image path
-$font-path: "./fonts"; 
-$image-path: "./img";
+$font-path: "./fonts";  // TODO: Verify asset path
+$image-path: "./img"; // TODO: Verify asset path
 
 $label-border-radius: 2px;
 $h5-font-size: scale-rem(1.5rem);
@@ -81,3 +80,9 @@ $lead-line-height: 1.7;
 $title-font-size: scale-rem(5.2rem);
 $lead-max-width: scale-rem(77rem);
 
+$site-margins-mobile: scale-rem(1.5rem);
+$nav-width: 951px;
+$site-margins: scale-rem(3rem);
+$site-max-width: 1040px;
+
+$sidenav-current-border-width:  scale-rem(0.4rem);
