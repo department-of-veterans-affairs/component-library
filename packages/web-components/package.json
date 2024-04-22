@@ -41,7 +41,7 @@
     "@babel/core": "^7.12.13",
     "@department-of-veterans-affairs/formation": "^10.1.2",
     "@stencil/postcss": "^2.0.0",
-    "@stencil/react-output-target": "^0.4.0",
+    "@stencil/react-output-target": "^0.5.3",
     "@stencil/sass": "^2.0.0",
     "@types/jest": "^26.0.20",
     "@types/puppeteer": "^5.4.3",
