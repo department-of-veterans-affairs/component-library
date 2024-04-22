@@ -1,12 +1,12 @@
 /**
  * Do not edit directly
- * Generated on Fri, 29 Mar 2024 17:20:23 GMT
+ * Generated on Thu, 18 Apr 2024 16:44:35 GMT
  */
 
 :root {
   --xsmall-screen: 320px;
   --small-screen: 481px;
-  --medium-mobile: 640px;
+  --tablet: 640px;
   --medium-screen: 768px;
   --small-desktop-screen: 1008px;
   --large-screen: 1201px;
@@ -250,5 +250,4 @@
   --uswds-system-color-yellow-vivid-20: #face00;
   --uswds-system-color-indigo-cool-60: #3f57a6;
   --uswds-system-color-mint-cool-50: #40807e;
-  --uswds-system-color-red-cool-10v: #f8dfe2;
 }
