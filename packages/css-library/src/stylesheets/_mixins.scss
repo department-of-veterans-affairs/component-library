@@ -392,3 +392,43 @@ $asset-pipeline: false;
     color: $color-primary-darkest;
   }
 }
+
+@mixin button-link {
+  background: none;
+  background-color: transparent !important;
+  border: 0;
+  border-radius: 0;
+  outline: 0;
+  padding: 0 !important;
+  margin: 0;
+  text-align: left;
+  -webkit-font-smoothing: auto;
+  color: $color-link-default !important;
+  font-weight: normal;
+  text-decoration: underline;
+  display: inline;
+  width: auto !important;
+  line-height: inherit;
+  &:hover {
+    background: none;
+    border: 0;
+    border-radius: 0;
+    outline: 0;
+    padding: 0 !important;
+    color: $color-link-default;
+    text-decoration: underline;
+    background-color: $color-link-default-hover !important;
+    @include color-transition;
+  }
+  &:active {
+    background: $color-link-default-hover;
+  }
+  &:focus {
+    @include focus-gold-light-outline;
+    outline-offset: 0;
+  }
+  &:disabled {
+    text-decoration: none;
+    color: $color-gray-light !important;
+  }
+}

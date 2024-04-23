@@ -12,7 +12,7 @@
     "build:stylesheets": "sass --load-path=../../node_modules/@uswds/uswds/packages/ src/stylesheets:dist/",
     "build:minify": "yarn build:stylesheets --style compressed --no-source-map",
     "build:minify-core": "sass --style compressed --no-source-map dist/core.css:dist/core.min.css",
-    "build": "yarn run clean-dist && yarn run copy && yarn build:tokens && yarn build:stylesheets && yarn build:minify-core",
+    "build": "yarn run clean-dist && yarn run copy && yarn build:tokens && yarn build:stylesheets",
     "clean-dist": "rimraf dist/*",
     "copy-assets": "cp -rv src/assets/fonts dist/fonts/ && cp -rv src/assets/img dist/img/",
     "copy": "node ./copy-uswds-color-tokens.js && yarn run copy-assets"
