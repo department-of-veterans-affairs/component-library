@@ -25,7 +25,7 @@ import classnames from 'classnames';
   styleUrl: 'va-table-inner.scss',
   shadow: true,
 })
-export class VaTable {
+export class VaTableInner {
   headers: HTMLElement[] = null;
 
   @Element() el: HTMLElement;

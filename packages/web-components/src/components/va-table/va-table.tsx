@@ -18,7 +18,7 @@ import {
   styleUrl: 'va-table.scss',
   shadow: true,
 })
-export class VaTableWrapper {
+export class VaTable {
   @Element() el: HTMLElement;
 
   /**
@@ -142,7 +142,7 @@ export class VaTableWrapper {
     // if (this.tableType) {
     //   vaTable.setAttribute('table-type', this.tableType);
     // }
-    
+
     //make a fragment containing all the cells, one for each slot
     const frag = this.makeFragment();
     vaTable.appendChild(frag);
