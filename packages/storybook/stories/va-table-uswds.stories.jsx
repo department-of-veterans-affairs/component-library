@@ -88,7 +88,7 @@ const CustomComponentsTemplate = (args) => {
       <va-table-row>
         <span><va-link text="Social Security" href="https://www.ssa.gov/history/35act.html"/></span>
         <span>
-          <div className='vads-u-background-color--gray-lightest vads-u-padding--2'>
+          <div>
             <div>
               An act to provide for the general welfare by establishing a system of Federal old-age benefits. Enables provisions for:
             </div>
