@@ -5,11 +5,12 @@
 @import '../../global/formation_overrides';
 @import '../../mixins/focusable.css';
 
+// Needed so button doesn't cause re-flow issues
 :host {
   display: inline-block;
 }
 
-// Styles for "primary" buttons
+// Styles for "regular" buttons
 :host .usa-button {
   background: var(--vads-button-color-background-secondary-on-light, #FFFFFF);
   color: var(--vads-color-link);
@@ -20,6 +21,7 @@
   }
 }
 
+// Styles for "destructive" buttons
 :host .usa-button.va-button-icon--destructive {
   color: var(--vads-color-error);
 
@@ -27,20 +29,6 @@
     background: var(--vads-color-secondary-lightest);
   }
 }
-
-// Styles for disabled buttons
-:host([disabled]:not([disabled='false'])) {
-  cursor: not-allowed;
-}
-:host([disabled]:not([disabled='false'])) .usa-button {
-  color: var(--vads-color-base);
-
-  // Needs the aria-disabled attr to bypass USWDS' built-in styles
-  &[aria-disabled="true"]:hover, &[aria-disabled="true"]:focus {
-    background: var(--vads-color-base-lightest);
-  }
-}
-
 
 // Fix to off-centered content when icon present
 :host button.usa-button {
@@ -56,14 +44,4 @@
 // Override transparent background from USWDS v3
 .usa-button--outline {
   background-color: var(--vads-button-color-background-secondary-on-light);
-}
-
-.va-button-primary--alternate {
-  background: var(--vads-color-success-dark);
-
-  &:hover,
-  &:focus {
-    background-color: var(--vads-button-color-background-primary-alt-active-on-light);
-    text-decoration: none;
-  }
 }

@@ -16,21 +16,18 @@ export default {
 
 const defaultArgs = {
   'disable-analytics': undefined,
-  'disabled': undefined,
   'label': undefined,
   'button-type': 'change-file',
 };
 
 const Template = ({
   'disable-analytics': disableAnalytics,
-  disabled,
   label,
   'button-type': buttonType,
 }) => {
   return (
     <va-button-icon
       disable-analytics={disableAnalytics}
-      disabled={disabled}
       label={label}
       onClick={e => console.log(e)}
       button-type={buttonType}
@@ -56,9 +53,8 @@ Cancel.args = {
   'button-type': 'cancel',
 };
 
-export const Disabled = Template.bind(null);
-Disabled.args = {
+export const DisableAnalytics = Template.bind(null);
+DisableAnalytics.args = {
   ...defaultArgs,
-  'disabled': true,
-  'button-type': 'change-file',
+  'disable-analytics': true,
 };

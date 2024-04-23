@@ -239,10 +239,6 @@ export namespace Components {
          */
         "disableAnalytics"?: boolean;
         /**
-          * If `true`, the click event will not fire.
-         */
-        "disabled"?: boolean;
-        /**
           * The aria-label of the component.
          */
         "label"?: string;
@@ -2181,10 +2177,6 @@ declare namespace LocalJSX {
           * If `true`, the component-library-analytics event is disabled.
          */
         "disableAnalytics"?: boolean;
-        /**
-          * If `true`, the click event will not fire.
-         */
-        "disabled"?: boolean;
         /**
           * The aria-label of the component.
          */

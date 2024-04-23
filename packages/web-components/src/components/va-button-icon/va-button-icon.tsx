@@ -31,11 +31,6 @@ export class VaButtonIcon {
   @Prop() disableAnalytics?: boolean = false;
 
   /**
-   * If `true`, the click event will not fire.
-   */
-  @Prop({ reflect: true }) disabled?: boolean = false;
-
-  /**
    * The aria-label of the component.
    */
   @Prop() label?: string; // could use this.el.getAttribute('aria-label') but this is more explicit
@@ -50,7 +45,7 @@ export class VaButtonIcon {
     // eslint-disable-next-line i18next/no-literal-string
     'delete': { icon: 'delete', text: 'Delete' },
     // eslint-disable-next-line i18next/no-literal-string
-    'cancel': { icon: 'close', text: 'Cancel' },
+    'cancel': { icon: 'cancel', text: 'Cancel' },
   };
   @Prop() buttonType: keyof typeof this.buttonTypeMap;
 
@@ -64,41 +59,25 @@ export class VaButtonIcon {
   })
   componentLibraryAnalytics: EventEmitter;
 
-  private handleClick = (): void => {
+  @Listen('click')
+  handleClick(_: MouseEvent): void {
     if (!this.disableAnalytics) {
       const detail = {
         componentName: 'va-button',
         action: 'click',
         details: {
           // eslint-disable-next-line i18next/no-literal-string
-          type: 'primary',
+          type: 'tertiary',
           label: this.buttonTypeMap[this.buttonType].text,
         },
       };
       this.componentLibraryAnalytics.emit(detail);
     }
-  };
-
-  /**
-   * This workaround allows us to use disabled for styling and to prevent the click event from firing while improving
-   * the button's accessibility by allowing it to be focusable and through the use of aria-disabled.
-   *
-   * Using a click handler on the button with this same check for disabled results in the event bubbling.
-   */
-  @Listen('click')
-  handleClickOverride(e: MouseEvent) {
-    if (this.disabled) {
-      e.preventDefault();
-      e.stopPropagation();
-      return;
-    }
-    this.handleClick();
   }
 
   render() {
-    const { disabled, label, buttonType } = this;
+    const { label, buttonType } = this;
 
-    const ariaDisabled = disabled ? 'true' : undefined;
     const buttonClass = classnames({
       'usa-button': true,
       'va-button-icon--destructive':
@@ -109,7 +88,6 @@ export class VaButtonIcon {
       <Host>
         <button
           class={buttonClass}
-          aria-disabled={ariaDisabled}
           aria-label={label}
           type="button"
           part="button"
