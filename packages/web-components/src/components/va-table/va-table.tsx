@@ -32,11 +32,12 @@ export class VaTableWrapper {
   @Prop() tableTitle?: string;
 
   /**
+   * UNCOMMENT when we add more variations
    * If uswds is true, the type of table
    */
-  @Prop() tableType?:
-    | 'borderless'
-    | 'striped' = 'borderless';
+  // @Prop() tableType?:
+  //   | 'borderless'
+  //   | 'striped' = 'borderless';
   
   
   /// DELETE below props once V1 table removed ///
@@ -137,9 +138,11 @@ export class VaTableWrapper {
     if (this.tableTitle) {
       vaTable.setAttribute('table-title', this.tableTitle);
     }
-    if (this.tableType) {
-      vaTable.setAttribute('table-type', this.tableType);
-    }
+    // Uncomment when we add more uwds variations
+    // if (this.tableType) {
+    //   vaTable.setAttribute('table-type', this.tableType);
+    // }
+    
     //make a fragment containing all the cells, one for each slot
     const frag = this.makeFragment();
     vaTable.appendChild(frag);
