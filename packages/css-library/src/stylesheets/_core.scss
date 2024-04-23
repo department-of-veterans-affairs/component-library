@@ -6,6 +6,9 @@
   $theme-font-path: '../node_modules/@uswds/uswds/dist/fonts',
 );
 
+$font-path: "./fonts";  // TODO: Verify asset path
+$image-path: "./img"; // TODO: Verify asset path
+
 //============ MIXINS & OTHER FUNCTIONS ==============//
 @import './override-function';
 @import './mixins';
