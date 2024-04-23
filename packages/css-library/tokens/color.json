@@ -246,6 +246,9 @@
   "vads-color-warning": {
     "*": { "value": "{uswds-system-color-gold-vivid-20}"}
   },
+  "vads-color-warning-on-dark": {
+    "*": { "value": "{uswds-system-color-yellow-vivid-20}"}
+  },
   "vads-color-warning-dark": {
     "*": { "value": "{uswds-system-color-gold-vivid-30}"}
   },
@@ -260,9 +263,6 @@
   },
   "vads-color-warning-lighter": {
     "*": { "value": "{uswds-system-color-yellow-5}"}
-  },
-  "vads-color-warning-on-dark": {
-    "*": { "value": "{uswds-system-color-yellow-vivid-20}"}
   },
   "vads-color-gold-lighter": {
     "*": { "value": "{uswds-system-color-gold-vivid-10}"}
