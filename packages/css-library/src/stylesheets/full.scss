@@ -1,0 +1,33 @@
+/*
+ * PORTED: Complete set of Formation styles
+ */
+
+//  $fa-font-path: '~@fortawesome/fontawesome-free/webfonts';
+//  $font-path: '~uswds/src/fonts';
+//  $image-path: '~uswds/src/img';
+
+@use "../../dist/tokens/scss/variables" as *;
+
+//============ PORTED VARIABLES ==============//
+@import './formation-overrides/variables';
+ 
+@import 'core';
+@import 'modules/m-alert';
+@import 'modules/m-breadcrumbs';
+@import 'modules/m-button';
+@import 'modules/m-form-elements';
+@import 'modules/m-loading-indicator';
+@import 'modules/m-print';
+@import 'modules/m-dropdown';
+@import 'modules/m-nav-sidebar';
+@import 'modules/m-overlay';
+@import 'modules/m-additional-info';
+@import 'mobile-typography';
+@import 'shame';
+@import 'modules/m-modal';
+@import 'modules/va-pagination';
+@import 'modules/va-tabs';
+@import 'modules/m-process-list';
+@import 'modules/m-megamenu';
+@import 'modules/m-hub-page-link-list';
+@import 'modules/m-action-link';

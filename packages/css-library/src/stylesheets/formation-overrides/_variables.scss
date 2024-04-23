@@ -38,6 +38,15 @@ $color-secondary-dark: $color-red-dark;
 $color-red-darkest: #981b1e;
 $color-secondary-darkest: $color-red-darkest;
 
+$color-red-lightest: #f9dede;
+$color-secondary-lightest: $color-red-lightest;
+
+$color-blue-darkest: #112e51;
+$color-primary-darkest: $color-blue-darkest;
+
+$color-green: #2e8540;
+$color-green-lightest:#e7f4e4;
+
 $color-green-light: #4aa564;
 $color-gray: #5b616b;
 $color-gray-medium: #757575;
@@ -49,6 +58,20 @@ $color-gray-lightest:#f1f1f1;
 $color-blue: #005ea2;
 $color-primary: $color-blue;
 $color-primary-darker: #1a4480;
+
+$color-cool-blue-lightest: #dce4ef;
+
+$color-gold: #fdb81e;
+$color-gold-lightest: #fff1d2;
+
+$color-gray-light: #aeb0b5;
+$color-focus: $color-gray-light;
+
+$color-link-default:  $color-primary;
+
+$olso-gray: #8d9297;
+$color-va-modal-bg: rgba($color-gray-dark, .8);
+
 
 $base-font-size: 1rem;
 $input-max-width: scale-rem(46rem);
@@ -86,3 +109,5 @@ $site-margins: scale-rem(3rem);
 $site-max-width: 1040px;
 
 $sidenav-current-border-width:  scale-rem(0.4rem);
+
+$top-layer: 300;

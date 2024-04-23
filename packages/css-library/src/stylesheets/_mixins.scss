@@ -314,3 +314,81 @@ $asset-pipeline: false;
     display: table;
   }
 }
+
+@mixin modal-close-button {
+  background-color: transparent;
+  color: $color-primary;
+  font-size: scale-rem(2.25rem);
+  padding: 0;
+  position: absolute;
+  margin: units(2);
+  right: 0;
+  top: 0;
+  width: auto;
+  z-index: 9;
+
+  &:hover {
+    background-color: transparent;
+    color: $color-primary-darker;
+  }
+
+  &:active {
+    background-color: transparent;
+    color: $color-primary-darkest;
+  }
+}
+
+// There are a few places where the exit-icon is explicitly hidden using prop / values
+// like 'background-image: none;'. In these cases, we want to hide the corresponding
+// content placed in the ::after pseudo-element
+@mixin no-sr-content {
+  &:after {
+    content: none;
+  }
+}
+
+@mixin color-transition {
+  -webkit-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+
+  -webkit-transition-timing-function: ease-in-out;
+  transition-timing-function: ease-in-out;
+
+  // Transition only these properties.
+  -webkit-transition-property: color, background-color, border-color;
+  transition-property: color, background-color, border-color;
+}
+
+@mixin media-maxwidth($bp) {
+  @media screen and (max-width: #{$bp}) {
+    @content;
+  }
+}
+
+@mixin focus-gold-light-outline($offset: 2) {
+  outline: $focus-outline;
+  outline-offset: #{$offset}px;
+}
+
+@mixin modal-close-button {
+  background-color: transparent;
+  color: $color-primary;
+  font-size: scale-rem(2.25rem);
+  padding: 0;
+  position: absolute;
+  margin: units(2);
+  right: 0;
+  top: 0;
+  width: auto;
+  z-index: 9;
+
+  &:hover {
+    background-color: transparent;
+    color: $color-primary-darker;
+  }
+
+  &:active {
+    background-color: transparent;
+    color: $color-primary-darkest;
+  }
+}

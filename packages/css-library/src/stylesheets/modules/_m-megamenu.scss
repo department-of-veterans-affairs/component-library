@@ -1,0 +1,357 @@
+@import '../override-function';
+
+$vetnav-panel-height-desktop: 490px;
+$vetnav-panel-height: 380px;
+$marketing-container-height: 380px;
+
+#mega-menu,
+.mega-menu {
+  flex: 1 0 100%;
+  color: $color-primary;
+  width: 100%;
+  z-index: 2;
+
+  .panel-bottom-link {
+    position: unset;
+    height: 25px;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-bottom: 3px;
+    border: none;
+
+    a {
+      padding: 20px 25px 20px 7px;
+      font-weight: bold;
+
+      svg {
+        width: 15px;
+      }
+    }
+  }
+
+  .column-three {
+    display: none;
+  }
+
+  .vetnav-level2 {
+    width: 100%;
+  }
+
+  .panel-top-link {
+    &:nth-of-type(1) {
+      display: block;
+      font-weight: bold;
+      padding-top: 15px;
+    }
+  }
+
+  .vetnav-panel--submenu:not([hidden]) {
+    position: static;
+    h3 {
+      display: none;
+    }
+  }
+
+  .back-button {
+    display: block;
+  }
+
+  .vetnav-panel {
+    height: auto;
+  }
+
+  .mm-link-container-small {
+    background: $color-primary-darkest;
+    height: 100%;
+    position: absolute;
+    width: 100%;
+    top: 0;
+    z-index: 200;
+  }
+
+  .all-link-arrow {
+    display: none;
+  }
+
+  .vetnav-level1 {
+    &:active,
+    &:visited,
+    &:focus,
+    &:hover {
+      color: $vads-color-white;
+    }
+  }
+
+  .mm-links {
+    white-space: pre-wrap;
+  }
+
+  @include media($medium-screen) {
+    min-height: 51px;
+
+    .vetnav-panel--submenu:not([hidden]) {
+      position: absolute;
+      box-shadow: none;
+      width: scale-rem(26rem);
+      padding: 72px 0px 0px 28px;
+      white-space: normal;
+
+      h3 {
+        display: block;
+        color: $vads-color-black;
+        font-family: Source Sans Pro, sans serif;
+        font-size: scale-rem(1.6rem);
+        font-weight: bold;
+        margin-top: 4px;
+        padding: 0;
+      }
+
+      &.panel-white {
+        padding-top: 22px;
+      }
+    }
+
+    .vetnav-level1[aria-expanded='true'] {
+      border-top-color: $vads-color-va-accent;
+      &:active,
+      &:visited,
+      &:focus,
+      &:hover {
+        color: $color-base;
+      }
+    }
+
+    .vetnav-level2[aria-expanded='true'] {
+      box-shadow: -3px 0 $vads-color-va-accent;
+    }
+
+    .vetnav-panel {
+      box-shadow: 0 7px 25px -11px $vads-color-black;
+      height: $vetnav-panel-height-desktop;
+      width: 1008px;
+      left: 0;
+
+      .mm-links {
+        padding: 5px 0px;
+      }
+
+      .mm-link-container {
+        width: 225px;
+        margin-bottom: 0;
+      }
+    }
+
+    .column-one {
+      left: 20px;
+
+      &.panel-white {
+        background-color: $vads-color-white;
+        border-left: none;
+      }
+    }
+
+    .column-two {
+      border-left: none;
+      left: 280px;
+
+      &.panel-white {
+        background-color: $vads-color-white;
+        border-left: none;
+      }
+    }
+
+    .column-three {
+      border-left: none;
+      color: $vads-color-black;
+      left: 540px;
+      white-space: normal;
+
+      &.vetnav-panel--submenu:not([hidden]) {
+        padding: 86px 20px 20px 14px;
+        width: scale-rem(24rem);
+
+        &.panel-white {
+          padding-top: 30px;
+          background-color: $vads-color-white;
+          border-left: none;
+        }
+      }
+
+      a {
+        font-weight: bold;
+        padding: 14px 0px 0px 0px;
+      }
+    }
+
+    .panel-bottom-link {
+      margin: 0;
+    }
+
+    .all-link-arrow {
+      display: initial;
+    }
+
+    .panel-top-link {
+      display: none !important;
+    }
+
+    .vetnav-level2 {
+      width: scale-rem(24.3rem);
+    }
+  }
+
+  .panel-title {
+    font-weight: bold;
+    color: $vads-color-black;
+  }
+
+  a.vetnav-level1 {
+    color: $vads-color-white;
+  }
+
+  .main-column {
+    left: -230px;
+
+    &.panel-white {
+      background-color: $vads-color-white;
+    }
+  }
+
+  .mm-marketing-container {
+    background-color: $vads-color-white;
+    height: $marketing-container-height;
+    overflow: hidden;
+
+    &.mm-marketing-gray {
+      background-color: $vads-color-base-lightest;
+    }
+
+    .mm-marketing-text {
+      padding: 20px;
+    }
+
+    p {
+      margin-top: 5px;
+    }
+  }
+
+  #vetnav-column-one-col {
+    .panel-bottom-link {
+      width: 200%;
+    }
+  }
+
+  @include media($medium-screen) {
+    .panel-top-link {
+      display: none;
+    }
+
+    .back-button {
+      display: none;
+    }
+
+    .vetnav-panel--submenu:not([hidden]) {
+      h3 {
+        font-family: Source Sans Pro, sans serif;
+        font-size: scale-rem(1.6rem);
+      }
+    }
+  }
+
+  #vetnav-menu,
+  #vetnav {
+    margin-top: 0;
+  }
+
+  .my-va-top-nav {
+    margin-left: auto;
+
+    &.current-page {
+      margin-left: auto;
+    }
+  }
+
+  .mm-marketing-container {
+    height: $marketing-container-height;
+
+    p {
+      margin-top: 5px;
+    }
+  }
+
+  @include media($medium-screen) {
+    .current-page {
+      box-shadow: inset 0 -5px 0 $color-blue;
+      margin-left: scale-rem(1.6rem);
+      margin-right: scale-rem(1.6rem);
+      a {
+        padding: scale-rule(1.6rem 0);
+      }
+    }
+
+    .vetnav-panel {
+      width: $medium-screen;
+      height: $vetnav-panel-height;
+    }
+
+    .column-one {
+      width: scale-rem(39rem);
+    }
+
+    .column-two {
+      width: scale-rem(39rem);
+    }
+
+    .column-three {
+      display: none;
+    }
+
+    .panel-bottom-link {
+      position: absolute;
+      height: 60px;
+      width: $medium-screen - 297px;
+      left: scale-rem(28rem);
+      border-bottom: 1px solid #d0d0d0;
+      z-index: 3;
+      top: 0;
+
+      a {
+        background-size: 13px;
+        padding: 20px 0px;
+        display: inline-block;
+        padding-right: 25px;
+
+        svg {
+          height: 11px;
+          width: 11px;
+          margin-left: 5px;
+          vertical-align: middle;
+        }
+      }
+    }
+  }
+
+  @include media($small-desktop-screen) {
+    .vetnav-panel {
+      width: $small-desktop-screen;
+      height: $vetnav-panel-height-desktop;
+    }
+
+    .panel-bottom-link {
+      position: absolute;
+      width: $small-desktop-screen - 297px;
+    }
+
+    .column-one {
+      width: scale-rem(26rem);
+    }
+
+    .column-two {
+      width: scale-rem(26rem);
+    }
+
+    .column-three {
+      display: block;
+    }
+  }
+}
