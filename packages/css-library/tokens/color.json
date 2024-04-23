@@ -27,11 +27,11 @@
   "vads-process-list-color-text-pending-on-light": {
     "*": { "value": "{uswds-system-color-gray-50}" }
   },
-  "vads-color-base-gray-lighter": {
-    "*": { "value": "{uswds-system-color-gray-30}"}
-  },
-  "vads-color-base-gray-darker": {
+  "vads-color-base-active-on-light": {
     "*": { "value": "{uswds-system-color-gray-80}"}
+  },
+  "vads-color-base-active-on-dark": {
+    "*": { "value": "{uswds-system-color-gray-30}"}
   },
   "vads-color-gray-darkest-on-dark": {
     "*": { "value": "{uswds-system-color-gray-warm-90}"}
@@ -261,7 +261,7 @@
   "vads-color-warning-lighter": {
     "*": { "value": "{uswds-system-color-yellow-5}"}
   },
-  "vads-color-gold-light": {
+  "vads-color-warning-on-dark": {
     "*": { "value": "{uswds-system-color-yellow-vivid-20}"}
   },
   "vads-color-gold-lighter": {
