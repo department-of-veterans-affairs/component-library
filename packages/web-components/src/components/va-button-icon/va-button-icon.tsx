@@ -94,7 +94,7 @@ export class VaButtonIcon {
         >
           <va-icon
             icon={this.buttonTypeMap[buttonType].icon}
-            size={3}
+            size={2}
           ></va-icon>
           {this.buttonTypeMap[buttonType].text}
         </button>

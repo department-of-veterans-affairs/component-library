@@ -31,17 +31,9 @@
 }
 
 // Fix to off-centered content when icon present
-:host button.usa-button {
-  padding-top: 8px;
-
-  va-icon {
+:host button.usa-button va-icon {
     display: inline-block;
     height: 0;
-    vertical-align: text-top;
-  }
-}
-
-// Override transparent background from USWDS v3
-.usa-button--outline {
-  background-color: var(--vads-button-color-background-secondary-on-light);
+    vertical-align: top;
+    margin-right: 4px;
 }
