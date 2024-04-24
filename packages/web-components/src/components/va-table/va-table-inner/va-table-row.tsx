@@ -8,7 +8,7 @@ import { Component, Host, h } from '@stencil/core';
 export class VaTableRow {
   render() {
     return (
-      <Host>
+      <Host role="row">
         <slot></slot>
       </Host>
     );
