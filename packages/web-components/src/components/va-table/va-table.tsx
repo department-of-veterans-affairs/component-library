@@ -32,12 +32,9 @@ export class VaTable {
   @Prop() tableTitle?: string;
 
   /**
-   * UNCOMMENT when we add more variations
    * If uswds is true, the type of table
    */
-  // @Prop() tableType?:
-  //   | 'borderless'
-  //   | 'striped' = 'borderless';
+  @Prop() tableType?: 'borderless' = 'borderless';
   
   
   /// DELETE below props once V1 table removed ///
@@ -135,13 +132,14 @@ export class VaTable {
     vaTable.setAttribute('rows', `${this.rows}`);
     vaTable.setAttribute('cols', `${this.cols}`);
     vaTable.setAttribute('uswds', this.uswds ? "true" : "false");
+    
     if (this.tableTitle) {
       vaTable.setAttribute('table-title', this.tableTitle);
     }
-    // Uncomment when we add more uwds variations
-    // if (this.tableType) {
-    //   vaTable.setAttribute('table-type', this.tableType);
-    // }
+
+    if (this.tableType) {
+      vaTable.setAttribute('table-type', this.tableType);
+    }
 
     //make a fragment containing all the cells, one for each slot
     const frag = this.makeFragment();

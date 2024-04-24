@@ -61,12 +61,9 @@ export class VaTableInner {
   @Prop() cols?: number;
 
   /**
-   * UNCOMMENT when we add more variations
    * If uswds is true, the type of table to be used
    */
-  // @Prop() tableType?:
-  //   | 'borderless'
-  //   | 'striped' = 'borderless';
+  @Prop() tableType?: 'borderless' = 'borderless';
 
   /**
    * The next direction to sort the rows
@@ -237,12 +234,12 @@ export class VaTableInner {
   }
 
   render() {
-    const { tableTitle, uswds } = this;
+    const { tableTitle, uswds, tableType } = this;
     
     if (uswds) {
       const classes = classnames({
         'usa-table': true,
-        'usa-table--borderless': true,
+        'usa-table--borderless': tableType === 'borderless',
       });
       return (
         <table class={classes}>

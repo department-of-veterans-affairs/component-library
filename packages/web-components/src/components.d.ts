@@ -1199,6 +1199,10 @@ export namespace Components {
          */
         "tableTitle"?: string;
         /**
+          * If uswds is true, the type of table
+         */
+        "tableType"?: 'borderless';
+        /**
           * Whether or not the component will use USWDS v3 styling.
          */
         "uswds"?: boolean;
@@ -1221,6 +1225,10 @@ export namespace Components {
           * The title of the table
          */
         "tableTitle": string;
+        /**
+          * If uswds is true, the type of table to be used
+         */
+        "tableType"?: 'borderless';
         /**
           * Whether or not the component will use USWDS v3 styling.
          */
@@ -3330,6 +3338,10 @@ declare namespace LocalJSX {
          */
         "tableTitle"?: string;
         /**
+          * If uswds is true, the type of table
+         */
+        "tableType"?: 'borderless';
+        /**
           * Whether or not the component will use USWDS v3 styling.
          */
         "uswds"?: boolean;
@@ -3352,6 +3364,10 @@ declare namespace LocalJSX {
           * The title of the table
          */
         "tableTitle"?: string;
+        /**
+          * If uswds is true, the type of table to be used
+         */
+        "tableType"?: 'borderless';
         /**
           * Whether or not the component will use USWDS v3 styling.
          */
