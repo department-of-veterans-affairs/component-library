@@ -209,6 +209,7 @@ export class VaTable {
           sort-column={this.sortColumn}
           descending={this.descending}
         >
+          <slot name="headers"></slot>
           <slot></slot>
         </va-table-inner>
       ) 
