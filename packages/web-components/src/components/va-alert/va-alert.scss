@@ -9,76 +9,11 @@
   position: relative;
 }
 
-.usa-alert__body::before,
-:host(:not([uswds='false'])) i {
-  font-family: 'Font Awesome 5 Free';
-  font-size: 26px;
-  font-style: normal;
-  font-weight: 900;
-  line-height: 1;
-}
-
-// Replace USWDS icons with Font Awesome icons.
-.usa-alert--info .usa-alert__body::before,
-.usa-alert--warning .usa-alert__body::before,
-.usa-alert--success .usa-alert__body::before,
-.usa-alert--error .usa-alert__body::before,
-.usa-alert--slim .usa-alert__body::before {
-  background: unset;
-  -webkit-mask: unset;
-}
-
-.usa-alert--info .usa-alert__body,
-.usa-alert--warning .usa-alert__body,
-.usa-alert--success .usa-alert__body,
-.usa-alert--error .usa-alert__body {
-  &::before {
-    top: 18px;
-  }
-}
-
-.usa-alert--slim .usa-alert__body,
-.usa-alert--slim.usa-alert--info .usa-alert__body,
-.usa-alert--slim.usa-alert--warning .usa-alert__body,
-.usa-alert--slim.usa-alert--success .usa-alert__body,
-.usa-alert--slim.usa-alert--error .usa-alert__body {
-  &::before {
-    top: 10px;
-    font-size: 22px;
-  }
-}
-
-.usa-alert--info .usa-alert__body::before {
-  content: '\F05A';
-  /* fa-circle-info */
-}
-
-.usa-alert--warning .usa-alert__body::before {
-  content: '\F071';
-  /* fa-exclamation-triangle */
-}
-
-.usa-alert--success .usa-alert__body::before {
-  content: '\F00C';
-  /* fa-check */
-}
-
-:host([status='continue']) .usa-alert--success .usa-alert__body::before {
-  content: '\F023';
-  /* fa-lock */
-}
-
-.usa-alert--error .usa-alert__body::before {
-  content: '\F06A';
-  /* fa-exclamation-circle */
-}
-
 :host(:not([uswds='false'])) .va-alert-close:hover {
   color: var(--vads-color-base);
 }
 
 @media screen and (min-width: 1024px) {
-
   :host([uswds='false'])[full-width='true'] .va-alert-close,
   :host([uswds='false'])[full-width=''] .va-alert-close {
     position: relative;
@@ -101,17 +36,30 @@
   top: 0;
 }
 
-i.fa-times-circle::before {
-  content: '\F057';
-  /* fa-times-circle*/
-}
-
 .bg-only {
   border: none;
 }
 
 :host([closeable]:not([closeable='false'])) .usa-alert .usa-alert__body {
   padding-right: 5.7rem;
+}
+
+// Overriding USWDS' default success icon when using the 'continue' status
+:host(:not([uswds="false"])) .usa-alert--continue.usa-alert--success .usa-alert__body::before {
+  mask: none;
+  background: transparent;
+}
+
+:host(:not([uswds="false"])) .va-alert__lock-icon {
+  position: absolute;
+  top: 12px;
+  left: 24px;
+}
+
+:host(:not([uswds="false"])) .usa-alert--continue.usa-alert--success.usa-alert--slim .va-alert__lock-icon {
+  position: absolute;
+  top: 6px;
+  left: 28px;
 }
 
 /* Original Component Styles. */

@@ -232,6 +232,17 @@ export namespace Components {
          */
         "uswds"?: boolean;
     }
+    interface VaButtonIcon {
+        "buttonType": keyof typeof this.buttonTypeMap;
+        /**
+          * If `true`, the component-library-analytics event is disabled.
+         */
+        "disableAnalytics"?: boolean;
+        /**
+          * The aria-label of the component.
+         */
+        "label"?: string;
+    }
     interface VaButtonPair {
         /**
           * If `true`, button pair will use Continue and Back for button text.
@@ -1465,6 +1476,10 @@ export interface VaButtonCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLVaButtonElement;
 }
+export interface VaButtonIconCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLVaButtonIconElement;
+}
 export interface VaButtonPairCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLVaButtonPairElement;
@@ -1627,6 +1642,12 @@ declare global {
     var HTMLVaButtonElement: {
         prototype: HTMLVaButtonElement;
         new (): HTMLVaButtonElement;
+    };
+    interface HTMLVaButtonIconElement extends Components.VaButtonIcon, HTMLStencilElement {
+    }
+    var HTMLVaButtonIconElement: {
+        prototype: HTMLVaButtonIconElement;
+        new (): HTMLVaButtonIconElement;
     };
     interface HTMLVaButtonPairElement extends Components.VaButtonPair, HTMLStencilElement {
     }
@@ -1878,6 +1899,7 @@ declare global {
         "va-banner": HTMLVaBannerElement;
         "va-breadcrumbs": HTMLVaBreadcrumbsElement;
         "va-button": HTMLVaButtonElement;
+        "va-button-icon": HTMLVaButtonIconElement;
         "va-button-pair": HTMLVaButtonPairElement;
         "va-card": HTMLVaCardElement;
         "va-checkbox": HTMLVaCheckboxElement;
@@ -2190,6 +2212,21 @@ declare namespace LocalJSX {
           * Whether or not the component will use USWDS v3 styling.
          */
         "uswds"?: boolean;
+    }
+    interface VaButtonIcon {
+        "buttonType"?: keyof typeof this.buttonTypeMap;
+        /**
+          * If `true`, the component-library-analytics event is disabled.
+         */
+        "disableAnalytics"?: boolean;
+        /**
+          * The aria-label of the component.
+         */
+        "label"?: string;
+        /**
+          * The event used to track usage of the component.
+         */
+        "onComponent-library-analytics"?: (event: VaButtonIconCustomEvent<any>) => void;
     }
     interface VaButtonPair {
         /**
@@ -3593,6 +3630,7 @@ declare namespace LocalJSX {
         "va-banner": VaBanner;
         "va-breadcrumbs": VaBreadcrumbs;
         "va-button": VaButton;
+        "va-button-icon": VaButtonIcon;
         "va-button-pair": VaButtonPair;
         "va-card": VaCard;
         "va-checkbox": VaCheckbox;
@@ -3648,6 +3686,7 @@ declare module "@stencil/core" {
             "va-banner": LocalJSX.VaBanner & JSXBase.HTMLAttributes<HTMLVaBannerElement>;
             "va-breadcrumbs": LocalJSX.VaBreadcrumbs & JSXBase.HTMLAttributes<HTMLVaBreadcrumbsElement>;
             "va-button": LocalJSX.VaButton & JSXBase.HTMLAttributes<HTMLVaButtonElement>;
+            "va-button-icon": LocalJSX.VaButtonIcon & JSXBase.HTMLAttributes<HTMLVaButtonIconElement>;
             "va-button-pair": LocalJSX.VaButtonPair & JSXBase.HTMLAttributes<HTMLVaButtonPairElement>;
             "va-card": LocalJSX.VaCard & JSXBase.HTMLAttributes<HTMLVaCardElement>;
             "va-checkbox": LocalJSX.VaCheckbox & JSXBase.HTMLAttributes<HTMLVaCheckboxElement>;

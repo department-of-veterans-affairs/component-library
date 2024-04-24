@@ -201,7 +201,14 @@ export class VaAlert {
               onClick={this.handleAlertBodyClick.bind(this)}
               role="presentation"
             >
-               {!slim && <slot name="headline"></slot>}
+              {status === 'continue' && (
+                <va-icon
+                  class="va-alert__lock-icon"
+                  icon="lock"
+                  size={slim ? 3 : 4}
+                ></va-icon>
+              )}
+              {!slim && <slot name="headline"></slot>}
               <slot></slot>
             </div>
           </div>
@@ -212,11 +219,7 @@ export class VaAlert {
               aria-label={this.closeBtnAriaLabel}
               onClick={this.closeHandler.bind(this)}
             >
-              <i
-                aria-hidden="true"
-                class="fa-times-circle"
-                role="presentation"
-              />
+              <va-icon icon="cancel" size={4}></va-icon>
             </button>
           )}
         </Host>
@@ -248,7 +251,7 @@ export class VaAlert {
             aria-label={this.closeBtnAriaLabel}
             onClick={this.closeHandler.bind(this)}
           >
-            <i aria-hidden="true" class="fa-times-circle" />
+            <va-icon icon="cancel" size={4}></va-icon>
           </button>
         )}
       </Host>
