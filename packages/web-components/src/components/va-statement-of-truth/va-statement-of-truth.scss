@@ -34,21 +34,7 @@ a {
   color: var(--vads-color-link);
 }
 
-i {
-  font-family: 'Font Awesome 5 Free';
-  font-style: normal;
-  font-weight: 900;
-  line-height: 1;
-}
-
-i.fa-arrow-up-right-from-square {
-  display: inline-block;
-  color: var(--vads-color-link);
-  font-size: 1.2rem;
-  margin: 0.5rem;
-}
-
-
-i.fa-arrow-up-right-from-square::before {
-  content: '\f35d';
+.privacy-policy-icon {
+  margin-left: 4px;
+  vertical-align: text-top;
 }
