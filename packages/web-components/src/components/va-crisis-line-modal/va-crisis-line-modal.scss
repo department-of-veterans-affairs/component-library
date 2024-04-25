@@ -98,14 +98,20 @@ button.va-crisis-line {
   padding: 8px;
 }
 
-.va-crisis-line-arrow {
-  height: 13px;
-  width: 16px;
-  padding-left: 8px;
-  padding-right: 8px;
-
+// Right-arrow on modal 'trigger'
+.va-icon__right-arrow {
+  position: relative;
+  top: 2px;
 }
 
+// Modal icons
+.va-clm__icon {
+  position: relative;
+  top: 12px;
+  margin-right: 23px;
+}
+
+// Modal styles
 .va-crisis-panel {
   color: var(--vads-color-base);
   &-body {
@@ -159,17 +165,4 @@ button.va-crisis-line {
       background-color: transparent;
     }
   }
-}
-
-i.fa-phone::before {
-  content: '\F095'; /* fa-phone*/
-}
-i.fa-mobile-alt::before {
-  content: '\F3cd'; /* fa-phone*/
-}
-i.fa-comments::before {
-  content: '\F086'; /* fa-phone*/
-}
-i.fa-deaf::before {
-  content: '\F2a4'; /* fa-phone*/
 }

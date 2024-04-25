@@ -311,6 +311,8 @@ describe('va-search-input', () => {
   it('fires submit event when a suggestion is clicked', async () => {
     const page = await newE2EPage();
     await page.setContent('<va-search-input uswds="false"></va-search-input>');
+    const inputEl = await page.find('va-search-input >>> input');
+    await inputEl.click(); // Focus on the element
 
     await page.$eval('va-search-input', (elm: any) => {
       elm.value = 'benefits';
@@ -336,6 +338,8 @@ describe('va-search-input', () => {
   it('displays up to 5 suggestions but not more', async () => {
     const page = await newE2EPage();
     await page.setContent('<va-search-input uswds="false"></va-search-input>');
+    const inputEl = await page.find('va-search-input >>> input');
+    await inputEl.click(); // Focus on the element
 
     await page.$eval('va-search-input', (elm: any) => {
       elm.value = 'benefits';
@@ -358,6 +362,33 @@ describe('va-search-input', () => {
     );
 
     expect(suggestions.length).toEqual(5);
+  });
+
+  it('displays 0 suggestions when the element has not recieved focus', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-search-input uswds="false"></va-search-input>');
+
+    await page.$eval('va-search-input', (elm: any) => {
+      elm.value = 'benefits';
+      elm.suggestions = [
+        'benefits delivery at discharge',
+        'benefits for surviving spouse',
+        'benefits for spouses',
+        'benefits for assisted living',
+        'benefits for family',
+        'x',
+        'y',
+        'z',
+      ];
+    });
+
+    await page.waitForChanges();
+
+    const suggestions = await page.findAll(
+      'va-search-input >>> [role="option"]',
+    );
+
+    expect(suggestions.length).toEqual(0);
   });
 
   it('fires an analytics event when button is clicked', async () => {
@@ -452,7 +483,7 @@ describe('va-search-input', () => {
           <input class="usa-input" id="search-field" name="search" type="search" aria-autocomplete="none" aria-label="Search" autocomplete="off">
           <button class="usa-button" type="submit">
           <span class="usa-search__submit-text">Search VA.gov</span>
-          <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgd2lkdGg9IjI0Ij48cGF0aCBkPSJNMCAwaDI0djI0SDB6IiBmaWxsPSJub25lIi8+PHBhdGggZmlsbD0iI2ZmZiIgZD0iTTE1LjUgMTRoLS43OWwtLjI4LS4yN0E2LjQ3MSA2LjQ3MSAwIDAgMCAxNiA5LjUgNi41IDYuNSAwIDEgMCA5LjUgMTZjMS42MSAwIDMuMDktLjU5IDQuMjMtMS41N2wuMjcuMjh2Ljc5bDUgNC45OUwyMC40OSAxOWwtNC45OS01em0tNiAwQzcuMDEgMTQgNSAxMS45OSA1IDkuNVM3LjAxIDUgOS41IDUgMTQgNy4wMSAxNCA5LjUgMTEuOTkgMTQgOS41IDE0eiIvPjwvc3ZnPg==" class="usa-search__submit-icon" alt="Search">
+          <va-icon class="hydrated usa-search__submit-icon"></va-icon>
           </button>
         </form>
         </mock:shadow-root>
@@ -714,6 +745,8 @@ describe('va-search-input', () => {
   it('uswds fires submit event when a suggestion is clicked', async () => {
     const page = await newE2EPage();
     await page.setContent('<va-search-input uswds></va-search-input>');
+    const inputEl = await page.find('va-search-input >>> input');
+    await inputEl.click(); // Focus on the element
 
     await page.$eval('va-search-input', (elm: any) => {
       elm.value = 'benefits';
@@ -740,6 +773,8 @@ describe('va-search-input', () => {
   it('uswds displays up to 5 suggestions but not more', async () => {
     const page = await newE2EPage();
     await page.setContent('<va-search-input uswds></va-search-input>');
+    const inputEl = await page.find('va-search-input >>> input');
+    await inputEl.click(); // Focus on the element
 
     await page.$eval('va-search-input', (elm: any) => {
       elm.value = 'benefits';

@@ -18,7 +18,7 @@ describe('va-additional-info', () => {
               <span class="additional-info-title">
                 More info
               </span>
-              <i class="fa-angle-down" role="presentation"></i>
+              <va-icon class="additional-info-icon hydrated"></va-icon>
             </div>
           </a>
           <div class="closed" id="info" style="--calc-max-height:calc(0px + 1.125rem);">
@@ -245,7 +245,7 @@ describe('va-additional-info', () => {
               <span class="additional-info-title">
                 More info
               </span>
-              <i class="fa-angle-down" role="presentation"></i>
+              <va-icon class="additional-info-icon hydrated"></va-icon>
             </div>
           </a>
           <div class="closed" id="info" style="--calc-max-height:calc(0px + 1.125rem);">

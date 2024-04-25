@@ -117,7 +117,11 @@ export class VaAdditionalInfo {
           >
             <div>
               <span class="additional-info-title">{this.trigger}</span>
-              <i class="fa-angle-down" role="presentation" />
+              <va-icon
+                class="additional-info-icon"
+                icon="chevron_right"
+                size={3}
+              ></va-icon>
             </div>
           </a>
           <div id="info" class={infoClass}>
@@ -138,7 +142,11 @@ export class VaAdditionalInfo {
           >
             <div>
               <span class="additional-info-title">{this.trigger}</span>
-              <i class="fa-angle-down" role="presentation" />
+              <va-icon
+                class="additional-info-icon"
+                icon="chevron_right"
+                size={3}
+              ></va-icon>
             </div>
           </a>
           <div id="info" class={this.open ? 'open' : 'closed'}>

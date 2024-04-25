@@ -41,7 +41,7 @@ describe('va-button', () => {
     <va-button class="hydrated" back uswds="false">
       <mock:shadow-root>
         <button type="button" part="button">
-          <i aria-hidden="true" class="fa fa-angles-left"></i>
+          <va-icon class="hydrated va-button--icon"></va-icon>
           Back
         </button>
       </mock:shadow-root>
@@ -58,7 +58,7 @@ describe('va-button', () => {
       <mock:shadow-root>
         <button type="button" part="button">
           Continue
-          <i aria-hidden="true" class="fa fa-angles-right"></i>
+          <va-icon class="hydrated va-button--icon"></va-icon>
         </button>
       </mock:shadow-root>
     </va-button>
@@ -84,7 +84,9 @@ describe('va-button', () => {
 
   it('renders a submit button', async () => {
     const page = await newE2EPage();
-    await page.setContent('<va-button text="Edit" submit uswds="false"></va-button>');
+    await page.setContent(
+      '<va-button text="Edit" submit uswds="false"></va-button>',
+    );
     const element = await page.find('va-button');
     expect(element).toEqualHtml(`
     <va-button class="hydrated" text="Edit" submit uswds="false">
@@ -99,7 +101,9 @@ describe('va-button', () => {
 
   it('renders a disabled button', async () => {
     const page = await newE2EPage();
-    await page.setContent('<va-button text="Edit" disabled uswds="false"></va-button>');
+    await page.setContent(
+      '<va-button text="Edit" disabled uswds="false"></va-button>',
+    );
     const element = await page.find('va-button');
     expect(element).toEqualHtml(`
     <va-button class="hydrated" text="Edit" disabled uswds="false">
@@ -114,21 +118,27 @@ describe('va-button', () => {
 
   it('ignores text value and displays Continue when continue is true', async () => {
     const page = await newE2EPage();
-    await page.setContent('<va-button text="Edit" continue uswds="false"></va-button>');
+    await page.setContent(
+      '<va-button text="Edit" continue uswds="false"></va-button>',
+    );
     const button = await page.find('va-button >>> button');
     expect(button.textContent).toEqual('Continue');
   });
 
   it('ignores text value and displays Back when back is true', async () => {
     const page = await newE2EPage();
-    await page.setContent('<va-button text="Edit" back uswds="false"></va-button>');
+    await page.setContent(
+      '<va-button text="Edit" back uswds="false"></va-button>',
+    );
     const button = await page.find('va-button >>> button');
     expect(button.textContent).toEqual('Back');
   });
 
   it(`doesn't display icons if both continue and back are true`, async () => {
     const page = await newE2EPage();
-    await page.setContent('<va-button back continue uswds="false"></va-button>');
+    await page.setContent(
+      '<va-button back continue uswds="false"></va-button>',
+    );
     const element = await page.find('va-button');
     expect(element).toEqualHtml(`
     <va-button class="hydrated" back continue uswds="false">
@@ -176,7 +186,9 @@ describe('va-button', () => {
 
   it(`doesn't fire click event when disabled is true`, async () => {
     const page = await newE2EPage();
-    await page.setContent('<va-button text="Edit" disabled uswds="false"></va-button>');
+    await page.setContent(
+      '<va-button text="Edit" disabled uswds="false"></va-button>',
+    );
     const clickSpy = await page.spyOnEvent('click');
     const button = await page.find('va-button >>> button');
     await button.click();
@@ -213,7 +225,7 @@ describe('va-button', () => {
   it('uswds v3 renders a secondary button variant (usa-button--outline)', async () => {
     const page = await newE2EPage();
     await page.setContent('<va-button text="Edit" secondary></va-button>');
-    const button = await page.findAll("va-button >>> .usa-button--outline");
+    const button = await page.findAll('va-button >>> .usa-button--outline');
     expect(button.length).toBe(1);
   });
 
@@ -232,7 +244,7 @@ describe('va-button', () => {
     <va-button back="" class="hydrated" uswds="">
       <mock:shadow-root>
         <button class="usa-button usa-button--outline" type="button" part="button">
-          <i aria-hidden="true" class="fa fa-angles-left"></i>
+          <va-icon class="hydrated va-button--icon"></va-icon>
           Back
         </button>
       </mock:shadow-root>
@@ -249,7 +261,7 @@ describe('va-button', () => {
       <mock:shadow-root>
         <button class="usa-button" type="button" part="button">
           Continue
-          <i aria-hidden="true" class="fa fa-angles-right"></i>
+          <va-icon class="hydrated va-button--icon"></va-icon>
         </button>
       </mock:shadow-root>
     </va-button>

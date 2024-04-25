@@ -47,19 +47,16 @@
   margin: 0px auto;
 }
 
-:host([status='info']) .usa-modal__main::before {
+.va-modal-alert__icon {
   color: var(--vads-color-base-darker);
-  content: '\F05A'; /* fa-circle-info */
+  position: absolute;
+  top: 32px;
+  left: 16px;
 }
 
 :host([status='continue']) .usa-modal {
   border-left-color: var(--vads-color-success-dark);
   background-color: var(--vads-color-success-lighter);
-}
-
-:host([status='continue']) .usa-modal__main::before {
-  color: var(--vads-color-base-darker);
-  content: '\F023'; /* fa-lock */
 }
 
 :host([status='success']) .usa-modal {
@@ -92,19 +89,9 @@
   background-color: var(--vads-color-gold-lightest);
 }
 
-:host([status='warning']) .usa-modal__main::before {
-  color: var(--vads-color-base-darker);
-  content: '\F071'; /* fa-triangle-exclamation */
-}
-
 :host([status='error']) .usa-modal {
   border-left-color: var(--vads-color-secondary-dark);
   background-color: var(--vads-color-secondary-lightest);
-}
-
-:host([status='error']) .usa-modal__main::before {
-  color: var(--vads-color-base-darker);
-  content: '\F06A'; /* fa-circle-exclamation */
 }
 
 .va-modal-alert {
@@ -198,18 +185,6 @@ h1 {
 
 .va-modal-title {
   margin: 0 0 1rem 0;
-}
-
-i::before {
-  -webkit-font-smoothing: antialiased;
-  content: '\F057'; /* fa-times-circle*/
-  display: inline-block;
-  font-family: 'Font Awesome 5 Free';
-  font-style: normal;
-  font-variant: normal;
-  font-weight: 900;
-  line-height: 1;
-  text-rendering: auto;
 }
 
 .alert-actions button {

@@ -1,0 +1,38 @@
+@forward 'settings';
+
+@use 'usa-button/src/styles/usa-button';
+
+@import '../../mixins/focusable.css';
+
+// Needed so button doesn't cause re-flow issues
+:host {
+  display: inline-block;
+}
+
+// Styles for "regular" buttons
+:host .usa-button {
+  background: var(--vads-button-color-background-secondary-on-light, #FFFFFF);
+  color: var(--vads-color-link);
+  text-transform: uppercase;
+
+  &:hover, &:focus {
+    background: var(--vads-color-primary-lighter);
+  }
+}
+
+// Styles for "destructive" buttons
+:host .usa-button.va-button-icon--destructive {
+  color: var(--vads-color-error);
+
+  &:hover, &:focus {
+    background: var(--vads-color-secondary-lightest);
+  }
+}
+
+// Fix to off-centered content when icon present
+:host button.usa-button va-icon {
+    display: inline-block;
+    height: 0;
+    vertical-align: top;
+    margin-right: 4px;
+}
