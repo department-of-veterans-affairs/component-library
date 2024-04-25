@@ -9,6 +9,10 @@
   text-decoration: underline;
 }
 
+:host a.va-link--reverse {
+  color: var(--vads-color-white);
+}
+
 :host([active]:not([active='false'])) a {
   font-weight: 700;
 }

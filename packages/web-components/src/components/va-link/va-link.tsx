@@ -1,4 +1,5 @@
 import { Component, Event, EventEmitter, Host, h, Prop } from '@stencil/core';
+import classNames from 'classnames';
 
 /**
  * @componentName Link
@@ -20,7 +21,7 @@ export class VaLink {
   /**
    * If `true`, the anchor text will be bolded and include a right arrow icon.
    */
-  @Prop({reflect: true}) active?: boolean = false;
+  @Prop({ reflect: true }) active?: boolean = false;
 
   /**
    * If `true`, a calendar icon will be displayed before the anchor text.
@@ -73,6 +74,11 @@ export class VaLink {
   @Prop() video?: boolean = false;
 
   /**
+   * If 'true', will represent the link with white text instead of blue.
+   */
+  @Prop() reverse?: boolean = false;
+
+  /**
    * The event used to track usage of the component.
    */
   @Event({
@@ -91,7 +97,7 @@ export class VaLink {
         details: {
           label: this.text,
         },
-      }
+      };
       this.componentLibraryAnalytics.emit(detail);
     }
   };
@@ -116,13 +122,18 @@ export class VaLink {
       pages,
       text,
       video,
+      reverse,
     } = this;
+
+    const linkClass = classNames({
+      'va-link--reverse': reverse,
+    });
 
     // Active link variant
     if (active) {
       return (
         <Host>
-          <a href={href} onClick={handleClick}>
+          <a href={href} class={linkClass} onClick={handleClick}>
             {text}
             <i aria-hidden="true" />
           </a>
@@ -134,7 +145,13 @@ export class VaLink {
     if (channel || video) {
       return (
         <Host>
-          <a href={href} onClick={handleClick} rel="noopener" target="_blank">
+          <a
+            href={href}
+            class={linkClass}
+            onClick={handleClick}
+            rel="noopener"
+            target="_blank"
+          >
             <i aria-hidden="true" />
             {text} <dfn>{channel ? 'YouTube' : 'on YouTube'}</dfn>
           </a>
@@ -146,19 +163,29 @@ export class VaLink {
     if (calendar) {
       return (
         <Host>
-         <a href={href} download={filename} onClick={handleClick}>
-          <i aria-hidden="true" />
-          {text}
-        </a>
-      </Host>
-      )
+          <a
+            href={href}
+            class={linkClass}
+            download={filename}
+            onClick={handleClick}
+          >
+            <i aria-hidden="true" />
+            {text}
+          </a>
+        </Host>
+      );
     }
 
     // Download link variant
     if (download) {
       return (
         <Host>
-          <a href={href} download={filename} onClick={handleClick}>
+          <a
+            href={href}
+            class={linkClass}
+            download={filename}
+            onClick={handleClick}
+          >
             <i aria-hidden="true" />
             {text}{' '}
             {filetype && (
@@ -175,7 +202,7 @@ export class VaLink {
     // Default
     return (
       <Host>
-        <a href={href} onClick={handleClick}>
+        <a href={href} class={linkClass} onClick={handleClick}>
           {text}
         </a>
       </Host>
