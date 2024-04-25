@@ -14,8 +14,8 @@ describe('va-privacy-agreement', () => {
            <span class="description" slot="description">
              Please read and accept the
              <a href="/privacy-policy/" target="_blank">
-               privacy policy 
-               <i aria-hidden="true" class="fa-arrow-up-right-from-square" role="img"></i>
+               privacy policy
+               <va-icon class="hydrated privacy-policy-icon"></va-icon>
                <span class="sr-only">opens in a new window</span>
              </a>.
            </span>
@@ -61,7 +61,7 @@ describe('va-privacy-agreement', () => {
     expect(checkedValue).toBeFalsy();
   });
 
-  /** 
+  /**
    * Skipping the following tests because accessing the shadowRoot of the checkbox
    * in order to trigger an input click is flakey. The tests pass locally but fail in CI.
    */
@@ -164,8 +164,8 @@ describe('va-privacy-agreement', () => {
            <span class="description" slot="description">
              Please read and accept the
              <a href="/privacy-policy/" target="_blank">
-               privacy policy 
-               <i aria-hidden="true" class="fa-arrow-up-right-from-square" role="img"></i>
+               privacy policy
+               <va-icon class="hydrated privacy-policy-icon"></va-icon>
                <span class="usa-sr-only">opens in a new window</span>
              </a>.
            </span>
@@ -178,7 +178,7 @@ describe('va-privacy-agreement', () => {
   it('uswds V3 renders error label when showError is true', async () => {
     const page = await newE2EPage();
     await page.setContent('<va-privacy-agreement checked showError="true" uswds></va-privacy-agreement>');
-  
+
     const element = await page.find('va-privacy-agreement >>> va-checkbox >>> span.usa-label--error');
     expect(element).toBeTruthy();
   });
@@ -219,7 +219,7 @@ describe('va-privacy-agreement', () => {
     expect(checkedValue).toBeFalsy();
   });
 
-  /** 
+  /**
    * Skipping the following tests because accessing the shadowRoot of the checkbox
    * in order to trigger an input click is flakey. The tests pass locally but fail in CI.
    */

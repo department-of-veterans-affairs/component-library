@@ -163,22 +163,31 @@ export class VaButton {
       });
       return (
         <Host>
-          <button 
+          <button
             class={buttonClass}
             aria-disabled={ariaDisabled}
             aria-label={label}
             type={type}
-            part="button">
-              {back && !_continue && (
-                  <i aria-hidden="true" class="fa fa-angles-left" />
-                )}
-              {buttonText}
-              {_continue && !back && (
-                <i aria-hidden="true" class="fa fa-angles-right" />
-              )}
+            part="button"
+          >
+            {back && !_continue && (
+              <va-icon
+                class="va-button--icon"
+                icon="navigate_far_before"
+                size={3}
+              ></va-icon>
+            )}
+            {buttonText}
+            {_continue && !back && (
+              <va-icon
+                class="va-button--icon"
+                icon="navigate_far_next"
+                size={3}
+              ></va-icon>
+            )}
           </button>
         </Host>
-      )
+      );
     } else {
       const buttonClass = classnames({
         'va-button-primary--alternate': primaryAlternate
@@ -193,15 +202,23 @@ export class VaButton {
             part="button"
           >
             {back && !_continue && (
-              <i aria-hidden="true" class="fa fa-angles-left" />
+              <va-icon
+                class="va-button--icon"
+                icon="navigate_far_before"
+                size={2}
+              ></va-icon>
             )}
             {buttonText}
             {_continue && !back && (
-              <i aria-hidden="true" class="fa fa-angles-right" />
+              <va-icon
+                class="va-button--icon"
+                icon="navigate_far_next"
+                size={2}
+              ></va-icon>
             )}
           </button>
         </Host>
-      )
+      );
     }
 
   }
