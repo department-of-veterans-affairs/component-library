@@ -1244,6 +1244,10 @@ export namespace Components {
           * Whether or not the component will use USWDS v3 styling.
          */
         "uswds"?: boolean;
+        /**
+          * A live reference to the va-table-rows in the table which are hard to access from this component
+         */
+        "vaTableRowRefs"?: any;
     }
     interface VaTableRow {
     }
@@ -3409,6 +3413,10 @@ declare namespace LocalJSX {
           * Whether or not the component will use USWDS v3 styling.
          */
         "uswds"?: boolean;
+        /**
+          * A live reference to the va-table-rows in the table which are hard to access from this component
+         */
+        "vaTableRowRefs"?: any;
     }
     interface VaTableRow {
     }

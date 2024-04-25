@@ -210,6 +210,7 @@ export class VaTable {
           table-title={this.tableTitle}
           sort-column={this.sortColumn}
           descending={this.descending}
+          vaTableRowRefs={this.el.children}
         >
           <slot name="headers"></slot>
           <slot></slot>

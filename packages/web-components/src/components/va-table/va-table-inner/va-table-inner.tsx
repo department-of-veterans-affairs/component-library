@@ -31,6 +31,10 @@ export class VaTableInner {
   @Element() el: HTMLElement;
 
   /**
+   * A live reference to the va-table-rows in the table which are hard to access from this component
+   */
+  @Prop() vaTableRowRefs?: any;
+  /**
    * The title of the table
    */
   @Prop() tableTitle: string;
@@ -76,12 +80,10 @@ export class VaTableInner {
     if (!this.uswds) {
       // For IE11 compatibility. `el.children` renders booleans instead of html elements,
       // so instead we use `el.childNodes` and filter out nodes that aren't a proper tag
-      const elementChildren = (el: HTMLElement) =>
+      const elementChildren = (el: Node) =>
         Array.from(el.childNodes).filter(node => node.nodeName !== '#text');
 
-      const headerRow = Array.from(
-        this.el.querySelectorAll('va-table-row'),
-      )[0] as HTMLVaTableRowElement;
+      const headerRow = this.vaTableRowRefs[0];
 
       this.headers = elementChildren(headerRow) as Array<HTMLElement>;
       const columns = [];
@@ -123,8 +125,8 @@ export class VaTableInner {
       const alignment = {};
 
       const handleCellAdjustments = () => {
-        const rows = Array.from(this.el.querySelectorAll('va-table-row'))
-          .filter((row) => row.slot !== 'headers') as Array<HTMLVaTableRowElement>;
+        const slot = this.el.children[1] as HTMLSlotElement;
+        const rows = slot.assignedNodes().filter(node => node.nodeName !== '#text');
 
         Array.from(rows).forEach((row, index) => {
           const cells = elementChildren(row);
@@ -155,7 +157,7 @@ export class VaTableInner {
       handleCellAdjustments();
 
       // Watch for changes to the table body slot.
-      const slot = this.el.shadowRoot.querySelectorAll('slot')[1].assignedElements()[0] as HTMLSlotElement;
+      const bodyRow = this.vaTableRowRefs[1];
       const callback = mutationList => {
         for (const mutation of mutationList) {
           if (mutation.type === 'childList' || mutation.type === 'characterData') {
@@ -165,7 +167,7 @@ export class VaTableInner {
       };
 
       this.observer = new MutationObserver(callback);
-      this.observer.observe(slot, {
+      this.observer.observe(bodyRow, {
         childList: true,
         subtree: true,
         characterData: true,
@@ -184,7 +186,7 @@ export class VaTableInner {
       // Update the sort icon
       if (this.sortColumn >= 0) {
         const icon = this.sortAscending ? descendingIcon : ascendingIcon;
-        const button = this.el.querySelector('va-table-row[slot] button');
+        const button = this.vaTableRowRefs[0].children[this.sortColumn].querySelector('button')
         const node = button.children[0];
         node.outerHTML = icon;
       }
@@ -197,7 +199,7 @@ export class VaTableInner {
 
     // Starting at index 1 to skip the header row
     const sortingFunc = this.sortAscending ? quicksort : reverseQuicksort;
-    sortingFunc(this.el.children, 1, this.el.children.length - 1, cellSelector);
+    sortingFunc(this.vaTableRowRefs, 1, this.vaTableRowRefs.length - 1, cellSelector);
     sortableHeader.setAttribute(
       'aria-sort',
       this.sortAscending ? 'ascending' : 'descending',
@@ -235,7 +237,6 @@ export class VaTableInner {
 
   render() {
     const { tableTitle, uswds, tableType } = this;
-    
     if (uswds) {
       const classes = classnames({
         'usa-table': true,
@@ -245,7 +246,7 @@ export class VaTableInner {
         <table class={classes}>
           { tableTitle && <caption>{tableTitle}</caption> }
           <thead>{ this.makeRow(0) }</thead>
-          <tbody>
+          <tbody id="va-table-body">
             { this.getBodyRows() }
           </tbody>
         </table>

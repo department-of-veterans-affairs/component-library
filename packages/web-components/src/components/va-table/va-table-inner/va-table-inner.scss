@@ -37,7 +37,7 @@ caption {
 }
 
 @media screen and (max-width: 768px) {
-  thead {
+  thead, ::slotted([slot=headers]) {
     display: none;
   }
 
