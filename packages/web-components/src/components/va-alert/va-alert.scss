@@ -62,6 +62,15 @@
   left: 28px;
 }
 
+@media screen and (max-width: 64em) {
+  :host(:not([uswds="false"])) .va-alert__lock-icon {
+    left: 12px;
+  }
+  :host(:not([uswds="false"])) .usa-alert--continue.usa-alert--success.usa-alert--slim .va-alert__lock-icon {
+    left: 12px;
+  }
+}
+
 /* Original Component Styles. */
 
 @import '../../mixins/accessibility.css';
