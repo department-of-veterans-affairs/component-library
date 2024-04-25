@@ -12,8 +12,6 @@ import {
 } from '@stencil/core';
 import classnames from 'classnames';
 
-import searchIcon from '../../assets/search--white.svg';
-
 /**
  * @componentName Search input
  * @maturityCategory use
@@ -448,10 +446,12 @@ export class VaSearchInput {
       return (
         <Host onBlur={handleBlur}>
           <form class={formClasses} role="search">
-            <label class="usa-sr-only" htmlFor="search-field">{label}</label>
-            <input 
-              class="usa-input" 
-              id="search-field" 
+            <label class="usa-sr-only" htmlFor="search-field">
+              {label}
+            </label>
+            <input
+              class="usa-input"
+              id="search-field"
               name="search"
               type="search"
               ref={el => (this.inputRef = el as HTMLInputElement)}
@@ -467,17 +467,19 @@ export class VaSearchInput {
               role={role}
               value={value}
             />
-            <button 
-              class="usa-button" 
+            <button
+              class="usa-button"
               type="submit"
               onClick={handleButtonClick}
             >
-              {!small && <span class="usa-search__submit-text">{buttonText}</span>}
-              <img 
-                src={searchIcon}
-                class="usa-search__submit-icon" 
-                alt="Search" 
-              />
+              {!small && (
+                <span class="usa-search__submit-text">{buttonText}</span>
+              )}
+              <va-icon
+                class="usa-search__submit-icon"
+                icon="search"
+                size={3}
+              ></va-icon>
             </button>
             {isListboxOpen && (
               <ul
@@ -505,7 +507,7 @@ export class VaSearchInput {
             )}
           </form>
         </Host>
-      )
+      );
     }
 
     return (
