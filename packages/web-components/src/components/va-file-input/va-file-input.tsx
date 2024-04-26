@@ -98,6 +98,9 @@ export class VaFileInput {
     const target = e.target as HTMLInputElement;
     this.vaChange.emit({ files: target.files || files });
 
+    console.log('value before', target.value);
+    target.value = '';
+    console.log('value after', target.value);
     if (this.enableAnalytics) {
       this.componentLibraryAnalytics.emit({
         componentName: 'va-file-input',
