@@ -182,6 +182,16 @@ export class VaTextInput {
   })
   componentLibraryAnalytics: EventEmitter;
 
+  /**
+   * 
+   */
+    @Event({
+      // eventName: 'input-changed',
+      composed: true,
+      bubbles: true,
+    })
+    inputChanged: EventEmitter;
+
   private getInputType() {
     if (!this.allowedInputTypes.includes(this.type)) {
       consoleDevError(
@@ -210,6 +220,7 @@ export class VaTextInput {
   private handleInput = (e: Event) => {
     const target = e.target as HTMLInputElement;
     this.value = target.value;
+    this.inputChanged.emit(target.value);
   };
 
   private handleBlur = () => {

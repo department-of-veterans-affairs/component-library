@@ -5,7 +5,8 @@ import {
   h,
   Element,
   Event,
-  EventEmitter
+  EventEmitter,
+  Listen
 } from '@stencil/core';
 
 /**
@@ -91,14 +92,26 @@ export class VaStatementOfTruth {
   })
   vaCheckboxChange: EventEmitter;
 
+  @Listen('inputChanged')
+    getChangedValue(event: CustomEvent) {
+      // console.log("inputChanged data:", event);
+        if (event.detail) {
+            let data = event.detail;
+            // do something with your data
+            // console.log("inputChanged data:", data);
+            this.vaInputChange.emit(data);
+
+        }
+    }
+
   /**
    * Reference to host element
    */
   @Element() el: HTMLElement;
 
-  private handleInputChange = (event: Event) => {
-    this.vaInputChange.emit(event);
-  };
+  // private handleInputChange = (event: Event) => {
+  //   this.vaInputChange.emit(event);
+  // };
 
   private handleInputBlur = (event: Event) => {
     this.vaInputBlur.emit(event);
@@ -161,7 +174,7 @@ export class VaStatementOfTruth {
             value={inputValue}
             message-aria-describedby={inputMessageAriaDescribedby}
             required
-            onInput={this.handleInputChange}
+            // onInput={this.handleInputChange}
             onBlur={this.handleInputBlur}
             ref={field => (this.inputField = field)}
           />
