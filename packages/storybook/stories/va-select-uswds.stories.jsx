@@ -42,6 +42,7 @@ const defaultArgs = {
     </option>,
   ],
   'use-add-button': false,
+  'disabled': false,
 };
 
 const Template = ({
@@ -55,6 +56,7 @@ const Template = ({
   'aria-describedby-message': ariaDescribedbyMessage,
   options,
   'use-add-button': useAddButton,
+  disabled,
 }) => {
   const [modifiedOptions, setModifiedOptions] = useState(options);
 
@@ -83,6 +85,7 @@ const Template = ({
         aria-live-region-text={ariaLiveRegionText}
         message-aria-describedby={ariaDescribedbyMessage}
         use-add-button={useAddButton}
+        disabled={disabled}
       >
         {modifiedOptions}
       </va-select>

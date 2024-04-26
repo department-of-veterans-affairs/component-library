@@ -1112,6 +1112,10 @@ export namespace Components {
     }
     interface VaSelect {
         /**
+          * disable select
+         */
+        "disabled"?: boolean;
+        /**
           * Whether or not to fire the analytics events
          */
         "enableAnalytics"?: boolean;
@@ -3256,6 +3260,10 @@ declare namespace LocalJSX {
         "uswds"?: boolean;
     }
     interface VaSelect {
+        /**
+          * disable select
+         */
+        "disabled"?: boolean;
         /**
           * Whether or not to fire the analytics events
          */

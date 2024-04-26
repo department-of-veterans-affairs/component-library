@@ -176,6 +176,15 @@ describe('va-select', () => {
     expect(keyDownSpy).toHaveReceivedEventTimes(2);
   });
 
+  it('renders disabled select', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-select disabled />');
+
+    // Render a disabled select
+    const selectElement = await page.find('va-select >>> select');
+    expect(selectElement.disabled).toBe.true;
+  });
+
   // Begin USWDS v3 test
   it('uswds v3 renders', async () => {
     const page = await newE2EPage();
@@ -232,5 +241,14 @@ describe('va-select', () => {
     expect(inputEl.getAttribute('aria-describedby')).not.toBeNull();
     expect(inputEl.getAttribute('aria-describedby')).toContain('error-message');
     expect(inputEl.getAttribute('aria-describedby')).toContain('input-message');
+  });
+
+  it('renders disabled select', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-select disabled />');
+
+    // Render a disabled select
+    const selectElement = await page.find('va-select >>> select');
+    expect(selectElement.disabled).toBe.true;
   });
 });

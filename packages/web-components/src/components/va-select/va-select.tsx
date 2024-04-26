@@ -90,6 +90,11 @@ export class VaSelect {
   @Prop() messageAriaDescribedby?: string;
 
   /**
+   * disable select
+   */
+  @Prop() disabled?: boolean = false;
+
+  /**
    * The event attached to select's onkeydown
    */
   @Event() vaKeyDown: EventEmitter;
@@ -178,14 +183,14 @@ export class VaSelect {
   }
 
   render() {
-    const { error, reflectInputError, invalid, label, required, name, hint, messageAriaDescribedby, uswds } = this;
+    const { error, reflectInputError, invalid, label, required, name, hint, messageAriaDescribedby, uswds, disabled } = this;
 
     const errorID = uswds ? 'input-error-message': 'error-message';
-    const ariaDescribedbyIds = 
+    const ariaDescribedbyIds =
       `${messageAriaDescribedby ? 'input-message' : ''} ${
         error ? errorID : ''} ${
         hint ? 'input-hint' : ''}`.trim() || null; // Null so we don't add the attribute if we have an empty string
-    
+
     if (uswds) {
       const labelClass = classnames({
         'usa-label': true,
@@ -207,7 +212,7 @@ export class VaSelect {
           <span id={errorID} role="alert">
             {error && (
               <Fragment>
-                <span class="usa-sr-only">{i18next.t('error')}</span> 
+                <span class="usa-sr-only">{i18next.t('error')}</span>
                 <span class="usa-error-message">{error}</span>
               </Fragment>
             )}
@@ -223,6 +228,7 @@ export class VaSelect {
             onKeyDown={() => this.handleKeyDown()}
             onChange={e => this.handleChange(e)}
             part="select"
+            disabled={disabled}
           >
             <option key="0" value="" selected>{i18next.t('select')}</option>
             {this.options}
@@ -259,6 +265,7 @@ export class VaSelect {
             onKeyDown={() => this.handleKeyDown()}
             onChange={e => this.handleChange(e)}
             part="select"
+            disabled={disabled}
           >
             {this.options}
           </select>
