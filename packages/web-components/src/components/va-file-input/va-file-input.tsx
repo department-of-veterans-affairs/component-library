@@ -8,8 +8,8 @@ import {
   Fragment,
   Event,
   EventEmitter,
+  State,
 } from '@stencil/core';
-import classnames from 'classnames';
 import i18next from 'i18next';
 import { fileInput } from './va-file-input-upgrader';
 
@@ -27,6 +27,9 @@ import { fileInput } from './va-file-input-upgrader';
 })
 export class VaFileInput {
   @Element() el: HTMLElement;
+  @State() file?: File;
+  @State() dragActive: boolean = false;
+  @State() uploadStatus: 'idle' | 'uploading' | 'success' | 'failure' = 'idle';
 
   /**
    * The label for the file input.
@@ -79,6 +82,11 @@ export class VaFileInput {
   @Prop() uswds?: boolean = false;
 
   /**
+   * Whether or not the component will use USWDS v3 styling.
+   */
+  @Prop() uploadPercentage?: number;
+
+  /**
    * The event emitted when the file input value changes.
    */
   @Event() vaChange: EventEmitter;
@@ -94,11 +102,18 @@ export class VaFileInput {
   })
   componentLibraryAnalytics: EventEmitter;
 
-  private handleChange = (e: Event, files?: any) => {
-    const target = e.target as HTMLInputElement;
-    this.vaChange.emit({ files: target.files || files });
-    target.value = '';
-    
+  private handleChange = (e: Event) => {
+    const input = e.target as HTMLInputElement;
+    if (input.files && input.files.length > 0) {
+      console.log('success')
+      this.file = input.files[0];
+      this.vaChange.emit({ files: [this.file] });
+      this.uploadStatus = 'success';
+    } else
+      console.log('fail');
+
+    input.value = '';
+
     if (this.enableAnalytics) {
       this.componentLibraryAnalytics.emit({
         componentName: 'va-file-input',
@@ -113,6 +128,15 @@ export class VaFileInput {
   private handleButtonClick = () => {
     this.el.shadowRoot.getElementById('fileInputField').click();
   };
+
+  private removeFile = () => {
+    this.file = undefined;
+    this.uploadStatus = 'idle';
+  }
+
+  private changeFile = () => {
+
+  }
 
   /**
    * Makes sure the button text always has a value.
@@ -139,19 +163,11 @@ export class VaFileInput {
   }
 
   render() {
-    const { label, name, required, accept, error, hint, uswds } = this;
+    const { label, name, required, accept, error, hint, uswds, file, uploadStatus, uploadPercentage } = this;
 
     const text = this.getButtonText();
 
     if (uswds) {
-      const labelClass = classnames({
-        'usa-label': true,
-        'usa-label--error': error,
-      });
-      const inputClass = classnames({
-        'usa-file-input': true,
-        'usa-input--error': error,
-      });
       const ariaDescribedbyIds =
         `${hint ? 'input-hint-message' : ''} ${
           error ? 'input-error-message' : ''
@@ -160,39 +176,83 @@ export class VaFileInput {
       return (
         <Host>
           {label && (
-            <label htmlFor="fileInputButton" class={labelClass} part="label">
-              {label}
-              {required && (
-                <span class="usa-label--required">
-                  {' '}
-                  {i18next.t('required')}
-                </span>
-              )}
-            </label>
+            <div class="label-header">
+              <label htmlFor="fileInputButton" part="label">
+                {label}
+                {required && (
+                  <span>
+                    {' '}
+                    {i18next.t('required')}
+                  </span>
+                )}
+              </label>
+            </div>
           )}
           {hint && (
-            <span class="usa-hint" id="input-hint-message">
-              {hint}
-            </span>
+            <div id="input-hint-message">{hint}</div>
           )}
           <slot></slot>
-          <span id="input-error-message" role="alert">
+          <div id="input-error-message" role="alert">
             {error && (
               <Fragment>
-                <span class="usa-sr-only">{i18next.t('error')}</span>
-                <span class="usa-error-message">{error}</span>
+                <span class="sr-only">{i18next.t('error')}</span>
+                <span>{error}</span>
               </Fragment>
             )}
-          </span>
-          <input
-            id="fileInputField"
-            class={inputClass}
-            type="file"
-            name={name}
-            accept={accept}
-            aria-describedby={ariaDescribedbyIds}
-            onChange={this.handleChange}
-          />
+          </div>
+          <div class="file-input-wrapper">
+            <input
+              id="fileInputField"
+              class="file-input"
+              type="file"
+              name={name}
+              accept={accept}
+              aria-describedby={ariaDescribedbyIds}
+              onChange={this.handleChange}
+            />
+            {uploadStatus === 'idle' && (
+              <div>
+                <div class="sr-only">No files selected.</div>
+                <div class="file-input-target">
+                  <div class="file-input-box"></div>
+                  <div class="file-input-instructions">
+                    <span class="file-input-drag-text">Drag files here or </span>
+                    <span class="file-input-choose-text">choose from folder</span>
+                  </div>
+                </div>
+              </div>
+            )}
+            {uploadStatus !== 'idle' && (
+              <div class="selected-files-wrapper">
+                <div class="selected-files-label">Selected files</div>
+                <va-card>
+                  <div class="file-info-section">
+                    <va-icon icon="file_present" size={5} class="file-icon"></va-icon>
+                    <span class="file-label">{file.name} </span>
+                    <span class="file-size-label">{file.size} </span>
+                    {uploadStatus === 'uploading' && (
+                      <span>(Uploading...)</span>
+                    )}
+                  </div>
+                  {uploadStatus === 'uploading' && uploadPercentage && (
+                    <div>
+                      <va-progress-bar percent={uploadPercentage}></va-progress-bar>
+                      <div>
+                        <va-button-icon onClick={this.removeFile} buttonType="cancel" label="Cancel"
+                        />
+                      </div>
+                    </div>
+                  )}
+                  {uploadStatus === 'success' && file && (
+                    <div class="file-button-section">
+                      <va-button-icon buttonType="change-file" onClick={this.changeFile} label="Change file"></va-button-icon>
+                      <va-button-icon buttonType="delete" onClick={this.removeFile} label="Delete"></va-button-icon>
+                    </div>
+                  )}
+                </va-card>
+              </div>
+            )}
+          </div>
         </Host>
       );
     } else {

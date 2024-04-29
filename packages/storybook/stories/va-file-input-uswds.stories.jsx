@@ -17,13 +17,13 @@ export default {
 };
 
 const defaultArgs = {
-  'label': 'Input accepts a single file',
+  'label': 'Select a file to upload',
   'name': 'my-file-input',
   'accept': null,
   'required': false,
   'error': '',
   'enable-analytics': false,
-  'hint': null,
+  'hint': 'You can upload a .pdf, .gif, .jpg, .bmp, or .txt file.',
   'multiple': false,
   'vaChange': event =>
     alert(`File change event received: ${event?.detail?.files[0]?.name}`),

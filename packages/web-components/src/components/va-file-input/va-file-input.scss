@@ -1,26 +1,8 @@
-@forward 'settings';
-
-@use 'usa-file-input/src/styles/usa-file-input';
-@use 'usa-label/src/styles/usa-label';
-@use 'usa-hint/src/styles/usa-hint';
-@use 'uswds-helpers/src/styles/usa-sr-only';
-
-@import '../../mixins/uswds-error-border.scss';
 @import '../../global/formation_overrides';
 @import '../../mixins/focusable.css';
 
 [hidden] {
   display: none;
-}
-
-.usa-file-input__input {
-  box-sizing: border-box;
-  font-family: var(--font-source-sans);
-}
-
-:host([error]:not([error=''])) .usa-file-input__target {
-  border-color: var(--vads-color-secondary-dark);
-  border-width: 2px;
 }
 
 /** Original Component Style **/
@@ -44,4 +26,124 @@ va-button {
 .required {
   color: var(--vads-color-secondary-dark);
   margin-left: 0.4rem;
+}
+
+:host([uswds='true']) {
+
+  .label-header {
+    color: $vads-color-base;
+    font-weight: $font-weight-normal;
+    font-size: 1.696rem;
+  }
+
+  #input-hint-message {
+    display: block;
+    color: #757575;
+    font-size: 1.696rem;
+  }
+
+  .file-input-wrapper {
+    display: block;
+    max-width: 48rem;
+    width: 100%;
+    position: relative;
+  }
+
+  .file-input {
+    cursor: pointer;
+    height: 100%;
+    left: 0;
+    margin: 0;
+    max-width: none;
+    position: absolute;
+    padding: .5rem;
+    text-indent: -999em;
+    top: 0;
+    width: 100%;
+    z-index: 1;
+  }
+
+  .file-input-target {
+    border: 1px dashed #adadad;
+    display: block;
+    font-size: 1.06rem;
+    margin-top: 0.5rem;
+    position: relative;
+    text-align: center;
+    width: 100%;
+  }
+
+  .file-input-box {
+    background: #fff;
+    height: 100%;
+    left: 0;
+    pointer-events: none;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: 2;
+  }
+
+  .file-input-instructions {
+    font-size: 1.696rem;
+    padding: 2rem 1rem;
+    pointer-events: none;
+    position: relative;
+    z-index: 3;
+  }
+
+  .file-input-drag-text {
+
+  }
+
+  .file-input-choose-text {
+    color: #005ea2;
+    text-decoration: underline;
+    font-weight: $font-weight-normal;
+  }
+
+  .file-icon {
+    color: #07648D;
+  }
+
+  .selected-files-wrapper {
+    background-color: $vads-color-primary-lighter;
+    padding: 8px;
+  }
+
+  .selected-files-label {
+    color: $vads-color-base;
+    font-weight: $font-weight-bold;
+    font-size: 1.696rem;
+    border-bottom: 1px solid #FFFFFF;
+    margin-bottom: 8px;
+  }
+
+  .file-label {
+    color: $vads-color-base;
+    font-weight: $font-weight-bold;
+    font-size: 1.696rem;
+  }
+
+  .file-size-label {
+    color: $vads-color-base-dark;
+    font-weight: $font-weight-normal;
+    font-size: 1.696rem;
+  }
+
+  .file-info-section {
+    border-bottom: 1px solid #dfe1e2;
+    padding: 0 8px;
+    display: flex;
+    align-items: center;
+  }
+
+  .file-button-section {
+    display: flex;
+    justify-content: space-between;
+
+    > va-button-icon {
+      font-size: 1.696rem;
+    }
+  }
 }

@@ -454,6 +454,10 @@ export namespace Components {
         /**
           * Whether or not the component will use USWDS v3 styling.
          */
+        "uploadPercentage"?: number;
+        /**
+          * Whether or not the component will use USWDS v3 styling.
+         */
         "uswds"?: boolean;
     }
     interface VaHeaderMinimal {
@@ -2484,6 +2488,10 @@ declare namespace LocalJSX {
           * Sets the input to required and renders the (*Required) text.
          */
         "required"?: boolean;
+        /**
+          * Whether or not the component will use USWDS v3 styling.
+         */
+        "uploadPercentage"?: number;
         /**
           * Whether or not the component will use USWDS v3 styling.
          */
