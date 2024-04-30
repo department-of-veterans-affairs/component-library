@@ -26,6 +26,8 @@ import { fileInput } from './va-file-input-upgrader';
   shadow: true,
 })
 export class VaFileInput {
+  private fileInputRef!: HTMLInputElement;
+
   @Element() el: HTMLElement;
   @State() file?: File;
   @State() dragActive: boolean = false;
@@ -135,7 +137,9 @@ export class VaFileInput {
   }
 
   private changeFile = () => {
-
+    if (this.fileInputRef) {
+      this.fileInputRef.click();
+    }
   }
 
   /**
@@ -145,6 +149,20 @@ export class VaFileInput {
   private getButtonText = (): string => {
     return this.buttonText ? this.buttonText : 'Upload file';
   };
+
+  private formatFileSize = (filesSize): string => {
+    const units = ['B', 'KB', 'MB', 'GB', 'TB'];
+    if (filesSize === 0)
+      return '0 B';
+
+    const unitIndex = Math.floor(Math.log(filesSize) / Math.log(1024));
+    if (unitIndex === 0)
+      return `${filesSize} ${units[unitIndex]}`;
+
+    const sizeInUnit = (filesSize / Math.pow(1024, unitIndex));
+    const formattedSize = sizeInUnit.toFixed(unitIndex < 2 ? 0 : 1);
+    return `${formattedSize} ${units[unitIndex]}`;
+  }
 
   componentDidLoad() {
     if (this.uswds) fileInput.init(this.el);
@@ -204,7 +222,9 @@ export class VaFileInput {
             <input
               id="fileInputField"
               class="file-input"
+              style={{ visibility: this.uploadStatus === 'success' || this.uploadStatus === 'uploading' ? 'hidden' : 'unset' }}
               type="file"
+              ref={el => this.fileInputRef = el as HTMLInputElement}
               name={name}
               accept={accept}
               aria-describedby={ariaDescribedbyIds}
@@ -228,8 +248,8 @@ export class VaFileInput {
                 <va-card>
                   <div class="file-info-section">
                     <va-icon icon="file_present" size={5} class="file-icon"></va-icon>
-                    <span class="file-label">{file.name} </span>
-                    <span class="file-size-label">{file.size} </span>
+                    <span class="file-label">{file.name}</span>
+                    <span class="file-size-label">{this.formatFileSize(file.size)}</span>
                     {uploadStatus === 'uploading' && (
                       <span>(Uploading...)</span>
                     )}
