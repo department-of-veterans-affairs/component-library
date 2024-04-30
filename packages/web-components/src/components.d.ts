@@ -212,6 +212,10 @@ export namespace Components {
          */
         "label"?: string;
         /**
+          * An optional message that will be read by screen readers when the input is focused.
+         */
+        "messageAriaDescribedby"?: string;
+        /**
           * If `true`, the button will use the primary alternate variant.
          */
         "primaryAlternate"?: boolean;
@@ -2192,6 +2196,10 @@ declare namespace LocalJSX {
           * The aria-label of the component.
          */
         "label"?: string;
+        /**
+          * An optional message that will be read by screen readers when the input is focused.
+         */
+        "messageAriaDescribedby"?: string;
         /**
           * The event used to track usage of the component.
          */
