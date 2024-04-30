@@ -25,6 +25,7 @@ const defaultArgs = {
   'primaryAlternate': undefined,
   'submit': undefined,
   'text': 'Default',
+  'message-aria-describedby': 'Optional description text for screen readers',
 };
 
 const Template = ({
@@ -38,6 +39,7 @@ const Template = ({
   primaryAlternate,
   submit,
   text,
+  'message-aria-describedby': messageAriaDescribedby,
 }) => {
   return (
     <va-button
@@ -52,6 +54,7 @@ const Template = ({
       submit={submit}
       text={text}
       onClick={e => console.log(e)}
+      message-aria-describedby={messageAriaDescribedby}
     />
   );
 };
