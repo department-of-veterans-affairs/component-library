@@ -182,7 +182,6 @@ export class VaButton {
               <va-icon
                 class="va-button--icon"
                 icon="navigate_far_before"
-                size={3}
               ></va-icon>
             )}
             {buttonText}
@@ -190,7 +189,6 @@ export class VaButton {
               <va-icon
                 class="va-button--icon"
                 icon="navigate_far_next"
-                size={3}
               ></va-icon>
             )}
           </button>

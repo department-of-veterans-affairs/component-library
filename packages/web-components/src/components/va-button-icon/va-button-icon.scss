@@ -32,8 +32,5 @@
 
 // Fix to off-centered content when icon present
 :host button.usa-button va-icon {
-    display: inline-block;
-    height: 0;
-    vertical-align: top;
     margin-right: 4px;
 }
