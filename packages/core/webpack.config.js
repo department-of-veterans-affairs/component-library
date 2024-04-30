@@ -68,6 +68,11 @@ module.exports = {
           context: path.resolve(__dirname, '../', 'web-components/dist'),
         },
         {
+          from: 'img/**/*',
+          to: './',
+          context: path.resolve(__dirname, '../', 'web-components/dist'),
+        },
+        {
           from: '*',
           to: './components/types',
           context: path.resolve(__dirname, '../', 'web-components/dist/types'),
