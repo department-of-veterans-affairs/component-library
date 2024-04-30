@@ -395,4 +395,13 @@ describe('va-button', () => {
     const button = await page.find('va-button >>> button');
     expect(button.getAttribute('aria-label')).toEqual('Edit dependent');
   });
+
+  it('renders a button with an optional screen reader description', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-button text="Edit" message-aria-describedby="Button description."></va-button>');
+
+    const descriptionSpan = await page.find('va-button >>> #button-description');
+    expect(descriptionSpan).not.toBeNull();
+    expect(descriptionSpan.textContent).toBe('Button description.');
+  });
 });
