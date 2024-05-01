@@ -11,6 +11,11 @@
 
 :host a.va-link--reverse {
   color: var(--vads-color-white);
+
+  &:hover, &:active {
+    color: var(--vads-color-action-focus-on-light);
+    background-color: transparent;
+  }
 }
 
 :host([active]:not([active='false'])) a {

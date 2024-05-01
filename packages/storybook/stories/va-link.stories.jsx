@@ -148,42 +148,33 @@ Calendar.args = {
   text: `Add to calendar`,
 };
 
-const ReverseTemplate = ({
-  'abbr-title': abbrTitle,
-  active,
-  calendar,
-  channel,
-  'disable-analytics': disableAnalytics,
-  download,
-  href,
-  filename,
-  filetype,
-  pages,
-  reverse,
-  text,
-  video,
-}) => {
+const ReverseTemplate = ({ filename, filetype, href, reverse, text }) => {
   return (
-    <div className="vads-u-background-color--primary">
-      <span className="vads-u-color--white">
-        If you need help to gather your information or fill out your
-        application/form,{' '}
-      </span>
+    <div className="vads-u-background-color--primary vads-u-padding--1">
+      <span className="vads-u-color--white">Default Link: </span>
+      <va-link href={href} reverse={reverse} text={text} />
+      <br />
+      <span className="vads-u-color--white">Active Link: </span>
+      <va-link active={true} href={href} reverse={reverse} text={text} />
+      <br />
+      <span className="vads-u-color--white">Download Link: </span>
       <va-link
-        abbr-title={abbrTitle}
-        active={active}
-        calendar={calendar}
-        channel={channel}
-        disable-analytics={disableAnalytics}
-        download={download}
+        download={true}
         href={href}
         filename={filename}
         filetype={filetype}
-        pages={pages}
         reverse={reverse}
         text={text}
-        video={video}
       />
+      <br />
+      <span className="vads-u-color--white">Video Link: </span>
+      <va-link href={href} reverse={reverse} text={text} video={true} />
+      <br />
+      <span className="vads-u-color--white">Channel Link: </span>
+      <va-link channel={true} href={href} reverse={reverse} text={text} />
+      <br />
+      <span className="vads-u-color--white">Calendar Link: </span>
+      <va-link calendar={true} href={href} reverse={reverse} text={text} />
     </div>
   );
 };
@@ -191,7 +182,7 @@ const ReverseTemplate = ({
 export const Reverse = ReverseTemplate.bind(null);
 Reverse.args = {
   ...defaultArgs,
-  href: 'https://va.gov/vso/',
-  text: 'contact a local Veterans Service Organization (VSO)',
+  href: 'https://va.gov/',
+  text: 'Example Link',
   reverse: true,
 };
