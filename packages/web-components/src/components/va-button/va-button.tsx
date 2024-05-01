@@ -180,23 +180,23 @@ export class VaButton {
           >
             {back && !_continue && (
               <va-icon
-                class="va-button--icon"
+                class="va-button--icon margin-right-8px"
                 icon="navigate_far_before"
               ></va-icon>
             )}
             {buttonText}
             {_continue && !back && (
               <va-icon
-                class="va-button--icon"
+                class="va-button--icon margin-left-8px"
                 icon="navigate_far_next"
               ></va-icon>
             )}
           </button>
           {messageAriaDescribedby && (
-              <span id="button-description" class="usa-sr-only">
-                {messageAriaDescribedby}
-              </span>
-            )}
+            <span id="button-description" class="usa-sr-only">
+              {messageAriaDescribedby}
+            </span>
+          )}
         </Host>
       );
     } else {
