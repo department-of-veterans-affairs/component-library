@@ -37,7 +37,7 @@ va-button {
   }
 
   .label-header-tag {
-    margin-bottom: 0;
+    margin: 0;
   }
 
   #input-hint-message {
@@ -154,5 +154,9 @@ va-button {
     > va-button-icon {
       font-size: 1.696rem;
     }
+  }
+
+  .additional-info-slot {
+    padding-bottom: 16px;
   }
 }

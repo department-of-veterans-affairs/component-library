@@ -173,7 +173,7 @@ export class VaFileInput {
 
   private renderLabelOrHeader = (label: string, required: boolean, headerSize?: number) => {
     console.log(label, required, headerSize);
-    const requiredSpan = required ? <span> {i18next.t('required')}</span> : null;
+    const requiredSpan = required ? <span class="required"> {i18next.t('required')}</span> : null;
     if (headerSize && headerSize >= 1 && headerSize <= 6) {
       console.log('in the thing')
       const HeaderTag = `h${headerSize}` as keyof  JSX.IntrinsicElements;
@@ -231,7 +231,6 @@ export class VaFileInput {
           {hint && (
             <div id="input-hint-message">{hint}</div>
           )}
-          <slot></slot>
           <div id="input-error-message" role="alert">
             {error && (
               <Fragment>
@@ -286,9 +285,14 @@ export class VaFileInput {
                     </div>
                   )}
                   {uploadStatus === 'success' && file && (
-                    <div class="file-button-section">
-                      <va-button-icon buttonType="change-file" onClick={this.changeFile} label="Change file"></va-button-icon>
-                      <va-button-icon buttonType="delete" onClick={this.removeFile} label="Delete"></va-button-icon>
+                    <div>
+                      <div class="additional-info-slot">
+                        <slot></slot>
+                      </div>
+                      <div class="file-button-section">
+                        <va-button-icon buttonType="change-file" onClick={this.changeFile} label="Change file"></va-button-icon>
+                        <va-button-icon buttonType="delete" onClick={this.removeFile} label="Delete"></va-button-icon>
+                      </div>
                     </div>
                   )}
                 </va-card>

@@ -29,7 +29,8 @@ const defaultArgs = {
     alert(`File change event received: ${event?.detail?.files[0]?.name}`),
   'uswds': true,
   'uploadPercentage': null,
-  'headerSize': null
+  'headerSize': null,
+  'children': null
 };
 
 const Template = ({
@@ -43,7 +44,8 @@ const Template = ({
   vaChange,
   uswds,
   uploadPercentage,
-  headerSize
+  headerSize,
+  children
 }) => {
   return (
     <VaFileInput
@@ -58,6 +60,7 @@ const Template = ({
       uswds={uswds}
       uploadPercentage={uploadPercentage}
       headerSize={headerSize}
+      children={children}
     />
   );
 };
@@ -107,7 +110,22 @@ HeaderLabel.args = {
   ...defaultArgs,
   label: 'Label Header',
   headerSize: 3,
-  required: true,
+  required: true
+}
+
+const additionalInfoSlotContent = (
+  <div>
+    <va-select className="hydrated" uswds label='What kind of file is this?' required>
+      <option key="1" value="1">Public Document</option>
+      <option key="2" value="2">Private Document</option>
+    </va-select>
+  </div>);
+
+export const AdditionalInfo = Template.bind(null);
+AdditionalInfo.args = {
+  ...defaultArgs,
+  label: 'Label Header',
+  children: additionalInfoSlotContent
 }
 
 export const WithAnalytics = Template.bind(null);
