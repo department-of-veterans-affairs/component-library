@@ -27,7 +27,9 @@ const defaultArgs = {
   'multiple': false,
   'vaChange': event =>
     alert(`File change event received: ${event?.detail?.files[0]?.name}`),
-  'uswds': true
+  'uswds': true,
+  'uploadPercentage': null,
+  'headerSize': null
 };
 
 const Template = ({
@@ -39,7 +41,9 @@ const Template = ({
   hint,
   'enable-analytics': enableAnalytics,
   vaChange,
-  uswds
+  uswds,
+  uploadPercentage,
+  headerSize
 }) => {
   return (
     <VaFileInput
@@ -52,6 +56,8 @@ const Template = ({
       enable-analytics={enableAnalytics}
       onVaChange={vaChange}
       uswds={uswds}
+      uploadPercentage={uploadPercentage}
+      headerSize={headerSize}
     />
   );
 };
@@ -95,6 +101,14 @@ ErrorMessage.args = {
   hint: 'Select any valid file',
   error: 'Display a helpful error message',
 };
+
+export const HeaderLabel = Template.bind(null);
+HeaderLabel.args = {
+  ...defaultArgs,
+  label: 'Label Header',
+  headerSize: 3,
+  required: true,
+}
 
 export const WithAnalytics = Template.bind(null);
 WithAnalytics.args = { ...defaultArgs, 'enable-analytics': true };

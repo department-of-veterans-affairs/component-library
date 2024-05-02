@@ -31,9 +31,13 @@ va-button {
 :host([uswds='true']) {
 
   .label-header {
-    color: $vads-color-base;
-    font-weight: $font-weight-normal;
+    color: var(--vads-color-base);
+    font-weight: var(--font-weight-normal);
     font-size: 1.696rem;
+  }
+
+  .label-header-tag {
+    margin-bottom: 0;
   }
 
   #input-hint-message {
@@ -71,6 +75,10 @@ va-button {
     position: relative;
     text-align: center;
     width: 100%;
+
+    &.file-input-target-error {
+      border: 2px dashed var(--vads-color-secondary-dark);
+    }
   }
 
   .file-input-box {
@@ -99,7 +107,7 @@ va-button {
   .file-input-choose-text {
     color: #005ea2;
     text-decoration: underline;
-    font-weight: $font-weight-normal;
+    font-weight: var(--font-weight-normal);
   }
 
   .file-icon {
@@ -107,28 +115,28 @@ va-button {
   }
 
   .selected-files-wrapper {
-    background-color: $vads-color-primary-lighter;
+    background-color: var(--vads-color-primary-lighter);
     padding: 8px;
   }
 
   .selected-files-label {
-    color: $vads-color-base;
-    font-weight: $font-weight-bold;
+    color: var(--vads-color-base);
+    font-weight: var(--font-weight-bold);
     font-size: 1.696rem;
     border-bottom: 1px solid #FFFFFF;
     margin-bottom: 8px;
   }
 
   .file-label {
-    color: $vads-color-base;
-    font-weight: $font-weight-bold;
+    color: var(--vads-color-base);
+    font-weight: var(--font-weight-bold);
     font-size: 1.696rem;
     padding-right: 8px;
   }
 
   .file-size-label {
-    color: $vads-color-base-dark;
-    font-weight: $font-weight-normal;
+    color: var(--vads-color-base)-dark;
+    font-weight: var(--font-weight-normal);
     font-size: 1.696rem;
   }
 

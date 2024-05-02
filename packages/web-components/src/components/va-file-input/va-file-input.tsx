@@ -84,9 +84,16 @@ export class VaFileInput {
   @Prop() uswds?: boolean = false;
 
   /**
-   * Whether or not the component will use USWDS v3 styling.
+   * Shows a va-progress-bar at this percentage when uploading
    */
   @Prop() uploadPercentage?: number;
+
+  /**
+   * Optionally specifies the size of the header element to use instead of the base label.
+   * Accepts a number from 1 to 6, corresponding to HTML header elements h1 through h6.
+   * If not provided, defaults to standard label styling.
+   */
+  @Prop() headerSize?: number;
 
   /**
    * The event emitted when the file input value changes.
@@ -164,6 +171,32 @@ export class VaFileInput {
     return `${formattedSize} ${units[unitIndex]}`;
   }
 
+  private renderLabelOrHeader = (label: string, required: boolean, headerSize?: number) => {
+    console.log(label, required, headerSize);
+    const requiredSpan = required ? <span> {i18next.t('required')}</span> : null;
+    if (headerSize && headerSize >= 1 && headerSize <= 6) {
+      console.log('in the thing')
+      const HeaderTag = `h${headerSize}` as keyof  JSX.IntrinsicElements;
+      return (
+        <div class="label-header">
+          <HeaderTag htmlFor="fileInputButton" part="label" class="label-header-tag">
+            {label}
+            {requiredSpan}
+          </HeaderTag>
+        </div>
+      );
+    } else {
+      return (
+        <div class="label-header">
+          <label htmlFor="fileInputButton" part="label">
+            {label}
+            {requiredSpan}
+          </label>
+        </div>
+      );
+    }
+  }
+
   componentDidLoad() {
     if (this.uswds) fileInput.init(this.el);
   }
@@ -181,7 +214,7 @@ export class VaFileInput {
   }
 
   render() {
-    const { label, name, required, accept, error, hint, uswds, file, uploadStatus, uploadPercentage } = this;
+    const { label, name, required, accept, error, hint, uswds, file, uploadStatus, uploadPercentage, headerSize } = this;
 
     const text = this.getButtonText();
 
@@ -190,22 +223,11 @@ export class VaFileInput {
         `${hint ? 'input-hint-message' : ''} ${
           error ? 'input-error-message' : ''
         }`.trim() || null; // Null so we don't add the attribute if we have an empty string
+      const fileInputTargetClasses = `file-input-target ${this.error ? 'file-input-target-error' : ''}`.trim();
 
       return (
         <Host>
-          {label && (
-            <div class="label-header">
-              <label htmlFor="fileInputButton" part="label">
-                {label}
-                {required && (
-                  <span>
-                    {' '}
-                    {i18next.t('required')}
-                  </span>
-                )}
-              </label>
-            </div>
-          )}
+          {label && this.renderLabelOrHeader(label, required, headerSize)}
           {hint && (
             <div id="input-hint-message">{hint}</div>
           )}
@@ -233,7 +255,7 @@ export class VaFileInput {
             {uploadStatus === 'idle' && (
               <div>
                 <div class="sr-only">No files selected.</div>
-                <div class="file-input-target">
+                <div class={fileInputTargetClasses}>
                   <div class="file-input-box"></div>
                   <div class="file-input-instructions">
                     <span class="file-input-drag-text">Drag files here or </span>
