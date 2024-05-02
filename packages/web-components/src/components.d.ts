@@ -524,6 +524,10 @@ export namespace Components {
          */
         "pages"?: number;
         /**
+          * If 'true', will represent the link with white text instead of blue.
+         */
+        "reverse"?: boolean;
+        /**
           * The anchor text.
          */
         "text": string;
@@ -2560,6 +2564,10 @@ declare namespace LocalJSX {
           * The number of pages of the file. Only displayed if download is `true`.
          */
         "pages"?: number;
+        /**
+          * If 'true', will represent the link with white text instead of blue.
+         */
+        "reverse"?: boolean;
         /**
           * The anchor text.
          */
