@@ -48,9 +48,11 @@
   margin: 0px auto;
 }
 
-:host([status='info']) .usa-modal__main::before {
+.va-modal-alert__icon {
   color: var(--vads-color-base-darker);
-  content: '\F05A'; /* fa-circle-info */
+  position: absolute;
+  top: 32px;
+  left: 16px;
 }
 
 :host([status='continue']) .usa-modal {
@@ -58,34 +60,9 @@
   background-color: var(--vads-color-success-lighter);
 }
 
-:host([status='continue']) .usa-modal__main::before {
-  color: var(--vads-color-base-darker);
-  content: '\F023'; /* fa-lock */
-}
-
 :host([status='success']) .usa-modal {
   border-left-color: var(--vads-color-success-dark);
   background-color: var(--vads-color-success-lighter);
-}
-
-:host([status='success']) .usa-modal__main::before {
-  color: var(--vads-color-base-darker);
-  content: '\F00C'; /* fa-check */
-}
-
-.usa-modal__main::before {
-  padding-top: 0;
-  position: absolute;
-  left: -1.6rem;
-  top: 0;
-  font-family: 'Font Awesome 5 Free';
-  font-size: 2rem;
-  font-weight: 900;
-
-  :host([large='true']) &,
-  :host([large]:not([large='false'])) & {
-    padding-top: 20px;
-  }
 }
 
 :host([status='warning']) .usa-modal {
@@ -93,19 +70,9 @@
   background-color: var(--vads-color-gold-lightest);
 }
 
-:host([status='warning']) .usa-modal__main::before {
-  color: var(--vads-color-base-darker);
-  content: '\F071'; /* fa-triangle-exclamation */
-}
-
 :host([status='error']) .usa-modal {
   border-left-color: var(--vads-color-secondary-dark);
   background-color: var(--vads-color-secondary-lightest);
-}
-
-:host([status='error']) .usa-modal__main::before {
-  color: var(--vads-color-base-darker);
-  content: '\F06A'; /* fa-circle-exclamation */
 }
 
 .va-modal-alert {
@@ -166,7 +133,6 @@
 .va-modal-close {
   background-color: transparent;
   color: var(--vads-color-base-darker);
-  font-size: 2.25rem;
   padding: 0;
   position: absolute;
   margin: 1.6rem;
@@ -201,18 +167,6 @@ h1 {
   margin: 0 0 1.6rem 0;
 }
 
-i::before {
-  -webkit-font-smoothing: antialiased;
-  content: '\F057'; /* fa-times-circle*/
-  display: inline-block;
-  font-family: 'Font Awesome 5 Free';
-  font-style: normal;
-  font-variant: normal;
-  font-weight: 900;
-  line-height: 1;
-  text-rendering: auto;
-}
-
 .alert-actions button {
   /* -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased; */
@@ -236,14 +190,6 @@ i::before {
 .alert-actions .button-secondary:hover,
 .alert-actions .button-secondary:focus {
   background-color: var(--vads-color-gray-cool-light);
-}
-
-:host([uswds='false']) .va-modal-alert {
-  border-left-style: solid;
-  border-left-width: 10px;
-  display: inline-flex;
-  max-width: 60rem;
-  padding: 3.2rem 6.4rem 3.2rem 2.4rem;
 }
 
 .va-modal-alert::before {

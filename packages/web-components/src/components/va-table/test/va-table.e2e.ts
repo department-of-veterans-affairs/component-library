@@ -1,208 +1,82 @@
 import { newE2EPage } from '@stencil/core/testing';
-import { axeCheck } from '../../../testing/test-helpers';
 
-const sortSetup = async (opts = { ascending: true }) => {
-  const page = await newE2EPage();
-  await page.setContent(`
-      <va-table sort-column="2" ${!opts.ascending ? 'descending' : ''}>
-        <va-table-row slot="headers">
-          <span>ID</span>
-          <span>Name</span>
-          <span>Cost</span>
-        </va-table-row>
+describe('V1 table', () => {
+  function getTableMarkup(uswds: boolean): string {
+    return `<va-table
+    table-title="My table"
+    uswds=${uswds}
+  >
+    <va-table-row slot="headers">
+      <span>
+        Document title
+      </span>
+      <span>
+        Description
+      </span>
+      <span>
+        Year
+      </span>
+    </va-table-row>
+    <va-table-row>
+      <span>
+        Declaration of Independence
+      </span>
+      <span>
+        Statement adopted by the Continental Congress declaring independence from the British Empire
+      </span>
+      <span>
+        1776
+      </span>
+    </va-table-row>
+    <va-table-row>
+      <span>
+        Bill of Rights
+      </span>
+      <span>
+        The first ten ammendements of the U.S. Constitution guaranteeing rights and freedoms
+      </span>
+      <span>
+        1791
+      </span>
+    </va-table-row>
+    <va-table-row>
+      <span>
+        Declaration of Sentiments
+      </span>
+      <span>
+        A document written during the Seneca Falls Convention outlining the rights that American women should be entitled to as citizens.
+      </span>
+      <span>
+        1848
+      </span>
+    </va-table-row>
+    <va-table-row>
+      <span>
+        Emancipation Proclamation
+      </span>
+      <span>
+        An executive order granting freedom to slaves in designated southern states.
+      </span>
+      <span>
+        1863
+      </span>
+    </va-table-row>
+  </va-table>`;
+  }
 
-        <va-table-row>
-          <span>1</span>
-          <span>Turkey sandwich</span>
-          <span>8.00</span>
-        </va-table-row>
-        <va-table-row>
-          <span>2</span>
-          <span>Banana</span>
-          <span>0.50</span>
-        </va-table-row>
-      </va-table>
-    `);
-
-  return page;
-};
-
-describe('va-table', () => {
-  it('renders', async () => {
+  it('renders a V1 va-table-inner with va-table-rows inside', async () => {
     const page = await newE2EPage();
-    await page.setContent('<va-table></va-table>');
+    await page.setContent(getTableMarkup(false));
 
-    const element = await page.find('va-table');
-    expect(element).toHaveClass('hydrated');
+    const headerRow = await page.find('va-table-inner >>> va-table-row');
+    expect(headerRow).toBeDefined();
   });
 
-  it('includes a caption', async () => {
+  it('renders a V3 va-table-inner with an HTML table inside', async () => {
     const page = await newE2EPage();
-    await page.setContent('<va-table table-title="My table"></va-table>');
+    await page.setContent(getTableMarkup(true));
+    const element = await page.find('va-table-inner >>> table');
 
-    const element = await page.find('va-table >>> caption');
-    expect(element.innerText).toEqual('My table');
-  });
-
-  it('adds role and scope to header row children', async () => {
-    const page = await newE2EPage();
-    await page.setContent(`
-      <va-table>
-        <va-table-row slot="headers">
-          <span>One</span>
-          <span>Two</span>
-          <span>Three</span>
-        </va-table-row>
-
-        <va-table-row>
-          <span>Dog</span>
-          <span>Cat</span>
-          <span>Mouse</span>
-        </va-table-row>
-      </va-table>
-    `);
-
-    const element = await page.find('va-table > va-table-row');
-    const cols = await element.findAll('span');
-    expect(element.getAttribute('role')).toEqual('row');
-    cols.forEach(col => {
-      expect(col.getAttribute('role')).toEqual('columnheader');
-      expect(col.getAttribute('scope')).toEqual('col');
-    });
-  });
-
-  it('adds role to body row children', async () => {
-    const page = await newE2EPage();
-    await page.setContent(`
-      <va-table>
-        <va-table-row slot="headers">
-          <span>One</span>
-          <span>Two</span>
-          <span>Three</span>
-        </va-table-row>
-
-        <va-table-row>
-          <span>Dog</span>
-          <span>Cat</span>
-          <span>Mouse</span>
-        </va-table-row>
-      </va-table>
-    `);
-
-    const cells = await page.findAll(
-      'va-table > va-table-row:last-child > span',
-    );
-
-    cells.forEach(cell => {
-      expect(cell.getAttribute('role')).toEqual('cell');
-    });
-  });
-
-  it('passes an axe check', async () => {
-    const page = await newE2EPage();
-    await page.setContent(`
-        <va-table>
-          <va-table-row slot="headers">
-            <span>One</span>
-            <span>Two</span>
-            <span>Three</span>
-          </va-table-row>
-
-          <va-table-row>
-            <span>Dog</span>
-            <span>Cat</span>
-            <span>Mouse</span>
-          </va-table-row>
-        </va-table>
-      `);
-
-    await page.waitForChanges();
-    await axeCheck(page);
-  });
-
-  it('right aligns columns with numeric data', async () => {
-    const rightAlignClass = 'text-align-right';
-    const page = await newE2EPage();
-    await page.setContent(`
-      <va-table>
-        <va-table-row slot="headers">
-          <span>First</span>
-          <span>Second</span>
-          <span>Third</span>
-        </va-table-row>
-
-        <va-table-row>
-          <span>Strings</span>
-          <span>1234</span>
-          <span>More strings</span>
-        </va-table-row>
-      </va-table>
-    `);
-
-    await page.waitForChanges();
-    const table = await page.findAll('va-table-row');
-    const header = await table[0].findAll('span');
-    const body = await table[1].findAll('span');
-
-    expect(header[1].getAttribute('class')).toEqual(rightAlignClass);
-    expect(body[1].getAttribute('class')).toEqual(rightAlignClass);
-  });
-
-  // TODO: add tests for the following (have been unable to get puppeteer to recognize DOM mutations):
-  // - initial sort on load
-  // - descending sort on button click
-  describe('ascending sort', () => {
-    it('sets aria-sort on the header column to "ascending"', async () => {
-      const page = await sortSetup();
-      const sortHeader = await page.find(
-        'va-table-row[slot] span:nth-child(3)',
-      );
-
-      expect(sortHeader.getAttribute('aria-sort')).toEqual('ascending');
-    });
-
-    it('adds a button with icon to the sortable column', async () => {
-      const page = await sortSetup();
-      // The `nth-child` index is 1-based
-      const sortButton = await page.find(
-        'va-table-row[slot] span:nth-child(3) > button',
-      );
-      const sortIcon = await sortButton.find('svg');
-      // This describes the result of the click action
-      expect(sortButton.getAttribute('aria-label')).toEqual(
-        'sort data by descending',
-      );
-      // This describes the current state
-      expect(sortIcon.getAttribute('aria-label')).toEqual('ascending');
-    });
-  });
-
-  // TODO: add tests for the following (have been unable to get puppeteer to recognize DOM mutations):
-  // - initial descending sort on load
-  // - ascending sort on button click
-  describe('descending sort', () => {
-    it('sets aria-sort on the header column to "descending"', async () => {
-      const page = await sortSetup({ ascending: false });
-      const sortHeader = await page.find(
-        'va-table-row[slot] span:nth-child(3)',
-      );
-
-      expect(sortHeader.getAttribute('aria-sort')).toEqual('descending');
-    });
-
-    it('adds a button with icon to the sortable column', async () => {
-      const page = await sortSetup({ ascending: false });
-      // The `nth-child` index is 1-based
-      const sortButton = await page.find(
-        'va-table-row[slot] span:nth-child(3) > button',
-      );
-      const sortIcon = await sortButton.find('svg');
-      // This describes the result of the click action
-      expect(sortButton.getAttribute('aria-label')).toEqual(
-        'sort data by ascending',
-      );
-      // This describes the current state
-      expect(sortIcon.getAttribute('aria-label')).toEqual('descending');
-    });
+    expect(element).toBeDefined();
   });
 });

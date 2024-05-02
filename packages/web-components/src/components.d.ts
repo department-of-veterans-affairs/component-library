@@ -212,6 +212,10 @@ export namespace Components {
          */
         "label"?: string;
         /**
+          * An optional message that will be read by screen readers when the input is focused.
+         */
+        "messageAriaDescribedby"?: string;
+        /**
           * If `true`, the button will use the primary alternate variant.
          */
         "primaryAlternate"?: boolean;
@@ -231,6 +235,17 @@ export namespace Components {
           * Whether or not the component will use USWDS v3 styling.
          */
         "uswds"?: boolean;
+    }
+    interface VaButtonIcon {
+        "buttonType": keyof typeof this.buttonTypeMap;
+        /**
+          * If `true`, the component-library-analytics event is disabled.
+         */
+        "disableAnalytics"?: boolean;
+        /**
+          * The aria-label of the component.
+         */
+        "label"?: string;
     }
     interface VaButtonPair {
         /**
@@ -663,13 +678,9 @@ export namespace Components {
         "secondaryButtonText"?: string;
         "status"?: 'continue' | 'error' | 'info' | 'success' | 'warning';
         /**
-          * Whether or not the component will be using the unstyled button. This is only available for USWDS
+          * Whether or not the component will be using the unstyled button.
          */
         "unstyled"?: boolean;
-        /**
-          * Whether or not the component will use USWDS v3 styling.
-         */
-        "uswds"?: boolean;
         /**
           * If the modal is visible or not
          */
@@ -1201,7 +1212,46 @@ export namespace Components {
         /**
           * The title of the table
          */
+        "tableTitle"?: string;
+        /**
+          * If uswds is true, the type of table
+         */
+        "tableType"?: 'borderless';
+        /**
+          * Whether or not the component will use USWDS v3 styling.
+         */
+        "uswds"?: boolean;
+    }
+    interface VaTableInner {
+        /**
+          * If uswds is true, the number of columns in the table
+         */
+        "cols"?: number;
+        /**
+          * Whether the initial sort state will be descending or not.
+         */
+        "descending"?: boolean;
+        "rows"?: number;
+        /**
+          * The zero-based index of the column to sort by (Doesn't work in IE11). Optional.
+         */
+        "sortColumn"?: number;
+        /**
+          * The title of the table
+         */
         "tableTitle": string;
+        /**
+          * If uswds is true, the type of table to be used
+         */
+        "tableType"?: 'borderless';
+        /**
+          * Whether or not the component will use USWDS v3 styling.
+         */
+        "uswds"?: boolean;
+        /**
+          * A live reference to the va-table-rows in the table which are hard to access from this component
+         */
+        "vaTableRowRefs"?: any;
     }
     interface VaTableRow {
     }
@@ -1434,6 +1484,10 @@ export interface VaButtonCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLVaButtonElement;
 }
+export interface VaButtonIconCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLVaButtonIconElement;
+}
 export interface VaButtonPairCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLVaButtonPairElement;
@@ -1596,6 +1650,12 @@ declare global {
     var HTMLVaButtonElement: {
         prototype: HTMLVaButtonElement;
         new (): HTMLVaButtonElement;
+    };
+    interface HTMLVaButtonIconElement extends Components.VaButtonIcon, HTMLStencilElement {
+    }
+    var HTMLVaButtonIconElement: {
+        prototype: HTMLVaButtonIconElement;
+        new (): HTMLVaButtonIconElement;
     };
     interface HTMLVaButtonPairElement extends Components.VaButtonPair, HTMLStencilElement {
     }
@@ -1807,6 +1867,12 @@ declare global {
         prototype: HTMLVaTableElement;
         new (): HTMLVaTableElement;
     };
+    interface HTMLVaTableInnerElement extends Components.VaTableInner, HTMLStencilElement {
+    }
+    var HTMLVaTableInnerElement: {
+        prototype: HTMLVaTableInnerElement;
+        new (): HTMLVaTableInnerElement;
+    };
     interface HTMLVaTableRowElement extends Components.VaTableRow, HTMLStencilElement {
     }
     var HTMLVaTableRowElement: {
@@ -1841,6 +1907,7 @@ declare global {
         "va-banner": HTMLVaBannerElement;
         "va-breadcrumbs": HTMLVaBreadcrumbsElement;
         "va-button": HTMLVaButtonElement;
+        "va-button-icon": HTMLVaButtonIconElement;
         "va-button-pair": HTMLVaButtonPairElement;
         "va-card": HTMLVaCardElement;
         "va-checkbox": HTMLVaCheckboxElement;
@@ -1876,6 +1943,7 @@ declare global {
         "va-statement-of-truth": HTMLVaStatementOfTruthElement;
         "va-summary-box": HTMLVaSummaryBoxElement;
         "va-table": HTMLVaTableElement;
+        "va-table-inner": HTMLVaTableInnerElement;
         "va-table-row": HTMLVaTableRowElement;
         "va-telephone": HTMLVaTelephoneElement;
         "va-text-input": HTMLVaTextInputElement;
@@ -2129,6 +2197,10 @@ declare namespace LocalJSX {
          */
         "label"?: string;
         /**
+          * An optional message that will be read by screen readers when the input is focused.
+         */
+        "messageAriaDescribedby"?: string;
+        /**
           * The event used to track usage of the component.
          */
         "onComponent-library-analytics"?: (event: VaButtonCustomEvent<any>) => void;
@@ -2152,6 +2224,21 @@ declare namespace LocalJSX {
           * Whether or not the component will use USWDS v3 styling.
          */
         "uswds"?: boolean;
+    }
+    interface VaButtonIcon {
+        "buttonType"?: keyof typeof this.buttonTypeMap;
+        /**
+          * If `true`, the component-library-analytics event is disabled.
+         */
+        "disableAnalytics"?: boolean;
+        /**
+          * The aria-label of the component.
+         */
+        "label"?: string;
+        /**
+          * The event used to track usage of the component.
+         */
+        "onComponent-library-analytics"?: (event: VaButtonIconCustomEvent<any>) => void;
     }
     interface VaButtonPair {
         /**
@@ -2672,13 +2759,9 @@ declare namespace LocalJSX {
         "secondaryButtonText"?: string;
         "status"?: 'continue' | 'error' | 'info' | 'success' | 'warning';
         /**
-          * Whether or not the component will be using the unstyled button. This is only available for USWDS
+          * Whether or not the component will be using the unstyled button.
          */
         "unstyled"?: boolean;
-        /**
-          * Whether or not the component will use USWDS v3 styling.
-         */
-        "uswds"?: boolean;
         /**
           * If the modal is visible or not
          */
@@ -3303,6 +3386,45 @@ declare namespace LocalJSX {
           * The title of the table
          */
         "tableTitle"?: string;
+        /**
+          * If uswds is true, the type of table
+         */
+        "tableType"?: 'borderless';
+        /**
+          * Whether or not the component will use USWDS v3 styling.
+         */
+        "uswds"?: boolean;
+    }
+    interface VaTableInner {
+        /**
+          * If uswds is true, the number of columns in the table
+         */
+        "cols"?: number;
+        /**
+          * Whether the initial sort state will be descending or not.
+         */
+        "descending"?: boolean;
+        "rows"?: number;
+        /**
+          * The zero-based index of the column to sort by (Doesn't work in IE11). Optional.
+         */
+        "sortColumn"?: number;
+        /**
+          * The title of the table
+         */
+        "tableTitle"?: string;
+        /**
+          * If uswds is true, the type of table to be used
+         */
+        "tableType"?: 'borderless';
+        /**
+          * Whether or not the component will use USWDS v3 styling.
+         */
+        "uswds"?: boolean;
+        /**
+          * A live reference to the va-table-rows in the table which are hard to access from this component
+         */
+        "vaTableRowRefs"?: any;
     }
     interface VaTableRow {
     }
@@ -3524,6 +3646,7 @@ declare namespace LocalJSX {
         "va-banner": VaBanner;
         "va-breadcrumbs": VaBreadcrumbs;
         "va-button": VaButton;
+        "va-button-icon": VaButtonIcon;
         "va-button-pair": VaButtonPair;
         "va-card": VaCard;
         "va-checkbox": VaCheckbox;
@@ -3559,6 +3682,7 @@ declare namespace LocalJSX {
         "va-statement-of-truth": VaStatementOfTruth;
         "va-summary-box": VaSummaryBox;
         "va-table": VaTable;
+        "va-table-inner": VaTableInner;
         "va-table-row": VaTableRow;
         "va-telephone": VaTelephone;
         "va-text-input": VaTextInput;
@@ -3578,6 +3702,7 @@ declare module "@stencil/core" {
             "va-banner": LocalJSX.VaBanner & JSXBase.HTMLAttributes<HTMLVaBannerElement>;
             "va-breadcrumbs": LocalJSX.VaBreadcrumbs & JSXBase.HTMLAttributes<HTMLVaBreadcrumbsElement>;
             "va-button": LocalJSX.VaButton & JSXBase.HTMLAttributes<HTMLVaButtonElement>;
+            "va-button-icon": LocalJSX.VaButtonIcon & JSXBase.HTMLAttributes<HTMLVaButtonIconElement>;
             "va-button-pair": LocalJSX.VaButtonPair & JSXBase.HTMLAttributes<HTMLVaButtonPairElement>;
             "va-card": LocalJSX.VaCard & JSXBase.HTMLAttributes<HTMLVaCardElement>;
             "va-checkbox": LocalJSX.VaCheckbox & JSXBase.HTMLAttributes<HTMLVaCheckboxElement>;
@@ -3613,6 +3738,7 @@ declare module "@stencil/core" {
             "va-statement-of-truth": LocalJSX.VaStatementOfTruth & JSXBase.HTMLAttributes<HTMLVaStatementOfTruthElement>;
             "va-summary-box": LocalJSX.VaSummaryBox & JSXBase.HTMLAttributes<HTMLVaSummaryBoxElement>;
             "va-table": LocalJSX.VaTable & JSXBase.HTMLAttributes<HTMLVaTableElement>;
+            "va-table-inner": LocalJSX.VaTableInner & JSXBase.HTMLAttributes<HTMLVaTableInnerElement>;
             "va-table-row": LocalJSX.VaTableRow & JSXBase.HTMLAttributes<HTMLVaTableRowElement>;
             "va-telephone": LocalJSX.VaTelephone & JSXBase.HTMLAttributes<HTMLVaTelephoneElement>;
             "va-text-input": LocalJSX.VaTextInput & JSXBase.HTMLAttributes<HTMLVaTextInputElement>;
