@@ -75,6 +75,7 @@ va-button {
     position: relative;
     text-align: center;
     width: 100%;
+    box-sizing: border-box;
 
     &.file-input-target-error {
       border: 2px dashed var(--vads-color-secondary-dark);
