@@ -27,7 +27,6 @@ type FileInfo = {
 export class VaMultipleFileInput {
   @State() fileList: FileInfo[] = [];
   @State() fileCount: number = 0;
-  // can this be simplified to a list of upload statuses?
   
   /**
    * The label for the file input.
