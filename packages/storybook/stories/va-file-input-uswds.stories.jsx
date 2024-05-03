@@ -94,6 +94,16 @@ AcceptsAnyKindOfImage.args = {
 //   multiple: true,
 // };
 
+const multipleTemplate = (() =>  <va-multiple-file-input />)
+export const AcceptsMultipleFiles = multipleTemplate.bind(null);
+AcceptsMultipleFiles.args = {
+  ...defaultArgs,
+  label: 'Input accepts multiple files',
+  hint: 'Select one or more files',
+  multiple: true,
+};
+
+
 export const ErrorMessage = Template.bind(null);
 ErrorMessage.args = {
   ...defaultArgs,
