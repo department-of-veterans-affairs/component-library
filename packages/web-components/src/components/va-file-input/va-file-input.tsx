@@ -101,6 +101,11 @@ export class VaFileInput {
   @Event() vaChange: EventEmitter;
 
   /**
+   * The event emitted when the file input value changes.
+   */
+  @Event() vaRemoveFile: EventEmitter;
+
+  /**
    * The event used to track usage of the component. This is emitted when the
    * file input changes and enableAnalytics is true.
    */
@@ -141,6 +146,7 @@ export class VaFileInput {
   private removeFile = () => {
     this.file = undefined;
     this.uploadStatus = 'idle';
+    this.vaRemoveFile.emit({ files: [this.file] });
   }
 
   private changeFile = () => {

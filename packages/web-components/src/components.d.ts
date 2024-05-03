@@ -690,6 +690,48 @@ export namespace Components {
          */
         "visible"?: boolean;
     }
+    interface VaMultipleFileInput {
+        /**
+          * A comma-separated list of unique file type specifiers.
+         */
+        "accept"?: string;
+        /**
+          * The text displayed on the button.
+         */
+        "buttonText": string;
+        /**
+          * Emit component-library-analytics events on the file input change event.
+         */
+        "enableAnalytics"?: boolean;
+        /**
+          * The error message to render.
+         */
+        "error"?: string;
+        /**
+          * Optionally specifies the size of the header element to use instead of the base label. Accepts a number from 1 to 6, corresponding to HTML header elements h1 through h6. If not provided, defaults to standard label styling.
+         */
+        "headerSize"?: number;
+        /**
+          * Optional hint text.
+         */
+        "hint"?: string;
+        /**
+          * The label for the file input.
+         */
+        "label"?: string;
+        /**
+          * The name for the input element.
+         */
+        "name"?: string;
+        /**
+          * Sets the input to required and renders the (*Required) text.
+         */
+        "required"?: boolean;
+        /**
+          * Shows a va-progress-bar at this percentage when uploading
+         */
+        "uploadPercentage"?: number;
+    }
     interface VaNeedHelp {
     }
     interface VaNotification {
@@ -1751,6 +1793,12 @@ declare global {
         prototype: HTMLVaModalElement;
         new (): HTMLVaModalElement;
     };
+    interface HTMLVaMultipleFileInputElement extends Components.VaMultipleFileInput, HTMLStencilElement {
+    }
+    var HTMLVaMultipleFileInputElement: {
+        prototype: HTMLVaMultipleFileInputElement;
+        new (): HTMLVaMultipleFileInputElement;
+    };
     interface HTMLVaNeedHelpElement extends Components.VaNeedHelp, HTMLStencilElement {
     }
     var HTMLVaNeedHelpElement: {
@@ -1927,6 +1975,7 @@ declare global {
         "va-memorable-date": HTMLVaMemorableDateElement;
         "va-minimal-footer": HTMLVaMinimalFooterElement;
         "va-modal": HTMLVaModalElement;
+        "va-multiple-file-input": HTMLVaMultipleFileInputElement;
         "va-need-help": HTMLVaNeedHelpElement;
         "va-notification": HTMLVaNotificationElement;
         "va-number-input": HTMLVaNumberInputElement;
@@ -2493,6 +2542,10 @@ declare namespace LocalJSX {
          */
         "onVaChange"?: (event: VaFileInputCustomEvent<any>) => void;
         /**
+          * The event emitted when the file input value changes.
+         */
+        "onVaRemoveFile"?: (event: VaFileInputCustomEvent<any>) => void;
+        /**
           * Sets the input to required and renders the (*Required) text.
          */
         "required"?: boolean;
@@ -2774,6 +2827,48 @@ declare namespace LocalJSX {
           * If the modal is visible or not
          */
         "visible"?: boolean;
+    }
+    interface VaMultipleFileInput {
+        /**
+          * A comma-separated list of unique file type specifiers.
+         */
+        "accept"?: string;
+        /**
+          * The text displayed on the button.
+         */
+        "buttonText"?: string;
+        /**
+          * Emit component-library-analytics events on the file input change event.
+         */
+        "enableAnalytics"?: boolean;
+        /**
+          * The error message to render.
+         */
+        "error"?: string;
+        /**
+          * Optionally specifies the size of the header element to use instead of the base label. Accepts a number from 1 to 6, corresponding to HTML header elements h1 through h6. If not provided, defaults to standard label styling.
+         */
+        "headerSize"?: number;
+        /**
+          * Optional hint text.
+         */
+        "hint"?: string;
+        /**
+          * The label for the file input.
+         */
+        "label"?: string;
+        /**
+          * The name for the input element.
+         */
+        "name"?: string;
+        /**
+          * Sets the input to required and renders the (*Required) text.
+         */
+        "required"?: boolean;
+        /**
+          * Shows a va-progress-bar at this percentage when uploading
+         */
+        "uploadPercentage"?: number;
     }
     interface VaNeedHelp {
     }
@@ -3670,6 +3765,7 @@ declare namespace LocalJSX {
         "va-memorable-date": VaMemorableDate;
         "va-minimal-footer": VaMinimalFooter;
         "va-modal": VaModal;
+        "va-multiple-file-input": VaMultipleFileInput;
         "va-need-help": VaNeedHelp;
         "va-notification": VaNotification;
         "va-number-input": VaNumberInput;
@@ -3726,6 +3822,7 @@ declare module "@stencil/core" {
             "va-memorable-date": LocalJSX.VaMemorableDate & JSXBase.HTMLAttributes<HTMLVaMemorableDateElement>;
             "va-minimal-footer": LocalJSX.VaMinimalFooter & JSXBase.HTMLAttributes<HTMLVaMinimalFooterElement>;
             "va-modal": LocalJSX.VaModal & JSXBase.HTMLAttributes<HTMLVaModalElement>;
+            "va-multiple-file-input": LocalJSX.VaMultipleFileInput & JSXBase.HTMLAttributes<HTMLVaMultipleFileInputElement>;
             "va-need-help": LocalJSX.VaNeedHelp & JSXBase.HTMLAttributes<HTMLVaNeedHelpElement>;
             "va-notification": LocalJSX.VaNotification & JSXBase.HTMLAttributes<HTMLVaNotificationElement>;
             "va-number-input": LocalJSX.VaNumberInput & JSXBase.HTMLAttributes<HTMLVaNumberInputElement>;
