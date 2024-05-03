@@ -30,7 +30,6 @@ export class VaFileInput {
 
   @Element() el: HTMLElement;
   @State() file?: File;
-  @State() dragActive: boolean = false;
   @State() uploadStatus: 'idle' | 'uploading' | 'success' | 'failure' = 'idle';
 
   /**
@@ -114,12 +113,12 @@ export class VaFileInput {
   private handleChange = (e: Event) => {
     const input = e.target as HTMLInputElement;
     if (input.files && input.files.length > 0) {
-      console.log('success')
       this.file = input.files[0];
       this.vaChange.emit({ files: [this.file] });
       this.uploadStatus = 'success';
-    } else
-      console.log('fail');
+    } else {
+      this.uploadStatus = 'failure';
+    }
 
     input.value = '';
 
@@ -146,6 +145,18 @@ export class VaFileInput {
   private changeFile = () => {
     if (this.fileInputRef) {
       this.fileInputRef.click();
+    }
+  }
+
+  private handleDrop = (event: DragEvent) => {
+    event.preventDefault();
+    event.stopPropagation();
+
+    const files = event.dataTransfer.files;
+    if (files.length > 0) {
+      this.file = files[0];
+      this.vaChange.emit({ files: [this.file] });
+      this.uploadStatus = 'success';
     }
   }
 
@@ -239,7 +250,7 @@ export class VaFileInput {
               </Fragment>
             )}
           </div>
-          <div class="file-input-wrapper">
+          <div class="file-input-wrapper" onDrop={this.handleDrop}>
             <input
               id="fileInputField"
               class="file-input"
