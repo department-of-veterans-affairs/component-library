@@ -116,16 +116,8 @@ div.docked a {
   position: relative;
 }
 
-i {
-  align-self: flex-start;
-  font-family: 'Font Awesome 5 Free';
-  font-size: 2rem;
-  font-style: normal;
-  font-weight: 900;
-  padding-top: 10px;
-}
-i::before {
-  content: '\F062'; /* fa-arrow-up*/
+va-icon {
+  margin-right: 8px;
 }
 
 @media (min-width: 768px) {
