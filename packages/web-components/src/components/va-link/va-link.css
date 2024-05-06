@@ -22,6 +22,10 @@
   font-weight: 700;
 }
 
+.link-icon--left {
+  margin-right: 8px;
+}
+
 i::before {
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
