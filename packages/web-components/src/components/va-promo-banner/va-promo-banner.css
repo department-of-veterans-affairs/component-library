@@ -41,10 +41,6 @@
   text-decoration: underline;
 }
 
-.va-banner-content-link i::before {
-  content: '\F105'; /* fa-angle-right */
-}
-
 button {
   background: none;
   background-color: transparent;
@@ -56,21 +52,6 @@ button {
 
 button:hover {
   cursor: pointer;
-}
-
-button i::before {
-  content: '\F057'; /* fa-times-circle */
-}
-
-i {
-  font-family: 'Font Awesome 5 Free';
-  font-style: normal;
-  font-weight: 900;
-  display: inline-block;
-  font-style: normal;
-  font-variant: normal;
-  text-rendering: auto;
-  line-height: 1;
 }
 
 @media screen and (min-width: 768px) {
