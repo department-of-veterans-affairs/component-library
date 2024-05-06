@@ -95,7 +95,7 @@ export class VaOnThisPage {
           <dd role="definition">
             {h2s.map(heading => (
               <a href={`#${heading.id}`} onClick={handleOnClick}>
-                <i aria-hidden="true" class="fas fa-arrow-down"></i>
+                <va-icon icon="arrow_downward"></va-icon>
                 {heading.innerText}
               </a>
             ))}
