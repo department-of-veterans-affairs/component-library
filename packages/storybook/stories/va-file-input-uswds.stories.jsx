@@ -28,7 +28,6 @@ const defaultArgs = {
   'vaChange': event =>
     alert(`File change event received: ${event?.detail?.files[0]?.name}`),
   'uswds': true,
-  'uploadPercentage': null,
   'headerSize': null,
   'children': null
 };
@@ -43,7 +42,6 @@ const Template = ({
   'enable-analytics': enableAnalytics,
   vaChange,
   uswds,
-  uploadPercentage,
   headerSize,
   children
 }) => {
@@ -58,7 +56,6 @@ const Template = ({
       enable-analytics={enableAnalytics}
       onVaChange={vaChange}
       uswds={uswds}
-      uploadPercentage={uploadPercentage}
       headerSize={headerSize}
       children={children}
     />

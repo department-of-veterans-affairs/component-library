@@ -68,11 +68,6 @@ export class VaFileInput {
   @Prop() hint?: string;
 
   /**
-   * Optionally allow multiple files (USWDS Only)
-   */
-  // @Prop() multiple?: boolean = false; NOTE: disabling temporarily
-
-  /**
    * Emit component-library-analytics events on the file input change event.
    */
   @Prop() enableAnalytics?: boolean = false;
@@ -81,11 +76,6 @@ export class VaFileInput {
    * Whether or not the component will use USWDS v3 styling.
    */
   @Prop() uswds?: boolean = false;
-
-  /**
-   * Shows a va-progress-bar at this percentage when uploading
-   */
-  @Prop() uploadPercentage?: number;
 
   /**
    * Optionally specifies the size of the header element to use instead of the base label.
@@ -183,10 +173,8 @@ export class VaFileInput {
   }
 
   private renderLabelOrHeader = (label: string, required: boolean, headerSize?: number) => {
-    console.log(label, required, headerSize);
     const requiredSpan = required ? <span class="required"> {i18next.t('required')}</span> : null;
     if (headerSize && headerSize >= 1 && headerSize <= 6) {
-      console.log('in the thing')
       const HeaderTag = `h${headerSize}` as keyof  JSX.IntrinsicElements;
       return (
         <div class="label-header">
@@ -225,7 +213,7 @@ export class VaFileInput {
   }
 
   render() {
-    const { label, name, required, accept, error, hint, uswds, file, uploadStatus, uploadPercentage, headerSize } = this;
+    const { label, name, required, accept, error, hint, uswds, file, uploadStatus, headerSize } = this;
 
     const text = this.getButtonText();
 
@@ -286,15 +274,6 @@ export class VaFileInput {
                       <span>(Uploading...)</span>
                     )}
                   </div>
-                  {uploadStatus === 'uploading' && uploadPercentage && (
-                    <div>
-                      <va-progress-bar percent={uploadPercentage}></va-progress-bar>
-                      <div>
-                        <va-button-icon onClick={this.removeFile} buttonType="cancel" label="Cancel"
-                        />
-                      </div>
-                    </div>
-                  )}
                   {uploadStatus === 'success' && file && (
                     <div>
                       <div class="additional-info-slot">

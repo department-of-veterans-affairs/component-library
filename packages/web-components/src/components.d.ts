@@ -456,10 +456,6 @@ export namespace Components {
          */
         "required"?: boolean;
         /**
-          * Shows a va-progress-bar at this percentage when uploading
-         */
-        "uploadPercentage"?: number;
-        /**
           * Whether or not the component will use USWDS v3 styling.
          */
         "uswds"?: boolean;
@@ -2496,10 +2492,6 @@ declare namespace LocalJSX {
           * Sets the input to required and renders the (*Required) text.
          */
         "required"?: boolean;
-        /**
-          * Shows a va-progress-bar at this percentage when uploading
-         */
-        "uploadPercentage"?: number;
         /**
           * Whether or not the component will use USWDS v3 styling.
          */
