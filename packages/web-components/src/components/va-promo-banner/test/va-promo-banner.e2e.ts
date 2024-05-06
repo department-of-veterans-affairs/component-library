@@ -12,13 +12,13 @@ describe('va-promo-banner', () => {
       <va-promo-banner class="hydrated">
         <mock:shadow-root>
           <div class="va-banner-body">
-            <i aria-hidden="true" role="presentation"></i>
+            <va-icon class="hydrated va-promo-banner__icon"></va-icon>
             <a class="va-banner-content-link">
               <slot></slot>
-              <i aria-hidden="true" role="presentation"></i>
+              <va-icon class="hydrated"></va-icon>
             </a>
             <button aria-label="Dismiss this promo banner" type="button">
-              <i aria-hidden="true" role="presentation"></i>
+              <va-icon class="hydrated"></va-icon>
             </button>
           </div>
         </mock:shadow-root>
@@ -100,13 +100,13 @@ describe('va-promo-banner', () => {
     <va-promo-banner class="hydrated" href="#" type="news">
       <mock:shadow-root>
         <div class="va-banner-body">
-          <i aria-hidden="true" class="news" role="presentation"></i>
+          <va-icon class="hydrated va-promo-banner__icon"></va-icon>
           <a class="va-banner-content-link" href="#">
             <slot></slot>
-            <i aria-hidden="true" role="presentation"></i>
+            <va-icon class="hydrated"></va-icon>
           </a>
           <button aria-label="Dismiss this promo banner" type="button">
-            <i aria-hidden="true" role="presentation"></i>
+            <va-icon class="hydrated"></va-icon>
           </button>
         </div>
       </mock:shadow-root>

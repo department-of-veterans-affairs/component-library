@@ -16,38 +16,16 @@
   align-items: center;
 }
 
-.va-banner-body > i {
-  display: none;
-  text-align: center;
-  width: 100%;
-  font-size: 2.15rem;
+.va-promo-banner__icon {
   background-color: var(--vads-color-white);
   border-radius: 50%;
-  height: 100%;
   height: 4.2rem;
-  position: relative;
   width: 4.2rem;
   margin-left: 0.5rem;
   margin-right: 0.8rem;
   margin-top: 0.8rem;
   margin-bottom: 0.8rem;
-}
-
-.va-banner-body > i::before {
-  position: relative;
-  top: 0.8rem;
-}
-
-.va-banner-body > i.announcement::before {
-  content: '\F0A1'; /* fa-bullhorn */
-}
-
-.va-banner-body > i.news::before {
-  content: '\F1EA'; /* fa-newspaper */
-}
-
-.va-banner-body > i.email-signup::before {
-  content: '\F0E0'; /* fa-envelope */
+  text-align: center;
 }
 
 .va-banner-content-link {
