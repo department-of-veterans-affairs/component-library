@@ -410,116 +410,122 @@ export class VaModal {
       ? `Close ${modalTitle} modal`
       : 'Close modal';
 
-      const wrapperClass = classnames({
-        'usa-modal': true,
-        'va-modal-alert': status,
-        'usa-modal--lg': this.large,
-      });
-      const contentClass = classnames({
-        'usa-modal__content': true,
-        'usa-modal-alert': status,
-      });
-      const bodyClass = classnames({
-        'usa-modal__main': true,
-        'usa-modal-alert': status,
-        'va-modal-alert-body': status,
-      });
-      const titleClass = classnames({
-        'usa-modal__heading': true,
-        'va-modal-alert-title': status,
-      });
-      const closingButton = forcedModal ? (
-        ''
-      ) : (
-        <button
-          aria-label={btnAriaLabel}
-          class="va-modal-close"
-          onClick={e => this.handleClose(e)}
-          ref={el => (this.closeButton = el as HTMLButtonElement)}
-          type="button"
+    const wrapperClass = classnames({
+      'usa-modal': true,
+      'va-modal-alert': status,
+      'usa-modal--lg': this.large,
+    });
+    const contentClass = classnames({
+      'usa-modal__content': true,
+      'usa-modal-alert': status,
+    });
+    const bodyClass = classnames({
+      'usa-modal__main': true,
+      'usa-modal-alert': status,
+      'va-modal-alert-body': status,
+    });
+    const titleClass = classnames({
+      'usa-modal__heading': true,
+      'va-modal-alert-title': status,
+    });
+    const closingButton = forcedModal ? (
+      ''
+    ) : (
+      <button
+        aria-label={btnAriaLabel}
+        class="va-modal-close"
+        onClick={e => this.handleClose(e)}
+        ref={el => (this.closeButton = el as HTMLButtonElement)}
+        type="button"
+      >
+        <va-icon icon="cancel" size={4}></va-icon>
+      </button>
+    );
+    /* eslint-disable i18next/no-literal-string */
+    /** Icons to show for each status type */
+    const statusIcons = {
+      continue: 'lock',
+      error: 'error',
+      info: 'info',
+      success: 'check',
+      warning: 'warning',
+    };
+    /* eslint-enable i18next/no-literal-string */
+    const statusIcon = statusIcons[status];
+    return (
+      <Host>
+        <div
+          class={wrapperClass}
+          role={
+            status === 'warning' || status === 'error'
+              ? 'alertdialog'
+              : 'dialog'
+          }
+          aria-label={ariaLabel}
+          aria-modal="true"
         >
-          <va-icon icon="cancel" size={4}></va-icon>
-        </button>
-      );
-      /**
-       * Icons to show for each status type
-       */
-      const statusIcons = {
-        continue: 'lock',
-        error: 'error',
-        info: 'info',
-        success: 'check',
-        warning: 'warning',
-      };
-      const statusIcon = statusIcons[status];
-      return (
-        <Host>
-          <div
-            class={wrapperClass}
-            role={
-              status === 'warning' || status === 'error'
-                ? 'alertdialog'
-                : 'dialog'
-            }
-            aria-label={ariaLabel}
-            aria-modal="true"
-          >
-            <div class={contentClass}>
-              {closingButton}
-              {status && <va-icon class="va-modal-alert__icon" icon={statusIcon} size={4}></va-icon>}
-              <div class={bodyClass}>
-                <div role="document">
-                  {modalTitle && (
-                    <h2 class={titleClass} tabindex={-1} id="heading">
-                      {modalTitle}
-                    </h2>
-                  )}
-                  <div class="usa-prose" id="description">
-                    <slot></slot>
-                  </div>
-                </div>
-                {((primaryButtonClick && primaryButtonText) ||
-                  (secondaryButtonClick && secondaryButtonText)) && (
-                  <div
-                    class="usa-modal__footer"
-                    ref={el => (this.alertActions = el as HTMLDivElement)}
-                  >
-                    <ul class="usa-button-group">
-                      {primaryButtonClick && primaryButtonText && (
-                        <li class="usa-button-group__item">
-                          <va-button
-                            onClick={e => this.handlePrimaryButtonClick(e)}
-                            text={primaryButtonText}
-                          />
-                        </li>
-                      )}
-                      {secondaryButtonClick && secondaryButtonText && (
-                        <li class="usa-button-group__item">
-                          {!unstyled && (
-                            <va-button
-                              onClick={e => this.handleSecondaryButtonClick(e)}
-                              secondary
-                              text={secondaryButtonText}
-                            />
-                          )}
-                          {unstyled && (
-                            <button
-                              onClick={e => this.handlePrimaryButtonClick(e)}
-                              type="button"
-                              class="usa-button usa-button--unstyled"
-                            >
-                              {secondaryButtonText}
-                            </button>
-                          )}
-                        </li>
-                      )}
-                    </ul>
-                  </div>
+          <div class={contentClass}>
+            {closingButton}
+            {status && (
+              <va-icon
+                class="va-modal-alert__icon"
+                icon={statusIcon}
+                size={4}
+              ></va-icon>
+            )}
+            <div class={bodyClass}>
+              <div role="document">
+                {modalTitle && (
+                  <h2 class={titleClass} tabindex={-1} id="heading">
+                    {modalTitle}
+                  </h2>
                 )}
+                <div class="usa-prose" id="description">
+                  <slot></slot>
+                </div>
               </div>
+              {((primaryButtonClick && primaryButtonText) ||
+                (secondaryButtonClick && secondaryButtonText)) && (
+                <div
+                  class="usa-modal__footer"
+                  ref={el => (this.alertActions = el as HTMLDivElement)}
+                >
+                  <ul class="usa-button-group">
+                    {primaryButtonClick && primaryButtonText && (
+                      <li class="usa-button-group__item">
+                        <va-button
+                          onClick={e => this.handlePrimaryButtonClick(e)}
+                          text={primaryButtonText}
+                        />
+                      </li>
+                    )}
+                    {secondaryButtonClick && secondaryButtonText && (
+                      <li class="usa-button-group__item">
+                        {!unstyled && (
+                          <va-button
+                            onClick={e => this.handleSecondaryButtonClick(e)}
+                            secondary
+                            text={secondaryButtonText}
+                          />
+                        )}
+                        {unstyled && (
+                          <button
+                            onClick={e => this.handlePrimaryButtonClick(e)}
+                            type="button"
+                            class="usa-button usa-button--unstyled"
+                          >
+                            {secondaryButtonText}
+                          </button>
+                        )}
+                      </li>
+                    )}
+                  </ul>
+                </div>
+              )}
             </div>
           </div>
-        </Host>
-      );
+        </div>
+      </Host>
+    );
   }
 }
