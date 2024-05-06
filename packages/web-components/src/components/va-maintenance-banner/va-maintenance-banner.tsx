@@ -155,30 +155,53 @@ export class VaMaintenanceBanner {
         'maintenance-banner--error': !isWarning
       })
 
+      const bannerIconName = isError ? 'error' : 'warning';
+
       return (
         <Host>
-            <div class={maintenanceBannerClass} ref={el => (this.maintenanceBannerEl = el as HTMLDivElement)}>
-                <div class="maintenance-banner__body">
-                  <h4 class="maintenance-banner__title">{isWarning ? upcomingWarnTitle : maintenanceTitle}</h4>
-                  <div class="maintenance-banner__content" ref={el => (this.maintenanceBannerContent = el as HTMLDivElement)}>{
-                    isWarning ?
-                      <slot name="warn-content"></slot> :
-                      <slot name="maintenance-content"></slot>
-                  }</div>
-                  <div class="maintenance-banner__derived-content">{this.derivePostContent(new Date(maintenanceStartDateTime), new Date(maintenanceEndDateTime))}</div>
-                  <button
-                    aria-label="Close notification"
-                    class="maintenance-banner__close"
-                    onClick={this.onCloseAlert}
-                    type="button"
-                  >
-                    <i aria-hidden="true" />
-                </button>
-                </div>
-
+          <div
+            class={maintenanceBannerClass}
+            ref={el => (this.maintenanceBannerEl = el as HTMLDivElement)}
+          >
+            <va-icon
+              class="maintenance-banner__icon"
+              icon={bannerIconName}
+              size={3}
+            ></va-icon>
+            <div class="maintenance-banner__body">
+              <h4 class="maintenance-banner__title">
+                {isWarning ? upcomingWarnTitle : maintenanceTitle}
+              </h4>
+              <div
+                class="maintenance-banner__content"
+                ref={el =>
+                  (this.maintenanceBannerContent = el as HTMLDivElement)
+                }
+              >
+                {isWarning ? (
+                  <slot name="warn-content"></slot>
+                ) : (
+                  <slot name="maintenance-content"></slot>
+                )}
+              </div>
+              <div class="maintenance-banner__derived-content">
+                {this.derivePostContent(
+                  new Date(maintenanceStartDateTime),
+                  new Date(maintenanceEndDateTime),
+                )}
+              </div>
             </div>
+            <button
+              aria-label="Close notification"
+              class="maintenance-banner__close"
+              onClick={this.onCloseAlert}
+              type="button"
+            >
+              <va-icon icon="cancel" size={3}></va-icon>
+            </button>
+          </div>
         </Host>
-      )
+      );
     } else {
       return null
     }
