@@ -135,7 +135,11 @@ export class VaLink {
         <Host>
           <a href={href} class={linkClass} onClick={handleClick}>
             {text}
-            <i aria-hidden="true" />
+            <va-icon
+              class="link-icon--active"
+              icon="chevron_right"
+              size={3}
+            ></va-icon>
           </a>
         </Host>
       );
@@ -152,7 +156,11 @@ export class VaLink {
             rel="noopener"
             target="_blank"
           >
-            <i aria-hidden="true" />
+            <va-icon
+              class="link-icon--left"
+              icon="play_circle"
+              size={3}
+            ></va-icon>
             {text} <dfn>{channel ? 'YouTube' : 'on YouTube'}</dfn>
           </a>
         </Host>
@@ -169,7 +177,11 @@ export class VaLink {
             download={filename}
             onClick={handleClick}
           >
-            <i aria-hidden="true" />
+            <va-icon
+              class="link-icon--left"
+              icon="calendar_today"
+              size={3}
+            ></va-icon>
             {text}
           </a>
         </Host>
@@ -186,7 +198,11 @@ export class VaLink {
             download={filename}
             onClick={handleClick}
           >
-            <i aria-hidden="true" />
+            <va-icon
+              class="link-icon--left"
+              icon="file_download"
+              size={3}
+            ></va-icon>
             {text}{' '}
             {filetype && (
               <dfn>
