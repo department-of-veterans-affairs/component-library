@@ -7341,7 +7341,7 @@ article > h1 {
   border-left-style: solid;
   border-left-width: 10px;
   display: table;
-  padding: units(4) units(8) units(4) units(3);
+  padding: 2rem 4rem 2rem 1.5rem;
   width: 100%;
 }
 .usa-alert::before {
@@ -7350,7 +7350,7 @@ article > h1 {
   background: none;
   font-family: "Font Awesome 5 Free";
   font-size: 1.25rem;
-  margin-right: units(2);
+  margin-right: 1rem;
   position: static;
   font-weight: 900;
 }
@@ -7367,7 +7367,7 @@ article > h1 {
   padding-top: 0;
 }
 .usa-alert-text {
-  margin-top: units(2.5);
+  margin-top: 1.25rem;
 }
 .usa-alert-text:only-child {
   margin: 0;
@@ -7380,10 +7380,10 @@ article > h1 {
   margin-bottom: 0;
 }
 .usa-alert-text .usa-alert-heading + p:only-of-type {
-  margin-top: units(2.5);
+  margin-top: 1.25rem;
 }
 .usa-alert-text ul {
-  padding-left: units(2.5);
+  padding-left: 1.25rem;
 }
 .usa-alert-info {
   border-left-color: #00a6d2;
@@ -7444,7 +7444,7 @@ article > h1 {
   font-size: 1.40625rem;
   padding: 0;
   position: absolute;
-  margin: units(2);
+  margin: 1rem;
   right: 0;
   top: 0;
   width: auto;
@@ -7792,10 +7792,10 @@ button.short {
 @media screen and (min-width: 768px) {
   .va-btn-withicon svg {
     display: block;
-    height: 0.9375rem;
-    margin-right: 0.15625rem;
+    height: 15px;
+    margin-right: 2.5px;
     pointer-events: none;
-    width: 0.9375rem;
+    width: 15px;
   }
 }
 
@@ -8020,14 +8020,14 @@ legend.legend-label + .form-checkbox-buttons {
 }
 .loading-indicator-container .loading-indicator {
   display: block;
-  height: units(8);
-  margin-top: units(2);
+  height: 4rem;
+  margin-top: 1rem;
 }
 .loading-indicator-container .loading-indicator:after {
   content: " ";
   display: inline-block;
-  width: units(7);
-  height: units(7);
+  width: 3.5rem;
+  height: 3.5rem;
   margin: 1px;
   border-radius: 50%;
   border: 8px solid #005ea2;
@@ -8039,7 +8039,7 @@ legend.legend-label + .form-checkbox-buttons {
 }
 
 .async-loader {
-  padding-bottom: units(1);
+  padding-bottom: 0.5rem;
 }
 
 @keyframes spin {
@@ -8080,12 +8080,12 @@ legend.legend-label + .form-checkbox-buttons {
 }
 .va-dropdown-trigger {
   background: transparent url("./img/arrow-down-white.svg") no-repeat;
-  background-position: right 0.5rem center;
-  background-size: 0.625rem 0.625rem;
+  background-position: right 8px center;
+  background-size: 10px 10px;
   border-radius: 0;
   border-top: 3px solid transparent;
   margin: 0;
-  padding: 0.5625rem 1.5625rem 0.5rem 0.5rem;
+  padding: 9px 25px 8px 8px;
 }
 .va-dropdown-trigger:hover {
   background-color: #005ea2;
@@ -8409,13 +8409,13 @@ legend.legend-label + .form-checkbox-buttons {
 .va-btn-sidebarnav-trigger .button-wrapper {
   position: absolute;
   width: 100%;
-  padding: units(1) units(1) units(2);
+  padding: 0.5rem 0.5rem 1rem;
 }
 .va-btn-sidebarnav-trigger button {
   background-color: #ffffff;
   color: #005ea2;
   margin: 0;
-  padding: units(1.5);
+  padding: 0.75rem;
   border: 1px solid #005ea2;
   border-radius: 4px;
   width: 100%;
@@ -8424,7 +8424,7 @@ legend.legend-label + .form-checkbox-buttons {
   justify-content: space-between;
 }
 .va-btn-sidebarnav-trigger button strong {
-  line-height: units(2.5);
+  line-height: 1.25rem;
 }
 .va-btn-sidebarnav-trigger button svg {
   fill: #005ea2;
@@ -8695,14 +8695,14 @@ input[type=radio] {
   }
 }
 .va-modal .va-modal-body {
-  margin-right: units(2.5);
+  margin-right: 1.25rem;
 }
 .va-modal .va-modal-body p:first-of-type {
   margin-top: 0;
 }
 .va-modal-title {
   margin: 0;
-  margin-bottom: units(2);
+  margin-bottom: 1rem;
 }
 .va-modal-inner {
   background: #ffffff;
@@ -8724,17 +8724,17 @@ input[type=radio] {
   max-width: 37.5rem;
 }
 .va-modal-alert .alert-actions {
-  margin-top: units(3);
+  margin-top: 1.5rem;
 }
 .va-modal-alert .alert-actions button {
   margin: 0;
 }
 .va-modal-alert .alert-actions button + button {
-  margin-left: units(2.5);
+  margin-left: 1.25rem;
 }
 .va-modal-body {
   overflow-wrap: break-word;
-  padding: units(2.5);
+  padding: 1.25rem;
   word-break: break-word;
   word-wrap: break-word;
 }
@@ -8761,7 +8761,7 @@ button.va-modal-close {
   font-size: 1.40625rem;
   padding: 0;
   position: absolute;
-  margin: units(2);
+  margin: 1rem;
   right: 0;
   top: 0;
   width: auto;
