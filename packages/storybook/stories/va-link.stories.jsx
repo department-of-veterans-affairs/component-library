@@ -25,6 +25,7 @@ const defaultArgs = {
   'filename': undefined,
   'filetype': undefined,
   'pages': undefined,
+  'reverse': undefined,
   'text': undefined,
   'video': undefined,
 };
@@ -40,6 +41,7 @@ const Template = ({
   filename,
   filetype,
   pages,
+  reverse,
   text,
   video,
 }) => {
@@ -58,6 +60,7 @@ const Template = ({
         filename={filename}
         filetype={filetype}
         pages={pages}
+        reverse={reverse}
         text={text}
         video={video}
       />
@@ -84,6 +87,7 @@ const VariantTemplate = ({
   filename,
   filetype,
   pages,
+  reverse,
   text,
   video,
 }) => {
@@ -99,6 +103,7 @@ const VariantTemplate = ({
       filename={filename}
       filetype={filetype}
       pages={pages}
+      reverse={reverse}
       text={text}
       video={video}
     />
@@ -141,4 +146,43 @@ Calendar.args = {
   calendar: true,
   href: 'data:text/calendar;charset=utf-8,BEGIN%3AVCALENDAR%0D%0AVERSION%3A2.0%0D%0APRODID%3AVA%0D%0ABEGIN%3AVEVENT%0D%0AUID%3A1398DD3C-3572-40FD-84F6-BB6F97C79D67%0D%0ASUMMARY%3AAppointment%20at%20Cheyenne%20VA%20Medical%20Center%0D%0ADESCRIPTION%3AYou%20have%20a%20health%20care%20appointment%20at%20Cheyenne%20VA%20Medical%20Cent%0D%0A%09er%0D%0A%09%5Cn%5Cn2360%20East%20Pershing%20Boulevard%5Cn%0D%0A%09Cheyenne%5C%2C%20WY%2082001-5356%5Cn%0D%0A%09307-778-7550%5Cn%0D%0A%09%5CnSign%20in%20to%20https%3A%2F%2Fva.gov%2Fhealth-care%2Fschedule-view-va-appointments%2Fappo%0D%0A%09intments%20to%20get%20details%20about%20this%20appointment%5Cn%0D%0ALOCATION%3A2360%20East%20Pershing%20Boulevard%5C%2C%20Cheyenne%5C%2C%20WY%2082001-5356%0D%0ADTSTAMP%3A20221222T021934Z%0D%0ADTSTART%3A20221222T021934Z%0D%0ADTEND%3A20221222T024934Z%0D%0AEND%3AVEVENT%0D%0AEND%3AVCALENDAR',
   text: `Add to calendar`,
+};
+
+const ReverseTemplate = ({ filename, filetype, href, reverse, text }) => {
+  return (
+    <div className="vads-u-background-color--primary vads-u-padding--1">
+      <span className="vads-u-color--white">Default Link: </span>
+      <va-link href={href} reverse={reverse} text={text} />
+      <br />
+      <span className="vads-u-color--white">Active Link: </span>
+      <va-link active={true} href={href} reverse={reverse} text={text} />
+      <br />
+      <span className="vads-u-color--white">Download Link: </span>
+      <va-link
+        download={true}
+        href={href}
+        filename={filename}
+        filetype={filetype}
+        reverse={reverse}
+        text={text}
+      />
+      <br />
+      <span className="vads-u-color--white">Video Link: </span>
+      <va-link href={href} reverse={reverse} text={text} video={true} />
+      <br />
+      <span className="vads-u-color--white">Channel Link: </span>
+      <va-link channel={true} href={href} reverse={reverse} text={text} />
+      <br />
+      <span className="vads-u-color--white">Calendar Link: </span>
+      <va-link calendar={true} href={href} reverse={reverse} text={text} />
+    </div>
+  );
+};
+
+export const Reverse = ReverseTemplate.bind(null);
+Reverse.args = {
+  ...defaultArgs,
+  href: 'https://va.gov/',
+  text: 'Example Link',
+  reverse: true,
 };
