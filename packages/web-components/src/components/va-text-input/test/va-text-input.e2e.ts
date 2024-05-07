@@ -769,4 +769,29 @@ describe('va-text-input', () => {
 
     await axeCheck(page);
   });
+
+  it('sets a range based on min and max attributes', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-text-input min="0" max="4"/>');
+
+    const inputEl = await page.find('va-text-input >>> input');
+    expect(inputEl.getAttribute('min')).toBe('0');
+    expect(inputEl.getAttribute('max')).toBe('4');
+  });
+
+  it('renders a "$" if currency flag set to true', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-text-input currency />');
+    const currencyTextElement = await page.find('va-text-input >>> div > div > div');
+    expect(currencyTextElement.innerText).toContain('$');
+  });
+
+  it('sets the input mode to a default pattern if inputmode is numerical or decimal', async () => {
+    for (const inputMode of ['numeric', 'decimal']) {
+      const page = await newE2EPage();
+      await page.setContent(`<va-text-input inputmode="${inputMode}" />`);
+      const inputEl = await page.find('va-text-input >>> input');
+      expect(inputEl.getAttribute('pattern')).toEqual("[0-9]+(\.[0-9]{1,})?");
+    }
+  })
 });

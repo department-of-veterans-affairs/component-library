@@ -58,6 +58,9 @@ const defaultArgs = {
   'form-heading': null,
   'form-description': null,
   'charcount': false,
+  'max': undefined,
+  'min': undefined,
+  'currency': undefined
 };
 
 const Template = ({
@@ -75,7 +78,10 @@ const Template = ({
   pattern,
   hint,
   'message-aria-describedby': messageAriaDescribedby,
-  charcount
+  charcount,
+  max,
+  min,
+  currency
 }) => {
   return (
     <va-text-input
@@ -96,6 +102,9 @@ const Template = ({
       onInput={e => console.log('input event value', e.target.value)}
       message-aria-describedby={messageAriaDescribedby}
       charcount={charcount}
+      min={min}
+      max={max}
+      currency={currency}
     />
   );
 };
@@ -323,6 +332,15 @@ Pattern.args = {
   pattern: '[0-9]{4}',
 };
 
+export const ValidRange = Template.bind(null);
+ValidRange.args = {
+  ...defaultArgs,
+  inputmode: 'numeric',
+  min: 0,
+  max: 4,
+  hint: "The valid range is 0 to 4",
+};
+
 export const Autocomplete = Template.bind(null);
 Autocomplete.args = {
   ...defaultArgs,
@@ -369,7 +387,13 @@ WithAdditionalInfo.args = {
 };
 
 export const WithCharacterCount = Template.bind(null);
-WithCharacterCount.args = { ...defaultArgs, maxlength: '10', charcount: true }
+WithCharacterCount.args = { ...defaultArgs, maxlength: '10', charcount: true };
+
+export const WithCurrency = Template.bind(null);
+WithCurrency.args = {
+  ...defaultArgs,
+  currency: true
+};
 
 export const Widths = WidthsTemplate.bind(null);
 Widths.args = {
