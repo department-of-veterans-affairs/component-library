@@ -112,10 +112,10 @@ button.short {
 
     @include media($medium-screen) {
       display: block;
-      height: scale-rem(1.5rem);
-      margin-right: scale-rem(0.25rem);
+      height: 15px;
+      margin-right: 2.5px;
       pointer-events: none;
-      width: scale-rem(1.5rem);
+      width: 15px;
     }
   }
 }

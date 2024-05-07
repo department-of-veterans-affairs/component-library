@@ -6,12 +6,12 @@
   // This should always be a button element
   &-trigger {
     background: transparent url('#{$image-path}/arrow-down-white.svg') no-repeat;
-    background-position: right scale-rem(.8rem) center;
-    background-size: scale-rule(1rem 1rem);
+    background-position: right 8px center;
+    background-size: 10px 10px;
     border-radius: 0;
     border-top: 3px solid transparent;
     margin: 0;
-    padding: scale-rule(.9rem 2.5rem .8rem .8rem);
+    padding: 9px 25px 8px 8px;
 
     &:hover {
       background-color: $vads-color-link;
