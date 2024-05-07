@@ -1921,7 +1921,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@department-of-veterans-affairs/css-library@^0.6.0, @department-of-veterans-affairs/css-library@workspace:packages/css-library":
+"@department-of-veterans-affairs/css-library@^0.5.1, @department-of-veterans-affairs/css-library@workspace:packages/css-library":
   version: 0.0.0-use.local
   resolution: "@department-of-veterans-affairs/css-library@workspace:packages/css-library"
   dependencies:
@@ -2060,7 +2060,7 @@ __metadata:
   dependencies:
     "@axe-core/puppeteer": ^4.4.0
     "@babel/core": ^7.12.13
-    "@department-of-veterans-affairs/css-library": ^0.6.0
+    "@department-of-veterans-affairs/css-library": ^0.5.1
     "@department-of-veterans-affairs/formation": ^10.1.2
     "@stencil/core": ^2.19.2
     "@stencil/postcss": ^2.0.0
