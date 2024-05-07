@@ -12,7 +12,7 @@ $usa-form-width: scale-rem(32rem);
 
 [type=submit] {
   @include media($medium-screen) {
-    margin-top: calc(1.875rem - .2em); // Label margin minus input bottom margin
+    margin-top: calc(scale-rem(3rem) - .2em); // Label margin minus input bottom margin
   }
 }
 
