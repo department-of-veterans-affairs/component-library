@@ -25,7 +25,7 @@ $image-path: "./img"; // TODO: Verify asset path
 @import 'formation-overrides/core/base';
 
 // ----- VA BASE (VARIABLES/HELPERS) ---- //
-@import 'base/b-functions';
+@import 'base/functions';
 @import 'base/fonts';
 
 // ---- USWDS v1 STANDARDS ELEMENTS/COMPONENTS --- //
