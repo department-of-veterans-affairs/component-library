@@ -1,17 +1,8 @@
 /* eslint-disable i18next/no-literal-string */
-import {
-  Component,
-  h,
-  Prop,
-  State,
-} from '@stencil/core';
-// todo i think we need the react-bindings to pass the children prop along but getting an error currently 
+import { Component, Prop, State, Element, h } from '@stencil/core';
+// todo i think we need the react-bindings to pass the children prop along but getting an error currently
 //import { VaFileInput } from '@department-of-veterans-affairs/web-components/react-bindings';
 
-type FileInfo = {
-  id: number,
-  uploadStatus: string
-}
 /**
  * @componentName Multiple file input
  * @maturityCategory caution
@@ -25,9 +16,8 @@ type FileInfo = {
   shadow: true,
 })
 export class VaMultipleFileInput {
-  @State() fileList: FileInfo[] = [];
-  @State() fileCount: number = 0;
-  
+  @State() fileTrackCount: number = 0;
+
   /**
    * The label for the file input.
    */
@@ -80,74 +70,67 @@ export class VaMultipleFileInput {
    */
   @Prop() headerSize?: number;
 
+  @Element() el: HTMLElement;
+
   private handleChange(e) {
     // todo i think we need to bubble the event up
-
-    const fileInfo = this.findFile(e.target.id);
-    if(!fileInfo) {
-      // if the fileInfo exists, we don't need to update anything
-      // if it doesn't exist it's a new file, add it to fileList array
-      this.fileList = [...this.fileList, ({id: this.fileCount,  uploadStatus:'success'})]
-      this.fileCount++;
-    }    
+    // const inputElement = this.findFile(e.target.id);
+    console.log(e.target, 'z');
+    const container: HTMLElement =
+      this.el.shadowRoot.querySelector('.inputs-wrap');
+    this.appendFileInput(container);
   }
 
-  private findFile(id: string):FileInfo {
-    return this.fileList.find((file) => {
-      return file.id.toString() === id
-    })
-  }
+  // // private findFile(id: string): Element {
+  // //   return this.el.shadowRoot.getElementById(id);
+  // // }
 
-  private handleRemoveFile(e) {
-    let removedFile = this.findFile(e.target.id);
-    let index = this.fileList.indexOf(removedFile);
-    removedFile.uploadStatus = 'deleted'
-    this.fileList =  [...this.fileList.slice(0,index), removedFile, ...this.fileList.slice(index + 1, this.fileList.length)]
-  }
-
-  private renderFileInput(label, name, required, accept, error, hint, uploadPercentage, headerSize, enableAnalytics, fileInfo:FileInfo) {
-
-    if(!fileInfo || (fileInfo && fileInfo.uploadStatus !== 'deleted')) {
-      const id = fileInfo && fileInfo.id.toString() || this.fileCount;
-      return(
-        <va-file-input
-          id={id.toString()}
-          label={label}
-          name={name}
-          accept={accept}
-          required={required}
-          error={error}
-          hint={hint}
-          enable-analytics={enableAnalytics}
-          onVaChange={(e) => this.handleChange(e)}
-          onVaRemoveFile={(e) => this.handleRemoveFile(e)}
-          uswds={true}
-          uploadPercentage={uploadPercentage}
-          headerSize={headerSize}
-          //children={"children"}
-        />
-      )
+  private handleRemoveFile() {
+    const container: HTMLElement =
+      this.el.shadowRoot.querySelector('.inputs-wrap');
+    if (container.children.length === 0) {
+      this.appendFileInput(container);
     }
-    // todo this feels hacky
-    // return something for deleted uploads to replace what was there or the dom won't be updated
-    return <span></span>
   }
-  
+
+  private appendFileInput(container: HTMLElement): void {
+    const {
+      label,
+      name,
+      required,
+      accept,
+      error,
+      hint,
+      uploadPercentage,
+      headerSize,
+      enableAnalytics,
+    } = this;
+
+    const inputElement = document.createElement('va-file-input');
+    inputElement.id = this.fileTrackCount.toString();
+    inputElement.label = label;
+    inputElement.name = name;
+    inputElement.accept = accept;
+    inputElement.required = required;
+    inputElement.error = error;
+    inputElement.hint = hint;
+    inputElement.uswds = true;
+    inputElement.uploadPercentage = uploadPercentage;
+    inputElement.headerSize = headerSize;
+    inputElement['enable-analytics'] = enableAnalytics;
+    inputElement['onVAChange'] = e => this.handleChange(e);
+    inputElement['onVaRemoveFile'] = () => this.handleRemoveFile();
+    inputElement.setAttribute('data-ischild', 'true');
+    container.appendChild(inputElement);
+    this.fileTrackCount++;
+    return;
+  }
+
+  componentDidLoad() {
+    this.appendFileInput(this.el.shadowRoot.querySelector('.inputs-wrap'));
+  }
+
   render() {
-    const { label, name, required, accept, error, hint, uploadPercentage, headerSize, enableAnalytics } = this;
-    
-    return(
-      <div>
-        { // show the already uploaded files
-          this.fileList.map((fileInfo) => { 
-            return this.renderFileInput(label, name, required, accept, error, hint, uploadPercentage, headerSize, enableAnalytics, fileInfo) 
-          })
-        }
-        { // show an empty one for the next upload
-          this.renderFileInput(label, name, required, accept, error, hint, uploadPercentage, headerSize, enableAnalytics, null)
-        }
-      </div>
-    )
+    return <div class="inputs-wrap"></div>;
   }
- 
 }
