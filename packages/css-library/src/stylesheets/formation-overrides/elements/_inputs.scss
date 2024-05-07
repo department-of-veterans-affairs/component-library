@@ -64,7 +64,7 @@ select {
   textarea,
   select {
     border: 3px solid $color-secondary-dark;
-    width: calc(100% + scale-rem(1.9rem)); // 1.5rem left padding + 4px border from input error spacing
+    width: calc(100% + 1.1875rem); // 1.5rem left padding + 4px border from input error spacing
   }
 
   label {
