@@ -145,7 +145,7 @@ describe('va-file-input', () => {
       `<va-file-input error="This is an error" buttonText="Upload a file" uswds />`,
     );
 
-    const errorSpan = await page.find('va-file-input >>> .usa-error-message');
+    const errorSpan = await page.find('va-file-input >>> #input-error-message');
     expect(errorSpan.innerText.includes('This is an error')).toBe(true);
   });
 
@@ -162,7 +162,7 @@ describe('va-file-input', () => {
     await page.setContent('<va-file-input hint="This is hint text" uswds />');
 
     // Render the hint text
-    const hintTextElement = await page.find('va-file-input >>> span.usa-hint');
+    const hintTextElement = await page.find('va-file-input >>> div.input-hint-message');
     expect(hintTextElement.innerText).toContain('This is hint text');
   });
 
@@ -173,7 +173,7 @@ describe('va-file-input', () => {
     );
 
     const requiredSpan = await page.find(
-      'va-file-input >>> .usa-label--required',
+      'va-file-input >>> .required',
     );
     expect(requiredSpan).not.toBeNull();
   });

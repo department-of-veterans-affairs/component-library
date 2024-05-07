@@ -178,7 +178,7 @@ export class VaFileInput {
       const HeaderTag = `h${headerSize}` as keyof  JSX.IntrinsicElements;
       return (
         <div class="label-header">
-          <HeaderTag htmlFor="fileInputButton" part="label" class="label-header-tag">
+          <HeaderTag htmlFor="fileInputField" part="label" class="label-header-tag">
             {label}
             {requiredSpan}
           </HeaderTag>
@@ -187,7 +187,7 @@ export class VaFileInput {
     } else {
       return (
         <div class="label-header">
-          <label htmlFor="fileInputButton" part="label">
+          <label htmlFor="fileInputField" part="label">
             {label}
             {requiredSpan}
           </label>
@@ -228,7 +228,7 @@ export class VaFileInput {
         <Host>
           {label && this.renderLabelOrHeader(label, required, headerSize)}
           {hint && (
-            <div id="input-hint-message">{hint}</div>
+            <div class="input-hint-message">{hint}</div>
           )}
           <div id="input-error-message" role="alert">
             {error && (
