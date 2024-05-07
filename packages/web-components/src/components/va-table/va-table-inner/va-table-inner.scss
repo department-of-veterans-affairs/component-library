@@ -1,7 +1,6 @@
 @forward 'settings';
 @use 'usa-table/src/styles/usa-table';
 @import '~@department-of-veterans-affairs/css-library/dist/tokens/scss/variables.scss';
-@import '../../../global/formation_overrides';
 
 
 :host([uswds='true']){

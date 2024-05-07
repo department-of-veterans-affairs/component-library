@@ -122,18 +122,12 @@ export class VaModal {
   @Prop() modalTitle?: string;
 
   /**
-   * Whether or not the component will use USWDS v3 styling.
-   */
-  @Prop() uswds?: boolean = true;
-
-  /**
    * Whether or not the component will be forced to take action.
    */
   @Prop() forcedModal?: boolean = false;
 
   /**
    * Whether or not the component will be using the unstyled button.
-   * This is only available for USWDS
    */
   @Prop() unstyled?: boolean = false;
 
@@ -403,7 +397,6 @@ export class VaModal {
       secondaryButtonText,
       status,
       visible,
-      uswds,
       forcedModal,
       unstyled,
     } = this;
@@ -417,7 +410,6 @@ export class VaModal {
       ? `Close ${modalTitle} modal`
       : 'Close modal';
 
-    if (uswds) {
       const wrapperClass = classnames({
         'usa-modal': true,
         'va-modal-alert': status,
@@ -529,76 +521,5 @@ export class VaModal {
           </div>
         </Host>
       );
-    } else {
-      const wrapperClass = status
-        ? 'va-modal-inner va-modal-alert'
-        : 'va-modal-inner';
-      const bodyClass = status ? 'va-modal-alert-body' : 'va-modal-body';
-      const titleClass = status ? 'va-modal-alert-title' : 'va-modal-title';
-      return (
-        <Host>
-          <div
-            class={wrapperClass}
-            role={
-              status === 'warning' || status === 'error'
-                ? 'alertdialog'
-                : 'dialog'
-            }
-            aria-label={ariaLabel}
-            aria-describedby="modal-content"
-            aria-modal="true"
-          >
-            <button
-              aria-label={btnAriaLabel}
-              class="va-modal-close"
-              onClick={e => this.handleClose(e)}
-              ref={el => (this.closeButton = el as HTMLButtonElement)}
-              type="button"
-            >
-              <va-icon icon="cancel" size={4}></va-icon>
-            </button>
-            <div class={bodyClass}>
-              <div role="document">
-                {modalTitle && (
-                  <h1 class={titleClass} tabindex={-1}>
-                    {modalTitle}
-                  </h1>
-                )}
-                <div id="modal-content">
-                  <slot></slot>
-                </div>
-              </div>
-              {((primaryButtonClick && primaryButtonText) ||
-                (secondaryButtonClick && secondaryButtonText)) && (
-                <div
-                  class="alert-actions"
-                  ref={el => (this.alertActions = el as HTMLDivElement)}
-                >
-                  {primaryButtonClick && primaryButtonText && (
-                    <button
-                      id="modal-primary-button"
-                      onClick={e => this.handlePrimaryButtonClick(e)}
-                      type="button"
-                    >
-                      {primaryButtonText}
-                    </button>
-                  )}
-                  {secondaryButtonClick && secondaryButtonText && (
-                    <button
-                      id="modal-secondary-button"
-                      class="button-secondary"
-                      onClick={e => this.handleSecondaryButtonClick(e)}
-                      type="button"
-                    >
-                      {secondaryButtonText}
-                    </button>
-                  )}
-                </div>
-              )}
-            </div>
-          </div>
-        </Host>
-      );
-    }
   }
 }

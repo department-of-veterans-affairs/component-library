@@ -244,7 +244,7 @@ describe('va-button', () => {
     <va-button back="" class="hydrated" uswds="">
       <mock:shadow-root>
         <button class="usa-button usa-button--outline" type="button" part="button">
-          <va-icon class="hydrated va-button--icon"></va-icon>
+          <va-icon class="hydrated margin-right-8px va-button--icon"></va-icon>
           Back
         </button>
       </mock:shadow-root>
@@ -261,7 +261,7 @@ describe('va-button', () => {
       <mock:shadow-root>
         <button class="usa-button" type="button" part="button">
           Continue
-          <va-icon class="hydrated va-button--icon"></va-icon>
+          <va-icon class="hydrated margin-left-8px va-button--icon"></va-icon>
         </button>
       </mock:shadow-root>
     </va-button>
@@ -394,5 +394,14 @@ describe('va-button', () => {
 
     const button = await page.find('va-button >>> button');
     expect(button.getAttribute('aria-label')).toEqual('Edit dependent');
+  });
+
+  it('renders a button with an optional screen reader description', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-button text="Edit" message-aria-describedby="Button description."></va-button>');
+
+    const descriptionSpan = await page.find('va-button >>> #button-description');
+    expect(descriptionSpan).not.toBeNull();
+    expect(descriptionSpan.textContent).toBe('Button description.');
   });
 });
