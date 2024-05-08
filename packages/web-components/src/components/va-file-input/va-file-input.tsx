@@ -27,10 +27,10 @@ import { fileInput } from './va-file-input-upgrader';
 })
 export class VaFileInput {
   private fileInputRef!: HTMLInputElement;
+  private uploadStatus: 'idle' | 'success' | 'failure' = 'idle';
 
   @Element() el: HTMLElement;
   @State() file?: File;
-  @State() uploadStatus: 'idle' | 'success' | 'failure' = 'idle';
 
   /**
    * The label for the file input.
