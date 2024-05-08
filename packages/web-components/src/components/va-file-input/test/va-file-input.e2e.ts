@@ -162,7 +162,7 @@ describe('va-file-input', () => {
     await page.setContent('<va-file-input hint="This is hint text" uswds />');
 
     // Render the hint text
-    const hintTextElement = await page.find('va-file-input >>> div.input-hint-message');
+    const hintTextElement = await page.find('va-file-input >>> div.usa-hint');
     expect(hintTextElement.innerText).toContain('This is hint text');
   });
 

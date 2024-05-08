@@ -30,7 +30,7 @@ export class VaFileInput {
 
   @Element() el: HTMLElement;
   @State() file?: File;
-  @State() uploadStatus: 'idle' | 'uploading' | 'success' | 'failure' = 'idle';
+  @State() uploadStatus: 'idle' | 'success' | 'failure' = 'idle';
 
   /**
    * The label for the file input.
@@ -128,7 +128,7 @@ export class VaFileInput {
   };
 
   private removeFile = () => {
-    this.file = undefined;
+    this.file = null;
     this.uploadStatus = 'idle';
   }
 
@@ -158,6 +158,16 @@ export class VaFileInput {
     return this.buttonText ? this.buttonText : 'Upload file';
   };
 
+  /**
+   * Converts the size of a file from bytes to a more human-readable format for
+   * rendering the file size label. This function calculates the file size in
+   * appropriate units (B, KB, MB, GB, TB) based on the size provided. It uses
+   * logarithmic scaling to determine the unit, then formats the size to one
+   * decimal place for units KB and above.
+   *
+   * @param {number} filesSize - The size of the file in bytes.
+   * @returns {string} The file size formatted as a string with the appropriate unit.
+   */
   private formatFileSize = (filesSize): string => {
     const units = ['B', 'KB', 'MB', 'GB', 'TB'];
     if (filesSize === 0)
@@ -228,21 +238,21 @@ export class VaFileInput {
         <Host>
           {label && this.renderLabelOrHeader(label, required, headerSize)}
           {hint && (
-            <div class="input-hint-message">{hint}</div>
+            <div class="usa-hint" id="input-hint-message">{hint}</div>
           )}
-          <div id="input-error-message" role="alert">
-            {error && (
-              <Fragment>
-                <span class="sr-only">{i18next.t('error')}</span>
-                <span>{error}</span>
-              </Fragment>
-            )}
-          </div>
+          <span id="input-error-message" role="alert">
+             {error && (
+               <Fragment>
+                 <span class="usa-sr-only">{i18next.t('error')}</span>
+                 <span class="usa-error-message">{error}</span>
+               </Fragment>
+             )}
+           </span>
           <div class="file-input-wrapper" onDrop={this.handleDrop}>
             <input
               id="fileInputField"
               class="file-input"
-              style={{ visibility: this.uploadStatus === 'success' || this.uploadStatus === 'uploading' ? 'hidden' : 'unset' }}
+              style={{ visibility: this.uploadStatus === 'success' ? 'hidden' : 'unset' }}
               type="file"
               ref={el => this.fileInputRef = el as HTMLInputElement}
               name={name}
@@ -265,16 +275,13 @@ export class VaFileInput {
             {uploadStatus !== 'idle' && (
               <div class="selected-files-wrapper">
                 <div class="selected-files-label">Selected files</div>
-                <va-card>
+                <va-card class="va-card">
                   <div class="file-info-section">
                     <va-icon icon="file_present" size={5} class="file-icon"></va-icon>
                     <span class="file-label">{file.name}</span>
                     <span class="file-size-label">{this.formatFileSize(file.size)}</span>
-                    {uploadStatus === 'uploading' && (
-                      <span>(Uploading...)</span>
-                    )}
                   </div>
-                  {uploadStatus === 'success' && file && (
+                  {(uploadStatus === 'success' || uploadStatus === 'failure') && file && (
                     <div>
                       <div class="additional-info-slot">
                         <slot></slot>

@@ -1,3 +1,10 @@
+@forward 'settings';
+
+@use 'usa-label/src/styles/usa-label';
+@use 'usa-hint/src/styles/usa-hint';
+@use 'uswds-helpers/src/styles/usa-sr-only';
+
+@import '../../mixins/uswds-error-border.scss';
 @import '../../global/formation_overrides';
 @import '../../mixins/focusable.css';
 
@@ -13,10 +20,6 @@
 :host {
   display: block;
   font-family: var(--font-source-sans);
-}
-
-#error-message {
-  margin-bottom: 0.3rem;
 }
 
 va-button {
@@ -40,17 +43,12 @@ va-button {
     margin: 0;
   }
 
-  .input-hint-message {
-    display: block;
-    color: #757575;
-    font-size: 1.696rem;
-  }
-
   .file-input-wrapper {
     display: block;
     max-width: 48rem;
     width: 100%;
     position: relative;
+    margin: 8px 0;
   }
 
   .file-input {
@@ -117,7 +115,7 @@ va-button {
 
   .selected-files-wrapper {
     background-color: var(--vads-color-primary-lighter);
-    padding: 8px;
+    border: 1px solid var(--vads-color-base-light)
   }
 
   .selected-files-label {
@@ -126,24 +124,29 @@ va-button {
     font-size: 1.696rem;
     border-bottom: 1px solid #FFFFFF;
     margin-bottom: 8px;
+    padding: 8px;
+  }
+
+  .va-card {
+    margin: 8px;
   }
 
   .file-label {
     color: var(--vads-color-base);
     font-weight: var(--font-weight-bold);
     font-size: 1.696rem;
-    padding-right: 8px;
+    padding: 0 8px;
   }
 
   .file-size-label {
-    color: var(--vads-color-base)-dark;
+    color: var(--vads-color-base-dark);
     font-weight: var(--font-weight-normal);
     font-size: 1.696rem;
   }
 
   .file-info-section {
     border-bottom: 1px solid #dfe1e2;
-    padding: 0 8px;
+    padding: 0 8px 8px;
     display: flex;
     align-items: center;
   }
