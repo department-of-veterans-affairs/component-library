@@ -1,0 +1,38 @@
+.loading-indicator-container {
+  text-align: center;
+
+  .loading-indicator {
+    display: block;
+    height: units(8);
+    margin-top: units(2);
+
+    &:after {
+      content: " ";
+      display: inline-block;
+      width: units(7);
+      height: units(7);
+      margin: 1px;
+      border-radius: 50%;
+      border: 8px solid  $color-primary;
+      border-color:  $color-primary transparent  $color-primary transparent;
+      animation: spin 1.2s linear infinite;
+    }
+
+    &:focus {
+      outline: none;
+    }
+  }
+}
+
+.async-loader {
+  padding-bottom: units(1);
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

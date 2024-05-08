@@ -1,4 +1,5 @@
 @use 'uswds-core' with (
+  $theme-show-notifications: false,
   $theme-namespace: (
     'grid': (
       namespace: 'vads-grid-',
