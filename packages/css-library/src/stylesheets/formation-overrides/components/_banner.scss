@@ -26,8 +26,8 @@
     width: 100%;
   
     @include media($medium-screen) {
-      padding-bottom: scale-rem(2.3rem);
-      padding-top: scale-rem(4rem);
+      padding-bottom: 23px;
+      padding-top: 40px;
     }
   
     @include media($nav-width) {
@@ -82,8 +82,8 @@
       width: scale-rem(2.4rem);
   
       @include media($small-screen) {
-        margin-right: scale-rem(0.7rem);
-        width: scale-rem(2rem);
+        margin-right: 7px;
+        width: 20px;
       }
     }
   }
@@ -134,11 +134,11 @@
   
   .usa-banner-button {
     @include button-unstyled;
-    @include padding(scale-rem(1.3rem) null null scale-rem(4.8rem));
+    @include padding(13px null null 48px);
     background-position-x: right;
     color: $color-primary;
     display: block;
-    font-size: scale-rem(1.2rem);
+    font-size: 12px;
     height: scale-rem(4.3rem);
     left: 0;
     position: absolute;
@@ -209,6 +209,6 @@
   }
   
   .usa-banner-icon {
-    width: scale-rem(3.8rem);
+    width: 38px;
   }
   

@@ -200,8 +200,8 @@ legend.legend-label + .form-checkbox-buttons {
 
 .form-expanding-group > span {
   .usa-input-error {
-    padding-left: calc(scale-rem(1.5rem) - 6px);
-    right: calc(scale-rem(1.9rem) - 6px);
+    padding-left: scale-rule(calc(1.5rem - 6px));
+    right: scale-rule(calc(1.9rem - 6px));
   }
   .schemaform-expandUnder-indent {
     .usa-input-error {
@@ -217,7 +217,7 @@ legend.legend-label + .form-checkbox-buttons {
 }
 
 .form-expanding-group-open {
-  padding-left: calc(#{scale-rem(2rem)} - 7px);
+  padding-left: scale-rule(calc(2rem - 7px));
   border-left: 7px solid $vads-color-primary-alt-light;
 
   // Avoid nested expanding group borders

@@ -92,7 +92,7 @@ $marketing-container-height: 380px;
     .vetnav-panel--submenu:not([hidden]) {
       position: absolute;
       box-shadow: none;
-      width: scale-rem(26rem);
+      width: 260px;
       padding: 72px 0px 0px 28px;
       white-space: normal;
 
@@ -100,7 +100,7 @@ $marketing-container-height: 380px;
         display: block;
         color: $vads-color-black;
         font-family: Source Sans Pro, sans serif;
-        font-size: scale-rem(1.6rem);
+        font-size: 16px;
         font-weight: bold;
         margin-top: 4px;
         padding: 0;
@@ -168,7 +168,7 @@ $marketing-container-height: 380px;
 
       &.vetnav-panel--submenu:not([hidden]) {
         padding: 86px 20px 20px 14px;
-        width: scale-rem(24rem);
+        width: 240px;
 
         &.panel-white {
           padding-top: 30px;
@@ -253,7 +253,7 @@ $marketing-container-height: 380px;
     .vetnav-panel--submenu:not([hidden]) {
       h3 {
         font-family: Source Sans Pro, sans serif;
-        font-size: scale-rem(1.6rem);
+        font-size: 16px;
       }
     }
   }
@@ -310,7 +310,7 @@ $marketing-container-height: 380px;
       position: absolute;
       height: 60px;
       width: $medium-screen - 297px;
-      left: scale-rem(28rem);
+      left: 280px;
       border-bottom: 1px solid #d0d0d0;
       z-index: 3;
       top: 0;
@@ -343,11 +343,11 @@ $marketing-container-height: 380px;
     }
 
     .column-one {
-      width: scale-rem(26rem);
+      width: 260px;
     }
 
     .column-two {
-      width: scale-rem(26rem);
+      width: 260px;
     }
 
     .column-three {

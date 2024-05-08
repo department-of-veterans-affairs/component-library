@@ -32,17 +32,17 @@ input,
 textarea,
 select {
   appearance: none;
-  border: $input-border-width solid $color-gray;
+  border: 1px solid $color-gray;
   border-radius: 0;
   box-sizing: border-box;
   color: $vads-color-base; // standardize on firefox
   display: block;
-  font-size: $base-font-size;
-  height: $input-height;
+  font-size: 16px;
+  height: 42px;
   line-height: $input-line-height;
   margin: 0.2em 0;
-  max-width: $input-max-width;
-  padding: $input-padding-vertical 0.7em;
+  max-width: 460px;
+  padding: 10px 11.2px;
   width: 100%;
 
   &.usa-input-success {
