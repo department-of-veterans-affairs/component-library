@@ -16,7 +16,9 @@ describe('va-text-input', () => {
           </label>
           <slot></slot>
           <span id="input-error-message" role="alert"></span>
-          <input id="inputField" type="text" part="input" aria-invalid="false" />
+          <div>
+            <input id="inputField" type="text" part="input" aria-invalid="false" />
+          </div>
         </mock:shadow-root>
       </va-text-input>
     `);
@@ -40,7 +42,9 @@ describe('va-text-input', () => {
           </label>
           <slot></slot>
           <span id="input-error-message" role="alert"></span>
-          <input id="inputField" type="text" part="input" aria-invalid="false" />
+          <div>
+            <input id="inputField" type="text" part="input" aria-invalid="false" />
+          </div>
         </mock:shadow-root>
         <p className="vads-u-font-weight--normal label-description">
           You can only add an issue that you've already received a VA decision
@@ -120,8 +124,10 @@ describe('va-text-input', () => {
           </label>
           <slot></slot>
           <span id="input-error-message" role="alert"></span>
-          <input id="inputField" type="text" required="" part="input" aria-invalid="false" />
-        </mock:shadow-root>
+          <div>
+            <input id="inputField" type="text" required="" part="input" aria-invalid="false" />
+          </div>
+          </mock:shadow-root>
       </va-text-input>
     `);
 
@@ -383,8 +389,10 @@ describe('va-text-input', () => {
             </label>
             <slot></slot>
             <span id="input-error-message" role="alert"></span>
-            <input class="usa-input" id="inputField" part="input" type="text" aria-invalid="false" />
-          </div>
+            <div>
+              <input class="usa-input" id="inputField" part="input" type="text" aria-invalid="false" />
+            </div>
+            </div>
         </mock:shadow-root>
       </va-text-input>
     `);
