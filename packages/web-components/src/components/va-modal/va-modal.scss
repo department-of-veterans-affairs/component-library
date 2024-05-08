@@ -192,14 +192,6 @@ h1 {
   background-color: var(--vads-color-gray-cool-light);
 }
 
-:host([uswds='false']) .va-modal-alert {
-  border-left-style: solid;
-  border-left-width: 10px;
-  display: inline-flex;
-  max-width: 60rem;
-  padding: 3.2rem 6.4rem 3.2rem 2.4rem;
-}
-
 .va-modal-alert::before {
   display: block;
   width: auto;

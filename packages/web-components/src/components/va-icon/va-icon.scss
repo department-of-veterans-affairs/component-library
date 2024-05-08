@@ -2,3 +2,9 @@
 @use 'usa-icon/src/styles/_usa-icon.scss';
 
 @import '../../global/formation_overrides';
+
+:host {
+  display: inline-block;
+  line-height: 0;
+  vertical-align: bottom;
+}

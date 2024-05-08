@@ -212,6 +212,10 @@ export namespace Components {
          */
         "label"?: string;
         /**
+          * An optional message that will be read by screen readers when the input is focused.
+         */
+        "messageAriaDescribedby"?: string;
+        /**
           * If `true`, the button will use the primary alternate variant.
          */
         "primaryAlternate"?: boolean;
@@ -524,6 +528,10 @@ export namespace Components {
          */
         "pages"?: number;
         /**
+          * If 'true', will represent the link with white text instead of blue.
+         */
+        "reverse"?: boolean;
+        /**
           * The anchor text.
          */
         "text": string;
@@ -674,13 +682,9 @@ export namespace Components {
         "secondaryButtonText"?: string;
         "status"?: 'continue' | 'error' | 'info' | 'success' | 'warning';
         /**
-          * Whether or not the component will be using the unstyled button. This is only available for USWDS
+          * Whether or not the component will be using the unstyled button.
          */
         "unstyled"?: boolean;
-        /**
-          * Whether or not the component will use USWDS v3 styling.
-         */
-        "uswds"?: boolean;
         /**
           * If the modal is visible or not
          */
@@ -2197,6 +2201,10 @@ declare namespace LocalJSX {
          */
         "label"?: string;
         /**
+          * An optional message that will be read by screen readers when the input is focused.
+         */
+        "messageAriaDescribedby"?: string;
+        /**
           * The event used to track usage of the component.
          */
         "onComponent-library-analytics"?: (event: VaButtonCustomEvent<any>) => void;
@@ -2565,6 +2573,10 @@ declare namespace LocalJSX {
          */
         "pages"?: number;
         /**
+          * If 'true', will represent the link with white text instead of blue.
+         */
+        "reverse"?: boolean;
+        /**
           * The anchor text.
          */
         "text": string;
@@ -2755,13 +2767,9 @@ declare namespace LocalJSX {
         "secondaryButtonText"?: string;
         "status"?: 'continue' | 'error' | 'info' | 'success' | 'warning';
         /**
-          * Whether or not the component will be using the unstyled button. This is only available for USWDS
+          * Whether or not the component will be using the unstyled button.
          */
         "unstyled"?: boolean;
-        /**
-          * Whether or not the component will use USWDS v3 styling.
-         */
-        "uswds"?: boolean;
         /**
           * If the modal is visible or not
          */

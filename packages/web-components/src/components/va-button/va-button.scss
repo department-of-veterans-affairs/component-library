@@ -1,5 +1,6 @@
 @forward 'settings';
 
+@use 'uswds-helpers/src/styles/usa-sr-only';
 @use 'usa-button/src/styles/usa-button';
 
 @import '../../global/formation_overrides';
@@ -16,22 +17,19 @@
 }
 
 // Fix to off-centered content in V3 when icon present
-:host([back]:not([back='false'])), :host([continue]:not([continue='false'])) {
-  button.usa-button {
-    padding-top: 8px;
-  }
-}
 .va-button--icon {
-  display: inline-block;
-  height: 0;
-  vertical-align: text-top;
+  position: relative;
+  top: 0.1em;
+  &.margin-right-8px {
+    margin-right: 8px;
+  }
+  &.margin-left-8px {
+    margin-left: 8px;
+  }
 }
 :host([big]:not([big="false"]):is([back], [continue])) {
-  button.usa-button {
-    padding-top: 12px;
-  }
-  .va-button--icon {
-    vertical-align: sub;
+  .usa-button--big {
+    padding-top: 14px;
   }
 }
 
