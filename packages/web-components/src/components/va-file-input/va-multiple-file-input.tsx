@@ -1,5 +1,5 @@
 /* eslint-disable i18next/no-literal-string */
-import { Component, Prop, State, Element, h } from '@stencil/core';
+import { Component, Prop, State, Element, h, Host } from '@stencil/core';
 // todo i think we need the react-bindings to pass the children prop along but getting an error currently
 //import { VaFileInput } from '@department-of-veterans-affairs/web-components/react-bindings';
 
@@ -16,7 +16,9 @@ import { Component, Prop, State, Element, h } from '@stencil/core';
   shadow: true,
 })
 export class VaMultipleFileInput {
-  @State() fileTrackCount: number = 0;
+  @State() fileTrackCount: number = 1;
+  @State() inputArray: HTMLElement[] = [];
+  @State() inputOnDeck: HTMLElement = this.makeNewInput();
 
   /**
    * The label for the file input.
@@ -74,26 +76,30 @@ export class VaMultipleFileInput {
 
   private handleChange(e) {
     // todo i think we need to bubble the event up
-    // const inputElement = this.findFile(e.target.id);
-    console.log(e.target, 'z');
-    const container: HTMLElement =
-      this.el.shadowRoot.querySelector('.inputs-wrap');
-    this.appendFileInput(container);
-  }
-
-  // // private findFile(id: string): Element {
-  // //   return this.el.shadowRoot.getElementById(id);
-  // // }
-
-  private handleRemoveFile() {
-    const container: HTMLElement =
-      this.el.shadowRoot.querySelector('.inputs-wrap');
-    if (container.children.length === 0) {
-      this.appendFileInput(container);
+    // const index = this.inputArray.findIndex(o => o.id === e.target.id);
+    // if (index === this.inputArray.length - 1) {
+    // }
+    console.log('just changed');
+    if (e.target.id === this.fileTrackCount.toString()) {
+      this.registerFileInput();
     }
   }
 
-  private appendFileInput(container: HTMLElement): void {
+  private registerFileInput(): void {
+    console.log(this.inputOnDeck, 'reg');
+    this.inputArray.push(structuredClone(this.inputOnDeck));
+    this.inputOnDeck = <div>done</div>;
+    return;
+  }
+
+  private makeNewInput(): HTMLElement {
+    this.fileTrackCount++;
+    const newInput = this.createInput();
+    newInput['$attrs$']['ischild'] = 'true';
+    return newInput;
+  }
+
+  private createInput(): HTMLElement {
     const {
       label,
       name,
@@ -106,31 +112,80 @@ export class VaMultipleFileInput {
       enableAnalytics,
     } = this;
 
-    const inputElement = document.createElement('va-file-input');
-    inputElement.id = this.fileTrackCount.toString();
-    inputElement.label = label;
-    inputElement.name = name;
-    inputElement.accept = accept;
-    inputElement.required = required;
-    inputElement.error = error;
-    inputElement.hint = hint;
-    inputElement.uswds = true;
-    inputElement.uploadPercentage = uploadPercentage;
-    inputElement.headerSize = headerSize;
-    inputElement['enable-analytics'] = enableAnalytics;
-    inputElement['onVAChange'] = e => this.handleChange(e);
-    inputElement['onVaRemoveFile'] = () => this.handleRemoveFile();
-    inputElement.setAttribute('data-ischild', 'true');
-    container.appendChild(inputElement);
-    this.fileTrackCount++;
-    return;
+    // const inputElement = document.createElement('va-file-input');
+    // inputElement.id = this.fileTrackCount.toString();
+    // inputElement.label = label;
+    // inputElement.name = name;
+    // inputElement.accept = accept;
+    // inputElement.required = required;
+    // inputElement.error = error;
+    // inputElement.hint = hint;
+    // inputElement.uswds = true;
+    // inputElement.uploadPercentage = uploadPercentage;
+    // inputElement.headerSize = headerSize;
+    // inputElement['enable-analytics'] = enableAnalytics;
+    // inputElement['onVaChange'] = e => this.handleChange(e);
+    // inputElement['onVaRemoveFile'] = e => this.handleRemoveFile(e);
+    // inputElement.setAttribute('isChild', 'true');
+    // return inputElement;
+
+    return (
+      <va-file-input
+        id={this.fileTrackCount.toString()}
+        label={label}
+        name={name}
+        accept={accept}
+        required={required}
+        error={error}
+        hint={hint}
+        enable-analytics={enableAnalytics}
+        onVaChange={e => this.handleChange(e)}
+        onVaRemoveFile={e => this.handleRemoveFile(e)}
+        uswds={true}
+        uploadPercentage={uploadPercentage}
+        headerSize={headerSize}
+        //children={"children"}
+      />
+    );
   }
 
-  componentDidLoad() {
-    this.appendFileInput(this.el.shadowRoot.querySelector('.inputs-wrap'));
+  private handleRemoveFile(e): void {
+    console.log('delete!');
+    const id = e.target.closest('va-file-input').id;
+    alert(id);
+    this.inputArray = this.inputArray.filter(el => el['$attrs$'].id !== id);
+    // if (this.inputArray.length === 0) {
+    //   this.registerFileInput();
+    //   return;
+    // }
+  }
+
+  componentDidRender() {
+    /**
+     * AFTER the component has been rendered,
+     * append the list of tracked inputs to the DOM
+     * This is done as to not lose the file 'attached'
+     * to each of the va-file-input elements
+     **/
+    // const container: HTMLElement =
+    //   this.el.shadowRoot.querySelector('.inputs-wrap');
+    // this.inputArray.forEach(input => container.appendChild(input));
+    // const wrap: HTMLElement = this.el.shadowRoot.querySelector('.outer-wrap');
+    // wrap.appendChild(this.inputOnDeck);
+    console.log(this.fileTrackCount, 'didrend');
   }
 
   render() {
-    return <div class="inputs-wrap"></div>;
+    console.log('am rendering');
+    return (
+      <Host>
+        <div class="outer-wrap">
+          <div class="selected-files-label">Selected files</div>
+          <div class="inputs-wrap">{this.inputArray}</div>
+          -- arr:{this.inputArray.length} ---- trak: {this.fileTrackCount}-----
+          {this.inputOnDeck}
+        </div>
+      </Host>
+    );
   }
 }
