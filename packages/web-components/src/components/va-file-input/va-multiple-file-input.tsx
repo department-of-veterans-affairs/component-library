@@ -75,10 +75,6 @@ export class VaMultipleFileInput {
   @Element() el: HTMLElement;
 
   private handleChange(e) {
-    // todo i think we need to bubble the event up
-    // const index = this.inputArray.findIndex(o => o.id === e.target.id);
-    // if (index === this.inputArray.length - 1) {
-    // }
     console.log('just changed');
     if (e.target.id === this.fileTrackCount.toString()) {
       this.registerFileInput();
@@ -87,16 +83,14 @@ export class VaMultipleFileInput {
 
   private registerFileInput(): void {
     console.log(this.inputOnDeck, 'reg');
-    this.inputArray.push(structuredClone(this.inputOnDeck));
-    this.inputOnDeck = <div>done</div>;
+    this.inputArray.push(this.inputOnDeck);
+    this.inputOnDeck = this.makeNewInput();
     return;
   }
 
   private makeNewInput(): HTMLElement {
     this.fileTrackCount++;
-    const newInput = this.createInput();
-    newInput['$attrs$']['ischild'] = 'true';
-    return newInput;
+    return this.createInput();
   }
 
   private createInput(): HTMLElement {
@@ -112,52 +106,54 @@ export class VaMultipleFileInput {
       enableAnalytics,
     } = this;
 
-    // const inputElement = document.createElement('va-file-input');
-    // inputElement.id = this.fileTrackCount.toString();
-    // inputElement.label = label;
-    // inputElement.name = name;
-    // inputElement.accept = accept;
-    // inputElement.required = required;
-    // inputElement.error = error;
-    // inputElement.hint = hint;
-    // inputElement.uswds = true;
-    // inputElement.uploadPercentage = uploadPercentage;
-    // inputElement.headerSize = headerSize;
-    // inputElement['enable-analytics'] = enableAnalytics;
-    // inputElement['onVaChange'] = e => this.handleChange(e);
-    // inputElement['onVaRemoveFile'] = e => this.handleRemoveFile(e);
-    // inputElement.setAttribute('isChild', 'true');
-    // return inputElement;
-
-    return (
-      <va-file-input
-        id={this.fileTrackCount.toString()}
-        label={label}
-        name={name}
-        accept={accept}
-        required={required}
-        error={error}
-        hint={hint}
-        enable-analytics={enableAnalytics}
-        onVaChange={e => this.handleChange(e)}
-        onVaRemoveFile={e => this.handleRemoveFile(e)}
-        uswds={true}
-        uploadPercentage={uploadPercentage}
-        headerSize={headerSize}
-        //children={"children"}
-      />
+    const inputElement = document.createElement('va-file-input');
+    inputElement.id = this.fileTrackCount.toString();
+    inputElement.label = label;
+    inputElement.name = name;
+    inputElement.accept = accept;
+    inputElement.required = required;
+    inputElement.error = error;
+    inputElement.hint = hint;
+    inputElement.uswds = true;
+    inputElement.uploadPercentage = uploadPercentage;
+    inputElement.headerSize = headerSize;
+    inputElement['enable-analytics'] = enableAnalytics;
+    inputElement.addEventListener('vaChange', e => this.handleChange(e));
+    inputElement.addEventListener('vaRemoveFile', e =>
+      this.handleRemoveFile(e),
     );
+    inputElement.setAttribute('ischild', 'true');
+    return inputElement;
+
+    // return (
+    //   <va-file-input
+    //     id={this.fileTrackCount.toString()}
+    //     label={label}
+    //     name={name}
+    //     accept={accept}
+    //     required={required}
+    //     error={error}
+    //     hint={hint}
+    //     enable-analytics={enableAnalytics}
+    //     onVaChange={e => this.handleChange(e)}
+    //     onVaRemoveFile={e => this.handleRemoveFile(e)}
+    //     uswds={true}
+    //     uploadPercentage={uploadPercentage}
+    //     headerSize={headerSize}
+    //     //children={"children"}
+    //   />
+    // );
   }
 
   private handleRemoveFile(e): void {
     console.log('delete!');
-    const id = e.target.closest('va-file-input').id;
-    alert(id);
-    this.inputArray = this.inputArray.filter(el => el['$attrs$'].id !== id);
-    // if (this.inputArray.length === 0) {
-    //   this.registerFileInput();
-    //   return;
-    // }
+    const id = e.target.id;
+    this.inputArray = this.inputArray.filter(el => el.id !== id);
+    /**
+     * may want to check/remove listeners,
+     * tho it may not be necessary
+     */
+    e.target.remove();
   }
 
   componentDidRender() {
@@ -166,12 +162,13 @@ export class VaMultipleFileInput {
      * append the list of tracked inputs to the DOM
      * This is done as to not lose the file 'attached'
      * to each of the va-file-input elements
-     **/
-    // const container: HTMLElement =
-    //   this.el.shadowRoot.querySelector('.inputs-wrap');
-    // this.inputArray.forEach(input => container.appendChild(input));
-    // const wrap: HTMLElement = this.el.shadowRoot.querySelector('.outer-wrap');
-    // wrap.appendChild(this.inputOnDeck);
+     */
+    const container: HTMLElement = this.el.shadowRoot.querySelector(
+      '.input-component-wrap',
+    );
+    this.inputArray.forEach(input => container.appendChild(input));
+    const wrap: HTMLElement = this.el.shadowRoot.querySelector('.outer-wrap');
+    wrap.appendChild(this.inputOnDeck);
     console.log(this.fileTrackCount, 'didrend');
   }
 
@@ -181,9 +178,7 @@ export class VaMultipleFileInput {
       <Host>
         <div class="outer-wrap">
           <div class="selected-files-label">Selected files</div>
-          <div class="inputs-wrap">{this.inputArray}</div>
-          -- arr:{this.inputArray.length} ---- trak: {this.fileTrackCount}-----
-          {this.inputOnDeck}
+          <div class="input-component-wrap"></div>
         </div>
       </Host>
     );
