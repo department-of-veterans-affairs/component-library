@@ -66,7 +66,7 @@ va-button {
   }
 
   .file-input-target {
-    border: 1px dashed #adadad;
+    border: 1px dashed var(--uswds-system-color-gray-30);
     display: block;
     font-size: 1.06rem;
     margin-top: 0.5rem;
@@ -81,7 +81,7 @@ va-button {
   }
 
   .file-input-box {
-    background: #fff;
+    background: var(--vads-color-white);
     height: 100%;
     left: 0;
     pointer-events: none;
@@ -99,18 +99,14 @@ va-button {
     z-index: 3;
   }
 
-  .file-input-drag-text {
-
-  }
-
   .file-input-choose-text {
-    color: #005ea2;
+    color: var(--vads-color-link);
     text-decoration: underline;
     font-weight: var(--font-weight-normal);
   }
 
   .file-icon {
-    color: #07648D;
+    color: var(--vads-color-primary-alt-darkest);
   }
 
   .selected-files-wrapper {
@@ -122,7 +118,7 @@ va-button {
     color: var(--vads-color-base);
     font-weight: var(--font-weight-bold);
     font-size: 1.696rem;
-    border-bottom: 1px solid #FFFFFF;
+    border-bottom: 1px solid var(--vads-color-white);
     margin-bottom: 8px;
     padding: 8px;
   }
@@ -145,7 +141,7 @@ va-button {
   }
 
   .file-info-section {
-    border-bottom: 1px solid #dfe1e2;
+    border-bottom: 1px solid var(--vads-color-base-lighter);
     padding: 0 8px 8px;
     display: flex;
     align-items: center;
