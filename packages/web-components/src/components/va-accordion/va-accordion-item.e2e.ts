@@ -163,7 +163,7 @@ describe('va-accordion-item', () => {
   it("render the sub header icon", async () => {
     const page = await newE2EPage();
     await page.setContent(
-      '<va-accordion-item header="The header" subheader="The subheader" uswds="false"></i>Content inside</va-accordion-item>',
+      '<va-accordion-item header="The header" subheader="The subheader" uswds="false">Content inside</va-accordion-item>',
     );
     const element = await page.find('va-accordion-item');
     expect(element).toEqualHtml(
@@ -192,7 +192,7 @@ describe('va-accordion-item', () => {
   it("does not render the sub header icon if there is no sub header", async () => {
     const page = await newE2EPage();
     await page.setContent(
-      '<va-accordion-item header="The header" uswds="false"></i>Content inside</va-accordion-item>',
+      '<va-accordion-item header="The header" uswds="false">Content inside</va-accordion-item>',
     );
     const element = await page.find('va-accordion-item');
     expect(element).toEqualHtml(`
@@ -217,7 +217,7 @@ describe('va-accordion-item', () => {
   it('passes axe check with subheader icon', async () => {
     const page = await newE2EPage();
     await page.setContent(
-      '<va-accordion-item header="The header" subheader="The subheader" uswds="false"></i>Content inside</va-accordion-item>',
+      '<va-accordion-item header="The header" subheader="The subheader" uswds="false">Content inside</va-accordion-item>',
     );
 
     await axeCheck(page);
@@ -408,7 +408,7 @@ describe('va-accordion-item', () => {
   it("render the sub header icon", async () => {
     const page = await newE2EPage();
     await page.setContent(
-      '<va-accordion-item uswds header="The header" subheader="The subheader"></i>Content inside</va-accordion-item>',
+      '<va-accordion-item uswds header="The header" subheader="The subheader">Content inside</va-accordion-item>',
     );
     const element = await page.find('va-accordion-item');
     expect(element).toEqualHtml(
@@ -441,7 +441,7 @@ describe('va-accordion-item', () => {
   it("does not render the sub header icon if there is no sub header", async () => {
     const page = await newE2EPage();
     await page.setContent(
-      '<va-accordion-item uswds header="The header"></i>Content inside</va-accordion-item>',
+      '<va-accordion-item uswds header="The header">Content inside</va-accordion-item>',
     );
     const element = await page.find('va-accordion-item');
     expect(element).toEqualHtml(`
@@ -468,7 +468,7 @@ describe('va-accordion-item', () => {
   it('passes axe check with subheader icon', async () => {
     const page = await newE2EPage();
     await page.setContent(
-      '<va-accordion-item uswds header="The header" subheader="The subheader"></i>Content inside</va-accordion-item>',
+      '<va-accordion-item uswds header="The header" subheader="The subheader">Content inside</va-accordion-item>',
     );
 
     await axeCheck(page);
