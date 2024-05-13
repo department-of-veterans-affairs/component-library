@@ -2,12 +2,12 @@
 import { Component, Prop, State, Element, h, Host } from '@stencil/core';
 // todo i think we need the react-bindings to pass the children prop along but getting an error currently
 //import { VaFileInput } from '@department-of-veterans-affairs/web-components/react-bindings';
+import i18next from 'i18next';
 
 /**
  * @componentName Multiple file input
  * @maturityCategory caution
  * @maturityLevel available
- * @guidanceHref form/file-input
  */
 
 @Component({
@@ -95,12 +95,10 @@ export class VaMultipleFileInput {
 
   private createInput(): HTMLElement {
     const {
-      label,
       name,
       required,
       accept,
       error,
-      hint,
       uploadPercentage,
       headerSize,
       enableAnalytics,
@@ -108,12 +106,10 @@ export class VaMultipleFileInput {
 
     const inputElement = document.createElement('va-file-input');
     inputElement.id = this.fileTrackCount.toString();
-    inputElement.label = label;
     inputElement.name = name;
     inputElement.accept = accept;
     inputElement.required = required;
     inputElement.error = error;
-    inputElement.hint = hint;
     inputElement.uswds = true;
     inputElement.uploadPercentage = uploadPercentage;
     inputElement.headerSize = headerSize;
@@ -145,6 +141,42 @@ export class VaMultipleFileInput {
     // );
   }
 
+  private renderLabelOrHeader = (
+    label: string,
+    required: boolean,
+    headerSize?: number,
+  ) => {
+    console.log(label, required, headerSize);
+    const requiredSpan = required ? (
+      <span class="required"> {i18next.t('required')}</span>
+    ) : null;
+    if (headerSize && headerSize >= 1 && headerSize <= 6) {
+      console.log('in the thing');
+      const HeaderTag = `h${headerSize}` as keyof JSX.IntrinsicElements;
+      return (
+        <div class="label-header">
+          <HeaderTag
+            htmlFor="fileInputButton"
+            part="label"
+            class="label-header-tag"
+          >
+            {label}
+            {requiredSpan}
+          </HeaderTag>
+        </div>
+      );
+    } else {
+      return (
+        <div class="label-header">
+          <label htmlFor="fileInputButton" part="label">
+            {label}
+            {requiredSpan}
+          </label>
+        </div>
+      );
+    }
+  };
+
   private handleRemoveFile(e): void {
     console.log('delete!');
     const id = e.target.id;
@@ -173,11 +205,14 @@ export class VaMultipleFileInput {
   }
 
   render() {
+    const { label, required, headerSize, hint } = this;
     console.log('am rendering');
     return (
       <Host>
+        {label && this.renderLabelOrHeader(label, required, headerSize)}
+        {hint && <div id="input-hint-message">{hint}</div>}
+        <div class="selected-files-label">Selected files</div>
         <div class="outer-wrap">
-          <div class="selected-files-label">Selected files</div>
           <div class="input-component-wrap"></div>
         </div>
       </Host>

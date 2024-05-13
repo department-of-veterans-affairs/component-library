@@ -1,15 +1,15 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
-import { VaFileInput } from '@department-of-veterans-affairs/web-components/react-bindings';
+import { VaMultipleFileInput } from '@department-of-veterans-affairs/web-components/react-bindings';
 import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
 
 const fileInputDocs = getWebComponentDocs('va-file-input');
 
 export default {
-  title: 'Components/File input USWDS',
-  id: 'uswds/va-file-input',
+  title: 'Components/Multiple File input USWDS',
+  id: 'uswds/va-mulitple-file-input',
   parameters: {
-    componentSubtitle: `va-file-input web component`,
+    componentSubtitle: `va-mulitple-file-input web component`,
     docs: {
       page: () => <StoryDocs data={fileInputDocs} />,
     },
@@ -28,6 +28,7 @@ const defaultArgs = {
   'vaChange': event =>
     alert(`File change event received: ${event?.detail?.files[0]?.name}`),
   'uswds': true,
+  'uploadPercentage': null,
   'headerSize': null,
   'children': null
 };
@@ -42,11 +43,12 @@ const Template = ({
   'enable-analytics': enableAnalytics,
   vaChange,
   uswds,
+  uploadPercentage,
   headerSize,
   children
 }) => {
   return (
-    <VaFileInput
+    <VaMultipleFileInput
       label={label}
       name={name}
       accept={accept}
@@ -56,8 +58,9 @@ const Template = ({
       enable-analytics={enableAnalytics}
       onVaChange={vaChange}
       uswds={uswds}
+      uploadPercentage={uploadPercentage}
       headerSize={headerSize}
-      children={children}
+      // children={children}
     />
   );
 };
@@ -93,6 +96,14 @@ AcceptsAnyKindOfImage.args = {
 //   hint: 'Select one or more files',
 //   multiple: true,
 // };
+
+export const AcceptsMultipleFiles = Template.bind(null);
+AcceptsMultipleFiles.args = {
+  ...defaultArgs,
+  label: 'Input accepts multiple files',
+  hint: 'Select one or more files',
+  multiple: true,
+};
 
 
 export const ErrorMessage = Template.bind(null);
