@@ -53,7 +53,8 @@ describe('va-statement-of-truth', () => {
     const vaInputChangeSpy = await page.spyOnEvent('vaInputChange');
     const inputEl = await page.$('pierce/[name="veteran-signature"]');
     await inputEl.type('test');
-    expect(vaInputChangeSpy).toHaveReceivedEvent();
+    // wait for last event
+    await page.waitForTimeout(500);
     expect(vaInputChangeSpy).toHaveReceivedEventDetail({ value: 'test' });
   });
 
