@@ -96,7 +96,8 @@ export class VaLink {
         action: 'click',
         details: {
           label: this.text,
-          href: this.href,
+          destination: this.href,
+          origin: window.location.href,
         },
       };
       this.componentLibraryAnalytics.emit(detail);

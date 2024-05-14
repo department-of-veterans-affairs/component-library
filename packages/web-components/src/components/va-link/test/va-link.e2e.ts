@@ -136,7 +136,8 @@ describe('va-link', () => {
       action: 'click',
       details: {
         label: 'Find out if you qualify for this program and how to apply',
-        href: 'https://www.va.gov',
+        destination: 'https://www.va.gov',
+        origin: 'http://localhost:3333/',
       },
     });
   });
