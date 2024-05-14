@@ -54,6 +54,7 @@ describe('va-statement-of-truth', () => {
     const inputEl = await page.$('pierce/[name="veteran-signature"]');
     await inputEl.type('test');
     expect(vaInputChangeSpy).toHaveReceivedEvent();
+    expect(vaInputChangeSpy).toHaveReceivedEventDetail({ value: 'test' });
   });
 
   it('uswds emits vaCheckboxChange custom event', async () => {

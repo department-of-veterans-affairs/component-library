@@ -3534,6 +3534,10 @@ declare namespace LocalJSX {
          */
         "onComponent-library-analytics"?: (event: VaTextInputCustomEvent<any>) => void;
         /**
+          * The event emitted when the input value of the va-text-input element changes.
+         */
+        "onVaTextInputChange"?: (event: VaTextInputCustomEvent<any>) => void;
+        /**
           * The regular expression that the input element's value is checked against on submission
          */
         "pattern"?: string;

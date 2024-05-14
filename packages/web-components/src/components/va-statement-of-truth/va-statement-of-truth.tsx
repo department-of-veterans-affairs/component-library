@@ -14,6 +14,10 @@ import {
  * @maturityLevel candidate
  */
 
+interface VaStatementOfTruthEvent extends Event {
+  detail: { string : string | boolean }
+}
+
 @Component({
   tag: 'va-statement-of-truth',
   styleUrl: 'va-statement-of-truth.scss',
@@ -96,16 +100,18 @@ export class VaStatementOfTruth {
    */
   @Element() el: HTMLElement;
 
-  private handleInputChange = (event: Event) => {
-    this.vaInputChange.emit(event);
+  private handleInputChange = (event: VaStatementOfTruthEvent) => {
+    const { detail } = event;
+    this.vaInputChange.emit(detail);
   };
 
   private handleInputBlur = (event: Event) => {
     this.vaInputBlur.emit(event);
   };
 
-  private handleCheckboxChange = (event: Event) => {
-    this.vaCheckboxChange.emit(event);
+  private handleCheckboxChange = (event: VaStatementOfTruthEvent) => {
+    const { detail } = event;
+    this.vaCheckboxChange.emit(detail);
   };
 
   /**
@@ -161,7 +167,7 @@ export class VaStatementOfTruth {
             value={inputValue}
             message-aria-describedby={inputMessageAriaDescribedby}
             required
-            onInput={this.handleInputChange}
+            onVaTextInputChange={this.handleInputChange}
             onBlur={this.handleInputBlur}
             ref={field => (this.inputField = field)}
           />
