@@ -1,0 +1,43 @@
+a.vads-c-action-link--blue, a.vads-c-action-link--green, a.vads-c-action-link--white {
+  &:before {
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    font-size: 175%;
+    // Sets alt text for the icon to blank to hide it from screen readers. The content property is duplicated as a fallback for browsers that do not support alt text for it (Firefox, Safari).
+    content: "\f138";
+    content: "\f138" / "";
+    position: absolute; 
+    left: 0px;
+    top: -4px;
+  }
+  font-weight: bold;
+  padding: 4px 0 4px 38px;
+  position: relative;
+  display: inline-block;
+}
+
+a.vads-c-action-link--blue:before {
+  color: $color-link-default;
+}
+
+a.vads-c-action-link--green:before {
+  color: $color-green;
+}
+
+a.vads-c-action-link--white {
+  color: $vads-color-white;
+
+  &:before {
+    color: $vads-color-white;
+    @include color-transition;
+  }
+}
+
+a.vads-c-action-link--white:hover {
+  color: $vads-color-gold-lightest;
+  background-color: transparent;
+
+  &:before {
+    color: $vads-color-gold-lightest;
+  }
+}

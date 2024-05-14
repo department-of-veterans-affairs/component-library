@@ -81,6 +81,11 @@ export class VaButton {
   @Prop({ reflect: true }) uswds?: boolean = true;
 
   /**
+   * An optional message that will be read by screen readers when the input is focused.
+   */
+  @Prop() messageAriaDescribedby?: string;
+
+  /**
    * The event used to track usage of the component.
    */
   @Event({
@@ -107,7 +112,7 @@ export class VaButton {
           type: this.secondary ? 'secondary' : 'primary',
           label: this.getButtonText(),
         },
-      }
+      };
       this.componentLibraryAnalytics.emit(detail);
     }
   };
@@ -135,7 +140,6 @@ export class VaButton {
     this.handleClick();
   }
 
-
   render() {
     const {
       back,
@@ -147,8 +151,11 @@ export class VaButton {
       secondary,
       primaryAlternate,
       big,
-      uswds
+      uswds,
+      messageAriaDescribedby,
     } = this;
+
+    const ariaDescribedbyIds = `${messageAriaDescribedby ? 'button-description' : ''}`.trim() || null;
 
     const ariaDisabled = disabled ? 'true' : undefined;
     const buttonText = getButtonText();
@@ -159,29 +166,42 @@ export class VaButton {
         'usa-button': true,
         'usa-button--big': big,
         'usa-button--outline': back || secondary,
-        'va-button-primary--alternate': primaryAlternate
+        'va-button-primary--alternate': primaryAlternate,
       });
       return (
         <Host>
-          <button 
+          <button
             class={buttonClass}
             aria-disabled={ariaDisabled}
             aria-label={label}
+            aria-describedby={ariaDescribedbyIds}
             type={type}
-            part="button">
-              {back && !_continue && (
-                  <i aria-hidden="true" class="fa fa-angles-left" />
-                )}
-              {buttonText}
-              {_continue && !back && (
-                <i aria-hidden="true" class="fa fa-angles-right" />
-              )}
+            part="button"
+          >
+            {back && !_continue && (
+              <va-icon
+                class="va-button--icon margin-right-8px"
+                icon="navigate_far_before"
+              ></va-icon>
+            )}
+            {buttonText}
+            {_continue && !back && (
+              <va-icon
+                class="va-button--icon margin-left-8px"
+                icon="navigate_far_next"
+              ></va-icon>
+            )}
           </button>
+          {messageAriaDescribedby && (
+            <span id="button-description" class="usa-sr-only">
+              {messageAriaDescribedby}
+            </span>
+          )}
         </Host>
-      )
+      );
     } else {
       const buttonClass = classnames({
-        'va-button-primary--alternate': primaryAlternate
+        'va-button-primary--alternate': primaryAlternate,
       });
       return (
         <Host>
@@ -193,16 +213,23 @@ export class VaButton {
             part="button"
           >
             {back && !_continue && (
-              <i aria-hidden="true" class="fa fa-angles-left" />
+              <va-icon
+                class="va-button--icon"
+                icon="navigate_far_before"
+                size={2}
+              ></va-icon>
             )}
             {buttonText}
             {_continue && !back && (
-              <i aria-hidden="true" class="fa fa-angles-right" />
+              <va-icon
+                class="va-button--icon"
+                icon="navigate_far_next"
+                size={2}
+              ></va-icon>
             )}
           </button>
         </Host>
-      )
+      );
     }
-
   }
 }

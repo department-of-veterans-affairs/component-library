@@ -1,0 +1,107 @@
+// Breadcrumbs
+.va-nav-breadcrumbs {
+  background: $vads-color-white;
+  color: $vads-color-link;
+  font-size: inherit;
+  padding: 1em 0;
+
+  // Gate / Sign-in pages only
+  &--gate {
+    margin-bottom: -1em;
+  }
+
+  li {
+    display: inline-block;
+    margin: 0.25em 0;
+    padding: 0.25em 0 0.25em 0;
+    vertical-align: middle;
+
+    &:after {
+      content: " › ";
+      display: inline-block;
+      padding: 0 0.35em;
+    }
+
+    &:last-child:after {
+      content: "";
+    }
+
+    &.active {
+      font-weight: bold;
+      padding: 0.3em 0;
+
+      &:after {
+        content: "";
+      }
+    }
+  }
+
+  a {
+    color: $vads-color-link;
+    display: inline-block;
+    padding: 2px;
+
+    &:hover {
+      background: $color-link-default-hover;
+    }
+  }
+
+  a[aria-current="page"] {
+    color: $color-gray-dark !important;
+    cursor: default;
+    font-weight: bold;
+    pointer-events: none;
+    text-decoration: none;
+  }
+}
+
+.va-nav-breadcrumbs-list {
+  float: none !important;
+  position: relative;
+}
+
+/* Mobile class declaration for React apps, manual override */
+.va-nav-breadcrumbs--mobile {
+  li {
+    display: none;
+  }
+
+  li:nth-last-child(2) {
+    display: inline-block;
+
+    &::before {
+      content: " \2039 ";
+      display: inline-block;
+      padding: 0 0.15em;
+    }
+
+    &::after {
+      content: "";
+      display: none;
+      padding: 0;
+    }
+  }
+}
+
+/* Activate the mobile breadcrumb at $small-screen breakpoint */
+@media screen and (max-width: $small-screen) {
+  .va-nav-breadcrumbs li {
+    display: none;
+  }
+
+  .va-nav-breadcrumbs li:nth-last-child(2) {
+    display: inline-block;
+
+    &::before {
+      content: " \2039 ";
+      display: inline-block;
+      padding: 0 0.15em;
+    }
+
+    &::after {
+      content: "";
+      display: none;
+      padding: 0;
+    }
+  }
+}

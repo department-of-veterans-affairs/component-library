@@ -1,0 +1,50 @@
+@forward 'settings';
+@use 'usa-table/src/styles/usa-table';
+@import '~@department-of-veterans-affairs/css-library/dist/tokens/scss/variables.scss';
+@import '../../../global/formation_overrides';
+
+
+:host([uswds='true']){
+  td slot::slotted(span:empty)::before,
+  th slot::slotted(span:empty)::before {
+   content: "---";
+   font-weight: normal;
+  }
+}
+
+
+:host {
+  display: table;
+  font-family: var(--font-source-sans);
+  border-collapse: collapse;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+
+::slotted([slot='headers']) {
+  background: var(--vads-color-base-lightest);
+  font-weight: 700;
+}
+
+caption {
+  text-align: left;
+  padding: 0 0 0.5rem;
+  font-weight: 700;
+  font-size: 2rem;
+  font-family: var(--font-serif);
+  margin-bottom: 1.2rem;
+}
+
+@media screen and (max-width: 768px) {
+  thead, ::slotted([slot=headers]) {
+    display: none;
+  }
+
+  ::slotted(va-table-row) {
+    border-bottom: 1px solid var(--vads-color-gray-medium);
+  }
+  ::slotted(va-table-row):first-child {
+    border-top: 1px solid var(--vads-color-gray-medium);
+  }
+}
