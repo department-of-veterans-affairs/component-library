@@ -281,7 +281,7 @@ export class VaFileInput {
                     <span class="file-label">{file.name}</span>
                     <span class="file-size-label">{this.formatFileSize(file.size)}</span>
                   </div>
-                  {(uploadStatus === 'success' || uploadStatus === 'failure') && file && (
+                  {file && (
                     <div>
                       <div class="additional-info-slot">
                         <slot></slot>
