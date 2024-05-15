@@ -1,0 +1,64 @@
+.full-width {
+  width: 100%;
+}
+
+.no-text-transform {
+  text-transform: none;
+}
+
+.no-bottom-margin {
+  margin-bottom: 0;
+}
+
+// This is intended to override button styles and make a button
+// look like a link. We have plenty of overspecified button styles, so there are
+// several instances in here of !important.
+.va-button-link {
+  @include button-link;
+}
+
+.dashed-underline {
+  text-decoration: none;
+  border-bottom: 1px dashed;
+
+  &:hover {
+    text-decoration: none;
+    border-bottom: 1px dashed;
+  }
+}
+
+.clickable:hover {
+  cursor: pointer;
+}
+
+// These are JavaScript only styles that will be added and removed
+// dynamically with scripts
+.js-visual {
+  visibility: hidden !important;
+}
+
+.js-hide {
+  display: none !important;
+}
+
+.heading-level {
+  &-1 {
+    @include h1();
+  }
+  &-2 {
+    @include h2();
+  }
+  &-3 {
+    @include h3();
+  }
+  &-4 {
+    @include h4();
+  }
+  &-5 {
+    @include h5();
+  }
+  &-6 {
+    @include h6();
+    font-family: $font-family-sans;
+  }
+}

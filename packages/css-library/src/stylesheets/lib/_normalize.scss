@@ -1,0 +1,13 @@
+/*
+  @use 'uswds-global';
+  - contains the following:
+    @forward "uswds-elements/lib/normalize";
+    @forward "uswds-core";
+    @forward "uswds-fonts";
+    @forward "uswds-elements";
+    @forward "uswds-helpers";
+
+  See: https://github.com/uswds/uswds/blob/98566ec5dc12807a2b0bc36699a033fe3a711d44/packages/uswds-global/_index.scss
+*/
+
+@use "uswds-elements/lib/normalize";
