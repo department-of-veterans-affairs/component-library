@@ -139,6 +139,7 @@ export class VaAlertExpandable {
               <va-icon
                 class="alert-expandable__status-icon"
                 icon={statusIcons[status] || 'info'}
+                size={3}
               ></va-icon>
             )}
             <div>

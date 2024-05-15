@@ -26,6 +26,8 @@
   margin-top: 0.8rem;
   margin-bottom: 0.8rem;
   text-align: center;
+  box-sizing: border-box;
+  padding-top: 4px;
 }
 
 .va-banner-content-link {

@@ -166,7 +166,7 @@ export class VaMaintenanceBanner {
             <va-icon
               class="maintenance-banner__icon"
               icon={bannerIconName}
-              size={3}
+              size={4}
             ></va-icon>
             <div class="maintenance-banner__body">
               <h4 class="maintenance-banner__title">
@@ -197,7 +197,7 @@ export class VaMaintenanceBanner {
               onClick={this.onCloseAlert}
               type="button"
             >
-              <va-icon icon="cancel" size={3}></va-icon>
+              <va-icon icon="cancel" size={4}></va-icon>
             </button>
           </div>
         </Host>

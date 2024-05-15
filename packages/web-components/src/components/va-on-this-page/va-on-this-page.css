@@ -42,3 +42,7 @@ dd a {
 a:active {
   background-color: var(--vads-color-base-lighter);
 }
+
+va-icon {
+  margin-right: 8px;
+}

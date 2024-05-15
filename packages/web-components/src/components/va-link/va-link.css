@@ -24,6 +24,7 @@
 
 .link-icon--left {
   margin-right: 8px;
+  vertical-align: baseline;
 }
 
 dfn {
