@@ -7,6 +7,12 @@
 
 @import '../../mixins/focusable.css';
 
+@media print {
+  button.va-accordion__button {
+    display: none;
+  }
+}
+
 /** Original Component Style **/
 
 :host([uswds='false']) {
@@ -31,10 +37,4 @@ button.va-accordion__button {
   font-family: inherit;
   font-weight: bold;
   float: right;
-}
-
-@media print {
-  button.va-accordion__button {
-    display: none;
-  }
 }

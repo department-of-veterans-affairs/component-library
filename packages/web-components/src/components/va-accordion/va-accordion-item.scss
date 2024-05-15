@@ -34,6 +34,13 @@
   max-width: 64ex;
 }
 
+@media print {
+  :host(:not([open])) #content,
+  :host([open='false']) #content {
+    display: block;
+  }
+}
+
 /** Original Component Style **/
 
 :host {
@@ -129,11 +136,4 @@ p.subheader {
 
 ::slotted([slot='subheader-icon']) {
   margin-top: 0.5rem;
-}
-
-@media print {
-  :host(:not([open])) #content,
-  :host([open='false']) #content {
-    display: block;
-  }
 }
