@@ -4,7 +4,7 @@ import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
 const numberInputDocs = getWebComponentDocs('va-number-input');
 
 export default {
-  title: 'Deprecated/Number input V1',
+  title: 'Deprecated/Number input',
   id: 'components/va-number-input',
   parameters: {
     componentSubtitle: `va-number-input web component`,
