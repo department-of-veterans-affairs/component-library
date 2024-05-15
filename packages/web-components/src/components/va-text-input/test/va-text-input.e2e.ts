@@ -521,7 +521,7 @@ describe('va-text-input', () => {
     await page.setContent('<va-text-input label="Input Field" />');
 
     const inputEl = await page.find('va-text-input >>> input');
-    const inputSpy = await page.spyOnEvent('vaTextInputChange');
+    const inputSpy = await page.spyOnEvent('input');
 
     // Act
     await inputEl.press('a');
