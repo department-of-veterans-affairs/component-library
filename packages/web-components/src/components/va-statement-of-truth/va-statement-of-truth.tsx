@@ -96,8 +96,9 @@ export class VaStatementOfTruth {
    */
   @Element() el: HTMLElement;
 
-  private handleInputChange = (event: Event) => {
-    this.vaInputChange.emit(event);
+  private handleInputChange = (event: InputEvent) => {
+    const { value } = event.currentTarget as HTMLInputElement
+    this.vaInputChange.emit({ value });
   };
 
   private handleInputBlur = (event: Event) => {
@@ -105,7 +106,8 @@ export class VaStatementOfTruth {
   };
 
   private handleCheckboxChange = (event: Event) => {
-    this.vaCheckboxChange.emit(event);
+    const { checked } = event.currentTarget as HTMLInputElement
+    this.vaCheckboxChange.emit({ checked });
   };
 
   /**
