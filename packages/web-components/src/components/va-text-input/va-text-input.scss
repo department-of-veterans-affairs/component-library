@@ -46,6 +46,29 @@ input.usa-input {
   display: block;
 }
 
+
+.currency-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+
+  > div {
+    position: absolute;
+    left: 10px;
+  }
+
+  // for v3
+  #symbol {
+    margin-top: 8px;
+  }
+
+  #inputField {
+    padding-left: 25px;
+  }
+}
+
+
+
 /** Original Component Style **/
 @import '../../mixins/accessibility.css';
 @import '../../mixins/form-field-error.css';

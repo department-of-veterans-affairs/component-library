@@ -171,6 +171,23 @@ export class VaTextInput {
    */
     @Prop() charcount?: boolean = false;
 
+   /**
+   * Whether this component will be used to accept a currency value.
+   */
+  @Prop() currency?: boolean = false;
+  
+  /**
+   * The min attribute specifies the minimum value for an input element
+   * if the inputmode is numeric.
+   */
+  @Prop() min?: number | string;
+
+  /**
+   * The max attribute specifies the maximum value for an input element
+   * if the inputmode is numeric.
+   */
+  @Prop() max?: number | string;
+  
   /**
    * The event used to track usage of the component. This is emitted when the
    * input is blurred and enableAnalytics is true.
@@ -212,7 +229,7 @@ export class VaTextInput {
     this.value = target.value;
   };
 
-  private handleBlur = () => {
+  private handleBlur = (e: Event) => {
     if (this.enableAnalytics) {
       this.componentLibraryAnalytics.emit({
         componentName: 'va-text-input',
@@ -222,6 +239,19 @@ export class VaTextInput {
           value: this.value,
         },
       });
+    }
+
+    if (this.inputmode === 'decimal' || this.inputmode === 'numeric') {
+      let defaultError = i18next.t('number-error');
+      const target = e.target as HTMLInputElement;
+      const valid = target.checkValidity();
+      if (!this.error && !valid) {
+        this.error = defaultError;
+        this.el.setAttribute('error', defaultError);
+      } else if (this.error && this.error === defaultError && valid) {
+        this.error = null;
+        this.el.setAttribute('error', '');
+      }
     }
   };
 
@@ -266,7 +296,10 @@ export class VaTextInput {
       useFormsPattern,
       formHeadingLevel,
       formHeading,
-      charcount
+      charcount,
+      min,
+      max,
+      currency
     } = this;
 
     const type = this.getInputType();
@@ -280,9 +313,18 @@ export class VaTextInput {
     const ariaLabeledByIds =
     `${useFormsPattern && formHeading ? 'form-question' : ''} ${
       useFormsPattern ? 'form-description' : ''} ${
-      useFormsPattern && label ? 'input-label' : ''}`.trim() || null;
+        useFormsPattern && label ? 'input-label' : ''}`.trim() || null;
+    
+    const isNumericWithNoPattern =
+      pattern === undefined && (inputmode === 'decimal' || inputmode === 'numeric');
+    // if input will hold a number then set the pattern to a default
+    const _pattern = isNumericWithNoPattern ? "[0-9]+(\.[0-9]{1,})?" : pattern;
 
-      if (uswds) {
+    const currencyWrapper = classnames({
+      'currency-wrapper': currency
+    });
+    
+    if (uswds) {
       const charCountTooHigh = maxlength && (value?.length > maxlength);
       const labelClass = classnames({
         'usa-label': true,
@@ -348,26 +390,31 @@ export class VaTextInput {
                 </Fragment>
               )}
             </span>
-            <input
-              class={inputClass}
-              id="inputField"
-              type={type}
-              value={value}
-              onInput={handleInput}
-              onBlur={handleBlur}
-              aria-describedby={ariaDescribedbyIds}
-              aria-labelledby={ariaLabeledByIds}
-              aria-invalid={
-                invalid || error || charCountTooHigh ? 'true' : 'false'
-              }
-              inputmode={inputmode ? inputmode : undefined}
-              maxlength={maxlength}
-              pattern={pattern}
-              name={name}
-              autocomplete={autocomplete}
-              required={required || null}
-              part="input"
-            />
+            <div class={currencyWrapper}>
+              {currency && <div id="symbol">$</div>}
+              <input
+                class={inputClass}
+                id="inputField"
+                type={type}
+                value={value}
+                onInput={handleInput}
+                onBlur={handleBlur}
+                aria-describedby={ariaDescribedbyIds}
+                aria-labelledby={ariaLabeledByIds}
+                aria-invalid={
+                  invalid || error || charCountTooHigh ? 'true' : 'false'
+                }
+                inputmode={inputmode ? inputmode : undefined}
+                maxlength={maxlength}
+                pattern={_pattern}
+                name={name}
+                autocomplete={autocomplete}
+                required={required || null}
+                part="input"
+                min={min}
+                max={max}
+              />
+            </div>
             {messageAriaDescribedby && (
               <span id="input-message" class="sr-only dd-privacy-hidden">
                 {messageAriaDescribedby}
@@ -407,25 +454,30 @@ export class VaTextInput {
                 <span class="sr-only">{i18next.t('error')}</span> {error}
               </Fragment>
             )}
-          </span>
-          <input
-            class={inputClass}
-            id="inputField"
-            type={type}
-            value={value}
-            onInput={handleInput}
-            onBlur={handleBlur}
-            aria-describedby={ariaDescribedbyIds}
-            aria-invalid={invalid || error ? 'true' : 'false'}
-            inputmode={inputmode ? inputmode : undefined}
-            maxlength={maxlength}
-            minlength={minlength}
-            pattern={pattern}
-            name={name}
-            autocomplete={autocomplete}
-            required={required || null}
-            part="input"
-          />
+          </span>          
+          <div class={currencyWrapper}>
+            {currency && <div>$</div>}
+            <input
+              class={inputClass}
+              id="inputField"
+              type={type}
+              value={value}
+              onInput={handleInput}
+              onBlur={handleBlur}
+              aria-describedby={ariaDescribedbyIds}
+              aria-invalid={invalid || error ? 'true' : 'false'}
+              inputmode={inputmode ? inputmode : undefined}
+              maxlength={maxlength}
+              minlength={minlength}
+              pattern={_pattern}
+              name={name}
+              autocomplete={autocomplete}
+              required={required || null}
+              part="input"
+              max={max}
+              min={min}
+            />
+          </div>
           {messageAriaDescribedby && (
             <span id="input-message" class="sr-only dd-privacy-hidden">
               {messageAriaDescribedby}
