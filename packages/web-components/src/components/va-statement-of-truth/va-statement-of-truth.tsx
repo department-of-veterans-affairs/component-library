@@ -9,7 +9,7 @@ import {
 } from '@stencil/core';
 
 /**
- * @componentName Statement of Truth
+ * @componentName Statement of truth
  * @maturityCategory caution
  * @maturityLevel candidate
  */
@@ -26,7 +26,7 @@ export class VaStatementOfTruth {
   /**
    * An optional custom header for the component
    */
-  @Prop() heading: string = 'Statement of Truth';
+  @Prop() heading: string = 'Statement of truth';
 
   /**
    * The value to pre-fill the va-text-input element
