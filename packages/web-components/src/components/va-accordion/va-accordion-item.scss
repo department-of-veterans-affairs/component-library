@@ -32,6 +32,13 @@
   max-width: 64ex;
 }
 
+@media print {
+  :host(:not([open])) #content,
+  :host([open='false']) #content {
+    display: block;
+  }
+}
+
 /** Original Component Style **/
 
 :host {

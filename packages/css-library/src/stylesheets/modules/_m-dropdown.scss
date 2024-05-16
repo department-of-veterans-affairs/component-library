@@ -1,0 +1,54 @@
+@import '../override-function';
+
+.va-dropdown {
+  position: relative;
+
+  // This should always be a button element
+  &-trigger {
+    background: transparent url('#{$image-path}/arrow-down-white.svg') no-repeat;
+    background-position: right 8px center;
+    background-size: 10px 10px;
+    border-radius: 0;
+    border-top: 3px solid transparent;
+    margin: 0;
+    padding: 9px 25px 8px 8px;
+
+    &:hover {
+      background-color: $vads-color-link;
+    }
+
+    &[aria-expanded=true] {
+      border-top-color: $vads-color-va-accent;
+      background-color: $vads-color-white;
+      background-image: url('#{$image-path}/arrow-up.svg') !important;
+      color: $vads-color-base;
+
+      path {
+        fill: currentColor;
+      }
+    }
+  }
+
+  &-panel {
+    background: $vads-color-white;
+    box-shadow: 0px 4px 10px -4px $vads-color-base;
+    color: $vads-color-base;
+    padding: scale-rem(.8rem);
+    position: absolute;
+    min-width: 100%;
+    z-index: 2;
+
+    a {
+      color: $vads-color-link;
+      display: inline-block;
+    }
+  }
+}
+
+//==============================
+// Specific component overrides
+//==============================
+
+[id=helpmenu] {
+  width: scale-rem(21rem);
+}
