@@ -130,13 +130,13 @@ export class VaFileInput {
   private removeFile = () => {
     this.file = null;
     this.uploadStatus = 'idle';
-  }
+  };
 
   private changeFile = () => {
     if (this.fileInputRef) {
       this.fileInputRef.click();
     }
-  }
+  };
 
   private handleDrop = (event: DragEvent) => {
     event.preventDefault();
@@ -148,7 +148,7 @@ export class VaFileInput {
       this.vaChange.emit({ files: [this.file] });
       this.uploadStatus = 'success';
     }
-  }
+  };
 
   /**
    * Makes sure the button text always has a value.
@@ -170,25 +170,33 @@ export class VaFileInput {
    */
   private formatFileSize = (filesSize): string => {
     const units = ['B', 'KB', 'MB', 'GB', 'TB'];
-    if (filesSize === 0)
-      return '0 B';
+    if (filesSize === 0) return '0 B';
 
     const unitIndex = Math.floor(Math.log(filesSize) / Math.log(1024));
-    if (unitIndex === 0)
-      return `${filesSize} ${units[unitIndex]}`;
+    if (unitIndex === 0) return `${filesSize} ${units[unitIndex]}`;
 
-    const sizeInUnit = (filesSize / Math.pow(1024, unitIndex));
+    const sizeInUnit = filesSize / Math.pow(1024, unitIndex);
     const formattedSize = sizeInUnit.toFixed(unitIndex < 2 ? 0 : 1);
     return `${formattedSize} ${units[unitIndex]}`;
-  }
+  };
 
-  private renderLabelOrHeader = (label: string, required: boolean, headerSize?: number) => {
-    const requiredSpan = required ? <span class="required"> {i18next.t('required')}</span> : null;
+  private renderLabelOrHeader = (
+    label: string,
+    required: boolean,
+    headerSize?: number,
+  ) => {
+    const requiredSpan = required ? (
+      <span class="required"> {i18next.t('required')}</span>
+    ) : null;
     if (headerSize && headerSize >= 1 && headerSize <= 6) {
-      const HeaderTag = `h${headerSize}` as keyof  JSX.IntrinsicElements;
+      const HeaderTag = `h${headerSize}` as keyof JSX.IntrinsicElements;
       return (
         <div class="label-header">
-          <HeaderTag htmlFor="fileInputField" part="label" class="label-header-tag">
+          <HeaderTag
+            htmlFor="fileInputField"
+            part="label"
+            class="label-header-tag"
+          >
             {label}
             {requiredSpan}
           </HeaderTag>
@@ -204,7 +212,7 @@ export class VaFileInput {
         </div>
       );
     }
-  }
+  };
 
   componentDidLoad() {
     if (this.uswds) fileInput.init(this.el);
@@ -222,8 +230,28 @@ export class VaFileInput {
     }
   }
 
+  private getLabelFileName() {
+    const { file } = this;
+    const maxLength = 25;
+    return (
+      file.name.substring(0, maxLength) +
+      (file.name.length > maxLength ? '…' : '')
+    );
+  }
+
   render() {
-    const { label, name, required, accept, error, hint, uswds, file, uploadStatus, headerSize } = this;
+    const {
+      label,
+      name,
+      required,
+      accept,
+      error,
+      hint,
+      uswds,
+      file,
+      uploadStatus,
+      headerSize,
+    } = this;
 
     const text = this.getButtonText();
 
@@ -232,29 +260,36 @@ export class VaFileInput {
         `${hint ? 'input-hint-message' : ''} ${
           error ? 'input-error-message' : ''
         }`.trim() || null; // Null so we don't add the attribute if we have an empty string
-      const fileInputTargetClasses = `file-input-target ${this.error ? 'file-input-target-error' : ''}`.trim();
+      const fileInputTargetClasses = `file-input-target ${
+        this.error ? 'file-input-target-error' : ''
+      }`.trim();
 
       return (
         <Host>
           {label && this.renderLabelOrHeader(label, required, headerSize)}
           {hint && (
-            <div class="usa-hint" id="input-hint-message">{hint}</div>
+            <div class="usa-hint" id="input-hint-message">
+              {hint}
+            </div>
           )}
           <span id="input-error-message" role="alert">
-             {error && (
-               <Fragment>
-                 <span class="usa-sr-only">{i18next.t('error')}</span>
-                 <span class="usa-error-message">{error}</span>
-               </Fragment>
-             )}
-           </span>
+            {error && (
+              <Fragment>
+                <span class="usa-sr-only">{i18next.t('error')}</span>
+                <span class="usa-error-message">{error}</span>
+              </Fragment>
+            )}
+          </span>
           <div class="file-input-wrapper" onDrop={this.handleDrop}>
             <input
               id="fileInputField"
               class="file-input"
-              style={{ visibility: this.uploadStatus === 'success' ? 'hidden' : 'unset' }}
+              style={{
+                visibility:
+                  this.uploadStatus === 'success' ? 'hidden' : 'unset',
+              }}
               type="file"
-              ref={el => this.fileInputRef = el as HTMLInputElement}
+              ref={el => (this.fileInputRef = el as HTMLInputElement)}
               name={name}
               accept={accept}
               aria-describedby={ariaDescribedbyIds}
@@ -266,8 +301,12 @@ export class VaFileInput {
                 <div class={fileInputTargetClasses}>
                   <div class="file-input-box"></div>
                   <div class="file-input-instructions">
-                    <span class="file-input-drag-text">Drag files here or </span>
-                    <span class="file-input-choose-text">choose from folder</span>
+                    <span class="file-input-drag-text">
+                      Drag files here or{' '}
+                    </span>
+                    <span class="file-input-choose-text">
+                      choose from folder
+                    </span>
                   </div>
                 </div>
               </div>
@@ -277,9 +316,15 @@ export class VaFileInput {
                 <div class="selected-files-label">Selected files</div>
                 <va-card class="va-card">
                   <div class="file-info-section">
-                    <va-icon icon="file_present" size={5} class="file-icon"></va-icon>
-                    <span class="file-label">{file.name}</span>
-                    <span class="file-size-label">{this.formatFileSize(file.size)}</span>
+                    <va-icon
+                      icon="file_present"
+                      size={5}
+                      class="file-icon"
+                    ></va-icon>
+                    <span class="file-label">{this.getLabelFileName()}</span>
+                    <span class="file-size-label">
+                      {this.formatFileSize(file.size)}
+                    </span>
                   </div>
                   {file && (
                     <div>
@@ -287,8 +332,16 @@ export class VaFileInput {
                         <slot></slot>
                       </div>
                       <div class="file-button-section">
-                        <va-button-icon buttonType="change-file" onClick={this.changeFile} label="Change file"></va-button-icon>
-                        <va-button-icon buttonType="delete" onClick={this.removeFile} label="Delete"></va-button-icon>
+                        <va-button-icon
+                          buttonType="change-file"
+                          onClick={this.changeFile}
+                          label="Change file"
+                        ></va-button-icon>
+                        <va-button-icon
+                          buttonType="delete"
+                          onClick={this.removeFile}
+                          label="Delete"
+                        ></va-button-icon>
                       </div>
                     </div>
                   )}
