@@ -3,6 +3,10 @@
 @use 'uswds-helpers/src/styles/usa-sr-only';
 @use 'usa-process-list/src/styles/usa-process-list';
 
+*, ::after, ::before {
+  box-sizing: border-box;
+}
+
 :host(:not([uswds='false'])) {
   counter-reset: usa-numbered-list;
 }

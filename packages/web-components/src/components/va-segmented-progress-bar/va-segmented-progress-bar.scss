@@ -5,6 +5,10 @@
 @import '../../mixins/accessibility.css';
 
 
+*, ::after, ::before {
+  box-sizing: border-box;
+}
+
 /** V1 Styles **/
 
 .progress-bar-segmented {
