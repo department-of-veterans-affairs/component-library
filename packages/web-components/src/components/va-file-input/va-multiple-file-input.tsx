@@ -62,8 +62,7 @@ export class VaMultipleFileInput {
 
   /**
    * Shows a va-progress-bar at this percentage when uploading
-   */
-  @Prop() uploadPercentage?: number;
+  * @Prop() uploadPercentage?: number;
 
   /**
    * Optionally specifies the size of the header element to use instead of the base label.
@@ -99,7 +98,7 @@ export class VaMultipleFileInput {
       required,
       accept,
       error,
-      uploadPercentage,
+      // uploadPercentage,
       headerSize,
       enableAnalytics,
     } = this;
@@ -111,7 +110,7 @@ export class VaMultipleFileInput {
     inputElement.required = required;
     inputElement.error = error;
     inputElement.uswds = true;
-    inputElement.uploadPercentage = uploadPercentage;
+    // inputElement.uploadPercentage = uploadPercentage;
     inputElement.headerSize = headerSize;
     inputElement['enable-analytics'] = enableAnalytics;
     inputElement.addEventListener('vaChange', e => this.handleChange(e));
@@ -196,7 +195,7 @@ export class VaMultipleFileInput {
      * to each of the va-file-input elements
      */
     const container: HTMLElement = this.el.shadowRoot.querySelector(
-      '.input-component-wrap',
+      '[name="input-component-wrap"]',
     );
     this.inputArray.forEach(input => container.appendChild(input));
     const wrap: HTMLElement = this.el.shadowRoot.querySelector('.outer-wrap');
@@ -213,9 +212,10 @@ export class VaMultipleFileInput {
         {hint && <div id="input-hint-message">{hint}</div>}
         <div class="selected-files-label">Selected files</div>
         <div class="outer-wrap">
-          <div class="input-component-wrap"></div>
+          <slot name="input-component-wrap"></slot>
         </div>
       </Host>
     );
   }
 }
+///

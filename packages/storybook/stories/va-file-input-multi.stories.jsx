@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
-import { VaMultipleFileInput } from '@department-of-veterans-affairs/web-components/react-bindings';
+import { VaMultipleFileInput , VaFileInput} from '@department-of-veterans-affairs/web-components/react-bindings';
 import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
 
 const fileInputDocs = getWebComponentDocs('va-file-input');
@@ -65,9 +65,45 @@ const Template = ({
   );
 };
 
+const TemplateTwo = ({
+  label,
+  name,
+  accept,
+  error,
+  required,
+  hint,
+  'enable-analytics': enableAnalytics,
+  vaChange,
+  uswds,
+  uploadPercentage,
+  headerSize,
+  children
+}) => {
+  return (
+    <va-file-input
+      label={label}
+      name={name}
+      accept={accept}
+      required={required}
+      error={error}
+      hint={hint}
+      enable-analytics={enableAnalytics}
+      onVaChange={vaChange}
+      uswds={uswds}
+      uploadPercentage={uploadPercentage}
+      headerSize={headerSize}
+      // children={children}
+    />
+  );
+};
+
 export const Default = Template.bind(null);
 Default.args = { ...defaultArgs };
 Default.argTypes = propStructure(fileInputDocs);
+
+export const Default2 = TemplateTwo.bind(null);
+Default2.args = { ...defaultArgs };
+Default2.argTypes = propStructure(fileInputDocs);
 
 export const Required = Template.bind(null);
 Required.args = { ...defaultArgs, required: true };

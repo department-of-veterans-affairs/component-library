@@ -708,7 +708,8 @@ export namespace Components {
          */
         "error"?: string;
         /**
-          * Optionally specifies the size of the header element to use instead of the base label. Accepts a number from 1 to 6, corresponding to HTML header elements h1 through h6. If not provided, defaults to standard label styling.
+          * Shows a va-progress-bar at this percentage when uploading
+          * @Prop () uploadPercentage?: number;  /** Optionally specifies the size of the header element to use instead of the base label. Accepts a number from 1 to 6, corresponding to HTML header elements h1 through h6. If not provided, defaults to standard label styling.
          */
         "headerSize"?: number;
         /**
@@ -727,10 +728,6 @@ export namespace Components {
           * Sets the input to required and renders the (*Required) text.
          */
         "required"?: boolean;
-        /**
-          * Shows a va-progress-bar at this percentage when uploading
-         */
-        "uploadPercentage"?: number;
     }
     interface VaNeedHelp {
     }
@@ -2846,7 +2843,8 @@ declare namespace LocalJSX {
          */
         "error"?: string;
         /**
-          * Optionally specifies the size of the header element to use instead of the base label. Accepts a number from 1 to 6, corresponding to HTML header elements h1 through h6. If not provided, defaults to standard label styling.
+          * Shows a va-progress-bar at this percentage when uploading
+          * @Prop () uploadPercentage?: number;  /** Optionally specifies the size of the header element to use instead of the base label. Accepts a number from 1 to 6, corresponding to HTML header elements h1 through h6. If not provided, defaults to standard label styling.
          */
         "headerSize"?: number;
         /**
@@ -2865,10 +2863,6 @@ declare namespace LocalJSX {
           * Sets the input to required and renders the (*Required) text.
          */
         "required"?: boolean;
-        /**
-          * Shows a va-progress-bar at this percentage when uploading
-         */
-        "uploadPercentage"?: number;
     }
     interface VaNeedHelp {
     }

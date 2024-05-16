@@ -310,7 +310,9 @@ export class VaFileInput {
             )}
             {uploadStatus !== 'idle' && (
               <div class="selected-files-wrapper">
-                <div class="selected-files-label">Selected files</div>
+                {this.el.getAttribute('ischild') === 'true' ? null : (
+                  <div class="selected-files-label">Selected file</div>
+                )}
                 <va-card class="va-card">
                   <div class="file-info-section">
                     <va-icon
