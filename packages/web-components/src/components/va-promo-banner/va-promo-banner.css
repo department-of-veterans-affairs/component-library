@@ -30,6 +30,12 @@
   padding-top: 4px;
 }
 
+@media (max-width: 767px) {
+  .va-promo-banner__icon {
+    display: none;
+  }
+}
+
 .va-banner-content-link {
   padding: 0.8rem;
   line-height: 2.2rem;

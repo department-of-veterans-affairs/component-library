@@ -100,7 +100,6 @@ a[aria-expanded='true'] .alert-expandable-icon {
 .alert-expandable__status-icon {
   color: var(--vads-color-base-darker);
   margin-right: 8px;
-  margin-top: 0.4em;
 }
 
 ::slotted(*) {

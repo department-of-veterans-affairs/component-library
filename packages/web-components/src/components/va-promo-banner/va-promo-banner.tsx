@@ -161,7 +161,7 @@ export class VaPromoBanner {
             href={this.href}
             onClick={() => this.handleLinkClick()}
           >
-            <slot></slot> <va-icon icon="chevron_right"></va-icon>
+            <slot></slot> <va-icon icon="chevron_right" size={3}></va-icon>
           </a>
           <button
             type="button"

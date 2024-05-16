@@ -117,7 +117,7 @@ div.docked a {
 }
 
 va-icon {
-  margin-right: 8px;
+  margin-right: 0px;
 }
 
 @media (min-width: 768px) {
@@ -139,11 +139,7 @@ va-icon {
     visibility: hidden;
   }
 
-  i {
-    color: var(--vads-color-link);
-    padding-right: 8px;
-    padding-top: 11px;
-    font-size: 1em;
-    text-decoration: none;
+  va-icon {
+    margin-right: 4px;
   }
 }
