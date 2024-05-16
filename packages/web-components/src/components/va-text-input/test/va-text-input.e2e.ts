@@ -64,6 +64,7 @@ describe('va-text-input', () => {
     expect(error.innerText).toContain('This is a mistake');
     expect(input.getAttribute('aria-invalid')).toEqual('true');
     expect(input.getAttribute('aria-describedby')).toContain('input-error-message');
+    expect(input.getAttribute('aria-describedby')).not.toContain('charcount-message');
   });
 
   it('sets aria-invalid based on invalid prop', async () => {
@@ -89,7 +90,7 @@ describe('va-text-input', () => {
     el.setProperty('error', 'Testing Error');
     await page.waitForChanges();
     expect(inputEl.getAttribute('aria-describedby')).not.toBeNull();
-    expect(inputEl.getAttribute('aria-describedby')).toContain('error-message');
+    expect(inputEl.getAttribute('aria-describedby')).toBe('input-error-message');
   });
 
   it('adds aria-describedby input-message id', async () => {
@@ -106,8 +107,9 @@ describe('va-text-input', () => {
     el.setProperty('error', 'Testing Error');
     await page.waitForChanges();
     expect(inputEl.getAttribute('aria-describedby')).not.toBeNull();
-    expect(inputEl.getAttribute('aria-describedby')).toContain('error-message');
+    expect(inputEl.getAttribute('aria-describedby')).toContain('input-error-message');
     expect(inputEl.getAttribute('aria-describedby')).toContain('input-message');
+    expect(inputEl.getAttribute('aria-describedby')).not.toContain('charcount-message');
   });
 
   it('renders a required span', async () => {
@@ -256,6 +258,7 @@ describe('va-text-input', () => {
     expect((await page.find('va-text-input >>> small')).innerText).toContain(
       'min-chars',
     );
+    expect(inputEl.getAttribute('aria-describedby')).toBe('charcount-message');
   });
 
   it('ignores negative maxlength values', async () => {
@@ -366,6 +369,9 @@ describe('va-text-input', () => {
     const page = await newE2EPage();
     await page.setContent('<va-text-input class="memorable-date-input" label="This is a label" uswds="false"/>');
 
+    const inputEl = await page.find('va-text-input >>> input');
+    expect(inputEl.getAttribute('aria-describedby')).toBeNull();
+
     const charcountMessageEl = await page.find('va-text-input >>> #charcount-message');
     expect(charcountMessageEl).toBeNull();
 
@@ -407,7 +413,7 @@ describe('va-text-input', () => {
     const input = await page.find('va-text-input >>> input');
     expect(error.innerText).toContain('This is a mistake');
     expect(input.getAttribute('aria-invalid')).toEqual('true');
-    expect(input.getAttribute('aria-describedby')).toContain('input-error-message');
+    expect(input.getAttribute('aria-describedby')).toBe('input-error-message');
   });
 
   it('uswds sets aria-invalid based on invalid prop', async () => {
@@ -433,7 +439,7 @@ describe('va-text-input', () => {
     el.setProperty('error', 'Testing Error');
     await page.waitForChanges();
     expect(inputEl.getAttribute('aria-describedby')).not.toBeNull();
-    expect(inputEl.getAttribute('aria-describedby')).toContain('error-message');
+    expect(inputEl.getAttribute('aria-describedby')).toBe('input-error-message');
   });
 
   it('uswds adds aria-describedby input-message id', async () => {
@@ -452,6 +458,7 @@ describe('va-text-input', () => {
     expect(inputEl.getAttribute('aria-describedby')).not.toBeNull();
     expect(inputEl.getAttribute('aria-describedby')).toContain('error-message');
     expect(inputEl.getAttribute('aria-describedby')).toContain('input-message');
+    expect(inputEl.getAttribute('aria-describedby')).not.toContain('charcount-message');
   });
 
   it('uswds renders a required span', async () => {
@@ -586,6 +593,8 @@ describe('va-text-input', () => {
     expect((await page.find('va-text-input >>> span.usa-character-count__status')).innerText).toContain(
       '2 characters left',
     );
+
+    expect(inputEl.getAttribute('aria-describedby')).toBe('charcount-message');
   });
 
    it('uswds respects the maxlength character limit', async () => {
@@ -607,6 +616,8 @@ describe('va-text-input', () => {
        (await page.find('va-text-input >>> span.usa-character-count__status'))
          .innerText,
      ).toContain('0 characters left');
+
+     expect(inputEl.getAttribute('aria-describedby')).toBe('charcount-message');
    });
 
   it('uswds ignores negative maxlength values', async () => {
@@ -739,6 +750,9 @@ describe('va-text-input', () => {
   it('uswds charcount and maxlength text does not display on memorable date', async () => {
     const page = await newE2EPage();
     await page.setContent('<va-text-input class="memorable-date-input" label="This is a label" />');
+
+    const inputEl = await page.find('va-text-input >>> input');
+    expect(inputEl.getAttribute('aria-describedby')).toBeNull();
 
     const charcountMessageEl = await page.find('va-text-input >>> #charcount-message');
     expect(charcountMessageEl).toBeNull();
