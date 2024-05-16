@@ -177,7 +177,7 @@ export class VaFileInput {
 
     const sizeInUnit = filesSize / Math.pow(1024, unitIndex);
     const formattedSize = sizeInUnit.toFixed(unitIndex < 2 ? 0 : 1);
-    return `${formattedSize} ${units[unitIndex]}`;
+    return `${formattedSize}\xa0${units[unitIndex]}`;
   };
 
   private renderLabelOrHeader = (
@@ -228,15 +228,6 @@ export class VaFileInput {
     if (this.uswds) {
       this.el.removeEventListener('change', this.handleChange);
     }
-  }
-
-  private getLabelFileName() {
-    const { file } = this;
-    const maxLength = 25;
-    return (
-      file.name.substring(0, maxLength) +
-      (file.name.length > maxLength ? '…' : '')
-    );
   }
 
   render() {
@@ -315,16 +306,18 @@ export class VaFileInput {
               <div class="selected-files-wrapper">
                 <div class="selected-files-label">Selected files</div>
                 <va-card class="va-card">
-                  <div class="file-info-section">
+                  <div class="file-info-section vads-u-line-height-2">
                     <va-icon
                       icon="file_present"
                       size={5}
                       class="file-icon"
                     ></va-icon>
-                    <span class="file-label">{this.getLabelFileName()}</span>
-                    <span class="file-size-label">
-                      {this.formatFileSize(file.size)}
-                    </span>
+                    <div>
+                      <span class="file-label">{file.name}</span>
+                      <span class="file-size-label">
+                        {this.formatFileSize(file.size)}
+                      </span>
+                    </div>
                   </div>
                   {file && (
                     <div>

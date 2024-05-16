@@ -132,12 +132,15 @@ va-button {
     font-weight: var(--font-weight-bold);
     font-size: 1.696rem;
     padding: 0 8px;
+    display:block;
   }
 
   .file-size-label {
     color: var(--vads-color-base-dark);
     font-weight: var(--font-weight-normal);
     font-size: 1.696rem;
+    padding: 0 8px;
+    display: block;
   }
 
   .file-info-section {
@@ -145,6 +148,7 @@ va-button {
     padding: 0 8px 8px;
     display: flex;
     align-items: center;
+    line-height: 1.15;
   }
 
   .file-button-section {
