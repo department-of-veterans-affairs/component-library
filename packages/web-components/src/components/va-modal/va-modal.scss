@@ -64,26 +64,6 @@
   background-color: var(--vads-color-success-lighter);
 }
 
-:host([status='success']) .usa-modal__main::before {
-  color: var(--vads-color-base-darker);
-  content: '\F00C'; /* fa-check */
-}
-
-.usa-modal__main::before {
-  padding-top: 0;
-  position: absolute;
-  left: -1rem;
-  top: 0;
-  font-family: 'Font Awesome 5 Free';
-  font-size: 1.25rem;
-  font-weight: 900;
-
-  :host([large='true']) &,
-  :host([large]:not([large='false'])) & {
-    padding-top: 20px;
-  }
-}
-
 :host([status='warning']) .usa-modal {
   border-left-color: var(--vads-color-warning);
   background-color: var(--vads-color-gold-lightest);

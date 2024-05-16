@@ -83,7 +83,7 @@ describe('va-checkbox-group', () => {
       </va-checkbox-group>
       `);
     const analyticsSpy = await page.spyOnEvent('component-library-analytics');
-    const inputEl = await page.find('va-checkbox >>> label');
+    const inputEl = await page.find('va-checkbox');
     await inputEl.click();
 
     expect(analyticsSpy).toHaveReceivedEventDetail({

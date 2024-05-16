@@ -7,10 +7,6 @@
   display: list-item;
 }
 
-.usa-process-list__item::before {
-  box-sizing: border-box;
-}
-
 va-process-list-item[pending='true'] .usa-process-list__heading {
   color: var(--vads-process-list-color-text-pending-on-light);
 }

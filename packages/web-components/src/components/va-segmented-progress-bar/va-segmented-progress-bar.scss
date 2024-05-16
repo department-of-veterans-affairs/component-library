@@ -4,17 +4,8 @@
 @use 'uswds-helpers/src/styles/usa-sr-only';
 @import '../../mixins/accessibility.css';
 
-.usa-step-indicator__current-step {
-  box-sizing: border-box;
-}
-
-.usa-step-indicator--counters .usa-step-indicator__segment:before, .usa-step-indicator--counters-sm .usa-step-indicator__segment:before {
-  box-sizing: border-box;
-}
 
 /** V1 Styles **/
-
-
 
 .progress-bar-segmented {
   display: flex;

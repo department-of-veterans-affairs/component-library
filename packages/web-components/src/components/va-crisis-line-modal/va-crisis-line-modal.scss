@@ -141,28 +141,4 @@ button.va-crisis-line {
       }
     }
   }
-  &-icon {
-    color: var(--vads-color-base) !important;
-    font-size: 26px;
-    width: 46px;
-    padding: 6.4px 4.8px;
-    align-self: center;
-    flex-shrink: 0;
-    font-family: "Font Awesome 5 Free";
-    font-style: normal;
-    font-weight: 900;
-    &.fa-mobile {
-      font-size: 38px;
-      padding: 2.4px 4.8px;
-    }
-  }
-  &-close.va-modal-close {
-    font-size: 2.5rem;
-    color: var(--vads-color-link);
-    padding-top: 0.063rem;
-    &:hover {
-      color: var(--vads-color-black);
-      background-color: transparent;
-    }
-  }
 }

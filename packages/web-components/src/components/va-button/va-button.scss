@@ -111,24 +111,6 @@
   padding: 0.9375rem 1.875rem;
 }
 
-i {
-  font-family: 'Font Awesome 5 Free';
-  font-size: 1rem;
-  font-style: normal;
-  font-weight: 900;
-  line-height: 1;
-}
-
-i.fa-angles-left::before {
-  content: '\F100';
-  margin-right: 8px;
-}
-
-i.fa-angles-right::before {
-  content: '\F101';
-  margin-left: 8px;
-}
-
 :host([uswds='false'][disabled]:not([disabled='false'])) button {
   background-color: var(--vads-color-base-lighter);
   box-shadow: none;

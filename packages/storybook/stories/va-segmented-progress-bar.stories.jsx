@@ -28,11 +28,7 @@ const Template = ({
   <div style={{ margin: '3em' }}>
     <div
       className="schemaform-title"
-      style={{
-        alignItems: 'baseline',
-        display: 'flex',
-        marginBottom: '1.9rem',
-      }}
+      style={{ alignItems: 'baseline', display: 'flex', marginBottom: '1.9rem' }}
     >
       <h1
         data-testid="form-title"
@@ -73,7 +69,7 @@ const defaultArgs = {
   'current': 2,
   'total': 6,
   'label': undefined,
-  'uswds': false,
+  uswds: false,
 };
 
 export const Default = Template.bind(null);
