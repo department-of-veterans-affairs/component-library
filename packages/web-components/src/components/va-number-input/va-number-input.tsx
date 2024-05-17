@@ -23,8 +23,8 @@ if (Build.isTesting) {
  * @nativeHandler onInput
  * @nativeHandler onBlur
  * @componentName Number input
- * @maturityCategory use
- * @maturityLevel deployed
+ * @maturityCategory dont_use
+ * @maturityLevel deprecated
  * @guidanceHref form/number-input
  * @translations English
  * @translations Spanish

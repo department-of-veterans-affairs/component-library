@@ -1,0 +1,101 @@
+@import '../override-function';
+// Styles for application modals
+
+// Hide initially, to be shown if url contains #modal
+// Alternatively, modal.hide() in content/includes/modal.html
+#va-modal {
+  display: none;
+}
+
+.va-modal {
+  background: $color-va-modal-bg;
+  content: " ";
+  display: block;
+  height: 100%;
+  left: 0;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 6;
+
+  @include media-maxwidth($small-screen) {
+    overflow-y: scroll;
+  }
+
+  .va-modal-body {
+    p:first-of-type {
+      margin-top: 0;
+    }
+    margin-right: units(2.5);
+  }
+
+  &-title {
+    margin: 0;
+    margin-bottom: units(2);
+  }
+
+  &-inner {
+    background: $vads-color-white;
+    margin: auto;
+    max-width: scale-rem(40rem);
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 100%;
+    cursor: auto;
+
+    @include media-maxwidth($small-screen) {
+      transform: none;
+      top: 0;
+    }
+  }
+
+  &-alert {
+    max-width: scale-rem(60rem);
+
+    .alert-actions {
+      margin-top: units(3);
+
+      button {
+        margin: 0;
+
+        + button {
+          margin-left: units(2.5);
+        }
+      }
+    }
+  }
+
+  &-body {
+    overflow-wrap: break-word;
+    padding: units(2.5);
+    word-break: break-word;
+    word-wrap: break-word;
+  }
+
+  &-large {
+    .va-modal-inner {
+      max-width: scale-rem(75rem);
+      width: 75vw;
+
+      .va-modal-body {
+        max-height: 95vh;
+        overflow-y: auto;
+      }
+    }
+  }
+}
+
+.va-modal-body {
+  h3 {
+    margin-top: 0;
+  }
+}
+
+.va-modal button {
+  white-space: nowrap;
+}
+
+button.va-modal-close {
+  @include modal-close-button;
+}

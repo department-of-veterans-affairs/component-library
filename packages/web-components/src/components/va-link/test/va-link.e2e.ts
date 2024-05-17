@@ -135,7 +135,9 @@ describe('va-link', () => {
       componentName: 'va-link',
       action: 'click',
       details: {
-        label: 'Find out if you qualify for this program and how to apply'
+        label: 'Find out if you qualify for this program and how to apply',
+        destination: 'https://www.va.gov',
+        origin: 'http://localhost:3333/',
       },
     });
   });

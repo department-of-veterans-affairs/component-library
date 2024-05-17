@@ -1,0 +1,23 @@
+// This is a copy of the entire ~uswds/src/stylesheets/components/media-blocks.scss file
+// so that we can convert the rem values for USWDS v3.
+
+/*
+  Original: @import "~uswds/src/stylesheets/components/media-block";
+  ***THIS IS USWDS v1***
+*/
+
+@import '../../override-function';
+
+@mixin media-block-img($margin-right: scale-rem(1rem)) {
+    float: left;
+    margin-right: $margin-right;
+  }
+  
+  .usa-media_block-img {
+    @include media-block-img;
+  }
+  
+  .usa-media_block-body {
+    overflow: hidden;
+  }
+  
