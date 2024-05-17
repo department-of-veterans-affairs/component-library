@@ -2,7 +2,6 @@
 
 @use 'usa-button/src/styles/usa-button';
 
-@import '../../global/formation_overrides';
 @import '../../mixins/focusable.css';
 
 // Needed so button doesn't cause re-flow issues

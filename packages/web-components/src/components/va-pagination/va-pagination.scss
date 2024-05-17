@@ -3,7 +3,6 @@
 @use 'usa-icon/src/styles/_usa-icon.scss';
 
 @import '../../mixins/focusable.css';
-@import '../../global/formation_overrides';
 
 // Formation does not specify box-sizing on li elements, this is needed for pagination to fit on 320px size screens
 .va-pagination__item {
@@ -24,7 +23,7 @@
   font-family: var(--font-source-sans);
   justify-content: center;
   overflow: hidden;
-  padding: 2rem 0 1rem;
+  padding: 1.25rem 0 0.625rem;
   width: 100%;
 }
 
@@ -47,7 +46,7 @@ button {
   cursor: pointer;
   display: inline-flex;
   font-family: inherit;
-  font-size: 1.44rem;
+  font-size: 0.89rem;
   font-weight: 400;
   justify-content: center;
   line-height: 2;
@@ -83,9 +82,9 @@ button {
 
 .button-inner {
   border-radius: 1000px;
-  height: 3rem;
-  margin: 0 0.5rem;
-  width: 3rem;
+  height: 1.875rem;
+  margin: 0 0.3125rem;
+  width: 1.875rem;
 }
 
 .button-active,
@@ -105,17 +104,17 @@ button {
 
 @media (max-width: 768px) {
   .pagination-inner {
-    width: 20rem;
+    width: 12.5rem;
   }
 
   .pagination-next {
-    margin-right: -3rem;
-    padding-left: 1rem;
+    margin-right: -1.875rem;
+    padding-left: .625rem;
   }
 
   .pagination-prev {
-    margin-left: -3rem;
-    padding-right: 1rem;
+    margin-left: -1.875rem;
+    padding-right: .625rem;
   }
 }
 
@@ -134,13 +133,13 @@ button {
 @media (min-width: 768px) {
   .pagination-next,
   .pagination-prev {
-    padding-left: 1rem;
-    padding-right: 1rem;
+    padding-left: .625rem;
+    padding-right: .625rem;
   }
 }
 
 @media (min-width: 1201px) {
   .pagination-inner {
-    width: 40rem;
+    width: 25rem;
   }
 }

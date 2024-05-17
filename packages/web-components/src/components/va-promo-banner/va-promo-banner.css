@@ -10,7 +10,7 @@
 }
 
 .va-banner-body {
-  max-width: 100rem;
+  max-width: 62.5rem;
   margin: 0 auto;
   display: flex;
   align-items: center;
@@ -20,22 +20,22 @@
   display: none;
   text-align: center;
   width: 100%;
-  font-size: 2.15rem;
+  font-size: 1.34375rem;
   background-color: var(--vads-color-white);
   border-radius: 50%;
   height: 100%;
-  height: 4.2rem;
+  height: 2.625rem;
   position: relative;
-  width: 4.2rem;
-  margin-left: 0.5rem;
-  margin-right: 0.8rem;
-  margin-top: 0.8rem;
-  margin-bottom: 0.8rem;
+  width: 2.625rem;
+  margin-left: 0.3125rem;
+  margin-right: 0.5rem;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
 }
 
 .va-banner-body > i::before {
   position: relative;
-  top: 0.8rem;
+  top: 0.5rem;
 }
 
 .va-banner-body > i.announcement::before {
@@ -51,8 +51,8 @@
 }
 
 .va-banner-content-link {
-  padding: 0.8rem;
-  line-height: 2.2rem;
+  padding: 0.5rem;
+  line-height: 1.375rem;
   text-decoration: none;
   color: var(--vads-color-link);
   flex-grow: 2;
@@ -72,8 +72,8 @@ button {
   background-color: transparent;
   color: var(--vads-color-link);
   border: none;
-  font-size: 2rem;
-  padding: 0 1.6rem;
+  font-size: 1.25rem;
+  padding: 0 1rem;
 }
 
 button:hover {

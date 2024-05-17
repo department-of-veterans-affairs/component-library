@@ -2,8 +2,6 @@
 
 @use 'usa-alert/src/styles/usa-alert';
 
-@import '../../global/formation_overrides';
-
 :host {
   display: block;
   position: relative;
@@ -21,11 +19,11 @@
 }
 
 .va-alert-close {
-  margin: 1.6rem;
+  margin: 1rem;
   padding: 0;
   width: auto;
   color: var(--vads-color-base-darker);
-  font-size: 2.25rem;
+  font-size: 1.40625rem;
   appearance: none;
   border: 0;
   cursor: pointer;
@@ -41,7 +39,7 @@
 }
 
 :host([closeable]:not([closeable='false'])) .usa-alert .usa-alert__body {
-  padding-right: 5.7rem;
+  padding-right: 3.563rem;
 }
 
 // Overriding USWDS' default success icon when using the 'continue' status
@@ -121,7 +119,7 @@
 
 :host([uswds='false']) {
   ::slotted([slot='headline']) {
-    font-size: 2rem !important;
+    font-size: 1.25rem !important;
     line-height: 26px !important;
     padding: 0 !important;
     margin: 0 !important;
@@ -129,7 +127,7 @@
 
   div.alert {
     display: table;
-    padding: 1.6rem 2rem 1.6rem 1.6rem;
+    padding: 1rem 1.25rem 1rem 1rem;
     width: 100%;
     vertical-align: middle;
     box-sizing: border-box;
@@ -143,7 +141,7 @@
 
   div.alert>i::before {
     display: flex;
-    margin-right: 1.6rem;
+    margin-right: 1rem;
   }
 
   div.body {
@@ -155,7 +153,7 @@
   }
 
   ::slotted(:not([slot])) {
-    margin-top: 2rem;
+    margin-top: 1.25rem;
   }
 
   .bg-only ::slotted(*) {
@@ -188,7 +186,7 @@
 
   div.bg-only {
     border: none;
-    padding: 2rem;
+    padding: 1.25rem;
   }
 
   .info.bg-only {
@@ -213,7 +211,7 @@
 
   i {
     font-family: 'Font Awesome 5 Free';
-    font-size: 2.4rem;
+    font-size: 1.5rem;
     font-style: normal;
     font-weight: 900;
     line-height: 1;
@@ -221,5 +219,5 @@
 }
 
 :host([uswds='false'][closeable]:not([closeable='false'])) .alert {
-  padding-right: 5.7rem;
+  padding-right: 3.5625rem;
 }

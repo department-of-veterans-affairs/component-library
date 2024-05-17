@@ -9,7 +9,6 @@
 @use 'usa-character-count/src/styles/_usa-character-count';
 
 @import '../../mixins/uswds-error-border.scss';
-@import '../../global/formation_overrides';
 @import '../../mixins/focusable.css';
 @import '~@department-of-veterans-affairs/css-library/dist/elements.css';
 
@@ -42,13 +41,13 @@
 
 :host([uswds='false']) label {
   display: block;
-  max-width: 46rem;
-  margin-top: 3rem;
+  max-width: 28.75rem;
+  margin-top: 1.875rem;
 }
 
 :host([uswds='false']) span.required {
   color: var(--vads-color-secondary-dark);
-  margin-left: 0.4rem;
+  margin-left: 0.25rem;
 }
 
 :host([uswds='false']) textarea {
@@ -56,15 +55,15 @@
   font-size: 16px;
   line-height: 1.3;
   display: block;
-  min-height: 5.2rem;
-  height: 16rem;
-  max-width: 48rem;
+  min-height: 3.25rem;
+  height: 10rem;
+  max-width: 30rem;
   width: 100%;
-  padding: 1.2rem;
-  margin: 0.4rem 0;
+  padding: 0.75rem;
+  margin: 0.25rem 0;
   resize: inherit;
 }
 
 :host([error]:not([error=''])[uswds='false']) textarea {
-  padding-right: 0.7rem;
+  padding-right: 0.4375rem;
 }

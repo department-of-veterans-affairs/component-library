@@ -10,11 +10,10 @@
 @use 'usa-modal/src/styles/usa-modal';
 
 @import '../../mixins/uswds-error-border.scss';
-@import '../../global/formation_overrides';
 
 .usa-modal-alert {
   padding: 0px; // => Due to icons
-  margin-left: 1.6rem;
+  margin-left: 1rem;
 }
 
 .usa-modal__heading,
@@ -80,7 +79,7 @@
   border-left-style: solid;
   border-left-width: 10px;
   display: inline-flex;
-  padding: 3.2rem 6.4rem 3.2rem 2.4rem;
+  padding: 2rem 4rem 2rem 1.5rem;
 }
 
 
@@ -100,7 +99,7 @@
   height: 100%;
   left: 0;
   overflow-y: auto;
-  padding: 1.5rem;
+  padding: 0.938rem;
   position: fixed;
   scroll-behavior: smooth;
   text-align: center;
@@ -122,8 +121,8 @@
   box-sizing: border-box;
   cursor: auto;
   display: inline-block;
-  margin: 1.25rem auto;
-  max-width: 40rem;
+  margin: 0.781rem auto;
+  max-width: 25rem;
   position: relative;
   text-align: left;
   vertical-align: middle;
@@ -133,9 +132,10 @@
 .va-modal-close {
   background-color: transparent;
   color: var(--vads-color-base-darker);
+  font-size: 1.4rem;
   padding: 0;
   position: absolute;
-  margin: 1.6rem;
+  margin: 1rem;
   right: 0;
   top: 0;
   width: auto;
@@ -148,32 +148,32 @@
 }
 
 .va-modal-body {
-  margin-right: 2rem;
+  margin-right: 1.25rem;
   overflow-wrap: break-word;
-  padding: 2rem;
+  padding: 1.25rem;
   word-break: break-word;
   word-wrap: break-word;
 }
 
 h1 {
   font-family: var(--font-serif);
-  font-size: 2rem;
+  font-size: 1.25rem;
   line-height: 1.3;
-  margin-bottom: 0.5rem;
-  margin-top: 1.5rem;
+  margin-bottom: 0.3125rem;
+  margin-top: 0.9375rem;
 }
 
 .va-modal-title {
-  margin: 0 0 1.6rem 0;
+  margin: 0 0 1rem 0;
 }
 
 .alert-actions button {
   /* -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased; */
   background-color: var(--vads-color-primary);
-  margin-top: 0.8rem;
-  margin-right: 0.8rem;
-  margin-bottom: 0.8rem;
+  margin-top: 0.5rem;
+  margin-right: 0.5rem;
+  margin-bottom: 0.5rem;
   white-space: nowrap;
 }
 
@@ -197,8 +197,8 @@ h1 {
   width: auto;
   background: none;
   font-family: 'Font Awesome 5 Free';
-  font-size: 2rem;
-  margin-right: 1.6rem;
+  font-size: 1.25rem;
+  margin-right: 1rem;
   position: static;
   font-weight: 900;
   height: 100%;
@@ -208,14 +208,14 @@ h1 {
 
 .va-modal-alert .va-modal-alert-body {
   display: table-cell;
-  padding-left: 1.6rem;
+  padding-left: 1rem;
   padding-right: 0;
   width: 100%;
   vertical-align: middle;
 }
 
 .va-modal-alert-title {
-  margin: 0 0 2rem 0;
+  margin: 0 0 1.25rem 0;
 }
 
 :host([status='continue']) .va-modal-inner {
@@ -262,7 +262,7 @@ h1 {
 }
 
 .va-modal-alert .alert-actions {
-  margin-top: 2.4rem;
+  margin-top: 1.5rem;
 }
 
 .va-modal-alert .alert-actions button {
@@ -270,7 +270,7 @@ h1 {
 }
 
 .va-modal-alert .alert-actions button + button {
-  margin-left: 2rem;
+  margin-left: 1.25rem;
 }
 
 @media (max-width: 320px) {
@@ -284,7 +284,7 @@ h1 {
   }
 
   .va-modal-alert .alert-actions button + button {
-    margin: 1.6rem 0 0 0;
+    margin: 1rem 0 0 0;
   }
 }
 
@@ -303,7 +303,7 @@ h1 {
   }
 
   .va-modal-alert .alert-actions button + button {
-    margin: 1.6rem 0 0 0;
+    margin: 1rem 0 0 0;
   }
 
   .usa-modal--lg .usa-modal__main {
@@ -313,6 +313,6 @@ h1 {
 }
 
 :host([large]:not([large='false'])) .va-modal-inner {
-  max-width: 75rem;
+  max-width: 46.875rem;
   width: 75vw;
 }

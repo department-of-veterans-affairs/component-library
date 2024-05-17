@@ -29,7 +29,7 @@
   align-items: flex-start;
   cursor: pointer;
   display: flex;
-  padding: 1.2rem;
+  padding: 0.75rem;
 }
 
 div.warning .alert-expandable-trigger:hover {
@@ -79,7 +79,7 @@ div.continue .alert-expandable-trigger:hover {
 }
 
 #slot-wrap {
-  margin: 1.2rem;
+  margin: 0.75rem;
 }
 
 i {
@@ -92,8 +92,8 @@ i {
 i.fa-angle-down {
   display: inline-block;
   color: var(--vads-color-base-darker);
-  font-size: 1.6rem;
-  margin: 0.5rem;
+  font-size: 1rem;
+  margin: 0.3125rem;
   transform: rotate(0deg);
   transition: transform 0.15s linear;
 }
@@ -109,8 +109,8 @@ a[aria-expanded='true'] i.fa-angle-down {
 
 i.alert-status-icon {
   color: var(--vads-color-base-darker);
-  margin-top: 0.4rem;
-  margin-right: 1.2rem;
+  margin-top: 0.25rem;
+  margin-right: 0.75rem;
 }
 
 div.hide-icon i.alert-status-icon {

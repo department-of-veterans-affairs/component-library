@@ -3,8 +3,6 @@
 @use 'uswds-helpers/src/styles/usa-sr-only';
 @use 'usa-button/src/styles/usa-button';
 
-@import '../../global/formation_overrides';
-
 :host {
   display: inline-block;
 }
@@ -59,7 +57,7 @@
     border-radius: 5px;
     color: var(--vads-button-color-text-primary-alt-on-light);
     display: flex;
-    font-size: 1.6rem;
+    font-size: 1rem;
     justify-content: center;
     margin: 0.5em 0.5em 0.5em 0;
   }
@@ -109,8 +107,8 @@
 
 :host([uswds='false'][big]:not([big='false'])) button {
   border-radius: 8px;
-  font-size: 2.4rem;
-  padding: 1.5rem 3rem;
+  font-size: 1.5rem;
+  padding: 0.9375rem 1.875rem;
 }
 
 :host([uswds='false'][disabled]:not([disabled='false'])) button {

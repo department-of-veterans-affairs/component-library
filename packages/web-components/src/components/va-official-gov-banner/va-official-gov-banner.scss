@@ -32,8 +32,8 @@
 .grid-row {
   display: flex;
   flex-wrap: wrap;
-  margin-left: -0.75rem;
-  margin-right: -0.75rem;
+  margin-left: -0.469rem;
+  margin-right: -0.469rem;
   margin-top: 0;
   margin-bottom: 0;
 }
@@ -42,8 +42,8 @@
   align-items: flex-start;
   display: flex;
   flex: 0 0 46%;
-  padding-left: 0.75rem;
-  padding-right: 0.75rem;
+  padding-left: 0.469rem;
+  padding-right: 0.469rem;
 }
 
 @media (max-width: 767px) {
@@ -130,7 +130,7 @@ button {
   color: #005ea2;
   font-size: 12px;
   margin: 0;
-  margin-left: 0.5rem;
+  margin-left: 0.313rem;
   padding-left: 0;
   padding-right: 0;
   position: relative;
