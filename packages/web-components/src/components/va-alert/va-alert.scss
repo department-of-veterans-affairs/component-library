@@ -139,11 +139,6 @@
     border-left-width: 8px;
   }
 
-  div.alert>i::before {
-    display: flex;
-    margin-right: 1rem;
-  }
-
   div.body {
     padding-left: 0;
     padding-right: 0;
@@ -161,26 +156,16 @@
     /* Fix for Safari 15.3 and lower. */
   }
 
-  div.info>i::before {
-    content: '\F05A';
+  .alert__status-icon {
+    color: var(--vads-color-base-darker);
+    margin-right: 8px;
   }
 
-  div.continue>i::before {
-    content: '\F023';
+  .continue .alert__status-icon, .success .alert__status-icon {
     color: var(--vads-color-success-dark);
   }
 
-  div.success>i::before {
-    content: '\F00C';
-    color: var(--vads-color-success-dark);
-  }
-
-  div.warning>i::before {
-    content: '\F071';
-  }
-
-  div.error>i::before {
-    content: '\F06A';
+  .error .alert__status-icon {
     color: var(--vads-color-secondary-dark);
   }
 
@@ -207,14 +192,6 @@
 
   .error.bg-only {
     background-color: var(--vads-color-secondary-lightest);
-  }
-
-  i {
-    font-family: 'Font Awesome 5 Free';
-    font-size: 1.5rem;
-    font-style: normal;
-    font-weight: 900;
-    line-height: 1;
   }
 }
 

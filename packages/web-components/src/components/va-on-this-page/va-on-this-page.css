@@ -39,17 +39,10 @@ dd a {
   max-width: 285px;
 }
 
-i {
-  font-family: 'Font Awesome 5 Free';
-  font-style: normal;
-  font-weight: 900;
-  margin-right: 8px;
-  font-size: 0.75em;
-}
-i::before {
-  content: '\F063'; /* fa-arrow-down */
-}
-
 a:active {
   background-color: var(--vads-color-base-lighter);
+}
+
+va-icon {
+  margin-right: 4px;
 }

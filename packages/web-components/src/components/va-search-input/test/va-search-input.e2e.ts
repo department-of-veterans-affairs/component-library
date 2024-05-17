@@ -47,7 +47,7 @@ describe('va-search-input', () => {
         <mock:shadow-root>
           <input aria-autocomplete="none" aria-label="Search" autocomplete="off" id="va-search-input" type="text">
           <button aria-label="Search" id="va-search-button" type="submit">
-            <i aria-hidden="true" class="fa fa-search"></i>
+            <va-icon class="hydrated"></va-icon>
             <span id="va-search-button-text">
               Search VA.gov
             </span>

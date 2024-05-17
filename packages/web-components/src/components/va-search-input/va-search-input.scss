@@ -78,17 +78,6 @@
   background-color: var(--vads-color-primary-dark);
 }
 
-i::before {
-  content: '\F002'; /* fa-search is now fa-magnifying-glass */
-  display: inline-block;
-  font-family: 'Font Awesome 5 Free';
-  font-style: normal;
-  font-variant: normal;
-  font-weight: 900;
-  line-height: 1;
-  text-rendering: auto;
-}
-
 #va-search-button-text {
   margin-left: 4px;
 }

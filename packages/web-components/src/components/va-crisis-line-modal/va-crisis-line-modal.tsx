@@ -75,7 +75,7 @@ export class VACrisisLineModal {
               <va-icon
                 class="va-icon__right-arrow"
                 icon="navigate_next"
-                size={4}
+                size={3}
               ></va-icon>
             </div>
           </button>
@@ -94,7 +94,7 @@ export class VACrisisLineModal {
           </p>
           <ul class="va-crisis-panel-list">
             <li>
-              <va-icon class="va-clm__icon" icon="phone" size={4}></va-icon>
+              <va-icon class="va-clm__icon" icon="phone" size={3}></va-icon>
               <span>
                 Call{' '}
                 <strong>
@@ -106,7 +106,7 @@ export class VACrisisLineModal {
               <va-icon
                 icon="phone_iphone"
                 class="va-clm__icon"
-                size={4}
+                size={3}
               ></va-icon>
               <span>
                 Text&nbsp;
@@ -116,7 +116,7 @@ export class VACrisisLineModal {
               </span>
             </li>
             <li>
-              <va-icon icon="chat" class="va-clm__icon" size={4}></va-icon>
+              <va-icon icon="chat" class="va-clm__icon" size={3}></va-icon>
               <a
                 class="no-external-icon"
                 href="https://www.veteranscrisisline.net/get-help-now/chat/"
@@ -125,7 +125,7 @@ export class VACrisisLineModal {
               </a>
             </li>
             <li>
-              <va-icon icon="deaf" class="va-clm__icon" size={4}></va-icon>
+              <va-icon icon="deaf" class="va-clm__icon" size={3}></va-icon>
               <p>
                 Call TTY if you have hearing loss{' '}
                 <strong>

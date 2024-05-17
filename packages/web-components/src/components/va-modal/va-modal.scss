@@ -222,43 +222,20 @@ h1 {
   border-left-color: var(--vads-color-success-dark);
 }
 
-:host([status='continue']) .va-modal-inner::before {
-  color: var(--vads-color-success-dark);
-  content: '\F023'; /* fa-lock */
-}
-
 :host([status='error']) .va-modal-inner {
   border-left-color: var(--vads-color-secondary-dark);
-}
-
-:host([status='error']) .va-modal-inner::before {
-  color: var(--vads-color-secondary-dark);
-  content: '\F06A'; /* fa-circle-exclamation */
 }
 
 :host([status='info']) .va-modal-inner {
   border-left-color: var(--vads-color-primary-alt-dark);
 }
 
-:host([status='info']) .va-modal-inner::before {
-  content: '\F05A'; /* fa-circle-info */
-}
-
 :host([status='success']) .va-modal-inner {
   border-left-color: var(--vads-color-success-dark);
 }
 
-:host([status='success']) .va-modal-inner::before {
-  color: var(--vads-color-success-dark);
-  content: '\F00C'; /* fa-check */
-}
-
 :host([status='warning']) .va-modal-inner {
   border-left-color: var(--vads-color-warning);
-}
-
-:host([status='warning']) .va-modal-inner::before {
-  content: '\F071'; /* fa-triangle-exclamation */
 }
 
 .va-modal-alert .alert-actions {
