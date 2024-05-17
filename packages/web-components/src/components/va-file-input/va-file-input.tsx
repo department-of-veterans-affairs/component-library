@@ -306,13 +306,13 @@ export class VaFileInput {
               <div class="selected-files-wrapper">
                 <div class="selected-files-label">Selected files</div>
                 <va-card class="va-card">
-                  <div class="file-info-section vads-u-line-height-2">
+                  <div class="file-info-section vads-u-line-height--2">
                     <va-icon
                       icon="file_present"
                       size={5}
                       class="file-icon"
                     ></va-icon>
-                    <div>
+                    <div class="file-info-group">
                       <span class="file-label">{file.name}</span>
                       <span class="file-size-label">
                         {this.formatFileSize(file.size)}

@@ -148,7 +148,6 @@ va-button {
     padding: 0 8px 8px;
     display: flex;
     align-items: center;
-    line-height: 1.15;
   }
 
   .file-button-section {
@@ -162,5 +161,13 @@ va-button {
 
   .additional-info-slot {
     padding-bottom: 16px;
+  }
+
+  /* copied from Formation
+  /* TO DO: decide whether to import from CSS-Library or simply rename,
+  /* as this is the only attibute currently needed from utilities
+  */
+  .vads-u-line-height--2{
+    line-height: 1.15;
   }
 }
