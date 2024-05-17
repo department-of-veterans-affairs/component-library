@@ -90,7 +90,7 @@ export class VaAdditionalInfo {
     // the additional 2em is #info margin-top and margin-bottom when open
     infoElm.style.setProperty(
       '--calc-max-height',
-      'calc(' + contentHeight + ' + 2rem)',
+      'calc(' + contentHeight + ' + 1.125rem)',
     );
     /* eslint-enable i18next/no-literal-string */
   }

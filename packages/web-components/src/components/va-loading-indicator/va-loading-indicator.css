@@ -5,15 +5,15 @@
 
 .loading-indicator {
   display: block;
-  height: 6.4rem;
-  margin-top: 1.6rem;
+  height: 4rem;
+  margin-top: 1rem;
 }
 
 .loading-indicator:after {
   content: ' ';
   display: inline-block;
-  width: 3.5rem;
-  height: 3.5rem;
+  width: 2.1875rem;
+  height: 2.1875rem;
   margin: 1px;
   border-radius: 50%;
   border: 8px solid var(--vads-color-primary);

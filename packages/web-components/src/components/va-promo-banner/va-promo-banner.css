@@ -10,7 +10,7 @@
 }
 
 .va-banner-body {
-  max-width: 100rem;
+  max-width: 62.5rem;
   margin: 0 auto;
   display: flex;
   align-items: center;
@@ -37,8 +37,8 @@
 }
 
 .va-banner-content-link {
-  padding: 0.8rem;
-  line-height: 2.2rem;
+  padding: 0.5rem;
+  line-height: 1.375rem;
   text-decoration: none;
   color: var(--vads-color-link);
   flex-grow: 2;
@@ -54,8 +54,8 @@ button {
   background-color: transparent;
   color: var(--vads-color-link);
   border: none;
-  font-size: 2rem;
-  padding: 0 1.6rem;
+  font-size: 1.25rem;
+  padding: 0 1rem;
 }
 
 button:hover {

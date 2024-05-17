@@ -7,8 +7,8 @@
   display: block;
   width: 100%;
   height: 44px;
-  margin-top: 4rem;
-  margin-bottom: 2rem;
+  margin-top: 2.5rem;
+  margin-bottom: 1.25rem;
 }
 
 div {
@@ -21,7 +21,7 @@ div {
   position: absolute;
   width: 1px;
   height: 1px;
-  top: var(--reveal-breakpoint, 60rem);
+  top: var(--reveal-breakpoint, 37.5rem);
   left: 0;
   /* background: black; /1* For debugging in browser *1/ */
   /* width: 100%;  /1* For debugging in browser *1/ */
@@ -36,7 +36,7 @@ a {
   background: rgba(255, 255, 255, 0.9);
   height: 48px;
   width: 48px;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.313rem;
   opacity: 0;
   padding: 0;
   pointer-events: none;
@@ -124,7 +124,7 @@ va-icon {
   a {
     height: 44px;
     width: 44px;
-    padding: 0 1.6rem;
+    padding: 0 1rem;
     text-decoration: none;
     width: auto;
   }

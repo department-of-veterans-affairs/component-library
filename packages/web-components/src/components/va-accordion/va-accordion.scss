@@ -2,9 +2,6 @@
 
 @use 'usa-accordion/src/styles/usa-accordion';
 
-@import '../../global/formation_overrides';
-
-
 @import '../../mixins/focusable.css';
 
 @media print {
@@ -32,7 +29,7 @@ button.va-accordion__button {
   border: none;
   color: var(--vads-color-link);
   background: transparent;
-  padding: 1rem;
+  padding: 0.625rem;
   cursor: pointer;
   font-family: inherit;
   font-weight: bold;
