@@ -254,5 +254,35 @@
   },
   "vads-color-blue-cool-lightest": {
     "*": { "value": "{uswds-system-color-blue-warm-30}"}
+  },
+  "vads-color-action-surface-default-on-dark": {
+    "*": { "value": "{uswds-system-color-blue-vivid-30}"}
+  },
+  "vads-color-action-surface-destructive-on-dark": {
+    "*": { "value": "{uswds-system-color-red-vivid-40}"}
+  },
+  "vads-color-action-border-base-active-on-light": {
+    "*": { "value": "{uswds-system-color-gray-80}"}
+  },
+  "vads-color-action-border-base-active-on-dark": {
+    "*": { "value": "{uswds-system-color-gray-30}"}
+  },
+  "vads-color-feedback-surface-info-on-dark": {
+    "*": { "value": "{uswds-system-color-blue-vivid-80}"}
+  },
+  "vads-color-feedback-surface-success-on-dark": {
+    "*": { "value": "{uswds-system-color-green-cool-vivid-80}"}
+  },
+  "vads-color-feedback-surface-warning-on-dark": {
+    "*": { "value": "{uswds-system-color-yellow-vivid-80}"}
+  },
+  "vads-color-feedback-surface-error-on-dark": {
+    "*": { "value": "{uswds-system-color-red-vivid-80}"}
+  },
+  "vads-color-feedback-border-warning-on-dark": {
+    "*": { "value": "{uswds-system-color-yellow-vivid-20}"}
+  },
+  "vads-color-bg-default-on-dark": {
+    "*": { "value": "{uswds-system-color-gray-warm-90}"}
   }
 }
