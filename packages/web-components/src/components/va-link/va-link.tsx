@@ -145,6 +145,7 @@ export class VaLink {
 
     // Channel and Video link variant
     if (channel || video) {
+      const linkIcon = channel ? 'youtube' : 'play_circle';
       return (
         <Host>
           <a
@@ -154,7 +155,7 @@ export class VaLink {
             rel="noopener"
             target="_blank"
           >
-            <va-icon class="link-icon--left" icon="play_circle"></va-icon>
+            <va-icon class="link-icon--left" icon={linkIcon}></va-icon>
             {text} <dfn>{channel ? 'YouTube' : 'on YouTube'}</dfn>
           </a>
         </Host>
