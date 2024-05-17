@@ -141,23 +141,34 @@ export class VaPromoBanner {
       return null;
     }
 
+    /* eslint-disable i18next/no-literal-string */
+    const typeIconName = {
+      'announcement': 'campaign',
+      'email-signup': 'mail',
+      'news': 'info',
+    };
+
     return (
       <Host>
         <div class="va-banner-body">
-          <i aria-hidden="true" class={this.type} role="presentation" />
+          <va-icon
+            class="va-promo-banner__icon"
+            icon={typeIconName[this.type]}
+            size={4}
+          ></va-icon>
           <a
             class="va-banner-content-link"
             href={this.href}
             onClick={() => this.handleLinkClick()}
           >
-            <slot></slot> <i aria-hidden="true" role="presentation" />
+            <slot></slot> <va-icon icon="chevron_right" size={3}></va-icon>
           </a>
           <button
             type="button"
             aria-label="Dismiss this promo banner"
             onClick={() => this.closeHandler()}
           >
-            <i aria-hidden="true" role="presentation" />
+            <va-icon icon="cancel" size={3}></va-icon>
           </button>
         </div>
       </Host>

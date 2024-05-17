@@ -1,9 +1,8 @@
 @import '~@department-of-veterans-affairs/css-library/dist/tokens/scss/variables.scss';
-@import 'functions';
 
 :host([error]:not([error='']):not([uswds='false'])) {
-    border-left: 0.4rem solid $vads-color-secondary-dark;
-    padding-left: rem-override(1rem);
+    border-left: 0.25rem solid $vads-color-secondary-dark;
+    padding-left: 1rem;
     position: relative;
 }
 
@@ -13,24 +12,24 @@
 
 :host([error]:not([error='']):not([uswds='false'])[use-forms-pattern='multiple']) {
     .input-wrap {
-        border-left: 0.4rem solid $vads-color-secondary-dark;
-        padding-left: rem-override(1rem);
+        border-left: 0.25rem solid $vads-color-secondary-dark;
+        padding-left: 1rem;
         position: relative;
     }
 }
 
 @media screen and (min-width: 1008px) {
     :host([error]:not([error='']):not([uswds='false'])) {
-        margin-left: -1.4rem;
+        margin-left: -0.9rem;
     }
     :host([error]:not([error='']):not([uswds='false'])[use-forms-pattern='multiple']) {
         .input-wrap {
-            margin-left: -1.6rem;
+            margin-left: -0.9rem;
         }
     }
 }
 
-@media screen and (max-width: 1008px) { 
+@media screen and (max-width: 1008px) {
     :host([error]:not([error='']):not([uswds='false'])[use-forms-pattern='multiple']) {
         padding-left: 0;
     }

@@ -89,8 +89,9 @@ export class VaBackToTop {
           >
             <a href="#ds-back-to-top" onClick={this.navigateToTop.bind(this)}>
               <span>
-                <i aria-hidden="true" role="img"></i>
-                <span class="sr-only">Back to top</span> {/* For small screen that only displays the arrow */}
+                <va-icon icon="arrow_upward" size={3}></va-icon>
+                <span class="sr-only">Back to top</span>{' '}
+                {/* For small screen that only displays the arrow */}
                 <span class="text">Back to top</span>
               </span>
             </a>

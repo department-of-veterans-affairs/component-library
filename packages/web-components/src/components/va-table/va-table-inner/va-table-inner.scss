@@ -1,7 +1,6 @@
 @forward 'settings';
 @use 'usa-table/src/styles/usa-table';
 @import '~@department-of-veterans-affairs/css-library/dist/tokens/scss/variables.scss';
-@import '../../../global/formation_overrides';
 
 
 :host([uswds='true']){
@@ -29,11 +28,11 @@
 
 caption {
   text-align: left;
-  padding: 0 0 0.5rem;
+  padding: 0 0 0.313rem;
   font-weight: 700;
-  font-size: 2rem;
+  font-size: 1.25rem;
   font-family: var(--font-serif);
-  margin-bottom: 1.2rem;
+  margin-bottom: .75rem;
 }
 
 @media screen and (max-width: 768px) {

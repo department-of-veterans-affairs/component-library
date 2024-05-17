@@ -2,8 +2,10 @@
 
 @use 'uswds-helpers/src/styles/usa-sr-only';
 @use 'usa-process-list/src/styles/usa-process-list';
-@import '../../global/formation_overrides';
 
+*, ::after, ::before {
+  box-sizing: border-box;
+}
 
 :host(:not([uswds='false'])) {
   counter-reset: usa-numbered-list;
@@ -39,12 +41,12 @@
 :host {
   display: block;
   list-style: none;
-  padding: 1.6rem 0;
+  padding: 1rem 0;
   position: relative;
 }
 
 ol {
-  margin: 0 0 0 2rem;
+  margin: 0 0 0 1.25rem;
   list-style-position: outside;
 }
 
@@ -55,7 +57,7 @@ ol {
 ::slotted(li) {
   counter-increment: listCounter;
   border-left: 8px solid var(--vads-color-base-light);
-  padding: 0 0 3.2rem 3.2rem;
+  padding: 0 0 2rem 2rem;
   list-style: none;
   margin: 0 !important;
 }
@@ -64,21 +66,21 @@ ol {
   color: var(--vads-color-white);
   content: counter(listCounter);
   float: left;
-  font-size: 2.08rem;
+  font-size: 1.3rem;
   font-weight: 700;
   text-align: center;
-  width: 4rem;
-  top: -0.4rem;
-  margin-left: -5.6rem;
+  width: 2.5rem;
+  top: -0.25rem;
+  margin-left: -3.5rem;
   display: block;
   border: 4px solid var(--vads-color-white);
   background: var(--vads-color-base-dark);
-  border-radius: 4rem;
+  border-radius: 2.5rem;
   position: relative;
   box-sizing: border-box !important;
 }
 
 ::slotted(li:last-child) {
   border-left: 0;
-  padding-left: calc(3.1rem + 8px);
+  padding-left: calc(1.9375rem + 8px);
 }

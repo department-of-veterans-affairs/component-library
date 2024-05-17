@@ -1,7 +1,6 @@
 @forward 'settings';
 @use 'usa-icon/src/styles/usa-icon';
 @use 'usa-breadcrumb/src/styles/usa-breadcrumb';
-@import '../../global/formation_overrides';
 
 :host {
   display: block;
@@ -17,14 +16,14 @@
     background: var(--vads-color-white);
     color: var(--vads-color-link);
     font-size: inherit;
-    padding: 1.6rem 0;
+    padding: 1rem 0;
   }
 
   ul {
     box-sizing: border-box;
     list-style: square;
     margin: 0 auto;
-    max-width: 100rem;
+    max-width: 62.5rem;
     padding-left: 0;
     padding-right: 0;
     position: relative;

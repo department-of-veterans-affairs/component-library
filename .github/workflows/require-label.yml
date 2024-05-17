@@ -8,6 +8,6 @@ jobs:
     steps:
       - uses: mheap/github-action-required-labels@v1
         with:
-          mode: exactly
+          mode: minimum
           count: 1
           labels: "patch, minor, major, ignore-for-release, css-library"

@@ -378,7 +378,7 @@ export class VaSearchInput {
    */
   private updateSuggestions = (suggestionsArr: string[]) => {
     // If it's an empty array, reset formatted suggestions and close the listbox
-    
+
     if (!suggestionsArr.length) {
       this.formattedSuggestions = [];
       this.isListboxOpen = false;
@@ -534,7 +534,7 @@ export class VaSearchInput {
           aria-label={label}
           onClick={handleButtonClick}
         >
-          <i aria-hidden="true" class="fa fa-search" />
+          <va-icon icon="search" size={3}></va-icon>
           {buttonText && <span id="va-search-button-text">{buttonText}</span>}
         </button>
         {isListboxOpen && (

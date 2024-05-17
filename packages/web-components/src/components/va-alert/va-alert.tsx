@@ -230,6 +230,16 @@ export class VaAlert {
       'bg-only': backgroundOnly,
     });
 
+    /* eslint-disable i18next/no-literal-string */
+    const statusIcons = {
+      continue: 'lock',
+      error: 'info',
+      warning: 'warning',
+      info: 'info',
+      success: 'check_circle',
+    };
+    /* eslint-enable i18next/no-literal-string */
+
     return (
       <Host>
         <div
@@ -238,7 +248,11 @@ export class VaAlert {
           class={classes}
           aria-label={this.el.getAttribute('data-label') || role}
         >
-          <i aria-hidden="true"></i>
+          <va-icon
+            class="alert__status-icon"
+            icon={statusIcons[status] || 'info'}
+            size={3}
+          ></va-icon>
           <div class="body" onClick={this.handleAlertBodyClick.bind(this)}>
             {!backgroundOnly && <slot name="headline"></slot>}
             <slot></slot>
