@@ -22,9 +22,17 @@
   font-weight: 700;
 }
 
+.link-icon--active {
+  vertical-align: baseline;
+  position: relative;
+  top: 3px;
+}
+
 .link-icon--left {
   margin-right: 4px;
   vertical-align: baseline;
+  position: relative;
+  top: 3px;
 }
 
 dfn {
