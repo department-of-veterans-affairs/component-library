@@ -158,7 +158,7 @@
 
   .bg-only ::slotted(*) {
     margin-top: 0 !important;
-    /* Fix for Safari 15.3margin-rightand lower. */
+    /* Fix for Safari 15.3 and lower. */
   }
 
   div.info>i::before {
