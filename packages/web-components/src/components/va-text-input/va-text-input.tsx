@@ -175,7 +175,7 @@ export class VaTextInput {
    * Whether this component will be used to accept a currency value.
    */
   @Prop() currency?: boolean = false;
-  
+
   /**
    * The min attribute specifies the minimum value for an input element
    * if the inputmode is numeric.
@@ -187,7 +187,7 @@ export class VaTextInput {
    * if the inputmode is numeric.
    */
   @Prop() max?: number | string;
-  
+
   /**
    * The event used to track usage of the component. This is emitted when the
    * input is blurred and enableAnalytics is true.
@@ -308,13 +308,13 @@ export class VaTextInput {
     const ariaDescribedbyIds =
       `${messageAriaDescribedby ? 'input-message' : ''} ${
         error ? 'input-error-message' : ''} ${
-        maxlength ? 'charcount-message' : ''}`.trim() || null; // Null so we don't add the attribute if we have an empty string
+        charcount && maxlength ? 'charcount-message' : ''}`.trim() || null; // Null so we don't add the attribute if we have an empty string
 
     const ariaLabeledByIds =
     `${useFormsPattern && formHeading ? 'form-question' : ''} ${
       useFormsPattern ? 'form-description' : ''} ${
         useFormsPattern && label ? 'input-label' : ''}`.trim() || null;
-    
+
     const isNumericWithNoPattern =
       pattern === undefined && (inputmode === 'decimal' || inputmode === 'numeric');
     // if input will hold a number then set the pattern to a default
@@ -323,7 +323,7 @@ export class VaTextInput {
     const currencyWrapper = classnames({
       'currency-wrapper': currency
     });
-    
+
     if (uswds) {
       const charCountTooHigh = maxlength && (value?.length > maxlength);
       const labelClass = classnames({
@@ -454,7 +454,7 @@ export class VaTextInput {
                 <span class="sr-only">{i18next.t('error')}</span> {error}
               </Fragment>
             )}
-          </span>          
+          </span>
           <div class={currencyWrapper}>
             {currency && <div>$</div>}
             <input
