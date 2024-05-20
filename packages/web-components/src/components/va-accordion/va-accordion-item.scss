@@ -32,6 +32,7 @@
   max-width: 64ex;
 }
 
+/* overrides hidden attribute on #content */
 @media print {
   :host(:not([open])) #content,
   :host([open='false']) #content {
@@ -56,6 +57,14 @@
 :host(:not([open])) #content,
 :host([open='false']) #content {
   display: none;
+}
+
+/* duplicate print media block needed to override above definition */
+@media print {
+  :host(:not([open])) #content,
+  :host([open='false']) #content {
+    display: block;
+  }
 }
 
 h1,
