@@ -7,7 +7,7 @@ const alertDocs = getWebComponentDocs('va-alert');
 alertDocs.props = alertDocs.props.filter((prop) => prop.name !== 'backgroundOnly');
 
 export default {
-  title: `Components/Alert USWDS`,
+  title: 'Components/Alert USWDS',
   id: 'uswds/va-alert',
   argTypes: {
     headline: {

@@ -3,8 +3,8 @@
   "private": true,
   "packageManager": "yarn@3.0.2",
   "scripts": {
-    "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
   },
   "dependencies": {
     "@department-of-veterans-affairs/component-library": "workspace:packages/core",
@@ -13,22 +13,25 @@
   },
   "devDependencies": {
     "@babel/core": "^7.15.8",
-    "@department-of-veterans-affairs/formation": "^11.0.5",
+    "@babel/preset-env": "^7.24.0",
+    "@babel/preset-react": "^7.23.3",
+    "@babel/preset-typescript": "^7.23.3",
+    "@department-of-veterans-affairs/formation": "^10.1.2",
     "@mdx-js/react": "^1.6.22",
-    "@storybook/addon-a11y": "6.4.19",
-    "@storybook/addon-actions": "^6.4.19",
-    "@storybook/addon-docs": "^6.4.19",
-    "@storybook/addon-essentials": "^6.4.19",
-    "@storybook/addon-links": "^6.4.19",
-    "@storybook/addon-storysource": "^6.4.19",
-    "@storybook/builder-webpack5": "^6.4.19",
-    "@storybook/manager-webpack5": "^6.4.19",
-    "@storybook/react": "^6.4.19",
-    "@whitespace/storybook-addon-html": "^5.0.0",
+    "@storybook/addon-a11y": "7.6.10",
+    "@storybook/addon-actions": "^7.6.10",
+    "@storybook/addon-docs": "^7.6.10",
+    "@storybook/addon-essentials": "^7.6.10",
+    "@storybook/addon-links": "^7.6.10",
+    "@storybook/addon-mdx-gfm": "7.6.10",
+    "@storybook/addon-storysource": "^7.6.10",
+    "@storybook/react": "^7.6.10",
+    "@storybook/react-webpack5": "7.6.10",
     "babel-loader": "^8.2.2",
     "css-loader": "^5.2.4",
     "node-sass": "^7.0.0",
     "react-dom": "^17.0.2",
-    "sass-loader": "^12.4.0"
+    "sass-loader": "^12.4.0",
+    "storybook": "7.6.10"
   }
 }

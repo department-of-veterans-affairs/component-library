@@ -4,7 +4,7 @@ import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
 const crisisLineModalDocs = getWebComponentDocs('va-crisis-line-modal');
 
 export default {
-  title: `Components/Crisis Line Modal`,
+  title: 'Components/Crisis Line Modal',
   id: 'components/va-crisis-line-modal',
   parameters: {
     componentSubtitle: 'va-crisis-line-modal web component',
