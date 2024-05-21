@@ -170,4 +170,11 @@ va-button {
   .vads-u-line-height--2{
     line-height: 1.15;
   }
+
+  .thumbnail-preview {
+    max-width: 40px;
+    width: auto;
+    max-height: 40px;
+    height: auto;
+  }
 }

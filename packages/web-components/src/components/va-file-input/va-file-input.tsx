@@ -28,9 +28,11 @@ import { fileInput } from './va-file-input-upgrader';
 export class VaFileInput {
   private fileInputRef!: HTMLInputElement;
   private uploadStatus: 'idle' | 'success' | 'failure' = 'idle';
+  private fileType?: string;
 
   @Element() el: HTMLElement;
   @State() file?: File;
+  @State() fileContents?: string;
 
   /**
    * The label for the file input.
@@ -106,6 +108,7 @@ export class VaFileInput {
       this.file = input.files[0];
       this.vaChange.emit({ files: [this.file] });
       this.uploadStatus = 'success';
+      this.generateFileContents(this.file);
     } else {
       this.uploadStatus = 'failure';
     }
@@ -214,6 +217,22 @@ export class VaFileInput {
     }
   };
 
+  private generateFileContents(file: File) {
+    if (!file)
+      return;
+
+    const reader = new FileReader();
+    this.fileType = file.type;
+
+    reader.onloadend = () => {
+      this.fileContents = reader.result as string;
+    };
+
+    if (this.fileType && (this.fileType === 'application/pdf' || this.fileType.startsWith('image/'))) {
+      reader.readAsDataURL(file);
+    }
+  }
+
   componentDidLoad() {
     if (this.uswds) fileInput.init(this.el);
   }
@@ -231,18 +250,7 @@ export class VaFileInput {
   }
 
   render() {
-    const {
-      label,
-      name,
-      required,
-      accept,
-      error,
-      hint,
-      uswds,
-      file,
-      uploadStatus,
-      headerSize,
-    } = this;
+    const { label, name, required, accept, error, hint, uswds, file, uploadStatus, headerSize, fileContents, fileType } = this;
 
     const text = this.getButtonText();
 
@@ -254,6 +262,15 @@ export class VaFileInput {
       const fileInputTargetClasses = `file-input-target ${
         this.error ? 'file-input-target-error' : ''
       }`.trim();
+
+      let fileThumbnail = <va-icon icon="file_icon" size={5} class="file-icon"/>;
+      if (fileContents) {
+        if (fileType.startsWith('image/')) {
+          fileThumbnail = <img class="thumbnail-preview" src={fileContents} alt="image" />;
+        } else if (fileType === 'application/pdf') {
+          fileThumbnail = <object class="thumbnail-preview" data={fileContents} type="application/pdf"/>;
+        }
+      }
 
       return (
         <Host>
@@ -306,12 +323,8 @@ export class VaFileInput {
               <div class="selected-files-wrapper">
                 <div class="selected-files-label">Selected files</div>
                 <va-card class="va-card">
-                  <div class="file-info-section vads-u-line-height--2">
-                    <va-icon
-                      icon="file_present"
-                      size={5}
-                      class="file-icon"
-                    ></va-icon>
+                  <div class="file-info-section">
+                    {fileThumbnail}
                     <div class="file-info-group">
                       <span class="file-label">{file.name}</span>
                       <span class="file-size-label">
