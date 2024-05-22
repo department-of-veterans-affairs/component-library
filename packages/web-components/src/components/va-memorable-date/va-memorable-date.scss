@@ -11,7 +11,6 @@
 @use 'usa-memorable-date/src/styles/usa-memorable-date';
 
 @import '../../mixins/uswds-error-border.scss';
-@import '../../global/formation_overrides';
 @import '../../mixins/focusable.css';
 @import '../../mixins/form-field-error.css';
 
@@ -32,7 +31,7 @@
 }
 
 slot:not([name])::slotted(*) {
-  margin-bottom: 0.8rem;
+  margin-bottom: 0.5rem;
 }
 
 va-select::part(label),
@@ -51,12 +50,28 @@ va-text-input::part(validation) {
   flex-wrap: nowrap;
 }
 
+.usa-memorable-date .usa-form-group {
+  margin-top: 0px;
+}
+
 .usa-form-group--month {
   margin-right: 16px;
 }
 
 .usa-form-group--month-input {
   width: 48px;
+}
+
+.usa-form-group--month-select {
+  width: 15rem;
+}
+
+.usa-form-group--day-input {
+  width: 3rem;
+}
+
+.usa-form-group--year-input {
+  width: 4.5rem;
 }
 
 @media (max-width: 480px) {

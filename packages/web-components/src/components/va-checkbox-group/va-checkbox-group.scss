@@ -7,7 +7,6 @@
 @use 'usa-error-message/src/styles/usa-error-message';
 
 @import '../../mixins/uswds-error-border.scss';
-@import '../../global/formation_overrides';
 @import '../../mixins/focusable.css';
 @import '~@department-of-veterans-affairs/css-library/dist/elements.css';
 
@@ -30,15 +29,15 @@
 
 :host([uswds='false']) {
   #error-message {
-    font-size: 1.6rem;
-    line-height: 2.4rem;
+    font-size: 1rem;
+    line-height: 1.5rem;
     font-weight: 700;
     margin-bottom: 0;
   }
 
   .required {
     color: var(--vads-color-secondary-dark);
-    margin: 0 0.35rem;
+    margin: 0 0.219rem;
   }
 
   fieldset {
@@ -49,7 +48,7 @@
 
   legend {
     display: block;
-    max-width: 46rem;
+    max-width: 28.75rem;
     font-weight: inherit;
     font-size: inherit;
     line-height: inherit;

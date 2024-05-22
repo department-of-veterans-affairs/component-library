@@ -1303,6 +1303,10 @@ export namespace Components {
          */
         "charcount"?: boolean;
         /**
+          * Whether this component will be used to accept a currency value.
+         */
+        "currency"?: boolean;
+        /**
           * Emit component-library-analytics events on the blur event.
          */
         "enableAnalytics"?: boolean;
@@ -1341,6 +1345,10 @@ export namespace Components {
          */
         "label"?: string;
         /**
+          * The max attribute specifies the maximum value for an input element if the inputmode is numeric.
+         */
+        "max"?: number | string;
+        /**
           * The maximum number of characters allowed in the input. Negative and zero values will be ignored.
          */
         "maxlength"?: number;
@@ -1348,6 +1356,10 @@ export namespace Components {
           * An optional message that will be read by screen readers when the input is focused.
          */
         "messageAriaDescribedby"?: string;
+        /**
+          * The min attribute specifies the minimum value for an input element if the inputmode is numeric.
+         */
+        "min"?: number | string;
         /**
           * The minimum number of characters allowed in the input.
          */
@@ -3484,6 +3496,10 @@ declare namespace LocalJSX {
          */
         "charcount"?: boolean;
         /**
+          * Whether this component will be used to accept a currency value.
+         */
+        "currency"?: boolean;
+        /**
           * Emit component-library-analytics events on the blur event.
          */
         "enableAnalytics"?: boolean;
@@ -3522,6 +3538,10 @@ declare namespace LocalJSX {
          */
         "label"?: string;
         /**
+          * The max attribute specifies the maximum value for an input element if the inputmode is numeric.
+         */
+        "max"?: number | string;
+        /**
           * The maximum number of characters allowed in the input. Negative and zero values will be ignored.
          */
         "maxlength"?: number;
@@ -3529,6 +3549,10 @@ declare namespace LocalJSX {
           * An optional message that will be read by screen readers when the input is focused.
          */
         "messageAriaDescribedby"?: string;
+        /**
+          * The min attribute specifies the minimum value for an input element if the inputmode is numeric.
+         */
+        "min"?: number | string;
         /**
           * The minimum number of characters allowed in the input.
          */

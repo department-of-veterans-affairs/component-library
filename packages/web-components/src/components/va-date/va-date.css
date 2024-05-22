@@ -16,7 +16,7 @@
 :host {
   display: block;
   font-family: var(--font-source-sans);
-  margin-top: 3rem;
+  margin-top: 1.875rem;
 }
 
 fieldset {
@@ -55,17 +55,17 @@ span.required {
 }
 
 .select-month {
-  width: 13rem;
-  margin-right: 1.5rem;
+  width: 8.125rem;
+  margin-right: 0.9375rem;
 }
 
 .select-day {
-  width: 8rem;
-  margin-right: 1.5rem;
+  width: 5rem;
+  margin-right: 0.9375rem;
 }
 
 .input-year {
-  width: 8rem;
+  width: 5rem;
 }
 
 va-select::part(label),

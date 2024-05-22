@@ -70,7 +70,7 @@ describe('va-banner', () => {
       <va-alert class="hydrated uswds-false" data-label="Error banner" data-role="region" full-width="" status="error" uswds="false">
         <mock:shadow-root>
            <div aria-label="Error banner" aria-live="assertive" class="alert error" role="region">
-           <i aria-hidden="true"></i>
+           <va-icon class="alert__status-icon hydrated"></va-icon>
              <div class="body">
               <slot name="headline"></slot>
               <slot></slot>

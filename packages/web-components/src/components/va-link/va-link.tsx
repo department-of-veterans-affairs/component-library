@@ -96,6 +96,8 @@ export class VaLink {
         action: 'click',
         details: {
           label: this.text,
+          destination: this.href,
+          origin: window.location.href,
         },
       };
       this.componentLibraryAnalytics.emit(detail);
@@ -135,7 +137,7 @@ export class VaLink {
         <Host>
           <a href={href} class={linkClass} onClick={handleClick}>
             {text}
-            <i aria-hidden="true" />
+            <va-icon class="link-icon--active" icon="chevron_right"></va-icon>
           </a>
         </Host>
       );
@@ -143,6 +145,7 @@ export class VaLink {
 
     // Channel and Video link variant
     if (channel || video) {
+      const linkIcon = channel ? 'youtube' : 'play_circle';
       return (
         <Host>
           <a
@@ -152,7 +155,7 @@ export class VaLink {
             rel="noopener"
             target="_blank"
           >
-            <i aria-hidden="true" />
+            <va-icon class="link-icon--left" icon={linkIcon}></va-icon>
             {text} <dfn>{channel ? 'YouTube' : 'on YouTube'}</dfn>
           </a>
         </Host>
@@ -169,7 +172,7 @@ export class VaLink {
             download={filename}
             onClick={handleClick}
           >
-            <i aria-hidden="true" />
+            <va-icon class="link-icon--left" icon="calendar_today"></va-icon>
             {text}
           </a>
         </Host>
@@ -186,7 +189,7 @@ export class VaLink {
             download={filename}
             onClick={handleClick}
           >
-            <i aria-hidden="true" />
+            <va-icon class="link-icon--left" icon="file_download"></va-icon>
             {text}{' '}
             {filetype && (
               <dfn>

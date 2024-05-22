@@ -9,7 +9,6 @@
 @use 'usa-error-message/src/styles/usa-error-message';
 
 @import '../../mixins/uswds-error-border.scss';
-@import '../../global/formation_overrides';
 
 :host {
   display: block;
@@ -32,8 +31,8 @@
 @import '../../mixins/hint-text.css';
 
 :host([uswds='false']) {
-  --visible-checkbox-size: 2rem;
-  --visible-checkbox-top-margin: 0.14rem;
+  --visible-checkbox-size: 1.25rem;
+  --visible-checkbox-top-margin: 0.0875rem;
 
   p {
     margin-top: 0;
@@ -46,7 +45,7 @@
 }
 
 :host([error][uswds='false']:not([error=''])) input + label {
-  margin-top: 1.2rem;
+  margin-top: 0.75rem;
 }
 
 :host([uswds='false']) {
@@ -67,7 +66,7 @@
     cursor: pointer;
     display: inline-flex;
     font-weight: 400;
-    margin-top: 1.2rem;
+    margin-top: 0.75rem;
     width: 100%;
   }
 
@@ -76,7 +75,7 @@
     display: block;
     float: left;
     margin-top: var(--visible-checkbox-top-margin);
-    margin-right: 1rem;
+    margin-right: 0.625rem;
     pointer-events: none;
     border-radius: 2px;
     box-shadow: 0 0 0 1px var(--vads-color-gray-medium);
@@ -102,12 +101,12 @@
 
   .required {
     color: var(--vads-color-secondary-dark);
-    margin: 0 0.35rem;
+    margin: 0 0.21875rem;
   }
 
   ::slotted([slot='description']) {
     margin-top: 0 !important;
-    margin-bottom: 1.2rem !important;
+    margin-bottom: 0.75rem !important;
   }
 }
 

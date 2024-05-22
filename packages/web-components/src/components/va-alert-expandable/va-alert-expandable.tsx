@@ -112,6 +112,13 @@ export class VaAlertExpandable {
       closed: !open,
     });
     /* eslint-disable i18next/no-literal-string */
+    const statusIcons = {
+      continue: 'lock',
+      error: 'info',
+      warning: 'warning',
+      info: 'info',
+      success: 'check_circle',
+    };
     const role = status === 'error' ? 'alert' : null;
     const ariaLive = status === 'error' ? 'assertive' : null;
     /* eslint-enable i18next/no-literal-string */
@@ -128,13 +135,23 @@ export class VaAlertExpandable {
             onKeyDown={this.handleKeydown.bind(this)}
             class="alert-expandable-trigger"
           >
-            <i class="alert-status-icon" aria-hidden="true" role="img"></i>
+            {!iconless && (
+              <va-icon
+                class="alert-expandable__status-icon"
+                icon={statusIcons[status] || 'info'}
+                size={3}
+              ></va-icon>
+            )}
             <div>
               <span class="alert-expandable-title">
                 <span class="sr-only">Alert:&nbsp;</span>
                 {this.trigger}
               </span>
-              <i class="fa-angle-down" role="presentation" />
+              <va-icon
+                class="alert-expandable-icon"
+                icon="chevron_right"
+                size={3}
+              ></va-icon>
             </div>
           </a>
           <div id="alert-body" class={bodyClasses}>

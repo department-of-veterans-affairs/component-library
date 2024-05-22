@@ -63,11 +63,11 @@ describe('va-on-this-page', () => {
               <dt id="on-this-page">on-this-page</dt>
               <dd role="definition">
                 <a href="#an-id">
-                  <i aria-hidden="true" class="fa-arrow-down fas"></i>
+                  <va-icon class="hydrated"></va-icon>
                   Hello
                 </a>
                 <a href="#its-me">
-                  <i aria-hidden="true" class="fa-arrow-down fas"></i>
+                  <va-icon class="hydrated"></va-icon>
                   It's me
                 </a>
               </dd>
@@ -102,7 +102,7 @@ describe('va-on-this-page', () => {
           <dt id="on-this-page">on-this-page</dt>
           <dd role="definition">
             <a href="#foo">
-              <i aria-hidden="true" class="fa-arrow-down fas"></i>
+              <va-icon class="hydrated"></va-icon>
               Foo
             </a>
           </dd>
@@ -139,11 +139,11 @@ describe('va-on-this-page', () => {
               <dt id="on-this-page">on-this-page</dt>
               <dd role="definition">
                 <a href="#an-id">
-                  <i aria-hidden="true" class="fa-arrow-down fas"></i>
+                  <va-icon class="hydrated"></va-icon>
                   Hello
                 </a>
                 <a href="#its-me">
-                  <i aria-hidden="true" class="fa-arrow-down fas"></i>
+                  <va-icon class="hydrated"></va-icon>
                   It's me
                 </a>
               </dd>

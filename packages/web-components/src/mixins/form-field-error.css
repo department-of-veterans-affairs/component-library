@@ -1,5 +1,5 @@
 #error-message {
-  margin-bottom: 1.2rem;
+  margin-bottom: 0.75rem;
 }
 
 #error-message,
@@ -10,14 +10,14 @@
 }
 
 :host([error]:not([error=''])) {
-  border-left: 0.4rem solid var(--vads-color-secondary-dark);
-  padding-left: 2rem;
+  border-left: 0.3rem solid var(--vads-color-secondary-dark);
+  padding-left: 1.25rem;
   position: relative;
 }
 
 @media screen and (min-width: 1008px) {
   :host([error]:not([error=''])) {
-    margin-left: -2.4rem; /* padding left + border left */
+    margin-left: -1.4375rem; /* padding left + border left */
   }
 }
 

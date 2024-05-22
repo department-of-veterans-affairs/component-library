@@ -16,7 +16,9 @@ describe('va-text-input', () => {
           </label>
           <slot></slot>
           <span id="input-error-message" role="alert"></span>
-          <input id="inputField" type="text" part="input" aria-invalid="false" />
+          <div>
+            <input id="inputField" type="text" part="input" aria-invalid="false" />
+          </div>
         </mock:shadow-root>
       </va-text-input>
     `);
@@ -40,7 +42,9 @@ describe('va-text-input', () => {
           </label>
           <slot></slot>
           <span id="input-error-message" role="alert"></span>
-          <input id="inputField" type="text" part="input" aria-invalid="false" />
+          <div>
+            <input id="inputField" type="text" part="input" aria-invalid="false" />
+          </div>
         </mock:shadow-root>
         <p className="vads-u-font-weight--normal label-description">
           You can only add an issue that you've already received a VA decision
@@ -60,6 +64,7 @@ describe('va-text-input', () => {
     expect(error.innerText).toContain('This is a mistake');
     expect(input.getAttribute('aria-invalid')).toEqual('true');
     expect(input.getAttribute('aria-describedby')).toContain('input-error-message');
+    expect(input.getAttribute('aria-describedby')).not.toContain('charcount-message');
   });
 
   it('sets aria-invalid based on invalid prop', async () => {
@@ -85,7 +90,7 @@ describe('va-text-input', () => {
     el.setProperty('error', 'Testing Error');
     await page.waitForChanges();
     expect(inputEl.getAttribute('aria-describedby')).not.toBeNull();
-    expect(inputEl.getAttribute('aria-describedby')).toContain('error-message');
+    expect(inputEl.getAttribute('aria-describedby')).toBe('input-error-message');
   });
 
   it('adds aria-describedby input-message id', async () => {
@@ -102,8 +107,9 @@ describe('va-text-input', () => {
     el.setProperty('error', 'Testing Error');
     await page.waitForChanges();
     expect(inputEl.getAttribute('aria-describedby')).not.toBeNull();
-    expect(inputEl.getAttribute('aria-describedby')).toContain('error-message');
+    expect(inputEl.getAttribute('aria-describedby')).toContain('input-error-message');
     expect(inputEl.getAttribute('aria-describedby')).toContain('input-message');
+    expect(inputEl.getAttribute('aria-describedby')).not.toContain('charcount-message');
   });
 
   it('renders a required span', async () => {
@@ -120,8 +126,10 @@ describe('va-text-input', () => {
           </label>
           <slot></slot>
           <span id="input-error-message" role="alert"></span>
-          <input id="inputField" type="text" required="" part="input" aria-invalid="false" />
-        </mock:shadow-root>
+          <div>
+            <input id="inputField" type="text" required="" part="input" aria-invalid="false" />
+          </div>
+          </mock:shadow-root>
       </va-text-input>
     `);
 
@@ -250,6 +258,7 @@ describe('va-text-input', () => {
     expect((await page.find('va-text-input >>> small')).innerText).toContain(
       'min-chars',
     );
+    expect(inputEl.getAttribute('aria-describedby')).toBe('charcount-message');
   });
 
   it('ignores negative maxlength values', async () => {
@@ -360,6 +369,9 @@ describe('va-text-input', () => {
     const page = await newE2EPage();
     await page.setContent('<va-text-input class="memorable-date-input" label="This is a label" uswds="false"/>');
 
+    const inputEl = await page.find('va-text-input >>> input');
+    expect(inputEl.getAttribute('aria-describedby')).toBeNull();
+
     const charcountMessageEl = await page.find('va-text-input >>> #charcount-message');
     expect(charcountMessageEl).toBeNull();
 
@@ -383,8 +395,10 @@ describe('va-text-input', () => {
             </label>
             <slot></slot>
             <span id="input-error-message" role="alert"></span>
-            <input class="usa-input" id="inputField" part="input" type="text" aria-invalid="false" />
-          </div>
+            <div>
+              <input class="usa-input" id="inputField" part="input" type="text" aria-invalid="false" />
+            </div>
+            </div>
         </mock:shadow-root>
       </va-text-input>
     `);
@@ -399,7 +413,7 @@ describe('va-text-input', () => {
     const input = await page.find('va-text-input >>> input');
     expect(error.innerText).toContain('This is a mistake');
     expect(input.getAttribute('aria-invalid')).toEqual('true');
-    expect(input.getAttribute('aria-describedby')).toContain('input-error-message');
+    expect(input.getAttribute('aria-describedby')).toBe('input-error-message');
   });
 
   it('uswds sets aria-invalid based on invalid prop', async () => {
@@ -425,7 +439,7 @@ describe('va-text-input', () => {
     el.setProperty('error', 'Testing Error');
     await page.waitForChanges();
     expect(inputEl.getAttribute('aria-describedby')).not.toBeNull();
-    expect(inputEl.getAttribute('aria-describedby')).toContain('error-message');
+    expect(inputEl.getAttribute('aria-describedby')).toBe('input-error-message');
   });
 
   it('uswds adds aria-describedby input-message id', async () => {
@@ -444,6 +458,7 @@ describe('va-text-input', () => {
     expect(inputEl.getAttribute('aria-describedby')).not.toBeNull();
     expect(inputEl.getAttribute('aria-describedby')).toContain('error-message');
     expect(inputEl.getAttribute('aria-describedby')).toContain('input-message');
+    expect(inputEl.getAttribute('aria-describedby')).not.toContain('charcount-message');
   });
 
   it('uswds renders a required span', async () => {
@@ -578,6 +593,8 @@ describe('va-text-input', () => {
     expect((await page.find('va-text-input >>> span.usa-character-count__status')).innerText).toContain(
       '2 characters left',
     );
+
+    expect(inputEl.getAttribute('aria-describedby')).toBe('charcount-message');
   });
 
    it('uswds respects the maxlength character limit', async () => {
@@ -599,6 +616,8 @@ describe('va-text-input', () => {
        (await page.find('va-text-input >>> span.usa-character-count__status'))
          .innerText,
      ).toContain('0 characters left');
+
+     expect(inputEl.getAttribute('aria-describedby')).toBe('charcount-message');
    });
 
   it('uswds ignores negative maxlength values', async () => {
@@ -732,6 +751,9 @@ describe('va-text-input', () => {
     const page = await newE2EPage();
     await page.setContent('<va-text-input class="memorable-date-input" label="This is a label" />');
 
+    const inputEl = await page.find('va-text-input >>> input');
+    expect(inputEl.getAttribute('aria-describedby')).toBeNull();
+
     const charcountMessageEl = await page.find('va-text-input >>> #charcount-message');
     expect(charcountMessageEl).toBeNull();
 
@@ -769,4 +791,29 @@ describe('va-text-input', () => {
 
     await axeCheck(page);
   });
+
+  it('sets a range based on min and max attributes', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-text-input min="0" max="4"/>');
+
+    const inputEl = await page.find('va-text-input >>> input');
+    expect(inputEl.getAttribute('min')).toBe('0');
+    expect(inputEl.getAttribute('max')).toBe('4');
+  });
+
+  it('renders a "$" if currency flag set to true', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-text-input currency />');
+    const currencyTextElement = await page.find('va-text-input >>> div > div > div');
+    expect(currencyTextElement.innerText).toContain('$');
+  });
+
+  it('sets the input mode to a default pattern if inputmode is numerical or decimal', async () => {
+    for (const inputMode of ['numeric', 'decimal']) {
+      const page = await newE2EPage();
+      await page.setContent(`<va-text-input inputmode="${inputMode}" />`);
+      const inputEl = await page.find('va-text-input >>> input');
+      expect(inputEl.getAttribute('pattern')).toEqual("[0-9]+(\.[0-9]{1,})?");
+    }
+  })
 });

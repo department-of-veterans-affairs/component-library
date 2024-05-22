@@ -2,7 +2,7 @@ import { newE2EPage } from '@stencil/core/testing';
 import { axeCheck } from '../../../testing/test-helpers';
 
 describe('va-alert-expandable', () => {
-  it.skip('renders', async () => {
+  it('renders', async () => {
     const page = await newE2EPage();
     await page.setContent(
       '<va-alert-expandable status="warning" trigger="Limited services and hours"></va-alert-expandable>',
@@ -15,16 +15,16 @@ describe('va-alert-expandable', () => {
         <mock:shadow-root>
         <div class="alert-expandable warning">
           <a role="button" aria-controls="alert-body" aria-expanded="false" tabindex="0" class="alert-expandable-trigger">
-            <i class="alert-status-icon" aria-hidden="true" role="img"></i>
+            <va-icon class="alert-expandable__status-icon hydrated"></va-icon>
             <div>
               <span class="alert-expandable-title">
                 <span class="sr-only">Alert:&nbsp;</span>
                 Limited services and hours
               </span>
-              <i class="fa-angle-down" role="presentation"></i>
+              <va-icon class="alert-expandable-icon hydrated"></va-icon>
             </div>
           </a>
-          <div id="alert-body" class="alert-expandable-body closed" style="--calc-max-height:calc(20px + 2rem);"><div id="slot-wrap"><slot></slot></div></div>
+          <div id="alert-body" class="alert-expandable-body closed" style="--calc-max-height:calc(12px + 2rem);"><div id="slot-wrap"><slot></slot></div></div>
         </div>
         </mock:shadow-root>
       </va-alert-expandable>

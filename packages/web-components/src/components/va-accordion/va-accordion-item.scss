@@ -2,8 +2,6 @@
 
 @use 'usa-accordion/src/styles/usa-accordion';
 
-@import '../../global/formation_overrides';
-
 @import '../../mixins/focusable.css';
 
 
@@ -34,6 +32,14 @@
   max-width: 64ex;
 }
 
+/* overrides hidden attribute on #content */
+@media print {
+  :host(:not([open])) #content,
+  :host([open='false']) #content {
+    display: block;
+  }
+}
+
 /** Original Component Style **/
 
 :host {
@@ -41,16 +47,24 @@
 }
 
 :host(:not(:last-child)) {
-  margin-bottom: 0.8rem;
+  margin-bottom: 0.5rem;
 }
 
 :host(:last-child) {
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.3125rem;
 }
 
 :host(:not([open])) #content,
 :host([open='false']) #content {
   display: none;
+}
+
+/* duplicate print media block needed to override above definition */
+@media print {
+  :host(:not([open])) #content,
+  :host([open='false']) #content {
+    display: block;
+  }
 }
 
 h1,
@@ -68,15 +82,15 @@ button {
   border: 0;
   text-align: left;
   font-family: var(--font-source-sans);
-  font-size: 1.6rem;
+  font-size: 1rem;
   font-weight: 700;
   line-height: 1.15;
-  padding: 1.5rem 5.5rem 1.5rem 2rem;
+  padding: 0.9375rem 3.4375rem 0.9375rem 1.25rem;
   background-color: var(--vads-color-base-lightest);
   background-image: url('../../assets/minus.svg');
-  background-position: right 2rem center;
+  background-position: right 1.25rem center;
   background-repeat: no-repeat;
-  background-size: 1.5rem;
+  background-size: .938rem;
   display: block;
   /* This color assignment is for IE11 compatibility - the one in */
   /* the va-accordion's CSS with `:host` doesn't work well */
@@ -93,7 +107,7 @@ button:not(.usa-accordion__button):hover {
 #content:not(.usa-accordion__content) {
   background-color: var(--vads-color-white);
   overflow: auto;
-  padding: 1.5rem 2rem;
+  padding: 0.9375rem 1.25rem;
   border-left: var(--item-border);
   border-right: var(--item-border);
   border-bottom: var(--item-border);
@@ -112,7 +126,7 @@ p.subheader {
   font-weight: 400;
   line-height: 26px;
   margin: 0;
-  margin-top: 0.25rem;
+  margin-top: 0.156rem;
   display: flex;
 }
 
@@ -123,10 +137,10 @@ p.subheader {
 
 ::slotted([slot='icon']),
 ::slotted([slot='subheader-icon']){
-  width: 1rem;
-  margin-right: 1.5rem;
+  width: .625rem;
+  margin-right: .938rem;
 }
 
 ::slotted([slot='subheader-icon']) {
-  margin-top: 0.5rem;
+  margin-top: 0.313rem;
 }
