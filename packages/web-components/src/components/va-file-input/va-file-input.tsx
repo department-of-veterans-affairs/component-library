@@ -263,12 +263,20 @@ export class VaFileInput {
         this.error ? 'file-input-target-error' : ''
       }`.trim();
 
-      let fileThumbnail = <va-icon icon="file_icon" size={5} class="file-icon"/>;
+      let fileThumbnail = (<div class="thumbnail-container">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" fill="#07648d" width="40px" height="40px">
+          <path d="M224 136V0H24C10.7 0 0 10.7 0 24v464c0 13.3 10.7 24 24 24h336c13.3 0 24-10.7 24-24V160H248c-13.2 0-24-10.8-24-24zm160-14.1v6.1H256V0h6.1c6.4 0 12.5 2.5 17 7l97.9 98c4.5 4.5 7 10.6 7 16.9z"/>
+        </svg>
+      </div>);
       if (fileContents) {
         if (fileType.startsWith('image/')) {
-          fileThumbnail = <img class="thumbnail-preview" src={fileContents} alt="image" />;
+          fileThumbnail = (<div class="thumbnail-container">
+            <img class="thumbnail-preview" src={fileContents} alt="image" />
+          </div>);
         } else if (fileType === 'application/pdf') {
-          fileThumbnail = <object class="thumbnail-preview" data={fileContents} type="application/pdf"/>;
+          fileThumbnail = (<div class="thumbnail-container">
+            <object class="thumbnail-preview" data={fileContents} type="application/pdf"/>
+          </div>);
         }
       }
 
