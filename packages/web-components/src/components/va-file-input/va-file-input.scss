@@ -155,9 +155,15 @@ va-button {
   .file-button-section {
     display: flex;
     justify-content: space-between;
+    flex-direction: row;
 
     > va-button-icon {
       font-size: 1.06rem;
+    }
+
+    @media screen and (max-width: $small-screen) {
+      flex-direction: column;
+      align-items: flex-start;
     }
   }
 
