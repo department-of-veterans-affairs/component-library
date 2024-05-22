@@ -39,7 +39,7 @@ va-button {
   .label-header {
     color: var(--vads-color-base);
     font-weight: var(--font-weight-normal);
-    font-size: 1.696rem;
+    font-size: 1.06rem;
   }
 
   .label-header-tag {
@@ -48,7 +48,7 @@ va-button {
 
   .file-input-wrapper {
     display: block;
-    max-width: 48rem;
+    max-width: 30rem;
     width: 100%;
     position: relative;
     margin: 8px 0;
@@ -71,8 +71,7 @@ va-button {
   .file-input-target {
     border: 1px dashed var(--uswds-system-color-gray-30);
     display: block;
-    font-size: 1.06rem;
-    margin-top: 0.5rem;
+    margin-top: 0.3125rem;
     position: relative;
     text-align: center;
     width: 100%;
@@ -95,8 +94,8 @@ va-button {
   }
 
   .file-input-instructions {
-    font-size: 1.696rem;
-    padding: 2rem 1rem;
+    font-size: 1.06rem;
+    padding: 1.25rem 0.625rem;
     pointer-events: none;
     position: relative;
     z-index: 3;
@@ -120,7 +119,7 @@ va-button {
   .selected-files-label {
     color: var(--vads-color-base);
     font-weight: var(--font-weight-bold);
-    font-size: 1.696rem;
+    font-size: 1.06rem;
     border-bottom: 1px solid var(--vads-color-white);
     margin-bottom: 8px;
     padding: 8px;
@@ -133,15 +132,15 @@ va-button {
   .file-label {
     color: var(--vads-color-base);
     font-weight: var(--font-weight-bold);
-    font-size: 1.696rem;
+    font-size: 1.06rem;
     padding: 0 8px;
-    display:block;
+    display: block;
   }
 
   .file-size-label {
     color: var(--vads-color-base-dark);
     font-weight: var(--font-weight-normal);
-    font-size: 1.696rem;
+    font-size: 1.06rem;
     padding: 0 8px;
     display: block;
   }
@@ -158,7 +157,7 @@ va-button {
     justify-content: space-between;
 
     > va-button-icon {
-      font-size: 1.696rem;
+      font-size: 1.06rem;
     }
   }
 
