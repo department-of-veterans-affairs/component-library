@@ -15,16 +15,18 @@
   color: var(--vads-color-link);
   text-transform: uppercase;
 
-  &:hover, &:focus {
+  &:hover, &:focus, &:active {
+    color: var(--vads-color-primary-dark);
     background: var(--vads-color-primary-lighter);
   }
 }
 
 // Styles for "destructive" buttons
 :host .usa-button.va-button-icon--destructive {
-  color: var(--vads-color-error);
+  color: var(--vads-color-secondary-dark);
 
-  &:hover, &:focus {
+  &:hover, &:focus, &:active {
+    color: var(--vads-color-secondary-darkest);
     background: var(--vads-color-secondary-lightest);
   }
 }
