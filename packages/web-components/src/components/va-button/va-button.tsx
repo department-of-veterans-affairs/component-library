@@ -6,7 +6,7 @@ import {
   h,
   Listen,
   Prop,
-  Element
+  Element,
 } from '@stencil/core';
 import classnames from 'classnames';
 
@@ -95,6 +95,13 @@ export class VaButton {
   })
   componentLibraryAnalytics: EventEmitter;
 
+  @Event({
+    bubbles: true,
+    composed: true,
+    eventName: 'click',
+  })
+  submitEvent: EventEmitter;
+
   componentDidLoad() {
     // check if the element has a class named uswds-false added from parent
     if (this.el.classList.contains('uswds-false')) {
@@ -103,7 +110,7 @@ export class VaButton {
     }
   }
 
-  private handleClick = (): void => {
+  private handleClick = (e): void => {
     if (!this.disableAnalytics) {
       const detail = {
         componentName: 'va-button',
@@ -114,6 +121,9 @@ export class VaButton {
         },
       };
       this.componentLibraryAnalytics.emit(detail);
+      if (this.submit) {
+        this.submitEvent.emit(e);
+      }
     }
   };
 
@@ -137,7 +147,7 @@ export class VaButton {
       e.stopPropagation();
       return;
     }
-    this.handleClick();
+    this.handleClick(e);
   }
 
   render() {
@@ -155,7 +165,8 @@ export class VaButton {
       messageAriaDescribedby,
     } = this;
 
-    const ariaDescribedbyIds = `${messageAriaDescribedby ? 'button-description' : ''}`.trim() || null;
+    const ariaDescribedbyIds =
+      `${messageAriaDescribedby ? 'button-description' : ''}`.trim() || null;
 
     const ariaDisabled = disabled ? 'true' : undefined;
     const buttonText = getButtonText();
