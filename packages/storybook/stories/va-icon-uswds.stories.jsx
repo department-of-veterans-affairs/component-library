@@ -244,6 +244,7 @@ const icons = [
   "phone",
   "phone_iphone",
   "photo_camera",
+  "pill",
   "play_circle",
   "print",
   "priority_high",
