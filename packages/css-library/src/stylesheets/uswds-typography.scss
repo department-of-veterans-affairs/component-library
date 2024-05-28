@@ -3,8 +3,6 @@
 @import 'uswds-core/src/styles/mixins/typography/usa-content-styles';
 @import 'uswds-core/src/styles/mixins/typography/typeset';
 
-@import "uswds-fonts";
-
 /**
   Normalization for Source Sans Pro typeface.
 
@@ -22,8 +20,10 @@
 
   https://designsystem.digital.gov/design-tokens/typesetting/overview/
 */
-p, span, div {
-  @include typeset('ui');
+#content {
+  p, div {
+    @include typeset('ui');
+  }
 }
 
 /**
