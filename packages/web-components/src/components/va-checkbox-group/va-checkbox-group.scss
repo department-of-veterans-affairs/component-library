@@ -8,7 +8,7 @@
 
 @import '../../mixins/uswds-error-border.scss';
 @import '../../mixins/focusable.css';
-@import '~@department-of-veterans-affairs/css-library/dist/elements.css';
+@import '../../mixins/headers.css';
 
 :host {
   display: block;
@@ -25,7 +25,6 @@
 @import '../../mixins/accessibility.css';
 @import '../../mixins/form-field-error.css';
 @import '../../mixins/hint-text.css';
-@import '../../mixins/headers.css';
 
 :host([uswds='false']) {
   #error-message {
