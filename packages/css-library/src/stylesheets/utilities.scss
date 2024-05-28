@@ -1,27 +1,5 @@
-@use 'uswds-core' with (
-  $theme-show-notifications: false,
-  $theme-namespace: (
-    'grid': (
-      namespace: 'vads-grid-',
-      output: true,
-    ),
-    'utility': (
-      namespace: 'u-',
-      output: false,
-    ),
-  ),
-  $theme-utility-breakpoints: (
-    "card": false,
-    "card-lg": false,
-    "mobile": true,
-    "mobile-lg": false,
-    "tablet": true,
-    "tablet-lg": false,
-    "desktop": false,
-    "desktop-lg": true,
-    "widescreen": false
-  ),
-);
+@forward 'uswds-theme';
+
 @use 'uswds-core/src/styles/mixins/utility-builder' as *;
 @use 'uswds-core/src/styles/functions' as *;
 @use '../utilities' as *;
