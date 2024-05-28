@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
-import React from 'react';
-import { VaFileInput } from '@department-of-veterans-affairs/web-components/react-bindings';
+import React, { useState } from 'react';
+import {VaFileInput} from '@department-of-veterans-affairs/web-components/react-bindings';
 import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
 
 const fileInputDocs = getWebComponentDocs('va-file-input');
@@ -123,6 +123,97 @@ AdditionalInfo.args = {
   ...defaultArgs,
   label: 'Label Header',
   children: additionalInfoSlotContent
+}
+
+const CustomValidationTemplate = ({ label, name, accept, required, error, hint }) => {
+  const [errorVal, setErrorVal] = useState(error);
+
+  function validateFileContents(event) {
+    if (event.detail.files) {
+      const file = event.detail.files[0];
+
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        const contents = reader.result;
+        const hasX = contents.includes('X');
+
+        if (hasX)
+          setErrorVal('File contains an \'X\' character');
+        else
+          setErrorVal('')
+      };
+
+      reader.readAsText(file);
+    }
+  }
+
+  return (
+    <>
+      <VaFileInput
+        uswds
+        label={label}
+        name={name}
+        accept={accept}
+        required={required}
+        error={errorVal}
+        hint={hint}
+        onVaChange={validateFileContents}
+      />
+      <hr />
+      <div>
+        <p>The parent component captures the file from the onVaChange event, reads its contents, and validates it. The error prop is dynamically set if the validation fails.</p>
+        <p>This example validates that the file does not contain the character 'X'. The validation runs when the file changes or is removed.</p>
+      </div>
+      <div className="vads-u-margin-top--2">
+      <pre className="vads-u-font-size--sm vads-u-background-color--gray-lightest vads-u-padding--2">
+        <code>
+{`const [errorVal, setErrorVal] = useState(error);
+
+function validateFileContents(event) {
+  if (event.detail.files) {
+    const file = event.detail.files[0];
+
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      const contents = reader.result;
+      const hasX = contents.includes('X');
+
+      if (hasX)
+        setErrorVal('File contains an \\'X\\' character');
+      else
+        setErrorVal('')
+    };
+
+    reader.readAsText(file);
+  }
+}
+
+return (
+  <VaFileInput
+    ...
+    onVaChange={validateFileContents}
+  />
+)`}
+          </code>
+        </pre>
+        <a
+          href="https://github.com/department-of-veterans-affairs/component-library/tree/main/packages/storybook/stories"
+          target="_blank"
+        >
+          View validation code in our repo
+        </a>
+      </div>
+    </>
+  );
+};
+
+
+export const CustomValidation = CustomValidationTemplate.bind(null);
+CustomValidation.args = {
+  ...defaultArgs,
+  label: 'Upload a file which does not contain the character \'X\'',
+  hint: 'Select a TXT file',
+  accept: '.txt'
 }
 
 export const WithAnalytics = Template.bind(null);

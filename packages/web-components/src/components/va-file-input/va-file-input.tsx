@@ -12,6 +12,7 @@ import {
 } from '@stencil/core';
 import i18next from 'i18next';
 import { fileInput } from './va-file-input-upgrader';
+import { extensionToMimeType } from "./fileExtensionToMimeType";
 
 /**
  * @componentName File input
@@ -27,7 +28,7 @@ import { fileInput } from './va-file-input-upgrader';
 })
 export class VaFileInput {
   private fileInputRef!: HTMLInputElement;
-  private uploadStatus: 'idle' | 'success' | 'failure' = 'idle';
+  private uploadStatus: 'idle' | 'success' = 'idle';
   private fileType?: string;
 
   @Element() el: HTMLElement;
@@ -105,26 +106,47 @@ export class VaFileInput {
   private handleChange = (e: Event) => {
     const input = e.target as HTMLInputElement;
     if (input.files && input.files.length > 0) {
-      this.file = input.files[0];
-      this.vaChange.emit({ files: [this.file] });
-      this.uploadStatus = 'success';
-      this.generateFileContents(this.file);
-    } else {
-      this.uploadStatus = 'failure';
+      this.handleFile(input.files[0])
+    }
+    input.value = '';
+  }
+
+  private handleDrop = (event: DragEvent) => {
+    event.preventDefault();
+    event.stopPropagation();
+
+    const files = event.dataTransfer.files;
+    if (files.length > 0) {
+      this.handleFile(files[0]);
+    }
+  };
+
+  private handleFile = (file: File) => {
+    if (this.accept) {
+      const normalizedAcceptTypes = this.normalizeAcceptProp(this.accept);
+      if (!this.isAcceptedFileType(file.type, normalizedAcceptTypes)) {
+        this.error = 'This is not a valid file type.';
+        this.removeFile();
+        return;
+      }
     }
 
-    input.value = '';
+    this.file = file;
+    this.vaChange.emit({ files: [this.file] });
+    this.uploadStatus = 'success';
+    this.error = '';
+    this.generateFileContents(this.file);
 
     if (this.enableAnalytics) {
       this.componentLibraryAnalytics.emit({
-        componentName: 'va-file-input',
-        action: 'change',
-        details: {
-          label: this.label,
-        },
-      });
+                                            componentName: 'va-file-input',
+                                            action: 'change',
+                                            details: {
+                                              label: this.label,
+                                            },
+                                          });
     }
-  };
+  }
 
   private handleButtonClick = () => {
     this.el.shadowRoot.getElementById('fileInputField').click();
@@ -138,18 +160,6 @@ export class VaFileInput {
   private changeFile = () => {
     if (this.fileInputRef) {
       this.fileInputRef.click();
-    }
-  };
-
-  private handleDrop = (event: DragEvent) => {
-    event.preventDefault();
-    event.stopPropagation();
-
-    const files = event.dataTransfer.files;
-    if (files.length > 0) {
-      this.file = files[0];
-      this.vaChange.emit({ files: [this.file] });
-      this.uploadStatus = 'success';
     }
   };
 
@@ -182,6 +192,28 @@ export class VaFileInput {
     const formattedSize = sizeInUnit.toFixed(unitIndex < 2 ? 0 : 1);
     return `${formattedSize}\xa0${units[unitIndex]}`;
   };
+
+  private normalizeAcceptProp = (accept: string): string[] => {
+    return accept.split(',').map(item => {
+      item = item.trim();
+      if (item.startsWith('.')) {
+        return extensionToMimeType[item] || item;
+      }
+      return item;
+    });
+  }
+
+  private isAcceptedFileType = (fileType: string, acceptedTypes: string[]): boolean => {
+    for (const type of acceptedTypes) {
+      if (type === fileType) {
+        return true;
+      }
+      if (type.endsWith('/*') && fileType.startsWith(type.slice(0, -1))) {
+        return true;
+      }
+    }
+    return false;
+  }
 
   private renderLabelOrHeader = (
     label: string,
