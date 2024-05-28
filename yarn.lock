@@ -1921,12 +1921,23 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@department-of-veterans-affairs/css-library@^0.7.0, @department-of-veterans-affairs/css-library@^0.7.2, @department-of-veterans-affairs/css-library@workspace:packages/css-library":
+"@department-of-veterans-affairs/css-library@npm:^0.7.0":
+  version: 0.7.0
+  resolution: "@department-of-veterans-affairs/css-library@npm:0.7.0"
+  dependencies:
+    "@divriots/style-dictionary-to-figma": ^0.4.0
+    rimraf: ^5.0.5
+  checksum: 9d0e8c20a40e4ab5c7da8b9cfb1ed103ed460fc2445abb31e7b21f4d18f020fcde5d0d5645c08b09de89717fa14033301bd6444af630daaded8d3f4d5a49954e
+  languageName: node
+  linkType: hard
+
+"@department-of-veterans-affairs/css-library@workspace:packages/css-library":
   version: 0.0.0-use.local
   resolution: "@department-of-veterans-affairs/css-library@workspace:packages/css-library"
   dependencies:
     "@divriots/style-dictionary-to-figma": ^0.4.0
     "@uswds/uswds": ^3.7.1
+    minimatch: 9.0.4
     rimraf: ^5.0.5
     sass: ^1.64.1
     style-dictionary: ^3.8.0
@@ -2051,7 +2062,7 @@ __metadata:
   dependencies:
     "@axe-core/puppeteer": ^4.4.0
     "@babel/core": ^7.12.13
-    "@department-of-veterans-affairs/css-library": ^0.7.2
+    "@department-of-veterans-affairs/css-library": ^0.7.0
     "@department-of-veterans-affairs/formation": ^11.0.5
     "@stencil/core": ^2.19.2
     "@stencil/postcss": ^2.0.0
@@ -14890,21 +14901,21 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
+"minimatch@npm:9.0.4, minimatch@npm:^9.0.1":
+  version: 9.0.4
+  resolution: "minimatch@npm:9.0.4"
+  dependencies:
+    brace-expansion: ^2.0.1
+  checksum: cf717f597ec3eed7dabc33153482a2e8d49f4fd3c26e58fd9c71a94c5029a0838728841b93f46bf1263b65a8010e2ee800d0dc9b004ab8ba8b6d1ec07cc115b5
+  languageName: node
+  linkType: hard
+
 "minimatch@npm:^3.0.2, minimatch@npm:^3.0.4, minimatch@npm:^3.1.1, minimatch@npm:^3.1.2":
   version: 3.1.2
   resolution: "minimatch@npm:3.1.2"
   dependencies:
     brace-expansion: ^1.1.7
   checksum: c154e566406683e7bcb746e000b84d74465b3a832c45d59912b9b55cd50dee66e5c4b1e5566dba26154040e51672f9aa450a9aef0c97cfc7336b78b7afb9540a
-  languageName: node
-  linkType: hard
-
-"minimatch@npm:^9.0.1":
-  version: 9.0.4
-  resolution: "minimatch@npm:9.0.4"
-  dependencies:
-    brace-expansion: ^2.0.1
-  checksum: cf717f597ec3eed7dabc33153482a2e8d49f4fd3c26e58fd9c71a94c5029a0838728841b93f46bf1263b65a8010e2ee800d0dc9b004ab8ba8b6d1ec07cc115b5
   languageName: node
   linkType: hard
 

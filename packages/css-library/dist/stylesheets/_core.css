@@ -1,0 +1,19 @@
+/* Error: This module and the new module both define a variable named "$xsmall-screen".
+ *   ,
+ * 1 | @use "../../../dist/tokens/scss/variables" as *;
+ *   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ *   '
+ *   src/stylesheets/base/headings.scss 1:1  @import
+ *   src/stylesheets/base/_va.scss 108:9     @import
+ *   src/stylesheets/_core.scss 45:9         root stylesheet */
+
+body::before {
+  font-family: "Source Code Pro", "SF Mono", Monaco, Inconsolata, "Fira Mono",
+      "Droid Sans Mono", monospace, monospace;
+  white-space: pre;
+  display: block;
+  padding: 1em;
+  margin-bottom: 1em;
+  border-bottom: 2px solid black;
+  content: 'Error: This module and the new module both define a variable named "$xsmall-screen".\a   \2577 \a 1 \2502  @use "../../../dist/tokens/scss/variables" as *;\a   \2502  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\a   \2575 \a   src/stylesheets/base/headings.scss 1:1  @import\a   src/stylesheets/base/_va.scss 108:9     @import\a   src/stylesheets/_core.scss 45:9         root stylesheet';
+}

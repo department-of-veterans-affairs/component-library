@@ -1,0 +1,57 @@
+/**
+  Variables ported over from Formation so that we can keep those stylesheets
+  working while we work on deprecation.
+**/
+/**
+  /uswds/dist/scss/lib/addons/_margin.scss
+**/
+/**
+  uswds/src/stylesheets/lib/helpers/_directional-values.scss
+**/
+a.vads-c-action-link--blue, a.vads-c-action-link--green, a.vads-c-action-link--white {
+  font-weight: bold;
+  padding: 4px 0 4px 38px;
+  position: relative;
+  display: inline-block;
+}
+a.vads-c-action-link--blue:before, a.vads-c-action-link--green:before, a.vads-c-action-link--white:before {
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  font-size: 175%;
+  content: "\f138";
+  content: "\f138"/"";
+  position: absolute;
+  left: 0px;
+  top: -4px;
+}
+
+a.vads-c-action-link--blue:before {
+  color: #005ea2;
+}
+
+a.vads-c-action-link--green:before {
+  color: #2e8540;
+}
+
+a.vads-c-action-link--white {
+  color: #ffffff;
+}
+a.vads-c-action-link--white:before {
+  color: #ffffff;
+  -webkit-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+  -webkit-transition-timing-function: ease-in-out;
+  transition-timing-function: ease-in-out;
+  -webkit-transition-property: color, background-color, border-color;
+  transition-property: color, background-color, border-color;
+}
+
+a.vads-c-action-link--white:hover {
+  color: #fef0c8;
+  background-color: transparent;
+}
+a.vads-c-action-link--white:hover:before {
+  color: #fef0c8;
+}
+
+/*# sourceMappingURL=_m-action-link.css.map */

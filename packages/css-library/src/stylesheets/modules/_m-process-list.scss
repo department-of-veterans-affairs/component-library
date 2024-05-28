@@ -4,6 +4,8 @@
 // Should only be used with ol elements
 // Also see l-playbook for a variation of these styles.
 //======================================
+@import "../formation-overrides/variables";
+@import "../../../dist/tokens/scss/variables.scss";
 @import '../override-function';
 @import '../formation-overrides/core/utilities';
 

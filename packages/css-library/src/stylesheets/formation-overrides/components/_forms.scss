@@ -5,8 +5,11 @@
   Original: @import "~uswds/src/stylesheets/components/forms";
   ***THIS IS USWDS v1***
 */
-
+@use "../../core-variables" as *;
 @import '../../override-function';
+@import "../variables";
+@import "../../../../dist/tokens/scss/variables.scss";
+@import "../../mixins";
 
 $usa-form-width: scale-rem(32rem);
 

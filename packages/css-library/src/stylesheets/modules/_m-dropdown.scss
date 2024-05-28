@@ -1,3 +1,7 @@
+@use "../../../dist/tokens/scss/variables" as *;
+@use "../core-variables" as *;
+@import "../formation-overrides/variables";
+
 @import '../override-function';
 
 .va-dropdown {

@@ -1,3 +1,7 @@
+@import "../formation-overrides/variables";
+@import "../../../dist/tokens/scss/variables.scss";
+@import "../mixins";
+
 a.vads-c-action-link--blue, a.vads-c-action-link--green, a.vads-c-action-link--white {
   &:before {
     font-family: "Font Awesome 5 Free";

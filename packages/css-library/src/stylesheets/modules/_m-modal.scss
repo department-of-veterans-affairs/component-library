@@ -1,3 +1,7 @@
+@import "../formation-overrides/variables";
+@import "../../../dist/tokens/scss/variables.scss";
+@import "../mixins";
+
 @import '../override-function';
 // Styles for application modals
 
