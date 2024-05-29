@@ -10,7 +10,7 @@ export default {
   parameters: {
     componentSubtitle: 'va-icon web component',
     docs: {
-      page: () => <StoryDocs data={iconDocs} />,
+      page: () => <StoryDocs storyDefault={Default} data={iconDocs} />,
     }
   }
 }

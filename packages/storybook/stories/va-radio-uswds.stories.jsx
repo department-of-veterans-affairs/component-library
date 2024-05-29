@@ -23,9 +23,9 @@ export default {
   id: 'uswds/va-radio',
   subcomponents: componentStructure(radioItem),
   parameters: {
-    componentSubtitle: `va-radio web component`,
+    componentSubtitle: 'va-radio web component',
     docs: {
-      page: () => <StoryDocs data={radioDocs} />,
+      page: () => <StoryDocs storyDefault={Default} data={radioDocs} />,
     },
   },
 };

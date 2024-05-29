@@ -10,9 +10,9 @@ export default {
   title: 'Components/Statement of truth USWDS',
   id: 'uswds/va-statement-of-truth',
   parameters: {
-    componentSubtitle: `va-statement-of-truth web component`,
+    componentSubtitle: 'va-statement-of-truth web component',
     docs: {
-      page: () => <StoryDocs data={statementOfTruthDocs} />,
+      page: () => <StoryDocs storyDefault={Default} data={statementOfTruthDocs} />,
     },
   },
 };

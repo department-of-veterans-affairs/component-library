@@ -9,7 +9,7 @@ export default {
   parameters: {
     componentSubtitle: 'va-promo-banner web component',
     docs: {
-      page: () => <StoryDocs data={promoBannerDocs} />,
+      page: () => <StoryDocs storyDefault={Default} data={promoBannerDocs} />,
     },
   },
   argTypes: {

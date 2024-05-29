@@ -3048,22 +3048,6 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@department-of-veterans-affairs/formation@npm:^10.1.2":
-  version: 10.1.2
-  resolution: "@department-of-veterans-affairs/formation@npm:10.1.2"
-  dependencies:
-    "@fortawesome/fontawesome-free": "npm:^5.15.4"
-    domready: "npm:^1.0.8"
-    element-closest: "npm:^3.0.1"
-    foundation-sites: "npm:5"
-  peerDependencies:
-    "@fortawesome/fontawesome-free": ^5.15.4
-    foundation-sites: 5
-    uswds: ^1.6.10
-  checksum: 10/3377eb975b278f40d724b91494587a46a3f586635a4fdb9937b31504c47b40e3f600f25e5d8ca218dd8399b6def7b030963bb129b4d015754c1f4d48fbeb713d
-  languageName: node
-  linkType: hard
-
 "@department-of-veterans-affairs/formation@npm:^11.0.5":
   version: 11.0.5
   resolution: "@department-of-veterans-affairs/formation@npm:11.0.5"
@@ -3157,7 +3141,7 @@ __metadata:
     "@babel/preset-react": "npm:^7.23.3"
     "@babel/preset-typescript": "npm:^7.23.3"
     "@department-of-veterans-affairs/component-library": "workspace:packages/core"
-    "@department-of-veterans-affairs/formation": "npm:^10.1.2"
+    "@department-of-veterans-affairs/formation": "npm:^11.0.5"
     "@mdx-js/react": "npm:^1.6.22"
     "@storybook/addon-a11y": "npm:7.6.10"
     "@storybook/addon-actions": "npm:^7.6.10"

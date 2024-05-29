@@ -11,7 +11,7 @@ export default {
   parameters: {
     componentSubtitle: 'va-breadcrumbs web component',
     docs: {
-      page: () => <StoryDocs data={breadcrumbsDocs} />,
+      page: () => <StoryDocs storyDefault={Default} data={breadcrumbsDocs} />,
     },
   },
 };

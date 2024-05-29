@@ -9,7 +9,7 @@ export default {
   parameters: {
     componentSubtitle: 'va-on-this-page web component',
     docs: {
-      page: () => <StoryDocs data={otpDocs} />,
+      page: () => <StoryDocs storyDefault={Default} data={otpDocs} />,
     },
   },
 };

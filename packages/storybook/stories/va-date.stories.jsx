@@ -10,9 +10,9 @@ export default {
   title: 'Components/Date input',
   id: 'components/va-date',
   parameters: {
-    componentSubtitle: `va-date web component`,
+    componentSubtitle: 'va-date web component',
     docs: {
-      page: () => <StoryDocs data={dateDocs} />,
+      page: () => <StoryDocs storyDefault={Default} data={dateDocs} />,
     },
   },
 };

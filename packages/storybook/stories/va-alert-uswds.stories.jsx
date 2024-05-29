@@ -22,9 +22,9 @@ export default {
     },
   },
   parameters: {
-    componentSubtitle: `va-alert web component`,
+    componentSubtitle: 'va-alert web component',
     docs: {
-      page: () => <StoryDocs data={alertDocs} />,
+      page: () => <StoryDocs storyDefault={Default} data={alertDocs} />,
     },
   },
 };

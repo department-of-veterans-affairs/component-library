@@ -10,7 +10,7 @@ export default {
   parameters: {
     componentSubtitle: 'va-table web component',
     docs: {
-      page: () => <StoryDocs data={tableDocs} />,
+      page: () => <StoryDocs storyDefault={Default} data={tableDocs} />,
     },
   },
 };

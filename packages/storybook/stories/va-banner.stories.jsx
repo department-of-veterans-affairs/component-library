@@ -7,9 +7,9 @@ export default {
   title: 'Components/Banner',
   id: 'components/va-banner',
   parameters: {
-    componentSubtitle: `va-banner web component`,
+    componentSubtitle: 'va-banner web component',
     docs: {
-      page: () => <StoryDocs data={bannerDocs} />,
+      page: () => <StoryDocs storyDefault={Default} data={bannerDocs} />,
     },
   },
   argTypes: {

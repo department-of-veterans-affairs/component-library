@@ -9,7 +9,7 @@ export default {
   parameters: {
     componentSubtitle: 'va-crisis-line-modal web component',
     docs: {
-      page: () => <StoryDocs data={crisisLineModalDocs} />,
+      page: () => <StoryDocs storyDefault={Default} data={crisisLineModalDocs} />,
     },
   },
 };

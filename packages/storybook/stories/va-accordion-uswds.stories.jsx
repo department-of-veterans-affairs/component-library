@@ -14,9 +14,9 @@ export default {
   id: 'uswds/va-accordion',
   subcomponents: componentStructure(accordionItem),
   parameters: {
-    componentSubtitle: `va-accordion web component`,
+    componentSubtitle: 'va-accordion web component',
     docs: {
-      page: () => <StoryDocs data={accordionDocs} />,
+      page: () => <StoryDocs storyDefault={Default} data={accordionDocs} />,
     },
   },
 };

@@ -40,13 +40,13 @@ export default {
   title: 'Components/Telephone',
   id: 'components/va-telephone',
   parameters: {
-    componentSubtitle: `va-telephone web component`,
+    componentSubtitle: 'va-telephone web component',
     actions: {
       handles: ['component-library-analytics'],
     },
     docs: {
       page: () => (
-        <StoryDocs data={telephoneDocs}>
+        <StoryDocs storyDefault={Default} data={telephoneDocs}>
           <Contacts />
           <br />
         </StoryDocs>
