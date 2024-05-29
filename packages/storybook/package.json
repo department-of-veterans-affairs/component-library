@@ -1,7 +1,7 @@
 {
   "name": "@department-of-veterans-affairs/storybook",
   "private": true,
-  "packageManager": "yarn@3.0.2",
+  "packageManager": "yarn@4.2.2",
   "scripts": {
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"
