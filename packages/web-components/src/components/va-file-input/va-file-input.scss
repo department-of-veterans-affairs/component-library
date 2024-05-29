@@ -21,6 +21,16 @@
   font-family: var(--font-source-sans);
 }
 
+:host(.has-error) {
+  border-left: 0.25rem solid $vads-color-secondary-dark;
+  padding-left: 1rem;
+  position: relative;
+
+  @media screen and (min-width: 1008px) {
+    margin-left: -0.9rem;
+  }
+}
+
 #error-message {
   margin-bottom: 0.188rem;
 }

@@ -349,7 +349,7 @@ export class VaFileInput {
       }
 
       return (
-        <Host>
+        <Host class={{ 'has-error': !!displayError }}>
           {label && this.renderLabelOrHeader(label, required, headerSize)}
           {hint && (
             <div class="usa-hint" id="input-hint-message">
