@@ -9,8 +9,8 @@
 @use './core-variables' as *;
 
 //============ MIXINS & OTHER FUNCTIONS ==============//
-@import './override-function';
-@import './mixins';
+@use './override-function' as *;
+@use './mixins' as *;
 
 //============ VENDOR PARTIALS ==============//
 @import 'lib/normalize';

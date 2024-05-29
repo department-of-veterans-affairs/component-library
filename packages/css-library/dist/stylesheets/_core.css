@@ -1811,6 +1811,12 @@ template {
   src: url("/assets/fonts/merriweather-bold-webfont.eot?#iefix") format("embedded-opentype"), url("/assets/fonts/merriweather-bold-webfont.woff2") format("woff2"), url("/assets/fonts/merriweather-bold-webfont.woff") format("woff"), url("/assets/fonts/merriweather-bold-webfont.ttf") format("truetype"), url("/assets/fonts/merriweather-bold-webfont.svg#Merriweather") format("svg");
 }
 /* stylelint-enable */
+/**
+  /uswds/dist/scss/lib/addons/_margin.scss
+**/
+/**
+  uswds/src/stylesheets/lib/helpers/_directional-values.scss
+**/
 /*
   Original: @import "~uswds/src/stylesheets/core/utilities";
   ***THIS IS USWDS v1***
@@ -3450,6 +3456,12 @@ through all possible variants
   src: local("Bitter Bold"), local("Bitter-Bold"), url("./fonts/bitter-bold.woff2") format("woff2"), url("./fonts/bitter-bold.ttf") format("truetype");
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215;
 }
+/**
+  /uswds/dist/scss/lib/addons/_margin.scss
+**/
+/**
+  uswds/src/stylesheets/lib/helpers/_directional-values.scss
+**/
 /*
   Original: @import "~uswds/src/stylesheets/elements/buttons";
   ***THIS IS USWDS v1***
@@ -3988,6 +4000,12 @@ html .usa-button-secondary-inverse-disabled,
   background-color: transparent;
 }
 
+/**
+  /uswds/dist/scss/lib/addons/_margin.scss
+**/
+/**
+  uswds/src/stylesheets/lib/helpers/_directional-values.scss
+**/
 /*
   Original: @import "~uswds/src/stylesheets/elements/inputs";
   ***THIS IS USWDS v1***
@@ -4366,6 +4384,12 @@ legend {
   padding-right: 0.5625rem;
 }
 
+/**
+  /uswds/dist/scss/lib/addons/_margin.scss
+**/
+/**
+  uswds/src/stylesheets/lib/helpers/_directional-values.scss
+**/
 /*
   Original: @import "~uswds/src/stylesheets/elements/labels";
   ***THIS IS USWDS v1***
@@ -5025,6 +5049,12 @@ dfn {
   margin-top: 1.5em;
 }
 
+/**
+  /uswds/dist/scss/lib/addons/_margin.scss
+**/
+/**
+  uswds/src/stylesheets/lib/helpers/_directional-values.scss
+**/
 /*
   Original: @import "~uswds/src/stylesheets/components/banner";
   ***THIS IS USWDS v1***
@@ -5303,10 +5333,6 @@ dfn {
   width: 38px;
 }
 
-/*
-  Original: @import "~uswds/src/stylesheets/components/forms";
-  ***THIS IS USWDS v1***
-*/
 /**
   Variables ported over from Formation so that we can keep those stylesheets
   working while we work on deprecation.
@@ -5460,6 +5486,12 @@ fieldset {
   overflow: hidden;
 }
 
+/**
+  /uswds/dist/scss/lib/addons/_margin.scss
+**/
+/**
+  uswds/src/stylesheets/lib/helpers/_directional-values.scss
+**/
 /*
   Original: @import "~uswds/src/stylesheets/components/side-nav";
   ***THIS IS USWDS v1***
@@ -5508,7 +5540,7 @@ fieldset {
   font-weight: 700;
   padding-left: 0.6875rem;
 }
-@media screen and (min-width: 1201px), print and (min-width: 1201px) {
+@media screen and (min-width: 1201px) {
   .usa-sidenav-list {
     border-bottom: none;
     border-top: none;
@@ -5518,7 +5550,7 @@ fieldset {
   margin-right: -0.9375rem;
   margin-left: -0.9375rem;
 }
-@media screen and (min-width: 768px), print and (min-width: 768px) {
+@media screen and (min-width: 768px) {
   .usa-grid .usa-sidenav-list {
     margin-right: 0;
     margin-left: 0;
@@ -5561,7 +5593,7 @@ fieldset {
 .usa-layout-docs-sidenav {
   padding-top: 1.5rem;
 }
-@media screen and (min-width: 1201px), print and (min-width: 1201px) {
+@media screen and (min-width: 1201px) {
   .usa-layout-docs-sidenav {
     padding-top: 0;
   }
@@ -7245,12 +7277,12 @@ table {
   padding: 0;
   min-height: 189.19px;
 }
-@media screen and (min-width: 481px), print and (min-width: 481px) {
+@media screen and (min-width: 481px) {
   .header {
     min-height: 167.19px;
   }
 }
-@media screen and (min-width: 768px), print and (min-width: 768px) {
+@media screen and (min-width: 768px) {
   .header {
     position: relative;
     min-height: 159px;
@@ -7264,7 +7296,7 @@ table {
 .header .login-container .row {
   padding: 0;
 }
-@media screen and (min-width: 640px), print and (min-width: 640px) {
+@media screen and (min-width: 640px) {
   .header .login-container {
     flex: 1 0 100%;
   }
@@ -7274,7 +7306,7 @@ table {
   flex-wrap: wrap;
   padding: 1em 0.75em 0;
 }
-@media screen and (min-width: 640px), print and (min-width: 640px) {
+@media screen and (min-width: 640px) {
   #va-header-logo-menu {
     padding-bottom: 0;
   }
@@ -7283,7 +7315,7 @@ table {
 .va-header-logo-wrapper {
   flex: 1 0 164px;
 }
-@media screen and (min-width: 640px), print and (min-width: 640px) {
+@media screen and (min-width: 640px) {
   .va-header-logo-wrapper {
     flex-basis: 3.75rem;
   }
@@ -7307,7 +7339,7 @@ table {
   padding: 0;
   font-weight: 400;
 }
-@media screen and (min-width: 768px), print and (min-width: 768px) {
+@media screen and (min-width: 768px) {
   .va-notice--banner {
     background: #f1f1f1;
   }
@@ -7319,7 +7351,7 @@ table {
     padding-right: 0;
   }
 }
-@media screen and (min-width: 1008px), print and (min-width: 1008px) {
+@media screen and (min-width: 1008px) {
   .va-notice--banner .usa-banner-inner {
     padding-left: 0;
   }

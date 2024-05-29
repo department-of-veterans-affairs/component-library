@@ -3,7 +3,10 @@
   ***THIS IS USWDS v1***
 */
 
-@import '../../override-function';
+@use '../../override-function' as *;
+@use "../../../../dist/tokens/scss/variables" as *;
+@use '../../core-variables' as *;
+@use '../../mixins' as u;
 
 // Heading mixins
 @mixin title {
@@ -45,8 +48,8 @@
 
 // Focus state mixin
 @mixin focus {
-  outline: $focus-outline;
-  outline-offset: $focus-spacing;
+  outline: u.$focus-outline;
+  outline-offset: u.$focus-spacing;
 }
 
 // Mobile-first media query helper
@@ -84,7 +87,7 @@
 
 // Unstyled list helper
 @mixin unstyled-list() {
-  @include margin(0 null);
+  @include u.margin(0 null);
   list-style-type: none;
   padding-left: 0;
 
@@ -103,7 +106,7 @@
 
 // Content size helpers
 @mixin allow-layout-classes {
-  @include margin(null auto);
+  @include u.margin(null auto);
 
   &.width-one-half {
     @include media($medium-screen) {

@@ -6,7 +6,10 @@
   ***THIS IS USWDS v1***
 */
 
-@import '../../override-function';
+@use '../../override-function' as *;
+@use '../../core-variables' as *;
+@use "../../../../dist/tokens/scss/variables" as *;
+@use '../../mixins' as s;
 
 .usa-sidenav-list {
     @include usa-sidenav-list;
@@ -19,10 +22,10 @@
     }
   
     .usa-grid & {
-      @include margin(null (-$site-margins-mobile) null (-$site-margins-mobile));
+      @include s.margin(null (-$site-margins-mobile) null (-$site-margins-mobile));
   
       @include media($medium-screen) {
-        @include margin(null 0);
+        @include s.margin(null 0);
       }
     }
   }

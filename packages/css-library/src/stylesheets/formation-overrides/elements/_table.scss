@@ -6,7 +6,8 @@
   ***THIS IS USWDS v1***
 */
 
-@import '../../override-function';
+@use '../../override-function' as *;
+@use "../../../../dist/tokens/scss/variables" as *;
 
 table {
     border-spacing: 0;

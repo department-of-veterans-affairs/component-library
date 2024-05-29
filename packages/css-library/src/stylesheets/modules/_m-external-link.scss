@@ -1,6 +1,7 @@
 @use "../core-variables" as *;
+@use "../../../dist/tokens/scss/variables" as *;
 @import "../formation-overrides/variables";
-@import "../../../dist/tokens/scss/variables.scss";
+
 
 .external-link-icon-black {
   background-image: url('#{$image-path}/exit-icon.png');

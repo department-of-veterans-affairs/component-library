@@ -6,7 +6,10 @@
   ***THIS IS USWDS v1***
 */
 
-@import '../../override-function';
+@use '../../override-function' as *;
+@use '../../core-variables' as *;
+@use "../../../../dist/tokens/scss/variables" as *;
+@use "../../mixins" as b;
 
 .usa-banner {
     background-color: $color-gray-lightest;
@@ -19,7 +22,7 @@
   }
   
   .usa-banner-content {
-    @include padding(null $site-margins-mobile 3px $site-margins-mobile);
+    @include b.padding(null $site-margins-mobile 3px $site-margins-mobile);
     background-color: transparent;
     font-size: $h5-font-size;
     padding-top: scale-rem(2rem);
@@ -31,7 +34,7 @@
     }
   
     @include media($nav-width) {
-      @include padding(null $site-margins);
+      @include b.padding(null $site-margins);
     }
   
     p {
@@ -46,31 +49,31 @@
   }
   
   .usa-banner-inner {
-    @include outer-container($site-max-width);
-    @include padding(null $site-margins-mobile);
+    @include b.outer-container($site-max-width);
+    @include b.padding(null $site-margins-mobile);
   
     @include media($nav-width) {
-      @include padding(null $site-margins);
+      @include b.padding(null $site-margins);
     }
   }
   
   .usa-banner-header {
-    @include padding(scale-rem(0.55rem) null);
+    @include b.padding(scale-rem(0.55rem) null);
     font-size: scale-rem(1.2rem);
     font-weight: $font-weight-normal;
   
     @include media($small-screen) {
-      @include padding(0 null);
+      @include b.padding(0 null);
     }
   
     p {
-      @include margin(0 null);
+      @include b.margin(0 null);
       display: inline;
       overflow: hidden;
       vertical-align: middle;
   
       @include media($small-screen) {
-        @include margin(2px null);
+        @include b.margin(2px null);
         display: inline-block;
       }
     }
@@ -134,7 +137,7 @@
   
   .usa-banner-button {
     @include button-unstyled;
-    @include padding(13px null null 48px);
+    @include b.padding(13px null null 48px);
     background-position-x: right;
     color: $color-primary;
     display: block;
@@ -147,7 +150,7 @@
     width: 100%;
   
     @include media($small-screen) {
-      @include padding(0 null null 0);
+      @include b.padding(0 null null 0);
       /* stylelint-disable declaration-block-no-ignored-properties */
       display: inline;
       height: auto;

@@ -3,7 +3,7 @@
   working while we work on deprecation.
 **/
 
-@import '../override-function';
+@use '../override-function' as *; 
 
 $label-border-radius: 2px;
 $h5-font-size: scale-rem(1.5rem);

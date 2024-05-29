@@ -6,7 +6,9 @@
   ***THIS IS USWDS v1***
 */
 
-@import '../../override-function';
+@use '../../override-function' as *;
+@use "../../../../dist/tokens/scss/variables" as *;
+@use '../../mixins' as b;
 
 // Buttons variables
 
@@ -44,7 +46,7 @@ button,
 [type=reset],
 [type=image] {
   @include font-smoothing;
-  @include margin(scale-rem(0.5em) scale-rem(0.5em) scale-rem(0.5em) null);
+  @include b.margin(scale-rem(0.5em) scale-rem(0.5em) scale-rem(0.5em) null);
   appearance: none;
   background-color: $vads-color-link;
   border: 0;

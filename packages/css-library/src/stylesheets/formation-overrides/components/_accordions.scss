@@ -6,7 +6,9 @@
   ***THIS IS USWDS v1***
 */
 
-@import '../../override-function';
+@use '../../override-function' as *;
+@use '../../core-variables' as *;
+@use "../../../../dist/tokens/scss/variables" as *;
 
 // Variables
 

@@ -6,7 +6,10 @@
   ***THIS IS USWDS v1***
 */
 
-@import '../../override-function';
+@use '../../override-function' as *;
+@use "../../../../dist/tokens/scss/variables" as *;
+@use "../../core-variables" as *;
+@use '../../mixins' as i;
 
 // scss-lint:disable QualifyingElement, PropertyCount
 
@@ -251,8 +254,8 @@ legend {
 }
 
 [type=radio]:focus + label::before {
-  outline: $focus-outline;
-  outline-offset: $focus-spacing * 2; // Double the offset to account for circular shape
+  outline: i.$focus-outline;
+  outline-offset: i.$focus-spacing * 2; // Double the offset to account for circular shape
 }
 
 [type=checkbox]:disabled + label {
@@ -260,8 +263,8 @@ legend {
 }
 
 [type=checkbox]:focus + label::before {
-  outline: $focus-outline;
-  outline-offset: $focus-spacing;
+  outline: i.$focus-outline;
+  outline-offset: i.$focus-spacing;
 }
 
 [type=checkbox]:disabled + label::before,
