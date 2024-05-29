@@ -39,11 +39,11 @@ va-button {
   .label-header {
     color: var(--vads-color-base);
     font-weight: var(--font-weight-normal);
-    font-size: 1.06rem;
   }
 
   .label-header-tag {
     margin: 0;
+    display: inline-block;
   }
 
   .file-input-wrapper {
