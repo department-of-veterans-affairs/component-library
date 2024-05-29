@@ -11,9 +11,8 @@
 @import '../../mixins/uswds-error-border.scss';
 @import '../../mixins/uswds-input-width.scss';
 @import '../../mixins/focusable.css';
-@import '~@department-of-veterans-affairs/css-library/dist/elements.css';
 
-
+@import '../../mixins/headers.css';
 
 :host(:not([uswds='false'])) {
   color: var(--vads-color-base);

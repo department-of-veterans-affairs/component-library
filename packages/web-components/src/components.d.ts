@@ -440,6 +440,10 @@ export namespace Components {
          */
         "error"?: string;
         /**
+          * Optionally specifies the size of the header element to use instead of the base label. Accepts a number from 1 to 6, corresponding to HTML header elements h1 through h6. If not provided, defaults to standard label styling.
+         */
+        "headerSize"?: number;
+        /**
           * Optional hint text.
          */
         "hint"?: string;
@@ -2480,6 +2484,10 @@ declare namespace LocalJSX {
           * The error message to render.
          */
         "error"?: string;
+        /**
+          * Optionally specifies the size of the header element to use instead of the base label. Accepts a number from 1 to 6, corresponding to HTML header elements h1 through h6. If not provided, defaults to standard label styling.
+         */
+        "headerSize"?: number;
         /**
           * Optional hint text.
          */

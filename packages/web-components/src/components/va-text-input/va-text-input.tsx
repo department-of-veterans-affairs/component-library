@@ -207,7 +207,9 @@ export class VaTextInput {
       /* eslint-disable-next-line i18next/no-literal-string */
       return 'text';
     }
-
+    if (this.max || this.min) {
+      return 'number';
+    }
     return this.type;
   }
 
@@ -241,7 +243,7 @@ export class VaTextInput {
       });
     }
 
-    if (this.inputmode === 'decimal' || this.inputmode === 'numeric') {
+    if (this.inputmode === 'decimal' || this.inputmode === 'numeric' || this.currency) {
       let defaultError = i18next.t('number-error');
       const target = e.target as HTMLInputElement;
       const valid = target.checkValidity();
@@ -254,6 +256,27 @@ export class VaTextInput {
       }
     }
   };
+
+  // get the pattern for the input. note: currency has its own pattern
+  private getPattern(): string {
+    // currency should have its own pattern
+    if (this.currency) {
+      return '^[0-9]+(\.[0-9]{2})?$';
+    }
+
+    const isNumericWithNoPattern =
+      this.pattern === undefined && (this.inputmode === 'decimal' || this.inputmode === 'numeric');
+    // if input will hold a number then set the pattern to a default
+    return isNumericWithNoPattern ? "[0-9]+(\.[0-9]{1,})?" : this.pattern;
+  }
+
+  // get the inputmode for the component. if currency is true always use 'numeric'
+  private getInputmode(): string {
+    if (this.currency) {
+      return 'numeric';
+    } 
+    return this.inputmode ? this.inputmode : undefined
+  }
 
   connectedCallback() {
     i18next.on('languageChanged', () => {
@@ -279,11 +302,9 @@ export class VaTextInput {
       error,
       reflectInputError,
       invalid,
-      inputmode,
       required,
       value,
       minlength,
-      pattern,
       name,
       autocomplete,
       hint,
@@ -304,6 +325,7 @@ export class VaTextInput {
 
     const type = this.getInputType();
     const maxlength = this.getMaxlength();
+    const inputmode = this.getInputmode();
 
     const ariaDescribedbyIds =
       `${messageAriaDescribedby ? 'input-message' : ''} ${
@@ -315,10 +337,7 @@ export class VaTextInput {
       useFormsPattern ? 'form-description' : ''} ${
         useFormsPattern && label ? 'input-label' : ''}`.trim() || null;
 
-    const isNumericWithNoPattern =
-      pattern === undefined && (inputmode === 'decimal' || inputmode === 'numeric');
-    // if input will hold a number then set the pattern to a default
-    const _pattern = isNumericWithNoPattern ? "[0-9]+(\.[0-9]{1,})?" : pattern;
+    const pattern = this.getPattern();
 
     const currencyWrapper = classnames({
       'currency-wrapper': currency
@@ -404,9 +423,9 @@ export class VaTextInput {
                 aria-invalid={
                   invalid || error || charCountTooHigh ? 'true' : 'false'
                 }
-                inputmode={inputmode ? inputmode : undefined}
+                inputmode={inputmode}
                 maxlength={maxlength}
-                pattern={_pattern}
+                pattern={pattern}
                 name={name}
                 autocomplete={autocomplete}
                 required={required || null}
@@ -466,10 +485,10 @@ export class VaTextInput {
               onBlur={handleBlur}
               aria-describedby={ariaDescribedbyIds}
               aria-invalid={invalid || error ? 'true' : 'false'}
-              inputmode={inputmode ? inputmode : undefined}
+              inputmode={inputmode}
               maxlength={maxlength}
               minlength={minlength}
-              pattern={_pattern}
+              pattern={pattern}
               name={name}
               autocomplete={autocomplete}
               required={required || null}
