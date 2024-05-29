@@ -129,7 +129,8 @@ const CustomValidationTemplate = ({ label, name, accept, required, error, hint }
   const [errorVal, setErrorVal] = useState(error);
 
   function validateFileContents(event) {
-    if (event.detail.files) {
+    setErrorVal(null);
+    if (event.detail.files && event.detail.files.length) {
       const file = event.detail.files[0];
 
       const reader = new FileReader();
@@ -139,8 +140,6 @@ const CustomValidationTemplate = ({ label, name, accept, required, error, hint }
 
         if (hasX)
           setErrorVal('File contains an \'X\' character');
-        else
-          setErrorVal('')
       };
 
       reader.readAsText(file);
@@ -170,7 +169,8 @@ const CustomValidationTemplate = ({ label, name, accept, required, error, hint }
 {`const [errorVal, setErrorVal] = useState(error);
 
 function validateFileContents(event) {
-  if (event.detail.files) {
+  setErrorVal(null);
+  if (event.detail.files && event.detail.files.length) {
     const file = event.detail.files[0];
 
     const reader = new FileReader();
@@ -180,8 +180,6 @@ function validateFileContents(event) {
 
       if (hasX)
         setErrorVal('File contains an \\'X\\' character');
-      else
-        setErrorVal('')
     };
 
     reader.readAsText(file);
@@ -191,6 +189,7 @@ function validateFileContents(event) {
 return (
   <VaFileInput
     ...
+    error={errorVal}
     onVaChange={validateFileContents}
   />
 )`}

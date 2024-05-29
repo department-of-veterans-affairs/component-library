@@ -34,6 +34,7 @@ export class VaFileInput {
   @Element() el: HTMLElement;
   @State() file?: File;
   @State() fileContents?: string;
+  @State() internalError?: string;
 
   /**
    * The label for the file input.
@@ -125,8 +126,8 @@ export class VaFileInput {
     if (this.accept) {
       const normalizedAcceptTypes = this.normalizeAcceptProp(this.accept);
       if (!this.isAcceptedFileType(file.type, normalizedAcceptTypes)) {
-        this.error = 'This is not a valid file type.';
         this.removeFile();
+        this.internalError = 'This is not a valid file type.';
         return;
       }
     }
@@ -134,7 +135,7 @@ export class VaFileInput {
     this.file = file;
     this.vaChange.emit({ files: [this.file] });
     this.uploadStatus = 'success';
-    this.error = '';
+    this.internalError = null;
     this.generateFileContents(this.file);
 
     if (this.enableAnalytics) {
@@ -154,7 +155,9 @@ export class VaFileInput {
 
   private removeFile = () => {
     this.file = null;
+    this.vaChange.emit({ files: [this.file] });
     this.uploadStatus = 'idle';
+    this.internalError = null;
   };
 
   private changeFile = () => {
@@ -303,12 +306,13 @@ export class VaFileInput {
     const text = this.getButtonText();
 
     if (uswds) {
+      const displayError = this.error || this.internalError;
       const ariaDescribedbyIds =
         `${hint ? 'input-hint-message' : ''} ${
-          error ? 'input-error-message' : ''
+          displayError ? 'input-error-message' : ''
         }`.trim() || null; // Null so we don't add the attribute if we have an empty string
       const fileInputTargetClasses = `file-input-target ${
-        this.error ? 'file-input-target-error' : ''
+        displayError ? 'file-input-target-error' : ''
       }`.trim();
 
       let fileThumbnail = (
@@ -353,10 +357,10 @@ export class VaFileInput {
             </div>
           )}
           <span id="input-error-message" role="alert">
-            {error && (
+            {displayError && (
               <Fragment>
                 <span class="usa-sr-only">{i18next.t('error')}</span>
-                <span class="usa-error-message">{error}</span>
+                <span class="usa-error-message">{displayError}</span>
               </Fragment>
             )}
           </span>
