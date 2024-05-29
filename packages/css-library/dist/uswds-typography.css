@@ -4177,15 +4177,16 @@ Sets:
 /**
   Normalization for Source Sans Pro typeface.
 
-  Typefaces vary in optical size. This means that at any specific pixel 
-  value, an optically small typeface like Source Sans Pro will appear  
-  smaller than an optically large typeface like Merriweather.
+  Typefaces vary in optical size. This means that at any 
+  specific pixel  value, an optically small typeface like  
+  Source Sans Pro will appear smaller than an optically 
+  large typeface like Merriweather.
 
-  The `typeset()` mixin will calculate the appropriate font-size for 
-  a given typeface. The `ui` value will use the default value for 
-  $theme-body-font-family (Source Sans Pro).
+  The `typeset()` mixin will calculate the appropriate 
+  font-size for  a given typeface. The `ui` value will 
+  use the default value for $theme-body-font-family.
 
-  font-family: 'Source Sans Pro Web, Helvetica Neue, Helvetica, Roboto, Arial, sans-serif'
+  font-family: Source Sans Pro Web, Helvetica Neue, Helvetica, Roboto, Arial, sans-serif;
   font-size: 1.06rem;
   line-height: 1.5;
 
@@ -4198,7 +4199,7 @@ Sets:
 }
 
 /**
-  Default USWDS paragraph styles.
+  USWDS paragraph style
 
   p {
     line-height: 1.5;
