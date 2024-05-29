@@ -347,5 +347,8 @@ article > h1 {
 
   p {
     line-height: $lead-line-height;
+    font-size: $lead-font-size;
+    font-weight: $font-weight-normal;
+    line-height: $lead-line-height;
   }
 }

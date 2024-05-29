@@ -21,10 +21,8 @@
 
   https://designsystem.digital.gov/design-tokens/typesetting/overview/
 */
-#content {
-  p, div {
-    @include typeset('ui');
-  }
+p, ol, ul, li {
+  @include typeset('ui');
 }
 
 /**
