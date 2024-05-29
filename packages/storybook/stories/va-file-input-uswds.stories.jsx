@@ -24,7 +24,6 @@ const defaultArgs = {
   'error': '',
   'enable-analytics': false,
   'hint': 'You can upload a .pdf, .gif, .jpg, .bmp, or .txt file.',
-  'multiple': false,
   'vaChange': event =>
     alert(`File change event received: ${event?.detail?.files[0]?.name}`),
   'uswds': true,
@@ -84,15 +83,6 @@ AcceptsAnyKindOfImage.args = {
   hint: 'Select any type of image format',
   accept: 'image/*',
 };
-
-// Temporarily not supporting this option
-// export const AcceptsMultipleFiles = Template.bind(null);
-// AcceptsMultipleFiles.args = {
-//   ...defaultArgs,
-//   label: 'Input accepts multiple files',
-//   hint: 'Select one or more files',
-//   multiple: true,
-// };
 
 export const ErrorMessage = Template.bind(null);
 ErrorMessage.args = {
