@@ -6,9 +6,9 @@
   ***THIS IS USWDS v1***
 */
 @use "../../core-variables" as *;
+@use "../../../../dist/tokens/scss/variables.scss" as *;
 @import '../../override-function';
 @import "../variables";
-@import "../../../../dist/tokens/scss/variables.scss";
 @import "../../mixins";
 
 $usa-form-width: scale-rem(32rem);
