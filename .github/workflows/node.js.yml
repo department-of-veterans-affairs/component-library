@@ -24,4 +24,4 @@ jobs:
         working-directory: packages/react-components
       - run: yarn workspace @department-of-veterans-affairs/react-components run build
       - run: yarn workspace @department-of-veterans-affairs/web-components run build
-      - run: yarn workspaces foreach -v run test
+      - run: yarn workspaces foreach --all -v run test
