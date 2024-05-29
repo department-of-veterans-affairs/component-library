@@ -1,3 +1,5 @@
+@import '~@department-of-veterans-affairs/css-library/dist/base/headings.css';
+
 :host legend :is(h1, h2, h3, h4, h5, h6),
 :host label :is(h1, h2, h3, h4, h5, h6) {
   display: inline;

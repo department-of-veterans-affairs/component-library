@@ -1,6 +1,7 @@
 {
   "name": "@department-of-veterans-affairs/css-library",
-  "version": "0.7.0",
+  "version": "0.7.2",
+  "description": "Department of Veterans Affairs stylesheets, tokens, and utilities",
   "packageManager": "yarn@3.2.0",
   "files": [
     "dist/**/*.css",
@@ -9,7 +10,7 @@
   ],
   "scripts": {
     "build:tokens": "style-dictionary build",
-    "build:stylesheets": "sass --load-path=../../node_modules/@uswds/uswds/packages/ src/stylesheets:dist/",
+    "build:stylesheets": "sass --load-path=./node_modules/@uswds/uswds/packages/ src/stylesheets:dist/",
     "build:minify": "yarn build:stylesheets --style compressed --no-source-map",
     "build:minify-core": "sass --style compressed --no-source-map dist/core.css:dist/core.min.css",
     "build": "yarn run clean-dist && yarn run copy && yarn build:tokens && yarn build:stylesheets",

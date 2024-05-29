@@ -17,17 +17,19 @@ export default {
 };
 
 const defaultArgs = {
-  'label': 'Input accepts a single file',
+  'label': 'Select a file to upload',
   'name': 'my-file-input',
   'accept': null,
   'required': false,
   'error': '',
   'enable-analytics': false,
-  'hint': null,
+  'hint': 'You can upload a .pdf, .gif, .jpg, .bmp, or .txt file.',
   'multiple': false,
   'vaChange': event =>
     alert(`File change event received: ${event?.detail?.files[0]?.name}`),
-  'uswds': true
+  'uswds': true,
+  'headerSize': null,
+  'children': null
 };
 
 const Template = ({
@@ -39,7 +41,9 @@ const Template = ({
   hint,
   'enable-analytics': enableAnalytics,
   vaChange,
-  uswds
+  uswds,
+  headerSize,
+  children
 }) => {
   return (
     <VaFileInput
@@ -52,6 +56,8 @@ const Template = ({
       enable-analytics={enableAnalytics}
       onVaChange={vaChange}
       uswds={uswds}
+      headerSize={headerSize}
+      children={children}
     />
   );
 };
@@ -95,6 +101,29 @@ ErrorMessage.args = {
   hint: 'Select any valid file',
   error: 'Display a helpful error message',
 };
+
+export const HeaderLabel = Template.bind(null);
+HeaderLabel.args = {
+  ...defaultArgs,
+  label: 'Label Header',
+  headerSize: 3,
+  required: true
+}
+
+const additionalInfoSlotContent = (
+  <div>
+    <va-select className="hydrated" uswds label='What kind of file is this?' required>
+      <option key="1" value="1">Public Document</option>
+      <option key="2" value="2">Private Document</option>
+    </va-select>
+  </div>);
+
+export const AdditionalInfo = Template.bind(null);
+AdditionalInfo.args = {
+  ...defaultArgs,
+  label: 'Label Header',
+  children: additionalInfoSlotContent
+}
 
 export const WithAnalytics = Template.bind(null);
 WithAnalytics.args = { ...defaultArgs, 'enable-analytics': true };
