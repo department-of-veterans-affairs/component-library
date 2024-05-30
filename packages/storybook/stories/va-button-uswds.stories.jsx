@@ -123,6 +123,7 @@ const Template2 = ({
 }) => {
   return (
     <form onSubmit={onsub}>
+      <p>This is inside a from, with has an onsubmit attribute taht will display an alert when the form is submitted</p>
     <va-button
       back={back}
       big={big}
@@ -138,7 +139,7 @@ const Template2 = ({
       message-aria-describedby={messageAriaDescribedby}
     />
     <input type="hidden" name="fake" value="1"/>
-    <button type='submit'>x</button>
+    <button type='submit'>Native HTML button, for comparison</button>
     </form>
   );
 }
