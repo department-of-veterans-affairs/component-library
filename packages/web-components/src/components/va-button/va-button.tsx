@@ -95,13 +95,6 @@ export class VaButton {
   })
   componentLibraryAnalytics: EventEmitter;
 
-  @Event({
-    bubbles: true,
-    composed: true,
-    eventName: 'click',
-  })
-  submitEvent: EventEmitter;
-
   componentDidLoad() {
     // check if the element has a class named uswds-false added from parent
     if (this.el.classList.contains('uswds-false')) {
@@ -110,7 +103,7 @@ export class VaButton {
     }
   }
 
-  private handleClick = (e): void => {
+  private handleClick = (): void => {
     if (!this.disableAnalytics) {
       const detail = {
         componentName: 'va-button',
@@ -121,9 +114,6 @@ export class VaButton {
         },
       };
       this.componentLibraryAnalytics.emit(detail);
-      if (this.submit) {
-        this.submitEvent.emit(e);
-      }
     }
   };
 
@@ -147,7 +137,36 @@ export class VaButton {
       e.stopPropagation();
       return;
     }
-    this.handleClick(e);
+    /**
+     * if the button has a submit attribute:
+     * creates a faux, invisible button, looks for the closest anceston FORM tag of button
+     * if found it appends the faux button to the DOM, then clicks and removes it.
+     * this serves to submit the form as well as running the onsubmit script for the form
+     * ALTERNATIVELY (commented out)
+     * we could the closest anceston FORM tag of button and run the form's submit method.
+     * with the caviat that this will submit the form , but not theactual onsumbit script.
+     * This is an intentional feature of HTML.
+     */
+    if (this.submit) {
+      this.handleClick();
+      // this.el.closest('form')?.submit();
+      const fakeButton = document.createElement('button');
+      fakeButton.innerHTML = 'auto submit';
+      fakeButton.type = 'submit';
+      fakeButton.setAttribute('style', 'display:none;');
+      if (this.el.closest('form')?.appendChild(fakeButton)) {
+        fakeButton.click();
+        fakeButton.remove();
+      }
+    }
+    /** 
+    if (this.submit) {
+      // @ts-ignore
+      const theForm = e.composedPath().filter(n => n.nodeName === 'FORM')[0];
+      // @ts-ignore
+      theForm.submit();
+    }
+   */
   }
 
   render() {

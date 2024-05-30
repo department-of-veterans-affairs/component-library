@@ -106,3 +106,50 @@ Disabled.args = {
   disabled: true,
   text: "Disabled",
 };
+
+const Template2 = ({
+  back,
+  big,
+  'continue': _continue,
+  'disable-analytics': disableAnalytics,
+  disabled,
+  label,
+  secondary,
+  primaryAlternate,
+  submit,
+  text,
+  'message-aria-describedby': messageAriaDescribedby,
+  onsub,
+}) => {
+  return (
+    <form onSubmit={onsub}>
+    <va-button
+      back={back}
+      big={big}
+      continue={_continue}
+      disable-analytics={disableAnalytics}
+      disabled={disabled}
+      label={label}
+      secondary={secondary}
+      primary-alternate={primaryAlternate}
+      submit={submit}
+      text={text}
+      onClick={e => console.log(e.target.closest('form'))}
+      message-aria-describedby={messageAriaDescribedby}
+    />
+    <input type="hidden" name="fake" value="1"/>
+    <button type='submit'>x</button>
+    </form>
+  );
+}
+
+export const Submitted = Template2.bind(null);
+Submitted.args = {
+  ...defaultArgs,
+  onsub : (e)=>{ 
+    // e.preventDefault();
+    console.log(e.target, "I am submitted!!");
+    alert ("I am submitted!!")},
+  submit: true,
+  text: "Submit me",
+};
