@@ -7,7 +7,7 @@ The uswds-fonts package loads @font-face for:
 @use "uswds-fonts";
 
 // Path to font files in the css-library dist folder
-$css-library-font-path: "./fonts"; 
+$css-library-font-path: "~@department-of-veterans-affairs/css-library/dist/fonts"; 
 
 /* latin */
 @font-face {

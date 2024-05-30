@@ -1,13 +1,13 @@
 {
   "name": "@department-of-veterans-affairs/css-library",
-  "version": "0.7.3-rc1",
+  "version": "0.7.3-rc11",
   "description": "Department of Veterans Affairs stylesheets, tokens, and utilities",
   "packageManager": "yarn@3.2.0",
   "files": [
     "dist/**/*.css",
     "dist/**/*.scss",
     "dist/**/*.json",
-    "src/stylesheets/**/*.scss"
+    "dist/fonts/*"
   ],
   "scripts": {
     "build:tokens": "style-dictionary build",
@@ -21,12 +21,12 @@
     "copy": "node ./copy-uswds-color-tokens.js && yarn run copy-assets"
   },
   "devDependencies": {
-    "@uswds/uswds": "^3.7.1",
     "sass": "^1.64.1",
     "style-dictionary": "3.8.0"
   },
   "dependencies": {
     "@divriots/style-dictionary-to-figma": "^0.4.0",
+    "@uswds/uswds": "^3.7.1",
     "minimatch": "9.0.4",
     "rimraf": "^5.0.5"
   }
