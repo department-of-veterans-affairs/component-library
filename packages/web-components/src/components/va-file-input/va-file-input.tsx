@@ -140,12 +140,12 @@ export class VaFileInput {
 
     if (this.enableAnalytics) {
       this.componentLibraryAnalytics.emit({
-                                            componentName: 'va-file-input',
-                                            action: 'change',
-                                            details: {
-                                              label: this.label,
-                                            },
-                                          });
+        componentName: 'va-file-input',
+        action: 'change',
+        details: {
+          label: this.label,
+        },
+      });
     }
   }
 
@@ -199,10 +199,7 @@ export class VaFileInput {
   private normalizeAcceptProp = (accept: string): string[] => {
     return accept.split(',').map(item => {
       item = item.trim();
-      if (item.startsWith('.')) {
-        return extensionToMimeType[item] || item;
-      }
-      return item;
+      return item.startsWith('.') ? extensionToMimeType[item] : item;
     });
   }
 
