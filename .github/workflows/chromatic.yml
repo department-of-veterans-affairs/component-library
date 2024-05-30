@@ -20,6 +20,8 @@ jobs:
           node-version: 18.x
           cache: 'yarn'
       - run: yarn install
+      - name: Check Yarn version
+        run: yarn -v
       - name: Install dependencies in react-components
         run: yarn install
         working-directory: packages/react-components
