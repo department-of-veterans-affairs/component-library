@@ -44,7 +44,7 @@ export const config: Config = {
       esmLoaderPath: '../loader',
       copy: [
         { src: 'assets', dest: path.join(__dirname, 'dist/assets')},
-        { src: 'assets/sprite.svg', dest: path.join(__dirname, 'dist/img/sprite.svg')}
+        { src: 'img/sprite.svg', dest: path.join(__dirname, 'dist/img/sprite.svg')}
       ]
     },
     {
