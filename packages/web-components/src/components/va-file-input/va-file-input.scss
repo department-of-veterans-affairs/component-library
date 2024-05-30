@@ -135,6 +135,10 @@ va-button {
     font-size: 1.06rem;
     padding: 0 8px;
     display: block;
+    width: 100%;
+    word-wrap: break-word;
+    word-break: break-word;
+    overflow: hidden;
   }
 
   .file-size-label {
