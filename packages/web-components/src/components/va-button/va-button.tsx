@@ -137,6 +137,7 @@ export class VaButton {
       e.stopPropagation();
       return;
     }
+    this.handleClick();
     /**
      * if the button has a submit attribute:
      * creates a faux, invisible button, looks for the closest anceston FORM tag of button
@@ -148,7 +149,6 @@ export class VaButton {
      * This is an intentional feature of HTML.
      */
     if (this.submit) {
-      this.handleClick();
       // this.el.closest('form')?.submit();
       const fakeButton = document.createElement('button');
       fakeButton.innerHTML = 'auto submit';
