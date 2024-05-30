@@ -1,10 +1,6 @@
 @use "../../dist/tokens/scss/variables" as *;
 
-@use 'uswds-core' with (
-  $theme-show-notifications: false,
-  // TODO: verify USWDS font path
-  $theme-font-path: '../node_modules/@uswds/uswds/dist/fonts',
-);
+@forward 'uswds-theme';
 
 $font-path: "./fonts";  // TODO: Verify asset path
 $image-path: "./img"; // TODO: Verify asset path

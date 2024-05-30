@@ -1,0 +1,38 @@
+@forward 'uswds-theme';
+
+@import 'uswds-core/src/styles/mixins/typography/usa-content-styles';
+@import 'uswds-core/src/styles/mixins/typography/typeset';
+
+/**
+  Normalization for Source Sans Pro typeface.
+
+  Typefaces vary in optical size. This means that at any 
+  specific pixel  value, an optically small typeface like  
+  Source Sans Pro will appear smaller than an optically 
+  large typeface like Merriweather.
+
+  The `typeset()` mixin will calculate the appropriate 
+  font-size for  a given typeface. The `ui` value will 
+  use the default value for $theme-body-font-family.
+
+  font-family: Source Sans Pro Web, Helvetica Neue, Helvetica, Roboto, Arial, sans-serif;
+  font-size: 1.06rem;
+  line-height: 1.5;
+
+  https://designsystem.digital.gov/design-tokens/typesetting/overview/
+*/
+p, ol, ul, li {
+  @include typeset('ui');
+}
+
+/**
+  USWDS paragraph style
+
+  p {
+    line-height: 1.5;
+    max-width: 68ex;
+    margin-bottom: 0;
+    margin-top: 0;
+  }
+*/
+@include usa-paragraph-style;
