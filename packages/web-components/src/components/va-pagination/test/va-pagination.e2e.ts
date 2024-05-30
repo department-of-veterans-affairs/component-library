@@ -273,7 +273,7 @@ describe('uswds - va-pagination', () => {
                   <span class="usa-pagination__link-text">next</span>
                   <div id="next-arrow-icon">
                     <svg class="usa-icon" aria-hidden="true" role="img">
-                      <use href="/assets/sprite.svg#navigate_next"></use>
+                      <use href="/img/sprite.svg#navigate_next"></use>
                     </svg>
                   </div>
                 </a>
@@ -342,10 +342,14 @@ describe('uswds - va-pagination', () => {
   });
 
   it('uswds v3 renders an does not render an extra pagination item when the max-page-list-length is 6', async () => {
-    // a check to make sure the above edge case doesn't 
+    // a check to make sure the above edge case doesn't
     const page = await newE2EPage();
-    await page.setContent(`<va-pagination page="3" pages="24" max-page-list-length="6"/>`);
-    const paginationItems = await page.findAll('va-pagination >>> li.usa-pagination__item');
+    await page.setContent(
+      `<va-pagination page="3" pages="24" max-page-list-length="6"/>`,
+    );
+    const paginationItems = await page.findAll(
+      'va-pagination >>> li.usa-pagination__item',
+    );
     // should be 8, 6 as set by the max-page-list-length, and 2 prev/next buttons
     expect(paginationItems).toHaveLength(8);
   });
