@@ -123,7 +123,7 @@ const Template2 = ({
 }) => {
   return (
     <form onSubmit={onsub}>
-      <p>This is inside a form, which has an onsubmit() that will displays an alert when the form is submitted</p>
+      <p>This is inside a form, which has an onsubmit() that displays an alert when the form is submitted</p>
       <va-button
         back={back}
         big={big}

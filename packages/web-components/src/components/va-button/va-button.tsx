@@ -139,7 +139,7 @@ export class VaButton {
     }
     this.handleClick();
     /**
-     * if the button has a submit attribute:
+     * If the button has a 'submit' attribute:
      * creates a faux, invisible button, looks for the closest anceston FORM tag of button
      * if found it appends the faux button to the DOM, then clicks and removes it.
      * this serves to submit the form as well as running the onsubmit script for the form
