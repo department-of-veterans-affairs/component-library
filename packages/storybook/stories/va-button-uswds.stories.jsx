@@ -123,21 +123,21 @@ const Template2 = ({
 }) => {
   return (
     <form onSubmit={onsub}>
-      <p>This is inside a from, with has an onsubmit attribute taht will display an alert when the form is submitted</p>
-    <va-button
-      back={back}
-      big={big}
-      continue={_continue}
-      disable-analytics={disableAnalytics}
-      disabled={disabled}
-      label={label}
-      secondary={secondary}
-      primary-alternate={primaryAlternate}
-      submit={submit}
-      text={text}
-      onClick={e => console.log(e.target.closest('form'))}
-      message-aria-describedby={messageAriaDescribedby}
-    />
+      <p>This is inside a form, which has an onsubmit() that will displays an alert when the form is submitted</p>
+      <va-button
+        back={back}
+        big={big}
+        continue={_continue}
+        disable-analytics={disableAnalytics}
+        disabled={disabled}
+        label={label}
+        secondary={secondary}
+        primary-alternate={primaryAlternate}
+        submit={submit}
+        text={text}
+        onClick={e => console.log(e.target.closest('form'))}
+        message-aria-describedby={messageAriaDescribedby}
+      />
     </form>
   );
 }
