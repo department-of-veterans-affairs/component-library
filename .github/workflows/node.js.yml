@@ -33,7 +33,7 @@ jobs:
 
       - name: Test react-components
         run: yarn test
-        working-directory: packages/web-components
+        working-directory: packages/react-components
 
       - name: Install dependencies in design-system-dashboard-cli
         run: yarn install
@@ -47,6 +47,6 @@ jobs:
         run: yarn install
         working-directory: packages/web-components
      
-      - name: test web-components
+      - name: Test web-components
         run: yarn test
         working-directory: packages/web-components
