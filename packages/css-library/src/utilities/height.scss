@@ -4,7 +4,7 @@
 
 $u-height-base: (
   height: (
-    base: 'vads-height',
+    base: 'vads-u-height-',
     modifiers: null,
     values: map-collect($tokens-height),
     settings: $height-settings,
@@ -15,7 +15,7 @@ $u-height-base: (
 
 $u-min-height: (
   min-height: (
-    base: 'vads-min-height',
+    base: 'vads-u-min-height-',
     modifiers: null,
     values: map-collect($tokens-min-height),
     settings: $height-settings,
@@ -26,7 +26,7 @@ $u-min-height: (
 
 $u-max-height: (
   max-height: (
-    base: 'vads-max-height',
+    base: 'vads-u-max-height-',
     modifiers: null,
     values: map-collect($tokens-max-height),
     settings: $height-settings,

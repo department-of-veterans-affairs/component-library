@@ -4,7 +4,7 @@
 
 $u-font-family: (
   font-family: (
-    base: 'vads-font',
+    base: 'vads-u-font-',
     modifiers: null,
     values: map-collect($tokens-font-family),
     settings: $font-settings,
@@ -15,7 +15,7 @@ $u-font-family: (
 
 $u-font-size: (
   font-size: (
-    base: 'vads-font',
+    base: 'vads-u-font-size-',
     modifiers: null,
     values: map-collect($tokens-font-size),
     settings: $font-size-settings,
@@ -26,7 +26,7 @@ $u-font-size: (
 
 $u-font-style: (
   font-style: (
-    base: 'vads-font-style',
+    base: 'vads-u-font-style-',
     modifiers: null,
     values: map-collect($tokens-font-style),
     settings: $font-settings,
@@ -37,7 +37,7 @@ $u-font-style: (
 
 $u-font-weight: (
   font-weight: (
-    base: 'vads-font-weight',
+    base: 'vads-u-font-weight-',
     modifiers: null,
     values: map-collect($tokens-font-weight),
     settings: $font-settings,
