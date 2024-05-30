@@ -138,8 +138,6 @@ const Template2 = ({
       onClick={e => console.log(e.target.closest('form'))}
       message-aria-describedby={messageAriaDescribedby}
     />
-    <input type="hidden" name="fake" value="1"/>
-    <button type='submit'>Native HTML button, for comparison</button>
     </form>
   );
 }
