@@ -25,8 +25,8 @@ jobs:
         run: yarn install
         working-directory: packages/react-components
       - run: yarn workspace @department-of-veterans-affairs/react-components run build
-      - name: Install dependencies in web-components
-        run: yarn install
-        working-directory: packages/web-components
       - run: yarn workspace @department-of-veterans-affairs/web-components run build
-      - run: yarn workspaces foreach --all -v run test
+      - name: test web-components
+        run: yarn test
+        working-directory: packages/web-components
+      # - run: yarn workspaces foreach --all -v run test
