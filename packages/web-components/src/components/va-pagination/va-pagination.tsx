@@ -245,7 +245,7 @@ export class VaPagination {
    */
   addIcons() {
     function makeSvgString(icon: string) {
-      const path = `${getAssetPath('/assets/sprite.svg')}#${icon}`;
+      const path = `${getAssetPath('/img/sprite.svg')}#${icon}`;
       // eslint-disable-next-line i18next/no-literal-string
       return `<svg
       class="usa-icon"

@@ -235,7 +235,7 @@ function iterateValues(colorName, value, tokenColorsToKeep) {
 const uswdsTokens = Object.entries(tokensToKeep)
   .flatMap(([_, tokenProps]) => {
     // Using 'require' allows us to read and parse JSON files in one command
-    const tokens = require(`../../node_modules/@uswds/uswds/packages/uswds-tokens/colors/${tokenProps.file}`);
+    const tokens = require(`./node_modules/@uswds/uswds/packages/uswds-tokens/colors/${tokenProps.file}`);
     const keptTokens = tokens.props
       // First, find all of the keepers
       .reduce((accumulator, prop) => {

@@ -1,7 +1,5 @@
 @import '../override-function';
 
-@import 'uswds-core/src/styles/mixins/typography/usa-content-styles';
-
 $lead-max-width: scale-rem(77rem);
 
 html,
@@ -107,59 +105,7 @@ a {
 }
 
 // ====== Headings
-
-// H1 should only be used once at the top-level, so we can safely remove the margin-top.
-h1 {
-  margin-top: 0;
-}
-
-@include usa-headings-styles;
-
-h1, h2, h3, h4, h5 {
-  font-family: $font-family-serif;
-  font-weight: 700;
-}
-
-h6 {
-  font-family: $font-family-sans;
-  font-weight: 700;
-}
-
-h1 {
-  margin-top: 0;
-  font-size: 2.5rem;
-}
-h2 {
-  font-size: 1.875rem;
-}
-h3 {
-  font-size: 1.25rem;
-}
-h4 {
-  font-size: 1.0625rem;
-}
-h5 {
-  font-size: .9375rem;
-}
-h6 {
-  font-size: .9375rem;
-}
-
-@media (max-width: $small-screen)  {
-  h1 {
-    font-size: 30px;
-  }
-
-  h2 {
-    font-size: 24px;
-  }
-}
-
-h6 {
-  margin: 0.5em 0 0;
-  text-transform: none;
-  font-weight: 700;
-}
+@import 'headings';
 
 //======= Lists
 ul {
@@ -354,6 +300,7 @@ table {
 
 .va-notice--banner {
   p {
+    font-size: 16px;
     margin: 0;
   }
   a {
@@ -400,6 +347,8 @@ article > h1 {
   max-width: $lead-max-width;
 
   p {
+    font-size: $lead-font-size;
+    font-weight: $font-weight-normal;
     line-height: $lead-line-height;
   }
 }

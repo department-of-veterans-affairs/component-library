@@ -13,8 +13,7 @@
 @import '../../mixins/uswds-error-border.scss';
 @import '../../mixins/focusable.css';
 @import '../../mixins/form-field-error.css';
-
-@import '~@department-of-veterans-affairs/css-library/dist/elements.css';
+@import '../../mixins/headers.css';
 
 :host {
   display: block;
