@@ -19,12 +19,9 @@ jobs:
           node-version: 18.x
           cache: 'yarn'
       - run: yarn install
-       - name: Install dependencies in react-components
+      - name: Install dependencies in react-components
         run: yarn install
         working-directory: packages/react-components
-      - name: Install dependencies in web-components
-        run: yarn install
-        working-directory: packages/web-components
       - run: yarn workspace @department-of-veterans-affairs/react-components run build
       - run: yarn workspace @department-of-veterans-affairs/web-components run build
       - run: yarn workspaces foreach --all -v run test
