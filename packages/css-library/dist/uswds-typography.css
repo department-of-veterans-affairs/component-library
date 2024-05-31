@@ -4192,7 +4192,7 @@ Sets:
 
   https://designsystem.digital.gov/design-tokens/typesetting/overview/
 */
-p, ol, ul, li, dl, dt {
+p, ol, ul, li, dl, dt, form {
   font-family: Source Sans Pro Web, "Source Sans Pro", "Helvetica Neue", Helvetica, Arial, sans;
   font-size: 1.06rem;
   line-height: 1.5;
