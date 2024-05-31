@@ -4,7 +4,7 @@
 
 $u-flex: (
   flex: (
-    base: 'vads-flex',
+    base: 'vads-u-flex-',
     modifiers: null,
     values: map-collect($tokens-flex),
     settings: $flex-settings,
@@ -15,7 +15,7 @@ $u-flex: (
 
 $u-flex-direction: (
   flex-direction: (
-    base: 'vads-flex-direction',
+    base: 'vads-u-flex-direction-',
     modifiers: null,
     values: map-collect($tokens-flex-direction),
     settings: $flex-settings,
@@ -26,7 +26,7 @@ $u-flex-direction: (
 
 $u-flex-wrap: (
   flex-wrap: (
-    base: 'vads-flex-wrap',
+    base: 'vads-u-flex-wrap-',
     modifiers: null,
     values: map-collect($tokens-flex-wrap),
     settings: $flex-settings,
@@ -37,7 +37,7 @@ $u-flex-wrap: (
 
 $u-align-items: (
   align-items: (
-    base: 'vads-align-items',
+    base: 'vads-u-align-items-',
     modifiers: null,
     values: map-collect($tokens-align-items),
     settings: $flex-settings,
@@ -48,7 +48,7 @@ $u-align-items: (
 
 $u-justify-content: (
   justify-content: (
-    base: 'vads-justify-content',
+    base: 'vads-u-justify-content-',
     modifiers: null,
     values: map-collect($tokens-justify-content),
     settings: $flex-settings,
@@ -59,7 +59,7 @@ $u-justify-content: (
 
 $u-align-content: (
   align-content: (
-    base: 'vads-align-content',
+    base: 'vads-u-align-content-',
     modifiers: null,
     values: map-collect($tokens-align-content),
     settings: $flex-settings,
@@ -70,7 +70,7 @@ $u-align-content: (
 
 $u-align-self: (
   align-self: (
-    base: 'vads-align-self',
+    base: 'vads-u-align-self-',
     modifiers: null,
     values: map-collect($tokens-align-self),
     settings: $flex-settings,
@@ -81,7 +81,7 @@ $u-align-self: (
 
 $u-order: (
   order: (
-    base: 'vads-order',
+    base: 'vads-u-order-',
     modifiers: null,
     values: map-collect($tokens-order),
     settings: $flex-settings,

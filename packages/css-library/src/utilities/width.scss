@@ -4,7 +4,7 @@
 
 $u-width-base: (
   width: (
-    base: 'vads-width',
+    base: 'vads-u-width-',
     modifiers: null,
     values: map-collect($tokens-width),
     settings: $width-settings,
@@ -15,7 +15,7 @@ $u-width-base: (
 
 $u-min-width: (
   min-width: (
-    base: 'vads-min-width',
+    base: 'vads-u-min-width-',
     modifiers: null,
     values: map-collect($tokens-min-width),
     settings: $width-settings,
@@ -26,7 +26,7 @@ $u-min-width: (
 
 $u-max-width: (
   max-width: (
-    base: 'vads-max-width',
+    base: 'vads-u-max-width-',
     modifiers: null,
     values: map-collect($tokens-max-width),
     settings: $width-settings,
