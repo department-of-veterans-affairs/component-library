@@ -300,6 +300,7 @@ table {
 
 .va-notice--banner {
   p {
+    font-size: 16px;
     margin: 0;
   }
   a {
@@ -346,6 +347,8 @@ article > h1 {
   max-width: $lead-max-width;
 
   p {
+    font-size: $lead-font-size;
+    font-weight: $font-weight-normal;
     line-height: $lead-line-height;
   }
 }
