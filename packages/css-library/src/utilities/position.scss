@@ -4,7 +4,7 @@
 
 $u-position: (
   position: (
-    base: 'vads-position',
+    base: 'vads-u-position-',
     modifiers: null,
     values: map-collect($tokens-position),
     settings: $position-settings,

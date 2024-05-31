@@ -4,7 +4,7 @@
 
 $u-display: (
   display: (
-    base: 'vads',
+    base: 'vads-u-display-',
     modifiers: null,
     values: map-collect($tokens-display),
     settings: $display-settings,
