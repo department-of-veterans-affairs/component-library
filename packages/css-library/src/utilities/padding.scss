@@ -4,7 +4,7 @@
 
 $u-padding-base: (
   padding: (
-    base: 'vads-padding',
+    base: 'vads-u-padding',
     modifiers: (
       noModifier: '',
       'top': '-top',
@@ -21,7 +21,7 @@ $u-padding-base: (
 
 $u-padding-y: (
   padding-y: (
-    base: 'vads-padding-y',
+    base: 'vads-u-padding-y',
     modifiers: null,
     values: map-collect($tokens-padding),
     settings: $padding-settings,
@@ -35,7 +35,7 @@ $u-padding-y: (
 
 $u-padding-x: (
   padding-x: (
-    base: 'vads-padding-x',
+    base: 'vads-u-padding-x',
     modifiers: null,
     values: map-collect($tokens-padding),
     settings: $padding-settings,
