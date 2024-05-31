@@ -30,7 +30,6 @@ jobs:
     - name: Install dependencies in react-components
       run: yarn install
       working-directory: packages/react-components
-    - run: yarn install
     - name: Install dependencies in css-library
       run: yarn install
       working-directory: packages/css-library
