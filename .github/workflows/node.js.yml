@@ -26,8 +26,25 @@ jobs:
       # - run: yarn workspaces foreach --all -v run test
       # is not working after upgrades related to storybook 7, eg node and yarn
 
-      - name: Install deps in packages
-        run: yarn workspaces foreach --all -v install
+      # - name: Install deps in packages
+      #   run: yarn workspaces foreach --all -v install
+
+      - name: Install dependencies in react-components
+        run: yarn install
+        working-directory: packages/react-components
+
+      
+
+      - name: Install dependencies in design-system-dashboard-cli
+        run: yarn install
+        working-directory: packages/design-system-dashboard-cli
+    
+
+      - name: Install dependencies in web-components
+        run: yarn install
+        working-directory: packages/web-components
+
+
 
       - name: Test packages
         run: yarn workspaces foreach --all -v test
