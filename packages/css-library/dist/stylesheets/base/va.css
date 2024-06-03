@@ -1,3 +1,4 @@
+@charset "UTF-8";
 /**
   Variables ported over from Formation so that we can keep those stylesheets
   working while we work on deprecation.
@@ -42,6 +43,7 @@ body.modal-open {
   color: #162e51;
   display: block;
   font-weight: 600;
+  font-size: 1.06rem;
 }
 .show-on-focus:focus {
   position: inherit;
@@ -1838,7 +1840,438 @@ article > h1 {
   max-width: 48.125rem;
 }
 .va-introtext p {
+  font-family: Bitter, Georgia, Cambria, "Times New Roman", Times, serif;
+  font-size: 1.25rem;
+  font-weight: 400;
   line-height: 1.7;
+}
+
+.usa-content {
+  max-width: 43.75rem;
+}
+
+.feature {
+  background: #e1f3f8;
+  padding: 1em;
+  clear: both;
+  margin: 1.5em 0 1.5em 0;
+}
+.feature h2 {
+  margin-top: 0;
+}
+.feature h3 {
+  margin-top: 0;
+}
+.feature h4 {
+  margin-top: 0;
+}
+.feature ul {
+  margin: 0 0 0.5em 1.5em;
+  padding: 0;
+}
+.feature ul li {
+  list-style: square;
+  margin: 0;
+}
+
+.va-quicklinks ul {
+  margin-top: 0.5rem;
+}
+.va-quicklinks li {
+  padding: 0.35rem 0;
+}
+.va-quicklinks h3 {
+  line-height: 1.2em;
+  font-size: 1.65em;
+  color: #112e51;
+  margin: 0 0 1rem 0;
+  padding: 0 0 0.2em 0;
+}
+
+.va-nav-breadcrumbs--playbook {
+  background: none;
+  margin: 0 0 1em 0;
+  padding: 0;
+}
+.va-nav-breadcrumbs--playbook h2 {
+  font-size: 1em;
+}
+.va-nav-breadcrumbs--playbook li {
+  text-transform: none;
+  margin: 0.25em 0;
+  padding: 0.1em;
+  display: inline-block;
+  line-height: 1.15em;
+  vertical-align: middle;
+  font-size: 1.35em;
+}
+.va-nav-breadcrumbs--playbook li:hover {
+  border-bottom: none;
+  text-decoration: none;
+}
+.va-nav-breadcrumbs--playbook a {
+  border-bottom: 3px solid #ffffff;
+  text-decoration: none !important;
+  color: #ffffff;
+}
+.va-nav-breadcrumbs--playbook a:hover {
+  text-decoration: none;
+  background: rgba(0, 0, 0, 0.05);
+  border-bottom: 3px solid #ffbe2e;
+}
+
+.va-nav-breadcrumbs--playbook .parent {
+  padding-top: 0.5em;
+  margin: 0 0 0.75em 0;
+}
+.va-nav-breadcrumbs--playbook .parent:after {
+  content: " › ";
+  display: inline-block;
+  color: #ffffff;
+  padding: 0 0.5em;
+}
+.va-nav-breadcrumbs--playbook .active {
+  background: #ffbe2e;
+  color: #000000;
+  font: 400 1.35em/1.15em Bitter, Georgia, Cambria, "Times New Roman", Times, serif;
+  margin: 0.5em 0;
+  padding: 0.2em;
+}
+@media screen and (min-width: 768px), print and (min-width: 768px) {
+  .va-nav-breadcrumbs--playbook .active {
+    font-size: 1.8em;
+  }
+}
+.va-nav-breadcrumbs--playbook .active:before {
+  content: "";
+  padding: 0;
+  margin: 0;
+}
+
+li span.meta {
+  display: inline-block;
+  padding: 0.5em;
+  color: #112e51;
+  background: rgba(0, 0, 0, 0.05);
+  font-weight: bold;
+  float: right;
+  margin: 0.5em 0 1em 1em;
+}
+
+.navigation {
+  padding: 1em 0 3em 0;
+  background: #f1f1f1;
+  color: #112e51;
+  border-bottom: 2px solid #ffffff;
+  margin: 0 auto;
+}
+
+[class*=block-grid-] > li {
+  padding: 0 0.390625rem 0.78125rem 0.390625rem;
+}
+
+.tel {
+  background: rgba(0, 0, 0, 0.05);
+  padding: 0.2em;
+  display: inline-block;
+}
+
+.va-notice--banner {
+  background: #ffffff;
+  margin: 0 0 0.75em 0;
+  padding: 0;
+  font-weight: 400;
+}
+@media screen and (min-width: 768px), print and (min-width: 768px) {
+  .va-notice--banner {
+    background: #f1f1f1;
+  }
+  .va-notice--banner .usa-banner-inner {
+    padding-left: 0.9375rem;
+  }
+  .va-notice--banner .usa-banner-inner p {
+    font-size: 12px;
+  }
+  .va-notice--banner .usa-banner-content {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+@media screen and (min-width: 1008px), print and (min-width: 1008px) {
+  .va-notice--banner .usa-banner-inner {
+    padding-left: 0;
+  }
+  .va-notice--banner .usa-banner-inner p {
+    font-size: 12px;
+  }
+}
+.va-notice--banner-inner {
+  margin: auto;
+  max-width: 1000px;
+  position: relative;
+}
+
+.va-notice--banner p {
+  margin: 0;
+}
+.va-notice--banner a {
+  background-image: none;
+  color: inherit;
+  padding: 0;
+}
+
+.search-button {
+  margin: 1em 0.5em 0 0;
+  padding: 0;
+}
+@media screen and (min-width: 320px), print and (min-width: 320px) {
+  .search-button {
+    float: right;
+    margin-top: 0.1em;
+  }
+}
+
+.card {
+  position: relative;
+  margin: 0 0 1.5em 0;
+  padding: 1em;
+  border: 1px solid #f1f1f1;
+}
+.card dt {
+  font-weight: 700;
+}
+.card dd {
+  padding: 0;
+  margin: 0;
+}
+.card.templates {
+  height: 338px;
+}
+.card:after {
+  visibility: hidden;
+  display: block;
+  font-size: 0;
+  content: " ";
+  clear: both;
+  height: 0;
+}
+.card h4,
+.card h5 {
+  margin-top: 0;
+}
+.card span {
+  display: block;
+}
+.card .number {
+  font-family: Bitter, Georgia, Cambria, "Times New Roman", Times, serif;
+  font-size: 2em;
+  font-weight: 700;
+  float: left;
+  margin: 0;
+  color: color-primary-darker;
+  line-height: 1em;
+  padding: 0 0 0.5em;
+  border-bottom: 1px solid #aeb0b5;
+}
+.card .heading,
+.card .description {
+  display: block;
+}
+.card .heading {
+  color: #046b99;
+  font-size: 0.8em;
+  padding: 0;
+}
+.card .description {
+  font-size: 1em;
+  font-weight: 400;
+  padding: 0.3em 0 0;
+  text-align: left;
+  width: 100%;
+  float: left;
+}
+.card.information {
+  background: rgba(0, 0, 0, 0.05);
+  padding: 1em;
+}
+.card.info-graphic {
+  border: 1px solid #ffffff;
+  background: none;
+  padding: 1em 1em 0;
+  line-height: 2.5;
+}
+.card.info-graphic span.number {
+  color: #ffffff;
+  display: inline-block;
+}
+
+.actions {
+  margin: 1em 0;
+}
+
+.divider.margin {
+  padding-top: 1em;
+  padding-bottom: 1em;
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+.divider.top {
+  border-top: 1px solid #f1f1f1;
+}
+.divider.bottom {
+  border-bottom: 1px solid #f1f1f1;
+}
+
+.highlight,
+.va-h-ruled {
+  border-bottom: 3px solid #005ea2;
+  padding-bottom: 0.25em;
+  font-weight: 700;
+}
+
+.va-h-ruled--a {
+  color: #1a4480;
+  padding-bottom: 0.5em;
+  border-bottom: --vads-color-va-accent solid 2px;
+}
+
+.va-h-ruled--stars {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: url("/assets/img/stars.png") no-repeat center;
+  background-size: 6.875rem auto;
+  margin: 1rem auto auto;
+  padding: 1.25rem 0 0;
+  text-align: center;
+}
+.va-h-ruled--stars::before {
+  margin-right: 7.5rem;
+}
+.va-h-ruled--stars::before, .va-h-ruled--stars::after {
+  border-top: 1px solid #aeb0b5;
+  content: " ";
+  flex: 1 1 50%;
+  padding: 0.625rem 0;
+}
+@media screen and (min-width: 768px), print and (min-width: 768px) {
+  .va-h-ruled--stars {
+    padding-left: 0;
+  }
+}
+
+.va-button-primary {
+  background: #2e8540 !important;
+}
+.va-button-primary:hover, .va-button-primary:focus {
+  background-color: #154c21 !important;
+  text-decoration: none !important;
+}
+.va-button-primary svg {
+  display: inline-block;
+  height: 0.75rem;
+  margin-left: 0.3125rem;
+  width: 0.75rem;
+  vertical-align: -1px;
+}
+
+.usa-accordion-content[aria-hidden=true] {
+  display: none !important;
+}
+
+.va-address-block {
+  margin-left: 3.125rem;
+  border-left: 3px solid #005ea2;
+  padding-left: 0.625rem;
+}
+
+.va-flex {
+  display: -webkit-flex;
+  display: flex;
+}
+
+.react-container {
+  padding: 2em 0;
+}
+
+.react-container {
+  padding: 2em 0;
+}
+
+.va-list--plain {
+  list-style: none;
+  padding-left: 0;
+}
+
+.last-updated {
+  margin-top: 1.5em;
+  border-top: 2px solid #aeb0b5;
+  padding: 1em 0;
+}
+.last-updated p {
+  font-size: 1em !important;
+  color: #323a45 !important;
+}
+
+.usa-sidenav-sub_list {
+  padding-left: 0;
+  list-style: none;
+}
+
+.vertical-list-group {
+  list-style-type: none;
+}
+
+.vertical-list-group.more-bottom-cushion {
+  margin-bottom: 2.5em;
+}
+
+.vertical-list-group .list-group-item {
+  border: none;
+  border-left: 4px solid #d6d7d9;
+  box-sizing: border-box;
+  border-radius: 0;
+  padding-left: 20px;
+  padding-right: 0px;
+  padding-bottom: 20px;
+  padding-top: 0px;
+  margin-bottom: -30px;
+}
+.vertical-list-group .list-group-item:last-child {
+  border: none;
+  margin-bottom: 24px;
+}
+.vertical-list-group .list-group-item h4 {
+  clear: none;
+}
+
+.vertical-list-group .list-group-item:last-child {
+  border-left: 4px solid transparent;
+  padding-bottom: 0;
+}
+
+.vertical-list-group .list-group-item::before {
+  border-radius: 50%;
+  border: 3px #ffffff solid;
+  background-color: #757575;
+  content: "";
+  display: inline;
+  float: left;
+  height: 18px;
+  line-height: 12px;
+  margin-left: -31px;
+  text-align: center;
+  width: 18px;
+  position: absolute;
+}
+
+.fieldset-input {
+  margin-top: 1.875rem;
+}
+
+.i18-select {
+  font-size: 1.06rem;
+  line-height: 1.5;
 }
 
 /*# sourceMappingURL=va.css.map */
