@@ -156,14 +156,15 @@ Submitted.args = {
   onclk : (e)=>{ 
     console.log("called the on click method-on button", e.target);
     alert( "onclick happened on button"); 
-    const theForm = e.target.closest('form');
-    const submitEvent = new CustomEvent('submit', {
-      bubbles: true,
-      cancelable: true,
-      composed: true,
-    });
-    theForm.dispatchEvent(submitEvent);
-    theForm.submit();
+    // const theForm = e.target.closest('form');
+    // const submitEvent = new CustomEvent('submit', {
+    //   bubbles: true,
+    //   cancelable: true,
+    //   composed: true,
+    // });
+    // theForm.dispatchEvent(submitEvent);
+    // theForm.submit(); 
+    
 },
   submit: true,
   text: "Submit me",
