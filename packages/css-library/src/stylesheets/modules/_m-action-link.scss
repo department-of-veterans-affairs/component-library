@@ -2,6 +2,8 @@
 @import "../../../dist/tokens/scss/variables.scss";
 @import "../mixins";
 
+@import 'uswds-core/src/styles/mixins/typography/typeset';
+
 a.vads-c-action-link--blue, a.vads-c-action-link--green, a.vads-c-action-link--white {
   &:before {
     font-family: "Font Awesome 5 Free";
@@ -13,6 +15,7 @@ a.vads-c-action-link--blue, a.vads-c-action-link--green, a.vads-c-action-link--w
     position: absolute; 
     left: 0px;
     top: -4px;
+    @include typeset('ui');
   }
   font-weight: bold;
   padding: 4px 0 4px 38px;
