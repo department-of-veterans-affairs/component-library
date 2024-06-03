@@ -4,45 +4,46 @@
 */
 
 @use '../../override-function' as *;
-@use "../../../../dist/tokens/scss/variables" as *;
-@use '../../core-variables' as *;
+@use "../../../../dist/tokens/scss/variables" as tok;
+@use '../../core-variables' as core-vars;
 @use '../../mixins' as u;
+@use '../variables' as vars;
 
 // Heading mixins
 @mixin title {
-  font-size: $title-font-size;
-  font-weight: $font-bold;
+  font-size: vars.$title-font-size;
+  font-weight: vars.$font-bold;
 }
 
 @mixin h1 {
-  font-size: $h1-font-size;
-  font-weight: $font-bold;
+  font-size: vars.$h1-font-size;
+  font-weight: vars.$font-bold;
 }
 
 @mixin h2 {
-  font-size: $h2-font-size;
-  font-weight: $font-bold;
+  font-size: vars.$h2-font-size;
+  font-weight: vars.$font-bold;
 }
 
 @mixin h3 {
-  font-size: $h3-font-size;
-  font-weight: $font-bold;
+  font-size: vars.$h3-font-size;
+  font-weight: vars.$font-bold;
 }
 
 @mixin h4 {
-  font-size: $h4-font-size;
-  font-weight: $font-bold;
+  font-size: vars.$h4-font-size;
+  font-weight: vars.$font-bold;
 }
 
 @mixin h5 {
-  font-size: $h5-font-size;
-  font-weight: $font-bold;
+  font-size: vars.$h5-font-size;
+  font-weight: vars.$font-bold;
 }
 
 @mixin h6 {
-  font-size: $h6-font-size;
-  font-weight: $font-weight-normal;
-  line-height: $base-line-height;
+  font-size: vars.$h6-font-size;
+  font-weight: tok.$font-weight-normal;
+  line-height: vars.$base-line-height;
   text-transform: uppercase;
 }
 

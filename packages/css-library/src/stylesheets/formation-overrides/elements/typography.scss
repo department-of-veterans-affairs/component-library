@@ -1,0 +1,253 @@
+// This is a copy of the entire ~ uswds/src/stylesheets/elements/typography.scss file
+// so that we can convert the rem values for USWDS v3.
+
+/*
+  Original: @import "~uswds/src/stylesheets/elements/typography";
+  ***THIS IS USWDS v1***
+*/
+
+@use '../../override-function' as *;
+@use "../../core-variables" as core-vars;
+@use "../../../../dist/tokens/scss/variables" as tok;
+@use '../../mixins' as mix;
+@use '../variables' as vars;
+@use '../core/utilities' as util;
+
+html {
+  font-family: tok.$font-family-sans;
+  font-size: vars.$em-base;
+}
+
+body {
+  font-size: 16px;
+}
+
+p {
+  line-height: vars.$base-line-height;
+  margin-bottom: 1em;
+  margin-top: 1em;
+}
+
+a {
+  color: vars.$color-primary;
+  text-decoration: underline;
+
+  &:hover,
+  &:active {
+    color: vars.$color-primary-darker;
+  }
+
+  &:focus {
+    @include util.focus;
+  }
+
+  &:visited {
+    color: tok.$vads-color-link-visited;
+  }
+}
+
+@mixin external-link($external-link, $external-link-hover) {
+  &::after {
+    background: url('#{core-vars.$image-path}/#{$external-link}.png') no-repeat 0 0;
+    background: url('#{core-vars.$image-path}/#{$external-link}.svg') no-repeat 0 0;
+    background-size: 100%;
+    content: '';
+    display: inline-block;
+    height: 0.65em;
+    margin-bottom: -1px;
+    margin-left: 4px;
+    width: 0.65em;
+  }
+
+  &:hover::after {
+    background-image: url('#{core-vars.$image-path}/#{$external-link-hover}.png');
+    background-image: url('#{core-vars.$image-path}/#{$external-link-hover}.svg');
+  }
+}
+
+// External link consider "effortless style approach":
+// [href^="http:"]:not([href*="my-domain.com"])
+// [href^="https:"]:not([href*="my-domain.com"])
+
+.usa-external_link {
+  @include external-link(external-link, external-link-hover);
+}
+
+.usa-external_link-alt {
+  @include external-link(external-link-alt, external-link-alt-hover);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  clear: both;
+  font-family: tok.$font-family-serif;
+  line-height: vars.$heading-line-height;
+  margin-bottom: 0.5em;
+  margin-top: 1.5em;
+}
+
+h1 {
+  @include util.h1();
+}
+
+h2 {
+  @include util.h2();
+}
+
+h3 {
+  @include util.h3();
+}
+
+h4 {
+  @include util.h4();
+}
+
+h5 {
+  @include util.h5();
+}
+
+h6 {
+  @include util.h6();
+  font-family: tok.$font-family-sans;
+}
+
+// Remove user agent styles
+
+cite,
+var,
+address,
+dfn {
+  font-style: normal;
+}
+
+// Custom typography
+
+.usa-content {
+  p,
+  ul:not(.usa-accordion):not(.usa-accordion-bordered),
+  ol:not(.usa-accordion):not(.usa-accordion-bordered) {
+    max-width: vars.$text-max-width;
+  }
+}
+
+.usa-content-list {
+  max-width: vars.$text-max-width;
+}
+
+.usa-sans {
+  p,
+  a,
+  li,
+  span {
+    font-family: tok.$font-family-sans;
+  }
+
+  a {
+    border-bottom: none;
+    font-weight: tok.$font-weight-bold;
+  }
+}
+
+.usa-serif {
+  p,
+  a,
+  li,
+  span {
+    font-family: tok.$font-family-serif;
+  }
+}
+
+.usa-display {
+  @include util.h3();
+  margin-bottom: 0;
+
+  @include mix.media(tok.$small-screen) {
+    @include util.h1();
+  }
+
+  @include mix.media(tok.$medium-screen) {
+    @include util.title();
+  }
+}
+
+.usa-font-lead {
+  font-family: tok.$font-family-serif;
+  font-size: vars.$lead-font-size;
+  font-weight: tok.$font-weight-normal;
+  line-height: vars.$lead-line-height;
+  max-width: vars.$lead-max-width;
+}
+
+.usa-background-dark {
+  background-color: vars.$color-gray-dark;
+
+  p,
+  span {
+    color: tok.$vads-color-white;
+  }
+
+  a {
+    color: vars.$color-gray-lighter;
+
+    &:hover {
+      color: tok.$vads-color-white;
+    }
+  }
+}
+
+.usa-text-small {
+  font-size: vars.$h6-font-size;
+  margin-top: 0;
+}
+
+// Removes top margin from first child and bottom margin from last child on
+// elements when they are within those layout elements.
+.usa-section,
+.usa-grid,
+.usa-grid-full {
+  > :first-child {
+    margin-top: 0;
+  }
+
+  > :last-child {
+    margin-bottom: 0;
+  }
+}
+
+.usa-width-one-whole,
+.usa-width-one-half,
+.usa-width-one-third,
+.usa-width-two-thirds,
+.usa-width-one-fourth,
+.usa-width-three-fourths,
+.usa-width-one-sixth,
+.usa-width-five-sixths,
+.usa-width-one-twelfth {
+  &:first-child {
+    > :first-child {
+      margin-top: 0;
+    }
+  }
+
+  > :first-child {
+    @include mix.media(tok.$medium-screen) {
+      margin-top: 0;
+    }
+  }
+
+  &:last-child {
+    > :last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  > :last-child {
+    @include mix.media(tok.$medium-screen) {
+      margin-bottom: 0;
+    }
+  }
+}

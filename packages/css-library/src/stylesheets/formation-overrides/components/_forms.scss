@@ -5,8 +5,8 @@
   Original: @import "~uswds/src/stylesheets/components/forms";
   ***THIS IS USWDS v1***
 */
-@use "../../core-variables" as *;
-@use "../../../../dist/tokens/scss/variables.scss" as *;
+@use "../../core-variables" as core-vars;
+@use "../../../../dist/tokens/scss/variables.scss" as tok;
 @use "../variables" as fv;
 @use '../../override-function' as *;
 @use '../../mixins' as fm;
@@ -14,7 +14,7 @@
 $usa-form-width: scale-rem(32rem);
 
 [type=submit] {
-  @include fm.media($medium-screen) {
+  @include fm.media(tok.$medium-screen) {
     margin-top: scale-rule(calc(3rem - .2em)); // Label margin minus input bottom margin
   }
 }
@@ -26,26 +26,26 @@ fieldset {
 }
 
 .usa-form {
-  @include fm.media($medium-screen) {
+  @include fm.media(tok.$medium-screen) {
     max-width: $usa-form-width;
   }
 }
 
 .usa-input-tiny {
-  @include fm.media($medium-screen) {
+  @include fm.media(tok.$medium-screen) {
     max-width: scale-rem(6rem);
   }
 }
 
 .usa-input-medium {
-  @include fm.media($medium-screen) {
+  @include fm.media(tok.$medium-screen) {
     max-width: scale-rem(12rem);
   }
 }
 
 .usa-form-note {
   float: right;
-  font-family: $font-family-sans;
+  font-family: tok.$font-family-sans;
   font-size: fv.$h5-font-size;
   margin: 0 0 scale(1.5rem);
 
@@ -55,25 +55,25 @@ fieldset {
 }
 
 .usa-form-large {
-  @include fm.media($medium-screen) {
+  @include fm.media(tok.$medium-screen) {
     max-width: scale-rem(46rem);
   }
 }
 
 .usa-input-grid {
-  @include fm.media($medium-screen) {
+  @include fm.media(tok.$medium-screen) {
     padding-right: 5%;
   }
 }
 
 .usa-input-grid:last-of-type {
-  @include fm.media($medium-screen) {
+  @include fm.media(tok.$medium-screen) {
     padding-right: 0;
   }
 }
 
 .usa-input-grid-small {
-  @include fm.media($medium-screen) {
+  @include fm.media(tok.$medium-screen) {
     float: left;
     width: 35%;
   }
@@ -88,7 +88,7 @@ fieldset {
 }
 
 .usa-input-grid-medium {
-  @include fm.media($medium-screen) {
+  @include fm.media(tok.$medium-screen) {
     float: left;
     width: 65%;
   }
@@ -103,7 +103,7 @@ fieldset {
 }
 
 .usa-input-grid-large {
-  @include fm.media($medium-screen) {
+  @include fm.media(tok.$medium-screen) {
     float: left;
     width: 100%;
   }
@@ -148,8 +148,8 @@ fieldset {
 
 .usa-checklist-checked {
   &::before {
-    background-image: url('#{$image-path}/correct9.png');
-    background-image: url('#{$image-path}/correct9.svg');
+    background-image: url('#{core-vars.$image-path}/correct9.png');
+    background-image: url('#{core-vars.$image-path}/correct9.svg');
     background-position: 100%;
     background-repeat: no-repeat;
     background-size: 100%;

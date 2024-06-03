@@ -7,8 +7,6 @@
 */
 
 @use '../../override-function' as *;
-@use '../../core-variables' as *;
-@use "../../../../dist/tokens/scss/variables" as *;
 
 // Alert variables ---------- //
 $usa-custom-alerts: () !default;

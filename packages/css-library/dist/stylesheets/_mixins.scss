@@ -3,6 +3,9 @@
 // This is an override on Neat's media mixin to create media queries for both screen and print
 // https://github.com/thoughtbot/neat/blob/v1.8.0/app/assets/stylesheets/grid/_media.scss
 
+@import "../../dist/tokens/scss/variables.scss";
+@import "./formation-overrides/variables";
+
 // Define default feature:
 $default-feature: min-width;
 
@@ -438,4 +441,12 @@ $asset-pipeline: false;
   &[aria-hidden=true] {
     display: none;
   }
+}
+
+@mixin linear-gradient-background($from, $to) {
+  background: $from; /* Old browsers */
+  background: -moz-linear-gradient(top, $from 0%, $to 63%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(top, $from 0%,$to 63%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(to bottom, $from 0%,$to 63%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr=$from, endColorstr=$to,GradientType=0 ); /* IE6-9 */
 }
