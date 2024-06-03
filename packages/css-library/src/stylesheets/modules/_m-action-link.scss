@@ -1,5 +1,3 @@
-@import 'uswds-core/src/styles/mixins/typography/typeset';
-
 a.vads-c-action-link--blue, a.vads-c-action-link--green, a.vads-c-action-link--white {
   &:before {
     font-family: "Font Awesome 5 Free";
@@ -16,7 +14,6 @@ a.vads-c-action-link--blue, a.vads-c-action-link--green, a.vads-c-action-link--w
   padding: 4px 0 4px 38px;
   position: relative;
   display: inline-block;
-  @include typeset('ui');
 }
 
 a.vads-c-action-link--blue:before {
