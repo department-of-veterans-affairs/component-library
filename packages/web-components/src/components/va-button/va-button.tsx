@@ -6,7 +6,7 @@ import {
   h,
   Listen,
   Prop,
-  Element
+  Element,
 } from '@stencil/core';
 import classnames from 'classnames';
 
@@ -124,6 +124,17 @@ export class VaButton {
     return this.text;
   };
 
+  private handleSubmit() {
+    const theForm = this.el.closest('form');
+    const submitEvent = new CustomEvent('submit', {
+      bubbles: true,
+      cancelable: true,
+      composed: true,
+    });
+    theForm.dispatchEvent(submitEvent);
+    theForm.submit();
+  }
+
   /**
    * This workaround allows us to use disabled for styling and to prevent the click event from firing while improving
    * the button's accessibility by allowing it to be focusable and through the use of aria-disabled.
@@ -138,6 +149,9 @@ export class VaButton {
       return;
     }
     this.handleClick();
+    if (this.submit) {
+      this.handleSubmit();
+    }
   }
 
   render() {
@@ -155,7 +169,8 @@ export class VaButton {
       messageAriaDescribedby,
     } = this;
 
-    const ariaDescribedbyIds = `${messageAriaDescribedby ? 'button-description' : ''}`.trim() || null;
+    const ariaDescribedbyIds =
+      `${messageAriaDescribedby ? 'button-description' : ''}`.trim() || null;
 
     const ariaDisabled = disabled ? 'true' : undefined;
     const buttonText = getButtonText();

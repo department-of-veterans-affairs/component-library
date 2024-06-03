@@ -106,3 +106,65 @@ Disabled.args = {
   disabled: true,
   text: "Disabled",
 };
+
+
+const Template2 = ({
+  back,
+  big,
+  'continue': _continue,
+  'disable-analytics': disableAnalytics,
+  disabled,
+  label,
+  secondary,
+  primaryAlternate,
+  submit,
+  text,
+  'message-aria-describedby': messageAriaDescribedby,
+  onsub,
+  onclk,
+}) => {
+  return (
+    <form onSubmit={onsub}>
+      <p>This is inside a form, which has an onsubmit() that displays an alert when the form is submitted</p>
+      <va-button
+        back={back}
+        big={big}
+        continue={_continue}
+        disable-analytics={disableAnalytics}
+        disabled={disabled}
+        label={label}
+        secondary={secondary}
+        primary-alternate={primaryAlternate}
+        submit={submit}
+        text={text}
+        onClick={e => onclk(e) }
+        message-aria-describedby={messageAriaDescribedby}
+      />
+      <button type='submit' onClick={e=>onclk(e)}>X</button>
+    </form>
+  );
+}
+
+export const Submitted = Template2.bind(null);
+Submitted.args = {
+  ...defaultArgs,
+  onsub : (e)=>{ 
+    // e.preventDefault();
+    console.log(e.target, "I am submitted!!");
+    alert ("form onsubmit method fired!!--on form");
+  },
+  onclk : (e)=>{ 
+    console.log("called the on click method-on button", e.target);
+    alert( "onclick happened on button"); 
+    const theForm = e.target.closest('form');
+    const submitEvent = new CustomEvent('submit', {
+      bubbles: true,
+      cancelable: true,
+      composed: true,
+    });
+    theForm.dispatchEvent(submitEvent);
+    theForm.submit();
+},
+  submit: true,
+  text: "Submit me",
+};
