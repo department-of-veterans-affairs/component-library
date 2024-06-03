@@ -1,0 +1,52 @@
+@import '../../mixins/links.css';
+
+:host {
+  display: inline-flex;
+}
+
+:host a {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  text-decoration: underline;
+  font-weight: 700;
+  font-size: 1.06rem;
+  padding: 0.5rem 0;
+}
+
+:host a.va-link--reverse {
+  color: var(--vads-color-white);
+
+  &:hover, &:active {
+    color: var(--vads-color-action-focus-on-light);
+    background-color: transparent;
+  }
+}
+
+.link-icon--left {
+  margin-right: 10px;
+  vertical-align: baseline;
+  position: relative;
+  top: 3px;
+}
+
+.link-icon {
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+
+.link-icon--primary {
+  background-color: var(--vads-color-success-dark);
+}
+
+.link-icon--secondary {
+  background-color: var(--vads-color-primary);
+}
+
+.link-icon--reverse {
+  background-color: var(--vads-color-white);
+  color: var(--vads-color-black);
+}
