@@ -1,0 +1,125 @@
+@import "../formation-overrides/variables";
+@import "../../../dist/tokens/scss/variables.scss";
+@import "../mixins";
+
+@import '../override-function';
+
+.usa-button,
+.usa-button-primary,
+.usa-button:visited,
+.usa-button-primary:visited,
+button,
+[type='button'],
+[type='submit'],
+[type='reset'],
+[type='image'] {
+  -webkit-font-smoothing: inherit;
+  -moz-osx-font-smoothing: inherit;
+  background-color: $color-primary;
+  box-sizing: border-box;
+  font-size: 1.06rem; // USWDS v3 Source Sans Pro normalization
+  &.usa-button-secondary {
+    background: transparent;
+    &:focus,
+    &:hover {
+      background-color: $color-cool-blue-lightest;
+    }
+  }
+}
+
+.usa-button-primary {
+  color: $vads-color-white !important;
+  &[href^='http'] {
+    @include no-sr-content;
+
+    background-image: none;
+    // TODO: clean up #content .main.interior a then remove !important
+    text-decoration: none !important;
+  }
+}
+
+// @todo Remove this once the USWDS upgrade is complete.
+.usa-accordion {
+  .usa-button-secondary:focus {
+    box-shadow: inset 0 0 0 2px $color-primary-darkest, 0 0 3px $color-focus,
+      0 0 7px $color-focus;
+  }
+}
+
+.usa-accordion-button:active {
+  background-color: inherit;
+}
+
+.usa-button-disabled {
+  background-color: $color-gray-lighter;
+}
+
+.row.form-progress-buttons {
+  max-width: scale-rem(47rem);
+}
+
+button i.fa {
+  font-size: 0.75em;
+  &.before-text {
+    margin-right: 0.5em;
+  }
+  &.after-text {
+    margin-left: 0.5em;
+  }
+}
+
+button.short {
+  font-weight: 500;
+  padding: scale-rem(1rem);
+}
+
+// For links and buttons that look like links and have an icon.
+.va-icon-link,
+.va-icon-link[type='button'] {
+  background: transparent;
+  border-radius: 0;
+  color: $color-primary !important;
+  font-weight: normal;
+  line-height: 1.3;
+  margin: 0;
+  text-align: left;
+  @include color-transition;
+
+  white-space: nowrap;
+
+  &:hover {
+    background: $color-gray-lightest;
+  }
+
+  .fa {
+    display: inline-block;
+    font-size: scale-rem(1.8rem);
+  }
+
+  span {
+    display: inline-block;
+    padding-left: scale-rem(0.5rem);
+    text-decoration: underline;
+  }
+}
+
+// Buttons that do not look like buttons, but have an icon.
+// Ex: top navigation search, help buttons
+.va-btn-withicon {
+  > span {
+    display: flex;
+    align-items: center;
+  }
+
+  svg {
+    display: none;
+
+    @include media($medium-screen) {
+      display: block;
+      height: 15px;
+      margin-right: 2.5px;
+      pointer-events: none;
+      width: 15px;
+    }
+  }
+}

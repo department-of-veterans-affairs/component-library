@@ -6,7 +6,7 @@
   ***THIS IS USWDS v1***
 */
 
-@import '../../override-function';
+@use '../../override-function' as *;
 
 @mixin media-block-img($margin-right: scale-rem(1rem)) {
     float: left;
