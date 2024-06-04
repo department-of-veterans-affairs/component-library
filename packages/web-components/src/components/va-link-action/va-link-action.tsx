@@ -29,6 +29,11 @@ export class VaLinkAction {
   @Prop() text!: string;
 
   /**
+   * An optional message that will be read by screen readers when the link is focused.
+   */
+  @Prop() ariaDescribedBy?: string;
+
+  /**
    * The type of the link, which determines its style.
    * Can be 'primary', 'secondary', or 'reverse'.
    */
@@ -65,23 +70,24 @@ export class VaLinkAction {
       handleClick,
       href,
       text,
+      ariaDescribedBy,
       type
     } = this;
 
     const linkClass = classNames({
       'va-link--reverse': type === 'reverse',
+      'va-link--primary': type === 'primary',
+      'va-link--secondary': type === 'secondary'
     });
 
     // eslint-disable-next-line i18next/no-literal-string
     const iconClass = classNames('link-icon--left', 'link-icon', {
-      'link-icon--primary': type === 'primary',
-      'link-icon--secondary': type === 'secondary',
       'link-icon--reverse': type === 'reverse'
     });
 
     return (
       <Host>
-        <a href={href} class={linkClass} onClick={handleClick}>
+        <a href={href} class={linkClass}  aria-describedby={ariaDescribedBy} onClick={handleClick}>
           <va-icon class={iconClass} icon="chevron_right" size={3}></va-icon>
           {text}
         </a>

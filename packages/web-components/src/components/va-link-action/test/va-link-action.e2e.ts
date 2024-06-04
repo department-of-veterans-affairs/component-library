@@ -12,8 +12,8 @@ describe('va-link-action', () => {
     expect(element).toEqualHtml(`
     <va-link-action class="hydrated" href="https://www.va.gov" text="Find out if you qualify for this program and how to apply">
       <mock:shadow-root>
-        <a href="https://www.va.gov">
-          <va-icon class="link-icon--left link-icon link-icon--primary hydrated"></va-icon>
+        <a href="https://www.va.gov" class="va-link--primary">
+          <va-icon class="link-icon--left link-icon hydrated"></va-icon>
           Find out if you qualify for this program and how to apply
         </a>
       </mock:shadow-root>
@@ -31,8 +31,8 @@ describe('va-link-action', () => {
     expect(element).toEqualHtml(`
     <va-link-action class="hydrated" href="https://www.va.gov" text="Share your VA medical records" type="secondary">
       <mock:shadow-root>
-        <a href="https://www.va.gov">
-          <va-icon class="link-icon--left link-icon link-icon--secondary hydrated"></va-icon>
+        <a href="https://www.va.gov" class="va-link--secondary">
+          <va-icon class="link-icon--left link-icon hydrated"></va-icon>
           Share your VA medical records
         </a>
       </mock:shadow-root>

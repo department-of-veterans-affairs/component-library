@@ -12,6 +12,17 @@
   font-weight: 700;
   font-size: 1.06rem;
   padding: 0.5rem 0;
+  &:active {
+    outline: 2px solid var(--vads-color-action-focus-on-light);
+    outline-offset: 2px;
+  }
+}
+
+:host a.va-link--primary,
+:host a.va-link--secondary {
+  &:hover, &:active {
+    color: var(--vads-color-link) !important;
+  }
 }
 
 :host a.va-link--reverse {
@@ -20,6 +31,12 @@
   &:hover, &:active {
     color: var(--vads-color-action-focus-on-light);
     background-color: transparent;
+  }
+}
+
+:host a.va-link--reverse va-icon {
+  &:hover, &:active {
+    background-color: var(--vads-color-action-focus-on-light);
   }
 }
 
@@ -35,17 +52,29 @@
   align-items: center;
   justify-content: center;
   color: white;
+  transition-duration: 0.3s;
+  transition-timing-function: ease-in-out;
+  transition-property: color, background-color, border-color;
 }
 
-.link-icon--primary {
-  background-color: var(--vads-color-success-dark);
+.va-link--primary {
+  va-icon {
+    background-color: var(--vads-color-success-dark);
+  }
 }
 
-.link-icon--secondary {
-  background-color: var(--vads-color-primary);
+.va-link--secondary {
+  va-icon {
+    background-color: var(--vads-color-primary);
+  }
 }
 
 .link-icon--reverse {
   background-color: var(--vads-color-white);
   color: var(--vads-color-black);
+}
+
+:host a.va-link--reverse:hover va-icon,
+:host a.va-link--reverse:active va-icon {
+  background-color: var(--vads-color-action-focus-on-light) !important;
 }

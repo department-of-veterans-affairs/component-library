@@ -542,6 +542,10 @@ export namespace Components {
     }
     interface VaLinkAction {
         /**
+          * An optional message that will be read by screen readers when the link is focused.
+         */
+        "ariaDescribedBy"?: string;
+        /**
           * If `true`, the component-library-analytics event is disabled.
          */
         "disableAnalytics"?: boolean;
@@ -2627,6 +2631,10 @@ declare namespace LocalJSX {
         "video"?: boolean;
     }
     interface VaLinkAction {
+        /**
+          * An optional message that will be read by screen readers when the link is focused.
+         */
+        "ariaDescribedBy"?: string;
         /**
           * If `true`, the component-library-analytics event is disabled.
          */
