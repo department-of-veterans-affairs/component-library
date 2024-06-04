@@ -2,7 +2,7 @@ import { Component, Event, EventEmitter, Host, h, Prop } from '@stencil/core';
 import classNames from 'classnames';
 
 /**
- * @componentName Link - Action (new)
+ * @componentName Link - Action
  * @maturityCategory caution
  * @maturityLevel candidate
  */
