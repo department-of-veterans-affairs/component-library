@@ -4,7 +4,7 @@
 
 $u-margin-base: (
   margin: (
-    base: 'vads-margin',
+    base: 'vads-u-margin-',
     modifiers: null,
     values: map-collect($tokens-margin),
     settings: $margin-settings,
@@ -15,14 +15,14 @@ $u-margin-base: (
 
 $u-margin-y: (
   margin-y: (
-    base: 'vads-margin',
+    base: 'vads-u-margin',
     modifiers: (
-      'y': (
+      'y-': (
         '-top',
         '-bottom',
       ),
-      'top': '-top',
-      'bottom': '-bottom',
+      'top-': '-top',
+      'bottom-': '-bottom',
     ),
     values: map-collect($tokens-margin-y),
     settings: $margin-settings,
@@ -33,14 +33,14 @@ $u-margin-y: (
 
 $u-margin-x: (
   margin-x: (
-    base: 'vads-margin',
+    base: 'vads-u-margin',
     modifiers: (
-      'x': (
+      'x-': (
         '-left',
         '-right',
       ),
-      'right': '-right',
-      'left': '-left',
+      'right-': '-right',
+      'left-': '-left',
     ),
     values: map-collect($tokens-margin-x),
     settings: $margin-settings,

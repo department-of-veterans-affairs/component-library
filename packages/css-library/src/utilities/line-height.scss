@@ -4,7 +4,7 @@
 
 $u-line-height: (
   line-height: (
-    base: 'vads-line-height',
+    base: 'vads-u-line-height-',
     modifiers: null,
     values: map-collect($tokens-line-height),
     settings: $line-height-settings,
