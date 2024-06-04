@@ -14,7 +14,7 @@ describe('va-link-action', () => {
       <mock:shadow-root>
         <a href="https://www.va.gov" class="va-link--primary">
           <va-icon class="link-icon--left link-icon hydrated"></va-icon>
-          Find out if you qualify for this program and how to apply
+          <span class="link-text">Find out if you qualify for this program and how to apply</span>
         </a>
       </mock:shadow-root>
     </va-link-action>
@@ -33,7 +33,7 @@ describe('va-link-action', () => {
       <mock:shadow-root>
         <a href="https://www.va.gov" class="va-link--secondary">
           <va-icon class="link-icon--left link-icon hydrated"></va-icon>
-          Share your VA medical records
+          <span class="link-text">Share your VA medical records</span>
         </a>
       </mock:shadow-root>
     </va-link-action>
@@ -52,7 +52,7 @@ describe('va-link-action', () => {
       <mock:shadow-root>
         <a href="https://www.va.gov" class="va-link--reverse">
           <va-icon class="link-icon--left link-icon link-icon--reverse hydrated"></va-icon>
-          Find out more
+          <span class="link-text">Find out more</span>
         </a>
       </mock:shadow-root>
     </va-link-action>
