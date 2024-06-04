@@ -4,7 +4,7 @@
 
 $u-measure: (
   measure: (
-    base: 'vads-measure',
+    base: 'vads-u-measure-',
     modifiers: null,
     values: map-collect($tokens-measure),
     settings: $measure-settings,

@@ -4,7 +4,7 @@
 
 $u-visibility: (
   visibility: (
-    base: 'vads-visibility',
+    base: 'vads-u-visibility-',
     modifiers: null,
     values: map-collect($tokens-visibility),
     settings: $visibility-settings,

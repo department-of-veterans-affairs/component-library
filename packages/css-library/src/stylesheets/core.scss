@@ -1,10 +1,6 @@
 @use "../../dist/tokens/scss/variables" as *;
 
-@use 'uswds-core' with (
-  $theme-show-notifications: false,
-  // TODO: verify USWDS font path
-  $theme-font-path: '~@uswds/uswds/fonts',
-);
+@forward 'uswds-theme';
 
 @use './core-variables' as *;
 

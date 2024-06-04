@@ -12,6 +12,7 @@ import {
 } from '@stencil/core';
 import i18next from 'i18next';
 import { fileInput } from './va-file-input-upgrader';
+import { extensionToMimeType } from "./fileExtensionToMimeType";
 
 /**
  * @componentName File input
@@ -27,12 +28,13 @@ import { fileInput } from './va-file-input-upgrader';
 })
 export class VaFileInput {
   private fileInputRef!: HTMLInputElement;
-  private uploadStatus: 'idle' | 'success' | 'failure' = 'idle';
+  private uploadStatus: 'idle' | 'success' = 'idle';
   private fileType?: string;
 
   @Element() el: HTMLElement;
   @State() file?: File;
   @State() fileContents?: string;
+  @State() internalError?: string;
 
   /**
    * The label for the file input.
@@ -105,15 +107,36 @@ export class VaFileInput {
   private handleChange = (e: Event) => {
     const input = e.target as HTMLInputElement;
     if (input.files && input.files.length > 0) {
-      this.file = input.files[0];
-      this.vaChange.emit({ files: [this.file] });
-      this.uploadStatus = 'success';
-      this.generateFileContents(this.file);
-    } else {
-      this.uploadStatus = 'failure';
+      this.handleFile(input.files[0])
+    }
+    input.value = '';
+  }
+
+  private handleDrop = (event: DragEvent) => {
+    event.preventDefault();
+    event.stopPropagation();
+
+    const files = event.dataTransfer.files;
+    if (files.length > 0) {
+      this.handleFile(files[0]);
+    }
+  };
+
+  private handleFile = (file: File) => {
+    if (this.accept) {
+      const normalizedAcceptTypes = this.normalizeAcceptProp(this.accept);
+      if (!this.isAcceptedFileType(file.type, normalizedAcceptTypes)) {
+        this.removeFile();
+        this.internalError = 'This is not a valid file type.';
+        return;
+      }
     }
 
-    input.value = '';
+    this.file = file;
+    this.vaChange.emit({ files: [this.file] });
+    this.uploadStatus = 'success';
+    this.internalError = null;
+    this.generateFileContents(this.file);
 
     if (this.enableAnalytics) {
       this.componentLibraryAnalytics.emit({
@@ -124,7 +147,7 @@ export class VaFileInput {
         },
       });
     }
-  };
+  }
 
   private handleButtonClick = () => {
     this.el.shadowRoot.getElementById('fileInputField').click();
@@ -132,24 +155,14 @@ export class VaFileInput {
 
   private removeFile = () => {
     this.file = null;
+    this.vaChange.emit({ files: [this.file] });
     this.uploadStatus = 'idle';
+    this.internalError = null;
   };
 
   private changeFile = () => {
     if (this.fileInputRef) {
       this.fileInputRef.click();
-    }
-  };
-
-  private handleDrop = (event: DragEvent) => {
-    event.preventDefault();
-    event.stopPropagation();
-
-    const files = event.dataTransfer.files;
-    if (files.length > 0) {
-      this.file = files[0];
-      this.vaChange.emit({ files: [this.file] });
-      this.uploadStatus = 'success';
     }
   };
 
@@ -183,6 +196,25 @@ export class VaFileInput {
     return `${formattedSize}\xa0${units[unitIndex]}`;
   };
 
+  private normalizeAcceptProp = (accept: string): string[] => {
+    return accept.split(',').map(item => {
+      item = item.trim();
+      return item.startsWith('.') ? extensionToMimeType[item] : item;
+    });
+  }
+
+  private isAcceptedFileType = (fileType: string, acceptedTypes: string[]): boolean => {
+    for (const type of acceptedTypes) {
+      if (type === fileType) {
+        return true;
+      }
+      if (type.endsWith('/*') && fileType.startsWith(type.slice(0, -1))) {
+        return true;
+      }
+    }
+    return false;
+  }
+
   private renderLabelOrHeader = (
     label: string,
     required: boolean,
@@ -201,8 +233,8 @@ export class VaFileInput {
             class="label-header-tag"
           >
             {label}
-            {requiredSpan}
           </HeaderTag>
+          {requiredSpan}
         </div>
       );
     } else {
@@ -210,8 +242,8 @@ export class VaFileInput {
         <div class="label-header">
           <label htmlFor="fileInputField" part="label">
             {label}
-            {requiredSpan}
           </label>
+          {requiredSpan}
         </div>
       );
     }
@@ -271,12 +303,13 @@ export class VaFileInput {
     const text = this.getButtonText();
 
     if (uswds) {
+      const displayError = this.error || this.internalError;
       const ariaDescribedbyIds =
         `${hint ? 'input-hint-message' : ''} ${
-          error ? 'input-error-message' : ''
+          displayError ? 'input-error-message' : ''
         }`.trim() || null; // Null so we don't add the attribute if we have an empty string
       const fileInputTargetClasses = `file-input-target ${
-        this.error ? 'file-input-target-error' : ''
+        displayError ? 'file-input-target-error' : ''
       }`.trim();
 
       let fileThumbnail = (
@@ -313,7 +346,7 @@ export class VaFileInput {
       }
 
       return (
-        <Host>
+        <Host class={{ 'has-error': !!displayError }}>
           {label && this.renderLabelOrHeader(label, required, headerSize)}
           {hint && (
             <div class="usa-hint" id="input-hint-message">
@@ -321,10 +354,10 @@ export class VaFileInput {
             </div>
           )}
           <span id="input-error-message" role="alert">
-            {error && (
+            {displayError && (
               <Fragment>
                 <span class="usa-sr-only">{i18next.t('error')}</span>
-                <span class="usa-error-message">{error}</span>
+                <span class="usa-error-message">{displayError}</span>
               </Fragment>
             )}
           </span>
