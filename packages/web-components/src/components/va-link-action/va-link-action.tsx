@@ -1,4 +1,4 @@
-import { Component, Event, EventEmitter, Host, h, Prop } from '@stencil/core';
+import { Component, Event, EventEmitter, Host, h, Prop, State, Watch } from '@stencil/core';
 import classNames from 'classnames';
 
 /**
@@ -38,6 +38,8 @@ export class VaLinkAction {
    * Can be 'primary', 'secondary', or 'reverse'.
    */
   @Prop() type: "primary" | "secondary" | "reverse" = "primary";
+  
+  @State() isSingleLine: boolean = true;
 
   /**
    * The event used to track usage of the component.
@@ -65,6 +67,22 @@ export class VaLinkAction {
     }
   };
 
+  private linkRef?: HTMLElement;
+
+  componentDidLoad() {
+    this.checkTextLines();
+  }
+
+  @Watch('text')
+  checkTextLines() {
+    if (this.linkRef) {
+      const computedStyle = getComputedStyle(this.linkRef);
+      const lineHeight = parseFloat(computedStyle.lineHeight);
+      const height = this.linkRef.clientHeight;
+      this.isSingleLine = height <= lineHeight;
+    }
+  }
+
   render() {
     const {
       handleClick,
@@ -87,9 +105,9 @@ export class VaLinkAction {
 
     return (
       <Host>
-        <a href={href} class={linkClass}  aria-describedby={ariaDescribedBy} onClick={handleClick}>
+        <a href={href} class={linkClass}  aria-describedby={ariaDescribedBy} onClick={handleClick} ref={el => this.linkRef = el as HTMLElement}>
           <va-icon class={iconClass} icon="chevron_right" size={3}></va-icon>
-          {text}
+          <span class="link-text">{text}</span>
         </a>
       </Host>
     );

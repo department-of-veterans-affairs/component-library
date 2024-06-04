@@ -5,8 +5,8 @@
 }
 
 :host a {
-  display: flex;
-  align-items: center;
+  display: inline-flex;
+  align-items: flex-start;
   cursor: pointer;
   text-decoration: underline;
   font-weight: 700;
@@ -77,4 +77,11 @@
 :host a.va-link--reverse:hover va-icon,
 :host a.va-link--reverse:active va-icon {
   background-color: var(--vads-color-action-focus-on-light) !important;
+}
+
+.link-text {
+  display: inline-block;
+  vertical-align: top;
+  max-width: calc(100% - 24px);
+  white-space: pre-wrap;
 }
