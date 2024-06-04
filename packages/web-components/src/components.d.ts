@@ -542,10 +542,6 @@ export namespace Components {
     }
     interface VaLinkAction {
         /**
-          * An optional message that will be read by screen readers when the link is focused.
-         */
-        "ariaDescribedBy"?: string;
-        /**
           * If `true`, the component-library-analytics event is disabled.
          */
         "disableAnalytics"?: boolean;
@@ -553,6 +549,10 @@ export namespace Components {
           * The href attribute of the anchor.
          */
         "href": string;
+        /**
+          * An optional message that will be read by screen readers when the link is focused.
+         */
+        "messageAriaDescribedby"?: string;
         /**
           * The anchor text.
          */
@@ -2632,10 +2632,6 @@ declare namespace LocalJSX {
     }
     interface VaLinkAction {
         /**
-          * An optional message that will be read by screen readers when the link is focused.
-         */
-        "ariaDescribedBy"?: string;
-        /**
           * If `true`, the component-library-analytics event is disabled.
          */
         "disableAnalytics"?: boolean;
@@ -2643,6 +2639,10 @@ declare namespace LocalJSX {
           * The href attribute of the anchor.
          */
         "href": string;
+        /**
+          * An optional message that will be read by screen readers when the link is focused.
+         */
+        "messageAriaDescribedby"?: string;
         /**
           * The event used to track usage of the component.
          */

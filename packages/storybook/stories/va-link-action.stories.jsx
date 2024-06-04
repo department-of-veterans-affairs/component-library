@@ -36,6 +36,7 @@ Default.args = {
   ...defaultArgs,
   href: 'https://va.gov/vso/',
   text: 'Call to action',
+  messageAriaDescribedby: 'Call to action',
 };
 Default.argTypes = propStructure(linkDocs);
 

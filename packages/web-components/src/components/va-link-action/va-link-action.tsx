@@ -31,7 +31,7 @@ export class VaLinkAction {
   /**
    * An optional message that will be read by screen readers when the link is focused.
    */
-  @Prop() ariaDescribedBy?: string;
+  @Prop() messageAriaDescribedby?: string;
 
   /**
    * The type of the link, which determines its style.
@@ -88,7 +88,7 @@ export class VaLinkAction {
       handleClick,
       href,
       text,
-      ariaDescribedBy,
+      messageAriaDescribedby,
       type
     } = this;
 
@@ -105,7 +105,7 @@ export class VaLinkAction {
 
     return (
       <Host>
-        <a href={href} class={linkClass}  aria-describedby={ariaDescribedBy} onClick={handleClick} ref={el => this.linkRef = el as HTMLElement}>
+        <a href={href} class={linkClass}  aria-describedby={messageAriaDescribedby} onClick={handleClick} ref={el => this.linkRef = el as HTMLElement}>
           <va-icon class={iconClass} icon="chevron_right" size={3}></va-icon>
           <span class="link-text">{text}</span>
         </a>
