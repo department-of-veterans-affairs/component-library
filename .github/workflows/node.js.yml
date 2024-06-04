@@ -30,7 +30,7 @@ jobs:
         run: yarn workspaces foreach --all -v install
 
       - name: Test packages
-        run: yarn workspaces foreach --all -v test
+        run: yarn workspaces foreach --all -v run test
 
       # - name: Install dependencies in react-components
       #   run: yarn install
