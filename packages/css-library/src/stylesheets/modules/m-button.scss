@@ -17,7 +17,7 @@ button,
   -moz-osx-font-smoothing: inherit;
   background-color: $color-primary;
   box-sizing: border-box;
-
+  font-size: 1.06rem; // USWDS v3 Source Sans Pro normalization
   &.usa-button-secondary {
     background: transparent;
     &:focus,
