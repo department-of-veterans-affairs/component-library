@@ -12,11 +12,12 @@
   "scripts": {
     "build:tokens": "style-dictionary build",
     "build:stylesheets": "sass --load-path=./node_modules/@uswds/uswds/packages/ src/stylesheets:dist/stylesheets",
-    "compile:stylesheets": "node ./compile-stylesheets",
+   
     "build:minify": "yarn build:stylesheets --style compressed",
     "build:minify-core": "sass --style compressed dist/core.css:dist/core.min.css",
-    "build": "yarn run clean-dist && yarn run copy && yarn build:tokens && yarn build:stylesheets && yarn compile:stylesheets",
+    "build": "yarn run clean-dist && yarn run copy && yarn build:tokens && yarn build:stylesheets && yarn copy:scss-files",
     "clean-dist": "rimraf dist/*",
+    "copy:scss-files": "cp -rv src/stylesheets/_mixins.scss dist/stylesheets/_mixins.scss && cp -rv src/stylesheets/formation-overrides/_variables.scss dist/stylesheets/formation-overrides/_variables.scss",
     "copy-assets": "cp -rv src/assets/fonts dist/fonts/ && cp -rv src/assets/img dist/img/",
     "copy": "node ./copy-uswds-color-tokens.js && yarn run copy-assets"
   },

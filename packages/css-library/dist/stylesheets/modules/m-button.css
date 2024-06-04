@@ -25,6 +25,7 @@ button,
   -moz-osx-font-smoothing: inherit;
   background-color: #005ea2;
   box-sizing: border-box;
+  font-size: 1.06rem;
 }
 .usa-button.usa-button-secondary,
 .usa-button-primary.usa-button-secondary,
