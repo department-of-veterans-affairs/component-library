@@ -12,7 +12,6 @@
   "scripts": {
     "build:tokens": "style-dictionary build",
     "build:stylesheets": "sass --load-path=./node_modules/@uswds/uswds/packages/ src/stylesheets:dist/stylesheets",
-   
     "build:minify": "yarn build:stylesheets --style compressed",
     "build:minify-core": "sass --style compressed dist/core.css:dist/core.min.css",
     "build": "yarn run clean-dist && yarn run copy && yarn build:tokens && yarn build:stylesheets && yarn copy:scss-files",
@@ -28,7 +27,6 @@
   "dependencies": {
     "@divriots/style-dictionary-to-figma": "^0.4.0",
     "@uswds/uswds": "^3.7.1",
-    "minimatch": "9.0.4",
     "rimraf": "^5.0.5"
   }
 }
