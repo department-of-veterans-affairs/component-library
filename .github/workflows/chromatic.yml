@@ -28,9 +28,8 @@ jobs:
       - run: yarn workspace @department-of-veterans-affairs/component-library run build
       - name: Publish to Chromatic
         run: yarn build-storybook-chromatic
+        working-directory: packages/storybook
         env:
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          workingDir: packages/storybook
+       
 
