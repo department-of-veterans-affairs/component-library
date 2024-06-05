@@ -1,4 +1,4 @@
-@use "../../../dist/tokens/scss/variables" as *;
+@use "../../../dist/tokens/scss/variables" as vars;
 
 @import 'uswds-core/src/styles/mixins/typography/usa-content-styles';
 
@@ -10,12 +10,12 @@ h1 {
 @include usa-headings-styles;
 
 h1, h2, h3, h4, h5 {
-  font-family: $font-family-serif;
+  font-family: vars.$font-family-serif;
   font-weight: 700;
 }
 
 h6 {
-  font-family: $font-family-sans;
+  font-family: vars.$font-family-sans;
   font-weight: 700;
 }
 
@@ -39,7 +39,7 @@ h6 {
   font-size: .9375rem;
 }
 
-@media (max-width: $small-screen)  {
+@media (max-width: vars.$small-screen)  {
   h1 {
     font-size: 30px;
   }
@@ -55,7 +55,7 @@ h6 {
   font-weight: 700;
 }
 
-@media (max-width: $small-screen)  {
+@media (max-width: vars.$small-screen)  {
   h1 {
     font-size: 30px;
   }

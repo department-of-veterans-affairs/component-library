@@ -5,6 +5,6 @@ $tokens-visibility: (
   'visible': visible,
 );
 
-.vads-visibility-screen-reader {
+.vads-u-visibility--screen-reader {
   @include sr-only;
 }
