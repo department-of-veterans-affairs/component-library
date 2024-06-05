@@ -45,7 +45,7 @@ va-button {
   margin-left: 0.25rem;
 }
 
-:host([uswds='true']) {
+:host(:not([uswds=false])) {
 
   .label-header {
     color: var(--vads-color-base);
