@@ -3153,6 +3153,7 @@ __metadata:
     "@storybook/react": "npm:^7.6.10"
     "@storybook/react-webpack5": "npm:7.6.10"
     babel-loader: "npm:^8.2.2"
+    chromatic: "npm:^11.5.1"
     css-loader: "npm:^5.2.4"
     node-sass: "npm:^8.0.0"
     prop-types: "npm:^15.7.2"
@@ -8696,6 +8697,25 @@ __metadata:
     chromatic: dist/bin.js
     chromatic-cli: dist/bin.js
   checksum: 10/caea749001e803523fe0f06db2dc2db7a5c4342dbed3dacd185c9437d315fe544342c60188b2974be2f1c9271ab5e23324ec10c35ba86bf52befea1373999509
+  languageName: node
+  linkType: hard
+
+"chromatic@npm:^11.5.1":
+  version: 11.5.1
+  resolution: "chromatic@npm:11.5.1"
+  peerDependencies:
+    "@chromatic-com/cypress": ^0.*.* || ^1.0.0
+    "@chromatic-com/playwright": ^0.*.* || ^1.0.0
+  peerDependenciesMeta:
+    "@chromatic-com/cypress":
+      optional: true
+    "@chromatic-com/playwright":
+      optional: true
+  bin:
+    chroma: dist/bin.js
+    chromatic: dist/bin.js
+    chromatic-cli: dist/bin.js
+  checksum: 10/092406c78e3971b16221170f29581ae1d9ea4aa3c014e945aafeb8663cb44ebed97fbb8b36aedf93b0a336d4eca69440061ba8b9eb133f77a46059fe8452a691
   languageName: node
   linkType: hard
 
