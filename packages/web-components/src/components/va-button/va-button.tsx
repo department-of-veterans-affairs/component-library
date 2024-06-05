@@ -81,6 +81,11 @@ export class VaButton {
   @Prop({ reflect: true }) uswds?: boolean = true;
 
   /**
+   * If `false`, buttons of type submit will run onsubmit call back, but not submit form.
+   */
+  @Prop() dontSendForm?: boolean = false;
+
+  /**
    * An optional message that will be read by screen readers when the input is focused.
    */
   @Prop() messageAriaDescribedby?: string;
@@ -132,7 +137,10 @@ export class VaButton {
       composed: true,
     });
     theForm.dispatchEvent(submitEvent);
-    theForm.submit();
+    if (!this.dontSendForm) {
+      alert(this.dontSendForm);
+      theForm.submit();
+    }
   }
 
   /**
@@ -150,6 +158,9 @@ export class VaButton {
     }
     this.handleClick();
     if (this.submit) {
+      // stops on click event
+      // e.preventDefault();
+      // e.stopPropagation();
       this.handleSubmit();
     }
   }

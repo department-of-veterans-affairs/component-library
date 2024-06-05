@@ -22,24 +22,27 @@ const defaultArgs = {
   'disabled': undefined,
   'label': undefined,
   'secondary': undefined,
-  'primaryAlternate': undefined,
+  'primary-alternate': undefined,
   'submit': undefined,
   'text': 'Default',
+  'dont-send-form': undefined,
   'message-aria-describedby': 'Optional description text for screen readers',
+  'dontSendForm':undefined,
 };
 
 const Template = ({
   back,
   big,
-  'continue': _continue,
-  'disable-analytics': disableAnalytics,
+   _continue,
+  disableAnalytics,
   disabled,
   label,
   secondary,
   primaryAlternate,
   submit,
   text,
-  'message-aria-describedby': messageAriaDescribedby,
+  dontSendForm,
+  messageAriaDescribedby,
 }) => {
   return (
     <va-button
@@ -52,6 +55,7 @@ const Template = ({
       secondary={secondary}
       primary-alternate={primaryAlternate}
       submit={submit}
+      dont-send-form={dontSendForm}
       text={text}
       onClick={e => console.log(e)}
       message-aria-describedby={messageAriaDescribedby}
@@ -89,7 +93,7 @@ Big.args = {
 export const Continue = Template.bind(null);
 Continue.args = {
   ...defaultArgs,
-  continue: true,
+  _continue: true,
   text: undefined,
 };
 
@@ -111,16 +115,17 @@ Disabled.args = {
 const Template2 = ({
   back,
   big,
-  'continue': _continue,
-  'disable-analytics': disableAnalytics,
+   _continue,
+  disableAnalytics,
   disabled,
   label,
   secondary,
   primaryAlternate,
   submit,
   text,
-  'message-aria-describedby': messageAriaDescribedby,
+  messageAriaDescribedby,
   onsub,
+  dontSendForm ,
   onclk,
 }) => {
   return (
@@ -138,9 +143,10 @@ const Template2 = ({
         submit={submit}
         text={text}
         onClick={e => onclk(e) }
+        dont-send-form = {dontSendForm }
         message-aria-describedby={messageAriaDescribedby}
       />
-      <button type='submit' onClick={e=>onclk(e)}>X</button>
+      <button type='submit' onClick={e=>onclk(e)}>native button {dontSendForm.toString()}1</button>
     </form>
   );
 }
@@ -164,8 +170,8 @@ Submitted.args = {
     // });
     // theForm.dispatchEvent(submitEvent);
     // theForm.submit(); 
-    
 },
   submit: true,
   text: "Submit me",
+  dontSendForm: false
 };

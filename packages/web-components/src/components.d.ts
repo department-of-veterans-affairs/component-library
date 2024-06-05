@@ -208,6 +208,10 @@ export namespace Components {
          */
         "disabled"?: boolean;
         /**
+          * If `false`, buttons of type submit will run onsubmit call back, but not submit form.
+         */
+        "dontSendForm"?: boolean;
+        /**
           * The aria-label of the component.
          */
         "label"?: string;
@@ -2208,6 +2212,10 @@ declare namespace LocalJSX {
           * If `true`, the click event will not fire.
          */
         "disabled"?: boolean;
+        /**
+          * If `false`, buttons of type submit will run onsubmit call back, but not submit form.
+         */
+        "dontSendForm"?: boolean;
         /**
           * The aria-label of the component.
          */
