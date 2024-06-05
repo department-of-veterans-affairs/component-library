@@ -540,6 +540,28 @@ export namespace Components {
          */
         "video"?: boolean;
     }
+    interface VaLinkAction {
+        /**
+          * If `true`, the component-library-analytics event is disabled.
+         */
+        "disableAnalytics"?: boolean;
+        /**
+          * The href attribute of the anchor.
+         */
+        "href": string;
+        /**
+          * An optional message that will be read by screen readers when the link is focused.
+         */
+        "messageAriaDescribedby"?: string;
+        /**
+          * The anchor text.
+         */
+        "text": string;
+        /**
+          * The type of the link, which determines its style. Can be 'primary', 'secondary', or 'reverse'.
+         */
+        "type": "primary" | "secondary" | "reverse";
+    }
     interface VaLoadingIndicator {
         /**
           * Analytics tracking function(s) will be called. Form components are disabled by default due to PII/PHI concerns.
@@ -1528,6 +1550,10 @@ export interface VaLinkCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLVaLinkElement;
 }
+export interface VaLinkActionCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLVaLinkActionElement;
+}
 export interface VaLoadingIndicatorCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLVaLoadingIndicatorElement;
@@ -1733,6 +1759,12 @@ declare global {
         prototype: HTMLVaLinkElement;
         new (): HTMLVaLinkElement;
     };
+    interface HTMLVaLinkActionElement extends Components.VaLinkAction, HTMLStencilElement {
+    }
+    var HTMLVaLinkActionElement: {
+        prototype: HTMLVaLinkActionElement;
+        new (): HTMLVaLinkActionElement;
+    };
     interface HTMLVaLoadingIndicatorElement extends Components.VaLoadingIndicator, HTMLStencilElement {
     }
     var HTMLVaLoadingIndicatorElement: {
@@ -1934,6 +1966,7 @@ declare global {
         "va-header-minimal": HTMLVaHeaderMinimalElement;
         "va-icon": HTMLVaIconElement;
         "va-link": HTMLVaLinkElement;
+        "va-link-action": HTMLVaLinkActionElement;
         "va-loading-indicator": HTMLVaLoadingIndicatorElement;
         "va-maintenance-banner": HTMLVaMaintenanceBannerElement;
         "va-memorable-date": HTMLVaMemorableDateElement;
@@ -2596,6 +2629,32 @@ declare namespace LocalJSX {
           * If `true`, a video icon will be displayed before the anchor text.
          */
         "video"?: boolean;
+    }
+    interface VaLinkAction {
+        /**
+          * If `true`, the component-library-analytics event is disabled.
+         */
+        "disableAnalytics"?: boolean;
+        /**
+          * The href attribute of the anchor.
+         */
+        "href": string;
+        /**
+          * An optional message that will be read by screen readers when the link is focused.
+         */
+        "messageAriaDescribedby"?: string;
+        /**
+          * The event used to track usage of the component.
+         */
+        "onComponent-library-analytics"?: (event: VaLinkActionCustomEvent<any>) => void;
+        /**
+          * The anchor text.
+         */
+        "text": string;
+        /**
+          * The type of the link, which determines its style. Can be 'primary', 'secondary', or 'reverse'.
+         */
+        "type"?: "primary" | "secondary" | "reverse";
     }
     interface VaLoadingIndicator {
         /**
@@ -3689,6 +3748,7 @@ declare namespace LocalJSX {
         "va-header-minimal": VaHeaderMinimal;
         "va-icon": VaIcon;
         "va-link": VaLink;
+        "va-link-action": VaLinkAction;
         "va-loading-indicator": VaLoadingIndicator;
         "va-maintenance-banner": VaMaintenanceBanner;
         "va-memorable-date": VaMemorableDate;
@@ -3745,6 +3805,7 @@ declare module "@stencil/core" {
             "va-header-minimal": LocalJSX.VaHeaderMinimal & JSXBase.HTMLAttributes<HTMLVaHeaderMinimalElement>;
             "va-icon": LocalJSX.VaIcon & JSXBase.HTMLAttributes<HTMLVaIconElement>;
             "va-link": LocalJSX.VaLink & JSXBase.HTMLAttributes<HTMLVaLinkElement>;
+            "va-link-action": LocalJSX.VaLinkAction & JSXBase.HTMLAttributes<HTMLVaLinkActionElement>;
             "va-loading-indicator": LocalJSX.VaLoadingIndicator & JSXBase.HTMLAttributes<HTMLVaLoadingIndicatorElement>;
             "va-maintenance-banner": LocalJSX.VaMaintenanceBanner & JSXBase.HTMLAttributes<HTMLVaMaintenanceBannerElement>;
             "va-memorable-date": LocalJSX.VaMemorableDate & JSXBase.HTMLAttributes<HTMLVaMemorableDateElement>;

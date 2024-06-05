@@ -1,0 +1,88 @@
+@import '../../mixins/links.css';
+@import '../../mixins/accessibility.css';
+
+:host {
+  display: inline-flex;
+}
+
+:host a {
+  display: inline-flex;
+  align-items: flex-start;
+  cursor: pointer;
+  text-decoration: underline;
+  font-weight: 700;
+  font-size: 1.06rem;
+  padding: 0.5rem 0;
+  &:active {
+    outline: 2px solid var(--vads-color-action-focus-on-light);
+    outline-offset: 2px;
+  }
+}
+
+:host a.va-link--primary,
+:host a.va-link--secondary {
+  &:hover, &:active {
+    color: var(--vads-color-link) !important;
+  }
+}
+
+:host a.va-link--reverse {
+  color: var(--vads-color-white);
+
+  &:hover, &:active {
+    color: var(--vads-color-action-focus-on-light);
+    background-color: transparent;
+  }
+}
+
+:host a.va-link--reverse va-icon {
+  &:hover, &:active {
+    background-color: var(--vads-color-action-focus-on-light);
+  }
+}
+
+.link-icon--left {
+  margin-right: 8px;
+  vertical-align: baseline;
+  position: relative;
+}
+
+.link-icon {
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  transition-duration: 0.3s;
+  transition-timing-function: ease-in-out;
+  transition-property: color, background-color, border-color;
+}
+
+.va-link--primary {
+  va-icon {
+    background-color: var(--vads-color-success-dark);
+  }
+}
+
+.va-link--secondary {
+  va-icon {
+    background-color: var(--vads-color-primary);
+  }
+}
+
+.link-icon--reverse {
+  background-color: var(--vads-color-white);
+  color: var(--vads-color-black);
+}
+
+:host a.va-link--reverse:hover va-icon,
+:host a.va-link--reverse:active va-icon {
+  background-color: var(--vads-color-action-focus-on-light) !important;
+}
+
+.link-text {
+  display: inline-block;
+  vertical-align: top;
+  max-width: calc(100% - 24px);
+  white-space: pre-wrap;
+}
