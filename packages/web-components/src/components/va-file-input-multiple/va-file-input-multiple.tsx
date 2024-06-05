@@ -9,6 +9,12 @@ interface FileIndex {
   key: number;
 }
 
+/**
+ * @componentName File input multiple
+ * @maturityCategory caution
+ * @maturityLevel available
+ * @guidanceHref form/file-input-multiple
+ */
 @Component({
    tag: 'va-file-input-multiple',
    styleUrl: 'va-file-input-multiple.scss',
@@ -73,35 +79,41 @@ export class VaFileInputMultiple {
 
   @Element() el: HTMLElement;
 
-  private fileListIndex: number = 0;
-  @State() files: FileIndex[] = [ {key: this.fileListIndex, file: null} ];
+  private fileKeyCounter: number = 0;
+  @State() files: FileIndex[] = [ {key: this.fileKeyCounter, file: null} ];
 
-  private handleChange(event: any, index: number) {
+  private findFileByKey(fileKey: number) {
+    return this.files.find(file => file.key === fileKey);
+  }
+
+  private handleChange(event: any, fileKey: number, pageIndex: number) {
     const newFile = event.detail.files[0];
-    console.log('Pre handleChange', this.files);
+    console.log('Pre handleChange', JSON.stringify(this.files));
 
     if (newFile) {
       // Add/change file
-      if (this.files[index].file) {
+      const fileObject = this.findFileByKey(fileKey);
+      if (fileObject.file) {
         // Change file
-        this.files[index].file = newFile;
-        console.log('change', this.files);
+        fileObject.file = newFile;
+        console.log('change', JSON.stringify(this.files));
       } else {
         // New file
-        this.files[index].file = newFile;
+        fileObject.file = newFile;
 
-        this.fileListIndex++;
-        this.files.push({ file: null, key: this.fileListIndex });
-        console.log('new', this.files);
+        this.fileKeyCounter++;
+        this.files.push({ file: null, key: this.fileKeyCounter });
+        console.log('new', JSON.stringify(this.files));
       }
     } else {
       // Deleted file
-      this.files.splice(index, 1);
-      console.log('delete', this.files);
+      this.files.splice(pageIndex, 1);
+      console.log('delete', JSON.stringify(this.files));
     }
 
     this.vaChange.emit({ files: this.files.map(fileObj => fileObj.file) });
-    console.log('Post handleChange', this.files);
+    console.log('Post handleChange', JSON.stringify(this.files));
+    this.files = Array.of(...this.files);
   }
 
   private renderLabelOrHeader = (
@@ -149,22 +161,16 @@ export class VaFileInputMultiple {
           </div>
         )}
         <div class="outer-wrap">
-          <va-file-input
-            uswds
-            accept={accept}
-            required={required}
-            hint={hint}
-          />
-          {files.map((fileObj, index) => (
+          {files.map((fileEntry, pageIndex) => (
             <va-file-input
-              key={fileObj.key}
+              key={fileEntry.key}
               uswds
-              label={`File ${index + 1}`}
+              label={`File ${pageIndex + 1}`}
               accept={accept}
               required={required}
-              error={errors[index]}
+              error={errors[pageIndex]}
               hint={hint}
-              onVaChange={(event) => this.handleChange(event, fileObj.key)}
+              onVaChange={(event) => this.handleChange(event, fileEntry.key, pageIndex)}
             />
           ))}
         </div>
@@ -172,4 +178,3 @@ export class VaFileInputMultiple {
     );
   }
 }
-///
