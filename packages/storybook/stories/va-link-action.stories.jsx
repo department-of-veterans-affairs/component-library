@@ -21,12 +21,18 @@ const defaultArgs = {
   'type': 'primary',
 };
 
-const Template = ({ 'disable-analytics': disableAnalytics, href, text }) => {
+const Template = ({
+  'disable-analytics': disableAnalytics,
+  href,
+  text,
+  'message-aria-describedby': messageAriaDescribedBy,
+}) => {
   return (
     <va-link-action
       disable-analytics={disableAnalytics}
       href={href}
       text={text}
+      message-aria-describedby={messageAriaDescribedBy}
     />
   );
 };
@@ -34,9 +40,9 @@ const Template = ({ 'disable-analytics': disableAnalytics, href, text }) => {
 export const Default = Template.bind(null);
 Default.args = {
   ...defaultArgs,
-  href: 'https://va.gov/vso/',
-  text: 'Call to action',
-  messageAriaDescribedby: 'Call to action',
+  'href': 'https://va.gov/vso/',
+  'text': 'Call to action',
+  'message-aria-describedby': 'Custom message',
 };
 Default.argTypes = propStructure(linkDocs);
 

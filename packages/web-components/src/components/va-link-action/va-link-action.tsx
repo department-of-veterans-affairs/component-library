@@ -103,12 +103,19 @@ export class VaLinkAction {
       'link-icon--reverse': type === 'reverse'
     });
 
+    const ariaDescribedbyIds = messageAriaDescribedby ? 'link-description' : null;
+
     return (
       <Host>
-        <a href={href} class={linkClass}  aria-describedby={messageAriaDescribedby} onClick={handleClick} ref={el => this.linkRef = el as HTMLElement}>
+        <a href={href} class={linkClass} aria-describedby={ariaDescribedbyIds} onClick={handleClick} ref={el => this.linkRef = el as HTMLElement}>
           <va-icon class={iconClass} icon="chevron_right" size={3}></va-icon>
           <span class="link-text">{text}</span>
         </a>
+        {messageAriaDescribedby && (
+          <span id="link-description" class="sr-only">
+            {messageAriaDescribedby}
+          </span>
+        )}
       </Host>
     );
   }
