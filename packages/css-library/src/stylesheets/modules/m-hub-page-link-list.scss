@@ -1,0 +1,53 @@
+@use "../core-variables" as *;
+@import "../formation-overrides/variables";
+@import "../../../dist/tokens/scss/variables.scss";
+
+@import '../override-function';
+
+.hub-page-link-list {
+  // override default ul styles
+  list-style: none;
+  padding: 0;
+
+  &__item {
+    margin-bottom: 1em;
+    margin: scale-rule(1.6rem 0);
+    > a {
+      text-decoration: none;
+
+      &:hover,
+      &:focus {
+        .all-link-arrow {
+          margin-left: 10px;
+          content: url('#{$image-path}/arrow-right.svg');
+        }
+
+        .hub-page-link-list__header {
+          text-decoration: underline;
+        }
+      }
+
+      .all-link-arrow {
+        width: 11px;
+        margin-left: 5px;
+        transition: all 0.15s ease;
+        margin-bottom: 2px;
+      }
+    }
+  }
+
+  &__header {
+    font-weight: bold;
+  }
+
+  &__description {
+    color: $vads-color-black;
+    margin: 0;
+  }
+
+  &__title {
+    &:focus {
+      outline: none;
+    }
+  }
+}
