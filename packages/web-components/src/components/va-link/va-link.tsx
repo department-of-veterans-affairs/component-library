@@ -77,6 +77,11 @@ export class VaLink {
    * If 'true', will represent the link with white text instead of blue.
    */
   @Prop() reverse?: boolean = false;
+ 
+  /**
+   * Adds an aria-label attribute to the link element.
+   */
+    @Prop() label?: string = null;
 
   /**
    * The event used to track usage of the component.
@@ -135,7 +140,7 @@ export class VaLink {
     if (active) {
       return (
         <Host>
-          <a href={href} class={linkClass} onClick={handleClick}>
+          <a href={href} class={linkClass} onClick={handleClick} aria-label={this.label}>
             {text}
             <va-icon class="link-icon--active" icon="chevron_right"></va-icon>
           </a>
@@ -205,7 +210,7 @@ export class VaLink {
     // Default
     return (
       <Host>
-        <a href={href} class={linkClass} onClick={handleClick}>
+        <a href={href} class={linkClass} onClick={handleClick} aria-label={this.label}>
           {text}
         </a>
       </Host>
