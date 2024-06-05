@@ -140,7 +140,6 @@ const Template2 = ({
         onClick={e => onclk(e) }
         message-aria-describedby={messageAriaDescribedby}
       />
-      <button type='submit' onClick={e=>onclk(e)}>native button</button>
     </form>
   );
 }
