@@ -138,7 +138,6 @@ export class VaButton {
     });
     theForm.dispatchEvent(submitEvent);
     if (!this.dontSendForm) {
-      alert(this.dontSendForm);
       theForm.submit();
     }
   }
