@@ -66,9 +66,11 @@ export class VaButton {
   @Prop({ reflect: true }) secondary?: boolean = false;
 
   /**
-   * If `true`, the button will submit form data when clicked.
+   * A value of: `prevent` --will  triger the onsubmit callback on form, but not submit;
+   * `skip` --will submit but not trigger onsubmit callback; and `submit` or truthy -- will do both
+   * `false` acts a boolean false
    */
-  @Prop() submit?: boolean = false;
+  @Prop() submit?: 'submit' | 'prevent' | 'skip' | '' = '';
 
   /**
    * The text displayed on the button. If `continue` or `back` is true, the value of text is ignored.
@@ -79,11 +81,6 @@ export class VaButton {
    * Whether or not the component will use USWDS v3 styling.
    */
   @Prop({ reflect: true }) uswds?: boolean = true;
-
-  /**
-   * If `false`, buttons of type submit will run onsubmit call back, but not submit form.
-   */
-  @Prop() dontSendForm?: boolean = false;
 
   /**
    * An optional message that will be read by screen readers when the input is focused.
@@ -136,8 +133,10 @@ export class VaButton {
       cancelable: true,
       composed: true,
     });
-    theForm.dispatchEvent(submitEvent);
-    if (!this.dontSendForm) {
+    if (this.submit && this.submit !== 'skip') {
+      theForm.dispatchEvent(submitEvent);
+    }
+    if (this.submit && this.submit !== 'prevent') {
       theForm.submit();
     }
   }
@@ -157,9 +156,6 @@ export class VaButton {
     }
     this.handleClick();
     if (this.submit) {
-      // stops on click event
-      // e.preventDefault();
-      // e.stopPropagation();
       this.handleSubmit();
     }
   }

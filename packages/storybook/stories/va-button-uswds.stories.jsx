@@ -25,9 +25,7 @@ const defaultArgs = {
   'primary-alternate': undefined,
   'submit': undefined,
   'text': 'Default',
-  'dont-send-form': undefined,
   'message-aria-describedby': 'Optional description text for screen readers',
-  'dontSendForm':undefined,
 };
 
 const Template = ({
@@ -41,7 +39,6 @@ const Template = ({
   primaryAlternate,
   submit,
   text,
-  dontSendForm,
   messageAriaDescribedby,
 }) => {
   return (
@@ -55,7 +52,6 @@ const Template = ({
       secondary={secondary}
       primary-alternate={primaryAlternate}
       submit={submit}
-      dont-send-form={dontSendForm}
       text={text}
       onClick={e => console.log(e)}
       message-aria-describedby={messageAriaDescribedby}
@@ -125,7 +121,6 @@ const Template2 = ({
   text,
   messageAriaDescribedby,
   onsub,
-  dontSendForm ,
   onclk,
 }) => {
   return (
@@ -143,10 +138,9 @@ const Template2 = ({
         submit={submit}
         text={text}
         onClick={e => onclk(e) }
-        dont-send-form = {dontSendForm }
         message-aria-describedby={messageAriaDescribedby}
       />
-      <button type='submit' onClick={e=>onclk(e)}>native button {dontSendForm.toString()}1</button>
+      <button type='submit' onClick={e=>onclk(e)}>native button</button>
     </form>
   );
 }
@@ -162,16 +156,8 @@ Submitted.args = {
   onclk : (e)=>{ 
     console.log("called the on click method-on button", e.target);
     alert( "onclick happened on button"); 
-    // const theForm = e.target.closest('form');
-    // const submitEvent = new CustomEvent('submit', {
-    //   bubbles: true,
-    //   cancelable: true,
-    //   composed: true,
-    // });
-    // theForm.dispatchEvent(submitEvent);
-    // theForm.submit(); 
+
 },
-  submit: true,
+  submit: 'submit',
   text: "Submit me",
-  dontSendForm: false
 };

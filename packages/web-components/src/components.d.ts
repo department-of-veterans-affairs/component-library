@@ -208,10 +208,6 @@ export namespace Components {
          */
         "disabled"?: boolean;
         /**
-          * If `false`, buttons of type submit will run onsubmit call back, but not submit form.
-         */
-        "dontSendForm"?: boolean;
-        /**
           * The aria-label of the component.
          */
         "label"?: string;
@@ -228,9 +224,9 @@ export namespace Components {
          */
         "secondary"?: boolean;
         /**
-          * If `true`, the button will submit form data when clicked.
+          * A value of: `prevent` --will  triger the onsubmit callback on form, but not submit; `skip` --will submit but not trigger onsubmit callback; and `submit` or truthy -- will do both `false` acts a boolean false
          */
-        "submit"?: boolean;
+        "submit"?: 'submit' | 'prevent' | 'skip' | '';
         /**
           * The text displayed on the button. If `continue` or `back` is true, the value of text is ignored.
          */
@@ -269,9 +265,9 @@ export namespace Components {
          */
         "secondaryLabel"?: string;
         /**
-          * If `true`, the primary button will submit form data when clicked.
+          * A value of: `prevent` --will  triger the onsubmit callback on form, but not submit; `skip` --will submit but not trigger onsubmit callback; and `submit` or truthy -- will do both `false` acts a boolean false
          */
-        "submit"?: boolean;
+        "submit"?: 'submit' | 'prevent' | 'skip' | '';
         /**
           * If `true`, button pair will use Update and Cancel for button text.
          */
@@ -2213,10 +2209,6 @@ declare namespace LocalJSX {
          */
         "disabled"?: boolean;
         /**
-          * If `false`, buttons of type submit will run onsubmit call back, but not submit form.
-         */
-        "dontSendForm"?: boolean;
-        /**
           * The aria-label of the component.
          */
         "label"?: string;
@@ -2237,9 +2229,9 @@ declare namespace LocalJSX {
          */
         "secondary"?: boolean;
         /**
-          * If `true`, the button will submit form data when clicked.
+          * A value of: `prevent` --will  triger the onsubmit callback on form, but not submit; `skip` --will submit but not trigger onsubmit callback; and `submit` or truthy -- will do both `false` acts a boolean false
          */
-        "submit"?: boolean;
+        "submit"?: 'submit' | 'prevent' | 'skip' | '';
         /**
           * The text displayed on the button. If `continue` or `back` is true, the value of text is ignored.
          */
@@ -2294,9 +2286,9 @@ declare namespace LocalJSX {
          */
         "secondaryLabel"?: string;
         /**
-          * If `true`, the primary button will submit form data when clicked.
+          * A value of: `prevent` --will  triger the onsubmit callback on form, but not submit; `skip` --will submit but not trigger onsubmit callback; and `submit` or truthy -- will do both `false` acts a boolean false
          */
-        "submit"?: boolean;
+        "submit"?: 'submit' | 'prevent' | 'skip' | '';
         /**
           * If `true`, button pair will use Update and Cancel for button text.
          */
