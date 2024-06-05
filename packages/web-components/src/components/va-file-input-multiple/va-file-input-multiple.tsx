@@ -165,11 +165,10 @@ export class VaFileInputMultiple {
             <va-file-input
               key={fileEntry.key}
               uswds
-              label={`File ${pageIndex + 1}`}
+              headless
               accept={accept}
               required={required}
               error={errors[pageIndex]}
-              hint={hint}
               onVaChange={(event) => this.handleChange(event, fileEntry.key, pageIndex)}
             />
           ))}

@@ -88,6 +88,8 @@ export class VaFileInput {
    */
   @Prop() headerSize?: number;
 
+  @Prop() headless?: boolean = false;
+
   /**
    * The event emitted when the file input value changes.
    */
