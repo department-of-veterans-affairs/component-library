@@ -88,6 +88,10 @@ export class VaFileInput {
    */
   @Prop() headerSize?: number;
 
+  /**
+   * DST only prop
+   * removes extraneous display for multiple file input
+   */
   @Prop() headless?: boolean = false;
 
   /**
@@ -300,6 +304,7 @@ export class VaFileInput {
       headerSize,
       fileContents,
       fileType,
+      headless,
     } = this;
 
     const text = this.getButtonText();
@@ -346,6 +351,7 @@ export class VaFileInput {
           );
         }
       }
+      let selectedFileClassName = headless ? "headless-selected-files-wrapper" : "selected-files-wrapper"
 
       return (
         <Host class={{ 'has-error': !!displayError }}>
@@ -395,8 +401,10 @@ export class VaFileInput {
               </div>
             )}
             {uploadStatus !== 'idle' && (
-              <div class="selected-files-wrapper">
-                <div class="selected-files-label">Selected files</div>
+              <div class={selectedFileClassName}>
+                {!headless &&
+                  <div class="selected-files-label">Selected files</div>
+                }
                 <va-card class="va-card">
                   <div class="file-info-section">
                     {fileThumbnail}

@@ -161,6 +161,7 @@ export class VaFileInputMultiple {
           </div>
         )}
         <div class="outer-wrap">
+          <div class="selected-files-label">Selected files</div>
           {files.map((fileEntry, pageIndex) => (
             <va-file-input
               key={fileEntry.key}

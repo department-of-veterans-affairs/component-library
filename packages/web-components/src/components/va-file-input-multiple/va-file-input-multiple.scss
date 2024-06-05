@@ -1,3 +1,23 @@
 @forward 'settings';
 
 @use '../va-file-input/va-file-input';
+
+:host{
+  .outer-wrap {
+    background-color: var(--vads-color-primary-lighter);
+    border: 1px solid var(--vads-color-base-light);
+    display: block;
+    max-width: 30rem;
+    width: 100%;
+    position: relative;
+    margin: 8px 0;
+  }
+  
+  va-file-input:last-child {
+    padding: 0 8px;
+  }
+
+  va-file-input:not(:last-child) {
+    border-bottom: 1px solid var(--vads-color-white);
+  }
+}
