@@ -39,10 +39,10 @@ const Template = ({
         iconless={iconless}
         disable-analytics={disableAnalytics}
       >
-        <div>
+        <p>
           This is the alert content. To take action on this alert, please call{' '}
-          <a href="tel:8775551234">877-555-1234.</a>
-        </div>
+          <va-telephone contact="8775551234"></va-telephone>.
+        </p>
       </va-alert-expandable>
       <p>Surrounding content.</p>
     </>
@@ -58,54 +58,58 @@ const IconlessTemplate = ({ trigger, iconless }) => {
         iconless={iconless}
         disable-analytics="false"
       >
-        <div>
+        <p>
           This is the alert content. To take action on this alert, please call{' '}
-          <a href="tel:8775551234">877-555-1234.</a>
-        </div>
+          <va-telephone contact="8775551234"></va-telephone>.
+        </p>
       </va-alert-expandable>
+      <br />
       <va-alert-expandable
         status="error"
         trigger={trigger}
         iconless={iconless}
         disable-analytics="false"
       >
-        <div>
+        <p>
           This is the alert content. To take action on this alert, please call{' '}
-          <a href="tel:8775551234">877-555-1234.</a>
-        </div>
+          <va-telephone contact="8775551234"></va-telephone>.
+        </p>
       </va-alert-expandable>
+      <br />
       <va-alert-expandable
         status="warning"
         trigger={trigger}
         iconless={iconless}
         disable-analytics="false"
       >
-        <div>
+        <p>
           This is the alert content. To take action on this alert, please call{' '}
-          <a href="tel:8775551234">877-555-1234.</a>
-        </div>
+          <va-telephone contact="8775551234"></va-telephone>.
+        </p>
       </va-alert-expandable>
+      <br />
       <va-alert-expandable
         status="success"
         trigger={trigger}
         iconless={iconless}
         disable-analytics="false"
       >
-        <div>
+        <p>
           This is the alert content. To take action on this alert, please call{' '}
-          <a href="tel:8775551234">877-555-1234.</a>
-        </div>
+          <va-telephone contact="8775551234"></va-telephone>.
+        </p>
       </va-alert-expandable>
+      <br />
       <va-alert-expandable
         status="continue"
         trigger={trigger}
         iconless={iconless}
         disable-analytics="false"
       >
-        <div>
+        <p>
           This is the alert content. To take action on this alert, please call{' '}
-          <a href="tel:8775551234">877-555-1234.</a>
-        </div>
+          <va-telephone contact="8775551234"></va-telephone>.
+        </p>
       </va-alert-expandable>
     </>
   );
