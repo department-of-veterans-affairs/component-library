@@ -21,6 +21,8 @@ interface FileIndex {
    shadow: true,
  })
 export class VaFileInputMultiple {
+  @Element() el: HTMLElement;
+
   /**
    * The label for the file input.
    */
@@ -56,10 +58,6 @@ export class VaFileInputMultiple {
    */
   @Prop() enableAnalytics?: boolean = false;
 
-  /**
-   * Shows a va-progress-bar at this percentage when uploading
-   * @Prop() uploadPercentage?: number;
-
    /**
    * Optionally specifies the size of the header element to use instead of the base label.
    * Accepts a number from 1 to 6, corresponding to HTML header elements h1 through h6.
@@ -68,19 +66,12 @@ export class VaFileInputMultiple {
   @Prop() headerSize?: number;
 
   /**
-   * Whether or not the component will use USWDS v3 styling.
-   */
-  @Prop() uswds?: boolean = false;
-
-  /**
    * The event emitted when the file input value changes.
    */
-  @Event() vaChange: EventEmitter;
-
-  @Element() el: HTMLElement;
+  @Event() vaMultipleChange: EventEmitter;
+  @State() files: FileIndex[] = [ {key: 0, file: null} ];
 
   private fileKeyCounter: number = 0;
-  @State() files: FileIndex[] = [ {key: this.fileKeyCounter, file: null} ];
 
   private findFileByKey(fileKey: number) {
     return this.files.find(file => file.key === fileKey);
@@ -111,7 +102,7 @@ export class VaFileInputMultiple {
       console.log('delete', JSON.stringify(this.files));
     }
 
-    this.vaChange.emit({ files: this.files.map(fileObj => fileObj.file) });
+    this.vaMultipleChange.emit({ files: this.files.map(fileObj => fileObj.file) });
     console.log('Post handleChange', JSON.stringify(this.files));
     this.files = Array.of(...this.files);
   }
@@ -151,7 +142,7 @@ export class VaFileInputMultiple {
   };
 
   render() {
-    const { label, required, headerSize, hint, files, accept, errors } = this;
+    const { label, required, headerSize, hint, files, accept, errors, name, enableAnalytics } = this;
     return (
       <Host>
         {label && this.renderLabelOrHeader(label, required, headerSize)}
@@ -167,10 +158,12 @@ export class VaFileInputMultiple {
               key={fileEntry.key}
               uswds
               headless
+              name={`${name}-${fileEntry.key}`}
               accept={accept}
               required={required}
               error={errors[pageIndex]}
               onVaChange={(event) => this.handleChange(event, fileEntry.key, pageIndex)}
+              enableAnalytics={enableAnalytics}
             />
           ))}
         </div>

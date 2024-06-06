@@ -482,8 +482,7 @@ export namespace Components {
          */
         "errors": string[];
         /**
-          * Shows a va-progress-bar at this percentage when uploading
-          * @Prop () uploadPercentage?: number;  /** Optionally specifies the size of the header element to use instead of the base label. Accepts a number from 1 to 6, corresponding to HTML header elements h1 through h6. If not provided, defaults to standard label styling.
+          * Optionally specifies the size of the header element to use instead of the base label. Accepts a number from 1 to 6, corresponding to HTML header elements h1 through h6. If not provided, defaults to standard label styling.
          */
         "headerSize"?: number;
         /**
@@ -502,10 +501,6 @@ export namespace Components {
           * Sets the input to required and renders the (*Required) text.
          */
         "required"?: boolean;
-        /**
-          * Whether or not the component will use USWDS v3 styling.
-         */
-        "uswds"?: boolean;
     }
     interface VaHeaderMinimal {
         /**
@@ -2589,8 +2584,7 @@ declare namespace LocalJSX {
          */
         "errors"?: string[];
         /**
-          * Shows a va-progress-bar at this percentage when uploading
-          * @Prop () uploadPercentage?: number;  /** Optionally specifies the size of the header element to use instead of the base label. Accepts a number from 1 to 6, corresponding to HTML header elements h1 through h6. If not provided, defaults to standard label styling.
+          * Optionally specifies the size of the header element to use instead of the base label. Accepts a number from 1 to 6, corresponding to HTML header elements h1 through h6. If not provided, defaults to standard label styling.
          */
         "headerSize"?: number;
         /**
@@ -2608,15 +2602,11 @@ declare namespace LocalJSX {
         /**
           * The event emitted when the file input value changes.
          */
-        "onVaChange"?: (event: VaFileInputMultipleCustomEvent<any>) => void;
+        "onVaMultipleChange"?: (event: VaFileInputMultipleCustomEvent<any>) => void;
         /**
           * Sets the input to required and renders the (*Required) text.
          */
         "required"?: boolean;
-        /**
-          * Whether or not the component will use USWDS v3 styling.
-         */
-        "uswds"?: boolean;
     }
     interface VaHeaderMinimal {
         /**

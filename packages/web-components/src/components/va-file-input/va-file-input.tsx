@@ -132,7 +132,7 @@ export class VaFileInput {
     if (this.accept) {
       const normalizedAcceptTypes = this.normalizeAcceptProp(this.accept);
       if (!this.isAcceptedFileType(file.type, normalizedAcceptTypes)) {
-        this.removeFile();
+        this.removeFile(false);
         this.internalError = 'This is not a valid file type.';
         return;
       }
@@ -159,11 +159,13 @@ export class VaFileInput {
     this.el.shadowRoot.getElementById('fileInputField').click();
   };
 
-  private removeFile = () => {
+  private removeFile = (notifyParent: boolean = true) => {
     this.file = null;
-    this.vaChange.emit({ files: [this.file] });
     this.uploadStatus = 'idle';
     this.internalError = null;
+    if (notifyParent) {
+      this.vaChange.emit({ files: [this.file] });
+    }
   };
 
   private changeFile = () => {
@@ -428,7 +430,7 @@ export class VaFileInput {
                         ></va-button-icon>
                         <va-button-icon
                           buttonType="delete"
-                          onClick={this.removeFile}
+                          onClick={() => this.removeFile(true)}
                           label="Delete"
                         ></va-button-icon>
                       </div>
