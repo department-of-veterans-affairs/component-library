@@ -1,7 +1,7 @@
 {
   "name": "@department-of-veterans-affairs/storybook",
   "private": true,
-  "packageManager": "yarn@4.2.2",
+  "packageManager": "yarn@3.2.0",
   "scripts": {
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
@@ -31,7 +31,7 @@
     "babel-loader": "^8.2.2",
     "chromatic": "^11.5.1",
     "css-loader": "^5.2.4",
-    "node-sass": "^8.0.0",
+    "node-sass": "npm:sass@^1.49.9",
     "react-dom": "^17.0.2",
     "sass-loader": "^12.4.0",
     "storybook": "7.6.10"

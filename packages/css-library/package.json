@@ -2,7 +2,7 @@
   "name": "@department-of-veterans-affairs/css-library",
   "version": "0.7.4",
   "description": "Department of Veterans Affairs stylesheets, tokens, and utilities",
-  "packageManager": "yarn@4.2.2",
+  "packageManager": "yarn@3.2.0",
   "files": [
     "dist/**/*.css",
     "dist/**/*.scss",
