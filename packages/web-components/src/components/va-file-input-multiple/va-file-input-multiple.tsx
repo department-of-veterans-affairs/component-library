@@ -76,6 +76,10 @@ export class VaFileInputMultiple {
   private findFileByKey(fileKey: number) {
     return this.files.find(file => file.key === fileKey);
   }
+  
+  private isEmpty(): boolean {
+    return this.files[0].file === null;
+  }
 
   private handleChange(event: any, fileKey: number, pageIndex: number) {
     const newFile = event.detail.files[0];
@@ -143,6 +147,7 @@ export class VaFileInputMultiple {
 
   render() {
     const { label, required, headerSize, hint, files, accept, errors, name, enableAnalytics } = this;
+    const outerWrapClass = this.isEmpty() ? "" : "outer-wrap";
     return (
       <Host>
         {label && this.renderLabelOrHeader(label, required, headerSize)}
@@ -151,8 +156,8 @@ export class VaFileInputMultiple {
             {hint}
           </div>
         )}
-        <div class="outer-wrap">
-          <div class="selected-files-label">Selected files</div>
+        <div class={outerWrapClass}>
+          {!this.isEmpty() && <div class="selected-files-label">Selected files</div>}
           {files.map((fileEntry, pageIndex) => (
             <va-file-input
               key={fileEntry.key}
