@@ -28,6 +28,7 @@ const defaultArgs = {
   'reverse': undefined,
   'text': undefined,
   'video': undefined,
+  'label': undefined
 };
 
 const Template = ({
@@ -44,6 +45,7 @@ const Template = ({
   reverse,
   text,
   video,
+  label,
 }) => {
   return (
     <Fragment>
@@ -63,6 +65,7 @@ const Template = ({
         reverse={reverse}
         text={text}
         video={video}
+        label={label}
       />
     </Fragment>
   );
@@ -90,6 +93,7 @@ const VariantTemplate = ({
   reverse,
   text,
   video,
+  label,
 }) => {
   return (
     <va-link
@@ -106,6 +110,7 @@ const VariantTemplate = ({
       reverse={reverse}
       text={text}
       video={video}
+      label={label}
     />
   );
 };
