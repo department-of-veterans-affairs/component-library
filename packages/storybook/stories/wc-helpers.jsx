@@ -183,7 +183,7 @@ export function CustomEventsDescription({ data }) {
   const eventNames = events.map(event => event.event).join(', ');
 
   return (
-    <div className="vads-u-margin-top--2">
+    <p className="vads-u-margin-top--2">
       This component has {events.length} custom{' '}
       {events.length > 1 ? 'events' : 'event'}: <strong>{eventNames}</strong>.
       Please see our documentation on{' '}
@@ -191,7 +191,7 @@ export function CustomEventsDescription({ data }) {
         how to use web component custom events
       </a>
       .
-    </div>
+    </p>
   );
 }
 
