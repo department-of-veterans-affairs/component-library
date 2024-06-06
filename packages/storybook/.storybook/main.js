@@ -1,3 +1,4 @@
+import { dirname, join } from "path";
 const path = require('path');
 module.exports = {
   stories: ['../@(src|stories)/**/*.stories.@(js|jsx|ts|tsx|mdx)'],
@@ -13,7 +14,7 @@ module.exports = {
       // to individually list its addons
       docs: false
     }
-  }, '@storybook/addon-links', '@storybook/addon-storysource', '@storybook/addon-a11y', '@storybook/addon-mdx-gfm'],
+  }, getAbsolutePath("@storybook/addon-links"), getAbsolutePath("@storybook/addon-storysource"), getAbsolutePath("@storybook/addon-a11y"), getAbsolutePath("@storybook/addon-mdx-gfm")],
   webpackFinal: async (config, {
     configType
   }) => {
@@ -47,10 +48,14 @@ module.exports = {
     return config;
   },
   framework: {
-    name: '@storybook/react-webpack5',
+    name: getAbsolutePath("@storybook/react-webpack5"),
     options: {}
   },
   docs: {
     autodocs: true
   }
 };
+
+function getAbsolutePath(value) {
+  return dirname(require.resolve(join(value, "package.json")));
+}

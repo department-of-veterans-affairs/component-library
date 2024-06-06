@@ -5,7 +5,7 @@
   "scripts": {
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "build-storybook-chromatic": "chromatic build-storybook --project-token=${env.projectToken}"
+    "build-storybook-chromatic": "chromatic storybook build --project-token=${env.projectToken}"
   },
   "dependencies": {
     "@department-of-veterans-affairs/component-library": "workspace:packages/core",
@@ -19,15 +19,15 @@
     "@babel/preset-typescript": "^7.23.3",
     "@department-of-veterans-affairs/formation": "^11.0.5",
     "@mdx-js/react": "^1.6.22",
-    "@storybook/addon-a11y": "7.6.10",
+    "@storybook/addon-a11y": "7.6.19",
     "@storybook/addon-actions": "^7.6.10",
     "@storybook/addon-docs": "^7.6.10",
     "@storybook/addon-essentials": "^7.6.10",
     "@storybook/addon-links": "^7.6.10",
-    "@storybook/addon-mdx-gfm": "7.6.10",
+    "@storybook/addon-mdx-gfm": "7.6.19",
     "@storybook/addon-storysource": "^7.6.10",
     "@storybook/react": "^7.6.10",
-    "@storybook/react-webpack5": "7.6.10",
+    "@storybook/react-webpack5": "7.6.19",
     "babel-loader": "^8.2.2",
     "chromatic": "^11.5.1",
     "css-loader": "^5.2.4",
