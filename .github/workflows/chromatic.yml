@@ -27,7 +27,14 @@ jobs:
       - run: yarn workspace @department-of-veterans-affairs/web-components run build
       - run: yarn workspace @department-of-veterans-affairs/component-library run build
       - name: Publish to Chromatic
-        run: yarn chromatic storybook build --project-token=${{ secrets.CHROMATIC_PROJECT_TOKEN }} --only-changed=true
+        run: |
+          yarn chromatic storybook build --project-token=${{ secrets.CHROMATIC_PROJECT_TOKEN }} --only-changed=true > build-storybook.log 2>&1
+          exit_code=$?
+          if [ $exit_code -ne 0 ]; then
+            echo "Build failed. Printing log..."
+            cat build-storybook.log
+            exit $exit_code
+          fi
         working-directory: packages/storybook
         env:
           STORYBOOK_BUILD_TIMEOUT: 10000000
