@@ -8,10 +8,6 @@ import {
   Prop
 } from '@stencil/core';
 
-/**
- * This is a wrapper component whose job is to marshal the cells in slotted va-table-rows 
- * through DOM manipulation for projection into the slots of the va-table-inner component for rendering
- */
 
 @Component({
   tag: 'va-table',
@@ -19,6 +15,10 @@ import {
   shadow: true,
 })
 export class VaTable {
+  /**
+  * This is a wrapper component whose job is to marshal the cells in slotted va-table-rows 
+  * through DOM manipulation for projection into the slots of the va-table-inner component for rendering
+  */ 
   @Element() el: HTMLElement;
 
   /**
