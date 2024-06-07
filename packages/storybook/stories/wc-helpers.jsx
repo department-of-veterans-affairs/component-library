@@ -216,14 +216,14 @@ function NativeHandlers({ docsTags = [] }) {
   const nativeEvents = handlers.join(', ');
 
   return (
-    <div className="vads-u-margin-top--2">
+    <p className="vads-u-margin-top--2">
       This component uses the following native handlers:{' '}
       <strong>{nativeEvents}</strong>. Please see our documentation on{' '}
       <a href="https://design.va.gov/about/developers/using-web-components#native-events">
         how to use web component native events
       </a>
       .
-    </div>
+    </p>
   );
 }
 
