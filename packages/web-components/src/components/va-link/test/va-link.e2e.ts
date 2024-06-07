@@ -115,6 +115,14 @@ describe('va-link', () => {
     `);
   });
 
+  it('renders a link with a screen reader label', async () => {
+    const page = await newE2EPage();
+    await page.setContent(`<va-link href="https://www.va.gov" text="Veteran's Affairs" label="Example label" />`);
+
+    const label = await page.find('va-link >>> a[aria-label]');
+    expect(label.getAttribute("aria-label")).toBe('Example label');
+  });
+
   it('passes an axe check', async () => {
     const page = await newE2EPage();
     await page.setContent(
