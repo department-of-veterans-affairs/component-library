@@ -43,11 +43,12 @@ span.required {
 :host([error]:not([error=''])[uswds='false']) label,
 :host([error]:not([error=''])[uswds='false']) > span {
   display: block;
-  font-size: 1rem;
+  font-size: 1.06rem;
 }
 
 :host([error]:not([error=''])[uswds='false']) > span {
   color: var(--vads-color-secondary-dark);
+  font-size: 1.06rem;
 }
 
 ::slotted(option) {
@@ -55,6 +56,7 @@ span.required {
 }
 
 :host([uswds='false']) label {
+  font-size: 1.06rem;
   margin-top: 1.875rem;
   max-width: 28.75rem;
   display: block;
