@@ -30,7 +30,7 @@ jobs:
         run: yarn chromatic storybook build --project-token=${{ secrets.CHROMATIC_PROJECT_TOKEN }} --only-changed=true
         working-directory: packages/storybook
         env:
-          STORYBOOK_BUILD_TIMEOUT: 1000
+          STORYBOOK_BUILD_TIMEOUT: 10000000
           # projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
        
 
