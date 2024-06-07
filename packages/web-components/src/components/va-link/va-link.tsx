@@ -145,6 +145,7 @@ export class VaLink {
 
     const linkClass = classNames({
       'va-link--reverse': reverse,
+      'link--center': iconName
     });
 
     // Active link variant
@@ -226,10 +227,8 @@ export class VaLink {
             href={href}
             class={linkClass}
             onClick={handleClick}
-            rel="noopener"
-            target="_blank"
           >
-            <va-icon class="link-icon--left" icon={iconName} size={iconSize}></va-icon>
+            <va-icon icon={iconName} size={iconSize}></va-icon>
             {text}
           </a>
         </Host>

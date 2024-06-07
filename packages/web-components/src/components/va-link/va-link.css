@@ -35,6 +35,11 @@
   top: 3px;
 }
 
+.link--center {
+  display: inline-flex;
+  align-items: center;
+}
+
 dfn {
   font-style: normal;
 }
