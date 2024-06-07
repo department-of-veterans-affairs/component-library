@@ -1,0 +1,33 @@
+// This is a copy of the entire ~uswds/src/stylesheets/elements/labels.scss file
+// so that we can convert the rem values for USWDS v3.
+
+/*
+  Original: @import "~uswds/src/stylesheets/elements/labels";
+  ***THIS IS USWDS v1***
+*/
+
+@use '../../override-function' as *;
+@use "../../../../dist/tokens/scss/variables" as tok;
+@use '../variables' as vars;
+
+.usa-label {
+    background-color: tok.$vads-color-base-dark;
+    border-radius: vars.$label-border-radius;
+    color: tok.$vads-color-white;
+    font-size: vars.$h5-font-size;
+    margin-right: scale-rem(0.5rem);
+    padding: scale-rule(0.1rem 0.7rem);
+    text-transform: uppercase;
+  
+    &:only-of-type {
+      margin-right: 0;
+    }
+  }
+  
+  .usa-label-big {
+    @extend .usa-label;
+    font-size: vars.$base-font-size;
+    padding-left: scale-rem(0.9rem);
+    padding-right: scale-rem(0.9rem);
+  }
+  

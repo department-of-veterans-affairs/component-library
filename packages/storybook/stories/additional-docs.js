@@ -31,8 +31,8 @@ export const additionalDocs = {
   'Link - Action': {
     guidanceHref: 'link/action',
     guidanceName: 'Action link',
-    maturityCategory: USE,
-    maturityLevel: DEPLOYED,
+    maturityCategory: DONT_USE,
+    maturityLevel: DEPRECATED,
   },
   'Modal - React': {
     maturityCategory: DONT_USE,

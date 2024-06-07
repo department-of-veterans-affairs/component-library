@@ -19377,7 +19377,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"style-dictionary@npm:^3.8.0":
+"style-dictionary@npm:3.8.0":
   version: 3.8.0
   resolution: "style-dictionary@npm:3.8.0"
   dependencies:
