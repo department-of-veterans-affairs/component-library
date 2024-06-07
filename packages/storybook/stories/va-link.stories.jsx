@@ -49,6 +49,7 @@ const Template = ({
 }) => {
   return (
     <Fragment>
+    <p>
       If you need help to gather your information or fill out your
       application/form,{' '}
       <va-link
@@ -67,6 +68,7 @@ const Template = ({
         video={video}
         label={label}
       />
+    </p>
     </Fragment>
   );
 };

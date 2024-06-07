@@ -1,3 +1,4 @@
+@import "~@department-of-veterans-affairs/css-library/dist/uswds-typography.css";
 @import '../../mixins/links.css';
 
 :host {
