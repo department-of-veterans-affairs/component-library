@@ -26,7 +26,7 @@ const defaultArgs = {
   'hint': 'You can upload a .pdf, .gif, .jpg, .bmp, or .txt file.',
   'vaMultipleChange': null,
   'headerSize': null,
-  'children': null
+  'additionalInfo': null
 };
 
 const Template = ({
@@ -39,7 +39,7 @@ const Template = ({
   'enable-analytics': enableAnalytics,
   vaMultipleChange,
   headerSize,
-  children
+  additionalInfo
 }) => {
   return (
     <VaFileInputMultiple
@@ -52,7 +52,7 @@ const Template = ({
       enable-analytics={enableAnalytics}
       onVaMultipleChange={vaMultipleChange}
       header-size={headerSize}
-      children={children}
+      additional-info={additionalInfo}
     />
   );
 };
@@ -60,6 +60,47 @@ const Template = ({
 export const Default = Template.bind(null);
 Default.args = { ...defaultArgs };
 Default.argTypes = propStructure(fileInputDocs);
+
+const additionalInfoContent = (
+  <div>
+    <va-select className="hydrated" uswds label='What kind of file is this?' required>
+      <option key="1" value="1">Public Document</option>
+      <option key="2" value="2">Private Document</option>
+    </va-select>
+  </div>);
+
+export const AdditionalInfo = Template.bind(null);
+AdditionalInfo.args = {
+  ...defaultArgs,
+  label: 'Label Header',
+  additionalInfo: additionalInfoContent
+}
+
+const ErrorsTemplate = ({ label, name, hint}) => {
+  const [errorsList, setErrorsList] = useState([]);
+
+  function setErrorForEachFile(event) {
+    const fileEntries = event.detail.files;
+    setErrorsList(fileEntries.map((file, index) => `Error for index ${index}`));
+    console.log(errors);
+  }
+
+  return (
+    <VaFileInputMultiple
+      label={label}
+      name={name}
+      hint={hint}
+      errors={errorsList}
+      onVaMultipleChange={setErrorForEachFile}
+    />
+  )
+}
+
+export const Errors = ErrorsTemplate.bind(null);
+Errors.args = {
+  ...defaultArgs,
+  label: 'Label Header',
+}
 
 const CustomValidationTemplate = ({ label, name, accept, hint }) => {
   const [errorsList, setErrorsList] = useState([]);
@@ -143,7 +184,6 @@ function validateFileContents(event) {
     </>
   );
 };
-
 
 export const CustomValidation = CustomValidationTemplate.bind(null);
 CustomValidation.args = {

@@ -27,7 +27,7 @@ const defaultArgs = {
   'vaChange': null,
   'uswds': true,
   'header-size': null,
-  'children': null
+  'additionalInfo': null
 };
 
 const Template = ({
@@ -41,7 +41,7 @@ const Template = ({
   vaChange,
   uswds,
   headerSize,
-  children
+  additionalInfo
 }) => {
   return (
     <VaFileInput
@@ -55,7 +55,7 @@ const Template = ({
       onVaChange={vaChange}
       uswds={uswds}
       header-size={headerSize}
-      children={children}
+      additional-info={additionalInfo}
     />
   );
 };
@@ -99,7 +99,7 @@ HeaderLabel.args = {
   required: true
 }
 
-const additionalInfoSlotContent = (
+const additionalInfoContent = (
   <div>
     <va-select className="hydrated" uswds label='What kind of file is this?' required>
       <option key="1" value="1">Public Document</option>
@@ -111,7 +111,7 @@ export const AdditionalInfo = Template.bind(null);
 AdditionalInfo.args = {
   ...defaultArgs,
   label: 'Label Header',
-  children: additionalInfoSlotContent
+  additionalInfo: additionalInfoContent
 }
 
 const CustomValidationTemplate = ({ label, name, accept, required, error, hint }) => {
