@@ -526,6 +526,14 @@ export namespace Components {
         /**
           * Adds an aria-label attribute to the link element.
          */
+        "iconName"?: string;
+        /**
+          * Adds an aria-label attribute to the link element.
+         */
+        "iconSize"?: number;
+        /**
+          * Adds an aria-label attribute to the link element.
+         */
         "label"?: string;
         /**
           * The number of pages of the file. Only displayed if download is `true`.
@@ -2613,6 +2621,14 @@ declare namespace LocalJSX {
           * The href attribute of the anchor.
          */
         "href": string;
+        /**
+          * Adds an aria-label attribute to the link element.
+         */
+        "iconName"?: string;
+        /**
+          * Adds an aria-label attribute to the link element.
+         */
+        "iconSize"?: number;
         /**
           * Adds an aria-label attribute to the link element.
          */
