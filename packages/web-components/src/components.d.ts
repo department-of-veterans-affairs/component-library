@@ -224,9 +224,9 @@ export namespace Components {
          */
         "secondary"?: boolean;
         /**
-          * A value of: `prevent` --will  triger the onsubmit callback on form, but not submit; `skip` --will submit but not trigger onsubmit callback; and `submit` or truthy -- will do both `false` acts a boolean false
+          * Having this attribut present will set the type of this button as 'submit'. A value of: `prevent` --will  triger the onsubmit callback on form, but won't submit the form; `skip` --will submit the form but not trigger onsubmit callback;
          */
-        "submit"?: 'submit' | 'prevent' | 'skip' | '';
+        "submit"?: string;
         /**
           * The text displayed on the button. If `continue` or `back` is true, the value of text is ignored.
          */
@@ -265,9 +265,9 @@ export namespace Components {
          */
         "secondaryLabel"?: string;
         /**
-          * A value of: `prevent` --will  triger the onsubmit callback on form, but not submit; `skip` --will submit but not trigger onsubmit callback; and `submit` or truthy -- will do both `false` acts a boolean false
+          * Having this attribut present will set the type of this button as 'submit'. A value of: `prevent` --will  triger the onsubmit callback on form, but won't submit the form; `skip` --will submit the form but not trigger onsubmit callback;
          */
-        "submit"?: 'submit' | 'prevent' | 'skip' | '';
+        "submit"?: string;
         /**
           * If `true`, button pair will use Update and Cancel for button text.
          */
@@ -2262,9 +2262,9 @@ declare namespace LocalJSX {
          */
         "secondary"?: boolean;
         /**
-          * A value of: `prevent` --will  triger the onsubmit callback on form, but not submit; `skip` --will submit but not trigger onsubmit callback; and `submit` or truthy -- will do both `false` acts a boolean false
+          * Having this attribut present will set the type of this button as 'submit'. A value of: `prevent` --will  triger the onsubmit callback on form, but won't submit the form; `skip` --will submit the form but not trigger onsubmit callback;
          */
-        "submit"?: 'submit' | 'prevent' | 'skip' | '';
+        "submit"?: string;
         /**
           * The text displayed on the button. If `continue` or `back` is true, the value of text is ignored.
          */
@@ -2319,9 +2319,9 @@ declare namespace LocalJSX {
          */
         "secondaryLabel"?: string;
         /**
-          * A value of: `prevent` --will  triger the onsubmit callback on form, but not submit; `skip` --will submit but not trigger onsubmit callback; and `submit` or truthy -- will do both `false` acts a boolean false
+          * Having this attribut present will set the type of this button as 'submit'. A value of: `prevent` --will  triger the onsubmit callback on form, but won't submit the form; `skip` --will submit the form but not trigger onsubmit callback;
          */
-        "submit"?: 'submit' | 'prevent' | 'skip' | '';
+        "submit"?: string;
         /**
           * If `true`, button pair will use Update and Cancel for button text.
          */

@@ -41,11 +41,11 @@ export class VaButtonPair {
   @Prop() secondaryLabel?: string;
 
   /**
-   * A value of: `prevent` --will  triger the onsubmit callback on form, but not submit;
-   * `skip` --will submit but not trigger onsubmit callback; and `submit` or truthy -- will do both
-   * `false` acts a boolean false
+   *  Having this attribut present will set the type of this button as 'submit'.
+   *  A value of: `prevent` --will  triger the onsubmit callback on form, but won't submit the form;
+   * `skip` --will submit the form but not trigger onsubmit callback;
    */
-  @Prop() submit?: 'submit' | 'prevent' | 'skip' | '' = '';
+  @Prop() submit?: string;
 
   /**
    * If `true`, button pair will use Update and Cancel for button text.
