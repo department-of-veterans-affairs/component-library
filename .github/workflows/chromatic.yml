@@ -33,6 +33,7 @@ jobs:
           STORYBOOK_BUILD_TIMEOUT: 10000000
           # projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
       - name: Output build log details
+        if: always() 
         run: cat /home/runner/work/component-library/component-library/packages/storybook/build-storybook.log
 
        
