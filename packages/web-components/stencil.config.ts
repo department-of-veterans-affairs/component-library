@@ -35,7 +35,7 @@ export const config: Config = {
   },
   outputTargets: [
     reactOutputTarget({
-      componentCorePackage: '../dist/types',
+      componentCorePackage: '@department-of-veterans-affairs/web-components/dist/types',
       proxiesFile: './react-bindings/index.ts',
       includeDefineCustomElements: false,
     }),
