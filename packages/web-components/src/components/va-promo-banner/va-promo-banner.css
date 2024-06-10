@@ -1,4 +1,4 @@
-@import "~@department-of-veterans-affairs/css-library/dist/uswds-typography.css";
+@import "~@department-of-veterans-affairs/css-library/dist/stylesheets/uswds-typography.css";
 
 :host {
   z-index: 1;
