@@ -47,7 +47,3 @@ dfn {
 abbr {
   text-decoration: none;
 }
-
-a::part(icon) {
-  margin-right: 2rem;
-}
