@@ -126,7 +126,7 @@ describe('va-link', () => {
     <va-link class="hydrated" href="https://www.va.gov" text="Veteran's Affairs" icon-name="chevron_right" icon-size="3">
       <mock:shadow-root>
         <a href="https://www.va.gov" class="link--center">
-          <va-icon class="hydrated"></va-icon>
+          <va-icon class="hydrated" part="icon"></va-icon>
           Veteran's Affairs
         </a>
       </mock:shadow-root>
