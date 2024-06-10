@@ -94,8 +94,6 @@ export class VaFileInput {
    */
   @Prop() headless?: boolean = false;
 
-  @Prop() additionalInfo?: any;
-
   /**
    * The event emitted when the file input value changes.
    */
@@ -308,8 +306,7 @@ export class VaFileInput {
       headerSize,
       fileContents,
       fileType,
-      headless,
-      additionalInfo
+      headless
     } = this;
 
     const text = this.getButtonText();
@@ -422,11 +419,9 @@ export class VaFileInput {
                   </div>
                   {file && (
                     <div>
-                      {additionalInfo && (
-                        <div class="additional-info-slot">
-                          {additionalInfo}
-                        </div>
-                      )}
+                      <div class="additional-info-slot">
+                        <slot></slot>
+                      </div>
                       <div class="file-button-section">
                         <va-button-icon
                           buttonType="change-file"

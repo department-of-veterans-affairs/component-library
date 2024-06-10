@@ -427,7 +427,6 @@ export namespace Components {
           * A comma-separated list of unique file type specifiers.
          */
         "accept"?: string;
-        "additionalInfo"?: any;
         /**
           * The text displayed on the button.
          */
@@ -474,7 +473,6 @@ export namespace Components {
           * A comma-separated list of unique file type specifiers.
          */
         "accept"?: string;
-        "additionalInfo"?: any;
         /**
           * Emit component-library-analytics events on the file input change event.
          */
@@ -2523,7 +2521,6 @@ declare namespace LocalJSX {
           * A comma-separated list of unique file type specifiers.
          */
         "accept"?: string;
-        "additionalInfo"?: any;
         /**
           * The text displayed on the button.
          */
@@ -2578,7 +2575,6 @@ declare namespace LocalJSX {
           * A comma-separated list of unique file type specifiers.
          */
         "accept"?: string;
-        "additionalInfo"?: any;
         /**
           * Emit component-library-analytics events on the file input change event.
          */
