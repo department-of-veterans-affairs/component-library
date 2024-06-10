@@ -84,12 +84,12 @@ export class VaLink {
   @Prop() label?: string = null;
 
   /**
-   * Adds an aria-label attribute to the link element.
+   * The name of the icon to be displayed in the link.
    */
   @Prop() iconName?: string = null;
 
   /**
-   * Adds an aria-label attribute to the link element.
+   * The size of the icon to be displayed in the link.
    */
   @Prop() iconSize?: number = 3;
   /**
@@ -219,7 +219,7 @@ export class VaLink {
       );
     }
 
-    // IconName and IconSize
+    // Icon link Variant
     if (iconName) {
       return (
         <Host>
