@@ -228,7 +228,7 @@ export class VaLink {
             class={linkClass}
             onClick={handleClick}
           >
-            <va-icon icon={iconName} size={iconSize}></va-icon>
+            <va-icon icon={iconName} size={iconSize} part="icon"></va-icon>
             {text}
           </a>
         </Host>

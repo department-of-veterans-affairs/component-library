@@ -163,8 +163,8 @@ export const Icon = VariantTemplate.bind(null);
 Icon.args = {
   ...defaultArgs,
   'href': '#',
-  'text': `Link with icon`,
-  'icon-name': 'chevron_right',
+  'text': `National Cemetery Administration`,
+  'icon-name': 'mail',
   'icon-size': 3,
 };
 
