@@ -23,7 +23,7 @@ jobs:
         run: yarn workspaces foreach --all -v install
 
       - name: Install deps in packages
-        run: yarn workspaces foreach --all -v test
+        run: yarn workspaces foreach --all -v run test
 
       # - name: Test react-components
       #   run: yarn test
