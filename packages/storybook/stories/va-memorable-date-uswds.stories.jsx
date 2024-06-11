@@ -10,9 +10,9 @@ export default {
   title: 'Components/Memorable date USWDS',
   id: 'uswds/va-memorable-date',
   parameters: {
-    componentSubtitle: `va-memorable-date web component`,
+    componentSubtitle: 'va-memorable-date web component',
     docs: {
-      page: () => <StoryDocs data={memorableDateInputDocs} />,
+      page: () => <StoryDocs storyDefault={Default} data={memorableDateInputDocs} />,
     },
   },
 };

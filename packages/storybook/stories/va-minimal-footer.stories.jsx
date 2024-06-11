@@ -7,9 +7,9 @@ export default {
   title: 'Components/Minimal Footer',
   id: 'components/va-minimal-footer',
   parameters: {
-    componentSubtitle: `va-minimal-footer web component`,
+    componentSubtitle: 'va-minimal-footer web component',
     docs: {
-      page: () => <StoryDocs data={minimalFooterDocs} />,
+      page: () => <StoryDocs storyDefault={Default} data={minimalFooterDocs} />,
     },
   },
 };

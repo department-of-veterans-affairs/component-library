@@ -10,9 +10,9 @@ export default {
   id: 'uswds/va-process-list',
   subcomponents: componentStructure(processListItemDocs),
   parameters: {
-    componentSubtitle: `va-process-list web component`,
+    componentSubtitle: 'va-process-list web component',
     docs: {
-      page: () => <StoryDocs data={processListDocs} />,
+      page: () => <StoryDocs storyDefault={Default} data={processListDocs} />,
     },
   },
 };

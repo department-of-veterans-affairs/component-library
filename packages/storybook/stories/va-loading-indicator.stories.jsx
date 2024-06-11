@@ -8,9 +8,9 @@ export default {
   title: 'Components/Loading indicator',
   id: 'components/va-loading-indicator',
   parameters: {
-    componentSubtitle: `va-loading-indicator web component`,
+    componentSubtitle: 'va-loading-indicator web component',
     docs: {
-      page: () => <StoryDocs data={loadingIndicatorDocs} />,
+      page: () => <StoryDocs storyDefault={Default} data={loadingIndicatorDocs} />,
     },
     actions: {
       handles: ['component-library-analytics'],

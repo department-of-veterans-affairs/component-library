@@ -10,7 +10,7 @@ export default {
   parameters: {
     componentSubtitle: 'va-select web component',
     docs: {
-      page: () => <StoryDocs data={selectDocs} />,
+      page: () => <StoryDocs storyDefault={Default} data={selectDocs} />,
     },
   },
 };

@@ -13,15 +13,27 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Use Node.js 14.x
+      - name: Use Node.js 18.x
         uses: actions/setup-node@v2
         with:
-          node-version: 14.x
+          node-version: 18.x
           cache: 'yarn'
       - run: yarn install
-      - name: Install dependencies in react-components
-        run: yarn install
+
+      - name: Test react-components
+        run: |
+          yarn install
+          yarn test
         working-directory: packages/react-components
-      - run: yarn workspace @department-of-veterans-affairs/react-components run build
-      - run: yarn workspace @department-of-veterans-affairs/web-components run build
-      - run: yarn workspaces foreach -v run test
+      
+      - name: Test design-system-dashboard-cli
+        run: |
+          yarn install
+          yarn test
+        working-directory: packages/design-system-dashboard-cli
+     
+      - name: Test web-components
+        run: |
+          yarn install
+          yarn test
+        working-directory: packages/web-components

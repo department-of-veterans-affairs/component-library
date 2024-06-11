@@ -5,12 +5,12 @@ import { getWebComponentDocs, propStructure, StoryDocs, applyFocus } from './wc-
 const textareaDocs = getWebComponentDocs('va-textarea');
 
 export default {
-  title: `Components/Textarea USWDS`,
+  title: 'Components/Textarea USWDS',
   id: 'uswds/va-textarea',
   parameters: {
-    componentSubtitle: `va-textarea web component`,
+    componentSubtitle: 'va-textarea web component',
     docs: {
-      page: () => <StoryDocs data={textareaDocs} />,
+      page: () => <StoryDocs storyDefault={Default} data={textareaDocs} />,
     },
   },
 };

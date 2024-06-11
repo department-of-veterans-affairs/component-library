@@ -7,9 +7,9 @@ export default {
   title: 'Components/Progress bar - activity',
   id: 'components/va-progress-bar',
   parameters: {
-    componentSubtitle: `va-progress-bar web component`,
+    componentSubtitle: 'va-progress-bar web component',
     docs: {
-      page: () => <StoryDocs data={progressBarDocs} />,
+      page: () => <StoryDocs storyDefault={Default} data={progressBarDocs} />,
     },
   },
 };
