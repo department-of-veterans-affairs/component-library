@@ -128,6 +128,9 @@ export class VaButton {
 
   private handleSubmit() {
     const theForm = this.el.closest('form');
+    if (!theForm) {
+      return;
+    }
     const submitEvent = new CustomEvent('submit', {
       bubbles: true,
       cancelable: true,
