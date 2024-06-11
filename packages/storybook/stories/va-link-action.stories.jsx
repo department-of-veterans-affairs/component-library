@@ -9,7 +9,7 @@ export default {
   parameters: {
     componentSubtitle: `va-link-action web component`,
     docs: {
-      page: () => <StoryDocs data={linkDocs} />,
+      page: () => <StoryDocs storyDefault={Default} data={linkDocs} />,
     },
   },
 };
