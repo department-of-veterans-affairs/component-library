@@ -48,7 +48,7 @@ const defaultArgs = {
 export const Default = Template.bind(null);
 Default.args = {
   ...defaultArgs,
-  isError: true,
+  'is-error': true,
 };
 
 let maintenanceStartDateTime = new Date(maintenanceTime);
