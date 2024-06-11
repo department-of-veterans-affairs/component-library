@@ -7,9 +7,9 @@ export default {
   title: 'Components/Link',
   id: 'components/va-link',
   parameters: {
-    componentSubtitle: `va-link web component`,
+    componentSubtitle: 'va-link web component',
     docs: {
-      page: () => <StoryDocs data={linkDocs} />,
+      page: () => <StoryDocs storyDefault={Default} data={linkDocs} />,
     },
   },
 };

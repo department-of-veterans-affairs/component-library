@@ -7,9 +7,9 @@ export default {
   title: 'Components/OMB info',
   id: 'components/va-omb-info',
   parameters: {
-    componentSubtitle: `va-omb-info web component`,
+    componentSubtitle: 'va-omb-info web component',
     docs: {
-      page: () => <StoryDocs data={ombInfoDocs} />,
+      page: () => <StoryDocs storyDefault={Default} data={ombInfoDocs} />,
     },
   },
 };

@@ -7,9 +7,9 @@ export default {
   title: 'Components/Alert - expandable',
   id: 'components/va-alert-expandable',
   parameters: {
-    componentSubtitle: `va-alert-expandable web component`,
+    componentSubtitle: 'va-alert-expandable web component',
     docs: {
-      page: () => <StoryDocs data={alertExpandableDocs} />,
+      page: () => <StoryDocs storyDefault={Default} data={alertExpandableDocs} />,
     },
     actions: {
       handles: ['component-library-analytics'],

@@ -5,9 +5,8 @@ import {
   Subtitle,
   Description,
   Primary,
-  ArgsTable,
   Stories,
-  PRIMARY_STORY,
+  Controls,
 } from '@storybook/addon-docs';
 
 import webComponentDocs from '@department-of-veterans-affairs/web-components/component-docs.json';
@@ -243,7 +242,7 @@ function CanvasLink() {
  * Return a component with Storybook docs blocks in a standard order.
  * Accepts a JSON object as a prop representing component information
  */
-export function StoryDocs({ componentName, data, children }) {
+export function StoryDocs({ storyDefault, componentName, data, children }) {
   const component = componentName || data?.tag;
   const componentDocs = additionalDocs?.[component];
   const componentData = data || componentDocs ? { ...data, ...componentDocs } : null;
@@ -268,10 +267,10 @@ export function StoryDocs({ componentName, data, children }) {
       <Guidance href={guidanceHref} name={guidanceName} />
       <CanvasLink />
       <CustomEventsDescription data={componentData} />
-      <Description markdown={data?.docs} />
+      <Description of={storyDefault} />
       <NativeHandlers docsTags={data?.docsTags} />
       <Primary />
-      <ArgsTable story={PRIMARY_STORY} />
+      <Controls of={storyDefault} />
       <>{children}</>
       <Stories />
     </>

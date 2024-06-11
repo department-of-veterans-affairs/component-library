@@ -7,9 +7,9 @@ export default {
   title: 'Deprecated/Number input',
   id: 'components/va-number-input',
   parameters: {
-    componentSubtitle: `va-number-input web component`,
+    componentSubtitle: 'va-number-input web component',
     docs: {
-      page: () => <StoryDocs data={numberInputDocs} />,
+      page: () => <StoryDocs storyDefault={Default} data={numberInputDocs} />,
     },
   },
   argTypes: {

@@ -11,9 +11,9 @@ export default {
   title: 'V1 Components/File input',
   id: 'components/va-file-input',
   parameters: {
-    componentSubtitle: `va-file-input web component`,
+    componentSubtitle: 'va-file-input web component',
     docs: {
-      page: () => <StoryDocs data={fileInputDocs} />,
+      page: () => <StoryDocs storyDefault={Default} data={fileInputDocs} />,
     },
   },
 };
