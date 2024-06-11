@@ -192,6 +192,14 @@ const ReverseTemplate = ({ filename, filetype, href, reverse, text }) => {
         text="Share your VA medical records"
       />
 
+      <h4 className="vads-u-color--white">Icon</h4>
+      <va-link
+        href={href}
+        reverse={reverse}
+        text="National Cemetery Administration"
+        icon-name="mail"
+      />
+
       <h4 className="vads-u-color--white">Download Link</h4>
       <va-link
         download

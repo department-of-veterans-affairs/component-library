@@ -89,7 +89,8 @@ export class VaLink {
   @Prop() iconName?: string = null;
 
   /**
-   * The size of the icon to be displayed in the link.
+   * The size variant of the icon,
+   * an integer between 3 and 9 inclusive.
    */
   @Prop() iconSize?: number = 3;
   /**
