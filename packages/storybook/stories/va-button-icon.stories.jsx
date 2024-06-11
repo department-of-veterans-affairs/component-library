@@ -9,7 +9,7 @@ export default {
   parameters: {
     componentSubtitle: 'va-button-icon web component',
     docs: {
-      page: () => <StoryDocs storyDefault={Default} data={buttonIconDocs} />,
+      page: () => <StoryDocs storyDefault={ChangeFile} data={buttonIconDocs} />,
     },
   },
 };
