@@ -36,7 +36,7 @@ const Template = ({
         disable-analytics={disableAnalytics}
         disable-border={disableBorder}
       >
-        <div>Here are some popular pets to consider</div>
+        <p>Here are some popular pets to consider</p>
         <ul>
           <li>Dogs</li>
           <li>Cats</li>

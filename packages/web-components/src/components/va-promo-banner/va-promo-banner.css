@@ -1,3 +1,5 @@
+@import "~@department-of-veterans-affairs/css-library/dist/stylesheets/uswds-typography.css";
+
 :host {
   z-index: 1;
   position: fixed;
@@ -19,8 +21,8 @@
 .va-promo-banner__icon {
   background-color: var(--vads-color-white);
   border-radius: 50%;
-  height: 4.2rem;
-  width: 4.2rem;
+  height: 42px;
+  width: 42px;
   margin-left: 0.5rem;
   margin-right: 0.8rem;
   margin-top: 0.8rem;
