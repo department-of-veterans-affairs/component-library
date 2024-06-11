@@ -182,7 +182,7 @@ export function CustomEventsDescription({ data }) {
   const eventNames = events.map(event => event.event).join(', ');
 
   return (
-    <p className="vads-u-margin-top--2">
+    <p className="component-details vads-u-margin-top--2">
       This component has {events.length} custom{' '}
       {events.length > 1 ? 'events' : 'event'}: <strong>{eventNames}</strong>.
       Please see our documentation on{' '}
@@ -215,7 +215,7 @@ function NativeHandlers({ docsTags = [] }) {
   const nativeEvents = handlers.join(', ');
 
   return (
-    <p className="vads-u-margin-top--2">
+    <p className="component-details vads-u-margin-top--2">
       This component uses the following native handlers:{' '}
       <strong>{nativeEvents}</strong>. Please see our documentation on{' '}
       <a href="https://design.va.gov/about/developers/using-web-components#native-events">
@@ -230,7 +230,7 @@ function CanvasLink() {
   // We're inside an iframe on the Docs page, so we need to get the parent
   const canvasLink = window.parent.location.href.replace('docs', 'story');
   return (
-    <p>
+    <p class="component-details">
       Information on this component's accessibility, html output, and how it is
       used within Storybook can be <a href={canvasLink}>viewed on the Canvas</a>
       .
