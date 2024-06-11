@@ -31,7 +31,7 @@ jobs:
         run: yarn install
         working-directory: packages/storybook
       - name: Publish Storybook
-        run: yarn chromatic build-storybook --project-token=${{ secrets.CHROMATIC_PROJECT_TOKEN }} --output-dir=/storybook-static
+        run: yarn build-storybook
         working-directory: packages/storybook
       - uses: aws-actions/configure-aws-credentials@v1
         with:
