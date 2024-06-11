@@ -23,7 +23,7 @@
   background: #5b616b;
 }
 .form-process li.section-complete:before {
-  background: #2e8540;
+  background: #008817;
   content: "✔︎";
 }
 @media screen and (max-width: 481px) {
