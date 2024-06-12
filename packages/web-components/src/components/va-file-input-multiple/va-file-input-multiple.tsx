@@ -1,5 +1,14 @@
 /* eslint-disable i18next/no-literal-string */
-import { Component, Prop, State, Element, h, Host, Event, EventEmitter } from '@stencil/core';
+import {
+  Component,
+  Prop,
+  State,
+  Element,
+  h,
+  Host,
+  Event,
+  EventEmitter,
+} from '@stencil/core';
 // todo i think we need the react-bindings to pass the children prop along but getting an error currently
 //import { VaFileInput } from '@department-of-veterans-affairs/web-components/react-bindings';
 import i18next from 'i18next';
@@ -7,6 +16,7 @@ import i18next from 'i18next';
 interface FileIndex {
   file: File | null;
   key: number;
+  content: Node[];
 }
 
 /**
@@ -16,10 +26,10 @@ interface FileIndex {
  * @guidanceHref form/file-input-multiple
  */
 @Component({
-   tag: 'va-file-input-multiple',
-   styleUrl: 'va-file-input-multiple.scss',
-   shadow: true,
- })
+  tag: 'va-file-input-multiple',
+  styleUrl: 'va-file-input-multiple.scss',
+  shadow: true,
+})
 export class VaFileInputMultiple {
   @Element() el: HTMLElement;
 
@@ -58,7 +68,7 @@ export class VaFileInputMultiple {
    */
   @Prop() enableAnalytics?: boolean = false;
 
-   /**
+  /**
    * Optionally specifies the size of the header element to use instead of the base label.
    * Accepts a number from 1 to 6, corresponding to HTML header elements h1 through h6.
    * If not provided, defaults to standard label styling.
@@ -69,7 +79,7 @@ export class VaFileInputMultiple {
    * The event emitted when the file input value changes.
    */
   @Event() vaMultipleChange: EventEmitter;
-  @State() files: FileIndex[] = [ {key: 0, file: null} ];
+  @State() files: FileIndex[] = [{ key: 0, file: null, content: [] }];
 
   private fileKeyCounter: number = 0;
 
@@ -83,7 +93,7 @@ export class VaFileInputMultiple {
 
   private handleChange(event: any, fileKey: number, pageIndex: number) {
     const newFile = event.detail.files[0];
-    console.log('Pre handleChange', JSON.stringify(this.files));
+    console.log('Pre handleChange', this.files);
 
     if (newFile) {
       // Add/change file
@@ -91,23 +101,32 @@ export class VaFileInputMultiple {
       if (fileObject.file) {
         // Change file
         fileObject.file = newFile;
-        console.log('change', JSON.stringify(this.files));
+        console.log('change', this.files);
       } else {
         // New file
         fileObject.file = newFile;
+        fileObject.content = Array.from(
+          this.el.querySelector('slot').assignedNodes(),
+        );
 
         this.fileKeyCounter++;
-        this.files.push({ file: null, key: this.fileKeyCounter });
-        console.log('new', JSON.stringify(this.files));
+        this.files.push({
+          file: null,
+          key: this.fileKeyCounter,
+          content: [],
+        });
+        console.log('new', this.files);
       }
     } else {
       // Deleted file
       this.files.splice(pageIndex, 1);
-      console.log('delete', JSON.stringify(this.files));
+      console.log('delete', this.files);
     }
 
-    this.vaMultipleChange.emit({ files: this.files.map(fileObj => fileObj.file) });
-    console.log('Post handleChange', JSON.stringify(this.files));
+    this.vaMultipleChange.emit({
+      files: this.files.map(fileObj => fileObj.file),
+    });
+    console.log('Post handleChange', this.files);
     this.files = Array.of(...this.files);
   }
 
@@ -136,9 +155,7 @@ export class VaFileInputMultiple {
     } else {
       return (
         <div class="label-header">
-          <span part="label">
-            {label}
-          </span>
+          <span part="label">{label}</span>
           {requiredSpan}
         </div>
       );
@@ -146,8 +163,18 @@ export class VaFileInputMultiple {
   };
 
   render() {
-    const { label, required, headerSize, hint, files, accept, errors, name, enableAnalytics } = this;
-    const outerWrapClass = this.isEmpty() ? "" : "outer-wrap";
+    const {
+      label,
+      required,
+      headerSize,
+      hint,
+      files,
+      accept,
+      errors,
+      name,
+      enableAnalytics,
+    } = this;
+    const outerWrapClass = this.isEmpty() ? '' : 'outer-wrap';
     return (
       <Host>
         {label && this.renderLabelOrHeader(label, required, headerSize)}
@@ -157,22 +184,29 @@ export class VaFileInputMultiple {
           </div>
         )}
         <div class={outerWrapClass}>
-          {!this.isEmpty() && <div class="selected-files-label">Selected files</div>}
-          {files.map((fileEntry, pageIndex) => (
-            <va-file-input
-              key={fileEntry.key}
-              uswds
-              headless
-              name={`${name}-${fileEntry.key}`}
-              accept={accept}
-              required={required}
-              error={errors[pageIndex]}
-              onVaChange={(event) => this.handleChange(event, fileEntry.key, pageIndex)}
-              enable-analytics={enableAnalytics}
-            >
-              <slot></slot>
-            </va-file-input>
-          ))}
+          {!this.isEmpty() && (
+            <div class="selected-files-label">Selected files</div>
+          )}
+          {files.map((fileEntry, pageIndex) => {
+            console.log(fileEntry.content, 'ppp');
+            return (
+              <va-file-input
+                key={fileEntry.key}
+                uswds
+                headless
+                name={`${name}-${fileEntry.key}`}
+                accept={accept}
+                required={required}
+                error={errors[pageIndex]}
+                onVaChange={event =>
+                  this.handleChange(event, fileEntry.key, pageIndex)
+                }
+                enable-analytics={enableAnalytics}
+              >
+                {fileEntry.content}
+              </va-file-input>
+            );
+          })}
         </div>
       </Host>
     );
