@@ -25,7 +25,7 @@ const defaultArgs = {
   'enable-analytics': false,
   'hint': 'You can upload a .pdf, .gif, .jpg, .bmp, or .txt file.',
   'vaMultipleChange': null,
-  'headerSize': null,
+  'header-size': null,
   'children': null
 };
 
@@ -39,8 +39,9 @@ const Template = ({
   'enable-analytics': enableAnalytics,
   vaMultipleChange,
   headerSize,
-  children
+  additional
 }) => {
+  console.log(additional,'addit');
   return (
     <VaFileInputMultiple
       label={label}
@@ -52,8 +53,8 @@ const Template = ({
       enable-analytics={enableAnalytics}
       onVaMultipleChange={vaMultipleChange}
       header-size={headerSize}
-      children={children}
-    />
+      children = { additional}
+    /> 
   );
 };
 
@@ -73,7 +74,7 @@ export const AdditionalInfo = Template.bind(null);
 AdditionalInfo.args = {
   ...defaultArgs,
   label: 'Label Header',
-  children: additionalInfoContent
+  additional: additionalInfoContent
 }
 
 const ErrorsTemplate = ({ label, name, hint}) => {
