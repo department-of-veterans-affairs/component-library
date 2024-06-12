@@ -22,7 +22,7 @@
   font-weight: 700;
 }
 
-:host([icon-name])::part(icon) {
+:host([icon-name]) va-icon {
   margin-right: 4px;
 }
 
