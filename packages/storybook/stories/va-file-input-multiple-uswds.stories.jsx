@@ -10,9 +10,7 @@ export default {
   id: 'uswds/va-file-input-multiple',
   parameters: {
     componentSubtitle: `va-file-input-multiple web component`,
-    docs: {
-      page: () => <StoryDocs data={fileInputDocs} />,
-    },
+   
   },
 };
 
