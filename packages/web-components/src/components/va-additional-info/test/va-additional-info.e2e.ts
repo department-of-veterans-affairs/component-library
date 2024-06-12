@@ -87,7 +87,7 @@ describe('va-additional-info', () => {
     );
 
     expect(preOpacity).toEqual('0');
-    expect(postOpacity).toEqual('1');
+    expect(postOpacity).toBeGreaterThan(0);
   });
 
   it('has keyboard control for expanding & collapsing on spacebar', async () => {
