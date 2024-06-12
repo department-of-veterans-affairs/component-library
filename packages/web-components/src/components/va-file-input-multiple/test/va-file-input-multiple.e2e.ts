@@ -35,8 +35,6 @@ describe('va-file-input-multiple', () => {
     expect(errorSpan.textContent.includes('This is an error')).toBe(true);
   });
 
-  //todo error on second file
-
   it('no error message when `error` is not defined', async () => {
     const page = await newE2EPage();
     await page.setContent(`<va-file-input-multiple />`);
@@ -48,7 +46,7 @@ describe('va-file-input-multiple', () => {
 
   it('renders hint text', async () => {
     const page = await newE2EPage();
-    await page.setContent('<va-file-input-multiple hint="This is hint text" uswds />');
+    await page.setContent('<va-file-input-multiple hint="This is hint text" />');
 
     // Render the hint text
     const hintTextElement = await page.find('va-file-input-multiple >>> div.usa-hint');
@@ -87,10 +85,10 @@ describe('va-file-input-multiple', () => {
     expect(fileInput.getAttribute('accept')).toBeFalsy();
   });
 
-  // Skipping due to test flakiness, but this event does work in the browser
-  it('v3 emits the vaMultipleChange event only once', async () => {
+  
+  it('emits the vaMultipleChange event only once', async () => {
     const page = await newE2EPage();
-    await page.setContent(`<va-file-input-multiple buttonText="Upload a file" uswds />`);
+    await page.setContent(`<va-file-input-multiple buttonText="Upload a file" />`);
 
     const fileUploadSpy = await page.spyOnEvent('vaMultipleChange');
     const filePath = path.relative(process.cwd(), __dirname + '/1x1.png');
@@ -105,7 +103,7 @@ describe('va-file-input-multiple', () => {
     expect(fileUploadSpy).toHaveReceivedEventTimes(1);
   });
 
-  it.skip('v3 passes an aXe check', async () => {
+  it.skip('passes an aXe check', async () => {
     const page = await newE2EPage();
 
     await page.setContent(
