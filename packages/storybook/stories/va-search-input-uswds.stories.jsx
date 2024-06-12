@@ -12,7 +12,7 @@ export default {
   parameters: {
     componentSubtitle: 'va-search-input web component',
     docs: {
-      page: () => <StoryDocs data={searchDocs} />,
+      page: () => <StoryDocs storyDefault={Default} data={searchDocs} />,
     },
   },
 };

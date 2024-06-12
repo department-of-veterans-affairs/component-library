@@ -1406,9 +1406,6 @@ a.vads-c-action-link--blue:before, a.vads-c-action-link--green:before, a.vads-c-
   position: absolute;
   left: 0px;
   top: -4px;
-  font-family: Source Sans Pro Web, Helvetica Neue, Helvetica, Roboto, Arial, sans-serif;
-  font-size: 1.06rem;
-  line-height: 1.5;
 }
 
 a.vads-c-action-link--blue:before {
@@ -1416,7 +1413,7 @@ a.vads-c-action-link--blue:before {
 }
 
 a.vads-c-action-link--green:before {
-  color: #2e8540;
+  color: #008817;
 }
 
 a.vads-c-action-link--white {
@@ -1433,11 +1430,11 @@ a.vads-c-action-link--white:before {
 }
 
 a.vads-c-action-link--white:hover {
-  color: #fef0c8;
+  color: #face00;
   background-color: transparent;
 }
 a.vads-c-action-link--white:hover:before {
-  color: #fef0c8;
+  color: #face00;
 }
 
 /*# sourceMappingURL=m-action-link.css.map */

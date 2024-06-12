@@ -82,10 +82,10 @@
   background-color: #f9dede;
 }
 .usa-alert-success {
-  border-left-color: #2e8540;
+  border-left-color: #008817;
 }
 .usa-alert-success::before {
-  color: #2e8540;
+  color: #008817;
   content: "\f00c";
 }
 .usa-alert-success.background-color-only {
@@ -101,10 +101,10 @@
   background-color: #fff1d2;
 }
 .usa-alert-continue {
-  border-left-color: #2e8540;
+  border-left-color: #008817;
 }
 .usa-alert-continue::before {
-  color: #2e8540;
+  color: #008817;
   content: "\f023";
 }
 .usa-alert.background-color-only {

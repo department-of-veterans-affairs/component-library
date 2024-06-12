@@ -9,9 +9,9 @@ export default {
   title: 'Components/Checkbox USWDS',
   id: 'uswds/va-checkbox',
   parameters: {
-    componentSubtitle: `va-checkbox web component`,
+    componentSubtitle: 'va-checkbox web component',
     docs: {
-      page: () => <StoryDocs data={checkboxDocs} />,
+      page: () => <StoryDocs storyDefault={Default} data={checkboxDocs} />,
     },
   },
 };

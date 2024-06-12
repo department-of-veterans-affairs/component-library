@@ -8,9 +8,9 @@ export default {
   title: 'Components/Summary box USWDS',
   id: 'uswds/va-summary-box',
   parameters: {
-    componentSubtitle: `va-summary-box web component`,
+    componentSubtitle: 'va-summary-box web component',
     docs: {
-      page: () => <StoryDocs data={summaryBoxDocs} />,
+      page: () => <StoryDocs storyDefault={Default} data={summaryBoxDocs} />,
     },
   },
 };

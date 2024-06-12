@@ -21,7 +21,7 @@
 
   https://designsystem.digital.gov/design-tokens/typesetting/overview/
 */
-p, ol, ul, li, dl, dt, dd, form, label {
+p, a, ol, ul, li, dl, dt, dd, form, label, button {
   @include typeset('ui');
 }
 
