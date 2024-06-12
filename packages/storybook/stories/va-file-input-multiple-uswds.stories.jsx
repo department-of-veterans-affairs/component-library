@@ -70,7 +70,38 @@ const additionalInfoContent = (
     </va-select>
   </div>);
 
-export const AdditionalInfo = Template.bind(null);
+
+const Template2 = ({
+  label,
+  name,
+  accept,
+  errors,
+  required,
+  hint,
+  'enable-analytics': enableAnalytics,
+  vaMultipleChange,
+  headerSize,
+  additional
+}) => {
+  console.log(additional,'addit');
+  return (
+    <VaFileInputMultiple
+      label={label}
+      name={name}
+      accept={accept}
+      required={required}
+      errors={errors}
+      hint={hint}
+      enable-analytics={enableAnalytics}
+      onVaMultipleChange={vaMultipleChange}
+      header-size={headerSize}
+    >
+      {additionalInfoContent}
+      </VaFileInputMultiple> 
+  );
+};
+
+export const AdditionalInfo = Template2.bind(null);
 AdditionalInfo.args = {
   ...defaultArgs,
   label: 'Label Header',

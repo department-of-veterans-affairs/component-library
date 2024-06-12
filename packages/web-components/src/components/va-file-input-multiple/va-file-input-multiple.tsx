@@ -16,7 +16,7 @@ import i18next from 'i18next';
 interface FileIndex {
   file: File | null;
   key: number;
-  content: Node[];
+  content: any;
 }
 
 /**
@@ -81,6 +81,7 @@ export class VaFileInputMultiple {
   @Event() vaMultipleChange: EventEmitter;
   @State() files: FileIndex[] = [{ key: 0, file: null, content: [] }];
 
+
   private fileKeyCounter: number = 0;
 
   private findFileByKey(fileKey: number) {
@@ -105,9 +106,8 @@ export class VaFileInputMultiple {
       } else {
         // New file
         fileObject.file = newFile;
-        fileObject.content = Array.from(
-          this.el.querySelector('slot').assignedNodes(),
-        );
+        fileObject.content = this.el.innerHTML;
+        
 
         this.fileKeyCounter++;
         this.files.push({
@@ -208,6 +208,7 @@ export class VaFileInputMultiple {
             );
           })}
         </div>
+        <slot></slot>
       </Host>
     );
   }
