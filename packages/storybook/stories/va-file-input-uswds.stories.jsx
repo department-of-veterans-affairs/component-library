@@ -27,7 +27,7 @@ const defaultArgs = {
   'vaChange': null,
   'uswds': true,
   'header-size': null,
-  'additionalInfo': null
+  'children': null
 };
 
 const Template = ({
@@ -41,7 +41,7 @@ const Template = ({
   vaChange,
   uswds,
   headerSize,
-  additionalInfo
+  children
 }) => {
   return (
     <VaFileInput
@@ -55,7 +55,7 @@ const Template = ({
       onVaChange={vaChange}
       uswds={uswds}
       header-size={headerSize}
-      additional-info={additionalInfo}
+      children={children}
     />
   );
 };
@@ -111,7 +111,7 @@ export const AdditionalInfo = Template.bind(null);
 AdditionalInfo.args = {
   ...defaultArgs,
   label: 'Label Header',
-  additionalInfo: additionalInfoContent
+  children: additionalInfoContent
 }
 
 const CustomValidationTemplate = ({ label, name, accept, required, error, hint }) => {
