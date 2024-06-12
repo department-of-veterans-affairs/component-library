@@ -420,7 +420,7 @@ export class VaFileInput {
                   {file && (
                     <div>
                       <div class="additional-info-slot">
-                        <slot></slot>
+                        <slot name={name}></slot>
                       </div>
                       <div class="file-button-section">
                         <va-button-icon

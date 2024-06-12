@@ -25,8 +25,8 @@ const defaultArgs = {
   'enable-analytics': false,
   'hint': 'You can upload a .pdf, .gif, .jpg, .bmp, or .txt file.',
   'vaMultipleChange': null,
-  'headerSize': null,
-  'children': null
+  'header-size': null,
+  'additionalInfo': null
 };
 
 const Template = ({
@@ -39,7 +39,7 @@ const Template = ({
   'enable-analytics': enableAnalytics,
   vaMultipleChange,
   headerSize,
-  children
+  additionalInfo
 }) => {
   return (
     <VaFileInputMultiple
@@ -52,7 +52,7 @@ const Template = ({
       enable-analytics={enableAnalytics}
       onVaMultipleChange={vaMultipleChange}
       header-size={headerSize}
-      children={children}
+      additionalInfo={additionalInfo}
     />
   );
 };
@@ -61,19 +61,20 @@ export const Default = Template.bind(null);
 Default.args = { ...defaultArgs };
 Default.argTypes = propStructure(fileInputDocs);
 
-const additionalInfoContent = (
+const additionalInfo = (
   <div>
     <va-select className="hydrated" uswds label='What kind of file is this?' required>
       <option key="1" value="1">Public Document</option>
       <option key="2" value="2">Private Document</option>
     </va-select>
-  </div>);
+  </div>
+);
 
 export const AdditionalInfo = Template.bind(null);
 AdditionalInfo.args = {
   ...defaultArgs,
   label: 'Label Header',
-  children: additionalInfoContent
+  additionalInfo: additionalInfo
 }
 
 const ErrorsTemplate = ({ label, name, hint}) => {

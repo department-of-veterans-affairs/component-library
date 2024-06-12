@@ -473,6 +473,7 @@ export namespace Components {
           * A comma-separated list of unique file type specifiers.
          */
         "accept"?: string;
+        "additionalInfo"?: any;
         /**
           * Emit component-library-analytics events on the file input change event.
          */
@@ -2575,6 +2576,7 @@ declare namespace LocalJSX {
           * A comma-separated list of unique file type specifiers.
          */
         "accept"?: string;
+        "additionalInfo"?: any;
         /**
           * Emit component-library-analytics events on the file input change event.
          */
