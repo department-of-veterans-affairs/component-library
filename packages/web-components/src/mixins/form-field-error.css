@@ -7,6 +7,7 @@
   color: var(--vads-color-secondary-dark);
   display: block;
   font-weight: 700;
+  font-size: 1.06rem;
 }
 
 :host([error]:not([error=''])) {

@@ -7,9 +7,9 @@ export default {
   title: 'Components/Banner - Maintenance',
   id: 'components/va-maintenance-banner',
   parameters: {
-    componentSubtitle: `va-maintenance-banner web component`,
+    componentSubtitle: 'va-maintenance-banner web component',
     docs: {
-      page: () => <StoryDocs data={maintenanceBannerDocs} />,
+      page: () => <StoryDocs storyDefault={Default} data={maintenanceBannerDocs} />,
     },
   },
 };
@@ -48,7 +48,7 @@ const defaultArgs = {
 export const Default = Template.bind(null);
 Default.args = {
   ...defaultArgs,
-  isError: true,
+  'is-error': true,
 };
 
 let maintenanceStartDateTime = new Date(maintenanceTime);

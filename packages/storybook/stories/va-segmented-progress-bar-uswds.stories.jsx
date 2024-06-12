@@ -9,9 +9,9 @@ export default {
   title: 'Components/Progress bar - segmented USWDS',
   id: 'uswds/va-segmented-progress-bar',
   parameters: {
-    componentSubtitle: `va-segmented-progress-bar web component`,
+    componentSubtitle: 'va-segmented-progress-bar web component',
     docs: {
-      page: () => <StoryDocs data={segmentedProgressBarDocs} />,
+      page: () => <StoryDocs storyDefault={Default} data={segmentedProgressBarDocs} />,
     },
   },
 };

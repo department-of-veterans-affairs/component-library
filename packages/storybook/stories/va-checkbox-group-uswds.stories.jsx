@@ -20,7 +20,7 @@ export default {
       handles: ['component-library-analytics'],
     },
     docs: {
-      page: () => <StoryDocs data={checkBoxGroupDocs} />,
+      page: () => <StoryDocs storyDefault={Default} data={checkBoxGroupDocs} />,
     },
   },
 };

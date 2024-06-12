@@ -1,3 +1,5 @@
+@import "~@department-of-veterans-affairs/css-library/dist/stylesheets/uswds-typography.css";
+
 :host {
   display: block;
 }
@@ -91,6 +93,7 @@ header.expanded .header-action {
 }
 
 .header-text {
+  font-size: 12px;
   margin-bottom: 2px;
   margin-right: 5px;
   margin-top: 2px;
@@ -99,6 +102,7 @@ header.expanded .header-action {
 
 .header-action {
   color: #005ea2;
+  font-size: 12px;
   line-height: 1.1;
   margin-bottom: 0;
   margin-top: 2px;
@@ -305,4 +309,5 @@ button::after {
 
 .content p {
   margin-top: 0;
+  margin-block-end: 1em;
 }

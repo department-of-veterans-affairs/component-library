@@ -5,12 +5,12 @@ import { getWebComponentDocs, propStructure, StoryDocs, applyFocus } from './wc-
 const textInputDocs = getWebComponentDocs('va-text-input');
 
 export default {
-  title: `Components/Text input USWDS`,
+  title: 'Components/Text input USWDS',
   id: 'uswds/va-text-input',
   parameters: {
-    componentSubtitle: `va-text-input web component`,
+    componentSubtitle: 'va-text-input web component',
     docs: {
-      page: () => <StoryDocs data={textInputDocs} />,
+      page: () => <StoryDocs storyDefault={Default} data={textInputDocs} />,
     },
   },
   argTypes: {

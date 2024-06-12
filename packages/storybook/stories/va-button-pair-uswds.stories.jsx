@@ -11,9 +11,9 @@ export default {
   title: 'Components/Button pair USWDS',
   id: 'uswds/va-button-pair',
   parameters: {
-    componentSubtitle: `va-button-pair web component`,
+    componentSubtitle: 'va-button-pair web component',
     docs: {
-      page: () => <StoryDocs data={buttonPairDocs} />,
+      page: () => <StoryDocs storyDefault={Default} data={buttonPairDocs} />,
     },
   },
 };

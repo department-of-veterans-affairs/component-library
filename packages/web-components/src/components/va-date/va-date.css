@@ -27,6 +27,7 @@ fieldset {
 
 legend {
   border: 0;
+  font-size: 1.06rem;
   padding: 0;
 }
 
@@ -48,6 +49,7 @@ span.required {
 .date-container {
   display: flex;
   margin-top: 12px;
+  flex-wrap: wrap;
 }
 
 :host([error]:not([error=''])) .date-container {

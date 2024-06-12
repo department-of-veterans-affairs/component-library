@@ -10,7 +10,7 @@
   "workspaces": [
     "packages/*"
   ],
-  "packageManager": "yarn@3.2.0",
+  "packageManager": "yarn@4.2.2",
   "resolutions": {
     "ansi-regex": "^5.0.1",
     "diff": "^3.5.0",
@@ -22,7 +22,7 @@
     "prism": "^1.27.0"
   },
   "dependencies": {
-    "@department-of-veterans-affairs/css-library": "^0.7.0",
+    "@department-of-veterans-affairs/css-library": "^0.8.1",
     "webpack": "5"
   },
   "devDependencies": {

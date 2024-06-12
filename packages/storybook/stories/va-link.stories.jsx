@@ -7,9 +7,9 @@ export default {
   title: 'Components/Link',
   id: 'components/va-link',
   parameters: {
-    componentSubtitle: `va-link web component`,
+    componentSubtitle: 'va-link web component',
     docs: {
-      page: () => <StoryDocs data={linkDocs} />,
+      page: () => <StoryDocs storyDefault={Default} data={linkDocs} />,
     },
   },
 };
@@ -28,6 +28,7 @@ const defaultArgs = {
   'reverse': undefined,
   'text': undefined,
   'video': undefined,
+  'label': undefined
 };
 
 const Template = ({
@@ -44,9 +45,11 @@ const Template = ({
   reverse,
   text,
   video,
+  label,
 }) => {
   return (
     <Fragment>
+    <p>
       If you need help to gather your information or fill out your
       application/form,{' '}
       <va-link
@@ -63,7 +66,9 @@ const Template = ({
         reverse={reverse}
         text={text}
         video={video}
+        label={label}
       />
+    </p>
     </Fragment>
   );
 };
@@ -90,6 +95,7 @@ const VariantTemplate = ({
   reverse,
   text,
   video,
+  label,
 }) => {
   return (
     <va-link
@@ -106,6 +112,7 @@ const VariantTemplate = ({
       reverse={reverse}
       text={text}
       video={video}
+      label={label}
     />
   );
 };

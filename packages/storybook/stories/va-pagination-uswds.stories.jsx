@@ -10,7 +10,7 @@ export default {
   parameters: {
     componentSubtitle: 'va-pagination web component',
     docs: {
-      page: () => <StoryDocs data={paginationDocs} />,
+      page: () => <StoryDocs storyDefault={Default} data={paginationDocs} />,
     }
   }
 }

@@ -7,9 +7,9 @@ export default {
   title: 'Components/Button USWDS',
   id: 'uswds/va-button',
   parameters: {
-    componentSubtitle: `va-button web component`,
+    componentSubtitle: 'va-button web component',
     docs: {
-      page: () => <StoryDocs data={buttonDocs} />,
+      page: () => <StoryDocs storyDefault={Primary} data={buttonDocs} />,
     },
   },
 };

@@ -5,9 +5,8 @@ import {
   Subtitle,
   Description,
   Primary,
-  ArgsTable,
   Stories,
-  PRIMARY_STORY,
+  Controls,
 } from '@storybook/addon-docs';
 
 import webComponentDocs from '@department-of-veterans-affairs/web-components/component-docs.json';
@@ -183,7 +182,7 @@ export function CustomEventsDescription({ data }) {
   const eventNames = events.map(event => event.event).join(', ');
 
   return (
-    <div className="vads-u-margin-top--2">
+    <p className="component-details vads-u-margin-top--2">
       This component has {events.length} custom{' '}
       {events.length > 1 ? 'events' : 'event'}: <strong>{eventNames}</strong>.
       Please see our documentation on{' '}
@@ -191,7 +190,7 @@ export function CustomEventsDescription({ data }) {
         how to use web component custom events
       </a>
       .
-    </div>
+    </p>
   );
 }
 
@@ -216,14 +215,14 @@ function NativeHandlers({ docsTags = [] }) {
   const nativeEvents = handlers.join(', ');
 
   return (
-    <div className="vads-u-margin-top--2">
+    <p className="component-details vads-u-margin-top--2">
       This component uses the following native handlers:{' '}
       <strong>{nativeEvents}</strong>. Please see our documentation on{' '}
       <a href="https://design.va.gov/about/developers/using-web-components#native-events">
         how to use web component native events
       </a>
       .
-    </div>
+    </p>
   );
 }
 
@@ -231,7 +230,7 @@ function CanvasLink() {
   // We're inside an iframe on the Docs page, so we need to get the parent
   const canvasLink = window.parent.location.href.replace('docs', 'story');
   return (
-    <p>
+    <p class="component-details">
       Information on this component's accessibility, html output, and how it is
       used within Storybook can be <a href={canvasLink}>viewed on the Canvas</a>
       .
@@ -243,7 +242,7 @@ function CanvasLink() {
  * Return a component with Storybook docs blocks in a standard order.
  * Accepts a JSON object as a prop representing component information
  */
-export function StoryDocs({ componentName, data, children }) {
+export function StoryDocs({ storyDefault, componentName, data, children }) {
   const component = componentName || data?.tag;
   const componentDocs = additionalDocs?.[component];
   const componentData = data || componentDocs ? { ...data, ...componentDocs } : null;
@@ -268,10 +267,10 @@ export function StoryDocs({ componentName, data, children }) {
       <Guidance href={guidanceHref} name={guidanceName} />
       <CanvasLink />
       <CustomEventsDescription data={componentData} />
-      <Description markdown={data?.docs} />
+      <Description of={storyDefault} />
       <NativeHandlers docsTags={data?.docsTags} />
       <Primary />
-      <ArgsTable story={PRIMARY_STORY} />
+      <Controls of={storyDefault} />
       <>{children}</>
       <Stories />
     </>

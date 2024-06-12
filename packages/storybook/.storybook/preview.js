@@ -139,7 +139,7 @@ document.body.onload = function () {
   // Fix for React 17/NVDA bug where React root is read as "clickable"
   // https://github.com/nvaccess/nvda/issues/13262
   // https://github.com/facebook/react/issues/20895
-  document.querySelector('#root').setAttribute('role', 'presentation');
+  // document.querySelector('#root').setAttribute('role', 'presentation');
 
   observeDocsRoot();
 };
