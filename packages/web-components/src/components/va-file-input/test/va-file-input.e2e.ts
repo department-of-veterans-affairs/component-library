@@ -6,12 +6,12 @@ describe('va-file-input', () => {
   it('renders', async () => {
     const page = await newE2EPage();
     await page.setContent(
-      '<va-file-input label="This is the file upload label" buttonText="Upload a file" required="false" multiple="false" class="hydrated"></va-file-input>',
+      '<va-file-input label="This is the file upload label" buttonText="Upload a file" required="false" class="hydrated"></va-file-input>',
     );
 
     const element = await page.find('va-file-input');
     expect(element).toEqualHtml(`
-    <va-file-input label="This is the file upload label" buttonText="Upload a file" required="false" multiple="false" class="hydrated">
+    <va-file-input label="This is the file upload label" buttonText="Upload a file" required="false" class="hydrated">
         <mock:shadow-root>
           <label for="fileInputButton">This is the file upload label</label>
           <slot></slot>
@@ -58,25 +58,6 @@ describe('va-file-input', () => {
 
     const requiredSpan = await page.find('va-file-input >>> .required');
     expect(requiredSpan).not.toBeNull();
-  });
-
-  // Not supporting multiple for now
-  it.skip('the `multiple` attributes exists if set', async () => {
-    const page = await newE2EPage();
-    await page.setContent(
-      `<va-file-input buttonText="Upload a file" multiple="true" />`,
-    );
-
-    const fileInput = await page.find('va-file-input >>> input');
-    expect(fileInput.getAttribute('multiple')).toBeTruthy();
-  });
-
-  it('the `multiple` attributes does not apply if omitted', async () => {
-    const page = await newE2EPage();
-    await page.setContent(`<va-file-input buttonText="Upload a file" />`);
-
-    const fileInput = await page.find('va-file-input >>> input');
-    expect(fileInput.getAttribute('multiple')).toBeFalsy();
   });
 
   it('the `accept` attribute exists if set', async () => {
@@ -132,7 +113,7 @@ describe('va-file-input', () => {
   it('v3 renders', async () => {
     const page = await newE2EPage();
     await page.setContent(
-      '<va-file-input label="This is the file upload label" buttonText="Upload a file" required="false" multiple="false" class="hydrated" uswds></va-file-input>',
+      '<va-file-input label="This is the file upload label" buttonText="Upload a file" required="false" class="hydrated" uswds></va-file-input>',
     );
 
     const element = await page.find('va-file-input');
@@ -178,25 +159,6 @@ describe('va-file-input', () => {
     expect(requiredSpan).not.toBeNull();
   });
 
-  // Skipping temporarily while we are not supporting the multiple file upload option
-  it.skip('v3 the `multiple` attributes exists if set', async () => {
-    const page = await newE2EPage();
-    await page.setContent(
-      `<va-file-input buttonText="Upload a file" multiple="true" uswds />`,
-    );
-
-    const fileInput = await page.find('va-file-input >>> input');
-    expect(fileInput.getAttribute('multiple')).toBeTruthy();
-  });
-
-  it('v3 the `multiple` attributes does not apply if omitted', async () => {
-    const page = await newE2EPage();
-    await page.setContent(`<va-file-input buttonText="Upload a file" uswds />`);
-
-    const fileInput = await page.find('va-file-input >>> input');
-    expect(fileInput.getAttribute('multiple')).toBeFalsy();
-  });
-
   it('v3 the `accept` attribute exists if set', async () => {
     const page = await newE2EPage();
     await page.setContent(
@@ -207,7 +169,7 @@ describe('va-file-input', () => {
     expect(fileInput.getAttribute('accept')).toBeTruthy();
   });
 
-  it('the `accept` attribute does not apply if omitted', async () => {
+  it('v3 the `accept` attribute does not apply if omitted', async () => {
     const page = await newE2EPage();
     await page.setContent(`<va-file-input buttonText="Upload a file" uswds />`);
 
@@ -215,20 +177,14 @@ describe('va-file-input', () => {
     expect(fileInput.getAttribute('accept')).toBeFalsy();
   });
 
-  // Skipping due to test flakiness, but this event does work in the browser
-  it.skip('v3 emits the vaChange event only once', async () => {
+  it('v3 emits the vaChange event only once', async () => {
     const page = await newE2EPage();
     await page.setContent(`<va-file-input buttonText="Upload a file" uswds />`);
 
     const fileUploadSpy = await page.spyOnEvent('vaChange');
     const filePath = path.relative(process.cwd(), __dirname + '/1x1.png');
-    const instructions = await page.find(
-      'va-file-input >>> .usa-file-input__instructions',
-    );
 
-    expect(instructions).not.toBeNull();
-
-    const input = await page.$('pierce/.usa-file-input__input');
+    const input = await page.$('pierce/#fileInputField');
     expect(input).not.toBeNull();
 
     await input
