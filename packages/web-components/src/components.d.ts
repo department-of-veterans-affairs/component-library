@@ -524,6 +524,14 @@ export namespace Components {
          */
         "href": string;
         /**
+          * The name of the icon to be displayed in the link.
+         */
+        "iconName"?: string;
+        /**
+          * The size variant of the icon, an integer between 3 and 9 inclusive.
+         */
+        "iconSize"?: number;
+        /**
           * Adds an aria-label attribute to the link element.
          */
         "label"?: string;
@@ -2613,6 +2621,14 @@ declare namespace LocalJSX {
           * The href attribute of the anchor.
          */
         "href": string;
+        /**
+          * The name of the icon to be displayed in the link.
+         */
+        "iconName"?: string;
+        /**
+          * The size variant of the icon, an integer between 3 and 9 inclusive.
+         */
+        "iconSize"?: number;
         /**
           * Adds an aria-label attribute to the link element.
          */

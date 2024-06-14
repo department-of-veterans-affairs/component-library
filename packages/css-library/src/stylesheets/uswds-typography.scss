@@ -24,15 +24,3 @@
 p, a, ol, ul, li, dl, dt, dd, form, label, button {
   @include typeset('ui');
 }
-
-/**
-  USWDS paragraph style
-
-  p {
-    line-height: 1.5;
-    max-width: 68ex;
-    margin-bottom: 0;
-    margin-top: 0;
-  }
-*/
-@include usa-paragraph-style;
