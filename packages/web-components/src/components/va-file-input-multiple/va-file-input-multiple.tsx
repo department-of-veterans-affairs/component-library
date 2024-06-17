@@ -82,6 +82,7 @@ export class VaFileInputMultiple {
   @State() files: FileIndex[] = [{ key: 0, file: null, content: null }];
 
   private fileKeyCounter: number = 0;
+  private additionalSlot = null;
 
   private findFileByKey(fileKey: number) {
     return this.files.find(file => file.key === fileKey);
@@ -91,10 +92,19 @@ export class VaFileInputMultiple {
     return this.files[0].file === null;
   }
 
-  private getClonedSlotContent() {
+  private setSlotContent() {
     const slot = this.el.shadowRoot.querySelector('slot');
-    const slottedNodes = slot ? slot.assignedElements({ flatten: true }) : [];
-    const elArray = slottedNodes.map(n => n.cloneNode(true));
+    if (!this.additionalSlot) {
+      this.additionalSlot = slot
+        ? slot.assignedElements({ flatten: true })
+        : [];
+    }
+    slot?.remove();
+    console.log(this.additionalSlot), 'add';
+  }
+
+  private getAdditionalContent() {
+    const elArray = this.additionalSlot.map(n => n.cloneNode(true));
     return elArray;
   }
 
@@ -112,7 +122,7 @@ export class VaFileInputMultiple {
       } else {
         // New file
         fileObject.file = newFile;
-        fileObject.content = this.getClonedSlotContent();
+        fileObject.content = this.getAdditionalContent();
         this.fileKeyCounter++;
         this.files.push({
           file: null,
@@ -168,6 +178,7 @@ export class VaFileInputMultiple {
 
   componentDidRender() {
     const theFileInputs = this.el.shadowRoot.querySelectorAll(`va-file-input`);
+    this.setSlotContent();
     theFileInputs.forEach((fileEntry, index) => {
       if (this.files[index].content) {
         this.files[index].content.forEach(node => fileEntry.append(node));
