@@ -101,6 +101,11 @@ export class VaFileInputMultiple {
     return this.files[0].file === null;
   }
 
+  /**
+   * Sets the content for the slots by finding the first 'slot' within the shadow DOM of this component.
+   * If there is no additionalSlot set, it fetches the assigned elements to this slot, ensuring that content
+   * is managed only if the slot exists. This prevents the default slot content from rendering.
+   */
   private setSlotContent() {
     const slot = this.el.shadowRoot.querySelector('slot');
     if (!this.additionalSlot) {
@@ -109,12 +114,17 @@ export class VaFileInputMultiple {
                             : [];
     }
     slot?.remove();
-    console.log(this.additionalSlot), 'add';
   }
 
+  /**
+   * Retrieves cloned nodes of the additional content that was originally assigned to the slot.
+   * This allows for independent manipulation and reuse of the content in multiple instances
+   * without altering the original nodes.
+   *
+   * @returns {Node[]} An array of cloned nodes from the additionalSlot.
+   */
   private getAdditionalContent() {
-    const elArray = this.additionalSlot.map(n => n.cloneNode(true));
-    return elArray;
+    return this.additionalSlot.map(n => n.cloneNode(true));
   }
 
   /**
@@ -191,6 +201,11 @@ export class VaFileInputMultiple {
     }
   };
 
+  /**
+   * It first ensures that the slot content is correctly set up, then iterates over each file input in the component,
+   * appending cloned additional content where applicable. This method ensures that additional content is
+   * consistently rendered across multiple file inputs after updates to the DOM.
+   */
   componentDidRender() {
     const theFileInputs = this.el.shadowRoot.querySelectorAll(`va-file-input`);
     this.setSlotContent();
@@ -208,28 +223,6 @@ export class VaFileInputMultiple {
   private hasErrors = () => {
     return this.errors.some(error => !!error);
   }
-
-  // private buildFileInputs(fileEntry, pageIndex) {
-  //   const { required, accept, errors, name, enableAnalytics } = this;
-  //   const fileInput = (
-  //     <va-file-input
-  //       key={fileEntry.key}
-  //       uswds
-  //       headless
-  //       name={`${name}-${fileEntry.key}`}
-  //       accept={accept}
-  //       required={required}
-  //       error={errors[pageIndex]}
-  //       onVaChange={event => this.handleChange(event, fileEntry.key, pageIndex)}
-  //       enable-analytics={enableAnalytics}
-  //     />
-  //   );
-  //   if (fileEntry.content) {
-  //     fileInput['$elm$'].childNodes = fileEntry.content;
-  //   }
-  //   console.log(fileInput, 'built');
-  //   return fileInput;
-  // }
 
   /**
    * The render method to display the component structure.

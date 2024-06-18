@@ -83,36 +83,66 @@ const additionalInfoContent = (
     </va-select>
   </div>);
 
-const Template2 = ({
-   label,
-   name,
-   accept,
-   errors,
-   required,
-   hint,
-   'enable-analytics': enableAnalytics,
-   vaMultipleChange,
-   headerSize,
-   additional
+const AdditionalInfoTemplate = ({
+  label,
+  name,
+  accept,
+  errors,
+  required,
+  hint,
+  'enable-analytics': enableAnalytics,
+  vaMultipleChange,
+  headerSize,
+  additional
 }) => {
   return (
-    <VaFileInputMultiple
-      label={label}
-      name={name}
-      accept={accept}
-      required={required}
-      errors={errors}
-      hint={hint}
-      enable-analytics={enableAnalytics}
-      onVaMultipleChange={vaMultipleChange}
-      header-size={headerSize}
-    >
-      {additional}
-    </VaFileInputMultiple>
+    <>
+      <VaFileInputMultiple
+        label={label}
+        name={name}
+        accept={accept}
+        required={required}
+        errors={errors}
+        hint={hint}
+        enable-analytics={enableAnalytics}
+        onVaMultipleChange={vaMultipleChange}
+        header-size={headerSize}>
+        {additional}
+      </VaFileInputMultiple>
+      <hr/>
+      <div>
+        <p>To add additional fields associated with some file, you can pass custom content into the slot of this component and it will render in each file input.</p>
+        <p>This example showcases how to include custom content, such as dropdowns, within the file input component.</p>
+      </div>
+      <div className="vads-u-margin-top--2">
+          <pre className="vads-u-font-size--sm vads-u-background-color--gray-lightest vads-u-padding--2">
+            <code>
+  {`const additionalInfoContent = (
+  <div>
+    <va-select className="hydrated" uswds label='What kind of file is this?' required>
+      <option key="1" value="1">Public Document</option>
+      <option key="2" value="2">Private Document</option>
+    </va-select>
+  </div>
+);
+  
+<VaFileInputMultiple ... >
+  {additionalInfoContent}
+</VaFileInputMultiple>`}
+            </code>
+          </pre>
+        <a
+          href="https://github.com/department-of-veterans-affairs/component-library/tree/main/packages/storybook/stories"
+          target="_blank"
+        >
+          View validation code in our repo
+        </a>
+      </div>
+    </>
   );
 };
 
-export const AdditionalInfo = Template2.bind(null);
+export const AdditionalInfo = AdditionalInfoTemplate.bind(null);
 AdditionalInfo.args = {
   ...defaultArgs,
   label: 'Label Header',
