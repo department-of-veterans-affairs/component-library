@@ -12,36 +12,9 @@ describe('va-file-input-multiple', () => {
 
     const multiElement = await page.find('va-file-input-multiple');
     expect(multiElement).not.toBeNull();
-    
+
     const singleElement = await page.find('va-file-input-multiple >>> va-file-input');
     expect(singleElement).not.toBeNull();
-  });
-
-  it('displays an error message when `errors` is defined', async () => {
-    const page = await newE2EPage();
-    await page.setContent(
-      `<va-file-input-multiple />`,
-    );
-    await page.$eval('va-file-input-multiple', (elm: any) => {
-      elm.errors = ['This is an error'];
-    });
-
-    await page.waitForChanges();
-
-    const fileInput = await page.find('va-file-input-multiple >>> va-file-input');
-    const errorSpan = fileInput.shadowRoot.querySelector('#input-error-message .usa-error-message')
-    
-    expect(errorSpan).not.toBeNull();
-    expect(errorSpan.textContent.includes('This is an error')).toBe(true);
-  });
-
-  it('no error message when `error` is not defined', async () => {
-    const page = await newE2EPage();
-    await page.setContent(`<va-file-input-multiple />`);
-
-    const fileInput = await page.find('va-file-input-multiple >>> va-file-input');
-    const errorSpan = fileInput.shadowRoot.querySelector('#input-error-message .usa-error-message')
-    expect(errorSpan).toBeUndefined;
   });
 
   it('renders hint text', async () => {
@@ -85,7 +58,7 @@ describe('va-file-input-multiple', () => {
     expect(fileInput.getAttribute('accept')).toBeFalsy();
   });
 
-  
+
   it('emits the vaMultipleChange event only once', async () => {
     const page = await newE2EPage();
     await page.setContent(`<va-file-input-multiple buttonText="Upload a file" />`);

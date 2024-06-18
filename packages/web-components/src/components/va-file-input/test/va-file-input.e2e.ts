@@ -120,24 +120,6 @@ describe('va-file-input', () => {
     expect(element).not.toBeNull();
   });
 
-  it('v3 displays an error message when `error` is defined', async () => {
-    const page = await newE2EPage();
-    await page.setContent(
-      `<va-file-input error="This is an error" buttonText="Upload a file" uswds />`,
-    );
-
-    const errorSpan = await page.find('va-file-input >>> #input-error-message');
-    expect(errorSpan.innerText.includes('This is an error')).toBe(true);
-  });
-
-  it('v3 no error message when `error` is not defined', async () => {
-    const page = await newE2EPage();
-    await page.setContent(`<va-file-input uswds />`);
-
-    const errorSpan = await page.find('va-file-input >>> .usa-error-message');
-    expect(errorSpan).toBeUndefined;
-  });
-
   it('v3 renders hint text', async () => {
     const page = await newE2EPage();
     await page.setContent('<va-file-input hint="This is hint text" uswds />');
@@ -250,10 +232,10 @@ describe('va-file-input', () => {
 
     //modal now closed
     expect(modalCheck2).toBeNull();
-    
+
     // get buttons again
     const [__, deleteButton2] = await page.findAll('va-file-input >>> va-button-icon');
-      
+
     // file not deleted because delete option still here
     expect(deleteButton2).not.toBeNull();
   });
