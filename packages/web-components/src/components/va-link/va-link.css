@@ -23,6 +23,10 @@
   font-weight: 700;
 }
 
+:host([icon-name]) va-icon {
+  margin-right: 4px;
+}
+
 .link-icon--active {
   vertical-align: baseline;
   position: relative;
@@ -32,8 +36,13 @@
 .link-icon--left {
   margin-right: 4px;
   vertical-align: baseline;
-  position: relative;
+  position: relative; 
   top: 3px;
+}
+
+.link--center {
+  display: inline-flex;
+  align-items: center;
 }
 
 dfn {

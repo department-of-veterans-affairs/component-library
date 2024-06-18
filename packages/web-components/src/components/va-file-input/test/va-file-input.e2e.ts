@@ -203,4 +203,106 @@ describe('va-file-input', () => {
 
     await axeCheck(page);
   });
+
+  // this test usually passes but it is too flaky to enable
+  it.skip('v3 opens a modal when delete button clicked and lets user remove or keep file', async () => {
+    const page = await newE2EPage();
+    await page.setContent(`<va-file-input buttonText="Upload a file" uswds />`);
+
+    const filePath = path.relative(process.cwd(), __dirname + '/1x1.png');
+
+    const input = (
+      await page.waitForFunction(() =>
+        document
+          .querySelector('va-file-input')
+          .shadowRoot.querySelector('input[type=file]'),
+      )
+    ).asElement();
+
+    expect(input).not.toBeNull();
+
+    await input
+      .uploadFile(filePath)
+      .catch(e => console.log('uploadFile error', e));
+
+    // get delete button
+    const [_, deleteButton] = await page.findAll('va-file-input >>> va-button-icon');
+    deleteButton.click();
+    await page.waitForTimeout(100);
+
+    // make sure modal opens
+    const modalCheck = await page.find('va-file-input >>> va-modal[visible]');
+
+    expect(modalCheck).not.toBeNull();
+
+    const noButton = (
+      await page.waitForFunction(() =>
+        document.querySelector('va-file-input').shadowRoot.querySelector('va-modal').shadowRoot.querySelector('va-button[secondary]')
+      )
+    ).asElement();
+
+    //don't delete
+    noButton.click();
+
+    await page.waitForTimeout(100);
+
+    const modalCheck2 = await page.find('va-file-input >>> va-modal[visible]');
+
+    //modal now closed
+    expect(modalCheck2).toBeNull();
+    
+    // get buttons again
+    const [__, deleteButton2] = await page.findAll('va-file-input >>> va-button-icon');
+      
+    // file not deleted because delete option still here
+    expect(deleteButton2).not.toBeNull();
+  });
+
+  // this test usually passes but it is too flaky to enable
+  it.skip('v3 opens a modal when delete button clicked and lets user remove the file', async () => {
+    const page = await newE2EPage();
+    await page.setContent(`<va-file-input buttonText="Upload a file" uswds />`);
+
+    const filePath = path.relative(process.cwd(), __dirname + '/1x1.png');
+
+    const input = (
+      await page.waitForFunction(() =>
+        document
+          .querySelector('va-file-input')
+          .shadowRoot.querySelector('input[type=file]'),
+      )
+    ).asElement();
+
+    expect(input).not.toBeNull();
+
+    await input
+      .uploadFile(filePath)
+      .catch(e => console.log('uploadFile error', e));
+
+    // get delete button
+    const [_, deleteButton] = await page.findAll('va-file-input >>> va-button-icon');
+    deleteButton.click();
+    await page.waitForTimeout(100);
+
+    // make sure modal opens
+    const modalCheck = await page.find('va-file-input >>> va-modal[visible]');
+
+    expect(modalCheck).not.toBeNull();
+
+    const yesButton = (
+      await page.waitForFunction(() =>
+        document.querySelector('va-file-input').shadowRoot.querySelector('va-modal').shadowRoot.querySelector('va-button')
+      )
+    ).asElement();
+
+    // yes we want to remove the file
+    yesButton.click();
+    await page.waitForTimeout(100);
+
+    // get buttons again
+    const btns = await page.findAll('va-file-input >>> va-button-icon');
+
+    // buttons are gone because file has been deleted
+    expect(btns).toHaveLength(0);
+  });
 });

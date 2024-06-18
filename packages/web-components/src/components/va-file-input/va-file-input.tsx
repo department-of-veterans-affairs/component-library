@@ -35,6 +35,7 @@ export class VaFileInput {
   @State() file?: File;
   @State() fileContents?: string;
   @State() internalError?: string;
+  @State() showModal: boolean = false;
 
   /**
    * The label for the file input.
@@ -160,6 +161,7 @@ export class VaFileInput {
   };
 
   private removeFile = (notifyParent: boolean = true) => {
+    this.closeModal();
     this.file = null;
     this.uploadStatus = 'idle';
     this.internalError = null;
@@ -167,6 +169,21 @@ export class VaFileInput {
       this.vaChange.emit({ files: [this.file] });
     }
   };
+
+  private openModal = () => {
+    // set the status attribute here not in markup or it will have no effect
+    const modal = this.el.shadowRoot.querySelector('va-modal');
+    modal.setAttribute('status', 'warning');
+    this.showModal = true;
+  }
+
+  private closeModal = () => {
+    this.showModal = false;
+    // wait a tick for modal to close before setting focus
+    setTimeout(() => {
+      this.fileInputRef.focus();
+    }, 0);
+  }
 
   private changeFile = () => {
     if (this.fileInputRef) {
@@ -437,10 +454,21 @@ export class VaFileInput {
                         ></va-button-icon>
                         <va-button-icon
                           buttonType="delete"
-                          onClick={() => this.removeFile(true)}
+                          onClick={this.openModal}
                           label="Delete"
                         ></va-button-icon>
                       </div>
+                      <va-modal
+                        modalTitle='Are you sure you want to remove this file?'
+                        visible={this.showModal}
+                        primaryButtonText='Yes, remove this'
+                        secondaryButtonText='No, keep this'
+                        onCloseEvent={this.closeModal}
+                        onPrimaryButtonClick={() => this.removeFile(true)}
+                        onSecondaryButtonClick={this.closeModal}
+                      >
+                        We'll remove the uploaded document <span class="file-label">{file.name}</span>
+                      </va-modal>
                     </div>
                   )}
                 </va-card>

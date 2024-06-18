@@ -4198,27 +4198,4 @@ p, a, ol, ul, li, dl, dt, dd, form, label, button {
   line-height: 1.5;
 }
 
-/**
-  USWDS paragraph style
-
-  p {
-    line-height: 1.5;
-    max-width: 68ex;
-    margin-bottom: 0;
-    margin-top: 0;
-  }
-*/
-p {
-  line-height: 1.5;
-  max-width: 68ex;
-  margin-bottom: 0;
-  margin-top: 0;
-}
-* + p {
-  margin-top: 1em;
-}
-p + * {
-  margin-top: 1em;
-}
-
 /*# sourceMappingURL=uswds-typography.css.map */
