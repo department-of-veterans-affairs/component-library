@@ -24,10 +24,9 @@ const defaultArgs = {
   'error': '',
   'enable-analytics': false,
   'hint': 'You can upload a .pdf, .gif, .jpg, .bmp, or .txt file.',
-  'vaChange': event =>
-    alert(`File change event received: ${event?.detail?.files[0]?.name}`),
+  'vaChange': null,
   'uswds': true,
-  'headerSize': null,
+  'header-size': null,
   'children': null
 };
 
@@ -55,7 +54,7 @@ const Template = ({
       enable-analytics={enableAnalytics}
       onVaChange={vaChange}
       uswds={uswds}
-      headerSize={headerSize}
+      header-size={headerSize}
       children={children}
     />
   );
@@ -100,7 +99,7 @@ HeaderLabel.args = {
   required: true
 }
 
-const additionalInfoSlotContent = (
+const additionalInfoContent = (
   <div>
     <va-select className="hydrated" uswds label='What kind of file is this?' required>
       <option key="1" value="1">Public Document</option>
@@ -112,7 +111,7 @@ export const AdditionalInfo = Template.bind(null);
 AdditionalInfo.args = {
   ...defaultArgs,
   label: 'Label Header',
-  children: additionalInfoSlotContent
+  children: additionalInfoContent
 }
 
 const CustomValidationTemplate = ({ label, name, accept, required, error, hint }) => {
@@ -206,4 +205,7 @@ CustomValidation.args = {
 }
 
 export const WithAnalytics = Template.bind(null);
-WithAnalytics.args = { ...defaultArgs, 'enable-analytics': true };
+WithAnalytics.args = {
+  ...defaultArgs,
+  'enable-analytics': true
+};

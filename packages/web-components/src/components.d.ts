@@ -444,6 +444,10 @@ export namespace Components {
          */
         "headerSize"?: number;
         /**
+          * DST only prop removes extraneous display for multiple file input
+         */
+        "headless"?: boolean;
+        /**
           * Optional hint text.
          */
         "hint"?: string;
@@ -463,6 +467,40 @@ export namespace Components {
           * Whether or not the component will use USWDS v3 styling.
          */
         "uswds"?: boolean;
+    }
+    interface VaFileInputMultiple {
+        /**
+          * Defines acceptable file types the user can select; uses file type or extensions.
+         */
+        "accept"?: string;
+        /**
+          * If enabled, emits custom analytics events when file changes occur.
+         */
+        "enableAnalytics"?: boolean;
+        /**
+          * Array of error messages corresponding to each file input. The length and order match the files array.
+         */
+        "errors": string[];
+        /**
+          * Specifies the header size of the label element, from 1 (largest) to 6 (smallest).
+         */
+        "headerSize"?: number;
+        /**
+          * Hint text provided to guide users on the expected format or type of files.
+         */
+        "hint"?: string;
+        /**
+          * Label for the file input, displayed above the input.
+         */
+        "label"?: string;
+        /**
+          * Name attribute for the file input element, used to identify the form data in the submission.
+         */
+        "name"?: string;
+        /**
+          * If true, the file input is marked as required, and users must select a file.
+         */
+        "required"?: boolean;
     }
     interface VaHeaderMinimal {
         /**
@@ -1558,6 +1596,10 @@ export interface VaFileInputCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLVaFileInputElement;
 }
+export interface VaFileInputMultipleCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLVaFileInputMultipleElement;
+}
 export interface VaLinkCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLVaLinkElement;
@@ -1752,6 +1794,12 @@ declare global {
     var HTMLVaFileInputElement: {
         prototype: HTMLVaFileInputElement;
         new (): HTMLVaFileInputElement;
+    };
+    interface HTMLVaFileInputMultipleElement extends Components.VaFileInputMultiple, HTMLStencilElement {
+    }
+    var HTMLVaFileInputMultipleElement: {
+        prototype: HTMLVaFileInputMultipleElement;
+        new (): HTMLVaFileInputMultipleElement;
     };
     interface HTMLVaHeaderMinimalElement extends Components.VaHeaderMinimal, HTMLStencilElement {
     }
@@ -1975,6 +2023,7 @@ declare global {
         "va-crisis-line-modal": HTMLVaCrisisLineModalElement;
         "va-date": HTMLVaDateElement;
         "va-file-input": HTMLVaFileInputElement;
+        "va-file-input-multiple": HTMLVaFileInputMultipleElement;
         "va-header-minimal": HTMLVaHeaderMinimalElement;
         "va-icon": HTMLVaIconElement;
         "va-link": HTMLVaLinkElement;
@@ -2534,6 +2583,10 @@ declare namespace LocalJSX {
          */
         "headerSize"?: number;
         /**
+          * DST only prop removes extraneous display for multiple file input
+         */
+        "headless"?: boolean;
+        /**
           * Optional hint text.
          */
         "hint"?: string;
@@ -2561,6 +2614,44 @@ declare namespace LocalJSX {
           * Whether or not the component will use USWDS v3 styling.
          */
         "uswds"?: boolean;
+    }
+    interface VaFileInputMultiple {
+        /**
+          * Defines acceptable file types the user can select; uses file type or extensions.
+         */
+        "accept"?: string;
+        /**
+          * If enabled, emits custom analytics events when file changes occur.
+         */
+        "enableAnalytics"?: boolean;
+        /**
+          * Array of error messages corresponding to each file input. The length and order match the files array.
+         */
+        "errors"?: string[];
+        /**
+          * Specifies the header size of the label element, from 1 (largest) to 6 (smallest).
+         */
+        "headerSize"?: number;
+        /**
+          * Hint text provided to guide users on the expected format or type of files.
+         */
+        "hint"?: string;
+        /**
+          * Label for the file input, displayed above the input.
+         */
+        "label"?: string;
+        /**
+          * Name attribute for the file input element, used to identify the form data in the submission.
+         */
+        "name"?: string;
+        /**
+          * Event emitted when any change to the file inputs occurs.
+         */
+        "onVaMultipleChange"?: (event: VaFileInputMultipleCustomEvent<any>) => void;
+        /**
+          * If true, the file input is marked as required, and users must select a file.
+         */
+        "required"?: boolean;
     }
     interface VaHeaderMinimal {
         /**
@@ -3769,6 +3860,7 @@ declare namespace LocalJSX {
         "va-crisis-line-modal": VaCrisisLineModal;
         "va-date": VaDate;
         "va-file-input": VaFileInput;
+        "va-file-input-multiple": VaFileInputMultiple;
         "va-header-minimal": VaHeaderMinimal;
         "va-icon": VaIcon;
         "va-link": VaLink;
@@ -3826,6 +3918,7 @@ declare module "@stencil/core" {
             "va-crisis-line-modal": LocalJSX.VaCrisisLineModal & JSXBase.HTMLAttributes<HTMLVaCrisisLineModalElement>;
             "va-date": LocalJSX.VaDate & JSXBase.HTMLAttributes<HTMLVaDateElement>;
             "va-file-input": LocalJSX.VaFileInput & JSXBase.HTMLAttributes<HTMLVaFileInputElement>;
+            "va-file-input-multiple": LocalJSX.VaFileInputMultiple & JSXBase.HTMLAttributes<HTMLVaFileInputMultipleElement>;
             "va-header-minimal": LocalJSX.VaHeaderMinimal & JSXBase.HTMLAttributes<HTMLVaHeaderMinimalElement>;
             "va-icon": LocalJSX.VaIcon & JSXBase.HTMLAttributes<HTMLVaIconElement>;
             "va-link": LocalJSX.VaLink & JSXBase.HTMLAttributes<HTMLVaLinkElement>;

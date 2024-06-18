@@ -90,6 +90,12 @@ export class VaFileInput {
   @Prop() headerSize?: number;
 
   /**
+   * DST only prop
+   * removes extraneous display for multiple file input
+   */
+  @Prop() headless?: boolean = false;
+
+  /**
    * The event emitted when the file input value changes.
    */
   @Event() vaChange: EventEmitter;
@@ -127,7 +133,7 @@ export class VaFileInput {
     if (this.accept) {
       const normalizedAcceptTypes = this.normalizeAcceptProp(this.accept);
       if (!this.isAcceptedFileType(file.type, normalizedAcceptTypes)) {
-        this.removeFile();
+        this.removeFile(false);
         this.internalError = 'This is not a valid file type.';
         return;
       }
@@ -154,12 +160,14 @@ export class VaFileInput {
     this.el.shadowRoot.getElementById('fileInputField').click();
   };
 
-  private removeFile = () => {
+  private removeFile = (notifyParent: boolean = true) => {
     this.closeModal();
     this.file = null;
-    this.vaChange.emit({ files: [this.file] });
     this.uploadStatus = 'idle';
     this.internalError = null;
+    if (notifyParent) {
+      this.vaChange.emit({ files: [this.file] });
+    }
   };
 
   private openModal = () => {
@@ -315,6 +323,7 @@ export class VaFileInput {
       headerSize,
       fileContents,
       fileType,
+      headless
     } = this;
 
     const text = this.getButtonText();
@@ -342,7 +351,14 @@ export class VaFileInput {
           </svg>
         </div>
       );
-      if (fileContents) {
+      if (error) {
+        fileThumbnail = (
+          <div class="thumbnail-container">
+            <va-icon icon="error" size={3} class="thumbnail-preview thumbnail-error"/>
+          </div>
+        );
+      }
+      else if (fileContents) {
         if (fileType.startsWith('image/')) {
           fileThumbnail = (
             <div class="thumbnail-container">
@@ -361,6 +377,7 @@ export class VaFileInput {
           );
         }
       }
+      let selectedFileClassName = headless ? "headless-selected-files-wrapper" : "selected-files-wrapper"
 
       return (
         <Host class={{ 'has-error': !!displayError }}>
@@ -370,14 +387,6 @@ export class VaFileInput {
               {hint}
             </div>
           )}
-          <span id="input-error-message" role="alert">
-            {displayError && (
-              <Fragment>
-                <span class="usa-sr-only">{i18next.t('error')}</span>
-                <span class="usa-error-message">{displayError}</span>
-              </Fragment>
-            )}
-          </span>
           <div class="file-input-wrapper" onDrop={this.handleDrop}>
             <input
               id="fileInputField"
@@ -410,13 +419,23 @@ export class VaFileInput {
               </div>
             )}
             {uploadStatus !== 'idle' && (
-              <div class="selected-files-wrapper">
-                <div class="selected-files-label">Selected files</div>
+              <div class={selectedFileClassName}>
+                {!headless &&
+                  <div class="selected-files-label">Selected files</div>
+                }
                 <va-card class="va-card">
                   <div class="file-info-section">
                     {fileThumbnail}
                     <div class="file-info-group vads-u-line-height--2">
                       <span class="file-label">{file.name}</span>
+                      <span id="input-error-message" role="alert">
+                        {displayError && (
+                          <Fragment>
+                            <span class="usa-sr-only">{i18next.t('error')}</span>
+                            <span class="usa-error-message">{displayError}</span>
+                          </Fragment>
+                        )}
+                      </span>
                       <span class="file-size-label">
                         {this.formatFileSize(file.size)}
                       </span>
@@ -445,7 +464,7 @@ export class VaFileInput {
                         primaryButtonText='Yes, remove this'
                         secondaryButtonText='No, keep this'
                         onCloseEvent={this.closeModal}
-                        onPrimaryButtonClick={this.removeFile}
+                        onPrimaryButtonClick={() => this.removeFile(true)}
                         onSecondaryButtonClick={this.closeModal}
                       >
                         We'll remove the uploaded document <span class="file-label">{file.name}</span>
