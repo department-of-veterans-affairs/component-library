@@ -1,8 +1,14 @@
 @forward 'settings';
 
 @use '../va-file-input/va-file-input';
+@import '../../mixins/uswds-error-border.scss';
 
-:host{
+:host {
+  &.has-error {
+    border-left: 0.25rem solid $vads-color-secondary-dark;
+    padding-left: 1rem;
+  }
+
   .outer-wrap {
     background-color: var(--vads-color-primary-lighter);
     border: 1px solid var(--vads-color-base-light);
@@ -12,12 +18,21 @@
     position: relative;
     margin: 8px 0;
   }
-  
+
   .outer-wrap va-file-input:last-child {
     padding: 0 8px;
   }
 
   va-file-input:not(:last-child) {
     border-bottom: 1px solid var(--vads-color-white);
+  }
+
+  va-file-input.has-error {
+    border-left: none;
+    padding-left: 0;
+
+    @media screen and (min-width: 1008px) {
+      margin-left: 0;
+    }
   }
 }

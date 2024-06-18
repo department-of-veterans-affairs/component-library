@@ -152,6 +152,11 @@ va-button {
     overflow: hidden;
   }
 
+  #input-error-message {
+    padding: 0 8px;
+    width: 100%;
+  }
+
   .file-size-label {
     color: var(--vads-color-base-dark);
     font-weight: var(--font-weight-normal);
@@ -207,5 +212,9 @@ va-button {
     width: auto;
     max-height: 40px;
     height: auto;
+  }
+
+  .thumbnail-error {
+    color: $vads-color-error-dark;
   }
 }

@@ -205,4 +205,7 @@ CustomValidation.args = {
 }
 
 export const WithAnalytics = Template.bind(null);
-WithAnalytics.args = { ...defaultArgs, 'enable-analytics': true };
+WithAnalytics.args = {
+  ...defaultArgs,
+  'enable-analytics': true
+};

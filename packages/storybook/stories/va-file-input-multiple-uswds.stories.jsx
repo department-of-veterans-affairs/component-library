@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import {VaFileInputMultiple} from '@department-of-veterans-affairs/web-components/react-bindings';
-import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
+import {getWebComponentDocs, propStructure} from './wc-helpers';
 
 const fileInputDocs = getWebComponentDocs('va-file-input-multiple');
 
@@ -24,7 +24,6 @@ const defaultArgs = {
   'hint': 'You can upload a .pdf, .gif, .jpg, .bmp, or .txt file.',
   'vaMultipleChange': null,
   'header-size': null,
-  'additionalInfo': null
 };
 
 const Template = ({
@@ -37,7 +36,6 @@ const Template = ({
   'enable-analytics': enableAnalytics,
   vaMultipleChange,
   headerSize,
-  additionalInfo
 }) => {
   return (
     <VaFileInputMultiple
@@ -50,7 +48,6 @@ const Template = ({
       enable-analytics={enableAnalytics}
       onVaMultipleChange={vaMultipleChange}
       header-size={headerSize}
-      additionalInfo={additionalInfo}
     />
   );
 };
@@ -59,41 +56,100 @@ export const Default = Template.bind(null);
 Default.args = { ...defaultArgs };
 Default.argTypes = propStructure(fileInputDocs);
 
-const additionalInfo = (
-  <div>
-    <va-select className="hydrated" uswds label='What kind of file is this?' required>
-      <option key="1" value="1">Public Document</option>
-      <option key="2" value="2">Private Document</option>
-    </va-select>
-  </div>
-);
-
-export const AdditionalInfo = Template.bind(null);
-AdditionalInfo.args = {
+export const Accept = Template.bind(null);
+Accept.args = {
   ...defaultArgs,
-  label: 'Label Header',
-  additionalInfo: additionalInfo
-}
+  label: 'Select PDF files',
+  hint: 'All files in this list must be PDFs',
+  accept: '.pdf'
+};
 
-const ErrorsTemplate = ({ label, name, hint}) => {
+export const HeaderSize = Template.bind(null);
+HeaderSize.args = {
+  ...defaultArgs,
+  label: 'Custom sized header',
+  hint: 'Numbers from 1-6 correspond to an H1-H6 tag',
+  headerSize: 1
+};
+
+// TODO - Implement this in a future card
+// const additionalInfo = (
+//   <div>
+//     <va-select className="hydrated" uswds label='What kind of file is this?' required>
+//       <option key="1" value="1">Public Document</option>
+//       <option key="2" value="2">Private Document</option>
+//     </va-select>
+//   </div>
+// );
+//
+// export const AdditionalInfo = Template.bind(null);
+// AdditionalInfo.args = {
+//   ...defaultArgs,
+//   label: 'Label Header',
+//   additionalInfo: additionalInfo
+// }
+
+const ErrorsTemplate = ({label, name, hint}) => {
   const [errorsList, setErrorsList] = useState([]);
 
   function setErrorForEachFile(event) {
     const fileEntries = event.detail.files;
-    setErrorsList(fileEntries.map((file, index) => `Error for index ${index}`));
-    console.log(errors);
+    const errors = fileEntries.map((file, index) => {
+      if (!file) {
+        return '';
+      }
+      return 'Error for index ' + index;
+    });
+    setErrorsList(errors);
+  }
+
+  return (
+    <>
+      <VaFileInputMultiple
+        label={label}
+        name={name}
+        hint={hint}
+        errors={errorsList}
+        onVaMultipleChange={setErrorForEachFile}
+      />
+      <hr />
+      <div>
+        <p>Parent components are responsible for managing error states through a dedicated error array. Each index in this array corresponds to a file input, with the value at each index representing the error state for that specific file. This setup allows for the dynamic display of errors based on real-time validation of each file as it is processed.</p>
+      </div>
+      <div className="vads-u-margin-top--2">
+          <pre className="vads-u-font-size--sm vads-u-background-color--gray-lightest vads-u-padding--2">
+            <code>
+  {`const [errorsList, setErrorsList] = useState([]);
+  
+  function setErrorForEachFile(event) {
+    const fileEntries = event.detail.files;
+    const errors = fileEntries.map((file, index) => {
+      if (!file) {
+        return '';
+      }
+      return 'Error for index ' + index;
+    });
+    setErrorsList(errors);
   }
 
   return (
     <VaFileInputMultiple
-      label={label}
-      name={name}
-      hint={hint}
+      ...
       errors={errorsList}
       onVaMultipleChange={setErrorForEachFile}
-    />
+    />`}
+            </code>
+          </pre>
+        <a
+          href="https://github.com/department-of-veterans-affairs/component-library/tree/main/packages/storybook/stories"
+          target="_blank"
+        >
+          View validation code in our repo
+        </a>
+      </div>
+    </>
   )
-}
+};
 
 export const Errors = ErrorsTemplate.bind(null);
 Errors.args = {

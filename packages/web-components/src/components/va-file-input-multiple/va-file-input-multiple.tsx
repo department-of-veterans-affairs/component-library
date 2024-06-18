@@ -65,8 +65,6 @@ export class VaFileInputMultiple {
    */
   @Prop() headerSize?: number;
 
-  @Prop() additionalInfo?: any;
-
   /**
    * The event emitted when the file input value changes.
    */
@@ -147,15 +145,20 @@ export class VaFileInputMultiple {
     }
   };
 
+  private hasErrors = () => {
+    return this.errors.some(error => !!error);
+  }
+
   render() {
-    const { label, required, headerSize, hint, files, accept, errors, name, enableAnalytics, additionalInfo } = this;
+    const { label, required, headerSize, hint, files, accept, errors, name, enableAnalytics } = this;
     const outerWrapClass = this.isEmpty() ? "" : "outer-wrap";
+    const hasError = this.hasErrors() ? 'has-error': '';
     const filesCopy = files.map(file => {
       return {...file}
     });
 
     return (
-      <Host>
+      <Host class={hasError}>
         {label && this.renderLabelOrHeader(label, required, headerSize)}
         {hint && (
           <div class="usa-hint" id="input-hint-message">
@@ -175,13 +178,7 @@ export class VaFileInputMultiple {
               error={errors[pageIndex]}
               onVaChange={(event) => this.handleChange(event, fileEntry.key, pageIndex)}
               enable-analytics={enableAnalytics}
-            >
-              {additionalInfo && (
-                <div slot={`${name}-${fileEntry.key}`}>
-                  {this.additionalInfo}
-                </div>
-              )}
-            </va-file-input>
+            />
           ))}
         </div>
       </Host>

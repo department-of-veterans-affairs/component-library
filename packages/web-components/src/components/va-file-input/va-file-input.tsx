@@ -334,7 +334,14 @@ export class VaFileInput {
           </svg>
         </div>
       );
-      if (fileContents) {
+      if (error) {
+        fileThumbnail = (
+          <div class="thumbnail-container">
+            <va-icon icon="error" size={3} class="thumbnail-preview thumbnail-error"/>
+          </div>
+        );
+      }
+      else if (fileContents) {
         if (fileType.startsWith('image/')) {
           fileThumbnail = (
             <div class="thumbnail-container">
@@ -363,14 +370,6 @@ export class VaFileInput {
               {hint}
             </div>
           )}
-          <span id="input-error-message" role="alert">
-            {displayError && (
-              <Fragment>
-                <span class="usa-sr-only">{i18next.t('error')}</span>
-                <span class="usa-error-message">{displayError}</span>
-              </Fragment>
-            )}
-          </span>
           <div class="file-input-wrapper" onDrop={this.handleDrop}>
             <input
               id="fileInputField"
@@ -412,6 +411,14 @@ export class VaFileInput {
                     {fileThumbnail}
                     <div class="file-info-group vads-u-line-height--2">
                       <span class="file-label">{file.name}</span>
+                      <span id="input-error-message" role="alert">
+                        {displayError && (
+                          <Fragment>
+                            <span class="usa-sr-only">{i18next.t('error')}</span>
+                            <span class="usa-error-message">{displayError}</span>
+                          </Fragment>
+                        )}
+                      </span>
                       <span class="file-size-label">
                         {this.formatFileSize(file.size)}
                       </span>
@@ -420,7 +427,7 @@ export class VaFileInput {
                   {file && (
                     <div>
                       <div class="additional-info-slot">
-                        <slot name={name}></slot>
+                        <slot></slot>
                       </div>
                       <div class="file-button-section">
                         <va-button-icon
