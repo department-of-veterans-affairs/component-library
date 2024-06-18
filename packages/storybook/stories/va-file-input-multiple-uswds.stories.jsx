@@ -10,7 +10,7 @@ export default {
   id: 'uswds/va-file-input-multiple',
   parameters: {
     componentSubtitle: `va-file-input-multiple web component`,
-   
+
   },
 };
 
@@ -24,6 +24,7 @@ const defaultArgs = {
   'hint': 'You can upload a .pdf, .gif, .jpg, .bmp, or .txt file.',
   'vaMultipleChange': null,
   'header-size': null,
+  'children': null
 };
 
 const Template = ({
@@ -36,6 +37,7 @@ const Template = ({
   'enable-analytics': enableAnalytics,
   vaMultipleChange,
   headerSize,
+  additional
 }) => {
   return (
     <VaFileInputMultiple
@@ -48,6 +50,7 @@ const Template = ({
       enable-analytics={enableAnalytics}
       onVaMultipleChange={vaMultipleChange}
       header-size={headerSize}
+      children={additional}
     />
   );
 };
@@ -71,6 +74,51 @@ HeaderSize.args = {
   hint: 'Numbers from 1-6 correspond to an H1-H6 tag',
   headerSize: 1
 };
+
+const additionalInfoContent = (
+  <div>
+    <va-select className="hydrated" uswds label='What kind of file is this?' required>
+      <option key="1" value="1">Public Document</option>
+      <option key="2" value="2">Private Document</option>
+    </va-select>
+  </div>);
+
+
+const Template2 = ({
+   label,
+   name,
+   accept,
+   errors,
+   required,
+   hint,
+   'enable-analytics': enableAnalytics,
+   vaMultipleChange,
+   headerSize,
+   additionalInfoContent
+}) => {
+  return (
+    <VaFileInputMultiple
+      label={label}
+      name={name}
+      accept={accept}
+      required={required}
+      errors={errors}
+      hint={hint}
+      enable-analytics={enableAnalytics}
+      onVaMultipleChange={vaMultipleChange}
+      header-size={headerSize}
+    >
+      {additionalInfoContent}
+    </VaFileInputMultiple>
+  );
+};
+
+export const AdditionalInfo = Template2.bind(null);
+AdditionalInfo.args = {
+  ...defaultArgs,
+  label: 'Label Header',
+  additional: additionalInfoContent
+}
 
 const ErrorsTemplate = ({label, name, hint}) => {
   const [errorsList, setErrorsList] = useState([]);

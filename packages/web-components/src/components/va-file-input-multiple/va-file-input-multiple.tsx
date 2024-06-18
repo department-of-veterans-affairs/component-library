@@ -1,4 +1,13 @@
-import { Component, Prop, State, Element, h, Host, Event, EventEmitter } from '@stencil/core';
+import {
+  Component,
+  Prop,
+  State,
+  Element,
+  h,
+  Host,
+  Event,
+  EventEmitter,
+} from '@stencil/core';
 import i18next from 'i18next';
 import { FileIndex } from "./FileIndex";
 
@@ -12,10 +21,10 @@ import { FileIndex } from "./FileIndex";
  * @guidanceHref form/file-input-multiple
  */
 @Component({
-   tag: 'va-file-input-multiple',
-   styleUrl: 'va-file-input-multiple.scss',
-   shadow: true,
- })
+  tag: 'va-file-input-multiple',
+  styleUrl: 'va-file-input-multiple.scss',
+  shadow: true,
+})
 export class VaFileInputMultiple {
   @Element() el: HTMLElement;
 
@@ -67,12 +76,13 @@ export class VaFileInputMultiple {
   /**
    * Internal state to track files and their unique keys.
    */
-  @State() files: FileIndex[] = [{ key: 0, file: null }];
+  @State() files: FileIndex[] = [{ key: 0, file: null , content: null}];
 
   /**
    * Counter to assign unique keys to new file inputs.
    */
   private fileKeyCounter: number = 0;
+  private additionalSlot = null;
 
   /**
    * Finds a file entry by its unique key.
@@ -89,6 +99,22 @@ export class VaFileInputMultiple {
    */
   private isEmpty(): boolean {
     return this.files[0].file === null;
+  }
+
+  private setSlotContent() {
+    const slot = this.el.shadowRoot.querySelector('slot');
+    if (!this.additionalSlot) {
+      this.additionalSlot = slot
+                            ? slot.assignedElements({ flatten: true })
+                            : [];
+    }
+    slot?.remove();
+    console.log(this.additionalSlot), 'add';
+  }
+
+  private getAdditionalContent() {
+    const elArray = this.additionalSlot.map(n => n.cloneNode(true));
+    return elArray;
   }
 
   /**
@@ -109,9 +135,13 @@ export class VaFileInputMultiple {
       } else {
         // New file
         fileObject.file = newFile;
-
+        fileObject.content = this.getAdditionalContent();
         this.fileKeyCounter++;
-        this.files.push({ file: null, key: this.fileKeyCounter });
+        this.files.push({
+          file: null,
+          key: this.fileKeyCounter,
+          content: null,
+        });
       }
     } else {
       // Deleted file
@@ -154,14 +184,22 @@ export class VaFileInputMultiple {
     } else {
       return (
         <div class="label-header">
-          <span part="label">
-            {label}
-          </span>
+          <span part="label">{label}</span>
           {requiredSpan}
         </div>
       );
     }
   };
+
+  componentDidRender() {
+    const theFileInputs = this.el.shadowRoot.querySelectorAll(`va-file-input`);
+    this.setSlotContent();
+    theFileInputs.forEach((fileEntry, index) => {
+      if (this.files[index].content) {
+        this.files[index].content.forEach(node => fileEntry.append(node));
+      }
+    });
+  }
 
   /**
    * Checks if there are any errors in the errors array.
@@ -171,17 +209,46 @@ export class VaFileInputMultiple {
     return this.errors.some(error => !!error);
   }
 
+  // private buildFileInputs(fileEntry, pageIndex) {
+  //   const { required, accept, errors, name, enableAnalytics } = this;
+  //   const fileInput = (
+  //     <va-file-input
+  //       key={fileEntry.key}
+  //       uswds
+  //       headless
+  //       name={`${name}-${fileEntry.key}`}
+  //       accept={accept}
+  //       required={required}
+  //       error={errors[pageIndex]}
+  //       onVaChange={event => this.handleChange(event, fileEntry.key, pageIndex)}
+  //       enable-analytics={enableAnalytics}
+  //     />
+  //   );
+  //   if (fileEntry.content) {
+  //     fileInput['$elm$'].childNodes = fileEntry.content;
+  //   }
+  //   console.log(fileInput, 'built');
+  //   return fileInput;
+  // }
+
   /**
    * The render method to display the component structure.
    * @returns {JSX.Element} The rendered component.
    */
   render() {
-    const { label, required, headerSize, hint, files, accept, errors, name, enableAnalytics } = this;
-    const outerWrapClass = this.isEmpty() ? "" : "outer-wrap";
+    const {
+      label,
+      required,
+      headerSize,
+      hint,
+      files,
+      name,
+      accept,
+      errors,
+      enableAnalytics,
+    } = this;
+    const outerWrapClass = this.isEmpty() ? '' : 'outer-wrap';
     const hasError = this.hasErrors() ? 'has-error': '';
-    const filesCopy = files.map(file => {
-      return {...file}
-    });
 
     return (
       <Host class={hasError}>
@@ -192,21 +259,28 @@ export class VaFileInputMultiple {
           </div>
         )}
         <div class={outerWrapClass}>
-          {!this.isEmpty() && <div class="selected-files-label">Selected files</div>}
-          {filesCopy.map((fileEntry, pageIndex) => (
-            <va-file-input
-              key={fileEntry.key}
-              uswds
-              headless
-              name={`${name}-${fileEntry.key}`}
-              accept={accept}
-              required={required}
-              error={errors[pageIndex]}
-              onVaChange={(event) => this.handleChange(event, fileEntry.key, pageIndex)}
-              enable-analytics={enableAnalytics}
-            />
-          ))}
+          {!this.isEmpty() && (
+            <div class="selected-files-label">Selected files</div>
+          )}
+          {files.map((fileEntry, pageIndex) => {
+            return (
+              <va-file-input
+                key={fileEntry.key}
+                uswds
+                headless
+                name={`${name}-${fileEntry.key}`}
+                accept={accept}
+                required={required}
+                error={errors[pageIndex]}
+                onVaChange={event =>
+                  this.handleChange(event, fileEntry.key, pageIndex)
+                }
+                enable-analytics={enableAnalytics}
+              />
+            );
+          })}
         </div>
+        <slot></slot>
       </Host>
     );
   }
