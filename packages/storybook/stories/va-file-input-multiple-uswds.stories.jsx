@@ -83,7 +83,6 @@ const additionalInfoContent = (
     </va-select>
   </div>);
 
-
 const Template2 = ({
    label,
    name,
@@ -94,7 +93,7 @@ const Template2 = ({
    'enable-analytics': enableAnalytics,
    vaMultipleChange,
    headerSize,
-   additionalInfoContent
+   additional
 }) => {
   return (
     <VaFileInputMultiple
@@ -108,7 +107,7 @@ const Template2 = ({
       onVaMultipleChange={vaMultipleChange}
       header-size={headerSize}
     >
-      {additionalInfoContent}
+      {additional}
     </VaFileInputMultiple>
   );
 };
