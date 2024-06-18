@@ -1,15 +1,11 @@
-/* eslint-disable i18next/no-literal-string */
 import { Component, Prop, State, Element, h, Host, Event, EventEmitter } from '@stencil/core';
-// todo i think we need the react-bindings to pass the children prop along but getting an error currently
-//import { VaFileInput } from '@department-of-veterans-affairs/web-components/react-bindings';
 import i18next from 'i18next';
-
-interface FileIndex {
-  file: File | null;
-  key: number;
-}
+import { FileIndex } from "./FileIndex";
 
 /**
+ * A component that manages multiple file inputs, allowing users to upload several files.
+ * It supports adding, changing, and removing files with dynamic error handling.
+ *
  * @componentName File input multiple
  * @maturityCategory caution
  * @maturityLevel available
@@ -24,93 +20,115 @@ export class VaFileInputMultiple {
   @Element() el: HTMLElement;
 
   /**
-   * The label for the file input.
+   * Label for the file input, displayed above the input.
    */
   @Prop() label?: string;
 
   /**
-   * The name for the input element.
+   * Name attribute for the file input element, used to identify the form data in the submission.
    */
   @Prop() name?: string;
 
   /**
-   * Sets the input to required and renders the (*Required) text.
+   * If true, the file input is marked as required, and users must select a file.
    */
   @Prop() required?: boolean = false;
 
   /**
-   * A comma-separated list of unique file type specifiers.
+   * Defines acceptable file types the user can select; uses file type or extensions.
    */
   @Prop() accept?: string;
 
   /**
-   * The error messages to render. Corresponds to each file in the array.
+   * Array of error messages corresponding to each file input. The length and order match the files array.
    */
   @Prop() errors: string[] = [];
 
   /**
-   * Optional hint text.
+   * Hint text provided to guide users on the expected format or type of files.
    */
   @Prop() hint?: string;
 
   /**
-   * Emit component-library-analytics events on the file input change event.
+   * If enabled, emits custom analytics events when file changes occur.
    */
   @Prop() enableAnalytics?: boolean = false;
 
-   /**
-   * Optionally specifies the size of the header element to use instead of the base label.
-   * Accepts a number from 1 to 6, corresponding to HTML header elements h1 through h6.
-   * If not provided, defaults to standard label styling.
+  /**
+   * Specifies the header size of the label element, from 1 (largest) to 6 (smallest).
    */
   @Prop() headerSize?: number;
 
   /**
-   * The event emitted when the file input value changes.
+   * Event emitted when any change to the file inputs occurs.
    */
   @Event() vaMultipleChange: EventEmitter;
-  @State() files: FileIndex[] = [ {key: 0, file: null} ];
 
+  /**
+   * Internal state to track files and their unique keys.
+   */
+  @State() files: FileIndex[] = [{ key: 0, file: null }];
+
+  /**
+   * Counter to assign unique keys to new file inputs.
+   */
   private fileKeyCounter: number = 0;
 
+  /**
+   * Finds a file entry by its unique key.
+   * @param {number} fileKey - The unique key of the file.
+   * @returns {FileIndex | undefined} The matching file index object or undefined if not found.
+   */
   private findFileByKey(fileKey: number) {
     return this.files.find(file => file.key === fileKey);
   }
 
+  /**
+   * Checks if the first file input is empty.
+   * @returns {boolean} True if the first file input has no file, false otherwise.
+   */
   private isEmpty(): boolean {
     return this.files[0].file === null;
   }
 
+  /**
+   * Handles file input changes by updating, adding, or removing files based on user interaction.
+   * @param {any} event - The event object containing file details.
+   * @param {number} fileKey - The key of the file being changed.
+   * @param {number} pageIndex - The index of the file in the files array.
+   */
   private handleChange(event: any, fileKey: number, pageIndex: number) {
     const newFile = event.detail.files[0];
-    console.log('Pre handleChange', JSON.stringify(this.files));
 
     if (newFile) {
-      // Add/change file
       const fileObject = this.findFileByKey(fileKey);
+
       if (fileObject.file) {
         // Change file
         fileObject.file = newFile;
-        console.log('change', JSON.stringify(this.files));
       } else {
         // New file
         fileObject.file = newFile;
 
         this.fileKeyCounter++;
         this.files.push({ file: null, key: this.fileKeyCounter });
-        console.log('new', JSON.stringify(this.files));
       }
     } else {
       // Deleted file
       this.files.splice(pageIndex, 1);
-      console.log('delete', JSON.stringify(this.files));
     }
 
     this.vaMultipleChange.emit({ files: this.files.map(fileObj => fileObj.file) });
-    console.log('Post handleChange', JSON.stringify(this.files));
     this.files = Array.of(...this.files);
   }
 
+  /**
+   * Renders the label or header based on the provided configuration.
+   * @param {string} label - The text of the label.
+   * @param {boolean} required - Whether the input is required.
+   * @param {number} headerSize - The size of the header element.
+   * @returns {JSX.Element} A JSX element representing the label or header.
+   */
   private renderLabelOrHeader = (
     label: string,
     required: boolean,
@@ -145,10 +163,18 @@ export class VaFileInputMultiple {
     }
   };
 
+  /**
+   * Checks if there are any errors in the errors array.
+   * @returns {boolean} True if there are errors, false otherwise.
+   */
   private hasErrors = () => {
     return this.errors.some(error => !!error);
   }
 
+  /**
+   * The render method to display the component structure.
+   * @returns {JSX.Element} The rendered component.
+   */
   render() {
     const { label, required, headerSize, hint, files, accept, errors, name, enableAnalytics } = this;
     const outerWrapClass = this.isEmpty() ? "" : "outer-wrap";

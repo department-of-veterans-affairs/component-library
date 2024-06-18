@@ -470,35 +470,35 @@ export namespace Components {
     }
     interface VaFileInputMultiple {
         /**
-          * A comma-separated list of unique file type specifiers.
+          * Defines acceptable file types the user can select; uses file type or extensions.
          */
         "accept"?: string;
         /**
-          * Emit component-library-analytics events on the file input change event.
+          * If enabled, emits custom analytics events when file changes occur.
          */
         "enableAnalytics"?: boolean;
         /**
-          * The error messages to render. Corresponds to each file in the array.
+          * Array of error messages corresponding to each file input. The length and order match the files array.
          */
         "errors": string[];
         /**
-          * Optionally specifies the size of the header element to use instead of the base label. Accepts a number from 1 to 6, corresponding to HTML header elements h1 through h6. If not provided, defaults to standard label styling.
+          * Specifies the header size of the label element, from 1 (largest) to 6 (smallest).
          */
         "headerSize"?: number;
         /**
-          * Optional hint text.
+          * Hint text provided to guide users on the expected format or type of files.
          */
         "hint"?: string;
         /**
-          * The label for the file input.
+          * Label for the file input, displayed above the input.
          */
         "label"?: string;
         /**
-          * The name for the input element.
+          * Name attribute for the file input element, used to identify the form data in the submission.
          */
         "name"?: string;
         /**
-          * Sets the input to required and renders the (*Required) text.
+          * If true, the file input is marked as required, and users must select a file.
          */
         "required"?: boolean;
     }
@@ -2609,39 +2609,39 @@ declare namespace LocalJSX {
     }
     interface VaFileInputMultiple {
         /**
-          * A comma-separated list of unique file type specifiers.
+          * Defines acceptable file types the user can select; uses file type or extensions.
          */
         "accept"?: string;
         /**
-          * Emit component-library-analytics events on the file input change event.
+          * If enabled, emits custom analytics events when file changes occur.
          */
         "enableAnalytics"?: boolean;
         /**
-          * The error messages to render. Corresponds to each file in the array.
+          * Array of error messages corresponding to each file input. The length and order match the files array.
          */
         "errors"?: string[];
         /**
-          * Optionally specifies the size of the header element to use instead of the base label. Accepts a number from 1 to 6, corresponding to HTML header elements h1 through h6. If not provided, defaults to standard label styling.
+          * Specifies the header size of the label element, from 1 (largest) to 6 (smallest).
          */
         "headerSize"?: number;
         /**
-          * Optional hint text.
+          * Hint text provided to guide users on the expected format or type of files.
          */
         "hint"?: string;
         /**
-          * The label for the file input.
+          * Label for the file input, displayed above the input.
          */
         "label"?: string;
         /**
-          * The name for the input element.
+          * Name attribute for the file input element, used to identify the form data in the submission.
          */
         "name"?: string;
         /**
-          * The event emitted when the file input value changes.
+          * Event emitted when any change to the file inputs occurs.
          */
         "onVaMultipleChange"?: (event: VaFileInputMultipleCustomEvent<any>) => void;
         /**
-          * Sets the input to required and renders the (*Required) text.
+          * If true, the file input is marked as required, and users must select a file.
          */
         "required"?: boolean;
     }

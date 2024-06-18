@@ -72,23 +72,6 @@ HeaderSize.args = {
   headerSize: 1
 };
 
-// TODO - Implement this in a future card
-// const additionalInfo = (
-//   <div>
-//     <va-select className="hydrated" uswds label='What kind of file is this?' required>
-//       <option key="1" value="1">Public Document</option>
-//       <option key="2" value="2">Private Document</option>
-//     </va-select>
-//   </div>
-// );
-//
-// export const AdditionalInfo = Template.bind(null);
-// AdditionalInfo.args = {
-//   ...defaultArgs,
-//   label: 'Label Header',
-//   additionalInfo: additionalInfo
-// }
-
 const ErrorsTemplate = ({label, name, hint}) => {
   const [errorsList, setErrorsList] = useState([]);
 
