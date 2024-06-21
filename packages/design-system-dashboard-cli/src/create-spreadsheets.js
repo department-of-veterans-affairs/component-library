@@ -76,9 +76,9 @@ const flattenMatches = (flattened, compPathObj) => {
 };
 
 /**
- * Search vets-website and the content build for design system components.
+ * Search vets-website and the content build for design system components and instances of Font Awesome icons.
  */
-function findComponents() {
+function findComponentsAndIcons() {
   const vwModules = readAllModules(`${repos['vets-website']}/src`);
   const cbTemplates = readAllTemplates(`${repos['content-build']}/src`);
 
@@ -145,7 +145,7 @@ function findComponents() {
     []
   );
 
-  // Finally we filter out the V3 components from the V1 collection
+  // Next we filter out the V3 components from the V1 collection
   cbV1WC.forEach(compPath => {
     const foundIndex = cbV3WC.findIndex(
       allCompPath =>
@@ -157,14 +157,24 @@ function findComponents() {
     }
   });
 
-  // Last but not least, combine the vw and cb collections
+  // Combine the vw and cb collections
   const v1WebComponents = [...vwV1WC, ...cbV1WC];
   const v3WebComponents = [...vwV3WC, ...cbV3WC];
+
+  // Now, we look through the vw and cb modules and templates again, this time looking for potential Font Awesome icons
+  const iconRegex = /<i[\s].+(fa-[a-zA-Z0-9_-]+)/gm;
+  const vwIcons = [...search(vwModules, iconRegex)].reduce(flattenMatches, []);
+  const cbIcons = [...search(cbTemplates, iconRegex)].reduce(
+    flattenMatches,
+    []
+  );
+  const iconMatches = [...vwIcons, ...cbIcons];
 
   return {
     react: allReactComponents,
     v1: v1WebComponents,
     v3: v3WebComponents,
+    icons: iconMatches,
   };
 }
 
@@ -176,11 +186,12 @@ function writeCountsToCSVs(data) {
 }
 
 if (require.main === module) {
-  const data = findComponents();
+  const data = findComponentsAndIcons();
 
   console.log('react total instances:', data.react.length);
   console.log('v1 total instances:', data.v1.length);
   console.log('v3 total instances:', data.v3.length);
+  console.log('icon total instances:', data.icons.length);
 
   writeCountsToCSVs(data);
 }
