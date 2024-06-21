@@ -24,7 +24,8 @@ const defaultArgs = {
   'error': '',
   'enable-analytics': false,
   'hint': 'You can upload a .pdf, .gif, .jpg, .bmp, or .txt file.',
-  'vaChange': null,
+  'vaChange': event =>
+    alert(`File change event received: ${event?.detail?.files[0]?.name}`),
   'uswds': true,
   'header-size': null,
   'children': null
