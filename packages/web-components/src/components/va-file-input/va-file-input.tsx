@@ -162,12 +162,12 @@ export class VaFileInput {
 
   private removeFile = (notifyParent: boolean = true) => {
     this.closeModal();
-    this.file = null;
     this.uploadStatus = 'idle';
     this.internalError = null;
     if (notifyParent) {
       this.vaChange.emit({ files: [this.file] });
     }
+    this.file = null;
   };
 
   private openModal = () => {
