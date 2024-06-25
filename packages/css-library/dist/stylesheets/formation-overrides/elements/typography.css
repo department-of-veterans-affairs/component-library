@@ -60,8 +60,8 @@ a:visited {
 }
 
 .usa-external_link::after {
-  background: url("/assets/img/external-link.png") no-repeat 0 0;
-  background: url("/assets/img/external-link.svg") no-repeat 0 0;
+  background: url("/img/external-link.png") no-repeat 0 0;
+  background: url("/img/external-link.svg") no-repeat 0 0;
   background-size: 100%;
   content: "";
   display: inline-block;
@@ -71,13 +71,13 @@ a:visited {
   width: 0.65em;
 }
 .usa-external_link:hover::after {
-  background-image: url("/assets/img/external-link-hover.png");
-  background-image: url("/assets/img/external-link-hover.svg");
+  background-image: url("/img/external-link-hover.png");
+  background-image: url("/img/external-link-hover.svg");
 }
 
 .usa-external_link-alt::after {
-  background: url("/assets/img/external-link-alt.png") no-repeat 0 0;
-  background: url("/assets/img/external-link-alt.svg") no-repeat 0 0;
+  background: url("/img/external-link-alt.png") no-repeat 0 0;
+  background: url("/img/external-link-alt.svg") no-repeat 0 0;
   background-size: 100%;
   content: "";
   display: inline-block;
@@ -87,8 +87,8 @@ a:visited {
   width: 0.65em;
 }
 .usa-external_link-alt:hover::after {
-  background-image: url("/assets/img/external-link-alt-hover.png");
-  background-image: url("/assets/img/external-link-alt-hover.svg");
+  background-image: url("/img/external-link-alt-hover.png");
+  background-image: url("/img/external-link-alt-hover.svg");
 }
 
 h1,

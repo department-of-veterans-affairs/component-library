@@ -127,8 +127,8 @@ textarea {
 select {
   appearance: none;
   background-color: #ffffff;
-  background-image: url("/assets/img/arrow-both.png");
-  background-image: none, url("/assets/img/arrow-both.svg"), url("/assets/img/arrow-both.png");
+  background-image: url("/img/arrow-both.png");
+  background-image: none, url("/img/arrow-both.svg"), url("/img/arrow-both.png");
   background-position: right 0.8125rem center;
   background-repeat: no-repeat;
   background-size: 0.625rem;
@@ -226,8 +226,8 @@ legend {
 
 [type=checkbox]:checked + label::before,
 [type=checkbox]:checked:disabled + label::before {
-  background-image: url("/assets/img/correct8.png");
-  background-image: url("/assets/img/correct8.svg");
+  background-image: url("/img/correct8.png");
+  background-image: url("/img/correct8.svg");
   background-position: 50%;
   background-repeat: no-repeat;
 }
@@ -258,8 +258,8 @@ legend {
   [type=checkbox]:checked:disabled + label::before {
     background-image: none;
     background-color: #ffffff;
-    content: url("/assets/img/correct8-alt.png");
-    content: url("/assets/img/correct8-alt.svg");
+    content: url("/img/correct8-alt.png");
+    content: url("/img/correct8-alt.svg");
     text-indent: 0;
   }
   [type=radio]:checked:disabled + label::before,

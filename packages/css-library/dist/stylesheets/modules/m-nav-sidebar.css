@@ -264,11 +264,11 @@
   background-color: #e1f3f8;
 }
 .va-sidebarnav .usa-accordion .usa-accordion-button[aria-expanded=false] {
-  background-image: url("/assets/img/plus-blue.svg");
+  background-image: url("/img/plus-blue.svg");
 }
 .va-sidebarnav .usa-accordion .usa-accordion-button[aria-expanded=true] {
   border-bottom: 0;
-  background-image: url("/assets/img/minus-blue.svg");
+  background-image: url("/img/minus-blue.svg");
 }
 .va-sidebarnav .usa-accordion .usa-accordion-button[aria-expanded=true]:focus {
   border: 2px solid #fdb81e;
@@ -337,7 +337,7 @@
 }
 
 .va-btn-close-icon {
-  background: transparent url("/assets/img/close.svg") center no-repeat;
+  background: transparent url("/img/close.svg") center no-repeat;
   background-size: 0.625rem 0.625rem;
   height: 1.375rem;
   padding: 1.375rem;
