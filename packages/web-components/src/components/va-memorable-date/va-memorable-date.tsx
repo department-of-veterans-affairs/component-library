@@ -143,6 +143,8 @@ export class VaMemorableDate {
                      dayTouched: this.dayTouched
                    });
 
+    this.dateBlur.emit(event);
+
     if (this.error) {
       return;
     }
@@ -153,10 +155,6 @@ export class VaMemorableDate {
       day ? zeroPadStart(dayNum) : ''
     }` : '';
     /* eslint-enable i18next/no-literal-string */
-
-    // Any custom validation will happen first; otherwise consumer code clearing
-    // errors will also remove internal errors.
-    this.dateBlur.emit(event);
 
     if (this.enableAnalytics) {
       const detail = {

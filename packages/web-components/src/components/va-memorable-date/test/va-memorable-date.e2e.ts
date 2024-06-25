@@ -1250,4 +1250,34 @@ describe('va-memorable-date', () => {
     await axeCheck(page);
   });
 
+  it('uswds v3 blur event fires even when validation fails', async () => {
+    const page = await newE2EPage();
+    await page.setContent(
+      '<va-memorable-date name="test" label="Example label" month-select="false" />',
+    );
+    const blurSpy = await page.spyOnEvent('dateBlur');
+    const handleMonth = await page.$('pierce/[name="testMonth"]');
+    const handleDay = await page.$('pierce/[name="testDay"]');
+    const handleYear = await page.$('pierce/[name="testYear"]');
+
+    // Illegal Month
+    await handleMonth.press('0');
+    await handleMonth.press('Tab');
+    // Day
+    await handleDay.press('2');
+    await handleDay.press('Tab');
+    // Year
+    await handleYear.press('2');
+    await handleYear.press('0');
+    await handleYear.press('2');
+    await handleYear.press('2');
+    // Trigger Blur
+    await handleYear.press('Tab');
+    await page.waitForChanges();
+
+    const errorSpan = await page.find('va-memorable-date >>> span.usa-error-message');
+    expect(errorSpan).not.toBeNull();
+    expect(blurSpy).toHaveReceivedEventTimes(1);
+  });
+
 });
