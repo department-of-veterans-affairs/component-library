@@ -1,10 +1,11 @@
 import { newE2EPage } from '@stencil/core/testing';
 
 describe('V1 table', () => {
-  function getTableMarkup(uswds: boolean): string {
+  function getTableMarkup(uswds: boolean, stacked:boolean = false): string {
     return `<va-table
     table-title="My table"
     uswds=${uswds}
+    stacked=${stacked}
   >
     <va-table-row slot="headers">
       <span>
@@ -78,5 +79,21 @@ describe('V1 table', () => {
     const element = await page.find('va-table-inner >>> table');
 
     expect(element).toBeDefined();
+  });
+
+  it('is stacked by when attribute is set to true', async () => {
+    const page = await newE2EPage();
+    await page.setContent(getTableMarkup(true, true));
+    const element = await page.find('va-table-inner >>> table');
+
+    expect(element).toHaveClass('usa-table--stacked');
+  });
+
+  it('is not stacked by default', async () => {
+    const page = await newE2EPage();
+    await page.setContent(getTableMarkup(true));
+    const element = await page.find('va-table-inner >>> table');
+
+    expect(element).not.toHaveClass('usa-table--stacked');
   });
 });

@@ -42,11 +42,12 @@ const data = [
 const Template = (args) => {
   const {
     'table-title': tableTitle,
+    'table-type': tableType,
     rows = data,
   } = args;
 
   return (
-    <va-table uswds table-title={tableTitle}>
+    <va-table uswds table-title={tableTitle} stacked={args.stacked} table-type={tableType}>
       <va-table-row>
           {columns.map((col, i) => (
             <span key={`header-default-${i}`}>{col}</span>
@@ -308,6 +309,24 @@ Default.args = {
   rows: data
 }
 Default.argTypes = propStructure(vaTableDocs);
+
+
+export const StackedBordered = Template.bind(null);
+StackedBordered.args = {
+  'table-title': "This is a stacked bordered table (when on a mobile-width screen)",
+  'table-type': 'bordered',
+  stacked: true,
+  rows: data
+}
+StackedBordered.argTypes = propStructure(vaTableDocs);
+
+export const StackedBorderless = Template.bind(null);
+StackedBorderless.args = {
+  'table-title': "This is a stacked borderless table (when on a mobile-width screen)",
+  stacked: true,
+  rows: data
+}
+StackedBorderless.argTypes = propStructure(vaTableDocs);
 
 export const WithCustomMarkup = CustomComponentsTemplate.bind(null);
 WithCustomMarkup.args = {

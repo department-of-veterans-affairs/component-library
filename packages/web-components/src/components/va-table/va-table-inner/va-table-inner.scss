@@ -48,3 +48,9 @@ caption {
     border-top: 1px solid var(--vads-color-gray-medium);
   }
 }
+
+@media screen and (max-width: 29.99em) {
+  .usa-table--stacked th, .usa-table--stacked td {
+    width: auto;
+  }
+}
