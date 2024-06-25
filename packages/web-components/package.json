@@ -1,6 +1,6 @@
 {
   "name": "@department-of-veterans-affairs/web-components",
-  "version": "10.0.1",
+  "version": "11.0.0",
   "description": "Stencil Component Starter",
   "main": "dist/index.cjs.js",
   "module": "dist/index.js",
