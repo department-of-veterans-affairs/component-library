@@ -15,7 +15,7 @@
 }
 .hub-page-link-list__item > a:hover .all-link-arrow, .hub-page-link-list__item > a:focus .all-link-arrow {
   margin-left: 10px;
-  content: url("/assets/img/arrow-right.svg");
+  content: url("/img/arrow-right.svg");
 }
 .hub-page-link-list__item > a:hover .hub-page-link-list__header, .hub-page-link-list__item > a:focus .hub-page-link-list__header {
   text-decoration: underline;
