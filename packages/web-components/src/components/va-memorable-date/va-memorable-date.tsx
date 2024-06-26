@@ -158,8 +158,6 @@ export class VaMemorableDate {
                      monthTouched: this.monthTouched,
                      dayTouched: this.dayTouched
     });
-    
-    console.log('here?');
 
     if (this.error) {
       return;
@@ -274,8 +272,6 @@ export class VaMemorableDate {
       formHeadingLevel,
       formHeading,
     } = this;
-
-    console.log('here were are rendering!!!');
 
     const [year, month, day] = (value || '').split('-');
     const describedbyIds = ['dateHint', hint ? 'hint' : '']
