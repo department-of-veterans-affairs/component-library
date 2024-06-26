@@ -239,7 +239,6 @@ export class VaBreadcrumbs {
 
       let potentialBreadcrumbs = this.validateBreadcrumbs(this.breadcrumbList);
 
-      console.log('potentialBreadcrumbs:', potentialBreadcrumbs);
       if (potentialBreadcrumbs) {
         this.updateBreadCrumbList(potentialBreadcrumbs);
       } else return;
