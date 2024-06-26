@@ -156,7 +156,7 @@ describe('va-breadcrumbs', () => {
 
     const anchorElements = await page.findAll('pierce/a');
     const firstAnchorText = anchorElements[0].innerText;
-    
+
     expect(firstAnchorText).toBe('VA.gov home');
   });
 
@@ -172,7 +172,7 @@ describe('va-breadcrumbs', () => {
 
     const anchorElements = await page.findAll('pierce/a');
     const firstAnchorText = anchorElements[0].innerText;
-    
+
     expect(firstAnchorText).toBe('home');
   });
 
@@ -190,12 +190,51 @@ describe('va-breadcrumbs', () => {
             <ol class="usa-breadcrumb__list" role="list">
               <li class="usa-breadcrumb__list-item">
                 <a class="usa-breadcrumb__link" href="#home">
-                  <span>VA.gov home</span>
+                  <span lang="en-US">VA.gov home</span>
                 </a>
               </li>
               <li class="usa-breadcrumb__list-item usa-current" aria-current="page">
                 <a class="usa-breadcrumb__link" href="#content">
-                  <span>Current</span>
+                  <span lang="en-US">Current</span>
+                </a>
+              </li>
+            </ol>
+          </nav>
+        </mock:shadow-root>
+      </va-breadcrumbs>
+    `);
+  });
+
+  it('uswds - renders different language breadcrumbs', async () => {
+    const crumbs = JSON.stringify([
+      { label: 'Home', href: '#home' },
+      { label: 'Spanish Crumb', href: '#spanish', lang: 'es' },
+      { label: 'Tagalog Crumb', href: '#tagalog', lang: 'tl' },
+    ]);
+    const page = await newE2EPage({
+      html: `<va-breadcrumbs class="hydrated" label="test" disable-analytics="false" breadcrumb-list=\'${crumbs}\'></va-breadcrumbs>`,
+    });
+    const element = await page.find('va-breadcrumbs');
+    expect(element).toEqualHtml(`
+      <va-breadcrumbs class="hydrated" disable-analytics="false" label="test" breadcrumb-list='[{"label":"Home","href":"#home"},{"label":"Spanish Crumb","href":"#spanish","lang":"es"},{"label":"Tagalog Crumb","href":"#tagalog","lang":"tl"}]'>
+        <mock:shadow-root>
+          <nav aria-label="test" class="usa-breadcrumb">
+            <ol class="usa-breadcrumb__list" role="list">
+              <li class="usa-breadcrumb__list-item">
+                <a class="usa-breadcrumb__link" href="#home">
+                  <span lang="en-US">VA.gov home</span>
+                </a>
+              </li>
+              <li class="usa-breadcrumb__list-item">
+                <a class="usa-breadcrumb__link" href="#spanish">
+                  <span lang="es">
+                    Spanish Crumb
+                  </span>
+                </a>
+              </li>
+              <li class="usa-breadcrumb__list-item usa-current" aria-current="page">
+                <a class="usa-breadcrumb__link" href="#content">
+                  <span lang="tl">Tagalog Crumb</span>
                 </a>
               </li>
             </ol>
@@ -213,7 +252,7 @@ describe('va-breadcrumbs', () => {
     const element = await page.find('va-breadcrumbs');
     const indicator = element.shadowRoot.querySelector('.usa-breadcrumb');
     expect(indicator.classList.contains('usa-breadcrumb--wrap')).toBe(true);
-  })
+  });
 
   it('uswds - passes an axe check', async () => {
     const page = await newE2EPage();
@@ -272,17 +311,17 @@ describe('va-breadcrumbs', () => {
             <ol class="usa-breadcrumb__list" role="list">
               <li class="usa-breadcrumb__list-item">
                 <a class="usa-breadcrumb__link" href="/one">
-                  <span>VA.gov home</span>
+                  <span lang="en-US">VA.gov home</span>
                 </a>
               </li>
               <li class="usa-breadcrumb__list-item">
                 <a class="usa-breadcrumb__link" href="/two">
-                  <span>Two</span>
+                  <span lang="en-US">Two</span>
                 </a>
               </li>
               <li class="usa-breadcrumb__list-item usa-current" aria-current="page">
                 <a class="usa-breadcrumb__link" href="#content">
-                  <span>Three</span>
+                  <span lang="en-US">Three</span>
                 </a>
               </li>
             </ol>
@@ -304,7 +343,7 @@ describe('va-breadcrumbs', () => {
     await anchorElements[1].click();
 
     expect(routeChangeSpy).toHaveReceivedEventDetail({
-      href: "/two",
+      href: '/two',
     });
   });
 
@@ -346,7 +385,7 @@ describe('va-breadcrumbs', () => {
 
     const anchorElements = await page.findAll('pierce/a');
     const firstAnchorText = anchorElements[0].innerText;
-    
+
     expect(firstAnchorText).toBe('home');
   });
 
