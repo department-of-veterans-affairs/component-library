@@ -251,7 +251,7 @@ const CustomErrorMessageTemplate = ({ label, name, hint, required, error, value 
       />
       <hr />
       <div>
-        To displaly a custom error message when a day, month, or year is invalid, use the   
+        To display a custom error message when a day, month, or year is invalid, use the   
         &nbsp;<code>customDayErrorMessage</code>, <code>customMonthErrorMessage</code>, or <code>customYearErrorMessage</code>, prop respectively.
       </div>
     </>
