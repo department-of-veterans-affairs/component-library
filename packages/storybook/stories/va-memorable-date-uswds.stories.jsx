@@ -243,7 +243,7 @@ const CustomErrorMessageTemplate = ({ label, name, hint, required, error, value 
       hint={hint}
       required={required}
       error={error}
-      invalidMonth={true}
+      invalidDay={true}
       value={value}
       onDateBlur={() => {}}
       onDateChange={() => {}}
