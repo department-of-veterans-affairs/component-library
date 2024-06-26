@@ -102,6 +102,22 @@ export class VaMemorableDate {
   @Prop({ mutable: true, reflect: true }) value?: string;
 
   /**
+   * A custom error message to display if the day is invalid
+   */
+  @Prop() customDayErrorMessage?: string;
+
+  /**
+   * A custom error message to display if the month is invalid
+   */
+  @Prop() customMonthErrorMessage?: string;
+
+  /**
+   * A custom error message to display if the year is invalid
+   */
+  @Prop() customYearErrorMessage?: string;
+
+
+  /**
    * Fires when the date input loses focus after its value was changed
    */
   @Event({
@@ -141,7 +157,9 @@ export class VaMemorableDate {
                      yearTouched: this.yearTouched,
                      monthTouched: this.monthTouched,
                      dayTouched: this.dayTouched
-                   });
+    });
+    
+    console.log('here?');
 
     if (this.error) {
       return;
@@ -257,6 +275,8 @@ export class VaMemorableDate {
       formHeading,
     } = this;
 
+    console.log('here were are rendering!!!');
+
     const [year, month, day] = (value || '').split('-');
     const describedbyIds = ['dateHint', hint ? 'hint' : '']
       .filter(Boolean)
@@ -271,6 +291,20 @@ export class VaMemorableDate {
     }
 
     const getErrorMessage = (error: string) => {
+      let errorMessage: string = '';
+
+      if (this.invalidDay) {
+        errorMessage = this.customDayErrorMessage;
+      } else if (this.invalidMonth) {
+        errorMessage = this.customMonthErrorMessage;
+      } else if (this.invalidYear) {
+        errorMessage = this.customYearErrorMessage;
+      }
+
+      return errorMessage ? errorMessage : getStandardErrorMessage(error);
+    }
+
+    const getStandardErrorMessage = (error: string) => {
       let key = error;
       if (monthSelect && error === 'month-range') {
         key = 'month-select';
@@ -314,7 +348,7 @@ export class VaMemorableDate {
             class='usa-form-group--month-select'
             reflectInputError={error === 'month-range' ? true : false}
             value={month ? String(parseInt(month)) : month}
-            error={this.invalidMonth ? getErrorMessage(error) : null}
+            error={this.invalidMonth ? getStandardErrorMessage(error) : null}
           >
             {months &&
               months.map(monthOption => (
@@ -343,7 +377,7 @@ export class VaMemorableDate {
           reflectInputError={error === 'month-range' ? true : false}
           inputmode="numeric"
           type="text"
-          error={this.invalidMonth ? getErrorMessage(error) : null}
+          error={this.invalidMonth ? getStandardErrorMessage(error) : null}
         />
       </div>;
       const legendClass = classnames({
@@ -390,7 +424,7 @@ export class VaMemorableDate {
                     reflectInputError={error === 'day-range' ? true : false}
                     inputmode="numeric"
                     type="text"
-                    error={this.invalidDay ? getErrorMessage(error) : null}
+                    error={this.invalidDay ? getStandardErrorMessage(error) : null}
                   />
                 </div>
                 <div class="usa-form-group usa-form-group--year">
@@ -410,7 +444,7 @@ export class VaMemorableDate {
                     reflectInputError={error === 'year-range' ? true : false}
                     inputmode="numeric"
                     type="text"
-                    error={this.invalidYear ? getErrorMessage(error) : null}
+                    error={this.invalidYear ? getStandardErrorMessage(error) : null}
                   />
                 </div>
               </div>
