@@ -286,6 +286,8 @@ export class VaMemorableDate {
       return getErrorParameters(error, yearNum, monthNum);
     }
 
+    // get a custom error method if existent when internal validation fails
+    // otherwise take standard error message
     const getErrorMessage = (error: string) => {
       let errorMessage: string = '';
 
@@ -300,6 +302,7 @@ export class VaMemorableDate {
       return errorMessage ? errorMessage : getStandardErrorMessage(error);
     }
 
+    // get the default message if internal validation fails
     const getStandardErrorMessage = (error: string) => {
       let key = error;
       if (monthSelect && error === 'month-range') {
