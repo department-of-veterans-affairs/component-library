@@ -8,8 +8,9 @@ const {
 } = require('./write-comp-usage-to-csv');
 const {
   readAllModules,
-  readFile,
+  readAllStylesheets,
   readAllTemplates,
+  readFile,
   search,
 } = require('./search-files');
 const { repos } = require('./env');
@@ -70,9 +71,10 @@ function findReactComponents(modulesOrTemplates, regexPattern) {
 const flattenMatches = (flattened, compPathObj) => {
   const path = compPathObj.path;
   // Ignores the tag, just need the component's name
-  const newFlat = compPathObj.matches.map(([, component]) => {
+  const newFlat = compPathObj.matches.map(([, component, comp2]) => {
     // Some component name matches include the ending '>', so we remove that here
-    component = component.replace('>', '');
+    // For icons, sometimes the first component match is empty, so assigning the second match if needed
+    component = component?.replace('>', '') ?? comp2;
     return { path, component };
   });
   return flattened.concat(newFlat);
@@ -84,6 +86,7 @@ const flattenMatches = (flattened, compPathObj) => {
 function findComponentsAndIcons() {
   const vwModules = readAllModules(`${repos['vets-website']}/src`);
   const cbTemplates = readAllTemplates(`${repos['content-build']}/src`);
+  const vwStylesheets = readAllStylesheets(`${repos['vets-website']}/src`);
 
   // First thing we do is find all of the React components
   // This regex finds all of the non-react-binding imports
@@ -171,7 +174,15 @@ function findComponentsAndIcons() {
     flattenMatches,
     []
   );
-  const iconMatches = [...vwIcons, ...cbIcons];
+
+  // Also look into VW stylesheets for obvious mentions of Font Awesome
+  const styleRegex = /("Font Awesome)|(\.fa-)/g;
+  const vwStyleIcons = [...search(vwStylesheets, styleRegex)].reduce(
+    flattenMatches,
+    []
+  );
+
+  const iconMatches = [...vwIcons, ...cbIcons, ...vwStyleIcons];
 
   return {
     react: allReactComponents,
