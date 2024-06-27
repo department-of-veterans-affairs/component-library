@@ -2,7 +2,10 @@
  * Search through vets-website and content-build for instance of DST components, tally them up, and write the results to separate CSV files, one for each type of component (React, V1, V3)
  */
 
-const writeCompPathsToCSV = require('./write-comp-usage-to-csv');
+const {
+  writeCompPathsToCSV,
+  writeIconPathsToCSV,
+} = require('./write-comp-usage-to-csv');
 const {
   readAllModules,
   readFile,
@@ -180,8 +183,13 @@ function findComponentsAndIcons() {
 
 function writeCountsToCSVs(data) {
   Object.entries(data).forEach(([breakoutType, components]) => {
-    // write stuff out for each breakoutType
-    writeCompPathsToCSV({ breakoutType, components });
+    if (breakoutType !== 'icons') {
+      // write stuff out for each breakoutType
+      writeCompPathsToCSV({ breakoutType, components });
+    } else {
+      // write icon stuff out
+      writeIconPathsToCSV(components);
+    }
   });
 }
 
