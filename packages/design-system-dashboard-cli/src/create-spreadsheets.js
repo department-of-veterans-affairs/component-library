@@ -72,10 +72,10 @@ function findReactComponents(modulesOrTemplates, regexPattern) {
 const flattenMatches = (flattened, compPathObj) => {
   const path = compPathObj.path;
   // Ignores the tag, just need the component's name
-  const newFlat = compPathObj.matches.map(([, component, comp2]) => {
+  const newFlat = compPathObj.matches.map(([, component]) => {
     // Some component name matches include the ending '>', so we remove that here
     // For icons, sometimes the first component match is empty, so assigning the second match if needed
-    component = component?.replace('>', '') ?? comp2;
+    component = component?.replace('>', '');
     return { path, component };
   });
   return flattened.concat(newFlat);
@@ -178,7 +178,7 @@ function findComponentsAndIcons() {
   );
 
   // Also look into VW stylesheets for obvious mentions of Font Awesome
-  const styleRegex = /("Font Awesome)|(\.fa-)/g;
+  const styleRegex = /("Font Awesome|\.fa-|\.fa[srb]?[\s.{,])/g;
   const vwStyleIcons = [...search(vwStylesheets, styleRegex)].reduce(
     flattenMatches,
     []
