@@ -666,6 +666,18 @@ export namespace Components {
     }
     interface VaMemorableDate {
         /**
+          * A custom error message to display if the day is invalid
+         */
+        "customDayErrorMessage"?: string;
+        /**
+          * A custom error message to display if the month is invalid
+         */
+        "customMonthErrorMessage"?: string;
+        /**
+          * A custom error message to display if the year is invalid
+         */
+        "customYearErrorMessage"?: string;
+        /**
           * Whether or not an analytics event will be fired.
          */
         "enableAnalytics": boolean;
@@ -2836,6 +2848,18 @@ declare namespace LocalJSX {
         "upcomingWarnTitle"?: string;
     }
     interface VaMemorableDate {
+        /**
+          * A custom error message to display if the day is invalid
+         */
+        "customDayErrorMessage"?: string;
+        /**
+          * A custom error message to display if the month is invalid
+         */
+        "customMonthErrorMessage"?: string;
+        /**
+          * A custom error message to display if the year is invalid
+         */
+        "customYearErrorMessage"?: string;
         /**
           * Whether or not an analytics event will be fired.
          */
