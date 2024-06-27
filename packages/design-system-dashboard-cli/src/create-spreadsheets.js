@@ -10,6 +10,7 @@ const {
   readAllModules,
   readAllStylesheets,
   readAllTemplates,
+  readAllTests,
   readFile,
   search,
 } = require('./search-files');
@@ -87,6 +88,7 @@ function findComponentsAndIcons() {
   const vwModules = readAllModules(`${repos['vets-website']}/src`);
   const cbTemplates = readAllTemplates(`${repos['content-build']}/src`);
   const vwStylesheets = readAllStylesheets(`${repos['vets-website']}/src`);
+  const vwTests = readAllTests(`${repos['vets-website']}/src`);
 
   // First thing we do is find all of the React components
   // This regex finds all of the non-react-binding imports
@@ -182,7 +184,14 @@ function findComponentsAndIcons() {
     []
   );
 
-  const iconMatches = [...vwIcons, ...cbIcons, ...vwStyleIcons];
+  // Also look into VW tests for fa- classes
+  const testRegex = /(fa-)/g;
+  const vwTestIcons = [...search(vwTests, testRegex)].reduce(
+    flattenMatches,
+    []
+  );
+
+  const iconMatches = [...vwIcons, ...cbIcons, ...vwStyleIcons, ...vwTestIcons];
 
   return {
     react: allReactComponents,
