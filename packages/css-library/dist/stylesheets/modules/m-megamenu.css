@@ -239,9 +239,13 @@
 .mega-menu .mm-marketing-container .mm-marketing-text {
   padding: 20px;
 }
+#mega-menu .mm-marketing-container .mm-marketing-text a,
+.mega-menu .mm-marketing-container .mm-marketing-text a {
+  font-size: 16px;
+}
 #mega-menu .mm-marketing-container p,
 .mega-menu .mm-marketing-container p {
-  font-size: 13.2px;
+  font-size: 16px;
   margin-top: 5px;
 }
 #mega-menu #vetnav-column-one-col .panel-bottom-link,

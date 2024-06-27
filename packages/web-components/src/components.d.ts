@@ -5,6 +5,7 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
+import { Breadcrumb } from "./components/va-breadcrumbs/va-breadcrumbs";
 export namespace Components {
     interface VaAccordion {
         /**
@@ -164,7 +165,7 @@ export namespace Components {
         /**
           * Represents a list of breadcrumbs. Use a JSON array of objects with label and href properties, then wrap in a string if using non-React-binding version. See Storybook examples for React-binding version. For pure web components, here's an example link: ``[{"href": "/link1", "label": "Link 1"}]`. This prop is available when `uswds` is set to `true`.
          */
-        "breadcrumbList"?: any;
+        "breadcrumbList"?: Breadcrumb[] | string;
         /**
           * Analytics tracking function(s) will not be called
          */
@@ -665,6 +666,18 @@ export namespace Components {
         "upcomingWarnTitle": string;
     }
     interface VaMemorableDate {
+        /**
+          * A custom error message to display if the day is invalid
+         */
+        "customDayErrorMessage"?: string;
+        /**
+          * A custom error message to display if the month is invalid
+         */
+        "customMonthErrorMessage"?: string;
+        /**
+          * A custom error message to display if the year is invalid
+         */
+        "customYearErrorMessage"?: string;
         /**
           * Whether or not an analytics event will be fired.
          */
@@ -2259,7 +2272,7 @@ declare namespace LocalJSX {
         /**
           * Represents a list of breadcrumbs. Use a JSON array of objects with label and href properties, then wrap in a string if using non-React-binding version. See Storybook examples for React-binding version. For pure web components, here's an example link: ``[{"href": "/link1", "label": "Link 1"}]`. This prop is available when `uswds` is set to `true`.
          */
-        "breadcrumbList"?: any;
+        "breadcrumbList"?: Breadcrumb[] | string;
         /**
           * Analytics tracking function(s) will not be called
          */
@@ -2844,6 +2857,18 @@ declare namespace LocalJSX {
         "upcomingWarnTitle"?: string;
     }
     interface VaMemorableDate {
+        /**
+          * A custom error message to display if the day is invalid
+         */
+        "customDayErrorMessage"?: string;
+        /**
+          * A custom error message to display if the month is invalid
+         */
+        "customMonthErrorMessage"?: string;
+        /**
+          * A custom error message to display if the year is invalid
+         */
+        "customYearErrorMessage"?: string;
         /**
           * Whether or not an analytics event will be fired.
          */

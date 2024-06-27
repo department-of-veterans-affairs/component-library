@@ -11,6 +11,13 @@ import {
 } from '@stencil/core';
 import classnames from 'classnames';
 
+export type Breadcrumb = {
+  label: string;
+  href: string;
+  isRouterLink?: boolean;
+  lang?: string;
+};
+
 /**
  * @componentName Breadcrumbs
  * @maturityCategory use
@@ -39,7 +46,7 @@ export class VaBreadcrumbs {
   /**
    *  Represents a list of breadcrumbs. Use a JSON array of objects with label and href properties, then wrap in a string if using non-React-binding version. See Storybook examples for React-binding version. For pure web components, here's an example link: ``[{"href": "/link1", "label": "Link 1"}]`. This prop is available when `uswds` is set to `true`.
    */
-  @Prop() breadcrumbList?: any;
+  @Prop() breadcrumbList?: Breadcrumb[] | string;
 
   /**
    *  When true, the first breadcrumb label will be "VA.gov home".
@@ -49,10 +56,10 @@ export class VaBreadcrumbs {
   /**
    *
    * Represents an internal state of the component which stores the list of breadcrumbs parsed from the 'breadcrumbList' prop.
-   * Each breadcrumb is represented as an object with two properties: 'label' and 'href'.
+   * Each breadcrumb is represented as an object with at least two properties: 'label' and 'href'.
    * This state is used when `uswds` is set to `true`.
    */
-  @State() formattedBreadcrumbs?: Array<{ label: string; href: string }> = [];
+  @State() formattedBreadcrumbs?: Breadcrumb[] = [];
   /**
    *
    * This is a method that watches for changes in the 'breadcrumbList' prop.
@@ -62,7 +69,10 @@ export class VaBreadcrumbs {
   @Watch('breadcrumbList')
   watchBreadcrumbListHandler(breadcrumbList) {
     if (!this.breadcrumbList?.length) return;
-    this.updateBreadCrumbList(breadcrumbList);
+    let potentialBreadcrumbs = this.validateBreadcrumbs(breadcrumbList);
+    if (potentialBreadcrumbs) {
+      this.updateBreadCrumbList(potentialBreadcrumbs);
+    }
   }
   /**
    * Analytics tracking function(s) will not be called
@@ -99,24 +109,13 @@ export class VaBreadcrumbs {
    * @param breadcrumbList - An array of breadcrumb objects or a stringified version of it.
    * @private
    */
-  private updateBreadCrumbList(
-    breadcrumbList:
-      | Array<{ label: string; href: string; isRouterLink?: boolean }>
-      | string,
-  ) {
-    const firstBreadcrumb = breadcrumbList[0] as {
-      label: string;
-      href: string;
-    };
-
+  private updateBreadCrumbList(breadcrumbList: Breadcrumb[]) {
+    const firstBreadcrumb = breadcrumbList[0];
     if (firstBreadcrumb && this.homeVeteransAffairs) {
       firstBreadcrumb.label = 'VA.gov home';
     }
 
-    this.formattedBreadcrumbs =
-      typeof breadcrumbList === 'string'
-        ? JSON.parse(breadcrumbList)
-        : breadcrumbList;
+    this.formattedBreadcrumbs = breadcrumbList;
   }
 
   private getClickLevel(target: HTMLAnchorElement) {
@@ -178,6 +177,36 @@ export class VaBreadcrumbs {
     }
   }
 
+  private validateBreadcrumbs(breadcrumbList: Breadcrumb[] | string) {
+    let potentialBreadcrumbs: Breadcrumb[];
+
+    if (Array.isArray(breadcrumbList)) {
+      potentialBreadcrumbs = breadcrumbList;
+    } else if (typeof breadcrumbList === 'string') {
+      try {
+        potentialBreadcrumbs = JSON.parse(breadcrumbList);
+      } catch (e) {
+        return false;
+      }
+    } else return false;
+
+    // Now validate that potentialBreadcrumbs is an array of objects with the properties "label" and "href"
+    // eslint-disable-next-line i18next/no-literal-string
+    if (
+      Array.isArray(potentialBreadcrumbs) &&
+      potentialBreadcrumbs.every(
+        item =>
+          typeof item === 'object' &&
+          item.hasOwnProperty('label') &&
+          item.hasOwnProperty('href'),
+      )
+    ) {
+      return potentialBreadcrumbs;
+    } else {
+      return false;
+    }
+  }
+
   componentDidLoad() {
     // We are getting the slot nodes so that we can handle either receiving an
     // anchor tag or a list item with an anchor tag.
@@ -208,31 +237,10 @@ export class VaBreadcrumbs {
     if (this.uswds) {
       if (!this.breadcrumbList?.length) return;
 
-      let potentialBreadcrumbs;
+      let potentialBreadcrumbs = this.validateBreadcrumbs(this.breadcrumbList);
 
-      if (Array.isArray(this.breadcrumbList)) {
-        potentialBreadcrumbs = this.breadcrumbList;
-      } else if (typeof this.breadcrumbList === 'string') {
-        try {
-          potentialBreadcrumbs = JSON.parse(this.breadcrumbList);
-        } catch (e) {
-          return;
-        }
-      } else return;
-
-      // Now validate that potentialBreadcrumbs is an array of objects with the properties "label" and "href"
-      // eslint-disable-next-line i18next/no-literal-string
-      if (
-        Array.isArray(potentialBreadcrumbs) &&
-        potentialBreadcrumbs.every(
-          item =>
-            typeof item === 'object' &&
-            item.hasOwnProperty('label') &&
-            item.hasOwnProperty('href'),
-        )
-      ) {
-        this.formattedBreadcrumbs = potentialBreadcrumbs;
-        this.updateBreadCrumbList(this.formattedBreadcrumbs);
+      if (potentialBreadcrumbs) {
+        this.updateBreadCrumbList(potentialBreadcrumbs);
       } else return;
     }
   }
@@ -354,7 +362,7 @@ export class VaBreadcrumbs {
                       href="#content"
                       onClick={e => this.fireAnalyticsEvent(e)}
                     >
-                      <span>{item.label}</span>
+                      <span lang={item.lang || 'en-US'}>{item.label}</span>
                     </a>
                   ) : (
                     <a
@@ -362,7 +370,7 @@ export class VaBreadcrumbs {
                       href={item.href}
                       onClick={e => this.handleClick(e, item)}
                     >
-                      <span>{item.label}</span>
+                      <span lang={item.lang || 'en-US'}>{item.label}</span>
                     </a>
                   )}
                 </li>
