@@ -311,22 +311,21 @@ Default.args = {
 Default.argTypes = propStructure(vaTableDocs);
 
 
-export const StackedBordered = Template.bind(null);
-StackedBordered.args = {
-  'table-title': "This is a stacked bordered table (when on a mobile-width screen)",
+export const Bordered = Template.bind(null);
+Bordered.args = {
+  'table-title': "This is a stacked bordered table.",
   'table-type': 'bordered',
-  stacked: true,
   rows: data
 }
-StackedBordered.argTypes = propStructure(vaTableDocs);
+Bordered.argTypes = propStructure(vaTableDocs);
 
-export const StackedBorderless = Template.bind(null);
-StackedBorderless.args = {
-  'table-title': "This is a stacked borderless table (when on a mobile-width screen)",
-  stacked: true,
+export const NonStacked = Template.bind(null);
+NonStacked.args = {
+  'table-title': "This table is not stacked. It will not change on a mobile screen.",
+  stacked: false,
   rows: data
 }
-StackedBorderless.argTypes = propStructure(vaTableDocs);
+NonStacked.argTypes = propStructure(vaTableDocs);
 
 export const WithCustomMarkup = CustomComponentsTemplate.bind(null);
 WithCustomMarkup.args = {

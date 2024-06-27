@@ -37,9 +37,10 @@ export class VaTable {
   @Prop() tableType?: 'borderless' = 'borderless';
 
   /**
-   * If true convert to a stacked table when screen size is small
+   * Convert to a stacked table when screen size is small
+   * True by default, must specify if false if this is unwanted
    */
-  @Prop() stacked?: boolean = false;
+  @Prop() stacked?: boolean = true;
   
   
   /// DELETE below props once V1 table removed ///

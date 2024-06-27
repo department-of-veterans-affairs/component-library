@@ -1286,7 +1286,7 @@ export namespace Components {
          */
         "sortColumn"?: number;
         /**
-          * If true convert to a stacked table when screen size is small
+          * Convert to a stacked table when screen size is small True by default, must specify if false if this is unwanted
          */
         "stacked"?: boolean;
         /**
@@ -3585,7 +3585,7 @@ declare namespace LocalJSX {
          */
         "sortColumn"?: number;
         /**
-          * If true convert to a stacked table when screen size is small
+          * Convert to a stacked table when screen size is small True by default, must specify if false if this is unwanted
          */
         "stacked"?: boolean;
         /**
