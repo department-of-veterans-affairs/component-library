@@ -11,7 +11,7 @@ import {
 } from '@stencil/core';
 import classnames from 'classnames';
 
-type Breadcrumb = {
+export type Breadcrumb = {
   label: string;
   href: string;
   isRouterLink?: boolean;

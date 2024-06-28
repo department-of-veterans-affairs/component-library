@@ -232,6 +232,32 @@ const FormsPatternMultipleTemplate = ({ label, name, hint, required, error, valu
   );
 };
 
+
+const CustomErrorMessageTemplate = ({ label, name, hint, required, error, value }) => {
+  return (
+    <>
+    <VaMemorableDate
+      id="custom-error-message"
+      label={label}
+      name={name}
+      hint={hint}
+      required={required}
+      error={error}
+      invalidDay={true}
+      value={value}
+      onDateBlur={() => {}}
+      onDateChange={() => {}}
+      customDayErrorMessage='This is a custom error message for an invalid day'
+      />
+      <hr />
+      <div>
+        To display a custom error message when a day, month, or year is invalid, use the   
+        &nbsp;<code>customDayErrorMessage</code>, <code>customMonthErrorMessage</code>, or <code>customYearErrorMessage</code>, prop respectively.
+      </div>
+    </>
+  );
+};
+
 export const Default = Template.bind(null);
 Default.args = { ...defaultArgs };
 Default.argTypes = propStructure(memorableDateInputDocs);
@@ -269,6 +295,13 @@ CustomValidation.args = {
   required: true,
   value: '2022-04-19',
 };
+
+export const CustomErrorMessage = CustomErrorMessageTemplate.bind(null);
+CustomErrorMessage.args = {
+  ...defaultArgs,
+  value: '2024-11-99',
+  error: "true"
+}
 
 // export const Internationalization = I18nTemplate.bind(null);
 // Internationalization.args = {
