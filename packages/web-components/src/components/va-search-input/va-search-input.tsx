@@ -133,7 +133,7 @@ export class VaSearchInput {
       },
     });
 
-    if (!this.formattedSuggestions.length) return;
+    this.isTouched = false;
     this.isListboxOpen = false;
   };
 
@@ -300,6 +300,7 @@ export class VaSearchInput {
         this.inputRef.focus();
         this.inputRef.removeAttribute('aria-activedescendant');
         this.isListboxOpen = false;
+        this.isTouched = false;
         this.handleSubmit();
         break;
       case 'Escape':
