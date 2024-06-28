@@ -170,7 +170,7 @@ function findComponentsAndIcons() {
   const v3WebComponents = [...vwV3WC, ...cbV3WC];
 
   // Now, we look through the vw and cb modules and templates again, this time looking for potential Font Awesome icons
-  const iconRegex = /<i[\s].+(fa-[a-zA-Z0-9_-]+)/gm;
+  const iconRegex = /<i[\s]/gm;
   const vwIcons = [...search(vwModules, iconRegex)].reduce(flattenMatches, []);
   const cbIcons = [...search(cbTemplates, iconRegex)].reduce(
     flattenMatches,
@@ -184,8 +184,8 @@ function findComponentsAndIcons() {
     []
   );
 
-  // Also look into VW tests for fa- classes
-  const testRegex = /(fa-)/g;
+  // Also look into VW tests for fa- classes (filtering out "mfa")
+  const testRegex = /[^m](fa-)/g;
   const vwTestIcons = [...search(vwTests, testRegex)].reduce(
     flattenMatches,
     []
