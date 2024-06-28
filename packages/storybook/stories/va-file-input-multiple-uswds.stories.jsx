@@ -75,7 +75,7 @@ HeaderSize.args = {
   headerSize: 1
 };
 
-const additionalInfoContent = (
+const additionalFormInputsContent = (
   <div>
     <va-select className="hydrated" uswds label='What kind of file is this?' required>
       <option key="1" value="1">Public Document</option>
@@ -83,7 +83,7 @@ const additionalInfoContent = (
     </va-select>
   </div>);
 
-const AdditionalInfoTemplate = ({
+const AdditionalFormInputsContentTemplate = ({
   label,
   name,
   accept,
@@ -117,7 +117,7 @@ const AdditionalInfoTemplate = ({
       <div className="vads-u-margin-top--2">
           <pre className="vads-u-font-size--sm vads-u-background-color--gray-lightest vads-u-padding--2">
             <code>
-  {`const additionalInfoContent = (
+  {`const additionalFormInputsContent = (
   <div>
     <va-select className="hydrated" uswds label='What kind of file is this?' required>
       <option key="1" value="1">Public Document</option>
@@ -127,7 +127,7 @@ const AdditionalInfoTemplate = ({
 );
   
 <VaFileInputMultiple ... >
-  {additionalInfoContent}
+  {additionalFormInputsContent}
 </VaFileInputMultiple>`}
             </code>
           </pre>
@@ -142,11 +142,11 @@ const AdditionalInfoTemplate = ({
   );
 };
 
-export const AdditionalInfo = AdditionalInfoTemplate.bind(null);
-AdditionalInfo.args = {
+export const AdditionalFormInputs = AdditionalFormInputsContentTemplate.bind(null);
+AdditionalFormInputs.args = {
   ...defaultArgs,
   label: 'Label Header',
-  additional: additionalInfoContent
+  additional: additionalFormInputsContent
 }
 
 const ErrorsTemplate = ({label, name, hint}) => {
