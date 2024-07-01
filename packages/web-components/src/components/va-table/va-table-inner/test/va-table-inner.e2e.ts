@@ -253,7 +253,14 @@ describe('V3 Table', () => {
 
   it('is not stacked by default', async () => {
     const page = await newE2EPage();
-    await page.setContent(`<va-table uswds="true" table-title="this is a caption" stacked="true">
+    await page.setContent(makeTable());
+    const table = await page.find('va-table-inner >>> table');
+    expect(table).toHaveClass('usa-table--stacked');
+  });
+
+  it('is not stacked by when attribute is set to false', async () => {
+    const page = await newE2EPage();
+    await page.setContent(`<va-table uswds="true" stacked="false" table-title="this is a caption">
         <va-table-row>
         <span>One</span>
         <span>Two</span>
@@ -266,13 +273,6 @@ describe('V3 Table', () => {
         <span>Mouse</span>
       </va-table-row>
     </va-table>`);
-    const table = await page.find('va-table-inner >>> table');
-    expect(table).toHaveClass('usa-table--stacked');
-  });
-
-  it('is stacked by when attribute is set to true', async () => {
-    const page = await newE2EPage();
-    await page.setContent(makeTable());
     const table = await page.find('va-table-inner >>> table');
     expect(table).not.toHaveClass('usa-table--stacked');
   });
