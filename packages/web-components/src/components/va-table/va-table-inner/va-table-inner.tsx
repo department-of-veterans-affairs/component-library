@@ -74,6 +74,11 @@ export class VaTableInner {
    */
   @State() sortAscending: boolean = !this.descending;
 
+  /**
+   * If true convert to a stacked table when screen size is small
+   */
+  @Prop() stacked?: boolean = false;
+
   private observer: MutationObserver;
 
   componentDidLoad() {
@@ -236,10 +241,11 @@ export class VaTableInner {
   }
 
   render() {
-    const { tableTitle, uswds, tableType } = this;
+    const { tableTitle, uswds, tableType, stacked } = this;
     if (uswds) {
       const classes = classnames({
         'usa-table': true,
+        'usa-table--stacked': stacked,
         'usa-table--borderless': tableType === 'borderless',
       });
       return (
