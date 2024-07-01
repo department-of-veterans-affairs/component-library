@@ -38,6 +38,47 @@ function readAllModules(rootDir) {
 }
 
 /**
+ * Find all .css and .scss files.
+ *
+ * @param rootDir {string} - The path to the root directory to search
+ * @return {Module[]}
+ */
+function readAllStylesheets(rootDir) {
+  const cssFiles = glob.sync(`${rootDir}/**/*.@(css|scss)`, {
+    ignore: [
+      `${rootDir}/**/tests/**`,
+      // This mock-form directory exists in vets-website and we don't want to include it
+      `${rootDir}/**/_mock-form/**`,
+    ],
+  });
+
+  return cssFiles.map(filePath => ({
+    path: filePath,
+    contents: fs.readFileSync(filePath, 'utf8'),
+  }));
+}
+
+/**
+ * Find all .unit and .spec files.
+ *
+ * @param rootDir {string} - The path to the root directory to search
+ * @return {Module[]}
+ */
+function readAllTests(rootDir) {
+  const cssFiles = glob.sync(`${rootDir}/**/*.@(unit|spec).*`, {
+    ignore: [
+      // This mock-form directory exists in vets-website and we don't want to include it
+      `${rootDir}/**/_mock-form/**`,
+    ],
+  });
+
+  return cssFiles.map(filePath => ({
+    path: filePath,
+    contents: fs.readFileSync(filePath, 'utf8'),
+  }));
+}
+
+/**
  * This reads a single file and exports it the same way
  * as `readAllModules` in order to keep the interface
  * the same across the script
@@ -99,7 +140,9 @@ function search(allModules, term) {
 
 module.exports = {
   readAllModules,
+  readAllStylesheets,
   readAllTemplates,
-  search,
+  readAllTests,
   readFile,
+  search,
 };
