@@ -100,7 +100,7 @@ HeaderLabel.args = {
   required: true
 }
 
-const additionalInfoContent = (
+const additionalFormInputsContent = (
   <div>
     <va-select className="hydrated" uswds label='What kind of file is this?' required>
       <option key="1" value="1">Public Document</option>
@@ -108,11 +108,11 @@ const additionalInfoContent = (
     </va-select>
   </div>);
 
-export const AdditionalInfo = Template.bind(null);
-AdditionalInfo.args = {
+export const AdditionalFormInputs = Template.bind(null);
+AdditionalFormInputs.args = {
   ...defaultArgs,
   label: 'Label Header',
-  children: additionalInfoContent
+  children: additionalFormInputsContent
 }
 
 const CustomValidationTemplate = ({ label, name, accept, required, error, hint }) => {
