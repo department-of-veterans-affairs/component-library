@@ -1399,6 +1399,14 @@ export namespace Components {
          */
         "hint"?: string;
         /**
+          * This property displays a prefix that accepts either a string or an object with an icon string.
+         */
+        "inputPrefix"?: string;
+        /**
+          * Displays a fixed suffix string at the end of the input field.
+         */
+        "inputSuffix"?: string;
+        /**
           * The inputmode attribute.
          */
         "inputmode"?: | 'decimal'
@@ -3693,6 +3701,14 @@ declare namespace LocalJSX {
           * Optional hint text.
          */
         "hint"?: string;
+        /**
+          * This property displays a prefix that accepts either a string or an object with an icon string.
+         */
+        "inputPrefix"?: string;
+        /**
+          * Displays a fixed suffix string at the end of the input field.
+         */
+        "inputSuffix"?: string;
         /**
           * The inputmode attribute.
          */

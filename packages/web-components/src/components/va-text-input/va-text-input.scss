@@ -45,7 +45,7 @@ input.usa-input {
 }
 
 
-.currency-wrapper {
+.currency-wrapper, .prefix-wrapper {
   position: relative;
   display: flex;
   align-items: center;
@@ -65,7 +65,35 @@ input.usa-input {
   }
 }
 
+.prefix-wrapper {
+  #symbol {
+    margin-right: 10px;
+    pointer-events: none;
+    va-icon {
+      color: var(--uswds-system-color-gray-50);
+    }
+  }
+}
 
+.suffix-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: fit-content;
+
+  #text {
+    position: absolute;
+    right: 10px;
+    top: 35%;
+    color: var(--uswds-system-color-gray-50);
+    pointer-events: none;
+  }
+
+  #inputField {
+    padding-right: 40px;
+    box-sizing: border-box;
+  }
+}
 
 /** Original Component Style **/
 @import '../../mixins/accessibility.css';

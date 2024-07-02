@@ -3,6 +3,7 @@ import {
   Component,
   Element,
   Prop,
+  State,
   Host,
   h,
   Event,
@@ -176,6 +177,16 @@ export class VaTextInput {
    */
   @Prop() currency?: boolean = false;
 
+   /**
+   * This property displays a prefix that accepts either a string or an object with an icon string.
+   */
+   @Prop() inputPrefix?: string;
+
+   /**
+   * Displays a fixed suffix string at the end of the input field.
+   */
+   @Prop() inputSuffix?: string;
+
   /**
    * The min attribute specifies the minimum value for an input element
    * if the inputmode is numeric.
@@ -188,6 +199,9 @@ export class VaTextInput {
    */
   @Prop() max?: number | string;
 
+  @State() paddingLeftValue: string = '0';
+  @State() paddingRightValue: string = '0';
+
   /**
    * The event used to track usage of the component. This is emitted when the
    * input is blurred and enableAnalytics is true.
@@ -198,6 +212,40 @@ export class VaTextInput {
     bubbles: true,
   })
   componentLibraryAnalytics: EventEmitter;
+
+  componentWillLoad() {
+    this.updatePaddingLeft();
+    this.updatePaddingRight();
+  }
+
+  componentDidUpdate() {
+    this.updatePaddingLeft();
+    this.updatePaddingRight();
+  }
+
+  private updatePaddingLeft = () => {
+    let parsedPrefix: string | { icon: string };
+    try {
+      parsedPrefix = JSON.parse(this.inputPrefix);
+    } catch (e) {
+      parsedPrefix = String(this.inputPrefix);
+    }
+
+    if (typeof parsedPrefix === 'object' && parsedPrefix.icon) {
+      // eslint-disable-next-line i18next/no-literal-string
+      this.paddingLeftValue = '2.5rem';
+    } else {
+      const textLength = typeof parsedPrefix === "string" ? Math.min(parsedPrefix.length, 25) : null;
+      // eslint-disable-next-line i18next/no-literal-string
+      this.paddingLeftValue = `${textLength * 0.5 + 1}rem`;
+    }
+  };
+
+  private updatePaddingRight = () => {
+    const textLength = this.inputSuffix ? Math.min(this.inputSuffix.length, 25) : null;
+    // eslint-disable-next-line i18next/no-literal-string
+    this.paddingRightValue = `${textLength * 0.5 + 1}rem`;
+  };
 
   private getInputType() {
     if (!this.allowedInputTypes.includes(this.type)) {
@@ -320,7 +368,9 @@ export class VaTextInput {
       charcount,
       min,
       max,
-      currency
+      currency,
+      inputPrefix,
+      inputSuffix
     } = this;
 
     const type = this.getInputType();
@@ -340,8 +390,38 @@ export class VaTextInput {
     const pattern = this.getPattern();
 
     const currencyWrapper = classnames({
-      'currency-wrapper': currency
+      'currency-wrapper': currency,
+      'prefix-wrapper ': inputPrefix,
+      'suffix-wrapper ': inputSuffix
     });
+
+    const renderPrefix = () => {
+      let parsedPrefix;
+    
+      try {
+        parsedPrefix = JSON.parse(inputPrefix);
+      } catch (e) {
+        parsedPrefix = inputPrefix;
+      }
+    
+      if (typeof parsedPrefix === 'object' && parsedPrefix.icon) {
+        return <div id="symbol" part="input-prefix"><va-icon icon={parsedPrefix.icon} size={3} part="icon"></va-icon></div>;
+      }
+    
+      return <div id="symbol" part="input-prefix">{inputPrefix.substring(0, 25)}</div>;
+    };
+
+    const getInputStyle = () => {
+      if (this.paddingLeftValue !== '0' && inputPrefix) {
+        return { paddingLeft: this.paddingLeftValue };
+      } else if (inputSuffix) {
+        return { paddingRight: this.paddingRightValue };
+      } else {
+        return {};
+      }
+    }
+
+    const style = getInputStyle();
 
     if (uswds) {
       const charCountTooHigh = maxlength && (value?.length > maxlength);
@@ -411,6 +491,7 @@ export class VaTextInput {
             </span>
             <div class={currencyWrapper}>
               {currency && <div id="symbol">$</div>}
+              {inputPrefix && renderPrefix()}
               <input
                 class={inputClass}
                 id="inputField"
@@ -419,6 +500,7 @@ export class VaTextInput {
                 onInput={handleInput}
                 onBlur={handleBlur}
                 aria-describedby={ariaDescribedbyIds}
+                style={style}
                 aria-labelledby={ariaLabeledByIds}
                 aria-invalid={
                   invalid || error || charCountTooHigh ? 'true' : 'false'
@@ -433,6 +515,7 @@ export class VaTextInput {
                 min={min}
                 max={max}
               />
+              {inputSuffix && <div id="text" part="suffix">{inputSuffix.substring(0, 25)}</div>}
             </div>
             {messageAriaDescribedby && (
               <span id="input-message" class="sr-only dd-privacy-hidden">

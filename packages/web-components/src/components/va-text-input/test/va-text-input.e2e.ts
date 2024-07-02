@@ -808,6 +808,28 @@ describe('va-text-input', () => {
     expect(currencyTextElement.innerText).toContain('$');
   });
 
+  it('renders an icon if inputPrefix is set with an object containing the icon key', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-text-input input-prefix=\'{"icon": "credit_card"}\'></va-text-input>');
+    const vaIconEl = await page.find('va-text-input >>> va-icon');
+    expect(vaIconEl).toHaveClass('hydrated');
+  });
+
+  it('renders prefix text if inputPrefix is set with a string', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-text-input input-prefix=\'Pre\'></va-text-input>');
+    const el = await page.find('va-text-input >>> div > div');
+    expect(el).toHaveClass('prefix-wrapper');
+  });
+
+  it('renders suffix text if inputSufix is set with a string', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-text-input input-suffix=\'lbs.\'></va-text-input>');
+    const el = await page.find('va-text-input >>> div > div');
+    expect(el).toHaveClass('suffix-wrapper');
+  });
+  
+
   it('sets the input mode to a default pattern if inputmode is numerical or decimal', async () => {
     for (const inputMode of ['numeric', 'decimal']) {
       const page = await newE2EPage();
