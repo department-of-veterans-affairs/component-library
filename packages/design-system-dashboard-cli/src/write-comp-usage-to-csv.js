@@ -160,9 +160,9 @@ function writeIconPathsToCSV(icons) {
     []
   );
 
-  // Alphabetically sorts by [0], the path name
-  iconInstPathOwnersOutput.sort(([compA], [compB]) => {
-    return compA > compB ? 1 : compA === compB ? 0 : -1;
+  // Alphabetically sorts by [1], the code owner
+  iconInstPathOwnersOutput.sort(([, iconOwnerA], [, iconOwnerB]) => {
+    return iconOwnerA > iconOwnerB ? 1 : iconOwnerA === iconOwnerB ? 0 : -1;
   });
 
   // Add a "header" row for the CSV file

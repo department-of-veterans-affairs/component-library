@@ -1299,6 +1299,10 @@ export namespace Components {
          */
         "sortColumn"?: number;
         /**
+          * Convert to a stacked table when screen size is small True by default, must specify if false if this is unwanted
+         */
+        "stacked"?: boolean;
+        /**
           * The title of the table
          */
         "tableTitle"?: string;
@@ -1325,6 +1329,10 @@ export namespace Components {
           * The zero-based index of the column to sort by (Doesn't work in IE11). Optional.
          */
         "sortColumn"?: number;
+        /**
+          * If true convert to a stacked table when screen size is small
+         */
+        "stacked"?: boolean;
         /**
           * The title of the table
          */
@@ -3602,6 +3610,10 @@ declare namespace LocalJSX {
          */
         "sortColumn"?: number;
         /**
+          * Convert to a stacked table when screen size is small True by default, must specify if false if this is unwanted
+         */
+        "stacked"?: boolean;
+        /**
           * The title of the table
          */
         "tableTitle"?: string;
@@ -3628,6 +3640,10 @@ declare namespace LocalJSX {
           * The zero-based index of the column to sort by (Doesn't work in IE11). Optional.
          */
         "sortColumn"?: number;
+        /**
+          * If true convert to a stacked table when screen size is small
+         */
+        "stacked"?: boolean;
         /**
           * The title of the table
          */
