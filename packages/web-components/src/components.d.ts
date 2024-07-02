@@ -225,9 +225,9 @@ export namespace Components {
          */
         "secondary"?: boolean;
         /**
-          * If `true`, the button will submit form data when clicked.
+          * Having this attribut present will set the type of this button as 'submit'. A value of: `prevent` --will  triger the onsubmit callback on form, but won't submit the form; `skip` --will submit the form but not trigger onsubmit callback;
          */
-        "submit"?: boolean;
+        "submit"?: string;
         /**
           * The text displayed on the button. If `continue` or `back` is true, the value of text is ignored.
          */
@@ -266,9 +266,9 @@ export namespace Components {
          */
         "secondaryLabel"?: string;
         /**
-          * If `true`, the primary button will submit form data when clicked.
+          * Having this attribut present will set the type of this button as 'submit'. A value of: `prevent` --will  triger the onsubmit callback on form, but won't submit the form; `skip` --will submit the form but not trigger onsubmit callback;
          */
-        "submit"?: boolean;
+        "submit"?: string;
         /**
           * If `true`, button pair will use Update and Cancel for button text.
          */
@@ -2344,9 +2344,9 @@ declare namespace LocalJSX {
          */
         "secondary"?: boolean;
         /**
-          * If `true`, the button will submit form data when clicked.
+          * Having this attribut present will set the type of this button as 'submit'. A value of: `prevent` --will  triger the onsubmit callback on form, but won't submit the form; `skip` --will submit the form but not trigger onsubmit callback;
          */
-        "submit"?: boolean;
+        "submit"?: string;
         /**
           * The text displayed on the button. If `continue` or `back` is true, the value of text is ignored.
          */
@@ -2401,9 +2401,9 @@ declare namespace LocalJSX {
          */
         "secondaryLabel"?: string;
         /**
-          * If `true`, the primary button will submit form data when clicked.
+          * Having this attribut present will set the type of this button as 'submit'. A value of: `prevent` --will  triger the onsubmit callback on form, but won't submit the form; `skip` --will submit the form but not trigger onsubmit callback;
          */
-        "submit"?: boolean;
+        "submit"?: string;
         /**
           * If `true`, button pair will use Update and Cancel for button text.
          */

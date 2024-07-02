@@ -6,7 +6,7 @@ import {
   h,
   Listen,
   Prop,
-  Element
+  Element,
 } from '@stencil/core';
 import classnames from 'classnames';
 
@@ -66,9 +66,11 @@ export class VaButton {
   @Prop({ reflect: true }) secondary?: boolean = false;
 
   /**
-   * If `true`, the button will submit form data when clicked.
+   *  Having this attribut present will set the type of this button as 'submit'.
+   *  A value of: `prevent` --will  triger the onsubmit callback on form, but won't submit the form;
+   * `skip` --will submit the form but not trigger onsubmit callback;
    */
-  @Prop() submit?: boolean = false;
+  @Prop() submit?: string;
 
   /**
    * The text displayed on the button. If `continue` or `back` is true, the value of text is ignored.
@@ -124,6 +126,24 @@ export class VaButton {
     return this.text;
   };
 
+  private handleSubmit() {
+    const theForm = this.el.closest('form');
+    if (!theForm) {
+      return;
+    }
+    const submitEvent = new CustomEvent('submit', {
+      bubbles: true,
+      cancelable: true,
+      composed: true,
+    });
+    if (this.submit && this.submit !== 'skip') {
+      theForm.dispatchEvent(submitEvent);
+    }
+    if (this.submit && this.submit !== 'prevent') {
+      theForm.submit();
+    }
+  }
+
   /**
    * This workaround allows us to use disabled for styling and to prevent the click event from firing while improving
    * the button's accessibility by allowing it to be focusable and through the use of aria-disabled.
@@ -138,6 +158,9 @@ export class VaButton {
       return;
     }
     this.handleClick();
+    if (this.submit) {
+      this.handleSubmit();
+    }
   }
 
   render() {
@@ -155,11 +178,13 @@ export class VaButton {
       messageAriaDescribedby,
     } = this;
 
-    const ariaDescribedbyIds = `${messageAriaDescribedby ? 'button-description' : ''}`.trim() || null;
+    const ariaDescribedbyIds =
+      `${messageAriaDescribedby ? 'button-description' : ''}`.trim() || null;
 
     const ariaDisabled = disabled ? 'true' : undefined;
     const buttonText = getButtonText();
-    const type = submit ? 'submit' : 'button';
+
+    const type = typeof submit === 'string' ? 'submit' : 'button';
 
     if (uswds) {
       const buttonClass = classnames({
