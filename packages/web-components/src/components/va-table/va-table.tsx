@@ -35,6 +35,12 @@ export class VaTable {
    * If uswds is true, the type of table
    */
   @Prop() tableType?: 'borderless' = 'borderless';
+
+  /**
+   * Convert to a stacked table when screen size is small
+   * True by default, must specify if false if this is unwanted
+   */
+  @Prop() stacked?: boolean = true;
   
   
   /// DELETE below props once V1 table removed ///
@@ -134,6 +140,7 @@ export class VaTable {
     vaTable.setAttribute('rows', `${this.rows}`);
     vaTable.setAttribute('cols', `${this.cols}`);
     vaTable.setAttribute('uswds', this.uswds ? "true" : "false");
+    vaTable.setAttribute('stacked', this.stacked ? "true" : "false");
     
     if (this.tableTitle) {
       vaTable.setAttribute('table-title', this.tableTitle);

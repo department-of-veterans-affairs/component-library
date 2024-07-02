@@ -5,6 +5,7 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
+import { Breadcrumb } from "./components/va-breadcrumbs/va-breadcrumbs";
 export namespace Components {
     interface VaAccordion {
         /**
@@ -164,7 +165,7 @@ export namespace Components {
         /**
           * Represents a list of breadcrumbs. Use a JSON array of objects with label and href properties, then wrap in a string if using non-React-binding version. See Storybook examples for React-binding version. For pure web components, here's an example link: ``[{"href": "/link1", "label": "Link 1"}]`. This prop is available when `uswds` is set to `true`.
          */
-        "breadcrumbList"?: any;
+        "breadcrumbList"?: Breadcrumb[] | string;
         /**
           * Analytics tracking function(s) will not be called
          */
@@ -665,6 +666,18 @@ export namespace Components {
         "upcomingWarnTitle": string;
     }
     interface VaMemorableDate {
+        /**
+          * A custom error message to display if the day is invalid
+         */
+        "customDayErrorMessage"?: string;
+        /**
+          * A custom error message to display if the month is invalid
+         */
+        "customMonthErrorMessage"?: string;
+        /**
+          * A custom error message to display if the year is invalid
+         */
+        "customYearErrorMessage"?: string;
         /**
           * Whether or not an analytics event will be fired.
          */
@@ -1286,6 +1299,10 @@ export namespace Components {
          */
         "sortColumn"?: number;
         /**
+          * Convert to a stacked table when screen size is small True by default, must specify if false if this is unwanted
+         */
+        "stacked"?: boolean;
+        /**
           * The title of the table
          */
         "tableTitle"?: string;
@@ -1312,6 +1329,10 @@ export namespace Components {
           * The zero-based index of the column to sort by (Doesn't work in IE11). Optional.
          */
         "sortColumn"?: number;
+        /**
+          * If true convert to a stacked table when screen size is small
+         */
+        "stacked"?: boolean;
         /**
           * The title of the table
          */
@@ -2259,7 +2280,7 @@ declare namespace LocalJSX {
         /**
           * Represents a list of breadcrumbs. Use a JSON array of objects with label and href properties, then wrap in a string if using non-React-binding version. See Storybook examples for React-binding version. For pure web components, here's an example link: ``[{"href": "/link1", "label": "Link 1"}]`. This prop is available when `uswds` is set to `true`.
          */
-        "breadcrumbList"?: any;
+        "breadcrumbList"?: Breadcrumb[] | string;
         /**
           * Analytics tracking function(s) will not be called
          */
@@ -2844,6 +2865,18 @@ declare namespace LocalJSX {
         "upcomingWarnTitle"?: string;
     }
     interface VaMemorableDate {
+        /**
+          * A custom error message to display if the day is invalid
+         */
+        "customDayErrorMessage"?: string;
+        /**
+          * A custom error message to display if the month is invalid
+         */
+        "customMonthErrorMessage"?: string;
+        /**
+          * A custom error message to display if the year is invalid
+         */
+        "customYearErrorMessage"?: string;
         /**
           * Whether or not an analytics event will be fired.
          */
@@ -3585,6 +3618,10 @@ declare namespace LocalJSX {
          */
         "sortColumn"?: number;
         /**
+          * Convert to a stacked table when screen size is small True by default, must specify if false if this is unwanted
+         */
+        "stacked"?: boolean;
+        /**
           * The title of the table
          */
         "tableTitle"?: string;
@@ -3611,6 +3648,10 @@ declare namespace LocalJSX {
           * The zero-based index of the column to sort by (Doesn't work in IE11). Optional.
          */
         "sortColumn"?: number;
+        /**
+          * If true convert to a stacked table when screen size is small
+         */
+        "stacked"?: boolean;
         /**
           * The title of the table
          */

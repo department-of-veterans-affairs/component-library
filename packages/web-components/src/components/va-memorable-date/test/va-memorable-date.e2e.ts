@@ -1250,4 +1250,90 @@ describe('va-memorable-date', () => {
     await axeCheck(page);
   });
 
+  it('uswds v3 renders custom month error when custom-month-error-message set', async () => {
+    const page = await newE2EPage();
+    await page.setContent(
+      '<va-memorable-date name="test" label="Example label" month-select="false" custom-month-error-message="This is a custom month error message"/>',
+    );
+    const handleMonth = await page.$('pierce/[name="testMonth"]');
+    const handleDay = await page.$('pierce/[name="testDay"]');
+    const handleYear = await page.$('pierce/[name="testYear"]');
+
+    // Month
+    await handleMonth.press('0');
+    await handleMonth.press('Tab');
+    // Day
+    await handleDay.press('2');
+    await handleDay.press('Tab');
+    // Year
+    await handleYear.press('2');
+    await handleYear.press('0');
+    await handleYear.press('2');
+    await handleYear.press('2');
+    // Trigger Blur
+    await handleYear.press('Tab');
+    await page.waitForChanges();
+
+    const errorSpan = await page.find('va-memorable-date >>> span.usa-error-message');
+    expect(errorSpan).not.toBeNull();
+    expect(errorSpan.innerHTML).toEqual('This is a custom month error message')
+  });
+
+  it('uswds v3 renders custom day error when custom-day-error-message set', async () => {
+    const page = await newE2EPage();
+    await page.setContent(
+      '<va-memorable-date name="test" label="Example label" month-select="false" custom-day-error-message="This is a custom day error message"/>',
+    );
+    const handleMonth = await page.$('pierce/[name="testMonth"]');
+    const handleDay = await page.$('pierce/[name="testDay"]');
+    const handleYear = await page.$('pierce/[name="testYear"]');
+
+    // Month
+    await handleMonth.press('1');
+    await handleMonth.press('Tab');
+    // Day
+    await handleDay.press('0');
+    await handleDay.press('Tab');
+    // Year
+    await handleYear.press('2');
+    await handleYear.press('0');
+    await handleYear.press('2');
+    await handleYear.press('2');
+    // Trigger Blur
+    await handleYear.press('Tab');
+    await page.waitForChanges();
+
+    const errorSpan = await page.find('va-memorable-date >>> span.usa-error-message');
+    expect(errorSpan).not.toBeNull();
+    expect(errorSpan.innerHTML).toEqual('This is a custom day error message')
+  });
+
+  it('uswds v3 renders custom year error when custom-year-error-message set', async () => {
+    const page = await newE2EPage();
+    await page.setContent(
+      '<va-memorable-date name="test" label="Example label" month-select="false" custom-year-error-message="This is a custom year error message"/>',
+    );
+    const handleMonth = await page.$('pierce/[name="testMonth"]');
+    const handleDay = await page.$('pierce/[name="testDay"]');
+    const handleYear = await page.$('pierce/[name="testYear"]');
+
+    // Month
+    await handleMonth.press('1');
+    await handleMonth.press('Tab');
+    // Day
+    await handleDay.press('1');
+    await handleDay.press('Tab');
+    // Year
+    await handleYear.press('1');
+    await handleYear.press('8');
+    await handleYear.press('9');
+    await handleYear.press('9');
+    // Trigger Blur
+    await handleYear.press('Tab');
+    await page.waitForChanges();
+
+    const errorSpan = await page.find('va-memorable-date >>> span.usa-error-message');
+    expect(errorSpan).not.toBeNull();
+    expect(errorSpan.innerHTML).toEqual('This is a custom year error message')
+  });
 });
