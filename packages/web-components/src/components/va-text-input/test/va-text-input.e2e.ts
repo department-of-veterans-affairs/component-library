@@ -818,15 +818,15 @@ describe('va-text-input', () => {
   it('renders prefix text if inputPrefix is set', async () => {
     const page = await newE2EPage();
     await page.setContent('<va-text-input input-prefix=\'Pre\'></va-text-input>');
-    const el = await page.find('va-text-input >>> div > div');
-    expect(el).toHaveClass('prefix-wrapper');
+    const el = await page.find('va-text-input >>> div > div > div');
+    expect(el).toHaveClass('usa-input-prefix');
   });
 
   it('renders suffix text if inputSufix is set', async () => {
     const page = await newE2EPage();
     await page.setContent('<va-text-input input-suffix=\'lbs.\'></va-text-input>');
-    const el = await page.find('va-text-input >>> div > div');
-    expect(el).toHaveClass('suffix-wrapper');
+    const el = await page.find('va-text-input >>> div > div> div');
+    expect(el).toHaveClass('usa-input-suffix');
   });
   
 
