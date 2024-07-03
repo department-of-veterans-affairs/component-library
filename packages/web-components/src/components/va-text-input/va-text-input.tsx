@@ -178,9 +178,14 @@ export class VaTextInput {
   @Prop() currency?: boolean = false;
 
    /**
-   * This property displays a prefix that accepts either a string or an object with an icon string.
+   * Displays a fixed prefix string at the start of the input field.
    */
    @Prop() inputPrefix?: string;
+
+   /**
+   * This property displays a prefix that accepts a string which represents icon name.
+   */
+   @Prop() inputIconPrefix?: string;
 
    /**
    * Displays a fixed suffix string at the end of the input field.
@@ -224,18 +229,11 @@ export class VaTextInput {
   }
 
   private updatePaddingLeft = () => {
-    let parsedPrefix: string | { icon: string };
-    try {
-      parsedPrefix = JSON.parse(this.inputPrefix);
-    } catch (e) {
-      parsedPrefix = String(this.inputPrefix);
-    }
-
-    if (typeof parsedPrefix === 'object' && parsedPrefix.icon) {
+    if (this.inputIconPrefix) {
       // eslint-disable-next-line i18next/no-literal-string
       this.paddingLeftValue = '2.5rem';
-    } else {
-      const textLength = typeof parsedPrefix === "string" ? Math.min(parsedPrefix.length, 25) : null;
+    } else if (this.inputPrefix) {
+      const textLength = this.inputPrefix ? Math.min(this.inputPrefix.length, 25) : null;
       // eslint-disable-next-line i18next/no-literal-string
       this.paddingLeftValue = `${textLength * 0.5 + 1}rem`;
     }
@@ -370,6 +368,7 @@ export class VaTextInput {
       max,
       currency,
       inputPrefix,
+      inputIconPrefix,
       inputSuffix
     } = this;
 
@@ -391,25 +390,8 @@ export class VaTextInput {
 
     const currencyWrapper = classnames({
       'currency-wrapper': currency,
-      'prefix-wrapper ': inputPrefix,
-      'suffix-wrapper ': inputSuffix
+      'usa-input-group': inputSuffix || inputPrefix || inputIconPrefix
     });
-
-    const renderPrefix = () => {
-      let parsedPrefix;
-    
-      try {
-        parsedPrefix = JSON.parse(inputPrefix);
-      } catch (e) {
-        parsedPrefix = inputPrefix;
-      }
-    
-      if (typeof parsedPrefix === 'object' && parsedPrefix.icon) {
-        return <div id="symbol" part="input-prefix"><va-icon icon={parsedPrefix.icon} size={3} part="icon"></va-icon></div>;
-      }
-    
-      return <div id="symbol" part="input-prefix">{inputPrefix.substring(0, 25)}</div>;
-    };
 
     const getInputStyle = () => {
       if (this.paddingLeftValue !== '0' && inputPrefix) {
@@ -491,7 +473,9 @@ export class VaTextInput {
             </span>
             <div class={currencyWrapper}>
               {currency && <div id="symbol">$</div>}
-              {inputPrefix && renderPrefix()}
+              {inputPrefix && <div class="usa-input-prefix" part="input-prefix">{inputPrefix.substring(0, 25)}</div>}
+              {inputIconPrefix && <div class="usa-input-prefix" part="input-prefix"><va-icon icon={inputIconPrefix} size={3} part="icon"></va-icon></div>}
+              
               <input
                 class={inputClass}
                 id="inputField"
@@ -515,7 +499,7 @@ export class VaTextInput {
                 min={min}
                 max={max}
               />
-              {inputSuffix && <div id="text" part="suffix">{inputSuffix.substring(0, 25)}</div>}
+              {inputSuffix && <div id="text" class="usa-input-suffix" part="suffix" aria-hidden="true">{inputSuffix.substring(0, 25)}</div>}
             </div>
             {messageAriaDescribedby && (
               <span id="input-message" class="sr-only dd-privacy-hidden">

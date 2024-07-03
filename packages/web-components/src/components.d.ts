@@ -1420,7 +1420,11 @@ export namespace Components {
          */
         "hint"?: string;
         /**
-          * This property displays a prefix that accepts either a string or an object with an icon string.
+          * This property displays a prefix that accepts a string which represents icon name.
+         */
+        "inputIconPrefix"?: string;
+        /**
+          * Displays a fixed prefix string at the start of the input field.
          */
         "inputPrefix"?: string;
         /**
@@ -3743,7 +3747,11 @@ declare namespace LocalJSX {
          */
         "hint"?: string;
         /**
-          * This property displays a prefix that accepts either a string or an object with an icon string.
+          * This property displays a prefix that accepts a string which represents icon name.
+         */
+        "inputIconPrefix"?: string;
+        /**
+          * Displays a fixed prefix string at the start of the input field.
          */
         "inputPrefix"?: string;
         /**

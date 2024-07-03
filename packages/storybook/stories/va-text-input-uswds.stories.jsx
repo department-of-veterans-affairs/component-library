@@ -67,6 +67,7 @@ const defaultArgs = {
   'min': undefined,
   'currency': undefined,
   'input-prefix': undefined,
+  'input-icon-prefix': undefined,
   'input-suffix': undefined,
 };
 
@@ -90,6 +91,7 @@ const Template = ({
   min,
   currency,
   'input-prefix': inputPrefix,
+  'input-icon-prefix': inputIconPrefix,
   'input-suffix': inputSuffix,
 }) => {
   return (
@@ -115,6 +117,7 @@ const Template = ({
       max={max}
       currency={currency}
       input-prefix={inputPrefix}
+      input-icon-prefix={inputIconPrefix}
       input-suffix={inputSuffix}
     />
   );
@@ -387,16 +390,14 @@ WithCurrency.args = {
   currency: true,
 };
 
-export const WithCreditcard = Template.bind(null);
-WithCreditcard.args = {
+export const WithIcon = Template.bind(null);
+WithIcon.args = {
   ...defaultArgs,
-  'input-prefix': JSON.stringify({
-    icon: 'credit_card',
-  }),
+  'input-icon-prefix': 'credit_card',
 };
 
-export const WithCustomPrefix = Template.bind(null);
-WithCustomPrefix.args = {
+export const WithPrefix = Template.bind(null);
+WithPrefix.args = {
   ...defaultArgs,
   'input-prefix': 'Pre',
 };
