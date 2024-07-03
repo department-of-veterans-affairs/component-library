@@ -459,7 +459,7 @@ export class VaFileInput {
                         ></va-button-icon>
                       </div>
                       <va-modal
-                        modalTitle='Are you sure you want to remove this file?'
+                        modalTitle='Delete this file?'
                         visible={this.showModal}
                         primaryButtonText='Yes, remove this'
                         secondaryButtonText='No, keep this'
