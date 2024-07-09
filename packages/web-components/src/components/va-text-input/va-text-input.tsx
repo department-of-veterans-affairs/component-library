@@ -499,7 +499,7 @@ export class VaTextInput {
                 min={min}
                 max={max}
               />
-              {inputSuffix && <div id="text" class="usa-input-suffix" part="suffix" aria-hidden="true">{inputSuffix.substring(0, 25)}</div>}
+              {inputSuffix && <div class="usa-input-suffix" part="suffix" aria-hidden="true">{inputSuffix.substring(0, 25)}</div>}
             </div>
             {messageAriaDescribedby && (
               <span id="input-message" class="sr-only dd-privacy-hidden">
