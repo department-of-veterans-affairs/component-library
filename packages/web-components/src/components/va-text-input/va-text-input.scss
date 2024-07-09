@@ -4,6 +4,7 @@
 @use 'uswds-helpers/src/styles/usa-sr-only';
 @use 'usa-label/src/styles/usa-label';
 @use 'usa-input/src/styles/usa-input';
+@use 'usa-input-prefix-suffix/src/styles/usa-input-prefix-suffix';
 @use 'usa-error-message/src/styles/usa-error-message';
 @use 'usa-hint/src/styles/usa-hint';
 @use 'usa-character-count/src/styles/_usa-character-count';
@@ -64,7 +65,6 @@ input.usa-input {
     padding-left: 25px;
   }
 }
-
 
 
 /** Original Component Style **/
