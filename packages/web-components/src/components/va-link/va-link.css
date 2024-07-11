@@ -8,6 +8,10 @@
 :host a {
   cursor: pointer;
   text-decoration: underline;
+  font-size: inherit;
+  font-family: inherit;
+  font-weight: inherit;
+  line-height: inherit;
 }
 
 :host a.va-link--reverse {
