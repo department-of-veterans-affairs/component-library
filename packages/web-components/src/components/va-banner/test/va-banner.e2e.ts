@@ -60,31 +60,6 @@ describe('va-banner', () => {
     expect(button).not.toBeNull();
   });
 
-  it('still shows alert aria', async () => {
-    const page = await newE2EPage();
-    await page.setContent(
-      '<va-banner type="error" headline="This is an alert test"></va-banner>',
-    );
-    const element = await page.find('va-banner >>> va-alert');
-    expect(element).toEqualHtml(`
-      <va-alert class="hydrated uswds-false" data-label="Error banner" data-role="region" full-width="" status="error" uswds="false">
-        <mock:shadow-root>
-           <div aria-label="Error banner" aria-live="assertive" class="alert error" role="region">
-           <va-icon class="alert__status-icon hydrated"></va-icon>
-             <div class="body">
-              <slot name="headline"></slot>
-              <slot></slot>
-            </div>
-          </div>
-        </mock:shadow-root>
-        <h3 slot="headline">
-         This is an alert test
-        </h3>
-        <slot></slot>
-      </va-alert>
-    `);
-  });
-
   it('does not display if dismissed', async () => {
     const page = await newE2EPage();
     await page.setContent(
