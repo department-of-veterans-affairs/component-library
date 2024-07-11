@@ -242,7 +242,6 @@ export class VaAlert {
       <Host>
         <div
           role={this.el.getAttribute('data-role')}
-          // aria-live={ariaLive}
           class={classes}
           aria-label={this.el.getAttribute('data-label')}
         >
