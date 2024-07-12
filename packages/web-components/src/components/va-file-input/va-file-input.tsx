@@ -165,7 +165,7 @@ export class VaFileInput {
     this.uploadStatus = 'idle';
     this.internalError = null;
     if (notifyParent) {
-      this.vaChange.emit({ files: [this.file] });
+      this.vaChange.emit({ files: [] });
     }
     this.file = null;
   };
@@ -378,12 +378,14 @@ export class VaFileInput {
         }
       }
       let selectedFileClassName = headless ? "headless-selected-files-wrapper" : "selected-files-wrapper"
-
+      const hintClass = "usa-hint" + (headless ? " visually-hidden" : "")
       return (
         <Host class={{ 'has-error': !!displayError }}>
-          {label && this.renderLabelOrHeader(label, required, headerSize)}
+          <span class={{ 'visually-hidden': !!headless }}>
+            {label && this.renderLabelOrHeader(label, required, headerSize)}
+          </span>
           {hint && (
-            <div class="usa-hint" id="input-hint-message">
+            <div class={hintClass} id="input-hint-message">
               {hint}
             </div>
           )}
@@ -404,6 +406,14 @@ export class VaFileInput {
             />
             {uploadStatus === 'idle' && (
               <div>
+                <span id="input-error-message" class="no-file" role="alert">
+                  {displayError && (
+                    <Fragment>
+                      <span class="usa-sr-only">{i18next.t('error')}</span>
+                      <span class="usa-error-message">{displayError}</span>
+                    </Fragment>
+                  )}
+                </span>
                 <div class="sr-only">No files selected.</div>
                 <div class={fileInputTargetClasses}>
                   <div class="file-input-box"></div>
