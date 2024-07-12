@@ -49,7 +49,7 @@ This repo follows [semantic versioning](https://semver.org/). Here are some exam
 - New variant is added for a component
 - Non-breaking or backwards compatible component API change
 
-### Patch
+#### Patch
 
 - Accessibility fix
 - Styling fix
