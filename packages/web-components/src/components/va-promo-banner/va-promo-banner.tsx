@@ -9,7 +9,7 @@ import {
   State,
 } from '@stencil/core';
 
-const DISMISSED_PROMO_BANNERS_LOCAL_STORAGE_KEY = 'DISMISSED_PROMO_BANNERS';
+const DISMISSED_PROMO_BANNERS_LOCAL_STORAGE_NAME = 'DISMISSED_PROMO_BANNERS';
 
 /**
  * Reset the banner in storage by opening Developer Tools in the browser and
@@ -85,7 +85,7 @@ export class VaPromoBanner {
 
       // Add the promo banner ID to local storage.
       localStorage.setItem(
-        DISMISSED_PROMO_BANNERS_LOCAL_STORAGE_KEY,
+        DISMISSED_PROMO_BANNERS_LOCAL_STORAGE_NAME,
         JSON.stringify(updatedDismissedBanners),
       );
     }
@@ -121,7 +121,7 @@ export class VaPromoBanner {
   componentWillLoad() {
     // Derive dismissed banners from storage.
     const dismissedBannersString = localStorage.getItem(
-      DISMISSED_PROMO_BANNERS_LOCAL_STORAGE_KEY,
+      DISMISSED_PROMO_BANNERS_LOCAL_STORAGE_NAME,
     );
     this.dismissedBanners = dismissedBannersString
       ? JSON.parse(dismissedBannersString)
