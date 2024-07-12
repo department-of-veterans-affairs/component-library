@@ -47,13 +47,13 @@ This repo follows [semantic versioning](https://semver.org/). Here are some exam
 
 - New component is added
 - New variant is added for a component
-- Component API is changed that does not cause a breaking change
+- Non-breaking or backwards compatible component API change
 
 ### Patch
 
 - Accessibility fix
 - Styling fix
-- Functionality fix that does not change the API
+- Functionality fix
 
 ### Releasing
 
