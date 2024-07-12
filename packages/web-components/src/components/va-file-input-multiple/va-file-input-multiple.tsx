@@ -135,6 +135,7 @@ export class VaFileInputMultiple {
    */
   private handleChange(event: any, fileKey: number, pageIndex: number) {
     const newFile = event.detail.files[0];
+
     if (newFile) {
       const fileObject = this.findFileByKey(fileKey);
 
@@ -193,7 +194,7 @@ export class VaFileInputMultiple {
     } else {
       return (
         <div class="label-header">
-          <label htmlFor="fileInputField">{label}</label>
+          <span part="label">{label}</span>
           {requiredSpan}
         </div>
       );

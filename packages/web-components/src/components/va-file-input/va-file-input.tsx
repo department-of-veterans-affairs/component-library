@@ -406,7 +406,7 @@ export class VaFileInput {
             />
             {uploadStatus === 'idle' && (
               <div>
-                <span id="input-error-message" class="no-file" role="alert">
+                <span id="file-input-error-alert" role="alert">
                   {displayError && (
                     <Fragment>
                       <span class="usa-sr-only">{i18next.t('error')}</span>
