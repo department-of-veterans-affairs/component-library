@@ -41,7 +41,7 @@ This repo follows [semantic versioning](https://semver.org/). Here are some exam
 #### Major
 
 - Component is removed
-- Component API is changed that causes a breaking change
+- Component API is changed and it causes a breaking change
 
 #### Minor
 
