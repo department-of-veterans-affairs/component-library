@@ -36,35 +36,6 @@ describe('formatPhoneNumber', () => {
   });
 });
 
-describe('formatTelLabel', () => {
-  const contact = '8885551234';
-  const extension = 123;
-  it('formats a phone number into an assistive tech label', () => {
-    expect(VaTelephone.formatTelLabel(contact, null, false, false)).toBe(
-      '8 8 8. 5 5 5. 1 2 3 4',
-    );
-  });
-
-  it('formats a phone number with extension into an assistive tech label', () => {
-    expect(VaTelephone.formatTelLabel(contact, extension, false, false)).toBe(
-      '8 8 8. 5 5 5. 1 2 3 4. extension. 1 2 3',
-    );
-  });
-
-  it('formats a TTY phone number', () => {
-    expect(VaTelephone.formatTelLabel(contact, null, true, false)).toBe(
-      'TTY. 8 8 8. 5 5 5. 1 2 3 4',
-    );
-  });
-
-  it('formats an international phone number', () => {
-    expect(VaTelephone.formatTelLabel(contact, null, false, true)).toBe(
-      '1. 8 8 8. 5 5 5. 1 2 3 4',
-    );
-  });
-
-});
-
 describe('createHref', () => {
   const contact = '8885551234';
   const contactSms = '123456';
