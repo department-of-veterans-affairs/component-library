@@ -177,8 +177,6 @@ export class VaAlert {
     if (definedStatuses.indexOf(status) === -1) {
       status = 'info';
     }
-    const role = status === 'error' ? 'alert' : null;
-    const ariaLive = status === 'error' ? 'assertive' : null;
     /* eslint-enable i18next/no-literal-string */
 
     if (!visible) return <div aria-live="polite" />;
@@ -188,13 +186,13 @@ export class VaAlert {
         'usa-alert--success': status === 'continue',
         'usa-alert--slim': slim,
       });
+
       return (
         <Host>
           <div
-            role={this.el.getAttribute('data-role') || role}
-            aria-live={ariaLive}
+            role={this.el.getAttribute('data-role')}
             class={classes}
-            aria-label={this.el.getAttribute('data-label') || role}
+            aria-label={this.el.getAttribute('data-label')}
           >
             <div
               class="usa-alert__body"
@@ -243,10 +241,9 @@ export class VaAlert {
     return (
       <Host>
         <div
-          role={this.el.getAttribute('data-role') || role}
-          aria-live={ariaLive}
+          role={this.el.getAttribute('data-role')}
           class={classes}
-          aria-label={this.el.getAttribute('data-label') || role}
+          aria-label={this.el.getAttribute('data-label')}
         >
           <va-icon
             class="alert__status-icon"

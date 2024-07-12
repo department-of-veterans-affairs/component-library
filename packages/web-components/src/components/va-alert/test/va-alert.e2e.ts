@@ -139,20 +139,6 @@ describe('va-alert', () => {
     expect(analyticsSpy).toHaveReceivedEventTimes(0);
   });
 
-  it('has the correct accessibility attributes when in an error state', async () => {
-    const page = await newE2EPage();
-    await page.setContent(
-      '<va-alert status="error" uswds="false"><h4 slot="headline">This is an alert</h4><div>This is the alert content</div>',
-    );
-
-    const element = await page.find('va-alert >>> .alert');
-
-    expect(element).toEqualAttributes({
-      'role': 'alert',
-      'aria-live': 'assertive',
-    });
-  });
-
   // Skipped because I'm not sure why the test isn't working. I've verified that
   // the event is emitted as expected using the Stencil dev server, so the
   // problem is with this test, not the component.
@@ -374,20 +360,6 @@ describe('va-alert', () => {
     await link.click();
 
     expect(analyticsSpy).toHaveReceivedEventTimes(0);
-  });
-
-  it('uswds has the correct accessibility attributes when in an error state', async () => {
-    const page = await newE2EPage();
-    await page.setContent(
-      '<va-alert status="error"><h4 slot="headline">This is an alert</h4><div>This is the alert content</div>',
-    );
-
-    const element = await page.find('va-alert >>> .usa-alert');
-
-    expect(element).toEqualAttributes({
-      'role': 'alert',
-      'aria-live': 'assertive',
-    });
   });
 
   it('uswds should set status to info if null', async () => {
