@@ -41,17 +41,19 @@ This repo follows [semantic versioning](https://semver.org/). Here are some exam
 #### Major
 
 - Component is removed
-- Component API is changed
+- Component API is changed that causes a breaking change
 
 #### Minor
 
 - New component is added
 - New variant is added for a component
+- Component API is changed that does not cause a breaking change
 
 ### Patch
 
 - Accessibility fix
 - Styling fix
+- Functionality fix that does not change the API
 
 ### Releasing
 
