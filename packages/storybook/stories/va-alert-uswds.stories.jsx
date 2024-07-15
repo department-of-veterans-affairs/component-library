@@ -185,6 +185,46 @@ const SlimTemplate = ({
   );
 };
 
+const WithARIARoleTemplate = ({}) => {
+  return (
+    <>
+      <va-alert
+        status="error"
+        disable-analytics="false"
+        visible="true"
+        closeable="false"
+        full-width="false"
+        class="vads-u-margin-bottom--1"
+        role="alert"
+      >
+        <h2 id="track-your-status-on-mobile" slot="headline">
+          Alert Role
+        </h2>
+        <p className="vads-u-margin-y--0">
+          Important messages that demand the user's immediate attention, such as an error message.
+        </p>
+      </va-alert>
+
+      <va-alert
+        status="success"
+        disable-analytics="false"
+        visible="true"
+        closeable="false"
+        full-width="false"
+        class="vads-u-margin-bottom--1"
+        role="status"
+      >
+        <h2 id="track-your-status-on-mobile" slot="headline">
+          Status Role
+        </h2>
+        <p className="vads-u-margin-y--0">
+          Messages that provide advisory information but do not have the same urgency as alerts, such as a success message.
+        </p>
+      </va-alert>
+    </>
+  );
+};
+
 export const Default = Template.bind(null);
 Default.args = {
   ...defaultArgs,
@@ -305,4 +345,9 @@ export const NotVisible = Template.bind(null);
 NotVisible.args = {
   ...defaultArgs,
   visible: false,
+};
+
+export const WithARIARole = WithARIARoleTemplate.bind(null);
+WithARIARole.args = {
+  ...defaultArgs,
 };
