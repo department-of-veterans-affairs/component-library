@@ -378,10 +378,10 @@ export class VaFileInput {
         }
       }
       let selectedFileClassName = headless ? "headless-selected-files-wrapper" : "selected-files-wrapper"
-      const hintClass = "usa-hint" + (headless ? " visually-hidden" : "")
+      const hintClass = "usa-hint" + (headless ? " usa-sr-only" : "")
       return (
         <Host class={{ 'has-error': !!displayError }}>
-          <span class={{ 'visually-hidden': !!headless }}>
+          <span class={{ 'usa-sr-only': !!headless }}>
             {label && this.renderLabelOrHeader(label, required, headerSize)}
           </span>
           {hint && (
