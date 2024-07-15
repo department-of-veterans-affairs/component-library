@@ -203,18 +203,25 @@ export class VaModal {
     this.shifted = e.shiftKey;
   }
 
-  // This focusin event listener is used to trap focus within the modal. When
-  // the focus is on an element outside of the modal, it is moved back to an
-  // appropriate element within the modal, depending on the shift key state
-  @Listen('focusin', { target: 'body' })
-  handleFocus(e: FocusEvent) {
+  // Handle when the focus is leaving the last element, wrap back to the first if appropriate
+  handleLastElementFocus(e: KeyboardEvent) {
     if (this.visible) {
-      // focus path
-      const path = Array.from(e.composedPath());
       // The focus is outside the modal
-      if (!path.includes(this.el)) {
+      if (e.key === "Tab" && !this.shifted) {
         e.preventDefault();
-        const focusIndex = this.shifted ? this.focusableChildren.length - 1 : 0;
+        const focusIndex = 0;
+        this.focusableChildren[focusIndex]?.focus();
+      }
+    }
+  }
+
+  // Handle when the focus is leaving the first element, wrap back to the last if appropriate
+  handleFirstElementFocus(e: KeyboardEvent) {
+    if (this.visible) {
+      // The focus is outside the modal
+      if (e.key === "Tab" && this.shifted) {
+        e.preventDefault();
+        const focusIndex =  this.focusableChildren.length - 1;
         this.focusableChildren[focusIndex]?.focus();
       }
     }
@@ -337,11 +344,17 @@ export class VaModal {
 
     // find all focusable children within the modal, but maintain tab order
     this.focusableChildren = this.getFocusableChildren();
-
+    
+    // find first focusable item so that focus can be redirected there when needed
+    const firstFocusChild = this.focusableChildren[0];
+    firstFocusChild.classList.add('first-focusable-child');
+    firstFocusChild.onkeydown = (e)=> this.handleFirstElementFocus(e);
+    
     // find last focusable item so that focus can be redirected there when needed
     const lastFocusChild =
       this.focusableChildren[this.focusableChildren.length - 1];
     lastFocusChild.classList.add('last-focusable-child');
+    lastFocusChild.onkeydown = (e)=> this.handleLastElementFocus(e);
 
     // If an initialFocusSelector is provided, the element will be focused on modal open
     // if it exists. You are able to focus elements in both light and shadow DOM.
