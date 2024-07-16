@@ -261,6 +261,8 @@ export class VaFileInputMultiple {
                 key={fileEntry.key}
                 uswds
                 headless
+                label={label}
+                hint={hint}
                 name={`${name}-${fileEntry.key}`}
                 accept={accept}
                 required={required}
