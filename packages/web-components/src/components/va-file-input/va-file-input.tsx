@@ -144,6 +144,8 @@ export class VaFileInput {
     this.uploadStatus = 'success';
     this.internalError = null;
     this.generateFileContents(this.file);
+    this.updateStatusMessage(`You have selected the file: ${this.file.name}`);
+    this.el.focus();
 
     if (this.enableAnalytics) {
       this.componentLibraryAnalytics.emit({
@@ -168,6 +170,8 @@ export class VaFileInput {
       this.vaChange.emit({ files: [] });
     }
     this.file = null;
+    this.updateStatusMessage(`File removed. No file selected.`);
+    this.el.focus();
   };
 
   private openModal = () => {
@@ -190,6 +194,13 @@ export class VaFileInput {
       this.fileInputRef.click();
     }
   };
+
+  private updateStatusMessage(message:string) {
+    // Add delay to encourage screen reader readout
+    setTimeout(() => {
+      this.el.shadowRoot.querySelector("#statusMessage").textContent = message
+    }, 1000);
+  }
 
   /**
    * Makes sure the button text always has a value.
@@ -414,7 +425,7 @@ export class VaFileInput {
                     </Fragment>
                   )}
                 </span>
-                <div class="sr-only">No files selected.</div>
+                <div class='usa-sr-only' aria-live="polite" id="statusMessage">No files selected.</div>
                 <div class={fileInputTargetClasses}>
                   <div class="file-input-box"></div>
                   <div class="file-input-instructions">
@@ -433,6 +444,7 @@ export class VaFileInput {
                 {!headless &&
                   <div class="selected-files-label">Selected files</div>
                 }
+                <div class='usa-sr-only' aria-live="polite" id="statusMessage">No files selected.</div>
                 <va-card class="va-card">
                   <div class="file-info-section">
                     {fileThumbnail}
