@@ -1,4 +1,5 @@
 @forward 'uswds-theme';
+@forward 'uswds-theme-custom-styles';
 
 @use 'uswds-core/src/styles/mixins/utility-builder' as *;
 @use 'uswds-core/src/styles/functions' as *;

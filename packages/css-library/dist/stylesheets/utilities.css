@@ -1435,6 +1435,44 @@ through all possible variants
 */
 /* prettier-ignore */
 /* prettier-ignore */
+/*
+* * * * * ==============================
+* * * * * ==============================
+* * * * * ==============================
+* * * * * ==============================
+========================================
+========================================
+========================================
+----------------------------------------
+USWDS THEME CUSTOM STYLES
+----------------------------------------
+!! Copy this file to your project's
+   sass root. Don't edit the version
+   in node_modules.
+----------------------------------------
+Custom project SASS goes here.
+
+i.e.
+@include u-padding-right('05');
+----------------------------------------
+*/
+@media (min-width: 768px) {
+  .medium-screen\:vads-u-display--block {
+    display: block !important;
+  }
+  .medium-screen\:vads-u-display--inline-block {
+    display: inline-block !important;
+  }
+  .medium-screen\:vads-u-display--inline {
+    display: inline !important;
+  }
+  .medium-screen\:vads-u-display--none {
+    display: none !important;
+  }
+  .medium-screen\:vads-u-display--flex {
+    display: flex !important;
+  }
+}
 .vads-l-grid-container {
   margin-left: auto;
   margin-right: auto;

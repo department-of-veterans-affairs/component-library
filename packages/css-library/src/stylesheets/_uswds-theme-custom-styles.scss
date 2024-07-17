@@ -1,0 +1,47 @@
+/*
+* * * * * ==============================
+* * * * * ==============================
+* * * * * ==============================
+* * * * * ==============================
+========================================
+========================================
+========================================
+----------------------------------------
+USWDS THEME CUSTOM STYLES
+----------------------------------------
+!! Copy this file to your project's
+   sass root. Don't edit the version
+   in node_modules.
+----------------------------------------
+Custom project SASS goes here.
+
+i.e.
+@include u-padding-right('05');
+----------------------------------------
+*/
+
+@use "uswds-core" as *;
+
+$breakpoints: (
+  "medium-screen": 768px,
+);
+
+@each $bp_name, $bp_value in $breakpoints {
+  @media (min-width: $bp_value) {
+    .#{$bp_name}\:vads-u-display--block {
+      display: block !important;
+    }
+    .#{$bp_name}\:vads-u-display--inline-block {
+      display: inline-block !important;
+    }
+    .#{$bp_name}\:vads-u-display--inline {
+      display: inline !important;
+    }
+    .#{$bp_name}\:vads-u-display--none {
+      display: none !important;
+    }
+    .#{$bp_name}\:vads-u-display--flex {
+      display: flex !important;
+    }
+  }
+}
