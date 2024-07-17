@@ -405,3 +405,30 @@ describe('va-button', () => {
     expect(descriptionSpan.textContent).toBe('Button description.');
   });
 });
+
+
+it(`uswds v3 renders a default submit button variant`, async () => {
+  const page = await newE2EPage();
+  await page.setContent('<va-button submit="skip" text="Submit"></va-button>');
+  const element = await page.find('va-button');
+  expect(element).toEqualHtml(`
+  <va-button class="hydrated" submit="skip" text="Submit" uswds="">
+    <mock:shadow-root>
+      <button class="usa-button" type="submit" part="button">
+        Submit
+      </button>
+    </mock:shadow-root>
+  </va-button>
+  `);
+});
+
+
+it('submits form when clicked', async () => {
+  const page = await newE2EPage();
+  await page.setContent('<form onsubmit="()=>1"><va-button text="Submit" submit ></va-button></form>');
+  const submitSpy = await page.spyOnEvent('submit');
+  const button = await page.find('va-button >>> button');
+  await button.click();
+  expect(submitSpy).toEqual({"cursor": 0, "eventName": "submit", "events": [], "queuedHandler": []},
+);
+});

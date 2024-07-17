@@ -224,7 +224,7 @@ export namespace Components {
          */
         "secondary"?: boolean;
         /**
-          * Having this attribut present will set the type of this button as 'submit'. A value of: `prevent` --will  triger the onsubmit callback on form, but won't submit the form; `skip` --will submit the form but not trigger onsubmit callback;
+          * Having this attribute present will set the type of this button as 'submit'. A value of: `prevent` --will trigger the onsubmit callback on the form, but won't submit the form; `skip` --will submit the form but not trigger onsubmit callback;
          */
         "submit"?: string;
         /**
@@ -2266,7 +2266,7 @@ declare namespace LocalJSX {
          */
         "secondary"?: boolean;
         /**
-          * Having this attribut present will set the type of this button as 'submit'. A value of: `prevent` --will  triger the onsubmit callback on form, but won't submit the form; `skip` --will submit the form but not trigger onsubmit callback;
+          * Having this attribute present will set the type of this button as 'submit'. A value of: `prevent` --will trigger the onsubmit callback on the form, but won't submit the form; `skip` --will submit the form but not trigger onsubmit callback;
          */
         "submit"?: string;
         /**
