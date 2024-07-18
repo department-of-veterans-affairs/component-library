@@ -29,7 +29,7 @@ export default {
   'november': 'November',
   'december': 'December',
   'on-this-page': 'On this page',
-  'date-hint': 'Please enter 2 digits for the month and day and 4 digits for the year',
+  'date-hint': 'Enter 2 digits for the month and day and 4 digits for the year',
   'date-hint-with-select': 'For example: January 19 2000',
   'date-error': 'Please enter a complete date',
   'number-error': 'Please enter a valid number',
