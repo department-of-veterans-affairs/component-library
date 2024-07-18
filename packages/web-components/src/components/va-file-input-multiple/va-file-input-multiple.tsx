@@ -187,14 +187,14 @@ export class VaFileInputMultiple {
             class="label-header-tag"
           >
             {label}
+            {requiredSpan}
           </HeaderTag>
-          {requiredSpan}
         </div>
       );
     } else {
       return (
         <div class="label-header">
-          <span part="label">{label}</span>
+          <span part="label" class="usa-label">{label}</span>
           {requiredSpan}
         </div>
       );

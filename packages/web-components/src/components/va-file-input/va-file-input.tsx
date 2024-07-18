@@ -258,17 +258,17 @@ export class VaFileInput {
             class="label-header-tag"
           >
             {label}
+            {requiredSpan}
           </HeaderTag>
-          {requiredSpan}
         </div>
       );
     } else {
       return (
         <div class="label-header">
-          <label htmlFor="fileInputField" part="label">
+          <label htmlFor="fileInputField" part="label" class="usa-label">
             {label}
+            {requiredSpan}
           </label>
-          {requiredSpan}
         </div>
       );
     }
