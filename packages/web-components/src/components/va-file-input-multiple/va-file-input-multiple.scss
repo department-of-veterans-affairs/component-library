@@ -2,6 +2,7 @@
 
 @use '../va-file-input/va-file-input';
 @import '../../mixins/uswds-error-border.scss';
+@import '../../mixins/headers.css';
 
 :host {
   &.has-error {
