@@ -95,6 +95,17 @@ export class VaTextarea {
   @Prop() uswds?: boolean = true;
 
   /**
+   * Insert a header with defined level inside the label (legend)
+   */
+  @Prop() labelHeaderLevel?: string;
+
+  /**
+   * An optional message that will be read by screen readers when the header is focused. The label-header-level
+   * prop must be set for this to be active.
+   */
+    @Prop() headerAriaDescribedby?: string;
+
+  /**
    * Enabling this will add a heading and description for integrating into the forms pattern. Accepts `single` or `multiple` to indicate if the form is a single input or will have multiple inputs. `uswds` should be true.
    */
   @Prop() useFormsPattern?: string;
@@ -168,6 +179,11 @@ export class VaTextarea {
     return this.maxlength;
   }
 
+  private getHeaderLevel() {
+    const number = parseInt(this.labelHeaderLevel, 10);
+    return number >= 1 && number <= 6 ? `h${number}` : null;
+  }
+
   render() {
     const {
       label,
@@ -182,6 +198,7 @@ export class VaTextarea {
       messageAriaDescribedby,
       useFormsPattern,
       formHeadingLevel,
+      headerAriaDescribedby,
       formHeading,
     } = this;
 
@@ -194,6 +211,9 @@ export class VaTextarea {
       `${useFormsPattern && formHeading ? 'form-question' : ''} ${ 
         useFormsPattern ? 'form-description' : ''} ${
         useFormsPattern && label ? 'input-label' : ''}`.trim() || null;
+    
+    const HeaderLevel = this.getHeaderLevel();
+    const headerAriaDescribedbyId = headerAriaDescribedby ? 'header-message' : null;
 
     if (uswds) {
       const charCountTooHigh = charcount && (value?.length > maxlength);
@@ -233,14 +253,25 @@ export class VaTextarea {
           <div class="input-wrap">
             {label && (
               <label htmlFor="input-type-textarea" id="input-label" class={labelClass} part="label">
-                {label}
-                {required && (
-                  <span class="usa-label--required">
-                    {' '}
-                    {i18next.t('required')}
+               {HeaderLevel ? (
+                  <HeaderLevel part="header" aria-describedby={headerAriaDescribedbyId}>{label}</HeaderLevel>
+                ) : (
+                  label
+                )}&nbsp;
+                {
+                  useFormsPattern === 'multiple' && (
+                    <span id="header-message" class="sr-only">
+                      {label}
+                    </span>
+                  )
+                }
+                {headerAriaDescribedby && (
+                  <span id="header-message" class="sr-only">
+                    {headerAriaDescribedby}
                   </span>
                 )}
-                {hint && <span class="usa-hint">{hint}</span>}
+                {required && <span class="usa-label--required" part="required">{i18next.t('required')}</span>}
+                {hint && <div class="usa-hint">{hint}</div>}
               </label>
             )}
             <slot></slot>
