@@ -198,7 +198,8 @@ export class VaFileInput {
   private updateStatusMessage(message:string) {
     // Add delay to encourage screen reader readout
     setTimeout(() => {
-      this.el.shadowRoot.querySelector("#statusMessage").textContent = message
+      const statusMessageDiv = this.el.shadowRoot.querySelector("#statusMessage");
+      statusMessageDiv ? statusMessageDiv.textContent = message : "";
     }, 1000);
   }
 
