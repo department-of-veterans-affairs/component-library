@@ -127,6 +127,14 @@ export class VaButton {
   };
 
   private handleSubmit() {
+    // const type = this.el.shadowRoot.querySelector('button')?.type;
+    // console.log(this.el.shadowRoot.querySelector('button'), 'XX');
+    // if (type !== 'submit') {
+    //   return;
+    // }
+    if (this.submit === undefined) {
+      return;
+    }
     const theForm = this.el.closest('form');
     if (!theForm) {
       return;
@@ -136,10 +144,10 @@ export class VaButton {
       cancelable: true,
       composed: true,
     });
-    if (this.submit && this.submit !== 'skip') {
+    if (this.submit !== 'skip') {
       theForm.dispatchEvent(submitEvent);
     }
-    if (this.submit && this.submit !== 'prevent') {
+    if (this.submit !== 'prevent') {
       theForm.submit();
     }
   }
@@ -158,9 +166,7 @@ export class VaButton {
       return;
     }
     this.handleClick();
-    if (this.submit) {
-      this.handleSubmit();
-    }
+    this.handleSubmit();
   }
 
   render() {
@@ -184,7 +190,7 @@ export class VaButton {
     const ariaDisabled = disabled ? 'true' : undefined;
     const buttonText = getButtonText();
 
-    const type = typeof submit === 'string' ? 'submit' : 'button';
+    const type = submit !== undefined ? 'submit' : 'button';
 
     if (uswds) {
       const buttonClass = classnames({
