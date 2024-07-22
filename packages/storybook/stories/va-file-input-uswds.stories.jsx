@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import React, { useState } from 'react';
-import {VaFileInput} from '@department-of-veterans-affairs/web-components/react-bindings';
+import {VaFileInput, VaButton} from '@department-of-veterans-affairs/web-components/react-bindings';
 import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
 
 const fileInputDocs = getWebComponentDocs('va-file-input');
@@ -15,6 +15,35 @@ export default {
     },
   },
 };
+
+function loadURLToInputFiled(url){
+  getImgURL(url, (imgBlob)=>{
+    // Load img blob to input
+    // WIP: UTF8 character error
+    let fileName = 'header-logo.png'
+    let file = new File([imgBlob], fileName,{type:"image/png", lastModified:new Date().getTime()}, 'utf-8');
+    let container = new DataTransfer(); 
+    container.items.add(file);
+    let inputs = document.querySelectorAll('va-file-input')
+    inputs.forEach((input) =>{
+      input.shadowRoot.querySelector('#fileInputField')
+      input.files = container.files;
+      let e = new Event("change")
+      input.dispatchEvent(e)
+    })
+    
+  })
+}
+// xmlHTTP return blob respond
+function getImgURL(url, callback){
+  var xhr = new XMLHttpRequest();
+  xhr.onload = function() {
+      callback(xhr.response);
+  };
+  xhr.open('GET', url);
+  xhr.responseType = 'blob';
+  xhr.send();
+}
 
 const defaultArgs = {
   'label': 'Select a file to upload',
@@ -45,6 +74,7 @@ const Template = ({
   children
 }) => {
   return (
+    <>
     <VaFileInput
       label={label}
       name={name}
@@ -58,6 +88,10 @@ const Template = ({
       header-size={headerSize}
       children={children}
     />
+    <VaButton
+      onClick={() => {loadURLToInputFiled('https://i.imgur.com/xyKcUlt.jpeg')}} 
+    />
+  </>
   );
 };
 
