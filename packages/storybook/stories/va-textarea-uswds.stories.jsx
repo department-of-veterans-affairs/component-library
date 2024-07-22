@@ -261,7 +261,7 @@ LabelHeader.args = {
   'label-header-level': '3',
   'name': 'header-example',
   'header-aria-describedby': 'Optional description text for screen readers',
-  'required': true
+  required: true
 };
 
 export const WithHintText = Template.bind(null);

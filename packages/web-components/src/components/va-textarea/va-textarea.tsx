@@ -179,11 +179,6 @@ export class VaTextarea {
     return this.maxlength;
   }
 
-  private getHeaderLevel() {
-    const number = parseInt(this.labelHeaderLevel, 10);
-    return number >= 1 && number <= 6 ? `h${number}` : null;
-  }
-
   render() {
     const {
       label,
@@ -212,7 +207,7 @@ export class VaTextarea {
         useFormsPattern ? 'form-description' : ''} ${
         useFormsPattern && label ? 'input-label' : ''}`.trim() || null;
     
-    const HeaderLevel = this.getHeaderLevel();
+    const HeaderLevel = getHeaderLevel(this.labelHeaderLevel);
     const headerAriaDescribedbyId = headerAriaDescribedby ? 'header-message' : null;
 
     if (uswds) {
