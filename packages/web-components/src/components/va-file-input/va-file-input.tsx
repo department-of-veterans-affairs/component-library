@@ -426,7 +426,7 @@ export class VaFileInput {
                     </Fragment>
                   )}
                 </span>
-                <div class='usa-sr-only' aria-live="polite" id="statusMessage">No files selected.</div>
+                <div class='usa-sr-only' aria-live="polite" id="statusMessage"></div>
                 <div class={fileInputTargetClasses}>
                   <div class="file-input-box"></div>
                   <div class="file-input-instructions">
@@ -445,7 +445,7 @@ export class VaFileInput {
                 {!headless &&
                   <div class="selected-files-label">Selected files</div>
                 }
-                <div class='usa-sr-only' aria-live="polite" id="statusMessage">No files selected.</div>
+                <div class='usa-sr-only' aria-live="polite" id="statusMessage"></div>
                 <va-card class="va-card">
                   <div class="file-info-section">
                     {fileThumbnail}
