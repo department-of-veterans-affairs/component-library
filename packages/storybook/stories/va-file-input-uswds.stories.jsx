@@ -3,6 +3,8 @@ import React, { useState } from 'react';
 import {VaFileInput} from '@department-of-veterans-affairs/web-components/react-bindings';
 import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
 
+VaFileInput.displayName = 'VaFileInput';
+
 const fileInputDocs = getWebComponentDocs('va-file-input');
 
 export default {
