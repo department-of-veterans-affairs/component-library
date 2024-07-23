@@ -15,6 +15,7 @@
 .va-accordion__header ::slotted([slot=icon]), .va-accordion__subheader ::slotted([slot=subheader-icon]){
   margin-right: 15px;
   width: inherit;
+  vertical-align: text-top;
 }
 
 .va-accordion__subheader {
