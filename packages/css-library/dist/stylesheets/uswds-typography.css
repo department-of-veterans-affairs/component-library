@@ -4192,33 +4192,10 @@ Sets:
 
   https://designsystem.digital.gov/design-tokens/typesetting/overview/
 */
-p, ol, ul, li, dl, dt, dd, form, label {
+p, a, ol, ul, li, dl, dt, dd, form, label, button {
   font-family: Source Sans Pro Web, "Source Sans Pro", "Helvetica Neue", Helvetica, Arial, sans;
   font-size: 1.06rem;
   line-height: 1.5;
-}
-
-/**
-  USWDS paragraph style
-
-  p {
-    line-height: 1.5;
-    max-width: 68ex;
-    margin-bottom: 0;
-    margin-top: 0;
-  }
-*/
-p {
-  line-height: 1.5;
-  max-width: 68ex;
-  margin-bottom: 0;
-  margin-top: 0;
-}
-* + p {
-  margin-top: 1em;
-}
-p + * {
-  margin-top: 1em;
 }
 
 /*# sourceMappingURL=uswds-typography.css.map */

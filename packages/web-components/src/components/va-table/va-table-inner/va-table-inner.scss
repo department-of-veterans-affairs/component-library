@@ -15,6 +15,7 @@
 :host {
   display: table;
   font-family: var(--font-source-sans);
+  font-size: 1.06rem;
   border-collapse: collapse;
   margin: 0;
   padding: 0;
@@ -45,5 +46,11 @@ caption {
   }
   ::slotted(va-table-row):first-child {
     border-top: 1px solid var(--vads-color-gray-medium);
+  }
+}
+
+@media screen and (max-width: 29.99em) {
+  .usa-table--stacked th, .usa-table--stacked td {
+    width: auto;
   }
 }

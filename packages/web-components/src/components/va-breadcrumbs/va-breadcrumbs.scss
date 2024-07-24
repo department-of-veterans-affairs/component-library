@@ -10,6 +10,12 @@
   pointer-events: none;
 }
 
+@media screen and (max-width: 29.99em) {
+  .usa-breadcrumb__list-item:not(:nth-last-child(2)) {
+    display: none;
+  }
+}
+
 // Styles for V1 mode
 :host([uswds='false']) {
   nav {

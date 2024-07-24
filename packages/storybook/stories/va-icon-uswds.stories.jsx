@@ -10,7 +10,7 @@ export default {
   parameters: {
     componentSubtitle: 'va-icon web component',
     docs: {
-      page: () => <StoryDocs data={iconDocs} />,
+      page: () => <StoryDocs storyDefault={Default} data={iconDocs} />,
     }
   }
 }
@@ -64,6 +64,7 @@ const icons = [
   "account_balance",
   "account_box",
   "account_circle",
+  "acute",
   "add",
   "add_circle",
   "add_circle_outline",
@@ -140,6 +141,7 @@ const icons = [
   "expand_less",
   "expand_more",
   "facebook",
+  "fact_check",
   "fast_forward",
   "fast_rewind",
   "favorite",
@@ -181,10 +183,12 @@ const icons = [
   "hurricane",
   "identification",
   "image",
+  "inbox",
   "info",
   "info_outline",
   "insights",
   "instagram",
+  "key",
   "keyboard",
   "label",
   "language",
@@ -207,6 +211,7 @@ const icons = [
   "local_parking",
   "local_pharmacy",
   "local_police",
+  "local_shipping",
   "local_taxi",
   "location_city",
   "location_on",
@@ -253,6 +258,7 @@ const icons = [
   "radio_button_unchecked",
   "rain",
   "reduce_capacity",
+  "refresh",
   "remove",
   "remove_circle",
   "report",
@@ -267,6 +273,7 @@ const icons = [
   "science",
   "search",
   "security",
+  "sell",
   "send",
   "sentiment_dissatisfied",
   "sentiment_neutral",

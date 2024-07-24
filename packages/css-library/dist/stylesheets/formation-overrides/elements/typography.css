@@ -31,11 +31,17 @@
 
 html {
   font-family: "Source Sans Pro", "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
-  font-size: 10px;
+  font-size: 16px;
 }
 
 body {
   font-size: 16px;
+}
+
+p {
+  line-height: 1.5;
+  margin-bottom: 1em;
+  margin-top: 1em;
 }
 
 a {
@@ -54,8 +60,8 @@ a:visited {
 }
 
 .usa-external_link::after {
-  background: url("/assets/img/external-link.png") no-repeat 0 0;
-  background: url("/assets/img/external-link.svg") no-repeat 0 0;
+  background: url("/img/external-link.png") no-repeat 0 0;
+  background: url("/img/external-link.svg") no-repeat 0 0;
   background-size: 100%;
   content: "";
   display: inline-block;
@@ -65,13 +71,13 @@ a:visited {
   width: 0.65em;
 }
 .usa-external_link:hover::after {
-  background-image: url("/assets/img/external-link-hover.png");
-  background-image: url("/assets/img/external-link-hover.svg");
+  background-image: url("/img/external-link-hover.png");
+  background-image: url("/img/external-link-hover.svg");
 }
 
 .usa-external_link-alt::after {
-  background: url("/assets/img/external-link-alt.png") no-repeat 0 0;
-  background: url("/assets/img/external-link-alt.svg") no-repeat 0 0;
+  background: url("/img/external-link-alt.png") no-repeat 0 0;
+  background: url("/img/external-link-alt.svg") no-repeat 0 0;
   background-size: 100%;
   content: "";
   display: inline-block;
@@ -81,8 +87,8 @@ a:visited {
   width: 0.65em;
 }
 .usa-external_link-alt:hover::after {
-  background-image: url("/assets/img/external-link-alt-hover.png");
-  background-image: url("/assets/img/external-link-alt-hover.svg");
+  background-image: url("/img/external-link-alt-hover.png");
+  background-image: url("/img/external-link-alt-hover.svg");
 }
 
 h1,
@@ -102,25 +108,50 @@ h1 {
   font-size: 2.5rem;
   font-weight: 700;
 }
+h1 a {
+  font-size: 2.5rem;
+  font-weight: 700;
+  font-family: Bitter, Georgia, Cambria, "Times New Roman", Times, serif;
+}
 
 h2 {
   font-size: 1.875rem;
   font-weight: 700;
+}
+h2 a {
+  font-size: 1.875rem;
+  font-weight: 700;
+  font-family: Bitter, Georgia, Cambria, "Times New Roman", Times, serif;
 }
 
 h3 {
   font-size: 1.25rem;
   font-weight: 700;
 }
+h3 a {
+  font-size: 1.25rem;
+  font-weight: 700;
+  font-family: Bitter, Georgia, Cambria, "Times New Roman", Times, serif;
+}
 
 h4 {
   font-size: 1.0625rem;
   font-weight: 700;
 }
+h4 a {
+  font-size: 1.0625rem;
+  font-weight: 700;
+  font-family: Bitter, Georgia, Cambria, "Times New Roman", Times, serif;
+}
 
 h5 {
   font-size: 0.9375rem;
   font-weight: 700;
+}
+h5 a {
+  font-size: 0.9375rem;
+  font-weight: 700;
+  font-family: Bitter, Georgia, Cambria, "Times New Roman", Times, serif;
 }
 
 h6 {
@@ -128,7 +159,14 @@ h6 {
   font-weight: 400;
   line-height: 1.5;
   text-transform: uppercase;
-  font-family: "Source Sans Pro", "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+  font-family: Bitter, Georgia, Cambria, "Times New Roman", Times, serif;
+}
+h6 a {
+  font-size: 0.8125rem;
+  font-weight: 400;
+  line-height: 1.5;
+  text-transform: uppercase;
+  font-family: Bitter, Georgia, Cambria, "Times New Roman", Times, serif;
 }
 
 cite,

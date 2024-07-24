@@ -15,9 +15,9 @@ export default {
     },
   },
   parameters: {
-    componentSubtitle: `va-notification web component`,
+    componentSubtitle: 'va-notification web component',
     docs: {
-      page: () => <StoryDocs data={notificationDocs} />,
+      page: () => <StoryDocs storyDefault={Default} data={notificationDocs} />,
     },
   },
 };

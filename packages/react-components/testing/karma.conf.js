@@ -1,9 +1,7 @@
 // Karma configuration
 // Generated on Fri Nov 03 2017 11:42:39 GMT-0400 (EDT)
-
 const isDocker = require('is-docker')();
 const path = require('path');
-
 module.exports = function karmaConfig(config) {
   config.set({
     // base path that will be used to resolve all patterns (eg. files, exclude)
@@ -42,7 +40,7 @@ module.exports = function karmaConfig(config) {
     },
 
     // list of files / patterns to load in the browser
-    files: ['tests.js'],
+    files: ['process-stub.js', 'tests.js'],
 
     client: {
       captureConsole: true,

@@ -1,4 +1,4 @@
-@import '~@department-of-veterans-affairs/css-library/dist/base/headings.css';
+@import '~@department-of-veterans-affairs/css-library/dist/stylesheets/base/headings.css';
 
 :host legend :is(h1, h2, h3, h4, h5, h6),
 :host label :is(h1, h2, h3, h4, h5, h6) {
@@ -10,4 +10,12 @@
 :host legend :is(h1, h2, h3, h4, h5),
 :host label :is(h1, h2, h3, h4, h5)  {
   font-family: var(--font-serif);
+}
+
+:host h1 + *, :host h2 + *, :host h3 + *, :host h4 + *, :host h5 + *, :host h6 + * {
+  margin-top: unset;
+}
+
+:host #form-question {
+  margin-bottom: 1rem;
 }

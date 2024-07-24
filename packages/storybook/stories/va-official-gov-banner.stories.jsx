@@ -7,9 +7,9 @@ export default {
   title: 'Components/Banner - Official Gov',
   id: 'components/va-official-gov-banner',
   parameters: {
-    componentSubtitle: `va-official-gov-banner web component`,
+    componentSubtitle: 'va-official-gov-banner web component',
     docs: {
-      page: () => <StoryDocs data={officialGovBannerDocs} />,
+      page: () => <StoryDocs storyDefault={Default} data={officialGovBannerDocs} />,
     },
   }
 };

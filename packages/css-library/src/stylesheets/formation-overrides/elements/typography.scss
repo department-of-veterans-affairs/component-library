@@ -22,6 +22,12 @@ body {
   font-size: 16px;
 }
 
+p {
+  line-height: vars.$base-line-height;
+  margin-bottom: 1em;
+  margin-top: 1em;
+}
+
 a {
   color: vars.$color-primary;
   text-decoration: underline;
@@ -86,27 +92,51 @@ h6 {
 
 h1 {
   @include util.h1();
+  a {
+    @include util.h1();
+    font-family: tok.$font-family-serif;
+  }
 }
 
 h2 {
   @include util.h2();
+  a {
+    @include util.h2();
+    font-family: tok.$font-family-serif;
+  }
 }
 
 h3 {
   @include util.h3();
+  a {
+    @include util.h3();
+    font-family: tok.$font-family-serif;
+  }
 }
 
 h4 {
   @include util.h4();
+  a {
+    @include util.h4();
+    font-family: tok.$font-family-serif;
+  }
 }
 
 h5 {
   @include util.h5();
+  a {
+    @include util.h5();
+    font-family: tok.$font-family-serif;
+  }
 }
 
 h6 {
   @include util.h6();
-  font-family: tok.$font-family-sans;
+  font-family: tok.$font-family-serif;
+  a {
+    @include util.h6();
+    font-family: tok.$font-family-serif;
+  }
 }
 
 // Remove user agent styles

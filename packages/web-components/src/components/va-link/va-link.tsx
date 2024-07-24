@@ -81,8 +81,18 @@ export class VaLink {
   /**
    * Adds an aria-label attribute to the link element.
    */
-    @Prop() label?: string = null;
+  @Prop() label?: string = null;
 
+  /**
+   * The name of the icon to be displayed in the link.
+   */
+  @Prop() iconName?: string = null;
+
+  /**
+   * The size variant of the icon,
+   * an integer between 3 and 9 inclusive.
+   */
+  @Prop() iconSize?: number = 3;
   /**
    * The event used to track usage of the component.
    */
@@ -130,10 +140,13 @@ export class VaLink {
       text,
       video,
       reverse,
+      iconName,
+      iconSize
     } = this;
 
     const linkClass = classNames({
       'va-link--reverse': reverse,
+      'link--center': iconName
     });
 
     // Active link variant
@@ -202,6 +215,22 @@ export class VaLink {
                 {pages && `, ${pages} pages`})
               </dfn>
             )}
+          </a>
+        </Host>
+      );
+    }
+
+    // Icon link Variant
+    if (iconName) {
+      return (
+        <Host>
+          <a
+            href={href}
+            class={linkClass}
+            onClick={handleClick}
+          >
+            <va-icon icon={iconName} size={iconSize} part="icon"></va-icon>
+            {text}
           </a>
         </Host>
       );

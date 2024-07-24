@@ -1,6 +1,7 @@
 @forward 'settings';
-
 @use 'usa-alert/src/styles/usa-alert';
+
+@import "~@department-of-veterans-affairs/css-library/dist/stylesheets/uswds-typography.css";
 
 :host {
   display: block;

@@ -10,7 +10,7 @@ export default {
   parameters: {
     componentSubtitle: 'va-table web component',
     docs: {
-      page: () => <StoryDocs data={vaTableDocs} />,
+      page: () => <StoryDocs storyDefault={Default} data={vaTableDocs} />,
     }
   }
 }
@@ -42,11 +42,12 @@ const data = [
 const Template = (args) => {
   const {
     'table-title': tableTitle,
+    'table-type': tableType,
     rows = data,
   } = args;
 
   return (
-    <va-table uswds table-title={tableTitle}>
+    <va-table uswds table-title={tableTitle} stacked={args.stacked} table-type={tableType}>
       <va-table-row>
           {columns.map((col, i) => (
             <span key={`header-default-${i}`}>{col}</span>
@@ -308,6 +309,23 @@ Default.args = {
   rows: data
 }
 Default.argTypes = propStructure(vaTableDocs);
+
+
+export const Bordered = Template.bind(null);
+Bordered.args = {
+  'table-title': "This is a stacked bordered table.",
+  'table-type': 'bordered',
+  rows: data
+}
+Bordered.argTypes = propStructure(vaTableDocs);
+
+export const NonStacked = Template.bind(null);
+NonStacked.args = {
+  'table-title': "This table is not stacked. It will not change on a mobile screen.",
+  stacked: false,
+  rows: data
+}
+NonStacked.argTypes = propStructure(vaTableDocs);
 
 export const WithCustomMarkup = CustomComponentsTemplate.bind(null);
 WithCustomMarkup.args = {

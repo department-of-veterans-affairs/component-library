@@ -232,9 +232,13 @@ $marketing-container-height: 380px;
 
     .mm-marketing-text {
       padding: 20px;
+      a {
+        font-size: 16px;
+      }
     }
 
     p {
+      font-size: 16px;
       margin-top: 5px;
     }
   }

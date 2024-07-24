@@ -9,10 +9,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Use Node.js 14.x
+    - name: Use Node.js 18.x
       uses: actions/setup-node@v2
       with:
-        node-version: 14.x
+        node-version: 18.x
         cache: 'yarn'
     - uses: aws-actions/configure-aws-credentials@v1
       with:
@@ -38,6 +38,6 @@ jobs:
     - run: yarn workspace @department-of-veterans-affairs/web-components run build-bindings
     - run: yarn workspace @department-of-veterans-affairs/component-library run build
     - run: yarn workspace @department-of-veterans-affairs/css-library run build
-    - run: yarn workspaces foreach --verbose --no-private npm publish --access public --tolerate-republish
+    - run: yarn workspaces foreach --all --verbose --no-private npm publish --access public --tolerate-republish
       env:
         YARN_NPM_AUTH_TOKEN: ${{ env.VA_VSP_BOT_NPM_TOKEN }}

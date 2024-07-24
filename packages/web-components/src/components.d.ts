@@ -5,6 +5,7 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
+import { Breadcrumb } from "./components/va-breadcrumbs/va-breadcrumbs";
 export namespace Components {
     interface VaAccordion {
         /**
@@ -164,7 +165,7 @@ export namespace Components {
         /**
           * Represents a list of breadcrumbs. Use a JSON array of objects with label and href properties, then wrap in a string if using non-React-binding version. See Storybook examples for React-binding version. For pure web components, here's an example link: ``[{"href": "/link1", "label": "Link 1"}]`. This prop is available when `uswds` is set to `true`.
          */
-        "breadcrumbList"?: any;
+        "breadcrumbList"?: Breadcrumb[] | string;
         /**
           * Analytics tracking function(s) will not be called
          */
@@ -444,6 +445,10 @@ export namespace Components {
          */
         "headerSize"?: number;
         /**
+          * DST only prop removes extraneous display for multiple file input
+         */
+        "headless"?: boolean;
+        /**
           * Optional hint text.
          */
         "hint"?: string;
@@ -463,6 +468,40 @@ export namespace Components {
           * Whether or not the component will use USWDS v3 styling.
          */
         "uswds"?: boolean;
+    }
+    interface VaFileInputMultiple {
+        /**
+          * Defines acceptable file types the user can select; uses file type or extensions.
+         */
+        "accept"?: string;
+        /**
+          * If enabled, emits custom analytics events when file changes occur.
+         */
+        "enableAnalytics"?: boolean;
+        /**
+          * Array of error messages corresponding to each file input. The length and order match the files array.
+         */
+        "errors": string[];
+        /**
+          * Specifies the header size of the label element, from 1 (largest) to 6 (smallest).
+         */
+        "headerSize"?: number;
+        /**
+          * Hint text provided to guide users on the expected format or type of files.
+         */
+        "hint"?: string;
+        /**
+          * Label for the file input, displayed above the input.
+         */
+        "label"?: string;
+        /**
+          * Name attribute for the file input element, used to identify the form data in the submission.
+         */
+        "name"?: string;
+        /**
+          * If true, the file input is marked as required, and users must select a file.
+         */
+        "required"?: boolean;
     }
     interface VaHeaderMinimal {
         /**
@@ -523,6 +562,14 @@ export namespace Components {
           * The href attribute of the anchor.
          */
         "href": string;
+        /**
+          * The name of the icon to be displayed in the link.
+         */
+        "iconName"?: string;
+        /**
+          * The size variant of the icon, an integer between 3 and 9 inclusive.
+         */
+        "iconSize"?: number;
         /**
           * Adds an aria-label attribute to the link element.
          */
@@ -619,6 +666,18 @@ export namespace Components {
         "upcomingWarnTitle": string;
     }
     interface VaMemorableDate {
+        /**
+          * A custom error message to display if the day is invalid
+         */
+        "customDayErrorMessage"?: string;
+        /**
+          * A custom error message to display if the month is invalid
+         */
+        "customMonthErrorMessage"?: string;
+        /**
+          * A custom error message to display if the year is invalid
+         */
+        "customYearErrorMessage"?: string;
         /**
           * Whether or not an analytics event will be fired.
          */
@@ -1240,6 +1299,10 @@ export namespace Components {
          */
         "sortColumn"?: number;
         /**
+          * Convert to a stacked table when screen size is small True by default, must specify if false if this is unwanted
+         */
+        "stacked"?: boolean;
+        /**
           * The title of the table
          */
         "tableTitle"?: string;
@@ -1266,6 +1329,10 @@ export namespace Components {
           * The zero-based index of the column to sort by (Doesn't work in IE11). Optional.
          */
         "sortColumn"?: number;
+        /**
+          * If true convert to a stacked table when screen size is small
+         */
+        "stacked"?: boolean;
         /**
           * The title of the table
          */
@@ -1352,6 +1419,18 @@ export namespace Components {
           * Optional hint text.
          */
         "hint"?: string;
+        /**
+          * This property displays a prefix that accepts a string which represents icon name.
+         */
+        "inputIconPrefix"?: string;
+        /**
+          * Displays a fixed prefix string at the start of the input field.
+         */
+        "inputPrefix"?: string;
+        /**
+          * Displays a fixed suffix string at the end of the input field.
+         */
+        "inputSuffix"?: string;
         /**
           * The inputmode attribute.
          */
@@ -1453,6 +1532,10 @@ export namespace Components {
          */
         "formHeadingLevel"?: number;
         /**
+          * An optional message that will be read by screen readers when the header is focused. The label-header-level prop must be set for this to be active.
+         */
+        "headerAriaDescribedby"?: string;
+        /**
           * Optional hint text.
          */
         "hint"?: string;
@@ -1460,6 +1543,10 @@ export namespace Components {
           * The label for the textarea.
          */
         "label"?: string;
+        /**
+          * Insert a header with defined level inside the label (legend)
+         */
+        "labelHeaderLevel"?: string;
         /**
           * The maximum number of characters allowed in the input. Negative and zero values will be ignored.
          */
@@ -1549,6 +1636,10 @@ export interface VaDateCustomEvent<T> extends CustomEvent<T> {
 export interface VaFileInputCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLVaFileInputElement;
+}
+export interface VaFileInputMultipleCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLVaFileInputMultipleElement;
 }
 export interface VaLinkCustomEvent<T> extends CustomEvent<T> {
     detail: T;
@@ -1744,6 +1835,12 @@ declare global {
     var HTMLVaFileInputElement: {
         prototype: HTMLVaFileInputElement;
         new (): HTMLVaFileInputElement;
+    };
+    interface HTMLVaFileInputMultipleElement extends Components.VaFileInputMultiple, HTMLStencilElement {
+    }
+    var HTMLVaFileInputMultipleElement: {
+        prototype: HTMLVaFileInputMultipleElement;
+        new (): HTMLVaFileInputMultipleElement;
     };
     interface HTMLVaHeaderMinimalElement extends Components.VaHeaderMinimal, HTMLStencilElement {
     }
@@ -1967,6 +2064,7 @@ declare global {
         "va-crisis-line-modal": HTMLVaCrisisLineModalElement;
         "va-date": HTMLVaDateElement;
         "va-file-input": HTMLVaFileInputElement;
+        "va-file-input-multiple": HTMLVaFileInputMultipleElement;
         "va-header-minimal": HTMLVaHeaderMinimalElement;
         "va-icon": HTMLVaIconElement;
         "va-link": HTMLVaLinkElement;
@@ -2194,7 +2292,7 @@ declare namespace LocalJSX {
         /**
           * Represents a list of breadcrumbs. Use a JSON array of objects with label and href properties, then wrap in a string if using non-React-binding version. See Storybook examples for React-binding version. For pure web components, here's an example link: ``[{"href": "/link1", "label": "Link 1"}]`. This prop is available when `uswds` is set to `true`.
          */
-        "breadcrumbList"?: any;
+        "breadcrumbList"?: Breadcrumb[] | string;
         /**
           * Analytics tracking function(s) will not be called
          */
@@ -2526,6 +2624,10 @@ declare namespace LocalJSX {
          */
         "headerSize"?: number;
         /**
+          * DST only prop removes extraneous display for multiple file input
+         */
+        "headless"?: boolean;
+        /**
           * Optional hint text.
          */
         "hint"?: string;
@@ -2553,6 +2655,44 @@ declare namespace LocalJSX {
           * Whether or not the component will use USWDS v3 styling.
          */
         "uswds"?: boolean;
+    }
+    interface VaFileInputMultiple {
+        /**
+          * Defines acceptable file types the user can select; uses file type or extensions.
+         */
+        "accept"?: string;
+        /**
+          * If enabled, emits custom analytics events when file changes occur.
+         */
+        "enableAnalytics"?: boolean;
+        /**
+          * Array of error messages corresponding to each file input. The length and order match the files array.
+         */
+        "errors"?: string[];
+        /**
+          * Specifies the header size of the label element, from 1 (largest) to 6 (smallest).
+         */
+        "headerSize"?: number;
+        /**
+          * Hint text provided to guide users on the expected format or type of files.
+         */
+        "hint"?: string;
+        /**
+          * Label for the file input, displayed above the input.
+         */
+        "label"?: string;
+        /**
+          * Name attribute for the file input element, used to identify the form data in the submission.
+         */
+        "name"?: string;
+        /**
+          * Event emitted when any change to the file inputs occurs.
+         */
+        "onVaMultipleChange"?: (event: VaFileInputMultipleCustomEvent<any>) => void;
+        /**
+          * If true, the file input is marked as required, and users must select a file.
+         */
+        "required"?: boolean;
     }
     interface VaHeaderMinimal {
         /**
@@ -2613,6 +2753,14 @@ declare namespace LocalJSX {
           * The href attribute of the anchor.
          */
         "href": string;
+        /**
+          * The name of the icon to be displayed in the link.
+         */
+        "iconName"?: string;
+        /**
+          * The size variant of the icon, an integer between 3 and 9 inclusive.
+         */
+        "iconSize"?: number;
         /**
           * Adds an aria-label attribute to the link element.
          */
@@ -2729,6 +2877,18 @@ declare namespace LocalJSX {
         "upcomingWarnTitle"?: string;
     }
     interface VaMemorableDate {
+        /**
+          * A custom error message to display if the day is invalid
+         */
+        "customDayErrorMessage"?: string;
+        /**
+          * A custom error message to display if the month is invalid
+         */
+        "customMonthErrorMessage"?: string;
+        /**
+          * A custom error message to display if the year is invalid
+         */
+        "customYearErrorMessage"?: string;
         /**
           * Whether or not an analytics event will be fired.
          */
@@ -3470,6 +3630,10 @@ declare namespace LocalJSX {
          */
         "sortColumn"?: number;
         /**
+          * Convert to a stacked table when screen size is small True by default, must specify if false if this is unwanted
+         */
+        "stacked"?: boolean;
+        /**
           * The title of the table
          */
         "tableTitle"?: string;
@@ -3496,6 +3660,10 @@ declare namespace LocalJSX {
           * The zero-based index of the column to sort by (Doesn't work in IE11). Optional.
          */
         "sortColumn"?: number;
+        /**
+          * If true convert to a stacked table when screen size is small
+         */
+        "stacked"?: boolean;
         /**
           * The title of the table
          */
@@ -3586,6 +3754,18 @@ declare namespace LocalJSX {
           * Optional hint text.
          */
         "hint"?: string;
+        /**
+          * This property displays a prefix that accepts a string which represents icon name.
+         */
+        "inputIconPrefix"?: string;
+        /**
+          * Displays a fixed prefix string at the start of the input field.
+         */
+        "inputPrefix"?: string;
+        /**
+          * Displays a fixed suffix string at the end of the input field.
+         */
+        "inputSuffix"?: string;
         /**
           * The inputmode attribute.
          */
@@ -3691,6 +3871,10 @@ declare namespace LocalJSX {
          */
         "formHeadingLevel"?: number;
         /**
+          * An optional message that will be read by screen readers when the header is focused. The label-header-level prop must be set for this to be active.
+         */
+        "headerAriaDescribedby"?: string;
+        /**
           * Optional hint text.
          */
         "hint"?: string;
@@ -3698,6 +3882,10 @@ declare namespace LocalJSX {
           * The label for the textarea.
          */
         "label"?: string;
+        /**
+          * Insert a header with defined level inside the label (legend)
+         */
+        "labelHeaderLevel"?: string;
         /**
           * The maximum number of characters allowed in the input. Negative and zero values will be ignored.
          */
@@ -3753,6 +3941,7 @@ declare namespace LocalJSX {
         "va-crisis-line-modal": VaCrisisLineModal;
         "va-date": VaDate;
         "va-file-input": VaFileInput;
+        "va-file-input-multiple": VaFileInputMultiple;
         "va-header-minimal": VaHeaderMinimal;
         "va-icon": VaIcon;
         "va-link": VaLink;
@@ -3810,6 +3999,7 @@ declare module "@stencil/core" {
             "va-crisis-line-modal": LocalJSX.VaCrisisLineModal & JSXBase.HTMLAttributes<HTMLVaCrisisLineModalElement>;
             "va-date": LocalJSX.VaDate & JSXBase.HTMLAttributes<HTMLVaDateElement>;
             "va-file-input": LocalJSX.VaFileInput & JSXBase.HTMLAttributes<HTMLVaFileInputElement>;
+            "va-file-input-multiple": LocalJSX.VaFileInputMultiple & JSXBase.HTMLAttributes<HTMLVaFileInputMultipleElement>;
             "va-header-minimal": LocalJSX.VaHeaderMinimal & JSXBase.HTMLAttributes<HTMLVaHeaderMinimalElement>;
             "va-icon": LocalJSX.VaIcon & JSXBase.HTMLAttributes<HTMLVaIconElement>;
             "va-link": LocalJSX.VaLink & JSXBase.HTMLAttributes<HTMLVaLinkElement>;

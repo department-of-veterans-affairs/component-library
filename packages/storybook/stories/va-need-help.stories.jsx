@@ -8,9 +8,9 @@ export default {
   title: 'Components/Need help?',
   id: 'components/va-need-help',
   parameters: {
-    componentSubtitle: `va-need-help web component`,
+    componentSubtitle: 'va-need-help web component',
     docs: {
-      page: () => <StoryDocs data={needHelpDocs} />,
+      page: () => <StoryDocs storyDefault={Default} data={needHelpDocs} />,
     },
   },
 };

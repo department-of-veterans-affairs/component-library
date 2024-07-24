@@ -3,15 +3,17 @@ import React, { useState } from 'react';
 import {VaFileInput} from '@department-of-veterans-affairs/web-components/react-bindings';
 import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
 
+VaFileInput.displayName = 'VaFileInput';
+
 const fileInputDocs = getWebComponentDocs('va-file-input');
 
 export default {
   title: 'Components/File input USWDS',
   id: 'uswds/va-file-input',
   parameters: {
-    componentSubtitle: `va-file-input web component`,
+    componentSubtitle: 'va-file-input web component',
     docs: {
-      page: () => <StoryDocs data={fileInputDocs} />,
+      page: () => <StoryDocs storyDefault={Default} data={fileInputDocs} />,
     },
   },
 };
@@ -27,7 +29,7 @@ const defaultArgs = {
   'vaChange': event =>
     alert(`File change event received: ${event?.detail?.files[0]?.name}`),
   'uswds': true,
-  'headerSize': null,
+  'header-size': null,
   'children': null
 };
 
@@ -55,7 +57,7 @@ const Template = ({
       enable-analytics={enableAnalytics}
       onVaChange={vaChange}
       uswds={uswds}
-      headerSize={headerSize}
+      header-size={headerSize}
       children={children}
     />
   );
@@ -100,7 +102,7 @@ HeaderLabel.args = {
   required: true
 }
 
-const additionalInfoSlotContent = (
+const additionalFormInputsContent = (
   <div>
     <va-select className="hydrated" uswds label='What kind of file is this?' required>
       <option key="1" value="1">Public Document</option>
@@ -108,11 +110,11 @@ const additionalInfoSlotContent = (
     </va-select>
   </div>);
 
-export const AdditionalInfo = Template.bind(null);
-AdditionalInfo.args = {
+export const AdditionalFormInputs = Template.bind(null);
+AdditionalFormInputs.args = {
   ...defaultArgs,
   label: 'Label Header',
-  children: additionalInfoSlotContent
+  children: additionalFormInputsContent
 }
 
 const CustomValidationTemplate = ({ label, name, accept, required, error, hint }) => {
@@ -206,4 +208,7 @@ CustomValidation.args = {
 }
 
 export const WithAnalytics = Template.bind(null);
-WithAnalytics.args = { ...defaultArgs, 'enable-analytics': true };
+WithAnalytics.args = {
+  ...defaultArgs,
+  'enable-analytics': true
+};

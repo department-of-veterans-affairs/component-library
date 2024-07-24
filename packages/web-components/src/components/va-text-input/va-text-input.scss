@@ -4,6 +4,7 @@
 @use 'uswds-helpers/src/styles/usa-sr-only';
 @use 'usa-label/src/styles/usa-label';
 @use 'usa-input/src/styles/usa-input';
+@use 'usa-input-prefix-suffix/src/styles/usa-input-prefix-suffix';
 @use 'usa-error-message/src/styles/usa-error-message';
 @use 'usa-hint/src/styles/usa-hint';
 @use 'usa-character-count/src/styles/_usa-character-count';
@@ -66,7 +67,6 @@ input.usa-input {
 }
 
 
-
 /** Original Component Style **/
 @import '../../mixins/accessibility.css';
 @import '../../mixins/form-field-error.css';
@@ -77,7 +77,7 @@ input.usa-input {
   display: block;
   max-width: 28.75rem;
   margin-top: 1.875rem;
-  font-size: 16px;
+  font-size: 1.06rem;
 }
 
 span.required {

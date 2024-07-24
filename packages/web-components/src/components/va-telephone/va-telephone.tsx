@@ -123,31 +123,6 @@ export class VaTelephone {
     return formattedNum;
   }
 
-  /**
-   * Format telephone number for screen readers
-   * @param {string} contact - The 10 or 3 digit contact prop
-   * @param {string} ext - The extension numeric string
-   * @param {boolean} tty - Whether or not this is a TTY number
-   * @return {string} - Combined phone number parts within the label separated by
-   * periods, e.g. "800-555-1212" becomes "8 0 0. 5 5 5. 1 2 1 2"
-   */
-  static formatTelLabel(contact: string, ext: string, tty: boolean, international: boolean): string {
-    const spaceCharsOut = chars => chars.split('').join(' ');
-    let labelPieces = VaTelephone.splitContact(contact)
-      .map(spaceCharsOut);
-
-    if (international)
-      labelPieces.unshift('1');
-    if (tty)
-      labelPieces.unshift('TTY');
-    if (ext) {
-      labelPieces.push('extension');
-      labelPieces.push(spaceCharsOut(ext.toString()));
-    }
-
-    return labelPieces.join('. ');
-  }
-
   static createHref(contact: string, extension: string, sms: boolean): string {
     const cleanedContact = VaTelephone.cleanContact(contact);
     const isN11 = cleanedContact.length === 3;
@@ -194,12 +169,6 @@ export class VaTelephone {
       vanity,
       tty
     );
-    const formattedAriaLabel = `${VaTelephone.formatTelLabel(
-      contact,
-      extension,
-      tty,
-      international
-    )}.`;
 
     // Null so we don't add the attribute if we have an empty string
     const ariaDescribedbyIds = messageAriaDescribedby ? 'number-description' : null;
@@ -209,13 +178,11 @@ export class VaTelephone {
         {notClickable ? (
           <Fragment>
             <span aria-hidden="true" aria-describedby={ariaDescribedbyIds}>{formattedNumber}</span>
-            <span class="sr-only">{formattedAriaLabel}</span>
           </Fragment>
         ) : (
           <a
             aria-describedby={ariaDescribedbyIds}
             href={VaTelephone.createHref(contact, extension, sms)}
-            aria-label={formattedAriaLabel}
             onClick={this.handleClick.bind(this)}
           >
             {formattedNumber}

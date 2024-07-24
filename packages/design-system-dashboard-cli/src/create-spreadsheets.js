@@ -2,11 +2,16 @@
  * Search through vets-website and content-build for instance of DST components, tally them up, and write the results to separate CSV files, one for each type of component (React, V1, V3)
  */
 
-const writeCompPathsToCSV = require('./write-comp-usage-to-csv');
+const {
+  writeCompPathsToCSV,
+  writeIconPathsToCSV,
+} = require('./write-comp-usage-to-csv');
 const {
   readAllModules,
-  readFile,
+  readAllStylesheets,
   readAllTemplates,
+  readAllTests,
+  readFile,
   search,
 } = require('./search-files');
 const { repos } = require('./env');
@@ -69,18 +74,21 @@ const flattenMatches = (flattened, compPathObj) => {
   // Ignores the tag, just need the component's name
   const newFlat = compPathObj.matches.map(([, component]) => {
     // Some component name matches include the ending '>', so we remove that here
-    component = component.replace('>', '');
+    // For icons, sometimes the first component match is empty, so assigning the second match if needed
+    component = component?.replace('>', '');
     return { path, component };
   });
   return flattened.concat(newFlat);
 };
 
 /**
- * Search vets-website and the content build for design system components.
+ * Search vets-website and the content build for design system components and instances of Font Awesome icons.
  */
-function findComponents() {
+function findComponentsAndIcons() {
   const vwModules = readAllModules(`${repos['vets-website']}/src`);
   const cbTemplates = readAllTemplates(`${repos['content-build']}/src`);
+  const vwStylesheets = readAllStylesheets(`${repos['vets-website']}/src`);
+  const vwTests = readAllTests(`${repos['vets-website']}/src`);
 
   // First thing we do is find all of the React components
   // This regex finds all of the non-react-binding imports
@@ -145,7 +153,7 @@ function findComponents() {
     []
   );
 
-  // Finally we filter out the V3 components from the V1 collection
+  // Next we filter out the V3 components from the V1 collection
   cbV1WC.forEach(compPath => {
     const foundIndex = cbV3WC.findIndex(
       allCompPath =>
@@ -157,30 +165,61 @@ function findComponents() {
     }
   });
 
-  // Last but not least, combine the vw and cb collections
+  // Combine the vw and cb collections
   const v1WebComponents = [...vwV1WC, ...cbV1WC];
   const v3WebComponents = [...vwV3WC, ...cbV3WC];
+
+  // Now, we look through the vw and cb modules and templates again, this time looking for potential Font Awesome icons
+  const iconRegex = /<i[\s]/gm;
+  const vwIcons = [...search(vwModules, iconRegex)].reduce(flattenMatches, []);
+  const cbIcons = [...search(cbTemplates, iconRegex)].reduce(
+    flattenMatches,
+    []
+  );
+
+  // Also look into VW stylesheets for obvious mentions of Font Awesome
+  const styleRegex = /("Font Awesome|\.fa-|\.fa[srb]?[\s.{,])/g;
+  const vwStyleIcons = [...search(vwStylesheets, styleRegex)].reduce(
+    flattenMatches,
+    []
+  );
+
+  // Also look into VW tests for fa- classes (filtering out "mfa")
+  const testRegex = /[^m](fa-)/g;
+  const vwTestIcons = [...search(vwTests, testRegex)].reduce(
+    flattenMatches,
+    []
+  );
+
+  const iconMatches = [...vwIcons, ...cbIcons, ...vwStyleIcons, ...vwTestIcons];
 
   return {
     react: allReactComponents,
     v1: v1WebComponents,
     v3: v3WebComponents,
+    icons: iconMatches,
   };
 }
 
 function writeCountsToCSVs(data) {
   Object.entries(data).forEach(([breakoutType, components]) => {
-    // write stuff out for each breakoutType
-    writeCompPathsToCSV({ breakoutType, components });
+    if (breakoutType !== 'icons') {
+      // write stuff out for each breakoutType
+      writeCompPathsToCSV({ breakoutType, components });
+    } else {
+      // write icon stuff out
+      writeIconPathsToCSV(components);
+    }
   });
 }
 
 if (require.main === module) {
-  const data = findComponents();
+  const data = findComponentsAndIcons();
 
   console.log('react total instances:', data.react.length);
   console.log('v1 total instances:', data.v1.length);
   console.log('v3 total instances:', data.v3.length);
+  console.log('icon total instances:', data.icons.length);
 
   writeCountsToCSVs(data);
 }

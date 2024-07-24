@@ -1,6 +1,10 @@
 @import '../../mixins/links.css';
 @import '../../mixins/accessibility.css';
 
+:host {
+  font-size: 1.06rem;
+}
+
 a {
   white-space: nowrap;
 }

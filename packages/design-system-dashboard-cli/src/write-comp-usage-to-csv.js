@@ -10,6 +10,7 @@ const today = require('./today');
  * @typedef {string} Owner
  * @typedef {number} Total
  * @typedef {[Component, Path, Owner, Total]} CompPathOwner
+ * @typedef {[Path, Owner, Total]} IconPathOwner
  */
 
 function cleanPath(pathToClean) {
@@ -105,4 +106,84 @@ function writeCompPathsToCSV({ breakoutType, components }) {
   });
 }
 
-module.exports = writeCompPathsToCSV;
+function writeIconPathsToCSV(icons) {
+  // Big reducer takes a component name and path and determines which owner they belong to
+  /** @type {IconPathOwner[]} */
+  const iconInstPathOwnersOutput = icons.reduce(
+    (/** @type {IconPathOwner[]} */ acc, { path }) => {
+      let pagePath = '';
+      let owner = '';
+      let total = 1;
+      // First, clean the path of the local user's info
+      let compPath = cleanPath(path);
+
+      // Second, replace the reference to the vets-website if present
+      compPath = compPath.replace('vets-website/', '');
+
+      // Assign path and owner directly if belongs in content-build repo
+      if (compPath.startsWith('content-build')) {
+        pagePath = compPath;
+        owner = 'va-platform-cop-frontend';
+      } else {
+        // If no owner yet, find a matching owner path if possible
+        Object.entries(codeowners).forEach(([appPath, appOwner]) => {
+          if (compPath.includes(appPath)) {
+            owner = appOwner;
+          }
+        });
+      }
+
+      // If still no path or owner, assign to COP frontend
+      if (pagePath === '') pagePath = compPath;
+      if (owner === '') owner = 'va-platform-cop-frontend';
+
+      // For each icon, need to determine how many times it gets used per path, so we look to find the item (if it exists) that exactly matches the app, and owner and increase the total value by 1
+      if (acc.length > 0) {
+        const foundIndex = acc.findIndex(
+          ([accPath, accOwner]) => accPath === pagePath && accOwner === owner
+        );
+
+        if (foundIndex > -1) {
+          // Previous path found, so increment total by 1
+          acc[foundIndex][2] += 1;
+        } else {
+          // If no item found, add the current item to the collection
+          acc.push([pagePath, owner, total]);
+        }
+      } else {
+        // Very first time, just add the iconPathOwner array as is
+        acc.push([pagePath, owner, total]);
+      }
+
+      return acc;
+    },
+    []
+  );
+
+  // Alphabetically sorts by [1], the code owner
+  iconInstPathOwnersOutput.sort(([, iconOwnerA], [, iconOwnerB]) => {
+    return iconOwnerA > iconOwnerB ? 1 : iconOwnerA === iconOwnerB ? 0 : -1;
+  });
+
+  // Add a "header" row for the CSV file
+  iconInstPathOwnersOutput.unshift([
+    'Page Path',
+    'Owner',
+    // @ts-ignore
+    `Total Icons - ${icons.length}`,
+  ]);
+
+  // Finally, we write to csv, one file per breakout type
+  // Uses the 'csv' library to transmute the array of arrays into a CSV string, then write it to a file
+  csv.stringify(iconInstPathOwnersOutput, (_, output) => {
+    fs.writeFileSync(
+      path.resolve(__dirname, `../../../componentUsage-icons-${today}.csv`),
+      output
+    );
+  });
+}
+
+module.exports = {
+  writeCompPathsToCSV,
+  writeIconPathsToCSV,
+};

@@ -7,14 +7,16 @@ export default {
   title: 'Components/Back to top',
   id: 'components/va-back-to-top',
   parameters: {
-    componentSubtitle: `va-back-to-top web component`,
+    componentSubtitle: 'va-back-to-top web component',
     docs: {
-      page: () => <StoryDocs data={bttDocs} />,
+      page: () => <StoryDocs storyDefault={Default} data={bttDocs} />,
     },
   },
 };
 
-const Template = () => {
+const defaultArgs = {};
+
+const Template = (defaultArgs) => {
   return (
     <>
       <div className="usa-grid usa-grid-full">

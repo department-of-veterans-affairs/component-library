@@ -10,9 +10,9 @@ export default {
   title: 'Components/Modal USWDS',
   id: 'uswds/va-modal',
   parameters: {
-    componentSubtitle: `va-modal web component`,
+    componentSubtitle: 'va-modal web component',
     docs: {
-      page: () => <StoryDocs data={modalDocs} />,
+      page: () => <StoryDocs storyDefault={Default} data={modalDocs} />,
     },
   },
   argTypes: {
