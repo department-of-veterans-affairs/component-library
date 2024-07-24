@@ -243,7 +243,7 @@ describe('va-textarea', () => {
     await page.setContent('<va-textarea hint="This is hint text" label="Hello world" />');
 
     // Render the hint text
-    const hintTextElement = await page.find('va-textarea >>> span.usa-hint');
+    const hintTextElement = await page.find('va-textarea >>> div.usa-hint');
     expect(hintTextElement.innerText).toContain('This is hint text');
   });
 
@@ -361,7 +361,7 @@ describe('va-textarea', () => {
     // Level-setting expectations
     const textareaEl = await page.find('va-textarea >>> textarea');
     expect(await textareaEl.getProperty('value')).toBe('22');
-    expect(await page.find('va-textarea >>> span.usa-hint')).toBeNull();
+    expect(await page.find('va-textarea >>> div.usa-hint')).toBeNull();
 
     // Test the functionality
     await textareaEl.press('2');
@@ -378,14 +378,14 @@ describe('va-textarea', () => {
 
     // Level-setting expectations
     const textareaEl = await page.find('va-textarea >>> textarea');
-    expect(await page.find('va-textarea >>> span.usa-hint')).toBeNull();
+    expect(await page.find('va-textarea >>> div.usa-hint')).toBeNull();
 
     // Test the functionality
     await textareaEl.type('Hello, nice to meet you');
     expect(await textareaEl.getProperty('value')).toBe(
       'Hello, nice to meet you',
     );
-    expect(await page.find('va-textarea >>> span.usa-hint')).toBeNull();
+    expect(await page.find('va-textarea >>> div.usa-hint')).toBeNull();
   });
 
   it('uswds v3 ignores a maxlength of zero', async () => {
@@ -394,14 +394,14 @@ describe('va-textarea', () => {
 
     // Level-setting expectations
     const textareaEl = await page.find('va-textarea >>> textarea');
-    expect(await page.find('va-textarea >>> span.usa-hint')).toBeNull();
+    expect(await page.find('va-textarea >>> div.usa-hint')).toBeNull();
 
     // Test the functionality
     await textareaEl.type('Hello, nice to meet you');
     expect(await textareaEl.getProperty('value')).toBe(
       'Hello, nice to meet you',
     );
-    expect(await page.find('va-textarea >>> span.usa-hint')).toBeNull();
+    expect(await page.find('va-textarea >>> div.usa-hint')).toBeNull();
   });
 
   it('uswds shows chars allowed on load if maxlength and charcount set', async () => {

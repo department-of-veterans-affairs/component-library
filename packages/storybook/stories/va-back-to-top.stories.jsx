@@ -14,7 +14,9 @@ export default {
   },
 };
 
-const Template = () => {
+const defaultArgs = {};
+
+const Template = (defaultArgs) => {
   return (
     <>
       <div className="usa-grid usa-grid-full">

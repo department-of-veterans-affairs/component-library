@@ -144,6 +144,8 @@ export class VaFileInput {
     this.uploadStatus = 'success';
     this.internalError = null;
     this.generateFileContents(this.file);
+    this.updateStatusMessage(`You have selected the file: ${this.file.name}`);
+    this.el.focus();
 
     if (this.enableAnalytics) {
       this.componentLibraryAnalytics.emit({
@@ -165,9 +167,11 @@ export class VaFileInput {
     this.uploadStatus = 'idle';
     this.internalError = null;
     if (notifyParent) {
-      this.vaChange.emit({ files: [this.file] });
+      this.vaChange.emit({ files: [] });
     }
     this.file = null;
+    this.updateStatusMessage(`File removed. No file selected.`);
+    this.el.focus();
   };
 
   private openModal = () => {
@@ -190,6 +194,14 @@ export class VaFileInput {
       this.fileInputRef.click();
     }
   };
+
+  private updateStatusMessage(message:string) {
+    // Add delay to encourage screen reader readout
+    setTimeout(() => {
+      const statusMessageDiv = this.el.shadowRoot.querySelector("#statusMessage");
+      statusMessageDiv ? statusMessageDiv.textContent = message : "";
+    }, 1000);
+  }
 
   /**
    * Makes sure the button text always has a value.
@@ -258,17 +270,17 @@ export class VaFileInput {
             class="label-header-tag"
           >
             {label}
+            {requiredSpan}
           </HeaderTag>
-          {requiredSpan}
         </div>
       );
     } else {
       return (
         <div class="label-header">
-          <label htmlFor="fileInputField" part="label">
+          <label htmlFor="fileInputField" part="label" class="usa-label">
             {label}
+            {requiredSpan}
           </label>
-          {requiredSpan}
         </div>
       );
     }
@@ -378,12 +390,14 @@ export class VaFileInput {
         }
       }
       let selectedFileClassName = headless ? "headless-selected-files-wrapper" : "selected-files-wrapper"
-
+      const hintClass = "usa-hint" + (headless ? " usa-sr-only" : "")
       return (
         <Host class={{ 'has-error': !!displayError }}>
-          {label && this.renderLabelOrHeader(label, required, headerSize)}
+          <span class={{ 'usa-sr-only': !!headless }}>
+            {label && this.renderLabelOrHeader(label, required, headerSize)}
+          </span>
           {hint && (
-            <div class="usa-hint" id="input-hint-message">
+            <div class={hintClass} id="input-hint-message">
               {hint}
             </div>
           )}
@@ -404,7 +418,15 @@ export class VaFileInput {
             />
             {uploadStatus === 'idle' && (
               <div>
-                <div class="sr-only">No files selected.</div>
+                <span id="file-input-error-alert" role="alert">
+                  {displayError && (
+                    <Fragment>
+                      <span class="usa-sr-only">{i18next.t('error')}</span>
+                      <span class="usa-error-message">{displayError}</span>
+                    </Fragment>
+                  )}
+                </span>
+                <div class='usa-sr-only' aria-live="polite" id="statusMessage"></div>
                 <div class={fileInputTargetClasses}>
                   <div class="file-input-box"></div>
                   <div class="file-input-instructions">
@@ -423,6 +445,7 @@ export class VaFileInput {
                 {!headless &&
                   <div class="selected-files-label">Selected files</div>
                 }
+                <div class='usa-sr-only' aria-live="polite" id="statusMessage"></div>
                 <va-card class="va-card">
                   <div class="file-info-section">
                     {fileThumbnail}

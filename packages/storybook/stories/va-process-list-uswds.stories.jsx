@@ -9,6 +9,7 @@ export default {
   title: 'Components/Process list USWDS',
   id: 'uswds/va-process-list',
   subcomponents: componentStructure(processListItemDocs),
+  argTypes: propStructure(processListItemDocs),
   parameters: {
     componentSubtitle: 'va-process-list web component',
     docs: {
@@ -62,7 +63,7 @@ const Template = ({}) => {
 };
 
 
-const StatusTemplate = () => {
+const StatusTemplate = (defaultArgs) => {
   return (
     <va-process-list>
       <va-process-list-item checkmark header='Checkmark Icon'>  
@@ -80,7 +81,7 @@ const StatusTemplate = () => {
 };
 
 
-const HeaderSizeTemplate = () => {
+const HeaderSizeTemplate = (defaultArgs) => {
   return (
     <va-process-list>
       <va-process-list-item header='Size h1' level='1'/>
@@ -93,7 +94,7 @@ const HeaderSizeTemplate = () => {
   );
 };
 
-const CustomSizingTemplate = () => {
+const CustomSizingTemplate = (defaultArgs) => {
   return (
     <va-process-list>
       
@@ -111,7 +112,7 @@ const CustomSizingTemplate = () => {
   );
 };
 
-const UtilityStyling = () => {
+const UtilityStyling = (defaultArgs) => {
   return (
     <va-process-list>
       <va-process-list-item>
@@ -120,7 +121,7 @@ const UtilityStyling = () => {
           trigger="Show more"
           class="medium-screen:vads-u-display--none"
         >
-          <img src="https://via.placeholder.com/350" />
+          <img src="https://via.placeholder.com/350" alt="a placeholder image that displays the text 350 x 350" />
         </va-additional-info>
       </va-process-list-item>
       <va-process-list-item>

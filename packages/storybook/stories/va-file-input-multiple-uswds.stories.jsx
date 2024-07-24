@@ -1,16 +1,20 @@
 /* eslint-disable react/prop-types */
-import React, {useState} from 'react';
-import {VaFileInputMultiple} from '@department-of-veterans-affairs/web-components/react-bindings';
-import {getWebComponentDocs, propStructure} from './wc-helpers';
+import React, { useState } from 'react';
+import { VaFileInputMultiple } from '@department-of-veterans-affairs/web-components/react-bindings';
+import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
 
-const fileInputDocs = getWebComponentDocs('va-file-input-multiple');
+VaFileInputMultiple.displayName = 'VaFileInputMultiple';
+
+const fileInputMultipleDocs = getWebComponentDocs('va-file-input-multiple');
 
 export default {
   title: 'Components/File input multiple USWDS',
   id: 'uswds/va-file-input-multiple',
   parameters: {
-    componentSubtitle: `va-file-input-multiple web component`,
-
+    componentSubtitle: 'va-file-input-multiple web component',
+    docs: {
+      page: () => <StoryDocs storyDefault={Default} data={fileInputMultipleDocs} />,
+    },
   },
 };
 
@@ -57,7 +61,7 @@ const Template = ({
 
 export const Default = Template.bind(null);
 Default.args = { ...defaultArgs };
-Default.argTypes = propStructure(fileInputDocs);
+Default.argTypes = propStructure(fileInputMultipleDocs);
 
 export const Accept = Template.bind(null);
 Accept.args = {
