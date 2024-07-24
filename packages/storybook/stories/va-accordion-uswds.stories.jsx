@@ -101,8 +101,10 @@ const TemplateSubheader = args => (
 const TemplateIconHeaders = args => (
   <va-accordion {...args}>
     <va-accordion-item id="first" header="First Amendment" subheader="Subheader">
-      <i slot="icon" className="fas fa-info-circle vads-u-color--green"/>
-      <i aria-hidden="true" className="fas fa-envelope" slot="subheader-icon"/>
+      <span slot="icon" className="vads-u-color--green">
+        <va-icon icon="info" />
+      </span>
+      <va-icon icon="mail" slot="subheader-icon"/>
       <p>
         Congress shall make no law respecting an establishment of religion, or
         prohibiting the free exercise thereof; or abridging the freedom of speech,
@@ -111,16 +113,20 @@ const TemplateIconHeaders = args => (
       </p>
     </va-accordion-item>
     <va-accordion-item id="second" header="Second Amendment" subheader="Subheader">
-      <i slot="icon" className="fas fa-info-circle vads-u-color--green"/>
-      <i aria-hidden="true" className="fas fa-envelope" slot="subheader-icon"/>
+      <span slot="icon" className="vads-u-color--green">
+        <va-icon icon="info" />
+      </span>
+      <va-icon icon="mail" slot="subheader-icon"/>
       <p>
         A well regulated Militia, being necessary to the security of a free State,
         the right of the people to keep and bear Arms, shall not be infringed.
       </p>
     </va-accordion-item>
     <va-accordion-item id="third" header="Third Amendment" subheader="Subheader">
-      <i slot="icon" className="fas fa-info-circle vads-u-color--green"/>
-      <i aria-hidden="true" className="fas fa-envelope" slot="subheader-icon"/>
+      <span slot="icon" className="vads-u-color--green">
+        <va-icon icon="info" />
+      </span>
+      <va-icon icon="mail" slot="subheader-icon"/>
       <p>
         No Soldier shall, in time of peace be quartered in any house, without the
         consent of the Owner, nor in time of war, but in a manner to be prescribed by law.
