@@ -156,6 +156,12 @@ export class VaFileInputMultiple {
     } else {
       // Deleted file
       this.files.splice(pageIndex, 1);
+      const statusMessageDiv = this.el.shadowRoot.querySelector("#statusMessage");
+      // empty status message so it is read when updated
+      statusMessageDiv.textContent = ""
+      setTimeout(() => {
+        statusMessageDiv.textContent = "File removed."
+      }, 1000);
     }
 
     this.vaMultipleChange.emit({ files: this.files.map(fileObj => fileObj.file) });
@@ -252,6 +258,7 @@ export class VaFileInputMultiple {
           </div>
         )}
         <div class={outerWrapClass}>
+          <div class='usa-sr-only' aria-live="polite" id="statusMessage"></div>
           {!this.isEmpty() && (
             <div class="selected-files-label">Selected files</div>
           )}
