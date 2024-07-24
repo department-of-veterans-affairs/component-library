@@ -66,9 +66,11 @@ export class VaButton {
   @Prop({ reflect: true }) secondary?: boolean = false;
 
   /**
-   *  Having this attribute present will set the type of this button as 'submit'.
-   *  A value of: `prevent` --will trigger the onsubmit callback on the form, but won't submit the form;
-   * `skip` --will submit the form but not trigger onsubmit callback;
+   * Having this attribute present will set the type of this button as 'submit'.
+   * The va-button element must be within a `form` element for this fuctionlity to take place
+   * A value of: `prevent` will trigger the onsubmit callback on the form, but won't submit the form;
+   * `skip` will submit the form but not trigger the onsubmit callback;
+   * All other values will trigger the onsubmit and onclick callbacks, then submit the form; in that order.
    */
   @Prop() submit?: string;
 
@@ -127,11 +129,6 @@ export class VaButton {
   };
 
   private handleSubmit() {
-    // const type = this.el.shadowRoot.querySelector('button')?.type;
-    // console.log(this.el.shadowRoot.querySelector('button'), 'XX');
-    // if (type !== 'submit') {
-    //   return;
-    // }
     if (this.submit === undefined) {
       return;
     }

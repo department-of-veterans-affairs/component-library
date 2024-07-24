@@ -108,7 +108,7 @@ Disabled.args = {
 };
 
 
-const Template2 = ({
+const TemplateWithForm = ({
   back,
   big,
    _continue,
@@ -144,19 +144,18 @@ const Template2 = ({
   );
 }
 
-export const Submitted = Template2.bind(null);
+export const Submitted = TemplateWithForm.bind(null);
 Submitted.args = {
   ...defaultArgs,
   onsub : (e)=>{ 
-    // e.preventDefault();
-    console.log(e.target, "I am submitted!!");
-    alert ("form onsubmit method fired!!--on form");
+    console.log(e.target, "I am submitted!");
+    alert ("form onsubmit method fired!--on form");
   },
   onclk : (e)=>{ 
     console.log("called the on click method-on button", e.target);
     alert( "onclick happened on button"); 
 
 },
-  submit: 'submit',
+  submit: 'prevent',
   text: "Submit me",
 };
