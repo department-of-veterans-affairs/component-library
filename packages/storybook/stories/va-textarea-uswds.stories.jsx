@@ -31,6 +31,8 @@ const defaultArgs = {
   'form-heading-level': null,
   'form-heading': null,
   'form-description': null,
+  'label-header-level': null,
+  'header-aria-describedby': null
 };
 
 const Template = ({
@@ -45,6 +47,8 @@ const Template = ({
   hint,
   charcount,
   'message-aria-describedby': messageAriaDescribedby,
+  'label-header-level': labelHeaderLevel,
+  'header-aria-describedby': headerAriaDescribedby
 }) => {
   return (
     <va-textarea
@@ -61,6 +65,8 @@ const Template = ({
       onInput={e => console.log('input event value', e.target.value)}
       charcount={charcount}
       message-aria-describedby={messageAriaDescribedby}
+      label-header-level={labelHeaderLevel}
+      header-aria-describedby={headerAriaDescribedby}
     />
   );
 };
@@ -247,6 +253,15 @@ MaxLength.args = {
   ...defaultArgs,
   maxlength: '16',
   placeholder: 'No more than 16 characters',
+};
+
+export const LabelHeader = Template.bind(null);
+LabelHeader.args = {
+  ...defaultArgs,
+  'label-header-level': '3',
+  'name': 'header-example',
+  'header-aria-describedby': 'Optional description text for screen readers',
+  required: true
 };
 
 export const WithHintText = Template.bind(null);

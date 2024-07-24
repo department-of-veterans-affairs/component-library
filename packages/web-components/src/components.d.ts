@@ -1532,6 +1532,10 @@ export namespace Components {
          */
         "formHeadingLevel"?: number;
         /**
+          * An optional message that will be read by screen readers when the header is focused. The label-header-level prop must be set for this to be active.
+         */
+        "headerAriaDescribedby"?: string;
+        /**
           * Optional hint text.
          */
         "hint"?: string;
@@ -1539,6 +1543,10 @@ export namespace Components {
           * The label for the textarea.
          */
         "label"?: string;
+        /**
+          * Insert a header with defined level inside the label (legend)
+         */
+        "labelHeaderLevel"?: string;
         /**
           * The maximum number of characters allowed in the input. Negative and zero values will be ignored.
          */
@@ -3863,6 +3871,10 @@ declare namespace LocalJSX {
          */
         "formHeadingLevel"?: number;
         /**
+          * An optional message that will be read by screen readers when the header is focused. The label-header-level prop must be set for this to be active.
+         */
+        "headerAriaDescribedby"?: string;
+        /**
           * Optional hint text.
          */
         "hint"?: string;
@@ -3870,6 +3882,10 @@ declare namespace LocalJSX {
           * The label for the textarea.
          */
         "label"?: string;
+        /**
+          * Insert a header with defined level inside the label (legend)
+         */
+        "labelHeaderLevel"?: string;
         /**
           * The maximum number of characters allowed in the input. Negative and zero values will be ignored.
          */
