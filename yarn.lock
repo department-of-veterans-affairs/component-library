@@ -3074,7 +3074,7 @@ __metadata:
   resolution: "@department-of-veterans-affairs/css-library@workspace:packages/css-library"
   dependencies:
     "@divriots/style-dictionary-to-figma": "npm:^0.4.0"
-    "@uswds/uswds": "npm:^3.7.1"
+    "@uswds/uswds": "npm:^3.8.0"
     rimraf: "npm:^5.0.5"
     sass: "npm:^1.64.1"
     style-dictionary: "npm:3.8.0"
@@ -3214,7 +3214,7 @@ __metadata:
     "@types/react-dom": "npm:16.0.9"
     "@typescript-eslint/eslint-plugin": "npm:^5.30.5"
     "@typescript-eslint/parser": "npm:^5.30.5"
-    "@uswds/uswds": "npm:^3.7.1"
+    "@uswds/uswds": "npm:^3.8.0"
     animate.css: "npm:^4.1.1"
     aria-hidden: "npm:^1.1.3"
     babel-loader: "npm:^8.2.2"
@@ -6665,15 +6665,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@uswds/uswds@npm:^3.7.1":
-  version: 3.7.1
-  resolution: "@uswds/uswds@npm:3.7.1"
+"@uswds/uswds@npm:^3.8.0":
+  version: 3.8.1
+  resolution: "@uswds/uswds@npm:3.8.1"
   dependencies:
     classlist-polyfill: "npm:1.2.0"
     object-assign: "npm:4.1.1"
     receptor: "npm:1.0.0"
     resolve-id-refs: "npm:0.1.0"
-  checksum: 10/1d0ccda0d0b8833e0db7ff122dcd5e00bfe659fca0c9e5d18eb2664983a80298db7fbf174696fcd17b4956bb4df8c4431e73169ccf96128e1709f3a1b01ba197
+  checksum: 10/69859ff4c2da126a425b21fc7346023c793ba0fc517a3c52ff23f9466e8c45e4a0b8a534997f15a9611ee525b639000213b045242cf577e3e31a9f131810a47e
   languageName: node
   linkType: hard
 
