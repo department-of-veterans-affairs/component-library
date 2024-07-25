@@ -14,17 +14,7 @@
   cursor: not-allowed;
 }
 
-// Fix to off-centered content in V3 when icon present
-.va-button--icon {
-  position: relative;
-  top: 0.1em;
-  &.margin-right-8px {
-    margin-right: 8px;
-  }
-  &.margin-left-8px {
-    margin-left: 8px;
-  }
-}
+
 :host([big]:not([big="false"]):is([back], [continue])) {
   .usa-button--big {
     padding-top: 14px;
