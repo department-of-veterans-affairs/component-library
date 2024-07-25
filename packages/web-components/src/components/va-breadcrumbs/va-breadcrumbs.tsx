@@ -361,16 +361,20 @@ export class VaBreadcrumbs {
                       class="usa-breadcrumb__link"
                       href="#content"
                       onClick={e => this.fireAnalyticsEvent(e)}
+                      lang={item.lang || 'en-US'}
+                      hreflang={item.lang || 'en-US'}
                     >
-                      <span lang={item.lang || 'en-US'}>{item.label}</span>
+                      <span>{item.label}</span>
                     </a>
                   ) : (
                     <a
                       class="usa-breadcrumb__link"
                       href={item.href}
                       onClick={e => this.handleClick(e, item)}
+                      lang={item.lang || 'en-US'}
+                      hreflang={item.lang || 'en-US'}
                     >
-                      <span lang={item.lang || 'en-US'}>{item.label}</span>
+                      <span>{item.label}</span>
                     </a>
                   )}
                 </li>
