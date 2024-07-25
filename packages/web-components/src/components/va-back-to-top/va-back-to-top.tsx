@@ -92,7 +92,7 @@ export class VaBackToTop {
                 <va-icon icon="arrow_upward" size={3}></va-icon>
                 <span class="sr-only">Back to top</span>{' '}
                 {/* For small screen that only displays the arrow */}
-                <span class="text">Back to top test</span>
+                <span class="text">Back to top</span>
               </span>
             </a>
           </div>
