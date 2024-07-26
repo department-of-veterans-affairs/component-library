@@ -189,13 +189,13 @@ describe('va-breadcrumbs', () => {
           <nav aria-label="test" class="usa-breadcrumb">
             <ol class="usa-breadcrumb__list" role="list">
               <li class="usa-breadcrumb__list-item">
-                <a class="usa-breadcrumb__link" href="#home">
-                  <span lang="en-US">VA.gov home</span>
+                <a class="usa-breadcrumb__link" href="#home" hreflang="en-US" lang="en-US">
+                  <span>VA.gov home</span>
                 </a>
               </li>
               <li class="usa-breadcrumb__list-item usa-current" aria-current="page">
-                <a class="usa-breadcrumb__link" href="#content">
-                  <span lang="en-US">Current</span>
+                <a class="usa-breadcrumb__link" href="#content" hreflang="en-US" lang="en-US">
+                  <span>Current</span>
                 </a>
               </li>
             </ol>
@@ -221,20 +221,20 @@ describe('va-breadcrumbs', () => {
           <nav aria-label="test" class="usa-breadcrumb">
             <ol class="usa-breadcrumb__list" role="list">
               <li class="usa-breadcrumb__list-item">
-                <a class="usa-breadcrumb__link" href="#home">
-                  <span lang="en-US">VA.gov home</span>
+                <a class="usa-breadcrumb__link" href="#home" hreflang="en-US" lang="en-US">
+                  <span>VA.gov home</span>
                 </a>
               </li>
               <li class="usa-breadcrumb__list-item">
-                <a class="usa-breadcrumb__link" href="#spanish">
-                  <span lang="es">
+                <a class="usa-breadcrumb__link" href="#spanish" hreflang="es" lang="es">
+                  <span>
                     Spanish Crumb
                   </span>
                 </a>
               </li>
               <li class="usa-breadcrumb__list-item usa-current" aria-current="page">
-                <a class="usa-breadcrumb__link" href="#content">
-                  <span lang="tl">Tagalog Crumb</span>
+                <a class="usa-breadcrumb__link" href="#content" hreflang="tl" lang="tl">
+                  <span>Tagalog Crumb</span>
                 </a>
               </li>
             </ol>
@@ -310,18 +310,18 @@ describe('va-breadcrumbs', () => {
           <nav aria-label="test" class="usa-breadcrumb">
             <ol class="usa-breadcrumb__list" role="list">
               <li class="usa-breadcrumb__list-item">
-                <a class="usa-breadcrumb__link" href="/one">
-                  <span lang="en-US">VA.gov home</span>
+                <a class="usa-breadcrumb__link" href="/one" hreflang="en-US" lang="en-US">
+                  <span>VA.gov home</span>
                 </a>
               </li>
               <li class="usa-breadcrumb__list-item">
-                <a class="usa-breadcrumb__link" href="/two">
-                  <span lang="en-US">Two</span>
+                <a class="usa-breadcrumb__link" href="/two" hreflang="en-US" lang="en-US">
+                  <span>Two</span>
                 </a>
               </li>
               <li class="usa-breadcrumb__list-item usa-current" aria-current="page">
-                <a class="usa-breadcrumb__link" href="#content">
-                  <span lang="en-US">Three</span>
+                <a class="usa-breadcrumb__link" href="#content" hreflang="en-US" lang="en-US">
+                  <span>Three</span>
                 </a>
               </li>
             </ol>
