@@ -67,7 +67,7 @@ export class VaButton {
 
   /**
    * Having this attribute present will set the type of this button as 'submit'.
-   * The va-button element must be within a `form` element for this fuctionlity to take place
+   * The va-button element must be within a `form` element for this functionality to take place
    * A value of: `prevent` will trigger the onsubmit callback on the form, but won't submit the form;
    * `skip` will submit the form but not trigger the onsubmit callback;
    * All other values will trigger the onsubmit and onclick callbacks, then submit the form; in that order.
