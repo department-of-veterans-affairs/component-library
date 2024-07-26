@@ -17,3 +17,7 @@
 .storybook-background-color-orange {
   background-color: #db7533;
 }
+
+h3#secondary + div:has(#story--uswds-va-button--secondary) {
+  background: var(--vads-color-gray-light-alt);
+}
