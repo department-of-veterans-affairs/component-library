@@ -408,6 +408,15 @@ WithSuffix.args = {
   'input-suffix': 'lbs.',
 };
 
+export const WithIconAndSuffix = Template.bind(null);
+WithIconAndSuffix.args = {
+  ...defaultArgs,
+  'label': 'How often is the payment?',
+  'required': true,
+  'input-icon-prefix': 'attach_money',
+  'input-suffix': 'per year',
+};
+
 export const Widths = WidthsTemplate.bind(null);
 Widths.args = {
   ...defaultArgs,

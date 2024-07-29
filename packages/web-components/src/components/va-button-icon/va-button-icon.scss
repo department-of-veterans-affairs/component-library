@@ -30,8 +30,3 @@
     background: var(--vads-color-secondary-lightest);
   }
 }
-
-// Fix to off-centered content when icon present
-:host button.usa-button va-icon {
-    margin-right: 8px;
-}

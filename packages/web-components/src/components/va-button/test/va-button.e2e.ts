@@ -244,7 +244,7 @@ describe('va-button', () => {
     <va-button back="" class="hydrated" uswds="">
       <mock:shadow-root>
         <button class="usa-button usa-button--outline" type="button" part="button">
-          <va-icon class="hydrated margin-right-8px va-button--icon"></va-icon>
+          <va-icon class="hydrated"></va-icon>
           Back
         </button>
       </mock:shadow-root>
@@ -261,7 +261,7 @@ describe('va-button', () => {
       <mock:shadow-root>
         <button class="usa-button" type="button" part="button">
           Continue
-          <va-icon class="hydrated margin-left-8px va-button--icon"></va-icon>
+          <va-icon class="hydrated"></va-icon>
         </button>
       </mock:shadow-root>
     </va-button>
@@ -404,4 +404,30 @@ describe('va-button', () => {
     expect(descriptionSpan).not.toBeNull();
     expect(descriptionSpan.textContent).toBe('Button description.');
   });
+});
+
+
+it(`uswds v3 renders a default submit button variant`, async () => {
+  const page = await newE2EPage();
+  await page.setContent('<va-button submit text="Submit"></va-button>');
+  const element = await page.find('va-button');
+  expect(element).toEqualHtml(`
+  <va-button class="hydrated" submit="" text="Submit" uswds="">
+    <mock:shadow-root>
+      <button class="usa-button" type="submit" part="button">
+        Submit
+      </button>
+    </mock:shadow-root>
+  </va-button>
+  `);
+});
+
+it('submits form when clicked', async () => {
+  const page = await newE2EPage();
+  await page.setContent('<form onsubmit="e=>{e.preventDefault();}"><va-button submit text="Submit"  ></va-button></form>');
+  const submitSpy = await page.spyOnEvent('submit');
+  const button = await page.find('va-button >>> button');
+  await button.click();
+  await page.waitForChanges();
+  expect(submitSpy).toHaveReceivedEventTimes(1);
 });

@@ -14,17 +14,7 @@
   cursor: not-allowed;
 }
 
-// Fix to off-centered content in V3 when icon present
-.va-button--icon {
-  position: relative;
-  top: 0.1em;
-  &.margin-right-8px {
-    margin-right: 8px;
-  }
-  &.margin-left-8px {
-    margin-left: 8px;
-  }
-}
+
 :host([big]:not([big="false"]):is([back], [continue])) {
   .usa-button--big {
     padding-top: 14px;
@@ -32,8 +22,15 @@
 }
 
 // Override transparent background from USWDS v3
-.usa-button--outline {
+.usa-button.usa-button--outline {
   background-color: var(--vads-button-color-background-secondary-on-light);
+
+  &:hover,
+  &:focus {
+    background-color: var(--vads-button-color-background-secondary-on-light);
+    text-decoration: none;
+  }
+
 }
 
 .va-button-primary--alternate {

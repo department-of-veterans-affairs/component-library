@@ -48,7 +48,7 @@
     "@types/react-dom": "16.0.9",
     "@typescript-eslint/eslint-plugin": "^5.30.5",
     "@typescript-eslint/parser": "^5.30.5",
-    "@uswds/uswds": "^3.7.1",
+    "@uswds/uswds": "^3.8.1",
     "animate.css": "^4.1.1",
     "babel-loader": "^8.2.2",
     "eslint": "^8.19.0",
