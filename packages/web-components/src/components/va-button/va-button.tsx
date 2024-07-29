@@ -207,17 +207,11 @@ export class VaButton {
             part="button"
           >
             {back && !_continue && (
-              <va-icon
-                class="va-button--icon margin-right-8px"
-                icon="navigate_far_before"
-              ></va-icon>
+              <va-icon icon="navigate_far_before" />
             )}
             {buttonText}
             {_continue && !back && (
-              <va-icon
-                class="va-button--icon margin-left-8px"
-                icon="navigate_far_next"
-              ></va-icon>
+              <va-icon icon="navigate_far_next" />
             )}
           </button>
           {messageAriaDescribedby && (
