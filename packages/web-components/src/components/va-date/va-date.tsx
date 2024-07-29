@@ -303,7 +303,6 @@ export class VaDate {
               aria-describedby={error ? 'error-message' : undefined}
               name={`${name}Year`}
               maxlength={4}
-              minlength={4}
               pattern="[0-9]{4}"
               // Value must be a string
               // Checking is NaN if so provide empty string
@@ -311,11 +310,10 @@ export class VaDate {
               invalid={this.invalidYear}
               onInput={handleDateChange}
               onBlur={this.handleYearBlur}
-              class="input-year uswds-false"
+              class="input-year"
               inputmode="numeric"
               type="text"
               aria-label="Please enter four digits for the year"
-              uswds={false}
             />
           </div>
         </fieldset>
