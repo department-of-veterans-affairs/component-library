@@ -22,8 +22,15 @@
 }
 
 // Override transparent background from USWDS v3
-.usa-button--outline {
+.usa-button.usa-button--outline {
   background-color: var(--vads-button-color-background-secondary-on-light);
+
+  &:hover,
+  &:focus {
+    background-color: var(--vads-button-color-background-secondary-on-light);
+    text-decoration: none;
+  }
+
 }
 
 .va-button-primary--alternate {
