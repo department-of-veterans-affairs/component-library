@@ -248,13 +248,13 @@ export class VaTextarea {
               )}&nbsp;
               {
                 useFormsPattern === 'multiple' && (
-                  <span id="header-message" class="sr-only">
+                  <span id="header-message" class="usa-sr-only">
                     {label}
                   </span>
                 )
               }
               {headerAriaDescribedby && (
-                <span id="header-message" class="sr-only">
+                <span id="header-message" class="usa-sr-only">
                   {headerAriaDescribedby}
                 </span>
               )}
@@ -296,7 +296,7 @@ export class VaTextarea {
             </span>
           )}
           {messageAriaDescribedby && (
-            <span id="input-message" class="sr-only dd-privacy-hidden">
+            <span id="input-message" class="usa-sr-only dd-privacy-hidden">
               {messageAriaDescribedby}
             </span>
           )}
