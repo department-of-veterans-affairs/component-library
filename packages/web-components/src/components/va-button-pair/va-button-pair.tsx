@@ -1,4 +1,12 @@
-import { Component, Event, EventEmitter, Host, h, Prop, Listen } from '@stencil/core';
+import {
+  Component,
+  Event,
+  EventEmitter,
+  Host,
+  h,
+  Prop,
+  Listen,
+} from '@stencil/core';
 
 /**
  * @componentName Button pair
@@ -76,12 +84,12 @@ export class VaButtonPair {
   componentLibraryAnalytics: EventEmitter;
 
   /**
-   * Listen for the va-button GA event and capture it so 
+   * Listen for the va-button GA event and capture it so
    * that we can emit a single va-button-pair GA event that includes
    * the va-button details.
    */
   @Listen('component-library-analytics')
-  handleButtonAnalytics(event) {
+  handleButtonAnalytics(event): void {
     // Prevent va-button-pair GA event from firing multiple times.
     if (event.detail.componentName === 'va-button-pair') return;
 
@@ -93,20 +101,20 @@ export class VaButtonPair {
         componentName: 'va-button-pair',
         action: 'click',
         details: {
-          type: null, 
-          label: null, 
-          ...event.detail?.details // Merging the va-button GA event details.
+          type: null,
+          label: null,
+          ...event.detail?.details, // Merging the va-button GA event details.
         },
       };
       this.componentLibraryAnalytics.emit(detail);
     }
   }
 
-  private handlePrimaryClick = (e: MouseEvent) => {
+  private handlePrimaryClick = (e: MouseEvent): void => {
     this.primaryClick.emit(e);
   };
 
-  private handleSecondaryClick = (e: MouseEvent) => {
+  private handleSecondaryClick = (e: MouseEvent): void => {
     this.secondaryClick.emit(e);
   };
 
@@ -179,13 +187,13 @@ export class VaButtonPair {
           <Host>
             <ul class="usa-button-group">
               <li class="usa-button-group__item">
-              <va-button
-                disable-analytics={disableAnalytics}
-                label={primaryLabel}
-                onClick={handlePrimaryClick}
-                text={update ? 'Update' : 'Yes'}
-                submit={submit}
-              />
+                <va-button
+                  disable-analytics={disableAnalytics}
+                  label={primaryLabel}
+                  onClick={handlePrimaryClick}
+                  text={update ? 'Update' : 'Yes'}
+                  submit={submit}
+                />
               </li>
               <li class="usa-button-group__item">
                 <va-button
@@ -198,7 +206,7 @@ export class VaButtonPair {
               </li>
             </ul>
           </Host>
-        )
+        );
       } else {
         return (
           <Host>
@@ -224,6 +232,5 @@ export class VaButtonPair {
         );
       }
     }
-
   }
 }

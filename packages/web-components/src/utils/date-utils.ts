@@ -16,6 +16,7 @@ const maxMonths = 12;
 const minMonths = 1;
 const minDays = 1;
 
+/*eslint-disable i18next/no-literal-string */
 export const months = [
   { label: 'January', value: 1 },
   { label: 'February', value: 2 },
@@ -32,7 +33,7 @@ export const months = [
 ];
 
 /* eslint-disable i18next/no-literal-string */
-const twentyNineDays = [
+const twentyNineDays: string[] = [
   '1',
   '2',
   '3',
@@ -63,7 +64,7 @@ const twentyNineDays = [
   '28',
   '29',
 ];
-const thirtyDays = [
+const thirtyDays: string[] = [
   '1',
   '2',
   '3',
@@ -95,7 +96,7 @@ const thirtyDays = [
   '29',
   '30',
 ];
-const thirtyOneDays = [
+const thirtyOneDays: string[] = [
   '1',
   '2',
   '3',
@@ -148,12 +149,12 @@ export const days = {
  * Return true if the year is a leap year.
  * (Exported for testing purposes)
  */
-export function checkLeapYear(year: number) {
+export function checkLeapYear(year: number): boolean {
   //three conditions to find out the leap year
   return (0 == year % 4 && 0 != year % 100) || 0 == year % 400;
 }
 
-export const internalErrors = [
+export const internalErrors: string[] = [
   'year-range',
   'day-range',
   'month-range',

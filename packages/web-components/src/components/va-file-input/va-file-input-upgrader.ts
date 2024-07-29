@@ -46,14 +46,14 @@ let DEFAULT_FILE_STATUS_TEXT = '';
  * @param {HTMLElement} el the element within the file input
  * @returns {FileInputContext} elements
  */
-const getFileInputContext = el => {
-  const dropZoneEl = el.closest(DROPZONE);
+const getFileInputContext = (el: HTMLElement): { dropZoneEl: HTMLElement, inputEl: HTMLInputElement } => {
+  const dropZoneEl = el.closest(DROPZONE) as HTMLElement;
 
   if (!dropZoneEl) {
     throw new Error(`Element is missing outer ${DROPZONE}`);
   }
 
-  const inputEl = dropZoneEl.querySelector(INPUT);
+  const inputEl = dropZoneEl.querySelector(INPUT) as HTMLInputElement;
 
   return {
     dropZoneEl,
@@ -66,7 +66,7 @@ const getFileInputContext = el => {
  *
  * @param {HTMLElement} el An element within the file input component
  */
-const disable = el => {
+const disable = (el: HTMLElement): void => {
   const { dropZoneEl, inputEl } = getFileInputContext(el);
 
   inputEl.disabled = true;
@@ -78,7 +78,7 @@ const disable = el => {
  *
  * @param {HTMLElement} el An element within the file input component
  */
-const ariaDisable = el => {
+const ariaDisable = (el: HTMLElement): void => {
   const { dropZoneEl } = getFileInputContext(el);
 
   dropZoneEl.classList.add(DISABLED_CLASS);
@@ -89,7 +89,7 @@ const ariaDisable = el => {
  *
  * @param {HTMLElement} el An element within the file input component
  */
-const enable = el => {
+const enable = (el: HTMLElement): void => {
   const { dropZoneEl, inputEl } = getFileInputContext(el);
 
   inputEl.disabled = false;
@@ -102,31 +102,32 @@ const enable = el => {
  * @param {String} s special characters
  * @returns {String} replaces specified values
  */
-const replaceName = s => {
+const replaceName = (s: string): string => {
   const c = s.charCodeAt(0);
   if (c === 32) return '-';
   if (c >= 65 && c <= 90) return `img_${s.toLowerCase()}`;
   return `__000${c.toString(16).slice(-4)}`;
 };
 
+
 /**
  * Creates an ID name for each file that strips all invalid characters.
  * @param {String} name - name of the file added to file input (search value)
  * @returns {String} same characters as the name with invalid chars removed (new value)
  */
-const makeSafeForID = name => name.replace(/[^a-z0-9]/g, replaceName);
+const makeSafeForID = (name: string): string => name.replace(/[^a-z0-9]/g, replaceName);
 
 // Takes a generated safe ID and creates a unique ID.
-const createUniqueID = name => `${name}-${Math.floor(Date.now() / 1000)}`;
+const createUniqueID = (name: string): string => `${name}-${Math.floor(Date.now() / 1000)}`;
 
 /**
  * Determines if the singular or plural item label should be used
  * Determination is based on the presence of the `multiple` attribute
  *
  * @param {HTMLInputElement} fileInputEl - The input element.
- * @returns {HTMLDivElement} The singular or plural version of "item"
+ * @returns {string} The singular or plural version of "item". Either "file" or "files".
  */
-const getItemsLabel = fileInputEl => {
+const getItemsLabel = (fileInputEl: HTMLInputElement): string => {
   const acceptsMultiple = fileInputEl.hasAttribute('multiple');
   const itemsLabel = acceptsMultiple ? 'files' : 'file';
 
@@ -140,7 +141,7 @@ const getItemsLabel = fileInputEl => {
  * @param {HTMLInputElement} fileInputEl - The input element.
  * @returns {HTMLDivElement} The drag and drop target area.
  */
-const createTargetArea = fileInputEl => {
+const createTargetArea = (fileInputEl: HTMLInputElement): HTMLDivElement => {
   const fileInputParent = document.createElement('div');
   const dropTarget = document.createElement('div');
   const box = document.createElement('div');
@@ -168,7 +169,7 @@ const createTargetArea = fileInputEl => {
  * @param {HTMLInputElement} fileInputEl - The input element.
  * @returns {HTMLDivElement} The container for visible interaction instructions.
  */
-const createVisibleInstructions = fileInputEl => {
+const createVisibleInstructions = (fileInputEl: HTMLInputElement): HTMLDivElement => {
   const fileInputParent = fileInputEl.closest(DROPZONE);
   const itemsLabel = getItemsLabel(fileInputEl);
   const instructions = document.createElement('div');
@@ -208,7 +209,7 @@ const createVisibleInstructions = fileInputEl => {
  *
  * @param {HTMLInputElement} fileInputEl - The input element.
  */
-const createSROnlyStatus = fileInputEl => {
+const createSROnlyStatus = (fileInputEl: HTMLInputElement): void => {
   const statusEl = document.createElement('div');
   const itemsLabel = getItemsLabel(fileInputEl);
   const fileInputParent = fileInputEl.closest(DROPZONE);
@@ -232,7 +233,7 @@ const createSROnlyStatus = fileInputEl => {
  *
  * @param {HTMLInputElement} fileInputEl - The original input element.
  */
-const enhanceFileInput = fileInputEl => {
+const enhanceFileInput = (fileInputEl: HTMLInputElement): { instructions: HTMLDivElement, dropTarget: HTMLDivElement } => {
   const isInputDisabled =
     fileInputEl.hasAttribute('aria-disabled') ||
     fileInputEl.hasAttribute('disabled');
@@ -256,7 +257,7 @@ const enhanceFileInput = fileInputEl => {
  * @param {HTMLDivElement} dropTarget - The drag and drop target area.
  * @param {HTMLDivElement} instructions - The container for visible interaction instructions.
  */
-const removeOldPreviews = (dropTarget, instructions) => {
+const removeOldPreviews = (dropTarget: HTMLDivElement, instructions: HTMLDivElement): void => {
   const filePreviews = dropTarget.querySelectorAll(`.${PREVIEW_CLASS}`);
   const currentPreviewHeading = dropTarget.querySelector(
     `.${PREVIEW_HEADING_CLASS}`,
@@ -269,7 +270,7 @@ const removeOldPreviews = (dropTarget, instructions) => {
    * finds the parent of the passed node and removes the child
    * @param {HTMLElement} node
    */
-  const removeImages = node => {
+  const removeImages = (node: HTMLElement): void => {
     node.parentNode.removeChild(node);
   };
 
@@ -300,7 +301,7 @@ const removeOldPreviews = (dropTarget, instructions) => {
  * @param {Object} fileNames - The selected files found in the fileList object.
  * @param {Array} fileStore - The array of uploaded file names created from the fileNames object.
  */
-const updateStatusMessage = (statusElement, fileNames, fileStore) => {
+const updateStatusMessage = (statusElement: HTMLDivElement | Element, fileNames: FileList | File[], fileStore: string[]): void => {
   const statusEl = statusElement;
   let statusMessage = DEFAULT_FILE_STATUS_TEXT;
 
@@ -308,9 +309,8 @@ const updateStatusMessage = (statusElement, fileNames, fileStore) => {
   if (fileNames.length === 1) {
     statusMessage = `You have selected the file: ${fileStore}`;
   } else if (fileNames.length > 1) {
-    statusMessage = `You have selected ${
-      fileNames.length
-    } files: ${fileStore.join(', ')}`;
+    statusMessage = `You have selected ${fileNames.length
+      } files: ${fileStore.join(', ')}`;
   }
 
   // Add delay to encourage screen reader readout
@@ -324,9 +324,9 @@ const updateStatusMessage = (statusElement, fileNames, fileStore) => {
  * Update the aria-label with new instructions text
  *
  * @param {HTMLInputElement} fileInputEl - The input element.
- * @param {Object} fileNames - The selected files found in the fileList object.
+ * @param {Array} fileNames - The selected files found in the fileList object.
  */
-const addPreviewHeading = (fileInputEl, fileNames) => {
+const addPreviewHeading = (fileInputEl: HTMLInputElement, fileNames: FileList | File[]) => {
   const filePreviewsHeading = document.createElement('div');
   const dropTarget = fileInputEl.closest(`.${TARGET_CLASS}`);
   const instructions = dropTarget.querySelector(`.${INSTRUCTIONS_CLASS}`);
@@ -364,12 +364,12 @@ const addPreviewHeading = (fileInputEl, fileNames) => {
  * @param {HTMLDivElement} dropTarget - The drag and drop target area.
  */
 
-const handleChange = (e, fileInputEl, instructions, dropTarget) => {
+const handleChange = (e: Event, fileInputEl: HTMLInputElement, instructions: HTMLDivElement, dropTarget: HTMLDivElement) => {
   const multiple = fileInputEl.getAttribute('multiple'); // TODO: Double-check this works correctly when multiple is re-enabled
-  const fileNames = multiple ? e.target.files : [e.target.files[0]];
+  const fileNames = multiple ? (e.target as HTMLInputElement).files : [(e.target as HTMLInputElement).files[0]];
   const inputParent = dropTarget.closest(`.${DROPZONE_CLASS}`);
   const statusElement = inputParent.querySelector(`.${SR_ONLY_CLASS}`);
-  const fileStore = [];
+  const fileStore: string[] = [];
 
   // First, get rid of existing previews
   removeOldPreviews(dropTarget, instructions);
@@ -464,7 +464,7 @@ const handleChange = (e, fileInputEl, instructions, dropTarget) => {
  * @param {HTMLDivElement} instructions - The container for visible interaction instructions.
  * @param {HTMLDivElement} dropTarget - The drag and drop target area.
  */
-const preventInvalidFiles = (e, fileInputEl, instructions, dropTarget) => {
+const preventInvalidFiles = (e: Event, fileInputEl: HTMLInputElement, instructions: HTMLDivElement, dropTarget: HTMLDivElement) => {
   const acceptedFilesAttr = fileInputEl.getAttribute('accept');
   dropTarget.classList.remove(INVALID_FILE_CLASS);
 
@@ -494,7 +494,7 @@ const preventInvalidFiles = (e, fileInputEl, instructions, dropTarget) => {
 
     // If multiple files are dragged, this iterates through them and look for any files that are not accepted.
     let allFilesAllowed = true;
-    const scannedFiles = e.target.files || e.dataTransfer.files;
+    const scannedFiles = (e.target as HTMLInputElement).files || (e as DragEvent).dataTransfer.files;
     for (let i = 0; i < scannedFiles.length; i += 1) {
       const file = scannedFiles[i];
       if (allFilesAllowed) {
@@ -536,7 +536,7 @@ const preventInvalidFiles = (e, fileInputEl, instructions, dropTarget) => {
  * @param {HTMLDivElement} instructions - The container for visible interaction instructions.
  * @param {HTMLDivElement} dropTarget - The drag and drop target area.
  */
-const handleUpload = (event, fileInputEl, instructions, dropTarget) => {
+const handleUpload = (event: Event, fileInputEl: HTMLInputElement, instructions: HTMLDivElement, dropTarget: HTMLDivElement) => {
   preventInvalidFiles(event, fileInputEl, instructions, dropTarget);
   if (TYPE_IS_VALID === true) {
     handleChange(event, fileInputEl, instructions, dropTarget);
@@ -545,7 +545,7 @@ const handleUpload = (event, fileInputEl, instructions, dropTarget) => {
 
 export const fileInput = {
   init(root: HTMLElement) {
-    selectOrMatches(DROPZONE, root).forEach(fileInputEl => {
+    selectOrMatches(DROPZONE, root).forEach((fileInputEl: HTMLInputElement) => {
       const { instructions, dropTarget } = enhanceFileInput(fileInputEl);
 
       dropTarget.addEventListener(

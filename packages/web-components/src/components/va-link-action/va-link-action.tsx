@@ -1,4 +1,13 @@
-import { Component, Event, EventEmitter, Host, h, Prop, State, Watch } from '@stencil/core';
+import {
+  Component,
+  Event,
+  EventEmitter,
+  Host,
+  h,
+  Prop,
+  State,
+  Watch,
+} from '@stencil/core';
 import classNames from 'classnames';
 
 /**
@@ -37,8 +46,8 @@ export class VaLinkAction {
    * The type of the link, which determines its style.
    * Can be 'primary', 'secondary', or 'reverse'.
    */
-  @Prop() type: "primary" | "secondary" | "reverse" = "primary";
-  
+  @Prop() type: 'primary' | 'secondary' | 'reverse' = 'primary';
+
   @State() isSingleLine: boolean = true;
 
   /**
@@ -74,7 +83,7 @@ export class VaLinkAction {
   }
 
   @Watch('text')
-  checkTextLines() {
+  checkTextLines(): void {
     if (this.linkRef) {
       const computedStyle = getComputedStyle(this.linkRef);
       const lineHeight = parseFloat(computedStyle.lineHeight);
@@ -84,30 +93,32 @@ export class VaLinkAction {
   }
 
   render() {
-    const {
-      handleClick,
-      href,
-      text,
-      messageAriaDescribedby,
-      type
-    } = this;
+    const { handleClick, href, text, messageAriaDescribedby, type } = this;
 
     const linkClass = classNames({
       'va-link--reverse': type === 'reverse',
       'va-link--primary': type === 'primary',
-      'va-link--secondary': type === 'secondary'
+      'va-link--secondary': type === 'secondary',
     });
 
     // eslint-disable-next-line i18next/no-literal-string
     const iconClass = classNames('link-icon--left', 'link-icon', {
-      'link-icon--reverse': type === 'reverse'
+      'link-icon--reverse': type === 'reverse',
     });
 
-    const ariaDescribedbyIds = messageAriaDescribedby ? 'link-description' : null;
+    const ariaDescribedbyIds = messageAriaDescribedby
+      ? 'link-description'
+      : null;
 
     return (
       <Host>
-        <a href={href} class={linkClass} aria-describedby={ariaDescribedbyIds} onClick={handleClick} ref={el => this.linkRef = el as HTMLElement}>
+        <a
+          href={href}
+          class={linkClass}
+          aria-describedby={ariaDescribedbyIds}
+          onClick={handleClick}
+          ref={el => (this.linkRef = el as HTMLElement)}
+        >
           <va-icon class={iconClass} icon="chevron_right" size={3}></va-icon>
           <span class="link-text">{text}</span>
         </a>

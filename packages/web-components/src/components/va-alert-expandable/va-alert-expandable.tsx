@@ -87,7 +87,7 @@ export class VaAlertExpandable {
 
   // Ensures that the CSS animation is consistent and uses the correct max-height for its content
   /* eslint-disable i18next/no-literal-string */
-  updateAlertBodyMaxHeight() {
+  updateAlertBodyMaxHeight(): void {
     const bodyElm = this.el.shadowRoot.getElementById('alert-body');
     const contentHeight = bodyElm.scrollHeight + 'px';
     // the additional 2em is #alert-body margin-top and margin-bottom when open
