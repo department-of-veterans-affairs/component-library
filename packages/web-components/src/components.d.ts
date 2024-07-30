@@ -225,9 +225,9 @@ export namespace Components {
          */
         "secondary"?: boolean;
         /**
-          * If `true`, the button will submit form data when clicked.
+          * Having this attribute present will set the type of this button as 'submit'. The va-button element must be within a `form` element for this functionality to take place A value of: `prevent` will trigger the onsubmit callback on the form, but won't submit the form; `skip` will submit the form but not trigger the onsubmit callback; All other values will trigger the onsubmit and onclick callbacks, then submit the form; in that order.
          */
-        "submit"?: boolean;
+        "submit"?: string;
         /**
           * The text displayed on the button. If `continue` or `back` is true, the value of text is ignored.
          */
@@ -266,9 +266,9 @@ export namespace Components {
          */
         "secondaryLabel"?: string;
         /**
-          * If `true`, the primary button will submit form data when clicked.
+          * Having this attribute present will set the type of this button as 'submit'. The va-button element must be within a `form` element for this functionality to take place A value of: `prevent` will trigger the onsubmit callback on the form, but won't submit the form; `skip` will submit the form but not trigger the onsubmit callback; All other values will trigger the onsubmit and onclick callbacks, then submit the form; in that order.
          */
-        "submit"?: boolean;
+        "submit"?: string;
         /**
           * If `true`, button pair will use Update and Cancel for button text.
          */
@@ -2356,9 +2356,9 @@ declare namespace LocalJSX {
          */
         "secondary"?: boolean;
         /**
-          * If `true`, the button will submit form data when clicked.
+          * Having this attribute present will set the type of this button as 'submit'. The va-button element must be within a `form` element for this functionality to take place A value of: `prevent` will trigger the onsubmit callback on the form, but won't submit the form; `skip` will submit the form but not trigger the onsubmit callback; All other values will trigger the onsubmit and onclick callbacks, then submit the form; in that order.
          */
-        "submit"?: boolean;
+        "submit"?: string;
         /**
           * The text displayed on the button. If `continue` or `back` is true, the value of text is ignored.
          */
@@ -2413,9 +2413,9 @@ declare namespace LocalJSX {
          */
         "secondaryLabel"?: string;
         /**
-          * If `true`, the primary button will submit form data when clicked.
+          * Having this attribute present will set the type of this button as 'submit'. The va-button element must be within a `form` element for this functionality to take place A value of: `prevent` will trigger the onsubmit callback on the form, but won't submit the form; `skip` will submit the form but not trigger the onsubmit callback; All other values will trigger the onsubmit and onclick callbacks, then submit the form; in that order.
          */
-        "submit"?: boolean;
+        "submit"?: string;
         /**
           * If `true`, button pair will use Update and Cancel for button text.
          */

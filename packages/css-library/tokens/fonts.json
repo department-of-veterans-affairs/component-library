@@ -17,12 +17,12 @@
       "italic": { "value": "italic" }
     },
     "size": {
-      "sm": { "value": "1.5rem" },
-      "base": { "value": "1.6rem" },
-      "md": { "value": "1.7rem" },
-      "lg": { "value": "2rem" },
-      "xl": { "value": "3rem" },
-      "2xl": { "value": "4rem" },
+      "sm": { "value": "0.938rem" },
+      "base": { "value": "1rem" },
+      "md": { "value": "1.063rem" },
+      "lg": { "value": "1.25rem" },
+      "xl": { "value": "1.875rem" },
+      "2xl": { "value": "2.5rem" },
       "h1": { "value": "{font.size.2xl}" },
       "h2": { "value": "{font.size.xl}" },
       "h3": { "value": "{font.size.lg}" },
