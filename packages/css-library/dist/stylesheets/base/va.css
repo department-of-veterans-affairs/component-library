@@ -1834,7 +1834,7 @@ article > h1 {
   line-height: 1.7;
   max-width: 48.125rem;
 }
-.va-introtext p {
+.va-introtext p, .va-introtext a {
   font-size: 1.25rem;
   font-weight: 400;
   line-height: 1.7;
