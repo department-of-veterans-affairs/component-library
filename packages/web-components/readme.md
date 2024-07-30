@@ -21,28 +21,32 @@ Stencil components are just Web Components, so they work in any major framework 
 
 ## Getting Started
 
-To start building a new web component using Stencil:
+To start building a new web component using Stencil, first cd into `packages/web-components`.
 
-run:
+Run:
 
 ```bash
-npm install
-npm serve
+yarn install
 ```
-running `npm serve` will start the dev server so the new component can be viewed in the browser. 
 
-After creating and naming your component, add it to `./index.html` so the dev server picks it up. Remove the `<my-component />` dummy component from index.html 
+There are two ways this project can be run for development. 
+
+For developing and testing with storybook, follow [these steps](https://github.com/department-of-veterans-affairs/component-library?tab=readme-ov-file#running-build-via-storybook). 
+
+For just running the stencil dev server, ensure your working directory is still `packages/web-components` and run then `yarn serve`. 
+
+If just running the stencil dev server, after creating and naming your component, add it to `src/index.html` so the dev server picks it up. Remove the `<my-component />` dummy component from index.html 
 
 To build for production, run:
 
 ```bash
-npm run build
+yarn run build
 ```
 
 To run the unit tests for the components, run:
 
 ```bash
-npm test
+yarn test
 ```
 
 Need help? Check out our docs [here](https://stenciljs.com/docs/my-first-component).
