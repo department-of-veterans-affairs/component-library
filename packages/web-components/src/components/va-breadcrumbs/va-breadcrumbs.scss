@@ -37,8 +37,19 @@
   }
 }
 
-// Styles for V3 mode
+// Styles for V3 
 :host(:not([uswds='false'])) {
+  .usa-breadcrumb {
+    padding-top: 20px;
+    padding-bottom: 32px;
+  }
+
+  @media (min-width: 768px) {
+    .usa-breadcrumb {
+      padding-bottom: 48px;
+    }
+  }
+
   .usa-breadcrumb__link {
     color: var(--vads-color-link);
   }

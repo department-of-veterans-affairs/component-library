@@ -2053,11 +2053,11 @@
     },
     "size": {
       "sm": {
-        "value": "1.5rem",
+        "value": "0.938rem",
         "filePath": "tokens/fonts.json",
         "isSource": true,
         "original": {
-          "value": "1.5rem"
+          "value": "0.938rem"
         },
         "name": "font-size-sm",
         "attributes": {
@@ -2072,11 +2072,11 @@
         ]
       },
       "base": {
-        "value": "1.6rem",
+        "value": "1rem",
         "filePath": "tokens/fonts.json",
         "isSource": true,
         "original": {
-          "value": "1.6rem"
+          "value": "1rem"
         },
         "name": "font-size-base",
         "attributes": {
@@ -2091,11 +2091,11 @@
         ]
       },
       "md": {
-        "value": "1.7rem",
+        "value": "1.063rem",
         "filePath": "tokens/fonts.json",
         "isSource": true,
         "original": {
-          "value": "1.7rem"
+          "value": "1.063rem"
         },
         "name": "font-size-md",
         "attributes": {
@@ -2110,11 +2110,11 @@
         ]
       },
       "lg": {
-        "value": "2rem",
+        "value": "1.25rem",
         "filePath": "tokens/fonts.json",
         "isSource": true,
         "original": {
-          "value": "2rem"
+          "value": "1.25rem"
         },
         "name": "font-size-lg",
         "attributes": {
@@ -2129,11 +2129,11 @@
         ]
       },
       "xl": {
-        "value": "3rem",
+        "value": "1.875rem",
         "filePath": "tokens/fonts.json",
         "isSource": true,
         "original": {
-          "value": "3rem"
+          "value": "1.875rem"
         },
         "name": "font-size-xl",
         "attributes": {
@@ -2148,11 +2148,11 @@
         ]
       },
       "2xl": {
-        "value": "4rem",
+        "value": "2.5rem",
         "filePath": "tokens/fonts.json",
         "isSource": true,
         "original": {
-          "value": "4rem"
+          "value": "2.5rem"
         },
         "name": "font-size-2xl",
         "attributes": {
@@ -2167,7 +2167,7 @@
         ]
       },
       "h1": {
-        "value": "4rem",
+        "value": "2.5rem",
         "filePath": "tokens/fonts.json",
         "isSource": true,
         "original": {
@@ -2186,7 +2186,7 @@
         ]
       },
       "h2": {
-        "value": "3rem",
+        "value": "1.875rem",
         "filePath": "tokens/fonts.json",
         "isSource": true,
         "original": {
@@ -2205,7 +2205,7 @@
         ]
       },
       "h3": {
-        "value": "2rem",
+        "value": "1.25rem",
         "filePath": "tokens/fonts.json",
         "isSource": true,
         "original": {
@@ -2224,7 +2224,7 @@
         ]
       },
       "h4": {
-        "value": "1.7rem",
+        "value": "1.063rem",
         "filePath": "tokens/fonts.json",
         "isSource": true,
         "original": {
@@ -2243,7 +2243,7 @@
         ]
       },
       "h5": {
-        "value": "1.5rem",
+        "value": "0.938rem",
         "filePath": "tokens/fonts.json",
         "isSource": true,
         "original": {
@@ -2262,7 +2262,7 @@
         ]
       },
       "h6": {
-        "value": "1.5rem",
+        "value": "0.938rem",
         "filePath": "tokens/fonts.json",
         "isSource": true,
         "original": {
@@ -2324,11 +2324,11 @@
       ]
     },
     "1": {
-      "value": "0.8rem",
+      "value": "0.5rem",
       "filePath": "tokens/spacing.json",
       "isSource": true,
       "original": {
-        "value": "0.8rem"
+        "value": "0.5rem"
       },
       "name": "units-1",
       "attributes": {
@@ -2341,11 +2341,11 @@
       ]
     },
     "2": {
-      "value": "1.6rem",
+      "value": "1rem",
       "filePath": "tokens/spacing.json",
       "isSource": true,
       "original": {
-        "value": "1.6rem"
+        "value": "1rem"
       },
       "name": "units-2",
       "attributes": {
@@ -2358,11 +2358,11 @@
       ]
     },
     "3": {
-      "value": "2.4rem",
+      "value": "1.5rem",
       "filePath": "tokens/spacing.json",
       "isSource": true,
       "original": {
-        "value": "2.4rem"
+        "value": "1.5rem"
       },
       "name": "units-3",
       "attributes": {
@@ -2375,11 +2375,11 @@
       ]
     },
     "4": {
-      "value": "3.2rem",
+      "value": "2rem",
       "filePath": "tokens/spacing.json",
       "isSource": true,
       "original": {
-        "value": "3.2rem"
+        "value": "2rem"
       },
       "name": "units-4",
       "attributes": {
@@ -2392,11 +2392,11 @@
       ]
     },
     "5": {
-      "value": "4rem",
+      "value": "2.5rem",
       "filePath": "tokens/spacing.json",
       "isSource": true,
       "original": {
-        "value": "4rem"
+        "value": "2.5rem"
       },
       "name": "units-5",
       "attributes": {
@@ -2409,11 +2409,11 @@
       ]
     },
     "6": {
-      "value": "4.8rem",
+      "value": "3rem",
       "filePath": "tokens/spacing.json",
       "isSource": true,
       "original": {
-        "value": "4.8rem"
+        "value": "3rem"
       },
       "name": "units-6",
       "attributes": {
@@ -2426,11 +2426,11 @@
       ]
     },
     "7": {
-      "value": "5.6rem",
+      "value": "3.5rem",
       "filePath": "tokens/spacing.json",
       "isSource": true,
       "original": {
-        "value": "5.6rem"
+        "value": "3.5rem"
       },
       "name": "units-7",
       "attributes": {
@@ -2443,11 +2443,11 @@
       ]
     },
     "8": {
-      "value": "6.4rem",
+      "value": "4rem",
       "filePath": "tokens/spacing.json",
       "isSource": true,
       "original": {
-        "value": "6.4rem"
+        "value": "4rem"
       },
       "name": "units-8",
       "attributes": {
@@ -2460,11 +2460,11 @@
       ]
     },
     "9": {
-      "value": "7.2rem",
+      "value": "4.5rem",
       "filePath": "tokens/spacing.json",
       "isSource": true,
       "original": {
-        "value": "7.2rem"
+        "value": "4.5rem"
       },
       "name": "units-9",
       "attributes": {
@@ -2477,11 +2477,11 @@
       ]
     },
     "10": {
-      "value": "8rem",
+      "value": "5rem",
       "filePath": "tokens/spacing.json",
       "isSource": true,
       "original": {
-        "value": "8rem"
+        "value": "5rem"
       },
       "name": "units-10",
       "attributes": {
@@ -2494,11 +2494,11 @@
       ]
     },
     "15": {
-      "value": "12rem",
+      "value": "7.5rem",
       "filePath": "tokens/spacing.json",
       "isSource": true,
       "original": {
-        "value": "12rem"
+        "value": "7.5rem"
       },
       "name": "units-15",
       "attributes": {
@@ -2545,11 +2545,11 @@
       ]
     },
     "0p5": {
-      "value": "0.4rem",
+      "value": "0.25rem",
       "filePath": "tokens/spacing.json",
       "isSource": true,
       "original": {
-        "value": "0.4rem"
+        "value": "0.25rem"
       },
       "name": "units-0p5",
       "attributes": {
@@ -2562,11 +2562,11 @@
       ]
     },
     "1p5": {
-      "value": "1.2rem",
+      "value": "0.75rem",
       "filePath": "tokens/spacing.json",
       "isSource": true,
       "original": {
-        "value": "1.2rem"
+        "value": "0.75rem"
       },
       "name": "units-1p5",
       "attributes": {
@@ -2579,11 +2579,11 @@
       ]
     },
     "2p5": {
-      "value": "2rem",
+      "value": "1.25rem",
       "filePath": "tokens/spacing.json",
       "isSource": true,
       "original": {
-        "value": "2rem"
+        "value": "1.25rem"
       },
       "name": "units-2p5",
       "attributes": {
@@ -2630,7 +2630,7 @@
       ]
     },
     "neg-0p5": {
-      "value": "-0.4rem",
+      "value": "-0.25rem",
       "filePath": "tokens/spacing.json",
       "isSource": true,
       "original": {
@@ -2647,7 +2647,7 @@
       ]
     },
     "neg-1": {
-      "value": "-0.8rem",
+      "value": "-0.5rem",
       "filePath": "tokens/spacing.json",
       "isSource": true,
       "original": {
@@ -2664,7 +2664,7 @@
       ]
     },
     "neg-1p5": {
-      "value": "-1.2rem",
+      "value": "-0.75rem",
       "filePath": "tokens/spacing.json",
       "isSource": true,
       "original": {
@@ -2681,7 +2681,7 @@
       ]
     },
     "neg-2": {
-      "value": "-1.6rem",
+      "value": "-1rem",
       "filePath": "tokens/spacing.json",
       "isSource": true,
       "original": {
@@ -2698,7 +2698,7 @@
       ]
     },
     "neg-2p5": {
-      "value": "-2rem",
+      "value": "-1.25rem",
       "filePath": "tokens/spacing.json",
       "isSource": true,
       "original": {
@@ -2715,7 +2715,7 @@
       ]
     },
     "neg-3": {
-      "value": "-2.4rem",
+      "value": "-1.5rem",
       "filePath": "tokens/spacing.json",
       "isSource": true,
       "original": {
@@ -2732,7 +2732,7 @@
       ]
     },
     "neg-4": {
-      "value": "-3.2rem",
+      "value": "-2rem",
       "filePath": "tokens/spacing.json",
       "isSource": true,
       "original": {
@@ -2749,7 +2749,7 @@
       ]
     },
     "neg-5": {
-      "value": "-4rem",
+      "value": "-2.5rem",
       "filePath": "tokens/spacing.json",
       "isSource": true,
       "original": {
@@ -2766,7 +2766,7 @@
       ]
     },
     "neg-6": {
-      "value": "-4.8rem",
+      "value": "-3rem",
       "filePath": "tokens/spacing.json",
       "isSource": true,
       "original": {
@@ -2783,7 +2783,7 @@
       ]
     },
     "neg-7": {
-      "value": "-5.6rem",
+      "value": "-3.5rem",
       "filePath": "tokens/spacing.json",
       "isSource": true,
       "original": {
@@ -2800,7 +2800,7 @@
       ]
     },
     "neg-8": {
-      "value": "-6.4rem",
+      "value": "-4rem",
       "filePath": "tokens/spacing.json",
       "isSource": true,
       "original": {
@@ -2817,7 +2817,7 @@
       ]
     },
     "neg-9": {
-      "value": "-7.2rem",
+      "value": "-4.5rem",
       "filePath": "tokens/spacing.json",
       "isSource": true,
       "original": {
@@ -2834,7 +2834,7 @@
       ]
     },
     "neg-10": {
-      "value": "-8rem",
+      "value": "-5rem",
       "filePath": "tokens/spacing.json",
       "isSource": true,
       "original": {
@@ -2851,7 +2851,7 @@
       ]
     },
     "neg-15": {
-      "value": "-12rem",
+      "value": "-7.5rem",
       "filePath": "tokens/spacing.json",
       "isSource": true,
       "original": {
