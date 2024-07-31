@@ -4,6 +4,37 @@
 
 @import '../../mixins/focusable.css';
 
+:host {
+  display: block;
+}
+
+:host(:not(:last-child)) {
+  margin-bottom: 0.5rem;
+}
+
+:host(:last-child) {
+  margin-bottom: 0.3125rem;
+}
+
+button {
+  font: inherit;
+  line-height: 1.15;
+}
+
+/* Hiding since element would be duplicated via the Shadow DOM */
+::slotted([slot='headline']) {
+  display: none;
+}
+
+::slotted([slot='icon']),
+::slotted([slot='subheader-icon']){
+  width: .625rem;
+  margin-right: .938rem;
+}
+
+::slotted([slot='subheader-icon']) {
+  margin-top: 0.2rem;
+}
 
 /**
   Custom classes and overrides to add in subheader and icon functionality
@@ -41,40 +72,7 @@
   }
 }
 
-:host {
-  display: block;
-}
-
-:host(:not(:last-child)) {
-  margin-bottom: 0.5rem;
-}
-
-:host(:last-child) {
-  margin-bottom: 0.3125rem;
-}
-
 :host(:not([open])) #content,
 :host([open='false']) #content {
   display: none;
-}
-
-button {
-  font-family: var(--font-source-sans);
-  font-size: 1.06rem;
-  line-height: 1.15;
-}
-
-/* Hiding since element would be duplicated via the Shadow DOM */
-::slotted([slot='headline']) {
-  display: none;
-}
-
-::slotted([slot='icon']),
-::slotted([slot='subheader-icon']){
-  width: .625rem;
-  margin-right: .938rem;
-}
-
-::slotted([slot='subheader-icon']) {
-  margin-top: 0.2rem;
 }

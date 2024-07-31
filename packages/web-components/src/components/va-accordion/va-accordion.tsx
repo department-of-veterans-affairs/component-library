@@ -184,7 +184,7 @@ export class VaAccordion {
   }
 
   render() {
-    const {openSingle} = this;
+    const { openSingle } = this;
 
     const accordionClass = classNames({
       'usa-accordion': true,

@@ -10,6 +10,7 @@ import {
 } from '@stencil/core';
 import { getSlottedNodes } from '../../utils/utils';
 import classNames from 'classnames';
+
 @Component({
   tag: 'va-accordion-item',
   styleUrl: 'va-accordion-item.scss',
@@ -101,7 +102,7 @@ export class VaAccordionItem {
   }
 
   render() {
-    const {bordered, header, subheader, level, open} = this;
+    const { bordered, header, subheader, level, open } = this;
     const accordionItemClass = classNames({
       'usa-accordion--bordered': bordered,
     });
@@ -127,7 +128,7 @@ export class VaAccordionItem {
             }}
             part="accordion-header"
           >
-            <span class="usa-accordion__header va-accordion__header">
+            <span class="va-accordion__header">
               <slot name="icon" />
               {this.slotHeader || header || ieSlotCheckHeader}
             </span>
@@ -144,7 +145,7 @@ export class VaAccordionItem {
     return (
       <Host>
         <div class={accordionItemClass}>
-          <Header/>
+          <Header />
           <slot name="headline" onSlotchange={() => this.populateStateValues()} />
           <div
             id="content"
