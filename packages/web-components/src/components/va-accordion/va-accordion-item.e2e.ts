@@ -15,7 +15,7 @@ describe('va-accordion-item', () => {
         <div>
           <h2 class="usa-accordion__heading">
             <button aria-controls="content" aria-expanded="false" class="usa-accordion__button" type="button" part="accordion-header">
-              <span class="usa-accordion__header va-accordion__header">
+              <span class="va-accordion__header">
                 <slot name="icon"></slot>
               </span>
             </button>
@@ -172,7 +172,7 @@ describe('va-accordion-item', () => {
           <div>
             <h2 class="usa-accordion__heading">
               <button aria-controls="content" aria-expanded="false" class="usa-accordion__button" type="button" part="accordion-header">
-                <span class="usa-accordion__header va-accordion__header">
+                <span class="va-accordion__header">
                   <slot name="icon"></slot>
                   The header
                 </span>
@@ -205,7 +205,7 @@ describe('va-accordion-item', () => {
         <div>
           <h2 class="usa-accordion__heading">
             <button aria-controls="content" aria-expanded="false" class="usa-accordion__button" type="button" part="accordion-header">
-              <span class="usa-accordion__header va-accordion__header">
+              <span class="va-accordion__header">
                 <slot name="icon"></slot>
                 The header
               </span>
