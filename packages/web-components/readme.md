@@ -33,7 +33,7 @@ There are two ways this project can be run for development.
 
 For developing and testing with storybook, follow [these steps](https://github.com/department-of-veterans-affairs/component-library?tab=readme-ov-file#running-build-via-storybook). 
 
-For just running the stencil dev server, ensure your working directory is still `packages/web-components` and run then `yarn serve`. 
+For just running the stencil dev server, ensure your working directory is still `packages/web-components` and then run `yarn serve`. 
 
 If just running the stencil dev server, after creating and naming your component, add it to `src/index.html` so the dev server picks it up. Remove the `<my-component />` dummy component from index.html 
 
