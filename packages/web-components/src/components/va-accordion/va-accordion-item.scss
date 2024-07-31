@@ -41,8 +41,6 @@
   }
 }
 
-/** Original Component Style **/
-
 :host {
   display: block;
 }
@@ -60,75 +58,10 @@
   display: none;
 }
 
-/* duplicate print media block needed to override above definition */
-@media print {
-  :host(:not([open])) #content,
-  :host([open='false']) #content {
-    display: block;
-  }
-}
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  margin: 0;
-}
-
 button {
-  cursor: pointer;
-  width: 100%;
-  border: 0;
-  text-align: left;
   font-family: var(--font-source-sans);
-  font-size: 1rem;
-  font-weight: 700;
+  font-size: 1.06rem;
   line-height: 1.15;
-  padding: 0.9375rem 3.4375rem 0.9375rem 1.25rem;
-  background-color: var(--vads-color-base-lightest);
-  background-image: url('../../assets/minus.svg');
-  background-position: right 1.25rem center;
-  background-repeat: no-repeat;
-  background-size: .938rem;
-  display: block;
-  /* This color assignment is for IE11 compatibility - the one in */
-  /* the va-accordion's CSS with `:host` doesn't work well */
-  color: var(--vads-color-base-darker);
-}
-
-button:not(.usa-accordion__button):hover {
-  background-color: var(--vads-color-base-lighter);
-  /* This color assignment is for IE11 compatibility - the one in */
-  /* the va-accordion's CSS with `:host` doesn't work well */
-  color: var(--vads-color-base-darker);
-}
-
-#content:not(.usa-accordion__content) {
-  background-color: var(--vads-color-white);
-  overflow: auto;
-  padding: 0.9375rem 1.25rem;
-  border-left: var(--item-border);
-  border-right: var(--item-border);
-  border-bottom: var(--item-border);
-  overflow-wrap: break-word;
-}
-
-button[aria-expanded='false']:not(.usa-accordion__button) {
-  background-image: url('../../assets/plus.svg');
-}
-
-.header-text{
-  display: flex;
-}
-
-p.subheader {
-  font-weight: 400;
-  line-height: 26px;
-  margin: 0;
-  margin-top: 0.156rem;
-  display: flex;
 }
 
 /* Hiding since element would be duplicated via the Shadow DOM */
