@@ -97,11 +97,6 @@ export class VaTextInput {
   @Prop() maxlength?: number;
 
   /**
-   * The minimum number of characters allowed in the input.
-   */
-  @Prop() minlength?: number;
-
-  /**
    * Allows the browser to automatically complete the input.
    */
   @Prop() autocomplete?: string;
@@ -147,28 +142,23 @@ export class VaTextInput {
   @Prop() width?: string;
 
   /**
-   * Whether or not the component will use USWDS v3 styling.
-   */
-  @Prop({reflect: true}) uswds?: boolean = true;
-
-  /**
-   * Enabling this will add a heading and description for integrating into the forms pattern. Accepts `single` or `multiple` to indicate if the form is a single input or will have multiple inputs. `uswds` should be true.
+   * Enabling this will add a heading and description for integrating into the forms pattern. Accepts `single` or `multiple` to indicate if the form is a single input or will have multiple inputs.
    */
   @Prop() useFormsPattern?: string;
 
   /**
-   * The heading level for the heading if `useFormsPattern` and `uswds` are true.
+   * The heading level for the heading if `useFormsPattern`is true.
    */
   @Prop() formHeadingLevel?: number = 3;
 
   /**
-   * The content of the heading if `useFormsPattern` and `uswds` are true.
+   * The content of the heading if `useFormsPattern` is true.
    */
   @Prop() formHeading?: string;
 
     /**
    * Whether the component should show a character count message.
-   * Has no effect without uswds and maxlength being set.
+   * Has no effect without maxlength being set.
    */
     @Prop() charcount?: boolean = false;
 
@@ -334,14 +324,6 @@ export class VaTextInput {
     i18next.off('languageChanged');
   }
 
-  componentDidLoad() {
-    // check if the element has a class named uswds-false added from parent
-    if (this.el.classList.contains('uswds-false')) {
-      // add attribute manually
-      this.el.setAttribute('uswds', 'false');
-    }
-  }
-
   render() {
     const {
       label,
@@ -350,13 +332,11 @@ export class VaTextInput {
       invalid,
       required,
       value,
-      minlength,
       name,
       autocomplete,
       hint,
       handleInput,
       handleBlur,
-      uswds,
       success,
       messageAriaDescribedby,
       width,
@@ -405,144 +385,76 @@ export class VaTextInput {
 
     const style = getInputStyle();
 
-    if (uswds) {
-      const charCountTooHigh = maxlength && (value?.length > maxlength);
-      const labelClass = classnames({
-        'usa-label': true,
-        'usa-label--error': error,
-      });
-      const inputClass = classnames({
-        'usa-input': true,
-        'usa-input--success': success,
-        'usa-input--error': error || reflectInputError,
-        [`usa-input--${width}`]: width,
-      });
-      const messageClass = classnames({
-        'usa-hint': true,
-        'usa-character-count__status': maxlength,
-        'usa-character-count__status--invalid': maxlength && value?.length > maxlength
-      });
+    const charCountTooHigh = maxlength && (value?.length > maxlength);
+    const labelClass = classnames({
+      'usa-label': true,
+      'usa-label--error': error,
+    });
+    const inputClass = classnames({
+      'usa-input': true,
+      'usa-input--success': success,
+      'usa-input--error': error || reflectInputError,
+      [`usa-input--${width}`]: width,
+    });
+    const messageClass = classnames({
+      'usa-hint': true,
+      'usa-character-count__status': maxlength,
+      'usa-character-count__status--invalid': maxlength && value?.length > maxlength
+    });
 
-      const isFormsPattern = useFormsPattern === 'single' || useFormsPattern === 'multiple' ? true : false;
-      let formsHeading = null;
-      if (isFormsPattern) {
-        const HeaderLevel = getHeaderLevel(formHeadingLevel);
-        formsHeading = (
-          <Fragment>
-            {formHeading &&
-              <HeaderLevel id="form-question" part="form-header">
-                {formHeading}
-              </HeaderLevel>
-            }
-            <div id="form-description">
-              <slot name="form-description"></slot>
-            </div>
-          </Fragment>
-        )
-      }
-
-      return (
-        <Host>
-          {formsHeading}
-          <div class="input-wrap">
-            {label && (
-              <label
-                htmlFor="inputField"
-                id="input-label"
-                class={labelClass}
-                part="label"
-              >
-                {label}
-                {required && (
-                  <span class="usa-label--required">
-                    {' '}
-                    {i18next.t('required')}
-                  </span>
-                )}
-                {hint && <span class="usa-hint">{hint}</span>}
-              </label>
-            )}
-            <slot></slot>
-            <span id="input-error-message" role="alert">
-              {error && (
-                <Fragment>
-                  <span class="usa-sr-only">{i18next.t('error')}</span>
-                  <span class="usa-error-message">{error}</span>
-                </Fragment>
-              )}
-            </span>
-            <div class={currencyWrapper}>
-              {currency && <div id="symbol">$</div>}
-              {inputPrefix && <div class="usa-input-prefix" part="input-prefix">{inputPrefix.substring(0, 25)}</div>}
-              {inputIconPrefix && <div class="usa-input-prefix" part="input-prefix"><va-icon icon={inputIconPrefix} size={3} part="icon"></va-icon></div>}
-              
-              <input
-                class={inputClass}
-                id="inputField"
-                type={type}
-                value={value}
-                onInput={handleInput}
-                onBlur={handleBlur}
-                aria-describedby={ariaDescribedbyIds}
-                style={style}
-                aria-labelledby={ariaLabeledByIds}
-                aria-invalid={
-                  invalid || error || charCountTooHigh ? 'true' : 'false'
-                }
-                inputmode={inputmode}
-                maxlength={maxlength}
-                pattern={pattern}
-                name={name}
-                autocomplete={autocomplete}
-                required={required || null}
-                part="input"
-                min={min}
-                max={max}
-              />
-              {inputSuffix && <div class="usa-input-suffix" part="suffix" aria-hidden="true">{inputSuffix.substring(0, 25)}</div>}
-            </div>
-            {messageAriaDescribedby && (
-              <span id="input-message" class="sr-only dd-privacy-hidden">
-                {messageAriaDescribedby}
-              </span>
-            )}
-            {charcount && maxlength && (
-              <span
-                id="charcount-message"
-                class={messageClass}
-                aria-live="polite"
-              >
-                {getCharacterMessage(value, maxlength)}
-              </span>
-            )}
+    const isFormsPattern = useFormsPattern === 'single' || useFormsPattern === 'multiple' ? true : false;
+    let formsHeading = null;
+    if (isFormsPattern) {
+      const HeaderLevel = getHeaderLevel(formHeadingLevel);
+      formsHeading = (
+        <Fragment>
+          {formHeading &&
+            <HeaderLevel id="form-question" part="form-header">
+              {formHeading}
+            </HeaderLevel>
+          }
+          <div id="form-description">
+            <slot name="form-description"></slot>
           </div>
-        </Host>
-      );
-    } else {
-      const inputClass = classnames({
-        [`usa-input--${width}`]: width,
-      });
-      return (
-        <Host>
+        </Fragment>
+      )
+    }
+
+    return (
+      <Host>
+        {formsHeading}
+        <div class="input-wrap">
           {label && (
-            <label htmlFor="inputField" part="label">
-              {label}{' '}
+            <label
+              htmlFor="inputField"
+              id="input-label"
+              class={labelClass}
+              part="label"
+            >
+              {label}
               {required && (
-                <span class="required">{i18next.t('required')}</span>
+                <span class="usa-label--required">
+                  {' '}
+                  {i18next.t('required')}
+                </span>
               )}
-              {hint && <span class="hint-text">{hint}</span>}
+              {hint && <span class="usa-hint">{hint}</span>}
             </label>
           )}
           <slot></slot>
           <span id="input-error-message" role="alert">
             {error && (
               <Fragment>
-                <span class="sr-only">{i18next.t('error')}</span> {error}
+                <span class="usa-sr-only">{i18next.t('error')}</span>
+                <span class="usa-error-message">{error}</span>
               </Fragment>
             )}
           </span>
           <div class={currencyWrapper}>
-            {currency && <div>$</div>}
+            {currency && <div id="symbol">$</div>}
+            {inputPrefix && <div class="usa-input-prefix" part="input-prefix">{inputPrefix.substring(0, 25)}</div>}
+            {inputIconPrefix && <div class="usa-input-prefix" part="input-prefix"><va-icon icon={inputIconPrefix} size={3} part="icon"></va-icon></div>}
+            
             <input
               class={inputClass}
               id="inputField"
@@ -551,36 +463,39 @@ export class VaTextInput {
               onInput={handleInput}
               onBlur={handleBlur}
               aria-describedby={ariaDescribedbyIds}
-              aria-invalid={invalid || error ? 'true' : 'false'}
+              style={style}
+              aria-labelledby={ariaLabeledByIds}
+              aria-invalid={
+                invalid || error || charCountTooHigh ? 'true' : 'false'
+              }
               inputmode={inputmode}
               maxlength={maxlength}
-              minlength={minlength}
               pattern={pattern}
               name={name}
               autocomplete={autocomplete}
               required={required || null}
               part="input"
-              max={max}
               min={min}
+              max={max}
             />
+            {inputSuffix && <div class="usa-input-suffix" part="suffix" aria-hidden="true">{inputSuffix.substring(0, 25)}</div>}
           </div>
           {messageAriaDescribedby && (
-            <span id="input-message" class="sr-only dd-privacy-hidden">
+            <span id="input-message" class="usa-sr-only dd-privacy-hidden">
               {messageAriaDescribedby}
             </span>
           )}
-          {charcount && maxlength && value?.length >= maxlength && (
-            <small id="maxlength-message"  part="validation" aria-live="polite">
-              {i18next.t('max-chars', { length: maxlength })}
-            </small>
+          {charcount && maxlength && (
+            <span
+              id="charcount-message"
+              class={messageClass}
+              aria-live="polite"
+            >
+              {getCharacterMessage(value, maxlength)}
+            </span>
           )}
-          {charcount && minlength && value?.length < minlength && (
-            <small id="charcount-message" part="validation">
-              {i18next.t('min-chars', { length: minlength })}
-            </small>
-          )}
-        </Host>
-      );
-    }
+        </div>
+      </Host>
+    );
   }
 }
