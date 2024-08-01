@@ -54,22 +54,22 @@
   }
 }
 
-header {
+#header {
   padding-bottom: 6px;
   padding-top: 6px;
   position: relative;
 }
 
-header.expanded .header-action {
+#header.expanded .header-action {
   display: none;
 }
 
 @media (max-width: 767px) {
-  header {
+  #header {
     min-height: 32px;
   }
 
-  header.expanded {
+  #header.expanded {
     padding-right: 56px;
   }
 }
@@ -185,11 +185,11 @@ button:hover {
 
 // Mobile display dropdown/expand more arrow.
 @media (max-width: 767px) {
-  header .header-action::after, header.expanded .header-action::after {
+  #header .header-action::after, #header.expanded .header-action::after {
     background-color: #005ea2;
   }
 
-  header.expanded .header-action::after, header .header-action::after {
+  #header.expanded .header-action::after, #header .header-action::after {
     background: 0 0;
     background-color: #005ea2;
     -webkit-mask: url("../../../../../node_modules/@uswds/uswds/dist/img/usa-icons/expand_more.svg") no-repeat center/contain;
@@ -210,7 +210,7 @@ button:hover {
     position: absolute;
   }
 
-  button::after, header.expanded button::after {
+  button::after, #header.expanded button::after {
     background: 0 0;
     background-color: #005ea2;
     display: inline-block;
@@ -227,7 +227,7 @@ button:hover {
     mask: url("../../../../../node_modules/@uswds/uswds/dist/img/usa-icons/expand_more.svg") no-repeat center/contain;
   }
 
-  header.expanded button::after {
+  #header.expanded button::after {
     -webkit-mask: url("../../../../../node_modules/@uswds/uswds/dist/img/usa-icons/expand_less.svg") no-repeat center/contain;
     mask: url("../../../../../node_modules/@uswds/uswds/dist/img/usa-icons/expand_less.svg") no-repeat center/contain;
   }
