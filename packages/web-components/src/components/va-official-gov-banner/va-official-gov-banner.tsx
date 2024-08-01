@@ -72,7 +72,7 @@ export class VaOfficialGovBanner {
   private handleClick = () => {
     const content = this.el.shadowRoot?.querySelector('.content') as HTMLElement;
     const button = this.el.shadowRoot?.querySelector('button') as HTMLElement;
-    const header = this.el.shadowRoot?.querySelector('header') as HTMLElement;
+    const header = this.el.shadowRoot?.querySelector('div#header') as HTMLElement;
 
     button.setAttribute(
       'aria-expanded',
@@ -141,12 +141,9 @@ export class VaOfficialGovBanner {
     if (tld === 'gov' || tld === 'mil') {
       return (
         <Host>
-          <section
-            class="banner"
-            aria-label={i18next.t('gov-site-label')}
-          >
+            <div class="banner">
             <div class="accordion"  >
-              <header >
+              <div id="header">
                 <div class="inner">
                   <div class="grid-col-auto">
                     <img
@@ -167,7 +164,7 @@ export class VaOfficialGovBanner {
                     <span class="button-text">{i18next.t('gov-site-button')}</span>
                   </button>
                 </div>
-              </header>
+              </div>
 
               <div class="content" id="official-gov-banner" hidden>
                 <div class="grid-row">
@@ -201,9 +198,8 @@ export class VaOfficialGovBanner {
                   </div>
                 </div>
               </div>
-
             </div>
-          </section>
+          </div>
         </Host>
       );
     }
