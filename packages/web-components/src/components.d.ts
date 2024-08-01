@@ -20,10 +20,6 @@ export namespace Components {
           * Optional accordion section heading text. Only used in analytics event. Default is null.
          */
         "sectionHeading"?: string;
-        /**
-          * Whether or not the component will use USWDS v3 styling.
-         */
-        "uswds"?: boolean;
     }
     interface VaAccordionItem {
         /**
@@ -46,10 +42,6 @@ export namespace Components {
           * Optional accordion item subheader text. Default is null.
          */
         "subheader"?: string;
-        /**
-          * Whether or not the component will use USWDS v3 styling.
-         */
-        "uswds"?: boolean;
     }
     interface VaAdditionalInfo {
         /**
@@ -2107,10 +2099,6 @@ declare namespace LocalJSX {
           * Optional accordion section heading text. Only used in analytics event. Default is null.
          */
         "sectionHeading"?: string;
-        /**
-          * Whether or not the component will use USWDS v3 styling.
-         */
-        "uswds"?: boolean;
     }
     interface VaAccordionItem {
         /**
@@ -2137,10 +2125,6 @@ declare namespace LocalJSX {
           * Optional accordion item subheader text. Default is null.
          */
         "subheader"?: string;
-        /**
-          * Whether or not the component will use USWDS v3 styling.
-         */
-        "uswds"?: boolean;
     }
     interface VaAdditionalInfo {
         /**

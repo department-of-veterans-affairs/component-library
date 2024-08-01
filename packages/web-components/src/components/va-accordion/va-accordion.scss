@@ -4,27 +4,6 @@
 
 @import '../../mixins/focusable.css';
 
-@media print {
-  button.va-accordion__button {
-    display: none;
-  }
-}
-
-/** Original Component Style **/
-
-:host([uswds='false']) {
-  display: block;
-  width: 100%;
-  color: var(--vads-color-base-darker);
-  --item-border: none; /* This is to overwrite any previous inherited value */
-}
-
-/* If `bordered` is present and if it is *not* false */
-:host([bordered='true'][uswds='false']),
-:host([bordered=''][uswds='false']) {
-  --item-border: 3px solid var(--vads-color-base-lightest);
-}
-
 button.va-accordion__button {
   border: none;
   color: var(--vads-color-link);
@@ -34,4 +13,10 @@ button.va-accordion__button {
   font-family: inherit;
   font-weight: bold;
   float: right;
+}
+
+@media print {
+  button.va-accordion__button {
+    display: none;
+  }
 }

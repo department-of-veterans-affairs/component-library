@@ -10,6 +10,7 @@ import {
 } from '@stencil/core';
 import { getSlottedNodes } from '../../utils/utils';
 import classNames from 'classnames';
+
 @Component({
   tag: 'va-accordion-item',
   styleUrl: 'va-accordion-item.scss',
@@ -54,11 +55,6 @@ export class VaAccordionItem {
    * Whether or not the accordion item will have a border
    */
   @Prop() bordered?: boolean = false;
-
-  /**
-   * Whether or not the component will use USWDS v3 styling.
-   */
-  @Prop() uswds?: boolean = true;
 
   /**
    * Local State for slot=headline replacement of props (header).
@@ -106,111 +102,61 @@ export class VaAccordionItem {
   }
 
   render() {
-    const {uswds} = this;
-
-    if (uswds) {
-      const {bordered, header, subheader, level, open} = this;
-      const accordionItemClass = classNames({
-        'usa-accordion--bordered': bordered,
-      });
-      const Header = () => {
-        const headline = this.el.querySelector('[slot="headline"]');
-        const ieSlotCheckHeader = headline?.innerHTML;
+    const { bordered, header, subheader, level, open } = this;
+    const accordionItemClass = classNames({
+      'usa-accordion--bordered': bordered,
+    });
+    const Header = () => {
+      const headline = this.el.querySelector('[slot="headline"]');
+      const ieSlotCheckHeader = headline?.innerHTML;
+      // eslint-disable-next-line i18next/no-literal-string
+      const Tag = (headline && headline.tagName.includes("H"))
+        ? headline.tagName.toLowerCase()
         // eslint-disable-next-line i18next/no-literal-string
-        const Tag = (headline && headline.tagName.includes("H"))
-          ? headline.tagName.toLowerCase()
-          // eslint-disable-next-line i18next/no-literal-string
-          : `h${level}`;
-
-        return (
-          <Tag class="usa-accordion__heading">
-            <button
-              type="button"
-              class="usa-accordion__button"
-              aria-expanded={open ? 'true' : 'false'}
-              aria-controls="content"
-              onClick={this.toggleOpen.bind(this)}
-              ref={el => {
-                this.expandButton = el;
-              }}
-              part="accordion-header"
-            >
-              <span class="usa-accordion__header va-accordion__header">
-                <slot name="icon" />
-                {this.slotHeader || header || ieSlotCheckHeader}
-              </span>
-              {this.subheader &&
-                <span class="va-accordion__subheader">
-                  <slot name="subheader-icon" />
-                  {subheader}
-                </span>}
-            </button>
-          </Tag >
-        );
-      }
+        : `h${level}`;
 
       return (
-        <Host>
-          <div class={accordionItemClass}>
-            <Header/>
-            <slot name="headline" onSlotchange={() => this.populateStateValues()} />
-            <div
-              id="content"
-              class="usa-accordion__content usa-prose"
-              hidden={!open}
-              part="accordion-content"
-            >
-              <slot/>
-            </div>
-          </div>
-        </Host>
-      )
-
-    } else {
-
-      const Header = () => {
-        const headline = this.el.querySelector('[slot="headline"]');
-        const ieSlotCheckHeader = headline?.innerHTML;
-
-        // eslint-disable-next-line i18next/no-literal-string
-        const Tag = (headline && headline.tagName.includes("H"))
-          ? headline.tagName.toLowerCase()
-          // eslint-disable-next-line i18next/no-literal-string
-          : `h${this.level}`;
-
-        return (
-          <Tag>
-            <button
-              ref={el => {
-                this.expandButton = el;
-              }}
-              onClick={this.toggleOpen.bind(this)}
-              aria-expanded={this.open ? 'true' : 'false'}
-              aria-controls="content"
-              part="accordion-header"
-            >
-              <span class="header-text">
-                <slot name="icon" />
-                {this.slotHeader || this.header || ieSlotCheckHeader}
-              </span>
-              {this.subheader &&
-                <p class="subheader" part='accordion-subheader'>
-                  <slot name="subheader-icon" />
-                  {this.subheader}
-                </p>}
-            </button>
-          </Tag >
-        );
-      }
-      return (
-        <Host>
-          <Header />
-          <slot name="headline" onSlotchange={() => this.populateStateValues()} />
-          <div id="content">
-            <slot />
-          </div>
-        </Host>
+        <Tag class="usa-accordion__heading">
+          <button
+            type="button"
+            class="usa-accordion__button"
+            aria-expanded={open ? 'true' : 'false'}
+            aria-controls="content"
+            onClick={this.toggleOpen.bind(this)}
+            ref={el => {
+              this.expandButton = el;
+            }}
+            part="accordion-header"
+          >
+            <span class="va-accordion__header">
+              <slot name="icon" />
+              {this.slotHeader || header || ieSlotCheckHeader}
+            </span>
+            {this.subheader &&
+              <span class="va-accordion__subheader">
+                <slot name="subheader-icon" />
+                {subheader}
+              </span>}
+          </button>
+        </Tag >
       );
     }
+
+    return (
+      <Host>
+        <div class={accordionItemClass}>
+          <Header />
+          <slot name="headline" onSlotchange={() => this.populateStateValues()} />
+          <div
+            id="content"
+            class="usa-accordion__content usa-prose"
+            hidden={!open}
+            part="accordion-content"
+          >
+            <slot/>
+          </div>
+        </div>
+      </Host>
+    )
   }
 }
