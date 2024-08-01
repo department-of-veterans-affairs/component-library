@@ -373,13 +373,13 @@ export class VaFileInput {
       else if (fileContents) {
         if (fileType.startsWith('image/')) {
           fileThumbnail = (
-            <div class="thumbnail-container">
+            <div class="thumbnail-container" aria-hidden="true">
               <img class="thumbnail-preview" src={fileContents} alt="image" />
             </div>
           );
         } else if (fileType === 'application/pdf') {
           fileThumbnail = (
-            <div class="thumbnail-container">
+            <div class="thumbnail-container" aria-hidden="true">
               <object
                 class="thumbnail-preview"
                 data={fileContents}
