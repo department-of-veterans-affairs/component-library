@@ -9,7 +9,7 @@ import {
   EventEmitter,
 } from '@stencil/core';
 import i18next from 'i18next';
-import { FileIndex } from "./FileIndex";
+import { FileIndex } from './FileIndex';
 
 /**
  * A component that manages multiple file inputs, allowing users to upload several files.
@@ -76,7 +76,7 @@ export class VaFileInputMultiple {
   /**
    * Internal state to track files and their unique keys.
    */
-  @State() files: FileIndex[] = [{ key: 0, file: null , content: null}];
+  @State() files: FileIndex[] = [{ key: 0, file: null, content: null }];
 
   /**
    * Counter to assign unique keys to new file inputs.
@@ -106,12 +106,12 @@ export class VaFileInputMultiple {
    * If there is no additionalSlot set, it fetches the assigned elements to this slot, ensuring that content
    * is managed only if the slot exists. This prevents the default slot content from rendering.
    */
-  private setSlotContent() {
+  private setSlotContent(): void {
     const slot = this.el.shadowRoot.querySelector('slot');
     if (!this.additionalSlot) {
       this.additionalSlot = slot
-                            ? slot.assignedElements({ flatten: true })
-                            : [];
+        ? slot.assignedElements({ flatten: true })
+        : [];
     }
     slot?.remove();
   }
@@ -123,17 +123,17 @@ export class VaFileInputMultiple {
    *
    * @returns {Node[]} An array of cloned nodes from the additionalSlot.
    */
-  private getAdditionalContent() {
+  private getAdditionalContent(): Node[] {
     return this.additionalSlot.map(n => n.cloneNode(true));
   }
 
   /**
    * Handles file input changes by updating, adding, or removing files based on user interaction.
-   * @param {any} event - The event object containing file details.
+   * @param {CustomEvent} event - The event object containing file details.
    * @param {number} fileKey - The key of the file being changed.
    * @param {number} pageIndex - The index of the file in the files array.
    */
-  private handleChange(event: any, fileKey: number, pageIndex: number) {
+  private handleChange(event: CustomEvent, fileKey: number, pageIndex: number) {
     const newFile = event.detail.files[0];
 
     if (newFile) {
@@ -156,15 +156,18 @@ export class VaFileInputMultiple {
     } else {
       // Deleted file
       this.files.splice(pageIndex, 1);
-      const statusMessageDiv = this.el.shadowRoot.querySelector("#statusMessage");
+      const statusMessageDiv =
+        this.el.shadowRoot.querySelector('#statusMessage');
       // empty status message so it is read when updated
-      statusMessageDiv.textContent = ""
+      statusMessageDiv.textContent = '';
       setTimeout(() => {
-        statusMessageDiv.textContent = "File removed."
+        statusMessageDiv.textContent = 'File removed.';
       }, 1000);
     }
 
-    this.vaMultipleChange.emit({ files: this.files.map(fileObj => fileObj.file) });
+    this.vaMultipleChange.emit({
+      files: this.files.map(fileObj => fileObj.file),
+    });
     this.files = Array.of(...this.files);
   }
 
@@ -179,7 +182,7 @@ export class VaFileInputMultiple {
     label: string,
     required: boolean,
     headerSize?: number,
-  ) => {
+  ): JSX.Element => {
     const requiredSpan = required ? (
       <span class="required"> {i18next.t('required')}</span>
     ) : null;
@@ -200,7 +203,9 @@ export class VaFileInputMultiple {
     } else {
       return (
         <div class="label-header">
-          <span part="label" class="usa-label">{label}</span>
+          <span part="label" class="usa-label">
+            {label}
+          </span>
           {requiredSpan}
         </div>
       );
@@ -228,7 +233,7 @@ export class VaFileInputMultiple {
    */
   private hasErrors = () => {
     return this.errors.some(error => !!error);
-  }
+  };
 
   /**
    * The render method to display the component structure.
@@ -247,7 +252,7 @@ export class VaFileInputMultiple {
       enableAnalytics,
     } = this;
     const outerWrapClass = this.isEmpty() ? '' : 'outer-wrap';
-    const hasError = this.hasErrors() ? 'has-error': '';
+    const hasError = this.hasErrors() ? 'has-error' : '';
 
     return (
       <Host class={hasError}>
@@ -258,7 +263,7 @@ export class VaFileInputMultiple {
           </div>
         )}
         <div class={outerWrapClass}>
-          <div class='usa-sr-only' aria-live="polite" id="statusMessage"></div>
+          <div class="usa-sr-only" aria-live="polite" id="statusMessage"></div>
           {!this.isEmpty() && (
             <div class="selected-files-label">Selected files</div>
           )}

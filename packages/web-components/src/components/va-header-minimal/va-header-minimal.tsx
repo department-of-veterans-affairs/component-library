@@ -44,8 +44,10 @@ export class VaHeaderMinimal {
   }
 
   // Redirects focus back to the modal, if the modal is open/visible
-  private trapFocus() {
-    const modal = this.el?.shadowRoot.querySelector('va-crisis-line-modal').shadowRoot.querySelector('va-modal');
+  private trapFocus(): void {
+    const modal = this.el?.shadowRoot
+      .querySelector('va-crisis-line-modal')
+      .shadowRoot.querySelector('va-modal');
     const modalVisible = modal?.getAttribute('visible');
 
     if (modalVisible !== null && modalVisible !== 'false') {
@@ -70,15 +72,25 @@ export class VaHeaderMinimal {
         <va-crisis-line-modal />
         <div onFocusin={() => this.trapFocus()} class="va-header">
           <a href="/" title="Go to VA.gov" class="va-logo-link">
-            <img class="va-logo" src={vaSeal} alt="VA logo and Seal, U.S. Department of Veterans Affairs" />
+            <img
+              class="va-logo"
+              src={vaSeal}
+              alt="VA logo and Seal, U.S. Department of Veterans Affairs"
+            />
           </a>
           <div class="header-container">
-            
-            {!disableHeadings ? <h1>{header}</h1> : <div class="header">{header}</div>}
-
-            {subheader && (
-              !disableHeadings ? <h2>{subheader}</h2> : <div class="subheader">{subheader}</div>
+            {!disableHeadings ? (
+              <h1>{header}</h1>
+            ) : (
+              <div class="header">{header}</div>
             )}
+
+            {subheader &&
+              (!disableHeadings ? (
+                <h2>{subheader}</h2>
+              ) : (
+                <div class="subheader">{subheader}</div>
+              ))}
           </div>
         </div>
       </Host>

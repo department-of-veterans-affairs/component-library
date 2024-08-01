@@ -37,12 +37,12 @@ export class VaAccordionItem {
 
   /**
    * Optional accordion item subheader text. Default is null.
-  */
+   */
   @Prop() subheader?: string = null;
 
   /**
    * True if the item is open
-  */
+   */
   @Prop() open?: boolean = false;
 
   /**
@@ -85,7 +85,7 @@ export class VaAccordionItem {
   // Data access from slot html element is being perfomed by this function
   // Function allows us to provide context to state
   // State is then being digested by the Header Function below
-  private populateStateValues() {
+  private populateStateValues(): void {
     getSlottedNodes(this.el, null).forEach((node: HTMLSlotElement) => {
       this.slotHeader = node.innerHTML;
       this.slotTag = node.tagName.toLowerCase();
@@ -106,10 +106,10 @@ export class VaAccordionItem {
   }
 
   render() {
-    const {uswds} = this;
+    const { uswds } = this;
 
     if (uswds) {
-      const {bordered, header, subheader, level, open} = this;
+      const { bordered, header, subheader, level, open } = this;
       const accordionItemClass = classNames({
         'usa-accordion--bordered': bordered,
       });
@@ -117,10 +117,11 @@ export class VaAccordionItem {
         const headline = this.el.querySelector('[slot="headline"]');
         const ieSlotCheckHeader = headline?.innerHTML;
         // eslint-disable-next-line i18next/no-literal-string
-        const Tag = (headline && headline.tagName.includes("H"))
-          ? headline.tagName.toLowerCase()
-          // eslint-disable-next-line i18next/no-literal-string
-          : `h${level}`;
+        const Tag =
+          headline && headline.tagName.includes('H')
+            ? headline.tagName.toLowerCase()
+            : // eslint-disable-next-line i18next/no-literal-string
+              `h${level}`;
 
         return (
           <Tag class="usa-accordion__heading">
@@ -139,44 +140,47 @@ export class VaAccordionItem {
                 <slot name="icon" />
                 {this.slotHeader || header || ieSlotCheckHeader}
               </span>
-              {this.subheader &&
+              {this.subheader && (
                 <span class="va-accordion__subheader">
                   <slot name="subheader-icon" />
                   {subheader}
-                </span>}
+                </span>
+              )}
             </button>
-          </Tag >
+          </Tag>
         );
-      }
+      };
 
       return (
         <Host>
           <div class={accordionItemClass}>
-            <Header/>
-            <slot name="headline" onSlotchange={() => this.populateStateValues()} />
+            <Header />
+            <slot
+              name="headline"
+              onSlotchange={() => this.populateStateValues()}
+            />
             <div
               id="content"
               class="usa-accordion__content usa-prose"
               hidden={!open}
               part="accordion-content"
             >
-              <slot/>
+              <slot />
             </div>
           </div>
         </Host>
-      )
-
+      );
     } else {
-
       const Header = () => {
         const headline = this.el.querySelector('[slot="headline"]');
         const ieSlotCheckHeader = headline?.innerHTML;
 
         // eslint-disable-next-line i18next/no-literal-string
-        const Tag = (headline && headline.tagName.includes("H"))
-          ? headline.tagName.toLowerCase()
-          // eslint-disable-next-line i18next/no-literal-string
-          : `h${this.level}`;
+        const Tag =
+          headline && headline.tagName.includes('H')
+            ? headline.tagName.toLowerCase()
+            : // eslint-disable-next-line i18next/no-literal-string
+              `h${this.level}`;
 
         return (
           <Tag>
@@ -193,19 +197,23 @@ export class VaAccordionItem {
                 <slot name="icon" />
                 {this.slotHeader || this.header || ieSlotCheckHeader}
               </span>
-              {this.subheader &&
-                <p class="subheader" part='accordion-subheader'>
+              {this.subheader && (
+                <p class="subheader" part="accordion-subheader">
                   <slot name="subheader-icon" />
                   {this.subheader}
-                </p>}
+                </p>
+              )}
             </button>
-          </Tag >
+          </Tag>
         );
-      }
+      };
       return (
         <Host>
           <Header />
-          <slot name="headline" onSlotchange={() => this.populateStateValues()} />
+          <slot
+            name="headline"
+            onSlotchange={() => this.populateStateValues()}
+          />
           <div id="content">
             <slot />
           </div>

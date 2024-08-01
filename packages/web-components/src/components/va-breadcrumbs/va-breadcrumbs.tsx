@@ -7,7 +7,7 @@ import {
   h,
   Prop,
   Watch,
-  State
+  State,
 } from '@stencil/core';
 import classnames from 'classnames';
 
@@ -69,9 +69,10 @@ export class VaBreadcrumbs {
   @Watch('breadcrumbList')
   watchBreadcrumbListHandler(breadcrumbList) {
     if (!this.breadcrumbList?.length) return;
-    let potentialBreadcrumbs = this.validateBreadcrumbs(breadcrumbList);
+    let potentialBreadcrumbs: Breadcrumb[] | boolean =
+      this.validateBreadcrumbs(breadcrumbList);
     if (potentialBreadcrumbs) {
-      this.updateBreadCrumbList(potentialBreadcrumbs);
+      this.updateBreadCrumbList(potentialBreadcrumbs as Breadcrumb[]);
     }
   }
   /**
@@ -109,7 +110,7 @@ export class VaBreadcrumbs {
    * @param breadcrumbList - An array of breadcrumb objects or a stringified version of it.
    * @private
    */
-  private updateBreadCrumbList(breadcrumbList: Breadcrumb[]) {
+  private updateBreadCrumbList(breadcrumbList: Breadcrumb[]): void {
     const firstBreadcrumb = breadcrumbList[0];
     if (firstBreadcrumb && this.homeVeteransAffairs) {
       firstBreadcrumb.label = 'VA.gov home';
@@ -118,7 +119,7 @@ export class VaBreadcrumbs {
     this.formattedBreadcrumbs = breadcrumbList;
   }
 
-  private getClickLevel(target: HTMLAnchorElement) {
+  private getClickLevel(target: HTMLAnchorElement): number {
     const anchorNodes = this.uswds
       ? Array.from(this.el.shadowRoot.querySelectorAll('a'))
       : Array.from(this.el.querySelectorAll('a'));
@@ -153,7 +154,7 @@ export class VaBreadcrumbs {
     node: HTMLSlotElement,
     index: number,
     slotNodes: Node[],
-  ) {
+  ): void {
     const li = document.createElement('li');
     li.classList.add('va-breadcrumbs-li');
     if (index === slotNodes.length - 1) {
@@ -168,7 +169,7 @@ export class VaBreadcrumbs {
     node: HTMLSlotElement,
     index: number,
     slotNodes: Node[],
-  ) {
+  ): void {
     node.classList.add('va-breadcrumbs-li');
     const anchor = node.querySelector('a');
     if (anchor && index === slotNodes.length - 1) {
@@ -177,7 +178,9 @@ export class VaBreadcrumbs {
     }
   }
 
-  private validateBreadcrumbs(breadcrumbList: Breadcrumb[] | string) {
+  private validateBreadcrumbs(
+    breadcrumbList: Breadcrumb[] | string,
+  ): boolean | Breadcrumb[] {
     let potentialBreadcrumbs: Breadcrumb[];
 
     if (Array.isArray(breadcrumbList)) {
@@ -237,10 +240,11 @@ export class VaBreadcrumbs {
     if (this.uswds) {
       if (!this.breadcrumbList?.length) return;
 
-      let potentialBreadcrumbs = this.validateBreadcrumbs(this.breadcrumbList);
+      let potentialBreadcrumbs: Breadcrumb[] | boolean =
+        this.validateBreadcrumbs(this.breadcrumbList);
 
       if (potentialBreadcrumbs) {
-        this.updateBreadCrumbList(potentialBreadcrumbs);
+        this.updateBreadCrumbList(potentialBreadcrumbs as Breadcrumb[]);
       } else return;
     }
   }
@@ -251,7 +255,7 @@ export class VaBreadcrumbs {
    * aria-current attribute on the last anchor tag and add the
    * va-breadcrumbs-li class to the list item.
    */
-  handleSlotChange() {
+  handleSlotChange(): void {
     // Get all of the slot nodes and filter out only the list items.
     const slotNodes = (
       this.el.shadowRoot.querySelector('slot') as HTMLSlotElement

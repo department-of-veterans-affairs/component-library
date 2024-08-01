@@ -93,7 +93,7 @@ export class VaButtonPair {
    * the va-button details.
    */
   @Listen('component-library-analytics')
-  handleButtonAnalytics(event) {
+  handleButtonAnalytics(event): void {
     // Prevent va-button-pair GA event from firing multiple times.
     if (event.detail.componentName === 'va-button-pair') return;
 
@@ -114,11 +114,11 @@ export class VaButtonPair {
     }
   }
 
-  private handlePrimaryClick = (e: MouseEvent) => {
+  private handlePrimaryClick = (e: MouseEvent): void => {
     this.primaryClick.emit(e);
   };
 
-  private handleSecondaryClick = (e: MouseEvent) => {
+  private handleSecondaryClick = (e: MouseEvent): void => {
     this.secondaryClick.emit(e);
   };
 

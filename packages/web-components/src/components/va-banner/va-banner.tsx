@@ -87,9 +87,10 @@ export class VaBanner {
   componentLibraryAnalytics: EventEmitter;
 
   /* eslint-disable-next-line i18next/no-literal-string */
-  private prepareBannerID = () => `${this.headline}:${this.el.innerHTML}`;
+  private prepareBannerID = (): string =>
+    `${this.headline}:${this.el.innerHTML}`;
 
-  private dismiss = () => {
+  private dismiss = (): string => {
     // Derive the current banner ID.
     const currentBannerID = this.prepareBannerID();
 

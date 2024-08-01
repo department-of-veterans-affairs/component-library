@@ -77,7 +77,7 @@ export class VaLink {
    * If 'true', will represent the link with white text instead of blue.
    */
   @Prop() reverse?: boolean = false;
- 
+
   /**
    * Adds an aria-label attribute to the link element.
    */
@@ -119,7 +119,7 @@ export class VaLink {
     }
   };
 
-  private getAbbreviationTitle = () => {
+  private getAbbreviationTitle = (): string => {
     const { abbrTitle, filetype } = this;
     if (filetype === 'PDF') return 'Portable Document Format';
     return abbrTitle;
@@ -141,19 +141,24 @@ export class VaLink {
       video,
       reverse,
       iconName,
-      iconSize
+      iconSize,
     } = this;
 
     const linkClass = classNames({
       'va-link--reverse': reverse,
-      'link--center': iconName
+      'link--center': iconName,
     });
 
     // Active link variant
     if (active) {
       return (
         <Host>
-          <a href={href} class={linkClass} onClick={handleClick} aria-label={this.label}>
+          <a
+            href={href}
+            class={linkClass}
+            onClick={handleClick}
+            aria-label={this.label}
+          >
             {text}
             <va-icon class="link-icon--active" icon="chevron_right"></va-icon>
           </a>
@@ -224,11 +229,7 @@ export class VaLink {
     if (iconName) {
       return (
         <Host>
-          <a
-            href={href}
-            class={linkClass}
-            onClick={handleClick}
-          >
+          <a href={href} class={linkClass} onClick={handleClick}>
             <va-icon icon={iconName} size={iconSize} part="icon"></va-icon>
             {text}
           </a>
@@ -239,7 +240,12 @@ export class VaLink {
     // Default
     return (
       <Host>
-        <a href={href} class={linkClass} onClick={handleClick} aria-label={this.label}>
+        <a
+          href={href}
+          class={linkClass}
+          onClick={handleClick}
+          aria-label={this.label}
+        >
           {text}
         </a>
       </Host>

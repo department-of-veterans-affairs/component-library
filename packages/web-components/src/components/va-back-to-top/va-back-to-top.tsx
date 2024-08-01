@@ -52,7 +52,7 @@ export class VaBackToTop {
     revealObserver.observe(this.revealPixel);
   }
 
-  navigateToTop(event) {
+  navigateToTop(event): void {
     event.preventDefault();
     // Focus the h1 tag on the page.
     const el = document.querySelector('h1');

@@ -49,7 +49,7 @@ export class VaCheckbox {
   /**
    * The error message to render.
    */
-   @Prop({ reflect: true }) error?: string;
+  @Prop({ reflect: true }) error?: string;
 
   /**
    * The description to render. If this prop exists, va-checkbox will render it
@@ -79,7 +79,7 @@ export class VaCheckbox {
   /**
    * Optional hint text.
    */
-   @Prop() hint?: string;
+  @Prop() hint?: string;
 
   /**
    * Whether or not the component will display as a tile. Available when uswds is true.
@@ -122,7 +122,7 @@ export class VaCheckbox {
   })
   componentLibraryAnalytics: EventEmitter;
 
-  private fireAnalyticsEvent = () => {
+  private fireAnalyticsEvent = (): void => {
     // Either the description prop or the text content of the description slots
     const description =
       this.description ||
@@ -153,7 +153,7 @@ export class VaCheckbox {
     });
   };
 
-  private handleChange = (e: Event) => {
+  private handleChange = (e: Event): void => {
     this.checked = (e.target as HTMLInputElement).checked;
     this.vaChange.emit({ checked: this.checked });
     if (this.enableAnalytics) this.fireAnalyticsEvent();
@@ -190,10 +190,11 @@ export class VaCheckbox {
       checkboxDescription,
       disabled,
       messageAriaDescribedby,
-      name
+      name,
     } = this;
 
-    const hasDescription = description || !!this.el.querySelector('[slot="description"]');
+    const hasDescription =
+      description || !!this.el.querySelector('[slot="description"]');
 
     if (uswds) {
       const inputClass = classnames({
@@ -202,21 +203,28 @@ export class VaCheckbox {
       });
       const descriptionClass = classnames({
         'usa-legend': true,
-        'usa-label--error': error
+        'usa-label--error': error,
       });
-      const ariaDescribedbyIds = [
-        messageAriaDescribedby ? 'input-message' : '',
-        error ? 'checkbox-error-message' : '',
-        hasDescription ? 'description' : '',
-        // Return null so we don't add the attribute if we have an empty string
-      ].filter(Boolean).join(' ').trim() || null;
+      const ariaDescribedbyIds =
+        [
+          messageAriaDescribedby ? 'input-message' : '',
+          error ? 'checkbox-error-message' : '',
+          hasDescription ? 'description' : '',
+          // Return null so we don't add the attribute if we have an empty string
+        ]
+          .filter(Boolean)
+          .join(' ')
+          .trim() || null;
 
       return (
         <Host>
-          {description ?
-            <legend id="description" class={descriptionClass}>{description}</legend> :
+          {description ? (
+            <legend id="description" class={descriptionClass}>
+              {description}
+            </legend>
+          ) : (
             <slot name="description" />
-          }
+          )}
 
           {hint && <span class="usa-hint">{hint}</span>}
           <span id="checkbox-error-message" role="alert">
@@ -239,13 +247,28 @@ export class VaCheckbox {
               disabled={disabled}
               onChange={this.handleChange}
             />
-            <label htmlFor="checkbox-element" id="option-label" class="usa-checkbox__label" part="label">
+            <label
+              htmlFor="checkbox-element"
+              id="option-label"
+              class="usa-checkbox__label"
+              part="label"
+            >
               {label}&nbsp;
-              {required && <span class="usa-label--required">{i18next.t('required')}</span>}
-              {checkboxDescription && <span class="usa-checkbox__label-description" aria-describedby="option-label" part="description">{checkboxDescription}</span>}
+              {required && (
+                <span class="usa-label--required">{i18next.t('required')}</span>
+              )}
+              {checkboxDescription && (
+                <span
+                  class="usa-checkbox__label-description"
+                  aria-describedby="option-label"
+                  part="description"
+                >
+                  {checkboxDescription}
+                </span>
+              )}
             </label>
             {messageAriaDescribedby && (
-              <span id='input-message' class="sr-only dd-privacy-hidden">
+              <span id="input-message" class="sr-only dd-privacy-hidden">
                 {messageAriaDescribedby}
               </span>
             )}
@@ -253,19 +276,27 @@ export class VaCheckbox {
         </Host>
       );
     } else {
-      const ariaDescribedbyIds = [
-        messageAriaDescribedby ? 'input-message' : '',
-        error ? 'checkbox-error-message' : '',
-        hasDescription ? 'description' : '',
-      // Return null so we don't add the attribute if we have an empty string
-      ].filter(Boolean).join(' ').trim() || null;
+      const ariaDescribedbyIds =
+        [
+          messageAriaDescribedby ? 'input-message' : '',
+          error ? 'checkbox-error-message' : '',
+          hasDescription ? 'description' : '',
+          // Return null so we don't add the attribute if we have an empty string
+        ]
+          .filter(Boolean)
+          .join(' ')
+          .trim() || null;
       return (
         <Host>
           <div id="description">
             {description ? <p>{description}</p> : <slot name="description" />}
           </div>
           {hint && <span class="hint-text">{hint}</span>}
-          <span id="checkbox-error-message" class="usa-error-message" role="alert">
+          <span
+            id="checkbox-error-message"
+            class="usa-error-message"
+            role="alert"
+          >
             {error && (
               <Fragment>
                 <span class="sr-only">{i18next.t('error')}</span> {error}
@@ -282,11 +313,14 @@ export class VaCheckbox {
           />
           <label htmlFor="checkbox-element">
             <span>
-              {label} {required && <span class="required">{i18next.t('required')}</span>}
+              {label}{' '}
+              {required && (
+                <span class="required">{i18next.t('required')}</span>
+              )}
             </span>
           </label>
           {messageAriaDescribedby && (
-            <span id='input-message' class="sr-only dd-privacy-hidden">
+            <span id="input-message" class="sr-only dd-privacy-hidden">
               {messageAriaDescribedby}
             </span>
           )}

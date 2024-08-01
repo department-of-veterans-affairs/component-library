@@ -22,22 +22,22 @@ export class VACrisisLineModal {
    */
   @State() shifted: boolean = false;
 
-  setVisible() {
+  setVisible(): void {
     this.isOpen = true;
   }
 
-  setNotVisible() {
+  setNotVisible(): void {
     this.isOpen = false;
   }
 
   // This keydown event listener tracks if the shift key is held down while changing focus
   @Listen('keydown', { target: 'window' })
-  trackShiftKey(e: KeyboardEvent) {
+  trackShiftKey(e: KeyboardEvent): void {
     this.shifted = e.shiftKey;
   }
 
   // Redirects focus back to the modal, if the modal is open/visible
-  private trapFocus() {
+  private trapFocus(): void {
     const modal = this.el?.shadowRoot.querySelector('va-modal');
     const modalVisible = modal?.getAttribute('visible');
 

@@ -142,7 +142,7 @@ export const Sanitizer = {
   },
   /* eslint-enable i18next/no-literal-string */
 
-  getEntity: function (s) {
+  getEntity: function (s: string): string {
     return Sanitizer._entities[s];
   },
 

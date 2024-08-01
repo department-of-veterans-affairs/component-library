@@ -83,7 +83,7 @@ export class VaAdditionalInfo {
   }
 
   // Ensures that the CSS animation is consistent and uses the correct max-height for its content
-  updateInfoMaxHeight() {
+  updateInfoMaxHeight(): void {
     const infoElm = this.el.shadowRoot.getElementById('info');
     /* eslint-disable i18next/no-literal-string */
     const contentHeight = infoElm.scrollHeight + 'px';
@@ -102,8 +102,8 @@ export class VaAdditionalInfo {
   render() {
     if (this.uswds) {
       const infoClass = classnames({
-        'open': this.open,
-        'closed': !this.open
+        open: this.open,
+        closed: !this.open,
       });
       return (
         <Host>
