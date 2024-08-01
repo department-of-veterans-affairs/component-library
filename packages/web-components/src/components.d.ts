@@ -1392,7 +1392,7 @@ export namespace Components {
          */
         "autocomplete"?: string;
         /**
-          * Whether the component should show a character count message. Has no effect without uswds and maxlength being set.
+          * Whether the component should show a character count message. Has no effect without maxlength being set.
          */
         "charcount"?: boolean;
         /**
@@ -1408,11 +1408,11 @@ export namespace Components {
          */
         "error"?: string;
         /**
-          * The content of the heading if `useFormsPattern` and `uswds` are true.
+          * The content of the heading if `useFormsPattern` is true.
          */
         "formHeading"?: string;
         /**
-          * The heading level for the heading if `useFormsPattern` and `uswds` are true.
+          * The heading level for the heading if `useFormsPattern`is true.
          */
         "formHeadingLevel"?: number;
         /**
@@ -1466,10 +1466,6 @@ export namespace Components {
          */
         "min"?: number | string;
         /**
-          * The minimum number of characters allowed in the input.
-         */
-        "minlength"?: number;
-        /**
           * The name to pass to the input element.
          */
         "name"?: string;
@@ -1494,13 +1490,9 @@ export namespace Components {
          */
         "type"?: 'email' | 'number' | 'search' | 'tel' | 'text' | 'url';
         /**
-          * Enabling this will add a heading and description for integrating into the forms pattern. Accepts `single` or `multiple` to indicate if the form is a single input or will have multiple inputs. `uswds` should be true.
+          * Enabling this will add a heading and description for integrating into the forms pattern. Accepts `single` or `multiple` to indicate if the form is a single input or will have multiple inputs.
          */
         "useFormsPattern"?: string;
-        /**
-          * Whether or not the component will use USWDS v3 styling.
-         */
-        "uswds"?: boolean;
         /**
           * The value for the input.
          */
@@ -1512,7 +1504,7 @@ export namespace Components {
     }
     interface VaTextarea {
         /**
-          * Whether the component should show a character count message. Has no effect without uswds and maxlength being set.
+          * Whether the component should show a character count message. Has no effect without maxlength being set.
          */
         "charcount"?: boolean;
         /**
@@ -1524,11 +1516,11 @@ export namespace Components {
          */
         "error"?: string;
         /**
-          * The content of the heading if `useFormsPattern` and `uswds` are true.
+          * The content of the heading if `useFormsPattern` is true.
          */
         "formHeading"?: string;
         /**
-          * The heading level for the heading if `useFormsPattern` and `uswds` are true.
+          * The heading level for the heading if `useFormsPattern` is true.
          */
         "formHeadingLevel"?: number;
         /**
@@ -1568,13 +1560,9 @@ export namespace Components {
          */
         "required"?: boolean;
         /**
-          * Enabling this will add a heading and description for integrating into the forms pattern. Accepts `single` or `multiple` to indicate if the form is a single input or will have multiple inputs. `uswds` should be true.
+          * Enabling this will add a heading and description for integrating into the forms pattern. Accepts `single` or `multiple` to indicate if the form is a single input or will have multiple inputs.
          */
         "useFormsPattern"?: string;
-        /**
-          * Whether or not the component will use USWDS v3 styling.
-         */
-        "uswds"?: boolean;
         /**
           * The value of the textarea
          */
@@ -3727,7 +3715,7 @@ declare namespace LocalJSX {
          */
         "autocomplete"?: string;
         /**
-          * Whether the component should show a character count message. Has no effect without uswds and maxlength being set.
+          * Whether the component should show a character count message. Has no effect without maxlength being set.
          */
         "charcount"?: boolean;
         /**
@@ -3743,11 +3731,11 @@ declare namespace LocalJSX {
          */
         "error"?: string;
         /**
-          * The content of the heading if `useFormsPattern` and `uswds` are true.
+          * The content of the heading if `useFormsPattern` is true.
          */
         "formHeading"?: string;
         /**
-          * The heading level for the heading if `useFormsPattern` and `uswds` are true.
+          * The heading level for the heading if `useFormsPattern`is true.
          */
         "formHeadingLevel"?: number;
         /**
@@ -3801,10 +3789,6 @@ declare namespace LocalJSX {
          */
         "min"?: number | string;
         /**
-          * The minimum number of characters allowed in the input.
-         */
-        "minlength"?: number;
-        /**
           * The name to pass to the input element.
          */
         "name"?: string;
@@ -3833,13 +3817,9 @@ declare namespace LocalJSX {
          */
         "type"?: 'email' | 'number' | 'search' | 'tel' | 'text' | 'url';
         /**
-          * Enabling this will add a heading and description for integrating into the forms pattern. Accepts `single` or `multiple` to indicate if the form is a single input or will have multiple inputs. `uswds` should be true.
+          * Enabling this will add a heading and description for integrating into the forms pattern. Accepts `single` or `multiple` to indicate if the form is a single input or will have multiple inputs.
          */
         "useFormsPattern"?: string;
-        /**
-          * Whether or not the component will use USWDS v3 styling.
-         */
-        "uswds"?: boolean;
         /**
           * The value for the input.
          */
@@ -3851,7 +3831,7 @@ declare namespace LocalJSX {
     }
     interface VaTextarea {
         /**
-          * Whether the component should show a character count message. Has no effect without uswds and maxlength being set.
+          * Whether the component should show a character count message. Has no effect without maxlength being set.
          */
         "charcount"?: boolean;
         /**
@@ -3863,11 +3843,11 @@ declare namespace LocalJSX {
          */
         "error"?: string;
         /**
-          * The content of the heading if `useFormsPattern` and `uswds` are true.
+          * The content of the heading if `useFormsPattern` is true.
          */
         "formHeading"?: string;
         /**
-          * The heading level for the heading if `useFormsPattern` and `uswds` are true.
+          * The heading level for the heading if `useFormsPattern` is true.
          */
         "formHeadingLevel"?: number;
         /**
@@ -3911,13 +3891,9 @@ declare namespace LocalJSX {
          */
         "required"?: boolean;
         /**
-          * Enabling this will add a heading and description for integrating into the forms pattern. Accepts `single` or `multiple` to indicate if the form is a single input or will have multiple inputs. `uswds` should be true.
+          * Enabling this will add a heading and description for integrating into the forms pattern. Accepts `single` or `multiple` to indicate if the form is a single input or will have multiple inputs.
          */
         "useFormsPattern"?: string;
-        /**
-          * Whether or not the component will use USWDS v3 styling.
-         */
-        "uswds"?: boolean;
         /**
           * The value of the textarea
          */
