@@ -1125,6 +1125,10 @@ export namespace Components {
          */
         "buttonText"?: string;
         /**
+          * If `true`, the component-library-analytics event is disabled.
+         */
+        "disableAnalytics"?: boolean;
+        /**
           * The aria-label for search input and button. Default is 'Search'.
          */
         "label"?: string;
@@ -3403,6 +3407,10 @@ declare namespace LocalJSX {
           * Text displayed inside the search button
          */
         "buttonText"?: string;
+        /**
+          * If `true`, the component-library-analytics event is disabled.
+         */
+        "disableAnalytics"?: boolean;
         /**
           * The aria-label for search input and button. Default is 'Search'.
          */
