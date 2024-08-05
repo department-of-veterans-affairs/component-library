@@ -135,7 +135,7 @@ export class VaFileInputMultiple {
    */
   private handleChange(event: any, fileKey: number, pageIndex: number) {
     const newFile = event.detail.files[0];
-
+    let deletedFile = null;
     if (newFile) {
       const fileObject = this.findFileByKey(fileKey);
 
@@ -155,7 +155,7 @@ export class VaFileInputMultiple {
       }
     } else {
       // Deleted file
-      this.files.splice(pageIndex, 1);
+      [{ file: deletedFile }] = this.files.splice(pageIndex, 1);
       const statusMessageDiv = this.el.shadowRoot.querySelector("#statusMessage");
       // empty status message so it is read when updated
       statusMessageDiv.textContent = ""
@@ -164,7 +164,7 @@ export class VaFileInputMultiple {
       }, 1000);
     }
 
-    this.vaMultipleChange.emit({ files: this.files.map(fileObj => fileObj.file) });
+    this.vaMultipleChange.emit({ files: this.files.map(fileObj => fileObj.file), deletedFile });
     this.files = Array.of(...this.files);
   }
 
