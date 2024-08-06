@@ -22,7 +22,7 @@ describe('va-memorable-date', () => {
               <slot></slot>
               <div class="usa-memorable-date">
                 <div class="usa-form-group usa-form-group--select usa-form-group--month">
-                  <va-select aria-describedby="dateHint" class="hydrated usa-form-group--month-select" uswds="">
+                  <va-select aria-describedby="dateHint" class="hydrated usa-form-group--month-select">
                     <option value="1">
                       January
                     </option>
@@ -112,7 +112,7 @@ describe('va-memorable-date', () => {
             <slot></slot>
             <div class="usa-memorable-date">
               <div class="usa-form-group usa-form-group--select usa-form-group--month">
-                <va-select aria-describedby="dateHint hint" class="hydrated usa-form-group--month-select" uswds="">
+                <va-select aria-describedby="dateHint hint" class="hydrated usa-form-group--month-select">
                   <option value="1">
                     January
                   </option>
