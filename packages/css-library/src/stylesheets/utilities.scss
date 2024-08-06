@@ -55,11 +55,6 @@ $breakpoint-class-name: 'medium-screen';
 
   @each $modifier, $modifier-value in $u-border-modifiers {
     @each $name, $value in $u-border-values {
-
-      @if $modifier-value == '-' {
-        $modifier-value: '';
-      }
-
       .#{$breakpoint-class-name}\:#{$u-border-base}#{$modifier-value}-#{$name} {
         @if $modifier == 'noModifier' {
           border: unquote($value);

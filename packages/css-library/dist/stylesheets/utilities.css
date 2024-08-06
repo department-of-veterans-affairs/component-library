@@ -3212,7 +3212,7 @@ through all possible variants
 }
 
 .vads-u-border--0 {
-  border-: 0;
+  border: 0;
 }
 
 .vads-u-border-top--0 {
@@ -3232,7 +3232,7 @@ through all possible variants
 }
 
 .vads-u-border--1px {
-  border-: 1px solid;
+  border: 1px solid;
 }
 
 .vads-u-border-top--1px {
@@ -3252,7 +3252,7 @@ through all possible variants
 }
 
 .vads-u-border--2px {
-  border-: 2px solid;
+  border: 2px solid;
 }
 
 .vads-u-border-top--2px {
@@ -3272,7 +3272,7 @@ through all possible variants
 }
 
 .vads-u-border--3px {
-  border-: 3px solid;
+  border: 3px solid;
 }
 
 .vads-u-border-top--3px {
@@ -3292,7 +3292,7 @@ through all possible variants
 }
 
 .vads-u-border--4px {
-  border-: 4px solid;
+  border: 4px solid;
 }
 
 .vads-u-border-top--4px {
@@ -3312,7 +3312,7 @@ through all possible variants
 }
 
 .vads-u-border--5px {
-  border-: 5px solid;
+  border: 5px solid;
 }
 
 .vads-u-border-top--5px {
@@ -3332,7 +3332,7 @@ through all possible variants
 }
 
 .vads-u-border--7px {
-  border-: 7px solid;
+  border: 7px solid;
 }
 
 .vads-u-border-top--7px {
@@ -3352,7 +3352,7 @@ through all possible variants
 }
 
 .vads-u-border--10px {
-  border-: 10px solid;
+  border: 10px solid;
 }
 
 .vads-u-border-top--10px {
@@ -3809,6 +3809,17 @@ through all possible variants
 
 .vads-u-display--none {
   display: none;
+}
+
+.vads-l-col {
+  box-sizing: border-box;
+  flex-basis: 0;
+  max-width: 100%;
+  min-height: 1px;
+  min-width: 0;
+  position: relative;
+  width: 100%;
+  flex-grow: 1;
 }
 
 .vads-l-col--1 {
@@ -5606,7 +5617,7 @@ through all possible variants
 
 @media all and (min-width: 20em) {
   .mobile\:vads-u-border--0 {
-    border-: 0;
+    border: 0;
   }
   .mobile\:vads-u-border-top--0 {
     border-top: 0;
@@ -5621,7 +5632,7 @@ through all possible variants
     border-left: 0;
   }
   .mobile\:vads-u-border--1px {
-    border-: 1px solid;
+    border: 1px solid;
   }
   .mobile\:vads-u-border-top--1px {
     border-top: 1px solid;
@@ -5636,7 +5647,7 @@ through all possible variants
     border-left: 1px solid;
   }
   .mobile\:vads-u-border--2px {
-    border-: 2px solid;
+    border: 2px solid;
   }
   .mobile\:vads-u-border-top--2px {
     border-top: 2px solid;
@@ -5651,7 +5662,7 @@ through all possible variants
     border-left: 2px solid;
   }
   .mobile\:vads-u-border--3px {
-    border-: 3px solid;
+    border: 3px solid;
   }
   .mobile\:vads-u-border-top--3px {
     border-top: 3px solid;
@@ -5666,7 +5677,7 @@ through all possible variants
     border-left: 3px solid;
   }
   .mobile\:vads-u-border--4px {
-    border-: 4px solid;
+    border: 4px solid;
   }
   .mobile\:vads-u-border-top--4px {
     border-top: 4px solid;
@@ -5681,7 +5692,7 @@ through all possible variants
     border-left: 4px solid;
   }
   .mobile\:vads-u-border--5px {
-    border-: 5px solid;
+    border: 5px solid;
   }
   .mobile\:vads-u-border-top--5px {
     border-top: 5px solid;
@@ -5696,7 +5707,7 @@ through all possible variants
     border-left: 5px solid;
   }
   .mobile\:vads-u-border--7px {
-    border-: 7px solid;
+    border: 7px solid;
   }
   .mobile\:vads-u-border-top--7px {
     border-top: 7px solid;
@@ -5711,7 +5722,7 @@ through all possible variants
     border-left: 7px solid;
   }
   .mobile\:vads-u-border--10px {
-    border-: 10px solid;
+    border: 10px solid;
   }
   .mobile\:vads-u-border-top--10px {
     border-top: 10px solid;
@@ -5739,6 +5750,16 @@ through all possible variants
   }
   .mobile\:vads-u-display--none {
     display: none;
+  }
+  .mobile\:vads-l-col {
+    box-sizing: border-box;
+    flex-basis: 0;
+    max-width: 100%;
+    min-height: 1px;
+    min-width: 0;
+    position: relative;
+    width: 100%;
+    flex-grow: 1;
   }
   .mobile\:vads-l-col--1 {
     box-sizing: border-box;
@@ -7101,7 +7122,7 @@ through all possible variants
 }
 @media all and (min-width: 40em) {
   .tablet\:vads-u-border--0 {
-    border-: 0;
+    border: 0;
   }
   .tablet\:vads-u-border-top--0 {
     border-top: 0;
@@ -7116,7 +7137,7 @@ through all possible variants
     border-left: 0;
   }
   .tablet\:vads-u-border--1px {
-    border-: 1px solid;
+    border: 1px solid;
   }
   .tablet\:vads-u-border-top--1px {
     border-top: 1px solid;
@@ -7131,7 +7152,7 @@ through all possible variants
     border-left: 1px solid;
   }
   .tablet\:vads-u-border--2px {
-    border-: 2px solid;
+    border: 2px solid;
   }
   .tablet\:vads-u-border-top--2px {
     border-top: 2px solid;
@@ -7146,7 +7167,7 @@ through all possible variants
     border-left: 2px solid;
   }
   .tablet\:vads-u-border--3px {
-    border-: 3px solid;
+    border: 3px solid;
   }
   .tablet\:vads-u-border-top--3px {
     border-top: 3px solid;
@@ -7161,7 +7182,7 @@ through all possible variants
     border-left: 3px solid;
   }
   .tablet\:vads-u-border--4px {
-    border-: 4px solid;
+    border: 4px solid;
   }
   .tablet\:vads-u-border-top--4px {
     border-top: 4px solid;
@@ -7176,7 +7197,7 @@ through all possible variants
     border-left: 4px solid;
   }
   .tablet\:vads-u-border--5px {
-    border-: 5px solid;
+    border: 5px solid;
   }
   .tablet\:vads-u-border-top--5px {
     border-top: 5px solid;
@@ -7191,7 +7212,7 @@ through all possible variants
     border-left: 5px solid;
   }
   .tablet\:vads-u-border--7px {
-    border-: 7px solid;
+    border: 7px solid;
   }
   .tablet\:vads-u-border-top--7px {
     border-top: 7px solid;
@@ -7206,7 +7227,7 @@ through all possible variants
     border-left: 7px solid;
   }
   .tablet\:vads-u-border--10px {
-    border-: 10px solid;
+    border: 10px solid;
   }
   .tablet\:vads-u-border-top--10px {
     border-top: 10px solid;
@@ -7234,6 +7255,16 @@ through all possible variants
   }
   .tablet\:vads-u-display--none {
     display: none;
+  }
+  .tablet\:vads-l-col {
+    box-sizing: border-box;
+    flex-basis: 0;
+    max-width: 100%;
+    min-height: 1px;
+    min-width: 0;
+    position: relative;
+    width: 100%;
+    flex-grow: 1;
   }
   .tablet\:vads-l-col--1 {
     box-sizing: border-box;
@@ -8596,7 +8627,7 @@ through all possible variants
 }
 @media all and (min-width: 75em) {
   .desktop-lg\:vads-u-border--0 {
-    border-: 0;
+    border: 0;
   }
   .desktop-lg\:vads-u-border-top--0 {
     border-top: 0;
@@ -8611,7 +8642,7 @@ through all possible variants
     border-left: 0;
   }
   .desktop-lg\:vads-u-border--1px {
-    border-: 1px solid;
+    border: 1px solid;
   }
   .desktop-lg\:vads-u-border-top--1px {
     border-top: 1px solid;
@@ -8626,7 +8657,7 @@ through all possible variants
     border-left: 1px solid;
   }
   .desktop-lg\:vads-u-border--2px {
-    border-: 2px solid;
+    border: 2px solid;
   }
   .desktop-lg\:vads-u-border-top--2px {
     border-top: 2px solid;
@@ -8641,7 +8672,7 @@ through all possible variants
     border-left: 2px solid;
   }
   .desktop-lg\:vads-u-border--3px {
-    border-: 3px solid;
+    border: 3px solid;
   }
   .desktop-lg\:vads-u-border-top--3px {
     border-top: 3px solid;
@@ -8656,7 +8687,7 @@ through all possible variants
     border-left: 3px solid;
   }
   .desktop-lg\:vads-u-border--4px {
-    border-: 4px solid;
+    border: 4px solid;
   }
   .desktop-lg\:vads-u-border-top--4px {
     border-top: 4px solid;
@@ -8671,7 +8702,7 @@ through all possible variants
     border-left: 4px solid;
   }
   .desktop-lg\:vads-u-border--5px {
-    border-: 5px solid;
+    border: 5px solid;
   }
   .desktop-lg\:vads-u-border-top--5px {
     border-top: 5px solid;
@@ -8686,7 +8717,7 @@ through all possible variants
     border-left: 5px solid;
   }
   .desktop-lg\:vads-u-border--7px {
-    border-: 7px solid;
+    border: 7px solid;
   }
   .desktop-lg\:vads-u-border-top--7px {
     border-top: 7px solid;
@@ -8701,7 +8732,7 @@ through all possible variants
     border-left: 7px solid;
   }
   .desktop-lg\:vads-u-border--10px {
-    border-: 10px solid;
+    border: 10px solid;
   }
   .desktop-lg\:vads-u-border-top--10px {
     border-top: 10px solid;
@@ -8729,6 +8760,16 @@ through all possible variants
   }
   .desktop-lg\:vads-u-display--none {
     display: none;
+  }
+  .desktop-lg\:vads-l-col {
+    box-sizing: border-box;
+    flex-basis: 0;
+    max-width: 100%;
+    min-height: 1px;
+    min-width: 0;
+    position: relative;
+    width: 100%;
+    flex-grow: 1;
   }
   .desktop-lg\:vads-l-col--1 {
     box-sizing: border-box;
