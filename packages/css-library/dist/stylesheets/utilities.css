@@ -10089,5 +10089,130 @@ through all possible variants
     max-width: 100%;
   }
 }
+/**
+  * Generate custom breakpoint utility classes. ie. medium-screen
+  */
+@media all and (min-width: 768px) {
+  .medium-screen\:vads-u-border--0 {
+    border: 0;
+  }
+  .medium-screen\:vads-u-border--1px {
+    border: 1px solid;
+  }
+  .medium-screen\:vads-u-border--2px {
+    border: 2px solid;
+  }
+  .medium-screen\:vads-u-border--3px {
+    border: 3px solid;
+  }
+  .medium-screen\:vads-u-border--4px {
+    border: 4px solid;
+  }
+  .medium-screen\:vads-u-border--5px {
+    border: 5px solid;
+  }
+  .medium-screen\:vads-u-border--7px {
+    border: 7px solid;
+  }
+  .medium-screen\:vads-u-border--10px {
+    border: 10px solid;
+  }
+  .medium-screen\:vads-u-border-top--0 {
+    border-top: 0;
+  }
+  .medium-screen\:vads-u-border-top--1px {
+    border-top: 1px solid;
+  }
+  .medium-screen\:vads-u-border-top--2px {
+    border-top: 2px solid;
+  }
+  .medium-screen\:vads-u-border-top--3px {
+    border-top: 3px solid;
+  }
+  .medium-screen\:vads-u-border-top--4px {
+    border-top: 4px solid;
+  }
+  .medium-screen\:vads-u-border-top--5px {
+    border-top: 5px solid;
+  }
+  .medium-screen\:vads-u-border-top--7px {
+    border-top: 7px solid;
+  }
+  .medium-screen\:vads-u-border-top--10px {
+    border-top: 10px solid;
+  }
+  .medium-screen\:vads-u-border-right--0 {
+    border-right: 0;
+  }
+  .medium-screen\:vads-u-border-right--1px {
+    border-right: 1px solid;
+  }
+  .medium-screen\:vads-u-border-right--2px {
+    border-right: 2px solid;
+  }
+  .medium-screen\:vads-u-border-right--3px {
+    border-right: 3px solid;
+  }
+  .medium-screen\:vads-u-border-right--4px {
+    border-right: 4px solid;
+  }
+  .medium-screen\:vads-u-border-right--5px {
+    border-right: 5px solid;
+  }
+  .medium-screen\:vads-u-border-right--7px {
+    border-right: 7px solid;
+  }
+  .medium-screen\:vads-u-border-right--10px {
+    border-right: 10px solid;
+  }
+  .medium-screen\:vads-u-border-bottom--0 {
+    border-bottom: 0;
+  }
+  .medium-screen\:vads-u-border-bottom--1px {
+    border-bottom: 1px solid;
+  }
+  .medium-screen\:vads-u-border-bottom--2px {
+    border-bottom: 2px solid;
+  }
+  .medium-screen\:vads-u-border-bottom--3px {
+    border-bottom: 3px solid;
+  }
+  .medium-screen\:vads-u-border-bottom--4px {
+    border-bottom: 4px solid;
+  }
+  .medium-screen\:vads-u-border-bottom--5px {
+    border-bottom: 5px solid;
+  }
+  .medium-screen\:vads-u-border-bottom--7px {
+    border-bottom: 7px solid;
+  }
+  .medium-screen\:vads-u-border-bottom--10px {
+    border-bottom: 10px solid;
+  }
+  .medium-screen\:vads-u-border-left--0 {
+    border-left: 0;
+  }
+  .medium-screen\:vads-u-border-left--1px {
+    border-left: 1px solid;
+  }
+  .medium-screen\:vads-u-border-left--2px {
+    border-left: 2px solid;
+  }
+  .medium-screen\:vads-u-border-left--3px {
+    border-left: 3px solid;
+  }
+  .medium-screen\:vads-u-border-left--4px {
+    border-left: 4px solid;
+  }
+  .medium-screen\:vads-u-border-left--5px {
+    border-left: 5px solid;
+  }
+  .medium-screen\:vads-u-border-left--7px {
+    border-left: 7px solid;
+  }
+  .medium-screen\:vads-u-border-left--10px {
+    border-left: 10px solid;
+  }
+}
 
 /*# sourceMappingURL=utilities.css.map */

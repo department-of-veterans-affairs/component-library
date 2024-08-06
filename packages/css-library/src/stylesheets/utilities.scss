@@ -26,3 +26,33 @@ $utilities-package: map-collect(
 
 // Generate all utility classes
 @include render-utilities-in($utilities-package);
+
+/**
+  * Generate custom breakpoint utility classes. ie. medium-screen
+  */
+$medium-screen-breakpoint: 768px;
+$breakpoint-class-name: 'medium-screen';
+
+@media all and (min-width: $medium-screen-breakpoint) {
+  // border
+  $u-border-modifiers: map-get(map-get($u-border, border), modifiers);
+  $u-border-values: map-get(map-get($u-border, border), values);
+  $u-border-base: map-get(map-get($u-border, border), base);
+
+  @each $modifier, $modifier-value in $u-border-modifiers {
+    @each $name, $value in $u-border-values {
+
+      @if $modifier-value == '-' {
+        $modifier-value: '';
+      }
+
+      .#{$breakpoint-class-name}\:#{$u-border-base}#{$modifier-value}-#{$name} {
+        @if $modifier == 'noModifier' {
+          border: unquote($value);
+        } @else {
+          border#{$modifier-value}: unquote($value);
+        }
+      }
+    }
+  }
+}
