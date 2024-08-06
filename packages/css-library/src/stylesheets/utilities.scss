@@ -33,6 +33,20 @@ $utilities-package: map-collect(
 $medium-screen-breakpoint: 768px;
 $breakpoint-class-name: 'medium-screen';
 
+@mixin generate-utilities-from-map-collection($collection) {
+  @each $property, $property-map in $collection { 
+    $u-base: map-get($property-map, base);
+    $u-values: map-get($property-map, values);
+    $u-property: map-get($property-map, property);
+
+    @each $name, $value in $u-values {
+      .#{$breakpoint-class-name}\:#{$u-base}-#{$name} {
+        #{$u-property}: $value;
+      }
+    }
+  }
+}
+
 @media all and (min-width: $medium-screen-breakpoint) {
   // border
   $u-border-modifiers: map-get(map-get($u-border, border), modifiers);
@@ -65,4 +79,10 @@ $breakpoint-class-name: 'medium-screen';
       display: unquote($value);
     }
   }
+
+  // flexbox
+  @include generate-utilities-from-map-collection($u-flexbox);
+
+  // font-size
+  @include generate-utilities-from-map-collection($u-font);
 }
