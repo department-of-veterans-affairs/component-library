@@ -55,4 +55,14 @@ $breakpoint-class-name: 'medium-screen';
       }
     }
   }
+
+  // display
+  $u-display-values: map-get(map-get($u-display, display), values);
+  $u-display-base: map-get(map-get($u-display, display), base);
+
+  @each $name, $value in $u-display-values {
+    .#{$breakpoint-class-name}\:#{$u-display-base}-#{$name} {
+      display: unquote($value);
+    }
+  }
 }

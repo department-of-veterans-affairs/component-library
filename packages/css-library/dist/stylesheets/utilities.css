@@ -10213,6 +10213,21 @@ through all possible variants
   .medium-screen\:vads-u-border-left--10px {
     border-left: 10px solid;
   }
+  .medium-screen\:vads-u-display--block {
+    display: block;
+  }
+  .medium-screen\:vads-u-display--inline {
+    display: inline;
+  }
+  .medium-screen\:vads-u-display--inline-block {
+    display: inline-block;
+  }
+  .medium-screen\:vads-u-display--flex {
+    display: flex;
+  }
+  .medium-screen\:vads-u-display--none {
+    display: none;
+  }
 }
 
 /*# sourceMappingURL=utilities.css.map */
