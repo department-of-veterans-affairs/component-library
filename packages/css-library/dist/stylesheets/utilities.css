@@ -11067,6 +11067,18 @@ through all possible variants
   .medium-screen\:vads-u-position--relative {
     position: relative;
   }
+  .medium-screen\:vads-u-text-align--left {
+    text-align: left;
+  }
+  .medium-screen\:vads-u-text-align--center {
+    text-align: center;
+  }
+  .medium-screen\:vads-u-text-align--right {
+    text-align: right;
+  }
+  .medium-screen\:vads-u-text-align--justify {
+    text-align: justify;
+  }
 }
 
 /*# sourceMappingURL=utilities.css.map */
