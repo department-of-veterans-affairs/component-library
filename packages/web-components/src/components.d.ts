@@ -179,10 +179,6 @@ export namespace Components {
          */
         "label"?: string;
         /**
-          * Whether or not the component will use USWDS v3 styling.
-         */
-        "uswds"?: boolean;
-        /**
           * Whether or not the component will wrap the breadcrumbs. This prop is available when `uswds` is set to `true`.
          */
         "wrapping"?: boolean;
@@ -2301,10 +2297,6 @@ declare namespace LocalJSX {
           * Fires when user clicks on breadcrumb anchor tag. Has no effect unless uswds is true and the href of anchor tag is part of breadcrumb object that also has isRouterLink: true
          */
         "onRouteChange"?: (event: VaBreadcrumbsCustomEvent<{ href: string }>) => void;
-        /**
-          * Whether or not the component will use USWDS v3 styling.
-         */
-        "uswds"?: boolean;
         /**
           * Whether or not the component will wrap the breadcrumbs. This prop is available when `uswds` is set to `true`.
          */
