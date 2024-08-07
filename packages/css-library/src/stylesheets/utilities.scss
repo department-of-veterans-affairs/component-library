@@ -28,6 +28,8 @@ $utilities-package: map-collect(
 @include render-utilities-in($utilities-package);
 
 // Generate medium screen breakpoint utility classes.
+// If this USWDS PR gets approved/merged, we can remove all the code below:
+// https://github.com/uswds/uswds/pull/5985
 $medium-screen-breakpoint: 768px;
 $breakpoint-class-name: 'medium-screen';
 
