@@ -70,8 +70,23 @@ $breakpoint-class-name: 'medium-screen';
   // flexbox
   @include generate-utilities-from-deep-map($u-flexbox);
 
-  // TODO: flex-grid
-  // @debug $u-flex-grid;
+  // u-flex-grid
+  @each $property, $property-map in $u-flex-grid { 
+    $u-base: map-get($property-map, base);
+    $u-values: map-get($property-map, values);
+    $u-property: map-get($property-map, property);
+
+    @each $name, $value in $u-values {
+      $extend: map-get($value, extend);
+      $content: map-get($value, content);
+      .#{$breakpoint-class-name}\:#{$u-base}-#{$name} {
+        @each $css-property, $css-value in $extend {
+          #{$css-property}: $css-value;
+        }
+        #{$u-property}: #{$content};
+      }
+    }
+  }
 
   // u-font
   @include generate-utilities-from-deep-map($u-font);
