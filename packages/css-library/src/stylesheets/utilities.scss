@@ -31,7 +31,7 @@ $utilities-package: map-collect(
 $medium-screen-breakpoint: 768px;
 $breakpoint-class-name: 'medium-screen';
 
-@mixin generate-utilities-from-deep-map($collection, $unquote: false) {
+@mixin generate-utilities-from-deep-map($collection) {
   @each $property, $property-map in $collection { 
     $u-base: map-get($property-map, base);
     $u-values: map-get($property-map, values);
@@ -43,9 +43,9 @@ $breakpoint-class-name: 'medium-screen';
         @each $name, $value in $u-values {
           .#{$breakpoint-class-name}\:#{$u-base}#{$modifier-value}-#{$name} {
             @if $modifier == 'noModifier' {
-              #{$u-property}: $value;
+              #{$u-property}: #{$value};
             } @else {
-              #{$u-property}#{$modifier-value}: $value;
+              #{$u-property}#{$modifier-value}: #{$value};
             }
           }
         }
@@ -53,39 +53,19 @@ $breakpoint-class-name: 'medium-screen';
     }
 
     @each $name, $value in $u-values {
-      @if $unquote {
-        .#{$breakpoint-class-name}\:#{$u-base}-#{$name} {
-          #{$u-property}: unquote($value);
-        }
-      } @else {
-        .#{$breakpoint-class-name}\:#{$u-base}-#{$name} {
-          #{$u-property}: $value;
-        }
+      .#{$breakpoint-class-name}\:#{$u-base}-#{$name} {
+        #{$u-property}: #{$value};
       }
     }
   }
 }
 
 @media all and (min-width: $medium-screen-breakpoint) {
-  // border
-  $u-border-base: map-get(map-get($u-border, border), base);
-  $u-border-values: map-get(map-get($u-border, border), values);
-  $u-border-modifiers: map-get(map-get($u-border, border), modifiers);
-
-  @each $modifier, $modifier-value in $u-border-modifiers {
-    @each $name, $value in $u-border-values {
-      .#{$breakpoint-class-name}\:#{$u-border-base}#{$modifier-value}-#{$name} {
-        @if $modifier == 'noModifier' {
-          border: unquote($value);
-        } @else {
-          border#{$modifier-value}: unquote($value);
-        }
-      }
-    }
-  }
+  // u-border
+  @include generate-utilities-from-deep-map($u-border);
 
   // display
-  @include generate-utilities-from-deep-map($u-display, $unquote: true);
+  @include generate-utilities-from-deep-map($u-display);
 
   // flexbox
   @include generate-utilities-from-deep-map($u-flexbox);
