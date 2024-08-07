@@ -10473,6 +10473,24 @@ through all possible variants
   .medium-screen\:vads-u-max-height--viewport {
     max-height: 100vh;
   }
+  .medium-screen\:vads-u-line-height--1 {
+    line-height: 1;
+  }
+  .medium-screen\:vads-u-line-height--2 {
+    line-height: 1.15;
+  }
+  .medium-screen\:vads-u-line-height--3 {
+    line-height: 1.35;
+  }
+  .medium-screen\:vads-u-line-height--4 {
+    line-height: 1.5;
+  }
+  .medium-screen\:vads-u-line-height--5 {
+    line-height: 1.62;
+  }
+  .medium-screen\:vads-u-line-height--6 {
+    line-height: 1.75;
+  }
 }
 
 /*# sourceMappingURL=utilities.css.map */

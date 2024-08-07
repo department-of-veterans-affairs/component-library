@@ -83,4 +83,7 @@ $breakpoint-class-name: 'medium-screen';
 
   // u-height
   @include generate-utilities-from-deep-map($u-height);
+
+  // u-line-height
+  @include generate-utilities-from-deep-map($u-line-height);
 }
