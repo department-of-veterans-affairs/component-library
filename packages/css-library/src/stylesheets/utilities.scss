@@ -24,24 +24,28 @@ $utilities-package: map-collect(
   $u-width
 );
 
-// Generate all utility classes
+// Generate all utility classes from USWDS function
 @include render-utilities-in($utilities-package);
 
-/**
-  * Generate custom breakpoint utility classes. ie. medium-screen
-  */
+// Generate medium screen breakpoint utility classes.
 $medium-screen-breakpoint: 768px;
 $breakpoint-class-name: 'medium-screen';
 
-@mixin generate-utilities-from-map-collection($collection) {
+@mixin generate-utilities-from-deep-map($collection, $unquote: false) {
   @each $property, $property-map in $collection { 
     $u-base: map-get($property-map, base);
     $u-values: map-get($property-map, values);
     $u-property: map-get($property-map, property);
 
     @each $name, $value in $u-values {
-      .#{$breakpoint-class-name}\:#{$u-base}-#{$name} {
-        #{$u-property}: $value;
+      @if $unquote {
+        .#{$breakpoint-class-name}\:#{$u-base}-#{$name} {
+          #{$u-property}: unquote($value);
+        }
+      } @else {
+        .#{$breakpoint-class-name}\:#{$u-base}-#{$name} {
+          #{$u-property}: $value;
+        }
       }
     }
   }
@@ -49,9 +53,9 @@ $breakpoint-class-name: 'medium-screen';
 
 @media all and (min-width: $medium-screen-breakpoint) {
   // border
-  $u-border-modifiers: map-get(map-get($u-border, border), modifiers);
-  $u-border-values: map-get(map-get($u-border, border), values);
   $u-border-base: map-get(map-get($u-border, border), base);
+  $u-border-values: map-get(map-get($u-border, border), values);
+  $u-border-modifiers: map-get(map-get($u-border, border), modifiers);
 
   @each $modifier, $modifier-value in $u-border-modifiers {
     @each $name, $value in $u-border-values {
@@ -66,18 +70,14 @@ $breakpoint-class-name: 'medium-screen';
   }
 
   // display
-  $u-display-values: map-get(map-get($u-display, display), values);
-  $u-display-base: map-get(map-get($u-display, display), base);
-
-  @each $name, $value in $u-display-values {
-    .#{$breakpoint-class-name}\:#{$u-display-base}-#{$name} {
-      display: unquote($value);
-    }
-  }
+  @include generate-utilities-from-deep-map($u-display, $unquote: true);
 
   // flexbox
-  @include generate-utilities-from-map-collection($u-flexbox);
+  @include generate-utilities-from-deep-map($u-flexbox);
 
-  // font-size
-  @include generate-utilities-from-map-collection($u-font);
+  // TODO: flex-grid
+  // @debug $u-flex-grid;
+
+  // u-font
+  @include generate-utilities-from-deep-map($u-font);
 }

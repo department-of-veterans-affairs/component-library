@@ -10130,9 +10130,6 @@ through all possible variants
     max-width: 100%;
   }
 }
-/**
-  * Generate custom breakpoint utility classes. ie. medium-screen
-  */
 @media all and (min-width: 768px) {
   .medium-screen\:vads-u-border--0 {
     border: 0;
