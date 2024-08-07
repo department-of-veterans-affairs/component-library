@@ -36,6 +36,21 @@ $breakpoint-class-name: 'medium-screen';
     $u-base: map-get($property-map, base);
     $u-values: map-get($property-map, values);
     $u-property: map-get($property-map, property);
+    $u-modifiers: map-get($property-map, modifiers);
+
+    @if $u-modifiers {
+      @each $modifier, $modifier-value in $u-modifiers {
+        @each $name, $value in $u-values {
+          .#{$breakpoint-class-name}\:#{$u-base}#{$modifier-value}-#{$name} {
+            @if $modifier == 'noModifier' {
+              #{$u-property}: $value;
+            } @else {
+              #{$u-property}#{$modifier-value}: $value;
+            }
+          }
+        }
+      }
+    }
 
     @each $name, $value in $u-values {
       @if $unquote {
@@ -92,4 +107,7 @@ $breakpoint-class-name: 'medium-screen';
 
   // u-measure,
   @include generate-utilities-from-deep-map($u-measure);
+
+  // u-padding
+  @include generate-utilities-from-deep-map($u-padding);
 }

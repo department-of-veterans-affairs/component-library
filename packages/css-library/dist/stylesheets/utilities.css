@@ -10509,6 +10509,366 @@ through all possible variants
   .medium-screen\:vads-u-measure--none {
     max-width: none;
   }
+  .medium-screen\:vads-u-padding--0 {
+    padding: 0;
+  }
+  .medium-screen\:vads-u-padding--1px {
+    padding: 1px;
+  }
+  .medium-screen\:vads-u-padding--0p25 {
+    padding: 2px;
+  }
+  .medium-screen\:vads-u-padding--0p5 {
+    padding: 0.25rem;
+  }
+  .medium-screen\:vads-u-padding--1 {
+    padding: 0.5rem;
+  }
+  .medium-screen\:vads-u-padding--1p5 {
+    padding: 0.75rem;
+  }
+  .medium-screen\:vads-u-padding--2 {
+    padding: 1rem;
+  }
+  .medium-screen\:vads-u-padding--2p5 {
+    padding: 1.25rem;
+  }
+  .medium-screen\:vads-u-padding--3 {
+    padding: 1.5rem;
+  }
+  .medium-screen\:vads-u-padding--4 {
+    padding: 2rem;
+  }
+  .medium-screen\:vads-u-padding--5 {
+    padding: 2.5rem;
+  }
+  .medium-screen\:vads-u-padding--6 {
+    padding: 3rem;
+  }
+  .medium-screen\:vads-u-padding--7 {
+    padding: 3.5rem;
+  }
+  .medium-screen\:vads-u-padding--8 {
+    padding: 4rem;
+  }
+  .medium-screen\:vads-u-padding--9 {
+    padding: 4.5rem;
+  }
+  .medium-screen\:vads-u-padding-top--0 {
+    padding-top: 0;
+  }
+  .medium-screen\:vads-u-padding-top--1px {
+    padding-top: 1px;
+  }
+  .medium-screen\:vads-u-padding-top--0p25 {
+    padding-top: 2px;
+  }
+  .medium-screen\:vads-u-padding-top--0p5 {
+    padding-top: 0.25rem;
+  }
+  .medium-screen\:vads-u-padding-top--1 {
+    padding-top: 0.5rem;
+  }
+  .medium-screen\:vads-u-padding-top--1p5 {
+    padding-top: 0.75rem;
+  }
+  .medium-screen\:vads-u-padding-top--2 {
+    padding-top: 1rem;
+  }
+  .medium-screen\:vads-u-padding-top--2p5 {
+    padding-top: 1.25rem;
+  }
+  .medium-screen\:vads-u-padding-top--3 {
+    padding-top: 1.5rem;
+  }
+  .medium-screen\:vads-u-padding-top--4 {
+    padding-top: 2rem;
+  }
+  .medium-screen\:vads-u-padding-top--5 {
+    padding-top: 2.5rem;
+  }
+  .medium-screen\:vads-u-padding-top--6 {
+    padding-top: 3rem;
+  }
+  .medium-screen\:vads-u-padding-top--7 {
+    padding-top: 3.5rem;
+  }
+  .medium-screen\:vads-u-padding-top--8 {
+    padding-top: 4rem;
+  }
+  .medium-screen\:vads-u-padding-top--9 {
+    padding-top: 4.5rem;
+  }
+  .medium-screen\:vads-u-padding-bottom--0 {
+    padding-bottom: 0;
+  }
+  .medium-screen\:vads-u-padding-bottom--1px {
+    padding-bottom: 1px;
+  }
+  .medium-screen\:vads-u-padding-bottom--0p25 {
+    padding-bottom: 2px;
+  }
+  .medium-screen\:vads-u-padding-bottom--0p5 {
+    padding-bottom: 0.25rem;
+  }
+  .medium-screen\:vads-u-padding-bottom--1 {
+    padding-bottom: 0.5rem;
+  }
+  .medium-screen\:vads-u-padding-bottom--1p5 {
+    padding-bottom: 0.75rem;
+  }
+  .medium-screen\:vads-u-padding-bottom--2 {
+    padding-bottom: 1rem;
+  }
+  .medium-screen\:vads-u-padding-bottom--2p5 {
+    padding-bottom: 1.25rem;
+  }
+  .medium-screen\:vads-u-padding-bottom--3 {
+    padding-bottom: 1.5rem;
+  }
+  .medium-screen\:vads-u-padding-bottom--4 {
+    padding-bottom: 2rem;
+  }
+  .medium-screen\:vads-u-padding-bottom--5 {
+    padding-bottom: 2.5rem;
+  }
+  .medium-screen\:vads-u-padding-bottom--6 {
+    padding-bottom: 3rem;
+  }
+  .medium-screen\:vads-u-padding-bottom--7 {
+    padding-bottom: 3.5rem;
+  }
+  .medium-screen\:vads-u-padding-bottom--8 {
+    padding-bottom: 4rem;
+  }
+  .medium-screen\:vads-u-padding-bottom--9 {
+    padding-bottom: 4.5rem;
+  }
+  .medium-screen\:vads-u-padding-right--0 {
+    padding-right: 0;
+  }
+  .medium-screen\:vads-u-padding-right--1px {
+    padding-right: 1px;
+  }
+  .medium-screen\:vads-u-padding-right--0p25 {
+    padding-right: 2px;
+  }
+  .medium-screen\:vads-u-padding-right--0p5 {
+    padding-right: 0.25rem;
+  }
+  .medium-screen\:vads-u-padding-right--1 {
+    padding-right: 0.5rem;
+  }
+  .medium-screen\:vads-u-padding-right--1p5 {
+    padding-right: 0.75rem;
+  }
+  .medium-screen\:vads-u-padding-right--2 {
+    padding-right: 1rem;
+  }
+  .medium-screen\:vads-u-padding-right--2p5 {
+    padding-right: 1.25rem;
+  }
+  .medium-screen\:vads-u-padding-right--3 {
+    padding-right: 1.5rem;
+  }
+  .medium-screen\:vads-u-padding-right--4 {
+    padding-right: 2rem;
+  }
+  .medium-screen\:vads-u-padding-right--5 {
+    padding-right: 2.5rem;
+  }
+  .medium-screen\:vads-u-padding-right--6 {
+    padding-right: 3rem;
+  }
+  .medium-screen\:vads-u-padding-right--7 {
+    padding-right: 3.5rem;
+  }
+  .medium-screen\:vads-u-padding-right--8 {
+    padding-right: 4rem;
+  }
+  .medium-screen\:vads-u-padding-right--9 {
+    padding-right: 4.5rem;
+  }
+  .medium-screen\:vads-u-padding-left--0 {
+    padding-left: 0;
+  }
+  .medium-screen\:vads-u-padding-left--1px {
+    padding-left: 1px;
+  }
+  .medium-screen\:vads-u-padding-left--0p25 {
+    padding-left: 2px;
+  }
+  .medium-screen\:vads-u-padding-left--0p5 {
+    padding-left: 0.25rem;
+  }
+  .medium-screen\:vads-u-padding-left--1 {
+    padding-left: 0.5rem;
+  }
+  .medium-screen\:vads-u-padding-left--1p5 {
+    padding-left: 0.75rem;
+  }
+  .medium-screen\:vads-u-padding-left--2 {
+    padding-left: 1rem;
+  }
+  .medium-screen\:vads-u-padding-left--2p5 {
+    padding-left: 1.25rem;
+  }
+  .medium-screen\:vads-u-padding-left--3 {
+    padding-left: 1.5rem;
+  }
+  .medium-screen\:vads-u-padding-left--4 {
+    padding-left: 2rem;
+  }
+  .medium-screen\:vads-u-padding-left--5 {
+    padding-left: 2.5rem;
+  }
+  .medium-screen\:vads-u-padding-left--6 {
+    padding-left: 3rem;
+  }
+  .medium-screen\:vads-u-padding-left--7 {
+    padding-left: 3.5rem;
+  }
+  .medium-screen\:vads-u-padding-left--8 {
+    padding-left: 4rem;
+  }
+  .medium-screen\:vads-u-padding-left--9 {
+    padding-left: 4.5rem;
+  }
+  .medium-screen\:vads-u-padding--0 {
+    padding: 0;
+  }
+  .medium-screen\:vads-u-padding--1px {
+    padding: 1px;
+  }
+  .medium-screen\:vads-u-padding--0p25 {
+    padding: 2px;
+  }
+  .medium-screen\:vads-u-padding--0p5 {
+    padding: 0.25rem;
+  }
+  .medium-screen\:vads-u-padding--1 {
+    padding: 0.5rem;
+  }
+  .medium-screen\:vads-u-padding--1p5 {
+    padding: 0.75rem;
+  }
+  .medium-screen\:vads-u-padding--2 {
+    padding: 1rem;
+  }
+  .medium-screen\:vads-u-padding--2p5 {
+    padding: 1.25rem;
+  }
+  .medium-screen\:vads-u-padding--3 {
+    padding: 1.5rem;
+  }
+  .medium-screen\:vads-u-padding--4 {
+    padding: 2rem;
+  }
+  .medium-screen\:vads-u-padding--5 {
+    padding: 2.5rem;
+  }
+  .medium-screen\:vads-u-padding--6 {
+    padding: 3rem;
+  }
+  .medium-screen\:vads-u-padding--7 {
+    padding: 3.5rem;
+  }
+  .medium-screen\:vads-u-padding--8 {
+    padding: 4rem;
+  }
+  .medium-screen\:vads-u-padding--9 {
+    padding: 4.5rem;
+  }
+  .medium-screen\:vads-u-padding-y--0 {
+    padding-top, padding-bottom: 0;
+  }
+  .medium-screen\:vads-u-padding-y--1px {
+    padding-top, padding-bottom: 1px;
+  }
+  .medium-screen\:vads-u-padding-y--0p25 {
+    padding-top, padding-bottom: 2px;
+  }
+  .medium-screen\:vads-u-padding-y--0p5 {
+    padding-top, padding-bottom: 0.25rem;
+  }
+  .medium-screen\:vads-u-padding-y--1 {
+    padding-top, padding-bottom: 0.5rem;
+  }
+  .medium-screen\:vads-u-padding-y--1p5 {
+    padding-top, padding-bottom: 0.75rem;
+  }
+  .medium-screen\:vads-u-padding-y--2 {
+    padding-top, padding-bottom: 1rem;
+  }
+  .medium-screen\:vads-u-padding-y--2p5 {
+    padding-top, padding-bottom: 1.25rem;
+  }
+  .medium-screen\:vads-u-padding-y--3 {
+    padding-top, padding-bottom: 1.5rem;
+  }
+  .medium-screen\:vads-u-padding-y--4 {
+    padding-top, padding-bottom: 2rem;
+  }
+  .medium-screen\:vads-u-padding-y--5 {
+    padding-top, padding-bottom: 2.5rem;
+  }
+  .medium-screen\:vads-u-padding-y--6 {
+    padding-top, padding-bottom: 3rem;
+  }
+  .medium-screen\:vads-u-padding-y--7 {
+    padding-top, padding-bottom: 3.5rem;
+  }
+  .medium-screen\:vads-u-padding-y--8 {
+    padding-top, padding-bottom: 4rem;
+  }
+  .medium-screen\:vads-u-padding-y--9 {
+    padding-top, padding-bottom: 4.5rem;
+  }
+  .medium-screen\:vads-u-padding-x--0 {
+    padding-left, padding-right: 0;
+  }
+  .medium-screen\:vads-u-padding-x--1px {
+    padding-left, padding-right: 1px;
+  }
+  .medium-screen\:vads-u-padding-x--0p25 {
+    padding-left, padding-right: 2px;
+  }
+  .medium-screen\:vads-u-padding-x--0p5 {
+    padding-left, padding-right: 0.25rem;
+  }
+  .medium-screen\:vads-u-padding-x--1 {
+    padding-left, padding-right: 0.5rem;
+  }
+  .medium-screen\:vads-u-padding-x--1p5 {
+    padding-left, padding-right: 0.75rem;
+  }
+  .medium-screen\:vads-u-padding-x--2 {
+    padding-left, padding-right: 1rem;
+  }
+  .medium-screen\:vads-u-padding-x--2p5 {
+    padding-left, padding-right: 1.25rem;
+  }
+  .medium-screen\:vads-u-padding-x--3 {
+    padding-left, padding-right: 1.5rem;
+  }
+  .medium-screen\:vads-u-padding-x--4 {
+    padding-left, padding-right: 2rem;
+  }
+  .medium-screen\:vads-u-padding-x--5 {
+    padding-left, padding-right: 2.5rem;
+  }
+  .medium-screen\:vads-u-padding-x--6 {
+    padding-left, padding-right: 3rem;
+  }
+  .medium-screen\:vads-u-padding-x--7 {
+    padding-left, padding-right: 3.5rem;
+  }
+  .medium-screen\:vads-u-padding-x--8 {
+    padding-left, padding-right: 4rem;
+  }
+  .medium-screen\:vads-u-padding-x--9 {
+    padding-left, padding-right: 4.5rem;
+  }
 }
 
 /*# sourceMappingURL=utilities.css.map */
