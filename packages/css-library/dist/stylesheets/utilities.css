@@ -11079,6 +11079,15 @@ through all possible variants
   .medium-screen\:vads-u-text-align--justify {
     text-align: justify;
   }
+  .medium-screen\:vads-u-text-decoration--none {
+    text-decoration: none;
+  }
+  .medium-screen\:vads-u-text-decoration--underline {
+    text-decoration: underline;
+  }
+  .medium-screen\:vads-u-text-decoration--line-through {
+    text-decoration: line-through;
+  }
 }
 
 /*# sourceMappingURL=utilities.css.map */
