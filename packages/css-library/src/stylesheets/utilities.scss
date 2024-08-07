@@ -102,4 +102,7 @@ $breakpoint-class-name: 'medium-screen';
 
   // u-visibility
   @include generate-utilities-from-deep-map($u-visibility);
+
+  // u-width
+  @include generate-utilities-from-deep-map($u-width);
 }

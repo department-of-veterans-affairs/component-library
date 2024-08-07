@@ -11094,6 +11094,24 @@ through all possible variants
   .medium-screen\:vads-u-visibility--visible {
     visibility: visible;
   }
+  .medium-screen\:vads-u-width--0 {
+    width: 0px;
+  }
+  .medium-screen\:vads-u-width--full {
+    width: 100%;
+  }
+  .medium-screen\:vads-u-width--auto {
+    width: auto;
+  }
+  .medium-screen\:vads-u-min-width--none {
+    min-width: none;
+  }
+  .medium-screen\:vads-u-max-width--none {
+    max-width: none;
+  }
+  .medium-screen\:vads-u-max-width--100 {
+    max-width: 100%;
+  }
 }
 
 /*# sourceMappingURL=utilities.css.map */
