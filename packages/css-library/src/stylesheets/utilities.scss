@@ -99,4 +99,7 @@ $breakpoint-class-name: 'medium-screen';
 
   // u-text-decoration
   @include generate-utilities-from-deep-map($u-text-decoration);
+
+  // u-visibility
+  @include generate-utilities-from-deep-map($u-visibility);
 }

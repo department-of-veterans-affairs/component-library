@@ -11088,6 +11088,12 @@ through all possible variants
   .medium-screen\:vads-u-text-decoration--line-through {
     text-decoration: line-through;
   }
+  .medium-screen\:vads-u-visibility--hidden {
+    visibility: hidden;
+  }
+  .medium-screen\:vads-u-visibility--visible {
+    visibility: visible;
+  }
 }
 
 /*# sourceMappingURL=utilities.css.map */
