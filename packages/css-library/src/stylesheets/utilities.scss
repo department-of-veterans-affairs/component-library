@@ -83,7 +83,7 @@ $breakpoint-class-name: 'medium-screen';
         @each $css-property, $css-value in $extend {
           #{$css-property}: $css-value;
         }
-        #{$u-property}: #{$content};
+        #{$u-property}: #{$content}; // flex property
       }
     }
   }
@@ -97,8 +97,42 @@ $breakpoint-class-name: 'medium-screen';
   // u-line-height
   @include generate-utilities-from-deep-map($u-line-height);
 
-  // TODO: u-margin
-  // @debug $u-margin;
+  // u-margin
+  @each $property, $property-map in $u-margin { 
+    $u-base: map-get($property-map, base);
+    $u-values: map-get($property-map, values);
+    $u-property: map-get($property-map, property);
+    $u-modifiers: map-get($property-map, modifiers);
+
+    @if $u-modifiers {
+      $modifier-y: map-get($u-modifiers, 'y-');
+      $modifier-x: map-get($u-modifiers, 'x-');
+
+      @each $name, $value in $u-values { 
+        @if $u-modifiers {
+          @each $key, $modifier in $u-modifiers {
+            .#{$breakpoint-class-name}\:#{$u-base}-#{$key}-#{$name} {
+              @if $key == 'y-' or $key == 'x-' {
+                margin-top: #{$value};
+                margin-bottom: #{$value};
+              } @else if $key != 'y-' or $key != 'x-'{
+                $direction: map-get($u-modifiers, $key);
+                margin#{$direction}: #{$value};
+              } @else {
+                margin: #{$value};
+              }
+            }
+          }
+        }
+      }
+    } @else {
+      @each $name, $value in $u-values {
+        .#{$breakpoint-class-name}\:#{$u-base}-#{$name} {
+          #{$u-property}: #{$value};
+        }
+      }
+    }
+  }
 
   // u-measure,
   @include generate-utilities-from-deep-map($u-measure);
