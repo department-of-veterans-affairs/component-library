@@ -10440,6 +10440,162 @@ through all possible variants
   .medium-screen\:vads-u-border-color--hub-service-member {
     border-color: #162e51;
   }
+  .medium-screen\:vads-u-color--base {
+    color: #1b1b1b;
+  }
+  .medium-screen\:vads-u-color--white {
+    color: #ffffff;
+  }
+  .medium-screen\:vads-u-color--black {
+    color: #000000;
+  }
+  .medium-screen\:vads-u-color--orange {
+    color: false;
+  }
+  .medium-screen\:vads-u-color--link-default {
+    color: #005ea2;
+  }
+  .medium-screen\:vads-u-color--warning-message {
+    color: #8a7237;
+  }
+  .medium-screen\:vads-u-color--primary {
+    color: #005ea2;
+  }
+  .medium-screen\:vads-u-color--primary-dark {
+    color: #1a4480;
+  }
+  .medium-screen\:vads-u-color--primary-darker {
+    color: #162e51;
+  }
+  .medium-screen\:vads-u-color--primary-alt {
+    color: #00bde3;
+  }
+  .medium-screen\:vads-u-color--primary-alt-dark {
+    color: #28a0cb;
+  }
+  .medium-screen\:vads-u-color--primary-alt-darkest {
+    color: #07648d;
+  }
+  .medium-screen\:vads-u-color--primary-alt-light {
+    color: #97d4ea;
+  }
+  .medium-screen\:vads-u-color--primary-alt-lightest {
+    color: #e1f3f8;
+  }
+  .medium-screen\:vads-u-color--secondary {
+    color: #d83933;
+  }
+  .medium-screen\:vads-u-color--secondary-dark {
+    color: #b50909;
+  }
+  .medium-screen\:vads-u-color--secondary-darkest {
+    color: #8b0a03;
+  }
+  .medium-screen\:vads-u-color--secondary-light {
+    color: #f2938c;
+  }
+  .medium-screen\:vads-u-color--secondary-lightest {
+    color: #f8dfe2;
+  }
+  .medium-screen\:vads-u-color--gray {
+    color: #565c65;
+  }
+  .medium-screen\:vads-u-color--gray-dark {
+    color: #3d4551;
+  }
+  .medium-screen\:vads-u-color--gray-medium {
+    color: #757575;
+  }
+  .medium-screen\:vads-u-color--gray-light {
+    color: #a9aeb1;
+  }
+  .medium-screen\:vads-u-color--gray-light-alt {
+    color: #edeff0;
+  }
+  .medium-screen\:vads-u-color--gray-lighter {
+    color: #dfe1e2;
+  }
+  .medium-screen\:vads-u-color--gray-lightest {
+    color: #f0f0f0;
+  }
+  .medium-screen\:vads-u-color--gray-warm-dark {
+    color: #454540;
+  }
+  .medium-screen\:vads-u-color--gray-warm-light {
+    color: #e6e6e2;
+  }
+  .medium-screen\:vads-u-color--gray-cool-light {
+    color: #e1e7f1;
+  }
+  .medium-screen\:vads-u-color--gold {
+    color: #ffbe2e;
+  }
+  .medium-screen\:vads-u-color--gold-darker {
+    color: #936f38;
+  }
+  .medium-screen\:vads-u-color--gold-light {
+    color: #face00;
+  }
+  .medium-screen\:vads-u-color--gold-lighter {
+    color: #ffe396;
+  }
+  .medium-screen\:vads-u-color--gold-lightest {
+    color: #fef0c8;
+  }
+  .medium-screen\:vads-u-color--green {
+    color: #008817;
+  }
+  .medium-screen\:vads-u-color--green-darker {
+    color: #154c21;
+  }
+  .medium-screen\:vads-u-color--green-light {
+    color: #5e9f69;
+  }
+  .medium-screen\:vads-u-color--green-lighter {
+    color: #b4d0b9;
+  }
+  .medium-screen\:vads-u-color--green-lightest {
+    color: #ecf3ec;
+  }
+  .medium-screen\:vads-u-color--cool-blue {
+    color: #345d96;
+  }
+  .medium-screen\:vads-u-color--cool-blue-light {
+    color: #4a77b4;
+  }
+  .medium-screen\:vads-u-color--cool-blue-lightest {
+    color: #e6e6e2;
+  }
+  .medium-screen\:vads-u-color--hub-health-care {
+    color: #3f57a6;
+  }
+  .medium-screen\:vads-u-color--hub-education {
+    color: #162e51;
+  }
+  .medium-screen\:vads-u-color--hub-disability {
+    color: #a23737;
+  }
+  .medium-screen\:vads-u-color--hub-careers {
+    color: #bd5727;
+  }
+  .medium-screen\:vads-u-color--hub-pension {
+    color: #4d8055;
+  }
+  .medium-screen\:vads-u-color--hub-housing {
+    color: #8e704f;
+  }
+  .medium-screen\:vads-u-color--hub-life-insurance {
+    color: #6f7a41;
+  }
+  .medium-screen\:vads-u-color--hub-burials {
+    color: #2378c3;
+  }
+  .medium-screen\:vads-u-color--hub-family-member {
+    color: #162e51;
+  }
+  .medium-screen\:vads-u-color--hub-service-member {
+    color: #162e51;
+  }
   .medium-screen\:vads-u-display--block {
     display: block;
   }

@@ -61,13 +61,8 @@ $breakpoint-class-name: 'medium-screen';
 }
 
 @media all and (min-width: $medium-screen-breakpoint) {
-
-  // $u-bg-color
-
   // $u-border
   @include generate-utilities-from-settings($u-border);
-
-  // $u-color
 
   // $u-display
   @include generate-utilities-from-settings($u-display);
