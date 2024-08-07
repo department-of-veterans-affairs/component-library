@@ -54,7 +54,7 @@ export class VaTextInput {
   /**
    * The error message to render.
    */
-  @Prop() error?: string;
+  @Prop({ reflect: true }) error?: string;
 
   /**
    * Whether or not to add usa-input--error as class if error message is outside of component
@@ -310,7 +310,7 @@ export class VaTextInput {
   private getInputmode(): string {
     if (this.currency) {
       return 'numeric';
-    } 
+    }
     return this.inputmode ? this.inputmode : undefined
   }
 
@@ -454,7 +454,7 @@ export class VaTextInput {
             {currency && <div id="symbol">$</div>}
             {inputPrefix && <div class="usa-input-prefix" part="input-prefix">{inputPrefix.substring(0, 25)}</div>}
             {inputIconPrefix && <div class="usa-input-prefix" part="input-prefix"><va-icon icon={inputIconPrefix} size={3} part="icon"></va-icon></div>}
-            
+
             <input
               class={inputClass}
               id="inputField"

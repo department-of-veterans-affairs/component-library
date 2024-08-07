@@ -36,8 +36,23 @@
   color: var(--vads-color-primary-dark);
 }
 
+.usa-breadcrumb__link {
+  color: var(--vads-color-link);
+}
+
+.usa-breadcrumb__link:hover {
+  color: var(--vads-color-primary-dark);
+}
+
 .usa-breadcrumb__list-item:not(:last-child)::after {
   background: var(--vads-color-gray-medium);
+}
+
+@media (max-width: 29.99em) {
+  .usa-breadcrumb__list-item:nth-last-child(2) .usa-breadcrumb__link {
+    padding-top: 0;
+    padding-bottom: 0;
+  }
 }
 
 .usa-current a {
