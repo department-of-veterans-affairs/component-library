@@ -90,4 +90,7 @@ $breakpoint-class-name: 'medium-screen';
 
   // u-padding
   @include generate-utilities-from-deep-map($u-padding);
+
+  // u-position
+  @include generate-utilities-from-deep-map($u-position);
 }

@@ -11058,6 +11058,15 @@ through all possible variants
   .medium-screen\:vads-u-padding-x--9 {
     padding-left, padding-right: 4.5rem;
   }
+  .medium-screen\:vads-u-position--absolute {
+    position: absolute;
+  }
+  .medium-screen\:vads-u-position--fixed {
+    position: fixed;
+  }
+  .medium-screen\:vads-u-position--relative {
+    position: relative;
+  }
 }
 
 /*# sourceMappingURL=utilities.css.map */
