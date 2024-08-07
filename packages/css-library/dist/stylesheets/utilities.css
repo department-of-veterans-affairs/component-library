@@ -10491,6 +10491,24 @@ through all possible variants
   .medium-screen\:vads-u-line-height--6 {
     line-height: 1.75;
   }
+  .medium-screen\:vads-u-measure--1 {
+    max-width: 40ch;
+  }
+  .medium-screen\:vads-u-measure--2 {
+    max-width: 60ch;
+  }
+  .medium-screen\:vads-u-measure--3 {
+    max-width: 66ch;
+  }
+  .medium-screen\:vads-u-measure--4 {
+    max-width: 72ch;
+  }
+  .medium-screen\:vads-u-measure--5 {
+    max-width: 77ch;
+  }
+  .medium-screen\:vads-u-measure--none {
+    max-width: none;
+  }
 }
 
 /*# sourceMappingURL=utilities.css.map */
