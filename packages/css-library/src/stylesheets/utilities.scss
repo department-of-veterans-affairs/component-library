@@ -80,4 +80,7 @@ $breakpoint-class-name: 'medium-screen';
 
   // u-font
   @include generate-utilities-from-deep-map($u-font);
+
+  // u-height
+  @include generate-utilities-from-deep-map($u-height);
 }

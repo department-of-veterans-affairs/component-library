@@ -10449,6 +10449,30 @@ through all possible variants
   .medium-screen\:vads-u-font-weight--normal {
     font-weight: 400;
   }
+  .medium-screen\:vads-u-height--0 {
+    height: 0px;
+  }
+  .medium-screen\:vads-u-height--full {
+    height: 100%;
+  }
+  .medium-screen\:vads-u-height--auto {
+    height: auto;
+  }
+  .medium-screen\:vads-u-height--viewport {
+    height: 100vh;
+  }
+  .medium-screen\:vads-u-min-height--none {
+    min-height: none;
+  }
+  .medium-screen\:vads-u-min-height--viewport {
+    min-height: 100vh;
+  }
+  .medium-screen\:vads-u-max-height--none {
+    max-height: none;
+  }
+  .medium-screen\:vads-u-max-height--viewport {
+    max-height: 100vh;
+  }
 }
 
 /*# sourceMappingURL=utilities.css.map */
