@@ -171,10 +171,6 @@ export namespace Components {
          */
         "label"?: string;
         /**
-          * Whether or not the component will use USWDS v3 styling.
-         */
-        "uswds"?: boolean;
-        /**
           * Whether or not the component will wrap the breadcrumbs. This prop is available when `uswds` is set to `true`.
          */
         "wrapping"?: boolean;
@@ -1041,11 +1037,11 @@ export namespace Components {
          */
         "error"?: string;
         /**
-          * The content of the heading if `useFormsPattern` and `uswds` are true.
+          * The content of the heading if `useFormsPattern` is true.
          */
         "formHeading"?: string;
         /**
-          * The heading level for the heading if `useFormsPattern` and `uswds` are true.
+          * The heading level for the heading if `useFormsPattern` is true.
          */
         "formHeadingLevel"?: number;
         /**
@@ -1069,13 +1065,9 @@ export namespace Components {
          */
         "required"?: boolean;
         /**
-          * Enabling this will add a heading and description for integrating into the forms pattern. Accepts `single` or `multiple` to indicate if the form is a single input or will have multiple inputs. `uswds` should be true.
+          * Enabling this will add a heading and description for integrating into the forms pattern. Accepts `single` or `multiple` to indicate if the form is a single input or will have multiple inputs
          */
         "useFormsPattern"?: string;
-        /**
-          * Whether or not the component will use USWDS v3 styling.
-         */
-        "uswds"?: boolean;
     }
     interface VaRadioOption {
         /**
@@ -1087,11 +1079,11 @@ export namespace Components {
          */
         "checked"?: boolean;
         /**
-          * Description of the option displayed below the option label. Available when uswds is true.
+          * Description of the option displayed below the option label.
          */
         "description"?: string;
         /**
-          * Whether or not the radio option is disabled. Can be used if the USWDS option is active.
+          * Whether or not the radio option is disabled.
          */
         "disabled"?: boolean;
         /**
@@ -1103,13 +1095,9 @@ export namespace Components {
          */
         "name": string;
         /**
-          * Whether or not the component will display as a tile. Available when uswds is true.
+          * Whether or not the component will display as a tile.
          */
         "tile"?: boolean;
-        /**
-          * Whether or not the component will use USWDS v3. styling.
-         */
-        "uswds"?: boolean;
         /**
           * The value attribute for the input element.
          */
@@ -1236,10 +1224,6 @@ export namespace Components {
           * Whether or not this is a required field.
          */
         "required"?: boolean;
-        /**
-          * Whether or not the component will use USWDS v3 styling.
-         */
-        "uswds"?: boolean;
         /**
           * Selected value (will get updated on select).
          */
@@ -2290,10 +2274,6 @@ declare namespace LocalJSX {
          */
         "onRouteChange"?: (event: VaBreadcrumbsCustomEvent<{ href: string }>) => void;
         /**
-          * Whether or not the component will use USWDS v3 styling.
-         */
-        "uswds"?: boolean;
-        /**
           * Whether or not the component will wrap the breadcrumbs. This prop is available when `uswds` is set to `true`.
          */
         "wrapping"?: boolean;
@@ -3312,11 +3292,11 @@ declare namespace LocalJSX {
          */
         "error"?: string;
         /**
-          * The content of the heading if `useFormsPattern` and `uswds` are true.
+          * The content of the heading if `useFormsPattern` is true.
          */
         "formHeading"?: string;
         /**
-          * The heading level for the heading if `useFormsPattern` and `uswds` are true.
+          * The heading level for the heading if `useFormsPattern` is true.
          */
         "formHeadingLevel"?: number;
         /**
@@ -3348,13 +3328,9 @@ declare namespace LocalJSX {
          */
         "required"?: boolean;
         /**
-          * Enabling this will add a heading and description for integrating into the forms pattern. Accepts `single` or `multiple` to indicate if the form is a single input or will have multiple inputs. `uswds` should be true.
+          * Enabling this will add a heading and description for integrating into the forms pattern. Accepts `single` or `multiple` to indicate if the form is a single input or will have multiple inputs
          */
         "useFormsPattern"?: string;
-        /**
-          * Whether or not the component will use USWDS v3 styling.
-         */
-        "uswds"?: boolean;
     }
     interface VaRadioOption {
         /**
@@ -3366,11 +3342,11 @@ declare namespace LocalJSX {
          */
         "checked"?: boolean;
         /**
-          * Description of the option displayed below the option label. Available when uswds is true.
+          * Description of the option displayed below the option label.
          */
         "description"?: string;
         /**
-          * Whether or not the radio option is disabled. Can be used if the USWDS option is active.
+          * Whether or not the radio option is disabled.
          */
         "disabled"?: boolean;
         /**
@@ -3386,13 +3362,9 @@ declare namespace LocalJSX {
          */
         "onRadioOptionSelected"?: (event: VaRadioOptionCustomEvent<any>) => void;
         /**
-          * Whether or not the component will display as a tile. Available when uswds is true.
+          * Whether or not the component will display as a tile.
          */
         "tile"?: boolean;
-        /**
-          * Whether or not the component will use USWDS v3. styling.
-         */
-        "uswds"?: boolean;
         /**
           * The value attribute for the input element.
          */
@@ -3539,10 +3511,6 @@ declare namespace LocalJSX {
           * Whether or not this is a required field.
          */
         "required"?: boolean;
-        /**
-          * Whether or not the component will use USWDS v3 styling.
-         */
-        "uswds"?: boolean;
         /**
           * Selected value (will get updated on select).
          */
