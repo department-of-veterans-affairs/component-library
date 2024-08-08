@@ -22,7 +22,7 @@ const Template = (defaultArgs) => {
       <div className="usa-grid usa-grid-full">
         <div className="usa-width-three-fourths">
           <h1>The top</h1>
-          {[...Array(2)].map(i => (
+          {[...Array(10)].map(i => (
             <div
               key={i}
               style={{
@@ -35,7 +35,6 @@ const Template = (defaultArgs) => {
               }}
             >
               Scroll down
-              <a href="">link</a>
             </div>
           ))}
           <va-back-to-top />
