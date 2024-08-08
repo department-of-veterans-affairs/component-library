@@ -278,7 +278,7 @@ export namespace Components {
     }
     interface VaCheckbox {
         /**
-          * Description of the option displayed below the checkbox label. Available when uswds is true.
+          * Description of the option displayed below the checkbox label.
          */
         "checkboxDescription"?: string;
         /**
@@ -290,7 +290,7 @@ export namespace Components {
          */
         "description"?: string;
         /**
-          * Whether or not the checkbox option is disabled. Available when uswds is true.
+          * Whether or not the checkbox option is disabled.
          */
         "disabled"?: boolean;
         /**
@@ -322,13 +322,9 @@ export namespace Components {
          */
         "required"?: boolean;
         /**
-          * Whether or not the component will display as a tile. Available when uswds is true.
+          * Whether or not the component will display as a tile.
          */
         "tile"?: boolean;
-        /**
-          * Whether or not the component will use USWDS v3 styling.
-         */
-        "uswds"?: boolean;
     }
     interface VaCheckboxGroup {
         /**
@@ -340,11 +336,11 @@ export namespace Components {
          */
         "error"?: string;
         /**
-          * The content of the heading if `useFormsPattern` and `uswds` are true.
+          * The content of the heading if `useFormsPattern` is true.
          */
         "formHeading"?: string;
         /**
-          * The heading level for the heading if `useFormsPattern` and `uswds` are true.
+          * The heading level for the heading if `useFormsPattern` is true.
          */
         "formHeadingLevel"?: number;
         /**
@@ -364,13 +360,9 @@ export namespace Components {
          */
         "required"?: boolean;
         /**
-          * Enabling this will add a heading and description for integrating into the forms pattern. Accepts `single` or `multiple` to indicate if the form is a single input or will have multiple inputs. `uswds` should be true.
+          * Enabling this will add a heading and description for integrating into the forms pattern. Accepts `single` or `multiple` to indicate if the form is a single input or will have multiple inputs.
          */
         "useFormsPattern"?: string;
-        /**
-          * Whether or not the component will use USWDS v3 styling.
-         */
-        "uswds"?: boolean;
     }
     interface VaCrisisLineModal {
     }
@@ -966,10 +958,6 @@ export namespace Components {
           * Whether to display the error message or not.
          */
         "showError"?: boolean;
-        /**
-          * Whether or not the component will use USWDS v3 styling.
-         */
-        "uswds"?: boolean;
     }
     interface VaProcessList {
         /**
@@ -2401,7 +2389,7 @@ declare namespace LocalJSX {
     }
     interface VaCheckbox {
         /**
-          * Description of the option displayed below the checkbox label. Available when uswds is true.
+          * Description of the option displayed below the checkbox label.
          */
         "checkboxDescription"?: string;
         /**
@@ -2413,7 +2401,7 @@ declare namespace LocalJSX {
          */
         "description"?: string;
         /**
-          * Whether or not the checkbox option is disabled. Available when uswds is true.
+          * Whether or not the checkbox option is disabled.
          */
         "disabled"?: boolean;
         /**
@@ -2453,13 +2441,9 @@ declare namespace LocalJSX {
          */
         "required"?: boolean;
         /**
-          * Whether or not the component will display as a tile. Available when uswds is true.
+          * Whether or not the component will display as a tile.
          */
         "tile"?: boolean;
-        /**
-          * Whether or not the component will use USWDS v3 styling.
-         */
-        "uswds"?: boolean;
     }
     interface VaCheckboxGroup {
         /**
@@ -2471,11 +2455,11 @@ declare namespace LocalJSX {
          */
         "error"?: string;
         /**
-          * The content of the heading if `useFormsPattern` and `uswds` are true.
+          * The content of the heading if `useFormsPattern` is true.
          */
         "formHeading"?: string;
         /**
-          * The heading level for the heading if `useFormsPattern` and `uswds` are true.
+          * The heading level for the heading if `useFormsPattern` is true.
          */
         "formHeadingLevel"?: number;
         /**
@@ -2499,13 +2483,9 @@ declare namespace LocalJSX {
          */
         "required"?: boolean;
         /**
-          * Enabling this will add a heading and description for integrating into the forms pattern. Accepts `single` or `multiple` to indicate if the form is a single input or will have multiple inputs. `uswds` should be true.
+          * Enabling this will add a heading and description for integrating into the forms pattern. Accepts `single` or `multiple` to indicate if the form is a single input or will have multiple inputs.
          */
         "useFormsPattern"?: string;
-        /**
-          * Whether or not the component will use USWDS v3 styling.
-         */
-        "uswds"?: boolean;
     }
     interface VaCrisisLineModal {
     }
@@ -3209,10 +3189,6 @@ declare namespace LocalJSX {
           * Whether to display the error message or not.
          */
         "showError"?: boolean;
-        /**
-          * Whether or not the component will use USWDS v3 styling.
-         */
-        "uswds"?: boolean;
     }
     interface VaProcessList {
         /**
