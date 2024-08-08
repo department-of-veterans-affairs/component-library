@@ -64,26 +64,21 @@ export class VaCheckboxGroup {
   @Prop() hint?: string;
 
   /**
-   * Whether or not the component will use USWDS v3 styling.
-   */
-  @Prop() uswds?: boolean = true;
-
-  /**
    * Insert a header with defined level inside the label (legend)
    */
   @Prop() labelHeaderLevel?: string;
    /**
-   * Enabling this will add a heading and description for integrating into the forms pattern. Accepts `single` or `multiple` to indicate if the form is a single input or will have multiple inputs. `uswds` should be true.
+   * Enabling this will add a heading and description for integrating into the forms pattern. Accepts `single` or `multiple` to indicate if the form is a single input or will have multiple inputs.
    */
    @Prop() useFormsPattern?: string;
 
    /**
-    * The heading level for the heading if `useFormsPattern` and `uswds` are true.
+    * The heading level for the heading if `useFormsPattern` is true.
     */
    @Prop() formHeadingLevel?: number = 3;
  
    /**
-    * The content of the heading if `useFormsPattern` and `uswds` are true.
+    * The content of the heading if `useFormsPattern` is true.
     */
    @Prop() formHeading?: string;
 
@@ -137,7 +132,6 @@ export class VaCheckboxGroup {
       required,
       error,
       hint,
-      uswds,
       useFormsPattern,
       formHeadingLevel,
       formHeading, } = this;
@@ -148,91 +142,62 @@ export class VaCheckboxGroup {
         useFormsPattern === 'multiple' ? 'header-message' : ''}`.trim() || null;
 
 
-    if (uswds) {
-      const legendClass = classnames({
-        'usa-legend': true,
-        'usa-label--error': error
-      });
-      const isFormsPattern = useFormsPattern === 'single' || useFormsPattern === 'multiple' ? true : false;
+    const legendClass = classnames({
+      'usa-legend': true,
+      'usa-label--error': error
+    });
+    const isFormsPattern = useFormsPattern === 'single' || useFormsPattern === 'multiple' ? true : false;
 
-      let formsHeading = null;
-      if (isFormsPattern) {
-        const HeaderLevel = getHeaderLevel(formHeadingLevel);
-        formsHeading = (
-          <Fragment>
-            {formHeading &&
-              <HeaderLevel id="form-question" part="form-header">
-                {formHeading}
-              </HeaderLevel>
-            }
-            <div id="form-description">
-              <slot name="form-description"></slot>
-            </div>
-          </Fragment>
-        )
-      }
-
-      return (
-        <Host role="group">
-          {formsHeading}
-          <div class="input-wrap">
-            <fieldset class="usa-fieldset" aria-labelledby={ariaLabeledByIds}>
-              <legend class={legendClass}>
-                {HeaderLevel ? (
-                  <HeaderLevel part="header">{label}</HeaderLevel>
-                ) : (
-                  label
-                )}&nbsp;
-                {
-                  useFormsPattern === 'multiple' && (
-                    <span id="header-message" class="sr-only">
-                      {label}
-                    </span>
-                  )
-                }
-                {required && <span class="usa-label--required">{i18next.t('required')}</span>}
-                {hint && <div class="usa-hint">{hint}</div>}
-              </legend>
-              <span id="checkbox-error-message" role="alert">
-                {error && (
-                  <Fragment>
-                    <span class="usa-sr-only">{i18next.t('error')}</span>
-                    <span class="usa-error-message">{error}</span>
-                  </Fragment>
-                )}
-              </span>
-              <slot></slot>
-            </fieldset>
+    let formsHeading = null;
+    if (isFormsPattern) {
+      const HeaderLevel = getHeaderLevel(formHeadingLevel);
+      formsHeading = (
+        <Fragment>
+          {formHeading &&
+            <HeaderLevel id="form-question" part="form-header">
+              {formHeading}
+            </HeaderLevel>
+          }
+          <div id="form-description">
+            <slot name="form-description"></slot>
           </div>
-        </Host>
+        </Fragment>
       )
-    } else  {
-      return (
-        <Host role="group">
-          <fieldset>
-            <legend>
+    }
+
+    return (
+      <Host role="group">
+        {formsHeading}
+        <div class="input-wrap">
+          <fieldset class="usa-fieldset" aria-labelledby={ariaLabeledByIds}>
+            <legend class={legendClass}>
               {HeaderLevel ? (
                 <HeaderLevel part="header">{label}</HeaderLevel>
               ) : (
                 label
-              )}
-              {required && (
-                <span class="required">{i18next.t('required')}</span>
-              )}
-              {hint && <div class="hint-text">{hint}</div>}
+              )}&nbsp;
+              {
+                useFormsPattern === 'multiple' && (
+                  <span id="header-message" class="sr-only">
+                    {label}
+                  </span>
+                )
+              }
+              {required && <span class="usa-label--required">{i18next.t('required')}</span>}
+              {hint && <div class="usa-hint">{hint}</div>}
             </legend>
-            
-            <span id="error-message" role="alert">
+            <span id="checkbox-error-message" role="alert">
               {error && (
                 <Fragment>
-                  <span class="sr-only">{i18next.t('error')}</span> {error}
+                  <span class="usa-sr-only">{i18next.t('error')}</span>
+                  <span class="usa-error-message">{error}</span>
                 </Fragment>
               )}
             </span>
             <slot></slot>
           </fieldset>
-        </Host>
-      );
-    }
+        </div>
+      </Host>
+    )
   }
 }

@@ -36,15 +36,11 @@ export class VaBreadcrumbs {
    */
   @Prop() label?: string = 'Breadcrumb';
   /**
-   * Whether or not the component will use USWDS v3 styling.
-   */
-  @Prop() uswds?: boolean = true;
-  /**
-   *  Whether or not the component will wrap the breadcrumbs. This prop is available when `uswds` is set to `true`.
+   *  Whether or not the component will wrap the breadcrumbs.
    */
   @Prop() wrapping?: boolean = false;
   /**
-   *  Represents a list of breadcrumbs. Use a JSON array of objects with label and href properties, then wrap in a string if using non-React-binding version. See Storybook examples for React-binding version. For pure web components, here's an example link: ``[{"href": "/link1", "label": "Link 1"}]`. This prop is available when `uswds` is set to `true`.
+   *  Represents a list of breadcrumbs. Use a JSON array of objects with label and href properties, then wrap in a string if using non-React-binding version. See Storybook examples for React-binding version. For pure web components, here's an example link: ``[{"href": "/link1", "label": "Link 1"}]`.
    */
   @Prop() breadcrumbList?: Breadcrumb[] | string;
 
@@ -57,7 +53,6 @@ export class VaBreadcrumbs {
    *
    * Represents an internal state of the component which stores the list of breadcrumbs parsed from the 'breadcrumbList' prop.
    * Each breadcrumb is represented as an object with at least two properties: 'label' and 'href'.
-   * This state is used when `uswds` is set to `true`.
    */
   @State() formattedBreadcrumbs?: Breadcrumb[] = [];
   /**
@@ -92,7 +87,7 @@ export class VaBreadcrumbs {
 
   /**
    * Fires when user clicks on breadcrumb anchor tag.
-   * Has no effect unless uswds is true and the href of anchor tag is part of
+   * Has no effect unless the href of anchor tag is part of
    * breadcrumb object that also has isRouterLink: true
    */
   @Event({
@@ -103,7 +98,6 @@ export class VaBreadcrumbs {
 
   /**
    * This method is used to update the formattedBreadcrumbs state.
-   * It is only invoked when the uswds attribute is set to true on the component.
    * It either parses a JSON string into an array of breadcrumb objects or uses the passed array as is.
    *
    * @param breadcrumbList - An array of breadcrumb objects or a stringified version of it.
@@ -119,9 +113,7 @@ export class VaBreadcrumbs {
   }
 
   private getClickLevel(target: HTMLAnchorElement) {
-    const anchorNodes = this.uswds
-      ? Array.from(this.el.shadowRoot.querySelectorAll('a'))
-      : Array.from(this.el.querySelectorAll('a'));
+    const anchorNodes = Array.from(this.el.shadowRoot.querySelectorAll('a'));
     const index = anchorNodes.findIndex((node: HTMLAnchorElement) =>
       node.isEqualNode(target),
     );
@@ -139,9 +131,7 @@ export class VaBreadcrumbs {
           details: {
             clickLabel: target.innerText.trim(),
             clickLevel: this.getClickLevel(target),
-            totalLevels: this.uswds
-              ? this.el.shadowRoot.querySelectorAll('a').length + 1
-              : this.el.querySelectorAll('a').length,
+            totalLevels:  this.el.shadowRoot.querySelectorAll('a').length + 1
           },
         };
         this.componentLibraryAnalytics.emit(details);
@@ -229,20 +219,17 @@ export class VaBreadcrumbs {
 
   /**
    * This method is invoked once before the component is first rendered.
-   * It is only used when the uswds attribute is set to true on the component.
    * Its main purpose is to validate and format the breadcrumbList prop, if present.
    *
    */
   componentWillLoad() {
-    if (this.uswds) {
-      if (!this.breadcrumbList?.length) return;
+    if (!this.breadcrumbList?.length) return;
 
-      let potentialBreadcrumbs = this.validateBreadcrumbs(this.breadcrumbList);
+    let potentialBreadcrumbs = this.validateBreadcrumbs(this.breadcrumbList);
 
-      if (potentialBreadcrumbs) {
-        this.updateBreadCrumbList(potentialBreadcrumbs);
-      } else return;
-    }
+    if (potentialBreadcrumbs) {
+      this.updateBreadCrumbList(potentialBreadcrumbs);
+    } else return;
   }
 
   /**
@@ -267,11 +254,7 @@ export class VaBreadcrumbs {
       // only be adding new breadcrumbs items in the format of
       // <li><a href="...">...</a></li>.
       if (node.nodeName === 'LI') {
-        if (this.uswds) {
-          node.classList.add('usa-breadcrumb__list-item');
-        } else {
-          node.classList.add('va-breadcrumbs-li');
-        }
+        node.classList.add('usa-breadcrumb__list-item');
         const anchor = node.querySelector('a');
 
         if (index === 0 && anchor && this.homeVeteransAffairs) {
@@ -284,25 +267,18 @@ export class VaBreadcrumbs {
           anchor.removeAttribute('aria-current');
         }
 
-        if (this.uswds) {
-          const span = document.createElement('span');
-          span.textContent = anchor.textContent;
-          anchor.innerHTML = '';
-          anchor.appendChild(span);
-        }
+        const span = document.createElement('span');
+        span.textContent = anchor.textContent;
+        anchor.innerHTML = '';
+        anchor.appendChild(span);
 
         if (index === slotNodes.length - 1) {
-          if (this.uswds) {
-            const span = document.createElement('span');
-            span.textContent = anchor.textContent;
-            node.classList.add('usa-current');
-            node.replaceChild(span, anchor);
-            /* eslint-disable-next-line i18next/no-literal-string */
-            node?.setAttribute('aria-current', 'page');
-          } else {
-            /* eslint-disable-next-line i18next/no-literal-string */
-            anchor?.setAttribute('aria-current', 'page');
-          }
+          const span = document.createElement('span');
+          span.textContent = anchor.textContent;
+          node.classList.add('usa-current');
+          node.replaceChild(span, anchor);
+          /* eslint-disable-next-line i18next/no-literal-string */
+          node?.setAttribute('aria-current', 'page');
         }
       }
     });
@@ -318,7 +294,7 @@ export class VaBreadcrumbs {
   }
 
   /**
-   * Handle click event on breadcrumb when uswds is true
+   * Handle click event on breadcrumb
    */
   handleClick(
     e: MouseEvent,
@@ -332,67 +308,55 @@ export class VaBreadcrumbs {
   }
 
   render() {
-    const { label, uswds, wrapping } = this;
+    const { label, wrapping } = this;
     const wrapClass = classnames({
       'usa-breadcrumb': true,
       'usa-breadcrumb--wrap': wrapping,
     });
 
-    if (uswds) {
-      return (
-        <Host>
-          <nav aria-label={label} class={wrapClass}>
-            <ol role="list" class="usa-breadcrumb__list">
-              {this.formattedBreadcrumbs.map((item, index) => (
-                <li
-                  class={`usa-breadcrumb__list-item ${
-                    index === this.formattedBreadcrumbs.length - 1
-                      ? 'usa-current'
-                      : ''
-                  }`}
-                  aria-current={
-                    index === this.formattedBreadcrumbs.length - 1
-                      ? 'page'
-                      : undefined
-                  }
-                >
-                  {index === this.formattedBreadcrumbs.length - 1 ? (
-                    <a
-                      class="usa-breadcrumb__link"
-                      href="#content"
-                      onClick={e => this.fireAnalyticsEvent(e)}
-                      lang={item.lang || 'en-US'}
-                      hreflang={item.lang || 'en-US'}
-                    >
-                      <span>{item.label}</span>
-                    </a>
-                  ) : (
-                    <a
-                      class="usa-breadcrumb__link"
-                      href={item.href}
-                      onClick={e => this.handleClick(e, item)}
-                      lang={item.lang || 'en-US'}
-                      hreflang={item.lang || 'en-US'}
-                    >
-                      <span>{item.label}</span>
-                    </a>
-                  )}
-                </li>
-              ))}
-            </ol>
-          </nav>
-        </Host>
-      );
-    } else {
-      return (
-        <Host>
-          <nav aria-label={label}>
-            <ul role="list" onClick={e => this.fireAnalyticsEvent(e)}>
-              <slot onSlotchange={this.handleSlotChange.bind(this)}></slot>
-            </ul>
-          </nav>
-        </Host>
-      );
-    }
+    return (
+      <Host>
+        <nav aria-label={label} class={wrapClass}>
+          <ol role="list" class="usa-breadcrumb__list">
+            {this.formattedBreadcrumbs.map((item, index) => (
+              <li
+                class={`usa-breadcrumb__list-item ${
+                  index === this.formattedBreadcrumbs.length - 1
+                    ? 'usa-current'
+                    : ''
+                }`}
+                aria-current={
+                  index === this.formattedBreadcrumbs.length - 1
+                    ? 'page'
+                    : undefined
+                }
+              >
+                {index === this.formattedBreadcrumbs.length - 1 ? (
+                  <a
+                    class="usa-breadcrumb__link"
+                    href="#content"
+                    onClick={e => this.fireAnalyticsEvent(e)}
+                    lang={item.lang || 'en-US'}
+                    hreflang={item.lang || 'en-US'}
+                  >
+                    <span>{item.label}</span>
+                  </a>
+                ) : (
+                  <a
+                    class="usa-breadcrumb__link"
+                    href={item.href}
+                    onClick={e => this.handleClick(e, item)}
+                    lang={item.lang || 'en-US'}
+                    hreflang={item.lang || 'en-US'}
+                  >
+                    <span>{item.label}</span>
+                  </a>
+                )}
+              </li>
+            ))}
+          </ol>
+        </nav>
+      </Host>
+    );
   }
 }
