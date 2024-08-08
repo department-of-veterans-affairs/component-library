@@ -474,10 +474,12 @@ export class VaFileInput {
                           buttonType="change-file"
                           onClick={this.changeFile}
                           label="Change file"
+                          aria-label={'change file ' + file.name}
                         ></va-button-icon>
                         <va-button-icon
                           buttonType="delete"
                           onClick={this.openModal}
+                          aria-label={'delete file ' + file.name}
                           label="Delete"
                         ></va-button-icon>
                       </div>
