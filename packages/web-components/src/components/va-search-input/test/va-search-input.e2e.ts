@@ -841,7 +841,7 @@ describe('va-search-input', () => {
     });
   });
 
-  it('does not fire an analytics event when button is clicked if analytics are disabled', async () => {
+  it('does not fire an analytics event when button is clicked if analytics are disabled with only the prop name', async () => {
     const page = await newE2EPage();
     await page.setContent(
       '<va-search-input disable-analytics label="Search" value="benefits""></va-search-input>',
@@ -855,10 +855,40 @@ describe('va-search-input', () => {
     expect(analyticsSpy).not.toHaveReceivedEvent();
   });
 
-  it('does not fire an analytics event on blur if analytics are disabled', async () => {
+  it('does not fire an analytics event when button is clicked if analytics are disabled with the explicit "true" value', async () => {
+    const page = await newE2EPage();
+    await page.setContent(
+      '<va-search-input disable-analytics="true" label="Search" value="benefits""></va-search-input>',
+    );
+
+    const analyticsSpy = await page.spyOnEvent('component-library-analytics');
+
+    const button = await page.find('va-search-input >>> button');
+    await button.click();
+
+    expect(analyticsSpy).not.toHaveReceivedEvent();
+  });
+
+  it('does not fire an analytics event on blur if analytics are disabled with only the prop name', async () => {
     const page = await newE2EPage();
     await page.setContent(
       '<va-search-input disable-analytics label="Search" value="benefits""></va-search-input>',
+    );
+
+    const analyticsSpy = await page.spyOnEvent('component-library-analytics');
+
+    const component = await page.find('va-search-input');
+    await component.press('Tab'); // on the input
+    await component.press('Tab'); // on the button
+    await component.press('Tab'); // off the component
+
+    expect(analyticsSpy).not.toHaveReceivedEvent();
+  });
+
+  it('does not fire an analytics event on blur if analytics are disabled with the explicit "true" value', async () => {
+    const page = await newE2EPage();
+    await page.setContent(
+      '<va-search-input disable-analytics="true" label="Search" value="benefits""></va-search-input>',
     );
 
     const analyticsSpy = await page.spyOnEvent('component-library-analytics');
