@@ -51,4 +51,4 @@ $u-flex-grid-cols: (
   ),
 );
 
-$u-flex-grid: map-collect($u-flex-grid-cols, $u-flex-grid-cols);
+$u-flex-grid: map-collect($u-flex-grid-col, $u-flex-grid-cols);
