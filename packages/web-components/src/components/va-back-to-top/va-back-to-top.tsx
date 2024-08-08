@@ -87,7 +87,7 @@ export class VaBackToTop {
           <div
             class={classnames({ docked: this.isDocked, reveal: this.revealed })}
           >
-            <a href="#ds-back-to-top" onClick={this.navigateToTop.bind(this)} aria-hidden={`${!this.revealed}`}>
+            <a href="#ds-back-to-top" onClick={this.navigateToTop.bind(this)}>
               <span>
                 <va-icon icon="arrow_upward" size={3}></va-icon>
                 <span class="sr-only">Back to top</span>{' '}
