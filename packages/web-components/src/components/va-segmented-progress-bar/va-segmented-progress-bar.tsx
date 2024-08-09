@@ -35,11 +35,6 @@ export class VaSegmentedProgressBar {
   @Prop() label?: string;
 
   /**
-  * Whether or not the component will use USWDS v3 styling.
-  */
-  @Prop() uswds?: boolean = true;
-
-  /**
   * Header level for button wrapper. Must be between 1 and 6 (v3 only)
   */
   @Prop() headerLevel?: number = 4;
@@ -102,8 +97,6 @@ export class VaSegmentedProgressBar {
     const {
       current,
       total,
-      label = `Step ${current} of ${total}`,
-      uswds,
       labels,
       centeredLabels,
       counters,
@@ -118,86 +111,59 @@ export class VaSegmentedProgressBar {
     }
     const range = Array.from({ length: total }, (_, i) => i);
 
-    if (uswds) {
 
-      // eslint-disable-next-line i18next/no-literal-string
-      const Tag = useDiv ? `div` : `h${headerLevel}`;
+    // eslint-disable-next-line i18next/no-literal-string
+    const Tag = useDiv ? `div` : `h${headerLevel}`;
 
-      const indicatorClass = classNames({
-        'usa-step-indicator': true,
-        'usa-step-indicator--center': centeredLabels,
-        'usa-step-indicator--counters': counters === 'default',
-        'usa-step-indicator--counters-sm': counters === 'small'
-      })
+    const indicatorClass = classNames({
+      'usa-step-indicator': true,
+      'usa-step-indicator--center': centeredLabels,
+      'usa-step-indicator--counters': counters === 'default',
+      'usa-step-indicator--counters-sm': counters === 'small'
+    })
 
-      const computeSegmentClass = (step) => {
-        return classNames({
-          'usa-step-indicator__segment': true,
-          'usa-step-indicator__segment--complete': current > step + 1,
-          'usa-step-indicator__segment--current': current === step + 1
-        });
-      }
-
-      return (
-        <Host>
-          <div class={indicatorClass}>
-                <ol class="usa-step-indicator__segments" aria-hidden={labels ? null : 'true'}>
-                  {range.map(step => (
-                    <li class={computeSegmentClass(step)} aria-current={current===step + 1 ? 'step' : null}>
-                      {
-                        labels ? (
-                          <span class="usa-step-indicator__segment-label">{labelsArray[step]}
-                            {
-                              current !== step + 1 ? (
-                                <span class="usa-sr-only">{current > step + 1 ? 'completed' : 'not completed'}</span>
-                              ) : null
-                            }
-                          </span>
-                        ) : null
-                      }
-                    </li>
-                  ))}
-                </ol>
-                {
-                  <div class="usa-step-indicator__header">
-                    <Tag class="usa-step-indicator__heading">
-                      <span class="usa-step-indicator__heading-counter">
-                        <span class="usa-sr-only">{progressTerm}</span>
-                        <span class="usa-step-indicator__current-step">{current}</span>
-                        <span class="usa-step-indicator__total-steps"> of {total}</span>
-                      </span>
-                      <span class="usa-step-indicator__heading-text">{labels ? labelsArray[current - 1] : headingText}</span>
-                    </Tag>
-                  </div>
-                }
-              </div>
-        </Host>
-      )
-    } else {
-      return (
-        <Host>
-          <div>
-            <div
-              class="progress-bar-segmented"
-              role="progressbar"
-              aria-label={label}
-              aria-valuenow={current}
-              aria-valuemin="0"
-              aria-valuemax={total}
-              aria-valuetext={label}
-            >
-              {range.map(step => (
-                <div
-                  key={step}
-                  class={`progress-segment ${
-                    current > step ? 'progress-segment-complete' : ''
-                  }`}
-                />
-              ))}
-            </div>
-          </div>
-        </Host>
-      )
+    const computeSegmentClass = (step) => {
+      return classNames({
+        'usa-step-indicator__segment': true,
+        'usa-step-indicator__segment--complete': current > step + 1,
+        'usa-step-indicator__segment--current': current === step + 1
+      });
     }
-  }
+
+    return (
+      <Host>
+        <div class={indicatorClass}>
+              <ol class="usa-step-indicator__segments" aria-hidden={labels ? null : 'true'}>
+                {range.map(step => (
+                  <li class={computeSegmentClass(step)} aria-current={current===step + 1 ? 'step' : null}>
+                    {
+                      labels ? (
+                        <span class="usa-step-indicator__segment-label">{labelsArray[step]}
+                          {
+                            current !== step + 1 ? (
+                              <span class="usa-sr-only">{current > step + 1 ? 'completed' : 'not completed'}</span>
+                            ) : null
+                          }
+                        </span>
+                      ) : null
+                    }
+                  </li>
+                ))}
+              </ol>
+              {
+                <div class="usa-step-indicator__header">
+                  <Tag class="usa-step-indicator__heading">
+                    <span class="usa-step-indicator__heading-counter">
+                      <span class="usa-sr-only">{progressTerm}</span>
+                      <span class="usa-step-indicator__current-step">{current}</span>
+                      <span class="usa-step-indicator__total-steps"> of {total}</span>
+                    </span>
+                    <span class="usa-step-indicator__heading-text">{labels ? labelsArray[current - 1] : headingText}</span>
+                  </Tag>
+                </div>
+              }
+            </div>
+      </Host>
+    )
+  } 
 }
