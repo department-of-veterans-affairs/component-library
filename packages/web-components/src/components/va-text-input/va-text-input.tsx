@@ -62,6 +62,11 @@ export class VaTextInput {
   @Prop() reflectInputError?: boolean = false;
 
   /**
+   * Blah blah blah
+   */
+  @Prop() showInputError?: boolean = true;
+
+  /**
    * Whether or not `aria-invalid` will be set on the inner input. Useful when
    * composing the component into something larger, like a date component.
    */
@@ -156,11 +161,11 @@ export class VaTextInput {
    */
   @Prop() formHeading?: string;
 
-    /**
+  /**
    * Whether the component should show a character count message.
    * Has no effect without maxlength being set.
    */
-    @Prop() charcount?: boolean = false;
+  @Prop() charcount?: boolean = false;
 
    /**
    * Whether this component will be used to accept a currency value.
@@ -279,7 +284,7 @@ export class VaTextInput {
       });
     }
 
-    if (this.inputmode === 'decimal' || this.inputmode === 'numeric' || this.currency) {
+    if (this.showInputError && (this.inputmode === 'decimal' || this.inputmode === 'numeric' || this.currency)) {
       let defaultError = i18next.t('number-error');
       const target = e.target as HTMLInputElement;
       const valid = target.checkValidity();

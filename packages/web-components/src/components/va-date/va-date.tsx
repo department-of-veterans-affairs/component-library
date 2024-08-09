@@ -302,6 +302,7 @@ export class VaDate {
               invalid={this.invalidYear}
               onInput={handleDateChange}
               onBlur={this.handleYearBlur}
+              showInputError={false}
               class="input-year"
               inputmode="numeric"
               type="text"

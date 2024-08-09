@@ -1446,6 +1446,10 @@ export namespace Components {
          */
         "required"?: boolean;
         /**
+          * Blah blah blah
+         */
+        "showInputError"?: boolean;
+        /**
           * Adds styling based on status value
          */
         "success"?: boolean;
@@ -3736,6 +3740,10 @@ declare namespace LocalJSX {
           * Set the input to required and render the (Required) text.
          */
         "required"?: boolean;
+        /**
+          * Blah blah blah
+         */
+        "showInputError"?: boolean;
         /**
           * Adds styling based on status value
          */
