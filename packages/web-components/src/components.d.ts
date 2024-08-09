@@ -1131,11 +1131,11 @@ export namespace Components {
     }
     interface VaSegmentedProgressBar {
         /**
-          * Whether or not to center the step labels (v3 only)
+          * Whether or not to center the step labels
          */
         "centeredLabels"?: boolean;
         /**
-          * Show number counters for each step (v3 only)
+          * Show number counters for each step
          */
         "counters"?: "default" | "small";
         /**
@@ -1147,11 +1147,11 @@ export namespace Components {
          */
         "enableAnalytics"?: boolean;
         /**
-          * Header level for button wrapper. Must be between 1 and 6 (v3 only)
+          * Header level for button wrapper. Must be between 1 and 6
          */
         "headerLevel"?: number;
         /**
-          * Text of current step (v3 only)
+          * Text of current step
          */
         "headingText"?: string;
         /**
@@ -1159,7 +1159,7 @@ export namespace Components {
          */
         "label"?: string;
         /**
-          * String containing a list of step labels delimited by a semi-colon (v3 only) Example: `"Step 1;Step 2;Step 3"`
+          * String containing a list of step labels delimited by a semi-colon. Example: `"Step 1;Step 2;Step 3"`
          */
         "labels"?: string;
         /**
@@ -1171,13 +1171,9 @@ export namespace Components {
          */
         "total": number;
         /**
-          * When true, this makes the segmented-progress-bar use a div instead of a heading (v3 only)
+          * When true, this makes the segmented-progress-bar use a div instead of a heading
          */
         "useDiv"?: boolean;
-        /**
-          * Whether or not the component will use USWDS v3 styling.
-         */
-        "uswds"?: boolean;
     }
     interface VaSelect {
         /**
@@ -3394,11 +3390,11 @@ declare namespace LocalJSX {
     }
     interface VaSegmentedProgressBar {
         /**
-          * Whether or not to center the step labels (v3 only)
+          * Whether or not to center the step labels
          */
         "centeredLabels"?: boolean;
         /**
-          * Show number counters for each step (v3 only)
+          * Show number counters for each step
          */
         "counters"?: "default" | "small";
         /**
@@ -3410,11 +3406,11 @@ declare namespace LocalJSX {
          */
         "enableAnalytics"?: boolean;
         /**
-          * Header level for button wrapper. Must be between 1 and 6 (v3 only)
+          * Header level for button wrapper. Must be between 1 and 6
          */
         "headerLevel"?: number;
         /**
-          * Text of current step (v3 only)
+          * Text of current step
          */
         "headingText"?: string;
         /**
@@ -3422,7 +3418,7 @@ declare namespace LocalJSX {
          */
         "label"?: string;
         /**
-          * String containing a list of step labels delimited by a semi-colon (v3 only) Example: `"Step 1;Step 2;Step 3"`
+          * String containing a list of step labels delimited by a semi-colon. Example: `"Step 1;Step 2;Step 3"`
          */
         "labels"?: string;
         /**
@@ -3438,13 +3434,9 @@ declare namespace LocalJSX {
          */
         "total": number;
         /**
-          * When true, this makes the segmented-progress-bar use a div instead of a heading (v3 only)
+          * When true, this makes the segmented-progress-bar use a div instead of a heading
          */
         "useDiv"?: boolean;
-        /**
-          * Whether or not the component will use USWDS v3 styling.
-         */
-        "uswds"?: boolean;
     }
     interface VaSelect {
         /**
