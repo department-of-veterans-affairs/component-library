@@ -282,7 +282,7 @@
   "vads-color-feedback-border-warning-on-dark": {
     "*": { "value": "{uswds-system-color-yellow-vivid-20}"}
   },
-  "vads-color-bg-default-on-dark": {
+  "vads-color-background-default-on-dark": {
     "*": { "value": "{uswds-system-color-gray-warm-90}"}
   }
 }
