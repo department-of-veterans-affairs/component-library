@@ -246,6 +246,14 @@ const ReverseTemplate = ({ filename, filetype, href, reverse, text }) => {
         text="Add to calendar"
         reverse
       />
+
+      <h4 className="vads-u-color--white">External</h4>
+      <va-link
+        external
+        href='https://design.va.gov/content-style-guide/links#linking-to-external-sites'
+        text="Leave VA.gov"
+        reverse
+      />
     </div>
   );
 };

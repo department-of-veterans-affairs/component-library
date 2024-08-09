@@ -152,7 +152,7 @@ export class VaLink {
 
     const linkClass = classNames({
       'va-link--reverse': reverse,
-      'link--center': iconName
+      'link--center': iconName || external
     });
 
     // Active link variant
@@ -242,14 +242,27 @@ export class VaLink {
       );
     }
 
+    if (external) {
+      return (
+        <Host>
+          <a
+            href={href}
+            class={linkClass}
+            onClick={handleClick}
+            target='_blank'
+          >
+            {text}
+            <va-icon class="external-link-icon" icon="launch"></va-icon>
+          </a>
+        </Host>
+      );
+    }
+
     // Default
     return (
       <Host>
-        <a href={href} class={linkClass} onClick={handleClick} aria-label={this.label} target={external ? '_blank': ''}>
+        <a href={href} class={linkClass} onClick={handleClick} aria-label={this.label}>
           {text}
-          {external && (
-            <va-icon class="external-link-icon" icon="launch"></va-icon>
-          )}
         </a>
       </Host>
     );
