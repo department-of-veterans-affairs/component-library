@@ -155,7 +155,7 @@ export namespace Components {
     }
     interface VaBreadcrumbs {
         /**
-          * Represents a list of breadcrumbs. Use a JSON array of objects with label and href properties, then wrap in a string if using non-React-binding version. See Storybook examples for React-binding version. For pure web components, here's an example link: ``[{"href": "/link1", "label": "Link 1"}]`. This prop is available when `uswds` is set to `true`.
+          * Represents a list of breadcrumbs. Use a JSON array of objects with label and href properties, then wrap in a string if using non-React-binding version. See Storybook examples for React-binding version. For pure web components, here's an example link: ``[{"href": "/link1", "label": "Link 1"}]`.
          */
         "breadcrumbList"?: Breadcrumb[] | string;
         /**
@@ -171,7 +171,7 @@ export namespace Components {
          */
         "label"?: string;
         /**
-          * Whether or not the component will wrap the breadcrumbs. This prop is available when `uswds` is set to `true`.
+          * Whether or not the component will wrap the breadcrumbs.
          */
         "wrapping"?: boolean;
     }
@@ -1127,11 +1127,11 @@ export namespace Components {
     }
     interface VaSegmentedProgressBar {
         /**
-          * Whether or not to center the step labels (v3 only)
+          * Whether or not to center the step labels
          */
         "centeredLabels"?: boolean;
         /**
-          * Show number counters for each step (v3 only)
+          * Show number counters for each step
          */
         "counters"?: "default" | "small";
         /**
@@ -1143,11 +1143,11 @@ export namespace Components {
          */
         "enableAnalytics"?: boolean;
         /**
-          * Header level for button wrapper. Must be between 1 and 6 (v3 only)
+          * Header level for button wrapper. Must be between 1 and 6
          */
         "headerLevel"?: number;
         /**
-          * Text of current step (v3 only)
+          * Text of current step
          */
         "headingText"?: string;
         /**
@@ -1155,7 +1155,7 @@ export namespace Components {
          */
         "label"?: string;
         /**
-          * String containing a list of step labels delimited by a semi-colon (v3 only) Example: `"Step 1;Step 2;Step 3"`
+          * String containing a list of step labels delimited by a semi-colon. Example: `"Step 1;Step 2;Step 3"`
          */
         "labels"?: string;
         /**
@@ -1167,13 +1167,9 @@ export namespace Components {
          */
         "total": number;
         /**
-          * When true, this makes the segmented-progress-bar use a div instead of a heading (v3 only)
+          * When true, this makes the segmented-progress-bar use a div instead of a heading
          */
         "useDiv"?: boolean;
-        /**
-          * Whether or not the component will use USWDS v3 styling.
-         */
-        "uswds"?: boolean;
     }
     interface VaSelect {
         /**
@@ -2238,7 +2234,7 @@ declare namespace LocalJSX {
     }
     interface VaBreadcrumbs {
         /**
-          * Represents a list of breadcrumbs. Use a JSON array of objects with label and href properties, then wrap in a string if using non-React-binding version. See Storybook examples for React-binding version. For pure web components, here's an example link: ``[{"href": "/link1", "label": "Link 1"}]`. This prop is available when `uswds` is set to `true`.
+          * Represents a list of breadcrumbs. Use a JSON array of objects with label and href properties, then wrap in a string if using non-React-binding version. See Storybook examples for React-binding version. For pure web components, here's an example link: ``[{"href": "/link1", "label": "Link 1"}]`.
          */
         "breadcrumbList"?: Breadcrumb[] | string;
         /**
@@ -2258,11 +2254,11 @@ declare namespace LocalJSX {
          */
         "onComponent-library-analytics"?: (event: VaBreadcrumbsCustomEvent<any>) => void;
         /**
-          * Fires when user clicks on breadcrumb anchor tag. Has no effect unless uswds is true and the href of anchor tag is part of breadcrumb object that also has isRouterLink: true
+          * Fires when user clicks on breadcrumb anchor tag. Has no effect unless the href of anchor tag is part of breadcrumb object that also has isRouterLink: true
          */
         "onRouteChange"?: (event: VaBreadcrumbsCustomEvent<{ href: string }>) => void;
         /**
-          * Whether or not the component will wrap the breadcrumbs. This prop is available when `uswds` is set to `true`.
+          * Whether or not the component will wrap the breadcrumbs.
          */
         "wrapping"?: boolean;
     }
@@ -3386,11 +3382,11 @@ declare namespace LocalJSX {
     }
     interface VaSegmentedProgressBar {
         /**
-          * Whether or not to center the step labels (v3 only)
+          * Whether or not to center the step labels
          */
         "centeredLabels"?: boolean;
         /**
-          * Show number counters for each step (v3 only)
+          * Show number counters for each step
          */
         "counters"?: "default" | "small";
         /**
@@ -3402,11 +3398,11 @@ declare namespace LocalJSX {
          */
         "enableAnalytics"?: boolean;
         /**
-          * Header level for button wrapper. Must be between 1 and 6 (v3 only)
+          * Header level for button wrapper. Must be between 1 and 6
          */
         "headerLevel"?: number;
         /**
-          * Text of current step (v3 only)
+          * Text of current step
          */
         "headingText"?: string;
         /**
@@ -3414,7 +3410,7 @@ declare namespace LocalJSX {
          */
         "label"?: string;
         /**
-          * String containing a list of step labels delimited by a semi-colon (v3 only) Example: `"Step 1;Step 2;Step 3"`
+          * String containing a list of step labels delimited by a semi-colon. Example: `"Step 1;Step 2;Step 3"`
          */
         "labels"?: string;
         /**
@@ -3430,13 +3426,9 @@ declare namespace LocalJSX {
          */
         "total": number;
         /**
-          * When true, this makes the segmented-progress-bar use a div instead of a heading (v3 only)
+          * When true, this makes the segmented-progress-bar use a div instead of a heading
          */
         "useDiv"?: boolean;
-        /**
-          * Whether or not the component will use USWDS v3 styling.
-         */
-        "uswds"?: boolean;
     }
     interface VaSelect {
         /**

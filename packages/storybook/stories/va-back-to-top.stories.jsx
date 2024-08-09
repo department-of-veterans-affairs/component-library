@@ -37,7 +37,6 @@ const Template = ({
                 justifyContent: 'center',
               }}
             >
-              <a href="">Link</a>
               Scroll down
             </div>
           ))}
