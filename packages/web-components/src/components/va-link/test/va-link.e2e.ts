@@ -144,9 +144,12 @@ describe('va-link', () => {
     expect(element).toEqualHtml(`
     <va-link class="hydrated" external="" href="https://www.va.gov" text="Veteran's Affairs">
       <mock:shadow-root>
-        <a href="https://www.va.gov" class="link--center" target="_blank">
+        <a href="https://www.va.gov" rel="noreferrer" class="link--center" target="_blank">
           Veteran's Affairs
           <va-icon class="external-link-icon hydrated"></va-icon>
+          <span class="usa-sr-only">
+            opens in a new window
+          </span>
         </a>
       </mock:shadow-root>
     </va-link>
