@@ -6,6 +6,7 @@ const bttDocs = getWebComponentDocs('va-back-to-top');
 export default {
   title: 'Components/Back to top',
   id: 'components/va-back-to-top',
+  displayAmount: 10,
   parameters: {
     componentSubtitle: 'va-back-to-top web component',
     docs: {
@@ -16,13 +17,15 @@ export default {
 
 const defaultArgs = {};
 
-const Template = (defaultArgs) => {
+const Template = ({
+  displayAmount
+}) => {
   return (
     <>
       <div className="usa-grid usa-grid-full">
         <div className="usa-width-three-fourths">
           <h1>The top</h1>
-          {[...Array(10)].map(i => (
+          {[...Array(displayAmount)].map(i => (
             <div
               key={i}
               style={{
@@ -34,6 +37,7 @@ const Template = (defaultArgs) => {
                 justifyContent: 'center',
               }}
             >
+              <a href="">Link</a>
               Scroll down
             </div>
           ))}
@@ -56,4 +60,15 @@ const Template = (defaultArgs) => {
 };
 
 export const Default = Template.bind(null);
+Default.args = {
+  ...defaultArgs,
+  displayAmount: 10
+}
+Default.argTypes = propStructure(bttDocs);
+
+export const ShortExample = Template.bind(null);
+ShortExample.args = {
+  ...defaultArgs,
+  displayAmount: 2
+}
 Default.argTypes = propStructure(bttDocs);

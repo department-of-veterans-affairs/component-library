@@ -56,7 +56,13 @@ a:not([disabled]):hover {
   color: var(--vads-color-primary-darker);
   outline: none;
 }
+
+div a {
+  display: none;
+}
+  
 div.reveal a {
+  display: inherit;
   border-bottom-left-radius: 5px;
   border-top-left-radius: 5px;
   text-decoration: none;
