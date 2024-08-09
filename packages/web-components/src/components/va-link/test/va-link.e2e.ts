@@ -134,6 +134,25 @@ describe('va-link', () => {
     `);
   });
 
+  it('renders external link', async () => {
+    const page = await newE2EPage();
+    await page.setContent(
+      `<va-link href="https://www.va.gov" external text="Veteran's Affairs"/>`,
+    );
+
+    const element = await page.find('va-link');
+    expect(element).toEqualHtml(`
+    <va-link class="hydrated" external="" href="https://www.va.gov" text="Veteran's Affairs">
+      <mock:shadow-root>
+        <a href="https://www.va.gov" class="link--center" target="_blank">
+          Veteran's Affairs
+          <va-icon class="external-link-icon hydrated"></va-icon>
+        </a>
+      </mock:shadow-root>
+    </va-link>
+    `);
+  });
+
   it('renders a link with a screen reader label', async () => {
     const page = await newE2EPage();
     await page.setContent(`<va-link href="https://www.va.gov" text="Veteran's Affairs" label="Example label" />`);

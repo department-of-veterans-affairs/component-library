@@ -531,6 +531,10 @@ export namespace Components {
          */
         "download"?: boolean;
         /**
+          * If 'true', will open in a new tab and have icon denoting that
+         */
+        "external"?: boolean;
+        /**
           * The suggested filename. Only valid if download or calendar is `true`.
          */
         "filename"?: string;
@@ -2673,6 +2677,10 @@ declare namespace LocalJSX {
           * If `true`, the link will be treated as a download, and a download icon will be displayed before the anchor text.
          */
         "download"?: boolean;
+        /**
+          * If 'true', will open in a new tab and have icon denoting that
+         */
+        "external"?: boolean;
         /**
           * The suggested filename. Only valid if download or calendar is `true`.
          */

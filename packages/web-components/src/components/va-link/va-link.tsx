@@ -77,6 +77,11 @@ export class VaLink {
    * If 'true', will represent the link with white text instead of blue.
    */
   @Prop() reverse?: boolean = false;
+
+  /**
+   * If 'true', will open in a new tab and have icon denoting that
+   */
+  @Prop() external?: boolean = false;
  
   /**
    * Adds an aria-label attribute to the link element.
@@ -140,13 +145,14 @@ export class VaLink {
       text,
       video,
       reverse,
+      external,
       iconName,
       iconSize
     } = this;
 
     const linkClass = classNames({
       'va-link--reverse': reverse,
-      'link--center': iconName
+      'link--center': iconName || external
     });
 
     // Active link variant
@@ -231,6 +237,22 @@ export class VaLink {
           >
             <va-icon icon={iconName} size={iconSize} part="icon"></va-icon>
             {text}
+          </a>
+        </Host>
+      );
+    }
+
+    if (external) {
+      return (
+        <Host>
+          <a
+            href={href}
+            class={linkClass}
+            onClick={handleClick}
+            target='_blank'
+          >
+            {text}
+            <va-icon class="external-link-icon" icon="launch"></va-icon>
           </a>
         </Host>
       );
