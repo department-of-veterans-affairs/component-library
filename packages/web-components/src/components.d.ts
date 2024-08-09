@@ -155,7 +155,7 @@ export namespace Components {
     }
     interface VaBreadcrumbs {
         /**
-          * Represents a list of breadcrumbs. Use a JSON array of objects with label and href properties, then wrap in a string if using non-React-binding version. See Storybook examples for React-binding version. For pure web components, here's an example link: ``[{"href": "/link1", "label": "Link 1"}]`. This prop is available when `uswds` is set to `true`.
+          * Represents a list of breadcrumbs. Use a JSON array of objects with label and href properties, then wrap in a string if using non-React-binding version. See Storybook examples for React-binding version. For pure web components, here's an example link: ``[{"href": "/link1", "label": "Link 1"}]`.
          */
         "breadcrumbList"?: Breadcrumb[] | string;
         /**
@@ -171,7 +171,7 @@ export namespace Components {
          */
         "label"?: string;
         /**
-          * Whether or not the component will wrap the breadcrumbs. This prop is available when `uswds` is set to `true`.
+          * Whether or not the component will wrap the breadcrumbs.
          */
         "wrapping"?: boolean;
     }
@@ -1259,14 +1259,6 @@ export namespace Components {
     }
     interface VaTable {
         /**
-          * Whether the initial sort state will be descending or not.
-         */
-        "descending"?: boolean;
-        /**
-          * The zero-based index of the column to sort by (Doesn't work in IE11). Optional.
-         */
-        "sortColumn"?: number;
-        /**
           * Convert to a stacked table when screen size is small True by default, must specify if false if this is unwanted
          */
         "stacked"?: boolean;
@@ -1278,25 +1270,13 @@ export namespace Components {
           * If uswds is true, the type of table
          */
         "tableType"?: 'borderless';
-        /**
-          * Whether or not the component will use USWDS v3 styling.
-         */
-        "uswds"?: boolean;
     }
     interface VaTableInner {
         /**
-          * If uswds is true, the number of columns in the table
+          * The number of columns in the table
          */
         "cols"?: number;
-        /**
-          * Whether the initial sort state will be descending or not.
-         */
-        "descending"?: boolean;
         "rows"?: number;
-        /**
-          * The zero-based index of the column to sort by (Doesn't work in IE11). Optional.
-         */
-        "sortColumn"?: number;
         /**
           * If true convert to a stacked table when screen size is small
          */
@@ -1306,17 +1286,9 @@ export namespace Components {
          */
         "tableTitle": string;
         /**
-          * If uswds is true, the type of table to be used
+          * The type of table to be used
          */
         "tableType"?: 'borderless';
-        /**
-          * Whether or not the component will use USWDS v3 styling.
-         */
-        "uswds"?: boolean;
-        /**
-          * A live reference to the va-table-rows in the table which are hard to access from this component
-         */
-        "vaTableRowRefs"?: any;
     }
     interface VaTableRow {
     }
@@ -2238,7 +2210,7 @@ declare namespace LocalJSX {
     }
     interface VaBreadcrumbs {
         /**
-          * Represents a list of breadcrumbs. Use a JSON array of objects with label and href properties, then wrap in a string if using non-React-binding version. See Storybook examples for React-binding version. For pure web components, here's an example link: ``[{"href": "/link1", "label": "Link 1"}]`. This prop is available when `uswds` is set to `true`.
+          * Represents a list of breadcrumbs. Use a JSON array of objects with label and href properties, then wrap in a string if using non-React-binding version. See Storybook examples for React-binding version. For pure web components, here's an example link: ``[{"href": "/link1", "label": "Link 1"}]`.
          */
         "breadcrumbList"?: Breadcrumb[] | string;
         /**
@@ -2258,11 +2230,11 @@ declare namespace LocalJSX {
          */
         "onComponent-library-analytics"?: (event: VaBreadcrumbsCustomEvent<any>) => void;
         /**
-          * Fires when user clicks on breadcrumb anchor tag. Has no effect unless uswds is true and the href of anchor tag is part of breadcrumb object that also has isRouterLink: true
+          * Fires when user clicks on breadcrumb anchor tag. Has no effect unless the href of anchor tag is part of breadcrumb object that also has isRouterLink: true
          */
         "onRouteChange"?: (event: VaBreadcrumbsCustomEvent<{ href: string }>) => void;
         /**
-          * Whether or not the component will wrap the breadcrumbs. This prop is available when `uswds` is set to `true`.
+          * Whether or not the component will wrap the breadcrumbs.
          */
         "wrapping"?: boolean;
     }
@@ -3546,14 +3518,6 @@ declare namespace LocalJSX {
     }
     interface VaTable {
         /**
-          * Whether the initial sort state will be descending or not.
-         */
-        "descending"?: boolean;
-        /**
-          * The zero-based index of the column to sort by (Doesn't work in IE11). Optional.
-         */
-        "sortColumn"?: number;
-        /**
           * Convert to a stacked table when screen size is small True by default, must specify if false if this is unwanted
          */
         "stacked"?: boolean;
@@ -3565,25 +3529,13 @@ declare namespace LocalJSX {
           * If uswds is true, the type of table
          */
         "tableType"?: 'borderless';
-        /**
-          * Whether or not the component will use USWDS v3 styling.
-         */
-        "uswds"?: boolean;
     }
     interface VaTableInner {
         /**
-          * If uswds is true, the number of columns in the table
+          * The number of columns in the table
          */
         "cols"?: number;
-        /**
-          * Whether the initial sort state will be descending or not.
-         */
-        "descending"?: boolean;
         "rows"?: number;
-        /**
-          * The zero-based index of the column to sort by (Doesn't work in IE11). Optional.
-         */
-        "sortColumn"?: number;
         /**
           * If true convert to a stacked table when screen size is small
          */
@@ -3593,17 +3545,9 @@ declare namespace LocalJSX {
          */
         "tableTitle"?: string;
         /**
-          * If uswds is true, the type of table to be used
+          * The type of table to be used
          */
         "tableType"?: 'borderless';
-        /**
-          * Whether or not the component will use USWDS v3 styling.
-         */
-        "uswds"?: boolean;
-        /**
-          * A live reference to the va-table-rows in the table which are hard to access from this component
-         */
-        "vaTableRowRefs"?: any;
     }
     interface VaTableRow {
     }
