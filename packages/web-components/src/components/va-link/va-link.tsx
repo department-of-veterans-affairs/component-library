@@ -9,7 +9,7 @@ import classNames from 'classnames';
 
 @Component({
   tag: 'va-link',
-  styleUrl: 'va-link.css',
+  styleUrl: 'va-link.scss',
   shadow: true,
 })
 export class VaLink {
@@ -247,12 +247,14 @@ export class VaLink {
         <Host>
           <a
             href={href}
+            rel='noreferrer'
             class={linkClass}
             onClick={handleClick}
             target='_blank'
           >
             {text}
             <va-icon class="external-link-icon" icon="launch"></va-icon>
+            <span class="usa-sr-only">opens in a new window</span>
           </a>
         </Host>
       );
