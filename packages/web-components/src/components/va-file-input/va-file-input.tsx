@@ -373,13 +373,13 @@ export class VaFileInput {
       else if (fileContents) {
         if (fileType.startsWith('image/')) {
           fileThumbnail = (
-            <div class="thumbnail-container">
+            <div class="thumbnail-container" aria-hidden="true">
               <img class="thumbnail-preview" src={fileContents} alt="image" />
             </div>
           );
         } else if (fileType === 'application/pdf') {
           fileThumbnail = (
-            <div class="thumbnail-container">
+            <div class="thumbnail-container" aria-hidden="true">
               <object
                 class="thumbnail-preview"
                 data={fileContents}
@@ -474,10 +474,12 @@ export class VaFileInput {
                           buttonType="change-file"
                           onClick={this.changeFile}
                           label="Change file"
+                          aria-label={'change file ' + file.name}
                         ></va-button-icon>
                         <va-button-icon
                           buttonType="delete"
                           onClick={this.openModal}
+                          aria-label={'delete file ' + file.name}
                           label="Delete"
                         ></va-button-icon>
                       </div>
