@@ -49,7 +49,7 @@ export class VaBanner {
 
   /* eslint-disable i18next/no-literal-string */
   /**
-   * The type of the banner. This affects both the icon of the AlertBox and the top border color.
+   * The type of the banner. This affects both the icon of the AlertBox and border color / background.
    * */
   @Prop() type?: 'info' | 'warning' | 'error' | 'success' | 'continue' = 'info';
   /* eslint-enable i18next/no-literal-string */
@@ -181,8 +181,6 @@ export class VaBanner {
           status={this.type}
           data-role="region"
           data-label={bannerAriaLabel}
-          uswds={false}
-          class="uswds-false"
         >
           <h3 slot="headline">{this.headline}</h3>
           <slot></slot>
