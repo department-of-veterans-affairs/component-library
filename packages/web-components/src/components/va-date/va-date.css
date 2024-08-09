@@ -35,8 +35,8 @@ span.required {
   color: var(--vads-color-secondary-dark);
 }
 
-:host([error]:not([error=''])[uswds='false']) va-select::part(select),
-:host([error]:not([error=''])[uswds='false']) va-text-input::part(input) {
+:host([error]:not([error=''])) va-select::part(select),
+:host([error]:not([error=''])) va-text-input::part(input) {
   border: 4px solid var(--vads-color-secondary-dark);
 }
 
@@ -78,10 +78,4 @@ va-text-input::part(label) {
 
 va-text-input::part(validation) {
   display: none;
-}
-
-va-text-input::part(input) {
-  height: 2.625rem;
-  line-height: 1.3;
-  margin: 0.9em 0;
 }

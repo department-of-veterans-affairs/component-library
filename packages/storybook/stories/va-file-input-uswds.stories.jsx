@@ -97,7 +97,7 @@ ErrorMessage.args = {
 export const HeaderLabel = Template.bind(null);
 HeaderLabel.args = {
   ...defaultArgs,
-  label: 'Label Header',
+  label: 'Header label',
   headerSize: 3,
   required: true
 }
@@ -113,7 +113,7 @@ const additionalFormInputsContent = (
 export const AdditionalFormInputs = Template.bind(null);
 AdditionalFormInputs.args = {
   ...defaultArgs,
-  label: 'Label Header',
+  label: 'Header label',
   children: additionalFormInputsContent
 }
 

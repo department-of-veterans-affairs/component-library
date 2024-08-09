@@ -7,6 +7,9 @@ import {
   applyFocus,
 } from './wc-helpers';
 
+import { VaTextInput } from '@department-of-veterans-affairs/web-components/react-bindings';
+
+
 const textInputDocs = getWebComponentDocs('va-text-input');
 
 export default {
@@ -336,12 +339,50 @@ ValidRange.args = {
   hint: 'The valid range is 0 to 4',
 };
 
-export const Autocomplete = Template.bind(null);
+export const Autocomplete = ({ name, label, autocomplete }) => {
+  function handleSubmit() { };
+  function handleKeyPress() { }
+  return (
+    <>
+      <form onSubmit={handleSubmit} >
+        <VaTextInput label={label} onKeyPress={handleKeyPress} name={name} autocomplete={autocomplete} />
+      </form>
+      <div className='vads-u-margin-top--2'>
+        Note: on Safari (Mac or iOS), when using "Shift + Command + A" to autofill a field,
+        no <code>input</code>&nbsp;event is fired, which means that any handler passed to <code>onInput</code> will not fire. This can result in
+        errors on form submission, because from the component's perspective the autofilled field is empty. A suggested
+        workaround is to synchronize field state with component state on submit by passing handlers
+        to <code>VaTextInput</code>&nbsp;such as:
+
+        <pre className="vads-u-font-size--sm vads-u-background-color--gray-lightest vads-u-padding--2">
+          <code>
+            function onSubmit(e) &#x7b;<br/>
+            &nbsp;&nbsp;e.preventDefault()<br/>
+            &nbsp;&nbsp;// check if the "value" passed to VaTextInput is <br/>
+            &nbsp;&nbsp;// the same as e.target.value, <br />
+            &nbsp;&nbsp;// then proceed with submission <br />
+            &#x7d;<br/><br/>
+
+            function handleKeyPress(e) &#x7b;<br/>
+              &nbsp;&nbsp;if (e.key === 'Enter') &#x7b;<br/>
+              &nbsp;&nbsp;// the user wants to submit the form<br/>
+              &nbsp;&nbsp;// synchronize element and component state before<br/>
+              &nbsp;&nbsp;// continuing with submission<br/>
+              &nbsp;&#x7d;<br/>
+            &#x7d;<br />
+        </code>
+      </pre>
+      </div>
+    </>
+  )
+}
+
 Autocomplete.args = {
   ...defaultArgs,
   name: 'email',
   autocomplete: 'email',
-};
+  label: 'This va-text-input is configured for email autocompletion'
+}
 
 export const WithAnalytics = Template.bind(null);
 WithAnalytics.args = { ...defaultArgs, 'enable-analytics': true };

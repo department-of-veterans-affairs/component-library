@@ -171,10 +171,6 @@ export namespace Components {
          */
         "label"?: string;
         /**
-          * Whether or not the component will use USWDS v3 styling.
-         */
-        "uswds"?: boolean;
-        /**
           * Whether or not the component will wrap the breadcrumbs. This prop is available when `uswds` is set to `true`.
          */
         "wrapping"?: boolean;
@@ -282,7 +278,7 @@ export namespace Components {
     }
     interface VaCheckbox {
         /**
-          * Description of the option displayed below the checkbox label. Available when uswds is true.
+          * Description of the option displayed below the checkbox label.
          */
         "checkboxDescription"?: string;
         /**
@@ -294,7 +290,7 @@ export namespace Components {
          */
         "description"?: string;
         /**
-          * Whether or not the checkbox option is disabled. Available when uswds is true.
+          * Whether or not the checkbox option is disabled.
          */
         "disabled"?: boolean;
         /**
@@ -326,13 +322,9 @@ export namespace Components {
          */
         "required"?: boolean;
         /**
-          * Whether or not the component will display as a tile. Available when uswds is true.
+          * Whether or not the component will display as a tile.
          */
         "tile"?: boolean;
-        /**
-          * Whether or not the component will use USWDS v3 styling.
-         */
-        "uswds"?: boolean;
     }
     interface VaCheckboxGroup {
         /**
@@ -344,11 +336,11 @@ export namespace Components {
          */
         "error"?: string;
         /**
-          * The content of the heading if `useFormsPattern` and `uswds` are true.
+          * The content of the heading if `useFormsPattern` is true.
          */
         "formHeading"?: string;
         /**
-          * The heading level for the heading if `useFormsPattern` and `uswds` are true.
+          * The heading level for the heading if `useFormsPattern` is true.
          */
         "formHeadingLevel"?: number;
         /**
@@ -368,13 +360,9 @@ export namespace Components {
          */
         "required"?: boolean;
         /**
-          * Enabling this will add a heading and description for integrating into the forms pattern. Accepts `single` or `multiple` to indicate if the form is a single input or will have multiple inputs. `uswds` should be true.
+          * Enabling this will add a heading and description for integrating into the forms pattern. Accepts `single` or `multiple` to indicate if the form is a single input or will have multiple inputs.
          */
         "useFormsPattern"?: string;
-        /**
-          * Whether or not the component will use USWDS v3 styling.
-         */
-        "uswds"?: boolean;
     }
     interface VaCrisisLineModal {
     }
@@ -974,10 +962,6 @@ export namespace Components {
           * Whether to display the error message or not.
          */
         "showError"?: boolean;
-        /**
-          * Whether or not the component will use USWDS v3 styling.
-         */
-        "uswds"?: boolean;
     }
     interface VaProcessList {
         /**
@@ -1045,11 +1029,11 @@ export namespace Components {
          */
         "error"?: string;
         /**
-          * The content of the heading if `useFormsPattern` and `uswds` are true.
+          * The content of the heading if `useFormsPattern` is true.
          */
         "formHeading"?: string;
         /**
-          * The heading level for the heading if `useFormsPattern` and `uswds` are true.
+          * The heading level for the heading if `useFormsPattern` is true.
          */
         "formHeadingLevel"?: number;
         /**
@@ -1073,13 +1057,9 @@ export namespace Components {
          */
         "required"?: boolean;
         /**
-          * Enabling this will add a heading and description for integrating into the forms pattern. Accepts `single` or `multiple` to indicate if the form is a single input or will have multiple inputs. `uswds` should be true.
+          * Enabling this will add a heading and description for integrating into the forms pattern. Accepts `single` or `multiple` to indicate if the form is a single input or will have multiple inputs
          */
         "useFormsPattern"?: string;
-        /**
-          * Whether or not the component will use USWDS v3 styling.
-         */
-        "uswds"?: boolean;
     }
     interface VaRadioOption {
         /**
@@ -1091,11 +1071,11 @@ export namespace Components {
          */
         "checked"?: boolean;
         /**
-          * Description of the option displayed below the option label. Available when uswds is true.
+          * Description of the option displayed below the option label.
          */
         "description"?: string;
         /**
-          * Whether or not the radio option is disabled. Can be used if the USWDS option is active.
+          * Whether or not the radio option is disabled.
          */
         "disabled"?: boolean;
         /**
@@ -1107,13 +1087,9 @@ export namespace Components {
          */
         "name": string;
         /**
-          * Whether or not the component will display as a tile. Available when uswds is true.
+          * Whether or not the component will display as a tile.
          */
         "tile"?: boolean;
-        /**
-          * Whether or not the component will use USWDS v3. styling.
-         */
-        "uswds"?: boolean;
         /**
           * The value attribute for the input element.
          */
@@ -1128,6 +1104,10 @@ export namespace Components {
           * Text displayed inside the search button
          */
         "buttonText"?: string;
+        /**
+          * If `true`, the component-library-analytics event is disabled.
+         */
+        "disableAnalytics"?: boolean;
         /**
           * The aria-label for search input and button. Default is 'Search'.
          */
@@ -1236,10 +1216,6 @@ export namespace Components {
           * Whether or not this is a required field.
          */
         "required"?: boolean;
-        /**
-          * Whether or not the component will use USWDS v3 styling.
-         */
-        "uswds"?: boolean;
         /**
           * Selected value (will get updated on select).
          */
@@ -2290,10 +2266,6 @@ declare namespace LocalJSX {
          */
         "onRouteChange"?: (event: VaBreadcrumbsCustomEvent<{ href: string }>) => void;
         /**
-          * Whether or not the component will use USWDS v3 styling.
-         */
-        "uswds"?: boolean;
-        /**
           * Whether or not the component will wrap the breadcrumbs. This prop is available when `uswds` is set to `true`.
          */
         "wrapping"?: boolean;
@@ -2421,7 +2393,7 @@ declare namespace LocalJSX {
     }
     interface VaCheckbox {
         /**
-          * Description of the option displayed below the checkbox label. Available when uswds is true.
+          * Description of the option displayed below the checkbox label.
          */
         "checkboxDescription"?: string;
         /**
@@ -2433,7 +2405,7 @@ declare namespace LocalJSX {
          */
         "description"?: string;
         /**
-          * Whether or not the checkbox option is disabled. Available when uswds is true.
+          * Whether or not the checkbox option is disabled.
          */
         "disabled"?: boolean;
         /**
@@ -2473,13 +2445,9 @@ declare namespace LocalJSX {
          */
         "required"?: boolean;
         /**
-          * Whether or not the component will display as a tile. Available when uswds is true.
+          * Whether or not the component will display as a tile.
          */
         "tile"?: boolean;
-        /**
-          * Whether or not the component will use USWDS v3 styling.
-         */
-        "uswds"?: boolean;
     }
     interface VaCheckboxGroup {
         /**
@@ -2491,11 +2459,11 @@ declare namespace LocalJSX {
          */
         "error"?: string;
         /**
-          * The content of the heading if `useFormsPattern` and `uswds` are true.
+          * The content of the heading if `useFormsPattern` is true.
          */
         "formHeading"?: string;
         /**
-          * The heading level for the heading if `useFormsPattern` and `uswds` are true.
+          * The heading level for the heading if `useFormsPattern` is true.
          */
         "formHeadingLevel"?: number;
         /**
@@ -2519,13 +2487,9 @@ declare namespace LocalJSX {
          */
         "required"?: boolean;
         /**
-          * Enabling this will add a heading and description for integrating into the forms pattern. Accepts `single` or `multiple` to indicate if the form is a single input or will have multiple inputs. `uswds` should be true.
+          * Enabling this will add a heading and description for integrating into the forms pattern. Accepts `single` or `multiple` to indicate if the form is a single input or will have multiple inputs.
          */
         "useFormsPattern"?: string;
-        /**
-          * Whether or not the component will use USWDS v3 styling.
-         */
-        "uswds"?: boolean;
     }
     interface VaCrisisLineModal {
     }
@@ -3233,10 +3197,6 @@ declare namespace LocalJSX {
           * Whether to display the error message or not.
          */
         "showError"?: boolean;
-        /**
-          * Whether or not the component will use USWDS v3 styling.
-         */
-        "uswds"?: boolean;
     }
     interface VaProcessList {
         /**
@@ -3316,11 +3276,11 @@ declare namespace LocalJSX {
          */
         "error"?: string;
         /**
-          * The content of the heading if `useFormsPattern` and `uswds` are true.
+          * The content of the heading if `useFormsPattern` is true.
          */
         "formHeading"?: string;
         /**
-          * The heading level for the heading if `useFormsPattern` and `uswds` are true.
+          * The heading level for the heading if `useFormsPattern` is true.
          */
         "formHeadingLevel"?: number;
         /**
@@ -3352,13 +3312,9 @@ declare namespace LocalJSX {
          */
         "required"?: boolean;
         /**
-          * Enabling this will add a heading and description for integrating into the forms pattern. Accepts `single` or `multiple` to indicate if the form is a single input or will have multiple inputs. `uswds` should be true.
+          * Enabling this will add a heading and description for integrating into the forms pattern. Accepts `single` or `multiple` to indicate if the form is a single input or will have multiple inputs
          */
         "useFormsPattern"?: string;
-        /**
-          * Whether or not the component will use USWDS v3 styling.
-         */
-        "uswds"?: boolean;
     }
     interface VaRadioOption {
         /**
@@ -3370,11 +3326,11 @@ declare namespace LocalJSX {
          */
         "checked"?: boolean;
         /**
-          * Description of the option displayed below the option label. Available when uswds is true.
+          * Description of the option displayed below the option label.
          */
         "description"?: string;
         /**
-          * Whether or not the radio option is disabled. Can be used if the USWDS option is active.
+          * Whether or not the radio option is disabled.
          */
         "disabled"?: boolean;
         /**
@@ -3390,13 +3346,9 @@ declare namespace LocalJSX {
          */
         "onRadioOptionSelected"?: (event: VaRadioOptionCustomEvent<any>) => void;
         /**
-          * Whether or not the component will display as a tile. Available when uswds is true.
+          * Whether or not the component will display as a tile.
          */
         "tile"?: boolean;
-        /**
-          * Whether or not the component will use USWDS v3. styling.
-         */
-        "uswds"?: boolean;
         /**
           * The value attribute for the input element.
          */
@@ -3411,6 +3363,10 @@ declare namespace LocalJSX {
           * Text displayed inside the search button
          */
         "buttonText"?: string;
+        /**
+          * If `true`, the component-library-analytics event is disabled.
+         */
+        "disableAnalytics"?: boolean;
         /**
           * The aria-label for search input and button. Default is 'Search'.
          */
@@ -3539,10 +3495,6 @@ declare namespace LocalJSX {
           * Whether or not this is a required field.
          */
         "required"?: boolean;
-        /**
-          * Whether or not the component will use USWDS v3 styling.
-         */
-        "uswds"?: boolean;
         /**
           * Selected value (will get updated on select).
          */

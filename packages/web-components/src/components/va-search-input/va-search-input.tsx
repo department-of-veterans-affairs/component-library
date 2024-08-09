@@ -92,6 +92,11 @@ export class VaSearchInput {
   @Prop() small?: boolean = false;
 
   /**
+   * If `true`, the component-library-analytics event is disabled.
+   */
+  @Prop() disableAnalytics?: boolean = false;
+
+  /**
    * If suggestions are provided, then format suggestions and open the listbox.
    * Limits suggestions to 5 and sorts them.
    */
@@ -125,13 +130,15 @@ export class VaSearchInput {
    * and fires analytics event.
    */
   private handleBlur = () => {
-    this.componentLibraryAnalytics.emit({
-      componentName: 'va-search-input',
-      action: 'blur',
-      details: {
-        value: this.value,
-      },
-    });
+    if (!this.disableAnalytics) {
+      this.componentLibraryAnalytics.emit({
+        componentName: 'va-search-input',
+        action: 'blur',
+        details: {
+          value: this.value,
+        },
+      });
+    }
 
     this.isTouched = false;
     this.isListboxOpen = false;
@@ -155,14 +162,16 @@ export class VaSearchInput {
         composed: true,
       }),
     );
-
-    this.componentLibraryAnalytics.emit({
-      componentName: 'va-search-input',
-      action: 'click',
-      details: {
-        value: this.value,
-      },
-    });
+    
+    if (!this.disableAnalytics) {
+      this.componentLibraryAnalytics.emit({
+        componentName: 'va-search-input',
+        action: 'click',
+        details: {
+          value: this.value,
+        },
+      });
+    }
   };
 
   // Input event handlers
