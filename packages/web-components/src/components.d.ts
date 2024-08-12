@@ -933,13 +933,9 @@ export namespace Components {
          */
         "showLastPage"?: boolean;
         /**
-          * Don't show last page when the page count exceeds `maxPageListLength` (but do show the ellipsis). Only relevant if uswds is true.
+          * Don't show last page when the page count exceeds `maxPageListLength` (but do show the ellipsis).
          */
         "unbounded"?: boolean;
-        /**
-          * Whether or not the component will use USWDS v3 styling.
-         */
-        "uswds"?: boolean;
     }
     interface VaPrivacyAgreement {
         /**
@@ -3144,13 +3140,9 @@ declare namespace LocalJSX {
          */
         "showLastPage"?: boolean;
         /**
-          * Don't show last page when the page count exceeds `maxPageListLength` (but do show the ellipsis). Only relevant if uswds is true.
+          * Don't show last page when the page count exceeds `maxPageListLength` (but do show the ellipsis).
          */
         "unbounded"?: boolean;
-        /**
-          * Whether or not the component will use USWDS v3 styling.
-         */
-        "uswds"?: boolean;
     }
     interface VaPrivacyAgreement {
         /**
