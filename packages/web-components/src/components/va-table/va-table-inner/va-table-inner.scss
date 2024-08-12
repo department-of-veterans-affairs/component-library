@@ -1,7 +1,5 @@
 @forward 'settings';
 @use 'usa-table/src/styles/usa-table';
-@import '~@department-of-veterans-affairs/css-library/dist/tokens/scss/variables.scss';
-
 
 :host {
   td slot::slotted(span:empty)::before,
