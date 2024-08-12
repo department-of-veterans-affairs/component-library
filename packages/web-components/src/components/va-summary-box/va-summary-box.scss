@@ -11,13 +11,6 @@
   display: block;
 }
 
-.feature {
-  background: var(--vads-color-primary-alt-lightest);
-  padding: 1em;
-  clear: both;
-  margin: 1.5em 0 1.5em 0;
-}
-
 ::slotted([slot='headline']) {
   font-family: var(--font-serif);
   margin-top: 0 !important;
