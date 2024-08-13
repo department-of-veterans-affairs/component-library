@@ -3,6 +3,8 @@
 @use 'uswds-helpers/src/styles/usa-sr-only';
 @use 'usa-button/src/styles/usa-button';
 
+@import '../../mixins/focusable.css';
+
 :host {
   display: inline-block;
 }
@@ -43,4 +45,3 @@
   }
 }
 
-@import '../../mixins/focusable.css';
