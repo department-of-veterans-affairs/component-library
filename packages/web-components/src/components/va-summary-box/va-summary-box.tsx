@@ -1,4 +1,4 @@
-import { Component, Host, h, Prop, Element, State } from '@stencil/core';
+import { Component, Host, h, Element, State } from '@stencil/core';
 
 /**
  * @componentName Summary box
@@ -11,11 +11,7 @@ import { Component, Host, h, Prop, Element, State } from '@stencil/core';
   shadow: true,
 })
 export class VaSummaryBox {
-  /**
-   * Whether or not the component will use USWDS v3 styling.
-   */
-  @Prop() uswds?: boolean = true;
-
+  
   /**
    * Local state for slot=headline's text.
    * Used to place an aria-label for role="region" with the same text as the heading.
@@ -30,10 +26,7 @@ export class VaSummaryBox {
   }
 
   componentDidLoad() {
-    if (!this.uswds) {
-      return
-    }
-    // add uswds classes
+       // add uswds classes
     const nodes = this.el.shadowRoot
       .querySelectorAll('slot')
     const headline = nodes[0];
@@ -47,27 +40,15 @@ export class VaSummaryBox {
   }
 
   render() {
-    const { uswds } = this;
-    if (uswds) {
-      return (
-        <Host>
-          <div class="usa-summary-box" role="region" aria-label={this.headlineText}>
-            <div class="usa-summary-box__body">
-              <slot name="headline"></slot>
-              <slot />
-            </div>
-          </div>
-        </Host>
-      );
-    } else {
-      return (
-        <Host>
-          <div class="feature">
+    return (
+      <Host>
+        <div class="usa-summary-box" role="region" aria-label={this.headlineText}>
+          <div class="usa-summary-box__body">
             <slot name="headline"></slot>
             <slot />
           </div>
-        </Host>
-      );
-    }
-  }
+        </div>
+      </Host>
+    );
+  } 
 }
