@@ -1232,10 +1232,6 @@ export namespace Components {
         "inputValue": string;
     }
     interface VaSummaryBox {
-        /**
-          * Whether or not the component will use USWDS v3 styling.
-         */
-        "uswds"?: boolean;
     }
     interface VaTable {
         /**
@@ -3499,10 +3495,6 @@ declare namespace LocalJSX {
         "onVaInputChange"?: (event: VaStatementOfTruthCustomEvent<any>) => void;
     }
     interface VaSummaryBox {
-        /**
-          * Whether or not the component will use USWDS v3 styling.
-         */
-        "uswds"?: boolean;
     }
     interface VaTable {
         /**
