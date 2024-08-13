@@ -80,11 +80,6 @@ export class VaButton {
   @Prop() text?: string;
 
   /**
-   * Whether or not the component will use USWDS v3 styling.
-   */
-  @Prop({ reflect: true }) uswds?: boolean = true;
-
-  /**
    * An optional message that will be read by screen readers when the input is focused.
    */
   @Prop() messageAriaDescribedby?: string;
@@ -98,14 +93,6 @@ export class VaButton {
     eventName: 'component-library-analytics',
   })
   componentLibraryAnalytics: EventEmitter;
-
-  componentDidLoad() {
-    // check if the element has a class named uswds-false added from parent
-    if (this.el.classList.contains('uswds-false')) {
-      // add attribute manually
-      this.el.setAttribute('uswds', 'false');
-    }
-  }
 
   private handleClick = (): void => {
     if (!this.disableAnalytics) {
@@ -132,6 +119,7 @@ export class VaButton {
     if (this.submit === undefined) {
       return;
     }
+    // eslint-disable-next-line i18next/no-literal-string
     const theForm = this.el.closest('form');
     if (!theForm) {
       return;
@@ -177,7 +165,6 @@ export class VaButton {
       secondary,
       primaryAlternate,
       big,
-      uswds,
       messageAriaDescribedby,
     } = this;
 
@@ -189,69 +176,33 @@ export class VaButton {
 
     const type = submit !== undefined ? 'submit' : 'button';
 
-    if (uswds) {
-      const buttonClass = classnames({
-        'usa-button': true,
-        'usa-button--big': big,
-        'usa-button--outline': back || secondary,
-        'va-button-primary--alternate': primaryAlternate,
-      });
-      return (
-        <Host>
-          <button
-            class={buttonClass}
-            aria-disabled={ariaDisabled}
-            aria-label={label}
-            aria-describedby={ariaDescribedbyIds}
-            type={type}
-            part="button"
-          >
-            {back && !_continue && (
-              <va-icon icon="navigate_far_before" />
-            )}
-            {buttonText}
-            {_continue && !back && (
-              <va-icon icon="navigate_far_next" />
-            )}
-          </button>
-          {messageAriaDescribedby && (
-            <span id="button-description" class="usa-sr-only">
-              {messageAriaDescribedby}
-            </span>
-          )}
-        </Host>
-      );
-    } else {
-      const buttonClass = classnames({
-        'va-button-primary--alternate': primaryAlternate,
-      });
-      return (
-        <Host>
-          <button
-            class={buttonClass}
-            aria-disabled={ariaDisabled}
-            aria-label={label}
-            type={type}
-            part="button"
-          >
-            {back && !_continue && (
-              <va-icon
-                class="va-button--icon"
-                icon="navigate_far_before"
-                size={2}
-              ></va-icon>
-            )}
-            {buttonText}
-            {_continue && !back && (
-              <va-icon
-                class="va-button--icon"
-                icon="navigate_far_next"
-                size={2}
-              ></va-icon>
-            )}
-          </button>
-        </Host>
-      );
-    }
+    const buttonClass = classnames({
+      'usa-button': true,
+      'usa-button--big': big,
+      'usa-button--outline': back || secondary,
+      'va-button-primary--alternate': primaryAlternate,
+    });
+    
+    return (
+      <Host>
+        <button
+          class={buttonClass}
+          aria-disabled={ariaDisabled}
+          aria-label={label}
+          aria-describedby={ariaDescribedbyIds}
+          type={type}
+          part="button"
+        >
+          {back && !_continue && <va-icon icon="navigate_far_before" />}
+          {buttonText}
+          {_continue && !back && <va-icon icon="navigate_far_next" />}
+        </button>
+        {messageAriaDescribedby && (
+          <span id="button-description" class="usa-sr-only">
+            {messageAriaDescribedby}
+          </span>
+        )}
+      </Host>
+    );
   }
 }
