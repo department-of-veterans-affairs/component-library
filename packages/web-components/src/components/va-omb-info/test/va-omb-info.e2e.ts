@@ -17,7 +17,7 @@ describe('va-omb-info', () => {
             </strong>
           </div>
           <div>
-            <va-button class="hydrated uswds-false" uswds="false" secondary></va-button>
+            <va-button class="hydrated" secondary></va-button>
           </div>
           <va-modal class="hydrated" large>
             <slot></slot>

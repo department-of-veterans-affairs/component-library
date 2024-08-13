@@ -56,10 +56,6 @@ export namespace Components {
           * The text to trigger the expansion
          */
         "trigger": string;
-        /**
-          * Whether or not the component will use USWDS v3 styling.
-         */
-        "uswds"?: boolean;
     }
     interface VaAlert {
         /**
@@ -220,10 +216,6 @@ export namespace Components {
           * The text displayed on the button. If `continue` or `back` is true, the value of text is ignored.
          */
         "text"?: string;
-        /**
-          * Whether or not the component will use USWDS v3 styling.
-         */
-        "uswds"?: boolean;
     }
     interface VaButtonIcon {
         "buttonType": keyof typeof this.buttonTypeMap;
@@ -261,10 +253,6 @@ export namespace Components {
           * If `true`, button pair will use Update and Cancel for button text.
          */
         "update"?: boolean;
-        /**
-          * Whether or not the component will use USWDS v3 styling.
-         */
-        "uswds"?: boolean;
     }
     interface VaCard {
         /**
@@ -941,13 +929,9 @@ export namespace Components {
          */
         "showLastPage"?: boolean;
         /**
-          * Don't show last page when the page count exceeds `maxPageListLength` (but do show the ellipsis). Only relevant if uswds is true.
+          * Don't show last page when the page count exceeds `maxPageListLength` (but do show the ellipsis).
          */
         "unbounded"?: boolean;
-        /**
-          * Whether or not the component will use USWDS v3 styling.
-         */
-        "uswds"?: boolean;
     }
     interface VaPrivacyAgreement {
         /**
@@ -1252,10 +1236,6 @@ export namespace Components {
         "inputValue": string;
     }
     interface VaSummaryBox {
-        /**
-          * Whether or not the component will use USWDS v3 styling.
-         */
-        "uswds"?: boolean;
     }
     interface VaTable {
         /**
@@ -2119,10 +2099,6 @@ declare namespace LocalJSX {
           * The text to trigger the expansion
          */
         "trigger": string;
-        /**
-          * Whether or not the component will use USWDS v3 styling.
-         */
-        "uswds"?: boolean;
     }
     interface VaAlert {
         /**
@@ -2315,10 +2291,6 @@ declare namespace LocalJSX {
           * The text displayed on the button. If `continue` or `back` is true, the value of text is ignored.
          */
         "text"?: string;
-        /**
-          * Whether or not the component will use USWDS v3 styling.
-         */
-        "uswds"?: boolean;
     }
     interface VaButtonIcon {
         "buttonType"?: keyof typeof this.buttonTypeMap;
@@ -2372,10 +2344,6 @@ declare namespace LocalJSX {
           * If `true`, button pair will use Update and Cancel for button text.
          */
         "update"?: boolean;
-        /**
-          * Whether or not the component will use USWDS v3 styling.
-         */
-        "uswds"?: boolean;
     }
     interface VaCard {
         /**
@@ -3164,13 +3132,9 @@ declare namespace LocalJSX {
          */
         "showLastPage"?: boolean;
         /**
-          * Don't show last page when the page count exceeds `maxPageListLength` (but do show the ellipsis). Only relevant if uswds is true.
+          * Don't show last page when the page count exceeds `maxPageListLength` (but do show the ellipsis).
          */
         "unbounded"?: boolean;
-        /**
-          * Whether or not the component will use USWDS v3 styling.
-         */
-        "uswds"?: boolean;
     }
     interface VaPrivacyAgreement {
         /**
@@ -3539,10 +3503,6 @@ declare namespace LocalJSX {
         "onVaInputChange"?: (event: VaStatementOfTruthCustomEvent<any>) => void;
     }
     interface VaSummaryBox {
-        /**
-          * Whether or not the component will use USWDS v3 styling.
-         */
-        "uswds"?: boolean;
     }
     interface VaTable {
         /**

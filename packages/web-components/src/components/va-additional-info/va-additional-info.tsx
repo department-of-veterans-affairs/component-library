@@ -30,10 +30,7 @@ export class VaAdditionalInfo {
    * The text to trigger the expansion
    */
   @Prop() trigger!: string;
-  /**
-   * Whether or not the component will use USWDS v3 styling.
-   */
-  @Prop() uswds?: boolean = true;
+
   /**
    * If `true`, doesn't fire the CustomEvent which can be used for analytics tracking.
    */
@@ -100,60 +97,33 @@ export class VaAdditionalInfo {
   }
 
   render() {
-    if (this.uswds) {
-      const infoClass = classnames({
-        'open': this.open,
-        'closed': !this.open
-      });
-      return (
-        <Host>
-          <a
-            role="button"
-            aria-controls="info"
-            aria-expanded={this.open ? 'true' : 'false'}
-            tabIndex={0}
-            onClick={this.toggleOpen.bind(this)}
-            onKeyDown={this.handleKeydown.bind(this)}
-          >
-            <div>
-              <span class="additional-info-title">{this.trigger}</span>
-              <va-icon
-                class="additional-info-icon"
-                icon="chevron_right"
-                size={3}
-              ></va-icon>
-            </div>
-          </a>
-          <div id="info" class={infoClass}>
-            <slot></slot>
+    const infoClass = classnames({
+      'open': this.open,
+      'closed': !this.open
+    });
+    return (
+      <Host>
+        <a
+          role="button"
+          aria-controls="info"
+          aria-expanded={this.open ? 'true' : 'false'}
+          tabIndex={0}
+          onClick={this.toggleOpen.bind(this)}
+          onKeyDown={this.handleKeydown.bind(this)}
+        >
+          <div>
+            <span class="additional-info-title">{this.trigger}</span>
+            <va-icon
+              class="additional-info-icon"
+              icon="chevron_right"
+              size={3}
+            ></va-icon>
           </div>
-        </Host>
-      );
-    } else {
-      return (
-        <Host>
-          <a
-            role="button"
-            aria-controls="info"
-            aria-expanded={this.open ? 'true' : 'false'}
-            tabIndex={0}
-            onClick={this.toggleOpen.bind(this)}
-            onKeyDown={this.handleKeydown.bind(this)}
-          >
-            <div>
-              <span class="additional-info-title">{this.trigger}</span>
-              <va-icon
-                class="additional-info-icon"
-                icon="chevron_right"
-                size={3}
-              ></va-icon>
-            </div>
-          </a>
-          <div id="info" class={this.open ? 'open' : 'closed'}>
-            <slot></slot>
-          </div>
-        </Host>
-      );
-    }
+        </a>
+        <div id="info" class={infoClass}>
+          <slot></slot>
+        </div>
+      </Host>
+    );
   }
 }
