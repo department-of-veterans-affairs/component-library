@@ -529,8 +529,6 @@ export class VaFileInput {
             secondary
             text={text}
             aria-describedby={error ? 'error-message' : undefined}
-            class="uswds-false"
-            uswds={false}
           />
           <input
             id="fileInputField"
