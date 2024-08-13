@@ -952,10 +952,6 @@ export namespace Components {
         "showError"?: boolean;
     }
     interface VaProcessList {
-        /**
-          * Whether or not the component will use USWDS v3 styling.
-         */
-        "uswds"?: boolean;
     }
     interface VaProcessListItem {
         /**
@@ -3167,10 +3163,6 @@ declare namespace LocalJSX {
         "showError"?: boolean;
     }
     interface VaProcessList {
-        /**
-          * Whether or not the component will use USWDS v3 styling.
-         */
-        "uswds"?: boolean;
     }
     interface VaProcessListItem {
         /**
