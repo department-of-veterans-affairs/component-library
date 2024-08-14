@@ -55,11 +55,6 @@ export class VaButtonPair {
   @Prop() update?: boolean = false;
 
   /**
-   * Whether or not the component will use USWDS v3 styling.
-   */
-  @Prop() uswds?: boolean = true;
-
-  /**
    * Fires when the primary button is clicked.
    */
   @Event({
@@ -132,109 +127,59 @@ export class VaButtonPair {
       secondaryLabel,
       submit,
       update,
-      uswds,
     } = this;
 
     if (_continue) {
-      if (uswds) {
-        return (
-          <Host>
-            <ul class="usa-button-group">
-              <li class="usa-button-group__item">
-                <va-button
-                  back
-                  disable-analytics={disableAnalytics}
-                  label={secondaryLabel}
-                  onClick={handleSecondaryClick}
-                />
-              </li>
-              <li class="usa-button-group__item">
-                <va-button
-                  continue
-                  disable-analytics={disableAnalytics}
-                  label={primaryLabel}
-                  onClick={handlePrimaryClick}
-                  submit={submit}
-                />
-              </li>
-            </ul>
-          </Host>
-        );
-      } else {
-        return (
-          <Host>
-            <va-button
-              back
-              disable-analytics={disableAnalytics}
-              label={secondaryLabel}
-              onClick={handleSecondaryClick}
-              uswds={false}
-              class="uswds-false"
-            />
-            <va-button
-              continue
-              disable-analytics={disableAnalytics}
-              label={primaryLabel}
-              onClick={handlePrimaryClick}
-              submit={submit}
-              uswds={false}
-              class="uswds-false"
-            />
-          </Host>
-        );
-      }
+      return (
+        <Host>
+          <ul class="usa-button-group">
+            <li class="usa-button-group__item">
+              <va-button
+                back
+                disable-analytics={disableAnalytics}
+                label={secondaryLabel}
+                onClick={handleSecondaryClick}
+              />
+            </li>
+            <li class="usa-button-group__item">
+              <va-button
+                continue
+                disable-analytics={disableAnalytics}
+                label={primaryLabel}
+                onClick={handlePrimaryClick}
+                submit={submit}
+              />
+            </li>
+          </ul>
+        </Host>
+      );
     }
 
     if (update || !_continue) {
-      if (uswds) {
-        return (
-          <Host>
-            <ul class="usa-button-group">
-              <li class="usa-button-group__item">
-                <va-button
-                  disable-analytics={disableAnalytics}
-                  label={primaryLabel}
-                  onClick={handlePrimaryClick}
-                  text={update ? 'Update' : 'Yes'}
-                  submit={submit}
-                />
-              </li>
-              <li class="usa-button-group__item">
-                <va-button
-                  disable-analytics={disableAnalytics}
-                  label={secondaryLabel}
-                  onClick={handleSecondaryClick}
-                  secondary
-                  text={update ? 'Cancel' : 'No'}
-                />
-              </li>
-            </ul>
-          </Host>
-        );
-      } else {
-        return (
-          <Host>
-            <va-button
-              disable-analytics={disableAnalytics}
-              label={primaryLabel}
-              onClick={handlePrimaryClick}
-              text={update ? 'Update' : 'Yes'}
-              submit={submit}
-              uswds={false}
-              class="uswds-false"
-            />
-            <va-button
-              disable-analytics={disableAnalytics}
-              label={secondaryLabel}
-              onClick={handleSecondaryClick}
-              secondary
-              text={update ? 'Cancel' : 'No'}
-              uswds={false}
-              class="uswds-false"
-            />
-          </Host>
-        );
-      }
+      return (
+        <Host>
+          <ul class="usa-button-group">
+            <li class="usa-button-group__item">
+              <va-button
+                disable-analytics={disableAnalytics}
+                label={primaryLabel}
+                onClick={handlePrimaryClick}
+                text={update ? 'Update' : 'Yes'}
+                submit={submit}
+              />
+            </li>
+            <li class="usa-button-group__item">
+              <va-button
+                disable-analytics={disableAnalytics}
+                label={secondaryLabel}
+                onClick={handleSecondaryClick}
+                secondary
+                text={update ? 'Cancel' : 'No'}
+              />
+            </li>
+          </ul>
+        </Host>
+      );
     }
   }
 }
