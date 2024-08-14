@@ -468,7 +468,7 @@ describe('va-search-input', () => {
     expect(analyticsSpy).not.toHaveReceivedEvent();
   });
 
-  it('uswds displays as the small variation', async () => {
+  it('displays as the small variation', async () => {
     const page = await newE2EPage();
     await page.setContent('<va-search-input small></va-search-input>');
 
@@ -476,7 +476,7 @@ describe('va-search-input', () => {
     expect(form).toHaveClass('usa-search--small');
   });
 
-  it('uswds displays as the big variation', async () => {
+  it('displays as the big variation', async () => {
     const page = await newE2EPage();
     await page.setContent('<va-search-input big></va-search-input>');
 
