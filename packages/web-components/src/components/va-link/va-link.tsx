@@ -79,7 +79,7 @@ export class VaLink {
   @Prop() reverse?: boolean = false;
 
   /**
-   * If 'true', will open in a new tab and have icon denoting that
+   * If 'true', will open in a new tab and have icon denoting that. Will also have the text "opens in a new tab" appended to the link text in screen reader only span
    */
   @Prop() external?: boolean = false;
  
@@ -254,7 +254,7 @@ export class VaLink {
           >
             {text}
             <va-icon class="external-link-icon" icon="launch"></va-icon>
-            <span class="usa-sr-only">opens in a new window</span>
+            <span class="usa-sr-only">opens in a new tab</span>
           </a>
         </Host>
       );

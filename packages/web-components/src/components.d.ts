@@ -519,7 +519,7 @@ export namespace Components {
          */
         "download"?: boolean;
         /**
-          * If 'true', will open in a new tab and have icon denoting that
+          * If 'true', will open in a new tab and have icon denoting that. Will also have the text "opens in a new tab" appended to the link text in screen reader only span
          */
         "external"?: boolean;
         /**
@@ -2646,7 +2646,7 @@ declare namespace LocalJSX {
          */
         "download"?: boolean;
         /**
-          * If 'true', will open in a new tab and have icon denoting that
+          * If 'true', will open in a new tab and have icon denoting that. Will also have the text "opens in a new tab" appended to the link text in screen reader only span
          */
         "external"?: boolean;
         /**
