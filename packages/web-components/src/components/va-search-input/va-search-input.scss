@@ -5,6 +5,7 @@
 @use 'usa-button/src/styles/usa-button';
 
 @import '../../mixins/uswds-error-border.scss';
+@import '../../mixins/inputs.css';
 
 :host {
   display: block;
@@ -34,3 +35,4 @@
     width: auto;
   }
 }
+
