@@ -148,7 +148,7 @@ describe('va-link', () => {
           Veteran's Affairs
           <va-icon class="external-link-icon hydrated"></va-icon>
           <span class="usa-sr-only">
-            opens in a new window
+            opens in a new tab
           </span>
         </a>
       </mock:shadow-root>
