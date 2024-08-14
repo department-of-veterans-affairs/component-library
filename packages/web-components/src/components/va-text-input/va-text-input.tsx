@@ -64,7 +64,7 @@ export class VaTextInput {
   /**
    * Blah blah blah
    */
-  @Prop() showInputError?: boolean = true;
+  @Prop({ reflect: true }) showInputError?: boolean = true;
 
   /**
    * Whether or not `aria-invalid` will be set on the inner input. Useful when
@@ -334,6 +334,7 @@ export class VaTextInput {
       label,
       error,
       reflectInputError,
+      showInputError,
       invalid,
       required,
       value,
@@ -448,7 +449,7 @@ export class VaTextInput {
           )}
           <slot></slot>
           <span id="input-error-message" role="alert">
-            {error && (
+            {error && showInputError && (
               <Fragment>
                 <span class="usa-sr-only">{i18next.t('error')}</span>
                 <span class="usa-error-message">{error}</span>

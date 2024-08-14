@@ -65,3 +65,9 @@ input.usa-input {
     padding-left: 25px;
   }
 }
+
+:host([error]:not([error=""])[show-input-error]:not([show-input-error=false])) {
+  // override error left border when show-input-error is set true
+  border-left: 0;
+  padding-left: 0;
+}

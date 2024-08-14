@@ -243,7 +243,7 @@ export class VaMemorableDate {
     // We are setting the error on each va-text-input for screen readers, but do not want to show it visually.
     const textInputs = this.el.shadowRoot.querySelectorAll('va-text-input, va-select');
     textInputs.forEach((input) => {
-      input.shadowRoot.querySelector('#input-error-message').classList.add('sr-only');
+      input.shadowRoot.querySelector('#input-error-message').classList.add('usa-sr-only');
     });
   }
 
