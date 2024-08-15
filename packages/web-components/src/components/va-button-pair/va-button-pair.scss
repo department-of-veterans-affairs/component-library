@@ -7,79 +7,16 @@
   flex-direction: column;
 }
 
-:host(:not([uswds='false'])) va-button::part(button){
+:host va-button::part(button){
   margin-right: 0;
 }
 
 @media (max-width: 480px) {
-  :host(:not([uswds='false'])) va-button {
+  :host va-button {
     display: block;
   }
   .usa-button-group {
     margin: 0 auto;
     width: 100%;
-  }
-}
-
-/* Original Component Styles. */
-
-:host([uswds='false']) va-button {
-  flex: 1 1 auto;
-}
-
-:host([uswds='false']) {
-  max-width: 560px;
-}
-
-:host([uswds='false']) va-button::part(button) {
-  max-width: 280px;
-  width: 100%;
-}
-
-@media (min-width: 481px) {
-  :host([continue]:not([continue='false'])[uswds='false']) {
-    flex-direction: row;
-  }
-
-  :host([continue]:not([continue='false'])[uswds='false']) va-button + va-button::part(button) {
-    margin-left: 12px;
-    margin-right: 0;
-  }
-}
-
-@media (min-width: 481px) {
-  :host([uswds='false']) {
-    flex-direction: row;
-    max-width: 420px;
-  }
-
-  :host([uswds='false']) va-button + va-button::part(button) {
-    margin-left: 12px;
-    margin-right: 0;
-  }
-
-  :host([uswds='false']) va-button::part(button) {
-    max-width: 210px;
-  }
-}
-
-@media (max-width: 481px) {
-  :host([uswds='false']) {
-    width: 100%;
-  }
-
-  :host([continue]:not([continue='false'])[uswds='false']) va-button::part(button) {
-    max-width: 280px;
-  }
-}
-
-@media (max-width: 320px) {
-  :host([uswds='false']) {
-    margin: 0 auto;
-    max-width: 280px;
-  }
-
-  :host([continue]:not([continue='false'])[uswds='false']) va-button::part(button) {
-    max-width: 280px;
   }
 }

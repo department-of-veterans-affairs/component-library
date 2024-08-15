@@ -56,10 +56,6 @@ export namespace Components {
           * The text to trigger the expansion
          */
         "trigger": string;
-        /**
-          * Whether or not the component will use USWDS v3 styling.
-         */
-        "uswds"?: boolean;
     }
     interface VaAlert {
         /**
@@ -147,7 +143,7 @@ export namespace Components {
     }
     interface VaBreadcrumbs {
         /**
-          * Represents a list of breadcrumbs. Use a JSON array of objects with label and href properties, then wrap in a string if using non-React-binding version. See Storybook examples for React-binding version. For pure web components, here's an example link: ``[{"href": "/link1", "label": "Link 1"}]`. This prop is available when `uswds` is set to `true`.
+          * Represents a list of breadcrumbs. Use a JSON array of objects with label and href properties, then wrap in a string if using non-React-binding version. See Storybook examples for React-binding version. For pure web components, here's an example link: ``[{"href": "/link1", "label": "Link 1"}]`.
          */
         "breadcrumbList"?: Breadcrumb[] | string;
         /**
@@ -163,7 +159,7 @@ export namespace Components {
          */
         "label"?: string;
         /**
-          * Whether or not the component will wrap the breadcrumbs. This prop is available when `uswds` is set to `true`.
+          * Whether or not the component will wrap the breadcrumbs.
          */
         "wrapping"?: boolean;
     }
@@ -212,10 +208,6 @@ export namespace Components {
           * The text displayed on the button. If `continue` or `back` is true, the value of text is ignored.
          */
         "text"?: string;
-        /**
-          * Whether or not the component will use USWDS v3 styling.
-         */
-        "uswds"?: boolean;
     }
     interface VaButtonIcon {
         "buttonType": keyof typeof this.buttonTypeMap;
@@ -253,10 +245,6 @@ export namespace Components {
           * If `true`, button pair will use Update and Cancel for button text.
          */
         "update"?: boolean;
-        /**
-          * Whether or not the component will use USWDS v3 styling.
-         */
-        "uswds"?: boolean;
     }
     interface VaCard {
         /**
@@ -436,10 +424,6 @@ export namespace Components {
           * Sets the input to required and renders the (*Required) text.
          */
         "required"?: boolean;
-        /**
-          * Whether or not the component will use USWDS v3 styling.
-         */
-        "uswds"?: boolean;
     }
     interface VaFileInputMultiple {
         /**
@@ -929,13 +913,9 @@ export namespace Components {
          */
         "showLastPage"?: boolean;
         /**
-          * Don't show last page when the page count exceeds `maxPageListLength` (but do show the ellipsis). Only relevant if uswds is true.
+          * Don't show last page when the page count exceeds `maxPageListLength` (but do show the ellipsis).
          */
         "unbounded"?: boolean;
-        /**
-          * Whether or not the component will use USWDS v3 styling.
-         */
-        "uswds"?: boolean;
     }
     interface VaPrivacyAgreement {
         /**
@@ -952,10 +932,6 @@ export namespace Components {
         "showError"?: boolean;
     }
     interface VaProcessList {
-        /**
-          * Whether or not the component will use USWDS v3 styling.
-         */
-        "uswds"?: boolean;
     }
     interface VaProcessListItem {
         /**
@@ -1085,7 +1061,7 @@ export namespace Components {
     }
     interface VaSearchInput {
         /**
-          * If `true`, the component will use the big variant. Only available when `uswds` is `true`.
+          * If `true`, the component will use the big variant.
          */
         "big"?: boolean;
         /**
@@ -1101,7 +1077,7 @@ export namespace Components {
          */
         "label"?: string;
         /**
-          * If `true`, the component will use the small variant. Only available when `uswds` is `true`.
+          * If `true`, the component will use the small variant.
          */
         "small"?: boolean;
         /**
@@ -1109,21 +1085,17 @@ export namespace Components {
          */
         "suggestions"?: any;
         /**
-          * Whether or not the component will use USWDS v3 styling.
-         */
-        "uswds"?: boolean;
-        /**
           * The value of the input field
          */
         "value"?: string;
     }
     interface VaSegmentedProgressBar {
         /**
-          * Whether or not to center the step labels (v3 only)
+          * Whether or not to center the step labels
          */
         "centeredLabels"?: boolean;
         /**
-          * Show number counters for each step (v3 only)
+          * Show number counters for each step
          */
         "counters"?: "default" | "small";
         /**
@@ -1135,11 +1107,11 @@ export namespace Components {
          */
         "enableAnalytics"?: boolean;
         /**
-          * Header level for button wrapper. Must be between 1 and 6 (v3 only)
+          * Header level for button wrapper. Must be between 1 and 6
          */
         "headerLevel"?: number;
         /**
-          * Text of current step (v3 only)
+          * Text of current step
          */
         "headingText"?: string;
         /**
@@ -1147,7 +1119,7 @@ export namespace Components {
          */
         "label"?: string;
         /**
-          * String containing a list of step labels delimited by a semi-colon (v3 only) Example: `"Step 1;Step 2;Step 3"`
+          * String containing a list of step labels delimited by a semi-colon. Example: `"Step 1;Step 2;Step 3"`
          */
         "labels"?: string;
         /**
@@ -1159,13 +1131,9 @@ export namespace Components {
          */
         "total": number;
         /**
-          * When true, this makes the segmented-progress-bar use a div instead of a heading (v3 only)
+          * When true, this makes the segmented-progress-bar use a div instead of a heading
          */
         "useDiv"?: boolean;
-        /**
-          * Whether or not the component will use USWDS v3 styling.
-         */
-        "uswds"?: boolean;
     }
     interface VaSelect {
         /**
@@ -1244,10 +1212,6 @@ export namespace Components {
         "inputValue": string;
     }
     interface VaSummaryBox {
-        /**
-          * Whether or not the component will use USWDS v3 styling.
-         */
-        "uswds"?: boolean;
     }
     interface VaTable {
         /**
@@ -2111,10 +2075,6 @@ declare namespace LocalJSX {
           * The text to trigger the expansion
          */
         "trigger": string;
-        /**
-          * Whether or not the component will use USWDS v3 styling.
-         */
-        "uswds"?: boolean;
     }
     interface VaAlert {
         /**
@@ -2222,7 +2182,7 @@ declare namespace LocalJSX {
     }
     interface VaBreadcrumbs {
         /**
-          * Represents a list of breadcrumbs. Use a JSON array of objects with label and href properties, then wrap in a string if using non-React-binding version. See Storybook examples for React-binding version. For pure web components, here's an example link: ``[{"href": "/link1", "label": "Link 1"}]`. This prop is available when `uswds` is set to `true`.
+          * Represents a list of breadcrumbs. Use a JSON array of objects with label and href properties, then wrap in a string if using non-React-binding version. See Storybook examples for React-binding version. For pure web components, here's an example link: ``[{"href": "/link1", "label": "Link 1"}]`.
          */
         "breadcrumbList"?: Breadcrumb[] | string;
         /**
@@ -2242,11 +2202,11 @@ declare namespace LocalJSX {
          */
         "onComponent-library-analytics"?: (event: VaBreadcrumbsCustomEvent<any>) => void;
         /**
-          * Fires when user clicks on breadcrumb anchor tag. Has no effect unless uswds is true and the href of anchor tag is part of breadcrumb object that also has isRouterLink: true
+          * Fires when user clicks on breadcrumb anchor tag. Has no effect unless the href of anchor tag is part of breadcrumb object that also has isRouterLink: true
          */
         "onRouteChange"?: (event: VaBreadcrumbsCustomEvent<{ href: string }>) => void;
         /**
-          * Whether or not the component will wrap the breadcrumbs. This prop is available when `uswds` is set to `true`.
+          * Whether or not the component will wrap the breadcrumbs.
          */
         "wrapping"?: boolean;
     }
@@ -2299,10 +2259,6 @@ declare namespace LocalJSX {
           * The text displayed on the button. If `continue` or `back` is true, the value of text is ignored.
          */
         "text"?: string;
-        /**
-          * Whether or not the component will use USWDS v3 styling.
-         */
-        "uswds"?: boolean;
     }
     interface VaButtonIcon {
         "buttonType"?: keyof typeof this.buttonTypeMap;
@@ -2356,10 +2312,6 @@ declare namespace LocalJSX {
           * If `true`, button pair will use Update and Cancel for button text.
          */
         "update"?: boolean;
-        /**
-          * Whether or not the component will use USWDS v3 styling.
-         */
-        "uswds"?: boolean;
     }
     interface VaCard {
         /**
@@ -2571,10 +2523,6 @@ declare namespace LocalJSX {
           * Sets the input to required and renders the (*Required) text.
          */
         "required"?: boolean;
-        /**
-          * Whether or not the component will use USWDS v3 styling.
-         */
-        "uswds"?: boolean;
     }
     interface VaFileInputMultiple {
         /**
@@ -3144,13 +3092,9 @@ declare namespace LocalJSX {
          */
         "showLastPage"?: boolean;
         /**
-          * Don't show last page when the page count exceeds `maxPageListLength` (but do show the ellipsis). Only relevant if uswds is true.
+          * Don't show last page when the page count exceeds `maxPageListLength` (but do show the ellipsis).
          */
         "unbounded"?: boolean;
-        /**
-          * Whether or not the component will use USWDS v3 styling.
-         */
-        "uswds"?: boolean;
     }
     interface VaPrivacyAgreement {
         /**
@@ -3175,10 +3119,6 @@ declare namespace LocalJSX {
         "showError"?: boolean;
     }
     interface VaProcessList {
-        /**
-          * Whether or not the component will use USWDS v3 styling.
-         */
-        "uswds"?: boolean;
     }
     interface VaProcessListItem {
         /**
@@ -3332,7 +3272,7 @@ declare namespace LocalJSX {
     }
     interface VaSearchInput {
         /**
-          * If `true`, the component will use the big variant. Only available when `uswds` is `true`.
+          * If `true`, the component will use the big variant.
          */
         "big"?: boolean;
         /**
@@ -3352,7 +3292,7 @@ declare namespace LocalJSX {
          */
         "onComponent-library-analytics"?: (event: VaSearchInputCustomEvent<any>) => void;
         /**
-          * If `true`, the component will use the small variant. Only available when `uswds` is `true`.
+          * If `true`, the component will use the small variant.
          */
         "small"?: boolean;
         /**
@@ -3360,21 +3300,17 @@ declare namespace LocalJSX {
          */
         "suggestions"?: any;
         /**
-          * Whether or not the component will use USWDS v3 styling.
-         */
-        "uswds"?: boolean;
-        /**
           * The value of the input field
          */
         "value"?: string;
     }
     interface VaSegmentedProgressBar {
         /**
-          * Whether or not to center the step labels (v3 only)
+          * Whether or not to center the step labels
          */
         "centeredLabels"?: boolean;
         /**
-          * Show number counters for each step (v3 only)
+          * Show number counters for each step
          */
         "counters"?: "default" | "small";
         /**
@@ -3386,11 +3322,11 @@ declare namespace LocalJSX {
          */
         "enableAnalytics"?: boolean;
         /**
-          * Header level for button wrapper. Must be between 1 and 6 (v3 only)
+          * Header level for button wrapper. Must be between 1 and 6
          */
         "headerLevel"?: number;
         /**
-          * Text of current step (v3 only)
+          * Text of current step
          */
         "headingText"?: string;
         /**
@@ -3398,7 +3334,7 @@ declare namespace LocalJSX {
          */
         "label"?: string;
         /**
-          * String containing a list of step labels delimited by a semi-colon (v3 only) Example: `"Step 1;Step 2;Step 3"`
+          * String containing a list of step labels delimited by a semi-colon. Example: `"Step 1;Step 2;Step 3"`
          */
         "labels"?: string;
         /**
@@ -3414,13 +3350,9 @@ declare namespace LocalJSX {
          */
         "total": number;
         /**
-          * When true, this makes the segmented-progress-bar use a div instead of a heading (v3 only)
+          * When true, this makes the segmented-progress-bar use a div instead of a heading
          */
         "useDiv"?: boolean;
-        /**
-          * Whether or not the component will use USWDS v3 styling.
-         */
-        "uswds"?: boolean;
     }
     interface VaSelect {
         /**
@@ -3523,10 +3455,6 @@ declare namespace LocalJSX {
         "onVaInputChange"?: (event: VaStatementOfTruthCustomEvent<any>) => void;
     }
     interface VaSummaryBox {
-        /**
-          * Whether or not the component will use USWDS v3 styling.
-         */
-        "uswds"?: boolean;
     }
     interface VaTable {
         /**

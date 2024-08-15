@@ -7,7 +7,7 @@
  */
  export const focusableQueryString = [
   'a[href]:not([tabindex^="-"])',
-  '.hydrated:not([tabindex^="-"])',
+  '.hydrated:not([tabindex^="-"]):not(va-radio-option)', // This was selecting the component wrapper for va-radio-option, we only want to select the input
   '[tabindex]:not([tabindex^="-"])',
   'input:not([type=hidden]):not([tabindex^="-"])',
   'textarea:not([tabindex^="-"])',

@@ -266,7 +266,6 @@ export class VaFileInputMultiple {
             return (
               <va-file-input
                 key={fileEntry.key}
-                uswds
                 headless
                 label={label}
                 hint={hint}
