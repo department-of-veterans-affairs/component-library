@@ -59,10 +59,6 @@ export namespace Components {
     }
     interface VaAlert {
         /**
-          * If `true`, renders the alert with only a background color corresponding to the status - no left border. (v1 only)
-         */
-        "backgroundOnly"?: boolean;
-        /**
           * Aria-label text for the close button.
          */
         "closeBtnAriaLabel"?: string;
@@ -79,7 +75,7 @@ export namespace Components {
          */
         "fullWidth"?: boolean;
         /**
-          * Displays the slim variation. Available when USWDS is true.
+          * Displays the slim variation.
          */
         "slim"?: boolean;
         /**
@@ -90,10 +86,6 @@ export namespace Components {
     | 'error'
     | 'success'
     | 'continue';
-        /**
-          * Whether or not the component will use USWDS v3 styling.
-         */
-        "uswds"?: boolean;
         /**
           * If `true`, the alert will be visible.
          */
@@ -137,7 +129,7 @@ export namespace Components {
          */
         "showClose"?: boolean;
         /**
-          * The type of the banner. This affects both the icon of the AlertBox and the top border color.
+          * The type of the banner. This affects both the icon of the AlertBox and border color / background.
          */
         "type"?: 'info' | 'warning' | 'error' | 'success' | 'continue';
         /**
@@ -2090,10 +2082,6 @@ declare namespace LocalJSX {
     }
     interface VaAlert {
         /**
-          * If `true`, renders the alert with only a background color corresponding to the status - no left border. (v1 only)
-         */
-        "backgroundOnly"?: boolean;
-        /**
           * Aria-label text for the close button.
          */
         "closeBtnAriaLabel"?: string;
@@ -2122,7 +2110,7 @@ declare namespace LocalJSX {
          */
         "onVa-component-did-load"?: (event: VaAlertCustomEvent<any>) => void;
         /**
-          * Displays the slim variation. Available when USWDS is true.
+          * Displays the slim variation.
          */
         "slim"?: boolean;
         /**
@@ -2133,10 +2121,6 @@ declare namespace LocalJSX {
     | 'error'
     | 'success'
     | 'continue';
-        /**
-          * Whether or not the component will use USWDS v3 styling.
-         */
-        "uswds"?: boolean;
         /**
           * If `true`, the alert will be visible.
          */
@@ -2188,7 +2172,7 @@ declare namespace LocalJSX {
          */
         "showClose"?: boolean;
         /**
-          * The type of the banner. This affects both the icon of the AlertBox and the top border color.
+          * The type of the banner. This affects both the icon of the AlertBox and border color / background.
          */
         "type"?: 'info' | 'warning' | 'error' | 'success' | 'continue';
         /**
