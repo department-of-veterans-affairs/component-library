@@ -56,6 +56,7 @@ const defaultArgs = {
   'minlength': undefined,
   'value': undefined,
   'inputmode': undefined,
+  'step': undefined,
   'type': undefined,
   'success': false,
   'pattern': undefined,
@@ -84,6 +85,7 @@ const Template = ({
   maxlength,
   value,
   inputmode,
+  step,
   type,
   success,
   pattern,
@@ -109,6 +111,7 @@ const Template = ({
       maxlength={maxlength}
       value={value}
       inputmode={inputmode}
+      step={step}
       type={type}
       success={success}
       pattern={pattern}

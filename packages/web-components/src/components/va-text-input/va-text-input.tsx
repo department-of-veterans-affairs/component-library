@@ -85,6 +85,12 @@ export class VaTextInput {
     | 'url';
 
   /**
+   * The step attribute is a number, or the string 'any', that specifies the granularity of the value. For example: `<va-text-input type="number" step=".1"/>` enables float/decimal values to be valid and increment by one-hundredth. <br/>
+   * Defaults to 1 for every field type except for time and datetime-local which default to 60 (seconds)
+   */
+  @Prop() step?: string;
+
+  /**
    * The type attribute.
    */
   @Prop() type?: 'email' | 'number' | 'search' | 'tel' | 'text' | 'url' =
@@ -346,6 +352,7 @@ export class VaTextInput {
       charcount,
       min,
       max,
+      step,
       currency,
       inputPrefix,
       inputIconPrefix,
@@ -469,6 +476,7 @@ export class VaTextInput {
                 invalid || error || charCountTooHigh ? 'true' : 'false'
               }
               inputmode={inputmode}
+              step={step}
               maxlength={maxlength}
               pattern={pattern}
               name={name}
