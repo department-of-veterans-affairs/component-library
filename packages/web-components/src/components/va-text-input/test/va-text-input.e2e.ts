@@ -455,7 +455,8 @@ describe('va-text-input', () => {
     const page = await newE2EPage();
     await page.setContent('<va-text-input input-icon-suffix=\'credit_card\'></va-text-input>');
     const vaIconEl = await page.find('va-text-input >>> va-icon');
-    expect(vaIconEl).toHaveClass('hydrated');
+    const iconProp = await vaIconEl.getProperty('icon');
+    expect(iconProp).toMatch('credit_card');
   })
 
   it('sets the input mode to a default pattern if inputmode is numerical or decimal', async () => {
