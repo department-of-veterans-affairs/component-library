@@ -1356,6 +1356,10 @@ export namespace Components {
          */
         "inputIconPrefix"?: string;
         /**
+          * A string that represents the name of an icon passed to va-icon, which will be applied as a suffix to the input.
+         */
+        "inputIconSuffix"?: string;
+        /**
           * Displays a fixed prefix string at the start of the input field.
          */
         "inputPrefix"?: string;
@@ -3610,6 +3614,10 @@ declare namespace LocalJSX {
           * This property displays a prefix that accepts a string which represents icon name.
          */
         "inputIconPrefix"?: string;
+        /**
+          * A string that represents the name of an icon passed to va-icon, which will be applied as a suffix to the input.
+         */
+        "inputIconSuffix"?: string;
         /**
           * Displays a fixed prefix string at the start of the input field.
          */

@@ -72,6 +72,7 @@ const defaultArgs = {
   'input-prefix': undefined,
   'input-icon-prefix': undefined,
   'input-suffix': undefined,
+  'input-icon-suffix': undefined
 };
 
 const Template = ({
@@ -96,6 +97,7 @@ const Template = ({
   'input-prefix': inputPrefix,
   'input-icon-prefix': inputIconPrefix,
   'input-suffix': inputSuffix,
+  'input-icon-suffix': inputIconSuffix
 }) => {
   return (
     <va-text-input
@@ -122,6 +124,7 @@ const Template = ({
       input-prefix={inputPrefix}
       input-icon-prefix={inputIconPrefix}
       input-suffix={inputSuffix}
+      input-icon-suffix={inputIconSuffix}
     />
   );
 };
@@ -449,6 +452,12 @@ WithSuffix.args = {
   'input-suffix': 'lbs.',
 };
 
+export const WithIconSuffix = Template.bind(null);
+WithIconSuffix.args = {
+  ...defaultArgs,
+  'input-icon-suffix': 'comment',
+}
+
 export const WithIconAndSuffix = Template.bind(null);
 WithIconAndSuffix.args = {
   ...defaultArgs,
@@ -457,6 +466,13 @@ WithIconAndSuffix.args = {
   'input-icon-prefix': 'attach_money',
   'input-suffix': 'per year',
 };
+
+export const WithPrefixAndIconSuffix = Template.bind(null);
+WithPrefixAndIconSuffix.args = {
+  ...defaultArgs,
+  'input-icon-suffix': 'comment',
+  'input-prefix': 'Pre'
+}
 
 export const Widths = WidthsTemplate.bind(null);
 Widths.args = {
