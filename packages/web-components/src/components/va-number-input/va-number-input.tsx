@@ -281,7 +281,7 @@ export class VaNumberInput {
             onBlur={handleBlur}
             />
             {messageAriaDescribedby && (
-              <span id="input-message" class="sr-only dd-privacy-hidden">
+              <span id="input-message" class="usa-sr-only dd-privacy-hidden">
                 {messageAriaDescribedby}
               </span>
             )}
@@ -303,7 +303,7 @@ export class VaNumberInput {
           <span id="error-message" role="alert">
             {error && (
               <Fragment>
-                <span class="sr-only">{i18next.t('error')}</span>{' '}{error}
+                <span class="usa-sr-only">{i18next.t('error')}</span>{' '}{error}
               </Fragment>
             )}
           </span>
@@ -328,7 +328,7 @@ export class VaNumberInput {
               onBlur={handleBlur}
               />
               {messageAriaDescribedby && (
-                <span id="input-message" class="sr-only dd-privacy-hidden">
+                <span id="input-message" class="usa-sr-only dd-privacy-hidden">
                   {messageAriaDescribedby}
                 </span>
               )}

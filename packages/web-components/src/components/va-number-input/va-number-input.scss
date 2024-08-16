@@ -6,11 +6,18 @@
   display: block;
 }
 
+.usa-sr-only {
+  position: absolute !important;
+  left: -999em !important;
+  right: auto !important;
+}
+
 /** Original Component Style **/
 
 @import '../../mixins/form-field-error.css';
 @import '../../mixins/hint-text.css';
 @import '../../mixins/headers.css';
+
 
 :host([uswds='false']) {
   input[type='number'] {
