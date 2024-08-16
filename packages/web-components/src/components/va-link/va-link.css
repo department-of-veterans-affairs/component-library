@@ -1,4 +1,4 @@
-@import "~@department-of-veterans-affairs/css-library/dist/stylesheets/uswds-typography.css";
+@import '~@department-of-veterans-affairs/css-library/dist/stylesheets/uswds-typography.css';
 @import '../../mixins/links.css';
 
 :host {
@@ -11,10 +11,14 @@
   font: inherit;
 }
 
-:host a.va-link--reverse, :host a.va-link--reverse .link-icon--back {
+:host a.va-link--reverse,
+:host a.va-link--reverse .link-icon--back {
   color: var(--vads-color-white);
 
-  &:hover, &:active, &:hover .link-icon--back, &:active .link-icon--back {
+  &:hover,
+  &:active,
+  &:hover .link-icon--back,
+  &:active .link-icon--back {
     color: var(--vads-color-action-focus-on-light);
     background-color: transparent;
   }
@@ -43,6 +47,9 @@
 
 .link-icon--back {
   color: var(--vads-color-gray-medium);
+  transition-duration: 0.3s;
+  transition-timing-function: ease-in-out;
+  transition-property: color, background-color, border-color;
 }
 
 .link--center {
