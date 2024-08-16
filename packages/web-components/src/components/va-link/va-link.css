@@ -11,7 +11,7 @@
   font: inherit;
 }
 
-:host a.va-link--reverse {
+:host a.va-link--reverse, :host a.va-link--reverse .link-icon--back {
   color: var(--vads-color-white);
 
   &:hover, &:active {
@@ -37,8 +37,12 @@
 .link-icon--left {
   margin-right: 4px;
   vertical-align: baseline;
-  position: relative; 
+  position: relative;
   top: 3px;
+}
+
+.link-icon--back {
+  color: var(--vads-color-gray-medium);
 }
 
 .link--center {

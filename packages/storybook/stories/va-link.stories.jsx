@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import { getWebComponentDocs, propStructure, StoryDocs } from './wc-helpers';
 
 const linkDocs = getWebComponentDocs('va-link');
@@ -17,6 +17,7 @@ export default {
 const defaultArgs = {
   'abbr-title': undefined,
   'active': undefined,
+  'back': undefined,
   'calendar': undefined,
   'channel': undefined,
   'disable-analytics': undefined,
@@ -36,6 +37,7 @@ const defaultArgs = {
 const Template = ({
   'abbr-title': abbrTitle,
   active,
+  back,
   calendar,
   channel,
   'disable-analytics': disableAnalytics,
@@ -50,13 +52,13 @@ const Template = ({
   label,
 }) => {
   return (
-    <Fragment>
     <p>
       If you need help to gather your information or fill out your
       application/form,{' '}
       <va-link
         abbr-title={abbrTitle}
         active={active}
+        back={back}
         calendar={calendar}
         channel={channel}
         disable-analytics={disableAnalytics}
@@ -71,7 +73,6 @@ const Template = ({
         label={label}
       />
     </p>
-    </Fragment>
   );
 };
 
@@ -86,6 +87,7 @@ Default.argTypes = propStructure(linkDocs);
 const VariantTemplate = ({
   'abbr-title': abbrTitle,
   active,
+  back,
   calendar,
   channel,
   'disable-analytics': disableAnalytics,
@@ -105,6 +107,7 @@ const VariantTemplate = ({
     <va-link
       abbr-title={abbrTitle}
       active={active}
+      back={back}
       calendar={calendar}
       channel={channel}
       disable-analytics={disableAnalytics}
@@ -130,27 +133,11 @@ Active.args = {
   text: 'Share your VA medical records',
 };
 
-export const Download = VariantTemplate.bind(null);
-Download.args = {
+export const Back = VariantTemplate.bind(null);
+Back.args = {
   ...defaultArgs,
-  download: true,
-  text: 'Download VA form 10-10EZ',
-  filetype: 'PDF',
-  pages: 5,
-};
-
-export const Video = VariantTemplate.bind(null);
-Video.args = {
-  ...defaultArgs,
-  video: true,
-  text: 'Go to the video about VA disability compensation',
-};
-
-export const Channel = VariantTemplate.bind(null);
-Channel.args = {
-  ...defaultArgs,
-  channel: true,
-  text: `Veteran's Affairs`,
+  back: true,
+  text: 'Back to previous page',
 };
 
 export const Calendar = VariantTemplate.bind(null);
@@ -161,6 +148,22 @@ Calendar.args = {
   text: `Add to calendar`,
 };
 
+export const Channel = VariantTemplate.bind(null);
+Channel.args = {
+  ...defaultArgs,
+  channel: true,
+  text: `Veteran's Affairs`,
+};
+
+export const Download = VariantTemplate.bind(null);
+Download.args = {
+  ...defaultArgs,
+  download: true,
+  text: 'Download VA form 10-10EZ',
+  filetype: 'PDF',
+  pages: 5,
+};
+
 export const Icon = VariantTemplate.bind(null);
 Icon.args = {
   ...defaultArgs,
@@ -168,6 +171,13 @@ Icon.args = {
   'text': `National Cemetery Administration`,
   'icon-name': 'mail',
   'icon-size': 3,
+};
+
+export const Video = VariantTemplate.bind(null);
+Video.args = {
+  ...defaultArgs,
+  video: true,
+  text: 'Go to the video about VA disability compensation',
 };
 
 const ReverseTemplate = ({ filename, filetype, href, reverse, text }) => {
@@ -194,12 +204,28 @@ const ReverseTemplate = ({ filename, filetype, href, reverse, text }) => {
         text="Share your VA medical records"
       />
 
-      <h4 className="vads-u-color--white">Icon</h4>
+      <h4 className="vads-u-color--white">Back Link</h4>
       <va-link
+        back
         href={href}
         reverse={reverse}
-        text="National Cemetery Administration"
-        icon-name="mail"
+        text="Back to previous page"
+      />
+
+      <h4 className="vads-u-color--white">Calendar Link</h4>
+      <va-link
+        calendar
+        href="data:text/calendar;charset=utf-8,BEGIN%3AVCALENDAR%0D%0AVERSION%3A2.0%0D%0APRODID%3AVA%0D%0ABEGIN%3AVEVENT%0D%0AUID%3A1398DD3C-3572-40FD-84F6-BB6F97C79D67%0D%0ASUMMARY%3AAppointment%20at%20Cheyenne%20VA%20Medical%20Center%0D%0ADESCRIPTION%3AYou%20have%20a%20health%20care%20appointment%20at%20Cheyenne%20VA%20Medical%20Cent%0D%0A%09er%0D%0A%09%5Cn%5Cn2360%20East%20Pershing%20Boulevard%5Cn%0D%0A%09Cheyenne%5C%2C%20WY%2082001-5356%5Cn%0D%0A%09307-778-7550%5Cn%0D%0A%09%5CnSign%20in%20to%20https%3A%2F%2Fva.gov%2Fhealth-care%2Fschedule-view-va-appointments%2Fappo%0D%0A%09intments%20to%20get%20details%20about%20this%20appointment%5Cn%0D%0ALOCATION%3A2360%20East%20Pershing%20Boulevard%5C%2C%20Cheyenne%5C%2C%20WY%2082001-5356%0D%0ADTSTAMP%3A20221222T021934Z%0D%0ADTSTART%3A20221222T021934Z%0D%0ADTEND%3A20221222T024934Z%0D%0AEND%3AVEVENT%0D%0AEND%3AVCALENDAR"
+        text="Add to calendar"
+        reverse
+      />
+
+      <h4 className="vads-u-color--white">Channel Link</h4>
+      <va-link
+        channel
+        href="https://www.va.gov"
+        text="Veteran's Affairs"
+        reverse
       />
 
       <h4 className="vads-u-color--white">Download Link</h4>
@@ -212,27 +238,19 @@ const ReverseTemplate = ({ filename, filetype, href, reverse, text }) => {
         text="Download VA form 10-10EZ"
       />
 
+      <h4 className="vads-u-color--white">Icon</h4>
+      <va-link
+        href={href}
+        reverse={reverse}
+        text="National Cemetery Administration"
+        icon-name="mail"
+      />
+
       <h4 className="vads-u-color--white">Video Link</h4>
       <va-link
         href="https://www.va.gov"
         text="Go to the video about VA disability compensation"
         video
-        reverse
-      />
-
-      <h4 className="vads-u-color--white">Channel Link</h4>
-      <va-link
-        channel
-        href="https://www.va.gov"
-        text="Veteran's Affairs"
-        reverse
-      />
-
-      <h4 className="vads-u-color--white">Calendar Link</h4>
-      <va-link
-        calendar
-        href="data:text/calendar;charset=utf-8,BEGIN%3AVCALENDAR%0D%0AVERSION%3A2.0%0D%0APRODID%3AVA%0D%0ABEGIN%3AVEVENT%0D%0AUID%3A1398DD3C-3572-40FD-84F6-BB6F97C79D67%0D%0ASUMMARY%3AAppointment%20at%20Cheyenne%20VA%20Medical%20Center%0D%0ADESCRIPTION%3AYou%20have%20a%20health%20care%20appointment%20at%20Cheyenne%20VA%20Medical%20Cent%0D%0A%09er%0D%0A%09%5Cn%5Cn2360%20East%20Pershing%20Boulevard%5Cn%0D%0A%09Cheyenne%5C%2C%20WY%2082001-5356%5Cn%0D%0A%09307-778-7550%5Cn%0D%0A%09%5CnSign%20in%20to%20https%3A%2F%2Fva.gov%2Fhealth-care%2Fschedule-view-va-appointments%2Fappo%0D%0A%09intments%20to%20get%20details%20about%20this%20appointment%5Cn%0D%0ALOCATION%3A2360%20East%20Pershing%20Boulevard%5C%2C%20Cheyenne%5C%2C%20WY%2082001-5356%0D%0ADTSTAMP%3A20221222T021934Z%0D%0ADTSTART%3A20221222T021934Z%0D%0ADTEND%3A20221222T024934Z%0D%0AEND%3AVEVENT%0D%0AEND%3AVCALENDAR"
-        text="Add to calendar"
         reverse
       />
     </div>

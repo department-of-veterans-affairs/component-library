@@ -24,6 +24,11 @@ export class VaLink {
   @Prop({ reflect: true }) active?: boolean = false;
 
   /**
+   * If 'true', renders a "back arrow" in front of the link text
+   */
+  @Prop() back?: boolean = false;
+
+  /**
    * If `true`, a calendar icon will be displayed before the anchor text.
    */
   @Prop() calendar?: boolean = false;
@@ -77,7 +82,7 @@ export class VaLink {
    * If 'true', will represent the link with white text instead of blue.
    */
   @Prop() reverse?: boolean = false;
- 
+
   /**
    * Adds an aria-label attribute to the link element.
    */
@@ -128,6 +133,7 @@ export class VaLink {
   render() {
     const {
       active,
+      back,
       calendar,
       channel,
       download,
@@ -141,19 +147,31 @@ export class VaLink {
       video,
       reverse,
       iconName,
-      iconSize
+      iconSize,
     } = this;
 
     const linkClass = classNames({
       'va-link--reverse': reverse,
-      'link--center': iconName
+      'link--center': iconName,
     });
+
+    const backArrow = (
+      <va-icon
+        icon="arrow_back"
+        class="link-icon--left link-icon--back"
+      ></va-icon>
+    );
 
     // Active link variant
     if (active) {
       return (
         <Host>
-          <a href={href} class={linkClass} onClick={handleClick} aria-label={this.label}>
+          <a
+            href={href}
+            class={linkClass}
+            onClick={handleClick}
+            aria-label={this.label}
+          >
             {text}
             <va-icon class="link-icon--active" icon="chevron_right"></va-icon>
           </a>
@@ -224,11 +242,7 @@ export class VaLink {
     if (iconName) {
       return (
         <Host>
-          <a
-            href={href}
-            class={linkClass}
-            onClick={handleClick}
-          >
+          <a href={href} class={linkClass} onClick={handleClick}>
             <va-icon icon={iconName} size={iconSize} part="icon"></va-icon>
             {text}
           </a>
@@ -239,7 +253,13 @@ export class VaLink {
     // Default
     return (
       <Host>
-        <a href={href} class={linkClass} onClick={handleClick} aria-label={this.label}>
+        <a
+          href={href}
+          class={linkClass}
+          onClick={handleClick}
+          aria-label={this.label}
+        >
+          {back && backArrow}
           {text}
         </a>
       </Host>
