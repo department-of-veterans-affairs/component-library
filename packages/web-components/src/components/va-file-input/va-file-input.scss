@@ -13,41 +13,10 @@
   display: none;
 }
 
-/** Original Component Style **/
-@import '../../mixins/accessibility.css';
-@import '../../mixins/form-field-error.css';
-@import '../../mixins/hint-text.css';
-
 :host {
   display: block;
   font-family: var(--font-source-sans);
   font-size: 16.96px;
-}
-
-:host(.has-error) {
-  border-left: 0.25rem solid $vads-color-secondary-dark;
-  padding-left: 1rem;
-  position: relative;
-
-  @media screen and (min-width: 1008px) {
-    margin-left: -0.9rem;
-  }
-}
-
-#error-message {
-  margin-bottom: 0.188rem;
-}
-
-va-button {
-  margin-bottom: -0.5rem;
-}
-
-.required {
-  color: var(--vads-color-secondary-dark);
-  margin-left: 0.25rem;
-}
-
-:host(:not([uswds=false])) {
 
   .label-header {
     color: var(--vads-color-base);
@@ -219,4 +188,19 @@ va-button {
   .thumbnail-error {
     color: $vads-color-error-dark;
   }
+}
+
+:host(.has-error) {
+  border-left: 0.25rem solid $vads-color-secondary-dark;
+  padding-left: 1rem;
+  position: relative;
+
+  @media screen and (min-width: 1008px) {
+    margin-left: -0.9rem;
+  }
+}
+
+.required {
+  color: var(--vads-color-secondary-dark);
+  margin-left: 0.25rem;
 }

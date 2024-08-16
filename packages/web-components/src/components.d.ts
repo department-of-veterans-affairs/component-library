@@ -59,10 +59,6 @@ export namespace Components {
     }
     interface VaAlert {
         /**
-          * If `true`, renders the alert with only a background color corresponding to the status - no left border. (v1 only)
-         */
-        "backgroundOnly"?: boolean;
-        /**
           * Aria-label text for the close button.
          */
         "closeBtnAriaLabel"?: string;
@@ -79,7 +75,7 @@ export namespace Components {
          */
         "fullWidth"?: boolean;
         /**
-          * Displays the slim variation. Available when USWDS is true.
+          * Displays the slim variation.
          */
         "slim"?: boolean;
         /**
@@ -90,10 +86,6 @@ export namespace Components {
     | 'error'
     | 'success'
     | 'continue';
-        /**
-          * Whether or not the component will use USWDS v3 styling.
-         */
-        "uswds"?: boolean;
         /**
           * If `true`, the alert will be visible.
          */
@@ -137,7 +129,7 @@ export namespace Components {
          */
         "showClose"?: boolean;
         /**
-          * The type of the banner. This affects both the icon of the AlertBox and the top border color.
+          * The type of the banner. This affects both the icon of the AlertBox and border color / background.
          */
         "type"?: 'info' | 'warning' | 'error' | 'success' | 'continue';
         /**
@@ -432,10 +424,6 @@ export namespace Components {
           * Sets the input to required and renders the (*Required) text.
          */
         "required"?: boolean;
-        /**
-          * Whether or not the component will use USWDS v3 styling.
-         */
-        "uswds"?: boolean;
     }
     interface VaFileInputMultiple {
         /**
@@ -948,10 +936,6 @@ export namespace Components {
         "showError"?: boolean;
     }
     interface VaProcessList {
-        /**
-          * Whether or not the component will use USWDS v3 styling.
-         */
-        "uswds"?: boolean;
     }
     interface VaProcessListItem {
         /**
@@ -1081,7 +1065,7 @@ export namespace Components {
     }
     interface VaSearchInput {
         /**
-          * If `true`, the component will use the big variant. Only available when `uswds` is `true`.
+          * If `true`, the component will use the big variant.
          */
         "big"?: boolean;
         /**
@@ -1097,17 +1081,13 @@ export namespace Components {
          */
         "label"?: string;
         /**
-          * If `true`, the component will use the small variant. Only available when `uswds` is `true`.
+          * If `true`, the component will use the small variant.
          */
         "small"?: boolean;
         /**
           * An array of strings containing suggestions to be displayed in listbox. This component displays up to 5 suggestions.
          */
         "suggestions"?: any;
-        /**
-          * Whether or not the component will use USWDS v3 styling.
-         */
-        "uswds"?: boolean;
         /**
           * The value of the input field
          */
@@ -1372,6 +1352,10 @@ export namespace Components {
          */
         "inputIconPrefix"?: string;
         /**
+          * A string that represents the name of an icon passed to va-icon, which will be applied as a suffix to the input.
+         */
+        "inputIconSuffix"?: string;
+        /**
           * Displays a fixed prefix string at the start of the input field.
          */
         "inputPrefix"?: string;
@@ -1429,6 +1413,10 @@ export namespace Components {
           * Set the input to required and render the (Required) text.
          */
         "required"?: boolean;
+        /**
+          * The step attribute is a number, or the string 'any', that specifies the granularity of the value. For example: `<va-text-input type="number" step=".1"/>` enables float/decimal values to be valid and increment by one-tenth. <br/> Defaults to 1 for every field type except for time and datetime-local which default to 60 (seconds). View more documentation on [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/step)
+         */
+        "step"?: string;
         /**
           * Adds styling based on status value
          */
@@ -2102,10 +2090,6 @@ declare namespace LocalJSX {
     }
     interface VaAlert {
         /**
-          * If `true`, renders the alert with only a background color corresponding to the status - no left border. (v1 only)
-         */
-        "backgroundOnly"?: boolean;
-        /**
           * Aria-label text for the close button.
          */
         "closeBtnAriaLabel"?: string;
@@ -2134,7 +2118,7 @@ declare namespace LocalJSX {
          */
         "onVa-component-did-load"?: (event: VaAlertCustomEvent<any>) => void;
         /**
-          * Displays the slim variation. Available when USWDS is true.
+          * Displays the slim variation.
          */
         "slim"?: boolean;
         /**
@@ -2145,10 +2129,6 @@ declare namespace LocalJSX {
     | 'error'
     | 'success'
     | 'continue';
-        /**
-          * Whether or not the component will use USWDS v3 styling.
-         */
-        "uswds"?: boolean;
         /**
           * If `true`, the alert will be visible.
          */
@@ -2200,7 +2180,7 @@ declare namespace LocalJSX {
          */
         "showClose"?: boolean;
         /**
-          * The type of the banner. This affects both the icon of the AlertBox and the top border color.
+          * The type of the banner. This affects both the icon of the AlertBox and border color / background.
          */
         "type"?: 'info' | 'warning' | 'error' | 'success' | 'continue';
         /**
@@ -2555,10 +2535,6 @@ declare namespace LocalJSX {
           * Sets the input to required and renders the (*Required) text.
          */
         "required"?: boolean;
-        /**
-          * Whether or not the component will use USWDS v3 styling.
-         */
-        "uswds"?: boolean;
     }
     interface VaFileInputMultiple {
         /**
@@ -3159,10 +3135,6 @@ declare namespace LocalJSX {
         "showError"?: boolean;
     }
     interface VaProcessList {
-        /**
-          * Whether or not the component will use USWDS v3 styling.
-         */
-        "uswds"?: boolean;
     }
     interface VaProcessListItem {
         /**
@@ -3316,7 +3288,7 @@ declare namespace LocalJSX {
     }
     interface VaSearchInput {
         /**
-          * If `true`, the component will use the big variant. Only available when `uswds` is `true`.
+          * If `true`, the component will use the big variant.
          */
         "big"?: boolean;
         /**
@@ -3336,17 +3308,13 @@ declare namespace LocalJSX {
          */
         "onComponent-library-analytics"?: (event: VaSearchInputCustomEvent<any>) => void;
         /**
-          * If `true`, the component will use the small variant. Only available when `uswds` is `true`.
+          * If `true`, the component will use the small variant.
          */
         "small"?: boolean;
         /**
           * An array of strings containing suggestions to be displayed in listbox. This component displays up to 5 suggestions.
          */
         "suggestions"?: any;
-        /**
-          * Whether or not the component will use USWDS v3 styling.
-         */
-        "uswds"?: boolean;
         /**
           * The value of the input field
          */
@@ -3643,6 +3611,10 @@ declare namespace LocalJSX {
          */
         "inputIconPrefix"?: string;
         /**
+          * A string that represents the name of an icon passed to va-icon, which will be applied as a suffix to the input.
+         */
+        "inputIconSuffix"?: string;
+        /**
           * Displays a fixed prefix string at the start of the input field.
          */
         "inputPrefix"?: string;
@@ -3704,6 +3676,10 @@ declare namespace LocalJSX {
           * Set the input to required and render the (Required) text.
          */
         "required"?: boolean;
+        /**
+          * The step attribute is a number, or the string 'any', that specifies the granularity of the value. For example: `<va-text-input type="number" step=".1"/>` enables float/decimal values to be valid and increment by one-tenth. <br/> Defaults to 1 for every field type except for time and datetime-local which default to 60 (seconds). View more documentation on [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/step)
+         */
+        "step"?: string;
         /**
           * Adds styling based on status value
          */
