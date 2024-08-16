@@ -56,6 +56,7 @@ const defaultArgs = {
   'minlength': undefined,
   'value': undefined,
   'inputmode': undefined,
+  'step': undefined,
   'type': undefined,
   'success': false,
   'pattern': undefined,
@@ -85,6 +86,7 @@ const Template = ({
   maxlength,
   value,
   inputmode,
+  step,
   type,
   success,
   pattern,
@@ -111,6 +113,7 @@ const Template = ({
       maxlength={maxlength}
       value={value}
       inputmode={inputmode}
+      step={step}
       type={type}
       success={success}
       pattern={pattern}
@@ -392,6 +395,9 @@ WithAnalytics.args = { ...defaultArgs, 'enable-analytics': true };
 
 export const WithHintText = Template.bind(null);
 WithHintText.args = { ...defaultArgs, hint: 'This is hint text' };
+
+export const WithStep = Template.bind(null);
+WithStep.args = { ...defaultArgs, type: 'number', inputmode: 'decimal', step: '.2', hint: 'step=".2" (only even values in tenth position valid)' };
 
 const WithInlineHintTextTemplate = ({ name, label }) => {
   return (
