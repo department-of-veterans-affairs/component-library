@@ -86,7 +86,7 @@ export class VaTextInput {
 
   /**
    * The step attribute is a number, or the string 'any', that specifies the granularity of the value. For example: `<va-text-input type="number" step=".1"/>` enables float/decimal values to be valid and increment by one-tenth. <br/>
-   * Defaults to 1 for every field type except for time and datetime-local which default to 60 (seconds). View more information [here](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/step)
+   * Defaults to 1 for every field type except for time and datetime-local which default to 60 (seconds). View more documentation on [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/step)
    */
   @Prop() step?: string;
 
