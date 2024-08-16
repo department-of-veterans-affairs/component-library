@@ -86,7 +86,7 @@ export class VaTextInput {
 
   /**
    * The step attribute is a number, or the string 'any', that specifies the granularity of the value. For example: `<va-text-input type="number" step=".1"/>` enables float/decimal values to be valid and increment by one-tenth. <br/>
-   * Defaults to 1 for every field type except for time and datetime-local which default to 60 (seconds)
+   * Defaults to 1 for every field type except for time and datetime-local which default to 60 (seconds). View more information [here](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/step)
    */
   @Prop() step?: string;
 
@@ -320,6 +320,14 @@ export class VaTextInput {
     return this.inputmode ? this.inputmode : undefined
   }
 
+  // get the step for the input, if inputMode is decimal default to .01
+  private getStep(): string {
+    if (!this.step && this.inputmode === 'decimal') {
+      return '.01';
+    }
+    return this.step ? this.step : undefined;
+  }
+
   connectedCallback() {
     i18next.on('languageChanged', () => {
       forceUpdate(this.el);
@@ -352,7 +360,6 @@ export class VaTextInput {
       charcount,
       min,
       max,
-      step,
       currency,
       inputPrefix,
       inputIconPrefix,
@@ -362,6 +369,7 @@ export class VaTextInput {
     const type = this.getInputType();
     const maxlength = this.getMaxlength();
     const inputmode = this.getInputmode();
+    const step = this.getStep();
 
     const ariaDescribedbyIds =
       `${messageAriaDescribedby ? 'input-message' : ''} ${

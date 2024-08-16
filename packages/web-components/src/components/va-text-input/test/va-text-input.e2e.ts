@@ -475,4 +475,17 @@ describe('va-text-input', () => {
     const inputEl = await page.find('va-text-input >>> input');
     expect(inputEl.getAttribute('type')).toEqual("number");
   });
+
+  it('sets the step attribute to .01 if inputmode is decimal', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-text-input type="number" inputmode="decimal"/>');
+    const inputEl = await page.find('va-text-input >>> input');
+    expect(inputEl.getAttribute('step')).toEqual(".01");
+  });
+  it('does not set the step attribute when step is defined', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-text-input type="number" inputmode="decimal" step="any"/>');
+    const inputEl = await page.find('va-text-input >>> input');
+    expect(inputEl.getAttribute('step')).toEqual("any");
+  });
 });
