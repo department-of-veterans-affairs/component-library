@@ -1,5 +1,7 @@
+@use 'uswds-helpers/src/styles/usa-sr-only';
 @import "~@department-of-veterans-affairs/css-library/dist/stylesheets/uswds-typography.css";
 @import '../../mixins/links.css';
+
 
 :host {
   display: inline;
@@ -8,7 +10,6 @@
 :host a {
   cursor: pointer;
   text-decoration: underline;
-  font: inherit;
 }
 
 :host a.va-link--reverse {
@@ -52,4 +53,8 @@ dfn {
 
 abbr {
   text-decoration: none;
+}
+
+.external-link-icon {
+  margin-left: 4px;
 }
