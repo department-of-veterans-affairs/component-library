@@ -14,7 +14,7 @@
 :host a.va-link--reverse, :host a.va-link--reverse .link-icon--back {
   color: var(--vads-color-white);
 
-  &:hover, &:active {
+  &:hover, &:active, &:hover .link-icon--back, &:active .link-icon--back {
     color: var(--vads-color-action-focus-on-light);
     background-color: transparent;
   }
