@@ -511,6 +511,10 @@ export namespace Components {
          */
         "download"?: boolean;
         /**
+          * If 'true', will open in a new tab and have icon denoting that. Will also have the text "opens in a new tab" appended to the link text in screen reader only span
+         */
+        "external"?: boolean;
+        /**
           * The suggested filename. Only valid if download or calendar is `true`.
          */
         "filename"?: string;
@@ -786,76 +790,6 @@ export namespace Components {
           * If `true`, the card will be visible.
          */
         "visible"?: boolean;
-    }
-    interface VaNumberInput {
-        /**
-          * Whether this component will be used to accept a currency value.
-         */
-        "currency"?: boolean;
-        /**
-          * Emit component-library-analytics events on the blur event.
-         */
-        "enableAnalytics"?: boolean;
-        /**
-          * The error message to render.
-         */
-        "error"?: string;
-        /**
-          * The content of the heading if `useFormsPattern` and `uswds` are true.
-         */
-        "formHeading"?: string;
-        /**
-          * The heading level for the heading if `useFormsPattern` and `uswds` are true.
-         */
-        "formHeadingLevel"?: number;
-        /**
-          * Optional hint text.
-         */
-        "hint"?: string;
-        /**
-          * The inputmode attribute.
-         */
-        "inputmode"?: 'decimal' | 'numeric';
-        /**
-          * The label for the text input.
-         */
-        "label"?: string;
-        /**
-          * Maximum number value The max attribute specifies the maximum value for an input element.
-         */
-        "max": number | string;
-        /**
-          * An optional message that will be read by screen readers when the input is focused.
-         */
-        "messageAriaDescribedby"?: string;
-        /**
-          * Minimum number value The min attribute specifies the minimum value for an input element.
-         */
-        "min": number | string;
-        /**
-          * The name to pass to the input element.
-         */
-        "name"?: string;
-        /**
-          * Set the input to required and render the (Required) text.
-         */
-        "required"?: boolean;
-        /**
-          * Enabling this will add a heading and description for integrating into the forms pattern. Accepts `single` or `multiple` to indicate if the form is a single input or will have multiple inputs. `uswds` should be true.
-         */
-        "useFormsPattern"?: string;
-        /**
-          * Whether or not the component will use USWDS v3 styling.
-         */
-        "uswds"?: boolean;
-        /**
-          * The value for the input.
-         */
-        "value"?: string;
-        /**
-          * Displays the input at a specific width. Accepts 2xs (4ex), xs (7ex), sm or small (10ex), md or medium (20ex), lg (30ex), xl (40ex), and 2xl (50ex).
-         */
-        "width"?: string;
     }
     interface VaOfficialGovBanner {
         /**
@@ -1414,6 +1348,10 @@ export namespace Components {
          */
         "required"?: boolean;
         /**
+          * The step attribute is a number, or the string 'any', that specifies the granularity of the value. For example: `<va-text-input type="number" step=".1"/>` enables float/decimal values to be valid and increment by one-tenth. <br/> Defaults to 1 for every field type except for time and datetime-local which default to 60 (seconds). View more documentation on [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/step)
+         */
+        "step"?: string;
+        /**
           * Adds styling based on status value
          */
         "success"?: boolean;
@@ -1588,10 +1526,6 @@ export interface VaModalCustomEvent<T> extends CustomEvent<T> {
 export interface VaNotificationCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLVaNotificationElement;
-}
-export interface VaNumberInputCustomEvent<T> extends CustomEvent<T> {
-    detail: T;
-    target: HTMLVaNumberInputElement;
 }
 export interface VaOfficialGovBannerCustomEvent<T> extends CustomEvent<T> {
     detail: T;
@@ -1828,12 +1762,6 @@ declare global {
         prototype: HTMLVaNotificationElement;
         new (): HTMLVaNotificationElement;
     };
-    interface HTMLVaNumberInputElement extends Components.VaNumberInput, HTMLStencilElement {
-    }
-    var HTMLVaNumberInputElement: {
-        prototype: HTMLVaNumberInputElement;
-        new (): HTMLVaNumberInputElement;
-    };
     interface HTMLVaOfficialGovBannerElement extends Components.VaOfficialGovBanner, HTMLStencilElement {
     }
     var HTMLVaOfficialGovBannerElement: {
@@ -1996,7 +1924,6 @@ declare global {
         "va-modal": HTMLVaModalElement;
         "va-need-help": HTMLVaNeedHelpElement;
         "va-notification": HTMLVaNotificationElement;
-        "va-number-input": HTMLVaNumberInputElement;
         "va-official-gov-banner": HTMLVaOfficialGovBannerElement;
         "va-omb-info": HTMLVaOmbInfoElement;
         "va-on-this-page": HTMLVaOnThisPageElement;
@@ -2622,6 +2549,10 @@ declare namespace LocalJSX {
          */
         "download"?: boolean;
         /**
+          * If 'true', will open in a new tab and have icon denoting that. Will also have the text "opens in a new tab" appended to the link text in screen reader only span
+         */
+        "external"?: boolean;
+        /**
           * The suggested filename. Only valid if download or calendar is `true`.
          */
         "filename"?: string;
@@ -2953,80 +2884,6 @@ declare namespace LocalJSX {
           * If `true`, the card will be visible.
          */
         "visible"?: boolean;
-    }
-    interface VaNumberInput {
-        /**
-          * Whether this component will be used to accept a currency value.
-         */
-        "currency"?: boolean;
-        /**
-          * Emit component-library-analytics events on the blur event.
-         */
-        "enableAnalytics"?: boolean;
-        /**
-          * The error message to render.
-         */
-        "error"?: string;
-        /**
-          * The content of the heading if `useFormsPattern` and `uswds` are true.
-         */
-        "formHeading"?: string;
-        /**
-          * The heading level for the heading if `useFormsPattern` and `uswds` are true.
-         */
-        "formHeadingLevel"?: number;
-        /**
-          * Optional hint text.
-         */
-        "hint"?: string;
-        /**
-          * The inputmode attribute.
-         */
-        "inputmode"?: 'decimal' | 'numeric';
-        /**
-          * The label for the text input.
-         */
-        "label"?: string;
-        /**
-          * Maximum number value The max attribute specifies the maximum value for an input element.
-         */
-        "max"?: number | string;
-        /**
-          * An optional message that will be read by screen readers when the input is focused.
-         */
-        "messageAriaDescribedby"?: string;
-        /**
-          * Minimum number value The min attribute specifies the minimum value for an input element.
-         */
-        "min"?: number | string;
-        /**
-          * The name to pass to the input element.
-         */
-        "name"?: string;
-        /**
-          * The event used to track usage of the component. This is emitted when the input is blurred and enableAnalytics is true.
-         */
-        "onComponent-library-analytics"?: (event: VaNumberInputCustomEvent<any>) => void;
-        /**
-          * Set the input to required and render the (Required) text.
-         */
-        "required"?: boolean;
-        /**
-          * Enabling this will add a heading and description for integrating into the forms pattern. Accepts `single` or `multiple` to indicate if the form is a single input or will have multiple inputs. `uswds` should be true.
-         */
-        "useFormsPattern"?: string;
-        /**
-          * Whether or not the component will use USWDS v3 styling.
-         */
-        "uswds"?: boolean;
-        /**
-          * The value for the input.
-         */
-        "value"?: string;
-        /**
-          * Displays the input at a specific width. Accepts 2xs (4ex), xs (7ex), sm or small (10ex), md or medium (20ex), lg (30ex), xl (40ex), and 2xl (50ex).
-         */
-        "width"?: string;
     }
     interface VaOfficialGovBanner {
         /**
@@ -3673,6 +3530,10 @@ declare namespace LocalJSX {
          */
         "required"?: boolean;
         /**
+          * The step attribute is a number, or the string 'any', that specifies the granularity of the value. For example: `<va-text-input type="number" step=".1"/>` enables float/decimal values to be valid and increment by one-tenth. <br/> Defaults to 1 for every field type except for time and datetime-local which default to 60 (seconds). View more documentation on [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/step)
+         */
+        "step"?: string;
+        /**
           * Adds styling based on status value
          */
         "success"?: boolean;
@@ -3793,7 +3654,6 @@ declare namespace LocalJSX {
         "va-modal": VaModal;
         "va-need-help": VaNeedHelp;
         "va-notification": VaNotification;
-        "va-number-input": VaNumberInput;
         "va-official-gov-banner": VaOfficialGovBanner;
         "va-omb-info": VaOmbInfo;
         "va-on-this-page": VaOnThisPage;
@@ -3851,7 +3711,6 @@ declare module "@stencil/core" {
             "va-modal": LocalJSX.VaModal & JSXBase.HTMLAttributes<HTMLVaModalElement>;
             "va-need-help": LocalJSX.VaNeedHelp & JSXBase.HTMLAttributes<HTMLVaNeedHelpElement>;
             "va-notification": LocalJSX.VaNotification & JSXBase.HTMLAttributes<HTMLVaNotificationElement>;
-            "va-number-input": LocalJSX.VaNumberInput & JSXBase.HTMLAttributes<HTMLVaNumberInputElement>;
             "va-official-gov-banner": LocalJSX.VaOfficialGovBanner & JSXBase.HTMLAttributes<HTMLVaOfficialGovBannerElement>;
             "va-omb-info": LocalJSX.VaOmbInfo & JSXBase.HTMLAttributes<HTMLVaOmbInfoElement>;
             "va-on-this-page": LocalJSX.VaOnThisPage & JSXBase.HTMLAttributes<HTMLVaOnThisPageElement>;

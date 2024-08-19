@@ -27,6 +27,7 @@ const defaultArgs = {
   'filetype': undefined,
   'pages': undefined,
   'reverse': undefined,
+  'external': undefined,
   'text': undefined,
   'video': undefined,
   'label': undefined,
@@ -98,6 +99,7 @@ const VariantTemplate = ({
   pages,
   reverse,
   text,
+  external,
   video,
   label,
   'icon-name': iconName,
@@ -118,6 +120,7 @@ const VariantTemplate = ({
       pages={pages}
       reverse={reverse}
       text={text}
+      external={external}
       video={video}
       label={label}
       icon-name={iconName}
@@ -162,6 +165,14 @@ Download.args = {
   text: 'Download VA form 10-10EZ',
   filetype: 'PDF',
   pages: 5,
+};
+
+export const External = VariantTemplate.bind(null);
+External.args = {
+  ...defaultArgs,
+  external: true,
+  text: `Leave VA.gov`,
+  href: 'https://design.va.gov/content-style-guide/links#linking-to-external-sites',
 };
 
 export const Icon = VariantTemplate.bind(null);
@@ -236,6 +247,14 @@ const ReverseTemplate = ({ filename, filetype, href, reverse, text }) => {
         pages={5}
         reverse
         text="Download VA form 10-10EZ"
+      />
+
+      <h4 className="vads-u-color--white">External</h4>
+      <va-link
+        external
+        href="https://design.va.gov/content-style-guide/links#linking-to-external-sites"
+        text="Leave VA.gov"
+        reverse
       />
 
       <h4 className="vads-u-color--white">Icon</h4>
