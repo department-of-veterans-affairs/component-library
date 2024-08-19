@@ -10,7 +10,7 @@ import {
   Fragment,
 } from '@stencil/core';
 import classnames from 'classnames';
-import i18next from 'i18next';
+import { i18next } from '../../i18n/i18n-setup';
 import { Build } from '@stencil/core';
 import { getHeaderLevel } from '../../utils/utils';
 

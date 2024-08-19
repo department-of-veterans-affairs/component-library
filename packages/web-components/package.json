@@ -1,6 +1,6 @@
 {
   "name": "@department-of-veterans-affairs/web-components",
-  "version": "13.0.0",
+  "version": "13.0.0-rcabcd",
   "description": "Stencil Component Starter",
   "main": "dist/index.cjs.js",
   "module": "dist/index.js",
@@ -17,14 +17,15 @@
     "react-bindings/"
   ],
   "scripts": {
-    "build": "stencil build --docs-json component-docs.json",
+    "copyi18n": "./scripts/copyi18n.sh",
+    "build": "yarn copyi18n && stencil build --docs-json component-docs.json",
     "build-bindings": "tsc -p tsconfig.bindings.json",
     "lint": "eslint src/**/*{.ts,.tsx}",
     "watch:stencil": "stencil build --watch",
-    "test": "stencil test --spec --e2e",
-    "test.watch": "stencil test --spec --e2e --watchAll",
+    "test": "yarn copyi18n && stencil test --spec --e2e",
+    "test.watch": "yarn copyi18n && stencil test --spec --e2e --watchAll",
     "generate": "stencil generate",
-    "serve": "stencil build --dev --watch --serve"
+    "serve": "yarn copyi18n && stencil build --dev --watch --serve"
   },
   "dependencies": {
     "@department-of-veterans-affairs/css-library": "^0.8.1",

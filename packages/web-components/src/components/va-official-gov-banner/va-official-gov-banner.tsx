@@ -8,7 +8,8 @@ import {
   Element,
   forceUpdate
 } from '@stencil/core';
-import i18next from 'i18next';
+import { i18next } from '../../i18n/i18n-setup';
+
 import { Build } from '@stencil/core';
 
 import iconHttpsSvg from '../../assets/icon-https.svg';

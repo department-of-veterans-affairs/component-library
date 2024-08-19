@@ -10,7 +10,7 @@ import {
   EventEmitter,
   State,
 } from '@stencil/core';
-import i18next from 'i18next';
+import { i18next } from '../../i18n/i18n-setup';
 import { fileInput } from './va-file-input-upgrader';
 import { extensionToMimeType } from "./fileExtensionToMimeType";
 
