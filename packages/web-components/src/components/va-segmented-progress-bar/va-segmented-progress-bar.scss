@@ -8,31 +8,3 @@
 *, ::after, ::before {
   box-sizing: border-box;
 }
-
-/** V1 Styles **/
-
-.progress-bar-segmented {
-  display: flex;
-  width: 100%;
-  height: 6px;
-}
-
-.progress-segment {
-  content: '&nbsp;';
-  flex: 1;
-  margin-left: 2px;
-  margin-right: 2px;
-  background-color: var(--vads-color-base-lighter);
-}
-
-.progress-segment:first-child {
-  margin-left: 0;
-}
-
-.progress-segment:last-child {
-  margin-right: 0;
-}
-
-.progress-segment-complete {
-  background-color: var(--vads-color-primary);
-}

@@ -306,7 +306,6 @@ export class VaModal {
     const actionButtons = Array.from(
       this.alertActions?.querySelectorAll(focusableQueryString) || [],
     );
-
     // maintain tab order
     return [
       this.closeButton, // close button first
@@ -317,15 +316,23 @@ export class VaModal {
       if (elm && (elm.offsetWidth || elm.offsetHeight)) {
         // hydrated class likely on web components
         if (elm.classList.contains('hydrated')) {
-          const shadowElms = Array.from(
-            elm.shadowRoot.querySelectorAll(focusableQueryString) || [],
-          );
-          if (shadowElms.length) {
+          let focusElms = [];
+          // va-radio-option does not have a shadow root, but should still be included in the focusable elements
+          if (elm.shadowRoot) {
+            focusElms = Array.from(
+              elm.shadowRoot.querySelectorAll(focusableQueryString) || [],
+            );
+          } else {
+            focusElms = Array.from(
+              elm.querySelectorAll(focusableQueryString) || [],
+            );
+          }
+          if (focusElms.length) {
             // add the web component and focusable shadow elements
             // document.activeElement targets the web component but the event
             // is composed, so crosses shadow DOM and shows up in composedPath
             focusableElms.push(elm);
-            return focusableElms.concat(shadowElms);
+            return focusableElms.concat(focusElms);
           }
         } else {
           focusableElms.push(elm);
