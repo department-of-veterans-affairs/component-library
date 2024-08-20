@@ -62,7 +62,7 @@ export class VaTextInput {
   @Prop() reflectInputError?: boolean = false;
 
   /**
-   * Blah blah blah
+   * When `false`, hides the error message from view, but not from the screen reader. Should only be used if error is being displayed elsewhere.
    */
   @Prop({ reflect: true }) showInputError?: boolean = true;
 
@@ -357,7 +357,6 @@ export class VaTextInput {
       inputIconPrefix,
       inputSuffix
     } = this;
-
     const type = this.getInputType();
     const maxlength = this.getMaxlength();
     const inputmode = this.getInputmode();
@@ -408,6 +407,10 @@ export class VaTextInput {
       'usa-character-count__status--invalid': maxlength && value?.length > maxlength
     });
 
+    const errorClass = classnames({
+      'usa-sr-only': !showInputError,
+    });
+
     const isFormsPattern = useFormsPattern === 'single' || useFormsPattern === 'multiple' ? true : false;
     let formsHeading = null;
     if (isFormsPattern) {
@@ -448,8 +451,8 @@ export class VaTextInput {
             </label>
           )}
           <slot></slot>
-          <span id="input-error-message" role="alert">
-            {error && showInputError && (
+          <span id="input-error-message" role="alert" class={errorClass}>
+            {error && (
               <Fragment>
                 <span class="usa-sr-only">{i18next.t('error')}</span>
                 <span class="usa-error-message">{error}</span>

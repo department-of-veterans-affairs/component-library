@@ -66,8 +66,8 @@ input.usa-input {
   }
 }
 
-:host([error]:not([error=""])[show-input-error]:not([show-input-error=false])) {
-  // override error left border when show-input-error is set true
+:host([error]:not([error=""])[show-input-error=false]) {
+  // override error left border when show-input-error is set false
   border-left: 0;
   padding-left: 0;
 }

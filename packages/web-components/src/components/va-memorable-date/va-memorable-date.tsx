@@ -239,14 +239,6 @@ export class VaMemorableDate {
   })
   componentLibraryAnalytics: EventEmitter;
 
-  componentDidLoad() {
-    // We are setting the error on each va-text-input for screen readers, but do not want to show it visually.
-    const textInputs = this.el.shadowRoot.querySelectorAll('va-text-input, va-select');
-    textInputs.forEach((input) => {
-      input.shadowRoot.querySelector('#input-error-message').classList.add('usa-sr-only');
-    });
-  }
-
   connectedCallback() {
     i18next.on('languageChanged', () => {
       forceUpdate(this.el);
@@ -377,6 +369,7 @@ export class VaMemorableDate {
           inputmode="numeric"
           type="text"
           error={this.invalidMonth ? getStandardErrorMessage(error) : null}
+          show-input-error="false"
         />
       </div>;
       const legendClass = classnames({
@@ -424,6 +417,7 @@ export class VaMemorableDate {
                     inputmode="numeric"
                     type="text"
                     error={this.invalidDay ? getStandardErrorMessage(error) : null}
+                    show-input-error="false"
                   />
                 </div>
                 <div class="usa-form-group usa-form-group--year">
@@ -444,6 +438,7 @@ export class VaMemorableDate {
                     inputmode="numeric"
                     type="text"
                     error={this.invalidYear ? getStandardErrorMessage(error) : null}
+                    show-input-error="false"
                   />
                 </div>
               </div>
