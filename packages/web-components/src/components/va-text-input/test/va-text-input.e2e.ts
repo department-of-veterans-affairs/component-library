@@ -464,6 +464,13 @@ describe('va-text-input', () => {
     expect(el).toHaveClass('usa-input-suffix');
   });
   
+  it('renders an icon if input-icon-suffix is set', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-text-input input-icon-suffix=\'credit_card\'></va-text-input>');
+    const vaIconEl = await page.find('va-text-input >>> va-icon');
+    const iconProp = await vaIconEl.getProperty('icon');
+    expect(iconProp).toMatch('credit_card');
+  })
 
   it('sets the input mode to a default pattern if inputmode is numerical or decimal', async () => {
     for (const inputMode of ['numeric', 'decimal']) {
@@ -487,5 +494,18 @@ describe('va-text-input', () => {
     await page.setContent('<va-text-input max="5" min="1" />');
     const inputEl = await page.find('va-text-input >>> input');
     expect(inputEl.getAttribute('type')).toEqual("number");
+  });
+
+  it('sets the step attribute to .01 if inputmode is decimal', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-text-input type="number" inputmode="decimal"/>');
+    const inputEl = await page.find('va-text-input >>> input');
+    expect(inputEl.getAttribute('step')).toEqual(".01");
+  });
+  it('does not set the step attribute when step is defined', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-text-input type="number" inputmode="decimal" step="any"/>');
+    const inputEl = await page.find('va-text-input >>> input');
+    expect(inputEl.getAttribute('step')).toEqual("any");
   });
 });

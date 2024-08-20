@@ -178,7 +178,7 @@ export class VaCheckboxGroup {
               )}&nbsp;
               {
                 useFormsPattern === 'multiple' && (
-                  <span id="header-message" class="sr-only">
+                  <span id="header-message" class="usa-sr-only">
                     {label}
                   </span>
                 )

@@ -131,14 +131,7 @@ export class VaStatementOfTruth {
           <slot></slot>
           <p class="font-sans-6">
             I have read and accept the&nbsp;
-            <a href="/privacy-policy/" target="_blank">
-              privacy policy
-              <va-icon
-                class="privacy-policy-icon"
-                icon="launch"
-              ></va-icon>
-              <span class="usa-sr-only">opens in a new window</span>
-            </a>
+            <va-link external text='privacy policy' href='/privacy-policy/' />
             .
           </p>
           <va-text-input

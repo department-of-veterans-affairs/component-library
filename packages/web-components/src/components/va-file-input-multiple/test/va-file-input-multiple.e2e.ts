@@ -7,7 +7,7 @@ describe('va-file-input-multiple', () => {
   it('renders', async () => {
     const page = await newE2EPage();
     await page.setContent(
-      '<va-file-input-multiple label="This is the file upload label" required="false" class="hydrated" uswds></va-file-input-multiple>',
+      '<va-file-input-multiple label="This is the file upload label" required="false" class="hydrated"></va-file-input-multiple>',
     );
 
     const multiElement = await page.find('va-file-input-multiple');

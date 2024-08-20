@@ -90,6 +90,12 @@ export class VaTextInput {
     | 'url';
 
   /**
+   * The step attribute is a number, or the string 'any', that specifies the granularity of the value. For example: `<va-text-input type="number" step=".1"/>` enables float/decimal values to be valid and increment by one-tenth. <br/>
+   * Defaults to 1 for every field type except for time and datetime-local which default to 60 (seconds). View more documentation on [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/step)
+   */
+  @Prop() step?: string;
+
+  /**
    * The type attribute.
    */
   @Prop() type?: 'email' | 'number' | 'search' | 'tel' | 'text' | 'url' =
@@ -185,7 +191,13 @@ export class VaTextInput {
    /**
    * Displays a fixed suffix string at the end of the input field.
    */
-   @Prop() inputSuffix?: string;
+  @Prop() inputSuffix?: string;
+  
+
+   /**
+   * A string that represents the name of an icon passed to va-icon, which will be applied as a suffix to the input.
+   */
+   @Prop() inputIconSuffix?: string;
 
   /**
    * The min attribute specifies the minimum value for an input element
@@ -319,6 +331,14 @@ export class VaTextInput {
     return this.inputmode ? this.inputmode : undefined
   }
 
+  // get the step for the input, if inputMode is decimal default to .01
+  private getStep(): string {
+    if (!this.step && this.inputmode === 'decimal') {
+      return '.01';
+    }
+    return this.step ? this.step : undefined;
+  }
+
   connectedCallback() {
     i18next.on('languageChanged', () => {
       forceUpdate(this.el);
@@ -355,11 +375,13 @@ export class VaTextInput {
       currency,
       inputPrefix,
       inputIconPrefix,
-      inputSuffix
+      inputSuffix,
+      inputIconSuffix
     } = this;
     const type = this.getInputType();
     const maxlength = this.getMaxlength();
     const inputmode = this.getInputmode();
+    const step = this.getStep();
 
     const ariaDescribedbyIds =
       `${messageAriaDescribedby ? 'input-message' : ''} ${
@@ -375,7 +397,7 @@ export class VaTextInput {
 
     const currencyWrapper = classnames({
       'currency-wrapper': currency,
-      'usa-input-group': inputSuffix || inputPrefix || inputIconPrefix
+      'usa-input-group': inputSuffix || inputPrefix || inputIconPrefix || inputIconSuffix
     });
 
     const getInputStyle = () => {
@@ -478,6 +500,7 @@ export class VaTextInput {
                 invalid || error || charCountTooHigh ? 'true' : 'false'
               }
               inputmode={inputmode}
+              step={step}
               maxlength={maxlength}
               pattern={pattern}
               name={name}
@@ -488,6 +511,7 @@ export class VaTextInput {
               max={max}
             />
             {inputSuffix && <div class="usa-input-suffix" part="suffix" aria-hidden="true">{inputSuffix.substring(0, 25)}</div>}
+            {inputIconSuffix && <div class="usa-input-suffix" part="input-suffix"><va-icon icon={inputIconSuffix} size={3} part="icon"></va-icon></div>}
           </div>
           {messageAriaDescribedby && (
             <span id="input-message" class="usa-sr-only dd-privacy-hidden">

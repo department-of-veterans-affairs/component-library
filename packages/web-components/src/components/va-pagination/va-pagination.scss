@@ -9,7 +9,7 @@
   box-sizing: border-box;
 }
 
-:host(:not([uswds='false'])) {
+:host {
   a.usa-pagination__next-page > div,
   a.usa-pagination__previous-page > div {
     display: flex;
@@ -53,93 +53,4 @@ button {
   padding: 0;
   transition: all 0.3s ease-in-out;
   transition-property: color, background-color;
-}
-
-.button-next,
-.button-prev {
-  border-radius: 0;
-  margin: 0;
-}
-
-.button-next:hover,
-.button-prev:hover {
-  background-color: transparent;
-  color: var(--vads-color-link);
-  text-decoration: underline;
-}
-
-.pagination-next:hover,
-.pagination-prev:hover {
-  text-decoration: underline;
-  text-decoration-color: var(--vads-color-primary);
-}
-
-.pagination-inner {
-  overflow: hidden;
-  text-align: center;
-  white-space: nowrap;
-}
-
-.button-inner {
-  border-radius: 1000px;
-  height: 1.875rem;
-  margin: 0 0.3125rem;
-  width: 1.875rem;
-}
-
-.button-active,
-.button-inner[aria-current='true'],
-.button-inner:hover,
-.button-inner:focus {
-  background-color: var(--vads-color-primary);
-  color: var(--vads-button-color-text-primary-on-light);
-}
-
-.pagination-inner,
-.pagination-next,
-.pagination-prev {
-  padding-bottom: 4px;
-  padding-top: 4px;
-}
-
-@media (max-width: 768px) {
-  .pagination-inner {
-    width: 12.5rem;
-  }
-
-  .pagination-next {
-    margin-right: -1.875rem;
-    padding-left: .625rem;
-  }
-
-  .pagination-prev {
-    margin-left: -1.875rem;
-    padding-right: .625rem;
-  }
-}
-
-@media (min-width: 481px) {
-  .pagination-next:not(:empty) .button-next::after {
-    /* right-pointing angle quotation mark › with 2 spaces before it */
-    content: '\a0\a0\203a';
-  }
-
-  .pagination-prev:not(:empty) .button-prev::before {
-    /* left-pointing angle quotation mark ‹ with 2 spaces after it */
-    content: '\2039\a0\a0';
-  }
-}
-
-@media (min-width: 768px) {
-  .pagination-next,
-  .pagination-prev {
-    padding-left: .625rem;
-    padding-right: .625rem;
-  }
-}
-
-@media (min-width: 1201px) {
-  .pagination-inner {
-    width: 25rem;
-  }
 }

@@ -56,6 +56,7 @@ const defaultArgs = {
   'minlength': undefined,
   'value': undefined,
   'inputmode': undefined,
+  'step': undefined,
   'type': undefined,
   'success': false,
   'pattern': undefined,
@@ -73,6 +74,7 @@ const defaultArgs = {
   'input-icon-prefix': undefined,
   'input-suffix': undefined,
   'show-input-error': true,
+  'input-icon-suffix': undefined
 };
 
 const Template = ({
@@ -85,6 +87,7 @@ const Template = ({
   maxlength,
   value,
   inputmode,
+  step,
   type,
   success,
   pattern,
@@ -98,6 +101,7 @@ const Template = ({
   'input-icon-prefix': inputIconPrefix,
   'input-suffix': inputSuffix,
   'show-input-error': showInputError,
+  'input-icon-suffix': inputIconSuffix
 }) => {
   return (
     <va-text-input
@@ -111,6 +115,7 @@ const Template = ({
       maxlength={maxlength}
       value={value}
       inputmode={inputmode}
+      step={step}
       type={type}
       success={success}
       pattern={pattern}
@@ -125,6 +130,7 @@ const Template = ({
       input-icon-prefix={inputIconPrefix}
       input-suffix={inputSuffix}
       show-input-error={showInputError}
+      input-icon-suffix={inputIconSuffix}
     />
   );
 };
@@ -393,6 +399,9 @@ WithAnalytics.args = { ...defaultArgs, 'enable-analytics': true };
 export const WithHintText = Template.bind(null);
 WithHintText.args = { ...defaultArgs, hint: 'This is hint text' };
 
+export const WithStep = Template.bind(null);
+WithStep.args = { ...defaultArgs, type: 'number', inputmode: 'decimal', step: '.2', hint: 'step=".2" (only even values in tenth position valid)' };
+
 const WithInlineHintTextTemplate = ({ name, label }) => {
   return (
     <>
@@ -452,6 +461,12 @@ WithSuffix.args = {
   'input-suffix': 'lbs.',
 };
 
+export const WithIconSuffix = Template.bind(null);
+WithIconSuffix.args = {
+  ...defaultArgs,
+  'input-icon-suffix': 'comment',
+}
+
 export const WithIconAndSuffix = Template.bind(null);
 WithIconAndSuffix.args = {
   ...defaultArgs,
@@ -460,6 +475,13 @@ WithIconAndSuffix.args = {
   'input-icon-prefix': 'attach_money',
   'input-suffix': 'per year',
 };
+
+export const WithPrefixAndIconSuffix = Template.bind(null);
+WithPrefixAndIconSuffix.args = {
+  ...defaultArgs,
+  'input-icon-suffix': 'comment',
+  'input-prefix': 'Pre'
+}
 
 export const Widths = WidthsTemplate.bind(null);
 Widths.args = {

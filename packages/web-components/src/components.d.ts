@@ -56,16 +56,8 @@ export namespace Components {
           * The text to trigger the expansion
          */
         "trigger": string;
-        /**
-          * Whether or not the component will use USWDS v3 styling.
-         */
-        "uswds"?: boolean;
     }
     interface VaAlert {
-        /**
-          * If `true`, renders the alert with only a background color corresponding to the status - no left border. (v1 only)
-         */
-        "backgroundOnly"?: boolean;
         /**
           * Aria-label text for the close button.
          */
@@ -83,7 +75,7 @@ export namespace Components {
          */
         "fullWidth"?: boolean;
         /**
-          * Displays the slim variation. Available when USWDS is true.
+          * Displays the slim variation.
          */
         "slim"?: boolean;
         /**
@@ -94,10 +86,6 @@ export namespace Components {
     | 'error'
     | 'success'
     | 'continue';
-        /**
-          * Whether or not the component will use USWDS v3 styling.
-         */
-        "uswds"?: boolean;
         /**
           * If `true`, the alert will be visible.
          */
@@ -141,7 +129,7 @@ export namespace Components {
          */
         "showClose"?: boolean;
         /**
-          * The type of the banner. This affects both the icon of the AlertBox and the top border color.
+          * The type of the banner. This affects both the icon of the AlertBox and border color / background.
          */
         "type"?: 'info' | 'warning' | 'error' | 'success' | 'continue';
         /**
@@ -220,10 +208,6 @@ export namespace Components {
           * The text displayed on the button. If `continue` or `back` is true, the value of text is ignored.
          */
         "text"?: string;
-        /**
-          * Whether or not the component will use USWDS v3 styling.
-         */
-        "uswds"?: boolean;
     }
     interface VaButtonIcon {
         "buttonType": keyof typeof this.buttonTypeMap;
@@ -261,10 +245,6 @@ export namespace Components {
           * If `true`, button pair will use Update and Cancel for button text.
          */
         "update"?: boolean;
-        /**
-          * Whether or not the component will use USWDS v3 styling.
-         */
-        "uswds"?: boolean;
     }
     interface VaCard {
         /**
@@ -444,10 +424,6 @@ export namespace Components {
           * Sets the input to required and renders the (*Required) text.
          */
         "required"?: boolean;
-        /**
-          * Whether or not the component will use USWDS v3 styling.
-         */
-        "uswds"?: boolean;
     }
     interface VaFileInputMultiple {
         /**
@@ -530,6 +506,10 @@ export namespace Components {
           * If `true`, the link will be treated as a download, and a download icon will be displayed before the anchor text.
          */
         "download"?: boolean;
+        /**
+          * If 'true', will open in a new tab and have icon denoting that. Will also have the text "opens in a new tab" appended to the link text in screen reader only span
+         */
+        "external"?: boolean;
         /**
           * The suggested filename. Only valid if download or calendar is `true`.
          */
@@ -807,76 +787,6 @@ export namespace Components {
          */
         "visible"?: boolean;
     }
-    interface VaNumberInput {
-        /**
-          * Whether this component will be used to accept a currency value.
-         */
-        "currency"?: boolean;
-        /**
-          * Emit component-library-analytics events on the blur event.
-         */
-        "enableAnalytics"?: boolean;
-        /**
-          * The error message to render.
-         */
-        "error"?: string;
-        /**
-          * The content of the heading if `useFormsPattern` and `uswds` are true.
-         */
-        "formHeading"?: string;
-        /**
-          * The heading level for the heading if `useFormsPattern` and `uswds` are true.
-         */
-        "formHeadingLevel"?: number;
-        /**
-          * Optional hint text.
-         */
-        "hint"?: string;
-        /**
-          * The inputmode attribute.
-         */
-        "inputmode"?: 'decimal' | 'numeric';
-        /**
-          * The label for the text input.
-         */
-        "label"?: string;
-        /**
-          * Maximum number value The max attribute specifies the maximum value for an input element.
-         */
-        "max": number | string;
-        /**
-          * An optional message that will be read by screen readers when the input is focused.
-         */
-        "messageAriaDescribedby"?: string;
-        /**
-          * Minimum number value The min attribute specifies the minimum value for an input element.
-         */
-        "min": number | string;
-        /**
-          * The name to pass to the input element.
-         */
-        "name"?: string;
-        /**
-          * Set the input to required and render the (Required) text.
-         */
-        "required"?: boolean;
-        /**
-          * Enabling this will add a heading and description for integrating into the forms pattern. Accepts `single` or `multiple` to indicate if the form is a single input or will have multiple inputs. `uswds` should be true.
-         */
-        "useFormsPattern"?: string;
-        /**
-          * Whether or not the component will use USWDS v3 styling.
-         */
-        "uswds"?: boolean;
-        /**
-          * The value for the input.
-         */
-        "value"?: string;
-        /**
-          * Displays the input at a specific width. Accepts 2xs (4ex), xs (7ex), sm or small (10ex), md or medium (20ex), lg (30ex), xl (40ex), and 2xl (50ex).
-         */
-        "width"?: string;
-    }
     interface VaOfficialGovBanner {
         /**
           * If `true`, the component-library-analytics event is disabled.
@@ -937,13 +847,9 @@ export namespace Components {
          */
         "showLastPage"?: boolean;
         /**
-          * Don't show last page when the page count exceeds `maxPageListLength` (but do show the ellipsis). Only relevant if uswds is true.
+          * Don't show last page when the page count exceeds `maxPageListLength` (but do show the ellipsis).
          */
         "unbounded"?: boolean;
-        /**
-          * Whether or not the component will use USWDS v3 styling.
-         */
-        "uswds"?: boolean;
     }
     interface VaPrivacyAgreement {
         /**
@@ -960,10 +866,6 @@ export namespace Components {
         "showError"?: boolean;
     }
     interface VaProcessList {
-        /**
-          * Whether or not the component will use USWDS v3 styling.
-         */
-        "uswds"?: boolean;
     }
     interface VaProcessListItem {
         /**
@@ -1093,7 +995,7 @@ export namespace Components {
     }
     interface VaSearchInput {
         /**
-          * If `true`, the component will use the big variant. Only available when `uswds` is `true`.
+          * If `true`, the component will use the big variant.
          */
         "big"?: boolean;
         /**
@@ -1109,17 +1011,13 @@ export namespace Components {
          */
         "label"?: string;
         /**
-          * If `true`, the component will use the small variant. Only available when `uswds` is `true`.
+          * If `true`, the component will use the small variant.
          */
         "small"?: boolean;
         /**
           * An array of strings containing suggestions to be displayed in listbox. This component displays up to 5 suggestions.
          */
         "suggestions"?: any;
-        /**
-          * Whether or not the component will use USWDS v3 styling.
-         */
-        "uswds"?: boolean;
         /**
           * The value of the input field
          */
@@ -1248,10 +1146,6 @@ export namespace Components {
         "inputValue": string;
     }
     interface VaSummaryBox {
-        /**
-          * Whether or not the component will use USWDS v3 styling.
-         */
-        "uswds"?: boolean;
     }
     interface VaTable {
         /**
@@ -1388,6 +1282,10 @@ export namespace Components {
          */
         "inputIconPrefix"?: string;
         /**
+          * A string that represents the name of an icon passed to va-icon, which will be applied as a suffix to the input.
+         */
+        "inputIconSuffix"?: string;
+        /**
           * Displays a fixed prefix string at the start of the input field.
          */
         "inputPrefix"?: string;
@@ -1449,6 +1347,9 @@ export namespace Components {
           * When `false`, hides the error message from view, but not from the screen reader. Should only be used if error is being displayed elsewhere.
          */
         "showInputError"?: boolean;
+          * The step attribute is a number, or the string 'any', that specifies the granularity of the value. For example: `<va-text-input type="number" step=".1"/>` enables float/decimal values to be valid and increment by one-tenth. <br/> Defaults to 1 for every field type except for time and datetime-local which default to 60 (seconds). View more documentation on [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/step)
+         */
+        "step"?: string;
         /**
           * Adds styling based on status value
          */
@@ -1624,10 +1525,6 @@ export interface VaModalCustomEvent<T> extends CustomEvent<T> {
 export interface VaNotificationCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLVaNotificationElement;
-}
-export interface VaNumberInputCustomEvent<T> extends CustomEvent<T> {
-    detail: T;
-    target: HTMLVaNumberInputElement;
 }
 export interface VaOfficialGovBannerCustomEvent<T> extends CustomEvent<T> {
     detail: T;
@@ -1864,12 +1761,6 @@ declare global {
         prototype: HTMLVaNotificationElement;
         new (): HTMLVaNotificationElement;
     };
-    interface HTMLVaNumberInputElement extends Components.VaNumberInput, HTMLStencilElement {
-    }
-    var HTMLVaNumberInputElement: {
-        prototype: HTMLVaNumberInputElement;
-        new (): HTMLVaNumberInputElement;
-    };
     interface HTMLVaOfficialGovBannerElement extends Components.VaOfficialGovBanner, HTMLStencilElement {
     }
     var HTMLVaOfficialGovBannerElement: {
@@ -2032,7 +1923,6 @@ declare global {
         "va-modal": HTMLVaModalElement;
         "va-need-help": HTMLVaNeedHelpElement;
         "va-notification": HTMLVaNotificationElement;
-        "va-number-input": HTMLVaNumberInputElement;
         "va-official-gov-banner": HTMLVaOfficialGovBannerElement;
         "va-omb-info": HTMLVaOmbInfoElement;
         "va-on-this-page": HTMLVaOnThisPageElement;
@@ -2119,16 +2009,8 @@ declare namespace LocalJSX {
           * The text to trigger the expansion
          */
         "trigger": string;
-        /**
-          * Whether or not the component will use USWDS v3 styling.
-         */
-        "uswds"?: boolean;
     }
     interface VaAlert {
-        /**
-          * If `true`, renders the alert with only a background color corresponding to the status - no left border. (v1 only)
-         */
-        "backgroundOnly"?: boolean;
         /**
           * Aria-label text for the close button.
          */
@@ -2158,7 +2040,7 @@ declare namespace LocalJSX {
          */
         "onVa-component-did-load"?: (event: VaAlertCustomEvent<any>) => void;
         /**
-          * Displays the slim variation. Available when USWDS is true.
+          * Displays the slim variation.
          */
         "slim"?: boolean;
         /**
@@ -2169,10 +2051,6 @@ declare namespace LocalJSX {
     | 'error'
     | 'success'
     | 'continue';
-        /**
-          * Whether or not the component will use USWDS v3 styling.
-         */
-        "uswds"?: boolean;
         /**
           * If `true`, the alert will be visible.
          */
@@ -2224,7 +2102,7 @@ declare namespace LocalJSX {
          */
         "showClose"?: boolean;
         /**
-          * The type of the banner. This affects both the icon of the AlertBox and the top border color.
+          * The type of the banner. This affects both the icon of the AlertBox and border color / background.
          */
         "type"?: 'info' | 'warning' | 'error' | 'success' | 'continue';
         /**
@@ -2315,10 +2193,6 @@ declare namespace LocalJSX {
           * The text displayed on the button. If `continue` or `back` is true, the value of text is ignored.
          */
         "text"?: string;
-        /**
-          * Whether or not the component will use USWDS v3 styling.
-         */
-        "uswds"?: boolean;
     }
     interface VaButtonIcon {
         "buttonType"?: keyof typeof this.buttonTypeMap;
@@ -2372,10 +2246,6 @@ declare namespace LocalJSX {
           * If `true`, button pair will use Update and Cancel for button text.
          */
         "update"?: boolean;
-        /**
-          * Whether or not the component will use USWDS v3 styling.
-         */
-        "uswds"?: boolean;
     }
     interface VaCard {
         /**
@@ -2587,10 +2457,6 @@ declare namespace LocalJSX {
           * Sets the input to required and renders the (*Required) text.
          */
         "required"?: boolean;
-        /**
-          * Whether or not the component will use USWDS v3 styling.
-         */
-        "uswds"?: boolean;
     }
     interface VaFileInputMultiple {
         /**
@@ -2677,6 +2543,10 @@ declare namespace LocalJSX {
           * If `true`, the link will be treated as a download, and a download icon will be displayed before the anchor text.
          */
         "download"?: boolean;
+        /**
+          * If 'true', will open in a new tab and have icon denoting that. Will also have the text "opens in a new tab" appended to the link text in screen reader only span
+         */
+        "external"?: boolean;
         /**
           * The suggested filename. Only valid if download or calendar is `true`.
          */
@@ -3010,80 +2880,6 @@ declare namespace LocalJSX {
          */
         "visible"?: boolean;
     }
-    interface VaNumberInput {
-        /**
-          * Whether this component will be used to accept a currency value.
-         */
-        "currency"?: boolean;
-        /**
-          * Emit component-library-analytics events on the blur event.
-         */
-        "enableAnalytics"?: boolean;
-        /**
-          * The error message to render.
-         */
-        "error"?: string;
-        /**
-          * The content of the heading if `useFormsPattern` and `uswds` are true.
-         */
-        "formHeading"?: string;
-        /**
-          * The heading level for the heading if `useFormsPattern` and `uswds` are true.
-         */
-        "formHeadingLevel"?: number;
-        /**
-          * Optional hint text.
-         */
-        "hint"?: string;
-        /**
-          * The inputmode attribute.
-         */
-        "inputmode"?: 'decimal' | 'numeric';
-        /**
-          * The label for the text input.
-         */
-        "label"?: string;
-        /**
-          * Maximum number value The max attribute specifies the maximum value for an input element.
-         */
-        "max"?: number | string;
-        /**
-          * An optional message that will be read by screen readers when the input is focused.
-         */
-        "messageAriaDescribedby"?: string;
-        /**
-          * Minimum number value The min attribute specifies the minimum value for an input element.
-         */
-        "min"?: number | string;
-        /**
-          * The name to pass to the input element.
-         */
-        "name"?: string;
-        /**
-          * The event used to track usage of the component. This is emitted when the input is blurred and enableAnalytics is true.
-         */
-        "onComponent-library-analytics"?: (event: VaNumberInputCustomEvent<any>) => void;
-        /**
-          * Set the input to required and render the (Required) text.
-         */
-        "required"?: boolean;
-        /**
-          * Enabling this will add a heading and description for integrating into the forms pattern. Accepts `single` or `multiple` to indicate if the form is a single input or will have multiple inputs. `uswds` should be true.
-         */
-        "useFormsPattern"?: string;
-        /**
-          * Whether or not the component will use USWDS v3 styling.
-         */
-        "uswds"?: boolean;
-        /**
-          * The value for the input.
-         */
-        "value"?: string;
-        /**
-          * Displays the input at a specific width. Accepts 2xs (4ex), xs (7ex), sm or small (10ex), md or medium (20ex), lg (30ex), xl (40ex), and 2xl (50ex).
-         */
-        "width"?: string;
-    }
     interface VaOfficialGovBanner {
         /**
           * If `true`, the component-library-analytics event is disabled.
@@ -3160,13 +2956,9 @@ declare namespace LocalJSX {
          */
         "showLastPage"?: boolean;
         /**
-          * Don't show last page when the page count exceeds `maxPageListLength` (but do show the ellipsis). Only relevant if uswds is true.
+          * Don't show last page when the page count exceeds `maxPageListLength` (but do show the ellipsis).
          */
         "unbounded"?: boolean;
-        /**
-          * Whether or not the component will use USWDS v3 styling.
-         */
-        "uswds"?: boolean;
     }
     interface VaPrivacyAgreement {
         /**
@@ -3191,10 +2983,6 @@ declare namespace LocalJSX {
         "showError"?: boolean;
     }
     interface VaProcessList {
-        /**
-          * Whether or not the component will use USWDS v3 styling.
-         */
-        "uswds"?: boolean;
     }
     interface VaProcessListItem {
         /**
@@ -3348,7 +3136,7 @@ declare namespace LocalJSX {
     }
     interface VaSearchInput {
         /**
-          * If `true`, the component will use the big variant. Only available when `uswds` is `true`.
+          * If `true`, the component will use the big variant.
          */
         "big"?: boolean;
         /**
@@ -3368,17 +3156,13 @@ declare namespace LocalJSX {
          */
         "onComponent-library-analytics"?: (event: VaSearchInputCustomEvent<any>) => void;
         /**
-          * If `true`, the component will use the small variant. Only available when `uswds` is `true`.
+          * If `true`, the component will use the small variant.
          */
         "small"?: boolean;
         /**
           * An array of strings containing suggestions to be displayed in listbox. This component displays up to 5 suggestions.
          */
         "suggestions"?: any;
-        /**
-          * Whether or not the component will use USWDS v3 styling.
-         */
-        "uswds"?: boolean;
         /**
           * The value of the input field
          */
@@ -3535,10 +3319,6 @@ declare namespace LocalJSX {
         "onVaInputChange"?: (event: VaStatementOfTruthCustomEvent<any>) => void;
     }
     interface VaSummaryBox {
-        /**
-          * Whether or not the component will use USWDS v3 styling.
-         */
-        "uswds"?: boolean;
     }
     interface VaTable {
         /**
@@ -3679,6 +3459,10 @@ declare namespace LocalJSX {
          */
         "inputIconPrefix"?: string;
         /**
+          * A string that represents the name of an icon passed to va-icon, which will be applied as a suffix to the input.
+         */
+        "inputIconSuffix"?: string;
+        /**
           * Displays a fixed prefix string at the start of the input field.
          */
         "inputPrefix"?: string;
@@ -3744,6 +3528,9 @@ declare namespace LocalJSX {
           * When `false`, hides the error message from view, but not from the screen reader. Should only be used if error is being displayed elsewhere.
          */
         "showInputError"?: boolean;
+          * The step attribute is a number, or the string 'any', that specifies the granularity of the value. For example: `<va-text-input type="number" step=".1"/>` enables float/decimal values to be valid and increment by one-tenth. <br/> Defaults to 1 for every field type except for time and datetime-local which default to 60 (seconds). View more documentation on [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/step)
+         */
+        "step"?: string;
         /**
           * Adds styling based on status value
          */
@@ -3865,7 +3652,6 @@ declare namespace LocalJSX {
         "va-modal": VaModal;
         "va-need-help": VaNeedHelp;
         "va-notification": VaNotification;
-        "va-number-input": VaNumberInput;
         "va-official-gov-banner": VaOfficialGovBanner;
         "va-omb-info": VaOmbInfo;
         "va-on-this-page": VaOnThisPage;
@@ -3923,7 +3709,6 @@ declare module "@stencil/core" {
             "va-modal": LocalJSX.VaModal & JSXBase.HTMLAttributes<HTMLVaModalElement>;
             "va-need-help": LocalJSX.VaNeedHelp & JSXBase.HTMLAttributes<HTMLVaNeedHelpElement>;
             "va-notification": LocalJSX.VaNotification & JSXBase.HTMLAttributes<HTMLVaNotificationElement>;
-            "va-number-input": LocalJSX.VaNumberInput & JSXBase.HTMLAttributes<HTMLVaNumberInputElement>;
             "va-official-gov-banner": LocalJSX.VaOfficialGovBanner & JSXBase.HTMLAttributes<HTMLVaOfficialGovBannerElement>;
             "va-omb-info": LocalJSX.VaOmbInfo & JSXBase.HTMLAttributes<HTMLVaOmbInfoElement>;
             "va-on-this-page": LocalJSX.VaOnThisPage & JSXBase.HTMLAttributes<HTMLVaOnThisPageElement>;
