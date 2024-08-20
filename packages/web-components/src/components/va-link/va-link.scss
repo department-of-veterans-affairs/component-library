@@ -45,6 +45,12 @@
   top: 3px;
 }
 
+// Needed by the back link variant for text alignment
+.link-container {
+  display: flex;
+  flex-direction: row;
+}
+
 .link-icon--back {
   color: var(--vads-color-gray-medium);
   transition-duration: 0.3s;

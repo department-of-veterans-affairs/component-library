@@ -158,15 +158,8 @@ export class VaLink {
 
     const linkClass = classNames({
       'va-link--reverse': reverse,
-      'link--center': iconName || external
+      'link--center': iconName || external,
     });
-
-    const backArrow = (
-      <va-icon
-        icon="arrow_back"
-        class="link-icon--left link-icon--back"
-      ></va-icon>
-    );
 
     // Active link variant
     if (active) {
@@ -181,6 +174,32 @@ export class VaLink {
             {text}
             <va-icon class="link-icon--active" icon="chevron_right"></va-icon>
           </a>
+        </Host>
+      );
+    }
+
+    // Back link variant
+    if (back) {
+      const backArrow = (
+        <va-icon
+          icon="arrow_back"
+          class="link-icon--left link-icon--back"
+        ></va-icon>
+      );
+
+      return (
+        <Host>
+          <div class="link-container">
+            {backArrow}
+            <a
+              href={href}
+              class={linkClass}
+              onClick={handleClick}
+              aria-label={this.label}
+            >
+              {text}
+            </a>
+          </div>
         </Host>
       );
     }
@@ -261,10 +280,10 @@ export class VaLink {
         <Host>
           <a
             href={href}
-            rel='noreferrer'
+            rel="noreferrer"
             class={linkClass}
             onClick={handleClick}
-            target='_blank'
+            target="_blank"
           >
             {text}
             <va-icon class="external-link-icon" icon="launch"></va-icon>
@@ -283,7 +302,6 @@ export class VaLink {
           onClick={handleClick}
           aria-label={this.label}
         >
-          {back && backArrow}
           {text}
         </a>
       </Host>
