@@ -73,8 +73,8 @@ const defaultArgs = {
   'input-prefix': undefined,
   'input-icon-prefix': undefined,
   'input-suffix': undefined,
+  'input-icon-suffix': undefined,
   'show-input-error': true,
-  'input-icon-suffix': undefined
 };
 
 const Template = ({
@@ -100,8 +100,8 @@ const Template = ({
   'input-prefix': inputPrefix,
   'input-icon-prefix': inputIconPrefix,
   'input-suffix': inputSuffix,
+  'input-icon-suffix': inputIconSuffix,
   'show-input-error': showInputError,
-  'input-icon-suffix': inputIconSuffix
 }) => {
   return (
     <va-text-input
@@ -129,8 +129,8 @@ const Template = ({
       input-prefix={inputPrefix}
       input-icon-prefix={inputIconPrefix}
       input-suffix={inputSuffix}
-      show-input-error={showInputError}
       input-icon-suffix={inputIconSuffix}
+      show-input-error={showInputError}
     />
   );
 };
