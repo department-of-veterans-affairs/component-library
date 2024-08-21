@@ -47,7 +47,7 @@ const defaultArgs = {
   ),
   'children': (
     <p className="vads-u-margin-y--0">
-      Lorem ipsum dolor sit amet <a class="usa-link" href="javascript:void(0);">consectetur adipiscing</a> elit sed do eiusmod.
+      Lorem ipsum dolor sit amet <a className="usa-link" href="javascript:void(0);">consectetur adipiscing</a> elit sed do eiusmod.
     </p>
   ),
 };

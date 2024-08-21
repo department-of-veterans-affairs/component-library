@@ -274,7 +274,7 @@ export class VaTextInput {
     return this.maxlength;
   }
 
-  private handleInput = (e: Event) => {
+  private handleInput = (e: InputEvent) => {
     const target = e.target as HTMLInputElement;
     this.value = target.value;
   };

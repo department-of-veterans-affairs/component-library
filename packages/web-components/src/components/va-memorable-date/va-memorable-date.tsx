@@ -189,7 +189,11 @@ export class VaMemorableDate {
     }
   };
 
-  private handleDateChange = (event: CustomEvent) => {
+  private handleMonthChange = (event) => {
+    this.handleDateChange(event as InputEvent)
+  }
+
+  private handleDateChange = (event: InputEvent) => {
     const target = event.target as HTMLInputElement;
 
     let [currentYear, currentMonth, currentDay] = (this.value || '').split('-');
@@ -342,7 +346,7 @@ export class VaMemorableDate {
             aria-describedby={describedbyIds}
             aria-labelledby={ariaLabeledByIds}
             invalid={this.invalidMonth}
-            onVaSelect={handleDateChange}
+            onVaSelect={this.handleMonthChange}
             onBlur={this.handleMonthBlur}
             class='usa-form-group--month-select'
             reflectInputError={error === 'month-range' ? true : false}
