@@ -62,8 +62,9 @@ export class VaTextInput {
   @Prop() reflectInputError?: boolean = false;
 
   /**
-   * When `false`, hides the error message from view, but not from the screen reader. Should only be used if error is being displayed elsewhere.
+   * When `false`, hides the error message from view, but not from the screen reader. Should only be used if error is being displayed elsewhere. Must use kebab-case on this attribute for it to work properly.
    */
+  // Dev note: When camelCase is used instead of kebab-case it doesn't reflect in the DOM and one of the CSS selectors won't be applied. Maybe worth revisiting to see if this is still the case after a stencil upgrade.
   @Prop({ reflect: true }) showInputError?: boolean = true;
 
   /**
@@ -296,7 +297,7 @@ export class VaTextInput {
       });
     }
 
-    if (this.showInputError && (this.inputmode === 'decimal' || this.inputmode === 'numeric' || this.currency)) {
+    if (this.inputmode === 'decimal' || this.inputmode === 'numeric' || this.currency) {
       let defaultError = i18next.t('number-error');
       const target = e.target as HTMLInputElement;
       const valid = target.checkValidity();

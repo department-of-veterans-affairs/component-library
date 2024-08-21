@@ -1344,7 +1344,7 @@ export namespace Components {
          */
         "required"?: boolean;
         /**
-          * When `false`, hides the error message from view, but not from the screen reader. Should only be used if error is being displayed elsewhere.
+          * When `false`, hides the error message from view, but not from the screen reader. Should only be used if error is being displayed elsewhere. Must use kebab-case on this attribute for it to work properly.
          */
         "showInputError"?: boolean;
         /**
@@ -3526,7 +3526,7 @@ declare namespace LocalJSX {
          */
         "required"?: boolean;
         /**
-          * When `false`, hides the error message from view, but not from the screen reader. Should only be used if error is being displayed elsewhere.
+          * When `false`, hides the error message from view, but not from the screen reader. Should only be used if error is being displayed elsewhere. Must use kebab-case on this attribute for it to work properly.
          */
         "showInputError"?: boolean;
         /**
