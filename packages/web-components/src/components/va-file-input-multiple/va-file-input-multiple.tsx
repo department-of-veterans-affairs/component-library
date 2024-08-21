@@ -164,7 +164,7 @@ export class VaFileInputMultiple {
       }, 1000);
     }
 
-    this.vaMultipleChange.emit({ files: this.files.map(fileObj => fileObj.file) });
+    this.vaMultipleChange.emit({ files: this.files.map(fileObj => fileObj.file).filter((file =>{ return !!file})) });
     this.files = Array.of(...this.files);
   }
 
