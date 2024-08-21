@@ -61,7 +61,7 @@
     "postcss-url": "^10.1.1",
     "puppeteer": "^10.0.0",
     "react-dom": "^16.7.0",
-    "typescript": "^4.3.5"
+    "typescript": "^5.5.4"
   },
   "peerDependencies": {
     "@department-of-veterans-affairs/formation": "^11.0.6",
