@@ -1,0 +1,60 @@
+@use 'uswds-helpers/src/styles/usa-sr-only';
+@import "~@department-of-veterans-affairs/css-library/dist/stylesheets/uswds-typography.css";
+@import '../../mixins/links.css';
+
+
+:host {
+  display: inline;
+}
+
+:host a {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+:host a.va-link--reverse {
+  color: var(--vads-color-white);
+
+  &:hover, &:active {
+    color: var(--vads-color-action-focus-on-light);
+    background-color: transparent;
+  }
+}
+
+:host([active]:not([active='false'])) a {
+  font-weight: 700;
+}
+
+:host([icon-name]) va-icon {
+  margin-right: 4px;
+}
+
+.link-icon--active {
+  vertical-align: baseline;
+  position: relative;
+  top: 3px;
+}
+
+.link-icon--left {
+  margin-right: 4px;
+  vertical-align: baseline;
+  position: relative; 
+  top: 3px;
+}
+
+.link--center {
+  display: inline-flex;
+  align-items: center;
+}
+
+dfn {
+  font-style: normal;
+}
+
+abbr {
+  text-decoration: none;
+}
+
+.external-link-icon {
+  margin-left: 4px;
+}

@@ -10,42 +10,10 @@
 
 @import '../../mixins/uswds-error-border.scss';
 @import '../../mixins/focusable.css';
-@import '~@department-of-veterans-affairs/css-library/dist/elements.css';
 
 :host {
   display: block;
   border: none;
   padding: 0;
-}
-
-:host(:not([uswds='false'])) {
   margin-top: 24px;
-}
-
-/* Original Component Styles. */
-
-@import '../../mixins/accessibility.css';
-@import '../../mixins/form-field-error.css';
-@import '../../mixins/hint-text.css';
-@import '../../mixins/headers.css';
-
-.required {
-  color: var(--vads-color-secondary-dark);
-  margin: 0 0.219rem;
-}
-
-:host([uswds='false']) fieldset {
-  border: none;
-  margin: 0;
-  padding: 0;
-}
-
-:host([uswds='false']) legend {
-  display: block;
-  max-width: 28.75rem;
-  font-weight: inherit;
-  font-size: inherit;
-  color: inherit;
-  line-height: inherit;
-  padding-inline: 0;
 }

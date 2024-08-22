@@ -1,9 +1,7 @@
 @forward 'settings';
 @use 'usa-table/src/styles/usa-table';
-@import '~@department-of-veterans-affairs/css-library/dist/tokens/scss/variables.scss';
 
-
-:host([uswds='true']){
+:host {
   td slot::slotted(span:empty)::before,
   th slot::slotted(span:empty)::before {
    content: "---";
@@ -11,10 +9,10 @@
   }
 }
 
-
 :host {
   display: table;
   font-family: var(--font-source-sans);
+  font-size: 1.06rem;
   border-collapse: collapse;
   margin: 0;
   padding: 0;
@@ -45,5 +43,11 @@ caption {
   }
   ::slotted(va-table-row):first-child {
     border-top: 1px solid var(--vads-color-gray-medium);
+  }
+}
+
+@media screen and (max-width: 29.99em) {
+  .usa-table--stacked th, .usa-table--stacked td {
+    width: auto;
   }
 }

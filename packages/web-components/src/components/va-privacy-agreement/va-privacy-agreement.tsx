@@ -21,10 +21,7 @@ export class VaPrivacyAgreement {
    * Whether to display the error message or not.
    */
   @Prop() showError?: boolean = false;
-  /**
-   * Whether or not the component will use USWDS v3 styling.
-   */
-  @Prop() uswds?: boolean = true;
+
   /**
    * Emit component-library-analytics events on the blur event.
    */
@@ -69,43 +66,38 @@ export class VaPrivacyAgreement {
 
   render() {
     const labelClass = classnames({
-      'usa-label--error': this.showError && this.uswds
+      'usa-label--error': this.showError
     });
 
-    const uswdsFalse = classnames({
-      'uswds-false': !this.uswds
-    });
 
-      return (
-        <Host>
-          <va-checkbox
-            class={uswdsFalse}
-            uswds={this.uswds}
-            required
-            error={this.errorMessage()}
-            id="checkbox"
-            label="I have read and accept the privacy policy."
-            checked={this.checked}
-            onVaChange={this.handleCheckboxChange}
-          >
-            <span class={`${labelClass} description`} slot="description">
-              Please read and accept the&nbsp;
-              <a href="/privacy-policy/" target="_blank">
-                privacy policy
+    return (
+      <Host>
+        <va-checkbox
+          required
+          error={this.errorMessage()}
+          id="checkbox"
+          label="I have read and accept the privacy policy."
+          checked={this.checked}
+          onVaChange={this.handleCheckboxChange}
+        >
+          <span class={`${labelClass} description`} slot="description">
+            Please read and accept the&nbsp;
+            <a href="/privacy-policy/" target="_blank">
+              privacy policy
 
-                <va-icon
-                  class="privacy-policy-icon"
-                  icon="launch"
-                  size={2}
-                ></va-icon>
-                <span class={this.uswds ? 'usa-sr-only' : 'sr-only'}>
-                  opens in a new window
-                </span>
-              </a>
-              .
-            </span>
-          </va-checkbox>
-        </Host>
-      );
+              <va-icon
+                class="privacy-policy-icon"
+                icon="launch"
+                size={2}
+              ></va-icon>
+              <span class="usa-sr-only">
+                opens in a new window
+              </span>
+            </a>
+            .
+          </span>
+        </va-checkbox>
+      </Host>
+    );
   }
 }

@@ -10,16 +10,13 @@
 
 @import '../../mixins/uswds-error-border.scss';
 
-:host(:not([uswds='false'])) {
-  color: var(--vads-color-base);
-}
-
 :host {
   display: block;
   font-family: var(--font-source-sans);
+  color: var(--vads-color-base);
 }
 
-:host(:not([uswds='false'])[inert]) select {
+:host([inert]) select {
   border: 0;
   background: none;
 }
@@ -28,44 +25,6 @@
   margin-bottom: 0;
 }
 
-/** Original Component Style **/
-
-@import '../../mixins/inputs.css';
-@import '../../mixins/accessibility.css';
-@import '../../mixins/form-field-error.css';
-@import '../../mixins/hint-text.css';
-
-span.required {
-  color: var(--vads-color-secondary-dark);
-  margin: 0 0.35em;
-}
-
-:host([error]:not([error=''])[uswds='false']) label,
-:host([error]:not([error=''])[uswds='false']) > span {
-  display: block;
-  font-size: 1rem;
-}
-
-:host([error]:not([error=''])[uswds='false']) > span {
-  color: var(--vads-color-secondary-dark);
-}
-
 ::slotted(option) {
   display: none;
-}
-
-:host([uswds='false']) label {
-  margin-top: 1.875rem;
-  max-width: 28.75rem;
-  display: block;
-}
-
-:host([uswds='false']) select {
-  background-color: var(--vads-color-white);
-  background-image: url('../../assets/arrow-both.svg');
-  background-position: right 0.813rem center;
-  background-repeat: no-repeat;
-  background-size: 0.625rem;
-  font-family: var(--font-source-sans);
-  padding: 0.5rem 1.875rem 0.5rem 0.7em;
 }

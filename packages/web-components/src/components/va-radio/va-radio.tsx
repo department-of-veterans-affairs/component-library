@@ -12,7 +12,7 @@ import {
 } from '@stencil/core';
 import classnames from 'classnames';
 import { getSlottedNodes } from '../../utils/utils';
-import i18next from 'i18next';
+import { i18next } from '../..';
 import { Build } from '@stencil/core';
 import { getHeaderLevel } from '../../utils/utils';
 
@@ -67,11 +67,6 @@ export class VaRadio {
   @Prop() enableAnalytics?: boolean = false;
 
   /**
-   * Whether or not the component will use USWDS v3 styling.
-   */
-   @Prop() uswds?: boolean = true;
-
-  /**
    * Insert a header with defined level inside the label (legend)
    */
   @Prop() labelHeaderLevel?: string;
@@ -83,17 +78,17 @@ export class VaRadio {
   @Prop() headerAriaDescribedby?: string;
 
   /**
-   * Enabling this will add a heading and description for integrating into the forms pattern. Accepts `single` or `multiple` to indicate if the form is a single input or will have multiple inputs. `uswds` should be true.
+   * Enabling this will add a heading and description for integrating into the forms pattern. Accepts `single` or `multiple` to indicate if the form is a single input or will have multiple inputs
    */
   @Prop() useFormsPattern?: string;
 
   /**
-   * The heading level for the heading if `useFormsPattern` and `uswds` are true.
+   * The heading level for the heading if `useFormsPattern` is true.
    */
   @Prop() formHeadingLevel?: number = 3;
 
   /**
-   * The content of the heading if `useFormsPattern` and `uswds` are true.
+   * The content of the heading if `useFormsPattern` is true.
    */
   @Prop() formHeading?: string;
 
@@ -235,13 +230,11 @@ export class VaRadio {
       hint, 
       required, 
       error, 
-      uswds, 
       headerAriaDescribedby,
       useFormsPattern,
       formHeadingLevel,
       formHeading
     } = this;
-    const ariaLabel = label + (required ? ' required' : '');
     const HeaderLevel = this.getHeaderLevel();
     const headerAriaDescribedbyId = headerAriaDescribedby ? 'header-message' : null;
     const ariaLabeledByIds = 
@@ -249,101 +242,67 @@ export class VaRadio {
       useFormsPattern ? 'form-description' : ''} ${
       useFormsPattern === 'multiple' ? 'header-message' : ''}`.trim() || null;
 
-    if (uswds) {
-      const legendClass = classnames({
-        'usa-legend': true,
-        'usa-label--error': error
-      });
+    const legendClass = classnames({
+      'usa-legend': true,
+      'usa-label--error': error
+    });
 
-      const isFormsPattern = useFormsPattern === 'single' || useFormsPattern === 'multiple' ? true : false;
+    const isFormsPattern = useFormsPattern === 'single' || useFormsPattern === 'multiple' ? true : false;
 
-      let formsHeading = null;
-      if (isFormsPattern) {
-        const HeaderLevel = getHeaderLevel(formHeadingLevel);
-        formsHeading = (
-          <Fragment>
-            {formHeading &&
-            <HeaderLevel id="form-question" part="form-header">
-              {formHeading}
-            </HeaderLevel>
-            }
-            <div id="form-description">
-              <slot name="form-description"></slot>
-            </div>
-          </Fragment>
-        )
-      }
-      return (
-        <Host aria-invalid={error ? 'true' : 'false'} >
-          {formsHeading}
-          <div class="input-wrap">
-            <fieldset class="usa-fieldset" aria-labelledby={ariaLabeledByIds}>
-              <legend class={legendClass} part="legend">
-                {HeaderLevel ? (
-                  <HeaderLevel part="header" aria-describedby={headerAriaDescribedbyId}>{label}</HeaderLevel>
-                ) : (
-                  label
-                )}&nbsp;
-                {
-                  useFormsPattern === 'multiple' && (
-                    <span id="header-message" class="sr-only">
-                      {label}
-                    </span>
-                  )
-                }
-                {headerAriaDescribedby && (
-                  <span id="header-message" class="sr-only">
-                    {headerAriaDescribedby}
-                  </span>
-                )}
-                {required && <span class="usa-label--required" part="required">{i18next.t('required')}</span>}
-                {hint && <div class="usa-hint">{hint}</div>}
-              </legend>
-              <span class="usa-error-message" role="alert">
-                {error && (
-                  <Fragment>
-                    <span class="usa-sr-only">{i18next.t('error')}</span> {error}
-                  </Fragment>
-                )}
-              </span>
-              <slot></slot>
-            </fieldset>
+    let formsHeading = null;
+    if (isFormsPattern) {
+      const HeaderLevel = getHeaderLevel(formHeadingLevel);
+      formsHeading = (
+        <Fragment>
+          {formHeading &&
+          <HeaderLevel id="form-question" part="form-header">
+            {formHeading}
+          </HeaderLevel>
+          }
+          <div id="form-description">
+            <slot name="form-description"></slot>
           </div>
-        </Host>
-      );
-    } else {
-      return (
-        <Host aria-invalid={error ? 'true' : 'false'} aria-label={ariaLabel}>
-          <fieldset>
-            <legend part="legend">
+        </Fragment>
+      )
+    }
+    return (
+      <Host aria-invalid={error ? 'true' : 'false'} >
+        {formsHeading}
+        <div class="input-wrap">
+          <fieldset class="usa-fieldset" aria-labelledby={ariaLabeledByIds}>
+            <legend class={legendClass} part="legend">
               {HeaderLevel ? (
                 <HeaderLevel part="header" aria-describedby={headerAriaDescribedbyId}>{label}</HeaderLevel>
               ) : (
                 label
-              )}
+              )}&nbsp;
+              {
+                useFormsPattern === 'multiple' && (
+                  <span id="header-message" class="sr-only">
+                    {label}
+                  </span>
+                )
+              }
               {headerAriaDescribedby && (
                 <span id="header-message" class="sr-only">
                   {headerAriaDescribedby}
                 </span>
               )}
-              {required && (
-                <span class="required" part="required">
-                  {i18next.t('required')}
-                </span>
-              )}
-              {hint && <div class="hint-text">{hint}</div>}
+              {required && <span class="usa-label--required" part="required">{i18next.t('required')}</span>}
+              {hint && <div class="usa-hint">{hint}</div>}
             </legend>
-            <span id="error-message" role="alert">
+            <span class="usa-error-message" role="alert">
               {error && (
                 <Fragment>
-                  <span class="sr-only">{i18next.t('error')}</span> {error}
+                  <span class="usa-sr-only">{i18next.t('error')}</span> {error}
                 </Fragment>
               )}
             </span>
             <slot></slot>
           </fieldset>
-        </Host>
-      );
-    }
+        </div>
+      </Host>
+    );
+    
   }
 }

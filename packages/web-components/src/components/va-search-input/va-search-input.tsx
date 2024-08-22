@@ -77,19 +77,19 @@ export class VaSearchInput {
   // $('va-search-input').getAttribute('value') will be incorrect
 
   /**
-   * Whether or not the component will use USWDS v3 styling.
-   */
-  @Prop() uswds?: boolean = true;
-
-  /**
-   * If `true`, the component will use the big variant. Only available when `uswds` is `true`.
+   * If `true`, the component will use the big variant.
    */
   @Prop() big?: boolean = false;
 
   /**
-   * If `true`, the component will use the small variant. Only available when `uswds` is `true`.
+   * If `true`, the component will use the small variant.
    */
   @Prop() small?: boolean = false;
+
+  /**
+   * If `true`, the component-library-analytics event is disabled.
+   */
+  @Prop() disableAnalytics?: boolean = false;
 
   /**
    * If suggestions are provided, then format suggestions and open the listbox.
@@ -125,15 +125,17 @@ export class VaSearchInput {
    * and fires analytics event.
    */
   private handleBlur = () => {
-    this.componentLibraryAnalytics.emit({
-      componentName: 'va-search-input',
-      action: 'blur',
-      details: {
-        value: this.value,
-      },
-    });
+    if (!this.disableAnalytics) {
+      this.componentLibraryAnalytics.emit({
+        componentName: 'va-search-input',
+        action: 'blur',
+        details: {
+          value: this.value,
+        },
+      });
+    }
 
-    if (!this.formattedSuggestions.length) return;
+    this.isTouched = false;
     this.isListboxOpen = false;
   };
 
@@ -155,14 +157,16 @@ export class VaSearchInput {
         composed: true,
       }),
     );
-
-    this.componentLibraryAnalytics.emit({
-      componentName: 'va-search-input',
-      action: 'click',
-      details: {
-        value: this.value,
-      },
-    });
+    
+    if (!this.disableAnalytics) {
+      this.componentLibraryAnalytics.emit({
+        componentName: 'va-search-input',
+        action: 'click',
+        details: {
+          value: this.value,
+        },
+      });
+    }
   };
 
   // Input event handlers
@@ -300,6 +304,7 @@ export class VaSearchInput {
         this.inputRef.focus();
         this.inputRef.removeAttribute('aria-activedescendant');
         this.isListboxOpen = false;
+        this.isTouched = false;
         this.handleSubmit();
         break;
       case 'Escape':
@@ -408,7 +413,6 @@ export class VaSearchInput {
       isListboxOpen,
       label,
       value,
-      uswds,
       big,
       small,
     } = this;
@@ -434,133 +438,76 @@ export class VaSearchInput {
     /* eslint-disable i18next/no-literal-string */
     const ariaHasPopup = isCombobox ? 'listbox' : undefined;
     const role = isCombobox ? 'combobox' : undefined;
-    const type = this.el.getAttribute('type') || 'text';
     /* eslint-enable i18next/no-literal-string */
 
-    if (uswds) {
-      const formClasses = classnames({
-        'usa-search': true,
-        'usa-search--big': big && !small,
-        'usa-search--small': small && !big,
-      });
-      return (
-        <Host onBlur={handleBlur}>
-          <form class={formClasses} role="search">
-            <label class="usa-sr-only" htmlFor="search-field">
-              {label}
-            </label>
-            <input
-              class="usa-input"
-              id="search-field"
-              name="search"
-              type="search"
-              ref={el => (this.inputRef = el as HTMLInputElement)}
-              aria-autocomplete={ariaAutoComplete}
-              aria-controls={ariaControls}
-              aria-expanded={ariaExpanded}
-              aria-haspopup={ariaHasPopup}
-              aria-label={label}
-              autocomplete="off"
-              onFocus={handleInputFocus}
-              onInput={handleInput}
-              onKeyDown={handleInputKeyDown}
-              role={role}
-              value={value}
-            />
-            <button
-              class="usa-button"
-              type="submit"
-              onClick={handleButtonClick}
-            >
-              {!small && (
-                <span class="usa-search__submit-text">{buttonText}</span>
-              )}
-              <va-icon
-                class="usa-search__submit-icon"
-                icon="search"
-                size={3}
-              ></va-icon>
-            </button>
-            {isListboxOpen && (
-              <ul
-                id="va-search-listbox"
-                aria-label="Search Suggestions"
-                role="listbox"
-              >
-                {formattedSuggestions.map(
-                  (suggestion: string | HTMLElement, index: number) => {
-                    return (
-                      <li
-                        id={`listbox-option-${index}`}
-                        class="va-search-suggestion"
-                        onClick={() => handleListboxClick(index)}
-                        onKeyDown={e => handleListboxKeyDown(e, index)}
-                        role="option"
-                        tabIndex={-1}
-                      >
-                        {suggestion}
-                      </li>
-                    );
-                  },
-                )}
-              </ul>
-            )}
-          </form>
-        </Host>
-      );
-    }
-
+    const formClasses = classnames({
+      'usa-search': true,
+      'usa-search--big': big && !small,
+      'usa-search--small': small && !big,
+    });
     return (
       <Host onBlur={handleBlur}>
-        <input
-          ref={el => (this.inputRef = el as HTMLInputElement)}
-          id="va-search-input"
-          aria-autocomplete={ariaAutoComplete}
-          aria-controls={ariaControls}
-          aria-expanded={ariaExpanded}
-          aria-haspopup={ariaHasPopup}
-          aria-label={label}
-          autocomplete="off"
-          onFocus={handleInputFocus}
-          onInput={handleInput}
-          onKeyDown={handleInputKeyDown}
-          role={role}
-          type={type}
-          value={value}
-        />
-        <button
-          id="va-search-button"
-          type="submit"
-          aria-label={label}
-          onClick={handleButtonClick}
-        >
-          <va-icon icon="search" size={3}></va-icon>
-          {buttonText && <span id="va-search-button-text">{buttonText}</span>}
-        </button>
-        {isListboxOpen && (
-          <ul
-            id="va-search-listbox"
-            aria-label="Search Suggestions"
-            role="listbox"
+        <form class={formClasses} role="search">
+          <label class="usa-sr-only" htmlFor="search-field">
+            {label}
+          </label>
+          <input
+            class="usa-input"
+            id="search-field"
+            name="search"
+            type="search"
+            ref={el => (this.inputRef = el as HTMLInputElement)}
+            aria-autocomplete={ariaAutoComplete}
+            aria-controls={ariaControls}
+            aria-expanded={ariaExpanded}
+            aria-haspopup={ariaHasPopup}
+            aria-label={label}
+            autocomplete="off"
+            onFocus={handleInputFocus}
+            onInput={handleInput}
+            onKeyDown={handleInputKeyDown}
+            role={role}
+            value={value}
+          />
+          <button
+            class="usa-button"
+            type="submit"
+            onClick={handleButtonClick}
           >
-            {formattedSuggestions.map(
-              (suggestion: string | HTMLElement, index: number) => {
-                return (
-                  <li
-                    id={`listbox-option-${index}`}
-                    class="va-search-suggestion"
-                    onClick={() => handleListboxClick(index)}
-                    onKeyDown={e => handleListboxKeyDown(e, index)}
-                    role="option"
-                    tabIndex={-1}
-                  >
-                    {suggestion}
-                  </li>
-                );
-              },
+            {!small && (
+              <span class="usa-search__submit-text">{buttonText}</span>
             )}
-          </ul>
-        )}
+            <va-icon
+              class="usa-search__submit-icon"
+              icon="search"
+              size={3}
+            ></va-icon>
+          </button>
+          {isListboxOpen && (
+            <ul
+              id="va-search-listbox"
+              aria-label="Search Suggestions"
+              role="listbox"
+            >
+              {formattedSuggestions.map(
+                (suggestion: string | HTMLElement, index: number) => {
+                  return (
+                    <li
+                      id={`listbox-option-${index}`}
+                      class="va-search-suggestion"
+                      onClick={() => handleListboxClick(index)}
+                      onKeyDown={e => handleListboxKeyDown(e, index)}
+                      role="option"
+                      tabIndex={-1}
+                    >
+                      {suggestion}
+                    </li>
+                  );
+                },
+              )}
+            </ul>
+          )}
+        </form>
       </Host>
     );
   }

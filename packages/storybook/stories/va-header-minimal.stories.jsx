@@ -12,9 +12,9 @@ export default {
   title: 'Components/Header - Minimal',
   id: 'components/va-header-minimal',
   parameters: {
-    componentSubtitle: `va-header-minimal web component`,
+    componentSubtitle: 'va-header-minimal web component',
     docs: {
-      page: () => <StoryDocs data={minimalHeaderDocs} />,
+      page: () => <StoryDocs storyDefault={Default} data={minimalHeaderDocs} />,
     },
   },
 };

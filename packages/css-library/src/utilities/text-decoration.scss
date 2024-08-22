@@ -4,7 +4,7 @@
 
 $u-text-decoration: (
   text-decoration: (
-    base: 'vads-text',
+    base: 'vads-u-text-decoration-',
     modifiers: null,
     values: map-collect($tokens-text-decoration),
     settings: $text-decoration-settings,

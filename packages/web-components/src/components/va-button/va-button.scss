@@ -3,6 +3,8 @@
 @use 'uswds-helpers/src/styles/usa-sr-only';
 @use 'usa-button/src/styles/usa-button';
 
+@import '../../mixins/focusable.css';
+
 :host {
   display: inline-block;
 }
@@ -14,17 +16,7 @@
   cursor: not-allowed;
 }
 
-// Fix to off-centered content in V3 when icon present
-.va-button--icon {
-  position: relative;
-  top: 0.1em;
-  &.margin-right-8px {
-    margin-right: 8px;
-  }
-  &.margin-left-8px {
-    margin-left: 8px;
-  }
-}
+
 :host([big]:not([big="false"]):is([back], [continue])) {
   .usa-button--big {
     padding-top: 14px;
@@ -32,8 +24,15 @@
 }
 
 // Override transparent background from USWDS v3
-.usa-button--outline {
+.usa-button.usa-button--outline {
   background-color: var(--vads-button-color-background-secondary-on-light);
+
+  &:hover,
+  &:focus {
+    background-color: var(--vads-button-color-background-secondary-on-light);
+    text-decoration: none;
+  }
+
 }
 
 .va-button-primary--alternate {
@@ -46,73 +45,3 @@
   }
 }
 
-/* Original Component Styles. */
-
-@import '../../mixins/buttons.css';
-
-:host([uswds='false']) {
-  button {
-    align-items: center;
-    background-color: var(--vads-color-primary);
-    border-radius: 5px;
-    color: var(--vads-button-color-text-primary-alt-on-light);
-    display: flex;
-    font-size: 1rem;
-    justify-content: center;
-    margin: 0.5em 0.5em 0.5em 0;
-  }
-
-  button:hover,
-  button:focus {
-    background-color: var(--vads-color-primary-dark);
-  }
-
-  button:active {
-    background-color: var(--vads-color-primary-darker);
-  }
-
-  button.va-button-primary--alternate {
-    background: var(--vads-color-success-dark);
-
-    &:hover,
-    &:focus {
-      background-color: var(--vads-button-color-background-primary-alt-active-on-light);
-      text-decoration: none;
-    }
-  }
-}
-
-:host([uswds='false'][back]:not([back='false'])) button,
-:host([uswds='false'][secondary]:not([secondary='false'])) button {
-  background-color: var(--vads-button-color-background-secondary-on-light);
-  box-shadow: inset 0 0 0 2px var(--vads-color-primary);
-  color: var(--vads-color-primary);
-}
-
-:host([uswds='false'][back]:not([back='false'])) button:active,
-:host([uswds='false'][back]:not([back='false'])) button:hover,
-:host([uswds='false'][secondary]:not([secondary='false'])) button:active,
-:host([uswds='false'][secondary]:not([secondary='false'])) button:hover {
-  background-color: var(--vads-color-gray-cool-light);
-  box-shadow: inset 0 0 0 2px var(--vads-color-primary-dark);
-  color: var(--vads-color-primary-dark);
-}
-
-:host([uswds='false'][back]:not([back='false'])) button:focus,
-:host([uswds='false'][secondary]:not([secondary='false'])) button:focus {
-  background-color: var(--vads-color-gray-cool-light);
-  box-shadow: inset 0 0 0 2px var(--vads-color-primary);
-  color: var(--vads-color-primary);
-}
-
-:host([uswds='false'][big]:not([big='false'])) button {
-  border-radius: 8px;
-  font-size: 1.5rem;
-  padding: 0.9375rem 1.875rem;
-}
-
-:host([uswds='false'][disabled]:not([disabled='false'])) button {
-  background-color: var(--vads-color-base-lighter);
-  box-shadow: none;
-  color: var(--vads-button-color-text-primary-alt-on-light);
-}

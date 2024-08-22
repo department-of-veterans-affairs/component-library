@@ -5,7 +5,7 @@
 
 $u-border-base: (
   border: (
-    base: 'vads-border',
+    base: 'vads-u-border',
     modifiers: (
       noModifier: '',
       'top': '-top',
@@ -22,7 +22,7 @@ $u-border-base: (
 
 $u-border-style: (
   border-style: (
-    base: 'vads-border',
+    base: 'vads-u-border-style-',
     modifiers: null,
     values: map-collect($tokens-border-style),
     settings: $border-other-settings,
@@ -33,7 +33,7 @@ $u-border-style: (
 
 $u-border-color: (
   border-color: (
-    base: 'vads-border',
+    base: 'vads-u-border-color-',
     modifiers: null,
     values:
       map-collect(

@@ -20,9 +20,6 @@ import {
   shadow: true,
 })
 export class VaStatementOfTruth {
-  private inputField: HTMLElement;
-  private checkboxField: HTMLElement;
-
   /**
    * An optional custom header for the component
    */
@@ -110,19 +107,6 @@ export class VaStatementOfTruth {
     this.vaCheckboxChange.emit({ checked });
   };
 
-  /**
-  without this step the va-text-input and va-checkbox components will not
-  have an error attribute, which is used for styling.
-  */
-  componentDidRender() {
-    if (this.inputError) {
-      this.inputField.setAttribute('error', this.inputError);
-    }
-    if (this.checkboxError) {
-      this.checkboxField.setAttribute('error', this.checkboxError);
-    }
-  }
-
   render() {
     const {
       heading,
@@ -131,6 +115,8 @@ export class VaStatementOfTruth {
       inputMessageAriaDescribedby,
       checked,
       inputValue,
+      inputError,
+      checkboxError,
     } = this;
     return (
       <Host>
@@ -145,15 +131,7 @@ export class VaStatementOfTruth {
           <slot></slot>
           <p class="font-sans-6">
             I have read and accept the&nbsp;
-            <a href="/privacy-policy/" target="_blank">
-              privacy policy
-              <va-icon
-                class="privacy-policy-icon"
-                icon="launch"
-                size={2}
-              ></va-icon>
-              <span class="usa-sr-only">opens in a new window</span>
-            </a>
+            <va-link external text='privacy policy' href='/privacy-policy/' />
             .
           </p>
           <va-text-input
@@ -163,9 +141,9 @@ export class VaStatementOfTruth {
             value={inputValue}
             message-aria-describedby={inputMessageAriaDescribedby}
             required
+            error={inputError}
             onInput={this.handleInputChange}
             onBlur={this.handleInputBlur}
-            ref={field => (this.inputField = field)}
           />
           <va-checkbox
             id="veteran-certify"
@@ -173,8 +151,8 @@ export class VaStatementOfTruth {
             label={checkboxLabel}
             required
             checked={checked}
+            error={checkboxError}
             onVaChange={this.handleCheckboxChange}
-            ref={field => (this.checkboxField = field)}
           />
         </article>
       </Host>

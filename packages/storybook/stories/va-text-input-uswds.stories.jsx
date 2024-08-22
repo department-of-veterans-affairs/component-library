@@ -1,16 +1,24 @@
 /* eslint-disable react/prop-types */
 import React, { useState, useEffect } from 'react';
-import { getWebComponentDocs, propStructure, StoryDocs, applyFocus } from './wc-helpers';
+import {
+  getWebComponentDocs,
+  propStructure,
+  StoryDocs,
+  applyFocus,
+} from './wc-helpers';
+
+import { VaTextInput } from '@department-of-veterans-affairs/web-components/react-bindings';
+
 
 const textInputDocs = getWebComponentDocs('va-text-input');
 
 export default {
-  title: `Components/Text input USWDS`,
+  title: 'Components/Text input USWDS',
   id: 'uswds/va-text-input',
   parameters: {
-    componentSubtitle: `va-text-input web component`,
+    componentSubtitle: 'va-text-input web component',
     docs: {
-      page: () => <StoryDocs data={textInputDocs} />,
+      page: () => <StoryDocs storyDefault={Default} data={textInputDocs} />,
     },
   },
   argTypes: {
@@ -48,6 +56,7 @@ const defaultArgs = {
   'minlength': undefined,
   'value': undefined,
   'inputmode': undefined,
+  'step': undefined,
   'type': undefined,
   'success': false,
   'pattern': undefined,
@@ -60,7 +69,11 @@ const defaultArgs = {
   'charcount': false,
   'max': undefined,
   'min': undefined,
-  'currency': undefined
+  'currency': undefined,
+  'input-prefix': undefined,
+  'input-icon-prefix': undefined,
+  'input-suffix': undefined,
+  'input-icon-suffix': undefined
 };
 
 const Template = ({
@@ -73,6 +86,7 @@ const Template = ({
   maxlength,
   value,
   inputmode,
+  step,
   type,
   success,
   pattern,
@@ -81,7 +95,11 @@ const Template = ({
   charcount,
   max,
   min,
-  currency
+  currency,
+  'input-prefix': inputPrefix,
+  'input-icon-prefix': inputIconPrefix,
+  'input-suffix': inputSuffix,
+  'input-icon-suffix': inputIconSuffix
 }) => {
   return (
     <va-text-input
@@ -95,6 +113,7 @@ const Template = ({
       maxlength={maxlength}
       value={value}
       inputmode={inputmode}
+      step={step}
       type={type}
       success={success}
       pattern={pattern}
@@ -105,6 +124,10 @@ const Template = ({
       min={min}
       max={max}
       currency={currency}
+      input-prefix={inputPrefix}
+      input-icon-prefix={inputIconPrefix}
+      input-suffix={inputSuffix}
+      input-icon-suffix={inputIconSuffix}
     />
   );
 };
@@ -129,9 +152,9 @@ const I18nTemplate = ({
   }, [lang]);
   return (
     <>
-      <va-button onClick={e => setLang('es')} text="Español"/>
-      <va-button onClick={e => setLang('en')} text="English"/>
-      <va-button onClick={e => setLang('tl')} text="Tagalog"/>
+      <va-button onClick={e => setLang('es')} text="Español" />
+      <va-button onClick={e => setLang('en')} text="English" />
+      <va-button onClick={e => setLang('tl')} text="Tagalog" />
 
       <va-text-input
         name={name}
@@ -150,76 +173,69 @@ const I18nTemplate = ({
   );
 };
 
-const WidthsTemplate = ({
-  name,
-  value,
-}) => {
+const WidthsTemplate = ({ name, value }) => {
   return (
     <>
       <va-text-input
         width="2xs"
         name={name}
-        label='My input - 2xs'
+        label="My input - 2xs"
         value={value}
       />
 
       <va-text-input
         width="xs"
         name={name}
-        label='My input - xs'
+        label="My input - xs"
         value={value}
       />
 
       <va-text-input
         width="sm"
         name={name}
-        label='My input - sm'
+        label="My input - sm"
         value={value}
       />
 
       <va-text-input
         width="md"
         name={name}
-        label='My input - md'
+        label="My input - md"
         value={value}
       />
 
       <va-text-input
         width="lg"
         name={name}
-        label='My input - lg'
+        label="My input - lg"
         value={value}
       />
 
       <va-text-input
         width="xl"
         name={name}
-        label='My input - xl'
+        label="My input - xl"
         value={value}
       />
 
       <va-text-input
         width="2xl"
         name={name}
-        label='My input - 2xl'
+        label="My input - 2xl"
         value={value}
       />
     </>
   );
 };
 
-const FormsPatternMultipleTemplate = ({
-  name,
-  value,
-  uswds,
-}) => {
+const FormsPatternMultipleTemplate = ({ name, value, uswds }) => {
   const handleClick = () => {
-    const header = document.getElementById('form-pattern-multiple-input')
-      ?.shadowRoot
-      ?.getElementById('form-question');
+    const header = document
+      .getElementById('form-pattern-multiple-input')
+      ?.shadowRoot?.getElementById('form-question');
 
     applyFocus(header);
-  }
+  };
   return (
     <>
       <va-text-input
@@ -227,48 +243,36 @@ const FormsPatternMultipleTemplate = ({
         error="This is an error message"
         id="form-pattern-multiple-input"
         name={name}
-        label='First Name'
+        label="First Name"
         value={value}
-        use-forms-pattern='multiple'
+        use-forms-pattern="multiple"
         form-heading-level={1}
         form-heading="Name and email address"
         form-description="This is the additional form-description prop"
       />
 
-      <va-text-input
-        name={name}
-        label='Last Name'
-        value={value}
-      />
+      <va-text-input name={name} label="Last Name" value={value} />
 
-      <va-text-input
-        name={name}
-        label='Email address'
-        value={value}
-      />
+      <va-text-input name={name} label="Email address" value={value} />
       <hr />
       <va-button
         text="click to focus header"
         onClick={handleClick}
-        uswds={false}>
-      </va-button>
+        uswds={false}
+      ></va-button>
     </>
   );
 };
 
-const FormsPatternSingleTemplate = ({
-  name,
-  value,
-  error,
-}) => {
-  const id = (Math.floor(Math.random() * 10) + 1);
+const FormsPatternSingleTemplate = ({ name, value, error }) => {
+  const id = Math.floor(Math.random() * 10) + 1;
   const handleClick = () => {
-    const header = document.getElementById(`form-pattern-single-input-${id}`)
-      ?.shadowRoot
-      ?.getElementById('form-question');
+    const header = document
+      .getElementById(`form-pattern-single-input-${id}`)
+      ?.shadowRoot?.getElementById('form-question');
 
     applyFocus(header);
-  }
+  };
   return (
     <>
       <va-text-input
@@ -283,15 +287,15 @@ const FormsPatternSingleTemplate = ({
         form-heading-level={1}
         form-heading="Enter the name of a historical figure"
       >
-      <div slot="form-description">
-        <p>HTML passed into the form-description slot:</p>
-        <ul>
-          <li>Sojourner Truth</li>
-          <li>Frederick Douglass</li>
-          <li>Booker T. Washington</li>
-          <li>George Washington Carver</li>
-        </ul>
-      </div>
+        <div slot="form-description">
+          <p>HTML passed into the form-description slot:</p>
+          <ul>
+            <li>Sojourner Truth</li>
+            <li>Frederick Douglass</li>
+            <li>Booker T. Washington</li>
+            <li>George Washington Carver</li>
+          </ul>
+        </div>
       </va-text-input>
 
       <hr />
@@ -299,8 +303,8 @@ const FormsPatternSingleTemplate = ({
       <va-button
         text="click to focus header"
         onClick={handleClick}
-        uswds={false}>
-      </va-button>
+        uswds={false}
+      ></va-button>
     </>
   );
 };
@@ -338,21 +342,62 @@ ValidRange.args = {
   inputmode: 'numeric',
   min: 0,
   max: 4,
-  hint: "The valid range is 0 to 4",
+  hint: 'The valid range is 0 to 4',
 };
 
-export const Autocomplete = Template.bind(null);
+export const Autocomplete = ({ name, label, autocomplete }) => {
+  function handleSubmit() { };
+  function handleKeyPress() { }
+  return (
+    <>
+      <form onSubmit={handleSubmit} >
+        <VaTextInput label={label} onKeyPress={handleKeyPress} name={name} autocomplete={autocomplete} />
+      </form>
+      <div className='vads-u-margin-top--2'>
+        Note: on Safari (Mac or iOS), when using "Shift + Command + A" to autofill a field,
+        no <code>input</code>&nbsp;event is fired, which means that any handler passed to <code>onInput</code> will not fire. This can result in
+        errors on form submission, because from the component's perspective the autofilled field is empty. A suggested
+        workaround is to synchronize field state with component state on submit by passing handlers
+        to <code>VaTextInput</code>&nbsp;such as:
+
+        <pre className="vads-u-font-size--sm vads-u-background-color--gray-lightest vads-u-padding--2">
+          <code>
+            function onSubmit(e) &#x7b;<br/>
+            &nbsp;&nbsp;e.preventDefault()<br/>
+            &nbsp;&nbsp;// check if the "value" passed to VaTextInput is <br/>
+            &nbsp;&nbsp;// the same as e.target.value, <br />
+            &nbsp;&nbsp;// then proceed with submission <br />
+            &#x7d;<br/><br/>
+
+            function handleKeyPress(e) &#x7b;<br/>
+              &nbsp;&nbsp;if (e.key === 'Enter') &#x7b;<br/>
+              &nbsp;&nbsp;// the user wants to submit the form<br/>
+              &nbsp;&nbsp;// synchronize element and component state before<br/>
+              &nbsp;&nbsp;// continuing with submission<br/>
+              &nbsp;&#x7d;<br/>
+            &#x7d;<br />
+        </code>
+      </pre>
+      </div>
+    </>
+  )
+}
+
 Autocomplete.args = {
   ...defaultArgs,
   name: 'email',
   autocomplete: 'email',
-};
+  label: 'This va-text-input is configured for email autocompletion'
+}
 
 export const WithAnalytics = Template.bind(null);
 WithAnalytics.args = { ...defaultArgs, 'enable-analytics': true };
 
 export const WithHintText = Template.bind(null);
 WithHintText.args = { ...defaultArgs, hint: 'This is hint text' };
+
+export const WithStep = Template.bind(null);
+WithStep.args = { ...defaultArgs, type: 'number', inputmode: 'decimal', step: '.2', hint: 'step=".2" (only even values in tenth position valid)' };
 
 const WithInlineHintTextTemplate = ({ name, label }) => {
   return (
@@ -364,7 +409,7 @@ const WithInlineHintTextTemplate = ({ name, label }) => {
 };
 
 export const WithInlineHintText = WithInlineHintTextTemplate.bind(null);
-WithInlineHintText.args = { ...defaultArgs, label: "My input (with hint)" };
+WithInlineHintText.args = { ...defaultArgs, label: 'My input (with hint)' };
 
 const WithAdditionalInfoTemplate = ({ name, label }) => {
   return (
@@ -392,8 +437,48 @@ WithCharacterCount.args = { ...defaultArgs, maxlength: '10', charcount: true };
 export const WithCurrency = Template.bind(null);
 WithCurrency.args = {
   ...defaultArgs,
-  currency: true
+  currency: true,
 };
+
+export const WithIcon = Template.bind(null);
+WithIcon.args = {
+  ...defaultArgs,
+  'input-icon-prefix': 'credit_card',
+};
+
+export const WithPrefix = Template.bind(null);
+WithPrefix.args = {
+  ...defaultArgs,
+  'input-prefix': 'Pre',
+};
+
+export const WithSuffix = Template.bind(null);
+WithSuffix.args = {
+  ...defaultArgs,
+  'input-suffix': 'lbs.',
+};
+
+export const WithIconSuffix = Template.bind(null);
+WithIconSuffix.args = {
+  ...defaultArgs,
+  'input-icon-suffix': 'comment',
+}
+
+export const WithIconAndSuffix = Template.bind(null);
+WithIconAndSuffix.args = {
+  ...defaultArgs,
+  'label': 'How often is the payment?',
+  'required': true,
+  'input-icon-prefix': 'attach_money',
+  'input-suffix': 'per year',
+};
+
+export const WithPrefixAndIconSuffix = Template.bind(null);
+WithPrefixAndIconSuffix.args = {
+  ...defaultArgs,
+  'input-icon-suffix': 'comment',
+  'input-prefix': 'Pre'
+}
 
 export const Widths = WidthsTemplate.bind(null);
 Widths.args = {

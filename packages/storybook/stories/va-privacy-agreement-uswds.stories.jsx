@@ -12,7 +12,7 @@ export default {
   parameters: {
     componentSubtitle: 'va-privacy-agreement web component',
     docs: {
-      page: () => <StoryDocs data={privacyAgreementDocs} />,
+      page: () => <StoryDocs storyDefault={Default} data={privacyAgreementDocs} />,
     },
   },
 };

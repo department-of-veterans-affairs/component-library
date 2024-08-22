@@ -8,7 +8,7 @@ export default {
   parameters: {
     componentSubtitle: 'Modal React component',
     docs: {
-      page: () => <StoryDocs componentName="Modal - React" />,
+      page: () => <StoryDocs storyDefault={Default} componentName="Modal - React" />,
     },
   },
 };

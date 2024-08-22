@@ -1702,6 +1702,196 @@
       ]
     }
   },
+  "vads-color-action-surface-default-on-dark": {
+    "*": {
+      "value": "#58b4ff",
+      "filePath": "tokens/color.json",
+      "isSource": true,
+      "original": {
+        "value": "{uswds-system-color-blue-vivid-30}"
+      },
+      "name": "vads-color-action-surface-default-on-dark",
+      "attributes": {
+        "category": "vads-color-action-surface-default-on-dark",
+        "type": "*"
+      },
+      "path": [
+        "vads-color-action-surface-default-on-dark",
+        "*"
+      ]
+    }
+  },
+  "vads-color-action-surface-destructive-on-dark": {
+    "*": {
+      "value": "#fb5a47",
+      "filePath": "tokens/color.json",
+      "isSource": true,
+      "original": {
+        "value": "{uswds-system-color-red-vivid-40}"
+      },
+      "name": "vads-color-action-surface-destructive-on-dark",
+      "attributes": {
+        "category": "vads-color-action-surface-destructive-on-dark",
+        "type": "*"
+      },
+      "path": [
+        "vads-color-action-surface-destructive-on-dark",
+        "*"
+      ]
+    }
+  },
+  "vads-color-action-border-base-active-on-light": {
+    "*": {
+      "value": "#2e2e2e",
+      "filePath": "tokens/color.json",
+      "isSource": true,
+      "original": {
+        "value": "{uswds-system-color-gray-80}"
+      },
+      "name": "vads-color-action-border-base-active-on-light",
+      "attributes": {
+        "category": "vads-color-action-border-base-active-on-light",
+        "type": "*"
+      },
+      "path": [
+        "vads-color-action-border-base-active-on-light",
+        "*"
+      ]
+    }
+  },
+  "vads-color-action-border-base-active-on-dark": {
+    "*": {
+      "value": "#adadad",
+      "filePath": "tokens/color.json",
+      "isSource": true,
+      "original": {
+        "value": "{uswds-system-color-gray-30}"
+      },
+      "name": "vads-color-action-border-base-active-on-dark",
+      "attributes": {
+        "category": "vads-color-action-border-base-active-on-dark",
+        "type": "*"
+      },
+      "path": [
+        "vads-color-action-border-base-active-on-dark",
+        "*"
+      ]
+    }
+  },
+  "vads-color-feedback-surface-info-on-dark": {
+    "*": {
+      "value": "#112f4e",
+      "filePath": "tokens/color.json",
+      "isSource": true,
+      "original": {
+        "value": "{uswds-system-color-blue-vivid-80}"
+      },
+      "name": "vads-color-feedback-surface-info-on-dark",
+      "attributes": {
+        "category": "vads-color-feedback-surface-info-on-dark",
+        "type": "*"
+      },
+      "path": [
+        "vads-color-feedback-surface-info-on-dark",
+        "*"
+      ]
+    }
+  },
+  "vads-color-feedback-surface-success-on-dark": {
+    "*": {
+      "value": "#19311e",
+      "filePath": "tokens/color.json",
+      "isSource": true,
+      "original": {
+        "value": "{uswds-system-color-green-cool-vivid-80}"
+      },
+      "name": "vads-color-feedback-surface-success-on-dark",
+      "attributes": {
+        "category": "vads-color-feedback-surface-success-on-dark",
+        "type": "*"
+      },
+      "path": [
+        "vads-color-feedback-surface-success-on-dark",
+        "*"
+      ]
+    }
+  },
+  "vads-color-feedback-surface-warning-on-dark": {
+    "*": {
+      "value": "#422d19",
+      "filePath": "tokens/color.json",
+      "isSource": true,
+      "original": {
+        "value": "{uswds-system-color-yellow-vivid-80}"
+      },
+      "name": "vads-color-feedback-surface-warning-on-dark",
+      "attributes": {
+        "category": "vads-color-feedback-surface-warning-on-dark",
+        "type": "*"
+      },
+      "path": [
+        "vads-color-feedback-surface-warning-on-dark",
+        "*"
+      ]
+    }
+  },
+  "vads-color-feedback-surface-error-on-dark": {
+    "*": {
+      "value": "#5c1111",
+      "filePath": "tokens/color.json",
+      "isSource": true,
+      "original": {
+        "value": "{uswds-system-color-red-vivid-80}"
+      },
+      "name": "vads-color-feedback-surface-error-on-dark",
+      "attributes": {
+        "category": "vads-color-feedback-surface-error-on-dark",
+        "type": "*"
+      },
+      "path": [
+        "vads-color-feedback-surface-error-on-dark",
+        "*"
+      ]
+    }
+  },
+  "vads-color-feedback-border-warning-on-dark": {
+    "*": {
+      "value": "#face00",
+      "filePath": "tokens/color.json",
+      "isSource": true,
+      "original": {
+        "value": "{uswds-system-color-yellow-vivid-20}"
+      },
+      "name": "vads-color-feedback-border-warning-on-dark",
+      "attributes": {
+        "category": "vads-color-feedback-border-warning-on-dark",
+        "type": "*"
+      },
+      "path": [
+        "vads-color-feedback-border-warning-on-dark",
+        "*"
+      ]
+    }
+  },
+  "vads-color-bg-default-on-dark": {
+    "*": {
+      "value": "#171716",
+      "filePath": "tokens/color.json",
+      "isSource": true,
+      "original": {
+        "value": "{uswds-system-color-gray-warm-90}"
+      },
+      "name": "vads-color-bg-default-on-dark",
+      "attributes": {
+        "category": "vads-color-bg-default-on-dark",
+        "type": "*"
+      },
+      "path": [
+        "vads-color-bg-default-on-dark",
+        "*"
+      ]
+    }
+  },
   "font": {
     "family": {
       "sans": {
@@ -1863,11 +2053,11 @@
     },
     "size": {
       "sm": {
-        "value": "1.5rem",
+        "value": "0.938rem",
         "filePath": "tokens/fonts.json",
         "isSource": true,
         "original": {
-          "value": "1.5rem"
+          "value": "0.938rem"
         },
         "name": "font-size-sm",
         "attributes": {
@@ -1882,11 +2072,11 @@
         ]
       },
       "base": {
-        "value": "1.6rem",
+        "value": "1rem",
         "filePath": "tokens/fonts.json",
         "isSource": true,
         "original": {
-          "value": "1.6rem"
+          "value": "1rem"
         },
         "name": "font-size-base",
         "attributes": {
@@ -1901,11 +2091,11 @@
         ]
       },
       "md": {
-        "value": "1.7rem",
+        "value": "1.063rem",
         "filePath": "tokens/fonts.json",
         "isSource": true,
         "original": {
-          "value": "1.7rem"
+          "value": "1.063rem"
         },
         "name": "font-size-md",
         "attributes": {
@@ -1920,11 +2110,11 @@
         ]
       },
       "lg": {
-        "value": "2rem",
+        "value": "1.25rem",
         "filePath": "tokens/fonts.json",
         "isSource": true,
         "original": {
-          "value": "2rem"
+          "value": "1.25rem"
         },
         "name": "font-size-lg",
         "attributes": {
@@ -1939,11 +2129,11 @@
         ]
       },
       "xl": {
-        "value": "3rem",
+        "value": "1.875rem",
         "filePath": "tokens/fonts.json",
         "isSource": true,
         "original": {
-          "value": "3rem"
+          "value": "1.875rem"
         },
         "name": "font-size-xl",
         "attributes": {
@@ -1958,11 +2148,11 @@
         ]
       },
       "2xl": {
-        "value": "4rem",
+        "value": "2.5rem",
         "filePath": "tokens/fonts.json",
         "isSource": true,
         "original": {
-          "value": "4rem"
+          "value": "2.5rem"
         },
         "name": "font-size-2xl",
         "attributes": {
@@ -1977,7 +2167,7 @@
         ]
       },
       "h1": {
-        "value": "4rem",
+        "value": "2.5rem",
         "filePath": "tokens/fonts.json",
         "isSource": true,
         "original": {
@@ -1996,7 +2186,7 @@
         ]
       },
       "h2": {
-        "value": "3rem",
+        "value": "1.875rem",
         "filePath": "tokens/fonts.json",
         "isSource": true,
         "original": {
@@ -2015,7 +2205,7 @@
         ]
       },
       "h3": {
-        "value": "2rem",
+        "value": "1.25rem",
         "filePath": "tokens/fonts.json",
         "isSource": true,
         "original": {
@@ -2034,7 +2224,7 @@
         ]
       },
       "h4": {
-        "value": "1.7rem",
+        "value": "1.063rem",
         "filePath": "tokens/fonts.json",
         "isSource": true,
         "original": {
@@ -2053,7 +2243,7 @@
         ]
       },
       "h5": {
-        "value": "1.5rem",
+        "value": "0.938rem",
         "filePath": "tokens/fonts.json",
         "isSource": true,
         "original": {
@@ -2072,7 +2262,7 @@
         ]
       },
       "h6": {
-        "value": "1.5rem",
+        "value": "0.938rem",
         "filePath": "tokens/fonts.json",
         "isSource": true,
         "original": {
@@ -2134,11 +2324,11 @@
       ]
     },
     "1": {
-      "value": "0.8rem",
+      "value": "0.5rem",
       "filePath": "tokens/spacing.json",
       "isSource": true,
       "original": {
-        "value": "0.8rem"
+        "value": "0.5rem"
       },
       "name": "units-1",
       "attributes": {
@@ -2151,11 +2341,11 @@
       ]
     },
     "2": {
-      "value": "1.6rem",
+      "value": "1rem",
       "filePath": "tokens/spacing.json",
       "isSource": true,
       "original": {
-        "value": "1.6rem"
+        "value": "1rem"
       },
       "name": "units-2",
       "attributes": {
@@ -2168,11 +2358,11 @@
       ]
     },
     "3": {
-      "value": "2.4rem",
+      "value": "1.5rem",
       "filePath": "tokens/spacing.json",
       "isSource": true,
       "original": {
-        "value": "2.4rem"
+        "value": "1.5rem"
       },
       "name": "units-3",
       "attributes": {
@@ -2185,11 +2375,11 @@
       ]
     },
     "4": {
-      "value": "3.2rem",
+      "value": "2rem",
       "filePath": "tokens/spacing.json",
       "isSource": true,
       "original": {
-        "value": "3.2rem"
+        "value": "2rem"
       },
       "name": "units-4",
       "attributes": {
@@ -2202,11 +2392,11 @@
       ]
     },
     "5": {
-      "value": "4rem",
+      "value": "2.5rem",
       "filePath": "tokens/spacing.json",
       "isSource": true,
       "original": {
-        "value": "4rem"
+        "value": "2.5rem"
       },
       "name": "units-5",
       "attributes": {
@@ -2219,11 +2409,11 @@
       ]
     },
     "6": {
-      "value": "4.8rem",
+      "value": "3rem",
       "filePath": "tokens/spacing.json",
       "isSource": true,
       "original": {
-        "value": "4.8rem"
+        "value": "3rem"
       },
       "name": "units-6",
       "attributes": {
@@ -2236,11 +2426,11 @@
       ]
     },
     "7": {
-      "value": "5.6rem",
+      "value": "3.5rem",
       "filePath": "tokens/spacing.json",
       "isSource": true,
       "original": {
-        "value": "5.6rem"
+        "value": "3.5rem"
       },
       "name": "units-7",
       "attributes": {
@@ -2253,11 +2443,11 @@
       ]
     },
     "8": {
-      "value": "6.4rem",
+      "value": "4rem",
       "filePath": "tokens/spacing.json",
       "isSource": true,
       "original": {
-        "value": "6.4rem"
+        "value": "4rem"
       },
       "name": "units-8",
       "attributes": {
@@ -2270,11 +2460,11 @@
       ]
     },
     "9": {
-      "value": "7.2rem",
+      "value": "4.5rem",
       "filePath": "tokens/spacing.json",
       "isSource": true,
       "original": {
-        "value": "7.2rem"
+        "value": "4.5rem"
       },
       "name": "units-9",
       "attributes": {
@@ -2287,11 +2477,11 @@
       ]
     },
     "10": {
-      "value": "8rem",
+      "value": "5rem",
       "filePath": "tokens/spacing.json",
       "isSource": true,
       "original": {
-        "value": "8rem"
+        "value": "5rem"
       },
       "name": "units-10",
       "attributes": {
@@ -2304,11 +2494,11 @@
       ]
     },
     "15": {
-      "value": "12rem",
+      "value": "7.5rem",
       "filePath": "tokens/spacing.json",
       "isSource": true,
       "original": {
-        "value": "12rem"
+        "value": "7.5rem"
       },
       "name": "units-15",
       "attributes": {
@@ -2355,11 +2545,11 @@
       ]
     },
     "0p5": {
-      "value": "0.4rem",
+      "value": "0.25rem",
       "filePath": "tokens/spacing.json",
       "isSource": true,
       "original": {
-        "value": "0.4rem"
+        "value": "0.25rem"
       },
       "name": "units-0p5",
       "attributes": {
@@ -2372,11 +2562,11 @@
       ]
     },
     "1p5": {
-      "value": "1.2rem",
+      "value": "0.75rem",
       "filePath": "tokens/spacing.json",
       "isSource": true,
       "original": {
-        "value": "1.2rem"
+        "value": "0.75rem"
       },
       "name": "units-1p5",
       "attributes": {
@@ -2389,11 +2579,11 @@
       ]
     },
     "2p5": {
-      "value": "2rem",
+      "value": "1.25rem",
       "filePath": "tokens/spacing.json",
       "isSource": true,
       "original": {
-        "value": "2rem"
+        "value": "1.25rem"
       },
       "name": "units-2p5",
       "attributes": {
@@ -2440,7 +2630,7 @@
       ]
     },
     "neg-0p5": {
-      "value": "-0.4rem",
+      "value": "-0.25rem",
       "filePath": "tokens/spacing.json",
       "isSource": true,
       "original": {
@@ -2457,7 +2647,7 @@
       ]
     },
     "neg-1": {
-      "value": "-0.8rem",
+      "value": "-0.5rem",
       "filePath": "tokens/spacing.json",
       "isSource": true,
       "original": {
@@ -2474,7 +2664,7 @@
       ]
     },
     "neg-1p5": {
-      "value": "-1.2rem",
+      "value": "-0.75rem",
       "filePath": "tokens/spacing.json",
       "isSource": true,
       "original": {
@@ -2491,7 +2681,7 @@
       ]
     },
     "neg-2": {
-      "value": "-1.6rem",
+      "value": "-1rem",
       "filePath": "tokens/spacing.json",
       "isSource": true,
       "original": {
@@ -2508,7 +2698,7 @@
       ]
     },
     "neg-2p5": {
-      "value": "-2rem",
+      "value": "-1.25rem",
       "filePath": "tokens/spacing.json",
       "isSource": true,
       "original": {
@@ -2525,7 +2715,7 @@
       ]
     },
     "neg-3": {
-      "value": "-2.4rem",
+      "value": "-1.5rem",
       "filePath": "tokens/spacing.json",
       "isSource": true,
       "original": {
@@ -2542,7 +2732,7 @@
       ]
     },
     "neg-4": {
-      "value": "-3.2rem",
+      "value": "-2rem",
       "filePath": "tokens/spacing.json",
       "isSource": true,
       "original": {
@@ -2559,7 +2749,7 @@
       ]
     },
     "neg-5": {
-      "value": "-4rem",
+      "value": "-2.5rem",
       "filePath": "tokens/spacing.json",
       "isSource": true,
       "original": {
@@ -2576,7 +2766,7 @@
       ]
     },
     "neg-6": {
-      "value": "-4.8rem",
+      "value": "-3rem",
       "filePath": "tokens/spacing.json",
       "isSource": true,
       "original": {
@@ -2593,7 +2783,7 @@
       ]
     },
     "neg-7": {
-      "value": "-5.6rem",
+      "value": "-3.5rem",
       "filePath": "tokens/spacing.json",
       "isSource": true,
       "original": {
@@ -2610,7 +2800,7 @@
       ]
     },
     "neg-8": {
-      "value": "-6.4rem",
+      "value": "-4rem",
       "filePath": "tokens/spacing.json",
       "isSource": true,
       "original": {
@@ -2627,7 +2817,7 @@
       ]
     },
     "neg-9": {
-      "value": "-7.2rem",
+      "value": "-4.5rem",
       "filePath": "tokens/spacing.json",
       "isSource": true,
       "original": {
@@ -2644,7 +2834,7 @@
       ]
     },
     "neg-10": {
-      "value": "-8rem",
+      "value": "-5rem",
       "filePath": "tokens/spacing.json",
       "isSource": true,
       "original": {
@@ -2661,7 +2851,7 @@
       ]
     },
     "neg-15": {
-      "value": "-12rem",
+      "value": "-7.5rem",
       "filePath": "tokens/spacing.json",
       "isSource": true,
       "original": {
@@ -2828,6 +3018,21 @@
       "uswds-system-color-blue-90"
     ]
   },
+  "uswds-system-color-blue-vivid-30": {
+    "value": "#58b4ff",
+    "filePath": "tokens/uswds.json",
+    "isSource": true,
+    "original": {
+      "value": "#58b4ff"
+    },
+    "name": "uswds-system-color-blue-vivid-30",
+    "attributes": {
+      "category": "uswds-system-color-blue-vivid-30"
+    },
+    "path": [
+      "uswds-system-color-blue-vivid-30"
+    ]
+  },
   "uswds-system-color-blue-vivid-50": {
     "value": "#0076d6",
     "filePath": "tokens/uswds.json",
@@ -2871,6 +3076,21 @@
     },
     "path": [
       "uswds-system-color-blue-vivid-70"
+    ]
+  },
+  "uswds-system-color-blue-vivid-80": {
+    "value": "#112f4e",
+    "filePath": "tokens/uswds.json",
+    "isSource": true,
+    "original": {
+      "value": "#112f4e"
+    },
+    "name": "uswds-system-color-blue-vivid-80",
+    "attributes": {
+      "category": "uswds-system-color-blue-vivid-80"
+    },
+    "path": [
+      "uswds-system-color-blue-vivid-80"
     ]
   },
   "uswds-system-color-blue-cool-60": {
@@ -3668,6 +3888,21 @@
       "uswds-system-color-gray-warm-70"
     ]
   },
+  "uswds-system-color-gray-warm-90": {
+    "value": "#171716",
+    "filePath": "tokens/uswds.json",
+    "isSource": true,
+    "original": {
+      "value": "#171716"
+    },
+    "name": "uswds-system-color-gray-warm-90",
+    "attributes": {
+      "category": "uswds-system-color-gray-warm-90"
+    },
+    "path": [
+      "uswds-system-color-gray-warm-90"
+    ]
+  },
   "uswds-system-color-green-warm-50": {
     "value": "#6f7a41",
     "filePath": "tokens/uswds.json",
@@ -3818,6 +4053,21 @@
       "uswds-system-color-green-cool-vivid-70"
     ]
   },
+  "uswds-system-color-green-cool-vivid-80": {
+    "value": "#19311e",
+    "filePath": "tokens/uswds.json",
+    "isSource": true,
+    "original": {
+      "value": "#19311e"
+    },
+    "name": "uswds-system-color-green-cool-vivid-80",
+    "attributes": {
+      "category": "uswds-system-color-green-cool-vivid-80"
+    },
+    "path": [
+      "uswds-system-color-green-cool-vivid-80"
+    ]
+  },
   "uswds-system-color-orange-40": {
     "value": "#dd7533",
     "filePath": "tokens/uswds.json",
@@ -3908,6 +4158,21 @@
       "uswds-system-color-red-70"
     ]
   },
+  "uswds-system-color-red-vivid-40": {
+    "value": "#fb5a47",
+    "filePath": "tokens/uswds.json",
+    "isSource": true,
+    "original": {
+      "value": "#fb5a47"
+    },
+    "name": "uswds-system-color-red-vivid-40",
+    "attributes": {
+      "category": "uswds-system-color-red-vivid-40"
+    },
+    "path": [
+      "uswds-system-color-red-vivid-40"
+    ]
+  },
   "uswds-system-color-red-vivid-60": {
     "value": "#b50909",
     "filePath": "tokens/uswds.json",
@@ -3936,6 +4201,21 @@
     },
     "path": [
       "uswds-system-color-red-vivid-70"
+    ]
+  },
+  "uswds-system-color-red-vivid-80": {
+    "value": "#5c1111",
+    "filePath": "tokens/uswds.json",
+    "isSource": true,
+    "original": {
+      "value": "#5c1111"
+    },
+    "name": "uswds-system-color-red-vivid-80",
+    "attributes": {
+      "category": "uswds-system-color-red-vivid-80"
+    },
+    "path": [
+      "uswds-system-color-red-vivid-80"
     ]
   },
   "uswds-system-color-red-cool-vivid-10": {
@@ -4161,6 +4441,21 @@
     },
     "path": [
       "uswds-system-color-yellow-vivid-20"
+    ]
+  },
+  "uswds-system-color-yellow-vivid-80": {
+    "value": "#422d19",
+    "filePath": "tokens/uswds.json",
+    "isSource": true,
+    "original": {
+      "value": "#422d19"
+    },
+    "name": "uswds-system-color-yellow-vivid-80",
+    "attributes": {
+      "category": "uswds-system-color-yellow-vivid-80"
+    },
+    "path": [
+      "uswds-system-color-yellow-vivid-80"
     ]
   },
   "uswds-system-color-indigo-cool-60": {

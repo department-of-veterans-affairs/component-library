@@ -125,7 +125,7 @@ export class VACrisisLineModal {
               </a>
             </li>
             <li>
-              <va-icon icon="deaf" class="va-clm__icon" size={3}></va-icon>
+              <va-icon icon="tty" class="va-clm__icon" size={3}></va-icon>
               <p>
                 Call TTY if you have hearing loss{' '}
                 <strong>

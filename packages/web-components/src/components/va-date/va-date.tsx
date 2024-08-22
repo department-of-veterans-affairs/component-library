@@ -8,7 +8,7 @@ import {
   Element,
   Fragment,
 } from '@stencil/core';
-import i18next from 'i18next';
+import { i18next } from '../..';
 
 import {
   months,
@@ -121,12 +121,6 @@ export class VaDate {
     bubbles: true,
   })
   componentLibraryAnalytics: EventEmitter;
-
-  componentDidLoad() {
-    // add this attr so that error state css selectors will target inputs
-    // without causing conflict in memorable-date
-    this.el.setAttribute('uswds', 'false');
-  }
 
   /**
    * Set the value prop as an ISO-8601 date using provided arguments.
@@ -265,9 +259,8 @@ export class VaDate {
               onVaSelect={handleDateChange}
               onBlur={this.handleMonthBlur}
               invalid={this.invalidMonth}
-              class="select-month uswds-false"
+              class="select-month"
               aria-label="Please enter two digits for the month"
-              uswds={false}
             >
               <option value=""></option>
               {months &&
@@ -287,9 +280,8 @@ export class VaDate {
                 onVaSelect={handleDateChange}
                 onBlur={this.handleDayBlur}
                 invalid={this.invalidDay}
-                class="select-day uswds-false"
+                class="select-day"
                 aria-label="Please enter two digits for the day"
-                uswds={false}
               >
                 <option value=""></option>
                 {daysForSelectedMonth &&
@@ -303,7 +295,6 @@ export class VaDate {
               aria-describedby={error ? 'error-message' : undefined}
               name={`${name}Year`}
               maxlength={4}
-              minlength={4}
               pattern="[0-9]{4}"
               // Value must be a string
               // Checking is NaN if so provide empty string
@@ -311,11 +302,10 @@ export class VaDate {
               invalid={this.invalidYear}
               onInput={handleDateChange}
               onBlur={this.handleYearBlur}
-              class="input-year uswds-false"
+              class="input-year"
               inputmode="numeric"
               type="text"
               aria-label="Please enter four digits for the year"
-              uswds={false}
             />
           </div>
         </fieldset>

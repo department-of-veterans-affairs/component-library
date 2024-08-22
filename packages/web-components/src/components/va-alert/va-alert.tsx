@@ -40,12 +40,6 @@ export class VaAlert {
     | 'continue' = 'info';
 
   /**
-   * If `true`, renders the alert with only a background color corresponding
-   * to the status - no left border. (v1 only)
-   */
-  @Prop() backgroundOnly?: boolean = false;
-
-  /**
    * If `true`, doesn't fire the CustomEvent which can be used for analytics tracking.
    */
   @Prop() disableAnalytics?: boolean = false;
@@ -72,12 +66,7 @@ export class VaAlert {
   @Prop() fullWidth?: boolean = false;
 
   /**
-   * Whether or not the component will use USWDS v3 styling.
-   */
-  @Prop() uswds?: boolean = true;
-
-  /**
-   * Displays the slim variation. Available when USWDS is true.
+   * Displays the slim variation.
    */
   @Prop() slim?: boolean = false;
 
@@ -149,7 +138,6 @@ export class VaAlert {
             clickLabel: target.innerText,
             headline: headlineText,
             status: this.status,
-            backgroundOnly: this.backgroundOnly,
             closeable: this.closeable,
           },
         };
@@ -160,15 +148,10 @@ export class VaAlert {
 
   componentDidLoad() {
     this.vaComponentDidLoad.emit();
-    // check if the element has a class named uswds-false added from parent
-    if (this.el.classList.contains('uswds-false')) {
-      // add attribute manually
-      this.el.setAttribute('uswds', 'false');
-    }
   }
 
   render() {
-    const { backgroundOnly, visible, closeable, uswds, slim } = this;
+    const { visible, closeable, slim } = this;
     let status = this.status;
     /* eslint-disable i18next/no-literal-string */
 
@@ -177,84 +160,36 @@ export class VaAlert {
     if (definedStatuses.indexOf(status) === -1) {
       status = 'info';
     }
-    const role = status === 'error' ? 'alert' : null;
-    const ariaLive = status === 'error' ? 'assertive' : null;
     /* eslint-enable i18next/no-literal-string */
 
     if (!visible) return <div aria-live="polite" />;
 
-    if (uswds) {
-      const classes = classnames('usa-alert', `usa-alert--${status}`, {
-        'usa-alert--success': status === 'continue',
-        'usa-alert--slim': slim,
-      });
-      return (
-        <Host>
-          <div
-            role={this.el.getAttribute('data-role') || role}
-            aria-live={ariaLive}
-            class={classes}
-            aria-label={this.el.getAttribute('data-label') || role}
-          >
-            <div
-              class="usa-alert__body"
-              onClick={this.handleAlertBodyClick.bind(this)}
-              role="presentation"
-            >
-              {status === 'continue' && (
-                <va-icon
-                  class="va-alert__lock-icon"
-                  icon="lock"
-                  size={slim ? 3 : 4}
-                ></va-icon>
-              )}
-              {!slim && <slot name="headline"></slot>}
-              <slot></slot>
-            </div>
-          </div>
 
-          {closeable && (
-            <button
-              class="va-alert-close"
-              aria-label={this.closeBtnAriaLabel}
-              onClick={this.closeHandler.bind(this)}
-            >
-              <va-icon icon="cancel" size={4}></va-icon>
-            </button>
-          )}
-        </Host>
-      );
-    }
-
-    const classes = classnames('alert', status, {
-      'bg-only': backgroundOnly,
+    const classes = classnames('usa-alert', `usa-alert--${status}`, {
+      'usa-alert--success': status === 'continue',
+      'usa-alert--slim': slim,
     });
-
-    /* eslint-disable i18next/no-literal-string */
-    const statusIcons = {
-      continue: 'lock',
-      error: 'info',
-      warning: 'warning',
-      info: 'info',
-      success: 'check_circle',
-    };
-    /* eslint-enable i18next/no-literal-string */
 
     return (
       <Host>
         <div
-          role={this.el.getAttribute('data-role') || role}
-          aria-live={ariaLive}
+          role={this.el.getAttribute('data-role')}
           class={classes}
-          aria-label={this.el.getAttribute('data-label') || role}
+          aria-label={this.el.getAttribute('data-label')}
         >
-          <va-icon
-            class="alert__status-icon"
-            icon={statusIcons[status] || 'info'}
-            size={3}
-          ></va-icon>
-          <div class="body" onClick={this.handleAlertBodyClick.bind(this)}>
-            {!backgroundOnly && <slot name="headline"></slot>}
+          <div
+            class="usa-alert__body"
+            onClick={this.handleAlertBodyClick.bind(this)}
+            role="presentation"
+          >
+            {status === 'continue' && (
+              <va-icon
+                class="va-alert__lock-icon"
+                icon="lock"
+                size={slim ? 3 : 4}
+              ></va-icon>
+            )}
+            {!slim && <slot name="headline"></slot>}
             <slot></slot>
           </div>
         </div>

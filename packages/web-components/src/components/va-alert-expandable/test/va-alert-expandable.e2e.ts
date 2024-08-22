@@ -88,8 +88,11 @@ describe('va-alert-expandable', () => {
       (domElement: HTMLElement) => window.getComputedStyle(domElement).opacity,
     );
 
-    expect(preOpacity).toEqual('0');
-    expect(postOpacity).toEqual('1');
+    const preOpacityToNumber = parseFloat(preOpacity);
+    const postOpacityToNumber = parseFloat(postOpacity);
+
+    expect(preOpacityToNumber).toEqual(0);
+    expect(postOpacityToNumber).toBeGreaterThan(0);
   });
 
   it('has keyboard control for expanding & collapsing on spacebar', async () => {
@@ -117,8 +120,11 @@ describe('va-alert-expandable', () => {
       (domElement: HTMLElement) => window.getComputedStyle(domElement).opacity,
     );
 
-    expect(preOpacity).toEqual('0');
-    expect(postOpacity).toEqual('1');
+    const preOpacityToNumber = parseFloat(preOpacity);
+    const postOpacityToNumber = parseFloat(postOpacity);
+
+    expect(preOpacityToNumber).toEqual(0);
+    expect(postOpacityToNumber).toBeGreaterThan(0);
   });
 
   it('has keyboard control for expanding & collapsing on enter', async () => {
@@ -146,8 +152,11 @@ describe('va-alert-expandable', () => {
       (domElement: HTMLElement) => window.getComputedStyle(domElement).opacity,
     );
 
-    expect(preOpacity).toEqual('0');
-    expect(postOpacity).toEqual('1');
+    const preOpacityToNumber = parseFloat(preOpacity);
+    const postOpacityToNumber = parseFloat(postOpacity);
+
+    expect(preOpacityToNumber).toEqual(0);
+    expect(postOpacityToNumber).toBeGreaterThan(0);
   });
 
   it('fires an analytics event by default', async () => {

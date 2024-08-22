@@ -6,7 +6,7 @@ import {
   h,
   Listen,
   Prop,
-  Element
+  Element,
 } from '@stencil/core';
 import classnames from 'classnames';
 
@@ -66,19 +66,18 @@ export class VaButton {
   @Prop({ reflect: true }) secondary?: boolean = false;
 
   /**
-   * If `true`, the button will submit form data when clicked.
+   * Having this attribute present will set the type of this button as 'submit'.
+   * The va-button element must be within a `form` element for this functionality to take place
+   * A value of: `prevent` will trigger the onsubmit callback on the form, but won't submit the form;
+   * `skip` will submit the form but not trigger the onsubmit callback;
+   * All other values will trigger the onsubmit and onclick callbacks, then submit the form; in that order.
    */
-  @Prop() submit?: boolean = false;
+  @Prop() submit?: string;
 
   /**
    * The text displayed on the button. If `continue` or `back` is true, the value of text is ignored.
    */
   @Prop() text?: string;
-
-  /**
-   * Whether or not the component will use USWDS v3 styling.
-   */
-  @Prop({ reflect: true }) uswds?: boolean = true;
 
   /**
    * An optional message that will be read by screen readers when the input is focused.
@@ -94,14 +93,6 @@ export class VaButton {
     eventName: 'component-library-analytics',
   })
   componentLibraryAnalytics: EventEmitter;
-
-  componentDidLoad() {
-    // check if the element has a class named uswds-false added from parent
-    if (this.el.classList.contains('uswds-false')) {
-      // add attribute manually
-      this.el.setAttribute('uswds', 'false');
-    }
-  }
 
   private handleClick = (): void => {
     if (!this.disableAnalytics) {
@@ -124,6 +115,28 @@ export class VaButton {
     return this.text;
   };
 
+  private handleSubmit() {
+    if (this.submit === undefined) {
+      return;
+    }
+    // eslint-disable-next-line i18next/no-literal-string
+    const theForm = this.el.closest('form');
+    if (!theForm) {
+      return;
+    }
+    const submitEvent = new CustomEvent('submit', {
+      bubbles: true,
+      cancelable: true,
+      composed: true,
+    });
+    if (this.submit !== 'skip') {
+      theForm.dispatchEvent(submitEvent);
+    }
+    if (this.submit !== 'prevent') {
+      theForm.submit();
+    }
+  }
+
   /**
    * This workaround allows us to use disabled for styling and to prevent the click event from firing while improving
    * the button's accessibility by allowing it to be focusable and through the use of aria-disabled.
@@ -138,6 +151,7 @@ export class VaButton {
       return;
     }
     this.handleClick();
+    this.handleSubmit();
   }
 
   render() {
@@ -151,85 +165,44 @@ export class VaButton {
       secondary,
       primaryAlternate,
       big,
-      uswds,
       messageAriaDescribedby,
     } = this;
 
-    const ariaDescribedbyIds = `${messageAriaDescribedby ? 'button-description' : ''}`.trim() || null;
+    const ariaDescribedbyIds =
+      `${messageAriaDescribedby ? 'button-description' : ''}`.trim() || null;
 
     const ariaDisabled = disabled ? 'true' : undefined;
     const buttonText = getButtonText();
-    const type = submit ? 'submit' : 'button';
 
-    if (uswds) {
-      const buttonClass = classnames({
-        'usa-button': true,
-        'usa-button--big': big,
-        'usa-button--outline': back || secondary,
-        'va-button-primary--alternate': primaryAlternate,
-      });
-      return (
-        <Host>
-          <button
-            class={buttonClass}
-            aria-disabled={ariaDisabled}
-            aria-label={label}
-            aria-describedby={ariaDescribedbyIds}
-            type={type}
-            part="button"
-          >
-            {back && !_continue && (
-              <va-icon
-                class="va-button--icon margin-right-8px"
-                icon="navigate_far_before"
-              ></va-icon>
-            )}
-            {buttonText}
-            {_continue && !back && (
-              <va-icon
-                class="va-button--icon margin-left-8px"
-                icon="navigate_far_next"
-              ></va-icon>
-            )}
-          </button>
-          {messageAriaDescribedby && (
-            <span id="button-description" class="usa-sr-only">
-              {messageAriaDescribedby}
-            </span>
-          )}
-        </Host>
-      );
-    } else {
-      const buttonClass = classnames({
-        'va-button-primary--alternate': primaryAlternate,
-      });
-      return (
-        <Host>
-          <button
-            class={buttonClass}
-            aria-disabled={ariaDisabled}
-            aria-label={label}
-            type={type}
-            part="button"
-          >
-            {back && !_continue && (
-              <va-icon
-                class="va-button--icon"
-                icon="navigate_far_before"
-                size={2}
-              ></va-icon>
-            )}
-            {buttonText}
-            {_continue && !back && (
-              <va-icon
-                class="va-button--icon"
-                icon="navigate_far_next"
-                size={2}
-              ></va-icon>
-            )}
-          </button>
-        </Host>
-      );
-    }
+    const type = submit !== undefined ? 'submit' : 'button';
+
+    const buttonClass = classnames({
+      'usa-button': true,
+      'usa-button--big': big,
+      'usa-button--outline': back || secondary,
+      'va-button-primary--alternate': primaryAlternate,
+    });
+    
+    return (
+      <Host>
+        <button
+          class={buttonClass}
+          aria-disabled={ariaDisabled}
+          aria-label={label}
+          aria-describedby={ariaDescribedbyIds}
+          type={type}
+          part="button"
+        >
+          {back && !_continue && <va-icon icon="navigate_far_before" />}
+          {buttonText}
+          {_continue && !back && <va-icon icon="navigate_far_next" />}
+        </button>
+        {messageAriaDescribedby && (
+          <span id="button-description" class="usa-sr-only">
+            {messageAriaDescribedby}
+          </span>
+        )}
+      </Host>
+    );
   }
 }

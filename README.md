@@ -41,17 +41,19 @@ This repo follows [semantic versioning](https://semver.org/). Here are some exam
 #### Major
 
 - Component is removed
-- Component API is changed
+- Component API is changed and it causes a breaking change
 
 #### Minor
 
 - New component is added
 - New variant is added for a component
+- Non-breaking or backwards compatible component API change
 
-### Patch
+#### Patch
 
 - Accessibility fix
 - Styling fix
+- Functionality fix
 
 ### Releasing
 
@@ -60,7 +62,7 @@ Releases will occur no less often than at the beginning of each sprint (every ot
 **For Design System Team only:**
 
 1. If you are unsure if a new release should be created, check with the Release Manager and/or the rest of the team first, to make sure it's worth the effort at this time.
-2. Get the version number from [`packages/core/package.json`](https://github.com/department-of-veterans-affairs/component-library/blob/main/packages/core/package.json#L4), ensuring it's up-to-date and new. If the core version hasn't been updated yet, submit a PR to update it prior to performing the release, or things won't work correctly with the automation.
+2. Get the version number from [`packages/core/package.json`](https://github.com/department-of-veterans-affairs/component-library/blob/main/packages/core/package.json#L4), ensuring it's up-to-date and new. If the core, web-components, and/or react-components packages versions haven't been updated yet, submit a PR to update them prior to performing the release, or things won't work correctly with the automation.
 3. From the [repo's homepage](https://github.com/department-of-veterans-affairs/component-library) click on "Releases" in the right-hand sidebar.
 4. Click on the "Draft a new release" button near the top of the page.
 5. Click on the 'Choose a tag' drop-down and type the letter `v` followed by the new "core" version number (should look like `v16.1.0`). The target should remain `main`.

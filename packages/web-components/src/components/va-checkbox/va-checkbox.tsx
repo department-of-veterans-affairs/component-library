@@ -10,7 +10,7 @@ import {
   Fragment,
 } from '@stencil/core';
 import classnames from 'classnames';
-import i18next from 'i18next';
+import { i18next } from '../..';
 import { Build } from '@stencil/core';
 
 if (Build.isTesting) {
@@ -82,22 +82,17 @@ export class VaCheckbox {
    @Prop() hint?: string;
 
   /**
-   * Whether or not the component will display as a tile. Available when uswds is true.
+   * Whether or not the component will display as a tile.
    */
   @Prop() tile?: boolean = false;
 
   /**
-   * Whether or not the component will use USWDS v3 styling.
-   */
-  @Prop({ reflect: true }) uswds?: boolean = true;
-
-  /**
-   * Description of the option displayed below the checkbox label. Available when uswds is true.
+   * Description of the option displayed below the checkbox label.
    */
   @Prop() checkboxDescription?: string;
 
   /**
-   * Whether or not the checkbox option is disabled. Available when uswds is true.
+   * Whether or not the checkbox option is disabled.
    */
   @Prop() disabled?: boolean = false;
 
@@ -169,14 +164,6 @@ export class VaCheckbox {
     i18next.off('languageChanged');
   }
 
-  componentDidLoad() {
-    // check if the element has a class named uswds-false added from parent
-    if (this.el.classList.contains('uswds-false')) {
-      // add attribute manually
-      this.el.setAttribute('uswds', 'false');
-    }
-  }
-
   render() {
     const {
       error,
@@ -186,7 +173,6 @@ export class VaCheckbox {
       checked,
       hint,
       tile,
-      uswds,
       checkboxDescription,
       disabled,
       messageAriaDescribedby,
@@ -195,103 +181,61 @@ export class VaCheckbox {
 
     const hasDescription = description || !!this.el.querySelector('[slot="description"]');
 
-    if (uswds) {
-      const inputClass = classnames({
-        'usa-checkbox__input': true,
-        'usa-checkbox__input--tile': tile,
-      });
-      const descriptionClass = classnames({
-        'usa-legend': true,
-        'usa-label--error': error
-      });
-      const ariaDescribedbyIds = [
-        messageAriaDescribedby ? 'input-message' : '',
-        error ? 'checkbox-error-message' : '',
-        hasDescription ? 'description' : '',
-        // Return null so we don't add the attribute if we have an empty string
-      ].filter(Boolean).join(' ').trim() || null;
-
-      return (
-        <Host>
-          {description ?
-            <legend id="description" class={descriptionClass}>{description}</legend> :
-            <slot name="description" />
-          }
-
-          {hint && <span class="usa-hint">{hint}</span>}
-          <span id="checkbox-error-message" role="alert">
-            {error && (
-              <Fragment>
-                <span class="usa-sr-only">{i18next.t('error')}</span>
-                <span class="usa-error-message">{error}</span>
-              </Fragment>
-            )}
-          </span>
-          <div class="usa-checkbox" part="checkbox">
-            <input
-              class={inputClass}
-              type="checkbox"
-              name={name || null}
-              id="checkbox-element"
-              checked={checked}
-              aria-describedby={ariaDescribedbyIds}
-              aria-invalid={error ? 'true' : 'false'}
-              disabled={disabled}
-              onChange={this.handleChange}
-            />
-            <label htmlFor="checkbox-element" id="option-label" class="usa-checkbox__label" part="label">
-              {label}&nbsp;
-              {required && <span class="usa-label--required">{i18next.t('required')}</span>}
-              {checkboxDescription && <span class="usa-checkbox__label-description" aria-describedby="option-label" part="description">{checkboxDescription}</span>}
-            </label>
-            {messageAriaDescribedby && (
-              <span id='input-message' class="sr-only dd-privacy-hidden">
-                {messageAriaDescribedby}
-              </span>
-            )}
-          </div>
-        </Host>
-      );
-    } else {
-      const ariaDescribedbyIds = [
-        messageAriaDescribedby ? 'input-message' : '',
-        error ? 'checkbox-error-message' : '',
-        hasDescription ? 'description' : '',
+    const inputClass = classnames({
+      'usa-checkbox__input': true,
+      'usa-checkbox__input--tile': tile,
+    });
+    const descriptionClass = classnames({
+      'usa-legend': true,
+      'usa-label--error': error
+    });
+    const ariaDescribedbyIds = [
+      messageAriaDescribedby ? 'input-message' : '',
+      error ? 'checkbox-error-message' : '',
+      hasDescription ? 'description' : '',
       // Return null so we don't add the attribute if we have an empty string
-      ].filter(Boolean).join(' ').trim() || null;
-      return (
-        <Host>
-          <div id="description">
-            {description ? <p>{description}</p> : <slot name="description" />}
-          </div>
-          {hint && <span class="hint-text">{hint}</span>}
-          <span id="checkbox-error-message" class="usa-error-message" role="alert">
-            {error && (
-              <Fragment>
-                <span class="sr-only">{i18next.t('error')}</span> {error}
-              </Fragment>
-            )}
-          </span>
+    ].filter(Boolean).join(' ').trim() || null;
+
+    return (
+      <Host>
+        {description ?
+          <legend id="description" class={descriptionClass}>{description}</legend> :
+          <slot name="description" />
+        }
+
+        {hint && <span class="usa-hint">{hint}</span>}
+        <span id="checkbox-error-message" role="alert">
+          {error && (
+            <Fragment>
+              <span class="usa-sr-only">{i18next.t('error')}</span>
+              <span class="usa-error-message">{error}</span>
+            </Fragment>
+          )}
+        </span>
+        <div class="usa-checkbox" part="checkbox">
           <input
+            class={inputClass}
             type="checkbox"
+            name={name || null}
             id="checkbox-element"
             checked={checked}
             aria-describedby={ariaDescribedbyIds}
             aria-invalid={error ? 'true' : 'false'}
+            disabled={disabled}
             onChange={this.handleChange}
           />
-          <label htmlFor="checkbox-element">
-            <span>
-              {label} {required && <span class="required">{i18next.t('required')}</span>}
-            </span>
+          <label htmlFor="checkbox-element" id="option-label" class="usa-checkbox__label" part="label">
+            {label}&nbsp;
+            {required && <span class="usa-label--required">{i18next.t('required')}</span>}
+            {checkboxDescription && <span class="usa-checkbox__label-description" aria-describedby="option-label" part="description">{checkboxDescription}</span>}
           </label>
           {messageAriaDescribedby && (
-            <span id='input-message' class="sr-only dd-privacy-hidden">
+            <span id='input-message' class="usa-sr-only dd-privacy-hidden">
               {messageAriaDescribedby}
             </span>
           )}
-        </Host>
-      );
-    }
+        </div>
+      </Host>
+    );
   }
 }

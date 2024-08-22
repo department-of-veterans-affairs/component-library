@@ -9,7 +9,7 @@ import classNames from 'classnames';
 
 @Component({
   tag: 'va-link',
-  styleUrl: 'va-link.css',
+  styleUrl: 'va-link.scss',
   shadow: true,
 })
 export class VaLink {
@@ -79,6 +79,26 @@ export class VaLink {
   @Prop() reverse?: boolean = false;
 
   /**
+   * If 'true', will open in a new tab and have icon denoting that. Will also have the text "opens in a new tab" appended to the link text in screen reader only span
+   */
+  @Prop() external?: boolean = false;
+ 
+  /**
+   * Adds an aria-label attribute to the link element.
+   */
+  @Prop() label?: string = null;
+
+  /**
+   * The name of the icon to be displayed in the link.
+   */
+  @Prop() iconName?: string = null;
+
+  /**
+   * The size variant of the icon,
+   * an integer between 3 and 9 inclusive.
+   */
+  @Prop() iconSize?: number = 3;
+  /**
    * The event used to track usage of the component.
    */
   @Event({
@@ -125,17 +145,21 @@ export class VaLink {
       text,
       video,
       reverse,
+      external,
+      iconName,
+      iconSize
     } = this;
 
     const linkClass = classNames({
       'va-link--reverse': reverse,
+      'link--center': iconName || external
     });
 
     // Active link variant
     if (active) {
       return (
         <Host>
-          <a href={href} class={linkClass} onClick={handleClick}>
+          <a href={href} class={linkClass} onClick={handleClick} aria-label={this.label}>
             {text}
             <va-icon class="link-icon--active" icon="chevron_right"></va-icon>
           </a>
@@ -202,10 +226,44 @@ export class VaLink {
       );
     }
 
+    // Icon link Variant
+    if (iconName) {
+      return (
+        <Host>
+          <a
+            href={href}
+            class={linkClass}
+            onClick={handleClick}
+          >
+            <va-icon icon={iconName} size={iconSize} part="icon"></va-icon>
+            {text}
+          </a>
+        </Host>
+      );
+    }
+
+    if (external) {
+      return (
+        <Host>
+          <a
+            href={href}
+            rel='noreferrer'
+            class={linkClass}
+            onClick={handleClick}
+            target='_blank'
+          >
+            {text}
+            <va-icon class="external-link-icon" icon="launch"></va-icon>
+            <span class="usa-sr-only">opens in a new tab</span>
+          </a>
+        </Host>
+      );
+    }
+
     // Default
     return (
       <Host>
-        <a href={href} class={linkClass} onClick={handleClick}>
+        <a href={href} class={linkClass} onClick={handleClick} aria-label={this.label}>
           {text}
         </a>
       </Host>

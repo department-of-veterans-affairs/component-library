@@ -11,7 +11,7 @@ export default {
   parameters: {
     componentSubtitle: 'va-breadcrumbs web component',
     docs: {
-      page: () => <StoryDocs data={breadcrumbsDocs} />,
+      page: () => <StoryDocs storyDefault={Default} data={breadcrumbsDocs} />,
     },
   },
 };
@@ -104,6 +104,35 @@ const WrappingCrumbsTemplate = ({
   );
 };
 
+const MultipleLanguagesTemplate = ({
+  label,
+  'disable-analytics': disableAnalytics,
+}) => {
+  const breadcrumbs = [
+    { label: 'VA.gov home', href: '/#1' },
+    { label: 'Resources', href: '/#2' },
+    {
+      label: 'Asistencia y recursos del VA en español',
+      href: '/#3',
+      lang: 'es',
+    },
+    {
+      label: 'VA Tagalog wika mapagkukunan at tulong',
+      href: '/#4',
+      lang: 'tl',
+    },
+  ];
+  return (
+    <div>
+      <VaBreadcrumbs
+        label={label}
+        disableAnalytics={disableAnalytics}
+        breadcrumbList={breadcrumbs}
+      ></VaBreadcrumbs>
+    </div>
+  );
+};
+
 
 const WithRouterTemplate = ({
   label,
@@ -130,7 +159,7 @@ const WithRouterTemplate = ({
     <div>
       <p>Some of the breadcrumbs in this example have an <code>isRouterLink:true</code> property.
         When the corresponding anchor tag is clicked these links emit a <code>route-change</code> event.
-        This event can be handled in a React component where utilities provided 
+        This event can be handled in a React component where utilities provided
         by React Router can be used to change the page under view, as in the example below:
       </p>
       <pre className="vads-u-font-size--sm vads-u-background-color--gray-lightest vads-u-padding--2">
@@ -192,6 +221,9 @@ RerenderState.args = { ...defaultArgs };
 
 export const WrappingState = WrappingCrumbsTemplate.bind(null);
 WrappingState.args = { ...defaultArgs, wrapping: true };
+
+export const MultipleLanguages = MultipleLanguagesTemplate.bind(null);
+MultipleLanguages.args = { ...defaultArgs };
 
 export const WithRouterLinkSupport = WithRouterTemplate.bind(null);
 WithRouterLinkSupport.args = { ...defaultArgs }

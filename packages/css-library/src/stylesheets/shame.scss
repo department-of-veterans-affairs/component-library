@@ -1,0 +1,195 @@
+// This file is a place where you put all the code you're not proud of,
+// with the intention of A) isolating it and B) fixing it later. The goal
+// is for this file to be empty, but some times you just have to throw that
+// hack in there to get it working.
+
+@use "./formation-overrides/components/_forms.scss" as *;
+
+@use './override-function.scss' as *;
+@use "./mixins" as *;
+@import "./formation-overrides/variables";
+@import "../../dist/tokens/scss/variables.scss";
+
+
+body {
+  // used a lot in vets-website
+  .row {
+    max-width: 62.5em;
+  }
+
+  // We have no container element, so elements that are full width have to redefine the container layout every time
+  // if they want to line up.
+  // unused in content-build
+  // Used in vets-website, used in src/platform/monitoring/DowntimeNotification/components/DowntimeApproaching.jsx 
+  .row-padded {
+    max-width: scale-rem(100rem);
+    padding: scale-rule(0 1rem);
+    margin: 0 auto;
+  }
+}
+
+// unused in content-build
+// used in vets-website, used in src/applications/edu-benefits/0993/containers/FormPage.jsx
+// and src/applications/appeals/testing/components/ContactInformation.jsx
+.form-panel {
+  @include media($medium-screen) {
+    max-width: $usa-form-width;
+  }
+}
+
+// unused in content-build
+// used in vets-website, used in src/platform/forms-system/src/js/containers/FormApp.jsx 
+// and src/applications/simple-forms/mock-alternate-header-21-0845/components/CustomFormApp.jsx
+.progress-box {
+  button {
+    width: 100%;
+  }
+}
+
+.progress-box {
+  border: 1px solid $color-gray-lightest;
+  margin: scale-rule(1.5rem 0);
+  padding: scale-rule(1rem 2rem);
+}
+
+
+// unused in content-build
+// used in vets-website in script/github-actions/daily-product-scan/tests/mocks/applications/app-1/containers/IDPage.jsx,
+// src/applications/enrollment-verification/components/VerifyEnrollments.jsx, src/applications/financial-status-report/components/shared/ButtonGroup.jsx
+// src/platform/forms-system/src/js/components/ProgressButton.jsx
+.button-icon {
+  font-size: scale-rem(1.7rem);
+}
+
+// unused in content-build
+// used in vets-website in src/platform/forms-system/src/js/fields/ArrayField.jsx, which appears to be reused in a number of forms
+.input-section {
+  margin-bottom: 2em;
+
+  .row {
+    margin: 0;
+  }
+}
+
+// unused in content-build
+// used in src/applications/facility-locator/components/SearchControls.jsx in vets-website, can probably be removed if we update <select> to <VaSelect>
+.usa-input-error {
+  select {
+    border: 3px solid $color-secondary-dark;
+  }
+}
+
+// unused in content-build
+// used in vets-website in src/applications/terms-of-use/components/TermsAcceptanceAction.jsx,
+// src/platform/forms-system/src/js/containers/FormApp.jsx, src/platform/forms-system/src/js/review/submit-states/ClientError.jsx,
+// src/platform/forms-system/src/js/review/submit-states/Pending.jsx, src/platform/forms-system/src/js/review/submit-states/Submitted.jsx, 
+// src/platform/forms-system/src/js/review/submit-states/ThrottledError.jsx, src/platform/forms-system/src/js/review/submit-states/ValidationError.jsx
+.hidden {
+  display: none !important;
+}
+
+// inline declarations moved here as a result of CSP rules
+// used in content-build in src/site/includes/google-analytics.liquid
+// unused in vets-website
+.csp-inline-patch-footer {
+  display: none;
+  visibility: hidden;
+}
+
+// used in content-build in src/site/components/react-loader.html
+// unused in vets-website
+.csp-inline-patch-page-react {
+  padding: 2em 0;
+}
+
+
+//============================================
+// Overrides for USWDS shenanigans.
+// See: https://github.com/18F/web-design-standards/issues/1899
+// ===========================================
+
+@include media($medium-screen) {
+  .usa-grid {
+    .usa-width-one-fourth {
+      margin-right: 2.35765%;
+      width: 23.23176%;
+    }
+
+    .usa-width-three-fourths {
+      width: 74.41059%;
+    }
+  }
+}
+
+// USWDS override so that checkboxes aren't offscreen
+// At some point between 0.10 and 1.4, USWDS modified radio/checkbox style
+// so be position: absolute, and left: -999em. This isn't compatible with our
+// e2e test cases, because Nightwatch can't find the elements on screen.
+input[type="checkbox"],
+input[type="radio"] {
+  margin-left: scale-rem(-2rem);
+  opacity: 0;
+  position: absolute;
+  left: auto;
+}
+
+// USWDS uses this:
+// [hidden] { display: none !important; }
+// However, some apps set the property to false and expect the element to be visible.
+// So, we do this shameful override to get around it.
+[hidden="false"] {
+  display: block !important;
+}
+
+// USWDS adds an increased margin for submit buttons, which break out grid display when we have a
+// back button on the left and a submit on the right.
+form {
+  [type="submit"] {
+    @include media($medium-screen) {
+      padding-left: scale-rem(2rem);
+      padding-right: scale-rem(2rem);
+      width: 100%;
+    }
+  }
+}
+
+// .usa-alert shame moved to _m_alert.scss
+
+// used in content-build in /src/site/includes/gibs-down.html
+// unused in vets-website
+#top-of-page-alert-container {
+  width: 100%;
+  background-color: $vads-color-gibill-accent;
+  position: relative;
+
+  &:before {
+    background-color: $color-gold;
+    content: "";
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: scale-rem(1rem);
+  }
+}
+
+// used in content-build in /src/site/includes/gibs-down.html
+// unused in vets-website
+#top-of-page-alert {
+  max-width: 62.5em;
+  margin: 0 auto;
+
+  &.usa-alert::before {
+    content: none;
+  }
+
+  .usa-alert-body {
+    margin: 0 auto;
+    text-align: left;
+
+    .usa-alert-heading {
+      margin: 0 auto;
+      padding: 0;
+    }
+  }
+}

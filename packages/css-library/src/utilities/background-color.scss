@@ -5,7 +5,7 @@
 // Config for background-color utility classes
 $u-bg-color: (
   background-color: (
-    base: "vads-bg",
+    base: "vads-u-background-color-",
     modifiers: null,
     values:
       map-collect(

@@ -1,27 +1,5 @@
-@use 'uswds-core' with (
-  $theme-show-notifications: false,
-  $theme-namespace: (
-    'grid': (
-      namespace: 'vads-grid-',
-      output: true,
-    ),
-    'utility': (
-      namespace: 'u-',
-      output: false,
-    ),
-  ),
-  $theme-utility-breakpoints: (
-    "card": false,
-    "card-lg": false,
-    "mobile": true,
-    "mobile-lg": false,
-    "tablet": true,
-    "tablet-lg": false,
-    "desktop": false,
-    "desktop-lg": true,
-    "widescreen": false
-  ),
-);
+@forward 'uswds-theme';
+
 @use 'uswds-core/src/styles/mixins/utility-builder' as *;
 @use 'uswds-core/src/styles/functions' as *;
 @use '../utilities' as *;
@@ -46,5 +24,142 @@ $utilities-package: map-collect(
   $u-width
 );
 
-// Generate all utility classes
+// Generate all utility classes from USWDS function
 @include render-utilities-in($utilities-package);
+
+// Generate medium screen breakpoint utility classes.
+// If this USWDS PR gets approved/merged, we can remove all the code below:
+// https://github.com/uswds/uswds/pull/5985
+$medium-screen-breakpoint: 768px;
+$breakpoint-class-name: 'medium-screen';
+
+@mixin generate-utilities-from-settings($collection) {
+  @each $property, $property-map in $collection { 
+    $u-base: map-get($property-map, base);
+    $u-values: map-get($property-map, values);
+    $u-property: map-get($property-map, property);
+    $u-modifiers: map-get($property-map, modifiers);
+
+    @if $u-modifiers {
+      @each $modifier, $modifier-value in $u-modifiers {
+        @each $name, $value in $u-values {
+          .#{$breakpoint-class-name}\:#{$u-base}#{$modifier-value}-#{$name} {
+            @if $modifier == 'noModifier' {
+              #{$u-property}: #{$value};
+            } @else {
+              #{$u-property}#{$modifier-value}: #{$value};
+            }
+          }
+        }
+      }
+    }
+
+    @each $name, $value in $u-values {
+      .#{$breakpoint-class-name}\:#{$u-base}-#{$name} {
+        @if type-of($u-property) == 'list' {
+          @each $property in $u-property {
+            #{$property}: #{$value};
+          }
+        } @else { 
+          #{$u-property}: #{$value};
+        }
+      }
+    }
+  }
+}
+
+@media all and (min-width: $medium-screen-breakpoint) {
+  // $u-border
+  @include generate-utilities-from-settings($u-border);
+
+  // $u-display
+  @include generate-utilities-from-settings($u-display);
+
+  // $u-flex-grid
+  @each $property, $property-map in $u-flex-grid { 
+    $u-base: map-get($property-map, base);
+    $u-values: map-get($property-map, values);
+    $u-property: map-get($property-map, property);
+
+    @each $name, $value in $u-values {
+      $extend: map-get($value, extend);
+      $content: map-get($value, content);
+      .#{$breakpoint-class-name}\:#{$u-base}-#{$name} {
+        @each $css-property, $css-value in $extend {
+          #{$css-property}: $css-value;
+        }
+        #{$u-property}: #{$content}; // flex property
+      }
+    }
+  }
+
+  // $u-flexbox
+  @include generate-utilities-from-settings($u-flexbox);
+
+  // $u-font
+  @include generate-utilities-from-settings($u-font);
+
+  // $u-height
+  @include generate-utilities-from-settings($u-height);
+
+  // $u-line-height
+  @include generate-utilities-from-settings($u-line-height);
+
+  // $u-margin
+  @each $property, $property-map in $u-margin { 
+    $u-base: map-get($property-map, base);
+    $u-values: map-get($property-map, values);
+    $u-property: map-get($property-map, property);
+    $u-modifiers: map-get($property-map, modifiers);
+
+    @if $u-modifiers {
+      $modifier-y: map-get($u-modifiers, 'y-');
+      $modifier-x: map-get($u-modifiers, 'x-');
+
+      @each $name, $value in $u-values { 
+        @if $u-modifiers {
+          @each $key, $modifier in $u-modifiers {
+            .#{$breakpoint-class-name}\:#{$u-base}-#{$key}-#{$name} {
+              @if $key == 'y-' or $key == 'x-' {
+                margin-top: #{$value};
+                margin-bottom: #{$value};
+              } @else if $key != 'y-' or $key != 'x-'{
+                $direction: map-get($u-modifiers, $key);
+                margin#{$direction}: #{$value};
+              } @else {
+                margin: #{$value};
+              }
+            }
+          }
+        }
+      }
+    } @else {
+      @each $name, $value in $u-values {
+        .#{$breakpoint-class-name}\:#{$u-base}-#{$name} {
+          #{$u-property}: #{$value};
+        }
+      }
+    }
+  }
+
+  // $u-measure
+  @include generate-utilities-from-settings($u-measure);
+
+  // $u-padding
+  @include generate-utilities-from-settings($u-padding);
+
+  // $u-position
+  @include generate-utilities-from-settings($u-position);
+
+  // $u-text-align
+  @include generate-utilities-from-settings($u-text-align);
+
+  // $u-text-decoration
+  @include generate-utilities-from-settings($u-text-decoration);
+
+  // $u-visibility
+  @include generate-utilities-from-settings($u-visibility);
+
+  // $u-width
+  @include generate-utilities-from-settings($u-width);
+}

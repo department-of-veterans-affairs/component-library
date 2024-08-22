@@ -1,43 +1,203 @@
 @forward 'settings';
 
-@use 'usa-file-input/src/styles/usa-file-input';
 @use 'usa-label/src/styles/usa-label';
 @use 'usa-hint/src/styles/usa-hint';
 @use 'uswds-helpers/src/styles/usa-sr-only';
+@use 'usa-error-message/src/styles/usa-error-message';
 
 @import '../../mixins/uswds-error-border.scss';
 @import '../../mixins/focusable.css';
+@import '../../mixins/headers.css';
 
 [hidden] {
   display: none;
 }
 
-.usa-file-input__input {
-  box-sizing: border-box;
-  font-family: var(--font-source-sans);
-}
-
-:host([error]:not([error=''])) .usa-file-input__target {
-  border-color: var(--vads-color-secondary-dark);
-  border-width: 2px;
-}
-
-/** Original Component Style **/
-@import '../../mixins/accessibility.css';
-@import '../../mixins/form-field-error.css';
-@import '../../mixins/hint-text.css';
-
 :host {
   display: block;
   font-family: var(--font-source-sans);
+  font-size: 16.96px;
+
+  .label-header {
+    color: var(--vads-color-base);
+    font-weight: var(--font-weight-normal);
+  }
+
+  .label-header-tag {
+    margin: 0;
+    display: inline-block;
+  }
+
+  .file-input-wrapper {
+    display: block;
+    max-width: 30rem;
+    width: 100%;
+    position: relative;
+    margin: 8px 0;
+  }
+
+  .file-input {
+    cursor: pointer;
+    height: 100%;
+    width: 100%;
+    max-width: none;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    margin: 0;
+    position: absolute;
+    text-indent: -999em;
+    box-sizing: border-box;
+  }
+
+  .file-input-target {
+    border: 1px dashed var(--uswds-system-color-gray-30);
+    display: block;
+    margin-top: 0.3125rem;
+    position: relative;
+    text-align: center;
+    width: 100%;
+    box-sizing: border-box;
+
+    &.file-input-target-error {
+      border: 2px dashed var(--vads-color-secondary-dark);
+    }
+  }
+
+  .file-input-box {
+    background: var(--vads-color-white);
+    height: 100%;
+    left: 0;
+    pointer-events: none;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: 2;
+  }
+
+  .file-input-instructions {
+    font-size: 1.06rem;
+    padding: 1.25rem 0.625rem;
+    pointer-events: none;
+    position: relative;
+    z-index: 3;
+  }
+
+  .file-input-choose-text {
+    color: var(--vads-color-link);
+    text-decoration: underline;
+    font-weight: var(--font-weight-normal);
+  }
+
+  .file-icon {
+    color: var(--vads-color-primary-alt-darkest);
+  }
+
+  .selected-files-wrapper {
+    background-color: var(--vads-color-primary-lighter);
+    border: 1px solid var(--vads-color-base-light)
+  }
+
+  .selected-files-label {
+    color: var(--vads-color-base);
+    font-weight: var(--font-weight-bold);
+    font-size: 1.06rem;
+    border-bottom: 1px solid var(--vads-color-white);
+    margin-bottom: 8px;
+    padding: 8px;
+  }
+
+  .va-card {
+    margin: 8px;
+  }
+
+  .file-label {
+    color: var(--vads-color-base);
+    font-weight: var(--font-weight-bold);
+    font-size: 1.06rem;
+    padding: 0 8px;
+    display: block;
+    width: 100%;
+    word-wrap: break-word;
+    word-break: break-word;
+    overflow: hidden;
+  }
+
+  #input-error-message {
+    padding: 0 8px;
+    width: 100%;
+  }
+
+  .file-size-label {
+    color: var(--vads-color-base-dark);
+    font-weight: var(--font-weight-normal);
+    font-size: 1.06rem;
+    padding: 0 8px;
+    display: block;
+  }
+
+  .file-info-section {
+    border-bottom: 1px solid var(--vads-color-base-lighter);
+    padding: 0 8px 8px;
+    display: flex;
+    align-items: center;
+  }
+
+  .file-button-section {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+
+    > va-button-icon {
+      font-size: 1.06rem;
+    }
+
+    @media screen and (max-width: $small-screen) {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+
+  .additional-info-slot {
+    padding-bottom: 16px;
+  }
+
+  /* copied from Formation
+  /* TO DO: decide whether to import from CSS-Library or simply rename,
+  /* as this is the only attibute currently needed from utilities
+  */
+  .vads-u-line-height--2{
+    line-height: 1.15;
+  }
+
+  .thumbnail-container {
+    height: 40px;
+    width: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .thumbnail-preview {
+    max-width: 40px;
+    width: auto;
+    max-height: 40px;
+    height: auto;
+  }
+
+  .thumbnail-error {
+    color: $vads-color-error-dark;
+  }
 }
 
-#error-message {
-  margin-bottom: 0.188rem;
-}
+:host(.has-error) {
+  border-left: 0.25rem solid $vads-color-secondary-dark;
+  padding-left: 1rem;
+  position: relative;
 
-va-button {
-  margin-bottom: -0.5rem;
+  @media screen and (min-width: 1008px) {
+    margin-left: -0.9rem;
+  }
 }
 
 .required {

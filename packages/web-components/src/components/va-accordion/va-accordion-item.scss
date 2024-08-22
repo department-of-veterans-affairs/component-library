@@ -4,6 +4,37 @@
 
 @import '../../mixins/focusable.css';
 
+:host {
+  display: block;
+}
+
+:host(:not(:last-child)) {
+  margin-bottom: 0.5rem;
+}
+
+:host(:last-child) {
+  margin-bottom: 0.3125rem;
+}
+
+button {
+  font: inherit;
+  line-height: 1.15;
+}
+
+/* Hiding since element would be duplicated via the Shadow DOM */
+::slotted([slot='headline']) {
+  display: none;
+}
+
+::slotted([slot='icon']),
+::slotted([slot='subheader-icon']){
+  width: .625rem;
+  margin-right: .938rem;
+}
+
+::slotted([slot='subheader-icon']) {
+  margin-top: 0.2rem;
+}
 
 /**
   Custom classes and overrides to add in subheader and icon functionality
@@ -15,6 +46,7 @@
 .va-accordion__header ::slotted([slot=icon]), .va-accordion__subheader ::slotted([slot=subheader-icon]){
   margin-right: 15px;
   width: inherit;
+  vertical-align: text-top;
 }
 
 .va-accordion__subheader {
@@ -40,107 +72,7 @@
   }
 }
 
-/** Original Component Style **/
-
-:host {
-  display: block;
-}
-
-:host(:not(:last-child)) {
-  margin-bottom: 0.5rem;
-}
-
-:host(:last-child) {
-  margin-bottom: 0.3125rem;
-}
-
 :host(:not([open])) #content,
 :host([open='false']) #content {
   display: none;
-}
-
-/* duplicate print media block needed to override above definition */
-@media print {
-  :host(:not([open])) #content,
-  :host([open='false']) #content {
-    display: block;
-  }
-}
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  margin: 0;
-}
-
-button {
-  cursor: pointer;
-  width: 100%;
-  border: 0;
-  text-align: left;
-  font-family: var(--font-source-sans);
-  font-size: 1rem;
-  font-weight: 700;
-  line-height: 1.15;
-  padding: 0.9375rem 3.4375rem 0.9375rem 1.25rem;
-  background-color: var(--vads-color-base-lightest);
-  background-image: url('../../assets/minus.svg');
-  background-position: right 1.25rem center;
-  background-repeat: no-repeat;
-  background-size: .938rem;
-  display: block;
-  /* This color assignment is for IE11 compatibility - the one in */
-  /* the va-accordion's CSS with `:host` doesn't work well */
-  color: var(--vads-color-base-darker);
-}
-
-button:not(.usa-accordion__button):hover {
-  background-color: var(--vads-color-base-lighter);
-  /* This color assignment is for IE11 compatibility - the one in */
-  /* the va-accordion's CSS with `:host` doesn't work well */
-  color: var(--vads-color-base-darker);
-}
-
-#content:not(.usa-accordion__content) {
-  background-color: var(--vads-color-white);
-  overflow: auto;
-  padding: 0.9375rem 1.25rem;
-  border-left: var(--item-border);
-  border-right: var(--item-border);
-  border-bottom: var(--item-border);
-  overflow-wrap: break-word;
-}
-
-button[aria-expanded='false']:not(.usa-accordion__button) {
-  background-image: url('../../assets/plus.svg');
-}
-
-.header-text{
-  display: flex;
-}
-
-p.subheader {
-  font-weight: 400;
-  line-height: 26px;
-  margin: 0;
-  margin-top: 0.156rem;
-  display: flex;
-}
-
-/* Hiding since element would be duplicated via the Shadow DOM */
-::slotted([slot='headline']) {
-  display: none;
-}
-
-::slotted([slot='icon']),
-::slotted([slot='subheader-icon']){
-  width: .625rem;
-  margin-right: .938rem;
-}
-
-::slotted([slot='subheader-icon']) {
-  margin-top: 0.313rem;
 }

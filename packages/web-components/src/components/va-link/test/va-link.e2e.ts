@@ -115,6 +115,55 @@ describe('va-link', () => {
     `);
   });
 
+  it('renders custom icon link', async () => {
+    const page = await newE2EPage();
+    await page.setContent(
+      `<va-link href="https://www.va.gov" text="Veteran's Affairs" icon-name="chevron_right" icon-size="3"/>`,
+    );
+
+    const element = await page.find('va-link');
+    expect(element).toEqualHtml(`
+    <va-link class="hydrated" href="https://www.va.gov" text="Veteran's Affairs" icon-name="chevron_right" icon-size="3">
+      <mock:shadow-root>
+        <a href="https://www.va.gov" class="link--center">
+          <va-icon class="hydrated" part="icon"></va-icon>
+          Veteran's Affairs
+        </a>
+      </mock:shadow-root>
+    </va-link>
+    `);
+  });
+
+  it('renders external link', async () => {
+    const page = await newE2EPage();
+    await page.setContent(
+      `<va-link href="https://www.va.gov" external text="Veteran's Affairs"/>`,
+    );
+
+    const element = await page.find('va-link');
+    expect(element).toEqualHtml(`
+    <va-link class="hydrated" external="" href="https://www.va.gov" text="Veteran's Affairs">
+      <mock:shadow-root>
+        <a href="https://www.va.gov" rel="noreferrer" class="link--center" target="_blank">
+          Veteran's Affairs
+          <va-icon class="external-link-icon hydrated"></va-icon>
+          <span class="usa-sr-only">
+            opens in a new tab
+          </span>
+        </a>
+      </mock:shadow-root>
+    </va-link>
+    `);
+  });
+
+  it('renders a link with a screen reader label', async () => {
+    const page = await newE2EPage();
+    await page.setContent(`<va-link href="https://www.va.gov" text="Veteran's Affairs" label="Example label" />`);
+
+    const label = await page.find('va-link >>> a[aria-label]');
+    expect(label.getAttribute("aria-label")).toBe('Example label');
+  });
+
   it('passes an axe check', async () => {
     const page = await newE2EPage();
     await page.setContent(

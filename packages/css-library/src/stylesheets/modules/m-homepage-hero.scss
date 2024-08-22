@@ -1,0 +1,74 @@
+@import "../formation-overrides/variables";
+@import "../../../dist/tokens/scss/variables.scss";
+@import "../mixins";
+
+@import '../override-function';
+
+.homepage-hero {
+  background: $color-gray-lightest;
+}
+
+.homepage-hero-image {
+  align-items: center;
+  background-size: cover;
+  display: flex;
+  margin: auto;
+  min-height: scale-rem(22.4rem);
+  padding: 1em scale-rem(2.4rem);
+  text-align: center;
+
+  &.usa-grid {
+    max-width: scale-rem(114rem);
+  }
+
+  @include media($medium-screen) {
+    padding: 2em 0;
+    min-height: scale-rem(32rem);
+  }
+
+  @include media($large-screen) {
+    padding-top: 2.5em;
+    padding-bottom: 2.5em;
+  }
+}
+
+.homepage-hero-title {
+  background: $vads-color-white;
+  color: $color-gray-dark;
+  font-weight: bold;
+  font-size: scale-rem(2.5rem);
+  line-height: 1.3;
+  //margin: auto;
+  margin: 3em auto;
+  padding: 0.5em 0.4em;
+  white-space: pre-wrap;
+
+  @include media($medium-screen) {
+    font-size: scale-rem(3.5rem);
+    padding-left: .75em;
+    padding-right: .75em;
+    white-space: normal;
+  }
+
+  @include media($large-screen) {
+    padding-left: .4em;
+    padding-right: .4em;
+  }
+}
+
+
+.va-homepage-benefits {
+  padding-bottom: scale-rem(2rem);
+  // Commenting to remove this for now because there's still a discussion about
+  // whether these links should be one column or two.
+  // Restore if we use two columns. Remove if we use one.
+  //@include media($medium-screen) {
+  //  .va-nav-linkslist {
+  //    @include span-columns(6); // Pulls from Neat
+  //  }
+  //}
+
+  li:first-child{
+    margin-top: scale-rem(1rem);
+  }
+}

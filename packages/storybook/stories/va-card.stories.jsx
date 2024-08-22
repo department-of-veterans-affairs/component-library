@@ -8,9 +8,9 @@ export default {
   title: 'Components/Card',
   id: 'components/va-card',
   parameters: {
-    componentSubtitle: `va-card web component`,
+    componentSubtitle: 'va-card web component',
     docs: {
-      page: () => <StoryDocs data={cardDocs} />,
+      page: () => <StoryDocs storyDefault={Default} data={cardDocs} />,
     },
   },
 };

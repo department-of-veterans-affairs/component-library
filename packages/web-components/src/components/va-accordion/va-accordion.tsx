@@ -11,7 +11,7 @@ import {
   forceUpdate,
 } from '@stencil/core';
 import { getSlottedNodes } from '../../utils/utils';
-import i18next from 'i18next';
+import { i18next } from '../..';
 import { Build } from '@stencil/core';
 import classNames from 'classnames';
 
@@ -63,11 +63,6 @@ export class VaAccordion {
    * True if only a single item can be opened at once
    */
   @Prop() openSingle?: boolean = false;
-
-  /**
-   * Whether or not the component will use USWDS v3 styling.
-   */
-  @Prop() uswds?: boolean = true;
 
   /**
    * If `true`, doesn't fire the CustomEvent which can be used for analytics tracking.
@@ -189,68 +184,42 @@ export class VaAccordion {
   }
 
   render() {
-    const {uswds, openSingle} = this;
-    if (uswds) {
-      const accordionClass = classNames({
-        'usa-accordion': true,
-      });
-      const accordionItemIDs = [...this.el.children]
-        .filter((el) => el.tagName.toLowerCase() === 'va-accordion-item')
-        .map((el) => el.id);
-      return (
-        <Host>
-          <div class={ accordionClass } ref={(accordionContainer) => this.accordionContainer = accordionContainer}>
-            {
-              !openSingle ? (
-                <button
-                  class="va-accordion__button"
-                  ref={el => (this.expandCollapseBtn = el as HTMLButtonElement)}
-                  onClick={() => this.expandCollapseAll(!this.expanded)}
-                  aria-label={
-                    this.expanded
-                      ? i18next.t('collapse-all-aria-label')
-                      : i18next.t('expand-all-aria-label')
-                  }
-                  aria-controls={accordionItemIDs.join(' ')}
-                  aria-expanded={`${this.expanded}`}
-                >
-                  {this.expanded
-                    ? `${i18next.t('collapse-all')} -`
-                    : `${i18next.t('expand-all')} +`}
-                </button>
-              ) : null
-            }
-            <slot></slot>
-          </div>
-        </Host>
-      )
-    } else {
-      const accordionItemIDs = [...this.el.children]
-        .filter((el) => el.tagName.toLowerCase() === 'va-accordion-item')
-        .map((el) => el.id);
-      return (
-        <Host>
-          {!openSingle && (
-            <button
-              class="va-accordion__button"
-              ref={el => (this.expandCollapseBtn = el as HTMLButtonElement)}
-              onClick={() => this.expandCollapseAll(!this.expanded)}
-              aria-label={
-                this.expanded
-                  ? i18next.t('collapse-all-aria-label')
-                  : i18next.t('expand-all-aria-label')
-              }
-              aria-controls={accordionItemIDs.join(' ')}
-              aria-expanded={`${this.expanded}`}
-            >
-              {this.expanded
-                ? `${i18next.t('collapse-all')} -`
-                : `${i18next.t('expand-all')} +`}
-            </button>
-          )}
-          <slot />
-        </Host>
-      );
-    }
+    const { openSingle } = this;
+
+    const accordionClass = classNames({
+      'usa-accordion': true,
+    });
+
+    const accordionItemIDs = [...this.el.children]
+      .filter((el) => el.tagName.toLowerCase() === 'va-accordion-item')
+      .map((el) => el.id);
+    
+    return (
+      <Host>
+        <div class={ accordionClass } ref={(accordionContainer) => this.accordionContainer = accordionContainer}>
+          {
+            !openSingle ? (
+              <button
+                class="va-accordion__button"
+                ref={el => (this.expandCollapseBtn = el as HTMLButtonElement)}
+                onClick={() => this.expandCollapseAll(!this.expanded)}
+                aria-label={
+                  this.expanded
+                    ? i18next.t('collapse-all-aria-label')
+                    : i18next.t('expand-all-aria-label')
+                }
+                aria-controls={accordionItemIDs.join(' ')}
+                aria-expanded={`${this.expanded}`}
+              >
+                {this.expanded
+                  ? `${i18next.t('collapse-all')} -`
+                  : `${i18next.t('expand-all')} +`}
+              </button>
+            ) : null
+          }
+          <slot></slot>
+        </div>
+      </Host>
+    )
   }
 }

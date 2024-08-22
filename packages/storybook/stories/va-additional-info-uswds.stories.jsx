@@ -7,9 +7,9 @@ export default {
   title: 'Components/Additional info USWDS',
   id: 'uswds/va-additional-info',
   parameters: {
-    componentSubtitle: `va-additional-info web component`,
+    componentSubtitle: 'va-additional-info web component',
     docs: {
-      page: () => <StoryDocs data={additionalInfoDocs} />,
+      page: () => <StoryDocs storyDefault={Default} data={additionalInfoDocs} />,
     },
     actions: {
       handles: ['component-library-analytics'],
@@ -36,7 +36,7 @@ const Template = ({
         disable-analytics={disableAnalytics}
         disable-border={disableBorder}
       >
-        <div>Here are some popular pets to consider</div>
+        <p>Here are some popular pets to consider</p>
         <ul>
           <li>Dogs</li>
           <li>Cats</li>

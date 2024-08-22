@@ -1,21 +1,23 @@
 @forward 'settings';
-
 @use 'usa-alert/src/styles/usa-alert';
+
+@import "~@department-of-veterans-affairs/css-library/dist/stylesheets/uswds-typography.css";
 
 :host {
   display: block;
   position: relative;
 }
 
-:host(:not([uswds='false'])) .va-alert-close:hover {
-  color: var(--vads-color-base);
+// when component is used within va-banner
+:host ::slotted([slot='headline']) {
+  font-size: 21.28px; /* 1.33rem */
+  margin-top: 0;
+  margin-bottom: 8px; /* 0.5rem */
+  font-family: var(--font-serif); 
 }
 
-@media screen and (min-width: 1024px) {
-  :host([uswds='false'])[full-width='true'] .va-alert-close,
-  :host([uswds='false'])[full-width=''] .va-alert-close {
-    position: relative;
-  }
+.va-alert-close:hover {
+  color: var(--vads-color-base);
 }
 
 .va-alert-close {
@@ -34,167 +36,33 @@
   top: 0;
 }
 
-.bg-only {
-  border: none;
-}
-
 :host([closeable]:not([closeable='false'])) .usa-alert .usa-alert__body {
   padding-right: 3.563rem;
 }
 
 // Overriding USWDS' default success icon when using the 'continue' status
-:host(:not([uswds="false"])) .usa-alert--continue.usa-alert--success .usa-alert__body::before {
+.usa-alert--continue.usa-alert--success .usa-alert__body::before {
   mask: none;
   background: transparent;
 }
 
-:host(:not([uswds="false"])) .va-alert__lock-icon {
+.va-alert__lock-icon {
   position: absolute;
   top: 12px;
   left: 24px;
 }
 
-:host(:not([uswds="false"])) .usa-alert--continue.usa-alert--success.usa-alert--slim .va-alert__lock-icon {
+.usa-alert--continue.usa-alert--success.usa-alert--slim .va-alert__lock-icon {
   position: absolute;
   top: 6px;
   left: 28px;
 }
 
 @media screen and (max-width: 64em) {
-  :host(:not([uswds="false"])) .va-alert__lock-icon {
+  .va-alert__lock-icon {
     left: 12px;
   }
-  :host(:not([uswds="false"])) .usa-alert--continue.usa-alert--success.usa-alert--slim .va-alert__lock-icon {
+  .usa-alert--continue.usa-alert--success.usa-alert--slim .va-alert__lock-icon {
     left: 12px;
   }
-}
-
-/* Original Component Styles. */
-
-@import '../../mixins/accessibility.css';
-@import '../../mixins/buttons.css';
-
-:host([uswds='false']) {
-  background-color: var(--vads-color-base-lightest);
-}
-
-:host([uswds='false'][background-only='true']),
-:host([uswds='false'][background-only='']) {
-  background-color: unset;
-}
-
-:host([uswds='false'][full-width='true']),
-:host([uswds='false'][full-width='']) {
-  border-top-style: solid;
-  border-top-width: 8px;
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
-}
-
-:host([uswds='false'][status='warning']) {
-  border-color: var(--vads-color-warning);
-}
-
-:host([uswds='false'][status='info']) {
-  border-color: var(--vads-color-primary-alt-dark);
-}
-
-:host([uswds='false'][status='error']) {
-  border-color: var(--vads-color-secondary-dark);
-}
-
-:host([uswds='false'][status='continue']),
-:host([uswds='false'][status='success']) {
-  border-color: var(--vads-color-success-dark);
-}
-
-:host([uswds='false'][full-width='']) div.alert,
-:host([uswds='false'][full-width='true']) div.alert,
-:host([uswds='false'][full-width=''][data-role='region']) div.alert,
-:host([uswds='false'][full-width='true'][data-role='region']) div.alert {
-  border-left: none;
-  max-width: 1000px;
-}
-
-:host([uswds='false']) {
-  ::slotted([slot='headline']) {
-    font-size: 1.25rem !important;
-    line-height: 26px !important;
-    padding: 0 !important;
-    margin: 0 !important;
-  }
-
-  div.alert {
-    display: table;
-    padding: 1rem 1.25rem 1rem 1rem;
-    width: 100%;
-    vertical-align: middle;
-    box-sizing: border-box;
-  }
-
-  div.alert:not(.bg-only) {
-    border-color: inherit;
-    border-left-style: solid;
-    border-left-width: 8px;
-  }
-
-  div.body {
-    padding-left: 0;
-    padding-right: 0;
-    display: table-cell;
-    vertical-align: middle;
-    width: 100%;
-  }
-
-  ::slotted(:not([slot])) {
-    margin-top: 1.25rem;
-  }
-
-  .bg-only ::slotted(*) {
-    margin-top: 0 !important;
-    /* Fix for Safari 15.3 and lower. */
-  }
-
-  .alert__status-icon {
-    color: var(--vads-color-base-darker);
-    margin-right: 8px;
-  }
-
-  .continue .alert__status-icon, .success .alert__status-icon {
-    color: var(--vads-color-success-dark);
-  }
-
-  .error .alert__status-icon {
-    color: var(--vads-color-secondary-dark);
-  }
-
-  div.bg-only {
-    border: none;
-    padding: 1.25rem;
-  }
-
-  .info.bg-only {
-    background-color: var(--vads-color-primary-alt-lightest);
-  }
-
-  .continue.bg-only {
-    background-color: var(--vads-color-base-lightest);
-  }
-
-  .success.bg-only {
-    background-color: var(--vads-color-success-lighter);
-  }
-
-  .warning.bg-only {
-    background-color: var(--vads-color-gold-lightest);
-  }
-
-  .error.bg-only {
-    background-color: var(--vads-color-secondary-lightest);
-  }
-}
-
-:host([uswds='false'][closeable]:not([closeable='false'])) .alert {
-  padding-right: 3.5625rem;
 }

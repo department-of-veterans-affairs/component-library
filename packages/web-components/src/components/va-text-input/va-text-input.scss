@@ -4,6 +4,7 @@
 @use 'uswds-helpers/src/styles/usa-sr-only';
 @use 'usa-label/src/styles/usa-label';
 @use 'usa-input/src/styles/usa-input';
+@use 'usa-input-prefix-suffix/src/styles/usa-input-prefix-suffix';
 @use 'usa-error-message/src/styles/usa-error-message';
 @use 'usa-hint/src/styles/usa-hint';
 @use 'usa-character-count/src/styles/_usa-character-count';
@@ -11,9 +12,8 @@
 @import '../../mixins/uswds-error-border.scss';
 @import '../../mixins/uswds-input-width.scss';
 @import '../../mixins/focusable.css';
-@import '~@department-of-veterans-affairs/css-library/dist/elements.css';
 
-
+@import '../../mixins/headers.css';
 
 :host(:not([uswds='false'])) {
   color: var(--vads-color-base);
@@ -64,49 +64,4 @@ input.usa-input {
   #inputField {
     padding-left: 25px;
   }
-}
-
-
-
-/** Original Component Style **/
-@import '../../mixins/accessibility.css';
-@import '../../mixins/form-field-error.css';
-@import '../../mixins/hint-text.css';
-
-
-:host([uswds='false']) label {
-  display: block;
-  max-width: 28.75rem;
-  margin-top: 1.875rem;
-  font-size: 16px;
-}
-
-span.required {
-  color: var(--vads-color-secondary-dark);
-}
-
-:host([uswds='false']) input {
-  appearance: none;
-  border: 0.063rem solid var(--vads-color-base-dark);
-  border-radius: 0;
-  box-sizing: border-box;
-  color: var(--vads-color-base);
-  display: block;
-  font-family: var(--font-source-sans);
-  font-size: 1rem;
-  height: 2.625rem;
-  line-height: 1.3;
-  margin: 0.2em 0;
-  max-width: 28.75rem;
-  padding: 0.625rem 0.7em;
-  width: 100%;
-}
-
-:host([uswds='false']) input:not([disabled]):focus {
-  outline: 2px solid var(--vads-color-action-focus-on-light);
-  outline-offset: 2px;
-}
-
-:host([success]:not([success='false'])[uswds='false']) input {
-  border: 4px solid var(--vads-color-success-dark);
 }

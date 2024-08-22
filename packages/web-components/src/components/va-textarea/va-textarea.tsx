@@ -11,7 +11,7 @@ import {
   Fragment,
 } from '@stencil/core';
 import classnames from 'classnames';
-import i18next from 'i18next';
+import { i18next } from '../..';
 import { consoleDevError, getCharacterMessage, getHeaderLevel } from '../../utils/utils';
 
 if (Build.isTesting) {
@@ -90,28 +90,34 @@ export class VaTextarea {
   @Prop() enableAnalytics?: boolean = false;
 
   /**
-   * Whether or not the component will use USWDS v3 styling.
+   * Insert a header with defined level inside the label (legend)
    */
-  @Prop() uswds?: boolean = true;
+  @Prop() labelHeaderLevel?: string;
 
   /**
-   * Enabling this will add a heading and description for integrating into the forms pattern. Accepts `single` or `multiple` to indicate if the form is a single input or will have multiple inputs. `uswds` should be true.
+   * An optional message that will be read by screen readers when the header is focused. The label-header-level
+   * prop must be set for this to be active.
+   */
+    @Prop() headerAriaDescribedby?: string;
+
+  /**
+   * Enabling this will add a heading and description for integrating into the forms pattern. Accepts `single` or `multiple` to indicate if the form is a single input or will have multiple inputs.
    */
   @Prop() useFormsPattern?: string;
 
   /**
-   * The heading level for the heading if `useFormsPattern` and `uswds` are true.
+   * The heading level for the heading if `useFormsPattern` is true.
    */
   @Prop() formHeadingLevel?: number = 3;
 
   /**
-   * The content of the heading if `useFormsPattern` and `uswds` are true.
+   * The content of the heading if `useFormsPattern` is true.
    */
   @Prop() formHeading?: string;
 
   /**
    * Whether the component should show a character count message.
-   * Has no effect without uswds and maxlength being set.
+   * Has no effect without maxlength being set.
    */
   @Prop() charcount?: boolean = false;
 
@@ -177,11 +183,11 @@ export class VaTextarea {
       required,
       value,
       hint,
-      uswds,
       charcount,
       messageAriaDescribedby,
       useFormsPattern,
       formHeadingLevel,
+      headerAriaDescribedby,
       formHeading,
     } = this;
 
@@ -194,133 +200,108 @@ export class VaTextarea {
       `${useFormsPattern && formHeading ? 'form-question' : ''} ${ 
         useFormsPattern ? 'form-description' : ''} ${
         useFormsPattern && label ? 'input-label' : ''}`.trim() || null;
+    
+    const HeaderLevel = getHeaderLevel(this.labelHeaderLevel);
+    const headerAriaDescribedbyId = headerAriaDescribedby ? 'header-message' : null;
 
-    if (uswds) {
-      const charCountTooHigh = charcount && (value?.length > maxlength);
-      const labelClass = classnames({
-        'usa-label': true,
-        'usa-label--error': error,
-      });
-      const inputClass = classnames({
-        'usa-textarea': true,
-        'usa-input--error': error,
-      });
-      const messageClass = classnames({
-        'usa-hint': true,
-        'usa-character-count__status': charcount,
-        'usa-character-count__status--invalid': charcount && maxlength && value?.length > maxlength
-      });
-      const isFormsPattern = useFormsPattern === 'single' || useFormsPattern === 'multiple' ? true : false;
-      let formsHeading = null;
-      if (isFormsPattern) {
-        const HeaderLevel = getHeaderLevel(formHeadingLevel);
-        formsHeading = (
-          <Fragment>
-            {formHeading &&
-              <HeaderLevel id="form-question" part="form-header">
-                {formHeading}
-              </HeaderLevel>
-            }
-            <div id="form-description">
-              <slot name="form-description"></slot>
-            </div>
-          </Fragment>
-        )
-      }
-      return (
-        <Host>
-          {formsHeading}
-          <div class="input-wrap">
-            {label && (
-              <label htmlFor="input-type-textarea" id="input-label" class={labelClass} part="label">
-                {label}
-                {required && (
-                  <span class="usa-label--required">
-                    {' '}
-                    {i18next.t('required')}
-                  </span>
-                )}
-                {hint && <span class="usa-hint">{hint}</span>}
-              </label>
-            )}
-            <slot></slot>
-            <span id="input-error-message" role="alert">
-              {error && (
-                <Fragment>
-                  <span class="usa-sr-only">{i18next.t('error')}</span>
-                  <span class="usa-error-message">{error}</span>
-                </Fragment>
-              )}
-            </span>
-            <textarea
-              class={inputClass}
-              aria-describedby={ariaDescribedbyIds}
-              aria-invalid={error || charCountTooHigh ? 'true' : 'false'}
-              aria-labelledby={ariaLabeledByIds}
-              onInput={this.handleInput}
-              onBlur={this.handleBlur}
-              id="input-type-textarea"
-              placeholder={placeholder}
-              name={name}
-              maxLength={charcount ? undefined : maxlength}
-              value={value}
-              part="input-type-textarea"
-            />
-            {!charcount && maxlength && value?.length >= maxlength && (
-                <span class={messageClass} aria-live="polite">
-                {i18next.t('max-chars', { length: maxlength })}
-                </span>
-            )}
-            {charcount && maxlength && (
-              <span id="charcount-message" class={messageClass} aria-live="polite">
-                {getCharacterMessage(value, maxlength)}
-              </span>
-            )}
-            {messageAriaDescribedby && (
-              <span id="input-message" class="sr-only dd-privacy-hidden">
-                {messageAriaDescribedby}
-              </span>
-            )}
+    const charCountTooHigh = charcount && (value?.length > maxlength);
+    const labelClass = classnames({
+      'usa-label': true,
+      'usa-label--error': error,
+    });
+    const inputClass = classnames({
+      'usa-textarea': true,
+      'usa-input--error': error,
+    });
+    const messageClass = classnames({
+      'usa-hint': true,
+      'usa-character-count__status': charcount,
+      'usa-character-count__status--invalid': charcount && maxlength && value?.length > maxlength
+    });
+    const isFormsPattern = useFormsPattern === 'single' || useFormsPattern === 'multiple' ? true : false;
+    let formsHeading = null;
+    if (isFormsPattern) {
+      const HeaderLevel = getHeaderLevel(formHeadingLevel);
+      formsHeading = (
+        <Fragment>
+          {formHeading &&
+            <HeaderLevel id="form-question" part="form-header">
+              {formHeading}
+            </HeaderLevel>
+          }
+          <div id="form-description">
+            <slot name="form-description"></slot>
           </div>
-        </Host>
-      );
-    } else {
-      return (
-        <Host>
-          <label htmlFor="textarea">
-            {label}
-            {required && <span class="required">{i18next.t('required')}</span>}
-            {hint && <span class="hint-text">{hint}</span>}
-          </label>
+        </Fragment>
+      )
+    }
+    return (
+      <Host>
+        {formsHeading}
+        <div class="input-wrap">
+          {label && (
+            <label htmlFor="input-type-textarea" id="input-label" class={labelClass} part="label">
+              {HeaderLevel ? (
+                <HeaderLevel part="header" aria-describedby={headerAriaDescribedbyId}>{label}</HeaderLevel>
+              ) : (
+                label
+              )}&nbsp;
+              {
+                useFormsPattern === 'multiple' && (
+                  <span id="header-message" class="usa-sr-only">
+                    {label}
+                  </span>
+                )
+              }
+              {headerAriaDescribedby && (
+                <span id="header-message" class="usa-sr-only">
+                  {headerAriaDescribedby}
+                </span>
+              )}
+              {required && <span class="usa-label--required">{i18next.t('required')}</span>}
+              {hint && <div class="usa-hint">{hint}</div>}
+            </label>
+          )}
+          <slot></slot>
           <span id="input-error-message" role="alert">
             {error && (
               <Fragment>
-                <span class="sr-only">{i18next.t('error')}</span> {error}
+                <span class="usa-sr-only">{i18next.t('error')}</span>
+                <span class="usa-error-message">{error}</span>
               </Fragment>
             )}
           </span>
           <textarea
+            class={inputClass}
             aria-describedby={ariaDescribedbyIds}
-            aria-invalid={error ? 'true' : 'false'}
+            aria-invalid={error || charCountTooHigh ? 'true' : 'false'}
+            aria-labelledby={ariaLabeledByIds}
             onInput={this.handleInput}
             onBlur={this.handleBlur}
-            id="textarea"
+            id="input-type-textarea"
             placeholder={placeholder}
             name={name}
-            maxLength={maxlength}
+            maxLength={charcount ? undefined : maxlength}
             value={value}
-            part="textarea"
+            part="input-type-textarea"
           />
-          {maxlength && value?.length >= maxlength && (
-            <small>{i18next.t('max-chars', { length: maxlength })}</small>
+          {!charcount && maxlength && value?.length >= maxlength && (
+              <span class={messageClass} aria-live="polite">
+              {i18next.t('max-chars', { length: maxlength })}
+              </span>
+          )}
+          {charcount && maxlength && (
+            <span id="charcount-message" class={messageClass} aria-live="polite">
+              {getCharacterMessage(value, maxlength)}
+            </span>
           )}
           {messageAriaDescribedby && (
-            <span id="input-message" class="sr-only dd-privacy-hidden">
+            <span id="input-message" class="usa-sr-only dd-privacy-hidden">
               {messageAriaDescribedby}
             </span>
           )}
-        </Host>
-      );
-    }
+        </div>
+      </Host>
+    );
   }
 }

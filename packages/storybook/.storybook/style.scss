@@ -1,5 +1,7 @@
 $formation-asset-path: '~@department-of-veterans-affairs/formation/assets';
 
+@import "~@department-of-veterans-affairs/css-library/dist/stylesheets/uswds-typography.css";
+
 @import '@department-of-veterans-affairs/formation/sass/base/_b-mixins.scss';
 @import '@department-of-veterans-affairs/formation/sass/base/_b-variables.scss';
 @import '@department-of-veterans-affairs/formation/sass/base/_b-breakpoints.scss';
@@ -20,6 +22,14 @@ $formation-asset-path: '~@department-of-veterans-affairs/formation/assets';
 
 .sbdocs-wrapper {
   padding: 2.5rem 20px !important;
+}
+
+.sbdocs-wrapper tr p {
+  font-size: 14px;
+}
+
+p.sbdocs-p, p.component-details, .sbdocs-content p {
+  font-size: 1.06rem;
 }
 
 .sbdocs-h1 {
