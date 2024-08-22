@@ -8,7 +8,7 @@ import {
   Event,
   EventEmitter,
 } from '@stencil/core';
-import i18next from 'i18next';
+import { i18next } from '../..';
 import { FileIndex } from "./FileIndex";
 
 /**
@@ -164,7 +164,7 @@ export class VaFileInputMultiple {
       }, 1000);
     }
 
-    this.vaMultipleChange.emit({ files: this.files.map(fileObj => fileObj.file) });
+    this.vaMultipleChange.emit({ files: this.files.map(fileObj => fileObj.file).filter((file =>{ return !!file})) });
     this.files = Array.of(...this.files);
   }
 

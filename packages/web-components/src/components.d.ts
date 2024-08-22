@@ -1153,14 +1153,6 @@ export namespace Components {
     }
     interface VaTable {
         /**
-          * Whether the initial sort state will be descending or not.
-         */
-        "descending"?: boolean;
-        /**
-          * The zero-based index of the column to sort by (Doesn't work in IE11). Optional.
-         */
-        "sortColumn"?: number;
-        /**
           * Convert to a stacked table when screen size is small True by default, must specify if false if this is unwanted
          */
         "stacked"?: boolean;
@@ -1172,25 +1164,13 @@ export namespace Components {
           * If uswds is true, the type of table
          */
         "tableType"?: 'borderless';
-        /**
-          * Whether or not the component will use USWDS v3 styling.
-         */
-        "uswds"?: boolean;
     }
     interface VaTableInner {
         /**
-          * If uswds is true, the number of columns in the table
+          * The number of columns in the table
          */
         "cols"?: number;
-        /**
-          * Whether the initial sort state will be descending or not.
-         */
-        "descending"?: boolean;
         "rows"?: number;
-        /**
-          * The zero-based index of the column to sort by (Doesn't work in IE11). Optional.
-         */
-        "sortColumn"?: number;
         /**
           * If true convert to a stacked table when screen size is small
          */
@@ -1200,17 +1180,9 @@ export namespace Components {
          */
         "tableTitle": string;
         /**
-          * If uswds is true, the type of table to be used
+          * The type of table to be used
          */
         "tableType"?: 'borderless';
-        /**
-          * Whether or not the component will use USWDS v3 styling.
-         */
-        "uswds"?: boolean;
-        /**
-          * A live reference to the va-table-rows in the table which are hard to access from this component
-         */
-        "vaTableRowRefs"?: any;
     }
     interface VaTableRow {
     }
@@ -3327,14 +3299,6 @@ declare namespace LocalJSX {
     }
     interface VaTable {
         /**
-          * Whether the initial sort state will be descending or not.
-         */
-        "descending"?: boolean;
-        /**
-          * The zero-based index of the column to sort by (Doesn't work in IE11). Optional.
-         */
-        "sortColumn"?: number;
-        /**
           * Convert to a stacked table when screen size is small True by default, must specify if false if this is unwanted
          */
         "stacked"?: boolean;
@@ -3346,25 +3310,13 @@ declare namespace LocalJSX {
           * If uswds is true, the type of table
          */
         "tableType"?: 'borderless';
-        /**
-          * Whether or not the component will use USWDS v3 styling.
-         */
-        "uswds"?: boolean;
     }
     interface VaTableInner {
         /**
-          * If uswds is true, the number of columns in the table
+          * The number of columns in the table
          */
         "cols"?: number;
-        /**
-          * Whether the initial sort state will be descending or not.
-         */
-        "descending"?: boolean;
         "rows"?: number;
-        /**
-          * The zero-based index of the column to sort by (Doesn't work in IE11). Optional.
-         */
-        "sortColumn"?: number;
         /**
           * If true convert to a stacked table when screen size is small
          */
@@ -3374,17 +3326,9 @@ declare namespace LocalJSX {
          */
         "tableTitle"?: string;
         /**
-          * If uswds is true, the type of table to be used
+          * The type of table to be used
          */
         "tableType"?: 'borderless';
-        /**
-          * Whether or not the component will use USWDS v3 styling.
-         */
-        "uswds"?: boolean;
-        /**
-          * A live reference to the va-table-rows in the table which are hard to access from this component
-         */
-        "vaTableRowRefs"?: any;
     }
     interface VaTableRow {
     }
