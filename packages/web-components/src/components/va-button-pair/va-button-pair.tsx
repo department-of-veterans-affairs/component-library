@@ -130,6 +130,7 @@ export class VaButtonPair {
   };
 
 
+  // get text for the left button; custom text takes precedence
   private getLeftButtonText = () => {
     let text: string;
     if (this.leftButtonText) {
@@ -141,6 +142,7 @@ export class VaButtonPair {
   }
 
 
+  // get text for the right button; custom text takes precedence
   private getRightButtonText = () => {
     let text: string;
     if (this.rightButtonText) {
