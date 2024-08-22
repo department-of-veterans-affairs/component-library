@@ -55,6 +55,18 @@ export class VaButtonPair {
   @Prop() update?: boolean = false;
 
   /**
+   * Custom text that will be applied to the left va-button inside the component.
+   * If set will override text controlled by the 'update' prop.
+   */
+  @Prop() leftButtonText?: string;
+
+  /**
+   * Custom text that will be applied to the right va-button inside the component.
+   * If set will override text controlled by the 'update' prop,
+   */
+  @Prop() rightButtonText?: string
+
+  /**
    * Fires when the primary button is clicked.
    */
   @Event({
@@ -117,6 +129,28 @@ export class VaButtonPair {
     this.secondaryClick.emit(e);
   };
 
+
+  private getLeftButtonText = () => {
+    let text: string;
+    if (this.leftButtonText) {
+      text = this.leftButtonText;
+    } else {
+      text = this.update ? 'Update' : 'Yes';
+    }
+    return text;
+  }
+
+
+  private getRightButtonText = () => {
+    let text: string;
+    if (this.rightButtonText) {
+      text = this.rightButtonText;
+    } else {
+      text = this.update ? 'Cancel' : 'No';
+    }
+    return text;
+  }
+
   render() {
     const {
       continue: _continue,
@@ -126,7 +160,6 @@ export class VaButtonPair {
       primaryLabel,
       secondaryLabel,
       submit,
-      update,
     } = this;
 
     if (_continue) {
@@ -155,31 +188,29 @@ export class VaButtonPair {
       );
     }
 
-    if (update || !_continue) {
-      return (
-        <Host>
-          <ul class="usa-button-group">
-            <li class="usa-button-group__item">
-              <va-button
-                disable-analytics={disableAnalytics}
-                label={primaryLabel}
-                onClick={handlePrimaryClick}
-                text={update ? 'Update' : 'Yes'}
-                submit={submit}
-              />
-            </li>
-            <li class="usa-button-group__item">
-              <va-button
-                disable-analytics={disableAnalytics}
-                label={secondaryLabel}
-                onClick={handleSecondaryClick}
-                secondary
-                text={update ? 'Cancel' : 'No'}
-              />
-            </li>
-          </ul>
-        </Host>
-      );
-    }
+    return (
+      <Host>
+        <ul class="usa-button-group">
+          <li class="usa-button-group__item">
+            <va-button
+              disable-analytics={disableAnalytics}
+              label={primaryLabel}
+              onClick={handlePrimaryClick}
+              text={this.getLeftButtonText()}
+              submit={submit}
+            />
+          </li>
+          <li class="usa-button-group__item">
+            <va-button
+              disable-analytics={disableAnalytics}
+              label={secondaryLabel}
+              onClick={handleSecondaryClick}
+              secondary
+              text={this.getRightButtonText()}
+            />
+          </li>
+        </ul>
+      </Host>
+    );
   }
 }

@@ -229,10 +229,12 @@ export namespace Components {
           * If `true`, the component-library-analytics event is disabled.
          */
         "disableAnalytics"?: boolean;
+        "leftButtonText"?: string;
         /**
           * Applies to the primary button aria-label.
          */
         "primaryLabel"?: string;
+        "rightButtonText"?: string;
         /**
           * Applies to the secondary button aria-label.
          */
@@ -2187,6 +2189,7 @@ declare namespace LocalJSX {
           * If `true`, the component-library-analytics event is disabled.
          */
         "disableAnalytics"?: boolean;
+        "leftButtonText"?: string;
         /**
           * The event used to track usage of the component.
          */
@@ -2203,6 +2206,7 @@ declare namespace LocalJSX {
           * Applies to the primary button aria-label.
          */
         "primaryLabel"?: string;
+        "rightButtonText"?: string;
         /**
           * Applies to the secondary button aria-label.
          */
