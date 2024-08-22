@@ -18,7 +18,7 @@ import {
 } from '../../utils/date-utils';
 import { getHeaderLevel } from '../../utils/utils';
 
-import { i18next } from '../..';
+import i18next from 'i18next';
 import { Build } from '@stencil/core';
 import classnames from 'classnames';
 
