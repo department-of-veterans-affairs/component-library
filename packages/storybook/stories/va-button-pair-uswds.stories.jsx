@@ -25,6 +25,8 @@ const defaultArgs = {
   'secondary-label': undefined,
   'submit': undefined,
   'update': undefined,
+  'left-button-text': undefined,
+  'right-button-text': undefined
 };
 
 const Template = ({
@@ -34,6 +36,8 @@ const Template = ({
   'secondary-label': secondaryLabel,
   submit,
   update,
+  'left-button-text': lbText,
+  'right-button-text': rbText
 }) => {
   return (
     <div style={{ paddingLeft: '8px' }}>
@@ -46,6 +50,8 @@ const Template = ({
         onPrimaryClick={e => console.log(e)}
         onSecondaryClick={e => console.log(e)}
         update={update}
+        leftButtonText={lbText}
+        rightButtonText={rbText}
       />
     </div>
   );
@@ -68,3 +74,10 @@ Continue.args = {
   ...defaultArgs,
   continue: true,
 };
+
+export const CustomButtonText = Template.bind(null);
+CustomButtonText.args = {
+  ...defaultArgs,
+  'left-button-text': 'Start',
+  'right-button-text': 'Stop'
+}
