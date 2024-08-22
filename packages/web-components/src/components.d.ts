@@ -1404,14 +1404,6 @@ export namespace Components {
     }
     interface VaTable {
         /**
-          * Whether the initial sort state will be descending or not.
-         */
-        "descending"?: boolean;
-        /**
-          * The zero-based index of the column to sort by (Doesn't work in IE11). Optional.
-         */
-        "sortColumn"?: number;
-        /**
           * Convert to a stacked table when screen size is small True by default, must specify if false if this is unwanted
          */
         "stacked"?: boolean;
@@ -1423,10 +1415,6 @@ export namespace Components {
           * If uswds is true, the type of table
          */
         "tableType"?: 'borderless';
-        /**
-          * Whether or not the component will use USWDS v3 styling.
-         */
-        "uswds"?: boolean;
     }
     /**
      * @componentName Table
@@ -1435,18 +1423,10 @@ export namespace Components {
      */
     interface VaTableInner {
         /**
-          * If uswds is true, the number of columns in the table
+          * The number of columns in the table
          */
         "cols"?: number;
-        /**
-          * Whether the initial sort state will be descending or not.
-         */
-        "descending"?: boolean;
         "rows"?: number;
-        /**
-          * The zero-based index of the column to sort by (Doesn't work in IE11). Optional.
-         */
-        "sortColumn"?: number;
         /**
           * If true convert to a stacked table when screen size is small
          */
@@ -1456,17 +1436,9 @@ export namespace Components {
          */
         "tableTitle": string;
         /**
-          * If uswds is true, the type of table to be used
+          * The type of table to be used
          */
         "tableType"?: 'borderless';
-        /**
-          * Whether or not the component will use USWDS v3 styling.
-         */
-        "uswds"?: boolean;
-        /**
-          * A live reference to the va-table-rows in the table which are hard to access from this component
-         */
-        "vaTableRowRefs"?: any;
     }
     interface VaTableRow {
     }
@@ -1619,6 +1591,10 @@ export namespace Components {
           * Set the input to required and render the (Required) text.
          */
         "required"?: boolean;
+        /**
+          * When `false`, hides the error message from view, but not from the screen reader. Should only be used if error is being displayed elsewhere. Must use kebab-case on this attribute for it to work properly.
+         */
+        "showInputError"?: boolean;
         /**
           * The step attribute is a number, or the string 'any', that specifies the granularity of the value. For example: `<va-text-input type="number" step=".1"/>` enables float/decimal values to be valid and increment by one-tenth. <br/> Defaults to 1 for every field type except for time and datetime-local which default to 60 (seconds). View more documentation on [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/step)
          */
@@ -4144,14 +4120,6 @@ declare namespace LocalJSX {
     }
     interface VaTable {
         /**
-          * Whether the initial sort state will be descending or not.
-         */
-        "descending"?: boolean;
-        /**
-          * The zero-based index of the column to sort by (Doesn't work in IE11). Optional.
-         */
-        "sortColumn"?: number;
-        /**
           * Convert to a stacked table when screen size is small True by default, must specify if false if this is unwanted
          */
         "stacked"?: boolean;
@@ -4163,10 +4131,6 @@ declare namespace LocalJSX {
           * If uswds is true, the type of table
          */
         "tableType"?: 'borderless';
-        /**
-          * Whether or not the component will use USWDS v3 styling.
-         */
-        "uswds"?: boolean;
     }
     /**
      * @componentName Table
@@ -4175,18 +4139,10 @@ declare namespace LocalJSX {
      */
     interface VaTableInner {
         /**
-          * If uswds is true, the number of columns in the table
+          * The number of columns in the table
          */
         "cols"?: number;
-        /**
-          * Whether the initial sort state will be descending or not.
-         */
-        "descending"?: boolean;
         "rows"?: number;
-        /**
-          * The zero-based index of the column to sort by (Doesn't work in IE11). Optional.
-         */
-        "sortColumn"?: number;
         /**
           * If true convert to a stacked table when screen size is small
          */
@@ -4196,17 +4152,9 @@ declare namespace LocalJSX {
          */
         "tableTitle"?: string;
         /**
-          * If uswds is true, the type of table to be used
+          * The type of table to be used
          */
         "tableType"?: 'borderless';
-        /**
-          * Whether or not the component will use USWDS v3 styling.
-         */
-        "uswds"?: boolean;
-        /**
-          * A live reference to the va-table-rows in the table which are hard to access from this component
-         */
-        "vaTableRowRefs"?: any;
     }
     interface VaTableRow {
     }
@@ -4367,6 +4315,10 @@ declare namespace LocalJSX {
           * Set the input to required and render the (Required) text.
          */
         "required"?: boolean;
+        /**
+          * When `false`, hides the error message from view, but not from the screen reader. Should only be used if error is being displayed elsewhere. Must use kebab-case on this attribute for it to work properly.
+         */
+        "showInputError"?: boolean;
         /**
           * The step attribute is a number, or the string 'any', that specifies the granularity of the value. For example: `<va-text-input type="number" step=".1"/>` enables float/decimal values to be valid and increment by one-tenth. <br/> Defaults to 1 for every field type except for time and datetime-local which default to 60 (seconds). View more documentation on [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/step)
          */
