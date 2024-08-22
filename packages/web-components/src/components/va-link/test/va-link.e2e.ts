@@ -148,10 +148,12 @@ describe('va-link', () => {
     expect(element).toEqualHtml(`
     <va-link class="hydrated" href="https://www.va.gov" text="Veteran's Affairs" back>
       <mock:shadow-root>
-        <a href="https://www.va.gov">
+        <div class="link-container">
           <va-icon class="hydrated link-icon--back link-icon--left"></va-icon>
-          Veteran's Affairs
-        </a>
+          <a href="https://www.va.gov">
+            Veteran's Affairs
+          </a>
+        </div>
       </mock:shadow-root>
     </va-link>
     `);
