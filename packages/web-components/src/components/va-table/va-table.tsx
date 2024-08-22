@@ -18,13 +18,8 @@ export class VaTable {
   /**
   * This is a wrapper component whose job is to marshal the cells in slotted va-table-rows 
   * through DOM manipulation for projection into the slots of the va-table-inner component for rendering
-  */ 
+  */
   @Element() el: HTMLElement;
-
-  /**
-   * Whether or not the component will use USWDS v3 styling.
-   */
-  @Prop() uswds?: boolean = false;
   
   /**
    * The title of the table
@@ -41,26 +36,6 @@ export class VaTable {
    * True by default, must specify if false if this is unwanted
    */
   @Prop() stacked?: boolean = true;
-  
-  
-  /// DELETE below props once V1 table removed ///
-
-   /**
-   * The zero-based index of the column to sort by (Doesn't work in IE11). Optional.
-   */
-  @Prop() sortColumn?: number;
-
-  /**
-   * Whether the initial sort state will be descending or not.
-   */
-  @Prop() descending?: boolean = false;
-  
-  /**
-   * The next direction to sort the rows
-   */
-  @State() sortAscending: boolean = !this.descending;
-
-  /// END props to delete ///
   
   // The number of va-table-rows
   @State() rows: number;
@@ -139,7 +114,6 @@ export class VaTable {
     // add attributes
     vaTable.setAttribute('rows', `${this.rows}`);
     vaTable.setAttribute('cols', `${this.cols}`);
-    vaTable.setAttribute('uswds', this.uswds ? "true" : "false");
     vaTable.setAttribute('stacked', this.stacked ? "true" : "false");
     
     if (this.tableTitle) {
@@ -195,35 +169,17 @@ export class VaTable {
   }
 
   componentDidLoad() {
-    if (this.uswds) {
-      // add a va-table-inner instance to the DOM
-      this.addVaTableInner();
-      // watch for changes to content
-      this.watchForDataChanges();
-    }
+    // add a va-table-inner instance to the DOM
+    this.addVaTableInner();
+    // watch for changes to content
+    this.watchForDataChanges();
   }
 
   render() {
-    if (this.uswds) {
-      return (
-        <Host>
-          <slot></slot>
-        </Host>
-      )
-    } else {
-      return (  
-        <va-table-inner
-          uswds={this.uswds}
-          table-title={this.tableTitle}
-          sort-column={this.sortColumn}
-          descending={this.descending}
-          vaTableRowRefs={this.el.children}
-        >
-          <slot name="headers"></slot>
-          <slot></slot>
-        </va-table-inner>
-      ) 
-    }
-      
+    return (
+      <Host>
+        <slot></slot>
+      </Host>
+    )
   }
 }
