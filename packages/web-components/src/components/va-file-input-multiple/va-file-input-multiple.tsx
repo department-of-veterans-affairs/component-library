@@ -8,7 +8,7 @@ import {
   Event,
   EventEmitter,
 } from '@stencil/core';
-import { i18next } from '../..';
+import i18next from 'i18next';
 import { FileIndex } from "./FileIndex";
 
 /**

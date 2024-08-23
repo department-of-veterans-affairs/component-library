@@ -7,7 +7,7 @@ import {
   h,
   Prop
 } from '@stencil/core';
-import { i18next } from '../..';
+import i18next from 'i18next';
 import { Build } from '@stencil/core';
 import { consoleDevError } from '../../utils/utils';
 

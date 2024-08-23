@@ -12,7 +12,7 @@ import {
   Fragment,
 } from '@stencil/core';
 import classnames from 'classnames';
-import { i18next } from '../..';
+import i18next from 'i18next';
 import { getSlottedNodes } from '../../utils/utils';
 
 /**
