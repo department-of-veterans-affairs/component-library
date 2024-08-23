@@ -11,7 +11,7 @@ import {
   getAssetPath,
 } from '@stencil/core';
 import classnames from 'classnames';
-import { i18next } from '../..';
+import i18next from 'i18next';
 import { Build } from '@stencil/core';
 
 import { makeArray } from '../../utils/utils';
