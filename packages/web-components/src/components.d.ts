@@ -615,6 +615,10 @@ export namespace Components {
          */
         "active"?: boolean;
         /**
+          * If 'true', renders a "back arrow" in front of the link text
+         */
+        "back"?: boolean;
+        /**
           * If `true`, a calendar icon will be displayed before the anchor text.
          */
         "calendar"?: boolean;
@@ -3194,6 +3198,10 @@ declare namespace LocalJSX {
           * If `true`, the anchor text will be bolded and include a right arrow icon.
          */
         "active"?: boolean;
+        /**
+          * If 'true', renders a "back arrow" in front of the link text
+         */
+        "back"?: boolean;
         /**
           * If `true`, a calendar icon will be displayed before the anchor text.
          */
