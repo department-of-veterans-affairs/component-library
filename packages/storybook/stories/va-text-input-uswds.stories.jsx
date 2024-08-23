@@ -73,8 +73,7 @@ const defaultArgs = {
   'input-prefix': undefined,
   'input-icon-prefix': undefined,
   'input-suffix': undefined,
-  'input-icon-suffix': undefined,
-  'show-input-error': true,
+  'input-icon-suffix': undefined
 };
 
 const Template = ({
@@ -100,8 +99,7 @@ const Template = ({
   'input-prefix': inputPrefix,
   'input-icon-prefix': inputIconPrefix,
   'input-suffix': inputSuffix,
-  'input-icon-suffix': inputIconSuffix,
-  'show-input-error': showInputError,
+  'input-icon-suffix': inputIconSuffix
 }) => {
   return (
     <va-text-input
@@ -130,7 +128,6 @@ const Template = ({
       input-icon-prefix={inputIconPrefix}
       input-suffix={inputSuffix}
       input-icon-suffix={inputIconSuffix}
-      show-input-error={showInputError}
     />
   );
 };
@@ -487,14 +484,6 @@ export const Widths = WidthsTemplate.bind(null);
 Widths.args = {
   ...defaultArgs,
 };
-
-export const hideInputError = Template.bind(null);
-hideInputError.args = {
-  ...defaultArgs,
-  'show-input-error': false,
-  'error': 'This is an error message',
-};
-
 
 export const FormsPatternSingle = FormsPatternSingleTemplate.bind(null);
 FormsPatternSingle.args = {

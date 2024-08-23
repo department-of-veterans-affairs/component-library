@@ -8,7 +8,7 @@ import {
   Element,
   Fragment,
 } from '@stencil/core';
-import i18next from 'i18next';
+import { i18next } from '../..';
 
 import {
   months,
@@ -302,7 +302,6 @@ export class VaDate {
               invalid={this.invalidYear}
               onInput={handleDateChange}
               onBlur={this.handleYearBlur}
-              show-input-error="false"
               class="input-year"
               inputmode="numeric"
               type="text"

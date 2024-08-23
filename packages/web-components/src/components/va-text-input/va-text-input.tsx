@@ -12,7 +12,7 @@ import {
   Fragment,
 } from '@stencil/core';
 import classnames from 'classnames';
-import i18next from 'i18next';
+import { i18next } from '../..';
 import { consoleDevError, getCharacterMessage, getHeaderLevel } from '../../utils/utils';
 
 if (Build.isTesting) {
@@ -60,12 +60,6 @@ export class VaTextInput {
    * Whether or not to add usa-input--error as class if error message is outside of component
    */
   @Prop() reflectInputError?: boolean = false;
-
-  /**
-   * When `false`, hides the error message from view, but not from the screen reader. Should only be used if error is being displayed elsewhere. Must use kebab-case on this attribute for it to work properly.
-   */
-  // Dev note: When camelCase is used instead of kebab-case it doesn't reflect in the DOM and one of the CSS selectors won't be applied. Maybe worth revisiting to see if this is still the case after a stencil upgrade.
-  @Prop({ reflect: true }) showInputError?: boolean = true;
 
   /**
    * Whether or not `aria-invalid` will be set on the inner input. Useful when
@@ -168,11 +162,11 @@ export class VaTextInput {
    */
   @Prop() formHeading?: string;
 
-  /**
+    /**
    * Whether the component should show a character count message.
    * Has no effect without maxlength being set.
    */
-  @Prop() charcount?: boolean = false;
+    @Prop() charcount?: boolean = false;
 
    /**
    * Whether this component will be used to accept a currency value.
@@ -355,7 +349,6 @@ export class VaTextInput {
       label,
       error,
       reflectInputError,
-      showInputError,
       invalid,
       required,
       value,
@@ -379,6 +372,7 @@ export class VaTextInput {
       inputSuffix,
       inputIconSuffix
     } = this;
+
     const type = this.getInputType();
     const maxlength = this.getMaxlength();
     const inputmode = this.getInputmode();
@@ -430,10 +424,6 @@ export class VaTextInput {
       'usa-character-count__status--invalid': maxlength && value?.length > maxlength
     });
 
-    const errorClass = classnames({
-      'usa-sr-only': !showInputError,
-    });
-
     const isFormsPattern = useFormsPattern === 'single' || useFormsPattern === 'multiple' ? true : false;
     let formsHeading = null;
     if (isFormsPattern) {
@@ -474,7 +464,7 @@ export class VaTextInput {
             </label>
           )}
           <slot></slot>
-          <span id="input-error-message" role="alert" class={errorClass}>
+          <span id="input-error-message" role="alert">
             {error && (
               <Fragment>
                 <span class="usa-sr-only">{i18next.t('error')}</span>

@@ -11,7 +11,7 @@ import {
   forceUpdate,
 } from '@stencil/core';
 import { getSlottedNodes } from '../../utils/utils';
-import i18next from 'i18next';
+import { i18next } from '../..';
 import { Build } from '@stencil/core';
 import classNames from 'classnames';
 

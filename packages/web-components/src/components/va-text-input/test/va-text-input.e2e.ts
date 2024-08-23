@@ -9,7 +9,7 @@ describe('va-text-input', () => {
     const element = await page.find('va-text-input');
 
     expect(element).toEqualHtml(`
-      <va-text-input class="hydrated" label="Hello, world" show-input-error="">
+      <va-text-input class="hydrated" label="Hello, world">
         <mock:shadow-root>
         <div class="input-wrap">
           <label for="inputField" class="usa-label" id="input-label" part="label">
@@ -36,19 +36,6 @@ describe('va-text-input', () => {
     expect(error.innerText).toContain('This is a mistake');
     expect(input.getAttribute('aria-invalid')).toEqual('true');
     expect(input.getAttribute('aria-describedby')).toBe('input-error-message');
-    const errorMesage = await page.find('va-text-input >>> #input-error-message');
-    // verify showInputError isn't set to false
-    expect(errorMesage).not.toHaveClass('usa-sr-only');
-  });
-
-  it('renders an with a hidden error message when showInputError is false', async () => {
-    const page = await newE2EPage();
-    await page.setContent('<va-text-input label="Hello, world" error="This is a mistake" show-input-error="false"/>');
-
-    // Render the error message text
-    const errorMesage = await page.find('va-text-input >>> #input-error-message');
-    expect(errorMesage).toHaveClass('usa-sr-only');
-    
   });
 
   it('sets aria-invalid based on invalid prop', async () => {

@@ -132,35 +132,6 @@ describe('va-link', () => {
       </mock:shadow-root>
     </va-link>
     `);
-
-    const iconEl = await page.find('va-link >>> va-icon');
-    const iconName = await iconEl.getProperty('icon');
-    expect(iconName).toBe('chevron_right');
-  });
-
-  it('renders back link', async () => {
-    const page = await newE2EPage();
-    await page.setContent(
-      `<va-link href="https://www.va.gov" text="Veteran's Affairs" back/>`,
-    );
-
-    const element = await page.find('va-link');
-    expect(element).toEqualHtml(`
-    <va-link class="hydrated" href="https://www.va.gov" text="Veteran's Affairs" back>
-      <mock:shadow-root>
-        <div class="link-container">
-          <va-icon class="hydrated link-icon--back link-icon--left"></va-icon>
-          <a href="https://www.va.gov">
-            Veteran's Affairs
-          </a>
-        </div>
-      </mock:shadow-root>
-    </va-link>
-    `);
-
-    const iconEl = await page.find('va-link >>> va-icon');
-    const iconName = await iconEl.getProperty('icon');
-    expect(iconName).toBe('arrow_back');
   });
 
   it('renders external link', async () => {
