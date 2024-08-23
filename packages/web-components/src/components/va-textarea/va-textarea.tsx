@@ -11,7 +11,7 @@ import {
   Fragment,
 } from '@stencil/core';
 import classnames from 'classnames';
-import i18next from 'i18next';
+import { i18next } from '../..';
 import { consoleDevError, getCharacterMessage, getHeaderLevel } from '../../utils/utils';
 
 if (Build.isTesting) {
