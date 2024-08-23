@@ -58,17 +58,17 @@ module.exports = {
           context: path.resolve(__dirname, '../', 'web-components'),
         },
         {
-          from: 'collection/components/**/*',
+          from: 'components/**/*',
           to: './',
           context: path.resolve(__dirname, '../', 'web-components/dist'),
         },
         {
-          from: 'collection/assets/**/*',
+          from: 'assets/**/*',
           to: './',
           context: path.resolve(__dirname, '../', 'web-components/dist'),
         },
         {
-          from: 'collection/img/**/*',
+          from: 'img/**/*',
           to: './',
           context: path.resolve(__dirname, '../', 'web-components/dist'),
         },

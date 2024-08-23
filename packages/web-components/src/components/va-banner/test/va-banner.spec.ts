@@ -8,7 +8,7 @@ describe('va-banner', () => {
     cmp.el.innerHTML = 'This is test content';
     cmp.showClose = true;
     expect(cmp.dismissedBanners).toEqual([]);
-    cmp['dismiss']();
+    cmp["dismiss"]();
     expect(cmp.dismissedBanners).toEqual([
       'Test headline:This is test content',
     ]);
