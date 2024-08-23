@@ -24,6 +24,11 @@ export class VaLink {
   @Prop({ reflect: true }) active?: boolean = false;
 
   /**
+   * If 'true', renders a "back arrow" in front of the link text
+   */
+  @Prop() back?: boolean = false;
+
+  /**
    * If `true`, a calendar icon will be displayed before the anchor text.
    */
   @Prop() calendar?: boolean = false;
@@ -82,7 +87,7 @@ export class VaLink {
    * If 'true', will open in a new tab and have icon denoting that. Will also have the text "opens in a new tab" appended to the link text in screen reader only span
    */
   @Prop() external?: boolean = false;
- 
+
   /**
    * Adds an aria-label attribute to the link element.
    */
@@ -133,6 +138,7 @@ export class VaLink {
   render() {
     const {
       active,
+      back,
       calendar,
       channel,
       download,
@@ -147,22 +153,53 @@ export class VaLink {
       reverse,
       external,
       iconName,
-      iconSize
+      iconSize,
     } = this;
 
     const linkClass = classNames({
       'va-link--reverse': reverse,
-      'link--center': iconName || external
+      'link--center': iconName || external,
     });
 
     // Active link variant
     if (active) {
       return (
         <Host>
-          <a href={href} class={linkClass} onClick={handleClick} aria-label={this.label}>
+          <a
+            href={href}
+            class={linkClass}
+            onClick={handleClick}
+            aria-label={this.label}
+          >
             {text}
             <va-icon class="link-icon--active" icon="chevron_right"></va-icon>
           </a>
+        </Host>
+      );
+    }
+
+    // Back link variant
+    if (back) {
+      const backArrow = (
+        <va-icon
+          icon="arrow_back"
+          class="link-icon--left link-icon--back"
+        ></va-icon>
+      );
+
+      return (
+        <Host>
+          <div class="link-container">
+            {backArrow}
+            <a
+              href={href}
+              class={linkClass}
+              onClick={handleClick}
+              aria-label={this.label}
+            >
+              {text}
+            </a>
+          </div>
         </Host>
       );
     }
@@ -230,11 +267,7 @@ export class VaLink {
     if (iconName) {
       return (
         <Host>
-          <a
-            href={href}
-            class={linkClass}
-            onClick={handleClick}
-          >
+          <a href={href} class={linkClass} onClick={handleClick}>
             <va-icon icon={iconName} size={iconSize} part="icon"></va-icon>
             {text}
           </a>
@@ -247,10 +280,10 @@ export class VaLink {
         <Host>
           <a
             href={href}
-            rel='noreferrer'
+            rel="noreferrer"
             class={linkClass}
             onClick={handleClick}
-            target='_blank'
+            target="_blank"
           >
             {text}
             <va-icon class="external-link-icon" icon="launch"></va-icon>
@@ -263,7 +296,12 @@ export class VaLink {
     // Default
     return (
       <Host>
-        <a href={href} class={linkClass} onClick={handleClick} aria-label={this.label}>
+        <a
+          href={href}
+          class={linkClass}
+          onClick={handleClick}
+          aria-label={this.label}
+        >
           {text}
         </a>
       </Host>
