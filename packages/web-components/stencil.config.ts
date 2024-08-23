@@ -52,6 +52,9 @@ export const config: Config = {
       type: 'www',
       serviceWorker: null, // disable service workers
     },
+    {
+      type: 'dist-custom-elements'
+    }
   ],
   testing: {
     moduleNameMapper: {
