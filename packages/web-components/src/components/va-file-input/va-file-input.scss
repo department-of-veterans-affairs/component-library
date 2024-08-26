@@ -95,7 +95,7 @@
 
   .selected-files-wrapper {
     background-color: var(--vads-color-primary-lighter);
-    border: 1px solid var(--vads-color-base-light)
+    border: 1px solid var(--vads-color-base-light);
   }
 
   .selected-files-label {
@@ -137,7 +137,6 @@
   }
 
   .file-info-section {
-    border-bottom: 1px solid var(--vads-color-base-lighter);
     padding: 0 8px 8px;
     display: flex;
     align-items: center;
@@ -159,6 +158,7 @@
   }
 
   .additional-info-slot {
+    border-top: 1px solid var(--vads-color-base-lighter);
     padding-bottom: 16px;
   }
 
@@ -166,7 +166,7 @@
   /* TO DO: decide whether to import from CSS-Library or simply rename,
   /* as this is the only attibute currently needed from utilities
   */
-  .vads-u-line-height--2{
+  .vads-u-line-height--2 {
     line-height: 1.15;
   }
 
