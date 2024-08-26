@@ -78,6 +78,6 @@ Continue.args = {
 export const CustomButtonText = Template.bind(null);
 CustomButtonText.args = {
   ...defaultArgs,
-  'left-button-text': 'Start',
-  'right-button-text': 'Stop'
+  'left-button-text': 'Agree to these terms',
+  'right-button-text': 'File later'
 }
