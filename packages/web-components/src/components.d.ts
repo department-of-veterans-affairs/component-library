@@ -421,9 +421,17 @@ export namespace Components {
          */
         "name"?: string;
         /**
+          * Optionally displays the read-only view
+         */
+        "readOnly"?: boolean;
+        /**
           * Sets the input to required and renders the (*Required) text.
          */
         "required"?: boolean;
+        /**
+          * The value attribute for the file view element.
+         */
+        "value"?: File;
     }
     interface VaFileInputMultiple {
         /**
@@ -2427,13 +2435,37 @@ declare namespace LocalJSX {
          */
         "onComponent-library-analytics"?: (event: VaFileInputCustomEvent<any>) => void;
         /**
+          * The event emitted when the change file button is clicked.
+         */
+        "onFileChangeClick"?: (event: VaFileInputCustomEvent<any>) => void;
+        /**
+          * The event emitted when the delete file confirmation button is clicked.
+         */
+        "onFileDeleteCancelClick"?: (event: VaFileInputCustomEvent<any>) => void;
+        /**
+          * The event emitted when the delete file button is clicked.
+         */
+        "onFileDeleteClick"?: (event: VaFileInputCustomEvent<any>) => void;
+        /**
+          * The event emitted when the delete file cancel button is clicked.
+         */
+        "onFileDeleteConfirmClick"?: (event: VaFileInputCustomEvent<any>) => void;
+        /**
           * The event emitted when the file input value changes.
          */
         "onVaChange"?: (event: VaFileInputCustomEvent<any>) => void;
         /**
+          * Optionally displays the read-only view
+         */
+        "readOnly"?: boolean;
+        /**
           * Sets the input to required and renders the (*Required) text.
          */
         "required"?: boolean;
+        /**
+          * The value attribute for the file view element.
+         */
+        "value"?: File;
     }
     interface VaFileInputMultiple {
         /**
