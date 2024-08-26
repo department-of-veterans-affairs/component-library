@@ -288,9 +288,17 @@ export namespace Components {
          */
         "disableAnalytics"?: boolean;
         /**
+          * Custom text that will be applied to the left va-button inside the component. If set will override text controlled by the 'update' prop.
+         */
+        "leftButtonText"?: string;
+        /**
           * Applies to the primary button aria-label.
          */
         "primaryLabel"?: string;
+        /**
+          * Custom text that will be applied to the right va-button inside the component. If set will override text controlled by the 'update' prop,
+         */
+        "rightButtonText"?: string;
         /**
           * Applies to the secondary button aria-label.
          */
@@ -2824,6 +2832,10 @@ declare namespace LocalJSX {
          */
         "disableAnalytics"?: boolean;
         /**
+          * Custom text that will be applied to the left va-button inside the component. If set will override text controlled by the 'update' prop.
+         */
+        "leftButtonText"?: string;
+        /**
           * The event used to track usage of the component.
          */
         "onComponent-library-analytics"?: (event: VaButtonPairCustomEvent<any>) => void;
@@ -2839,6 +2851,10 @@ declare namespace LocalJSX {
           * Applies to the primary button aria-label.
          */
         "primaryLabel"?: string;
+        /**
+          * Custom text that will be applied to the right va-button inside the component. If set will override text controlled by the 'update' prop,
+         */
+        "rightButtonText"?: string;
         /**
           * Applies to the secondary button aria-label.
          */
