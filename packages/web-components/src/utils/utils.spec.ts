@@ -45,6 +45,7 @@ describe('getSlottedNodes()', () => {
   }
 
   it('gathers slot nodes in the shadow DOM if slot is used', async () => {
+    
     var mockObject = {
       assignedNodes: () => {
         return ['h2', 'a', 'a'];
@@ -56,13 +57,14 @@ describe('getSlottedNodes()', () => {
 
     const defElement_shadowRoot_querySelector =
       defaultElement.shadowRoot.querySelector;
-    jest
-      .spyOn(defaultElement.shadowRoot, 'querySelector')
-      .mockImplementation(selector => {
-        if (selector === 'slot') {
-          return mockObject;
+      
+    const spy = jest
+      .spyOn(defaultElement.shadowRoot, 'querySelector');
+    spy.mockImplementation(selectors => {
+        if (selectors === 'slot') {
+          return mockObject as unknown as Element;
         }
-        return defElement_shadowRoot_querySelector(selector);
+        return defElement_shadowRoot_querySelector(selectors);
       });
 
     const slottedNodes = getSlottedNodes(defaultElement, null);
@@ -85,7 +87,7 @@ describe('getSlottedNodes()', () => {
       .spyOn(defaultElement.shadowRoot, 'querySelector')
       .mockImplementation(selector => {
         if (selector === 'slot') {
-          return mockObject;
+          return mockObject as unknown as Element;
         }
         return defElement_shadowRoot_querySelector(selector);
       });
