@@ -22,7 +22,7 @@ describe('va-select', () => {
           <span id="input-error-message" role="alert"></span>
           <slot></slot>
           <select id="options" part="select" aria-invalid="false" class="usa-select">
-            <option value=""></option>
+            <option value="">- Select -</option>
             <option value="">Please choose an option</option>
             <option value="foo">Foo</option>
             <option value="bar">Bar</option>
