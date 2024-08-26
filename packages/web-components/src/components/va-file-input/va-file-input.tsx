@@ -487,27 +487,25 @@ export class VaFileInput {
                     </span>
                   </div>
                 </div>
-                {file && (
+                {file && !readOnly && (
                   <div>
                     <div class="additional-info-slot">
                       <slot></slot>
                     </div>
-                    {!readOnly && (
-                      <div class="file-button-section">
-                        <va-button-icon
-                          buttonType="change-file"
-                          onClick={this.changeFile}
-                          label="Change file"
-                          aria-label={'change file ' + file.name}
-                        ></va-button-icon>
-                        <va-button-icon
-                          buttonType="delete"
-                          onClick={this.openModal}
-                          aria-label={'delete file ' + file.name}
-                          label="Delete"
-                        ></va-button-icon>
-                      </div>
-                    )}
+                    <div class="file-button-section">
+                      <va-button-icon
+                        buttonType="change-file"
+                        onClick={this.changeFile}
+                        label="Change file"
+                        aria-label={'change file ' + file.name}
+                      ></va-button-icon>
+                      <va-button-icon
+                        buttonType="delete"
+                        onClick={this.openModal}
+                        aria-label={'delete file ' + file.name}
+                        label="Delete"
+                      ></va-button-icon>
+                    </div>
                     <va-modal
                       modalTitle="Delete this file?"
                       visible={this.showModal}
