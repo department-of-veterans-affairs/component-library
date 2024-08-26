@@ -3205,11 +3205,12 @@ __metadata:
     "@babel/core": "npm:^7.12.13"
     "@department-of-veterans-affairs/css-library": "npm:^0.8.1"
     "@department-of-veterans-affairs/formation": "npm:^11.0.6"
-    "@stencil/core": "npm:^2.19.2"
+    "@stencil/core": "npm:^3.2.1"
     "@stencil/postcss": "npm:^2.0.0"
     "@stencil/react-output-target": "npm:^0.5.3"
     "@stencil/sass": "npm:^2.0.0"
     "@types/jest": "npm:^26.0.20"
+    "@types/node": "npm:^22.5.0"
     "@types/puppeteer": "npm:^5.4.3"
     "@types/react-dom": "npm:16.0.9"
     "@typescript-eslint/eslint-plugin": "npm:^5.30.5"
@@ -3231,7 +3232,7 @@ __metadata:
     postcss-url: "npm:^10.1.1"
     puppeteer: "npm:^10.0.0"
     react-dom: "npm:^16.7.0"
-    typescript: "npm:^4.3.5"
+    typescript: "npm:^5.5.4"
   peerDependencies:
     "@department-of-veterans-affairs/formation": ^11.0.6
     i18next: "*"
@@ -4875,12 +4876,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@stencil/core@npm:^2.19.2":
-  version: 2.19.2
-  resolution: "@stencil/core@npm:2.19.2"
+"@stencil/core@npm:^3.2.1":
+  version: 3.4.2
+  resolution: "@stencil/core@npm:3.4.2"
   bin:
     stencil: bin/stencil
-  checksum: 10/cf73c8be87016f4589921713705ba0b7347d97b453560f4c91b1fe878146c482b6eef3401bdf01b9faf648fa257a29ac71f27194f31781b0254a05d3d14b97e9
+  checksum: 10/91c4a1a62687456f42256847aceba31ee7472a97852fd49e47a6c052995af2136194f842655218202aebc29ee8418c0d5fad711ddb29b54ddcae844afb683ce5
   languageName: node
   linkType: hard
 
@@ -6334,6 +6335,15 @@ __metadata:
   dependencies:
     undici-types: "npm:~5.26.4"
   checksum: 10/5c8daed0c672e824c36d31312377fc4dddf3e91006fadad719527bb2bd710d4207193c1c7034da9d2d6cbc03da89d3693c86207f751540c18a7d38802040fbd9
+  languageName: node
+  linkType: hard
+
+"@types/node@npm:^22.5.0":
+  version: 22.5.0
+  resolution: "@types/node@npm:22.5.0"
+  dependencies:
+    undici-types: "npm:~6.19.2"
+  checksum: 10/89af3bd217b1559b645a9ed16d4ae3add75749814cbd8eefddd1b96003d1973afb1c8a2b23d69f3a8cc6c532e3aa185eaf5cc29a6e7c42c311a2aad4c99430ae
   languageName: node
   linkType: hard
 
@@ -20663,23 +20673,23 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@npm:^4.3.5":
-  version: 4.5.5
-  resolution: "typescript@npm:4.5.5"
+"typescript@npm:^5.5.4":
+  version: 5.5.4
+  resolution: "typescript@npm:5.5.4"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
-  checksum: 10/6b1a99a272bb6bf701e6f5f7e23455049a85db4958cd19bc4c2d25025b5af5751756962ae7a8bbcc1e339fa5209384f5e15352aa973c2121d7f8f525067106b3
+  checksum: 10/1689ccafef894825481fc3d856b4834ba3cc185a9c2878f3c76a9a1ef81af04194849840f3c69e7961e2312771471bb3b460ca92561e1d87599b26c37d0ffb6f
   languageName: node
   linkType: hard
 
-"typescript@patch:typescript@npm%3A^4.3.5#optional!builtin<compat/typescript>":
-  version: 4.5.5
-  resolution: "typescript@patch:typescript@npm%3A4.5.5#optional!builtin<compat/typescript>::version=4.5.5&hash=f1b8ea"
+"typescript@patch:typescript@npm%3A^5.5.4#optional!builtin<compat/typescript>":
+  version: 5.5.4
+  resolution: "typescript@patch:typescript@npm%3A5.5.4#optional!builtin<compat/typescript>::version=5.5.4&hash=b45daf"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
-  checksum: 10/dddcdd55dab8823f6ab618d74b6b09f8c010e4fe3ae28904c3c17f176e186773ad7b99410176bf0a2ec4ea07e0edec9ccf11fe05e0ca6e7958bf05ee7ce487f6
+  checksum: 10/2c065f0ef81855eac25c9b658a3c9da65ffc005260c12854c2286f40f3667e1b1ecf8bdbdd37b59aa0397920378ce7900bff8cb32e0f1c7af6fd86efc676718c
   languageName: node
   linkType: hard
 
@@ -20739,6 +20749,13 @@ __metadata:
   version: 5.26.5
   resolution: "undici-types@npm:5.26.5"
   checksum: 10/0097779d94bc0fd26f0418b3a05472410408877279141ded2bd449167be1aed7ea5b76f756562cb3586a07f251b90799bab22d9019ceba49c037c76445f7cddd
+  languageName: node
+  linkType: hard
+
+"undici-types@npm:~6.19.2":
+  version: 6.19.8
+  resolution: "undici-types@npm:6.19.8"
+  checksum: 10/cf0b48ed4fc99baf56584afa91aaffa5010c268b8842f62e02f752df209e3dea138b372a60a963b3b2576ed932f32329ce7ddb9cb5f27a6c83040d8cd74b7a70
   languageName: node
   linkType: hard
 

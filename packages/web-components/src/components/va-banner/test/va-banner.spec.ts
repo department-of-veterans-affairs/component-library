@@ -8,7 +8,7 @@ describe('va-banner', () => {
     cmp.el.innerHTML = 'This is test content';
     cmp.showClose = true;
     expect(cmp.dismissedBanners).toEqual([]);
-    cmp.dismiss();
+    cmp["dismiss"]();
     expect(cmp.dismissedBanners).toEqual([
       'Test headline:This is test content',
     ]);
@@ -20,7 +20,7 @@ describe('va-banner', () => {
     cmp.headline = 'Test headline';
     cmp.el.innerHTML = 'This is test content';
     const spy = jest.spyOn(cmp.componentLibraryAnalytics, 'emit');
-    cmp.dismiss();
+    cmp["dismiss"]();
     expect(spy).toHaveBeenCalled();
   });
 
@@ -30,8 +30,8 @@ describe('va-banner', () => {
     cmp.headline = 'Test headline';
     cmp.el.innerHTML = 'This is test content';
     const spy = jest.spyOn(cmp.componentLibraryAnalytics, 'emit');
-    cmp.dismiss();
-    expect(cmp.dismiss()).toEqual(undefined);
+    cmp["dismiss"]();
+    expect(cmp["dismiss"]()).toEqual(undefined);
     expect(cmp.dismissedBanners).toEqual([]);
     expect(spy).toHaveBeenCalledTimes(0);
   });
@@ -40,6 +40,6 @@ describe('va-banner', () => {
     let cmp = new VaBanner();
     cmp.headline = 'Test headline';
     cmp.el.innerHTML = 'This is test content';
-    expect(cmp.prepareBannerID()).toEqual('Test headline:This is test content');
+    expect(cmp["prepareBannerID"]()).toEqual('Test headline:This is test content');
   });
 });

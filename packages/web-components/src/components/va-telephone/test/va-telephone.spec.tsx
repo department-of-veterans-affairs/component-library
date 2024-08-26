@@ -3,7 +3,7 @@ import { VaTelephone } from '../va-telephone';
 describe('formatPhoneNumber', () => {
   const contact = '8885551234';
   const N11 = '911';
-  const extension = 123;
+  const extension = '123';
   const vanity = 'ABCD';
   it('formats a contact number with no extension', () => {
     expect(VaTelephone.formatPhoneNumber(contact, null, null, null)).toBe('888-555-1234');
@@ -40,7 +40,7 @@ describe('createHref', () => {
   const contact = '8885551234';
   const contactSms = '123456';
   const n11 = '911';
-  const extension = 123;
+  const extension = '123';
   it('creates a tel link for a phone number', () => {
     expect(VaTelephone.createHref(contact, null, null)).toBe('tel:+18885551234');
   });
