@@ -1873,7 +1873,7 @@
       ]
     }
   },
-  "vads-color-bg-default-on-dark": {
+  "vads-color-background-default-on-dark": {
     "*": {
       "value": "#171716",
       "filePath": "tokens/color.json",
@@ -1881,13 +1881,13 @@
       "original": {
         "value": "{uswds-system-color-gray-warm-90}"
       },
-      "name": "vads-color-bg-default-on-dark",
+      "name": "vads-color-background-default-on-dark",
       "attributes": {
-        "category": "vads-color-bg-default-on-dark",
+        "category": "vads-color-background-default-on-dark",
         "type": "*"
       },
       "path": [
-        "vads-color-bg-default-on-dark",
+        "vads-color-background-default-on-dark",
         "*"
       ]
     }
