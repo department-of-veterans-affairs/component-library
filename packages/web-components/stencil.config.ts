@@ -9,6 +9,7 @@ import * as path from 'path';
 export const config: Config = {
   namespace: 'component-library',
   globalStyle: 'src/global/main.css',
+  sourceMap: false,
   plugins: [
     sass({
       includePaths: [
@@ -24,10 +25,10 @@ export const config: Config = {
   // https://stenciljs.com/docs/config-extras
   buildEs5: 'prod',
   extras: {
-    cssVarsShim: true,
-    dynamicImportShim: true,
-    shadowDomShim: true,
-    safari10: true,
+    __deprecated__cssVarsShim: true,
+    __deprecated__dynamicImportShim: true,
+    __deprecated__shadowDomShim: true,
+    __deprecated__safari10: true,
     scriptDataOpts: true,
     appendChildSlotFix: false,
     cloneNodeFix: false,
@@ -48,13 +49,12 @@ export const config: Config = {
       ]
     },
     {
-      type: 'dist-custom-elements',
-      generateTypeDeclarations: true,
-    },
-    {
       type: 'www',
       serviceWorker: null, // disable service workers
     },
+    {
+      type: 'dist-custom-elements'
+    }
   ],
   testing: {
     moduleNameMapper: {

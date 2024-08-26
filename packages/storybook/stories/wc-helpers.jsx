@@ -230,7 +230,7 @@ function CanvasLink() {
   // We're inside an iframe on the Docs page, so we need to get the parent
   const canvasLink = window.parent.location.href.replace('docs', 'story');
   return (
-    <p class="component-details">
+    <p className="component-details">
       Information on this component's accessibility, html output, and how it is
       used within Storybook can be <a href={canvasLink}>viewed on the Canvas</a>
       .
