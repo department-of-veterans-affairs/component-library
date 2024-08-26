@@ -3121,6 +3121,10 @@ declare namespace LocalJSX {
          */
         "onVaChange"?: (event: VaFileInputCustomEvent<any>) => void;
         /**
+          * Optionally displays the read-only view
+         */
+        "readOnly"?: boolean;
+        /**
           * Sets the input to required and renders the (*Required) text.
          */
         "required"?: boolean;
