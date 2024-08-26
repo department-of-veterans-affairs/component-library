@@ -94,6 +94,10 @@ export class VaFileInput {
    * The event emitted when the file input value changes.
    */
   @Event() vaChange: EventEmitter;
+  /**
+   * Optionally displays the read-only view
+   */
+  @Prop() readOnly?: boolean = false;
 
   /**
    * The event used to track usage of the component. This is emitted when the
@@ -109,10 +113,10 @@ export class VaFileInput {
   private handleChange = (e: Event) => {
     const input = e.target as HTMLInputElement;
     if (input.files && input.files.length > 0) {
-      this.handleFile(input.files[0])
+      this.handleFile(input.files[0]);
     }
     input.value = '';
-  }
+  };
 
   private handleDrop = (event: DragEvent) => {
     event.preventDefault();
@@ -170,7 +174,7 @@ export class VaFileInput {
     const modal = this.el.shadowRoot.querySelector('va-modal');
     modal.setAttribute('status', 'warning');
     this.showModal = true;
-  }
+  };
 
   private closeModal = () => {
     this.showModal = false;
@@ -178,7 +182,7 @@ export class VaFileInput {
     setTimeout(() => {
       this.fileInputRef.focus();
     }, 0);
-  }
+  };
 
   private changeFile = () => {
     if (this.fileInputRef) {
@@ -186,11 +190,12 @@ export class VaFileInput {
     }
   };
 
-  private updateStatusMessage(message:string) {
+  private updateStatusMessage(message: string) {
     // Add delay to encourage screen reader readout
     setTimeout(() => {
-      const statusMessageDiv = this.el.shadowRoot.querySelector("#statusMessage");
-      statusMessageDiv ? statusMessageDiv.textContent = message : "";
+      const statusMessageDiv =
+        this.el.shadowRoot.querySelector('#statusMessage');
+      statusMessageDiv ? (statusMessageDiv.textContent = message) : '';
     }, 1000);
   }
 
@@ -221,9 +226,12 @@ export class VaFileInput {
       item = item.trim();
       return item.startsWith('.') ? extensionToMimeType[item] : item;
     });
-  }
+  };
 
-  private isAcceptedFileType = (fileType: string, acceptedTypes: string[]): boolean => {
+  private isAcceptedFileType = (
+    fileType: string,
+    acceptedTypes: string[],
+  ): boolean => {
     for (const type of acceptedTypes) {
       if (type === fileType) {
         return true;
@@ -233,7 +241,7 @@ export class VaFileInput {
       }
     }
     return false;
-  }
+  };
 
   private renderLabelOrHeader = (
     label: string,
@@ -313,7 +321,8 @@ export class VaFileInput {
       headerSize,
       fileContents,
       fileType,
-      headless
+      headless,
+      readOnly,
     } = this;
 
     const displayError = this.error || this.internalError;
@@ -341,11 +350,14 @@ export class VaFileInput {
     if (error) {
       fileThumbnail = (
         <div class="thumbnail-container">
-          <va-icon icon="error" size={3} class="thumbnail-preview thumbnail-error"/>
+          <va-icon
+            icon="error"
+            size={3}
+            class="thumbnail-preview thumbnail-error"
+          />
         </div>
       );
-    }
-    else if (fileContents) {
+    } else if (fileContents) {
       if (fileType.startsWith('image/')) {
         fileThumbnail = (
           <div class="thumbnail-container" aria-hidden="true">
@@ -364,8 +376,10 @@ export class VaFileInput {
         );
       }
     }
-    let selectedFileClassName = headless ? "headless-selected-files-wrapper" : "selected-files-wrapper"
-    const hintClass = "usa-hint" + (headless ? " usa-sr-only" : "")
+    let selectedFileClassName = headless
+      ? 'headless-selected-files-wrapper'
+      : 'selected-files-wrapper';
+    const hintClass = 'usa-hint' + (headless ? ' usa-sr-only' : '');
     return (
       <Host class={{ 'has-error': !!displayError }}>
         <span class={{ 'usa-sr-only': !!headless }}>
@@ -381,8 +395,7 @@ export class VaFileInput {
             id="fileInputField"
             class="file-input"
             style={{
-              visibility:
-                this.uploadStatus === 'success' ? 'hidden' : 'unset',
+              visibility: this.uploadStatus === 'success' ? 'hidden' : 'unset',
             }}
             type="file"
             ref={el => (this.fileInputRef = el as HTMLInputElement)}
@@ -401,26 +414,30 @@ export class VaFileInput {
                   </Fragment>
                 )}
               </span>
-              <div class='usa-sr-only' aria-live="polite" id="statusMessage"></div>
+              <div
+                class="usa-sr-only"
+                aria-live="polite"
+                id="statusMessage"
+              ></div>
               <div class={fileInputTargetClasses}>
                 <div class="file-input-box"></div>
                 <div class="file-input-instructions">
-                  <span class="file-input-drag-text">
-                    Drag files here or{' '}
-                  </span>
-                  <span class="file-input-choose-text">
-                    choose from folder
-                  </span>
+                  <span class="file-input-drag-text">Drag files here or </span>
+                  <span class="file-input-choose-text">choose from folder</span>
                 </div>
               </div>
             </div>
           )}
           {uploadStatus !== 'idle' && (
             <div class={selectedFileClassName}>
-              {!headless &&
+              {!headless && (
                 <div class="selected-files-label">Selected files</div>
-              }
-              <div class='usa-sr-only' aria-live="polite" id="statusMessage"></div>
+              )}
+              <div
+                class="usa-sr-only"
+                aria-live="polite"
+                id="statusMessage"
+              ></div>
               <va-card class="va-card">
                 <div class="file-info-section">
                   {fileThumbnail}
@@ -439,7 +456,7 @@ export class VaFileInput {
                     </span>
                   </div>
                 </div>
-                {file && (
+                {file && !readOnly && (
                   <div>
                     <div class="additional-info-slot">
                       <slot></slot>
@@ -459,15 +476,16 @@ export class VaFileInput {
                       ></va-button-icon>
                     </div>
                     <va-modal
-                      modalTitle='Delete this file?'
+                      modalTitle="Delete this file?"
                       visible={this.showModal}
-                      primaryButtonText='Yes, remove this'
-                      secondaryButtonText='No, keep this'
+                      primaryButtonText="Yes, remove this"
+                      secondaryButtonText="No, keep this"
                       onCloseEvent={this.closeModal}
                       onPrimaryButtonClick={() => this.removeFile(true)}
                       onSecondaryButtonClick={this.closeModal}
                     >
-                      We'll remove the uploaded document <span class="file-label">{file.name}</span>
+                      We'll remove the uploaded document{' '}
+                      <span class="file-label">{file.name}</span>
                     </va-modal>
                   </div>
                 )}
@@ -477,5 +495,5 @@ export class VaFileInput {
         </div>
       </Host>
     );
-  } 
+  }
 }
