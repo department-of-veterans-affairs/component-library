@@ -25,10 +25,6 @@ export const config: Config = {
   // https://stenciljs.com/docs/config-extras
   buildEs5: 'prod',
   extras: {
-    __deprecated__cssVarsShim: true,
-    __deprecated__dynamicImportShim: true,
-    __deprecated__shadowDomShim: true,
-    __deprecated__safari10: true,
     scriptDataOpts: true,
     appendChildSlotFix: false,
     cloneNodeFix: false,
@@ -43,6 +39,7 @@ export const config: Config = {
     {
       type: 'dist',
       esmLoaderPath: '../loader',
+      transformAliasedImportPathsInCollection: false,
       copy: [
         { src: 'assets', dest: path.join(__dirname, 'dist/assets')},
         { src: 'img/sprite.svg', dest: path.join(__dirname, 'dist/img/sprite.svg')}
