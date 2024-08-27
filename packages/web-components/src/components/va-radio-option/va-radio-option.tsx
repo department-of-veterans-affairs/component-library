@@ -57,6 +57,11 @@ export class VaRadioOption {
   @Prop() ariaDescribedby?: string;
 
   /**
+   * An optional message that will be read by screen readers when a radio option is focused.
+   */
+  @Prop() messageAriaDescribedby?: string;
+
+  /**
    * The event emitted when the selected option value changes
    */
   @Event({
@@ -77,7 +82,8 @@ export class VaRadioOption {
       label,
       disabled,
       tile,
-      description } = this;
+      description,
+      messageAriaDescribedby } = this;
     const id = this.el.id || (name + value);
 
     const inputClass = classnames({
@@ -95,6 +101,7 @@ export class VaRadioOption {
             disabled={disabled}
             onClick={() => this.handleChange()}
             id={id + 'input'}
+            aria-describedby="radio-option-message"
           />
         <label class="usa-radio__label" htmlFor={id + 'input'}>
           {label}
@@ -108,6 +115,11 @@ export class VaRadioOption {
             </span>
           )}
         </label>
+        {messageAriaDescribedby && (
+          <span id="radio-option-message" class="usa-sr-only dd-privacy-hidden">
+            {messageAriaDescribedby}
+          </span>
+        )}
       </div>
     )
   }

@@ -1188,6 +1188,10 @@ export namespace Components {
          */
         "labelHeaderLevel"?: string;
         /**
+          * An optional message that will be read by screen readers when a radio option is focused.
+         */
+        "messageAriaDescribedby"?: string;
+        /**
           * Whether or not this input field is required.
          */
         "required"?: boolean;
@@ -1217,6 +1221,10 @@ export namespace Components {
           * The text label for the input element.
          */
         "label": string;
+        /**
+          * An optional message that will be read by screen readers when a radio option is focused.
+         */
+        "messageAriaDescribedby"?: string;
         /**
           * The name attribute for the input element.
          */
@@ -3872,6 +3880,10 @@ declare namespace LocalJSX {
          */
         "labelHeaderLevel"?: string;
         /**
+          * An optional message that will be read by screen readers when a radio option is focused.
+         */
+        "messageAriaDescribedby"?: string;
+        /**
           * The event used to track usage of the component. This is emitted when a radio option is selected and enableAnalytics is true.
          */
         "onComponent-library-analytics"?: (event: VaRadioCustomEvent<any>) => void;
@@ -3909,6 +3921,10 @@ declare namespace LocalJSX {
           * The text label for the input element.
          */
         "label": string;
+        /**
+          * An optional message that will be read by screen readers when a radio option is focused.
+         */
+        "messageAriaDescribedby"?: string;
         /**
           * The name attribute for the input element.
          */

@@ -78,6 +78,11 @@ export class VaRadio {
   @Prop() headerAriaDescribedby?: string;
 
   /**
+   * An optional message that will be read by screen readers when a radio option is focused.
+   */
+  @Prop() messageAriaDescribedby?: string;
+
+  /**
    * Enabling this will add a heading and description for integrating into the forms pattern. Accepts `single` or `multiple` to indicate if the form is a single input or will have multiple inputs
    */
   @Prop() useFormsPattern?: string;
@@ -111,6 +116,13 @@ export class VaRadio {
     bubbles: true,
   })
   vaValueChange: EventEmitter;
+
+  componentDidRender() {
+    if (this.messageAriaDescribedby) {
+      const radioOptionNodes = (getSlottedNodes(this.el, 'va-radio-option') as HTMLVaRadioOptionElement[])
+      radioOptionNodes.forEach(radioOptionNode => radioOptionNode.setAttribute('message-aria-describedby', this.messageAriaDescribedby))
+    }
+  }
 
   @Listen('keydown')
   handleKeyDown(event: KeyboardEvent) {
