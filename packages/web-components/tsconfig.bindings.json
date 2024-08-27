@@ -15,7 +15,8 @@
     "removeComments": false,
     "sourceMap": true,
     "jsx": "react",
-    "target": "es5"
+    "target": "es5",
+    "skipLibCheck": true
   },
   "include": ["react-bindings/**/*.ts", "react-bindings/**/*.tsx"],
   "compileOnSave": false,

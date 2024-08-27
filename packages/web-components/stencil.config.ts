@@ -41,8 +41,8 @@ export const config: Config = {
       esmLoaderPath: '../loader',
       transformAliasedImportPathsInCollection: false,
       copy: [
-        { src: 'assets', dest: path.join(__dirname, 'dist/assets')},
-        { src: 'img/sprite.svg', dest: path.join(__dirname, 'dist/img/sprite.svg')}
+        { src: 'assets', dest: path.join(__dirname, 'dist/assets') },
+        { src: 'img/sprite.svg', dest: path.join(__dirname, 'dist/img/sprite.svg') }
       ]
     },
     {
@@ -50,7 +50,8 @@ export const config: Config = {
       serviceWorker: null, // disable service workers
     },
     {
-      type: 'dist-custom-elements'
+      type: 'dist-custom-elements',
+      customElementsExportBehavior: 'single-export-module',
     }
   ],
   testing: {
