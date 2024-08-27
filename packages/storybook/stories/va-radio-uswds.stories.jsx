@@ -258,6 +258,47 @@ const USWDSTiledError = ({
   );
 };
 
+const withARIAMessageTemplate = ({
+  'enable-analytics': enableAnalytics,
+  error,
+  label,
+  required,
+  hint,
+}) => {
+  let extraMessage = 'Some additional info'
+  return (
+    <va-radio
+      enable-analytics={enableAnalytics}
+      error={error}
+      label={label}
+      required={required}
+      message-aria-describedby={extraMessage}
+    >
+      <va-radio-option
+        label="Soujourner Truth"
+        name={name}
+        value="1"
+      />
+      <va-radio-option
+        label="Frederick Douglass"
+        name={name}
+        value="2"
+      />
+      <va-radio-option
+        label="Booker T. Washington"
+        name={name}
+        value="3"
+      />
+      <va-radio-option
+        label="George Washington Carver"
+        name={name}
+        value="4"
+      />
+      <p>{extraMessage}</p>
+    </va-radio>
+  );
+};
+
 const FormsPatternMultipleTemplate = ({ label, required }) => {
   const handleClick = () => {
     const header = document
@@ -450,6 +491,11 @@ export const IDUsage = IdUsageTemplate.bind(null);
 IDUsage.args = {
   ...defaultArgs,
   required: true,
+};
+
+export const withARIAMessage = withARIAMessageTemplate.bind(null);
+withARIAMessage.args = {
+  ...defaultArgs,
 };
 
 export const Internationalization = I18nTemplate.bind(null);
