@@ -24,3 +24,7 @@ a {
   margin-left: 4px;
   vertical-align: text-top;
 }
+
+a:focus {
+  outline: 2px solid var(--vads-color-action-focus-on-light);
+}

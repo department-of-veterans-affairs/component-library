@@ -51,6 +51,10 @@
   text-decoration: underline;
 }
 
+.va-banner-content-link:focus {
+  outline: 2px solid var(--vads-color-action-focus-on-light);
+}
+
 button {
   background: none;
   background-color: transparent;

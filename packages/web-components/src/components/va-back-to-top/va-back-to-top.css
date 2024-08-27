@@ -56,6 +56,9 @@ a:not([disabled]):hover {
   color: var(--vads-color-primary-darker);
   outline: none;
 }
+a:focus {
+  outline: 2px solid var(--vads-color-action-focus-on-light);
+}
 
 div a {
   display: none;

@@ -44,6 +44,10 @@
   color: var(--vads-color-primary-dark);
 }
 
+.usa-breadcrumb__link:focus {
+  outline: 2px solid var(--vads-color-action-focus-on-light);
+}
+
 .usa-breadcrumb__list-item:not(:last-child)::after {
   background: var(--vads-color-gray-medium);
 }

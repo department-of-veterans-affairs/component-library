@@ -33,3 +33,7 @@ va-checkbox::part(checkbox) {
 a {
   color: var(--vads-color-link);
 }
+
+a:focus {
+  outline: 2px solid var(--vads-color-action-focus-on-light);
+}
