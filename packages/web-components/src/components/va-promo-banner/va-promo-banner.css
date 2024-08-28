@@ -12,6 +12,10 @@
   font-weight: 700;
 }
 
+:host:focus {
+  outline: none;
+}
+
 .va-banner-body {
   max-width: 62.5rem;
   margin: 0 auto;

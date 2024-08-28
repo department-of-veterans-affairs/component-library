@@ -44,7 +44,6 @@ a {
   padding: 0;
   pointer-events: none;
   position: absolute;
-  transition: all 0.25s ease-in;
 }
 a:not([disabled]):active, a:not([disabled]):focus {
   border-radius: 5px;
