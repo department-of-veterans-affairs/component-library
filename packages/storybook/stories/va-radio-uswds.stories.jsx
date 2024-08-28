@@ -258,12 +258,11 @@ const USWDSTiledError = ({
   );
 };
 
-const withARIAMessageTemplate = ({
+const withDescriptionMessageTemplate = ({
   'enable-analytics': enableAnalytics,
   error,
   label,
   required,
-  hint,
 }) => {
   let extraMessage = 'Some additional info'
   return (
@@ -274,27 +273,27 @@ const withARIAMessageTemplate = ({
       required={required}
       message-aria-describedby={extraMessage}
     >
+      <p>{extraMessage}</p>
       <va-radio-option
         label="Soujourner Truth"
-        name={name}
+        name={"name"}
         value="1"
       />
       <va-radio-option
         label="Frederick Douglass"
-        name={name}
+        name={"name"}
         value="2"
       />
       <va-radio-option
         label="Booker T. Washington"
-        name={name}
+        name={"name"}
         value="3"
       />
       <va-radio-option
         label="George Washington Carver"
-        name={name}
+        name={"name"}
         value="4"
       />
-      <p>{extraMessage}</p>
     </va-radio>
   );
 };
@@ -493,8 +492,8 @@ IDUsage.args = {
   required: true,
 };
 
-export const withARIAMessage = withARIAMessageTemplate.bind(null);
-withARIAMessage.args = {
+export const withDescriptionMessage = withDescriptionMessageTemplate.bind(null);
+withDescriptionMessage.args = {
   ...defaultArgs,
 };
 

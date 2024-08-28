@@ -1222,10 +1222,6 @@ export namespace Components {
          */
         "label": string;
         /**
-          * An optional message that will be read by screen readers when a radio option is focused.
-         */
-        "messageAriaDescribedby"?: string;
-        /**
           * The name attribute for the input element.
          */
         "name": string;
@@ -3921,10 +3917,6 @@ declare namespace LocalJSX {
           * The text label for the input element.
          */
         "label": string;
-        /**
-          * An optional message that will be read by screen readers when a radio option is focused.
-         */
-        "messageAriaDescribedby"?: string;
         /**
           * The name attribute for the input element.
          */
