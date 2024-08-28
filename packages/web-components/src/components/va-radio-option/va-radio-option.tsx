@@ -95,7 +95,6 @@ export class VaRadioOption {
             disabled={disabled}
             onClick={() => this.handleChange()}
             id={id + 'input'}
-            aria-describedby="radio-option-message"
           />
         <label class="usa-radio__label" htmlFor={id + 'input'}>
           {label}
