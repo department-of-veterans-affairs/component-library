@@ -1,4 +1,5 @@
 @import "~@department-of-veterans-affairs/css-library/dist/stylesheets/uswds-typography.css";
+@import '../../mixins/focusable.css';
 
 :host {
   z-index: 1;
@@ -49,10 +50,6 @@
 
 .va-banner-content-link:hover {
   text-decoration: underline;
-}
-
-.va-banner-content-link:focus {
-  outline: 2px solid var(--vads-color-action-focus-on-light);
 }
 
 button {

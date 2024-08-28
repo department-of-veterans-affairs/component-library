@@ -4,6 +4,7 @@
 @import '../../../../../node_modules/animate.css/source/sliding_exits/slideOutDown.css';
 @import '../../mixins/buttons.css';
 @import '../../mixins/accessibility.css';
+@import '../../mixins/focusable.css';
 
 #marginWrapper {
   display: block;
@@ -55,9 +56,6 @@ a:not([disabled]):hover {
   border-radius: 0;
   color: var(--vads-color-primary-darker);
   outline: none;
-}
-a:focus {
-  outline: 2px solid var(--vads-color-action-focus-on-light);
 }
 
 div a {
