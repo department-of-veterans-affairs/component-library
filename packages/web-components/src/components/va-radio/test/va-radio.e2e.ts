@@ -96,6 +96,15 @@ describe('va-radio', () => {
     `);
   });
 
+  it('renders aria message text if included', async () => {
+    const page = await newE2EPage();
+    await page.setContent('<va-radio message-aria-describedby="Some additional info"></va-radio>');
+
+    const message = await page.find('va-radio >>> #description-message');
+    expect(message.textContent).toEqual("Some additional info");
+    expect(message).toHaveClass("usa-sr-only");
+  });
+
   it('renders a required span based on prop', async () => {
     const page = await newE2EPage();
     await page.setContent('<va-radio required></va-radio>');
