@@ -28,6 +28,7 @@ import { extensionToMimeType } from './fileExtensionToMimeType';
 })
 export class VaFileInput {
   private fileInputRef!: HTMLInputElement;
+  // private uploadStatus: 'idle' | 'in-progress' | 'success' = 'idle';
   private uploadStatus: 'idle' | 'success' = 'idle';
   private fileType?: string;
 
@@ -99,6 +100,32 @@ export class VaFileInput {
    * The event emitted when the file input value changes.
    */
   @Event() vaChange: EventEmitter;
+
+  // /**
+  //  * The event emitted when the user cancels the file input.
+  //  */
+  // @Event() vaCancelFileInput: EventEmitter;
+
+  // /**
+  //  * The event emitted when the change file button is clicked.
+  //  */
+  // @Event() fileChangeClick: EventEmitter;
+
+  // /**
+  //  * The event emitted when the delete file button is clicked.
+  //  */
+  // @Event() fileDeleteClick: EventEmitter;
+
+  // /**
+  //  * The event emitted when the delete file confirmation button is clicked.
+  //  */
+  // @Event() fileDeleteCancelClick: EventEmitter;
+
+  // /**
+  //  * The event emitted when the delete file cancel button is clicked.
+  //  */
+  // @Event() fileDeleteConfirmClick: EventEmitter;
+
   /**
    * Optionally displays the read-only view
    */
@@ -145,6 +172,7 @@ export class VaFileInput {
 
     this.file = file;
     this.vaChange.emit({ files: [this.file] });
+    // this.uploadStatus = 'in-progress';
     this.uploadStatus = 'success';
     this.internalError = null;
     this.generateFileContents(this.file);
@@ -160,7 +188,19 @@ export class VaFileInput {
         },
       });
     }
-  }
+  };
+
+  // private handleFileInputCancel = () => {
+  //   console.log('handleFileInputCancel clicked!');
+  //   this.uploadStatus = 'idle';
+  //   console.log(`uploadStatus: ${this.uploadStatus}`);
+  //   this.vaCancelFileInput.emit();
+  //   console.log(`vaCancelFileInput emitted`);
+  //   this.file = null;
+  //   console.log(`file: ${this.file}`);
+  //   this.el.focus();
+  //   console.log(`element focused!`);
+  // };
 
   private removeFile = (notifyParent: boolean = true) => {
     this.closeModal();
@@ -438,6 +478,47 @@ export class VaFileInput {
               </div>
             </div>
           )}
+          {/* {uploadStatus === 'in-progress' && (
+            <div class={selectedFileClassName}>
+              {!headless && (
+                <div class="selected-files-label">Selected files</div>
+              )}
+              <div
+                class="usa-sr-only"
+                aria-live="polite"
+                id="statusMessage"
+              ></div>
+              <va-card class="va-card">
+                <div class="file-info-section">
+                  <div class="thumbnail-container">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 384 512"
+                      fill="#07648d"
+                      width="40px"
+                      height="40px"
+                    >
+                      <path d="M224 136V0H24C10.7 0 0 10.7 0 24v464c0 13.3 10.7 24 24 24h336c13.3 0 24-10.7 24-24V160H248c-13.2 0-24-10.8-24-24zm160-14.1v6.1H256V0h6.1c6.4 0 12.5 2.5 17 7l97.9 98c4.5 4.5 7 10.6 7 16.9z" />
+                    </svg>
+                  </div>
+                  <div class="file-info-group vads-u-line-height--2">
+                    <span class="file-label">{file.name}</span>
+                    <span class="file-size-label">Uploading...</span>
+                  </div>
+                </div>
+                <va-progress-bar percent={50} />
+                <div class="file-button-section">
+                  <va-button-icon
+                    buttonType="cancel"
+                    onClick={this.handleFileInputCancel}
+                    aria-label="cancel file upload"
+                    label="Cancel"
+                  ></va-button-icon>
+                </div>
+              </va-card>
+            </div>
+          )} */}
+          {/* {uploadStatus !== 'idle' && uploadStatus !== 'in-progress' && ( */}
           {uploadStatus !== 'idle' && (
             <div class={selectedFileClassName}>
               {!headless && (
