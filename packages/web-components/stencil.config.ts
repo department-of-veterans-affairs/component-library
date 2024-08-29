@@ -32,9 +32,7 @@ export const config: Config = {
   },
   outputTargets: [
     reactOutputTarget({
-      componentCorePackage: '@department-of-veterans-affairs/web-components/dist/types',
-      proxiesFile: './react-bindings/index.ts',
-      includeDefineCustomElements: false,
+      outDir: './react-bindings/',
     }),
     {
       type: 'dist',
@@ -51,6 +49,7 @@ export const config: Config = {
     {
       type: 'dist-custom-elements',
       customElementsExportBehavior: 'single-export-module',
+      externalRuntime: false
     }
   ],
   testing: {
