@@ -31,7 +31,7 @@ const defaultArgs = {
     alert(`File change event received: ${event?.detail?.files[0]?.name}`),
   'uswds': true,
   'header-size': null,
-  'children': null
+  'children': null,
   'value': null,
   'children': null,
 };
