@@ -21,15 +21,3 @@
     margin-left: -1.4375rem; /* padding left + border left */
   }
 }
-
-:host([error]:not([error=''])[uswds='false']) {
-  label {
-    margin-top: 0;
-  }
-
-  input,
-  textarea,
-  select {
-    border: 4px solid var(--vads-color-secondary-dark);
-  }
-}
