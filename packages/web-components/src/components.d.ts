@@ -1367,6 +1367,10 @@ export namespace Components {
           * Selected value (will get updated on select).
          */
         "value"?: string;
+        /**
+          * Displays the input at a specific width. Accepts 2xs (4ex), xs (7ex), sm or small (10ex), md or medium (20ex), lg (30ex), xl (40ex), and 2xl (50ex).
+         */
+        "width"?: string;
     }
     /**
      * @componentName Statement of truth
@@ -4083,6 +4087,10 @@ declare namespace LocalJSX {
           * Selected value (will get updated on select).
          */
         "value"?: string;
+        /**
+          * Displays the input at a specific width. Accepts 2xs (4ex), xs (7ex), sm or small (10ex), md or medium (20ex), lg (30ex), xl (40ex), and 2xl (50ex).
+         */
+        "width"?: string;
     }
     /**
      * @componentName Statement of truth
